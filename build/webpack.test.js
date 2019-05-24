@@ -1,6 +1,7 @@
-const path = require('path');
-const ProgressBarPlugin = require('progress-bar-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const path = require('path')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const config = require('./config')
 
 
 const webpackConfig = {
@@ -16,13 +17,7 @@ const webpackConfig = {
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
-    alias: Object.assign({
-      main: path.resolve(__dirname, '../src'),
-      packages: path.resolve(__dirname, '../packages'),
-      examples: path.resolve(__dirname, '../examples')
-    }, {
-      'vue$': 'vue/dist/vue.common.js'
-    }),
+    alias: config.alias,
     modules: ['node_modules']
   },
   module: {

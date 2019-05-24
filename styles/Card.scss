@@ -1,0 +1,89 @@
+@import './mixins/mixins.scss';
+
+@include b(card) {
+  .mask {
+    overflow: hidden;
+    position: absolute;
+    padding: 12px 24px 18px 24px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, .7);
+    transition: background-color .2s ease-out;
+  }
+
+  .mask .alert {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lock {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+  }
+
+  .lock-description {
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  & .lock .lock-description {
+    color: rgba(81, 90, 110, 0);
+    transition: color .2s ease-out;
+  }
+
+  &:hover .lock .lock-description {
+    color: rgba(81, 90, 110, 1);
+    transition: color .2s ease-out;
+  }
+
+  & {
+    position: relative;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 12px 24px 18px 24px;
+    display: inline-block;
+    transition: box-shadow .2s;
+  }
+
+  &:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+  }
+
+  .title {
+    margin-top: 6px;
+    font-size: 18px;
+    color: #17233D;
+  }
+
+  .content {
+    margin-top: 6px;
+    font-size: 14px;
+  }
+
+  .ribbon {
+    display: flex;
+    align-items: center;
+    color: white;
+    background: rgb(81, 90, 110);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+
+  .intro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
