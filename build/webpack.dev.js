@@ -6,7 +6,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const webpackConfig = {
   mode: 'development',
-  entry: './demo/indexUsingCss.js',
+  entry: './demo/index.js',
   output: {
     path: path.resolve(process.cwd(), ),
     publicPath: '',

@@ -1,6 +1,5 @@
 import Vue from 'vue'
-import '../styles/index.scss'
-// import '../dist/lib/index.css'
+import '../dist/lib/index.css'
 import Demo from './demo.vue'
 import Card from 'packages/Card'
 import Icon from 'packages/Icon'
