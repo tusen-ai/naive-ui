@@ -8,13 +8,14 @@
     "demo": "cross-env NODE_ENV=development & gulp --gulpfile build/gulpfile.js build & webpack-dev-server --config build/webpack.demo.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.js",
     "serve": "npm run dev",
-    "test": "cross-env NODE_ENV=development karma start test/unit/karma.conf.js"
+    "test": "cross-env NODE_ENV=development BABEL_ENV=test karma start test/unit/karma.conf.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
+    "@vue/babel-preset-app": "^3.8.0",
     "@vue/test-utils": "^1.0.0-beta.29",
     "babel-loader": "^8.0.5",
     "babel-plugin-istanbul": "^5.1.4",
@@ -29,9 +30,11 @@
     "gulp-sass": "^4.0.2",
     "html-webpack-plugin": "^3.2.0",
     "iview": "^3.4.2",
+    "jsdom": "^15.1.1",
     "karma": "^4.1.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-coverage": "^1.1.2",
+    "karma-jsdom-launcher": "^7.1.0",
     "karma-mocha": "^1.3.0",
     "karma-sinon-chai": "^2.0.2",
     "karma-sourcemap-loader": "^0.3.7",

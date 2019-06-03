@@ -1,14 +1,33 @@
 <template>
   <div class="layout">
-    <div class="body"></div>
+    <div class="body" :class="{ collapse: collapse, active: !collapse }">
+      <div class="header">
+        <span class="content">
+          Service Management
+        </span>
+      </div>
+      <nv-loader></nv-loader>
+    </div>
     <div class="menu" :class="{ collapse: collapse, active: !collapse }">
-      <div class="header">Administration</div>
-      <div class="item active"><span>Service Management</span></div>
-      <div class="item"><span>Service Type Management</span></div>
-      <div class="item"><span>User Management</span></div>
+      <div class="header">
+        <div class="content">
+          <div class="icon">
+            <nv-icon type="md-settings" :size="22"></nv-icon>
+          </div>
+          Administration
+        </div>
+      </div>
+      <div
+        class="item"
+        :class="{ active: activeItemName === item.name }"
+        v-for="item in items"
+        :key="item.name"
+        @click="setActive(item.name)"
+      >
+        <span>{{ item.name }}</span>
+      </div>
       <div class="toggle-button" @click="toggle"><img src="./toggleButton.svg"></div>
     </div>
-    
   </div>
 </template>
 
@@ -19,11 +38,26 @@ export default {
   methods: {
     toggle () {
       this.collapse = !this.collapse
+    },
+    setActive (itemName) {
+      this.activeItemName = itemName
     }
   },
   data () {
     return {
-      collapse: false
+      collapse: false,
+      activeItemName: 'Service Management',
+      items: [
+        {
+          name: 'Service Management'
+        }, 
+        {
+          name: 'Service Type Management'
+        },
+        {
+          name: 'User Management'
+        }
+      ]
     }
   }
 };
@@ -38,28 +72,49 @@ export default {
   left: 0;
   right: 0;
 }
-.menu-container {
-  display: inline-block;
-  
-  margin-right: 14px;
-  
-  width: 256px;
+
+.body {
+  & {
+    position: absolute;
+    left: 272px;
+    right: 0px;
+    top: 0;
+    bottom: 0;
+    transition: left .3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  }
   &.active {
-    max-width: 256px;
-    transition: max-width .3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    left: 272px;
   }
   &.collapse {
-    max-width: 32px;
-    transition: max-width .25s cubic-bezier(0.4, 0.0, 0.2, 1);
+    left: 48px;
+  }
+  .header {
+    position: relative;
+    color: #fff;
+    font-weight: 700;
+    padding-top: 21px;
+    padding-bottom: 21px;
+    padding-left: 48px;
+    font-size: 16px;
+    .content {
+      background:linear-gradient(14deg, rgba(120,205,104,1) 0%, rgba(20,166,165,1) 100%);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .icon {
+      position: absolute;
+      left: 22px;
+      opacity: .4;
+    }
   }
 }
+
 .menu {
   & {
+    display: inline-block;
     background-color: #1f263e;
     width: 272px;
     height: 100%;
-    display: flex;
-    flex-direction: column;
     box-shadow: 0 2px 10px 1px rgba(0, 0, 0, .2);
   }
   &.active {
@@ -72,21 +127,40 @@ export default {
   }
   &.collapse {
     transform: translateX(-224px);
-    transition: transform .25s cubic-bezier(0.4, 0.0, 0.2, 1);
+    transition: transform .3s cubic-bezier(0.4, 0.0, 0.2, 1);
     .toggle-button {
-      transition: transform .25s cubic-bezier(0.4, 0.0, 0.2, 1);
+      transition: transform .3s cubic-bezier(0.4, 0.0, 0.2, 1);
       transform: translateX(50%) translateY(-50%) rotate(180deg);
+    }
+    .item.active {
+      span {
+        opacity: .4;
+      }
+      &::before {
+        content: "";
+        opacity: 0;
+      }
+      &:hover::before {
+        content: "";
+        opacity: 0;
+      }
     }
   }
   .header {
+    position: relative;
     color: #fff;
     font-weight: 700;
     padding-top: 21px;
     padding-bottom: 21px;
     padding-left: 48px;
     font-size: 16px;
-    button {
-      float: right;
+    .content {
+      opacity: .9;
+    }
+    .icon {
+      position: absolute;
+      left: 22px;
+      opacity: .4;
     }
   }
   .toggle-button {
@@ -106,17 +180,19 @@ export default {
     padding-left: 48px;
     font-size: 14px;
     color: #fff;
-    opacity: 0.4;
-    transition: opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-    &.active {
-      opacity: 1;
-      background-image:linear-gradient(47deg,rgba(232,232,235,.4) 0%,rgba(31,38,62,.4) 100%);
+    span {
+      transition: opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+      opacity: .4;
     }
-    &:hover {
-      opacity: 1;
+    &.active span{
+      opacity: .9;
+    }
+    &:hover span {
+      opacity: .9;
     }
     &::before {
       content: "";
+      background-image:linear-gradient(47deg,rgba(232,232,235,.4) 0%,rgba(31,38,62,.4) 100%);
       position: absolute;
       left: 0;
       right: 0;
@@ -125,20 +201,11 @@ export default {
       z-index: -1;
       transition: opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
       opacity: 0;
-      // background-image:linear-gradient(47deg,rgba(232,232,235,.4) 0%,rgba(31,38,62,.4) 100%);
     }
-    &:hover::before {
-      opacity: 1;
-    }
+    &.active::before {
+      opacity: .9;
+    }    
   }
-}
-.body {
-  position: absolute;
-  
-  left: 272px;
-  right: 0px;
-  top: 0;
-  bottom: 0;
 }
 </style>
 

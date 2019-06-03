@@ -2,8 +2,6 @@
 // Generated on Thu May 09 2019 10:31:35 GMT+0800 (China Standard Time)
 const webpackConfig = require('../../build/webpack.test')
 
-process.env.CHROME_BIN = require('puppeteer').executablePath()
-
 module.exports = function(config) {
   config.set({
 
@@ -63,7 +61,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['ChromeHeadless'],
+    browsers: ['jsdom'],
 
 
     // Continuous Integration mode

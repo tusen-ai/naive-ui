@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="service-container">
-    <nv-layout></nv-layout>
+    <nv-home></nv-home>
   </div>
   <div class="nav-container">
     <nv-navbar></nv-navbar>
@@ -15,7 +15,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .nav-container {
   position: fixed;
   top: 0;
