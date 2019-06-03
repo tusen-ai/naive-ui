@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "",
+    "build": "cross-env NODE_ENV=development & gulp --gulpfile build/gulpfile.js build",
     "demo": "cross-env NODE_ENV=development & gulp --gulpfile build/gulpfile.js build & webpack-dev-server --config build/webpack.demo.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.js",
+    "serve": "npm run dev",
     "test": "cross-env NODE_ENV=development karma start test/unit/karma.conf.js"
   },
   "author": "",
@@ -47,6 +48,7 @@
     "url-loader": "^1.1.2",
     "vue": "^2.6.10",
     "vue-loader": "^15.7.0",
+    "vue-router": "^3.0.6",
     "vue-template-compiler": "^2.6.10",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.2",
