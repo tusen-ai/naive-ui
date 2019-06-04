@@ -1,42 +1,45 @@
 <template>
-  <i :class="classes" :style="styles"></i>
+  <i
+    :class="classes"
+    :style="styles"
+  />
 </template>
 <script>
-const prefixCls = "ion";
+const prefixCls = 'ion'
 export default {
-  name: "NvIcon",
+  name: 'NvIcon',
   props: {
     type: {
       type: String,
-      default: ""
+      default: ''
     },
     size: [Number, String],
     color: String,
     custom: {
       type: String,
-      default: ""
+      default: ''
     }
   },
   computed: {
-    classes() {
+    classes () {
       return [
         {
-          [`${prefixCls}-${this.type}`]: this.type !== "",
-          [`${this.custom}`]: this.custom !== ""
+          [`${prefixCls}-${this.type}`]: this.type !== '',
+          [`${this.custom}`]: this.custom !== ''
         }
-      ];
+      ]
     },
-    styles() {
-      let style = {};
+    styles () {
+      let style = {}
       if (this.size) {
-        style["font-size"] = `${this.size}px`;
-        style["line-height"] = '1';
+        style['font-size'] = `${this.size}px`
+        style['line-height'] = '1'
       }
       if (this.color) {
-        style.color = this.color;
+        style.color = this.color
       }
-      return style;
+      return style
     }
   }
-};
+}
 </script>

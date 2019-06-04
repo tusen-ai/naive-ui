@@ -1,32 +1,40 @@
 <template>
   <div class="nav">
     <div class="left">
-      <div class="item">TuSimple</div>
+      <div class="item">
+        TuSimple
+      </div>
     </div>
     <div class="right">
-      <div class="item">Beijing</div>
-      <div class="item">English</div>
-      <div class="item">Mollie Jennings</div>
+      <div class="item">
+        Beijing
+      </div>
+      <div class="item">
+        English
+      </div>
+      <div class="item">
+        Mollie Jennings
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "NvNavbar",
+  name: 'NvNavbar',
   props: {},
+  data () {
+    return {
+      collapse: false
+    }
+  },
   methods: {
     toggle () {
       console.log('hello')
       this.collapse = !this.collapse
     }
-  },
-  data () {
-    return {
-      collapse: false
-    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -65,4 +73,3 @@ export default {
   }
 }
 </style>
-

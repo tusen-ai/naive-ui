@@ -1,10 +1,10 @@
 <template>
-  <div>{{title}}</div>
+  <div>{{ title }}</div>
 </template>
 
 <script>
 export default {
-  name: 'amazing',
+  name: 'Amazing',
   props: ['title'],
   methods: {
     hello () {
@@ -17,4 +17,3 @@ export default {
 <style>
 
 </style>
-

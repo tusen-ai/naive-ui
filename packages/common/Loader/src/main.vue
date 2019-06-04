@@ -1,17 +1,26 @@
 <template>
   <div class="nv-loader__mask">
     <div class="nv-loader__loader">
-      <svg viewBox="25 25 50 50" class="circular"><circle cx="50" cy="50" r="20" fill="none" class="path"></circle></svg>
+      <svg
+        viewBox="25 25 50 50"
+        class="circular"
+      ><circle
+        cx="50"
+        cy="50"
+        r="20"
+        fill="none"
+        class="path"
+      /></svg>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "NvLoader",
+  name: 'NvLoader',
   props: {
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -62,4 +71,3 @@ export default {
   }
 }
 </style>
-

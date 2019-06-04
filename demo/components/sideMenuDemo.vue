@@ -1,12 +1,12 @@
 <template>
-<div>
-  <div class="service-container">
-    <nv-layout></nv-layout>
+  <div>
+    <div class="service-container">
+      <nv-layout />
+    </div>
+    <div class="nav-container">
+      <nv-navbar />
+    </div>
   </div>
-  <div class="nav-container">
-    <nv-navbar></nv-navbar>
-  </div>
-</div>
 </template>
 
 <script>

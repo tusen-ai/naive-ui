@@ -1,31 +1,47 @@
 <template>
-  <div class="menu-container" :class="{ collapse: collapse, active: !collapse }">
-    <div class="menu" :class="{ collapse: collapse, active: !collapse }">
-      <div class="header">Good Service<button @click="toggle">&lt;</button></div>
-      <div class="item">Service Management</div>
-      <div class="item">Service Management</div>
-      <div class="item">Service Management</div>
-      <div class="toggle-button"></div>
+  <div
+    class="menu-container"
+    :class="{ collapse: collapse, active: !collapse }"
+  >
+    <div
+      class="menu"
+      :class="{ collapse: collapse, active: !collapse }"
+    >
+      <div class="header">
+        Good Service<button @click="toggle">
+          &lt;
+        </button>
+      </div>
+      <div class="item">
+        Service Management
+      </div>
+      <div class="item">
+        Service Management
+      </div>
+      <div class="item">
+        Service Management
+      </div>
+      <div class="toggle-button" />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "NvSidemenu",
+  name: 'NvSidemenu',
   props: {},
+  data () {
+    return {
+      collapse: false
+    }
+  },
   methods: {
     toggle () {
       console.log('hello')
       this.collapse = !this.collapse
     }
-  },
-  data () {
-    return {
-      collapse: false
-    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -75,4 +91,3 @@ export default {
   }
 }
 </style>
-

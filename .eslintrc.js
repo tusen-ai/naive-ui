@@ -1,5 +1,6 @@
 module.exports = {
   extends: [
-    "@vue/standard"
+    'plugin:vue/recommended',
+    '@vue/standard'
   ]
 }

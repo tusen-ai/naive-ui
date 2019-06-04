@@ -1,27 +1,18 @@
 <template>
   <div class="home">
     <div class="columns">
-      <div class="column"></div>
-      <div class="column"></div>
-      <div class="column"></div>
-      <div class="column"></div>
-
+      <div class="column" />
+      <div class="column" />
+      <div class="column" />
+      <div class="column" />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "NvHome",
+  name: 'NvHome',
   props: {},
-  methods: {
-    toggle () {
-      this.collapse = !this.collapse
-    },
-    setActive (itemName) {
-      this.activeItemName = itemName
-    }
-  },
   data () {
     return {
       collapse: false,
@@ -29,7 +20,7 @@ export default {
       items: [
         {
           name: 'Service Management'
-        }, 
+        },
         {
           name: 'Service Type Management'
         },
@@ -38,8 +29,16 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    toggle () {
+      this.collapse = !this.collapse
+    },
+    setActive (itemName) {
+      this.activeItemName = itemName
+    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -60,9 +59,8 @@ export default {
       background-color: white;
       flex-grow: 1;
       height: 100px;
-      
+
     }
   }
 }
 </style>
-
