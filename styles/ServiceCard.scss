@@ -1,0 +1,38 @@
+@import './mixins/mixins.scss';
+
+@include b(service-card) {
+  & {
+    background:rgba(58,64,85,1);
+    box-shadow:0px 2px 20px 0px rgba(0,0,0,0.23),0px 1px 10px 0px rgba(0,0,0,0.04);
+    border-radius:10px;
+    padding: 15px 14px 18px 14px;
+    margin-bottom: 16px;
+  }
+  & > .title {
+    font-size: 14px;
+    color: rgba(212, 216, 231, .5);
+  }
+  & > .divider {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    height: 1px;
+    background-color: rgba(255, 255, 255, .09)
+  }
+  & > .items {
+    display: flex;
+    flex-direction: column;
+    & > .item {
+      font-size: 14px;
+      padding: 10px 16px;
+      color: #fff;
+      background-color: rgba(255,255,255,0.23);
+      border-radius: 6px;
+    }
+    & > .item:not(:last-child) {
+      margin-bottom: 10px;
+    }
+    & > .item.disabled {
+      background-color: rgba(255,255,255,0.23);
+    }
+  }
+}

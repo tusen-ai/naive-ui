@@ -13,8 +13,14 @@ export default {
       type: String,
       default: ''
     },
-    size: [Number, String],
-    color: String,
+    size: {
+      type: [Number, String],
+      default: 14
+    },
+    color: {
+      type: String,
+      default: '#fff'
+    },
     custom: {
       type: String,
       default: ''

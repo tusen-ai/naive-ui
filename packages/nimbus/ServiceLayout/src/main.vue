@@ -47,7 +47,7 @@
 
 <script>
 export default {
-  name: 'NvLayout',
+  name: 'NvServiceLayout',
   props: {},
   data () {
     return {
@@ -79,7 +79,7 @@ export default {
 
 <style lang="scss" scoped>
 .layout {
-  background: #1f263e;
+  background: #171D33;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -112,6 +112,7 @@ export default {
     font-size: 16px;
     .content {
       background:linear-gradient(14deg, rgba(120,205,104,1) 0%, rgba(20,166,165,1) 100%);
+      background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
     }

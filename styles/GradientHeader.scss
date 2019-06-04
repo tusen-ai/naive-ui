@@ -1,0 +1,17 @@
+@import './mixins/mixins.scss';
+
+@include b(gradient-header) {
+  & > .header {
+    display: inline-block;
+    position: relative;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    & > .content {
+      background:linear-gradient(14deg, rgba(120,205,104,1) 0%, rgba(20,166,165,1) 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+  }
+}

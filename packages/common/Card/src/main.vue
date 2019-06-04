@@ -49,7 +49,8 @@ export default {
     },
     width: {
       type: Number,
-      required: false
+      required: false,
+      default: 14
     }
   },
   data () {

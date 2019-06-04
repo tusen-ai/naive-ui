@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="service-container">
-      <nv-layout />
+      <nv-service-layout />
     </div>
     <div class="nav-container">
       <nv-navbar />
@@ -30,6 +30,6 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #1f263e;
+  background-color: #171D33;
 }
 </style>

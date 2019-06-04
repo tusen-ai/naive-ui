@@ -39,16 +39,17 @@ export default {
 
 <style lang="scss" scoped>
 .nav {
-  position: fixed;
+  position: absolute;
   top: 0;
   height: 50px;
   left: 0;
-  right: 0;
+  width: 100%;
   background-color: #1f263e;
   box-shadow: 0 2px 6px 1px rgba(0, 0, 0, .1);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-width: 1280px;
   .left {
     display: flex;
     align-items: center;
