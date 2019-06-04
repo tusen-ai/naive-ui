@@ -2,13 +2,13 @@ const path = require('path')
 const webpack = require('webpack')
 const config = require('./config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 const webpackConfig = {
   mode: 'development',
   entry: './demo/index.js',
   output: {
-    path: path.resolve(process.cwd(), ),
+    path: path.resolve(process.cwd()),
     publicPath: '',
     filename: '[name].[hash:7].js',
     chunkFilename: '[name].[hash:7].js'
@@ -49,7 +49,7 @@ const webpackConfig = {
           'sass-loader'
         ]
       },
-       {
+      {
         test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,
         loader: 'url-loader',
         query: {

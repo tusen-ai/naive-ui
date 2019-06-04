@@ -45,6 +45,7 @@ export default {
 <style lang="scss" scoped>
 .home {
   width: 100%;
+  padding-top: 14px;
   .columns {
     margin: auto;
     display: flex;

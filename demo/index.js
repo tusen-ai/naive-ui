@@ -1,7 +1,7 @@
 import Vue from 'vue/dist/vue'
 import VueRouter from 'vue-router'
 import '../styles/index.scss'
-import Demo from './demo.vue'
+// import Demo from './demo.vue'
 import Card from 'packages/common/Card'
 import Icon from 'packages/common/Icon'
 import Loader from 'packages/common/Loader'
@@ -31,8 +31,6 @@ const routes = [
 const router = new VueRouter({
   routes
 })
-
-
 
 ;(new Vue({
   router

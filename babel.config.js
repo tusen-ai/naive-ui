@@ -1,8 +1,7 @@
 module.exports = {
-  "env": {
-    "test": {
-      "plugins": ["istanbul"]
+  'env': {
+    'test': {
+      'plugins': ['istanbul']
     }
   }
 }
-  
