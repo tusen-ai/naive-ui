@@ -1,0 +1,51 @@
+@import './mixins/mixins.scss';
+
+@include b(table) {
+  width: 100%;
+  border-radius: 12px;
+  font-size: 12px;
+  overflow: hidden;
+  box-shadow: 0 3px 20px 6px rgba(0, 0, 0, .2);
+  padding-bottom: 8px;
+  background-color: #1f263e;
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    thead {
+      background-color: rgb(43,49,71);
+      color: #fff;
+      tr {
+        th {
+          padding: 16px 6px 16px 6px;
+          text-align: left;
+          border: none;
+        }
+        th:nth-child(1) {
+          padding-left: 32px;
+          border-radius: 12px 0 0 0;
+        }
+        th:nth-last-child(1) {
+          padding-left: 32px;
+          border-radius: 0 12px 0 0;
+        }
+      }
+    }
+    tbody {
+      background-color: #1f263e;
+      color: #fff;
+      tr {
+        td {
+          padding: 16px 6px 12px 6px;
+          text-align: left;
+          border: none;
+        }
+        td:nth-child(1) {
+          padding-left: 32px;
+        }
+        td:nth-last-child(1) {
+          padding-left: 32px;
+        }
+      }
+    }
+  }
+}

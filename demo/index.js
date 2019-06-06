@@ -8,7 +8,9 @@ import Loader from 'packages/common/Loader'
 import GradientHeader from 'packages/common/GradientHeader'
 import ColumnGroup from 'packages/common/ColumnGroup'
 import WithPadding from 'packages/common/WithPadding'
+import WithMargin from 'packages/common/WithMargin'
 import MasonryGroup from 'packages/common/MasonryGroup'
+import Table from 'packages/common/Table'
 
 import ServiceCard from 'packages/nimbus/ServiceCard'
 import HomeLayout from 'packages/nimbus/HomeLayout'
@@ -31,6 +33,8 @@ ColumnGroup.install(Vue)
 WithPadding.install(Vue)
 ServiceCard.install(Vue)
 MasonryGroup.install(Vue)
+Table.install(Vue)
+WithMargin.install(Vue)
 
 const routes = [
   { path: '/sidemenu', component: sideMenuDemo },

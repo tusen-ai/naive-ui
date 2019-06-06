@@ -78,10 +78,6 @@ export default {
 </script>
 
 <style scoped>
-.body {
-  min-width: 1280px;
-  background: #1a2033;
-}
 .nav-container {
   position: absolute;
   top: 0;

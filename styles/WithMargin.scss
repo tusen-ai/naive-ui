@@ -1,6 +1,5 @@
 @import './mixins/mixins.scss';
 
 @include b(with-padding) {
-  box-sizing: border-box;
   width: 100%;
 }
