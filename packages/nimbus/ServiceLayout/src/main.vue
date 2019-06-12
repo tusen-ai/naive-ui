@@ -155,7 +155,7 @@ export default {
     top: 0;
     bottom: 0;
     transition: left .3s cubic-bezier(0.4, 0.0, 0.2, 1);
-    overflow: scroll;
+    overflow: auto;
   }
   &.active {
     left: 272px;
@@ -190,7 +190,10 @@ export default {
     display: inline-block;
     background-color: #1f263e;
     width: 272px;
-    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
     box-shadow: 0 2px 10px 1px rgba(0, 0, 0, .2);
   }
   &.active {
@@ -264,7 +267,7 @@ export default {
     bottom: 0;
     left: 0;
     right: 0;
-    overflow: scroll;
+    overflow-y: auto;
     .item {
       cursor: pointer;
       position: relative;
@@ -307,14 +310,14 @@ export default {
           border-top: 2px solid #63E2B7;
           position: absolute;
           right: 24px;
-          top: 50%;
+          top: calc(50% - 1px);
           transform: rotate(45deg);
           transform-origin: 25% 25%;
           opacity: 1;
           transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
         }
         &.is-collapsed::after {
-          transform: rotate(225deg);
+          transform: rotate(225deg) ;
           opacity: 1;
         }
         &:hover span {

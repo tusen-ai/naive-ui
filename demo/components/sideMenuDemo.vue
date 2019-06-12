@@ -73,6 +73,6 @@ export default {
   width: 100%;
   min-width: 1280px;
   background-color: #171D33;
-  overflow: scroll;
+  overflow: auto;
 }
 </style>

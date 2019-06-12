@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="service-container">
+    <div class="main-container">
       <nv-home-layout>
         <nv-with-padding
           :padding-top="16"
@@ -87,7 +87,7 @@ export default {
   min-width: 1280px;
   background-color: #1f263e;
 }
-.service-container {
+.main-container {
   position: absolute;
   top: 50px;
   left: 0;
@@ -95,6 +95,6 @@ export default {
   width: 100%;
   min-width: 1280px;
   background-color: #171D33;
-  overflow: scroll;
+  overflow: auto;
 }
 </style>
