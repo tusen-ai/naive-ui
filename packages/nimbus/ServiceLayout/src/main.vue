@@ -226,6 +226,9 @@ export default {
         &::after {
           opacity: 0;
         }
+        &.is-collapsed::after {
+          opacity: 0;
+        }
       }
     }
   }
@@ -305,13 +308,13 @@ export default {
           position: absolute;
           right: 24px;
           top: 50%;
-          transform: rotate(45deg) translateY(-3px);
+          transform: rotate(45deg);
           transform-origin: 25% 25%;
           opacity: 1;
           transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
         }
         &.is-collapsed::after {
-          transform: rotate(225deg) translateY(0px);
+          transform: rotate(225deg);
           opacity: 1;
         }
         &:hover span {
