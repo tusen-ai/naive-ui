@@ -1,7 +1,7 @@
 import Card from './packages/common/Card'
 import Icon from './packages/common/Icon'
 import Loader from './packages/common/Loader'
-import GradientHeader from './packages/common/GradientHeader'
+import GradientText from './packages/common/GradientText'
 import ColumnGroup from './packages/common/ColumnGroup'
 import WithPadding from './packages/common/WithPadding'
 import WithMargin from './packages/common/WithMargin'
@@ -20,7 +20,7 @@ function installUiToVue (Vue) {
   Navbar.install(Vue)
   Loader.install(Vue)
   HomeLayout.install(Vue)
-  GradientHeader.install(Vue)
+  GradientText.install(Vue)
   ColumnGroup.install(Vue)
   WithPadding.install(Vue)
   ServiceCard.install(Vue)

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="service-container">
-      <n-service-layout>
+      <n-nimbus-service-layout>
         <n-with-padding
           :padding-left="48"
           :padding-right="48"
@@ -40,7 +40,7 @@
             </n-tbody>
           </n-table>
         </n-with-padding>
-      </n-service-layout>
+      </n-nimbus-service-layout>
     </div>
     <div class="nav-container">
       <n-navbar />

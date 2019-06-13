@@ -1,7 +1,7 @@
-import ServiceLayout from './src/main.vue'
+import NimbusServiceLayout from './src/main.vue'
 
-ServiceLayout.install = function (Vue) {
-  Vue.component(ServiceLayout.name, ServiceLayout)
+NimbusServiceLayout.install = function (Vue) {
+  Vue.component(NimbusServiceLayout.name, NimbusServiceLayout)
 }
 
-export default ServiceLayout
+export default NimbusServiceLayout

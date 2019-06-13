@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'NHomeLayout',
+  name: 'NNimbusHomeLayout',
   props: {},
   data () {
     return {

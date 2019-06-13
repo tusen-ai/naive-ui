@@ -83,7 +83,7 @@
 
 <script>
 export default {
-  name: 'NServiceLayout',
+  name: 'NNimbusServiceLayout',
   props: {},
   data () {
     return {

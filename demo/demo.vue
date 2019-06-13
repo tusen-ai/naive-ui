@@ -1,12 +1,16 @@
 <template>
   <div class="demo">
     <div class="section">
-      <router-link to="/home">
-        home
+      <router-link to="/n-nimbus-home-layout">
+        home / n-nimbus-home-layout
       </router-link>
       <br>
-      <router-link to="/sidemenu">
-        service
+      <router-link to="/n-nimbus-service-layout">
+        service / n-nimbus-service-layout
+      </router-link>
+      <br>
+      <router-link to="/n-gradient-text">
+        渐变文字 / n-gradient-text
       </router-link>
     </div>
   </div>
@@ -20,10 +24,13 @@ export default {
 <style lang="scss" scoped>
 .demo {
   width: 1080px;
+  height: 100vh;
   margin: auto;
+  display: flex;
+  align-items: center;
 }
 
-.section.title {
-  margin: 14px 0;
+.section {
+
 }
 </style>

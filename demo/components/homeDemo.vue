@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="main-container">
-      <n-home-layout>
+      <n-nimbus-home-layout>
         <n-with-padding
           :padding-top="16"
           :padding-bottom="23"
@@ -20,7 +20,7 @@
             style="width: 271.5px"
           />
         </n-masonry-group>
-      </n-home-layout>
+      </n-nimbus-home-layout>
     </div>
     <div class="nav-container">
       <n-navbar />

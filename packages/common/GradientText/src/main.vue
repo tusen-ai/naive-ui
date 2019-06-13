@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'NGradientHeader',
+  name: 'NGradientText',
   props: {
     'fontSize': {
       type: Number,

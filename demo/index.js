@@ -5,7 +5,7 @@ import '../styles/index.scss'
 import Card from 'packages/common/Card'
 import Icon from 'packages/common/Icon'
 import Loader from 'packages/common/Loader'
-import GradientHeader from 'packages/common/GradientHeader'
+import GradientText from 'packages/common/GradientText'
 import ColumnGroup from 'packages/common/ColumnGroup'
 import WithPadding from 'packages/common/WithPadding'
 import WithMargin from 'packages/common/WithMargin'
@@ -19,6 +19,7 @@ import ServiceLayout from 'packages/nimbus/ServiceLayout'
 
 import sideMenuDemo from './components/sideMenuDemo'
 import homeDemo from './components/homeDemo'
+import gradientTextDemo from './components/gradientTextDemo'
 import demo from './demo'
 
 Vue.use(VueRouter)
@@ -29,7 +30,7 @@ ServiceLayout.install(Vue)
 Navbar.install(Vue)
 Loader.install(Vue)
 HomeLayout.install(Vue)
-GradientHeader.install(Vue)
+GradientText.install(Vue)
 ColumnGroup.install(Vue)
 WithPadding.install(Vue)
 ServiceCard.install(Vue)
@@ -39,8 +40,9 @@ WithMargin.install(Vue)
 
 const routes = [
   { path: '/', component: demo },
-  { path: '/sidemenu', component: sideMenuDemo },
-  { path: '/home', component: homeDemo }
+  { path: '/n-nimbus-service-layout', component: sideMenuDemo },
+  { path: '/n-nimbus-home-layout', component: homeDemo },
+  { path: '/n-gradient-text', component: gradientTextDemo }
 ]
 
 const router = new VueRouter({
