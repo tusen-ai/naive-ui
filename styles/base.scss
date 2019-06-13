@@ -1,8 +1,14 @@
 @import './fonts/OpenSans.scss';
+@import './theme/default.scss';
 
 body {
   margin: 0;
   font-family: 'Open Sans';
   min-width: 1280px;
-  background: #1a2033;
+  background: $body-background-color;
+  color: $primary-text-color;
+}
+
+a {
+  color: $primary-text-color;
 }

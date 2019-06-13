@@ -19,6 +19,7 @@ import ServiceLayout from 'packages/nimbus/ServiceLayout'
 
 import sideMenuDemo from './components/sideMenuDemo'
 import homeDemo from './components/homeDemo'
+import demo from './demo'
 
 Vue.use(VueRouter)
 
@@ -37,8 +38,9 @@ Table.install(Vue)
 WithMargin.install(Vue)
 
 const routes = [
+  { path: '/', component: demo },
   { path: '/sidemenu', component: sideMenuDemo },
-  { path: '/', component: homeDemo }
+  { path: '/home', component: homeDemo }
 ]
 
 const router = new VueRouter({

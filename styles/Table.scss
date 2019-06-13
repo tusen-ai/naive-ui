@@ -1,19 +1,20 @@
 @import './mixins/mixins.scss';
+@import './theme/default.scss';
 
 @include b(table) {
   width: 100%;
   border-radius: 12px;
-  font-size: 12px;
+  font-size: $small-font-size;
   overflow: hidden;
-  box-shadow: 0 3px 20px 6px rgba(0, 0, 0, .2);
+  box-shadow: $table-box-shadow;
   padding-bottom: 8px;
-  background-color: #1f263e;
+  background-color: $table-body-background-color;
   table {
     border-collapse: collapse;
     width: 100%;
     thead {
-      background-color: rgb(43,49,71);
-      color: #fff;
+      background-color: $table-header-background-color;
+      color: $primary-text-color;
       tr {
         th {
           padding: 16px 6px 16px 6px;
@@ -31,8 +32,8 @@
       }
     }
     tbody {
-      background-color: #1f263e;
-      color: #fff;
+      background-color: $table-body-background-color;
+      color: $regular-text-color;
       tr {
         td {
           padding: 16px 6px 12px 6px;
