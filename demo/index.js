@@ -11,6 +11,7 @@ import WithPadding from 'packages/common/WithPadding'
 import WithMargin from 'packages/common/WithMargin'
 import MasonryGroup from 'packages/common/MasonryGroup'
 import Table from 'packages/common/Table'
+import Checkbox from 'packages/common/Checkbox'
 
 import ServiceCard from 'packages/nimbus/ServiceCard'
 import HomeLayout from 'packages/nimbus/HomeLayout'
@@ -21,6 +22,7 @@ import sideMenuDemo from './components/sideMenuDemo'
 import homeDemo from './components/homeDemo'
 import gradientTextDemo from './components/gradientTextDemo'
 import iconDemo from './components/iconDemo'
+import checkboxDemo from './components/checkboxDemo'
 import demo from './demo'
 
 Vue.use(VueRouter)
@@ -38,13 +40,15 @@ ServiceCard.install(Vue)
 MasonryGroup.install(Vue)
 Table.install(Vue)
 WithMargin.install(Vue)
+Checkbox.install(Vue)
 
 const routes = [
   { path: '/', component: demo },
   { path: '/n-nimbus-service-layout', component: sideMenuDemo },
   { path: '/n-nimbus-home-layout', component: homeDemo },
   { path: '/n-gradient-text', component: gradientTextDemo },
-  { path: '/n-icon', component: iconDemo }
+  { path: '/n-icon', component: iconDemo },
+  { path: '/n-checkbox', component: checkboxDemo }
 ]
 
 const router = new VueRouter({

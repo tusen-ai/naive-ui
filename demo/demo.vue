@@ -20,6 +20,10 @@
       <router-link to="/n-icon">
         图标 / n-icon
       </router-link>
+      <br>
+      <router-link to="/n-checkbox">
+        多选框 / n-checkbox
+      </router-link>
     </div>
   </div>
 </template>

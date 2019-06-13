@@ -1,0 +1,48 @@
+@import './mixins/mixins.scss';
+
+@include b(checkbox) {
+  & {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .label {
+    font-size: 12px;
+    color: #63E2B7;
+  }
+  .checkbox {
+    & {
+      height: 15px;
+      width: 15px;
+      margin-right: 6px;
+      border: 1px solid #63E2B7;
+      background-color: transparent;
+      border-radius: 4px;
+      position: relative;
+      
+    }
+    &.checked {
+      background-color: #63E2B7;
+    }
+    .inner {
+      &::after {
+        box-sizing: content-box;
+        content: "";
+        border: 1.5px solid #5C647B;
+        border-left: 0;
+        border-top: 0;
+        height: 8px;
+        left: 5px;
+        position: absolute;
+        top: 2px;
+        transform: rotate(45deg) scaleY(0);
+        width: 3px;
+        transform-origin: center;
+      }
+      &.checked::after {
+        transform: rotate(45deg) scaleY(1);
+      }
+    }
+  }
+}
