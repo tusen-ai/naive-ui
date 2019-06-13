@@ -1,5 +1,5 @@
 <template>
-  <div class="nv-service-card">
+  <div class="n-service-card">
     <div class="title">
       {{ title }}
     </div>
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'NvServiceCard',
+  name: 'NServiceCard',
   props: {
     title: {
       type: String,

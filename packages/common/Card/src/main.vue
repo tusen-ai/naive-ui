@@ -1,24 +1,24 @@
 <template>
   <div
-    class="nv-card"
+    class="n-card"
     :style="style"
   >
     <!-- <div class="mask">
       <div class="intro">
         <div></div>
         <div class="ribbon">
-          <nv-icon type="md-lock" size="16" style="margin-right: 4px;"/>
+          <n-icon type="md-lock" size="16" style="margin-right: 4px;"/>
           <div>Access Required</div>
         </div>
       </div>
     </div> -->
     <div class="intro">
-      <nv-icon
+      <n-icon
         type="logo-github"
         size="32"
       />
       <div class="ribbon">
-        <nv-icon
+        <n-icon
           type="md-lock"
           size="16"
           style="margin-right: 4px;"
@@ -37,7 +37,7 @@
 
 <script>
 export default {
-  name: 'NvCard',
+  name: 'NCard',
   props: {
     title: {
       type: String,

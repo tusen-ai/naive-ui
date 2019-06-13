@@ -1,7 +1,7 @@
-import NvTh from './src/main.vue'
+import NTh from './src/main.vue'
 
-NvTh.install = function (Vue) {
-  Vue.component(NvTh.name, NvTh)
+NTh.install = function (Vue) {
+  Vue.component(NTh.name, NTh)
 }
 
-export default NvTh
+export default NTh

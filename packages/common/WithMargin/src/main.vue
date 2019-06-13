@@ -1,6 +1,6 @@
 <template>
   <div
-    class="nv-with-margin"
+    class="n-with-margin"
     :style="style"
   >
     <slot />
@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'NvWithMargin',
+  name: 'NWithMargin',
   props: {
     marginTop: {
       type: Number,

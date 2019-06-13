@@ -1,5 +1,5 @@
 <template>
-  <div class="nv-gradient-header">
+  <div class="n-gradient-header">
     <div
       class="header"
       :style="style"
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'NvGradientHeader',
+  name: 'NGradientHeader',
   props: {
     'fontSize': {
       type: Number,

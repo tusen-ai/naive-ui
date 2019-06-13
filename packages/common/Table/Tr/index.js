@@ -1,7 +1,7 @@
-import NvTr from './src/main.vue'
+import NTr from './src/main.vue'
 
-NvTr.install = function (Vue) {
-  Vue.component(NvTr.name, NvTr)
+NTr.install = function (Vue) {
+  Vue.component(NTr.name, NTr)
 }
 
-export default NvTr
+export default NTr

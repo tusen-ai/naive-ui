@@ -1,17 +1,17 @@
 <template>
   <div>
     <div class="main-container">
-      <nv-home-layout>
-        <nv-with-padding
+      <n-home-layout>
+        <n-with-padding
           :padding-top="16"
           :padding-bottom="23"
         >
-          <nv-gradient-header :font-size="18">
+          <n-gradient-header :font-size="18">
             All Services
-          </nv-gradient-header>
-        </nv-with-padding>
-        <nv-masonry-group>
-          <nv-service-card
+          </n-gradient-header>
+        </n-with-padding>
+        <n-masonry-group>
+          <n-service-card
             v-for="service in services"
             :key="service.title"
             :title="service.title"
@@ -19,11 +19,11 @@
             class="grid-item"
             style="width: 271.5px"
           />
-        </nv-masonry-group>
-      </nv-home-layout>
+        </n-masonry-group>
+      </n-home-layout>
     </div>
     <div class="nav-container">
-      <nv-navbar />
+      <n-navbar />
     </div>
   </div>
 </template>

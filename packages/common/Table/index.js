@@ -1,13 +1,17 @@
-import NvTable from './src/main.vue'
-import NvTh from './Th/src/main.vue'
-import NvTr from './Tr/src/main.vue'
-import NvTd from './Td/src/main.vue'
+import NTable from './src/main.vue'
+import NTh from './Th/src/main.vue'
+import NTr from './Tr/src/main.vue'
+import NTd from './Td/src/main.vue'
+import NThead from './Thead/src/main.vue'
+import NTbody from './TBody/src/main.vue'
 
-NvTable.install = function (Vue) {
-  Vue.component(NvTable.name, NvTable)
-  Vue.component(NvTh.name, NvTh)
-  Vue.component(NvTr.name, NvTr)
-  Vue.component(NvTd.name, NvTd)
+NTable.install = function (Vue) {
+  Vue.component(NTable.name, NTable)
+  Vue.component(NTh.name, NTh)
+  Vue.component(NTr.name, NTr)
+  Vue.component(NTd.name, NTd)
+  Vue.component(NTbody.name, NTbody)
+  Vue.component(NThead.name, NThead)
 }
 
-export default NvTable
+export default NTable

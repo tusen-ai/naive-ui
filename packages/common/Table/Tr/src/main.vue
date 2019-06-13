@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'NvTr'
+  name: 'NTr'
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="nv-with-padding"
+    class="n-with-padding"
     :style="style"
   >
     <slot />
@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'NvWithPadding',
+  name: 'NWithPadding',
   props: {
     paddingTop: {
       type: Number,

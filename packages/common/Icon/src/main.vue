@@ -7,7 +7,7 @@
 <script>
 const prefixCls = 'ion'
 export default {
-  name: 'NvIcon',
+  name: 'NIcon',
   props: {
     type: {
       type: String,

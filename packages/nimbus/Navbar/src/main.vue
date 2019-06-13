@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: 'NvNavbar',
+  name: 'NNavbar',
   props: {},
   data () {
     return {

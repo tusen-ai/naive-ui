@@ -1,5 +1,5 @@
 <template>
-  <div class="nv-column-group">
+  <div class="n-column-group">
     <div class="columns">
       <div
         v-for="index in cols"
@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'NvColumnGroup',
+  name: 'NColumnGroup',
   props: {
     col: {
       type: Number,

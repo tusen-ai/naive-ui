@@ -1,6 +1,6 @@
 <template>
-  <div class="nv-loader__mask">
-    <div class="nv-loader__loader">
+  <div class="n-loader__mask">
+    <div class="n-loader__loader">
       <svg
         viewBox="25 25 50 50"
         class="circular"
@@ -17,14 +17,14 @@
 
 <script>
 export default {
-  name: 'NvLoader',
+  name: 'NLoader',
   props: {
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.nv-loader__mask {
+.n-loader__mask {
   position: absolute;
   left: 0;
   right: 0;

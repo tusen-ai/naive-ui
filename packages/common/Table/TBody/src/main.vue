@@ -1,19 +1,15 @@
 <template>
-  <td>
+  <tbody>
     <slot>
-      default th content
+      default tbody content
     </slot>
-  </td>
+  </tbody>
 </template>
 
 <script>
 export default {
-  name: 'NTd',
+  name: 'NTbody',
   props: {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

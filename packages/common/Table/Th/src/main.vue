@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'NvTh'
+  name: 'NTh'
 }
 </script>
 

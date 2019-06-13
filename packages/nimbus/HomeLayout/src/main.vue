@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'NvHomeLayout',
+  name: 'NHomeLayout',
   props: {},
   data () {
     return {

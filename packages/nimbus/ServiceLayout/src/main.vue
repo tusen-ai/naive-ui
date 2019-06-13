@@ -1,5 +1,5 @@
 <template>
-  <div class="nv-nimbus-service-layout">
+  <div class="n-nimbus-service-layout">
     <div
       class="body"
       :class="{ 'is-collapsed': isCollapsed, active: !isCollapsed }"
@@ -19,7 +19,7 @@
         <div class="header">
           <div class="content">
             <div class="icon">
-              <nv-icon
+              <n-icon
                 type="md-settings"
                 :size="22"
               />
@@ -83,7 +83,7 @@
 
 <script>
 export default {
-  name: 'NvServiceLayout',
+  name: 'NServiceLayout',
   props: {},
   data () {
     return {
