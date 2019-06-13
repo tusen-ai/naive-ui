@@ -12,6 +12,14 @@
       <router-link to="/n-gradient-text">
         渐变文字 / n-gradient-text
       </router-link>
+      <br>
+      <router-link to="/n-gradient-button">
+        (不可用)渐变按钮 / n-gradient-button
+      </router-link>
+      <br>
+      <router-link to="/n-icon">
+        图标 / n-icon
+      </router-link>
     </div>
   </div>
 </template>
@@ -28,9 +36,5 @@ export default {
   margin: auto;
   display: flex;
   align-items: center;
-}
-
-.section {
-
 }
 </style>

@@ -20,6 +20,7 @@ import ServiceLayout from 'packages/nimbus/ServiceLayout'
 import sideMenuDemo from './components/sideMenuDemo'
 import homeDemo from './components/homeDemo'
 import gradientTextDemo from './components/gradientTextDemo'
+import iconDemo from './components/iconDemo'
 import demo from './demo'
 
 Vue.use(VueRouter)
@@ -42,7 +43,8 @@ const routes = [
   { path: '/', component: demo },
   { path: '/n-nimbus-service-layout', component: sideMenuDemo },
   { path: '/n-nimbus-home-layout', component: homeDemo },
-  { path: '/n-gradient-text', component: gradientTextDemo }
+  { path: '/n-gradient-text', component: gradientTextDemo },
+  { path: '/n-icon', component: iconDemo }
 ]
 
 const router = new VueRouter({
