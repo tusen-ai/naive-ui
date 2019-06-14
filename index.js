@@ -9,6 +9,7 @@ import MasonryGroup from './packages/common/MasonryGroup'
 import Table from './packages/common/Table'
 import CheckBox from './packages/common/Checkbox'
 import RoundButton from './packages/common/RoundButton'
+import Switch from './packages/common/Switch'
 
 import ServiceCard from './packages/nimbus/ServiceCard'
 import HomeLayout from './packages/nimbus/HomeLayout'
@@ -31,6 +32,7 @@ function installUiToVue (Vue) {
   WithMargin.install(Vue)
   CheckBox.install(Vue)
   RoundButton.install(Vue)
+  Switch.install(Vue)
 }
 
 export default installUiToVue

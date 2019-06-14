@@ -13,6 +13,7 @@ import MasonryGroup from 'packages/common/MasonryGroup'
 import Table from 'packages/common/Table'
 import Checkbox from 'packages/common/Checkbox'
 import RoundButton from 'packages/common/RoundButton'
+import Switch from '../packages/common/Switch'
 
 import ServiceCard from 'packages/nimbus/ServiceCard'
 import HomeLayout from 'packages/nimbus/HomeLayout'
@@ -25,6 +26,7 @@ import gradientTextDemo from './components/gradientTextDemo'
 import iconDemo from './components/iconDemo'
 import checkboxDemo from './components/checkboxDemo'
 import roundButtonDemo from './components/roundButtonDemo'
+import switchDemo from './components/switchDemo'
 import demo from './demo'
 
 Vue.use(VueRouter)
@@ -44,6 +46,7 @@ Table.install(Vue)
 WithMargin.install(Vue)
 Checkbox.install(Vue)
 RoundButton.install(Vue)
+Switch.install(Vue)
 
 const routes = [
   { path: '/', component: demo },
@@ -52,7 +55,8 @@ const routes = [
   { path: '/n-gradient-text', component: gradientTextDemo },
   { path: '/n-icon', component: iconDemo },
   { path: '/n-checkbox', component: checkboxDemo },
-  { path: '/n-round-button', component: roundButtonDemo }
+  { path: '/n-round-button', component: roundButtonDemo },
+  { path: '/n-switch', component: switchDemo }
 ]
 
 const router = new VueRouter({

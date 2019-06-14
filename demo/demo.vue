@@ -28,6 +28,10 @@
       <router-link to="/n-round-button">
         圆按钮 / n-round-button
       </router-link>
+      <br>
+      <router-link to="/n-switch">
+        开关 / n-switch
+      </router-link>
     </div>
   </div>
 </template>
