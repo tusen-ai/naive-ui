@@ -6,11 +6,47 @@
     <n-dropdown
       v-model="selectedValue"
       placeholder="Please Select Type"
+      :items="[
+        {
+          label: 'Artifactory',
+          value: 'Artifactory'
+        },
+        {
+          label: 'Registry',
+          value: 'Registry'
+        },
+        {
+          label: 'Public',
+          value: 'Public'
+        },
+        {
+          label: 'Custom',
+          value: 'Custom'
+        }
+      ]"
     />
     <br>SelectedValue: {{ selectedValue === null ? 'null' : selectedValue }}<br>
-    <textarea rows="5"><n-dropdown
+    <textarea rows="40"><n-dropdown
   v-model="selectedValue"
   placeholder="Please Select Type"
+  :items="[
+    {
+      label: 'Artifactory',
+      value: 'Artifactory'
+    },
+    {
+      label: 'Registry',
+      value: 'Registry'
+    },
+    {
+      label: 'Public',
+      value: 'Public'
+    },
+    {
+      label: 'Custom',
+      value: 'Custom'
+    }
+  ]"
 /></textarea>
     <hr>
   </div>
