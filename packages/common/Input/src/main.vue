@@ -18,7 +18,7 @@
     <input
       type="text"
       class="inner-input"
-      placeholder="placeholder"
+      :placeholder="placeholder"
       :value="value"
       @input="handleInput"
     >

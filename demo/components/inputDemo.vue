@@ -9,7 +9,10 @@
     />
     {{ value }}
     <br>
-    <textarea rows="5">scaffold</textarea>
+    <textarea rows="5"><n-input
+      v-model="value"
+      type="input"
+    /></textarea>
     <hr>
     <h2>textarea</h2>
     <n-input
@@ -17,7 +20,10 @@
       type="textarea"
     />
     <br>
-    <textarea rows="5">scaffold</textarea>
+    <textarea rows="5"><n-input
+      v-model="value"
+      type="textarea"
+    /></textarea>
     <hr>
     <h2>placeholder</h2>
     <n-input
@@ -25,7 +31,10 @@
       placeholder="abcdd"
     />
     <br>
-    <textarea rows="5">scaffold</textarea>
+    <textarea rows="5"><n-input
+      v-model="value"
+      placeholder="abcdd"
+    /></textarea>
     <hr>
   </div>
 </template>
