@@ -3,7 +3,7 @@
 
 body {
   margin: 0;
-  font-family: 'Open Sans';
+  font-family: $default-font-family;
   min-width: 1280px;
   background: $body-background-color;
   color: $primary-text-color;

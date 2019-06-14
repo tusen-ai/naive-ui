@@ -12,7 +12,7 @@
     font-size: 14px;
     line-height: 20px;
     color: #fff;
-    font-family: 'Open Sans';
+    font-family: $default-font-family;
     width: 100%;
     caret-color: #63E2B7;
     &::placeholder {
@@ -30,7 +30,7 @@
     font-size: 14px;
     line-height: 20px;
     color: #fff;
-    font-family: 'Open Sans';
+    font-family: $default-font-family;
     width: 100%;
     resize: vertical;
     caret-color: #63E2B7;

@@ -38,6 +38,10 @@
       <router-link to="/n-input">
         输入 / n-input
       </router-link>
+      <br>
+      <router-link to="/n-dropdown">
+        下拉框 / n-dropdown
+      </router-link>
     </div>
   </div>
 </template>

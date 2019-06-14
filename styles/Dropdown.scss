@@ -1,0 +1,69 @@
+@import './mixins/mixins.scss';
+@import './theme/default.scss';
+
+@include b(dropdown) {
+  box-sizing: border-box;
+  display: inline-block;
+  border: none;
+  border-radius: 9px;
+  padding: 10px 14px;
+  outline: none;
+  background-color: #6F768B;
+  font-size: 14px;
+  line-height: 20px;
+  width: 100%;
+  color: #fff;
+  font-family: $default-font-family;
+  cursor: pointer;
+  &.active {
+    border: 1px solid #63E2B7;
+    margin: -1px;
+    .link {
+      &::after {
+        transform: rotate(135deg);
+      }
+      .menu {
+        visibility: visible;
+      }
+    }
+  }
+  .link {
+    position: relative;
+    &::after {
+      position: absolute;
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-left: 1px solid rgba(255, 255, 255, .4);
+      border-bottom: 1px solid rgba(255, 255, 255, .4);
+      right: 2px;
+      top: calc(50% - 5px);
+      transform: rotate(-45deg);
+      transform-origin: 25% 75%;
+    }
+    .label {
+      &.placeholder {
+        color: rgba(255, 255, 255, .4);
+      }
+    }
+    .menu {
+      overflow: hidden;
+      position: absolute;
+      visibility: hidden;
+      top: calc(100% + 15px);
+      left: -14px;
+      right: -14px;
+      border-radius: 9px;
+      background-color: rgba(75, 81, 106, 1);
+      box-shadow: 0px 2px 20px 0px rgba(0,0,0,0.16);
+      .item {
+        padding: 8px 14px;
+        color: rgba(255, 255, 255, .7);
+        &:hover {
+          background-color: rgba(96, 220, 178, 0.3);
+          color: #63E2B7;
+        }
+      }
+    }
+  }
+}
