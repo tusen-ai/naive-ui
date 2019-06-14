@@ -6,9 +6,9 @@
           :padding-top="16"
           :padding-bottom="23"
         >
-          <n-gradient-header :font-size="18">
+          <n-gradient-text :font-size="18">
             All Services
-          </n-gradient-header>
+          </n-gradient-text>
         </n-with-padding>
         <n-masonry-group>
           <n-service-card
