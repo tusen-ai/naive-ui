@@ -27,6 +27,7 @@ import iconDemo from './components/iconDemo'
 import checkboxDemo from './components/checkboxDemo'
 import roundButtonDemo from './components/roundButtonDemo'
 import switchDemo from './components/switchDemo'
+import tableDemo from './components/tableDemo'
 import demo from './demo'
 
 Vue.use(VueRouter)
@@ -56,7 +57,8 @@ const routes = [
   { path: '/n-icon', component: iconDemo },
   { path: '/n-checkbox', component: checkboxDemo },
   { path: '/n-round-button', component: roundButtonDemo },
-  { path: '/n-switch', component: switchDemo }
+  { path: '/n-switch', component: switchDemo },
+  { path: '/n-table', component: tableDemo }
 ]
 
 const router = new VueRouter({

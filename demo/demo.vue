@@ -31,6 +31,9 @@
       <br>
       <router-link to="/n-switch">
         开关 / n-switch
+      </router-link><br>
+      <router-link to="/n-table">
+        表格 / n-table
       </router-link>
     </div>
   </div>

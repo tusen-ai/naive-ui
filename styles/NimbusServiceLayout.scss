@@ -12,6 +12,7 @@
   
   .body {
     & {
+      padding: 21px 48px;
       position: absolute;
       left: 272px;
       right: 0px;
@@ -25,26 +26,6 @@
     }
     &.is-collapsed {
       left: 48px;
-    }
-    .header {
-      position: relative;
-      color: #fff;
-      font-weight: 700;
-      padding-top: 21px;
-      padding-bottom: 21px;
-      padding-left: 48px;
-      font-size: 16px;
-      .content {
-        background:linear-gradient(14deg, rgba(120,205,104,1) 0%, rgba(20,166,165,1) 100%);
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: transparent;
-      }
-      .icon {
-        position: absolute;
-        left: 22px;
-        opacity: .4;
-      }
     }
   }
   

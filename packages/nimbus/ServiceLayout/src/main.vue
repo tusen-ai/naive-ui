@@ -4,11 +4,6 @@
       class="body"
       :class="{ 'is-collapsed': isCollapsed, active: !isCollapsed }"
     >
-      <div class="header">
-        <span class="content">
-          Service Management
-        </span>
-      </div>
       <slot />
     </div>
     <div
@@ -24,11 +19,11 @@
                 :size="22"
               />
             </div>
-            Administration
+            {{ name }}
           </div>
         </div>
         <div
-          v-for="item in items"
+          v-for="item in itemsWithCollapseStatus"
           :key="item.name"
         >
           <div
@@ -84,40 +79,24 @@
 <script>
 export default {
   name: 'NNimbusServiceLayout',
-  props: {},
+  props: {
+    name: {
+      type: String,
+      required: true
+    },
+    items: {
+      type: Array,
+      required: true
+    }
+  },
   data () {
     return {
       isCollapsed: false,
       activeItemName: 'Service Management',
-      items: [
-        {
-          name: 'Service Management'
-        },
-        {
-          name: 'Service Type Management',
-          isCollapsed: false,
-          childItems: [
-            {
-              name: 'Clusters'
-            },
-            {
-              name: 'Notes'
-            },
-            {
-              name: 'Volume'
-            },
-            {
-              name: 'Namespaces'
-            },
-            {
-              name: 'Authorization'
-            }
-          ]
-        },
-        {
-          name: 'User Management'
-        }
-      ]
+      itemsWithCollapseStatus: this.items.map(item => ({
+        ...item,
+        isCollapsed: true
+      }))
     }
   },
   methods: {
@@ -128,9 +107,9 @@ export default {
       this.activeItemName = itemName
     },
     toggleGroupHeaderCollapse (headerName) {
-      const headerIndex = this.items.findIndex(item => item.name === headerName && item.childItems)
+      const headerIndex = this.itemsWithCollapseStatus.findIndex(item => item.name === headerName && item.childItems)
       if (headerIndex + 1) {
-        this.items[headerIndex].isCollapsed = !this.items[headerIndex].isCollapsed
+        this.itemsWithCollapseStatus[headerIndex].isCollapsed = !this.itemsWithCollapseStatus[headerIndex].isCollapsed
       }
     }
   }
