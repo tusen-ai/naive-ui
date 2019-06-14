@@ -10,7 +10,7 @@
     background-color: rgba(148,151,155,0.4);
     margin: 3px;
     transition: background-color .2s $default-cubic-bezier;
-    &::before {
+    &::before, &::after {
       content: "";
       position: absolute;
       height: 20px;
@@ -19,14 +19,25 @@
       top: -3px;
       left: -3px;
       box-shadow:0px 2px 4px 0px rgba(0,0,0,0.4);
+      transition: left .2s $default-cubic-bezier, opacity .2s $default-cubic-bezier;
+    }
+    &::before {
       background-image: linear-gradient(52deg,rgba(148,151,155,1) 0%,rgba(148,151,155,1) 100%);
-      transition: left .2s $default-cubic-bezier
+      opacity: 1;
+    }
+    &::after {
+      background-image: linear-gradient(52deg,rgba(120,205,104,1) 0%,rgba(20,166,165,1) 100%);
+      opacity: 0;
     }
     &.active {
       background-color: rgba(97, 196, 118, .27);
       &::before {
         left: 12px;
-        background-image: linear-gradient(52deg,rgba(120,205,104,1) 0%,rgba(20,166,165,1) 100%);
+        opacity: 0;
+      }
+      &::after {
+        left: 12px;
+        opacity: 1;
       }
     }
   }
