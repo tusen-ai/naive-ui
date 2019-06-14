@@ -10,7 +10,7 @@ import Table from './packages/common/Table'
 import CheckBox from './packages/common/Checkbox'
 import RoundButton from './packages/common/RoundButton'
 import Switch from './packages/common/Switch'
-import Dropdown from './packages/common/Dropdown'
+import Select from './packages/common/Select'
 
 import ServiceCard from './packages/nimbus/ServiceCard'
 import HomeLayout from './packages/nimbus/HomeLayout'
@@ -34,7 +34,7 @@ function installUiToVue (Vue) {
   CheckBox.install(Vue)
   RoundButton.install(Vue)
   Switch.install(Vue)
-  Dropdown.install(Vue)
+  Select.install(Vue)
 }
 
 export default installUiToVue

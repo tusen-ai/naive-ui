@@ -1,12 +1,12 @@
 @import './mixins/mixins.scss';
 @import './theme/default.scss';
 
-@include b(dropdown) {
+@include b(select) {
   box-sizing: border-box;
   display: inline-block;
   border: none;
   border-radius: 9px;
-  padding: 10px 14px;
+  padding: 8px 14px;
   outline: none;
   background-color: #6F768B;
   font-size: 14px;
@@ -42,6 +42,11 @@
       transform-origin: 25% 75%;
     }
     .label {
+      &.placeholder {
+        color: rgba(255, 255, 255, .4);
+      }
+    }
+    .tags {
       &.placeholder {
         color: rgba(255, 255, 255, .4);
       }

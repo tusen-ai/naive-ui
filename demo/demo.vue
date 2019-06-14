@@ -39,8 +39,8 @@
         输入 / n-input
       </router-link>
       <br>
-      <router-link to="/n-dropdown">
-        下拉框 / n-dropdown
+      <router-link to="/n-select">
+        选择 / n-select
       </router-link>
     </div>
   </div>

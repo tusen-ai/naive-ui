@@ -2,7 +2,7 @@
   <div class="n-column-group">
     <div class="columns">
       <div
-        v-for="index in cols"
+        v-for="index in colIndexes"
         :key="index"
         class="column"
       >
@@ -16,18 +16,18 @@
 export default {
   name: 'NColumnGroup',
   props: {
-    col: {
+    cols: {
       type: Number,
       required: true
     }
   },
   computed: {
-    cols () {
-      const colIndexes = []
+    colIndexes () {
+      const indexes = []
       for (let i = 0; i < this.col; ++i) {
-        colIndexes.push(i + 1)
+        indexes.push(i + 1)
       }
-      return colIndexes
+      return indexes
     }
   }
 }

@@ -1,9 +1,9 @@
 <template>
   <div class="doc">
-    <h1>scaffold</h1>
+    <h1>选择 / n-select</h1>
     <hr>
     <h2>基本用法</h2>
-    <n-dropdown
+    <n-select
       v-model="selectedValue"
       placeholder="Please Select Type"
       :items="[
@@ -26,7 +26,7 @@
       ]"
     />
     <br>SelectedValue: {{ selectedValue === null ? 'null' : selectedValue }}<br>
-    <textarea rows="40"><n-dropdown
+    <textarea rows="40"><n-select
   v-model="selectedValue"
   placeholder="Please Select Type"
   :items="[
@@ -49,6 +49,30 @@
   ]"
 /></textarea>
     <hr>
+    <h2>多选</h2>
+    <n-select
+      v-model="selectedArray"
+      multiple
+      placeholder="Please Select Type"
+      :items="[
+        {
+          label: 'Artifactory',
+          value: 'Artifactory'
+        },
+        {
+          label: 'Registry',
+          value: 'Registry'
+        },
+        {
+          label: 'Public',
+          value: 'Public'
+        },
+        {
+          label: 'Custom',
+          value: 'Custom'
+        }
+      ]"
+    />
   </div>
 </template>
 
@@ -56,7 +80,8 @@
 export default {
   data () {
     return {
-      selectedValue: null
+      selectedValue: null,
+      selectedArray: []
     }
   }
 }
