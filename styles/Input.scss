@@ -14,6 +14,7 @@
     color: #fff;
     font-family: 'Open Sans';
     width: 100%;
+    caret-color: #63E2B7;
     &::placeholder {
       color: rgba(255, 255, 255, .4);
       opacity: 1;
@@ -31,6 +32,7 @@
     color: #fff;
     font-family: 'Open Sans';
     width: 100%;
-    resize: vertical
+    resize: vertical;
+    caret-color: #63E2B7;
   }
 }
