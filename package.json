@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,8 @@
     "demo": "cross-env NODE_ENV=development & gulp --gulpfile build/gulpfile.js build & webpack-dev-server --config build/webpack.demo.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.js",
     "serve": "npm run dev",
-    "test": "cross-env NODE_ENV=development BABEL_ENV=test karma start test/unit/karma.conf.js"
+    "test": "cross-env NODE_ENV=development BABEL_ENV=test karma start test/unit/karma.conf.js",
+    "test-release": "cross-env NODE_ENV=production webpack-dev-server --config build/webpack.release.js"
   },
   "author": "",
   "license": "ISC",

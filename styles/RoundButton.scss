@@ -1,0 +1,23 @@
+@import './mixins/mixins.scss';
+@import './theme/default.scss';
+
+@include b(round-button) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: $default-button-text-color;
+  border: 1px solid $default-button-border-color;
+  height: 28px;
+  border-radius: 14px;
+  padding-left: 14px;
+  padding-right: 14px;
+  box-sizing: border-box;
+  font-size: $regular-font-size;
+  min-width: 72px;
+  cursor: pointer;
+  user-select: none;
+  &:hover {
+    background-color: $default-button-background-color;
+    color: $default-button-hover-text-color;
+  }
+}

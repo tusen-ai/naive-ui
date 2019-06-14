@@ -7,7 +7,9 @@
       Nimbus
     </n-checkbox><br>{{ String(checked) }}
     <br>
-    <textarea rows="5">scaffold</textarea>
+    <textarea rows="5"><n-checkbox v-model="checked">
+  Nimbus
+</n-checkbox></textarea>
     <hr>
   </div>
 </template>

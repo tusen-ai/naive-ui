@@ -24,6 +24,10 @@
       <router-link to="/n-checkbox">
         多选框 / n-checkbox
       </router-link>
+      <br>
+      <router-link to="/n-round-button">
+        圆按钮 / n-round-button
+      </router-link>
     </div>
   </div>
 </template>
