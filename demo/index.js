@@ -14,6 +14,7 @@ import Table from 'packages/common/Table'
 import Checkbox from 'packages/common/Checkbox'
 import RoundButton from 'packages/common/RoundButton'
 import Switch from '../packages/common/Switch'
+import Input from '../packages/common/Input'
 
 import ServiceCard from 'packages/nimbus/ServiceCard'
 import HomeLayout from 'packages/nimbus/HomeLayout'
@@ -28,6 +29,7 @@ import checkboxDemo from './components/checkboxDemo'
 import roundButtonDemo from './components/roundButtonDemo'
 import switchDemo from './components/switchDemo'
 import tableDemo from './components/tableDemo'
+import inputDemo from './components/inputDemo'
 import demo from './demo'
 
 Vue.use(VueRouter)
@@ -48,6 +50,7 @@ WithMargin.install(Vue)
 Checkbox.install(Vue)
 RoundButton.install(Vue)
 Switch.install(Vue)
+Input.install(Vue)
 
 const routes = [
   { path: '/', component: demo },
@@ -58,7 +61,8 @@ const routes = [
   { path: '/n-checkbox', component: checkboxDemo },
   { path: '/n-round-button', component: roundButtonDemo },
   { path: '/n-switch', component: switchDemo },
-  { path: '/n-table', component: tableDemo }
+  { path: '/n-table', component: tableDemo },
+  { path: '/n-input', component: inputDemo }
 ]
 
 const router = new VueRouter({

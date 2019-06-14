@@ -34,6 +34,9 @@
       </router-link><br>
       <router-link to="/n-table">
         表格 / n-table
+      </router-link><br>
+      <router-link to="/n-input">
+        输入 / n-input
       </router-link>
     </div>
   </div>
