@@ -15,19 +15,20 @@
   color: #fff;
   font-family: $default-font-family;
   cursor: pointer;
-  &.active {
+  &.is-active {
+    box-shadow:0px 0px 10px 1px rgba(54,101,85,1);
     border: 1px solid #63E2B7;
     margin: -1px;
-    .link {
+    .n-select-link {
       &::after {
         transform: rotate(135deg);
       }
-      .menu {
+      .n-select-menu {
         visibility: visible;
       }
     }
   }
-  .link {
+  .n-select-link {
     position: relative;
     &::after {
       position: absolute;
@@ -41,17 +42,17 @@
       transform: rotate(-45deg);
       transform-origin: 25% 75%;
     }
-    .label {
-      &.placeholder {
+    .n-select-link__label {
+      &.n-select__placeholder {
         color: rgba(255, 255, 255, .4);
       }
     }
-    .tags {
-      &.placeholder {
+    .n-select-link__tags {
+      &.n-select__placeholder {
         color: rgba(255, 255, 255, .4);
       }
     }
-    .menu {
+    .n-select-menu {
       overflow: hidden;
       position: absolute;
       visibility: hidden;
@@ -61,12 +62,11 @@
       border-radius: 9px;
       background-color: rgba(75, 81, 106, 1);
       box-shadow: 0px 2px 20px 0px rgba(0,0,0,0.16);
-      .item {
+      .n-select-menu__item {
         padding: 8px 14px;
         color: rgba(255, 255, 255, .7);
-        &:hover {
+        &:hover, &.is-selected {
           background-color: rgba(96, 220, 178, 0.3);
-          color: #63E2B7;
         }
       }
     }

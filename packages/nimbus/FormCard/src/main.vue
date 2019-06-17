@@ -60,6 +60,7 @@ export default {
       line-height: 19px;
       font-size: 16px;
       font-weight: 700;
+      color: #ffffff;
     }
     .n-nimbus-form-card__right-header {
       display: flex;

@@ -1,12 +1,15 @@
 <template>
-  <div class="n-gradient-header">
+  <div
+    class="n-gradient-text"
+    :style="style"
+  >
     <div
-      class="header"
-      :style="style"
+      class="n-gradient-text__content"
+      :class="{
+        [`is-${type}`]: true
+      }"
     >
-      <div class="content">
-        <slot />
-      </div>
+      <slot />
     </div>
   </div>
 </template>
@@ -18,6 +21,10 @@ export default {
     'fontSize': {
       type: Number,
       default: 16
+    },
+    type: {
+      type: String,
+      default: 'default'
     }
   },
   computed: {

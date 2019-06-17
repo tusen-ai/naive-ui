@@ -1,17 +1,31 @@
 @import './mixins/mixins.scss';
 @import './theme/default.scss';
 
-@include b(gradient-header) {
-  & > .header {
-    display: inline-block;
-    position: relative;
-    font-weight: 700;
-    font-size: 16px;
-    & > .content {
-      background: $default-header-gradient;
-      background-clip: text;
+@include b(gradient-text) {
+  display: inline-block;
+  position: relative;
+  font-weight: 700;
+  font-size: 16px;
+  .n-gradient-text__content {
+    background: $default-text-gradient;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    &.is-default {
+      background: $default-text-gradient;
       -webkit-background-clip: text;
-      color: transparent;
+    }
+    &.is-warning {
+      background: $default-text-gradient-warning;
+      -webkit-background-clip: text;
+    }
+    &.is-danger {
+      background: $default-text-gradient-danger;
+      -webkit-background-clip: text;
+    }
+    &.is-success {
+      background: $default-text-gradient-success;
+      -webkit-background-clip: text;
     }
   }
 }

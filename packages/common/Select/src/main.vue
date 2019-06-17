@@ -1,34 +1,38 @@
 <template>
   <div
     class="n-select"
-    :class="{ active: active }"
+    :class="{ 'is-active': active }"
     @click="toggleSelect"
   >
     <div
       v-if="multiple"
-      class="link"
+      class="n-select-link"
     >
       <div
         v-if="selected"
-        class="tags"
+        class="n-select-link__tags"
       >
         <span
           v-for="item in selectedItems"
           :key="item.value"
         >
-          {{ item.value }}
+          {{ item.label }}
         </span>
       </div><div
         v-else
-        class="tags placeholder"
+        class="n-select__tags n-select__placeholder"
       >
         {{ placeholder }}
       </div>
-      <div class="menu">
+      <div class="n-select-menu">
         <div
           v-for="item in items"
           :key="item.value"
-          class="item"
+          class="n-select-menu__item"
+          :class="{
+            'is-selected':
+              selectedItemValues.has(item.value)
+          }"
           @click="toggle(item)"
         >
           {{ item.label }}
@@ -37,24 +41,30 @@
     </div>
     <div
       v-else
-      class="link"
+      class="n-select-link"
     >
       <div
         v-if="selected"
-        class="label"
+        class="n-select-link__label"
       >
         {{ selectedValue }}
-      </div><div
+      </div>
+      <div
         v-else
-        class="label placeholder"
+        class="n-select__label n-select__placeholder"
       >
         {{ placeholder }}
       </div>
-      <div class="menu">
+      <div class="n-select-menu">
         <div
           v-for="item in items"
           :key="item.value"
-          class="item"
+          class="n-select-menu__item"
+          :class="{
+            'is-selected':
+              selectedValue ===
+              item.value
+          }"
           @click="select(item)"
         >
           {{ item.label }}
@@ -97,6 +107,9 @@ export default {
       selectedItemValues: new Set()
     }
   },
+  created () {
+
+  },
   methods: {
     toggleSelect () {
       this.active = !this.active
@@ -119,7 +132,7 @@ export default {
       } else {
         this.selected = false
       }
-      this.$emit('change', this.selectedItems)
+      this.$emit('change', this.selectedItems.map(item => item.value))
     }
   }
 }

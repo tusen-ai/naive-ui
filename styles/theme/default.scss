@@ -17,7 +17,10 @@ $table-body-background-color: #1f263e;
 $table-box-shadow: 0 3px 20px 6px rgba(0, 0, 0, .2);
 
 $default-button-gradient: linear-gradient(14deg, rgba(120,205,104,1) 0%, rgba(20,166,165,1) 100%);
-$default-header-gradient: linear-gradient(14deg, rgba(120,205,104,1) 0%, rgba(20,166,165,1) 100%);
+$default-text-gradient: linear-gradient(14deg, rgba(120,205,104,1) 0%, rgba(20,166,165,1) 100%);
+$default-text-gradient-warning: linear-gradient(252deg, rgba(247,181,0,1) 0%, rgba(237,255,0,1) 100%);
+$default-text-gradient-success: linear-gradient(14deg, rgba(120,205,104,1) 0%, rgba(20,166,165,1) 100%);
+$default-text-gradient-danger: linear-gradient(214deg, rgba(224,32,32,1) 0%, rgba(250,100,0,1) 100%);
 $default-button-border-color: #63E2B7;
 $default-button-text-color: #63E2B7;
 $default-button-hover-text-color: #1F263E;

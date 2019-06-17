@@ -12,7 +12,47 @@
       轻轻闭上眼睛，此刻我觉得清醒。
     </n-gradient-text>
     <br>
-    <textarea rows="5"><n-gradient-text font-size="24">轻轻闭上眼睛，此刻我觉得清醒。</n-gradient-text></textarea>
+    <textarea rows="2"><n-gradient-text font-size="24">轻轻闭上眼睛，此刻我觉得清醒。</n-gradient-text></textarea>
+    <hr>
+    <h2>调整颜色</h2>
+    <n-gradient-text
+      font-size="24"
+      type="danger"
+    >
+      type="danger"
+    </n-gradient-text>
+    <n-gradient-text
+      font-size="24"
+      type="warning"
+    >
+      type="warning"
+    </n-gradient-text>
+    <n-gradient-text
+      font-size="24"
+      type="success"
+    >
+      type="success"
+    </n-gradient-text>
+    <br>
+    <textarea rows="20">
+<n-gradient-text
+  font-size="24"
+  type="danger"
+>
+  type="danger"
+</n-gradient-text>
+<n-gradient-text
+  font-size="24"
+  type="warning"
+>
+  type="warning"
+</n-gradient-text>
+<n-gradient-text
+  font-size="24"
+  type="success"
+>
+  type="success"
+</n-gradient-text></textarea>
     <hr>
   </div>
 </template>
