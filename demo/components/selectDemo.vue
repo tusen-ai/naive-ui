@@ -74,6 +74,30 @@
       ]"
     />
     SelectedArray: {{ selectedArray }}
+    <hr>
+    <textarea rows="40"><n-select
+  v-model="selectedArray"
+  multiple
+  placeholder="Please Select Type"
+  :items="[
+    {
+      label: 'Artifactory',
+      value: 'Artifactory'
+    },
+    {
+      label: 'Registry',
+      value: 'Registry'
+    },
+    {
+      label: 'Public',
+      value: 'Public'
+    },
+    {
+      label: 'Custom',
+      value: 'Custom'
+    }
+  ]"
+/></textarea>
   </div>
 </template>
 
