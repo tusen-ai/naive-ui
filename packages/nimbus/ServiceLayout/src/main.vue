@@ -30,7 +30,7 @@
             v-if="!item.childItems"
             class="item"
             :class="{ active: activeItemName === item.name }"
-            @click="makeActive(item.name)"
+            @click="makeActive(item)"
           >
             <span>{{ item.name }}</span>
           </div>
@@ -58,7 +58,7 @@
                 :key="childItem.name"
                 class="item is-group-item"
                 :class="{ active: activeItemName === childItem.name }"
-                @click="makeActive(childItem.name)"
+                @click="makeActive(childItem)"
               >
                 <span>{{ childItem.name }}</span>
               </div>
@@ -103,8 +103,11 @@ export default {
     toggle () {
       this.isCollapsed = !this.isCollapsed
     },
-    makeActive (itemName) {
-      this.activeItemName = itemName
+    makeActive (item) {
+      this.activeItemName = item.name
+      if (this.$router) {
+        this.$router.push(item.path)
+      }
     },
     toggleGroupHeaderCollapse (headerName) {
       const headerIndex = this.itemsWithCollapseStatus.findIndex(item => item.name === headerName && item.childItems)
