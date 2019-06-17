@@ -74,7 +74,9 @@ export default {
         class: {
           'is-active': this.isActive
         }
-      }, this.$slots.default)
+      }, [
+        h('div', { staticClass: 'modal-card' }, this.$slots.default)
+      ])
     ])
   }
 }
@@ -101,9 +103,16 @@ export default {
   align-items: center;
   justify-content: center;
   z-index: 201;
+
   visibility: hidden;
   &.is-active {
     visibility: visible;
+  }
+  .modal-card {
+    width: 1032px;
+    background: #5C657E;
+    padding: 24px 45px;
+    border-radius: 9px;
   }
 }
 
