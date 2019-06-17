@@ -40,9 +40,7 @@ export default {
   },
   beforeDestroy () {
     this.removeOverlay()
-    console.log('removeContent', this.content)
-    //
-    this.app.removeChild(this.content)
+    this.app.removeChild(this.$refs.content)
   },
   methods: {
     addOverlayToApp () {
@@ -50,13 +48,16 @@ export default {
       if (!overlay) {
         overlay = document.createElement('div')
         overlay.classList.add('n-modal-overlay')
+        overlay.id = 'overlay'
         this.app.insertBefore(overlay, this.app.firstElementChild)
+        this.overlay = overlay
       }
-      this.overlay = overlay
     },
     removeOverlay () {
-      if (this.overlay) {
-        this.app.removeChild(this.overlay)
+      let overlay = document.querySelector('#overlay')
+      console.log(overlay)
+      if (overlay) {
+        this.app.removeChild(overlay)
       }
     },
     detachContentToApp () {
