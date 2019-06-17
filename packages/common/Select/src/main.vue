@@ -12,12 +12,12 @@
         v-if="selected"
         class="tags"
       >
-        <div
+        <span
           v-for="item in selectedItems"
           :key="item.value"
         >
           {{ item.value }}
-        </div>
+        </span>
       </div><div
         v-else
         class="tags placeholder"

@@ -73,6 +73,7 @@
         }
       ]"
     />
+    SelectedArray: {{ selectedArray }}
   </div>
 </template>
 
