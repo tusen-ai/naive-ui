@@ -6,7 +6,7 @@
     <n-switch v-model="active" /><br>
     active: {{ active }}
     <br>
-    <textarea rows="5"><n-switch /></textarea>
+    <textarea rows="5"><n-switch v-model="active" /><br></textarea>
     <hr>
   </div>
 </template>
