@@ -5,37 +5,44 @@
         name="已经不需要，一些挽留字句"
         :items="[
           {
-            name: '第一个服务'
+            name: '第一个服务',
+            path: '/n-nimbus-service-layout?param=666'
           },
           {
             name: '第二个服务',
             childItems: [
               {
-                name: '二级菜单１'
+                name: '二级菜单１',
+                path: '/n-nimbus-service-layout?param=777'
               },
               {
-                name: '二级菜单2'
+                name: '二级菜单2',
+                path: '/n-nimbus-service-layout?param=888'
               },
               {
-                name: '二级菜单3'
+                name: '二级菜单3',
+                path: '/n-nimbus-service-layout?param=999'
               },
               {
-                name: '二级菜单4'
+                name: '二级菜单4',
+                path: '/n-nimbus-service-layout?param=000'
               },
               {
-                name: '二级菜单5'
+                name: '二级菜单5',
+                path: '/n-nimbus-service-layout?param=111'
               }
             ]
           },
           {
-            name: '第三个服务'
+            name: '第三个服务',
+            path: '/n-nimbus-service-layout?param=222'
           }
         ]"
       >
-        <n-gradient-text>你觉得应该怎么写</n-gradient-text>
+        <n-gradient-text>你觉得应该怎么写</n-gradient-text><br>
         <textarea
           rows="50"
-          style="width: 100%;"
+          style="width: 90%;"
         ><n-nimbus-service-layout
   name="已经不需要，一些挽留字句"
   :items="[

@@ -14,18 +14,22 @@
     &.is-default {
       background: $default-text-gradient;
       -webkit-background-clip: text;
+      background-clip: text;
     }
     &.is-warning {
       background: $default-text-gradient-warning;
       -webkit-background-clip: text;
+      background-clip: text;
     }
     &.is-danger {
       background: $default-text-gradient-danger;
       -webkit-background-clip: text;
+      background-clip: text;
     }
     &.is-success {
       background: $default-text-gradient-success;
       -webkit-background-clip: text;
+      background-clip: text;
     }
   }
 }

@@ -22,6 +22,7 @@
             {{ name }}
           </div>
         </div>
+        <div class="n-nimbus-service-layout-menu__divider" />
         <div
           v-for="item in itemsWithCollapseStatus"
           :key="item.name"
@@ -32,6 +33,7 @@
             :class="{ active: activeItemName === item.name }"
             @click="makeActive(item)"
           >
+            <div class="item-icon" />
             <span>{{ item.name }}</span>
           </div>
           <div
@@ -45,6 +47,7 @@
               }"
               @click="toggleGroupHeaderCollapse(item.name)"
             >
+              <div class="item-icon" />
               <span>{{ item.name }}</span>
             </div>
             <div
@@ -160,6 +163,10 @@ export default {
       left: 0;
       box-shadow: 0 2px 10px 1px rgba(0, 0, 0, .2);
     }
+    .n-nimbus-service-layout-menu__divider {
+      margin: 0px 25px;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+    }
     &.active {
       transform: translateX(0);
       transition: transform .3s cubic-bezier(0.4, 0.0, 0.2, 1);
@@ -176,6 +183,9 @@ export default {
         transform: translateX(50%) translateY(-50%) rotate(180deg);
       }
       .item-wrapper {
+        .header {
+          opacity: 0;
+        }
         .item.active {
           span {
             opacity: .4;
@@ -200,15 +210,16 @@ export default {
       }
     }
     .header {
+      transition: opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
       position: relative;
-      color: #fff;
+      color: #E9E9EC;
       font-weight: 700;
       padding-top: 21px;
       padding-bottom: 21px;
       padding-left: 48px;
       font-size: 16px;
       .content {
-        opacity: .9;
+        opacity: 1;
       }
       .icon {
         position: absolute;
@@ -239,16 +250,30 @@ export default {
         padding-bottom: 16px;
         padding-left: 48px;
         font-size: 14px;
-        color: #fff;
+        color: #E9E9EC;
+        .item-icon {
+          &::before {
+            content: '';
+            width: 0;
+            height: 0;
+            position: absolute;
+            border-style: solid;
+            border-color:#78CD68 transparent transparent transparent;
+            border-width: 7px;
+            transform: rotate(-45deg);
+            top: 24px;
+            left: 32px;
+          }
+        }
         span {
           transition: opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-          opacity: .4;
+          opacity: 1;
         }
         &.active span{
-          opacity: .9;
+          opacity: 1;
         }
         &:hover span {
-          opacity: .9;
+          opacity: 1;
         }
         &::before {
           content: "";
@@ -285,11 +310,11 @@ export default {
             opacity: 1;
           }
           &:hover span {
-            transition: opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-            background-clip: text;
-            -webkit-background-clip: text;
-            transform-origin: 50% 50%;
-            color: transparent;
+            // transition: opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            // background-clip: text;
+            // -webkit-background-clip: text;
+            // transform-origin: 50% 50%;
+            // color: transparent;
             opacity: 1;
           }
           span {
@@ -297,12 +322,20 @@ export default {
             background: linear-gradient(14deg, rgba(120,205,104,1) 0%, rgba(20,166,165,1) 100%);
             background-clip: text;
             -webkit-background-clip: text;
-            color: #fff;
-            opacity: 0.4;
+            color: #E9E9EC;
+            opacity: 1;
           }
         }
         &.is-group-item {
           padding-left: 64px;
+          span {
+            opacity: .4;
+          }
+          &.active {
+            span {
+              opacity: 1;
+            }
+          }
         }
         &.is-group-header.group-item-is-choosed {
           span {
