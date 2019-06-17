@@ -11,6 +11,7 @@ import CheckBox from './packages/common/Checkbox'
 import RoundButton from './packages/common/RoundButton'
 import Switch from './packages/common/Switch'
 import Select from './packages/common/Select'
+import Modal from './packages/common/Modal'
 
 import ServiceCard from './packages/nimbus/ServiceCard'
 import HomeLayout from './packages/nimbus/HomeLayout'
@@ -35,6 +36,7 @@ function installUiToVue (Vue) {
   RoundButton.install(Vue)
   Switch.install(Vue)
   Select.install(Vue)
+  Modal.install(Vue)
 }
 
 export default installUiToVue

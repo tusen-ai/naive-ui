@@ -42,6 +42,10 @@
       <router-link to="/n-select">
         选择 / n-select
       </router-link>
+      <br>
+      <router-link to="/n-modal">
+        模态框 / n-modal
+      </router-link>
     </div>
   </div>
 </template>

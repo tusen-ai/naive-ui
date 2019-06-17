@@ -16,6 +16,7 @@ import RoundButton from 'packages/common/RoundButton'
 import Switch from '../packages/common/Switch'
 import Input from '../packages/common/Input'
 import Select from '../packages/common/Select'
+import Modal from '../packages/common/Modal'
 
 import ServiceCard from 'packages/nimbus/ServiceCard'
 import HomeLayout from 'packages/nimbus/HomeLayout'
@@ -32,6 +33,7 @@ import switchDemo from './components/switchDemo'
 import tableDemo from './components/tableDemo'
 import inputDemo from './components/inputDemo'
 import selectDemo from './components/selectDemo'
+import modalDemo from './components/modalDemo'
 import demo from './demo'
 
 Vue.use(VueRouter)
@@ -54,6 +56,7 @@ RoundButton.install(Vue)
 Switch.install(Vue)
 Input.install(Vue)
 Select.install(Vue)
+Modal.install(Vue)
 
 const routes = [
   { path: '/', component: demo },
@@ -66,7 +69,8 @@ const routes = [
   { path: '/n-switch', component: switchDemo },
   { path: '/n-table', component: tableDemo },
   { path: '/n-input', component: inputDemo },
-  { path: '/n-select', component: selectDemo }
+  { path: '/n-select', component: selectDemo },
+  { path: '/n-modal', component: modalDemo }
 ]
 
 const router = new VueRouter({
