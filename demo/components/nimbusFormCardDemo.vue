@@ -1,6 +1,6 @@
 <template>
   <div class="doc">
-    <h1>Modal</h1>
+    <h1>Nimbus 弹出式表单 / n-nimbus-form-card</h1>
     <hr>
     <h2>基本用法</h2>
     <n-modal v-model="isActive">
@@ -9,10 +9,47 @@
           打开它！
         </button>
       </template>
-      <n-nimbus-form-card width="1032" />
+      <n-nimbus-form-card
+        width="1032"
+        title="Create Pod"
+        :deactivate="() => isActive = false"
+      >
+        <template v-slot:header>
+          v-slot:header
+        </template>
+        <template v-slot:footer>
+          v-slot:footer
+        </template>
+        <template v-slot:content>
+          Here is content
+        </template>
+      </n-nimbus-form-card>
     </n-modal>
     <br>
-    <textarea rows="20" />
+    <textarea rows="30">
+<n-modal v-model="isActive">
+  <template v-slot:activator>
+    <button @click="isActive = true">
+      打开它！
+    </button>
+  </template>
+  <n-nimbus-form-card
+    width="1032"
+    title="Create Pod"
+    :deactivate="() => isActive = false"
+  >
+    <template v-slot:header>
+      v-slot:header
+    </template>
+    <template v-slot:footer>
+      v-slot:footer
+    </template>
+    <template v-slot:content>
+      Here is content
+    </template>
+  </n-nimbus-form-card>
+</n-modal>
+    </textarea>
     <hr>
   </div>
 </template>

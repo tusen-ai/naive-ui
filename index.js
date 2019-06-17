@@ -17,6 +17,7 @@ import ServiceCard from './packages/nimbus/ServiceCard'
 import HomeLayout from './packages/nimbus/HomeLayout'
 import Navbar from './packages/nimbus/Navbar'
 import ServiceLayout from './packages/nimbus/ServiceLayout'
+import NimbusFormCard from './packages/nimbus/FormCard'
 
 function installUiToVue (Vue) {
   Card.install(Vue)
@@ -37,6 +38,7 @@ function installUiToVue (Vue) {
   Switch.install(Vue)
   Select.install(Vue)
   Modal.install(Vue)
+  NimbusFormCard.install(Vue)
 }
 
 export default installUiToVue
