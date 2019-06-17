@@ -74,9 +74,9 @@ export default {
         class: {
           'is-active': this.isActive
         }
-      }, [
-        h('div', { staticClass: 'modal-card' }, this.$slots.default)
-      ])
+      },
+      this.$slots.default
+      )
     ])
   }
 }
@@ -107,12 +107,6 @@ export default {
   visibility: hidden;
   &.is-active {
     visibility: visible;
-  }
-  .modal-card {
-    width: 1032px;
-    background: #5C657E;
-    padding: 24px 45px;
-    border-radius: 9px;
   }
 }
 

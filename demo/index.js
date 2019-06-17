@@ -22,6 +22,7 @@ import ServiceCard from 'packages/nimbus/ServiceCard'
 import HomeLayout from 'packages/nimbus/HomeLayout'
 import Navbar from 'packages/nimbus/Navbar'
 import ServiceLayout from 'packages/nimbus/ServiceLayout'
+import NimbusFormCard from 'packages/nimbus/FormCard'
 
 import sideMenuDemo from './components/sideMenuDemo'
 import homeDemo from './components/homeDemo'
@@ -34,6 +35,7 @@ import tableDemo from './components/tableDemo'
 import inputDemo from './components/inputDemo'
 import selectDemo from './components/selectDemo'
 import modalDemo from './components/modalDemo'
+import nimbusFormCardDemo from './components/nimbusFormCardDemo'
 import demo from './demo'
 
 Vue.use(VueRouter)
@@ -57,6 +59,7 @@ Switch.install(Vue)
 Input.install(Vue)
 Select.install(Vue)
 Modal.install(Vue)
+NimbusFormCard.install(Vue)
 
 const routes = [
   { path: '/', component: demo },
@@ -70,7 +73,8 @@ const routes = [
   { path: '/n-table', component: tableDemo },
   { path: '/n-input', component: inputDemo },
   { path: '/n-select', component: selectDemo },
-  { path: '/n-modal', component: modalDemo }
+  { path: '/n-modal', component: modalDemo },
+  { path: '/n-nimbus-form-card', component: nimbusFormCardDemo }
 ]
 
 const router = new VueRouter({

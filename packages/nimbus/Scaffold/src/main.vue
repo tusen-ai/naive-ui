@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'NScaffold'
+  name: 'NNimbusScaffold'
 }
 </script>
 

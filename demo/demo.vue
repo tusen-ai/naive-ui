@@ -46,6 +46,10 @@
       <router-link to="/n-modal">
         模态框 / n-modal
       </router-link>
+      <br>
+      <router-link to="/n-nimbus-form-card">
+        Nimbus 弹出式表单 / n-nimbus-form-card
+      </router-link>
     </div>
   </div>
 </template>
