@@ -2,12 +2,16 @@
   <div
     v-if="type==='textarea'"
     class="n-input"
+    :class="{
+      'is-disabled': disabled
+    }"
   >
     <textarea
-      class="inner-textarea"
+      class="n-input__textarea"
       rows="3"
       :placeholder="placeholder"
       :value="value"
+      :disabled="disabled"
       @input="handleInput"
     />
   </div>
@@ -17,9 +21,10 @@
   >
     <input
       type="text"
-      class="inner-input"
+      class="n-input__input"
       :placeholder="placeholder"
       :value="value"
+      :disabled="disabled"
       @input="handleInput"
     >
   </div>
@@ -44,6 +49,10 @@ export default {
     value: {
       type: String,
       default: ''
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {

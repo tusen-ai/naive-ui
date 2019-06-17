@@ -36,6 +36,19 @@
       placeholder="abcdd"
     /></textarea>
     <hr>
+    <h2>disabled</h2>
+    <n-input
+      v-model="value"
+      disabled
+      placeholder="abcdd"
+    />
+    <br>
+    <textarea rows="5"><n-input
+      v-model="value"
+      disabled
+      placeholder="abcdd"
+    /></textarea>
+    <hr>
   </div>
 </template>
 

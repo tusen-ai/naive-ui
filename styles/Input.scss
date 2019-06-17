@@ -2,11 +2,18 @@
 @import './theme/default.scss';
 
 @include b(input) {
-  .inner-input {
+  &.is-disabled {
+    .n-input__input, .n-input__textarea {
+      background-color: #6F778D;
+    }
+  }
+  .n-input__input {
     box-sizing: border-box;
     border: none;
     border-radius: 8px;
-    padding: 10px 20px;
+    padding: 0 20px;
+    height: 36px;
+    line-height: 36px;
     outline: none;
     background-color: #6F768B;
     font-size: 14px;
@@ -20,7 +27,7 @@
       opacity: 1;
     }
   }
-  .inner-textarea {
+  .n-input__textarea {
     box-sizing: border-box;
     border: none;
     border-radius: 8px;
