@@ -3,25 +3,42 @@
 
 @include b(input) {
   &.is-disabled {
+    cursor: not-allowed;
     .n-input__input, .n-input__textarea {
+      cursor: not-allowed;
       background-color: #6F778D;
+      color: #9FA5B3FF;
     }
   }
   .n-input__input {
     box-sizing: border-box;
     border: none;
     border-radius: 8px;
-    padding: 0 20px;
-    height: 36px;
-    line-height: 36px;
     outline: none;
-    background-color: #6F768B;
+    background-color: #5C657EFF;
     font-size: 14px;
-    line-height: 20px;
     color: #fff;
     font-family: $default-font-family;
     width: 100%;
     caret-color: #63E2B7;
+    &.n-input__input--small-size {
+      height: $small-height;
+      line-height: $small-height;
+      padding: 0 14px;
+      font-size: $small-input-font-size;
+    }
+    &.n-input__input--default-size, &.n-input__input--medium-size {
+      height: $default-height;
+      line-height: $default-height;
+      padding: 0 18px;
+      font-size: $default-input-font-size;
+    }
+    &.n-input__input--large-size {
+      height: $large-height;
+      line-height: $large-height;
+      padding: 0 18px;
+      font-size: $large-input-font-size;
+    }
     &::placeholder {
       color: rgba(255, 255, 255, .4);
       opacity: 1;
@@ -33,13 +50,24 @@
     border-radius: 8px;
     padding: 10px 20px;
     outline: none;
-    background-color: #6F768B;
-    font-size: 14px;
-    line-height: 20px;
+    background-color: #5C657EFF;
     color: #fff;
     font-family: $default-font-family;
     width: 100%;
     resize: vertical;
     caret-color: #63E2B7;
+    &.n-input__textarea--small-size {
+      font-size: $small-input-font-size;
+    }
+    &.n-input__textarea--default-size, &.n-input__input--medium-size {
+      font-size: $default-input-font-size;
+    }
+    &.n-input__textarea--large-size {
+      font-size: $large-input-font-size;
+    }
+    &::placeholder {
+      color: rgba(255, 255, 255, .4);
+      opacity: 1;
+    }
   }
 }

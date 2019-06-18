@@ -8,23 +8,32 @@
   >
     <textarea
       class="n-input__textarea"
-      rows="3"
+      :class="{
+        [`n-input__textarea--${size}-size`]: true
+      }"
+      :rows="rows"
       :placeholder="placeholder"
       :value="value"
-      :disabled="disabled"
+      :disabled="disabled === true"
       @input="handleInput"
     />
   </div>
   <div
     v-else
     class="n-input"
+    :class="{
+      'is-disabled': disabled
+    }"
   >
     <input
       type="text"
       class="n-input__input"
+      :class="{
+        [`n-input__input--${size}-size`]: true
+      }"
       :placeholder="placeholder"
       :value="value"
-      :disabled="disabled"
+      :disabled="disabled === true"
       @input="handleInput"
     >
   </div>
@@ -53,11 +62,18 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    size: {
+      type: String,
+      default: 'default'
+    },
+    rows: {
+      type: Number,
+      default: 3
     }
   },
   methods: {
     handleInput (e) {
-      console.log(e.target.value)
       this.$emit('change', e.target.value)
     }
   }
