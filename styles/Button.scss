@@ -15,6 +15,13 @@
   cursor: pointer;
   user-select: none;
   font-weight: 700;
+  &.n-button--small-size {
+
+  }
+  &.n-button--large-size {
+
+  }
+  &.n-button--medium
   &.is-round {
     border-radius: 14px
   }

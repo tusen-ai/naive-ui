@@ -101,14 +101,11 @@ export default {
   top: 0;
   bottom: 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
   z-index: 201;
-
   visibility: hidden;
+  overflow: auto;
   &.is-active {
     visibility: visible;
   }
 }
-
 </style>
