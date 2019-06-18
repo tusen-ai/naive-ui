@@ -8,10 +8,25 @@
     <h2>基本用法</h2>
     <n-button
       round
+      size="small"
       icon="md-save"
     >
       Save as Template
     </n-button>
+    <n-button
+      round
+      icon="md-save"
+    >
+      Save as Template
+    </n-button>
+    <n-button
+      round
+      size="large"
+      icon="md-save"
+    >
+      Save as Template
+    </n-button>
+    <br>
     <n-button round>
       Cancel
     </n-button>
@@ -23,16 +38,40 @@
       round
       @click="handleClick"
     >
-      New Service
+      handleClick
+    </n-button>
+    <n-button size="small">
+      small size
+    </n-button>
+    <n-button>
+      regular size
+    </n-button>
+    <n-button size="large">
+      large size
     </n-button>
     <br><br>
-    <textarea rows="5">
+    <textarea rows="30">
+<n-button
+  round
+  size="small"
+  icon="md-save"
+>
+  Save as Template
+</n-button>
 <n-button
   round
   icon="md-save"
 >
   Save as Template
 </n-button>
+<n-button
+  round
+  size="large"
+  icon="md-save"
+>
+  Save as Template
+</n-button>
+<br>
 <n-button round>
   Cancel
 </n-button>
@@ -44,7 +83,16 @@
   round
   @click="handleClick"
 >
-  New Service
+  handleClick
+</n-button>
+<n-button size="small">
+  small size
+</n-button>
+<n-button>
+  regular size
+</n-button>
+<n-button size="large">
+  large size
 </n-button>
 </textarea>
     <hr>

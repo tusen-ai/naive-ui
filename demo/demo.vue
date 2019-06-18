@@ -64,3 +64,14 @@ export default {
   align-items: center;
 }
 </style>
+
+<style>
+.CodeMirror {
+  border: 1px solid #eee;
+  height: auto;
+}
+.CodeMirror-scroll {
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+</style>

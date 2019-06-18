@@ -3,7 +3,8 @@
     class="n-button"
     :class="{
       'is-round': round,
-      [`is-${type}`]: true
+      [`is-${type}`]: true,
+      [`n-button--${size}-size`]: true
     }"
     v-on="$listeners"
   >
