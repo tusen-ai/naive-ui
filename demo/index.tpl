@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>2s design</title>
+    <title>naive-ui</title>
     <style></style>
   </head>
   <body>

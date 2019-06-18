@@ -1,6 +1,7 @@
 import Vue from 'vue/dist/vue'
 import VueRouter from 'vue-router'
 import '../styles/index.scss'
+import 'codemirror/lib/codemirror.css'
 // import Demo from './demo.vue'
 import Card from 'packages/common/Card'
 import Icon from 'packages/common/Icon'
@@ -12,7 +13,7 @@ import WithMargin from 'packages/common/WithMargin'
 import MasonryGroup from 'packages/common/MasonryGroup'
 import Table from 'packages/common/Table'
 import Checkbox from 'packages/common/Checkbox'
-import RoundButton from 'packages/common/RoundButton'
+import RoundButton from 'packages/common/Button'
 import Switch from '../packages/common/Switch'
 import Input from '../packages/common/Input'
 import Select from '../packages/common/Select'
@@ -29,7 +30,7 @@ import homeDemo from './components/homeDemo'
 import gradientTextDemo from './components/gradientTextDemo'
 import iconDemo from './components/iconDemo'
 import checkboxDemo from './components/checkboxDemo'
-import roundButtonDemo from './components/roundButtonDemo'
+import ButtonDemo from './components/ButtonDemo'
 import switchDemo from './components/switchDemo'
 import tableDemo from './components/tableDemo'
 import inputDemo from './components/inputDemo'
@@ -68,7 +69,7 @@ const routes = [
   { path: '/n-gradient-text', component: gradientTextDemo },
   { path: '/n-icon', component: iconDemo },
   { path: '/n-checkbox', component: checkboxDemo },
-  { path: '/n-round-button', component: roundButtonDemo },
+  { path: '/n-button', component: ButtonDemo },
   { path: '/n-switch', component: switchDemo },
   { path: '/n-table', component: tableDemo },
   { path: '/n-input', component: inputDemo },

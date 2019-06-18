@@ -13,10 +13,6 @@
         渐变文字 / n-gradient-text
       </router-link>
       <br>
-      <router-link to="/n-gradient-button">
-        (不可用)渐变按钮 / n-gradient-button
-      </router-link>
-      <br>
       <router-link to="/n-icon">
         图标 / n-icon
       </router-link>
@@ -25,8 +21,8 @@
         多选框 / n-checkbox
       </router-link>
       <br>
-      <router-link to="/n-round-button">
-        圆按钮 / n-round-button
+      <router-link to="/n-button">
+        按钮 / n-button
       </router-link>
       <br>
       <router-link to="/n-switch">

@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "0.1.30",
+  "version": "0.1.32",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -25,6 +25,7 @@
     "babel-loader": "^8.0.5",
     "babel-plugin-istanbul": "^5.1.4",
     "chai": "^4.2.0",
+    "codemirror": "^5.47.0",
     "copy-webpack-plugin": "^5.0.3",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
