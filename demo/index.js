@@ -18,6 +18,7 @@ import Switch from '../packages/common/Switch'
 import Input from '../packages/common/Input'
 import Select from '../packages/common/Select'
 import Modal from '../packages/common/Modal'
+import Message from '../packages/common/Message'
 
 import ServiceCard from 'packages/nimbus/ServiceCard'
 import HomeLayout from 'packages/nimbus/HomeLayout'
@@ -37,6 +38,7 @@ import inputDemo from './components/inputDemo'
 import selectDemo from './components/selectDemo'
 import modalDemo from './components/modalDemo'
 import nimbusFormCardDemo from './components/nimbusFormCardDemo'
+import MessageDemo from './components/messageDemo'
 import demo from './demo'
 
 Vue.use(VueRouter)
@@ -61,6 +63,7 @@ Input.install(Vue)
 Select.install(Vue)
 Modal.install(Vue)
 NimbusFormCard.install(Vue)
+Message.install(Vue)
 
 const routes = [
   { path: '/', component: demo },
@@ -75,7 +78,8 @@ const routes = [
   { path: '/n-input', component: inputDemo },
   { path: '/n-select', component: selectDemo },
   { path: '/n-modal', component: modalDemo },
-  { path: '/n-nimbus-form-card', component: nimbusFormCardDemo }
+  { path: '/n-nimbus-form-card', component: nimbusFormCardDemo },
+  { path: '/n-message', component: MessageDemo }
 ]
 
 const router = new VueRouter({

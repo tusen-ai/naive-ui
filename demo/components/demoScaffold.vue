@@ -11,8 +11,9 @@
 </template>
 
 <script>
+import docCodeEditorMixin from './docCodeEditorMixin'
 export default {
-
+  mixins: [docCodeEditorMixin]
 }
 </script>
 

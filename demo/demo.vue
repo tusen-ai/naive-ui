@@ -46,6 +46,10 @@
       <router-link to="/n-nimbus-form-card">
         Nimbus 弹出式表单 / n-nimbus-form-card
       </router-link>
+      <br>
+      <router-link to="/n-message">
+        通知 / $NMessage
+      </router-link>
     </div>
   </div>
 </template>
