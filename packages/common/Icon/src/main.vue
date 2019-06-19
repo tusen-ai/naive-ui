@@ -2,6 +2,7 @@
   <i
     :class="classes"
     :style="styles"
+    v-on="$listeners"
   />
 </template>
 <script>
@@ -19,7 +20,7 @@ export default {
     },
     color: {
       type: String,
-      default: '#fff'
+      default: null
     },
     custom: {
       type: String,

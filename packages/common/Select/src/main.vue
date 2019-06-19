@@ -1,37 +1,48 @@
 <template>
   <div
     class="n-select"
-    :class="{ 'is-active': active }"
+    :class="{
+      [`n-select--${size}-size`]: true
+    }"
     @click="toggleSelect"
   >
     <div
       v-if="multiple"
       class="n-select-link"
+      :class="{
+        'is-active': active
+      }"
     >
       <div
         v-if="selected"
         class="n-select-link__tags"
       >
-        <span
+        <div
           v-for="item in selectedItems"
           :key="item.value"
+          class="n-select-link__tag"
         >
           {{ item.label }}
-        </span>
+          <n-icon
+            class="n-select-link-tag__icon"
+            type="md-close"
+            @click.stop="toggle(item)"
+          />
+        </div>
       </div><div
         v-else
-        class="n-select__tags n-select__placeholder"
+        class="n-select-link__tags n-select-link__placeholder"
       >
         {{ placeholder }}
       </div>
-      <div class="n-select-menu">
+      <div class="n-select-menu n-select-menu--multiple">
         <div
           v-for="item in items"
           :key="item.value"
           class="n-select-menu__item"
           :class="{
             'is-selected':
-              selectedItemValues.has(item.value)
+              isSelected(item)
           }"
           @click="toggle(item)"
         >
@@ -42,6 +53,9 @@
     <div
       v-else
       class="n-select-link"
+      :class="{
+        'is-active': active
+      }"
     >
       <div
         v-if="selected"
@@ -51,7 +65,7 @@
       </div>
       <div
         v-else
-        class="n-select__label n-select__placeholder"
+        class="n-select-link__label n-select-link__placeholder"
       >
         {{ placeholder }}
       </div>
@@ -75,8 +89,13 @@
 </template>
 
 <script>
+import NIcon from '../../Icon/index'
+
 export default {
   name: 'NSelect',
+  components: {
+    NIcon
+  },
   model: {
     prop: 'selectedValue',
     event: 'change'
@@ -97,42 +116,71 @@ export default {
     multiple: {
       type: Boolean,
       default: false
+    },
+    size: {
+      type: String,
+      default: 'default'
     }
   },
   data () {
     return {
-      active: false,
-      selected: false,
-      selectedItems: [],
-      selectedItemValues: new Set()
+      active: false
+    }
+  },
+  computed: {
+    selected () {
+      if (Array.isArray(this.selectedValue)) {
+        return this.selectedValue.length !== 0
+      }
+      if (this.selectedValue !== null) {
+        return true
+      } else {
+        return false
+      }
+    },
+    selectedItems () {
+      const selectedValues = new Set(this.selectedValue)
+      console.log(this.items.filter(item => selectedValues.has(item.value)))
+      return this.items.filter(item => selectedValues.has(item.value))
     }
   },
   created () {
-
   },
   methods: {
+    isSelected (item) {
+      if (this.multiple) {
+        return 1 + this.selectedValue.findIndex(value => value === item.value)
+      } else {
+        return item.value === this.selectedValue
+      }
+    },
     toggleSelect () {
       this.active = !this.active
     },
     select (item) {
       this.$emit('change', item.value)
-      this.selected = true
     },
+    // toggleValue (value) {
+    //   const index = this.selectedValue.findIndex(v => v === value)
+    //   if (1 + index) {
+    //     const selectedValue = this.selectedValue
+    //     selectedValue.splice(index, 1)
+    //     this.$emit('change', selectedValue)
+    //   } else {
+    //     const selectedValue = this.selectedValue.concat([value])
+    //     this.$emit('change', selectedValue)
+    //   }
+    // }
     toggle (item) {
-      const index = this.selectedItems.findIndex(selectedItem => selectedItem.value === item.value)
+      const index = this.selectedValue.findIndex(value => value === item.value)
       if (1 + index) {
-        this.selectedItems.splice(index, 1)
-        this.selectedItemValues.delete(item.value)
+        const selectedValue = this.selectedValue
+        selectedValue.splice(index, 1)
+        this.$emit('change', selectedValue)
       } else {
-        this.selectedItems.push(item)
-        this.selectedItemValues.add(item.value)
+        const selectedValue = this.selectedValue.concat([item.value])
+        this.$emit('change', selectedValue)
       }
-      if (this.selectedItems.length) {
-        this.selected = true
-      } else {
-        this.selected = false
-      }
-      this.$emit('change', this.selectedItems.map(item => item.value))
     }
   }
 }
