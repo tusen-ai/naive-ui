@@ -54,6 +54,9 @@
         
         margin-right: 7px;
         margin-bottom: 2px;
+        .n-select-link-tag__content  {
+          transform: translateY(-1px);
+        }
         .n-select-link-tag__icon {
           position: absolute;
           right: 7px;

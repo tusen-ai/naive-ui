@@ -23,7 +23,9 @@
           :key="item.value"
           class="n-select-link__tag"
         >
-          {{ item.label }}
+          <div class="n-select-link-tag__content">
+            {{ item.label }}
+          </div>
           <n-icon
             class="n-select-link-tag__icon"
             type="md-close"
