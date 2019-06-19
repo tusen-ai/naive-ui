@@ -78,7 +78,7 @@
       box-shadow: 0px 2px 20px 0px rgba(0,0,0,0.16);
       &.n-select-menu--multiple {
         .n-select-menu__item {
-          &.is-selected {
+          &.is-selected, &:active {
             position: relative;
             background: none;
             &::after {
@@ -92,6 +92,12 @@
               transform: rotate(45deg);
               top: calc(50% - 4px);
             }
+          }
+          &:active {
+            color: #63E2B7FF;
+            background-color: rgba(96, 220, 178, 0.3);
+          }
+          &.is-selected {
             &:hover {
               background-color: rgba(96, 220, 178, 0.3);
             }

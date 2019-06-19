@@ -9,24 +9,24 @@
   cursor: pointer;
   user-select: none;
   font-weight: 700;
-  &.n-button--small-size {
-    font-size: 13px;
-    height: 22px;
-    border-radius: 5px;
-    padding: 0 14px;
+  &.n-button--large-size {
+    font-size: 16px;
+    height: 40px;
+    border-radius: 6px;
+    padding: 0 24px;
     &.is-round {
-      border-radius: 11px
+      border-radius: 20px
     }
     .n-button__icon {
-      height: 15px;
-      margin-right: 5px;
+      height: 22px;
+      margin-right: 6px;
       & > i::before {
         color: #63E2B7FF;
-        font-size: 15px;
+        font-size: 22px;
       }
     }
   }
-  &.n-button--default-size, &.n-button--medium-size {
+  &.n-button--small-size {
     font-size: 14px;
     height: 28px;
     border-radius: 6px;
@@ -42,10 +42,10 @@
       }
     }
   }
-  &.n-button--large-size {
+  &.n-button--default-size, &.n-button--medium-size {
     font-size: 16px;
     height: 34px;
-    border-radius: 8px;
+    border-radius: 6px;
     padding: 0 24px;
     &.is-round {
       border-radius: 17px
