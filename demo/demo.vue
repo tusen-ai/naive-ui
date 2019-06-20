@@ -81,7 +81,7 @@ export default {
 .CodeMirror {
   border: 1px solid #eee;
   height: auto;
-  z-index: -1;
+  z-index: 0;
 }
 .CodeMirror-scroll {
   overflow-y: hidden;

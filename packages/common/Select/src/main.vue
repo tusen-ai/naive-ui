@@ -146,8 +146,22 @@ export default {
       return this.items.filter(item => selectedValues.has(item.value))
     }
   },
-  mounted () {
-    document.addEventListener('click', this.nativeCloseSelect, true)
+  watch: {
+    active (newValue) {
+      if (newValue === true) {
+        this.$nextTick().then(
+          () => {
+            document.addEventListener('click', this.nativeCloseSelect)
+          }
+        )
+      } else {
+        this.$nextTick().then(
+          () => {
+            document.removeEventListener('click', this.nativeCloseSelect)
+          }
+        )
+      }
+    }
   },
   beforeDestroy () {
     document.removeEventListener('click', this.nativeCloseSelect)
@@ -168,7 +182,6 @@ export default {
       if (!this.$refs.select.contains(e.target)) {
         this.active = false
       }
-      e.preventDefault()
     },
     closeSelect () {
       this.active = false
@@ -178,9 +191,7 @@ export default {
     },
     select (item) {
       this.$emit('change', item.value)
-      console.log(this.active)
       this.closeSelect()
-      console.log(this.active)
     },
     toggle (item) {
       const index = this.selectedValue.findIndex(value => value === item.value)
