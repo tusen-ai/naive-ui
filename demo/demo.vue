@@ -50,6 +50,10 @@
       <router-link to="/n-message">
         通知 / $NMessage
       </router-link>
+      <br>
+      <router-link to="/n-tooltip">
+        帮助 / n-tooltip
+      </router-link>
     </div>
   </div>
 </template>
@@ -73,6 +77,7 @@ export default {
 .CodeMirror {
   border: 1px solid #eee;
   height: auto;
+  z-index: -1;
 }
 .CodeMirror-scroll {
   overflow-y: hidden;

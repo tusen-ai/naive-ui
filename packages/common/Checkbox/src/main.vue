@@ -4,15 +4,18 @@
     @click="handleClick"
   >
     <div
-      class="checkbox"
-      :class="{checked:checked}"
+      class="n-checkbox__checkbox"
+      :class="{'is-checked':checked}"
     >
       <div
-        class="inner"
-        :class="{checked:checked}"
+        class="n-checkbox-checkbox__inner"
+        :class="{'is-checked':checked}"
       />
     </div>
-    <div class="label">
+    <div
+      v-if="$slots.default"
+      class="n-checkbox__label"
+    >
       <slot />
     </div>
   </div>

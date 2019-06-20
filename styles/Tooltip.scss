@@ -1,0 +1,37 @@
+@import './mixins/mixins.scss';
+@import './theme/default.scss';
+
+@include b(tooltip) {
+  & {
+    display: inline-block;
+    position: relative;
+  }
+  .n-tooltip__popup.is-hidden {
+    display: none;
+  }
+  .n-tooltip__popup.has-emerged {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  .n-tooltip__popup {
+    z-index: 1;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 2px;
+    opacity: 1;
+    transition: opacity .3s $default-cubic-bezier, transform .3s $default-cubic-bezier;
+    .n-tooltip-popup__content {
+      white-space: nowrap;
+      border-radius: 6px;
+      background-color: rgba(75,81,106,1);
+      color: #FFFFFFE6;
+      padding: 8px 14px;
+      font-size: 12px;
+    }
+  }
+  .n-tooltip__popup.is-vanishing { 
+    opacity: 0;
+  }
+}

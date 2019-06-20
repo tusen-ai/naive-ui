@@ -49,6 +49,7 @@ export default {
 
 <style lang="scss" scoped>
 .n-nimbus-form-card {
+  position: relative;
   min-width: 600px;
   width: 1032px;
   margin: auto;

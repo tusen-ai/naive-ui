@@ -19,27 +19,26 @@ export default {
     }
   },
   watch: {
-    isActive (val) {
-      if (!val) {
-        this.removeOverlay()
-      } else {
-        this.addOverlayToApp()
-      }
-    }
+    // isActive (val) {
+    //   if (!val) {
+    //     this.removeOverlay()
+    //   } else {
+    //     this.addOverlayToApp()
+    //   }
+    // }
   },
   beforeMount () {
-    const app = document.querySelector('#app')
-    console.log()
+    const app = document.querySelector('body')
     if (!app) {
-      console.warn('Modal will be mounted to #app element, but it doesn\'t exist! Modal component won\'t work!')
+      console.warn('Modal will be mounted to body element, but it doesn\'t exist! Modal component won\'t work!')
     }
   },
   mounted () {
-    this.app = document.querySelector('#app')
+    this.app = document.querySelector('body')
     this.detachContentToApp()
   },
   beforeDestroy () {
-    this.removeOverlay()
+    // this.removeOverlay()
     this.app.removeChild(this.$refs.content)
   },
   methods: {
@@ -49,7 +48,8 @@ export default {
         overlay = document.createElement('div')
         overlay.classList.add('n-modal-overlay')
         overlay.id = 'overlay'
-        this.app.insertBefore(overlay, this.app.firstElementChild)
+        this.app.append(overlay)
+        // this.app.insertBefore(overlay, this.app.firstElementChild)
         this.overlay = overlay
       }
     },
@@ -63,11 +63,15 @@ export default {
     detachContentToApp () {
       this.$refs.content.parentNode.removeChild(this.$refs.content)
       this.content = this.$refs.content
-      this.app.insertBefore(this.content, this.app.firstElementChild)
+      // this.addOverlayToApp()
+      this.app.append(this.content)
+      // this.app.insertBefore(this.content, this.app.firstElementChild)
     }
   },
   render (h) {
-    return h('div', [
+    return h('div', {
+      staticClass: 'n-modal-activator'
+    }, [
       this.$slots.activator,
       h('div', {
         staticClass: 'n-modal-content',
@@ -76,7 +80,13 @@ export default {
           'is-active': this.isActive
         }
       },
-      this.$slots.default
+      [h('div', {
+        staticClass: 'n-modal-overlay',
+        ref: 'overlay',
+        class: {
+          'is-active': this.isActive
+        }
+      }), ...this.$slots.default]
       )
     ])
   }
@@ -84,6 +94,10 @@ export default {
 </script>
 
 <style lang="scss">
+.n-modal-activator {
+  display: inline-block;
+}
+
 .n-modal-overlay {
   position: fixed;
   left: 0;
@@ -91,7 +105,10 @@ export default {
   top: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, .35);
-  z-index: 200;
+  display: none;
+  &.is-active {
+    display: block;
+  }
 }
 
 .n-modal-content {
@@ -101,11 +118,10 @@ export default {
   top: 0;
   bottom: 0;
   display: flex;
-  z-index: 201;
-  visibility: hidden;
+  display: none;
   overflow: auto;
   &.is-active {
-    visibility: visible;
+    display: block;
   }
 }
 </style>

@@ -5,7 +5,8 @@
     <h2>基本用法</h2>
     <n-checkbox v-model="checked">
       Nimbus
-    </n-checkbox><br>{{ String(checked) }}
+    </n-checkbox><br>
+    <n-checkbox v-model="checked" /><br>{{ String(checked) }}
     <br>
     <textarea rows="5"><n-checkbox v-model="checked">
   Nimbus
@@ -15,7 +16,9 @@
 </template>
 
 <script>
+import docCodeEditorMixin from './docCodeEditorMixin'
 export default {
+  mixins: [docCodeEditorMixin],
   props: {},
   data () {
     return {

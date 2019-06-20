@@ -19,6 +19,7 @@ import Input from '../packages/common/Input'
 import Select from '../packages/common/Select'
 import Modal from '../packages/common/Modal'
 import Message from '../packages/common/Message'
+import Tooltip from '../packages/common/Tooltip'
 
 import ServiceCard from 'packages/nimbus/ServiceCard'
 import HomeLayout from 'packages/nimbus/HomeLayout'
@@ -38,7 +39,8 @@ import inputDemo from './components/inputDemo'
 import selectDemo from './components/selectDemo'
 import modalDemo from './components/modalDemo'
 import nimbusFormCardDemo from './components/nimbusFormCardDemo'
-import MessageDemo from './components/messageDemo'
+import messageDemo from './components/messageDemo'
+import tooltipDemo from './components/tooltipDemo'
 import demo from './demo'
 
 Vue.use(VueRouter)
@@ -64,6 +66,7 @@ Select.install(Vue)
 Modal.install(Vue)
 NimbusFormCard.install(Vue)
 Message.install(Vue)
+Tooltip.install(Vue)
 
 const routes = [
   { path: '/', component: demo },
@@ -79,7 +82,8 @@ const routes = [
   { path: '/n-select', component: selectDemo },
   { path: '/n-modal', component: modalDemo },
   { path: '/n-nimbus-form-card', component: nimbusFormCardDemo },
-  { path: '/n-message', component: MessageDemo }
+  { path: '/n-message', component: messageDemo },
+  { path: '/n-tooltip', component: tooltipDemo }
 ]
 
 const router = new VueRouter({

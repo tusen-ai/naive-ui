@@ -20,7 +20,7 @@ function attachMessageContainer () {
           flex-direction: column;
           align-items: center;
         `
-    document.body.insertBefore(messageContainer, document.body.firstElementChild)
+    document.body.appendChild(messageContainer)
   }
   return messageContainer
 }

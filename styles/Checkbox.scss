@@ -7,25 +7,26 @@
     justify-content: center;
     cursor: pointer;
   }
-  .label {
-    font-size: 12px;
+  .n-checkbox__label {
+    font-size: 13px;
     color: #63E2B7;
+    margin-left: 6px;
   }
-  .checkbox {
+  .n-checkbox__checkbox {
     & {
-      height: 15px;
-      width: 15px;
-      margin-right: 6px;
+      height: 14px;
+      width: 14px;
+      box-sizing: border-box;
       border: 1px solid #63E2B7;
       background-color: transparent;
       border-radius: 4px;
       position: relative;
       
     }
-    &.checked {
+    &.is-checked {
       background-color: #63E2B7;
     }
-    .inner {
+    .n-checkbox-checkbox__inner {
       &::after {
         box-sizing: content-box;
         content: "";
@@ -33,14 +34,14 @@
         border-left: 0;
         border-top: 0;
         height: 8px;
-        left: 5px;
+        left: 4px;
         position: absolute;
-        top: 2px;
+        top: 0px;
         transform: rotate(45deg) scaleY(0);
         width: 3px;
         transform-origin: center;
       }
-      &.checked::after {
+      &.is-checked::after {
         transform: rotate(45deg) scaleY(1);
       }
     }

@@ -69,10 +69,10 @@
       }
     }
     .n-select-menu {
-      z-index: 100;
+      z-index: 1;
       overflow: hidden;
       position: absolute;
-      visibility: hidden;
+      display: none;
       top: calc(100% + 4px);
       left: 0;
       right: 0;
@@ -119,7 +119,7 @@
     }
     &.is-active {
       .n-select-menu {
-        visibility: visible;
+        display: block;
       }
       &::after {
         transform: rotate(135deg);
