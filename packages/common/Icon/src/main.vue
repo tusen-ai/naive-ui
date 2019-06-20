@@ -16,7 +16,7 @@ export default {
     },
     size: {
       type: [Number, String],
-      default: 14
+      default: null
     },
     color: {
       type: String,
@@ -40,7 +40,7 @@ export default {
       let style = {}
       if (this.size) {
         style['font-size'] = `${this.size}px`
-        style['line-height'] = '1'
+        style['line-height'] = `${this.size}px`
       }
       if (this.color) {
         style.color = this.color

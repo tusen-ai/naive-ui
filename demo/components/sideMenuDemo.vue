@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="doc">
     <div class="service-container">
       <n-nimbus-service-layout
         name="已经不需要，一些挽留字句"
@@ -93,7 +93,9 @@
 </template>
 
 <script>
+import docCodeEditorMixin from './docCodeEditorMixin'
 export default {
+  mixins: [docCodeEditorMixin]
 }
 </script>
 

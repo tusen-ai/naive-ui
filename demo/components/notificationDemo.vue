@@ -3,25 +3,34 @@
     ref="doc"
     class="doc"
   >
-    <h1>Message</h1>
+    <h1>Notification</h1>
     <hr>
     <h2>基本用法</h2>
+    <p>如果消息主体的高度不超过400px，动画不会有问题，如果超过了，会有小问题</p>
     <button @click="emitMessage">
-      爱你那么用力，却好像一场闹剧
+      这绚烂新世纪，深情已不受欢迎
     </button>
     <br><br>
     <textarea rows="5"><button @click="emitMessage">
-  爱你那么用力，却好像一场闹剧
+  这绚烂新世纪，深情已不受欢迎
 </button>
 
 <script>
-emitMessage () {
-  this.$NMessage.error('Oops, here is a error')
-  this.$NMessage.success('Cloned Successfully')
-}
+  this.$NNotification.notify({
+    title: 'Notification',
+    titleMeta: 'From Xingyue Feng',
+    content: 'VTS has been edited by admin',
+    meta: '2019-5-27 15:11',
+    action: 'Mark as read',
+    avator: null,
+    actionCallback: (notification) => {
+      console.log('mark read!')
+      notification.close()
+    }
+  })
 </script>
 
-</textarea>
+    </textarea>
     <hr>
   </div>
 </template>
@@ -32,13 +41,17 @@ export default {
   mixins: [docCodeEditorMixin],
   methods: {
     emitMessage () {
-      this.$NNotification.notify({
+      this.$notify({
         title: 'Notification',
         titleMeta: 'From Xingyue Feng',
         content: 'VTS has been edited by admin',
         meta: '2019-5-27 15:11',
         action: 'Mark as read',
-        actionCallback: () => {}
+        avator: null,
+        actionCallback: (notification) => {
+          console.log('mark read!')
+          notification.close()
+        }
       })
     }
   }

@@ -5,7 +5,16 @@
       [`n-notification__cell--${type}`]: true
     }"
   >
-    <div class="n-notification-cell__avator" />
+    <div
+      v-if="!notification.avator"
+      class="n-notification-cell__avator"
+    >
+      !
+    </div>
+    <div
+      class="n-notification-cell__deactivator"
+      @click="close"
+    />
     <div class="n-notification-cell__body">
       <div class="n-notification-cell__header">
         {{ notification.title }}
@@ -20,7 +29,10 @@
         <div class="n-notification-cell__meta">
           {{ notification.meta }}
         </div>
-        <div class="n-notification-cell__action">
+        <div
+          class="n-notification-cell__action"
+          @click="handleActionClick"
+        >
           {{ notification.action }}
         </div>
       </div>
@@ -29,12 +41,8 @@
 </template>
 
 <script>
-import NIcon from '../../Icon/index'
 
 export default {
-  components: {
-    NIcon
-  },
   props: {
     type: {
       type: String,

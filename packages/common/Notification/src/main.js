@@ -1,6 +1,6 @@
 
 import Vue from 'vue'
-import NMessageCell from './MessageCell'
+import NNotificationCell from './NotificationCell'
 
 function attachMessageContainer () {
   let notificationContainer = document.querySelector('.n-notification.n-notification__container')
@@ -31,25 +31,42 @@ const defaultOptions = {
   vanishTransitionTimeout: 300
 }
 
+const defaultNotification = {
+  avator: null,
+  actionCallback: () => {}
+}
+
 function registerMessageEl (container, el, option) {
   el.classList.add('is-going-to-emerge')
   container.appendChild(el)
   el.getBoundingClientRect()
   el.classList.remove('is-going-to-emerge')
   setTimeout(function () {
-    setTimeout(function () {
-      setTimeout(function () {
-        container.removeChild(el)
-      }, option.vanishTransitionTimeout)
-      el.classList.add('is-vanishing')
-    }, option.timeout)
   }, option.emergeTransitionTimeout)
+}
+
+function removeMessageEl (container, el, option) {
+  setTimeout(function () {
+    container.removeChild(el)
+  }, option.vanishTransitionTimeout)
+  el.classList.add('is-vanishing')
 }
 
 const NMessage = {
   notify (notification, type = 'success', option = defaultOptions) {
+    notification = { ...defaultNotification, ...notification }
     const notificationContainer = attachMessageContainer()
-    const notificationCell = (new Vue({ ...NMessageCell, propsData: { type, notification: notification } })).$mount()
+    const notificationCell = (new Vue({ ...NNotificationCell,
+      propsData: { type, notification: notification },
+      methods: {
+        close () {
+          removeMessageEl(notificationContainer, this.$el, option)
+        },
+        handleActionClick () {
+          notification.actionCallback(this)
+        }
+      }
+    })).$mount()
     registerMessageEl(notificationContainer, notificationCell.$el, option)
   }
 }
