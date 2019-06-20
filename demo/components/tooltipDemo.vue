@@ -14,7 +14,7 @@
         This is the contextual help
       </div>
     </n-tooltip>
-    <br>
+    <br><br>
     <textarea rows="5"><n-tooltip>
   <template v-slot:activator>
     scaffold

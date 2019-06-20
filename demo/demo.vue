@@ -54,6 +54,10 @@
       <router-link to="/n-tooltip">
         帮助 / n-tooltip
       </router-link>
+      <br>
+      <router-link to="/n-notification">
+        通知 / $NNotification
+      </router-link>
     </div>
   </div>
 </template>

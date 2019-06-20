@@ -44,10 +44,15 @@ export default {
       }
       this.isHidden = false
       this.hasEmerged = true
-      this.$nextTick(() => {
-        this.$el.getBoundingClientRect()
-        this.hasEmerged = false
-      })
+      this
+        .$nextTick()
+        .then(vm => {
+          vm.$el.getBoundingClientRect()
+          return this.$nextTick()
+        })
+        .then(vm => {
+          vm.hasEmerged = false
+        })
     },
     handleMouseLeave (x) {
       this.isVanishing = true
