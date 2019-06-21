@@ -10,14 +10,19 @@
       color: #9FA5B3FF;
     }
   }
-  .n-input__input {
+  .n-input__input, .n-input__textarea {
     box-sizing: border-box;
     border: none;
     border-radius: 8px;
     outline: none;
-    background-color: #5C657EFF;
-    font-size: 14px;
     color: #fff;
+    background-color: #6F778DFF;
+    &:focus {
+      box-shadow: inset 0 0 0px 1px rgba(99,226,183,1);
+    }
+  }
+  .n-input__input {
+    font-size: 14px;
     font-family: $default-font-family;
     width: 100%;
     caret-color: #63E2B7;
@@ -45,13 +50,7 @@
     }
   }
   .n-input__textarea {
-    box-sizing: border-box;
-    border: none;
-    border-radius: 8px;
     padding: 10px 20px;
-    outline: none;
-    background-color: #5C657EFF;
-    color: #fff;
     font-family: $default-font-family;
     width: 100%;
     resize: vertical;
