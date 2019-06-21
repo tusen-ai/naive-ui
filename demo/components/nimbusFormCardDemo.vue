@@ -1,5 +1,8 @@
 <template>
-  <div class="doc">
+  <div
+    ref="doc"
+    class="doc"
+  >
     <h1>Nimbus 弹出式表单 / n-nimbus-form-card</h1>
     <hr>
     <h2>基本用法</h2>
@@ -55,7 +58,9 @@
 </template>
 
 <script>
+import docCodeEditorMixin from './docCodeEditorMixin'
 export default {
+  mixins: [docCodeEditorMixin],
   data () {
     return {
       isActive: false,

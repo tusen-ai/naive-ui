@@ -27,6 +27,7 @@ import HomeLayout from 'packages/nimbus/HomeLayout'
 import Navbar from 'packages/nimbus/Navbar'
 import ServiceLayout from 'packages/nimbus/ServiceLayout'
 import NimbusFormCard from 'packages/nimbus/FormCard'
+import NimbusConfirmCard from '../packages/nimbus/ConfirmCard'
 
 import sideMenuDemo from './components/sideMenuDemo'
 import homeDemo from './components/homeDemo'
@@ -43,6 +44,7 @@ import nimbusFormCardDemo from './components/nimbusFormCardDemo'
 import messageDemo from './components/messageDemo'
 import tooltipDemo from './components/tooltipDemo'
 import notificationDemo from './components/notificationDemo'
+import nimbusConfirmCardDemo from './components/nimbusConfirmCardDemo'
 import demo from './demo'
 
 Vue.use(VueRouter)
@@ -70,6 +72,7 @@ NimbusFormCard.install(Vue)
 Message.install(Vue)
 Tooltip.install(Vue)
 Notification.install(Vue)
+NimbusConfirmCard.install(Vue)
 
 const routes = [
   { path: '/', component: demo },
@@ -87,7 +90,8 @@ const routes = [
   { path: '/n-nimbus-form-card', component: nimbusFormCardDemo },
   { path: '/n-message', component: messageDemo },
   { path: '/n-tooltip', component: tooltipDemo },
-  { path: '/n-notification', component: notificationDemo }
+  { path: '/n-notification', component: notificationDemo },
+  { path: '/n-nimbus-confirm-card', component: nimbusConfirmCardDemo }
 ]
 
 const router = new VueRouter({

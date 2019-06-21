@@ -21,6 +21,7 @@ import HomeLayout from './packages/nimbus/HomeLayout'
 import Navbar from './packages/nimbus/Navbar'
 import ServiceLayout from './packages/nimbus/ServiceLayout'
 import NimbusFormCard from './packages/nimbus/FormCard'
+import NimbusConfirmCard from './packages/nimbus/ConfirmCard'
 
 function installUiToVue (Vue) {
   Card.install(Vue)
@@ -45,6 +46,7 @@ function installUiToVue (Vue) {
   Input.install(Vue)
   Message.install(Vue)
   Notification.install(Vue)
+  NimbusConfirmCard.install(Vue)
 }
 
 export default installUiToVue

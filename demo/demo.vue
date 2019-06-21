@@ -58,6 +58,12 @@
       <router-link to="/n-notification">
         通知 / $NNotification
       </router-link>
+      <br>
+      <router-link
+        to="/n-nimbus-confirm-card"
+      >
+        Nimbus 确认框 / n-nimbus-confirm-card
+      </router-link>
     </div>
   </div>
 </template>
