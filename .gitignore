@@ -1,4 +1,4 @@
 node_modules
 dist
-demoDist
+docDist
 test/unit/coverage
