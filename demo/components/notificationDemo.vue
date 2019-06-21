@@ -6,28 +6,52 @@
     <h1>Notification</h1>
     <hr>
     <h2>基本用法</h2>
-    <p>如果消息主体的高度不超过400px，动画不会有问题，如果超过了，会有小问题</p>
-    <button @click="emitMessage">
+    <button @click="emitMessage1">
       这绚烂新世纪，深情已不受欢迎
     </button>
+    <button @click="emitMessage2">
+      爱你那么用力，却好像一场闹剧
+    </button>
     <br><br>
-    <textarea rows="5"><button @click="emitMessage">
+    <textarea rows="5"><button @click="emitMessage1">
   这绚烂新世纪，深情已不受欢迎
+</button>
+<button @click="emitMessage2">
+  爱你那么用力，却好像一场闹剧
 </button>
 
 <script>
-  this.$NNotification.notify({
-    title: 'Notification',
-    titleMeta: 'From Xingyue Feng',
-    content: 'VTS has been edited by admin',
-    meta: '2019-5-27 15:11',
-    action: 'Mark as read',
-    avator: null,
-    actionCallback: (notification) => {
-      console.log('mark read!')
-      notification.close()
+export default {
+  methods: {
+    emitMessage1 () {
+      this.$notify({
+        title: 'Notification',
+        titleMeta: 'From Xingyue Feng',
+        content: 'VTS has been edited by admin',
+        meta: '2019-5-27 15:11',
+        action: 'Mark as read',
+        avator: null,
+        actionCallback: (notification) => {
+          console.log('mark read!')
+          notification.close()
+        }
+      })
+    },
+    emitMessage2 () {
+      this.$notify({
+        title: 'Notification',
+        content: 'VTS has been edited by admin',
+        meta: '2019-5-27 15:11',
+        action: 'Mark as read',
+        avator: null,
+        actionCallback: (notification) => {
+          console.log('mark read!')
+          notification.close()
+        }
+      })
     }
-  })
+  }
+}
 </script>
 
     </textarea>
@@ -40,10 +64,23 @@ import docCodeEditorMixin from './docCodeEditorMixin'
 export default {
   mixins: [docCodeEditorMixin],
   methods: {
-    emitMessage () {
-      this.$notify({
+    emitMessage1 () {
+      this.$nNotify({
         title: 'Notification',
         titleMeta: 'From Xingyue Feng',
+        content: 'VTS has been edited by admin',
+        meta: '2019-5-27 15:11',
+        action: 'Mark as read',
+        avator: null,
+        actionCallback: (notification) => {
+          console.log('mark read!')
+          notification.close()
+        }
+      })
+    },
+    emitMessage2 () {
+      this.$nNotify({
+        title: 'Notification',
         content: 'VTS has been edited by admin',
         meta: '2019-5-27 15:11',
         action: 'Mark as read',

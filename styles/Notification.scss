@@ -36,104 +36,83 @@
         flex-shrink: 0;
         font-weight: 700;
         color: #ffffff;
-        .n-notification-cell__deactivator {
-          position: absolute;
-          height: 15px;
-          width: 15px;
-          right: 15px;
-          top: 15px;
-          transition: top .3s $default-cubic-bezier;
-          cursor: pointer;
-          &::before {
-            position: absolute;
-            transform: rotate(45deg);
-            height: 6px;
-            width: 6px;
-            top: -2px;
-            content: "";
-            border-right: 2px solid #a1d9c6;
-            border-bottom: 2px solid #a1d9c6
-          }
-          &::after {
-            position: absolute;
-            height: 6px;
-            width: 6px;
-            content: "";
-            transform: rotate(45deg);
-            top: 7px;
-            border-left: 2px solid #a1d9c6;
-            border-top: 2px solid #a1d9c6;
-          }
-        }
-        .n-notification-cell__avator {
-          position: absolute;
-          height: 28px;
-          width: 28px;
-          border-radius: 14px;
-          background-color: #59C3B2FF;
-          left: 15px;
-          top: 15px;
-          text-align: center;
-          font-size: 18px;
-          line-height: 28px;
-          transition: top .3s $default-cubic-bezier,
-        }
-        .n-notification-cell__body {
-          display: flex;
-          flex-direction: column;
-          margin-left: 41px;
-          font-size: 14px;
+        .n-notification-cell__wrapper {
+          position: relative;
           width: 100%;
-          color: #ffffff;
-          .n-notification-cell__header {
-            font-weight: 700;
-            font-size: 16px;
-            margin-bottom: 6px;
-          }
-          .n-notification-cell__title-meta {
-            margin-bottom: 8px;
-          }
-          .n-notification-cell__title-meta, .n-notification-cell__meta {
-            font-size: 12px;
-            color: rgba(255,255,255,.4);
-          }
-          .n-notification-cell__content {
-            color: #ffffff;
-            margin-bottom: 7px;
-          }
-          .n-notification-cell__action {
+          .n-notification-cell__deactivator {
+            position: absolute;
+            height: 15px;
+            width: 15px;
+            right: 0px;
+            top: 0px;
+            transition: top .3s $default-cubic-bezier;
             cursor: pointer;
-            color: #00FFA9FF;
-          }
-          .n-notification-cell__footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-          }
-        }
-        .n-notification-cell__icon {
-          margin-right: 11px;
-          display: inline-flex;
-          height: 40px;
-          line-height: 40px;
-          align-items: center;
-          i::before {
-            font-size: 20px;
-          }
-        }
-        &.n-notification__cell--success {
-          background-color: #2F6C66FF;
-          .n-notification-cell__icon {
-            i::before {
-              color: #63E2B7FF
+            &::before {
+              position: absolute;
+              transform: rotate(45deg);
+              height: 6px;
+              width: 6px;
+              top: -2px;
+              content: "";
+              border-right: 2px solid #a1d9c6;
+              border-bottom: 2px solid #a1d9c6
+            }
+            &::after {
+              position: absolute;
+              height: 6px;
+              width: 6px;
+              content: "";
+              transform: rotate(45deg);
+              top: 7px;
+              border-left: 2px solid #a1d9c6;
+              border-top: 2px solid #a1d9c6;
             }
           }
-        }
-        &.n-notification__cell--error {
-          background-color: #D03A52FF;
-          .n-notification-cell__icon {
-            i::before {
-              color: #FF92A4FF
+          .n-notification-cell__avator {
+            position: absolute;
+            height: 28px;
+            width: 28px;
+            border-radius: 14px;
+            background-color: #59C3B2FF;
+            left: 0px;
+            top: 0px;
+            text-align: center;
+            font-size: 18px;
+            line-height: 28px;
+            transition: top .3s $default-cubic-bezier,
+          }
+          .n-notification-cell__body {
+            display: flex;
+            flex-direction: column;
+            margin-left: 41px;
+            font-size: 14px;
+            width: calc(100%-41px);
+            color: #ffffff;
+            .n-notification-cell__header {
+              font-weight: 700;
+              font-size: 16px;
+              margin-bottom: 8px;
+            }
+            .n-notification-cell__title-meta {
+              margin-bottom: 8px;
+            }
+            .n-notification-cell__title-meta, .n-notification-cell__meta {
+              font-size: 12px;
+              color: rgba(255,255,255,.4);
+            }
+            .n-notification-cell__content {
+              white-space: wrap;
+              color: #ffffff;
+            }
+            .n-notification-cell__action {
+              cursor: pointer;
+              color: #00FFA9FF;
+            }
+            .n-notification-cell__footer {
+              margin-top: 8px;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
             }
           }
         }

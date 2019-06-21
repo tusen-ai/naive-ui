@@ -36,13 +36,13 @@ const defaultNotification = {
   actionCallback: () => {}
 }
 
-function registerMessageEl (container, el, option) {
+function registerMessageEl (container, vm, option) {
+  const el = vm.$el
   el.classList.add('is-going-to-emerge')
   container.appendChild(el)
   el.getBoundingClientRect()
   el.classList.remove('is-going-to-emerge')
-  setTimeout(function () {
-  }, option.emergeTransitionTimeout)
+  el.style['max-height'] = `${30 + vm.$refs.body.getBoundingClientRect().height}px`
 }
 
 function removeMessageEl (container, el, option) {
@@ -50,6 +50,7 @@ function removeMessageEl (container, el, option) {
     container.removeChild(el)
   }, option.vanishTransitionTimeout)
   el.classList.add('is-vanishing')
+  el.style['max-height'] = '0'
 }
 
 const NMessage = {
@@ -67,7 +68,7 @@ const NMessage = {
         }
       }
     })).$mount()
-    registerMessageEl(notificationContainer, notificationCell.$el, option)
+    registerMessageEl(notificationContainer, notificationCell, option)
   }
 }
 

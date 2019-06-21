@@ -14,6 +14,7 @@ import Select from './packages/common/Select'
 import Modal from './packages/common/Modal'
 import Input from './packages/common/Input'
 import Message from './packages/common/Message'
+import Notification from './packages/common/Notification'
 
 import ServiceCard from './packages/nimbus/ServiceCard'
 import HomeLayout from './packages/nimbus/HomeLayout'
@@ -43,6 +44,7 @@ function installUiToVue (Vue) {
   NimbusFormCard.install(Vue)
   Input.install(Vue)
   Message.install(Vue)
+  Notification.install(Vue)
 }
 
 export default installUiToVue
