@@ -36,7 +36,7 @@ const defaultNotification = {
   actionCallback: () => {}
 }
 
-function registerMessageEl (container, vm, option) {
+function mountMessageEl (container, vm, option) {
   const el = vm.$el
   el.classList.add('is-going-to-emerge')
   container.appendChild(el)
@@ -68,7 +68,7 @@ const NMessage = {
         }
       }
     })).$mount()
-    registerMessageEl(notificationContainer, notificationCell, option)
+    mountMessageEl(notificationContainer, notificationCell, option)
   }
 }
 

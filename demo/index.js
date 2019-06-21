@@ -21,6 +21,7 @@ import Modal from '../packages/common/Modal'
 import Message from '../packages/common/Message'
 import Tooltip from '../packages/common/Tooltip'
 import Notification from '../packages/common/Notification'
+import Pagination from '../packages/common/Pagination'
 
 import ServiceCard from 'packages/nimbus/ServiceCard'
 import HomeLayout from 'packages/nimbus/HomeLayout'
@@ -45,6 +46,7 @@ import messageDemo from './components/messageDemo'
 import tooltipDemo from './components/tooltipDemo'
 import notificationDemo from './components/notificationDemo'
 import nimbusConfirmCardDemo from './components/nimbusConfirmCardDemo'
+import paginationDemo from './components/paginationDemo'
 import demo from './demo'
 
 Vue.use(VueRouter)
@@ -73,6 +75,7 @@ Message.install(Vue)
 Tooltip.install(Vue)
 Notification.install(Vue)
 NimbusConfirmCard.install(Vue)
+Pagination.install(Vue)
 
 const routes = [
   { path: '/', component: demo },
@@ -91,7 +94,8 @@ const routes = [
   { path: '/n-message', component: messageDemo },
   { path: '/n-tooltip', component: tooltipDemo },
   { path: '/n-notification', component: notificationDemo },
-  { path: '/n-nimbus-confirm-card', component: nimbusConfirmCardDemo }
+  { path: '/n-nimbus-confirm-card', component: nimbusConfirmCardDemo },
+  { path: '/n-pagination', component: paginationDemo }
 ]
 
 const router = new VueRouter({

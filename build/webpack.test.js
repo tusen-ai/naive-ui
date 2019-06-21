@@ -6,7 +6,7 @@ const config = require('./config')
 const webpackConfig = {
   mode: 'development',
   entry: {
-    app: ['./src/index.js']
+    app: ['./index.js']
   },
   output: {
     path: path.resolve(process.cwd(), './dist'),
@@ -37,8 +37,12 @@ const webpackConfig = {
         }
       },
       {
-        test: /\.css$/,
-        loaders: ['style-loader', 'css-loader']
+        test: /\.(scss|css)$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
       },
       {
         test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,

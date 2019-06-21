@@ -64,6 +64,12 @@
       >
         Nimbus 确认框 / n-nimbus-confirm-card
       </router-link>
+      <br>
+      <router-link
+        to="/n-pagination"
+      >
+        分页 / n-pagination
+      </router-link>
     </div>
   </div>
 </template>
