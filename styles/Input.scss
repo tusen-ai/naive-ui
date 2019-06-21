@@ -2,6 +2,7 @@
 @import './theme/default.scss';
 
 @include b(input) {
+  position: relative;
   &.is-disabled {
     cursor: not-allowed;
     .n-input__input, .n-input__textarea {
@@ -10,26 +11,37 @@
       color: #9FA5B3FF;
     }
   }
+  .n-input__icon {
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    left: 0;
+    top: calc(50% - 8px);
+    margin-left: 16px;
+    i::before {
+      font-size: 20px;
+      line-height: 17px;
+    }
+  }
   .n-input__input, .n-input__textarea {
     box-sizing: border-box;
     border: none;
     border-radius: 8px;
     outline: none;
     color: #fff;
+    font-family: $default-font-family;
     background-color: #6F778DFF;
+    width: 100%;
+    caret-color: #63E2B7;
     &:focus {
       box-shadow: inset 0 0 0px 1px rgba(99,226,183,1);
     }
   }
   .n-input__input {
-    font-size: 14px;
-    font-family: $default-font-family;
-    width: 100%;
-    caret-color: #63E2B7;
     &.n-input__input--small-size {
       height: $small-height;
       line-height: $small-height;
-      padding: 0 14px;
+      padding: 0 18px;
       font-size: $small-input-font-size;
     }
     &.n-input__input--default-size, &.n-input__input--medium-size {
@@ -49,12 +61,23 @@
       opacity: 1;
     }
   }
+  .n-input__input.n-input__input--round {
+    &.n-input__input--small-size {
+      border-radius: $small-height / 2;
+    }
+    &.n-input__input--default-size, &.n-input__input--medium-size {
+      border-radius: $default-height / 2;
+    }
+    &.n-input__input--large-size {
+      border-radius: $large-height / 2;
+    }
+  }
+  .n-input__input.n-input__input--icon {
+    padding-left: 44px;
+  }
   .n-input__textarea {
-    padding: 10px 20px;
-    font-family: $default-font-family;
-    width: 100%;
+    padding: 10px 14px;
     resize: vertical;
-    caret-color: #63E2B7;
     &.n-input__textarea--small-size {
       font-size: $small-input-font-size;
     }

@@ -29,19 +29,32 @@
       type="text"
       class="n-input__input"
       :class="{
-        [`n-input__input--${size}-size`]: true
+        [`n-input__input--${size}-size`]: true,
+        [`n-input__input--round`]: round,
+        [`n-input__input--icon`]: icon
       }"
       :placeholder="placeholder"
       :value="value"
       :disabled="disabled === true"
       @input="handleInput"
     >
+    <div
+      v-if="icon"
+      class="n-input__icon"
+    >
+      <n-icon type="ios-search" />
+    </div>
   </div>
 </template>
 
 <script>
+import nIcon from '../../Icon'
+
 export default {
   name: 'NInput',
+  components: {
+    nIcon
+  },
   model: {
     prop: 'value',
     event: 'change'
@@ -70,6 +83,14 @@ export default {
     rows: {
       type: Number,
       default: 3
+    },
+    round: {
+      type: Boolean,
+      default: false
+    },
+    icon: {
+      type: String,
+      default: null
     }
   },
   methods: {

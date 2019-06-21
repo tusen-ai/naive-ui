@@ -9,6 +9,8 @@
       v-model="value"
       type="input"
       size="small"
+      round
+      icon="search"
     />
     <br>
     <n-input
@@ -20,6 +22,7 @@
       v-model="value"
       size="large"
       type="input"
+      round
     />
     {{ value }}
     <br>
@@ -27,6 +30,8 @@
   v-model="value"
   type="input"
   size="small"
+  round
+  icon="search"
 />
 <br>
 <n-input
@@ -38,6 +43,7 @@
   v-model="value"
   size="large"
   type="input"
+  round
 /></textarea>
     <hr>
     <h2>textarea</h2>

@@ -2,6 +2,9 @@
 @import './theme/default.scss';
 
 @include b(switch) {
+  & {
+    display: inline-block;
+  }
   .rail {
     position: relative;
     height: 14px;

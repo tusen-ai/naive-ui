@@ -1,3 +1,4 @@
 node_modules
 dist
+demoDist
 test/unit/coverage

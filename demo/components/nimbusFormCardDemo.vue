@@ -22,9 +22,6 @@
         </template>
         <template v-slot:content>
           Here is content
-          <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-          <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-          <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         </template>
       </n-nimbus-form-card>
     </n-modal>

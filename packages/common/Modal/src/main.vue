@@ -18,6 +18,7 @@ export default {
       content: null
     }
   },
+
   watch: {
     // isActive (val) {
     //   if (!val) {
@@ -42,23 +43,25 @@ export default {
     this.app.removeChild(this.$refs.content)
   },
   methods: {
-    addOverlayToApp () {
-      let overlay = document.querySelector('#overlay')
-      if (!overlay) {
-        overlay = document.createElement('div')
-        overlay.classList.add('n-modal-overlay')
-        overlay.id = 'overlay'
-        this.app.append(overlay)
-        // this.app.insertBefore(overlay, this.app.firstElementChild)
-        this.overlay = overlay
-      }
-    },
-    removeOverlay () {
-      let overlay = document.querySelector('#overlay')
-      console.log(overlay)
-      if (overlay) {
-        this.app.removeChild(overlay)
-      }
+    // addOverlayToApp () {
+    //   let overlay = document.querySelector('#overlay')
+    //   if (!overlay) {
+    //     overlay = document.createElement('div')
+    //     overlay.classList.add('n-modal-overlay')
+    //     overlay.id = 'overlay'
+    //     this.app.append(overlay)
+    //     // this.app.insertBefore(overlay, this.app.firstElementChild)
+    //     this.overlay = overlay
+    //   }
+    // },
+    // removeOverlay () {
+    //   let overlay = document.querySelector('#overlay')
+    //   if (overlay) {
+    //     this.app.removeChild(overlay)
+    //   }
+    // },
+    deactivate () {
+      this.$emit('toggle', false)
     },
     detachContentToApp () {
       this.$refs.content.parentNode.removeChild(this.$refs.content)
@@ -85,6 +88,9 @@ export default {
         ref: 'overlay',
         class: {
           'is-active': this.isActive
+        },
+        on: {
+          click: this.deactivate
         }
       }), ...this.$slots.default]
       )
@@ -117,11 +123,10 @@ export default {
   right: 0;
   top: 0;
   bottom: 0;
-  display: flex;
   display: none;
   overflow: auto;
   &.is-active {
-    display: block;
+    display: flex;
   }
 }
 </style>
