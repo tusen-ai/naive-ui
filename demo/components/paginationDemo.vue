@@ -1,10 +1,18 @@
 <template>
-  <div class="doc">
+  <div
+    ref="doc"
+    class="doc"
+  >
     <h1>分页 / n-pagination</h1>
     <hr>
     <h2>基本用法</h2>
-    <n-pagination v-model="page" />
-    <br>
+    <n-pagination
+      v-model="page"
+      :page-count="100"
+    />
+    <br><br>
+    page: {{ page }}
+    <br><br>
     <textarea rows="5">scaffold</textarea>
     <hr>
   </div>

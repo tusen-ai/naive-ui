@@ -1,19 +1,24 @@
-function pagesToShow (page, totalPage) {
-  if (totalPage === 1) return [1]
+/**
+ *
+ * @param {number} currentPage
+ * @param {number} pageCount
+ */
+function pagesToShow (currentPage, pageCount) {
+  if (pageCount === 1) return [1]
   const firstPage = 1
-  const lastPage = totalPage
-  let middleStart = page
-  let middleEnd = page
-  if (firstPage === page) {
+  const lastPage = pageCount
+  let middleStart = currentPage
+  let middleEnd = currentPage
+  if (firstPage === currentPage) {
     middleEnd += 4
-  } else if (firstPage + 1 === page) {
+  } else if (firstPage + 1 === currentPage) {
     middleEnd += 3
   } else {
     middleEnd += 2
   }
-  if (lastPage === page) {
+  if (lastPage === currentPage) {
     middleStart -= 4
-  } else if (lastPage - 1 === page) {
+  } else if (lastPage - 1 === currentPage) {
     middleStart -= 3
   } else {
     middleStart -= 2
@@ -25,7 +30,7 @@ function pagesToShow (page, totalPage) {
   const items = []
   items.push(firstPage)
   if (leftSplit) {
-    items.push(-1)
+    items.push(-2)
   }
   for (let i = Math.max(middleStart, firstPage + 1); i <= middleEnd && i < lastPage; ++i) {
     items.push(i)
@@ -37,4 +42,37 @@ function pagesToShow (page, totalPage) {
   return items
 }
 
-export { pagesToShow }
+function pageItems (currentPage, pageCount) {
+  const pages = pagesToShow(currentPage, pageCount)
+  const items = pages.map(page => {
+    switch (page) {
+      case -2:
+        return {
+          type: 'fastBackward',
+          label: 'fastBackward'
+        }
+      case -1:
+        return {
+          type: 'fastForward',
+          label: 'fastForward'
+        }
+      default:
+        if (page === currentPage) {
+          return {
+            type: 'page',
+            label: page,
+            active: true
+          }
+        } else {
+          return {
+            type: 'page',
+            label: page,
+            activa: false
+          }
+        }
+    }
+  })
+  return items
+}
+
+export { pagesToShow, pageItems }
