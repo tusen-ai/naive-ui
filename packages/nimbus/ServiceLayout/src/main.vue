@@ -1,5 +1,6 @@
 <template>
   <div class="n-nimbus-service-layout">
+    <div><slot name="header" /></div>
     <div
       class="n-nimbus-service-layout__body"
       :class="{ 'n-nimbus-service-layout__body--collapsed': isCollapsed, 'n-nimbus-service-layout__body--active': !isCollapsed }"
@@ -254,11 +255,12 @@ export default {
       .n-nimbus-service-layout-drawer__header {
         position: relative;
         font-weight: 700;
-        padding-top: 21px;
-        padding-bottom: 21px;
+        height: 60px;
         padding-left: 48px;
         font-size: 16px;
         color: #E9E9EC;
+        display: flex;
+        align-items: center;
         .n-nimbus-service-layout-drawer-header__content {
           opacity: 1;
         }

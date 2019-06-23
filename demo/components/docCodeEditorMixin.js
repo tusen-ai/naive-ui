@@ -5,7 +5,7 @@ export default {
   mounted () {
     this.$refs.doc.querySelectorAll('textarea').forEach(ta => {
       CodeMirror.fromTextArea(ta, {
-        lineNumbers: true,
+        lineNumbers: false,
         mode: 'htmlmixed'
       })
     })

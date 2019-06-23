@@ -2,82 +2,11 @@
   <div class="demo">
     <n-nimbus-service-layout
       service-icon="md-contacts"
-      name="NAIVE UI"
+      name="NAIVE UI (0.1.49)"
       :items="items"
     >
-      123
+      <router-view />
     </n-nimbus-service-layout>
-    <!-- <div class="section">
-      <router-link to="/n-nimbus-home-layout">
-        home / n-nimbus-home-layout
-      </router-link>
-      <br>
-      <router-link to="/n-nimbus-service-layout">
-        service / n-nimbus-service-layout
-      </router-link>
-      <br>
-      <router-link to="/n-gradient-text">
-        渐变文字 / n-gradient-text
-      </router-link>
-      <br>
-      <router-link to="/n-icon">
-        图标 / n-icon
-      </router-link>
-      <br>
-      <router-link to="/n-checkbox">
-        多选框 / n-checkbox
-      </router-link>
-      <br>
-      <router-link to="/n-button">
-        按钮 / n-button
-      </router-link>
-      <br>
-      <router-link to="/n-switch">
-        开关 / n-switch
-      </router-link><br>
-      <router-link to="/n-table">
-        表格 / n-table
-      </router-link><br>
-      <router-link to="/n-input">
-        输入 / n-input
-      </router-link>
-      <br>
-      <router-link to="/n-select">
-        选择 / n-select
-      </router-link>
-      <br>
-      <router-link to="/n-modal">
-        模态框 / n-modal
-      </router-link>
-      <br>
-      <router-link to="/n-nimbus-form-card">
-        Nimbus 弹出式表单 / n-nimbus-form-card
-      </router-link>
-      <br>
-      <router-link to="/n-message">
-        通知 / $NMessage
-      </router-link>
-      <br>
-      <router-link to="/n-tooltip">
-        帮助 / n-tooltip
-      </router-link>
-      <br>
-      <router-link to="/n-notification">
-        通知 / $NNotification
-      </router-link>
-      <br>
-      <router-link
-        to="/n-nimbus-confirm-card"
-      >
-        Nimbus 确认框 / n-nimbus-confirm-card
-      </router-link>
-      <br>
-      <router-link
-        to="/n-pagination"
-      >
-        分页 / n-pagination
-      </router-link>
-    </div> -->
   </div>
 </template>
 
@@ -86,6 +15,9 @@ export default {
   data () {
     return {
       items: [
+        {
+          name: 'Installation'
+        },
         {
           name: 'Nimbus',
           path: '/',
@@ -114,55 +46,55 @@ export default {
           childItems: [
             {
               name: 'Button',
-              path: '/'
+              path: '/n-button'
             },
             {
               name: 'Checkbox',
-              path: '/'
+              path: '/n-checkbox'
             },
             {
               name: 'Gradient Text',
-              path: '/'
+              path: '/n-gradient-text'
             },
             {
               name: 'Icon',
-              path: '/'
+              path: '/n-icon'
             },
             {
               name: 'Input',
-              path: '/'
+              path: '/n-input'
             },
             {
               name: 'Message',
-              path: '/'
+              path: '/n-message'
             },
             {
               name: 'Modal',
-              path: '/'
+              path: '/n-modal'
             },
             {
               name: 'Notification',
-              path: '/'
+              path: '/n-notification'
             },
             {
               name: 'Pagination',
-              path: '/'
+              path: '/n-pagination'
             },
             {
               name: 'Select',
-              path: '/'
+              path: '/n-select'
             },
             {
               name: 'Switch',
-              path: '/'
+              path: '/n-switch'
             },
             {
               name: 'Table',
-              path: '/'
+              path: '/n-table'
             },
             {
               name: 'Tooltip',
-              path: '/'
+              path: '/n-tooltip'
             }
           ]
         }
@@ -187,9 +119,15 @@ export default {
   border: 1px solid #eee;
   height: auto;
   z-index: 0;
+  border-radius: 6px;
+  padding: 4px;
+  margin-bottom: 18px;
 }
 .CodeMirror-scroll {
   overflow-y: hidden;
   overflow-x: auto;
+}
+.n-nimbus-service-layout__body {
+  padding: 0!important;
 }
 </style>

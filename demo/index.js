@@ -35,7 +35,7 @@ import homeDemo from './components/homeDemo'
 import gradientTextDemo from './components/gradientTextDemo'
 import iconDemo from './components/iconDemo'
 import checkboxDemo from './components/checkboxDemo'
-import ButtonDemo from './components/ButtonDemo'
+import ButtonDemo from './components/buttonDemoX'
 import switchDemo from './components/switchDemo'
 import tableDemo from './components/tableDemo'
 import inputDemo from './components/inputDemo'
@@ -78,24 +78,28 @@ NimbusConfirmCard.install(Vue)
 Pagination.install(Vue)
 
 const routes = [
-  { path: '/', component: demo },
-  { path: '/n-nimbus-service-layout', component: sideMenuDemo },
-  { path: '/n-nimbus-home-layout', component: homeDemo },
-  { path: '/n-gradient-text', component: gradientTextDemo },
-  { path: '/n-icon', component: iconDemo },
-  { path: '/n-checkbox', component: checkboxDemo },
-  { path: '/n-button', component: ButtonDemo },
-  { path: '/n-switch', component: switchDemo },
-  { path: '/n-table', component: tableDemo },
-  { path: '/n-input', component: inputDemo },
-  { path: '/n-select', component: selectDemo },
-  { path: '/n-modal', component: modalDemo },
-  { path: '/n-nimbus-form-card', component: nimbusFormCardDemo },
-  { path: '/n-message', component: messageDemo },
-  { path: '/n-tooltip', component: tooltipDemo },
-  { path: '/n-notification', component: notificationDemo },
-  { path: '/n-nimbus-confirm-card', component: nimbusConfirmCardDemo },
-  { path: '/n-pagination', component: paginationDemo }
+  { path: '/',
+    component: demo,
+    children: [
+      { path: '/n-nimbus-service-layout', component: sideMenuDemo },
+      { path: '/n-nimbus-home-layout', component: homeDemo },
+      { path: '/n-gradient-text', component: gradientTextDemo },
+      { path: '/n-icon', component: iconDemo },
+      { path: '/n-checkbox', component: checkboxDemo },
+      { path: '/n-button', component: ButtonDemo },
+      { path: '/n-switch', component: switchDemo },
+      { path: '/n-table', component: tableDemo },
+      { path: '/n-input', component: inputDemo },
+      { path: '/n-select', component: selectDemo },
+      { path: '/n-modal', component: modalDemo },
+      { path: '/n-nimbus-form-card', component: nimbusFormCardDemo },
+      { path: '/n-message', component: messageDemo },
+      { path: '/n-tooltip', component: tooltipDemo },
+      { path: '/n-notification', component: notificationDemo },
+      { path: '/n-nimbus-confirm-card', component: nimbusConfirmCardDemo },
+      { path: '/n-pagination', component: paginationDemo }
+    ]
+  }
 ]
 
 const router = new VueRouter({
@@ -105,5 +109,3 @@ const router = new VueRouter({
 ;(new Vue({
   router
 })).$mount('#app')
-
-console.log('...')
