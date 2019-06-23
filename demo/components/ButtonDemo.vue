@@ -30,12 +30,16 @@
     <n-button round>
       Cancel
     </n-button>
-    <n-button type="primary">
+    <n-button
+      type="primary"
+      auto-text-color
+    >
       Delete
     </n-button>
     <n-button
       type="primary"
       round
+      auto-text-color
       @click="handleClick"
     >
       handleClick

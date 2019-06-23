@@ -14,7 +14,10 @@
     >
       <n-icon :type="icon" />
     </div>
-    <div class="n-button__content">
+    <div
+      class="n-button__content"
+      :style="style"
+    >
       <slot />
     </div>
   </div>
@@ -48,6 +51,30 @@ export default {
     icon: {
       type: String,
       default: null
+    },
+    autoTextColor: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data () {
+    return {
+      style: {}
+    }
+  },
+  mounted () {
+    if (this.autoTextColor) {
+      let cursor = this.$el
+      while (cursor.parentElement) {
+        cursor = cursor.parentElement
+        const backgroundColor = getComputedStyle(cursor).backgroundColor
+        if (backgroundColor !== 'rgba(0, 0, 0, 0)') {
+          this.style = {
+            color: backgroundColor
+          }
+          break
+        }
+      }
     }
   }
 }

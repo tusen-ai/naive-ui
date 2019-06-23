@@ -62,10 +62,10 @@
   &.is-default {
     color: $default-button-text-color;
     &:hover {
-      background-color: #336F6FFF;
+      background-color: rgba(99, 226, 183, .3);
     }
     &:active {
-      background-color: #366165FF;
+      background-color: rgba(99, 226, 183, .2);
     }
   }
   &.is-primary {
