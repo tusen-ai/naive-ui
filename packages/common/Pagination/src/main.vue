@@ -128,7 +128,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .n-pagination {
   display: inline-flex;
   .n-pagination__item {

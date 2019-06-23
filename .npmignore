@@ -1,2 +1,7 @@
 node_modules
 test/unit/coverage
+build
+demo
+doc
+test
+Dockerfile

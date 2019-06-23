@@ -1,4 +1,5 @@
 node_modules
 dist
 docDist
+doc/dist
 test/unit/coverage

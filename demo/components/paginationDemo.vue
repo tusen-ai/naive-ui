@@ -13,7 +13,10 @@
     <br><br>
     page: {{ page }}
     <br><br>
-    <textarea rows="5">scaffold</textarea>
+    <textarea rows="5"><n-pagination
+  v-model="page"
+  :page-count="100"
+/></textarea>
     <hr>
   </div>
 </template>
