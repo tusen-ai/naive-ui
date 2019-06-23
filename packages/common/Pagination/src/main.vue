@@ -179,8 +179,14 @@ export default {
         }
         .n-pagination-item__fast-backward-icon, .n-pagination-item__fast-forward-icon {
           display: block;
-          i::before {
-            color: #63E2B7;
+          .n-icon {
+            & {
+              display: inline-block;
+              width: 6px;
+            }
+            &::before{
+              color: #63E2B7;
+            }
           }
         }
       }

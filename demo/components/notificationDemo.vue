@@ -1,33 +1,45 @@
 <template>
   <div
     ref="doc"
-    class="doc"
+    class="n-doc"
   >
-    <h1>Notification</h1>
-    <hr>
-    <h2>基本用法</h2>
-    <button @click="emitMessage1">
-      这绚烂新世纪，深情已不受欢迎
-    </button>
-    <button @click="emitMessage2">
-      爱你那么用力，却好像一场闹剧
-    </button>
-    <br><br>
-    <textarea rows="5"><button @click="emitMessage1">
-  这绚烂新世纪，深情已不受欢迎
-</button>
-<button @click="emitMessage2">
-  爱你那么用力，却好像一场闹剧
-</button>
-
+    <div class="n-doc-header">
+      <n-gradient-text :font-size="20">
+        Notification / $nNotify
+      </n-gradient-text>
+    </div>
+    <div class="n-doc-body">
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
+          Basic Usage
+        </div>
+        <div class="n-doc-section__view">
+          <n-button @click="notify1">
+            Wouldn't it be Nice
+          </n-button>
+          <n-button @click="notify2">
+            Satisfaction
+          </n-button>
+        </div>
+        <div class="n-doc-section__source">
+          <textarea>
+<n-button @click="notify1">
+  Wouldn't it be Nice
+</n-button>
+<n-button @click="notify2">
+  Satisfaction
+</n-button>
 <script>
 export default {
   methods: {
-    emitMessage1 () {
-      this.$notify({
-        title: 'Notification',
-        titleMeta: 'From Xingyue Feng',
-        content: 'VTS has been edited by admin',
+    notify1 () {
+      this.$nNotify({
+        title: `Wouldn't it be Nice`,
+        titleMeta: 'From the Beach Boys',
+        content: `Wouldn't it be nice if we were older
+Then we wouldn't have to wait so long
+And wouldn't it be nice to live together
+In the kind of world where we belong`,
         meta: '2019-5-27 15:11',
         action: 'Mark as read',
         avator: null,
@@ -37,10 +49,13 @@ export default {
         }
       })
     },
-    emitMessage2 () {
-      this.$notify({
-        title: 'Notification',
-        content: 'VTS has been edited by admin',
+    notify2 () {
+      this.$nNotify({
+        title: 'Satisfaction',
+        content: `I cant get no satisfaction
+I cant get no satisfaction
+Cause I try and I try and I try and I try
+I cant get no, I cant get no`,
         meta: '2019-5-27 15:11',
         action: 'Mark as read',
         avator: null,
@@ -53,9 +68,10 @@ export default {
   }
 }
 </script>
-
-    </textarea>
-    <hr>
+          </textarea>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -64,11 +80,14 @@ import docCodeEditorMixin from './docCodeEditorMixin'
 export default {
   mixins: [docCodeEditorMixin],
   methods: {
-    emitMessage1 () {
+    notify1 () {
       this.$nNotify({
-        title: 'Notification',
-        titleMeta: 'From Xingyue Feng',
-        content: 'VTS has been edited by admin',
+        title: `Wouldn't it be Nice`,
+        titleMeta: 'From the Beach Boys',
+        content: `Wouldn't it be nice if we were older
+Then we wouldn't have to wait so long
+And wouldn't it be nice to live together
+In the kind of world where we belong`,
         meta: '2019-5-27 15:11',
         action: 'Mark as read',
         avator: null,
@@ -78,10 +97,13 @@ export default {
         }
       })
     },
-    emitMessage2 () {
+    notify2 () {
       this.$nNotify({
-        title: 'Notification',
-        content: 'VTS has been edited by admin',
+        title: 'Satisfaction',
+        content: `I cant get no satisfaction
+I cant get no satisfaction
+Cause I try and I try and I try and I try
+I cant get no, I cant get no`,
         meta: '2019-5-27 15:11',
         action: 'Mark as read',
         avator: null,
@@ -94,15 +116,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="scss">
-.doc {
-  width: 900px;
-  margin: auto;
-  textarea {
-    width: 100%;
-    min-height: 3em;
-  }
-}
-
-</style>

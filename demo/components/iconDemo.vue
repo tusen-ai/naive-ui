@@ -1,40 +1,77 @@
 <template>
-  <div class="doc">
-    <h1>n-icon</h1>
-    <hr>
-    <h2>基本用法</h2>
-    <n-icon type="md-search" />
-    <br>
-    <textarea rows="5"><n-icon type="md-search" /></textarea>
-    <hr>
-    <h2>自定义属性</h2>
-    <n-icon
-      type="md-search"
-      size="40"
-      color="#ff0000"
-    />
-    <br>
-    <textarea rows="5"><n-icon type="md-search" size="40" color="#ff0000"></n-icon></textarea>
-    <hr>
-    <h2>备注</h2>
-    <p>type 都有啥可参考<a href="https://www.iviewui.com/components/icon">icon type</a></p>
+  <div
+    ref="doc"
+    class="n-doc"
+  >
+    <div class="n-doc-header">
+      <n-gradient-text :font-size="20">
+        Icon / n-icon
+      </n-gradient-text>
+    </div>
+    <div class="n-doc-body">
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
+          Basic Usage
+        </div>
+        <div class="n-doc-section__view">
+          <n-icon
+            type="ios-contacts"
+            size="40"
+          />
+          <n-icon
+            type="md-contacts"
+            size="40"
+          />
+          <n-icon
+            type="md-cash"
+            size="40"
+            color="#000000"
+          />
+        </div>
+        <div class="n-doc-section__source">
+          <textarea>
+/**
+ * If you don't specify its size, it will inherit font-size from its parent element
+ */
+<n-icon
+  type="ios-contacts"
+  size="40"
+/>
+<n-icon
+  type="md-contacts"
+  size="40"
+/>
+<n-icon
+  type="md-cash"
+  size="40"
+  color="#000000"
+/>
+          </textarea>
+        </div>
+      </div>
+    </div>
+    <div class="n-doc-section">
+      <div class="n-doc-section__header">
+        Note
+      </div>
+      <textarea>
+Type of Icon: See "https://ionicons.com/" Ionicons.
+If you use ios icon, type will be ios-***.
+If you use material icon, type will be md-***</textarea>
+    </div>
   </div>
 </template>
 
 <script>
+import docCodeEditorMixin from './docCodeEditorMixin'
 export default {
+  mixins: [docCodeEditorMixin],
+  data () {
+    return {
 
-}
-</script>
-
-<style scoped lang="scss">
-.doc {
-  width: 900px;
-  margin: auto;
-  textarea {
-    width: 100%;
-    min-height: 3em;
+    }
+  },
+  methods: {
   }
 }
-
-</style>
+</script>

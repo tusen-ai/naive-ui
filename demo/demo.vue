@@ -114,13 +114,13 @@ export default {
 }
 </style>
 
-<style>
+<style lang="scss">
 .CodeMirror {
-  border: 1px solid #eee;
+  border: 2px solid #5C657EFF;
   height: auto;
   z-index: 0;
-  border-radius: 6px;
-  padding: 4px;
+  border-radius: 8px;
+  padding: 8px;
   margin-bottom: 18px;
 }
 .CodeMirror-scroll {
@@ -129,5 +129,38 @@ export default {
 }
 .n-nimbus-service-layout__body {
   padding: 0!important;
+}
+
+.n-doc {
+  width: 780px;
+  margin: 0 auto;
+  .n-doc-header {
+    display: flex;
+    height: 60px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    align-items: center;
+  }
+  .n-doc-body {
+    padding-top: 14px;
+  }
+  .n-doc-section {
+    .n-doc-section__header {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+    .n-doc-section__view {
+      background: #5C657EFF;
+      padding: 18px;
+      border-radius: 8px;
+      justify-content: center;
+      display: flex;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .n-doc-section__source {
+
+    }
+  }
 }
 </style>

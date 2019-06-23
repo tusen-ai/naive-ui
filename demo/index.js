@@ -35,7 +35,7 @@ import homeDemo from './components/homeDemo'
 import gradientTextDemo from './components/gradientTextDemo'
 import iconDemo from './components/iconDemo'
 import checkboxDemo from './components/checkboxDemo'
-import ButtonDemo from './components/buttonDemoX'
+import buttonDemo from './components/buttonDemo'
 import switchDemo from './components/switchDemo'
 import tableDemo from './components/tableDemo'
 import inputDemo from './components/inputDemo'
@@ -86,7 +86,7 @@ const routes = [
       { path: '/n-gradient-text', component: gradientTextDemo },
       { path: '/n-icon', component: iconDemo },
       { path: '/n-checkbox', component: checkboxDemo },
-      { path: '/n-button', component: ButtonDemo },
+      { path: '/n-button', component: buttonDemo },
       { path: '/n-switch', component: switchDemo },
       { path: '/n-table', component: tableDemo },
       { path: '/n-input', component: inputDemo },

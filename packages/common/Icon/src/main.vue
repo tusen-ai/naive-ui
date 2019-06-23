@@ -1,5 +1,6 @@
 <template>
   <i
+    class="n-icon"
     :class="classes"
     :style="styles"
     v-on="$listeners"
@@ -40,7 +41,6 @@ export default {
       let style = {}
       if (this.size) {
         style['font-size'] = `${this.size}px`
-        style['line-height'] = `${this.size}px`
       }
       if (this.color) {
         style.color = this.color

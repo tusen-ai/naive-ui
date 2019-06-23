@@ -1,28 +1,48 @@
 <template>
   <div
     ref="doc"
-    class="doc"
+    class="n-doc"
   >
-    <h1>Message</h1>
-    <hr>
-    <h2>基本用法</h2>
-    <button @click="emitMessage">
-      爱你那么用力，却好像一场闹剧
-    </button>
-    <br><br>
-    <textarea rows="5"><button @click="emitMessage">
-  爱你那么用力，却好像一场闹剧
-</button>
-
+    <div class="n-doc-header">
+      <n-gradient-text :font-size="20">
+        Message / $NMessage
+      </n-gradient-text>
+    </div>
+    <div class="n-doc-body">
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
+          Basic Usage
+        </div>
+        <div class="n-doc-section__view">
+          <n-button @click="emitMessage1">
+            Like a Rolling Stone
+          </n-button>
+          <n-button @click="emitMessage2">
+            Blowing in the Wind
+          </n-button>
+        </div>
+        <div class="n-doc-section__source">
+          <textarea><n-button @click="emitMessage1">
+  Like a Rolling Stone
+</n-button>
+<n-button @click="emitMessage2">
+  Blowing in the Wind
+</n-button>
 <script>
-emitMessage () {
-  this.$NMessage.error('Oops, here is a error')
-  this.$NMessage.success('Cloned Successfully')
+export default {
+  methods: {
+    emitMessage1 () {
+      this.$NMessage.error('Once upon a time you dressed so fine')
+    },
+    emitMessage2 () {
+      this.$NMessage.success('How many roads must a man walk down')
+    }
+  }
 }
-</script>
-
-</textarea>
-    <hr>
+</script></textarea>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -30,23 +50,18 @@ emitMessage () {
 import docCodeEditorMixin from './docCodeEditorMixin'
 export default {
   mixins: [docCodeEditorMixin],
+  data () {
+    return {
+
+    }
+  },
   methods: {
-    emitMessage () {
-      this.$NMessage.error('Oops, here is a error')
-      this.$NMessage.success('Cloned Successfully')
+    emitMessage1 () {
+      this.$NMessage.error('Once upon a time you dressed so fine')
+    },
+    emitMessage2 () {
+      this.$NMessage.success('How many roads must a man walk down')
     }
   }
 }
 </script>
-
-<style scoped lang="scss">
-.doc {
-  width: 900px;
-  margin: auto;
-  textarea {
-    width: 100%;
-    min-height: 3em;
-  }
-}
-
-</style>

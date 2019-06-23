@@ -1,17 +1,50 @@
 <template>
-  <div class="doc">
-    <h1>多选框</h1>
-    <hr>
-    <h2>基本用法</h2>
-    <n-checkbox v-model="checked">
-      Nimbus
-    </n-checkbox><br>
-    <n-checkbox v-model="checked" /><br>{{ String(checked) }}
-    <br>
-    <textarea rows="5"><n-checkbox v-model="checked">
-  Nimbus
-</n-checkbox></textarea>
-    <hr>
+  <div
+    ref="doc"
+    class="n-doc"
+  >
+    <div class="n-doc-header">
+      <n-gradient-text :font-size="20">
+        Checkbox / n-checkbox
+      </n-gradient-text>
+    </div>
+    <div class="n-doc-body">
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
+          Basic Usage
+        </div>
+        <div class="n-doc-section__view">
+          <n-checkbox
+            v-model="isChecked"
+            style="width: 120px;"
+          >
+            checkbox
+          </n-checkbox>
+          <n-checkbox
+            v-model="isChecked"
+            style="width: 120px;"
+          />
+          <div style="width: 120px;">
+            isChecked: {{ isChecked }}
+          </div>
+        </div>
+        <div class="n-doc-section__source">
+          <textarea v-pre><n-checkbox
+  v-model="isChecked"
+  style="width: 120px;"
+>
+  checkbox
+</n-checkbox>
+<n-checkbox
+  v-model="isChecked"
+  style="width: 120px;"
+/>
+<div style="width: 120px;">
+  isChecked: {{ isChecked }}
+</div></textarea>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -19,24 +52,12 @@
 import docCodeEditorMixin from './docCodeEditorMixin'
 export default {
   mixins: [docCodeEditorMixin],
-  props: {},
   data () {
     return {
-      checked: false
+      isChecked: false
     }
+  },
+  methods: {
   }
 }
 </script>
-
-<style scoped lang="scss">
-.doc {
-  width: 900px;
-  margin: auto;
-  textarea {
-    width: 100%;
-    min-height: 3em;
-  }
-  background: #5C647B
-}
-
-</style>

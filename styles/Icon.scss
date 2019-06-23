@@ -1,1 +1,15 @@
 @import './fonts/ionicons.scss';
+
+.n-icon {
+  height: 1em;
+  width: 1em;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  &::before {
+    width: 1em;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}

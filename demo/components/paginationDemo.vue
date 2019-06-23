@@ -1,23 +1,45 @@
 <template>
   <div
     ref="doc"
-    class="doc"
+    class="n-doc"
   >
-    <h1>分页 / n-pagination</h1>
-    <hr>
-    <h2>基本用法</h2>
-    <n-pagination
-      v-model="page"
-      :page-count="100"
-    />
-    <br><br>
-    page: {{ page }}
-    <br><br>
-    <textarea rows="5"><n-pagination
-  v-model="page"
+    <div class="n-doc-header">
+      <n-gradient-text :font-size="20">
+        Pagination / n-pagination
+      </n-gradient-text>
+    </div>
+    <div class="n-doc-body">
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
+          Basic Usage
+        </div>
+        <div
+          class="n-doc-section__view"
+          style="background-color: #1f263e;"
+        >
+          <n-pagination
+            v-model="currentPage"
+            :page-count="100"
+          />
+        </div>
+        <div class="n-doc-section__source">
+          <textarea><n-pagination
+  v-model="currentPage"
   :page-count="100"
-/></textarea>
-    <hr>
+/>
+<script>
+export default {
+  data () {
+    return {
+      currentPage: 1
+    }
+  }
+}
+</script>
+</textarea>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -27,19 +49,10 @@ export default {
   mixins: [docCodeEditorMixin],
   data () {
     return {
-      page: 1
+      currentPage: 1
     }
+  },
+  methods: {
   }
 }
 </script>
-
-<style scoped lang="scss">
-.doc {
-  width: 900px;
-  margin: auto;
-  textarea {
-    width: 100%;
-    min-height: 3em;
-  }
-}
-</style>

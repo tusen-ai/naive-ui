@@ -1,34 +1,57 @@
 <template>
-  <div class="doc">
-    <h1>开关 / n-switch</h1>
-    <hr>
-    <h2>基本用法</h2>
-    <n-switch v-model="active" /><br>
-    active: {{ active }}
-    <br>
-    <textarea rows="5"><n-switch v-model="active" /><br></textarea>
-    <hr>
-  </div>
-</template>
-
+  <div
+    ref="doc"
+    class="n-doc"
+  >
+    <div class="n-doc-header">
+      <n-gradient-text :font-size="20">
+        scaffold
+      </n-gradient-text>
+    </div>
+    <div class="n-doc-body">
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
+          Basic Usage
+        </div>
+        <div class="n-doc-section__view">
+          <n-switch v-model="isActive" />
+          <div style="margin-left: 14px;">
+            active: {{ isActive }}
+          </div>
+        </div>
+        <div class="n-doc-section__source">
+          <textarea v-pre>
+<n-switch v-model="isActive" />
+<div style="margin-left: 14px;">
+  active: {{ isActive }}
+</div>
 <script>
 export default {
   data () {
     return {
-      active: false
+      isActive: false
     }
+  },
+  methods: {
+  }
+}
+</script></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import docCodeEditorMixin from './docCodeEditorMixin'
+export default {
+  mixins: [docCodeEditorMixin],
+  data () {
+    return {
+      isActive: false
+    }
+  },
+  methods: {
   }
 }
 </script>
-
-<style scoped lang="scss">
-.doc {
-  width: 900px;
-  margin: auto;
-  textarea {
-    width: 100%;
-    min-height: 3em;
-  }
-}
-
-</style>

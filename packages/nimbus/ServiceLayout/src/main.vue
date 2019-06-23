@@ -170,6 +170,28 @@ export default {
       transition: left .3s cubic-bezier(0.4, 0.0, 0.2, 1);
       overflow: auto;
     }
+    & {
+        /* width */
+        &::-webkit-scrollbar {
+          width: 5px;
+        }
+
+        /* Track */
+        &::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+          background: rgba(255,255,255,0.2);
+          border-radius: 2.5px;
+        }
+
+        /* Handle on hover */
+        &::-webkit-scrollbar-thumb:hover {
+          background: rgba(255,255,255,0.3);
+        }
+      }
     &.n-nimbus-service-layout__body--active {
       left: 272px;
     }
