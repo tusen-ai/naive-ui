@@ -1,76 +1,81 @@
 <template>
   <div class="n-nimbus-service-layout">
     <div
-      class="body"
-      :class="{ 'is-collapsed': isCollapsed, active: !isCollapsed }"
+      class="n-nimbus-service-layout__body"
+      :class="{ 'n-nimbus-service-layout__body--collapsed': isCollapsed, 'n-nimbus-service-layout__body--active': !isCollapsed }"
     >
       <slot />
     </div>
     <div
-      class="menu"
-      :class="{ 'is-collapsed': isCollapsed, active: !isCollapsed }"
+      class="n-nimbus-service-layout__drawer"
+      :class="{ 'n-nimbus-service-layout__drawer--collapsed': isCollapsed, 'n-nimbus-service-layout__drawer--active': !isCollapsed }"
     >
-      <div class="item-wrapper">
-        <div class="header">
-          <div class="content">
-            <div class="icon">
+      <div class="n-nimbus-service-layout-drawer__item-wrapper">
+        <div class="n-nimbus-service-layout-drawer__header">
+          <div class="n-nimbus-service-layout-drawer-header__content">
+            <div class="n-nimbus-service-layout-drawer-header__icon">
               <n-icon
-                type="md-settings"
+                :type="serviceIcon"
                 :size="22"
               />
             </div>
             {{ name }}
           </div>
         </div>
-        <div class="n-nimbus-service-layout-menu__divider" />
+        <div class="n-nimbus-service-layout-drawer__divider" />
         <div
           v-for="item in itemsWithCollapseStatus"
           :key="item.name"
         >
           <div
             v-if="!item.childItems"
-            class="item"
-            :class="{ active: activeItemName === item.name }"
+            class="n-nimbus-service-layout-drawer__item"
+            :class="{ 'n-nimbus-service-layout-drawer__item--active': activeItemName === item.name }"
             @click="makeActive(item)"
           >
-            <div class="item-icon" />
+            <div class="n-nimbus-service-layout-drawer-item__icon" />
             <span>{{ item.name }}</span>
           </div>
           <div
             v-else
           >
             <div
-              class="item is-group-header"
+              class="n-nimbus-service-layout-drawer__item n-nimbus-service-layout-drawer__item--is-group-header"
               :class="{
-                'group-item-is-choosed': !!(1 + item.childItems.findIndex(item => item.name === activeItemName)),
-                'is-collapsed': item.isCollapsed
+                'n-nimbus-service-layout-drawer__item--group-item-is-choosed': !!(1 + item.childItems.findIndex(item => item.name === activeItemName)),
+                'n-nimbus-service-layout-drawer__item--collapsed': item.isCollapsed
               }"
               @click="toggleGroupHeaderCollapse(item.name)"
             >
-              <div class="item-icon" />
+              <div class="n-nimbus-service-layout-drawer-item__icon" />
               <span>{{ item.name }}</span>
             </div>
             <div
-              class="group-items"
+              :ref="item.name"
+              class="n-nimbus-service-layout-drawer__group-items"
               :class="{
-                'is-collapsed': item.isCollapsed
+                'n-nimbus-service-layout-drawer__group-items--collapsed': item.isCollapsed
               }"
             >
               <div
-                v-for="childItem in item.childItems"
-                :key="childItem.name"
-                class="item is-group-item"
-                :class="{ active: activeItemName === childItem.name }"
-                @click="makeActive(childItem)"
+                class="n-nimbus-service-layout-drawer-group-items__inner-wrapper"
               >
-                <span>{{ childItem.name }}</span>
+                <div
+                  v-for="childItem in item.childItems"
+                  :key="childItem.name"
+                  class="n-nimbus-service-layout-drawer__item n-nimbus-service-layout-drawer__item--is-group-item"
+                  :class="{ 'n-nimbus-service-layout-drawer__item--active': activeItemName === childItem.name }"
+                  @click="makeActive(childItem)"
+                >
+                  <span>{{ childItem.name }}</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div
-        class="toggle-button"
+        class="n-nimbus-service-layout-drawer__toggle-button"
         @click="toggle"
       >
         <img src="./toggleButton.svg">
@@ -83,6 +88,10 @@
 export default {
   name: 'NNimbusServiceLayout',
   props: {
+    serviceIcon: {
+      type: String,
+      default: 'md-settings'
+    },
     name: {
       type: String,
       required: true
@@ -98,7 +107,7 @@ export default {
       activeItemName: 'Service Management',
       itemsWithCollapseStatus: this.items.map(item => ({
         ...item,
-        isCollapsed: true
+        isCollapsed: false
       }))
     }
   },
@@ -114,15 +123,31 @@ export default {
     },
     toggleGroupHeaderCollapse (headerName) {
       const headerIndex = this.itemsWithCollapseStatus.findIndex(item => item.name === headerName && item.childItems)
-      if (headerIndex + 1) {
-        this.itemsWithCollapseStatus[headerIndex].isCollapsed = !this.itemsWithCollapseStatus[headerIndex].isCollapsed
+      const groupItems = this.$refs[headerName][0]
+      if (headerIndex + 1) { // is collapsed
+        const groupItemsInnerWrapper = groupItems.firstElementChild
+        const maxHeight = groupItemsInnerWrapper.getBoundingClientRect().height
+        const currentCollapseStatus = this.itemsWithCollapseStatus[headerIndex].isCollapsed
+        if (currentCollapseStatus) {
+          this.$nextTick().then(() => {
+            groupItems.style.maxHeight = `${maxHeight}px`
+          })
+        } else {
+          this.$nextTick().then(() => {
+            groupItems.style.maxHeight = `${maxHeight}px`
+            groupItems.getBoundingClientRect()
+          }).then(() => {
+            groupItems.style.maxHeight = null
+          })
+        }
+        this.itemsWithCollapseStatus[headerIndex].isCollapsed = !currentCollapseStatus
       }
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .n-nimbus-service-layout{
   & {
     background: #171D33;
@@ -133,7 +158,7 @@ export default {
     right: 0;
     z-index: 0;
   }
-  .body {
+  .n-nimbus-service-layout__body {
     & {
       padding: 21px 48px;
       position: absolute;
@@ -144,15 +169,14 @@ export default {
       transition: left .3s cubic-bezier(0.4, 0.0, 0.2, 1);
       overflow: auto;
     }
-    &.active {
+    &.n-nimbus-service-layout__body--active {
       left: 272px;
     }
-    &.is-collapsed {
+    &.n-nimbus-service-layout__body--collapsed {
       left: 48px;
     }
   }
-
-  .menu {
+  .n-nimbus-service-layout__drawer {
     & {
       display: inline-block;
       background-color: #1f263e;
@@ -163,71 +187,28 @@ export default {
       left: 0;
       box-shadow: 0 2px 10px 1px rgba(0, 0, 0, .2);
     }
-    .n-nimbus-service-layout-menu__divider {
-      margin: 0px 25px;
-      border-bottom: 1px solid rgba(255, 255, 255, .08);
-    }
-    &.active {
+    &.n-nimbus-service-layout__drawer--active {
       transform: translateX(0);
       transition: transform .3s cubic-bezier(0.4, 0.0, 0.2, 1);
-      .toggle-button {
-        transition: transform .3s cubic-bezier(0.4, 0.0, 0.2, 1);
+      .n-nimbus-service-layout-drawer__toggle-button {
         transform: translateX(50%) translateY(-50%) rotate(0deg);
       }
-    }
-    &.is-collapsed {
-      transform: translateX(-224px);
-      transition: transform .3s cubic-bezier(0.4, 0.0, 0.2, 1);
-      .toggle-button {
-        transition: transform .3s cubic-bezier(0.4, 0.0, 0.2, 1);
-        transform: translateX(50%) translateY(-50%) rotate(180deg);
-      }
-      .item-wrapper {
-        .header {
-          opacity: 0;
-        }
-        .item.active {
-          span {
-            opacity: .4;
-          }
-          &::before {
-            content: "";
-            opacity: 0;
-          }
-          &:hover::before {
-            content: "";
-            opacity: 0;
-          }
-        }
-        .item.is-group-header {
-          &::after {
-            opacity: 0;
-          }
-          &.is-collapsed::after {
-            opacity: 0;
-          }
-        }
-      }
-    }
-    .header {
-      transition: opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-      position: relative;
-      color: #E9E9EC;
-      font-weight: 700;
-      padding-top: 21px;
-      padding-bottom: 21px;
-      padding-left: 48px;
-      font-size: 16px;
-      .content {
+      .n-nimbus-service-layout-drawer__item-wrapper {
         opacity: 1;
       }
-      .icon {
-        position: absolute;
-        left: 22px;
-        opacity: .4;
+    }
+    &.n-nimbus-service-layout__drawer--collapsed {
+      transform: translateX(-224px);
+      transition: transform .3s cubic-bezier(0.4, 0.0, 0.2, 1);
+      .n-nimbus-service-layout-drawer__toggle-button {
+        transform: translateX(50%) translateY(-50%) rotate(180deg);
+      }
+      .n-nimbus-service-layout-drawer__item-wrapper {
+        opacity: 0;
       }
     }
-    .toggle-button {
+    .n-nimbus-service-layout-drawer__toggle-button {
+      transition: transform .3s cubic-bezier(0.4, 0.0, 0.2, 1);
       cursor: pointer;
       width: 36px;
       height: 36px;
@@ -236,14 +217,60 @@ export default {
       top: 50%;
       right: 0;
     }
-    .item-wrapper {
+    .n-nimbus-service-layout-drawer__divider {
+      margin: 0px 25px;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+    }
+    .n-nimbus-service-layout-drawer__item-wrapper {
       position: absolute;
       top: 0;
       bottom: 0;
       left: 0;
       right: 0;
       overflow-y: auto;
-      .item {
+      transition: opacity .3s cubic-bezier(0.4, 0.0, 0.2, 1);
+      & {
+        /* width */
+        &::-webkit-scrollbar {
+          width: 5px;
+        }
+
+        /* Track */
+        &::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+          background: rgba(255,255,255,0.2);
+          border-radius: 2.5px;
+        }
+
+        /* Handle on hover */
+        &::-webkit-scrollbar-thumb:hover {
+          background: rgba(255,255,255,0.3);
+        }
+      }
+      .n-nimbus-service-layout-drawer__header {
+        position: relative;
+        font-weight: 700;
+        padding-top: 21px;
+        padding-bottom: 21px;
+        padding-left: 48px;
+        font-size: 16px;
+        color: #E9E9EC;
+        .n-nimbus-service-layout-drawer-header__content {
+          opacity: 1;
+        }
+        .n-nimbus-service-layout-drawer-header__icon {
+          position: absolute;
+          left: 22px;
+          i::before {
+            color: #626778FF;
+          }
+        }
+      }
+      .n-nimbus-service-layout-drawer__item {
         cursor: pointer;
         position: relative;
         padding-top: 16px;
@@ -251,7 +278,7 @@ export default {
         padding-left: 48px;
         font-size: 14px;
         color: #E9E9EC;
-        .item-icon {
+        .n-nimbus-service-layout-drawer-item__icon {
           &::before {
             content: '';
             width: 0;
@@ -261,7 +288,7 @@ export default {
             border-color:#78CD68 transparent transparent transparent;
             border-width: 7px;
             transform: rotate(-45deg);
-            top: 24px;
+            top: 23px;
             left: 32px;
           }
         }
@@ -269,7 +296,7 @@ export default {
           transition: opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
           opacity: 1;
         }
-        &.active span{
+        &.n-nimbus-service-layout-drawer__item--active span{
           opacity: 1;
         }
         &:hover span {
@@ -287,71 +314,44 @@ export default {
           transition: opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
           opacity: 0;
         }
-        &.active::before {
+        &.n-nimbus-service-layout-drawer__item--active::before {
           opacity: .9;
         }
-        &.is-group-header {
-          &::after {
+        &.n-nimbus-service-layout-drawer__item--is-group-header {
+          &::after { // down arrow
             content: '';
             height: 6px;
             width: 6px;
             border-left: 2px solid #63E2B7;
             border-top: 2px solid #63E2B7;
             position: absolute;
-            right: 24px;
+            left: 240px;
             top: calc(50% - 1px);
             transform: rotate(45deg);
             transform-origin: 25% 25%;
-            opacity: 1;
             transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
           }
-          &.is-collapsed::after {
-            transform: rotate(225deg) ;
-            opacity: 1;
-          }
-          &:hover span {
-            // transition: opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-            // background-clip: text;
-            // -webkit-background-clip: text;
-            // transform-origin: 50% 50%;
-            // color: transparent;
-            opacity: 1;
-          }
-          span {
-            transition: opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), color 0.3s cubic-bezier(.6, 0.2, 0.4, 1);
-            background: linear-gradient(14deg, rgba(120,205,104,1) 0%, rgba(20,166,165,1) 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: #E9E9EC;
-            opacity: 1;
-          }
-        }
-        &.is-group-item {
-          padding-left: 64px;
-          span {
-            opacity: .4;
-          }
-          &.active {
+          &.n-nimbus-service-layout-drawer__item--group-item-is-choosed {
             span {
-              opacity: 1;
+              color: #63E2B7;
             }
           }
-        }
-        &.is-group-header.group-item-is-choosed {
+          &.n-nimbus-service-layout-drawer__item--collapsed::after {
+            transform: rotate(225deg) ;
+          }
           span {
-            transition: opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            opacity: 1;
+            transition: color 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            color: #E9E9EC;
           }
         }
+        &.n-nimbus-service-layout-drawer__item--is-group-item {
+          padding-left: 64px;
+        }
       }
-      .group-items {
+      .n-nimbus-service-layout-drawer__group-items {
         overflow: hidden;
-        max-height: 600px;
         transition: max-height .45s cubic-bezier(0.4, 0.0, 0.2, 1);
-        &.is-collapsed {
+        &.n-nimbus-service-layout-drawer__group-items--collapsed {
           max-height: 0;
         }
       }

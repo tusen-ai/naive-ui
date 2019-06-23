@@ -1,6 +1,13 @@
 <template>
   <div class="demo">
-    <div class="section">
+    <n-nimbus-service-layout
+      service-icon="md-contacts"
+      name="NAIVE UI"
+      :items="items"
+    >
+      123
+    </n-nimbus-service-layout>
+    <!-- <div class="section">
       <router-link to="/n-nimbus-home-layout">
         home / n-nimbus-home-layout
       </router-link>
@@ -70,22 +77,108 @@
       >
         分页 / n-pagination
       </router-link>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
+      items: [
+        {
+          name: 'Nimbus',
+          path: '/',
+          childItems: [
+            {
+              name: 'Nimbus Service Layout',
+              path: '/'
+            },
+            {
+              name: 'Nimbus Home Layout',
+              path: '/'
+            },
+            {
+              name: 'Nimbus Form Card',
+              path: '/'
+            },
+            {
+              name: 'Nimbus Confirm Card',
+              path: '/'
+            }
+          ]
+        },
+        {
+          name: 'Common',
+          path: '/',
+          childItems: [
+            {
+              name: 'Button',
+              path: '/'
+            },
+            {
+              name: 'Checkbox',
+              path: '/'
+            },
+            {
+              name: 'Gradient Text',
+              path: '/'
+            },
+            {
+              name: 'Icon',
+              path: '/'
+            },
+            {
+              name: 'Input',
+              path: '/'
+            },
+            {
+              name: 'Message',
+              path: '/'
+            },
+            {
+              name: 'Modal',
+              path: '/'
+            },
+            {
+              name: 'Notification',
+              path: '/'
+            },
+            {
+              name: 'Pagination',
+              path: '/'
+            },
+            {
+              name: 'Select',
+              path: '/'
+            },
+            {
+              name: 'Switch',
+              path: '/'
+            },
+            {
+              name: 'Table',
+              path: '/'
+            },
+            {
+              name: 'Tooltip',
+              path: '/'
+            }
+          ]
+        }
+      ]
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .demo {
-  width: 1080px;
-  height: 100vh;
-  margin: auto;
-  display: flex;
-  align-items: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
 </style>
 
