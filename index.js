@@ -15,6 +15,7 @@ import Modal from './packages/common/Modal'
 import Input from './packages/common/Input'
 import Message from './packages/common/Message'
 import Notification from './packages/common/Notification'
+import Pagination from './packages/common/Pagination'
 
 import ServiceCard from './packages/nimbus/ServiceCard'
 import HomeLayout from './packages/nimbus/HomeLayout'
@@ -47,6 +48,7 @@ function installUiToVue (Vue) {
   Message.install(Vue)
   Notification.install(Vue)
   NimbusConfirmCard.install(Vue)
+  Pagination.install(Vue)
 }
 
 export default installUiToVue
