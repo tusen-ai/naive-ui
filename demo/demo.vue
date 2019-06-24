@@ -120,15 +120,15 @@ export default {
 <style lang="scss">
 .CodeMirror {
   border: 2px solid #5C657EFF;
-  height: auto;
+  height: auto!important;
   z-index: 0;
   border-radius: 8px;
   padding: 8px;
   margin-bottom: 18px;
 }
 .CodeMirror-scroll {
-  overflow-y: hidden;
-  overflow-x: auto;
+  overflow-y: hidden!important;
+  overflow-x: auto!important;
 }
 .n-doc {
   width: 780px;
