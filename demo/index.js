@@ -35,7 +35,7 @@ import homeDemo from './components/homeDemo'
 import gradientTextDemo from './components/gradientTextDemo'
 import iconDemo from './components/iconDemo'
 import checkboxDemo from './components/checkboxDemo'
-import buttonDemo from './components/buttonDemo'
+import buttonDemo from './components/ButtonDemo'
 import switchDemo from './components/switchDemo'
 import tableDemo from './components/tableDemo'
 import inputDemo from './components/inputDemo'
@@ -79,7 +79,7 @@ NimbusConfirmCard.install(Vue)
 Pagination.install(Vue)
 
 const routes = [
-  { path: '/',
+  { path: '/start',
     component: demo,
     children: [
       { path: '/start', component: startPage },
@@ -103,7 +103,7 @@ const routes = [
     ]
   },
   {
-    path: '*',
+    path: '/*',
     redirect: '/start'
   }
 ]
