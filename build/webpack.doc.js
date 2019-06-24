@@ -74,7 +74,7 @@ const webpackConfig = {
         }
       }
     }),
-    new ExtractTextPlugin('style.css')
+    new ExtractTextPlugin('[name].[hash:7].css')
   ]
 }
 
