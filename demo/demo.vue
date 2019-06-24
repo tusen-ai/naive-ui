@@ -3,6 +3,7 @@
     <n-nimbus-service-layout
       service-icon="md-contacts"
       name="NAIVE UI (0.1.49)"
+      :padding-body="false"
       :items="items"
     >
       <router-view />
@@ -16,27 +17,29 @@ export default {
     return {
       items: [
         {
-          name: 'Installation'
+          name: 'Start',
+          path: '/start'
         },
         {
           name: 'Nimbus',
           path: '/',
           childItems: [
+
             {
               name: 'Nimbus Service Layout',
-              path: '/'
+              path: '/n-nimbus-service-layout'
             },
-            {
-              name: 'Nimbus Home Layout',
-              path: '/'
-            },
+            // {
+            //   name: 'Nimbus Home Layout',
+            //   path: '/n-nimbus-home-layout'
+            // },
             {
               name: 'Nimbus Form Card',
-              path: '/'
+              path: '/n-nimbus-form-card'
             },
             {
               name: 'Nimbus Confirm Card',
-              path: '/'
+              path: '/n-nimbus-confirm-card'
             }
           ]
         },
@@ -127,10 +130,6 @@ export default {
   overflow-y: hidden;
   overflow-x: auto;
 }
-.n-nimbus-service-layout__body {
-  padding: 0!important;
-}
-
 .n-doc {
   width: 780px;
   margin: 0 auto;

@@ -3,7 +3,7 @@
     <div><slot name="header" /></div>
     <div
       class="n-nimbus-service-layout__body"
-      :class="{ 'n-nimbus-service-layout__body--collapsed': isCollapsed, 'n-nimbus-service-layout__body--active': !isCollapsed }"
+      :class="{ 'n-nimbus-service-layout__body--collapsed': isCollapsed, 'n-nimbus-service-layout__body--active': !isCollapsed, 'n-nimbus-service-layout__body--padded': paddingBody }"
     >
       <slot />
     </div>
@@ -100,6 +100,10 @@ export default {
     items: {
       type: Array,
       required: true
+    },
+    paddingBody: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -110,6 +114,23 @@ export default {
         ...item,
         isCollapsed: false
       }))
+    }
+  },
+  mounted () {
+    const path = this.$route.path
+    for (const item of this.items) {
+      if (item.path === path) {
+        this.activeItemName = item.name
+        return
+      }
+      if (item.childItems) {
+        for (const childItem of item.childItems) {
+          if (childItem.path === path) {
+            this.activeItemName = childItem.name
+            return
+          }
+        }
+      }
     }
   },
   methods: {
@@ -161,7 +182,6 @@ export default {
   }
   .n-nimbus-service-layout__body {
     & {
-      padding: 21px 48px;
       position: absolute;
       left: 272px;
       right: 0px;
@@ -197,6 +217,9 @@ export default {
     }
     &.n-nimbus-service-layout__body--collapsed {
       left: 48px;
+    }
+    &.n-nimbus-service-layout__body--padded {
+      padding: 21px 48px;
     }
   }
   .n-nimbus-service-layout__drawer {

@@ -1,146 +1,230 @@
 <template>
   <div
-    class="doc"
+    ref="doc"
+    class="n-doc"
   >
-    <h1>输入 / n-input</h1>
-    <hr>
-    <h2>基本用法</h2>
-    <n-input
-      v-model="value"
-      type="input"
-      size="small"
-      round
-      icon="search"
-    />
-    <br>
-    <n-input
-      v-model="value"
-      type="input"
-    />
-    <br>
-    <n-input
-      v-model="value"
-      size="large"
-      type="input"
-      round
-    />
-    {{ value }}
-    <br>
-    <textarea ref="ta1"><n-input
+    <div class="n-doc-header">
+      <n-gradient-text :font-size="20">
+        Input / n-input
+      </n-gradient-text>
+    </div>
+    <div class="n-doc-body">
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
+          Basic Usage
+        </div>
+        <div class="n-doc-section__view">
+          <n-input
+            v-model="value"
+            type="input"
+            size="small"
+          />
+          <br>
+          <n-input
+            v-model="value"
+            type="input"
+          />
+          <br>
+          value: {{ value }}
+        </div>
+        <div class="n-doc-section__source">
+          <textarea v-pre>
+<n-input
+  v-model="value"
+  type="input"
+  size="small"
+/>
+<n-input
+  v-model="value"
+  type="input"
+/>
+value: {{ value }}
+
+<script>
+export default {
+  data () {
+    return {
+      value: null
+    }
+  }
+}
+</script></textarea>
+        </div>
+      </div>
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
+          Icon
+        </div>
+        <div class="n-doc-section__view">
+          <n-input
+            v-model="value"
+            type="input"
+            size="small"
+            icon="ios-search"
+          />
+          <br>
+          value: {{ value }}
+        </div>
+        <div class="n-doc-section__source">
+          <textarea v-pre>
+<n-input
+  v-model="value"
+  type="input"
+  size="small"
+  icon="ios-search"
+/>
+value: {{ value }}
+
+<script>
+export default {
+  data () {
+    return {
+      value: null
+    }
+  }
+}
+</script></textarea>
+        </div>
+      </div>
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
+          Round
+        </div>
+        <div class="n-doc-section__view">
+          <n-input
+            v-model="value"
+            type="input"
+            size="small"
+            round
+          />
+          <br>
+          value: {{ value }}
+        </div>
+        <div class="n-doc-section__source">
+          <textarea v-pre>
+<n-input
   v-model="value"
   type="input"
   size="small"
   round
-  icon="search"
 />
-<br>
+value: {{ value }}
+
+<script>
+export default {
+  data () {
+    return {
+      value: null
+    }
+  }
+}
+</script></textarea>
+        </div>
+      </div>
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
+          placeholder
+        </div>
+        <div class="n-doc-section__view">
+          <n-input
+            v-model="value"
+            type="input"
+            size="small"
+            placeholder="Stairway to Heaven"
+            round
+          />
+          <br>
+          value: {{ value }}
+        </div>
+        <div class="n-doc-section__source">
+          <textarea v-pre>
 <n-input
   v-model="value"
   type="input"
-/>
-<br>
-<n-input
-  v-model="value"
-  size="large"
-  type="input"
+  size="small"
+  placeholder="Stairway to Heaven"
   round
-/></textarea>
-    <hr>
-    <h2>textarea</h2>
-    <n-input
-      v-model="value"
-      type="textarea"
-      size="small"
-      :rows="1"
-    />
-    <n-input
-      v-model="value"
-      type="textarea"
-      :rows="2"
-    />
-    <n-input
-      v-model="value"
-      type="textarea"
-      size="large"
-      :rows="3"
-    />
-    <br>
-    <textarea ref="ta2"><n-input
+/>
+value: {{ value }}
+
+<script>
+export default {
+  data () {
+    return {
+      value: null
+    }
+  }
+}
+</script></textarea>
+        </div>
+      </div>
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
+          Textarea
+        </div>
+        <div class="n-doc-section__view not-code">
+          <n-input
+            v-model="value"
+            type="textarea"
+            size="small"
+            :rows="5"
+          />
+          <br>
+          <n-input
+            v-model="value"
+            type="textarea"
+            :rows="3"
+          />
+          <br>
+          value: {{ value }}
+        </div>
+        <div class="n-doc-section__source">
+          <textarea v-pre>
+<n-input
   v-model="value"
   type="textarea"
   size="small"
-  :rows="1"
+  :rows="5"
 />
 <n-input
   v-model="value"
   type="textarea"
-  :rows="2"
-/>
-<n-input
-  v-model="value"
-  type="textarea"
-  size="large"
   :rows="3"
-/></textarea>
-    <hr>
-    <h2>placeholder & disabled</h2>
-    <n-input
-      v-model="value"
-      size="large"
-      placeholder="abcdd"
-    />
-    <n-input
-      v-model="value"
-      disabled
-      size="large"
-      placeholder="abcdd"
-    />
-    <br>
-    <textarea ref="ta3"><n-input
-  v-model="value"
-  size="large"
-  placeholder="abcdd"
 />
-<n-input
-  v-model="value"
-  disabled
-  size="large"
-  placeholder="abcdd"
-/></textarea>
-    <hr>
+value: {{ value }}
+
+<script>
+export default {
+  data () {
+    return {
+      value: null
+    }
+  }
+}
+</script>
+          </textarea>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import CodeMirror from 'codemirror'
-import 'codemirror/mode/htmlmixed/htmlmixed'
-
+import docCodeEditorMixin from './docCodeEditorMixin'
 export default {
+  mixins: [docCodeEditorMixin],
   data () {
     return {
-      value: '123'
+      value: null
     }
   },
-  mounted () {
-    Object.keys(this.$refs).forEach(k => {
-      console.log(k)
-      CodeMirror.fromTextArea(this.$refs[k], {
-        lineNumbers: true,
-        mode: 'htmlmixed'
-      })
-    })
+  methods: {
   }
 }
 </script>
 
-<style scoped lang="scss">
-.doc {
-  width: 900px;
-  margin: auto;
-  textarea {
-    width: 100%;
-    min-height: 3em;
-  }
+<style scoped>
+.n-doc-section__view {
+  display: block!important;
 }
-
 </style>

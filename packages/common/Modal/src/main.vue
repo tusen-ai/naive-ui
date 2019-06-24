@@ -77,7 +77,7 @@ export default {
     }, [
       this.$slots.activator,
       h('div', {
-        staticClass: 'n-modal-content',
+        staticClass: 'n-modal-container',
         ref: 'content',
         class: {
           'is-active': this.isActive
@@ -92,7 +92,9 @@ export default {
         on: {
           click: this.deactivate
         }
-      }), ...this.$slots.default]
+      }), h('div', {
+        staticClass: 'n-modal-content'
+      }, this.$slots.default)]
       )
     ])
   }
@@ -117,7 +119,7 @@ export default {
   }
 }
 
-.n-modal-content {
+.n-modal-container {
   position: fixed;
   left: 0;
   right: 0;
@@ -127,6 +129,10 @@ export default {
   overflow: auto;
   &.is-active {
     display: flex;
+  }
+  .n-modal-content {
+    position: relative;
+    margin: auto;
   }
 }
 </style>

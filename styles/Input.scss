@@ -3,6 +3,7 @@
 
 @include b(input) {
   position: relative;
+  width: 100%;
   &.is-disabled {
     cursor: not-allowed;
     .n-input__input, .n-input__textarea {

@@ -30,7 +30,7 @@ import ServiceLayout from 'packages/nimbus/ServiceLayout'
 import NimbusFormCard from 'packages/nimbus/FormCard'
 import NimbusConfirmCard from '../packages/nimbus/ConfirmCard'
 
-import sideMenuDemo from './components/sideMenuDemo'
+import nimbusServiceLayoutDemo from './components/nimbusServiceLayoutDemo'
 import homeDemo from './components/homeDemo'
 import gradientTextDemo from './components/gradientTextDemo'
 import iconDemo from './components/iconDemo'
@@ -47,6 +47,7 @@ import tooltipDemo from './components/tooltipDemo'
 import notificationDemo from './components/notificationDemo'
 import nimbusConfirmCardDemo from './components/nimbusConfirmCardDemo'
 import paginationDemo from './components/paginationDemo'
+import startPage from './components/startPage'
 import demo from './demo'
 
 Vue.use(VueRouter)
@@ -81,7 +82,8 @@ const routes = [
   { path: '/',
     component: demo,
     children: [
-      { path: '/n-nimbus-service-layout', component: sideMenuDemo },
+      { path: '/start', component: startPage },
+      { path: '/n-nimbus-service-layout', component: nimbusServiceLayoutDemo },
       { path: '/n-nimbus-home-layout', component: homeDemo },
       { path: '/n-gradient-text', component: gradientTextDemo },
       { path: '/n-icon', component: iconDemo },
@@ -99,6 +101,10 @@ const routes = [
       { path: '/n-nimbus-confirm-card', component: nimbusConfirmCardDemo },
       { path: '/n-pagination', component: paginationDemo }
     ]
+  },
+  {
+    path: '*',
+    redirect: '/start'
   }
 ]
 
