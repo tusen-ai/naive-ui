@@ -22,6 +22,7 @@
     i::before {
       font-size: 20px;
       line-height: 17px;
+      color: rgba(255,255,255,0.15);
     }
   }
   .n-input__input, .n-input__textarea {
@@ -31,11 +32,25 @@
     outline: none;
     color: #fff;
     font-family: $default-font-family;
-    background-color: #6F778DFF;
+    background-color: rgba(255, 255, 255, 0.1);
     width: 100%;
     caret-color: #63E2B7;
+    box-shadow: inset 0 0 0px 1px #6F778DFF;
+    transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+    &:focus:hover {
+      box-shadow: inset 0 0 0px 1px rgba(99,226,183,1), 0px 0px 10px 1px rgba(54,101,85,1);
+    }
+    &:hover {
+      box-shadow: inset 0 0 0px 1px rgba(99,226,183,1);
+    }
     &:focus {
       box-shadow: inset 0 0 0px 1px rgba(99,226,183,1);
+      background-color: rgba(99, 226, 183, 0.12);
+      .n-input__icon {
+        i::before {
+          color: rgba(57, 97, 101, 1);
+        }
+      }
     }
   }
   .n-input__input {
