@@ -1,9 +1,10 @@
 {
   "name": "naive-ui",
-  "version": "0.1.56",
+  "version": "0.1.60",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "pub": "npm run build; npm publish",
     "build": "cross-env NODE_ENV=development & gulp --gulpfile build/gulpfile.js build",
     "demo": "cross-env NODE_ENV=development & gulp --gulpfile build/gulpfile.js build & webpack-dev-server --config build/webpack.demo.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.js",
