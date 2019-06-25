@@ -15,7 +15,7 @@
         </div>
         <div class="n-doc-section__view">
           <n-nimbus-service-layout
-            service-icon="md-musical-notes"
+            icon="md-musical-notes"
             name="My Generation"
             :items="[
               {
@@ -61,7 +61,7 @@
         </div>
         <div class="n-doc-section__source">
           <textarea><n-nimbus-service-layout
-  service-icon="md-musical-notes"
+  icon="md-musical-notes"
   name="My Generation"
   :items="[
     {

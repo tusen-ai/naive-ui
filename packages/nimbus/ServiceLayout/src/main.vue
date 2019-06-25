@@ -16,7 +16,7 @@
           <div class="n-nimbus-service-layout-drawer-header__content">
             <div class="n-nimbus-service-layout-drawer-header__icon">
               <n-icon
-                :type="serviceIcon"
+                :type="icon"
                 :size="22"
               />
             </div>
@@ -89,7 +89,7 @@
 export default {
   name: 'NNimbusServiceLayout',
   props: {
-    serviceIcon: {
+    icon: {
       type: String,
       default: 'md-settings'
     },

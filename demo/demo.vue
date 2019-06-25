@@ -1,7 +1,7 @@
 <template>
   <div class="demo">
     <n-nimbus-service-layout
-      service-icon="md-contacts"
+      icon="md-contacts"
       name="NAIVE UI (0.1.50)"
       :padding-body="false"
       :items="items"
