@@ -6,12 +6,14 @@
   border: none;
   outline: none;
   width: 100%;
-  color: #fff;
+  color: $select-text-color;
   font-family: $default-font-family;
   cursor: pointer;
   .n-select-link {
     position: relative;
+    box-shadow: none;
     &::after {
+      transition: transform .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
       position: absolute;
       content: '';
       width: 6px;
@@ -23,43 +25,38 @@
       transform: rotate(-45deg);
       transform-origin: 25% 75%;
     }
-    .n-select-link__label {
+    .n-select-link__label, .n-select-link__tags {
+      transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
       box-sizing: border-box;
-      border-radius: 9px;
-      border: 1px solid #6F768B;
-      background-color: #6F768B;
+      border-radius: $select-border-radius;
+      background-color: $select-background-color;
       padding: 0 14px;
       &.n-select-link__placeholder {
-        color: rgba(255, 255, 255, .4);
+        color: $select-placeholder-color;
       }
     }
     .n-select-link__tags {
-      box-sizing: border-box;
-      border-radius: 9px;
-      border: 1px solid #6F768B;
-      background-color: #6F768B;
       padding: 0 14px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      &.n-select-link__placeholder {
-        color: rgba(255, 255, 255, .4);
-      }
+      padding-top: 4px;
       .n-select-link__tag {
+        box-sizing: border-box;
         position: relative;
         display: inline-block;
         border: 1px solid #63E2B7FF;
         color: #63E2B7FF;
         border-radius: 4px;
-        
         margin-right: 7px;
-        margin-bottom: 2px;
+        margin-bottom: 4px;
+        font-size: 14px;
         .n-select-link-tag__content  {
           transform: translateY(-1px);
         }
         .n-select-link-tag__icon {
           position: absolute;
-          right: 7px;
+          right: 4px;
           top: 50%;
           transform: translateY(-50%);
           i::before {
@@ -72,7 +69,6 @@
       z-index: 1;
       overflow: hidden;
       position: absolute;
-      display: none;
       top: calc(100% + 4px);
       left: 0;
       right: 0;
@@ -117,18 +113,20 @@
         }
       }
     }
-    &.is-active {
-      .n-select-menu {
-        display: block;
+    &:hover {
+      .n-select-link__label, .n-select-link__tags {
+        box-shadow: inset 0 0 0 1px $select-border-color--active;
       }
+    }
+    &.n-select-link--active {
       &::after {
         transform: rotate(135deg);
         border-left: 1px solid #63E2B7FF;
-      border-bottom: 1px solid #63E2B7FF;
+        border-bottom: 1px solid #63E2B7FF;
       }
       .n-select-link__label, .n-select-link__tags {
-        box-shadow:0px 0px 10px 1px rgba(54,101,85,1);
-        border: 1px solid #63E2B7;
+        box-shadow: inset 0 0 0 1px $select-border-color--active, 0px 0px 10px 1px #366555;
+        background-color: $select-background-color--active;
       }
     }
   }
@@ -136,7 +134,6 @@
   &.n-select--small-size {
     .n-select-link {
       .n-select-link__tags {
-        padding-top: 2px;
         .n-select-link__tag {
           padding: 0px 20px 0 7px;
           height: 20px;
@@ -162,7 +159,6 @@
   &.n-select--default-size, &.n-select--medium-size {
     .n-select-link {
       .n-select-link__tags {
-        padding-top: 2px;
         .n-select-link__tag {
           padding: 0px 20px 0 7px;
           height: 26px;
@@ -187,7 +183,6 @@
   }
   &.n-select--large-size {
     .n-select-link__tags {
-      padding-top: 2px;
       .n-select-link__tag {
         padding: 0px 20px 0 7px;
         height: 32px;
@@ -210,5 +205,17 @@
         line-height: $large-height;
       }
     }
+  }
+
+  /** transition */
+  .n-select-menu--transition-enter-active {
+    transition: opacity .3s $fast-in-cubic-bezier, transform .3s $fast-in-cubic-bezier;
+  }
+  .n-select-menu--transition-leave-active {
+    transition: opacity .3s $slow-out-cubic-bezier, transform .3s $slow-out-cubic-bezier;
+  }
+  .n-select-menu--transition-enter, .n-select-menu--transition-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+    transform: translateY(4px);
   }
 }

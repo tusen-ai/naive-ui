@@ -11,7 +11,7 @@
       v-if="multiple"
       class="n-select-link"
       :class="{
-        'is-active': active
+        'n-select-link--active': active
       }"
     >
       <div
@@ -38,26 +38,31 @@
       >
         {{ placeholder }}
       </div>
-      <div class="n-select-menu n-select-menu--multiple">
+      <transition name="n-select-menu--transition">
         <div
-          v-for="item in items"
-          :key="item.value"
-          class="n-select-menu__item"
-          :class="{
-            'is-selected':
-              isSelected(item)
-          }"
-          @click.stop="toggle(item)"
+          v-if="active"
+          class="n-select-menu n-select-menu--multiple"
         >
-          {{ item.label }}
+          <div
+            v-for="item in items"
+            :key="item.value"
+            class="n-select-menu__item"
+            :class="{
+              'is-selected':
+                isSelected(item)
+            }"
+            @click.stop="toggle(item)"
+          >
+            {{ item.label }}
+          </div>
         </div>
-      </div>
+      </transition>
     </div>
     <div
       v-else
       class="n-select-link"
       :class="{
-        'is-active': active
+        'n-select-link--active': active
       }"
     >
       <div
@@ -72,21 +77,27 @@
       >
         {{ placeholder }}
       </div>
-      <div class="n-select-menu">
+      <transition name="n-select-menu--transition">
         <div
-          v-for="item in items"
-          :key="item.value"
-          class="n-select-menu__item"
-          :class="{
-            'is-selected':
-              selectedValue ===
-              item.value
-          }"
-          @click.stop="select(item)"
+          v-if="active"
+          class="n-select-menu"
         >
-          {{ item.label }}
+          <div
+            v-for="item in items"
+
+            :key="item.value"
+            class="n-select-menu__item"
+            :class="{
+              'is-selected':
+                selectedValue ===
+                item.value
+            }"
+            @click.stop="select(item)"
+          >
+            {{ item.label }}
+          </div>
         </div>
-      </div>
+      </transition>
     </div>
   </div>
 </template>

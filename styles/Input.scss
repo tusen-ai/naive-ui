@@ -49,7 +49,7 @@
     }
     &:focus {
       box-shadow: inset 0 0 0px 1px $main-color;
-      background-color: $hover-input-background-color;
+      background-color: $focus-input-background-color;
     }
     &::placeholder {
       color: $input-placeholder-color;

@@ -213,9 +213,3 @@ export default {
   }
 }
 </script>
-<style scoped>
-.n-button {
-  margin-right: 14px;
-  margin-bottom: 8px;
-}
-</style>

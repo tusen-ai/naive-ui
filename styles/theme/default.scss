@@ -9,6 +9,9 @@ $large-height: 40px;
 
 $main-color: #63E2B7;
 
+$fast-in-cubic-bezier: cubic-bezier(0.0, 0.0, 0.2, 1);
+$slow-out-cubic-bezier: cubic-bezier(0.4, 0.0, 1, 1);
+
 /**
  * n-input
  */
@@ -21,10 +24,42 @@ $disabled-input-text-color: rgba(255, 255, 255, .2);
 $disabled-input-placeholder-color: rgba(255, 255, 255, .2);
 $input-caret-color: $main-color;
 $input-placeholder-color: rgba(255, 255, 255, .4);
-$hover-input-background-color: rgba(99, 226, 183, 0.1);
+$focus-input-background-color: rgba(99, 226, 183, 0.1);
 $input-border-radius: 8px;
 $input-icon-color: rgba(255,255,255,0.2);
 
+/**
+ * n-button
+ */
+$button-margin: 0 12px 8px 0;
+$button-border-radius: 6px;
+$button-small-font-size: 14px;
+$button-default-font-size: 16px;
+$button-large-font-size: 16px;
+$button-default-text-color: $main-color;
+$button-default-border-color: $main-color;
+$button-default-background-color: transparent;
+$button-default-background-color--hover: rgba(99, 226, 183, .3);
+$button-default-background-color--active: rgba(99, 226, 183, .2);
+$button-primary-background-color: $main-color;
+$button-primary-background-color--hover: rgb(103, 235, 190);
+$button-primary-background-color--active: rgb(97, 218, 177);
+
+/**
+ * n-select
+ */
+$select-text-color: #ffffff;
+$select-font-size--small: 14px;
+$select-font-size--medium: 14px;
+$select-font-size--large: 14px;
+$select-background-color: rgba(255, 255, 255, 0.12);
+$select-background-color--disabled:rgba(255,255,255,0.06);
+$select-text-color--disabled: rgba(255, 255, 255, .2);
+$select-placeholder-color--disabled: rgba(255, 255, 255, .2);
+$select-placeholder-color: rgba(255, 255, 255, .4);
+$select-background-color--active: rgba(99, 226, 183, 0.1);
+$select-border-radius: 8px;
+$select-border-color--active: $main-color;
 
 
 $amazing-font-size: 20px;
@@ -48,10 +83,7 @@ $default-text-gradient: linear-gradient(14deg, rgba(120,205,104,1) 0%, rgba(20,1
 $default-text-gradient-warning: linear-gradient(252deg, rgba(247,181,0,1) 0%, rgba(237,255,0,1) 100%);
 $default-text-gradient-success: linear-gradient(14deg, rgba(120,205,104,1) 0%, rgba(20,166,165,1) 100%);
 $default-text-gradient-danger: linear-gradient(214deg, rgba(224,32,32,1) 0%, rgba(250,100,0,1) 100%);
-$default-button-border-color: #63E2B7;
-$default-button-text-color: #63E2B7;
-$default-button-hover-text-color: #1F263E;
-$default-button-background-color: #63E2B7;
+
 
 $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
 
