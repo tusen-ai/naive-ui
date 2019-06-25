@@ -7,9 +7,7 @@
       }"
       @click="backward"
     >
-      <div>
-        <n-icon type="ios-arrow-back" />
-      </div>
+      <n-icon type="ios-arrow-back" />
     </div>
     <div
       v-for="pageItem in pageItems"
@@ -127,70 +125,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.n-pagination {
-  display: inline-flex;
-  .n-pagination__item {
-    cursor: pointer;
-    user-select: none;
-    color: #75819B;
-    min-width:28px;
-    height:28px;
-    padding-left: 4px;
-    padding-right: 4px;
-    box-sizing: border-box;
-    &:not(:last-child) {
-      margin-right: 17px;
-    }
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius:6px;
-    border:1px solid transparent;
-    &.n-pagination__item--active {
-      color: red;
-      background:rgba(99,226,183,0.3);
-      color: #63E2B7;
-      border:1px solid rgba(99,226,183,1);
-    }
-    &.n-pagination__item--backward, &.n-pagination__item--forward {
-      border:1px solid rgba(117,129,155,1);
-      &.n-pagination__item--disabled {
-        i::before {
-          color: rgba(44,55,78,1);
-        }
-        border:1px solid rgba(44,55,78,1);
-        cursor: not-allowed;
-      }
-    }
-    .n-pagination-item__fast-backward, .n-pagination-item__fast-forward {
-      .n-pagination-item__fast-backward-icon, .n-pagination-item__fast-forward-icon {
-        display: none;
-      }
-      .n-pagination-item__more-icon {
-        display: block;
-      }
-    }
-    &:hover {
-      .n-pagination-item__fast-backward, .n-pagination-item__fast-forward {
-        .n-pagination-item__more-icon {
-          display: none;
-        }
-        .n-pagination-item__fast-backward-icon, .n-pagination-item__fast-forward-icon {
-          display: block;
-          .n-icon {
-            & {
-              display: inline-block;
-              width: 6px;
-            }
-            &::before{
-              color: #63E2B7;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-</style>

@@ -1,0 +1,69 @@
+@import './mixins/mixins.scss';
+@import './theme/default.scss';
+
+.n-pagination {
+  display: inline-flex;
+  .n-pagination__item {
+    cursor: pointer;
+    user-select: none;
+    color: $pagination-color;
+    min-width:28px;
+    height:28px;
+    padding-left: 4px;
+    padding-right: 4px;
+    box-sizing: border-box;
+    &:not(:last-child) {
+      margin-right: 17px;
+    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius:6px;
+    border:1px solid transparent;
+    .n-pagination-item__label {
+      line-height: 28px;
+    }
+    &.n-pagination__item--active {
+      background: $pagination-bagkround-color--active;
+      color: $pagination-color--active;
+      box-shadow: inset 0 0 0 1px $pagination-color--active;
+    }
+    &.n-pagination__item--backward, &.n-pagination__item--forward {
+      box-shadow: inset 0 0 0 1px  $pagination-color;
+      &.n-pagination__item--disabled {
+        i::before {
+          color: $pagination-color--disabled;
+        }
+        box-shadow: inset 0 0 0 1px $pagination-color--disabled;
+        cursor: not-allowed;
+      }
+    }
+    .n-pagination-item__fast-backward, .n-pagination-item__fast-forward {
+      .n-pagination-item__fast-backward-icon, .n-pagination-item__fast-forward-icon {
+        display: none;
+      }
+      .n-pagination-item__more-icon {
+        display: block;
+      }
+    }
+    &:hover {
+      .n-pagination-item__fast-backward, .n-pagination-item__fast-forward {
+        .n-pagination-item__more-icon {
+          display: none;
+        }
+        .n-pagination-item__fast-backward-icon, .n-pagination-item__fast-forward-icon {
+          display: block;
+          .n-icon {
+            & {
+              display: inline-block;
+              width: 6px;
+            }
+            &::before{
+              color: $pagination-color--active;
+            }
+          }
+        }
+      }
+    }
+  }
+}

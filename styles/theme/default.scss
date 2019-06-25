@@ -61,6 +61,14 @@ $select-background-color--active: rgba(99, 226, 183, 0.1);
 $select-border-radius: 8px;
 $select-border-color--active: $main-color;
 
+/**
+ * n-pagination
+ */
+$pagination-color--disabled: rgba(255,255,255,.2);
+$pagination-color: rgba(255,255,255,.6); 
+$pagination-border-radius: 4px;
+$pagination-color--active: $main-color;
+$pagination-bagkround-color--active: rgba(99,226,183,0.3);
 
 $amazing-font-size: 20px;
 $huge-font-size: 18px;

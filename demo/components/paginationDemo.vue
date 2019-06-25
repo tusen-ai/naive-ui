@@ -15,7 +15,6 @@
         </div>
         <div
           class="n-doc-section__view"
-          style="background-color: #1f263e;"
         >
           <n-pagination
             v-model="currentPage"
