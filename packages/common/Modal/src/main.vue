@@ -1,4 +1,7 @@
 <script>
+import NModalOverlay from './Overlay'
+import NModalContent from './ModalContent'
+
 export default {
   name: 'NModal',
   model: {
@@ -80,21 +83,31 @@ export default {
         staticClass: 'n-modal-container',
         ref: 'content',
         class: {
-          'is-active': this.isActive
+          'n-modal-container--active': this.isActive
         }
       },
-      [h('div', {
-        staticClass: 'n-modal-overlay',
-        ref: 'overlay',
-        class: {
-          'is-active': this.isActive
-        },
+      // [h('div', {
+      //   staticClass: 'n-modal-overlay',
+      //   ref: 'overlay',
+      //   class: {
+      //     'is-active': this.isActive
+      //   },
+      //   on: {
+      //     click: this.deactivate
+      //   }
+      // })
+      [h(NModalOverlay, {
+        props: { active: this.isActive }
+      }),
+      h(NModalContent, { ref: 'modalWrapper',
+        props: { active: this.isActive },
         on: {
-          click: this.deactivate
-        }
-      }), h('div', {
-        staticClass: 'n-modal-content'
-      }, this.$slots.default)]
+          click: (e) => {
+            if (e.target.contains(this.$refs.modalWrapper.$el)) {
+              this.deactivate()
+            }
+          }
+        } }, this.$slots.default)]
       )
     ])
   }
@@ -106,33 +119,13 @@ export default {
   display: inline-block;
 }
 
-.n-modal-overlay {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, .35);
-  display: none;
-  &.is-active {
-    display: block;
-  }
-}
-
 .n-modal-container {
   position: fixed;
   left: 0;
-  right: 0;
   top: 0;
-  bottom: 0;
-  display: none;
+  height: 0;
+  width: 0;
   overflow: auto;
-  &.is-active {
-    display: flex;
-  }
-  .n-modal-content {
-    position: relative;
-    margin: auto;
-  }
+  display: flex;
 }
 </style>

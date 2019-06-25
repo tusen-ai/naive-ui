@@ -15,7 +15,9 @@
     <div class="section">
       <n-tooltip>
         <template v-slot:activator>
-          <n-button>hello tooltip</n-button>
+          <n-button style="margin: 0;">
+            hello tooltip
+          </n-button>
         </template>
         <div>
           This is the contextual help
@@ -24,7 +26,7 @@
     </div>
     <textarea rows="5"><n-tooltip>
   <template v-slot:activator>
-    <n-button>hello tooltip</n-button>
+    <n-button style="margin: 0;">hello tooltip</n-button>
   </template>
   <div>
     This is the contextual help
