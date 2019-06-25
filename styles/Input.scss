@@ -8,8 +8,12 @@
     cursor: not-allowed;
     .n-input__input, .n-input__textarea {
       cursor: not-allowed;
-      background-color: #6F778D;
-      color: #9FA5B3FF;
+      background-color: $disabled-input-background-color;
+      color: $disabled-input-text-color;
+      box-shadow: none;
+      &::placeholder {
+        color: $disabled-input-placeholder-color;
+      }
     }
   }
   .n-input__icon {
@@ -18,64 +22,60 @@
     width: 18px;
     left: 0;
     top: calc(50% - 8px);
-    margin-left: 16px;
+    margin-left: 12px;
     i::before {
       font-size: 20px;
       line-height: 17px;
-      color: rgba(255,255,255,0.15);
+      color: $input-icon-color;
     }
   }
   .n-input__input, .n-input__textarea {
     box-sizing: border-box;
     border: none;
-    border-radius: 8px;
+    border-radius: $input-border-radius;
     outline: none;
     color: #fff;
     font-family: $default-font-family;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: $input-background-color;
     width: 100%;
-    caret-color: #63E2B7;
-    box-shadow: inset 0 0 0px 1px #6F778DFF;
+    caret-color: $input-caret-color;
+    box-shadow: none;
     transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
     &:focus:hover {
-      box-shadow: inset 0 0 0px 1px rgba(99,226,183,1), 0px 0px 10px 1px rgba(54,101,85,1);
+      box-shadow: inset 0 0 0px 1px $main-color, 0px 0px 10px 1px #366555;
     }
     &:hover {
-      box-shadow: inset 0 0 0px 1px rgba(99,226,183,1);
+      box-shadow: inset 0 0 0px 1px $main-color;
     }
     &:focus {
-      box-shadow: inset 0 0 0px 1px rgba(99,226,183,1);
-      background-color: rgba(99, 226, 183, 0.12);
-      .n-input__icon {
-        i::before {
-          color: rgba(57, 97, 101, 1);
-        }
-      }
+      box-shadow: inset 0 0 0px 1px $main-color;
+      background-color: $hover-input-background-color;
+    }
+    &::placeholder {
+      color: $input-placeholder-color;
+      opacity: 1;
     }
   }
   .n-input__input {
     &.n-input__input--small-size {
       height: $small-height;
       line-height: $small-height;
-      padding: 0 18px;
+      padding: 0 14px;
       font-size: $small-input-font-size;
     }
     &.n-input__input--default-size, &.n-input__input--medium-size {
       height: $default-height;
       line-height: $default-height;
-      padding: 0 18px;
+      padding: 0 14px;
       font-size: $default-input-font-size;
     }
     &.n-input__input--large-size {
       height: $large-height;
       line-height: $large-height;
-      padding: 0 18px;
+      padding: 0 14px;
       font-size: $large-input-font-size;
     }
-    &::placeholder {
-      color: rgba(255, 255, 255, .4);
-      opacity: 1;
-    }
+    
   }
   .n-input__input.n-input__input--round {
     &.n-input__input--small-size {
@@ -89,7 +89,7 @@
     }
   }
   .n-input__input.n-input__input--icon {
-    padding-left: 44px;
+    padding-left: 40px;
   }
   .n-input__textarea {
     padding: 10px 14px;
@@ -102,10 +102,6 @@
     }
     &.n-input__textarea--large-size {
       font-size: $large-input-font-size;
-    }
-    &::placeholder {
-      color: rgba(255, 255, 255, .4);
-      opacity: 1;
     }
   }
 }

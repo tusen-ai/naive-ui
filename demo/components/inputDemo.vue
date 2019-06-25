@@ -160,11 +160,50 @@ export default {
       </div>
       <div class="n-doc-section">
         <div class="n-doc-section__header">
+          disabled
+        </div>
+        <div class="n-doc-section__view">
+          <n-input
+            v-model="value"
+            type="input"
+            size="small"
+            placeholder="Stairway to Heaven"
+            disabled
+            round
+          />
+          <br>
+          value: {{ value }}
+        </div>
+        <div class="n-doc-section__source">
+          <textarea v-pre>
+<n-input
+  v-model="value"
+  type="input"
+  size="small"
+  placeholder="Stairway to Heaven"
+  round
+/>
+value: {{ value }}
+
+<script>
+export default {
+  data () {
+    return {
+      value: null
+    }
+  }
+}
+</script></textarea>
+        </div>
+      </div>
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
           Textarea
         </div>
         <div class="n-doc-section__view not-code">
           <n-input
             v-model="value"
+            placeholder="Nowhere Man"
             type="textarea"
             size="small"
             :rows="5"
@@ -182,6 +221,7 @@ export default {
           <textarea v-pre>
 <n-input
   v-model="value"
+  placeholder="Nowhere Man"
   type="textarea"
   size="small"
   :rows="5"

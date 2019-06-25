@@ -1,13 +1,31 @@
 $body-background-color: #1a2033;
 
-
-$small-input-font-size: 14px;
-$default-input-font-size: 14px;
-$large-input-font-size: 14px;
-
+/**
+ * genaral
+ */
 $small-height: 28px;
 $default-height: 34px;
 $large-height: 40px;
+
+$main-color: #63E2B7;
+
+/**
+ * n-input
+ */
+$small-input-font-size: 14px;
+$default-input-font-size: 14px;
+$large-input-font-size: 14px;
+$input-background-color: rgba(255, 255, 255, 0.12);
+$disabled-input-background-color:rgba(255,255,255,0.06);
+$disabled-input-text-color: rgba(255, 255, 255, .2);
+$disabled-input-placeholder-color: rgba(255, 255, 255, .2);
+$input-caret-color: $main-color;
+$input-placeholder-color: rgba(255, 255, 255, .4);
+$hover-input-background-color: rgba(99, 226, 183, 0.1);
+$input-border-radius: 8px;
+$input-icon-color: rgba(255,255,255,0.2);
+
+
 
 $amazing-font-size: 20px;
 $huge-font-size: 18px;
