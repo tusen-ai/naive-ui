@@ -5,7 +5,7 @@
   & {
     display: inline-block;
   }
-  .rail {
+  .n-switch__rail {
     position: relative;
     height: 14px;
     width: 28px;
@@ -32,7 +32,7 @@
       background-image: linear-gradient(52deg,rgba(120,205,104,1) 0%,rgba(20,166,165,1) 100%);
       opacity: 0;
     }
-    &.active {
+    &.n-switch__rail--active {
       background-color: rgba(97, 196, 118, .27);
       &::before {
         left: 12px;
@@ -42,6 +42,10 @@
         left: 12px;
         opacity: 1;
       }
+    }
+    &.n-switch__rail--disabled {
+      cursor: not-allowed;
+      opacity: .5;
     }
   }
 }

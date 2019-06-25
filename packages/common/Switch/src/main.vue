@@ -4,8 +4,8 @@
     @click="handleClick"
   >
     <div
-      class="rail"
-      :class="{ active: active }"
+      class="n-switch__rail"
+      :class="{ 'n-switch__rail--active': active, 'n-switch__rail--disabled': disabled }"
     />
   </div>
 </template>
@@ -21,11 +21,17 @@ export default {
     active: {
       type: Boolean,
       required: true
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
     handleClick () {
-      this.$emit('change', !this.active)
+      if (!this.disabled) {
+        this.$emit('change', !this.active)
+      }
     }
   }
 }

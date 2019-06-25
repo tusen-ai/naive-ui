@@ -14,17 +14,27 @@
           Basic Usage
         </div>
         <div class="n-doc-section__view">
-          <n-switch v-model="isActive" />
-          <div style="margin-left: 14px;">
+          <n-switch
+            v-model="isActive"
+          />
+          <div style="margin: 0 14px;">
             active: {{ isActive }}
           </div>
+          <n-switch
+            v-model="isActive"
+            disabled
+          />
         </div>
         <div class="n-doc-section__source">
           <textarea v-pre>
 <n-switch v-model="isActive" />
-<div style="margin-left: 14px;">
+<div style="margin: 0 14px;">
   active: {{ isActive }}
 </div>
+<n-switch
+  v-model="isActive"
+  disabled
+/>
 <script>
 export default {
   data () {

@@ -24,6 +24,11 @@
             v-model="isChecked"
             style="width: 120px;"
           />
+          <n-checkbox
+            v-model="isChecked"
+            disabled
+            style="width: 120px;"
+          />
           <div style="width: 120px;">
             isChecked: {{ isChecked }}
           </div>
@@ -37,6 +42,11 @@
 </n-checkbox>
 <n-checkbox
   v-model="isChecked"
+  style="width: 120px;"
+/>
+<n-checkbox
+  v-model="isChecked"
+  disabled
   style="width: 120px;"
 />
 <div style="width: 120px;">

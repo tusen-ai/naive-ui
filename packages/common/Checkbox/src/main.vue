@@ -5,7 +5,7 @@
   >
     <div
       class="n-checkbox__checkbox"
-      :class="{'is-checked':checked}"
+      :class="{'is-checked':checked, 'n-checkbox__checkbox--disabled': disabled}"
     >
       <div
         class="n-checkbox-checkbox__inner"
@@ -29,11 +29,20 @@ export default {
     event: 'change'
   },
   props: {
-    checked: Boolean
+    checked: {
+      type: Boolean,
+      required: true
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    }
   },
   methods: {
     handleClick () {
-      this.$emit('change', !this.checked)
+      if (!this.disabled) {
+        this.$emit('change', !this.checked)
+      }
     }
   }
 }
