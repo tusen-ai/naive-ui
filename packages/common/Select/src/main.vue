@@ -15,9 +15,14 @@
       }"
     >
       <div
-        v-if="selected"
         class="n-select-link__tags"
+        :class="{
+          'n-select-link__tags--selected': selected
+        }"
       >
+        <!-- <transition-group
+          name="n-select-menu__tags--transition"
+        > -->
         <div
           v-for="item in selectedItems"
           :key="item.value"
@@ -32,17 +37,27 @@
             @click.stop="toggle(item)"
           />
         </div>
-      </div><div
-        v-else
-        class="n-select-link__tags n-select-link__placeholder"
-      >
-        {{ placeholder }}
+        <!-- </transition-group> -->
+        <div
+          v-if="!selected"
+          class="n-select-link__placeholder"
+        >
+          {{ placeholder }}
+        </div>
       </div>
       <transition name="n-select-menu--transition">
         <div
           v-if="active"
           class="n-select-menu n-select-menu--multiple"
+          @mouseleave="removeLightBar"
         >
+          <transition name="n-select-menu__light-bar--transition">
+            <div
+              v-if="showLightBar"
+              class="n-select-menu__light-bar"
+              :style="{ top: `${lightBarTop}px` }"
+            />
+          </transition>
           <div
             v-for="item in items"
             :key="item.value"
@@ -52,6 +67,7 @@
                 isSelected(item)
             }"
             @click.stop="toggle(item)"
+            @mouseenter="showLightBarTop"
           >
             {{ item.label }}
           </div>
@@ -81,10 +97,17 @@
         <div
           v-if="active"
           class="n-select-menu"
+          @mouseleave="removeLightBar"
         >
+          <transition name="n-select-menu__light-bar--transition">
+            <div
+              v-if="showLightBar"
+              class="n-select-menu__light-bar"
+              :style="{ top: `${lightBarTop}px` }"
+            />
+          </transition>
           <div
             v-for="item in items"
-
             :key="item.value"
             class="n-select-menu__item"
             :class="{
@@ -93,6 +116,7 @@
                 item.value
             }"
             @click.stop="select(item)"
+            @mouseenter="showLightBarTop"
           >
             {{ item.label }}
           </div>
@@ -138,7 +162,9 @@ export default {
   },
   data () {
     return {
-      active: false
+      active: false,
+      lightBarTop: null,
+      showLightBar: false
     }
   },
   computed: {
@@ -182,6 +208,13 @@ export default {
     //   console.log('click')
     //   this.closeSelect(e)
     // },
+    showLightBarTop (e) {
+      this.showLightBar = true
+      this.lightBarTop = e.target.offsetTop
+    },
+    removeLightBar (e) {
+      this.showLightBar = false
+    },
     isSelected (item) {
       if (this.multiple) {
         return 1 + this.selectedValue.findIndex(value => value === item.value)

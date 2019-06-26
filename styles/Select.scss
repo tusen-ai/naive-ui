@@ -31,16 +31,21 @@
       border-radius: $select-border-radius;
       background-color: $select-background-color;
       padding: 0 14px;
-      &.n-select-link__placeholder {
+      .n-select-link__placeholder {
+        position: absolute;
+        left: 14px;
+        top: 0;
         color: $select-placeholder-color;
       }
     }
     .n-select-link__tags {
-      padding: 0 14px;
+      padding: 0 20px 0 14px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      padding-top: 4px;
+      &.n-select-link__tags--selected {
+        padding-top: 4px;
+      }
       .n-select-link__tag {
         box-sizing: border-box;
         position: relative;
@@ -51,6 +56,7 @@
         margin-right: 7px;
         margin-bottom: 4px;
         font-size: 14px;
+        transition: opacity .2s $default-cubic-bezier, transform .2s $default-cubic-bezier;
         .n-select-link-tag__content  {
           transform: translateY(-1px);
         }
@@ -75,31 +81,41 @@
       border-radius: 9px;
       background-color: rgba(75, 81, 106, 1);
       box-shadow: 0px 2px 20px 0px rgba(0,0,0,0.16);
+      .n-select-menu__light-bar {
+        position: absolute;
+        width:100%;
+        background-color: rgba(96, 220, 178, 0.3);
+        top: 0;
+        left: 0;
+        z-index: -1;
+        transition: top .2s $default-cubic-bezier;
+      }
       &.n-select-menu--multiple {
         .n-select-menu__item {
+          position: relative;
+          transition: color .3s $default-cubic-bezier;
+          &::after {
+            content: '';
+            height: 6px;
+            width: 3px;
+            border-right: 1px solid #63E2B7FF;
+            border-bottom: 1px solid #63E2B7FF;
+            position: absolute;
+            right: 14px;
+            transform: rotate(45deg) scale(.5);
+            top: calc(50% - 4px);
+            opacity: 0;
+            transition: transform .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
+          }
           &.is-selected, &:active {
-            position: relative;
             background: none;
             &::after {
-              content: '';
-              height: 6px;
-              width: 3px;
-              border-right: 1px solid #63E2B7FF;
-              border-bottom: 1px solid #63E2B7FF;
-              position: absolute;
-              right: 14px;
-              transform: rotate(45deg);
-              top: calc(50% - 4px);
+              opacity: 1;
+              transform: rotate(45deg) scale(1);
             }
           }
           &:active {
             color: #63E2B7FF;
-            background-color: rgba(96, 220, 178, 0.3);
-          }
-          &.is-selected {
-            &:hover {
-              background-color: rgba(96, 220, 178, 0.3);
-            }
           }
         }
       }
@@ -107,9 +123,6 @@
         padding: 0px 14px;
         &.is-selected {
           color: #63E2B7FF;
-        }
-        &:hover {
-          background-color: rgba(96, 220, 178, 0.3);
         }
       }
     }
@@ -134,14 +147,15 @@
   &.n-select--small-size {
     .n-select-link {
       .n-select-link__tags {
+        min-height: $small-height;
         .n-select-link__tag {
           padding: 0px 20px 0 7px;
           height: 20px;
           line-height: 20px;
         }
-        &.n-select-link__placeholder {
-          padding: 0 14px;
+        .n-select-link__placeholder {
           height: $small-height;
+          line-height: $small-height;
         }
       }
       .n-select-link__label {
@@ -149,24 +163,26 @@
         line-height: $small-height;
       }
       .n-select-menu {
-        .n-select-menu__item {
+        .n-select-menu__item, .n-select-menu__light-bar {
           height: $small-height;
           line-height: $small-height;
         }
+        
       }
     }
   }
   &.n-select--default-size, &.n-select--medium-size {
     .n-select-link {
       .n-select-link__tags {
+        min-height: $default-height;
         .n-select-link__tag {
           padding: 0px 20px 0 7px;
           height: 26px;
           line-height: 26px;
         }
-        &.n-select-link__placeholder {
-          padding: 0 14px;
+        .n-select-link__placeholder {
           height: $default-height;
+          line-height: $default-height;
         }
       }
       .n-select-link__label {
@@ -174,7 +190,7 @@
         line-height: $default-height;
       }
       .n-select-menu {
-        .n-select-menu__item {
+        .n-select-menu__item, .n-select-menu__light-bar {
           height: $default-height;
           line-height: $default-height;
         }
@@ -183,14 +199,15 @@
   }
   &.n-select--large-size {
     .n-select-link__tags {
+      min-height: 32px;
       .n-select-link__tag {
         padding: 0px 20px 0 7px;
         height: 32px;
         line-height: 32px;
       }
-      &.n-select-link__placeholder {
-        padding: 0 14px;
+      .n-select-link__placeholder {
         height: $large-height;
+        line-height: $large-height;
       }
     }
     .n-select-link {
@@ -200,7 +217,7 @@
       }
     }
     .n-select-menu {
-      .n-select-menu__item {
+      .n-select-menu__item, .n-select-menu__light-bar {
         height: $large-height;
         line-height: $large-height;
       }
@@ -214,8 +231,40 @@
   .n-select-menu--transition-leave-active {
     transition: opacity .3s $slow-out-cubic-bezier, transform .3s $slow-out-cubic-bezier;
   }
-  .n-select-menu--transition-enter, .n-select-menu--transition-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  .n-select-menu--transition-enter, .n-select-menu--transition-leave-to {
     opacity: 0;
     transform: translateY(4px);
+  }
+  .n-select-menu__light-bar--transition-enter-active {
+    transition: opacity .15s $fast-in-cubic-bezier, top .2s $default-cubic-bezier!important;
+  }
+  .n-select-menu__light-bar--transition-leave-active {
+    transition: opacity .15s $slow-out-cubic-bezier, top .2s $default-cubic-bezier!important;
+  }
+  .n-select-menu__light-bar--transition-enter, .n-select-menu__light-bar--transition-leave-to {
+    opacity: 0;
+  }
+
+  .n-select-menu__tags--transition-enter, .n-select-menu__tags--transition-leave-to {
+    transition: opacity .2s $fast-in-cubic-bezier;
+    opacity: 0;
+  }
+  .n-select-menu__tags--transition-enter-active {
+    transition: opacity .2s $slow-out-cubic-bezier;
+  }
+  .n-select-menu__tags--transition-leave-active {
+    transition: opacity .2s $slow-out-cubic-bezier;
+    /**
+     * Don't delete the following line. I don't know how it work. However it works!
+     */
+    transform: translateY(0)!important;
+    position: absolute!important;
+    /**
+     * Don't delete the following line. I don't know how it work. However it works!
+     */
+    top: 4px;
+  }
+  .n-select-menu__tags--transition-move {
+    transition: transform .2s $default-cubic-bezier;
   }
 }
