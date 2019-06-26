@@ -11,6 +11,7 @@ http://***REMOVED***/#/start
 - demo
 - build
 # Want to see how component works / 想看看组件效果？
+Run `npm run build`, then open `http://localhost:8086/` at browser.
 # Want to add your own component?
 1. add some thing in packages
 2. add some thing in demo/index.js demo/components
