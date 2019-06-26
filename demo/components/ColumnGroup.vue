@@ -1,4 +1,4 @@
-u<template>
+<template>
   <div class="doc">
     <h1>一堆列 / n-column-group</h1>
     <hr>

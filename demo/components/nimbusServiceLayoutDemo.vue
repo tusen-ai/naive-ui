@@ -16,39 +16,39 @@
         <div class="n-doc-section__view">
           <n-nimbus-service-layout
             icon="md-musical-notes"
-            name="My Generation"
+            name="Oasis"
             :items="[
               {
-                name: '第一个服务',
+                name: 'Definitely Maybe',
                 path: '/n-nimbus-service-layout?param=666'
               },
               {
-                name: '第二个服务',
+                name: `Morning Glory`,
                 childItems: [
                   {
-                    name: '二级菜单１',
+                    name: 'Hello',
                     path: '/n-nimbus-service-layout?param=777'
                   },
                   {
-                    name: '二级菜单2',
+                    name: 'Roll with It',
                     path: '/n-nimbus-service-layout?param=888'
                   },
                   {
-                    name: '二级菜单3',
+                    name: 'Wonderwall',
                     path: '/n-nimbus-service-layout?param=999'
                   },
                   {
-                    name: '二级菜单4',
+                    name: `Don't Look Back in Anger`,
                     path: '/n-nimbus-service-layout?param=000'
                   },
                   {
-                    name: '二级菜单5',
+                    name: 'Some Might Say',
                     path: '/n-nimbus-service-layout?param=111'
                   }
                 ]
               },
               {
-                name: '第三个服务',
+                name: 'Be Here Now',
                 path: '/n-nimbus-service-layout?param=222'
               }
             ]"
@@ -62,39 +62,39 @@
         <div class="n-doc-section__source">
           <textarea><n-nimbus-service-layout
   icon="md-musical-notes"
-  name="My Generation"
+  name="Oasis"
   :items="[
     {
-      name: '第一个服务',
+      name: 'Definitely Maybe',
       path: '/n-nimbus-service-layout?param=666'
     },
     {
-      name: '第二个服务',
+      name: `What's the Story(Morning Glory)`,
       childItems: [
         {
-          name: '二级菜单１',
+          name: 'Hello',
           path: '/n-nimbus-service-layout?param=777'
         },
         {
-          name: '二级菜单2',
+          name: 'Roll with It',
           path: '/n-nimbus-service-layout?param=888'
         },
         {
-          name: '二级菜单3',
+          name: 'Wonderwall',
           path: '/n-nimbus-service-layout?param=999'
         },
         {
-          name: '二级菜单4',
+          name: `Don't Look Back in Anger`,
           path: '/n-nimbus-service-layout?param=000'
         },
         {
-          name: '二级菜单5',
+          name: 'Some Might Say',
           path: '/n-nimbus-service-layout?param=111'
         }
       ]
     },
     {
-      name: '第三个服务',
+      name: 'Be Here Now',
       path: '/n-nimbus-service-layout?param=222'
     }
   ]"
