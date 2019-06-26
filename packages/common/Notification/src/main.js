@@ -44,12 +44,13 @@ function mountNotificationEl (container, vm, option) {
   el.style['max-height'] = `${30 + vm.$refs.body.getBoundingClientRect().height}px`
 }
 
-function removeNotificationEl (container, el, option, notification) {
+function removeNotificationEl (container, el, option, notificationVueInstance) {
   setTimeout(function () {
     if (container.contains(el)) {
       container.removeChild(el)
+      const notification = notificationVueInstance.notification
       if (notification.afterCloseCallback) {
-        notification.afterCloseCallback(notification)
+        notification.afterCloseCallback(notificationVueInstance)
       }
     }
   }, option.vanishTransitionTimeout)
@@ -70,10 +71,10 @@ const NMessage = {
       },
       methods: {
         close () {
-          removeNotificationEl(notificationContainer, this.$el, option, notification)
+          removeNotificationEl(notificationContainer, this.$el, option, this)
         },
         handleActionClick () {
-          notification.actionCallback(notification, this.close)
+          notification.actionCallback(this)
         }
       }
     })).$mount()

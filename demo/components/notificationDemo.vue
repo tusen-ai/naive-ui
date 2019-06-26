@@ -44,12 +44,12 @@ In the kind of world where we belong`,
         action: 'Mark as read',
         avator: null,
         duration: 3000,
-        afterCloseCallback: (notification) => {
-          this.$NMessage.success('Notification closed successfully!')
+        afterCloseCallback: (notificationVueInstance) => {
+          const notification = notificationVueInstance.notification
+          this.$NMessage.success(notification.title)
         },
-        actionCallback: (notification) => {
-          console.log('mark read!')
-          notification.close()
+        actionCallback: (notificationVueInstance) => {
+          notificationVueInstance.close()
         }
       })
     },
@@ -63,9 +63,10 @@ I cant get no, I cant get no`,
         meta: '2019-5-27 15:11',
         action: 'Mark as read',
         avator: null,
-        actionCallback: (notification) => {
-          console.log('mark read!')
-          notification.close()
+        actionCallback: (notificationVueInstance) => {
+          const notification = notificationVueInstance.notification
+          this.$NMessage.success(notification.title)
+          notificationVueInstance.close()
         }
       })
     }
@@ -96,8 +97,12 @@ In the kind of world where we belong`,
         action: 'Mark as read',
         avator: null,
         duration: 3000,
-        afterCloseCallback: (notification) => {
+        afterCloseCallback: (notificationVueInstance) => {
+          const notification = notificationVueInstance.notification
           this.$NMessage.success(notification.title)
+        },
+        actionCallback: (notificationVueInstance) => {
+          notificationVueInstance.close()
         }
       })
     },
@@ -111,12 +116,10 @@ I cant get no, I cant get no`,
         meta: '2019-5-27 15:11',
         action: 'Mark as read',
         avator: null,
-        afterCloseCallback: (notification) => {
+        actionCallback: (notificationVueInstance) => {
+          const notification = notificationVueInstance.notification
           this.$NMessage.success(notification.title)
-        },
-        actionCallback: (notification, closeNotification) => {
-          this.$NMessage.success(notification.title)
-          closeNotification()
+          notificationVueInstance.close()
         }
       })
     }
