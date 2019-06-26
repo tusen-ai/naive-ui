@@ -65,9 +65,9 @@
         <div class="n-doc-section__source">
           <textarea>
 /**
- * 注意 auto-text-color 会将 type="primary" 的按钮的文字颜色设定为背景色
- * 如果不设定 将使用黑色作为文字颜色
- * 请注意设计稿还原
+ * Note: auto-text-color will set button of type="primary"'s color as its first
+ * background-colored parent's background-color
+ * If auto-text-color is not set, its color will be black
  */
 <n-button
   size="small"

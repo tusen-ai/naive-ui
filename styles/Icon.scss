@@ -3,11 +3,14 @@
 .n-icon {
   height: 1em;
   width: 1em;
+  line-height: 1em;
   text-align: center;
   display: inline-block;
   position: relative;
   &::before {
+    line-height: 1em;
     width: 1em;
+    height: 1em;
     position: absolute;
     top: 0;
     left: 0;

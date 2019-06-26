@@ -2,7 +2,7 @@
   <div class="demo">
     <n-nimbus-service-layout
       icon="md-contacts"
-      name="NAIVE UI (0.1.59)"
+      name="NAIVE UI (0.1.64)"
       :padding-body="false"
       :items="items"
     >
@@ -159,6 +159,9 @@ export default {
       display: flex;
       margin-bottom: 12px;
       flex-wrap: wrap;
+    }
+    .n-doc-section__text-content {
+      font-size: 16px;
     }
     .n-doc-section__source {
     }

@@ -195,6 +195,9 @@ export default {
         &::-webkit-scrollbar {
           width: 5px;
         }
+        &::-moz-scrollbar {
+          width: 5px;
+        }
 
         /* Track */
         &::-webkit-scrollbar-track {

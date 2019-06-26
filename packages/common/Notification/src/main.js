@@ -2,9 +2,8 @@
 import Vue from 'vue'
 import NNotificationCell from './NotificationCell'
 
-function attachMessageContainer () {
+function attachNotificationContainer () {
   let notificationContainer = document.querySelector('.n-notification.n-notification__container')
-  console.log(notificationContainer)
   if (!notificationContainer) {
     notificationContainer = document.createElement('div')
     notificationContainer.classList.add('n-notification', 'n-notification__container')
@@ -26,17 +25,17 @@ function attachMessageContainer () {
 }
 
 const defaultOptions = {
-  timeout: 50000,
   emergeTransitionTimeout: 300,
   vanishTransitionTimeout: 300
 }
 
 const defaultNotification = {
+  duration: null,
   avator: null,
   actionCallback: () => {}
 }
 
-function mountMessageEl (container, vm, option) {
+function mountNotificationEl (container, vm, option) {
   const el = vm.$el
   el.classList.add('is-going-to-emerge')
   container.appendChild(el)
@@ -45,9 +44,15 @@ function mountMessageEl (container, vm, option) {
   el.style['max-height'] = `${30 + vm.$refs.body.getBoundingClientRect().height}px`
 }
 
-function removeMessageEl (container, el, option) {
+function removeNotificationEl (container, el, option, notificationVueInstance) {
   setTimeout(function () {
-    container.removeChild(el)
+    if (container.contains(el)) {
+      container.removeChild(el)
+      const notification = notificationVueInstance.notification
+      if (notification.afterCloseCallback) {
+        notification.afterCloseCallback(notificationVueInstance)
+      }
+    }
   }, option.vanishTransitionTimeout)
   el.classList.add('is-vanishing')
   el.style['max-height'] = '0'
@@ -56,19 +61,24 @@ function removeMessageEl (container, el, option) {
 const NMessage = {
   notify (notification, type = 'success', option = defaultOptions) {
     notification = { ...defaultNotification, ...notification }
-    const notificationContainer = attachMessageContainer()
+    const notificationContainer = attachNotificationContainer()
     const notificationCell = (new Vue({ ...NNotificationCell,
       propsData: { type, notification: notification },
+      mounted () {
+        if (notification.duration) {
+          setTimeout(this.close, notification.duration)
+        }
+      },
       methods: {
         close () {
-          removeMessageEl(notificationContainer, this.$el, option)
+          removeNotificationEl(notificationContainer, this.$el, option, this)
         },
         handleActionClick () {
           notification.actionCallback(this)
         }
       }
     })).$mount()
-    mountMessageEl(notificationContainer, notificationCell, option)
+    mountNotificationEl(notificationContainer, notificationCell, option)
   }
 }
 
