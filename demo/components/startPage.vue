@@ -13,6 +13,9 @@
         <div class="n-doc-section__header">
           TuSimple Vue-Based Frontend Component Library
         </div>
+        <div class="n-doc-section__text-content">
+          <a href="https://***REMOVED***/naive-ui">GitHub</a>
+        </div>
       </div>
     </div>
   </div>

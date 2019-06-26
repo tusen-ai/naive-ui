@@ -1,5 +1,7 @@
 # naive-ui
 TuSimple Vue-Based Frontend Component Library
+# Documentation
+http://***REMOVED***/#/start
 # Start Develop / 开始开发
 - packages
 - packages/commons
@@ -9,7 +11,6 @@ TuSimple Vue-Based Frontend Component Library
 - demo
 - build
 # Want to see how component works / 想看看组件效果？
-`npm run dev` @ port 8086
 # Want to add your own component?
 1. add some thing in packages
 2. add some thing in demo/index.js demo/components

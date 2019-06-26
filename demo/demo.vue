@@ -157,6 +157,9 @@ export default {
       margin-bottom: 12px;
       flex-wrap: wrap;
     }
+    .n-doc-section__text-content {
+      font-size: 16px;
+    }
     .n-doc-section__source {
 
     }
