@@ -42,12 +42,13 @@ const webpackConfig = {
         }
       },
       {
+        test: /\.(js|jsx)$/,
+        exclude: [/node_modules/],
+        loader: 'babel-loader'
+      },
+      {
         test: /\.(scss|css)$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader'
-        ]
+        use: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
         test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,

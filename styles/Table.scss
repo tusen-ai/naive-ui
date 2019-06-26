@@ -1,5 +1,5 @@
-@import './mixins/mixins.scss';
-@import './theme/default.scss';
+@import "./mixins/mixins.scss";
+@import "./theme/default.scss";
 
 @include b(table) {
   width: 100%;
@@ -46,6 +46,9 @@
         td:nth-last-child(1) {
           padding-left: 32px;
         }
+      }
+      tr:hover {
+        background-color: #2b3147;
       }
     }
   }

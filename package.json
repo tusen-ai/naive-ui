@@ -19,13 +19,17 @@
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.4",
-    "@babel/preset-env": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
     "@vue/babel-preset-app": "^3.8.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "@vue/test-utils": "^1.0.0-beta.29",
-    "babel-loader": "^8.0.5",
+    "babel-helper-vue-jsx-merge-props": "^2.0.3",
+    "babel-loader": "^8.0.6",
     "babel-plugin-istanbul": "^5.1.4",
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-plugin-transform-vue-jsx": "^3.7.0",
+    "babel-preset-env": "^1.7.0",
     "chai": "^4.2.0",
     "codemirror": "^5.47.0",
     "copy-webpack-plugin": "^5.0.3",
@@ -52,6 +56,7 @@
     "karma-spec-reporter": "0.0.32",
     "karma-webpack": "^3.0.5",
     "mocha": "^6.1.4",
+    "prettier-eslint": "^9.0.0",
     "progress-bar-webpack-plugin": "^1.12.1",
     "sinon": "^7.3.2",
     "sinon-chai": "^3.3.0",
@@ -66,9 +71,11 @@
     "webpack-dev-server": "^3.4.1"
   },
   "dependencies": {
+    "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
+    "@vue/babel-preset-jsx": "^1.0.0",
     "ionicons": "^4.5.8",
     "masonry-layout": "^4.2.2",
-    "sass-loader": "^7.1.0",
-    "node-sass": "^4.12.0"
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0"
   }
 }

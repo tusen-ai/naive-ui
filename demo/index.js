@@ -12,6 +12,8 @@ import WithPadding from 'packages/common/WithPadding'
 import WithMargin from 'packages/common/WithMargin'
 import MasonryGroup from 'packages/common/MasonryGroup'
 import Table from 'packages/common/Table'
+import AdvanceTable from 'packages/common/AdvanceTable'
+
 import Checkbox from 'packages/common/Checkbox'
 import RoundButton from 'packages/common/Button'
 import Switch from '../packages/common/Switch'
@@ -38,6 +40,7 @@ import checkboxDemo from './components/checkboxDemo'
 import buttonDemo from './components/buttonDemo'
 import switchDemo from './components/switchDemo'
 import tableDemo from './components/tableDemo'
+import advanceTableDemo from './components/advanceTableDemo'
 import inputDemo from './components/inputDemo'
 import selectDemo from './components/selectDemo'
 import modalDemo from './components/modalDemo'
@@ -64,6 +67,7 @@ WithPadding.install(Vue)
 ServiceCard.install(Vue)
 MasonryGroup.install(Vue)
 Table.install(Vue)
+AdvanceTable.install(Vue)
 WithMargin.install(Vue)
 Checkbox.install(Vue)
 RoundButton.install(Vue)
@@ -79,7 +83,8 @@ NimbusConfirmCard.install(Vue)
 Pagination.install(Vue)
 
 const routes = [
-  { path: '/start',
+  {
+    path: '/start',
     component: demo,
     children: [
       { path: '/start', component: startPage },
@@ -91,6 +96,7 @@ const routes = [
       { path: '/n-button', component: buttonDemo },
       { path: '/n-switch', component: switchDemo },
       { path: '/n-table', component: tableDemo },
+      { path: '/n-advance-table', component: advanceTableDemo },
       { path: '/n-input', component: inputDemo },
       { path: '/n-select', component: selectDemo },
       { path: '/n-modal', component: modalDemo },
@@ -112,6 +118,6 @@ const router = new VueRouter({
   routes
 })
 
-;(new Vue({
+new Vue({
   router
-})).$mount('#app')
+}).$mount('#app')

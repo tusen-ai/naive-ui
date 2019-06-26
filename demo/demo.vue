@@ -24,7 +24,6 @@ export default {
           name: 'Nimbus',
           path: '/',
           childItems: [
-
             {
               name: 'Nimbus Service Layout',
               path: '/n-nimbus-service-layout'
@@ -96,6 +95,10 @@ export default {
               path: '/n-table'
             },
             {
+              name: 'AdvanceTable',
+              path: '/n-advance-table'
+            },
+            {
               name: 'Tooltip',
               path: '/n-tooltip'
             }
@@ -119,16 +122,16 @@ export default {
 
 <style lang="scss">
 .CodeMirror {
-  border: 2px solid #5C657EFF;
-  height: auto!important;
+  border: 2px solid #5c657eff;
+  height: auto !important;
   z-index: 0;
   border-radius: 8px;
   padding: 8px;
   margin-bottom: 18px;
 }
 .CodeMirror-scroll {
-  overflow-y: hidden!important;
-  overflow-x: auto!important;
+  overflow-y: hidden !important;
+  overflow-x: auto !important;
 }
 .n-doc {
   width: 780px;
@@ -149,7 +152,7 @@ export default {
       margin-bottom: 12px;
     }
     .n-doc-section__view {
-      background: #5C657EFF;
+      background: #5c657eff;
       padding: 18px;
       border-radius: 8px;
       justify-content: center;
@@ -158,7 +161,6 @@ export default {
       flex-wrap: wrap;
     }
     .n-doc-section__source {
-
     }
   }
 }
