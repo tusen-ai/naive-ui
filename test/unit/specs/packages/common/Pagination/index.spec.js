@@ -1,4 +1,4 @@
-import { pagesToShow } from 'packages/common/Pagination/src/utils'
+import { pagesToShow, mapPagesToPageItems } from 'packages/common/Pagination/src/utils'
 
 describe('Pagination', function () {
   describe('utils', function () {
@@ -55,6 +55,30 @@ describe('Pagination', function () {
         expect(pagesToShow(7, 9)).to.deep.equal([1, -2, 5, 6, 7, 8, 9])
         expect(pagesToShow(8, 9)).to.deep.equal([1, -2, 5, 6, 7, 8, 9])
         expect(pagesToShow(9, 9)).to.deep.equal([1, -2, 5, 6, 7, 8, 9])
+      })
+    })
+    describe('#mapPagesToPageItems', function () {
+      it('should return corresponding items', function () {
+        expect(mapPagesToPageItems([-2, -1, 1, 2], 1)).to.deep.equal([
+          {
+            type: 'fastBackward',
+            label: 'fastBackward'
+          },
+          {
+            type: 'fastForward',
+            label: 'fastForward'
+          },
+          {
+            type: 'page',
+            label: 1,
+            active: true
+          },
+          {
+            type: 'page',
+            label: 2,
+            active: false
+          }
+        ])
       })
     })
   })
