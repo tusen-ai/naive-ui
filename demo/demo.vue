@@ -2,7 +2,7 @@
   <div class="demo">
     <n-nimbus-service-layout
       icon="md-contacts"
-      name="NAIVE UI (0.1.69)"
+      name="NAIVE UI (0.1.70)"
       :padding-body="false"
       :items="items"
     >
@@ -108,6 +108,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .demo {
   position: absolute;
   left: 0;
@@ -119,6 +120,10 @@ export default {
 </style>
 
 <style lang="scss">
+body {
+  -webkit-text-size-adjust: 100%;
+}
+
 .CodeMirror {
   border: 2px solid #5C657EFF;
   height: auto!important;

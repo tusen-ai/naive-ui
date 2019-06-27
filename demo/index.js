@@ -79,6 +79,10 @@ NimbusConfirmCard.install(Vue)
 Pagination.install(Vue)
 
 const routes = [
+  {
+    path: '/home-demo',
+    component: homeDemo
+  },
   { path: '/start',
     component: demo,
     children: [
