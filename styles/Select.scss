@@ -25,27 +25,35 @@
       transform: rotate(-45deg);
       transform-origin: 25% 75%;
     }
+    .n-select-link__placeholder {
+      position: absolute;
+      left: 14px;
+      top: 0;
+      color: $select-placeholder-color;
+      opacity: 1;
+      &.n-select-link__placeholder--verbose-transition {
+        transition: opacity .3s $slow-out-cubic-bezier;
+      }
+    }
     .n-select-link__label, .n-select-link__tags {
+      position: relative;
       transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
       box-sizing: border-box;
       border-radius: $select-border-radius;
       background-color: $select-background-color;
       padding: 0 14px;
-      .n-select-link__placeholder {
-        position: absolute;
-        left: 14px;
-        top: 0;
+      
+    }
+    .n-select-link__label {
+      .n-select-link-label__placeholder {
         color: $select-placeholder-color;
       }
     }
     .n-select-link__tags {
-      padding: 0 20px 0 14px;
+      padding: 4px 20px 0 14px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      &.n-select-link__tags--selected {
-        padding-top: 4px;
-      }
       .n-select-link__tag {
         box-sizing: border-box;
         position: relative;
@@ -56,7 +64,7 @@
         margin-right: 7px;
         margin-bottom: 4px;
         font-size: 14px;
-        transition: opacity .2s $default-cubic-bezier, transform .2s $default-cubic-bezier;
+        transition: opacity .3s $default-cubic-bezier, transform .3s $default-cubic-bezier;
         .n-select-link-tag__content  {
           transform: translateY(-1px);
         }
@@ -88,7 +96,7 @@
         top: 0;
         left: 0;
         z-index: -1;
-        transition: top .2s $default-cubic-bezier;
+        transition: top .3s $default-cubic-bezier;
       }
       &.n-select-menu--multiple {
         .n-select-menu__item {
@@ -131,6 +139,14 @@
         box-shadow: inset 0 0 0 1px $select-border-color--active;
       }
     }
+    &.n-select-link--selected {
+      .n-select-link__placeholder {
+        opacity: 0;
+        &.n-select-link__placeholder--verbose-transition {
+          transition: opacity .3s $fast-in-cubic-bezier;
+        }
+      }
+    }
     &.n-select-link--active {
       &::after {
         transform: rotate(135deg);
@@ -146,6 +162,10 @@
   
   &.n-select--small-size {
     .n-select-link {
+      .n-select-link__placeholder {
+        height: $small-height;
+        line-height: $small-height;
+      }
       .n-select-link__tags {
         min-height: $small-height;
         .n-select-link__tag {
@@ -153,10 +173,7 @@
           height: 20px;
           line-height: 20px;
         }
-        .n-select-link__placeholder {
-          height: $small-height;
-          line-height: $small-height;
-        }
+        
       }
       .n-select-link__label {
         height: $small-height;
@@ -173,6 +190,10 @@
   }
   &.n-select--default-size, &.n-select--medium-size {
     .n-select-link {
+      .n-select-link__placeholder {
+        height: $default-height;
+        line-height: $default-height;
+      }
       .n-select-link__tags {
         min-height: $default-height;
         .n-select-link__tag {
@@ -180,10 +201,7 @@
           height: 26px;
           line-height: 26px;
         }
-        .n-select-link__placeholder {
-          height: $default-height;
-          line-height: $default-height;
-        }
+        
       }
       .n-select-link__label {
         height: $default-height;
@@ -198,16 +216,16 @@
     }
   }
   &.n-select--large-size {
+    .n-select-link__placeholder {
+      height: $large-height;
+      line-height: $large-height;
+    }
     .n-select-link__tags {
       min-height: 32px;
       .n-select-link__tag {
         padding: 0px 20px 0 7px;
         height: 32px;
         line-height: 32px;
-      }
-      .n-select-link__placeholder {
-        height: $large-height;
-        line-height: $large-height;
       }
     }
     .n-select-link {
@@ -224,7 +242,7 @@
     }
   }
 
-  /** transition */
+  /** transition of menu */
   .n-select-menu--transition-enter-active {
     transition: opacity .3s $fast-in-cubic-bezier, transform .3s $fast-in-cubic-bezier;
   }
@@ -235,36 +253,34 @@
     opacity: 0;
     transform: translateY(4px);
   }
+  /** transition of menu light bar */
   .n-select-menu__light-bar--transition-enter-active {
-    transition: opacity .15s $fast-in-cubic-bezier, top .2s $default-cubic-bezier!important;
+    transition: opacity .15s $fast-in-cubic-bezier, top .3s $default-cubic-bezier!important;
   }
   .n-select-menu__light-bar--transition-leave-active {
-    transition: opacity .15s $slow-out-cubic-bezier, top .2s $default-cubic-bezier!important;
+    transition: opacity .15s $slow-out-cubic-bezier, top .3s $default-cubic-bezier!important;
   }
   .n-select-menu__light-bar--transition-enter, .n-select-menu__light-bar--transition-leave-to {
     opacity: 0;
   }
 
+  /**
+   * transition of tag in tags
+   */
   .n-select-menu__tags--transition-enter, .n-select-menu__tags--transition-leave-to {
-    transition: opacity .2s $fast-in-cubic-bezier;
+    transition: opacity .3s $fast-in-cubic-bezier;
     opacity: 0;
   }
   .n-select-menu__tags--transition-enter-active {
-    transition: opacity .2s $slow-out-cubic-bezier;
+    transition: opacity .3s $slow-out-cubic-bezier;
   }
   .n-select-menu__tags--transition-leave-active {
-    transition: opacity .2s $slow-out-cubic-bezier;
-    /**
-     * Don't delete the following line. I don't know how it work. However it works!
-     */
-    transform: translateY(0)!important;
+    transition: opacity .3s $slow-out-cubic-bezier;
     position: absolute!important;
-    /**
-     * Don't delete the following line. I don't know how it work. However it works!
-     */
-    top: 4px;
+    // transform: translateY(0)!important;
+    top: 4px!important;
   }
   .n-select-menu__tags--transition-move {
-    transition: transform .2s $default-cubic-bezier;
+    transition: transform .3s $default-cubic-bezier;
   }
 }

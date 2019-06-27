@@ -144,6 +144,76 @@ export default {
 </script></textarea>
         </div>
       </div>
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
+          Verbose Transition of Multiple Select
+        </div>
+        <div class="n-doc-section__view">
+          <n-select
+            v-model="selectedArray"
+            multiple
+            placeholder="Please Select Type"
+            :items="items"
+            verbose-transition
+          />
+          <br><br>
+          <n-select
+            v-model="selectedArray"
+            multiple
+            size="small"
+            placeholder="Please Select Type"
+            :items="items"
+            verbose-transition
+          />
+          <div>selectedArray: {{ selectedArray }}</div>
+        </div>
+        <div class="n-doc-section__source">
+          <textarea v-pre>
+<n-select
+  v-model="selectedArray"
+  multiple
+  placeholder="Please Select Type"
+  :items="items"
+  verbose-transition
+/>
+<n-select
+  v-model="selectedArray"
+  multiple
+  size="small"
+  placeholder="Please Select Type"
+  :items="items"
+  verbose-transition
+/>
+<div>selectedArray: {{ selectedArray }}</div>
+<script>
+export default {
+  data () {
+    return {
+      selectedArray: [],
+      items: [
+        {
+          label: 'Artifactory',
+          value: 'Artifactory'
+        },
+        {
+          label: 'Registry',
+          value: 'Registry'
+        },
+        {
+          label: 'Public',
+          value: 'Public'
+        },
+        {
+          label: 'Custom',
+          value: 'Custom'
+        }
+      ]
+    }
+  }
+}
+</script></textarea>
+        </div>
+      </div>
     </div>
   </div>
 </template>
