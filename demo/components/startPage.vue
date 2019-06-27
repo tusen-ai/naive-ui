@@ -14,7 +14,8 @@
           TuSimple Vue-Based Frontend Component Library
         </div>
         <div class="n-doc-section__text-content">
-          <a href="https://***REMOVED***/naive-ui">GitHub</a>
+          <a href="https://***REMOVED***/naive-ui">Code Repo(GitHub Enterprise)</a><br>
+          <a href="https://gist.github.com/brianclements/841ea7bffdb01346392c"> Git Commit Style(!important)</a>
         </div>
       </div>
     </div>
