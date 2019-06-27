@@ -114,6 +114,7 @@ export default {
   right: 0;
   top: 0;
   bottom: 0;
+  min-width: 1080px;
 }
 </style>
 
@@ -131,7 +132,7 @@ export default {
   overflow-x: auto!important;
 }
 .n-doc {
-  width: 780px;
+  width: 720px;
   margin: 0 auto;
   .n-doc-header {
     display: flex;

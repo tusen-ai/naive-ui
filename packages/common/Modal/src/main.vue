@@ -125,7 +125,7 @@ export default {
   top: 0;
   height: 0;
   width: 0;
-  overflow: auto;
+  overflow: visible;
   display: flex;
 }
 </style>
