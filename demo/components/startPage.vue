@@ -15,7 +15,8 @@
         </div>
         <div class="n-doc-section__text-content">
           <a href="https://***REMOVED***/naive-ui">Code Repo(GitHub Enterprise)</a><br>
-          <a href="https://gist.github.com/brianclements/841ea7bffdb01346392c"> Git Commit Style(!important)</a>
+          <a href="https://gist.github.com/brianclements/841ea7bffdb01346392c"> Git Commit Style(!important)</a><br>
+          <a href="https://github.com/angular/angular/commits/master">Git Commit Style Example</a>
         </div>
       </div>
     </div>
