@@ -1,17 +1,17 @@
 {
   "name": "naive-ui",
-  "version": "0.1.67",
+  "version": "0.1.69",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "release": "npm run build; npm publish",
-    "build": "cross-env NODE_ENV=development & gulp --gulpfile build/gulpfile.js build",
-    "demo": "cross-env NODE_ENV=development & gulp --gulpfile build/gulpfile.js build & webpack-dev-server --config build/webpack.demo.js",
+    "release": "npm run build && npm publish",
+    "build": "cross-env NODE_ENV=development && gulp --gulpfile build/gulpfile.js build",
+    "demo": "cross-env NODE_ENV=development && gulp --gulpfile build/gulpfile.js build && webpack-dev-server --config build/webpack.demo.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.js",
     "serve": "npm run dev",
     "test": "cross-env NODE_ENV=development BABEL_ENV=test karma start test/unit/karma.conf.js",
     "test-release": "cross-env NODE_ENV=production webpack-dev-server --config build/webpack.release.js",
-    "release-doc": "cross-env NODE_ENV=development & rm -rf doc/dist & webpack --config build/webpack.doc.js; sudo bash doc/deploy-doc.sh"
+    "release-doc": "cross-env NODE_ENV=development && rm -rf doc/dist && node doc/changeDemoVersion.js && webpack --config build/webpack.doc.js && sudo bash doc/deploy-doc.sh"
   },
   "author": "",
   "license": "ISC",
