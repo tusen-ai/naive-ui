@@ -59,6 +59,51 @@
 </div></textarea>
         </div>
       </div>
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
+          Change Event
+        </div>
+        <div class="n-doc-section__view">
+          <n-checkbox
+            v-model="isChecked"
+            style="width: 120px;"
+            @change="handleChange"
+          >
+            checkbox
+          </n-checkbox>
+          <div style="width: 120px;">
+            isChecked: {{ isChecked }}
+          </div>
+        </div>
+        <div class="n-doc-section__source">
+          <textarea v-pre>
+<n-checkbox
+  v-model="isChecked"
+  style="width: 120px;"
+  @change="handleChange"
+>
+  checkbox
+</n-checkbox>
+<div style="width: 120px;">
+  isChecked: {{ isChecked }}
+</div>
+<script>
+export default {
+  data () {
+    return {
+      isChecked: false
+    }
+  },
+  methods: {
+    handleChange (isChecked) {
+      alert(String(isChecked))
+    }
+  }
+}
+</script>
+          </textarea>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -73,6 +118,9 @@ export default {
     }
   },
   methods: {
+    handleChange (isChecked) {
+      alert(String(isChecked))
+    }
   }
 }
 </script>

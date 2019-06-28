@@ -11,38 +11,62 @@
       v-if="multiple"
       class="n-select-link"
       :class="{
-        'n-select-link--active': active
+        'n-select-link--active': active,
+        'n-select-link--selected': selected
       }"
     >
+      <div
+        class="n-select-link__placeholder"
+        :class="{
+          'n-select-link__placeholder--verbose-transition': verboseTransition
+        }"
+      >
+        {{ placeholder }}
+      </div>
       <div
         class="n-select-link__tags"
         :class="{
           'n-select-link__tags--selected': selected
         }"
       >
-        <!-- <transition-group
+        <transition-group
+          v-if="verboseTransition"
+          class="n-select-link__tag-wrapper"
           name="n-select-menu__tags--transition"
-        > -->
-        <div
-          v-for="item in selectedItems"
-          :key="item.value"
-          class="n-select-link__tag"
         >
-          <div class="n-select-link-tag__content">
-            {{ item.label }}
+          <div
+            v-for="item in selectedItems"
+            :key="item.value"
+            class="n-select-link__tag"
+          >
+            <div class="n-select-link-tag__content">
+              {{ item.label }}
+            </div>
+            <n-icon
+              class="n-select-link-tag__icon"
+              type="md-close"
+              @click.stop="toggle(item)"
+            />
           </div>
-          <n-icon
-            class="n-select-link-tag__icon"
-            type="md-close"
-            @click.stop="toggle(item)"
-          />
-        </div>
-        <!-- </transition-group> -->
+        </transition-group>
         <div
-          v-if="!selected"
-          class="n-select-link__placeholder"
+          v-else
+          class="n-select-link__tag-wrapper"
         >
-          {{ placeholder }}
+          <div
+            v-for="item in selectedItems"
+            :key="item.value"
+            class="n-select-link__tag"
+          >
+            <div class="n-select-link-tag__content">
+              {{ item.label }}
+            </div>
+            <n-icon
+              class="n-select-link-tag__icon"
+              type="md-close"
+              @click.stop="toggle(item)"
+            />
+          </div>
         </div>
       </div>
       <transition name="n-select-menu--transition">
@@ -82,16 +106,13 @@
       }"
     >
       <div
-        v-if="selected"
         class="n-select-link__label"
       >
-        {{ selectedValue }}
-      </div>
-      <div
-        v-else
-        class="n-select-link__label n-select-link__placeholder"
-      >
-        {{ placeholder }}
+        <span v-if="selected">{{ selectedValue }}</span>
+        <span
+          v-else
+          class="n-select-link-label__placeholder"
+        >{{ placeholder }}</span>
       </div>
       <transition name="n-select-menu--transition">
         <div
@@ -158,6 +179,10 @@ export default {
     size: {
       type: String,
       default: 'default'
+    },
+    verboseTransition: {
+      type: Boolean,
+      default: false
     }
   },
   data () {

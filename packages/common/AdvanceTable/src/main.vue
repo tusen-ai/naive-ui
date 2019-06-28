@@ -7,7 +7,6 @@
           <SortIcon
             v-if="column.sortable"
             v-model="sortIndexs[i]"
-            class="table-head-icon"
             @onSortTypeChange="
               type =>
                 onSortTypeChange(i, column.sortable, column.key, type, column)
@@ -95,14 +94,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.ts-sort-container {
-  display: inline-block;
-  width: 14px;
-  height: 12px;
-  margin-top: -1px;
-  cursor: pointer;
-  position: relative;
-}
-</style>

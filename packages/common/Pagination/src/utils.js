@@ -42,9 +42,8 @@ function pagesToShow (currentPage, pageCount) {
   return items
 }
 
-function pageItems (currentPage, pageCount) {
-  const pages = pagesToShow(currentPage, pageCount)
-  const items = pages.map(page => {
+function mapPagesToPageItems (pages, currentPage) {
+  return pages.map(page => {
     switch (page) {
       case -2:
         return {
@@ -67,12 +66,17 @@ function pageItems (currentPage, pageCount) {
           return {
             type: 'page',
             label: page,
-            activa: false
+            active: false
           }
         }
     }
   })
+}
+
+function pageItems (currentPage, pageCount) {
+  const pages = pagesToShow(currentPage, pageCount)
+  const items = mapPagesToPageItems(pages, currentPage)
   return items
 }
 
-export { pagesToShow, pageItems }
+export { pagesToShow, mapPagesToPageItems, pageItems }

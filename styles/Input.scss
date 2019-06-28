@@ -30,6 +30,7 @@
     }
   }
   .n-input__input, .n-input__textarea {
+    -webkit-appearance: none;
     box-sizing: border-box;
     border: none;
     border-radius: $input-border-radius;

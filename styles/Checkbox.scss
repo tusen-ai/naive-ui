@@ -13,6 +13,31 @@
     color: #fff;
     margin-left: 6px;
   }
+  &.n-checkbox--checked {
+    .n-checkbox__checkbox {
+      background-color: $checkbox-background--active;
+      &::after {
+        opacity: 1;
+        transform: rotate(45deg) scale(1);
+      }
+    }
+  }
+  &.n-checkbox--disabled {
+    .n-checkbox__checkbox {
+      cursor: not-allowed;
+      background-color: rgba(255,255,255,.4);
+      &:hover {
+        box-shadow: none;
+      }
+
+      &::after {
+        border: 1.5px solid rgba(255,255,255,.4);
+        border-left: 0;
+        border-top: 0;
+      }
+
+    }
+  }
   .n-checkbox__checkbox {
     & {
       height: 14px;
@@ -27,44 +52,21 @@
     &:hover {
       box-shadow: inset 0 0 0 1px $checkbox-border-color--active;
     }
-    &.is-checked {
-      background-color: $checkbox-background--active;
-    }
-    &.n-checkbox__checkbox--disabled {
-      cursor: not-allowed;
-      background-color: rgba(255,255,255,.4);
-      &:hover {
-        box-shadow: none;
-      }
-      .n-checkbox-checkbox__inner {
-        &::after {
-          border: 1.5px solid rgba(255,255,255,.4);
-          border-left: 0;
-          border-top: 0;
-        }
-      }
-    }
-    .n-checkbox-checkbox__inner {
-      &::after {
-        box-sizing: content-box;
-        content: "";
-        border: 1.5px solid #5C647B;
-        border-left: 0;
-        border-top: 0;
-        height: 8px;
-        left: 5px;
-        position: absolute;
-        top: 1px;
-        opacity: 0;
-        transform: rotate(45deg) scale(.5);
-        width: 3px;
-        transform-origin: center;
-        transition: transform .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
-      }
-      &.is-checked::after {
-        opacity: 1;
-        transform: rotate(45deg) scale(1);
-      }
+    &::after {
+      box-sizing: content-box;
+      content: "";
+      border: 1.5px solid #5C647B;
+      border-left: 0;
+      border-top: 0;
+      height: 8px;
+      left: 5px;
+      position: absolute;
+      top: 1px;
+      opacity: 0;
+      transform: rotate(45deg) scale(.5);
+      width: 3px;
+      transform-origin: center;
+      transition: transform .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
     }
   }
 }

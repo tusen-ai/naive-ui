@@ -2,7 +2,7 @@
   <div class="demo">
     <n-nimbus-service-layout
       icon="md-contacts"
-      name="NAIVE UI (0.1.64)"
+      name="NAIVE UI (0.1.70)"
       :padding-body="false"
       :items="items"
     >
@@ -111,16 +111,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .demo {
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
+  min-width: 1080px;
 }
 </style>
 
 <style lang="scss">
+body {
+  -webkit-text-size-adjust: 100%;
+}
+
 .CodeMirror {
   border: 2px solid #5c657eff;
   height: auto !important;
@@ -134,7 +140,7 @@ export default {
   overflow-x: auto !important;
 }
 .n-doc {
-  width: 780px;
+  width: 720px;
   margin: 0 auto;
   .n-doc-header {
     display: flex;
@@ -164,6 +170,10 @@ export default {
       font-size: 16px;
     }
     .n-doc-section__source {
+<<<<<<< HEAD
+=======
+      position: relative;
+>>>>>>> ca1d208f1357cc1eff2bd4829bad43064242edb5
     }
   }
 }

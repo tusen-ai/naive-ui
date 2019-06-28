@@ -84,7 +84,14 @@ Pagination.install(Vue)
 
 const routes = [
   {
+<<<<<<< HEAD
     path: '/start',
+=======
+    path: '/home-demo',
+    component: homeDemo
+  },
+  { path: '/start',
+>>>>>>> ca1d208f1357cc1eff2bd4829bad43064242edb5
     component: demo,
     children: [
       { path: '/start', component: startPage },
