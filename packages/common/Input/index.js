@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import Input from './src/main.vue'
 
 Input.install = function (Vue) {
