@@ -45,6 +45,7 @@
     "iview": "^3.4.2",
     "jsdom": "^15.1.1",
     "karma": "^4.1.0",
+    "karma-chrome-launcher": "^2.2.0",
     "karma-coverage": "^1.1.2",
     "karma-jsdom-launcher": "^7.1.0",
     "karma-mocha": "^1.3.0",

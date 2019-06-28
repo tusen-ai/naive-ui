@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import Icon from './src/main.vue'
 
 Icon.install = function (Vue) {

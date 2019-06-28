@@ -146,12 +146,14 @@
         </div>
         <div class="n-doc-section__view">
           <div style="padding: 14px; background: white; margin-right: 14px; border-radius: 8px;">
-            <n-button
-              type="primary"
-              auto-text-color
-            >
-              with-auto-text-color
-            </n-button>
+            <div>
+              <n-button
+                type="primary"
+                auto-text-color
+              >
+                with-auto-text-color
+              </n-button>
+            </div>
           </div>
           <div style="padding: 14px; background: white; border-radius: 8px;">
             <n-button type="primary">

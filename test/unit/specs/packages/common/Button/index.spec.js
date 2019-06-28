@@ -48,7 +48,7 @@ describe('Button', function () {
       components: {
         NButton
       },
-      template: `<div style="background-color: ${backgroundColor};"><n-button auto-text-color>test</n-button></div>`
+      template: `<div style="background-color: ${backgroundColor};"><div><n-button auto-text-color>test</n-button></div></div>`
     }
     const wrapper = mount(NButtonTestContext)
     expect(wrapper.element.querySelector('.n-button__content').style.color).to.equal('rgba(6, 6, 6, 0.6)')

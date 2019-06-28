@@ -22,18 +22,13 @@ export default {
     color: {
       type: String,
       default: null
-    },
-    custom: {
-      type: String,
-      default: ''
     }
   },
   computed: {
     classes () {
       return [
         {
-          [`${prefixCls}-${this.type}`]: this.type !== '',
-          [`${this.custom}`]: this.custom !== ''
+          [`${prefixCls}-${this.type}`]: this.type !== ''
         }
       ]
     },
