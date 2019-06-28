@@ -1,4 +1,5 @@
 import { pagesToShow, mapPagesToPageItems } from 'packages/common/Pagination/src/utils'
+import { expect } from 'chai'
 
 describe('Pagination', function () {
   describe('utils', function () {

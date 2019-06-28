@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import Scaffold from './src/main.vue'
 
 Scaffold.install = function (Vue) {
