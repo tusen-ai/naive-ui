@@ -29,7 +29,7 @@
       color: $input-icon-color;
     }
   }
-  .n-input__input, .n-input__textarea {
+  & .n-input__input, .n-input__textarea {
     -webkit-appearance: none;
     box-sizing: border-box;
     border: none;
