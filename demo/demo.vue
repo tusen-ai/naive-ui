@@ -101,6 +101,10 @@ export default {
             {
               name: 'Tooltip',
               path: '/n-tooltip'
+            },
+            {
+              name: 'Popup',
+              path: '/n-popup'
             }
           ]
         }
@@ -111,7 +115,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .demo {
   position: absolute;
   left: 0;
@@ -170,10 +173,7 @@ body {
       font-size: 16px;
     }
     .n-doc-section__source {
-<<<<<<< HEAD
-=======
       position: relative;
->>>>>>> ca1d208f1357cc1eff2bd4829bad43064242edb5
     }
   }
 }

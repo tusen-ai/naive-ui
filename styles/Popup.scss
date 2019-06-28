@@ -1,0 +1,27 @@
+@import "./mixins/mixins.scss";
+@import "./theme/default.scss";
+
+.n-popup__content__wrapper {
+  z-index: 1;
+  transition: opacity 0.3s $default-cubic-bezier,
+    transform 0.3s $fast-in-cubic-bezier;
+  opacity: 1;
+  margin: 5px;
+}
+.n-popup__content {
+  border-radius: 6px;
+  background-color: rgba(75, 81, 106, 1);
+  color: #ffffffe6;
+  padding: 8px 14px;
+  font-size: 12px;
+}
+.n-popup__word_wrap {
+  white-space: pre-wrap;
+  text-align: justify;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}

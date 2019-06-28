@@ -22,6 +22,8 @@ import Select from '../packages/common/Select'
 import Modal from '../packages/common/Modal'
 import Message from '../packages/common/Message'
 import Tooltip from '../packages/common/Tooltip'
+import Popup from '../packages/common/Popup'
+
 import Notification from '../packages/common/Notification'
 import Pagination from '../packages/common/Pagination'
 
@@ -47,6 +49,8 @@ import modalDemo from './components/modalDemo'
 import nimbusFormCardDemo from './components/nimbusFormCardDemo'
 import messageDemo from './components/messageDemo'
 import tooltipDemo from './components/tooltipDemo'
+import popupDemo from './components/popupDemo'
+
 import notificationDemo from './components/notificationDemo'
 import nimbusConfirmCardDemo from './components/nimbusConfirmCardDemo'
 import paginationDemo from './components/paginationDemo'
@@ -81,17 +85,15 @@ Tooltip.install(Vue)
 Notification.install(Vue)
 NimbusConfirmCard.install(Vue)
 Pagination.install(Vue)
+Popup.install(Vue)
 
 const routes = [
   {
-<<<<<<< HEAD
-    path: '/start',
-=======
     path: '/home-demo',
     component: homeDemo
   },
-  { path: '/start',
->>>>>>> ca1d208f1357cc1eff2bd4829bad43064242edb5
+  {
+    path: '/start',
     component: demo,
     children: [
       { path: '/start', component: startPage },
@@ -110,6 +112,7 @@ const routes = [
       { path: '/n-nimbus-form-card', component: nimbusFormCardDemo },
       { path: '/n-message', component: messageDemo },
       { path: '/n-tooltip', component: tooltipDemo },
+      { path: '/n-popup', component: popupDemo },
       { path: '/n-notification', component: notificationDemo },
       { path: '/n-nimbus-confirm-card', component: nimbusConfirmCardDemo },
       { path: '/n-pagination', component: paginationDemo }

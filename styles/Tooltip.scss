@@ -1,5 +1,5 @@
-@import './mixins/mixins.scss';
-@import './theme/default.scss';
+@import "./mixins/mixins.scss";
+@import "./theme/default.scss";
 
 @include b(tooltip) {
   & {
@@ -10,7 +10,7 @@
     display: none;
   }
   .n-tooltip__popup.has-emerged {
-    opacity: .5;
+    opacity: 0.5;
     transform: translateX(-50%) translateY(4px);
   }
   .n-tooltip__popup {
@@ -21,19 +21,21 @@
     transform: translateX(-50%) translateY(0px);
     padding-top: 4px;
     opacity: 1;
-    transition: opacity .3s $default-cubic-bezier, transform .3s $fast-in-cubic-bezier;
+    transition: opacity 0.3s $default-cubic-bezier,
+      transform 0.3s $fast-in-cubic-bezier;
     .n-tooltip-popup__content {
       white-space: nowrap;
       border-radius: 6px;
-      background-color: rgba(75,81,106,1);
-      color: #FFFFFFE6;
+      background-color: rgba(75, 81, 106, 1);
+      color: #ffffffe6;
       padding: 8px 14px;
       font-size: 12px;
     }
   }
-  .n-tooltip__popup.is-vanishing { 
+  .n-tooltip__popup.is-vanishing {
     opacity: 0;
-    transition: opacity .3s $default-cubic-bezier, transform .3s $slow-out-cubic-bezier!important;
+    transition: opacity 0.3s $default-cubic-bezier,
+      transform 0.3s $slow-out-cubic-bezier !important;
     transform: translateX(-50%) translateY(4px);
   }
 }

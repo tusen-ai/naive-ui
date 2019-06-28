@@ -18,6 +18,7 @@ import Message from './packages/common/Message'
 import Notification from './packages/common/Notification'
 import Pagination from './packages/common/Pagination'
 import Tooltip from './packages/common/Tooltip'
+import Popup from './packages/common/Popup'
 
 import ServiceCard from './packages/nimbus/ServiceCard'
 import HomeLayout from './packages/nimbus/HomeLayout'
@@ -53,6 +54,7 @@ function installUiToVue (Vue) {
   NimbusConfirmCard.install(Vue)
   Pagination.install(Vue)
   Tooltip.install(Vue)
+  Popup.install(Popup)
 }
 
 export default installUiToVue
