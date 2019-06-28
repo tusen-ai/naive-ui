@@ -4,6 +4,23 @@
 @include b(notification) {
   &.n-notification__container {
     .n-notification__cell {
+      position: relative;
+      transform: translateX(0);
+      display: flex;
+      overflow: hidden;
+      transition: opacity .3s $default-cubic-bezier, transform .3s $default-cubic-bezier,  max-height .3s $default-cubic-bezier, margin-bottom .3s linear, padding-top .3s $default-cubic-bezier, padding-bottom .3s $default-cubic-bezier;
+      opacity: 1;
+      margin-bottom: 9px;
+      width:365px;
+      padding: 15px;
+      box-sizing: border-box;
+      max-height: 400px;
+      background:linear-gradient(225deg,rgba(91,197,161,1) 0%,rgba(116,127,157,1) 100%);
+      box-shadow:0px 2px 25px 0px rgba(0,0,0,0.5);
+      border-radius:6px;
+      flex-shrink: 0;
+      font-weight: 700;
+      color: #ffffff;
       &.is-going-to-emerge {
         opacity: 0;
         transform: translateX(calc(100% + 15px));
@@ -18,105 +35,6 @@
           top: 0;
         }
       }
-      & {
-        position: relative;
-        transform: translateX(0);
-        display: flex;
-        overflow: hidden;
-        transition: opacity .3s $default-cubic-bezier, transform .3s $default-cubic-bezier,  max-height .3s $default-cubic-bezier, margin-bottom .3s linear, padding-top .3s $default-cubic-bezier, padding-bottom .3s $default-cubic-bezier;
-        opacity: 1;
-        margin-bottom: 9px;
-        width:365px;
-        padding: 15px;
-        box-sizing: border-box;
-        max-height: 400px;
-        background:linear-gradient(225deg,rgba(91,197,161,1) 0%,rgba(116,127,157,1) 100%);
-        box-shadow:0px 2px 25px 0px rgba(0,0,0,0.5);
-        border-radius:6px;
-        flex-shrink: 0;
-        font-weight: 700;
-        color: #ffffff;
-        .n-notification-cell__wrapper {
-          position: relative;
-          width: 100%;
-          .n-notification-cell__deactivator {
-            position: absolute;
-            height: 15px;
-            width: 15px;
-            right: 0px;
-            top: 0px;
-            transition: top .3s $default-cubic-bezier;
-            cursor: pointer;
-            &::before {
-              position: absolute;
-              transform: rotate(45deg);
-              height: 6px;
-              width: 6px;
-              top: -2px;
-              content: "";
-              border-right: 2px solid #a1d9c6;
-              border-bottom: 2px solid #a1d9c6
-            }
-            &::after {
-              position: absolute;
-              height: 6px;
-              width: 6px;
-              content: "";
-              transform: rotate(45deg);
-              top: 7px;
-              border-left: 2px solid #a1d9c6;
-              border-top: 2px solid #a1d9c6;
-            }
-          }
-          .n-notification-cell__avator {
-            position: absolute;
-            height: 28px;
-            width: 28px;
-            border-radius: 14px;
-            background-color: #59C3B2FF;
-            left: 0px;
-            top: 0px;
-            text-align: center;
-            font-size: 18px;
-            line-height: 28px;
-            transition: top .3s $default-cubic-bezier,
-          }
-          .n-notification-cell__body {
-            display: flex;
-            flex-direction: column;
-            margin-left: 41px;
-            font-size: 14px;
-            width: calc(100%-41px);
-            color: #ffffff;
-            .n-notification-cell__header {
-              font-weight: 700;
-              font-size: 16px;
-              margin-bottom: 8px;
-            }
-            .n-notification-cell__title-meta {
-              margin-bottom: 8px;
-            }
-            .n-notification-cell__title-meta, .n-notification-cell__meta {
-              font-size: 12px;
-              color: rgba(255,255,255,.4);
-            }
-            .n-notification-cell__content {
-              white-space: wrap;
-              color: #ffffff;
-            }
-            .n-notification-cell__action {
-              cursor: pointer;
-              color: #00FFA9FF;
-            }
-            .n-notification-cell__footer {
-              margin-top: 8px;
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-            }
-          }
-        }
-      }
       &.is-vanishing {
         opacity: 0;
         transform: translateX(calc(100% + 15px));
@@ -124,6 +42,86 @@
         padding-bottom: 0;
         max-height: 0;
         margin-bottom: 0;
+      }
+      .n-notification-cell__wrapper {
+        position: relative;
+        width: 100%;
+        .n-notification-cell__deactivator {
+          position: absolute;
+          height: 15px;
+          width: 15px;
+          right: 0px;
+          top: 0px;
+          transition: top .3s $default-cubic-bezier;
+          cursor: pointer;
+          &::before {
+            position: absolute;
+            transform: rotate(45deg);
+            height: 6px;
+            width: 6px;
+            top: -2px;
+            content: "";
+            border-right: 2px solid #a1d9c6;
+            border-bottom: 2px solid #a1d9c6
+          }
+          &::after {
+            position: absolute;
+            height: 6px;
+            width: 6px;
+            content: "";
+            transform: rotate(45deg);
+            top: 7px;
+            border-left: 2px solid #a1d9c6;
+            border-top: 2px solid #a1d9c6;
+          }
+        }
+        .n-notification-cell__avator {
+          position: absolute;
+          height: 28px;
+          width: 28px;
+          border-radius: 14px;
+          background-color: #59C3B2FF;
+          left: 0px;
+          top: 0px;
+          text-align: center;
+          font-size: 18px;
+          line-height: 28px;
+          transition: top .3s $default-cubic-bezier,
+        }
+        .n-notification-cell__body {
+          display: flex;
+          flex-direction: column;
+          margin-left: 41px;
+          font-size: 14px;
+          width: calc(100% - 41px);
+          color: #ffffff;
+          .n-notification-cell__header {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 8px;
+          }
+          .n-notification-cell__title-meta {
+            margin-bottom: 8px;
+          }
+          .n-notification-cell__title-meta, .n-notification-cell__meta {
+            font-size: 12px;
+            color: rgba(255,255,255,.4);
+          }
+          .n-notification-cell__content {
+            white-space: wrap;
+            color: #ffffff;
+          }
+          .n-notification-cell__action {
+            cursor: pointer;
+            color: #00FFA9FF;
+          }
+          .n-notification-cell__footer {
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          }
+        }
       }
     }
   }

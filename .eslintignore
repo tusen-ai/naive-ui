@@ -1,2 +1,2 @@
 node_modules
-coverage
+test/unit/coverage
