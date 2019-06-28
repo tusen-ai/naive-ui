@@ -214,6 +214,93 @@ export default {
 </script></textarea>
         </div>
       </div>
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
+          Change Event
+        </div>
+        <div class="n-doc-section__view">
+          <div style="flex-grow: 1;">
+            selectedValue: {{ selectedValue }}
+          </div>
+          <div style="flex-grow: 1;">
+            selectedArray: {{ selectedArray }}
+          </div>
+          <n-select
+            v-model="selectedValue"
+            placeholder="Please Select Type"
+            :items="items"
+            @change="handleChange"
+          />
+          <br><br>
+          <n-select
+            v-model="selectedArray"
+            multiple
+            size="small"
+            placeholder="Please Select Type"
+            :items="items"
+            verbose-transition
+            @change="handleChange"
+          />
+        </div>
+        <div class="n-doc-section__source">
+          <textarea v-pre>
+<div>
+  selectedValue: {{ selectedValue }}
+</div>
+<div>
+  selectedArray: {{ selectedArray }}
+</div>
+<n-select
+  v-model="selectedValue"
+  placeholder="Please Select Type"
+  :items="items"
+  @change="handleChange"
+/>
+<br><br>
+<n-select
+  v-model="selectedArray"
+  multiple
+  size="small"
+  placeholder="Please Select Type"
+  :items="items"
+  verbose-transition
+  @change="handleChange"
+/>
+<script>
+export default {
+  data () {
+    return {
+      selectedValue: null,
+      selectedArray: [],
+      items: [
+        {
+          label: 'Artifactory',
+          value: 'Artifactory'
+        },
+        {
+          label: 'Registry',
+          value: 'Registry'
+        },
+        {
+          label: 'Public',
+          value: 'Public'
+        },
+        {
+          label: 'Custom',
+          value: 'Custom'
+        }
+      ]
+    }
+  },
+  methods: {
+    handleChange (newValue) {
+      alert(String(newValue))
+    }
+  }
+}
+</script></textarea>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -247,6 +334,9 @@ export default {
     }
   },
   methods: {
+    handleChange (newValue) {
+      alert(String(newValue))
+    }
   }
 }
 </script>

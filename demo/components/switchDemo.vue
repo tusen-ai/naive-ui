@@ -48,6 +48,31 @@ export default {
 </script></textarea>
         </div>
       </div>
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
+          Change Event
+        </div>
+        <div class="n-doc-section__view">
+          <n-switch
+            v-model="isActive"
+            @change="handleChange"
+          />
+          <div style="margin: 0 14px;">
+            active: {{ isActive }}
+          </div>
+        </div>
+        <div class="n-doc-section__source">
+          <textarea v-pre>
+<n-switch
+  v-model="isActive"
+  @change="handleChange"
+/>
+<div style="margin: 0 14px;">
+  active: {{ isActive }}
+</div>
+</textarea>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -62,6 +87,9 @@ export default {
     }
   },
   methods: {
+    handleChange (isOn) {
+      alert(isOn)
+    }
   }
 }
 </script>
