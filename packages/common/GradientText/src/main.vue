@@ -1,16 +1,12 @@
 <template>
   <div
     class="n-gradient-text"
+    :class="{
+      [`n-gradient-text--${type}-type`]: true
+    }"
     :style="style"
   >
-    <div
-      class="n-gradient-text__content"
-      :class="{
-        [`is-${type}`]: true
-      }"
-    >
-      <slot />
-    </div>
+    <slot />
   </div>
 </template>
 
@@ -18,9 +14,13 @@
 export default {
   name: 'NGradientText',
   props: {
-    'fontSize': {
-      type: Number,
-      default: 16
+    size: {
+      type: [String, Number],
+      default: null
+    },
+    fontSize: {
+      type: [String, Number],
+      default: null
     },
     type: {
       type: String,
@@ -29,9 +29,10 @@ export default {
   },
   computed: {
     style () {
-      return {
-        fontSize: this.fontSize + 'px'
-      }
+      const style = {}
+      const fontSize = this.size || this.fontSize
+      if (fontSize) style.fontSize = fontSize + 'px'
+      return style
     }
   }
 }

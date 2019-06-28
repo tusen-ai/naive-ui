@@ -1,6 +1,7 @@
 import NIcon from 'packages/common/Icon'
 import { mount, createLocalVue } from '@vue/test-utils'
 import { expect } from 'chai'
+import { existsInClassList } from '../../utils'
 
 describe('Icon', function () {
   const localVue = createLocalVue()
@@ -20,7 +21,7 @@ describe('Icon', function () {
         }
       }
       const wrapper = mount(NIconTestContext)
-      expect(Array.from(wrapper.element.classList).some(className => 1 + className.search(type)))
+      expect(existsInClassList(wrapper.element, type))
     })
   })
   describe('props.size', function () {

@@ -6,30 +6,28 @@
   position: relative;
   font-weight: 700;
   font-size: 16px;
-  .n-gradient-text__content {
+  background: $default-text-gradient;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  &.n-gradient-text--default-type {
     background: $default-text-gradient;
-    background-clip: text;
     -webkit-background-clip: text;
-    color: transparent;
-    &.is-default {
-      background: $default-text-gradient;
-      -webkit-background-clip: text;
-      background-clip: text;
-    }
-    &.is-warning {
-      background: $default-text-gradient-warning;
-      -webkit-background-clip: text;
-      background-clip: text;
-    }
-    &.is-danger {
-      background: $default-text-gradient-danger;
-      -webkit-background-clip: text;
-      background-clip: text;
-    }
-    &.is-success {
-      background: $default-text-gradient-success;
-      -webkit-background-clip: text;
-      background-clip: text;
-    }
+    background-clip: text;
+  }
+  &.n-gradient-text--warning-type {
+    background: $default-text-gradient-warning;
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+  &.n-gradient-text--danger-type {
+    background: $default-text-gradient-danger;
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+  &.n-gradient-text--success-type {
+    background: $default-text-gradient-success;
+    -webkit-background-clip: text;
+    background-clip: text;
   }
 }
