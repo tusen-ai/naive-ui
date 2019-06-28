@@ -1,4 +1,5 @@
-import { pagesToShow, mapPagesToPageItems } from 'packages/common/Pagination/src/utils'
+import { pagesToShow, mapPagesToPageItems, pageItems } from 'packages/common/Pagination/src/utils'
+import { expect } from 'chai'
 
 describe('Pagination', function () {
   describe('utils', function () {
@@ -79,6 +80,45 @@ describe('Pagination', function () {
             active: false
           }
         ])
+      })
+    })
+    describe('#pageItems', function () {
+      it('should work', function () {
+        expect(pageItems(5, 9)).to.deep.equal([{
+          type: 'page',
+          label: 1,
+          active: false
+        }, {
+          type: 'fastBackward',
+          label: 'fastBackward'
+        }, {
+          type: 'page',
+          label: 3,
+          active: false
+        }, {
+          type: 'page',
+          label: 4,
+          active: false
+        }, {
+          type: 'page',
+          label: 5,
+          active: true
+        }, {
+          type: 'page',
+          label: 6,
+          active: false
+        }, {
+          type: 'page',
+          label: 7,
+          active: false
+        }, {
+          type: 'fastForward',
+          label: 'fastForward'
+        }, {
+          type: 'page',
+          label: 9,
+          active: false
+        }])
       })
     })
   })

@@ -68,7 +68,7 @@ export default {
       while (cursor.parentElement) {
         cursor = cursor.parentElement
         const backgroundColor = getComputedStyle(cursor).backgroundColor
-        if (backgroundColor !== 'rgba(0, 0, 0, 0)') {
+        if (backgroundColor && backgroundColor !== 'rgba(0, 0, 0, 0)') {
           this.style = {
             color: backgroundColor
           }

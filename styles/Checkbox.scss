@@ -13,42 +13,15 @@
     color: #fff;
     margin-left: 6px;
   }
-  &.n-checkbox--checked {
-    .n-checkbox__checkbox {
-      background-color: $checkbox-background--active;
-      &::after {
-        opacity: 1;
-        transform: rotate(45deg) scale(1);
-      }
-    }
-  }
-  &.n-checkbox--disabled {
-    .n-checkbox__checkbox {
-      cursor: not-allowed;
-      background-color: rgba(255,255,255,.4);
-      &:hover {
-        box-shadow: none;
-      }
-
-      &::after {
-        border: 1.5px solid rgba(255,255,255,.4);
-        border-left: 0;
-        border-top: 0;
-      }
-
-    }
-  }
   .n-checkbox__checkbox {
-    & {
-      height: 14px;
-      width: 14px;
-      box-sizing: border-box;
-      box-shadow: inset 0 0 0 1px $checkbox-border-color;
-      background-color: transparent;
-      border-radius: 4px;
-      position: relative;
-      transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
-    }
+    height: 14px;
+    width: 14px;
+    box-sizing: border-box;
+    box-shadow: inset 0 0 0 1px $checkbox-border-color;
+    background-color: transparent;
+    border-radius: 4px;
+    position: relative;
+    transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
     &:hover {
       box-shadow: inset 0 0 0 1px $checkbox-border-color--active;
     }
@@ -67,6 +40,29 @@
       width: 3px;
       transform-origin: center;
       transition: transform .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
+    }
+  }
+  &.n-checkbox--checked {
+    .n-checkbox__checkbox {
+      background-color: $checkbox-background--active;
+      &::after {
+        opacity: 1;
+        transform: rotate(45deg) scale(1);
+      }
+    }
+  }
+  &.n-checkbox--disabled {
+    .n-checkbox__checkbox {
+      cursor: not-allowed;
+      background-color: rgba(255,255,255,.4);
+      &:hover {
+        box-shadow: none;
+      }
+      &::after {
+        border: 1.5px solid rgba(255,255,255,.4);
+        border-left: 0;
+        border-top: 0;
+      }
     }
   }
 }

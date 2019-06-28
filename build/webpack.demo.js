@@ -1,3 +1,6 @@
+/**
+ * Webpack config to see if css file works on demo page
+ */
 const path = require('path')
 const webpack = require('webpack')
 const config = require('./config')

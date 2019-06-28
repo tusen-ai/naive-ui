@@ -1,3 +1,6 @@
+/**
+ * Webpack config to pack documentation page
+ */
 const path = require('path')
 const webpack = require('webpack')
 const config = require('./config')

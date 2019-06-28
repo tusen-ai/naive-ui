@@ -2,37 +2,7 @@ import Vue from 'vue/dist/vue'
 import VueRouter from 'vue-router'
 import '../styles/index.scss'
 import 'codemirror/lib/codemirror.css'
-// import Demo from './demo.vue'
-import Card from 'packages/common/Card'
-import Icon from 'packages/common/Icon'
-import Loader from 'packages/common/Loader'
-import GradientText from 'packages/common/GradientText'
-import ColumnGroup from 'packages/common/ColumnGroup'
-import WithPadding from 'packages/common/WithPadding'
-import WithMargin from 'packages/common/WithMargin'
-import MasonryGroup from 'packages/common/MasonryGroup'
-import Table from 'packages/common/Table'
-import AdvanceTable from 'packages/common/AdvanceTable'
-
-import Checkbox from 'packages/common/Checkbox'
-import RoundButton from 'packages/common/Button'
-import Switch from '../packages/common/Switch'
-import Input from '../packages/common/Input'
-import Select from '../packages/common/Select'
-import Modal from '../packages/common/Modal'
-import Message from '../packages/common/Message'
-import Tooltip from '../packages/common/Tooltip'
-import Popup from '../packages/common/Popup'
-
-import Notification from '../packages/common/Notification'
-import Pagination from '../packages/common/Pagination'
-
-import ServiceCard from 'packages/nimbus/ServiceCard'
-import HomeLayout from 'packages/nimbus/HomeLayout'
-import Navbar from 'packages/nimbus/Navbar'
-import ServiceLayout from 'packages/nimbus/ServiceLayout'
-import NimbusFormCard from 'packages/nimbus/FormCard'
-import NimbusConfirmCard from '../packages/nimbus/ConfirmCard'
+import NaiveUI from '../index'
 
 import nimbusServiceLayoutDemo from './components/nimbusServiceLayoutDemo'
 import homeDemo from './components/homeDemo'
@@ -57,35 +27,8 @@ import paginationDemo from './components/paginationDemo'
 import startPage from './components/startPage'
 import demo from './demo'
 
+Vue.use(NaiveUI)
 Vue.use(VueRouter)
-
-Card.install(Vue)
-Icon.install(Vue)
-ServiceLayout.install(Vue)
-Navbar.install(Vue)
-Loader.install(Vue)
-HomeLayout.install(Vue)
-GradientText.install(Vue)
-ColumnGroup.install(Vue)
-WithPadding.install(Vue)
-ServiceCard.install(Vue)
-MasonryGroup.install(Vue)
-Table.install(Vue)
-AdvanceTable.install(Vue)
-WithMargin.install(Vue)
-Checkbox.install(Vue)
-RoundButton.install(Vue)
-Switch.install(Vue)
-Input.install(Vue)
-Select.install(Vue)
-Modal.install(Vue)
-NimbusFormCard.install(Vue)
-Message.install(Vue)
-Tooltip.install(Vue)
-Notification.install(Vue)
-NimbusConfirmCard.install(Vue)
-Pagination.install(Vue)
-Popup.install(Vue)
 
 const routes = [
   {

@@ -1,5 +1,6 @@
 import NCheckbox from 'packages/common/Checkbox'
 import { mount, createLocalVue } from '@vue/test-utils'
+import { expect } from 'chai'
 
 describe('Checkbox', function () {
   const localVue = createLocalVue()

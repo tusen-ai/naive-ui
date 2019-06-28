@@ -1,3 +1,6 @@
+/**
+ * Webpack config to test if there is any problem in index.js before release
+ */
 const path = require('path')
 const webpack = require('webpack')
 const config = require('./config')

@@ -54,10 +54,8 @@
         .n-pagination-item__fast-backward-icon, .n-pagination-item__fast-forward-icon {
           display: block;
           .n-icon {
-            & {
-              display: inline-block;
-              width: 6px;
-            }
+            display: inline-block;
+            width: 6px;
             &::before{
               color: $pagination-color--active;
             }

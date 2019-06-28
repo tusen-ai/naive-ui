@@ -27,7 +27,7 @@ import ServiceLayout from './packages/nimbus/ServiceLayout'
 import NimbusFormCard from './packages/nimbus/FormCard'
 import NimbusConfirmCard from './packages/nimbus/ConfirmCard'
 
-function installUiToVue (Vue) {
+function install (Vue) {
   Card.install(Vue)
   Icon.install(Vue)
   ServiceLayout.install(Vue)
@@ -57,4 +57,6 @@ function installUiToVue (Vue) {
   Popup.install(Popup)
 }
 
-export default installUiToVue
+export default {
+  install
+}
