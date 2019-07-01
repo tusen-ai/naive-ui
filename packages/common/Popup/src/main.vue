@@ -37,9 +37,9 @@
 </template>
 
 <script>
-import Popper from 'packages/utils/popper.js'
+import Popper from '../../../utils/popper.js'
 import { directive as clickOutside } from 'v-click-outside-x'
-import TransferDom from 'packages/directives/transfer-dom'
+import TransferDom from '../../../directives/transfer-dom'
 
 export default {
   mixins: [Popper],

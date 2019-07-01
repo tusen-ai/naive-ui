@@ -54,7 +54,7 @@ function install (Vue) {
   NimbusConfirmCard.install(Vue)
   Pagination.install(Vue)
   Tooltip.install(Vue)
-  Popup.install(Popup)
+  Popup.install(Vue)
 }
 
 export default {

@@ -16,14 +16,14 @@
         <div class="n-doc-section__view">
           <n-popup>
             <n-button style="margin:0">hover</n-button>
-            <span slot="content">hello宝贝</span>
+            <span slot="content">hello baby</span>
           </n-popup>
         </div>
         <div class="n-doc-section__source">
           <textarea v-pre>
           <n-popup>
             <n-button>hover</n-button>
-            <span slot="content">hello宝贝</span>
+            <span slot="content">hello baby</span>
           </n-popup>
           </textarea>
         </div>
@@ -46,7 +46,7 @@
           <textarea v-pre>
            <n-popup placement="left">
             <n-button style="margin:0">hover show left</n-button>
-            <span slot="content">hello宝贝</span>
+            <span slot="content">hello baby</span>
           </n-popup>
           </textarea>
         </div>
@@ -58,7 +58,7 @@
         <div class="n-doc-section__view">
           <n-popup placement="left">
             <n-button style="margin:0">hover show left</n-button>
-            <span slot="content">hello宝贝</span>
+            <span slot="content">hello baby</span>
           </n-popup>
         </div>
         <div class="n-doc-section__source">
@@ -80,7 +80,7 @@
           */
            <n-popup placement="left">
             <n-button style="margin:0">hover show left</n-button>
-            <span slot="content">hello宝贝</span>
+            <span slot="content">hello baby</span>
           </n-popup>
           </textarea>
         </div>
@@ -93,14 +93,14 @@
         <div class="n-doc-section__view">
           <n-popup placement="top-end">
             <n-button style="margin:0">transfer to body</n-button>
-            <span slot="content">hello宝贝</span>
+            <span slot="content">hello baby</span>
           </n-popup>
         </div>
         <div class="n-doc-section__source">
           <textarea v-pre>
           <n-popup placement="top-end">
             <n-button style="margin:0">transfer to body</n-button>
-            <span slot="content">hello宝贝</span>
+            <span slot="content">hello baby</span>
           </n-popup>
           </textarea>
         </div>
