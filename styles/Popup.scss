@@ -10,6 +10,7 @@ $popup-distance: $popup-arrow-width - 1 + 14;
     transform 0.3s $fast-in-cubic-bezier;
   opacity: 1;
   margin: 5px;
+  box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.16);
 }
 
 .n-popup__content__wrapper {
