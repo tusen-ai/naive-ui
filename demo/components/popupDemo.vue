@@ -126,6 +126,27 @@
         </div>
       </div>
     </div>
+
+    <div class="n-doc-section">
+        <div class="n-doc-section__header">
+          No Arrow
+        </div>
+        <div class="n-doc-section__view">
+          <n-popup placement="left" trigger="click" transfer :arrow="false">
+            <n-button style="margin:0">No Arrow</n-button>
+            <span slot="content">click out side to hide</span>
+          </n-popup>
+        </div>
+        <div class="n-doc-section__source">
+          <textarea v-pre>
+          <n-popup placement="left" trigger="click" transfer :arrow="false">
+            <n-button style="margin:0">No Arrow</n-button>
+            <span slot="content">click out side to hide</span>
+          </n-popup>
+          </textarea>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

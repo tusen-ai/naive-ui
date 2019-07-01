@@ -19,7 +19,7 @@
         ref="popper"
         class="popper n-popup__content__wrapper"
       >
-        <div class="n-popup-arrow"></div>
+        <div class="n-popup-arrow" v-if="arrow"></div>
         <div
           class="n-popup__content"
           :style="{
@@ -79,6 +79,10 @@ export default {
         return ['click', 'hover'].includes(value)
       },
       default: 'hover'
+    },
+    arrow: {
+      default: true,
+      type: Boolean
     }
   },
   data () {
