@@ -18,8 +18,8 @@
         v-transfer-dom
         ref="popper"
         class="popper n-popup__content__wrapper"
-        style="  overflow: auto"
       >
+        <div class="n-popup-arrow"></div>
         <div
           class="n-popup__content"
           :style="{

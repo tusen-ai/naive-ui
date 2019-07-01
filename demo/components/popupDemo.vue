@@ -56,8 +56,8 @@
           Change placement
         </div>
         <div class="n-doc-section__view">
-          <n-popup placement="left">
-            <n-button style="margin:0">hover show left</n-button>
+          <n-popup placement="left-start">
+            <n-button style="margin:0">hover show left-start</n-button>
             <span slot="content">hello baby</span>
           </n-popup>
         </div>
@@ -78,8 +78,8 @@
             'right-start',
             'right-end'
           */
-           <n-popup placement="left">
-            <n-button style="margin:0">hover show left</n-button>
+           <n-popup placement="left-start'">
+            <n-button style="margin:0">hover show left-start</n-button>
             <span slot="content">hello baby</span>
           </n-popup>
           </textarea>
