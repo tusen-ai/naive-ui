@@ -10,6 +10,7 @@
     </div>
     <transition name="fade">
       <div
+        @click="handleContentClick"
         @mouseenter="handleMouseEnter"
         @mouseleave="handleMouseLeave"
         v-show="visible"
@@ -92,7 +93,15 @@ export default {
         this.show()
       }
     },
+    handleContentClick (e) {
+      if (this.transfer) {
+        e.stopPropagation()
+      }
+    },
     handleClickOut () {
+      if (this.trigger !== 'click') {
+        return
+      }
       this.hide()
     },
     hide () {
