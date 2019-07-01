@@ -17,9 +17,10 @@
         :data-transfer="transfer"
         v-transfer-dom
         ref="popper"
+        :style="style"
         class="popper n-popup__content__wrapper"
       >
-        <div class="n-popup-arrow" v-if="arrow"></div>
+        <div class="n-popup-arrow"></div>
         <div
           class="n-popup__content"
           :style="{
@@ -80,15 +81,22 @@ export default {
       },
       default: 'hover'
     },
-    arrow: {
-      default: true,
-      type: Boolean
+    zIndex: {
+      default: 1000,
+      type: Number
     }
   },
   data () {
     return {
       timerId: null,
       leaveTimer: null
+    }
+  },
+  computed: {
+    style () {
+      let style = {}
+      if (this.transfer) style['z-index'] = this.zIndex
+      return style
     }
   },
   methods: {
