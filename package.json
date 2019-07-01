@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "0.1.72",
+  "version": "0.1.73",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,7 @@
   "author": "",
   "license": "ISC",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "***REMOVED***"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
