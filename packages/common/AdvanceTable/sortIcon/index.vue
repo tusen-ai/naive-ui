@@ -30,7 +30,8 @@ export default {
       default: '12px'
     },
     value: {
-      type: Number
+      type: Number,
+      default: 0
     }
   },
   data () {
@@ -43,6 +44,10 @@ export default {
     value (val) {
       this.setSort(val)
     }
+  },
+  mounted () {
+    this.setSort(this.value)
+    // console.log('value', this.value, this.upOpacity, this.downOpacity)
   },
   methods: {
     changeDownSort () {
@@ -82,10 +87,6 @@ export default {
           self.downOpacity = 1
       }
     }
-  },
-  mounted () {
-    this.setSort(this.value)
-    // console.log('value', this.value, this.upOpacity, this.downOpacity)
   }
 }
 </script>

@@ -1,5 +1,8 @@
 <template>
-  <div ref="doc" class="n-doc">
+  <div
+    ref="doc"
+    class="n-doc"
+  >
     <div class="n-doc-header">
       <n-gradient-text :font-size="20">
         AdvanceTable
@@ -11,7 +14,10 @@
           Basic Usage
         </div>
         <div class="n-doc-section__view">
-          <n-advance-table :columns="columns" :data="data" />
+          <n-advance-table
+            :columns="columns"
+            :data="data"
+          />
         </div>
         <div class="n-doc-section__source">
           <textarea>scaffold</textarea>

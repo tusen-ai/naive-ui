@@ -2,8 +2,11 @@
   <n-table>
     <n-thead>
       <n-tr>
-        <n-th v-for="(column, i) in columns" :key="column.key"
-          >{{ column.title }}
+        <n-th
+          v-for="(column, i) in columns"
+          :key="column.key"
+        >
+          {{ column.title }}
           <SortIcon
             v-if="column.sortable"
             v-model="sortIndexs[i]"
@@ -12,20 +15,26 @@
                 onSortTypeChange(i, column.sortable, column.key, type, column)
             "
           />
-          <filterIcon></filterIcon>
+          <filterIcon />
         </n-th>
       </n-tr>
     </n-thead>
     <n-tbody>
-      <n-tr v-for="(rowData, i) in copyData" :key="i">
-        <n-td v-for="column in columns" :key="column.key"
-          ><row
+      <n-tr
+        v-for="(rowData, i) in copyData"
+        :key="i"
+      >
+        <n-td
+          v-for="column in columns"
+          :key="column.key"
+        >
+          <row
             :index="i"
             :row="rowData"
-            :keyName="column.key"
+            :key-name="column.key"
             :render="column.render"
-          ></row
-        ></n-td>
+          />
+        </n-td>
       </n-tr>
     </n-tbody>
   </n-table>
@@ -57,14 +66,14 @@ export default {
       default: () => []
     }
   },
+  data () {
+    const sortIndexs = new Array(this.columns.length).fill(0)
+    return { copyData: this.data.slice(0), sortIndexs }
+  },
   watch: {
     data () {
       this.copyData = this.data.slice(0)
     }
-  },
-  data () {
-    const sortIndexs = new Array(this.columns.length).fill(0)
-    return { copyData: this.data.slice(0), sortIndexs }
   },
   methods: {
     onSortTypeChange (i, sortable, key, type, column) {

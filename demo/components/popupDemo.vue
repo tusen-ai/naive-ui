@@ -2,7 +2,10 @@
   有待解决一个bug，在nimbus新的layout下，不使用transfer 弹出的定位是不准的，所以这里默认使用了transfer,经过查询可能是 overflow:auto造成的影响但是还是没有解决
  */
 <template>
-  <div ref="doc" class="n-doc">
+  <div
+    ref="doc"
+    class="n-doc"
+  >
     <div class="n-doc-header">
       <n-gradient-text :font-size="20">
         Popup
@@ -15,7 +18,9 @@
         </div>
         <div class="n-doc-section__view">
           <n-popup>
-            <n-button style="margin:0">hover</n-button>
+            <n-button style="margin:0">
+              hover
+            </n-button>
             <span slot="content">hello baby</span>
           </n-popup>
         </div>
@@ -33,13 +38,17 @@
           word wrap
         </div>
         <div class="n-doc-section__view">
-          <n-popup placement="bottom" :width="200">
-            <n-button style="margin:0">word wrap</n-button>
+          <n-popup
+            placement="bottom"
+            :width="200"
+          >
+            <n-button style="margin:0">
+              word wrap
+            </n-button>
             <span slot="content">
               "Beautiful designs at up to 70% Off. Article offers stylish
               modern, mid-century and scandinavian furniture from world renowned
-              designers at accessible prices."</span
-            >
+              designers at accessible prices."</span>
           </n-popup>
         </div>
         <div class="n-doc-section__source">
@@ -57,7 +66,9 @@
         </div>
         <div class="n-doc-section__view">
           <n-popup placement="left-start">
-            <n-button style="margin:0">hover show left-start</n-button>
+            <n-button style="margin:0">
+              hover show left-start
+            </n-button>
             <span slot="content">hello baby</span>
           </n-popup>
         </div>
@@ -111,8 +122,14 @@
           Click to show
         </div>
         <div class="n-doc-section__view">
-          <n-popup placement="left" trigger="click" transfer>
-            <n-button style="margin:0">click to show</n-button>
+          <n-popup
+            placement="left"
+            trigger="click"
+            transfer
+          >
+            <n-button style="margin:0">
+              click to show
+            </n-button>
             <span slot="content">click out side to hide</span>
           </n-popup>
         </div>
@@ -128,23 +145,29 @@
     </div>
 
     <div class="n-doc-section">
-        <div class="n-doc-section__header">
-          No Arrow
-        </div>
-        <div class="n-doc-section__view">
-          <n-popup placement="left" trigger="click" transfer :arrow="false">
-            <n-button style="margin:0">No Arrow</n-button>
-            <span slot="content">click out side to hide</span>
-          </n-popup>
-        </div>
-        <div class="n-doc-section__source">
-          <textarea v-pre>
+      <div class="n-doc-section__header">
+        No Arrow
+      </div>
+      <div class="n-doc-section__view">
+        <n-popup
+          placement="left"
+          trigger="click"
+          transfer
+          :arrow="false"
+        >
+          <n-button style="margin:0">
+            No Arrow
+          </n-button>
+          <span slot="content">click out side to hide</span>
+        </n-popup>
+      </div>
+      <div class="n-doc-section__source">
+        <textarea v-pre>
           <n-popup placement="left" trigger="click" transfer :arrow="false">
             <n-button style="margin:0">No Arrow</n-button>
             <span slot="content">click out side to hide</span>
           </n-popup>
           </textarea>
-        </div>
       </div>
     </div>
   </div>

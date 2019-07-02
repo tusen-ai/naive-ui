@@ -4,7 +4,7 @@
       style="vertical-align: middle;color: #63e2b7;"
       type="ios-funnel"
       size="12"
-    ></n-icon>
+    />
   </span>
 </template>
 
@@ -24,4 +24,3 @@
   opacity: 1;
 }
 </style>
-

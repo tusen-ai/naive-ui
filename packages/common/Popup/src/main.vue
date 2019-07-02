@@ -1,26 +1,30 @@
 <template>
   <div
+    v-click-outside="handleClickOut"
     style="postion:relative"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
-    v-click-outside="handleClickOut"
   >
-    <div ref="reference" @click="handleClickRef" style="position:relative;">
-      <slot></slot>
+    <div
+      ref="reference"
+      style="position:relative;"
+      @click="handleClickRef"
+    >
+      <slot />
     </div>
     <transition name="fade">
       <div
+        v-show="visible"
+        ref="popper"
+        v-transfer-dom
+        :data-transfer="transfer"
+        :style="style"
+        class="popper n-popup__content__wrapper"
         @click="handleContentClick"
         @mouseenter="handleMouseEnter"
         @mouseleave="handleMouseLeave"
-        v-show="visible"
-        :data-transfer="transfer"
-        v-transfer-dom
-        ref="popper"
-        :style="style"
-        class="popper n-popup__content__wrapper"
       >
-        <div class="n-popup-arrow"></div>
+        <div class="n-popup-arrow" />
         <div
           class="n-popup__content"
           :style="{
@@ -44,9 +48,9 @@ import { directive as clickOutside } from 'v-click-outside-x'
 import TransferDom from '../../../directives/transfer-dom'
 
 export default {
-  mixins: [Popper],
   name: 'NPopup',
   directives: { clickOutside, TransferDom },
+  mixins: [Popper],
   props: {
     placement: {
       validator (value) {
