@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import row from '../row/index.jsx'
+import row from '../row/index.js'
 import SortIcon from '../sortIcon'
 import filterIcon from '../filterIcon'
 

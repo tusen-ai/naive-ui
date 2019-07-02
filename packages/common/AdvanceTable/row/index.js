@@ -15,7 +15,7 @@ export default {
 
     const { keyName, render, row } = ctx.props
     if (render) {
-      return <div>{render(h, params)}</div>
-    } else return <div>{row[keyName]}</div>
+      return h('div', [render(h, params)])
+    } else return h('div', [row[keyName]])
   }
 }

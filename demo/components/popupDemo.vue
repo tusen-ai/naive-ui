@@ -45,10 +45,7 @@
             <n-button style="margin:0">
               word wrap
             </n-button>
-            <span slot="content">
-              "Beautiful designs at up to 70% Off. Article offers stylish
-              modern, mid-century and scandinavian furniture from world renowned
-              designers at accessible prices."</span>
+            <span slot="content">"Beautiful designs at up to 70% Off. Article offers stylish modern, mid-century and scandinavian furniture from world renowned designers at accessible prices."</span>
           </n-popup>
         </div>
         <div class="n-doc-section__source">
@@ -163,11 +160,10 @@
       </div>
       <div class="n-doc-section__source">
         <textarea v-pre>
-          <n-popup placement="left" trigger="click" transfer :arrow="false">
-            <n-button style="margin:0">No Arrow</n-button>
-            <span slot="content">click out side to hide</span>
-          </n-popup>
-          </textarea>
+<n-popup placement="left" trigger="click" transfer :arrow="false">
+  <n-button style="margin:0">No Arrow</n-button>
+  <span slot="content">click out side to hide</span>
+</n-popup></textarea>
       </div>
     </div>
   </div>

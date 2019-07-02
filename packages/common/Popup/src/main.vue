@@ -1,38 +1,40 @@
 <template>
   <div
     v-click-outside="handleClickOut"
-    style="postion:relative"
+    class="n-popup"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
   >
     <div
       ref="reference"
-      style="position:relative;"
+      class="n-popup__rel"
       @click="handleClickRef"
     >
       <slot />
     </div>
-    <transition name="fade">
+    <transition name="n-poup__fade">
       <div
         v-show="visible"
         ref="popper"
         v-transfer-dom
         :data-transfer="transfer"
         :style="style"
-        class="popper n-popup__content__wrapper"
+        class="popper n-popup__content-wrapper"
         @click="handleContentClick"
         @mouseenter="handleMouseEnter"
         @mouseleave="handleMouseLeave"
       >
-        <div v-if="arrow" class="n-popup-arrow" />
+        <div
+          v-if="arrow"
+          class="n-popup__arrow"
+        />
         <div
           class="n-popup__content"
           :style="{
-            width: width + 'px',
-            'box-sizing': 'border-box'
+            'max-width': width + 'px',
           }"
           :class="{
-            'n-popup__word_wrap': width ? true : false
+            'n-popup--word_wrap': width ? true : false
           }"
         >
           <slot name="content" />
@@ -52,6 +54,10 @@ export default {
   directives: { clickOutside, TransferDom },
   mixins: [Popper],
   props: {
+    value: {
+      default: false,
+      type: Boolean
+    },
     placement: {
       validator (value) {
         return [
@@ -107,6 +113,11 @@ export default {
       return style
     }
   },
+  watch: {
+    value (val) {
+      this.visible = val
+    }
+  },
   methods: {
     handleClickRef () {
       if (this.trigger === 'click') {
@@ -129,6 +140,7 @@ export default {
         clearTimeout(this.timerId)
         this.timerId = setTimeout(() => {
           this.visible = false
+          this.$emit('input', this.visible)
         }, 100)
       }
     },
@@ -138,6 +150,7 @@ export default {
       }
       this.timerId = setTimeout(() => {
         this.visible = true
+        this.$emit('input', this.visible)
       }, 100)
     },
     handleMouseEnter () {
