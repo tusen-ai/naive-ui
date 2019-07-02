@@ -197,7 +197,7 @@ export default {
       if (Array.isArray(this.selectedValue)) {
         return this.selectedValue.length !== 0
       }
-      if (this.selectedValue !== null) {
+      if (this.selectedItem !== null) {
         return true
       } else {
         return false
@@ -235,10 +235,6 @@ export default {
     document.removeEventListener('click', this.nativeCloseSelect)
   },
   methods: {
-    // test (e) {
-    //   console.log('click')
-    //   this.closeSelect(e)
-    // },
     showLightBarTop (e) {
       this.showLightBar = true
       this.lightBarTop = e.target.offsetTop

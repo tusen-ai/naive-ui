@@ -24,7 +24,8 @@
         @mouseenter="handleMouseEnter"
         @mouseleave="handleMouseLeave"
       >
-        <div v-if="arrow" class="n-popup-arrow" />
+        <div v-if="arrow"
+class="n-popup-arrow" />
         <div
           class="n-popup__content"
           :style="{
