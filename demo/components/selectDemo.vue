@@ -55,7 +55,7 @@ export default {
       selectedValue: null,
       items: [
         {
-          label: 'Artifactory',
+          label: 'ArtifactoryLabel',
           value: 'Artifactory'
         },
         {
@@ -122,7 +122,7 @@ export default {
       selectedArray: [],
       items: [
         {
-          label: 'Artifactory',
+          label: 'ArtifactoryLabel',
           value: 'Artifactory'
         },
         {
@@ -192,7 +192,7 @@ export default {
       selectedArray: [],
       items: [
         {
-          label: 'Artifactory',
+          label: 'ArtifactoryLabel',
           value: 'Artifactory'
         },
         {
@@ -274,7 +274,7 @@ export default {
       selectedArray: [],
       items: [
         {
-          label: 'Artifactory',
+          label: 'ArtifactoryLabel',
           value: 'Artifactory'
         },
         {
@@ -315,7 +315,7 @@ export default {
       selectedArray: [],
       items: [
         {
-          label: 'Artifactory',
+          label: 'ArtifactoryLabel',
           value: 'Artifactory'
         },
         {

@@ -108,7 +108,7 @@
       <div
         class="n-select-link__label"
       >
-        <span v-if="selected">{{ selectedValue }}</span>
+        <span v-if="selected">{{ selectedItem.label }}</span>
         <span
           v-else
           class="n-select-link-label__placeholder"
@@ -202,6 +202,12 @@ export default {
       } else {
         return false
       }
+    },
+    selectedItem () {
+      const selectedValue = this.selectedValue
+      const index = this.items.findIndex(item => item.value === selectedValue)
+      if (1 + index) return this.items[index]
+      else return null
     },
     selectedItems () {
       const selectedValues = new Set(this.selectedValue)
