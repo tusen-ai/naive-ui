@@ -14,4 +14,8 @@ function existsInClassList (el, searchPattern, alsoSearchDescendant = false) {
   return Array.from(el.classList).some(className => 1 + className.search(searchPattern))
 }
 
-export { existsInClassList }
+async function sleep (ms = 0) {
+  return new Promise(resolve => setTimeout(() => resolve(), ms))
+}
+
+export { existsInClassList, sleep }
