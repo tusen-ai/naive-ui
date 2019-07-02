@@ -2,7 +2,7 @@
   <div class="demo">
     <n-nimbus-service-layout
       icon="md-contacts"
-      name="NAIVE UI (0.1.73)"
+      name="NAIVE UI (0.1.79)"
       :padding-body="false"
       :items="items"
     >
@@ -47,6 +47,10 @@ export default {
           path: '/',
           childItems: [
             {
+              name: 'Alert',
+              path: '/n-alert'
+            },
+            {
               name: 'Button',
               path: '/n-button'
             },
@@ -83,6 +87,10 @@ export default {
               path: '/n-pagination'
             },
             {
+              name: 'Popup',
+              path: '/n-popup'
+            },
+            {
               name: 'Select',
               path: '/n-select'
             },
@@ -94,17 +102,13 @@ export default {
               name: 'Table',
               path: '/n-table'
             },
-            {
-              name: 'AdvanceTable',
-              path: '/n-advance-table'
-            },
+            // {
+            //   name: 'AdvanceTable',
+            //   path: '/n-advance-table'
+            // },
             {
               name: 'Tooltip',
               path: '/n-tooltip'
-            },
-            {
-              name: 'Popup',
-              path: '/n-popup'
             }
           ]
         }

@@ -1,0 +1,22 @@
+@import './mixins/mixins.scss';
+@import './theme/default.scss';
+
+@include b(alert) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  background-color: rgba(31, 38, 62, 1); 
+  color: rgba(255, 146, 164, 1);
+  border-radius: 9px;
+  font-size: 14px;
+  .n-alert__icon {
+    display: flex;
+    margin-right: 15px;
+    align-items: center;
+    justify-content: center;
+    .n-icon {
+      color: #ff92a4;
+    }
+  }
+}

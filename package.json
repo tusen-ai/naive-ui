@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "0.1.76",
+  "version": "0.1.79",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -58,9 +58,11 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.32",
     "karma-webpack": "^3.0.5",
+    "lodash": "^4.17.11",
     "mocha": "^6.1.4",
     "prettier-eslint": "^9.0.0",
     "progress-bar-webpack-plugin": "^1.12.1",
+    "regenerator-runtime": "^0.13.2",
     "sinon": "^7.3.2",
     "style-loader": "^0.23.1",
     "stylelint": "^10.1.0",

@@ -108,7 +108,7 @@
       <div
         class="n-select-link__label"
       >
-        <span v-if="selected">{{ selectedValue }}</span>
+        <span v-if="selected">{{ selectedItem.label }}</span>
         <span
           v-else
           class="n-select-link-label__placeholder"
@@ -197,11 +197,17 @@ export default {
       if (Array.isArray(this.selectedValue)) {
         return this.selectedValue.length !== 0
       }
-      if (this.selectedValue !== null) {
+      if (this.selectedItem !== null) {
         return true
       } else {
         return false
       }
+    },
+    selectedItem () {
+      const selectedValue = this.selectedValue
+      const index = this.items.findIndex(item => item.value === selectedValue)
+      if (1 + index) return this.items[index]
+      else return null
     },
     selectedItems () {
       const selectedValues = new Set(this.selectedValue)
@@ -229,10 +235,6 @@ export default {
     document.removeEventListener('click', this.nativeCloseSelect)
   },
   methods: {
-    // test (e) {
-    //   console.log('click')
-    //   this.closeSelect(e)
-    // },
     showLightBarTop (e) {
       this.showLightBar = true
       this.lightBarTop = e.target.offsetTop

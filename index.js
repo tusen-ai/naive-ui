@@ -7,7 +7,10 @@ import WithPadding from './packages/common/WithPadding'
 import WithMargin from './packages/common/WithMargin'
 import MasonryGroup from './packages/common/MasonryGroup'
 import Table from './packages/common/Table'
+<<<<<<< HEAD
 import AdvanceTable from './packages/common/AdvanceTable'
+=======
+>>>>>>> 5c2bedcc26bdd6ba44cc2bf7ca98a7c552e45ea6
 import CheckBox from './packages/common/Checkbox'
 import RoundButton from './packages/common/Button'
 import Switch from './packages/common/Switch'
@@ -19,6 +22,7 @@ import Notification from './packages/common/Notification'
 import Pagination from './packages/common/Pagination'
 import Tooltip from './packages/common/Tooltip'
 import Popup from './packages/common/Popup'
+import Alert from './packages/common/Alert'
 
 import ServiceCard from './packages/nimbus/ServiceCard'
 import HomeLayout from './packages/nimbus/HomeLayout'
@@ -40,7 +44,6 @@ function install (Vue) {
   ServiceCard.install(Vue)
   MasonryGroup.install(Vue)
   Table.install(Vue)
-  AdvanceTable.install(Vue)
   WithMargin.install(Vue)
   CheckBox.install(Vue)
   RoundButton.install(Vue)
@@ -55,6 +58,7 @@ function install (Vue) {
   Pagination.install(Vue)
   Tooltip.install(Vue)
   Popup.install(Vue)
+  Alert.install(Vue)
 }
 
 export default {

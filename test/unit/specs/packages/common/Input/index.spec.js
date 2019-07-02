@@ -139,7 +139,7 @@ describe('Input', function () {
       })
     })
   })
-  describe('type=input', function () {
+  describe('type=textarea', function () {
     describe('props.disabled', function () {
       describe('props.disabled', function () {
         it('should exist `disabled` in some el\'s class name', function () {
@@ -199,13 +199,29 @@ describe('Input', function () {
       })
     })
     describe('props.rows', function () {
-      it('should work', function () {
+      it('should work with string input', function () {
         const NInputTestContext = {
           localVue,
           components: {
             NInput
           },
           template: `<n-input type="textarea" v-model="value" rows="20"></n-input>`,
+          data () {
+            return {
+              value: ''
+            }
+          }
+        }
+        const wrapper = mount(NInputTestContext)
+        expect(wrapper.find('textarea').element.getAttribute('rows')).to.equal('20')
+      })
+      it('should work with number input', function () {
+        const NInputTestContext = {
+          localVue,
+          components: {
+            NInput
+          },
+          template: `<n-input type="textarea" v-model="value" :rows="20"></n-input>`,
           data () {
             return {
               value: ''

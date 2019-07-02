@@ -24,7 +24,7 @@
         line-height: 40px;
       }
       .n-message-cell__icon {
-        margin-right: 11px;
+        margin-right: 10px;
         display: inline-flex;
         height: 40px;
         line-height: 40px;
@@ -46,6 +46,14 @@
         .n-message-cell__icon {
           i::before {
             color: #FF92A4FF
+          }
+        }
+      }
+      &.n-message__cell--warning {
+        background-color: rgba(255, 138, 0, 1);
+        .n-message-cell__icon {
+          i::before {
+            color: rgba(255, 255, 255, .65);
           }
         }
       }

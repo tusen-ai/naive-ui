@@ -81,7 +81,7 @@ export default {
       default: 'default'
     },
     rows: {
-      type: Number,
+      type: [Number, String],
       default: 3
     },
     round: {
