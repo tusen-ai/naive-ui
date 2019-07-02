@@ -24,7 +24,7 @@
         @mouseenter="handleMouseEnter"
         @mouseleave="handleMouseLeave"
       >
-        <div class="n-popup-arrow" />
+        <div v-if="arrow" class="n-popup-arrow" />
         <div
           class="n-popup__content"
           :style="{
@@ -84,6 +84,10 @@ export default {
         return ['click', 'hover'].includes(value)
       },
       default: 'hover'
+    },
+    arrow: {
+      default: true,
+      type: Boolean
     },
     zIndex: {
       default: 1000,

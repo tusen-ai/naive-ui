@@ -5,21 +5,17 @@ $popup-bg-color: rgba(75, 81, 106, 1);
 $popup-distance: $popup-arrow-width - 1 + 14;
 
 .n-popup__content__wrapper {
-  z-index: 1;
-  transition: opacity 0.3s $default-cubic-bezier,
-    transform 0.3s $fast-in-cubic-bezier;
-  opacity: 1;
-  margin: 5px;
-  box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.16);
-}
-
-.n-popup__content__wrapper {
-  margin: 7px;
   border-radius: 6px;
   background-color: rgba(75, 81, 106, 1);
   color: #ffffffe6;
   padding: 8px 14px;
   font-size: 12px;
+  z-index: 1;
+  transition: opacity 0.3s $default-cubic-bezier,
+    transform 0.3s $fast-in-cubic-bezier;
+  opacity: 1;
+  margin: 7px;
+  box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.16);
 
   &[x-placement^="top"] .n-popup-arrow {
     bottom: 0%;
@@ -105,8 +101,11 @@ $popup-distance: $popup-arrow-width - 1 + 14;
 }
 .n-popup {
   &-arrow {
+    border-width: $popup-arrow-width;
     &,
     &:after {
+      content: "";
+      border-width: $popup-arrow-width;
       position: absolute;
       display: block;
       width: 0;
@@ -114,13 +113,6 @@ $popup-distance: $popup-arrow-width - 1 + 14;
       border-color: transparent;
       border-style: solid;
     }
-  }
-  &-arrow {
-    border-width: $popup-arrow-width;
-  }
-  &-arrow:after {
-    content: "";
-    border-width: $popup-arrow-width;
   }
 }
 
