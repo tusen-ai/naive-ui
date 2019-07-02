@@ -7,7 +7,7 @@
   >
     <div
       ref="reference"
-      class="n-popup__rel"
+      class="n-popup__ref"
       @click="handleClickRef"
     >
       <slot />
