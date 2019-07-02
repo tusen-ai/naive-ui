@@ -25,12 +25,6 @@ function attachMessageContainer () {
   return messageContainer
 }
 
-const defaultOptions = {
-  timeout: 5000,
-  emergeTransitionTimeout: 300,
-  vanishTransitionTimeout: 300
-}
-
 function registerMessageEl (container, el, option) {
   el.classList.add('is-going-to-emerge')
   container.appendChild(el)
@@ -42,21 +36,56 @@ function registerMessageEl (container, el, option) {
         container.removeChild(el)
       }, option.vanishTransitionTimeout)
       el.classList.add('is-vanishing')
-    }, option.timeout)
+    }, option.duration)
   }, option.emergeTransitionTimeout)
 }
 
+/**
+ * Create options for message
+ * @param {Object} option
+ * @param {string} option.type
+ * @param {number} option.duration  by millisecond
+ * @param {string} option.color
+ * @param {string} option.icon
+ * @param {string} option.iconColor
+ */
+function mixinOption (option) {
+  const defaultOptions = {
+    duration: 3000,
+    emergeTransitionTimeout: 300,
+    vanishTransitionTimeout: 300,
+    type: 'success',
+    color: null,
+    icon: null,
+    iconColor: null
+  }
+  if (option) {
+    return { ...defaultOptions, ...option }
+  } else {
+    return defaultOptions
+  }
+}
+
 const NMessage = {
-  notice (content, type = 'success', option = defaultOptions) {
+  notice (content, option) {
     const messageContainer = attachMessageContainer()
-    const messageCell = (new Vue({ ...NMessageCell, propsData: { type, content } })).$mount()
-    registerMessageEl(messageContainer, messageCell.$el, option)
+    const messageCell = (new Vue({ ...NMessageCell, propsData: { option, content } })).$mount()
+    registerMessageEl(messageContainer, messageCell.$el, mixinOption(option))
   },
-  success (content) {
-    this.notice(content, 'success')
+  success (content, option) {
+    option = mixinOption(option)
+    option.type = 'success'
+    this.notice(content, option)
   },
-  error (content) {
-    this.notice(content, 'error')
+  warning (content, option) {
+    option = mixinOption(option)
+    option.type = 'warning'
+    this.notice(content, option)
+  },
+  error (content, option) {
+    option = mixinOption(option)
+    option.type = 'error'
+    this.notice(content, (option))
   }
 }
 

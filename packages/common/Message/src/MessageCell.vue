@@ -7,12 +7,24 @@
   >
     <div class="n-message-cell__icon">
       <n-icon
-        v-if="type === 'success'"
+        v-if="icon"
+        size="20"
+        :type="icon"
+      />
+      <n-icon
+        v-else-if="type === 'success'"
+        size="20"
         type="md-checkmark-circle"
       />
       <n-icon
         v-else-if="type === 'error'"
+        size="20"
         type="md-close-circle"
+      />
+      <n-icon
+        v-else-if="type === 'warning'"
+        size="20"
+        type="md-alert"
       />
     </div>
     <div class="n-message-cell__content">
@@ -29,13 +41,21 @@ export default {
     NIcon
   },
   props: {
-    type: {
-      type: String,
-      default: 'success'
+    option: {
+      type: Object,
+      required: true
     },
     content: {
       type: String,
       default: ''
+    }
+  },
+  computed: {
+    type () {
+      return this.option.type
+    },
+    icon () {
+      return this.option.icon
     }
   }
 }

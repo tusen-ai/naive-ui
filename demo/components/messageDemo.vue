@@ -20,6 +20,9 @@
           <n-button @click="emitMessage2">
             Blowing in the Wind
           </n-button>
+          <n-button @click="emitMessage3">
+            No Reply
+          </n-button>
         </div>
         <div class="n-doc-section__source">
           <textarea><n-button @click="emitMessage1">
@@ -28,14 +31,45 @@
 <n-button @click="emitMessage2">
   Blowing in the Wind
 </n-button>
+<n-button @click="emitMessage3">
+  No Reply
+</n-button>
 <script>
 export default {
   methods: {
     emitMessage1 () {
-      this.$NMessage.error('Once upon a time you dressed so fine')
+      this.$NMessage.error('Once upon a time you dressed so fine', { duration: 1000 })
     },
     emitMessage2 () {
-      this.$NMessage.success('How many roads must a man walk down')
+      this.$NMessage.warning('How many roads must a man walk down')
+    },
+    emitMessage3 () {
+      this.$NMessage.success('\'Cause you walked hand in hand With another man in my place')
+    }
+  }
+}
+</script></textarea>
+        </div>
+      </div>
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
+          Custom Icon
+        </div>
+        <div class="n-doc-section__view">
+          <n-button @click="emitMessage4">
+            Help!
+          </n-button>
+        </div>
+        <div class="n-doc-section__source">
+          <textarea>
+<n-button @click="emitMessage4">
+  Help!
+</n-button>
+<script>
+export default {
+  methods: {
+    emitMessage4 () {
+      this.$NMessage.warning('I never needed anybody\'s help in any way', { icon: 'ios-alert' })
     }
   }
 }
@@ -57,10 +91,16 @@ export default {
   },
   methods: {
     emitMessage1 () {
-      this.$NMessage.error('Once upon a time you dressed so fine')
+      this.$NMessage.error('Once upon a time you dressed so fine', { duration: 1000 })
     },
     emitMessage2 () {
-      this.$NMessage.success('How many roads must a man walk down')
+      this.$NMessage.warning('How many roads must a man walk down')
+    },
+    emitMessage3 () {
+      this.$NMessage.success('\'Cause you walked hand in hand With another man in my place')
+    },
+    emitMessage4 () {
+      this.$NMessage.warning('I never needed anybody\'s help in any way', { icon: 'ios-hourglass' })
     }
   }
 }
