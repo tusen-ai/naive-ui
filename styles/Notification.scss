@@ -55,6 +55,7 @@
           transition: top .3s $default-cubic-bezier;
           cursor: pointer;
           &::before {
+            box-sizing: content-box;
             position: absolute;
             transform: rotate(45deg);
             height: 6px;
@@ -65,6 +66,7 @@
             border-bottom: 2px solid #a1d9c6
           }
           &::after {
+            box-sizing: content-box;
             position: absolute;
             height: 6px;
             width: 6px;

@@ -148,6 +148,9 @@
 </template>
 
 <script>
+/**
+ * Warning: There are some potential problems if there are too many items!
+ */
 import NIcon from '../../Icon/index'
 
 export default {
