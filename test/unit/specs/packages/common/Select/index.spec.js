@@ -201,6 +201,9 @@ describe('Select', function () {
         const wrapper = mount(NSelectTestContext)
         expect(existsInClassList(wrapper.element, 'placeholder', true))
       })
+      it('should show when v-model value is invalid', function () {
+
+      })
       it('should show `Please select` when not specified', function () {
         const NSelectTestContext = {
           localVue,
@@ -236,6 +239,9 @@ describe('Select', function () {
         }
         const wrapper = mount(NSelectTestContext)
         expect(existsInClassList(wrapper.element, 'placeholder', true))
+      })
+      it('should show when v-model value is invalid', function () {
+
       })
       it('should show `Please select` when not specified', function () {
         const NSelectTestContext = {
@@ -329,6 +335,9 @@ describe('Select', function () {
       })
     })
   })
+  describe('props.emitItem', function () {
+
+  })
   describe('v-model', function () {
     describe('single select', function () {
       it('should sync view with value', function () {
@@ -390,6 +399,9 @@ describe('Select', function () {
         const wrapper = mount(NSelectTestContext)
         expect(existsInClassList(wrapper.element, 'placeholder', true))
       })
+      it('should change to valid value when select an item when initial v-model value is invalid', function () {
+
+      })
     })
     describe('multiple select', function () {
       it('should sync view with value', function () {
@@ -433,6 +445,9 @@ describe('Select', function () {
         /** Todo using XPath */
         wrapper.find('.n-select-menu__item').trigger('click')
         expect(wrapper.vm.selectedArray).to.deep.equal(['value1'])
+      })
+      it('should change to valid value when select an item when initial v-model value is invalid', function () {
+
       })
     })
   })

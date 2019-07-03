@@ -312,7 +312,7 @@ export default {
   data () {
     return {
       selectedValue: null,
-      selectedArray: [],
+      selectedArray: 666,
       items: [
         {
           label: 'ArtifactoryLabel',

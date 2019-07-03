@@ -5,7 +5,7 @@
     :class="{
       [`n-select--${size}-size`]: true
     }"
-    @click="toggleSelect"
+    @click="toggleMenu"
   >
     <div
       v-if="multiple"
@@ -45,7 +45,7 @@
             <n-icon
               class="n-select-link-tag__icon"
               type="md-close"
-              @click.stop="toggle(item)"
+              @click.stop="toggleItemInMultipleSelect(item)"
             />
           </div>
         </transition-group>
@@ -64,7 +64,7 @@
             <n-icon
               class="n-select-link-tag__icon"
               type="md-close"
-              @click.stop="toggle(item)"
+              @click.stop="toggleItemInMultipleSelect(item)"
             />
           </div>
         </div>
@@ -73,7 +73,7 @@
         <div
           v-if="active"
           class="n-select-menu n-select-menu--multiple"
-          @mouseleave="removeLightBar"
+          @mouseleave="hideLightBar"
         >
           <transition name="n-select-menu__light-bar--transition">
             <div
@@ -90,7 +90,7 @@
               'is-selected':
                 isSelected(item)
             }"
-            @click.stop="toggle(item)"
+            @click.stop="toggleItemInMultipleSelect(item)"
             @mouseenter="showLightBarTop"
           >
             {{ item.label }}
@@ -118,7 +118,7 @@
         <div
           v-if="active"
           class="n-select-menu"
-          @mouseleave="removeLightBar"
+          @mouseleave="hideLightBar"
         >
           <transition name="n-select-menu__light-bar--transition">
             <div
@@ -136,7 +136,7 @@
                 selectedValue ===
                 item.value
             }"
-            @click.stop="select(item)"
+            @click.stop="toggleItemInSingleSelect(item)"
             @mouseenter="showLightBarTop"
           >
             {{ item.label }}
@@ -148,6 +148,9 @@
 </template>
 
 <script>
+/**
+ * Warning: There are some potential problems if there are too many items!
+ */
 import NIcon from '../../Icon/index'
 
 export default {
@@ -157,7 +160,7 @@ export default {
   },
   model: {
     prop: 'selectedValue',
-    event: 'change'
+    event: '_change'
   },
   props: {
     items: {
@@ -183,6 +186,10 @@ export default {
     verboseTransition: {
       type: Boolean,
       default: false
+    },
+    emitItem: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -194,13 +201,15 @@ export default {
   },
   computed: {
     selected () {
-      if (Array.isArray(this.selectedValue)) {
-        return this.selectedValue.length !== 0
-      }
-      if (this.selectedItem !== null) {
-        return true
+      if (this.multiple) {
+        if (Array.isArray(this.selectedValue)) {
+          const itemValues = new Set(this.items.map(item => item.value))
+          return this.selectedValue.filter(value => itemValues.has(value)).length
+        } else {
+          return false
+        }
       } else {
-        return false
+        return this.items.some(item => item.value === this.selectedValue)
       }
     },
     selectedItem () {
@@ -210,6 +219,7 @@ export default {
       else return null
     },
     selectedItems () {
+      if (!Array.isArray(this.selectedValue)) return []
       const selectedValues = new Set(this.selectedValue)
       return this.items.filter(item => selectedValues.has(item.value))
     }
@@ -219,61 +229,74 @@ export default {
       if (newValue === true) {
         this.$nextTick().then(
           () => {
-            document.addEventListener('click', this.nativeCloseSelect)
+            document.addEventListener('click', this.nativeCloseMenu)
           }
         )
       } else {
         this.$nextTick().then(
           () => {
-            document.removeEventListener('click', this.nativeCloseSelect)
+            document.removeEventListener('click', this.nativeCloseMenu)
           }
         )
       }
     }
   },
   beforeDestroy () {
-    document.removeEventListener('click', this.nativeCloseSelect)
+    document.removeEventListener('click', this.nativeCloseMenu)
   },
   methods: {
+    emitChangeEvent (item) {
+      if (this.emitItem) {
+        this.$emit('change', item)
+      } else {
+        this.$emit('change', item.value)
+      }
+    },
     showLightBarTop (e) {
       this.showLightBar = true
       this.lightBarTop = e.target.offsetTop
     },
-    removeLightBar (e) {
+    hideLightBar (e) {
       this.showLightBar = false
     },
     isSelected (item) {
       if (this.multiple) {
+        if (!Array.isArray(this.selectedValue)) return false
         return 1 + this.selectedValue.findIndex(value => value === item.value)
       } else {
         return item.value === this.selectedValue
       }
     },
-    nativeCloseSelect (e) {
+    nativeCloseMenu (e) {
       if (!this.$refs.select.contains(e.target)) {
         this.active = false
       }
     },
-    closeSelect () {
+    closeMenu () {
       this.active = false
     },
-    toggleSelect () {
+    toggleMenu () {
       this.active = !this.active
     },
-    select (item) {
-      this.$emit('change', item.value)
-      this.closeSelect()
+    toggleItemInSingleSelect (item) {
+      this.$emit('_change', item.value)
+      this.emitChangeEvent(item)
+      this.closeMenu()
     },
-    toggle (item) {
-      const index = this.selectedValue.findIndex(value => value === item.value)
-      if (1 + index) {
-        const selectedValue = this.selectedValue
-        selectedValue.splice(index, 1)
-        this.$emit('change', selectedValue)
-      } else {
-        const selectedValue = this.selectedValue.concat([item.value])
-        this.$emit('change', selectedValue)
+    toggleItemInMultipleSelect (item) {
+      let newSelectedValues = []
+      if (Array.isArray(this.selectedValue)) {
+        const itemValues = new Set(this.items.map(item => item.value))
+        newSelectedValues = this.selectedValue.filter(value => itemValues.has(value))
       }
+      const index = newSelectedValues.findIndex(value => value === item.value)
+      if (1 + index) {
+        newSelectedValues.splice(index, 1)
+      } else {
+        newSelectedValues.push(item.value)
+      }
+      this.$emit('_change', newSelectedValues)
+      this.emitChangeEvent(item)
     }
   }
 }
