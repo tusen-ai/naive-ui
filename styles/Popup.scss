@@ -27,6 +27,7 @@ $popup-distance: $popup-arrow-width - 1 + 14;
 }
 .n-popup__content-wrapper {
 
+  display: inline-table;
   border-radius: 6px;
   background-color: rgba(75, 81, 106, 1);
   color: #ffffffe6;
