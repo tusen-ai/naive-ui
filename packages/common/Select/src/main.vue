@@ -147,8 +147,14 @@
             v-if="label.length && !filteredItems.length"
             class="n-select-menu__item n-select-menu__item--not-found"
           >
-            {{ hideLightBar() }}
-            Sorry, no result
+            {{
+              /**
+               * This method to activate hideLightBar is ridiculous, however using
+               * event handler still has some problem.
+               */
+              hideLightBar()
+            }}
+            none result matched
           </div>
         </div>
       </transition>
