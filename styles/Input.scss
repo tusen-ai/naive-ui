@@ -20,14 +20,20 @@
     position: absolute;
     height: 18px;
     width: 18px;
-    left: 0;
-    top: calc(50% - 8px);
-    margin-left: 12px;
-    i::before {
-      font-size: 20px;
-      line-height: 17px;
-      color: $input-icon-color;
+    i {
+      height: 18px;
+      width: 18px;
+      &::before {
+        font-size: 20px;
+        line-height: 18px;
+        height: 18px;
+        width: 18px;
+        color: $input-icon-color;
+      }
     }
+    left: 0;
+    top: calc(50% - 9px);
+    margin-left: 12px;
   }
   & .n-input__input, .n-input__textarea {
     -webkit-appearance: none;

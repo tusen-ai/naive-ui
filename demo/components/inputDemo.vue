@@ -59,7 +59,7 @@ export default {
           <n-input
             v-model="value"
             type="input"
-            size="small"
+            size="large"
             icon="ios-search"
           />
           <br>

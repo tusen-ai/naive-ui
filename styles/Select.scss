@@ -133,7 +133,7 @@
             opacity: 0;
             transition: transform .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
           }
-          &.is-selected, &:active {
+          &.n-select-menu__item--selected, &:active {
             background: none;
             &::after {
               opacity: 1;
@@ -147,8 +147,12 @@
       }
       .n-select-menu__item {
         padding: 0px 14px;
-        &.is-selected {
+        &.n-select-menu__item--selected {
           color: #63E2B7FF;
+        }
+        &.n-select-menu__item--not-found {
+          color: rgba(255, 255, 255, .5);
+          text-align: center;
         }
       }
     }

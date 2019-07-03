@@ -432,7 +432,7 @@ export default {
       value: 'song4'
     },
     {
-      label: 'hink For Yourseld',
+      label: 'Think For Yourseld',
       value: 'song5'
     },
     {
@@ -515,7 +515,7 @@ export default {
           value: 'song4'
         },
         {
-          label: 'hink For Yourseld',
+          label: 'Think For Yourseld',
           value: 'song5'
         },
         {

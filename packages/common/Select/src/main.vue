@@ -143,6 +143,13 @@
           >
             {{ item.label }}
           </div>
+          <div
+            v-if="label.length && !filteredItems.length"
+            class="n-select-menu__item n-select-menu__item--not-found"
+          >
+            {{ hideLightBar() }}
+            Sorry, no result
+          </div>
         </div>
       </transition>
     </div>
@@ -210,7 +217,7 @@ export default {
   computed: {
     filteredItems () {
       if (!this.filterable) return this.items
-      return this.items.filter(item => typeof item.label === 'string' ? 1 + item.label.search(this.label) : false)
+      return this.items.filter(item => typeof item.label === 'string' ? this.matchFilterablePattern(item.label) : false)
     },
     selected () {
       if (this.multiple) {
@@ -260,6 +267,9 @@ export default {
           this.$refs.singleSelectInput.blur()
           if (this.selectedItem) {
             this.label = this.selectedItem.label
+          } else {
+            this.label = ''
+            this.labelPlaceholder = this.placeholder
           }
         }
         this.$nextTick().then(
@@ -283,7 +293,9 @@ export default {
      * @param {string} value
      */
     matchFilterablePattern (value) {
-      return 1 + value.search(this.label)
+      console.log(value.toLowerCase())
+      console.log(this.label.toLowerCase())
+      return 1 + value.toLowerCase().search(this.label.toLowerCase())
     },
     emitChangeEvent (item) {
       if (this.emitItem) {
