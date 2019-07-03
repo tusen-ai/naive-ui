@@ -189,6 +189,23 @@ describe('Select', function () {
   })
   describe('props.placeholder', function () {
     describe('single select', function () {
+      it('should work', function () {
+        const NSelectTestContext = {
+          localVue,
+          components: {
+            NSelect
+          },
+          template: `<n-select :items="items" v-model="selectedValue" placeholder="666"/>`,
+          data () {
+            return {
+              items: _.cloneDeep(items),
+              selectedValue: null
+            }
+          }
+        }
+        const wrapper = mount(NSelectTestContext)
+        expect(wrapper.find('input').element.placeholder).to.equal('666')
+      })
       it('should show when nothing is selected', function () {
         const NSelectTestContext = {
           localVue,
@@ -204,7 +221,8 @@ describe('Select', function () {
           }
         }
         const wrapper = mount(NSelectTestContext)
-        expect(existsInClassList(wrapper.element, 'placeholder', true))
+        expect(wrapper.find('input').element.value).to.equal('')
+        expect(wrapper.find('input').element.placeholder.toLowerCase()).to.contain('please select')
       })
       it('should show when v-model value is invalid', function () {
         const NSelectTestContext = {
@@ -221,7 +239,8 @@ describe('Select', function () {
           }
         }
         const wrapper = mount(NSelectTestContext)
-        expect(existsInClassList(wrapper.element, 'placeholder', true))
+        expect(wrapper.find('input').element.value).to.equal('')
+        expect(wrapper.find('input').element.placeholder.toLowerCase()).to.contain('please select')
       })
       it('should show `Please select` when not specified', function () {
         const NSelectTestContext = {
@@ -238,7 +257,7 @@ describe('Select', function () {
           }
         }
         const wrapper = mount(NSelectTestContext)
-        expect(wrapper.html().toLowerCase()).to.contain('please select')
+        expect(wrapper.find('input').element.placeholder.toLowerCase()).to.contain('please select')
       })
     })
     describe('multiple select', function () {
@@ -386,11 +405,9 @@ describe('Select', function () {
         }
         const wrapper = mount(NSelectTestContext)
         wrapper.vm.selectedValue = 'value1'
-        expect(wrapper.html()).to.contain('label1')
+        expect(wrapper.find('input').element.value).to.contain('label1')
         wrapper.vm.selectedValue = 'value2'
-        expect(wrapper.html()).to.contain('label2')
-        wrapper.vm.selectedValue = null
-        expect(wrapper.html().toLowerCase()).to.contain('please select')
+        expect(wrapper.find('input').element.value).to.contain('label2')
       })
       it('should sync value with view', function () {
         const NSelectTestContext = {

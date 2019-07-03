@@ -12,3 +12,8 @@ body {
 a {
   color: $primary-text-color;
 }
+
+input {
+  font-family: $default-font-family;
+  font-size: inherit;
+}

@@ -108,3 +108,19 @@ $default-text-gradient-danger: linear-gradient(214deg, rgba(224,32,32,1) 0%, rgb
 $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
 
 $default-font-family: 'Lato';
+
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.2);
+    border-radius: 2.5px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.3);
+  }
+}

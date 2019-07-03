@@ -42,7 +42,7 @@
       v-if="icon"
       class="n-input__icon"
     >
-      <n-icon type="ios-search" />
+      <n-icon :type="icon" />
     </div>
   </div>
 </template>

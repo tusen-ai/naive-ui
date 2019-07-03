@@ -42,12 +42,27 @@
       box-sizing: border-box;
       border-radius: $select-border-radius;
       background-color: $select-background-color;
-      padding: 0 14px;
-      
     }
     .n-select-link__label {
+      display: flex;
       .n-select-link-label__placeholder {
+        vertical-align: baseline;
         color: $select-placeholder-color;
+        padding: 0 28px 0 14px;
+      }
+      .n-select-link-label__input {
+        vertical-align: baseline;
+        display: inline-block;
+        border:none;
+        width: 100%;
+        cursor: pointer;
+        background: transparent;
+        outline: none;
+        color: $select-text-color;
+        padding: 0 28px 0 14px;
+        &::placeholder {
+          color: $select-placeholder-color;
+        }
       }
     }
     .n-select-link__tags {
@@ -85,11 +100,13 @@
       overflow: hidden;
       position: absolute;
       top: calc(100% + 4px);
+      overflow-y: auto;
       left: 0;
       right: 0;
       border-radius: 9px;
       background-color: rgba(75, 81, 106, 1);
       box-shadow: 0px 2px 20px 0px rgba(0,0,0,0.16);
+      @include scrollbar;
       .n-select-menu__light-bar {
         position: absolute;
         width:100%;
@@ -162,6 +179,7 @@
   }
   
   &.n-select--small-size {
+    font-size: 13px;
     .n-select-link {
       .n-select-link__placeholder {
         height: $small-height;
@@ -174,22 +192,26 @@
           height: 20px;
           line-height: 20px;
         }
-        
       }
       .n-select-link__label {
         height: $small-height;
         line-height: $small-height;
+        .n-select-lint-label__input {
+          height: $small-height;
+          line-height: $small-height;
+        }
       }
       .n-select-menu {
+        max-height: $small-height * 8;
         .n-select-menu__item, .n-select-menu__light-bar {
           height: $small-height;
           line-height: $small-height;
         }
-        
       }
     }
   }
   &.n-select--default-size, &.n-select--medium-size {
+    font-size: 14px;
     .n-select-link {
       .n-select-link__placeholder {
         height: $default-height;
@@ -202,13 +224,17 @@
           height: 26px;
           line-height: 26px;
         }
-        
       }
       .n-select-link__label {
         height: $default-height;
         line-height: $default-height;
+        .n-select-lint-label__input {
+          height: $default-height;
+          line-height: $default-height;
+        }
       }
       .n-select-menu {
+        max-height: $default-height * 8;
         .n-select-menu__item, .n-select-menu__light-bar {
           height: $default-height;
           line-height: $default-height;
@@ -233,6 +259,10 @@
       .n-select-link__label{
         height: $large-height;
         line-height: $large-height;
+        .n-select-lint-label__input {
+          height: $large-height;
+          line-height: $large-height;
+        }
       }
     }
     .n-select-menu {
@@ -240,6 +270,7 @@
         height: $large-height;
         line-height: $large-height;
       }
+      max-height: $large-height * 8;
     }
   }
 

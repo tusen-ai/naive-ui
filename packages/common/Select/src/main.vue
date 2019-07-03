@@ -108,11 +108,13 @@
       <div
         class="n-select-link__label"
       >
-        <span v-if="selected">{{ selectedItem.label }}</span>
-        <span
-          v-else
-          class="n-select-link-label__placeholder"
-        >{{ placeholder }}</span>
+        <input
+          ref="singleSelectInput"
+          v-model="label"
+          class="n-select-link-label__input"
+          :placeholder="labelPlaceholder"
+          :readonly="filterable ? false : 'readonly'"
+        >
       </div>
       <transition name="n-select-menu--transition">
         <div
@@ -128,7 +130,7 @@
             />
           </transition>
           <div
-            v-for="item in items"
+            v-for="item in filteredItems"
             :key="item.value"
             class="n-select-menu__item"
             :class="{
@@ -190,16 +192,26 @@ export default {
     emitItem: {
       type: Boolean,
       default: false
+    },
+    filterable: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
       active: false,
       lightBarTop: null,
-      showLightBar: false
+      showLightBar: false,
+      label: '',
+      labelPlaceholder: 'Please Select'
     }
   },
   computed: {
+    filteredItems () {
+      if (!this.filterable) return this.items
+      return this.items.filter(item => typeof item.label === 'string' ? 1 + item.label.search(this.label) : false)
+    },
     selected () {
       if (this.multiple) {
         if (Array.isArray(this.selectedValue)) {
@@ -225,14 +237,31 @@ export default {
     }
   },
   watch: {
+    selectedItem () {
+      if (this.selectedItem) {
+        this.label = this.selectedItem.label
+      }
+    },
     active (newValue) {
       if (newValue === true) {
+        if (!this.multiple) {
+          if (this.selectedItem && this.filterable) {
+            this.labelPlaceholder = this.selectedItem.label
+            this.label = ''
+          }
+        }
         this.$nextTick().then(
           () => {
             document.addEventListener('click', this.nativeCloseMenu)
           }
         )
       } else {
+        if (!this.multiple) {
+          this.$refs.singleSelectInput.blur()
+          if (this.selectedItem) {
+            this.label = this.selectedItem.label
+          }
+        }
         this.$nextTick().then(
           () => {
             document.removeEventListener('click', this.nativeCloseMenu)
@@ -241,10 +270,21 @@ export default {
       }
     }
   },
+  created () {
+    if (!this.multiple) {
+      this.labelPlaceholder = this.placeholder
+    }
+  },
   beforeDestroy () {
     document.removeEventListener('click', this.nativeCloseMenu)
   },
   methods: {
+    /**
+     * @param {string} value
+     */
+    matchFilterablePattern (value) {
+      return 1 + value.search(this.label)
+    },
     emitChangeEvent (item) {
       if (this.emitItem) {
         this.$emit('change', item)
@@ -279,6 +319,7 @@ export default {
       this.active = !this.active
     },
     toggleItemInSingleSelect (item) {
+      this.label = item.label
       this.$emit('_change', item.value)
       this.emitChangeEvent(item)
       this.closeMenu()
