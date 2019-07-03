@@ -12,7 +12,7 @@
   Modified icons to fit ionicon’s grid from original.
 */
 @font-face {
-  font-family: "Ionicons";
+  font-family: "n-Ionicons";
   src: url("./resources/fonts/ionicons.eot?v=4.5.7");
   src: url("./resources/fonts/ionicons.eot?v=4.5.7#iefix") format("embedded-opentype"), url("./resources/fonts/ionicons.woff2?v=4.5.7") format("woff2"), url("./resources/fonts/ionicons.woff?v=4.5.7") format("woff"), url("./resources/fonts/ionicons.ttf?v=4.5.7") format("truetype"), url("./resources/fonts/ionicons.svg?v=4.5.7#Ionicons") format("svg");
   font-weight: normal;
@@ -717,7 +717,7 @@
 .ion-md-wine:before,
 .ion-md-woman:before {
   display: inline-block;
-  font-family: "Ionicons";
+  font-family: "n-Ionicons";
   speak: none;
   font-style: normal;
   font-weight: normal;
