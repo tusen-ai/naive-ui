@@ -19,6 +19,10 @@
     }
   }
   border-radius: $button-border-radius;
+  &.n-button--disabled {
+    cursor: not-allowed;
+    opacity: .43;
+  }
   &.n-button--small-size {
     font-size: $button-small-font-size;
     height: $small-height;

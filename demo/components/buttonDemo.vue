@@ -38,6 +38,39 @@
       </div>
       <div class="n-doc-section">
         <div class="n-doc-section__header">
+          Disabled
+        </div>
+        <div class="n-doc-section__view">
+          <n-button
+            size="small"
+            disabled
+          >
+            small size
+          </n-button>
+          <n-button disabled>
+            regular size
+          </n-button>
+          <n-button
+            size="large"
+            disabled
+          >
+            large size
+          </n-button>
+        </div>
+        <div class="n-doc-section__source">
+          <textarea><n-button size="small" disabled>
+  small size
+</n-button>
+<n-button disabled>
+  regular size
+</n-button>
+<n-button size="large" disabled>
+  large size
+</n-button></textarea>
+        </div>
+      </div>
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
           Button Type
         </div>
         <div class="n-doc-section__view">

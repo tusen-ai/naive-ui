@@ -99,6 +99,7 @@ export default {
             @blur="handleBlur"
             @focus="handleFocus"
             @change="handleChange"
+            @keyup="handleKeyUp"
           />
           <br>
           value: {{ value }}
@@ -110,6 +111,7 @@ export default {
   @blur="handleBlur"
   @focus="handleFocus"
   @change="handleChange"
+  @keyup="handleKeyUp"
 />
 value: {{ value }}
 
@@ -353,6 +355,9 @@ export default {
     },
     handleChange (value) {
       this.$NMessage.success('change: ' + value)
+    },
+    handleKeyUp (e) {
+      this.$NMessage.success('keyup')
     }
   }
 }

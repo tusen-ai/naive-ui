@@ -19,6 +19,7 @@
       @blur="handleBlur"
       @focus="handleFocus"
       @input="handleInput"
+      @keyup="handleKeyUp"
     />
   </div>
   <div
@@ -43,6 +44,7 @@
       @blur="handleBlur"
       @focus="handleFocus"
       @input="handleInput"
+      @keyup="handleKeyUp"
     >
     <div
       v-if="icon"
@@ -112,6 +114,9 @@ export default {
     },
     handleFocus (e) {
       this.$emit('focus', e)
+    },
+    handleKeyUp (e) {
+      this.$emit('keyup', e)
     }
   }
 }

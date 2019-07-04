@@ -4,9 +4,10 @@
     :class="{
       'is-round': round,
       [`is-${type}`]: true,
-      [`n-button--${size}-size`]: true
+      [`n-button--${size}-size`]: true,
+      'n-button--disabled': disabled
     }"
-    v-on="$listeners"
+    @click="handleClick"
   >
     <div
       v-if="icon && !iconOnRight"
@@ -38,6 +39,10 @@ export default {
     NIcon
   },
   props: {
+    disabled: {
+      type: Boolean,
+      default: false
+    },
     size: {
       type: String,
       default: 'default'
@@ -84,6 +89,13 @@ export default {
           }
           break
         }
+      }
+    }
+  },
+  methods: {
+    handleClick (e) {
+      if (!this.disabled) {
+        this.$emit('click', e)
       }
     }
   }

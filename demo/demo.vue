@@ -59,6 +59,10 @@ export default {
               path: '/n-checkbox'
             },
             {
+              name: 'DatePicker',
+              path: '/n-date-picker'
+            },
+            {
               name: 'Gradient Text',
               path: '/n-gradient-text'
             },
