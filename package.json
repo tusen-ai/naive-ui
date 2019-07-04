@@ -16,7 +16,7 @@
     "test-release": "cross-env NODE_ENV=production webpack-dev-server --config build/webpack.release.js",
     "release-doc": "cross-env NODE_ENV=development && rm -rf doc/dist && node doc/changeDemoVersion.js && webpack --config build/webpack.doc.js && sudo bash doc/deploy-doc.sh"
   },
-  "author": "",
+  "author": "lecong.zhang",
   "license": "ISC",
   "publishConfig": {
     "registry": "***REMOVED***"
