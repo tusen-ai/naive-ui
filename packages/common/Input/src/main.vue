@@ -16,8 +16,8 @@
       :value="value"
       :disabled="disabled === true"
       v-on="$listeners"
-      @blur="$listeners.blur"
-      @focus="$listeners.focus"
+      @blur="$listeners.blur ? $listeners.blur : false"
+      @focus="$listeners.focus ? $listeners.focus : false"
       @input="handleInput"
     />
   </div>
@@ -39,8 +39,9 @@
       :placeholder="placeholder"
       :value="value"
       :disabled="disabled === true"
-      @blur="$listeners.blur"
-      @focus="$listeners.focus"
+      :maxlength="maxlength"
+      @blur="$listeners.blur ? $listeners.blur : false"
+      @focus="$listeners.focus ? $listeners.focus : false"
       @input="handleInput"
     >
     <div
@@ -96,6 +97,10 @@ export default {
     icon: {
       type: String,
       default: null
+    },
+    maxlength: {
+      type: [String, Number],
+      default: 'false'
     }
   },
   methods: {
