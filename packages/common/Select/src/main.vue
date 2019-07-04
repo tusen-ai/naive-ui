@@ -222,8 +222,8 @@ export default {
   },
   computed: {
     filteredItems () {
-      if (!this.filterable) return this.items
-      return this.items.filter(item => typeof item.label === 'string' ? this.matchFilterablePattern(item.label) : false)
+      if (!this.filterable || !this.label.trim().length) return this.items
+      return this.items.filter(item => this.matchFilterablePattern(item.label))
     },
     selected () {
       if (this.multiple) {
@@ -299,9 +299,11 @@ export default {
      * @param {string} value
      */
     matchFilterablePattern (value) {
-      console.log(value.toLowerCase())
-      console.log(this.label.toLowerCase())
-      return 1 + value.toLowerCase().search(this.label.toLowerCase())
+      try {
+        return 1 + value.toString().toLowerCase().search(this.label.trim().toLowerCase())
+      } catch (err) {
+        return false
+      }
     },
     emitChangeEvent (item) {
       if (this.emitItem) {
