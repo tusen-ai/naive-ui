@@ -53,6 +53,77 @@ export default {
       </div>
       <div class="n-doc-section">
         <div class="n-doc-section__header">
+          Password
+        </div>
+        <div class="n-doc-section__view">
+          <n-input
+            v-model="value"
+            type="password"
+            size="large"
+            icon="md-person"
+          />
+          <br>
+          value: {{ value }}
+        </div>
+        <div class="n-doc-section__source">
+          <textarea v-pre>
+<n-input
+  v-model="value"
+  type="password"
+  size="large"
+  icon="md-person"
+/>
+<br>
+value: {{ value }}
+
+<script>
+export default {
+  data () {
+    return {
+      value: null
+    }
+  }
+}
+</script></textarea>
+        </div>
+      </div>
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
+          Event
+        </div>
+        <div class="n-doc-section__view">
+          <n-input
+            v-model="value"
+            @blur="handleBlur"
+            @focus="handleFocus"
+            @change="handleChange"
+          />
+          <br>
+          value: {{ value }}
+        </div>
+        <div class="n-doc-section__source">
+          <textarea v-pre>
+<n-input
+  v-model="value"
+  @blur="handleBlur"
+  @focus="handleFocus"
+  @change="handleChange"
+/>
+value: {{ value }}
+
+<script>
+export default {
+  data () {
+    return {
+      value: null
+    }
+  }
+}
+</script></textarea>
+        </div>
+      </div>
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
           Icon
         </div>
         <div class="n-doc-section__view">
@@ -61,6 +132,13 @@ export default {
             type="input"
             size="large"
             icon="ios-search"
+          />
+          <br>
+          <n-input
+            v-model="value"
+            type="input"
+            size="large"
+            icon="md-settings"
           />
           <br>
           value: {{ value }}
@@ -72,6 +150,12 @@ export default {
   type="input"
   size="small"
   icon="ios-search"
+/>
+<n-input
+  v-model="value"
+  type="input"
+  size="large"
+  icon="md-settings"
 />
 value: {{ value }}
 
@@ -259,6 +343,15 @@ export default {
     }
   },
   methods: {
+    handleFocus () {
+      this.$NMessage.success('focus')
+    },
+    handleBlur () {
+      this.$NMessage.success('blur')
+    },
+    handleChange (value) {
+      this.$NMessage.success('change: ' + value)
+    }
   }
 }
 </script>

@@ -15,6 +15,9 @@
       :placeholder="placeholder"
       :value="value"
       :disabled="disabled === true"
+      v-on="$listeners"
+      @blur="$listeners.blur"
+      @focus="$listeners.focus"
       @input="handleInput"
     />
   </div>
@@ -26,7 +29,7 @@
     }"
   >
     <input
-      type="text"
+      :type="type"
       class="n-input__input"
       :class="{
         [`n-input__input--${size}-size`]: true,
@@ -36,6 +39,8 @@
       :placeholder="placeholder"
       :value="value"
       :disabled="disabled === true"
+      @blur="$listeners.blur"
+      @focus="$listeners.focus"
       @input="handleInput"
     >
     <div
