@@ -5,6 +5,7 @@ function setDate (time, dateItem) {
   time.year(dateItem.year)
   time.month(dateItem.month)
   time.date(dateItem.date)
+  return moment(time)
 }
 
 function isSameDate (time, patternTime) {
@@ -35,7 +36,6 @@ function dateArray (displayTime, selectedTime, currentTime) {
   const lastMonthIterator = moment(displayMonthIterator).subtract(1, 'day')
   const calendarDays = []
   let protectLastMonthDateIsShownFlag = true
-  let protectNextMonthDateIsShownFlag = true
   while (lastMonthIterator.day() !== 6 || protectLastMonthDateIsShownFlag) {
     calendarDays.unshift(dateItem(lastMonthIterator, displayTime, selectedTime, currentTime))
     lastMonthIterator.subtract(1, 'day')
@@ -45,10 +45,9 @@ function dateArray (displayTime, selectedTime, currentTime) {
     calendarDays.push(dateItem(displayMonthIterator, displayTime, selectedTime, currentTime))
     displayMonthIterator.add(1, 'day')
   }
-  while (displayMonthIterator.day() !== 0 || protectNextMonthDateIsShownFlag) {
+  while (calendarDays.length < 42) {
     calendarDays.push(dateItem(displayMonthIterator, displayTime, selectedTime, currentTime))
     displayMonthIterator.add(1, 'day')
-    protectNextMonthDateIsShownFlag = false
   }
   // console.log(calendarDays)
   return calendarDays

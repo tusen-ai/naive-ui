@@ -37,6 +37,7 @@ export default {
   top: 0;
   bottom: 0;
   display: flex;
+  overflow: auto;
 }
 
 .n-modal-overlay--transition-enter-active {
