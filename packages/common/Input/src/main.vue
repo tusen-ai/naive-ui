@@ -16,8 +16,8 @@
       :value="value"
       :disabled="disabled === true"
       v-on="$listeners"
-      @blur="$listeners.blur ? $listeners.blur : false"
-      @focus="$listeners.focus ? $listeners.focus : false"
+      @blur="handleBlur"
+      @focus="handleFocus"
       @input="handleInput"
     />
   </div>
@@ -40,8 +40,8 @@
       :value="value"
       :disabled="disabled === true"
       :maxlength="maxlength"
-      @blur="$listeners.blur ? $listeners.blur : false"
-      @focus="$listeners.focus ? $listeners.focus : false"
+      @blur="handleBlur"
+      @focus="handleFocus"
       @input="handleInput"
     >
     <div
@@ -106,6 +106,12 @@ export default {
   methods: {
     handleInput (e) {
       this.$emit('change', e.target.value)
+    },
+    handleBlur (e) {
+      this.$emit('blur', e)
+    },
+    handleFocus (e) {
+      this.$emit('focus', e)
     }
   }
 }

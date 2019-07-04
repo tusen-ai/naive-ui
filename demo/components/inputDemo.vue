@@ -73,6 +73,7 @@ export default {
   type="password"
   size="large"
   icon="md-person"
+  maxlength="16"
 />
 <br>
 value: {{ value }}
