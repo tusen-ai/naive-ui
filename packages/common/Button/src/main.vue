@@ -9,7 +9,7 @@
     v-on="$listeners"
   >
     <div
-      v-if="icon"
+      v-if="icon && !iconOnRight"
       class="n-button__icon"
     >
       <n-icon :type="icon" />
@@ -19,6 +19,12 @@
       :style="style"
     >
       <slot />
+    </div>
+    <div
+      v-if="icon && iconOnRight"
+      class="n-button__icon n-button__icon--right"
+    >
+      <n-icon :type="icon" />
     </div>
   </div>
 </template>
@@ -51,6 +57,10 @@ export default {
     icon: {
       type: String,
       default: null
+    },
+    iconOnRight: {
+      type: Boolean,
+      default: false
     },
     autoTextColor: {
       type: Boolean,

@@ -106,6 +106,7 @@
           <n-button
             round
             icon="md-save"
+            icon-on-right
           >
             Save as Template
           </n-button>
