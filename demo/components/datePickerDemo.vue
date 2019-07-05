@@ -14,7 +14,10 @@
           Basic Usage
         </div>
         <div class="n-doc-section__view">
-          <n-date-picker v-model="timestamp" />timestamp: {{ timestamp }}
+          <div style="width: 100%;">
+            timestamp: {{ timestamp }}
+          </div>
+          <n-date-picker v-model="timestamp" />
         </div>
         <div class="n-doc-section__source">
           <textarea>scaffold</textarea>
