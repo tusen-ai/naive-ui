@@ -102,10 +102,10 @@ export default {
               name: 'Table',
               path: '/n-table'
             },
-            // {
-            //   name: 'AdvanceTable',
-            //   path: '/n-advance-table'
-            // },
+            {
+              name: 'AdvanceTable',
+              path: '/n-advance-table'
+            },
             {
               name: 'Tooltip',
               path: '/n-tooltip'

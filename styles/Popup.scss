@@ -20,13 +20,14 @@ $popup-distance: $popup-arrow-width - 1 + 14;
       border-style: solid;
     }
   }
-}
-.n-popup__ref {
-  position:relative;
-  display:inline-block;
+  .n-popup__ref {
+    position:relative;
+    display:inline-block;
+  }
+  
 }
 .n-popup__content-wrapper {
-
+  
   display: inline-table;
   border-radius: 6px;
   background-color: rgba(75, 81, 106, 1);
@@ -121,14 +122,15 @@ $popup-distance: $popup-arrow-width - 1 + 14;
     border-left-color: $popup-bg-color;
     bottom: $popup-arrow-width;
   }
+  .popup__content {
+    box-sizing: 'border-box'
+  }
+  .n-popup--word_wrap {
+    white-space: pre-wrap;
+    text-align: justify;
+  }
 }
-.popup__content {
-  box-sizing: 'border-box'
-}
-.n-popup--word_wrap {
-  white-space: pre-wrap;
-  text-align: justify;
-}
+
 .n-poup__fade-enter-active,
 .n-poup__fade-leave-active {
   transition: opacity 0.5s;

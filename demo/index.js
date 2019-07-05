@@ -12,7 +12,7 @@ import checkboxDemo from './components/checkboxDemo'
 import buttonDemo from './components/buttonDemo'
 import switchDemo from './components/switchDemo'
 import tableDemo from './components/tableDemo'
-// import advanceTableDemo from './components/advanceTableDemo'
+import advanceTableDemo from './components/advanceTableDemo'
 import inputDemo from './components/inputDemo'
 import selectDemo from './components/selectDemo'
 import modalDemo from './components/modalDemo'
@@ -49,7 +49,7 @@ const routes = [
       { path: '/n-button', component: buttonDemo },
       { path: '/n-switch', component: switchDemo },
       { path: '/n-table', component: tableDemo },
-      // { path: '/n-advance-table', component: advanceTableDemo },
+      { path: '/n-advance-table', component: advanceTableDemo },
       { path: '/n-input', component: inputDemo },
       { path: '/n-select', component: selectDemo },
       { path: '/n-modal', component: modalDemo },
