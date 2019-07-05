@@ -4,12 +4,13 @@
     :class="{
       'is-round': round,
       [`is-${type}`]: true,
-      [`n-button--${size}-size`]: true
+      [`n-button--${size}-size`]: true,
+      'n-button--disabled': disabled
     }"
-    v-on="$listeners"
+    @click="handleClick"
   >
     <div
-      v-if="icon"
+      v-if="icon && !iconOnRight"
       class="n-button__icon"
     >
       <n-icon :type="icon" />
@@ -19,6 +20,12 @@
       :style="style"
     >
       <slot />
+    </div>
+    <div
+      v-if="icon && iconOnRight"
+      class="n-button__icon n-button__icon--right"
+    >
+      <n-icon :type="icon" />
     </div>
   </div>
 </template>
@@ -32,6 +39,10 @@ export default {
     NIcon
   },
   props: {
+    disabled: {
+      type: Boolean,
+      default: false
+    },
     size: {
       type: String,
       default: 'default'
@@ -51,6 +62,10 @@ export default {
     icon: {
       type: String,
       default: null
+    },
+    iconOnRight: {
+      type: Boolean,
+      default: false
     },
     autoTextColor: {
       type: Boolean,
@@ -74,6 +89,13 @@ export default {
           }
           break
         }
+      }
+    }
+  },
+  methods: {
+    handleClick (e) {
+      if (!this.disabled) {
+        this.$emit('click', e)
       }
     }
   }

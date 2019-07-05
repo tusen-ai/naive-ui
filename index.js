@@ -20,6 +20,7 @@ import Pagination from './packages/common/Pagination'
 import Tooltip from './packages/common/Tooltip'
 import Popup from './packages/common/Popup'
 import Alert from './packages/common/Alert'
+import DatePicker from './packages/common/DatePicker'
 
 import ServiceCard from './packages/nimbus/ServiceCard'
 import HomeLayout from './packages/nimbus/HomeLayout'
@@ -57,6 +58,7 @@ function install (Vue) {
   Tooltip.install(Vue)
   Popup.install(Vue)
   Alert.install(Vue)
+  DatePicker.install(Vue)
 }
 
 export default {

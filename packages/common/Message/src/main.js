@@ -4,7 +4,6 @@ import NMessageCell from './MessageCell'
 
 function attachMessageContainer () {
   let messageContainer = document.querySelector('.n-message.n-message__container')
-  console.log(messageContainer)
   if (!messageContainer) {
     messageContainer = document.createElement('div')
     messageContainer.classList.add('n-message', 'n-message__container')

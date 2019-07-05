@@ -21,6 +21,7 @@ import messageDemo from './components/messageDemo'
 import tooltipDemo from './components/tooltipDemo'
 import popupDemo from './components/popupDemo'
 import alertDemo from './components/alertDemo'
+import datePickerDemo from './components/datePickerDemo'
 
 import notificationDemo from './components/notificationDemo'
 import nimbusConfirmCardDemo from './components/nimbusConfirmCardDemo'
@@ -60,7 +61,8 @@ const routes = [
       { path: '/n-notification', component: notificationDemo },
       { path: '/n-nimbus-confirm-card', component: nimbusConfirmCardDemo },
       { path: '/n-pagination', component: paginationDemo },
-      { path: '/n-alert', component: alertDemo }
+      { path: '/n-alert', component: alertDemo },
+      { path: '/n-date-picker', component: datePickerDemo }
     ]
   },
   {

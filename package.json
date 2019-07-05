@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "0.1.82",
+  "version": "0.1.93",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "test-release": "cross-env NODE_ENV=production webpack-dev-server --config build/webpack.release.js",
     "release-doc": "cross-env NODE_ENV=development && rm -rf doc/dist && node doc/changeDemoVersion.js && webpack --config build/webpack.doc.js && sudo bash doc/deploy-doc.sh"
   },
-  "author": "",
+  "author": "lecong.zhang",
   "license": "ISC",
   "publishConfig": {
     "registry": "***REMOVED***"
@@ -78,13 +78,14 @@
     "webpack-dev-server": "^3.4.1"
   },
   "dependencies": {
-    "popper.js": "^1.15.0",
-    "v-click-outside-x": "^4.0.5",
     "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
     "@vue/babel-preset-jsx": "^1.0.0",
     "ionicons": "^4.5.8",
     "masonry-layout": "^4.2.2",
+    "moment": "^2.24.0",
     "node-sass": "^4.12.0",
-    "sass-loader": "^7.1.0"
+    "popper.js": "^1.15.0",
+    "sass-loader": "^7.1.0",
+    "v-click-outside-x": "^4.0.5"
   }
 }

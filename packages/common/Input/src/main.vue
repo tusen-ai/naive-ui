@@ -15,7 +15,11 @@
       :placeholder="placeholder"
       :value="value"
       :disabled="disabled === true"
+      v-on="$listeners"
+      @blur="handleBlur"
+      @focus="handleFocus"
       @input="handleInput"
+      @keyup="handleKeyUp"
     />
   </div>
   <div
@@ -26,7 +30,7 @@
     }"
   >
     <input
-      type="text"
+      :type="type"
       class="n-input__input"
       :class="{
         [`n-input__input--${size}-size`]: true,
@@ -36,13 +40,17 @@
       :placeholder="placeholder"
       :value="value"
       :disabled="disabled === true"
+      :maxlength="maxlength"
+      @blur="handleBlur"
+      @focus="handleFocus"
       @input="handleInput"
+      @keyup="handleKeyUp"
     >
     <div
       v-if="icon"
       class="n-input__icon"
     >
-      <n-icon type="ios-search" />
+      <n-icon :type="icon" />
     </div>
   </div>
 </template>
@@ -91,11 +99,24 @@ export default {
     icon: {
       type: String,
       default: null
+    },
+    maxlength: {
+      type: [String, Number],
+      default: 'false'
     }
   },
   methods: {
     handleInput (e) {
       this.$emit('change', e.target.value)
+    },
+    handleBlur (e) {
+      this.$emit('blur', e)
+    },
+    handleFocus (e) {
+      this.$emit('focus', e)
+    },
+    handleKeyUp (e) {
+      this.$emit('keyup', e)
     }
   }
 }

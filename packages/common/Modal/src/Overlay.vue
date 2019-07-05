@@ -37,19 +37,18 @@ export default {
   top: 0;
   bottom: 0;
   display: flex;
+  overflow: auto;
 }
 
 .n-modal-overlay--transition-enter-active {
-  opacity: 1;
-  transition: opacity .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+  transition: background-color .3s cubic-bezier(0.0, 0.0, 0.2, 1);
 }
 
 .n-modal-overlay--transition-leave-active {
-  opacity: 1;
-  transition: opacity .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+  transition: background-color .3s cubic-bezier(0.0, 0.0, 0.2, 1);
 }
 
 .n-modal-overlay--transition-enter, .n-modal-overlay--transition-leave-to {
-  opacity: 0;
+  background-color: rgba(0, 0, 0, 0);
 }
 </style>

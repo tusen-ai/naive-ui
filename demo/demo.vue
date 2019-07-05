@@ -2,7 +2,7 @@
   <div class="demo">
     <n-nimbus-service-layout
       icon="md-contacts"
-      name="NAIVE UI (0.1.79)"
+      name="NAIVE UI (0.1.92)"
       :padding-body="false"
       :items="items"
     >
@@ -57,6 +57,10 @@ export default {
             {
               name: 'Checkbox',
               path: '/n-checkbox'
+            },
+            {
+              name: 'DatePicker',
+              path: '/n-date-picker'
             },
             {
               name: 'Gradient Text',

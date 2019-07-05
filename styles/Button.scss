@@ -13,8 +13,16 @@
   text-align: center;
   .n-button__icon {
     margin-right: 2px;
+    &.n-button__icon--right {
+      margin-right: 0px;
+      margin-left: 4px;
+    }
   }
   border-radius: $button-border-radius;
+  &.n-button--disabled {
+    cursor: not-allowed;
+    opacity: .43;
+  }
   &.n-button--small-size {
     font-size: $button-small-font-size;
     height: $small-height;

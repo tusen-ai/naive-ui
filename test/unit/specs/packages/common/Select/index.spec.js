@@ -1,8 +1,13 @@
 import NSelect from 'packages/common/Select'
 import { mount, createLocalVue } from '@vue/test-utils'
 import { expect } from 'chai'
+import sinon from 'sinon'
 import { existsInClassList, sleep } from '../../utils'
 import _ from 'lodash'
+
+/**
+ * Warning: The following tests depend on class name `n-select-menu` and `n-select-menu__item` to work correctly
+ */
 
 describe('Select', function () {
   const localVue = createLocalVue()
@@ -184,6 +189,23 @@ describe('Select', function () {
   })
   describe('props.placeholder', function () {
     describe('single select', function () {
+      it('should work', function () {
+        const NSelectTestContext = {
+          localVue,
+          components: {
+            NSelect
+          },
+          template: `<n-select :items="items" v-model="selectedValue" placeholder="666"/>`,
+          data () {
+            return {
+              items: _.cloneDeep(items),
+              selectedValue: null
+            }
+          }
+        }
+        const wrapper = mount(NSelectTestContext)
+        expect(wrapper.find('input').element.placeholder).to.equal('666')
+      })
       it('should show when nothing is selected', function () {
         const NSelectTestContext = {
           localVue,
@@ -199,10 +221,26 @@ describe('Select', function () {
           }
         }
         const wrapper = mount(NSelectTestContext)
-        expect(existsInClassList(wrapper.element, 'placeholder', true))
+        expect(wrapper.find('input').element.value).to.equal('')
+        expect(wrapper.find('input').element.placeholder.toLowerCase()).to.contain('please select')
       })
       it('should show when v-model value is invalid', function () {
-
+        const NSelectTestContext = {
+          localVue,
+          components: {
+            NSelect
+          },
+          template: `<n-select :items="items" v-model="selectedValue"/>`,
+          data () {
+            return {
+              items: _.cloneDeep(items),
+              selectedValue: 'riduculousValue'
+            }
+          }
+        }
+        const wrapper = mount(NSelectTestContext)
+        expect(wrapper.find('input').element.value).to.equal('')
+        expect(wrapper.find('input').element.placeholder.toLowerCase()).to.contain('please select')
       })
       it('should show `Please select` when not specified', function () {
         const NSelectTestContext = {
@@ -219,7 +257,7 @@ describe('Select', function () {
           }
         }
         const wrapper = mount(NSelectTestContext)
-        expect(wrapper.html().toLowerCase()).to.contain('please select')
+        expect(wrapper.find('input').element.placeholder.toLowerCase()).to.contain('please select')
       })
     })
     describe('multiple select', function () {
@@ -240,8 +278,22 @@ describe('Select', function () {
         const wrapper = mount(NSelectTestContext)
         expect(existsInClassList(wrapper.element, 'placeholder', true))
       })
-      it('should show when v-model value is invalid', function () {
-
+      it('should show `Please select` when v-model value is invalid', function () {
+        const NSelectTestContext = {
+          localVue,
+          components: {
+            NSelect
+          },
+          template: `<n-select :items="items" v-model="selectedArray" multiple/>`,
+          data () {
+            return {
+              items: _.cloneDeep(items),
+              selectedArray: 'ridiculous'
+            }
+          }
+        }
+        const wrapper = mount(NSelectTestContext)
+        expect(wrapper.html().toLowerCase()).to.contain('please select')
       })
       it('should show `Please select` when not specified', function () {
         const NSelectTestContext = {
@@ -335,9 +387,6 @@ describe('Select', function () {
       })
     })
   })
-  describe('props.emitItem', function () {
-
-  })
   describe('v-model', function () {
     describe('single select', function () {
       it('should sync view with value', function () {
@@ -356,11 +405,9 @@ describe('Select', function () {
         }
         const wrapper = mount(NSelectTestContext)
         wrapper.vm.selectedValue = 'value1'
-        expect(wrapper.html()).to.contain('label1')
+        expect(wrapper.find('input').element.value).to.contain('label1')
         wrapper.vm.selectedValue = 'value2'
-        expect(wrapper.html()).to.contain('label2')
-        wrapper.vm.selectedValue = null
-        expect(wrapper.html().toLowerCase()).to.contain('please select')
+        expect(wrapper.find('input').element.value).to.contain('label2')
       })
       it('should sync value with view', function () {
         const NSelectTestContext = {
@@ -400,7 +447,24 @@ describe('Select', function () {
         expect(existsInClassList(wrapper.element, 'placeholder', true))
       })
       it('should change to valid value when select an item when initial v-model value is invalid', function () {
-
+        const NSelectTestContext = {
+          localVue,
+          components: {
+            NSelect
+          },
+          template: `<n-select :items="items" v-model="selectedValue"/>`,
+          data () {
+            return {
+              items: _.cloneDeep(items),
+              selectedValue: { haha: 'ridiculous' }
+            }
+          }
+        }
+        const wrapper = mount(NSelectTestContext)
+        wrapper.trigger('click')
+        /** Todo using XPath */
+        wrapper.find('.n-select-menu__item').trigger('click')
+        expect(wrapper.vm.selectedValue).to.equal('value1')
       })
     })
     describe('multiple select', function () {
@@ -446,27 +510,244 @@ describe('Select', function () {
         wrapper.find('.n-select-menu__item').trigger('click')
         expect(wrapper.vm.selectedArray).to.deep.equal(['value1'])
       })
-      it('should change to valid value when select an item when initial v-model value is invalid', function () {
-
+      it('should change to valid value when select an item when initial v-model value is invalid (case 798)', function () {
+        const NSelectTestContext = {
+          localVue,
+          components: {
+            NSelect
+          },
+          template: `<n-select multiple :items="items" v-model="selectedArray"/>`,
+          data () {
+            return {
+              items: _.cloneDeep(items),
+              selectedArray: 798
+            }
+          }
+        }
+        const wrapper = mount(NSelectTestContext)
+        wrapper.trigger('click')
+        /** Todo using XPath */
+        wrapper.find('.n-select-menu__item').trigger('click')
+        expect(wrapper.vm.selectedArray).to.deep.equal(['value1'])
+      })
+      it('should change to valid value when select an item when initial v-model value is invalid (case [\'798\', \'999\'])', function () {
+        const NSelectTestContext = {
+          localVue,
+          components: {
+            NSelect
+          },
+          template: `<n-select multiple :items="items" v-model="selectedArray"/>`,
+          data () {
+            return {
+              items: _.cloneDeep(items),
+              selectedArray: ['798', '999']
+            }
+          }
+        }
+        const wrapper = mount(NSelectTestContext)
+        wrapper.trigger('click')
+        /** Todo using XPath */
+        wrapper.find('.n-select-menu__item').trigger('click')
+        expect(wrapper.vm.selectedArray).to.deep.equal(['value1'])
       })
     })
   })
   describe('@change', function () {
     describe('single select', function () {
       it('should be called when change selected item', function () {
-
+        const handleChange = sinon.spy()
+        const NSelectTestContext = {
+          localVue,
+          components: {
+            NSelect
+          },
+          template: `<n-select :items="items" v-model="selectedValue" @change="handleChange"/>`,
+          methods: {
+            handleChange
+          },
+          data () {
+            return {
+              items: _.cloneDeep(items),
+              selectedValue: null
+            }
+          }
+        }
+        const wrapper = mount(NSelectTestContext)
+        wrapper.trigger('click')
+        wrapper.find('.n-select-menu__item').trigger('click')
+        expect(handleChange.calledOnce)
+        expect(handleChange.calledWith('value1'))
       })
       it('should return item object', function () {
-
+        const handleChange = sinon.spy()
+        const NSelectTestContext = {
+          localVue,
+          components: {
+            NSelect
+          },
+          template: `<n-select :items="items" v-model="selectedValue" @change="handleChange" emitItem/>`,
+          methods: {
+            handleChange
+          },
+          data () {
+            return {
+              items: _.cloneDeep(items),
+              selectedValue: null
+            }
+          }
+        }
+        const wrapper = mount(NSelectTestContext)
+        wrapper.trigger('click')
+        wrapper.find('.n-select-menu__item').trigger('click')
+        expect(handleChange.calledOnce)
+        expect(handleChange.args[0][0]).to.deep.equal({
+          value: 'value1',
+          label: 'label1'
+        })
       })
     })
     describe('multiple select', function () {
       it('should be called when change selected item', function () {
-
+        const handleChange = sinon.spy()
+        const NSelectTestContext = {
+          localVue,
+          components: {
+            NSelect
+          },
+          template: `<n-select multiple :items="items" v-model="selectedArray" @change="handleChange"/>`,
+          methods: {
+            handleChange
+          },
+          data () {
+            return {
+              items: _.cloneDeep(items),
+              selectedArray: []
+            }
+          }
+        }
+        const wrapper = mount(NSelectTestContext)
+        wrapper.trigger('click')
+        wrapper.find('.n-select-menu__item').trigger('click')
+        expect(handleChange.calledOnce)
+        expect(handleChange.calledWith('value1'))
       })
-      it('should return item object', function () {
-
+      it('should return item object when prop `emitItem` is specified', function () {
+        const handleChange = sinon.spy()
+        const NSelectTestContext = {
+          localVue,
+          components: {
+            NSelect
+          },
+          template: `<n-select multiple :items="items" v-model="selectedArray" @change="handleChange" emitItem/>`,
+          methods: {
+            handleChange
+          },
+          data () {
+            return {
+              items: _.cloneDeep(items),
+              selectedArray: []
+            }
+          }
+        }
+        const wrapper = mount(NSelectTestContext)
+        wrapper.trigger('click')
+        wrapper.find('.n-select-menu__item').trigger('click')
+        expect(handleChange.calledOnce)
+        expect(handleChange.args[0][0]).to.deep.equal({
+          value: 'value1',
+          label: 'label1'
+        })
       })
+    })
+  })
+  describe('lightbar', function () {
+    describe('single select', function () {
+      it('should show when mouse enter item', function () {
+        const NSelectTestContext = {
+          localVue,
+          components: {
+            NSelect
+          },
+          template: `<n-select :items="items" v-model="selectedValue"/>`,
+          data () {
+            return {
+              items: _.cloneDeep(items),
+              selectedValue: null
+            }
+          }
+        }
+        const wrapper = mount(NSelectTestContext)
+        wrapper.trigger('click')
+        /** Todo using XPath */
+        wrapper.find('.n-select-menu__item').trigger('mouseenter')
+        expect(existsInClassList(wrapper.element, 'light-bar', true))
+      })
+    })
+    describe('multiple select', function () {
+      it('should show when mouse enter item', function () {
+        const NSelectTestContext = {
+          localVue,
+          components: {
+            NSelect
+          },
+          template: `<n-select :items="items" v-model="selectedArray" multiple/>`,
+          data () {
+            return {
+              items: _.cloneDeep(items),
+              selectedArray: []
+            }
+          }
+        }
+        const wrapper = mount(NSelectTestContext)
+        wrapper.trigger('click')
+        /** Todo using XPath */
+        wrapper.find('.n-select-menu__item').trigger('mouseenter')
+        expect(existsInClassList(wrapper.element, 'light-bar', true))
+      })
+    })
+  })
+  describe('item selected status', function () {
+    describe('single select', function () {
+      const NSelectTestContext = {
+        localVue,
+        components: {
+          NSelect
+        },
+        template: `<n-select :items="items" v-model="selectedValue"/>`,
+        data () {
+          return {
+            items: _.cloneDeep(items),
+            selectedValue: null
+          }
+        }
+      }
+      const wrapper = mount(NSelectTestContext)
+      wrapper.trigger('click')
+      /** Todo using XPath */
+      const itemWrapper = wrapper.find('.n-select-menu__item')
+      itemWrapper.trigger('click')
+      expect(existsInClassList(itemWrapper.element, 'selected', true))
+    })
+    describe('multiple select', function () {
+      const NSelectTestContext = {
+        localVue,
+        components: {
+          NSelect
+        },
+        template: `<n-select :items="items" v-model="selectedArray"/>`,
+        data () {
+          return {
+            items: _.cloneDeep(items),
+            selectedArray: []
+          }
+        }
+      }
+      const wrapper = mount(NSelectTestContext)
+      wrapper.trigger('click')
+      /** Todo using XPath */
+      const itemWrapper = wrapper.find('.n-select-menu__item')
+      itemWrapper.trigger('click')
+      expect(existsInClassList(itemWrapper.element, 'selected', true))
     })
   })
 })
