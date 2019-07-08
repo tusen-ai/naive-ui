@@ -336,6 +336,9 @@ export default {
   },
   created () {
     this.refreshSelectedDateTimeString()
+    if (this.computedSelectedDateTime !== null && this.computedSelectedDateTime.isValid()) {
+      this.calendarDateTime = moment(this.computedSelectedDateTime)
+    }
   },
   methods: {
     dateArray,
