@@ -1,7 +1,13 @@
 import moment from 'moment'
 
+/**
+ * change date of `time` accroding to `dateItem`
+ * keep time of `time`
+ * return a new Moment Object according to time
+ * @param {Moment} time
+ * @param {Object} dateItem
+ */
 function setDate (time, dateItem) {
-  console.log(time, dateItem)
   time.year(dateItem.year)
   time.month(dateItem.month)
   time.date(dateItem.date)
