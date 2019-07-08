@@ -44,6 +44,7 @@
       :placeholder="placeholder"
       :disabled="disabled === true"
       :maxlength="maxlength"
+      :value="value"
       @blur="handleBlur"
       @focus="handleFocus"
       @input="handleInput"
