@@ -65,7 +65,7 @@ export default {
   },
   model: {
     prop: 'value',
-    event: 'changes'
+    event: 'change'
   },
   props: {
     type: {
@@ -107,7 +107,7 @@ export default {
   },
   methods: {
     handleInput (e) {
-      this.$emit('changes', e.target.value)
+      this.$emit('change', e.target.value)
     },
     handleBlur (e) {
       this.$emit('blur', e)
