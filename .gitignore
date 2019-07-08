@@ -4,3 +4,4 @@ docDist
 doc/dist
 test/unit/coverage
 package-lock.json
+*.swp
