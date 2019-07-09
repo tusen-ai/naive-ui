@@ -98,6 +98,10 @@ export default {
     zIndex: {
       default: 1000,
       type: Number
+    },
+    padding: {
+      type: String,
+      default: null
     }
   },
   data () {
@@ -110,6 +114,7 @@ export default {
     style () {
       let style = {}
       if (this.transfer) style['z-index'] = this.zIndex
+      if (this.padding) style['padding'] = this.padding
       return style
     }
   },
