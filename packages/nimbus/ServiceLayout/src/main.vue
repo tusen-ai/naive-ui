@@ -113,26 +113,32 @@ export default {
   data () {
     return {
       isCollapsed: false,
-      activeItemName: 'Service Management',
+      activeItemName: '',
       itemsWithCollapseStatus: this.items.map(item => ({
         ...item,
         isCollapsed: false
       }))
     }
   },
-
+  watch: {
+    value () {
+      this.activeItemName = this.value
+    }
+  },
   mounted () {
     this.activeItemName = this.value
     const path = this.$route.path
     for (const item of this.items) {
       if (item.path === path) {
         this.activeItemName = item.name
+        this.$emit('input', item.name)
         return
       }
       if (item.childItems) {
         for (const childItem of item.childItems) {
           if (childItem.path === path) {
             this.activeItemName = childItem.name
+            this.$emit('input', item.name)
             return
           }
         }
@@ -145,6 +151,7 @@ export default {
     },
     makeActive (item) {
       this.activeItemName = item.name
+      this.$emit('input', item.name)
       if (this.$router) {
         this.$router.push(item.path)
       }
