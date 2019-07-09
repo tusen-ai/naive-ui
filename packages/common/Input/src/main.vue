@@ -7,6 +7,7 @@
     }"
   >
     <textarea
+      ref="textarea"
       class="n-input__textarea"
       :class="{
         [`n-input__textarea--${size}-size`]: true
@@ -15,11 +16,13 @@
       :placeholder="placeholder"
       :value="value"
       :disabled="disabled === true"
-      v-on="$listeners"
       @blur="handleBlur"
       @focus="handleFocus"
       @input="handleInput"
+      @change="handleChange"
       @keyup="handleKeyUp"
+      @compositionstart="handleCompositionStart"
+      @compositionend="handleCompositionEnd"
     />
   </div>
   <div
@@ -30,6 +33,7 @@
     }"
   >
     <input
+      ref="input"
       :type="type"
       class="n-input__input"
       :class="{
@@ -38,13 +42,16 @@
         [`n-input__input--icon`]: icon
       }"
       :placeholder="placeholder"
-      :value="value"
       :disabled="disabled === true"
       :maxlength="maxlength"
+      :value="value"
       @blur="handleBlur"
       @focus="handleFocus"
       @input="handleInput"
+      @change="handleChange"
       @keyup="handleKeyUp"
+      @compositionstart="handleCompositionStart"
+      @compositionend="handleCompositionEnd"
     >
     <div
       v-if="icon"
@@ -65,7 +72,7 @@ export default {
   },
   model: {
     prop: 'value',
-    event: 'change'
+    event: 'input'
   },
   props: {
     type: {
@@ -77,7 +84,7 @@ export default {
       default: ''
     },
     value: {
-      type: String,
+      type: [String, Number],
       default: ''
     },
     disabled: {
@@ -105,9 +112,22 @@ export default {
       default: 'false'
     }
   },
+  data () {
+    return {
+      isComposing: false
+    }
+  },
   methods: {
+    handleCompositionStart () {
+      this.isComposing = true
+    },
+    handleCompositionEnd (event) {
+      this.isComposing = false
+      this.handleInput(event)
+    },
     handleInput (e) {
-      this.$emit('change', e.target.value)
+      if (this.isComposing) return
+      this.$emit('input', e.target.value)
     },
     handleBlur (e) {
       this.$emit('blur', e)
@@ -116,7 +136,11 @@ export default {
       this.$emit('focus', e)
     },
     handleKeyUp (e) {
+      if (this.isComposing) return
       this.$emit('keyup', e)
+    },
+    handleChange (e) {
+      this.$emit('change', e.target.value)
     }
   }
 }

@@ -100,6 +100,7 @@ export default {
             @focus="handleFocus"
             @change="handleChange"
             @keyup="handleKeyUp"
+            @input="handleInput"
           />
           <br>
           value: {{ value }}
@@ -120,6 +121,23 @@ export default {
   data () {
     return {
       value: null
+    }
+  },
+  methods: {
+    handleFocus () {
+      this.$NMessage.success('focus')
+    },
+    handleBlur () {
+      this.$NMessage.success('blur')
+    },
+    handleInput (value) {
+      this.$NMessage.success('input: ' + value)
+    },
+    handleChange (value) {
+      this.$NMessage.success('change: ' + value)
+    },
+    handleKeyUp (e) {
+      this.$NMessage.success('keyup')
     }
   }
 }
@@ -352,6 +370,9 @@ export default {
     },
     handleBlur () {
       this.$NMessage.success('blur')
+    },
+    handleInput (value) {
+      this.$NMessage.success('input: ' + value)
     },
     handleChange (value) {
       this.$NMessage.success('change: ' + value)

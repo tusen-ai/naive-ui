@@ -1,8 +1,11 @@
+@import './mixins/config.scss';
+
 $body-background-color: #1a2033;
 
 /**
  * genaral
  */
+$tiny-height: 22px;
 $small-height: 28px;
 $default-height: 34px;
 $large-height: 40px;
@@ -33,6 +36,7 @@ $input-icon-color: rgba(255,255,255,0.2);
  */
 $button-margin: 0 12px 8px 0;
 $button-border-radius: 6px;
+$button-tiny-font-size: 12px;
 $button-small-font-size: 14px;
 $button-default-font-size: 16px;
 $button-large-font-size: 16px;
@@ -122,5 +126,18 @@ $default-font-family: 'Lato';
   }
   &::-webkit-scrollbar-thumb:hover {
     background: rgba(255,255,255,0.3);
+  }
+}
+
+@mixin fade-up-transition($block) {
+  .#{$namespace}-#{$block}--transition-enter, .#{$namespace}-#{$block}--transition-leave-to {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  .#{$namespace}-#{$block}--transition-leave-active {
+    transition: opacity .3s $slow-out-cubic-bezier, transform .3s $slow-out-cubic-bezier;
+  }
+  .#{$namespace}-#{$block}--transition-enter-active {
+    transition: opacity .3s $fast-in-cubic-bezier, transform .3s $fast-in-cubic-bezier;
   }
 }
