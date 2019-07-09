@@ -65,6 +65,7 @@
           <textarea><n-nimbus-service-layout
   icon="md-musical-notes"
   name="Oasis"
+  v-model="'Hello'"
   :items="[
     {
       name: 'Definitely Maybe',
