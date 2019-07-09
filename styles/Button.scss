@@ -23,6 +23,25 @@
     cursor: not-allowed;
     opacity: .43;
   }
+  &.n-button--tiny-size {
+    font-size: $button-tiny-font-size;
+    height: $tiny-height;
+    padding: 0 14px;
+    &.is-round {
+      border-radius: $tiny-height / 2;
+    }
+    .n-button__content {
+      line-height: $tiny-height;
+    }
+    .n-button__icon {
+      height: 18px;
+      width: 18px;
+      .n-icon {
+        font-size: 18px;
+        display: block;
+      }
+    }
+  }
   &.n-button--small-size {
     font-size: $button-small-font-size;
     height: $small-height;
