@@ -31,7 +31,7 @@ export default {
     },
     value: {
       type: Number,
-      default: 0
+      default: null
     }
   },
   data () {
@@ -42,11 +42,11 @@ export default {
   },
   watch: {
     value (val) {
-      this.setSort(val)
+      if (val !== null) { this.setSort(val) }
     }
   },
   mounted () {
-    this.setSort(this.value)
+    // this.setSort(this.value)
     // console.log('value', this.value, this.upOpacity, this.downOpacity)
   },
   methods: {

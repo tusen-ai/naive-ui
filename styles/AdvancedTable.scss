@@ -1,0 +1,25 @@
+@import "./mixins/mixins.scss";
+@import "./theme/default.scss";
+// TODO: 滚动条
+.n-advance-tabel__wrapper {
+  width: 100%;
+  
+  .n-table {
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.2);
+      border-radius: 2.5px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: rgba(255,255,255,0.3);
+    }
+    table thead tr th:last-of-type {
+      padding-left: 32px;
+    }
+  }
+}
