@@ -104,6 +104,10 @@ export default {
     paddingBody: {
       type: Boolean,
       default: true
+    },
+    value: {
+      type: String,
+      default: ''
     }
   },
   data () {
@@ -116,7 +120,9 @@ export default {
       }))
     }
   },
+
   mounted () {
+    this.activeItemName = this.value
     const path = this.$route.path
     for (const item of this.items) {
       if (item.path === path) {

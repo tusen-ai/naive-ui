@@ -15,6 +15,7 @@
         </div>
         <div class="n-doc-section__view">
           <n-nimbus-service-layout
+            v-model="currentFileld"
             icon="md-musical-notes"
             name="Oasis"
             :items="[
@@ -118,7 +119,7 @@ export default {
   mixins: [docCodeEditorMixin],
   data () {
     return {
-
+      currentFileld: 'Hello'
     }
   },
   methods: {
