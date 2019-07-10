@@ -6,12 +6,12 @@ TuSimple Vue-Based Frontend Component Library
 [https://***REMOVED***/naive-ui/tree/develop](https://***REMOVED***/naive-ui/tree/develop)
 ## Develop Guidelines
 ### Git Commit Message Style
-You **Must** follow [Angular Commit Format](https://gist.github.com/brianclements/841ea7bffdb01346392c).
+You **MUST** follow [Angular Commit Format](https://gist.github.com/brianclements/841ea7bffdb01346392c).
 
 If you want see some example, see [Angular Commits on Github](https://github.com/angular/angular/commits/master).
 ### Code Styles
 #### Javascript Style
-You **Must** follow [Standard JS](https://standardjs.com/).
+You **MUST** follow [Standard JS](https://standardjs.com/).
 #### SCSS Style
 Run `npm run lint-style` to echeck styles.
 #### Check Both

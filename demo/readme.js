@@ -6,11 +6,11 @@ export default `<div class="markdown-body"><h1 id="naiveui">naive-ui</h1>
 <p><a href="https://***REMOVED***/naive-ui/tree/develop">https://***REMOVED***/naive-ui/tree/develop</a></p>
 <h2 id="developguidelines">Develop Guidelines</h2>
 <h3 id="gitcommitmessagestyle">Git Commit Message Style</h3>
-<p>You <strong>Must</strong> follow <a href="https://gist.github.com/brianclements/841ea7bffdb01346392c">Angular Commit Format</a>.</p>
+<p>You <strong>MUST</strong> follow <a href="https://gist.github.com/brianclements/841ea7bffdb01346392c">Angular Commit Format</a>.</p>
 <p>If you want see some example, see <a href="https://github.com/angular/angular/commits/master">Angular Commits on Github</a>.</p>
 <h3 id="codestyles">Code Styles</h3>
 <h4 id="javascriptstyle">Javascript Style</h4>
-<p>You <strong>Must</strong> follow <a href="https://standardjs.com/">Standard JS</a>.</p>
+<p>You <strong>MUST</strong> follow <a href="https://standardjs.com/">Standard JS</a>.</p>
 <h4 id="scssstyle">SCSS Style</h4>
 <p>Run <code>npm run lint-style</code> to echeck styles.</p>
 <h4 id="checkboth">Check Both</h4>

@@ -2,7 +2,7 @@
   <div class="demo">
     <n-nimbus-service-layout
       icon="md-contacts"
-      name="NAIVE UI (0.1.96)"
+      name="NAIVE UI (0.1.99)"
       :padding-body="false"
       :items="items"
     >
