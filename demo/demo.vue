@@ -75,6 +75,10 @@ export default {
               path: '/n-input'
             },
             {
+              name: 'InputNumber',
+              path: '/n-input-number'
+            },
+            {
               name: 'Message',
               path: '/n-message'
             },

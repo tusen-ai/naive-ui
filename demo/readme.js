@@ -170,6 +170,18 @@ Vue.use(naiveUi)
 <td style="text-align:center;">❌</td>
 <td>May be need to merge with Tooltip</td>
 </tr>
+<tr>
+<td>InputNumber</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Radio</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
 </tbody>
 </table>
 <h2 id="todo">Todo</h2>
@@ -182,4 +194,5 @@ Vue.use(naiveUi)
 <li>Create a Markdown webpack loader to convert documentation(Low Priority)</li>
 <li>Refactor documentation page(for code clairity)</li>
 <li>Code refactor for some 😢  messy code(which is my bad…)</li>
+<li>Refactor CSS use mixins(which means I should learn SCSS hard…)</li>
 </ol></div>`

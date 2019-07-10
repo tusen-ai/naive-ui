@@ -69,6 +69,8 @@ Vue.use(naiveUi)
 |Table|🚧|❌|Function is not fulfilled|
 |Tooltip|😍|❌|Remove the dependency of Popper.js|
 |Popup|😍|❌|May be need to merge with Tooltip|
+|InputNumber|🚧|||
+|Radio|🚧|||
 ## Todo
 1. Z-index management on `Select` & `Tooltip` & `Modal`(Low Priority)
 2. Full featured table component(Medium Priority)
@@ -78,3 +80,4 @@ Vue.use(naiveUi)
 6. Create a Markdown webpack loader to convert documentation(Low Priority)
 7. Refactor documentation page(for code clairity)
 8. Code refactor for some 😢  messy code(which is my bad...)
+9. Refactor CSS use mixins(which means I should learn SCSS hard...)

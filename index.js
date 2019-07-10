@@ -21,6 +21,7 @@ import Tooltip from './packages/common/Tooltip'
 import Popup from './packages/common/Popup'
 import Alert from './packages/common/Alert'
 import DatePicker from './packages/common/DatePicker'
+import InputNumber from './packages/common/InputNumber'
 
 import ServiceCard from './packages/nimbus/ServiceCard'
 import HomeLayout from './packages/nimbus/HomeLayout'
@@ -59,6 +60,7 @@ function install (Vue) {
   Popup.install(Vue)
   Alert.install(Vue)
   DatePicker.install(Vue)
+  InputNumber.install(Vue)
 }
 
 export default {
