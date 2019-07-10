@@ -12,7 +12,7 @@ export default `<div class="markdown-body"><h1 id="naiveui">naive-ui</h1>
 <h4 id="javascriptstyle">Javascript Style</h4>
 <p>You <strong>MUST</strong> follow <a href="https://standardjs.com/">Standard JS</a>.</p>
 <h4 id="scssstyle">SCSS Style</h4>
-<p>Run <code>npm run lint-style</code> to echeck styles.</p>
+<p>Run <code>npm run lint-style</code> to check styles.</p>
 <h4 id="checkboth">Check Both</h4>
 <p>Run <code>npm run lint</code>
 You <strong>MUST</strong> fix all lint warnings and errors before you push your branch.</p>
@@ -121,5 +121,9 @@ Vue.use(naiveUi)
 <li>Z-index management on <code>Select</code> &amp; <code>Tooltip</code> &amp; <code>Modal</code>(Low Priority)</li>
 <li>Full featured table component(Medium Priority)</li>
 <li>Form component(Medium Priority)</li>
+<li>FormItem component(High Priority)</li>
 <li>Complete unit test for all existing components(High Priority)</li>
+<li>Create a Markdown webpack loader to convert documentation(Low Priority)</li>
+<li>Refactor documentation page(for code clairity)</li>
+<li>Code refactor for some 😢  messy code(which is my bad…)</li>
 </ol></div>`

@@ -222,6 +222,7 @@ export default {
 .markdown-body a {
   background-color: transparent;
   color: #63e2b7;
+  text-decoration: none;
 }
 
 .markdown-body a:active,
@@ -230,23 +231,26 @@ export default {
 }
 
 .markdown-body strong {
-  font-weight: inherit;
+  font-weight: 600;
   font-weight: bolder;
 }
 
 .markdown-body h1 {
-  font-size: 2em;
   margin: .67em 0;
+  font-size: 32px;
 }
 
 .markdown-body img {
+  background-color: transparent;
+  box-sizing: content-box;
+  max-width: 100%;
   border-style: none;
 }
 
 .markdown-body code,
 .markdown-body kbd,
 .markdown-body pre {
-  font-family: monospace,monospace;
+  font-family: monospace;
   font-size: 1em;
   color: #333;
 }
@@ -255,15 +259,21 @@ export default {
   box-sizing: content-box;
   height: 0;
   overflow: visible;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #dfe2e5;
+  margin: 15px 0;
+  background-color: #e1e4e8;
+  padding: 0;
 }
 
 .markdown-body input {
   font: inherit;
   margin: 0;
-}
-
-.markdown-body input {
   overflow: visible;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
 }
 
 .markdown-body [type=checkbox] {
@@ -275,31 +285,8 @@ export default {
   box-sizing: border-box;
 }
 
-.markdown-body input {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.markdown-body a {
-  text-decoration: none;
-}
-
 .markdown-body a:hover {
   text-decoration: underline;
-}
-
-.markdown-body strong {
-  font-weight: 600;
-}
-
-.markdown-body hr {
-  background: transparent;
-  border: 0;
-  border-bottom: 1px solid #dfe2e5;
-  height: 0;
-  margin: 15px 0;
-  overflow: hidden;
 }
 
 .markdown-body hr:before {
@@ -317,6 +304,9 @@ export default {
   border-collapse: collapse;
   border-spacing: 0;
   color: #333;
+  display: block;
+  overflow: auto;
+  width: 100%;
 }
 
 .markdown-body td,
@@ -334,12 +324,10 @@ export default {
 .markdown-body h4,
 .markdown-body h5,
 .markdown-body h6 {
-  margin-bottom: 0;
-  margin-top: 0;
-}
-
-.markdown-body h1 {
-  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: 16px;
+  margin-top: 24px;
 }
 
 .markdown-body h1,
@@ -383,14 +371,17 @@ export default {
 }
 
 .markdown-body blockquote {
+  border-left: .25em solid #dfe2e5;
+  color: #6a737d;
+  padding: 0 1em;
   margin: 0;
 }
 
 .markdown-body ol,
 .markdown-body ul {
+  padding-left: 2em;
   margin-bottom: 0;
   margin-top: 0;
-  padding-left: 0;
 }
 
 .markdown-body ol ol,
@@ -416,6 +407,7 @@ export default {
 }
 
 .markdown-body pre {
+  word-wrap: normal;
   margin-bottom: 0;
   margin-top: 0;
 }
@@ -554,20 +546,6 @@ export default {
   margin-top: 0;
 }
 
-.markdown-body hr {
-  background-color: #e1e4e8;
-  border: 0;
-  height: .25em;
-  margin: 24px 0;
-  padding: 0;
-}
-
-.markdown-body blockquote {
-  border-left: .25em solid #dfe2e5;
-  color: #6a737d;
-  padding: 0 1em;
-}
-
 .markdown-body blockquote>:first-child {
   margin-top: 0;
 }
@@ -578,64 +556,16 @@ export default {
 
 .markdown-body kbd {
   background-color: #fafbfc;
-  border: 1px solid #c6cbd1;
-  border-bottom-color: #959da5;
+  border: 1px solid #d1d5da;
+  border-bottom-color: #c6cbd1;
   border-radius: 3px;
-  box-shadow: inset 0 -1px 0 #959da5;
+  box-shadow: inset 0 -1px 0 #c6cbd1;
   color: #444d56;
   display: inline-block;
-  font-size: 11px;
+  font: 11px SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
   line-height: 10px;
   padding: 3px 5px;
   vertical-align: middle;
-}
-
-.markdown-body h1,
-.markdown-body h2,
-.markdown-body h3,
-.markdown-body h4,
-.markdown-body h5,
-.markdown-body h6 {
-  font-weight: 600;
-  line-height: 1.25;
-  margin-bottom: 16px;
-  margin-top: 24px;
-}
-
-.markdown-body h1 {
-  font-size: 2em;
-}
-
-.markdown-body h1,
-.markdown-body h2 {
-  border-bottom: 1px solid #eaecef;
-  padding-bottom: .3em;
-}
-
-.markdown-body h2 {
-  font-size: 1.5em;
-}
-
-.markdown-body h3 {
-  font-size: 1.25em;
-}
-
-.markdown-body h4 {
-  font-size: 1em;
-}
-
-.markdown-body h5 {
-  font-size: .875em;
-}
-
-.markdown-body h6 {
-  color: #6a737d;
-  font-size: .85em;
-}
-
-.markdown-body ol,
-.markdown-body ul {
-  padding-left: 2em;
 }
 
 .markdown-body ol ol,
@@ -675,12 +605,6 @@ export default {
   padding: 0 16px;
 }
 
-.markdown-body table {
-  display: block;
-  overflow: auto;
-  width: 100%;
-}
-
 .markdown-body table th {
   font-weight: 600;
 }
@@ -700,12 +624,6 @@ export default {
   background-color: #f6f8fa;
 }
 
-.markdown-body img {
-  background-color: #fff;
-  box-sizing: content-box;
-  max-width: 100%;
-}
-
 .markdown-body img[align=right] {
   padding-left: 20px;
 }
@@ -720,10 +638,6 @@ export default {
   font-size: 85%;
   margin: 0;
   padding: .2em .4em;
-}
-
-.markdown-body pre {
-  word-wrap: normal;
 }
 
 .markdown-body pre>code {
@@ -836,20 +750,6 @@ export default {
   cursor: pointer;
 }
 
-.markdown-body kbd {
-  background-color: #fafbfc;
-  border: 1px solid #d1d5da;
-  border-bottom-color: #c6cbd1;
-  border-radius: 3px;
-  box-shadow: inset 0 -1px 0 #c6cbd1;
-  color: #444d56;
-  display: inline-block;
-  font: 11px SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
-  line-height: 10px;
-  padding: 3px 5px;
-  vertical-align: middle;
-}
-
 .markdown-body :checked+.radio-label {
   border-color: #0366d6;
   position: relative;
@@ -929,59 +829,4 @@ export default {
   vertical-align: middle;
 }
 
-.markdown-body hr {
-  border-bottom-color: #eee;
-}
-
-.markdown-body .pl-0 {
-  padding-left: 0!important;
-}
-
-.markdown-body .pl-1 {
-  padding-left: 4px!important;
-}
-
-.markdown-body .pl-2 {
-  padding-left: 8px!important;
-}
-
-.markdown-body .pl-3 {
-  padding-left: 16px!important;
-}
-
-.markdown-body .pl-4 {
-  padding-left: 24px!important;
-}
-
-.markdown-body .pl-5 {
-  padding-left: 32px!important;
-}
-
-.markdown-body .pl-6 {
-  padding-left: 40px!important;
-}
-
-.markdown-body .pl-7 {
-  padding-left: 48px!important;
-}
-
-.markdown-body .pl-8 {
-  padding-left: 64px!important;
-}
-
-.markdown-body .pl-9 {
-  padding-left: 80px!important;
-}
-
-.markdown-body .pl-10 {
-  padding-left: 96px!important;
-}
-
-.markdown-body .pl-11 {
-  padding-left: 112px!important;
-}
-
-.markdown-body .pl-12 {
-  padding-left: 128px!important;
-}
 </style>
