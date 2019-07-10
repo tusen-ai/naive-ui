@@ -27,7 +27,7 @@ Run `npm run test-cov` to test all components and see detailed test coverage rep
 1. Run `npm run build`
 2. Open `http://localhost:8086/` in browser.
 ## Want to add your own component
-Explore by your self or ask `lecong.zhang@tusimple.ai`
+There is no guideline for now. If you want to know how to do it, you can explore by yourself or ask `lecong.zhang@tusimple.ai`.
 ## Publish a new version
 1. You **MUST** change your version according to [semver](https://semver.org/)
 2. `npm run release`
