@@ -13,7 +13,7 @@ If you want see some example, see [Angular Commits on Github](https://github.com
 #### Javascript Style
 You **MUST** follow [Standard JS](https://standardjs.com/).
 #### SCSS Style
-Run `npm run lint-style` to echeck styles.
+Run `npm run lint-style` to check styles.
 #### Check Both
 Run `npm run lint`
 You **MUST** fix all lint warnings and errors before you push your branch.
