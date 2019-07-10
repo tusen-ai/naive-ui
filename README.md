@@ -1,27 +1,41 @@
 # naive-ui
 TuSimple Vue-Based Frontend Component Library
-# Documentation
+## Documentation
 http://***REMOVED***/#/start
-# Start Develop
-- packages
-- packages/commons
-- packages/nimbus
-- styles
-- test
-- demo
-- build
-# Want to see how component works
+## Develop Guidelines
+### Git Commit Message Style
+You **Must** follow [Angular Commit Format](https://gist.github.com/brianclements/841ea7bffdb01346392c).
+
+If you want see some example, see [Angular Commits on Github](https://github.com/angular/angular/commits/master).
+### Code Styles
+#### Javascript Style
+You **Must** follow [Standard JS](https://standardjs.com/).
+#### SCSS Style
+Run `npm run lint-style` to echeck styles.
+#### Check Both
+Run `npm run lint`
+You **MUST** fix all lint warnings and errors before you push your branch.
+### Unit test
+If you create a component, you **MUST** add unit test for it.
+
+Run `npm run test` to test all components.
+Run `npm run test-cov` to test all components and see detailed test coverage report.
+
+## Want to see how component works
 1. Run `npm run build`
 2. Open `http://localhost:8086/` in browser.
-# Want to add your own component
-1. add some thing in packages
-2. add some thing in demo/index.js demo/components
-3. add some thing to index.js
-# Publish a new version
-1. First change your version according to [semver](https://semver.org/)
+## Want to add your own component
+Explore by your self or ask `lecong.zhang@tusimple.ai`
+## Publish a new version
+1. You **MUST** change your version according to [semver](https://semver.org/)
 2. `npm run release`
-# Want to use this ui
-`npm install --save-dev naive-ui`
+3. You **MAY** publish documentation by running `npm run release-doc`
+## Installation & Usage
+First install it.
+```
+npm install --save-dev naive-ui
+```
+Then add the following lines in you entry point js file.
 ```
 ...
 import naiveUi from 'naive-ui'
@@ -30,7 +44,7 @@ import 'naive-ui/dist/lib/index.css
 Vue.use(naiveUi)
 ...
 ```
-# Component Develop Status
+## Component Develop Status
 |Component|Unit Test|
 |-|-|
 |Alert|❌|
@@ -49,7 +63,7 @@ Vue.use(naiveUi)
 |Switch|❌|
 |Tooltip|❌|
 
-# Todo
+## Todo
 1. Z-index management on `Select` & `Tooltip` & `Modal`(Low Priority)
 2. Full featured table component(Medium Priority)
 3. Form component(Medium Priority)
