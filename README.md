@@ -48,24 +48,27 @@ Vue.use(naiveUi)
 ```
 ## Component Develop Status
 
-|Component|Unit Test|
-|--|:--:|
-|Alert|❌|
-|Button|🆗|
-|Checkbox|🆗|
-|DatePicker|❌|
-|GradientText|🆗|
-|Icon|🆗|
-|Input|🆗|
-|Message|❌|
-|Modal|❌|
-|Notification|❌|
-|Pagination|❌|
-|Popup|❌|
-|Select|🆗|
-|Switch|❌|
-|Tooltip|❌|
-
+|Component|Develop status|Unit Test|Note|
+|--|:--:|:--:|--|
+|Alert|😍|❌||
+|Button|😍|🆗||
+|Checkbox|😍|🆗||
+|DatePicker|😍|❌||
+|GradientText|😍|🆗||
+|Icon|😍|🆗||
+|Input|😍|🆗||
+|Message|😍|❌|Code clean in need|
+|Modal|😍|❌|Code clean in need|
+|Notification|😍|❌|Code clean in need|
+|Pagination|😍|🆗|Unit test is not enough|
+|Popup|😍|❌||
+|Select|😍|🆗|Multiple search is not done|
+|Switch|😍|❌||
+|FormItem|🚧|❌||
+|Form|🚧|❌||
+|Table|🚧|❌|Function is not fulfilled|
+|Tooltip|😍|❌|Remove the dependency of Popper.js|
+|Popup|😍|❌|May be need to merge with Tooltip|
 ## Todo
 1. Z-index management on `Select` & `Tooltip` & `Modal`(Low Priority)
 2. Full featured table component(Medium Priority)

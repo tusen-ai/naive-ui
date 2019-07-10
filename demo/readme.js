@@ -26,7 +26,7 @@ Run <code>npm run test-cov</code> to test all components and see detailed test c
 <li>Open <code>http://localhost:8086/</code> in browser.</li>
 </ol>
 <h2 id="wanttoaddyourowncomponent">Want to add your own component</h2>
-<p>Explore by your self or ask <code>lecong.zhang@tusimple.ai</code></p>
+<p>There is no guideline for now. If you want to know how to do it, you can explore by yourself or ask <code>lecong.zhang@tusimple.ai</code>.</p>
 <h2 id="publishanewversion">Publish a new version</h2>
 <ol>
 <li>You <strong>MUST</strong> change your version according to <a href="https://semver.org/">semver</a></li>
@@ -50,69 +50,125 @@ Vue.use(naiveUi)
 <thead>
 <tr>
 <th>Component</th>
+<th style="text-align:center;">Develop status</th>
 <th style="text-align:center;">Unit Test</th>
+<th>Note</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Alert</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;">❌</td>
+<td></td>
 </tr>
 <tr>
 <td>Button</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;">🆗</td>
+<td></td>
 </tr>
 <tr>
 <td>Checkbox</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;">🆗</td>
+<td></td>
 </tr>
 <tr>
 <td>DatePicker</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;">❌</td>
+<td></td>
 </tr>
 <tr>
 <td>GradientText</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;">🆗</td>
+<td></td>
 </tr>
 <tr>
 <td>Icon</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;">🆗</td>
+<td></td>
 </tr>
 <tr>
 <td>Input</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;">🆗</td>
+<td></td>
 </tr>
 <tr>
 <td>Message</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;">❌</td>
+<td>Code clean in need</td>
 </tr>
 <tr>
 <td>Modal</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;">❌</td>
+<td>Code clean in need</td>
 </tr>
 <tr>
 <td>Notification</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;">❌</td>
+<td>Code clean in need</td>
 </tr>
 <tr>
 <td>Pagination</td>
-<td style="text-align:center;">❌</td>
+<td style="text-align:center;">😍</td>
+<td style="text-align:center;">🆗</td>
+<td>Unit test is not enough</td>
 </tr>
 <tr>
 <td>Popup</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;">❌</td>
+<td></td>
 </tr>
 <tr>
 <td>Select</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;">🆗</td>
+<td>Multiple search is not done</td>
 </tr>
 <tr>
 <td>Switch</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;">❌</td>
+<td></td>
+</tr>
+<tr>
+<td>FormItem</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;">❌</td>
+<td></td>
+</tr>
+<tr>
+<td>Form</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;">❌</td>
+<td></td>
+</tr>
+<tr>
+<td>Table</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;">❌</td>
+<td>Function is not fulfilled</td>
 </tr>
 <tr>
 <td>Tooltip</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;">❌</td>
+<td>Remove the dependency of Popper.js</td>
+</tr>
+<tr>
+<td>Popup</td>
+<td style="text-align:center;">😍</td>
+<td style="text-align:center;">❌</td>
+<td>May be need to merge with Tooltip</td>
 </tr>
 </tbody>
 </table>
