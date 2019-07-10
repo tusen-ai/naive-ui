@@ -1,7 +1,9 @@
 # naive-ui
 TuSimple Vue-Based Frontend Component Library
 ## Documentation
-http://***REMOVED***/#/start
+[http://***REMOVED***/#/start](http://***REMOVED***/#/start)
+## Repository
+[https://***REMOVED***/naive-ui/tree/develop](https://***REMOVED***/naive-ui/tree/develop)
 ## Develop Guidelines
 ### Git Commit Message Style
 You **Must** follow [Angular Commit Format](https://gist.github.com/brianclements/841ea7bffdb01346392c).
@@ -45,8 +47,9 @@ Vue.use(naiveUi)
 ...
 ```
 ## Component Develop Status
+
 |Component|Unit Test|
-|-|-|
+|--|:--:|
 |Alert|❌|
 |Button|🆗|
 |Checkbox|🆗|
