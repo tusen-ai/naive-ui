@@ -333,6 +333,9 @@ export default {
 .markdown-body h1,
 .markdown-body h2 {
   font-weight: 600;
+  padding-bottom: .3em;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #eaecef;
 }
 
 .markdown-body h2 {
