@@ -399,15 +399,16 @@ describe('Select', function () {
           data () {
             return {
               items: _.cloneDeep(items),
-              selectedValue: null
+              selectedValue: 'value1'
             }
           }
         }
         const wrapper = mount(NSelectTestContext)
-        wrapper.vm.selectedValue = 'value1'
         expect(wrapper.find('input').element.value).to.contain('label1')
         wrapper.vm.selectedValue = 'value2'
         expect(wrapper.find('input').element.value).to.contain('label2')
+        wrapper.vm.selectedValue = null
+        expect(wrapper.find('input').element.value).to.equal('')
       })
       it('should sync value with view', function () {
         const NSelectTestContext = {
@@ -478,12 +479,11 @@ describe('Select', function () {
           data () {
             return {
               items: _.cloneDeep(items),
-              selectedArray: []
+              selectedArray: ['value1']
             }
           }
         }
         const wrapper = mount(NSelectTestContext)
-        wrapper.vm.selectedArray.push('value1')
         expect(wrapper.html()).to.contain('label1')
         wrapper.vm.selectedArray.push('value2')
         expect(wrapper.html()).to.contain('label1', 'label2')
