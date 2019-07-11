@@ -2,7 +2,7 @@
   <div class="demo">
     <n-nimbus-service-layout
       icon="md-contacts"
-      name="NAIVE UI (0.2.01)"
+      :name="`NAIVE UI (${version})`"
       :padding-body="false"
       :items="items"
     >
@@ -12,9 +12,11 @@
 </template>
 
 <script>
+import { version } from '../package.json'
 export default {
   data () {
     return {
+      version,
       items: [
         {
           name: 'Start',
@@ -73,6 +75,10 @@ export default {
             {
               name: 'Input',
               path: '/n-input'
+            },
+            {
+              name: 'InputNumber',
+              path: '/n-input-number'
             },
             {
               name: 'Message',

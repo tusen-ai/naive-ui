@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "0.1.100",
+  "version": "0.2.4",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "test": "cross-env NODE_ENV=development BABEL_ENV=test karma start test/unit/karma.conf.js",
     "test-cov": "cross-env NODE_ENV=development BABEL_ENV=test karma start test/unit/karma.conf.js && http-server test/unit/coverage",
     "test-release": "cross-env NODE_ENV=production webpack-dev-server --config build/webpack.release.js",
-    "release-doc": "cross-env NODE_ENV=development && rm -rf doc/dist && node doc/changeDemoVersion.js && webpack --config build/webpack.doc.js && sudo bash doc/deploy-doc.sh"
+    "release-doc": "cross-env NODE_ENV=development && rm -rf doc/dist && node doc/changeDemoVersion.js && node doc/injectReadme.js && webpack --config build/webpack.doc.js && sudo bash doc/deploy-doc.sh"
   },
   "author": "lecong.zhang",
   "license": "ISC",
@@ -38,6 +38,8 @@
     "copy-webpack-plugin": "^5.0.3",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
+    "emoji-regex": "^8.0.0",
+    "emoji-unicode": "^1.0.10",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.2.2",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
@@ -63,6 +65,7 @@
     "prettier-eslint": "^9.0.0",
     "progress-bar-webpack-plugin": "^1.12.1",
     "regenerator-runtime": "^0.13.2",
+    "showdown": "^1.9.0",
     "sinon": "^7.3.2",
     "style-loader": "^0.23.1",
     "stylelint": "^10.1.0",
