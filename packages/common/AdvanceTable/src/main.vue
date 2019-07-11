@@ -397,10 +397,3 @@ export default {
   }
 }
 </script>
-<style scoped>
-.n-advance-table__operation{
-  margin-bottom: 18px;
-  display: flex;
-  justify-content: space-between;
-}
-</style>

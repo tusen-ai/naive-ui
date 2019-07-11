@@ -672,7 +672,9 @@ export default {
       search1: {
         columns: [
           { label: 'Name',
-            value: 'name' }
+            value: 'name' },
+          { label: 'Age',
+            value: 'age' }
         ],
         onSearch: 'custom',
         placeholder: 'search from net'
