@@ -3,6 +3,17 @@
     ref="tableWrapper"
     class="n-advance-tabel__wrapper"
   >
+    <div class="n-advance-table__operation">
+      <section class="n-advance-table__operation__bacth" />
+      <div class="n-advance-table__operation__custom" />
+      <div class="n-advance-table__operation__search">
+        <searchInput
+          v-if="search"
+          :options="search"
+          @on-change="handleSearch"
+        />
+      </div>
+    </div>
     <n-table
       style="padding:0;border-bottom-left-radius:0;border-bottom-right-radius:0;"
       :style="colGroup"
@@ -46,7 +57,7 @@
           </n-th>
           <span
             v-if="scrollBarWidth"
-            :style="'padding-left:' + scrollBarWidth + 'px'"
+            :style="'padding-left:' + scrollBarWidth + 'px;' + 'visibility:hidden;'"
             rowspan="1"
           />
         </n-tr>
@@ -83,6 +94,14 @@
         </n-tr>
       </n-tbody>
     </n-table>
+    <!-- 分页 -->
+    <div class="n-advanced-table__pagination">
+      <n-pagination
+        v-if="pagination!==false && showingData.length"
+        v-model="currentPage"
+        :page-count="pageCount"
+      />
+    </div>
   </div>
 </template>
 
@@ -90,15 +109,46 @@
 import row from '../row/index.js'
 import SortIcon from '../sortIcon'
 import sortDropDown from '../sortDropDown'
+import searchInput from '../searchInput'
 
 export default {
   name: 'NAdvanceTable',
   components: {
     row,
     SortIcon,
-    sortDropDown
+    sortDropDown,
+    searchInput
   },
   props: {
+    search: {
+      /**
+       * @description if onSearch === 'custom' will exec this.onChange
+       * columns:{label,value}
+       * placeholder @description search input placeholder
+       * onSearch @type Function | String 'custom' @returns Boolean, @description used in locale @example ( key, word,row)=>{return row.xxx.includes[word]}
+       */
+      type: [Object, Boolean],
+      default: false
+    },
+    pagination: {
+      /**
+       * @description pagination === false will now show pagination
+       *
+       * @param {total,limit,custom}
+       *
+       * emit event => on-page-change
+       *
+       * and
+       *
+       * if(custom===true){
+       *   exec this.props.onChange
+       * }
+       *
+       *
+       */
+      type: [Object, Boolean],
+      default: false
+    },
     onChange: {
       type: Function,
       default: null
@@ -134,16 +184,45 @@ export default {
       scrollBarWidth: '0',
       searchData: [],
       currentSortColumn: null,
-      currentFilterColumn: null
+      currentFilterColumn: null,
+      currentSearchColumn: null,
+      currentPage: 1
     }
   },
   computed: {
-    showingData () {
-      if (this.searchData.length) {
-        return this.searchData
-      } else {
-        return this.copyData
+    paginationer () {
+      if (this.pagination) {
+        return {
+          currentPage: this.currentPage,
+          ...this.pagination
+        }
       }
+      return null
+    },
+    pageCount () {
+      if (this.pagination) {
+        // TODO: check count limit is exisit
+        let total = this.pagination.total
+        if (this.pagination.custom !== 'custom' && this.currentFilterColumn) {
+          total = this.searchData.length
+        }
+        return Math.ceil(total / this.pagination.limit)
+      }
+      return 1
+    },
+    showingData () {
+      let data = this.searchData
+      if (data === null) {
+        data = []
+      } else if (!this.searchData.length) {
+        data = this.copyData
+      }
+      if (this.pagination && this.pagination.limit && !this.pagination.custom) {
+        let start = (this.currentPage - 1) * this.pagination.limit
+        let end = start + this.pagination.limit
+        data = data.slice(start, end)
+      }
+      return data
     },
     tableStl () {
       const stl = {
@@ -174,30 +253,51 @@ export default {
     }
   },
   watch: {
+    currentPage () {
+      if (this.pagination.custom === true) { this.useRemoteChange() }
+      this.$emit('on-page-change', this.paginationer)
+    },
     data () {
       this.copyData = this.data.slice(0)
       this.searchData = []
+    },
+    currentSearchColumn () {
+      this.searchData = this.computeShowingData()
+      // because after search ,length maybe change , so need to reset current page
+      this.currentPage = 1
     },
     currentSortColumn () {
       this.searchData = this.computeShowingData()
     },
     currentFilterColumn () {
       this.searchData = this.computeShowingData()
+      // because after filter length maybe change , so need to reset current page
+      this.currentPage = 1
     }
   },
   mounted () {
-    console.log(this.$refs.tableWrapper)
     this.wrapper = this.$refs.tableWrapper
     this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
     this.tbodyWidth = this.$refs.tbody.$el.scrollWidth
     this.scrollBarWidth = this.wrapperWidth - this.tbodyWidth
   },
   methods: {
+    handleSearch ({ key, word }) {
+      console.log(key, word)
+      this.currentSearchColumn = {
+        key, word
+      }
+      if (word.length === 0) {
+        this.currentSearchColumn = null
+      }
+      if (this.search.onSearch === 'custom') { this.useRemoteChange() }
+    },
     useRemoteChange () {
       this.onChange({
         filter: this.currentFilterColumn,
         sorter: this.currentSortColumn,
-        pagination: this.pagination
+        pagination: this.paginationer,
+        search: this.currentSearchColumn
       })
     },
     computeShowingData () {
@@ -217,10 +317,20 @@ export default {
           })
         }
       }
+      // compute search
+      if (this.currentSearchColumn && this.search.onSearch !== 'custom') {
+        const { key, word } = this.currentSearchColumn
+        data = data.filter((item) => {
+          return this.search.onSearch(key, word, item)
+        })
+      }
 
       // compute sort
       if (this.currentSortColumn) {
         data = this.computeSortData(data)
+      }
+      if (data.length === 0) {
+        data = null
       }
       return data
     },
@@ -250,7 +360,6 @@ export default {
       }
       if (type !== 0) {
         this.sortIndexs = this.sortIndexs.map((item, idx) => {
-          console.log(idx, i)
           if (idx !== i) {
             return 0
           } else {
@@ -268,7 +377,7 @@ export default {
       if (value === null) {
         this.currentFilterColumn = null
       }
-      if (this.currentFilterColumn.filterFn === 'custom') {
+      if (filterFn === 'custom') {
         // remote filter
         this.useRemoteChange()
       }
@@ -288,3 +397,10 @@ export default {
   }
 }
 </script>
+<style scoped>
+.n-advance-table__operation{
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+}
+</style>
