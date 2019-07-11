@@ -251,8 +251,10 @@ export default {
   },
   watch: {
     selectedItem () {
-      if (this.selectedItem) {
+      if (this.selectedItem !== null) {
         this.label = this.selectedItem.label
+      } else {
+        this.label = ''
       }
     },
     active (newValue) {
@@ -289,6 +291,9 @@ export default {
   created () {
     if (!this.multiple) {
       this.labelPlaceholder = this.placeholder
+      if (this.selectedItem) {
+        this.label = this.selectedItem.label
+      }
     }
   },
   beforeDestroy () {
