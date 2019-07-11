@@ -60,14 +60,13 @@ Vue.use(naiveUi)
 |Modal|😍|❌|Code clean in need|
 |Notification|😍|❌|Code clean in need|
 |Pagination|😍|🆗|Unit test is not enough|
-|Popup|😍|❌||
 |Select|😍|🆗|Multiple search is not done|
 |Switch|😍|❌||
 |FormItem|🚧|❌||
 |Form|🚧|❌||
 |Table|🚧|❌|Function is not fulfilled|
 |Tooltip|😍|❌|Remove the dependency of Popper.js|
-|Popup|😍|❌|May be need to merge with Tooltip|
+|Popover|😍|❌|May be need to merge with Tooltip|
 |InputNumber|🚧|||
 |Radio|🚧|||
 |Tab|🚧|||

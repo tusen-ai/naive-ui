@@ -19,7 +19,7 @@ import modalDemo from './components/modalDemo'
 import nimbusFormCardDemo from './components/nimbusFormCardDemo'
 import messageDemo from './components/messageDemo'
 import tooltipDemo from './components/tooltipDemo'
-import popupDemo from './components/popupDemo'
+import popoverDemo from './components/popoverDemo'
 import alertDemo from './components/alertDemo'
 import datePickerDemo from './components/datePickerDemo'
 import inputNumberDemo from './components/inputNumberDemo'
@@ -58,7 +58,7 @@ const routes = [
       { path: '/n-nimbus-form-card', component: nimbusFormCardDemo },
       { path: '/n-message', component: messageDemo },
       { path: '/n-tooltip', component: tooltipDemo },
-      { path: '/n-popup', component: popupDemo },
+      { path: '/n-popover', component: popoverDemo },
       { path: '/n-notification', component: notificationDemo },
       { path: '/n-nimbus-confirm-card', component: nimbusConfirmCardDemo },
       { path: '/n-pagination', component: paginationDemo },

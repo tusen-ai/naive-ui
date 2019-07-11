@@ -123,12 +123,6 @@ Vue.use(naiveUi)
 <td>Unit test is not enough</td>
 </tr>
 <tr>
-<td>Popup</td>
-<td style="text-align:center;">😍</td>
-<td style="text-align:center;">❌</td>
-<td></td>
-</tr>
-<tr>
 <td>Select</td>
 <td style="text-align:center;">😍</td>
 <td style="text-align:center;">🆗</td>
@@ -165,7 +159,7 @@ Vue.use(naiveUi)
 <td>Remove the dependency of Popper.js</td>
 </tr>
 <tr>
-<td>Popup</td>
+<td>Popover</td>
 <td style="text-align:center;">😍</td>
 <td style="text-align:center;">❌</td>
 <td>May be need to merge with Tooltip</td>
@@ -178,6 +172,30 @@ Vue.use(naiveUi)
 </tr>
 <tr>
 <td>Radio</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Tab</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Breadcrumb</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Badge</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Steps</td>
 <td style="text-align:center;">🚧</td>
 <td style="text-align:center;"></td>
 <td></td>

@@ -8,7 +8,7 @@
   >
     <div class="n-doc-header">
       <n-gradient-text :font-size="20">
-        Popup
+        Popover
       </n-gradient-text>
     </div>
     <div class="n-doc-body">
@@ -17,19 +17,19 @@
           Basic Usage
         </div>
         <div class="n-doc-section__view">
-          <n-popup>
+          <n-popover>
             <n-button style="margin:0">
               hover
             </n-button>
             <span slot="content">hello baby</span>
-          </n-popup>
+          </n-popover>
         </div>
         <div class="n-doc-section__source">
           <textarea v-pre>
-          <n-popup>
+          <n-popover>
             <n-button>hover</n-button>
             <span slot="content">hello baby</span>
-          </n-popup>
+          </n-popover>
           </textarea>
         </div>
       </div>
@@ -38,7 +38,7 @@
           word wrap
         </div>
         <div class="n-doc-section__view">
-          <n-popup
+          <n-popover
             placement="bottom"
             :width="200"
           >
@@ -46,14 +46,14 @@
               word wrap
             </n-button>
             <span slot="content">"Beautiful designs at up to 70% Off. Article offers stylish modern, mid-century and scandinavian furniture from world renowned designers at accessible prices."</span>
-          </n-popup>
+          </n-popover>
         </div>
         <div class="n-doc-section__source">
           <textarea v-pre>
-           <n-popup placement="left">
+           <n-popover placement="left">
             <n-button style="margin:0">hover show left</n-button>
             <span slot="content">hello baby</span>
-          </n-popup>
+          </n-popover>
           </textarea>
         </div>
       </div>
@@ -62,12 +62,12 @@
           Change placement
         </div>
         <div class="n-doc-section__view">
-          <n-popup placement="left-start">
+          <n-popover placement="left-start">
             <n-button style="margin:0">
               hover show left-start
             </n-button>
             <span slot="content">hello baby</span>
-          </n-popup>
+          </n-popover>
         </div>
         <div class="n-doc-section__source">
           <textarea v-pre>
@@ -86,10 +86,10 @@
             'right-start',
             'right-end'
           */
-           <n-popup placement="left-start'">
+           <n-popover placement="left-start'">
             <n-button style="margin:0">hover show left-start</n-button>
             <span slot="content">hello baby</span>
-          </n-popup>
+          </n-popover>
           </textarea>
         </div>
       </div>
@@ -99,17 +99,17 @@
           Transfer dom to body
         </div>
         <div class="n-doc-section__view">
-          <n-popup placement="top-end">
+          <n-popover placement="top-end">
             <n-button style="margin:0">transfer to body</n-button>
             <span slot="content">hello baby</span>
-          </n-popup>
+          </n-popover>
         </div>
         <div class="n-doc-section__source">
           <textarea v-pre>
-          <n-popup placement="top-end">
+          <n-popover placement="top-end">
             <n-button style="margin:0">transfer to body</n-button>
             <span slot="content">hello baby</span>
-          </n-popup>
+          </n-popover>
           </textarea>
         </div>
       </div> -->
@@ -119,7 +119,7 @@
           Click to show
         </div>
         <div class="n-doc-section__view">
-          <n-popup
+          <n-popover
             placement="left"
             trigger="click"
             transfer
@@ -128,14 +128,14 @@
               click to show
             </n-button>
             <span slot="content">click out side to hide</span>
-          </n-popup>
+          </n-popover>
         </div>
         <div class="n-doc-section__source">
           <textarea v-pre>
-          <n-popup placement="left" trigger="click" transfer>
+          <n-popover placement="left" trigger="click" transfer>
             <n-button style="margin:0">click to show</n-button>
             <span slot="content">click out side to hide</span>
-          </n-popup>
+          </n-popover>
           </textarea>
         </div>
       </div>
@@ -146,7 +146,7 @@
         No Arrow
       </div>
       <div class="n-doc-section__view">
-        <n-popup
+        <n-popover
           placement="left"
           trigger="click"
           transfer
@@ -156,14 +156,14 @@
             No Arrow
           </n-button>
           <span slot="content">click out side to hide</span>
-        </n-popup>
+        </n-popover>
       </div>
       <div class="n-doc-section__source">
         <textarea v-pre>
-<n-popup placement="left" trigger="click" transfer :arrow="false">
+<n-popover placement="left" trigger="click" transfer :arrow="false">
   <n-button style="margin:0">No Arrow</n-button>
   <span slot="content">click out side to hide</span>
-</n-popup></textarea>
+</n-popover></textarea>
       </div>
     </div>
   </div>
