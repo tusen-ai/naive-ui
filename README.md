@@ -47,7 +47,6 @@ Vue.use(naiveUi)
 ...
 ```
 ## Component Develop Status
-
 |Component|Develop status|Unit Test|Note|
 |--|:--:|:--:|--|
 |Alert|😍|❌||
@@ -71,6 +70,10 @@ Vue.use(naiveUi)
 |Popup|😍|❌|May be need to merge with Tooltip|
 |InputNumber|🚧|||
 |Radio|🚧|||
+|Tab|🚧|||
+|Breadcrumb|🚧|||
+|Badge|🚧|||
+|Steps|🚧|||
 ## Todo
 1. Z-index management on `Select` & `Tooltip` & `Modal`(Low Priority)
 2. Full featured table component(Medium Priority)
