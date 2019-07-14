@@ -67,7 +67,7 @@ Vue.use(naiveUi)
 |Table|🚧|❌|Function is not fulfilled|
 |Tooltip|😍|❌||
 |Popover|😍|❌||
-|InputNumber|🚧|||
+|InputNumber|😍|❌||
 |Radio|🚧|||
 |Tab|🚧|||
 |Breadcrumb|🚧|||
