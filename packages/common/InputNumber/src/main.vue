@@ -1,17 +1,44 @@
 <template>
-  <div>
-    <button @click="minus">
-      -
-    </button><input
+  <div
+    class="n-input-number"
+    :class="{
+      [`n-input-number--${size}-size`]: true,
+      'n-input-number--disabled': disabled
+    }"
+  >
+    <button
+      class="n-input-number__minus-button"
+      :class="{
+        [`n-input-bumber__button--disabled`]: value !== null && safeMin !== null && value <= safeMin
+      }"
+      @click="minus"
+    >
+      <n-icon type="md-remove" />
+    </button>
+    <input
+      class="n-input-number__input"
       type="text"
       :value="value"
-    ><button @click="add">
-      +
+      :disabled="disabled ? 'disabled' : false"
+      @blur="handleBlurOrEnter"
+      @keyup.enter="handleBlurOrEnter"
+    >
+    <button
+      class="n-input-number__add-button"
+      :class="{
+        [`n-input-bumber__button--disabled`]: value !== null && safeMax !== null && value >= safeMax
+      }"
+      @click="add"
+    >
+      <n-icon type="md-add" />
     </button>
+    <div class="n-input-number__border-layer" />
   </div>
 </template>
 
 <script>
+import NIcon from '../../Icon/index'
+
 const DEFAULT_STEP = 1
 
 function parseNumber (number) {
@@ -29,13 +56,12 @@ function parseNumber (number) {
 
 export default {
   name: 'NInputNumber',
-  model: {
-    prop: 'value',
-    event: 'change'
+  components: {
+    NIcon
   },
   props: {
     value: {
-      type: [Number, String],
+      type: Number,
       default: null
     },
     step: {
@@ -49,6 +75,14 @@ export default {
     max: {
       type: [Number, String],
       default: null
+    },
+    size: {
+      type: String,
+      default: 'medium'
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -66,42 +100,73 @@ export default {
       const parsedNumber = parseNumber(this.max)
       if (parsedNumber !== null) return parsedNumber
       else return null
+    },
+    aValidValue () {
+      if (this.safeMin !== null) {
+        return Math.max(0, this.safeMin)
+      } else if (this.safeMax !== null) {
+        return Math.min(0, this.safeMax)
+      } else {
+        return 0
+      }
+    }
+  },
+  watch: {
+    value (newValue, oldValue) {
+      if (newValue !== null) {
+        if (this.safeMax !== null && newValue > this.safeMax) {
+          newValue = this.safeMax
+        }
+        if (this.safeMin !== null && newValue < this.safeMin) {
+          newValue = this.safeMin
+        }
+      }
+      this.$emit('change', newValue, oldValue)
+      /**
+       * newValue === oldValue won't trigger watcher!
+       * so the call stack won't fall in loop
+       */
+      this.$emit('input', newValue)
     }
   },
   created () {
-    this.guardCurrentValue()
+    if (this.value !== null) {
+      if (this.safeMax !== null && this.value > this.safeMax) {
+        this.$emit('input', this.safeMax)
+      } else if (this.safeMin !== null && this.value < this.safeMin) {
+        this.$emit('input', this.safeMin)
+      }
+    }
   },
   methods: {
-    guardCurrentValue () {
-      if (typeof this.value !== 'number') {
-        const parsedNumber = Number(this.value)
-        if (Number.isNaN(parsedNumber)) {
-          this.$emit('change', 0)
-        } else {
-          this.$emit('change', parsedNumber)
-        }
-      }
-    },
     add () {
-      this.guardCurrentValue()
-      const previousValue = this.value
-      let valueAfterChange = this.value + this.safeStep
-      if (this.safeMax !== null && valueAfterChange > this.safeMax) {
-        valueAfterChange = this.safeMax
-      }
-      if (valueAfterChange !== previousValue) {
-        this.$emit('change', valueAfterChange)
+      if (this.value === null) {
+        this.$emit('input', this.aValidValue)
+      } else {
+        const valueAfterChange = this.value + this.safeStep
+        this.$emit('input', valueAfterChange)
       }
     },
     minus () {
-      this.guardCurrentValue()
-      const previousValue = this.value
-      let valueAfterChange = this.value - this.safeStep
-      if (this.safeMin !== null && valueAfterChange < this.safeMin) {
-        valueAfterChange = this.safeMin
+      if (this.value === null) {
+        this.$emit('input', this.aValidValue)
+      } else {
+        const valueAfterChange = this.value - this.safeStep
+        this.$emit('input', valueAfterChange)
       }
-      if (valueAfterChange !== previousValue) {
-        this.$emit('change', valueAfterChange)
+    },
+    handleBlurOrEnter (e) {
+      const value = e.target.value
+      if (value === '') {
+        this.$emit('input', null)
+        return
+      }
+      const parsedNumber = Number(value)
+      if (Number.isNaN(parsedNumber)) {
+        e.target.value = String(this.value)
+      } else {
+        const valueAfterChange = parsedNumber
+        this.$emit('input', valueAfterChange)
       }
     }
   }
