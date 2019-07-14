@@ -1,48 +1,4 @@
 <template>
-  <!-- <div
-    ref="popover"
-    v-click-outside="handleClickOut"
-    class="n-popover"
-    @mouseenter="handleMouseEnter"
-    @mouseleave="handleMouseLeave"
-  >
-    <div
-      ref="reference"
-      class="n-popover__ref"
-      @click="handleClickRef"
-    >
-      <slot />
-    </div>
-    <transition name="n-poup__fade">
-      <div
-        v-show="visible"
-        ref="popper"
-        v-transfer-dom
-        :data-transfer="transfer"
-        :style="style"
-        class="popper n-popover__content-wrapper"
-        @click="handleContentClick"
-        @mouseenter="handleMouseEnter"
-        @mouseleave="handleMouseLeave"
-      >
-        <div
-          v-if="arrow"
-          class="n-popover__arrow"
-        />
-        <div
-          class="n-popover__content"
-          :style="{
-            'max-width': width + 'px',
-          }"
-          :class="{
-            'n-popover--word_wrap': width ? true : false
-          }"
-        >
-          <slot name="content" />
-        </div>
-      </div>
-    </transition>
-  </div> -->
   <div
     ref="self"
     class="n-popover"
@@ -54,41 +10,36 @@
       class="n-popover__activator"
       @click="handleActivatorClick"
     >
-      <slot />
+      <slot name="activator" />
     </div>
-    <!-- <transition
-      name="n-poup__fade"
-    > -->
     <div
       ref="content"
-      class="popper n-popover__content-container"
-      @click="handleContentClick"
-      @mouseenter="handleMouseEnter"
-      @mouseleave="handleMouseLeave"
+      class="n-popover__content-container"
     >
       <div
-        v-if="arrow"
-        class="n-popover__arrow"
-      />
-
-      <div
-        ref="popoverBody"
+        ref="contentWrapper"
         class="n-popover__content-wrapper"
-        :style="`position: absolute; left: 0; top: 0; transform: translateX(${contentLeft}px) translateY( ${contentTop}px)`"
       >
         <transition
           name="n-popover-fade"
         >
           <div
-            v-if="showTooltip"
+            v-if="showPopover"
+            ref="popoverBody"
+            :n-placement="placement"
             class="n-popover__content"
+            @mouseenter="handleMouseEnter"
+            @mouseleave="handleMouseLeave"
           >
-            <slot name="content" />
+            <div
+              v-if="arrow"
+              class="n-popover__arrow"
+            />
+            <slot />
           </div>
         </transition>
       </div>
     </div>
-    <!-- </transition> -->
   </div>
 </template>
 
@@ -96,22 +47,32 @@
 import detachable from '../../../mixins/detachable'
 import getParentNode from '../../../utils/getParentNode'
 import getScrollParent from '../../../utils/getScrollParent'
-// import Popper from '../../../utils/popper.js'
-// import { directive as clickOutside } from 'v-click-outside-x'
-// import TransferDom from '../../../directives/transfer-dom'
+import scrollHandler from './scrollHandler'
+import resizeHandler from './resizeHandler'
+import calcTransform from './calcTransform'
+
+const DEFAULT_DURATION = 200
 
 export default {
   name: 'NPopover',
   mixins: [detachable],
+  model: {
+    prop: 'active',
+    event: 'change'
+  },
   props: {
-    value: {
-      default: false,
-      type: Boolean
+    active: {
+      type: Boolean,
+      default: false
+    },
+    duration: {
+      type: [String, Number],
+      default: DEFAULT_DURATION
     },
     trigger: {
       default: 'hover',
       validator (value) {
-        return ['click', 'hover'].includes(value)
+        return ['click', 'hover', 'manual'].includes(value)
       }
     },
     arrow: {
@@ -122,17 +83,17 @@ export default {
       validator (value) {
         return [
           'top',
+          'bottom',
+          'left',
+          'right',
           'top-start',
           'top-end',
-          'bottom',
-          'bottom-start',
-          'bottom-end',
-          'left',
           'left-start',
           'left-end',
-          'right',
           'right-start',
-          'right-end'
+          'right-end',
+          'bottom-start',
+          'bottom-end'
         ].includes(value)
       },
       default: 'bottom'
@@ -143,22 +104,49 @@ export default {
       contentTop: 0,
       contentLeft: 0,
       scrollListeners: [],
-      showTooltip: false
+      privateShowPopover: false,
+      id: Math.random().toString(16),
+      vanishTimerId: null
+    }
+  },
+  computed: {
+    computedDuration () {
+      const duration = Number(this.duration)
+      if (Number.isNaN(duration)) {
+        return DEFAULT_DURATION
+      } else {
+        return duration < 0 ? DEFAULT_DURATION : duration
+      }
+    },
+    showPopover () {
+      if (this.trigger === 'manual') {
+        return this.active
+      } else {
+        return this.privateShowPopover
+      }
+    }
+  },
+  watch: {
+    active () {
+      this.$nextTick().then(this.updatePosition)
     }
   },
   mounted () {
     this.$nextTick().then(() => {
-      this.updatePosition()
-      this.registerScrollListener()
+      this.registerScrollListeners()
+      this.registerResizeListener()
     })
-    // console.log(this.$refs.activator)
-    // console.log(getScrollParent(this.$refs.popover))
   },
   beforeDestroy () {
-    this.unregisterScrollListener()
+    this.unregisterScrollListeners()
+    this.unregisterResizeListener()
+    window.removeEventListener('click', this.handleClickOutsidePopover)
   },
   methods: {
-    registerScrollListener () {
+    registerResizeListener () {
+      resizeHandler.registerHandler(this.updatePosition)
+    },
+    registerScrollListeners () {
       let currentElement = this.$refs.self
       while (true) {
         currentElement = getScrollParent(currentElement)
@@ -168,164 +156,65 @@ export default {
           break
         }
       }
-      console.log(this.scrollListeners)
       for (const [el, handler] of this.scrollListeners) {
-        el.addEventListener('scroll', handler)
+        scrollHandler.registerHandler(el, handler)
       }
     },
-    unregisterScrollListener () {
+    unregisterResizeListener () {
+      resizeHandler.unregisterHandler(this.updatePosition)
+    },
+    unregisterScrollListeners () {
       for (const [el, handler] of this.scrollListeners) {
-        el.removeEventListener('scroll', handler)
+        scrollHandler.unregisterHandler(el, handler)
       }
       this.scrollListeners = []
     },
     updatePosition () {
       // console.log('scroll')
+      if (!this.showPopover) return
+      console.log(this.id)
       this.activatorBoundingClientRect = this.$refs.activator.getBoundingClientRect()
-      this.contentBoundingClientRect = this.$refs.popoverBody.getBoundingClientRect()
+      // console.log(this.$refs.popoverBody)
+      // debugger
+      this.contentBoundingClientRect = this.$refs.contentWrapper.getBoundingClientRect()
+      // console.log(this.contentBoundingClientRect)
+      // debugger
       // console.log('scroll', this.activatorBoundingClientRect, this.contentBoundingClientRect)
-      this.contentTop = this.activatorBoundingClientRect.top + this.activatorBoundingClientRect.height
-      this.contentLeft = this.activatorBoundingClientRect.left + this.activatorBoundingClientRect.width / 2 - this.contentBoundingClientRect.width / 2
+      this.$refs.contentWrapper.style = calcTransform(this.placement, this.activatorBoundingClientRect, this.contentBoundingClientRect)
     },
     handleMouseEnter () {
       if (this.trigger === 'hover') {
-        this.showTooltip = true
+        if (this.vanishTimerId) {
+          window.clearTimeout(this.vanishTimerId)
+          this.vanishTimerId = null
+        }
+        this.privateShowPopover = true
+        /** only after popover dom has emerged can we update position */
         this.$nextTick().then(this.updatePosition)
       }
     },
     handleMouseLeave () {
       if (this.trigger === 'hover') {
-        this.showTooltip = false
-        this.$nextTick().then(this.updatePosition)
+        this.vanishTimerId = window.setTimeout(() => {
+          this.privateShowPopover = false
+        }, this.duration)
       }
     },
-    handleContentClick () {
-
+    handleClickOutsidePopover (e) {
+      if (!this.$refs.activator.contains(e.target) && (this.$refs.popoverBody && !this.$refs.popoverBody.contains(e.target))) {
+        this.privateShowPopover = false
+        window.removeEventListener('click', this.handleClickOutsidePopover)
+      }
     },
     handleActivatorClick () {
       if (this.trigger === 'click') {
-        this.showTooltip = !this.showTooltip
+        this.privateShowPopover = !this.privateShowPopover
         this.$nextTick().then(this.updatePosition)
+        window.addEventListener('click',
+          this.handleClickOutsidePopover
+        )
       }
     }
   }
 }
-
-// export default {
-//   name: 'NPopup',
-//   directives: { clickOutside, TransferDom },
-//   mixins: [Popper],
-//   props: {
-//     value: {
-//       default: false,
-//       type: Boolean
-//     },
-//     placement: {
-//       validator (value) {
-//         return [
-//           'top',
-//           'top-start',
-//           'top-end',
-//           'bottom',
-//           'bottom-start',
-//           'bottom-end',
-//           'left',
-//           'left-start',
-//           'left-end',
-//           'right',
-//           'right-start',
-//           'right-end'
-//         ].includes(value)
-//       },
-//       default: 'bottom'
-//     },
-//     transfer: {
-//       default: true,
-//       type: Boolean
-//     },
-//     width: {
-//       default: null,
-//       type: Number
-//     },
-//     trigger: {
-//       validator (value) {
-//         return ['click', 'hover'].includes(value)
-//       },
-//       default: 'hover'
-//     },
-//     arrow: {
-//       default: true,
-//       type: Boolean
-//     },
-//     zIndex: {
-//       default: 1000,
-//       type: Number
-//     },
-//     padding: {
-//       type: String,
-//       default: null
-//     }
-//   },
-//   data () {
-//     return {
-//       timerId: null,
-//       leaveTimer: null
-//     }
-//   },
-//   computed: {
-//     style () {
-//       let style = {}
-//       if (this.transfer) style['z-index'] = this.zIndex
-//       if (this.padding) style['padding'] = this.padding
-//       return style
-//     }
-//   },
-//   watch: {
-//     value (val) {
-//       this.visible = val
-//     }
-//   },
-//   methods: {
-//     handleClickRef () {
-//       if (this.trigger === 'click') {
-//         this.show()
-//       }
-//     },
-//     handleContentClick (e) {
-//       if (this.transfer) {
-//         e.stopPropagation()
-//       }
-//     },
-//     handleClickOut () {
-//       if (this.trigger !== 'click') {
-//         return
-//       }
-//       this.hide()
-//     },
-//     hide () {
-//       if (this.timerId) {
-//         clearTimeout(this.timerId)
-//         this.timerId = setTimeout(() => {
-//           this.visible = false
-//           this.$emit('input', this.visible)
-//         }, 100)
-//       }
-//     },
-//     show () {
-//       if (this.timerId) {
-//         clearTimeout(this.timerId)
-//       }
-//       this.timerId = setTimeout(() => {
-//         this.visible = true
-//         this.$emit('input', this.visible)
-//       }, 100)
-//     },
-//     handleMouseEnter () {
-//       if (this.trigger === 'hover') this.show()
-//     },
-//     handleMouseLeave () {
-//       if (this.trigger === 'hover') this.hide()
-//     }
-//   }
-// }
 </script>

@@ -18,152 +18,559 @@
         </div>
         <div class="n-doc-section__view">
           <n-popover>
-            <n-button style="margin:0">
-              hover
-            </n-button>
-            <span slot="content">hello baby</span>
+            <template v-slot:activator>
+              <n-button style="margin:0;">
+                hover
+              </n-button>
+            </template>
+            <span>Light My Fire</span>
           </n-popover>
         </div>
         <div class="n-doc-section__source">
-          <textarea v-pre>
-          <n-popover>
-            <n-button>hover</n-button>
-            <span slot="content">hello baby</span>
-          </n-popover>
-          </textarea>
+          <textarea v-pre><n-popover>
+  <template v-slot:activator>
+    <n-button style="margin:0;">
+      hover
+    </n-button>
+  </template>
+  <span>Light My Fire</span>
+</n-popover></textarea>
         </div>
       </div>
       <div class="n-doc-section">
         <div class="n-doc-section__header">
-          word wrap
+          No Arrow
+        </div>
+        <div class="n-doc-section__view">
+          <n-popover :arrow="false">
+            <template v-slot:activator>
+              <n-button
+                style="margin:0;"
+              >
+                hover
+              </n-button>
+            </template>
+            <span>Light My Fire</span>
+          </n-popover>
+        </div>
+        <div class="n-doc-section__source">
+          <textarea v-pre><n-popover :arrow="false">
+  <template v-slot:activator>
+    <n-button
+      style="margin:0;"
+    >
+      hover
+    </n-button>
+  </template>
+  <span>Light My Fire</span>
+</n-popover></textarea>
+        </div>
+      </div>
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
+          trigger
         </div>
         <div class="n-doc-section__view">
           <n-popover
             placement="bottom"
             :width="200"
+            trigger="hover"
+            style="margin-right: 12px;"
           >
-            <n-button style="margin:0">
-              word wrap
-            </n-button>
-            <span slot="content">"Beautiful designs at up to 70% Off. Article offers stylish modern, mid-century and scandinavian furniture from world renowned designers at accessible prices."</span>
+            <template v-slot:activator>
+              <n-button style="margin: 0;">
+                California Girls(Hover)
+              </n-button>
+            </template>
+            <span>
+              I wish they all could be California girls
+            </span>
           </n-popover>
-        </div>
-        <div class="n-doc-section__source">
-          <textarea v-pre>
-           <n-popover placement="left">
-            <n-button style="margin:0">hover show left</n-button>
-            <span slot="content">hello baby</span>
-          </n-popover>
-          </textarea>
-        </div>
-      </div>
-      <div class="n-doc-section">
-        <div class="n-doc-section__header">
-          Change placement
-        </div>
-        <div class="n-doc-section__view">
-          <n-popover placement="left-start">
-            <n-button style="margin:0">
-              hover show left-start
-            </n-button>
-            <span slot="content">hello baby</span>
-          </n-popover>
-        </div>
-        <div class="n-doc-section__source">
-          <textarea v-pre>
-            /*
-            support:
-            'top',
-            'top-start',
-            'top-end',
-            'bottom',
-            'bottom-start',
-            'bottom-end',
-            'left',
-            'left-start',
-            'left-end',
-            'right',
-            'right-start',
-            'right-end'
-          */
-           <n-popover placement="left-start'">
-            <n-button style="margin:0">hover show left-start</n-button>
-            <span slot="content">hello baby</span>
-          </n-popover>
-          </textarea>
-        </div>
-      </div>
-
-      <!-- <div class="n-doc-section">
-        <div class="n-doc-section__header">
-          Transfer dom to body
-        </div>
-        <div class="n-doc-section__view">
-          <n-popover placement="top-end">
-            <n-button style="margin:0">transfer to body</n-button>
-            <span slot="content">hello baby</span>
-          </n-popover>
-        </div>
-        <div class="n-doc-section__source">
-          <textarea v-pre>
-          <n-popover placement="top-end">
-            <n-button style="margin:0">transfer to body</n-button>
-            <span slot="content">hello baby</span>
-          </n-popover>
-          </textarea>
-        </div>
-      </div> -->
-
-      <div class="n-doc-section">
-        <div class="n-doc-section__header">
-          Click to show
-        </div>
-        <div class="n-doc-section__view">
           <n-popover
-            placement="left"
+            placement="bottom"
+            :width="200"
             trigger="click"
-            transfer
+            style="margin-right: 12px;"
           >
-            <n-button style="margin:0">
-              click to show
-            </n-button>
-            <span slot="content">click out side to hide</span>
+            <template v-slot:activator>
+              <n-button
+                style="margin: 0;"
+              >
+                California Girls(Click)
+              </n-button>
+            </template>
+            <span>
+              I wish they all could be California girls
+            </span>
+          </n-popover>
+          <n-popover
+            v-model="showPopover"
+            placement="bottom"
+            :width="200"
+            trigger="manual"
+          >
+            <template v-slot:activator>
+              <n-button
+                style="margin: 0;"
+                @click="showPopover = !showPopover"
+              >
+                California Girls(Manual)
+              </n-button>
+            </template>
+            <span>
+              I wish they all could be California girls
+            </span>
           </n-popover>
         </div>
         <div class="n-doc-section__source">
-          <textarea v-pre>
-          <n-popover placement="left" trigger="click" transfer>
-            <n-button style="margin:0">click to show</n-button>
-            <span slot="content">click out side to hide</span>
-          </n-popover>
-          </textarea>
+          <textarea v-pre><n-popover
+  placement="bottom"
+  :width="200"
+  trigger="hover"
+  style="margin-right: 12px;"
+>
+  <template v-slot:activator>
+    <n-button style="margin: 0;">
+      California Girls(Hover)
+    </n-button>
+  </template>
+  <span>
+    I wish they all could be California girls
+  </span>
+</n-popover>
+<n-popover
+  placement="bottom"
+  :width="200"
+  trigger="click"
+  style="margin-right: 12px;"
+>
+  <template v-slot:activator>
+    <n-button
+      style="margin: 0;"
+    >
+      California Girls(Click)
+    </n-button>
+  </template>
+  <span>
+    I wish they all could be California girls
+  </span>
+</n-popover>
+<n-popover
+  v-model="showPopover"
+  placement="bottom"
+  :width="200"
+  trigger="manual"
+>
+  <template v-slot:activator>
+    <n-button
+      style="margin: 0;"
+      @click="showPopover = !showPopover"
+    >
+      California Girls(Manual)
+    </n-button>
+  </template>
+  <span>
+    I wish they all could be California girls
+  </span>
+</n-popover></textarea>
         </div>
       </div>
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
+          Placement
+        </div>
+        <div class="n-doc-section__view">
+          <div class="popover-grid">
+            <n-popover
+              placement="top-start"
+              trigger="click"
+              style="grid-area: 1 / 2 / 2 / 3;"
+            >
+              <template v-slot:activator>
+                <n-button
+                  style="margin: 0;"
+                >
+                  Top Start
+                </n-button>
+              </template>
+              <div class="large-text">
+                Oops!
+              </div>
+            </n-popover>
+            <n-popover
+              placement="top"
+              trigger="click"
+              style="grid-area: 1 / 3 / 2 / 4;"
+            >
+              <template v-slot:activator>
+                <n-button
+                  style="margin: 0;"
+                >
+                  Top
+                </n-button>
+              </template>
+              <div class="large-text">
+                Oops!
+              </div>
+            </n-popover>
+            <n-popover
+              placement="top-end"
+              trigger="click"
+              style="grid-area: 1 / 4/ 2 / 5;"
+            >
+              <template v-slot:activator>
+                <n-button
+                  style="margin: 0;"
+                >
+                  Top End
+                </n-button>
+              </template>
+              <div class="large-text">
+                Oops!
+              </div>
+            </n-popover>
+            <n-popover
+              placement="left-start"
+              trigger="click"
+              style="grid-area: 2 / 1 / 3 / 2;"
+            >
+              <template v-slot:activator>
+                <n-button
+                  style="margin: 0;"
+                >
+                  Left Start
+                </n-button>
+              </template>
+              <div class="large-text">
+                Oops!
+              </div>
+            </n-popover>
+            <n-popover
+              placement="left"
+              trigger="click"
+              style="grid-area: 3 / 1 / 4 / 2;"
+            >
+              <template v-slot:activator>
+                <n-button
+                  style="margin: 0;"
+                >
+                  Left
+                </n-button>
+              </template>
+              <div class="large-text">
+                Oops!
+              </div>
+            </n-popover>
+            <n-popover
+              placement="left-end"
+              trigger="click"
+              style="grid-area: 4 / 1 / 5 / 2;"
+            >
+              <template v-slot:activator>
+                <n-button
+                  style="margin: 0;"
+                >
+                  Left End
+                </n-button>
+              </template>
+              <div class="large-text">
+                Oops!
+              </div>
+            </n-popover>
+            <n-popover
+              placement="right-start"
+              trigger="click"
+              style="grid-area: 2 / 5 / 3 / 6;"
+            >
+              <template v-slot:activator>
+                <n-button
+                  style="margin: 0;"
+                >
+                  Right Start
+                </n-button>
+              </template>
+              <div class="large-text">
+                Oops!
+              </div>
+            </n-popover>
+            <n-popover
+              placement="right"
+              trigger="click"
+              style="grid-area: 3 / 5 / 4 / 6;"
+            >
+              <template v-slot:activator>
+                <n-button
+                  style="margin: 0;"
+                >
+                  Right
+                </n-button>
+              </template>
+              <div class="large-text">
+                Oops!
+              </div>
+            </n-popover>
+            <n-popover
+              placement="right-end"
+              trigger="click"
+              style="grid-area: 4 / 5 / 5 / 6;"
+            >
+              <template v-slot:activator>
+                <n-button
+                  style="margin: 0;"
+                >
+                  Right End
+                </n-button>
+              </template>
+              <div class="large-text">
+                Oops!
+              </div>
+            </n-popover>
+            <n-popover
+              placement="bottom-start"
+              trigger="click"
+              style="grid-area: 5 / 2 / 6 / 3;"
+            >
+              <template v-slot:activator>
+                <n-button
+                  style="margin: 0;"
+                >
+                  Bottom Start
+                </n-button>
+              </template>
+              <div class="large-text">
+                Oops!
+              </div>
+            </n-popover>
+            <n-popover
+              placement="bottom"
+              trigger="click"
+              style="grid-area: 5 / 3 / 6 / 4;"
+            >
+              <template v-slot:activator>
+                <n-button
+                  style="margin: 0;"
+                >
+                  Bottom
+                </n-button>
+              </template>
+              <div class="large-text">
+                Oops!
+              </div>
+            </n-popover>
+            <n-popover
+              placement="bottom-end"
+              trigger="click"
+              style="grid-area: 5 / 4 / 6 / 5;"
+            >
+              <template v-slot:activator>
+                <n-button
+                  style="margin: 0;"
+                >
+                  Bottom End
+                </n-button>
+              </template>
+              <div class="large-text">
+                Oops!
+              </div>
+            </n-popover>
+          </div>
+        </div>
+        <div class="n-doc-section__source">
+          <textarea v-pre><div class="popover-grid">
+  <n-popover
+    placement="top-start"
+    trigger="click"
+    style="grid-area: 1 / 2 / 2 / 3;"
+  >
+    <template v-slot:activator>
+      <n-button
+        style="margin: 0;"
+      >
+        Top Start
+      </n-button>
+    </template>
+    <div class="large-text">
+      Oops!
     </div>
-
-    <div class="n-doc-section">
-      <div class="n-doc-section__header">
-        No Arrow
-      </div>
-      <div class="n-doc-section__view">
-        <n-popover
-          placement="left"
-          trigger="click"
-          transfer
-          :arrow="false"
-        >
-          <n-button style="margin:0">
-            No Arrow
-          </n-button>
-          <span slot="content">click out side to hide</span>
-        </n-popover>
-      </div>
-      <div class="n-doc-section__source">
-        <textarea v-pre>
-<n-popover placement="left" trigger="click" transfer :arrow="false">
-  <n-button style="margin:0">No Arrow</n-button>
-  <span slot="content">click out side to hide</span>
-</n-popover></textarea>
+  </n-popover>
+  <n-popover
+    placement="top"
+    trigger="click"
+    style="grid-area: 1 / 3 / 2 / 4;"
+  >
+    <template v-slot:activator>
+      <n-button
+        style="margin: 0;"
+      >
+        Top
+      </n-button>
+    </template>
+    <div class="large-text">
+      Oops!
+    </div>
+  </n-popover>
+  <n-popover
+    placement="top-end"
+    trigger="click"
+    style="grid-area: 1 / 4/ 2 / 5;"
+  >
+    <template v-slot:activator>
+      <n-button
+        style="margin: 0;"
+      >
+        Top End
+      </n-button>
+    </template>
+    <div class="large-text">
+      Oops!
+    </div>
+  </n-popover>
+  <n-popover
+    placement="left-start"
+    trigger="click"
+    style="grid-area: 2 / 1 / 3 / 2;"
+  >
+    <template v-slot:activator>
+      <n-button
+        style="margin: 0;"
+      >
+        Left Start
+      </n-button>
+    </template>
+    <div class="large-text">
+      Oops!
+    </div>
+  </n-popover>
+  <n-popover
+    placement="left"
+    trigger="click"
+    style="grid-area: 3 / 1 / 4 / 2;"
+  >
+    <template v-slot:activator>
+      <n-button
+        style="margin: 0;"
+      >
+        Left
+      </n-button>
+    </template>
+    <div class="large-text">
+      Oops!
+    </div>
+  </n-popover>
+  <n-popover
+    placement="left-end"
+    trigger="click"
+    style="grid-area: 4 / 1 / 5 / 2;"
+  >
+    <template v-slot:activator>
+      <n-button
+        style="margin: 0;"
+      >
+        Left End
+      </n-button>
+    </template>
+    <div class="large-text">
+      Oops!
+    </div>
+  </n-popover>
+  <n-popover
+    placement="right-start"
+    trigger="click"
+    style="grid-area: 2 / 5 / 3 / 6;"
+  >
+    <template v-slot:activator>
+      <n-button
+        style="margin: 0;"
+      >
+        Right Start
+      </n-button>
+    </template>
+    <div class="large-text">
+      Oops!
+    </div>
+  </n-popover>
+  <n-popover
+    placement="right"
+    trigger="click"
+    style="grid-area: 3 / 5 / 4 / 6;"
+  >
+    <template v-slot:activator>
+      <n-button
+        style="margin: 0;"
+      >
+        Right
+      </n-button>
+    </template>
+    <div class="large-text">
+      Oops!
+    </div>
+  </n-popover>
+  <n-popover
+    placement="right-end"
+    trigger="click"
+    style="grid-area: 4 / 5 / 5 / 6;"
+  >
+    <template v-slot:activator>
+      <n-button
+        style="margin: 0;"
+      >
+        Right End
+      </n-button>
+    </template>
+    <div class="large-text">
+      Oops!
+    </div>
+  </n-popover>
+  <n-popover
+    placement="bottom-start"
+    trigger="click"
+    style="grid-area: 5 / 2 / 6 / 3;"
+  >
+    <template v-slot:activator>
+      <n-button
+        style="margin: 0;"
+      >
+        Bottom Start
+      </n-button>
+    </template>
+    <div class="large-text">
+      Oops!
+    </div>
+  </n-popover>
+  <n-popover
+    placement="bottom"
+    trigger="click"
+    style="grid-area: 5 / 3 / 6 / 4;"
+  >
+    <template v-slot:activator>
+      <n-button
+        style="margin: 0;"
+      >
+        Bottom
+      </n-button>
+    </template>
+    <div class="large-text">
+      Oops!
+    </div>
+  </n-popover>
+  <n-popover
+    placement="bottom-end"
+    trigger="click"
+    style="grid-area: 5 / 4 / 6 / 5;"
+  >
+    <template v-slot:activator>
+      <n-button
+        style="margin: 0;"
+      >
+        Bottom End
+      </n-button>
+    </template>
+    <div class="large-text">
+      Oops!
+    </div>
+  </n-popover>
+</div></textarea>
+        </div>
       </div>
     </div>
   </div>
@@ -175,36 +582,29 @@ import docCodeEditorMixin from './docCodeEditorMixin'
 export default {
   mixins: [docCodeEditorMixin],
   data () {
-    return { content: 'hello', visible: false }
+    return { content: 'hello', visible: false, showPopover: false }
   }
 }
 </script>
 
 <style scoped lang="scss">
-.doc {
-  width: 780px;
-  margin: 0 auto;
-  .doc-header {
-    display: flex;
-    height: 60px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    align-items: center;
+.n-doc {
+  width: 1020px;
+  margin: auto;
+}
+
+.popover-grid {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  grid-gap: 18px;
+  justify-content: center;
+  align-items: center;
+  .n-button {
+    width: 120px;
   }
-  .doc-body {
-    padding-top: 14px;
-  }
-  .section-header {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 12px;
-  }
-  .section {
-    background: #5c657eff;
-    padding: 18px;
-    border-radius: 8px;
-    justify-content: center;
-    display: flex;
-    margin-bottom: 12px;
-  }
+}
+
+.large-text {
+  font-size: 72px;
 }
 </style>
