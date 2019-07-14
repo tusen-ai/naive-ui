@@ -27,10 +27,52 @@ $popover-distance: $popover-arrow-width - 1 + 14;
       border-radius: 6px;
       background-color: rgba(75, 81, 106, 1);
       color: #ffffffe6;
-      padding: 8px 14px;
       font-size: 12px;
       opacity: 1;
       box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.16);
+      &.n-popover__content--without-arrow {
+        &[n-placement$="top-start"] {
+          margin-bottom: 6px;
+        }
+        &[n-placement$="top"] {
+          margin-bottom: 6px;
+        }
+        &[n-placement$="top-end"] {
+          margin-bottom: 6px;
+        }
+        &[n-placement$="bottom-start"] {
+          margin-top: 6px;
+        }
+        &[n-placement$="bottom"] {
+          margin-top: 6px;
+        }
+        &[n-placement$="bottom-end"] {
+          margin-top: 6px;
+        }
+        &[n-placement$="left-start"] {
+          margin-right: 6px;
+        }&[n-placement$="left"] {
+          margin-right: 6px;
+        }
+        &[n-placement$="left-end"] {
+          margin-right: 10px;
+          transform-origin: right center;
+          .n-popover__arrow {
+            right: -2 * $popover-arrow-width;
+            border-left-color: rgba(75, 81, 106, 1);
+            bottom: 10px;
+          }
+        }
+        &[n-placement$="right-start"] {
+          margin-left: 6px;
+        }
+        &[n-placement$="right"] {
+          margin-left: 6px;
+        }
+        &[n-placement$="right-end"] {
+          margin-left: 6px;
+        }
+      }
       .n-popover__arrow {
         border-width: $popover-arrow-width;
         pointer-events: none;
@@ -43,16 +85,16 @@ $popover-distance: $popover-arrow-width - 1 + 14;
         border-style: solid;
       }
       &[n-placement$="top-start"] {
-        margin-bottom: 12px;
+        margin-bottom: 10px;
         transform-origin: bottom center;
         .n-popover__arrow {
           bottom: -2 * $popover-arrow-width;
           border-top-color: rgba(75, 81, 106, 1);
-          left: 2 * $popover-arrow-width;
+          left: 10px;
         }
       }
       &[n-placement$="top"] {
-        margin-bottom: 12px;
+        margin-bottom: 10px;
         transform-origin: bottom center;
         .n-popover__arrow {
           bottom: -2 * $popover-arrow-width;
@@ -62,25 +104,25 @@ $popover-distance: $popover-arrow-width - 1 + 14;
         }
       }
       &[n-placement$="top-end"] {
-        margin-bottom: 12px;
+        margin-bottom: 10px;
         transform-origin: bottom center;
         .n-popover__arrow {
           bottom: -2 * $popover-arrow-width;
           border-top-color: rgba(75, 81, 106, 1);
-          right: 2 * $popover-arrow-width;
+          right: 10px;
         }
       }
       &[n-placement$="bottom-start"] {
-        margin-top: 12px;
+        margin-top: 10px;
         transform-origin: top center;
         .n-popover__arrow {
           top: -2 * $popover-arrow-width;
           border-bottom-color: rgba(75, 81, 106, 1);
-          left: 2 * $popover-arrow-width;
+          left: 10px;
         }
       }
       &[n-placement$="bottom"] {
-        margin-top: 12px;
+        margin-top: 10px;
         transform-origin: top center;
         .n-popover__arrow {
           top: -2 * $popover-arrow-width;
@@ -90,24 +132,24 @@ $popover-distance: $popover-arrow-width - 1 + 14;
         }
       }
       &[n-placement$="bottom-end"] {
-        margin-top: 12px;
+        margin-top: 10px;
         transform-origin: top center;
         .n-popover__arrow {
           top: -2 * $popover-arrow-width;
           border-bottom-color: rgba(75, 81, 106, 1);
-          right: 2 * $popover-arrow-width;
+          right: 10px;
         }
       }
       &[n-placement$="left-start"] {
-        margin-right: 12px;
+        margin-right: 10px;
         transform-origin: right center;
         .n-popover__arrow {
           right: -2 * $popover-arrow-width;
           border-left-color: rgba(75, 81, 106, 1);
-          top: 2 * $popover-arrow-width;
+          top: 10px;
         }
       }&[n-placement$="left"] {
-        margin-right: 12px;
+        margin-right: 10px;
         transform-origin: right center;
         .n-popover__arrow {
           right: -2 * $popover-arrow-width;
@@ -117,25 +159,25 @@ $popover-distance: $popover-arrow-width - 1 + 14;
         }
       }
       &[n-placement$="left-end"] {
-        margin-right: 12px;
+        margin-right: 10px;
         transform-origin: right center;
         .n-popover__arrow {
           right: -2 * $popover-arrow-width;
           border-left-color: rgba(75, 81, 106, 1);
-          bottom: 2 * $popover-arrow-width;
+          bottom: 10px;
         }
       }
       &[n-placement$="right-start"] {
-        margin-left: 12px;
+        margin-left: 10px;
         transform-origin: left center;
         .n-popover__arrow {
           left: -2 * $popover-arrow-width;
           border-right-color: rgba(75, 81, 106, 1);
-          top: 2 * $popover-arrow-width;
+          top: 10px;
         }
       }
       &[n-placement$="right"] {
-        margin-left: 12px;
+        margin-left: 10px;
         transform-origin: left center;
         .n-popover__arrow {
           left: -2 * $popover-arrow-width;
@@ -145,12 +187,12 @@ $popover-distance: $popover-arrow-width - 1 + 14;
         }
       }
       &[n-placement$="right-end"] {
-        margin-left: 12px;
+        margin-left: 10px;
         transform-origin: left center;
         .n-popover__arrow {
           left: -2 * $popover-arrow-width;
           border-right-color: rgba(75, 81, 106, 1);
-          bottom: 2 * $popover-arrow-width;
+          bottom: 10px;
         }
       }
       &.n-popover-fade-enter-active,

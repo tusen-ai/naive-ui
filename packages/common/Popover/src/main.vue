@@ -28,6 +28,9 @@
             ref="popoverBody"
             :n-placement="placement"
             class="n-popover__content"
+            :class="{
+              'n-popover__content--without-arrow': !arrow
+            }"
             @mouseenter="handleMouseEnter"
             @mouseleave="handleMouseLeave"
           >
