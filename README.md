@@ -65,8 +65,8 @@ Vue.use(naiveUi)
 |FormItem|🚧|❌||
 |Form|🚧|❌||
 |Table|🚧|❌|Function is not fulfilled|
-|Tooltip|😍|❌|Remove the dependency of Popper.js|
-|Popover|😍|❌|May be need to merge with Tooltip|
+|Tooltip|😍|❌||
+|Popover|😍|❌||
 |InputNumber|🚧|||
 |Radio|🚧|||
 |Tab|🚧|||
