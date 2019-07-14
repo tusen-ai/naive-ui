@@ -2,11 +2,7 @@
   <div class="demo">
     <n-nimbus-service-layout
       icon="md-contacts"
-<<<<<<< a1da6ba2886aa36c2538ca3936c46a868ad4880c
       :name="`NAIVE UI (${version})`"
-=======
-      name="NAIVE UI (0.2.4)"
->>>>>>> chore(popover): refactor checkpoint...
       :padding-body="false"
       :items="items"
     >
