@@ -92,6 +92,12 @@
             />
           </n-td>
         </n-tr>
+        <div
+          v-if="showingData.length===0"
+          class="n-no-data-tip"
+        >
+          No data
+        </div>
       </n-tbody>
     </n-table>
     <!-- 分页 -->
