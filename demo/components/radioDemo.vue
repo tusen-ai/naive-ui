@@ -26,6 +26,13 @@
           >
             Be Here Now
           </n-radio>
+          <n-radio
+            v-model="value1"
+            value="Be Here Now"
+            disabled
+          >
+            Be Here Now
+          </n-radio>
         </div>
         <pre class="n-doc-section__inspect">value: {{ JSON.stringify(value1) }}</pre>
         <div class="n-doc-section__source">
@@ -38,6 +45,13 @@
 <n-radio
   v-model="value"
   value="Be Here Now"
+>
+  Be Here Now
+</n-radio>
+<n-radio
+  v-model="value"
+  value="Be Here Now"
+  disabled
 >
   Be Here Now
 </n-radio>
