@@ -1,0 +1,119 @@
+@import './mixins/mixins.scss';
+@import './theme/default.scss';
+
+@include b(input-number) {
+  position: relative;
+  border-radius: $input-number-border-radius;
+  background-color: $input-number-background-color;
+  width: 152px;
+  display: inline-block;
+  vertical-align: bottom;
+  & * {
+    outline: none;
+  }
+  &.n-input-number--disabled {
+    background:rgba(238,238,238,0.05);
+    .n-input-number__minus-button, .n-input-number__add-button {
+      background:rgba(238,238,238,0.05);
+      color:rgba(233,233,236,0.2);
+      pointer-events: none;
+    }
+    .n-input-number__input {
+      color:rgba(233,233,236,0.2);
+      pointer-events: none;
+    }
+    cursor: not-allowed;
+  }
+  &.n-input-number--default-size, &.n-input-number--medium-size {
+    height: $medium-height;
+    line-height: $medium-height;
+    .n-input-number__minus-button, .n-input-number__add-button, .n-input-number__input {
+      height: $medium-height;
+      line-height: $medium-height;
+    }
+  }
+  &.n-input-number--small-size {
+    height: $small-height;
+    line-height: $small-height;
+    .n-input-number__minus-button, .n-input-number__add-button, .n-input-number__input {
+      height: $small-height;
+      line-height: $small-height;
+    }
+  }
+  &.n-input-number--large-size {
+    height: $large-height;
+    line-height: $large-height;
+    .n-input-number__minus-button, .n-input-number__add-button, .n-input-number__input {
+      height: $large-height;
+      line-height: $large-height;
+    }
+  }
+  .n-input-number__border-layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: $input-number-border-radius;
+    transition: box-shadow .3s $default-cubic-bezier;
+    pointer-events: none;
+  }
+  .n-input-number__minus-button, .n-input-number__add-button {
+    position: absolute;
+    top: 0;
+    padding: 0;
+    width: 28px;
+    border: none;
+    background-color: $input-number-button-background-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #eeeeee;
+    font-size: 14px;
+    transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+    &:hover~.n-input-number__border-layer {
+      box-shadow: inset 0 0 0px 1px $main-color;
+    }
+    &:hover {
+      color: $main-color;
+    }
+    &:active {
+      transition: color .3s $default-cubic-bezier, background-color .15s $default-cubic-bezier;
+      background-color: rgba(99,226,183,0.12)
+    }
+    &.n-input-bumber__button--disabled {
+      background-color: rgba(221,238,247,0.3);
+      color: rgba(255, 255, 255, .2);
+      cursor: not-allowed;
+    }
+  }
+  .n-input-number__minus-button {
+    left: 0;
+    border-top-left-radius: $input-number-border-radius;
+    border-bottom-left-radius: $input-number-border-radius;
+  }
+  .n-input-number__add-button {
+    right: 0;
+    border-top-right-radius: $input-number-border-radius;
+    border-bottom-right-radius: $input-number-border-radius;
+  }
+  .n-input-number__input {
+    &:hover~.n-input-number__border-layer {
+      box-shadow: inset 0 0 0px 1px $main-color;
+    }
+    &:focus {
+      background-color: rgba(99,226,183,0.12);
+      &~.n-input-number__border-layer {
+        box-shadow: inset 0 0 0px 1px $main-color, 0px 0px 10px 1px #366555;
+      }
+    }
+    transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+    background-color: transparent;
+    border: none;
+    color: $input-number-color;
+    width: 84px;
+    text-align: center;
+    padding: 0 34px;
+    caret-color: $input-caret-color;
+  }
+}

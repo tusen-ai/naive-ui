@@ -53,7 +53,9 @@ export default {
   min-width: 600px;
   width: 1032px;
   margin: auto;
+  pointer-events: none;
   .n-nimbus-form-card__body {
+    pointer-events: all;
     margin-top: 24px;
     margin-bottom: 24px;
     background: #5c657e;

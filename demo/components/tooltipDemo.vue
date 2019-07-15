@@ -1,73 +1,105 @@
 <template>
   <div
     ref="doc"
-    class="doc"
+    class="n-doc"
   >
-    <div class="doc-header">
-      <n-gradient-text :font-size="18">
-        n-tooltip
+    <div class="n-doc-header">
+      <n-gradient-text :font-size="20">
+        Tooltip
       </n-gradient-text>
     </div>
-    <div class="doc-body" />
-    <div class="section-header">
-      Basic Usage
-    </div>
-    <div class="section">
-      <n-tooltip>
-        <template v-slot:activator>
-          <n-button style="margin: 0;">
-            hello tooltip
-          </n-button>
-        </template>
-        <div>
-          This is the contextual help
+    <div class="n-doc-body">
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
+          Basic Usage
         </div>
-      </n-tooltip>
-    </div>
-    <textarea rows="5"><n-tooltip>
+        <div class="n-doc-section__view">
+          <n-tooltip>
+            <template v-slot:activator>
+              <n-button style="margin: 0;">
+                hello tooltip
+              </n-button>
+            </template>
+          </n-tooltip>
+        </div>
+        <div class="n-doc-section__source">
+          <textarea><n-tooltip>
   <template v-slot:activator>
-    <n-button style="margin: 0;">hello tooltip</n-button>
+    <n-button style="margin: 0;">
+      hello tooltip
+    </n-button>
   </template>
-  <div>
-    This is the contextual help
-  </div>
+  This is the contextual help
 </n-tooltip></textarea>
+        </div>
+      </div>
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
+          Arrow
+        </div>
+        <div class="n-doc-section__view">
+          <n-tooltip arrow>
+            <template v-slot:activator>
+              <n-button style="margin: 0;">
+                hello tooltip
+              </n-button>
+            </template>
+            This is the contextual help
+          </n-tooltip>
+        </div>
+        <div class="n-doc-section__source">
+          <textarea><n-tooltip arrow>
+  <template v-slot:activator>
+    <n-button style="margin: 0;">
+      hello tooltip
+    </n-button>
+  </template>
+  This is the contextual help
+</n-tooltip></textarea>
+        </div>
+      </div>
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
+          Placement
+        </div>
+        <div class="n-doc-section__view">
+          <n-tooltip placement="top-start">
+            <template v-slot:activator>
+              <n-button style="margin: 0;">
+                hello tooltip
+              </n-button>
+            </template>
+            This is the contextual help
+          </n-tooltip>
+        </div>
+        <div class="n-doc-section__source">
+          <textarea>/**
+  * If you want to see more placement options, see Popover
+  */
+<n-tooltip placement="top-start">
+  <template v-slot:activator>
+    <n-button style="margin: 0;">
+      hello tooltip
+    </n-button>
+  </template>
+  This is the contextual help
+</n-tooltip></textarea>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import docCodeEditorMixin from './docCodeEditorMixin'
 export default {
-  mixins: [docCodeEditorMixin]
+  mixins: [docCodeEditorMixin],
+  data () {
+    return {
+
+    }
+  },
+  methods: {
+  }
 }
 </script>
-
-<style scoped lang="scss">
-.doc {
-  width: 780px;
-  margin: 0 auto;
-  .doc-header {
-    display: flex;
-    height: 60px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    align-items: center;
-  }
-  .doc-body {
-    padding-top: 14px;
-  }
-  .section-header {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 12px;
-  }
-  .section {
-    background: #5C657EFF;
-    padding: 18px;
-    border-radius: 8px;
-    justify-content: center;
-    display: flex;
-    margin-bottom: 12px;
-  }
-}
-
-</style>

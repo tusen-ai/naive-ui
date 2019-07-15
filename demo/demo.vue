@@ -49,6 +49,10 @@ export default {
           path: '/',
           childItems: [
             {
+              name: 'AdvanceTable',
+              path: '/n-advance-table'
+            },
+            {
               name: 'Alert',
               path: '/n-alert'
             },
@@ -97,8 +101,8 @@ export default {
               path: '/n-pagination'
             },
             {
-              name: 'Popup',
-              path: '/n-popup'
+              name: 'Popover',
+              path: '/n-popover'
             },
             {
               name: 'Select',
@@ -111,10 +115,6 @@ export default {
             {
               name: 'Table',
               path: '/n-table'
-            },
-            {
-              name: 'AdvanceTable',
-              path: '/n-advance-table'
             },
             {
               name: 'Tooltip',

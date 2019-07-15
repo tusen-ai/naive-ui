@@ -1,13 +1,13 @@
 {
   "name": "naive-ui",
-  "version": "0.2.5",
+  "version": "0.2.7",
   "description": "",
   "main": "index.js",
   "scripts": {
     "release": "npm run build && npm publish",
     "build": "cross-env NODE_ENV=development && gulp --gulpfile build/gulpfile.js build",
     "demo": "cross-env NODE_ENV=development && gulp --gulpfile build/gulpfile.js build && webpack-dev-server --config build/webpack.demo.js",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.js",
+    "dev": "cross-env NODE_ENV=development && node doc/changeDemoVersion.js && node doc/injectReadme.js && webpack-dev-server --config build/webpack.dev.js",
     "serve": "npm run dev",
     "lint": "eslint packages/**/*.{js,vue} test/**/*.{js,vue} build/**/*.{js,vue} demo/**/*.{js,vue} && stylelint \"styles/**/*.scss\"",
     "lint-style": "stylelint  \"styles/**/*.scss\"",

@@ -199,8 +199,10 @@
     &.n-nimbus-service-layout__drawer--collapsed {
       transform: translateX(-224px);
       transition: transform .3s cubic-bezier(0.4, 0.0, 0.2, 1);
+      pointer-events: none;
       .n-nimbus-service-layout-drawer__toggle-button {
         transform: translateX(50%) translateY(-50%) rotate(180deg);
+        pointer-events: all;
       }
       .n-nimbus-service-layout-drawer__item-wrapper {
         opacity: 0;
