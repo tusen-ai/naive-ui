@@ -132,6 +132,71 @@ export default {
 </textarea>
         </div>
       </div>
+      <div class="n-doc-section">
+        <div class="n-doc-section__header">
+          Radio Button Group
+        </div>
+        <div class="n-doc-section__view">
+          <n-radio-group v-model="value3">
+            <n-radio-button
+              v-for="song in songs"
+              :key="song.value"
+              :value="song.value"
+              :disabled="song.label === 'Live Forever'"
+            >
+              {{ song.label }}
+            </n-radio-button>
+          </n-radio-group>
+        </div>
+        <pre class="n-doc-section__inspect">value: {{ JSON.stringify(value3) }}</pre>
+        <div class="n-doc-section__source">
+          <textarea v-pre><n-radio-group v-model="value">
+  <n-radio
+    v-for="song in songs"
+    :key="song.value"
+    :value="song.value"
+  >
+    {{ song.label }}
+  </n-radio>
+</n-radio-group>
+
+<script>
+export default {
+  data () {
+    return {
+      value: null,
+      songs: [
+        {
+          value: 'Rock\'n\'Roll Star',
+          label: 'Rock\'n\'Roll Star'
+        },
+        {
+          value: 'Shakermaker',
+          label: 'Shakermaker'
+        },
+        {
+          value: 'Live Forever',
+          label: 'Live Forever'
+        },
+        {
+          value: 'Up in the Sky',
+          label: 'Up in the Sky'
+        },
+        {
+          value: '...',
+          label: '...'
+        }
+      ].map(s => {
+        s.value = s.value.toLowerCase()
+        return s
+      }
+    }
+  }
+}
+</script>
+</textarea>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -144,6 +209,7 @@ export default {
     return {
       value1: null,
       value2: null,
+      value3: 'Shakermaker',
       songs: [
         {
           value: 'Rock\'n\'Roll Star',

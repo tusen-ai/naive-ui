@@ -1,7 +1,7 @@
 <script>
 function mapSlot (defaultSlot, currentComponent) {
   return defaultSlot.map(el => {
-    if (el.componentOptions.tag === 'n-radio') {
+    if (el.componentOptions.tag === 'n-radio' || el.componentOptions.tag === 'n-radio-button') {
       el.componentOptions.propsData.privateValue = currentComponent.value
       el.componentOptions.listeners = {
         ...el.componentOptions.listeners,

@@ -1,6 +1,3 @@
-/**
-  有待解决一个bug，在nimbus新的layout下，不使用transfer 弹出的定位是不准的，所以这里默认使用了transfer,经过查询可能是 overflow:auto造成的影响但是还是没有解决
- */
 <template>
   <div
     ref="doc"

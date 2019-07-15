@@ -59,9 +59,9 @@
       box-shadow: inset 0 0 0 1px rgba(255,255,255,0.25);
       transition: box-shadow .2s $default-cubic-bezier;
       &::before {
-        transform: scale(1.5);
+        transform: scale(.8);
         transform-origin: center;
-        opacity: 1;
+        opacity: 0;
         background-color: rgba(233,233,236,0.25);
       }
       &.n-radio__control--checked {
@@ -80,4 +80,73 @@
 @include b(radio-group) {
   display: inline-block;
   vertical-align: middle;
+}
+
+@include b(radio-button) {
+  position: relative;
+  user-select: none;
+  display: inline-flex;
+  vertical-align: middle;
+  align-items: center;
+  height: 28px;
+  line-height: 28px;
+  border-top: 1px solid rgba(255,255,255,0.5);
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+  box-sizing: border-box;
+  .n-radio-button__label {
+    height: 28px;
+    line-height: 28px;
+    display: inline-block;
+    color: rgba(233,233,236,1);
+    margin: 0 14px;
+  }
+  .n-radio-button__border-mask {
+    pointer-events: none;
+    position: absolute;
+    box-shadow: inset 0 0 0 1px transparent;
+    transition: box-shadow .2s $default-cubic-bezier;
+    left: -1px;
+    bottom: -1px;
+    right: -1px;
+    top: -1px;
+  }
+  &:first-child {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-left: 1px solid rgba(255,255,255,0.5);
+    border-right: 1px solid rgba(255,255,255,0.5);
+    .n-radio-button__border-mask {
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
+    }
+  }
+  &:last-child {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    
+    border-right: 1px solid rgba(255,255,255,0.5);
+    .n-radio-button__border-mask {
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+    }
+  }
+  &:not(:first-child):not(:last-child) {
+    border-right: 1px solid rgba(255,255,255,0.5);
+  }
+  &:not(.n-radio-button--disabled) {
+    cursor: pointer;
+    &:hover .n-radio-button__border-mask {
+      box-shadow: inset 0 0 0 1px rgba(99, 226, 183, 1);
+      transition: box-shadow .2s $default-cubic-bezier;
+    }
+    &:active .n-radio-button__border-mask {
+      box-shadow: inset 0 0 0 1px rgba(99, 226, 183, 1), 0px 0px 10px 1px rgba(99,226,183,0.3);
+    }
+  }
+  &.n-radio-button--disabled {
+    cursor: not-allowed;
+    .n-radio__label {
+      color: rgba(233,233,236,0.25);
+    }
+  }
 }
