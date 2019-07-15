@@ -41,6 +41,10 @@ export default {
             {
               name: 'Nimbus Confirm Card',
               path: '/n-nimbus-confirm-card'
+            },
+            {
+              name: 'Nimbus Icon',
+              path: '/n-nimbus-icon'
             }
           ]
         },

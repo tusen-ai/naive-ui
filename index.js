@@ -29,6 +29,7 @@ import Navbar from './packages/nimbus/Navbar'
 import ServiceLayout from './packages/nimbus/ServiceLayout'
 import NimbusFormCard from './packages/nimbus/FormCard'
 import NimbusConfirmCard from './packages/nimbus/ConfirmCard'
+import NimbusIcon from './packages/nimbus/Icon'
 
 function install (Vue) {
   Card.install(Vue)
@@ -61,6 +62,7 @@ function install (Vue) {
   Alert.install(Vue)
   DatePicker.install(Vue)
   InputNumber.install(Vue)
+  NimbusIcon.install(Vue)
 }
 
 export default {
