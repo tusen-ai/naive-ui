@@ -109,6 +109,10 @@ export default {
               path: '/n-popover'
             },
             {
+              name: 'Radio',
+              path: '/n-radio'
+            },
+            {
               name: 'Select',
               path: '/n-select'
             },
