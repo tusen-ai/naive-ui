@@ -156,18 +156,18 @@ Vue.use(naiveUi)
 <td>Tooltip</td>
 <td style="text-align:center;">😍</td>
 <td style="text-align:center;">❌</td>
-<td>Remove the dependency of Popper.js</td>
+<td></td>
 </tr>
 <tr>
 <td>Popover</td>
 <td style="text-align:center;">😍</td>
 <td style="text-align:center;">❌</td>
-<td>May be need to merge with Tooltip</td>
+<td></td>
 </tr>
 <tr>
 <td>InputNumber</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;"></td>
+<td style="text-align:center;">😍</td>
+<td style="text-align:center;">❌</td>
 <td></td>
 </tr>
 <tr>
