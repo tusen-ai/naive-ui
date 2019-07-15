@@ -739,7 +739,7 @@ export default {
           }
         }
       ],
-      data: [],
+      data: d,
       columns0: [
         {
           title: 'Name',
