@@ -1,5 +1,3 @@
-import getScrollParent from '../utils/getScrollParent'
-
 export default {
   props: {
     isActive: {

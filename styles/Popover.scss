@@ -76,7 +76,6 @@ $popover-distance: $popover-arrow-width - 1 + 14;
       .n-popover__arrow {
         border-width: $popover-arrow-width;
         pointer-events: none;
-        border-width: $popover-arrow-width;
         position: absolute;
         display: block;
         width: 0;
@@ -201,16 +200,14 @@ $popover-distance: $popover-arrow-width - 1 + 14;
         opacity: 1;
       }
       &.n-popover-fade-enter-active {
-        transition: opacity .1s $fast-in-cubic-bezier,
-        transform .1s $fast-in-cubic-bezier;
+        transition: opacity .1s $fast-in-cubic-bezier, transform .1s $fast-in-cubic-bezier;
       }
       &.n-popover-fade-enter, &.n-popover-fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
         opacity: 0;
         transform: scale(.9);
       }
       &.n-popover-fade-leave-to {
-        transition: opacity .1s $slow-out-cubic-bezier,
-        transform .1s $slow-out-cubic-bezier;
+        transition: opacity .1s $slow-out-cubic-bezier, transform .1s $slow-out-cubic-bezier;
       }
     }
   }
