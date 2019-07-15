@@ -4,15 +4,17 @@
 @include b(radio) {
   position: relative;
   user-select: none;
+  display: inline-flex;
+  vertical-align: middle;
+  align-items: center;
+  margin-right: 18px;
   .n-radio__control {
     box-shadow: inset 0 0 0 1px rgba(255,255,255,0.25);
     transition: box-shadow .2s $default-cubic-bezier;
-    vertical-align: middle;
-    display: inline-block;
     height: 14px;
     width: 14px;
     border-radius: 7px;
-    margin-right: 12px;
+    margin-right: 9px;
     position: relative;
     &::before {
       content: "";
@@ -28,9 +30,11 @@
       transition: opacity .15s $slow-out-cubic-bezier, transform .15s $slow-out-cubic-bezier;
     }
     &.n-radio__control--checked {
+      box-shadow: inset 0 0 0 1px rgba(99, 226, 183, 1);
       &::before {
         opacity: 1;
         transform: scale(1);
+        
         transition: opacity .15s $fast-in-cubic-bezier, transform .15s $fast-in-cubic-bezier;
       }
     }
@@ -55,9 +59,9 @@
       box-shadow: inset 0 0 0 1px rgba(255,255,255,0.25);
       transition: box-shadow .2s $default-cubic-bezier;
       &::before {
-        transform: scale(.8);
+        transform: scale(1.5);
         transform-origin: center;
-        opacity: 0;
+        opacity: 1;
         background-color: rgba(233,233,236,0.25);
       }
       &.n-radio__control--checked {
@@ -71,4 +75,9 @@
       color: rgba(233,233,236,0.25);
     }
   }
+}
+
+@include b(radio-group) {
+  display: inline-block;
+  vertical-align: middle;
 }

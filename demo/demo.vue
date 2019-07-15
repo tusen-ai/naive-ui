@@ -191,6 +191,14 @@ body {
       margin-bottom: 12px;
       flex-wrap: wrap;
     }
+    .n-doc-section__inspect {
+      background: #5c657eff;
+      padding: 18px;
+      border-radius: 8px;
+      display: flex;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
     .n-doc-section__text-content {
       font-size: 16px;
     }

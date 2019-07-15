@@ -47,10 +47,9 @@ export default {
   },
   methods: {
     handleClick () {
+      if (this.disabled) return
       if (this.privateValue !== this.value) {
         this.$emit('input', this.value)
-      } else {
-        this.$emit('input', null)
       }
     }
   }
