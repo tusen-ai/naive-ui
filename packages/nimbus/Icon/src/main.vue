@@ -1,6 +1,6 @@
 <template>
   <i
-    :class="`n-nimbus-icon n-nimbus-${type}-icon`"
+    :class="`n-nimbus-icon n-nimbus-icon-${type}`"
     :style="styles"
     v-on="$listeners"
   >
@@ -8,16 +8,22 @@
       v-if="type==='share'"
       :color="color"
     />
+    <ban-icon
+      v-else-if="type==='ban'"
+      :color="color"
+    />
     <span v-else>icon-type is invalid</span>
   </i>
 </template>
 <script>
 import shareIcon from './icons/share'
+import banIcon from './icons/ban'
 
 export default {
   name: 'NNimbusIcon',
   components: {
-    shareIcon
+    shareIcon,
+    banIcon
   },
   props: {
     type: {
@@ -46,4 +52,13 @@ export default {
     }
   }
 }
+// <style>
+// .n-nimbus-icon svg:hover g {
+//   fill:blue;
+// }
+// .n-nimbus-icon svg g {
+//   transition: fill .3s ease-in-out;
+//   fill:red;
+// }
+// </style>
 </script>

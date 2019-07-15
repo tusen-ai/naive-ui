@@ -5,4 +5,7 @@
   text-align: center;
   display: inline-block;
   position: relative;
+  svg {
+    pointer-events: none;
+  }
 }
