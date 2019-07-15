@@ -110,15 +110,13 @@
         .n-nimbus-service-layout-drawer-item__icon {
           &::before {
             content: '';
-            width: 0;
-            height: 0;
+            width: 10px;
+            height: 10px;
             position: absolute;
-            border-style: solid;
-            border-color:#78CD68 transparent transparent transparent;
-            border-width: 7px;
-            transform: rotate(-45deg);
-            top: 23px;
-            left: 32px;
+            background-image:linear-gradient(47deg,rgba(120, 205, 104, 1) 0%,rgba(20, 166, 165, 1) 100%);
+            top: 20px;
+            left: 30px;
+            clip-path: polygon(100% 0, 100% 100%, 0% 100%);
           }
         }
         span {

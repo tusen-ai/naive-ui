@@ -23,6 +23,8 @@ import popoverDemo from './components/popoverDemo'
 import alertDemo from './components/alertDemo'
 import datePickerDemo from './components/datePickerDemo'
 import inputNumberDemo from './components/inputNumberDemo'
+import nimbusIconDemo from './components/nimbusIconDemo'
+import radioDemo from './components/radioDemo'
 
 import notificationDemo from './components/notificationDemo'
 import nimbusConfirmCardDemo from './components/nimbusConfirmCardDemo'
@@ -64,7 +66,9 @@ const routes = [
       { path: '/n-pagination', component: paginationDemo },
       { path: '/n-alert', component: alertDemo },
       { path: '/n-date-picker', component: datePickerDemo },
-      { path: '/n-input-number', component: inputNumberDemo }
+      { path: '/n-input-number', component: inputNumberDemo },
+      { path: '/n-nimbus-icon', component: nimbusIconDemo },
+      { path: '/n-radio', component: radioDemo }
     ]
   },
   {

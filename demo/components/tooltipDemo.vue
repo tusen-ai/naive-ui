@@ -20,6 +20,7 @@
                 hello tooltip
               </n-button>
             </template>
+            This is the contextual help
           </n-tooltip>
         </div>
         <div class="n-doc-section__source">

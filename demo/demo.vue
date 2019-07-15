@@ -41,6 +41,10 @@ export default {
             {
               name: 'Nimbus Confirm Card',
               path: '/n-nimbus-confirm-card'
+            },
+            {
+              name: 'Nimbus Icon',
+              path: '/n-nimbus-icon'
             }
           ]
         },
@@ -103,6 +107,10 @@ export default {
             {
               name: 'Popover',
               path: '/n-popover'
+            },
+            {
+              name: 'Radio',
+              path: '/n-radio'
             },
             {
               name: 'Select',
@@ -179,6 +187,14 @@ body {
       padding: 18px;
       border-radius: 8px;
       justify-content: center;
+      display: flex;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .n-doc-section__inspect {
+      background: #5c657eff;
+      padding: 18px;
+      border-radius: 8px;
       display: flex;
       margin-bottom: 12px;
       flex-wrap: wrap;
