@@ -14,7 +14,6 @@
           v-show="item.isChecked"
           type="md-checkmark"
           size="14"
-          style="margin-top:6px;"
         />
       </li>
     </ul>
@@ -106,10 +105,14 @@ export default {
   border-bottom-right-radius: 6px;
 }
 .n-table-filter-item li{
+  padding: 0 12px;
+  height: 27px;
+  align-items: center;
   display: flex;
   justify-content: space-between;
   min-width: 154px;
   border-radius: 0;
+  cursor: pointer;
 }
 .n-popup__content-wrapper li {
   font-size: 13px;
