@@ -1,7 +1,8 @@
-class ResizeHandler {
+class ResizeDelegate {
   constructor () {
-    console.log('ctor called once')
+    console.log('ResizeDelegate: Ctor called')
     this.handlers = []
+    this.handleResize = this.handleResize.bind(this)
   }
   handleResize (e) {
     const handlers = this.handlers
@@ -14,8 +15,8 @@ class ResizeHandler {
   unregisterHandler (handler) {
     const handlers = this.handlers
     if (handlers.length) {
-      console.log('remove resize handler from window')
-      window.removeEventListener('resize', this.handleResize.bind(this))
+      console.log('ResizeDelegate: remove resize handler from window')
+      window.removeEventListener('resize', this.handleResize)
     } else {
       // console.log(handler)
       const handlerIndex = handlers.findIndex(h => handler === h)
@@ -27,11 +28,11 @@ class ResizeHandler {
   }
   registerHandler (handler) {
     if (!this.handlers.length) {
-      console.log('add resize handler to window')
-      window.addEventListener('resize', this.handleResize.bind(this), true)
+      console.log('ResizeDelegate: add resize handler to window')
+      window.addEventListener('resize', this.handleResize, true)
     }
     this.handlers.push(handler)
   }
 }
 
-export default new ResizeHandler()
+export default new ResizeDelegate()

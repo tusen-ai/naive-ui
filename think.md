@@ -10,3 +10,5 @@ npm run dev
 我的锅，忘了为啥了。确实是同步的，是我没有考虑到v-model这东西应该用什么方法测试。
 # Vue 的深度选择器出了问题
 a >>> b 被编译成了 a > > > b
+# input 的 change 不随外界 props value 的改变改变
+其他的我还没想好

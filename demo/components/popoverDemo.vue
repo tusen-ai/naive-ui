@@ -579,7 +579,7 @@ import docCodeEditorMixin from './docCodeEditorMixin'
 export default {
   mixins: [docCodeEditorMixin],
   data () {
-    return { content: 'hello', visible: false, showPopover: false }
+    return { content: 'hello', visible: false, showPopover: false, active1: false }
   }
 }
 </script>

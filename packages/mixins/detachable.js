@@ -1,29 +1,19 @@
+/**
+ * detach $refs.contentWrapper to detachTarget
+ */
 export default {
   props: {
-    isActive: {
-      type: Boolean,
-      default: false
+    detachTarget: {
+      validator () {
+        return true
+      },
+      default: () => document.body
     }
-  },
-  data () {
-    return {
-      detachTarget: document.body
-    }
-  },
-  model: {
-    prop: 'isActive',
-    event: 'toggle'
   },
   methods: {
-    deactivate () {
-      this.$emit('toggle', false)
-    },
-    activate () {
-      this.$emit('toggle', true)
-    },
     detachContent () {
-      this.$refs.content.parentNode.removeChild(this.$refs.content)
-      this.detachTarget.append(this.$refs.content)
+      this.$refs.contentWrapper.parentNode.removeChild(this.$refs.contentWrapper)
+      this.detachTarget.append(this.$refs.contentWrapper)
     }
   },
   beforeMount () {
@@ -36,6 +26,6 @@ export default {
     this.detachContent()
   },
   beforeDestroy () {
-    this.detachTarget.removeChild(this.$refs.content)
+    this.detachTarget.removeChild(this.$refs.contentWrapper)
   }
 }

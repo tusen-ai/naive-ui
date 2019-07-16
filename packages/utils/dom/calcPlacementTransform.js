@@ -1,4 +1,4 @@
-export default function calcTransform (placement, activatorRect, popoverRect) {
+export default function calcPlacementTransform (placement, activatorRect, popoverRect) {
   let contentLeft, contentTop
   if (placement === 'top-start') {
     contentTop = activatorRect.top - popoverRect.height
