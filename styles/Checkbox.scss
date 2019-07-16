@@ -45,6 +45,7 @@
   &.n-checkbox--checked {
     .n-checkbox__checkbox {
       background-color: $checkbox-background--active;
+      box-shadow: inset 0 0 0 1px $checkbox-border-color--active;
       &::after {
         opacity: 1;
         transform: rotate(45deg) scale(1);
