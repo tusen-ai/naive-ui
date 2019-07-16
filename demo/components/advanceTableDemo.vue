@@ -664,8 +664,8 @@ export default {
     let d = new Array(20).fill(0)
     d = d.map((item, idx) => {
       return {
-        name: 'xiaobai' + idx + '218212198379821739821',
-        age: '1'
+        name: 'xiaobai' + idx,
+        age: Math.ceil((Math.random() * 20))
       }
     })
     console.log(d)
@@ -718,6 +718,10 @@ export default {
           title: 'Age',
           key: 'age',
           sortable: true,
+          order: 1,
+          sorter: (a, b) => {
+            return a.age - b.age
+          },
           filterMultiple: true,
           filterItems: [{
             label: '14',

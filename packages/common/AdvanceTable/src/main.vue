@@ -194,7 +194,10 @@ export default {
     }
   },
   data () {
-    const sortIndexs = new Array(this.columns.length).fill(0)
+    const sortIndexs = new Array(this.columns.length).fill(0).map((item, idx) => {
+      return this.columns[idx].order ? this.columns[idx].order : 0
+    })
+    console.log(sortIndexs)
     return {
       copyData: this.data.slice(0),
       sortIndexs,
@@ -436,12 +439,15 @@ export default {
           }
         } else {
           data = data.sort((a, b) => {
-            if (column.sorter) {
-              return column.sorter(a, b)
-            }
             if (type > 0) {
+              if (column.sorter) {
+                return column.sorter(a, b)
+              }
               return ('' + a[key]).localeCompare('' + b[key])
             } else {
+              if (column.sorter) {
+                return column.sorter(b, a)
+              }
               return ('' + b[key]).localeCompare('' + a[key])
             }
           })
