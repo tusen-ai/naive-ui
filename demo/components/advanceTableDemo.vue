@@ -665,7 +665,7 @@ export default {
     d = d.map((item, idx) => {
       return {
         name: 'xiaobai' + idx + '218212198379821739821',
-        age: 10 + Math.ceil(Math.random() * 10)
+        age: '1'
       }
     })
     console.log(d)
@@ -699,6 +699,20 @@ export default {
             value: 'xiaobai1'
           }],
           onFilter: 'custom'
+        },
+        {
+          title: '#',
+          render: (h, params) => {
+            return (
+              <n-button
+                style="margin:0;"
+                size="small"
+                onClick={() => this.handleClick(params)}
+              >
+                delete
+              </n-button>
+            )
+          }
         },
         {
           title: 'Age',
@@ -746,6 +760,20 @@ export default {
           title: 'Name',
           key: 'name',
           width: 300
+        },
+        {
+          title: '#',
+          render: (h, params) => {
+            return (
+              <n-button
+                style="margin:0;"
+                size="small"
+                onClick={() => this.handleClick(params)}
+              >
+                delete
+              </n-button>
+            )
+          }
         },
         {
           title: 'Age',

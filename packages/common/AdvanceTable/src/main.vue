@@ -16,6 +16,7 @@
       </div>
     </div>
     <n-table
+      ref="header"
       style="padding:0;border-bottom-left-radius:0;border-bottom-right-radius:0;"
       :style="colGroup"
     >
@@ -23,8 +24,7 @@
         <col
           v-for="(column, i) in columns"
           :key="i"
-          :style="computeCustomWidthStl(column) || headColStl"
-          :width="column.width || headColWidth"
+          :style="computeCustomWidthStl(column)"
         >
         <col
           v-if="scrollBarWidth"
@@ -77,13 +77,13 @@
       ref="tbody"
       :style="tableStl"
       style="border-top-left-radius:0;border-top-right-radius:0;"
+      @scroll.native="onBodyScrolll"
     >
       <colgroup>
         <col
           v-for="(column, i) in columns"
           :key="i"
-          :style="computeCustomWidthStl(column) || colStl"
-          :width="column.width || colWidth"
+          :style="computeCustomWidthStl(column)"
         >
       </colgroup>
       <n-tbody>
@@ -265,27 +265,29 @@ export default {
     colGroup () {
       return { width: `100%` }
     },
-    headColStl () {
-      let width = (
-        (this.wrapperWidth - this.scrollBarWidth) /
-        this.columns.length
-      ).toFixed(3)
-      return {
-        width: width + 'px',
-        'padding-right': this.scrollBarWidth + 'px',
-        minWidth: width + 'px'
-      }
-    },
-    colStl () {
-      let width = (
-        (this.wrapperWidth - this.scrollBarWidth) /
-        this.columns.length
-      ).toFixed(3)
-      return {
-        width: width + 'px',
-        minWidth: width + 'px'
-      }
-    },
+    // headColStl () {
+    //   let width = (
+    //     (this.wrapperWidth - this.scrollBarWidth) /
+    //     this.columns.length
+    //   ).toFixed(3)
+    //   return ''
+    //   return {
+    //     width: width + 'px',
+    //     'padding-right': this.scrollBarWidth + 'px',
+    //     minWidth: width + 'px'
+    //   }
+    // },
+    // colStl () {
+    //   return ''
+    //   let width = (
+    //     (this.wrapperWidth - this.scrollBarWidth) /
+    //     this.columns.length
+    //   ).toFixed(3)
+    //   return {
+    //     width: width + 'px',
+    //     minWidth: width + 'px'
+    //   }
+    // },
     headColWidth () {
       return (
         (this.wrapperWidth - this.scrollBarWidth) /
@@ -334,12 +336,16 @@ export default {
     console.log(this.wrapperWidth, this.tbodyWidth)
 
     this.init()
-    window.addEventListener('resize', this.init)
+    // window.addEventListener('resize', this.init)
   },
   beforeDestroy () {
-    window.removeEventListener('resize', this.init)
+    // window.removeEventListener('resize', this.init)
   },
   methods: {
+    onBodyScrolll (event) {
+      this.$refs.header.$el.scrollLeft = event.target.scrollLeft
+      event.stopPropagation()
+    },
     computeCustomWidthStl (column) {
       if (column.width) {
         let width = column.width
