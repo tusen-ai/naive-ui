@@ -23,8 +23,8 @@
         <col
           v-for="(column, i) in columns"
           :key="i"
-          :style="headColStl"
-          :width="headColWidth"
+          :style="computeCustomWidthStl(column) || headColStl"
+          :width="column.width || headColWidth"
         >
         <col
           v-if="scrollBarWidth"
@@ -82,8 +82,8 @@
         <col
           v-for="(column, i) in columns"
           :key="i"
-          :style="colStl"
-          :width="colWidth"
+          :style="computeCustomWidthStl(column) || colStl"
+          :width="column.width || colWidth"
         >
       </colgroup>
       <n-tbody>
@@ -340,6 +340,17 @@ export default {
     window.removeEventListener('resize', this.init)
   },
   methods: {
+    computeCustomWidthStl (column) {
+      if (column.width) {
+        let width = column.width
+        return {
+          width: width + 'px',
+          'padding-right': this.scrollBarWidth + 'px',
+          minWidth: width + 'px'
+        }
+      }
+      return null
+    },
     init () {
       this.$nextTick(() => {
         this.wrapperWidth = this.$refs.tableWrapper.offsetWidth

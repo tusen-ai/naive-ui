@@ -41,6 +41,7 @@ export default {
         {
           title: 'Name',
           key: 'name',
+          width: 300 //custom column width
         },
         {
           title: 'Age',
@@ -663,7 +664,7 @@ export default {
     let d = new Array(20).fill(0)
     d = d.map((item, idx) => {
       return {
-        name: 'xiaobai' + idx + '21983798217398212198379821739821 21983798217398212198379821739821',
+        name: 'xiaobai' + idx + '218212198379821739821',
         age: 10 + Math.ceil(Math.random() * 10)
       }
     })
@@ -743,7 +744,8 @@ export default {
       columns0: [
         {
           title: 'Name',
-          key: 'name'
+          key: 'name',
+          width: 300
         },
         {
           title: 'Age',
