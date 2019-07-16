@@ -142,11 +142,24 @@ export default {
               v-for="song in songs"
               :key="song.value"
               :value="song.value"
-              :disabled="song.label === 'Live Forever'"
+              :disabled="(song.label === 'Live Forever' && disabled1 || song.label === 'Shakermaker' && disabled2)"
             >
               {{ song.label }}
             </n-radio-button>
           </n-radio-group>
+        </div>
+        <div class="n-doc-section__view">
+          <n-checkbox
+            v-model="disabled2"
+            style="margin-right: 12px;"
+          >
+            disable Shakemaker
+          </n-checkbox>
+          <n-checkbox
+            v-model="disabled1"
+          >
+            disable Live Forever
+          </n-checkbox>
         </div>
         <pre class="n-doc-section__inspect">value: {{ JSON.stringify(value3) }}</pre>
         <div class="n-doc-section__source">
@@ -210,6 +223,8 @@ export default {
       value1: null,
       value2: null,
       value3: 'Shakermaker',
+      disabled1: false,
+      disabled2: false,
       songs: [
         {
           value: 'Rock\'n\'Roll Star',
