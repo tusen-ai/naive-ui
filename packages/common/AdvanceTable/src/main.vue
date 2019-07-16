@@ -22,7 +22,8 @@
         <col
           v-for="(column, i) in columns"
           :key="i"
-          :style="colStl"
+          :style="headColStl"
+          :width="colWidth"
         >
         <col
           v-if="scrollBarWidth"
@@ -73,6 +74,7 @@
           v-for="(column, i) in columns"
           :key="i"
           :style="colStl"
+          :width="colWidth"
         >
       </colgroup>
       <n-tbody>
@@ -101,9 +103,9 @@
       </n-tbody>
     </n-table>
     <!-- 分页 -->
-    <div class="n-advanced-table__pagination">
+    <div v-if="pagination!==false && showingData.length" class="n-advanced-table__pagination">
       <n-pagination
-        v-if="pagination!==false && showingData.length"
+
         v-model="currentPage"
         :page-count="pageCount"
       />
@@ -249,13 +251,19 @@ export default {
     headColStl () {
       return {
         width: this.tbodyWidth / this.columns.length + 'px',
-        'padding-right': this.scrollBarWidth + 'px'
+        'padding-right': this.scrollBarWidth + 'px',
+        minWidth: this.wrapperWidth / this.columns.length + 'px'
+
       }
     },
     colStl () {
       return {
-        width: this.wrapperWidth / this.columns.length + 'px'
+        width: (this.wrapperWidth - this.scrollBarWidth) / this.columns.length + 'px',
+        minWidth: (this.wrapperWidth - this.scrollBarWidth) / this.columns.length + 'px'
       }
+    },
+    colWidth () {
+      return this.tbodyWidth / this.columns.length
     }
   },
   watch: {
@@ -281,13 +289,21 @@ export default {
       this.currentPage = 1
     }
   },
+
   mounted () {
-    this.wrapper = this.$refs.tableWrapper
-    this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
-    this.tbodyWidth = this.$refs.tbody.$el.scrollWidth
-    this.scrollBarWidth = this.wrapperWidth - this.tbodyWidth
+    this.init()
+    window.addEventListener('resize', this.init)
+  },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.init)
   },
   methods: {
+    init () {
+      this.wrapper = this.$refs.tableWrapper
+      this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
+      this.tbodyWidth = this.$refs.tbody.$el.scrollWidth
+      this.scrollBarWidth = this.wrapperWidth - this.tbodyWidth
+    },
     handleSearch ({ key, word }) {
       console.log(key, word)
       this.currentSearchColumn = {
@@ -403,3 +419,6 @@ export default {
   }
 }
 </script>
+<style scoped>
+
+</style>

@@ -5,6 +5,13 @@
   width: 100%;
   
   .n-table {
+    // background-color: #2b3147;
+    table {
+      word-wrap: break-word;
+      word-break: break-all;
+      table-layout: fixed;
+      // width: auto;
+    }
     &::-webkit-scrollbar {
       width: 5px;
     }

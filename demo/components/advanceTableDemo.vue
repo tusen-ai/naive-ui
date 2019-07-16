@@ -663,7 +663,7 @@ export default {
     let d = new Array(20).fill(0)
     d = d.map((item, idx) => {
       return {
-        name: 'xiaobai' + idx,
+        name: 'xiaobai' + idx + '21983798217398212198379821739821 21983798217398212198379821739821',
         age: 10 + Math.ceil(Math.random() * 10)
       }
     })
