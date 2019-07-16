@@ -9,6 +9,7 @@
       <div class="n-advance-table__operation__search">
         <searchInput
           v-if="search"
+          style=" margin-bottom: 18px;"
           :options="search"
           @on-change="handleSearch"
         />
@@ -23,7 +24,7 @@
           v-for="(column, i) in columns"
           :key="i"
           :style="headColStl"
-          :width="colWidth"
+          :width="headColWidth"
         >
         <col
           v-if="scrollBarWidth"
@@ -42,7 +43,13 @@
               v-model="sortIndexs[i]"
               @onSortTypeChange="
                 type =>
-                  onSortTypeChange({i, sortable:column.sortable, key:column.key, type, column})
+                  onSortTypeChange({
+                    i,
+                    sortable: column.sortable,
+                    key: column.key,
+                    type,
+                    column
+                  })
               "
             />
 
@@ -53,12 +60,14 @@
               v-if="column.filterItems && !column.filterDropdown"
               :filter-items="column.filterItems"
               :filter-multiple="column.filterMultiple || false"
-              @on-filter="(value)=>onFilter(value,column.onFilter)"
+              @on-filter="value => onFilter(value, column.onFilter)"
             />
           </n-th>
           <span
             v-if="scrollBarWidth"
-            :style="'padding-left:' + scrollBarWidth + 'px;' + 'visibility:hidden;'"
+            :style="
+              'padding-left:' + scrollBarWidth + 'px;' + 'visibility:hidden;'
+            "
             rowspan="1"
           />
         </n-tr>
@@ -95,7 +104,7 @@
           </n-td>
         </n-tr>
         <div
-          v-if="showingData.length===0"
+          v-if="showingData.length === 0"
           class="n-no-data-tip"
         >
           No data
@@ -103,9 +112,11 @@
       </n-tbody>
     </n-table>
     <!-- 分页 -->
-    <div v-if="pagination!==false && showingData.length" class="n-advanced-table__pagination">
+    <div
+      v-if="pagination !== false && showingData.length"
+      class="n-advanced-table__pagination"
+    >
       <n-pagination
-
         v-model="currentPage"
         :page-count="pageCount"
       />
@@ -234,41 +245,65 @@ export default {
     },
     tableStl () {
       const stl = {
-        'overflow': 'auto',
+        overflow: 'auto',
         ...this.colGroup
       }
       if (this.maxHeight) {
-        stl.maxHeight = typeof this.maxHeight === 'number' ? this.maxHeight + 'px' : this.maxHeight
+        stl.maxHeight =
+          typeof this.maxHeight === 'number'
+            ? this.maxHeight + 'px'
+            : this.maxHeight
       }
       if (this.maxWidth) {
-        stl.maxWidth = typeof this.maxWidth === 'number' ? this.maxWidth + 'px' : this.maxWidth
+        stl.maxWidth =
+          typeof this.maxWidth === 'number'
+            ? this.maxWidth + 'px'
+            : this.maxWidth
       }
       return stl
     },
     colGroup () {
-      return { width: `${this.wrapperWidth}px` }
+      return { width: `100%` }
     },
     headColStl () {
+      let width = (
+        (this.wrapperWidth - this.scrollBarWidth) /
+        this.columns.length
+      ).toFixed(3)
       return {
-        width: this.tbodyWidth / this.columns.length + 'px',
+        width: width + 'px',
         'padding-right': this.scrollBarWidth + 'px',
-        minWidth: this.wrapperWidth / this.columns.length + 'px'
-
+        minWidth: width + 'px'
       }
     },
     colStl () {
+      let width = (
+        (this.wrapperWidth - this.scrollBarWidth) /
+        this.columns.length
+      ).toFixed(3)
       return {
-        width: (this.wrapperWidth - this.scrollBarWidth) / this.columns.length + 'px',
-        minWidth: (this.wrapperWidth - this.scrollBarWidth) / this.columns.length + 'px'
+        width: width + 'px',
+        minWidth: width + 'px'
       }
     },
+    headColWidth () {
+      return (
+        (this.wrapperWidth - this.scrollBarWidth) /
+        this.columns.length
+      ).toFixed(3)
+    },
     colWidth () {
-      return this.tbodyWidth / this.columns.length
+      return (
+        (this.wrapperWidth - this.scrollBarWidth) /
+        this.columns.length
+      ).toFixed(3)
     }
   },
   watch: {
     currentPage () {
-      if (this.pagination.custom === true) { this.useRemoteChange() }
+      if (this.pagination.custom === true) {
+        this.useRemoteChange()
+      }
       this.$emit('on-page-change', this.paginationer)
     },
     data () {
@@ -291,6 +326,13 @@ export default {
   },
 
   mounted () {
+    this.relTable = this.$refs.tbody.$el.querySelector('table')
+    this.wrapper = this.$refs.tableWrapper
+    this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
+    this.tbodyWidth = this.relTable.offsetWidth
+    this.scrollBarWidth = this.wrapperWidth - this.tbodyWidth
+    console.log(this.wrapperWidth, this.tbodyWidth)
+
     this.init()
     window.addEventListener('resize', this.init)
   },
@@ -299,20 +341,26 @@ export default {
   },
   methods: {
     init () {
-      this.wrapper = this.$refs.tableWrapper
-      this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
-      this.tbodyWidth = this.$refs.tbody.$el.scrollWidth
-      this.scrollBarWidth = this.wrapperWidth - this.tbodyWidth
+      this.$nextTick(() => {
+        this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
+
+        // console.log(this.relTable.offsetWidth)
+
+        // this.scrollBarWidth = 5
+      })
     },
     handleSearch ({ key, word }) {
       console.log(key, word)
       this.currentSearchColumn = {
-        key, word
+        key,
+        word
       }
       if (word.length === 0) {
         this.currentSearchColumn = null
       }
-      if (this.search.onSearch === 'custom') { this.useRemoteChange() }
+      if (this.search.onSearch === 'custom') {
+        this.useRemoteChange()
+      }
     },
     useRemoteChange () {
       this.onChange({
@@ -334,7 +382,7 @@ export default {
           this.filterStatus = true
         }
         if (value && filterFn !== 'custom') {
-          data = data.filter((item) => {
+          data = data.filter(item => {
             return filterFn(value, item)
           })
         }
@@ -342,7 +390,7 @@ export default {
       // compute search
       if (this.currentSearchColumn && this.search.onSearch !== 'custom') {
         const { key, word } = this.currentSearchColumn
-        data = data.filter((item) => {
+        data = data.filter(item => {
           return this.search.onSearch(key, word, item)
         })
       }
@@ -361,7 +409,9 @@ export default {
       let { i, sortable, key, type, column } = this.currentSortColumn
       // use remote sort
       if (sortable === true) {
-        if (!this.searchDataNoSort) { this.searchDataNoSort = data.slice(0) }
+        if (!this.searchDataNoSort) {
+          this.searchDataNoSort = data.slice(0)
+        }
         if (type === 0) {
           if (this.searchDataNoSort) {
             data = this.searchDataNoSort
@@ -419,6 +469,3 @@ export default {
   }
 }
 </script>
-<style scoped>
-
-</style>
