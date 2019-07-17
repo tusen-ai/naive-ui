@@ -26,7 +26,7 @@ class ScrollDelegate {
     }
     if (!this.handlerCount) {
       console.debug('[ScrollDelegate]: remove handler from window')
-      window.removeEventListener('scroll', this.handleScroll)
+      window.removeEventListener('scroll', this.handleScroll, true)
       this.handlers = new Map()
     }
   }

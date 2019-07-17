@@ -38,6 +38,13 @@ export default {
         return ['click', 'hover', 'manual'].includes(value)
       }
     },
+    /**
+     * for debug usage
+     */
+    name: {
+      type: String,
+      default: '-1'
+    },
     arrow: {
       default: true,
       type: Boolean

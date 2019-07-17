@@ -9,6 +9,7 @@
       </n-gradient-text>
     </div>
     <div class="n-doc-body">
+      <debug />
       <div class="n-doc-section">
         <div class="n-doc-section__header">
           Basic Usage
@@ -574,9 +575,13 @@
 </template>
 
 <script>
-import docCodeEditorMixin from './docCodeEditorMixin'
+import docCodeEditorMixin from '../docCodeEditorMixin'
+import debug from './debug.demo.vue'
 
 export default {
+  components: {
+    debug
+  },
   mixins: [docCodeEditorMixin],
   data () {
     return { content: 'hello', visible: false, showPopover: false, active1: false }

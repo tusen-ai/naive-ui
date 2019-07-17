@@ -1,11 +1,11 @@
-class ClickOutsideDelegate {
+class MoveOutsideDelegate {
   constructor () {
-    console.debug('[ClickOutsideDelegate]: Ctor called')
+    console.debug('[MoveOutsideDelegate]: Ctor called')
     this.handlers = new Map()
     this.handlerCount = 0
-    this.handleClickOutside = this.handleClickOutside.bind(this)
+    this.handleMoveOutside = this.handleMoveOutside.bind(this)
   }
-  handleClickOutside (e) {
+  handleMoveOutside (e) {
     const target = e.target
     for (const [handler, { els, once }] of this.handlers) {
       let existElContainTarget = false
@@ -33,15 +33,15 @@ class ClickOutsideDelegate {
     }
   }
   unregisterHandler (handler) {
-    console.debug('[ClickOutsideDelegate]: unregisterHandler')
+    console.debug('[MoveOutsideDelegate]: unregisterHandler')
     const h = this.handlers.get(handler)
     if (h) {
       this.handlers.delete(handler)
       --this.handlerCount
     }
     if (!this.handlerCount) {
-      console.debug('[ClickOutsideDelegate]: remove handler from window')
-      window.removeEventListener('click', this.handleClickOutside, true)
+      console.debug('[MoveOutsideDelegate]: remove handler from window')
+      window.removeEventListener('mousemove', this.handleMoveOutside, true)
       this.handlers = new Map()
     }
   }
@@ -50,19 +50,19 @@ class ClickOutsideDelegate {
       els = [els]
     }
     for (const el of els) {
-      if (!el) throw new Error('[ClickOutsideDelegate.registerHandler]: make sure `el` is an HTMLElement')
+      if (!el) throw new Error('[MoveOutsideDelegate.registerHandler]: make sure `el` is an HTMLElement')
     }
     if (this.handlers.get(handler)) {
-      throw new Error('[ClickOutsideDelegate.registerHandler]: don\'t register duplicate event handler')
+      this.handlers.set(handler, { els, once })
+      return
     }
     if (!this.handlerCount) {
-      console.debug('[ClickOutsideDelegate]: add handler to window')
-      window.addEventListener('click', this.handleClickOutside, true)
+      console.debug('[MoveOutsideDelegate]: add handler to window')
+      window.addEventListener('mousemove', this.handleMoveOutside, true)
     }
     ++this.handlerCount
     this.handlers.set(handler, { els, once })
-    window.x = this.handlers
   }
 }
 
-export default new ClickOutsideDelegate()
+export default new MoveOutsideDelegate()

@@ -8,7 +8,6 @@
       class="n-popover__activator"
       @click="handleActivatorClick"
       @mouseenter="handleMouseEnter"
-      @mouseleave="handleMouseLeave"
     >
       <slot name="activator" />
     </div>
@@ -38,7 +37,6 @@
               'n-popover__content--without-arrow': !arrow
             }"
             @mouseenter="handleMouseEnter"
-            @mouseleave="handleMouseLeave"
           >
             <div
               v-if="arrow"
@@ -57,6 +55,7 @@ import detachable from '../../../mixins/detachable'
 import toggleable from '../../../mixins/toggleable'
 import placeable from '../../../mixins/placeable'
 import clickoutsideDelegate from '../../../utils/clickoutsideDelegate'
+import moveoutsideDelegate from '../../../utils/moveoutsideDelegate'
 
 export default {
   // name: 'NPopover',
@@ -75,6 +74,13 @@ export default {
     arrow: {
       default: true,
       type: Boolean
+    },
+    /**
+     * for debug usage
+     */
+    name: {
+      type: String,
+      default: '-1'
     }
   },
   data: function () {
@@ -82,33 +88,84 @@ export default {
       vanishTimerId: null
     }
   },
+  created () {
+    this.handleMoveOutsidePopover = this.handleMoveOutsidePopover.bind(this)
+  },
   beforeDestroy () {
     clickoutsideDelegate.unregisterHandler(this.handleClickOutsidePopover)
+    moveoutsideDelegate.unregisterHandler(this.handleMoveOutsidePopover)
   },
   methods: {
     handleMouseEnter () {
       if (this.trigger === 'hover') {
+        // console.log('move inside:', this.name)
         if (this.vanishTimerId) {
           window.clearTimeout(this.vanishTimerId)
           this.vanishTimerId = null
         }
         this.activate()
+        /**
+         * use $nextTick to
+         * make sure this.$refs.popoverBody is mount
+         * and make sure add mousemove handler on window after removeEventListener
+         * which is possible to happen if there is no registered handler
+         */
+        this.$nextTick().then(() => {
+          if (!this.$refs.popoverBody) {
+            throw new Error('popoverBody is not mounted, this is a bug of repo maintainer')
+          }
+          moveoutsideDelegate.registerHandler([
+            () => this.$refs.activator,
+            this.$refs.popoverBody
+          ], this.handleMoveOutsidePopover)
+        })
       }
     },
-    handleMouseLeave () {
-      if (this.trigger === 'hover') {
-        if (this.vanishTimerId) {
-          window.clearTimeout(this.vanishTimerId)
-          this.vanishTimerId = null
-        }
-        this.vanishTimerId = window.setTimeout(() => {
-          this.deactivate()
-        }, this.duration)
-      }
-    },
+    // handleMouseOut (e) {
+    //   if (this.trigger === 'hover') {
+    //     if (this.vanishTimerId) {
+    //       window.clearTimeout(this.vanishTimerId)
+    //       this.vanishTimerId = null
+    //     }
+    //     if (!this.$refs.activator || !this.$refs.popoverBody) {
+    //       this.deactivate()
+    //       return
+    //     }
+    //     if (!this.$refs.activator.contains(e.relatedTarget) && !this.$refs.popoverBody.contains(e.relatedTarget)) {
+    //       this.vanishTimerId = window.setTimeout(() => {
+    //         this.deactivate()
+    //       }, this.duration)
+    //     }
+    //   }
+    // },
+    // There are some bugs here, for mouseleave won't be fired some time, leave
+    // it for later to discover.
+    // handleMouseLeave () {
+    //   if (this.trigger === 'hover') {
+    //     if (this.vanishTimerId) {
+    //       window.clearTimeout(this.vanishTimerId)
+    //       this.vanishTimerId = null
+    //     }
+    //     this.vanishTimerId = window.setTimeout(() => {
+    //       this.deactivate()
+    //     }, this.duration)
+    //   }
+    // },
     handleClickOutsidePopover (e) {
       // console.log('click outside')
       this.deactivate()
+      clickoutsideDelegate.unregisterHandler(this.handleClickOutsidePopover)
+    },
+    handleMoveOutsidePopover (e) {
+      // console.log('move out side:', this.name)
+      if (this.vanishTimerId) {
+        window.clearTimeout(this.vanishTimerId)
+        this.vanishTimerId = null
+      }
+      // moveoutsideDelegate.unregisterHandler(this.handleMoveOutsidePopover)
+      this.vanishTimerId = window.setTimeout(() => {
+        this.deactivate()
+      }, this.duration)
     },
     handleActivatorClick () {
       if (this.trigger === 'click') {

@@ -16,7 +16,7 @@ class ResizeDelegate {
     const handlers = this.handlers
     if (handlers.length) {
       console.debug('[ResizeDelegate]: remove resize handler from window')
-      window.removeEventListener('resize', this.handleResize)
+      window.removeEventListener('resize', this.handleResize, true)
     } else {
       // console.debug(handler)
       const handlerIndex = handlers.findIndex(h => handler === h)
