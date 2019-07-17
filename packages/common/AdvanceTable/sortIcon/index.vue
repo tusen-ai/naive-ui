@@ -46,6 +46,9 @@ export default {
     }
   },
   mounted () {
+    if (this.value !== 0) {
+      this.setSort(this.value)
+    }
     // this.setSort(this.value)
     // console.log('value', this.value, this.upOpacity, this.downOpacity)
   },
@@ -70,9 +73,12 @@ export default {
       this.$emit('input', v)
     },
     setSort (val) {
-      let self = this
       this.$emit('onSortTypeChange', this.value)
 
+      this.changeOpacity(val)
+    },
+    changeOpacity (val) {
+      const self = this
       switch (val) {
         case 0:
           self.upOpacity = 0.3

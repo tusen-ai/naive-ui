@@ -18,13 +18,22 @@
           <n-advance-table
             :columns="columns0"
             :data="data"
-          />
+          >
+            <template #table-operation>
+              <n-button>custom operation by v-slot:table-operation</n-button>
+            </template>
+          </n-advance-table>
         </div>
         <div class="n-doc-section__source">
-          <textarea><n-advance-table
-  :columns="columns"
+          <textarea>
+<n-advance-table
+  :columns="columns0"
   :data="data"
-/>
+>
+  <template #table-operation>
+    <n-button>custom operation by v-slot:table-operation</n-button>
+  </template>
+</n-advance-table>
 //
 <script>
 export default {
@@ -41,6 +50,7 @@ export default {
         {
           title: 'Name',
           key: 'name',
+          width: 300 //custom column width
         },
         {
           title: 'Age',
@@ -123,6 +133,11 @@ export default {
           title: 'Age',
           key: 'age',
           sortable: true,
+          order: 1, // 默认升序
+          sorter: (a, b) => {
+            // soter 方法替换默认的sorter函数
+            return a.age - b.age
+          },
           filterMultiple: true, //多选 onFilter接受参数为数组
           filterItems: [{
             label: '14',
@@ -664,7 +679,7 @@ export default {
     d = d.map((item, idx) => {
       return {
         name: 'xiaobai' + idx,
-        age: 10 + Math.ceil(Math.random() * 10)
+        age: Math.ceil((Math.random() * 20))
       }
     })
     console.log(d)
@@ -700,9 +715,27 @@ export default {
           onFilter: 'custom'
         },
         {
+          title: '#',
+          render: (h, params) => {
+            return (
+              <n-button
+                style="margin:0;"
+                size="small"
+                onClick={() => this.handleClick(params)}
+              >
+                delete
+              </n-button>
+            )
+          }
+        },
+        {
           title: 'Age',
           key: 'age',
           sortable: true,
+          order: 1,
+          sorter: (a, b) => {
+            return a.age - b.age
+          },
           filterMultiple: true,
           filterItems: [{
             label: '14',
@@ -743,7 +776,22 @@ export default {
       columns0: [
         {
           title: 'Name',
-          key: 'name'
+          key: 'name',
+          width: 300
+        },
+        {
+          title: '#',
+          render: (h, params) => {
+            return (
+              <n-button
+                style="margin:0;"
+                size="small"
+                onClick={() => this.handleClick(params)}
+              >
+                delete
+              </n-button>
+            )
+          }
         },
         {
           title: 'Age',
