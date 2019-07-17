@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import docCodeEditorMixin from '../docCodeEditorMixin'
 import basicUsage from './basigUsage.demo.vue'
 import multipleSelect from './multipleSelect.demo.vue'
 import verboseTransition from './verboseTransition.demo.vue'
@@ -39,7 +38,6 @@ export default {
     changeEventEmitItem,
     search
   },
-  mixins: [docCodeEditorMixin],
   data () {
     return {
       selectedValue: null,

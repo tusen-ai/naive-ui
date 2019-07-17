@@ -92,7 +92,7 @@
 </template>
 
 <script>
-import docCodeEditorMixin from './docCodeEditorMixin'
+import docCodeEditorMixin from '../docCodeEditorMixin'
 export default {
   mixins: [docCodeEditorMixin],
   data () {

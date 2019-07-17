@@ -2,13 +2,13 @@
   <div
     ref="self"
     class="n-popover"
-    @mouseenter="handleMouseEnter"
-    @mouseleave="handleMouseLeave"
   >
     <div
       ref="activator"
       class="n-popover__activator"
       @click="handleActivatorClick"
+      @mouseenter="handleMouseEnter"
+      @mouseleave="handleMouseLeave"
     >
       <slot name="activator" />
     </div>
@@ -19,7 +19,7 @@
       <!--
         ref="content" should exist since if not, I can't detach the element
         because it doesn't exist. Maybe there are some other solutions, such
-        as detach when active. However it also have some good points such as
+        as detach when active. However it also has some good points such as
         make it easy to positioning. So I just leave it for later solving.
       -->
       <div
@@ -97,13 +97,17 @@ export default {
     },
     handleMouseLeave () {
       if (this.trigger === 'hover') {
+        if (this.vanishTimerId) {
+          window.clearTimeout(this.vanishTimerId)
+          this.vanishTimerId = null
+        }
         this.vanishTimerId = window.setTimeout(() => {
           this.deactivate()
         }, this.duration)
       }
     },
     handleClickOutsidePopover (e) {
-      console.log('click outside')
+      // console.log('click outside')
       this.deactivate()
     },
     handleActivatorClick () {

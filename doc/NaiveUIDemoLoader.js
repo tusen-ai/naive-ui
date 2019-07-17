@@ -1,5 +1,5 @@
-const { getOptions } = require('loader-utils')
-const validateOptions = require('schema-utils')
+// const { getOptions } = require('loader-utils')
+// const validateOptions = require('schema-utils')
 const prettier = require('prettier')
 
 module.exports = function (content) {

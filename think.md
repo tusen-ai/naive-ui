@@ -8,3 +8,9 @@ a >>> b 被编译成了 a > > > b
 其他的我还没想好
 # 2019.7.17 There may be a bug of chrome
 在一个 single filterable select 中，会出现一个 bug...，这个 bug 会让溢出屏幕的 item 不再显示。感觉可能是 Chrome 为了性能优化没有渲染一些在屏幕外面的东西，暂时通过 translateZ(0) 解决了。
+# 2019.7.17 Popover
+popover 的 hover 有问题，哎...一大堆东西闪来闪去就可能 mouseleave 没触发就一直留在那了
+## TODO
+issue fix, add delay prop
+add trigger to tooltip
+outside click delegate select
