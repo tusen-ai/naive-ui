@@ -27,6 +27,12 @@ export default {
         ].includes(value)
       },
       default: 'bottom'
+    },
+    widthMode: {
+      validator (value) {
+        return ['self', 'activator'].includes(value)
+      },
+      default: 'self'
     }
   },
   watch: {
@@ -54,20 +60,23 @@ export default {
     updatePosition () {
       // console.log('scroll')
       if (!this.active) return
-      this.activatorBoundingClientRect = this.$refs.activator.getBoundingClientRect()
+      const activatorBoundingClientRect = this.$refs.activator.getBoundingClientRect()
       // console.log(this.$refs.popoverBody)
       // debugger
-      this.contentBoundingClientRect = this.$refs.content.getBoundingClientRect()
-      // console.log(this.contentBoundingClientRect)
+      const contentBoundingClientRect = this.$refs.content.getBoundingClientRect()
+      // console.log(contentBoundingClientRect)
       // debugger
-      // console.log('scroll', this.activatorBoundingClientRect, this.contentBoundingClientRect)
-      this.$refs.content.style = calcPlacementTransfrom(this.placement, this.activatorBoundingClientRect, this.contentBoundingClientRect)
+      // console.log('scroll', activatorBoundingClientRect, contentBoundingClientRect)
+      this.$refs.content.style = calcPlacementTransfrom(this.placement, activatorBoundingClientRect, contentBoundingClientRect)
+      if (this.widthMode === 'activator' && this.$refs.contentInner) {
+        this.$refs.contentInner.style.width = activatorBoundingClientRect.width + 'px'
+      }
     },
     registerResizeListener () {
       resizeDelegate.registerHandler(this.updatePosition)
     },
     registerScrollListeners () {
-      let currentElement = this.$refs.self
+      let currentElement = this.$el
       while (true) {
         currentElement = getScrollParent(currentElement)
         this.scrollListeners.push([currentElement, this.updatePosition])

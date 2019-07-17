@@ -8,6 +8,7 @@
     @click="toggleMenu"
   >
     <div
+      ref="activator"
       class="n-select-link"
       :class="{
         'n-select-link--active': active
@@ -24,55 +25,72 @@
           :readonly="filterable ? false : 'readonly'"
         >
       </div>
-      <transition name="n-select-menu--transition">
-        <div
-          v-if="active"
-          class="n-select-menu"
-          @mouseleave="hideLightBar"
-        >
-          <transition name="n-select-menu__light-bar--transition">
+    </div>
+    <div
+      ref="contentWrapper"
+      class="n-select-menu__content-wrapper"
+    >
+      <div
+        ref="content"
+        class="n-select-menu__content"
+      >
+        <transition name="n-select-menu--transition">
+          <div
+            v-if="active"
+            ref="contentInner"
+            class="n-select-menu"
+            :class="{[`n-select-menu--${size}-size`]: true}"
+            @mouseleave="hideLightBar"
+          >
+            <transition name="n-select-menu__light-bar--transition">
+              <div
+                v-if="showLightBar"
+                class="n-select-menu__light-bar"
+                :style="{ top: `${lightBarTop}px` }"
+              />
+            </transition>
             <div
-              v-if="showLightBar"
-              class="n-select-menu__light-bar"
-              :style="{ top: `${lightBarTop}px` }"
-            />
-          </transition>
-          <div
-            v-for="item in filteredItems"
-            :key="item.value"
-            class="n-select-menu__item"
-            :class="{
-              'is-selected':
-                selectedValue ===
-                item.value
-            }"
-            @click.stop="toggleItemInSingleSelect(item)"
-            @mouseenter="showLightBarTop"
-          >
-            {{ item.label }}
+              v-for="item in filteredItems"
+              :key="item.value"
+              class="n-select-menu__item"
+              :class="{
+                'n-select-menu__item--selected':
+                  selectedValue ===
+                  item.value
+              }"
+              @click.stop="toggleItemInSingleSelect(item)"
+              @mouseenter="showLightBarTop"
+            >
+              {{ item.label }}
+            </div>
+            <div
+              v-if="label.length && !filteredItems.length"
+              class="n-select-menu__item n-select-menu__item--not-found"
+            >
+              {{
+                /**
+                 * This method to activate hideLightBar is ridiculous, however using
+                 * event handler still has some problem.
+                 */
+                hideLightBar()
+              }}
+              none result matched
+            </div>
           </div>
-          <div
-            v-if="label.length && !filteredItems.length"
-            class="n-select-menu__item n-select-menu__item--not-found"
-          >
-            {{
-              /**
-               * This method to activate hideLightBar is ridiculous, however using
-               * event handler still has some problem.
-               */
-              hideLightBar()
-            }}
-            none result matched
-          </div>
-        </div>
-      </transition>
+        </transition>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import detachable from '../../../mixins/detachable'
+import placeable from '../../../mixins/placeable'
+import toggleable from '../../../mixins/toggleable'
+
 export default {
   name: 'NSingleSelect',
+  mixins: [detachable, toggleable, placeable],
   model: {
     prop: 'selectedValue',
     event: 'input'
@@ -109,7 +127,6 @@ export default {
   },
   data () {
     return {
-      active: false,
       lightBarTop: null,
       showLightBar: false,
       label: '',
@@ -210,14 +227,18 @@ export default {
     },
     handleClickOutsideMenu (e) {
       if (!this.$refs.select.contains(e.target)) {
-        this.active = false
+        this.deactivate()
       }
     },
     closeMenu () {
-      this.active = false
+      this.deactivate()
     },
     toggleMenu () {
-      this.active = !this.active
+      if (this.active) {
+        this.deactivate()
+      } else {
+        this.activate()
+      }
     },
     toggleItemInSingleSelect (item) {
       this.label = item.label

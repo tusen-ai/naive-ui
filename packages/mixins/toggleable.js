@@ -4,7 +4,7 @@
 export default {
   model: {
     prop: 'active',
-    event: 'input'
+    event: 'setactive'
   },
   props: {
     active: {
@@ -14,12 +14,16 @@ export default {
   },
   methods: {
     deactivate () {
-      console.log('deactivate')
-      this.$emit('input', false)
+      // console.log('deactivate')
+      this.$emit('setactive', false)
     },
     activate () {
-      console.log('activate')
-      this.$emit('input', true)
+      // console.log('activate')
+      this.$emit('setactive', true)
+    },
+    toggle () {
+      if (this.active) this.deactivate()
+      else this.activate()
     }
   }
 }

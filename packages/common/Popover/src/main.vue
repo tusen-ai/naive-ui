@@ -48,6 +48,7 @@ export default {
   },
   methods: {
     handleInput (active) {
+      this.$emit('change', active)
       this.active = active
     }
   },
