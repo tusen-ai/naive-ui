@@ -18,13 +18,22 @@
           <n-advance-table
             :columns="columns0"
             :data="data"
-          />
+          >
+            <template #table-operation>
+              <n-button>custom operation by v-slot:table-operation</n-button>
+            </template>
+          </n-advance-table>
         </div>
         <div class="n-doc-section__source">
-          <textarea><n-advance-table
-  :columns="columns"
+          <textarea>
+<n-advance-table
+  :columns="columns0"
   :data="data"
-/>
+>
+  <template #table-operation>
+    <n-button>custom operation by v-slot:table-operation</n-button>
+  </template>
+</n-advance-table>
 //
 <script>
 export default {

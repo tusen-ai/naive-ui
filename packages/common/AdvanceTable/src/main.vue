@@ -5,10 +5,14 @@
   >
     <div class="n-advance-table__operation">
       <section class="n-advance-table__operation__bacth" />
-      <div class="n-advance-table__operation__custom" />
-      <div class="n-advance-table__operation__search">
+      <div class="n-advance-table__operation__custom">
+        <slot name="table-operation" />
+      </div>
+      <div
+        v-if="search"
+        class="n-advance-table__operation__search"
+      >
         <searchInput
-          v-if="search"
           style=" margin-bottom: 18px;"
           :options="search"
           @on-change="handleSearch"
