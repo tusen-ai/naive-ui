@@ -5,7 +5,15 @@ import getScrollParent from '../utils/dom/getScrollParent'
 import calcPlacementTransfrom from '../utils/dom/calcPlacementTransform'
 
 /**
- * Make $refs.content trace $refs.activator
+ * Make $refs.content trace $refs.activator, set $refs.contentInner width by the way
+ *
+ * Dependency:
+ * $refs.activator
+ * $refs.content
+ * $refs.contentInner(optional)
+ *
+ * @prop {string} placement determine where should $refs.content be put
+ * @prop {string} widthMode determine how width is $refs.contentInner
  */
 export default {
   props: {
@@ -37,8 +45,9 @@ export default {
   },
   watch: {
     active (newValue) {
-      console.log(newValue)
-      this.$nextTick().then(this.updatePosition)
+      if (newValue) {
+        this.$nextTick().then(this.updatePosition)
+      }
     }
   },
   mounted () {

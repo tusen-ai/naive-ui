@@ -3,9 +3,16 @@ import Popover from './RawPopover'
 
 const DEFAULT_DURATION = 200
 
+/**
+ * When using `manual` trigger, using default param of v-model(value prop, input event)
+ */
 export default {
   name: 'NPopover',
   props: {
+    placement: {
+      type: String,
+      default: 'bottom'
+    },
     value: {
       type: Boolean,
       default: false
@@ -47,14 +54,14 @@ export default {
     }
   },
   methods: {
-    handleInput (active) {
+    handleSetActive (active) {
       this.$emit('change', active)
       this.active = active
     }
   },
   render (h) {
     const on = {
-      input: this.handleInput.bind(this)
+      setactive: this.handleSetActive.bind(this)
     }
     return h(Popover, {
       props: {

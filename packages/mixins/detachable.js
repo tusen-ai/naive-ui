@@ -1,5 +1,10 @@
 /**
- * detach $refs.contentWrapper to detachTarget
+ * Detach $refs.contentWrapper to detachTarget
+ *
+ * Dependency:
+ * $refs.contentWrapper
+ *
+ * @prop {HTMLElement} detachTarget determine where should $refs.contentWrapper to be detached
  */
 export default {
   props: {

@@ -219,6 +219,7 @@
 
 .n-select-menu__content-wrapper {
   @include detachedContentWrapper;
+  transform: translateZ(0);
   .n-select-menu__content {
     @include detachedContent;
     margin-top: 4px;

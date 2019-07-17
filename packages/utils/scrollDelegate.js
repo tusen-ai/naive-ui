@@ -1,6 +1,6 @@
 class ScrollDelegate {
   constructor () {
-    console.log('ScrollDelegate: Ctor called')
+    console.debug('[ScrollDelegate]: Ctor called')
     this.handlers = new Map()
     this.handlerCount = 0
     this.handleScroll = this.handleScroll.bind(this)
@@ -16,23 +16,23 @@ class ScrollDelegate {
   unregisterHandler (el, handler) {
     const handlers = this.handlers.get(el)
     if (handlers) {
-      // console.log(handler)
+      // console.debug(handler)
       const handlerIndex = handlers.findIndex(h => handler === h)
-      // console.log(handlerIndex)
+      // console.debug(handlerIndex)
       if (~handlerIndex) {
         handlers.splice(handlerIndex, 1)
         --this.handlerCount
       }
     }
     if (!this.handlerCount) {
-      console.log('ScrollDelegate: remove handler from window')
+      console.debug('[ScrollDelegate]: remove handler from window')
       window.removeEventListener('scroll', this.handleScroll)
       this.handlers = new Map()
     }
   }
   registerHandler (el, handler) {
     if (!this.handlerCount) {
-      console.log('ScrollDelegate: add handler to window')
+      console.debug('[ScrollDelegate]: add handler to window')
       window.addEventListener('scroll', this.handleScroll, true)
     }
     ++this.handlerCount

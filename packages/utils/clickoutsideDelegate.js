@@ -1,6 +1,6 @@
 class ClickOutsideDelegate {
   constructor () {
-    console.log('ClickOutsideDelegate: Ctor called')
+    console.debug('[ClickOutsideDelegate]: Ctor called')
     this.handlers = new Map()
     this.handlerCount = 0
     this.handleClickOutside = this.handleClickOutside.bind(this)
@@ -33,14 +33,14 @@ class ClickOutsideDelegate {
     }
   }
   unregisterHandler (handler) {
-    console.log('[ClickOutsideDelegate.unregisterHandler]')
+    console.debug('[ClickOutsideDelegate]: unregisterHandler')
     const h = this.handlers.get(handler)
     if (h) {
       this.handlers.delete(h)
       --this.handlerCount
     }
     if (!this.handlerCount) {
-      console.log('ClickOutsideDelegate: remove handler from window')
+      console.debug('[ClickOutsideDelegate]: remove handler from window')
       window.removeEventListener('click', this.handleClickOutside.bind(this))
       this.handlers = new Map()
     }
@@ -50,13 +50,13 @@ class ClickOutsideDelegate {
       els = [els]
     }
     for (const el of els) {
-      if (!el) throw new Error('[ClickOutsideDelegate.registerHandler] make sure `el` is an HTMLElement')
+      if (!el) throw new Error('[ClickOutsideDelegate.registerHandler]: make sure `el` is an HTMLElement')
     }
     if (this.handlers.get(handler)) {
-      throw new Error('[ClickOutsideDelegate.registerHandler] don\'t register duplicate event handler')
+      throw new Error('[ClickOutsideDelegate.registerHandler]: don\'t register duplicate event handler')
     }
     if (!this.handlerCount) {
-      console.log('ClickOutsideDelegate: add handler to window')
+      console.debug('[ClickOutsideDelegate]: add handler to window')
       window.addEventListener('click', this.handleClickOutside.bind(this), true)
     }
     ++this.handlerCount
