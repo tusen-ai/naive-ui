@@ -133,6 +133,11 @@ export default {
           title: 'Age',
           key: 'age',
           sortable: true,
+          order: 1, // 默认升序
+          sorter: (a, b) => {
+            // soter 方法替换默认的sorter函数
+            return a.age - b.age
+          },
           filterMultiple: true, //多选 onFilter接受参数为数组
           filterItems: [{
             label: '14',
