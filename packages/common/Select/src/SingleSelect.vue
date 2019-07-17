@@ -208,11 +208,11 @@ export default {
         return false
       }
     },
-    emitChangeEvent (item) {
+    emitChangeEvent (item, isSelected) {
       if (this.emitItem) {
-        this.$emit('change', item)
+        this.$emit('change', item, isSelected)
       } else {
-        this.$emit('change', item.value)
+        this.$emit('change', item.value, isSelected)
       }
     },
     showLightBarTop (e) {
@@ -243,7 +243,7 @@ export default {
     toggleItemInSingleSelect (item) {
       this.label = item.label
       this.$emit('input', item.value)
-      this.emitChangeEvent(item)
+      this.emitChangeEvent(item, true)
       this.closeMenu()
     }
   }

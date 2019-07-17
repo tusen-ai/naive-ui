@@ -27,6 +27,7 @@
       transform-origin: 25% 75%;
     }
     .n-select-link__placeholder {
+      pointer-events: none;
       position: absolute;
       left: 14px;
       top: 0;

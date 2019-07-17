@@ -36,7 +36,14 @@ const webpackConfig = {
   module: {
     rules: [
       {
-        test: /\.vue$/,
+        test: /\.demo\.vue$/,
+        loader: ['vue-loader', path.resolve(__dirname, '../doc/NaiveUIDemoLoader.js')]
+      },
+      {
+        test: {
+          test: /\.vue$/,
+          exclude: /\.demo\.vue$/
+        },
         loader: 'vue-loader',
         options: {
           compilerOptions: {

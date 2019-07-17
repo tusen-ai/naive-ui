@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "0.2.18",
+  "version": "0.2.20",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,8 @@
     "test": "cross-env NODE_ENV=development BABEL_ENV=test karma start test/unit/karma.conf.js",
     "test-cov": "cross-env NODE_ENV=development BABEL_ENV=test karma start test/unit/karma.conf.js && http-server test/unit/coverage",
     "test-release": "cross-env NODE_ENV=production webpack-dev-server --config build/webpack.release.js",
-    "release-doc": "cross-env NODE_ENV=development && rm -rf doc/dist && node doc/changeDemoVersion.js && node doc/injectReadme.js && webpack --config build/webpack.doc.js && sudo bash doc/deploy-doc.sh"
+    "release-doc": "cross-env NODE_ENV=development && rm -rf doc/dist && node doc/changeDemoVersion.js && node doc/injectReadme.js && webpack --config build/webpack.doc.js && sudo bash doc/deploy-doc.sh",
+    "build-doc": "cross-env NODE_ENV=development && rm -rf doc/dist && node doc/changeDemoVersion.js && node doc/injectReadme.js && webpack --config build/webpack.doc.js"
   },
   "author": "lecong.zhang",
   "license": "ISC",
@@ -27,6 +28,7 @@
     "@vue/babel-preset-app": "^3.8.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "@vue/test-utils": "^1.0.0-beta.29",
+    "angular-html-parser": "^1.2.0",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "babel-loader": "^8.0.6",
     "babel-plugin-istanbul": "^5.1.4",
@@ -60,11 +62,15 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.32",
     "karma-webpack": "^3.0.5",
+    "loader-utils": "^1.2.3",
     "lodash": "^4.17.11",
+    "memory-fs": "^0.4.1",
     "mocha": "^6.1.4",
+    "prettier": "^1.18.2",
     "prettier-eslint": "^9.0.0",
     "progress-bar-webpack-plugin": "^1.12.1",
     "regenerator-runtime": "^0.13.2",
+    "schema-utils": "^1.0.0",
     "showdown": "^1.9.0",
     "sinon": "^7.3.2",
     "style-loader": "^0.23.1",

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import '../styles/index.scss'
 import 'codemirror/lib/codemirror.css'
 import NaiveUI from '../index'
+import SourceBlock from './SourceBlock'
 
 import nimbusServiceLayoutDemo from './components/nimbusServiceLayoutDemo'
 import homeDemo from './components/homeDemo'
@@ -34,6 +35,8 @@ import demo from './demo'
 
 Vue.use(NaiveUI)
 Vue.use(VueRouter)
+
+Vue.component(SourceBlock.name, SourceBlock)
 
 const routes = [
   {

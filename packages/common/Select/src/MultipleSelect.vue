@@ -16,14 +16,6 @@
       }"
     >
       <div
-        class="n-select-link__placeholder"
-        :class="{
-          'n-select-link__placeholder--verbose-transition': verboseTransition
-        }"
-      >
-        {{ placeholder }}
-      </div>
-      <div
         class="n-select-link__tags"
         :class="{
           'n-select-link__tags--selected': selected
@@ -68,6 +60,14 @@
             />
           </div>
         </div>
+      </div>
+      <div
+        class="n-select-link__placeholder"
+        :class="{
+          'n-select-link__placeholder--verbose-transition': verboseTransition
+        }"
+      >
+        {{ placeholder }}
       </div>
     </div>
     <div
@@ -236,11 +236,11 @@ export default {
         return false
       }
     },
-    emitChangeEvent (item) {
+    emitChangeEvent (item, isSelected) {
       if (this.emitItem) {
-        this.$emit('change', item)
+        this.$emit('change', item, isSelected)
       } else {
-        this.$emit('change', item.value)
+        this.$emit('change', item.value, isSelected)
       }
     },
     showLightBarTop (e) {
@@ -265,12 +265,6 @@ export default {
     toggleMenu () {
       this.toggle()
     },
-    toggleItemInSingleSelect (item) {
-      this.label = item.label
-      this.$emit('input', item.value)
-      this.emitChangeEvent(item)
-      this.closeMenu()
-    },
     toggleItemInMultipleSelect (item) {
       let newSelectedValues = []
       if (Array.isArray(this.selectedValue)) {
@@ -280,11 +274,12 @@ export default {
       const index = newSelectedValues.findIndex(value => value === item.value)
       if (1 + index) {
         newSelectedValues.splice(index, 1)
+        this.emitChangeEvent(item, false)
       } else {
         newSelectedValues.push(item.value)
+        this.emitChangeEvent(item, true)
       }
       this.$emit('input', newSelectedValues)
-      this.emitChangeEvent(item)
     }
   }
 }
