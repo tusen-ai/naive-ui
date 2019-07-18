@@ -16,12 +16,12 @@
       <trigger />
       <event />
       <placement />
+      <raw />
     </div>
   </div>
 </template>
 
 <script>
-import docCodeEditorMixin from '../docCodeEditorMixin'
 // import debug from './debug.demo.vue'
 import basicUsage from './basicUsage.demo.vue'
 import noArrow from './noArrow.demo.vue'
@@ -29,6 +29,7 @@ import trigger from './trigger.demo.vue'
 import placement from './placement.demo.vue'
 import event from './event.demo'
 import delay from './delay.demo'
+import raw from './raw.demo.vue'
 
 export default {
   components: {
@@ -38,9 +39,9 @@ export default {
     trigger,
     placement,
     event,
-    delay
+    delay,
+    raw
   },
-  mixins: [docCodeEditorMixin],
   data () {
     return { content: 'hello', visible: false, showPopover: false, active1: false }
   }

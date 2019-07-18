@@ -8,7 +8,7 @@
       style="flex-wrap: nowrap;"
     >
       <!--EXAMPLE_START-->
-      <n-popover
+      <n-tooltip
         placement="bottom"
         :width="200"
         trigger="hover"
@@ -24,8 +24,8 @@
         <span>
           I wish they all could be California girls
         </span>
-      </n-popover>
-      <n-popover
+      </n-tooltip>
+      <n-tooltip
         placement="bottom"
         :width="200"
         trigger="click"
@@ -43,8 +43,8 @@
         <span>
           I wish they all could be California girls
         </span>
-      </n-popover>
-      <n-popover
+      </n-tooltip>
+      <n-tooltip
         v-model="showPopover"
         placement="bottom"
         :width="200"
@@ -63,7 +63,7 @@
         <span>
           I wish they all could be California girls
         </span>
-      </n-popover>
+      </n-tooltip>
       <!--EXAMPLE_END-->
     </div>
     <n-doc-source-block>
@@ -81,10 +81,10 @@ export default {
   },
   methods: {
     handleShow () {
-      this.$NMessage.success('show popover')
+      this.$NMessage.success('show tooltip')
     },
     handleHide () {
-      this.$NMessage.success('hide popover')
+      this.$NMessage.success('hide tooltip')
     }
   }
 }

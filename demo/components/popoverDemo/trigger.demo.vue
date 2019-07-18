@@ -10,7 +10,6 @@
       <!--EXAMPLE_START-->
       <n-popover
         placement="bottom"
-        :width="200"
         trigger="hover"
         style="margin-right: 12px;"
       >
@@ -25,7 +24,6 @@
       </n-popover>
       <n-popover
         placement="bottom"
-        :width="200"
         trigger="click"
         style="margin-right: 12px;"
       >
@@ -43,7 +41,6 @@
       <n-popover
         v-model="showPopover"
         placement="bottom"
-        :width="200"
         trigger="manual"
       >
         <template v-slot:activator>
@@ -60,7 +57,7 @@
       </n-popover>
       <!--EXAMPLE_END-->
     </div>
-    <pre class="n-doc-section__inspect">(trigger="menu")showPopover: {{ JSON.stringify(showPopover) }}</pre>
+    <pre class="n-doc-section__inspect">(trigger="manual")showPopover: {{ JSON.stringify(showPopover) }}</pre>
     <n-doc-source-block>
       <!--SOURCE-->
     </n-doc-source-block>

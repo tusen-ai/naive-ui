@@ -43,16 +43,13 @@ export default {
         return ['click', 'hover', 'manual'].includes(value)
       }
     },
-    /**
-     * for debug usage
-     */
-    // name: {
-    //   type: String,
-    //   default: '-1'
-    // },
     arrow: {
       default: true,
       type: Boolean
+    },
+    raw: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -68,12 +65,25 @@ export default {
       return this.delay === null ? null : Number(this.delay)
     }
   },
-  methods: {
-    handleSetActive (active) {
-      if (active) {
+  watch: {
+    value (newValue) {
+      if (newValue) {
         this.$emit('show')
       } else {
         this.$emit('hide')
+      }
+    }
+  },
+  methods: {
+    handleSetActive (active) {
+      if (active) {
+        if (!this.active) {
+          this.$emit('show')
+        }
+      } else {
+        if (this.active) {
+          this.$emit('hide')
+        }
       }
       this.active = active
     }

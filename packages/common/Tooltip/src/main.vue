@@ -1,8 +1,12 @@
 <template>
   <n-popover
-    trigger="hover"
+    v-model="value"
+    class="n-tooltip"
     :arrow="arrow"
     :placement="placement"
+    :trigger="trigger"
+    @show="handleShow"
+    @hide="handleHide"
   >
     <template v-slot:activator>
       <slot name="activator" />
@@ -19,34 +23,59 @@
  */
 import NPopover from '../../Popover'
 
+const DEFAULT_DURATION = 200
+const DEFAULT_DELAY = null
+
 export default {
   name: 'NTooltip',
   components: {
     NPopover
   },
   props: {
-    arrow: {
+    placement: {
+      type: String,
+      default: 'bottom'
+    },
+    value: {
       type: Boolean,
       default: false
     },
-    placement: {
+    delay: {
+      type: [String, Number],
+      default: DEFAULT_DELAY
+    },
+    duration: {
+      type: [String, Number],
+      default: DEFAULT_DURATION,
+      /**
+       * make sure it is a positive number...
+       */
       validator (value) {
-        return [
-          'top',
-          'bottom',
-          'left',
-          'right',
-          'top-start',
-          'top-end',
-          'left-start',
-          'left-end',
-          'right-start',
-          'right-end',
-          'bottom-start',
-          'bottom-end'
-        ].includes(value)
-      },
-      default: 'bottom'
+        value = Number(value)
+        if (Number.isNaN(value)) {
+          return false
+        } else {
+          return value > 0
+        }
+      }
+    },
+    trigger: {
+      default: 'hover',
+      validator (value) {
+        return ['click', 'hover', 'manual'].includes(value)
+      }
+    },
+    arrow: {
+      default: false,
+      type: Boolean
+    }
+  },
+  methods: {
+    handleShow () {
+      this.$emit('show')
+    },
+    handleHide () {
+      this.$emit('hide')
     }
   }
 }

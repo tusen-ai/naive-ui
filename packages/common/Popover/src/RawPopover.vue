@@ -22,6 +22,7 @@
         make it easy to positioning. So I just leave it for later solving.
       -->
       <div
+        v-if="!raw"
         ref="content"
         class="n-popover__content-wrapper"
       >
@@ -42,6 +43,28 @@
               v-if="arrow"
               class="n-popover__arrow"
             />
+            <slot />
+          </div>
+        </transition>
+      </div>
+      <div
+        v-else
+        ref="content"
+        class="n-popover__content-wrapper"
+      >
+        <transition
+          name="n-popover-fade"
+        >
+          <div
+            v-if="active"
+            ref="popoverBody"
+            :n-placement="placement"
+            class="n-popover__raw-content"
+            :class="{
+              'n-popover__content--without-arrow': !arrow
+            }"
+            @mouseenter="handleMouseEnter"
+          >
             <slot />
           </div>
         </transition>
@@ -77,6 +100,10 @@ export default {
     },
     arrow: {
       default: true,
+      type: Boolean
+    },
+    raw: {
+      default: false,
       type: Boolean
     }
     /**

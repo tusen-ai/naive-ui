@@ -9,92 +9,22 @@
       </n-gradient-text>
     </div>
     <div class="n-doc-body">
-      <div class="n-doc-section">
-        <div class="n-doc-section__header">
-          Basic Usage
-        </div>
-        <div class="n-doc-section__view">
-          <n-tooltip>
-            <template v-slot:activator>
-              <n-button style="margin: 0;">
-                hello tooltip
-              </n-button>
-            </template>
-            This is the contextual help
-          </n-tooltip>
-        </div>
-        <div class="n-doc-section__source">
-          <textarea><n-tooltip>
-  <template v-slot:activator>
-    <n-button style="margin: 0;">
-      hello tooltip
-    </n-button>
-  </template>
-  This is the contextual help
-</n-tooltip></textarea>
-        </div>
-      </div>
-      <div class="n-doc-section">
-        <div class="n-doc-section__header">
-          Arrow
-        </div>
-        <div class="n-doc-section__view">
-          <n-tooltip arrow>
-            <template v-slot:activator>
-              <n-button style="margin: 0;">
-                hello tooltip
-              </n-button>
-            </template>
-            This is the contextual help
-          </n-tooltip>
-        </div>
-        <div class="n-doc-section__source">
-          <textarea><n-tooltip arrow>
-  <template v-slot:activator>
-    <n-button style="margin: 0;">
-      hello tooltip
-    </n-button>
-  </template>
-  This is the contextual help
-</n-tooltip></textarea>
-        </div>
-      </div>
-      <div class="n-doc-section">
-        <div class="n-doc-section__header">
-          Placement
-        </div>
-        <div class="n-doc-section__view">
-          <n-tooltip placement="top-start">
-            <template v-slot:activator>
-              <n-button style="margin: 0;">
-                hello tooltip
-              </n-button>
-            </template>
-            This is the contextual help
-          </n-tooltip>
-        </div>
-        <div class="n-doc-section__source">
-          <textarea>/**
-  * If you want to see more placement options, see Popover
-  */
-<n-tooltip placement="top-start">
-  <template v-slot:activator>
-    <n-button style="margin: 0;">
-      hello tooltip
-    </n-button>
-  </template>
-  This is the contextual help
-</n-tooltip></textarea>
-        </div>
-      </div>
+      <basic-usage />
+      <trigger />
+      <event />
+      <placement />
     </div>
   </div>
 </template>
 
 <script>
-import docCodeEditorMixin from '../docCodeEditorMixin'
+import basicUsage from './basicUsage.demo.vue'
+import trigger from './trigger.demo.vue'
+import event from './event.demo.vue'
+import placement from './placement.demo.vue'
+
 export default {
-  mixins: [docCodeEditorMixin],
+  components: { basicUsage, trigger, event, placement },
   data () {
     return {
 
