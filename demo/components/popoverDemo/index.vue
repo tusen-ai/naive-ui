@@ -11,8 +11,10 @@
     <div class="n-doc-body">
       <!-- <debug /> -->
       <basic-usage />
+      <delay />
       <no-arrow />
       <trigger />
+      <event />
       <placement />
     </div>
   </div>
@@ -25,6 +27,8 @@ import basicUsage from './basicUsage.demo.vue'
 import noArrow from './noArrow.demo.vue'
 import trigger from './trigger.demo.vue'
 import placement from './placement.demo.vue'
+import event from './event.demo'
+import delay from './delay.demo'
 
 export default {
   components: {
@@ -32,7 +36,9 @@ export default {
     basicUsage,
     noArrow,
     trigger,
-    placement
+    placement,
+    event,
+    delay
   },
   mixins: [docCodeEditorMixin],
   data () {

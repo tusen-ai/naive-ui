@@ -2,6 +2,7 @@
 import Popover from './RawPopover'
 
 const DEFAULT_DURATION = 200
+const DEFAULT_DELAY = null
 
 /**
  * When using `manual` trigger, using default param of v-model(value prop, input event)
@@ -17,11 +18,15 @@ export default {
       type: Boolean,
       default: false
     },
+    delay: {
+      type: [String, Number],
+      default: DEFAULT_DELAY
+    },
     duration: {
       type: [String, Number],
       default: DEFAULT_DURATION,
       /**
-       * make sure it is a number...
+       * make sure it is a positive number...
        */
       validator (value) {
         value = Number(value)
@@ -41,10 +46,10 @@ export default {
     /**
      * for debug usage
      */
-    name: {
-      type: String,
-      default: '-1'
-    },
+    // name: {
+    //   type: String,
+    //   default: '-1'
+    // },
     arrow: {
       default: true,
       type: Boolean
@@ -58,11 +63,18 @@ export default {
   computed: {
     safeDuration () {
       return Number(this.duration)
+    },
+    safeDelay () {
+      return this.delay === null ? null : Number(this.delay)
     }
   },
   methods: {
     handleSetActive (active) {
-      this.$emit('change', active)
+      if (active) {
+        this.$emit('show')
+      } else {
+        this.$emit('hide')
+      }
       this.active = active
     }
   },
@@ -74,6 +86,7 @@ export default {
       props: {
         ...this.$props,
         duration: this.safeDuration,
+        delay: this.safeDelay,
         active: this.$props.trigger === 'manual' ? this.value : this.active
       },
       on
