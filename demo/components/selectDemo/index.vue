@@ -13,6 +13,7 @@
     >
       <basic-usage />
       <multiple-select />
+      <disabled />
       <verbose-transition />
       <change-event />
       <change-event-emit-item />
@@ -22,6 +23,7 @@
 </template>
 
 <script>
+import disabled from './disabled.demo.vue'
 import basicUsage from './basigUsage.demo.vue'
 import multipleSelect from './multipleSelect.demo.vue'
 import verboseTransition from './verboseTransition.demo.vue'
@@ -36,7 +38,8 @@ export default {
     verboseTransition,
     changeEvent,
     changeEventEmitItem,
-    search
+    search,
+    disabled
   },
   data () {
     return {

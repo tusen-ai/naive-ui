@@ -3,7 +3,8 @@
     ref="select"
     class="n-select"
     :class="{
-      [`n-select--${size}-size`]: true
+      [`n-select--${size}-size`]: true,
+      'n-select--disabled': disabled
     }"
     @click="toggleMenu"
   >
@@ -161,6 +162,11 @@ export default {
     filterable: {
       type: Boolean,
       default: false
+    },
+
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -261,9 +267,11 @@ export default {
       this.deactivate()
     },
     toggleMenu () {
+      if (this.disabled) return
       this.toggle()
     },
     toggleItemInMultipleSelect (item) {
+      if (this.disabled) return
       let newSelectedValues = []
       if (Array.isArray(this.selectedValue)) {
         const itemValues = new Set(this.items.map(item => item.value))

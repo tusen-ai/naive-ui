@@ -10,6 +10,41 @@
   font-family: $default-font-family;
   text-align: start;
   cursor: pointer;
+  &.n-select--disabled {
+    cursor: not-allowed;
+    .n-select-link {
+      &::after {
+        border-color: rgba(255, 255, 255, 0.20);
+      }
+      .n-select-link__label, .n-select-link__tags {
+        background-color: rgba(255, 255, 255, 0.08);
+      }
+      .n-select-link__tag-wrapper {
+        .n-select-link__tag {
+          border-color: rgba(255, 255, 255, 0.20);
+          color: rgba(255, 255, 255, 0.20);
+        }
+      }
+      .n-select-link__placeholder {
+        color: rgba(255, 255, 255, 0.20);
+      }
+      .n-select-link__label {
+        .n-select-link-label__input {
+          color: rgba(255, 255, 255, 0.20);
+          &::placeholder {
+            color: rgba(255, 255, 255, 0.20);
+          }
+        }
+      }
+    }
+  }
+  &:not(.n-select--disabled) {
+    .n-select-link:hover {
+      .n-select-link__label, .n-select-link__tags {
+        box-shadow: inset 0 0 0 1px $select-border-color--active;
+      }
+    }
+  }
   .n-select-link {
     position: relative;
     box-shadow: none;
@@ -56,7 +91,7 @@
         display: inline-block;
         border:none;
         width: 100%;
-        cursor: pointer;
+        cursor: inherit;
         background: transparent;
         outline: none;
         color: $select-text-color;
@@ -114,11 +149,6 @@
         &.n-select-menu__tags--transition-move {
           transition: transform .3s $default-cubic-bezier;
         }
-      }
-    }
-    &:hover {
-      .n-select-link__label, .n-select-link__tags {
-        box-shadow: inset 0 0 0 1px $select-border-color--active;
       }
     }
     &.n-select-link--selected {
@@ -251,7 +281,7 @@
         background-color: rgba(96, 220, 178, 0.3);
         top: 0;
         left: 0;
-        transition: top .3s $default-cubic-bezier;
+        transition: top .15s $default-cubic-bezier;
       }
       &.n-select-menu--small-size {
         max-height: $small-height * 8;
@@ -303,7 +333,6 @@
           }
         }
       }
-      
     }
     /** transition of menu */
     .n-select-menu--transition-enter-active {

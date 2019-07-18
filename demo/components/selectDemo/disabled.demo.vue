@@ -1,7 +1,7 @@
 <template>
   <div class="n-doc-section">
     <div class="n-doc-section__header">
-      Basic Usage
+      Disabled
     </div>
     <div
       class="n-doc-section__view"
@@ -10,28 +10,36 @@
       <!--EXAMPLE_START-->
       <n-select
         v-model="selectedValue"
-        size="large"
         placeholder="Please Select Type"
         :items="items"
         style="flex-grow: 1; margin-right: 12px;"
+        disabled
       />
       <n-select
-        v-model="selectedValue"
+        v-model="selectedValue2"
         placeholder="Please Select Type"
         :items="items"
         style="flex-grow: 1; margin-right: 12px;"
+        disabled
       />
       <n-select
-        v-model="selectedValue"
-        size="small"
+        v-model="selectedArray"
+        multiple
+        placeholder="Please Select Type"
+        :items="items"
+        style="flex-grow: 1; margin-right: 12px;"
+        disabled
+      />
+      <n-select
+        v-model="selectedArray2"
+        multiple
         placeholder="Please Select Type"
         :items="items"
         style="flex-grow: 1;"
+        disabled
       />
       <!--EXAMPLE_END-->
-    </div>
-    <pre class="n-doc-section__inspect">selectedValue: {{ JSON.stringify(selectedValue) }}</pre>
-    <n-doc-source-block>
+    </div><n-doc-source-block>
       <!--SOURCE-->
     </n-doc-source-block>
   </div>
@@ -41,12 +49,11 @@
 export default {
   data () {
     return {
-      selectedValue: null,
+      selectedValue: 'song1',
+      selectedArray: ['song1'],
+      selectedValue2: null,
+      selectedArray2: [],
       items: [
-        {
-          label: "Everybody's Got Something to Hide Except Me and My Monkey",
-          value: 'song0'
-        },
         {
           label: 'Drive My Car',
           value: 'song1'
