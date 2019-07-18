@@ -220,8 +220,6 @@ export default {
       }
     }
   },
-  created () {
-  },
   beforeDestroy () {
     document.removeEventListener('click', this.nativeCloseMenu)
   },
@@ -280,6 +278,7 @@ export default {
         this.emitChangeEvent(item, true)
       }
       this.$emit('input', newSelectedValues)
+      this.$nextTick().then(this.updatePosition)
     }
   }
 }
