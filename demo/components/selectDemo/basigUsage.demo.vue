@@ -44,11 +44,11 @@ export default {
       selectedValue: null,
       items: [
         {
-          label: 'Drive My Car',
+          label: 'Drive My Car Drive My Car Drive My Car Drive My Car Drive My Car',
           value: 'song1'
         },
         {
-          label: 'Norwegian Wood',
+          label: 'Norwegian-Wood-Norwegian-Wood-Norwegian-Wood-Norwegian-Wood-',
           value: 'song2'
         },
         {

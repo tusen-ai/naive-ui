@@ -236,6 +236,7 @@
       .n-select-menu__item {
         position: relative;
         padding: 0px 14px;
+        white-space: nowrap;
         &.n-select-menu__item--selected {
           color: #63E2B7FF;
         }

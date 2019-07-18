@@ -78,7 +78,7 @@ export default {
       // console.log('scroll', activatorBoundingClientRect, contentBoundingClientRect)
       this.$refs.content.style = calcPlacementTransfrom(this.placement, activatorBoundingClientRect, contentBoundingClientRect)
       if (this.widthMode === 'activator' && this.$refs.contentInner) {
-        this.$refs.contentInner.style.width = activatorBoundingClientRect.width + 'px'
+        this.$refs.contentInner.style.minWidth = activatorBoundingClientRect.width + 'px'
       }
     },
     registerResizeListener () {
