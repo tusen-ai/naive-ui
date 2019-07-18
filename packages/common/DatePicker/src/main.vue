@@ -3,7 +3,8 @@
     ref="datePicker"
     class="n-date-picker"
     :class="{
-      [`n-date-picker--${size}-size`]: true
+      [`n-date-picker--${size}-size`]: true,
+      'n-date-picker--disabled': disabled
     }"
     @click="handleCalendarClick"
   >
@@ -11,6 +12,7 @@
       v-model="displayDateTimeString"
       class="n-date-picker__input"
       :placeholder="placeholder"
+      :readonly="disabled ? 'disabled' : false"
       @click="openCalendar"
       @focus="openCalendar"
       @blur="handleDateTimeInputBlur"
@@ -254,6 +256,10 @@ export default {
     event: 'change'
   },
   props: {
+    disabled: {
+      type: Boolean,
+      default: false
+    },
     value: {
       type: [Number, String],
       required: false,
@@ -520,6 +526,10 @@ export default {
      * Calendar view related methods
      */
     openCalendar () {
+      /**
+       * May leak memory here if change disabled from false to true
+       */
+      if (this.disabled) return
       this.showCalendar = true
       document.body.addEventListener('click', this.nativeCloseCalendar)
     },

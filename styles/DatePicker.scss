@@ -6,6 +6,30 @@
   width: 240px;
   @include fade-up-transition(date-picker-calendar);
   @include fade-up-transition(date-picker-time-selector);
+  &.n-date-picker--disabled {
+    cursor: not-allowed;
+    .n-date-picker__icon {
+      color: rgba(255, 255, 255, .2);
+    }
+    .n-date-picker__input {
+      cursor: not-allowed;
+      background-color: rgba(255, 255, 255, .08);
+      color: rgba(255, 255, 255, .2);
+      &:focus:hover {
+        box-shadow: none;
+      }
+      &:hover {
+        box-shadow: none;
+      }
+      &:focus {
+        box-shadow: none;
+        background-color: rgba(255, 255, 255, .08);
+      }
+      &::placeholder {
+        color: rgba(255, 255, 255, .2);
+      }
+    }
+  }
   .n-date-picker__icon {
     position: absolute;
     right: 13px;
