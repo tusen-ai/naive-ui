@@ -664,6 +664,49 @@ export default {
 </script>
           </textarea>
         </div>
+        <!-- test -->
+        <div class="n-doc-section">
+          <div class="n-doc-section__header">
+            Test
+          </div>
+          <div class="n-doc-section__view">
+            <n-advance-table
+              ref="table"
+              :columns="columns3"
+              :data="data"
+              max-height="300px"
+              :on-change="onChange1"
+              :search="search"
+              :pagination="{total:data.length,limit:10}"
+            />
+          </div>
+          <div class="n-doc-section__source">
+            <textarea><n-advance-table
+  :columns="columns"
+  :data="data"
+  max-height="300px"
+  ref="table"
+  :on-change="onChange"
+  :search="search"
+  :pagination="{total:data.length,limit:10,custom:true}"
+/>
+//
+<script>
+// if you want to set sorter filter searcher and pagnation
+
+mounted () {
+  this.$refs.table.setParams({ filter: { age: [14] }, sorter: { key: 'age', type: -1 }, searcher: { key: 'name', value: 'xiaobai' } })
+},
+methods:{
+  onChange ({ filter, sorter, pagination, search }) {
+      console.log('执行', { filter, sorter, pagination, search })
+    },
+}
+
+</script>
+          </textarea>
+          </div>
+        </div>
       </div>
       <!-- body end -->
     </div>
@@ -863,15 +906,69 @@ export default {
             )
           }
         }
+      ],
+      columns3: [
+        {
+          title: 'Name',
+          key: 'name',
+          filterMultiple: false,
+          filterItems: [{
+            label: 'xiaobai1',
+            value: 'xiaobai1'
+          }],
+          onFilter: (value, record) => {
+            return value.includes(record.name + '')
+          }
+        },
+        {
+          title: 'Age',
+          key: 'age',
+          sortable: 'custom',
+          filterMultiple: true,
+          filterItems: [{
+            label: '14',
+            value: '14'
+          }, {
+            label: '15',
+            value: '15'
+          }],
+          onFilter: (value, record) => {
+            return value.includes(record.age + '')
+          },
+          render: (h, params) => {
+            return <b>{params.row.age}</b>
+          }
+        },
+        {
+          title: '#',
+          render: (h, params) => {
+            return (
+              <n-button
+                style="margin:0;"
+                size="small"
+                onClick={() => this.handleClick(params)}
+              >
+                delete
+              </n-button>
+            )
+          }
+        }
       ]
     }
+  },
+  mounted () {
+    this.$refs.table.setParams({ filter: { age: [14] }, sorter: { key: 'age', type: -1 }, searcher: { key: 'name', value: 'xiaobai' }, page: 2 })
   },
   methods: {
     handleClick (params) {
       alert('delete' + JSON.stringify(params))
     },
+    onChange1 ({ filter, sorter, pagination, search }) {
+      console.log('执行', { filter, sorter, pagination, search })
+    },
     onChange ({ filter, sorter, pagination, search }) {
       alert('remote handler: \n' + JSON.stringify({ sorter, filter, pagination, search }, null, '\t'))
+      console.log({ filter, sorter, pagination, search })
       this.data = [{
         name: 'form net',
         age: 0

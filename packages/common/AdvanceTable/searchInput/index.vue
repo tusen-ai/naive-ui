@@ -40,11 +40,13 @@ export default {
     }
   },
   methods: {
+    setSearch ({ key, value }) {
+      this.value = value
+      this.selectedValue = key
+      this.handleInputChange()
+    },
     handleInputChange () {
-      this.timer && clearTimeout(this.timer)
-      this.timer = setTimeout(() => {
-        this.$emit('on-change', { key: this.selectedValue, word: this.value })
-      }, 300)
+      this.$emit('on-change', { key: this.selectedValue, word: this.value })
     }
   }
 }
