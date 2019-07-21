@@ -11,6 +11,7 @@ import calcPlacementTransfrom from '../utils/dom/calcPlacementTransform'
  * $refs.activator
  * $refs.content
  * $refs.contentInner(optional)
+ * $vm.active
  *
  * @prop {string} placement determine where should $refs.content be put
  * @prop {string} widthMode determine how width is $refs.contentInner
@@ -76,7 +77,7 @@ export default {
       // console.log(contentBoundingClientRect)
       // debugger
       // console.log('scroll', activatorBoundingClientRect, contentBoundingClientRect)
-      this.$refs.content.style = calcPlacementTransfrom(this.placement, activatorBoundingClientRect, contentBoundingClientRect)
+      this.$refs.content.style = 'position: absolute;' + calcPlacementTransfrom(this.placement, activatorBoundingClientRect, contentBoundingClientRect)
       if (this.widthMode === 'activator' && this.$refs.contentInner) {
         this.$refs.contentInner.style.minWidth = activatorBoundingClientRect.width + 'px'
       }
