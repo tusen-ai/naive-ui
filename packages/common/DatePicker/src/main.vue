@@ -13,8 +13,7 @@
       class="n-date-picker__input"
       :placeholder="placeholder"
       :readonly="disabled ? 'disabled' : false"
-      @click="openCalendar"
-      @focus="openCalendar"
+      @click.stop="openCalendar"
       @blur="handleDateTimeInputBlur"
       @keyup.enter="handleDateTimeInputEnter"
     >
@@ -28,215 +27,25 @@
       ref="contentWrapper"
       class="n-content-wrapper"
     >
-      <transition name="n-date-picker-calendar--transition">
-        <div
-          v-if="active || debug"
-          ref="content"
-          class="n-date-picker-calendar"
-        >
-          <div
-            v-if="type==='datetime'"
-            class="n-date-picker-calendar__date-time-input-wrapper"
-          >
-            <input
-              v-model="displayDateString"
-              class="n-date-picker-calendar__date-input"
-              placeholder="Select date"
-              @blur="handleDateInputBlur"
-              @input="handleDateInput"
-            >
-            <div
-              ref="timeSelector"
-              class="n-date-picker-calendar__time-input-wrapper"
-            >
-              <input
-                v-model="displayTimeString"
-                class="n-date-picker-calendar__time-input"
-                placeholder="Select time"
-                @click="openTimeSelector"
-                @input="handleTimeInput"
-                @blur="handleTimeInputBlur"
-              >
-              <transition name="n-date-picker-time-selector--transition">
-                <div
-                  v-if="showTimeSelector"
-                  class="n-date-picker-time-selector"
-                >
-                  <div class="n-date-picker-time-selector__selection-wrapper">
-                    <div class="n-date-picker-time-selector__hour">
-                      <div
-                        v-for="hour in hours"
-                        :key="hour"
-                        class="n-date-picker-time-selector__item"
-                        :class="{
-                          'n-date-picker-time-selector__item--active':
-                            hour === computedHour
-                        }"
-                        @click="setHour(hour)"
-                      >
-                        {{ hour }}
-                      </div>
-                    </div>
-                    <div class="n-date-picker-time-selector__minute">
-                      <div
-                        v-for="minute in minutes"
-                        :key="minute"
-                        class="n-date-picker-time-selector__item"
-                        :class="{
-                          'n-date-picker-time-selector__item--active':
-                            minute === computedMinute
-                        }"
-                        @click="setMinute(minute)"
-                      >
-                        {{ minute }}
-                      </div>
-                    </div>
-                    <div class="n-date-picker-time-selector__hour">
-                      <div
-                        v-for="second in seconds"
-                        :key="second"
-                        class="n-date-picker-time-selector__item"
-                        :class="{
-                          'n-date-picker-time-selector__item--active':
-                            second === computedSecond
-                        }"
-                        @click="setSecond(second)"
-                      >
-                        {{ second }}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="n-date-picker-time-selector__actions">
-                    <n-button
-                      size="tiny"
-                      round
-                      @click="handleTimeCancelClick"
-                    >
-                      Cancel
-                    </n-button>
-                    <n-button
-                      size="tiny"
-                      round
-                      auto-text-color
-                      type="primary"
-                      @click="handleTimeConfirmClick"
-                    >
-                      Confirm
-                    </n-button>
-                  </div>
-                </div>
-              </transition>
-            </div>
-          </div>
-          <div
-            v-else
-            style="width: 100%; height: 12px;"
-          />
-          <div class="n-date-picker-calendar__month-modifier">
-            <div
-              class="n-date-picker-calendar__fast-prev"
-              @click="prevYear"
-            >
-              <n-icon
-                type="ios-arrow-back"
-                size="14"
-              />
-              <n-icon
-                type="ios-arrow-back"
-                size="14"
-              />
-            </div>
-            <div
-              class="n-date-picker-calendar__prev"
-              @click="prevMonth"
-            >
-              <n-icon
-                type="ios-arrow-back"
-                size="14"
-              />
-            </div>
-            <div class="n-date-picker-calendar__month-year">
-              {{ calendarDateTime.format('MMMM') }} {{ calendarDateTime.year() }}
-            </div>
-            <div
-              class="n-date-picker-calendar__next"
-              @click="nextMonth"
-            >
-              <n-icon
-                type="ios-arrow-forward"
-                size="14"
-              />
-            </div>
-            <div
-              class="n-date-picker-calendar__fast-next"
-              @click="nextYear"
-            >
-              <n-icon
-                type="ios-arrow-forward"
-                size="14"
-              />
-              <n-icon
-                type="ios-arrow-forward"
-                size="14"
-              />
-            </div>
-          </div>
-          <div class="n-date-picker-calendar__weekdays">
-            <div
-              v-for="weekday in weekdays"
-              :key="weekday"
-              class="n-date-picker-calendar__weekday"
-            >
-              {{ weekday }}
-            </div>
-          </div>
-          <div class="n-date-picker-calendar__divider" />
-          <div class="n-date-picker-calendar__dates">
-            <div
-              v-for="dateItem in dateArray(calendarDateTime, computedSelectedDateTime, currentDateTime)"
-              :key="dateItem.timestamp"
-              class="n-date-picker-calendar__date"
-              :class="{
-                'n-date-picker-calendar__date--current': dateItem.isCurrentDate,
-                'n-date-picker-calendar__date--selected': dateItem.isSelectedDate,
-                'n-date-picker-calendar__date--in-display-month': dateItem.isDateOfDisplayMonth
-              }"
-              @click="handleDateClick(dateItem)"
-            >
-              {{ dateItem.date }}
-            </div>
-          </div>
-          <div class="n-date-picker-calendar__actions">
-            <n-button
-              size="tiny"
-              round
-              @click="setSelectedDateTimeToNow"
-            >
-              Now
-            </n-button>
-            <n-button
-              size="tiny"
-              round
-              auto-text-color
-              type="primary"
-              @click="handleDateInputAndTimeInputConfirmClick"
-            >
-              Confirm
-            </n-button>
-          </div>
-        </div>
-      </transition>
+      <div ref="content">
+        <datetime-panel
+          v-model="panelValue"
+          :active="active"
+          @change="handlePanelValueChange"
+          @close="closeCalendar"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import moment from 'moment'
-import { dateArray, setDate } from './utils'
 import NIcon from '../../Icon'
-import NButton from '../../Button'
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
+import DatetimePanel from './panel/datetime'
+import clickoutside from '../../../directives/clickoutside'
 
 const DATE_FORMAT = {
   date: 'YYYY-MM-DD',
@@ -255,9 +64,12 @@ const TIME_CONST = {
 
 export default {
   name: 'NDatePicker',
+  directives: {
+    clickoutside
+  },
   components: {
     NIcon,
-    NButton
+    DatetimePanel
   },
   mixins: [
     detachable,
@@ -302,12 +114,19 @@ export default {
       displayDateTimeString: '',
       displayDateString: '',
       displayTimeString: '',
+      rightDisplayDateTimeString: '',
+      rightDisplayDateString: '',
+      rightDisplayTimeString: '',
       calendarDateTime: moment(),
+      rightCalendarDateTime: moment(),
       currentDateTime: moment(),
       active: false,
       showTimeSelector: false,
+      showRightTimeSelector: false,
       calendar: [],
-      ...TIME_CONST
+      rightCalendar: [],
+      ...TIME_CONST,
+      panelValue: this.value
     }
   },
   computed: {
@@ -363,7 +182,10 @@ export default {
     }
   },
   methods: {
-    dateArray,
+    handlePanelValueChange (value) {
+      this.$emit('change', value)
+      this.refreshSelectedDateTimeString()
+    },
     /**
      * If new datetime is null or undefined, emit null to value.
      * Else adjust new datetime by props.type and emit it to value.
@@ -420,39 +242,6 @@ export default {
     handleTimeCancelClick () {
       this.closeTimeSelector()
     },
-    setHour (hour) {
-      try {
-        const timeArray = this.displayTimeString.split(':')
-        timeArray[0] = hour
-        this.displayTimeString = timeArray.join(':')
-      } catch (err) {
-
-      } finally {
-        this.justifySelectedDateTimeAfterChangeTimeString()
-      }
-    },
-    setMinute (minute) {
-      try {
-        const timeArray = this.displayTimeString.split(':')
-        timeArray[1] = minute
-        this.displayTimeString = timeArray.join(':')
-      } catch (err) {
-
-      } finally {
-        this.justifySelectedDateTimeAfterChangeTimeString()
-      }
-    },
-    setSecond (second) {
-      try {
-        const timeArray = this.displayTimeString.split(':')
-        timeArray[2] = second
-        this.displayTimeString = timeArray.join(':')
-      } catch (err) {
-
-      } finally {
-        this.justifySelectedDateTimeAfterChangeTimeString()
-      }
-    },
     openTimeSelector () {
       if (this.computedSelectedDateTime === null) {
         this.setValue(moment())
@@ -470,29 +259,6 @@ export default {
       if (!this.$refs.timeSelector.contains(e.target) && this.$refs.timeSelector !== e.target) {
         this.closeTimeSelector()
       }
-    },
-    nativeCloseCalendar (e) {
-      if (!this.$refs.activator.contains(e.target) && !this.$refs.content.contains(e.target)) {
-        this.closeCalendar()
-      }
-    },
-    clearSelectedDateTime () {
-      this.setValue(null)
-      this.displayDateTimeString = ''
-      this.displayDateString = ''
-      this.displayTimeString = ''
-    },
-    setSelectedDateTimeToNow () {
-      this.setValue(moment())
-      this.calendarDateTime = moment()
-    },
-    handleDateClick (dateItem) {
-      let newSelectedDateTime = moment()
-      if (this.computedSelectedDateTime !== null) {
-        newSelectedDateTime = moment(this.computedSelectedDateTime)
-      }
-      newSelectedDateTime = setDate(newSelectedDateTime, dateItem)
-      this.setValue(newSelectedDateTime)
     },
     /**
      * If not selected, display nothing,
@@ -527,17 +293,6 @@ export default {
        */
       this.refreshSelectedDateTimeString()
     },
-    handleDateInputAndTimeInputConfirmClick () {
-      const newDisplayDateTimeString = `${this.displayDateString.trim()} ${this.displayTimeString.trim()}`
-      const newSelectedDateTime = moment(newDisplayDateTimeString, this.format, true)
-      if (this.computedSelectedDateTime === null) {
-        this.setValue(moment())
-      } else {
-        this.setValue(newSelectedDateTime)
-        this.refreshSelectedDateTimeString()
-      }
-      this.closeCalendar()
-    },
     /**
      * Calendar view related methods
      */
@@ -548,31 +303,13 @@ export default {
       if (this.disabled) return
       this.active = true
       this.$nextTick().then(this.updatePosition)
-      document.body.addEventListener('click', this.nativeCloseCalendar)
     },
     closeCalendar () {
       this.active = false
       this.showTimeSelector = false
-      document.body.removeEventListener('click', this.nativeCloseCalendar)
     },
     toggleCalendar () {
 
-    },
-    nextYear () {
-      this.calendarDateTime.add(1, 'year')
-      this.$forceUpdate()
-    },
-    prevYear () {
-      this.calendarDateTime.subtract(1, 'year')
-      this.$forceUpdate()
-    },
-    nextMonth () {
-      this.calendarDateTime.add(1, 'month')
-      this.$forceUpdate()
-    },
-    prevMonth () {
-      this.calendarDateTime.subtract(1, 'month')
-      this.$forceUpdate()
     }
   }
 }

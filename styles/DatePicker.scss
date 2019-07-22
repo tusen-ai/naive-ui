@@ -93,6 +93,8 @@
 }
 
 @include b(date-picker-calendar) {
+  @include fade-in-transition(date-picker-calendar);
+  margin-top: 4px;
   width: 351px;
   background:rgba(75,81,106,1);
   box-shadow:0px 2px 20px 0px rgba(0,0,0,0.16);
