@@ -472,7 +472,7 @@ export default {
       }
     },
     nativeCloseCalendar (e) {
-      if (!this.$refs.activator.contains(e.target)) {
+      if (!this.$refs.activator.contains(e.target) && !this.$refs.content.contains(e.target)) {
         this.closeCalendar()
       }
     },

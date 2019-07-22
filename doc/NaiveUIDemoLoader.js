@@ -4,13 +4,18 @@ const prettier = require('prettier')
 
 module.exports = function (content) {
   const exampleReg = /<!--EXAMPLE_START-->([\s\S]*)?<!--EXAMPLE_END-->/
+  const styleExampleReg = /<!--STYLE_EXAMPLE_START-->([\s\S]*)?<!--STYLE_EXAMPLE_END-->/
   const scriptReg = /<script>([\s\S]*)?<\/script>/
   const sourceReg = /<!--SOURCE-->/
-  const example = prettier.format(content.match(exampleReg)[1], {
+  let sourceExample = content.match(exampleReg)
+  sourceExample = sourceExample === null ? '' : sourceExample[1]
+  let styleExample = content.match(styleExampleReg)
+  const script = content.match(scriptReg)[0]
+  // console.log(styleExample)
+  styleExample = styleExample === null ? '' : styleExample[1]
+  const example = prettier.format((sourceExample + '\n' + script + '\n' + styleExample), {
     parser: 'html',
     printWidth: 80
-  })
-  const script = content.match(scriptReg)[0]
-  const source = example + '\n' + script
-  return content.replace(sourceReg, `<textarea v-pre>${source}</textarea>`)
+  }).trim()
+  return content.replace(sourceReg, `<textarea v-pre>${example}</textarea>`)
 }
