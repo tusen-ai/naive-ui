@@ -25,6 +25,9 @@
     &::-webkit-scrollbar-thumb:hover {
       background: rgba(255,255,255,0.3);
     }
+    &::-webkit-scrollbar-corner{
+      background: transparent
+    }
     table thead tr th:last-of-type {
       padding-left: 32px;
     }
@@ -41,5 +44,7 @@
   .n-no-data-tip{
     padding: 5px;
     text-align: center;
+    width: 100%;
+    display: table-cell;
   }
 }
