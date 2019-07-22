@@ -87,7 +87,7 @@
       style="border-top-left-radius:0;border-top-right-radius:0;"
       @scroll.native="onBodyScrolll"
     >
-      <colgroup>
+      <colgroup v-if="showingData.length !== 0">
         <col
           v-for="(column, i) in columns"
           :key="i"
