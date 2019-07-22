@@ -2,7 +2,7 @@
   <transition name="n-date-picker-calendar--transition">
     <div
       v-if="active"
-      v-clickoutside="handleClickOutside"
+      v-clickoutside.lazy="handleClickOutside"
       class="n-date-picker-calendar"
     >
       <div
@@ -317,9 +317,11 @@ export default {
       if (newSelectedDateTime.isValid()) {
         const adjustedDateTime = this.adjustDateTime(newSelectedDateTime)
         if (this.computedSelectedDateTime === null || adjustedDateTime.valueOf() !== this.computedSelectedDateTime.valueOf()) {
+          this.refreshSelectedDateTimeString(adjustedDateTime)
           this.$emit('change', adjustedDateTime.valueOf(), adjustedDateTime.format(this.format))
         }
       }
+      // this.$nextTick(this.refreshSelectedDateTimeString)
     },
     adjustDateTime (datetime) {
       return moment(datetime).startOf('second')
@@ -399,11 +401,6 @@ export default {
     closeTimeSelector () {
       this.showTimeSelector = false
     },
-    nativeCloseCalendar (e) {
-      if (!this.$refs.activator.contains(e.target) && !this.$refs.content.contains(e.target)) {
-        this.closeCalendar()
-      }
-    },
     clearSelectedDateTime () {
       this.setValue(null)
       this.displayDateTimeString = ''
@@ -426,14 +423,17 @@ export default {
      * If not selected, display nothing,
      * else update datetime related string
      */
-    refreshSelectedDateTimeString () {
+    refreshSelectedDateTimeString (time) {
       if (this.computedSelectedDateTime === null) {
         this.displayDateTimeString = ''
         return
       }
-      this.displayDateTimeString = this.computedSelectedDateTime.format(this.format)
-      this.displayDateString = this.computedSelectedDateTime.format('YYYY-MM-DD')
-      this.displayTimeString = this.computedSelectedDateTime.format('HH:mm:ss')
+      if (time === undefined) {
+        time = this.computedSelectedDateTime
+      }
+      this.displayDateTimeString = time.format(this.format)
+      this.displayDateString = time.format('YYYY-MM-DD')
+      this.displayTimeString = time.format('HH:mm:ss')
     },
     /**
      * If new time is invalid, do nothing.
@@ -462,7 +462,6 @@ export default {
         this.setValue(moment())
       } else {
         this.setValue(newSelectedDateTime)
-        this.refreshSelectedDateTimeString()
       }
       this.closeCalendar()
     },

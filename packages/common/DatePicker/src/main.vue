@@ -6,14 +6,13 @@
       [`n-date-picker--${size}-size`]: true,
       'n-date-picker--disabled': disabled
     }"
-    @click="handleCalendarClick"
   >
     <input
       v-model="displayDateTimeString"
       class="n-date-picker__input"
       :placeholder="placeholder"
       :readonly="disabled ? 'disabled' : false"
-      @click.stop="openCalendar"
+      @focus="openCalendar"
       @blur="handleDateTimeInputBlur"
       @keyup.enter="handleDateTimeInputEnter"
     >
@@ -182,8 +181,8 @@ export default {
     }
   },
   methods: {
-    handlePanelValueChange (value) {
-      this.$emit('change', value)
+    handlePanelValueChange (value, valueString) {
+      this.$emit('change', value, valueString)
       this.refreshSelectedDateTimeString()
     },
     /**
@@ -252,15 +251,6 @@ export default {
       this.showTimeSelector = false
     },
     /**
-     * To close timeSelector
-     */
-    handleCalendarClick (e) {
-      if (!this.$refs.timeSelector) return
-      if (!this.$refs.timeSelector.contains(e.target) && this.$refs.timeSelector !== e.target) {
-        this.closeTimeSelector()
-      }
-    },
-    /**
      * If not selected, display nothing,
      * else update datetime related string
      */
@@ -296,7 +286,7 @@ export default {
     /**
      * Calendar view related methods
      */
-    openCalendar () {
+    openCalendar (e) {
       /**
        * May leak memory here if change disabled from false to true
        */

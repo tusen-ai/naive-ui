@@ -23,6 +23,7 @@ import Alert from './packages/common/Alert'
 import DatePicker from './packages/common/DatePicker'
 import InputNumber from './packages/common/InputNumber'
 import Radio from './packages/common/Radio'
+import TimePicker from './packages/common/TimePicker'
 
 import ServiceCard from './packages/nimbus/ServiceCard'
 import HomeLayout from './packages/nimbus/HomeLayout'
@@ -65,6 +66,7 @@ function install (Vue) {
   InputNumber.install(Vue)
   NimbusIcon.install(Vue)
   Radio.install(Vue)
+  TimePicker.install(Vue)
 }
 
 export default {

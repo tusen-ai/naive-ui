@@ -125,6 +125,10 @@ export default {
               path: '/n-table'
             },
             {
+              name: 'TimePicker',
+              path: '/n-time-picker'
+            },
+            {
               name: 'Tooltip',
               path: '/n-tooltip'
             }

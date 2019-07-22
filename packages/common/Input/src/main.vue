@@ -19,6 +19,7 @@
       @blur="handleBlur"
       @focus="handleFocus"
       @input="handleInput"
+      @click="handleClick"
       @change="handleChange"
       @keyup="handleKeyUp"
       @compositionstart="handleCompositionStart"
@@ -48,6 +49,7 @@
       @blur="handleBlur"
       @focus="handleFocus"
       @input="handleInput"
+      @click="handleClick"
       @change="handleChange"
       @keyup="handleKeyUp"
       @compositionstart="handleCompositionStart"
@@ -141,6 +143,9 @@ export default {
     },
     handleChange (e) {
       this.$emit('change', e.target.value)
+    },
+    handleClick (e) {
+      this.$emit('click', e)
     }
   }
 }
