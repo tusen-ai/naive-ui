@@ -18,6 +18,9 @@
       margin-left: 4px;
     }
   }
+  .n-button__content {
+    white-space: nowrap;
+  }
   border-radius: $button-border-radius;
   &.n-button--disabled {
     cursor: not-allowed;
@@ -32,14 +35,22 @@
     }
     .n-button__content {
       line-height: $tiny-height;
-      white-space: nowrap;
     }
     .n-button__icon {
-      height: 18px;
-      width: 18px;
+      height: 16px;
+      width: 16px;
       .n-icon {
-        font-size: 18px;
+        font-size: 16px;
         display: block;
+      }
+    }
+    .n-button__icon--slot {
+      height: 14px;
+      width: 14px;
+      .n-icon-slot {
+        height: 14px;
+        width: 14px;
+        font-size: 14px;
       }
     }
   }
@@ -61,6 +72,15 @@
         display: block;
       }
     }
+    .n-button__icon--slot {
+      height: 16px;
+      width: 16px;
+      .n-icon-slot {
+        height: 16px;
+        width: 16px;
+        font-size: 16px;
+      }
+    }
   }
   &.n-button--default-size, &.n-button--medium-size {
     font-size: $button-default-font-size;
@@ -79,6 +99,15 @@
         font-size: 20px;
       }
     }
+    .n-button__icon--slot {
+      height: 18px;
+      width: 18px;
+      .n-icon-slot {
+        height: 18px;
+        width: 18px;
+        font-size: 18px;
+      }
+    }
   }
   &.n-button--large-size {
     font-size: $button-large-font-size;
@@ -95,6 +124,15 @@
       width: 20px;
       .n-icon {
         font-size: 20px;
+      }
+    }
+    .n-button__icon--slot {
+      height: 18px;
+      width: 18px;
+      .n-icon-slot {
+        height: 18px;
+        width: 18px;
+        font-size: 18px;
       }
     }
   }

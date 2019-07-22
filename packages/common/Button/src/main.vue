@@ -10,10 +10,22 @@
     @click="handleClick"
   >
     <div
-      v-if="icon && !iconOnRight"
+      v-if="hasIcon && !iconOnRight"
       class="n-button__icon"
+      :class="{'n-button__icon--slot': $slots.icon }"
     >
-      <n-icon :type="icon" />
+      <n-icon
+        v-if="icon"
+        :type="icon"
+      />
+      <div
+        v-else
+        class="n-icon-slot"
+      >
+        <slot
+          name="icon"
+        />
+      </div>
     </div>
     <div
       class="n-button__content"
@@ -22,10 +34,22 @@
       <slot />
     </div>
     <div
-      v-if="icon && iconOnRight"
+      v-if="hasIcon && iconOnRight"
       class="n-button__icon n-button__icon--right"
+      :class="{'n-button__icon--slot': $slots.icon }"
     >
-      <n-icon :type="icon" />
+      <n-icon
+        v-if="icon"
+        :type="icon"
+      />
+      <div
+        v-else
+        class="n-icon-slot"
+      >
+        <slot
+          name="icon"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -75,6 +99,11 @@ export default {
   data () {
     return {
       style: {}
+    }
+  },
+  computed: {
+    hasIcon () {
+      return this.icon || this.$slots.icon
     }
   },
   mounted () {

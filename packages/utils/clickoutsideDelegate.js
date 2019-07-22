@@ -36,8 +36,12 @@ class ClickOutsideDelegate {
     console.debug('[ClickOutsideDelegate]: unregisterHandler')
     const h = this.handlers.get(handler)
     if (h) {
+      console.debug('[ClickOutsideDelegate.unregisterHandler]: handler found')
       this.handlers.delete(handler)
       --this.handlerCount
+      console.debug('[ClickOutsideDelegate.unregisterHandler]: handler unregistered')
+    } else {
+      console.debug('[ClickOutsideDelegate.unregisterHandler]: handler not found')
     }
     if (!this.handlerCount) {
       console.debug('[ClickOutsideDelegate]: remove handler from window')

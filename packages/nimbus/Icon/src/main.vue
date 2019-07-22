@@ -12,18 +12,24 @@
       v-else-if="type==='ban'"
       :color="color"
     />
+    <pull-request-icon
+      v-else-if="type==='pull-request'"
+      :color="color"
+    />
     <span v-else>icon-type is invalid</span>
   </i>
 </template>
 <script>
 import shareIcon from './icons/share'
 import banIcon from './icons/ban'
+import pullRequestIcon from './icons/pullRequest'
 
 export default {
   name: 'NNimbusIcon',
   components: {
     shareIcon,
-    banIcon
+    banIcon,
+    pullRequestIcon
   },
   props: {
     type: {
@@ -43,7 +49,11 @@ export default {
     styles () {
       let style = {}
       if (this.size) {
-        style['font-size'] = `${this.size}px`
+        if (this.size.endsWith('%') || this.size.endsWith('px')) {
+          style['width'] = this.size
+        } else {
+          style['width'] = this.size + 'px'
+        }
       }
       if (this.color) {
         style.color = this.color
@@ -52,13 +62,4 @@ export default {
     }
   }
 }
-// <style>
-// .n-nimbus-icon svg:hover g {
-//   fill:blue;
-// }
-// .n-nimbus-icon svg g {
-//   transition: fill .3s ease-in-out;
-//   fill:red;
-// }
-// </style>
 </script>
