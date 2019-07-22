@@ -8,10 +8,10 @@
       style="flex-wrap: nowrap;"
     >
       <!--EXAMPLE_START-->
-      <n-time-picker />
+      <n-time-picker v-model="time0" />
       <!--EXAMPLE_END-->
     </div>
-    <pre class="n-doc-section__inspect">Inspect some value here</pre>
+    <pre class="n-doc-section__inspect">{{ JSON.stringify(time0) }}</pre>
     <n-doc-source-block>
       <!--SOURCE-->
     </n-doc-source-block>
@@ -22,6 +22,8 @@
 export default {
   data () {
     return {
+      time0: null,
+      time1: 'invalid'
     }
   }
 }
