@@ -23,6 +23,8 @@ import Alert from './packages/common/Alert'
 import DatePicker from './packages/common/DatePicker'
 import InputNumber from './packages/common/InputNumber'
 import Radio from './packages/common/Radio'
+import Form from './packages/common/Form'
+// import FormItem from './packages/common/Form/form-item'
 
 import ServiceCard from './packages/nimbus/ServiceCard'
 import HomeLayout from './packages/nimbus/HomeLayout'
@@ -65,6 +67,8 @@ function install (Vue) {
   InputNumber.install(Vue)
   NimbusIcon.install(Vue)
   Radio.install(Vue)
+  Form.install(Vue)
+  // FormItem.install(Vue)
 }
 
 export default {
