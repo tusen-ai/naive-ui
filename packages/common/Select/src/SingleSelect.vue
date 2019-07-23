@@ -71,11 +71,19 @@
 </template>
 
 <script>
+import Emitter from '../../../mixins/emitter'
+
 export default {
   name: 'NSingleSelect',
   model: {
     prop: 'selectedValue',
     event: 'input'
+  },
+  mixins: [ Emitter ],
+  inject: {
+    formItem: {
+      default: null
+    }
   },
   props: {
     items: {
@@ -137,9 +145,12 @@ export default {
     }
   },
   watch: {
-    selectedItem () {
+    selectedItem (n, o) {
       if (this.selectedItem !== null) {
         this.label = this.selectedItem.label
+        if (n !== o && this.formItem) {
+          this.dispatch('NFormItem', 'on-form-change', n.value)
+        }
       } else {
         this.label = ''
       }

@@ -9,7 +9,6 @@
   </form>
 </template>
 <script>
-import { debuglog } from 'util';
 export default {
   name: 'NForm',
   provide () {
@@ -61,6 +60,9 @@ export default {
   },
   methods: {
     disabledToggle (flag) {
+      this.$children.forEach(child => {
+        console.log(child.$options.componentName)
+      })
       let sel = ['input', 'select', 'textarea'].map(i => '.n-form-item ' + i).join(',')
       let el = this.$el.querySelectorAll(sel)
       el.forEach(i => {
@@ -75,23 +77,46 @@ export default {
       return 'n-form--lable-' + labelPosition
     },
     /** 
-     * 收集所有prop属性的formitem,在提交的时候进行一次检查验证
+     * form validation, validate all prop-elements by default,
+     * can use specify the scope of validation by param part.
+     * 
+     * @param {Funtion} cb callback
+     * @param {Array} scope  to specify the scope of validation
+     * @return {Boolean} validation passed or not
      */
-    validate (cb) {
-      let flag = true
-      this.$children.forEach(child => {
-        if (child.prop) {
-          let res = child.validate('', this.model[child.prop], true)
-          if (!res) {
-            flag = res
-          }
+    validate (cb, scope = []) {
+      let promise
+      let isCallback = typeof cb === 'function'
+      if (!isCallback && window.Promise) {
+        promise = new Promise((resolve, reject) => {
+          cb = valid => valid ? resolve(valid) : reject(valid)
+        })
+      }
+      let valid = true
+      let fields = {}
+      this.$children.forEach((child, i) => {
+        let flag = scope.length > 0 ? scope.indexOf(child.prop) > -1 : true
+        if (child.prop && flag) {
+          child.validate('', (errors, field) => {
+            if (errors) {
+              valid = false
+            }
+            fields = Object.assign({}, fields, field)
+          })
+        }
+        if (++i === this.$children.length && isCallback) {
+          cb(valid, fields)
         }
       })
-      cb(flag)
+
+      if (promise) {
+        return promise
+      }
     },
     resetForm () {
       this.$children.forEach(child => {
         if (child.prop) {
+          // 这里需要考虑prop是复杂key的情况, 带.
           this.model[child.prop] = this.initialValue[child.prop]
           if (child.validateFlag) {
             child.clearValidateClass()
