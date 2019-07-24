@@ -89,13 +89,17 @@ export default {
     registerScrollListeners () {
       let currentElement = this.$el
       while (true) {
+        console.log('currentElement', currentElement)
         currentElement = getScrollParent(currentElement)
-        this.scrollListeners.push([currentElement, this.updatePosition])
-        currentElement = getParentNode(currentElement)
         if (currentElement === document.body || currentElement.nodeName === 'HTML') {
           break
         }
+        this.scrollListeners.push([currentElement, this.updatePosition])
+        currentElement = getParentNode(currentElement)
       }
+      this.scrollListeners.push([document, this.updatePosition])
+      this.scrollListeners.push([document.body, this.updatePosition])
+      console.log(this.scrollListeners)
       for (const [el, handler] of this.scrollListeners) {
         scrollDelegate.registerHandler(el, handler)
       }
