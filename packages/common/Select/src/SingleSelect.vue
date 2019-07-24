@@ -85,21 +85,14 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 import Emitter from '../../../mixins/emitter'
-
-export default {
-  name: 'NSingleSelect',
-  mixins: [ Emitter ],
-=======
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import toggleable from '../../../mixins/toggleable'
 
 export default {
   name: 'NSingleSelect',
-  mixins: [detachable, toggleable, placeable],
->>>>>>> b7734aafe6f3014543af57489ab336e4b1441e71
+  mixins: [detachable, toggleable, placeable, Emitter],
   model: {
     prop: 'selectedValue',
     event: 'input'

@@ -161,7 +161,7 @@
                   form: {
                     input: '',
                     select: '',
-                    datepicker: '',
+                    datepicker: 0,
                     switch: false,
                     radio: ''
                   }
@@ -730,7 +730,7 @@ export default {
             select: 'Public'
           }
         },
-        datepicker: '',
+        datepicker: 0,
         switch: false,
         radio: ''
       },

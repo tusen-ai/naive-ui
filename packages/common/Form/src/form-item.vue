@@ -116,7 +116,6 @@ export default {
       let cls = ['n-form-item']
       let pre = 'n-form-item__label--'
       cls.push(pre + this.getValue('labelPosition'))
-      console.log(this.getValue('requiredLogo'))
       if (!this.getValue('requiredLogo')) {
         return cls
       }
