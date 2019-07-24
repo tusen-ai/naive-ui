@@ -9,17 +9,17 @@
       </n-gradient-text>
     </div>
     <div class="n-doc-body">
-      <scaffold />
+      <basicUsage />
     </div>
   </div>
 </template>
 
 <script>
-import scaffold from './scaffold.demo.vue'
+import basicUsage from './basicUsage.demo.vue'
 
 export default {
   components: {
-    scaffold
+    basicUsage
   },
   data () {
     return {

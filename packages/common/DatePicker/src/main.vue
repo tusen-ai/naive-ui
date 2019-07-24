@@ -282,6 +282,7 @@ export default {
        * If newSelectedDateTime is invalid, display string need to be restored
        */
       this.refreshSelectedDateTimeString()
+      this.closeCalendar()
     },
     /**
      * Calendar view related methods
