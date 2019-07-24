@@ -20,11 +20,19 @@
 </template>
 
 <script>
+import Emitter from '../../../mixins/emitter'
+
 export default {
   name: 'NRadio',
+  mixins: [ Emitter ],
   model: {
     prop: 'privateValue',
     event: 'input'
+  },
+  inject: {
+    formItem: {
+      default: null
+    }
   },
   props: {
     value: {
@@ -50,6 +58,9 @@ export default {
       if (this.disabled) return
       if (this.privateValue !== this.value) {
         this.$emit('input', this.value)
+        if (this.formItem) {
+          this.dispatch('NFormItem', 'on-form-change', this.value)
+        }
       }
     }
   }

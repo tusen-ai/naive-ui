@@ -26,6 +26,7 @@ import datePickerDemo from './components/datePickerDemo'
 import inputNumberDemo from './components/inputNumberDemo'
 import nimbusIconDemo from './components/nimbusIconDemo'
 import radioDemo from './components/radioDemo'
+import formDemo from './components/formDemo'
 import timePickerDemo from './components/timePickerDemo'
 
 import notificationDemo from './components/notificationDemo'
@@ -73,6 +74,7 @@ const routes = [
       { path: '/n-input-number', component: inputNumberDemo },
       { path: '/n-nimbus-icon', component: nimbusIconDemo },
       { path: '/n-radio', component: radioDemo },
+      { path: '/n-form', component: formDemo },
       { path: '/n-time-picker', component: timePickerDemo }
     ]
   },
