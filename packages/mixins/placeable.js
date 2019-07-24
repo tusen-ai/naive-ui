@@ -87,19 +87,14 @@ export default {
       resizeDelegate.registerHandler(this.updatePosition)
     },
     registerScrollListeners () {
-      let currentElement = this.$el
+      let currentElement = getParentNode(this.$el)
       while (true) {
-        console.log('currentElement', currentElement)
         currentElement = getScrollParent(currentElement)
-        if (currentElement === document.body || currentElement.nodeName === 'HTML') {
-          break
-        }
+        if (currentElement === null) break
         this.scrollListeners.push([currentElement, this.updatePosition])
         currentElement = getParentNode(currentElement)
       }
-      this.scrollListeners.push([document, this.updatePosition])
-      this.scrollListeners.push([document.body, this.updatePosition])
-      console.log(this.scrollListeners)
+      // console.log(this.scrollListeners)
       for (const [el, handler] of this.scrollListeners) {
         scrollDelegate.registerHandler(el, handler)
       }

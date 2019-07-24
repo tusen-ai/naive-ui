@@ -50,7 +50,6 @@ export default {
         },
         {
           name: 'Common',
-          path: '/',
           childItems: [
             {
               name: 'AdvanceTable',
@@ -131,6 +130,15 @@ export default {
             {
               name: 'Tooltip',
               path: '/n-tooltip'
+            }
+          ]
+        },
+        {
+          name: 'Debug',
+          childItems: [
+            {
+              name: 'Popover',
+              path: '/n-popover-debug'
             }
           ]
         }

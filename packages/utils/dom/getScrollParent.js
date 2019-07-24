@@ -5,20 +5,20 @@ import getParentNode from './getParentNode'
  * Returns the scrolling parent of the given element
  * @method
  * @param {Element} element
- * @returns {Element} scroll parent
+ * @returns {Element|null} scroll parent
  */
 export default function getScrollParent (element) {
   // Return body, `getScroll` will take care to get the correct `scrollTop` from it
   if (!element) {
-    return document.body
+    return null
   }
 
   switch (element.nodeName) {
     case 'HTML':
     case 'BODY':
-      return element.ownerDocument.body
+      return document
     case '#document':
-      return element.body
+      return null
   }
 
   // Firefox want us to check `-x` and `-y` variations as well

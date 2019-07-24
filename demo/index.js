@@ -34,6 +34,8 @@ import paginationDemo from './components/paginationDemo'
 import startPage from './components/startPage'
 import demo from './demo'
 
+import popoverDebug from './debugComponents/popoverDebug'
+
 Vue.use(NaiveUI)
 Vue.use(VueRouter)
 
@@ -43,6 +45,10 @@ const routes = [
   {
     path: '/home-demo',
     component: homeDemo
+  },
+  {
+    path: '/n-popover-debug',
+    component: popoverDebug
   },
   {
     path: '/start',

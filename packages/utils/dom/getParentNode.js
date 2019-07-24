@@ -1,11 +1,11 @@
 /**
- * Returns the parentNode or the host of the element
+ * Returns the parentNode or the host of the element until document
  * @method
  * @param {Element} element
  * @returns {Element} parent
  */
 export default function getParentNode (element) {
-  if (element.nodeName === 'HTML') {
+  if (element.nodeName === '#document') {
     return element
   }
   return element.parentNode || element.host
