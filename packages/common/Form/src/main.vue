@@ -1,11 +1,11 @@
 <template>
-  <form 
+  <form
     class="n-form"
     :class="{
       'n-form--inline': inline
     }"
   >
-    <slot v-bind:form="this"></slot>
+    <slot />
   </form>
 </template>
 <script>
@@ -32,10 +32,16 @@ export default {
       default: 'right' // ['top', 'right', 'left', 'center']
     },
     model: {
-      type: Object
+      type: Object,
+      default: function () {
+        return {}
+      }
     },
     rules: {
-      type: Object 
+      type: Object,
+      default: function () {
+        return {}
+      }
     },
     requiredLogo: {
       type: Boolean,
@@ -44,7 +50,7 @@ export default {
   },
   data () {
     return {
-      initialValue: '' 
+      initialValue: ''
     }
   },
   created () {
@@ -54,10 +60,10 @@ export default {
     getLabelPosClass (labelPosition) {
       return 'n-form--lable-' + labelPosition
     },
-    /** 
+    /**
      * form validation, validate all prop-elements by default,
      * can use specify the scope of validation by param part.
-     * 
+     *
      * @param {Funtion} cb callback
      * @param {Array} scope  to specify the scope of validation
      * @return {Boolean} validation passed or not

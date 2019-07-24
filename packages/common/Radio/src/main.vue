@@ -24,11 +24,11 @@ import Emitter from '../../../mixins/emitter'
 
 export default {
   name: 'NRadio',
+  mixins: [ Emitter ],
   model: {
     prop: 'privateValue',
     event: 'input'
   },
-  mixins: [ Emitter ],
   inject: {
     formItem: {
       default: null

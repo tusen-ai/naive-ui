@@ -75,11 +75,11 @@ import Emitter from '../../../mixins/emitter'
 
 export default {
   name: 'NSingleSelect',
+  mixins: [ Emitter ],
   model: {
     prop: 'selectedValue',
     event: 'input'
   },
-  mixins: [ Emitter ],
   inject: {
     formItem: {
       default: null

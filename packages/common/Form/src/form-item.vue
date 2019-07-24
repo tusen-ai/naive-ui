@@ -1,11 +1,21 @@
 <template>
-  <div class="n-form-item" :class="getFormClass()">
-    <label v-if="label !== undefined"  :class="`${prefix}__label`" :style="style">{{label}}</label>
-    <div class="n-form-item__content" :class="
-      validateFlag ? `${prefix}__content--error` : `${prefix}__content--pass`">
-      <slot></slot>
+  <div
+    :class="getFormClass()"
+  >
+    <label
+      v-if="label !== undefined"
+      :class="`${prefix}__label`"
+      :style="style"
+    >
+      {{ label }}
+    </label>
+    <div
+      class="n-form-item__content"
+      :class="validateFlag ? `${prefix}__content--error` : `${prefix}__content--pass`"
+    >
+      <slot />
       <div :class="`${prefix}__validate`">
-        {{validateInfo}}
+        {{ validateInfo }}
       </div>
     </div>
   </div>
@@ -13,17 +23,34 @@
 <script>
 import AsyncValidator from 'async-validator'
 import { getObjValue } from '../../../utils/index'
-import { debuglog } from 'util';
 
 export default {
   name: 'NFormItem',
   props: {
-    label: String,
-    labelWidth: Number,
-    labelStyle: String,
-    labelPosition: String,
-    prop: String,
-    required: Boolean,
+    label: {
+      type: String,
+      default: undefined
+    },
+    labelWidth: {
+      type: Number,
+      default: undefined
+    },
+    labelStyle: {
+      type: String,
+      default: undefined
+    },
+    labelPosition: {
+      type: String,
+      default: undefined
+    },
+    prop: {
+      type: String,
+      default: undefined
+    },
+    required: {
+      type: Boolean,
+      default: undefined
+    },
     requiredLogo: {
       type: Boolean,
       default: undefined
@@ -45,7 +72,7 @@ export default {
   computed: {
     style () {
       let s = {
-        width: null,
+        width: null
       }
       let lW = this.getValue('labelWidth')
       s.width = lW ? lW + 'px' : 'auto'
@@ -86,7 +113,7 @@ export default {
       return this[key] === undefined ? this.form[key] : this[key]
     },
     getFormClass () {
-      let cls = []
+      let cls = ['n-form-item']
       let pre = 'n-form-item__label--'
       cls.push(pre + this.getValue('labelPosition'))
       console.log(this.getValue('requiredLogo'))
@@ -141,8 +168,8 @@ export default {
         return i.trigger === trigger
       })
       if (activeRule.length === 0) return
-      const asyncValidator = new AsyncValidator({[prop]: activeRule})
-      asyncValidator.validate({[prop]: value}, (errors, fields) => {
+      const asyncValidator = new AsyncValidator({ [prop]: activeRule })
+      asyncValidator.validate({ [prop]: value }, (errors, fields) => {
         if (errors) {
           this.validateInfo = errors[0].message
           this.validateFlag = true
@@ -154,7 +181,7 @@ export default {
     },
     clearValidateClass () {
       this.validateInfo = ''
-      this.validateFlag = false 
+      this.validateFlag = false
     },
     validateEventListener () {
       const rules = this.getRules()
