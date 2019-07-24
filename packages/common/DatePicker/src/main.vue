@@ -12,9 +12,9 @@
       class="n-date-picker__input"
       :placeholder="placeholder"
       :readonly="disabled ? 'disabled' : false"
-      @focus="openCalendar"
+      @click="handleActivatorClick"
       @blur="handleDateTimeInputBlur"
-      @keyup.enter="handleDateTimeInputEnter"
+      @input="handleDateTimeInputInput"
     >
     <div class="n-date-picker__icon">
       <n-icon
@@ -28,9 +28,17 @@
     >
       <div ref="content">
         <datetime-panel
-          v-model="panelValue"
+          v-if="type === 'datetime'"
+          :value="value"
           :active="active"
-          @change="handlePanelValueChange"
+          @input="handlePanelInput"
+          @close="closeCalendar"
+        />
+        <date-panel
+          v-if="type === 'date'"
+          :value="value"
+          :active="active"
+          @input="handlePanelInput"
           @close="closeCalendar"
         />
       </div>
@@ -44,6 +52,7 @@ import NIcon from '../../Icon'
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import DatetimePanel from './panel/datetime'
+import DatePanel from './panel/date'
 import clickoutside from '../../../directives/clickoutside'
 
 const DATE_FORMAT = {
@@ -68,16 +77,13 @@ export default {
   },
   components: {
     NIcon,
-    DatetimePanel
+    DatetimePanel,
+    DatePanel
   },
   mixins: [
     detachable,
     placeable
   ],
-  model: {
-    prop: 'value',
-    event: 'change'
-  },
   props: {
     disabled: {
       type: Boolean,
@@ -88,7 +94,7 @@ export default {
       default: 'bottom-start'
     },
     value: {
-      type: [Number, String],
+      type: Number,
       required: false,
       default: null
     },
@@ -111,21 +117,14 @@ export default {
   data () {
     return {
       displayDateTimeString: '',
-      displayDateString: '',
-      displayTimeString: '',
       rightDisplayDateTimeString: '',
-      rightDisplayDateString: '',
-      rightDisplayTimeString: '',
       calendarDateTime: moment(),
       rightCalendarDateTime: moment(),
       currentDateTime: moment(),
       active: false,
-      showTimeSelector: false,
-      showRightTimeSelector: false,
       calendar: [],
       rightCalendar: [],
-      ...TIME_CONST,
-      panelValue: this.value
+      ...TIME_CONST
     }
   },
   computed: {
@@ -181,74 +180,9 @@ export default {
     }
   },
   methods: {
-    handlePanelValueChange (value, valueString) {
-      this.$emit('change', value, valueString)
+    handlePanelInput (value, valueString) {
+      this.$emit('input', value, 'unavailable for now')
       this.refreshSelectedDateTimeString()
-    },
-    /**
-     * If new datetime is null or undefined, emit null to value.
-     * Else adjust new datetime by props.type and emit it to value.
-     */
-    setValue (newSelectedDateTime) {
-      if (newSelectedDateTime === null || newSelectedDateTime === undefined) {
-        this.$emit('change', null)
-        return
-      }
-      if (newSelectedDateTime.isValid()) {
-        const adjustedDateTime = this.adjustDateTimeAccrodingToType(newSelectedDateTime)
-        if (this.computedSelectedDateTime === null || adjustedDateTime.valueOf() !== this.computedSelectedDateTime.valueOf()) {
-          this.$emit('change', adjustedDateTime.valueOf(), adjustedDateTime.format(this.format))
-        }
-      }
-    },
-    adjustDateTimeAccrodingToType (datetime) {
-      if (this.type === 'datetime') {
-        return moment(datetime).startOf('second')
-      } else {
-        return moment(datetime).startOf('date').hour(0)
-      }
-    },
-    justifySelectedDateTimeAfterChangeTimeString () {
-      if (this.computedSelectedDateTime === null) {
-        // case here is impossible for now, because you can't clear time for now
-      } else {
-        const newDisplayDateTimeString = this.displayDateString + ' ' + this.displayTimeString
-        const newSelectedDateTime = moment(newDisplayDateTimeString, this.format, true)
-        this.setValue(newSelectedDateTime)
-      }
-    },
-    handleTimeInput (e) {
-      const newDisplayDateTimeString = this.displayDateString + ' ' + e.target.value
-      const newSelectedDateTime = moment(newDisplayDateTimeString, this.format, true)
-      this.setValue(newSelectedDateTime)
-    },
-    handleDateInput (e) {
-      const newDisplayDateTimeString = e.target.value + ' ' + this.displayTimeString
-      const newSelectedDateTime = moment(newDisplayDateTimeString, this.format, true)
-      this.setValue(newSelectedDateTime)
-    },
-    handleTimeInputBlur () {
-      this.refreshSelectedDateTimeString()
-    },
-    handleDateInputBlur () {
-      this.refreshSelectedDateTimeString()
-    },
-    handleTimeConfirmClick () {
-      this.justifySelectedDateTimeAfterChangeTimeString()
-      this.refreshSelectedDateTimeString()
-      this.closeTimeSelector()
-    },
-    handleTimeCancelClick () {
-      this.closeTimeSelector()
-    },
-    openTimeSelector () {
-      if (this.computedSelectedDateTime === null) {
-        this.setValue(moment())
-      }
-      this.showTimeSelector = true
-    },
-    closeTimeSelector () {
-      this.showTimeSelector = false
     },
     /**
      * If not selected, display nothing,
@@ -260,16 +194,6 @@ export default {
         return
       }
       this.displayDateTimeString = this.computedSelectedDateTime.format(this.format)
-      this.displayDateString = this.computedSelectedDateTime.format('YYYY-MM-DD')
-      this.displayTimeString = this.computedSelectedDateTime.format('HH:mm:ss')
-    },
-    /**
-     * If new time is invalid, do nothing.
-     * If valid, update.
-     */
-    handleDateTimeInputEnter () {
-      const newSelectedDateTime = moment(this.displayDateTimeString, this.format, true)
-      this.setValue(newSelectedDateTime)
     },
     /**
      * If new SelectedDateTime is valid, update `selectedDateTime` and `calendarTime`
@@ -277,12 +201,18 @@ export default {
      */
     handleDateTimeInputBlur () {
       const newSelectedDateTime = moment(this.displayDateTimeString, this.format, true)
-      this.setValue(newSelectedDateTime)
-      /**
-       * If newSelectedDateTime is invalid, display string need to be restored
-       */
-      this.refreshSelectedDateTimeString()
-      this.closeCalendar()
+      if (newSelectedDateTime.isValid()) {
+        this.$emit('input', newSelectedDateTime.valueOf())
+      } else {
+        this.refreshSelectedDateTimeString()
+      }
+    },
+    handleActivatorClick (e) {
+      if (this.active) {
+        e.stopPropagation()
+      } else {
+        this.openCalendar()
+      }
     },
     /**
      * Calendar view related methods
@@ -301,6 +231,12 @@ export default {
     },
     toggleCalendar () {
 
+    },
+    handleDateTimeInputInput (v) {
+      const newSelectedDateTime = moment(this.displayDateTimeString, this.format, true)
+      if (newSelectedDateTime.isValid()) {
+        this.$emit('input', newSelectedDateTime.valueOf())
+      }
     }
   }
 }

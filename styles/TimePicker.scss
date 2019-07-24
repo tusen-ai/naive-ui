@@ -1,4 +1,4 @@
-@include b(time-picker) {
+@include b(time-picker-selector) {
   background-color: rgba(97, 104, 132, 1);
   box-shadow:0px 2px 20px 0px rgba(0,0,0,0.16);
   font-size: 12px;
@@ -6,7 +6,7 @@
   margin-top: 4px;
   width: 180px;
   overflow: hidden;
-  @include fade-in-transition(time-picker, center top);
+  @include fade-in-transition(time-picker, top left);
   .n-time-picker__selection-wrapper {
     position: relative;
     height: 244px;

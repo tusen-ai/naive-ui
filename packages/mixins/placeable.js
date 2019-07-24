@@ -52,6 +52,7 @@ export default {
     }
   },
   mounted () {
+    this.$refs.content.style = 'position: absolute;'
     this.$nextTick().then(() => {
       this.registerScrollListeners()
       this.registerResizeListener()

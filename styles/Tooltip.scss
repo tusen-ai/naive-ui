@@ -7,4 +7,5 @@
 
 @include b(tooltip__content) {
   padding: 8px 14px;
+  white-space: nowrap;
 }

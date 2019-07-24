@@ -13,6 +13,7 @@
     <div
       ref="contentWrapper"
       class="n-content-wrapper"
+      @click="handleContentClick"
     >
       <div
         ref="content"
@@ -21,7 +22,7 @@
           <div
             v-if="active"
             v-clickoutside.lazy="closeTimeSelector"
-            class="n-time-picker"
+            class="n-time-picker-selector"
           >
             <div class="n-time-picker__selection-wrapper">
               <div
@@ -92,7 +93,7 @@
                 round
                 auto-text-color
                 type="primary"
-                @click="handleComfirmClick"
+                @click="handleConfirmClick"
               >
                 Confirm
               </n-button>
@@ -153,14 +154,16 @@ export default {
   },
   mixins: [detachable, placeable],
   props: {
+    stopSelectorBubble: {
+      type: Boolean,
+      default: false
+    },
     placement: {
       type: String,
       default: 'bottom-start'
     },
     value: {
-      validator (value) {
-        return moment(value).isValid()
-      },
+      type: Number,
       default: null
     },
     format: {
@@ -290,9 +293,14 @@ export default {
       this.$emit('input', this.memorizedValue)
       this.active = false
     },
-    handleComfirmClick () {
+    handleConfirmClick () {
       this.refreshTimeString()
       this.active = false
+    },
+    handleContentClick (e) {
+      if (this.stopSelectorBubble) {
+        e.stopPropagation()
+      }
     }
   }
 }
