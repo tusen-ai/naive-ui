@@ -109,7 +109,6 @@ import NIcon from '../../../Icon'
 import clickoutside from '../../../../directives/clickoutside'
 
 import NButton from '../../../Button'
-import NInput from '../../../Input'
 
 const DATETIME_FORMAT = 'YYYY-MM-DD HH:mm:ss'
 const DATE_FORMAT = 'YYYY-MM-DD'
