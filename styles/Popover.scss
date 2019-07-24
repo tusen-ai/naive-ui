@@ -14,6 +14,8 @@ $popover-distance: $popover-arrow-width - 1 + 14;
 }
 
 .n-popover__content-container {
+  left: 0;
+  top: 0;
   height: 0;
   width: 0;
   position: fixed;
