@@ -6,6 +6,30 @@
   width: 240px;
   @include fade-up-transition(date-picker-calendar);
   @include fade-up-transition(date-picker-time-selector);
+  &.n-date-picker--disabled {
+    cursor: not-allowed;
+    .n-date-picker__icon {
+      color: rgba(255, 255, 255, .2);
+    }
+    .n-date-picker__input {
+      cursor: not-allowed;
+      background-color: rgba(255, 255, 255, .08);
+      color: rgba(255, 255, 255, .2);
+      &:focus:hover {
+        box-shadow: none;
+      }
+      &:hover {
+        box-shadow: none;
+      }
+      &:focus {
+        box-shadow: none;
+        background-color: rgba(255, 255, 255, .08);
+      }
+      &::placeholder {
+        color: rgba(255, 255, 255, .2);
+      }
+    }
+  }
   .n-date-picker__icon {
     position: absolute;
     right: 13px;
@@ -14,7 +38,7 @@
     color: rgba(221, 238, 247, 0.3);
     height: 20px;
   }
-  .n-date-picker__input, .n-date-picker-calendar__date-input, .n-date-picker-calendar__time-input {
+  .n-date-picker__input, .n-date-picker-calendar__date-input {
     -webkit-appearance: none;
     box-sizing: border-box;
     border: none;
@@ -69,10 +93,8 @@
 }
 
 @include b(date-picker-calendar) {
-  z-index: 1;
-  position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
+  @include fade-in-transition(date-picker-calendar);
+  margin-top: 4px;
   width: 351px;
   background:rgba(75,81,106,1);
   box-shadow:0px 2px 20px 0px rgba(0,0,0,0.16);

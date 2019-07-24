@@ -3,11 +3,13 @@
     ref="select"
     class="n-select"
     :class="{
-      [`n-select--${size}-size`]: true
+      [`n-select--${size}-size`]: true,
+      'n-select--disabled': disabled
     }"
     @click="toggleMenu"
   >
     <div
+      ref="activator"
       class="n-select-link"
       :class="{
         'n-select-link--active': active
@@ -24,58 +26,80 @@
           :readonly="filterable ? false : 'readonly'"
         >
       </div>
-      <transition name="n-select-menu--transition">
-        <div
-          v-if="active"
-          class="n-select-menu"
-          @mouseleave="hideLightBar"
-        >
-          <transition name="n-select-menu__light-bar--transition">
+    </div>
+    <div
+      ref="contentWrapper"
+      class="n-select-menu__content-wrapper"
+    >
+      <div
+        ref="content"
+        class="n-select-menu__content"
+      >
+        <transition name="n-select-menu--transition">
+          <div
+            v-if="active"
+            ref="contentInner"
+            class="n-select-menu"
+            :class="{[`n-select-menu--${size}-size`]: true}"
+            @mouseleave="hideLightBar"
+          >
+            <transition name="n-select-menu__light-bar--transition">
+              <div
+                v-if="showLightBar"
+                class="n-select-menu__light-bar"
+                :style="{ top: `${lightBarTop}px` }"
+              />
+            </transition>
             <div
-              v-if="showLightBar"
-              class="n-select-menu__light-bar"
-              :style="{ top: `${lightBarTop}px` }"
-            />
-          </transition>
-          <div
-            v-for="item in filteredItems"
-            :key="item.value"
-            class="n-select-menu__item"
-            :class="{
-              'is-selected':
-                selectedValue ===
-                item.value
-            }"
-            @click.stop="toggleItemInSingleSelect(item)"
-            @mouseenter="showLightBarTop"
-          >
-            {{ item.label }}
+              v-for="item in filteredItems"
+              :key="item.value"
+              class="n-select-menu__item"
+              :class="{
+                'n-select-menu__item--selected':
+                  selectedValue ===
+                  item.value
+              }"
+              @click.stop="toggleItemInSingleSelect(item)"
+              @mouseenter="showLightBarTop"
+            >
+              {{ item.label }}
+            </div>
+            <div
+              v-if="label.length && !filteredItems.length"
+              class="n-select-menu__item n-select-menu__item--not-found"
+            >
+              {{
+                /**
+                 * This method to activate hideLightBar is ridiculous, however using
+                 * event handler still has some problem.
+                 */
+                hideLightBar()
+              }}
+              none result matched
+            </div>
           </div>
-          <div
-            v-if="label.length && !filteredItems.length"
-            class="n-select-menu__item n-select-menu__item--not-found"
-          >
-            {{
-              /**
-               * This method to activate hideLightBar is ridiculous, however using
-               * event handler still has some problem.
-               */
-              hideLightBar()
-            }}
-            none result matched
-          </div>
-        </div>
-      </transition>
+        </transition>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+<<<<<<< HEAD
 import Emitter from '../../../mixins/emitter'
 
 export default {
   name: 'NSingleSelect',
   mixins: [ Emitter ],
+=======
+import detachable from '../../../mixins/detachable'
+import placeable from '../../../mixins/placeable'
+import toggleable from '../../../mixins/toggleable'
+
+export default {
+  name: 'NSingleSelect',
+  mixins: [detachable, toggleable, placeable],
+>>>>>>> b7734aafe6f3014543af57489ab336e4b1441e71
   model: {
     prop: 'selectedValue',
     event: 'input'
@@ -113,11 +137,14 @@ export default {
     filterable: {
       type: Boolean,
       default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
-      active: false,
       lightBarTop: null,
       showLightBar: false,
       label: '',
@@ -202,11 +229,11 @@ export default {
         return false
       }
     },
-    emitChangeEvent (item) {
+    emitChangeEvent (item, isSelected) {
       if (this.emitItem) {
-        this.$emit('change', item)
+        this.$emit('change', item, isSelected)
       } else {
-        this.$emit('change', item.value)
+        this.$emit('change', item.value, isSelected)
       }
     },
     showLightBarTop (e) {
@@ -221,19 +248,25 @@ export default {
     },
     handleClickOutsideMenu (e) {
       if (!this.$refs.select.contains(e.target)) {
-        this.active = false
+        this.deactivate()
       }
     },
     closeMenu () {
-      this.active = false
+      this.deactivate()
     },
     toggleMenu () {
-      this.active = !this.active
+      if (this.disabled) return
+      if (this.active) {
+        this.deactivate()
+      } else {
+        this.activate()
+      }
     },
     toggleItemInSingleSelect (item) {
+      if (this.disabled) return
       this.label = item.label
       this.$emit('input', item.value)
-      this.emitChangeEvent(item)
+      this.emitChangeEvent(item, true)
       this.closeMenu()
     }
   }

@@ -3,25 +3,19 @@
     ref="select"
     class="n-select"
     :class="{
-      [`n-select--${size}-size`]: true
+      [`n-select--${size}-size`]: true,
+      'n-select--disabled': disabled
     }"
     @click="toggleMenu"
   >
     <div
+      ref="activator"
       class="n-select-link"
       :class="{
         'n-select-link--active': active,
         'n-select-link--selected': selected
       }"
     >
-      <div
-        class="n-select-link__placeholder"
-        :class="{
-          'n-select-link__placeholder--verbose-transition': verboseTransition
-        }"
-      >
-        {{ placeholder }}
-      </div>
       <div
         class="n-select-link__tags"
         :class="{
@@ -68,46 +62,70 @@
           </div>
         </div>
       </div>
-      <transition name="n-select-menu--transition">
-        <div
-          v-if="active"
-          class="n-select-menu n-select-menu--multiple"
-          @mouseleave="hideLightBar"
-        >
-          <transition name="n-select-menu__light-bar--transition">
-            <div
-              v-if="showLightBar"
-              class="n-select-menu__light-bar"
-              :style="{ top: `${lightBarTop}px` }"
-            />
-          </transition>
+      <div
+        class="n-select-link__placeholder"
+        :class="{
+          'n-select-link__placeholder--verbose-transition': verboseTransition
+        }"
+      >
+        {{ placeholder }}
+      </div>
+    </div>
+    <div
+      ref="contentWrapper"
+      class="n-select-menu__content-wrapper"
+    >
+      <div
+        ref="content"
+        class="n-select-menu__content"
+      >
+        <transition name="n-select-menu--transition">
           <div
-            v-for="item in items"
-            :key="item.value"
-            class="n-select-menu__item"
-            :class="{
-              'is-selected':
-                isSelected(item)
-            }"
-            @click.stop="toggleItemInMultipleSelect(item)"
-            @mouseenter="showLightBarTop"
+            v-if="active"
+            ref="contentInner"
+            class="n-select-menu n-select-menu--multiple"
+            :class="{[`n-select-menu--${size}-size`]: true}"
+            @mouseleave="hideLightBar"
           >
-            {{ item.label }}
+            <transition name="n-select-menu__light-bar--transition">
+              <div
+                v-if="showLightBar"
+                class="n-select-menu__light-bar"
+                :style="{ top: `${lightBarTop}px` }"
+              />
+            </transition>
+            <div
+              v-for="item in items"
+              :key="item.value"
+              class="n-select-menu__item"
+              :class="{
+                'n-select-menu__item--selected':
+                  isSelected(item)
+              }"
+              @click.stop="toggleItemInMultipleSelect(item)"
+              @mouseenter="showLightBarTop"
+            >
+              {{ item.label }}
+            </div>
           </div>
-        </div>
-      </transition>
+        </transition>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import NIcon from '../../Icon/index'
+import detachable from '../../../mixins/detachable'
+import placeable from '../../../mixins/placeable'
+import toggleable from '../../../mixins/toggleable'
 
 export default {
   name: 'NMultipleSelect',
   components: {
     NIcon
   },
+  mixins: [detachable, toggleable, placeable],
   model: {
     prop: 'selectedValue',
     event: 'input'
@@ -144,11 +162,15 @@ export default {
     filterable: {
       type: Boolean,
       default: false
+    },
+
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
-      active: false,
       lightBarTop: null,
       showLightBar: false,
       label: '',
@@ -204,8 +226,6 @@ export default {
       }
     }
   },
-  created () {
-  },
   beforeDestroy () {
     document.removeEventListener('click', this.nativeCloseMenu)
   },
@@ -220,11 +240,11 @@ export default {
         return false
       }
     },
-    emitChangeEvent (item) {
+    emitChangeEvent (item, isSelected) {
       if (this.emitItem) {
-        this.$emit('change', item)
+        this.$emit('change', item, isSelected)
       } else {
-        this.$emit('change', item.value)
+        this.$emit('change', item.value, isSelected)
       }
     },
     showLightBarTop (e) {
@@ -240,22 +260,18 @@ export default {
     },
     nativeCloseMenu (e) {
       if (!this.$refs.select.contains(e.target)) {
-        this.active = false
+        this.deactivate()
       }
     },
     closeMenu () {
-      this.active = false
+      this.deactivate()
     },
     toggleMenu () {
-      this.active = !this.active
-    },
-    toggleItemInSingleSelect (item) {
-      this.label = item.label
-      this.$emit('input', item.value)
-      this.emitChangeEvent(item)
-      this.closeMenu()
+      if (this.disabled) return
+      this.toggle()
     },
     toggleItemInMultipleSelect (item) {
+      if (this.disabled) return
       let newSelectedValues = []
       if (Array.isArray(this.selectedValue)) {
         const itemValues = new Set(this.items.map(item => item.value))
@@ -264,11 +280,13 @@ export default {
       const index = newSelectedValues.findIndex(value => value === item.value)
       if (1 + index) {
         newSelectedValues.splice(index, 1)
+        this.emitChangeEvent(item, false)
       } else {
         newSelectedValues.push(item.value)
+        this.emitChangeEvent(item, true)
       }
       this.$emit('input', newSelectedValues)
-      this.emitChangeEvent(item)
+      this.$nextTick().then(this.updatePosition)
     }
   }
 }

@@ -5,7 +5,16 @@ import getScrollParent from '../utils/dom/getScrollParent'
 import calcPlacementTransfrom from '../utils/dom/calcPlacementTransform'
 
 /**
- * Make $refs.content trace $refs.activator
+ * Make $refs.content trace $refs.activator, set $refs.contentInner width by the way
+ *
+ * Dependency:
+ * $refs.activator
+ * $refs.content
+ * $refs.contentInner(optional)
+ * $vm.active
+ *
+ * @prop {string} placement determine where should $refs.content be put
+ * @prop {string} widthMode determine how width is $refs.contentInner
  */
 export default {
   props: {
@@ -27,15 +36,23 @@ export default {
         ].includes(value)
       },
       default: 'bottom'
+    },
+    widthMode: {
+      validator (value) {
+        return ['self', 'activator'].includes(value)
+      },
+      default: 'self'
     }
   },
   watch: {
     active (newValue) {
-      console.log(newValue)
-      this.$nextTick().then(this.updatePosition)
+      if (newValue) {
+        this.$nextTick().then(this.updatePosition)
+      }
     }
   },
   mounted () {
+    this.$refs.content.style = 'position: absolute;'
     this.$nextTick().then(() => {
       this.registerScrollListeners()
       this.registerResizeListener()
@@ -54,20 +71,23 @@ export default {
     updatePosition () {
       // console.log('scroll')
       if (!this.active) return
-      this.activatorBoundingClientRect = this.$refs.activator.getBoundingClientRect()
+      const activatorBoundingClientRect = this.$refs.activator.getBoundingClientRect()
       // console.log(this.$refs.popoverBody)
       // debugger
-      this.contentBoundingClientRect = this.$refs.content.getBoundingClientRect()
-      // console.log(this.contentBoundingClientRect)
+      const contentBoundingClientRect = this.$refs.content.getBoundingClientRect()
+      // console.log(contentBoundingClientRect)
       // debugger
-      // console.log('scroll', this.activatorBoundingClientRect, this.contentBoundingClientRect)
-      this.$refs.content.style = calcPlacementTransfrom(this.placement, this.activatorBoundingClientRect, this.contentBoundingClientRect)
+      // console.log('scroll', activatorBoundingClientRect, contentBoundingClientRect)
+      this.$refs.content.style = 'position: absolute;' + calcPlacementTransfrom(this.placement, activatorBoundingClientRect, contentBoundingClientRect)
+      if (this.widthMode === 'activator' && this.$refs.contentInner) {
+        this.$refs.contentInner.style.minWidth = activatorBoundingClientRect.width + 'px'
+      }
     },
     registerResizeListener () {
       resizeDelegate.registerHandler(this.updatePosition)
     },
     registerScrollListeners () {
-      let currentElement = this.$refs.self
+      let currentElement = this.$el
       while (true) {
         currentElement = getScrollParent(currentElement)
         this.scrollListeners.push([currentElement, this.updatePosition])

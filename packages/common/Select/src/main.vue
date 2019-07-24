@@ -43,27 +43,39 @@ export default {
     filterable: {
       type: Boolean,
       default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data () {
+    return {
+      active: false
     }
   },
   methods: {
     handleInput (...args) {
-      console.log('input')
       this.$emit('input', ...args)
     },
     handleChange (...args) {
       this.$emit('change', ...args)
+    },
+    handleSetActive (active) {
+      this.active = active
     }
   },
   render (h) {
     const on = {
       input: this.handleInput.bind(this),
-      change: this.handleChange.bind(this)
+      change: this.handleChange.bind(this),
+      setactive: this.handleSetActive.bind(this)
     }
     return this.multiple ? h(NMultipleSelect, {
-      props: this.$props,
+      props: { ...this.$props, active: this.active, placement: 'bottom-start', widthMode: 'activator' },
       on
     }) : h(NSingleSelect, {
-      props: this.$props,
+      props: { ...this.$props, active: this.active, placement: 'bottom-start', widthMode: 'activator' },
       on
     })
   }

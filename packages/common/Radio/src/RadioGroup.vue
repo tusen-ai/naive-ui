@@ -70,11 +70,11 @@ export default {
   },
   methods: {
     handleInput (value) {
-      console.log('input')
+      // console.log('input')
     }
   },
   render (h) {
-    console.log('render radio')
+    // console.log('render radio')
     return h('div', {
       staticClass: 'n-radio-group'
     }, mapSlot(h, this.$slots.default, this))
