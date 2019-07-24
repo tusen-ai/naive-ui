@@ -211,13 +211,19 @@
       <div class="n-doc-section">
         <div class="n-doc-section__header">Validate Form</div>
         <div class="n-doc-section__view">
-          <n-form ref="form-validate" :model="validateForm" :rules="validateRules">
-            <n-form-item prop="input" label="Input">
+
+          <n-form ref="form-validate" :model="validateForm" disabled :rules="validateRules">
+            <n-form-item label="Warning" labelPosition="top">
+              The key in form-model does not support the form with ' . '.<br/>
+              And does not init the value of parameters with 'undefined'.</br>
+              ResetForm Method: only can reset the item with prop.<br/>
+              ValidateForm Method: support validate specified items by the second parameter in form of array.<br/>
+            </n-form-item>
+            <n-form-item :requiredLogo="false" prop="input" label="Input">
               <n-input v-model="validateForm.input" placeholder="Enter string" />
             </n-form-item>
             <n-form-item prop="muti.deep.select" label="Select">
               <n-select
-                size="small"
                 v-model="validateForm.muti.deep.select"
                 placeholder="Please Select Type"
                 :items="items"
@@ -235,14 +241,14 @@
             </n-form-item>
             <n-form-item>
               <n-button @click="formValidate('form-validate')">Submit</n-button>
-              <n-button>Reset</n-button>
+              <n-button @click="formReset('form-validate')">Reset</n-button>
             </n-form-item>
           </n-form>
          
         </div>
         <div class="n-doc-section__source">
           <textarea v-pre>
-            <n-form ref="form-validate" :model="validateForm" :rules="validateRules">
+            <n-form ref="form-validate" disabled :model="validateForm" :rules="validateRules">
               <n-form-item prop="input" label="Input">
                 <n-input v-model="validateForm.input" placeholder="Enter string" />
               </n-form-item>
@@ -266,7 +272,7 @@
               </n-form-item>
               <n-form-item>
                 <n-button @click="formValidate('form-validate')">Submit</n-button>
-                <n-button>Reset</n-button>
+                <n-button @click="formReset('form-validate')">Reset</n-button>
               </n-form-item>
             </n-form>
             <script>
@@ -315,6 +321,7 @@
                 },
                 methods: {
                   formValidate(ref) {
+                    // two ways to use, the first used most
                     // this.$refs[ref].validate((flag, res) => {
                     //   console.log("validate all result", flag, res);
                     // });
@@ -333,7 +340,10 @@
                       .catch(e => {
                         console.log("unpass", e);
                       });
-                  }
+                  },
+                  formReset (ref) {
+                    this.$refs[ref].resetForm();
+                  },
                 }
               }
             </script>
@@ -443,7 +453,7 @@
               <n-input v-model="dynamic['email'][k]"></n-input>
             </n-form-item>
             <n-form-item>
-              <n-button @click="dynamicAddItem">Add item</n-button>
+              <n-button @click="dynamicAddItem">Add</n-button>
               <n-button @click="dynamicPopItem">Delete</n-button>
             </n-form-item>
           </n-form>
@@ -584,10 +594,10 @@ export default {
         }
       ],
       validateForm: {
-        input: "",
+        input: "input",
         muti: {
           deep: {
-            select: ""
+            select: "Public"
           }
         },
         datepicker: "",
@@ -722,9 +732,9 @@ export default {
   },
   methods: {
     formValidate(ref) {
-      // this.$refs[ref].validate((flag, res) => {
-      //   console.log("validate all result", flag, res);
-      // });
+      this.$refs[ref].validate((flag, res) => {
+        console.log("validate all result", flag, res);
+      });
       new Promise((resolve, reject) => {
         this.$refs[ref].validate((valid, filed) => {
           if (valid) {
@@ -741,8 +751,8 @@ export default {
           console.log("unpass", e);
         });
     },
-    resetForm() {
-      this.$refs["form3"].resetForm();
+    formReset (ref) {
+      this.$refs[ref].resetForm();
     },
     dynamicAddItem() {
       let i = Object.keys(this.dynamic.email).length;
@@ -758,7 +768,6 @@ export default {
       let keys = Object.keys(this.dynamic.email)
       let k = keys.pop()
       if (k) {
-        console.log(this.dynamic.email, k)
         this.$delete(this.dynamic.email, k)
       }
     }

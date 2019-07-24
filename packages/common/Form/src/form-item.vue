@@ -12,6 +12,7 @@
 </template>
 <script>
 import AsyncValidator from 'async-validator'
+import { getObjValue } from '../../../utils/index'
 import { debuglog } from 'util';
 
 export default {
@@ -22,7 +23,11 @@ export default {
     labelStyle: String,
     labelPosition: String,
     prop: String,
-    required: Boolean
+    required: Boolean,
+    requiredLogo: {
+      type: Boolean,
+      default: undefined
+    }
   },
   inject: ['form'],
   provide () {
@@ -57,6 +62,18 @@ export default {
       return rule
     }
   },
+  watch: {
+    // disabled (n) {
+    //   this.$children.forEach(i => {
+    //     if (getObjValue(i, '$options.name.0'.split('.')) === 'N') {
+    //       // dirctly modify the prop value is forbbiden by vue,
+    //       // neither definePropery or proxy pass
+    //       // we need to update every components we want to influence
+    //       // i.disabled = n
+    //     }
+    //   })
+    // }
+  },
   created () {
     this.validateEventListener()
   },
@@ -66,12 +83,16 @@ export default {
   },
   methods: {
     getValue (key) {
-      return this[key] || this.form[key] || null
+      return this[key] === undefined ? this.form[key] : this[key]
     },
     getFormClass () {
       let cls = []
       let pre = 'n-form-item__label--'
       cls.push(pre + this.getValue('labelPosition'))
+      console.log(this.getValue('requiredLogo'))
+      if (!this.getValue('requiredLogo')) {
+        return cls
+      }
       if (this.required) {
         cls.push(pre + 'require')
       } else if (this.form && this.form.rules && this.prop) {
@@ -83,9 +104,6 @@ export default {
         }
       }
       return cls
-    },
-    getPropValue (obj, keys) {
-      return keys.reduce((res, n) => (res !== undefined && res[n] !== undefined ? res[n] : null), obj)
     },
     getRules () {
       let rules = []
@@ -115,7 +133,7 @@ export default {
       let rules = this.getRules()
       // 针对多层对象的验证
       let prop = this.prop
-      let value = this.getPropValue(this.form.model, this.prop.split('.'))
+      let value = getObjValue(this.form.model, this.prop.split('.'))
       if (this.prop.indexOf('.') > -1) {
         prop = prop.slice(prop.lastIndexOf('.') + 1)
       }
@@ -132,7 +150,6 @@ export default {
           this.clearValidateClass()
         }
         cb(errors[0].message || false, fields)
-        // 此处是否需要向外面发送
       })
     },
     clearValidateClass () {

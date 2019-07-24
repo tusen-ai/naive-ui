@@ -2,13 +2,15 @@
   <form 
     class="n-form"
     :class="{
-      'n-form--inline': inline,
+      'n-form--inline': inline
     }"
   >
     <slot v-bind:form="this"></slot>
   </form>
 </template>
 <script>
+import { deepClone, getObjValue } from '../../../utils/index'
+
 export default {
   name: 'NForm',
   provide () {
@@ -23,7 +25,7 @@ export default {
     },
     labelWidth: {
       type: Number,
-      default: 200
+      default: 80
     },
     labelPosition: {
       type: String,
@@ -31,13 +33,13 @@ export default {
     },
     model: {
       type: Object
-    }, 
-    disabled: {
-      type: Boolean,
-      default: null 
     },
     rules: {
       type: Object 
+    },
+    requiredLogo: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -45,34 +47,10 @@ export default {
       initialValue: '' 
     }
   },
-  watch: {
-    disabled: {
-      handler (n) {
-        this.disabledToggle(n)
-      }
-    }
-  },
-  created() {
-    this.initialValue = JSON.parse(JSON.stringify(this.model || ''))
-  },
-  mounted () {
-    this.disabledToggle(this.disabled)
+  created () {
+    this.initialValue = deepClone(this.model)
   },
   methods: {
-    disabledToggle (flag) {
-      this.$children.forEach(child => {
-        console.log(child.$options.componentName)
-      })
-      let sel = ['input', 'select', 'textarea'].map(i => '.n-form-item ' + i).join(',')
-      let el = this.$el.querySelectorAll(sel)
-      el.forEach(i => {
-        i.disabled = flag
-
-        if (flag) {
-          i.classList.toggle('n-form--disable')
-        }
-      })
-    },
     getLabelPosClass (labelPosition) {
       return 'n-form--lable-' + labelPosition
     },
@@ -113,11 +91,22 @@ export default {
         return promise
       }
     },
+    /**
+     * just can reset the value with prop in form-item
+     */
     resetForm () {
       this.$children.forEach(child => {
         if (child.prop) {
-          // 这里需要考虑prop是复杂key的情况, 带.
-          this.model[child.prop] = this.initialValue[child.prop]
+          let keys = child.prop.split('.')
+          let obj = this.model
+          let j = 0
+          keys.forEach((k, i) => {
+            if (i !== keys.length - 1) {
+              obj = obj[k]
+            }
+            j = i
+          })
+          obj[keys[j]] = getObjValue(this.initialValue, keys)
           if (child.validateFlag) {
             child.clearValidateClass()
           }
