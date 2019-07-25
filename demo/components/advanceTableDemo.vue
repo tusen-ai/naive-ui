@@ -98,7 +98,8 @@ export default {
           />
         </div>
         <div class="n-doc-section__source">
-          <textarea><n-advance-table
+          <textarea>
+<n-advance-table
   :columns="columns"
   :data="data"
   max-height="300px" // maxheight will fix header
@@ -205,7 +206,8 @@ export default {
           />
         </div>
         <div class="n-doc-section__source">
-          <textarea><n-advance-table
+          <textarea>
+<n-advance-table
   :columns="columns"
   :data="data"
   max-height="300px"
@@ -306,7 +308,8 @@ export default {
           />
         </div>
         <div class="n-doc-section__source">
-          <textarea><n-advance-table
+          <textarea>
+<n-advance-table
   :columns="columns"
   :data="data"
   max-height="300px"
@@ -403,11 +406,12 @@ export default {
             :data="data"
             max-height="300px"
             :on-change="onChange"
-            :pagination="{total:data.length,limit:10}"
+            :pagination="{ total: data.length, limit: 10 }"
           />
         </div>
         <div class="n-doc-section__source">
-          <textarea><n-advance-table
+          <textarea>
+<n-advance-table
   :columns="columns"
   :data="data"
   max-height="300px"
@@ -507,11 +511,12 @@ export default {
             :data="data"
             max-height="300px"
             :on-change="onChange"
-            :pagination="{total:data.length,limit:10,custom:true}"
+            :pagination="{ total: data.length, limit: 10, custom: true }"
           />
         </div>
         <div class="n-doc-section__source">
-          <textarea><n-advance-table
+          <textarea>
+<n-advance-table
   :columns="columns"
   :data="data"
   max-height="300px"
@@ -563,11 +568,12 @@ export default {
             max-height="300px"
             :on-change="onChange"
             :search="search"
-            :pagination="{total:data.length,limit:10}"
+            :pagination="{ total: data.length, limit: 10 }"
           />
         </div>
         <div class="n-doc-section__source">
-          <textarea><n-advance-table
+          <textarea>
+<n-advance-table
   :columns="columns"
   :data="data"
   max-height="300px"
@@ -621,11 +627,12 @@ export default {
             max-height="300px"
             :on-change="onChange"
             :search="search1"
-            :pagination="{total:data.length,limit:10}"
+            :pagination="{ total: data.length, limit: 10 }"
           />
         </div>
         <div class="n-doc-section__source">
-          <textarea><n-advance-table
+          <textarea>
+<n-advance-table
   :columns="columns"
   :data="data"
   max-height="300px"
@@ -677,11 +684,12 @@ export default {
               max-height="300px"
               :on-change="onChange1"
               :search="search"
-              :pagination="{total:data.length,limit:10}"
+              :pagination="{ total: data.length, limit: 10 }"
             />
           </div>
           <div class="n-doc-section__source">
-            <textarea><n-advance-table
+            <textarea>
+<n-advance-table
   :columns="columns"
   :data="data"
   max-height="300px"

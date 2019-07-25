@@ -19,14 +19,17 @@
       background: transparent;
     }
     &::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,0.2);
+      background: rgba(255, 255, 255, 0.2);
       border-radius: 2.5px;
     }
     &::-webkit-scrollbar-thumb:hover {
-      background: rgba(255,255,255,0.3);
+      background: rgba(255, 255, 255, 0.3);
     }
-    &::-webkit-scrollbar-corner{
-      background: transparent
+    &::-webkit-scrollbar-corner {
+      background: transparent;
+    }
+    &::-webkit-scrollbar:horizontal {
+      height: 5px;
     }
     table thead tr th:last-of-type {
       padding-left: 32px;
@@ -37,11 +40,11 @@
     display: flex;
     justify-content: flex-end;
   }
-  .n-advance-table__operation{
+  .n-advance-table__operation {
     display: flex;
     justify-content: space-between;
   }
-  .n-no-data-tip{
+  .n-no-data-tip {
     padding: 5px;
     text-align: center;
     width: 100%;
