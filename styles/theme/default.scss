@@ -184,7 +184,7 @@ $default-font-family: 'Lato';
   }
 }
 
-@mixin fade-in-transition($block, $origin: left top) {
+@mixin fade-in-transition($block, $origin: inherit) {
   &.#{$namespace}-#{$block}--transition-enter-active,
   &.#{$namespace}-#{$block}--transition-leave-active {
     transform: scale(1);

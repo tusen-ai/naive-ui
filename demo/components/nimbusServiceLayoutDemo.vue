@@ -17,41 +17,7 @@
           <n-nimbus-service-layout
             icon="md-musical-notes"
             name="Oasis"
-            :items="[
-              {
-                name: 'Definitely Maybe',
-                path: '/n-nimbus-service-layout?param=666'
-              },
-              {
-                name: `Morning Glory`,
-                childItems: [
-                  {
-                    name: 'Hello',
-                    path: '/n-nimbus-service-layout?param=777'
-                  },
-                  {
-                    name: 'Roll with It',
-                    path: '/n-nimbus-service-layout?param=888'
-                  },
-                  {
-                    name: 'Wonderwall',
-                    path: '/n-nimbus-service-layout?param=999'
-                  },
-                  {
-                    name: `Don't Look Back in Anger`,
-                    path: '/n-nimbus-service-layout?param=000'
-                  },
-                  {
-                    name: 'Some Might Say',
-                    path: '/n-nimbus-service-layout?param=111'
-                  }
-                ]
-              },
-              {
-                name: 'Be Here Now',
-                path: '/n-nimbus-service-layout?param=222'
-              }
-            ]"
+            :items="items"
           >
             Take me to the place where you go<br>
             Where nobody knows if it's night or day<br>
@@ -59,6 +25,11 @@
             Of a Rock n Roll band<br>
             Who'll throw it all away
           </n-nimbus-service-layout>
+        </div>
+        <div class="n-doc-section__inspect">
+          <button @click="handleClick">
+            change items
+          </button>
         </div>
         <div class="n-doc-section__source">
           <textarea><n-nimbus-service-layout
@@ -118,10 +89,52 @@ export default {
   mixins: [docCodeEditorMixin],
   data () {
     return {
-      currentField: 'Hello'
+      items: [
+        {
+          name: 'Definitely Maybe',
+          path: '/n-nimbus-service-layout?param=666'
+        },
+        {
+          name: `Morning Glory`,
+          childItems: [
+            {
+              name: 'Hello',
+              path: '/n-nimbus-service-layout?param=777'
+            },
+            {
+              name: 'Roll with It',
+              path: '/n-nimbus-service-layout?param=888'
+            },
+            {
+              name: 'Wonderwall',
+              path: '/n-nimbus-service-layout?param=999'
+            },
+            {
+              name: `Don't Look Back in Anger`,
+              path: '/n-nimbus-service-layout?param=000'
+            },
+            {
+              name: 'Some Might Say',
+              path: '/n-nimbus-service-layout?param=111'
+            }
+          ]
+        },
+        {
+          name: 'Be Here Now',
+          path: '/n-nimbus-service-layout?param=222'
+        }
+      ]
     }
   },
   methods: {
+    handleClick () {
+      this.items = [
+        {
+          name: 'Definitely Maybe',
+          path: '/n-nimbus-service-layout?param=666'
+        }
+      ]
+    }
   }
 }
 </script>

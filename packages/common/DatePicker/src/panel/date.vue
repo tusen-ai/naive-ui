@@ -201,6 +201,7 @@ export default {
   created () {
     if (this.valueAsMoment !== null) {
       this.displayDateString = this.valueAsMoment.format(DATE_FORMAT)
+      this.calendarDateTime = this.valueAsMoment
     } else {
       this.displayDateString = ''
     }

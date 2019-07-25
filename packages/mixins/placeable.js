@@ -78,7 +78,9 @@ export default {
       // console.log(contentBoundingClientRect)
       // debugger
       // console.log('scroll', activatorBoundingClientRect, contentBoundingClientRect)
-      this.$refs.content.style = 'position: absolute;' + calcPlacementTransfrom(this.placement, activatorBoundingClientRect, contentBoundingClientRect)
+      const [placementTransform, suggsetedTransformOrigin] = calcPlacementTransfrom(this.placement, activatorBoundingClientRect, contentBoundingClientRect)
+      this.$refs.content.style = 'position: absolute;' + placementTransform + `transform-origin: ${suggsetedTransformOrigin};`
+      this.$refs.content.setAttribute('n-suggested-transform-origin', suggsetedTransformOrigin)
       if (this.widthMode === 'activator' && this.$refs.contentInner) {
         this.$refs.contentInner.style.minWidth = activatorBoundingClientRect.width + 'px'
       }

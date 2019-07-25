@@ -4,24 +4,50 @@
     class="n-date-picker"
     :class="{
       [`n-date-picker--${size}-size`]: true,
-      'n-date-picker--disabled': disabled
+      'n-date-picker--disabled': disabled,
+      'n-date-picker--range': isRange
     }"
   >
-    <input
-      v-model="displayDateTimeString"
-      class="n-date-picker__input"
-      :placeholder="placeholder"
-      :readonly="disabled ? 'disabled' : false"
-      @click="handleActivatorClick"
-      @blur="handleDateTimeInputBlur"
-      @input="handleDateTimeInputInput"
+    <div
+      v-if="isRange"
+      class="n-date-picker__editor"
     >
-    <div class="n-date-picker__icon">
-      <n-icon
-        size="20"
-        type="ios-calendar"
-      />
+      <input
+        v-model="displayDateTimeString"
+        class="n-date-picker__input"
+        :placeholder="placeholder"
+        :readonly="disabled ? 'disabled' : false"
+        @click="handleActivatorClick"
+        @focus="handleFocus"
+        @blur="handleDateTimeInputBlur"
+        @input="handleDateTimeInputInput"
+      >
     </div>
+    <div
+      v-else
+      class="n-date-picker__editor"
+      :class="{
+        'n-date-picker__editor--focus': isFocus
+      }"
+    >
+      <input
+        v-model="displayDateTimeString"
+        class="n-date-picker__input"
+        :placeholder="placeholder"
+        :readonly="disabled ? 'disabled' : false"
+        @click="handleActivatorClick"
+        @focus="handleFocus"
+        @blur="handleDateTimeInputBlur"
+        @input="handleDateTimeInputInput"
+      >
+      <div class="n-date-picker__icon">
+        <n-icon
+          size="20"
+          type="ios-calendar"
+        />
+      </div>
+    </div>
+
     <div
       ref="contentWrapper"
       class="n-content-wrapper"
@@ -41,6 +67,13 @@
           @input="handlePanelInput"
           @close="closeCalendar"
         />
+        <datetimerange-panel
+          v-if="type === 'datetimerange'"
+          :value="value"
+          :active="active"
+          @input="handlePanelInput"
+          @close="closeCalendar"
+        />
       </div>
     </div>
   </div>
@@ -52,6 +85,7 @@ import NIcon from '../../Icon'
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import DatetimePanel from './panel/datetime'
+import DatetimerangePanel from './panel/datetimerange'
 import DatePanel from './panel/date'
 import clickoutside from '../../../directives/clickoutside'
 
@@ -78,7 +112,8 @@ export default {
   components: {
     NIcon,
     DatetimePanel,
-    DatePanel
+    DatePanel,
+    DatetimerangePanel
   },
   mixins: [
     detachable,
@@ -106,12 +141,14 @@ export default {
      * type can be 'date', 'datetime'
      */
     type: {
-      type: String,
+      validator (type) {
+        return ['date', 'datetime', 'daterange', 'datetimerange'].includes(type)
+      },
       default: 'date'
     },
-    debug: {
-      type: Boolean,
-      default: false
+    placeholder: {
+      type: String,
+      default: null
     }
   },
   data () {
@@ -124,12 +161,20 @@ export default {
       active: false,
       calendar: [],
       rightCalendar: [],
+      isFocus: false,
       ...TIME_CONST
     }
   },
   computed: {
-    placeholder () {
-      return PLACEHOLDER[this.type]
+    isRange () {
+      return ['daterange', 'datetimerange'].includes(this.type)
+    },
+    computedPlaceholder () {
+      if (this.placeholder === null) {
+        return PLACEHOLDER[this.type]
+      } else {
+        return this.placeholder
+      }
     },
     format () {
       return DATE_FORMAT[this.type]
@@ -206,6 +251,7 @@ export default {
       } else {
         this.refreshSelectedDateTimeString()
       }
+      this.isFocus = false
     },
     handleActivatorClick (e) {
       if (this.active) {
@@ -237,6 +283,9 @@ export default {
       if (newSelectedDateTime.isValid()) {
         this.$emit('input', newSelectedDateTime.valueOf())
       }
+    },
+    handleFocus () {
+      this.isFocus = true
     }
   }
 }

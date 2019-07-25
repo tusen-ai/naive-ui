@@ -11,6 +11,7 @@
     <div class="n-doc-body">
       <basic-usage />
       <disabled />
+      <range />
     </div>
   </div>
 </template>
@@ -18,11 +19,13 @@
 <script>
 import basicUsage from './basicUsage.demo.vue'
 import disabled from './disabled.demo.vue'
+import range from './range.demo'
 
 export default {
   components: {
     basicUsage,
-    disabled
+    disabled,
+    range
   },
   data () {
     return {

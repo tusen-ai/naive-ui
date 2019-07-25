@@ -1,5 +1,6 @@
 export default function calcPlacementTransform (placement, activatorRect, popoverRect) {
   let contentLeft, contentTop
+  let suggesetedTransfromOrigin = 'none'
   if (placement === 'top-start') {
     contentTop = activatorRect.top - popoverRect.height
     contentLeft = activatorRect.left
@@ -28,7 +29,14 @@ export default function calcPlacementTransform (placement, activatorRect, popove
     contentTop = activatorRect.top + activatorRect.height - popoverRect.height
     contentLeft = activatorRect.left + activatorRect.width
   } else if (placement === 'bottom-start') {
-    contentTop = activatorRect.top + activatorRect.height
+    const toWindowBottom = window.innerHeight - activatorRect.bottom
+    if (popoverRect.height > toWindowBottom) {
+      contentTop = activatorRect.top - popoverRect.height
+      suggesetedTransfromOrigin = 'bottom left'
+    } else {
+      contentTop = activatorRect.top + activatorRect.height
+      suggesetedTransfromOrigin = 'top left'
+    }
     contentLeft = activatorRect.left
   } else if (placement === 'bottom-end') {
     contentTop = activatorRect.top + activatorRect.height
@@ -43,5 +51,5 @@ export default function calcPlacementTransform (placement, activatorRect, popove
    * However, I found that the dom delay is very serious.
    * So I decide to use left and top for now.
    */
-  return `left: ${contentLeft}px; top: ${contentTop}px;`
+  return [`left: ${contentLeft}px; top: ${contentTop}px;`, suggesetedTransfromOrigin]
 }

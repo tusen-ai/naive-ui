@@ -11,24 +11,23 @@
     .n-date-picker__icon {
       color: rgba(255, 255, 255, .2);
     }
-    .n-date-picker__input {
+    .n-date-picker__editor {
       cursor: not-allowed;
       background-color: rgba(255, 255, 255, .08);
-      color: rgba(255, 255, 255, .2);
-      &:focus:hover {
-        box-shadow: none;
+      .n-date-picker__input {
+        cursor: not-allowed;
+        color: rgba(255, 255, 255, .2);
+        &::placeholder {
+          color: rgba(255, 255, 255, .2);
+        }
       }
       &:hover {
         box-shadow: none;
       }
-      &:focus {
-        box-shadow: none;
-        background-color: rgba(255, 255, 255, .08);
-      }
-      &::placeholder {
-        color: rgba(255, 255, 255, .2);
-      }
     }
+  }
+  &.n-date-picker--range {
+    width: 382px;
   }
   .n-date-picker__icon {
     position: absolute;
@@ -37,9 +36,9 @@
     transform: translateY(-50%);
     color: rgba(221, 238, 247, 0.3);
     height: 20px;
+    transition: color .3s $default-cubic-bezier;
   }
-  .n-date-picker__input, .n-date-picker-calendar__date-input {
-    -webkit-appearance: none;
+  .n-date-picker__editor {
     box-sizing: border-box;
     border: none;
     border-radius: $input-border-radius;
@@ -54,19 +53,30 @@
     transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
     padding: 0 14px;
     font-size: 14px;
-    &:focus:hover {
-      box-shadow: inset 0 0 0px 1px $main-color, 0px 0px 10px 1px #366555;
+    .n-date-picker__input {
+      width: 100%;
+      -webkit-appearance: none;
+      outline: none;
+      background: none;
+      color: #fff;
+      border: none;
+      padding: 0;
+      transition: color .3s $default-cubic-bezier;
+      &::placeholder {
+        transition: color .3s $default-cubic-bezier;
+        color: $input-placeholder-color;
+        opacity: 1;
+      }
     }
-    &:hover {
-      box-shadow: inset 0 0 0px 1px $main-color;
-    }
-    &:focus {
+    &.n-date-picker__editor--focus {
+      &:hover {
+        box-shadow: inset 0 0 0px 1px $main-color, 0px 0px 10px 1px #366555;
+      }
       box-shadow: inset 0 0 0px 1px $main-color;
       background-color: $focus-input-background-color;
     }
-    &::placeholder {
-      color: $input-placeholder-color;
-      opacity: 1;
+    &:hover {
+      box-shadow: inset 0 0 0px 1px $main-color;
     }
   }
   &.n-date-picker--small-size {
@@ -95,11 +105,19 @@
 @include b(date-picker-calendar) {
   @include fade-in-transition(date-picker-calendar);
   margin-top: 4px;
+  margin-bottom: 4px;
   width: 351px;
   background:rgba(75,81,106,1);
   box-shadow:0px 2px 20px 0px rgba(0,0,0,0.16);
   border-radius: 6px;
   color:rgba(233,233,236,1);
+  &.n-date-picker-calendar--datetimerange {
+    width: 702px;
+    display: flex;
+  }
+  .n-date-picker-calendar__range-wrapper {
+    width: 351px;
+  }
   .n-date-picker-calendar__date-time-input-wrapper {
     padding: 14px 24px;
     border-bottom: 1px solid rgba(255, 255, 255, .07);
@@ -211,53 +229,6 @@
     justify-content: flex-end;
     .n-button {
       margin-bottom: 0;
-    }
-  }
-}
-
-@include b(date-picker-time-selector) {
-  z-index: 1;
-  position: absolute;
-  top: calc(100% + 4px);
-  background-color: rgba(97, 104, 132, 1);
-  box-shadow:0px 2px 20px 0px rgba(0,0,0,0.16);
-  font-size: 12px;
-  border-radius: 6px;
-  width: 180px;
-  .n-date-picker-time-selector__selection-wrapper {
-    height: 244px;
-    border-bottom: 1px solid rgba(255, 255, 255, .07);
-    display: flex;
-  }
-  .n-date-picker-time-selector__hour, .n-date-picker-time-selector__minute, .n-date-picker-time-selector__second {
-    @include scrollbar;
-    width: 60px;
-    height: 244px;
-    flex-direction: column;
-    overflow-y: scroll;
-    .n-date-picker-time-selector__item {
-      cursor: pointer;
-      height: 35px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background-color .2s $default-cubic-bezier, color .2s $default-cubic-bezier;
-      background: transparent;
-      &:hover {
-        background-color: rgba(99,226,183,0.12);
-      }
-      &.n-date-picker-time-selector__item--active {
-        background-color: rgba(99,226,183,0.12);
-        color: rgba(99, 226, 183, 1);
-      }
-    }
-  }
-  .n-date-picker-time-selector__actions {
-    margin: 10px 15px;
-    display: flex;
-    justify-content: space-between;
-    .n-button {
-      margin: 0;
     }
   }
 }
