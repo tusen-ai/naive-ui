@@ -1,17 +1,13 @@
 <template>
-  <div
-    ref="tableWrapper"
-    class="n-advance-tabel__wrapper"
-  >
+  <div ref="tableWrapper"
+class="n-advance-tabel__wrapper">
     <div class="n-advance-table__operation">
       <section class="n-advance-table__operation__bacth" />
       <div class="n-advance-table__operation__custom">
         <slot name="table-operation" />
       </div>
-      <div
-        v-if="search"
-        class="n-advance-table__operation__search"
-      >
+      <div v-if="search"
+class="n-advance-table__operation__search">
         <searchInput
           ref="search"
           style=" margin-bottom: 18px;"
@@ -31,21 +27,17 @@
           :key="i"
           :style="computeCustomWidthStl(column)"
         >
-        <col
-          v-if="scrollBarWidth"
-          :width="scrollBarWidth"
-        >
+        <col v-if="scrollBarWidth"
+:width="scrollBarWidth" >
       </colgroup>
       <n-thead>
         <n-tr>
-          <n-th
-            v-for="(column, i) in columns"
-            :key="column.key"
-          >
+          <n-th v-for="(column, i) in columns"
+:key="column.key">
             {{ column.title }}
             <SortIcon
               v-if="column.sortable"
-              v-model="sortIndexs[(column.key || i) ]"
+              v-model="sortIndexs[column.key || i]"
               @onSortTypeChange="
                 type =>
                   onSortTypeChange({
@@ -68,7 +60,9 @@
               :filter-key="column.key || i"
               :filter-items="column.filterItems"
               :filter-multiple="column.filterMultiple || false"
-              @on-filter="({value,key,filterFn}) => onFilter(value,key, filterFn)"
+              @on-filter="
+                ({ value, key, filterFn }) => onFilter(value, key, filterFn)
+              "
             />
           </n-th>
           <span
@@ -95,14 +89,10 @@
         >
       </colgroup>
       <n-tbody>
-        <n-tr
-          v-for="(rowData, i) in showingData"
-          :key="i"
-        >
-          <n-td
-            v-for="column in columns"
-            :key="column.key"
-          >
+        <n-tr v-for="(rowData, i) in showingData"
+:key="i">
+          <n-td v-for="column in columns"
+:key="column.key">
             <row
               :index="i"
               :row="rowData"
@@ -111,10 +101,8 @@
             />
           </n-td>
         </n-tr>
-        <div
-          v-if="showingData.length === 0"
-          class="n-no-data-tip"
-        >
+        <div v-if="showingData.length === 0"
+class="n-no-data-tip">
           No data
         </div>
       </n-tbody>
@@ -124,10 +112,8 @@
       v-if="pagination !== false && showingData.length"
       class="n-advanced-table__pagination"
     >
-      <n-pagination
-        v-model="currentPage"
-        :page-count="pageCount"
-      />
+      <n-pagination v-model="currentPage"
+:page-count="pageCount" />
     </div>
   </div>
 </template>
@@ -474,7 +460,7 @@ export default {
       let { sortable, key, type, column } = this.currentSortColumn
       // use remote sort
       if (sortable === true) {
-        if (!this.searchDataNoSort) {
+        if (!this.searchDataNoSort && this.data.length !== 0) {
           this.searchDataNoSort = data.slice(0)
         }
         if (type === 0) {
