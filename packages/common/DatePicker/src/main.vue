@@ -11,17 +11,37 @@
     <div
       v-if="isRange"
       class="n-date-picker__editor"
+      :class="{
+        'n-date-picker__editor--focus': isFocus
+      }"
     >
       <input
-        v-model="displayDateTimeString"
-        class="n-date-picker__input"
-        :placeholder="placeholder"
+        class="n-date-picker__input n-date-picker__input--start"
+        :placeholder="computedStartPlaceholder"
         :readonly="disabled ? 'disabled' : false"
-        @click="handleActivatorClick"
         @focus="handleFocus"
-        @blur="handleDateTimeInputBlur"
-        @input="handleDateTimeInputInput"
+        @click="openCalendar"
+        @blur="handleRangeInputBlur"
       >
+      <input
+        class="n-date-picker__input n-date-picker__input--splitor"
+        :value="splitor"
+        readonly="readonly"
+      >
+      <input
+        class="n-date-picker__input n-date-picker__input--end"
+        :placeholder="computedEndPlaceholder"
+        :readonly="disabled ? 'disabled' : false"
+        @click="openCalendar"
+        @focus="handleFocus"
+        @blur="handleRangeInputBlur"
+      >
+      <div class="n-date-picker__icon">
+        <n-icon
+          size="20"
+          type="ios-calendar"
+        />
+      </div>
     </div>
     <div
       v-else
@@ -33,7 +53,7 @@
       <input
         v-model="displayDateTimeString"
         class="n-date-picker__input"
-        :placeholder="placeholder"
+        :placeholder="computedPlaceholder"
         :readonly="disabled ? 'disabled' : false"
         @click="handleActivatorClick"
         @focus="handleFocus"
@@ -97,6 +117,14 @@ const PLACEHOLDER = {
   date: 'Select date',
   datetime: 'Select date and time'
 }
+const START_PLACEHOLDER = {
+  datetimerange: 'Start date and time',
+  daterange: 'Start date'
+}
+const END_PLACEHOLDER = {
+  datetimerange: 'End date and time',
+  daterange: 'End date'
+}
 const TIME_CONST = {
   weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
   hours: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'],
@@ -129,8 +157,7 @@ export default {
       default: 'bottom-start'
     },
     value: {
-      type: Number,
-      required: false,
+      type: [Number, Array],
       default: null
     },
     size: {
@@ -146,7 +173,19 @@ export default {
       },
       default: 'date'
     },
+    splitor: {
+      type: String,
+      default: 'to'
+    },
     placeholder: {
+      type: String,
+      default: null
+    },
+    startPlaceholder: {
+      type: String,
+      default: null
+    },
+    endPlaceholder: {
       type: String,
       default: null
     }
@@ -176,20 +215,22 @@ export default {
         return this.placeholder
       }
     },
+    computedStartPlaceholder () {
+      if (this.placeholder === null) {
+        return START_PLACEHOLDER[this.type]
+      } else {
+        return this.startPlaceholder
+      }
+    },
+    computedEndPlaceholder () {
+      if (this.placeholder === null) {
+        return END_PLACEHOLDER[this.type]
+      } else {
+        return this.endPlaceholder
+      }
+    },
     format () {
       return DATE_FORMAT[this.type]
-    },
-    computedHour () {
-      if (this.computedSelectedDateTime) return this.computedSelectedDateTime.format('HH')
-      else return null
-    },
-    computedMinute () {
-      if (this.computedSelectedDateTime) return this.computedSelectedDateTime.format('mm')
-      else return null
-    },
-    computedSecond () {
-      if (this.computedSelectedDateTime) return this.computedSelectedDateTime.format('ss')
-      else return null
     },
     /**
      * If value is valid return null.
@@ -268,12 +309,12 @@ export default {
        * May leak memory here if change disabled from false to true
        */
       if (this.disabled) return
+      if (this.active) return
       this.active = true
       this.$nextTick().then(this.updatePosition)
     },
     closeCalendar () {
       this.active = false
-      this.showTimeSelector = false
     },
     toggleCalendar () {
 
@@ -286,6 +327,9 @@ export default {
     },
     handleFocus () {
       this.isFocus = true
+    },
+    handleRangeInputBlur () {
+      this.isFocus = false
     }
   }
 }

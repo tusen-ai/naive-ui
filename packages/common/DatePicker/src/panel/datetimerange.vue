@@ -10,110 +10,95 @@
           class="n-date-picker-calendar__date-time-input-wrapper"
         >
           <n-input
-            v-model="displayDateString"
+            v-model="startDateDisplayString"
             class="n-date-picker-calendar__date-input"
             placeholder="Select date"
-            @blur="handleDateInputBlur"
-            @input="handleDateInput"
+            @blur="handleStartDateInputBlur"
+            @input="handleStartDateInput"
           />
           <n-time-picker
             class="n-date-picker-calendar__time-input"
-            :value="value"
+            :value="startTimeValue"
             stop-selector-bubble
             @input="handleStartTimePickerInput"
           />
         </div>
-        <div class="n-date-picker-calendar__month-modifier">
-          <div
-            class="n-date-picker-calendar__fast-prev"
-            @click="startCalendarPrevYear"
-          >
-            <n-icon
-              type="ios-arrow-back"
-              size="14"
-            />
-            <n-icon
-              type="ios-arrow-back"
-              size="14"
-            />
+        <div class="n-date-picker-calendar__calendar-wrapper">
+          <div class="n-date-picker-calendar__month-modifier">
+            <div
+              class="n-date-picker-calendar__fast-prev"
+              @click="startCalendarPrevYear"
+            >
+              <n-icon
+                type="ios-arrow-back"
+                size="14"
+              />
+              <n-icon
+                type="ios-arrow-back"
+                size="14"
+              />
+            </div>
+            <div
+              class="n-date-picker-calendar__prev"
+              @click="startCalendarPrevMonth"
+            >
+              <n-icon
+                type="ios-arrow-back"
+                size="14"
+              />
+            </div>
+            <div class="n-date-picker-calendar__month-year">
+              {{ startCalendarDateTime.format('MMMM') }} {{ startCalendarDateTime.year() }}
+            </div>
+            <div
+              class="n-date-picker-calendar__next"
+              @click="startCalendarNextMonth"
+            >
+              <n-icon
+                type="ios-arrow-forward"
+                size="14"
+              />
+            </div>
+            <div
+              class="n-date-picker-calendar__fast-next"
+              @click="startCalendarNextYear"
+            >
+              <n-icon
+                type="ios-arrow-forward"
+                size="14"
+              />
+              <n-icon
+                type="ios-arrow-forward"
+                size="14"
+              />
+            </div>
           </div>
-          <div
-            class="n-date-picker-calendar__prev"
-            @click="startCalendarPrevMonth"
-          >
-            <n-icon
-              type="ios-arrow-back"
-              size="14"
-            />
+          <div class="n-date-picker-calendar__weekdays">
+            <div
+              v-for="weekday in weekdays"
+              :key="weekday"
+              class="n-date-picker-calendar__weekday"
+            >
+              {{ weekday }}
+            </div>
           </div>
-          <div class="n-date-picker-calendar__month-year">
-            {{ startCalendarDateTime.format('MMMM') }} {{ startCalendarDateTime.year() }}
+          <div class="n-date-picker-calendar__divider" />
+          <div class="n-date-picker-calendar__dates">
+            <div
+              v-for="dateItem in dateArray(startCalendarDateTime, valueAsMomentArray, currentDateTime)"
+              :key="`${dateItem.timestamp}${dateItem.isDateOfDisplayMonth}`"
+              class="n-date-picker-calendar__date"
+              :class="{
+                'n-date-picker-calendar__date--current': dateItem.isCurrentDate,
+                'n-date-picker-calendar__date--selected': dateItem.isSelectedDate,
+                'n-date-picker-calendar__date--in-display-month': dateItem.isDateOfDisplayMonth,
+                'n-date-picker-calendar__date--in-span': dateItem.isInSpan
+              }"
+              @click="handleDateClick(dateItem)"
+            >
+              {{ dateItem.date }}
+            </div>
           </div>
-          <div
-            class="n-date-picker-calendar__next"
-            @click="startCalendarNextMonth"
-          >
-            <n-icon
-              type="ios-arrow-forward"
-              size="14"
-            />
-          </div>
-          <div
-            class="n-date-picker-calendar__fast-next"
-            @click="startCalendarNextYear"
-          >
-            <n-icon
-              type="ios-arrow-forward"
-              size="14"
-            />
-            <n-icon
-              type="ios-arrow-forward"
-              size="14"
-            />
-          </div>
-        </div>
-        <div class="n-date-picker-calendar__weekdays">
-          <div
-            v-for="weekday in weekdays"
-            :key="weekday"
-            class="n-date-picker-calendar__weekday"
-          >
-            {{ weekday }}
-          </div>
-        </div>
-        <div class="n-date-picker-calendar__divider" />
-        <div class="n-date-picker-calendar__dates">
-          <div
-            v-for="dateItem in dateArray(startCalendarDateTime, valueAsMoment, currentDateTime)"
-            :key="`${dateItem.timestamp}${dateItem.isDateOfDisplayMonth}`"
-            class="n-date-picker-calendar__date"
-            :class="{
-              'n-date-picker-calendar__date--current': dateItem.isCurrentDate,
-              'n-date-picker-calendar__date--selected': dateItem.isSelectedDate,
-              'n-date-picker-calendar__date--in-display-month': dateItem.isDateOfDisplayMonth
-            }"
-            @click="handleDateClick(dateItem)"
-          >
-            {{ dateItem.date }}
-          </div>
-        </div>
-        <div class="n-date-picker-calendar__actions">
-          <n-button
-            size="tiny"
-            round
-            @click="setSelectedDateTimeToNow"
-          >
-            Now
-          </n-button>
-          <n-button
-            size="tiny"
-            round
-            auto-text-color
-            type="primary"
-            @click="handleConfirmClick"
-          >
-            Confirm
-          </n-button>
         </div>
       </div>
       <div class="n-date-picker-calendar__range-wrapper">
@@ -121,17 +106,17 @@
           class="n-date-picker-calendar__date-time-input-wrapper"
         >
           <n-input
-            v-model="displayDateString"
+            v-model="endDateDisplayString"
             class="n-date-picker-calendar__date-input"
             placeholder="Select date"
-            @blur="handleDateInputBlur"
-            @input="handleDateInput"
+            @blur="handleEndDateInputBlur"
+            @input="handleEndDateInput"
           />
           <n-time-picker
             class="n-date-picker-calendar__time-input"
-            :value="value"
+            :value="endTimeValue"
             stop-selector-bubble
-            @input="handleStartTimePickerInput"
+            @input="handleEndTimePickerInput"
           />
         </div>
         <div class="n-date-picker-calendar__month-modifier">
@@ -195,13 +180,14 @@
         <div class="n-date-picker-calendar__divider" />
         <div class="n-date-picker-calendar__dates">
           <div
-            v-for="dateItem in dateArray(endCalendarDateTime, valueAsMoment, currentDateTime)"
+            v-for="dateItem in dateArray(endCalendarDateTime, valueAsMomentArray, currentDateTime)"
             :key="`${dateItem.timestamp}${dateItem.isDateOfDisplayMonth}`"
             class="n-date-picker-calendar__date"
             :class="{
               'n-date-picker-calendar__date--current': dateItem.isCurrentDate,
               'n-date-picker-calendar__date--selected': dateItem.isSelectedDate,
-              'n-date-picker-calendar__date--in-display-month': dateItem.isDateOfDisplayMonth
+              'n-date-picker-calendar__date--in-display-month': dateItem.isDateOfDisplayMonth,
+              'n-date-picker-calendar__date--in-span': dateItem.isInSpan
             }"
             @click="handleDateClick(dateItem)"
           >
@@ -212,9 +198,8 @@
           <n-button
             size="tiny"
             round
-            @click="setSelectedDateTimeToNow"
           >
-            Now
+            Reset
           </n-button>
           <n-button
             size="tiny"
@@ -270,8 +255,18 @@ export default {
       default: true
     },
     value: {
-      type: Array,
-      required: false,
+      validator (value) {
+        if (value === null) return true
+        if (Array.isArray(value)) {
+          if (value.length === 2) {
+            if (typeof value[0] === 'number' && typeof value[1] === 'number') {
+              return value[1] >= value[0]
+            }
+          }
+        }
+        return false
+      },
+      required: true,
       default: null
     },
     debug: {
@@ -289,55 +284,60 @@ export default {
   },
   data () {
     return {
-      displayDateString: '',
+      startDateDisplayString: '',
+      endDateDisplayString: '',
       startCalendarDateTime: moment(),
       endCalendarDateTime: moment().add(1, 'month'),
       currentDateTime: moment(),
       calendar: [],
+      isSelecting: false,
+      startDateTime: null,
+      endDateTime: null,
       ...TIME_CONST
     }
   },
   computed: {
-    computedHour () {
-      if (this.valueAsMoment) return this.valueAsMoment.format('HH')
+    startTimeValue () {
+      if (this.value !== null) return this.value[0]
       else return null
     },
-    computedMinute () {
-      if (this.valueAsMoment) return this.valueAsMoment.format('mm')
-      else return null
-    },
-    computedSecond () {
-      if (this.valueAsMoment) return this.valueAsMoment.format('ss')
+    endTimeValue () {
+      if (this.value !== null) return this.value[1]
       else return null
     },
     /**
      * If value is valid return null.
      * If value is not valid, return moment(value)
      */
-    valueAsMoment () {
+    valueAsMomentArray () {
       if (this.value === null || this.value === undefined) return null
-      const newSelectedDateTime = moment(this.value)
-      if (newSelectedDateTime.isValid()) {
-        return newSelectedDateTime
-      } else {
-        return null
-      }
+      const startMoment = moment(this.value[0])
+      const endMoment = moment(this.value[1])
+      if (startMoment.isValid() && endMoment.isValid()) {
+        return [startMoment, endMoment]
+      } else return null
     }
   },
   watch: {
-    valueAsMoment (newValue) {
+    valueAsMomentArray (newValue) {
       if (newValue !== null) {
-        this.displayDateString = newValue.format(DATE_FORMAT)
+        const [startMoment, endMoment] = newValue
+        this.startDateDisplayString = startMoment.format(DATE_FORMAT)
+        this.endDateDisplayString = endMoment.format(DATE_FORMAT)
       } else {
-        this.displayDateString = ''
+        this.startDateDisplayString = ''
+        this.endDateDisplayString = ''
       }
     }
   },
   created () {
-    if (this.valueAsMoment !== null) {
-      this.displayDateString = this.valueAsMoment.format(DATE_FORMAT)
+    if (this.valueAsMomentArray !== null) {
+      const [startMoment, endMoment] = this.valueAsMomentArray
+      this.startDateDisplayString = startMoment.format(DATE_FORMAT)
+      this.endDateDisplayString = endMoment.format(DATE_FORMAT)
     } else {
-      this.displayDateString = ''
+      this.startDateDisplayString = ''
+      this.endDateDisplayString = ''
     }
   },
   methods: {
@@ -350,7 +350,7 @@ export default {
         this.$emit('input', null)
       } else if (newSelectedDateTime.isValid()) {
         const adjustedDateTime = this.adjustValue(newSelectedDateTime)
-        if (this.valueAsMoment === null || adjustedDateTime.valueOf() !== this.valueAsMoment.valueOf()) {
+        if (this.valueAsMomentArray === null || adjustedDateTime.valueOf() !== this.valueAsMomentArray.valueOf()) {
           this.refreshDisplayDateString(adjustedDateTime)
           this.$emit('input', adjustedDateTime.valueOf())
         }
@@ -359,41 +359,82 @@ export default {
     adjustValue (datetime) {
       return moment(datetime).startOf('second')
     },
-    handleDateInput (value) {
+    handleStartDateInput (value) {
       const date = moment(value, DATE_FORMAT, true)
       if (date.isValid()) {
-        if (!this.valueAsMoment) {
+        if (!this.valueAsMomentArray) {
           const newValue = moment()
           newValue.year(date.year())
           newValue.month(date.month())
           newValue.date(date.date())
-          this.$emit('input', this.adjustValue(newValue).valueOf())
+          this.changeStartDateTime(this.adjustValue(newValue))
         } else {
-          const newValue = this.valueAsMoment
+          const newValue = this.valueAsMomentArray[0]
           newValue.year(date.year())
           newValue.month(date.month())
           newValue.date(date.date())
-          this.$emit('input', this.adjustValue(newValue).valueOf())
+          this.changeStartDateTime(this.adjustValue(newValue))
         }
       } else {
         // do nothing
       }
     },
-    handleDateInputBlur () {
-      const date = moment(this.displayDateString, DATE_VALIDATE_FORMAT, true)
+    handleEndDateInput (value) {
+      /** strict check when input */
+      const date = moment(value, DATE_FORMAT, true)
       if (date.isValid()) {
-        if (!this.valueAsMoment) {
+        if (!this.valueAsMomentArray) {
           const newValue = moment()
           newValue.year(date.year())
           newValue.month(date.month())
           newValue.date(date.date())
-          this.$emit('input', this.adjustValue(newValue).valueOf())
+          this.changeEndDateTime(this.adjustValue(newValue))
         } else {
-          const newValue = this.valueAsMoment
+          const newValue = this.valueAsMomentArray[1]
           newValue.year(date.year())
           newValue.month(date.month())
           newValue.date(date.date())
-          this.$emit('input', this.adjustValue(newValue).valueOf())
+          this.changeEndDateTime(this.adjustValue(newValue))
+        }
+      } else {
+        // do nothing
+      }
+    },
+    handleStartDateInputBlur () {
+      const date = moment(this.startDateDisplayString, DATE_VALIDATE_FORMAT, true)
+      if (date.isValid()) {
+        if (!this.valueAsMomentArray) {
+          const newValue = moment()
+          newValue.year(date.year())
+          newValue.month(date.month())
+          newValue.date(date.date())
+          this.changeStartDateTime(this.adjustValue(newValue))
+        } else {
+          const newValue = this.valueAsMomentArray[0]
+          newValue.year(date.year())
+          newValue.month(date.month())
+          newValue.date(date.date())
+          this.changeStartDateTime(this.adjustValue(newValue))
+        }
+      } else {
+        this.refreshDisplayDateString()
+      }
+    },
+    handleEndDateInputBlur () {
+      const date = moment(this.endDateDisplayString, DATE_VALIDATE_FORMAT, true)
+      if (date.isValid()) {
+        if (!this.valueAsMomentArray) {
+          const newValue = moment()
+          newValue.year(date.year())
+          newValue.month(date.month())
+          newValue.date(date.date())
+          this.changeEndDateTime(this.adjustValue(newValue))
+        } else {
+          const newValue = this.valueAsMomentArray[1]
+          newValue.year(date.year())
+          newValue.month(date.month())
+          newValue.date(date.date())
+          this.changeEndDateTime(this.adjustValue(newValue))
         }
       } else {
         this.refreshDisplayDateString()
@@ -401,16 +442,12 @@ export default {
     },
     clearSelectedDateTime () {
       this.$emit('input', null)
-      this.displayDateString = ''
-    },
-    setSelectedDateTimeToNow () {
-      this.$emit('input', this.adjustValue(moment()).valueOf())
-      this.startCalendarDateTime = moment()
     },
     handleDateClick (dateItem) {
+      return
       let newSelectedDateTime = moment()
-      if (this.valueAsMoment !== null) {
-        newSelectedDateTime = moment(this.valueAsMoment)
+      if (this.valueAsMomentArray !== null) {
+        newSelectedDateTime = moment(this.valueAsMomentArray)
       }
       newSelectedDateTime = setDate(newSelectedDateTime, dateItem)
       this.$emit('input', this.adjustValue(newSelectedDateTime).valueOf())
@@ -419,15 +456,17 @@ export default {
      * If not selected, display nothing,
      * else update datetime related string
      */
-    refreshDisplayDateString (time) {
-      if (this.valueAsMoment === null) {
-        this.displayDateString = ''
+    refreshDisplayDateString (times) {
+      if (this.valueAsMomentArray === null) {
+        this.startDateDisplayString = ''
+        this.endDateDisplayString = ''
         return
       }
-      if (time === undefined) {
-        time = this.valueAsMoment
+      if (times === undefined) {
+        times = this.valueAsMomentArray
       }
-      this.displayDateString = time.format(DATE_FORMAT)
+      this.startDateDisplayString = times[0].format(DATE_FORMAT)
+      this.endDateDisplayString = times[1].format(DATE_FORMAT)/// //
     },
     handleConfirmClick () {
       this.$emit('confirm')
@@ -438,6 +477,34 @@ export default {
         this.$emit('close')
       }
     },
+
+    handleStartTimePickerInput (value) {
+      this.changeStartDateTime(value)
+    },
+    handleEndTimePickerInput (value) {
+      this.changeEndDateTime(value)
+    },
+    changeStartDateTime (time) {
+      if (typeof time !== 'number') {
+        time = time.valueOf()
+      }
+      if (this.value === null) {
+        this.$emit('input', [time, time])
+      } else {
+        this.$emit('input', [time, Math.max(this.value[1], time)])
+      }
+    },
+    changeEndDateTime (time) {
+      if (typeof time !== 'number') {
+        time = time.valueOf()
+      }
+      if (this.value === null) {
+        this.$emit('input', [time, time])
+      } else {
+        this.$emit('input', [Math.min(this.value[0], time), time])
+      }
+    },
+    /** change calendar time */
     adjustCalendarTimes (byStartCalendarTime) {
       const startTime = this.startCalendarDateTime.startOf('month').valueOf()
       const endTime = this.endCalendarDateTime.startOf('month').valueOf()
@@ -480,12 +547,6 @@ export default {
     endCalendarPrevMonth () {
       this.endCalendarDateTime = moment(this.endCalendarDateTime).subtract(1, 'month')
       this.adjustCalendarTimes(false)
-    },
-    handleStartTimePickerInput (value) {
-      // this.$emit('input', value)
-    },
-    handleEndTimePickerInput (value) {
-      // this.$emit('input', value)
     }
   }
 }

@@ -184,18 +184,6 @@ export default {
     }
   },
   computed: {
-    computedHour () {
-      if (this.valueAsMoment) return this.valueAsMoment.format('HH')
-      else return null
-    },
-    computedMinute () {
-      if (this.valueAsMoment) return this.valueAsMoment.format('mm')
-      else return null
-    },
-    computedSecond () {
-      if (this.valueAsMoment) return this.valueAsMoment.format('ss')
-      else return null
-    },
     /**
      * If value is valid return null.
      * If value is not valid, return moment(value)

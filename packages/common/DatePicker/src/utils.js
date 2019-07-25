@@ -15,15 +15,27 @@ function setDate (time, dateItem) {
 }
 
 function isSameDate (time, patternTime) {
-  return time.year() === patternTime.year() && time.month() === patternTime.month() && time.date() === patternTime.date()
+  if (Array.isArray(time)) {
+    return time.some(t => t.year() === patternTime.year() && t.month() === patternTime.month() && t.date() === patternTime.date())
+  } else {
+    return time.year() === patternTime.year() && time.month() === patternTime.month() && time.date() === patternTime.date()
+  }
 }
 
 function dateItem (time, displayTime, selectedTime, currentTime) {
+  let isInSpan = false
+  if (Array.isArray(selectedTime)) {
+    console.log('oops')
+    if (selectedTime[0].valueOf() < time.valueOf() && time.valueOf() < selectedTime[1].valueOf()) {
+      isInSpan = true
+    }
+  }
   return {
     date: time.date(),
     month: time.month(),
     year: time.year(),
     isDateOfDisplayMonth: time.month() === displayTime.month(),
+    isInSpan,
     isSelectedDate: selectedTime !== null && isSameDate(selectedTime, time),
     isCurrentDate: isSameDate(currentTime, time),
     timestamp: time.unix()
