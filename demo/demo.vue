@@ -50,7 +50,6 @@ export default {
         },
         {
           name: 'Common',
-          path: '/',
           childItems: [
             {
               name: 'AdvanceTable',
@@ -125,8 +124,29 @@ export default {
               path: '/n-table'
             },
             {
+              name: 'TimePicker',
+              path: '/n-time-picker'
+            },
+            {
               name: 'Tooltip',
               path: '/n-tooltip'
+            },
+            {
+              name: 'Form',
+              path: '/n-form'
+            }
+          ]
+        },
+        {
+          name: 'Debug',
+          childItems: [
+            {
+              name: 'PopoverDebug',
+              path: '/n-popover-debug'
+            },
+            {
+              name: 'RouterDebug',
+              path: '/n-router-debug'
             }
           ]
         }

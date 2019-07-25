@@ -52,6 +52,7 @@ export default {
     }
   },
   mounted () {
+    this.$refs.content.style = 'position: absolute;'
     this.$nextTick().then(() => {
       this.registerScrollListeners()
       this.registerResizeListener()
@@ -86,15 +87,14 @@ export default {
       resizeDelegate.registerHandler(this.updatePosition)
     },
     registerScrollListeners () {
-      let currentElement = this.$el
+      let currentElement = getParentNode(this.$el)
       while (true) {
         currentElement = getScrollParent(currentElement)
+        if (currentElement === null) break
         this.scrollListeners.push([currentElement, this.updatePosition])
         currentElement = getParentNode(currentElement)
-        if (currentElement === document.body || currentElement.nodeName === 'HTML') {
-          break
-        }
       }
+      // console.log(this.scrollListeners)
       for (const [el, handler] of this.scrollListeners) {
         scrollDelegate.registerHandler(el, handler)
       }

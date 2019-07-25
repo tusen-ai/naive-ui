@@ -15,7 +15,6 @@
         </div>
         <div class="n-doc-section__view">
           <n-nimbus-service-layout
-            v-model="currentFileld"
             icon="md-musical-notes"
             name="Oasis"
             :items="[
@@ -65,7 +64,6 @@
           <textarea><n-nimbus-service-layout
   icon="md-musical-notes"
   name="Oasis"
-  v-model="'Hello'"
   :items="[
     {
       name: 'Definitely Maybe',
@@ -120,7 +118,7 @@ export default {
   mixins: [docCodeEditorMixin],
   data () {
     return {
-      currentFileld: 'Hello'
+      currentField: 'Hello'
     }
   },
   methods: {

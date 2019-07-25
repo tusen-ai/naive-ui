@@ -123,8 +123,13 @@
           transition: opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
           opacity: 1;
         }
-        &.n-nimbus-service-layout-drawer__item--active span{
-          opacity: 1;
+        &.n-nimbus-service-layout-drawer__item--active {
+          &:not(.n-nimbus-service-layout-drawer__item--is-group-item) {
+            color: #63E2B7;
+          }
+          span {
+            opacity: 1;
+          }
         }
         &:hover span {
           opacity: 1;

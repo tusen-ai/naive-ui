@@ -26,12 +26,17 @@ import datePickerDemo from './components/datePickerDemo'
 import inputNumberDemo from './components/inputNumberDemo'
 import nimbusIconDemo from './components/nimbusIconDemo'
 import radioDemo from './components/radioDemo'
+import formDemo from './components/formDemo'
+import timePickerDemo from './components/timePickerDemo'
 
 import notificationDemo from './components/notificationDemo'
 import nimbusConfirmCardDemo from './components/nimbusConfirmCardDemo'
 import paginationDemo from './components/paginationDemo'
 import startPage from './components/startPage'
 import demo from './demo'
+
+import popoverDebug from './debugComponents/popoverDebug'
+import routerDebug from './debugComponents/routerDebug'
 
 Vue.use(NaiveUI)
 Vue.use(VueRouter)
@@ -42,6 +47,10 @@ const routes = [
   {
     path: '/home-demo',
     component: homeDemo
+  },
+  {
+    path: '/n-popover-debug',
+    component: popoverDebug
   },
   {
     path: '/start',
@@ -71,7 +80,10 @@ const routes = [
       { path: '/n-date-picker', component: datePickerDemo },
       { path: '/n-input-number', component: inputNumberDemo },
       { path: '/n-nimbus-icon', component: nimbusIconDemo },
-      { path: '/n-radio', component: radioDemo }
+      { path: '/n-radio', component: radioDemo },
+      { path: '/n-form', component: formDemo },
+      { path: '/n-time-picker', component: timePickerDemo },
+      { path: '/n-router-debug', component: routerDebug }
     ]
   },
   {

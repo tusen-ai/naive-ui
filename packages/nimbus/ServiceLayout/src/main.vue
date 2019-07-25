@@ -104,10 +104,6 @@ export default {
     paddingBody: {
       type: Boolean,
       default: true
-    },
-    value: {
-      type: String,
-      default: ''
     }
   },
   data () {
@@ -121,31 +117,31 @@ export default {
     }
   },
   watch: {
-    value () {
-      this.activeItemName = this.value
+    $route (to, from) {
+      this.syncActiveItemWithPath(to.path)
     }
   },
   mounted () {
-    this.activeItemName = this.value
     const path = this.$route.path
-    for (const item of this.items) {
-      if (item.path === path) {
-        this.activeItemName = item.name
-        this.$emit('input', item.name)
-        return
-      }
-      if (item.childItems) {
-        for (const childItem of item.childItems) {
-          if (childItem.path === path) {
-            this.activeItemName = childItem.name
-            this.$emit('input', item.name)
-            return
+    this.syncActiveItemWithPath(path)
+  },
+  methods: {
+    syncActiveItemWithPath (path) {
+      for (const item of this.items) {
+        if (item.path === path) {
+          this.activeItemName = item.name
+          return
+        }
+        if (item.childItems) {
+          for (const childItem of item.childItems) {
+            if (childItem.path === path) {
+              this.activeItemName = childItem.name
+              return
+            }
           }
         }
       }
-    }
-  },
-  methods: {
+    },
     toggle () {
       this.isCollapsed = !this.isCollapsed
     },

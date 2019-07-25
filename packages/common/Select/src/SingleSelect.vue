@@ -85,16 +85,22 @@
 </template>
 
 <script>
+import Emitter from '../../../mixins/emitter'
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import toggleable from '../../../mixins/toggleable'
 
 export default {
   name: 'NSingleSelect',
-  mixins: [detachable, toggleable, placeable],
+  mixins: [detachable, toggleable, placeable, Emitter],
   model: {
     prop: 'selectedValue',
     event: 'input'
+  },
+  inject: {
+    formItem: {
+      default: null
+    }
   },
   props: {
     items: {
@@ -159,9 +165,12 @@ export default {
     }
   },
   watch: {
-    selectedItem () {
+    selectedItem (n, o) {
       if (this.selectedItem !== null) {
         this.label = this.selectedItem.label
+        if (n !== o && this.formItem) {
+          this.dispatch('NFormItem', 'on-form-change', n.value)
+        }
       } else {
         this.label = ''
       }
