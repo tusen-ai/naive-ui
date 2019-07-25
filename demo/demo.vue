@@ -141,8 +141,12 @@ export default {
           name: 'Debug',
           childItems: [
             {
-              name: 'Popover',
+              name: 'PopoverDebug',
               path: '/n-popover-debug'
+            },
+            {
+              name: 'RouterDebug',
+              path: '/n-router-debug'
             }
           ]
         }

@@ -36,6 +36,7 @@ import startPage from './components/startPage'
 import demo from './demo'
 
 import popoverDebug from './debugComponents/popoverDebug'
+import routerDebug from './debugComponents/routerDebug'
 
 Vue.use(NaiveUI)
 Vue.use(VueRouter)
@@ -81,7 +82,8 @@ const routes = [
       { path: '/n-nimbus-icon', component: nimbusIconDemo },
       { path: '/n-radio', component: radioDemo },
       { path: '/n-form', component: formDemo },
-      { path: '/n-time-picker', component: timePickerDemo }
+      { path: '/n-time-picker', component: timePickerDemo },
+      { path: '/n-router-debug', component: routerDebug }
     ]
   },
   {
