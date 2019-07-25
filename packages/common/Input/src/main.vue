@@ -66,11 +66,21 @@
 
 <script>
 import nIcon from '../../Icon'
+import Emitter from '../../../mixins/emitter'
 
 export default {
   name: 'NInput',
   components: {
     nIcon
+  },
+  mixins: [ Emitter ],
+  inject: {
+    form: {
+      default: null
+    },
+    formItem: {
+      default: null
+    }
   },
   model: {
     prop: 'value',
@@ -119,6 +129,11 @@ export default {
       isComposing: false
     }
   },
+  computed: {
+    validateState () {
+      return this.formItem ? this.formItem.validateState : ''
+    }
+  },
   methods: {
     handleCompositionStart () {
       this.isComposing = true
@@ -133,6 +148,10 @@ export default {
     },
     handleBlur (e) {
       this.$emit('blur', e)
+      // 这里设计的冒泡还是针对特定元素, 否则会在其他不需要的元素上遍历
+      if (this.formItem) {
+        this.dispatch('NFormItem', 'on-form-blur', e.target.value)
+      }
     },
     handleFocus (e) {
       this.$emit('focus', e)
@@ -142,6 +161,9 @@ export default {
       this.$emit('keyup', e)
     },
     handleChange (e) {
+      if (this.formItem) {
+        this.dispatch('NFormItem', 'on-form-change', e.target.value)
+      }
       this.$emit('change', e.target.value)
     },
     handleClick (e) {

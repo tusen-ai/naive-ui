@@ -130,6 +130,10 @@ export default {
             {
               name: 'Tooltip',
               path: '/n-tooltip'
+            },
+            {
+              name: 'Form',
+              path: '/n-form'
             }
           ]
         },
