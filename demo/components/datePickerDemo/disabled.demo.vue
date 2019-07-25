@@ -21,7 +21,6 @@
         :disabled="disabled"
         @change="onDateChange"
       />
-      <wrapper><oops content="666" /></wrapper>
       <!--EXAMPLE_END-->
     </div>
     <div
@@ -38,13 +37,7 @@
 </template>
 
 <script>
-import Wrapper from './Wrapper'
-import Oops from './Oops'
 export default {
-  components: {
-    Wrapper,
-    Oops
-  },
   data () {
     return {
       dateTimeTimestamp: 891360258000,
