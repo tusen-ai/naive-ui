@@ -166,6 +166,10 @@ export default {
       type: Function,
       default: null
     },
+    minHeight: {
+      type: [Number, String],
+      default: 'unset'
+    },
     maxHeight: {
       type: [Number, String],
       default: 'auto'
@@ -260,6 +264,12 @@ export default {
           typeof this.maxWidth === 'number'
             ? this.maxWidth + 'px'
             : this.maxWidth
+      }
+      if (this.minHeight !== 'unset') {
+        stl.minHeight =
+          typeof this.minHeight === 'number'
+            ? this.minHeight + 'px'
+            : this.minHeight
       }
       return stl
     },
