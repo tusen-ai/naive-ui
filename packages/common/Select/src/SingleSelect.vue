@@ -38,44 +38,48 @@
         <transition name="n-select-menu--transition">
           <div
             v-if="active"
-            ref="contentInner"
-            class="n-select-menu"
-            :class="{[`n-select-menu--${size}-size`]: true}"
-            @mouseleave="hideLightBar"
+            class="n-select-menu-wrapper"
           >
-            <transition name="n-select-menu__light-bar--transition">
+            <div
+              ref="contentInner"
+              class="n-select-menu"
+              :class="{[`n-select-menu--${size}-size`]: true}"
+              @mouseleave="hideLightBar"
+            >
+              <transition name="n-select-menu__light-bar--transition">
+                <div
+                  v-if="showLightBar"
+                  class="n-select-menu__light-bar"
+                  :style="{ top: `${lightBarTop}px` }"
+                />
+              </transition>
               <div
-                v-if="showLightBar"
-                class="n-select-menu__light-bar"
-                :style="{ top: `${lightBarTop}px` }"
-              />
-            </transition>
-            <div
-              v-for="item in filteredItems"
-              :key="item.value"
-              class="n-select-menu__item"
-              :class="{
-                'n-select-menu__item--selected':
-                  selectedValue ===
-                  item.value
-              }"
-              @click.stop="toggleItemInSingleSelect(item)"
-              @mouseenter="showLightBarTop"
-            >
-              {{ item.label }}
-            </div>
-            <div
-              v-if="label.length && !filteredItems.length"
-              class="n-select-menu__item n-select-menu__item--not-found"
-            >
-              {{
-                /**
-                 * This method to activate hideLightBar is ridiculous, however using
-                 * event handler still has some problem.
-                 */
-                hideLightBar()
-              }}
-              none result matched
+                v-for="item in filteredItems"
+                :key="item.value"
+                class="n-select-menu__item"
+                :class="{
+                  'n-select-menu__item--selected':
+                    selectedValue ===
+                    item.value
+                }"
+                @click.stop="toggleItemInSingleSelect(item)"
+                @mouseenter="showLightBarTop"
+              >
+                {{ item.label }}
+              </div>
+              <div
+                v-if="label.length && !filteredItems.length"
+                class="n-select-menu__item n-select-menu__item--not-found"
+              >
+                {{
+                  /**
+                  * This method to activate hideLightBar is ridiculous, however using
+                  * event handler still has some problem.
+                  */
+                  hideLightBar()
+                }}
+                none result matched
+              </div>
             </div>
           </div>
         </transition>

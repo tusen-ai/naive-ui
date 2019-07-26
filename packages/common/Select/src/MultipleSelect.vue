@@ -82,30 +82,34 @@
         <transition name="n-select-menu--transition">
           <div
             v-if="active"
-            ref="contentInner"
-            class="n-select-menu n-select-menu--multiple"
-            :class="{[`n-select-menu--${size}-size`]: true}"
-            @mouseleave="hideLightBar"
+            class="n-select-menu-wrapper"
           >
-            <transition name="n-select-menu__light-bar--transition">
-              <div
-                v-if="showLightBar"
-                class="n-select-menu__light-bar"
-                :style="{ top: `${lightBarTop}px` }"
-              />
-            </transition>
             <div
-              v-for="item in items"
-              :key="item.value"
-              class="n-select-menu__item"
-              :class="{
-                'n-select-menu__item--selected':
-                  isSelected(item)
-              }"
-              @click.stop="toggleItemInMultipleSelect(item)"
-              @mouseenter="showLightBarTop"
+              ref="contentInner"
+              class="n-select-menu n-select-menu--multiple"
+              :class="{[`n-select-menu--${size}-size`]: true}"
+              @mouseleave="hideLightBar"
             >
-              {{ item.label }}
+              <transition name="n-select-menu__light-bar--transition">
+                <div
+                  v-if="showLightBar"
+                  class="n-select-menu__light-bar"
+                  :style="{ top: `${lightBarTop}px` }"
+                />
+              </transition>
+              <div
+                v-for="item in items"
+                :key="item.value"
+                class="n-select-menu__item"
+                :class="{
+                  'n-select-menu__item--selected':
+                    isSelected(item)
+                }"
+                @click.stop="toggleItemInMultipleSelect(item)"
+                @mouseenter="showLightBarTop"
+              >
+                {{ item.label }}
+              </div>
             </div>
           </div>
         </transition>
