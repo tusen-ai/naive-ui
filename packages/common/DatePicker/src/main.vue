@@ -72,7 +72,7 @@
     </div>
     <div
       ref="contentWrapper"
-      class="n-content-wrapper"
+      class="n-content-wrapper n-content-wrapper--date-picker"
     >
       <div ref="content">
         <datetime-panel
@@ -83,21 +83,21 @@
           @close="closeCalendar"
         />
         <date-panel
-          v-if="type === 'date'"
+          v-else-if="type === 'date'"
           :value="value"
           :active="active"
           @input="handlePanelInput"
           @close="closeCalendar"
         />
         <daterange-panel
-          v-if="type === 'daterange'"
+          v-else-if="type === 'daterange'"
           :value="value"
           :active="active"
           @input="handleRangePanelInput"
           @close="closeCalendar"
         />
         <datetimerange-panel
-          v-if="type === 'datetimerange'"
+          v-else-if="type === 'datetimerange'"
           :value="value"
           :active="active"
           @input="handleRangePanelInput"
@@ -113,6 +113,7 @@ import moment from 'moment'
 import NIcon from '../../Icon'
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
+import zindexable from '../../../mixins/zindexable'
 import DatetimePanel from './panel/datetime'
 import DatetimerangePanel from './panel/datetimerange'
 import DatePanel from './panel/date'
@@ -158,7 +159,8 @@ export default {
   },
   mixins: [
     detachable,
-    placeable
+    placeable,
+    zindexable
   ],
   props: {
     disabled: {
