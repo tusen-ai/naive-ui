@@ -15,7 +15,7 @@ export default {
   },
   watch: {
     active (newActive) {
-      console.log('[zindexable.watch.active]:', newActive)
+      console.debug('[zindexable.watch.active]:', newActive)
       if (newActive) {
         zIndexManager.setNewZIndex(this.$refs.contentWrapper)
       }
