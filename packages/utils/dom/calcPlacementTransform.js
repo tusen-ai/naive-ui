@@ -1,37 +1,37 @@
-export default function calcPlacementTransform (placement, activatorRect, popoverRect) {
+export default function calcPlacementTransform (placement, activatorRect, contentRect) {
   let contentLeft, contentTop
   let suggesetedTransfromOrigin = 'none'
   if (placement === 'top-start') {
-    contentTop = activatorRect.top - popoverRect.height
+    contentTop = activatorRect.top - contentRect.height
     contentLeft = activatorRect.left
   } else if (placement === 'top') {
-    contentTop = activatorRect.top - popoverRect.height
-    contentLeft = activatorRect.left + activatorRect.width / 2 - popoverRect.width / 2
+    contentTop = activatorRect.top - contentRect.height
+    contentLeft = activatorRect.left + activatorRect.width / 2 - contentRect.width / 2
   } else if (placement === 'top-end') {
-    contentTop = activatorRect.top - popoverRect.height
-    contentLeft = activatorRect.left + activatorRect.width - popoverRect.width
+    contentTop = activatorRect.top - contentRect.height
+    contentLeft = activatorRect.left + activatorRect.width - contentRect.width
   } else if (placement === 'left-start') {
     contentTop = activatorRect.top
-    contentLeft = activatorRect.left - popoverRect.width
+    contentLeft = activatorRect.left - contentRect.width
   } else if (placement === 'left') {
-    contentTop = activatorRect.top + activatorRect.height / 2 - popoverRect.height / 2
-    contentLeft = activatorRect.left - popoverRect.width
+    contentTop = activatorRect.top + activatorRect.height / 2 - contentRect.height / 2
+    contentLeft = activatorRect.left - contentRect.width
   } else if (placement === 'left-end') {
-    contentTop = activatorRect.top + activatorRect.height - popoverRect.height
-    contentLeft = activatorRect.left - popoverRect.width
+    contentTop = activatorRect.top + activatorRect.height - contentRect.height
+    contentLeft = activatorRect.left - contentRect.width
   } else if (placement === 'right-start') {
     contentTop = activatorRect.top
     contentLeft = activatorRect.left + activatorRect.width
   } else if (placement === 'right') {
-    contentTop = activatorRect.top + activatorRect.height / 2 - popoverRect.height / 2
+    contentTop = activatorRect.top + activatorRect.height / 2 - contentRect.height / 2
     contentLeft = activatorRect.left + activatorRect.width
   } else if (placement === 'right-end') {
-    contentTop = activatorRect.top + activatorRect.height - popoverRect.height
+    contentTop = activatorRect.top + activatorRect.height - contentRect.height
     contentLeft = activatorRect.left + activatorRect.width
   } else if (placement === 'bottom-start') {
     const toWindowBottom = window.innerHeight - activatorRect.bottom
-    if (popoverRect.height > toWindowBottom) {
-      contentTop = activatorRect.top - popoverRect.height
+    if (contentRect.height > toWindowBottom) {
+      contentTop = activatorRect.top - contentRect.height
       suggesetedTransfromOrigin = 'bottom left'
     } else {
       contentTop = activatorRect.top + activatorRect.height
@@ -40,10 +40,10 @@ export default function calcPlacementTransform (placement, activatorRect, popove
     contentLeft = activatorRect.left
   } else if (placement === 'bottom-end') {
     contentTop = activatorRect.top + activatorRect.height
-    contentLeft = activatorRect.left + activatorRect.width - popoverRect.width
+    contentLeft = activatorRect.left + activatorRect.width - contentRect.width
   } else {
     contentTop = activatorRect.top + activatorRect.height
-    contentLeft = activatorRect.left + activatorRect.width / 2 - popoverRect.width / 2
+    contentLeft = activatorRect.left + activatorRect.width / 2 - contentRect.width / 2
   }
   /**
    * We could also change the position using transform.
