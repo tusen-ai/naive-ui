@@ -51,5 +51,5 @@ export default function calcPlacementTransform (placement, activatorRect, popove
    * However, I found that the dom delay is very serious.
    * So I decide to use left and top for now.
    */
-  return [`left: ${contentLeft}px; top: ${contentTop}px;`, suggesetedTransfromOrigin]
+  return [{ left: `${contentLeft}px`, top: `${contentTop}px` }, suggesetedTransfromOrigin]
 }
