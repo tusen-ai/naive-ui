@@ -8,7 +8,7 @@ function attachMessageContainer () {
     messageContainer = document.createElement('div')
     messageContainer.classList.add('n-message', 'n-message__container')
     messageContainer.style = `
-          z-index: 300;
+          z-index: 6000;
           position: fixed;
           left: 0;
           right: 0;
