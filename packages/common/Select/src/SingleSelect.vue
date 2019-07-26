@@ -89,10 +89,11 @@ import Emitter from '../../../mixins/emitter'
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import toggleable from '../../../mixins/toggleable'
+import zindexable from '../../../mixins/zindexable'
 
 export default {
   name: 'NSingleSelect',
-  mixins: [detachable, toggleable, placeable, Emitter],
+  mixins: [detachable, toggleable, placeable, zindexable, Emitter],
   model: {
     prop: 'selectedValue',
     event: 'input'

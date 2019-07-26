@@ -119,13 +119,14 @@ import NIcon from '../../Icon/index'
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import toggleable from '../../../mixins/toggleable'
+import zindexable from '../../../mixins/zindexable'
 
 export default {
   name: 'NMultipleSelect',
   components: {
     NIcon
   },
-  mixins: [detachable, toggleable, placeable],
+  mixins: [detachable, toggleable, placeable, zindexable],
   model: {
     prop: 'selectedValue',
     event: 'input'
