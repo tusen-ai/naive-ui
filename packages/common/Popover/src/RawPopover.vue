@@ -37,6 +37,7 @@
             :class="{
               'n-popover__content--without-arrow': !arrow
             }"
+            :style="style"
             @mouseenter="handleMouseEnter"
           >
             <div
@@ -63,6 +64,7 @@
             :class="{
               'n-popover__content--without-arrow': !arrow
             }"
+            :style="style"
             @mouseenter="handleMouseEnter"
           >
             <slot />
@@ -106,6 +108,10 @@ export default {
     raw: {
       default: false,
       type: Boolean
+    },
+    width: {
+      type: Number,
+      default: null
     }
     /**
      * for debug usage
@@ -119,6 +125,15 @@ export default {
     return {
       vanishTimerId: null,
       delayTimerId: null
+    }
+  },
+  computed: {
+    style () {
+      const style = {}
+      if (this.width !== null) {
+        style.width = this.width + 'px'
+      }
+      return style
     }
   },
   created () {
