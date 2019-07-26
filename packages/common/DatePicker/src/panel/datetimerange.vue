@@ -6,24 +6,40 @@
       class="n-date-picker-calendar n-date-picker-calendar--datetimerange"
       @click.capture="resetSelectingStatus"
     >
-      <div class="n-date-picker-calendar__range-wrapper">
-        <div
-          class="n-date-picker-calendar__date-time-input-wrapper"
-        >
-          <n-input
-            v-model="startDateDisplayString"
-            class="n-date-picker-calendar__date-input"
-            placeholder="Select date"
-            @blur="handleStartDateInputBlur"
-            @input="handleStartDateInput"
-          />
-          <n-time-picker
-            class="n-date-picker-calendar__time-input"
-            :value="startTimeValue"
-            stop-selector-bubble
-            @input="handleStartTimePickerInput"
-          />
+      <div
+        class="n-date-picker-calendar__date-time-input-wrapper"
+      >
+        <n-input
+          v-model="startDateDisplayString"
+          class="n-date-picker-calendar__date-input"
+          placeholder="Select date"
+          @blur="handleStartDateInputBlur"
+          @input="handleStartDateInput"
+        />
+        <n-time-picker
+          class="n-date-picker-calendar__time-input"
+          :value="startTimeValue"
+          stop-selector-bubble
+          @input="handleStartTimePickerInput"
+        />
+        <div class="n-date-picker-calendar__arrow">
+          <n-icon type="ios-arrow-forward" />
         </div>
+        <n-input
+          v-model="endDateDisplayString"
+          class="n-date-picker-calendar__date-input"
+          placeholder="Select date"
+          @blur="handleEndDateInputBlur"
+          @input="handleEndDateInput"
+        />
+        <n-time-picker
+          class="n-date-picker-calendar__time-input"
+          :value="endTimeValue"
+          stop-selector-bubble
+          @input="handleEndTimePickerInput"
+        />
+      </div>
+      <div class="n-date-picker-calendar__range-wrapper">
         <div class="n-date-picker-calendar__month-modifier">
           <div
             class="n-date-picker-calendar__fast-prev"
@@ -106,23 +122,6 @@
       </div>
       <div><div class="n-date-picker-calendar__vertical-divider" /></div>
       <div class="n-date-picker-calendar__range-wrapper">
-        <div
-          class="n-date-picker-calendar__date-time-input-wrapper"
-        >
-          <n-input
-            v-model="endDateDisplayString"
-            class="n-date-picker-calendar__date-input"
-            placeholder="Select date"
-            @blur="handleEndDateInputBlur"
-            @input="handleEndDateInput"
-          />
-          <n-time-picker
-            class="n-date-picker-calendar__time-input"
-            :value="endTimeValue"
-            stop-selector-bubble
-            @input="handleEndTimePickerInput"
-          />
-        </div>
         <div class="n-date-picker-calendar__month-modifier">
           <div
             class="n-date-picker-calendar__fast-prev"
