@@ -4,6 +4,7 @@
       v-if="active"
       v-clickoutside.lazy="handleClickOutside"
       class="n-date-picker-calendar n-date-picker-calendar--datetimerange"
+      @click.capture="resetSelectingStatus"
     >
       <div class="n-date-picker-calendar__range-wrapper">
         <div
@@ -82,7 +83,10 @@
           </div>
         </div>
         <div class="n-date-picker-calendar__divider" />
-        <div class="n-date-picker-calendar__dates">
+        <div
+          ref="startDates"
+          class="n-date-picker-calendar__dates"
+        >
           <div
             v-for="dateItem in dateArray(startCalendarDateTime, valueAsMomentArray, currentDateTime)"
             :key="`${dateItem.timestamp}${dateItem.isDateOfDisplayMonth}`"
@@ -178,7 +182,10 @@
           </div>
         </div>
         <div class="n-date-picker-calendar__divider" />
-        <div class="n-date-picker-calendar__dates">
+        <div
+          ref="endDates"
+          class="n-date-picker-calendar__dates"
+        >
           <div
             v-for="dateItem in dateArray(endCalendarDateTime, valueAsMomentArray, currentDateTime)"
             :key="`${dateItem.timestamp}${dateItem.isDateOfDisplayMonth}`"
@@ -195,23 +202,24 @@
             {{ dateItem.date }}
           </div>
         </div>
-        <div class="n-date-picker-calendar__actions">
-          <n-button
-            size="tiny"
-            round
-          >
-            Reset
-          </n-button>
-          <n-button
-            size="tiny"
-            round
-            auto-text-color
-            type="primary"
-            @click="handleConfirmClick"
-          >
-            Confirm
-          </n-button>
-        </div>
+      </div>
+      <div class="n-date-picker-calendar__actions">
+        <n-button
+          size="tiny"
+          round
+          @click="clearSelectedDateTime"
+        >
+          Reset
+        </n-button>
+        <n-button
+          size="tiny"
+          round
+          auto-text-color
+          type="primary"
+          @click="handleConfirmClick"
+        >
+          Confirm
+        </n-button>
       </div>
     </div>
   </transition>
@@ -219,7 +227,7 @@
 
 <script>
 import moment from 'moment'
-import { dateArray, setDate } from '../utils'
+import { dateArray } from '../utils'
 import NIcon from '../../../Icon'
 import clickoutside from '../../../../directives/clickoutside'
 
@@ -321,11 +329,18 @@ export default {
     }
   },
   watch: {
+    active (newActive) {
+      if (newActive) {
+        this.syncCalendarTimeWithValue(this.value)
+      }
+    },
     valueAsMomentArray (newValue) {
+      if (this.isSelecting) return
       if (newValue !== null) {
         const [startMoment, endMoment] = newValue
         this.startDateDisplayString = startMoment.format(DATE_FORMAT)
         this.endDateDisplayString = endMoment.format(DATE_FORMAT)
+        this.syncCalendarTimeWithValue(newValue)
       } else {
         this.startDateDisplayString = ''
         this.endDateDisplayString = ''
@@ -337,6 +352,7 @@ export default {
       const [startMoment, endMoment] = this.valueAsMomentArray
       this.startDateDisplayString = startMoment.format(DATE_FORMAT)
       this.endDateDisplayString = endMoment.format(DATE_FORMAT)
+      this.syncCalendarTimeWithValue(this.valueAsMomentArray)
     } else {
       this.startDateDisplayString = ''
       this.endDateDisplayString = ''
@@ -344,19 +360,25 @@ export default {
   },
   methods: {
     dateArray,
+    resetSelectingStatus (e) {
+      if (this.$refs.startDates.contains(e.target) || this.$refs.endDates.contains(e.target)) {
+        // do nothing
+      } else {
+        this.isSelecting = false
+      }
+    },
+    syncCalendarTimeWithValue (value) {
+      if (value === null) return
+      const [startMoment, endMoment] = value
+      this.startCalendarDateTime = moment(startMoment)
+      if (moment(endMoment).startOf('month').valueOf() <= moment(startMoment).startOf('month').valueOf()) {
+        this.endCalendarDateTime = moment(startMoment).add(1, 'month').startOf('month')
+      } else {
+        this.endCalendarDateTime = moment(endMoment).startOf('month')
+      }
+    },
     handleClickOutside () {
       this.closeCalendar()
-    },
-    setValue (newSelectedDateTime) {
-      if (newSelectedDateTime === null || newSelectedDateTime === undefined) {
-        this.$emit('input', null)
-      } else if (newSelectedDateTime.isValid()) {
-        const adjustedDateTime = this.adjustValue(newSelectedDateTime)
-        if (this.valueAsMomentArray === null || adjustedDateTime.valueOf() !== this.valueAsMomentArray.valueOf()) {
-          this.refreshDisplayDateString(adjustedDateTime)
-          this.$emit('input', adjustedDateTime.valueOf())
-        }
-      }
     },
     adjustValue (datetime) {
       return moment(datetime).startOf('second')
@@ -449,7 +471,7 @@ export default {
       if (!this.isSelecting) {
         this.isSelecting = true
         this.memorizedStartDateTime = dateItem.timestamp
-        this.changeBothTime(dateItem.timestamp)
+        this.changeStartEndTime(dateItem.timestamp)
       } else {
         this.isSelecting = false
       }
@@ -457,9 +479,9 @@ export default {
     handleDateMouseEnter (dateItem) {
       if (this.isSelecting) {
         if (dateItem.timestamp >= this.memorizedStartDateTime) {
-          this.changeBothTime(this.memorizedStartDateTime, dateItem.timestamp)
+          this.changeStartEndTime(this.memorizedStartDateTime, dateItem.timestamp)
         } else {
-          this.changeBothTime(dateItem.timestamp, this.memorizedStartDateTime)
+          this.changeStartEndTime(dateItem.timestamp, this.memorizedStartDateTime)
         }
       }
     },
@@ -484,11 +506,11 @@ export default {
       this.closeCalendar()
     },
     closeCalendar () {
+      this.isSelecting = false
       if (this.active) {
         this.$emit('close')
       }
     },
-
     handleStartTimePickerInput (value) {
       this.changeStartDateTime(value)
     },
@@ -515,7 +537,7 @@ export default {
         this.$emit('input', [Math.min(this.value[0], time), time])
       }
     },
-    changeBothTime (startTime, endTime) {
+    changeStartEndTime (startTime, endTime) {
       if (endTime === undefined) endTime = startTime
       if (typeof startTime !== 'number') {
         startTime = startTime.valueOf()

@@ -1,20 +1,31 @@
 <template>
   <div class="n-doc-section">
     <div class="n-doc-section__header">
-      Range
+      DateTime Range
     </div>
     <div
       class="n-doc-section__view"
-      style="flex-wrap: nowrap;"
+      style="flex-wrap: wrap;"
     >
       <!--EXAMPLE_START-->
       <n-date-picker
-        v-model="ts1"
+        v-model="range1"
         type="datetimerange"
-        style="margin-right: 12px;"
+        style="margin-bottom: 12px;"
+      />
+      <n-date-picker
+        v-model="range2"
+        type="datetimerange"
+        style="margin-bottom: 12px;"
+      />
+      <n-date-picker
+        v-model="range3"
+        type="daterange"
       />
     </div>
-    <pre class="n-doc-section__inspect">datetimerange v-model: {{ JSON.stringify(ts1) }}</pre>
+    <pre class="n-doc-section__inspect">range1 v-model: {{ JSON.stringify(range1) }}
+range2 v-model: {{ JSON.stringify(range2) }}
+range3 v-model: {{ JSON.stringify(range3) }}</pre>
     <n-doc-source-block>
       <!--SOURCE-->
     </n-doc-source-block>
@@ -32,8 +43,9 @@
 export default {
   data () {
     return {
-      ts1: null,
-      ts2: [0, 0]
+      range1: null,
+      range2: [1562774466000, 1567180866000],
+      range3: [1562774400000, 1567180800000]
     }
   },
   methods: {

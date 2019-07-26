@@ -70,14 +70,16 @@
         opacity: 1;
       }
       &.n-date-picker__input--start {
-        width: 152px;
-        margin-right: 4px;
+        width: 160px;
+        text-align: center;
       }
       &.n-date-picker__input--splitor {
-        width: 30px;
+        width: 18px;
+        text-align: center;
       }
       &.n-date-picker__input--end {
-        width: 152px;
+        width: 160px;
+        text-align: center;
       }
     }
     &.n-date-picker__editor--focus {
@@ -123,18 +125,30 @@
   box-shadow:0px 2px 20px 0px rgba(0,0,0,0.16);
   border-radius: 6px;
   color:rgba(233,233,236,1);
-  &.n-date-picker-calendar--datetimerange {
+  &.n-date-picker-calendar--datetimerange, &.n-date-picker-calendar--daterange {
     width: 701px;
     display: flex;
+    flex-wrap: wrap;
     .n-date-picker-calendar__range-wrapper {
-      width: 351px;
+      width: 350px;
+      .n-date-picker-calendar__month-modifier {
+        margin-top: 12px;
+      }
     }
     .n-date-picker-calendar__vertical-divider {
       width: 1px;
-      height: calc(100% - 109px);
+      height: calc(100% - 62px);
       background: rgba(255, 255, 255, .1);
       margin-top: 62px;
-      margin-bottom: 47px;
+    }
+    &.n-date-picker-calendar--daterange {
+      .n-date-picker-calendar__vertical-divider {
+        height:100%;
+        margin-top: 0;
+      }
+    }
+    .n-date-picker-calendar__actions {
+      flex: 1;
     }
   }
   .n-date-picker-calendar__date-time-input-wrapper {

@@ -66,6 +66,7 @@ export default {
       this.ts1 = Number.isNaN(v) ? null : v
     },
     handleInputTs2 (v) {
+      v = Number(v)
       this.ts2 = Number.isNaN(v) ? null : v
     }
   }
