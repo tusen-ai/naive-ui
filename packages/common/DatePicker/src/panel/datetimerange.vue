@@ -23,84 +23,84 @@
             @input="handleStartTimePickerInput"
           />
         </div>
-        <div class="n-date-picker-calendar__calendar-wrapper">
-          <div class="n-date-picker-calendar__month-modifier">
-            <div
-              class="n-date-picker-calendar__fast-prev"
-              @click="startCalendarPrevYear"
-            >
-              <n-icon
-                type="ios-arrow-back"
-                size="14"
-              />
-              <n-icon
-                type="ios-arrow-back"
-                size="14"
-              />
-            </div>
-            <div
-              class="n-date-picker-calendar__prev"
-              @click="startCalendarPrevMonth"
-            >
-              <n-icon
-                type="ios-arrow-back"
-                size="14"
-              />
-            </div>
-            <div class="n-date-picker-calendar__month-year">
-              {{ startCalendarDateTime.format('MMMM') }} {{ startCalendarDateTime.year() }}
-            </div>
-            <div
-              class="n-date-picker-calendar__next"
-              @click="startCalendarNextMonth"
-            >
-              <n-icon
-                type="ios-arrow-forward"
-                size="14"
-              />
-            </div>
-            <div
-              class="n-date-picker-calendar__fast-next"
-              @click="startCalendarNextYear"
-            >
-              <n-icon
-                type="ios-arrow-forward"
-                size="14"
-              />
-              <n-icon
-                type="ios-arrow-forward"
-                size="14"
-              />
-            </div>
+        <div class="n-date-picker-calendar__month-modifier">
+          <div
+            class="n-date-picker-calendar__fast-prev"
+            @click="startCalendarPrevYear"
+          >
+            <n-icon
+              type="ios-arrow-back"
+              size="14"
+            />
+            <n-icon
+              type="ios-arrow-back"
+              size="14"
+            />
           </div>
-          <div class="n-date-picker-calendar__weekdays">
-            <div
-              v-for="weekday in weekdays"
-              :key="weekday"
-              class="n-date-picker-calendar__weekday"
-            >
-              {{ weekday }}
-            </div>
+          <div
+            class="n-date-picker-calendar__prev"
+            @click="startCalendarPrevMonth"
+          >
+            <n-icon
+              type="ios-arrow-back"
+              size="14"
+            />
           </div>
-          <div class="n-date-picker-calendar__divider" />
-          <div class="n-date-picker-calendar__dates">
-            <div
-              v-for="dateItem in dateArray(startCalendarDateTime, valueAsMomentArray, currentDateTime)"
-              :key="`${dateItem.timestamp}${dateItem.isDateOfDisplayMonth}`"
-              class="n-date-picker-calendar__date"
-              :class="{
-                'n-date-picker-calendar__date--current': dateItem.isCurrentDate,
-                'n-date-picker-calendar__date--selected': dateItem.isSelectedDate,
-                'n-date-picker-calendar__date--in-display-month': dateItem.isDateOfDisplayMonth,
-                'n-date-picker-calendar__date--in-span': dateItem.isInSpan
-              }"
-              @click="handleDateClick(dateItem)"
-            >
-              {{ dateItem.date }}
-            </div>
+          <div class="n-date-picker-calendar__month-year">
+            {{ startCalendarDateTime.format('MMMM') }} {{ startCalendarDateTime.year() }}
+          </div>
+          <div
+            class="n-date-picker-calendar__next"
+            @click="startCalendarNextMonth"
+          >
+            <n-icon
+              type="ios-arrow-forward"
+              size="14"
+            />
+          </div>
+          <div
+            class="n-date-picker-calendar__fast-next"
+            @click="startCalendarNextYear"
+          >
+            <n-icon
+              type="ios-arrow-forward"
+              size="14"
+            />
+            <n-icon
+              type="ios-arrow-forward"
+              size="14"
+            />
+          </div>
+        </div>
+        <div class="n-date-picker-calendar__weekdays">
+          <div
+            v-for="weekday in weekdays"
+            :key="weekday"
+            class="n-date-picker-calendar__weekday"
+          >
+            {{ weekday }}
+          </div>
+        </div>
+        <div class="n-date-picker-calendar__divider" />
+        <div class="n-date-picker-calendar__dates">
+          <div
+            v-for="dateItem in dateArray(startCalendarDateTime, valueAsMomentArray, currentDateTime)"
+            :key="`${dateItem.timestamp}${dateItem.isDateOfDisplayMonth}`"
+            class="n-date-picker-calendar__date"
+            :class="{
+              'n-date-picker-calendar__date--current': dateItem.isCurrentDate,
+              'n-date-picker-calendar__date--selected': dateItem.isSelectedDate,
+              'n-date-picker-calendar__date--in-display-month': dateItem.isDateOfDisplayMonth,
+              'n-date-picker-calendar__date--in-span': dateItem.isInSpan
+            }"
+            @click="handleDateClick(dateItem)"
+            @mouseenter="handleDateMouseEnter(dateItem)"
+          >
+            {{ dateItem.date }}
           </div>
         </div>
       </div>
+      <div><div class="n-date-picker-calendar__vertical-divider" /></div>
       <div class="n-date-picker-calendar__range-wrapper">
         <div
           class="n-date-picker-calendar__date-time-input-wrapper"
@@ -190,6 +190,7 @@
               'n-date-picker-calendar__date--in-span': dateItem.isInSpan
             }"
             @click="handleDateClick(dateItem)"
+            @mouseenter="handleDateMouseEnter(dateItem)"
           >
             {{ dateItem.date }}
           </div>
@@ -292,6 +293,7 @@ export default {
       calendar: [],
       isSelecting: false,
       startDateTime: null,
+      memorizedStartDateTime: null,
       endDateTime: null,
       ...TIME_CONST
     }
@@ -444,13 +446,22 @@ export default {
       this.$emit('input', null)
     },
     handleDateClick (dateItem) {
-      return
-      let newSelectedDateTime = moment()
-      if (this.valueAsMomentArray !== null) {
-        newSelectedDateTime = moment(this.valueAsMomentArray)
+      if (!this.isSelecting) {
+        this.isSelecting = true
+        this.memorizedStartDateTime = dateItem.timestamp
+        this.changeBothTime(dateItem.timestamp)
+      } else {
+        this.isSelecting = false
       }
-      newSelectedDateTime = setDate(newSelectedDateTime, dateItem)
-      this.$emit('input', this.adjustValue(newSelectedDateTime).valueOf())
+    },
+    handleDateMouseEnter (dateItem) {
+      if (this.isSelecting) {
+        if (dateItem.timestamp >= this.memorizedStartDateTime) {
+          this.changeBothTime(this.memorizedStartDateTime, dateItem.timestamp)
+        } else {
+          this.changeBothTime(dateItem.timestamp, this.memorizedStartDateTime)
+        }
+      }
     },
     /**
      * If not selected, display nothing,
@@ -503,6 +514,16 @@ export default {
       } else {
         this.$emit('input', [Math.min(this.value[0], time), time])
       }
+    },
+    changeBothTime (startTime, endTime) {
+      if (endTime === undefined) endTime = startTime
+      if (typeof startTime !== 'number') {
+        startTime = startTime.valueOf()
+      }
+      if (typeof endTime !== 'number') {
+        endTime = endTime.valueOf()
+      }
+      this.$emit('input', [startTime, endTime])
     },
     /** change calendar time */
     adjustCalendarTimes (byStartCalendarTime) {

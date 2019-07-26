@@ -118,22 +118,25 @@
   @include fade-in-transition(date-picker-calendar);
   margin-top: 4px;
   margin-bottom: 4px;
-  width: 351px;
+  width: 350px;
   background:rgba(75,81,106,1);
   box-shadow:0px 2px 20px 0px rgba(0,0,0,0.16);
   border-radius: 6px;
   color:rgba(233,233,236,1);
   &.n-date-picker-calendar--datetimerange {
-    width: 702px;
+    width: 701px;
     display: flex;
     .n-date-picker-calendar__range-wrapper {
       width: 351px;
-      .n-date-picker-calendar__calendar-wrapper {
-        border-right: 1px solid rgba(255, 255, 255, .1);
-      }
+    }
+    .n-date-picker-calendar__vertical-divider {
+      width: 1px;
+      height: calc(100% - 109px);
+      background: rgba(255, 255, 255, .1);
+      margin-top: 62px;
+      margin-bottom: 47px;
     }
   }
-  
   .n-date-picker-calendar__date-time-input-wrapper {
     padding: 14px 24px;
     border-bottom: 1px solid rgba(255, 255, 255, .1);
@@ -192,15 +195,13 @@
     flex-wrap: wrap;
     .n-date-picker-calendar__date {
       position: relative;
-      width: 46px;
+      width: 24px;
       height: 24px;
       line-height: 24px;
       text-align: center;
       font-size: 12px;
-      // margin-right: 21px;
-      margin-top: 8px;
-      margin-bottom: 8px;
-      
+      margin: 8px 11px;
+      border-radius: 3px;
       cursor: pointer;
       transition: background-color .2s $default-cubic-bezier, color .2s $default-cubic-bezier;
       &:not(.n-date-picker-calendar__date--in-display-month) {
@@ -211,7 +212,7 @@
         &::after {
           position: absolute;
           top: 3px;
-          right: 14px;
+          right: 2px;
           content: "";
           height: 4px;
           width: 4px;
@@ -220,7 +221,7 @@
           transition: background-color .2s $default-cubic-bezier;
         }
       }
-      &.n-date-picker-calendar__date--selected {
+      &.n-date-picker-calendar__date--selected.n-date-picker-calendar__date--in-display-month {
         border-radius: 3px;
         color: rgba(75, 81, 106, 1)!important;
         background-color: $main-color!important;
@@ -228,11 +229,18 @@
         margin: 8px 11px;
         &::after {
           background-color: rgba(75, 81, 106, 1);
-          right: 3px;
         }
       }
-      &.n-date-picker-calendar__date--in-span {
-        background: rgba(99,226,183,0.1);
+      &.n-date-picker-calendar__date--in-span.n-date-picker-calendar__date--in-display-month:not(.n-date-picker-calendar__date--selected) {
+        background: rgba(99,226,183,0.15);
+        width: 46px;
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 0;
+        transition: none;
+        &::after {
+          right: 13px;
+        }
       }
       &:hover {
         background-color: rgba(99, 226, 183, 0.2);

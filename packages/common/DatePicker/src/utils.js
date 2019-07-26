@@ -25,7 +25,6 @@ function isSameDate (time, patternTime) {
 function dateItem (time, displayTime, selectedTime, currentTime) {
   let isInSpan = false
   if (Array.isArray(selectedTime)) {
-    console.log('oops')
     if (selectedTime[0].valueOf() < time.valueOf() && time.valueOf() < selectedTime[1].valueOf()) {
       isInSpan = true
     }
@@ -38,7 +37,7 @@ function dateItem (time, displayTime, selectedTime, currentTime) {
     isInSpan,
     isSelectedDate: selectedTime !== null && isSameDate(selectedTime, time),
     isCurrentDate: isSameDate(currentTime, time),
-    timestamp: time.unix()
+    timestamp: time.valueOf()
   }
 }
 
