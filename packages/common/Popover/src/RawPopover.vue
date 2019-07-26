@@ -77,12 +77,13 @@
 import detachable from '../../../mixins/detachable'
 import toggleable from '../../../mixins/toggleable'
 import placeable from '../../../mixins/placeable'
+import zindexable from '../../../mixins/zindexable'
 import clickoutsideDelegate from '../../../utils/clickoutsideDelegate'
 import moveoutsideDelegate from '../../../utils/moveoutsideDelegate'
 
 export default {
   // name: 'NPopover',
-  mixins: [detachable, toggleable, placeable],
+  mixins: [detachable, toggleable, placeable, zindexable],
   props: {
     duration: {
       type: Number,

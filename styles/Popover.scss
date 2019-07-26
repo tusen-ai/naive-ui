@@ -19,7 +19,6 @@ $popover-distance: $popover-arrow-width - 1 + 14;
   height: 0;
   width: 0;
   position: fixed;
-  z-index: 2000;
   .n-popover__content-wrapper {
     position: fixed;
     left: 0;
