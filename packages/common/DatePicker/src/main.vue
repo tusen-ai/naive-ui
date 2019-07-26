@@ -60,7 +60,7 @@
         :readonly="disabled ? 'disabled' : false"
         @click="handleActivatorClick"
         @focus="handleFocus"
-        @blur="handleDateTimeInputBlur"
+        @blur="handleTimeInputBlur"
         @input="handleTimeInput"
       >
       <div class="n-date-picker__icon">
@@ -268,11 +268,11 @@ export default {
      */
     handlePanelInput (value, valueString) {
       this.$emit('input', value, 'unavailable for now')
-      this.refreshDisplayTime(value)
+      this.refresh(value)
     },
     handleRangePanelInput (value, valueString) {
       this.$emit('input', value, 'unavailable for now')
-      this.refreshDisplayRange(value)
+      this.refresh(value)
     },
     /**
      * Refresh
@@ -303,13 +303,13 @@ export default {
     /**
      * Blur
      */
-    handleDateTimeInputBlur () {
+    handleTimeInputBlur () {
       if (this.disabled) return
-      const newSelectedDateTime = moment(this.displayTime, this.computedFormat, true)
+      const newSelectedDateTime = moment(this.displayTime, this.computedValidateFormat, true)
       if (newSelectedDateTime.isValid()) {
         this.$emit('input', newSelectedDateTime.valueOf())
       } else {
-        this.refreshDisplayTime()
+        this.refreshDisplayTime(this.value)
       }
       this.isFocus = false
     },
