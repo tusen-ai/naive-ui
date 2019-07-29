@@ -53,7 +53,7 @@ class="n-advance-table__operation__search">
             <!-- 优先自定义 -->
             {{ column.filterDropdown && column.filterDropdown() }}
             <!-- 否则默认渲染 -->
-            <sortDropDown
+            <filterDropDown
               v-if="column.filterItems && !column.filterDropdown"
               :ref="'filterDropDown_' + (column.key || i)"
               :filter-fn="column.onFilter"
@@ -121,7 +121,7 @@ class="n-no-data-tip">
 <script>
 import row from '../row/index.js'
 import SortIcon from '../sortIcon'
-import sortDropDown from '../sortDropDown'
+import filterDropDown from '../filterDropDown'
 import searchInput from '../searchInput'
 
 export default {
@@ -129,7 +129,7 @@ export default {
   components: {
     row,
     SortIcon,
-    sortDropDown,
+    filterDropDown,
     searchInput
   },
   props: {
