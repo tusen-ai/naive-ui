@@ -323,7 +323,8 @@ export default {
     },
     data () {
       this.copyData = this.data.slice(0)
-      this.searchData = []
+      this.searchData = this.computeShowingData()
+      this.searchDataNoSort = null
     },
     currentSearchColumn () {
       this.searchData = this.computeShowingData()
