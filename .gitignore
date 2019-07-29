@@ -4,4 +4,5 @@ docDist
 doc/dist
 test/unit/coverage
 package-lock.json
+.vscode
 *.swp
