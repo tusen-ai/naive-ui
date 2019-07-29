@@ -8,7 +8,11 @@
       style="flex-wrap: nowrap;"
     >
       <!--EXAMPLE_START-->
-      Write some demo here
+      <div style="width: 400px; height: 300px;">
+        <n-scrollbar>
+          <div style="background: linear-gradient(red, blue); width: 100%; height: 500px;" />
+        </n-scrollbar>
+      </div>
       <!--EXAMPLE_END-->
     </div>
     <pre class="n-doc-section__inspect">Inspect some value here</pre>
