@@ -33,6 +33,14 @@
           font-size: 20px;
         }
       }
+      &.n-message__cell--info {
+        background-color: rgba(56, 137, 197, 1);
+        .n-message-cell__icon {
+          i::before {
+            color: rgba(129, 202, 255, 1);
+          }
+        }
+      }
       &.n-message__cell--success {
         background-color: #2A947DFF;
         .n-message-cell__icon {

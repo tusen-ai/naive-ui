@@ -71,6 +71,11 @@ const NMessage = {
     const messageCell = (new Vue({ ...NMessageCell, propsData: { option, content } })).$mount()
     registerMessageEl(messageContainer, messageCell.$el, mixinOption(option))
   },
+  info (content, option) {
+    option = mixinOption(option)
+    option.type = 'info'
+    this.notice(content, option)
+  },
   success (content, option) {
     option = mixinOption(option)
     option.type = 'success'
