@@ -334,12 +334,13 @@ export default {
       }
     },
     valueAsMomentArray (newValue) {
-      if (this.isSelecting) return
       if (newValue !== null) {
         const [startMoment, endMoment] = newValue
         this.startDateDisplayString = startMoment.format(DATE_FORMAT)
         this.endDateDisplayString = endMoment.format(DATE_FORMAT)
-        this.syncCalendarTimeWithValue(newValue)
+        if (this.isSelecting) {
+          this.syncCalendarTimeWithValue(newValue)
+        }
       } else {
         this.startDateDisplayString = ''
         this.endDateDisplayString = ''
