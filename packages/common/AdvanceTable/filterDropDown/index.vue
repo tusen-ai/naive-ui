@@ -1,13 +1,11 @@
 <template>
-  <filterIcon
-    :status="filterStatus"
-  >
+  <filterIcon :status="filterStatus">
     <ul class="n-table-filter-item">
       <li
         v-for="(item, idx) in items"
         :key="item.value"
         :class="computeItemClass(item)"
-        @click="handleSelect(item,idx)"
+        @click="handleSelect(item, idx)"
       >
         <span>{{ item.label }}</span>
         <n-icon
@@ -27,7 +25,6 @@ import Vue from 'vue'
 export default {
   components: {
     filterIcon
-
   },
   props: {
     filterItems: {
@@ -48,42 +45,32 @@ export default {
     }
   },
   data () {
-    const checkedIndexs = {}
-    this.filterItems.forEach((item) => {
-      checkedIndexs[item.value] = false
-    })
-    let items = this.filterItems.map((item) => {
-      return {
-        ...item,
-        isChecked: false
-      }
-    })
     return {
-      items,
-      emitData: null,
-      checkedIndexs
+      // items,
+      emitData: null
+      // checkedIndexs
     }
   },
   computed: {
     filterStatus () {
       return !!this.emitData
+    },
+    checkedIndexs (val, oldVal) {
+      const checkedIndexs = {}
+      this.filterItems.forEach((item) => {
+        checkedIndexs[item.value] = false
+      })
+      return { checkedIndexs, ...oldVal }
+    },
+    items () {
+      let items = this.filterItems.map((item) => {
+        return {
+          ...item
+          // isChecked: false
+        }
+      })
+      return items
     }
-    // _emitData () {
-    //   let res = []
-    //   Object.keys(this.checkedIndexs).forEach((key) => {
-    //     if (this.checkedIndexs[key] === true) {
-    //       res.push(key)
-    //     }
-    //   })
-    //   res = res.length ? res : null
-    //   if (!this.filterMultiple) {
-    //     res = res.length ? res[0] : null
-    //   }
-
-    //   this.$emit('on-filter', res)
-
-    //   return res
-    // }
   },
   watch: {
     checkedIndexs: {
@@ -162,7 +149,7 @@ export default {
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
 }
-.n-table-filter-item li{
+.n-table-filter-item li {
   padding: 0 12px;
   height: 27px;
   align-items: center;
@@ -178,17 +165,18 @@ export default {
   line-height: 27px;
   box-sizing: border-box;
   padding: 0 12px;
-  transition: all .3s;
+  transition: all 0.3s;
   cursor: pointer;
 }
 
-.n-table-filter-item li:hover{
-  background-color: rgba(96,220,178,0.3);
+.n-table-filter-item li:hover {
+  background-color: rgba(96, 220, 178, 0.3);
 }
-.n-table-filter-item--selected{
-  background-color:rgba(96,220,178,0.3);
+.n-table-filter-item--selected {
+  background-color: rgba(96, 220, 178, 0.3);
 }
-.n-table-filter-item--selected,.n-table-filter-item--selected i {
-  color: #63E2B7;
+.n-table-filter-item--selected,
+.n-table-filter-item--selected i {
+  color: #63e2b7;
 }
 </style>
