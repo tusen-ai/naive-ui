@@ -1,8 +1,6 @@
 <template>
-  <div
-    ref="doc"
-    class="n-doc"
-  >
+  <div ref="doc"
+class="n-doc">
     <div class="n-doc-header">
       <n-gradient-text :font-size="20">
         AdvanceTable
@@ -15,10 +13,8 @@
           Basic use
         </div>
         <div class="n-doc-section__view">
-          <n-advance-table
-            :columns="columns0"
-            :data="data"
-          >
+          <n-advance-table :columns="columns0"
+:data="data">
             <template #table-operation>
               <n-button>custom operation by v-slot:table-operation</n-button>
             </template>
@@ -796,7 +792,7 @@ export default {
             value: 15
           }],
           onFilter: (value, record) => {
-            return value.includes(record.age)
+            return value.includes(record.age + '')
             // switch (value) {
             //   case 14:
             //     return record.age <= value
@@ -889,11 +885,11 @@ export default {
             value: 15
           }],
           onFilter: (value, record) => {
-            switch (value) {
+            switch (+value) {
               case 14:
-                return record.age <= value
+                return record.age <= +value
               case 15:
-                return record.age >= value
+                return record.age >= +value
             }
           },
           render: (h, params) => {
@@ -935,10 +931,10 @@ export default {
           filterMultiple: true,
           filterItems: [{
             label: '14',
-            value: '14'
+            value: 14
           }, {
             label: '15',
-            value: '15'
+            value: 15
           }],
           onFilter: (value, record) => {
             return value.includes(record.age + '')

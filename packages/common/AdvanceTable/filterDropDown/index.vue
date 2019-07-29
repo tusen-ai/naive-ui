@@ -9,7 +9,7 @@
       >
         <span>{{ item.label }}</span>
         <n-icon
-          v-show="checkedIndexs[item.value]"
+          v-show="checkedIndexs[item.value] === true"
           type="md-checkmark"
           size="14"
         />
@@ -45,23 +45,27 @@ export default {
     }
   },
   data () {
+    const checkedIndexs = {}
+    this.filterItems.forEach((item) => {
+      checkedIndexs[item.value] = false
+    })
     return {
       // items,
-      emitData: null
-      // checkedIndexs
+      emitData: null,
+      checkedIndexs
     }
   },
   computed: {
     filterStatus () {
       return !!this.emitData
     },
-    checkedIndexs (val, oldVal) {
-      const checkedIndexs = {}
-      this.filterItems.forEach((item) => {
-        checkedIndexs[item.value] = false
-      })
-      return { checkedIndexs, ...oldVal }
-    },
+    // checkedIndexs (val, oldVal) {
+    //   const checkedIndexs = {}
+    //   this.filterItems.forEach((item) => {
+    //     checkedIndexs[item.value] = false
+    //   })
+    //   return { checkedIndexs, ...oldVal }
+    // },
     items () {
       let items = this.filterItems.map((item) => {
         return {
@@ -86,7 +90,13 @@ export default {
         this.$emit('on-filter', { key: this.filterKey, value: res, filterFn: this.filterFn })
       },
       deep: true
-
+    },
+    filterItems () {
+      const checkedIndexs = {}
+      this.filterItems.forEach((item) => {
+        checkedIndexs[item.value] = false
+      })
+      this.checkedIndexs = { checkedIndexs, ...this.checkedIndexs }
     }
   },
   methods: {
@@ -107,10 +117,9 @@ export default {
       // single select
       let isChecked = this.checkedIndexs[item.value]
       !this.filterMultiple && this.reset()
+      // this.checkedIndexs[item.value] = !isChecked
       Vue.set(this.checkedIndexs, item.value, !isChecked)
-      // this.$nextTick(() => {
-      //   this.$emit('on-filter', { key: this.filterKey, value: this.checkedIndexs })
-      // })
+
       // this.checkedIndexs[item.value] = !isChecked
 
       // if (!this.filterMultiple) {
