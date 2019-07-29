@@ -64,11 +64,15 @@ export default {
     styles () {
       let style = {}
       if (this.size) {
-        if (typeof this.size === 'number') style['width'] = this.size + 'px'
-        else if (this.size.endsWith('%') || this.size.endsWith('px')) {
+        if (typeof this.size === 'number') {
+          style['width'] = this.size + 'px'
+          style['height'] = this.size + 'px'
+        } else if (this.size.endsWith('%') || this.size.endsWith('px')) {
           style['width'] = this.size
+          style['height'] = this.size
         } else {
           style['width'] = this.size + 'px'
+          style['height'] = this.size + 'px'
         }
       }
       if (this.color) {
