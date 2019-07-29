@@ -24,6 +24,7 @@ import DatePicker from './packages/common/DatePicker'
 import InputNumber from './packages/common/InputNumber'
 import Radio from './packages/common/Radio'
 import Form from './packages/common/Form'
+import Tab from './packages/common/Tab'
 import TimePicker from './packages/common/TimePicker'
 import ServiceCard from './packages/nimbus/ServiceCard'
 import HomeLayout from './packages/nimbus/HomeLayout'
@@ -67,6 +68,7 @@ function install (Vue) {
   NimbusIcon.install(Vue)
   Radio.install(Vue)
   Form.install(Vue)
+  Tab.install(Vue)
   TimePicker.install(Vue)
 }
 
