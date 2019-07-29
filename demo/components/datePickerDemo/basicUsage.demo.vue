@@ -62,10 +62,19 @@ export default {
       this.$NMessage.success(`${timestamp}, ${dateString}`)
     },
     handleInputTs1 (v) {
+      if (v === '') {
+        this.ts1 = null
+        return
+      }
       v = Number(v)
       this.ts1 = Number.isNaN(v) ? null : v
     },
     handleInputTs2 (v) {
+      if (v === '') {
+        this.ts2 = null
+        return
+      }
+      v = Number(v)
       this.ts2 = Number.isNaN(v) ? null : v
     }
   }

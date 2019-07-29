@@ -100,6 +100,7 @@
   .n-input__textarea {
     padding: 10px 14px;
     resize: vertical;
+    @include scrollbar;
     &.n-input__textarea--small-size {
       font-size: $small-input-font-size;
     }

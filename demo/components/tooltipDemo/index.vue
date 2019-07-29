@@ -13,6 +13,7 @@
       <trigger />
       <event />
       <placement />
+      <fixWidth />
     </div>
   </div>
 </template>
@@ -22,9 +23,10 @@ import basicUsage from './basicUsage.demo.vue'
 import trigger from './trigger.demo.vue'
 import event from './event.demo.vue'
 import placement from './placement.demo.vue'
+import fixWidth from './fixWidth.demo'
 
 export default {
-  components: { basicUsage, trigger, event, placement },
+  components: { basicUsage, trigger, event, placement, fixWidth },
   data () {
     return {
 

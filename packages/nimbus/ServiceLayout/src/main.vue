@@ -119,6 +119,12 @@ export default {
   watch: {
     $route (to, from) {
       this.syncActiveItemWithPath(to.path)
+    },
+    items (newItems) {
+      this.itemsWithCollapseStatus = newItems.map(item => ({
+        ...item,
+        isCollapsed: false
+      }))
     }
   },
   mounted () {

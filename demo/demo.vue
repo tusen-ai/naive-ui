@@ -147,6 +147,10 @@ export default {
             {
               name: 'RouterDebug',
               path: '/n-router-debug'
+            },
+            {
+              name: 'ModalDebug',
+              path: '/n-modal-debug'
             }
           ]
         }

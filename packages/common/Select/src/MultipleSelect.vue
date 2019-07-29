@@ -82,30 +82,34 @@
         <transition name="n-select-menu--transition">
           <div
             v-if="active"
-            ref="contentInner"
-            class="n-select-menu n-select-menu--multiple"
-            :class="{[`n-select-menu--${size}-size`]: true}"
-            @mouseleave="hideLightBar"
+            class="n-select-menu-wrapper"
           >
-            <transition name="n-select-menu__light-bar--transition">
-              <div
-                v-if="showLightBar"
-                class="n-select-menu__light-bar"
-                :style="{ top: `${lightBarTop}px` }"
-              />
-            </transition>
             <div
-              v-for="item in items"
-              :key="item.value"
-              class="n-select-menu__item"
-              :class="{
-                'n-select-menu__item--selected':
-                  isSelected(item)
-              }"
-              @click.stop="toggleItemInMultipleSelect(item)"
-              @mouseenter="showLightBarTop"
+              ref="contentInner"
+              class="n-select-menu n-select-menu--multiple"
+              :class="{[`n-select-menu--${size}-size`]: true}"
+              @mouseleave="hideLightBar"
             >
-              {{ item.label }}
+              <transition name="n-select-menu__light-bar--transition">
+                <div
+                  v-if="showLightBar"
+                  class="n-select-menu__light-bar"
+                  :style="{ top: `${lightBarTop}px` }"
+                />
+              </transition>
+              <div
+                v-for="item in items"
+                :key="item.value"
+                class="n-select-menu__item"
+                :class="{
+                  'n-select-menu__item--selected':
+                    isSelected(item)
+                }"
+                @click.stop="toggleItemInMultipleSelect(item)"
+                @mouseenter="showLightBarTop"
+              >
+                {{ item.label }}
+              </div>
             </div>
           </div>
         </transition>
@@ -119,13 +123,14 @@ import NIcon from '../../Icon/index'
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import toggleable from '../../../mixins/toggleable'
+import zindexable from '../../../mixins/zindexable'
 
 export default {
   name: 'NMultipleSelect',
   components: {
     NIcon
   },
-  mixins: [detachable, toggleable, placeable],
+  mixins: [detachable, toggleable, placeable, zindexable],
   model: {
     prop: 'selectedValue',
     event: 'input'

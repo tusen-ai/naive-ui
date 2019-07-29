@@ -111,6 +111,7 @@ import moment from 'moment'
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import clickoutside from '../../../directives/clickoutside'
+import zindexable from '../../../mixins/zindexable'
 
 const DEFAULT_FORMAT = 'HH:mm:ss'
 const TIME_CONST = {
@@ -152,7 +153,7 @@ export default {
   directives: {
     clickoutside
   },
-  mixins: [detachable, placeable],
+  mixins: [detachable, placeable, zindexable],
   props: {
     stopSelectorBubble: {
       type: Boolean,

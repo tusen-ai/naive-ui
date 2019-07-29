@@ -184,18 +184,6 @@ export default {
     }
   },
   computed: {
-    computedHour () {
-      if (this.valueAsMoment) return this.valueAsMoment.format('HH')
-      else return null
-    },
-    computedMinute () {
-      if (this.valueAsMoment) return this.valueAsMoment.format('mm')
-      else return null
-    },
-    computedSecond () {
-      if (this.valueAsMoment) return this.valueAsMoment.format('ss')
-      else return null
-    },
     /**
      * If value is valid return null.
      * If value is not valid, return moment(value)
@@ -214,6 +202,7 @@ export default {
     valueAsMoment (newValue) {
       if (newValue !== null) {
         this.displayDateString = newValue.format(DATE_FORMAT)
+        this.calendarDateTime = this.valueAsMoment
       } else {
         this.displayDateString = ''
       }
@@ -222,6 +211,7 @@ export default {
   created () {
     if (this.valueAsMoment !== null) {
       this.displayDateString = this.valueAsMoment.format(DATE_FORMAT)
+      this.calendarDateTime = this.valueAsMoment
     } else {
       this.displayDateString = ''
     }

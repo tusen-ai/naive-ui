@@ -52,7 +52,7 @@ export default {
     }
   },
   mounted () {
-    this.$refs.content.style = 'position: absolute;'
+    this.$refs.content.style.position = 'absolute'
     this.$nextTick().then(() => {
       this.registerScrollListeners()
       this.registerResizeListener()
@@ -78,7 +78,12 @@ export default {
       // console.log(contentBoundingClientRect)
       // debugger
       // console.log('scroll', activatorBoundingClientRect, contentBoundingClientRect)
-      this.$refs.content.style = 'position: absolute;' + calcPlacementTransfrom(this.placement, activatorBoundingClientRect, contentBoundingClientRect)
+      const [placementTransform, suggsetedTransformOrigin] = calcPlacementTransfrom(this.placement, activatorBoundingClientRect, contentBoundingClientRect)
+      this.$refs.content.style.position = 'absolute'
+      this.$refs.content.style.top = placementTransform.top
+      this.$refs.content.style.left = placementTransform.left
+      this.$refs.content.style.transformOrigin = suggsetedTransformOrigin
+      this.$refs.content.setAttribute('n-suggested-transform-origin', suggsetedTransformOrigin)
       if (this.widthMode === 'activator' && this.$refs.contentInner) {
         this.$refs.contentInner.style.minWidth = activatorBoundingClientRect.width + 'px'
       }

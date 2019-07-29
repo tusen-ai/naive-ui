@@ -164,27 +164,7 @@ $default-font-family: 'Lato';
   }
 }
 
-@mixin fade-in-transition($block) {
-  &.#{$namespace}-#{$block}--transition-enter-active,
-  &.#{$namespace}-#{$block}--transition-leave-active {
-    transform: scale(1);
-    opacity: 1;
-  }
-  &.#{$namespace}-#{$block}--transition-enter-active {
-    transform-origin: left top;
-    transition: opacity .2s $fast-in-cubic-bezier, transform .2s $fast-in-cubic-bezier;
-  }
-  &.#{$namespace}-#{$block}--transition-enter, &.#{$namespace}-#{$block}--transition-leave-to {
-    opacity: 0;
-    transform-origin: left top;
-    transform: scale(.9);
-  }
-  &.#{$namespace}-#{$block}--transition-leave-to {
-    transition: opacity .2s $slow-out-cubic-bezier, transform .2s $slow-out-cubic-bezier;
-  }
-}
-
-@mixin fade-in-transition($block, $origin: left top) {
+@mixin fade-in-transition($block, $origin: inherit) {
   &.#{$namespace}-#{$block}--transition-enter-active,
   &.#{$namespace}-#{$block}--transition-leave-active {
     transform: scale(1);

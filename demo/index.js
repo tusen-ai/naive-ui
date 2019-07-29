@@ -37,6 +37,7 @@ import demo from './demo'
 
 import popoverDebug from './debugComponents/popoverDebug'
 import routerDebug from './debugComponents/routerDebug'
+import modalDebug from './debugComponents/modalDebug'
 
 Vue.use(NaiveUI)
 Vue.use(VueRouter)
@@ -83,7 +84,8 @@ const routes = [
       { path: '/n-radio', component: radioDemo },
       { path: '/n-form', component: formDemo },
       { path: '/n-time-picker', component: timePickerDemo },
-      { path: '/n-router-debug', component: routerDebug }
+      { path: '/n-router-debug', component: routerDebug },
+      { path: '/n-modal-debug', component: modalDebug }
     ]
   },
   {
