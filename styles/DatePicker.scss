@@ -271,7 +271,6 @@
         background-color: rgba(99, 226, 183, 0.2);
       }
     }
-    border-bottom: 1px solid rgba(255, 255, 255, .1);
   }
   .n-date-picker-calendar__divider {
     margin: 0 24px;
@@ -279,6 +278,7 @@
     background-color: rgba(255, 255, 255, .1);
   }
   .n-date-picker-calendar__actions {
+    border-top: 1px solid rgba(255, 255, 255, .1);
     height: 47px;
     display: flex;
     align-items: center;

@@ -200,6 +200,10 @@
           >
             {{ dateItem.date }}
           </div>
+          <div
+            v-if="!(actions && actions.length)"
+            style="height: 8px; width: 100%;"
+          />
         </div>
       </div>
       <div
@@ -225,6 +229,10 @@
           Confirm
         </n-button>
       </div>
+      <div
+        v-else
+        style="height: 12px"
+      />
     </div>
   </transition>
 </template>
