@@ -202,7 +202,7 @@
           </div>
           <div
             v-if="!(actions && actions.length)"
-            style="height: 8px; width: 100%;"
+            style="height: 6px; width: 100%;"
           />
         </div>
       </div>

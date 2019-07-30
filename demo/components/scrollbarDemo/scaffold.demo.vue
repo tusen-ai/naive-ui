@@ -1,7 +1,7 @@
 <template>
   <div class="n-doc-section">
     <div class="n-doc-section__header">
-      Scaffold
+      Scrollbar
     </div>
     <div
       class="n-doc-section__view"
@@ -10,7 +10,9 @@
       <!--EXAMPLE_START-->
       <div style="width: 400px; height: 300px;">
         <n-scrollbar>
-          <div style="background: linear-gradient(red, blue); width: 100%; height: 500px;" />
+          <div style="background: linear-gradient(red, blue); width: 800px; height: 500px;">
+            666
+          </div>
         </n-scrollbar>
       </div>
       <!--EXAMPLE_END-->
