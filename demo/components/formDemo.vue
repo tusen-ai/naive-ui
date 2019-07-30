@@ -182,7 +182,10 @@
             :label-width="200"
             label-position="top"
           >
-            <n-form-item label="Top1">
+            <n-form-item
+              required
+              label="Top1"
+            >
               <n-input />
             </n-form-item>
             <n-form-item label="Top2">

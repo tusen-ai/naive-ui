@@ -31,7 +31,10 @@
                 </n-form-item>
               </n-form>
             </n-tab-panel>
-            <n-tab-panel label="lal">
+            <n-tab-panel
+              active
+              label="table"
+            >
               <n-advance-table
                 :columns="columns0"
                 :data="data"
@@ -40,6 +43,9 @@
                   <n-button>custom operation by v-slot:table-operation</n-button>
                 </template>
               </n-advance-table>
+            </n-tab-panel>
+            <n-tab-panel label="input">
+              haha: <n-input />
             </n-tab-panel>
           </n-tab>
         </div>

@@ -2,7 +2,6 @@
 @import './theme/default.scss';
 
 @include b(tab) {
-  display: block;
   width: 100%;
   height: 100%;
   .n-tab--label {
@@ -18,5 +17,24 @@
     .n-tab--label-item_active {
       color: aquamarine;
     }
+  }
+  .n-tab--slot {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+@include b(tab-panel) {
+  position: absolute;
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  transition: width 0.3s;
+  &.n-tab-panel_active {
+    visibility: visible;
   }
 }

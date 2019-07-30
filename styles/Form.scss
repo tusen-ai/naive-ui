@@ -19,11 +19,12 @@
     .n-form-item__label {
       display: block;
       overflow-wrap: unset;
+      padding-top: 0;
       align-items: center;
       text-align: left;
     }
   }
-  .n-form-item__label--require .n-form-item__label::before {
+  .n-form-item__label--require .n-form-item__label-span::before {
     float: right;
     content: '*';
     color:rgba(255, 146, 164, 1);
@@ -58,6 +59,9 @@
     flex-grow: 0;
     padding: 10px 10px 10px 0; 
     overflow-wrap: break-word;
+  }
+  .n-form-item__label-span {
+    display: inline-block;
   }
   .n-form-item__content {
     position: relative;

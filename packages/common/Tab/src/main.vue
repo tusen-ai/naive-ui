@@ -14,7 +14,12 @@
         {{ label }}
       </div>
     </div>
-    <slot />
+    <div
+      ref="slot"
+      class="n-tab--slot"
+    >
+      <slot />
+    </div>
   </div>
 </template>
 <script>
@@ -38,7 +43,7 @@ export default {
     }
   },
   created () {
-    // this.updateOrder()
+    this.updateOrder()
     // this.initActive()
   },
   beforeMount () {
@@ -78,10 +83,8 @@ export default {
     },
     updateOrder () {
       // method duplicate with updateLabels
-      this.$children.forEach((i, order) => {
-        if (i.$options.name === 'NTabPanel') {
-          i._NaiveTabOrder = order
-        }
+      this.$slots.default.forEach((i, order) => {
+        i._NaiveTabOrder = order
       })
     }
   }
