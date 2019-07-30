@@ -792,7 +792,7 @@ export default {
             value: 15
           }],
           onFilter: (value, record) => {
-            return value.includes(record.age + '')
+            return value.includes(record.age)
             // switch (value) {
             //   case 14:
             //     return record.age <= value
