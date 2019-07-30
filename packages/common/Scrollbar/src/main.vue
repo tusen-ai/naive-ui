@@ -155,10 +155,13 @@ export default {
       this.displayVerticalScrollbar()
     },
     leaveScrollWrapper () {
-      this.hiddenVerticalScrollbar()
-      this.hiddenHorizontalScrollbar()
+      this.hideScrollbar()
     },
-    hiddenVerticalScrollbar () {
+    hideScrollbar () {
+      this.hideVerticalScrollbar()
+      this.hideHorizontalScrollbar()
+    },
+    hideVerticalScrollbar () {
       if (this.verticalScrollbarVanishTimerId !== null) {
         window.clearTimeout(this.verticalScrollbarVanishTimerId)
       }
@@ -166,7 +169,7 @@ export default {
         this.showVeriticalScrollbar = false
       }, this.duration)
     },
-    hiddenHorizontalScrollbar () {
+    hideHorizontalScrollbar () {
       if (this.horizontalScrollbarVanishTimerId !== null) {
         window.clearTimeout(this.horizontalScrollbarVanishTimerId)
       }
@@ -221,6 +224,8 @@ export default {
     },
     handleHorizontalScrollMouseMove (e) {
       if (this.horizontalScrollbarActivated) {
+        window.clearTimeout(this.horizontalScrollbarVanishTimerId)
+        window.clearTimeout(this.verticalScrollbarVanishTimerId)
         const dX = (e.clientX - this.memorizedMouseX)
         let dScrollLeft = dX * ((this.contentWidth - this.horizontalScrollbarWidth) * this.contentWidth) / (this.containerWidth * this.containerWidth)
         const toScrollLeftUpperBound = this.contentWidth - this.containerWidth
@@ -235,6 +240,7 @@ export default {
       window.removeEventListener('mouseup', this.handleHorizontalScrollMouseUp)
       this.horizontalScrollbarActivated = false
       this.updateParameters()
+      this.hideScrollbar()
       console.log('mouseup')
     },
     handleVerticalScrollMouseDown (e) {
@@ -247,6 +253,8 @@ export default {
     },
     handleVerticalScrollMouseMove (e) {
       if (this.verticalScrollbarActivated) {
+        window.clearTimeout(this.horizontalScrollbarVanishTimerId)
+        window.clearTimeout(this.verticalScrollbarVanishTimerId)
         const dY = (e.clientY - this.memorizedMouseY)
         let dScrollLeft = dY * ((this.contentHeight - this.verticalScrollbarHeight) * this.contentHeight) / (this.containerHeight * this.containerHeight)
         const toScrollTopUpperBound = this.contentHeight - this.containerHeight
@@ -261,6 +269,7 @@ export default {
       window.removeEventListener('mouseup', this.handleVerticalScrollMouseUp)
       this.verticalScrollbarActivated = false
       this.updateParameters()
+      this.hideScrollbar()
       console.log('mouseup')
     },
     handleDragStart (e) {
@@ -284,6 +293,7 @@ export default {
 .n-scrollbar-vertical-rail, .n-scrollbar-horizontal-rail {
   position: absolute;
   user-select: none;
+  -moz-user-select: none;
   .n-scrollbar-rail__scrollbar {
     position: absolute;
     background-color: yellow;
@@ -317,6 +327,7 @@ export default {
   top: 0;
   right: 0;
   overflow: scroll;
+  scrollbar-width: none;
   &::-webkit-scrollbar {
     width: 0;
     height: 0;
@@ -326,6 +337,8 @@ export default {
 .n-scrollbar-content {
   width: fit-content;
   height: fit-content;
+  width: -moz-fit-content;
+  height: -moz-fit-content;
   overflow: visible;
 }
 </style>
