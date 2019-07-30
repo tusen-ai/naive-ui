@@ -20,7 +20,6 @@
   }
   .n-tab--slot {
     display: flex;
-    position: relative;
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -28,12 +27,11 @@
 }
 
 @include b(tab-panel) {
-  position: absolute;
   flex-shrink: 0;
   width: 100%;
   height: 100%;
   visibility: hidden;
-  transition: width 0.3s;
+  transition: transform 0.3s;
   &.n-tab-panel_active {
     visibility: visible;
   }

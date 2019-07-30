@@ -39,11 +39,13 @@ export default {
   data () {
     return {
       labels: [],
-      active: null // number
+      active: null, // number
+      offset: null
     }
   },
   created () {
     this.updateOrder()
+    this.initOffset()
     // this.initActive()
   },
   beforeMount () {
@@ -79,6 +81,7 @@ export default {
         this.$children[this.active].updateIsShow(false)
         this.active = i
         this.$children[i].updateIsShow(true)
+        this.offset = '-' + this.active * 100 + '%'
       }
     },
     updateOrder () {
@@ -86,6 +89,20 @@ export default {
       this.$slots.default.forEach((i, order) => {
         i._NaiveTabOrder = order
       })
+    },
+    initOffset () {
+      // method duplicate with updateLabels
+      let order = this.$slots.default.findIndex((i) => {
+        let props = i.componentOptions.propsData
+        if ([undefined, false].indexOf(props.active) === -1) {
+          return true
+        }
+        if (this.name === props.name && this.name !== undefined) {
+          return true
+        }
+      })
+      this.active = order > -1 ? order : 0
+      this.offset = '-' + this.active * 100 + '%'
     }
   }
 }

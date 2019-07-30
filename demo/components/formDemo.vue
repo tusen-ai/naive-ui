@@ -271,19 +271,24 @@
             >
               The key in form-model does not support the form with ' . '.<br>
               And does not init the value of parameters with 'undefined'.<br>
-              ResetForm Method: only can reset the item with prop.<br>
+              ResetForm Method: only can reset the item with prop. And Donnot deal the nesting form context<br>
               ValidateForm Method: support validate specified items by the second parameter in form of array.<br>
             </n-form-item>
-            <n-form-item
-              :required-logo="false"
-              prop="input"
-              label="Input"
-            >
-              <n-input
-                v-model="validateForm.input"
-                placeholder="Enter string"
-              />
-            </n-form-item>
+            <n-popover>
+              <template v-slot:activator>
+                <n-form-item
+                  :required-logo="false"
+                  prop="input"
+                  label="Input"
+                >
+                  <n-input
+                    v-model="validateForm.input"
+                    placeholder="Enter string"
+                  />
+                </n-form-item>
+              </template>
+              <span>Test nesting Form Item</span>
+            </n-popover>
             <n-form-item
               prop="muti.deep.select"
               label="Select"

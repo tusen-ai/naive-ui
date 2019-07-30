@@ -34,35 +34,34 @@ export default {
     cls () {
       return this.isShow ? 'n-tab-panel n-tab-panel_active' : 'n-tab-panel'
     },
-    order () {
-      return this.$vnode._NaiveTabOrder
+    offset () {
+      return this.NTab.offset
     }
   },
   watch: {
-    order: {
-
+    offset: {
+      handler (n) {
+        this.setTransfer(n)
+        console.log('zhixing', n)
+      },
+      immediate: true
     }
   },
   created () {
     this.NTab.updateLabels()
-    this.initActive()
-    // this.setTransfer('-', )
+    if (this._NaiveTabOrder === this.NTab.active) {
+      this.updateIsShow(true)
+    }
   },
   methods: {
-    updateIsShow (flag, dir = 'left') {
+    updateIsShow (flag) {
       this.isShow = flag
       // window.getComputedStyle(this.NTab.refs['slot'], null).getPropertyValue('width')
       // this.$refs['panel'].classList.toggle('n-tab-panel_active')
       // 这里应该是根据切换的方向(左右) 来设置
     },
-    setTransfer (dir, per) {
-      this.style.transform = 'translateX(' + dir + per + '%)'
-    },
-    initActive () {
-      if ((this.active || (this.NTab.name === this.name && this.name !== undefined)) && this.NTab.active === null) {
-        this.updateIsShow(true)
-        this.NTab.initActive()
-      }
+    setTransfer (per) {
+      this.style.transform = 'translateX(' + per + ')'
     }
   }
 }

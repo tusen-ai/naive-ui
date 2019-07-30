@@ -10,6 +10,7 @@
 </template>
 <script>
 import { deepClone, getObjValue } from '../../../utils/index'
+import { debuglog } from 'util';
 
 export default {
   name: 'NForm',
@@ -100,24 +101,29 @@ export default {
     /**
      * just can reset the value with prop in form-item
      */
-    resetForm () {
-      this.$children.forEach(child => {
-        if (child.prop) {
+    resetForm (target = this) {
+      for (let i = 0; i < target.$children.length; i++) {
+        let child = target.$children[i]
+        if (child.$options.name === 'NFormItem' && child.prop) {
           let keys = child.prop.split('.')
           let obj = this.model
           let j = 0
-          keys.forEach((k, i) => {
-            if (i !== keys.length - 1) {
-              obj = obj[k]
+          keys.forEach((m, n) => {
+            if (n !== keys.length - 1) {
+              obj = obj[m]
             }
-            j = i
+            j = n
           })
           obj[keys[j]] = getObjValue(this.initialValue, keys)
           if (child.validateFlag) {
             child.clearValidateClass()
           }
+        } else if (child.$options.name === 'NForm') {
+          break
+        } else {
+          this.resetForm(child)
         }
-      })
+      }
     }
   }
 }
