@@ -112,6 +112,10 @@ export default {
               path: '/n-radio'
             },
             {
+              name: 'Scrollbar',
+              path: '/n-scrollbar'
+            },
+            {
               name: 'Select',
               path: '/n-select'
             },

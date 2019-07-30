@@ -10,20 +10,29 @@
       <!--EXAMPLE_START-->
       <n-nimbus-icon
         type="share"
-        size="24"
+        :size="24"
       />
       <n-nimbus-icon
         type="ban"
-        size="24"
+        :size="24"
       />
       <n-nimbus-icon
         type="pull-request"
-        size="24"
+        :size="24"
         color="#63E2B7"
+      />
+      <n-nimbus-icon
+        type="operate"
+        :size="24"
+        color="#63E2B7"
+      />
+      <n-nimbus-icon
+        :size="24"
+        type="edit"
       />
       <!--EXAMPLE_END-->
     </div>
-    <pre class="n-doc-section__inspect">Valid type: share, ban, pull-request</pre>
+    <pre class="n-doc-section__inspect">Valid type: share, ban, pull-request, operate, edit</pre>
     <n-doc-source-block>
       <!--SOURCE-->
     </n-doc-source-block>

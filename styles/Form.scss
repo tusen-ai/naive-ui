@@ -18,12 +18,13 @@
     display: block;
     .n-form-item__label {
       display: block;
+      padding-top: 0;
       overflow-wrap: unset;
       align-items: center;
       text-align: left;
     }
   }
-  .n-form-item__label--require .n-form-item__label::before {
+  .n-form-item__label--require .n-form-item__label-span::before {
     float: right;
     content: '*';
     color:rgba(255, 146, 164, 1);
@@ -59,6 +60,9 @@
     padding: 10px 10px 10px 0; 
     overflow-wrap: break-word;
   }
+  .n-form-item__label-span {
+    display: inline-block;
+  } 
   .n-form-item__content {
     position: relative;
     flex-grow: 1;

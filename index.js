@@ -32,6 +32,7 @@ import ServiceLayout from './packages/nimbus/ServiceLayout'
 import NimbusFormCard from './packages/nimbus/FormCard'
 import NimbusConfirmCard from './packages/nimbus/ConfirmCard'
 import NimbusIcon from './packages/nimbus/Icon'
+import Scrollbar from './packages/common/Scrollbar'
 
 function install (Vue) {
   Card.install(Vue)
@@ -68,6 +69,7 @@ function install (Vue) {
   Radio.install(Vue)
   Form.install(Vue)
   TimePicker.install(Vue)
+  Scrollbar.install(Vue)
 }
 
 export default {
