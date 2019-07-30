@@ -182,13 +182,21 @@
             :label-width="200"
             label-position="top"
           >
-            <n-form-item label="Top1">
-              <n-input />
-            </n-form-item>
-            <n-form-item label="Top2">
+            <n-form-item
+              required
+              label="Top1"
+            >
               <n-input />
             </n-form-item>
             <n-form-item
+              required
+              :label-width="80"
+              label="Top2"
+            >
+              <n-input />
+            </n-form-item>
+            <n-form-item
+              required
               label-position="left"
               label="Left"
             >
@@ -196,12 +204,14 @@
             </n-form-item>
             <n-form-item
               label-position="center"
+              required
               label="Center"
             >
               <n-input />
             </n-form-item>
             <n-form-item
               label-position="right"
+              required
               label="Right"
             >
               <n-input />
@@ -271,16 +281,21 @@
               ResetForm Method: only can reset the item with prop.<br>
               ValidateForm Method: support validate specified items by the second parameter in form of array.<br>
             </n-form-item>
-            <n-form-item
-              :required-logo="false"
-              prop="input"
-              label="Input"
-            >
-              <n-input
-                v-model="validateForm.input"
-                placeholder="Enter string"
-              />
-            </n-form-item>
+            <n-popover>
+              <template v-slot:activator>
+                <n-form-item
+                  :required-logo="false"
+                  prop="input"
+                  label="Input"
+                >
+                  <n-input
+                    v-model="validateForm.input"
+                    placeholder="Enter string"
+                  />
+                </n-form-item>
+              </template>
+              <span>Test nesting formItem in resetForm</span>
+            </n-popover>
             <n-form-item
               prop="muti.deep.select"
               label="Select"
@@ -724,7 +739,7 @@ export default {
         }
       ],
       validateForm: {
-        input: 'input',
+        input: '',
         muti: {
           deep: {
             select: 'Public'
