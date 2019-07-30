@@ -182,13 +182,21 @@
             :label-width="200"
             label-position="top"
           >
-            <n-form-item label="Top1">
-              <n-input />
-            </n-form-item>
-            <n-form-item label="Top2">
+            <n-form-item
+              required
+              label="Top1"
+            >
               <n-input />
             </n-form-item>
             <n-form-item
+              required
+              :label-width="80"
+              label="Top2"
+            >
+              <n-input />
+            </n-form-item>
+            <n-form-item
+              required
               label-position="left"
               label="Left"
             >
@@ -196,12 +204,14 @@
             </n-form-item>
             <n-form-item
               label-position="center"
+              required
               label="Center"
             >
               <n-input />
             </n-form-item>
             <n-form-item
               label-position="right"
+              required
               label="Right"
             >
               <n-input />

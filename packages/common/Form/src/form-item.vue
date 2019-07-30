@@ -7,7 +7,9 @@
       :class="`${prefix}__label`"
       :style="style"
     >
-      {{ label }}
+      <span :class="`${prefix}__label-span`">
+        {{ label }}
+      </span>
     </label>
     <div
       class="n-form-item__content"
