@@ -79,6 +79,7 @@
           v-if="type === 'datetime'"
           :value="value"
           :active="active"
+          :actions="actions"
           @input="handlePanelInput"
           @close="closeCalendar"
         />
@@ -86,6 +87,7 @@
           v-else-if="type === 'date'"
           :value="value"
           :active="active"
+          :actions="actions"
           @input="handlePanelInput"
           @close="closeCalendar"
         />
@@ -93,6 +95,7 @@
           v-else-if="type === 'daterange'"
           :value="value"
           :active="active"
+          :actions="actions"
           @input="handleRangePanelInput"
           @close="closeCalendar"
         />
@@ -100,6 +103,7 @@
           v-else-if="type === 'datetimerange'"
           :value="value"
           :active="active"
+          :actions="actions"
           @input="handleRangePanelInput"
           @close="closeCalendar"
         />
@@ -207,6 +211,10 @@ export default {
     format: {
       type: String,
       default: null
+    },
+    actions: {
+      type: Array,
+      default: undefined
     }
   },
   data () {

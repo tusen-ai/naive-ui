@@ -169,15 +169,20 @@
           </div>
         </div>
       </div>
-      <div class="n-date-picker-calendar__actions">
+      <div
+        v-if="actions && actions.length"
+        class="n-date-picker-calendar__actions"
+      >
         <n-button
+          v-if="actions.includes('clear')"
           size="tiny"
           round
           @click="clearValue"
         >
-          Reset
+          Clear
         </n-button>
         <n-button
+          v-if="actions.includes('confirm')"
           size="tiny"
           round
           auto-text-color
@@ -249,6 +254,10 @@ export default {
     format: {
       type: String,
       default: DATETIME_FORMAT
+    },
+    actions: {
+      type: Array,
+      default: () => ['clear', 'confirm']
     }
   },
   data () {

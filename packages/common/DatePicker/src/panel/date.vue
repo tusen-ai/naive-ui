@@ -80,8 +80,12 @@
           {{ dateItem.date }}
         </div>
       </div>
-      <div class="n-date-picker-calendar__actions">
+      <div
+        v-if="actions && actions.length"
+        class="n-date-picker-calendar__actions"
+      >
         <n-button
+          v-if="actions.includes('now')"
           size="tiny"
           round
           @click="setSelectedDateTimeToNow"
@@ -89,6 +93,7 @@
           Now
         </n-button>
         <n-button
+          v-if="actions.includes('confirm')"
           size="tiny"
           round
           auto-text-color
@@ -151,6 +156,10 @@ export default {
     format: {
       type: String,
       default: DATETIME_FORMAT
+    },
+    actions: {
+      type: Array,
+      default: () => ['now', 'confirm']
     }
   },
   data () {

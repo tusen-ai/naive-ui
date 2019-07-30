@@ -12,6 +12,7 @@
       <basic-usage />
       <disabled />
       <range />
+      <actions />
     </div>
   </div>
 </template>
@@ -19,13 +20,15 @@
 <script>
 import basicUsage from './basicUsage.demo.vue'
 import disabled from './disabled.demo.vue'
-import range from './range.demo'
+import range from './range.demo.vue'
+import actions from './actions.demo.vue'
 
 export default {
   components: {
     basicUsage,
     disabled,
-    range
+    range,
+    actions
   },
   data () {
     return {
