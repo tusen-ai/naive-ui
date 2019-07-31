@@ -117,7 +117,7 @@
 }
 
 @include b(date-picker-calendar) {
-  @include fade-in-transition(date-picker-calendar);
+  @include fade-in-scale-up-transition(date-picker-calendar);
   margin-top: 4px;
   margin-bottom: 4px;
   width: 350px;
