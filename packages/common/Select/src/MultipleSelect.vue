@@ -73,6 +73,7 @@
     </div>
     <div
       ref="contentWrapper"
+      v-clickoutside="handleClickOutsideMenu"
       class="n-select-menu__content-wrapper"
     >
       <div
@@ -90,26 +91,33 @@
               :class="{[`n-select-menu--${size}-size`]: true}"
               @mouseleave="hideLightBar"
             >
-              <transition name="n-select-menu__light-bar--transition">
-                <div
-                  v-if="showLightBar"
-                  class="n-select-menu__light-bar"
-                  :style="{ top: `${lightBarTop}px` }"
-                />
-              </transition>
-              <div
-                v-for="item in items"
-                :key="item.value"
-                class="n-select-menu__item"
-                :class="{
-                  'n-select-menu__item--selected':
-                    isSelected(item)
-                }"
-                @click.stop="toggleItemInMultipleSelect(item)"
-                @mouseenter="showLightBarTop"
+              <scrollbar
+                @scrollstart="handleMenuScrollStart"
+                @scrollend="handleMenuScrollEnd"
               >
-                {{ item.label }}
-              </div>
+                <div class="n-select-menu__item-wrapper">
+                  <transition name="n-select-menu__light-bar--transition">
+                    <div
+                      v-if="showLightBar"
+                      class="n-select-menu__light-bar"
+                      :style="{ top: `${lightBarTop}px` }"
+                    />
+                  </transition>
+                  <div
+                    v-for="item in items"
+                    :key="item.value"
+                    class="n-select-menu__item"
+                    :class="{
+                      'n-select-menu__item--selected':
+                        isSelected(item)
+                    }"
+                    @click.stop="toggleItemInMultipleSelect(item)"
+                    @mouseenter="showLightBarTop"
+                  >
+                    {{ item.label }}
+                  </div>
+                </div>
+              </scrollbar>
             </div>
           </div>
         </transition>
@@ -124,11 +132,17 @@ import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import toggleable from '../../../mixins/toggleable'
 import zindexable from '../../../mixins/zindexable'
+import Scrollbar from '../../Scrollbar'
+import clickoutside from '../../../directives/clickoutside'
 
 export default {
   name: 'NMultipleSelect',
   components: {
-    NIcon
+    NIcon,
+    Scrollbar
+  },
+  directives: {
+    clickoutside
   },
   mixins: [detachable, toggleable, placeable, zindexable],
   model: {
@@ -168,7 +182,6 @@ export default {
       type: Boolean,
       default: false
     },
-
     disabled: {
       type: Boolean,
       default: false
@@ -179,7 +192,7 @@ export default {
       lightBarTop: null,
       showLightBar: false,
       label: '',
-      labelPlaceholder: 'Please Select'
+      scrolling: false
     }
   },
   computed: {
@@ -214,25 +227,7 @@ export default {
       } else {
         this.label = ''
       }
-    },
-    active (newValue) {
-      if (newValue === true) {
-        this.$nextTick().then(
-          () => {
-            document.addEventListener('click', this.nativeCloseMenu)
-          }
-        )
-      } else {
-        this.$nextTick().then(
-          () => {
-            document.removeEventListener('click', this.nativeCloseMenu)
-          }
-        )
-      }
     }
-  },
-  beforeDestroy () {
-    document.removeEventListener('click', this.nativeCloseMenu)
   },
   methods: {
     /**
@@ -263,8 +258,8 @@ export default {
       if (!Array.isArray(this.selectedValue)) return false
       return 1 + this.selectedValue.findIndex(value => value === item.value)
     },
-    nativeCloseMenu (e) {
-      if (!this.$refs.select.contains(e.target)) {
+    handleClickOutsideMenu (e) {
+      if (!this.$refs.activator.contains(e.target) && !this.scrolling) {
         this.deactivate()
       }
     },
@@ -292,6 +287,14 @@ export default {
       }
       this.$emit('input', newSelectedValues)
       this.$nextTick().then(this.updatePosition)
+    },
+    handleMenuScrollStart () {
+      this.scrolling = true
+    },
+    handleMenuScrollEnd () {
+      window.setTimeout(() => {
+        this.scrolling = false
+      }, 0)
     }
   }
 }

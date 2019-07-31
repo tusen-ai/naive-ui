@@ -260,16 +260,18 @@
       border-radius: 6px;
       margin-top: 4px;
       margin-bottom: 4px;
-      @include fade-in-transition(select-menu);
+      @include fade-in-scale-up-transition(select-menu);
       .n-select-menu {
         z-index: 0;
         position: relative;
-        overflow-x: hidden;
-        overflow-y: auto;
+        overflow: hidden;
         border-radius: 6px;
         background-color: rgba(75, 81, 106, 1);
         box-shadow: 0px 2px 20px 0px rgba(0,0,0,0.16);
-        @include scrollbar;
+        .n-select-menu__item-wrapper {
+          position: relative;
+          width: 100%;
+        }
         .n-select-menu__item {
           cursor: pointer;
           position: relative;
@@ -292,14 +294,18 @@
           transition: top .15s $default-cubic-bezier;
         }
         &.n-select-menu--small-size {
-          max-height: $small-height * 8;
+          .n-scrollbar-container {
+            max-height: $small-height * 8;
+          }
           .n-select-menu__item, .n-select-menu__light-bar {
             height: $small-height;
             line-height: $small-height;
           }
         }
         &.n-select-menu--default-size, &.n-select-menu--medium-size {
-          max-height: $default-height * 8;
+          .n-scrollbar-container {
+            max-height: $default-height * 8;
+          }
           .n-select-menu__item, .n-select-menu__light-bar {
             height: $default-height;
             line-height: $default-height;
@@ -310,7 +316,9 @@
             height: $large-height;
             line-height: $large-height;
           }
-          max-height: $large-height * 8;
+          .n-scrollbar-container {
+            max-height: $large-height * 8;
+          }
         }
         &.n-select-menu--multiple {
           .n-select-menu__item {
