@@ -12,9 +12,11 @@ a >>> b 被编译成了 a > > > b
 popover 的 hover 有问题，哎...一大堆东西闪来闪去就可能 mouseleave 没触发就一直留在那了
 ## 2019.7.31 Margin 没有撑开元素
 overflow: hidden 可以解决，这是 BFC 的问题
+
 ## TODO
 issue fix, add delay prop
 add trigger to tooltip
 outside click delegate select
 DatePicker range Bug
 Scrollbar Firefox...
+scrollbar 在 resize 之后滚动会有问题
