@@ -253,7 +253,7 @@ export default {
         window.clearTimeout(this.horizontalScrollbarVanishTimerId)
         window.clearTimeout(this.verticalScrollbarVanishTimerId)
         const dX = (e.clientX - this.memorizedMouseX)
-        let dScrollLeft = dX * ((this.contentWidth - this.horizontalScrollbarWidth) * this.contentWidth) / (this.containerWidth * this.containerWidth)
+        let dScrollLeft = dX * (this.contentWidth - this.containerWidth) / (this.horizontalScrollbarWidth - this.containerWidth)
         const toScrollLeftUpperBound = this.contentWidth - this.containerWidth
         let toScrollLeft = this.memorizedHorizontalLeft + dScrollLeft
         toScrollLeft = Math.min(toScrollLeftUpperBound, toScrollLeft)
@@ -284,9 +284,9 @@ export default {
         window.clearTimeout(this.horizontalScrollbarVanishTimerId)
         window.clearTimeout(this.verticalScrollbarVanishTimerId)
         const dY = (e.clientY - this.memorizedMouseY)
-        let dScrollLeft = dY * ((this.contentHeight - this.verticalScrollbarHeight) * this.contentHeight) / (this.containerHeight * this.containerHeight)
+        let dScrollTop = dY * (this.contentHeight - this.containerHeight) / (this.containerHeight - this.verticalScrollbarHeight)
         const toScrollTopUpperBound = this.contentHeight - this.containerHeight
-        let toScrollTop = this.memorizedVerticalTop + dScrollLeft
+        let toScrollTop = this.memorizedVerticalTop + dScrollTop
         toScrollTop = Math.min(toScrollTopUpperBound, toScrollTop)
         toScrollTop = Math.max(toScrollTop, 0)
         this.$refs.scrollContainer.scrollTop = toScrollTop
