@@ -250,10 +250,11 @@ export default {
     },
     handleHorizontalScrollMouseMove (e) {
       if (this.horizontalScrollbarActivated) {
+        console.log('here')
         window.clearTimeout(this.horizontalScrollbarVanishTimerId)
         window.clearTimeout(this.verticalScrollbarVanishTimerId)
         const dX = (e.clientX - this.memorizedMouseX)
-        let dScrollLeft = dX * (this.contentWidth - this.containerWidth) / (this.horizontalScrollbarWidth - this.containerWidth)
+        let dScrollLeft = dX * (this.contentWidth - this.containerWidth) / (this.containerWidth - this.horizontalScrollbarWidth)
         const toScrollLeftUpperBound = this.contentWidth - this.containerWidth
         let toScrollLeft = this.memorizedHorizontalLeft + dScrollLeft
         toScrollLeft = Math.min(toScrollLeftUpperBound, toScrollLeft)
