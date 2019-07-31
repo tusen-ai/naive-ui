@@ -97,7 +97,7 @@ export default {
       this.filterItems.forEach((item, index) => {
         checkedIndexs[item.value] = { isChecked: false, index }
       })
-      this.checkedIndexs = { checkedIndexs, ...this.checkedIndexs }
+      this.checkedIndexs = { ...checkedIndexs, ...this.checkedIndexs }
     }
   },
   methods: {
