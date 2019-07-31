@@ -218,17 +218,23 @@ export default {
       this.updateScrollParameters()
     },
     updateScrollParameters () {
-      this.containerScrollTop = this.$refs.scrollContainer.scrollTop
-      this.containerScrollLeft = this.$refs.scrollContainer.scrollLeft
+      if (this.$refs.scrollContainer) {
+        this.containerScrollTop = this.$refs.scrollContainer.scrollTop
+        this.containerScrollLeft = this.$refs.scrollContainer.scrollLeft
+      }
     },
     updatePositionParameters () {
       /**
        * Don't use getClientBoundingRect because element may be scale transformed
        */
-      this.contentHeight = this.$refs.scrollContent.offsetHeight
-      this.contentWidth = this.$refs.scrollContent.offsetWidth
-      this.containerHeight = this.$refs.scrollContainer.offsetHeight
-      this.containerWidth = this.$refs.scrollContainer.offsetWidth
+      if (this.$refs.scrollContent) {
+        this.contentHeight = this.$refs.scrollContent.offsetHeight
+        this.contentWidth = this.$refs.scrollContent.offsetWidth
+      }
+      if (this.$refs.scrollContainer) {
+        this.containerHeight = this.$refs.scrollContainer.offsetHeight
+        this.containerWidth = this.$refs.scrollContainer.offsetWidth
+      }
     },
     updateParameters () {
       this.updatePositionParameters()
