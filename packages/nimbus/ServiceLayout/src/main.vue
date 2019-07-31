@@ -5,75 +5,79 @@
       class="n-nimbus-service-layout__body"
       :class="{ 'n-nimbus-service-layout__body--collapsed': isCollapsed, 'n-nimbus-service-layout__body--active': !isCollapsed, 'n-nimbus-service-layout__body--padded': paddingBody }"
     >
-      <slot />
+      <scrollbar>
+        <slot />
+      </scrollbar>
     </div>
     <div
       class="n-nimbus-service-layout__drawer"
       :class="{ 'n-nimbus-service-layout__drawer--collapsed': isCollapsed, 'n-nimbus-service-layout__drawer--active': !isCollapsed }"
     >
       <div class="n-nimbus-service-layout-drawer__item-wrapper">
-        <div class="n-nimbus-service-layout-drawer__header">
-          <div class="n-nimbus-service-layout-drawer-header__content">
-            <div class="n-nimbus-service-layout-drawer-header__icon">
-              <n-icon
-                :type="icon"
-                :size="22"
-              />
+        <scrollbar>
+          <div class="n-nimbus-service-layout-drawer__header">
+            <div class="n-nimbus-service-layout-drawer-header__content">
+              <div class="n-nimbus-service-layout-drawer-header__icon">
+                <n-icon
+                  :type="icon"
+                  :size="22"
+                />
+              </div>
+              {{ name }}
             </div>
-            {{ name }}
           </div>
-        </div>
-        <div class="n-nimbus-service-layout-drawer__divider" />
-        <div
-          v-for="item in itemsWithCollapseStatus"
-          :key="item.name"
-        >
+          <div class="n-nimbus-service-layout-drawer__divider" />
           <div
-            v-if="!item.childItems"
-            class="n-nimbus-service-layout-drawer__item"
-            :class="{ 'n-nimbus-service-layout-drawer__item--active': activeItemName === item.name }"
-            @click="makeActive(item)"
-          >
-            <div class="n-nimbus-service-layout-drawer-item__icon" />
-            <span>{{ item.name }}</span>
-          </div>
-          <div
-            v-else
+            v-for="item in itemsWithCollapseStatus"
+            :key="item.name"
           >
             <div
-              class="n-nimbus-service-layout-drawer__item n-nimbus-service-layout-drawer__item--is-group-header"
-              :class="{
-                'n-nimbus-service-layout-drawer__item--group-item-is-choosed': !!(1 + item.childItems.findIndex(item => item.name === activeItemName)),
-                'n-nimbus-service-layout-drawer__item--collapsed': item.isCollapsed
-              }"
-              @click="toggleGroupHeaderCollapse(item.name)"
+              v-if="!item.childItems"
+              class="n-nimbus-service-layout-drawer__item"
+              :class="{ 'n-nimbus-service-layout-drawer__item--active': activeItemName === item.name }"
+              @click="makeActive(item)"
             >
               <div class="n-nimbus-service-layout-drawer-item__icon" />
               <span>{{ item.name }}</span>
             </div>
             <div
-              :ref="item.name"
-              class="n-nimbus-service-layout-drawer__group-items"
-              :class="{
-                'n-nimbus-service-layout-drawer__group-items--collapsed': item.isCollapsed
-              }"
+              v-else
             >
               <div
-                class="n-nimbus-service-layout-drawer-group-items__inner-wrapper"
+                class="n-nimbus-service-layout-drawer__item n-nimbus-service-layout-drawer__item--is-group-header"
+                :class="{
+                  'n-nimbus-service-layout-drawer__item--group-item-is-choosed': !!(1 + item.childItems.findIndex(item => item.name === activeItemName)),
+                  'n-nimbus-service-layout-drawer__item--collapsed': item.isCollapsed
+                }"
+                @click="toggleGroupHeaderCollapse(item.name)"
+              >
+                <div class="n-nimbus-service-layout-drawer-item__icon" />
+                <span>{{ item.name }}</span>
+              </div>
+              <div
+                :ref="item.name"
+                class="n-nimbus-service-layout-drawer__group-items"
+                :class="{
+                  'n-nimbus-service-layout-drawer__group-items--collapsed': item.isCollapsed
+                }"
               >
                 <div
-                  v-for="childItem in item.childItems"
-                  :key="childItem.name"
-                  class="n-nimbus-service-layout-drawer__item n-nimbus-service-layout-drawer__item--is-group-item"
-                  :class="{ 'n-nimbus-service-layout-drawer__item--active': activeItemName === childItem.name }"
-                  @click="makeActive(childItem)"
+                  class="n-nimbus-service-layout-drawer-group-items__inner-wrapper"
                 >
-                  <span>{{ childItem.name }}</span>
+                  <div
+                    v-for="childItem in item.childItems"
+                    :key="childItem.name"
+                    class="n-nimbus-service-layout-drawer__item n-nimbus-service-layout-drawer__item--is-group-item"
+                    :class="{ 'n-nimbus-service-layout-drawer__item--active': activeItemName === childItem.name }"
+                    @click="makeActive(childItem)"
+                  >
+                    <span>{{ childItem.name }}</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </scrollbar>
       </div>
       <div
         class="n-nimbus-service-layout-drawer__toggle-button"
@@ -86,8 +90,13 @@
 </template>
 
 <script>
+import Scrollbar from '../../../common/Scrollbar'
+
 export default {
   name: 'NNimbusServiceLayout',
+  components: {
+    Scrollbar
+  },
   props: {
     icon: {
       type: String,
