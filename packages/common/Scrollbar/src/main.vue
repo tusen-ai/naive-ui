@@ -13,6 +13,9 @@
       <div
         ref="scrollContent"
         class="n-scrollbar-content"
+        :class="{
+          'n-scrollbar-content--fit-content-width': fitContentWidth
+        }"
       >
         <slot />
       </div>
@@ -21,35 +24,40 @@
       class="n-scrollbar-vertical-rail"
       :style="{width: scrollbarSize}"
     >
-      <div
-        v-if="showVeriticalScrollbar"
-        class="n-scrollbar-rail__scrollbar"
-        :style="{
-          height: verticalScrollbarHeightPx,
-          top: verticalScrollbarTopPx,
-          width: scrollbarSize
-        }"
-        @mousedown="handleVerticalScrollMouseDown"
-        @mouseup="handleVerticalScrollMouseUp"
-        @mousemove="handleVerticalScrollMouseMove"
-      />
+      <transition name="n-scrollbar--transition">
+        <div
+          v-if="needVerticalScrollbar && showVeriticalScrollbar"
+          class="n-scrollbar-rail__scrollbar"
+          :style="{
+            height: verticalScrollbarHeightPx,
+            top: verticalScrollbarTopPx,
+            width: scrollbarSize,
+            borderRadius: scrollbarBorderRadius
+          }"
+          @mousedown="handleVerticalScrollMouseDown"
+          @mouseup="handleVerticalScrollMouseUp"
+          @mousemove="handleVerticalScrollMouseMove"
+        />
+      </transition>
     </div>
     <div
       class="n-scrollbar-horizontal-rail"
       :style="{height: scrollbarSize}"
     >
-      <div
-        v-if="showHorizontalScrollbar"
-        class="n-scrollbar-rail__scrollbar"
-        :style="{
-          height: scrollbarSize,
-          width: horizontalScrollbarWidthPx,
-          left: horizontalScrollbarLeftPx
-        }"
-        @mousedown="handleHorizontalScrollMouseDown"
-        @mouseup="handleHorizontalScrollMouseUp"
-        @mousemove="handleHorizontalScrollMouseMove"
-      />
+      <transition name="n-scrollbar--transition">
+        <div
+          v-if="needHorizontalScrollbar && showHorizontalScrollbar"
+          class="n-scrollbar-rail__scrollbar"
+          :style="{
+            height: scrollbarSize,
+            width: horizontalScrollbarWidthPx,
+            left: horizontalScrollbarLeftPx
+          }"
+          @mousedown="handleHorizontalScrollMouseDown"
+          @mouseup="handleHorizontalScrollMouseUp"
+          @mousemove="handleHorizontalScrollMouseMove"
+        />
+      </transition>
     </div>
   </div>
 </template>
@@ -65,7 +73,11 @@ export default {
     },
     duration: {
       type: Number,
-      default: 1000
+      default: 0
+    },
+    fitContentWidth: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -127,6 +139,15 @@ export default {
     },
     scrollbarSize () {
       return this.width + 'px'
+    },
+    scrollbarBorderRadius () {
+      return this.width / 2 + 'px'
+    },
+    needVerticalScrollbar () {
+      return this.containerHeight !== null && this.contentHeight !== null && this.contentHeight > this.containerHeight
+    },
+    needHorizontalScrollbar () {
+      return this.containerWidth !== null && this.contentWidth !== null && this.contentWidth > this.containerWidth
     }
   },
   watch: {
@@ -144,15 +165,13 @@ export default {
     window.removeEventListener('mouseup', this.handleVerticalScrollMouseUp)
   },
   mounted () {
-    this.$el.parentElement.style.position = 'relative'
-    this.$el.parentElement.style.overflow = 'hidden'
-    this.$el.parentElement.classList.add('n-scrollbar-wrapper')
     this.updateParameters()
   },
   methods: {
     enterScrollWrapper () {
       this.displayHorizontalScrollbar()
       this.displayVerticalScrollbar()
+      this.updateParameters()
     },
     leaveScrollWrapper () {
       this.hideScrollbar()
@@ -203,19 +222,20 @@ export default {
       this.containerScrollLeft = this.$refs.scrollContainer.scrollLeft
     },
     updatePositionParameters () {
-      const containerRect = this.$refs.scrollContainer.getBoundingClientRect()
-      const contentRect = this.$refs.scrollContent.getBoundingClientRect()
-      this.contentHeight = contentRect.height
-      this.contentWidth = contentRect.width
-      this.containerHeight = containerRect.height
-      this.containerWidth = containerRect.width
+      /**
+       * Don't use getClientBoundingRect because element may be scale transformed
+       */
+      this.contentHeight = this.$refs.scrollContent.offsetHeight
+      this.contentWidth = this.$refs.scrollContent.offsetWidth
+      this.containerHeight = this.$refs.scrollContainer.offsetHeight
+      this.containerWidth = this.$refs.scrollContainer.offsetWidth
     },
     updateParameters () {
       this.updatePositionParameters()
       this.updateScrollParameters()
     },
     handleHorizontalScrollMouseDown (e) {
-      console.log('mousedown')
+      this.$emit('scrollstart')
       this.horizontalScrollbarActivated = true
       window.addEventListener('mousemove', this.handleHorizontalScrollMouseMove)
       window.addEventListener('mouseup', this.handleHorizontalScrollMouseUp)
@@ -235,16 +255,18 @@ export default {
         this.$refs.scrollContainer.scrollLeft = toScrollLeft
       }
     },
-    handleHorizontalScrollMouseUp () {
+    handleHorizontalScrollMouseUp (e) {
+      this.$emit('scrollend')
       window.removeEventListener('mousemove', this.handleHorizontalScrollMouseMove)
       window.removeEventListener('mouseup', this.handleHorizontalScrollMouseUp)
       this.horizontalScrollbarActivated = false
       this.updateParameters()
-      this.hideScrollbar()
-      console.log('mouseup')
+      if (!this.$el.contains(e.target)) {
+        this.hideScrollbar()
+      }
     },
     handleVerticalScrollMouseDown (e) {
-      console.log('mousedown')
+      this.$emit('scrollstart')
       this.verticalScrollbarActivated = true
       window.addEventListener('mousemove', this.handleVerticalScrollMouseMove)
       window.addEventListener('mouseup', this.handleVerticalScrollMouseUp)
@@ -264,81 +286,19 @@ export default {
         this.$refs.scrollContainer.scrollTop = toScrollTop
       }
     },
-    handleVerticalScrollMouseUp () {
+    handleVerticalScrollMouseUp (e) {
+      this.$emit('scrollend')
       window.removeEventListener('mousemove', this.handleVerticalScrollMouseMove)
       window.removeEventListener('mouseup', this.handleVerticalScrollMouseUp)
       this.verticalScrollbarActivated = false
       this.updateParameters()
-      this.hideScrollbar()
-      console.log('mouseup')
+      if (!this.$el.contains(e.target)) {
+        this.hideScrollbar()
+      }
     },
     handleDragStart (e) {
-      console.log('drag start')
       e.preventDefault()
     }
   }
 }
 </script>
-
-<style lang="scss" scoped>
-
-.n-scrollbar {
-  width: 100%;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  top: 0;
-  right: 0;
-}
-.n-scrollbar-vertical-rail, .n-scrollbar-horizontal-rail {
-  position: absolute;
-  user-select: none;
-  -moz-user-select: none;
-  .n-scrollbar-rail__scrollbar {
-    position: absolute;
-    background-color: yellow;
-  }
-}
-
-.n-scrollbar-horizontal-rail {
-  left: 0;
-  right: 0;
-  bottom: 0;
-  .n-scrollbar-rail__scrollbar {
-    right: 0;
-  }
-}
-
-.n-scrollbar-vertical-rail {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  .n-scrollbar-rail__scrollbar {
-    bottom: 0;
-  }
-}
-
-.n-scrollbar-container {
-  width: 100%;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  top: 0;
-  right: 0;
-  overflow: scroll;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-  }
-}
-
-.n-scrollbar-content {
-  width: fit-content;
-  height: fit-content;
-  width: -moz-fit-content;
-  height: -moz-fit-content;
-  overflow: visible;
-}
-</style>
