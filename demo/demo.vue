@@ -111,10 +111,7 @@ export default {
               name: 'Radio',
               path: '/n-radio'
             },
-            {
-              name: 'Scrollbar',
-              path: '/n-scrollbar'
-            },
+
             {
               name: 'Select',
               path: '/n-select'
@@ -155,6 +152,10 @@ export default {
             {
               name: 'ModalDebug',
               path: '/n-modal-debug'
+            },
+            {
+              name: 'ScrollbarDebug',
+              path: '/n-scrollbar-debug'
             }
           ]
         }
