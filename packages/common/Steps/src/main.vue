@@ -1,24 +1,24 @@
 <script>
-function wrapStep (step, i, active) {
+function wrapStep (step, i, current) {
   if (step.componentOptions.tag === 'n-step') {
     step.componentOptions.propsData = {
       ...step.componentOptions.propsData,
       index: i + 1,
-      finished: !!active && active > i,
-      active: active === i
+      finished: !!current && current > i,
+      active: current === i
     }
   }
   return step
 }
 
 function mapSteps (props, steps) {
-  return steps.map((step, i) => wrapStep(step, i, props.active))
+  return steps.map((step, i) => wrapStep(step, i, props.current))
 }
 
 export default {
   name: 'NSteps',
   props: {
-    active: {
+    current: {
       type: Number,
       default: null,
       required: false

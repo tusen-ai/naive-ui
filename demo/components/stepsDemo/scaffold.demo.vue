@@ -8,7 +8,7 @@
       style="flex-wrap: nowrap;"
     >
       <!--EXAMPLE_START-->
-      <n-steps :active="active">
+      <n-steps :current="current">
         <n-step
           title="A B C D"
           description="Hello Go Go Go Go, Hello Go Go Go Go"
@@ -40,14 +40,14 @@ export default {
   data () {
     return {
       timerId: null,
-      active: null
+      current: null
     }
   },
   mounted () {
     this.timerId = window.setInterval(() => {
-      if (this.active === null) this.active = 0
-      else if (this.active >= 3) this.active = null
-      else this.active++
+      if (this.current === null) this.current = 0
+      else if (this.current >= 3) this.current = null
+      else this.current++
     }, 2000)
   },
   beforeDestroy () {
