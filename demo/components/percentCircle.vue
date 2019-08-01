@@ -57,12 +57,12 @@ export default {
   name: 'PercentCircle',
   props: {
     request: {
-      type: Number
-      // default: 0
+      type: Number,
+      default: 0
     },
     usage: {
-      type: Number
-      // default: 0
+      type: Number,
+      default: 0
     },
     cx: {
       type: Number,
@@ -80,11 +80,9 @@ export default {
       type: Number,
       default: 22
     },
-    text: {
-      type: String
-    },
-    id: {
-      type: String
+    key: {
+      type: String,
+      require: true
     }
     // width: {
     //   type: Number,

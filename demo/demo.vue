@@ -117,6 +117,10 @@ export default {
               path: '/n-select'
             },
             {
+              name: 'Cascader',
+              path: '/n-cascader'
+            },
+            {
               name: 'Switch',
               path: '/n-switch'
             },

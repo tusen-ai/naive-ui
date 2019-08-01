@@ -16,6 +16,7 @@ import tableDemo from './components/tableDemo'
 import advanceTableDemo from './components/advanceTableDemo'
 import inputDemo from './components/inputDemo'
 import selectDemo from './components/selectDemo'
+import cascaderDemo from './components/cascaderDemo'
 import modalDemo from './components/modalDemo'
 import nimbusFormCardDemo from './components/nimbusFormCardDemo'
 import messageDemo from './components/messageDemo'
@@ -59,6 +60,7 @@ const routes = [
       { path: '/n-advance-table', component: advanceTableDemo },
       { path: '/n-input', component: inputDemo },
       { path: '/n-select', component: selectDemo },
+      { path: '/n-cascader', component: cascaderDemo },
       { path: '/n-modal', component: modalDemo },
       { path: '/n-nimbus-form-card', component: nimbusFormCardDemo },
       { path: '/n-message', component: messageDemo },
