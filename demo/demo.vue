@@ -76,6 +76,10 @@ export default {
               path: '/n-collapse'
             },
             {
+              name: 'Confirm',
+              path: '/n-confirm'
+            },
+            {
               name: 'DatePicker',
               path: '/n-date-picker'
             },
@@ -126,6 +130,10 @@ export default {
             {
               name: 'Select',
               path: '/n-select'
+            },
+            {
+              name: 'Cascader',
+              path: '/n-cascader'
             },
             {
               name: 'Steps',

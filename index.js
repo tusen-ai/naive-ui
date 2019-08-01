@@ -12,6 +12,7 @@ import CheckBox from './packages/common/Checkbox'
 import RoundButton from './packages/common/Button'
 import Switch from './packages/common/Switch'
 import Select from './packages/common/Select'
+import Cascader from './packages/common/Cascader'
 import Modal from './packages/common/Modal'
 import Input from './packages/common/Input'
 import Message from './packages/common/Message'
@@ -34,6 +35,7 @@ import NimbusConfirmCard from './packages/nimbus/ConfirmCard'
 import NimbusIcon from './packages/nimbus/Icon'
 import Scrollbar from './packages/common/Scrollbar'
 import Steps from './packages/common/Steps'
+import Confirm from './packages/common/Confirm'
 
 function install (Vue) {
   Card.install(Vue)
@@ -68,10 +70,12 @@ function install (Vue) {
   InputNumber.install(Vue)
   NimbusIcon.install(Vue)
   Radio.install(Vue)
+  Cascader.install(Vue)
   Form.install(Vue)
   TimePicker.install(Vue)
   Scrollbar.install(Vue)
   Steps.install(Vue)
+  Confirm.install(Vue)
 }
 
 export default {

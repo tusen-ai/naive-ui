@@ -16,6 +16,7 @@ import tableDemo from './components/tableDemo'
 import advanceTableDemo from './components/advanceTableDemo'
 import inputDemo from './components/inputDemo'
 import selectDemo from './components/selectDemo'
+import cascaderDemo from './components/cascaderDemo'
 import modalDemo from './components/modalDemo'
 import nimbusFormCardDemo from './components/nimbusFormCardDemo'
 import messageDemo from './components/messageDemo'
@@ -28,6 +29,8 @@ import nimbusIconDemo from './components/nimbusIconDemo'
 import radioDemo from './components/radioDemo'
 import formDemo from './components/formDemo'
 import timePickerDemo from './components/timePickerDemo'
+import confirmDemo from './components/confirmDemo'
+
 import scrollbarDebug from './debugComponents/scrollbarDebug'
 import badgeDemo from './components/badgeDemo'
 import stepsDemo from './components/stepsDemo'
@@ -75,6 +78,7 @@ const routes = [
       { path: '/n-advance-table', component: advanceTableDemo },
       { path: '/n-input', component: inputDemo },
       { path: '/n-select', component: selectDemo },
+      { path: '/n-cascader', component: cascaderDemo },
       { path: '/n-modal', component: modalDemo },
       { path: '/n-nimbus-form-card', component: nimbusFormCardDemo },
       { path: '/n-message', component: messageDemo },
@@ -90,6 +94,8 @@ const routes = [
       { path: '/n-radio', component: radioDemo },
       { path: '/n-form', component: formDemo },
       { path: '/n-time-picker', component: timePickerDemo },
+      { path: '/n-confirm', component: confirmDemo },
+
       { path: '/n-router-debug', component: routerDebug },
       { path: '/n-modal-debug', component: modalDebug },
       { path: '/n-scrollbar-debug', component: scrollbarDebug },
