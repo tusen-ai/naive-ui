@@ -30,6 +30,10 @@
         :size="24"
         type="edit"
       />
+      <n-nimbus-icon
+        :size="24"
+        type="close"
+      />
       <!--EXAMPLE_END-->
     </div>
     <pre class="n-doc-section__inspect">Valid type: share, ban, pull-request, operate, edit</pre>

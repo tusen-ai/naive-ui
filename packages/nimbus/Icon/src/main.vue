@@ -24,6 +24,10 @@
       v-else-if="type==='edit'"
       :color="color"
     />
+    <close-icon
+      v-else-if="type==='close'"
+      :color="color"
+    />
   </i>
 </template>
 <script>
@@ -32,6 +36,7 @@ import banIcon from './icons/ban'
 import pullRequestIcon from './icons/pullRequest'
 import operateIcon from './icons/operate'
 import editIcon from './icons/edit'
+import closeIcon from './icons/close'
 
 const validTypes = ['share', 'ban', 'pull-request', 'operate', 'edit']
 
@@ -42,7 +47,8 @@ export default {
     banIcon,
     pullRequestIcon,
     operateIcon,
-    editIcon
+    editIcon,
+    closeIcon
   },
   props: {
     type: {
