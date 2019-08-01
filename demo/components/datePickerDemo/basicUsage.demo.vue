@@ -9,13 +9,13 @@
     >
       <!--EXAMPLE_START-->
       <n-date-picker
-        v-model="dateTimeTimestamp"
+        v-model="ts1"
         type="datetime"
         style="margin-right: 12px;"
         @change="onDateTimeChange"
       />
       <n-date-picker
-        v-model="dateTimestamp"
+        v-model="ts2"
         type="date"
         @change="onDateChange"
       />
@@ -26,18 +26,20 @@
       style="flex-wrap: nowrap;"
     >
       <n-input
-        v-model="dateTimeTimestamp"
-        placeholder="dateTimeTimestamp"
+        :value="ts1"
+        placeholder="ts1"
         type="text"
         style="margin-right: 12px;"
+        @input="handleInputTs1"
       />
       <n-input
-        v-model="dateTimestamp"
-        placeholder="dateTimestamp"
+        :value="ts2"
+        placeholder="ts2"
         type="text"
+        @input="handleInputTs2"
       />
     </div>
-    <pre class="n-doc-section__inspect">datetime v-model: {{ dateTimeTimestamp }}, date v-model: {{ dateTimestamp }}</pre>
+    <pre class="n-doc-section__inspect">datetime v-model: {{ JSON.stringify(ts1) }}, date v-model: {{ JSON.stringify(ts2) }}</pre>
     <n-doc-source-block>
       <!--SOURCE-->
     </n-doc-source-block>
@@ -48,8 +50,8 @@
 export default {
   data () {
     return {
-      dateTimeTimestamp: 891360258000,
-      dateTimestamp: 891360258000
+      ts1: null,
+      ts2: 0
     }
   },
   methods: {
@@ -58,6 +60,22 @@ export default {
     },
     onDateChange (timestamp, dateString) {
       this.$NMessage.success(`${timestamp}, ${dateString}`)
+    },
+    handleInputTs1 (v) {
+      if (v === '') {
+        this.ts1 = null
+        return
+      }
+      v = Number(v)
+      this.ts1 = Number.isNaN(v) ? null : v
+    },
+    handleInputTs2 (v) {
+      if (v === '') {
+        this.ts2 = null
+        return
+      }
+      v = Number(v)
+      this.ts2 = Number.isNaN(v) ? null : v
     }
   }
 }

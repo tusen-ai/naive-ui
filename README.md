@@ -24,7 +24,7 @@ Run `npm run test` to test all components.
 Run `npm run test-cov` to test all components and see detailed test coverage report.
 
 ## Want to see how component works
-1. Run `npm run build`
+1. Run `npm run dev`
 2. Open `http://localhost:8086/` in browser.
 ## Want to add your own component
 There is no guideline for now. If you want to know how to do it, you can explore by yourself or ask `lecong.zhang@tusimple.ai`.
@@ -68,12 +68,22 @@ Vue.use(naiveUi)
 |Tooltip|😍|❌||
 |Popover|😍|❌||
 |InputNumber|😍|❌||
-|Radio|🚧|||
+|Radio|😍|||
 |Tab|🚧|||
 |Breadcrumb|🚧|||
 |Badge|🚧|||
 |Steps|🚧|||
-## Todo
+|Tag|🚧|||
+|Divider|🚧|||
+|Statistic|🚧|||
+|PopConfirm|🚧|||
+|Anchor|🚧|||
+|BackTop|🚧|||
+|Progress|🚧|||
+|Timeline|🚧|||
+|Card|🚧|||
+|Collapse|🚧|||
+|Cascader|🚧|||
 1. Z-index management on `Select` & `Tooltip` & `Modal`(Low Priority)
 2. Full featured table component(Medium Priority)
 3. Form component(Medium Priority)

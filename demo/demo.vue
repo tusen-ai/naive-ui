@@ -50,7 +50,6 @@ export default {
         },
         {
           name: 'Common',
-          path: '/',
           childItems: [
             {
               name: 'AdvanceTable',
@@ -61,12 +60,20 @@ export default {
               path: '/n-alert'
             },
             {
+              name: 'Badge',
+              path: '/n-badge'
+            },
+            {
               name: 'Button',
               path: '/n-button'
             },
             {
               name: 'Checkbox',
               path: '/n-checkbox'
+            },
+            {
+              name: 'Collapse',
+              path: '/n-collapse'
             },
             {
               name: 'DatePicker',
@@ -109,6 +116,10 @@ export default {
               path: '/n-popover'
             },
             {
+              name: 'Progress',
+              path: '/n-progress'
+            },
+            {
               name: 'Radio',
               path: '/n-radio'
             },
@@ -121,6 +132,10 @@ export default {
               path: '/n-cascader'
             },
             {
+              name: 'Steps',
+              path: '/n-steps'
+            },
+            {
               name: 'Switch',
               path: '/n-switch'
             },
@@ -129,8 +144,45 @@ export default {
               path: '/n-table'
             },
             {
+              name: 'Tag',
+              path: '/n-tag'
+            },
+            {
+              name: 'TimePicker',
+              path: '/n-time-picker'
+            },
+            {
+              name: 'Timeline',
+              path: '/n-timeline'
+            },
+            {
               name: 'Tooltip',
               path: '/n-tooltip'
+            },
+            {
+              name: 'Form',
+              path: '/n-form'
+            }
+          ]
+        },
+        {
+          name: 'Debug',
+          childItems: [
+            {
+              name: 'PopoverDebug',
+              path: '/n-popover-debug'
+            },
+            {
+              name: 'RouterDebug',
+              path: '/n-router-debug'
+            },
+            {
+              name: 'ModalDebug',
+              path: '/n-modal-debug'
+            },
+            {
+              name: 'ScrollbarDebug',
+              path: '/n-scrollbar-debug'
             }
           ]
         }

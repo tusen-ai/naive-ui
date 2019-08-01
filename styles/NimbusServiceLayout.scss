@@ -15,7 +15,7 @@
     top: 0;
     bottom: 0;
     transition: left .3s cubic-bezier(0.4, 0.0, 0.2, 1);
-    overflow: auto;
+    overflow: hidden;
     &::-webkit-scrollbar {
       width: 5px;
     }
@@ -64,7 +64,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      overflow-y: auto;
+      overflow: hidden;
       transition: opacity .3s cubic-bezier(0.4, 0.0, 0.2, 1);
       &::-webkit-scrollbar {
         width: 5px;
@@ -123,8 +123,13 @@
           transition: opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
           opacity: 1;
         }
-        &.n-nimbus-service-layout-drawer__item--active span{
-          opacity: 1;
+        &.n-nimbus-service-layout-drawer__item--active {
+          &:not(.n-nimbus-service-layout-drawer__item--is-group-item) {
+            color: #63E2B7;
+          }
+          span {
+            opacity: 1;
+          }
         }
         &:hover span {
           opacity: 1;

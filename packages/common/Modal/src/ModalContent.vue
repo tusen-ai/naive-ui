@@ -23,6 +23,11 @@ export default {
 </script>
 
 <style lang="scss">
+.n-modal-content {
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
+}
 
 .n-modal-content--transition-enter-active {
   opacity: 1;

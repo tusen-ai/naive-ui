@@ -37,6 +37,7 @@
             :class="{
               'n-popover__content--without-arrow': !arrow
             }"
+            :style="style"
             @mouseenter="handleMouseEnter"
           >
             <div
@@ -63,6 +64,7 @@
             :class="{
               'n-popover__content--without-arrow': !arrow
             }"
+            :style="style"
             @mouseenter="handleMouseEnter"
           >
             <slot />
@@ -77,12 +79,13 @@
 import detachable from '../../../mixins/detachable'
 import toggleable from '../../../mixins/toggleable'
 import placeable from '../../../mixins/placeable'
+import zindexable from '../../../mixins/zindexable'
 import clickoutsideDelegate from '../../../utils/clickoutsideDelegate'
 import moveoutsideDelegate from '../../../utils/moveoutsideDelegate'
 
 export default {
   // name: 'NPopover',
-  mixins: [detachable, toggleable, placeable],
+  mixins: [detachable, toggleable, placeable, zindexable],
   props: {
     duration: {
       type: Number,
@@ -105,6 +108,10 @@ export default {
     raw: {
       default: false,
       type: Boolean
+    },
+    width: {
+      type: Number,
+      default: null
     }
     /**
      * for debug usage
@@ -118,6 +125,15 @@ export default {
     return {
       vanishTimerId: null,
       delayTimerId: null
+    }
+  },
+  computed: {
+    style () {
+      const style = {}
+      if (this.width !== null) {
+        style.width = this.width + 'px'
+      }
+      return style
     }
   },
   created () {

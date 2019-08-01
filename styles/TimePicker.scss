@@ -1,0 +1,51 @@
+@import "./mixins/mixins.scss";
+@import "./theme/default.scss";
+
+@include b(time-picker-selector) {
+  background-color: rgba(97, 104, 132, 1);
+  box-shadow:0px 2px 20px 0px rgba(0,0,0,0.16);
+  font-size: 12px;
+  border-radius: 6px;
+  margin-top: 4px;
+  width: 180px;
+  overflow: hidden;
+  @include fade-in-scale-up-transition(time-picker, top left);
+  .n-time-picker__selection-wrapper {
+    position: relative;
+    height: 244px;
+    border-bottom: 1px solid rgba(255, 255, 255, .07);
+    display: flex;
+  }
+  .n-time-picker__hour, .n-time-picker__minute, .n-time-picker__second {
+    @include scrollbar;
+    width: 60px;
+    height: 244px;
+    flex-direction: column;
+    overflow-y: scroll;
+    .n-time-picker__item {
+      cursor: pointer;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color .2s $default-cubic-bezier, color .2s $default-cubic-bezier;
+      background: transparent;
+      &:hover {
+        background-color: rgba(99,226,183,0.12);
+      }
+      &.n-time-picker__item--active {
+        background-color: rgba(99,226,183,0.12);
+        color: rgba(99, 226, 183, 1);
+      }
+    }
+  }
+  .n-time-picker__actions {
+    // margin will boom! I don't know why
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    .n-button {
+      margin: 0;
+    }
+  }
+}

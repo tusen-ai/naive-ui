@@ -24,7 +24,8 @@ import Alert from './packages/common/Alert'
 import DatePicker from './packages/common/DatePicker'
 import InputNumber from './packages/common/InputNumber'
 import Radio from './packages/common/Radio'
-
+import Form from './packages/common/Form'
+import TimePicker from './packages/common/TimePicker'
 import ServiceCard from './packages/nimbus/ServiceCard'
 import HomeLayout from './packages/nimbus/HomeLayout'
 import Navbar from './packages/nimbus/Navbar'
@@ -32,6 +33,7 @@ import ServiceLayout from './packages/nimbus/ServiceLayout'
 import NimbusFormCard from './packages/nimbus/FormCard'
 import NimbusConfirmCard from './packages/nimbus/ConfirmCard'
 import NimbusIcon from './packages/nimbus/Icon'
+import Scrollbar from './packages/common/Scrollbar'
 
 function install (Vue) {
   Card.install(Vue)
@@ -67,6 +69,9 @@ function install (Vue) {
   NimbusIcon.install(Vue)
   Radio.install(Vue)
   Cascader.install(Vue)
+  Form.install(Vue)
+  TimePicker.install(Vue)
+  Scrollbar.install(Vue)
 }
 
 export default {

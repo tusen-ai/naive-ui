@@ -1,8 +1,6 @@
 <template>
-  <div
-    ref="doc"
-    class="n-doc"
-  >
+  <div ref="doc"
+class="n-doc">
     <div class="n-doc-header">
       <n-gradient-text :font-size="20">
         AdvanceTable
@@ -15,10 +13,8 @@
           Basic use
         </div>
         <div class="n-doc-section__view">
-          <n-advance-table
-            :columns="columns0"
-            :data="data"
-          >
+          <n-advance-table :columns="columns0"
+:data="data">
             <template #table-operation>
               <n-button>custom operation by v-slot:table-operation</n-button>
             </template>
@@ -98,7 +94,8 @@ export default {
           />
         </div>
         <div class="n-doc-section__source">
-          <textarea><n-advance-table
+          <textarea>
+<n-advance-table
   :columns="columns"
   :data="data"
   max-height="300px" // maxheight will fix header
@@ -205,7 +202,8 @@ export default {
           />
         </div>
         <div class="n-doc-section__source">
-          <textarea><n-advance-table
+          <textarea>
+<n-advance-table
   :columns="columns"
   :data="data"
   max-height="300px"
@@ -306,7 +304,8 @@ export default {
           />
         </div>
         <div class="n-doc-section__source">
-          <textarea><n-advance-table
+          <textarea>
+<n-advance-table
   :columns="columns"
   :data="data"
   max-height="300px"
@@ -403,11 +402,12 @@ export default {
             :data="data"
             max-height="300px"
             :on-change="onChange"
-            :pagination="{total:data.length,limit:10}"
+            :pagination="{ total: data.length, limit: 10 }"
           />
         </div>
         <div class="n-doc-section__source">
-          <textarea><n-advance-table
+          <textarea>
+<n-advance-table
   :columns="columns"
   :data="data"
   max-height="300px"
@@ -507,11 +507,12 @@ export default {
             :data="data"
             max-height="300px"
             :on-change="onChange"
-            :pagination="{total:data.length,limit:10,custom:true}"
+            :pagination="{ total: data.length, limit: 10, custom: true }"
           />
         </div>
         <div class="n-doc-section__source">
-          <textarea><n-advance-table
+          <textarea>
+<n-advance-table
   :columns="columns"
   :data="data"
   max-height="300px"
@@ -563,11 +564,12 @@ export default {
             max-height="300px"
             :on-change="onChange"
             :search="search"
-            :pagination="{total:data.length,limit:10}"
+            :pagination="{ total: data.length, limit: 10 }"
           />
         </div>
         <div class="n-doc-section__source">
-          <textarea><n-advance-table
+          <textarea>
+<n-advance-table
   :columns="columns"
   :data="data"
   max-height="300px"
@@ -621,11 +623,12 @@ export default {
             max-height="300px"
             :on-change="onChange"
             :search="search1"
-            :pagination="{total:data.length,limit:10}"
+            :pagination="{ total: data.length, limit: 10 }"
           />
         </div>
         <div class="n-doc-section__source">
-          <textarea><n-advance-table
+          <textarea>
+<n-advance-table
   :columns="columns"
   :data="data"
   max-height="300px"
@@ -663,6 +666,50 @@ export default {
 }
 </script>
           </textarea>
+        </div>
+        <!-- test -->
+        <div class="n-doc-section">
+          <div class="n-doc-section__header">
+            Test
+          </div>
+          <div class="n-doc-section__view">
+            <n-advance-table
+              ref="table"
+              :columns="columns3"
+              :data="data"
+              max-height="300px"
+              :on-change="onChange1"
+              :search="search"
+              :pagination="{ total: data.length, limit: 10 }"
+            />
+          </div>
+          <div class="n-doc-section__source">
+            <textarea>
+<n-advance-table
+  :columns="columns"
+  :data="data"
+  max-height="300px"
+  ref="table"
+  :on-change="onChange"
+  :search="search"
+  :pagination="{total:data.length,limit:10,custom:true}"
+/>
+//
+<script>
+// if you want to set sorter filter searcher and pagnation
+
+mounted () {
+  this.$refs.table.setParams({ filter: { age: [14] }, sorter: { key: 'age', type: -1 }, searcher: { key: 'name', value: 'xiaobai' } })
+},
+methods:{
+  onChange ({ filter, sorter, pagination, search }) {
+      console.log('执行', { filter, sorter, pagination, search })
+    },
+}
+
+</script>
+          </textarea>
+          </div>
         </div>
       </div>
       <!-- body end -->
@@ -838,12 +885,59 @@ export default {
             value: 15
           }],
           onFilter: (value, record) => {
-            switch (value) {
+            switch (+value) {
               case 14:
-                return record.age <= value
+                return record.age <= +value
               case 15:
-                return record.age >= value
+                return record.age >= +value
             }
+          },
+          render: (h, params) => {
+            return <b>{params.row.age}</b>
+          }
+        },
+        {
+          title: '#',
+          render: (h, params) => {
+            return (
+              <n-button
+                style="margin:0;"
+                size="small"
+                onClick={() => this.handleClick(params)}
+              >
+                delete
+              </n-button>
+            )
+          }
+        }
+      ],
+      columns3: [
+        {
+          title: 'Name',
+          key: 'name',
+          filterMultiple: false,
+          filterItems: [{
+            label: 'xiaobai1',
+            value: 'xiaobai1'
+          }],
+          onFilter: (value, record) => {
+            return value.includes(record.name + '')
+          }
+        },
+        {
+          title: 'Age',
+          key: 'age',
+          sortable: 'custom',
+          filterMultiple: true,
+          filterItems: [{
+            label: '14',
+            value: 14
+          }, {
+            label: '15',
+            value: 15
+          }],
+          onFilter: (value, record) => {
+            return value.includes(record.age + '')
           },
           render: (h, params) => {
             return <b>{params.row.age}</b>
@@ -866,12 +960,19 @@ export default {
       ]
     }
   },
+  mounted () {
+    this.$refs.table.setParams({ filter: { age: [14] }, sorter: { key: 'age', type: -1 }, searcher: { key: 'name', value: 'xiaobai' }, page: 2 })
+  },
   methods: {
     handleClick (params) {
       alert('delete' + JSON.stringify(params))
     },
+    onChange1 ({ filter, sorter, pagination, search }) {
+      console.log('执行', { filter, sorter, pagination, search })
+    },
     onChange ({ filter, sorter, pagination, search }) {
       alert('remote handler: \n' + JSON.stringify({ sorter, filter, pagination, search }, null, '\t'))
+      console.log({ filter, sorter, pagination, search })
       this.data = [{
         name: 'form net',
         age: 0

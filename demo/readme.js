@@ -22,7 +22,7 @@ You <strong>MUST</strong> fix all lint warnings and errors before you push your 
 Run <code>npm run test-cov</code> to test all components and see detailed test coverage report.</p>
 <h2 id="wanttoseehowcomponentworks">Want to see how component works</h2>
 <ol>
-<li>Run <code>npm run build</code></li>
+<li>Run <code>npm run dev</code></li>
 <li>Open <code>http://localhost:8086/</code> in browser.</li>
 </ol>
 <h2 id="wanttoaddyourowncomponent">Want to add your own component</h2>
@@ -172,7 +172,7 @@ Vue.use(naiveUi)
 </tr>
 <tr>
 <td>Radio</td>
-<td style="text-align:center;">🚧</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;"></td>
 <td></td>
 </tr>
@@ -200,9 +200,74 @@ Vue.use(naiveUi)
 <td style="text-align:center;"></td>
 <td></td>
 </tr>
+<tr>
+<td>Tag</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Divider</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Statistic</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>PopConfirm</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Anchor</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>BackTop</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Progress</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Timeline</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Card</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Collapse</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Cascader</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
 </tbody>
 </table>
-<h2 id="todo">Todo</h2>
 <ol>
 <li>Z-index management on <code>Select</code> &amp; <code>Tooltip</code> &amp; <code>Modal</code>(Low Priority)</li>
 <li>Full featured table component(Medium Priority)</li>

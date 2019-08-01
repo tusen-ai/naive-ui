@@ -45,7 +45,7 @@ class ClickOutsideDelegate {
     }
     if (!this.handlerCount) {
       console.debug('[ClickOutsideDelegate]: remove handler from window')
-      window.removeEventListener('click', this.handleClickOutside, true)
+      window.removeEventListener('click', this.handleClickOutside)
       this.handlers = new Map()
     }
   }
@@ -57,11 +57,11 @@ class ClickOutsideDelegate {
       if (!el) throw new Error('[ClickOutsideDelegate.registerHandler]: make sure `el` is an HTMLElement')
     }
     if (this.handlers.get(handler)) {
-      throw new Error('[ClickOutsideDelegate.registerHandler]: don\'t register duplicate event handler')
+      throw new Error('[ClickOutsideDelegate.registerHandler]: don\'t register duplicate event handler, if you want to do it, unregister this handler and reregister it.')
     }
     if (!this.handlerCount) {
       console.debug('[ClickOutsideDelegate]: add handler to window')
-      window.addEventListener('click', this.handleClickOutside, true)
+      window.addEventListener('click', this.handleClickOutside)
     }
     ++this.handlerCount
     this.handlers.set(handler, { els, once })

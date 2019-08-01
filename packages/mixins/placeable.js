@@ -52,6 +52,7 @@ export default {
     }
   },
   mounted () {
+    this.$refs.content.style.position = 'absolute'
     this.$nextTick().then(() => {
       this.registerScrollListeners()
       this.registerResizeListener()
@@ -77,7 +78,12 @@ export default {
       // console.log(contentBoundingClientRect)
       // debugger
       // console.log('scroll', activatorBoundingClientRect, contentBoundingClientRect)
-      this.$refs.content.style = 'position: absolute;' + calcPlacementTransfrom(this.placement, activatorBoundingClientRect, contentBoundingClientRect)
+      const [placementTransform, suggsetedTransformOrigin] = calcPlacementTransfrom(this.placement, activatorBoundingClientRect, contentBoundingClientRect)
+      this.$refs.content.style.position = 'absolute'
+      this.$refs.content.style.top = placementTransform.top
+      this.$refs.content.style.left = placementTransform.left
+      this.$refs.content.style.transformOrigin = suggsetedTransformOrigin
+      this.$refs.content.setAttribute('n-suggested-transform-origin', suggsetedTransformOrigin)
       if (this.widthMode === 'activator' && this.$refs.contentInner) {
         this.$refs.contentInner.style.minWidth = activatorBoundingClientRect.width + 'px'
       }
@@ -86,15 +92,14 @@ export default {
       resizeDelegate.registerHandler(this.updatePosition)
     },
     registerScrollListeners () {
-      let currentElement = this.$el
+      let currentElement = getParentNode(this.$el)
       while (true) {
         currentElement = getScrollParent(currentElement)
+        if (currentElement === null) break
         this.scrollListeners.push([currentElement, this.updatePosition])
         currentElement = getParentNode(currentElement)
-        if (currentElement === document.body || currentElement.nodeName === 'HTML') {
-          break
-        }
       }
+      // console.log(this.scrollListeners)
       for (const [el, handler] of this.scrollListeners) {
         scrollDelegate.registerHandler(el, handler)
       }

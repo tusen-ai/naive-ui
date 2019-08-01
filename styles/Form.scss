@@ -1,0 +1,92 @@
+@import './mixins/mixins.scss';
+@import './theme/default.scss';
+
+@include b(form) {
+  width: 100%;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 1);
+  &.n-form--inline {
+    display: flex;
+    align-items: center;
+    align-content: space-around;
+    flex-wrap: nowrap;
+    .n-form-item:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+  .n-form-item__label--top {
+    display: block;
+    .n-form-item__label {
+      display: block;
+      padding-top: 0;
+      overflow-wrap: unset;
+      align-items: center;
+      text-align: left;
+    }
+  }
+  .n-form-item__label--require .n-form-item__label-span::before {
+    float: right;
+    content: '*';
+    color:rgba(255, 146, 164, 1);
+    margin-left: 5px;
+  }
+  .n-form-item__label--left .n-form-item__label {
+    text-align: left;
+  }
+  .n-form-item__label--right .n-form-item__label {
+    text-align: right;
+  }
+  .n-form-item__label--center .n-form-item__label {
+    text-align: center;
+  }
+  .n-form--disable {
+    box-shadow: inset 0 0 0px 1px rgb(99, 96, 96);
+    background-color: rgba(255, 255, 255, 0.1);
+    cursor: not-allowed;
+    &:hover {
+      box-shadow: inset 0 0 0px 1px rgb(99, 96, 96);
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+@include b(form-item) {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 24px;
+  .n-form-item__label {
+    flex-grow: 0;
+    padding: 10px 10px 10px 0; 
+    overflow-wrap: break-word;
+  }
+  .n-form-item__label-span {
+    display: inline-block;
+  } 
+  .n-form-item__content {
+    position: relative;
+    flex-grow: 1;
+  }
+  .n-form-item__validate {
+    position: absolute;
+    bottom: -18px;
+    margin-top: 6px;
+    color: rgba(255, 146, 164, 1);
+    font-size: 14px;
+  }
+  .n-form-item__content--pass {
+    .n-form-item__validate {
+      visibility: hidden;
+    }
+  }
+  .n-form-item__content--error {
+    .n-form-item__validate {
+      visibility: visible;
+    }
+    // 后期可以通过属性优化, 精确定位
+    input, select, textarea {
+      box-shadow: inset 0 0 0px 1px rgba(255, 146, 164, 1);
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+}

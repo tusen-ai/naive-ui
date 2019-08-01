@@ -27,12 +27,24 @@ import datePickerDemo from './components/datePickerDemo'
 import inputNumberDemo from './components/inputNumberDemo'
 import nimbusIconDemo from './components/nimbusIconDemo'
 import radioDemo from './components/radioDemo'
-
+import formDemo from './components/formDemo'
+import timePickerDemo from './components/timePickerDemo'
+import scrollbarDebug from './debugComponents/scrollbarDebug'
+import badgeDemo from './components/badgeDemo'
+import stepsDemo from './components/stepsDemo'
 import notificationDemo from './components/notificationDemo'
 import nimbusConfirmCardDemo from './components/nimbusConfirmCardDemo'
 import paginationDemo from './components/paginationDemo'
 import startPage from './components/startPage'
+import collapseDemo from './components/collapseDemo'
+import tagDemo from './components/tagDemo'
+import timelineDemo from './components/timelineDemo'
+import progressDemo from './components/progressDemo'
 import demo from './demo'
+
+import popoverDebug from './debugComponents/popoverDebug'
+import routerDebug from './debugComponents/routerDebug'
+import modalDebug from './debugComponents/modalDebug'
 
 Vue.use(NaiveUI)
 Vue.use(VueRouter)
@@ -43,6 +55,10 @@ const routes = [
   {
     path: '/home-demo',
     component: homeDemo
+  },
+  {
+    path: '/n-popover-debug',
+    component: popoverDebug
   },
   {
     path: '/start',
@@ -73,7 +89,18 @@ const routes = [
       { path: '/n-date-picker', component: datePickerDemo },
       { path: '/n-input-number', component: inputNumberDemo },
       { path: '/n-nimbus-icon', component: nimbusIconDemo },
-      { path: '/n-radio', component: radioDemo }
+      { path: '/n-radio', component: radioDemo },
+      { path: '/n-form', component: formDemo },
+      { path: '/n-time-picker', component: timePickerDemo },
+      { path: '/n-router-debug', component: routerDebug },
+      { path: '/n-modal-debug', component: modalDebug },
+      { path: '/n-scrollbar-debug', component: scrollbarDebug },
+      { path: '/n-badge', component: badgeDemo },
+      { path: '/n-steps', component: stepsDemo },
+      { path: '/n-collapse', component: collapseDemo },
+      { path: '/n-progress', component: progressDemo },
+      { path: '/n-tag', component: tagDemo },
+      { path: '/n-timeline', component: timelineDemo }
     ]
   },
   {

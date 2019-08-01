@@ -38,44 +38,57 @@
         <transition name="n-select-menu--transition">
           <div
             v-if="active"
-            ref="contentInner"
-            class="n-select-menu"
-            :class="{[`n-select-menu--${size}-size`]: true}"
-            @mouseleave="hideLightBar"
+            v-clickoutside="handleClickOutsideMenu"
+            class="n-select-menu-wrapper"
           >
-            <transition name="n-select-menu__light-bar--transition">
-              <div
-                v-if="showLightBar"
-                class="n-select-menu__light-bar"
-                :style="{ top: `${lightBarTop}px` }"
-              />
-            </transition>
             <div
-              v-for="item in filteredItems"
-              :key="item.value"
-              class="n-select-menu__item"
-              :class="{
-                'n-select-menu__item--selected':
-                  selectedValue ===
-                  item.value
-              }"
-              @click.stop="toggleItemInSingleSelect(item)"
-              @mouseenter="showLightBarTop"
+              ref="contentInner"
+              class="n-select-menu"
+              :class="{[`n-select-menu--${size}-size`]: true}"
+              @mouseleave="hideLightBar"
             >
-              {{ item.label }}
-            </div>
-            <div
-              v-if="label.length && !filteredItems.length"
-              class="n-select-menu__item n-select-menu__item--not-found"
-            >
-              {{
-                /**
-                 * This method to activate hideLightBar is ridiculous, however using
-                 * event handler still has some problem.
-                 */
-                hideLightBar()
-              }}
-              none result matched
+              <scrollbar
+                ref="scrollbar"
+                @scrollstart="handleMenuScrollStart"
+                @scrollend="handleMenuScrollEnd"
+              >
+                <div class="n-select-menu__item-wrapper">
+                  <transition name="n-select-menu__light-bar--transition">
+                    <div
+                      v-if="showLightBar"
+                      class="n-select-menu__light-bar"
+                      :style="{ top: `${lightBarTop}px` }"
+                    />
+                  </transition>
+                  <div
+                    v-for="item in filteredItems"
+                    :key="item.value"
+                    class="n-select-menu__item"
+                    :class="{
+                      'n-select-menu__item--selected':
+                        selectedValue ===
+                        item.value
+                    }"
+                    @click.stop="toggleItemInSingleSelect(item)"
+                    @mouseenter="showLightBarTop"
+                  >
+                    {{ item.label }}
+                  </div>
+                  <div
+                    v-if="label.length && !filteredItems.length"
+                    class="n-select-menu__item n-select-menu__item--not-found"
+                  >
+                    {{
+                      /**
+                      * This method to activate hideLightBar is ridiculous, however using
+                      * event handler still has some problem.
+                      */
+                      hideLightBar()
+                    }}
+                    none result matched
+                  </div>
+                </div>
+              </scrollbar>
             </div>
           </div>
         </transition>
@@ -85,16 +98,31 @@
 </template>
 
 <script>
+import Emitter from '../../../mixins/emitter'
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import toggleable from '../../../mixins/toggleable'
+import zindexable from '../../../mixins/zindexable'
+import Scrollbar from '../../Scrollbar'
+import clickoutside from '../../../directives/clickoutside'
 
 export default {
   name: 'NSingleSelect',
-  mixins: [detachable, toggleable, placeable],
+  components: {
+    Scrollbar
+  },
+  directives: {
+    clickoutside
+  },
+  mixins: [detachable, toggleable, placeable, zindexable, Emitter],
   model: {
     prop: 'selectedValue',
     event: 'input'
+  },
+  inject: {
+    formItem: {
+      default: null
+    }
   },
   props: {
     items: {
@@ -135,7 +163,8 @@ export default {
       lightBarTop: null,
       showLightBar: false,
       label: '',
-      labelPlaceholder: 'Please Select'
+      labelPlaceholder: 'Please Select',
+      scrolling: false
     }
   },
   computed: {
@@ -159,9 +188,20 @@ export default {
     }
   },
   watch: {
-    selectedItem () {
+    label () {
+      this.$nextTick().then(() => {
+        this.updatePosition()
+        if (this.$refs.scrollbar) {
+          this.$refs.scrollbar.updateParameters()
+        }
+      })
+    },
+    selectedItem (n, o) {
       if (this.selectedItem !== null) {
         this.label = this.selectedItem.label
+        if (n !== o && this.formItem) {
+          this.dispatch('NFormItem', 'on-form-change', n.value)
+        }
       } else {
         this.label = ''
       }
@@ -172,11 +212,6 @@ export default {
           this.labelPlaceholder = this.selectedItem.label
           this.label = ''
         }
-        this.$nextTick().then(
-          () => {
-            document.addEventListener('click', this.handleClickOutsideMenu)
-          }
-        )
       } else {
         this.$refs.singleSelectInput.blur()
         if (this.selectedItem) {
@@ -185,11 +220,6 @@ export default {
           this.label = ''
           this.labelPlaceholder = this.placeholder
         }
-        this.$nextTick().then(
-          () => {
-            document.removeEventListener('click', this.handleClickOutsideMenu)
-          }
-        )
       }
     }
   },
@@ -198,9 +228,6 @@ export default {
     if (this.selectedItem) {
       this.label = this.selectedItem.label
     }
-  },
-  beforeDestroy () {
-    document.removeEventListener('click', this.handleClickOutsideMenu)
   },
   methods: {
     /**
@@ -231,7 +258,7 @@ export default {
       return item.value === this.selectedValue
     },
     handleClickOutsideMenu (e) {
-      if (!this.$refs.select.contains(e.target)) {
+      if (!this.$refs.activator.contains(e.target) && !this.scrolling) {
         this.deactivate()
       }
     },
@@ -252,6 +279,14 @@ export default {
       this.$emit('input', item.value)
       this.emitChangeEvent(item, true)
       this.closeMenu()
+    },
+    handleMenuScrollStart () {
+      this.scrolling = true
+    },
+    handleMenuScrollEnd () {
+      window.setTimeout(() => {
+        this.scrolling = false
+      }, 0)
     }
   }
 }

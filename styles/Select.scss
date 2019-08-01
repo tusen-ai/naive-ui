@@ -253,98 +253,105 @@
   transform: translateZ(0);
   .n-select-menu__content {
     @include detachedContent;
-    margin-top: 4px;
-    .n-select-menu {
-      z-index: 0;
-      position: relative;
-      overflow-x: hidden;
-      overflow-y: auto;
-      border-radius: 9px;
-      background-color: rgba(75, 81, 106, 1);
-      box-shadow: 0px 2px 20px 0px rgba(0,0,0,0.16);
-      @include scrollbar;
-      .n-select-menu__item {
+    overflow: hidden;
+    border-radius: 6px;
+    .n-select-menu-wrapper {
+      overflow: hidden;
+      border-radius: 6px;
+      margin-top: 4px;
+      margin-bottom: 4px;
+      @include fade-in-scale-up-transition(select-menu);
+      .n-select-menu {
+        z-index: 0;
         position: relative;
-        padding: 0px 14px;
-        white-space: nowrap;
-        &.n-select-menu__item--selected {
-          color: #63E2B7FF;
-        }
-        &.n-select-menu__item--not-found {
-          color: rgba(255, 255, 255, .5);
-          text-align: center;
-        }
-      }
-      .n-select-menu__light-bar {
-        position: absolute;
-        width:100%;
-        background-color: rgba(96, 220, 178, 0.3);
-        top: 0;
-        left: 0;
-        transition: top .15s $default-cubic-bezier;
-      }
-      &.n-select-menu--small-size {
-        max-height: $small-height * 8;
-        .n-select-menu__item, .n-select-menu__light-bar {
-          height: $small-height;
-          line-height: $small-height;
-        }
-      }
-      &.n-select-menu--default-size, &.n-select-menu--medium-size {
-        max-height: $default-height * 8;
-        .n-select-menu__item, .n-select-menu__light-bar {
-          height: $default-height;
-          line-height: $default-height;
-        }
-      }
-      &.n-select-menu--large-size {
-        .n-select-menu__item, .n-select-menu__light-bar {
-          height: $large-height;
-          line-height: $large-height;
-        }
-        max-height: $large-height * 8;
-      }
-      &.n-select-menu--multiple {
-        .n-select-menu__item {
+        overflow: hidden;
+        border-radius: 6px;
+        background-color: rgba(75, 81, 106, 1);
+        box-shadow: 0px 2px 20px 0px rgba(0,0,0,0.16);
+        .n-select-menu__item-wrapper {
           position: relative;
-          transition: color .3s $default-cubic-bezier;
-          &::after {
-            content: '';
-            height: 6px;
-            width: 3px;
-            border-right: 1px solid #63E2B7FF;
-            border-bottom: 1px solid #63E2B7FF;
-            position: absolute;
-            right: 14px;
-            transform: rotate(45deg) scale(.5);
-            top: calc(50% - 4px);
-            opacity: 0;
-            transition: transform .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
-          }
-          &.n-select-menu__item--selected, &:active {
-            background: none;
-            &::after {
-              opacity: 1;
-              transform: rotate(45deg) scale(1);
-            }
-          }
-          &:active {
+          width: 100%;
+        }
+        .n-select-menu__item {
+          cursor: pointer;
+          position: relative;
+          padding: 0px 14px;
+          white-space: nowrap;
+          &.n-select-menu__item--selected {
             color: #63E2B7FF;
           }
+          &.n-select-menu__item--not-found {
+            color: rgba(255, 255, 255, .5);
+            text-align: center;
+          }
+        }
+        .n-select-menu__light-bar {
+          position: absolute;
+          width:100%;
+          background-color: rgba(96, 220, 178, 0.3);
+          top: 0;
+          left: 0;
+          transition: top .15s $default-cubic-bezier;
+        }
+        &.n-select-menu--small-size {
+          .n-scrollbar-container {
+            max-height: $small-height * 8;
+          }
+          .n-select-menu__item, .n-select-menu__light-bar {
+            height: $small-height;
+            line-height: $small-height;
+          }
+        }
+        &.n-select-menu--default-size, &.n-select-menu--medium-size {
+          .n-scrollbar-container {
+            max-height: $default-height * 8;
+          }
+          .n-select-menu__item, .n-select-menu__light-bar {
+            height: $default-height;
+            line-height: $default-height;
+          }
+        }
+        &.n-select-menu--large-size {
+          .n-select-menu__item, .n-select-menu__light-bar {
+            height: $large-height;
+            line-height: $large-height;
+          }
+          .n-scrollbar-container {
+            max-height: $large-height * 8;
+          }
+        }
+        &.n-select-menu--multiple {
+          .n-select-menu__item {
+            position: relative;
+            transition: color .3s $default-cubic-bezier;
+            &::after {
+              content: '';
+              height: 6px;
+              width: 3px;
+              border-right: 1px solid #63E2B7FF;
+              border-bottom: 1px solid #63E2B7FF;
+              position: absolute;
+              right: 14px;
+              transform: rotate(45deg) scale(.5);
+              top: calc(50% - 4px);
+              opacity: 0;
+              transition: transform .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
+            }
+            &.n-select-menu__item--selected, &:active {
+              background: none;
+              &::after {
+                opacity: 1;
+                transform: rotate(45deg) scale(1);
+              }
+            }
+            &:active {
+              color: #63E2B7FF;
+            }
+          }
         }
       }
     }
-    /** transition of menu */
-    .n-select-menu--transition-enter-active {
-      transition: opacity .3s $fast-in-cubic-bezier, transform .3s $fast-in-cubic-bezier;
-    }
-    .n-select-menu--transition-leave-active {
-      transition: opacity .3s $slow-out-cubic-bezier, transform .3s $slow-out-cubic-bezier;
-    }
-    .n-select-menu--transition-enter, .n-select-menu--transition-leave-to {
-      opacity: 0;
-      transform: translateY(4px);
-    }
+    
     /** transition of menu light bar */
     .n-select-menu__light-bar--transition-enter-active {
       transition: opacity .15s $fast-in-cubic-bezier, top .3s $default-cubic-bezier!important;

@@ -1,18 +1,15 @@
 <template>
-  <div
-    ref="tableWrapper"
-    class="n-advance-tabel__wrapper"
-  >
+  <div ref="tableWrapper"
+class="n-advance-tabel__wrapper">
     <div class="n-advance-table__operation">
       <section class="n-advance-table__operation__bacth" />
       <div class="n-advance-table__operation__custom">
         <slot name="table-operation" />
       </div>
-      <div
-        v-if="search"
-        class="n-advance-table__operation__search"
-      >
+      <div v-if="search"
+class="n-advance-table__operation__search">
         <searchInput
+          ref="search"
           style=" margin-bottom: 18px;"
           :options="search"
           @on-change="handleSearch"
@@ -30,21 +27,17 @@
           :key="i"
           :style="computeCustomWidthStl(column)"
         >
-        <col
-          v-if="scrollBarWidth"
-          :width="scrollBarWidth"
-        >
+        <col v-if="scrollBarWidth"
+:width="scrollBarWidth" >
       </colgroup>
       <n-thead>
         <n-tr>
-          <n-th
-            v-for="(column, i) in columns"
-            :key="column.key"
-          >
+          <n-th v-for="(column, i) in columns"
+:key="column.key">
             {{ column.title }}
             <SortIcon
               v-if="column.sortable"
-              v-model="sortIndexs[i]"
+              v-model="sortIndexs[column.key || i]"
               @onSortTypeChange="
                 type =>
                   onSortTypeChange({
@@ -60,11 +53,16 @@
             <!-- 优先自定义 -->
             {{ column.filterDropdown && column.filterDropdown() }}
             <!-- 否则默认渲染 -->
-            <sortDropDown
+            <filterDropDown
               v-if="column.filterItems && !column.filterDropdown"
+              :ref="'filterDropDown_' + (column.key || i)"
+              :filter-fn="column.onFilter"
+              :filter-key="column.key || i"
               :filter-items="column.filterItems"
               :filter-multiple="column.filterMultiple || false"
-              @on-filter="value => onFilter(value, column.onFilter)"
+              @on-filter="
+                ({ value, key, filterFn }) => onFilter(value, key, filterFn)
+              "
             />
           </n-th>
           <span
@@ -83,7 +81,7 @@
       style="border-top-left-radius:0;border-top-right-radius:0;"
       @scroll.native="onBodyScrolll"
     >
-      <colgroup>
+      <colgroup v-if="showingData.length !== 0">
         <col
           v-for="(column, i) in columns"
           :key="i"
@@ -91,14 +89,10 @@
         >
       </colgroup>
       <n-tbody>
-        <n-tr
-          v-for="(rowData, i) in showingData"
-          :key="i"
-        >
-          <n-td
-            v-for="column in columns"
-            :key="column.key"
-          >
+        <n-tr v-for="(rowData, i) in showingData"
+:key="i">
+          <n-td v-for="column in columns"
+:key="column.key">
             <row
               :index="i"
               :row="rowData"
@@ -107,10 +101,8 @@
             />
           </n-td>
         </n-tr>
-        <div
-          v-if="showingData.length === 0"
-          class="n-no-data-tip"
-        >
+        <div v-if="showingData.length === 0"
+class="n-no-data-tip">
           No data
         </div>
       </n-tbody>
@@ -120,10 +112,8 @@
       v-if="pagination !== false && showingData.length"
       class="n-advanced-table__pagination"
     >
-      <n-pagination
-        v-model="currentPage"
-        :page-count="pageCount"
-      />
+      <n-pagination v-model="currentPage"
+:page-count="pageCount" />
     </div>
   </div>
 </template>
@@ -131,7 +121,7 @@
 <script>
 import row from '../row/index.js'
 import SortIcon from '../sortIcon'
-import sortDropDown from '../sortDropDown'
+import filterDropDown from '../filterDropDown'
 import searchInput from '../searchInput'
 
 export default {
@@ -139,7 +129,7 @@ export default {
   components: {
     row,
     SortIcon,
-    sortDropDown,
+    filterDropDown,
     searchInput
   },
   props: {
@@ -176,6 +166,10 @@ export default {
       type: Function,
       default: null
     },
+    minHeight: {
+      type: [Number, String],
+      default: 'unset'
+    },
     maxHeight: {
       type: [Number, String],
       default: 'auto'
@@ -198,9 +192,13 @@ export default {
     }
   },
   data () {
-    const sortIndexs = new Array(this.columns.length).fill(0).map((item, idx) => {
-      return this.columns[idx].order ? this.columns[idx].order : 0
+    const sortIndexs = {}
+    this.columns.forEach((column, idx) => {
+      sortIndexs[column.key || idx] = column.order ? column.order : 0
     })
+    // const sortIndexs = new Array(this.columns.length).fill(0).map((item, idx) => {
+    //   return this.columns[idx].order ? this.columns[idx].order : 0
+    // })
     console.log(sortIndexs)
     return {
       copyData: this.data.slice(0),
@@ -267,6 +265,12 @@ export default {
             ? this.maxWidth + 'px'
             : this.maxWidth
       }
+      if (this.minHeight !== 'unset') {
+        stl.minHeight =
+          typeof this.minHeight === 'number'
+            ? this.minHeight + 'px'
+            : this.minHeight
+      }
       return stl
     },
     colGroup () {
@@ -313,24 +317,32 @@ export default {
       if (this.pagination.custom === true) {
         this.useRemoteChange()
       }
+      console.log('currentPage')
+
       this.$emit('on-page-change', this.paginationer)
     },
     data () {
       this.copyData = this.data.slice(0)
-      this.searchData = []
+      this.searchData = this.computeShowingData()
+      this.searchDataNoSort = null
     },
     currentSearchColumn () {
       this.searchData = this.computeShowingData()
-      // because after search ,length maybe change , so need to reset current page
-      this.currentPage = 1
+      console.log('currentSearchColumn')
     },
     currentSortColumn () {
       this.searchData = this.computeShowingData()
+      console.log('currentSortColumn')
     },
-    currentFilterColumn () {
-      this.searchData = this.computeShowingData()
-      // because after filter length maybe change , so need to reset current page
-      this.currentPage = 1
+    currentFilterColumn: {
+      handler () {
+        this.searchData = this.computeShowingData()
+        console.log('currentFilterColumn')
+
+        // because after filter length maybe change , so need to reset current page
+        this.currentPage = 1
+      },
+      deep: true
     }
   },
 
@@ -349,6 +361,24 @@ export default {
     // window.removeEventListener('resize', this.init)
   },
   methods: {
+    /**
+     * {key:[value,value1],key1:[v1,v2]}
+     * {key:value}
+     * number
+     * {key:value}
+     */
+    setParams ({ filter, sorter, page, searcher }) {
+      if (sorter) {
+        this.sortIndexs[sorter.key] = sorter.type
+      }
+      filter && Object.keys(filter).forEach((key) => {
+        const ref = this.$refs['filterDropDown_' + key][0]
+        ref.setCheckedIndexs(filter[key])
+      })
+      searcher && this.$refs.search.setSearch(searcher)
+      if (page) { this.currentPage = page }
+      // TODO:测试功能 有远程 无远程 ，半有半无
+    },
     onBodyScrolll (event) {
       this.$refs.header.$el.scrollLeft = event.target.scrollLeft
       event.stopPropagation()
@@ -375,41 +405,49 @@ export default {
     },
     handleSearch ({ key, word }) {
       console.log(key, word)
+
       this.currentSearchColumn = {
         key,
         word
       }
       if (word.length === 0) {
         this.currentSearchColumn = null
+      } else {
+        // because after search ,length maybe change , so need to reset current page
+        this.currentPage = 1
       }
       if (this.search.onSearch === 'custom') {
         this.useRemoteChange()
       }
     },
     useRemoteChange () {
-      this.onChange({
-        filter: this.currentFilterColumn,
-        sorter: this.currentSortColumn,
-        pagination: this.paginationer,
-        search: this.currentSearchColumn
-      })
+      clearTimeout(this.remoteTimter)
+      this.remoteTimter = setTimeout(() => {
+        this.onChange({
+          filter: this.currentFilterColumn,
+          sorter: this.currentSortColumn,
+          pagination: this.paginationer,
+          search: this.currentSearchColumn
+        })
+      }, 300)
     },
     computeShowingData () {
       let data = this.copyData
       // compute filter
       if (this.currentFilterColumn) {
-        const { value, filterFn } = this.currentFilterColumn
-        if (value === null) {
-          this.filterStatus = false
+        // const { filterFn, value } = this.operatingfilter
+
+        if (Object.keys(this.currentFilterColumn).length === 0) {
           this.searchData = []
-        } else {
-          this.filterStatus = true
         }
-        if (value && filterFn !== 'custom') {
-          data = data.filter(item => {
-            return filterFn(value, item)
-          })
-        }
+        Object.keys(this.currentFilterColumn).forEach((key) => {
+          const { value, filterFn } = this.currentFilterColumn[key]
+          if (value && filterFn !== 'custom') {
+            data = data.filter(item => {
+              return filterFn(value, item)
+            })
+          }
+        })
       }
       // compute search
       if (this.currentSearchColumn && this.search.onSearch !== 'custom') {
@@ -430,10 +468,10 @@ export default {
     },
     computeSortData (data) {
       data = data.slice(0)
-      let { i, sortable, key, type, column } = this.currentSortColumn
+      let { sortable, key, type, column } = this.currentSortColumn
       // use remote sort
       if (sortable === true) {
-        if (!this.searchDataNoSort) {
+        if (!this.searchDataNoSort && this.data.length !== 0) {
           this.searchDataNoSort = data.slice(0)
         }
         if (type === 0) {
@@ -458,23 +496,32 @@ export default {
         }
       }
       if (type !== 0) {
-        this.sortIndexs = this.sortIndexs.map((item, idx) => {
-          if (idx !== i) {
-            return 0
-          } else {
-            return this.sortIndexs[idx]
+        Object.keys(this.sortIndexs).forEach((key) => {
+          if (key !== column.key) {
+            this.sortIndexs[key] = 0
           }
         })
+        // this.sortIndexs.map((item, idx) => {
+        //   if (idx !== i) {
+        //     return 0
+        //   } else {
+        //     return this.sortIndexs[idx]
+        //   }
+        // })
       }
       return data
     },
-    onFilter (value, filterFn) {
-      this.currentFilterColumn = {
-        value,
-        filterFn
+    onFilter (value, key, filterFn) {
+      if (this.currentFilterColumn === null) {
+        this.currentFilterColumn = {}
       }
+      this.$set(this.currentFilterColumn, key, { value, filterFn })
+      // this.currentFilterColumn[key] = value
       if (value === null) {
-        this.currentFilterColumn = null
+        delete this.currentFilterColumn[key]
+        if (Object.keys(this.currentFilterColumn).length === 0) {
+          this.currentFilterColumn = null
+        }
       }
       if (filterFn === 'custom') {
         // remote filter

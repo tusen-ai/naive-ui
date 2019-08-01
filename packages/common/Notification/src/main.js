@@ -8,7 +8,7 @@ function attachNotificationContainer () {
     notificationContainer = document.createElement('div')
     notificationContainer.classList.add('n-notification', 'n-notification__container')
     notificationContainer.style = `
-          z-index: 300;
+          z-index: 4000;
           position: fixed;
           left: 0;
           right: 15px;

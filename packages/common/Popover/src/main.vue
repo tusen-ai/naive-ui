@@ -50,6 +50,10 @@ export default {
     raw: {
       type: Boolean,
       default: false
+    },
+    width: {
+      type: Number,
+      default: null
     }
   },
   data () {
