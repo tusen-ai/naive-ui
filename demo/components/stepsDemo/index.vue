@@ -5,7 +5,7 @@
   >
     <div class="n-doc-header">
       <n-gradient-text :font-size="20">
-        scaffold
+        NSteps / n-steps
       </n-gradient-text>
     </div>
     <div class="n-doc-body">

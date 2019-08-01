@@ -12,7 +12,19 @@ a >>> b 被编译成了 a > > > b
 popover 的 hover 有问题，哎...一大堆东西闪来闪去就可能 mouseleave 没触发就一直留在那了
 ## 2019.7.31 Margin 没有撑开元素
 overflow: hidden 可以解决，这是 BFC 的问题
-
+## 2019.8.1
+width: fit-content, min-content, max-content, intrinsic, extrinsic
+flex, flex-grow
+```
+render (h) {
+    console.log(this.$props)
+    return h('div', {
+      staticClass: 'n-steps'
+    }, mapSteps({ ...this.$props }, this.$slots.default))
+  }
+```
+为什么 $props 不一样？解构赋值做了什么
+document.querySelector('*[n-id=888d3] .simulate-transparent-text') 不合法？
 ## TODO
 issue fix, add delay prop
 add trigger to tooltip
