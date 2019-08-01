@@ -134,6 +134,7 @@ import toggleable from '../../../mixins/toggleable'
 import zindexable from '../../../mixins/zindexable'
 import Scrollbar from '../../Scrollbar'
 import clickoutside from '../../../directives/clickoutside'
+import Emitter from '../../../mixins/emitter'
 
 export default {
   name: 'NMultipleSelect',
@@ -144,10 +145,15 @@ export default {
   directives: {
     clickoutside
   },
-  mixins: [detachable, toggleable, placeable, zindexable],
+  mixins: [detachable, toggleable, placeable, zindexable, Emitter],
   model: {
     prop: 'selectedValue',
     event: 'input'
+  },
+  inject: {
+    formItem: {
+      default: null
+    }
   },
   props: {
     items: {
@@ -226,6 +232,12 @@ export default {
         this.label = this.selectedItem.label
       } else {
         this.label = ''
+      }
+    },
+    selectedItems (n) {
+      if (this.formItem) {
+        let vals = n.map(i => i.value)
+        this.dispatch('NFormItem', 'on-form-change', vals)
       }
     }
   },
