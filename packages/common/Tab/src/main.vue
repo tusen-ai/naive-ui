@@ -3,16 +3,25 @@
     class="n-tab"
   >
     <div
-      class="n-tab--label"
+      :class="addable ? 'n-tab--label_addable n-tab--label' : 'n-tab--label'"
     >
       <div
         v-for="(label, i) in labels"
         :key="i"
-        class="n-tab--label-item"
+        :class="getClass(i)"
         @click="updateActive($event, i)"
       >
-        {{ label }}
+        <span class="n-tab--label-content">{{ label }}
+          <span class="n-tab--label-delete"> + </span>
+        </span>
       </div>
+      <n-button
+        size="small"
+        class="n-tab--label-add"
+        @click="addPanelItem"
+      >
+        +
+      </n-button>
     </div>
     <div
       ref="slot"
@@ -23,6 +32,8 @@
   </div>
 </template>
 <script>
+import Emitter from '../../../mixins/emitter'
+
 export default {
   name: 'NTab',
   provide () {
@@ -30,26 +41,42 @@ export default {
       NTab: this
     }
   },
+  mixins: [ Emitter ],
   props: {
     name: {
       type: String || Number,
       default: undefined
+    },
+    closable: {
+      type: Boolean,
+      default: undefined
+    },
+    type: {
+      type: String,
+      default: 'normal' // card board?
+    },
+    addable: {
+      type: Boolean,
+      default: false
+    },
+    addPanel: {
+      type: Function,
+      default: () => {}
     }
   },
   data () {
     return {
       labels: [],
       active: null, // number
-      offset: null
+      offset: null,
+      prefix: 'n-tab--label'
     }
+  },
+  computed: {
   },
   created () {
     this.updateOrder()
     this.initOffset()
-    // this.initActive()
-  },
-  beforeMount () {
-    console.log('slot', this.$slots)
   },
   mounted () {
     if (this.active === null) {
@@ -59,35 +86,66 @@ export default {
     }
   },
   methods: {
+    getClass (i) {
+      let panel = this.getTabPanel(i) || {}
+      let cName = this.prefix + '-item '
+      cName += (panel.disabled ? this.prefix + '-item_disabled ' : '')
+      cName += (this.active === i ? this.prefix + '-item_active ' : '')
+      cName += this.type === 'card' ? this.prefix + '-item_card ' : ''
+      cName += this.type === 'card' && (this.closable || panel.closable) ? this.prefix + '-item_close ' : ''
+      // cName += this.addable ? this.prefix + '-item_addable ' : ''
+
+      return cName
+    },
     updateLabels () {
       let labels = []
-      this.$children.forEach((i, order) => {
+      let j = 0
+      this.$children.forEach((i) => {
         if (i.$options.name === 'NTabPanel') {
           labels.push(i.label || '')
-          i._NaiveTabOrder = order
+          i._NaiveTabOrder = j++
         }
       })
       this.$set(this, 'labels', labels)
     },
     initActive () {
-      // let res = this.$children.findIndex(i => { return i.$options.name === 'NTabPanel' && i.active })
-      // let order = res > -1 ? res : 0
-      // this.$children[order].updateIsShow(true)
-      // this.active = order
       this.active = this.labels.length - 1
     },
     updateActive (e, i) {
-      if (e.target.className === 'n-tab--label-item' && i !== this.active) {
-        this.$children[this.active].updateIsShow(false)
+      let eName = e.target.className
+      let eParentName = e.target.parentElement.className
+      let isLabel = eName.indexOf('n-tab--label-item') > -1 || eParentName.indexOf('n-tab--label-item') > -1
+      if (eName === 'n-tab--label-delete') {
+        // steps while deleting, need to set display none to label and the tab panel and then init the display
+        this.labels.splice(i, 1)
+        this.broadcast('NTabPanel', 'display-none', i)
+        this.updateOrder(false)
+        if (this.active === i) {
+          this.active = 0
+          this.getTabPanel(this.active).updateIsShow(true)
+        } else {
+          this.active = i > this.active ? this.active : this.active - 1
+        }
+        this.offset = '-' + this.active * 100 + '%'
+      } else if (isLabel && i !== this.active) {
+        this.getTabPanel(this.active).updateIsShow(false)
         this.active = i
-        this.$children[i].updateIsShow(true)
+        let temp = this.getTabPanel(i)
+        console.log(temp, this.$children, i)
+        temp.updateIsShow(true)
         this.offset = '-' + this.active * 100 + '%'
       }
     },
-    updateOrder () {
+    updateOrder (init = true) {
       // method duplicate with updateLabels
-      this.$slots.default.forEach((i, order) => {
-        i._NaiveTabOrder = order
+      let j = 0
+      let arr = init ? this.$slots.default : this.$children
+      arr.forEach((i) => {
+        if (init || i.unDelete) {
+          i._NaiveTabOrder = j++
+        } else {
+          delete i._NaiveTabOrder
+        }
       })
     },
     initOffset () {
@@ -103,6 +161,17 @@ export default {
       })
       this.active = order > -1 ? order : 0
       this.offset = '-' + this.active * 100 + '%'
+      console.log('active', this.active)
+    },
+    getTabPanel (i) {
+      if (i === undefined) return
+      return this.$children.find(c => {
+        return c._NaiveTabOrder === i
+      })
+    },
+    addPanelItem () {
+      this.addPanel()
+      this.updateOrder(false)
     }
   }
 }

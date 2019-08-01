@@ -14,7 +14,12 @@
           Basic Usage
         </div>
         <div class="n-doc-section__view">
-          <n-tab>
+          <n-tab
+            type="card"
+            closable
+            addable
+            :add-panel="addPanel"
+          >
             <n-tab-panel label="form">
               <n-form
                 inline
@@ -44,8 +49,24 @@
                 </template>
               </n-advance-table>
             </n-tab-panel>
-            <n-tab-panel label="input">
+            <n-tab-panel
+              disabled
+              label="input"
+            >
               haha: <n-input />
+            </n-tab-panel>
+            <n-tab-panel label="icon">
+              lala: <n-icon />
+            </n-tab-panel>
+            <n-tab-panel label="button">
+              hehe: <n-button />
+            </n-tab-panel>
+            <n-tab-panel
+              v-for="(item, i) in panels"
+              :key="i"
+              :label="item.label"
+            >
+              {{ item.content }}
             </n-tab-panel>
           </n-tab>
         </div>
@@ -68,6 +89,7 @@ export default {
       }
     })
     return {
+      panels: [],
       data: d,
       columns0: [
         {
@@ -111,7 +133,14 @@ export default {
           }
         }]
     }
+  },
+  methods: {
+    addPanel () {
+      this.panels.push({
+        label: this.panels.length,
+        content: 'i am number' + this.panels.length
+      })
+    }
   }
-
 }
 </script>

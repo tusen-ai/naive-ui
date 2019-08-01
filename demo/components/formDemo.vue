@@ -300,6 +300,17 @@
               />
             </n-form-item>
             <n-form-item
+              prop="mutiSelect.0"
+              label="multi-select"
+            >
+              <n-select
+                v-model="validateForm.mutiSelect[0]"
+                multiple
+                placeholder="Please Select Type"
+                :items="items"
+              />
+            </n-form-item>
+            <n-form-item
               label="Switch"
               prop="switch"
             >
@@ -701,6 +712,10 @@ export default {
         callback()
       }
     }
+    let arrayValidate = (rule, value, callback) => {
+      console.log('arrya validate value', value)
+      debugger
+    }
     return {
       form: {
         name: '',
@@ -738,6 +753,9 @@ export default {
             select: 'Public'
           }
         },
+        mutiSelect: [
+          []
+        ],
         datepicker: 0,
         switch: false,
         radio: ''
@@ -746,6 +764,9 @@ export default {
         input: [
           { required: true, message: 'input cannot be empty', trigger: 'blur' }
         ],
+        'mutiSelect.0': [{
+          validator: arrayValidate, trigger: 'change'
+        }],
         'muti.deep.select': [
           {
             required: true,
@@ -890,7 +911,6 @@ export default {
           console.log('unpass', e)
         })
     },
-
     formReset (ref) {
       this.$refs[ref].resetForm()
     },

@@ -1,5 +1,7 @@
 <template>
   <div
+    v-if="unDelete"
+    ref="tab-panel"
     :class="cls"
     :style="style"
   >
@@ -12,7 +14,7 @@ export default {
   inject: [ 'NTab' ],
   props: {
     label: {
-      type: String,
+      type: [String, Number],
       default: undefined
     },
     name: {
@@ -22,10 +24,19 @@ export default {
     active: {
       type: Boolean,
       default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    closable: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
+      unDelete: true,
       isShow: false,
       style: {}
     }
@@ -42,7 +53,7 @@ export default {
     offset: {
       handler (n) {
         this.setTransfer(n)
-        console.log('zhixing', n)
+        this.$forceUpdate()
       },
       immediate: true
     }
@@ -52,16 +63,28 @@ export default {
     if (this._NaiveTabOrder === this.NTab.active) {
       this.updateIsShow(true)
     }
+    this.$on('display-none', this.setDisplayNone)
+  },
+  beforeDestroy () {
+    console.log('before destory call')
+    this.$off('display-none', this.setDisplayNone)
   },
   methods: {
     updateIsShow (flag) {
       this.isShow = flag
+      this.$forceUpdate()
       // window.getComputedStyle(this.NTab.refs['slot'], null).getPropertyValue('width')
       // this.$refs['panel'].classList.toggle('n-tab-panel_active')
       // 这里应该是根据切换的方向(左右) 来设置
     },
     setTransfer (per) {
       this.style.transform = 'translateX(' + per + ')'
+    },
+    setDisplayNone (i) {
+      if (i === this._NaiveTabOrder) {
+        // this.$set(this.style, 'display', 'none')
+        this.unDelete = false
+      }
     }
   }
 }
