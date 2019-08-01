@@ -31,6 +31,9 @@ export default {
       const confirmInstance = this.$NModal.confirm({
         title: 'Confirm',
         content: 'Are u sure to ...?',
+        okText: 'Yes', // 自定义ok按钮文字 error和success也可以使用
+        cancelText: 'No', // 自定义取消按钮文字
+
         onOk: () => {
           console.log('click on ok', confirmInstance)
           this.$NMessage.info('will be ok in 3 seconds')

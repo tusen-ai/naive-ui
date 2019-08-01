@@ -8,6 +8,12 @@
       <!-- <slot name="title"> -->
       <div class="n-confirm__title">
         <span class="n-confirm__title__text">
+          <n-icon
+            class="n-confirm__content__icon"
+            :type="iconType.type"
+            size="28"
+            :color="iconType.color"
+          />
           {{ title }}
         </span>
 
@@ -21,12 +27,6 @@
       <!-- </slot> -->
       <!-- <slot> -->
       <div class="n-confirm__content">
-        <n-icon
-          class="n-confirm__content__icon"
-          :type="iconType.type"
-          size="28"
-          :color="iconType.color"
-        />
         <div
           class="n-confirm__content__text"
           v-html="content"
@@ -53,7 +53,7 @@
           auto-text-color
           @click="handleOk"
         >
-          {{ loading === true ? "loading" : okText }}
+          {{ loading === true ? "Loading" : okText }}
         </n-button>
       </div>
       <!-- </slot> -->
