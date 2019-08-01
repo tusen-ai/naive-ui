@@ -3,10 +3,16 @@
     <div><slot name="header" /></div>
     <div
       class="n-nimbus-service-layout__body"
-      :class="{ 'n-nimbus-service-layout__body--collapsed': isCollapsed, 'n-nimbus-service-layout__body--active': !isCollapsed, 'n-nimbus-service-layout__body--padded': paddingBody }"
+      :class="{ 'n-nimbus-service-layout__body--collapsed': isCollapsed, 'n-nimbus-service-layout__body--active': !isCollapsed }"
     >
       <scrollbar>
-        <slot />
+        <div
+          :style="{
+            padding: paddingBody ? '21px 48px' : 0
+          }"
+        >
+          <slot />
+        </div>
       </scrollbar>
     </div>
     <div

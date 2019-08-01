@@ -1,0 +1,115 @@
+@import './mixins/mixins.scss';
+@import './theme/default.scss';
+
+@include b(steps) {
+  width: 100%;
+  display: flex;
+}
+
+@include b(step) {
+  display: flex;
+  flex: 1;
+  .n-step__splitor {
+    transition: color .2s $default-cubic-bezier, background-color .2s $default-cubic-bezier;
+    height: 1px;
+    flex: 1;
+    align-self: flex-start;
+    margin-top: 10px;
+    margin-left: 11px;
+    margin-right: 11px;
+    background-color: rgba(255,255,255,0.3);
+  }
+  .n-step__splitor.n-step__splitor--left {
+    display: none;
+  }
+  &:last-child {
+    flex: none;
+    .n-step__splitor.n-step__splitor--right {
+      display: none;
+    }
+    .n-step-content {
+      .n-step-content__title {
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+  &.n-step--finished {
+    .n-step__splitor {
+      background-color: rgba(99,226,183,1);
+    }
+    .n-step-content {
+      .n-step-content__title {
+        color: rgba(99,226,183,1);
+      }
+      .n-step-content__description {
+        color: rgba(99,226,183,1);
+      }
+    }
+    .n-step-indicator {
+      box-shadow: 0 0 0 1px rgba(99,226,183,1);
+      .n-step-indicator__index {
+        color: rgba(99,226,183,1);
+      }
+    }
+  }
+  &.n-step--active {
+    .n-step__splitor {
+      background-color: rgba(99,226,183,1);
+    }
+    .n-step-content {
+      .n-step-content__title {
+        color: rgba(99,226,183,1);
+      }
+      .n-step-content__description {
+        color: rgba(99,226,183,1);
+      }
+    }
+    .n-step-indicator {
+      background-color: rgba(99,226,183,1);
+      box-shadow: 0 0 0 1px rgba(99,226,183,1);
+      .n-step-indicator__index {
+        color: rgba(23, 29, 51, 1);
+      }
+    }
+  }
+}
+
+@include b(step-content) {
+  flex: 1;
+  .n-step-content__title {
+    transition: color .2s $default-cubic-bezier, background-color .2s $default-cubic-bezier;
+    position: relative;
+    display: flex;
+    color: rgba(255,255,255,0.3);
+    font-weight: bold;
+    margin-left: 9px;
+    .n-step-content__title-inner {
+      white-space: nowrap;
+      flex: 0;
+    }
+  }
+  .n-step-content__description {
+    transition: color .2s $default-cubic-bezier, background-color .2s $default-cubic-bezier;
+    color: rgba(255,255,255,0.3);
+    margin-top: 12px;
+    margin-left: 9px;
+  }
+}
+
+@include b(step-indicator) {
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color .2s $default-cubic-bezier, background-color .2s $default-cubic-bezier;
+  .n-step-indicator__index {
+    transition: inherit;
+    color: rgba(255,255,255,0.3);
+    font-size: 13px;
+  }
+}

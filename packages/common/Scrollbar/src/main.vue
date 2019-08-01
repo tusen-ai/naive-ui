@@ -13,9 +13,6 @@
       <div
         ref="scrollContent"
         class="n-scrollbar-content"
-        :class="{
-          'n-scrollbar-content--fit-content-width': fitContentWidth
-        }"
       >
         <slot />
       </div>
@@ -74,10 +71,6 @@ export default {
     duration: {
       type: Number,
       default: 0
-    },
-    fitContentWidth: {
-      type: Boolean,
-      default: false
     }
   },
   data () {

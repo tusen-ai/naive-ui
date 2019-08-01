@@ -29,6 +29,8 @@ import nimbusIconDemo from './components/nimbusIconDemo'
 import radioDemo from './components/radioDemo'
 import formDemo from './components/formDemo'
 import timePickerDemo from './components/timePickerDemo'
+import confirmDemo from './components/confirmDemo'
+
 import scrollbarDebug from './debugComponents/scrollbarDebug'
 import badgeDemo from './components/badgeDemo'
 import stepsDemo from './components/stepsDemo'
@@ -92,6 +94,8 @@ const routes = [
       { path: '/n-radio', component: radioDemo },
       { path: '/n-form', component: formDemo },
       { path: '/n-time-picker', component: timePickerDemo },
+      { path: '/n-confirm', component: confirmDemo },
+
       { path: '/n-router-debug', component: routerDebug },
       { path: '/n-modal-debug', component: modalDebug },
       { path: '/n-scrollbar-debug', component: scrollbarDebug },

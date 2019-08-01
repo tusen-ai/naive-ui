@@ -9,7 +9,7 @@
     >
       <!--EXAMPLE_START-->
       <div style="width: 400px; height: 300px;">
-        <n-scrollbar fit-content-width>
+        <n-scrollbar>
           <div style="background: linear-gradient(red, blue); width: 800px; height: 500px;">
             666
           </div>
@@ -23,7 +23,7 @@
         </n-scrollbar>
       </div>
       <div style="width: 400px; height: 300px;">
-        <n-scrollbar fit-content-width>
+        <n-scrollbar>
           <div style="background: linear-gradient(red, blue); width: 800px; height: 300px;">
             666
           </div>
