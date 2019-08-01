@@ -3,7 +3,7 @@
     <n-nimbus-service-layout
       icon="md-contacts"
       :name="`NAIVE UI (${version})`"
-      :padding-body="false"
+      :padding-body="true"
       :items="items"
     >
       <router-view />
