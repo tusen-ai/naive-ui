@@ -33,6 +33,7 @@ import NimbusFormCard from './packages/nimbus/FormCard'
 import NimbusConfirmCard from './packages/nimbus/ConfirmCard'
 import NimbusIcon from './packages/nimbus/Icon'
 import Scrollbar from './packages/common/Scrollbar'
+import Steps from './packages/common/Steps'
 
 function install (Vue) {
   Card.install(Vue)
@@ -70,6 +71,7 @@ function install (Vue) {
   Form.install(Vue)
   TimePicker.install(Vue)
   Scrollbar.install(Vue)
+  Steps.install(Vue)
 }
 
 export default {
