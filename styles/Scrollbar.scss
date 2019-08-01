@@ -52,11 +52,11 @@
 }
 
 .n-scrollbar-content {
-  width: max-content;
+  width: fit-content;
   overflow: visible;
   min-width: 100%;
-  width: intrinsic;           /* Safari/WebKit uses a non-standard name */
-  width: -moz-max-content;    /* Firefox/Gecko */
-  width: -webkit-max-content; /* Chrome */
-  width: max-content;
+  /* stylelint-disable */
+  width: -moz-fit-content;    /* Firefox/Gecko */
+  width: -webkit-fit-content; /* Chrome */
+  /* stylelint-enable */
 }
