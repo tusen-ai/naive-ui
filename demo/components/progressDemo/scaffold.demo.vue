@@ -8,7 +8,10 @@
       style="flex-wrap: nowrap;"
     >
       <!--EXAMPLE_START-->
-      Write some demo here
+      <n-progress
+        type="circle"
+        :percentage="60"
+      />
       <!--EXAMPLE_END-->
     </div>
     <pre class="n-doc-section__inspect">Inspect some value here</pre>

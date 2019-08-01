@@ -18,6 +18,7 @@ import Input from './packages/common/Input'
 import Message from './packages/common/Message'
 import Notification from './packages/common/Notification'
 import Pagination from './packages/common/Pagination'
+import Progress from './packages/common/Progress'
 import Tooltip from './packages/common/Tooltip'
 import Popup from './packages/common/Popover'
 import Alert from './packages/common/Alert'
@@ -76,6 +77,7 @@ function install (Vue) {
   Scrollbar.install(Vue)
   Steps.install(Vue)
   Confirm.install(Vue)
+  Progress.install(Vue)
 }
 
 export default {
