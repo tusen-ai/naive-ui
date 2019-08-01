@@ -288,7 +288,7 @@
         .n-select-menu__light-bar {
           position: absolute;
           width:100%;
-          background-color: rgba(96, 220, 178, 0.3);
+          background-color: $select-item-background-color--active;
           top: 0;
           left: 0;
           transition: top .15s $default-cubic-bezier;
