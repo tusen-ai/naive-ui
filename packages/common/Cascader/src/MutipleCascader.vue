@@ -52,7 +52,6 @@
     </div>
 
     <div
-      v-if="active"
       ref="contentWrapper"
       class="n-cascader-menu__content-wrapper"
     >
@@ -65,6 +64,7 @@
         >
           <transition name="n-select-menu--transition">
             <CasPanel
+              v-if="active"
               :data="items"
               :selected-items="selectedItems"
               :selected="selected"
@@ -85,7 +85,7 @@ import toggleable from '../../../mixins/toggleable'
 import CasPanel from './CasPanel'
 
 export default {
-  name: 'Cascader',
+  name: 'MutipleCascader',
   components: {
     NIcon,
     CasPanel

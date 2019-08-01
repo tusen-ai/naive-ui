@@ -2,89 +2,90 @@
 @import './mixins/mixins.scss';
 @import './theme/default.scss';
 
-@include b(cascader) {
-  font-family: $default-font-family;
-  .n-cascader-menu__content-wrapper {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 0;
-    height: 0;
-    overflow: visible;
-    transform: translateZ(0);
-    .n-cascader-menu__item {
-      height: $default-height;
-      line-height: $default-height;
-      min-width: 100px;
+.n-cascader-menu__content-wrapper {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  overflow: visible;
+  transform: translateZ(0);
+  .n-cascader-menu__item {
+    height: $default-height;
+    line-height: $default-height;
+    min-width: 100px;
+    cursor: pointer;
+    &:hover {
+      background: $select-item-background-color--active; 
     }
-    .n-cascader-menu__item-next::after {
-      content: "\f3d1";
-      font-family: "n-Ionicons";
-      position: absolute;
-      right: 8px;
-    }
-    .n-cascader-menu__item-next--selected::after {
-      content: "\f3d1"; 
-      font-family: "n-Ionicons";
-      position: absolute;
-      right: 10px;
-      color: red;
-    }
-    .n-cascader-menu__item--selected::after {
-      content: "\f3ff"; 
-      font-family: "n-Ionicons";
-      position: absolute;
-      right: 8px;
-      color: #63E2B7FF;
-      font-size: 18px;
-    }
-    .n-cascader-menu__content {
-      margin-top: 4px;
-      .n-cascader-menu {
-        display: inline-block;
-        height: 185px;
-        overflow-y: auto;
-        z-index: 0;
+  }
+  .n-cascader-menu__item-next::after {
+    content: "\f3d1";
+    font-family: "n-Ionicons";
+    position: absolute;
+    right: 8px;
+  }
+  .n-cascader-menu__item-next--selected::after {
+    content: "\f3d1"; 
+    font-family: "n-Ionicons";
+    position: absolute;
+    right: 10px;
+    color: red;
+  }
+  .n-cascader-menu__item--selected::after {
+    content: "\f3ff"; 
+    font-family: "n-Ionicons";
+    position: absolute;
+    right: 8px;
+    color: #63E2B7FF;
+    font-size: 18px;
+  }
+  .n-cascader-menu__content {
+    margin-top: 4px;
+    .n-cascader-menu {
+      display: inline-block;
+      height: 185px;
+      overflow-y: auto;
+      z-index: 0;
+      position: relative;
+      border-radius: 9px;
+      background-color: #4b516a;
+      box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.16);
+      .n-cascader-menu__item {
+        display: flex;
+        padding: 0px 20px;
+        white-space: nowrap;
         position: relative;
-        border-radius: 9px;
-        background-color: #4b516a;
-        box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.16);
-        .n-cascader-menu__item {
-          display: flex;
-          padding: 0px 20px;
-          white-space: nowrap;
-          position: relative;
-          transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          span {
-            display: flex
-          }
-          .n-cascader-menu__item-select {
-            margin-right: 8px;
-          }
-          .n-cascader-menu_item-icon {
-            margin-left: auto;
-            align-items: center;
-          }
+        transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        span {
+          display: flex
         }
-        .n-cascader-menu__item--active.n-cascader-menu__item-next::after {
-          color: #63E2B7FF;
+        .n-cascader-menu__item-select {
+          margin-right: 8px;
         }
-        &::-webkit-scrollbar {
-          width: 5px;
+        .n-cascader-menu_item-icon {
+          margin-left: auto;
+          align-items: center;
         }
-        &::-webkit-scrollbar-track {
-          background: transparent;
-        }
-        &::-webkit-scrollbar-thumb {
-          background: rgba(255,255,255,0.2);
-          border-radius: 2.5px;
-        }
-        &::-webkit-scrollbar-thumb:hover {
-          background: rgba(255,255,255,0.3);
-        }
-        table thead tr th:last-of-type {
-          padding-left: 32px;
-        }
+      }
+      .n-cascader-menu__item--active.n-cascader-menu__item-next::after {
+        color: #63E2B7FF;
+      }
+      &::-webkit-scrollbar {
+        width: 5px;
+      }
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.2);
+        border-radius: 2.5px;
+      }
+      &::-webkit-scrollbar-thumb:hover {
+        background: rgba(255,255,255,0.3);
+      }
+      table thead tr th:last-of-type {
+        padding-left: 32px;
       }
     }
   }
