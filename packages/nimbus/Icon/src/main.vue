@@ -59,7 +59,7 @@ export default {
     },
     size: {
       type: [Number, String],
-      default: 16
+      default: null
     },
     color: {
       type: String,
