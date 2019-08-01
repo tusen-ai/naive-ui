@@ -60,12 +60,20 @@ export default {
               path: '/n-alert'
             },
             {
+              name: 'Badge',
+              path: '/n-badge'
+            },
+            {
               name: 'Button',
               path: '/n-button'
             },
             {
               name: 'Checkbox',
               path: '/n-checkbox'
+            },
+            {
+              name: 'Collapse',
+              path: '/n-collapse'
             },
             {
               name: 'DatePicker',
@@ -108,13 +116,24 @@ export default {
               path: '/n-popover'
             },
             {
+              name: 'Progress',
+              path: '/n-progress'
+            },
+            {
               name: 'Radio',
               path: '/n-radio'
             },
-
             {
               name: 'Select',
               path: '/n-select'
+            },
+            {
+              name: 'Cascader',
+              path: '/n-cascader'
+            },
+            {
+              name: 'Steps',
+              path: '/n-steps'
             },
             {
               name: 'Switch',
@@ -125,8 +144,16 @@ export default {
               path: '/n-table'
             },
             {
+              name: 'Tag',
+              path: '/n-tag'
+            },
+            {
               name: 'TimePicker',
               path: '/n-time-picker'
+            },
+            {
+              name: 'Timeline',
+              path: '/n-timeline'
             },
             {
               name: 'Tooltip',
