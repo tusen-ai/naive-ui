@@ -1,13 +1,17 @@
 <template>
-  <div ref="tableWrapper"
-class="n-advance-tabel__wrapper">
+  <div
+    ref="tableWrapper"
+    class="n-advance-tabel__wrapper"
+  >
     <div class="n-advance-table__operation">
       <section class="n-advance-table__operation__bacth" />
       <div class="n-advance-table__operation__custom">
         <slot name="table-operation" />
       </div>
-      <div v-if="search"
-class="n-advance-table__operation__search">
+      <div
+        v-if="search"
+        class="n-advance-table__operation__search"
+      >
         <searchInput
           ref="search"
           style=" margin-bottom: 18px;"
@@ -27,13 +31,18 @@ class="n-advance-table__operation__search">
           :key="i"
           :style="computeCustomWidthStl(column)"
         >
-        <col v-if="scrollBarWidth"
-:width="scrollBarWidth" >
+        <col
+          v-if="scrollBarWidth"
+          :width="scrollBarWidth"
+        >
       </colgroup>
       <n-thead>
         <n-tr>
-          <n-th v-for="(column, i) in columns"
-:key="column.key">
+          <n-th
+            v-for="(column, i) in columns"
+            :key="column.key"
+            :style="computeAlign(column)"
+          >
             {{ column.title }}
             <SortIcon
               v-if="column.sortable"
@@ -89,10 +98,16 @@ class="n-advance-table__operation__search">
         >
       </colgroup>
       <n-tbody>
-        <n-tr v-for="(rowData, i) in showingData"
-:key="i">
-          <n-td v-for="column in columns"
-:key="column.key">
+        <n-tr
+          v-for="(rowData, i) in showingData"
+          :key="i"
+        >
+          <n-td
+            v-for="column in columns"
+            :key="column.key"
+            :style="computeAlign(column)"
+            :class="computeTdClass(column,{row:rowData,index:i,key:column.key})"
+          >
             <row
               :index="i"
               :row="rowData"
@@ -101,8 +116,10 @@ class="n-advance-table__operation__search">
             />
           </n-td>
         </n-tr>
-        <div v-if="showingData.length === 0"
-class="n-no-data-tip">
+        <div
+          v-if="showingData.length === 0"
+          class="n-no-data-tip"
+        >
           No data
         </div>
       </n-tbody>
@@ -112,8 +129,10 @@ class="n-no-data-tip">
       v-if="pagination !== false && showingData.length"
       class="n-advanced-table__pagination"
     >
-      <n-pagination v-model="currentPage"
-:page-count="pageCount" />
+      <n-pagination
+        v-model="currentPage"
+        :page-count="pageCount"
+      />
     </div>
   </div>
 </template>
@@ -313,6 +332,7 @@ export default {
     }
   },
   watch: {
+
     currentPage () {
       if (this.pagination.custom === true) {
         this.useRemoteChange()
@@ -361,6 +381,29 @@ export default {
     // window.removeEventListener('resize', this.init)
   },
   methods: {
+    computeAlign (column) {
+      if (column.align) {
+        return {
+          'text-align': column.align
+        }
+      }
+    },
+    computeTdClass (column, params) {
+      let className = []
+      if (column.ellipsis) {
+        className.push('n-advanced-table__td-text-ellipsis')
+      }
+      if (!column.className) {
+        return className
+      }
+      if (typeof column.className === 'string') {
+        className.push(column.className)
+      } else if (typeof column.className === 'function') {
+        className.push(column.className(params))
+      }
+      console.log(className)
+      return className
+    },
     /**
      * {key:[value,value1],key1:[v1,v2]}
      * {key:value}
