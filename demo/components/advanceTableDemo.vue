@@ -789,7 +789,7 @@ export default {
           className: (params) => {
             let row = params.row
             if (row.age > 10) {
-              return 'older'
+              return 'older higher'
             }
             return ''
           },
@@ -999,5 +999,8 @@ export default {
 <style>
 .older{
  background:rgb(255, 204, 146);
+}
+.higher {
+  color: blue;
 }
 </style>

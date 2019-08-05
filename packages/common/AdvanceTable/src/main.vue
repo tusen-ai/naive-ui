@@ -218,7 +218,7 @@ export default {
     // const sortIndexs = new Array(this.columns.length).fill(0).map((item, idx) => {
     //   return this.columns[idx].order ? this.columns[idx].order : 0
     // })
-    console.log(sortIndexs)
+    // console.log(sortIndexs)
     return {
       copyData: this.data.slice(0),
       sortIndexs,
@@ -401,7 +401,7 @@ export default {
       } else if (typeof column.className === 'function') {
         className.push(column.className(params))
       }
-      console.log(className)
+      // console.log(className)
       return className
     },
     /**
