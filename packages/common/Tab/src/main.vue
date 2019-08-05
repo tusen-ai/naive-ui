@@ -5,7 +5,7 @@
     <div
       :class="addable ? 'n-tab--label_addable n-tab--label' : 'n-tab--label'"
     >
-      <div style="display: inline-flex;">
+      <div style="display: inline-flex;margin-bottom: -1px;">
         <div
           v-for="(label, i) in labels"
           :key="i"
@@ -17,22 +17,23 @@
             <n-icon
               class="n-tab--label-delete"
               type="ios-close"
-              size="20"
             />
           </span>
         </div>
       </div>
       <n-icon
-        type="ios-add"
+        type="ios-add-circle-outline"
         class="n-tab--label-add"
         @click="addPanelItem"
       />
     </div>
     <div
       ref="slot"
-      class="n-tab--slot"
+      class="n-tab--slot-panel"
     >
-      <slot />
+      <div class="n-tab--slot">
+        <slot />
+      </div>
     </div>
   </div>
 </template>
@@ -102,7 +103,7 @@ export default {
     tabCls () {
       let type = ['normal', 'card', 'board']
       let cls = 'n-tab '
-      return type.indexOf(this.type) > -1 ? cls + 'n-tab_' + this.type + '' : ''
+      return type.indexOf(this.type) > -1 ? cls + 'n-tab_' + this.type + '' : cls + 'n-tab_normal '
     }
   },
   watch: {
@@ -159,7 +160,8 @@ export default {
       let newName = this.names[i]
       let eName = e.target.className
       let eParentName = e.target.parentElement.className
-      let isLabel = eName.indexOf('n-tab--label-item') > -1 || eParentName.indexOf('n-tab--label-item') > -1
+      let ePPName = ((e.target.parentElement || {}).parentElement || {}).className
+      let isLabel = eName.indexOf('n-tab--label-item') > -1 || eParentName.indexOf('n-tab--label-item') > -1 || ePPName.indexOf('n-tab--label-item') > -1
       if (isLabel) {
         Promise.resolve(this.beforeLeave(newName, oldName)).then(res => {
           if (res) {
@@ -173,7 +175,8 @@ export default {
     updateActive (e, i) {
       let eName = e.target.className
       let eParentName = e.target.parentElement.className
-      let isLabel = eName.indexOf('n-tab--label-item') > -1 || eParentName.indexOf('n-tab--label-item') > -1
+      let ePPName = ((e.target.parentElement || {}).parentElement || {}).className
+      let isLabel = eName.indexOf('n-tab--label-item') > -1 || eParentName.indexOf('n-tab--label-item') > -1 || ePPName.indexOf('n-tab--label-item') > -1
       if (eName.indexOf('n-tab--label-delete') > -1) {
         // steps while deleting, need to set display none to label and the tab panel and then init the display
         this.labels.splice(i, 1)

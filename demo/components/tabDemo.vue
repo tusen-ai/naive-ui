@@ -11,11 +11,12 @@
     <div class="n-doc-body">
       <div class="n-doc-section">
         <div class="n-doc-section__header">
-          Basic Usage
+          Basic Usage / board mode
         </div>
         <div class="n-doc-section__view">
           <n-tab
-            type="card"
+            type="board"
+            addable
           >
             <n-tab-panel label="Select">
               <n-form
@@ -58,7 +59,10 @@
         </div>
         <div class="n-doc-section__source">
           <textarea v-pre>
-          <n-tab>
+          <n-tab
+            type="board"
+            addable
+          >
             <n-tab-panel label="form">
               <n-form
                 inline
@@ -112,7 +116,7 @@
           >
             <n-tab-panel
               name="a"
-              label="a"
+              label="Select"
             >
               Name: a. <br>
               We can control the element display by setting the tab's name attribute.<br>
@@ -121,10 +125,14 @@
             </n-tab-panel>
             <n-tab-panel
               name="b"
-              label="b"
+              label="Hover"
             >
               Name: b. <br>
             </n-tab-panel>
+            <n-tab-panel
+              disabled
+              label="Disabled"
+            />
           </n-tab>
         </div>
         <div class="n-doc-section__source">
