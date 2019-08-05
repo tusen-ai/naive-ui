@@ -66,23 +66,19 @@ export default {
     this.$on('display-none', this.setDisplayNone)
   },
   beforeDestroy () {
-    console.log('before destory call')
     this.$off('display-none', this.setDisplayNone)
   },
   methods: {
     updateIsShow (flag) {
       this.isShow = flag
       this.$forceUpdate()
-      // window.getComputedStyle(this.NTab.refs['slot'], null).getPropertyValue('width')
-      // this.$refs['panel'].classList.toggle('n-tab-panel_active')
-      // 这里应该是根据切换的方向(左右) 来设置
     },
     setTransfer (per) {
+      // 这里可以优化, 直接在上层div做整体移动, 不需要对子元素移动
       this.style.transform = 'translateX(' + per + ')'
     },
     setDisplayNone (i) {
       if (i === this._NaiveTabOrder) {
-        // this.$set(this.style, 'display', 'none')
         this.unDelete = false
       }
     }
