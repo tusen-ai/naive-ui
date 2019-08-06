@@ -50,7 +50,7 @@
               ref="inputTagInput"
               v-model="pattern"
               class="n-select-input-tag__input"
-              @keyup.delete="handlePatternInputDelete"
+              @keydown.delete="handlePatternInputDelete"
               @input="handlePatternInput"
             >
             <span
@@ -362,7 +362,7 @@ export default {
         this.$refs.inputTagInput.style.width = textWidth + 'px'
       })
     },
-    handlePatternInputDelete () {
+    handlePatternInputDelete (e) {
       if (!this.pattern.length) {
         const newValue = this.value
         if (Array.isArray(newValue)) {
