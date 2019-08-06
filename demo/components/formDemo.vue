@@ -278,7 +278,7 @@
             >
               The key in form-model does not support the form with ' . '.<br>
               And does not init the value of parameters with 'undefined'.<br>
-              ResetForm Method: only can reset the item with prop.<br>
+              ResetForm Method: only can reset the item with prop. And Donnot deal the nesting form context<br>
               ValidateForm Method: support validate specified items by the second parameter in form of array.<br>
             </n-form-item>
             <n-popover>
@@ -308,7 +308,7 @@
             </n-form-item>
             <n-form-item
               prop="mutiSelect.0"
-              label="Select"
+              label="multi-select"
             >
               <n-select
                 v-model="validateForm.mutiSelect[0]"
@@ -942,7 +942,6 @@ export default {
           console.log('unpass', e)
         })
     },
-
     formReset (ref) {
       this.$refs[ref].resetForm()
     },
