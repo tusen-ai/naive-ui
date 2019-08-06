@@ -1,6 +1,8 @@
 <template>
-  <div ref="doc"
-class="n-doc">
+  <div
+    ref="doc"
+    class="n-doc"
+  >
     <div class="n-doc-header">
       <n-gradient-text :font-size="20">
         AdvanceTable
@@ -13,8 +15,10 @@ class="n-doc">
           Basic use
         </div>
         <div class="n-doc-section__view">
-          <n-advance-table :columns="columns0"
-:data="data">
+          <n-advance-table
+            :columns="columns0"
+            :data="data"
+          >
             <template #table-operation>
               <n-button>custom operation by v-slot:table-operation</n-button>
             </template>
@@ -124,11 +128,13 @@ export default {
             label: 'xiaobai1',
             value: 'xiaobai1'
           }],
-          onFilter: 'custom'
+          onFilter: 'custom',
+          ellipsis:true,// 溢出隐藏，显示省略号
         },
         {
           title: 'Age',
           key: 'age',
+          align: 'center',//居中
           sortable: true,
           order: 1, // 默认升序
           sorter: (a, b) => {
@@ -725,7 +731,7 @@ export default {
     let d = new Array(20).fill(0)
     d = d.map((item, idx) => {
       return {
-        name: 'xiaobai' + idx,
+        name: 'xiaobai213213132123213111121' + idx,
         age: Math.ceil((Math.random() * 20))
       }
     })
@@ -754,7 +760,7 @@ export default {
         {
           title: 'Name',
           key: 'name',
-          filterMultiple: false,
+          ellipsis: true,
           filterItems: [{
             label: 'xiaobai1',
             value: 'xiaobai1'
@@ -780,6 +786,14 @@ export default {
           key: 'age',
           sortable: true,
           order: 1,
+          className: (params) => {
+            let row = params.row
+            if (row.age > 10) {
+              return 'older higher'
+            }
+            return ''
+          },
+          align: 'center',
           sorter: (a, b) => {
             return a.age - b.age
           },
@@ -966,6 +980,10 @@ export default {
   methods: {
     handleClick (params) {
       alert('delete' + JSON.stringify(params))
+      this.$set(this.data, params._index, {
+        ...params.row,
+        age: 100
+      })
     },
     onChange1 ({ filter, sorter, pagination, search }) {
       console.log('执行', { filter, sorter, pagination, search })
@@ -982,3 +1000,11 @@ export default {
   }
 }
 </script>
+<style>
+.older{
+ background:rgb(255, 204, 146);
+}
+.higher {
+  color: blue;
+}
+</style>
