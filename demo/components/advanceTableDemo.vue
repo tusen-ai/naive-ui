@@ -789,7 +789,7 @@ export default {
           className: (params) => {
             let row = params.row
             if (row.age > 10) {
-              return 'older'
+              return 'older higher'
             }
             return ''
           },
@@ -980,6 +980,10 @@ export default {
   methods: {
     handleClick (params) {
       alert('delete' + JSON.stringify(params))
+      this.$set(this.data, params._index, {
+        ...params.row,
+        age: 100
+      })
     },
     onChange1 ({ filter, sorter, pagination, search }) {
       console.log('执行', { filter, sorter, pagination, search })
@@ -999,5 +1003,8 @@ export default {
 <style>
 .older{
  background:rgb(255, 204, 146);
+}
+.higher {
+  color: blue;
 }
 </style>

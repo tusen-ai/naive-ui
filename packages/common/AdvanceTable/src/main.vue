@@ -106,7 +106,7 @@
             v-for="column in columns"
             :key="column.key"
             :style="computeAlign(column)"
-            :class="computeTdClass(column,{row:rowData,index:i,key:column.key})"
+            :class="computeTdClass(column,rowData)"
           >
             <row
               :index="i"
@@ -218,9 +218,15 @@ export default {
     // const sortIndexs = new Array(this.columns.length).fill(0).map((item, idx) => {
     //   return this.columns[idx].order ? this.columns[idx].order : 0
     // })
-    console.log(sortIndexs)
+    // console.log(sortIndexs)
+    let copyData = this.data.slice(0).map((row, idx) => {
+      return {
+        row,
+        _index: idx
+      }
+    })
     return {
-      copyData: this.data.slice(0),
+      copyData,
       sortIndexs,
       wrapperWidth: 'unset',
       tbodyWidth: 'auto;',
@@ -342,7 +348,12 @@ export default {
       this.$emit('on-page-change', this.paginationer)
     },
     data () {
-      this.copyData = this.data.slice(0)
+      this.copyData = this.data.slice(0).map((row, idx) => {
+        return {
+          row,
+          _index: idx
+        }
+      })
       this.searchData = this.computeShowingData()
       this.searchDataNoSort = null
     },
@@ -401,7 +412,7 @@ export default {
       } else if (typeof column.className === 'function') {
         className.push(column.className(params))
       }
-      console.log(className)
+      // console.log(className)
       return className
     },
     /**
@@ -487,7 +498,7 @@ export default {
           const { value, filterFn } = this.currentFilterColumn[key]
           if (value && filterFn !== 'custom') {
             data = data.filter(item => {
-              return filterFn(value, item)
+              return filterFn(value, item.row)
             })
           }
         })
@@ -496,7 +507,7 @@ export default {
       if (this.currentSearchColumn && this.search.onSearch !== 'custom') {
         const { key, word } = this.currentSearchColumn
         data = data.filter(item => {
-          return this.search.onSearch(key, word, item)
+          return this.search.onSearch(key, word, item.row)
         })
       }
 
@@ -524,6 +535,8 @@ export default {
           }
         } else {
           data = data.sort((a, b) => {
+            a = a.row
+            b = b.row
             if (type > 0) {
               if (column.sorter) {
                 return column.sorter(a, b)

@@ -166,6 +166,10 @@ export default {
             {
               name: 'Form',
               path: '/n-form'
+            },
+            {
+              name: 'Tab',
+              path: '/n-tab'
             }
           ]
         },

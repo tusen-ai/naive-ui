@@ -7,6 +7,7 @@
     }"
   >
     <button
+      type="button"
       class="n-input-number__minus-button"
       :class="{
         [`n-input-bumber__button--disabled`]: value !== null && safeMin !== null && value <= safeMin
@@ -24,6 +25,7 @@
       @keyup.enter="handleBlurOrEnter"
     >
     <button
+      type="button"
       class="n-input-number__add-button"
       :class="{
         [`n-input-bumber__button--disabled`]: value !== null && safeMax !== null && value >= safeMax
