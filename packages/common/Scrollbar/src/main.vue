@@ -161,6 +161,21 @@ export default {
     this.updateParameters()
   },
   methods: {
+    scrollToElement (el, elPosition = 'bottom') {
+      if (el.offsetTop < this.$refs.scrollContainer.scrollTop) {
+        this.$refs.scrollContainer.scrollTo({
+          top: el.offsetTop,
+          left: 0,
+          behavior: 'smooth'
+        })
+      } else if (el.offsetTop + el.offsetHeight > this.$refs.scrollContainer.scrollTop + this.$refs.scrollContainer.offsetHeight) {
+        this.$refs.scrollContainer.scrollTo({
+          top: el.offsetTop + el.offsetHeight - this.$refs.scrollContainer.offsetHeight,
+          left: 0,
+          behavior: 'smooth'
+        })
+      }
+    },
     enterScrollWrapper () {
       this.displayHorizontalScrollbar()
       this.displayVerticalScrollbar()

@@ -5,21 +5,21 @@
     </div>
     <div
       class="n-doc-section__view"
-      style="flex-wrap: nowrap;"
+      style="flex-wrap: wrap;"
     >
       <!--EXAMPLE_START-->
       <n-select
         v-model="selectedValue"
         placeholder="Please Select Type"
         :items="items"
-        style="flex-grow: 1; margin-right: 12px;"
+        style="width: 300px; margin-right: 12px;"
         disabled
       />
       <n-select
         v-model="selectedValue2"
         placeholder="Please Select Type"
         :items="items"
-        style="flex-grow: 1; margin-right: 12px;"
+        style="width: 300px; margin-right: 12px;"
         disabled
       />
       <n-select
@@ -27,7 +27,7 @@
         multiple
         placeholder="Please Select Type"
         :items="items"
-        style="flex-grow: 1; margin-right: 12px;"
+        style="width: 300px; margin-right: 12px;"
         disabled
       />
       <n-select
@@ -35,7 +35,24 @@
         multiple
         placeholder="Please Select Type"
         :items="items"
-        style="flex-grow: 1;"
+        style="width: 300px;"
+        disabled
+      />
+      <n-select
+        v-model="selectedArray2"
+        filterable
+        placeholder="Please Select Type"
+        :items="items"
+        style="width: 300px;"
+        disabled
+      />
+      <n-select
+        v-model="selectedArray2"
+        multiple
+        filterable
+        placeholder="Please Select Type"
+        :items="items"
+        style="width: 300px;"
         disabled
       />
       <!--EXAMPLE_END-->
