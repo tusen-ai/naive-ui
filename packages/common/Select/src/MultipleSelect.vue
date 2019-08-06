@@ -16,7 +16,7 @@
       class="n-select-link"
       :class="{
         'n-select-link--active': active,
-        'n-select-link--selected': selected || pattern.length
+        'n-select-link--selected': selected || (active && pattern.length)
       }"
     >
       <div
