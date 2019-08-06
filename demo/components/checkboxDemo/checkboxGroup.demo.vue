@@ -1,7 +1,7 @@
 <template>
   <div class="n-doc-section">
     <div class="n-doc-section__header">
-      Scaffold
+      Checkbox Group
     </div>
     <div
       class="n-doc-section__view"
@@ -43,7 +43,7 @@
 export default {
   data () {
     return {
-      cities: ['666']
+      cities: null
     }
   }
 }

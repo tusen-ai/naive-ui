@@ -5,23 +5,23 @@
   >
     <div class="n-doc-header">
       <n-gradient-text :font-size="20">
-        scaffold
+        Checkbox
       </n-gradient-text>
     </div>
     <div class="n-doc-body">
-      <scaffold />
+      <basic-usage />
       <checkbox-group />
     </div>
   </div>
 </template>
 
 <script>
-import scaffold from './scaffold.demo.vue'
+import basicUsage from './basicUsage.demo.vue'
 import checkboxGroup from './checkboxGroup.demo'
 
 export default {
   components: {
-    scaffold,
+    basicUsage,
     checkboxGroup
   },
   data () {
