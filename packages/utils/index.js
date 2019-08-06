@@ -27,8 +27,22 @@ const getObjValue = (obj, keys) => {
   return keys.reduce((res, n) => (res !== undefined && res[n] !== undefined ? res[n] : null), obj)
 }
 
+/**
+ * transfer function into promise
+ */
+const funcToPromise = (fn, receiver) => {
+  return (...args) => {
+    return new Promise((resolve, reject) => {
+      fn.apply(receiver, [...args, (err, res) => {
+        return err ? reject(err) : resolve(res)
+      }])
+    })
+  }
+}
+
 export {
   getScrollParent,
   deepClone,
-  getObjValue
+  getObjValue,
+  funcToPromise
 }
