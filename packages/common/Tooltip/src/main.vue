@@ -5,13 +5,19 @@
     :arrow="arrow"
     :placement="placement"
     :trigger="trigger"
+    :width="width"
     @show="handleShow"
     @hide="handleHide"
   >
     <template v-slot:activator>
       <slot name="activator" />
     </template>
-    <div class="n-tooltip__content">
+    <div
+      class="n-tooltip__content"
+      :class="{
+        'n-tooltip__content--fix-width': width !== null
+      }"
+    >
       <slot />
     </div>
   </n-popover>
@@ -68,6 +74,10 @@ export default {
     arrow: {
       default: false,
       type: Boolean
+    },
+    width: {
+      type: Number,
+      default: null
     }
   },
   methods: {

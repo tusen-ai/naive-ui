@@ -60,7 +60,7 @@
         :readonly="disabled ? 'disabled' : false"
         @click="handleActivatorClick"
         @focus="handleFocus"
-        @blur="handleDateTimeInputBlur"
+        @blur="handleTimeInputBlur"
         @input="handleTimeInput"
       >
       <div class="n-date-picker__icon">
@@ -72,34 +72,38 @@
     </div>
     <div
       ref="contentWrapper"
-      class="n-content-wrapper"
+      class="n-content-wrapper n-content-wrapper--date-picker"
     >
       <div ref="content">
         <datetime-panel
           v-if="type === 'datetime'"
           :value="value"
           :active="active"
+          :actions="actions"
           @input="handlePanelInput"
           @close="closeCalendar"
         />
         <date-panel
-          v-if="type === 'date'"
+          v-else-if="type === 'date'"
           :value="value"
           :active="active"
+          :actions="actions"
           @input="handlePanelInput"
           @close="closeCalendar"
         />
         <daterange-panel
-          v-if="type === 'daterange'"
+          v-else-if="type === 'daterange'"
           :value="value"
           :active="active"
+          :actions="actions"
           @input="handleRangePanelInput"
           @close="closeCalendar"
         />
         <datetimerange-panel
-          v-if="type === 'datetimerange'"
+          v-else-if="type === 'datetimerange'"
           :value="value"
           :active="active"
+          :actions="actions"
           @input="handleRangePanelInput"
           @close="closeCalendar"
         />
@@ -113,6 +117,7 @@ import moment from 'moment'
 import NIcon from '../../Icon'
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
+import zindexable from '../../../mixins/zindexable'
 import DatetimePanel from './panel/datetime'
 import DatetimerangePanel from './panel/datetimerange'
 import DatePanel from './panel/date'
@@ -158,7 +163,8 @@ export default {
   },
   mixins: [
     detachable,
-    placeable
+    placeable,
+    zindexable
   ],
   props: {
     disabled: {
@@ -205,6 +211,10 @@ export default {
     format: {
       type: String,
       default: null
+    },
+    actions: {
+      type: Array,
+      default: undefined
     }
   },
   data () {
@@ -266,11 +276,11 @@ export default {
      */
     handlePanelInput (value, valueString) {
       this.$emit('input', value, 'unavailable for now')
-      this.refreshDisplayTime(value)
+      this.refresh(value)
     },
     handleRangePanelInput (value, valueString) {
       this.$emit('input', value, 'unavailable for now')
-      this.refreshDisplayRange(value)
+      this.refresh(value)
     },
     /**
      * Refresh
@@ -301,13 +311,13 @@ export default {
     /**
      * Blur
      */
-    handleDateTimeInputBlur () {
+    handleTimeInputBlur () {
       if (this.disabled) return
-      const newSelectedDateTime = moment(this.displayTime, this.computedFormat, true)
+      const newSelectedDateTime = moment(this.displayTime, this.computedValidateFormat, true)
       if (newSelectedDateTime.isValid()) {
         this.$emit('input', newSelectedDateTime.valueOf())
       } else {
-        this.refreshDisplayTime()
+        this.refreshDisplayTime(this.value)
       }
       this.isFocus = false
     },

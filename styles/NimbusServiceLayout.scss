@@ -15,7 +15,7 @@
     top: 0;
     bottom: 0;
     transition: left .3s cubic-bezier(0.4, 0.0, 0.2, 1);
-    overflow: auto;
+    overflow: hidden;
     &::-webkit-scrollbar {
       width: 5px;
     }
@@ -34,9 +34,6 @@
     }
     &.n-nimbus-service-layout__body--collapsed {
       left: 48px;
-    }
-    &.n-nimbus-service-layout__body--padded {
-      padding: 21px 48px;
     }
   }
   .n-nimbus-service-layout__drawer {
@@ -64,7 +61,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      overflow-y: auto;
+      overflow: hidden;
       transition: opacity .3s cubic-bezier(0.4, 0.0, 0.2, 1);
       &::-webkit-scrollbar {
         width: 5px;

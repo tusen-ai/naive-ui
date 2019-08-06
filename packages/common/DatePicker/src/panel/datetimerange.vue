@@ -6,24 +6,40 @@
       class="n-date-picker-calendar n-date-picker-calendar--datetimerange"
       @click.capture="resetSelectingStatus"
     >
-      <div class="n-date-picker-calendar__range-wrapper">
-        <div
-          class="n-date-picker-calendar__date-time-input-wrapper"
-        >
-          <n-input
-            v-model="startDateDisplayString"
-            class="n-date-picker-calendar__date-input"
-            placeholder="Select date"
-            @blur="handleStartDateInputBlur"
-            @input="handleStartDateInput"
-          />
-          <n-time-picker
-            class="n-date-picker-calendar__time-input"
-            :value="startTimeValue"
-            stop-selector-bubble
-            @input="handleStartTimePickerInput"
-          />
+      <div
+        class="n-date-picker-calendar__date-time-input-wrapper"
+      >
+        <n-input
+          v-model="startDateDisplayString"
+          class="n-date-picker-calendar__date-input"
+          placeholder="Select date"
+          @blur="handleStartDateInputBlur"
+          @input="handleStartDateInput"
+        />
+        <n-time-picker
+          class="n-date-picker-calendar__time-input"
+          :value="startTimeValue"
+          stop-selector-bubble
+          @input="handleStartTimePickerInput"
+        />
+        <div class="n-date-picker-calendar__arrow">
+          <n-icon type="ios-arrow-forward" />
         </div>
+        <n-input
+          v-model="endDateDisplayString"
+          class="n-date-picker-calendar__date-input"
+          placeholder="Select date"
+          @blur="handleEndDateInputBlur"
+          @input="handleEndDateInput"
+        />
+        <n-time-picker
+          class="n-date-picker-calendar__time-input"
+          :value="endTimeValue"
+          stop-selector-bubble
+          @input="handleEndTimePickerInput"
+        />
+      </div>
+      <div class="n-date-picker-calendar__range-wrapper">
         <div class="n-date-picker-calendar__month-modifier">
           <div
             class="n-date-picker-calendar__fast-prev"
@@ -106,23 +122,6 @@
       </div>
       <div><div class="n-date-picker-calendar__vertical-divider" /></div>
       <div class="n-date-picker-calendar__range-wrapper">
-        <div
-          class="n-date-picker-calendar__date-time-input-wrapper"
-        >
-          <n-input
-            v-model="endDateDisplayString"
-            class="n-date-picker-calendar__date-input"
-            placeholder="Select date"
-            @blur="handleEndDateInputBlur"
-            @input="handleEndDateInput"
-          />
-          <n-time-picker
-            class="n-date-picker-calendar__time-input"
-            :value="endTimeValue"
-            stop-selector-bubble
-            @input="handleEndTimePickerInput"
-          />
-        </div>
         <div class="n-date-picker-calendar__month-modifier">
           <div
             class="n-date-picker-calendar__fast-prev"
@@ -201,17 +200,26 @@
           >
             {{ dateItem.date }}
           </div>
+          <div
+            v-if="!(actions && actions.length)"
+            style="height: 6px; width: 100%;"
+          />
         </div>
       </div>
-      <div class="n-date-picker-calendar__actions">
+      <div
+        v-if="actions && actions.length"
+        class="n-date-picker-calendar__actions"
+      >
         <n-button
+          v-if="actions.includes('clear')"
           size="tiny"
           round
           @click="clearSelectedDateTime"
         >
-          Reset
+          Clear
         </n-button>
         <n-button
+          v-if="actions.includes('confirm')"
           size="tiny"
           round
           auto-text-color
@@ -221,6 +229,10 @@
           Confirm
         </n-button>
       </div>
+      <div
+        v-else
+        style="height: 12px"
+      />
     </div>
   </transition>
 </template>
@@ -289,6 +301,10 @@ export default {
     format: {
       type: String,
       default: DATETIME_FORMAT
+    },
+    actions: {
+      type: Array,
+      default: () => ['clear', 'confirm']
     }
   },
   data () {
@@ -335,12 +351,13 @@ export default {
       }
     },
     valueAsMomentArray (newValue) {
-      if (this.isSelecting) return
       if (newValue !== null) {
         const [startMoment, endMoment] = newValue
         this.startDateDisplayString = startMoment.format(DATE_FORMAT)
         this.endDateDisplayString = endMoment.format(DATE_FORMAT)
-        this.syncCalendarTimeWithValue(newValue)
+        if (this.isSelecting) {
+          this.syncCalendarTimeWithValue(newValue)
+        }
       } else {
         this.startDateDisplayString = ''
         this.endDateDisplayString = ''

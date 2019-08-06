@@ -68,30 +68,34 @@ export default {
      * @param {Array} scope  to specify the scope of validation
      * @return {Boolean} validation passed or not
      */
-    validate (cb, scope = []) {
+    validate (cb, scope = [], target = this) {
       let promise
       let isCallback = typeof cb === 'function'
       if (!isCallback && window.Promise) {
         promise = new Promise((resolve, reject) => {
-          cb = valid => valid ? resolve(valid) : reject(valid)
+          cb = (valid) => valid ? resolve(valid) : reject(valid)
         })
       }
       let valid = true
       let fields = {}
-      this.$children.forEach((child, i) => {
+      for (let i = 0; i < target.$children.length; i++) {
+        let child = target.$children[i]
+        let componentName = child.$options.name
         let flag = scope.length > 0 ? scope.indexOf(child.prop) > -1 : true
-        if (child.prop && flag) {
+        if (componentName === 'NFormItem' && child.prop && flag) {
           child.validate('', (errors, field) => {
             if (errors) {
               valid = false
             }
             fields = Object.assign({}, fields, field)
           })
+        } else if (['NFormItem', 'NForm'].indexOf(componentName) === -1) {
+          this.validate(null, [], child)
         }
-        if (++i === this.$children.length && isCallback) {
+        if (i === target.$children.length - 1 && isCallback) {
           cb(valid, fields)
         }
-      })
+      }
 
       if (promise) {
         return promise
@@ -103,7 +107,8 @@ export default {
     resetForm (target = this) {
       for (let i = 0; i < target.$children.length; i++) {
         let child = target.$children[i]
-        if (child.$options.name === 'NFormItem' && child.prop) {
+        let componentName = child.$options.name
+        if (componentName === 'NFormItem' && child.prop) {
           let keys = child.prop.split('.')
           let obj = this.model
           let j = 0
@@ -117,9 +122,7 @@ export default {
           if (child.validateFlag) {
             child.clearValidateClass()
           }
-        } else if (child.$options.name === 'NForm') {
-          break
-        } else {
+        } else if (['NFormItem', 'NForm'].indexOf(componentName) === -1) {
           this.resetForm(child)
         }
       }

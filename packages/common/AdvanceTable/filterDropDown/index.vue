@@ -1,17 +1,15 @@
 <template>
-  <filterIcon
-    :status="filterStatus"
-  >
+  <filterIcon :status="filterStatus">
     <ul class="n-table-filter-item">
       <li
         v-for="(item, idx) in items"
         :key="item.value"
         :class="computeItemClass(item)"
-        @click="handleSelect(item,idx)"
+        @click="handleSelect(item, idx)"
       >
         <span>{{ item.label }}</span>
         <n-icon
-          v-show="checkedIndexs[item.value]"
+          v-show="checkedIndexs[item.value].isChecked === true"
           type="md-checkmark"
           size="14"
         />
@@ -27,7 +25,6 @@ import Vue from 'vue'
 export default {
   components: {
     filterIcon
-
   },
   props: {
     filterItems: {
@@ -49,17 +46,11 @@ export default {
   },
   data () {
     const checkedIndexs = {}
-    this.filterItems.forEach((item) => {
-      checkedIndexs[item.value] = false
-    })
-    let items = this.filterItems.map((item) => {
-      return {
-        ...item,
-        isChecked: false
-      }
+    this.filterItems.forEach((item, index) => {
+      checkedIndexs[item.value] = { isChecked: false, index }
     })
     return {
-      items,
+      // items,
       emitData: null,
       checkedIndexs
     }
@@ -67,31 +58,32 @@ export default {
   computed: {
     filterStatus () {
       return !!this.emitData
-    }
-    // _emitData () {
-    //   let res = []
-    //   Object.keys(this.checkedIndexs).forEach((key) => {
-    //     if (this.checkedIndexs[key] === true) {
-    //       res.push(key)
-    //     }
+    },
+    // checkedIndexs (val, oldVal) {
+    //   const checkedIndexs = {}
+    //   this.filterItems.forEach((item) => {
+    //     checkedIndexs[item.value] = false
     //   })
-    //   res = res.length ? res : null
-    //   if (!this.filterMultiple) {
-    //     res = res.length ? res[0] : null
-    //   }
-
-    //   this.$emit('on-filter', res)
-
-    //   return res
-    // }
+    //   return { checkedIndexs, ...oldVal }
+    // },
+    items () {
+      let items = this.filterItems.map((item) => {
+        return {
+          ...item
+          // isChecked: false
+        }
+      })
+      return items
+    }
   },
   watch: {
     checkedIndexs: {
       handler () {
         let res = []
         Object.keys(this.checkedIndexs).forEach((key) => {
-          if (this.checkedIndexs[key] === true) {
-            res.push(key)
+          if (this.checkedIndexs[key].isChecked === true) {
+            let index = this.checkedIndexs[key].index
+            res.push(this.filterItems[index].value)
           }
         })
         res = res.length ? res : null
@@ -99,18 +91,24 @@ export default {
         this.$emit('on-filter', { key: this.filterKey, value: res, filterFn: this.filterFn })
       },
       deep: true
-
+    },
+    filterItems () {
+      const checkedIndexs = {}
+      this.filterItems.forEach((item, index) => {
+        checkedIndexs[item.value] = { isChecked: false, index }
+      })
+      this.checkedIndexs = { ...checkedIndexs, ...this.checkedIndexs }
     }
   },
   methods: {
     setCheckedIndexs (arr) {
       arr.forEach(value => {
-        this.checkedIndexs[value] !== undefined && Vue.set(this.checkedIndexs, value, true)
+        this.checkedIndexs[value].isChecked !== undefined && Vue.set(this.checkedIndexs[value], 'isChecked', true)
       })
     },
     reset () {
       Object.keys(this.checkedIndexs).forEach((key) => {
-        this.checkedIndexs[key] = false
+        this.checkedIndexs[key].isChecked = false
       })
       // this.items.forEach((item) => {
       //   item.isChecked = false
@@ -118,12 +116,11 @@ export default {
     },
     handleSelect (item, idx) {
       // single select
-      let isChecked = this.checkedIndexs[item.value]
+      let isChecked = this.checkedIndexs[item.value].isChecked
       !this.filterMultiple && this.reset()
-      Vue.set(this.checkedIndexs, item.value, !isChecked)
-      // this.$nextTick(() => {
-      //   this.$emit('on-filter', { key: this.filterKey, value: this.checkedIndexs })
-      // })
+      // this.checkedIndexs[item.value] = !isChecked
+      Vue.set(this.checkedIndexs[item.value], 'isChecked', !isChecked)
+
       // this.checkedIndexs[item.value] = !isChecked
 
       // if (!this.filterMultiple) {
@@ -141,7 +138,7 @@ export default {
     computeItemClass (item) {
       return {
         'n-table-filter-item': true,
-        'n-table-filter-item--selected': this.checkedIndexs[item.value]
+        'n-table-filter-item--selected': this.checkedIndexs[item.value].isChecked
       }
     }
   }
@@ -162,7 +159,7 @@ export default {
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
 }
-.n-table-filter-item li{
+.n-table-filter-item li {
   padding: 0 12px;
   height: 27px;
   align-items: center;
@@ -178,17 +175,18 @@ export default {
   line-height: 27px;
   box-sizing: border-box;
   padding: 0 12px;
-  transition: all .3s;
+  transition: all 0.3s;
   cursor: pointer;
 }
 
-.n-table-filter-item li:hover{
-  background-color: rgba(96,220,178,0.3);
+.n-table-filter-item li:hover {
+  background-color: rgba(96, 220, 178, 0.3);
 }
-.n-table-filter-item--selected{
-  background-color:rgba(96,220,178,0.3);
+.n-table-filter-item--selected {
+  background-color: rgba(96, 220, 178, 0.3);
 }
-.n-table-filter-item--selected,.n-table-filter-item--selected i {
-  color: #63E2B7;
+.n-table-filter-item--selected,
+.n-table-filter-item--selected i {
+  color: #63e2b7;
 }
 </style>

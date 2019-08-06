@@ -35,6 +35,27 @@
       padding-left: 32px;
     }
   }
+  .n-advanced-table__td-text-ellipsis{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .n-advanced-table__td-text-ellipsis>*{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .n-advanced-table__td-text{
+    &-center{
+      text-align: center;
+    }
+    &-left{
+      text-align: left;
+    }
+    &-right{
+      text-align: right;
+    }
+  }
   .n-advanced-table__pagination {
     margin-top: 27px;
     display: flex;

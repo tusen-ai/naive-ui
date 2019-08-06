@@ -22,6 +22,11 @@
         type="md-close-circle"
       />
       <n-icon
+        v-else-if="type === 'info'"
+        size="20"
+        type="md-information-circle"
+      />
+      <n-icon
         v-else-if="type === 'warning'"
         size="20"
         type="md-alert"

@@ -188,10 +188,15 @@
             >
               <n-input />
             </n-form-item>
-            <n-form-item label="Top2">
+            <n-form-item
+              required
+              :label-width="80"
+              label="Top2"
+            >
               <n-input />
             </n-form-item>
             <n-form-item
+              required
               label-position="left"
               label="Left"
             >
@@ -199,12 +204,14 @@
             </n-form-item>
             <n-form-item
               label-position="center"
+              required
               label="Center"
             >
               <n-input />
             </n-form-item>
             <n-form-item
               label-position="right"
+              required
               label="Right"
             >
               <n-input />
@@ -287,7 +294,7 @@
                   />
                 </n-form-item>
               </template>
-              <span>Test nesting Form Item</span>
+              <span>Test nesting formItem in resetForm</span>
             </n-popover>
             <n-form-item
               prop="muti.deep.select"
@@ -366,6 +373,17 @@
                   :items="items"
                 />
               </n-form-item>
+              <n-form-item
+                prop="mutiSelect.0"
+                label="Select"
+              >
+                <n-select
+                  v-model="validateForm.mutiSelect[0]"
+                  multiple
+                  placeholder="Please Select Type"
+                  :items="items"
+                />
+              </n-form-item>
               <n-form-item label="Switch" prop="switch">
                 <n-switch v-model="validateForm.switch" />
               </n-form-item>
@@ -394,6 +412,13 @@
             <script>
               export default {
                 data () {
+                  let arrayValidate = (rule, value, callback) => {
+                    if (value.length <= 0) {
+                      callback(new Error('input required'))
+                    } else {
+                      callback()
+                    }
+                  }
                   return {
                     validateForm: {
                       input: "",
@@ -409,6 +434,9 @@
                     validateRules: {
                       input: [
                         { required: true, message: "input cannot be empty", trigger: "blur" }
+                      ],
+                      'mutiSelect.0': [
+                        { validator: arrayValidate, trigger: 'change' }
                       ],
                       "muti.deep.select": [
                         {
@@ -712,9 +740,12 @@ export default {
         callback()
       }
     }
-    let arrayValidate = (rule, value, callback) => {
-      console.log('arrya validate value', value)
-      debugger
+    var arrayValidate = (rule, value, callback) => {
+      if (value.length <= 0) {
+        callback(new Error('input required'))
+      } else {
+        callback()
+      }
     }
     return {
       form: {
@@ -747,7 +778,7 @@ export default {
         }
       ],
       validateForm: {
-        input: 'input',
+        input: '',
         muti: {
           deep: {
             select: 'Public'
@@ -764,9 +795,9 @@ export default {
         input: [
           { required: true, message: 'input cannot be empty', trigger: 'blur' }
         ],
-        'mutiSelect.0': [{
-          validator: arrayValidate, trigger: 'change'
-        }],
+        'mutiSelect.0': [
+          { validator: arrayValidate, trigger: 'change' }
+        ],
         'muti.deep.select': [
           {
             required: true,

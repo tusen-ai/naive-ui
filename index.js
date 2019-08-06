@@ -12,11 +12,13 @@ import CheckBox from './packages/common/Checkbox'
 import RoundButton from './packages/common/Button'
 import Switch from './packages/common/Switch'
 import Select from './packages/common/Select'
+import Cascader from './packages/common/Cascader'
 import Modal from './packages/common/Modal'
 import Input from './packages/common/Input'
 import Message from './packages/common/Message'
 import Notification from './packages/common/Notification'
 import Pagination from './packages/common/Pagination'
+import Progress from './packages/common/Progress'
 import Tooltip from './packages/common/Tooltip'
 import Popup from './packages/common/Popover'
 import Alert from './packages/common/Alert'
@@ -33,6 +35,9 @@ import ServiceLayout from './packages/nimbus/ServiceLayout'
 import NimbusFormCard from './packages/nimbus/FormCard'
 import NimbusConfirmCard from './packages/nimbus/ConfirmCard'
 import NimbusIcon from './packages/nimbus/Icon'
+import Scrollbar from './packages/common/Scrollbar'
+import Steps from './packages/common/Steps'
+import Confirm from './packages/common/Confirm'
 
 function install (Vue) {
   Card.install(Vue)
@@ -67,9 +72,14 @@ function install (Vue) {
   InputNumber.install(Vue)
   NimbusIcon.install(Vue)
   Radio.install(Vue)
+  Cascader.install(Vue)
   Form.install(Vue)
   Tab.install(Vue)
   TimePicker.install(Vue)
+  Scrollbar.install(Vue)
+  Steps.install(Vue)
+  Confirm.install(Vue)
+  Progress.install(Vue)
 }
 
 export default {

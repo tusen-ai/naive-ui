@@ -63,6 +63,7 @@ $select-text-color--disabled: rgba(255, 255, 255, .2);
 $select-placeholder-color--disabled: rgba(255, 255, 255, .2);
 $select-placeholder-color: rgba(255, 255, 255, .4);
 $select-background-color--active: rgba(99, 226, 183, 0.1);
+$select-item-background-color--active: rgba(96, 220, 178, 0.3);
 $select-border-radius: 8px;
 $select-border-color--active: $main-color;
 
@@ -122,6 +123,9 @@ $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
 
 $default-font-family: 'Lato';
 
+$scrollbar-color: rgba(255,255,255,0.2);
+$scrollbar-color--hover: rgba(255,255,255,0.3);
+
 @mixin scrollbar {
   &::-webkit-scrollbar {
     width: 5px;
@@ -164,19 +168,19 @@ $default-font-family: 'Lato';
   }
 }
 
-@mixin fade-in-transition($block) {
+@mixin fade-in-scale-up-transition($block, $origin: inherit) {
   &.#{$namespace}-#{$block}--transition-enter-active,
   &.#{$namespace}-#{$block}--transition-leave-active {
     transform: scale(1);
     opacity: 1;
   }
   &.#{$namespace}-#{$block}--transition-enter-active {
-    transform-origin: left top;
+    transform-origin: $origin;
     transition: opacity .2s $fast-in-cubic-bezier, transform .2s $fast-in-cubic-bezier;
   }
   &.#{$namespace}-#{$block}--transition-enter, &.#{$namespace}-#{$block}--transition-leave-to {
     opacity: 0;
-    transform-origin: left top;
+    transform-origin: $origin;
     transform: scale(.9);
   }
   &.#{$namespace}-#{$block}--transition-leave-to {
@@ -184,22 +188,34 @@ $default-font-family: 'Lato';
   }
 }
 
-@mixin fade-in-transition($block, $origin: inherit) {
+@mixin fade-in-transition($block, $duration: .2s) {
   &.#{$namespace}-#{$block}--transition-enter-active,
   &.#{$namespace}-#{$block}--transition-leave-active {
-    transform: scale(1);
     opacity: 1;
   }
   &.#{$namespace}-#{$block}--transition-enter-active {
-    transform-origin: $origin;
-    transition: opacity .2s $fast-in-cubic-bezier, transform .2s $fast-in-cubic-bezier;
+    transition: opacity $duration $fast-in-cubic-bezier;
   }
   &.#{$namespace}-#{$block}--transition-enter, &.#{$namespace}-#{$block}--transition-leave-to {
     opacity: 0;
-    transform-origin: $origin;
-    transform: scale(.9);
   }
   &.#{$namespace}-#{$block}--transition-leave-to {
-    transition: opacity .2s $slow-out-cubic-bezier, transform .2s $slow-out-cubic-bezier;
+    transition: opacity $duration $slow-out-cubic-bezier;
+  }
+}
+
+@mixin fade-in-transition-ease-in-out($block, $duration: .2s) {
+  &.#{$namespace}-#{$block}--transition-enter-active,
+  &.#{$namespace}-#{$block}--transition-leave-active {
+    opacity: 1;
+  }
+  &.#{$namespace}-#{$block}--transition-enter-active {
+    transition: opacity $duration $default-cubic-bezier;
+  }
+  &.#{$namespace}-#{$block}--transition-enter, &.#{$namespace}-#{$block}--transition-leave-to {
+    opacity: 0;
+  }
+  &.#{$namespace}-#{$block}--transition-leave-to {
+    transition: opacity $duration $default-cubic-bezier;
   }
 }

@@ -22,6 +22,7 @@
         v-model="range3"
         type="daterange"
       />
+      <!--EXAMPLE_END-->
     </div>
     <pre class="n-doc-section__inspect">range1 v-model: {{ JSON.stringify(range1) }}
 range2 v-model: {{ JSON.stringify(range2) }}

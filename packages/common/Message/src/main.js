@@ -8,7 +8,7 @@ function attachMessageContainer () {
     messageContainer = document.createElement('div')
     messageContainer.classList.add('n-message', 'n-message__container')
     messageContainer.style = `
-          z-index: 300;
+          z-index: 6000;
           position: fixed;
           left: 0;
           right: 0;
@@ -70,6 +70,11 @@ const NMessage = {
     const messageContainer = attachMessageContainer()
     const messageCell = (new Vue({ ...NMessageCell, propsData: { option, content } })).$mount()
     registerMessageEl(messageContainer, messageCell.$el, mixinOption(option))
+  },
+  info (content, option) {
+    option = mixinOption(option)
+    option.type = 'info'
+    this.notice(content, option)
   },
   success (content, option) {
     option = mixinOption(option)

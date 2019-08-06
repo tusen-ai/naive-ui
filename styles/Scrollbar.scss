@@ -1,0 +1,62 @@
+/* stylelint-disable */
+@import './mixins/mixins.scss';
+@import './theme/default.scss';
+
+@include b(scrollbar) {
+  position: relative;
+  height: 100%;
+  .n-scrollbar-vertical-rail, .n-scrollbar-horizontal-rail {
+    position: absolute;
+    user-select: none;
+    -moz-user-select: none;
+    .n-scrollbar-rail__scrollbar {
+      @include fade-in-transition(scrollbar);
+      position: absolute;
+      cursor: pointer;
+      background-color: $scrollbar-color;
+      &:hover {
+        background-color: $scrollbar-color--hover;
+      }
+    }
+  }
+}
+
+.n-scrollbar-horizontal-rail {
+  left: 0;
+  right: 0;
+  bottom: 2.5px;
+  .n-scrollbar-rail__scrollbar {
+    right: 0;
+  }
+}
+
+.n-scrollbar-vertical-rail {
+  position: absolute;
+  right: 2.5px;
+  top: 0;
+  bottom: 0;
+  .n-scrollbar-rail__scrollbar {
+    bottom: 0;
+  }
+}
+
+.n-scrollbar-container {
+  width: 100%;
+  overflow: scroll;
+  height: 100%;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}
+
+.n-scrollbar-content {
+  width: fit-content;
+  overflow: visible;
+  min-width: 100%;
+  /* stylelint-disable */
+  width: -moz-fit-content;    /* Firefox/Gecko */
+  width: -webkit-fit-content; /* Chrome */
+  /* stylelint-enable */
+}

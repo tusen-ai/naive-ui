@@ -1,0 +1,56 @@
+@import './mixins/mixins.scss';
+@import './theme/default.scss';
+
+@include b(confirm) {
+  width: 446px;
+  margin: auto;
+  border-radius: 9px;
+  padding: 28px;
+  padding-top: 16px;
+  background: rgba(92, 101, 126, 1);
+  box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.16);
+  .n-confirm__wrap {
+    background: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .n-confirm__title {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .n-confirm__content {
+    font-size: 16px;
+    padding-right: 9px;
+    margin-top: 20px;
+    margin-bottom: 19px;
+    position: relative;
+    /* padding-left: 29px; */
+    /* display: flex; */
+  }
+  .n-confirm__content__text {
+    padding-left: 26px;
+    margin-left: 12px;
+  }
+  .n-confirm__content__icon {
+    // position: absolute;
+    vertical-align: middle;
+    margin-right: 8px;
+    // left: 0;
+    /* top: 50%;
+    transform: translateY(-50%); */
+  }
+  .n-comfirm__footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .n-confirm__title__text {
+    display: flex;
+    align-items: center;
+  }
+}

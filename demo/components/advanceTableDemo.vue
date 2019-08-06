@@ -128,11 +128,13 @@ export default {
             label: 'xiaobai1',
             value: 'xiaobai1'
           }],
-          onFilter: 'custom'
+          onFilter: 'custom',
+          ellipsis:true,// 溢出隐藏，显示省略号
         },
         {
           title: 'Age',
           key: 'age',
+          align: 'center',//居中
           sortable: true,
           order: 1, // 默认升序
           sorter: (a, b) => {
@@ -729,7 +731,7 @@ export default {
     let d = new Array(20).fill(0)
     d = d.map((item, idx) => {
       return {
-        name: 'xiaobai' + idx,
+        name: 'xiaobai213213132123213111121' + idx,
         age: Math.ceil((Math.random() * 20))
       }
     })
@@ -758,7 +760,7 @@ export default {
         {
           title: 'Name',
           key: 'name',
-          filterMultiple: false,
+          ellipsis: true,
           filterItems: [{
             label: 'xiaobai1',
             value: 'xiaobai1'
@@ -784,6 +786,14 @@ export default {
           key: 'age',
           sortable: true,
           order: 1,
+          className: (params) => {
+            let row = params.row
+            if (row.age > 10) {
+              return 'older'
+            }
+            return ''
+          },
+          align: 'center',
           sorter: (a, b) => {
             return a.age - b.age
           },
@@ -889,11 +899,11 @@ export default {
             value: 15
           }],
           onFilter: (value, record) => {
-            switch (value) {
+            switch (+value) {
               case 14:
-                return record.age <= value
+                return record.age <= +value
               case 15:
-                return record.age >= value
+                return record.age >= +value
             }
           },
           render: (h, params) => {
@@ -935,10 +945,10 @@ export default {
           filterMultiple: true,
           filterItems: [{
             label: '14',
-            value: '14'
+            value: 14
           }, {
             label: '15',
-            value: '15'
+            value: 15
           }],
           onFilter: (value, record) => {
             return value.includes(record.age + '')
@@ -986,3 +996,8 @@ export default {
   }
 }
 </script>
+<style>
+.older{
+ background:rgb(255, 204, 146);
+}
+</style>

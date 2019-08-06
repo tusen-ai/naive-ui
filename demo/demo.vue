@@ -3,7 +3,7 @@
     <n-nimbus-service-layout
       icon="md-contacts"
       :name="`NAIVE UI (${version})`"
-      :padding-body="false"
+      :padding-body="true"
       :items="items"
     >
       <router-view />
@@ -60,12 +60,24 @@ export default {
               path: '/n-alert'
             },
             {
+              name: 'Badge',
+              path: '/n-badge'
+            },
+            {
               name: 'Button',
               path: '/n-button'
             },
             {
               name: 'Checkbox',
               path: '/n-checkbox'
+            },
+            {
+              name: 'Collapse',
+              path: '/n-collapse'
+            },
+            {
+              name: 'Confirm',
+              path: '/n-confirm'
             },
             {
               name: 'DatePicker',
@@ -108,12 +120,24 @@ export default {
               path: '/n-popover'
             },
             {
+              name: 'Progress',
+              path: '/n-progress'
+            },
+            {
               name: 'Radio',
               path: '/n-radio'
             },
             {
               name: 'Select',
               path: '/n-select'
+            },
+            {
+              name: 'Cascader',
+              path: '/n-cascader'
+            },
+            {
+              name: 'Steps',
+              path: '/n-steps'
             },
             {
               name: 'Switch',
@@ -124,8 +148,16 @@ export default {
               path: '/n-table'
             },
             {
+              name: 'Tag',
+              path: '/n-tag'
+            },
+            {
               name: 'TimePicker',
               path: '/n-time-picker'
+            },
+            {
+              name: 'Timeline',
+              path: '/n-timeline'
             },
             {
               name: 'Tooltip',
@@ -151,6 +183,14 @@ export default {
             {
               name: 'RouterDebug',
               path: '/n-router-debug'
+            },
+            {
+              name: 'ModalDebug',
+              path: '/n-modal-debug'
+            },
+            {
+              name: 'ScrollbarDebug',
+              path: '/n-scrollbar-debug'
             }
           ]
         }
