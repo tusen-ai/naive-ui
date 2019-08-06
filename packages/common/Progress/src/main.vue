@@ -204,7 +204,9 @@ export default {
     if (this.indicatorPosition === 'inside-label') {
       this.$nextTick().then(() => {
         this.indicatorPercentage = this.calcIndicatorPercentage()
+        console.log(this.indicatorPercentage)
         this.$nextTick().then(() => {
+          this.$refs.indicator.getBoundingClientRect()
           this.indicatorPercentageIsCaculated = true
         })
       })
