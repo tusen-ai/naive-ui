@@ -38,7 +38,7 @@ import operateIcon from './icons/operate'
 import editIcon from './icons/edit'
 import closeIcon from './icons/close'
 
-const validTypes = ['share', 'ban', 'pull-request', 'operate', 'edit']
+const validTypes = ['share', 'ban', 'pull-request', 'operate', 'edit', 'close']
 
 export default {
   name: 'NNimbusIcon',
