@@ -1,0 +1,40 @@
+<template>
+  <div class="n-doc-section">
+    <div class="n-doc-section__header">
+      Multiple Labels
+    </div>
+    <div
+      class="n-doc-section__view"
+      style="flex-wrap: nowrap;"
+    >
+      <!--EXAMPLE_START-->
+      <n-multipleLabels
+        v-model="test1"
+      />
+      <!--EXAMPLE_END-->
+    </div>
+    <pre class="n-doc-section__inspect">v-model: {{ test1 }}</pre>
+    <n-doc-source-block>
+      <!--SOURCE-->
+    </n-doc-source-block>
+  </div>
+</template>
+
+<script>
+export default {
+  data () {
+    return {
+      test1: [
+        {
+          key: 'key1',
+          value: 'key1'
+        },
+        {
+          key: 'key2',
+          value: 'key2'
+        }
+      ]
+    }
+  }
+}
+</script>

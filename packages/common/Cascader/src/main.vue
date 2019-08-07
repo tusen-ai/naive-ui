@@ -2,7 +2,7 @@
 /**
  * Warning: There are some potential problems if there are too many items!
  */
-import MutipleCascader from './MutipleCascader'
+import MultipleCascader from './MultipleCascader'
 
 export default {
   name: 'NCascader',
@@ -70,7 +70,7 @@ export default {
       change: this.handleChange.bind(this),
       setactive: this.handleSetActive.bind(this)
     }
-    return h(MutipleCascader, {
+    return h(MultipleCascader, {
       props: { ...this.$props, active: this.active, placement: 'bottom-start', widthMode: 'activator' },
       on
     })

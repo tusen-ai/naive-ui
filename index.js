@@ -13,6 +13,7 @@ import RoundButton from './packages/common/Button'
 import Switch from './packages/common/Switch'
 import Select from './packages/common/Select'
 import Cascader from './packages/common/Cascader'
+import MultipleLabels from './packages/common/MultipleLabels'
 import Modal from './packages/common/Modal'
 import Input from './packages/common/Input'
 import Message from './packages/common/Message'
@@ -71,6 +72,7 @@ function install (Vue) {
   NimbusIcon.install(Vue)
   Radio.install(Vue)
   Cascader.install(Vue)
+  MultipleLabels.install(Vue)
   Form.install(Vue)
   TimePicker.install(Vue)
   Scrollbar.install(Vue)
