@@ -10,6 +10,8 @@
       <!--EXAMPLE_START-->
       <n-multipleLabels
         v-model="test1"
+        placeholder-key="placeholder1"
+        placeholder-value="placeholder2"
       />
       <!--EXAMPLE_END-->
     </div>
@@ -29,10 +31,7 @@ export default {
           key: 'key1',
           value: 'key1'
         },
-        {
-          key: 'key2',
-          value: 'key2'
-        }
+        {}
       ]
     }
   }
