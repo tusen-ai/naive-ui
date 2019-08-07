@@ -68,6 +68,10 @@ export default {
               path: '/n-button'
             },
             {
+              name: 'Cascader',
+              path: '/n-cascader'
+            },
+            {
               name: 'Checkbox',
               path: '/n-checkbox'
             },
@@ -130,10 +134,6 @@ export default {
             {
               name: 'Select',
               path: '/n-select'
-            },
-            {
-              name: 'Cascader',
-              path: '/n-cascader'
             },
             {
               name: 'Steps',

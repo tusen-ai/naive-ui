@@ -38,6 +38,7 @@ import NimbusIcon from './packages/nimbus/Icon'
 import Scrollbar from './packages/common/Scrollbar'
 import Steps from './packages/common/Steps'
 import Confirm from './packages/common/Confirm'
+import Badge from './packages/common/Badge'
 
 function install (Vue) {
   Card.install(Vue)
@@ -80,6 +81,7 @@ function install (Vue) {
   Steps.install(Vue)
   Confirm.install(Vue)
   Progress.install(Vue)
+  Badge.install(Vue)
 }
 
 export default {
