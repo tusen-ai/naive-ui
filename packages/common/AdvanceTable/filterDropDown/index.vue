@@ -1,6 +1,9 @@
 <template>
   <filterIcon :status="filterStatus">
-    <ul class="n-table-filter-item">
+    <!-- <n-scrollbar> -->
+    <ul
+      class="n-table-filter-item"
+    >
       <li
         v-for="(item, idx) in items"
         :key="item.value"
@@ -15,6 +18,7 @@
         />
       </li>
     </ul>
+    <!-- </n-scrollbar> -->
   </filterIcon>
 </template>
 
@@ -27,6 +31,10 @@ export default {
     filterIcon
   },
   props: {
+    maxHeight: {
+      type: [String, Number],
+      default: 27 * 3
+    },
     filterItems: {
       type: Array,
       default: () => []
@@ -56,6 +64,14 @@ export default {
     }
   },
   computed: {
+    dropDownContent () {
+      let stl = {}
+      if (this.maxHeight !== 'unset') {
+        let maxHeight = typeof this.maxHeight === 'string' ? this.maxHeight : this.maxHeight + 'px'
+        stl.maxHeight = maxHeight
+      }
+      return stl
+    },
     filterStatus () {
       return !!this.emitData
     },
@@ -144,12 +160,38 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+// .n-table-filter-item {
+
+//   &::-webkit-scrollbar {
+//     width: 5px;
+//   }
+//   &::-webkit-scrollbar-track {
+//     background: transparent;
+//   }
+//   &::-webkit-scrollbar-thumb {
+//     background: rgba(255, 255, 255, 0.2);
+//     border-radius: 2.5px;
+//   }
+//   &::-webkit-scrollbar-thumb:hover {
+//     background: rgba(255, 255, 255, 0.3);
+//   }
+//   &::-webkit-scrollbar-corner {
+//     background: transparent;
+//   }
+//   &::-webkit-scrollbar:horizontal {
+//     height: 5px;
+//   }
+// }
+</style>
 
 <style scoped>
+
 .n-table-filter-item {
   margin: 0;
   padding: 0;
   border-radius: 6px;
+  /* overflow-y: scroll; */
 }
 .n-table-filter-item li:first-of-type {
   border-top-left-radius: 6px;
