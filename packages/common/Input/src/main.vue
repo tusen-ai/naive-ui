@@ -75,9 +75,6 @@ export default {
   },
   mixins: [ Emitter ],
   inject: {
-    form: {
-      default: null
-    },
     formItem: {
       default: null
     }
@@ -127,11 +124,6 @@ export default {
   data () {
     return {
       isComposing: false
-    }
-  },
-  computed: {
-    validateState () {
-      return this.formItem ? this.formItem.validateState : ''
     }
   },
   methods: {
