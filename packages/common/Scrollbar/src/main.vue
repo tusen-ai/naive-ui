@@ -1,9 +1,6 @@
 <template>
   <div
     class="n-scrollbar"
-    :style="maxHeight === null ? {} : {
-      maxHeight: maxHeight + 'px'
-    }"
     @mouseenter="enterScrollWrapper"
     @mouseleave="leaveScrollWrapper"
     @dragstart.capture="handleDragStart"
@@ -11,9 +8,6 @@
     <div
       ref="scrollContainer"
       class="n-scrollbar-container"
-      :style="maxHeight === null ? {} : {
-        maxHeight: maxHeight + 'px'
-      }"
       @scroll="handleScroll"
     >
       <div
@@ -54,7 +48,8 @@
           :style="{
             height: scrollbarSize,
             width: horizontalScrollbarWidthPx,
-            left: horizontalScrollbarLeftPx
+            left: horizontalScrollbarLeftPx,
+            borderRadius: scrollbarBorderRadius
           }"
           @mousedown="handleHorizontalScrollMouseDown"
           @mouseup="handleHorizontalScrollMouseUp"
@@ -77,10 +72,6 @@ export default {
     duration: {
       type: Number,
       default: 0
-    },
-    maxHeight: {
-      type: Number,
-      default: null
     }
   },
   data () {
