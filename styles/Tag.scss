@@ -1,0 +1,43 @@
+@import './mixins/mixins.scss';
+@import './theme/default.scss';
+
+@include b(tag) {
+  position: relative;
+  line-height: 28px;
+  height: 28px;
+  font-size: 14px;
+  padding: 0 7px;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1px rgba(99,226,183,1);
+  color: rgba(99, 226, 183, 1);
+  box-sizing: border-box;
+  cursor: pointer;
+  &.n-tag--closable {
+    padding-right: 18px;
+    .n-tag__close-mark {
+      right: 3px;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 14px;
+      width: 14px;
+      line-height: 14px;
+      position: absolute;
+    }
+  }
+  &.n-tag--success-type {
+    box-shadow: inset 0 0 0 1px rgba(99, 226, 183, 1);
+    color:  rgba(99, 226, 183, 1);
+  }
+  &.n-tag--info-type {
+    box-shadow: inset 0 0 0 1px rgba(98, 187, 252, 1);
+    color: rgba(98, 187, 252, 1);
+  }
+  &.n-tag--warning-type {
+    box-shadow: inset 0 0 0 1px rgba(245, 166, 35, 1);
+    color: rgba(245, 166, 35, 1);
+  }
+  &.n-tag--error-type {
+    box-shadow: inset 0 0 0 1px rgba(255, 146, 164, 1);
+    color: rgba(255, 146, 164, 1)
+  }
+}
