@@ -104,6 +104,10 @@ export default {
               path: '/n-input-number'
             },
             {
+              name: 'InputKeyValuePairs',
+              path: '/n-InputKeyValuePairs'
+            },
+            {
               name: 'Message',
               path: '/n-message'
             },
@@ -134,10 +138,6 @@ export default {
             {
               name: 'Select',
               path: '/n-select'
-            },
-            {
-              name: 'MultipleLabels',
-              path: '/n-MultipleLabels'
             },
             {
               name: 'Steps',

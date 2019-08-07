@@ -40,6 +40,7 @@
 
 <script>
 import NIcon from '../../Icon/index'
+import Emitter from '../../../mixins/emitter'
 
 const DEFAULT_STEP = 1
 
@@ -60,6 +61,12 @@ export default {
   name: 'NInputNumber',
   components: {
     NIcon
+  },
+  mixins: [ Emitter ],
+  inject: {
+    formItem: {
+      default: null
+    }
   },
   props: {
     value: {
@@ -124,6 +131,7 @@ export default {
         }
       }
       this.$emit('change', newValue, oldValue)
+      this.formBlur('change', newValue)
       /**
        * newValue === oldValue won't trigger watcher!
        * so the call stack won't fall in loop
@@ -141,6 +149,11 @@ export default {
     }
   },
   methods: {
+    formBlur (type, val) {
+      if (this.formItem) {
+        this.dispatch('NFormItem', 'on-form-' + type, val)
+      }
+    },
     add () {
       if (this.value === null) {
         this.$emit('input', this.aValidValue)
@@ -161,6 +174,7 @@ export default {
       const value = e.target.value
       if (value === '') {
         this.$emit('input', null)
+        this.formBlur('blur', value)
         return
       }
       const parsedNumber = Number(value)
@@ -170,6 +184,7 @@ export default {
         const valueAfterChange = parsedNumber
         this.$emit('input', valueAfterChange)
       }
+      this.formBlur('blur', parsedNumber)
     }
   }
 }
