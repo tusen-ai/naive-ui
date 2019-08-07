@@ -1,15 +1,16 @@
 <template>
   <div
     class="n-checkbox"
-    :class="{'n-checkbox--checked': isChecked, 'n-checkbox--disabled': disabled}"
-    @click="handleClick"
+    :class="{'n-checkbox--checked': value, 'n-checkbox--disabled': disabled}"
   >
     <div
       class="n-checkbox__checkbox"
+      @click="handleClick"
     />
     <div
       v-if="$slots.default"
       class="n-checkbox__label"
+      @click="handleClick"
     >
       <slot />
     </div>
@@ -19,12 +20,12 @@
 <script>
 export default {
   name: 'NCheckbox',
-  model: {
-    prop: 'isChecked',
-    event: 'change'
-  },
   props: {
-    isChecked: {
+    label: {
+      type: [Number, Boolean, String],
+      default: null
+    },
+    value: {
       type: Boolean,
       required: true
     },
@@ -36,7 +37,8 @@ export default {
   methods: {
     handleClick () {
       if (!this.disabled) {
-        this.$emit('change', !this.isChecked)
+        this.$emit('input', !this.value)
+        this.$emit('change', !this.value, this.label)
       }
     }
   }

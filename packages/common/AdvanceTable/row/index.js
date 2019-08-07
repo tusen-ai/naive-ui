@@ -8,14 +8,11 @@ export default {
     keyName: String
   },
   render: (h, ctx) => {
-    const params = {
-      row: ctx.props.row,
-      index: ctx.props.index
-    }
+    const params = ctx.props.row
 
     const { keyName, render, row } = ctx.props
     if (render) {
       return h('div', [render(h, params)])
-    } else return h('div', [row[keyName]])
+    } else return h('div', [params.row[keyName]])
   }
 }

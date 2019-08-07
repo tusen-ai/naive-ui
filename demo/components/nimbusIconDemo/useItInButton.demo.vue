@@ -11,7 +11,7 @@
       <n-button size="small">
         <template v-slot:icon>
           <n-nimbus-icon
-            type="pull-request"
+            type="share"
             color="#63E2B7"
           />
         </template>
@@ -20,7 +20,7 @@
       <n-button>
         <template v-slot:icon>
           <n-nimbus-icon
-            type="pull-request"
+            type="share"
             color="#63E2B7"
           />
         </template>
@@ -29,7 +29,7 @@
       <n-button size="tiny">
         <template v-slot:icon>
           <n-nimbus-icon
-            type="pull-request"
+            type="share"
             color="#63E2B7"
           />
         </template>
@@ -38,7 +38,7 @@
       <n-button icon-on-right>
         <template v-slot:icon>
           <n-nimbus-icon
-            type="pull-request"
+            type="share"
             color="#63E2B7"
           />
         </template>

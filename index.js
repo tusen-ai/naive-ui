@@ -19,6 +19,7 @@ import Input from './packages/common/Input'
 import Message from './packages/common/Message'
 import Notification from './packages/common/Notification'
 import Pagination from './packages/common/Pagination'
+import Progress from './packages/common/Progress'
 import Tooltip from './packages/common/Tooltip'
 import Popup from './packages/common/Popover'
 import Alert from './packages/common/Alert'
@@ -26,6 +27,7 @@ import DatePicker from './packages/common/DatePicker'
 import InputNumber from './packages/common/InputNumber'
 import Radio from './packages/common/Radio'
 import Form from './packages/common/Form'
+import Tab from './packages/common/Tab'
 import TimePicker from './packages/common/TimePicker'
 import ServiceCard from './packages/nimbus/ServiceCard'
 import HomeLayout from './packages/nimbus/HomeLayout'
@@ -37,6 +39,7 @@ import NimbusIcon from './packages/nimbus/Icon'
 import Scrollbar from './packages/common/Scrollbar'
 import Steps from './packages/common/Steps'
 import Confirm from './packages/common/Confirm'
+import Badge from './packages/common/Badge'
 
 function install (Vue) {
   Card.install(Vue)
@@ -74,10 +77,13 @@ function install (Vue) {
   Cascader.install(Vue)
   MultipleLabels.install(Vue)
   Form.install(Vue)
+  Tab.install(Vue)
   TimePicker.install(Vue)
   Scrollbar.install(Vue)
   Steps.install(Vue)
   Confirm.install(Vue)
+  Progress.install(Vue)
+  Badge.install(Vue)
 }
 
 export default {

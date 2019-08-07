@@ -10,7 +10,7 @@
   display: flex;
   flex: 1;
   .n-step__splitor {
-    transition: color .2s $default-cubic-bezier, background-color .2s $default-cubic-bezier;
+    transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
     height: 1px;
     flex: 1;
     align-self: flex-start;
@@ -23,7 +23,6 @@
     display: none;
   }
   &:last-child {
-    flex: none;
     .n-step__splitor.n-step__splitor--right {
       display: none;
     }
@@ -49,15 +48,31 @@
     }
     .n-step-indicator {
       box-shadow: 0 0 0 1px rgba(99,226,183,1);
-      .n-step-indicator__index {
+      .n-step-indicator__icon, .n-step-indicator__index {
         color: rgba(99,226,183,1);
+      }
+    }
+    &.n-step--error {
+      .n-step__splitor {
+        background-color: rgba(255, 146, 164, 1);
+      }
+      .n-step-content {
+        .n-step-content__title {
+          color: rgba(255, 146, 164, 1);
+        }
+        .n-step-content__description {
+          color: rgba(255, 146, 164, 1);
+        }
+      }
+      .n-step-indicator {
+        box-shadow: 0 0 0 1px rgba(255, 146, 164, 1);
+        .n-step-indicator__icon, .n-step-indicator__index {
+          color: rgba(255, 146, 164, 1);
+        }
       }
     }
   }
   &.n-step--active {
-    .n-step__splitor {
-      background-color: rgba(99,226,183,1);
-    }
     .n-step-content {
       .n-step-content__title {
         color: rgba(99,226,183,1);
@@ -69,8 +84,25 @@
     .n-step-indicator {
       background-color: rgba(99,226,183,1);
       box-shadow: 0 0 0 1px rgba(99,226,183,1);
-      .n-step-indicator__index {
+      .n-step-indicator__icon, .n-step-indicator__index {
         color: rgba(23, 29, 51, 1);
+      }
+    }
+    &.n-step--error {
+      .n-step-content {
+        .n-step-content__title {
+          color: rgba(255, 146, 164, 1);
+        }
+        .n-step-content__description {
+          color: rgba(255, 146, 164, 1);
+        }
+      }
+      .n-step-indicator {
+        background-color: rgba(255, 146, 164, 1);
+        box-shadow: 0 0 0 1px rgba(255, 146, 164, 1);
+        .n-step-indicator__icon, .n-step-indicator__index {
+          color: rgba(23, 29, 51, 1);
+        }
       }
     }
   }
@@ -79,7 +111,7 @@
 @include b(step-content) {
   flex: 1;
   .n-step-content__title {
-    transition: color .2s $default-cubic-bezier, background-color .2s $default-cubic-bezier;
+    transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
     position: relative;
     display: flex;
     color: rgba(255,255,255,0.3);
@@ -91,7 +123,7 @@
     }
   }
   .n-step-content__description {
-    transition: color .2s $default-cubic-bezier, background-color .2s $default-cubic-bezier;
+    transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
     color: rgba(255,255,255,0.3);
     margin-top: 12px;
     margin-left: 9px;
@@ -99,17 +131,33 @@
 }
 
 @include b(step-indicator) {
+  position: relative;
   height: 20px;
   width: 20px;
   border-radius: 10px;
   box-shadow: 0 0 0 1px rgba(255,255,255,0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color .2s $default-cubic-bezier, background-color .2s $default-cubic-bezier;
+  transition: background-color .3s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier;
+  .n-step-indicator__icon {
+    @include fade-in-transition-ease-in-out(step-indicator, .3s);
+    transition: color .3s $default-cubic-bezier;
+    color: rgba(255,255,255,0.3);
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+    line-height: 16px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
   .n-step-indicator__index {
-    transition: inherit;
+    @include fade-in-transition-ease-in-out(step-indicator, .3s);
+    transition: color .3s $default-cubic-bezier;
     color: rgba(255,255,255,0.3);
     font-size: 13px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
   }
 }

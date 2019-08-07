@@ -68,6 +68,10 @@ export default {
               path: '/n-button'
             },
             {
+              name: 'Cascader',
+              path: '/n-cascader'
+            },
+            {
               name: 'Checkbox',
               path: '/n-checkbox'
             },
@@ -170,6 +174,10 @@ export default {
             {
               name: 'Form',
               path: '/n-form'
+            },
+            {
+              name: 'Tab',
+              path: '/n-tab'
             }
           ]
         },

@@ -278,7 +278,7 @@
             >
               The key in form-model does not support the form with ' . '.<br>
               And does not init the value of parameters with 'undefined'.<br>
-              ResetForm Method: only can reset the item with prop.<br>
+              ResetForm Method: only can reset the item with prop. And Donnot deal the nesting form context<br>
               ValidateForm Method: support validate specified items by the second parameter in form of array.<br>
             </n-form-item>
             <n-popover>
@@ -302,6 +302,17 @@
             >
               <n-select
                 v-model="validateForm.muti.deep.select"
+                placeholder="Please Select Type"
+                :items="items"
+              />
+            </n-form-item>
+            <n-form-item
+              prop="mutiSelect.0"
+              label="multi-select"
+            >
+              <n-select
+                v-model="validateForm.mutiSelect[0]"
+                multiple
                 placeholder="Please Select Type"
                 :items="items"
               />
@@ -362,6 +373,17 @@
                   :items="items"
                 />
               </n-form-item>
+              <n-form-item
+                prop="mutiSelect.0"
+                label="Select"
+              >
+                <n-select
+                  v-model="validateForm.mutiSelect[0]"
+                  multiple
+                  placeholder="Please Select Type"
+                  :items="items"
+                />
+              </n-form-item>
               <n-form-item label="Switch" prop="switch">
                 <n-switch v-model="validateForm.switch" />
               </n-form-item>
@@ -390,6 +412,13 @@
             <script>
               export default {
                 data () {
+                  let arrayValidate = (rule, value, callback) => {
+                    if (value.length <= 0) {
+                      callback(new Error('input required'))
+                    } else {
+                      callback()
+                    }
+                  }
                   return {
                     validateForm: {
                       input: "",
@@ -405,6 +434,9 @@
                     validateRules: {
                       input: [
                         { required: true, message: "input cannot be empty", trigger: "blur" }
+                      ],
+                      'mutiSelect.0': [
+                        { validator: arrayValidate, trigger: 'change' }
                       ],
                       "muti.deep.select": [
                         {
@@ -708,6 +740,13 @@ export default {
         callback()
       }
     }
+    var arrayValidate = (rule, value, callback) => {
+      if (value.length <= 0) {
+        callback(new Error('input required'))
+      } else {
+        callback()
+      }
+    }
     return {
       form: {
         name: '',
@@ -745,6 +784,9 @@ export default {
             select: 'Public'
           }
         },
+        mutiSelect: [
+          []
+        ],
         datepicker: 0,
         switch: false,
         radio: ''
@@ -752,6 +794,9 @@ export default {
       validateRules: {
         input: [
           { required: true, message: 'input cannot be empty', trigger: 'blur' }
+        ],
+        'mutiSelect.0': [
+          { validator: arrayValidate, trigger: 'change' }
         ],
         'muti.deep.select': [
           {
@@ -897,7 +942,6 @@ export default {
           console.log('unpass', e)
         })
     },
-
     formReset (ref) {
       this.$refs[ref].resetForm()
     },
