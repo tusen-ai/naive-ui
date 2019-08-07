@@ -136,6 +136,14 @@ export default {
               path: '/n-select'
             },
             {
+              name: 'Cascader',
+              path: '/n-cascader'
+            },
+            {
+              name: 'MultipleLabels',
+              path: '/n-MultipleLabels'
+            },
+            {
               name: 'Steps',
               path: '/n-steps'
             },

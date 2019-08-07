@@ -85,7 +85,7 @@ import toggleable from '../../../mixins/toggleable'
 import CasPanel from './CasPanel'
 
 export default {
-  name: 'MutipleCascader',
+  name: 'MultipleCascader',
   components: {
     NIcon,
     CasPanel
