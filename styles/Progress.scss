@@ -1,0 +1,183 @@
+@import "./mixins/mixins.scss";
+@import "./theme/default.scss";
+
+.n-progress {
+  color: rgba(98, 187, 252, 1);
+  &.n-progress--line {
+    width: 350px;
+    .n-progress-content {
+      display: flex;
+      align-items: center;
+      .n-progress-graph {
+        flex: 1;
+      }
+    }
+    .n-progress-icon {
+      width: 46px;
+      padding-left: 14px;
+      height: 24px;
+      font-size: 24px;
+    }
+    .n-progress-text {
+      color: inherit;
+      white-space: nowrap;
+      font-weight: bold;
+      line-height: 24px;
+      width: 60px;
+      .n-progress-text__percentage {
+        font-size: 18px;
+        margin-left: 14px;
+      }
+      .n-progress-text__unit {
+        font-size: 18px;
+      }
+    }
+  }
+  &.n-progress--circle {
+    width: 120px;
+    .n-progress-text, .n-progress-icon {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      display: flex;
+      align-items: center;
+      color: inherit;
+      font-size: 36px;
+    }
+    .n-progress-text {
+      white-space: nowrap;
+      font-weight: bold;
+      .n-progress-text__percentage {
+        font-size: 28px;
+      }
+      .n-progress-text__unit {
+        font-size: 24px;
+        margin-left: 6px;
+      }
+    }
+  }
+  &.n-progress--success{
+    color: rgba(99, 226, 183, 1);
+    .n-progress-graph {
+      .n-progress-graph__circle {
+        .n-progress-graph__circle-fill {
+          stroke: rgba(99, 226, 183, 1);
+        }
+      }
+      .n-progress-graph__line {
+        .n-progress-graph__line-fill, .n-progress-graph__line-indicator {
+          background-color: rgba(99, 226, 183, 1);
+        }
+      }
+    }
+  }
+  &.n-progress--error{
+    color: rgba(255, 146, 164, 1);
+    .n-progress-graph {
+      .n-progress-graph__circle {
+        .n-progress-graph__circle-fill {
+          stroke: rgba(255, 146, 164, 1);
+        }
+      }
+      .n-progress-graph__line {
+        .n-progress-graph__line-fill, .n-progress-graph__line-indicator {
+          background-color: rgba(255, 146, 164, 1);
+        }
+      }
+    }
+  }
+  &.n-progress--warning{
+    color: rgba(255, 138, 0, 1);
+    .n-progress-graph {
+      .n-progress-graph__circle {
+        .n-progress-graph__circle-fill {
+          stroke: rgba(255, 138, 0, 1);
+        }
+      }
+      .n-progress-graph__line {
+        .n-progress-graph__line-fill, .n-progress-graph__line-indicator {
+          background-color: rgba(255, 138, 0, 1);
+        }
+      }
+    }
+  }
+  .n-progress-content {
+    position: relative;
+  }
+  .n-progress-graph {
+    position: relative;
+    .n-progress-graph__circle {
+      vertical-align: bottom;
+      .n-progress-graph__circle-rail {
+        stroke: rgba(255, 255, 255, .3);
+      }
+      .n-progress-graph__circle-fill {
+        transition: stroke-dasharray .3s $default-cubic-bezier;
+        stroke: rgba(98, 187, 252, 1);
+      }
+    }
+    .n-progress-graph__line {
+      &.n-progress-graph__line--indicator-inside {
+        .n-progress-graph__line-rail {
+          height: 33px;
+          border-radius: 16.5px;
+        }
+        .n-progress-graph__line-fill {
+          height: 33px;
+          border-radius: 16.5px;
+        }
+        .n-progress-graph__line-indicator {
+          background-color: none;
+          color: rgba(23, 29, 51, 1);
+          white-space: nowrap;
+          text-align: right;
+          font-weight: bold;
+          margin-left: 14px;
+          margin-right: 14px; 
+          height: 33px;
+          font-size: 18px;
+          line-height: 33px;
+        }
+      }
+      &.n-progress-graph__line--indicator-inside-label {
+        height: 33px;
+        display: flex;
+        align-items: center;
+        .n-progress-graph__line-rail {
+          flex: 1;
+        }
+        .n-progress-graph__line-indicator {
+          transition: right .2s $default-cubic-bezier;
+          height: 33px;
+          line-height: 33px;
+          padding: 0 10px;
+          border-radius: 16.5px;
+          position: absolute;
+          color: rgba(23, 29, 51, 1);
+          white-space: nowrap;
+          font-weight: bold;
+          font-size: 18px;
+        }
+      }
+      .n-progress-graph__line-rail {
+        overflow: hidden;
+        height: 15px;
+        background-color: rgba(255, 255, 255, .3);
+        border-radius: 7.5px;
+      }
+      .n-progress-graph__line-fill {
+        background-color: rgba(98, 187, 252, 1);
+        border-radius: 7.5px;
+        height: 15px;
+        width: 100%;
+        max-width: 0%;
+        transition: max-width .2s $default-cubic-bezier;
+      }
+      .n-progress-graph__line-indicator {
+        background-color: rgba(98, 187, 252, 1);
+      }
+    }
+  }
+  
+}

@@ -1,7 +1,7 @@
 <template>
   <div class="n-doc-section">
     <div class="n-doc-section__header">
-      Search(Only for single select)
+      Search
     </div>
     <div
       class="n-doc-section__view"
@@ -10,30 +10,22 @@
       <!--EXAMPLE_START-->
       <n-select
         v-model="selectedValue"
-        size="large"
         filterable
         placeholder="Please Select Type"
         :items="items"
-        style="flex-grow: 1; margin-right: 12px;"
+        style="flex-grow: 1; margin-right: 12px; width: 300px;"
       />
       <n-select
-        v-model="selectedValue"
+        v-model="selectedValues"
+        multiple
         filterable
         placeholder="Please Select Type"
         :items="items"
-        style="flex-grow: 1; margin-right: 12px;"
-      />
-      <n-select
-        v-model="selectedValue"
-        filterable
-        size="small"
-        placeholder="Please Select Type"
-        :items="items"
-        style="flex-grow: 1;"
+        style="flex-grow: 1; margin-right: 12px; width: 300px;"
       />
       <!--EXAMPLE_END-->
     </div>
-    <pre class="n-doc-section__inspect">v-model: {{ JSON.stringify(selectedValue) }}</pre>
+    <pre class="n-doc-section__inspect">v-model(single): {{ JSON.stringify(selectedValue) }}, v-model(multiple): {{ JSON.stringify(selectedValues) }}</pre>
     <n-doc-source-block>
       <!--SOURCE-->
     </n-doc-source-block>
@@ -45,6 +37,7 @@ export default {
   data () {
     return {
       selectedValue: null,
+      selectedValues: null,
       items: [
         {
           label: 'Drive My Car',
@@ -63,7 +56,7 @@ export default {
           value: 'song4'
         },
         {
-          label: 'Think For Yourseld',
+          label: 'Think For Yourself',
           value: 'song5'
         },
         {

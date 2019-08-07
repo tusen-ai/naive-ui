@@ -1,0 +1,23 @@
+.n-multiple-labels {
+  .n-multiple-labels__item {
+    margin-bottom: 30px;
+    .n-multiple-labels__item--title {
+      display: block;
+      margin: 0 0 8px;
+    }
+    .n-multiple-labels__item--content {
+      display: flex;
+      .n-multiple-labels__item--input {
+        flex: 2;
+        display: inline-block;
+        margin-right: 13px;
+      }
+      .n-multiple-labels__item--action {
+        flex: 1;
+        display: inline-block;
+        align-items: center;
+        display: flex;
+      }
+    }
+  }
+}

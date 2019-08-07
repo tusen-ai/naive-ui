@@ -11,8 +11,16 @@
 </template>
 
 <script>
+import Emitter from '../../../mixins/emitter'
+
 export default {
   name: 'NSwitch',
+  mixins: [ Emitter ],
+  inject: {
+    formItem: {
+      default: null
+    }
+  },
   model: {
     prop: 'active',
     event: 'change'
@@ -31,6 +39,9 @@ export default {
     handleClick () {
       if (!this.disabled) {
         this.$emit('change', !this.active)
+        if (this.formItem) {
+          this.dispatch('NFormItem', 'on-form-change', !this.active)
+        }
       }
     }
   }

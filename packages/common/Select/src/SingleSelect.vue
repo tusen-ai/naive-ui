@@ -24,7 +24,7 @@
           v-model="label"
           class="n-select-link-label__input"
           :placeholder="labelPlaceholder"
-          :readonly="filterable ? false : 'readonly'"
+          :readonly="!disabled && filterable ? false : 'readonly'"
         >
       </div>
     </div>
@@ -67,7 +67,7 @@
                     class="n-select-menu__item"
                     :class="{
                       'n-select-menu__item--selected':
-                        selectedValue ===
+                        value ===
                         item.value
                     }"
                     @click.stop="toggleItemInSingleSelect(item)"
@@ -116,10 +116,6 @@ export default {
     clickoutside
   },
   mixins: [detachable, toggleable, placeable, zindexable, Emitter],
-  model: {
-    prop: 'selectedValue',
-    event: 'input'
-  },
   inject: {
     formItem: {
       default: null
@@ -131,7 +127,7 @@ export default {
       required: true
     },
     // eslint-disable-next-line vue/require-prop-types
-    selectedValue: {
+    value: {
       default: null
     },
     placeholder: {
@@ -179,18 +175,13 @@ export default {
       return this.items.filter(item => this.matchFilterablePattern(item.label))
     },
     selected () {
-      return this.items.some(item => item.value === this.selectedValue)
+      return this.items.some(item => item.value === this.value)
     },
     selectedItem () {
-      const selectedValue = this.selectedValue
-      const index = this.items.findIndex(item => item.value === selectedValue)
+      const value = this.value
+      const index = this.items.findIndex(item => item.value === value)
       if (1 + index) return this.items[index]
       else return null
-    },
-    selectedItems () {
-      if (!Array.isArray(this.selectedValue)) return []
-      const selectedValues = new Set(this.selectedValue)
-      return this.items.filter(item => selectedValues.has(item.value))
     }
   },
   watch: {
@@ -261,7 +252,7 @@ export default {
       this.showLightBar = false
     },
     isSelected (item) {
-      return item.value === this.selectedValue
+      return item.value === this.value
     },
     handleClickOutsideMenu (e) {
       if (!this.$refs.activator.contains(e.target) && !this.scrolling) {

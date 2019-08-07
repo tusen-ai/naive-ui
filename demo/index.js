@@ -17,6 +17,7 @@ import advanceTableDemo from './components/advanceTableDemo'
 import inputDemo from './components/inputDemo'
 import selectDemo from './components/selectDemo'
 import cascaderDemo from './components/cascaderDemo'
+import multipleLabelsDemo from './components/multipleLabelsDemo'
 import modalDemo from './components/modalDemo'
 import nimbusFormCardDemo from './components/nimbusFormCardDemo'
 import messageDemo from './components/messageDemo'
@@ -80,6 +81,7 @@ const routes = [
       { path: '/n-input', component: inputDemo },
       { path: '/n-select', component: selectDemo },
       { path: '/n-cascader', component: cascaderDemo },
+      { path: '/n-MultipleLabels', component: multipleLabelsDemo },
       { path: '/n-modal', component: modalDemo },
       { path: '/n-nimbus-form-card', component: nimbusFormCardDemo },
       { path: '/n-message', component: messageDemo },
@@ -97,7 +99,6 @@ const routes = [
       { path: '/n-tab', component: tabDemo },
       { path: '/n-time-picker', component: timePickerDemo },
       { path: '/n-confirm', component: confirmDemo },
-
       { path: '/n-router-debug', component: routerDebug },
       { path: '/n-modal-debug', component: modalDebug },
       { path: '/n-scrollbar-debug', component: scrollbarDebug },

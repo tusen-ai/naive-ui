@@ -1,6 +1,9 @@
 <template>
   <div
     class="n-scrollbar"
+    :style="maxHeight === null ? {} : {
+      maxHeight: maxHeight + 'px'
+    }"
     @mouseenter="enterScrollWrapper"
     @mouseleave="leaveScrollWrapper"
     @dragstart.capture="handleDragStart"
@@ -8,6 +11,9 @@
     <div
       ref="scrollContainer"
       class="n-scrollbar-container"
+      :style="maxHeight === null ? {} : {
+        maxHeight: maxHeight + 'px'
+      }"
       @scroll="handleScroll"
     >
       <div
@@ -71,6 +77,10 @@ export default {
     duration: {
       type: Number,
       default: 0
+    },
+    maxHeight: {
+      type: Number,
+      default: null
     }
   },
   data () {
@@ -161,6 +171,21 @@ export default {
     this.updateParameters()
   },
   methods: {
+    scrollToElement (el, elPosition = 'bottom') {
+      if (el.offsetTop < this.$refs.scrollContainer.scrollTop) {
+        this.$refs.scrollContainer.scrollTo({
+          top: el.offsetTop,
+          left: 0,
+          behavior: 'smooth'
+        })
+      } else if (el.offsetTop + el.offsetHeight > this.$refs.scrollContainer.scrollTop + this.$refs.scrollContainer.offsetHeight) {
+        this.$refs.scrollContainer.scrollTo({
+          top: el.offsetTop + el.offsetHeight - this.$refs.scrollContainer.offsetHeight,
+          left: 0,
+          behavior: 'smooth'
+        })
+      }
+    },
     enterScrollWrapper () {
       this.displayHorizontalScrollbar()
       this.displayVerticalScrollbar()

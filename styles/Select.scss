@@ -72,6 +72,9 @@
         transition: opacity .3s $slow-out-cubic-bezier;
       }
     }
+    .n-select-link__tag-wrapper {
+      width: 100%;
+    }
     .n-select-link__label, .n-select-link__tags {
       position: relative;
       transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
@@ -95,18 +98,19 @@
         background: transparent;
         outline: none;
         color: $select-text-color;
-        padding: 0 28px 0 14px;
+        padding: 0 32px 0 14px;
         &::placeholder {
           color: $select-placeholder-color;
         }
       }
     }
     .n-select-link__tags {
-      padding: 4px 20px 0 14px;
+      padding: 4px 28px 0 14px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       .n-select-link__tag {
+        vertical-align: bottom;
         box-sizing: border-box;
         position: relative;
         display: inline-block;
@@ -185,6 +189,10 @@
           height: 20px;
           line-height: 20px;
         }
+        .n-select-input-tag {
+          height: 20px;
+          line-height: 20px;
+        }
       }
       .n-select-link__label {
         height: $small-height;
@@ -210,6 +218,10 @@
           height: 26px;
           line-height: 26px;
         }
+        .n-select-input-tag {
+          height: 26px;
+          line-height: 26px;
+        }
       }
       .n-select-link__label {
         height: $default-height;
@@ -219,7 +231,6 @@
           line-height: $default-height;
         }
       }
-      
     }
   }
   &.n-select--large-size {
@@ -231,6 +242,10 @@
       min-height: 32px;
       .n-select-link__tag {
         padding: 0px 20px 0 7px;
+        height: 32px;
+        line-height: 32px;
+      }
+      .n-select-input-tag {
         height: 32px;
         line-height: 32px;
       }
@@ -362,5 +377,36 @@
     .n-select-menu__light-bar--transition-enter, .n-select-menu__light-bar--transition-leave-to {
       opacity: 0;
     }    
+  }
+}
+
+@include b(select-input-tag) {
+  position: relative;
+  margin-bottom: 4px;
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: bottom;
+  .n-select-input-tag__input {
+    padding: 0;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    max-width: 100%;
+    caret-color: $input-caret-color;
+    color: $select-text-color;
+    height: 100%;
+    width: 1em;
+    line-height: inherit;
+    cursor: pointer;
+  }
+  .n-select-input-tag__mirror {
+    position: absolute;
+    padding-right: .5em;
+    left: 0;
+    top: 0;
+    white-space: pre;
+    visibility: hidden;
+    user-select: none;
+    opacity: 0;
   }
 }

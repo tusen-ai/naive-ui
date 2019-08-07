@@ -18,6 +18,7 @@
           <n-advance-table
             :columns="columns0"
             :data="data"
+            :rowCls="rowCls"
           >
             <template #table-operation>
               <n-button>custom operation by v-slot:table-operation</n-button>
@@ -29,6 +30,7 @@
 <n-advance-table
   :columns="columns0"
   :data="data"
+  :rowCls="rowCls"
 >
   <template #table-operation>
     <n-button>custom operation by v-slot:table-operation</n-button>
@@ -46,6 +48,7 @@ export default {
       }
     })
     return {
+      rowCls:{'rowGreen': true, 'rowColor': false}, // ['rowGreen', 'rowColor'], 'rowGreen rowColor'
       columns: [
         {
           title: 'Name',
@@ -82,6 +85,11 @@ export default {
   }
 }
 </script>
+<style>
+  .rowGreen:hover {
+  background-color:rgb(37, 109, 85)!important
+}
+</style>
           </textarea>
         </div>
       </div>
@@ -737,6 +745,7 @@ export default {
     })
     console.log(d)
     return {
+      rowCls: {'rowGreen': true, 'rowColor': false}, // ['rowGreen', 'rowColor'], 'rowGreen rowColor'
       search1: {
         columns: [
           { label: 'Name',
@@ -1006,5 +1015,11 @@ export default {
 }
 .higher {
   color: blue;
+}
+.rowGreen:hover {
+  background-color:rgb(37, 109, 85)!important
+}
+.rowColor{
+  color:bisque
 }
 </style>

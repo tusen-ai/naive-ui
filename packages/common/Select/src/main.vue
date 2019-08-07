@@ -8,7 +8,7 @@ import NSingleSelect from './SingleSelect'
 export default {
   name: 'NSelect',
   model: {
-    prop: 'selectedValue',
+    prop: 'value',
     event: 'input'
   },
   props: {
@@ -17,7 +17,7 @@ export default {
       required: true
     },
     // eslint-disable-next-line vue/require-prop-types
-    selectedValue: {
+    value: {
       default: null
     },
     placeholder: {

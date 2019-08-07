@@ -101,6 +101,7 @@
         <n-tr
           v-for="(rowData, i) in showingData"
           :key="i"
+          :class="rowCls"
         >
           <n-td
             v-for="column in columns"
@@ -208,6 +209,10 @@ export default {
     data: {
       type: Array,
       default: () => []
+    },
+    rowCls: {
+      type: [Array, String, Object],
+      default: ''
     }
   },
   data () {

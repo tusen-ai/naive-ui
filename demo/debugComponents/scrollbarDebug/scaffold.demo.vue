@@ -16,7 +16,7 @@
         </n-scrollbar>
       </div>
       <div style="width: 400px; height: 300px;">
-        <n-scrollbar>
+        <n-scrollbar :max-height="200">
           <div style="background: linear-gradient(red, blue); width: 400px; height: 500px;">
             666
           </div>

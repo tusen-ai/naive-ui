@@ -71,8 +71,8 @@ Vue.use(naiveUi)
 |Radio|😍|||
 |Tab|🚧|||
 |Breadcrumb|🚧|||
-|Badge|🚧|||
-|Steps|🚧|||
+|Badge|😍|||
+|Steps|😍|||
 |Tag|🚧|||
 |Divider|🚧|||
 |Statistic|🚧|||
