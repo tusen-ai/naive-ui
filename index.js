@@ -40,6 +40,7 @@ import Scrollbar from './packages/common/Scrollbar'
 import Steps from './packages/common/Steps'
 import Confirm from './packages/common/Confirm'
 import Badge from './packages/common/Badge'
+import Tag from './packages/common/Tag'
 
 function install (Vue) {
   Card.install(Vue)
@@ -84,6 +85,7 @@ function install (Vue) {
   Confirm.install(Vue)
   Progress.install(Vue)
   Badge.install(Vue)
+  Tag.install(Vue)
 }
 
 export default {

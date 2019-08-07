@@ -17,23 +17,22 @@
   }
   &.n-badge--success-type {
     .n-badge-sup {
-      color: rgba(75, 81, 106, 1);
-      background-color: rgba(99, 226, 183, 1);
+      background-color: rgba(9, 133, 91, 1);
     }
   }
   &.n-badge--info-type {
     .n-badge-sup {
-      background-color: rgba(98, 187, 252, 1);
+      background-color: rgba(56, 137, 197, 1);
     }
   }
   &.n-badge--warning-type {
     .n-badge-sup {
-      background-color: rgba(255, 138, 0, 1);
+      background-color: rgba(216, 94, 0, 1);
     }
   }
   &.n-badge--error-type {
     .n-badge-sup {
-      background-color: rgba(255, 146, 164, 1);
+      background-color: rgba(210, 82, 129, 1);
     }
   }
 }
@@ -44,7 +43,7 @@
   height: 18px;
   line-height: 18px;
   border-radius: 9px;
-  background-color: rgba(237, 73, 99, 1);
+  background-color: rgba(186, 45, 67, 1);
   padding: 0 6px;
   text-align: center;
   font-size: 12px;

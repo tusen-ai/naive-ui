@@ -271,6 +271,7 @@
             ref="form-validate"
             :model="validateForm"
             :rules="validateRules"
+            :label-width="100"
           >
             <n-form-item
               label="Warning"
@@ -296,6 +297,15 @@
               </template>
               <span>Test nesting formItem in resetForm</span>
             </n-popover>
+            <n-form-item
+              prop="inputNumber"
+              label="InputNumber"
+            >
+              <n-input-number
+                v-model="validateForm.inputNumber"
+                placeholder="n-input-number"
+              />
+            </n-form-item>
             <n-form-item
               prop="muti.deep.select"
               label="Select"
@@ -365,6 +375,15 @@
               <n-form-item prop="input" label="Input">
                 <n-input v-model="validateForm.input" placeholder="Enter string" />
               </n-form-item>
+              <n-form-item
+                prop="inputNumber"
+                label="InputNumber"
+              >
+                <n-input-number
+                  v-model="validateForm.inputNumber"
+                  placeholder="n-input-number"
+                />
+              </n-form-item>
               <n-form-item prop="muti.deep.select" label="Select">
                 <n-select
                   size="small"
@@ -419,9 +438,22 @@
                       callback()
                     }
                   }
+                  var inputNumberValidate = (rule, value, callback) => {
+                    console.log('blur', value)
+                    callback()
+                  }
+                  var inputNumberValidateChange = (rule, value, callback) => {
+                    console.log('change', value)
+                    callback()
+                  }
+                  var switchValidate = (rule, value, callback) => {
+                    console.log('switch change', value)
+                    callback()
+                  }
                   return {
                     validateForm: {
                       input: "",
+                      inputNumber: undefined,
                       muti: {
                         deep: {
                           select: ""
@@ -432,6 +464,14 @@
                       radio: ""
                     },
                     validateRules: {
+                      switch: [
+                        { validator: switchValidate, trigger: 'change' }
+                      ],
+                      inputNumber: [
+                        { required: true, message: 'input cannot be empty', trigger: 'blur' },
+                        { validator: inputNumberValidate, trigger: 'blur' },
+                        { validator: inputNumberValidateChange, trigger: 'change' }
+                      ],
                       input: [
                         { required: true, message: "input cannot be empty", trigger: "blur" }
                       ],
@@ -747,6 +787,18 @@ export default {
         callback()
       }
     }
+    var inputNumberValidate = (rule, value, callback) => {
+      console.log('blur', value)
+      callback()
+    }
+    var inputNumberValidateChange = (rule, value, callback) => {
+      console.log('change', value)
+      callback()
+    }
+    var switchValidate = (rule, value, callback) => {
+      console.log('switch change', value)
+      callback()
+    }
     return {
       form: {
         name: '',
@@ -779,6 +831,7 @@ export default {
       ],
       validateForm: {
         input: '',
+        inputNumber: undefined,
         muti: {
           deep: {
             select: 'Public'
@@ -792,6 +845,14 @@ export default {
         radio: ''
       },
       validateRules: {
+        switch: [
+          { validator: switchValidate, trigger: 'change' }
+        ],
+        inputNumber: [
+          { type: 'number', required: true, message: 'input cannot be empty', trigger: 'blur' },
+          { validator: inputNumberValidate, trigger: 'blur' },
+          { validator: inputNumberValidateChange, trigger: 'change' }
+        ],
         input: [
           { required: true, message: 'input cannot be empty', trigger: 'blur' }
         ],

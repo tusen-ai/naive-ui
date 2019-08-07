@@ -190,13 +190,13 @@ Vue.use(naiveUi)
 </tr>
 <tr>
 <td>Badge</td>
-<td style="text-align:center;">🚧</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;"></td>
 <td></td>
 </tr>
 <tr>
 <td>Steps</td>
-<td style="text-align:center;">🚧</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;"></td>
 <td></td>
 </tr>
