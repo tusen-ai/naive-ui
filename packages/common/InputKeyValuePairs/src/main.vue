@@ -1,31 +1,39 @@
 <template>
-  <div class="n-multiple-labels">
+  <div class="n-input-key-value">
     <div
       v-for="(item, index) in value"
       :key="index"
-      class="n-multiple-labels__item"
+      class="n-input-key-value__item"
     >
-      <p class="n-multiple-labels__item--title">
+      <p class="n-input-key-value__item--title">
         {{ title }}
       </p>
-      <div class="n-multiple-labels__item--content">
-        <slot :item="item">
-          <n-input
-            v-model="item.key"
-            class="n-multiple-labels__item--input"
-            :placeholder="placeholderKey"
-          />
-          <n-input
-            v-model="item.value"
-            class="n-multiple-labels__item--input"
-            :placeholder="placeholderValue"
-          />
-        </slot>
-
-        <div class="n-multiple-labels__item--action">
+      <div class="n-input-key-value__item--container">
+        <div class="n-input-key-value__item--content">
+          <slot :item="item">
+            <div
+              ref="default"
+              class="n-input-key-value__item--input--container"
+            >
+              <n-input
+                v-model="item.key"
+                class="n-input-key-value__item--input"
+                :placeholder="placeholderKey"
+                @focus="checkValue"
+              />
+              <n-input
+                v-model="item.value"
+                class="n-input-key-value__item--input"
+                :placeholder="placeholderValue"
+                @focus="checkValue"
+              />
+            </div>
+          </slot>
+        </div>
+        <div class="n-input-key-value__item--action">
           <!-- <span> -->
           <n-icon
-            class="n-multiple-labels__item--action--add"
+            class="n-input-key-value__item--action--add"
             type="md-remove-circle"
             size="30"
             color="#C0818B"
@@ -33,7 +41,7 @@
           />
           <n-icon
             v-if="index==value.length-1"
-            class="n-multiple-labels__item--action--remove"
+            class="n-input-key-value__item--action--remove"
             type="md-add-circle"
             size="30"
             color="#4DB199"
@@ -51,7 +59,7 @@
 <script>
 
 export default {
-  name: 'NMultipleLabels',
+  name: 'NInputKeyValuePairs',
   model: {
     prop: 'value',
     event: 'input'
@@ -96,12 +104,17 @@ export default {
   computed: {
 
   },
+  watch: {
+    // value () {
+    //   this.checkValue()
+    // }
+  },
+  mounted () {
+    // this.checkValue()
+  },
   methods: {
     add () {
-      this.value.push({
-        key: '',
-        value: ''
-      })
+      this.value.push({})
     },
     remove (index) {
       if (index === 0) {
@@ -119,6 +132,18 @@ export default {
         return
       }
       this.value.splice(index, 1)
+    },
+    checkValue () {
+      let self = this
+      if (this.$refs.default) {
+        this.value.map((item, index) => {
+          let result = {
+            key: item.key ? item.key : '',
+            value: item.value ? item.value : ''
+          }
+          self.$set(this.value, index, result)
+        })
+      }
     }
   }
 }

@@ -1,0 +1,37 @@
+.n-input-key-value {
+  width: 100%;
+  .n-input-key-value__item {
+    margin-bottom: 30px;
+    .n-input-key-value__item--title {
+      display: block;
+      margin: 0 0 8px;
+    }
+    .n-input-key-value__item--container {
+      display: flex;
+      .n-input-key-value__item--content {
+        flex: 1;
+        display: inline-block;
+        display: flex;
+      }
+      .n-input-key-value__item--input--container {
+        width: 100%;
+        display: flex;
+        .n-input-key-value__item--input {
+          display: inline-block;
+          flex: 1;
+        }
+      }
+      
+      .n-input-key-value__item--input:first-child {
+        margin-right: 13px;
+      }
+      .n-input-key-value__item--action {
+        width: 70px;
+        display: inline-block;
+        align-items: center;
+        display: flex;
+        margin-left: 13px;
+      }
+    }
+  }
+}

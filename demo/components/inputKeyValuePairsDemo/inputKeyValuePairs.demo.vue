@@ -8,7 +8,7 @@
       style="flex-wrap: nowrap;"
     >
       <!--EXAMPLE_START-->
-      <n-multipleLabels
+      <n-input-key-value-pairs
         v-model="test1"
         placeholder-key="placeholder1"
         placeholder-value="placeholder2"
@@ -29,7 +29,7 @@ export default {
       test1: [
         {
           key: 'key1',
-          value: 'key1'
+          value: 'value1'
         },
         {}
       ]

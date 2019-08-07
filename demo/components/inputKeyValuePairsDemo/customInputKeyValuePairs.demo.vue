@@ -8,12 +8,12 @@
       style="flex-wrap: nowrap;"
     >
       <!--EXAMPLE_START-->
-      <n-multipleLabels
+      <n-input-key-value-pairs
         v-model="test1"
         title="Add CheckBox"
       >
-        <template slot-scope="slotProps">
-          <div>
+        <template v-slot="slotProps">
+          <div style="width:100%">
             <n-checkbox
               v-model="slotProps.item.isCheck"
               style="width: 120px;"
@@ -22,13 +22,13 @@
               v-model="slotProps.item.num"
             />
             <n-input
-              v-model="slotProps.item.dtring"
+              v-model="slotProps.item.string"
               type="input"
               size="small"
             />
           </div>
         </template>
-      </n-multipleLabels>
+      </n-input-key-value-pairs>
       <!--EXAMPLE_END-->
     </div>
     <pre class="n-doc-section__inspect">v-model: {{ test1 }}</pre>

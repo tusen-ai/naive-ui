@@ -17,7 +17,7 @@ import advanceTableDemo from './components/advanceTableDemo'
 import inputDemo from './components/inputDemo'
 import selectDemo from './components/selectDemo'
 import cascaderDemo from './components/cascaderDemo'
-import multipleLabelsDemo from './components/multipleLabelsDemo'
+import inputKeyValuePairsDemo from './components/inputKeyValuePairsDemo'
 import modalDemo from './components/modalDemo'
 import nimbusFormCardDemo from './components/nimbusFormCardDemo'
 import messageDemo from './components/messageDemo'
@@ -34,6 +34,7 @@ import timePickerDemo from './components/timePickerDemo'
 import confirmDemo from './components/confirmDemo'
 
 import scrollbarDebug from './debugComponents/scrollbarDebug'
+import scrollbarDebug2 from './debugComponents/scrollbarDebug2'
 import badgeDemo from './components/badgeDemo'
 import stepsDemo from './components/stepsDemo'
 import notificationDemo from './components/notificationDemo'
@@ -81,7 +82,7 @@ const routes = [
       { path: '/n-input', component: inputDemo },
       { path: '/n-select', component: selectDemo },
       { path: '/n-cascader', component: cascaderDemo },
-      { path: '/n-MultipleLabels', component: multipleLabelsDemo },
+      { path: '/n-InputKeyValuePairs', component: inputKeyValuePairsDemo },
       { path: '/n-modal', component: modalDemo },
       { path: '/n-nimbus-form-card', component: nimbusFormCardDemo },
       { path: '/n-message', component: messageDemo },
@@ -107,7 +108,9 @@ const routes = [
       { path: '/n-collapse', component: collapseDemo },
       { path: '/n-progress', component: progressDemo },
       { path: '/n-tag', component: tagDemo },
-      { path: '/n-timeline', component: timelineDemo }
+      { path: '/n-timeline', component: timelineDemo },
+      { path: '/n-scrollbar-debug2', component: scrollbarDebug2 }
+
     ]
   },
   {
