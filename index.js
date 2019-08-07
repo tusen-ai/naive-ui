@@ -13,6 +13,7 @@ import RoundButton from './packages/common/Button'
 import Switch from './packages/common/Switch'
 import Select from './packages/common/Select'
 import Cascader from './packages/common/Cascader'
+import InputKeyValuePairs from './packages/common/InputKeyValuePairs'
 import Modal from './packages/common/Modal'
 import Input from './packages/common/Input'
 import Message from './packages/common/Message'
@@ -38,6 +39,8 @@ import NimbusIcon from './packages/nimbus/Icon'
 import Scrollbar from './packages/common/Scrollbar'
 import Steps from './packages/common/Steps'
 import Confirm from './packages/common/Confirm'
+import Badge from './packages/common/Badge'
+import Tag from './packages/common/Tag'
 
 function install (Vue) {
   Card.install(Vue)
@@ -73,6 +76,7 @@ function install (Vue) {
   NimbusIcon.install(Vue)
   Radio.install(Vue)
   Cascader.install(Vue)
+  InputKeyValuePairs.install(Vue)
   Form.install(Vue)
   Tab.install(Vue)
   TimePicker.install(Vue)
@@ -80,6 +84,8 @@ function install (Vue) {
   Steps.install(Vue)
   Confirm.install(Vue)
   Progress.install(Vue)
+  Badge.install(Vue)
+  Tag.install(Vue)
 }
 
 export default {

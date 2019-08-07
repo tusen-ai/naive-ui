@@ -9,14 +9,14 @@
     >
       <!--EXAMPLE_START-->
       <div style="width: 400px; height: 300px;">
-        <n-scrollbar>
+        <n-scrollbar style="max-height: 200px;">
           <div style="background: linear-gradient(red, blue); width: 800px; height: 500px;">
             666
           </div>
         </n-scrollbar>
       </div>
       <div style="width: 400px; height: 300px;">
-        <n-scrollbar>
+        <n-scrollbar :max-height="200">
           <div style="background: linear-gradient(red, blue); width: 400px; height: 500px;">
             666
           </div>

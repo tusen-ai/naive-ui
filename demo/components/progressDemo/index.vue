@@ -5,21 +5,24 @@
   >
     <div class="n-doc-header">
       <n-gradient-text :font-size="20">
-        scaffold
+        Progress / n-progress
       </n-gradient-text>
     </div>
     <div class="n-doc-body">
-      <scaffold />
+      <circle-demo />
+      <line-demo />
     </div>
   </div>
 </template>
 
 <script>
-import scaffold from './scaffold.demo.vue'
+import circleDemo from './circle.demo.vue'
+import lineDemo from './line.demo.vue'
 
 export default {
   components: {
-    scaffold
+    circleDemo,
+    lineDemo
   },
   data () {
     return {

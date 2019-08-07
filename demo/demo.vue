@@ -68,6 +68,10 @@ export default {
               path: '/n-button'
             },
             {
+              name: 'Cascader',
+              path: '/n-cascader'
+            },
+            {
               name: 'Checkbox',
               path: '/n-checkbox'
             },
@@ -100,6 +104,10 @@ export default {
               path: '/n-input-number'
             },
             {
+              name: 'InputKeyValuePairs',
+              path: '/n-InputKeyValuePairs'
+            },
+            {
               name: 'Message',
               path: '/n-message'
             },
@@ -130,10 +138,6 @@ export default {
             {
               name: 'Select',
               path: '/n-select'
-            },
-            {
-              name: 'Cascader',
-              path: '/n-cascader'
             },
             {
               name: 'Steps',
@@ -191,6 +195,10 @@ export default {
             {
               name: 'ScrollbarDebug',
               path: '/n-scrollbar-debug'
+            },
+            {
+              name: 'ScrollbarDebug2',
+              path: '/n-scrollbar-debug2'
             }
           ]
         }

@@ -1,20 +1,21 @@
 <template>
   <div class="n-doc-section">
     <div class="n-doc-section__header">
-      Scaffold
+      Multiple Labels
     </div>
     <div
       class="n-doc-section__view"
       style="flex-wrap: nowrap;"
     >
       <!--EXAMPLE_START-->
-      <n-progress
-        type="circle"
-        :percentage="60"
+      <n-input-key-value-pairs
+        v-model="test1"
+        placeholder-key="placeholder1"
+        placeholder-value="placeholder2"
       />
       <!--EXAMPLE_END-->
     </div>
-    <pre class="n-doc-section__inspect">Inspect some value here</pre>
+    <pre class="n-doc-section__inspect">v-model: {{ test1 }}</pre>
     <n-doc-source-block>
       <!--SOURCE-->
     </n-doc-source-block>
@@ -25,6 +26,13 @@
 export default {
   data () {
     return {
+      test1: [
+        {
+          key: 'key1',
+          value: 'value1'
+        },
+        {}
+      ]
     }
   }
 }

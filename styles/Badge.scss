@@ -1,0 +1,53 @@
+@import './mixins/mixins.scss';
+@import './theme/default.scss';
+
+@include b(badge) {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  &.n-badge--dot {
+    .n-badge-sup {
+      height: 8px;
+      width: 8px;
+      padding: 0;
+      min-width: 8px;
+      left: calc(100% - 4px);
+      bottom: calc(100% - 4px);
+    }
+  }
+  &.n-badge--success-type {
+    .n-badge-sup {
+      background-color: rgba(9, 133, 91, 1);
+    }
+  }
+  &.n-badge--info-type {
+    .n-badge-sup {
+      background-color: rgba(56, 137, 197, 1);
+    }
+  }
+  &.n-badge--warning-type {
+    .n-badge-sup {
+      background-color: rgba(216, 94, 0, 1);
+    }
+  }
+  &.n-badge--error-type {
+    .n-badge-sup {
+      background-color: rgba(210, 82, 129, 1);
+    }
+  }
+}
+
+@include b(badge-sup) {
+  user-select: none;
+  position: absolute;
+  height: 18px;
+  line-height: 18px;
+  border-radius: 9px;
+  background-color: rgba(186, 45, 67, 1);
+  padding: 0 6px;
+  text-align: center;
+  font-size: 12px;
+  left: calc(100% - 8px);
+  bottom: calc(100% - 8px);
+  font-weight: bold;
+}

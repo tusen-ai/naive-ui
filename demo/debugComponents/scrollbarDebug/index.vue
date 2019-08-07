@@ -9,17 +9,17 @@
       </n-gradient-text>
     </div>
     <div class="n-doc-body">
-      <scaffold />
+      <case1 />
     </div>
   </div>
 </template>
 
 <script>
-import scaffold from './scaffold.demo.vue'
+import case1 from './case1.demo.vue'
 
 export default {
   components: {
-    scaffold
+    case1
   },
   data () {
     return {
