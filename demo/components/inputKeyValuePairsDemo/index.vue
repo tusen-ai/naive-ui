@@ -11,21 +11,21 @@
     <div
       class="n-doc-body"
     >
-      <multiple-labels />
-      <customMultipleLabels />
+      <input-key-value-pairs />
+      <custom-input-key-value-pairs />
     </div>
   </div>
 </template>
 
 <script>
 
-import multipleLabels from './multipleLabels.demo.vue'
-import customMultipleLabels from './customMultipleLabels.demo.vue'
+import inputKeyValuePairs from './inputKeyValuePairs.demo.vue'
+import customInputKeyValuePairs from './customInputKeyValuePairs.demo.vue'
 
 export default {
   components: {
-    multipleLabels,
-    customMultipleLabels
+    inputKeyValuePairs,
+    customInputKeyValuePairs
   },
   data () {
     return {
