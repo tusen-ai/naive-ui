@@ -4,20 +4,27 @@
     class="n-advance-tabel__wrapper"
   >
     <div class="n-advance-table__operation">
-      <section class="n-advance-table__operation__bacth" />
-      <div class="n-advance-table__operation__custom">
-        <slot name="table-operation" />
+      <div class="n-advance-table__operation__left">
+        <slot name="table-operation-batch-left" />
+        <section class="n-advance-table__operation__bacth" />
+        <slot name="table-operation-batch-right" />
       </div>
       <div
-        v-if="search"
-        class="n-advance-table__operation__search"
+        class="n-advance-table__operation__right"
+        :style="search?'margin-bottom: 18px;':''"
       >
-        <searchInput
-          ref="search"
-          style=" margin-bottom: 18px;"
-          :options="search"
-          @on-change="handleSearch"
-        />
+        <slot name="table-operation" />
+        <div
+          v-if="search"
+          class="n-advance-table__operation__search"
+        >
+          <searchInput
+            ref="search"
+            :options="search"
+            @on-change="handleSearch"
+          />
+        </div>
+        <slot name="table-operation-search-right" />
       </div>
     </div>
     <n-table
@@ -65,6 +72,7 @@
             <filterDropDown
               v-if="column.filterItems && !column.filterDropdown"
               :ref="'filterDropDown_' + (column.key || i)"
+              :max-height="column.filterDropDownMaxHeight"
               :filter-fn="column.onFilter"
               :filter-key="column.key || i"
               :filter-items="column.filterItems"

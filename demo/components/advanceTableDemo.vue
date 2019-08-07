@@ -579,7 +579,14 @@ export default {
             :on-change="onChange"
             :search="search"
             :pagination="{ total: data.length, limit: 10 }"
-          />
+          >
+            <div slot="table-operation">
+              custom
+            </div>
+            <div slot="table-operation-search-right">
+              right custom
+            </div>
+          </n-advance-table>
         </div>
         <div class="n-doc-section__source">
           <textarea>
@@ -813,7 +820,19 @@ export default {
           }, {
             label: '15',
             value: 15
-          }],
+          }, {
+            label: '16',
+            value: 16
+          }, {
+            label: '17',
+            value: 17
+          }, {
+            label: '18',
+            value: 18
+          }, {
+            label: '19',
+            value: 19
+          } ],
           onFilter: (value, record) => {
             return value.includes(record.age)
             // switch (value) {
