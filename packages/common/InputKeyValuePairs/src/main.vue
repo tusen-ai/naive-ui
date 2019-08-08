@@ -5,7 +5,10 @@
       :key="index"
       class="n-input-key-value__item"
     >
-      <p class="n-input-key-value__item--title">
+      <p
+        v-if="title"
+        class="n-input-key-value__item--title"
+      >
         {{ title }}
       </p>
       <div class="n-input-key-value__item--container">
@@ -76,7 +79,7 @@ export default {
     },
     title: {
       type: String,
-      default: 'Label'
+      default: ''
     },
     placeholderKey: {
       type: String,
