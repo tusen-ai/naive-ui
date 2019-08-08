@@ -41,6 +41,7 @@ import Steps from './packages/common/Steps'
 import Confirm from './packages/common/Confirm'
 import Badge from './packages/common/Badge'
 import Tag from './packages/common/Tag'
+import BackTop from './packages/common/BackTop'
 
 function install (Vue) {
   Card.install(Vue)
@@ -86,6 +87,7 @@ function install (Vue) {
   Progress.install(Vue)
   Badge.install(Vue)
   Tag.install(Vue)
+  BackTop.install(Vue)
 }
 
 export default {

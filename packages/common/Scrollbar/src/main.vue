@@ -162,7 +162,7 @@ export default {
     this.updateParameters()
   },
   methods: {
-    scrollToElement (el, elPosition = 'bottom') {
+    scrollToElement (el) {
       if (el.offsetTop < this.$refs.scrollContainer.scrollTop) {
         this.$refs.scrollContainer.scrollTo({
           top: el.offsetTop,

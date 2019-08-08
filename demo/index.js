@@ -32,6 +32,7 @@ import formDemo from './components/formDemo'
 import tabDemo from './components/tabDemo'
 import timePickerDemo from './components/timePickerDemo'
 import confirmDemo from './components/confirmDemo'
+import backTopDemo from './components/backTopDemo'
 
 import scrollbarDebug from './debugComponents/scrollbarDebug'
 import scrollbarDebug2 from './debugComponents/scrollbarDebug2'
@@ -50,6 +51,8 @@ import demo from './demo'
 import popoverDebug from './debugComponents/popoverDebug'
 import routerDebug from './debugComponents/routerDebug'
 import modalDebug from './debugComponents/modalDebug'
+import datePickerDebug from './debugComponents/datePickerDebug'
+import backTopDebug from './debugComponents/backTopDebug'
 
 Vue.use(NaiveUI)
 Vue.use(VueRouter)
@@ -64,6 +67,10 @@ const routes = [
   {
     path: '/n-popover-debug',
     component: popoverDebug
+  },
+  {
+    path: '/n-back-top-debug',
+    component: backTopDebug
   },
   {
     path: '/start',
@@ -109,8 +116,9 @@ const routes = [
       { path: '/n-progress', component: progressDemo },
       { path: '/n-tag', component: tagDemo },
       { path: '/n-timeline', component: timelineDemo },
-      { path: '/n-scrollbar-debug2', component: scrollbarDebug2 }
-
+      { path: '/n-scrollbar-debug2', component: scrollbarDebug2 },
+      { path: '/n-back-top', component: backTopDemo },
+      { path: '/n-date-picker-debug', component: datePickerDebug }
     ]
   },
   {
