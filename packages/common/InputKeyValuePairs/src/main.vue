@@ -33,7 +33,7 @@
         <div class="n-input-key-value__item--action">
           <!-- <span> -->
           <n-icon
-            class="n-input-key-value__item--action--add"
+            class="n-input-key-value__item--action--icon"
             type="md-remove-circle"
             size="30"
             color="#C0818B"
@@ -41,7 +41,7 @@
           />
           <n-icon
             v-if="index==value.length-1"
-            class="n-input-key-value__item--action--remove"
+            class="n-input-key-value__item--action--icon"
             type="md-add-circle"
             size="30"
             color="#4DB199"
