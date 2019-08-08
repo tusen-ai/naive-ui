@@ -39,7 +39,10 @@
           @input="handleEndTimePickerInput"
         />
       </div>
-      <div class="n-date-picker-calendar__range-wrapper">
+      <div
+        ref="startDates"
+        class="n-date-picker-calendar__range-wrapper"
+      >
         <div class="n-date-picker-calendar__month-modifier">
           <div
             class="n-date-picker-calendar__fast-prev"
@@ -100,7 +103,6 @@
         </div>
         <div class="n-date-picker-calendar__divider" />
         <div
-          ref="startDates"
           class="n-date-picker-calendar__dates"
         >
           <div
@@ -121,7 +123,10 @@
         </div>
       </div>
       <div><div class="n-date-picker-calendar__vertical-divider" /></div>
-      <div class="n-date-picker-calendar__range-wrapper">
+      <div
+        ref="endDates"
+        class="n-date-picker-calendar__range-wrapper"
+      >
         <div class="n-date-picker-calendar__month-modifier">
           <div
             class="n-date-picker-calendar__fast-prev"
@@ -182,7 +187,6 @@
         </div>
         <div class="n-date-picker-calendar__divider" />
         <div
-          ref="endDates"
           class="n-date-picker-calendar__dates"
         >
           <div
@@ -355,7 +359,7 @@ export default {
         const [startMoment, endMoment] = newValue
         this.startDateDisplayString = startMoment.format(DATE_FORMAT)
         this.endDateDisplayString = endMoment.format(DATE_FORMAT)
-        if (this.isSelecting) {
+        if (!this.isSelecting) {
           this.syncCalendarTimeWithValue(newValue)
         }
       } else {
