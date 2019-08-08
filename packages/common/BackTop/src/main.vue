@@ -10,6 +10,7 @@
       @click="handleClick"
     >
       <svg
+        v-if="!$slots.default"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
         viewBox="0 0 40 40"
@@ -23,6 +24,7 @@
           />
         </g>
       </svg>
+      <slot v-else />
     </div>
   </transition>
 </template>
@@ -41,13 +43,13 @@ export default {
       type: Number,
       default: 40
     },
-    targetSelector: {
+    contentSelector: {
       type: String,
       default: null
     },
     /**
      * container is the place where we place event listener
-     * if target is documentElement, the listener should be placed at #document,
+     * if content is documentElement, the listener should be placed at #document,
      * which doesn't has scrollTop...
      */
     containerSelector: {
@@ -62,7 +64,7 @@ export default {
   data () {
     return {
       container: null,
-      target: null,
+      content: null,
       show: false
     }
   },
@@ -84,16 +86,19 @@ export default {
   },
   methods: {
     init () {
-      if (this.targetSelector) {
-        this.target = document.querySelector(this.targetSelector)
-        if (!this.target) {
-          throw new Error('[n-back-top]: target not found')
-        } else {
-          this.container = getScrollParent(this.target)
-        }
+      if (this.containerSelector) {
+        this.container = document.querySelector(this.containerSelector)
       }
-      if (!this.target) {
-        this.container = document
+      if (this.contentSelector) {
+        this.content = document.querySelector(this.contentSelector)
+        if (!this.content) {
+          throw new Error('[n-back-top]: content not found')
+        } else {
+          this.container = getScrollParent(this.content)
+        }
+        if (!this.content) {
+          this.container = document
+        }
       }
       if (this.container) {
         this.container.addEventListener('scroll', this.handleScroll)
