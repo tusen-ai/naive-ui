@@ -1,0 +1,56 @@
+@import './mixins/mixins.scss';
+@import './theme/default.scss';
+
+@include b(divider) {
+  position: relative;
+  display: flex;
+  width: 100%;
+  .n-divider__line {
+    height: 1px;
+    width: 100%;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    background-color: rgba(255, 255, 255, 0.3)
+  }
+  .n-divider__content {
+    display: flex;
+    align-items: center;
+    margin-left: 4px;
+    margin-right: 4px;
+    white-space: nowrap;
+    color: rgba(233, 233, 236, 1);
+    font-weight: bold;
+  }
+  &.n-divider--content-position-left {
+    .n-divider__line {
+      &.n-divider__line--left {
+        width: 14px;
+      }
+    }
+  }
+  &.n-divider--content-position-right {
+    .n-divider__line {
+      &.n-divider__line--right {
+        width: 14px;
+      }
+    }
+  }
+  &.n-divider--dashed {
+    .n-divider__line {
+      height: 0px;
+      width: 100%;
+      background: none;
+      border-color: rgba(255, 255, 255, 0.3);
+      border-style: dashed;
+      border-width: 1px 0 0;
+    }
+  }
+  &.n-divider--vertical {
+    display: inline-block;
+    height: 1em;
+    margin: 0 8px;
+    vertical-align: middle;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.3)
+  }
+}

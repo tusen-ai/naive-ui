@@ -46,6 +46,7 @@ import collapseDemo from './components/collapseDemo'
 import tagDemo from './components/tagDemo'
 import timelineDemo from './components/timelineDemo'
 import progressDemo from './components/progressDemo'
+import dividerDemo from './components/dividerDemo'
 import demo from './demo'
 
 import popoverDebug from './debugComponents/popoverDebug'
@@ -118,7 +119,8 @@ const routes = [
       { path: '/n-timeline', component: timelineDemo },
       { path: '/n-scrollbar-debug2', component: scrollbarDebug2 },
       { path: '/n-back-top', component: backTopDemo },
-      { path: '/n-date-picker-debug', component: datePickerDebug }
+      { path: '/n-date-picker-debug', component: datePickerDebug },
+      { path: '/n-divider', component: dividerDemo }
     ]
   },
   {

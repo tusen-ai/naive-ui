@@ -92,6 +92,10 @@ export default {
               path: '/n-date-picker'
             },
             {
+              name: 'Divider',
+              path: '/n-divider'
+            },
+            {
               name: 'Gradient Text',
               path: '/n-gradient-text'
             },
