@@ -105,7 +105,7 @@
           :style="computeCustomWidthStl(column)"
         >
       </colgroup>
-      <n-tbody>
+      <n-tbody v-show="!loading">
         <n-tr
           v-for="(rowData, i) in showingData"
           :key="i"
@@ -133,6 +133,9 @@
         </div>
       </n-tbody>
     </n-table>
+    <template v-if="loading">
+      <Loading style="margin-top:20px;" :circle="{time:'1.5s'}" :svg="{height: '150px', width: '250px'}" />
+    </template>
     <!-- 分页 -->
     <div
       v-if="pagination !== false && showingData.length"
@@ -151,6 +154,7 @@ import row from '../row/index.js'
 import SortIcon from '../sortIcon'
 import filterDropDown from '../filterDropDown'
 import searchInput from '../searchInput'
+import Loading from '../loading'
 
 export default {
   name: 'NAdvanceTable',
@@ -158,7 +162,8 @@ export default {
     row,
     SortIcon,
     filterDropDown,
-    searchInput
+    searchInput,
+    Loading
   },
   props: {
     search: {
@@ -221,6 +226,10 @@ export default {
     rowCls: {
       type: [Array, String, Object],
       default: ''
+    },
+    loading: {
+      type: [Boolean],
+      default: false
     }
   },
   data () {

@@ -417,6 +417,7 @@ export default {
             max-height="300px"
             :on-change="onChange"
             :pagination="{ total: data.length, limit: 10 }"
+            :loading="loading"
           />
         </div>
         <div class="n-doc-section__source">
@@ -427,6 +428,7 @@ export default {
   max-height="300px"
   :on-change="onChange"
    :pagination="{total:data.length,limit:10}"
+   :loading="loading"
 />
 //
 <script>
@@ -442,6 +444,7 @@ export default {
     })
     console.log(d)
     return {
+      loading:true,
       columns: [
         {
           title: 'Name',
@@ -752,7 +755,8 @@ export default {
     })
     console.log(d)
     return {
-      rowCls: {'rowGreen': true, 'rowColor': false}, // ['rowGreen', 'rowColor'], 'rowGreen rowColor'
+      loading: false,
+      rowCls: { 'rowGreen': true, 'rowColor': false }, // ['rowGreen', 'rowColor'], 'rowGreen rowColor'
       search1: {
         columns: [
           { label: 'Name',
@@ -1019,6 +1023,10 @@ export default {
     onChange ({ filter, sorter, pagination, search }) {
       alert('remote handler: \n' + JSON.stringify({ sorter, filter, pagination, search }, null, '\t'))
       console.log({ filter, sorter, pagination, search })
+      this.loading = true
+      setTimeout(() => {
+        this.loading = false
+      }, 2000)
       this.data = [{
         name: 'form net',
         age: 0
