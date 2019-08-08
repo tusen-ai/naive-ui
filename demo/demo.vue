@@ -195,6 +195,10 @@ export default {
             {
               name: 'ScrollbarDebug',
               path: '/n-scrollbar-debug'
+            },
+            {
+              name: 'ScrollbarDebug2',
+              path: '/n-scrollbar-debug2'
             }
           ]
         }

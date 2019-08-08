@@ -40,7 +40,7 @@
             <div
               v-if="!item.childItems"
               class="n-nimbus-service-layout-drawer__item"
-              :class="{ 'n-nimbus-service-layout-drawer__item--active': activeItemName === item.name }"
+              :class="{ 'n-nimbus-service-layout-drawer__item--active': activeItemPath === item.path }"
               @click="makeActive(item)"
             >
               <div class="n-nimbus-service-layout-drawer-item__icon" />
@@ -52,7 +52,7 @@
               <div
                 class="n-nimbus-service-layout-drawer__item n-nimbus-service-layout-drawer__item--is-group-header"
                 :class="{
-                  'n-nimbus-service-layout-drawer__item--group-item-is-choosed': !!(1 + item.childItems.findIndex(item => item.name === activeItemName)),
+                  'n-nimbus-service-layout-drawer__item--group-item-is-choosed': !!(1 + item.childItems.findIndex(item => item.name === activeItemPath)),
                   'n-nimbus-service-layout-drawer__item--collapsed': item.isCollapsed
                 }"
                 @click="toggleGroupHeaderCollapse(item.name)"
@@ -74,7 +74,7 @@
                     v-for="childItem in item.childItems"
                     :key="childItem.name"
                     class="n-nimbus-service-layout-drawer__item n-nimbus-service-layout-drawer__item--is-group-item"
-                    :class="{ 'n-nimbus-service-layout-drawer__item--active': activeItemName === childItem.name }"
+                    :class="{ 'n-nimbus-service-layout-drawer__item--active': activeItemPath === childItem.path }"
                     @click="makeActive(childItem)"
                   >
                     <span>{{ childItem.name }}</span>
@@ -124,7 +124,7 @@ export default {
   data () {
     return {
       isCollapsed: false,
-      activeItemName: '',
+      activeItemPath: null,
       itemsWithCollapseStatus: this.items.map(item => ({
         ...item,
         isCollapsed: false
@@ -150,13 +150,13 @@ export default {
     syncActiveItemWithPath (path) {
       for (const item of this.items) {
         if (item.path === path) {
-          this.activeItemName = item.name
+          this.activeItemPath = item.path
           return
         }
         if (item.childItems) {
           for (const childItem of item.childItems) {
             if (childItem.path === path) {
-              this.activeItemName = childItem.name
+              this.activeItemPath = childItem.path
               return
             }
           }
@@ -167,7 +167,7 @@ export default {
       this.isCollapsed = !this.isCollapsed
     },
     makeActive (item) {
-      this.activeItemName = item.name
+      this.activeItemPath = item.path
       this.$emit('input', item.name)
       if (this.$router) {
         this.$router.push(item.path)
