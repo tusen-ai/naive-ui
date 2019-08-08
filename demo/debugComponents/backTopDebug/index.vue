@@ -5,21 +5,21 @@
   >
     <div class="n-doc-header">
       <n-gradient-text :font-size="20">
-        basicUsage
+        BackTopDebug
       </n-gradient-text>
     </div>
-    <div class="n-doc-body">
-      <basic-usage />
-    </div>
+    <div
+      class="n-doc-body"
+      style="height: 2400px;"
+    />
+    <n-back-top />
   </div>
 </template>
 
 <script>
-import basicUsage from './basicUsage.demo.vue'
 
 export default {
   components: {
-    basicUsage
   },
   data () {
     return {

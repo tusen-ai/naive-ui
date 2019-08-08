@@ -6,7 +6,10 @@
       class="n-date-picker-calendar n-date-picker-calendar--daterange"
       @click.capture="resetSelectingStatus"
     >
-      <div class="n-date-picker-calendar__range-wrapper">
+      <div
+        ref="startDates"
+        class="n-date-picker-calendar__range-wrapper"
+      >
         <div class="n-date-picker-calendar__month-modifier">
           <div
             class="n-date-picker-calendar__fast-prev"
@@ -67,7 +70,6 @@
         </div>
         <div class="n-date-picker-calendar__divider" />
         <div
-          ref="startDates"
           class="n-date-picker-calendar__dates"
         >
           <div
@@ -88,7 +90,10 @@
         </div>
       </div>
       <div><div class="n-date-picker-calendar__vertical-divider" /></div>
-      <div class="n-date-picker-calendar__range-wrapper">
+      <div
+        ref="endDates"
+        class="n-date-picker-calendar__range-wrapper"
+      >
         <div class="n-date-picker-calendar__month-modifier">
           <div
             class="n-date-picker-calendar__fast-prev"
@@ -149,7 +154,6 @@
         </div>
         <div class="n-date-picker-calendar__divider" />
         <div
-          ref="endDates"
           class="n-date-picker-calendar__dates"
         >
           <div

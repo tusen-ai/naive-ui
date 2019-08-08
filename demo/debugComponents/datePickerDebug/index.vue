@@ -5,21 +5,21 @@
   >
     <div class="n-doc-header">
       <n-gradient-text :font-size="20">
-        basicUsage
+        DatePickerDebug
       </n-gradient-text>
     </div>
     <div class="n-doc-body">
-      <basic-usage />
+      <range />
     </div>
   </div>
 </template>
 
 <script>
-import basicUsage from './basicUsage.demo.vue'
+import range from './range.demo.vue'
 
 export default {
   components: {
-    basicUsage
+    range
   },
   data () {
     return {
