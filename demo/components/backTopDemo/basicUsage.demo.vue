@@ -4,7 +4,7 @@
       Basic Usage
     </div>
     <!--EXAMPLE_START-->
-    <n-back-top target-selector=".n-doc" />
+    <n-back-top content-selector=".n-doc" />
     <!--EXAMPLE_END-->
     <n-doc-source-block>
       <!--SOURCE-->

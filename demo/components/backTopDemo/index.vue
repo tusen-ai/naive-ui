@@ -10,6 +10,7 @@
     </div>
     <div class="n-doc-body">
       <basic-usage />
+      <target-container-selector />
       <change-position />
       <visibility-height />
       <div style="height: 1200px; width: 100%;" />
@@ -21,12 +22,14 @@
 import basicUsage from './basicUsage.demo.vue'
 import changePosition from './changePosition.demo.vue'
 import visibilityHeight from './visibilityHeight.demo.vue'
+import targetContainerSelector from './targetContainerSelector.demo'
 
 export default {
   components: {
     basicUsage,
     changePosition,
-    visibilityHeight
+    visibilityHeight,
+    targetContainerSelector
   },
   data () {
     return {
