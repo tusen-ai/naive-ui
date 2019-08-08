@@ -5,7 +5,10 @@
       :key="index"
       class="n-input-key-value__item"
     >
-      <p class="n-input-key-value__item--title">
+      <p
+        v-if="title"
+        class="n-input-key-value__item--title"
+      >
         {{ title }}
       </p>
       <div class="n-input-key-value__item--container">
@@ -33,7 +36,7 @@
         <div class="n-input-key-value__item--action">
           <!-- <span> -->
           <n-icon
-            class="n-input-key-value__item--action--add"
+            class="n-input-key-value__item--action--icon"
             type="md-remove-circle"
             size="30"
             color="#C0818B"
@@ -41,7 +44,7 @@
           />
           <n-icon
             v-if="index==value.length-1"
-            class="n-input-key-value__item--action--remove"
+            class="n-input-key-value__item--action--icon"
             type="md-add-circle"
             size="30"
             color="#4DB199"
@@ -76,7 +79,7 @@ export default {
     },
     title: {
       type: String,
-      default: 'Label'
+      default: ''
     },
     placeholderKey: {
       type: String,

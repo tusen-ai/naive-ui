@@ -63,7 +63,11 @@
   }
   .n-advance-table__operation {
     display: flex;
-    justify-content: space-between;
+    justify-content:space-between;
+  }
+  .n-advance-table__operation__right {
+    display: flex;
+    align-items: center;
   }
   .n-no-data-tip {
     padding: 5px;
