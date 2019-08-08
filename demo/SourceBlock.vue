@@ -1,7 +1,7 @@
 <template>
   <div style="overflow: hidden;">
     <div
-      style="width: 100%; border-radius: 8px; border: 2px solid #5c657eff; height: 39px; background-color: black; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer;"
+      style="width: 100%; box-sizing: border-box; border-radius: 8px; border: 2px solid #5c657eff; height: 39px; background-color: black; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer;"
       @click="collapse = !collapse"
     >
       <span v-if="collapse">Click to Expand</span>
