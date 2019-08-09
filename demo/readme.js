@@ -202,7 +202,7 @@ Vue.use(naiveUi)
 </tr>
 <tr>
 <td>Tag</td>
-<td style="text-align:center;">🚧</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;"></td>
 <td></td>
 </tr>
@@ -232,13 +232,13 @@ Vue.use(naiveUi)
 </tr>
 <tr>
 <td>BackTop</td>
-<td style="text-align:center;">🚧</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;"></td>
 <td></td>
 </tr>
 <tr>
 <td>Progress</td>
-<td style="text-align:center;">🚧</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;"></td>
 <td></td>
 </tr>

@@ -31,6 +31,9 @@
         align-items: center;
         display: flex;
         margin-left: 13px;
+        .n-input-key-value__item--action--icon {
+          cursor: pointer;
+        }
       }
     }
   }

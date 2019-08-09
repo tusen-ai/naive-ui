@@ -5,7 +5,7 @@
   >
     <div class="n-doc-header">
       <n-gradient-text :font-size="20">
-        Select / n-select
+        InputKeyValuePairs / n-input-key-value-pairs
       </n-gradient-text>
     </div>
     <div

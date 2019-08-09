@@ -73,13 +73,13 @@ Vue.use(naiveUi)
 |Breadcrumb|🚧|||
 |Badge|😍|||
 |Steps|😍|||
-|Tag|🚧|||
+|Tag|😍|||
 |Divider|🚧|||
 |Statistic|🚧|||
 |PopConfirm|🚧|||
 |Anchor|🚧|||
-|BackTop|🚧|||
-|Progress|🚧|||
+|BackTop|😍|||
+|Progress|😍|||
 |Timeline|🚧|||
 |Card|🚧|||
 |Collapse|🚧|||

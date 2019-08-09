@@ -60,6 +60,10 @@ export default {
               path: '/n-alert'
             },
             {
+              name: 'BackTop',
+              path: '/n-back-top'
+            },
+            {
               name: 'Badge',
               path: '/n-badge'
             },
@@ -86,6 +90,10 @@ export default {
             {
               name: 'DatePicker',
               path: '/n-date-picker'
+            },
+            {
+              name: 'Divider',
+              path: '/n-divider'
             },
             {
               name: 'Gradient Text',
@@ -199,6 +207,14 @@ export default {
             {
               name: 'ScrollbarDebug2',
               path: '/n-scrollbar-debug2'
+            },
+            {
+              name: 'DatePickerDebug',
+              path: '/n-date-picker-debug'
+            },
+            {
+              name: 'BackTopDebug',
+              path: '/n-back-top-debug'
             }
           ]
         }
