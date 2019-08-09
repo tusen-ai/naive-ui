@@ -693,7 +693,7 @@ export default {
               max-height="300px"
               :on-change="onChange1"
               :search="search"
-              :pagination="{ total: data.length, limit: 10 }"
+              :pagination="{ total: count, limit: 10 ,custom:true}"
             />
           </div>
           <div class="n-doc-section__source">
@@ -744,6 +744,7 @@ export default {
     })
     console.log(d)
     return {
+      count: 0,
       search1: {
         columns: [
           { label: 'Name',
@@ -994,7 +995,12 @@ export default {
     }
   },
   mounted () {
-    this.$refs.table.setParams({ filter: { age: [14] }, sorter: { key: 'age', type: -1 }, searcher: { key: 'name', value: 'xiaobai' }, page: 2 })
+    setTimeout(() => {
+      this.count = 80
+    }, 3000)
+    // this.$refs.table.setParams({ page: +this.$route.query.page || 5 })
+
+    // this.$refs.table.setParams({ filter: { age: [14] }, sorter: { key: 'age', type: -1 }, searcher: { key: 'name', value: 'xiaobai' }, page: 2 })
   },
   methods: {
     handleClick (params) {
