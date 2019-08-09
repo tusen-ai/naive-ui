@@ -131,11 +131,21 @@
         >
           No data
         </div>
+        <!-- <tr style="display:inline-block;width:100%;"> -->
+
+        <!-- </tr> -->
       </n-tbody>
+      <template v-if="loading">
+        <div style="width:100%;display:table-caption;">
+          <Loading
+            style="margin-top:20px;"
+            :circle="{time:'1.5s'}"
+            :svg="{height: '150px', width: '250px'}"
+          />
+        </div>
+      </template>
     </n-table>
-    <template v-if="loading">
-      <Loading style="margin-top:20px;" :circle="{time:'1.5s'}" :svg="{height: '150px', width: '250px'}" />
-    </template>
+
     <!-- 分页 -->
     <div
       v-if="pagination !== false && showingData.length"
