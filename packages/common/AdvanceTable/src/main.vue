@@ -391,7 +391,6 @@ export default {
     },
     currentSearchColumn () {
       this.searchData = this.computeShowingData()
-      console.log('currentSearchColumn')
     },
     currentSortColumn () {
       this.searchData = this.computeShowingData()
@@ -401,7 +400,6 @@ export default {
       handler () {
         this.searchData = this.computeShowingData()
         console.log('currentFilterColumn')
-
         // because after filter length maybe change , so need to reset current page
         this.currentPage = 1
       },
@@ -418,6 +416,7 @@ export default {
     console.log(this.wrapperWidth, this.tbodyWidth)
 
     this.init()
+
     // window.addEventListener('resize', this.init)
   },
   beforeDestroy () {
@@ -462,7 +461,11 @@ export default {
         ref.setCheckedIndexs(filter[key])
       })
       searcher && this.$refs.search.setSearch(searcher)
-      if (page) { this.currentPage = page }
+      if (page) {
+        this.$nextTick(() => {
+          this.currentPage = page
+        })
+      }
       // TODO:测试功能 有远程 无远程 ，半有半无
     },
     onBodyScrolll (event) {
@@ -490,8 +493,6 @@ export default {
       })
     },
     handleSearch ({ key, word }) {
-      console.log(key, word)
-
       this.currentSearchColumn = {
         key,
         word
@@ -615,6 +616,7 @@ export default {
         // remote filter
         this.useRemoteChange()
       }
+      console.log('on-filter')
     },
     onSortTypeChange ({ i, sortable, key, type, column }) {
       this.currentSortColumn = {

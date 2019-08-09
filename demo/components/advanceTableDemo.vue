@@ -18,7 +18,7 @@
           <n-advance-table
             :columns="columns0"
             :data="data"
-            :rowCls="rowCls"
+            :row-cls="rowCls"
           >
             <template #table-operation>
               <n-button>custom operation by v-slot:table-operation</n-button>
@@ -699,7 +699,7 @@ export default {
           <div class="n-doc-section__view">
             <n-advance-table
               ref="table"
-              :columns="columns3"
+              :columns="columns4"
               :data="data"
               max-height="300px"
               :on-change="onChange1"
@@ -743,9 +743,56 @@ methods:{
 
 <script>
 import docCodeEditorMixin from './docCodeEditorMixin'
+const _columns3 = ($this) => {
+  return [
+    {
+      title: 'Name',
+      key: 'name',
+      filterMultiple: false,
+      filterItems: $this.filterItems,
+      onFilter: (value, record) => {
+        return value.includes(record.name + '')
+      }
+    },
+    {
+      title: 'Age',
+      key: 'age',
+      sortable: 'custom',
+      filterMultiple: true,
+      filterItems: [{
+        label: '14',
+        value: 14
+      }, {
+        label: '15',
+        value: 15
+      }],
+      onFilter: (value, record) => {
+        return true
+      },
+      render: (h, params) => {
+        return <b>{params.row.age}</b>
+      }
+    },
+    {
+      title: '#',
+      render: (h, params) => {
+        return (
+          <n-button
+            style="margin:0;"
+            size="small"
+            onClick={() => this.handleClick(params)}
+          >
+                delete
+          </n-button>
+        )
+      }
+    }
+  ]
+}
 export default {
   mixins: [docCodeEditorMixin],
   data () {
+    let columns4 = _columns3(this)
     let d = new Array(20).fill(0)
     d = d.map((item, idx) => {
       return {
@@ -773,9 +820,7 @@ export default {
           { label: 'Name',
             value: 'name' }
         ],
-        onSearch: (key, word, row) => {
-          return row.name.includes(word)
-        }
+        onSearch: 'custom'
       },
       columns: [
         {
@@ -1004,16 +1049,35 @@ export default {
             )
           }
         }
-      ]
+      ],
+      filterItems:
+      [{
+        label: '14',
+        value: 14
+      }, {
+        label: '15',
+        value: 15
+      }]
+    }
+  },
+  computed: {
+    columns4 () {
+      return _columns3(this)
     }
   },
   mounted () {
     setTimeout(() => {
       this.count = 80
+      this.filterItems = [
+        {
+          label: 'hahah',
+          value: 1
+        }
+      ]
     }, 3000)
     // this.$refs.table.setParams({ page: +this.$route.query.page || 5 })
 
-    // this.$refs.table.setParams({ filter: { age: [14] }, sorter: { key: 'age', type: -1 }, searcher: { key: 'name', value: 'xiaobai' }, page: 2 })
+    this.$refs.table.setParams({ filter: { age: [14] }, sorter: { key: 'age', type: -1 }, searcher: { key: 'name', value: 'xiaobai' }, page: 2 })
   },
   methods: {
     handleClick (params) {
