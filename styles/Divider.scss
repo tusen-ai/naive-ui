@@ -15,8 +15,8 @@
   .n-divider__content {
     display: flex;
     align-items: center;
-    margin-left: 4px;
-    margin-right: 4px;
+    margin-left: 12px;
+    margin-right: 12px;
     white-space: nowrap;
     color: rgba(233, 233, 236, 1);
     font-weight: bold;
@@ -24,14 +24,14 @@
   &.n-divider--content-position-left {
     .n-divider__line {
       &.n-divider__line--left {
-        width: 14px;
+        width: 28px;
       }
     }
   }
   &.n-divider--content-position-right {
     .n-divider__line {
       &.n-divider__line--right {
-        width: 14px;
+        width: 28px;
       }
     }
   }
