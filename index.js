@@ -44,6 +44,7 @@ import Tag from './packages/common/Tag'
 import BackTop from './packages/common/BackTop'
 import Divider from './packages/common/Divider'
 import Collapse from './packages/common/Collapse'
+import Timeline from './packages/common/Timeline'
 
 function install (Vue) {
   Card.install(Vue)
@@ -92,6 +93,7 @@ function install (Vue) {
   BackTop.install(Vue)
   Divider.install(Vue)
   Collapse.install(Vue)
+  Timeline.install(Vue)
 }
 
 export default {
