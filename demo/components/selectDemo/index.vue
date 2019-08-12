@@ -17,6 +17,7 @@
       <change-event />
       <change-event-emit-item />
       <search />
+      <remote-search />
     </div>
   </div>
 </template>
@@ -28,6 +29,7 @@ import multipleSelect from './multipleSelect.demo.vue'
 import changeEvent from './changeEvent.demo'
 import changeEventEmitItem from './changeEventEmitItem.demo'
 import search from './search.demo.vue'
+import remoteSearch from './remoteSearch.demo.vue'
 
 export default {
   components: {
@@ -36,7 +38,8 @@ export default {
     changeEvent,
     changeEventEmitItem,
     search,
-    disabled
+    disabled,
+    remoteSearch
   },
   data () {
     return {

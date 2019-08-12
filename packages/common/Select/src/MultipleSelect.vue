@@ -4,9 +4,9 @@
     class="n-select"
     :class="{
       [`n-select--${size}-size`]: true,
+      [`n-select--remote`]: remote,
       'n-select--disabled': disabled
     }"
-    :style="{'cursor':cursor}"
     @click="handleActivatorClick"
     @keyup.up.prevent="handleActivatorKeyUpUp"
     @keyup.down.prevent="handleActivatorKeyUpDown"
@@ -63,9 +63,6 @@
       </div>
       <div
         class="n-select-link__placeholder"
-        :class="{
-          'n-select-link__placeholder--verbose-transition': verboseTransition
-        }"
       >
         {{ placeholder }}
       </div>
@@ -103,24 +100,26 @@
                       :style="{ top: `${lightBarTop}px` }"
                     />
                   </transition>
+                  <template v-if="!loading">
+                    <div
+                      v-for="(item, index) in filteredItems"
+                      ref="menuItems"
+                      :key="item.value"
+                      :data-index="index"
+                      class="n-select-menu__item"
+                      :class="{
+                        'n-select-menu__item--selected':
+                          isSelected(item)
+                      }"
+                      @click="toggleItem(item)"
+                      @mousemove="showLightBarTop($event, item, index)"
+                    >
+                      {{ item.label }}
+                    </div>
+                  </template>
                   <div
-                    v-for="(item, index) in filteredItems"
-                    ref="menuItems"
-                    :key="item.value"
-                    :data-index="index"
-                    class="n-select-menu__item"
-                    :class="{
-                      'n-select-menu__item--selected':
-                        isSelected(item)
-                    }"
-                    @click="toggleItem(item)"
-                    @mousemove="showLightBarTop($event, item, index)"
-                  >
-                    {{ item.label }}
-                  </div>
-                  <div
-                    v-if="pattern.length && !filteredItems.length"
-                    class="n-select-menu__item n-select-menu__item--not-found"
+                    v-if="loading"
+                    class="n-select-menu__item n-select-menu__item--loading"
                   >
                     {{
                       /**
@@ -129,7 +128,25 @@
                       */
                       hideLightBar()
                     }}
-                    none result matched
+                    loading
+                  </div>
+                  <div
+                    v-else-if="items && items.length === 0"
+                    class="n-select-menu__item n-select-menu__item--no-data"
+                  >
+                    {{
+                      hideLightBar()
+                    }}
+                    {{ noDataContent }}
+                  </div>
+                  <div
+                    v-else-if="pattern.length && !filteredItems.length"
+                    class="n-select-menu__item n-select-menu__item--not-found"
+                  >
+                    {{
+                      hideLightBar()
+                    }}
+                    {{ notFoundContent }}
                   </div>
                 </div>
               </scrollbar>
@@ -203,9 +220,25 @@ export default {
       type: Boolean,
       default: false
     },
-    cursor: {
-      type: String,
-      default: 'inherit'
+    remote: {
+      type: Boolean,
+      default: false
+    },
+    onSearch: {
+      type: Function,
+      default: null
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    noDataContent: {
+      type: [String, Function],
+      default: 'no data'
+    },
+    notFoundContent: {
+      type: [String, Function],
+      default: 'none result matched'
     }
   },
   data () {
@@ -215,21 +248,19 @@ export default {
       scrolling: false,
       pattern: '',
       pendingItem: null,
-      pendingItemIndex: null
+      pendingItemIndex: null,
+      memorizedValueItemMap: new Map()
     }
   },
   computed: {
     filteredItems () {
-      if (!this.filterable || !this.pattern.trim().length) return this.items
+      if (this.remote) {
+        return this.items
+      } else if (!this.filterable || !this.pattern.trim().length) return this.items
       return this.items.filter(item => this.patternMatched(item.label))
     },
     selected () {
-      if (Array.isArray(this.value)) {
-        const itemValues = new Set(this.items.map(item => item.value))
-        return this.value.filter(value => itemValues.has(value)).length
-      } else {
-        return false
-      }
+      return this.selectedItems.length
     },
     valueItemMap () {
       const valueToItem = new Map()
@@ -238,7 +269,13 @@ export default {
     },
     selectedItems () {
       if (!Array.isArray(this.value)) return []
-      return this.value.filter(value => this.valueItemMap.has(value)).map(value => this.valueItemMap.get(value))
+      if (this.remote) {
+        return this.value
+          .filter(value => this.valueItemMap.has(value) || this.memorizedValueItemMap.has(value))
+          .map(value => this.valueItemMap.has(value) ? this.valueItemMap.get(value) : this.memorizedValueItemMap.get(value))
+      } else {
+        return this.value.filter(value => this.valueItemMap.has(value)).map(value => this.valueItemMap.get(value))
+      }
     },
     clearedPattern () {
       return this.pattern.toLowerCase().trim()
@@ -332,10 +369,13 @@ export default {
     },
     toggleItem (item) {
       if (this.disabled) return
+      if (this.remote) {
+        this.memorizedValueItemMap.set(item.value, item)
+      }
       let newValue = []
       if (Array.isArray(this.value)) {
         const itemValues = new Set(this.items.map(item => item.value))
-        newValue = this.value.filter(value => itemValues.has(value))
+        newValue = this.value.filter(value => itemValues.has(value) || this.memorizedValueItemMap.has(value))
       }
       const index = newValue.findIndex(value => value === item.value)
       if (~index) {
@@ -365,6 +405,9 @@ export default {
       this.$nextTick().then(() => {
         const textWidth = this.$refs.inputTagMirror.getBoundingClientRect().width
         this.$refs.inputTagInput.style.width = textWidth + 'px'
+        if (this.onSearch) {
+          this.onSearch(this.pattern)
+        }
       })
     },
     handlePatternInputDelete (e) {

@@ -16,8 +16,11 @@ export default {
       type: Array,
       required: true
     },
-    // eslint-disable-next-line vue/require-prop-types
     value: {
+      validator () {
+        return true
+      },
+      required: false,
       default: null
     },
     placeholder: {
@@ -48,9 +51,21 @@ export default {
       type: Boolean,
       default: false
     },
-    cursor: {
-      type: String,
-      default: 'inherit'
+    remote: {
+      type: Boolean,
+      default: false
+    },
+    onSearch: {
+      type: Function,
+      default: null
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    noDataContent: {
+      type: [String, Function],
+      default: 'no data'
     }
   },
   data () {
