@@ -37,7 +37,7 @@
       <div class="n-comfirm__footer">
         <n-button
           v-if="type === 'confirm'"
-          style="margin-bottom:0;"
+          style="margin-bottom:0;margin-right:12px;"
           round
           size="small"
           @click="handleCancel"
@@ -82,7 +82,7 @@ export default {
     iconType () {
       const colors = {
         'error': { type: 'ios-close-circle', color: '#FF92A4' },
-        'confirm': { type: 'ios-information-circle', color: '#FF92A4' },
+        'confirm': { type: 'md-alert', color: '#FF92A4' },
         'success': { type: 'ios-checkmark-circle', color: '#63E2B7' }
       }
       return colors[this.type]

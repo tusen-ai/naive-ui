@@ -6,6 +6,7 @@
       [`n-select--${size}-size`]: true,
       'n-select--disabled': disabled
     }"
+    :style="{'cursor':cursor}"
     @click="handleActivatorClick"
     @keyup.up.prevent="handleActivatorKeyUpUp"
     @keyup.down.prevent="handleActivatorKeyUpDown"
@@ -201,6 +202,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    cursor: {
+      type: String,
+      default: 'inherit'
     }
   },
   data () {

@@ -6,6 +6,7 @@
       [`n-select--${size}-size`]: true,
       'n-select--disabled': disabled
     }"
+    :style="{'cursor':cursor}"
     @click="toggleMenu"
   >
     <div
@@ -152,7 +153,12 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    cursor: {
+      type: String,
+      default: 'inherit'
     }
+
   },
   data () {
     return {

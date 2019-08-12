@@ -47,6 +47,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    cursor: {
+      type: String,
+      default: 'inherit'
     }
   },
   data () {

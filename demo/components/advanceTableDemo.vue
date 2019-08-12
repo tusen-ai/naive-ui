@@ -18,6 +18,7 @@
           <n-advance-table
             :columns="columns0"
             :data="data"
+            :row-cls="rowCls"
           >
             <template #table-operation>
               <n-button>custom operation by v-slot:table-operation</n-button>
@@ -29,6 +30,7 @@
 <n-advance-table
   :columns="columns0"
   :data="data"
+  :rowCls="rowCls"
 >
   <template #table-operation>
     <n-button>custom operation by v-slot:table-operation</n-button>
@@ -46,6 +48,7 @@ export default {
       }
     })
     return {
+      rowCls:{'rowGreen': true, 'rowColor': false}, // ['rowGreen', 'rowColor'], 'rowGreen rowColor'
       columns: [
         {
           title: 'Name',
@@ -82,6 +85,11 @@ export default {
   }
 }
 </script>
+<style>
+  .rowGreen:hover {
+  background-color:rgb(37, 109, 85)!important
+}
+</style>
           </textarea>
         </div>
       </div>
@@ -409,6 +417,7 @@ export default {
             max-height="300px"
             :on-change="onChange"
             :pagination="{ total: data.length, limit: 10 }"
+            :loading="loading"
           />
         </div>
         <div class="n-doc-section__source">
@@ -419,6 +428,7 @@ export default {
   max-height="300px"
   :on-change="onChange"
    :pagination="{total:data.length,limit:10}"
+   :loading="loading"
 />
 //
 <script>
@@ -434,6 +444,7 @@ export default {
     })
     console.log(d)
     return {
+      loading:true,
       columns: [
         {
           title: 'Name',
@@ -688,12 +699,12 @@ export default {
           <div class="n-doc-section__view">
             <n-advance-table
               ref="table"
-              :columns="columns3"
+              :columns="columns4"
               :data="data"
               max-height="300px"
               :on-change="onChange1"
               :search="search"
-              :pagination="{ total: data.length, limit: 10 }"
+              :pagination="{ total: count, limit: 10 ,custom:true}"
             />
           </div>
           <div class="n-doc-section__source">
@@ -732,9 +743,56 @@ methods:{
 
 <script>
 import docCodeEditorMixin from './docCodeEditorMixin'
+const _columns3 = ($this) => {
+  return [
+    {
+      title: 'Name',
+      key: 'name',
+      filterMultiple: false,
+      filterItems: $this.filterItems,
+      onFilter: (value, record) => {
+        return value.includes(record.name + '')
+      }
+    },
+    {
+      title: 'Age',
+      key: 'age',
+      sortable: 'custom',
+      filterMultiple: true,
+      filterItems: [{
+        label: '14',
+        value: 14
+      }, {
+        label: '15',
+        value: 15
+      }],
+      onFilter: (value, record) => {
+        return true
+      },
+      render: (h, params) => {
+        return <b>{params.row.age}</b>
+      }
+    },
+    {
+      title: '#',
+      render: (h, params) => {
+        return (
+          <n-button
+            style="margin:0;"
+            size="small"
+            onClick={() => this.handleClick(params)}
+          >
+                delete
+          </n-button>
+        )
+      }
+    }
+  ]
+}
 export default {
   mixins: [docCodeEditorMixin],
   data () {
+    let columns4 = _columns3(this)
     let d = new Array(20).fill(0)
     d = d.map((item, idx) => {
       return {
@@ -744,6 +802,9 @@ export default {
     })
     console.log(d)
     return {
+      loading: false,
+      rowCls: { 'rowGreen': true, 'rowColor': false }, // ['rowGreen', 'rowColor'], 'rowGreen rowColor'
+      count: 0,
       search1: {
         columns: [
           { label: 'Name',
@@ -759,9 +820,7 @@ export default {
           { label: 'Name',
             value: 'name' }
         ],
-        onSearch: (key, word, row) => {
-          return row.name.includes(word)
-        }
+        onSearch: 'custom'
       },
       columns: [
         {
@@ -990,10 +1049,34 @@ export default {
             )
           }
         }
-      ]
+      ],
+      filterItems:
+      [{
+        label: '14',
+        value: 14
+      }, {
+        label: '15',
+        value: 15
+      }]
+    }
+  },
+  computed: {
+    columns4 () {
+      return _columns3(this)
     }
   },
   mounted () {
+    setTimeout(() => {
+      this.count = 80
+      this.filterItems = [
+        {
+          label: 'hahah',
+          value: 1
+        }
+      ]
+    }, 3000)
+    // this.$refs.table.setParams({ page: +this.$route.query.page || 5 })
+
     this.$refs.table.setParams({ filter: { age: [14] }, sorter: { key: 'age', type: -1 }, searcher: { key: 'name', value: 'xiaobai' }, page: 2 })
   },
   methods: {
@@ -1010,6 +1093,10 @@ export default {
     onChange ({ filter, sorter, pagination, search }) {
       alert('remote handler: \n' + JSON.stringify({ sorter, filter, pagination, search }, null, '\t'))
       console.log({ filter, sorter, pagination, search })
+      this.loading = true
+      setTimeout(() => {
+        this.loading = false
+      }, 2000)
       this.data = [{
         name: 'form net',
         age: 0
@@ -1025,5 +1112,11 @@ export default {
 }
 .higher {
   color: blue;
+}
+.rowGreen:hover {
+  background-color:rgb(37, 109, 85)!important
+}
+.rowColor{
+  color:bisque
 }
 </style>

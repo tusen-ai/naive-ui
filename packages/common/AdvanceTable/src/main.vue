@@ -105,10 +105,11 @@
           :style="computeCustomWidthStl(column)"
         >
       </colgroup>
-      <n-tbody>
+      <n-tbody v-show="!loading">
         <n-tr
           v-for="(rowData, i) in showingData"
           :key="i"
+          :class="rowCls"
         >
           <n-td
             v-for="column in columns"
@@ -130,8 +131,21 @@
         >
           No data
         </div>
+        <!-- <tr style="display:inline-block;width:100%;"> -->
+
+        <!-- </tr> -->
       </n-tbody>
+      <template v-if="loading">
+        <div style="width:100%;display:table-caption;">
+          <Loading
+            style="margin-top:20px;"
+            :circle="{time:'1.5s'}"
+            :svg="{height: '150px', width: '250px'}"
+          />
+        </div>
+      </template>
     </n-table>
+
     <!-- 分页 -->
     <div
       v-if="pagination !== false && showingData.length"
@@ -150,6 +164,7 @@ import row from '../row/index.js'
 import SortIcon from '../sortIcon'
 import filterDropDown from '../filterDropDown'
 import searchInput from '../searchInput'
+import Loading from '../loading'
 
 export default {
   name: 'NAdvanceTable',
@@ -157,7 +172,8 @@ export default {
     row,
     SortIcon,
     filterDropDown,
-    searchInput
+    searchInput,
+    Loading
   },
   props: {
     search: {
@@ -216,6 +232,14 @@ export default {
     data: {
       type: Array,
       default: () => []
+    },
+    rowCls: {
+      type: [Array, String, Object],
+      default: ''
+    },
+    loading: {
+      type: [Boolean],
+      default: false
     }
   },
   data () {
@@ -367,7 +391,6 @@ export default {
     },
     currentSearchColumn () {
       this.searchData = this.computeShowingData()
-      console.log('currentSearchColumn')
     },
     currentSortColumn () {
       this.searchData = this.computeShowingData()
@@ -377,7 +400,6 @@ export default {
       handler () {
         this.searchData = this.computeShowingData()
         console.log('currentFilterColumn')
-
         // because after filter length maybe change , so need to reset current page
         this.currentPage = 1
       },
@@ -394,6 +416,7 @@ export default {
     console.log(this.wrapperWidth, this.tbodyWidth)
 
     this.init()
+
     // window.addEventListener('resize', this.init)
   },
   beforeDestroy () {
@@ -438,7 +461,11 @@ export default {
         ref.setCheckedIndexs(filter[key])
       })
       searcher && this.$refs.search.setSearch(searcher)
-      if (page) { this.currentPage = page }
+      if (page) {
+        this.$nextTick(() => {
+          this.currentPage = page
+        })
+      }
       // TODO:测试功能 有远程 无远程 ，半有半无
     },
     onBodyScrolll (event) {
@@ -466,8 +493,6 @@ export default {
       })
     },
     handleSearch ({ key, word }) {
-      console.log(key, word)
-
       this.currentSearchColumn = {
         key,
         word
@@ -591,6 +616,7 @@ export default {
         // remote filter
         this.useRemoteChange()
       }
+      console.log('on-filter')
     },
     onSortTypeChange ({ i, sortable, key, type, column }) {
       this.currentSortColumn = {

@@ -93,21 +93,12 @@ export default {
     }
   },
   watch: {
-    checkedIndexs: {
-      handler () {
-        let res = []
-        Object.keys(this.checkedIndexs).forEach((key) => {
-          if (this.checkedIndexs[key].isChecked === true) {
-            let index = this.checkedIndexs[key].index
-            res.push(this.filterItems[index].value)
-          }
-        })
-        res = res.length ? res : null
-        this.emitData = res
-        this.$emit('on-filter', { key: this.filterKey, value: res, filterFn: this.filterFn })
-      },
-      deep: true
-    },
+    // checkedIndexs: {
+    //   handler () {
+
+    //   },
+    //   deep: true
+    // },
     filterItems () {
       const checkedIndexs = {}
       this.filterItems.forEach((item, index) => {
@@ -117,10 +108,23 @@ export default {
     }
   },
   methods: {
+    emitFilter () {
+      let res = []
+      Object.keys(this.checkedIndexs).forEach((key) => {
+        if (this.checkedIndexs[key].isChecked === true) {
+          let index = this.checkedIndexs[key].index
+          res.push(this.filterItems[index].value)
+        }
+      })
+      res = res.length ? res : null
+      this.emitData = res
+      this.$emit('on-filter', { key: this.filterKey, value: res, filterFn: this.filterFn })
+    },
     setCheckedIndexs (arr) {
       arr.forEach(value => {
         this.checkedIndexs[value].isChecked !== undefined && Vue.set(this.checkedIndexs[value], 'isChecked', true)
       })
+      this.emitFilter()
     },
     reset () {
       Object.keys(this.checkedIndexs).forEach((key) => {
@@ -136,7 +140,7 @@ export default {
       !this.filterMultiple && this.reset()
       // this.checkedIndexs[item.value] = !isChecked
       Vue.set(this.checkedIndexs[item.value], 'isChecked', !isChecked)
-
+      this.emitFilter()
       // this.checkedIndexs[item.value] = !isChecked
 
       // if (!this.filterMultiple) {
