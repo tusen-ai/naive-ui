@@ -10,6 +10,13 @@
   font-family: $default-font-family;
   text-align: start;
   cursor: pointer;
+  &.n-select--remote {
+    .n-select-link {
+      &::after {
+        display: none;
+      }
+    }
+  }
   &.n-select--disabled {
     cursor: not-allowed;
     .n-select-link {
@@ -295,7 +302,15 @@
           &.n-select-menu__item--selected {
             color: #63E2B7FF;
           }
+          &.n-select-menu__item--no-data {
+            color: rgba(255, 255, 255, .5);
+            text-align: center;
+          }
           &.n-select-menu__item--not-found {
+            color: rgba(255, 255, 255, .5);
+            text-align: center;
+          }
+          &.n-select-menu__item--loading {
             color: rgba(255, 255, 255, .5);
             text-align: center;
           }

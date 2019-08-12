@@ -8,13 +8,13 @@
   font-size: 14px;
   padding: 0 7px;
   border-radius: 4px;
-  box-shadow: inset 0 0 0 1px rgba(99,226,183,1);
-  color: rgba(99, 226, 183, 1);
   box-sizing: border-box;
   cursor: pointer;
+  transition: background-color .3s $default-cubic-bezier;
   &.n-tag--closable {
     padding-right: 18px;
     .n-tag__close-mark {
+      transition: color .3s $default-cubic-bezier;
       right: 3px;
       top: 50%;
       transform: translateY(-50%);
@@ -24,20 +24,84 @@
       position: absolute;
     }
   }
+  & {
+    box-shadow: inset 0 0 0 1px rgba(99,226,183,1);
+    color: rgba(99, 226, 183, 1);
+    .n-tag__close-mark {
+      color: rgba(99, 226, 183, 0.5);
+      &:hover {
+        color: rgba(99, 226, 183, 1);
+      }
+    }
+    &:hover {
+      background-color: rgba(99, 226, 183, 0.3);
+    }
+    &:active {
+      background-color: rgba(99, 226, 183, 0.2);
+    }
+  }
   &.n-tag--success-type {
     box-shadow: inset 0 0 0 1px rgba(99, 226, 183, 1);
     color:  rgba(99, 226, 183, 1);
+    .n-tag__close-mark {
+      color: rgba(99, 226, 183, 0.5);
+      &:hover {
+        color: rgba(99, 226, 183, 1);
+      }
+    }
+    &:hover {
+      background-color: rgba(99, 226, 183, 0.3);
+    }
+    &:active {
+      background-color: rgba(99, 226, 183, 0.2);
+    }
   }
   &.n-tag--info-type {
     box-shadow: inset 0 0 0 1px rgba(98, 187, 252, 1);
     color: rgba(98, 187, 252, 1);
+    .n-tag__close-mark {
+      color: rgba(98, 187, 252, 0.5);
+      &:hover {
+        color: rgba(98, 187, 252, 1);
+      }
+    }
+    &:hover {
+      background-color: rgba(98, 187, 252, 0.3);
+    }
+    &:active {
+      background-color: rgba(98, 187, 252, 0.2);
+    }
   }
   &.n-tag--warning-type {
     box-shadow: inset 0 0 0 1px rgba(245, 166, 35, 1);
     color: rgba(245, 166, 35, 1);
+    .n-tag__close-mark {
+      color: rgba(245, 166, 35, 0.5);
+      &:hover {
+        color: rgba(245, 166, 35, 1);
+      }
+    }
+    &:hover {
+      background-color: rgba(245, 166, 35, 0.3);
+    }
+    &:active {
+      background-color: rgba(245, 166, 35, 0.2);
+    }
   }
   &.n-tag--error-type {
     box-shadow: inset 0 0 0 1px rgba(255, 146, 164, 1);
-    color: rgba(255, 146, 164, 1)
+    color: rgba(255, 146, 164, 1);
+    .n-tag__close-mark {
+      color: rgba(255, 146, 164, 0.5);
+      &:hover {
+        color: rgba(255, 146, 164, 1);
+      }
+    }
+    &:hover {
+      background-color: rgba(255, 146, 164, 0.3);
+    }
+    &:active {
+      background-color: rgba(255, 146, 164, 0.2);
+    }
   }
 }

@@ -5,21 +5,24 @@
   >
     <div class="n-doc-header">
       <n-gradient-text :font-size="20">
-        scaffold
+        Collapse / n-collapse
       </n-gradient-text>
     </div>
     <div class="n-doc-body">
-      <scaffold />
+      <basic-usage />
+      <accordion />
     </div>
   </div>
 </template>
 
 <script>
-import scaffold from './scaffold.demo.vue'
+import basicUsage from './basicUsage.demo.vue'
+import accordion from './accordion.demo.vue'
 
 export default {
   components: {
-    scaffold
+    basicUsage,
+    accordion
   },
   data () {
     return {

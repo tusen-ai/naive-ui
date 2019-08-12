@@ -5,21 +5,21 @@
   >
     <div class="n-doc-header">
       <n-gradient-text :font-size="20">
-        scaffold
+        Tag / n-tag
       </n-gradient-text>
     </div>
     <div class="n-doc-body">
-      <scaffold />
+      <basic-usage />
     </div>
   </div>
 </template>
 
 <script>
-import scaffold from './scaffold.demo.vue'
+import basicUsage from './basicUsage.demo.vue'
 
 export default {
   components: {
-    scaffold
+    basicUsage
   },
   data () {
     return {

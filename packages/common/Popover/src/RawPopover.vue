@@ -8,6 +8,7 @@
       class="n-popover__activator"
       @click="handleActivatorClick"
       @mouseenter="handleMouseEnter"
+      @mouseleave="handleMouseLeavePopover"
     >
       <slot name="activator" />
     </div>
@@ -39,6 +40,7 @@
             }"
             :style="style"
             @mouseenter="handleMouseEnter"
+            @mouseleave="handleMouseLeavePopover"
           >
             <div
               v-if="arrow"
@@ -160,7 +162,6 @@ export default {
     },
     handleMouseEnter () {
       if (this.trigger === 'hover') {
-        console.log(this.delay)
         if (this.vanishTimerId) {
           window.clearTimeout(this.vanishTimerId)
           this.vanishTimerId = null
@@ -181,8 +182,7 @@ export default {
       this.deactivate()
       clickoutsideDelegate.unregisterHandler(this.handleClickOutsidePopover)
     },
-    handleMoveOutsidePopover (e) {
-      console.log('move out side')
+    hidePopover () {
       if (this.vanishTimerId !== null) {
         window.clearTimeout(this.vanishTimerId)
         this.vanishTimerId = null
@@ -195,6 +195,16 @@ export default {
       this.vanishTimerId = window.setTimeout(() => {
         this.deactivate()
       }, this.duration)
+    },
+    handleMouseLeavePopover (e) {
+      if (this.trigger === 'hover') {
+        this.hidePopover()
+      }
+    },
+    handleMoveOutsidePopover (e) {
+      if (this.trigger === 'hover') {
+        this.hidePopover()
+      }
     },
     handleActivatorClick () {
       if (this.trigger === 'click') {

@@ -1,45 +1,44 @@
 <template>
   <div class="n-doc-section">
     <div class="n-doc-section__header">
-      Scaffold
+      Basic Usage
     </div>
     <div
       class="n-doc-section__view"
       style="flex-wrap: nowrap;"
     >
       <!--EXAMPLE_START-->
-      <n-tag>Label 1</n-tag>
+      <n-tag>Real Love</n-tag>
       <n-tag
         type="success"
         closable
         @close="handleClose"
       >
-        Label 1
+        Yes It Is
       </n-tag>
       <n-tag
         type="warning"
         closable
         @close="handleClose"
       >
-        Label 1
+        I'm Down
       </n-tag>
       <n-tag
         type="error"
         closable
         @close="handleClose"
       >
-        Label 1
+        Yesterday
       </n-tag>
       <n-tag
         type="info"
         closable
         @close="handleClose"
       >
-        Label 1
+        I'm Looking Through You
       </n-tag>
       <!--EXAMPLE_END-->
     </div>
-    <pre class="n-doc-section__inspect">Inspect some value here</pre>
     <n-doc-source-block>
       <!--SOURCE-->
     </n-doc-source-block>
@@ -59,3 +58,13 @@ export default {
   }
 }
 </script>
+
+<!--STYLE_EXAMPLE_START-->
+<style
+  scoped
+>
+.n-tag {
+  margin-right: 12px;
+}
+</style>
+<!--STYLE_EXAMPLE_END-->
