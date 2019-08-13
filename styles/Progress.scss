@@ -58,6 +58,19 @@
       }
     }
   }
+  &.n-progress--multiple-circle {
+    width: 200px;
+    color: inherit;
+    .n-progress-text {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
   &.n-progress--success{
     color: rgba(99, 226, 183, 1);
     .n-progress-graph {

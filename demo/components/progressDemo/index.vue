@@ -11,6 +11,7 @@
     <div class="n-doc-body">
       <circle-demo />
       <line-demo />
+      <multiple-circle-demo />
     </div>
   </div>
 </template>
@@ -18,11 +19,13 @@
 <script>
 import circleDemo from './circle.demo.vue'
 import lineDemo from './line.demo.vue'
+import multipleCircleDemo from './multipleCircle.demo.vue'
 
 export default {
   components: {
     circleDemo,
-    lineDemo
+    lineDemo,
+    multipleCircleDemo
   },
   data () {
     return {

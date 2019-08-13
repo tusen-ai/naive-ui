@@ -60,6 +60,10 @@ export default {
               path: '/n-alert'
             },
             {
+              name: 'Anchor',
+              path: '/n-anchor'
+            },
+            {
               name: 'BackTop',
               path: '/n-back-top'
             },

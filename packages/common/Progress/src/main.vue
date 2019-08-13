@@ -40,7 +40,7 @@
           </svg>
         </div>
       </div>
-      <div v-if="showIndicator && indicatorPosition === 'outside'">
+      <div v-if="!noIndicator">
         <div
           v-if="status"
           class="n-progress-icon"
@@ -98,7 +98,7 @@
           </div>
         </div>
       </div>
-      <div v-if="showIndicator && indicatorPosition === 'outside'">
+      <div v-if="!noIndicator && indicatorPosition === 'outside'">
         <div
           v-if="status"
           class="n-progress-icon"
@@ -114,11 +114,67 @@
         </div>
       </div>
     </div>
+    <div
+      v-else-if="type==='multiple-circle'"
+      class="n-progress-content"
+    >
+      <div
+        class="n-progress-graph"
+      >
+        <div
+          class="n-progress-graph__circle"
+        >
+          <svg :viewBox="`0 0 ${viewBoxWidth} ${viewBoxWidth}`">
+            <g
+              v-for="(p, index) in percentage"
+              :key="index"
+            >
+              <path
+                class="n-progress-graph__circle-rail"
+                :d="circlePath(viewBoxWidth / 2 - strokeWidth / 2 * (1 + 2 * index) - gap * index, strokeWidth, viewBoxWidth)"
+                :stroke-width="strokeWidth"
+                stroke-linecap="round"
+                fill="none"
+                :style="{
+                  'stroke-dashoffset': 0,
+                  stroke: safeRailColor[index]
+                }"
+              />
+              <path
+                class="n-progress-graph__circle-fill"
+                :d="circlePath(viewBoxWidth / 2 - strokeWidth / 2 * (1 + 2 * index) - gap * index, strokeWidth, viewBoxWidth)"
+                :stroke-width="strokeWidth"
+                stroke-linecap="round"
+                fill="none"
+                :style="{
+                  'stroke-dasharray': strokeDasharray[index],
+                  'stroke-dashoffset': 0,
+                  stroke: safeColor[index]
+                }"
+              />
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div v-if="!noIndicator && this.$slots.default">
+        <div
+          class="n-progress-text"
+        >
+          <slot />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import NIcon from '../../Icon'
+
+function circlePath (r, sw, vw = 100) {
+  console.log(r, sw, vw)
+  console.log(`m ${vw / 2} ${vw / 2 - r} a ${r} ${r} 0 1 1 0 ${2 * r} a ${r} ${r} 0 1 1 0 -${2 * r}`)
+  return `m ${vw / 2} ${vw / 2 - r} a ${r} ${r} 0 1 1 0 ${2 * r} a ${r} ${r} 0 1 1 0 -${2 * r}`
+}
 
 export default {
   name: 'NProgress',
@@ -128,7 +184,7 @@ export default {
   props: {
     type: {
       validator (type) {
-        return ['line', 'circle', 'double-circle'].includes(type)
+        return ['line', 'circle', 'multiple-circle'].includes(type)
       },
       default: 'line'
     },
@@ -138,27 +194,47 @@ export default {
       },
       default: null
     },
-    color: {
-      type: String,
+    railColor: {
+      type: [String, Array],
       default: null
     },
-    percentage: {
+    color: {
+      type: [String, Array],
+      default: null
+    },
+    viewBoxWidth: {
       type: Number,
+      default: 100
+    },
+    strokeWidth: {
+      type: Number,
+      default: 10
+    },
+    gap: {
+      type: Number,
+      default: 1
+    },
+    percentage: {
+      type: [Number, Array],
       default: 0
     },
     unit: {
       type: String,
       default: '%'
     },
-    showIndicator: {
+    noIndicator: {
       type: Boolean,
-      default: true
+      default: false
     },
     indicatorPosition: {
       validator (indicatorPosition) {
         return ['inside', 'inside-label', 'outside'].includes(indicatorPosition)
       },
       default: 'outside'
+    },
+    circleGap: {
+      type: Number,
+      default: 1
     }
   },
   data () {
@@ -169,7 +245,12 @@ export default {
   },
   computed: {
     strokeDasharray () {
-      return `${Math.PI * this.percentage}, 500`
+      if (this.type === 'multiple-circle') {
+        const strokeDasharrays = this.percentage.map((v, i) => `${Math.PI * v / 100 * (this.viewBoxWidth / 2 - this.strokeWidth / 2 * (1 + 2 * i) - this.gap * i) * 2}, ${this.viewBoxWidth * 8}`)
+        return strokeDasharrays
+      } else {
+        return `${Math.PI * this.percentage}, ${this.viewBoxWidth * 8}`
+      }
     },
     iconType () {
       if (this.type === 'circle') {
@@ -189,6 +270,24 @@ export default {
           return 'md-alert'
         }
       } return ''
+    },
+    safeColor () {
+      if (this.type === 'multiple-circle') {
+        if (Array.isArray(this.color)) {
+          return this.color
+        } else return []
+      } else {
+        return this.color
+      }
+    },
+    safeRailColor () {
+      if (this.type === 'multiple-circle') {
+        if (Array.isArray(this.railColor)) {
+          return this.railColor
+        } else return []
+      } else {
+        return this.railColor
+      }
     }
   },
   watch: {
@@ -213,6 +312,7 @@ export default {
     }
   },
   methods: {
+    circlePath: circlePath,
     calcIndicatorPercentage () {
       const lineRect = this.$refs.line.getBoundingClientRect()
       const indicator = this.$refs.indicator.getBoundingClientRect()

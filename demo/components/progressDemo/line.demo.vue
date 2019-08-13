@@ -11,7 +11,7 @@
       <n-progress
         type="line"
         :percentage="percentage"
-        :show-indicator="false"
+        no-indicator
       />
       <n-progress
         type="line"
@@ -31,7 +31,7 @@
         type="line"
         status="success"
         :percentage="percentage"
-        :show-indicator="false"
+        no-indicator
       />
       <n-progress
         type="line"
@@ -54,7 +54,7 @@
         type="line"
         status="warning"
         :percentage="percentage"
-        :show-indicator="false"
+        no-indicator
       />
       <n-progress
         type="line"
@@ -77,7 +77,7 @@
         type="line"
         status="error"
         :percentage="percentage"
-        :show-indicator="false"
+        no-indicator
       />
       <n-progress
         type="line"

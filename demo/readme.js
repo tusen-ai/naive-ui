@@ -208,7 +208,7 @@ Vue.use(naiveUi)
 </tr>
 <tr>
 <td>Divider</td>
-<td style="text-align:center;">🚧</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;"></td>
 <td></td>
 </tr>
@@ -220,7 +220,7 @@ Vue.use(naiveUi)
 </tr>
 <tr>
 <td>Popconfirm</td>
-<td style="text-align:center;">🚧</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;"></td>
 <td></td>
 </tr>
@@ -240,11 +240,11 @@ Vue.use(naiveUi)
 <td>Progress</td>
 <td style="text-align:center;">😍</td>
 <td style="text-align:center;"></td>
-<td></td>
+<td>Multiple Value</td>
 </tr>
 <tr>
 <td>Timeline</td>
-<td style="text-align:center;">🚧</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;"></td>
 <td></td>
 </tr>
@@ -256,12 +256,18 @@ Vue.use(naiveUi)
 </tr>
 <tr>
 <td>Collapse</td>
-<td style="text-align:center;">🚧</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;"></td>
 <td></td>
 </tr>
 <tr>
 <td>Cascader</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Affix</td>
 <td style="text-align:center;">🚧</td>
 <td style="text-align:center;"></td>
 <td></td>

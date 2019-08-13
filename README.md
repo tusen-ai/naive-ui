@@ -74,16 +74,18 @@ Vue.use(naiveUi)
 |Badge|😍|||
 |Steps|😍|||
 |Tag|😍|||
-|Divider|🚧|||
+|Divider|😍|||
 |Statistic|🚧|||
-|Popconfirm|🚧|||
+|Popconfirm|😍|||
 |Anchor|🚧|||
 |BackTop|😍|||
-|Progress|😍|||
-|Timeline|🚧|||
+|Progress|😍||Multiple Value|
+|Timeline|😍|||
 |Card|🚧|||
-|Collapse|🚧|||
+|Collapse|😍|||
 |Cascader|🚧|||
+|Affix|🚧|||
+
 1. Z-index management on `Select` & `Tooltip` & `Modal`(Low Priority)
 2. Full featured table component(Medium Priority)
 3. Form component(Medium Priority)
