@@ -11,7 +11,7 @@
       </div>
       <div
         class="n-advance-table__operation__right"
-        :style="search?'margin-bottom: 18px;':''"
+        :style="search ? 'margin-bottom: 18px;' : ''"
       >
         <slot name="table-operation" />
         <div
@@ -115,7 +115,7 @@
             v-for="column in columns"
             :key="column.key"
             :style="computeAlign(column)"
-            :class="computeTdClass(column,rowData)"
+            :class="computeTdClass(column, rowData)"
           >
             <row
               :index="i"
@@ -139,8 +139,8 @@
         <div style="width:100%;display:table-caption;">
           <Loading
             style="margin-top:20px;"
-            :circle="{time:'1.5s'}"
-            :svg="{height: '150px', width: '250px'}"
+            :circle="{ time: '1.5s' }"
+            :svg="{ height: '150px', width: '250px' }"
           />
         </div>
       </template>

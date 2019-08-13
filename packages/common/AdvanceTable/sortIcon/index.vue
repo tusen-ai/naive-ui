@@ -4,7 +4,7 @@
       type="md-arrow-dropdown"
       :style="{
         fontSize: fontSize,
-        opacity: downOpacity,
+        opacity: opacitys.downOpacity,
         transform: 'scale(0.8)'
       }"
       @click.native="changeDownSort()"
@@ -13,7 +13,7 @@
       type="md-arrow-dropup"
       :style="{
         fontSize: fontSize,
-        opacity: upOpacity,
+        opacity: opacitys.upOpacity,
         transform: 'scale(0.8)'
       }"
       @click.native="changeUpSort()"
@@ -22,6 +22,23 @@
 </template>
 <script>
 // refer to https://github.com/TuSimple/infra-ecos-webui/blob/develop/src/components/SortIcon.vue
+const computeOpacity = (val) => {
+  let self = {}
+  switch (val) {
+    case 0:
+      self.upOpacity = 0.3
+      self.downOpacity = 0.3
+      break
+    case 1:
+      self.upOpacity = 1
+      self.downOpacity = 0.3
+      break
+    case -1:
+      self.upOpacity = 0.3
+      self.downOpacity = 1
+  }
+  return self
+}
 export default {
   name: 'SortIcon',
   props: {
@@ -40,12 +57,20 @@ export default {
       downOpacity: 0.3
     }
   },
-  watch: {
-    value (val) {
-      if (val !== null) { this.setSort(val) }
+  computed: {
+    opacitys () {
+      let val = this.value
+      return computeOpacity(val)
     }
   },
+  // watch: {
+  //   value (val) {
+  //     if (val !== null) { this.setSort(val) }
+  //   }
+  // },
   mounted () {
+    console.log('TCL: mounted -> this.value', this.value)
+
     if (this.value !== 0) {
       this.setSort(this.value)
     }
@@ -60,7 +85,7 @@ export default {
       } else {
         v = -1
       }
-      this.$emit('input', v)
+      this.setSort(v)
     },
     changeUpSort () {
       let v = this.value
@@ -70,28 +95,14 @@ export default {
       } else {
         v = 1
       }
-      this.$emit('input', v)
+      this.setSort(v)
     },
     setSort (val) {
-      this.$emit('onSortTypeChange', this.value)
+      this.$emit('input', val)
 
-      this.changeOpacity(val)
-    },
-    changeOpacity (val) {
-      const self = this
-      switch (val) {
-        case 0:
-          self.upOpacity = 0.3
-          self.downOpacity = 0.3
-          break
-        case 1:
-          self.upOpacity = 1
-          self.downOpacity = 0.3
-          break
-        case -1:
-          self.upOpacity = 0.3
-          self.downOpacity = 1
-      }
+      this.$emit('onSortTypeChange', val)
+
+      // this.changeOpacity(val)
     }
   }
 }
