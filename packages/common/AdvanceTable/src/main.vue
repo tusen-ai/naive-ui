@@ -1,8 +1,8 @@
 <template>
   <div
-    ref="tableWrapper"
-    class="n-advance-tabel__wrapper"
-  >
+ref="tableWrapper"
+       class="n-advance-tabel__wrapper"
+>
     <div class="n-advance-table__operation">
       <div class="n-advance-table__operation__left">
         <slot name="table-operation-batch-left" />
@@ -15,9 +15,9 @@
       >
         <slot name="table-operation" />
         <div
-          v-if="search"
-          class="n-advance-table__operation__search"
-        >
+v-if="search"
+             class="n-advance-table__operation__search"
+>
           <searchInput
             ref="search"
             :options="search"
@@ -39,9 +39,9 @@
           :style="computeCustomWidthStl(column)"
         >
         <col
-          v-if="scrollBarWidth"
-          :width="scrollBarWidth"
-        >
+v-if="scrollBarWidth"
+             :width="scrollBarWidth"
+>
       </colgroup>
       <n-thead>
         <n-tr>
@@ -54,16 +54,10 @@
             <SortIcon
               v-if="column.sortable"
               v-model="sortIndexs[column.key || i]"
-              @onSortTypeChange="
-                type =>
-                  onSortTypeChange({
-                    i,
-                    sortable: column.sortable,
-                    key: column.key,
-                    type,
-                    column
-                  })
-              "
+              :ref="'sorter_' + (column.key || i)"
+              :column="column"
+              :index="i"
+              @onSortTypeChange="onSortTypeChange"
             />
 
             <!-- 优先自定义 -->
@@ -107,10 +101,10 @@
       </colgroup>
       <n-tbody v-show="!loading">
         <n-tr
-          v-for="(rowData, i) in showingData"
-          :key="i"
-          :class="rowCls"
-        >
+v-for="(rowData, i) in showingData"
+              :key="i"
+:class="rowCls"
+>
           <n-td
             v-for="column in columns"
             :key="column.key"
@@ -126,9 +120,9 @@
           </n-td>
         </n-tr>
         <div
-          v-if="showingData.length === 0"
-          class="n-no-data-tip"
-        >
+v-if="showingData.length === 0"
+             class="n-no-data-tip"
+>
           No data
         </div>
         <!-- <tr style="display:inline-block;width:100%;"> -->
@@ -152,9 +146,9 @@
       class="n-advanced-table__pagination"
     >
       <n-pagination
-        v-model="currentPage"
-        :page-count="pageCount"
-      />
+v-model="currentPage"
+                    :page-count="pageCount"
+/>
     </div>
   </div>
 </template>
@@ -413,7 +407,7 @@ export default {
     this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
     this.tbodyWidth = this.relTable.offsetWidth
     this.scrollBarWidth = this.wrapperWidth - this.tbodyWidth
-    console.log(this.wrapperWidth, this.tbodyWidth)
+    // console.log(this.wrapperWidth, this.tbodyWidth)
 
     this.init()
 
@@ -454,7 +448,9 @@ export default {
      */
     setParams ({ filter, sorter, page, searcher }) {
       if (sorter) {
-        this.sortIndexs[sorter.key] = sorter.type
+        const ref = this.$refs['sorter_' + sorter.key][0]
+        ref.setSort(sorter.type)
+        // this.sortIndexs[sorter.key] = sorter.type
       }
       filter && Object.keys(filter).forEach((key) => {
         const ref = this.$refs['filterDropDown_' + key][0]
