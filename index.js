@@ -45,6 +45,8 @@ import BackTop from './packages/common/BackTop'
 import Divider from './packages/common/Divider'
 import Collapse from './packages/common/Collapse'
 import Timeline from './packages/common/Timeline'
+import PopConfirm from './packages/common/PopConfirm'
+import Anchor from './packages/common/Anchor'
 
 function install (Vue) {
   Card.install(Vue)
@@ -94,6 +96,8 @@ function install (Vue) {
   Divider.install(Vue)
   Collapse.install(Vue)
   Timeline.install(Vue)
+  PopConfirm.install(Vue)
+  Anchor.install(Vue)
 }
 
 export default {
