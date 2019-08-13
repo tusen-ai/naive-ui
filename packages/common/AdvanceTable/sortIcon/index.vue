@@ -49,6 +49,14 @@ export default {
     value: {
       type: Number,
       default: null
+    },
+    index: {
+      type: Number,
+      required: true
+    },
+    column: {
+      type: Object,
+      required: true
     }
   },
   data () {
@@ -63,14 +71,7 @@ export default {
       return computeOpacity(val)
     }
   },
-  // watch: {
-  //   value (val) {
-  //     if (val !== null) { this.setSort(val) }
-  //   }
-  // },
   mounted () {
-    console.log('TCL: mounted -> this.value', this.value)
-
     if (this.value !== 0) {
       this.setSort(this.value)
     }
@@ -99,9 +100,13 @@ export default {
     },
     setSort (val) {
       this.$emit('input', val)
-
-      this.$emit('onSortTypeChange', val)
-
+      this.$emit('onSortTypeChange', {
+        i: this.index,
+        sortable: this.column.sortable,
+        key: this.column.key || this.index,
+        type: val,
+        column: this.column
+      })
       // this.changeOpacity(val)
     }
   }
