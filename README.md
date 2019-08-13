@@ -76,7 +76,7 @@ Vue.use(naiveUi)
 |Tag|😍|||
 |Divider|🚧|||
 |Statistic|🚧|||
-|PopConfirm|🚧|||
+|Popconfirm|🚧|||
 |Anchor|🚧|||
 |BackTop|😍|||
 |Progress|😍|||

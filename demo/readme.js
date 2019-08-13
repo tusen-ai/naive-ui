@@ -219,7 +219,7 @@ Vue.use(naiveUi)
 <td></td>
 </tr>
 <tr>
-<td>PopConfirm</td>
+<td>Popconfirm</td>
 <td style="text-align:center;">🚧</td>
 <td style="text-align:center;"></td>
 <td></td>

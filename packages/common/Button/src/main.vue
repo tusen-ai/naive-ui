@@ -29,6 +29,9 @@
     </div>
     <div
       class="n-button__content"
+      :class="{
+        'simulate-transparent-text': type === 'primary'
+      }"
       :style="style"
     >
       <slot />
@@ -56,12 +59,16 @@
 
 <script>
 import NIcon from '../../Icon/index'
+import texttransparentable from '../../../mixins/texttransparentable'
 
 export default {
   name: 'NButton',
   components: {
     NIcon
   },
+  mixins: [
+    texttransparentable
+  ],
   props: {
     disabled: {
       type: Boolean,
@@ -90,10 +97,6 @@ export default {
     iconOnRight: {
       type: Boolean,
       default: false
-    },
-    autoTextColor: {
-      type: Boolean,
-      default: false
     }
   },
   data () {
@@ -107,19 +110,6 @@ export default {
     }
   },
   mounted () {
-    if (this.autoTextColor) {
-      let cursor = this.$el
-      while (cursor.parentElement) {
-        cursor = cursor.parentElement
-        const backgroundColor = getComputedStyle(cursor).backgroundColor
-        if (backgroundColor && backgroundColor !== 'rgba(0, 0, 0, 0)') {
-          this.style = {
-            color: backgroundColor
-          }
-          break
-        }
-      }
-    }
   },
   methods: {
     handleClick (e) {

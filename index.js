@@ -45,7 +45,7 @@ import BackTop from './packages/common/BackTop'
 import Divider from './packages/common/Divider'
 import Collapse from './packages/common/Collapse'
 import Timeline from './packages/common/Timeline'
-import PopConfirm from './packages/common/PopConfirm'
+import Popconfirm from './packages/common/Popconfirm'
 import Anchor from './packages/common/Anchor'
 
 function install (Vue) {
@@ -96,7 +96,7 @@ function install (Vue) {
   Divider.install(Vue)
   Collapse.install(Vue)
   Timeline.install(Vue)
-  PopConfirm.install(Vue)
+  Popconfirm.install(Vue)
   Anchor.install(Vue)
 }
 

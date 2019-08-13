@@ -136,6 +136,10 @@ export default {
               path: '/n-popover'
             },
             {
+              name: 'Popconfirm',
+              path: '/n-popconfirm'
+            },
+            {
               name: 'Progress',
               path: '/n-progress'
             },

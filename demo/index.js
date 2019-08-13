@@ -47,7 +47,7 @@ import tagDemo from './components/tagDemo'
 import timelineDemo from './components/timelineDemo'
 import progressDemo from './components/progressDemo'
 import dividerDemo from './components/dividerDemo'
-import popConfirmDemo from './components/popConfirmDemo'
+import popconfirmDemo from './components/popconfirmDemo'
 import anchorDemo from './components/anchorDemo'
 import demo from './demo'
 
@@ -123,7 +123,7 @@ const routes = [
       { path: '/n-back-top', component: backTopDemo },
       { path: '/n-date-picker-debug', component: datePickerDebug },
       { path: '/n-divider', component: dividerDemo },
-      { path: '/n-pop-confirm', component: popConfirmDemo },
+      { path: '/n-popconfirm', component: popconfirmDemo },
       { path: '/n-anchor', component: anchorDemo }
     ]
   },
