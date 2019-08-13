@@ -1,24 +1,24 @@
 <template>
   <filterIcon :status="filterStatus">
-    <!-- <n-scrollbar> -->
-    <ul
-      class="n-table-filter-item"
-    >
-      <li
-        v-for="(item, idx) in items"
-        :key="item.value"
-        :class="computeItemClass(item)"
-        @click="handleSelect(item, idx)"
+    <n-scrollbar :style="`max-height:${maxHeight}px;`">
+      <ul
+        class="n-table-filter-item"
       >
-        <span>{{ item.label }}</span>
-        <n-icon
-          v-show="checkedIndexs[item.value].isChecked === true"
-          type="md-checkmark"
-          size="14"
-        />
-      </li>
-    </ul>
-    <!-- </n-scrollbar> -->
+        <li
+          v-for="(item, idx) in items"
+          :key="item.value"
+          :class="computeItemClass(item)"
+          @click="handleSelect(item, idx)"
+        >
+          <span>{{ item.label }}</span>
+          <n-icon
+            v-show="checkedIndexs[item.value].isChecked === true"
+            type="md-checkmark"
+            size="14"
+          />
+        </li>
+      </ul>
+    </n-scrollbar>
   </filterIcon>
 </template>
 
@@ -33,7 +33,7 @@ export default {
   props: {
     maxHeight: {
       type: [String, Number],
-      default: 27 * 3
+      default: 27 * 5
     },
     filterItems: {
       type: Array,
