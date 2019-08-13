@@ -12,6 +12,9 @@
       <circle-demo />
       <line-demo />
       <multiple-circle-demo />
+      <no-indicator />
+      <color />
+      <custom-indicator />
     </div>
   </div>
 </template>
@@ -20,12 +23,18 @@
 import circleDemo from './circle.demo.vue'
 import lineDemo from './line.demo.vue'
 import multipleCircleDemo from './multipleCircle.demo.vue'
+import noIndicator from './noIndicator.demo.vue'
+import color from './color.demo.vue'
+import customIndicator from './customIndicator.demo'
 
 export default {
   components: {
     circleDemo,
     lineDemo,
-    multipleCircleDemo
+    multipleCircleDemo,
+    noIndicator,
+    color,
+    customIndicator
   },
   data () {
     return {

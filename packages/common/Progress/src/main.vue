@@ -24,7 +24,10 @@
                 stroke-width="10"
                 stroke-linecap="round"
                 fill="none"
-                style="stroke-dashoffset: 0;"
+                :style="{
+                  'stroke-dashoffset': 0,
+                  stroke: safeRailColor
+                }"
               />
             </g>
             <g>
@@ -34,7 +37,11 @@
                 stroke-width="10"
                 stroke-linecap="round"
                 fill="none"
-                :style="`stroke-dasharray: ${strokeDasharray}; stroke-dashoffset: 0;`"
+                :style="{
+                  'stroke-dasharray': strokeDasharray,
+                  'stroke-dashoffset': 0,
+                  stroke: safeColor
+                }"
               />
             </g>
           </svg>
@@ -42,7 +49,13 @@
       </div>
       <div v-if="!noIndicator">
         <div
-          v-if="status"
+          v-if="$slots.default"
+          class="n-progress-custom-content"
+        >
+          <slot />
+        </div>
+        <div
+          v-else-if="status"
           class="n-progress-icon"
         >
           <n-icon :type="iconType" />
@@ -50,6 +63,9 @@
         <div
           v-else
           class="n-progress-text"
+          :style="{
+            color: indicatorTextColor
+          }"
         >
           <span class="n-progress-text__percentage">{{ percentage }}</span>
           <span class="n-progress-text__unit">{{ unit }}</span>
@@ -68,11 +84,17 @@
             [`n-progress-graph__line--indicator-${indicatorPosition}`]: true
           }"
         >
-          <div class="n-progress-graph__line-rail">
+          <div
+            class="n-progress-graph__line-rail"
+            :style="{
+              backgroundColor: safeRailColor
+            }"
+          >
             <div
               class="n-progress-graph__line-fill"
               :style="{
-                maxWidth: percentage + '%'
+                maxWidth: percentage + '%',
+                backgroundColor: safeColor
               }"
             >
               <div
@@ -88,10 +110,14 @@
             ref="indicator"
             class="n-progress-graph__line-indicator"
             :style="indicatorPercentageIsCaculated ? {
-              right: `${indicatorPercentage}%`
+              right: `${indicatorPercentage}%`,
+              backgroundColor: safeColor,
+              color: indicatorTextColor
             } : {
               transition: 'none',
-              right: `${indicatorPercentage}%`
+              right: `${indicatorPercentage}%`,
+              backgroundColor: safeColor,
+              color: indicatorTextColor
             }"
           >
             {{ percentage + unit }}
@@ -100,7 +126,13 @@
       </div>
       <div v-if="!noIndicator && indicatorPosition === 'outside'">
         <div
-          v-if="status"
+          v-if="$slots.default"
+          class="n-progress-custom-content"
+        >
+          <slot />
+        </div>
+        <div
+          v-else-if="status"
           class="n-progress-icon"
         >
           <n-icon :type="iconType" />
@@ -108,6 +140,9 @@
         <div
           v-else
           class="n-progress-text"
+          :style="{
+            color: indicatorTextColor
+          }"
         >
           <span class="n-progress-text__percentage">{{ percentage }}</span>
           <span class="n-progress-text__unit">{{ unit }}</span>
@@ -131,7 +166,7 @@
             >
               <path
                 class="n-progress-graph__circle-rail"
-                :d="circlePath(viewBoxWidth / 2 - strokeWidth / 2 * (1 + 2 * index) - gap * index, strokeWidth, viewBoxWidth)"
+                :d="circlePath(viewBoxWidth / 2 - strokeWidth / 2 * (1 + 2 * index) - circleGap * index, strokeWidth, viewBoxWidth)"
                 :stroke-width="strokeWidth"
                 stroke-linecap="round"
                 fill="none"
@@ -142,7 +177,7 @@
               />
               <path
                 class="n-progress-graph__circle-fill"
-                :d="circlePath(viewBoxWidth / 2 - strokeWidth / 2 * (1 + 2 * index) - gap * index, strokeWidth, viewBoxWidth)"
+                :d="circlePath(viewBoxWidth / 2 - strokeWidth / 2 * (1 + 2 * index) - circleGap * index, strokeWidth, viewBoxWidth)"
                 :stroke-width="strokeWidth"
                 stroke-linecap="round"
                 fill="none"
@@ -210,10 +245,6 @@ export default {
       type: Number,
       default: 10
     },
-    gap: {
-      type: Number,
-      default: 1
-    },
     percentage: {
       type: [Number, Array],
       default: 0
@@ -232,6 +263,10 @@ export default {
       },
       default: 'outside'
     },
+    indicatorTextColor: {
+      type: String,
+      default: null
+    },
     circleGap: {
       type: Number,
       default: 1
@@ -246,7 +281,7 @@ export default {
   computed: {
     strokeDasharray () {
       if (this.type === 'multiple-circle') {
-        const strokeDasharrays = this.percentage.map((v, i) => `${Math.PI * v / 100 * (this.viewBoxWidth / 2 - this.strokeWidth / 2 * (1 + 2 * i) - this.gap * i) * 2}, ${this.viewBoxWidth * 8}`)
+        const strokeDasharrays = this.percentage.map((v, i) => `${Math.PI * v / 100 * (this.viewBoxWidth / 2 - this.strokeWidth / 2 * (1 + 2 * i) - this.circleGap * i) * 2}, ${this.viewBoxWidth * 8}`)
         return strokeDasharrays
       } else {
         return `${Math.PI * this.percentage}, ${this.viewBoxWidth * 8}`
@@ -317,7 +352,7 @@ export default {
       const lineRect = this.$refs.line.getBoundingClientRect()
       const indicator = this.$refs.indicator.getBoundingClientRect()
       const quotient = indicator.width / lineRect.width
-      let indicatorPercentage = 100 - this.percentage - quotient / 2 * 100
+      let indicatorPercentage = 100 - this.percentage
       indicatorPercentage = Math.min(indicatorPercentage, 100 - quotient * 100)
       indicatorPercentage = Math.max(indicatorPercentage, 0)
       return indicatorPercentage

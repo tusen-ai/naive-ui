@@ -10,8 +10,8 @@
       <!--EXAMPLE_START-->
       <n-progress
         type="multiple-circle"
-        :stroke-width="6"
-        :gap="0"
+        :stroke-width="4"
+        :circle-gap="2"
         :percentage="[percentage, (percentage +10) % 100, (percentage +20) % 100, (percentage + 30) % 100]"
         :color="['red', 'green', 'blue', null]"
         :rail-color="['rgba(0, 255, 0, .2)', 'rgba(0, 0, 255, .2)', 'rgba(255, 0, 0, .2)', 'rgba(255, 255, 255, .2)']"

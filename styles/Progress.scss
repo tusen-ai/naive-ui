@@ -2,7 +2,6 @@
 @import "./theme/default.scss";
 
 .n-progress {
-  color: rgba(98, 187, 252, 1);
   &.n-progress--line {
     width: 350px;
     .n-progress-content {
@@ -13,6 +12,7 @@
       }
     }
     .n-progress-icon {
+      color: rgba(98, 187, 252, 1);
       width: 46px;
       padding-left: 14px;
       height: 24px;
@@ -20,7 +20,7 @@
       font-size: 24px;
     }
     .n-progress-text {
-      color: inherit;
+      // color: rgba(98, 187, 252, 1);
       white-space: nowrap;
       font-weight: bold;
       line-height: 24px;
@@ -36,6 +36,15 @@
   }
   &.n-progress--circle {
     width: 120px;
+    .n-progress-custom-content {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     .n-progress-text, .n-progress-icon {
       position: absolute;
       left: 50%;
@@ -49,10 +58,13 @@
     .n-progress-text {
       white-space: nowrap;
       font-weight: bold;
+      // color: rgba(98, 187, 252, 1);
       .n-progress-text__percentage {
+        color: inherit;
         font-size: 28px;
       }
       .n-progress-text__unit {
+        color: inherit;
         font-size: 24px;
         margin-left: 6px;
       }
@@ -72,7 +84,9 @@
     }
   }
   &.n-progress--success{
-    color: rgba(99, 226, 183, 1);
+    .n-progress-text, .n-progress-icon {
+      color: rgba(99, 226, 183, 1);
+    }
     .n-progress-graph {
       .n-progress-graph__circle {
         .n-progress-graph__circle-fill {
@@ -87,7 +101,9 @@
     }
   }
   &.n-progress--error{
-    color: rgba(255, 146, 164, 1);
+    .n-progress-text, .n-progress-icon {
+      color: rgba(255, 146, 164, 1);
+    }
     .n-progress-graph {
       .n-progress-graph__circle {
         .n-progress-graph__circle-fill {
@@ -102,7 +118,9 @@
     }
   }
   &.n-progress--warning{
-    color: rgba(255, 138, 0, 1);
+    .n-progress-text, .n-progress-icon {
+      color: rgba(255, 138, 0, 1);
+    }
     .n-progress-graph {
       .n-progress-graph__circle {
         .n-progress-graph__circle-fill {
