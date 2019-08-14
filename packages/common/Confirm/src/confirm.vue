@@ -98,9 +98,7 @@ export default {
   },
   methods: {
     toggle (isActive) {
-      !isActive && setTimeout(() => {
-        this.$destroy()
-      }, 300)
+      this.handleCancel()
     },
     handleCancel () {
       this.onCancel()

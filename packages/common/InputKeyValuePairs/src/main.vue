@@ -120,7 +120,7 @@ export default {
       this.value.push({})
     },
     remove (index) {
-      if (index === 0) {
+      if (index === 0 && this.value.length <= 1) {
         Object.keys(this.value[0]).forEach((key) => {
           let type = typeof (this.value[0][key])
           switch (type) {
