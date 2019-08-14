@@ -1,7 +1,6 @@
 <template>
   <div
-    v-if="unDelete"
-    ref="tab-panel"
+    v-if="NTab && name === NTab.value"
     :class="cls"
     :style="style"
   >
@@ -18,8 +17,8 @@ export default {
       default: undefined
     },
     name: {
-      type: String || Number,
-      default: undefined
+      type: String,
+      default: null
     },
     active: {
       type: Boolean,
@@ -36,7 +35,6 @@ export default {
   },
   data () {
     return {
-      unDelete: true,
       isShow: false,
       style: {}
     }
@@ -44,44 +42,47 @@ export default {
   computed: {
     cls () {
       return this.isShow ? 'n-tab-panel n-tab-panel_active' : 'n-tab-panel'
-    },
-    offset () {
-      return this.NTab.offset
     }
+    // offset () {
+    //   return this.NTab.offset
+    // }
   },
   watch: {
-    offset: {
-      handler (n) {
-        this.setTransfer(n)
-        this.$forceUpdate()
-      },
-      immediate: true
-    }
+    // offset: {
+    //   handler (n) {
+    //     this.setTransfer(n)
+    //     this.$forceUpdate()
+    //   },
+    //   immediate: true
+    // }
   },
-  created () {
-    this.NTab.updateLabels()
-    if (this._NaiveTabOrder === this.NTab.active) {
-      this.updateIsShow(true)
+  // created () {
+  //   this.NTab.updateLabels()
+  //   if (this._NaiveTabOrder === this.NTab.active) {
+  //     this.updateIsShow(true)
+  //   }
+  //   this.$on('display-none', this.setDisplayNone)
+  // },
+  mounted () {
+    if (this.NTab) {
+      console.log(this.NTab.value)
+      this.NTab.addPanel(this)
     }
-    this.$on('display-none', this.setDisplayNone)
   },
   beforeDestroy () {
-    this.$off('display-none', this.setDisplayNone)
-  },
-  methods: {
-    updateIsShow (flag) {
-      this.isShow = flag
-      this.$forceUpdate()
-    },
-    setTransfer (per) {
-      // 这里可以优化, 直接在上层div做整体移动, 不需要对子元素移动
-      this.style.transform = 'translateX(' + per + ')'
-    },
-    setDisplayNone (i) {
-      if (i === this._NaiveTabOrder) {
-        this.unDelete = false
-      }
+    if (this.NTab) {
+      this.NTab.removePanel(this)
     }
   }
+  // methods: {
+  //   updateIsShow (flag) {
+  //     this.isShow = flag
+  //     this.$forceUpdate()
+  //   },
+  //   setTransfer (per) {
+  //     // 这里可以优化, 直接在上层div做整体移动, 不需要对子元素移动
+  //     this.style.transform = 'translateX(' + per + ')'
+  //   }
+  // }
 }
 </script>
