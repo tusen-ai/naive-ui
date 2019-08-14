@@ -33,6 +33,19 @@
     &:hover {
       box-shadow: inset 0 0 0 1px $checkbox-border-color--active;
     }
+    &::before {
+      box-sizing: content-box;
+      content: "";
+      border-bottom: 2px solid #5C647B;
+      width: 8px;
+      left: 3px;
+      position: absolute;
+      top: 6px;
+      opacity: 0;
+      transform: scale(.5);
+      transform-origin: center;
+      transition: transform .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+    }
     &::after {
       box-sizing: content-box;
       content: "";
@@ -47,7 +60,7 @@
       transform: rotate(45deg) scale(.5);
       width: 3px;
       transform-origin: center;
-      transition: transform .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
+      transition: transform .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
     }
   }
   &.n-checkbox--checked {
@@ -60,6 +73,19 @@
       }
     }
   }
+  &.n-checkbox--indeterminate {
+    .n-checkbox__checkbox {
+      background-color: $checkbox-background--active;
+      box-shadow: inset 0 0 0 1px $checkbox-border-color--active;
+      &::after {
+        opacity: 0;
+      }
+      &::before {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }
   &.n-checkbox--disabled {
     .n-checkbox__checkbox {
       cursor: not-allowed;
@@ -69,6 +95,9 @@
         border: 1.5px solid rgba(255,255,255,.4);
         border-left: 0;
         border-top: 0;
+      }
+      &::before {
+        border-bottom: 1.5px solid rgba(255,255,255,.4);
       }
     }
   }

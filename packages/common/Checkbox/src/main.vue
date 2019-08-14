@@ -1,7 +1,7 @@
 <template>
   <div
     class="n-checkbox"
-    :class="{'n-checkbox--checked': value, 'n-checkbox--disabled': disabled}"
+    :class="{'n-checkbox--checked': value, 'n-checkbox--disabled': disabled, 'n-checkbox--indeterminate': indeterminate }"
   >
     <div
       class="n-checkbox__checkbox"
@@ -30,6 +30,10 @@ export default {
       default: false
     },
     disabled: {
+      type: Boolean,
+      default: false
+    },
+    indeterminate: {
       type: Boolean,
       default: false
     }

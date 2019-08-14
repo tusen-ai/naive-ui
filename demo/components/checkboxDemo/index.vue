@@ -11,6 +11,7 @@
     <div class="n-doc-body">
       <basic-usage />
       <checkbox-group />
+      <indeterminate />
     </div>
   </div>
 </template>
@@ -18,11 +19,13 @@
 <script>
 import basicUsage from './basicUsage.demo.vue'
 import checkboxGroup from './checkboxGroup.demo'
+import indeterminate from './indeterminate.demo'
 
 export default {
   components: {
     basicUsage,
-    checkboxGroup
+    checkboxGroup,
+    indeterminate
   },
   data () {
     return {
