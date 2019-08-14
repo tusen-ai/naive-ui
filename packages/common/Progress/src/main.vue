@@ -206,8 +206,8 @@
 import NIcon from '../../Icon'
 
 function circlePath (r, sw, vw = 100) {
-  console.log(r, sw, vw)
-  console.log(`m ${vw / 2} ${vw / 2 - r} a ${r} ${r} 0 1 1 0 ${2 * r} a ${r} ${r} 0 1 1 0 -${2 * r}`)
+  // console.log(r, sw, vw)
+  // console.log(`m ${vw / 2} ${vw / 2 - r} a ${r} ${r} 0 1 1 0 ${2 * r} a ${r} ${r} 0 1 1 0 -${2 * r}`)
   return `m ${vw / 2} ${vw / 2 - r} a ${r} ${r} 0 1 1 0 ${2 * r} a ${r} ${r} 0 1 1 0 -${2 * r}`
 }
 
