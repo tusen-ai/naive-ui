@@ -7,10 +7,14 @@
     }"
   >
     <slot />
-    <sup
-      v-if="value !== null || dot"
-      class="n-badge-sup"
-    >{{ dot ? null : (max === null || typeof value === 'string') ? value : (value > max ? `${max}+` : value) }}</sup>
+    <transition name="n-badge--transition">
+      <sup
+        v-if="(value !== null || dot) && !(hideZero && value === 0)"
+        class="n-badge-sup"
+      >
+        {{ dot ? null : (max === null || typeof value === 'string') ? value : (value > max ? `${max}+` : value) }}
+      </sup>
+    </transition>
   </div>
 </template>
 
@@ -35,6 +39,10 @@ export default {
         return ['success', 'error', 'warning', 'info']
       },
       default: null
+    },
+    hideZero: {
+      type: Boolean,
+      default: false
     }
   }
 }

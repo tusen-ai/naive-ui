@@ -38,6 +38,7 @@
 }
 
 @include b(badge-sup) {
+  @include fade-in-scale-up-transition(badge);
   user-select: none;
   position: absolute;
   height: 18px;

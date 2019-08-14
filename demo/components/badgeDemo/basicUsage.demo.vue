@@ -9,6 +9,7 @@
     >
       <!--EXAMPLE_START-->
       <n-badge
+        hide-zero
         :value="value"
         :max="10"
         style="margin-right: 24px;"
