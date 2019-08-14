@@ -8,7 +8,7 @@
   .n-switch__rail {
     position: relative;
     height: 14px;
-    width: 28px;
+    width: 30px;
     border-radius: 7px;
     background-color: rgba(148,151,155,0.4);
     margin: 3px;
@@ -35,11 +35,11 @@
     &.n-switch__rail--active {
       background-color: rgba(97, 196, 118, .27);
       &::before {
-        left: 12px;
+        left: 13px;
         opacity: 0;
       }
       &::after {
-        left: 12px;
+        left: 13px;
         opacity: 1;
       }
     }
