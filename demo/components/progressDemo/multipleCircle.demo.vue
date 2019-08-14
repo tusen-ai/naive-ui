@@ -10,6 +10,7 @@
       <!--EXAMPLE_START-->
       <n-progress
         type="multiple-circle"
+        :view-box-width="80"
         :stroke-width="4"
         :circle-gap="2"
         :percentage="[percentage, (percentage +10) % 100, (percentage +20) % 100, (percentage + 30) % 100]"
