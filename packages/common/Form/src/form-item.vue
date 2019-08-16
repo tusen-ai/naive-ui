@@ -177,7 +177,7 @@ export default {
         } else {
           this.clearValidateClass()
         }
-        cb(errors[0].message || false, fields)
+        cb((errors && errors[0].message) || false, fields)
       })
     },
     clearValidateClass () {

@@ -1,8 +1,8 @@
 <template>
   <div
-ref="tableWrapper"
-       class="n-advance-tabel__wrapper"
->
+    ref="tableWrapper"
+    class="n-advance-tabel__wrapper"
+  >
     <div class="n-advance-table__operation">
       <div class="n-advance-table__operation__left">
         <slot name="table-operation-batch-left" />
@@ -15,9 +15,9 @@ ref="tableWrapper"
       >
         <slot name="table-operation" />
         <div
-v-if="search"
-             class="n-advance-table__operation__search"
->
+          v-if="search"
+          class="n-advance-table__operation__search"
+        >
           <searchInput
             ref="search"
             :options="search"
@@ -39,9 +39,9 @@ v-if="search"
           :style="computeCustomWidthStl(column)"
         >
         <col
-v-if="scrollBarWidth"
-             :width="scrollBarWidth"
->
+          v-if="scrollBarWidth"
+          :width="scrollBarWidth"
+        >
       </colgroup>
       <n-thead>
         <n-tr>
@@ -53,8 +53,8 @@ v-if="scrollBarWidth"
             {{ column.title }}
             <SortIcon
               v-if="column.sortable"
-              v-model="sortIndexs[column.key || i]"
               :ref="'sorter_' + (column.key || i)"
+              v-model="sortIndexs[column.key || i]"
               :column="column"
               :index="i"
               @onSortTypeChange="onSortTypeChange"
@@ -101,10 +101,10 @@ v-if="scrollBarWidth"
       </colgroup>
       <n-tbody v-show="!loading">
         <n-tr
-v-for="(rowData, i) in showingData"
-              :key="i"
-:class="rowCls"
->
+          v-for="(rowData, i) in showingData"
+          :key="i"
+          :class="rowCls"
+        >
           <n-td
             v-for="column in columns"
             :key="column.key"
@@ -120,9 +120,9 @@ v-for="(rowData, i) in showingData"
           </n-td>
         </n-tr>
         <div
-v-if="showingData.length === 0"
-             class="n-no-data-tip"
->
+          v-if="showingData.length === 0"
+          class="n-no-data-tip"
+        >
           No data
         </div>
         <!-- <tr style="display:inline-block;width:100%;"> -->
@@ -146,9 +146,9 @@ v-if="showingData.length === 0"
       class="n-advanced-table__pagination"
     >
       <n-pagination
-v-model="currentPage"
-                    :page-count="pageCount"
-/>
+        v-model="currentPage"
+        :page-count="pageCount"
+      />
     </div>
   </div>
 </template>
@@ -462,6 +462,7 @@ export default {
           this.currentPage = page
         })
       }
+      this.useRemoteChange()
       // TODO:测试功能 有远程 无远程 ，半有半无
     },
     onBodyScrolll (event) {

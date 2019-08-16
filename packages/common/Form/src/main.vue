@@ -68,7 +68,7 @@ export default {
      * @param {Array} scope  to specify the scope of validation
      * @return {Boolean} validation passed or not
      */
-    validate (cb, scope = [], target = this) {
+    validate (cb, scope = [], target = this, res = false) {
       let promise
       let isCallback = typeof cb === 'function'
       if (!isCallback && window.Promise) {
@@ -90,11 +90,17 @@ export default {
             fields = Object.assign({}, fields, field)
           })
         } else if (['NFormItem', 'NForm'].indexOf(componentName) === -1) {
-          this.validate(null, [], child)
+          if (!this.validate(null, [], child, true)) {
+            valid = false
+          }
         }
         if (i === target.$children.length - 1 && isCallback) {
           cb(valid, fields)
         }
+      }
+
+      if (res) {
+        return valid
       }
 
       if (promise) {
