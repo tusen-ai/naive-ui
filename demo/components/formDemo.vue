@@ -752,12 +752,10 @@ export default {
       setTimeout(() => {
         if (!Number.isInteger(value)) {
           callback(new Error('Number required'))
+        } else if (value < 18) {
+          callback(new Error('Age should over 18'))
         } else {
-          if (value < 18) {
-            callback(new Error('Age should over 18'))
-          } else {
-            callback()
-          }
+          callback()
         }
       }, 1000)
     }
@@ -984,24 +982,24 @@ export default {
 
   methods: {
     formValidate (ref) {
-      // this.$refs[ref].validate((flag, res) => {
-      //   console.log('validate all result', flag, res);
-      // })
-      new Promise((resolve, reject) => {
-        this.$refs[ref].validate((valid, filed) => {
-          if (valid) {
-            resolve(filed)
-          } else {
-            reject(filed)
-          }
-        })
+      this.$refs[ref].validate((flag, res) => {
+        console.log('validate all result', flag, res)
       })
-        .then(f => {
-          console.log('pass', f)
-        })
-        .catch(e => {
-          console.log('unpass', e)
-        })
+      // new Promise((resolve, reject) => {
+      //   this.$refs[ref].validate((valid, filed) => {
+      //     if (valid) {
+      //       resolve(filed)
+      //     } else {
+      //       reject(filed)
+      //     }
+      //   })
+      // })
+      //   .then(f => {
+      //     console.log('pass', f)
+      //   })
+      //   .catch(e => {
+      //     console.log('unpass', e)
+      //   })
     },
     formReset (ref) {
       this.$refs[ref].resetForm()
