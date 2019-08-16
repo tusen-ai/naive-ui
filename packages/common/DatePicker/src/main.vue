@@ -71,7 +71,7 @@
       </div>
     </div>
     <div
-      ref="contentWrapper"
+      ref="contentContainer"
       class="n-content-wrapper n-content-wrapper--date-picker"
     >
       <div ref="content">
