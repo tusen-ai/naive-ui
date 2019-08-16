@@ -82,13 +82,17 @@ export default {
     },
     handleSetActive (active) {
       this.active = active
+    },
+    handleScroll (e, scrollContainer, scrollContent) {
+      this.$emit('scroll', e, scrollContainer, scrollContent)
     }
   },
   render (h) {
     const on = {
       input: this.handleInput.bind(this),
       change: this.handleChange.bind(this),
-      setactive: this.handleSetActive.bind(this)
+      setactive: this.handleSetActive.bind(this),
+      scroll: this.handleScroll.bind(this)
     }
     return this.multiple ? h(NMultipleSelect, {
       props: { ...this.$props, active: this.active, placement: 'bottom-start', widthMode: 'activator' },

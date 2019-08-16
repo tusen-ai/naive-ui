@@ -49,6 +49,7 @@
             >
               <scrollbar
                 ref="scrollbar"
+                @scroll="handleScroll"
                 @scrollstart="handleMenuScrollStart"
                 @scrollend="handleMenuScrollEnd"
               >
@@ -290,6 +291,9 @@ export default {
       window.setTimeout(() => {
         this.scrolling = false
       }, 0)
+    },
+    handleScroll (e, scrollContainer, scrollContent) {
+      this.$emit('scroll', e, scrollContainer, scrollContent)
     }
   }
 }
