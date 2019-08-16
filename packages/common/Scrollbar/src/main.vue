@@ -223,7 +223,8 @@ export default {
     handleVerticalScroll () {
       // console.log('handleVerticalScroll')
     },
-    handleScroll () {
+    handleScroll (e) {
+      this.$emit('scroll', e, this.$refs.scrollContainer, this.$refs.scrollContent)
       this.updateScrollParameters()
     },
     updateScrollParameters () {
