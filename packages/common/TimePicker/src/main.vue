@@ -11,7 +11,7 @@
       />
     </div>
     <div
-      ref="contentWrapper"
+      ref="contentContainer"
       class="n-content-wrapper"
       @click="handleContentClick"
     >
