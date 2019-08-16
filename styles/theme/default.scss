@@ -168,15 +168,15 @@ $scrollbar-color--hover: rgba(255,255,255,0.3);
   }
 }
 
-@mixin fade-in-scale-up-transition($block, $origin: inherit) {
+@mixin fade-in-scale-up-transition($block, $origin: inherit, $duration: .2s) {
   &.#{$namespace}-#{$block}--transition-enter-active,
   &.#{$namespace}-#{$block}--transition-leave-active {
     transform: scale(1);
-    opacity: 1;
+    opacity: $duration;
   }
   &.#{$namespace}-#{$block}--transition-enter-active {
     transform-origin: $origin;
-    transition: opacity .2s $fast-in-cubic-bezier, transform .2s $fast-in-cubic-bezier;
+    transition: opacity $duration $fast-in-cubic-bezier, transform $duration $fast-in-cubic-bezier;
   }
   &.#{$namespace}-#{$block}--transition-enter, &.#{$namespace}-#{$block}--transition-leave-to {
     opacity: 0;
@@ -184,7 +184,7 @@ $scrollbar-color--hover: rgba(255,255,255,0.3);
     transform: scale(.9);
   }
   &.#{$namespace}-#{$block}--transition-leave-to {
-    transition: opacity .2s $slow-out-cubic-bezier, transform .2s $slow-out-cubic-bezier;
+    transition: opacity $duration $slow-out-cubic-bezier, transform $duration $slow-out-cubic-bezier;
   }
 }
 

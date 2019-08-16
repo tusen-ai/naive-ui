@@ -47,6 +47,7 @@ import Collapse from './packages/common/Collapse'
 import Timeline from './packages/common/Timeline'
 import Popconfirm from './packages/common/Popconfirm'
 import Anchor from './packages/common/Anchor'
+import Dropdown from './packages/common/Dropdown'
 
 function install (Vue) {
   Card.install(Vue)
@@ -98,6 +99,7 @@ function install (Vue) {
   Timeline.install(Vue)
   Popconfirm.install(Vue)
   Anchor.install(Vue)
+  Dropdown.install(Vue)
 }
 
 export default {

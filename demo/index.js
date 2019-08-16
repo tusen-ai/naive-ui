@@ -33,7 +33,7 @@ import tabDemo from './components/tabDemo'
 import timePickerDemo from './components/timePickerDemo'
 import confirmDemo from './components/confirmDemo'
 import backTopDemo from './components/backTopDemo'
-
+import dropdownDemo from './components/dropdownDemo'
 import scrollbarDebug from './debugComponents/scrollbarDebug'
 import scrollbarDebug2 from './debugComponents/scrollbarDebug2'
 import badgeDemo from './components/badgeDemo'
@@ -124,7 +124,8 @@ const routes = [
       { path: '/n-date-picker-debug', component: datePickerDebug },
       { path: '/n-divider', component: dividerDemo },
       { path: '/n-popconfirm', component: popconfirmDemo },
-      { path: '/n-anchor', component: anchorDemo }
+      { path: '/n-anchor', component: anchorDemo },
+      { path: '/n-dropdown', component: dropdownDemo }
     ]
   },
   {

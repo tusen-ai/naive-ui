@@ -100,7 +100,15 @@ export default {
               path: '/n-divider'
             },
             {
-              name: 'Gradient Text',
+              name: 'Dropdown',
+              path: '/n-dropdown'
+            },
+            {
+              name: 'Form',
+              path: '/n-form'
+            },
+            {
+              name: 'GradientText',
               path: '/n-gradient-text'
             },
             {
@@ -164,6 +172,10 @@ export default {
               path: '/n-switch'
             },
             {
+              name: 'Tab',
+              path: '/n-tab'
+            },
+            {
               name: 'Table',
               path: '/n-table'
             },
@@ -182,14 +194,6 @@ export default {
             {
               name: 'Tooltip',
               path: '/n-tooltip'
-            },
-            {
-              name: 'Form',
-              path: '/n-form'
-            },
-            {
-              name: 'Tab',
-              path: '/n-tab'
             }
           ]
         },

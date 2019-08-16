@@ -22,6 +22,7 @@ export default function calcPlacementTransform (placement, activatorRect, conten
   } else if (placement === 'right-start') {
     contentTop = activatorRect.top
     contentLeft = activatorRect.left + activatorRect.width
+    suggesetedTransfromOrigin = 'top left'
   } else if (placement === 'right') {
     contentTop = activatorRect.top + activatorRect.height / 2 - contentRect.height / 2
     contentLeft = activatorRect.left + activatorRect.width
@@ -44,6 +45,7 @@ export default function calcPlacementTransform (placement, activatorRect, conten
   } else {
     contentTop = activatorRect.top + activatorRect.height
     contentLeft = activatorRect.left + activatorRect.width / 2 - contentRect.width / 2
+    suggesetedTransfromOrigin = 'top center'
   }
   /**
    * We could also change the position using transform.

@@ -18,3 +18,16 @@ input {
   font-family: $default-font-family;
   font-size: inherit;
 }
+
+.n-detached-content-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  overflow: visible;
+}
+
+.n-detached-content {
+  position: fixed;
+}
