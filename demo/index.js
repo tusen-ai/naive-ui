@@ -49,6 +49,7 @@ import progressDemo from './components/progressDemo'
 import dividerDemo from './components/dividerDemo'
 import popconfirmDemo from './components/popconfirmDemo'
 import anchorDemo from './components/anchorDemo'
+import popselectDemo from './components/popselectDemo'
 import demo from './demo'
 
 import popoverDebug from './debugComponents/popoverDebug'
@@ -125,7 +126,8 @@ const routes = [
       { path: '/n-divider', component: dividerDemo },
       { path: '/n-popconfirm', component: popconfirmDemo },
       { path: '/n-anchor', component: anchorDemo },
-      { path: '/n-dropdown', component: dropdownDemo }
+      { path: '/n-dropdown', component: dropdownDemo },
+      { path: '/n-popselect', component: popselectDemo }
     ]
   },
   {

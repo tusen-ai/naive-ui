@@ -48,6 +48,7 @@ import Timeline from './packages/common/Timeline'
 import Popconfirm from './packages/common/Popconfirm'
 import Anchor from './packages/common/Anchor'
 import Dropdown from './packages/common/Dropdown'
+import Popselect from './packages/common/Popselect'
 
 function install (Vue) {
   Card.install(Vue)
@@ -100,6 +101,7 @@ function install (Vue) {
   Popconfirm.install(Vue)
   Anchor.install(Vue)
   Dropdown.install(Vue)
+  Popselect.install(Vue)
 }
 
 export default {

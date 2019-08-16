@@ -152,6 +152,10 @@ export default {
               path: '/n-popconfirm'
             },
             {
+              name: 'Popselect',
+              path: '/n-popselect'
+            },
+            {
               name: 'Progress',
               path: '/n-progress'
             },
