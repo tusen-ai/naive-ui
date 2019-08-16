@@ -71,7 +71,7 @@ export default {
     },
     type: {
       validator (type) {
-        return ['info', 'warning', 'alert', 'success'].includes(type)
+        return ['info', 'warning', 'error', 'success'].includes(type)
       },
       default: 'info'
     }
