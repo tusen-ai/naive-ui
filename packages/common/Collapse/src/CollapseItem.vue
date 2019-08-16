@@ -12,7 +12,7 @@
       <n-icon type="ios-arrow-forward" />{{ title }}
     </div>
     <div
-      ref="contentWrapper"
+      ref="contentContainer"
       class="n-collapse-item__content-wrapper"
     >
       <div
@@ -49,18 +49,18 @@ export default {
   },
   watch: {
     value (newValue) {
-      if (newValue && this.$refs.contentWrapper && this.$refs.content) {
-        this.$refs.contentWrapper.style.maxHeight = this.$refs.content.getBoundingClientRect().height + 'px'
+      if (newValue && this.$refs.contentContainer && this.$refs.content) {
+        this.$refs.contentContainer.style.maxHeight = this.$refs.content.getBoundingClientRect().height + 'px'
       } else {
-        this.$refs.contentWrapper.style.maxHeight = 0
+        this.$refs.contentContainer.style.maxHeight = 0
       }
     }
   },
   mounted () {
-    if (this.value && this.$refs.contentWrapper && this.$refs.content) {
-      this.$refs.contentWrapper.style.maxHeight = this.$refs.content.getBoundingClientRect().height + 'px'
+    if (this.value && this.$refs.contentContainer && this.$refs.content) {
+      this.$refs.contentContainer.style.maxHeight = this.$refs.content.getBoundingClientRect().height + 'px'
     } else {
-      this.$refs.contentWrapper.style.maxHeight = 0
+      this.$refs.contentContainer.style.maxHeight = 0
     }
   },
   methods: {

@@ -1,10 +1,10 @@
 /**
- * Detach $refs.contentWrapper to detachTarget
+ * Detach $refs.contentContainer to detachTarget
  *
  * Dependency:
- * $refs.contentWrapper
+ * $refs.contentContainer
  *
- * @prop {HTMLElement} detachTarget determine where should $refs.contentWrapper to be detached
+ * @prop {HTMLElement} detachTarget determine where should $refs.contentContainer to be detached
  */
 export default {
   props: {
@@ -13,12 +13,16 @@ export default {
         return true
       },
       default: () => document.body
+    },
+    cleanManually: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
     detachContent () {
-      this.$refs.contentWrapper.parentNode.removeChild(this.$refs.contentWrapper)
-      this.detachTarget.append(this.$refs.contentWrapper)
+      this.$refs.contentContainer.parentNode.removeChild(this.$refs.contentContainer)
+      this.detachTarget.append(this.$refs.contentContainer)
     }
   },
   beforeMount () {
@@ -31,6 +35,8 @@ export default {
     this.detachContent()
   },
   beforeDestroy () {
-    this.detachTarget.removeChild(this.$refs.contentWrapper)
+    if (!this.cleanManually) {
+      this.detachTarget.removeChild(this.$refs.contentContainer)
+    }
   }
 }

@@ -68,7 +68,7 @@
       </div>
     </div>
     <div
-      ref="contentWrapper"
+      ref="contentContainer"
       v-clickoutside="handleClickOutsideMenu"
       class="n-select-menu__content-wrapper"
     >

@@ -52,7 +52,7 @@
     </div>
 
     <div
-      ref="contentWrapper"
+      ref="contentContainer"
       class="n-cascader-menu__content-wrapper"
     >
       <div

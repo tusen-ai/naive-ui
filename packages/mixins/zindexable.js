@@ -6,22 +6,22 @@ import zIndexManager from '../utils/dom/zIndexManager'
  * acquire new z-index on content when active is set to true
  *
  * dependency:
- * $refs.contentWrapper
+ * $refs.contentContainer
  * $vm.active
  */
 export default {
   mounted () {
-    zIndexManager.registerElement(this.$refs.contentWrapper)
+    zIndexManager.registerElement(this.$refs.contentContainer)
   },
   watch: {
     active (newActive) {
       console.debug('[zindexable.watch.active]:', newActive)
       if (newActive) {
-        zIndexManager.setNewZIndex(this.$refs.contentWrapper)
+        zIndexManager.setNewZIndex(this.$refs.contentContainer)
       }
     }
   },
   beforeDestroy () {
-    zIndexManager.unregisterElement(this.$refs.contentWrapper)
+    zIndexManager.unregisterElement(this.$refs.contentContainer)
   }
 }

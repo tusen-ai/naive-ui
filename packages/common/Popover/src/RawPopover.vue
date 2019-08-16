@@ -13,7 +13,7 @@
       <slot name="activator" />
     </div>
     <div
-      ref="contentWrapper"
+      ref="contentContainer"
       class="n-popover__content-container"
     >
       <!--

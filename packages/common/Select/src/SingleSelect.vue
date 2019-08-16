@@ -28,7 +28,7 @@
       </div>
     </div>
     <div
-      ref="contentWrapper"
+      ref="contentContainer"
       class="n-select-menu__content-wrapper"
     >
       <div
@@ -125,8 +125,8 @@ export default {
       type: Array,
       required: true
     },
-    // eslint-disable-next-line vue/require-prop-types
     value: {
+      validator: () => true,
       default: null
     },
     placeholder: {
