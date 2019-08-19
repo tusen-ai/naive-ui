@@ -4,7 +4,6 @@
       v-if="active"
       :key="'overlay'"
       class="n-modal-overlay"
-      v-on="$listeners"
     />
   </transition>
 </template>
@@ -36,8 +35,7 @@ export default {
   right: 0;
   top: 0;
   bottom: 0;
-  display: flex;
-  overflow: auto;
+  overflow: visible;
 }
 
 .n-modal-overlay--transition-enter-active {

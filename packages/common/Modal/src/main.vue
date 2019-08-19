@@ -2,76 +2,20 @@
 import NModalOverlay from './Overlay'
 import NModalContent from './ModalContent'
 
+import detachable from '../../../mixins/detachable'
+import zindexable from '../../../mixins/zindexable'
+import toggleable from '../../../mixins/toggleable'
+
 export default {
   name: 'NModal',
-  model: {
-    prop: 'isActive',
-    event: 'toggle'
-  },
-  props: {
-    isActive: {
-      type: Boolean,
-      default: false
-    }
-  },
+  mixins: [
+    toggleable,
+    detachable,
+    zindexable
+  ],
   data () {
     return {
-      overlay: null,
-      app: null,
-      content: null
-    }
-  },
-
-  watch: {
-    // isActive (val) {
-    //   if (!val) {
-    //     this.removeOverlay()
-    //   } else {
-    //     this.addOverlayToApp()
-    //   }
-    // }
-  },
-  beforeMount () {
-    const app = document.querySelector('body')
-    if (!app) {
-      console.warn('Modal will be mounted to body element, but it doesn\'t exist! Modal component won\'t work!')
-    }
-  },
-  mounted () {
-    this.app = document.querySelector('body')
-    this.detachContentToApp()
-  },
-  beforeDestroy () {
-    // this.removeOverlay()
-    this.app.removeChild(this.$refs.content)
-  },
-  methods: {
-    // addOverlayToApp () {
-    //   let overlay = document.querySelector('#overlay')
-    //   if (!overlay) {
-    //     overlay = document.createElement('div')
-    //     overlay.classList.add('n-modal-overlay')
-    //     overlay.id = 'overlay'
-    //     this.app.append(overlay)
-    //     // this.app.insertBefore(overlay, this.app.firstElementChild)
-    //     this.overlay = overlay
-    //   }
-    // },
-    // removeOverlay () {
-    //   let overlay = document.querySelector('#overlay')
-    //   if (overlay) {
-    //     this.app.removeChild(overlay)
-    //   }
-    // },
-    deactivate () {
-      this.$emit('toggle', false)
-    },
-    detachContentToApp () {
-      this.$refs.content.parentNode.removeChild(this.$refs.content)
-      this.content = this.$refs.content
-      // this.addOverlayToApp()
-      this.app.append(this.content)
-      // this.app.insertBefore(this.content, this.app.firstElementChild)
+      mousedownTarget: null
     }
   },
   render (h) {
@@ -81,34 +25,39 @@ export default {
       this.$slots.activator,
       h('div', {
         staticClass: 'n-modal-container',
-        ref: 'content',
+        ref: 'contentContainer',
         class: {
-          'n-modal-container--active': this.isActive
+          'n-modal-container--active': this.active
         }
       },
-      // [h('div', {
-      //   staticClass: 'n-modal-overlay',
-      //   ref: 'overlay',
-      //   class: {
-      //     'is-active': this.isActive
-      //   },
-      //   on: {
-      //     click: this.deactivate
-      //   }
-      // })
-      [h(NModalOverlay, {
-        props: { active: this.isActive }
-      }),
-      h(NModalContent, { ref: 'modalWrapper',
-        props: { active: this.isActive },
-        on: {
-          click: (e) => {
-            if (e.target.contains(this.$refs.modalWrapper.$el)) {
-              this.deactivate()
+      [
+        h(NModalOverlay, {
+          props: { active: this.active }
+        }),
+        h(NModalContent,
+          {
+            ref: 'content',
+            props: { active: this.active },
+            on: {
+              mousedown: (e) => {
+                this.mousedownTarget = e.target
+              },
+              mouseup: (e) => {
+                const slotDOM = this.$refs.content.slotDOM
+                const scollbars = this.$refs.content.$el.querySelectorAll('.n-scrollbar-rail__scrollbar')
+                const elsToAvoid = [...slotDOM, ...scollbars]
+                if (
+                  !elsToAvoid.some(el => el.contains(e.target)) &&
+                  !elsToAvoid.some(el => el.contains(this.mousedownTarget))
+                ) {
+                  this.deactivate()
+                }
+              }
             }
-          }
-        } }, this.$slots.default)]
-      )
+          },
+          this.$slots.default
+        )
+      ])
     ])
   }
 }
@@ -125,7 +74,6 @@ export default {
   top: 0;
   height: 0;
   width: 0;
-  overflow: visible;
   display: flex;
 }
 </style>
