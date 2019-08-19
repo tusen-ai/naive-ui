@@ -286,7 +286,9 @@ export default {
       this.$nextTick().then(() => {
         this.hideLightBar()
         this.updatePosition()
-        this.$refs.scrollbar.updateParameters()
+        if (this.$refs.scrollbar) {
+          this.$refs.scrollbar.updateParameters()
+        }
       })
     },
     value () {
