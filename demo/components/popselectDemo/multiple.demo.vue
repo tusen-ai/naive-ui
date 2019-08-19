@@ -10,6 +10,7 @@
       <!--EXAMPLE_START-->
       <n-popselect
         v-model="value"
+        multiple
         @change="handleChange"
       >
         <template v-slot:activator>
@@ -50,8 +51,8 @@ export default {
     }
   },
   methods: {
-    handleChange (v) {
-      this.$NMessage.info('value: ' + v)
+    handleChange (value) {
+      this.$NMessage.info(JSON.stringify(value))
     }
   }
 }

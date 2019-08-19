@@ -1,6 +1,76 @@
 @import './mixins/mixins.scss';
 @import './theme/default.scss';
 
+@include b(popselect) {
+  outline: none;
+}
+
 @include b(popselect-content) {
   position: relative;
+  &.n-popselect-content--multiple {
+    .n-popselect-option {
+      padding-right: 36px;
+      &::after {
+        content: '';
+        height: 6px;
+        width: 3px;
+        border-right: 1px solid #63E2B7FF;
+        border-bottom: 1px solid #63E2B7FF;
+        position: absolute;
+        right: 14px;
+        transform: rotate(45deg) scale(.5);
+        top: calc(50% - 4px);
+        opacity: 0;
+        transition: transform .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
+      }
+      &.n-popselect-option--active {
+        color: rgba(80, 227, 194, 1);
+        &::after {
+          opacity: 1;
+          transform: rotate(45deg) scale(1);
+        }
+      }
+    }
+  }
+  .n-popselect-light-bar-container {
+    @include fade-in-transition(popselect-light-bar);
+    overflow: hidden;
+    position: absolute;
+    border-radius: 6px;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    .n-popselect-light-bar {
+      position: absolute;
+      width: 100%;
+      background-color: $select-item-background-color--active;
+      left: 0;
+      height: 28px;
+      transition: top .15s $default-cubic-bezier;
+    }
+  }
+}
+
+@include b(popselect-option) {
+  height: 28px;
+  white-space: nowrap;
+  line-height: 28px;
+  color: rgba(233, 233, 236, 1);
+  padding: 0 12px;
+  font-size: 14px;
+  cursor: pointer;
+  position: relative;
+  transition: color .3s $default-cubic-bezier;
+  
+  &:active {
+    color: rgba(80, 227, 194, 1);
+  }
+  &.n-popselect-option--disabled {
+    cursor: not-allowed;
+    color: rgba(233, 233, 236, 0.3);
+  }
+  &.n-popselect-option--active {
+    color: rgba(80, 227, 194, 1);
+  }
 }

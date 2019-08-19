@@ -1,66 +1,101 @@
 <template>
   <n-popover
     ref="popover"
-    v-model="showPopselect"
     class="n-popselect"
     trigger="click"
+    @hide="handlePopoverHide"
+    @show="handlePopoverShow"
+    @keydown.native="handleActivatorKeyDown"
+    @keyup.up.native="handleActivatorKeyUpUp"
+    @keyup.down.native="handleActivatorKeyUpDown"
+    @keyup.enter.native="handleActivatorKeyUpEnter"
   >
     <template v-slot:activator>
-      <slot name="activator" />
+      <div
+        class="n-popselect__activator"
+      >
+        <slot name="activator" />
+      </div>
     </template>
     <div
+      ref="popselectContent"
       class="n-popselect-content"
       :class="{
-        'n-popselect-content--no-icon': noIcon
+        'n-popselect-content--multiple': multiple
       }"
+      @mouseleave="handleContentMouseLeave"
     >
-      <div class="n-popselect-content__body">
-        <slot
-          v-if="!noIcon"
-          name="icon"
+      <transition name="n-popselect-light-bar--transition">
+        <div
+          v-if="showLightBar"
+          class="n-popselect-light-bar-container"
         >
-          <n-icon
-            type="md-alert"
-            color="rgba(255, 138, 0, 1)"
+          <div
+            class="n-popselect-light-bar"
+            :style="{ top: `${lightBarTop}px` }"
           />
-        </slot>
-        <slot />
-      </div>
-      <template>
-        <div class="n-popselect-content__action">
-          <slot name="action">
-            <n-button
-              size="tiny"
-              round
-              @click="handleNegativeClick"
-            >
-              {{ negativeText }}
-            </n-button>
-            <n-button
-              round
-              size="tiny"
-              type="primary"
-              @click="handlePositiveClick"
-            >
-              {{ positiveText }}
-            </n-button>
-          </slot>
         </div>
-      </template>
+      </transition>
+      <slot />
     </div>
   </n-popover>
 </template>
 
 <script>
 import NPopover from '../../Popover'
-import NButton from '../../Button'
+import withlightbar from '../../../mixins/withlightbar'
+
+function collectOptions (self, componentName) {
+  const options = []
+  const traverse = (component, componentName) => {
+    component.$children.forEach(child => {
+      let name = child.$options.name
+      if (name === componentName) {
+        options.push(child)
+      } else {
+        traverse(child, componentName)
+      }
+    })
+  }
+  traverse(self, componentName)
+  return options
+}
+
+function getOption (options, currentIndex, direction) {
+  if (currentIndex === null) {
+    currentIndex = -1
+  }
+  for (let offset = 1; offset < options.length; ++offset) {
+    let index = null
+    if (direction === 'prev') {
+      index = (currentIndex - offset + options.length) % options.length
+    } else {
+      index = (currentIndex + offset) % options.length
+    }
+    if (!options[index].disabled) {
+      return {
+        option: options[index],
+        index
+      }
+    }
+  }
+  return {
+    option: null,
+    index: null
+  }
+}
 
 export default {
   name: 'NPopselect',
-  components: {
-    NPopover,
-    NButton
+  provide () {
+    return {
+      NPopselect: this
+    }
   },
+  components: {
+    NPopover
+  },
+  mixins: [withlightbar],
   props: {
     multiple: {
       type: Boolean,
@@ -71,24 +106,107 @@ export default {
         return true
       },
       default: null
+    },
+    cancelable: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
-      showPopselect: false
+      active: false,
+      options: [],
+      pendingOption: null,
+      pendingOptionIndex: null
     }
+  },
+  watch: {
+    active (newActive) {
+      const activator = this.$el
+      if (newActive) {
+        activator.setAttribute('tabindex', '0')
+        activator.focus()
+        this.$nextTick(function () {
+          this.options = collectOptions(this, 'NPopselectOption')
+        })
+      } else {
+        activator.removeAttribute('tabindex')
+        this.pendingOption = null
+        this.pendingOptionIndex = null
+        this.hideLightBar()
+      }
+    }
+  },
+  mounted () {
+    this.options = collectOptions(this, 'NPopselectOption')
+  },
+  updated () {
+    this.$nextTick(function () {
+      this.options = collectOptions(this, 'NPopselectOption')
+    })
   },
   methods: {
     close () {
       this.$refs.popover.active = false
     },
-    handlePositiveClick () {
-      this.$emit('positive-click')
-      this.close()
+    handleContentMouseLeave () {
+      this.hideLightBar()
     },
-    handleNegativeClick () {
-      this.$emit('negative-click')
-      this.close()
+    handlePopoverHide () {
+      this.active = false
+    },
+    handlePopoverShow () {
+      this.active = true
+    },
+    handleActivatorKeyUpUp () {
+      const { option, index } = getOption(this.options, this.pendingOptionIndex, 'prev')
+      this.pendingOption = option
+      this.pendingOptionIndex = index
+      this.updateLightBarPosition(option.$el)
+    },
+    handleActivatorKeyUpDown () {
+      const { option, index } = getOption(this.options, this.pendingOptionIndex, 'next')
+      this.pendingOption = option
+      this.pendingOptionIndex = index
+      this.updateLightBarPosition(option.$el)
+    },
+    handleActivatorKeyUpEnter () {
+      if (this.pendingOption && this.pendingOption.$el) {
+        this.pendingOption.$el.click()
+      }
+    },
+    handleActivatorKeyDown (e) {
+      if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+        e.preventDefault()
+      }
+    },
+    toggle (value) {
+      if (this.multiple) {
+        if (Array.isArray(this.value)) {
+          const validValues = new Set(this.options.map(option => option.value))
+          const newValue = this.value.filter((v) => validValues.has(v))
+          const index = newValue.findIndex(v => v === value)
+          if (~index) {
+            newValue.splice(index, 1)
+          } else {
+            newValue.push(value)
+          }
+          this.$emit('input', newValue)
+          this.$emit('change', newValue)
+        } else {
+          this.$emit('input', [value])
+          this.$emit('change', [value])
+        }
+      } else {
+        if (this.value === value && this.cancelable) {
+          this.$emit('input', null)
+          this.$emit('change', null)
+        } else {
+          this.$emit('input', value)
+          this.$emit('change', value)
+        }
+        this.$refs.popover.deactivate()
+      }
     }
   }
 }
