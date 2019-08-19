@@ -14,7 +14,7 @@
         @change="handleChange"
       >
         <template v-slot:activator>
-          <n-tag>{{ value || 'popselect' }}</n-tag>
+          <n-tag>{{ (Array.isArray(value) && value.length) ? value : 'popselect' }}</n-tag>
         </template>
         <n-popselect-option
           label="Go Let It Out"
