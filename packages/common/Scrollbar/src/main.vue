@@ -91,7 +91,8 @@ export default {
       memorizedVerticalTop: null,
       memorizedHorizontalLeft: null,
       memorizedMouseX: null,
-      memorizedMouseY: null
+      memorizedMouseY: null,
+      disabled: false
     }
   },
   computed: {
@@ -162,6 +163,19 @@ export default {
     this.updateParameters()
   },
   methods: {
+    disableScrollbar () {
+      this.hideScrollbar()
+      this.disabled = true
+    },
+    enableScrollbar () {
+      this.disabled = false
+      this.updateParameters()
+      this.showScrollbar()
+    },
+    showScrollbar () {
+      this.showHorizontalScrollbar = true
+      this.showVeriticalScrollbar = true
+    },
     scrollToElement (el) {
       if (el.offsetTop < this.$refs.scrollContainer.scrollTop) {
         this.$refs.scrollContainer.scrollTo({
@@ -178,11 +192,13 @@ export default {
       }
     },
     enterScrollWrapper () {
+      if (this.disabled) return
       this.displayHorizontalScrollbar()
       this.displayVerticalScrollbar()
       this.updateParameters()
     },
     leaveScrollWrapper () {
+      if (this.disabled) return
       this.hideScrollbar()
     },
     hideScrollbar () {
@@ -224,6 +240,7 @@ export default {
       // console.log('handleVerticalScroll')
     },
     handleScroll (e) {
+      if (this.disabled) return
       this.$emit('scroll', e, this.$refs.scrollContainer, this.$refs.scrollContent)
       this.updateScrollParameters()
     },
