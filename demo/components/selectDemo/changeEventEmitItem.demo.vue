@@ -93,8 +93,8 @@ export default {
     }
   },
   methods: {
-    handleChange (item, isSelected) {
-      this.$NMessage.success('item: ' + JSON.stringify(item) + ', isSelected: ' + JSON.stringify(isSelected))
+    handleChange (value) {
+      this.$NMessage.success('value: ' + JSON.stringify(value))
     }
   }
 }

@@ -269,14 +269,7 @@ export default {
       return valueToItem
     },
     selectedItems () {
-      if (!Array.isArray(this.value)) return []
-      if (this.remote) {
-        return this.value
-          .filter(value => this.valueItemMap.has(value) || this.memorizedValueItemMap.has(value))
-          .map(value => this.valueItemMap.has(value) ? this.valueItemMap.get(value) : this.memorizedValueItemMap.get(value))
-      } else {
-        return this.value.filter(value => this.valueItemMap.has(value)).map(value => this.valueItemMap.get(value))
-      }
+      return this.mapValueToItem(this.value)
     },
     clearedPattern () {
       return this.pattern.toLowerCase().trim()
@@ -316,11 +309,22 @@ export default {
         return false
       }
     },
-    emitChangeEvent (item, isSelected) {
-      if (this.emitItem) {
-        this.$emit('change', item, isSelected)
+    mapValueToItem (values) {
+      if (!Array.isArray(values)) return []
+      if (this.remote) {
+        return values
+          .filter(value => this.valueItemMap.has(value) || this.memorizedValueItemMap.has(value))
+          .map(value => this.valueItemMap.has(value) ? this.valueItemMap.get(value) : this.memorizedValueItemMap.get(value))
       } else {
-        this.$emit('change', item.value, isSelected)
+        return values.filter(value => this.valueItemMap.has(value)).map(value => this.valueItemMap.get(value))
+      }
+    },
+    emitChangeEvent (newValue) {
+      if (this.emitItem) {
+        let selectedItems = this.mapValueToItem(newValue)
+        this.$emit('change', selectedItems)
+      } else {
+        this.$emit('change', newValue)
       }
     },
     setPendingItem (item, index) {
@@ -381,10 +385,10 @@ export default {
       const index = newValue.findIndex(value => value === item.value)
       if (~index) {
         newValue.splice(index, 1)
-        this.emitChangeEvent(item, false)
+        // this.emitChangeEvent(item, false)
       } else {
         newValue.push(item.value)
-        this.emitChangeEvent(item, true)
+        // this.emitChangeEvent(item, true)
         this.pattern = ''
       }
       this.$nextTick().then(() => {
@@ -393,6 +397,7 @@ export default {
         }
       })
       this.$emit('input', newValue)
+      this.emitChangeEvent(newValue)
     },
     handleMenuScrollStart () {
       this.scrolling = true
