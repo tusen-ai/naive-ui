@@ -79,6 +79,14 @@ export default {
     }
   },
   methods: {
+    deactivate () {
+      this.active = false
+      this.$emit('hide')
+    },
+    activate () {
+      this.active = true
+      this.$emit('show')
+    },
     handleSetActive (active) {
       if (active) {
         if (!this.active) {

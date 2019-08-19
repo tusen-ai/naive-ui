@@ -138,6 +138,13 @@ export default {
       return style
     }
   },
+  watch: {
+    active (newActive) {
+      if (!newActive) {
+        clickoutsideDelegate.unregisterHandler(this.handleClickOutsidePopover)
+      }
+    }
+  },
   created () {
     this.handleMoveOutsidePopover = this.handleMoveOutsidePopover.bind(this)
   },
