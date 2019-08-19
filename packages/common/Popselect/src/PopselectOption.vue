@@ -30,10 +30,6 @@ export default {
     disabled: {
       type: Boolean,
       default: false
-    },
-    cancelable: {
-      type: Boolean,
-      default: false
     }
   },
   computed: {
