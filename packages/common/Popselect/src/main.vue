@@ -3,6 +3,7 @@
     ref="popover"
     class="n-popselect"
     trigger="click"
+    :width="width"
     @hide="handlePopoverHide"
     @show="handlePopoverShow"
     @keydown.native="handleActivatorKeyDown"
@@ -110,6 +111,10 @@ export default {
     cancelable: {
       type: Boolean,
       default: false
+    },
+    width: {
+      type: Number,
+      default: null
     }
   },
   data () {

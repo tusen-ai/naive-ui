@@ -12,6 +12,7 @@
       <basic-usage />
       <multiple />
       <cancelable />
+      <custom-width />
     </div>
   </div>
 </template>
@@ -19,13 +20,15 @@
 <script>
 import basicUsage from './basicUsage.demo.vue'
 import multiple from './multiple.demo.vue'
-import cancelable from './cancelable.demo'
+import cancelable from './cancelable.demo.vue'
+import customWidth from './customWidth.demo.vue'
 
 export default {
   components: {
     basicUsage,
     multiple,
-    cancelable
+    cancelable,
+    customWidth
   },
   data () {
     return {
