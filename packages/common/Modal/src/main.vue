@@ -20,7 +20,8 @@ export default {
   },
   render (h) {
     return h('div', {
-      staticClass: 'n-modal-activator'
+      staticClass: 'n-modal-activator',
+      ref: 'activator'
     }, [
       this.$slots.activator,
       h('div', {
