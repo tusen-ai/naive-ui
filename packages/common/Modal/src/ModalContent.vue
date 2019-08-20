@@ -71,15 +71,12 @@ export default {
       console.log(scrollTop)
       const {
         offsetLeft,
-        offsetTop,
-        offsetWidth,
-        offsetHeight
+        offsetTop
       } = this.$refs.contentInner
       const {
         left: activatorLeft,
         top: activatorTop,
-        width: activatorWidth,
-        height: activatorHeight
+        width: activatorWidth
       } = this.$parent.$refs.activator.getBoundingClientRect()
       const transformOriginX = -(offsetLeft - activatorLeft - activatorWidth / 2)
       const transformOriginY = -(offsetTop - activatorTop - scrollTop - activatorTop / 2)
