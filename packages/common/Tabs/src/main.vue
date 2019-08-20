@@ -62,7 +62,7 @@
 import Emitter from '../../../mixins/emitter'
 
 export default {
-  name: 'NTab',
+  name: 'NTabs',
   provide () {
     return {
       NTab: this

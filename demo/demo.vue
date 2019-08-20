@@ -180,8 +180,8 @@ export default {
               path: '/n-switch'
             },
             {
-              name: 'Tab',
-              path: '/n-tab'
+              name: 'Tabs',
+              path: '/n-tabs'
             },
             {
               name: 'Table',

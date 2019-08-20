@@ -8,7 +8,7 @@
       style="flex-wrap: nowrap;"
     >
       <!--EXAMPLE_START-->
-      <n-tab
+      <n-tabs
         v-model="name"
       >
         <n-tab-panel
@@ -30,7 +30,7 @@
           disabled
           label="Disabled"
         />
-      </n-tab>
+      </n-tabs>
       <!--EXAMPLE_END-->
     </div>
     <pre class="n-doc-section__inspect">name: {{ name }}</pre>

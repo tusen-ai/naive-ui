@@ -8,7 +8,7 @@
       style="flex-wrap: nowrap;"
     >
       <!--EXAMPLE_START-->
-      <n-tab
+      <n-tabs
         type="board"
         addable
       >
@@ -49,7 +49,7 @@
         >
           {{ item.content }}
         </n-tab-panel>
-      </n-tab>
+      </n-tabs>
       <!--EXAMPLE_END-->
     </div>
     <pre class="n-doc-section__inspect">Inspect some value here</pre>
