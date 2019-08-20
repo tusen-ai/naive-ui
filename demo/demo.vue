@@ -64,6 +64,10 @@ export default {
               path: '/n-anchor'
             },
             {
+              name: 'App',
+              path: '/n-app'
+            },
+            {
               name: 'BackTop',
               path: '/n-back-top'
             },
