@@ -27,6 +27,7 @@
 
 <script>
 import NScrollbar from '../../Scrollbar'
+
 export default {
   components: {
     NScrollbar
@@ -35,6 +36,12 @@ export default {
     active: {
       type: Boolean,
       default: false
+    },
+    activateEvent: {
+      validator (e) {
+        return e instanceof MouseEvent
+      },
+      default: null
     }
   },
   data () {
@@ -67,21 +74,40 @@ export default {
       // console.log('afterEnter', this.$refs.scrollbar.enableScrollbar())
     },
     updateTransformOrigin () {
+      if (
+        (!this.$parent.$refs.activator ||
+        !this.$parent.$refs.activator.childElementCount) &&
+        !this.activateEvent
+      ) {
+        return
+      }
       const scrollTop = this.$refs.scrollbar.containerScrollTop
-      console.log(scrollTop)
       const {
         offsetLeft,
         offsetTop
       } = this.$refs.contentInner
-      const {
-        left: activatorLeft,
-        top: activatorTop,
-        width: activatorWidth
-      } = this.$parent.$refs.activator.getBoundingClientRect()
-      const transformOriginX = -(offsetLeft - activatorLeft - activatorWidth / 2)
-      const transformOriginY = -(offsetTop - activatorTop - scrollTop - activatorTop / 2)
-      this.$refs.contentInner.style.transformOrigin = `${transformOriginX}px ${transformOriginY}px`
-      console.log(this.$refs.contentInner.style.transformOrigin)
+      if (
+        this.$parent.$refs.activator &&
+        this.$parent.$refs.activator.childElementCount
+      ) {
+        const {
+          left: activatorLeft,
+          top: activatorTop,
+          width: activatorWidth,
+          height: activatorHeight
+        } = this.$parent.$refs.activator.getBoundingClientRect()
+        const transformOriginX = -(offsetLeft - activatorLeft - activatorWidth / 2)
+        const transformOriginY = -(offsetTop - activatorTop - scrollTop - activatorHeight / 2)
+        this.$refs.contentInner.style.transformOrigin = `${transformOriginX}px ${transformOriginY}px`
+      } else {
+        const activatorTop = this.activateEvent.clientY
+        const activatorLeft = this.activateEvent.clientX
+        const activatorWidth = 0
+        const activatorHeight = 0
+        const transformOriginX = -(offsetLeft - activatorLeft - activatorWidth / 2)
+        const transformOriginY = -(offsetTop - activatorTop - scrollTop - activatorHeight / 2)
+        this.$refs.contentInner.style.transformOrigin = `${transformOriginX}px ${transformOriginY}px`
+      }
     },
     handleBeforeLeave () {
       this.updateTransformOrigin()
@@ -127,6 +153,6 @@ export default {
 
 .n-modal-content--transition-enter, .n-modal-content--transition-leave-to {
   opacity: 0;
-  transform: scale(.75);
+  transform: scale(.5);
 }
 </style>

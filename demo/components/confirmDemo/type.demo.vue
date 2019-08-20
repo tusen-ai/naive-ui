@@ -33,13 +33,13 @@ export default {
     }
   },
   methods: {
-    handleConfirm () {
+    handleConfirm (e) {
       const confirmInstance = this.$NModal.confirm({
         title: 'Confirm',
         content: '<b>Are u sure to ...?',
+        activateEvent: e,
         onOk: () => {
           console.log('click on ok', confirmInstance)
-
           this.$NMessage.success('sure')
         },
         onCancel: () => {
@@ -47,10 +47,11 @@ export default {
         }
       })
     },
-    handleSuccess () {
+    handleSuccess (e) {
       const confirmInstance = this.$NModal.success({
         title: 'Success',
         content: 'Premium designed icons for use in web, iOS, Android, and desktop apps. Support for SVG and web font. Completely open source, MIT licensed and built by the Ionic Framework team.',
+        activateEvent: e,
         onOk: () => {
           console.log('click on ok', confirmInstance)
 
@@ -58,13 +59,13 @@ export default {
         }
       })
     },
-    handleError () {
+    handleError (e) {
       const confirmInstance = this.$NModal.error({
         title: 'Error',
         content: '<b>这是一个测试？</b>hhahhaahahhahahsdiusah ashdusadu asdsadsadsadsadsa',
+        activateEvent: e,
         onOk: () => {
           console.log('click on ok', confirmInstance)
-
           this.$NMessage.success('I know..')
         }
       })

@@ -1,6 +1,7 @@
 <template>
   <n-modal
     v-model="isActive"
+    :activate-event="activateEvent"
     @toggle="toggle"
   >
     <!-- <transition name="n-modal-content--transition"> -->
@@ -16,7 +17,6 @@
           />
           {{ title }}
         </span>
-
         <n-icon
           type="md-close"
           size="22"
@@ -74,6 +74,7 @@ export default {
       type: 'error',
       title: 'title',
       loading: null,
+      activateEvent: null,
       onCancel: () => {},
       onOk: () => {}
     }
@@ -111,15 +112,6 @@ export default {
       this.onOk()
       if (this.loading !== true) { this.isActive = false }
     }
-    // updateData (data) {
-    //   Object.keys(data).forEach((key) => {
-    //     this[key] = data[key]
-    //   })
-    // },
   }
 }
 </script>
-
-<style scoped>
-
-</style>

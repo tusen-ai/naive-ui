@@ -13,6 +13,14 @@ export default {
     detachable,
     zindexable
   ],
+  props: {
+    activateEvent: {
+      validator (e) {
+        return e instanceof MouseEvent
+      },
+      default: null
+    }
+  },
   data () {
     return {
       mousedownTarget: null
@@ -38,7 +46,7 @@ export default {
         h(NModalContent,
           {
             ref: 'content',
-            props: { active: this.active },
+            props: { active: this.active, activateEvent: this.activateEvent },
             on: {
               mousedown: (e) => {
                 this.mousedownTarget = e.target
