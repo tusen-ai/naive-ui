@@ -7,7 +7,11 @@
  * @prop {HTMLElement} detachTarget determine where should $refs.contentContainer to be detached
  */
 export default {
-  inject: [ 'NApp' ],
+  inject: {
+    NApp: {
+      default: null
+    }
+  },
   computed: {
     namespace () {
       return (this.NApp && this.NApp.namespace) || null
