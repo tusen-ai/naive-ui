@@ -67,14 +67,15 @@
       }
       &.is-going-to-emerge {
         opacity: 0;
-        transform: translateY(-12px);
+        transform: translateY(-12px) scale(.5);
+        transform-origin: top center;
         max-height: 0px;
         margin-bottom: 0;
       }
-    
       &.is-vanishing {
         opacity: 0;
-        transform: translateY(-12px);
+        transform-origin: top center;
+        transform: translateY(-12px) scale(.5);
         max-height: 0px;
         margin-bottom: 0;
       }
