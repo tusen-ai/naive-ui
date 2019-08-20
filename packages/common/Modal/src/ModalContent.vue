@@ -64,8 +64,7 @@ export default {
   methods: {
     registerContent () {
       const slots = this.$slots.default
-      const componentInstances = slots.map(vNode => vNode.componentInstance).filter(ci => ci)
-      const els = componentInstances.map(ci => ci.$el).filter(el => el)
+      const els = slots.map(vNode => vNode.elm).filter(el => el)
       this.slotDOM = els
     },
     handleEnter () {
