@@ -50,6 +50,11 @@ export default {
       styleActive: false
     }
   },
+  created () {
+    if (this.active) {
+      this.styleActive = true
+    }
+  },
   mounted () {
     this.$nextTick().then(this.registerContent)
   },
