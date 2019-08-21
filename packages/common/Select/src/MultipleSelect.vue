@@ -300,6 +300,13 @@ export default {
       })
     }
   },
+  mounted () {
+    if (this.remote) {
+      for (const item of this.selectedItems) {
+        this.memorizedValueItemMap.set(item.value, item)
+      }
+    }
+  },
   methods: {
     /**
      * @param {string} value
