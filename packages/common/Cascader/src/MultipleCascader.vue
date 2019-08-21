@@ -1,51 +1,43 @@
 <template>
   <div
-    ref="select"
-    class="n-select"
+    ref="self"
+    class="n-cascader"
     :class="{
-      [`n-select--${size}-size`]: true,
-      'n-select--disabled': disabled
+      [`n-cascader--${size}-size`]: true,
+      'n-cascader--disabled': disabled
     }"
     @click="toggleMenu"
   >
     <div
       ref="activator"
-      class="n-select-link"
+      class="n-cascader-link"
       :class="{
-        'n-select-link--active': active,
-        'n-select-link--selected': selectedItems&&selectedItems.length
+        'n-cascader-link--active': active
       }"
     >
       <div
-        class="n-select-link__tags"
-        :class="{
-          'n-select-link__tags--selected': selectedItems&&selectedItems.length
-        }"
+        class="n-cascader-link__tags"
       >
         <div
-          class="n-select-link__tag-wrapper"
+          class="n-cascader-link__tag-wrapper"
         >
           <div
-            v-for="item in selectedItems"
+            v-for="item in []"
             :key="item"
-            class="n-select-link__tag"
+            class="n-cascader-link__tag"
           >
-            <div class="n-select-link-tag__content">
+            <div class="n-cascader-link-tag__content">
               {{ item }}
             </div>
             <n-icon
-              class="n-select-link-tag__icon"
+              class="n-cascader-link-tag__icon"
               type="md-close"
-              @click.stop="deleteItem(item)"
             />
           </div>
         </div>
       </div>
       <div
-        class="n-select-link__placeholder"
-        :class="{
-          'n-select-link__placeholder--verbose-transition': verboseTransition
-        }"
+        class="n-cascader-link__placeholder"
       >
         {{ placeholder }}
       </div>
@@ -59,19 +51,21 @@
         ref="content"
         class="n-cascader-menu__content"
       >
-        <div
-          ref="contentInner"
-        >
-          <transition name="n-select-menu--transition">
-            <CasPanel
-              v-if="active"
-              :data="items"
-              :selected-items="selectedItems"
-              :selected="selected"
-              @changeSelect="changeSelect"
-            />
-          </transition>
-        </div>
+        <transition name="n-cascader-menu--transition">
+          <CasPanel
+            v-if="active"
+            ref="menu"
+            v-clickoutside.lazy="handleMenuClickOutside"
+            :options="optionsWithId"
+            :active-id="activeId"
+            :traced-option="tracedOption"
+            @option-click="handleOptionClick"
+            @menu-keyup-up="handleKeyUpUp"
+            @menu-keyup-down="handleKeyUpDown"
+            @menu-keyup-left="handleKeyUpLeft"
+            @menu-keyup-right="handleKeyUpRight"
+          />
+        </transition>
       </div>
     </div>
   </div>
@@ -82,7 +76,9 @@ import NIcon from '../../Icon/index'
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import toggleable from '../../../mixins/toggleable'
+import clickoutside from '../../../directives/clickoutside'
 import CasPanel from './CasPanel'
+import cloneDeep from 'lodash/cloneDeep'
 
 export default {
   name: 'MultipleCascader',
@@ -90,18 +86,17 @@ export default {
     NIcon,
     CasPanel
   },
-  mixins: [detachable, toggleable, placeable],
-  model: {
-    prop: 'selectedValue',
-    event: 'input'
+  directives: {
+    clickoutside
   },
+  mixins: [detachable, toggleable, placeable],
   props: {
-    items: {
+    options: {
       type: Array,
       required: true
     },
     // eslint-disable-next-line vue/require-prop-types
-    selectedValue: {
+    value: {
       default: null
     },
     placeholder: {
@@ -116,106 +111,173 @@ export default {
       type: String,
       default: 'default'
     },
-    verboseTransition: {
-      type: Boolean,
-      default: false
-    },
-    emitItem: {
-      type: Boolean,
-      default: false
-    },
     filterable: {
       type: Boolean,
       default: false
     },
-
     disabled: {
       type: Boolean,
       default: false
+    },
+    expandTrigger: {
+      validator (expandTrigger) {
+        return ['click', 'hover'].includes(expandTrigger)
+      },
+      default: 'click'
     }
   },
   data () {
     return {
-      lightBarTop: null,
-      showLightBar: false,
-      label: '',
       labelPlaceholder: 'Please Select',
-      selectedItems: [],
-      selected: {}
+      activeId: null,
+      tracedOption: null,
+      firstOption: null
+    }
+  },
+  computed: {
+    expandTriggeredByHover () {
+      return this.expandTrigger === 'hover'
+    },
+    expandTriggeredByClick () {
+      return this.expandTrigger === 'click'
+    },
+    optionsWithId () {
+      const optionsWithId = cloneDeep(this.options)
+      let id = 0
+      function traverse (options, parent = null, depth = 0) {
+        const length = options.length
+        for (let i = 0; i < length; ++i) {
+          const option = options[i]
+          option.parent = parent
+          option.prevSibling = options[(i + length - 1) % length]
+          option.nextSibling = options[(i + length + 1) % length]
+          option.depth = depth
+          option.id = id++
+          if (option.children) {
+            traverse(option.children, option, depth + 1)
+          }
+        }
+      }
+      traverse(optionsWithId)
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.firstOption = optionsWithId[0]
+      return optionsWithId
     }
   },
   watch: {
-    active (newValue) {
-      if (newValue === true) {
-        this.$nextTick().then(
-          () => {
-            document.addEventListener('click', this.nativeCloseMenu)
-          }
-        )
+    options () {
+      this.tracedOption = null
+      this.activeId = null
+      this.firstOption = null
+    },
+    active (newActive) {
+      if (!newActive) {
+        this.tracedOption = null
       } else {
-        this.$nextTick().then(
-          () => {
-            document.removeEventListener('click', this.nativeCloseMenu)
+        this.$nextTick().then(() => {
+          const contentContainer = this.$refs.contentContainer
+          if (contentContainer) {
+            const firstSubmenu = contentContainer.querySelector('.n-cascader-submenu')
+            if (firstSubmenu) firstSubmenu.focus()
           }
-        )
+        })
       }
     },
-    selectedItems (val) {
-      let keys = Object.keys(this.selected)
-      for (let index of keys) {
-        this.$set(this.selected, index, false)
+    tracedOption (newOption) {
+      if (newOption) {
+        this.$nextTick().then(() => {
+          const submenu = this.$refs.contentContainer.querySelector(`[data-depth="${newOption.depth}"]`)
+          if (submenu) submenu.focus()
+        })
       }
-      for (let index of val) {
-        this.setSelected(index)
-      }
-      this.$nextTick().then(this.updatePosition)
-      this.$emit('input', val)
     }
   },
-  beforeDestroy () {
-    document.removeEventListener('click', this.nativeCloseMenu)
-  },
   methods: {
-    /**
-     * @param {string} value
-     */
-    nativeCloseMenu (e) {
-      if (!this.$refs.select.contains(e.target)) {
-        this.deactivate()
-      }
+    handleMenuClickOutside () {
+      this.deactivate()
     },
     toggleMenu () {
-      if (this.disabled) return
+      if (this.disabled) {
+        this.deactivate()
+        return
+      }
       this.toggle()
     },
-    changeSelect (val) {
-      let index = this.selectedItems.indexOf(val)
-      if (index < 0) {
-        this.selectedItems.push(val)
-      } else {
-        this.selectedItems.splice(index, 1)
-      }
-
-      if (this.selected[val]) {
-        this.setSelected(val)
+    handleOptionMouseEnter (e, option) {
+      if (this.expandTriggeredByHover && !option.disabled) {
+        this.activeId = option.id
       }
     },
-    setSelected (val) {
-      let arr = val.split('/')
-      let key = ''
-      for (let i = 0; i < arr.length; i++) {
-        if (i === 0) {
-          key = arr[i]
-        } else {
-          key = key + '/' + arr[i]
+    handleOptionClick (e, option, menu) {
+      if (this.expandTriggeredByClick && !option.disabled) {
+        this.activeId = option.id
+        this.tracedOption = option
+      }
+    },
+    handleKeyUpDown (menu) {
+      if (this.active) {
+        let scrollbar = null
+        if (menu && menu.$refs.scrollbar) {
+          scrollbar = menu.$refs.scrollbar
         }
-        this.$set(this.selected, key, true)
+        if (this.tracedOption) {
+          let optionIterator = this.tracedOption.nextSibling
+          while (optionIterator !== this.tracedOption && optionIterator.disabled) {
+            optionIterator = optionIterator.nextSibling
+          }
+          this.tracedOption = optionIterator
+          this.activeId = this.tracedOption.id
+          const el = menu && menu.$el && menu.$el.querySelector(`[data-id="${this.activeId}"]`)
+          if (scrollbar && el) {
+            scrollbar.scrollToElement(el)
+          }
+        } else {
+          const firstOption = this.firstOption
+          let optionIterator = firstOption
+          while (optionIterator !== firstOption && optionIterator.disabled) {
+            optionIterator = optionIterator.nextSibling
+          }
+          this.tracedOption = optionIterator
+          this.activeId = this.tracedOption.id
+          const el = menu && menu.$el && menu.$el.querySelector(`[data-id="${this.activeId}"]`)
+          if (scrollbar && el) {
+            scrollbar.scrollToElement(el)
+          }
+        }
       }
     },
-    deleteItem (val) {
-      let index = this.selectedItems.indexOf(val)
-      this.selectedItems.splice(index, 1)
-      this.$forceUpdate()
+    handleKeyUpUp (menu) {
+      if (this.active && this.tracedOption) {
+        let scrollbar = null
+        if (menu && menu.$refs.scrollbar) {
+          scrollbar = menu.$refs.scrollbar
+        }
+        let optionIterator = this.tracedOption.prevSibling
+        while (optionIterator !== this.tracedOption && optionIterator.disabled) {
+          optionIterator = optionIterator.prevSibling
+        }
+        this.tracedOption = optionIterator
+        this.activeId = this.tracedOption.id
+        const el = menu && menu.$el && menu.$el.querySelector(`[data-id="${this.activeId}"]`)
+        if (scrollbar && el) {
+          scrollbar.scrollToElement(el)
+        }
+      }
+    },
+    handleKeyUpLeft () {
+      if (this.active && this.tracedOption && this.tracedOption.parent) {
+        this.tracedOption = this.tracedOption.parent
+        this.activeId = this.tracedOption.id
+      }
+    },
+    handleKeyUpRight () {
+      if (this.active && this.tracedOption) {
+        const firstChild = this.tracedOption.children && this.tracedOption.children[0]
+        if (firstChild) {
+          this.tracedOption = firstChild
+          this.activeId = firstChild.id
+        }
+      }
     }
   }
 }

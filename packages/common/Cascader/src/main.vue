@@ -6,17 +6,13 @@ import MultipleCascader from './MultipleCascader'
 
 export default {
   name: 'NCascader',
-  model: {
-    prop: 'selectedValue',
-    event: 'input'
-  },
   props: {
-    items: {
+    options: {
       type: Array,
       required: true
     },
     // eslint-disable-next-line vue/require-prop-types
-    selectedValue: {
+    value: {
       default: null
     },
     placeholder: {
@@ -30,10 +26,6 @@ export default {
     size: {
       type: String,
       default: 'default'
-    },
-    verboseTransition: {
-      type: Boolean,
-      default: false
     },
     emitItem: {
       type: Boolean,
@@ -71,7 +63,7 @@ export default {
       setactive: this.handleSetActive.bind(this)
     }
     return h(MultipleCascader, {
-      props: { ...this.$props, active: this.active, placement: 'bottom-start', widthMode: 'activator' },
+      props: { ...this.$props, active: this.active, placement: 'bottom-start' },
       on
     })
   }

@@ -1,112 +1,123 @@
 <template>
-  <span
-    ref="contentInner"
-    style="display:inline-block;white-space:nowrap;"
+  <div
+    class="n-cascader-menu n-cascader-menu--multiple n-cascader-menu--default-size"
   >
-    <div
-      v-if="data && data.length"
-      class="n-cascader-menu n-cascader-menu--multiple n-cascader-menu--default-size"
-    >
-      <CasItem
-        v-for="(item, index) in data"
-        :key="index"
-        :data="item"
-        :name="isSelected(item,parent)"
-        :selected="!!selected[isSelected(item)]"
-        :class="{
-          'n-cascader-menu__item--active':
-            activeLabel ===
-            item.label
-        }"
-        @click.native.stop="selectItem(item, $event)"
-      />
-    </div>
-    <CasPanel
-      v-if="subList && subList.length"
-      :data="subList"
-      :parent="parentLabel"
-      :selected="selected"
-      @changeSelect="changeSelect"
+    <n-cascader-submenu
+      v-for="(submenuOptions, index) in menuModel"
+      :key="index"
+      :options="submenuOptions"
+      :data-depth="index"
+      @option-click="handleOptionClick"
+      @option-mouseenter="handleOptionMouseEnter"
+      @option-mouseleave="handleOptionMouseLeave"
+      @menu-keyup-up="handleMenuKeyUpUp"
+      @menu-keyup-down="handleMenuKeyUpDown"
+      @menu-keyup-left="handleMenuKeyUpLeft"
+      @menu-keyup-right="handleMenuKeyUpRight"
     />
-  </span>
+  </div>
 </template>
 <script>
-import CasItem from './CasItem.vue'
+import NCascaderSubmenu from './CascaderSubmenu'
 
 export default {
   name: 'CasPanel',
   components: {
-    CasItem
+    NCascaderSubmenu
   },
   props: {
-    data: {
+    activeValue: {
+      validator: () => true,
+      default: null
+    },
+    activeId: {
+      validator: () => true,
+      default: null
+    },
+    tracedOption: {
+      type: Object,
+      default: null
+    },
+    options: {
       type: Array,
       required: true
     },
-    parent: {
-      type: String,
-      default: ''
-    },
-    selected: {
-      type: Object,
-      required: true
-    }
-  },
-  data () {
-    return {
-      subList: [],
-      activeLabel: '',
-      click: false,
-      parentLabel: this.parent
+    multiple: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
-    isSelected () {
-      return function (item, parentl) {
-        let val = ''
-        if (this.click) {
-          if (this.parent) {
-            val = this.parent + '/' + item.label
+    activeOptionPath () {
+      const path = []
+      const activeId = this.activeId
+      let done = false
+      function traverseOptions (options) {
+        if (!Array.isArray(options) || !options.length) return
+        for (const option of options) {
+          if (done) return
+          path.push(option)
+          if (option.id === activeId) {
+            done = true
+            return
           }
-        } else {
-          if (this.parent) {
-            let index = this.parent.indexOf(item.label)
-            val = this.parent.substring(index) === item.label ? this.parent : this.parent + '/' + item.label
-          } else {
-            val = item.label
+          if (option.children) {
+            traverseOptions(option.children)
           }
+          if (done) return
+          path.pop(option)
         }
-        return val
       }
-    }
-
-  },
-  watch: {
-    parent () {
-      this.parentLabel = this.parent
+      traverseOptions(this.options)
+      return path
     },
-    data () {
-      this.subList = []
+    menuModel () {
+      const activeOptionPath = this.activeOptionPath
+      const activeIds = new Set(activeOptionPath.map(option => option.id))
+      const model = [this.options.map(option => {
+        return {
+          ...option,
+          traced: this.tracedOption && this.tracedOption.id === option.id,
+          active: activeIds.has(option.id)
+        }
+      })]
+      for (const option of activeOptionPath) {
+        if (Array.isArray(option.children) && option.children.length) {
+          model.push(option.children.map(option => {
+            return {
+              ...option,
+              traced: this.tracedOption && this.tracedOption.id === option.id,
+              active: activeIds.has(option.id)
+            }
+          }))
+        }
+      }
+      return model
     }
+  },
+  mounted () {
+    console.log(this.menuModel)
   },
   methods: {
-    selectItem (item, event) {
-      if (item.children && item.children.length) {
-        this.activeLabel = item.label
-        this.subList = item.children
-        this.parentLabel = this.parent ? this.parent + '/' + item.label : item.label
-      } else {
-        this.activeLabel = ''
-        this.subList = []
-        let result = this.parent ? this.parent + '/' + item.label : item.label
-        this.parentLabel = this.parent ? this.parent : item.label
-        this.$set(this.selected, result, !this.selected[result])
-        this.changeSelect(result)
-        this.click = true
-      }
+    handleOptionMouseEnter (e, option) {
+      this.$emit('option-mouse-enter', e, option)
     },
-    changeSelect (val) {
-      this.$emit('changeSelect', val)
+    handleOptionMouseLeave (e, option) {
+    },
+    handleOptionClick (e, option, menu) {
+      this.$emit('option-click', e, option, menu)
+    },
+    handleMenuKeyUpUp (submenu) {
+      this.$emit('menu-keyup-up', submenu)
+    },
+    handleMenuKeyUpDown (submenu) {
+      this.$emit('menu-keyup-down', submenu)
+    },
+    handleMenuKeyUpLeft () {
+      this.$emit('menu-keyup-left')
+    },
+    handleMenuKeyUpRight () {
+      this.$emit('menu-keyup-right')
     }
   }
 }

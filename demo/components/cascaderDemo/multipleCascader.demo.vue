@@ -11,7 +11,7 @@
       <n-cascader
         v-model="selectedArray"
         placeholder="Please Select Type"
-        :items="items"
+        :options="options"
         style="flex-grow: 1; margin-right: 12px;"
       />
       <!--EXAMPLE_END-->
@@ -24,112 +24,41 @@
 </template>
 
 <script>
+function genOptions (depth = 3, iterator = 1, prefix = '') {
+  const length = 12
+  const options = []
+  for (let i = 1; i <= length; ++i) {
+    if (iterator === 1) {
+      options.push({
+        value: `${i}`,
+        label: `${i}`,
+        disabled: i % 5 === 0,
+        children: genOptions(depth, iterator + 1, '' + i)
+      })
+    } else if (iterator === depth) {
+      options.push({
+        value: `${prefix}-${i}`,
+        label: `${prefix}-${i}`,
+        disabled: i % 5 === 0
+
+      })
+    } else {
+      options.push({
+        value: `${prefix}-${i}`,
+        label: `${prefix}-${i}`,
+        disabled: i % 5 === 0,
+        children: genOptions(depth, iterator + 1, `${prefix}-${i}`)
+      })
+    }
+  }
+  return options
+}
+
 export default {
   data () {
     return {
       selectedArray: null,
-      items: [
-        {
-          label: 'Drive My Car lalalalalalalala',
-          children: [
-            {
-              label: 'test1',
-              value: 'test1'
-            },
-            {
-              label: 'test2',
-              value: 'test2'
-            }
-          ]
-        },
-        {
-          label: '2',
-          children: [
-            {
-              label: 'test3',
-              children: [
-                {
-                  label: 'test3-1',
-                  value: 'test3-1'
-                },
-                {
-                  label: 'test3-2',
-                  value: 'test3-2'
-                }
-              ]
-            },
-            {
-              label: 'test4',
-              value: 'test4'
-            }
-          ]
-        },
-        {
-          label: '3',
-          children: [
-            {
-              label: 'test3',
-              value: 'test3'
-            },
-            {
-              label: 'test4',
-              value: 'test4'
-            }
-          ]
-        },
-        {
-          label: '4',
-          children: [
-            {
-              label: 'test3',
-              value: 'test3'
-            },
-            {
-              label: 'test4',
-              value: 'test4'
-            }
-          ]
-        },
-        {
-          label: '5',
-          children: [
-            {
-              label: 'test3',
-              value: 'test3'
-            },
-            {
-              label: 'test4',
-              value: 'test4'
-            }
-          ]
-        },
-        {
-          label: '6',
-          children: [
-            {
-              label: 'test3',
-              value: 'test3'
-            },
-            {
-              label: 'test4',
-              value: 'test4'
-            }
-          ]
-        },
-        {
-          label: '7',
-          children: [
-            {
-              label: 'test3',
-              value: 'test3'
-            },
-            {
-              label: 'test4',
-              value: 'test4'
-            }
-          ]
-        }
-      ]
+      options: genOptions()
     }
   }
 }

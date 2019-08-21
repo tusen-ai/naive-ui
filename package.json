@@ -63,7 +63,7 @@
     "karma-spec-reporter": "0.0.32",
     "karma-webpack": "^3.0.5",
     "loader-utils": "^1.2.3",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "memory-fs": "^0.4.1",
     "mocha": "^6.1.4",
     "prettier": "^1.18.2",
