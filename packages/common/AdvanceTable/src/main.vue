@@ -159,7 +159,7 @@ import SortIcon from '../sortIcon'
 import filterDropDown from '../filterDropDown'
 import searchInput from '../searchInput'
 import Loading from '../loading'
-
+import { noopFn } from '../../../utils/index'
 export default {
   name: 'NAdvanceTable',
   components: {
@@ -201,7 +201,7 @@ export default {
     },
     onChange: {
       type: Function,
-      default: null
+      default: noopFn
     },
     minHeight: {
       type: [Number, String],
@@ -364,7 +364,6 @@ export default {
     }
   },
   watch: {
-
     currentPage () {
       if (this.pagination.custom === true) {
         this.useRemoteChange()
@@ -452,10 +451,11 @@ export default {
         ref.setSort(sorter.type)
         // this.sortIndexs[sorter.key] = sorter.type
       }
-      filter && Object.keys(filter).forEach((key) => {
-        const ref = this.$refs['filterDropDown_' + key][0]
-        ref.setCheckedIndexs(filter[key])
-      })
+      filter &&
+        Object.keys(filter).forEach((key) => {
+          const ref = this.$refs['filterDropDown_' + key][0]
+          ref.setCheckedIndexs(filter[key])
+        })
       searcher && this.$refs.search.setSearch(searcher)
       if (page) {
         this.$nextTick(() => {
@@ -527,7 +527,7 @@ export default {
         Object.keys(this.currentFilterColumn).forEach((key) => {
           const { value, filterFn } = this.currentFilterColumn[key]
           if (value && filterFn !== 'custom') {
-            data = data.filter(item => {
+            data = data.filter((item) => {
               return filterFn(value, item.row)
             })
           }
@@ -536,7 +536,7 @@ export default {
       // compute search
       if (this.currentSearchColumn && this.search.onSearch !== 'custom') {
         const { key, word } = this.currentSearchColumn
-        data = data.filter(item => {
+        data = data.filter((item) => {
           return this.search.onSearch(key, word, item.row)
         })
       }
