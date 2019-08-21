@@ -39,7 +39,8 @@ export default {
     }
   },
   methods: {
-    handleClick () {
+    handleClick (e) {
+      this.$emit('click', e)
       if (!this.disabled) {
         this.$emit('input', !this.value)
         this.$emit('change', !this.value, this.label)

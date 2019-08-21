@@ -11,18 +11,27 @@
     <div
       class="n-doc-body"
     >
-      <multiple-cascader />
+      <multiple />
+      <multiple-all />
+      <single />
+      <single-all />
     </div>
   </div>
 </template>
 
 <script>
 
-import multipleCascader from './multipleCascader.demo.vue'
+import multiple from './multipleCascader.demo.vue'
+import multipleAll from './multipleAll.demo.vue'
+import single from './single.demo.vue'
+import singleAll from './singleAll.demo.vue'
 
 export default {
   components: {
-    multipleCascader
+    multiple,
+    multipleAll,
+    single,
+    singleAll
   },
   data () {
     return {

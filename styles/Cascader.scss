@@ -28,6 +28,61 @@
   @include fade-in-scale-up-transition(cascader-menu);
 }
 
+@include b(cascader-option) {
+  box-sizing: border-box;
+  min-width: 182px;
+  height: $default-height;
+  line-height: $default-height;
+  background-color: transparent;
+  transition: background-color .2s $default-cubic-bezier, color 0.2s $default-cubic-bezier;
+  height: 34px;
+  line-height: 34px;
+  display: flex;
+  padding: 0px 24px 0 33px;
+  white-space: nowrap;
+  position: relative;
+  color: rgba(255, 255, 255, 1);
+  cursor: pointer;
+  .n-cascader-option__checkbox {
+    position: absolute;
+    left: 11px;
+    line-height: 1;
+    top: 10px;
+    display: block;
+  }
+  .n-cascader-option__radio {
+    position: absolute;
+    left: 11px;
+    line-height: 1;
+    top: 7px;
+    display: block;
+  }
+  &.n-cascader-option--active {
+    font-weight: bold;
+  }
+  &.n-cascader-option--disabled {
+    color: rgba(255, 255, 255, .3);
+    cursor: not-allowed;
+  }
+  
+  &.n-cascader-option--traced {
+    background-color: rgba(81, 122, 126, 1);
+  }
+  &.n-cascader-option--has-children {
+    &::after {
+      content: '';
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      border-top: 2px solid rgba(255, 255, 255, 0.3);
+      border-right: 2px solid rgba(255, 255, 255, 0.3);
+      transform: rotate(45deg) translateY(-50%);
+      right: 18px;
+      top: 50%;
+    }
+  }
+}
+
 .n-cascader-menu__content-wrapper {
   position: fixed;
   left: 0;
@@ -36,46 +91,7 @@
   height: 0;
   overflow: visible;
   transform: translateZ(0);
-  .n-cascader-menu__item {
-    box-sizing: border-box;
-    min-width: 182px;
-    height: $default-height;
-    line-height: $default-height;
-    background-color: transparent;
-    transition: background-color .2s $default-cubic-bezier, color 0.2s $default-cubic-bezier;
-    height: 34px;
-    line-height: 34px;
-    display: flex;
-    padding: 0px 20px;
-    white-space: nowrap;
-    position: relative;
-    color: rgba(255, 255, 255, 1);
-    cursor: pointer;
-    &.n-cascader-menu__item--active {
-      color: rgba(99, 226, 183, 1);
-    }
-    &.n-cascader-menu__item--disabled {
-      color: rgba(255, 255, 255, .3);
-      cursor: not-allowed;
-    }
-    
-    &.n-cascader-menu__item--traced {
-      background-color: rgba(81, 122, 126, 1);
-    }
-    &.n-cascader-menu__item--has-children {
-      &::after {
-        content: '';
-        position: absolute;
-        width: 5px;
-        height: 5px;
-        border-top: 2px solid rgba(255, 255, 255, 0.3);
-        border-right: 2px solid rgba(255, 255, 255, 0.3);
-        transform: rotate(45deg) translateY(-50%);
-        right: 18px;
-        top: 50%;
-      }
-    }
-  }
+  
   .n-cascader-menu__content {
     margin-top: 4px;
     .n-cascader-menu {

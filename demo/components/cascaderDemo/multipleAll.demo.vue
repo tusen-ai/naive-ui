@@ -1,7 +1,7 @@
 <template>
   <div class="n-doc-section">
     <div class="n-doc-section__header">
-      Multiple
+      Multiple All
     </div>
     <div
       class="n-doc-section__view"
@@ -11,6 +11,7 @@
       <n-cascader
         v-model="value"
         multiple
+        enable-all-options
         placeholder="Please Select Type"
         :options="options"
         style="flex-grow: 1; margin-right: 12px;"

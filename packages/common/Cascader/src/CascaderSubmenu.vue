@@ -3,6 +3,8 @@
     class="n-cascader-submenu"
     tabindex="0"
     @mouseleave="handleMouseLeave"
+    @keyup.enter="handleKeyUpEnter"
+    @keyup.space="handleKeyUpSpace"
     @keyup.up="handleKeyUpUp"
     @keyup.down="handleKeyUpDown"
     @keyup.left="handleKeyUpLeft"
@@ -23,6 +25,7 @@
       <n-cascader-option
         v-for="(option, index) in options"
         :id="option.id"
+        ref="options"
         :key="`${index}_${option.value}`"
         :value="option.value"
         :active="option.active"
@@ -34,6 +37,11 @@
         :next-sibling="option.nextSibling"
         :parent="option.parent"
         :depth="option.depth"
+        :type="option.type"
+        :checked="option.checked"
+        :checked-leaf-count="option.checkedLeafCount"
+        :leaf-count="option.leafCount"
+        @check="handleOptionCheck"
         @click="handleOptionClick"
         @mouseenter="handleOptionMouseEnter"
         @mouseleave="handleOptionMouseLeave"
@@ -80,6 +88,12 @@ export default {
     handleMouseLeave (e) {
       this.hideLightBar()
     },
+    handleKeyUpEnter () {
+      this.$emit('menu-keyup-enter', this)
+    },
+    handleKeyUpSpace () {
+      this.$emit('menu-keyup-space', this)
+    },
     handleKeyUpUp () {
       this.$emit('menu-keyup-up', this)
     },
@@ -91,6 +105,9 @@ export default {
     },
     handleKeyUpRight () {
       this.$emit('menu-keyup-right', this)
+    },
+    handleOptionCheck (...params) {
+      this.$emit('option-check', ...params)
     }
   }
 }

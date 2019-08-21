@@ -38,6 +38,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    enableAllOptions: {
+      type: Boolean,
+      default: false
     }
   },
   data () {

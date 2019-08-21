@@ -54,7 +54,8 @@ export default {
     }
   },
   methods: {
-    handleClick () {
+    handleClick (e) {
+      this.$emit('click', e)
       if (this.disabled) return
       if (this.privateValue !== this.value) {
         this.$emit('input', this.value)

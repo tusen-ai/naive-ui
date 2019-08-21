@@ -56,10 +56,16 @@
             v-if="active"
             ref="menu"
             v-clickoutside.lazy="handleMenuClickOutside"
+            :value="value"
+            :multiple="multiple"
             :options="optionsWithId"
             :active-id="activeId"
             :traced-option="tracedOption"
+            :enable-all-options="enableAllOptions"
+            @input="handleMenuInput"
             @option-click="handleOptionClick"
+            @menu-keyup-space="handleKeyUpSpace"
+            @menu-keyup-enter="handleKeyUpEnter"
             @menu-keyup-up="handleKeyUpUp"
             @menu-keyup-down="handleKeyUpDown"
             @menu-keyup-left="handleKeyUpLeft"
@@ -79,6 +85,7 @@ import toggleable from '../../../mixins/toggleable'
 import clickoutside from '../../../directives/clickoutside'
 import CasPanel from './CasPanel'
 import cloneDeep from 'lodash/cloneDeep'
+import { type } from './utils'
 
 export default {
   name: 'MultipleCascader',
@@ -124,6 +131,10 @@ export default {
         return ['click', 'hover'].includes(expandTrigger)
       },
       default: 'click'
+    },
+    enableAllOptions: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -135,6 +146,7 @@ export default {
     }
   },
   computed: {
+    type: type,
     expandTriggeredByHover () {
       return this.expandTrigger === 'hover'
     },
@@ -144,6 +156,17 @@ export default {
     optionsWithId () {
       const optionsWithId = cloneDeep(this.options)
       let id = 0
+      const valueSet = new Set(this.value)
+      const value = this.value
+      const checkedOptions = []
+      function markPath (option) {
+        const parent = option.parent
+        if (parent) {
+          parent.checkedLeafCount += 1
+          markPath(parent)
+        }
+      }
+      const type = this.type
       function traverse (options, parent = null, depth = 0) {
         const length = options.length
         for (let i = 0; i < length; ++i) {
@@ -153,12 +176,63 @@ export default {
           option.nextSibling = options[(i + length + 1) % length]
           option.depth = depth
           option.id = id++
-          if (option.children) {
-            traverse(option.children, option, depth + 1)
+          option.checkedLeafCount = 0
+          if (type === 'multiple') {
+            if (Array.isArray(option.children) && option.children.length) {
+              traverse(option.children, option, depth + 1)
+              option.leafCount = 0
+              option.children.forEach(child => {
+                if (!child.disabled) {
+                  option.leafCount += child.leafCount
+                }
+              })
+            } else {
+              if (option.disabled) {
+                option.leafCount = 0
+              } else {
+                option.leafCount = 1
+              }
+              option.checked = valueSet.has(option.value)
+              if (option.checked) {
+                checkedOptions.push(option)
+              }
+            }
+          } else if (type === 'multiple-all-options') {
+            if (Array.isArray(option.children) && option.children.length) {
+              traverse(option.children, option, depth + 1)
+            }
+            option.leafCount = 0
+            option.checkedLeafCount = 0
+            option.checked = valueSet.has(option.value)
+          } else if (type === 'single-all-options') {
+            if (Array.isArray(option.children) && option.children.length) {
+              traverse(option.children, option, depth + 1)
+            }
+            option.leafCount = 0
+            option.checkedLeafCount = 0
+            option.checked = option.value === value
+          } else if (type === 'single') {
+            if (Array.isArray(option.children) && option.children.length) {
+              traverse(option.children, option, depth + 1)
+            }
+            option.leafCount = 0
+            option.checkedLeafCount = 0
+            option.checked = option.value === value
           }
         }
       }
-      traverse(optionsWithId)
+      if (type === 'multiple') {
+        traverse(optionsWithId)
+        for (const checkedOption of checkedOptions) {
+          markPath(checkedOption)
+        }
+      } else if (this.type === 'multiple-all-options') {
+        traverse(optionsWithId)
+      } else if (type === 'single-all-options') {
+        traverse(optionsWithId)
+      } else if (type === 'single') {
+        traverse(optionsWithId)
+      }
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.firstOption = optionsWithId[0]
       return optionsWithId
@@ -212,6 +286,18 @@ export default {
       if (this.expandTriggeredByClick && !option.disabled) {
         this.activeId = option.id
         this.tracedOption = option
+      }
+    },
+    handleKeyUpSpace (menu) {
+      this.handleKeyUpEnter(menu)
+    },
+    handleKeyUpEnter (menu) {
+      const options = menu && menu.$refs.options
+      if (options) {
+        const option = options.find(option => option.id === this.tracedOption.id)
+        if (option) {
+          option.handleOptionCheck()
+        }
       }
     },
     handleKeyUpDown (menu) {
@@ -278,6 +364,9 @@ export default {
           this.activeId = firstChild.id
         }
       }
+    },
+    handleMenuInput (value) {
+      this.$emit('input', value)
     }
   }
 }
