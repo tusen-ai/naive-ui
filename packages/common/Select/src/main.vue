@@ -11,6 +11,10 @@ export default {
     event: 'input'
   },
   props: {
+    clearable: {
+      type: Boolean,
+      default: false
+    },
     items: {
       type: Array,
       default: null

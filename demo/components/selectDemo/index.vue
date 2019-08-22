@@ -20,6 +20,7 @@
       <remote-search />
       <remote-search-single />
       <listen-scroll-event />
+      <clearable />
     </div>
   </div>
 </template>
@@ -34,6 +35,7 @@ import search from './search.demo.vue'
 import remoteSearch from './remoteSearch.demo.vue'
 import listenScrollEvent from './listenScrollEvent.demo'
 import remoteSearchSingle from './remoteSearchSingle.demo'
+import clearable from './clearable.demo.vue'
 
 export default {
   components: {
@@ -45,7 +47,8 @@ export default {
     disabled,
     remoteSearch,
     listenScrollEvent,
-    remoteSearchSingle
+    remoteSearchSingle,
+    clearable
   },
   data () {
     return {

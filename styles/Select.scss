@@ -10,19 +10,9 @@
   font-family: $default-font-family;
   text-align: start;
   cursor: pointer;
-  &.n-select--remote {
-    .n-select-link {
-      &::after {
-        display: none;
-      }
-    }
-  }
   &.n-select--disabled {
     cursor: not-allowed;
     .n-select-link {
-      &::after {
-        border-color: rgba(255, 255, 255, 0.20);
-      }
       .n-select-link__label, .n-select-link__tags {
         background-color: rgba(255, 255, 255, 0.08);
       }
@@ -55,18 +45,10 @@
   .n-select-link {
     position: relative;
     box-shadow: none;
-    &::after {
-      transition: transform .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+    .n-select-link__mark {
       position: absolute;
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-left: 1px solid rgba(255, 255, 255, .4);
-      border-bottom: 1px solid rgba(255, 255, 255, .4);
-      right: 12px;
-      top: calc(50% - 5px);
-      transform: rotate(-45deg);
-      transform-origin: 25% 75%;
+      top: calc(50% - 8px);
+      right: 8px;
     }
     .n-select-link__placeholder {
       pointer-events: none;
@@ -175,11 +157,6 @@
       }
     }
     &.n-select-link--active {
-      &::after {
-        transform: rotate(135deg);
-        border-left: 1px solid #63E2B7FF;
-        border-bottom: 1px solid #63E2B7FF;
-      }
       .n-select-link__label, .n-select-link__tags {
         box-shadow: inset 0 0 0 1px $select-border-color--active, 0px 0px 10px 1px #366555;
         background-color: $select-background-color--active;

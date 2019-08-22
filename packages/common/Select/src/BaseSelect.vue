@@ -72,6 +72,15 @@
       >
         {{ placeholder }}
       </div>
+      <n-cancel-mark
+        class="n-select-link__mark"
+        arrow
+        :show="!remote"
+        :disabled="disabled"
+        :active="active"
+        :clearable="clearable"
+        @clear="handleClear"
+      />
     </div>
     <div
       v-else
@@ -95,6 +104,15 @@
           @focus="handleSingleInputFocus"
         >
       </div>
+      <n-cancel-mark
+        class="n-select-link__mark"
+        arrow
+        :show="!remote"
+        :disabled="disabled"
+        :active="active"
+        :clearable="clearable"
+        @clear="handleClear"
+      />
     </div>
     <div
       ref="contentContainer"
@@ -144,12 +162,14 @@ import clickoutside from '../../../directives/clickoutside'
 import NSelectMenu from './SelectMenu'
 import Emitter from '../../../mixins/emitter'
 import cloneDeep from 'lodash/cloneDeep'
+import NCancelMark from '../../CancelMark'
 
 export default {
   name: 'NBaseSelect',
   components: {
     NIcon,
-    NSelectMenu
+    NSelectMenu,
+    NCancelMark
   },
   directives: {
     clickoutside
@@ -161,6 +181,10 @@ export default {
     }
   },
   props: {
+    clearable: {
+      type: Boolean,
+      default: false
+    },
     options: {
       type: Array,
       default: null
@@ -351,8 +375,12 @@ export default {
     emitChangeEvent (newValue) {
       if (this.emitOption) {
         if (this.multiple) {
-          let options = this.mapValuesToOptions(newValue)
-          this.$emit('change', options)
+          if (newValue === null) {
+            this.$emit('change', null)
+          } else {
+            let options = this.mapValuesToOptions(newValue)
+            this.$emit('change', options)
+          }
         } else {
           const option = this.getOption(newValue)
           this.$emit('change', option)
@@ -548,6 +576,12 @@ export default {
       if (this.onSearch) {
         this.onSearch(e.target.value)
       }
+    },
+    handleClear (e) {
+      e.stopPropagation()
+      this.closeMenu()
+      this.$emit('input', null)
+      this.emitChangeEvent(null)
     }
   }
 }
