@@ -203,6 +203,7 @@ export default {
       if (selectElement) {
         selectElement.focus()
       }
+      console.log('handleOptionClick', option)
       this.toggleOption(option)
     },
     handleMenuMouseLeave () {

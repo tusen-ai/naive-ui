@@ -93,7 +93,6 @@
           :readonly="!disabled && filterable ? false : 'readonly'"
           @input="handleSingleInputInput"
           @focus="handleSingleInputFocus"
-          @blur="handleSingleInputBlur"
         >
       </div>
     </div>
@@ -373,6 +372,10 @@ export default {
     handleClickOutsideMenu (e) {
       if (!this.$refs.activator.contains(e.target) && !this.scrolling) {
         this.deactivate()
+        if (this.filterable && !this.multiple) {
+          this.pattern = ''
+          this.singleInputActive = false
+        }
       }
     },
     closeMenu () {
@@ -427,6 +430,10 @@ export default {
         this.$emit('input', newValue)
         this.emitChangeEvent(newValue)
       } else {
+        if (this.filterable && !this.multiple) {
+          this.pattern = ''
+          this.singleInputActive = false
+        }
         this.$emit('input', option.value)
         this.emitChangeEvent(option.value)
         this.closeMenu()
@@ -518,13 +525,6 @@ export default {
       // console.log('handleSingleInputFocus')
       if (this.filterable && !this.multiple) {
         this.singleInputActive = true
-      }
-    },
-    handleSingleInputBlur () {
-      // console.log('handleSingleInputBlur')
-      if (this.filterable && !this.multiple) {
-        this.pattern = ''
-        this.singleInputActive = false
       }
     },
     handleSingleInputInput (e) {
