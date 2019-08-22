@@ -173,6 +173,7 @@
       .n-select-link__tags {
         min-height: $small-height;
         .n-select-link__tag {
+          font-size: 13px;
           padding: 0px 20px 0 7px;
           height: 20px;
           line-height: 20px;
@@ -327,6 +328,7 @@
           .n-select-menu__item, .n-select-menu__light-bar {
             height: $small-height;
             line-height: $small-height;
+            font-size: 13px;
           }
         }
         &.n-select-menu--default-size, &.n-select-menu--medium-size {
@@ -336,6 +338,7 @@
           .n-select-menu__item, .n-select-menu__light-bar {
             height: $default-height;
             line-height: $default-height;
+            font-size: 14px;
           }
         }
         &.n-select-menu--large-size {
