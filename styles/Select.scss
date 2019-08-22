@@ -63,7 +63,7 @@
       height: 6px;
       border-left: 1px solid rgba(255, 255, 255, .4);
       border-bottom: 1px solid rgba(255, 255, 255, .4);
-      right: 14px;
+      right: 12px;
       top: calc(50% - 5px);
       transform: rotate(-45deg);
       transform-origin: 25% 75%;
@@ -112,7 +112,7 @@
       }
     }
     .n-select-link__tags {
-      padding: 4px 28px 0 14px;
+      padding: 4px 32px 0 14px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
@@ -127,8 +127,12 @@
         margin-right: 7px;
         margin-bottom: 4px;
         font-size: 14px;
+        max-width: 100%;
         .n-select-link-tag__content  {
           transform: translateY(-1px);
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
         }
         .n-select-link-tag__icon {
           position: absolute;
@@ -296,6 +300,21 @@
           position: relative;
           padding: 0px 14px;
           white-space: nowrap;
+          &.n-select-menu__item--disabled {
+            color: rgba(255, 255, 255, .3)!important;
+            &::after {
+              display: none;
+            }
+            &.n-select-menu__item--selected {
+              color: rgba(99, 226, 183, .3)!important;
+              &::after {
+                border-right: 1px solid rgba(99, 226, 183, .3);
+                border-bottom: 1px solid rgba(99, 226, 183, .3);
+                display: block;
+              }
+            }
+            cursor: not-allowed;
+          }
           &.n-select-menu__item--selected {
             color: #63E2B7FF;
           }
@@ -326,7 +345,7 @@
         }
         &.n-select-menu--small-size {
           .n-scrollbar-container {
-            max-height: $small-height * 8;
+            max-height: $small-height * 7.6;
           }
           .n-select-menu__item, .n-select-menu__light-bar {
             height: $small-height;
@@ -335,7 +354,7 @@
         }
         &.n-select-menu--default-size, &.n-select-menu--medium-size {
           .n-scrollbar-container {
-            max-height: $default-height * 8;
+            max-height: $default-height * 7.6;
           }
           .n-select-menu__item, .n-select-menu__light-bar {
             height: $default-height;
@@ -348,13 +367,14 @@
             line-height: $large-height;
           }
           .n-scrollbar-container {
-            max-height: $large-height * 8;
+            max-height: $large-height * 7.6;
           }
         }
         &.n-select-menu--multiple {
           .n-select-menu__item {
             position: relative;
             transition: color .3s $default-cubic-bezier;
+            padding-right: 28px;
             &::after {
               content: '';
               height: 6px;
@@ -368,7 +388,7 @@
               opacity: 0;
               transition: transform .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
             }
-            &.n-select-menu__item--selected, &:active {
+            &.n-select-menu__item--selected {
               background: none;
               &::after {
                 opacity: 1;

@@ -484,6 +484,9 @@ export default {
         if (this.pendingOption) {
           let optionIterator = this.pendingOption
           optionIterator = optionIterator.prev
+          while (this.pendingOption !== optionIterator && optionIterator.disabled) {
+            optionIterator = optionIterator.prev
+          }
           this.pendingOption = optionIterator
           this.setPendingOptionElement(optionIterator)
         }
@@ -505,6 +508,16 @@ export default {
           const firstOption = this.firstOption
           if (firstOption) {
             let optionIterator = firstOption
+            if (!optionIterator) {
+              return
+            } else {
+              while (optionIterator.disabled) {
+                optionIterator = optionIterator.next
+                if (optionIterator === firstOption) {
+                  break
+                }
+              }
+            }
             this.pendingOption = optionIterator
             this.setPendingOptionElement(optionIterator)
           }
@@ -512,6 +525,9 @@ export default {
           // console.log('this.pendingOption !== null', this.pendingOption)
           let optionIterator = this.pendingOption
           optionIterator = optionIterator.next
+          while (this.pendingOption !== optionIterator && optionIterator.disabled) {
+            optionIterator = optionIterator.next
+          }
           this.pendingOption = optionIterator
           this.setPendingOptionElement(optionIterator)
         }

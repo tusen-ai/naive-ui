@@ -13,7 +13,7 @@
         multiple
         placeholder="Please Select Type"
         :options="options"
-        style="flex-grow: 1; margin-right: 12px;"
+        style="margin-right: 12px; width: 320px;"
       />
       <n-select
         v-model="selectedArray"
@@ -21,7 +21,7 @@
         size="small"
         placeholder="Please Select Type"
         :options="options"
-        style="flex-grow: 1;"
+        style="margin-right: 12px; width: 320px;"
       />
       <!--EXAMPLE_END-->
     </div>
@@ -36,11 +36,16 @@
 export default {
   data () {
     return {
-      selectedArray: null,
+      selectedArray: ['song1'],
       options: [
         {
+          label: "Everybody's Got Something to Hide Except Me and My Monkey",
+          value: 'song0'
+        },
+        {
           label: 'Drive My Car',
-          value: 'song1'
+          value: 'song1',
+          disabled: true
         },
         {
           label: 'Norwegian Wood',
@@ -48,7 +53,8 @@ export default {
         },
         {
           label: 'You Won\'t See',
-          value: 'song3'
+          value: 'song3',
+          disabled: true
         },
         {
           label: 'Nowhere Man',
@@ -64,7 +70,8 @@ export default {
         },
         {
           label: 'Michelle',
-          value: 'song7'
+          value: 'song7',
+          disabled: true
         },
         {
           label: 'What goes on',

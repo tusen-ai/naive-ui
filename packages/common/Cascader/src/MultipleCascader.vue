@@ -319,9 +319,15 @@ export default {
           }
         } else {
           const firstOption = this.firstOption
+          if (!firstOption) {
+            return
+          }
           let optionIterator = firstOption
-          while (optionIterator !== firstOption && optionIterator.disabled) {
+          while (optionIterator.disabled) {
             optionIterator = optionIterator.nextSibling
+            if (optionIterator === firstOption) {
+              break
+            }
           }
           this.tracedOption = optionIterator
           this.activeId = this.tracedOption.id

@@ -34,7 +34,9 @@
               class="n-select-menu__item"
               :class="{
                 'n-select-menu__item--selected':
-                  isSelected(option)
+                  isSelected(option),
+                'n-select-menu__item--disabled':
+                  option.disabled
               }"
               @click="handleOptionClick($event, option)"
               @mouseenter="handleOptionMouseEnter($event, option)"
@@ -185,8 +187,10 @@ export default {
       this.emit('menu-toggle-option', option)
     },
     handleOptionMouseEnter (e, option) {
-      this.updateLightBarPosition(e.target)
-      this.$emit('menu-change-pending-option', option)
+      if (!option.disabled) {
+        this.updateLightBarPosition(e.target)
+        this.$emit('menu-change-pending-option', option)
+      }
     },
     handleOptionMouseLeave (e) {
     },
@@ -199,12 +203,13 @@ export default {
       }
     },
     handleOptionClick (e, option) {
-      const selectElement = this.$parent.$el
-      if (selectElement) {
-        selectElement.focus()
+      if (!option.disabled) {
+        const selectElement = this.$parent.$el
+        if (selectElement) {
+          selectElement.focus()
+        }
+        this.toggleOption(option)
       }
-      console.log('handleOptionClick', option)
-      this.toggleOption(option)
     },
     handleMenuMouseLeave () {
       this.hideLightBar()

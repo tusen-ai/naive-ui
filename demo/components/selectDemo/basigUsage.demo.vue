@@ -41,11 +41,12 @@
 export default {
   data () {
     return {
-      selectedValue: null,
+      selectedValue: 'song0',
       options: [
         {
           label: "Everybody's Got Something to Hide Except Me and My Monkey",
-          value: 'song0'
+          value: 'song0',
+          disabled: true
         },
         {
           label: 'Drive My Car',
@@ -57,7 +58,8 @@ export default {
         },
         {
           label: 'You Won\'t See',
-          value: 'song3'
+          value: 'song3',
+          disabled: true
         },
         {
           label: 'Nowhere Man',
@@ -73,7 +75,8 @@ export default {
         },
         {
           label: 'Michelle',
-          value: 'song7'
+          value: 'song7',
+          disabled: true
         },
         {
           label: 'What goes on',
