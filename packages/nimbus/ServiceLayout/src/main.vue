@@ -1,9 +1,12 @@
 <template>
   <div class="n-nimbus-service-layout">
-    <div><slot name="header" /></div>
     <div
       class="n-nimbus-service-layout__body"
-      :class="{ 'n-nimbus-service-layout__body--collapsed': isCollapsed, 'n-nimbus-service-layout__body--active': !isCollapsed }"
+      :class="{
+        'n-nimbus-service-layout__body--collapsed': isCollapsed,
+        'n-nimbus-service-layout__body--active': !isCollapsed,
+        'n-nimbus-service-layout__body--disable-menu': disableMenu
+      }"
     >
       <scrollbar>
         <div
@@ -17,7 +20,11 @@
     </div>
     <div
       class="n-nimbus-service-layout__drawer"
-      :class="{ 'n-nimbus-service-layout__drawer--collapsed': isCollapsed, 'n-nimbus-service-layout__drawer--active': !isCollapsed }"
+      :class="{
+        'n-nimbus-service-layout__drawer--collapsed': isCollapsed,
+        'n-nimbus-service-layout__drawer--active': !isCollapsed,
+        'n-nimbus-service-layout__drawer--disabled': disableMenu,
+      }"
     >
       <div class="n-nimbus-service-layout-drawer__item-wrapper">
         <scrollbar>
@@ -119,6 +126,10 @@ export default {
     paddingBody: {
       type: Boolean,
       default: true
+    },
+    disableMenu: {
+      type: Boolean,
+      default: false
     }
   },
   data () {

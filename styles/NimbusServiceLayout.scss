@@ -14,7 +14,6 @@
     right: 0px;
     top: 0;
     bottom: 0;
-    transition: left .3s cubic-bezier(0.4, 0.0, 0.2, 1);
     overflow: hidden;
     &::-webkit-scrollbar {
       width: 5px;
@@ -31,9 +30,14 @@
     }
     &.n-nimbus-service-layout__body--active {
       left: 272px;
+      transition: left .3s cubic-bezier(0.4, 0.0, 0.2, 1);
     }
     &.n-nimbus-service-layout__body--collapsed {
       left: 48px;
+      transition: left .3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    }
+    &.n-nimbus-service-layout__body--disable-menu {
+      left: 0px;
     }
   }
   .n-nimbus-service-layout__drawer {
@@ -188,7 +192,8 @@
     }
     &.n-nimbus-service-layout__drawer--active {
       transform: translateX(0);
-      transition: transform .3s cubic-bezier(0.4, 0.0, 0.2, 1);
+      opacity: 1;
+      transition: transform .3s cubic-bezier(0.4, 0.0, 0.2, 1), opacity .3s cubic-bezier(0.4, 0.0, 0.2, 1);
       .n-nimbus-service-layout-drawer__toggle-button {
         transform: translateX(50%) translateY(-50%) rotate(0deg);
       }
@@ -197,8 +202,9 @@
       }
     }
     &.n-nimbus-service-layout__drawer--collapsed {
+      opacity: 1;
       transform: translateX(-224px);
-      transition: transform .3s cubic-bezier(0.4, 0.0, 0.2, 1);
+      transition: transform .3s cubic-bezier(0.4, 0.0, 0.2, 1), opacity .3s cubic-bezier(0.4, 0.0, 0.2, 1);
       pointer-events: none;
       .n-nimbus-service-layout-drawer__toggle-button {
         transform: translateX(50%) translateY(-50%) rotate(180deg);
@@ -211,6 +217,10 @@
     .n-nimbus-service-layout-drawer__divider {
       margin: 0px 25px;
       border-bottom: 1px solid rgba(255, 255, 255, .08);
+    }
+    &.n-nimbus-service-layout__drawer--disabled {
+      transform: translateX(-272px);
+      opacity: 0;
     }
   }
 }

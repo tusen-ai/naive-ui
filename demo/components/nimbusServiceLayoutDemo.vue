@@ -18,12 +18,16 @@
             icon="md-musical-notes"
             name="Oasis"
             :items="items"
+            :disable-menu="disableMenu"
           >
             Take me to the place where you go<br>
             Where nobody knows if it's night or day<br>
             But please don't put your life in the hands<br>
             Of a Rock n Roll band<br>
             Who'll throw it all away
+            <n-button @click="disableMenu = !disableMenu">
+              toggleDisableMenu
+            </n-button>
           </n-nimbus-service-layout>
         </div>
         <div class="n-doc-section__inspect">
@@ -70,12 +74,14 @@
       path: '/n-nimbus-service-layout?param=222'
     }
   ]"
+  :disable-menu="disableMenu"
 >
   Take me to the place where you go<br>
   Where nobody knows if it's night or day<br>
   But please don't put your life in the hands<br>
   Of a Rock n Roll band<br>
   Who'll throw it all away
+  <n-button @click="disableMenu = !disableMenu">toggleDisableMenu</n-button>
 </n-nimbus-service-layout></textarea>
         </div>
       </div>
@@ -89,6 +95,7 @@ export default {
   mixins: [docCodeEditorMixin],
   data () {
     return {
+      disableMenu: false,
       items: [
         {
           name: 'Definitely Maybe',
