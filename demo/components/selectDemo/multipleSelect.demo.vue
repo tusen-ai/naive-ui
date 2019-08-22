@@ -12,7 +12,7 @@
         v-model="selectedArray"
         multiple
         placeholder="Please Select Type"
-        :items="items"
+        :options="options"
         style="flex-grow: 1; margin-right: 12px;"
       />
       <n-select
@@ -20,7 +20,7 @@
         multiple
         size="small"
         placeholder="Please Select Type"
-        :items="items"
+        :options="options"
         style="flex-grow: 1;"
       />
       <!--EXAMPLE_END-->
@@ -37,7 +37,7 @@ export default {
   data () {
     return {
       selectedArray: null,
-      items: [
+      options: [
         {
           label: 'Drive My Car',
           value: 'song1'

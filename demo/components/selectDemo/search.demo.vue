@@ -12,7 +12,7 @@
         v-model="selectedValue"
         filterable
         placeholder="Please Select Type"
-        :items="items"
+        :options="options"
         style="flex-grow: 1; margin-right: 12px; width: 300px;"
       />
       <n-select
@@ -20,7 +20,7 @@
         multiple
         filterable
         placeholder="Please Select Type"
-        :items="items"
+        :options="options"
         style="flex-grow: 1; margin-right: 12px; width: 300px;"
       />
       <!--EXAMPLE_END-->
@@ -38,7 +38,7 @@ export default {
     return {
       selectedValue: null,
       selectedValues: null,
-      items: [
+      options: [
         {
           label: 'Drive My Car',
           value: 'song1'

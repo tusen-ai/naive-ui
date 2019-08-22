@@ -11,7 +11,7 @@
       <n-select
         v-model="selectedValue"
         placeholder="Please Select Type"
-        :items="items"
+        :options="options"
         style="flex-grow: 1; margin-right: 12px;"
         @change="handleChange"
       />
@@ -19,7 +19,7 @@
         v-model="selectedArray"
         multiple
         placeholder="Please Select Type"
-        :items="items"
+        :options="options"
         style="flex-grow: 1;"
         @change="handleChange"
       />
@@ -38,7 +38,7 @@ export default {
     return {
       selectedValue: 'song1',
       selectedArray: ['song1'],
-      items: [
+      options: [
         {
           label: 'Drive My Car',
           value: 'song1'

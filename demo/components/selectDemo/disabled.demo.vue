@@ -11,14 +11,14 @@
       <n-select
         v-model="selectedValue"
         placeholder="Please Select Type"
-        :items="items"
+        :options="options"
         style="width: 300px; margin-right: 12px;"
         disabled
       />
       <n-select
         v-model="selectedValue2"
         placeholder="Please Select Type"
-        :items="items"
+        :options="options"
         style="width: 300px; margin-right: 12px;"
         disabled
       />
@@ -26,7 +26,7 @@
         v-model="selectedArray"
         multiple
         placeholder="Please Select Type"
-        :items="items"
+        :options="options"
         style="width: 300px; margin-right: 12px;"
         disabled
       />
@@ -34,7 +34,7 @@
         v-model="selectedArray2"
         multiple
         placeholder="Please Select Type"
-        :items="items"
+        :options="options"
         style="width: 300px;"
         disabled
       />
@@ -42,7 +42,7 @@
         v-model="selectedArray2"
         filterable
         placeholder="Please Select Type"
-        :items="items"
+        :options="options"
         style="width: 300px;"
         disabled
       />
@@ -51,7 +51,7 @@
         multiple
         filterable
         placeholder="Please Select Type"
-        :items="items"
+        :options="options"
         style="width: 300px;"
         disabled
       />
@@ -70,7 +70,7 @@ export default {
       selectedArray: ['song1'],
       selectedValue2: null,
       selectedArray2: [],
-      items: [
+      options: [
         {
           label: 'Drive My Car',
           value: 'song1'

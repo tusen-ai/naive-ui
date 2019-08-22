@@ -1,7 +1,7 @@
 <template>
   <div class="n-doc-section">
     <div class="n-doc-section__header">
-      Change Event(Emit Item)
+      Change Event(Emit Option)
     </div>
     <div
       class="n-doc-section__view"
@@ -11,18 +11,18 @@
       <n-select
         v-model="selectedValue"
         placeholder="Please Select Type"
-        :items="items"
+        :options="options"
         style="flex-grow: 1; margin-right: 12px;"
-        emit-item
+        emit-option
         @change="handleChange"
       />
       <n-select
         v-model="selectedArray"
         multiple
         placeholder="Please Select Type"
-        :items="items"
+        :options="options"
         style="flex-grow: 1;"
-        emit-item
+        emit-option
         @change="handleChange"
       />
       <!--EXAMPLE_END-->
@@ -40,7 +40,7 @@ export default {
     return {
       selectedValue: null,
       selectedArray: null,
-      items: [
+      options: [
         {
           label: 'Drive My Car',
           value: 'song1'

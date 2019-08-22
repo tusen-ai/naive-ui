@@ -1,7 +1,7 @@
 <template>
   <div class="n-doc-section">
     <div class="n-doc-section__header">
-      Remote Search(multiple)
+      Remote Search(single)
     </div>
     <div
       class="n-doc-section__view"
@@ -9,8 +9,7 @@
     >
       <!--EXAMPLE_START-->
       <n-select
-        v-model="selectedValues"
-        multiple
+        v-model="value"
         filterable
         placeholder="Search Songs"
         :options="options"
@@ -22,7 +21,7 @@
       />
       <!--EXAMPLE_END-->
     </div>
-    <pre class="n-doc-section__inspect">v-model(multiple): {{ JSON.stringify(selectedValues) }}</pre>
+    <pre class="n-doc-section__inspect">v-model(multiple): {{ JSON.stringify(value) }}</pre>
     <n-doc-source-block>
       <!--SOURCE-->
     </n-doc-source-block>
@@ -84,7 +83,7 @@ const options = [
 export default {
   data () {
     return {
-      selectedValues: null,
+      value: null,
       loading: false,
       options: [],
       noDataContent: 'please search',

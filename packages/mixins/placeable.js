@@ -85,7 +85,11 @@ export default {
       this.$refs.content.style.transformOrigin = suggsetedTransformOrigin
       this.$refs.content.setAttribute('n-suggested-transform-origin', suggsetedTransformOrigin)
       if (this.widthMode === 'activator' && this.$refs.contentInner) {
-        this.$refs.contentInner.style.minWidth = activatorBoundingClientRect.width + 'px'
+        let el = this.$refs.contentInner
+        if (this.$refs.contentInner.$el) {
+          el = this.$refs.contentInner.$el
+        }
+        el.style.minWidth = activatorBoundingClientRect.width + 'px'
       }
     },
     registerResizeListener () {

@@ -18,6 +18,7 @@
       <change-event-emit-item />
       <search />
       <remote-search />
+      <remote-search-single />
       <listen-scroll-event />
     </div>
   </div>
@@ -32,6 +33,7 @@ import changeEventEmitItem from './changeEventEmitItem.demo'
 import search from './search.demo.vue'
 import remoteSearch from './remoteSearch.demo.vue'
 import listenScrollEvent from './listenScrollEvent.demo'
+import remoteSearchSingle from './remoteSearchSingle.demo'
 
 export default {
   components: {
@@ -42,7 +44,8 @@ export default {
     search,
     disabled,
     remoteSearch,
-    listenScrollEvent
+    listenScrollEvent,
+    remoteSearchSingle
   },
   data () {
     return {

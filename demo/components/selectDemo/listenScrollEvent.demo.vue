@@ -11,7 +11,7 @@
       <n-select
         v-model="value"
         placeholder="Please Select Type"
-        :items="items"
+        :options="options"
         style="flex-grow: 1; margin-right: 12px;"
         @scroll="handleScroll"
       />
@@ -19,7 +19,7 @@
         v-model="array"
         multiple
         placeholder="Please Select Type"
-        :items="items"
+        :options="options"
         style="flex-grow: 1;"
         @scroll="handleScroll"
       />
@@ -43,7 +43,7 @@ export default {
       scrollContentHeight: null,
       scrollContainerHeight: null,
       scrollContainerScrollTop: null,
-      items: [
+      options: [
         {
           label: 'Drive My Car',
           value: 'song1'

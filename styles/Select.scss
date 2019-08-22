@@ -275,11 +275,8 @@
   transform: translateZ(0);
   .n-select-menu__content {
     @include detachedContent;
-    overflow: hidden;
     border-radius: 6px;
     .n-select-menu-wrapper {
-      overflow: hidden;
-      border-radius: 6px;
       margin-top: 4px;
       margin-bottom: 4px;
       @include fade-in-scale-up-transition(select-menu);
@@ -305,14 +302,18 @@
           &.n-select-menu__item--no-data {
             color: rgba(255, 255, 255, .5);
             text-align: center;
+            pointer-events: none;
           }
           &.n-select-menu__item--not-found {
             color: rgba(255, 255, 255, .5);
             text-align: center;
+            pointer-events: none;
+
           }
           &.n-select-menu__item--loading {
             color: rgba(255, 255, 255, .5);
             text-align: center;
+            pointer-events: none;
           }
         }
         .n-select-menu__light-bar {

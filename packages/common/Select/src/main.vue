@@ -2,8 +2,7 @@
 /**
  * Warning: There are some potential problems if there are too many items!
  */
-import NMultipleSelect from './MultipleSelect'
-import NSingleSelect from './SingleSelect'
+import NSelect from './BaseSelect'
 
 export default {
   name: 'NSelect',
@@ -14,7 +13,11 @@ export default {
   props: {
     items: {
       type: Array,
-      required: true
+      default: null
+    },
+    options: {
+      type: Array,
+      default: null
     },
     value: {
       validator () {
@@ -39,7 +42,7 @@ export default {
       type: Boolean,
       default: false
     },
-    emitItem: {
+    emitOption: {
       type: Boolean,
       default: false
     },
@@ -66,11 +69,22 @@ export default {
     noDataContent: {
       type: [String, Function],
       default: 'no data'
+    },
+    notFoundContent: {
+      type: [String, Function],
+      default: 'none result matched'
     }
   },
   data () {
     return {
       active: false
+    }
+  },
+  computed: {
+    computedOptions () {
+      if (this.options) return this.options
+      else if (this.items) return this.items
+      return []
     }
   },
   methods: {
@@ -94,11 +108,8 @@ export default {
       setactive: this.handleSetActive.bind(this),
       scroll: this.handleScroll.bind(this)
     }
-    return this.multiple ? h(NMultipleSelect, {
-      props: { ...this.$props, active: this.active, placement: 'bottom-start', widthMode: 'activator' },
-      on
-    }) : h(NSingleSelect, {
-      props: { ...this.$props, active: this.active, placement: 'bottom-start', widthMode: 'activator' },
+    return h(NSelect, {
+      props: { ...this.$props, options: this.computedOptions, active: this.active, placement: 'bottom-start', widthMode: 'activator' },
       on
     })
   }

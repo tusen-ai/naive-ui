@@ -12,20 +12,20 @@
         v-model="selectedValue"
         size="large"
         placeholder="Please Select Type"
-        :items="items"
+        :options="options"
         style="flex-grow: 1; margin-right: 12px;"
       />
       <n-select
         v-model="selectedValue"
         placeholder="Please Select Type"
-        :items="items"
+        :options="options"
         style="flex-grow: 1; margin-right: 12px;"
       />
       <n-select
         v-model="selectedValue"
         size="small"
         placeholder="Please Select Type"
-        :items="items"
+        :options="options"
         style="flex-grow: 1;"
       />
       <!--EXAMPLE_END-->
@@ -42,7 +42,7 @@ export default {
   data () {
     return {
       selectedValue: null,
-      items: [
+      options: [
         {
           label: "Everybody's Got Something to Hide Except Me and My Monkey",
           value: 'song0'
