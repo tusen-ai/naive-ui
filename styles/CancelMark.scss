@@ -1,0 +1,80 @@
+@import './mixins/mixins.scss';
+@import './theme/default.scss';
+
+@include b(cancel-mark) {
+  @include fade-in-transition(cancel-mark);
+  user-select: none;
+  display: inline-block;
+  position: relative;
+  height: 16px;
+  width: 16px;
+}
+
+@include b(cancel-mark-cross) {
+  @include fade-in-transition(cancel-mark);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  .n-cancel-mark-cross__icon {
+    transition: fill .3s $default-cubic-bezier;
+    fill: rgba(255, 255, 255, .3);
+  }
+  &.n-cancel-mark-cross--arrow {
+    .n-cancel-mark-cross__icon {
+      fill: #63E2B7;
+    }
+  }
+  &:hover {
+    .n-cancel-mark-cross__icon {
+      fill: #63E2B7;
+    }
+  }
+  &:active {
+    .n-cancel-mark-cross__icon {
+      fill: #55be9b;
+    }
+  }
+}
+
+@include b(cancel-mark-arrow) {
+  @include fade-in-transition(cancel-mark);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  &::after {
+    transition: transform .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+    position: absolute;
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-left: 1px solid rgba(255, 255, 255, .4);
+    border-bottom: 1px solid rgba(255, 255, 255, .4);
+    right: 3px;
+    top: calc(50% - 5px);
+    transform: rotate(-45deg);
+    transform-origin: 25% 75%;
+  }
+  &.n-cancel-mark-arrow--active {
+    &::after {
+      transform: rotate(135deg);
+      border-left: 1px solid #63E2B7FF;
+      border-bottom: 1px solid #63E2B7FF;
+    }
+  }
+  &.n-cancel-mark-arrow--disabled {
+    cursor: not-allowed;
+    &::after {
+      border-color: rgba(255, 255, 255, 0.20);
+    }
+  }
+}

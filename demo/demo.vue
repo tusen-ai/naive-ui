@@ -209,6 +209,10 @@ export default {
           name: 'Debug',
           childItems: [
             {
+              name: 'CancelMarkDebug',
+              path: '/n-cancel-mark-debug'
+            },
+            {
               name: 'PopoverDebug',
               path: '/n-popover-debug'
             },

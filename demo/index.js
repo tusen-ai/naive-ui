@@ -58,6 +58,7 @@ import routerDebug from './debugComponents/routerDebug'
 import modalDebug from './debugComponents/modalDebug'
 import datePickerDebug from './debugComponents/datePickerDebug'
 import backTopDebug from './debugComponents/backTopDebug'
+import cancelMarkDebug from './debugComponents/cancelMarkDebug'
 
 Vue.use(NaiveUI)
 Vue.use(VueRouter)
@@ -129,7 +130,8 @@ const routes = [
       { path: '/n-anchor', component: anchorDemo },
       { path: '/n-dropdown', component: dropdownDemo },
       { path: '/n-popselect', component: popselectDemo },
-      { path: '/n-app', component: appDemo }
+      { path: '/n-app', component: appDemo },
+      { path: '/n-cancel-mark-debug', component: cancelMarkDebug }
     ]
   },
   {
