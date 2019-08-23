@@ -130,6 +130,7 @@ export default {
       Object.keys(this.checkedIndexs).forEach((key) => {
         this.checkedIndexs[key].isChecked = false
       })
+      this.emitData = null
       // this.items.forEach((item) => {
       //   item.isChecked = false
       // })

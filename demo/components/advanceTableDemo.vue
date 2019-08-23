@@ -767,7 +767,7 @@ const _columns3 = ($this) => {
         value: 15
       }],
       onFilter: (value, record) => {
-        return true
+        return value.includes(record.age)
       },
       render: (h, params) => {
         return <b>{params.row.age}</b>
@@ -792,7 +792,6 @@ const _columns3 = ($this) => {
 export default {
   mixins: [docCodeEditorMixin],
   data () {
-    let columns4 = _columns3(this)
     let d = new Array(20).fill(0)
     d = d.map((item, idx) => {
       return {
@@ -1013,7 +1012,7 @@ export default {
             value: 'xiaobai1'
           }],
           onFilter: (value, record) => {
-            return value.includes(record.name + '')
+            return value.includes(record.name)
           }
         },
         {
@@ -1022,14 +1021,15 @@ export default {
           sortable: 'custom',
           filterMultiple: true,
           filterItems: [{
-            label: '14',
+            label: '14!',
             value: 14
           }, {
             label: '15',
             value: 15
           }],
           onFilter: (value, record) => {
-            return value.includes(record.age + '')
+            console.log('TCL: data -> value.includes(record.age)', value.includes(record.age))
+            return value.includes(record.age)
           },
           render: (h, params) => {
             return <b>{params.row.age}</b>
@@ -1078,6 +1078,10 @@ export default {
     // this.$refs.table.setParams({ page: +this.$route.query.page || 5 })
 
     this.$refs.table.setParams({ filter: { age: [14] }, sorter: { key: 'age', type: -1 }, searcher: { key: 'name', value: 'xiaobai' }, page: 2 })
+    setTimeout(() => {
+      console.log('重新执行')
+      this.$refs.table.setParams({ filter: { age: [14, 15] }, page: 1 })
+    }, 10000)
   },
   methods: {
     handleClick (params) {

@@ -47,6 +47,7 @@
         <n-tr>
           <n-th
             v-for="(column, i) in columns"
+            ref="theads"
             :key="column.key"
             :style="computeAlign(column)"
           >
@@ -450,13 +451,26 @@ export default {
         const ref = this.$refs['sorter_' + sorter.key][0]
         ref.setSort(sorter.type)
         // this.sortIndexs[sorter.key] = sorter.type
+      } else {
+        // clear
+        this.clearSort()
       }
-      filter &&
+      this.currentFilterColumn && Object.keys(this.currentFilterColumn).forEach(key => {
+        const ref = this.$refs['filterDropDown_' + key][0]
+        ref.reset()
+        this.currentFilterColumn = null
+      })
+      if (filter) {
         Object.keys(filter).forEach((key) => {
           const ref = this.$refs['filterDropDown_' + key][0]
           ref.setCheckedIndexs(filter[key])
         })
-      searcher && this.$refs.search.setSearch(searcher)
+      }
+      if (searcher) {
+        this.$refs.search.setSearch(searcher)
+      } else {
+        this.$refs.search.clearSearch()
+      }
       if (page) {
         this.$nextTick(() => {
           this.currentPage = page
@@ -464,6 +478,12 @@ export default {
       }
       this.useRemoteChange()
       // TODO:测试功能 有远程 无远程 ，半有半无
+    },
+    clearSort () {
+      Object.keys(this.sortIndexs).forEach((key) => {
+        this.sortIndexs[key] = 0
+      })
+      this.currentSortColumn = null
     },
     onBodyScrolll (event) {
       this.$refs.header.$el.scrollLeft = event.target.scrollLeft
