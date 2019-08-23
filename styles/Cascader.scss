@@ -58,7 +58,7 @@
     display: block;
   }
   &.n-cascader-option--active {
-    font-weight: bold;
+    color: $main-color;
   }
   &.n-cascader-option--disabled {
     color: rgba(255, 255, 255, .3);

@@ -51,11 +51,12 @@
 </template>
 
 <script>
-import NCascaderOption from './CasOption.vue'
+import NCascaderOption from './CascaderOption.vue'
 import NScrollbar from '../../Scrollbar'
 import withlightbar from '../../../mixins/withlightbar'
 
 export default {
+  name: 'NCascaderSubmenu',
   components: {
     NCascaderOption,
     NScrollbar

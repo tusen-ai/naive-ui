@@ -34,7 +34,7 @@
         class="n-cascader-menu__content"
       >
         <transition name="n-cascader-menu--transition">
-          <CasPanel
+          <cascader-menu
             v-if="active"
             ref="menu"
             v-clickoutside.lazy="handleMenuClickOutside"
@@ -66,7 +66,7 @@ import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import toggleable from '../../../mixins/toggleable'
 import clickoutside from '../../../directives/clickoutside'
-import CasPanel from './CasPanel'
+import CascaderMenu from './CascaderMenu'
 import cloneDeep from 'lodash/cloneDeep'
 import { type } from './utils'
 
@@ -81,9 +81,9 @@ function traverseWithCallback (options, beforeCallback = () => {}, afterCallback
 }
 
 export default {
-  name: 'MultipleCascader',
+  name: 'NBaseCascader',
   components: {
-    CasPanel,
+    CascaderMenu,
     NBasePicker
   },
   directives: {
@@ -168,7 +168,7 @@ export default {
             if (values.has(option.value)) {
               options.push({
                 value: option.value,
-                label: path.join('/')
+                label: path.join(' / ')
               })
             }
           }, () => {
@@ -195,7 +195,7 @@ export default {
             // console.log('here')
             selectedOption = {
               value: option.value,
-              label: path.join('/')
+              label: path.join(' / ')
             }
           }
         }, () => {

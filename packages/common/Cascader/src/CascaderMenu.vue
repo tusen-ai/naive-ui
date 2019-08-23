@@ -41,7 +41,7 @@ function merge (arrA, arrB) {
 }
 
 export default {
-  name: 'CasPanel',
+  name: 'NCascaderMenu',
   components: {
     NCascaderSubmenu
   },
