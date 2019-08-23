@@ -2,11 +2,6 @@
   <div
     ref="select"
     class="n-select"
-    :class="{
-      [`n-select--${size}-size`]: true,
-      [`n-select--remote`]: remote,
-      'n-select--disabled': disabled
-    }"
     tabindex="0"
     @keydown.up.prevent="() => {}"
     @keydown.down.prevent="() => {}"
@@ -16,104 +11,29 @@
     @keyup.enter="handleKeyUpEnter"
     @keyup.space="handleKeyUpSpace"
   >
-    <div
-      v-if="multiple"
+    <n-base-picker
       ref="activator"
-      class="n-select-link"
-      :class="{
-        'n-select-link--active': active,
-        'n-select-link--selected': selected || (active && pattern.length)
-      }"
-      @click="handleActivatorClick"
-    >
-      <div
-        class="n-select-link__tags"
-        :class="{
-          'n-select-link__tags--selected': selected
-        }"
-      >
-        <div
-          class="n-select-link__tag-wrapper"
-        >
-          <div
-            v-for="option in selectedOptions"
-            :key="option.value"
-            class="n-select-link__tag"
-          >
-            <div class="n-select-link-tag__content">
-              {{ option.label }}
-            </div>
-            <n-icon
-              class="n-select-link-tag__icon"
-              type="md-close"
-              @click.stop="toggleOption(option)"
-            />
-          </div>
-          <div
-            v-if="filterable && active"
-            class="n-select-input-tag"
-          >
-            <input
-              ref="inputTagInput"
-              v-model="pattern"
-              class="n-select-input-tag__input"
-              @keydown.delete="handlePatternInputDelete"
-              @input="handlePatternInput"
-            >
-            <span
-              ref="inputTagMirror"
-              class="n-select-input-tag__mirror"
-            >{{ pattern ? pattern : '&nbsp;' }}</span>
-          </div>
-        </div>
-      </div>
-      <div
-        class="n-select-link__placeholder"
-      >
-        {{ placeholder }}
-      </div>
-      <n-cancel-mark
-        class="n-select-link__mark"
-        arrow
-        :show="!remote"
-        :disabled="disabled"
-        :active="active"
-        :clearable="clearable && selected"
-        @clear="handleClear"
-      />
-    </div>
-    <div
-      v-else
-      ref="activator"
-      class="n-select-link"
-      :class="{
-        'n-select-link--active': active
-      }"
-      @click="handleActivatorClick"
-    >
-      <div
-        class="n-select-link__label"
-      >
-        <input
-          ref="singleInput"
-          :value="singleInputActive ? pattern : (selectedOption && selectedOption.label)"
-          class="n-select-link-label__input"
-          :placeholder="selectedOption ? selectedOption.label : placeholder"
-          :readonly="!disabled && filterable ? false : 'readonly'"
-          @input="handleSingleInputInput"
-          @focus="handleSingleInputFocus"
-        >
-      </div>
-      <n-cancel-mark
-        class="n-select-link__mark"
-        arrow
-        :show="!remote"
-        :disabled="disabled"
-        :active="active"
-        :clearable="clearable && selected"
-        @clear="handleClear"
-      />
-    </div>
+      class="n-select-base-picker"
+      :active="active"
+      :pattern="pattern"
+      :placeholder="placeholder"
+      :selected-option="selectedOption"
+      :selected-options="selectedOptions"
+      :toggle-option="toggleOption"
+      :multiple="multiple"
+      :filterable="filterable"
+      :remote="remote"
+      :clearable="clearable"
+      :disabled="disabled"
+      :single-input-active="singleInputActive"
+      :on-search="onSearch"
+      :size="size"
+      @activator-click="handleActivatorClick"
+      @single-input-focus="handleSingleInputFocus"
+      @pattern-input-delete="handlePatternInputDelete"
+      @pattern-input="handlePatternInput"
+      @clear="handleClear"
+    />
     <div
       ref="contentContainer"
       v-clickoutside="handleClickOutsideMenu"
@@ -153,7 +73,6 @@
 </template>
 
 <script>
-import NIcon from '../../Icon/index'
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import toggleable from '../../../mixins/toggleable'
@@ -162,14 +81,13 @@ import clickoutside from '../../../directives/clickoutside'
 import NSelectMenu from './SelectMenu'
 import Emitter from '../../../mixins/emitter'
 import cloneDeep from 'lodash/cloneDeep'
-import NCancelMark from '../../CancelMark'
+import NBasePicker from '../../../base/Picker'
 
 export default {
   name: 'NBaseSelect',
   components: {
-    NIcon,
     NSelectMenu,
-    NCancelMark
+    NBasePicker
   },
   directives: {
     clickoutside
@@ -257,13 +175,6 @@ export default {
     }
   },
   computed: {
-    selected () {
-      if (this.multiple) {
-        return !!this.selectedOptions.length
-      } else {
-        return !!this.selectedOption
-      }
-    },
     filteredOptions () {
       if (this.remote) {
         return this.options
@@ -402,7 +313,7 @@ export default {
       }
     },
     handleClickOutsideMenu (e) {
-      if (!this.$refs.activator.contains(e.target) && !this.scrolling) {
+      if (!this.$refs.activator.$el.contains(e.target) && !this.scrolling) {
         this.deactivate()
         if (this.filterable && !this.multiple) {
           this.pattern = ''
@@ -414,7 +325,7 @@ export default {
       this.deactivate()
       if (!this.multiple) {
         this.init()
-        this.$refs.singleInput.blur()
+        this.$refs.activator.blurSingleInput()
       }
     },
     handleActivatorClick () {
@@ -429,7 +340,7 @@ export default {
       }
       if (this.multiple && this.filterable) {
         this.$nextTick().then(() => {
-          this.$refs.inputTagInput.focus()
+          this.$refs.activator.focusInputTag()
         })
       }
     },
@@ -456,7 +367,7 @@ export default {
         this.$nextTick().then(() => {
           if (this.filterable) {
             // console.log('toggleOption inputTagInput')
-            this.$refs.inputTagInput.focus()
+            this.$refs.activator.focusInputTag()
           }
         })
         this.$emit('input', newValue)
@@ -482,15 +393,6 @@ export default {
     handleMenuScroll (e, scrollContainer, scrollContent) {
       this.$emit('scroll', e, scrollContainer, scrollContent)
     },
-    handlePatternInput () {
-      this.$nextTick().then(() => {
-        const textWidth = this.$refs.inputTagMirror.getBoundingClientRect().width
-        this.$refs.inputTagInput.style.width = textWidth + 'px'
-        if (this.onSearch) {
-          this.onSearch(this.pattern)
-        }
-      })
-    },
     handlePatternInputDelete (e) {
       if (!this.pattern.length) {
         const newValue = this.value
@@ -498,6 +400,12 @@ export default {
           newValue.pop()
           this.$emit('input', newValue)
         }
+      }
+    },
+    handlePatternInput (e) {
+      this.pattern = e.target.value
+      if (this.onSearch) {
+        this.onSearch(e.target.value)
       }
     },
     handleKeyUpEnter () {
@@ -570,15 +478,8 @@ export default {
       this.pendingOptionElement = null
     },
     handleSingleInputFocus () {
-      // console.log('handleSingleInputFocus')
       if (this.filterable && !this.multiple) {
         this.singleInputActive = true
-      }
-    },
-    handleSingleInputInput (e) {
-      this.pattern = e.target.value
-      if (this.onSearch) {
-        this.onSearch(e.target.value)
       }
     },
     handleClear (e) {

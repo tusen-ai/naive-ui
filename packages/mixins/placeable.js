@@ -71,7 +71,8 @@ export default {
     updatePosition () {
       // console.log('scroll')
       if (!this.active) return
-      const activatorBoundingClientRect = this.$refs.activator.getBoundingClientRect()
+      const activator = this.$refs.activator.$el || this.$refs.activator
+      const activatorBoundingClientRect = activator.getBoundingClientRect()
       // console.log(this.$refs.popoverBody)
       // debugger
       const contentBoundingClientRect = this.$refs.content.getBoundingClientRect()
