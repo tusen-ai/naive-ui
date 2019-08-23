@@ -17,12 +17,14 @@
       <n-icon type="md-remove" />
     </button>
     <input
+      ref="input"
       class="n-input-number__input"
       type="text"
       :value="value"
       :disabled="disabled ? 'disabled' : false"
-      @blur="handleBlurOrEnter"
-      @keyup.enter="handleBlurOrEnter"
+      @blur="handleBlur"
+      @input="handleInput"
+      @keyup.enter="handleEnter"
     >
     <button
       type="button"
@@ -170,7 +172,13 @@ export default {
         this.$emit('input', valueAfterChange)
       }
     },
-    handleBlurOrEnter (e) {
+    handleInput (e) {
+
+    },
+    handleEnter (e) {
+      this.$refs.input.blur()
+    },
+    handleBlur (e) {
       const value = e.target.value
       if (value === '') {
         this.$emit('input', null)
@@ -182,6 +190,7 @@ export default {
         e.target.value = String(this.value)
       } else {
         const valueAfterChange = parsedNumber
+        e.target.value = String(parsedNumber)
         this.$emit('input', valueAfterChange)
       }
       this.formBlur('blur', parsedNumber)
