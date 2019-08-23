@@ -78,7 +78,7 @@
         :show="!remote"
         :disabled="disabled"
         :active="active"
-        :clearable="clearable"
+        :clearable="clearable && selected"
         @clear="handleClear"
       />
     </div>
@@ -110,7 +110,7 @@
         :show="!remote"
         :disabled="disabled"
         :active="active"
-        :clearable="clearable"
+        :clearable="clearable && selected"
         @clear="handleClear"
       />
     </div>
@@ -257,6 +257,16 @@ export default {
     }
   },
   computed: {
+    selected () {
+      if (this.multiple) {
+        console.log('this.selectedOptions.length', this.selectedOptions.length)
+        return !!this.selectedOptions.length
+      } else {
+        console.log('this.selectedOption', this.selectedOption)
+
+        return !!this.selectedOption
+      }
+    },
     filteredOptions () {
       if (this.remote) {
         return this.options
@@ -278,9 +288,6 @@ export default {
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.firstOption = decoratedOptions[0] || null
       return decoratedOptions
-    },
-    selected () {
-      return this.selectedOptions.length
     },
     valueOptionMap () {
       const valueToOption = new Map()

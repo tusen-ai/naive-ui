@@ -8,7 +8,7 @@
     >
       <transition name="n-cancel-mark--transition">
         <div
-          v-if="!arrow || showCancelMarkCross"
+          v-if="!arrow || (showCancelMarkCross && clearable)"
           class="n-cancel-mark-cross"
           :class="{
             'n-cancel-mark-cross--arrow': arrow
@@ -20,7 +20,7 @@
       </transition>
       <transition name="n-cancel-mark--transition">
         <div
-          v-if="arrow && !showCancelMarkCross"
+          v-if="(arrow && !clearable) || (arrow && !showCancelMarkCross)"
           class="n-cancel-mark-arrow"
           :class="{
             'n-cancel-mark-arrow--active': active,
@@ -62,6 +62,18 @@ export default {
   data () {
     return {
       showCancelMarkCross: false
+    }
+  },
+  watch: {
+    clearable (newValue) {
+      if (!newValue) {
+        this.showCancelMarkCross = false
+      }
+    },
+    show (newValue) {
+      if (!newValue) {
+        this.showCancelMarkCross = false
+      }
     }
   },
   methods: {
