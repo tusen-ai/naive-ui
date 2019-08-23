@@ -259,11 +259,8 @@ export default {
   computed: {
     selected () {
       if (this.multiple) {
-        console.log('this.selectedOptions.length', this.selectedOptions.length)
         return !!this.selectedOptions.length
       } else {
-        console.log('this.selectedOption', this.selectedOption)
-
         return !!this.selectedOption
       }
     },

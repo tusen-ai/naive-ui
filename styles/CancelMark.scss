@@ -8,6 +8,7 @@
   position: relative;
   height: 16px;
   width: 16px;
+  vertical-align: bottom;
 }
 
 @include b(cancel-mark-cross) {

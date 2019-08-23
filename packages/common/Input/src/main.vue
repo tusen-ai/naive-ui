@@ -1,17 +1,19 @@
 <template>
   <div
-    v-if="type==='textarea'"
     class="n-input"
     :class="{
-      'is-disabled': disabled
+      'n-input--disabled': disabled,
+      [`n-input--${size}-size`]: true,
+      'n-input--textarea': type==='textarea',
+      'n-input--round': round,
+      'n-input--icon': icon,
+      'n-input--clearable': clearable
     }"
   >
     <textarea
+      v-if="type==='textarea'"
       ref="textarea"
       class="n-input__textarea"
-      :class="{
-        [`n-input__textarea--${size}-size`]: true
-      }"
       :rows="rows"
       :placeholder="placeholder"
       :value="value"
@@ -25,23 +27,11 @@
       @compositionstart="handleCompositionStart"
       @compositionend="handleCompositionEnd"
     />
-  </div>
-  <div
-    v-else
-    class="n-input"
-    :class="{
-      'is-disabled': disabled
-    }"
-  >
     <input
+      v-else
       ref="input"
       :type="type"
       class="n-input__input"
-      :class="{
-        [`n-input__input--${size}-size`]: true,
-        [`n-input__input--round`]: round,
-        [`n-input__input--icon`]: icon
-      }"
       :placeholder="placeholder"
       :disabled="disabled === true"
       :maxlength="maxlength"
@@ -61,27 +51,32 @@
     >
       <n-icon :type="icon" />
     </div>
+    <div class="n-input__cancel-mark">
+      <n-cancel-mark
+        :show="!disabled && !!value"
+        :clearable="clearable"
+        @clear="handleClear"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-import nIcon from '../../Icon'
+import NIcon from '../../Icon'
 import Emitter from '../../../mixins/emitter'
+import NCancelMark from '../../CancelMark'
 
 export default {
   name: 'NInput',
   components: {
-    nIcon
+    NIcon,
+    NCancelMark
   },
   mixins: [ Emitter ],
   inject: {
     formItem: {
       default: null
     }
-  },
-  model: {
-    prop: 'value',
-    event: 'input'
   },
   props: {
     type: {
@@ -119,6 +114,10 @@ export default {
     maxlength: {
       type: [String, Number],
       default: 'false'
+    },
+    clearable: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -160,6 +159,10 @@ export default {
     },
     handleClick (e) {
       this.$emit('click', e)
+    },
+    handleClear (e) {
+      this.$emit('change', '')
+      this.$emit('input', '')
     }
   }
 }
