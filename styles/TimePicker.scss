@@ -17,11 +17,9 @@
     display: flex;
   }
   .n-time-picker__hour, .n-time-picker__minute, .n-time-picker__second {
-    @include scrollbar;
     width: 60px;
     height: 244px;
     flex-direction: column;
-    overflow-y: scroll;
     .n-time-picker__item {
       cursor: pointer;
       height: 35px;
