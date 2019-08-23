@@ -26,10 +26,10 @@
   }
   .n-input__cancel-mark {
     position: absolute;
-    right: 16px;
+    right: 14px;
     top: 50%;
     transform: translateY(-50%);
-    line-height: 16px;
+    line-height: 12px;
   }
   .n-input__input, .n-input__textarea {
     -webkit-appearance: none;
@@ -103,28 +103,28 @@
     }
   }
   &.n-input--round {
-    .n-input__input {
-      padding-left: 18px;
-    }
     &.n-input--small-size {
-      .n-input__input, .n-input__textarea {
+      .n-input__input {
         border-radius: $small-height / 2;
+        padding-left: $small-height / 2;
       }
     }
     &.n-input--default-size, &.n-input--medium-size {
-      .n-input__input, .n-input__textarea {
+      .n-input__input {
         border-radius: $default-height / 2;
+        padding-left: $default-height / 2;
       }
     }
     &.n-input--large-size {
-      .n-input__input, .n-input__textarea {
+      .n-input__input {
         border-radius: $large-height / 2;
+        padding-left: $large-height / 2;
       }
     }
   }
   &.n-input--icon {
     .n-input__input {
-      padding-left: 40px;
+      padding-left: 38px!important;
     }
   }
   &.n-input--disabled {
@@ -141,7 +141,7 @@
   }
   &.n-input--clearable {
     .n-input__input, .n-input__textarea {
-      padding-right: 42px;
+      padding-right: 32px;
     }
   }
   .n-input__textarea {

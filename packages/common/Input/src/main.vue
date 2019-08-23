@@ -5,7 +5,7 @@
       'n-input--disabled': disabled,
       [`n-input--${size}-size`]: true,
       'n-input--textarea': type==='textarea',
-      'n-input--round': round,
+      'n-input--round': round && type!=='textarea',
       'n-input--icon': icon,
       'n-input--clearable': clearable
     }"

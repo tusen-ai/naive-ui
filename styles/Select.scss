@@ -47,8 +47,9 @@
     box-shadow: none;
     .n-select-link__mark {
       position: absolute;
-      top: calc(50% - 8px);
-      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 14px;
     }
     .n-select-link__placeholder {
       pointer-events: none;

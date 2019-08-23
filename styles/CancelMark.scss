@@ -6,18 +6,17 @@
   user-select: none;
   display: inline-block;
   position: relative;
-  height: 16px;
-  width: 16px;
+  height: 12px;
+  width: 12px;
   vertical-align: bottom;
 }
 
 @include b(cancel-mark-cross) {
   @include fade-in-transition(cancel-mark);
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 16px;
-  width: 16px;
+  height: 12px;
+  width: 12px;
+  line-height: 12px;
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
@@ -47,8 +46,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
@@ -56,14 +55,15 @@
     transition: transform .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
     position: absolute;
     content: '';
-    width: 6px;
-    height: 6px;
+    box-sizing: border-box;
+    width: 7px;
+    height: 7px;
     border-left: 1px solid rgba(255, 255, 255, .4);
     border-bottom: 1px solid rgba(255, 255, 255, .4);
-    right: 3px;
-    top: calc(50% - 5px);
+    right: 1px;
+    top: calc(50% - 4.5px);
     transform: rotate(-45deg);
-    transform-origin: 25% 75%;
+    transform-origin: 30% 70%;
   }
   &.n-cancel-mark-arrow--active {
     &::after {

@@ -25,23 +25,6 @@
         size="large"
         round
       />
-      <n-input
-        v-model="value"
-        type="textarea"
-        size="small"
-        round
-      />
-      <n-input
-        v-model="value"
-        type="textarea"
-        round
-      />
-      <n-input
-        v-model="value"
-        type="textarea"
-        size="large"
-        round
-      />
       <!--EXAMPLE_END-->
     </div>
     <pre class="n-doc-section__inspect">{{ JSON.stringify(value) }}</pre>
