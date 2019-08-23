@@ -106,6 +106,11 @@ export default {
       return model
     }
   },
+  watch: {
+    options () {
+      this.$emit('menu-options-change')
+    }
+  },
   created () {
     // console.log('enableAllOptions', this.enableAllOptions)
   },

@@ -11,7 +11,7 @@
       <n-cascader
         v-model="value"
         multiple
-        placeholder="Please Select Type"
+        placeholder="Please Select Something"
         :options="options"
         style="flex-grow: 1; margin-right: 12px;"
       />

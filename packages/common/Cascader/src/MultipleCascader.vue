@@ -2,47 +2,29 @@
   <div
     ref="self"
     class="n-cascader"
-    :class="{
-      [`n-cascader--${size}-size`]: true,
-      'n-cascader--disabled': disabled
-    }"
-    @click="toggleMenu"
   >
-    <div
+    <n-base-picker
       ref="activator"
-      class="n-cascader-link"
-      :class="{
-        'n-cascader-link--active': active
-      }"
-    >
-      <div
-        class="n-cascader-link__tags"
-      >
-        <div
-          class="n-cascader-link__tag-wrapper"
-        >
-          <div
-            v-for="item in []"
-            :key="item"
-            class="n-cascader-link__tag"
-          >
-            <div class="n-cascader-link-tag__content">
-              {{ item }}
-            </div>
-            <n-icon
-              class="n-cascader-link-tag__icon"
-              type="md-close"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        class="n-cascader-link__placeholder"
-      >
-        {{ placeholder }}
-      </div>
-    </div>
-
+      class="n-cascader-picker"
+      :active="active"
+      :pattern="pattern"
+      :placeholder="placeholder"
+      :selected="selected"
+      :selected-option="selectedOption"
+      :selected-options="selectedOptions"
+      :toggle-option="removeOption"
+      :multiple="multiple"
+      :filterable="filterable"
+      :remote="remote"
+      :clearable="clearable"
+      :disabled="disabled"
+      :single-input-active="singleInputActive"
+      @activator-click="handleActivatorClick"
+      @single-input-focus="handleSingleInputFocus"
+      @pattern-input-delete="handlePatternInputDelete"
+      @pattern-input="handlePatternInput"
+      @clear="handleClear"
+    />
     <div
       ref="contentContainer"
       class="n-cascader-menu__content-wrapper"
@@ -70,6 +52,7 @@
             @menu-keyup-down="handleKeyUpDown"
             @menu-keyup-left="handleKeyUpLeft"
             @menu-keyup-right="handleKeyUpRight"
+            @menu-options-change="handleMenuOptionsChange"
           />
         </transition>
       </div>
@@ -78,7 +61,7 @@
 </template>
 
 <script>
-import NIcon from '../../Icon/index'
+import NBasePicker from '../../../base/Picker'
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import toggleable from '../../../mixins/toggleable'
@@ -87,11 +70,21 @@ import CasPanel from './CasPanel'
 import cloneDeep from 'lodash/cloneDeep'
 import { type } from './utils'
 
+function traverseWithCallback (options, beforeCallback = () => {}, afterCallback = () => {}) {
+  if (Array.isArray(options)) {
+    for (const option of options) {
+      beforeCallback(option)
+      if (option.children) traverseWithCallback(option.children, beforeCallback, afterCallback)
+      afterCallback(option)
+    }
+  }
+}
+
 export default {
   name: 'MultipleCascader',
   components: {
-    NIcon,
-    CasPanel
+    CasPanel,
+    NBasePicker
   },
   directives: {
     clickoutside
@@ -135,6 +128,14 @@ export default {
     enableAllOptions: {
       type: Boolean,
       default: false
+    },
+    clearable: {
+      type: Boolean,
+      default: false
+    },
+    remote: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -142,7 +143,10 @@ export default {
       labelPlaceholder: 'Please Select',
       activeId: null,
       tracedOption: null,
-      firstOption: null
+      firstOption: null,
+      singleInputActive: false,
+      pattern: '',
+      selected: true
     }
   },
   computed: {
@@ -153,7 +157,55 @@ export default {
     expandTriggeredByClick () {
       return this.expandTrigger === 'click'
     },
+    selectedOptions () {
+      if (this.multiple) {
+        let options = []
+        if (Array.isArray(this.value)) {
+          const values = new Set(this.value)
+          const path = []
+          traverseWithCallback(this.options, option => {
+            path.push(option.label)
+            if (values.has(option.value)) {
+              options.push({
+                value: option.value,
+                label: path.join('/')
+              })
+            }
+          }, () => {
+            path.pop()
+          })
+          const valueOptionMap = new Map()
+          options.forEach(option => {
+            valueOptionMap.set(option.value, option)
+          })
+          const reorderedOptions = this.value.filter(v => valueOptionMap.has(v)).map(v => valueOptionMap.get(v))
+          options = reorderedOptions
+        }
+        return options
+      } else return []
+    },
+    selectedOption () {
+      if (!this.multiple) {
+        const path = []
+        let selectedOption = null
+        traverseWithCallback(this.options, option => {
+          path.push(option.label)
+          // console.log(option.value, this.value)
+          if (option.value === this.value) {
+            // console.log('here')
+            selectedOption = {
+              value: option.value,
+              label: path.join('/')
+            }
+          }
+        }, () => {
+          path.pop()
+        })
+        return selectedOption
+      } else return null
+    },
     optionsWithId () {
+      // console.log('processOptions')
       const optionsWithId = cloneDeep(this.options)
       let id = 0
       const valueSet = new Set(this.value)
@@ -239,6 +291,16 @@ export default {
     }
   },
   watch: {
+    selectedOptions () {
+      this.$nextTick().then(() => {
+        this.updatePosition()
+      })
+    },
+    selectedOption () {
+      this.$nextTick().then(() => {
+        this.updatePosition()
+      })
+    },
     options () {
       this.tracedOption = null
       this.activeId = null
@@ -373,6 +435,36 @@ export default {
     },
     handleMenuInput (value) {
       this.$emit('input', value)
+    },
+    handleClear () {
+      this.$emit('input', null)
+    },
+    handleActivatorClick () {
+      this.toggleMenu()
+    },
+    handleSingleInputFocus () {
+
+    },
+    handlePatternInputDelete () {
+
+    },
+    handlePatternInput () {
+
+    },
+    handleMenuOptionsChange () {
+      this.tracedOption = null
+    },
+    removeOption (option) {
+      if (this.multiple && Array.isArray(this.value)) {
+        const index = this.value.findIndex(value => value === option.value)
+        if (~index) {
+          const newValue = this.value
+          newValue.splice(index, 1)
+          this.$emit('input', newValue)
+        }
+      } else {
+        this.$emit('input', null)
+      }
     }
   }
 }
