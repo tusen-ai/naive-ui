@@ -35,7 +35,7 @@
 <script>
 import CancelIcon from './CancelIcon'
 export default {
-  name: 'NCancelMark',
+  name: 'NBaseCancelMark',
   components: { CancelIcon },
   props: {
     show: {
