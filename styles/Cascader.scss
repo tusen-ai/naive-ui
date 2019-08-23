@@ -92,8 +92,9 @@
   overflow: visible;
   transform: translateZ(0);
   .n-cascader-menu__content {
-    margin-top: 4px;
     .n-cascader-menu {
+      margin-top: 4px;
+      margin-bottom: 4px;
       display: flex;
       z-index: 0;
       position: relative;

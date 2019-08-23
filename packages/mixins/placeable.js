@@ -72,7 +72,9 @@ export default {
       // console.log('scroll')
       if (!this.active) return
       const activator = this.$refs.activator.$el || this.$refs.activator
+      // console.log(activator)
       const activatorBoundingClientRect = activator.getBoundingClientRect()
+      // console.log(activatorBoundingClientRect)
       // console.log(this.$refs.popoverBody)
       // debugger
       const contentBoundingClientRect = this.$refs.content.getBoundingClientRect()
