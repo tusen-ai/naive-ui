@@ -64,7 +64,7 @@
 <script>
 import NIcon from '../../Icon'
 import Emitter from '../../../mixins/emitter'
-import NCancelMark from '../../CancelMark'
+import NCancelMark from '../../../base/CancelMark'
 
 export default {
   name: 'NInput',
