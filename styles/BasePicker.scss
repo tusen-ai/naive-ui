@@ -198,3 +198,34 @@
     }
   }
 }
+
+@include b(base-picker-input-tag) {
+  position: relative;
+  margin-bottom: 4px;
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: bottom;
+  .n-base-picker-input-tag__input {
+    padding: 0;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    max-width: 100%;
+    caret-color: $input-caret-color;
+    color: $select-text-color;
+    height: 100%;
+    width: 1em;
+    line-height: inherit;
+    cursor: pointer;
+  }
+  .n-base-picker-input-tag__mirror {
+    position: absolute;
+    padding-right: .5em;
+    left: 0;
+    top: 0;
+    white-space: pre;
+    visibility: hidden;
+    user-select: none;
+    opacity: 0;
+  }
+}

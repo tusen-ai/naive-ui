@@ -4,10 +4,10 @@ const ctx = '@@clickoutsideContext'
 
 function lazyHandler (handler) {
   let called = false
-  return function () {
+  return function (e) {
     if (called) {
       console.debug('[clickoutside] called')
-      handler()
+      handler(e)
     } else {
       console.debug('[clickoutside] lazy called')
       called = true
@@ -18,9 +18,6 @@ function lazyHandler (handler) {
 const clickoutside = {
   bind (el, bindings) {
     console.debug('[clickoutside]: bind', el)
-  },
-  inserted (el, bindings) {
-    console.debug('[clickoutside]: inserted')
     if (typeof bindings.value === 'function') {
       el[ctx] = {
         handler: bindings.modifiers.lazy ? lazyHandler(bindings.value) : bindings.value
@@ -28,7 +25,25 @@ const clickoutside = {
       clickoutsideDelegate.registerHandler(el, el[ctx].handler, false)
     }
   },
+  inserted (el, bindings) {
+    console.debug('[clickoutside]: inserted')
+    // if (typeof bindings.value === 'function') {
+    //   el[ctx] = {
+    //     handler: bindings.modifiers.lazy ? lazyHandler(bindings.value) : bindings.value
+    //   }
+    //   clickoutsideDelegate.registerHandler(el, el[ctx].handler, false)
+    // }
+  },
   update (el, bindings) {
+    console.debug('[clickoutside]: update')
+    if (typeof bindings.value === 'function') {
+      clickoutsideDelegate.unregisterHandler(el[ctx].handler)
+      el[ctx].handler = bindings.value
+      clickoutsideDelegate.registerHandler(el, el[ctx].handler, false)
+    }
+  },
+  componentUpdated (el, bindings) {
+    console.debug('[clickoutside]: componentUpdated')
     if (typeof bindings.value === 'function') {
       clickoutsideDelegate.unregisterHandler(el[ctx].handler)
       el[ctx].handler = bindings.value

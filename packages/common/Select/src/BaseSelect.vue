@@ -13,7 +13,7 @@
   >
     <n-base-picker
       ref="activator"
-      class="n-select-base-picker"
+      class="n-select-picker"
       :active="active"
       :pattern="pattern"
       :placeholder="placeholder"
@@ -25,11 +25,9 @@
       :remote="remote"
       :clearable="clearable"
       :disabled="disabled"
-      :single-input-active="singleInputActive"
       :on-search="onSearch"
       :size="size"
       @activator-click="handleActivatorClick"
-      @single-input-focus="handleSingleInputFocus"
       @pattern-input-delete="handlePatternInputDelete"
       @pattern-input="handlePatternInput"
       @clear="handleClear"
@@ -37,16 +35,17 @@
     <div
       ref="contentContainer"
       v-clickoutside="handleClickOutsideMenu"
-      class="n-select-menu__content-wrapper"
+      class="n-detached-content-container n-select-detached-content-container"
     >
       <div
         ref="content"
-        class="n-select-menu__content"
+        class="n-detached-content-content"
       >
         <transition name="n-select-menu--transition">
-          <n-select-menu
+          <n-base-select-menu
             v-if="active"
             ref="contentInner"
+            class="n-select-menu"
             :pattern="pattern"
             :options="options"
             :multiple="multiple"
@@ -57,14 +56,11 @@
             :not-found-content="notFoundContent"
             :emit-option="emitOption"
             :filterable="filterable"
-            :pending-option="pendingOption"
-            :pending-option-element="pendingOptionElement"
             :is-selected="isSelected"
             @menu-toggle-option="toggleOption"
             @menu-scroll="handleMenuScroll"
             @menu-scroll-start="handleMenuScrollStart"
             @menu-scroll-end="handleMenuScrollEnd"
-            @menu-change-pending-option="handleMenuChangePendingOption"
           />
         </transition>
       </div>
@@ -77,16 +73,16 @@ import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import toggleable from '../../../mixins/toggleable'
 import zindexable from '../../../mixins/zindexable'
-import clickoutside from '../../../directives/clickoutside'
-import NSelectMenu from './SelectMenu'
 import Emitter from '../../../mixins/emitter'
-import cloneDeep from 'lodash/cloneDeep'
+import clickoutside from '../../../directives/clickoutside'
+import NBaseSelectMenu from '../../../base/SelectMenu'
 import NBasePicker from '../../../base/Picker'
+import processedOptions from '../../../utils/component/processOptions'
 
 export default {
   name: 'NBaseSelect',
   components: {
-    NSelectMenu,
+    NBaseSelectMenu,
     NBasePicker
   },
   directives: {
@@ -167,14 +163,17 @@ export default {
     return {
       scrolling: false,
       pattern: '',
-      memorizedValueOptionMap: new Map(),
-      pendingOption: null,
-      pendingOptionElement: null,
-      firstOption: null,
-      singleInputActive: false
+      memorizedValueOptionMap: new Map()
     }
   },
   computed: {
+    firstOption () {
+      if (this.processedOptions && this.processedOptions.length) {
+        return this.processedOptions[0]
+      } else {
+        return null
+      }
+    },
     filteredOptions () {
       if (this.remote) {
         return this.options
@@ -182,20 +181,7 @@ export default {
       return this.options.filter(option => this.patternMatched(option.label))
     },
     processedOptions () {
-      const decoratedOptions = cloneDeep(this.filteredOptions).map((option, index) => {
-        return {
-          ...option,
-          id: index
-        }
-      })
-      const length = decoratedOptions.length
-      decoratedOptions.forEach((option, i) => {
-        option.prev = decoratedOptions[(i + length - 1) % length]
-        option.next = decoratedOptions[(i + length + 1) % length]
-      })
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.firstOption = decoratedOptions[0] || null
-      return decoratedOptions
+      return processedOptions(this.filteredOptions)
     },
     valueOptionMap () {
       const valueToOption = new Map()
@@ -255,17 +241,12 @@ export default {
     }
   },
   methods: {
-    init () {
-      this.pendingOption = null
-      this.pendingOptionElement = null
-      this.singleInputActive = false
-    },
     /**
      * @param {string} value
      */
     patternMatched (value) {
       try {
-        return 1 + value.toString().toLowerCase().search(this.pattern.trim().toLowerCase())
+        return 1 + value.toString().toLowerCase().indexOf(this.pattern.trim().toLowerCase())
       } catch (err) {
         return false
       }
@@ -317,14 +298,12 @@ export default {
         this.deactivate()
         if (this.filterable && !this.multiple) {
           this.pattern = ''
-          this.singleInputActive = false
         }
       }
     },
     closeMenu () {
       this.deactivate()
       if (!this.multiple) {
-        this.init()
         this.$refs.activator.blurSingleInput()
       }
     },
@@ -375,7 +354,6 @@ export default {
       } else {
         if (this.filterable && !this.multiple) {
           this.pattern = ''
-          this.singleInputActive = false
         }
         this.$emit('input', option.value)
         this.emitChangeEvent(option.value)
@@ -410,76 +388,26 @@ export default {
     },
     handleKeyUpEnter () {
       // console.log('keyup enter')
-      if (this.pendingOption) {
-        this.toggleOption(this.pendingOption)
+      const pendingOption = this.$refs.contentInner && this.$refs.contentInner.pendingOption
+      if (pendingOption) {
+        this.toggleOption(pendingOption)
       }
     },
     handleKeyUpSpace () {
       this.handleKeyUpEnter()
     },
     handleKeyUpUp () {
-      // console.log('keyup up')
+      console.log('keyup up')
       if (this.loading) return
       if (this.active) {
-        if (this.pendingOption) {
-          let optionIterator = this.pendingOption
-          optionIterator = optionIterator.prev
-          while (this.pendingOption !== optionIterator && optionIterator.disabled) {
-            optionIterator = optionIterator.prev
-          }
-          this.pendingOption = optionIterator
-          this.setPendingOptionElement(optionIterator)
-        }
-      }
-    },
-    setPendingOptionElement (option) {
-      const menu = this.$refs.contentContainer
-      if (menu) {
-        const el = menu.querySelector(`[data-id="${option.id}"]`)
-        this.pendingOptionElement = el
+        this.$refs.contentInner.prev()
       }
     },
     handleKeyUpDown () {
-      // console.log('keyup down')
+      console.log('keyup down')
       if (this.loading) return
       if (this.active) {
-        if (this.pendingOption === null) {
-          // console.log('this.pendingOption === null', this.firstOption)
-          const firstOption = this.firstOption
-          if (firstOption) {
-            let optionIterator = firstOption
-            if (!optionIterator) {
-              return
-            } else {
-              while (optionIterator.disabled) {
-                optionIterator = optionIterator.next
-                if (optionIterator === firstOption) {
-                  break
-                }
-              }
-            }
-            this.pendingOption = optionIterator
-            this.setPendingOptionElement(optionIterator)
-          }
-        } else {
-          // console.log('this.pendingOption !== null', this.pendingOption)
-          let optionIterator = this.pendingOption
-          optionIterator = optionIterator.next
-          while (this.pendingOption !== optionIterator && optionIterator.disabled) {
-            optionIterator = optionIterator.next
-          }
-          this.pendingOption = optionIterator
-          this.setPendingOptionElement(optionIterator)
-        }
-      }
-    },
-    handleMenuChangePendingOption (option) {
-      this.pendingOption = option
-      this.pendingOptionElement = null
-    },
-    handleSingleInputFocus () {
-      if (this.filterable && !this.multiple) {
-        this.singleInputActive = true
+        this.$refs.contentInner.next()
       }
     },
     handleClear (e) {

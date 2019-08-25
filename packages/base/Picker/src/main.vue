@@ -39,7 +39,7 @@
             ref="inputTagInput"
             :value="pattern"
             class="n-base-picker-input-tag__input"
-            @keyup.delete="handlePatternInputDelete"
+            @keydown.delete="handlePatternInputDelete"
             @input="handlePatternInput"
           >
           <span
@@ -67,12 +67,11 @@
       <div class="n-base-picker-label">
         <input
           ref="singleInput"
-          :value="singleInputActive ? pattern : (selectedOption && selectedOption.label)"
+          :value="(active && filterable && !forceActiveInput) ? pattern : (selectedOption && selectedOption.label)"
           class="n-base-picker-label__input"
           :placeholder="selectedOption ? selectedOption.label : placeholder"
           :readonly="!disabled && filterable ? false : 'readonly'"
           @input="handlePatternInput"
-          @focus="handleSingleInputFocus"
         >
       </div>
       <n-base-cancel-mark
@@ -135,10 +134,6 @@ export default {
       type: Boolean,
       default: false
     },
-    singleInputActive: {
-      type: Boolean,
-      default: false
-    },
     remote: {
       type: Boolean,
       default: false
@@ -156,6 +151,11 @@ export default {
       default: 'medium'
     }
   },
+  data () {
+    return {
+      forceActiveInput: false
+    }
+  },
   computed: {
     selected () {
       if (this.multiple) return !!(Array.isArray(this.selectedOptions) && this.selectedOptions.length)
@@ -164,15 +164,34 @@ export default {
       }
     }
   },
+  watch: {
+    active (active) {
+      if (!active) {
+        this.$nextTick().then(() => {
+          this.blurSingleInput()
+        })
+      }
+      this.forceActiveInput = false
+    }
+  },
   methods: {
-    handleClear () {
-      this.$emit('clear')
+    handleClear (e) {
+      this.$emit('clear', e)
     },
     handleActivatorClick () {
       this.$emit('activator-click')
+      this.forceActiveInput = false
+      if (this.multiple && this.filterable) {
+        this.$nextTick().then(() => {
+          this.focusInputTag()
+        })
+      }
     },
-    handlePatternInputDelete () {
-      this.$emit('pattern-input-delete')
+    handlePatternInputDelete (e) {
+      if (!this.pattern.length) {
+        // console.log(e)
+        this.$emit('pattern-input-delete')
+      }
     },
     handlePatternInput (e) {
       if (this.multiple) {
@@ -185,14 +204,15 @@ export default {
         this.$emit('pattern-input', e)
       }
     },
-    handleSingleInputFocus () {
-      this.$emit('single-input-focus')
-    },
     blurSingleInput () {
-      this.$refs.singleInput.blur()
+      if (this.$refs.singleInput) {
+        this.$refs.singleInput.blur()
+      }
     },
     focusInputTag () {
-      this.$refs.inputTagInput.focus()
+      if (this.$refs.inputTagInput) {
+        this.$refs.inputTagInput.focus()
+      }
     }
   }
 }

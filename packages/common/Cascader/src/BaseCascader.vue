@@ -2,6 +2,12 @@
   <div
     ref="self"
     class="n-cascader"
+    @keyup.space="handleKeyUpSpace"
+    @keyup.enter="handleKeyUpEnter"
+    @keyup.up="handleKeyUpUp"
+    @keyup.down="handleKeyUpDown"
+    @keyup.left="handleKeyUpLeft"
+    @keyup.right="handleKeyUpRight"
   >
     <n-base-picker
       ref="activator"
@@ -18,32 +24,32 @@
       :remote="remote"
       :clearable="clearable"
       :disabled="disabled"
-      :single-input-active="singleInputActive"
       @activator-click="handleActivatorClick"
-      @single-input-focus="handleSingleInputFocus"
       @pattern-input-delete="handlePatternInputDelete"
       @pattern-input="handlePatternInput"
       @clear="handleClear"
     />
     <div
       ref="contentContainer"
-      class="n-cascader-menu__content-wrapper"
+      class="n-detached-content-container n-cascader-detached-content-container"
     >
       <div
         ref="content"
-        class="n-cascader-menu__content"
+        class="n-detached-content"
       >
         <transition name="n-cascader-menu--transition">
           <cascader-menu
             v-if="active"
             ref="menu"
-            v-clickoutside.lazy="handleMenuClickOutside"
+            v-clickoutside="handleMenuClickOutside"
             :value="value"
             :multiple="multiple"
-            :options="optionsWithId"
+            :linked-options="linkedOptions"
             :active-id="activeId"
             :traced-option="tracedOption"
             :enable-all-options="enableAllOptions"
+            :pattern="pattern"
+            :filterable="filterable"
             @input="handleMenuInput"
             @option-click="handleOptionClick"
             @menu-keyup-space="handleKeyUpSpace"
@@ -52,7 +58,7 @@
             @menu-keyup-down="handleKeyUpDown"
             @menu-keyup-left="handleKeyUpLeft"
             @menu-keyup-right="handleKeyUpRight"
-            @menu-options-change="handleMenuOptionsChange"
+            @menu-type-change="handleMenuTypeChange"
           />
         </transition>
       </div>
@@ -68,17 +74,7 @@ import toggleable from '../../../mixins/toggleable'
 import clickoutside from '../../../directives/clickoutside'
 import CascaderMenu from './CascaderMenu'
 import cloneDeep from 'lodash/cloneDeep'
-import { type } from './utils'
-
-function traverseWithCallback (options, beforeCallback = () => {}, afterCallback = () => {}) {
-  if (Array.isArray(options)) {
-    for (const option of options) {
-      beforeCallback(option)
-      if (option.children) traverseWithCallback(option.children, beforeCallback, afterCallback)
-      afterCallback(option)
-    }
-  }
-}
+import { getType, traverseWithCallback } from './utils'
 
 export default {
   name: 'NBaseCascader',
@@ -143,14 +139,13 @@ export default {
       labelPlaceholder: 'Please Select',
       activeId: null,
       tracedOption: null,
-      firstOption: null,
-      singleInputActive: false,
       pattern: '',
-      selected: true
+      selected: true,
+      inputTypeIsSearch: false
     }
   },
   computed: {
-    type: type,
+    type: getType,
     expandTriggeredByHover () {
       return this.expandTrigger === 'hover'
     },
@@ -204,31 +199,27 @@ export default {
         return selectedOption
       } else return null
     },
-    optionsWithId () {
+    linkedOptions () {
       // console.log('processOptions')
-      const optionsWithId = cloneDeep(this.options)
+      const linkedOptions = cloneDeep(this.options)
       let id = 0
-      const valueSet = new Set(this.value)
-      const value = this.value
-      const checkedOptions = []
-      function markPath (option) {
-        const parent = option.parent
-        if (parent) {
-          parent.checkedLeafCount += 1
-          markPath(parent)
-        }
-      }
       const type = this.type
+      const path = []
       function traverse (options, parent = null, depth = 0) {
+        if (!Array.isArray(options)) return
         const length = options.length
         for (let i = 0; i < length; ++i) {
           const option = options[i]
+          path.push(option.label)
+          option.type = type
           option.parent = parent
           option.prevSibling = options[(i + length - 1) % length]
           option.nextSibling = options[(i + length + 1) % length]
           option.depth = depth
           option.id = id++
-          option.checkedLeafCount = 0
+          option.path = cloneDeep(path)
+          option.hasChildren = Array.isArray(option.children) && option.children.length
+          option.isLeaf = !option.hasChildren
           if (type === 'multiple') {
             if (Array.isArray(option.children) && option.children.length) {
               traverse(option.children, option, depth + 1)
@@ -244,53 +235,46 @@ export default {
               } else {
                 option.leafCount = 1
               }
-              option.checked = valueSet.has(option.value)
-              if (option.checked) {
-                checkedOptions.push(option)
-              }
             }
           } else if (type === 'multiple-all-options') {
             if (Array.isArray(option.children) && option.children.length) {
               traverse(option.children, option, depth + 1)
             }
             option.leafCount = 0
-            option.checkedLeafCount = 0
-            option.checked = valueSet.has(option.value)
           } else if (type === 'single-all-options') {
             if (Array.isArray(option.children) && option.children.length) {
               traverse(option.children, option, depth + 1)
             }
             option.leafCount = 0
-            option.checkedLeafCount = 0
-            option.checked = option.value === value
           } else if (type === 'single') {
             if (Array.isArray(option.children) && option.children.length) {
               traverse(option.children, option, depth + 1)
             }
             option.leafCount = 0
-            option.checkedLeafCount = 0
-            option.checked = option.value === value
           }
+          path.pop()
         }
       }
       if (type === 'multiple') {
-        traverse(optionsWithId)
-        for (const checkedOption of checkedOptions) {
-          markPath(checkedOption)
-        }
-      } else if (this.type === 'multiple-all-options') {
-        traverse(optionsWithId)
+        traverse(linkedOptions)
+      } else if (type === 'multiple-all-options') {
+        traverse(linkedOptions)
       } else if (type === 'single-all-options') {
-        traverse(optionsWithId)
+        traverse(linkedOptions)
       } else if (type === 'single') {
-        traverse(optionsWithId)
+        traverse(linkedOptions)
       }
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.firstOption = optionsWithId[0]
-      return optionsWithId
+      return linkedOptions
     }
   },
   watch: {
+    tracedOption (v) {
+      // console.log('tracedOption', v)
+    },
+    pattern () {
+      this.handlePatternChange()
+    },
     selectedOptions () {
       this.$nextTick().then(() => {
         this.updatePosition()
@@ -304,33 +288,29 @@ export default {
     options () {
       this.tracedOption = null
       this.activeId = null
-      this.firstOption = null
     },
     active (newActive) {
       if (!newActive) {
         this.tracedOption = null
+        this.pattern = ''
       } else {
-        this.$nextTick().then(() => {
-          const contentContainer = this.$refs.contentContainer
-          if (contentContainer) {
-            const firstSubmenu = contentContainer.querySelector('.n-cascader-submenu')
-            if (firstSubmenu) firstSubmenu.focus()
-          }
-        })
-      }
-    },
-    tracedOption (newOption) {
-      if (newOption) {
-        this.$nextTick().then(() => {
-          const submenu = this.$refs.contentContainer.querySelector(`[data-depth="${newOption.depth}"]`)
-          if (submenu) submenu.focus()
-        })
+        if (!this.filterable) {
+          this.$nextTick().then(() => {
+            const contentContainer = this.$refs.contentContainer
+            if (contentContainer) {
+              const firstSubmenu = contentContainer.querySelector('.n-cascader-submenu')
+              if (firstSubmenu) firstSubmenu.focus()
+            }
+          })
+        }
       }
     }
   },
   methods: {
-    handleMenuClickOutside () {
-      this.deactivate()
+    handleMenuClickOutside (e) {
+      if (!this.$refs.activator.$el.contains(e.target)) {
+        this.deactivate()
+      }
     },
     toggleMenu () {
       if (this.disabled) {
@@ -338,6 +318,9 @@ export default {
         return
       }
       this.toggle()
+    },
+    openMenu () {
+      this.activate()
     },
     handleOptionMouseEnter (e, option) {
       if (this.expandTriggeredByHover && !option.disabled) {
@@ -350,20 +333,27 @@ export default {
         this.tracedOption = option
       }
     },
-    handleKeyUpSpace (menu) {
-      this.handleKeyUpEnter(menu)
+    handleKeyUpSpace () {
+      this.handleKeyUpEnter()
     },
-    handleKeyUpEnter (menu) {
-      const options = menu && menu.$refs.options
-      if (options) {
-        const option = options.find(option => option.id === this.tracedOption.id)
-        if (option) {
-          option.handleOptionCheck()
+    handleKeyUpEnter () {
+      if (this.active && this.tracedOption && this.$refs.menu) {
+        this.$refs.menu.handleOptionCheck(this.tracedOption)
+      } else if (this.active && this.inputTypeIsSearch) {
+        const menu = this.$refs.menu
+        if (menu) {
+          const searchMenu = menu.$refs.searchMenu
+          if (searchMenu) {
+            const pendingOption = searchMenu.pendingOption
+            console.log(pendingOption)
+            menu.handleSelectOptionCheck(pendingOption)
+          }
         }
       }
     },
-    handleKeyUpDown (menu) {
-      if (this.active) {
+    handleKeyUpDown () {
+      if (this.active && !this.filterable) {
+        const menu = this.$refs.menu
         let scrollbar = null
         if (menu && menu.$refs.scrollbar) {
           scrollbar = menu.$refs.scrollbar
@@ -380,7 +370,7 @@ export default {
             scrollbar.scrollToElement(el)
           }
         } else {
-          const firstOption = this.firstOption
+          const firstOption = this.$refs.menu && this.$refs.menu.firstOption
           if (!firstOption) {
             return
           }
@@ -392,16 +382,28 @@ export default {
             }
           }
           this.tracedOption = optionIterator
+          // console.log('this.tracedOption', this.tracedOption)
           this.activeId = this.tracedOption.id
           const el = menu && menu.$el && menu.$el.querySelector(`[data-id="${this.activeId}"]`)
+          // console.log('el', el)
           if (scrollbar && el) {
             scrollbar.scrollToElement(el)
           }
         }
+      } else if (this.active && this.inputTypeIsSearch) {
+        const menu = this.$refs.menu
+        if (menu) {
+          const searchMenu = menu.$refs.searchMenu
+          if (searchMenu) {
+            searchMenu.next()
+            // console.log(searchMenu.pendingOption)
+          }
+        }
       }
     },
-    handleKeyUpUp (menu) {
-      if (this.active && this.tracedOption) {
+    handleKeyUpUp () {
+      if (this.active && this.tracedOption && !this.filterable) {
+        const menu = this.$refs.menu
         let scrollbar = null
         if (menu && menu.$refs.scrollbar) {
           scrollbar = menu.$refs.scrollbar
@@ -416,16 +418,25 @@ export default {
         if (scrollbar && el) {
           scrollbar.scrollToElement(el)
         }
+      } else if (this.active && this.inputTypeIsSearch) {
+        const menu = this.$refs.menu
+        if (menu) {
+          const searchMenu = menu.$refs.searchMenu
+          if (searchMenu) {
+            searchMenu.prev()
+            // console.log(searchMenu.pendingOption)
+          }
+        }
       }
     },
     handleKeyUpLeft () {
-      if (this.active && this.tracedOption && this.tracedOption.parent) {
+      if (this.active && this.tracedOption && this.tracedOption.parent && !this.filterable) {
         this.tracedOption = this.tracedOption.parent
         this.activeId = this.tracedOption.id
       }
     },
     handleKeyUpRight () {
-      if (this.active && this.tracedOption) {
+      if (this.active && this.tracedOption && !this.filterable) {
         const firstChild = this.tracedOption.children && this.tracedOption.children[0]
         if (firstChild) {
           this.tracedOption = firstChild
@@ -435,24 +446,47 @@ export default {
     },
     handleMenuInput (value) {
       this.$emit('input', value)
+      if (this.type === 'single') {
+        this.deactivate()
+      } else if (this.type === 'single-all-options') {
+        const activator = this.$refs.activator
+        if (activator) {
+          activator.forceActiveInput = true
+        }
+        if (this.inputTypeIsSearch) {
+          this.deactivate()
+        }
+      } else {
+        const activator = this.$refs.activator
+        this.pattern = ''
+        if (activator) {
+          this.$nextTick().then(() => {
+            activator.focusInputTag()
+          })
+        }
+      }
     },
     handleClear () {
       this.$emit('input', null)
     },
     handleActivatorClick () {
-      this.toggleMenu()
-    },
-    handleSingleInputFocus () {
-
+      if (this.filterable) {
+        this.openMenu()
+      } else {
+        this.toggleMenu()
+      }
     },
     handlePatternInputDelete () {
-
+      if (this.multiple) {
+        if (Array.isArray(this.value)) {
+          const newValue = this.value
+          newValue.pop()
+          this.$emit('input', newValue)
+        }
+      }
     },
-    handlePatternInput () {
-
-    },
-    handleMenuOptionsChange () {
-      this.tracedOption = null
+    handlePatternInput (e) {
+      this.pattern = e.target.value
     },
     removeOption (option) {
       if (this.multiple && Array.isArray(this.value)) {
@@ -465,6 +499,30 @@ export default {
       } else {
         this.$emit('input', null)
       }
+      this.tracedOption = null
+    },
+    handleMenuTypeChange (typeIsSearch) {
+      this.$nextTick().then(() => {
+        this.inputTypeIsSearch = typeIsSearch
+        if (typeIsSearch) {
+          const el = this.$refs.menu.$refs.searchMenu.$el
+          this.updatePosition(
+            el,
+            (el, activatorRect) => {
+              el.style.minWidth = activatorRect.width + 'px'
+            }
+          )
+        } else {
+          this.updatePosition()
+        }
+        // debugger
+      })
+    },
+    handlePatternChange () {
+      this.$nextTick().then(() => {
+        this.updatePosition()
+        // debugger
+      })
     }
   }
 }

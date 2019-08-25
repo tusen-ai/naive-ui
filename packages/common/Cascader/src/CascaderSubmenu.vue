@@ -41,6 +41,10 @@
         :checked="option.checked"
         :checked-leaf-count="option.checkedLeafCount"
         :leaf-count="option.leafCount"
+        :is-leaf="option.isLeaf"
+        :checkbox-checked="option.checkboxChecked"
+        :checkbox-indeterminate="option.checkboxIndeterminate"
+        :has-children="option.hasChildren"
         @check="handleOptionCheck"
         @click="handleOptionClick"
         @mouseenter="handleOptionMouseEnter"
@@ -90,25 +94,25 @@ export default {
       this.hideLightBar()
     },
     handleKeyUpEnter () {
-      this.$emit('menu-keyup-enter', this)
+      this.$emit('menu-keyup-enter')
     },
     handleKeyUpSpace () {
-      this.$emit('menu-keyup-space', this)
+      this.$emit('menu-keyup-space')
     },
     handleKeyUpUp () {
-      this.$emit('menu-keyup-up', this)
+      this.$emit('menu-keyup-up')
     },
     handleKeyUpDown () {
-      this.$emit('menu-keyup-down', this)
+      this.$emit('menu-keyup-down')
     },
     handleKeyUpLeft () {
-      this.$emit('menu-keyup-left', this)
+      this.$emit('menu-keyup-left')
     },
     handleKeyUpRight () {
-      this.$emit('menu-keyup-right', this)
+      this.$emit('menu-keyup-right')
     },
-    handleOptionCheck (...params) {
-      this.$emit('option-check', ...params)
+    handleOptionCheck (option) {
+      this.$emit('option-check', option)
     }
   }
 }

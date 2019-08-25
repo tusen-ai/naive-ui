@@ -1,4 +1,4 @@
-function type () {
+function getType () {
   if (this.multiple && !this.enableAllOptions) return 'multiple'
   if (this.multiple && this.enableAllOptions) return 'multiple-all-options'
   if (!this.multiple && this.enableAllOptions) return 'single-all-options'
@@ -15,8 +15,37 @@ function isLeaf (option) {
   return !(Array.isArray(option.children) && option.children)
 }
 
+function traverseWithCallback (options, beforeCallback = () => {}, afterCallback = () => {}) {
+  if (Array.isArray(options)) {
+    for (const option of options) {
+      beforeCallback(option)
+      if (option.children) traverseWithCallback(option.children, beforeCallback, afterCallback)
+      afterCallback(option)
+    }
+  }
+}
+
+function minus (arrA, arrB) {
+  const set = new Set(arrA)
+  arrB.forEach(v => {
+    if (set.has(v)) {
+      set.delete(v)
+    }
+  })
+  return Array.from(set)
+}
+
+function merge (arrA, arrB) {
+  const mergedSet = new Set(arrA)
+  arrB.forEach(v => mergedSet.add(v))
+  return Array.from(mergedSet)
+}
+
 export {
-  type,
+  getType,
   validateType,
-  isLeaf
+  isLeaf,
+  traverseWithCallback,
+  minus,
+  merge
 }

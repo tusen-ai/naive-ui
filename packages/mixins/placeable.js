@@ -68,7 +68,7 @@ export default {
     }
   },
   methods: {
-    updatePosition () {
+    updatePosition (el, cb) {
       // console.log('scroll')
       if (!this.active) return
       const activator = this.$refs.activator.$el || this.$refs.activator
@@ -85,14 +85,22 @@ export default {
       this.$refs.content.style.position = 'absolute'
       this.$refs.content.style.top = placementTransform.top
       this.$refs.content.style.left = placementTransform.left
+      this.$refs.content.style.right = placementTransform.right
+      this.$refs.content.style.bottom = placementTransform.bottom
       this.$refs.content.style.transformOrigin = suggsetedTransformOrigin
       this.$refs.content.setAttribute('n-suggested-transform-origin', suggsetedTransformOrigin)
-      if (this.widthMode === 'activator' && this.$refs.contentInner) {
+      // console.log(this.$refs.contentInner)
+      if (this.$refs.contentInner) {
         let el = this.$refs.contentInner
         if (this.$refs.contentInner.$el) {
           el = this.$refs.contentInner.$el
         }
-        el.style.minWidth = activatorBoundingClientRect.width + 'px'
+        if (this.widthMode === 'activator') {
+          el.style.minWidth = activatorBoundingClientRect.width + 'px'
+        }
+      }
+      if (el && cb) {
+        cb(el, activatorBoundingClientRect, contentBoundingClientRect)
       }
     },
     registerResizeListener () {

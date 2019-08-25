@@ -96,7 +96,7 @@ export default {
         }
         this.loading = true
         window.setTimeout(() => {
-          this.options = options.filter(item => ~item.label.search(query))
+          this.options = options.filter(item => ~item.label.indexOf(query))
           if (!this.options.length) this.noDataContent = 'no result found'
           this.loading = false
         }, 1000)

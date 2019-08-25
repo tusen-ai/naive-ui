@@ -1,51 +1,116 @@
 <template>
   <div
-    class="n-cascader-menu n-cascader-menu--multiple n-cascader-menu--default-size"
+    class="n-cascader-menu"
   >
-    <n-cascader-submenu
-      v-for="(submenuOptions, index) in menuModel"
-      :key="index"
-      :options="submenuOptions"
-      :data-depth="index"
-      @option-click="handleOptionClick"
-      @option-mouseenter="handleOptionMouseEnter"
-      @option-mouseleave="handleOptionMouseLeave"
-      @menu-keyup-enter="handleMenuKeyUpEnter"
-      @menu-keyup-up="handleMenuKeyUpUp"
-      @menu-keyup-down="handleMenuKeyUpDown"
-      @menu-keyup-left="handleMenuKeyUpLeft"
-      @menu-keyup-right="handleMenuKeyUpRight"
-      @menu-keyup-space="handleMenuKeyUpSpace"
-      @option-check="handleOptionCheck"
-    />
+    <transition name="n-cascader-cascader-menu--transition">
+      <div
+        v-if="!searchMenuActive"
+        class="n-cascader-cascader-menu"
+      >
+        <n-cascader-submenu
+          v-for="(submenuOptions, index) in menuModel"
+          :key="index"
+          :size="size"
+          :options="submenuOptions"
+          :data-depth="index"
+          @option-click="handleOptionClick"
+          @option-mouseenter="handleOptionMouseEnter"
+          @option-mouseleave="handleOptionMouseLeave"
+          @menu-keyup-enter="handleMenuKeyUpEnter"
+          @menu-keyup-up="handleMenuKeyUpUp"
+          @menu-keyup-down="handleMenuKeyUpDown"
+          @menu-keyup-left="handleMenuKeyUpLeft"
+          @menu-keyup-right="handleMenuKeyUpRight"
+          @menu-keyup-space="handleMenuKeyUpSpace"
+          @option-check="handleOptionCheck"
+        />
+      </div>
+    </transition>
+    <transition name="n-cascader-select-menu--transition">
+      <n-base-select-menu
+        v-if="searchMenuActive"
+        ref="searchMenu"
+        class="n-cascader-select-menu"
+        :pattern="pattern"
+        :options="options"
+        :multiple="multiple"
+        :size="size"
+        :processed-options="processedSelectOptions"
+        :pending-option="pendingOption"
+        :pending-option-element="pendingOptionElement"
+        :is-selected="isSelected"
+        @menu-toggle-option="handleSelectMenuToggleOption"
+        @menu-scroll-start="handleMenuScrollStart"
+        @menu-scroll-end="handleMenuScrollEnd"
+        @menu-change-pending-option="handleMenuChangePendingOption"
+      />
+    </transition>
   </div>
 </template>
 <script>
 import NCascaderSubmenu from './CascaderSubmenu'
-import { type } from './utils'
+import NBaseSelectMenu from '../../../base/SelectMenu'
+import { getType, traverseWithCallback, isLeaf, minus, merge } from './utils'
+import processedOptions from '../../../utils/component/processOptions'
+import cloneDeep from 'lodash/cloneDeep'
 
-function minus (arrA, arrB) {
-  const set = new Set(arrA)
-  arrB.forEach(v => {
-    if (set.has(v)) {
-      set.delete(v)
-    }
-  })
-  return Array.from(set)
+function processedOption (option, activeIds, tracedOption) {
+  return {
+    ...option,
+    active: activeIds.has(option.id),
+    hasChildren: hasChildren(option),
+    checkboxChecked: checkboxChecked(option),
+    checkboxIndeterminate: checkboxIndeterminate(option),
+    isLeaf: isLeaf(option),
+    traced: traced(option, tracedOption)
+  }
 }
 
-function merge (arrA, arrB) {
-  const mergedSet = new Set(arrA)
-  arrB.forEach(v => mergedSet.add(v))
-  return Array.from(mergedSet)
+function hasChildren (option) {
+  return !!(option.children && option.children.length)
+}
+function checkboxChecked (option) {
+  if (option.type === 'multiple') {
+    if (Array.isArray(option.children) && option.children.length) {
+      return option.leafCount === option.checkedLeafCount
+    } else {
+      return option.checked
+    }
+  } else {
+    return option.checked
+  }
+}
+function checkboxIndeterminate (option) {
+  if (option.type === 'multiple') {
+    return !option.checked && option.checkedLeafCount !== 0 && option.checkedLeafCount !== option.leafCount
+  } return false
+}
+function traced (option, tracedOption) {
+  if (option && tracedOption) {
+    return option.id === tracedOption.id
+  }
+  return false
 }
 
 export default {
   name: 'NCascaderMenu',
   components: {
-    NCascaderSubmenu
+    NCascaderSubmenu,
+    NBaseSelectMenu
   },
   props: {
+    size: {
+      type: String,
+      default: 'default'
+    },
+    pattern: {
+      type: String,
+      default: null
+    },
+    filterable: {
+      type: Boolean,
+      default: false
+    },
     value: {
       validator: () => true,
       default: null
@@ -62,7 +127,7 @@ export default {
       type: Object,
       default: null
     },
-    options: {
+    linkedOptions: {
       type: Array,
       required: true
     },
@@ -75,49 +140,175 @@ export default {
       default: false
     }
   },
+  data () {
+    return {
+      pendingOption: null,
+      pendingOptionElement: null
+    }
+  },
   computed: {
+    valueSet () {
+      return new Set(this.value)
+    },
+    options () {
+      const options = cloneDeep(this.linkedOptions)
+      const checkedOptions = []
+      const valueSet = this.valueSet
+      const value = this.value
+      function markPath (option) {
+        const parent = option.parent
+        if (parent) {
+          parent.checkedLeafCount += 1
+          markPath(parent)
+        }
+      }
+      const type = this.type
+      function traverse (options, parent = null, depth = 0) {
+        if (!Array.isArray(options)) return
+        const length = options.length
+        for (let i = 0; i < length; ++i) {
+          const option = options[i]
+          option.checkedLeafCount = 0
+          if (type === 'multiple') {
+            if (Array.isArray(option.children) && option.children.length) {
+              traverse(option.children, option, depth + 1)
+            } else {
+              option.checked = valueSet.has(option.value)
+              if (option.checked) {
+                checkedOptions.push(option)
+              }
+            }
+          } else if (type === 'multiple-all-options') {
+            if (Array.isArray(option.children) && option.children.length) {
+              traverse(option.children, option, depth + 1)
+            }
+            option.checked = valueSet.has(option.value)
+          } else if (type === 'single-all-options') {
+            if (Array.isArray(option.children) && option.children.length) {
+              traverse(option.children, option, depth + 1)
+            }
+            option.checked = option.value === value
+          } else if (type === 'single') {
+            if (Array.isArray(option.children) && option.children.length) {
+              traverse(option.children, option, depth + 1)
+            }
+            option.checked = option.value === value
+          }
+        }
+      }
+      traverse(options)
+      if (type === 'multiple') {
+        checkedOptions.forEach(option => {
+          console.log('checkedOption', option)
+          markPath(option)
+        })
+      }
+      return options
+    },
+    searchMenuActive () {
+      return this.filterable && this.pattern && this.pattern.trim().length
+    },
+    filteredSelectOptions () {
+      const filteredSelectOptions = []
+      const type = this.type
+      traverseWithCallback(this.options, option => {
+        if (Array.isArray(option.path) && option.path.some(
+          label => ~label.indexOf(this.pattern)
+        )) {
+          if (type === 'multiple' || type === 'single') {
+            console.log()
+            if (option.isLeaf) {
+              filteredSelectOptions.push({
+                value: option.value,
+                label: option.path.join(' / ')
+              })
+            }
+          } else {
+            filteredSelectOptions.push({
+              value: option.value,
+              label: option.path.join(' / ')
+            })
+          }
+        }
+      })
+      return filteredSelectOptions
+    },
+    processedSelectOptions () {
+      return processedOptions(this.filteredSelectOptions, this)
+    },
     activeOptionPath () {
       return this.optionPath(this.activeId)
     },
-    type: type,
+    type: getType,
+    firstOption () {
+      if (this.menuModel && this.menuModel[0] && this.menuModel[0][0]) {
+        return this.menuModel[0][0]
+      } else {
+        return null
+      }
+    },
+    activeIds () {
+      return new Set(this.activeOptionPath.map(option => option.id))
+    },
     menuModel () {
       const activeOptionPath = this.activeOptionPath
-      const activeIds = new Set(activeOptionPath.map(option => option.id))
       const model = [this.options.map(option => {
-        return {
-          ...option,
-          traced: this.tracedOption && this.tracedOption.id === option.id,
-          active: activeIds.has(option.id),
-          type: this.type
-        }
+        return processedOption(option, this.activeIds, this.tracedOption)
       })]
       for (const option of activeOptionPath) {
         if (Array.isArray(option.children) && option.children.length) {
           model.push(option.children.map(option => {
-            return {
-              ...option,
-              traced: this.tracedOption && this.tracedOption.id === option.id,
-              active: activeIds.has(option.id),
-              type: this.type
-            }
+            return processedOption(option, this.activeIds, this.tracedOption)
           }))
         }
       }
       return model
+    },
+    idOptionMap () {
+      const idOptionMap = new Map()
+      for (const submenu of this.menuModel) {
+        for (const option of submenu) {
+          idOptionMap.set(option.id, option)
+        }
+      }
+      return idOptionMap
     }
   },
   watch: {
-    options () {
-      this.$emit('menu-options-change')
+    filteredSelectOptions () {
+      this.$emit('menu-filtered-options-change')
+    },
+    searchMenuActive (searchMenuActive) {
+      this.$nextTick().then(() => {
+        this.handleMenuTypeChange(searchMenuActive)
+      })
     }
   },
-  created () {
-    // console.log('enableAllOptions', this.enableAllOptions)
-  },
-  mounted () {
-    // console.log(this.menuModel)
-  },
   methods: {
+    isSelected (option) {
+      if (this.multiple) {
+        return this.valueSet.has(option.value)
+      } else {
+        return this.value === option.value
+      }
+    },
+    handleMenuChangePendingOption (option) {
+      if (option) {
+        console.log(option.label)
+      }
+    },
+    handleSelectMenuToggleOption (option) {
+
+    },
+    handleMenuScrollStart () {
+
+    },
+    handleMenuScrollEnd () {
+
+    },
+    handleFilteredOptionsChange () {
+      this.$emit('filtered-options-change')
+    },
     optionPath (optionId) {
       const path = []
       let done = false
@@ -148,17 +339,17 @@ export default {
     handleOptionClick (e, option, menu) {
       this.$emit('option-click', e, option, menu)
     },
-    handleMenuKeyUpEnter (submenu) {
-      this.$emit('menu-keyup-enter', submenu)
+    handleMenuKeyUpEnter () {
+      this.$emit('menu-keyup-enter')
     },
-    handleMenuKeyUpSpace (submenu) {
-      this.$emit('menu-keyup-space', submenu)
+    handleMenuKeyUpSpace () {
+      this.$emit('menu-keyup-space')
     },
-    handleMenuKeyUpUp (submenu) {
-      this.$emit('menu-keyup-up', submenu)
+    handleMenuKeyUpUp () {
+      this.$emit('menu-keyup-up')
     },
-    handleMenuKeyUpDown (submenu) {
-      this.$emit('menu-keyup-down', submenu)
+    handleMenuKeyUpDown () {
+      this.$emit('menu-keyup-down')
     },
     handleMenuKeyUpLeft () {
       this.$emit('menu-keyup-left')
@@ -166,7 +357,34 @@ export default {
     handleMenuKeyUpRight () {
       this.$emit('menu-keyup-right')
     },
-    handleOptionCheck (option, checked, indeterminate) {
+    handleMenuTypeChange (typeIsSearch) {
+      this.$emit('menu-type-change', typeIsSearch)
+    },
+    handleSelectOptionCheck (option) {
+      if (option.disabled) return
+      if (this.type === 'multiple' || this.type === 'multiple-all-options') {
+        if (Array.isArray(this.value)) {
+          const index = this.value.findIndex(v => v === option.value)
+          if (~index) {
+            const newValue = this.value
+            newValue.splice(index, 1)
+            this.$emit('input', newValue)
+          } else {
+            const newValue = this.value
+            newValue.push(option.value)
+            this.$emit('input', newValue)
+          }
+        } else {
+          this.$emit('input', [option.value])
+        }
+      } else {
+        this.$emit('input', option.value)
+      }
+    },
+    handleOptionCheck (option) {
+      if (option.disabled) return
+      option = this.idOptionMap.get(option.id)
+      option = processedOption(option, this.activeIds, this.tracedOption)
       if (this.type === 'multiple') {
         const newValues = []
         const traverseMultiple = option => {
@@ -182,7 +400,7 @@ export default {
         }
         traverseMultiple(option)
         if (Array.isArray(this.value)) {
-          if (!option.checked && !option.indeterminate) {
+          if (!option.checkboxChecked && !option.checkboxIndeterminate) {
             this.$emit('input', merge(this.value, newValues))
           } else {
             this.$emit('input', minus(this.value, newValues))
@@ -192,7 +410,7 @@ export default {
         }
       } else if (this.type === 'multiple-all-options') {
         if (Array.isArray(this.value)) {
-          if (!option.checked) {
+          if (!option.checkboxChecked) {
             this.$emit('input', merge(this.value, [option.value]))
           } else {
             this.$emit('input', minus(this.value, [option.value]))
@@ -203,7 +421,9 @@ export default {
       } else if (this.type === 'single-all-options') {
         this.$emit('input', option.value)
       } else if (this.type === 'single') {
-        this.$emit('input', option.value)
+        if (!option.hasChildren) {
+          this.$emit('input', option.value)
+        }
       }
     }
   }

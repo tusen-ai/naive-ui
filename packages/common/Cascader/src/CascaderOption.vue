@@ -51,7 +51,7 @@
 <script>
 import NCheckbox from '../../Checkbox'
 import NRadio from '../../Radio'
-import { validateType, isLeaf } from './utils'
+import { validateType } from './utils'
 
 export default {
   name: 'NCascaderOption',
@@ -123,46 +123,22 @@ export default {
     checkedLeafCount: {
       type: Number,
       required: true
-    }
-  },
-  computed: {
-    isLeaf () {
-      return isLeaf(this.option)
     },
-    hasChildren () {
-      return this.children && this.children.length
+    isLeaf: {
+      type: Boolean,
+      default: false
     },
-    checkboxChecked () {
-      if (this.type === 'multiple') {
-        if (Array.isArray(this.children) && this.children.length) {
-          return this.leafCount === this.checkedLeafCount
-        } else {
-          return this.checked
-        }
-      } else {
-        return this.checked
-      }
+    hasChildren: {
+      type: Boolean,
+      default: false
     },
-    checkboxIndeterminate () {
-      if (this.type === 'multiple') {
-        return !this.checked && this.checkedLeafCount !== 0 && this.checkedLeafCount !== this.leafCount
-      } return false
+    checkboxChecked: {
+      type: Boolean,
+      default: false
     },
-    option () {
-      return {
-        id: this.id,
-        label: this.label,
-        value: this.value,
-        active: this.active,
-        checked: this.checkboxChecked,
-        indeterminate: this.checkboxIndeterminate,
-        traced: this.traced,
-        disabled: this.disabled,
-        children: this.children,
-        prevSibling: this.prevSibling,
-        nextSibling: this.nextSibling,
-        parent: this.parent
-      }
+    checkboxIndeterminate: {
+      type: Boolean,
+      default: false
     }
   },
   created () {
@@ -170,28 +146,16 @@ export default {
   },
   methods: {
     handleClick (e) {
-      this.$emit('click', e, this.option)
-      if (this.type === 'single') {
-        this.handleOptionCheck()
-      }
+      this.$emit('click', e, this)
     },
     handleMouseEnter (e) {
-      this.$emit('mouseenter', e, this.option)
+      this.$emit('mouseenter', e, this)
     },
     handleMouseLeave (e) {
-      this.$emit('mouseleave', e, this.option)
+      this.$emit('mouseleave', e, this)
     },
     handleOptionCheck (e) {
-      if (!this.disabled) {
-        // e.stopPropagation()
-        if (this.type === 'single') {
-          if (this.isLeaf) {
-            this.$emit('check', this.option, this.checked, this.indeterminate)
-          }
-        } else {
-          this.$emit('check', this.option, this.checked, this.indeterminate)
-        }
-      }
+      this.$emit('check', this)
     }
   }
 }
