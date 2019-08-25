@@ -2,7 +2,6 @@
   <div
     ref="select"
     class="n-select"
-    tabindex="0"
     @keydown.up.prevent="() => {}"
     @keydown.down.prevent="() => {}"
     @keydown.space.prevent="() => {}"
@@ -397,14 +396,14 @@ export default {
       this.handleKeyUpEnter()
     },
     handleKeyUpUp () {
-      console.log('keyup up')
+      // console.log('keyup up')
       if (this.loading) return
       if (this.active) {
         this.$refs.contentInner.prev()
       }
     },
     handleKeyUpDown () {
-      console.log('keyup down')
+      // console.log('keyup down')
       if (this.loading) return
       if (this.active) {
         this.$refs.contentInner.next()

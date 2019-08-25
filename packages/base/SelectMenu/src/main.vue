@@ -5,8 +5,9 @@
       [`n-base-select-menu--${size}-size`]: true,
       'n-base-select-menu--multiple': multiple
     }"
-    @mouseenter="handleMenuMouseEnter"
-    @mouseleave="handleMenuMouseLeave"
+    tabindex="0"
+    @keyup.up.stop="handleKeyUpUp"
+    @keyup.down.stop="handleKeyUpDown"
   >
     <n-scrollbar
       ref="scrollbar"
@@ -182,22 +183,14 @@ export default {
         this.pendingOption = option
       }
     },
-    handleOptionMouseLeave (e) {
+    handleKeyUpUp () {
+      this.prev()
     },
-    handleMenuMouseEnter (e) {
-      if (!this.filterable) {
-        const selectElement = this.$parent.$el
-        if (selectElement) {
-          selectElement.focus()
-        }
-      }
+    handleKeyUpDown () {
+      this.next()
     },
     handleOptionClick (e, option) {
       if (!option.disabled) {
-        const selectElement = this.$parent.$el
-        if (selectElement) {
-          selectElement.focus()
-        }
         this.toggleOption(option)
       }
     },

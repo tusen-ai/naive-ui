@@ -2,10 +2,13 @@
 @import './theme/default.scss';
 
 @include b(base-picker) {
+  outline: none;
   position: relative;
   box-shadow: none;
   cursor: pointer;
   border-radius: $select-border-radius;
+  width: 100%;
+  max-width: 100%;
   .n-base-picker__mark {
     position: absolute;
     top: 50%;
@@ -21,6 +24,7 @@
     opacity: 1;
   }
   .n-base-picker-label, .n-base-picker-tags {
+    outline: none;
     position: relative;
     transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
     box-sizing: border-box;
@@ -28,20 +32,21 @@
     background-color: $select-background-color;
   }
   .n-base-picker-label {
-    display: flex;
-    .n-base-picker-label__input {
-      vertical-align: baseline;
-      display: inline-block;
-      border:none;
-      width: 100%;
-      cursor: inherit;
-      background: transparent;
-      outline: none;
-      color: $select-text-color;
-      padding: 0 32px 0 14px;
-      &::placeholder {
-        color: $select-placeholder-color;
-      }
+    text-overflow: ellipsis;
+    overflow: hidden;
+    vertical-align: baseline;
+    display: inline-block;
+    border:none;
+    width: 100%;
+    white-space: nowrap;
+    cursor: inherit;
+    color: $select-text-color;
+    padding: 0 32px 0 14px;
+    &::placeholder {
+      color: $select-placeholder-color;
+    }
+    &.n-base-picker-label--placeholder {
+      color: $select-placeholder-color;
     }
   }
   .n-base-picker-tags {
@@ -111,10 +116,6 @@
     .n-base-picker-label {
       height: $small-height;
       line-height: $small-height;
-      .n-base-picker-label__input {
-        height: $small-height;
-        line-height: $small-height;
-      }
     }
   }
   &.n-base-picker--default-size, &.n-base-picker--medium-size {
@@ -138,10 +139,6 @@
     .n-base-picker-label {
       height: $medium-height;
       line-height: $medium-height;
-      .n-base-picker-label__input {
-        height: $medium-height;
-        line-height: $medium-height;
-      }
     }
   }
   &.n-base-picker--large-size {
@@ -165,10 +162,6 @@
     .n-base-picker-label {
       height: $large-height;
       line-height: $large-height;
-      .n-base-picker-label__input {
-        height: $large-height;
-        line-height: $large-height;
-      }
     }
   }
   &.n-base-picker--disabled {
@@ -184,16 +177,22 @@
       color: rgba(255, 255, 255, 0.20);
     }
     .n-base-picker-label {
-      .n-base-picker-label__input {
+      color: rgba(255, 255, 255, 0.20);
+      &::placeholder {
         color: rgba(255, 255, 255, 0.20);
-        &::placeholder {
-          color: rgba(255, 255, 255, 0.20);
-        }
       }
     }
   }
-  &:hover:not(.n-base-picker--disabled) {
-    .n-base-picker-label, .n-base-picker-tags {
+  &:not(.n-base-picker--disabled) {
+    .n-base-picker-label:hover, .n-base-picker-tags:hover {
+      box-shadow: inset 0 0 0 1px $select-border-color--active;
+    }
+    .n-base-picker-label[readonly="readonly"] {
+      user-select: none;
+    }
+  }
+  &:not(.n-base-picker--disabled) {
+    .n-base-picker-label:focus, .n-base-picker-tags:focus {
       box-shadow: inset 0 0 0 1px $select-border-color--active;
     }
   }

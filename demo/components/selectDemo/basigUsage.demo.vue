@@ -5,7 +5,6 @@
     </div>
     <div
       class="n-doc-section__view"
-      style="flex-wrap: nowrap;"
     >
       <!--EXAMPLE_START-->
       <n-select
@@ -13,13 +12,13 @@
         size="large"
         placeholder="Please Select Type"
         :options="options"
-        style="flex-grow: 1; margin-right: 12px;"
+        style="flex-grow: 1; margin-bottom: 12px;"
       />
       <n-select
         v-model="selectedValue"
         placeholder="Please Select Type"
         :options="options"
-        style="flex-grow: 1; margin-right: 12px;"
+        style="flex-grow: 1; margin-bottom: 12px;"
       />
       <n-select
         v-model="selectedValue"
@@ -41,7 +40,7 @@
 export default {
   data () {
     return {
-      selectedValue: 'song0',
+      selectedValue: null,
       options: [
         {
           label: "Everybody's Got Something to Hide Except Me and My Monkey",

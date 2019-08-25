@@ -2,6 +2,12 @@
   <div
     ref="self"
     class="n-cascader"
+    tabindex="0"
+    @keydown.up.prevent="() => {}"
+    @keydown.down.prevent="() => {}"
+    @keydown.left.prevent="() => {}"
+    @keydown.right.prevent="() => {}"
+    @keyup.esc="deactivate"
     @keyup.space="handleKeyUpSpace"
     @keyup.enter="handleKeyUpEnter"
     @keyup.up="handleKeyUpUp"
@@ -52,6 +58,7 @@
             :filterable="filterable"
             @input="handleMenuInput"
             @option-click="handleOptionClick"
+            @menu-keyup-esc="deactivate"
             @menu-keyup-space="handleKeyUpSpace"
             @menu-keyup-enter="handleKeyUpEnter"
             @menu-keyup-up="handleKeyUpUp"
@@ -334,7 +341,9 @@ export default {
       }
     },
     handleKeyUpSpace () {
-      this.handleKeyUpEnter()
+      if (!this.filterable) {
+        this.handleKeyUpEnter()
+      }
     },
     handleKeyUpEnter () {
       if (this.active && this.tracedOption && this.$refs.menu) {
@@ -345,14 +354,17 @@ export default {
           const searchMenu = menu.$refs.searchMenu
           if (searchMenu) {
             const pendingOption = searchMenu.pendingOption
-            console.log(pendingOption)
+            // console.log(pendingOption)
             menu.handleSelectOptionCheck(pendingOption)
           }
         }
+      } else if (!this.active) {
+        this.activate()
       }
     },
     handleKeyUpDown () {
-      if (this.active && !this.filterable) {
+      if (this.active && (!this.filterable || (this.filterable && !this.pattern.length))) {
+        // console.log('keyup down: cascader menu')
         const menu = this.$refs.menu
         let scrollbar = null
         if (menu && menu.$refs.scrollbar) {
@@ -391,6 +403,7 @@ export default {
           }
         }
       } else if (this.active && this.inputTypeIsSearch) {
+        console.log('keyup down: search menu')
         const menu = this.$refs.menu
         if (menu) {
           const searchMenu = menu.$refs.searchMenu
@@ -402,7 +415,8 @@ export default {
       }
     },
     handleKeyUpUp () {
-      if (this.active && this.tracedOption && !this.filterable) {
+      if ((!this.filterable || (this.filterable && !this.pattern.length)) && this.tracedOption && this.active) {
+        // console.log('keyup up: cascader menu')
         const menu = this.$refs.menu
         let scrollbar = null
         if (menu && menu.$refs.scrollbar) {
@@ -419,6 +433,7 @@ export default {
           scrollbar.scrollToElement(el)
         }
       } else if (this.active && this.inputTypeIsSearch) {
+        // console.log('keyup up: search menu')
         const menu = this.$refs.menu
         if (menu) {
           const searchMenu = menu.$refs.searchMenu
@@ -430,13 +445,13 @@ export default {
       }
     },
     handleKeyUpLeft () {
-      if (this.active && this.tracedOption && this.tracedOption.parent && !this.filterable) {
+      if (this.active && this.tracedOption && this.tracedOption.parent && (!this.filterable || (this.filterable && !this.pattern.length))) {
         this.tracedOption = this.tracedOption.parent
         this.activeId = this.tracedOption.id
       }
     },
     handleKeyUpRight () {
-      if (this.active && this.tracedOption && !this.filterable) {
+      if (this.active && this.tracedOption && (!this.filterable || (this.filterable && !this.pattern.length))) {
         const firstChild = this.tracedOption.children && this.tracedOption.children[0]
         if (firstChild) {
           this.tracedOption = firstChild
@@ -449,13 +464,7 @@ export default {
       if (this.type === 'single') {
         this.deactivate()
       } else if (this.type === 'single-all-options') {
-        const activator = this.$refs.activator
-        if (activator) {
-          activator.forceActiveInput = true
-        }
-        if (this.inputTypeIsSearch) {
-          this.deactivate()
-        }
+        this.deactivate()
       } else {
         const activator = this.$refs.activator
         this.pattern = ''
@@ -486,6 +495,7 @@ export default {
       }
     },
     handlePatternInput (e) {
+      // console.log('NBaseCascader, handlePatternInput,', e)
       this.pattern = e.target.value
     },
     removeOption (option) {
@@ -500,6 +510,7 @@ export default {
         this.$emit('input', null)
       }
       this.tracedOption = null
+      this.$el.focus()
     },
     handleMenuTypeChange (typeIsSearch) {
       this.$nextTick().then(() => {

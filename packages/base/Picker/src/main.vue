@@ -6,16 +6,18 @@
       'n-base-picker--selected': selected || (active && pattern),
       'n-base-picker--disabled': disabled,
       [`n-base-picker--${size}-size`]: true,
-      'n-base-picker--multiple': multiple
+      'n-base-picker--multiple': multiple,
+      'n-base-picker--focus': false
     }"
     @click="handleActivatorClick"
   >
-    <template v-if="multiple">
+    <template v-if="multiple && !filterable">
       <div
         class="n-base-picker-tags"
         :class="{
           'n-base-picker-tags--selected': selected
         }"
+        :tabindex="disabled ? false : '0'"
       >
         <div
           v-for="option in selectedOptions"
@@ -28,7 +30,7 @@
           <n-icon
             class="n-base-picker-tag__icon"
             type="md-close"
-            @click.stop="toggleOption(option)"
+            @click.stop="handleOptionToggle(option)"
           />
         </div>
         <div
@@ -63,16 +65,40 @@
         @clear="handleClear"
       />
     </template>
-    <template v-else>
-      <div class="n-base-picker-label">
-        <input
-          ref="singleInput"
-          :value="(active && filterable && !forceActiveInput) ? pattern : (selectedOption && selectedOption.label)"
-          class="n-base-picker-label__input"
-          :placeholder="selectedOption ? selectedOption.label : placeholder"
-          :readonly="!disabled && filterable ? false : 'readonly'"
-          @input="handlePatternInput"
-        >
+    <template v-else-if="!multiple && filterable">
+      <input
+        ref="singleInput"
+        :value="(active && filterable) ? pattern : (selectedOption && selectedOption.label)"
+        class="n-base-picker-label"
+        :placeholder="selectedOption ? selectedOption.label : placeholder"
+        :readonly="!disabled && filterable ? false : 'readonly'"
+        @input="handlePatternInput"
+      >
+      <n-base-cancel-mark
+        class="n-base-picker__mark"
+        arrow
+        :show="!remote"
+        :disabled="disabled"
+        :active="active"
+        :clearable="clearable && selected"
+        @clear="handleClear"
+      />
+    </template>
+    <template v-else-if="!multiple && !filterable">
+      <div
+        ref="singleInput"
+        :tabindex="disabled ? false : '0'"
+        class="n-base-picker-label"
+        :class="{
+          'n-base-picker-label--placeholder': !(label && label.length)
+        }"
+      >
+        <template v-if="label && label.length">
+          {{ label }}
+        </template>
+        <template v-else>
+          {{ labelPlaceholder }}
+        </template>
       </div>
       <n-base-cancel-mark
         class="n-base-picker__mark"
@@ -151,12 +177,15 @@ export default {
       default: 'medium'
     }
   },
-  data () {
-    return {
-      forceActiveInput: false
-    }
-  },
   computed: {
+    labelPlaceholder () {
+      return this.selectedOption ? this.selectedOption.label : this.placeholder
+    },
+    label () {
+      const label = (this.active && this.filterable) ? this.pattern : (this.selectedOption && this.selectedOption.label)
+      console.log(label)
+      return label
+    },
     selected () {
       if (this.multiple) return !!(Array.isArray(this.selectedOptions) && this.selectedOptions.length)
       else {
@@ -171,16 +200,17 @@ export default {
           this.blurSingleInput()
         })
       }
-      this.forceActiveInput = false
     }
   },
   methods: {
+    handleOptionToggle (option) {
+      this.toggleOption(option)
+    },
     handleClear (e) {
       this.$emit('clear', e)
     },
     handleActivatorClick () {
       this.$emit('activator-click')
-      this.forceActiveInput = false
       if (this.multiple && this.filterable) {
         this.$nextTick().then(() => {
           this.focusInputTag()
@@ -194,6 +224,7 @@ export default {
       }
     },
     handlePatternInput (e) {
+      // console.log('NBasePicker, handlePatternInput', e)
       if (this.multiple) {
         this.$nextTick().then(() => {
           const textWidth = this.$refs.inputTagMirror.getBoundingClientRect().width

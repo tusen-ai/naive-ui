@@ -22,6 +22,7 @@
           @menu-keyup-left="handleMenuKeyUpLeft"
           @menu-keyup-right="handleMenuKeyUpRight"
           @menu-keyup-space="handleMenuKeyUpSpace"
+          @menu-keyup-esc="handleMenuKeyUpEsc"
           @option-check="handleOptionCheck"
         />
       </div>
@@ -36,8 +37,6 @@
         :multiple="multiple"
         :size="size"
         :processed-options="processedSelectOptions"
-        :pending-option="pendingOption"
-        :pending-option-element="pendingOptionElement"
         :is-selected="isSelected"
         @menu-toggle-option="handleSelectMenuToggleOption"
         @menu-scroll-start="handleMenuScrollStart"
@@ -140,12 +139,6 @@ export default {
       default: false
     }
   },
-  data () {
-    return {
-      pendingOption: null,
-      pendingOptionElement: null
-    }
-  },
   computed: {
     valueSet () {
       return new Set(this.value)
@@ -199,7 +192,7 @@ export default {
       traverse(options)
       if (type === 'multiple') {
         checkedOptions.forEach(option => {
-          console.log('checkedOption', option)
+          // console.log('checkedOption', option)
           markPath(option)
         })
       }
@@ -216,7 +209,7 @@ export default {
           label => ~label.indexOf(this.pattern)
         )) {
           if (type === 'multiple' || type === 'single') {
-            console.log()
+            // console.log()
             if (option.isLeaf) {
               filteredSelectOptions.push({
                 value: option.value,
@@ -294,11 +287,12 @@ export default {
     },
     handleMenuChangePendingOption (option) {
       if (option) {
-        console.log(option.label)
+        // console.log(option.label)
       }
     },
     handleSelectMenuToggleOption (option) {
-
+      // console.log('handleSelectMenuToggleOption', option)
+      this.handleSelectOptionCheck(option)
     },
     handleMenuScrollStart () {
 
@@ -308,6 +302,9 @@ export default {
     },
     handleFilteredOptionsChange () {
       this.$emit('filtered-options-change')
+    },
+    handleMenuKeyUpEsc () {
+      this.$emit('menu-keyup-esc')
     },
     optionPath (optionId) {
       const path = []

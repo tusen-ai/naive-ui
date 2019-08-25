@@ -147,6 +147,9 @@ export default {
   methods: {
     handleClick (e) {
       this.$emit('click', e, this)
+      if (this.type === 'single') {
+        this.$emit('check', this)
+      }
     },
     handleMouseEnter (e) {
       this.$emit('mouseenter', e, this)
