@@ -9,6 +9,7 @@
     @keyup.down="handleKeyUpDown"
     @keyup.enter="handleKeyUpEnter"
     @keyup.space="handleKeyUpSpace"
+    @keyup.esc="handleKeyUpEsc"
   >
     <n-base-picker
       ref="activator"
@@ -18,7 +19,6 @@
       :placeholder="placeholder"
       :selected-option="selectedOption"
       :selected-options="selectedOptions"
-      :toggle-option="toggleOption"
       :multiple="multiple"
       :filterable="filterable"
       :remote="remote"
@@ -28,6 +28,7 @@
       :size="size"
       @click="handleActivatorClick"
       @delete-last-option="handleDeleteLastOption"
+      @delete-option="handleToggleOption"
       @pattern-input="handlePatternInput"
       @clear="handleClear"
       @blur="handlePickerBlur"
@@ -50,14 +51,14 @@
             :options="options"
             :multiple="multiple"
             :size="size"
-            :processed-options="processedOptions"
+            :linked-options="linkedOptions"
             :loading="loading"
             :no-data-content="noDataContent"
             :not-found-content="notFoundContent"
             :emit-option="emitOption"
             :filterable="filterable"
             :is-selected="isSelected"
-            @menu-toggle-option="toggleOption"
+            @menu-toggle-option="handleToggleOption"
             @menu-scroll="handleMenuScroll"
             @menu-scroll-start="handleMenuScrollStart"
             @menu-scroll-end="handleMenuScrollEnd"
@@ -77,7 +78,7 @@ import Emitter from '../../../mixins/emitter'
 import clickoutside from '../../../directives/clickoutside'
 import NBaseSelectMenu from '../../../base/SelectMenu'
 import NBasePicker from '../../../base/Picker'
-import processedOptions from '../../../utils/component/processOptions'
+import linkedOptions from '../../../utils/component/linkedOptions'
 
 export default {
   name: 'NBaseSelect',
@@ -122,10 +123,6 @@ export default {
       type: String,
       default: 'default'
     },
-    verboseTransition: {
-      type: Boolean,
-      default: false
-    },
     emitOption: {
       type: Boolean,
       default: false
@@ -168,8 +165,8 @@ export default {
   },
   computed: {
     firstOption () {
-      if (this.processedOptions && this.processedOptions.length) {
-        return this.processedOptions[0]
+      if (this.linkedOptions && this.linkedOptions.length) {
+        return this.linkedOptions[0]
       } else {
         return null
       }
@@ -180,8 +177,8 @@ export default {
       } else if (!this.filterable || !this.pattern.trim().length) return this.options
       return this.options.filter(option => this.patternMatched(option.label))
     },
-    processedOptions () {
-      return processedOptions(this.filteredOptions)
+    linkedOptions () {
+      return linkedOptions(this.filteredOptions)
     },
     valueOptionMap () {
       const valueToOption = new Map()
@@ -242,7 +239,40 @@ export default {
   },
   methods: {
     /**
-     * @param {string} value
+     * menu related methods
+     */
+    openMenu () {
+      this.pattern = ''
+      this.activate()
+      if (this.filterable) {
+        this.$refs.activator.focusPatternInput()
+      }
+    },
+    closeMenu () {
+      this.deactivate()
+    },
+    handleActivatorClick () {
+      if (this.disabled) return
+      if (!this.active) {
+        this.openMenu()
+      } else {
+        if (!this.filterable) {
+          this.closeMenu()
+        }
+      }
+    },
+    handlePickerBlur () {
+      this.closeMenu()
+    },
+    handleClickOutsideMenu (e) {
+      if (this.active) {
+        if (!this.$refs.activator.$el.contains(e.target) && !this.scrolling) {
+          this.closeMenu()
+        }
+      }
+    },
+    /**
+     * data utils methods
      */
     patternMatched (value) {
       try {
@@ -268,6 +298,17 @@ export default {
         return this.valueOptionMap.get(value) || null
       }
     },
+    isSelected (option) {
+      if (this.multiple) {
+        if (!Array.isArray(this.value)) return false
+        return 1 + this.value.findIndex(value => value === option.value)
+      } else {
+        return option.value === this.value
+      }
+    },
+    /**
+     * event utils methods
+     */
     emitChangeEvent (newValue) {
       if (this.emitOption) {
         if (this.multiple) {
@@ -285,45 +326,7 @@ export default {
         this.$emit('change', newValue)
       }
     },
-    isSelected (option) {
-      if (this.multiple) {
-        if (!Array.isArray(this.value)) return false
-        return 1 + this.value.findIndex(value => value === option.value)
-      } else {
-        return option.value === this.value
-      }
-    },
-    handleClickOutsideMenu (e) {
-      if (this.active) {
-        if (!this.$refs.activator.$el.contains(e.target) && !this.scrolling) {
-          console.log('handleClickOutsideMenu')
-          this.closeMenu()
-        }
-      }
-    },
-    openMenu () {
-      console.log('openMenu')
-      this.pattern = ''
-      this.activate()
-      if (this.filterable) {
-        this.$refs.activator.focusPatternInput()
-      }
-    },
-    closeMenu () {
-      console.log('closeMenu')
-      this.deactivate()
-    },
-    handleActivatorClick () {
-      if (this.disabled) return
-      if (!this.active) {
-        this.openMenu()
-      } else {
-        if (!this.filterable) {
-          this.closeMenu()
-        }
-      }
-    },
-    toggleOption (option) {
+    handleToggleOption (option) {
       if (this.disabled) return
       if (this.multiple) {
         if (this.remote) {
@@ -337,10 +340,8 @@ export default {
         const index = newValue.findIndex(value => value === option.value)
         if (~index) {
           newValue.splice(index, 1)
-        // this.emitChangeEvent(item, false)
         } else {
           newValue.push(option.value)
-          // this.emitChangeEvent(item, true)
           this.pattern = ''
         }
         this.$emit('input', newValue)
@@ -353,17 +354,6 @@ export default {
         this.emitChangeEvent(option.value)
         this.closeMenu()
       }
-    },
-    handleMenuScrollStart () {
-      this.scrolling = true
-    },
-    handleMenuScrollEnd () {
-      window.setTimeout(() => {
-        this.scrolling = false
-      }, 0)
-    },
-    handleMenuScroll (e, scrollContainer, scrollContent) {
-      this.$emit('scroll', e, scrollContainer, scrollContent)
     },
     handleDeleteLastOption (e) {
       if (!this.pattern.length) {
@@ -380,11 +370,34 @@ export default {
         this.onSearch(e.target.value)
       }
     },
+    handleClear (e) {
+      e.stopPropagation()
+      this.closeMenu()
+      this.$emit('input', null)
+      this.emitChangeEvent(null)
+    },
+    /**
+     * scroll events on menu
+     */
+    handleMenuScrollStart () {
+      this.scrolling = true
+    },
+    handleMenuScrollEnd () {
+      window.setTimeout(() => {
+        this.scrolling = false
+      }, 0)
+    },
+    handleMenuScroll (e, scrollContainer, scrollContent) {
+      this.$emit('scroll', e, scrollContainer, scrollContent)
+    },
+    /**
+     * keyboard events
+     */
     handleKeyUpEnter (e) {
       if (this.active) {
         const pendingOption = this.$refs.contentInner && this.$refs.contentInner.pendingOption
         if (pendingOption) {
-          this.toggleOption(pendingOption)
+          this.handleToggleOption(pendingOption)
         } else {
           this.closeMenu()
         }
@@ -394,17 +407,17 @@ export default {
       e.preventDefault()
     },
     handleKeyUpSpace (e) {
-      this.handleKeyUpEnter(e)
+      if (!this.filterable) {
+        this.handleKeyUpEnter(e)
+      }
     },
     handleKeyUpUp () {
-      // console.log('keyup up')
       if (this.loading) return
       if (this.active) {
         this.$refs.contentInner.prev()
       }
     },
     handleKeyUpDown () {
-      // console.log('keyup down')
       if (this.loading) return
       if (this.active) {
         this.$refs.contentInner.next()
@@ -415,14 +428,11 @@ export default {
         e.preventDefault()
       }
     },
-    handleClear (e) {
-      // e.stopPropagation()
+    handleKeyUpEsc (e) {
       this.closeMenu()
-      this.$emit('input', null)
-      this.emitChangeEvent(null)
-    },
-    handlePickerBlur () {
-      this.closeMenu()
+      this.$nextTick().then(() => {
+        this.$refs.activator.focusPatternInputWrapper()
+      })
     }
   }
 }

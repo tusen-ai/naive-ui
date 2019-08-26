@@ -1,7 +1,7 @@
 
 import cloneDeep from 'lodash/cloneDeep'
 
-export default function processedOptions (options) {
+export default function linkedOptions (options) {
   const decoratedOptions = cloneDeep(options).map((option, index) => {
     return {
       ...option,

@@ -25,7 +25,7 @@
         </transition>
         <template v-if="!loading">
           <div
-            v-for="option in processedOptions"
+            v-for="option in linkedOptions"
             ref="menuOptions"
             :key="option.value"
             :data-id="option.id"
@@ -65,7 +65,7 @@
           {{ noDataContent }}
         </div>
         <div
-          v-else-if="filterable && (pattern.length && !processedOptions.length)"
+          v-else-if="filterable && (pattern.length && !linkedOptions.length)"
           class="n-base-select-menu__item n-base-select-menu__item--not-found"
         >
           {{
@@ -93,7 +93,7 @@ export default {
       type: Array,
       default: null
     },
-    processedOptions: {
+    linkedOptions: {
       type: Array,
       default: null
     },
@@ -142,15 +142,15 @@ export default {
   },
   computed: {
     firstOption () {
-      // console.log(this.processedOptions)
-      if (this.processedOptions && this.processedOptions.length) {
-        return this.processedOptions[0]
+      // console.log(this.linkedOptions)
+      if (this.linkedOptions && this.linkedOptions.length) {
+        return this.linkedOptions[0]
       }
       return null
     }
   },
   watch: {
-    processedOptions () {
+    linkedOptions () {
       this.$nextTick().then(() => {
         this.hideLightBar()
         this.pendingOption = null

@@ -36,7 +36,7 @@
         :options="options"
         :multiple="multiple"
         :size="size"
-        :processed-options="processedSelectOptions"
+        :processed-options="linkedSelectOptions"
         :is-selected="isSelected"
         @menu-toggle-option="handleSelectMenuToggleOption"
         @menu-scroll-start="handleMenuScrollStart"
@@ -50,7 +50,7 @@
 import NCascaderSubmenu from './CascaderSubmenu'
 import NBaseSelectMenu from '../../../base/SelectMenu'
 import { getType, traverseWithCallback, isLeaf, minus, merge } from './utils'
-import processedOptions from '../../../utils/component/processOptions'
+import linkedOptions from '../../../utils/component/linkedOptions'
 import cloneDeep from 'lodash/cloneDeep'
 
 function processedOption (option, activeIds, tracedOption) {
@@ -226,8 +226,8 @@ export default {
       })
       return filteredSelectOptions
     },
-    processedSelectOptions () {
-      return processedOptions(this.filteredSelectOptions, this)
+    linkedSelectOptions () {
+      return linkedOptions(this.filteredSelectOptions, this)
     },
     activeOptionPath () {
       return this.optionPath(this.activeId)

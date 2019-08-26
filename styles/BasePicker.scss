@@ -2,7 +2,6 @@
 @import './theme/default.scss';
 
 @include b(base-picker) {
-  display: inline-block;
   position: relative;
   box-shadow: none;
   border-radius: $select-border-radius;
@@ -24,7 +23,7 @@
   }
   .n-base-picker-label, .n-base-picker-tags {
     cursor: pointer;
-    // outline: none;
+    outline: none;
     box-sizing: border-box;
     position: relative;
     transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
@@ -33,6 +32,7 @@
   }
   .n-base-picker-label {
     .n-base-picker-label__input {
+      outline: none;
       box-sizing: border-box;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -180,6 +180,9 @@
     }
     .n-base-picker-label__input {
       color: rgba(255, 255, 255, 0.20);
+      &.n-base-picker-label__input--placeholder {
+        color: rgba(255, 255, 255, 0.20);
+      }
       &::placeholder {
         color: rgba(255, 255, 255, 0.20);
       }
@@ -201,6 +204,7 @@
 }
 
 @include b(base-picker-input-tag) {
+  outline: none;
   position: relative;
   margin-bottom: 4px;
   display: inline-block;
@@ -209,7 +213,7 @@
   .n-base-picker-input-tag__input {
     padding: 0;
     background-color: transparent;
-    // outline: none;
+    outline: none;
     border: none;
     max-width: 100%;
     caret-color: $input-caret-color;

@@ -55,6 +55,7 @@
     <template v-if="multiple && filterable">
       <!-- multiple filterable -->
       <div
+        ref="patternInputWrapper"
         class="n-base-picker-tags"
         :class="{
           'n-base-picker-tags--selected': selected
@@ -113,6 +114,7 @@
     <template v-else-if="!multiple && filterable">
       <!-- single filterable -->
       <div
+        ref="patternInputWrapper"
         class="n-base-picker-label"
         :tabindex="(!disabled && !active) ? '0' : false"
       >
@@ -208,10 +210,6 @@ export default {
       },
       default: null
     },
-    toggleOption: {
-      type: Function,
-      default: () => {}
-    },
     multiple: {
       type: Boolean,
       default: false
@@ -283,8 +281,7 @@ export default {
       }
     },
     handleDeleteOption (option) {
-      this.$emit('delete-option')
-      this.toggleOption(option)
+      this.$emit('delete-option', option)
     },
     handlePatternKeyDownDelete (option) {
       if (!this.pattern.length) {
@@ -311,6 +308,11 @@ export default {
       console.log('handlePatternInputBlur')
       this.patternInputFocused = false
       this.handleBlur()
+    },
+    focusPatternInputWrapper () {
+      if (this.$refs.patternInputWrapper) {
+        this.$refs.patternInputWrapper.focus()
+      }
     },
     focusPatternInput () {
       if (this.$refs.patternInput) {
