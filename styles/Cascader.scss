@@ -21,7 +21,6 @@
 }
 
 .n-cascader {
-  outline: none;
   width: 100%;
 }
 
@@ -153,7 +152,6 @@
     border-radius: 9px;
     @include fade-in-scale-up-transition(cascader-cascader-menu, inherit, .2s);
     .n-cascader-submenu {
-      outline: none;
       position: relative;
       overflow: hidden;
       min-width: 182px;

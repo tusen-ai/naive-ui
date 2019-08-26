@@ -242,13 +242,16 @@ export default {
      * menu related methods
      */
     openMenu () {
-      this.pattern = ''
-      this.activate()
-      if (this.filterable) {
-        this.$refs.activator.focusPatternInput()
+      if (!this.disabled) {
+        this.pattern = ''
+        this.activate()
+        if (this.filterable) {
+          this.$refs.activator.focusPatternInput()
+        }
       }
     },
     closeMenu () {
+      this.pattern = ''
       this.deactivate()
     },
     handleActivatorClick () {

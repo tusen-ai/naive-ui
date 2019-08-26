@@ -1,20 +1,7 @@
 <template>
   <div
     class="n-cascader-submenu"
-    tabindex="0"
     @mouseleave="handleMouseLeave"
-    @keydown.up.prevent="() => {}"
-    @keydown.down.prevent="() => {}"
-    @keydown.left.prevent="() => {}"
-    @keydown.right.prevent="() => {}"
-    @keydown.space.prevent="() => {}"
-    @keyup.enter="handleKeyUpEnter"
-    @keyup.space="handleKeyUpSpace"
-    @keyup.up="handleKeyUpUp"
-    @keyup.down="handleKeyUpDown"
-    @keyup.left="handleKeyUpLeft"
-    @keyup.right="handleKeyUpRight"
-    @keyup.esc="handleKeyUpEsc"
   >
     <n-scrollbar ref="scrollbar">
       <transition name="n-cascader-light-bar--transition">
@@ -99,29 +86,8 @@ export default {
     handleMouseLeave (e) {
       this.hideLightBar()
     },
-    handleKeyUpEnter () {
-      this.$emit('menu-keyup-enter')
-    },
-    handleKeyUpSpace () {
-      this.$emit('menu-keyup-space')
-    },
-    handleKeyUpUp () {
-      this.$emit('menu-keyup-up')
-    },
-    handleKeyUpDown () {
-      this.$emit('menu-keyup-down')
-    },
-    handleKeyUpLeft () {
-      this.$emit('menu-keyup-left')
-    },
-    handleKeyUpRight () {
-      this.$emit('menu-keyup-right')
-    },
     handleOptionCheck (option) {
       this.$emit('option-check', option)
-    },
-    handleKeyUpEsc () {
-      this.$emit('menu-keyup-esc')
     }
   }
 }

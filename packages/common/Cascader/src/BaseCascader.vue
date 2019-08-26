@@ -2,12 +2,12 @@
   <div
     ref="self"
     class="n-cascader"
-    tabindex="0"
     @keydown.up.prevent="() => {}"
     @keydown.down.prevent="() => {}"
     @keydown.left.prevent="() => {}"
     @keydown.right.prevent="() => {}"
-    @keyup.esc="deactivate"
+    @keydown.space="handleKeyDownSpace"
+    @keyup.esc="handleKeyUpEsc"
     @keyup.space="handleKeyUpSpace"
     @keyup.enter="handleKeyUpEnter"
     @keyup.up="handleKeyUpUp"
@@ -24,16 +24,17 @@
       :selected="selected"
       :selected-option="selectedOption"
       :selected-options="selectedOptions"
-      :toggle-option="removeOption"
       :multiple="multiple"
       :filterable="filterable"
       :remote="remote"
       :clearable="clearable"
       :disabled="disabled"
-      @activator-click="handleActivatorClick"
-      @pattern-input-delete="handlePatternInputDelete"
-      @pattern-input="handlePatternInput"
+      @blur="handleActivatorBlur"
+      @click="handleActivatorClick"
       @clear="handleClear"
+      @delete-option="handleDeleteOption"
+      @delete-last-option="handleDeleteLastOption"
+      @pattern-input="handlePatternInput"
     />
     <div
       ref="contentContainer"
@@ -51,21 +52,11 @@
             :value="value"
             :multiple="multiple"
             :linked-options="linkedOptions"
-            :active-id="activeId"
-            :traced-option="tracedOption"
             :enable-all-options="enableAllOptions"
             :pattern="pattern"
             :filterable="filterable"
+            :expand-trigger="expandTrigger"
             @input="handleMenuInput"
-            @option-click="handleOptionClick"
-            @menu-keyup-esc="deactivate"
-            @menu-keyup-space="handleKeyUpSpace"
-            @menu-keyup-enter="handleKeyUpEnter"
-            @menu-keyup-up="handleKeyUpUp"
-            @menu-keyup-down="handleKeyUpDown"
-            @menu-keyup-left="handleKeyUpLeft"
-            @menu-keyup-right="handleKeyUpRight"
-            @menu-type-change="handleMenuTypeChange"
           />
         </transition>
       </div>
@@ -144,8 +135,6 @@ export default {
   data () {
     return {
       labelPlaceholder: 'Please Select',
-      activeId: null,
-      tracedOption: null,
       pattern: '',
       selected: true,
       inputTypeIsSearch: false
@@ -153,12 +142,6 @@ export default {
   },
   computed: {
     type: getType,
-    expandTriggeredByHover () {
-      return this.expandTrigger === 'hover'
-    },
-    expandTriggeredByClick () {
-      return this.expandTrigger === 'click'
-    },
     selectedOptions () {
       if (this.multiple) {
         let options = []
@@ -276,9 +259,6 @@ export default {
     }
   },
   watch: {
-    tracedOption (v) {
-      // console.log('tracedOption', v)
-    },
     pattern () {
       this.handlePatternChange()
     },
@@ -291,53 +271,29 @@ export default {
       this.$nextTick().then(() => {
         this.updatePosition()
       })
-    },
-    options () {
-      this.tracedOption = null
-      this.activeId = null
-    },
-    active (newActive) {
-      if (!newActive) {
-        this.tracedOption = null
-        this.pattern = ''
-      } else {
-        if (!this.filterable) {
-          this.$nextTick().then(() => {
-            const contentContainer = this.$refs.contentContainer
-            if (contentContainer) {
-              const firstSubmenu = contentContainer.querySelector('.n-cascader-submenu')
-              if (firstSubmenu) firstSubmenu.focus()
-            }
-          })
-        }
-      }
     }
   },
   methods: {
-    handleMenuClickOutside (e) {
-      if (!this.$refs.activator.$el.contains(e.target)) {
-        this.deactivate()
-      }
-    },
-    toggleMenu () {
-      if (this.disabled) {
-        this.deactivate()
-        return
-      }
-      this.toggle()
-    },
     openMenu () {
-      this.activate()
-    },
-    handleOptionMouseEnter (e, option) {
-      if (this.expandTriggeredByHover && !option.disabled) {
-        this.activeId = option.id
+      if (!this.disabled) {
+        this.pattern = ''
+        this.activate()
+        if (this.filterable) {
+          this.$refs.activator.focusPatternInput()
+        }
       }
     },
-    handleOptionClick (e, option, menu) {
-      if (this.expandTriggeredByClick && !option.disabled) {
-        this.activeId = option.id
-        this.tracedOption = option
+    closeMenu () {
+      this.deactivate()
+      this.pattern = ''
+      this.tracedOption = null
+      this.activeId = null
+    },
+    handleMenuClickOutside (e) {
+      if (this.active) {
+        if (!this.$refs.activator.$el.contains(e.target)) {
+          this.closeMenu()
+        }
       }
     },
     handleKeyUpSpace () {
@@ -346,131 +302,46 @@ export default {
       }
     },
     handleKeyUpEnter () {
-      if (this.active && this.tracedOption && this.$refs.menu) {
-        this.$refs.menu.handleOptionCheck(this.tracedOption)
-      } else if (this.active && this.inputTypeIsSearch) {
-        const menu = this.$refs.menu
-        if (menu) {
-          const searchMenu = menu.$refs.searchMenu
-          if (searchMenu) {
-            const pendingOption = searchMenu.pendingOption
-            // console.log(pendingOption)
-            menu.handleSelectOptionCheck(pendingOption)
-          }
-        }
-      } else if (!this.active) {
-        this.activate()
-      }
-    },
-    handleKeyUpDown () {
-      if (this.active && (!this.filterable || (this.filterable && !this.pattern.length))) {
-        // console.log('keyup down: cascader menu')
-        const menu = this.$refs.menu
-        let scrollbar = null
-        if (menu && menu.$refs.scrollbar) {
-          scrollbar = menu.$refs.scrollbar
-        }
-        if (this.tracedOption) {
-          let optionIterator = this.tracedOption.nextSibling
-          while (optionIterator !== this.tracedOption && optionIterator.disabled) {
-            optionIterator = optionIterator.nextSibling
-          }
-          this.tracedOption = optionIterator
-          this.activeId = this.tracedOption.id
-          const el = menu && menu.$el && menu.$el.querySelector(`[data-id="${this.activeId}"]`)
-          if (scrollbar && el) {
-            scrollbar.scrollToElement(el)
-          }
-        } else {
-          const firstOption = this.$refs.menu && this.$refs.menu.firstOption
-          if (!firstOption) {
-            return
-          }
-          let optionIterator = firstOption
-          while (optionIterator.disabled) {
-            optionIterator = optionIterator.nextSibling
-            if (optionIterator === firstOption) {
-              break
-            }
-          }
-          this.tracedOption = optionIterator
-          // console.log('this.tracedOption', this.tracedOption)
-          this.activeId = this.tracedOption.id
-          const el = menu && menu.$el && menu.$el.querySelector(`[data-id="${this.activeId}"]`)
-          // console.log('el', el)
-          if (scrollbar && el) {
-            scrollbar.scrollToElement(el)
-          }
-        }
-      } else if (this.active && this.inputTypeIsSearch) {
-        console.log('keyup down: search menu')
-        const menu = this.$refs.menu
-        if (menu) {
-          const searchMenu = menu.$refs.searchMenu
-          if (searchMenu) {
-            searchMenu.next()
-            // console.log(searchMenu.pendingOption)
-          }
+      if (!this.active) {
+        this.openMenu()
+      } else {
+        if (this.$refs.menu) {
+          this.$refs.menu.enter()
         }
       }
     },
     handleKeyUpUp () {
-      if ((!this.filterable || (this.filterable && !this.pattern.length)) && this.tracedOption && this.active) {
-        // console.log('keyup up: cascader menu')
-        const menu = this.$refs.menu
-        let scrollbar = null
-        if (menu && menu.$refs.scrollbar) {
-          scrollbar = menu.$refs.scrollbar
-        }
-        let optionIterator = this.tracedOption.prevSibling
-        while (optionIterator !== this.tracedOption && optionIterator.disabled) {
-          optionIterator = optionIterator.prevSibling
-        }
-        this.tracedOption = optionIterator
-        this.activeId = this.tracedOption.id
-        const el = menu && menu.$el && menu.$el.querySelector(`[data-id="${this.activeId}"]`)
-        if (scrollbar && el) {
-          scrollbar.scrollToElement(el)
-        }
-      } else if (this.active && this.inputTypeIsSearch) {
-        // console.log('keyup up: search menu')
-        const menu = this.$refs.menu
-        if (menu) {
-          const searchMenu = menu.$refs.searchMenu
-          if (searchMenu) {
-            searchMenu.prev()
-            // console.log(searchMenu.pendingOption)
-          }
-        }
+      if (this.active && this.$refs.menu) {
+        this.$refs.menu.prev()
+      }
+    },
+    handleKeyUpDown () {
+      if (this.active && this.$refs.menu) {
+        this.$refs.menu.next()
       }
     },
     handleKeyUpLeft () {
-      if (this.active && this.tracedOption && this.tracedOption.parent && (!this.filterable || (this.filterable && !this.pattern.length))) {
-        this.tracedOption = this.tracedOption.parent
-        this.activeId = this.tracedOption.id
+      if (this.active && this.$refs.menu) {
+        this.$refs.menu.shallow()
       }
     },
     handleKeyUpRight () {
-      if (this.active && this.tracedOption && (!this.filterable || (this.filterable && !this.pattern.length))) {
-        const firstChild = this.tracedOption.children && this.tracedOption.children[0]
-        if (firstChild) {
-          this.tracedOption = firstChild
-          this.activeId = firstChild.id
-        }
+      if (this.active && this.$refs.menu) {
+        this.$refs.menu.deep()
       }
     },
     handleMenuInput (value) {
       this.$emit('input', value)
       if (this.type === 'single') {
-        this.deactivate()
+        this.closeMenu()
       } else if (this.type === 'single-all-options') {
-        this.deactivate()
+        this.closeMenu()
       } else {
         const activator = this.$refs.activator
         this.pattern = ''
         if (activator) {
           this.$nextTick().then(() => {
-            activator.focusInputTag()
+            activator.focusPatternInput()
           })
         }
       }
@@ -478,14 +349,21 @@ export default {
     handleClear () {
       this.$emit('input', null)
     },
+    handleActivatorBlur () {
+      this.closeMenu()
+    },
     handleActivatorClick () {
       if (this.filterable) {
         this.openMenu()
       } else {
-        this.toggleMenu()
+        if (this.active) {
+          this.closeMenu()
+        } else {
+          this.openMenu()
+        }
       }
     },
-    handlePatternInputDelete () {
+    handleDeleteLastOption () {
       if (this.multiple) {
         if (Array.isArray(this.value)) {
           const newValue = this.value
@@ -498,7 +376,7 @@ export default {
       // console.log('NBaseCascader, handlePatternInput,', e)
       this.pattern = e.target.value
     },
-    removeOption (option) {
+    handleDeleteOption (option) {
       if (this.multiple && Array.isArray(this.value)) {
         const index = this.value.findIndex(value => value === option.value)
         if (~index) {
@@ -512,28 +390,18 @@ export default {
       this.tracedOption = null
       this.$el.focus()
     },
-    handleMenuTypeChange (typeIsSearch) {
-      this.$nextTick().then(() => {
-        this.inputTypeIsSearch = typeIsSearch
-        if (typeIsSearch) {
-          const el = this.$refs.menu.$refs.searchMenu.$el
-          this.updatePosition(
-            el,
-            (el, activatorRect) => {
-              el.style.minWidth = activatorRect.width + 'px'
-            }
-          )
-        } else {
-          this.updatePosition()
-        }
-        // debugger
-      })
-    },
     handlePatternChange () {
       this.$nextTick().then(() => {
         this.updatePosition()
-        // debugger
       })
+    },
+    handleKeyUpEsc () {
+      this.closeMenu()
+    },
+    handleKeyDownSpace (e) {
+      if (!this.filterable) {
+        e.preventDefault()
+      }
     }
   }
 }

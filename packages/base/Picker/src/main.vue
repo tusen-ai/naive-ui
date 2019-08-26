@@ -15,10 +15,6 @@
       <!-- multiple -->
       <div
         class="n-base-picker-tags"
-        :class="{
-          'n-base-picker-tags--selected': selected,
-          'n-base-picker-tags--focused': patternInputFocused
-        }"
         :tabindex="disabled ? false : '0'"
         @blur="handleBlur"
       >
@@ -57,9 +53,6 @@
       <div
         ref="patternInputWrapper"
         class="n-base-picker-tags"
-        :class="{
-          'n-base-picker-tags--selected': selected
-        }"
         :tabindex="(disabled || active) ? false : '0'"
       >
         <div
@@ -246,7 +239,7 @@ export default {
     },
     label () {
       const label = (this.selectedOption && this.selectedOption.label) || ''
-      console.log(label)
+      // console.log(label)
       return label
     },
     selected () {
@@ -301,11 +294,11 @@ export default {
       }
     },
     handlePatternInputFocus (e) {
-      console.log('handlePatternInputFocus')
+      // console.log('handlePatternInputFocus')
       this.patternInputFocused = true
     },
     handlePatternInputBlur (e) {
-      console.log('handlePatternInputBlur')
+      // console.log('handlePatternInputBlur')
       this.patternInputFocused = false
       this.handleBlur()
     },
@@ -316,13 +309,13 @@ export default {
     },
     focusPatternInput () {
       if (this.$refs.patternInput) {
-        console.log('focusPatternInput')
+        // console.log('focusPatternInput')
         this.$refs.patternInput.focus()
       }
     },
     blurPatternInput () {
       if (this.$refs.patternInput) {
-        console.log('blurPatternInput')
+        // console.log('blurPatternInput')
         this.$refs.patternInput.blur()
       }
     }

@@ -1,10 +1,11 @@
 <template>
   <div
     class="n-cascader-menu"
+    @mousedown.prevent="() => {}"
   >
     <transition name="n-cascader-cascader-menu--transition">
       <div
-        v-if="!searchMenuActive"
+        v-if="!selectMenuActive"
         class="n-cascader-cascader-menu"
       >
         <n-cascader-submenu
@@ -16,27 +17,21 @@
           @option-click="handleOptionClick"
           @option-mouseenter="handleOptionMouseEnter"
           @option-mouseleave="handleOptionMouseLeave"
-          @menu-keyup-enter="handleMenuKeyUpEnter"
-          @menu-keyup-up="handleMenuKeyUpUp"
-          @menu-keyup-down="handleMenuKeyUpDown"
-          @menu-keyup-left="handleMenuKeyUpLeft"
-          @menu-keyup-right="handleMenuKeyUpRight"
-          @menu-keyup-space="handleMenuKeyUpSpace"
-          @menu-keyup-esc="handleMenuKeyUpEsc"
           @option-check="handleOptionCheck"
         />
       </div>
     </transition>
     <transition name="n-cascader-select-menu--transition">
       <n-base-select-menu
-        v-if="searchMenuActive"
-        ref="searchMenu"
+        v-if="selectMenuActive"
+        ref="selectMenu"
         class="n-cascader-select-menu"
+        filterable
         :pattern="pattern"
         :options="options"
         :multiple="multiple"
         :size="size"
-        :processed-options="linkedSelectOptions"
+        :linked-options="linkedSelectOptions"
         :is-selected="isSelected"
         @menu-toggle-option="handleSelectMenuToggleOption"
         @menu-scroll-start="handleMenuScrollStart"
@@ -118,14 +113,6 @@ export default {
       validator: () => true,
       default: null
     },
-    activeId: {
-      validator: () => true,
-      default: null
-    },
-    tracedOption: {
-      type: Object,
-      default: null
-    },
     linkedOptions: {
       type: Array,
       required: true
@@ -137,6 +124,16 @@ export default {
     enableAllOptions: {
       type: Boolean,
       default: false
+    },
+    expandTrigger: {
+      type: String,
+      default: 'click'
+    }
+  },
+  data () {
+    return {
+      tracedOption: null,
+      activeId: null
     }
   },
   computed: {
@@ -198,7 +195,7 @@ export default {
       }
       return options
     },
-    searchMenuActive () {
+    selectMenuActive () {
       return this.filterable && this.pattern && this.pattern.trim().length
     },
     filteredSelectOptions () {
@@ -265,15 +262,21 @@ export default {
         }
       }
       return idOptionMap
+    },
+    expandTriggeredByHover () {
+      return this.expandTrigger === 'hover'
+    },
+    expandTriggeredByClick () {
+      return this.expandTrigger === 'click'
     }
   },
   watch: {
     filteredSelectOptions () {
       this.$emit('menu-filtered-options-change')
     },
-    searchMenuActive (searchMenuActive) {
+    selectMenuActive (selectMenuActive) {
       this.$nextTick().then(() => {
-        this.handleMenuTypeChange(searchMenuActive)
+        this.handleMenuTypeChange(selectMenuActive)
       })
     }
   },
@@ -303,11 +306,9 @@ export default {
     handleFilteredOptionsChange () {
       this.$emit('filtered-options-change')
     },
-    handleMenuKeyUpEsc () {
-      this.$emit('menu-keyup-esc')
-    },
     optionPath (optionId) {
       const path = []
+      if (optionId === null) return path
       let done = false
       function traverseOptions (options) {
         if (!Array.isArray(options) || !options.length) return
@@ -329,33 +330,33 @@ export default {
       return path
     },
     handleOptionMouseEnter (e, option) {
-      this.$emit('option-mouse-enter', e, option)
+      if (this.expandTriggeredByHover && !option.disabled) {
+        this.updateActiveId(option.id)
+      }
     },
     handleOptionMouseLeave (e, option) {
     },
     handleOptionClick (e, option, menu) {
-      this.$emit('option-click', e, option, menu)
+      if (this.expandTriggeredByClick && !option.disabled) {
+        this.updateActiveId(option.id)
+        this.updateTracedOption(option)
+      }
     },
-    handleMenuKeyUpEnter () {
-      this.$emit('menu-keyup-enter')
-    },
-    handleMenuKeyUpSpace () {
-      this.$emit('menu-keyup-space')
-    },
-    handleMenuKeyUpUp () {
-      this.$emit('menu-keyup-up')
-    },
-    handleMenuKeyUpDown () {
-      this.$emit('menu-keyup-down')
-    },
-    handleMenuKeyUpLeft () {
-      this.$emit('menu-keyup-left')
-    },
-    handleMenuKeyUpRight () {
-      this.$emit('menu-keyup-right')
-    },
-    handleMenuTypeChange (typeIsSearch) {
-      this.$emit('menu-type-change', typeIsSearch)
+    handleMenuTypeChange (typeisSelect) {
+      this.$nextTick().then(() => {
+        this.typeIsSelect = typeisSelect
+        if (typeisSelect) {
+          const el = this.$refs.selectMenu.$el
+          this.$parent.updatePosition(
+            el,
+            (el, activatorRect) => {
+              el.style.minWidth = activatorRect.width + 'px'
+            }
+          )
+        } else {
+          this.$parent.updatePosition()
+        }
+      })
     },
     handleSelectOptionCheck (option) {
       if (option.disabled) return
@@ -422,6 +423,94 @@ export default {
           this.$emit('input', option.value)
         }
       }
+    },
+    deep () {
+      console.log('deep: cascader menu')
+      if (this.tracedOption) {
+        const firstChild = this.tracedOption.children && this.tracedOption.children[0]
+        if (firstChild) {
+          this.updateTracedOption(firstChild)
+          this.updateActiveId(firstChild.id)
+        }
+      }
+    },
+    shallow () {
+      console.log('shallow: cascader menu')
+      if (this.tracedOption && this.tracedOption.parent) {
+        this.updateTracedOption(this.tracedOption.parent)
+        this.updateActiveId(this.tracedOption.id)
+      }
+    },
+    updateTracedOption (option) {
+      this.tracedOption = option
+    },
+    updateActiveId (id) {
+      this.activeId = id
+    },
+    prev () {
+      if (this.tracedOption && (!this.filterable || (this.filterable && !this.pattern.length))) {
+        console.log('prev: cascader menu')
+        let optionIterator = this.tracedOption.prevSibling
+        while (optionIterator !== this.tracedOption && optionIterator.disabled) {
+          optionIterator = optionIterator.prevSibling
+        }
+        this.updateTracedOption(optionIterator)
+        this.updateActiveId(optionIterator.id)
+      } else if (this.typeIsSelect) {
+        console.log('prev: search menu')
+        const selectMenu = this.$refs.selectMenu
+        if (selectMenu) {
+          selectMenu.prev()
+        }
+      }
+    },
+    next () {
+      if (!this.filterable || (this.filterable && !this.pattern.length)) {
+        console.log('next: cascader menu')
+        if (this.tracedOption) {
+          let optionIterator = this.tracedOption.nextSibling
+          while (optionIterator !== this.tracedOption && optionIterator.disabled) {
+            optionIterator = optionIterator.nextSibling
+          }
+          this.updateTracedOption(optionIterator)
+          this.updateActiveId(optionIterator.id)
+        } else {
+          const firstOption = this.firstOption
+          if (!firstOption) {
+            return
+          }
+          let optionIterator = firstOption
+          while (optionIterator.disabled) {
+            optionIterator = optionIterator.nextSibling
+            if (optionIterator === firstOption) {
+              break
+            }
+          }
+          this.updateTracedOption(optionIterator)
+          this.updateActiveId(optionIterator.id)
+        }
+      } else if (this.typeIsSelect) {
+        console.log('next: search menu')
+        const selectMenu = this.$refs.selectMenu
+        if (selectMenu) {
+          selectMenu.next()
+        }
+      }
+    },
+    enter () {
+      if (this.typeIsSelect) {
+        const selectMenu = this.$refs.selectMenu
+        if (selectMenu) {
+          const pendingOption = selectMenu.pendingOption
+          // console.log(pendingOption)
+          this.handleSelectOptionCheck(pendingOption)
+          return true
+        }
+      } else if (this.tracedOption) {
+        this.handleOptionCheck(this.tracedOption)
+        return true
+      }
+      return false
     }
   }
 }
