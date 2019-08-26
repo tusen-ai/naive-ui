@@ -15,7 +15,7 @@
         style="flex-grow: 1; margin-right: 12px;"
         filterable
         multiple
-        enable-all-options
+        all
       />
       <!--EXAMPLE_END-->
     </div>

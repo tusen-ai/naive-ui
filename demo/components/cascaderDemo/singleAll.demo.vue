@@ -12,7 +12,7 @@
         v-model="value"
         placeholder="Please Select Something"
         :options="options"
-        enable-all-options
+        all
         style="flex-grow: 1; margin-right: 12px;"
       />
       <!--EXAMPLE_END-->

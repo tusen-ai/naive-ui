@@ -39,7 +39,7 @@ export default {
       type: Boolean,
       default: false
     },
-    enableAllOptions: {
+    all: {
       type: Boolean,
       default: false
     }
@@ -67,7 +67,7 @@ export default {
       setactive: this.handleSetActive.bind(this)
     }
     return h(BaseCascader, {
-      props: { ...this.$props, active: this.active, placement: 'bottom-start' },
+      props: { ...this.$props, enableAllOptions: this.$props.all, active: this.active, placement: 'bottom-start' },
       on
     })
   }
