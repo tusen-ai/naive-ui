@@ -10,7 +10,7 @@
       <!--EXAMPLE_START-->
       <n-cascader
         v-model="value"
-        placeholder="Please Select Type"
+        placeholder="Please Select Something"
         :options="options"
         style="flex-grow: 1; margin-right: 12px;"
       />

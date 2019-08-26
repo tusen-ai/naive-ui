@@ -50,7 +50,7 @@ import Anchor from './packages/common/Anchor'
 import Dropdown from './packages/common/Dropdown'
 import Popselect from './packages/common/Popselect'
 import App from './packages/common/App'
-import CancelMark from './packages/common/CancelMark'
+import CancelMark from './packages/base/CancelMark'
 
 function install (Vue) {
   Card.install(Vue)

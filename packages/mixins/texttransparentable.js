@@ -25,6 +25,8 @@ export default {
     document.querySelector('head').appendChild(this.cssNode)
   },
   beforeDestroy () {
-    document.querySelector('head').removeChild(this.cssNode)
+    window.setTimeout(() => {
+      document.querySelector('head').removeChild(this.cssNode)
+    }, 1000)
   }
 }

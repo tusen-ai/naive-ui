@@ -11,7 +11,7 @@ function existsInClassList (el, searchPattern, alsoSearchDescendant = false) {
       existsInClassList(el, searchPattern, true)
     )
   }
-  return Array.from(el.classList).some(className => 1 + className.search(searchPattern))
+  return Array.from(el.classList).some(className => 1 + className.indexOf(searchPattern))
 }
 
 async function sleep (ms = 0) {

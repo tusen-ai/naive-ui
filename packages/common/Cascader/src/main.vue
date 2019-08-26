@@ -2,7 +2,7 @@
 /**
  * Warning: There are some potential problems if there are too many items!
  */
-import MultipleCascader from './MultipleCascader'
+import BaseCascader from './BaseCascader'
 
 export default {
   name: 'NCascader',
@@ -39,7 +39,7 @@ export default {
       type: Boolean,
       default: false
     },
-    enableAllOptions: {
+    all: {
       type: Boolean,
       default: false
     }
@@ -66,8 +66,8 @@ export default {
       change: this.handleChange.bind(this),
       setactive: this.handleSetActive.bind(this)
     }
-    return h(MultipleCascader, {
-      props: { ...this.$props, active: this.active, placement: 'bottom-start' },
+    return h(BaseCascader, {
+      props: { ...this.$props, enableAllOptions: this.$props.all, active: this.active, placement: 'bottom-start' },
       on
     })
   }

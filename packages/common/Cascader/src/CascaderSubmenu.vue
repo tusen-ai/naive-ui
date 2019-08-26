@@ -1,14 +1,7 @@
 <template>
   <div
     class="n-cascader-submenu"
-    tabindex="0"
     @mouseleave="handleMouseLeave"
-    @keyup.enter="handleKeyUpEnter"
-    @keyup.space="handleKeyUpSpace"
-    @keyup.up="handleKeyUpUp"
-    @keyup.down="handleKeyUpDown"
-    @keyup.left="handleKeyUpLeft"
-    @keyup.right="handleKeyUpRight"
   >
     <n-scrollbar ref="scrollbar">
       <transition name="n-cascader-light-bar--transition">
@@ -41,6 +34,10 @@
         :checked="option.checked"
         :checked-leaf-count="option.checkedLeafCount"
         :leaf-count="option.leafCount"
+        :is-leaf="option.isLeaf"
+        :checkbox-checked="option.checkboxChecked"
+        :checkbox-indeterminate="option.checkboxIndeterminate"
+        :has-children="option.hasChildren"
         @check="handleOptionCheck"
         @click="handleOptionClick"
         @mouseenter="handleOptionMouseEnter"
@@ -51,11 +48,12 @@
 </template>
 
 <script>
-import NCascaderOption from './CasOption.vue'
+import NCascaderOption from './CascaderOption.vue'
 import NScrollbar from '../../Scrollbar'
 import withlightbar from '../../../mixins/withlightbar'
 
 export default {
+  name: 'NCascaderSubmenu',
   components: {
     NCascaderOption,
     NScrollbar
@@ -88,26 +86,8 @@ export default {
     handleMouseLeave (e) {
       this.hideLightBar()
     },
-    handleKeyUpEnter () {
-      this.$emit('menu-keyup-enter', this)
-    },
-    handleKeyUpSpace () {
-      this.$emit('menu-keyup-space', this)
-    },
-    handleKeyUpUp () {
-      this.$emit('menu-keyup-up', this)
-    },
-    handleKeyUpDown () {
-      this.$emit('menu-keyup-down', this)
-    },
-    handleKeyUpLeft () {
-      this.$emit('menu-keyup-left', this)
-    },
-    handleKeyUpRight () {
-      this.$emit('menu-keyup-right', this)
-    },
-    handleOptionCheck (...params) {
-      this.$emit('option-check', ...params)
+    handleOptionCheck (option) {
+      this.$emit('option-check', option)
     }
   }
 }

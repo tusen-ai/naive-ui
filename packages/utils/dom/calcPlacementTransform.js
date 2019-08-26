@@ -1,5 +1,8 @@
 export default function calcPlacementTransform (placement, activatorRect, contentRect) {
-  let contentLeft, contentTop
+  let contentLeft = null
+  let contentTop = null
+  let contentRight = null
+  let contentBottom = null
   let suggesetedTransfromOrigin = 'none'
   if (placement === 'top-start') {
     contentTop = activatorRect.top - contentRect.height
@@ -32,13 +35,16 @@ export default function calcPlacementTransform (placement, activatorRect, conten
   } else if (placement === 'bottom-start') {
     const toWindowBottom = window.innerHeight - activatorRect.bottom
     if (contentRect.height > toWindowBottom) {
-      contentTop = activatorRect.top - contentRect.height
+      contentBottom = toWindowBottom + activatorRect.height
+      contentTop = null
       suggesetedTransfromOrigin = 'bottom left'
     } else {
       contentTop = activatorRect.top + activatorRect.height
+      contentBottom = null
       suggesetedTransfromOrigin = 'top left'
     }
     contentLeft = activatorRect.left
+    contentRight = null
   } else if (placement === 'bottom-end') {
     contentTop = activatorRect.top + activatorRect.height
     contentLeft = activatorRect.left + activatorRect.width - contentRect.width
@@ -53,5 +59,10 @@ export default function calcPlacementTransform (placement, activatorRect, conten
    * However, I found that the dom delay is very serious.
    * So I decide to use left and top for now.
    */
-  return [{ left: `${contentLeft}px`, top: `${contentTop}px` }, suggesetedTransfromOrigin]
+  return [{
+    left: contentLeft && `${contentLeft}px`,
+    top: contentTop && `${contentTop}px`,
+    right: contentRight && `${contentTop}px`,
+    bottom: contentBottom && `${contentBottom}px`
+  }, suggesetedTransfromOrigin]
 }

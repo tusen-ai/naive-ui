@@ -11,7 +11,7 @@
       <n-cascader
         v-model="value"
         multiple
-        placeholder="Please Select Type"
+        placeholder="Please Select Something"
         :options="options"
         style="flex-grow: 1; margin-right: 12px;"
       />
@@ -33,7 +33,7 @@ function genOptions (depth = 3, iterator = 1, prefix = '') {
       options.push({
         value: `${i}`,
         label: `${i}`,
-        disabled: i % 5 === 0,
+        disabled: i % 5 === 0 || i === 1,
         children: genOptions(depth, iterator + 1, '' + i)
       })
     } else if (iterator === depth) {
@@ -41,7 +41,6 @@ function genOptions (depth = 3, iterator = 1, prefix = '') {
         value: `${prefix}-${i}`,
         label: `${prefix}-${i}`,
         disabled: i % 5 === 0
-
       })
     } else {
       options.push({

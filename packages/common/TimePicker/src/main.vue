@@ -26,58 +26,61 @@
           >
             <div class="n-time-picker__selection-wrapper">
               <div
-                ref="hours"
                 class="n-time-picker__hour"
               >
-                <div
-                  v-for="hour in hours"
-                  :key="hour"
-                  class="n-time-picker__item"
-                  :class="{
-                    'n-time-picker__item--active':
-                      hour === computedHour
-                  }"
-                  @click="setHour(hour)"
-                >
-                  {{ hour }}
-                </div>
+                <n-scrollbar ref="hours">
+                  <div
+                    v-for="hour in hours"
+                    :key="hour"
+                    class="n-time-picker__item"
+                    :class="{
+                      'n-time-picker__item--active':
+                        hour === computedHour
+                    }"
+                    @click="setHour(hour)"
+                  >
+                    {{ hour }}
+                  </div>
+                </n-scrollbar>
               </div>
               <div
-                ref="minutes"
                 class="n-time-picker__minute"
               >
-                <div
-                  v-for="minute in minutes"
-                  :key="minute"
-                  class="n-time-picker__item"
-                  :class="{
-                    'n-time-picker__item--active':
-                      minute === computedMinute
-                  }"
-                  @click="setMinute(minute)"
-                >
-                  {{ minute }}
-                </div>
+                <n-scrollbar ref="minutes">
+                  <div
+                    v-for="minute in minutes"
+                    :key="minute"
+                    class="n-time-picker__item"
+                    :class="{
+                      'n-time-picker__item--active':
+                        minute === computedMinute
+                    }"
+                    @click="setMinute(minute)"
+                  >
+                    {{ minute }}
+                  </div>
+                </n-scrollbar>
               </div>
               <div
-                ref="seconds"
                 class="n-time-picker__hour"
               >
-                <div
-                  v-for="second in seconds"
-                  :key="second"
-                  class="n-time-picker__item"
-                  :class="{
-                    'n-time-picker__item--active':
-                      second === computedSecond,
-                    'n-time-picker__item--disabled':
-                      validator &&
-                      !validator(computedHour, computedMinute, second)
-                  }"
-                  @click="setSecond(second)"
-                >
-                  {{ second }}
-                </div>
+                <n-scrollbar ref="seconds">
+                  <div
+                    v-for="second in seconds"
+                    :key="second"
+                    class="n-time-picker__item"
+                    :class="{
+                      'n-time-picker__item--active':
+                        second === computedSecond,
+                      'n-time-picker__item--disabled':
+                        validator &&
+                        !validator(computedHour, computedMinute, second)
+                    }"
+                    @click="setSecond(second)"
+                  >
+                    {{ second }}
+                  </div>
+                </n-scrollbar>
               </div>
             </div>
             <div class="n-time-picker__actions">
@@ -106,6 +109,7 @@
 </template>
 
 <script>
+import NScrollbar from '../../Scrollbar'
 import NInput from '../../Input'
 import moment from 'moment'
 import detachable from '../../../mixins/detachable'
@@ -148,7 +152,8 @@ const TIME_CONST = {
 export default {
   name: 'NTimePicker',
   components: {
-    NInput
+    NInput,
+    NScrollbar
   },
   directives: {
     clickoutside
@@ -253,22 +258,22 @@ export default {
       this.refreshTimeString()
     },
     scrollTimer () {
-      if (this.$refs.hours) {
-        const hour = this.$refs.hours.querySelector('.n-time-picker__item--active')
+      if (this.$refs.hours.$el) {
+        const hour = this.$refs.hours.$el.querySelector('.n-time-picker__item--active')
         if (hour) {
-          this.$refs.hours.scrollTo(0, hour.offsetTop)
+          this.$refs.hours.$refs.scrollContainer.scrollTo(0, hour.offsetTop)
         }
       }
-      if (this.$refs.minutes) {
-        const minute = this.$refs.minutes.querySelector('.n-time-picker__item--active')
+      if (this.$refs.minutes.$el) {
+        const minute = this.$refs.minutes.$el.querySelector('.n-time-picker__item--active')
         if (minute) {
-          this.$refs.minutes.scrollTo(0, minute.offsetTop)
+          this.$refs.minutes.$refs.scrollContainer.scrollTo(0, minute.offsetTop)
         }
       }
-      if (this.$refs.seconds) {
-        const second = this.$refs.seconds.querySelector('.n-time-picker__item--active')
+      if (this.$refs.seconds.$el) {
+        const second = this.$refs.seconds.$el.querySelector('.n-time-picker__item--active')
         if (second) {
-          this.$refs.seconds.scrollTo(0, second.offsetTop)
+          this.$refs.seconds.$refs.scrollContainer.scrollTo(0, second.offsetTop)
         }
       }
     },

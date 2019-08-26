@@ -4,7 +4,6 @@
 @include b(input-number) {
   position: relative;
   border-radius: $input-number-border-radius;
-  background-color: $input-number-background-color;
   width: 152px;
   display: inline-block;
   vertical-align: bottom;
@@ -80,7 +79,7 @@
     }
     &:active {
       transition: color .3s $default-cubic-bezier, background-color .15s $default-cubic-bezier;
-      background-color: rgba(99,226,183,0.12)
+      background-color: rgba(99, 226, 183, 0.1);
     }
     &.n-input-bumber__button--disabled {
       background-color: rgba(221,238,247,0.3);
@@ -99,17 +98,18 @@
     border-bottom-right-radius: $input-number-border-radius;
   }
   .n-input-number__input {
+    border-radius: $input-number-border-radius;
+    background-color: $input-number-background-color;
     &:hover~.n-input-number__border-layer {
       box-shadow: inset 0 0 0px 1px $main-color;
     }
     &:focus {
-      background-color: rgba(99,226,183,0.12);
+      background-color: rgba(99,226,183,0.1);
       &~.n-input-number__border-layer {
         box-shadow: inset 0 0 0px 1px $main-color, 0px 0px 10px 1px #366555;
       }
     }
     transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
-    background-color: transparent;
     border: none;
     color: $input-number-color;
     width: 84px;

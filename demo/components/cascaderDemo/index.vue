@@ -5,7 +5,7 @@
   >
     <div class="n-doc-header">
       <n-gradient-text :font-size="20">
-        Select / n-select
+        Cascader / n-cascader
       </n-gradient-text>
     </div>
     <div
@@ -15,6 +15,10 @@
       <multiple-all />
       <single />
       <single-all />
+      <single-search />
+      <single-all-search />
+      <multiple-search />
+      <multiple-all-search />
     </div>
   </div>
 </template>
@@ -25,13 +29,21 @@ import multiple from './multipleCascader.demo.vue'
 import multipleAll from './multipleAll.demo.vue'
 import single from './single.demo.vue'
 import singleAll from './singleAll.demo.vue'
+import singleSearch from './singleSearch.demo'
+import singleAllSearch from './singleAllSearch.demo'
+import multipleSearch from './multipleSearch.demo'
+import multipleAllSearch from './multipleAllSearch.demo'
 
 export default {
   components: {
     multiple,
     multipleAll,
     single,
-    singleAll
+    singleAll,
+    singleSearch,
+    singleAllSearch,
+    multipleSearch,
+    multipleAllSearch
   },
   data () {
     return {
