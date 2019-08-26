@@ -4,7 +4,7 @@
     class="n-select"
     @keydown.up.prevent="() => {}"
     @keydown.down.prevent="() => {}"
-    @keydown.space.prevent="() => {}"
+    @keydown.space="handleKeyDownSpace"
     @keyup.up="handleKeyUpUp"
     @keyup.down="handleKeyUpDown"
     @keyup.enter="handleKeyUpEnter"
@@ -26,10 +26,11 @@
       :disabled="disabled"
       :on-search="onSearch"
       :size="size"
-      @activator-click="handleActivatorClick"
-      @pattern-input-delete="handlePatternInputDelete"
+      @click="handleActivatorClick"
+      @delete-last-option="handleDeleteLastOption"
       @pattern-input="handlePatternInput"
       @clear="handleClear"
+      @blur="handlePickerBlur"
     />
     <div
       ref="contentContainer"
@@ -293,33 +294,33 @@ export default {
       }
     },
     handleClickOutsideMenu (e) {
-      if (!this.$refs.activator.$el.contains(e.target) && !this.scrolling) {
-        this.deactivate()
-        if (this.filterable && !this.multiple) {
-          this.pattern = ''
+      if (this.active) {
+        if (!this.$refs.activator.$el.contains(e.target) && !this.scrolling) {
+          console.log('handleClickOutsideMenu')
+          this.closeMenu()
         }
       }
     },
-    closeMenu () {
-      this.deactivate()
-      if (!this.multiple) {
-        this.$refs.activator.blurSingleInput()
+    openMenu () {
+      console.log('openMenu')
+      this.pattern = ''
+      this.activate()
+      if (this.filterable) {
+        this.$refs.activator.focusPatternInput()
       }
+    },
+    closeMenu () {
+      console.log('closeMenu')
+      this.deactivate()
     },
     handleActivatorClick () {
       if (this.disabled) return
       if (!this.active) {
-        this.pattern = ''
-        this.activate()
+        this.openMenu()
       } else {
         if (!this.filterable) {
-          this.deactivate()
+          this.closeMenu()
         }
-      }
-      if (this.multiple && this.filterable) {
-        this.$nextTick().then(() => {
-          this.$refs.activator.focusInputTag()
-        })
       }
     },
     toggleOption (option) {
@@ -342,12 +343,6 @@ export default {
           // this.emitChangeEvent(item, true)
           this.pattern = ''
         }
-        this.$nextTick().then(() => {
-          if (this.filterable) {
-            // console.log('toggleOption inputTagInput')
-            this.$refs.activator.focusInputTag()
-          }
-        })
         this.$emit('input', newValue)
         this.emitChangeEvent(newValue)
       } else {
@@ -370,7 +365,7 @@ export default {
     handleMenuScroll (e, scrollContainer, scrollContent) {
       this.$emit('scroll', e, scrollContainer, scrollContent)
     },
-    handlePatternInputDelete (e) {
+    handleDeleteLastOption (e) {
       if (!this.pattern.length) {
         const newValue = this.value
         if (Array.isArray(newValue)) {
@@ -385,15 +380,21 @@ export default {
         this.onSearch(e.target.value)
       }
     },
-    handleKeyUpEnter () {
-      // console.log('keyup enter')
-      const pendingOption = this.$refs.contentInner && this.$refs.contentInner.pendingOption
-      if (pendingOption) {
-        this.toggleOption(pendingOption)
+    handleKeyUpEnter (e) {
+      if (this.active) {
+        const pendingOption = this.$refs.contentInner && this.$refs.contentInner.pendingOption
+        if (pendingOption) {
+          this.toggleOption(pendingOption)
+        } else {
+          this.closeMenu()
+        }
+      } else {
+        this.openMenu()
       }
+      e.preventDefault()
     },
-    handleKeyUpSpace () {
-      this.handleKeyUpEnter()
+    handleKeyUpSpace (e) {
+      this.handleKeyUpEnter(e)
     },
     handleKeyUpUp () {
       // console.log('keyup up')
@@ -409,11 +410,19 @@ export default {
         this.$refs.contentInner.next()
       }
     },
+    handleKeyDownSpace (e) {
+      if (!this.filterable) {
+        e.preventDefault()
+      }
+    },
     handleClear (e) {
-      e.stopPropagation()
+      // e.stopPropagation()
       this.closeMenu()
       this.$emit('input', null)
       this.emitChangeEvent(null)
+    },
+    handlePickerBlur () {
+      this.closeMenu()
     }
   }
 }

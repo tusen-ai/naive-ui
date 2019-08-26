@@ -5,9 +5,9 @@
       [`n-base-select-menu--${size}-size`]: true,
       'n-base-select-menu--multiple': multiple
     }"
-    tabindex="0"
     @keyup.up.stop="handleKeyUpUp"
     @keyup.down.stop="handleKeyUpDown"
+    @mousedown.prevent="() => {}"
   >
     <n-scrollbar
       ref="scrollbar"

@@ -2,10 +2,9 @@
 @import './theme/default.scss';
 
 @include b(base-picker) {
-  outline: none;
+  display: inline-block;
   position: relative;
   box-shadow: none;
-  cursor: pointer;
   border-radius: $select-border-radius;
   width: 100%;
   max-width: 100%;
@@ -24,29 +23,32 @@
     opacity: 1;
   }
   .n-base-picker-label, .n-base-picker-tags {
-    outline: none;
+    cursor: pointer;
+    // outline: none;
+    box-sizing: border-box;
     position: relative;
     transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
-    box-sizing: border-box;
     border-radius: $select-border-radius;
     background-color: $select-background-color;
   }
   .n-base-picker-label {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    vertical-align: baseline;
-    display: inline-block;
-    border:none;
-    width: 100%;
-    white-space: nowrap;
-    cursor: inherit;
-    color: $select-text-color;
-    padding: 0 32px 0 14px;
-    &::placeholder {
-      color: $select-placeholder-color;
-    }
-    &.n-base-picker-label--placeholder {
-      color: $select-placeholder-color;
+    .n-base-picker-label__input {
+      box-sizing: border-box;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      border:none;
+      width: 100%;
+      white-space: nowrap;
+      color: $select-text-color;
+      padding: 0 32px 0 14px;
+      background-color: transparent;
+      height: 100%;
+      &::placeholder {
+        color: $select-placeholder-color;
+      }
+      &.n-base-picker-label__input--placeholder {
+        color: $select-placeholder-color;
+      }
     }
   }
   .n-base-picker-tags {
@@ -176,22 +178,22 @@
     .n-base-picker__placeholder {
       color: rgba(255, 255, 255, 0.20);
     }
-    .n-base-picker-label {
+    .n-base-picker-label__input {
       color: rgba(255, 255, 255, 0.20);
       &::placeholder {
         color: rgba(255, 255, 255, 0.20);
       }
     }
   }
+  &.n-base-picker--focus {
+    .n-base-picker-label, .n-base-picker-tags {
+      box-shadow: inset 0 0 0 1px $select-border-color--active;      
+    }
+  }
   &:not(.n-base-picker--disabled) {
     .n-base-picker-label:hover, .n-base-picker-tags:hover {
       box-shadow: inset 0 0 0 1px $select-border-color--active;
     }
-    .n-base-picker-label[readonly="readonly"] {
-      user-select: none;
-    }
-  }
-  &:not(.n-base-picker--disabled) {
     .n-base-picker-label:focus, .n-base-picker-tags:focus {
       box-shadow: inset 0 0 0 1px $select-border-color--active;
     }
@@ -207,7 +209,7 @@
   .n-base-picker-input-tag__input {
     padding: 0;
     background-color: transparent;
-    outline: none;
+    // outline: none;
     border: none;
     max-width: 100%;
     caret-color: $input-caret-color;
