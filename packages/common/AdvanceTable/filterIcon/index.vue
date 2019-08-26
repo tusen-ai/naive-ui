@@ -3,7 +3,13 @@
     class="ts-funnel-container"
     :class="{'ts-funnel-container--active':status}"
   >
-    <n-popover
+    <n-icon
+      style="vertical-align: middle;color: #63e2b7;"
+      :class="{'ts-funnel-container--active':status}"
+      type="ios-funnel"
+      size="12"
+    />
+    <!-- <n-popover
       trigger="click"
       style="padding:0;"
       padding="0"
@@ -16,10 +22,8 @@
           size="12"
         />
       </template>
-      <!-- <div slot="content"> -->
       <slot />
-      <!-- </div> -->
-    </n-popover>
+    </n-popover> -->
 
   </span>
 </template>

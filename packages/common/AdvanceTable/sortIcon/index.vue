@@ -36,6 +36,11 @@ const computeOpacity = (val) => {
     case -1:
       self.upOpacity = 0.3
       self.downOpacity = 1
+      break
+    case null:
+      self.upOpacity = 0.3
+      self.downOpacity = 0.3
+      break
   }
   return self
 }
