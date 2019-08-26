@@ -47,6 +47,7 @@ const _columns3 = ($this) => {
       title: '类型',
       key: 'type',
       width: 200
+
     },
     {
       title: '默认值',
@@ -163,9 +164,16 @@ const data = [
     default: ``
   },
   {
-    name: 'filterItems',
-    desc: `过滤的选项列表 与onFilter一起使用,否则无效
+    name: 'filterMultiple',
+    desc: `是否开启多选过滤`,
+    type: 'Boolean',
+    default: `false`
+  },
+  {
+    name: 'asyncFilterItems',
+    desc: `异步获取过滤的选项列表 与onFilter一起使用,否则无效,
     example:
+    注意: 此函数需要返回如下格式:
     [
       {
         label:'age 15',
@@ -176,15 +184,13 @@ const data = [
         value: '14'
       }
     ]
+
+    asynsFilterItems() {
+      return fetch('/filteritems')
+    }
     `,
-    type: 'Array',
+    type: 'async Function',
     default: ``
-  },
-  {
-    name: 'filterMultiple',
-    desc: `是否开启多选过滤`,
-    type: 'Boolean',
-    default: `false`
   }
 
 ]
