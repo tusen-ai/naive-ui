@@ -65,9 +65,8 @@
     display: flex;
     justify-content:space-between;
   }
-  .n-advance-table__operation__right {
+  .n-advance-table__operation__right,.n-advance-table__operation__left {
     display: flex;
-    align-items: center;
   }
   .n-no-data-tip {
     padding: 5px;

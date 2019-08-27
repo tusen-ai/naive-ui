@@ -47,6 +47,7 @@
         <n-tr>
           <n-th
             v-for="(column, i) in columns"
+            ref="theads"
             :key="column.key"
             :style="computeAlign(column)"
           >
@@ -63,7 +64,15 @@
             <!-- 优先自定义 -->
             {{ column.filterDropdown && column.filterDropdown() }}
             <!-- 否则默认渲染 -->
-            <filterDropDown
+            <PopFilter
+              v-if="column.filterItems || column.asynsFilterItems"
+              v-model="selectedFilter[column.key]"
+              :column="column"
+              :items="column.filterItems || column.asynsFilterItems"
+              @on-filter="onFilter"
+            />
+
+            <!-- <filterDropDown
               v-if="column.filterItems && !column.filterDropdown"
               :ref="'filterDropDown_' + (column.key || i)"
               :max-height="column.filterDropDownMaxHeight"
@@ -74,7 +83,7 @@
               @on-filter="
                 ({ value, key, filterFn }) => onFilter(value, key, filterFn)
               "
-            />
+            /> -->
           </n-th>
           <span
             v-if="scrollBarWidth"
@@ -103,7 +112,7 @@
         <n-tr
           v-for="(rowData, i) in showingData"
           :key="i"
-          :class="rowCls"
+          :class="typeof rowClassName === 'function' ? rowClassName(rowData,i) : rowClassName"
         >
           <n-td
             v-for="column in columns"
@@ -134,7 +143,7 @@
           <Loading
             style="margin-top:20px;"
             :circle="{ time: '1.5s' }"
-            :svg="{ height: '150px', width: '250px' }"
+            :svg="{ height: '100px', width: '80px' }"
           />
         </div>
       </template>
@@ -156,7 +165,7 @@
 <script>
 import row from '../row/index.js'
 import SortIcon from '../sortIcon'
-import filterDropDown from '../filterDropDown'
+import PopFilter from '../popFilter'
 import searchInput from '../searchInput'
 import Loading from '../loading'
 import { noopFn } from '../../../utils/index'
@@ -165,7 +174,7 @@ export default {
   components: {
     row,
     SortIcon,
-    filterDropDown,
+    PopFilter,
     searchInput,
     Loading
   },
@@ -215,10 +224,10 @@ export default {
       type: [Number, String],
       default: 'auto'
     },
-    hoverColor: {
-      default: '#323850',
-      type: String
-    },
+    // hoverColor: {
+    //   default: '#323850',
+    //   type: String
+    // },
     columns: {
       type: Array,
       required: true
@@ -227,8 +236,8 @@ export default {
       type: Array,
       default: () => []
     },
-    rowCls: {
-      type: [Array, String, Object],
+    rowClassName: {
+      type: [Array, String, Object, Function],
       default: ''
     },
     loading: {
@@ -237,10 +246,10 @@ export default {
     }
   },
   data () {
-    const sortIndexs = {}
-    this.columns.forEach((column, idx) => {
-      sortIndexs[column.key || idx] = column.order ? column.order : 0
-    })
+    // const sortIndexs = {}
+    // this.columns.forEach((column, idx) => {
+    //   sortIndexs[column.key || idx] = column.order ? column.order : 0
+    // })
     // const sortIndexs = new Array(this.columns.length).fill(0).map((item, idx) => {
     //   return this.columns[idx].order ? this.columns[idx].order : 0
     // })
@@ -253,7 +262,7 @@ export default {
     })
     return {
       copyData,
-      sortIndexs,
+      sortIndexs: {},
       wrapperWidth: 'unset',
       tbodyWidth: 'auto;',
       scrollBarWidth: '0',
@@ -261,7 +270,8 @@ export default {
       currentSortColumn: null,
       currentFilterColumn: null,
       currentSearchColumn: null,
-      currentPage: 1
+      currentPage: 1,
+      selectedFilter: {}
     }
   },
   computed: {
@@ -325,31 +335,15 @@ export default {
       return stl
     },
     colGroup () {
-      return { width: `100%` }
+      let stl = { width: `100%` }
+      if (this.maxWidth) {
+        stl.maxWidth =
+          typeof this.maxWidth === 'number'
+            ? this.maxWidth + 'px'
+            : this.maxWidth
+      }
+      return stl
     },
-    // headColStl () {
-    //   let width = (
-    //     (this.wrapperWidth - this.scrollBarWidth) /
-    //     this.columns.length
-    //   ).toFixed(3)
-    //   return ''
-    //   return {
-    //     width: width + 'px',
-    //     'padding-right': this.scrollBarWidth + 'px',
-    //     minWidth: width + 'px'
-    //   }
-    // },
-    // colStl () {
-    //   return ''
-    //   let width = (
-    //     (this.wrapperWidth - this.scrollBarWidth) /
-    //     this.columns.length
-    //   ).toFixed(3)
-    //   return {
-    //     width: width + 'px',
-    //     minWidth: width + 'px'
-    //   }
-    // },
     headColWidth () {
       return (
         (this.wrapperWidth - this.scrollBarWidth) /
@@ -389,6 +383,28 @@ export default {
       this.searchData = this.computeShowingData()
       console.log('currentSortColumn')
     },
+    selectedFilter: {
+      deep: true,
+      handler (val) {
+        this.currentFilterColumn = null
+        console.log('TCL: selectedFilter -> val', val)
+        let keys = Object.keys(val)
+        if (keys.length) {
+          this.currentFilterColumn = {}
+        }
+        this.columns.forEach((column) => {
+          let key = column.key
+          if (keys.includes(key) && val[key] && val[key].length !== 0) {
+            // TODO: 未来版本单选将会返回一个数值而不是数组!
+            console.warn('[NAIVE-UI]: n-advance-table filter filterMultiple=false will return not a array in future')
+            this.currentFilterColumn[key] = {
+              value: [].concat(val[key]),
+              filterFn: column.onFilter
+            }
+          }
+        })
+      }
+    },
     currentFilterColumn: {
       handler () {
         this.searchData = this.computeShowingData()
@@ -402,6 +418,7 @@ export default {
 
   mounted () {
     this.relTable = this.$refs.tbody.$el.querySelector('table')
+    // this.relTHead = this.$refs.header.$el.querySelector('table')
     this.wrapper = this.$refs.tableWrapper
     this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
     this.tbodyWidth = this.relTable.offsetWidth
@@ -450,13 +467,33 @@ export default {
         const ref = this.$refs['sorter_' + sorter.key][0]
         ref.setSort(sorter.type)
         // this.sortIndexs[sorter.key] = sorter.type
+      } else {
+        // clear
+        this.clearSort()
       }
-      filter &&
+      this.currentFilterColumn && Object.keys(this.currentFilterColumn).forEach(key => {
+        this.selectedFilter = {}
+      })
+      if (filter) {
+        // ---- TODO: 未来版本将会去除这段代码,为了兼容老版本
         Object.keys(filter).forEach((key) => {
-          const ref = this.$refs['filterDropDown_' + key][0]
-          ref.setCheckedIndexs(filter[key])
+          let column = this.columns.find((item) => item.key === key)
+          if (column && !column.filterMultiple) {
+            if (filter[key].length) {
+              filter[key] = filter[key][0]
+            } else {
+              delete filter[key]
+            }
+          }
         })
-      searcher && this.$refs.search.setSearch(searcher)
+        // ----
+        this.selectedFilter = filter
+      }
+      if (searcher) {
+        this.$refs.search.setSearch(searcher)
+      } else {
+        this.$refs.search.clearSearch()
+      }
       if (page) {
         this.$nextTick(() => {
           this.currentPage = page
@@ -465,8 +502,15 @@ export default {
       this.useRemoteChange()
       // TODO:测试功能 有远程 无远程 ，半有半无
     },
+    clearSort () {
+      Object.keys(this.sortIndexs).forEach((key) => {
+        this.sortIndexs[key] = 0
+      })
+      this.currentSortColumn = null
+    },
     onBodyScrolll (event) {
       this.$refs.header.$el.scrollLeft = event.target.scrollLeft
+
       event.stopPropagation()
     },
     computeCustomWidthStl (column) {
@@ -504,15 +548,64 @@ export default {
         this.useRemoteChange()
       }
     },
+    getCusomFilterData () {
+      if (!this.currentFilterColumn) {
+        return null
+      }
+      let currentFilterColumn = null
+      let keys = Object.keys(this.currentFilterColumn)
+      currentFilterColumn = {}
+
+      keys.forEach(key => {
+        let val = this.currentFilterColumn[key].value
+        let filterFn = this.currentFilterColumn[key].filterFn
+        if (filterFn === 'custom') {
+          currentFilterColumn[key] = {
+            value: val
+          }
+        }
+      })
+      if (Object.keys(currentFilterColumn).length === 0) {
+        currentFilterColumn = null
+      }
+      return currentFilterColumn
+    },
+    getCusomSorterData () {
+      if (!this.currentSortColumn) {
+        return null
+      }
+      let currentSortColumn = null
+      let keys = Object.keys(this.currentSortColumn)
+      currentSortColumn = {}
+
+      keys.forEach(key => {
+        let val = this.currentSortColumn[key].value
+        let sortable = this.currentSortColumn[key].sortable
+        if (sortable === 'custom') {
+          currentSortColumn[key] = {
+            value: val
+          }
+        }
+      })
+      if (Object.keys(currentSortColumn).length === 0) {
+        currentSortColumn = null
+      }
+      return currentSortColumn
+    },
     useRemoteChange () {
       clearTimeout(this.remoteTimter)
+
       this.remoteTimter = setTimeout(() => {
-        this.onChange({
-          filter: this.currentFilterColumn,
-          sorter: this.currentSortColumn,
+        const currentFilterColumn = this.getCusomFilterData()
+        const currentSortColumn = this.getCusomSorterData()
+        const emitData = {
+          filter: currentFilterColumn,
+          sorter: currentSortColumn,
           pagination: this.paginationer,
           search: this.currentSearchColumn
-        })
+        }
+        this.$emit('on-change', emitData)
+        this.onChange(emitData)
       }, 300)
     },
     computeShowingData () {
@@ -520,7 +613,6 @@ export default {
       // compute filter
       if (this.currentFilterColumn) {
         // const { filterFn, value } = this.operatingfilter
-
         if (Object.keys(this.currentFilterColumn).length === 0) {
           this.searchData = []
         }
@@ -558,7 +650,7 @@ export default {
         if (!this.searchDataNoSort && this.data.length !== 0) {
           this.searchDataNoSort = data.slice(0)
         }
-        if (type === 0) {
+        if (type === 0 || type === null) {
           if (this.searchDataNoSort) {
             data = this.searchDataNoSort
             this.searchDataNoSort = null
@@ -587,33 +679,14 @@ export default {
             this.sortIndexs[key] = 0
           }
         })
-        // this.sortIndexs.map((item, idx) => {
-        //   if (idx !== i) {
-        //     return 0
-        //   } else {
-        //     return this.sortIndexs[idx]
-        //   }
-        // })
       }
       return data
     },
-    onFilter (value, key, filterFn) {
-      if (this.currentFilterColumn === null) {
-        this.currentFilterColumn = {}
-      }
-      this.$set(this.currentFilterColumn, key, { value, filterFn })
-      // this.currentFilterColumn[key] = value
-      if (value === null) {
-        delete this.currentFilterColumn[key]
-        if (Object.keys(this.currentFilterColumn).length === 0) {
-          this.currentFilterColumn = null
-        }
-      }
-      if (filterFn === 'custom') {
-        // remote filter
+    onFilter (value, column) {
+      if (column.onFilter === 'custom') {
         this.useRemoteChange()
       }
-      console.log('on-filter')
+      this.$emit('on-filter-change', this.currentFilterColumn)
     },
     onSortTypeChange ({ i, sortable, key, type, column }) {
       this.currentSortColumn = {
@@ -626,6 +699,7 @@ export default {
       if (this.onChange && sortable === 'custom') {
         this.useRemoteChange()
       }
+      this.$emit('on-sort-change', this.currentSortColumn)
     }
   }
 }

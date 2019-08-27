@@ -46,7 +46,7 @@
 export default {
   data () {
     return {
-      value: null
+      value: 'Go Let It Out'
     }
   },
   methods: {

@@ -51,6 +51,8 @@ import popconfirmDemo from './components/popconfirmDemo'
 import anchorDemo from './components/anchorDemo'
 import popselectDemo from './components/popselectDemo'
 import appDemo from './components/appDemo'
+import advanceTableDemos from './components/advanceTableDemos'
+
 import demo from './demo'
 
 import popoverDebug from './debugComponents/popoverDebug'
@@ -96,7 +98,8 @@ const routes = [
       { path: '/n-button', component: buttonDemo },
       { path: '/n-switch', component: switchDemo },
       { path: '/n-table', component: tableDemo },
-      { path: '/n-advance-table', component: advanceTableDemo },
+      { path: '/n-advance-table', component: advanceTableDemos },
+      // { path: '/n-advance-table', component: advanceTableDemo },
       { path: '/n-input', component: inputDemo },
       { path: '/n-select', component: selectDemo },
       { path: '/n-cascader', component: cascaderDemo },
