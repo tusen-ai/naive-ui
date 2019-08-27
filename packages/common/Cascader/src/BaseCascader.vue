@@ -51,11 +51,12 @@
             v-clickoutside="handleMenuClickOutside"
             :value="value"
             :multiple="multiple"
-            :linked-options="linkedOptions"
+            :options="options"
             :enable-all-options="enableAllOptions"
             :pattern="pattern"
             :filterable="filterable"
             :expand-trigger="expandTrigger"
+            :active-id.sync="activeId"
             @input="handleMenuInput"
           />
         </transition>
@@ -71,7 +72,6 @@ import placeable from '../../../mixins/placeable'
 import toggleable from '../../../mixins/toggleable'
 import clickoutside from '../../../directives/clickoutside'
 import CascaderMenu from './CascaderMenu'
-import cloneDeep from 'lodash/cloneDeep'
 import { getType, traverseWithCallback } from './utils'
 
 export default {
@@ -137,7 +137,11 @@ export default {
       labelPlaceholder: 'Please Select',
       pattern: '',
       selected: true,
-      inputTypeIsSearch: false
+      inputTypeIsSearch: false,
+      /**
+       * set here to keep state
+       */
+      activeId: null
     }
   },
   computed: {
@@ -188,77 +192,12 @@ export default {
         })
         return selectedOption
       } else return null
-    },
-    linkedOptions () {
-      // console.log('processOptions')
-      const linkedOptions = cloneDeep(this.options)
-      let id = 0
-      const type = this.type
-      const path = []
-      function traverse (options, parent = null, depth = 0) {
-        if (!Array.isArray(options)) return
-        const length = options.length
-        for (let i = 0; i < length; ++i) {
-          const option = options[i]
-          path.push(option.label)
-          option.type = type
-          option.parent = parent
-          option.prevSibling = options[(i + length - 1) % length]
-          option.nextSibling = options[(i + length + 1) % length]
-          option.depth = depth
-          option.id = id++
-          option.path = cloneDeep(path)
-          option.hasChildren = Array.isArray(option.children) && option.children.length
-          option.isLeaf = !option.hasChildren
-          if (type === 'multiple') {
-            if (Array.isArray(option.children) && option.children.length) {
-              traverse(option.children, option, depth + 1)
-              option.leafCount = 0
-              option.children.forEach(child => {
-                if (!child.disabled) {
-                  option.leafCount += child.leafCount
-                }
-              })
-            } else {
-              if (option.disabled) {
-                option.leafCount = 0
-              } else {
-                option.leafCount = 1
-              }
-            }
-          } else if (type === 'multiple-all-options') {
-            if (Array.isArray(option.children) && option.children.length) {
-              traverse(option.children, option, depth + 1)
-            }
-            option.leafCount = 0
-          } else if (type === 'single-all-options') {
-            if (Array.isArray(option.children) && option.children.length) {
-              traverse(option.children, option, depth + 1)
-            }
-            option.leafCount = 0
-          } else if (type === 'single') {
-            if (Array.isArray(option.children) && option.children.length) {
-              traverse(option.children, option, depth + 1)
-            }
-            option.leafCount = 0
-          }
-          path.pop()
-        }
-      }
-      if (type === 'multiple') {
-        traverse(linkedOptions)
-      } else if (type === 'multiple-all-options') {
-        traverse(linkedOptions)
-      } else if (type === 'single-all-options') {
-        traverse(linkedOptions)
-      } else if (type === 'single') {
-        traverse(linkedOptions)
-      }
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      return linkedOptions
     }
   },
   watch: {
+    options () {
+      this.activeId = null
+    },
     pattern () {
       this.handlePatternChange()
     },
@@ -286,8 +225,6 @@ export default {
     closeMenu () {
       this.deactivate()
       this.pattern = ''
-      this.tracedOption = null
-      this.activeId = null
     },
     handleMenuClickOutside (e) {
       if (this.active) {
@@ -387,7 +324,6 @@ export default {
       } else {
         this.$emit('input', null)
       }
-      this.tracedOption = null
       this.$el.focus()
     },
     handlePatternChange () {

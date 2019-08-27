@@ -6,5 +6,5 @@ import 'regenerator-runtime/runtime'
 // packagesContext.keys().forEach(packagesContext)
 
 // require all test files (files that ends with .spec.js)
-const testsContext = require.context('./specs', true, /\.spec.js$/)
+const testsContext = require.context('./specs/packages/utils/data', true, /\.spec.js$/)
 testsContext.keys().forEach(testsContext)

@@ -61,6 +61,7 @@ import modalDebug from './debugComponents/modalDebug'
 import datePickerDebug from './debugComponents/datePickerDebug'
 import backTopDebug from './debugComponents/backTopDebug'
 import cancelMarkDebug from './debugComponents/cancelMarkDebug'
+import cascaderDebug from './debugComponents/cascaderDebug'
 
 Vue.use(NaiveUI)
 Vue.use(VueRouter)
@@ -79,6 +80,10 @@ const routes = [
   {
     path: '/n-back-top-debug',
     component: backTopDebug
+  },
+  {
+    path: '/n-cascader-debug',
+    component: cascaderDebug
   },
   {
     path: '/start',

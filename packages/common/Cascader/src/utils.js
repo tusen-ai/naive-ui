@@ -15,12 +15,12 @@ function isLeaf (option) {
   return !(Array.isArray(option.children) && option.children)
 }
 
-function traverseWithCallback (options, beforeCallback = () => {}, afterCallback = () => {}) {
+function traverseWithCallback (options, beforeCallback, afterCallback) {
   if (Array.isArray(options)) {
     for (const option of options) {
-      beforeCallback(option)
+      if (beforeCallback) beforeCallback(option)
       if (option.children) traverseWithCallback(option.children, beforeCallback, afterCallback)
-      afterCallback(option)
+      if (afterCallback) afterCallback(option)
     }
   }
 }

@@ -2,12 +2,12 @@
   <div
     class="n-cascader-option"
     :class="{
-      'n-cascader-option--active': active && hasChildren,
-      'n-cascader-option--traced': traced,
+      'n-cascader-option--active': active && !isLeaf,
+      'n-cascader-option--tracked': tracked,
       'n-cascader-option--disabled': disabled,
-      'n-cascader-option--has-children': hasChildren
+      'n-cascader-option--not-leaf': !isLeaf
     }"
-    :data-id="id"
+    :data-n-cascader-option-id="id"
     @click="handleClick"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
@@ -51,7 +51,6 @@
 <script>
 import NCheckbox from '../../Checkbox'
 import NRadio from '../../Radio'
-import { validateType } from './utils'
 
 export default {
   name: 'NCascaderOption',
@@ -65,7 +64,7 @@ export default {
       default: false
     },
     type: {
-      validator: validateType,
+      type: String,
       required: true
     },
     id: {
@@ -84,9 +83,25 @@ export default {
       type: Boolean,
       default: false
     },
-    traced: {
+    tracked: {
       type: Boolean,
       default: false
+    },
+    prevAvailableSiblingId: {
+      type: Number,
+      default: null
+    },
+    nextAvailableSiblingId: {
+      type: Number,
+      default: null
+    },
+    availableParentId: {
+      type: Number,
+      default: null
+    },
+    firstAvailableChildId: {
+      type: Number,
+      default: null
     },
     disabled: {
       type: Boolean,
@@ -96,39 +111,11 @@ export default {
       type: Array,
       default: null
     },
-    selected: {
-      type: Boolean,
-      default: false
-    },
-    prevSibling: {
-      type: Object,
-      default: null
-    },
-    nextSibling: {
-      type: Object,
-      default: null
-    },
-    parent: {
-      type: Object,
-      default: null
-    },
     depth: {
       type: Number,
       required: true
     },
-    leafCount: {
-      type: Number,
-      required: true
-    },
-    checkedLeafCount: {
-      type: Number,
-      required: true
-    },
     isLeaf: {
-      type: Boolean,
-      default: false
-    },
-    hasChildren: {
       type: Boolean,
       default: false
     },
@@ -139,6 +126,19 @@ export default {
     checkboxIndeterminate: {
       type: Boolean,
       default: false
+    }
+  },
+  computed: {
+    option () {
+      return {
+        id: this.id,
+        value: this.value,
+        children: this.children,
+        prevAvailableSiblingId: this.prevAvailableSiblingId,
+        nextAvailableSiblingId: this.nextAvailableSiblingId,
+        availableParentId: this.availableParentId,
+        firstAvailableChildId: this.firstAvailableChildId
+      }
     }
   },
   created () {
@@ -152,10 +152,10 @@ export default {
       }
     },
     handleMouseEnter (e) {
-      this.$emit('mouseenter', e, this)
+      this.$emit('mouseenter', e, this.option)
     },
     handleMouseLeave (e) {
-      this.$emit('mouseleave', e, this)
+      this.$emit('mouseleave', e, this.option)
     },
     handleOptionCheck (e) {
       this.$emit('check', this)

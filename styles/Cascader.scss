@@ -65,10 +65,10 @@
     cursor: not-allowed;
   }
   
-  &.n-cascader-option--traced {
+  &.n-cascader-option--tracked {
     background-color: rgba(81, 122, 126, 1);
   }
-  &.n-cascader-option--has-children {
+  &.n-cascader-option--not-leaf {
     &::after {
       content: '';
       position: absolute;

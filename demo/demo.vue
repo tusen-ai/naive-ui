@@ -239,6 +239,10 @@ export default {
             {
               name: 'BackTopDebug',
               path: '/n-back-top-debug'
+            },
+            {
+              name: 'Cascader',
+              path: '/n-cascader-debug'
             }
           ]
         }

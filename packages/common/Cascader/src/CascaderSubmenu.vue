@@ -22,22 +22,20 @@
         :key="`${index}_${option.value}`"
         :value="option.value"
         :active="option.active"
-        :traced="option.traced"
+        :tracked="option.tracked"
         :label="option.label"
         :disabled="option.disabled"
         :children="option.children"
-        :prev-sibling="option.prevSibling"
-        :next-sibling="option.nextSibling"
-        :parent="option.parent"
+        :first-available-child-id="option.firstAvailableChildId"
+        :next-available-sibling-id="option.nextAvailableSiblingId"
+        :prev-available-sibling-id="option.prevAvailableSiblingId"
+        :available-parent-id="option.availableParentId"
         :depth="option.depth"
         :type="option.type"
         :checked="option.checked"
-        :checked-leaf-count="option.checkedLeafCount"
-        :leaf-count="option.leafCount"
         :is-leaf="option.isLeaf"
         :checkbox-checked="option.checkboxChecked"
         :checkbox-indeterminate="option.checkboxIndeterminate"
-        :has-children="option.hasChildren"
         @check="handleOptionCheck"
         @click="handleOptionClick"
         @mouseenter="handleOptionMouseEnter"
@@ -60,6 +58,10 @@ export default {
   },
   mixins: [withlightbar],
   props: {
+    depth: {
+      type: Number,
+      required: true
+    },
     options: {
       type: Array,
       required: true
@@ -87,7 +89,7 @@ export default {
       this.hideLightBar()
     },
     handleOptionCheck (option) {
-      this.$emit('option-check', option)
+      this.$emit('option-check', option.id)
     }
   }
 }
