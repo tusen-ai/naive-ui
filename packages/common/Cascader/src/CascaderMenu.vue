@@ -13,11 +13,11 @@
           :key="index"
           :size="size"
           :options="submenuOptions"
-          :depth="index"
+          :depth="index + 1"
           @option-click="handleOptionClick"
           @option-mouseenter="handleOptionMouseEnter"
           @option-mouseleave="handleOptionMouseLeave"
-          @option-check="handleOptionCheck"
+          @option-check="handleCascaderOptionCheck"
         />
       </div>
     </transition>
@@ -28,7 +28,7 @@
         class="n-cascader-select-menu"
         filterable
         :pattern="pattern"
-        :options="options"
+        :options="linkedSelectOptions"
         :multiple="multiple"
         :size="size"
         :linked-options="linkedSelectOptions"
@@ -44,47 +44,17 @@
 <script>
 import NCascaderSubmenu from './CascaderSubmenu'
 import NBaseSelectMenu from '../../../base/SelectMenu'
-import { getType, traverseWithCallback, isLeaf, minus, merge } from './utils'
+import { getType, traverseWithCallback, minus, merge } from './utils'
 import linkedOptions from '../../../utils/component/linkedOptions'
-import cloneDeep from 'lodash/cloneDeep'
 
-function processedOption (option, activeIds, tracedOption) {
-  return {
-    ...option,
-    active: activeIds.has(option.id),
-    hasChildren: hasChildren(option),
-    checkboxChecked: checkboxChecked(option),
-    checkboxIndeterminate: checkboxIndeterminate(option),
-    isLeaf: isLeaf(option),
-    traced: traced(option, tracedOption)
-  }
-}
-
-function hasChildren (option) {
-  return !!(option.children && option.children.length)
-}
-function checkboxChecked (option) {
-  if (option.type === 'multiple') {
-    if (Array.isArray(option.children) && option.children.length) {
-      return option.leafCount === option.checkedLeafCount
-    } else {
-      return option.checked
-    }
-  } else {
-    return option.checked
-  }
-}
-function checkboxIndeterminate (option) {
-  if (option.type === 'multiple') {
-    return !option.checked && option.checkedLeafCount !== 0 && option.checkedLeafCount !== option.leafCount
-  } return false
-}
-function traced (option, tracedOption) {
-  if (option && tracedOption) {
-    return option.id === tracedOption.id
-  }
-  return false
-}
+import {
+  firstOptionId,
+  rootedOptions,
+  patchedOptions,
+  linkedCascaderOptions,
+  menuOptions,
+  menuModel
+} from '../../../utils/component/menuModel'
 
 export default {
   name: 'NCascaderMenu',
@@ -113,7 +83,7 @@ export default {
       validator: () => true,
       default: null
     },
-    linkedOptions: {
+    options: {
       type: Array,
       required: true
     },
@@ -136,75 +106,61 @@ export default {
   },
   data () {
     return {
-      tracedOption: null
+      trackId: null
     }
   },
   computed: {
-    valueSet () {
-      return new Set(this.value)
+    /**
+     * cascader related attributes
+     */
+    type: getType,
+    expandTriggeredByHover () {
+      return this.expandTrigger === 'hover'
     },
-    options () {
-      const options = cloneDeep(this.linkedOptions)
-      const checkedOptions = []
-      const valueSet = this.valueSet
-      const value = this.value
-      function markPath (option) {
-        const parent = option.parent
-        if (parent) {
-          parent.checkedLeafCount += 1
-          markPath(parent)
+    expandTriggeredByClick () {
+      return this.expandTrigger === 'click'
+    },
+    rootedOptions () {
+      return rootedOptions(this.options)
+    },
+    linkedCascaderOptions () {
+      return linkedCascaderOptions(this.rootedOptions, this.type)
+    },
+    menuOptions () {
+      return menuOptions(this.linkedCascaderOptions, this.value, this.type)
+    },
+    menuModel () {
+      return menuModel(this.menuOptions, this.activeId, this.trackId)
+    },
+    firstCascaderOption () {
+      if (this.menuModel && this.menuModel[0] && this.menuModel[0][0]) {
+        return this.menuModel[0][0]
+      } else {
+        return null
+      }
+    },
+    idOptionMap () {
+      const idOptionMap = new Map()
+      for (const submenu of this.menuModel) {
+        for (const option of submenu) {
+          idOptionMap.set(option.id, option)
         }
       }
-      const type = this.type
-      function traverse (options, parent = null, depth = 0) {
-        if (!Array.isArray(options)) return
-        const length = options.length
-        for (let i = 0; i < length; ++i) {
-          const option = options[i]
-          option.checkedLeafCount = 0
-          if (type === 'multiple') {
-            if (Array.isArray(option.children) && option.children.length) {
-              traverse(option.children, option, depth + 1)
-            } else {
-              option.checked = valueSet.has(option.value)
-              if (option.checked) {
-                checkedOptions.push(option)
-              }
-            }
-          } else if (type === 'multiple-all-options') {
-            if (Array.isArray(option.children) && option.children.length) {
-              traverse(option.children, option, depth + 1)
-            }
-            option.checked = valueSet.has(option.value)
-          } else if (type === 'single-all-options') {
-            if (Array.isArray(option.children) && option.children.length) {
-              traverse(option.children, option, depth + 1)
-            }
-            option.checked = option.value === value
-          } else if (type === 'single') {
-            if (Array.isArray(option.children) && option.children.length) {
-              traverse(option.children, option, depth + 1)
-            }
-            option.checked = option.value === value
-          }
-        }
-      }
-      traverse(options)
-      if (type === 'multiple') {
-        checkedOptions.forEach(option => {
-          // console.log('checkedOption', option)
-          markPath(option)
-        })
-      }
-      return options
+      return idOptionMap
     },
+    firstOptionId () {
+      return firstOptionId(this.menuOptions)
+    },
+    /**
+     * filterable related attributes
+     */
     selectMenuActive () {
       return this.filterable && this.pattern && this.pattern.trim().length
     },
     filteredSelectOptions () {
       const filteredSelectOptions = []
       const type = this.type
-      traverseWithCallback(this.options, option => {
+      traverseWithCallback(this.menuOptions, option => {
         if (Array.isArray(option.path) && option.path.some(
           label => ~label.indexOf(this.pattern)
         )) {
@@ -229,48 +185,8 @@ export default {
     linkedSelectOptions () {
       return linkedOptions(this.filteredSelectOptions, this)
     },
-    activeOptionPath () {
-      return this.optionPath(this.activeId)
-    },
-    type: getType,
-    firstOption () {
-      if (this.menuModel && this.menuModel[0] && this.menuModel[0][0]) {
-        return this.menuModel[0][0]
-      } else {
-        return null
-      }
-    },
-    activeIds () {
-      return new Set(this.activeOptionPath.map(option => option.id))
-    },
-    menuModel () {
-      const activeOptionPath = this.activeOptionPath
-      const model = [this.options.map(option => {
-        return processedOption(option, this.activeIds, this.tracedOption)
-      })]
-      for (const option of activeOptionPath) {
-        if (Array.isArray(option.children) && option.children.length) {
-          model.push(option.children.map(option => {
-            return processedOption(option, this.activeIds, this.tracedOption)
-          }))
-        }
-      }
-      return model
-    },
-    idOptionMap () {
-      const idOptionMap = new Map()
-      for (const submenu of this.menuModel) {
-        for (const option of submenu) {
-          idOptionMap.set(option.id, option)
-        }
-      }
-      return idOptionMap
-    },
-    expandTriggeredByHover () {
-      return this.expandTrigger === 'hover'
-    },
-    expandTriggeredByClick () {
-      return this.expandTrigger === 'click'
+    valueSet () {
+      return new Set(this.value)
     }
   },
   watch: {
@@ -279,16 +195,18 @@ export default {
         this.handleMenuTypeChange(selectMenuActive)
       })
     },
-    tracedOption (option) {
+    trackId (id) {
       /**
        * scroll to option element
        */
       this.$nextTick().then(() => {
+        const option = this.idOptionMap.get(id)
+        if (!option) return
         const submenuInstance = this.$children.find(child => child.depth === option.depth)
         if (submenuInstance) {
           const scrollbar = submenuInstance.$refs.scrollbar
           if (scrollbar) {
-            const optionElement = this.$el.querySelector(`[data-n-cascader-option-id="${option.id}"]`)
+            const optionElement = this.$el.querySelector(`[data-n-cascader-option-id="${id}"]`)
             scrollbar.scrollToElement(optionElement)
           }
         }
@@ -348,10 +266,10 @@ export default {
     },
     handleOptionMouseLeave (e, option) {
     },
-    handleOptionClick (e, option, menu) {
+    handleOptionClick (e, option) {
       if (this.expandTriggeredByClick && !option.disabled) {
         this.updateActiveId(option.id)
-        this.updateTracedOption(option)
+        this.updateTrackId(option.id)
       }
     },
     handleMenuTypeChange (typeisSelect) {
@@ -391,10 +309,10 @@ export default {
         this.$emit('input', option.value)
       }
     },
-    handleOptionCheck (option) {
-      if (option.disabled) return
-      option = this.idOptionMap.get(option.id)
-      option = processedOption(option, this.activeIds, this.tracedOption)
+    handleCascaderOptionCheck (optionId) {
+      const option = this.idOptionMap.get(optionId)
+      if (!option || option.disabled) return
+      console.log(option)
       if (this.type === 'multiple') {
         const newValues = []
         const traverseMultiple = option => {
@@ -437,38 +355,46 @@ export default {
       }
     },
     deep () {
-      // console.log('deep: cascader menu')
-      if (this.tracedOption) {
-        const firstChild = this.tracedOption.children && this.tracedOption.children[0]
-        if (firstChild) {
-          this.updateTracedOption(firstChild)
-          this.updateActiveId(firstChild.id)
+      if (this.trackId) {
+        const option = this.idOptionMap.get(this.trackId)
+        if (option && option.firstAvailableChildId) {
+          this.updateTrackId(option.firstAvailableChildId)
+          this.updateActiveId(option.firstAvailableChildId)
         }
       }
     },
     shallow () {
       // console.log('shallow: cascader menu')
-      if (this.tracedOption && this.tracedOption.parent) {
-        this.updateTracedOption(this.tracedOption.parent)
-        this.updateActiveId(this.tracedOption.id)
+      if (this.trackId) {
+        const option = this.idOptionMap.get(this.trackId)
+        if (option && option.availableParentId) {
+          this.updateTrackId(option.availableParentId)
+          this.updateActiveId(option.availableParentId)
+        }
       }
     },
-    updateTracedOption (option) {
-      console.log(option)
-      this.tracedOption = option
+    updateTrackId (id) {
+      this.trackId = id
     },
     updateActiveId (id) {
       this.$emit('update:activeId', id)
     },
     prev () {
-      if (this.tracedOption && (!this.filterable || (this.filterable && !this.pattern.length))) {
+      if (!this.filterable || (this.filterable && !this.pattern.length)) {
         // console.log('prev: cascader menu')
-        let optionIterator = this.tracedOption.prevSibling
-        while (optionIterator !== this.tracedOption && optionIterator.disabled) {
-          optionIterator = optionIterator.prevSibling
+        if (this.trackId) {
+          const option = this.idOptionMap.get(this.trackId)
+          if (option && option.prevAvailableSiblingId) {
+            this.updateTrackId(option.prevAvailableSiblingId)
+            this.updateActiveId(option.prevAvailableSiblingId)
+          }
+        } else {
+          const option = this.idOptionMap.get(this.firstOptionId)
+          if (option) {
+            this.updateTrackId(this.firstOptionId)
+            this.updateActiveId(this.firstOptionId)
+          }
         }
-        this.updateTracedOption(optionIterator)
-        this.updateActiveId(optionIterator.id)
       } else if (this.typeIsSelect) {
         // console.log('prev: search menu')
         const selectMenu = this.$refs.selectMenu
@@ -480,27 +406,18 @@ export default {
     next () {
       if (!this.filterable || (this.filterable && !this.pattern.length)) {
         // console.log('next: cascader menu')
-        if (this.tracedOption) {
-          let optionIterator = this.tracedOption.nextSibling
-          while (optionIterator !== this.tracedOption && optionIterator.disabled) {
-            optionIterator = optionIterator.nextSibling
+        if (this.trackId) {
+          const option = this.idOptionMap.get(this.trackId)
+          if (option && option.nextAvailableSiblingId) {
+            this.updateTrackId(option.nextAvailableSiblingId)
+            this.updateActiveId(option.nextAvailableSiblingId)
           }
-          this.updateTracedOption(optionIterator)
-          this.updateActiveId(optionIterator.id)
         } else {
-          const firstOption = this.firstOption
-          if (!firstOption) {
-            return
+          const option = this.idOptionMap.get(this.firstOptionId)
+          if (option) {
+            this.updateTrackId(this.firstOptionId)
+            this.updateActiveId(this.firstOptionId)
           }
-          let optionIterator = firstOption
-          while (optionIterator.disabled) {
-            optionIterator = optionIterator.nextSibling
-            if (optionIterator === firstOption) {
-              break
-            }
-          }
-          this.updateTracedOption(optionIterator)
-          this.updateActiveId(optionIterator.id)
         }
       } else if (this.typeIsSelect) {
         // console.log('next: search menu')
@@ -519,8 +436,8 @@ export default {
           this.handleSelectOptionCheck(pendingOption)
           return true
         }
-      } else if (this.tracedOption) {
-        this.handleOptionCheck(this.tracedOption)
+      } else if (this.trackId) {
+        this.handleCascaderOptionCheck(this.trackId)
         return true
       }
       return false
