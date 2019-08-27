@@ -13,7 +13,7 @@
           :key="index"
           :size="size"
           :options="submenuOptions"
-          :data-depth="index"
+          :depth="index"
           @option-click="handleOptionClick"
           @option-mouseenter="handleOptionMouseEnter"
           @option-mouseleave="handleOptionMouseLeave"
@@ -128,12 +128,15 @@ export default {
     expandTrigger: {
       type: String,
       default: 'click'
+    },
+    activeId: {
+      type: Number,
+      default: null
     }
   },
   data () {
     return {
-      tracedOption: null,
-      activeId: null
+      tracedOption: null
     }
   },
   computed: {
@@ -271,12 +274,24 @@ export default {
     }
   },
   watch: {
-    filteredSelectOptions () {
-      this.$emit('menu-filtered-options-change')
-    },
     selectMenuActive (selectMenuActive) {
       this.$nextTick().then(() => {
         this.handleMenuTypeChange(selectMenuActive)
+      })
+    },
+    tracedOption (option) {
+      /**
+       * scroll to option element
+       */
+      this.$nextTick().then(() => {
+        const submenuInstance = this.$children.find(child => child.depth === option.depth)
+        if (submenuInstance) {
+          const scrollbar = submenuInstance.$refs.scrollbar
+          if (scrollbar) {
+            const optionElement = this.$el.querySelector(`[data-n-cascader-option-id="${option.id}"]`)
+            scrollbar.scrollToElement(optionElement)
+          }
+        }
       })
     }
   },
@@ -302,9 +317,6 @@ export default {
     },
     handleMenuScrollEnd () {
 
-    },
-    handleFilteredOptionsChange () {
-      this.$emit('filtered-options-change')
     },
     optionPath (optionId) {
       const path = []
@@ -425,7 +437,7 @@ export default {
       }
     },
     deep () {
-      console.log('deep: cascader menu')
+      // console.log('deep: cascader menu')
       if (this.tracedOption) {
         const firstChild = this.tracedOption.children && this.tracedOption.children[0]
         if (firstChild) {
@@ -435,21 +447,22 @@ export default {
       }
     },
     shallow () {
-      console.log('shallow: cascader menu')
+      // console.log('shallow: cascader menu')
       if (this.tracedOption && this.tracedOption.parent) {
         this.updateTracedOption(this.tracedOption.parent)
         this.updateActiveId(this.tracedOption.id)
       }
     },
     updateTracedOption (option) {
+      console.log(option)
       this.tracedOption = option
     },
     updateActiveId (id) {
-      this.activeId = id
+      this.$emit('update:activeId', id)
     },
     prev () {
       if (this.tracedOption && (!this.filterable || (this.filterable && !this.pattern.length))) {
-        console.log('prev: cascader menu')
+        // console.log('prev: cascader menu')
         let optionIterator = this.tracedOption.prevSibling
         while (optionIterator !== this.tracedOption && optionIterator.disabled) {
           optionIterator = optionIterator.prevSibling
@@ -457,7 +470,7 @@ export default {
         this.updateTracedOption(optionIterator)
         this.updateActiveId(optionIterator.id)
       } else if (this.typeIsSelect) {
-        console.log('prev: search menu')
+        // console.log('prev: search menu')
         const selectMenu = this.$refs.selectMenu
         if (selectMenu) {
           selectMenu.prev()
@@ -466,7 +479,7 @@ export default {
     },
     next () {
       if (!this.filterable || (this.filterable && !this.pattern.length)) {
-        console.log('next: cascader menu')
+        // console.log('next: cascader menu')
         if (this.tracedOption) {
           let optionIterator = this.tracedOption.nextSibling
           while (optionIterator !== this.tracedOption && optionIterator.disabled) {
@@ -490,7 +503,7 @@ export default {
           this.updateActiveId(optionIterator.id)
         }
       } else if (this.typeIsSelect) {
-        console.log('next: search menu')
+        // console.log('next: search menu')
         const selectMenu = this.$refs.selectMenu
         if (selectMenu) {
           selectMenu.next()

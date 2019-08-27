@@ -56,6 +56,7 @@
             :pattern="pattern"
             :filterable="filterable"
             :expand-trigger="expandTrigger"
+            :active-id.sync="activeId"
             @input="handleMenuInput"
           />
         </transition>
@@ -137,7 +138,11 @@ export default {
       labelPlaceholder: 'Please Select',
       pattern: '',
       selected: true,
-      inputTypeIsSearch: false
+      inputTypeIsSearch: false,
+      /**
+       * set here to keep state
+       */
+      activeId: null
     }
   },
   computed: {
@@ -259,6 +264,9 @@ export default {
     }
   },
   watch: {
+    options () {
+      this.activeId = null
+    },
     pattern () {
       this.handlePatternChange()
     },
@@ -286,8 +294,6 @@ export default {
     closeMenu () {
       this.deactivate()
       this.pattern = ''
-      this.tracedOption = null
-      this.activeId = null
     },
     handleMenuClickOutside (e) {
       if (this.active) {
@@ -387,7 +393,6 @@ export default {
       } else {
         this.$emit('input', null)
       }
-      this.tracedOption = null
       this.$el.focus()
     },
     handlePatternChange () {

@@ -60,6 +60,10 @@ export default {
   },
   mixins: [withlightbar],
   props: {
+    depth: {
+      type: Number,
+      required: true
+    },
     options: {
       type: Array,
       required: true

@@ -7,7 +7,7 @@
       'n-cascader-option--disabled': disabled,
       'n-cascader-option--has-children': hasChildren
     }"
-    :data-id="id"
+    :data-n-cascader-option-id="id"
     @click="handleClick"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"

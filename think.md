@@ -27,6 +27,11 @@ render (h) {
 document.querySelector('*[n-id=888d3] .simulate-transparent-text') 不合法？
 ## 2019.8.8
 函数节流别忘了加上@scroll
+## 2019.8.27
+activator 外面不应该包元素
+检查内存泄露可能性
+考虑级联异步api
+placement $refs 变化更改
 ## TODO
 issue fix, add delay prop
 add trigger to tooltip
