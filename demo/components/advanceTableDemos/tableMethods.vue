@@ -63,8 +63,22 @@ const data = [
           }
           `
       }
-    ]
 
+    ]
+  },
+  {
+    name: 'selectRow',
+    desc: '可以在mounted里selectRow来进行选中某一行,当为字符串all时,选中当前显示所有行,当为数组时,选中行号-1的行(注意data数据要已经存在)',
+    params: [
+      {
+        name: 'rowIndexs Array|String',
+        desc: `
+            [0,1,2]
+            all
+          `
+      }
+
+    ]
   }
 ]
 export default {

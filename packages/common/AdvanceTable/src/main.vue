@@ -489,7 +489,7 @@ export default {
       this.$nextTick(() => {
         if (rowIndexs === 'all') {
           this.showingData.forEach((item) => {
-            this.checkBoxes[item._index] = this.allCheckboxesSelect
+            this.checkBoxes[item._index] = true
           })
           this.checkBoxes = [].concat(this.checkBoxes)
         } else {

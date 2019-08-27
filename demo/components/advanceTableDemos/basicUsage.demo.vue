@@ -165,7 +165,7 @@ export default {
     this.data = this.getData()
     // data一定要先有值才可以再selectRow
     this.$refs.table.selectRow([1, 2, 5])
-    // this.$refs.table.selectRow('all'),可以全选当前展示数据
+    // this.$refs.table.selectRow('all') // 可以全选当前展示数据
   },
   methods: {
     batchDelete () {
