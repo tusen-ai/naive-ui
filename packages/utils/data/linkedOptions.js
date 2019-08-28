@@ -1,4 +1,9 @@
 
+/**
+ * For Select Component to use
+ * Todo: Refactor to avoid link list, since it will make component intrinsic
+ * logic more complex
+ */
 import cloneDeep from 'lodash/cloneDeep'
 
 export default function linkedOptions (options) {

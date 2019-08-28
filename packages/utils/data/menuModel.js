@@ -1,3 +1,7 @@
+/**
+ * For Cascader Component to use
+ */
+
 import cloneDeep from 'lodash/cloneDeep'
 
 function isLeaf (option) {
