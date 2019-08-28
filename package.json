@@ -93,7 +93,6 @@
     "ionicons": "^4.5.8",
     "masonry-layout": "^4.2.2",
     "moment": "^2.24.0",
-    "naive-ui": "^0.2.125",
     "node-sass": "^4.12.0",
     "sass-loader": "^7.1.0"
   }
