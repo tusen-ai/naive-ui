@@ -357,17 +357,21 @@ export default {
       ).toFixed(3)
     },
     selectedRows () {
-      return this.checkBoxes.map((isChecked, idx) => {
-        if (isChecked) {
-          return this.copyData[idx]
-        }
-      }).filter(item => item !== (void 0))
+      return this.checkBoxes
+        .map((isChecked, idx) => {
+          if (isChecked) {
+            return this.copyData[idx]
+          }
+        })
+        .filter((item) => item !== void 0)
     },
     isCheckedBoxAllIndeterminate () {
       let selectedLen = 0
       this.showingData.forEach((item) => {
         let realIdx = item._index
-        if (this.checkBoxes[realIdx] === true) { selectedLen++ }
+        if (this.checkBoxes[realIdx] === true) {
+          selectedLen++
+        }
       })
       return selectedLen === this.showingData.length || selectedLen === 0
     }
@@ -396,7 +400,10 @@ export default {
       console.log('currentSortColumn')
     },
     checkBoxes () {
-      if (this.selectedRows.length === this.showingData.length && this.showingData.length !== 0) {
+      if (
+        this.selectedRows.length === this.showingData.length &&
+        this.showingData.length !== 0
+      ) {
         this.allCheckboxesSelect = true
       }
       this.$emit('on-selected-change', this.selectedRows)
@@ -414,7 +421,9 @@ export default {
           let key = column.key
           if (keys.includes(key) && val[key] && val[key].length !== 0) {
             // TODO: 未来版本单选将会返回一个数值而不是数组!
-            console.warn('[NAIVE-UI]: n-advance-table filter filterMultiple=false will return not a array in future')
+            console.warn(
+              '[NAIVE-UI]: n-advance-table filter filterMultiple=false will return not a array in future'
+            )
             this.currentFilterColumn[key] = {
               value: [].concat(val[key]),
               filterFn: column.onFilter
@@ -520,9 +529,10 @@ export default {
         // clear
         this.clearSort()
       }
-      this.currentFilterColumn && Object.keys(this.currentFilterColumn).forEach(key => {
-        this.selectedFilter = {}
-      })
+      this.currentFilterColumn &&
+        Object.keys(this.currentFilterColumn).forEach((key) => {
+          this.selectedFilter = {}
+        })
       if (filter) {
         // ---- TODO: 未来版本将会去除这段代码,为了兼容老版本
         Object.keys(filter).forEach((key) => {
@@ -538,9 +548,9 @@ export default {
         // ----
         this.selectedFilter = filter
       }
-      if (searcher) {
+      if (searcher && this.search) {
         this.$refs.search.setSearch(searcher)
-      } else {
+      } else if (!searcher && this.search) {
         this.$refs.search.clearSearch()
       }
       if (page) {
@@ -590,7 +600,10 @@ export default {
       })
     },
     onAllCheckboxesClick () {
-      console.log('TCL: onAllCheckboxesClick -> this.allCheckboxesSelect', this.allCheckboxesSelect)
+      console.log(
+        'TCL: onAllCheckboxesClick -> this.allCheckboxesSelect',
+        this.allCheckboxesSelect
+      )
 
       this.showingData.forEach((item) => {
         this.checkBoxes[item._index] = this.allCheckboxesSelect
@@ -620,7 +633,7 @@ export default {
       let keys = Object.keys(this.currentFilterColumn)
       currentFilterColumn = {}
 
-      keys.forEach(key => {
+      keys.forEach((key) => {
         let val = this.currentFilterColumn[key].value
         let filterFn = this.currentFilterColumn[key].filterFn
         if (filterFn === 'custom') {
@@ -642,7 +655,7 @@ export default {
       let keys = Object.keys(this.currentSortColumn)
       currentSortColumn = {}
 
-      keys.forEach(key => {
+      keys.forEach((key) => {
         let val = this.currentSortColumn[key].value
         let sortable = this.currentSortColumn[key].sortable
         if (sortable === 'custom') {
