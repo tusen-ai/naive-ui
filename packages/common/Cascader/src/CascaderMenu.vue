@@ -145,7 +145,7 @@ export default {
       return this.expandTrigger === 'click'
     },
     linkedCascaderOptions () {
-      console.log('linkedCascaderOptions called')
+      // console.log('linkedCascaderOptions called')
       return linkedCascaderOptions(this.options, this.type)
     },
     menuOptions () {
@@ -316,6 +316,7 @@ export default {
     },
     handleOptionClick (e, option, setLoading) {
       if (this.expandTriggeredByClick && !option.disabled) {
+        console.log(option)
         this.updateActiveId(option.id)
         this.updateTrackId(option.id)
         if (this.lazy) {
@@ -327,9 +328,13 @@ export default {
             }
           }
         }
-        if (!this.multiple && !this.lazy) {
-          this.handleCascaderOptionCheck(option.id)
-        }
+        console.log('here')
+        // if (!this.multiple && !this.lazy) {
+        //   this.handleCascaderOptionCheck(option.id)
+        // }
+        // if (this.multiple && !this.lazy && option.isLeaf) {
+        //   this.handleCascaderOptionCheck(option.id)
+        // }
       }
     },
     handleMenuTypeChange (typeisSelect) {
@@ -420,6 +425,7 @@ export default {
     deep () {
       if (this.trackId) {
         const option = this.idOptionMap.get(this.trackId)
+        console.log('currentOption', option)
         if (option && option.firstAvailableChildId) {
           this.updateTrackId(option.firstAvailableChildId)
           this.updateActiveId(option.firstAvailableChildId)

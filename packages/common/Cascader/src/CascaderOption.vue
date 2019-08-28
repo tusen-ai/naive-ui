@@ -183,6 +183,7 @@ export default {
         leafCount: this.leafCount,
         loaded: this.loaded,
         depth: this.depth,
+        disabled: this.disabled,
         /** debug usage */
         hasCheckedLeaf: this.hasCheckedLeaf,
         checkedLeafCount: this.checkedLeafCount,

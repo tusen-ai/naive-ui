@@ -138,32 +138,32 @@ function rootedOptions (options) {
  * @param {Map} patches
  */
 function patchedOptions (options, patches) {
-  console.log('patchedOptions input', options, patches)
-  function traverse (options, depth = 0, parentIndex = -1) {
+  // console.log('patchedOptions input', options, patches)
+  function traverse (options, depth = 0, parentId = 0) {
     if (!Array.isArray(options)) return
     for (let i = 0; i < options.length; ++i) {
       const option = options[i]
-      const id = `${depth}_${parentIndex + 1}_${i + 1}`
+      const id = `${parentId}_${i + 1}`
       // console.log('iterate on option', id)
       if (!hasChildren(option)) {
         if (patches.has(id)) {
-          console.log('patched on option', id)
+          // console.log('patched on option', id)
           option.children = patches.get(id)
           option.loaded = true
         }
       }
-      traverse(option.children, depth + 1, i)
+      traverse(option.children, depth + 1, id)
     }
   }
   traverse(options)
-  console.log('patchedOptions output', options)
+  // console.log('patchedOptions output', options)
   return cloneDeep(options)
 }
 
 function linkedCascaderOptions (options, type) {
   const linkedCascaderOptions = options
   const path = []
-  function traverse (options, parent = null, depth = 0, parentIndex = -1) {
+  function traverse (options, parent = null, depth = 0, parentId = 0) {
     if (!Array.isArray(options)) return
     const length = options.length
     for (let i = 0; i < length; ++i) {
@@ -184,7 +184,7 @@ function linkedCascaderOptions (options, type) {
       /**
        * options.id to suport track option
        */
-      option.id = `${depth}_${parentIndex + 1}_${i + 1}`
+      option.id = `${parentId}_${i + 1}`
       /**
        * options.path to support ui status
        */
@@ -203,7 +203,7 @@ function linkedCascaderOptions (options, type) {
        */
       if (!option.isLeaf) {
         if (option.loaded) {
-          traverse(option.children, option, depth + 1, i)
+          traverse(option.children, option, depth + 1, option.id)
           option.leafCount = 0
           option.availableLeafCount = 0
           option.children.forEach(child => {
@@ -287,7 +287,7 @@ function menuOptions (linkedCascaderOptions, value, type) {
     }
   }
   traverse(linkedCascaderOptions)
-  console.log('menuOptions', linkedCascaderOptions)
+  // console.log('menuOptions', linkedCascaderOptions)
   return linkedCascaderOptions
 }
 
@@ -319,7 +319,8 @@ function menuModel (options, activeId, trackId) {
   const activeOptionPath = optionPath(options, activeId)
   const activeIds = new Set(activeOptionPath.map(option => option.id))
   const firstSubmenu = options[0].children
-  console.log('firstSubmenu', firstSubmenu)
+  // console.log('firstSubmenu', firstSubmenu)
+  console.log('menuModel', options, activeId, trackId, activeOptionPath)
   const model = []
   if (firstSubmenu !== null) {
     model.push(firstSubmenu.map(option => {
@@ -339,11 +340,12 @@ function menuModel (options, activeId, trackId) {
       }))
     }
   }
+  console.log('menuModel model', model)
   return model
 }
 
 function firstOptionId (options) {
-  console.log(options)
+  // console.log(options)
   return options[0].firstAvailableChildId
 }
 
