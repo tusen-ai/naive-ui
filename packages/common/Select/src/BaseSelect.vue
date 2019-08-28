@@ -202,12 +202,6 @@ export default {
     }
   },
   watch: {
-    selectedOptions (n) {
-      if (this.formItem) {
-        let vals = n.map(i => i.value)
-        this.dispatch('NFormItem', 'on-form-change', vals)
-      }
-    },
     filteredOptions () {
       this.$nextTick().then(() => {
         this.updatePosition()
@@ -217,6 +211,9 @@ export default {
       })
     },
     value () {
+      if (this.formItem) {
+        this.dispatch('NFormItem', 'on-form-change', this.value)
+      }
       this.$nextTick().then(() => {
         this.updatePosition()
         if (this.$refs.scrollbar) {
