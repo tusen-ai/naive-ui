@@ -51,6 +51,12 @@
             :key="column.key"
             :style="computeAlign(column)"
           >
+            <n-checkbox
+              v-if="column.type === 'selection'"
+              v-model="allCheckboxesSelect"
+              :indeterminate="!isCheckedBoxAllIndeterminate"
+              @click.native="onAllCheckboxesClick"
+            />
             {{ column.title }}
             <SortIcon
               v-if="column.sortable"
@@ -120,7 +126,12 @@
             :style="computeAlign(column)"
             :class="computeTdClass(column, rowData)"
           >
+            <n-checkbox
+              v-if="column.type === 'selection'"
+              v-model="checkBoxes[rowData._index]"
+            />
             <row
+              v-else
               :index="i"
               :row="rowData"
               :key-name="column.key"
@@ -169,6 +180,7 @@ import PopFilter from '../popFilter'
 import searchInput from '../searchInput'
 import Loading from '../loading'
 import { noopFn } from '../../../utils/index'
+
 export default {
   name: 'NAdvanceTable',
   components: {
@@ -246,22 +258,8 @@ export default {
     }
   },
   data () {
-    // const sortIndexs = {}
-    // this.columns.forEach((column, idx) => {
-    //   sortIndexs[column.key || idx] = column.order ? column.order : 0
-    // })
-    // const sortIndexs = new Array(this.columns.length).fill(0).map((item, idx) => {
-    //   return this.columns[idx].order ? this.columns[idx].order : 0
-    // })
-    // console.log(sortIndexs)
-    let copyData = this.data.slice(0).map((row, idx) => {
-      return {
-        row,
-        _index: idx
-      }
-    })
     return {
-      copyData,
+      copyData: [],
       sortIndexs: {},
       wrapperWidth: 'unset',
       tbodyWidth: 'auto;',
@@ -271,7 +269,9 @@ export default {
       currentFilterColumn: null,
       currentSearchColumn: null,
       currentPage: 1,
-      selectedFilter: {}
+      selectedFilter: {},
+      checkBoxes: [],
+      allCheckboxesSelect: false
     }
   },
   computed: {
@@ -355,6 +355,25 @@ export default {
         (this.wrapperWidth - this.scrollBarWidth) /
         this.columns.length
       ).toFixed(3)
+    },
+    selectedRows () {
+      return this.checkBoxes
+        .map((isChecked, idx) => {
+          if (isChecked) {
+            return this.copyData[idx]
+          }
+        })
+        .filter((item) => item !== void 0)
+    },
+    isCheckedBoxAllIndeterminate () {
+      let selectedLen = 0
+      this.showingData.forEach((item) => {
+        let realIdx = item._index
+        if (this.checkBoxes[realIdx] === true) {
+          selectedLen++
+        }
+      })
+      return selectedLen === this.showingData.length || selectedLen === 0
     }
   },
   watch: {
@@ -367,14 +386,11 @@ export default {
       this.$emit('on-page-change', this.paginationer)
     },
     data () {
-      this.copyData = this.data.slice(0).map((row, idx) => {
-        return {
-          row,
-          _index: idx
-        }
-      })
+      this.initData()
       this.searchData = this.computeShowingData()
       this.searchDataNoSort = null
+      this.checkBoxes = []
+      this.allCheckboxesSelect = false
     },
     currentSearchColumn () {
       this.searchData = this.computeShowingData()
@@ -382,6 +398,15 @@ export default {
     currentSortColumn () {
       this.searchData = this.computeShowingData()
       console.log('currentSortColumn')
+    },
+    checkBoxes () {
+      if (
+        this.selectedRows.length === this.showingData.length &&
+        this.showingData.length !== 0
+      ) {
+        this.allCheckboxesSelect = true
+      }
+      this.$emit('on-selected-change', this.selectedRows)
     },
     selectedFilter: {
       deep: true,
@@ -396,7 +421,9 @@ export default {
           let key = column.key
           if (keys.includes(key) && val[key] && val[key].length !== 0) {
             // TODO: 未来版本单选将会返回一个数值而不是数组!
-            console.warn('[NAIVE-UI]: n-advance-table filter filterMultiple=false will return not a array in future')
+            console.warn(
+              '[NAIVE-UI]: n-advance-table filter filterMultiple=false will return not a array in future'
+            )
             this.currentFilterColumn[key] = {
               value: [].concat(val[key]),
               filterFn: column.onFilter
@@ -414,6 +441,9 @@ export default {
       },
       deep: true
     }
+  },
+  created () {
+    this.initData()
   },
 
   mounted () {
@@ -433,6 +463,14 @@ export default {
     // window.removeEventListener('resize', this.init)
   },
   methods: {
+    initData () {
+      this.copyData = this.data.slice(0).map((row, idx) => {
+        return {
+          row,
+          _index: idx
+        }
+      })
+    },
     computeAlign (column) {
       if (column.align) {
         return {
@@ -456,6 +494,26 @@ export default {
       // console.log(className)
       return className
     },
+    selectRow (rowIndexs = []) {
+      this.$nextTick(() => {
+        if (rowIndexs === 'all') {
+          this.showingData.forEach((item) => {
+            this.checkBoxes[item._index] = true
+          })
+          this.checkBoxes = [].concat(this.checkBoxes)
+        } else {
+          if (this.showingData.length > 0) {
+            rowIndexs.forEach((idx) => {
+              if (this.showingData[idx]) {
+                const realIdx = this.showingData[idx]._index
+                this.checkBoxes[realIdx] = true
+              }
+            })
+            this.checkBoxes = [].concat(this.checkBoxes)
+          }
+        }
+      })
+    },
     /**
      * {key:[value,value1],key1:[v1,v2]}
      * {key:value}
@@ -471,9 +529,10 @@ export default {
         // clear
         this.clearSort()
       }
-      this.currentFilterColumn && Object.keys(this.currentFilterColumn).forEach(key => {
-        this.selectedFilter = {}
-      })
+      this.currentFilterColumn &&
+        Object.keys(this.currentFilterColumn).forEach((key) => {
+          this.selectedFilter = {}
+        })
       if (filter) {
         // ---- TODO: 未来版本将会去除这段代码,为了兼容老版本
         Object.keys(filter).forEach((key) => {
@@ -489,9 +548,9 @@ export default {
         // ----
         this.selectedFilter = filter
       }
-      if (searcher) {
+      if (searcher && this.search) {
         this.$refs.search.setSearch(searcher)
-      } else {
+      } else if (!searcher && this.search) {
         this.$refs.search.clearSearch()
       }
       if (page) {
@@ -518,8 +577,15 @@ export default {
         let width = column.width
         return {
           width: width + 'px',
-          'padding-right': this.scrollBarWidth + 'px',
-          minWidth: width + 'px'
+          'padding-right': this.scrollBarWidth + 'px'
+          // minWidth: width + 'px'
+        }
+      } else if (column.type === 'selection') {
+        let width = 60
+        return {
+          width: width + 'px',
+          'padding-right': this.scrollBarWidth + 'px'
+          // minWidth: width + 'px'
         }
       }
       return null
@@ -532,6 +598,17 @@ export default {
 
         // this.scrollBarWidth = 5
       })
+    },
+    onAllCheckboxesClick () {
+      console.log(
+        'TCL: onAllCheckboxesClick -> this.allCheckboxesSelect',
+        this.allCheckboxesSelect
+      )
+
+      this.showingData.forEach((item) => {
+        this.checkBoxes[item._index] = this.allCheckboxesSelect
+      })
+      this.checkBoxes = [].concat(this.checkBoxes)
     },
     handleSearch ({ key, word }) {
       this.currentSearchColumn = {
@@ -556,7 +633,7 @@ export default {
       let keys = Object.keys(this.currentFilterColumn)
       currentFilterColumn = {}
 
-      keys.forEach(key => {
+      keys.forEach((key) => {
         let val = this.currentFilterColumn[key].value
         let filterFn = this.currentFilterColumn[key].filterFn
         if (filterFn === 'custom') {
@@ -578,7 +655,7 @@ export default {
       let keys = Object.keys(this.currentSortColumn)
       currentSortColumn = {}
 
-      keys.forEach(key => {
+      keys.forEach((key) => {
         let val = this.currentSortColumn[key].value
         let sortable = this.currentSortColumn[key].sortable
         if (sortable === 'custom') {
