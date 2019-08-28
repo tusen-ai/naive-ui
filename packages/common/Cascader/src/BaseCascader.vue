@@ -358,8 +358,14 @@ export default {
         this.updatePosition()
       })
     },
+    /**
+     * Important for blur input state!
+     */
     handleKeyUpEsc () {
       this.closeMenu()
+      this.$nextTick().then(() => {
+        this.$refs.activator.focusPatternInputWrapper()
+      })
     },
     handleKeyDownSpace (e) {
       if (!this.filterable) {

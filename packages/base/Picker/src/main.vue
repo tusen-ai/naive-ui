@@ -262,7 +262,7 @@ export default {
   },
   methods: {
     handleBlur () {
-      // this.$emit('blur')
+      this.$emit('blur')
     },
     handleClear (e) {
       this.$emit('clear', e)
