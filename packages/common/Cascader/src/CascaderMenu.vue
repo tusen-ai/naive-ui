@@ -1,6 +1,9 @@
 <template>
   <div
     class="n-cascader-menu"
+    :class="{
+      'n-cascader-menu--masked': masked
+    }"
     @mousedown.prevent="() => {}"
   >
     <transition name="n-cascader-cascader-menu--transition">
@@ -14,6 +17,7 @@
           :size="size"
           :options="submenuOptions"
           :depth="index + 1"
+          :menu-is-loading="loading"
           @option-click="handleOptionClick"
           @option-mouseenter="handleOptionMouseEnter"
           @option-mouseleave="handleOptionMouseLeave"
@@ -39,28 +43,32 @@
         @menu-change-pending-option="handleMenuChangePendingOption"
       />
     </transition>
+    <n-base-menu-mask
+      ref="mask"
+      v-model="masked"
+    />
   </div>
 </template>
 <script>
-import NCascaderSubmenu from './CascaderSubmenu'
+import NBaseMenuMask from '../../../base/MenuMask'
 import NBaseSelectMenu from '../../../base/SelectMenu'
+import NCascaderSubmenu from './CascaderSubmenu'
+import linkedOptions from '../../../utils/data/linkedOptions'
 import { getType, traverseWithCallback, minus, merge } from './utils'
-import linkedOptions from '../../../utils/component/linkedOptions'
 
 import {
   firstOptionId,
-  rootedOptions,
-  patchedOptions,
   linkedCascaderOptions,
   menuOptions,
   menuModel
-} from '../../../utils/component/menuModel'
+} from '../../../utils/data/menuModel'
 
 export default {
   name: 'NCascaderMenu',
   components: {
     NCascaderSubmenu,
-    NBaseSelectMenu
+    NBaseSelectMenu,
+    NBaseMenuMask
   },
   props: {
     size: {
@@ -100,13 +108,29 @@ export default {
       default: 'click'
     },
     activeId: {
-      type: Number,
+      type: String,
       default: null
+    },
+    lazy: {
+      type: Boolean,
+      default: false
+    },
+    patches: {
+      validator (patches) {
+        return patches instanceof Map
+      },
+      required: true
+    },
+    onLoad: {
+      type: Function,
+      default: () => {}
     }
   },
   data () {
     return {
-      trackId: null
+      trackId: null,
+      loading: false,
+      masked: false
     }
   },
   computed: {
@@ -120,13 +144,12 @@ export default {
     expandTriggeredByClick () {
       return this.expandTrigger === 'click'
     },
-    rootedOptions () {
-      return rootedOptions(this.options)
-    },
     linkedCascaderOptions () {
-      return linkedCascaderOptions(this.rootedOptions, this.type)
+      console.log('linkedCascaderOptions called')
+      return linkedCascaderOptions(this.options, this.type)
     },
     menuOptions () {
+      console.log('menuOptions called')
       return menuOptions(this.linkedCascaderOptions, this.value, this.type)
     },
     menuModel () {
@@ -213,6 +236,20 @@ export default {
       })
     }
   },
+  mounted () {
+    if (this.lazy && !this.options[0].children) {
+      const option = this.menuOptions[0]
+      if (!this.loading) {
+        this.loading = true
+        this.$refs.mask.show(`Loading`)
+        this.onLoad(option, (children) => this.resolveLoad(option, children, () => {
+          this.$refs.mask.hide()
+        }), () => this.rejectLoad(() => {
+          this.$refs.mask.hide()
+        }))
+      }
+    }
+  },
   methods: {
     isSelected (option) {
       if (this.multiple) {
@@ -266,10 +303,33 @@ export default {
     },
     handleOptionMouseLeave (e, option) {
     },
-    handleOptionClick (e, option) {
+    resolveLoad (option, children, setLoading) {
+      const newPatches = new Map(this.patches)
+      newPatches.set(option.id, children)
+      this.$emit('update:patches', newPatches)
+      this.loading = false
+      setLoading(false)
+    },
+    rejectLoad (setLoading) {
+      this.loading = false
+      setLoading(false)
+    },
+    handleOptionClick (e, option, setLoading) {
       if (this.expandTriggeredByClick && !option.disabled) {
         this.updateActiveId(option.id)
         this.updateTrackId(option.id)
+        if (this.lazy) {
+          if (!option.loaded) {
+            if (!this.loading) {
+              this.loading = true
+              setLoading(true)
+              this.onLoad(option, (children) => this.resolveLoad(option, children, setLoading), () => this.rejectLoad(setLoading))
+            }
+          }
+        }
+        if (!this.multiple && !this.lazy) {
+          this.handleCascaderOptionCheck(option.id)
+        }
       }
     },
     handleMenuTypeChange (typeisSelect) {
@@ -312,9 +372,12 @@ export default {
     handleCascaderOptionCheck (optionId) {
       const option = this.idOptionMap.get(optionId)
       if (!option || option.disabled) return
-      console.log(option)
       if (this.type === 'multiple') {
         const newValues = []
+        if (!option.determined) {
+          this.$refs.mask.showOnce(`Not all child nodes of "${option.label}" have been loaded`)
+          return
+        }
         const traverseMultiple = option => {
           if (!option || option.disabled) return
           if (Array.isArray(option.children)) {

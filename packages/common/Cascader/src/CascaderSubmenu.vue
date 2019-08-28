@@ -17,9 +17,9 @@
       </transition>
       <n-cascader-option
         v-for="(option, index) in options"
-        :id="option.id"
         ref="options"
         :key="`${index}_${option.value}`"
+        :option-id="option.id"
         :value="option.value"
         :active="option.active"
         :tracked="option.tracked"
@@ -36,6 +36,12 @@
         :is-leaf="option.isLeaf"
         :checkbox-checked="option.checkboxChecked"
         :checkbox-indeterminate="option.checkboxIndeterminate"
+        :checked-leaf-count="option.checkedLeafCount"
+        :leaf-count="option.leafCount"
+        :has-checked-leaf="option.hasCheckedLeaf"
+        :loaded="option.loaded"
+        :determined="option.determined"
+        :menu-is-loading="menuIsLoading"
         @check="handleOptionCheck"
         @click="handleOptionClick"
         @mouseenter="handleOptionMouseEnter"
@@ -65,6 +71,10 @@ export default {
     options: {
       type: Array,
       required: true
+    },
+    menuIsLoading: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -77,13 +87,13 @@ export default {
       if (!option.disabled) {
         this.updateLightBarPosition(e.target)
       }
-      this.$emit('option-mouseenter', e, option, this)
+      this.$emit('option-mouseenter', e, option)
     },
     handleOptionMouseLeave (e, option) {
-      this.$emit('option-mouseleave', e, option, this)
+      this.$emit('option-mouseleave', e, option)
     },
-    handleOptionClick (e, option) {
-      this.$emit('option-click', e, option, this)
+    handleOptionClick (e, option, setLoading) {
+      this.$emit('option-click', e, option, setLoading)
     },
     handleMouseLeave (e) {
       this.hideLightBar()

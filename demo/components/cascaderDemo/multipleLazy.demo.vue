@@ -1,7 +1,7 @@
 <template>
   <div class="n-doc-section">
     <div class="n-doc-section__header">
-      Multiple
+      Multiple Lazy
     </div>
     <div
       class="n-doc-section__view"
@@ -41,8 +41,8 @@ function genChildren (option) {
 
 const options = [
   {
-    label: 'China',
-    value: 'china',
+    label: 'Root',
+    value: 'root',
     isLeaf: false
   }
 ]

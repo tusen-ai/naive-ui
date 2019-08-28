@@ -19,6 +19,10 @@
       <single-all-search />
       <multiple-search />
       <multiple-all-search />
+      <single-lazy />
+      <single-all-lazy />
+      <multiple-lazy />
+      <multiple-all-lazy />
     </div>
   </div>
 </template>
@@ -33,6 +37,10 @@ import singleSearch from './singleSearch.demo'
 import singleAllSearch from './singleAllSearch.demo'
 import multipleSearch from './multipleSearch.demo'
 import multipleAllSearch from './multipleAllSearch.demo'
+import singleLazy from './singleLazy.demo'
+import singleAllLazy from './singleAllLazy.demo'
+import multipleLazy from './multipleLazy.demo'
+import multipleAllLazy from './multipleAllLazy.demo'
 
 export default {
   components: {
@@ -43,7 +51,11 @@ export default {
     singleSearch,
     singleAllSearch,
     multipleSearch,
-    multipleAllSearch
+    multipleAllSearch,
+    singleLazy,
+    singleAllLazy,
+    multipleLazy,
+    multipleAllLazy
   },
   data () {
     return {

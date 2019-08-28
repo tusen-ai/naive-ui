@@ -1,7 +1,7 @@
 <template>
   <div class="n-doc-section">
     <div class="n-doc-section__header">
-      Multiple
+      Single Lazy
     </div>
     <div
       class="n-doc-section__view"
@@ -10,9 +10,7 @@
       <!--EXAMPLE_START-->
       <n-cascader
         v-model="value"
-        multiple
         placeholder="Please Select Something"
-        :options="options"
         style="flex-grow: 1; margin-right: 12px;"
         lazy
         :on-load="handleLoad"
@@ -29,29 +27,21 @@
 <script>
 function genChildren (option) {
   const children = []
+  const label = option.label || 'root'
   for (let i = 0; i <= option.depth; ++i) {
     children.push({
-      label: option.label + '_' + i,
-      value: option.label + '_' + i,
+      label: label + '_' + i,
+      value: label + '_' + i,
       isLeaf: option.depth === 3
     })
   }
   return children
 }
 
-const options = [
-  {
-    label: 'China',
-    value: 'china',
-    isLeaf: false
-  }
-]
-
 export default {
   data () {
     return {
-      value: null,
-      options: options
+      value: null
     }
   },
   methods: {

@@ -26,7 +26,6 @@
       :selected-options="selectedOptions"
       :multiple="multiple"
       :filterable="filterable"
-      :remote="remote"
       :clearable="clearable"
       :disabled="disabled"
       @blur="handleActivatorBlur"
@@ -51,12 +50,15 @@
             v-clickoutside="handleMenuClickOutside"
             :value="value"
             :multiple="multiple"
-            :options="options"
+            :options="patchedOptions"
             :enable-all-options="enableAllOptions"
             :pattern="pattern"
             :filterable="filterable"
             :expand-trigger="expandTrigger"
             :active-id.sync="activeId"
+            :lazy="lazy"
+            :on-load="onLoad"
+            :patches.sync="patches"
             @input="handleMenuInput"
           />
         </transition>
@@ -74,6 +76,11 @@ import clickoutside from '../../../directives/clickoutside'
 import CascaderMenu from './CascaderMenu'
 import { getType, traverseWithCallback } from './utils'
 
+import {
+  rootedOptions,
+  patchedOptions
+} from '../../../utils/data/menuModel'
+
 export default {
   name: 'NBaseCascader',
   components: {
@@ -87,7 +94,7 @@ export default {
   props: {
     options: {
       type: Array,
-      required: true
+      default: null
     },
     // eslint-disable-next-line vue/require-prop-types
     value: {
@@ -127,9 +134,17 @@ export default {
       type: Boolean,
       default: false
     },
-    remote: {
+    lazy: {
       type: Boolean,
       default: false
+    },
+    onLoad: {
+      type: Function,
+      default: () => {}
+    },
+    splitor: {
+      type: String,
+      default: ' / '
     }
   },
   data () {
@@ -141,23 +156,32 @@ export default {
       /**
        * set here to keep state
        */
-      activeId: null
+      activeId: null,
+      patches: new Map()
     }
   },
   computed: {
     type: getType,
+    rootedOptions () {
+      console.log('rootedOptions called')
+      return rootedOptions(this.options)
+    },
+    patchedOptions () {
+      console.log('patchedOptions called')
+      return patchedOptions(this.rootedOptions, this.patches)
+    },
     selectedOptions () {
       if (this.multiple) {
         let options = []
         if (Array.isArray(this.value)) {
           const values = new Set(this.value)
           const path = []
-          traverseWithCallback(this.options, option => {
+          traverseWithCallback(this.patchedOptions, option => {
             path.push(option.label)
             if (values.has(option.value)) {
               options.push({
                 value: option.value,
-                label: path.join(' / ')
+                label: path.slice(1, path.length).join(this.splitor)
               })
             }
           }, () => {
@@ -177,14 +201,14 @@ export default {
       if (!this.multiple) {
         const path = []
         let selectedOption = null
-        traverseWithCallback(this.options, option => {
+        traverseWithCallback(this.patchedOptions, option => {
           path.push(option.label)
           // console.log(option.value, this.value)
           if (option.value === this.value) {
             // console.log('here')
             selectedOption = {
               value: option.value,
-              label: path.join(' / ')
+              label: path.slice(1, path.length).join(this.splitor)
             }
           }
         }, () => {
@@ -195,6 +219,9 @@ export default {
     }
   },
   watch: {
+    patches () {
+      console.log('patched updated!')
+    },
     options () {
       this.activeId = null
     },

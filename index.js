@@ -1,6 +1,6 @@
 import Card from './packages/common/Card'
 import Icon from './packages/common/Icon'
-import Loader from './packages/common/Loader'
+import Loader from './packages/base/Loading'
 import GradientText from './packages/common/GradientText'
 import ColumnGroup from './packages/common/ColumnGroup'
 import WithPadding from './packages/common/WithPadding'

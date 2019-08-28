@@ -9,7 +9,7 @@ export default {
   props: {
     options: {
       type: Array,
-      required: true
+      default: null
     },
     // eslint-disable-next-line vue/require-prop-types
     value: {
@@ -42,6 +42,14 @@ export default {
     all: {
       type: Boolean,
       default: false
+    },
+    lazy: {
+      type: Boolean,
+      default: false
+    },
+    onLoad: {
+      type: Function,
+      default: () => {}
     }
   },
   data () {

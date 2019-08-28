@@ -78,7 +78,7 @@ import Emitter from '../../../mixins/emitter'
 import clickoutside from '../../../directives/clickoutside'
 import NBaseSelectMenu from '../../../base/SelectMenu'
 import NBasePicker from '../../../base/Picker'
-import linkedOptions from '../../../utils/component/linkedOptions'
+import linkedOptions from '../../../utils/data/linkedOptions'
 
 export default {
   name: 'NBaseSelect',

@@ -25,6 +25,7 @@
 }
 
 @include b(cascader-menu) {
+  position: relative;
   @include fade-in-scale-up-transition(cascader-menu, inherit, .2s);
 }
 
@@ -57,6 +58,17 @@
     top: 7px;
     display: block;
   }
+  .n-cascader-option__loading {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+    opacity: 0;
+    transition: opacity .3s $default-cubic-bezier;
+  }
   &.n-cascader-option--active {
     color: $main-color;
   }
@@ -64,7 +76,6 @@
     color: rgba(255, 255, 255, .3);
     cursor: not-allowed;
   }
-  
   &.n-cascader-option--tracked {
     background-color: rgba(81, 122, 126, 1);
   }
@@ -79,6 +90,18 @@
       transform: rotate(45deg) translateY(-50%);
       right: 18px;
       top: 50%;
+      opacity: 1;
+      transition: opacity .3s $default-cubic-bezier;
+    }
+  }
+  &.n-cascader-option--loading {
+    .n-cascader-option__loading {
+      opacity: 1;
+    }
+    &.n-cascader-option--not-leaf {
+      &::after {
+        opacity: 0;
+      }
     }
   }
 }
@@ -173,4 +196,19 @@
       background-color: #4b516a;
     }
   }
+}
+
+@include b(base-menu-mask) {
+  @include fade-in-transition(base-menu-mask);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 14px;
+  background-color: rgba(75, 81, 106, .75);
 }

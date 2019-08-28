@@ -5,9 +5,10 @@
       'n-cascader-option--active': active && !isLeaf,
       'n-cascader-option--tracked': tracked,
       'n-cascader-option--disabled': disabled,
-      'n-cascader-option--not-leaf': !isLeaf
+      'n-cascader-option--not-leaf': !isLeaf,
+      'n-cascader-option--loading': loading
     }"
-    :data-n-cascader-option-id="id"
+    :data-n-cascader-option-id="optionId"
     @click="handleClick"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
@@ -20,7 +21,7 @@
         :disabled="disabled"
         :value="checkboxChecked"
         :indeterminate="checkboxIndeterminate"
-        @click="handleOptionCheck"
+        @click.stop="handleOptionCheck"
       />
     </div>
     <div
@@ -44,19 +45,29 @@
         @click="handleOptionCheck"
       />
     </div>
-    <span class="n-cascader-option__label">{{ label }}</span>
+    <span
+      class="n-cascader-option__label"
+    >{{ label }}
+    </span>
+    <div
+      class="n-cascader-option__loading"
+    >
+      <n-base-loading />
+    </div>
   </div>
 </template>
 
 <script>
 import NCheckbox from '../../Checkbox'
 import NRadio from '../../Radio'
+import NBaseLoading from '../../../base/Loading'
 
 export default {
   name: 'NCascaderOption',
   components: {
     NCheckbox,
-    NRadio
+    NRadio,
+    NBaseLoading
   },
   props: {
     checked: {
@@ -67,8 +78,8 @@ export default {
       type: String,
       required: true
     },
-    id: {
-      type: Number,
+    optionId: {
+      type: String,
       required: true
     },
     label: {
@@ -88,19 +99,19 @@ export default {
       default: false
     },
     prevAvailableSiblingId: {
-      type: Number,
+      type: String,
       default: null
     },
     nextAvailableSiblingId: {
-      type: Number,
+      type: String,
       default: null
     },
     availableParentId: {
-      type: Number,
+      type: String,
       default: null
     },
     firstAvailableChildId: {
-      type: Number,
+      type: String,
       default: null
     },
     disabled: {
@@ -126,18 +137,57 @@ export default {
     checkboxIndeterminate: {
       type: Boolean,
       default: false
+    },
+    loaded: {
+      type: Boolean,
+      default: false
+    },
+    menuIsLoading: {
+      type: Boolean,
+      default: false
+    },
+    /** debug usage */
+    hasCheckedLeaf: {
+      type: Boolean,
+      required: true
+    },
+    checkedLeafCount: {
+      type: Number,
+      required: true
+    },
+    leafCount: {
+      type: Number,
+      required: true
+    },
+    determined: {
+      type: Boolean,
+      required: true
+    }
+  },
+  data () {
+    return {
+      loading: false
     }
   },
   computed: {
     option () {
       return {
-        id: this.id,
+        id: this.optionId,
+        label: this.label,
         value: this.value,
         children: this.children,
         prevAvailableSiblingId: this.prevAvailableSiblingId,
         nextAvailableSiblingId: this.nextAvailableSiblingId,
         availableParentId: this.availableParentId,
-        firstAvailableChildId: this.firstAvailableChildId
+        firstAvailableChildId: this.firstAvailableChildId,
+        leafCount: this.leafCount,
+        loaded: this.loaded,
+        depth: this.depth,
+        /** debug usage */
+        hasCheckedLeaf: this.hasCheckedLeaf,
+        checkedLeafCount: this.checkedLeafCount,
+        isLeaf: this.isLeaf,
+        determined: this.determined
       }
     }
   },
@@ -146,19 +196,19 @@ export default {
   },
   methods: {
     handleClick (e) {
-      this.$emit('click', e, this)
-      if (this.type === 'single') {
-        this.$emit('check', this)
-      }
+      this.$emit('click', e, this.option, this.setLoading)
     },
     handleMouseEnter (e) {
-      this.$emit('mouseenter', e, this.option)
+      this.$emit('mouseenter', e, this.option, this.setLoading)
     },
     handleMouseLeave (e) {
-      this.$emit('mouseleave', e, this.option)
+      this.$emit('mouseleave', e, this.option, this.setLoading)
     },
     handleOptionCheck (e) {
-      this.$emit('check', this)
+      this.$emit('check', this.option)
+    },
+    setLoading (loading) {
+      this.loading = loading
     }
   }
 }

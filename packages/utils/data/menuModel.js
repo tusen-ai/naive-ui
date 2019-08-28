@@ -23,7 +23,8 @@ function processedOption (option, activeIds, trackId) {
     checkboxChecked: checkboxChecked(option),
     checkboxIndeterminate: checkboxIndeterminate(option),
     isLeaf: isLeaf(option),
-    tracked: tracked(option, trackId)
+    tracked: tracked(option, trackId),
+    determined: !Number.isNaN(option.leafCount)
   }
 }
 
@@ -33,10 +34,14 @@ function tracked (option, trackId) {
 
 function checkboxChecked (option) {
   if (option.type === 'multiple') {
-    if (Array.isArray(option.children) && option.children.length) {
-      return option.leafCount === option.checkedLeafCount
-    } else {
+    if (option.isLeaf) {
       return option.checked
+    } else {
+      if (Number.isNaN(option.leafCount)) {
+        return false
+      } else {
+        return option.leafCount === option.checkedLeafCount
+      }
     }
   } else {
     return option.checked
@@ -45,7 +50,9 @@ function checkboxChecked (option) {
 
 function checkboxIndeterminate (option) {
   if (option.type === 'multiple') {
-    return !option.checked && option.checkedLeafCount !== 0 && option.checkedLeafCount !== option.leafCount
+    if (!option.isLeaf) {
+      return option.hasCheckedLeaf && !checkboxChecked(option)
+    }
   } return false
 }
 
@@ -62,6 +69,7 @@ function loaded (option) {
 
 function markAvailableSiblingIds (options) {
   const length = options.length
+  if (length === 0) return
   let lastAvailableOption = null
   for (let i = 0; i < length; ++i) {
     const option = options[i]
@@ -119,7 +127,8 @@ function availableParentId (parent, depth) {
 
 function rootedOptions (options) {
   return cloneDeep([{
-    children: options || []
+    isLeaf: false,
+    children: options || null
   }])
 }
 
@@ -129,26 +138,32 @@ function rootedOptions (options) {
  * @param {Map} patches
  */
 function patchedOptions (options, patches) {
-  function traverse (options) {
+  console.log('patchedOptions input', options, patches)
+  function traverse (options, depth = 0, parentIndex = -1) {
     if (!Array.isArray(options)) return
-    for (const option of options) {
+    for (let i = 0; i < options.length; ++i) {
+      const option = options[i]
+      const id = `${depth}_${parentIndex + 1}_${i + 1}`
+      // console.log('iterate on option', id)
       if (!hasChildren(option)) {
-        if (patches.has(option)) {
-          option.children = patches.get(option)
+        if (patches.has(id)) {
+          console.log('patched on option', id)
+          option.children = patches.get(id)
+          option.loaded = true
         }
       }
-      traverse(options)
+      traverse(option.children, depth + 1, i)
     }
   }
   traverse(options)
-  return options
+  console.log('patchedOptions output', options)
+  return cloneDeep(options)
 }
 
 function linkedCascaderOptions (options, type) {
   const linkedCascaderOptions = options
   const path = []
-  let id = 0
-  function traverse (options, parent = null, depth = 0) {
+  function traverse (options, parent = null, depth = 0, parentIndex = -1) {
     if (!Array.isArray(options)) return
     const length = options.length
     for (let i = 0; i < length; ++i) {
@@ -169,7 +184,7 @@ function linkedCascaderOptions (options, type) {
       /**
        * options.id to suport track option
        */
-      option.id = id++
+      option.id = `${depth}_${parentIndex + 1}_${i + 1}`
       /**
        * options.path to support ui status
        */
@@ -188,7 +203,7 @@ function linkedCascaderOptions (options, type) {
        */
       if (!option.isLeaf) {
         if (option.loaded) {
-          traverse(option.children, option, depth + 1)
+          traverse(option.children, option, depth + 1, i)
           option.leafCount = 0
           option.availableLeafCount = 0
           option.children.forEach(child => {
@@ -227,6 +242,7 @@ function menuOptions (linkedCascaderOptions, value, type) {
     for (let i = 0; i < length; ++i) {
       const option = options[i]
       option.checkedLeafCount = 0
+      option.checkedAvailableLeafCount = 0
       option.hasCheckedLeaf = false
       if (type === 'multiple') {
         if (option.loaded) {
@@ -234,6 +250,7 @@ function menuOptions (linkedCascaderOptions, value, type) {
             traverse(option.children, depth + 1)
             option.children.forEach(child => {
               option.checkedLeafCount += child.checkedLeafCount
+              option.checkedAvailableLeafCount += child.checkedAvailableLeafCount
               option.hasCheckedLeaf = !!(option.hasCheckedLeaf || child.hasCheckedLeaf)
             })
           } else {
@@ -241,11 +258,17 @@ function menuOptions (linkedCascaderOptions, value, type) {
             if (option.checked) {
               checkedOptions.push(option)
               option.checkedLeafCount = 1
+              if (option.disabled) {
+                option.availableLeafCount = 0
+              } else {
+                option.availableLeafCount = 1
+              }
               option.hasCheckedLeaf = true
             }
           }
         } else {
           option.checkedLeafCount = NaN
+          option.checkedAvailableLeafCount = NaN
         }
       } else if (type === 'multiple-all-options') {
         if (option.loaded && !option.isLeaf) {
@@ -264,6 +287,7 @@ function menuOptions (linkedCascaderOptions, value, type) {
     }
   }
   traverse(linkedCascaderOptions)
+  console.log('menuOptions', linkedCascaderOptions)
   return linkedCascaderOptions
 }
 
@@ -295,9 +319,15 @@ function menuModel (options, activeId, trackId) {
   const activeOptionPath = optionPath(options, activeId)
   const activeIds = new Set(activeOptionPath.map(option => option.id))
   const firstSubmenu = options[0].children
-  const model = [firstSubmenu.map(option => {
-    return processedOption(option, activeIds, trackId)
-  })]
+  console.log('firstSubmenu', firstSubmenu)
+  const model = []
+  if (firstSubmenu !== null) {
+    model.push(firstSubmenu.map(option => {
+      return processedOption(option, activeIds, trackId)
+    }))
+  } else {
+    model.push([])
+  }
   for (const option of activeOptionPath) {
     /**
      * pass root option
