@@ -41,7 +41,7 @@
         :has-checked-leaf="option.hasCheckedLeaf"
         :loaded="option.loaded"
         :determined="option.determined"
-        :menu-is-loading="menuIsLoading"
+        :loading="option.loading"
         @check="handleOptionCheck"
         @click="handleOptionClick"
         @mouseenter="handleOptionMouseEnter"
@@ -92,8 +92,8 @@ export default {
     handleOptionMouseLeave (e, option) {
       this.$emit('option-mouseleave', e, option)
     },
-    handleOptionClick (e, option, setLoading) {
-      this.$emit('option-click', e, option, setLoading)
+    handleOptionClick (e, option) {
+      this.$emit('option-click', e, option)
     },
     handleMouseLeave (e) {
       this.hideLightBar()

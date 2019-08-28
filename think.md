@@ -32,6 +32,8 @@ activator 外面不应该包元素
 检查内存泄露可能性
 考虑级联异步api
 placement $refs 变化更改
+## 2018.8.28
+picker 在 input 聚焦的时候，esc 按钮不符合预期
 ## TODO
 issue fix, add delay prop
 add trigger to tooltip

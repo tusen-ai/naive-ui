@@ -56,7 +56,6 @@ export default {
   },
   methods: {
     handleLoad (option, resolve) {
-      console.log(option)
       window.setTimeout(() => {
         resolve(genChildren(option))
       }, 1000)

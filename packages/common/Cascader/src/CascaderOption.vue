@@ -32,7 +32,7 @@
         :disabled="disabled"
         :value="true"
         :private-value="checked"
-        @click="handleOptionCheck"
+        @click.stop="handleOptionCheck"
       />
     </div>
     <div
@@ -42,7 +42,7 @@
       <n-checkbox
         :disabled="disabled"
         :value="checked"
-        @click="handleOptionCheck"
+        @click.stop="handleOptionCheck"
       />
     </div>
     <span
@@ -142,7 +142,7 @@ export default {
       type: Boolean,
       default: false
     },
-    menuIsLoading: {
+    loading: {
       type: Boolean,
       default: false
     },
@@ -162,11 +162,6 @@ export default {
     determined: {
       type: Boolean,
       required: true
-    }
-  },
-  data () {
-    return {
-      loading: false
     }
   },
   computed: {
@@ -197,13 +192,13 @@ export default {
   },
   methods: {
     handleClick (e) {
-      this.$emit('click', e, this.option, this.setLoading)
+      this.$emit('click', e, this.option)
     },
     handleMouseEnter (e) {
-      this.$emit('mouseenter', e, this.option, this.setLoading)
+      this.$emit('mouseenter', e, this.option)
     },
     handleMouseLeave (e) {
-      this.$emit('mouseleave', e, this.option, this.setLoading)
+      this.$emit('mouseleave', e, this.option)
     },
     handleOptionCheck (e) {
       this.$emit('check', this.option)

@@ -15,7 +15,7 @@ function isLeaf (option) {
   return true
 }
 
-function processedOption (option, activeIds, trackId) {
+function processedOption (option, activeIds, trackId, loadingId) {
   return {
     ...option,
     active: activeIds.has(option.id),
@@ -24,7 +24,8 @@ function processedOption (option, activeIds, trackId) {
     checkboxIndeterminate: checkboxIndeterminate(option),
     isLeaf: isLeaf(option),
     tracked: tracked(option, trackId),
-    determined: !Number.isNaN(option.leafCount)
+    determined: !Number.isNaN(option.leafCount),
+    loading: option.id === loadingId
   }
 }
 
@@ -315,16 +316,17 @@ function optionPath (options, optionId) {
   return path
 }
 
-function menuModel (options, activeId, trackId) {
+function menuModel (options, activeId, trackId, loadingId) {
+  // console.log('menuModel params', options, activeId, trackId, loadingId)
   const activeOptionPath = optionPath(options, activeId)
   const activeIds = new Set(activeOptionPath.map(option => option.id))
   const firstSubmenu = options[0].children
   // console.log('firstSubmenu', firstSubmenu)
-  console.log('menuModel', options, activeId, trackId, activeOptionPath)
+  // console.log('menuModel', options, activeId, trackId, activeOptionPath)
   const model = []
   if (firstSubmenu !== null) {
     model.push(firstSubmenu.map(option => {
-      return processedOption(option, activeIds, trackId)
+      return processedOption(option, activeIds, trackId, loadingId)
     }))
   } else {
     model.push([])
@@ -336,11 +338,11 @@ function menuModel (options, activeId, trackId) {
     if (option.depth === 0) continue
     if (hasChildren(option)) {
       model.push(option.children.map(option => {
-        return processedOption(option, activeIds, trackId)
+        return processedOption(option, activeIds, trackId, loadingId)
       }))
     }
   }
-  console.log('menuModel model', model)
+  // console.log('menuModel model', model)
   return model
 }
 

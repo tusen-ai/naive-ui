@@ -130,7 +130,8 @@ export default {
     return {
       trackId: null,
       loading: false,
-      masked: false
+      masked: false,
+      loadingId: null
     }
   },
   computed: {
@@ -149,11 +150,11 @@ export default {
       return linkedCascaderOptions(this.options, this.type)
     },
     menuOptions () {
-      console.log('menuOptions called')
+      // console.log('menuOptions called')
       return menuOptions(this.linkedCascaderOptions, this.value, this.type)
     },
     menuModel () {
-      return menuModel(this.menuOptions, this.activeId, this.trackId)
+      return menuModel(this.menuOptions, this.activeId, this.trackId, this.loadingId)
     },
     firstCascaderOption () {
       if (this.menuModel && this.menuModel[0] && this.menuModel[0][0]) {
@@ -218,7 +219,18 @@ export default {
         this.handleMenuTypeChange(selectMenuActive)
       })
     },
+    activeId (id) {
+      if (!id) return
+      /**
+       * lazy load
+       */
+      const option = this.idOptionMap.get(id)
+      if (option && !option.loaded) {
+        this.loadOptionChildren(option)
+      }
+    },
     trackId (id) {
+      if (!id) return
       /**
        * scroll to option element
        */
@@ -303,38 +315,40 @@ export default {
     },
     handleOptionMouseLeave (e, option) {
     },
-    resolveLoad (option, children, setLoading) {
+    updateLoadingId (id) {
+      // console.log('updateLoadingId', id)
+      this.loadingId = id
+    },
+    resolveLoad (option, children, callback) {
       const newPatches = new Map(this.patches)
       newPatches.set(option.id, children)
       this.$emit('update:patches', newPatches)
       this.loading = false
-      setLoading(false)
+      this.updateLoadingId(null)
+      if (callback) callback()
     },
-    rejectLoad (setLoading) {
+    rejectLoad () {
       this.loading = false
-      setLoading(false)
+      this.updateLoadingId(null)
     },
-    handleOptionClick (e, option, setLoading) {
-      if (this.expandTriggeredByClick && !option.disabled) {
-        console.log(option)
-        this.updateActiveId(option.id)
-        this.updateTrackId(option.id)
-        if (this.lazy) {
-          if (!option.loaded) {
-            if (!this.loading) {
-              this.loading = true
-              setLoading(true)
-              this.onLoad(option, (children) => this.resolveLoad(option, children, setLoading), () => this.rejectLoad(setLoading))
-            }
+    loadOptionChildren (option) {
+      if (this.lazy) {
+        if (!option.loaded) {
+          if (!this.loading) {
+            this.loading = true
+            this.updateLoadingId(option.id)
+            this.onLoad(option, (children) => this.resolveLoad(option, children), () => this.rejectLoad())
           }
         }
-        console.log('here')
-        // if (!this.multiple && !this.lazy) {
-        //   this.handleCascaderOptionCheck(option.id)
-        // }
-        // if (this.multiple && !this.lazy && option.isLeaf) {
-        //   this.handleCascaderOptionCheck(option.id)
-        // }
+      }
+    },
+    handleOptionClick (e, option) {
+      if (this.expandTriggeredByClick && !option.disabled) {
+        this.updateActiveId(option.id)
+        this.updateTrackId(option.id)
+        if (option.isLeaf) {
+          this.handleCascaderOptionCheck(option.id)
+        }
       }
     },
     handleMenuTypeChange (typeisSelect) {
@@ -425,7 +439,7 @@ export default {
     deep () {
       if (this.trackId) {
         const option = this.idOptionMap.get(this.trackId)
-        console.log('currentOption', option)
+        // console.log('currentOption', option)
         if (option && option.firstAvailableChildId) {
           this.updateTrackId(option.firstAvailableChildId)
           this.updateActiveId(option.firstAvailableChildId)
