@@ -4,12 +4,10 @@ import NModalContent from './ModalContent'
 
 import detachable from '../../../mixins/detachable'
 import zindexable from '../../../mixins/zindexable'
-import toggleable from '../../../mixins/toggleable'
 
 export default {
   name: 'NModal',
   mixins: [
-    toggleable,
     detachable,
     zindexable
   ],
@@ -19,11 +17,24 @@ export default {
         return e instanceof MouseEvent
       },
       default: null
+    },
+    value: {
+      type: Boolean,
+      default: false
+    },
+    maskClosable: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
       mousedownTarget: null
+    }
+  },
+  methods: {
+    deactivate () {
+      this.$emit('input', false)
     }
   },
   render (h) {
@@ -36,17 +47,17 @@ export default {
         staticClass: 'n-modal-container',
         ref: 'contentContainer',
         class: {
-          'n-modal-container--active': this.active
+          'n-modal-container--active': this.value
         }
       },
       [
         h(NModalOverlay, {
-          props: { active: this.active }
+          props: { active: this.value }
         }),
         h(NModalContent,
           {
             ref: 'content',
-            props: { active: this.active, activateEvent: this.activateEvent },
+            props: { active: this.value, activateEvent: this.activateEvent },
             on: {
               mousedown: (e) => {
                 this.mousedownTarget = e.target
@@ -55,11 +66,13 @@ export default {
                 const slotDOM = this.$refs.content.slotDOM
                 const scollbars = this.$refs.content.$el.querySelectorAll('.n-scrollbar-rail__scrollbar')
                 const elsToAvoid = [...slotDOM, ...scollbars]
-                if (
-                  !elsToAvoid.some(el => el.contains(e.target)) &&
-                  !elsToAvoid.some(el => el.contains(this.mousedownTarget))
-                ) {
-                  this.deactivate()
+                if (this.maskClosable) {
+                  if (
+                    !elsToAvoid.some(el => el.contains(e.target)) &&
+                    !elsToAvoid.some(el => el.contains(this.mousedownTarget))
+                  ) {
+                    this.deactivate()
+                  }
                 }
               }
             }
