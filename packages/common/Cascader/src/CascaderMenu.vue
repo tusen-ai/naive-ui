@@ -121,6 +121,14 @@ export default {
       },
       required: true
     },
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    loadingId: {
+      type: String,
+      default: null
+    },
     onLoad: {
       type: Function,
       default: () => {}
@@ -129,9 +137,7 @@ export default {
   data () {
     return {
       trackId: null,
-      loading: false,
-      masked: false,
-      loadingId: null
+      masked: false
     }
   },
   computed: {
@@ -252,17 +258,22 @@ export default {
     if (this.lazy && !this.options[0].children) {
       const option = this.menuOptions[0]
       if (!this.loading) {
-        this.loading = true
+        this.updateLoadingStatus(true)
         this.$refs.mask.show(`Loading`)
-        this.onLoad(option, (children) => this.resolveLoad(option, children, () => {
-          this.$refs.mask.hide()
+        this.onLoad(option, (children) => this.$parent.resolveLoad(option, children, () => {
+          this.hideMask()
         }), () => this.rejectLoad(() => {
-          this.$refs.mask.hide()
+          this.hideMask()
         }))
       }
     }
   },
   methods: {
+    hideMask () {
+      if (this.$refs.mask) {
+        this.$refs.mask.hide()
+      }
+    },
     isSelected (option) {
       if (this.multiple) {
         return this.valueSet.has(option.value)
@@ -278,12 +289,6 @@ export default {
     handleSelectMenuToggleOption (option) {
       // console.log('handleSelectMenuToggleOption', option)
       this.handleSelectOptionCheck(option)
-    },
-    handleMenuScrollStart () {
-
-    },
-    handleMenuScrollEnd () {
-
     },
     optionPath (optionId) {
       const path = []
@@ -317,27 +322,18 @@ export default {
     },
     updateLoadingId (id) {
       // console.log('updateLoadingId', id)
-      this.loadingId = id
+      this.$emit('update:loadingId', id)
     },
-    resolveLoad (option, children, callback) {
-      const newPatches = new Map(this.patches)
-      newPatches.set(option.id, children)
-      this.$emit('update:patches', newPatches)
-      this.loading = false
-      this.updateLoadingId(null)
-      if (callback) callback()
-    },
-    rejectLoad () {
-      this.loading = false
-      this.updateLoadingId(null)
+    updateLoadingStatus (loading) {
+      this.$emit('update:loading', loading)
     },
     loadOptionChildren (option) {
       if (this.lazy) {
         if (!option.loaded) {
           if (!this.loading) {
-            this.loading = true
+            this.updateLoadingStatus(true)
             this.updateLoadingId(option.id)
-            this.onLoad(option, (children) => this.resolveLoad(option, children), () => this.rejectLoad())
+            this.onLoad(option, (children) => this.$parent.resolveLoad(option, children), () => this.rejectLoad())
           }
         }
       }

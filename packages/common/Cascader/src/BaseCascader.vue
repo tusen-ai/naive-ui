@@ -59,6 +59,8 @@
             :lazy="lazy"
             :on-load="onLoad"
             :patches.sync="patches"
+            :loading.sync="loading"
+            :loading-id.sync="loadingId"
             @input="handleMenuInput"
           />
         </transition>
@@ -157,17 +159,17 @@ export default {
        * set here to keep state
        */
       activeId: null,
-      patches: new Map()
+      patches: new Map(),
+      loadingId: null,
+      loading: false
     }
   },
   computed: {
     type: getType,
     rootedOptions () {
-      console.log('rootedOptions called')
       return rootedOptions(this.options)
     },
     patchedOptions () {
-      console.log('patchedOptions called')
       return patchedOptions(this.rootedOptions, this.patches)
     },
     selectedOptions () {
@@ -371,6 +373,21 @@ export default {
       if (!this.filterable) {
         e.preventDefault()
       }
+    },
+    /**
+     * lazy load related
+     */
+    resolveLoad (option, children, callback) {
+      const newPatches = new Map(this.patches)
+      newPatches.set(option.id, children)
+      this.patches = newPatches
+      this.loading = false
+      this.loadingId = null
+      if (callback) callback()
+    },
+    rejectLoad () {
+      this.updateLoadingStatus(false)
+      this.updateLoadingId(null)
     }
   }
 }
