@@ -117,9 +117,11 @@ export default {
   },
   methods: {
     add () {
+      this.$emit('on-add')
       this.value.push({})
     },
     remove (index) {
+      this.$emit('on-remove', index)
       if (index === 0 && this.value.length <= 1) {
         Object.keys(this.value[0]).forEach((key) => {
           let type = typeof (this.value[0][key])

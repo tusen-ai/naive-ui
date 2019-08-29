@@ -2,7 +2,8 @@
 @import './theme/default.scss';
 
 @include b(confirm) {
-  width: 446px;
+  width: 80vh;
+  max-width: 446px;
   margin: auto;
   border-radius: 9px;
   padding: 28px;

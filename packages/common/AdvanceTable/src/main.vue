@@ -71,7 +71,7 @@
             {{ column.filterDropdown && column.filterDropdown() }}
             <!-- 否则默认渲染 -->
             <PopFilter
-              v-if="column.filterItems || column.asynsFilterItems"
+              v-if="column.onFilter && (column.filterItems || column.asynsFilterItems)"
               v-model="selectedFilter[column.key]"
               :column="column"
               :items="column.filterItems || column.asynsFilterItems"
@@ -453,6 +453,8 @@ export default {
     this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
     this.tbodyWidth = this.relTable.offsetWidth
     this.scrollBarWidth = this.wrapperWidth - this.tbodyWidth
+    this.headerRealEl = this.$refs.header.$el.querySelector('thead')
+
     // console.log(this.wrapperWidth, this.tbodyWidth)
 
     this.init()
@@ -568,7 +570,9 @@ export default {
       this.currentSortColumn = null
     },
     onBodyScrolll (event) {
-      this.$refs.header.$el.scrollLeft = event.target.scrollLeft
+      this.headerRealEl.style.transform = `translate3d(-${event.target.scrollLeft}px,0,0)`
+
+      // this.$refs.header.$el.scrollLeft = event.target.scrollLeft
 
       event.stopPropagation()
     },
