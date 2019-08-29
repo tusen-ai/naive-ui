@@ -99,7 +99,7 @@ export default {
     verticalScrollbarHeight () {
       if (this.containerHeight === null || this.contentHeight === null) return 0
       else {
-        return (this.containerHeight * this.containerHeight / this.contentHeight)
+        return (this.containerHeight * this.containerHeight / this.contentHeight + this.width * 1.5)
       }
     },
     verticalScrollbarHeightPx () {
@@ -108,7 +108,7 @@ export default {
     horizontalScrollbarWidth () {
       if (this.containerWidth === null || this.contentWidth === null) return 0
       else {
-        return (this.containerWidth * this.containerWidth / this.contentWidth)
+        return (this.containerWidth * this.containerWidth / this.contentWidth + this.width * 1.5)
       }
     },
     horizontalScrollbarWidthPx () {
@@ -117,7 +117,7 @@ export default {
     verticalScrollbarTop () {
       if (this.containerHeight === null || this.containerScrollTop === null || this.contentHeight === null) return 0
       else {
-        return (this.containerHeight * this.containerScrollTop / this.contentHeight)
+        return this.containerScrollTop / (this.contentHeight - this.containerHeight) * (this.containerHeight - this.verticalScrollbarHeight)
       }
     },
     verticalScrollbarTopPx () {
@@ -126,7 +126,7 @@ export default {
     horizontalScrollbarLeft () {
       if (this.containerWidth === null || this.containerScrollLeft === null || this.contentWidth === null) return 0
       else {
-        return (this.containerWidth * this.containerScrollLeft / this.contentWidth)
+        return this.containerScrollLeft / (this.contentWidth - this.containerWidth) * (this.containerWidth - this.horizontalScrollbarWidth)
       }
     },
     horizontalScrollbarLeftPx () {
