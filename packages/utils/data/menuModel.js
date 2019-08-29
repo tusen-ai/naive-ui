@@ -241,7 +241,7 @@ function linkedCascaderOptions (options, type) {
 function menuOptions (linkedCascaderOptions, value, type) {
   const valueSet = new Set(value)
   const checkedOptions = []
-  function traverse (options, depth = 0) {
+  function traverse (options) {
     if (!Array.isArray(options)) return
     const length = options.length
     for (let i = 0; i < length; ++i) {
@@ -252,7 +252,7 @@ function menuOptions (linkedCascaderOptions, value, type) {
       if (type === 'multiple') {
         if (option.loaded) {
           if (!option.isLeaf) {
-            traverse(option.children, depth + 1)
+            traverse(option.children)
             option.children.forEach(child => {
               option.checkedLeafCount += child.checkedLeafCount
               option.checkedAvailableLeafCount += child.checkedAvailableLeafCount
@@ -277,7 +277,7 @@ function menuOptions (linkedCascaderOptions, value, type) {
         }
       } else if (type === 'multiple-all-options') {
         if (option.loaded && !option.isLeaf) {
-          traverse(option.children, option, depth + 1)
+          traverse(option.children)
         } else {
           option.checkedLeafCount = NaN
         }
@@ -285,7 +285,7 @@ function menuOptions (linkedCascaderOptions, value, type) {
         checkedOptions.push(option)
       } else if (type === 'single' || type === 'single-all-options') {
         if (hasChildren(option)) {
-          traverse(option.children, option, depth + 1)
+          traverse(option.children)
         }
         option.checked = (option.value === value)
       }

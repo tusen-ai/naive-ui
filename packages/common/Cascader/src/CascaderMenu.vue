@@ -38,9 +38,6 @@
         :linked-options="linkedSelectOptions"
         :is-selected="isSelected"
         @menu-toggle-option="handleSelectMenuToggleOption"
-        @menu-scroll-start="handleMenuScrollStart"
-        @menu-scroll-end="handleMenuScrollEnd"
-        @menu-change-pending-option="handleMenuChangePendingOption"
       />
     </transition>
     <n-base-menu-mask
@@ -279,11 +276,6 @@ export default {
         return this.valueSet.has(option.value)
       } else {
         return this.value === option.value
-      }
-    },
-    handleMenuChangePendingOption (option) {
-      if (option) {
-        // console.log(option.label)
       }
     },
     handleSelectMenuToggleOption (option) {
