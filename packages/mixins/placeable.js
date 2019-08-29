@@ -4,6 +4,10 @@ import getParentNode from '../utils/dom/getParentNode'
 import getScrollParent from '../utils/dom/getScrollParent'
 import calcPlacementTransfrom from '../utils/dom/calcPlacementTransform'
 
+function getActivatorEl (componentInstance) {
+  return componentInstance.currentActivatorEl || componentInstance.$refs.activator.$el || componentInstance.$refs.activator
+}
+
 /**
  * Make $refs.content trace $refs.activator, set $refs.contentInner width by the way
  *
@@ -71,7 +75,7 @@ export default {
     updatePosition (el, cb) {
       // console.log('scroll')
       if (!this.active) return
-      const activator = this.$refs.activator.$el || this.$refs.activator
+      const activator = getActivatorEl(this)
       // console.log(activator)
       const activatorBoundingClientRect = activator.getBoundingClientRect()
       // console.log(activatorBoundingClientRect)

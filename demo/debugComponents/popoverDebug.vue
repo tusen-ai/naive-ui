@@ -5,6 +5,8 @@
       <n-popover trigger="click">
         <template v-slot:activator>
           <button>Activator</button>
+          <button>Activator</button>
+          <button>Activator</button>
         </template>
         <span>Out Out Out</span>
       </n-popover>
