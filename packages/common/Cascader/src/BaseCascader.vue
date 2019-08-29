@@ -170,6 +170,10 @@ export default {
       return rootedOptions(this.options)
     },
     patchedOptions () {
+      /**
+       * Options must be patched here because Picker need to know all available
+       * options.
+       */
       return patchedOptions(this.rootedOptions, this.patches)
     },
     selectedOptions () {
@@ -205,9 +209,7 @@ export default {
         let selectedOption = null
         traverseWithCallback(this.patchedOptions, option => {
           path.push(option.label)
-          // console.log(option.value, this.value)
           if (option.value === this.value) {
-            // console.log('here')
             selectedOption = {
               value: option.value,
               label: path.slice(1, path.length).join(this.splitor)

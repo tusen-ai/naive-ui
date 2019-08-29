@@ -72,9 +72,13 @@
     </div>
     <div
       ref="contentContainer"
-      class="n-content-wrapper n-content-wrapper--date-picker"
+      class="n-detached-content-container"
     >
-      <div ref="content">
+      <div
+        ref="content"
+        v-clickoutside="handleClickOutside"
+        class="n-dateched-content"
+      >
         <datetime-panel
           v-if="type === 'datetime'"
           :value="value"
@@ -271,6 +275,11 @@ export default {
     this.refresh(this.value)
   },
   methods: {
+    handleClickOutside (e) {
+      if (!this.$refs.activator.contains(e.target)) {
+        this.closeCalendar()
+      }
+    },
     /**
      * Panel Input
      */
@@ -369,9 +378,11 @@ export default {
      */
     handleActivatorClick (e) {
       if (this.disabled) return
+      console.log('handleActivatorClick')
       if (this.active) {
         e.stopPropagation()
       } else {
+        console.log('open calendar')
         this.openCalendar()
       }
     },
@@ -388,6 +399,7 @@ export default {
     openCalendar (e) {
       if (this.disabled || this.active) return
       this.active = true
+      console.log('into open calendar')
       this.$nextTick().then(this.updatePosition)
     },
     closeCalendar () {

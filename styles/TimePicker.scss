@@ -6,7 +6,7 @@
   box-shadow:0px 2px 20px 0px rgba(0,0,0,0.16);
   font-size: 12px;
   border-radius: 6px;
-  margin-top: 4px;
+  margin: 4px 0;
   width: 180px;
   overflow: hidden;
   @include fade-in-scale-up-transition(time-picker, top left);

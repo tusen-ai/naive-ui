@@ -12,11 +12,12 @@
     </div>
     <div
       ref="contentContainer"
-      class="n-content-wrapper"
+      class="n-detached-content-container"
       @click="handleContentClick"
     >
       <div
         ref="content"
+        class="n-detached-content"
       >
         <transition name="n-time-picker--transition">
           <div

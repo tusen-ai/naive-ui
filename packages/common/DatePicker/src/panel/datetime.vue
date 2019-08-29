@@ -2,7 +2,7 @@
   <transition name="n-date-picker-calendar--transition">
     <div
       v-if="active"
-      v-clickoutside.lazy="handleClickOutside"
+      ref="self"
       class="n-date-picker-calendar"
     >
       <div
@@ -83,13 +83,14 @@
       <div class="n-date-picker-calendar__divider" />
       <div class="n-date-picker-calendar__dates">
         <div
-          v-for="dateItem in dateArray(calendarDateTime, valueAsMoment, currentDateTime)"
-          :key="dateItem.timestamp"
+          v-for="(dateItem, i) in dateArray(calendarDateTime, valueAsMoment, currentDateTime)"
+          :key="i"
           class="n-date-picker-calendar__date"
           :class="{
             'n-date-picker-calendar__date--current': dateItem.isCurrentDate,
             'n-date-picker-calendar__date--selected': dateItem.isSelectedDate,
-            'n-date-picker-calendar__date--in-display-month': dateItem.isDateOfDisplayMonth
+            'n-date-picker-calendar__date--in-display-month': dateItem.isDateOfDisplayMonth,
+            'n-date-picker-calendar__date--no-transition': noTransition
           }"
           @click="handleDateClick(dateItem)"
         >
@@ -129,9 +130,9 @@
 
 <script>
 import moment from 'moment'
-import { dateArray, setDate } from '../utils'
 import NIcon from '../../../Icon'
 import clickoutside from '../../../../directives/clickoutside'
+import uniCalendarMixin from './uniCalendarMixin'
 
 import NButton from '../../../Button'
 import NTimePicker from '../../../TimePicker'
@@ -143,13 +144,6 @@ const DATE_VALIDATE_FORMAT = ['YYYY-MM-DD', 'YYYY-MM-D', 'YYYY-M-D', 'YYYY-M-DD'
 
 const PLACEHOLDER = 'Select date and time'
 
-const TIME_CONST = {
-  weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-  hours: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'],
-  minutes: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59'],
-  seconds: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59']
-}
-
 export default {
   components: {
     NButton,
@@ -160,20 +154,8 @@ export default {
   directives: {
     clickoutside
   },
+  mixins: [uniCalendarMixin],
   props: {
-    active: {
-      type: Boolean,
-      default: true
-    },
-    value: {
-      type: Number,
-      required: false,
-      default: null
-    },
-    debug: {
-      type: Boolean,
-      default: false
-    },
     placeholder: {
       type: String,
       default: PLACEHOLDER
@@ -181,167 +163,17 @@ export default {
     format: {
       type: String,
       default: DATETIME_FORMAT
-    },
-    actions: {
-      type: Array,
-      default: () => ['now', 'confirm']
     }
   },
   data () {
     return {
-      displayDateString: '',
-      calendarDateTime: moment(),
-      currentDateTime: moment(),
-      calendar: [],
-      ...TIME_CONST
-    }
-  },
-  computed: {
-    /**
-     * If value is valid return null.
-     * If value is not valid, return moment(value)
-     */
-    valueAsMoment () {
-      if (this.value === null || this.value === undefined) return null
-      const newSelectedDateTime = moment(this.value)
-      if (newSelectedDateTime.isValid()) {
-        return newSelectedDateTime
-      } else {
-        return null
-      }
-    }
-  },
-  watch: {
-    valueAsMoment (newValue) {
-      if (newValue !== null) {
-        this.displayDateString = newValue.format(DATE_FORMAT)
-        this.calendarDateTime = this.valueAsMoment
-      } else {
-        this.displayDateString = ''
-      }
-    }
-  },
-  created () {
-    if (this.valueAsMoment !== null) {
-      this.displayDateString = this.valueAsMoment.format(DATE_FORMAT)
-      this.calendarDateTime = this.valueAsMoment
-    } else {
-      this.displayDateString = ''
+      dateFormat: DATE_FORMAT,
+      detaValidateFormat: DATE_VALIDATE_FORMAT
     }
   },
   methods: {
-    dateArray,
-    handleClickOutside () {
-      this.closeCalendar()
-    },
-    setValue (newSelectedDateTime) {
-      if (newSelectedDateTime === null || newSelectedDateTime === undefined) {
-        this.$emit('input', null)
-      } else if (newSelectedDateTime.isValid()) {
-        const adjustedDateTime = this.adjustValue(newSelectedDateTime)
-        if (this.valueAsMoment === null || adjustedDateTime.valueOf() !== this.valueAsMoment.valueOf()) {
-          this.refreshDisplayDateString(adjustedDateTime)
-          this.$emit('input', adjustedDateTime.valueOf())
-        }
-      }
-    },
     adjustValue (datetime) {
       return moment(datetime).startOf('second')
-    },
-    handleDateInput (value) {
-      const date = moment(value, DATE_FORMAT, true)
-      if (date.isValid()) {
-        if (!this.valueAsMoment) {
-          const newValue = moment()
-          newValue.year(date.year())
-          newValue.month(date.month())
-          newValue.date(date.date())
-          this.$emit('input', this.adjustValue(newValue).valueOf())
-        } else {
-          const newValue = this.valueAsMoment
-          newValue.year(date.year())
-          newValue.month(date.month())
-          newValue.date(date.date())
-          this.$emit('input', this.adjustValue(newValue).valueOf())
-        }
-      } else {
-        // do nothing
-      }
-    },
-    handleDateInputBlur () {
-      const date = moment(this.displayDateString, DATE_VALIDATE_FORMAT, true)
-      if (date.isValid()) {
-        if (!this.valueAsMoment) {
-          const newValue = moment()
-          newValue.year(date.year())
-          newValue.month(date.month())
-          newValue.date(date.date())
-          this.$emit('input', this.adjustValue(newValue).valueOf())
-        } else {
-          const newValue = this.valueAsMoment
-          newValue.year(date.year())
-          newValue.month(date.month())
-          newValue.date(date.date())
-          this.$emit('input', this.adjustValue(newValue).valueOf())
-        }
-      } else {
-        this.refreshDisplayDateString()
-      }
-    },
-    clearSelectedDateTime () {
-      this.$emit('input', null)
-      this.displayDateString = ''
-    },
-    setSelectedDateTimeToNow () {
-      this.$emit('input', this.adjustValue(moment()).valueOf())
-      this.calendarDateTime = moment()
-    },
-    handleDateClick (dateItem) {
-      let newSelectedDateTime = moment()
-      if (this.valueAsMoment !== null) {
-        newSelectedDateTime = moment(this.valueAsMoment)
-      }
-      newSelectedDateTime = setDate(newSelectedDateTime, dateItem)
-      this.$emit('input', this.adjustValue(newSelectedDateTime).valueOf())
-    },
-    /**
-     * If not selected, display nothing,
-     * else update datetime related string
-     */
-    refreshDisplayDateString (time) {
-      if (this.valueAsMoment === null) {
-        this.displayDateString = ''
-        return
-      }
-      if (time === undefined) {
-        time = this.valueAsMoment
-      }
-      this.displayDateString = time.format(DATE_FORMAT)
-    },
-    handleConfirmClick () {
-      this.$emit('confirm')
-      this.closeCalendar()
-    },
-    closeCalendar () {
-      if (this.active) {
-        this.$emit('close')
-      }
-    },
-    nextYear () {
-      this.calendarDateTime.add(1, 'year')
-      this.$forceUpdate()
-    },
-    prevYear () {
-      this.calendarDateTime.subtract(1, 'year')
-      this.$forceUpdate()
-    },
-    nextMonth () {
-      this.calendarDateTime.add(1, 'month')
-      this.$forceUpdate()
-    },
-    prevMonth () {
-      this.calendarDateTime.subtract(1, 'month')
-      this.$forceUpdate()
     },
     handleTimePickerInput (value) {
       this.$emit('input', value)

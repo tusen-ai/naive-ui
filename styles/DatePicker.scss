@@ -228,7 +228,11 @@
       margin: 8px 11px;
       border-radius: 3px;
       cursor: pointer;
+      /** oops! */
       transition: background-color .2s $default-cubic-bezier, color .2s $default-cubic-bezier;
+      &.n-date-picker-calendar__date--no-transition {
+        transition: none!important;
+      }
       &:not(.n-date-picker-calendar__date--in-display-month) {
         color: rgba(233, 233, 236, 0.4);
       }
@@ -257,11 +261,15 @@
         }
       }
       &.n-date-picker-calendar__date--in-span.n-date-picker-calendar__date--in-display-month:not(.n-date-picker-calendar__date--selected) {
-        background: rgba(99,226,183,0.15);
-        width: 46px;
-        margin-left: 0;
-        margin-right: 0;
-        border-radius: 0;
+        &::before {
+          content: "";
+          position: absolute;
+          left: -11px;
+          right: -11px;
+          top: 0;
+          bottom: 0;
+          background: rgba(99,226,183,0.15);
+        }
         transition: none;
         &::after {
           right: 13px;
