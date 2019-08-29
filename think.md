@@ -34,6 +34,8 @@ activator 外面不应该包元素
 placement $refs 变化更改
 ## 2018.8.28
 picker 在 input 聚焦的时候，esc 按钮不符合预期
+## 2018.8.29
+block transition for date picker in range not via :key
 ## TODO
 issue fix, add delay prop
 add trigger to tooltip
