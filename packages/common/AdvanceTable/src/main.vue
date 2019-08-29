@@ -29,7 +29,7 @@
     </div>
     <n-table
       ref="header"
-      style="padding:0;border-bottom-left-radius:0;border-bottom-right-radius:0;"
+      style="padding:0;border-bottom-left-radius:0;border-bottom-right-radius:0;background-color: #2b3147;"
       :style="colGroup"
     >
       <colgroup>
