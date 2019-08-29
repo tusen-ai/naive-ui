@@ -9,7 +9,7 @@
   margin: 4px 0;
   width: 180px;
   overflow: hidden;
-  @include fade-in-scale-up-transition(time-picker, top left);
+  @include fade-in-scale-up-transition(time-picker);
   .n-time-picker__selection-wrapper {
     position: relative;
     height: 244px;

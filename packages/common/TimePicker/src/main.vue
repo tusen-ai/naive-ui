@@ -13,7 +13,6 @@
     <div
       ref="contentContainer"
       class="n-detached-content-container"
-      @click="handleContentClick"
     >
       <div
         ref="content"
@@ -22,8 +21,9 @@
         <transition name="n-time-picker--transition">
           <div
             v-if="active"
-            v-clickoutside.lazy="closeTimeSelector"
+            v-clickoutside="handleClickOutside"
             class="n-time-picker-selector"
+            @mouseup="handleContentMouseUp"
           >
             <div class="n-time-picker__selection-wrapper">
               <div
@@ -148,7 +148,7 @@ const TIME_CONST = {
 
 /**
  * Use range to disabled time since validator will need time picker to loop all available options.
- * Warning: this component shouldn't change v-model's timestamps' date
+ * Warning: this component shouldn't change v-model's timestamp's date
  */
 export default {
   name: 'NTimePicker',
@@ -259,19 +259,19 @@ export default {
       this.refreshTimeString()
     },
     scrollTimer () {
-      if (this.$refs.hours.$el) {
+      if (this.$refs.hours && this.$refs.hours.$el) {
         const hour = this.$refs.hours.$el.querySelector('.n-time-picker__item--active')
         if (hour) {
           this.$refs.hours.$refs.scrollContainer.scrollTo(0, hour.offsetTop)
         }
       }
-      if (this.$refs.minutes.$el) {
+      if (this.$refs.minutes && this.$refs.minutes.$el) {
         const minute = this.$refs.minutes.$el.querySelector('.n-time-picker__item--active')
         if (minute) {
           this.$refs.minutes.$refs.scrollContainer.scrollTo(0, minute.offsetTop)
         }
       }
-      if (this.$refs.seconds.$el) {
+      if (this.$refs.seconds && this.$refs.seconds.$el) {
         const second = this.$refs.seconds.$el.querySelector('.n-time-picker__item--active')
         if (second) {
           this.$refs.seconds.$refs.scrollContainer.scrollTo(0, second.offsetTop)
@@ -284,10 +284,13 @@ export default {
       this.$nextTick().then(this.scrollTimer)
     },
     handleActivatorClick (e) {
-      if (this.active) {
-        e.stopPropagation()
-      } else {
+      if (!this.active) {
         this.openTimeSelector()
+      }
+    },
+    handleClickOutside (e) {
+      if (!this.$refs.activator.contains(e.target)) {
+        this.closeTimeSelector()
       }
     },
     closeTimeSelector () {
@@ -304,7 +307,8 @@ export default {
       this.refreshTimeString()
       this.active = false
     },
-    handleContentClick (e) {
+    handleContentMouseUp (e) {
+      console.log('handleContentMouseUp')
       if (this.stopSelectorBubble) {
         e.stopPropagation()
       }
