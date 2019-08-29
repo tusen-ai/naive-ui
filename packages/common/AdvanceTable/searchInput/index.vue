@@ -42,7 +42,7 @@ export default {
   methods: {
     clearSearch () {
       this.value = ''
-      this.selectedValue = this.options.columns[0].value
+      this.selectedValue = this.options.columns ? this.options.columns[0].value : ''
       this.handleInputChange()
     },
     setSearch ({ key, value }) {
