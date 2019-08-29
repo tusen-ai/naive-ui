@@ -3,9 +3,14 @@ class ClickOutsideDelegate {
     console.debug('[ClickOutsideDelegate]: Ctor called')
     this.handlers = new Map()
     this.handlerCount = 0
-    this.handleClickOutside = this.handleClickOutside.bind(this)
+    this.mouseDownTarget = null
+    this.handleMouseUpOutside = this.handleMouseUpOutside.bind(this)
+    this.handleMouseDown = this.handleMouseDown.bind(this)
   }
-  handleClickOutside (e) {
+  handleMouseDown (e) {
+    this.mouseDownTarget = e.target
+  }
+  handleMouseUpOutside (e) {
     const target = e.target
     for (const [handler, { els, once }] of this.handlers) {
       let existElContainTarget = false
@@ -13,11 +18,11 @@ class ClickOutsideDelegate {
         if (el) {
           if (typeof el === 'function') {
             const unwrappedEl = el()
-            if (unwrappedEl && unwrappedEl.contains(target)) {
+            if (unwrappedEl && (unwrappedEl.contains(target) || unwrappedEl.contains(this.mouseDownTarget))) {
               existElContainTarget = true
               break
             }
-          } else if (el.contains(target)) {
+          } else if (el.contains(target) || el.contains(this.mouseDownTarget)) {
             existElContainTarget = true
             break
           }
@@ -45,7 +50,9 @@ class ClickOutsideDelegate {
     }
     if (!this.handlerCount) {
       console.debug('[ClickOutsideDelegate]: remove handler from window')
-      window.removeEventListener('click', this.handleClickOutside)
+      window.removeEventListener('mouseup', this.handleMouseUpOutside)
+      window.removeEventListener('mousedown', this.handleMouseDown)
+      this.mouseDownTarget = null
       this.handlers = new Map()
     }
   }
@@ -61,7 +68,8 @@ class ClickOutsideDelegate {
     }
     if (!this.handlerCount) {
       console.debug('[ClickOutsideDelegate]: add handler to window')
-      window.addEventListener('click', this.handleClickOutside)
+      window.addEventListener('mouseup', this.handleMouseUpOutside)
+      window.addEventListener('mousedown', this.handleMouseDown)
     }
     ++this.handlerCount
     this.handlers.set(handler, { els, once })

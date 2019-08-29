@@ -12,8 +12,6 @@
     <n-scrollbar
       ref="scrollbar"
       @scroll="handleMenuScroll"
-      @scrollstart="handleMenuScrollStart"
-      @scrollend="handleMenuScrollEnd"
     >
       <div class="n-base-select-menu__item-wrapper">
         <transition name="n-base-select-menu__light-bar--transition">
@@ -165,12 +163,6 @@ export default {
     }
   },
   methods: {
-    handleMenuScrollStart () {
-      this.$emit('menu-scroll-start')
-    },
-    handleMenuScrollEnd () {
-      this.$emit('menu-scroll-end')
-    },
     handleMenuScroll (e, scrollContainer, scrollContent) {
       this.$emit('menu-scroll', e, scrollContainer, scrollContent)
     },

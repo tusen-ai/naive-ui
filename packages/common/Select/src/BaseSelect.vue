@@ -60,8 +60,6 @@
             :is-selected="isSelected"
             @menu-toggle-option="handleToggleOption"
             @menu-scroll="handleMenuScroll"
-            @menu-scroll-start="handleMenuScrollStart"
-            @menu-scroll-end="handleMenuScrollEnd"
           />
         </transition>
       </div>
@@ -379,14 +377,6 @@ export default {
     /**
      * scroll events on menu
      */
-    handleMenuScrollStart () {
-      this.scrolling = true
-    },
-    handleMenuScrollEnd () {
-      window.setTimeout(() => {
-        this.scrolling = false
-      }, 0)
-    },
     handleMenuScroll (e, scrollContainer, scrollContent) {
       this.$emit('scroll', e, scrollContainer, scrollContent)
     },
