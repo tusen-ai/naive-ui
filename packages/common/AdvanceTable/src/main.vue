@@ -655,23 +655,8 @@ export default {
       if (!this.currentSortColumn) {
         return null
       }
-      let currentSortColumn = null
-      let keys = Object.keys(this.currentSortColumn)
-      currentSortColumn = {}
-
-      keys.forEach((key) => {
-        let val = this.currentSortColumn[key].value
-        let sortable = this.currentSortColumn[key].sortable
-        if (sortable === 'custom') {
-          currentSortColumn[key] = {
-            value: val
-          }
-        }
-      })
-      if (Object.keys(currentSortColumn).length === 0) {
-        currentSortColumn = null
-      }
-      return currentSortColumn
+      const isCustom = this.currentSortColumn.sortable === 'custom'
+      return isCustom ? this.currentSortColumn : null
     },
     useRemoteChange () {
       clearTimeout(this.remoteTimter)
@@ -770,6 +755,7 @@ export default {
       this.$emit('on-filter-change', this.currentFilterColumn)
     },
     onSortTypeChange ({ i, sortable, key, type, column }) {
+      console.log('TCL: onSortTypeChange -> { i, sortable, key, type, column }', { i, sortable, key, type, column })
       this.currentSortColumn = {
         sortable,
         key,
