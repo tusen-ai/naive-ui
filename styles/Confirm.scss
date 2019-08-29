@@ -2,7 +2,7 @@
 @import './theme/default.scss';
 
 @include b(confirm) {
-  width: 80vh;
+  width: 80vw;
   max-width: 446px;
   margin: auto;
   border-radius: 9px;
