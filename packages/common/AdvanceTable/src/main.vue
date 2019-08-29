@@ -29,7 +29,7 @@
     </div>
     <n-table
       ref="header"
-      style="padding:0;border-bottom-left-radius:0;border-bottom-right-radius:0;"
+      style="padding:0;border-bottom-left-radius:0;border-bottom-right-radius:0;background-color: #2b3147;"
       :style="colGroup"
     >
       <colgroup>
@@ -71,7 +71,7 @@
             {{ column.filterDropdown && column.filterDropdown() }}
             <!-- 否则默认渲染 -->
             <PopFilter
-              v-if="column.filterItems || column.asynsFilterItems"
+              v-if="column.onFilter && (column.filterItems || column.asynsFilterItems)"
               v-model="selectedFilter[column.key]"
               :column="column"
               :items="column.filterItems || column.asynsFilterItems"
@@ -453,6 +453,8 @@ export default {
     this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
     this.tbodyWidth = this.relTable.offsetWidth
     this.scrollBarWidth = this.wrapperWidth - this.tbodyWidth
+    this.headerRealEl = this.$refs.header.$el.querySelector('thead')
+
     // console.log(this.wrapperWidth, this.tbodyWidth)
 
     this.init()
@@ -568,7 +570,9 @@ export default {
       this.currentSortColumn = null
     },
     onBodyScrolll (event) {
-      this.$refs.header.$el.scrollLeft = event.target.scrollLeft
+      this.headerRealEl.style.transform = `translate3d(-${event.target.scrollLeft}px,0,0)`
+
+      // this.$refs.header.$el.scrollLeft = event.target.scrollLeft
 
       event.stopPropagation()
     },
@@ -651,23 +655,8 @@ export default {
       if (!this.currentSortColumn) {
         return null
       }
-      let currentSortColumn = null
-      let keys = Object.keys(this.currentSortColumn)
-      currentSortColumn = {}
-
-      keys.forEach((key) => {
-        let val = this.currentSortColumn[key].value
-        let sortable = this.currentSortColumn[key].sortable
-        if (sortable === 'custom') {
-          currentSortColumn[key] = {
-            value: val
-          }
-        }
-      })
-      if (Object.keys(currentSortColumn).length === 0) {
-        currentSortColumn = null
-      }
-      return currentSortColumn
+      const isCustom = this.currentSortColumn.sortable === 'custom'
+      return isCustom ? this.currentSortColumn : null
     },
     useRemoteChange () {
       clearTimeout(this.remoteTimter)
@@ -766,6 +755,7 @@ export default {
       this.$emit('on-filter-change', this.currentFilterColumn)
     },
     onSortTypeChange ({ i, sortable, key, type, column }) {
+      console.log('TCL: onSortTypeChange -> { i, sortable, key, type, column }', { i, sortable, key, type, column })
       this.currentSortColumn = {
         sortable,
         key,
