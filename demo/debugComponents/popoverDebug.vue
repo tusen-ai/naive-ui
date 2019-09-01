@@ -4,9 +4,16 @@
     <div style="margin-left: 400px;">
       <n-popover trigger="click">
         <template v-slot:activator>
-          <button>Activator</button>
-          <button>Activator</button>
-          <button>Activator</button>
+          <button
+            v-if="v"
+            @click="toggle"
+          >
+            Activator button
+          </button>
+          <span
+            v-else
+            @click="toggle"
+          >Activator span</span>
         </template>
         <span>Out Out Out</span>
       </n-popover>
@@ -16,6 +23,15 @@
 
 <script>
 export default {
-
+  data () {
+    return {
+      v: true
+    }
+  },
+  methods: {
+    toggle () {
+      this.v = !this.v
+    }
+  }
 }
 </script>

@@ -1,7 +1,7 @@
-import NPopup from './src/main.vue'
+import NPopover from './src/main'
 
-NPopup.install = function (Vue) {
-  Vue.component(NPopup.name, NPopup)
+NPopover.install = function (Vue) {
+  Vue.component(NPopover.name, NPopover)
 }
 
-export default NPopup
+export default NPopover

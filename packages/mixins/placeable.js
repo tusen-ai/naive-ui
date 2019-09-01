@@ -55,8 +55,16 @@ export default {
       }
     }
   },
+  data () {
+    return {
+      trackingElement: null,
+      trackedElement: null,
+      scrollListeners: []
+    }
+  },
   mounted () {
-    this.$refs.content.style.position = 'absolute'
+    this._getTrackingElement()
+    this.trackingElement.style.position = 'absolute'
     this.$nextTick().then(() => {
       this.registerScrollListeners()
       this.registerResizeListener()
@@ -66,33 +74,44 @@ export default {
     this.unregisterScrollListeners()
     this.unregisterResizeListener()
   },
-  data () {
-    return {
-      scrollListeners: []
-    }
-  },
   methods: {
+    _getTrackingElement () {
+      if (this.$refs && this.$refs.content) {
+        this.trackingElement = this.$refs.content
+      } else if (this.getTrackingElement) {
+        this.trackingElement = this.getTrackingElement()
+      }
+    },
+    _getTrackedElement () {
+      if (this.$refs && this.$refs.activator) {
+        this.trackedElement = getActivatorEl(this)
+      } else if (this.getTrackedElement) {
+        this.trackedElement = this.getTrackedElement()
+      }
+    },
     updatePosition (el, cb) {
       // console.log('scroll')
       if (!this.active) return
-      const activator = getActivatorEl(this)
+      console.log('[placeable.updatePosition]')
+      this._getTrackedElement()
+      this._getTrackingElement()
       // console.log(activator)
-      const activatorBoundingClientRect = activator.getBoundingClientRect()
+      const activatorBoundingClientRect = this.trackedElement.getBoundingClientRect()
       // console.log(activatorBoundingClientRect)
       // console.log(this.$refs.popoverBody)
       // debugger
-      const contentBoundingClientRect = this.$refs.content.getBoundingClientRect()
+      const contentBoundingClientRect = this.trackingElement.getBoundingClientRect()
       // console.log(contentBoundingClientRect)
       // debugger
       // console.log('scroll', activatorBoundingClientRect, contentBoundingClientRect)
       const [placementTransform, suggsetedTransformOrigin] = calcPlacementTransfrom(this.placement, activatorBoundingClientRect, contentBoundingClientRect)
-      this.$refs.content.style.position = 'absolute'
-      this.$refs.content.style.top = placementTransform.top
-      this.$refs.content.style.left = placementTransform.left
-      this.$refs.content.style.right = placementTransform.right
-      this.$refs.content.style.bottom = placementTransform.bottom
-      this.$refs.content.style.transformOrigin = suggsetedTransformOrigin
-      this.$refs.content.setAttribute('n-suggested-transform-origin', suggsetedTransformOrigin)
+      this.trackingElement.style.position = 'absolute'
+      this.trackingElement.style.top = placementTransform.top
+      this.trackingElement.style.left = placementTransform.left
+      this.trackingElement.style.right = placementTransform.right
+      this.trackingElement.style.bottom = placementTransform.bottom
+      this.trackingElement.style.transformOrigin = suggsetedTransformOrigin
+      this.trackingElement.setAttribute('n-suggested-transform-origin', suggsetedTransformOrigin)
       // console.log(this.$refs.contentInner)
       if (this.$refs.contentInner) {
         let el = this.$refs.contentInner
