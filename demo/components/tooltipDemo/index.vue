@@ -14,6 +14,7 @@
       <event />
       <placement />
       <fixWidth />
+      <max-width />
     </div>
   </div>
 </template>
@@ -24,9 +25,10 @@ import trigger from './trigger.demo.vue'
 import event from './event.demo.vue'
 import placement from './placement.demo.vue'
 import fixWidth from './fixWidth.demo'
+import maxWidth from './maxWidth.demo'
 
 export default {
-  components: { basicUsage, trigger, event, placement, fixWidth },
+  components: { basicUsage, trigger, event, placement, fixWidth, maxWidth },
   data () {
     return {
 

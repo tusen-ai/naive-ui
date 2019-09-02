@@ -10,7 +10,6 @@
     </div>
     <div class="n-doc-body">
       <basic />
-      <board />
       <card />
     </div>
   </div>
@@ -18,14 +17,12 @@
 
 <script>
 import basic from './basic.demo.vue'
-import board from './board.demo.vue'
 import card from './card.demo.vue'
 
 export default {
   components: {
     basic,
-    card,
-    board
+    card
   },
   data () {
     return {

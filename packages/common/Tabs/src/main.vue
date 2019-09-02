@@ -5,9 +5,24 @@
       [`n-tab--${type}-type`]: true
     }"
   >
-    <div class="n-tab-nav">
-      <div class="n-tab-nav__scroll">
-        <div class="n-tab-label-wrapper">
+    <div
+      ref="nav"
+      class="n-tab-nav"
+    >
+      <div
+        v-if="showScrollButton"
+        @click="scroll('left')"
+      >
+        Left
+      </div>
+      <div
+        ref="navScroll"
+        class="n-tab-nav__scroll"
+      >
+        <div
+          ref="labelWrapper"
+          class="n-tab-label-wrapper"
+        >
           <div>
             <div
               v-for="(panel, i) in panels"
@@ -20,15 +35,15 @@
               }"
               @click="handleTabClick($event, panel.name, panel.disabled)"
             >
+              <tab-label-corner
+                v-if="value === panel.name && type === 'card'"
+                direction="left"
+              />
+              <tab-label-corner
+                v-if="value === panel.name && type === 'card'"
+                direction="right"
+              />
               <span class="n-tab-label__label">{{ panel.label }}</span>
-              <div
-                v-if="panel.closable ? true : closable"
-                class="n-tab-label__icon"
-              >
-                <n-icon
-                  type="ios-close"
-                />
-              </div>
             </div>
           </div>
           <div
@@ -39,27 +54,18 @@
         </div>
       </div>
       <div
-        v-if="addable"
-        class="n-tab-add-button"
+        v-if="showScrollButton"
+        @click="scroll('right')"
       >
-        <n-icon
-          type="ios-add-circle-outline"
-          @click="handleAddButtonClick"
-        />
+        Right
       </div>
     </div>
-    <div
-      ref="slot"
-      class="n-tab--slot-panel"
-    >
-      <div class="n-tab--slot">
-        <slot />
-      </div>
-    </div>
+    <slot />
   </div>
 </template>
 <script>
 import Emitter from '../../../mixins/emitter'
+import TabLabelCorner from './TabLabelCorner'
 
 export default {
   name: 'NTabs',
@@ -67,6 +73,9 @@ export default {
     return {
       NTab: this
     }
+  },
+  components: {
+    TabLabelCorner
   },
   mixins: [ Emitter ],
   props: {
@@ -76,7 +85,7 @@ export default {
     },
     type: {
       validator (type) {
-        return ['line', 'card', 'board'].includes(type)
+        return ['line', 'card'].includes(type)
       },
       default: 'line'
     },
@@ -87,37 +96,13 @@ export default {
     addable: {
       type: Boolean,
       default: false
-    },
-    /** callback */
-    // addPanel: {
-    //   type: Function,
-    //   default: () => {}
-    // },
-    beforeLeave: {
-      type: Function,
-      default: () => { return true }
-    },
-    // tabClick: {
-    //   type: Function,
-    //   default: () => {}
-    // },
-    tabRemove: {
-      type: Function,
-      default: () => {}
     }
-    // tabAdd: {
-    //   type: Function,
-    //   default: () => {}
-    // },
-    // edit: {
-    //   type: Function,
-    //   default: () => {}
-    // }
   },
   data () {
     return {
       panels: [],
-      barStyleInitialized: false
+      barStyleInitialized: false,
+      showScrollButton: false
     }
   },
   mounted () {
@@ -132,15 +117,45 @@ export default {
         index++
       }
     }
+    this.updateScrollStatus()
     this
       .$nextTick()
       .then(() => {
         const fontsReady = document.fonts.ready
         return fontsReady || undefined
       })
-      .then(updateBarPosition.bind(this))
+      .then(() => {
+        this.updateScrollStatus()
+        updateBarPosition.bind(this)
+      })
   },
   methods: {
+    scroll (direction) {
+      const navScroll = this.$refs.navScroll
+      const scrollLeft = navScroll.scrollLeft
+      const scrollWidth = navScroll.offsetWidth * 0.8
+      if (direction === 'left') {
+        navScroll.scrollTo({
+          left: scrollLeft - scrollWidth,
+          behavior: 'smooth'
+        })
+      } else {
+        navScroll.scrollTo({
+          left: scrollLeft + scrollWidth,
+          behavior: 'smooth'
+        })
+      }
+    },
+    updateScrollStatus () {
+      const labelWrapper = this.$refs.labelWrapper
+      const nav = this.$refs.nav
+      if (labelWrapper.offsetWidth > nav.offsetWidth) {
+        console.log('showScrollButton')
+        this.showScrollButton = true
+      } else {
+        this.showScrollButton = false
+      }
+    },
     addPanel (panelInstance) {
       this.panels.push(panelInstance)
     },

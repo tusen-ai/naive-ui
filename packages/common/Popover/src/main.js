@@ -45,6 +45,10 @@ export default {
       type: Number,
       default: null
     },
+    maxWidth: {
+      type: Number,
+      default: null
+    },
     placement: {
       type: String,
       default: 'bottom'

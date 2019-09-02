@@ -1,8 +1,10 @@
 <template>
   <div
     v-if="NTab && name === NTab.value"
-    :class="cls"
-    :style="style"
+    class="n-tab-panel"
+    :class="{
+      [`n-tab-panel--${type}-type`]: true
+    }"
   >
     <slot />
   </div>
@@ -35,13 +37,11 @@ export default {
   },
   data () {
     return {
-      isShow: false,
-      style: {}
     }
   },
   computed: {
-    cls () {
-      return this.isShow ? 'n-tab-panel n-tab-panel_active' : 'n-tab-panel'
+    type () {
+      return this.NTab.type
     }
     // offset () {
     //   return this.NTab.offset

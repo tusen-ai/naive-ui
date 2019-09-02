@@ -51,6 +51,10 @@ export default {
     width: {
       type: Number,
       default: null
+    },
+    maxWidth: {
+      type: Number,
+      default: null
     }
   },
   render (h, context) {
@@ -67,7 +71,7 @@ export default {
       h('div', {
         staticClass: 'n-tooltip__content',
         class: {
-          'n-tooltip__content--fix-width': context.props.width !== null
+          'n-tooltip__content--fix-width': context.props.width !== null || context.props.maxWidth !== null
         }
       }, context.slots().default)
     ])

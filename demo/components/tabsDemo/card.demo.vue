@@ -1,7 +1,7 @@
 <template>
   <div class="n-doc-section">
     <div class="n-doc-section__header">
-      Basic Usage
+      Card
     </div>
     <div
       class="n-doc-section__view"
@@ -9,41 +9,60 @@
     >
       <!--EXAMPLE_START-->
       <n-tabs
+        v-model="name"
         type="card"
         closable
         addable
-        :add-panel="addPanelItem"
-        :tab-remove="tabRemove"
-        :before-leave="beforeLeave"
       >
-        <n-tab-panel label="closable">
-          I am a input <n-input placeholder="lalala" />
+        <n-tab-panel
+          name="a"
+          label="a"
+        >
+          Name: a. <br>
         </n-tab-panel>
         <n-tab-panel
-          active
-          label="card mode"
+          name="b"
+          label="b"
         >
-          I am an active button <n-button> hahaha </n-button>
-          <br>Two mode supported now: normal and card.
-          closable only can use in card mode.
-          <br>
-          Configure addable and add-panel attributes to dynamically add panels.
-          <br>
-          before-leave attribute: callback before tab-panel changed
-          <br>
-          tab-remove attribute: callback after tab removed, param is the instance of the panel.
-          <br>
-        </n-tab-panel>
-        <n-tab-panel label="addable">
-          I am a button <n-button> hahaha </n-button>
+          Name: b. <br>
+          We can control the element display by setting the tab's name attribute.<br>
+          Also we can use tab-panel's active attribute to init the display.
+          And tab-panels's active attribute is the first priority.
         </n-tab-panel>
         <n-tab-panel
-          v-for="(i, j) in panels"
-          :key="j"
-          :label="i.label"
+          name="c"
+          label="c"
         >
-          {{ i.content }}
+          Name: a. <br>
         </n-tab-panel>
+        <n-tab-panel
+          name="d"
+          label="d"
+        >
+          Name: b. <br>
+          We can control the element display by setting the tab's name attribute.<br>
+          Also we can use tab-panel's active attribute to init the display.
+          And tab-panels's active attribute is the first priority.
+        </n-tab-panel>
+        <n-tab-panel
+          name="e"
+          label="e"
+        >
+          Name: a. <br>
+        </n-tab-panel>
+        <n-tab-panel
+          name="f"
+          label="f"
+        >
+          Name: b. <br>
+          We can control the element display by setting the tab's name attribute.<br>
+          Also we can use tab-panel's active attribute to init the display.
+          And tab-panels's active attribute is the first priority.
+        </n-tab-panel>
+        <n-tab-panel
+          disabled
+          label="Disabled"
+        />
       </n-tabs>
       <!--EXAMPLE_END-->
     </div>
@@ -58,7 +77,7 @@
 export default {
   data () {
     return {
-      panels: []
+      name: 'b'
     }
   },
   methods: {

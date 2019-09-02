@@ -11,17 +11,26 @@ import zIndexManager from '../utils/dom/zIndexManager'
  */
 export default {
   mounted () {
-    zIndexManager.registerElement(this.$refs.contentContainer)
+    zIndexManager.registerElement(this._getZindexableContent())
   },
   watch: {
     active (newActive) {
       console.debug('[zindexable.watch.active]:', newActive)
       if (newActive) {
-        zIndexManager.setNewZIndex(this.$refs.contentContainer)
+        zIndexManager.setNewZIndex(this._getZindexableContent())
       }
     }
   },
   beforeDestroy () {
-    zIndexManager.unregisterElement(this.$refs.contentContainer)
+    zIndexManager.unregisterElement(this._getZindexableContent())
+  },
+  methods: {
+    _getZindexableContent () {
+      if (this.$refs.contentContainer) {
+        return this.$refs.contentContainer
+      } else {
+        return this.getZindexableContent()
+      }
+    }
   }
 }

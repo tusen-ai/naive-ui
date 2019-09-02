@@ -10,5 +10,8 @@
   white-space: nowrap;
   &.n-tooltip__content--fix-width {
     white-space: normal;
+    width: max-content;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 }

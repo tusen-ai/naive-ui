@@ -3,136 +3,7 @@
 
 @include b(tab) {
   width: 100%;
-  border-radius: 9px;
-  .n-tab--label-add {
-    display: none;
-    font-size: 24px;
-    margin-right: 8px;
-  }
-  .n-tab--label_addable {
-    .n-tab--label-add {
-      display: inline-block;
-    }
-  }
-  &.n-tab_card {
-    // background-color: rgb(75, 81, 106);
-    padding-top: 6px;
-    padding-bottom: 16px;
-    .n-tab--label {
-      padding: 0 8px;
-      // margin-bottom: 12px;
-      .n-tab--label-item:not(:last-child) {
-        margin-right: 6px;
-      }
-      .n-tab--label-content {
-        display: flex;
-        align-items: center;
-        padding: 8px 16px;
-        border: none;
-        color: #ffffff;
-        background-color: rgba(255, 255, 255, .1);
-        border-radius: 6px 6px 0 0;
-        .n-tab--label-delete {
-          color: #F2F2F4;
-          opacity: 0.5;
-        }
-      }
-      .n-tab--label-item_active {
-        .n-tab--label-content {
-          color: #50E3C2;
-          background-color: rgba(71, 228, 194, 0.1);
-        }
-      }
-      .n-tab--label-item_disabled {
-        pointer-events: none;
-        .n-tab--label-content {
-          opacity: 0.25;
-          background-color: rgba(255, 255, 255, .1);
-        }
-        .n-tab--label-delete {
-          opacity: 0.2;
-        }
-      }
-      .n-tab--label-text:hover {
-        color: #50E3C2;
-      }
-      .n-tab--label-delete:hover {
-        color: #63E2B7;
-      }
-    }
-    .n-tab--slot-panel {
-      padding: 12px 24px 16px;
-    }
-    .n-tab--slot {
-      display: flex;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-  }
-  &.n-tab_board {
-    background-color: rgb(23, 29, 51);
-    .n-tab--label {
-      border-bottom: 1px solid rgba(255, 255, 255, .3);
-      .n-tab--label-item:not(:last-child) {
-        margin-right: 3px;
-      }
-      .n-tab--label-content {
-        display: flex;
-        align-items: center;
-        border: none;
-        padding: 8px 16px;
-        border-radius: 6px 6px 0 0;
-        border: 1px solid rgba(255, 255, 255, .5);
-        background-color: rgba(255, 255, 255, .1);
-        color: #ffffff;
-        .n-tab--label-delete {
-          color: #F2F2F4;
-          opacity: 0.5;
-        }
-      }
-      .n-tab--label-item_active {
-        .n-tab--label-content {
-          color: #63E2B7;
-          border-color: #63E2B7;
-          border-bottom: none;
-          background: rgb(23, 29, 51);
-        }
-        &:after {
-          display: block;
-          content: '';
-          width: 100%;
-          height: 1px;
-          background-color: #171D33;
-        }
-      }
-      .n-tab--label-item_disabled {
-        pointer-events: none;
-        .n-tab--label-content {
-          opacity: 0.3;
-        }
-        .n-tab--label-delete {
-          opacity: 0.2;
-        }
-      }
-      .n-tab--label-text:hover {
-        color: #50E3C2;
-      }
-      .n-tab--label-delete:hover {
-        color: #63E2B7;
-      }
-    }
-    .n-tab--slot-panel {
-      padding: 13px 4px 16px 16px;
-      border-radius: 0px 0px 9px 9px;
-    }
-    .n-tab--slot {
-      display: flex;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-  }
+  border-radius: 4px;
   &.n-tab--line-type {
     .n-tab-label {
       display: inline-block;
@@ -158,17 +29,78 @@
         }
       }
     }
-    .n-tab--slot {
-      // margin: 12px 24px 16px;
-      display: flex;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
+  }
+  &.n-tab--card-type {
+    background-color: rgba(57, 63, 87, 1);
+    padding-top: 6px;
+    .n-tab-label {
+      margin-left: -1px;
+      display: inline-block;
+      box-sizing: border-box;
+      height: 34px;
+      line-height: 34px;
+      padding: 0 16px;
+      position: relative;
+      .n-tab-label__corner {
+        position: absolute;
+        height: 4px;
+        width: 4px;
+        bottom: 0;
+        &.n-tab-label__corner--left {
+          left: -4px;
+        }
+        &.n-tab-label__corner--right {
+          right: -4px;
+        }
+        svg {
+          display: block;
+          path {
+            fill: rgba(75, 81, 106, 1);
+          }
+        }
+      }
+      &:hover {
+        .n-tab-label__label {
+          color: #63E2B7;
+        }
+      }
+      &:first-child {
+        margin-left: 10px;
+      }
+      &:not(:last-child) {
+        &::after {
+          content: "";
+          background-color: rgba(255, 255, 255, 0.5);
+          width: 1px;
+          position: absolute;
+          right: 0;
+          top: 6px;
+          bottom: 6px;
+        }
+      }
+      &.n-tab-label--active {
+        background-color: rgba(75, 81, 106, 1);
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        .n-tab-label__label {
+          font-size: 16px;
+          color: #63E2B7;
+        }
+        &::after {
+          display: none;
+        }
+      }
+      &.n-tab-label--disabled {
+        .n-tab-label__label {
+          color: rgba(255,255,255,0.3);
+        }
+      }
     }
   }
 }
 
 @include b(tab-nav) {
+  display: flex;
   .n-tab-nav__scroll {
     overflow: hidden;
   }
@@ -201,4 +133,12 @@
 @include b(tab-panel) {
   width: 100%;
   margin-top: 7px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  &.n-tab-panel--card-type {
+    margin-top: 0px;
+    padding: 12px 26px 16px 26px;
+    box-sizing: border-box;
+    background-color: rgba(75,81,106,1);
+  }
 }
