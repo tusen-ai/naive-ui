@@ -36,6 +36,8 @@ placement $refs 变化更改
 picker 在 input 聚焦的时候，esc 按钮不符合预期
 ## 2018.8.29
 block transition for date picker in range not via :key
+## 2018.9.2
+select menu 更加自治一点 比如 isSelected，可能最后要加到 vmodel 为止
 ## TODO
 issue fix, add delay prop
 add trigger to tooltip

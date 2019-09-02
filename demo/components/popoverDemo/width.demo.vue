@@ -1,25 +1,20 @@
 <template>
   <div class="n-doc-section">
     <div class="n-doc-section__header">
-      Raw Content
+      Width
     </div>
     <div
       class="n-doc-section__view"
       style="flex-wrap: nowrap;"
     >
       <!--EXAMPLE_START-->
-      <n-popover
-        raw
-        :arrow="false"
-      >
+      <n-popover :width="500">
         <template v-slot:activator>
           <n-button style="margin:0;">
             hover
           </n-button>
         </template>
-        <div style="width: 100px; height: 100px; background-color: red; transform-origin: inherit;">
-          Who kicks a hole in the sky so the heaven cry over me.
-        </div>
+        <span>Light My Fire</span>
       </n-popover>
       <!--EXAMPLE_END-->
     </div>

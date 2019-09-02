@@ -8,7 +8,7 @@
       style="flex-wrap: nowrap;"
     >
       <!--EXAMPLE_START-->
-      <n-popconfirm ref="popconfirm">
+      <n-popconfirm :controller="controller">
         <template v-slot:activator>
           <n-button>Quit</n-button>
         </template>
@@ -32,10 +32,15 @@
 
 <script>
 export default {
+  data () {
+    return {
+      controller: {}
+    }
+  },
   methods: {
     handleOopsClick () {
       this.$NMessage.info('oops!')
-      this.$refs.popconfirm.close()
+      if (this.controller) this.controller.hide()
     }
   }
 }

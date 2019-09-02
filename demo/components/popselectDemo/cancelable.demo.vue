@@ -11,27 +11,11 @@
       <n-popselect
         v-model="value"
         cancelable
+        :options="options"
       >
         <template v-slot:activator>
           <n-tag>{{ value || 'popselect' }}</n-tag>
         </template>
-        <n-popselect-option
-          label="Go Let It Out"
-          value="Go Let It Out"
-        />
-        <n-popselect-option
-          label="Who Feels Love?"
-          value="Who Feels Love?"
-        />
-        <n-popselect-option
-          disabled
-          label="Sunday Morning Call"
-          value="Sunday Morning Call"
-        />
-        <n-popselect-option
-          label="Roll It Over"
-          value="Roll It Over"
-        />
       </n-popselect>
       <!--EXAMPLE_END-->
     </div>
@@ -46,7 +30,21 @@
 export default {
   data () {
     return {
-      value: null
+      value: null,
+      options: [{
+        label: 'Go Let It Out',
+        value: 'Go Let It Out'
+      }, {
+        label: 'Who Feels Love?',
+        value: 'Who Feels Love?'
+      }, {
+        label: 'Sunday Morning Call',
+        value: 'Sunday Morning Call',
+        disabled: true
+      }, {
+        label: 'Roll It Over',
+        value: 'Roll It Over'
+      }]
     }
   },
   methods: {

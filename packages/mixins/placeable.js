@@ -68,6 +68,7 @@ export default {
     this.$nextTick().then(() => {
       this.registerScrollListeners()
       this.registerResizeListener()
+      this.updatePosition()
     })
   },
   beforeDestroy () {
@@ -92,7 +93,7 @@ export default {
     updatePosition (el, cb) {
       // console.log('scroll')
       if (!this.active) return
-      console.log('[placeable.updatePosition]')
+      // console.log('[placeable.updatePosition]')
       this._getTrackedElement()
       this._getTrackingElement()
       // console.log(activator)
@@ -130,7 +131,8 @@ export default {
       resizeDelegate.registerHandler(this.updatePosition)
     },
     registerScrollListeners () {
-      let currentElement = getParentNode(this.$el)
+      this._getTrackedElement()
+      let currentElement = getParentNode(this.trackedElement)
       while (true) {
         currentElement = getScrollParent(currentElement)
         if (currentElement === null) break

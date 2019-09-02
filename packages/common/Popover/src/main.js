@@ -2,7 +2,6 @@ import NBaseContext from '../../../base/Context'
 import NBaseProtal from '../../../base/Protal'
 import NPopoverContent from './PopoverContent'
 import activatorMixin from './activatorMixin'
-import contentMixin from './contentMixin'
 import genId from '../../../utils/genId'
 
 function mixin (component, mixin) {
@@ -17,30 +16,78 @@ function mixin (component, mixin) {
 export default {
   name: 'NPopover',
   functional: true,
+  props: {
+    value: {
+      type: Boolean,
+      default: false
+    },
+    arrow: {
+      type: Boolean,
+      default: true
+    },
+    trigger: {
+      type: String,
+      default: 'hover'
+    },
+    delay: {
+      type: Number,
+      default: 0
+    },
+    duration: {
+      type: Number,
+      default: 300
+    },
+    raw: {
+      type: Boolean,
+      default: false
+    },
+    width: {
+      type: Number,
+      default: null
+    },
+    placement: {
+      type: String,
+      default: 'bottom'
+    },
+    controller: {
+      type: Object,
+      default: null
+    },
+    /** private props */
+    inFunctionalComponent: {
+      type: Boolean,
+      default: false
+    }
+  },
   render (h, context) {
     const slots = context.slots()
-    const activatorSlot = slots.activator || []
     const defaultSlot = slots.default || []
+    let activatorSlot = slots.activator
+    if (context.props.inFunctionalComponent) {
+      activatorSlot = defaultSlot[0].children
+      defaultSlot.shift()
+    }
+    activatorSlot = activatorSlot || []
     const id = genId()
-    const trigger = context.props.trigger || 'hover'
-    const show = context.props.show || false
+    const props = context.props
+    const listeners = context.listeners
+    const controller = context.props.controller
     return [
       h(mixin(NBaseContext, activatorMixin), {
         props: {
-          id,
-          trigger,
-          show
+          ...props,
+          controller,
+          id
         }
       }, [activatorSlot[0]]),
-      h(mixin(NBaseProtal, contentMixin), {
-        props: { id }
-      }, [
+      h(NBaseProtal, {}, [
         h(NPopoverContent, {
           props: {
-            id,
-            trigger,
-            show
-          }
+            ...props,
+            controller,
+            id
+          },
+          on: listeners
         }, defaultSlot)
       ])
     ]

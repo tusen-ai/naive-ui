@@ -1,6 +1,7 @@
 import popoverManager from './PopoverManager'
 import clickoutside from '../../../directives/clickoutside'
 import mousemoveoutside from '../../../directives/mousemoveoutside'
+import placeable from '../../../mixins/placeable'
 
 export default {
   name: 'NPopoverContent',
@@ -9,15 +10,36 @@ export default {
       type: String,
       required: true
     },
-    show: {
+    value: {
       type: Boolean,
       default: false
     },
     trigger: {
       type: String,
       default: 'click'
+    },
+    arrow: {
+      type: Boolean,
+      default: true
+    },
+    delay: {
+      type: Number,
+      default: 0
+    },
+    duration: {
+      type: Number,
+      default: 300
+    },
+    controller: {
+      type: Object,
+      default: null
+    },
+    width: {
+      type: Number,
+      default: null
     }
   },
+  mixins: [placeable],
   directives: {
     clickoutside,
     mousemoveoutside
@@ -27,7 +49,23 @@ export default {
       internalActive: false
     }
   },
+  watch: {
+    active (newActive) {
+      if (newActive) {
+        this.$emit('show')
+      } else {
+        this.$emit('hide')
+      }
+    }
+  },
   computed: {
+    style () {
+      const style = {}
+      if (this.width) {
+        style.width = this.width + 'px'
+      }
+      return style
+    },
     triggeredByClick () {
       return this.trigger === 'click'
     },
@@ -38,7 +76,7 @@ export default {
       return this.trigger === 'manual'
     },
     active () {
-      if (this.trigger === 'manual') return this.show
+      if (this.trigger === 'manual') return this.value
       else return this.internalActive
     }
   },
@@ -55,6 +93,13 @@ export default {
     popoverManager.unregisterContent(this)
   },
   methods: {
+    cancelVanishTimer () {
+      const activator = this.activator()
+      if (activator) {
+        window.clearTimeout(activator.vanishTimerId)
+        activator.vanishTimerId = null
+      }
+    },
     activate () {
       const activator = this.activator()
       if (activator && !activator.active) {
@@ -72,10 +117,33 @@ export default {
     activator () {
       return popoverManager.getActivatorInstance(this)
     },
-    handleMouseMoveOutside () {
+    handleMouseEnter () {
+      this.cancelVanishTimer()
+    },
+    handleMouseLeave (e) {
       if (this.triggeredByHover) {
-        console.log('[PopoverContent.handleMouseMoveOutside]')
-        this.deactivate()
+        if (!this.active) return
+        this.cancelVanishTimer()
+        // console.log('[PopoverContent.handleMouseLeave]')
+        const activator = this.activator()
+        activator.vanishTimerId = window.setTimeout(() => {
+          if (activator && activator.$el) {
+            const activatorEl = activator.$el
+            if (activatorEl.contains(e.target)) {
+              // console.log('[PopoverContent.handleMouseLeave] move on activator, do nothing')
+              return
+            }
+          }
+          // console.log('[PopoverContent.handleMouseLeave] move on outside, close the popover')
+          activator.vanishTimerId = null
+          this.deactivate()
+        }, this.duration)
+      }
+    },
+    handleMouseMoveOutside (e) {
+      // console.log('[PopoverContent.handleMouseMoveOutside')
+      if (this.triggeredByHover) {
+        this.handleMouseLeave(e)
       }
     },
     handleClickOutside (e) {
@@ -84,22 +152,31 @@ export default {
         if (activator && activator.$el) {
           const activatorEl = activator.$el
           if (activatorEl.contains(e.target)) {
-            console.log('[PopoverContent.handleClickOutside] click at activator, do nothing')
+            // console.log('[PopoverContent.handleClickOutside] click at activator, do nothing')
             return
           }
         }
-        console.log('[PopoverContent.handleClickOutside] click at outside, close the popover')
+        // console.log('[PopoverContent.handleClickOutside] click at outside, close the popover')
         this.deactivate()
       }
+    },
+    getTrackingElement () {
+      // console.log('getTrackingElement', this.activator().$el)
+      return this.$refs.content
+    },
+    getTrackedElement () {
+      // console.log('getTrackedEleme')
+      return this.activator().$el
     }
   },
   render (h) {
-    console.log('render popover content', this.$props)
+    // console.log('render popover content', this.$props)
     return h('div', {
       staticClass: 'n-detached-content-container'
     }, [
       h('div', {
         staticClass: 'n-detached-content',
+        ref: 'content',
         attrs: {
           'n-popover-id': this.$props.id
         }
@@ -130,26 +207,16 @@ export default {
                 }
               ],
               on: {
-                // mouseenter: this.handleMouseEnter,
-                // mouseleave: this.handleMouseLeavePopover
+                mouseenter: this.handleMouseEnter,
+                mouseleave: this.handleMouseLeave
               }
             }, [
+              ...this.$slots.default,
               this.arrow
                 ? h('div', {
-                  staticClass: 'n-popover__arrow',
-                  directives: [
-                    {
-                      name: 'clickoutside',
-                      value: this.handleClickOutside
-                    },
-                    {
-                      name: 'mousemoveoutside',
-                      valud: this.handleMouseMoveOutside
-                    }
-                  ]
+                  staticClass: 'n-popover__arrow'
                 })
-                : null,
-              ...this.$slots.default
+                : null
             ])
             : null
         ])

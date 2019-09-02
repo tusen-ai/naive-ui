@@ -39,19 +39,19 @@ class PopoverManager {
     this.content2id = new Map()
   }
   registerActivator (activator) {
-    console.log(`[PopoverManager.registerActivator]`)
+    // console.log(`[PopoverManager.registerActivator]`)
     abstractRegister(this, activator, 'id2activator', 'activator2id')
   }
   registerContent (content) {
-    console.log(`[PopoverManager.registerContent]`)
+    // console.log(`[PopoverManager.registerContent]`)
     abstractRegister(this, content, 'id2content', 'content2id')
   }
   unregisterActivator (activator) {
-    console.log(`[PopoverManager.unregisterActivator]`)
+    // console.log(`[PopoverManager.unregisterActivator]`)
     abstractUnregister(this, activator, 'id2activator', 'activator2id')
   }
   unregisterContent (content) {
-    console.log(`[PopoverManager.unregisterContent]`)
+    // console.log(`[PopoverManager.unregisterContent]`)
     abstractUnregister(this, content, 'id2content', 'content2id')
   }
   getContentInstance (activator) {

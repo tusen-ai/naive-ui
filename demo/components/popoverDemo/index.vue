@@ -17,6 +17,7 @@
       <event />
       <placement />
       <raw />
+      <width />
     </div>
   </div>
 </template>
@@ -30,6 +31,7 @@ import placement from './placement.demo.vue'
 import event from './event.demo'
 import delay from './delay.demo'
 import raw from './raw.demo.vue'
+import width from './width.demo.vue'
 
 export default {
   components: {
@@ -40,7 +42,8 @@ export default {
     placement,
     event,
     delay,
-    raw
+    raw,
+    width
   },
   data () {
     return { content: 'hello', visible: false, showPopover: false, active1: false }

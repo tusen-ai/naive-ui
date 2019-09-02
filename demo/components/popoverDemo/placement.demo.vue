@@ -12,11 +12,10 @@
         <n-popover
           placement="top-start"
           trigger="click"
-          style="grid-area: 1 / 2 / 2 / 3;"
-        >
+>
           <template v-slot:activator>
             <n-button
-              style="margin: 0;"
+              style="grid-area: 1 / 2 / 2 / 3;"
             >
               Top Start
             </n-button>
@@ -28,11 +27,10 @@
         <n-popover
           placement="top"
           trigger="click"
-          style="grid-area: 1 / 3 / 2 / 4;"
-        >
+>
           <template v-slot:activator>
             <n-button
-              style="margin: 0;"
+              style="grid-area: 1 / 3 / 2 / 4;"
             >
               Top
             </n-button>
@@ -44,11 +42,10 @@
         <n-popover
           placement="top-end"
           trigger="click"
-          style="grid-area: 1 / 4/ 2 / 5;"
-        >
+>
           <template v-slot:activator>
             <n-button
-              style="margin: 0;"
+              style="grid-area: 1 / 4/ 2 / 5;"
             >
               Top End
             </n-button>
@@ -60,11 +57,10 @@
         <n-popover
           placement="left-start"
           trigger="click"
-          style="grid-area: 2 / 1 / 3 / 2;"
-        >
+>
           <template v-slot:activator>
             <n-button
-              style="margin: 0;"
+              style="grid-area: 2 / 1 / 3 / 2;"
             >
               Left Start
             </n-button>
@@ -76,11 +72,10 @@
         <n-popover
           placement="left"
           trigger="click"
-          style="grid-area: 3 / 1 / 4 / 2;"
-        >
+>
           <template v-slot:activator>
             <n-button
-              style="margin: 0;"
+              style="grid-area: 3 / 1 / 4 / 2;"
             >
               Left
             </n-button>
@@ -92,11 +87,10 @@
         <n-popover
           placement="left-end"
           trigger="click"
-          style="grid-area: 4 / 1 / 5 / 2;"
-        >
+>
           <template v-slot:activator>
             <n-button
-              style="margin: 0;"
+              style="grid-area: 4 / 1 / 5 / 2;"
             >
               Left End
             </n-button>
@@ -108,11 +102,10 @@
         <n-popover
           placement="right-start"
           trigger="click"
-          style="grid-area: 2 / 5 / 3 / 6;"
-        >
+>
           <template v-slot:activator>
             <n-button
-              style="margin: 0;"
+              style="grid-area: 2 / 5 / 3 / 6;"
             >
               Right Start
             </n-button>
@@ -124,11 +117,10 @@
         <n-popover
           placement="right"
           trigger="click"
-          style="grid-area: 3 / 5 / 4 / 6;"
-        >
+>
           <template v-slot:activator>
             <n-button
-              style="margin: 0;"
+              style="grid-area: 3 / 5 / 4 / 6;"
             >
               Right
             </n-button>
@@ -140,11 +132,10 @@
         <n-popover
           placement="right-end"
           trigger="click"
-          style="grid-area: 4 / 5 / 5 / 6;"
-        >
+>
           <template v-slot:activator>
             <n-button
-              style="margin: 0;"
+              style="grid-area: 4 / 5 / 5 / 6;"
             >
               Right End
             </n-button>
@@ -156,11 +147,10 @@
         <n-popover
           placement="bottom-start"
           trigger="click"
-          style="grid-area: 5 / 2 / 6 / 3;"
-        >
+>
           <template v-slot:activator>
             <n-button
-              style="margin: 0;"
+              style="grid-area: 5 / 2 / 6 / 3;"
             >
               Bottom Start
             </n-button>
@@ -172,11 +162,10 @@
         <n-popover
           placement="bottom"
           trigger="click"
-          style="grid-area: 5 / 3 / 6 / 4;"
-        >
+>
           <template v-slot:activator>
             <n-button
-              style="margin: 0;"
+              style="grid-area: 5 / 3 / 6 / 4;"
             >
               Bottom
             </n-button>
@@ -188,11 +177,10 @@
         <n-popover
           placement="bottom-end"
           trigger="click"
-          style="grid-area: 5 / 4 / 6 / 5;"
-        >
+>
           <template v-slot:activator>
             <n-button
-              style="margin: 0;"
+              style="grid-area: 5 / 4 / 6 / 5;"
             >
               Bottom End
             </n-button>

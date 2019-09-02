@@ -1,4 +1,3 @@
-import placeable from '../../../mixins/placeable'
 import popoverManager from './PopoverManager'
 
 export default {
@@ -7,16 +6,35 @@ export default {
       type: String,
       required: true
     },
-    show: {
+    value: {
       type: Boolean,
       default: false
     },
     trigger: {
       type: String,
       default: 'hover'
+    },
+    delay: {
+      type: Number,
+      default: 0
+    },
+    duration: {
+      type: Number,
+      default: 300
+    },
+    raw: {
+      type: Boolean,
+      default: false
+    },
+    width: {
+      type: Number,
+      default: null
+    },
+    controller: {
+      type: Object,
+      default: null
     }
   },
-  mixins: [placeable],
   computed: {
     triggeredByClick () {
       return this.trigger === 'click'
@@ -28,32 +46,45 @@ export default {
       return this.trigger === 'manual'
     },
     active () {
-      if (this.trigger === 'manual') return this.show
+      if (this.trigger === 'manual') return this.value
       else return this.internalActive
     }
   },
   data () {
     return {
-      internalActive: false
+      internalActive: false,
+      delayTimerId: null,
+      vanishTimerId: null
     }
   },
   mounted () {
-    console.log('[Activator.mounted] id', this.id)
-    console.log('[Activator.mounted] active', this.active)
+    // console.log('[Activator.mounted] id', this.id)
+    // console.log('[Activator.mounted] active', this.active)
     popoverManager.registerActivator(this)
     this.registerListeners()
+    if (this.controller) {
+      this.controller.show = this.activate
+      this.controller.hide = this.deactivate
+    }
   },
   beforeUpdate () {
-
   },
   updated () {
-    console.log('Activator Updated', this.id)
+    // console.log('Activator Updated', this.id)
     popoverManager.registerActivator(this)
     this.registerListeners()
+    if (this.controller) {
+      this.controller.show = this.activate
+      this.controller.hide = this.deactivate
+    }
   },
   beforeDestroy () {
-    console.log('Activator Destroyed', this.id)
+    // console.log('Activator Destroyed', this.id)
     popoverManager.unregisterActivator(this)
+    if (this.controller) {
+      this.controller.show = null
+      this.controller.hide = null
+    }
   },
   methods: {
     activate () {
@@ -70,33 +101,33 @@ export default {
       }
       this.internalActive = false
     },
-    getTrackingElement () {
-      // console.log('popover activator getTrackingElement')
-      return document.querySelector(`[n-popover-id="${this.id}"]`)
-    },
-    getTrackedElement () {
-      return this.$el
-    },
     content () {
-      console.log(popoverManager, this)
+      // console.log(popoverManager, this)
       return popoverManager.getContentInstance(this)
     },
     handleClick () {
       if (this.triggeredByClick) {
-        console.log(`[Activator.handleClick]`)
+        // console.log(`[Activator.handleClick]`)
         if (this.active) this.deactivate()
         else this.activate()
       }
     },
     handleMouseEnter () {
+      window.clearTimeout(this.vanishTimerId)
       if (this.triggeredByHover) {
-        console.log(`[Activator.handleMouseEnter]`)
-        this.activate()
+        this.delayTimerId = window.setTimeout(() => {
+          this.activate()
+          this.delayTimerId = null
+        }, this.delay)
       }
     },
     handleMouseLeave () {
+      window.clearTimeout(this.delayTimerId)
       if (this.triggeredByHover) {
-        this.deactivate()
+        this.vanishTimerId = window.setTimeout(() => {
+          this.deactivate()
+          this.vanishTimerId = null
+        }, this.duration)
       }
     },
     registerListeners () {
@@ -106,12 +137,12 @@ export default {
         el.removeEventListener('mouseenter', this.handleMouseEnter)
         el.removeEventListener('mouseleave', this.handleMouseLeave)
         if (this.triggeredByClick) {
-          console.log('register click')
+          /// console.log('register click')
           el.addEventListener('click', this.handleClick)
         } else if (this.triggeredByHover) {
-          console.log('register hover')
+          // console.log('register hover')
           el.addEventListener('mouseenter', this.handleMouseEnter)
-          el.addEventListener('mouseleave', this.handleMouseEnter)
+          el.addEventListener('mouseleave', this.handleMouseLeave)
         }
       }
     }

@@ -2,7 +2,10 @@
   <div style="height: 3000px;">
     <div style="height: 400px;" />
     <div style="margin-left: 400px;">
-      <n-popover trigger="click">
+      <n-popover
+        v-model="v"
+        trigger="manual"
+      >
         <template v-slot:activator>
           <button
             v-if="v"

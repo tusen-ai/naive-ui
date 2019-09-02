@@ -1,66 +1,10 @@
-<template>
-  <n-popover
-    ref="popover"
-    v-model="showPopconfirm"
-    class="n-popconfirm"
-    trigger="click"
-  >
-    <template v-slot:activator>
-      <slot name="activator" />
-    </template>
-    <div
-      class="n-popconfirm-content"
-      :class="{
-        'n-popconfirm-content--no-icon': noIcon
-      }"
-    >
-      <div class="n-popconfirm-content__body">
-        <slot
-          v-if="!noIcon"
-          name="icon"
-        >
-          <n-icon
-            type="md-alert"
-            color="rgba(255, 138, 0, 1)"
-          />
-        </slot>
-        <slot />
-      </div>
-      <template>
-        <div class="n-popconfirm-content__action">
-          <slot name="action">
-            <n-button
-              size="tiny"
-              round
-              @click="handleNegativeClick"
-            >
-              {{ negativeText }}
-            </n-button>
-            <n-button
-              round
-              size="tiny"
-              type="primary"
-              @click="handlePositiveClick"
-            >
-              {{ positiveText }}
-            </n-button>
-          </slot>
-        </div>
-      </template>
-    </div>
-  </n-popover>
-</template>
-
 <script>
 import NPopover from '../../Popover'
-import NButton from '../../Button'
+import PopconfirmPanel from './PopconfirmPanel'
 
 export default {
   name: 'NPopconfirm',
-  components: {
-    NPopover,
-    NButton
-  },
+  functional: true,
   props: {
     positiveText: {
       type: String,
@@ -73,25 +17,47 @@ export default {
     noIcon: {
       type: Boolean,
       default: false
+    },
+    trigger: {
+      type: String,
+      default: 'click'
+    },
+    inFunctionalComponent: {
+      type: Boolean,
+      default: true
+    },
+    controller: {
+      type: Object,
+      default: null
     }
   },
-  data () {
-    return {
-      showPopconfirm: false
-    }
-  },
-  methods: {
-    close () {
-      this.$refs.popover.active = false
-    },
-    handlePositiveClick () {
-      this.$emit('positive-click')
-      this.close()
-    },
-    handleNegativeClick () {
-      this.$emit('negative-click')
-      this.close()
-    }
+  render (h, context) {
+    const controller = context.props.controller || {}
+    return h(NPopover, {
+      props: {
+        ...context.props,
+        controller
+      }
+    }, [
+      h('template', {
+        slot: 'activator'
+      }, context.slots().activator),
+      h(PopconfirmPanel, {
+        props: {
+          ...context.props,
+          controller
+        },
+        on: context.listeners
+      }, [
+        h('template', {
+          slot: 'action'
+        }, context.slots().action),
+        h('template', {
+          slot: 'icon'
+        }, context.slots().icon),
+        context.slots().default
+      ])
+    ])
   }
 }
 </script>

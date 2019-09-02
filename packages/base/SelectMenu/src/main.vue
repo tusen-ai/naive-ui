@@ -5,6 +5,9 @@
       [`n-base-select-menu--${size}-size`]: true,
       'n-base-select-menu--multiple': multiple
     }"
+    :style="{
+      width: width &&(width + 'px')
+    }"
     @keyup.up.stop="handleKeyUpUp"
     @keyup.down.stop="handleKeyUpDown"
     @mousedown.prevent="() => {}"
@@ -130,6 +133,10 @@ export default {
     isSelected: {
       type: Function,
       required: true
+    },
+    width: {
+      type: Number,
+      default: null
     }
   },
   data () {
@@ -139,12 +146,15 @@ export default {
     }
   },
   computed: {
-    firstOption () {
-      // console.log(this.linkedOptions)
-      if (this.linkedOptions && this.linkedOptions.length) {
-        return this.linkedOptions[0]
+    id2Option () {
+      const id2Option = new Map()
+      for (const option of this.linkedOptions) {
+        id2Option.set(option.id, option)
       }
-      return null
+      return id2Option
+    },
+    firstOptionId () {
+      return this.linkedOptions.firstAvailableOptionId
     }
   },
   watch: {
@@ -195,49 +205,21 @@ export default {
     },
     next () {
       if (this.pendingOption === null) {
-        // console.log('this.pendingOption === null', this.firstOption)
-        const firstOption = this.firstOption
-        if (firstOption) {
-          let optionIterator = firstOption
-          if (!optionIterator) {
-            return
-          } else {
-            while (optionIterator.disabled) {
-              optionIterator = optionIterator.next
-              if (optionIterator === firstOption) {
-                break
-              }
-            }
-          }
-          this.pendingOption = optionIterator
-          this.setPendingOptionElement(optionIterator)
-        }
+        this.setPendingOptionElementId(this.linkedOptions.firstAvailableOptionId)
       } else {
-        // console.log('this.pendingOption !== null', this.pendingOption)
-        let optionIterator = this.pendingOption
-        optionIterator = optionIterator.next
-        while (this.pendingOption !== optionIterator && optionIterator.disabled) {
-          optionIterator = optionIterator.next
-        }
-        this.pendingOption = optionIterator
-        this.setPendingOptionElement(optionIterator)
+        this.setPendingOptionElementId(this.pendingOption.nextAvailableOptionId)
       }
     },
     prev () {
       if (this.pendingOption) {
-        let optionIterator = this.pendingOption
-        optionIterator = optionIterator.prev
-        while (this.pendingOption !== optionIterator && optionIterator.disabled) {
-          optionIterator = optionIterator.prev
-        }
-        this.pendingOption = optionIterator
-        this.setPendingOptionElement(optionIterator)
+        this.setPendingOptionElementId(this.pendingOption.prevAvailableOptionId)
       }
     },
-    setPendingOptionElement (option) {
+    setPendingOptionElementId (id) {
       const menu = this.$el
-      if (menu) {
-        const el = menu.querySelector(`[data-id="${option.id}"]`)
+      if (menu && id !== null) {
+        const el = menu.querySelector(`[data-id="${id}"]`)
+        this.pendingOption = this.id2Option.get(id)
         this.pendingOptionElement = el
         this.updateLightBarPosition(this.pendingOptionElement)
         this.$refs.scrollbar.scrollToElement(this.pendingOptionElement)

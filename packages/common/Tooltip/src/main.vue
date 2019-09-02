@@ -1,28 +1,3 @@
-<template>
-  <n-popover
-    v-model="value"
-    class="n-tooltip"
-    :arrow="arrow"
-    :placement="placement"
-    :trigger="trigger"
-    :width="width"
-    @show="handleShow"
-    @hide="handleHide"
-  >
-    <template v-slot:activator>
-      <slot name="activator" />
-    </template>
-    <div
-      class="n-tooltip__content"
-      :class="{
-        'n-tooltip__content--fix-width': width !== null
-      }"
-    >
-      <slot />
-    </div>
-  </n-popover>
-</template>
-
 <script>
 /**
  * Tooltip: popover wearing waistcoat
@@ -34,9 +9,7 @@ const DEFAULT_DELAY = null
 
 export default {
   name: 'NTooltip',
-  components: {
-    NPopover
-  },
+  functional: true,
   props: {
     placement: {
       type: String,
@@ -80,13 +53,24 @@ export default {
       default: null
     }
   },
-  methods: {
-    handleShow () {
-      this.$emit('show')
-    },
-    handleHide () {
-      this.$emit('hide')
-    }
+  render (h, context) {
+    return h(NPopover, {
+      on: context.listeners,
+      props: {
+        ...context.props,
+        inFunctionalComponent: true
+      }
+    }, [
+      h('template', {
+        slot: 'activator'
+      }, context.slots().activator),
+      h('div', {
+        staticClass: 'n-tooltip__content',
+        class: {
+          'n-tooltip__content--fix-width': context.props.width !== null
+        }
+      }, context.slots().default)
+    ])
   }
 }
 </script>
