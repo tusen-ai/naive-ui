@@ -10,6 +10,7 @@
       'n-base-picker--focus': patternInputFocused
     }"
     @click="handleClick"
+    @mousedown="handleMouseDown"
   >
     <template v-if="multiple && !filterable">
       <!-- multiple -->
@@ -266,6 +267,11 @@ export default {
     },
     handleClear (e) {
       this.$emit('clear', e)
+    },
+    handleMouseDown (e) {
+      if (this.filterable && this.multiple) {
+        e.preventDefault()
+      }
     },
     handleClick () {
       this.$emit('click')
