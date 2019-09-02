@@ -5,64 +5,22 @@
     </div>
     <div
       class="n-doc-section__view"
-      style="flex-wrap: nowrap;"
     >
       <!--EXAMPLE_START-->
       <n-tabs
         v-model="name"
         type="card"
         closable
-        addable
+        @close="handleClose"
       >
         <n-tab-panel
-          name="a"
-          label="a"
+          v-for="panel in panels"
+          :key="panel"
+          :label="panel.toString()"
+          :name="panel.toString()"
         >
-          Name: a. <br>
+          {{ panel }}
         </n-tab-panel>
-        <n-tab-panel
-          name="b"
-          label="b"
-        >
-          Name: b. <br>
-          We can control the element display by setting the tab's name attribute.<br>
-          Also we can use tab-panel's active attribute to init the display.
-          And tab-panels's active attribute is the first priority.
-        </n-tab-panel>
-        <n-tab-panel
-          name="c"
-          label="c"
-        >
-          Name: a. <br>
-        </n-tab-panel>
-        <n-tab-panel
-          name="d"
-          label="d"
-        >
-          Name: b. <br>
-          We can control the element display by setting the tab's name attribute.<br>
-          Also we can use tab-panel's active attribute to init the display.
-          And tab-panels's active attribute is the first priority.
-        </n-tab-panel>
-        <n-tab-panel
-          name="e"
-          label="e"
-        >
-          Name: a. <br>
-        </n-tab-panel>
-        <n-tab-panel
-          name="f"
-          label="f"
-        >
-          Name: b. <br>
-          We can control the element display by setting the tab's name attribute.<br>
-          Also we can use tab-panel's active attribute to init the display.
-          And tab-panels's active attribute is the first priority.
-        </n-tab-panel>
-        <n-tab-panel
-          disabled
-          label="Disabled"
-        />
       </n-tabs>
       <!--EXAMPLE_END-->
     </div>
@@ -77,25 +35,17 @@
 export default {
   data () {
     return {
-      name: 'b'
+      panels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+      name: '1'
     }
   },
   methods: {
-    addPanelItem () {
-      this.panels.push({
-        label: this.panels.length,
-        content: 'i am number' + this.panels.length
-      })
-    },
-    tabRemove (i) {
-      console.log('callback tab-remove', i)
-    },
-    beforeLeave (n, o) {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve('e')
-        }, 500)
-      })
+    handleClose (name) {
+      this.$NMessage.info('Close ' + name)
+      const index = this.panels.findIndex(v => name === v.toString())
+      if (~index) {
+        this.panels.splice(index, 1)
+      }
     }
   }
 }

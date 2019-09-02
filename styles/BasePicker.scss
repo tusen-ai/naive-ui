@@ -52,7 +52,7 @@
     }
   }
   .n-base-picker-tags {
-    padding: 4px 32px 0 14px;
+    padding: 3px 32px 0 14px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -65,7 +65,7 @@
       color: #63E2B7FF;
       border-radius: 4px;
       margin-right: 7px;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
       font-size: 14px;
       max-width: 100%;
       .n-base-picker-tag__content  {
@@ -106,9 +106,9 @@
       min-height: $small-height;
       .n-base-picker-tag {
         font-size: 13px;
-        padding: 0px 20px 0 7px;
-        height: 20px;
-        line-height: 20px;
+        padding: 0px 22px 0 7px;
+        height: 22px;
+        line-height: 22px;
       }
       .n-base-picker-input-tag {
         height: 20px;
@@ -130,12 +130,12 @@
       min-height: $medium-height;
       .n-base-picker-tag {
         padding: 0px 20px 0 7px;
-        height: 26px;
-        line-height: 26px;
+        height: 28px;
+        line-height: 28px;
       }
       .n-base-picker-input-tag {
-        height: 26px;
-        line-height: 26px;
+        height: 28px;
+        line-height: 28px;
       }
     }
     .n-base-picker-label {

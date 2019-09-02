@@ -29,10 +29,10 @@
               :deactivate="() => isActive = false"
             >
               <template v-slot:header>
-                v-slot:header
+                v-slot:header11
               </template>
               <template v-slot:footer>
-                v-slot:footer
+                v-slot:footer22
               </template>
               <template v-slot:content>
                 All the people<br>

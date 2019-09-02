@@ -2,7 +2,8 @@
   <div
     class="n-tab"
     :class="{
-      [`n-tab--${type}-type`]: true
+      [`n-tab--${type}-type`]: true,
+      'n-tab--scroll': showScrollButton
     }"
   >
     <div
@@ -11,9 +12,13 @@
     >
       <div
         v-if="showScrollButton"
+        class="n-tab-nav__scroll-button n-tab-nav__scroll-button--left"
+        :class="{
+          'n-tab-nav__scroll-button--disabled': leftScrollButtonDisabled
+        }"
         @click="scroll('left')"
       >
-        Left
+        <n-icon type="ios-arrow-back" />
       </div>
       <div
         ref="navScroll"
@@ -44,6 +49,13 @@
                 direction="right"
               />
               <span class="n-tab-label__label">{{ panel.label }}</span>
+              <div
+                v-if="closable && type === 'card'"
+                class="n-tab-label__close"
+                @click.stop="handleCloseMarkClick(panel)"
+              >
+                <n-icon type="md-close" />
+              </div>
             </div>
           </div>
           <div
@@ -55,9 +67,13 @@
       </div>
       <div
         v-if="showScrollButton"
+        class="n-tab-nav__scroll-button n-tab-nav__scroll-button--right"
+        :class="{
+          'n-tab-nav__scroll-button--disabled': rightScrollButtonDisabled
+        }"
         @click="scroll('right')"
       >
-        Right
+        <n-icon type="ios-arrow-forward" />
       </div>
     </div>
     <slot />
@@ -66,6 +82,7 @@
 <script>
 import Emitter from '../../../mixins/emitter'
 import TabLabelCorner from './TabLabelCorner'
+import NIcon from '../../Icon'
 
 export default {
   name: 'NTabs',
@@ -75,7 +92,8 @@ export default {
     }
   },
   components: {
-    TabLabelCorner
+    TabLabelCorner,
+    NIcon
   },
   mixins: [ Emitter ],
   props: {
@@ -91,7 +109,7 @@ export default {
     },
     closable: {
       type: Boolean,
-      default: undefined
+      default: false
     },
     addable: {
       type: Boolean,
@@ -102,7 +120,9 @@ export default {
     return {
       panels: [],
       barStyleInitialized: false,
-      showScrollButton: false
+      showScrollButton: false,
+      leftScrollButtonDisabled: true,
+      rightScrollButtonDisabled: false
     }
   },
   mounted () {
@@ -126,31 +146,47 @@ export default {
       })
       .then(() => {
         this.updateScrollStatus()
-        updateBarPosition.bind(this)
+        updateBarPosition.bind(this)()
+      })
+  },
+  updated () {
+    this
+      .$nextTick()
+      .then(() => {
+        this.updateScrollStatus()
       })
   },
   methods: {
     scroll (direction) {
       const navScroll = this.$refs.navScroll
       const scrollLeft = navScroll.scrollLeft
+      const labelWrapper = this.$refs.labelWrapper
       const scrollWidth = navScroll.offsetWidth * 0.8
+      let left = 0
       if (direction === 'left') {
-        navScroll.scrollTo({
-          left: scrollLeft - scrollWidth,
-          behavior: 'smooth'
-        })
+        left = scrollLeft - scrollWidth
       } else {
-        navScroll.scrollTo({
-          left: scrollLeft + scrollWidth,
-          behavior: 'smooth'
-        })
+        left = scrollLeft + scrollWidth
       }
+      if (left <= 0) {
+        this.leftScrollButtonDisabled = true
+        this.rightScrollButtonDisabled = false
+      } else if (left >= labelWrapper.offsetWidth - navScroll.offsetWidth) {
+        this.rightScrollButtonDisabled = true
+        this.leftScrollButtonDisabled = false
+      } else {
+        this.rightScrollButtonDisabled = false
+        this.leftScrollButtonDisabled = false
+      }
+      navScroll.scrollTo({
+        left,
+        behavior: 'smooth'
+      })
     },
     updateScrollStatus () {
       const labelWrapper = this.$refs.labelWrapper
       const nav = this.$refs.nav
       if (labelWrapper.offsetWidth > nav.offsetWidth) {
-        console.log('showScrollButton')
         this.showScrollButton = true
       } else {
         this.showScrollButton = false
@@ -183,6 +219,9 @@ export default {
     },
     handleAddButtonClick () {
       this.$emit('add-button-click')
+    },
+    handleCloseMarkClick (panel) {
+      this.$emit('close', panel.name)
     }
   }
 }

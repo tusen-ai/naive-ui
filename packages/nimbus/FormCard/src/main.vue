@@ -15,10 +15,16 @@
             @click="deactivate"
           />
         </div>
+        <div class="n-nimbus-form-card__divider" />
       </div>
-      <div class="n-nimbus-form-card__divider" />
-      <slot name="content" />
-      <div class="n-nimbus-form-card__footer">
+      <div class="n-nimbus-form-card__content">
+        <slot name="content" />
+      </div>
+      <div
+        v-if="$slots.footer"
+        class="n-nimbus-form-card__footer"
+      >
+        <div class="n-nimbus-form-card__divider" />
         <div class="nimbus-form-card__footer nimbus-form-card__actions">
           <slot name="footer" />
         </div>
@@ -59,13 +65,21 @@ export default {
     margin-top: 24px;
     margin-bottom: 24px;
     background: #5c657e;
-    padding: 24px 45px;
     border-radius: 9px;
     .n-nimbus-form-card__header {
+      position: sticky;
+      top: 0;
+      background-color: #5c657e;
+      border-radius: 9px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
+      padding-bottom: 20px;
+      padding-top: 24px;
+      padding-left: 30px;
+      padding-right: 30px;
+      margin-left: 15px;
+      margin-right: 15px;
       height: 19px;
       .n-nimbus-form-card__title {
         line-height: 19px;
@@ -105,14 +119,35 @@ export default {
         }
       }
     }
+    .n-nimbus-form-card__content {
+      padding: 0px 45px;
+      padding-top: 19px;
+    }
     .n-nimbus-form-card__divider {
-      border: 1px solid #6f778d;
-      margin-bottom: 19px;
+      border-bottom: 1px solid #6f778d;
+      position: absolute;
+      left: 30px;
+      right: 30px;
+      bottom: 0;
     }
     .n-nimbus-form-card__footer {
-      margin-top: 24px;
+      position: relative;
+      padding-top: 24px;
+      padding-bottom: 24px;
+      padding-left: 30px;
+      padding-right: 30px;
+      margin-left: 15px;
+      margin-right: 15px;
       display: flex;
       flex-direction: row-reverse;
+      position: sticky;
+      background: #5c657e;
+      border-radius: 9px;
+      bottom: 0;
+      .n-nimbus-form-card__divider {
+        bottom: unset;
+        top: 0;
+      }
     }
   }
 }

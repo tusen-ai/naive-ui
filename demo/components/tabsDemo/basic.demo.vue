@@ -10,6 +10,7 @@
       <!--EXAMPLE_START-->
       <n-tabs
         v-model="name"
+        closable
       >
         <n-tab-panel
           name="a"
