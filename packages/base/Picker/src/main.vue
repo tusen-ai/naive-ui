@@ -269,7 +269,7 @@ export default {
       this.$emit('clear', e)
     },
     handleMouseDown (e) {
-      if (this.filterable && this.multiple) {
+      if (this.filterable && this.multiple && this.active) {
         e.preventDefault()
       }
     },
