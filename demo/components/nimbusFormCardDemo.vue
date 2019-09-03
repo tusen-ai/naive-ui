@@ -26,13 +26,14 @@
             <n-nimbus-form-card
               width="1032"
               title="Parklife"
+              sticky
               :deactivate="() => isActive = false"
             >
               <template v-slot:header>
-                v-slot:header11
+                v-slot:header
               </template>
               <template v-slot:footer>
-                v-slot:footer22
+                v-slot:footer
               </template>
               <template v-slot:content>
                 All the people<br>

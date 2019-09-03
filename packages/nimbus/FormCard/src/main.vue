@@ -4,7 +4,12 @@
     :style="{width: width + 'px'}"
   >
     <div class="n-nimbus-form-card__body">
-      <div class="n-nimbus-form-card__header">
+      <div
+        class="n-nimbus-form-card__header"
+        :class="{
+          'n-nimbus-form-card__header--sticky': sticky
+        }"
+      >
         <span class="n-nimbus-form-card__title">{{ title }}</span>
         <div class="n-nimbus-form-card__right-header">
           <div>
@@ -23,12 +28,19 @@
       <div
         v-if="$slots.footer"
         class="n-nimbus-form-card__footer"
+        :class="{
+          'n-nimbus-form-card__footer--sticky': sticky
+        }"
       >
         <div class="n-nimbus-form-card__divider" />
         <div class="nimbus-form-card__footer nimbus-form-card__actions">
           <slot name="footer" />
         </div>
       </div>
+      <div
+        v-else
+        style="padding-bottom: 45px;"
+      />
     </div>
   </div>
 </template>
@@ -48,6 +60,10 @@ export default {
     deactivate: {
       type: Function,
       required: true
+    },
+    sticky: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -67,7 +83,10 @@ export default {
     background: #5c657e;
     border-radius: 9px;
     .n-nimbus-form-card__header {
-      position: sticky;
+      position: relative;
+      &.n-nimbus-form-card__header--sticky {
+        position: sticky;
+      }
       top: 0;
       background-color: #5c657e;
       border-radius: 9px;
@@ -131,6 +150,9 @@ export default {
       bottom: 0;
     }
     .n-nimbus-form-card__footer {
+      &.n-nimbus-form-card__footer--sticky {
+        position: sticky;
+      }
       position: relative;
       padding-top: 24px;
       padding-bottom: 24px;
@@ -140,7 +162,6 @@ export default {
       margin-right: 15px;
       display: flex;
       flex-direction: row-reverse;
-      position: sticky;
       background: #5c657e;
       border-radius: 9px;
       bottom: 0;
