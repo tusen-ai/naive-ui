@@ -1,14 +1,18 @@
 <template>
-  <n-popselect
-    v-model="selectedValue"
-    cancelable
-    :multiple="column.filterMultiple"
-    @change="onSelectedChange"
-  >
-    <template v-slot:activator>
-      <filterIcon :status="filterStatus" />
-    </template>
-    <n-popselect-option
+  <div class="n-filter-wraper">
+    <n-popselect
+      v-if="!loading && !error"
+
+      v-model="selectedValue"
+      cancelable
+      :multiple="column.filterMultiple"
+      :options="filterItems"
+      @change="onSelectedChange"
+    >
+      <template v-slot:activator>
+        <filterIcon :status="filterStatus" />
+      </template>
+    <!-- <n-popselect-option
       v-if="loading"
       disabled
       label="Loading.."
@@ -26,16 +30,48 @@
         size="18"
         @click.stop="initItems"
       />
-    </p>
-    <n-scrollbar style="max-height:120px;">
-      <n-popselect-option
+    </p> -->
+    <!-- <n-scrollbar
+      style="max-height:120px;"
+    > -->
+    <!-- <n-popselect-option
         v-for="item in filterItems"
         :key="item.value"
         :label="item.label"
         :value="item.value"
-      />
-    </n-scrollbar>
-  </n-popselect>
+      /> -->
+    <!-- </n-scrollbar> -->
+    </n-popselect>
+    <n-popover
+      v-else
+      placement="bottom"
+      trigger="click"
+    >
+      <template v-slot:activator>
+        <filterIcon :status="filterStatus" />
+      </template>
+      <p
+        v-if="loading"
+        class="n-filter-tip-line"
+      >
+        Loading...
+      </p>
+      <p
+        v-if="error"
+        class="n-filter-tip-line"
+        style=""
+      >
+        Error,refresh
+        <n-icon
+          style="cursor:pointer"
+          type="md-refresh"
+          color="#999"
+          size="18"
+          @click.stop="initItems"
+        />
+      </p>
+    </n-popover>
+  </div>
 </template>
 
 <script>
@@ -116,6 +152,12 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.n-filter-wraper {
+  display: inline-block;
+}
+.n-filter-tip-line{
+  text-align:center;
+  padding:5px;
+}
 </style>
