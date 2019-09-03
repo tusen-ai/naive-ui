@@ -3,7 +3,13 @@
 // TODO: 滚动条
 .n-advance-tabel__wrapper {
   width: 100%;
-  overflow: hidden;
+  
+  // overflow: hidden;
+  .n-advance-table__tbody {
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 3px 20px 6px rgba(0, 0, 0, 0.2);
+  }
   .n-table {
     // background-color: #2b3147;
     table {
