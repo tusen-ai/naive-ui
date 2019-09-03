@@ -32,14 +32,16 @@ activator 外面不应该包元素
 检查内存泄露可能性
 考虑级联异步api
 placement $refs 变化更改
-## 2018.8.28
+## 2019.8.28
 picker 在 input 聚焦的时候，esc 按钮不符合预期
-## 2018.8.29
+## 2019.8.29
 block transition for date picker in range not via :key
-## 2018.9.2
+## 2019.9.2
 select menu 更加自治一点 比如 isSelected，可能最后要加到 vmodel 为止
 tooltip css max-content 兼容性
 popover z-index 问题
+## 2019.9.3
+popover 停止追踪的时机
 ## TODO
 issue fix, add delay prop
 add trigger to tooltip

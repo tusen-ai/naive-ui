@@ -53,6 +53,7 @@ Vue.use(naiveUi)
 |Button|😍|🆗||
 |Checkbox|😍|🆗||
 |DatePicker|😍|❌||
+|TimePicker|😍|❌||
 |GradientText|😍|🆗||
 |Icon|😍|🆗||
 |Input|😍|🆗||
@@ -62,29 +63,42 @@ Vue.use(naiveUi)
 |Pagination|😍|🆗|Unit test is not enough|
 |Select|😍|🆗|Multiple search is not done|
 |Switch|😍|❌||
-|FormItem|🚧|❌||
-|Form|🚧|❌||
-|Table|🚧|❌|Function is not fulfilled|
 |Tooltip|😍|❌||
 |Popover|😍|❌||
 |InputNumber|😍|❌||
 |Radio|😍|||
-|Tab|🚧|||
-|Breadcrumb|🚧|||
+|Tab|😍|||
 |Badge|😍|||
 |Steps|😍|||
 |Tag|😍|||
 |Divider|😍|||
-|Statistic|🚧|||
 |Popconfirm|😍|||
-|Anchor|🚧|||
 |BackTop|😍|||
 |Progress|😍||Multiple Value|
 |Timeline|😍|||
-|Card|🚧|||
 |Collapse|😍|||
-|Cascader|🚧|||
+|Cascader|😍|||
+|Dropdown|😍|||
 |Affix|🚧|||
+|Transfer|🚧|||
+|Carousel|🚧|||
+|Grid|🚧|||
+|Card|🚧|||
+|Anchor|🚧|||
+|Statistic|🚧|||
+|Breadcrumb|🚧|||
+|FormItem|🚧|❌||
+|Form|🚧|❌||
+|Table|🚧|❌|Function is not fulfilled|
+|AutoComplete|🚧|||
+|Slider|🚧|||
+|TreeSelect|🚧|||
+|Transfer|🚧|||
+|Upload|🚧|||
+|Empty|🚧|||
+|Tree|🚧|||
+|Spin|🚧|||
+|Drawer|🚧|||
 
 1. Z-index management on `Select` & `Tooltip` & `Modal`(Low Priority)
 2. Full featured table component(Medium Priority)
@@ -95,3 +109,20 @@ Vue.use(naiveUi)
 7. Refactor documentation page(for code clairity)
 8. Code refactor for some 😢  messy code(which is my bad...)
 9. Refactor CSS use mixins(which means I should learn SCSS hard...)
+
+## RoadMap
+v0.3 cascader
+v0.4 refactor popover
+v0.5 finish all planned components
+v0.6 refactor form component
+v0.7 refactor table component
+v0.8 fulfill props for all components
+v0.9 split icons for components
+v0.10 refactor css
+v0.11 import on demand
+v0.12 i18n
+v0.13 unit test
+v0.14 light theme
+v0.15 document formation
+v0.16 code clean
+v0.17 refactor document page
