@@ -27,56 +27,57 @@
         <slot name="table-operation-search-right" />
       </div>
     </div>
-    <n-table
-      ref="header"
-      style="padding:0;border-bottom-left-radius:0;border-bottom-right-radius:0;background-color: #2b3147;"
-      :style="colGroup"
-    >
-      <colgroup>
-        <col
-          v-for="(column, i) in columns"
-          :key="i"
-          :style="computeCustomWidthStl(column)"
-        >
-        <col
-          v-if="scrollBarWidth"
-          :width="scrollBarWidth"
-        >
-      </colgroup>
-      <n-thead>
-        <n-tr>
-          <n-th
+    <div class="n-advance-table__tbody">
+      <n-table
+        ref="header"
+        style="padding:0;border-bottom-left-radius:0;border-bottom-right-radius:0;background-color: #2b3147;"
+        :style="colGroup"
+      >
+        <colgroup>
+          <col
             v-for="(column, i) in columns"
-            ref="theads"
-            :key="column.key"
-            :style="computeAlign(column)"
+            :key="i"
+            :style="computeCustomWidthStl(column)"
           >
-            <n-checkbox
-              v-if="column.type === 'selection'"
-              v-model="allCheckboxesSelect"
-              :indeterminate="!isCheckedBoxAllIndeterminate"
-              @click.native="onAllCheckboxesClick"
-            />
-            {{ column.title }}
-            <SortIcon
-              v-if="column.sortable"
-              :ref="'sorter_' + (column.key || i)"
-              v-model="sortIndexs[column.key || i]"
-              :column="column"
-              :index="i"
-              @onSortTypeChange="onSortTypeChange"
-            />
+          <col
+            v-if="scrollBarWidth"
+            :width="scrollBarWidth"
+          >
+        </colgroup>
+        <n-thead>
+          <n-tr>
+            <n-th
+              v-for="(column, i) in columns"
+              ref="theads"
+              :key="column.key"
+              :style="computeAlign(column)"
+            >
+              <n-checkbox
+                v-if="column.type === 'selection'"
+                v-model="allCheckboxesSelect"
+                :indeterminate="!isCheckedBoxAllIndeterminate"
+                @click.native="onAllCheckboxesClick"
+              />
+              {{ column.title }}
+              <SortIcon
+                v-if="column.sortable"
+                :ref="'sorter_' + (column.key || i)"
+                v-model="sortIndexs[column.key || i]"
+                :column="column"
+                :index="i"
+                @onSortTypeChange="onSortTypeChange"
+              />
 
-            <!-- 优先自定义 -->
-            {{ column.filterDropdown && column.filterDropdown() }}
-            <!-- 否则默认渲染 -->
-            <PopFilter
-              v-if="column.onFilter && (column.filterItems || column.asynsFilterItems)"
-              v-model="selectedFilter[column.key]"
-              :column="column"
-              :items="column.filterItems || column.asynsFilterItems"
-              @on-filter="onFilter"
-            />
+              <!-- 优先自定义 -->
+              {{ column.filterDropdown && column.filterDropdown() }}
+              <!-- 否则默认渲染 -->
+              <PopFilter
+                v-if="column.onFilter && (column.filterItems || column.asynsFilterItems)"
+                v-model="selectedFilter[column.key]"
+                :column="column"
+                :items="column.filterItems || column.asynsFilterItems"
+                @on-filter="onFilter"
+              />
 
             <!-- <filterDropDown
               v-if="column.filterItems && !column.filterDropdown"
@@ -90,76 +91,76 @@
                 ({ value, key, filterFn }) => onFilter(value, key, filterFn)
               "
             /> -->
-          </n-th>
-          <span
-            v-if="scrollBarWidth"
-            :style="
-              'padding-left:' + scrollBarWidth + 'px;' + 'visibility:hidden;'
-            "
-            rowspan="1"
-          />
-        </n-tr>
-      </n-thead>
-    </n-table>
-    <n-table
-      ref="tbody"
-      :style="tableStl"
-      style="border-top-left-radius:0;border-top-right-radius:0;"
-      @scroll.native="onBodyScrolll"
-    >
-      <colgroup v-if="showingData.length !== 0">
-        <col
-          v-for="(column, i) in columns"
-          :key="i"
-          :style="computeCustomWidthStl(column)"
-        >
-      </colgroup>
-      <n-tbody v-show="!loading">
-        <n-tr
-          v-for="(rowData, i) in showingData"
-          :key="i"
-          :class="typeof rowClassName === 'function' ? rowClassName(rowData,i) : rowClassName"
-        >
-          <n-td
-            v-for="column in columns"
-            :key="column.key"
-            :style="computeAlign(column)"
-            :class="computeTdClass(column, rowData)"
+            </n-th>
+            <span
+              v-if="scrollBarWidth"
+              :style="
+                'padding-left:' + scrollBarWidth + 'px;' + 'visibility:hidden;'
+              "
+              rowspan="1"
+            />
+          </n-tr>
+        </n-thead>
+      </n-table>
+      <n-table
+        ref="tbody"
+        :style="tableStl"
+        style="border-top-left-radius:0;border-top-right-radius:0;"
+        @scroll.native="onBodyScrolll"
+      >
+        <colgroup v-if="showingData.length !== 0">
+          <col
+            v-for="(column, i) in columns"
+            :key="i"
+            :style="computeCustomWidthStl(column)"
           >
-            <n-checkbox
-              v-if="column.type === 'selection'"
-              v-model="checkBoxes[rowData._index]"
-            />
-            <row
-              v-else
-              :index="i"
-              :row="rowData"
-              :key-name="column.key"
-              :render="column.render"
-            />
-          </n-td>
-        </n-tr>
-        <div
-          v-if="showingData.length === 0"
-          class="n-no-data-tip"
-        >
-          No data
-        </div>
+        </colgroup>
+        <n-tbody v-show="!loading">
+          <n-tr
+            v-for="(rowData, i) in showingData"
+            :key="i"
+            :class="typeof rowClassName === 'function' ? rowClassName(rowData,i) : rowClassName"
+          >
+            <n-td
+              v-for="column in columns"
+              :key="column.key"
+              :style="computeAlign(column)"
+              :class="computeTdClass(column, rowData)"
+            >
+              <n-checkbox
+                v-if="column.type === 'selection'"
+                v-model="checkBoxes[rowData._index]"
+              />
+              <row
+                v-else
+                :index="i"
+                :row="rowData"
+                :key-name="column.key"
+                :render="column.render"
+              />
+            </n-td>
+          </n-tr>
+          <div
+            v-if="showingData.length === 0"
+            class="n-no-data-tip"
+          >
+            No data
+          </div>
         <!-- <tr style="display:inline-block;width:100%;"> -->
 
         <!-- </tr> -->
-      </n-tbody>
-      <template v-if="loading">
-        <div style="width:100%;display:table-caption;">
-          <Loading
-            style="margin-top:20px;"
-            :circle="{ time: '1.5s' }"
-            :svg="{ height: '100px', width: '80px' }"
-          />
-        </div>
-      </template>
-    </n-table>
-
+        </n-tbody>
+        <template v-if="loading">
+          <div style="width:100%;display:table-caption;">
+            <Loading
+              style="margin-top:20px;"
+              :circle="{ time: '1.5s' }"
+              :svg="{ height: '100px', width: '80px' }"
+            />
+          </div>
+        </template>
+      </n-table>
+    </div>
     <!-- 分页 -->
     <div
       v-if="pagination !== false && showingData.length"
