@@ -38,7 +38,8 @@ function genOptions () {
   prefix = Math.random().toString(36).slice(2, 5)
   return Array.apply(null, { length: 20 }).map((v, i) => ({
     label: prefix + 'Option' + i,
-    value: prefix + i
+    value: prefix + i,
+    disabled: i % 3 === 0
   }))
 }
 

@@ -45,8 +45,8 @@
         padding: 0;
         margin: 0;
         @include b(transfer-list-item) {
-          @include slide-right-transition(transfer-list-item-source, 2s);
-          @include slide-left-transition(transfer-list-item-target, 2s);
+          @include slide-right-transition(transfer-list-item-source);
+          @include slide-left-transition(transfer-list-item-target);
           cursor: pointer;
           max-height: 34px;
           display: flex;

@@ -19,23 +19,21 @@
       <div class="n-transfer-list-body">
         <n-scrollbar ref="leftScrollbar">
           <ul class="n-transfer-list-body-content">
-            <transition
-              v-for="option in memorizedOptions"
+            <n-transfer-list-item
+              v-for="option in memorizedSourceOptions"
               :key="option.value"
-              name="n-transfer-list-item-source--transition"
+              :show="sourceValueSet.has(option.value)"
+              :value="option.value"
+              :checked="sourceCheckedValueSet.has(option.value)"
+              :disabled="option.disabled"
+              source
+              @click="handleSourceCheckboxInput(
+                !sourceCheckedValueSet.has(option.value),
+                option.value
+              )"
             >
-              <n-transfer-list-item
-                v-if="sourceValueSet.has(option.value)"
-                :value="option.value"
-                :checked="sourceCheckedValueSet.has(option.value)"
-                @click="handleSourceCheckboxInput(
-                  !sourceCheckedValueSet.has(option.value),
-                  option.value
-                )"
-              >
-                {{ option.label }}
-              </n-transfer-list-item>
-            </transition>
+              {{ option.label }}
+            </n-transfer-list-item>
           </ul>
         </n-scrollbar>
       </div>
@@ -67,23 +65,21 @@
       <div class="n-transfer-list-body">
         <n-scrollbar ref="rightScrollbar">
           <ul class="n-transfer-list-body-content">
-            <transition
-              v-for="option in memorizedOptions"
+            <n-transfer-list-item
+              v-for="option in memorizedTargetOptions"
               :key="option.value"
-              name="n-transfer-list-item-target--transition"
+              :show="targetValueSet.has(option.value)"
+              :value="option.value"
+              :checked="targetCheckedValueSet.has(option.value)"
+              :disabled="option.disabled"
+              target
+              @click="handleTargetCheckboxInput(
+                !targetCheckedValueSet.has(option.value),
+                option.value
+              )"
             >
-              <n-transfer-list-item
-                v-if="targetValueSet.has(option.value)"
-                :value="option.value"
-                :checked="targetCheckedValueSet.has(option.value)"
-                @click="handleTargetCheckboxInput(
-                  !targetCheckedValueSet.has(option.value),
-                  option.value
-                )"
-              >
-                {{ option.label }}
-              </n-transfer-list-item>
-            </transition>
+              {{ option.label }}
+            </n-transfer-list-item>
           </ul>
         </n-scrollbar>
       </div>
@@ -95,6 +91,7 @@
 import NCheckbox from '../../Checkbox'
 import NScrollbar from '../../Scrollbar'
 import NTransferListItem from './TransferListItem'
+import cloneDeep from 'lodash/cloneDeep'
 
 export default {
   name: 'NTransfer',
@@ -111,13 +108,18 @@ export default {
     options: {
       type: Array,
       default: () => []
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
       sourceCheckedValues: [],
       targetCheckedValues: [],
-      memorizedOptions: null,
+      memorizedSourceOptions: null,
+      memorizedTargetOptions: null,
       init: true
     }
   },
@@ -130,7 +132,7 @@ export default {
     },
     valueToOptionMap () {
       const map = new Map()
-      this.memorizedOptions.forEach(option => {
+      this.options.forEach(option => {
         map.set(option.value, option)
       })
       return map
@@ -155,11 +157,12 @@ export default {
     },
     sourceOptions () {
       const valueSet = Array.isArray(this.value) ? new Set(this.value) : new Set()
-      return this.memorizedOptions.filter(option => !valueSet.has(option.value))
+      return this.memorizedSourceOptions.filter(option => !valueSet.has(option.value))
     },
     targetOptions () {
-      const value = Array.isArray(this.value) ? this.value : []
-      return value.filter(v => this.valueToOptionMap.has(v)).map(v => this.valueToOptionMap.get(v))
+      const valueSet = Array.isArray(this.value) ? new Set(this.value) : new Set()
+      return this.memorizedTargetOptions.filter(option => valueSet.has(option.value))
+      // value.filter(v => this.valueToOptionMap.has(v)).map(v => this.valueToOptionMap.get(v))
     },
     orderedOptions () {
       return this.sourceOptions.concat(this.targetOptions)
@@ -169,7 +172,8 @@ export default {
     options (newOptions) {
       this.init = true
       this.$nextTick().then(() => {
-        this.memorizedOptions = newOptions
+        this.memorizedSourceOptions = cloneDeep(newOptions)
+        this.memorizedTargetOptions = cloneDeep(newOptions)
         this.sourceCheckedValues = []
         this.targetCheckedValues = []
         return this.$nextTick()
@@ -184,7 +188,8 @@ export default {
     })
   },
   created () {
-    this.memorizedOptions = this.options
+    this.memorizedSourceOptions = cloneDeep(this.options)
+    this.memorizedTargetOptions = cloneDeep(this.options)
   },
   methods: {
     emitInputEvent (value) {
@@ -201,7 +206,8 @@ export default {
         return
       }
       if (value) {
-        this.sourceCheckedValues = this.sourceOptions.map(option => option.value)
+        const newValues = this.sourceOptions.filter(option => !option.disabled).map(option => option.value).concat(this.sourceCheckedValues)
+        this.sourceCheckedValues = Array.from(new Set(newValues))
       } else {
         this.sourceCheckedValues = []
       }
@@ -212,7 +218,8 @@ export default {
         return
       }
       if (value) {
-        this.targetCheckedValues = this.targetOptions.map(option => option.value)
+        const newValues = this.targetOptions.filter(option => !option.disabled).map(option => option.value).concat(this.targetCheckedValues)
+        this.targetCheckedValues = Array.from(new Set(newValues))
       } else {
         this.targetCheckedValues = []
       }
@@ -236,20 +243,33 @@ export default {
     handleToTargetClick () {
       let newValue = Array.isArray(this.value) ? this.value : []
       newValue = this.sourceCheckedValues.concat(newValue)
-      this.emitInputEvent(newValue)
+      const headTargetOptions = this.sourceCheckedValues.map(value => this.valueToOptionMap.get(value)).map(option => ({
+        ...option
+      }))
+      const tailTargetOptions = this.memorizedTargetOptions.filter(option => !this.sourceCheckedValueSet.has(option.value)).map(option => ({
+        ...option
+      }))
+      const reorderedTargetOptions = headTargetOptions.concat(tailTargetOptions)
+      this.memorizedTargetOptions = reorderedTargetOptions
+      this.$nextTick().then(() => {
+        this.emitInputEvent(newValue)
+      })
       this.sourceCheckedValues = []
     },
     handleToSourceClick () {
       let newValue = Array.isArray(this.value) ? this.value : []
-      newValue = newValue.filter(value => this.valueToOptionMap.has(value))
-      const filteredValues = newValue.filter(value => this.targetCheckedValueSet.has(value))
-      const stayedValues = newValue.filter(value => !this.targetCheckedValueSet.has(value))
-      newValue = stayedValues
-      const reorderedOptionsFirstPart = filteredValues.concat(stayedValues).map(value => this.valueToOptionMap.get(value))
-      const reorderedOptionsSecondPart = this.memorizedOptions.filter(option => !filteredValues.includes(option.value) && !stayedValues.includes(option.value))
-      const reorderedOptions = reorderedOptionsFirstPart.concat(reorderedOptionsSecondPart)
-      this.memorizedOptions = reorderedOptions
-      this.emitInputEvent(stayedValues)
+      newValue = newValue.filter(value => !this.targetCheckedValueSet.has(value))
+      const headSourceOptions = this.targetCheckedValues.map(value => this.valueToOptionMap.get(value)).map(option => ({
+        ...option
+      }))
+      const tailSourceOptions = this.memorizedSourceOptions.filter(option => !this.targetCheckedValueSet.has(option.value)).map(option => ({
+        ...option
+      }))
+      const reorderedSourceOptions = headSourceOptions.concat(tailSourceOptions)
+      this.memorizedSourceOptions = reorderedSourceOptions
+      this.$nextTick().then(() => {
+        this.emitInputEvent(newValue)
+      })
       this.targetCheckedValues = []
     }
   }

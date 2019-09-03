@@ -220,7 +220,7 @@ $scrollbar-color--hover: rgba(255,255,255,0.3);
   }
 }
 
-@mixin slide-right-transition($block, $duration: .2s, $delay: .2s) {
+@mixin slide-right-transition($block, $duration: .3s, $delay: .3s) {
   &.#{$namespace}-#{$block}--transition-leave-active {
     transition: transform $duration $slow-out-cubic-bezier, max-height $duration $default-cubic-bezier $delay;
   }
@@ -231,19 +231,19 @@ $scrollbar-color--hover: rgba(255,255,255,0.3);
     transform: translateX(0);
   }
   &.#{$namespace}-#{$block}--transition-enter {
-    transform: translateX(150%);
+    transform: translateX(120%);
     max-height: 0;
   }
   &.#{$namespace}-#{$block}--transition-leave {
     transform: translateX(0);
   }
   &.#{$namespace}-#{$block}--transition-leave-to {
-    transform: translateX(150%);
+    transform: translateX(120%);
     max-height: 0;
   }
 }
 
-@mixin slide-left-transition($block, $duration: .2s, $delay: .2s) {
+@mixin slide-left-transition($block, $duration: .3s, $delay: .3s) {
   &.#{$namespace}-#{$block}--transition-leave-active {
     transition: transform $duration $slow-out-cubic-bezier, max-height $duration $default-cubic-bezier $delay;
   }
@@ -254,14 +254,14 @@ $scrollbar-color--hover: rgba(255,255,255,0.3);
     transform: translateX(0);
   }
   &.#{$namespace}-#{$block}--transition-enter {
-    transform: translateX(-150%);
+    transform: translateX(-120%);
     max-height: 0;
   }
   &.#{$namespace}-#{$block}--transition-leave {
     transform: translateX(0);
   }
   &.#{$namespace}-#{$block}--transition-leave-to {
-    transform: translateX(-150%);
+    transform: translateX(-120%);
     max-height: 0;
   }
 }

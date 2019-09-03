@@ -1,16 +1,25 @@
 <template>
-  <li
-    class="n-transfer-list-item"
-    @click="handleClick"
+  <transition
+    :name="transitionName"
   >
-    <div class="n-transfer-list-item__checkbox">
-      <n-checkbox
-        :value="checked"
-        @input="handleInput"
-      />
-    </div>
-    <slot />
-  </li>
+    <li
+      v-show="show"
+      class="n-transfer-list-item"
+      :class="{
+        'n-transfer-list-item--disabled': disabled
+      }"
+      @click="handleClick"
+    >
+      <div class="n-transfer-list-item__checkbox">
+        <n-checkbox
+          :disabled="disabled"
+          :value="checked"
+          @input="handleInput"
+        />
+      </div>
+      <slot />
+    </li>
+  </transition>
 </template>
 
 <script>
@@ -31,11 +40,22 @@ export default {
         return true
       },
       required: true
-    }
-  },
-  data () {
-    return {
-      show: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    show: {
+      type: Boolean,
+      default: true
+    },
+    source: {
+      type: Boolean,
+      default: false
+    },
+    target: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -43,15 +63,16 @@ export default {
       return this.source ? 'n-transfer-list-item-source--transition' : 'n-transfer-list-item-target--transition'
     }
   },
-  mounted () {
-    this.show = true
-  },
   methods: {
     handleClick () {
-      this.$emit('click')
+      if (!this.disabled) {
+        this.$emit('click')
+      }
     },
     handleInput (checked) {
-      this.$emit('input', checked, this.value)
+      if (!this.disabled) {
+        this.$emit('input', checked, this.value)
+      }
     }
   }
 }
