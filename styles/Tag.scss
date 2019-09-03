@@ -9,12 +9,13 @@
   padding: 0 7px;
   border-radius: 4px;
   box-sizing: border-box;
-  cursor: pointer;
+  cursor: default;
   display: inline-block;
   transition: background-color .3s $default-cubic-bezier;
   &.n-tag--closable {
     padding-right: 18px;
     .n-tag__close-mark {
+      cursor: pointer;
       transition: color .3s $default-cubic-bezier;
       right: 3px;
       top: 50%;

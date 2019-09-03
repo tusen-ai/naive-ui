@@ -4,7 +4,12 @@
     :style="{width: width + 'px'}"
   >
     <div class="n-nimbus-form-card__body">
-      <div class="n-nimbus-form-card__header">
+      <div
+        class="n-nimbus-form-card__header"
+        :class="{
+          'n-nimbus-form-card__header--sticky': sticky
+        }"
+      >
         <span class="n-nimbus-form-card__title">{{ title }}</span>
         <div class="n-nimbus-form-card__right-header">
           <div>
@@ -15,14 +20,27 @@
             @click="deactivate"
           />
         </div>
+        <div class="n-nimbus-form-card__divider" />
       </div>
-      <div class="n-nimbus-form-card__divider" />
-      <slot name="content" />
-      <div class="n-nimbus-form-card__footer">
+      <div class="n-nimbus-form-card__content">
+        <slot name="content" />
+      </div>
+      <div
+        v-if="$slots.footer"
+        class="n-nimbus-form-card__footer"
+        :class="{
+          'n-nimbus-form-card__footer--sticky': sticky
+        }"
+      >
+        <div class="n-nimbus-form-card__divider" />
         <div class="nimbus-form-card__footer nimbus-form-card__actions">
           <slot name="footer" />
         </div>
       </div>
+      <div
+        v-else
+        style="padding-bottom: 45px;"
+      />
     </div>
   </div>
 </template>
@@ -42,6 +60,10 @@ export default {
     deactivate: {
       type: Function,
       required: true
+    },
+    sticky: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -59,13 +81,24 @@ export default {
     margin-top: 24px;
     margin-bottom: 24px;
     background: #5c657e;
-    padding: 24px 45px;
     border-radius: 9px;
     .n-nimbus-form-card__header {
+      position: relative;
+      &.n-nimbus-form-card__header--sticky {
+        position: sticky;
+      }
+      top: 0;
+      background-color: #5c657e;
+      border-radius: 9px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
+      padding-bottom: 20px;
+      padding-top: 24px;
+      padding-left: 30px;
+      padding-right: 30px;
+      margin-left: 15px;
+      margin-right: 15px;
       height: 19px;
       .n-nimbus-form-card__title {
         line-height: 19px;
@@ -105,14 +138,37 @@ export default {
         }
       }
     }
+    .n-nimbus-form-card__content {
+      padding: 0px 45px;
+      padding-top: 19px;
+    }
     .n-nimbus-form-card__divider {
-      border: 1px solid #6f778d;
-      margin-bottom: 19px;
+      border-bottom: 1px solid #6f778d;
+      position: absolute;
+      left: 30px;
+      right: 30px;
+      bottom: 0;
     }
     .n-nimbus-form-card__footer {
-      margin-top: 24px;
+      &.n-nimbus-form-card__footer--sticky {
+        position: sticky;
+      }
+      position: relative;
+      padding-top: 24px;
+      padding-bottom: 24px;
+      padding-left: 30px;
+      padding-right: 30px;
+      margin-left: 15px;
+      margin-right: 15px;
       display: flex;
       flex-direction: row-reverse;
+      background: #5c657e;
+      border-radius: 9px;
+      bottom: 0;
+      .n-nimbus-form-card__divider {
+        bottom: unset;
+        top: 0;
+      }
     }
   }
 }

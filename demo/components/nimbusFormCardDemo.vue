@@ -26,6 +26,7 @@
             <n-nimbus-form-card
               width="1032"
               title="Parklife"
+              sticky
               :deactivate="() => isActive = false"
             >
               <template v-slot:header>

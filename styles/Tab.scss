@@ -4,11 +4,22 @@
 @include b(tab) {
   width: 100%;
   border-radius: 4px;
+  &.n-tab--scroll {
+    &.n-tab--card-type {
+      .n-tab-label:first-child {
+        margin-left: 4px;
+      }
+    }
+  }
   &.n-tab--line-type {
+    .n-tab-nav {
+      .n-tab-nav__scroll-button {
+        padding-bottom: 4px;
+      }
+    }
     .n-tab-label {
-      display: inline-block;
       box-sizing: border-box;
-      padding: 0 0 8px 0;
+      padding-bottom: 7px;
       &:hover {
         .n-tab-label__label {
           color: #63E2B7;
@@ -33,9 +44,18 @@
   &.n-tab--card-type {
     background-color: rgba(57, 63, 87, 1);
     padding-top: 6px;
+    .n-tab-nav {
+      .n-tab-nav__scroll-button.n-tab-nav__scroll-button--left {
+        margin-left: 4px;
+        margin-right: 4px;
+      }
+      .n-tab-nav__scroll-button.n-tab-nav__scroll-button--right {
+        margin-left: 4px;
+        margin-right: 4px;
+      }
+    }
     .n-tab-label {
       margin-left: -1px;
-      display: inline-block;
       box-sizing: border-box;
       height: 34px;
       line-height: 34px;
@@ -104,6 +124,23 @@
   .n-tab-nav__scroll {
     overflow: hidden;
   }
+  .n-tab-nav__scroll-button {
+    font-size: 20px;
+    height: 20px;
+    line-height: 20px;
+    align-self: center;
+    cursor: pointer;
+    &.n-tab-nav__scroll-button--disabled {
+      cursor: not-allowed;
+      color: rgba(255, 255, 255 ,.3);
+    }
+    &.n-tab-nav__scroll-button--left {
+      margin-right: 8px;
+    }
+    &.n-tab-nav__scroll-button--right {
+      margin-left: 8px;
+    }
+  }
 }
 
 @include b(tab-label-wrapper) {
@@ -121,11 +158,23 @@
   }
   @include b(tab-label) {
     cursor: pointer;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    display: inline-flex;
+    align-items: center;
     &.n-tab-label--disabled {
       cursor: not-allowed;
     }
+    .n-tab-label__close {
+      color: rgba(255, 255, 255, 0.5);
+      margin-left: 8px;
+      font-size: 20px;
+      line-height: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
     .n-tab-label__label {
-      transition: color .2s $default-cubic-bezier;
+      transition: color .3s $default-cubic-bezier;
     }
   }
 }
