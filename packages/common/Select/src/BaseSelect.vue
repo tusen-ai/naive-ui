@@ -200,6 +200,9 @@ export default {
     }
   },
   watch: {
+    options () {
+      this.$nextTick().then(this.updateMemorizedOptions)
+    },
     filteredOptions () {
       this.$nextTick().then(() => {
         this.updatePosition()
@@ -221,18 +224,24 @@ export default {
     }
   },
   mounted () {
-    if (this.remote && this.multiple) {
-      for (const option of this.selectedOptions) {
-        this.memorizedValueOptionMap.set(option.value, option)
-      }
-    } else if (this.remote && !this.multiple) {
-      const option = this.selectedOption
-      if (option) {
-        this.memorizedValueOptionMap.set(option.value, option)
-      }
-    }
+    this.updateMemorizedOptions()
   },
   methods: {
+    /**
+     * remote related methods
+     */
+    updateMemorizedOptions () {
+      if (this.remote && this.multiple) {
+        for (const option of this.selectedOptions) {
+          this.memorizedValueOptionMap.set(option.value, option)
+        }
+      } else if (this.remote && !this.multiple) {
+        const option = this.selectedOption
+        if (option) {
+          this.memorizedValueOptionMap.set(option.value, option)
+        }
+      }
+    },
     /**
      * menu related methods
      */
