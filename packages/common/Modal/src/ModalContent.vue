@@ -51,6 +51,17 @@ export default {
       updateScrollbarTimerId: null
     }
   },
+  watch: {
+    active (newActive) {
+      this.$nextTick().then(() => {
+        if (newActive) {
+          this.updateScrollbar()
+        } else {
+          window.clearTimeout(this.updateScrollbarTimerId)
+        }
+      })
+    }
+  },
   created () {
     if (this.active) {
       this.styleActive = true
@@ -58,13 +69,6 @@ export default {
   },
   mounted () {
     this.$nextTick().then(this.registerContent)
-    const updateScrollbar = () => {
-      this.updateScrollbarTimerId = window.setTimeout(() => {
-        this.$refs.scrollbar.updateParameters()
-        updateScrollbar()
-      }, 300)
-    }
-    updateScrollbar()
   },
   updated () {
     this.$nextTick().then(this.registerContent)
@@ -73,6 +77,13 @@ export default {
     window.clearTimeout(this.updateScrollbarTimerId)
   },
   methods: {
+    updateScrollbar () {
+      this.updateScrollbarTimerId = window.setTimeout(() => {
+        // console.log('update scrollbar')
+        this.$refs.scrollbar.updateParameters()
+        this.updateScrollbar()
+      }, 300)
+    },
     registerContent () {
       const slots = this.$slots.default
       const els = slots.map(vNode => vNode.elm).filter(el => el)
