@@ -47,7 +47,8 @@ export default {
   data () {
     return {
       slotDOM: [],
-      styleActive: false
+      styleActive: false,
+      updateScrollbarTimerId: null
     }
   },
   created () {
@@ -57,9 +58,19 @@ export default {
   },
   mounted () {
     this.$nextTick().then(this.registerContent)
+    const updateScrollbar = () => {
+      this.updateScrollbarTimerId = window.setTimeout(() => {
+        this.$refs.scrollbar.updateParameters()
+        updateScrollbar()
+      }, 300)
+    }
+    updateScrollbar()
   },
   updated () {
     this.$nextTick().then(this.registerContent)
+  },
+  beforeDestroy () {
+    window.clearTimeout(this.updateScrollbarTimerId)
   },
   methods: {
     registerContent () {
@@ -138,8 +149,7 @@ export default {
     }
   }
   &:not(.n-modal-content--active) {
-    width: 0;
-    height: 0;
+    visibility: hidden;
   }
 }
 

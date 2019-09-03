@@ -153,6 +153,9 @@ export default {
       this.handleHorizontalScroll()
     }
   },
+  updated () {
+    // console.log('[NScrollbar.updated]')
+  },
   destroyed () {
     window.clearTimeout(this.horizontalScrollbarVanishTimerId)
     window.clearTimeout(this.verticalScrollbarVanishTimerId)

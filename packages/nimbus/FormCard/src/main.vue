@@ -3,8 +3,12 @@
     class="n-nimbus-form-card"
     :style="{width: width + 'px'}"
   >
-    <div class="n-nimbus-form-card__body">
+    <div
+      ref="body"
+      class="n-nimbus-form-card__body"
+    >
       <div
+        ref="header"
         class="n-nimbus-form-card__header"
         :class="{
           'n-nimbus-form-card__header--sticky': sticky
@@ -27,6 +31,7 @@
       </div>
       <div
         v-if="$slots.footer"
+        ref="footer"
         class="n-nimbus-form-card__footer"
         :class="{
           'n-nimbus-form-card__footer--sticky': sticky
@@ -39,7 +44,7 @@
       </div>
       <div
         v-else
-        style="padding-bottom: 45px;"
+        style="padding-bottom: 26px;"
       />
     </div>
   </div>
@@ -65,19 +70,82 @@ export default {
       type: Boolean,
       default: false
     }
+  },
+  mounted () {
+    if (this.sticky) {
+      this.patchOverflow(300)
+    }
+  },
+  beforeDestroy () {
+    if (this.sticky) {
+      this.patchOverflow()
+    }
+  },
+  methods: {
+    patchOverflow (timeout = null) {
+      const body = this.$refs.body
+      const bodyHeight = body.offsetHeight
+      const footer = this.$refs.footer
+      if (footer) {
+        const footerTop = footer.offsetTop
+        const footerHeight = footer.offsetHeight
+        const footerPatchTop = footerTop + footerHeight
+        const footerPatchHeight = bodyHeight - footerPatchTop
+        const footerPatch = document.createElement('div')
+        footerPatch.style.width = '100%'
+        footerPatch.style.position = 'absolute'
+        footerPatch.style.height = footerPatchHeight + 'px'
+        footerPatch.style.top = footerPatchTop + 'px'
+        footerPatch.style.backgroundColor = '#5c657e'
+        footerPatch.style.borderRadius = '9px'
+        body.appendChild(footerPatch)
+        if (timeout) {
+          window.setTimeout(() => {
+            const body = this.$refs.body
+            if (body) {
+              body.removeChild(footerPatch)
+            }
+          }, timeout)
+        }
+      }
+      const header = this.$refs.header
+      if (header) {
+        const headerTop = header.offsetTop
+        const headerPatchHeight = headerTop
+        const headerPatch = document.createElement('div')
+        headerPatch.style.width = '100%'
+        headerPatch.style.position = 'absolute'
+        headerPatch.style.height = headerPatchHeight + 'px'
+        headerPatch.style.top = '0px'
+        headerPatch.style.backgroundColor = '#5c657e'
+        headerPatch.style.borderRadius = '9px'
+        body.appendChild(headerPatch)
+        if (timeout) {
+          window.setTimeout(() => {
+            const body = this.$refs.body
+            if (body) {
+              body.removeChild(headerPatch)
+            }
+          }, timeout)
+        }
+      }
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .n-nimbus-form-card {
-  position: relative;
+  // position: relative;
   min-width: 600px;
   width: 1032px;
   margin: auto;
   pointer-events: none;
+  border-radius: 9px;
   .n-nimbus-form-card__body {
+    position: relative;
     pointer-events: all;
+    clip-path: border-box;
     margin-top: 24px;
     margin-bottom: 24px;
     background: #5c657e;
@@ -86,6 +154,7 @@ export default {
       position: relative;
       &.n-nimbus-form-card__header--sticky {
         position: sticky;
+        top: 0px;
       }
       top: 0;
       background-color: #5c657e;
@@ -139,8 +208,7 @@ export default {
       }
     }
     .n-nimbus-form-card__content {
-      padding: 0px 45px;
-      padding-top: 19px;
+      padding: 19px 45px;
     }
     .n-nimbus-form-card__divider {
       border-bottom: 1px solid #6f778d;
