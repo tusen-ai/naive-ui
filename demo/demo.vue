@@ -202,6 +202,10 @@ export default {
             {
               name: 'Tooltip',
               path: '/n-tooltip'
+            },
+            {
+              name: 'Transfer',
+              path: '/n-transfer'
             }
           ]
         },

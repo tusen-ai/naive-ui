@@ -81,6 +81,12 @@ Vue.use(naiveUi)
 <td></td>
 </tr>
 <tr>
+<td>TimePicker</td>
+<td style="text-align:center;">😍</td>
+<td style="text-align:center;">❌</td>
+<td></td>
+</tr>
+<tr>
 <td>GradientText</td>
 <td style="text-align:center;">😍</td>
 <td style="text-align:center;">🆗</td>
@@ -135,24 +141,6 @@ Vue.use(naiveUi)
 <td></td>
 </tr>
 <tr>
-<td>FormItem</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;">❌</td>
-<td></td>
-</tr>
-<tr>
-<td>Form</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;">❌</td>
-<td></td>
-</tr>
-<tr>
-<td>Table</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;">❌</td>
-<td>Function is not fulfilled</td>
-</tr>
-<tr>
 <td>Tooltip</td>
 <td style="text-align:center;">😍</td>
 <td style="text-align:center;">❌</td>
@@ -178,13 +166,7 @@ Vue.use(naiveUi)
 </tr>
 <tr>
 <td>Tab</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;"></td>
-<td></td>
-</tr>
-<tr>
-<td>Breadcrumb</td>
-<td style="text-align:center;">🚧</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;"></td>
 <td></td>
 </tr>
@@ -213,20 +195,8 @@ Vue.use(naiveUi)
 <td></td>
 </tr>
 <tr>
-<td>Statistic</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;"></td>
-<td></td>
-</tr>
-<tr>
 <td>Popconfirm</td>
 <td style="text-align:center;">😍</td>
-<td style="text-align:center;"></td>
-<td></td>
-</tr>
-<tr>
-<td>Anchor</td>
-<td style="text-align:center;">🚧</td>
 <td style="text-align:center;"></td>
 <td></td>
 </tr>
@@ -249,12 +219,6 @@ Vue.use(naiveUi)
 <td></td>
 </tr>
 <tr>
-<td>Card</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;"></td>
-<td></td>
-</tr>
-<tr>
 <td>Collapse</td>
 <td style="text-align:center;">😍</td>
 <td style="text-align:center;"></td>
@@ -262,12 +226,132 @@ Vue.use(naiveUi)
 </tr>
 <tr>
 <td>Cascader</td>
-<td style="text-align:center;">🚧</td>
+<td style="text-align:center;">😍</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Dropdown</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;"></td>
 <td></td>
 </tr>
 <tr>
 <td>Affix</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Transfer</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Carousel</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Grid</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Card</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Anchor</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Statistic</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Breadcrumb</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>FormItem</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;">❌</td>
+<td></td>
+</tr>
+<tr>
+<td>Form</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;">❌</td>
+<td></td>
+</tr>
+<tr>
+<td>Table</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;">❌</td>
+<td>Function is not fulfilled</td>
+</tr>
+<tr>
+<td>AutoComplete</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Slider</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>TreeSelect</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Transfer</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Upload</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Empty</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Tree</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Spin</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Drawer</td>
 <td style="text-align:center;">🚧</td>
 <td style="text-align:center;"></td>
 <td></td>
@@ -284,4 +368,21 @@ Vue.use(naiveUi)
 <li>Refactor documentation page(for code clairity)</li>
 <li>Code refactor for some 😢  messy code(which is my bad…)</li>
 <li>Refactor CSS use mixins(which means I should learn SCSS hard…)</li>
-</ol></div>`
+</ol>
+<h2 id="roadmap">RoadMap</h2>
+<p>v0.3 cascader
+v0.4 refactor popover
+v0.5 finish all planned components
+v0.6 add keyboard event on planned components
+v0.7 refactor form component
+v0.8 refactor table component
+v0.9 fulfill props for all components
+v0.10 split icons for components
+v0.11 refactor css
+v0.12 import on demand
+v0.13 i18n
+v0.14 unit test
+v0.15 light theme
+v0.16 refactor using proper html tags
+v0.17 document formation
+v0.18 refactor document page</p></div>`

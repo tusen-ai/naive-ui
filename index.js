@@ -51,6 +51,7 @@ import Dropdown from './packages/common/Dropdown'
 import Popselect from './packages/common/Popselect'
 import App from './packages/common/App'
 import CancelMark from './packages/base/CancelMark'
+import Transfer from './packages/common/Transfer'
 
 function install (Vue) {
   Card.install(Vue)
@@ -106,6 +107,7 @@ function install (Vue) {
   Popselect.install(Vue)
   App.install(Vue)
   CancelMark.install(Vue)
+  Transfer.install(Vue)
 }
 
 export default {

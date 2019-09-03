@@ -1,0 +1,79 @@
+@import './mixins/mixins.scss';
+@import './theme/default.scss';
+
+@include b(transfer) {
+  display: flex;
+  @include b(transfer-list) {
+    width: 182px;
+    height: 312px;
+    background-color: rgba(75,81,106,1);
+    border-radius: 6px;
+    @include b(transfer-list-header) {
+      background:rgba(255,255,255,0.2);
+      display: flex;
+      border-radius: 6px 6px 0 0;
+      align-items: center;
+      height: 40px;
+      @include e(checkbox) {
+        position: relative;
+        padding: 0 8px 0 14px;
+        @include b(checkbox) {
+          display: block;
+        }
+      }
+      @include e(header) {
+        flex: 1;
+        line-height: 1;
+        font-size: 16px;
+        font-weight: bold;
+        color: rgba(255, 255, 255, 1);
+        @include m(disabled) {
+          color: rgba(255, 255, 255, 0.25);
+        }
+      }
+      @include e(label) {
+        font-size: 12px;
+        justify-self: flex-end;
+        margin-right: 14px;
+      }
+    }
+    @include b(transfer-list-body) {
+      overflow: hidden;
+      position: relative;
+      height: 272px;
+      @include b(transfer-list-body-content) {
+        padding: 0;
+        margin: 0;
+        @include b(transfer-list-item) {
+          @include slide-right-transition(transfer-list-item-source, 2s);
+          @include slide-left-transition(transfer-list-item-target, 2s);
+          cursor: pointer;
+          max-height: 34px;
+          display: flex;
+          align-items: center;
+          font-size: 14px;
+          height: 34px;
+          color: rgba(255, 255, 255, 1);
+          @include e(checkbox) {
+            position: relative;
+            padding: 0 8px 0 14px;
+            @include b(checkbox) {
+              display: block;
+            }
+          }
+          @include m(disabled) {
+            color: rgba(255, 255, 255, 0.25);
+            cursor: not-allowed;
+          }
+          @include m(selected) {
+            color: rgba(99, 226, 183, 1);
+          }
+        }
+      }
+      
+    }
+  }
+  @include b(transfer-actions) {
+    
+  }
+}

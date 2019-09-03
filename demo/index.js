@@ -51,6 +51,7 @@ import anchorDemo from './components/anchorDemo'
 import popselectDemo from './components/popselectDemo'
 import appDemo from './components/appDemo'
 import advanceTableDemos from './components/advanceTableDemos'
+import transferDemo from './components/transferDemo'
 
 import demo from './demo'
 
@@ -138,7 +139,8 @@ const routes = [
       { path: '/n-dropdown', component: dropdownDemo },
       { path: '/n-popselect', component: popselectDemo },
       { path: '/n-app', component: appDemo },
-      { path: '/n-cancel-mark-debug', component: cancelMarkDebug }
+      { path: '/n-cancel-mark-debug', component: cancelMarkDebug },
+      { path: '/n-transfer', component: transferDemo }
     ]
   },
   {

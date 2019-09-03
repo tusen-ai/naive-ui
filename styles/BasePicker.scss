@@ -169,16 +169,20 @@
   &.n-base-picker--disabled {
     cursor: not-allowed;
     .n-base-picker-label, .n-base-picker-tags {
+      cursor: not-allowed;
       background-color: rgba(255, 255, 255, 0.08);
     }
     .n-base-picker-tag {
+      cursor: not-allowed;
       border-color: rgba(255, 255, 255, 0.20);
       color: rgba(255, 255, 255, 0.20);
     }
     .n-base-picker__placeholder {
+      cursor: not-allowed;
       color: rgba(255, 255, 255, 0.20);
     }
     .n-base-picker-label__input {
+      cursor: not-allowed;
       color: rgba(255, 255, 255, 0.20);
       &.n-base-picker-label__input--placeholder {
         color: rgba(255, 255, 255, 0.20);
@@ -225,7 +229,7 @@
   }
   .n-base-picker-input-tag__mirror {
     position: absolute;
-    padding-right: .5em;
+    padding-right: 1em;
     left: 0;
     top: 0;
     white-space: pre;

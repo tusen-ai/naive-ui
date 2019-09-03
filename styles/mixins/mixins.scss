@@ -1,10 +1,34 @@
 @import "./config.scss";
 
-@mixin b($block) {
-  $B: $namespace + "-" + $block;
+$B: null;
+$BE: null;
+$BEM: null;
 
+@mixin b($block) {
+  $temp-block: $B;
+  $temp-block-element: $BE;
+  $B: $namespace + "-" + $block !global;
+  $BE: $B!global;
   .#{$B} {
     @content;
+  }
+  $B: $temp-block !global;
+  $BE: $temp-block-element !global;
+}
+
+@mixin e($element) {
+  $temp-block-element: $BE;
+  $BE: $B + "__" + $element !global;
+  .#{$BE} {
+    @content
+  }
+  $BE: $temp-block-element !global;
+}
+
+@mixin m($modifier) {
+  $BEM: $BE + '--' + $modifier;
+  &.#{$BEM} {
+    @content
   }
 }
 
