@@ -4,7 +4,6 @@
 @include b(alert) {
   color: rgba(255, 146, 164, 1);
   border-radius: 12px;
-  margin-bottom: 12px;
   position: relative;
   .n-alert__icon {
     position: absolute;
@@ -39,7 +38,8 @@
     }
   }
   &.n-alert--success {
-    background-color: rgba(99, 226, 183, 0.1);
+    background-color: rgba(99, 226, 183, 0.2);
+    box-shadow: inset 0 0 0 1.2px rgba(99, 226, 183, .5);
     .n-icon {
       color: rgba(99, 226, 183, 1);
     }
@@ -48,7 +48,8 @@
     }
   }
   &.n-alert--info {
-    background-color: rgba(98,187,252,0.1); 
+    background-color: rgba(98,187,252,0.2);
+    box-shadow: inset 0 0 0 1.2px rgba(98,187,252, .5);
     .n-icon {
       color: rgba(98, 187, 252, 1);
     }
@@ -57,7 +58,8 @@
     }
   }
   &.n-alert--warning {
-    background-color: rgba(245, 166, 35, 0.1);
+    background-color: rgba(245, 166, 35, 0.2);
+    box-shadow: inset 0 0 0 1.2px rgba(245, 166, 35, .5);
     .n-icon {
       color: rgba(245, 166, 35, 1);
     }
@@ -66,7 +68,8 @@
     }
   }
   &.n-alert--error {
-    background-color: rgba(255, 146, 164, 0.1);
+    background-color: rgba(255, 146, 164, 0.2);
+    box-shadow: inset 0 0 0 1.2px  rgba(255, 146, 164, 0.5);
     .n-icon {
       color:rgba(255, 146, 164, 1);
     }

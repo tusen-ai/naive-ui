@@ -1,0 +1,55 @@
+<template>
+  <div
+    v-if="$slots.default"
+    class="n-spin-container"
+  >
+    <transition name="n-spin--transition">
+      <n-base-loading
+        v-if="spinning"
+        class="n-spin"
+        :class="{
+          [`n-spin--${size}-size`]: true
+        }"
+      />
+    </transition>
+    <div
+      class="n-spin-content"
+      :class="{
+        'n-spin-content--spinning': spinning
+      }"
+    >
+      <slot />
+    </div>
+  </div>
+  <n-base-loading
+    v-else
+    class="n-spin"
+    :class="{
+      [`n-spin--${size}-size`]: true
+    }"
+  />
+</template>
+
+<script>
+import NBaseLoading from '../../../base/Loading'
+
+export default {
+  name: 'NSpin',
+  components: {
+    NBaseLoading
+  },
+  props: {
+    size: {
+      type: [String, Number],
+      default: 'medium'
+    },
+    spinning: {
+      type: Boolean,
+      default: true
+    }
+  },
+  methods: {
+
+  }
+}
+</script>

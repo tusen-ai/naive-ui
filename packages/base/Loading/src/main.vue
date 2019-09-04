@@ -2,13 +2,13 @@
   <div class="n-base-loading">
     <svg
       viewBox="25 25 50 50"
-      class="circular"
+      class="n-base-loading-circular"
     ><circle
       cx="50"
       cy="50"
       r="20"
       fill="none"
-      class="path"
+      class="n-base-loading-circular-path"
     /></svg>
   </div>
 </template>
@@ -26,11 +26,11 @@ export default {
   line-height: 1;
 }
 
-.circular {
+.n-base-loading-circular {
   height: 100%;
   width: 100%;
   animation: loading-rotate 2s linear infinite;
-  .path {
+  .n-base-loading-circular-path {
     animation: loading-dash 1.5s ease-in-out infinite;
     stroke-dasharray: 90,150;
     stroke-dashoffset: 0;

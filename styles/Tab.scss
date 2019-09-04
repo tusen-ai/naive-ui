@@ -20,6 +20,10 @@
     .n-tab-label {
       box-sizing: border-box;
       padding-bottom: 7px;
+      vertical-align: bottom;
+      .n-tab-label__label {
+        font-size: 16px;
+      }
       &:hover {
         .n-tab-label__label {
           color: #63E2B7;
@@ -30,7 +34,6 @@
       }
       &.n-tab-label--active {
         .n-tab-label__label {
-          font-size: 16px;
           color: #63E2B7;
         }
       }
@@ -61,6 +64,10 @@
       line-height: 34px;
       padding: 0 16px;
       position: relative;
+      vertical-align: bottom;
+      .n-tab-label__label {
+        font-size: 16px;
+      }
       .n-tab-label__corner {
         position: absolute;
         height: 4px;

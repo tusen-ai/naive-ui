@@ -79,10 +79,13 @@ Vue.use(naiveUi)
 |Collapse|😍|||
 |Cascader|😍|||
 |Dropdown|😍|||
-|Affix|🚧|||
-|Transfer|🚧|||
-|Carousel|🚧|||
+|Transfer|😍|||
+|Spin|😍|||
+|Drawer|🚧|||
 |Grid|🚧|||
+|Layout|🚧|||
+|Affix|🚧|||
+|Carousel|🚧|||
 |Card|🚧|||
 |Anchor|🚧|||
 |Statistic|🚧|||
@@ -93,12 +96,18 @@ Vue.use(naiveUi)
 |AutoComplete|🚧|||
 |Slider|🚧|||
 |TreeSelect|🚧|||
-|Transfer|🚧|||
 |Upload|🚧|||
 |Empty|🚧|||
 |Tree|🚧|||
-|Spin|🚧|||
-|Drawer|🚧|||
+|LoadingBar|🚧|||
+|Rating|🚧|||
+|Time|🚧|||
+|Avator|🚧|||
+|Menu|🚧|||
+|Typography|🚧|||
+|Mentions|🚧|||
+|Result|🚧|||
+|Calendar|🚧|||
 
 1. Z-index management on `Select` & `Tooltip` & `Modal`(Low Priority)
 2. Full featured table component(Medium Priority)

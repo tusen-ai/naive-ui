@@ -52,6 +52,8 @@ import popselectDemo from './components/popselectDemo'
 import appDemo from './components/appDemo'
 import advanceTableDemos from './components/advanceTableDemos'
 import transferDemo from './components/transferDemo'
+import spinDemo from './components/spinDemo'
+import drawerDemo from './components/drawerDemo'
 
 import demo from './demo'
 
@@ -140,7 +142,9 @@ const routes = [
       { path: '/n-popselect', component: popselectDemo },
       { path: '/n-app', component: appDemo },
       { path: '/n-cancel-mark-debug', component: cancelMarkDebug },
-      { path: '/n-transfer', component: transferDemo }
+      { path: '/n-transfer', component: transferDemo },
+      { path: '/n-spin', component: spinDemo },
+      { path: '/n-drawer', component: drawerDemo }
     ]
   },
   {

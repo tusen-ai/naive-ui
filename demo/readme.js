@@ -237,25 +237,43 @@ Vue.use(naiveUi)
 <td></td>
 </tr>
 <tr>
-<td>Affix</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;"></td>
-<td></td>
-</tr>
-<tr>
 <td>Transfer</td>
+<td style="text-align:center;">😍</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Spin</td>
 <td style="text-align:center;">🚧</td>
 <td style="text-align:center;"></td>
 <td></td>
 </tr>
 <tr>
-<td>Carousel</td>
+<td>Drawer</td>
 <td style="text-align:center;">🚧</td>
 <td style="text-align:center;"></td>
 <td></td>
 </tr>
 <tr>
 <td>Grid</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Layout</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Affix</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Carousel</td>
 <td style="text-align:center;">🚧</td>
 <td style="text-align:center;"></td>
 <td></td>
@@ -321,12 +339,6 @@ Vue.use(naiveUi)
 <td></td>
 </tr>
 <tr>
-<td>Transfer</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;"></td>
-<td></td>
-</tr>
-<tr>
 <td>Upload</td>
 <td style="text-align:center;">🚧</td>
 <td style="text-align:center;"></td>
@@ -345,13 +357,55 @@ Vue.use(naiveUi)
 <td></td>
 </tr>
 <tr>
-<td>Spin</td>
+<td>LoadingBar</td>
 <td style="text-align:center;">🚧</td>
 <td style="text-align:center;"></td>
 <td></td>
 </tr>
 <tr>
-<td>Drawer</td>
+<td>Rating</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Time</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Avator</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Menu</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Typography</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Mentions</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Result</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Calendar</td>
 <td style="text-align:center;">🚧</td>
 <td style="text-align:center;"></td>
 <td></td>

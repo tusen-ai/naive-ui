@@ -1,0 +1,33 @@
+@import './mixins/mixins.scss';
+@import './theme/default.scss';
+
+@include b(drawer) {
+  @include slide-in-from-right-transition();
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(111, 111, 111, 1);
+}
+
+@include b(drawer-overlay) {
+  @include fade-in-transition(fade-in);
+  background-color: rgba(0, 0, 0, .3);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+@include b(drawer-container) {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  visibility: hidden;
+  @include m(active) {
+    visibility: visible;
+  }
+}

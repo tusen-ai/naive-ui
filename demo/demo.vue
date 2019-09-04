@@ -102,6 +102,11 @@ export default {
             {
               name: 'Divider',
               path: '/n-divider'
+
+            },
+            {
+              name: 'Drawer',
+              path: '/n-drawer'
             },
             {
               name: 'Dropdown',
@@ -170,6 +175,10 @@ export default {
             {
               name: 'Select',
               path: '/n-select'
+            },
+            {
+              name: 'Spin',
+              path: '/n-spin'
             },
             {
               name: 'Steps',
