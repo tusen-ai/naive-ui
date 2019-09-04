@@ -41,12 +41,25 @@
       overflow: hidden;
       position: relative;
       height: 272px;
+      @include b(scrollbar-content) {
+        width: 100%;
+      }
       @include b(transfer-list-body-content) {
         padding: 0;
         margin: 0;
+        position: relative;
+        @include b(transfer-list-light-bar) {
+          @include fade-in-transition(transfer-list-light-bar);
+          height: 34px;
+          transition: top .15s $default-cubic-bezier;
+          background-color: rgba(96, 220, 178, 0.3);
+          width: 100%;
+          position: absolute;
+        }
         @include b(transfer-list-item) {
           @include slide-right-transition(transfer-list-item-source);
           @include slide-left-transition(transfer-list-item-target);
+          position: relative;
           cursor: pointer;
           max-height: 34px;
           display: flex;
@@ -54,6 +67,12 @@
           font-size: 14px;
           height: 34px;
           color: rgba(255, 255, 255, 1);
+          @include e(label) {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            padding-right: 4px;
+          }
           @include e(checkbox) {
             position: relative;
             padding: 0 8px 0 14px;
@@ -73,7 +92,44 @@
       
     }
   }
-  @include b(transfer-actions) {
-    
+  @include b(transfer-gap) {
+    width: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    @include b(transfer-button) {
+      width: 36px;
+      height: 36px;
+      border-radius: 18px;
+      cursor: pointer;
+      &:first-child {
+        margin-bottom: 12px;
+      }
+      @include e(icon) {
+        pointer-events: none;
+        fill: rgba(255, 255, 255, 0.3);
+        transition: fill .3s $default-cubic-bezier;
+      }
+      &:hover {
+        @include e(icon) {
+          fill: rgba(99, 226, 183, 1);
+        }
+      }
+      &:active {
+        @include e(icon) {
+          fill: rgba(77, 177, 153, 1);
+        }
+      }
+      @include m(to) {
+        transform: rotate(180deg);
+      }
+      @include m(disabled) {
+        cursor: not-allowed;
+        @include e(icon) {
+          fill: rgba(255, 255, 255, .15)!important;
+        }
+      }
+    }
   }
 }

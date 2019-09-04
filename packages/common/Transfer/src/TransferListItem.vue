@@ -9,6 +9,8 @@
         'n-transfer-list-item--disabled': disabled
       }"
       @click="handleClick"
+      @mouseenter="handleMouseEnter"
+      @mouseleave="handleMouseLeave"
     >
       <div class="n-transfer-list-item__checkbox">
         <n-checkbox
@@ -17,7 +19,12 @@
           @input="handleInput"
         />
       </div>
-      <slot />
+      <div
+        class="n-transfer-list-item__label"
+        :title="title"
+      >
+        <slot />
+      </div>
     </li>
   </transition>
 </template>
@@ -56,6 +63,10 @@ export default {
     target: {
       type: Boolean,
       default: false
+    },
+    title: {
+      type: String,
+      required: true
     }
   },
   computed: {
@@ -72,6 +83,16 @@ export default {
     handleInput (checked) {
       if (!this.disabled) {
         this.$emit('input', checked, this.value)
+      }
+    },
+    handleMouseEnter (e) {
+      if (!this.disabled) {
+        this.$emit('mouseenter', e)
+      }
+    },
+    handleMouseLeave (e) {
+      if (!this.disabled) {
+        this.$emit('mouseleave', e)
       }
     }
   }

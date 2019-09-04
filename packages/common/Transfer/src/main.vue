@@ -3,9 +3,11 @@
     <div class="n-transfer-list">
       <div class="n-transfer-list-header">
         <div class="n-transfer-list-header__checkbox">
+          <div class="n-transfer-list-light-bar" />
           <n-checkbox
             :value="sourceHeaderCheckboxChecked"
             :indeterminate="sourceHeaderCheckboxIndeterminate"
+            :disabled="sourceHeaderCheckboxDisabled"
             @input="handleSourceHeaderCheckboxInput"
           />
         </div>
@@ -16,9 +18,21 @@
           {{ sourceCheckedValueSet.size }} / {{ sourceOptions.length }}
         </div>
       </div>
-      <div class="n-transfer-list-body">
+      <div
+        class="n-transfer-list-body"
+        @mouseleave="handleSourceListMouseLeave"
+      >
         <n-scrollbar ref="leftScrollbar">
           <ul class="n-transfer-list-body-content">
+            <transition name="n-transfer-list-light-bar--transition">
+              <div
+                v-if="showLightBar"
+                class="n-transfer-list-light-bar"
+                :style="{
+                  top: lightBarStyleTop
+                }"
+              />
+            </transition>
             <n-transfer-list-item
               v-for="option in memorizedSourceOptions"
               :key="option.value"
@@ -27,10 +41,13 @@
               :checked="sourceCheckedValueSet.has(option.value)"
               :disabled="option.disabled"
               source
+              :title="option.label"
               @click="handleSourceCheckboxInput(
                 !sourceCheckedValueSet.has(option.value),
                 option.value
               )"
+              @mouseenter="handleSourceOptionMouseEnter"
+              @mouseleave="handleSourceOptionMouseLeave"
             >
               {{ option.label }}
             </n-transfer-list-item>
@@ -38,13 +55,20 @@
         </n-scrollbar>
       </div>
     </div>
-    <div class="n-transfer-actions">
-      <button @click="handleToTargetClick">
+    <div class="n-transfer-gap">
+      <n-transfer-button
+        to
+        :disabled="toTargetButtonDisabled"
+        @click="handleToTargetClick"
+      >
         To Target
-      </button>
-      <button @click="handleToSourceClick">
+      </n-transfer-button>
+      <n-transfer-button
+        :disabled="toSourceButtonDisabled"
+        @click="handleToSourceClick"
+      >
         To Source
-      </button>
+      </n-transfer-button>
     </div>
     <div class="n-transfer-list">
       <div class="n-transfer-list-header">
@@ -52,6 +76,7 @@
           <n-checkbox
             :value="targetHeaderCheckboxChecked"
             :indeterminate="targetHeaderCheckboxIndeterminate"
+            :disabled="targetHeaderCheckboxDisabled"
             @input="handleTargetHeaderCheckboxInput"
           />
         </div>
@@ -62,9 +87,21 @@
           {{ targetCheckedValueSet.size }} / {{ targetOptions.length }}
         </div>
       </div>
-      <div class="n-transfer-list-body">
+      <div
+        class="n-transfer-list-body"
+        @mouseleave="handleTargetListMouseLeave"
+      >
         <n-scrollbar ref="rightScrollbar">
           <ul class="n-transfer-list-body-content">
+            <transition name="n-transfer-list-light-bar--transition">
+              <div
+                v-if="showSecondLightBar"
+                class="n-transfer-list-light-bar"
+                :style="{
+                  top: secondLightBarStyleTop
+                }"
+              />
+            </transition>
             <n-transfer-list-item
               v-for="option in memorizedTargetOptions"
               :key="option.value"
@@ -73,10 +110,13 @@
               :checked="targetCheckedValueSet.has(option.value)"
               :disabled="option.disabled"
               target
+              :title="option.label"
               @click="handleTargetCheckboxInput(
                 !targetCheckedValueSet.has(option.value),
                 option.value
               )"
+              @mouseenter="handleTargetOptionMouseEnter"
+              @mouseleave="handleTargetOptionMouseLeave"
             >
               {{ option.label }}
             </n-transfer-list-item>
@@ -91,15 +131,20 @@
 import NCheckbox from '../../Checkbox'
 import NScrollbar from '../../Scrollbar'
 import NTransferListItem from './TransferListItem'
+import NTransferButton from './TransferButton'
 import cloneDeep from 'lodash/cloneDeep'
+import withlightbar from '../../../mixins/withlightbar'
+import withsecondlightbar from '../../../mixins/withsecondlightbar'
 
 export default {
   name: 'NTransfer',
   components: {
     NCheckbox,
     NScrollbar,
-    NTransferListItem
+    NTransferListItem,
+    NTransferButton
   },
+  mixins: [withlightbar, withsecondlightbar],
   props: {
     value: {
       type: Array,
@@ -120,10 +165,29 @@ export default {
       targetCheckedValues: [],
       memorizedSourceOptions: null,
       memorizedTargetOptions: null,
-      init: true
+      init: true,
+      active: true
     }
   },
   computed: {
+    toTargetButtonDisabled () {
+      return this.disabled || this.sourceCheckedValueSet.size === 0
+    },
+    toSourceButtonDisabled () {
+      return this.disabled || this.targetCheckedValueSet.size === 0
+    },
+    sourceEnabledOptions () {
+      return this.sourceOptions.filter(option => !option.disabled)
+    },
+    targetEnabledOptions () {
+      return this.targetOptions.filter(option => !option.disabled)
+    },
+    sourceHeaderCheckboxDisabled () {
+      return this.disabled || !this.sourceEnabledOptions.length
+    },
+    targetHeaderCheckboxDisabled () {
+      return this.disabled || !this.targetEnabledOptions.length
+    },
     sourceHeaderCheckboxChecked () {
       return this.sourceCheckedValueSet.size === this.sourceOptions.length && !!this.sourceOptions.length
     },
@@ -157,11 +221,11 @@ export default {
     },
     sourceOptions () {
       const valueSet = Array.isArray(this.value) ? new Set(this.value) : new Set()
-      return this.memorizedSourceOptions.filter(option => !valueSet.has(option.value))
+      return this.options.filter(option => !valueSet.has(option.value))
     },
     targetOptions () {
       const valueSet = Array.isArray(this.value) ? new Set(this.value) : new Set()
-      return this.memorizedTargetOptions.filter(option => valueSet.has(option.value))
+      return this.options.filter(option => valueSet.has(option.value))
       // value.filter(v => this.valueToOptionMap.has(v)).map(v => this.valueToOptionMap.get(v))
     },
     orderedOptions () {
@@ -193,7 +257,9 @@ export default {
   },
   methods: {
     emitInputEvent (value) {
-      this.$emit('input', this.cleanValue(value))
+      const newValue = this.cleanValue(value)
+      this.$emit('input', newValue)
+      this.$emit('change', newValue)
     },
     cleanValue (value) {
       if (Array.isArray(value)) {
@@ -271,6 +337,24 @@ export default {
         this.emitInputEvent(newValue)
       })
       this.targetCheckedValues = []
+    },
+    handleSourceOptionMouseEnter (e) {
+      this.updateLightBarPosition(e.target)
+    },
+    handleTargetOptionMouseEnter (e) {
+      this.updateSecondLightBarPosition(e.target)
+    },
+    handleSourceOptionMouseLeave (e) {
+      this.hideLightBar()
+    },
+    handleTargetOptionMouseLeave (e) {
+      this.hideSecondLightBar()
+    },
+    handleSourceListMouseLeave () {
+      this.hideLightBar()
+    },
+    handleTargetListMouseLeave () {
+      this.hideSecondLightBar()
     }
   }
 }
