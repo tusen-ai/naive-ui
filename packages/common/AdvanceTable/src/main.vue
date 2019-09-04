@@ -303,11 +303,7 @@ export default {
       } else if (!this.searchData.length) {
         data = this.copyData
       }
-      if (this.pagination && this.pagination.limit && !this.pagination.custom) {
-        let start = (this.currentPage - 1) * this.pagination.limit
-        let end = start + this.pagination.limit
-        data = data.slice(start, end)
-      }
+      data = this.computePageDivideData(data)
       return data
     },
     tableStl () {
@@ -594,6 +590,21 @@ export default {
         }
       }
       return null
+    },
+    computePageDivideData (data) {
+      if (this.pagination && this.pagination.limit && !this.pagination.custom) {
+        let start = (this.currentPage - 1) * this.pagination.limit
+        let end = start + this.pagination.limit
+        data = data.slice(start, end)
+        // 删除了这个元素为本页最后一个那么应该跳转到上一页
+        if (data.length === 0 && this.currentPage > 1) {
+          start = (this.currentPage - 2) * this.pagination.limit
+          end = start + this.pagination.limit
+          this.currentPage = this.currentPage - 1
+          data = this.searchData.slice(start, end)
+        }
+      }
+      return data
     },
     init () {
       this.$nextTick(() => {
