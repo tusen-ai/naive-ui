@@ -137,6 +137,10 @@ export default {
               path: '/n-InputKeyValuePairs'
             },
             {
+              name: 'LoadingBar',
+              path: '/n-loading-bar'
+            },
+            {
               name: 'Message',
               path: '/n-message'
             },
@@ -199,6 +203,10 @@ export default {
             {
               name: 'Tag',
               path: '/n-tag'
+            },
+            {
+              name: 'Time',
+              path: '/n-time'
             },
             {
               name: 'TimePicker',

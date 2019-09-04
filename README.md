@@ -86,7 +86,7 @@ Vue.use(naiveUi)
 |Form|🤔|❌||
 |Table|🤔|❌|Function is not fulfilled|
 |Time|🚧|||
-|LoadingBar|🚧|||
+|LoadingBar|😍|||
 |Anchor|🚧|||
 |Statistic|🚧|||
 |Breadcrumb|🚧|||

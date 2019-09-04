@@ -54,6 +54,8 @@ import CancelMark from './packages/base/CancelMark'
 import Transfer from './packages/common/Transfer'
 import Spin from './packages/common/Spin'
 import Drawer from './packages/common/Drawer'
+import Time from './packages/common/Time'
+import LoadingBar from './packages/common/LoadingBar'
 
 function install (Vue) {
   Card.install(Vue)
@@ -112,6 +114,8 @@ function install (Vue) {
   Transfer.install(Vue)
   Spin.install(Vue)
   Drawer.install(Vue)
+  LoadingBar.install(Vue)
+  Time.install(Vue)
 }
 
 export default {

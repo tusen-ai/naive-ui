@@ -1,0 +1,31 @@
+@import './mixins/mixins.scss';
+@import './theme/default.scss';
+
+@include b(loading-bar-container) {
+  @include fade-in-transition(fade-in, .3s, .6s);
+  z-index: 5000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  @include b(loading-bar) {
+    background-color: $main-color;
+    width: 100%;
+    height: 2px;
+    transition: max-width 4s linear, background-color .2s linear;
+    max-width: 0;
+    @include m(starting) {
+      background-color: $main-color;
+      transition: max-width 4s linear, background-color .2s linear;
+    }
+    @include m(finishing) {
+      background-color: $main-color;
+      transition: max-width .2s linear, background-color .2s linear;
+    }
+    @include m(error) {
+      background-color: red;
+      transition: max-width .2s linear, background-color .2s linear;
+    }
+  }
+}

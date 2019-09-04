@@ -250,36 +250,36 @@ Vue.use(naiveUi)
 </tr>
 <tr>
 <td>Drawer</td>
+<td style="text-align:center;">🤔</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>FormItem</td>
+<td style="text-align:center;">🤔</td>
+<td style="text-align:center;">❌</td>
+<td></td>
+</tr>
+<tr>
+<td>Form</td>
+<td style="text-align:center;">🤔</td>
+<td style="text-align:center;">❌</td>
+<td></td>
+</tr>
+<tr>
+<td>Table</td>
+<td style="text-align:center;">🤔</td>
+<td style="text-align:center;">❌</td>
+<td>Function is not fulfilled</td>
+</tr>
+<tr>
+<td>Time</td>
 <td style="text-align:center;">🚧</td>
 <td style="text-align:center;"></td>
 <td></td>
 </tr>
 <tr>
-<td>Grid</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;"></td>
-<td></td>
-</tr>
-<tr>
-<td>Layout</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;"></td>
-<td></td>
-</tr>
-<tr>
-<td>Affix</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;"></td>
-<td></td>
-</tr>
-<tr>
-<td>Carousel</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;"></td>
-<td></td>
-</tr>
-<tr>
-<td>Card</td>
+<td>LoadingBar</td>
 <td style="text-align:center;">🚧</td>
 <td style="text-align:center;"></td>
 <td></td>
@@ -303,22 +303,34 @@ Vue.use(naiveUi)
 <td></td>
 </tr>
 <tr>
-<td>FormItem</td>
+<td>Card</td>
 <td style="text-align:center;">🚧</td>
-<td style="text-align:center;">❌</td>
+<td style="text-align:center;"></td>
 <td></td>
 </tr>
 <tr>
-<td>Form</td>
+<td>Empty</td>
 <td style="text-align:center;">🚧</td>
-<td style="text-align:center;">❌</td>
+<td style="text-align:center;"></td>
 <td></td>
 </tr>
 <tr>
-<td>Table</td>
+<td>Grid</td>
 <td style="text-align:center;">🚧</td>
-<td style="text-align:center;">❌</td>
-<td>Function is not fulfilled</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Layout</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Affix</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
 </tr>
 <tr>
 <td>AutoComplete</td>
@@ -328,6 +340,12 @@ Vue.use(naiveUi)
 </tr>
 <tr>
 <td>Slider</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Tree</td>
 <td style="text-align:center;">🚧</td>
 <td style="text-align:center;"></td>
 <td></td>
@@ -345,31 +363,7 @@ Vue.use(naiveUi)
 <td></td>
 </tr>
 <tr>
-<td>Empty</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;"></td>
-<td></td>
-</tr>
-<tr>
-<td>Tree</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;"></td>
-<td></td>
-</tr>
-<tr>
-<td>LoadingBar</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;"></td>
-<td></td>
-</tr>
-<tr>
 <td>Rating</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;"></td>
-<td></td>
-</tr>
-<tr>
-<td>Time</td>
 <td style="text-align:center;">🚧</td>
 <td style="text-align:center;"></td>
 <td></td>
@@ -381,34 +375,40 @@ Vue.use(naiveUi)
 <td></td>
 </tr>
 <tr>
-<td>Menu</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;"></td>
-<td></td>
-</tr>
-<tr>
-<td>Typography</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;"></td>
-<td></td>
-</tr>
-<tr>
-<td>Mentions</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;"></td>
-<td></td>
-</tr>
-<tr>
 <td>Result</td>
 <td style="text-align:center;">🚧</td>
 <td style="text-align:center;"></td>
 <td></td>
 </tr>
 <tr>
-<td>Calendar</td>
-<td style="text-align:center;">🚧</td>
+<td>Menu</td>
+<td style="text-align:center;">✋</td>
 <td style="text-align:center;"></td>
 <td></td>
+</tr>
+<tr>
+<td>Typography</td>
+<td style="text-align:center;">✋</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Mentions</td>
+<td style="text-align:center;">✋</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Calendar</td>
+<td style="text-align:center;">✋</td>
+<td style="text-align:center;"></td>
+<td>Not Planned</td>
+</tr>
+<tr>
+<td>Carousel</td>
+<td style="text-align:center;">✋</td>
+<td style="text-align:center;"></td>
+<td>Not Planned</td>
 </tr>
 </tbody>
 </table>

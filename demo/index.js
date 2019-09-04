@@ -54,6 +54,8 @@ import advanceTableDemos from './components/advanceTableDemos'
 import transferDemo from './components/transferDemo'
 import spinDemo from './components/spinDemo'
 import drawerDemo from './components/drawerDemo'
+import loadingBarDemo from './components/loadingBarDemo'
+import timeDemo from './components/timeDemo'
 
 import demo from './demo'
 
@@ -144,7 +146,9 @@ const routes = [
       { path: '/n-cancel-mark-debug', component: cancelMarkDebug },
       { path: '/n-transfer', component: transferDemo },
       { path: '/n-spin', component: spinDemo },
-      { path: '/n-drawer', component: drawerDemo }
+      { path: '/n-drawer', component: drawerDemo },
+      { path: '/n-loading-bar', component: loadingBarDemo },
+      { path: '/n-time', component: timeDemo }
     ]
   },
   {
