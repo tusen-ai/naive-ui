@@ -81,33 +81,33 @@ Vue.use(naiveUi)
 |Dropdown|😍|||
 |Transfer|😍|||
 |Spin|😍|||
-|Drawer|🚧|||
-|Grid|🚧|||
-|Layout|🚧|||
-|Affix|🚧|||
-|Carousel|🚧|||
-|Card|🚧|||
+|Drawer|🤔|||
+|FormItem|🤔|❌||
+|Form|🤔|❌||
+|Table|🤔|❌|Function is not fulfilled|
+|Time|🚧|||
+|LoadingBar|🚧|||
 |Anchor|🚧|||
 |Statistic|🚧|||
 |Breadcrumb|🚧|||
-|FormItem|🚧|❌||
-|Form|🚧|❌||
-|Table|🚧|❌|Function is not fulfilled|
+|Card|🚧|||
+|Empty|🚧|||
+|Grid|🚧|||
+|Layout|🚧|||
+|Affix|🚧|||
 |AutoComplete|🚧|||
 |Slider|🚧|||
+|Tree|🚧|||
 |TreeSelect|🚧|||
 |Upload|🚧|||
-|Empty|🚧|||
-|Tree|🚧|||
-|LoadingBar|🚧|||
 |Rating|🚧|||
-|Time|🚧|||
 |Avator|🚧|||
-|Menu|🚧|||
-|Typography|🚧|||
-|Mentions|🚧|||
 |Result|🚧|||
-|Calendar|🚧|||
+|Menu|✋|||
+|Typography|✋|||
+|Mentions|✋|||
+|Calendar|✋||Not Planned|
+|Carousel|✋||Not Planned|
 
 1. Z-index management on `Select` & `Tooltip` & `Modal`(Low Priority)
 2. Full featured table component(Medium Priority)
