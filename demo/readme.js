@@ -280,7 +280,7 @@ Vue.use(naiveUi)
 </tr>
 <tr>
 <td>LoadingBar</td>
-<td style="text-align:center;">🚧</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;"></td>
 <td></td>
 </tr>
