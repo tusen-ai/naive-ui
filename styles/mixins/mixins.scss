@@ -2,7 +2,6 @@
 
 $B: null;
 $BE: null;
-$BEM: null;
 
 @mixin b($block) {
   $temp-block: $B;
@@ -16,18 +15,29 @@ $BEM: null;
   $BE: $temp-block-element !global;
 }
 
-@mixin e($element) {
+@mixin e($elements...) {
   $temp-block-element: $BE;
-  $BE: $B + "__" + $element !global;
-  .#{$BE} {
-    @content
+  $BEs: '';
+  @each $element in $elements {
+    $BE: $B + "__" + $element !global;
+    .#{$BE} {
+      @content
+    }
   }
   $BE: $temp-block-element !global;
 }
 
-@mixin m($modifier) {
-  $BEM: $BE + '--' + $modifier;
-  &.#{$BEM} {
+@mixin m($modifiers...) {
+  $BEMs: '';
+  @for $i from 0 to length($modifiers) {
+    $modifier: nth($modifiers, $i + 1);
+    @if $i == 0 {
+      $BEMs: '&.' + $BE + '--' + $modifier;
+    } @else {
+      $BEMs: $BEMs + ', &.' + $BE + '--' + $modifier;
+    }
+  }
+  #{$BEMs} {
     @content
   }
 }
