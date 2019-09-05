@@ -56,22 +56,12 @@ export default {
     controller: {
       type: Object,
       default: null
-    },
-    /** private props */
-    inFunctionalComponent: {
-      type: Boolean,
-      default: false
     }
   },
   render (h, context) {
-    const slots = context.slots()
-    const defaultSlot = slots.default || []
-    let activatorSlot = slots.activator
-    if (context.props.inFunctionalComponent) {
-      activatorSlot = defaultSlot[0].children
-      defaultSlot.shift()
-    }
-    activatorSlot = activatorSlot || []
+    const slots = context.scopedSlots
+    const defaultSlot = slots.default && slots.default()
+    const activatorSlot = slots.activator && slots.activator()
     const id = genId()
     const props = context.props
     const listeners = context.listeners

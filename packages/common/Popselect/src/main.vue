@@ -48,27 +48,25 @@ export default {
     }
   },
   render (h, context) {
-    const slots = context.slots()
+    const slots = context.scopedSlots
     const controller = context.props.controller || {}
     return h(
       NPopover, {
         props: {
-          inFunctionalComponent: true,
           trigger: 'click',
           controller
+        },
+        scopedSlots: {
+          activator: () => slots.activator(),
+          default: () => h(NPopselectPanel, {
+            props: {
+              ...context.props,
+              controller
+            },
+            on: context.listeners
+          })
         }
-      }, [
-        h('template', {
-          slot: 'activator'
-        }, slots.activator),
-        h(NPopselectPanel, {
-          props: {
-            ...context.props,
-            controller
-          },
-          on: context.listeners
-        }, slots.default)
-      ])
+      })
   }
 }
 </script>
