@@ -8,6 +8,9 @@
       cy="50"
       r="20"
       fill="none"
+      :style="{
+        strokeWidth
+      }"
       class="n-base-loading-circular-path"
     /></svg>
   </div>
@@ -17,6 +20,13 @@
 export default {
   name: 'NBaseLoading',
   props: {
+    strokeWidth: {
+      type: Number,
+      default: null
+    }
+  },
+  mounted () {
+    console.log(this.strokeWidth)
   }
 }
 </script>

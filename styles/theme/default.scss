@@ -35,11 +35,10 @@ $input-icon-color: rgba(255,255,255,0.2);
 /**
  * n-button
  */
-$button-margin: 0 12px 8px 0;
 $button-border-radius: 6px;
 $button-tiny-font-size: 12px;
 $button-small-font-size: 14px;
-$button-default-font-size: 16px;
+$button-default-font-size: 14px;
 $button-large-font-size: 16px;
 $button-default-text-color: $main-color;
 $button-default-border-color: $main-color;
@@ -284,5 +283,28 @@ $scrollbar-color--hover: rgba(255,255,255,0.3);
   &.#{$namespace}-#{$block}--transition-leave-to {
     transform: translateX(-120%);
     max-height: 0;
+  }
+}
+
+@mixin fade-in-width-expand-transition($block: "fade-in-width-expand", $duration: .2s, $delay: .1s) {
+  &.#{$namespace}-#{$block}-leave-active {
+    transition: opacity $duration $default-cubic-bezier, max-width $duration $default-cubic-bezier $delay;
+  }
+  &.#{$namespace}-#{$block}-enter-active {
+    transition: opacity $duration $default-cubic-bezier $delay, max-width $duration $default-cubic-bezier;
+  }
+  &.#{$namespace}-#{$block}-enter-to {
+    opacity: 1;
+  }
+  &.#{$namespace}-#{$block}-enter {
+    max-width: 0!important;
+    opacity: 0;
+  }
+  &.#{$namespace}-#{$block}-leave {
+    opacity: 1;
+  }
+  &.#{$namespace}-#{$block}-leave-to {
+    max-width: 0!important;
+    opacity: 0!important;
   }
 }

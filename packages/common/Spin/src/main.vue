@@ -7,6 +7,7 @@
       <n-base-loading
         v-if="spinning"
         class="n-spin"
+        :stroke-width="strokeWidth"
         :class="{
           [`n-spin--${size}-size`]: true
         }"
@@ -24,8 +25,9 @@
   <n-base-loading
     v-else
     class="n-spin"
+    :stroke-width="strokeWidth"
     :class="{
-      [`n-spin--${size}-size`]: true
+      [`n-spin--${size}-size`]: size
     }"
   />
 </template>
@@ -46,6 +48,10 @@ export default {
     spinning: {
       type: Boolean,
       default: true
+    },
+    strokeWidth: {
+      type: Number,
+      default: null
     }
   },
   methods: {
