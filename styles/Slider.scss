@@ -1,0 +1,124 @@
+@import './mixins/mixins.scss';
+@import './theme/default.scss';
+
+$slider---padding: 5px 0;
+
+$slider-rail---height: 4px;
+$slider-rail---background-color: rgba(255, 255, 255, 0.2);
+$slider-rail--hover---background-color: rgba(255, 255, 255, 0.3);
+
+$slider-rail__fill---background-color: rgba(78, 143, 132, 1);
+$slider-rail__fill--hover---background-color: rgba(96, 186, 161, 1);
+
+$slider-handle---size: 14px;
+$slider-handle---background-color: rgba(99, 226, 183, 1);
+$slider-handle---box-shadow: inset 0 0 0 2px rgba(78, 143, 132, 1);
+$slider-handle--hover---box-shadow: inset 0 0 0 2px rgba(83, 186, 156, 1);
+$slider-handle--active---box-shadow: inset 0 0 0 2px rgba(99, 226, 183, 1);
+$slider-handle--focus---box-shadow: inset 0 0 0 2px rgba(99, 226, 183, 1), 0 0 0 4px rgba(99, 226, 183, .2);
+
+$slider-indicator---background-color: rgba(104, 112, 145, 1);
+$slider-indicator---box-shadow: 0px 2px 20px 0px rgba(0,0,0,0.16);
+
+$slider-dot---size: 8px;
+$slider-dot---box-shadow: inset 0 0 0 2px rgba(78, 143, 132, 1);
+
+@include b(slider) {
+  display: block;
+  width: 100%;
+  padding: $slider---padding;
+  position: relative;
+  z-index: 0;
+  cursor: pointer;
+  &:hover, &.n-slider--active {
+    @include b(slider-rail) {
+      background-color: $slider-rail--hover---background-color;
+      @include e(fill) {
+        background-color: $slider-rail__fill--hover---background-color;
+      }
+    }
+    @include b(slider-handle) {
+      box-shadow: $slider-handle--hover---box-shadow;
+    }
+  }
+  @include b(slider-handle) {
+    &:hover {
+      box-shadow: $slider-handle--active---box-shadow;
+    }
+    &:focus {
+      box-shadow: $slider-handle--focus---box-shadow;
+    }
+  }
+  @include m(with-mark) {
+    margin: 8px 12px 32px 12px;
+  }
+}
+
+@include b(slider-rail) {
+  width: 100%;
+  height: $slider-rail---height;
+  background-color: $slider-rail---background-color;
+  position: relative;
+  transition: background-color .2s $default-cubic-bezier;
+  border-radius: $slider-rail---height / 2;
+  @include e(fill) {
+    transition: background-color .3s $default-cubic-bezier;
+    background-color: $slider-rail__fill---background-color;
+    border-radius: $slider-rail---height / 2;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
+}
+
+@include b(slider-handle) {
+  outline: none;
+  height: $slider-handle---size;
+  width: $slider-handle---size;
+  border-radius: $slider-handle---size / 2;
+  background-color: white;
+  box-shadow: $slider-handle---box-shadow;
+  transition: box-shadow .2s $default-cubic-bezier;
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+@include b(slider-handle-indicator) {
+  @include fade-in-scale-up-transition();
+  font-size: 14px;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  background-color: $slider-indicator---background-color;
+  box-shadow: $slider-indicator---box-shadow;
+  border-radius: 4px;
+}
+
+@include b(slider-marks) {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  right: 0;
+  @include b(slider-mark) {
+    position: absolute;
+    transform: translateX(-50%);
+  }
+}
+
+@include b(slider-dots) {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  right: 0;
+  @include b(slider-dot) {
+    position: absolute;
+    transform: translateX(-50%) translateY(-50%);
+    height: $slider-dot---size;
+    width: $slider-dot---size;
+    border-radius: $slider-dot---size / 2;
+    overflow: hidden;
+    box-shadow: $slider-dot---box-shadow;
+  }
+}

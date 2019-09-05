@@ -90,12 +90,18 @@ export default {
   },
   mounted () {
     popoverManager.registerContent(this)
+    if (this.controller) {
+      this.controller.updatePosition = this.updatePosition
+    }
   },
   beforeUpdate () {
 
   },
   updated () {
     popoverManager.registerContent(this)
+    if (this.controller) {
+      this.controller.updatePosition = this.updatePosition
+    }
   },
   beforeDestroy () {
     popoverManager.unregisterContent(this)

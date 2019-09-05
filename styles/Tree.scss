@@ -1,0 +1,6 @@
+@import './mixins/mixins.scss';
+@import './theme/default.scss';
+
+@include b(scaffold) {
+  position: relative;
+}

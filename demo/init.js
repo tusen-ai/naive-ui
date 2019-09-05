@@ -56,6 +56,8 @@ import spinDemo from './components/spinDemo'
 import drawerDemo from './components/drawerDemo'
 import loadingBarDemo from './components/loadingBarDemo'
 import timeDemo from './components/timeDemo'
+import sliderDemo from './components/sliderDemo'
+import treeDemo from './components/treeDemo'
 
 import demo from './demo'
 
@@ -148,7 +150,9 @@ const routes = [
       { path: '/n-spin', component: spinDemo },
       { path: '/n-drawer', component: drawerDemo },
       { path: '/n-loading-bar', component: loadingBarDemo },
-      { path: '/n-time', component: timeDemo }
+      { path: '/n-time', component: timeDemo },
+      { path: '/n-slider', component: sliderDemo },
+      { path: '/n-tree', component: treeDemo }
     ]
   },
   {

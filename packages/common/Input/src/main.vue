@@ -18,6 +18,7 @@
       :placeholder="placeholder"
       :value="value"
       :disabled="disabled === true"
+      :maxlength="maxlength"
       @blur="handleBlur"
       @focus="handleFocus"
       @input="handleInput"
