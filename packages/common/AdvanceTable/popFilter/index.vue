@@ -113,11 +113,9 @@ export default {
   },
   watch: {
     items (val, oldVal) {
-      console.log('TCL: items -> val,oldVal', val, oldVal)
       this.initItems()
     },
     value (val, oldVal) {
-      console.log('TCL: value -> val, oldVal', val, oldVal)
       if (val !== oldVal) {
         this.selectedValue = val
       }

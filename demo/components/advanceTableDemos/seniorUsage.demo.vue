@@ -94,7 +94,9 @@ const _columns3 = ($this) => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
             // 模拟概率发生错误
-            Math.random() > 0.6 ? resolve(items) : reject(new Error('network error'))
+            Math.random() > 0.6
+              ? resolve(items)
+              : reject(new Error('network error'))
           }, 1000)
         })
       },
@@ -113,7 +115,9 @@ const _columns3 = ($this) => {
       asynsFilterItems () {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
-            Math.random() > 0.6 ? resolve(sex) : reject(new Error('network error'))
+            Math.random() > 0.6
+              ? resolve(sex)
+              : reject(new Error('network error'))
           }, 1000)
         })
       }
@@ -127,7 +131,7 @@ const _columns3 = ($this) => {
             size="small"
             onClick={() => this.handleClick(params)}
           >
-                delete
+            delete
           </n-button>
         )
       }
@@ -135,8 +139,7 @@ const _columns3 = ($this) => {
   ]
 }
 export default {
-  components: {
-  },
+  components: {},
   data () {
     const columns = _columns3(this)
     return {
@@ -146,10 +149,8 @@ export default {
       columns,
       search: {
         columns: [
-          { label: 'Name',
-            value: 'name' },
-          { label: 'Age',
-            value: 'age' }
+          { label: 'Name', value: 'name' },
+          { label: 'Age', value: 'age' }
         ],
         onSearch: 'custom',
         placeholder: 'search from net'
@@ -157,18 +158,21 @@ export default {
     }
   },
   mounted () {
-    this.$refs.table.setParams({ filter: { age: [15] }, sorter: { key: 'age', type: -1 }, searcher: { key: 'name', value: 'xiaobai' } })
+    this.$refs.table.setParams({
+      filter: { age: [15] },
+      sorter: { key: 'age', type: -1 },
+      searcher: { key: 'name', value: 'xiaobai' }
+    })
   },
   methods: {
     getData (args) {
       this.loading = true
-      console.log('TCL: getData -> args', args)
       setTimeout(() => {
         let d = new Array(20).fill(0)
         d = d.map((item, idx) => {
           return {
             name: 'xiaobai213213132123213111121' + idx,
-            age: Math.ceil((Math.random() * 20)),
+            age: Math.ceil(Math.random() * 20),
             sex: Math.random() > 0.5 ? 'male' : 'female'
           }
         })
@@ -177,7 +181,6 @@ export default {
       }, 3000)
     },
     onChange (args) {
-      console.log('TCL: onChange -> args', args)
       this.query = args
       /**
        * "filter": {

@@ -409,7 +409,6 @@ export default {
       deep: true,
       handler (val) {
         this.currentFilterColumn = null
-        console.log('TCL: selectedFilter -> val', val)
         let keys = Object.keys(val)
         if (keys.length) {
           this.currentFilterColumn = {}
@@ -616,10 +615,6 @@ export default {
       })
     },
     onAllCheckboxesClick () {
-      console.log(
-        'TCL: onAllCheckboxesClick -> this.allCheckboxesSelect',
-        this.allCheckboxesSelect
-      )
 
       this.showingData.forEach((item) => {
         this.checkBoxes[item._index] = this.allCheckboxesSelect
@@ -767,7 +762,6 @@ export default {
       this.$emit('on-filter-change', this.currentFilterColumn)
     },
     onSortTypeChange ({ i, sortable, key, type, column }) {
-      console.log('TCL: onSortTypeChange -> { i, sortable, key, type, column }', { i, sortable, key, type, column })
       this.currentSortColumn = {
         sortable,
         key,

@@ -38,9 +38,7 @@
           slot="table-operation"
           style="display:inline-block;"
         >
-          <div
-            style="width:100px;display:inline-block;"
-          >
+          <div style="width:100px;display:inline-block;">
             table-operation
           </div>
         </div>
@@ -48,9 +46,7 @@
           slot="table-operation-search-right"
           style="display:inline-block;"
         >
-          <div
-            style="width:100px;display:inline-block;"
-          >
+          <div style="width:100px;display:inline-block;">
             table-operation-search-right
           </div>
         </div>
@@ -123,7 +119,9 @@ const _columns3 = ($this) => {
       asynsFilterItems () {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
-            Math.random() > 0.6 ? resolve(sex) : reject(new Error('network error'))
+            Math.random() > 0.6
+              ? resolve(sex)
+              : reject(new Error('network error'))
           }, 1000)
         })
       }
@@ -145,8 +143,7 @@ const _columns3 = ($this) => {
   ]
 }
 export default {
-  components: {
-  },
+  components: {},
   data () {
     const columns = _columns3(this)
 
@@ -157,10 +154,8 @@ export default {
       search: {
         // 如果你不传入search.column,那么搜索框左侧的搜索选项不会显示
         columns: [
-          { label: 'Name',
-            value: 'name' },
-          { label: 'Age',
-            value: 'age' }
+          { label: 'Name', value: 'name' },
+          { label: 'Age', value: 'age' }
         ],
         onSearch: (key, word, record) => {
           switch (key) {
@@ -184,20 +179,17 @@ export default {
       this.$NMessage.success('Delete successfully', { duration: 2000 })
     },
     getData (args) {
-      console.log('TCL: getData -> args', args)
-
       let d = new Array(20).fill(0)
       d = d.map((item, idx) => {
         return {
           name: 'xiaobai' + idx,
-          age: Math.ceil((Math.random() * 20)),
+          age: Math.ceil(Math.random() * 20),
           sex: Math.random() > 0.5 ? 'male' : 'female'
         }
       })
       return d
     },
     onChange (args) {
-      console.log('TCL: onChange -> args', args)
       /**
        * "filter": {
           "age": {
