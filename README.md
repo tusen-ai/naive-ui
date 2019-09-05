@@ -85,8 +85,8 @@ Vue.use(naiveUi)
 |FormItem|🤔|❌||
 |Form|🤔|❌||
 |Table|🤔|❌|Function is not fulfilled|
-|Time|🚧|||
 |LoadingBar|😍|||
+|Time|🚧|||
 |Anchor|🚧|||
 |Statistic|🚧|||
 |Breadcrumb|🚧|||
@@ -96,10 +96,10 @@ Vue.use(naiveUi)
 |Layout|🚧|||
 |Affix|🚧|||
 |AutoComplete|🚧|||
-|Slider|🚧|||
 |Tree|🚧|||
 |TreeSelect|🚧|||
 |Upload|🚧|||
+|Slider|🚧|||
 |Rating|🚧|||
 |Avator|🚧|||
 |Result|🚧|||

@@ -22,42 +22,35 @@ export default {
       type: String,
       default: 'click'
     },
-    inFunctionalComponent: {
-      type: Boolean,
-      default: true
-    },
     controller: {
       type: Object,
       default: null
     }
   },
   render (h, context) {
+    const slots = context.scopedSlots
     const controller = context.props.controller || {}
     return h(NPopover, {
       props: {
         ...context.props,
         controller
+      },
+      scopedSlots: {
+        activator: () => slots.activator && slots.activator(),
+        default: () => h(PopconfirmPanel, {
+          props: {
+            ...context.props,
+            controller
+          },
+          on: context.listeners,
+          scopedSlots: {
+            action: () => slots.action && slots.action(),
+            icon: () => slots.icon && slots.icon(),
+            default: () => slots.default && slots.default()
+          }
+        })
       }
-    }, [
-      h('template', {
-        slot: 'activator'
-      }, context.slots().activator),
-      h(PopconfirmPanel, {
-        props: {
-          ...context.props,
-          controller
-        },
-        on: context.listeners
-      }, [
-        h('template', {
-          slot: 'action'
-        }, context.slots().action),
-        h('template', {
-          slot: 'icon'
-        }, context.slots().icon),
-        context.slots().default
-      ])
-    ])
+    })
   }
 }
 </script>

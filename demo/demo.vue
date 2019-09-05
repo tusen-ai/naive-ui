@@ -181,6 +181,10 @@ export default {
               path: '/n-select'
             },
             {
+              name: 'Slider',
+              path: '/n-slider'
+            },
+            {
               name: 'Spin',
               path: '/n-spin'
             },
@@ -223,6 +227,10 @@ export default {
             {
               name: 'Transfer',
               path: '/n-transfer'
+            },
+            {
+              name: 'Tree',
+              path: '/n-tree'
             }
           ]
         },

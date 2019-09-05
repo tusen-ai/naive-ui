@@ -168,11 +168,10 @@ $scrollbar-color--hover: rgba(255,255,255,0.3);
   }
 }
 
-@mixin fade-in-scale-up-transition($block, $origin: inherit, $duration: .2s) {
-  &.#{$namespace}-#{$block}--transition-enter-active,
+@mixin fade-in-scale-up-transition($block: 'fade-in-scale-up', $origin: inherit, $duration: .2s) {
   &.#{$namespace}-#{$block}--transition-leave-active {
-    transform: scale(1);
-    opacity: $duration;
+    transform-origin: $origin;
+    transition: opacity $duration $slow-out-cubic-bezier, transform $duration $slow-out-cubic-bezier;
   }
   &.#{$namespace}-#{$block}--transition-enter-active {
     transform-origin: $origin;
@@ -180,16 +179,15 @@ $scrollbar-color--hover: rgba(255,255,255,0.3);
   }
   &.#{$namespace}-#{$block}--transition-enter, &.#{$namespace}-#{$block}--transition-leave-to {
     opacity: 0;
-    transform-origin: $origin;
     transform: scale(.9);
   }
-  &.#{$namespace}-#{$block}--transition-leave-to {
-    transition: opacity $duration $slow-out-cubic-bezier, transform $duration $slow-out-cubic-bezier;
+  &.#{$namespace}-#{$block}--transition-leave, &.#{$namespace}-#{$block}--transition-enter-to {
+    opacity: 1; 
+    transform: scale(1);
   }
 }
 
 @mixin fade-in-transition($block: "fade-in", $enter-duration: .2s, $leave-duration: .2s) {
-  
   &.#{$namespace}-#{$block}--transition-enter-active {
     transition: opacity $enter-duration $default-cubic-bezier;
   }

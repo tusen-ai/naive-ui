@@ -1,8 +1,8 @@
 /* istanbul ignore file */
-import Scaffold from './src/main.vue'
+import Time from './src/main.js'
 
-Scaffold.install = function (Vue) {
-  Vue.component(Scaffold.name, Scaffold)
+Time.install = function (Vue) {
+  Vue.component(Time.name, Time)
 }
 
-export default Scaffold
+export default Time

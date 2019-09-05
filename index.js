@@ -56,6 +56,8 @@ import Spin from './packages/common/Spin'
 import Drawer from './packages/common/Drawer'
 import Time from './packages/common/Time'
 import LoadingBar from './packages/common/LoadingBar'
+import Slider from './packages/common/Slider'
+import Tree from './packages/common/Tree'
 
 function install (Vue) {
   Card.install(Vue)
@@ -116,6 +118,8 @@ function install (Vue) {
   Drawer.install(Vue)
   LoadingBar.install(Vue)
   Time.install(Vue)
+  Slider.install(Vue)
+  Tree.install(Vue)
 }
 
 export default {

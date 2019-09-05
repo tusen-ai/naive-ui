@@ -19,8 +19,11 @@ export default {
     this.$el.setAttribute('n-id', id)
     this.cssNode = document.createElement('style')
     this.cssNode.innerHTML = `[n-id=${id}] .simulate-transparent-text {
-      color: ${this.ascendantBackgroundColor}!important;
-    }`
+  color: ${this.ascendantBackgroundColor}!important;
+}
+[n-id=${id}] .simulate-transparent-background {
+  background-color: ${this.ascendantBackgroundColor}!important;
+}`
     this.cssNode.type = 'text/css'
     document.querySelector('head').appendChild(this.cssNode)
   },

@@ -273,14 +273,14 @@ Vue.use(naiveUi)
 <td>Function is not fulfilled</td>
 </tr>
 <tr>
-<td>Time</td>
-<td style="text-align:center;">🚧</td>
+<td>LoadingBar</td>
+<td style="text-align:center;">😍</td>
 <td style="text-align:center;"></td>
 <td></td>
 </tr>
 <tr>
-<td>LoadingBar</td>
-<td style="text-align:center;">😍</td>
+<td>Time</td>
+<td style="text-align:center;">🚧</td>
 <td style="text-align:center;"></td>
 <td></td>
 </tr>
@@ -339,12 +339,6 @@ Vue.use(naiveUi)
 <td></td>
 </tr>
 <tr>
-<td>Slider</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;"></td>
-<td></td>
-</tr>
-<tr>
 <td>Tree</td>
 <td style="text-align:center;">🚧</td>
 <td style="text-align:center;"></td>
@@ -358,6 +352,12 @@ Vue.use(naiveUi)
 </tr>
 <tr>
 <td>Upload</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Slider</td>
 <td style="text-align:center;">🚧</td>
 <td style="text-align:center;"></td>
 <td></td>

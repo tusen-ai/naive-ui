@@ -110,7 +110,9 @@ const _columns3 = ($this) => {
       asynsFilterItems () {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
-            Math.random() > 0.6 ? resolve(sex) : reject(new Error('network error'))
+            Math.random() > 0.6
+              ? resolve(sex)
+              : reject(new Error('network error'))
           }, 1000)
         })
       }
@@ -132,8 +134,7 @@ const _columns3 = ($this) => {
   ]
 }
 export default {
-  components: {
-  },
+  components: {},
   data () {
     const columns = _columns3(this)
 
@@ -145,10 +146,8 @@ export default {
       search: {
         // 如果你不传入search.column,那么搜索框左侧的搜索选项不会显示
         columns: [
-          { label: 'Name',
-            value: 'name' },
-          { label: 'Age',
-            value: 'age' }
+          { label: 'Name', value: 'name' },
+          { label: 'Age', value: 'age' }
         ],
         onSearch: (key, word, record) => {
           switch (key) {
@@ -174,7 +173,7 @@ export default {
         let index = item._index
         this.data[index] = null
       })
-      this.data = this.data.filter(item => item !== null)
+      this.data = this.data.filter((item) => item !== null)
     },
     computeRowcls (params) {
       if (params.row.age > 15) {
@@ -186,16 +185,16 @@ export default {
       let index = params._index
       this.data.splice(index, 1)
       this.$NMessage.success('Delete successfully,', { duration: 2000 })
-      this.$NMessage.warning('Data change,selected will be clear!', { duration: 4000 })
+      this.$NMessage.warning('Data change,selected will be clear!', {
+        duration: 4000
+      })
     },
     getData (args) {
-      console.log('TCL: getData -> args', args)
-
       let d = new Array(20).fill(0)
       d = d.map((item, idx) => {
         return {
           name: 'xiaobai' + idx,
-          age: Math.ceil((Math.random() * 20)),
+          age: Math.ceil(Math.random() * 20),
           sex: Math.random() > 0.5 ? 'male' : 'female'
         }
       })
@@ -206,7 +205,6 @@ export default {
       this.selectedRow = selectedRow
     },
     onChange (args) {
-      console.log('TCL: onChange -> args', args)
       /**
        * "filter": {
           "age": {
@@ -250,6 +248,6 @@ export default {
 </script>
 <style>
 .age-too-old {
-  color: rgba(255,255,255,.3);
+  color: rgba(255, 255, 255, 0.3);
 }
 </style>

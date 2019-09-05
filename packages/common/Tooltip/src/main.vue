@@ -58,23 +58,22 @@ export default {
     }
   },
   render (h, context) {
+    const slots = context.scopedSlots
     return h(NPopover, {
       on: context.listeners,
       props: {
-        ...context.props,
-        inFunctionalComponent: true
+        ...context.props
+      },
+      scopedSlots: {
+        activator: () => slots.activator && slots.activator(),
+        default: () => h('div', {
+          staticClass: 'n-tooltip__content',
+          class: {
+            'n-tooltip__content--fix-width': context.props.width !== null || context.props.maxWidth !== null
+          }
+        }, slots.default && slots.default())
       }
-    }, [
-      h('template', {
-        slot: 'activator'
-      }, context.scopedSlots.activator()),
-      h('div', {
-        staticClass: 'n-tooltip__content',
-        class: {
-          'n-tooltip__content--fix-width': context.props.width !== null || context.props.maxWidth !== null
-        }
-      }, context.scopedSlots.default())
-    ])
+    })
   }
 }
 </script>

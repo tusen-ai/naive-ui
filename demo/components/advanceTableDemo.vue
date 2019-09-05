@@ -1028,7 +1028,6 @@ export default {
             value: 15
           }],
           onFilter: (value, record) => {
-            console.log('TCL: data -> value.includes(record.age)', value.includes(record.age))
             return value.includes(record.age)
           },
           render: (h, params) => {
