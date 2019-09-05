@@ -2,7 +2,7 @@
   <n-modal
     v-model="isActive"
     :activate-event="activateEvent"
-    @toggle="toggle"
+    @input="toggle"
   >
     <!-- <transition name="n-modal-content--transition"> -->
     <div class="n-confirm">
@@ -82,9 +82,9 @@ export default {
   computed: {
     iconType () {
       const colors = {
-        'error': { type: 'ios-close-circle', color: '#FF92A4' },
-        'confirm': { type: 'md-alert', color: '#FF92A4' },
-        'success': { type: 'ios-checkmark-circle', color: '#63E2B7' }
+        error: { type: 'ios-close-circle', color: '#FF92A4' },
+        confirm: { type: 'md-alert', color: '#FF92A4' },
+        success: { type: 'ios-checkmark-circle', color: '#63E2B7' }
       }
       return colors[this.type]
     }
@@ -110,7 +110,9 @@ export default {
     },
     handleOk () {
       this.onOk()
-      if (this.loading !== true) { this.isActive = false }
+      if (this.loading !== true) {
+        this.isActive = false
+      }
     }
   }
 }
