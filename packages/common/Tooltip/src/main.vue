@@ -67,13 +67,13 @@ export default {
     }, [
       h('template', {
         slot: 'activator'
-      }, context.slots().activator),
+      }, context.scopedSlots.activator()),
       h('div', {
         staticClass: 'n-tooltip__content',
         class: {
           'n-tooltip__content--fix-width': context.props.width !== null || context.props.maxWidth !== null
         }
-      }, context.slots().default)
+      }, context.scopedSlots.default())
     ])
   }
 }

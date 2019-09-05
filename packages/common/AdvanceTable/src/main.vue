@@ -1,16 +1,16 @@
 <template>
   <div
     ref="tableWrapper"
-    class="n-advance-tabel__wrapper"
+    class="n-advance-table__wrapper n-advance-table"
   >
     <div class="n-advance-table__operation">
-      <div class="n-advance-table__operation__left">
+      <div class="n-advance-table__operation--left">
         <slot name="table-operation-batch-left" />
         <section class="n-advance-table__operation__bacth" />
         <slot name="table-operation-batch-right" />
       </div>
       <div
-        class="n-advance-table__operation__right"
+        class="n-advance-table__operation--right"
         :style="search ? 'margin-bottom: 18px;' : ''"
       >
         <slot name="table-operation" />
@@ -164,7 +164,7 @@
     <!-- 分页 -->
     <div
       v-if="pagination !== false && showingData.length"
-      class="n-advanced-table__pagination"
+      class="n-advance-table__pagination"
     >
       <n-pagination
         v-model="currentPage"
@@ -480,7 +480,7 @@ export default {
     computeTdClass (column, params) {
       let className = []
       if (column.ellipsis) {
-        className.push('n-advanced-table__td-text-ellipsis')
+        className.push('n-advanced-table__td-text--ellipsis')
       }
       if (!column.className) {
         return className
