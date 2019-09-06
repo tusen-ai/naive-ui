@@ -12,7 +12,6 @@
   >
     <transition
       name="n-fade-in-width-expand"
-      appear
     >
       <div
         v-if="(hasIcon || loading) && !iconOnRight"
@@ -52,7 +51,7 @@
     </div>
     <transition
       name="n-fade-in-width-expand"
-      appear
+      :appear="loading"
     >
       <div
         v-if="(loading || hasIcon) && iconOnRight"

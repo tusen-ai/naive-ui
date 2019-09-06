@@ -4,9 +4,10 @@
     appear
     @after-enter="handleAfterEnter"
     @after-leave="handleAfterLeave"
+    @leave-cancelled="handleLeaveCancelled"
   >
     <div
-      v-show="!enter || (status !== 'finishing' && status !== 'error')"
+      v-show="!enter || status === 'starting'"
       class="n-loading-bar-container"
     >
       <div
@@ -39,50 +40,75 @@ export default {
     handleAfterEnter () {
       this.enter = true
     },
-    start () {
-      if (this.status !== 'starting') {
-        this.progress = 0
+    handleLeaveCancelled () {
+      this.enter = false
+    },
+    start (fromProgress = 0, toProgress = 80) {
+      if (this.status === null) {
         this.status = 'starting'
-        this.$refs.loadingBar.style.transition = 'max-width .15s linear, background-color .15s linear'
-        window.setTimeout(() => {
+        return this.$nextTick().then(() => {
+          this.$refs.loadingBar.getBoundingClientRect()
+          this.progress = toProgress
+          return this.$nextTick()
+        })
+      } else {
+        this.progress = fromProgress
+        return this.$nextTick().then(() => {
+          this.$refs.loadingBar.style.transition = 'none'
+          this.$refs.loadingBar.getBoundingClientRect()
           this.$refs.loadingBar.style.transition = null
-          this.$refs.loadingBar.getBoundingClientRect()
-          this.progress = 80
-        }, 150)
-      } else if (this.status === null) {
-        this.progress = 0
-        this.$nextTick().then(() => {
-          this.$refs.loadingBar.getBoundingClientRect()
-          this.progress = 80
+          this.status = 'starting'
+          this.progress = toProgress
+          return this.$nextTick()
         })
       }
     },
     finish (callback) {
       this.finishCallback = callback
       if (this.status === 'finishing') {
-        // do nothing
+        this.start(100, 100).then(() => {
+          this.finish(callback)
+        })
       } else if (this.status === null) {
-        this.status = 'finishing'
         this.progress = 100
+        this.$nextTick().then(() => {
+          this.$refs.loadingBar.style.transition = 'none'
+          this.$refs.loadingBar.getBoundingClientRect()
+          this.$refs.loadingBar.style.transition = null
+          this.status = 'finishing'
+        })
       } else {
-        this.progress = 100
-        this.status = 'finishing'
+        this.$nextTick(() => {
+          this.progress = 100
+          this.status = 'finishing'
+        })
       }
-    },
-    handleAfterLeave () {
-      this.finishCallback()
     },
     error (callback) {
       this.finishCallback = callback
       if (this.status === 'error') {
-        // do nothing
+        this.start(100, 100).then(() => {
+          this.error(callback)
+        })
       } else if (this.status === null) {
         this.progress = 100
-        this.status = 'error'
+        this.$nextTick().then(() => {
+          this.$refs.loadingBar.style.transition = 'none'
+          this.$refs.loadingBar.getBoundingClientRect()
+          this.$refs.loadingBar.style.transition = null
+          this.status = 'error'
+        })
       } else {
-        this.progress = 100
-        this.status = 'error'
+        this.$nextTick(() => {
+          this.progress = 100
+          this.status = 'error'
+        })
       }
+    },
+    handleAfterLeave () {
+      this.enter = false
+      this.status = null
+      this.finishCallback()
     }
   }
 }

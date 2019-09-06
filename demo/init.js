@@ -165,4 +165,13 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach(function (to, from, next) {
+  Vue.prototype.$NLoadingBar.start()
+  next()
+})
+
+router.afterEach(function () {
+  Vue.prototype.$NLoadingBar.finish()
+})
+
 export { Vue, router }

@@ -2,7 +2,7 @@
 @import './theme/default.scss';
 
 @include b(loading-bar-container) {
-  @include fade-in-transition(fade-in, .3s, .6s);
+  @include fade-in-transition(fade-in, .3s, .8s);
   z-index: 5000;
   position: fixed;
   top: 0;

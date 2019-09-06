@@ -85,7 +85,12 @@ Vue.use(naiveUi)
 |FormItem|🤔|❌||
 |Form|🤔|❌||
 |Table|🤔|❌|Function is not fulfilled|
+|Slider|🤔|||
 |LoadingBar|😍|||
+|AutoComplete|🚧|||
+|Tree|🚧|||
+|TreeSelect|🚧|||
+|Upload|🚧|||
 |Time|🚧|||
 |Anchor|🚧|||
 |Statistic|🚧|||
@@ -95,17 +100,12 @@ Vue.use(naiveUi)
 |Grid|🚧|||
 |Layout|🚧|||
 |Affix|🚧|||
-|AutoComplete|🚧|||
-|Tree|🚧|||
-|TreeSelect|🚧|||
-|Upload|🚧|||
-|Slider|🚧|||
 |Rating|🚧|||
 |Avator|🚧|||
 |Result|🚧|||
-|Menu|✋|||
-|Typography|✋|||
-|Mentions|✋|||
+|Menu|✋||Not Planne|
+|Typography|✋||Not Planne|
+|Mentions|✋||Not Planne|
 |Calendar|✋||Not Planned|
 |Carousel|✋||Not Planned|
 

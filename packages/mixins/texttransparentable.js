@@ -16,15 +16,15 @@ export default {
       }
     }
     const id = 'x' + Math.random().toString(16).slice(9)
-    this.$el.setAttribute('n-id', id)
+    this.$el.setAttribute('n-background-id', id)
     this.cssNode = document.createElement('style')
-    this.cssNode.innerHTML = `[n-id=${id}] .simulate-transparent-text {
+    this.cssNode.innerHTML = `[n-background-id=${id}] .simulate-transparent-text {
   color: ${this.ascendantBackgroundColor}!important;
 }
-[n-id=${id}] .simulate-transparent-background {
+[n-background-id=${id}] .simulate-transparent-background {
   background-color: ${this.ascendantBackgroundColor}!important;
 }
-[n-id=${id}] .simulate-transparent-stroke circle {
+[n-background-id=${id}] .simulate-transparent-stroke circle {
   stroke: ${this.ascendantBackgroundColor}!important;
 }
 `

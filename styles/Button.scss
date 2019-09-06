@@ -21,7 +21,7 @@
       margin-left: 4px;
     }
   }
-  @include b(content) {
+  @include e(content) {
     white-space: nowrap;
   }
   @include m(disabled) {
