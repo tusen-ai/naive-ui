@@ -1,16 +1,56 @@
 @import "./mixins/mixins.scss";
 @import "./theme/default.scss";
-// TODO: 滚动条
-.n-advance-tabel__wrapper {
-  width: 100%;
-  
-  // overflow: hidden;
-  .n-advance-table__tbody {
+@include b(advance-table){
+  @include e(wrapper){
+    width: 100%;
+  }
+  @include e(tbody){
     overflow: hidden;
     border-radius: 12px;
     box-shadow: 0 3px 20px 6px rgba(0, 0, 0, 0.2);
   }
-  .n-table {
+  @include e(td-text){
+    &-center{
+      text-align: center;
+    }
+    &-left{
+      text-align: left;
+    }
+    &-right{
+      text-align: right;
+    }
+    @include m(ellipsis){
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      &>*{
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+    }
+  }
+  @include e(no-data-tip){
+    padding: 5px;
+    text-align: center;
+    width: 100%;
+    display: table-cell;
+  }
+  @include e(pagination){
+    margin-top: 27px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  @include e(operation){
+    display: flex;
+    justify-content:space-between;
+    &--right,&--left{
+      display: flex;
+    }
+
+  }
+  
+  @include b(table) {
     // background-color: #2b3147;
     table {
       word-wrap: break-word;
@@ -40,44 +80,5 @@
     table thead tr th:last-of-type {
       padding-left: 32px;
     }
-  }
-  .n-advanced-table__td-text-ellipsis{
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-  .n-advanced-table__td-text-ellipsis>*{
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-  .n-advanced-table__td-text{
-    &-center{
-      text-align: center;
-    }
-    &-left{
-      text-align: left;
-    }
-    &-right{
-      text-align: right;
-    }
-  }
-  .n-advanced-table__pagination {
-    margin-top: 27px;
-    display: flex;
-    justify-content: flex-end;
-  }
-  .n-advance-table__operation {
-    display: flex;
-    justify-content:space-between;
-  }
-  .n-advance-table__operation__right,.n-advance-table__operation__left {
-    display: flex;
-  }
-  .n-no-data-tip {
-    padding: 5px;
-    text-align: center;
-    width: 100%;
-    display: table-cell;
   }
 }
