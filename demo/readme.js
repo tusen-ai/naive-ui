@@ -279,8 +279,8 @@ Vue.use(naiveUi)
 <td></td>
 </tr>
 <tr>
-<td>LoadingBar</td>
-<td style="text-align:center;">😍</td>
+<td>Time</td>
+<td style="text-align:center;">🚧</td>
 <td style="text-align:center;"></td>
 <td></td>
 </tr>

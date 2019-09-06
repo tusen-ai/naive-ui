@@ -21,6 +21,9 @@
       >
         <n-spin
           v-if="loading"
+          :class="{
+            'simulate-transparent-stroke': type === 'primary'
+          }"
           :size="null"
           :stroke-width="4"
         />
@@ -54,10 +57,15 @@
       <div
         v-if="(loading || hasIcon) && iconOnRight"
         class="n-button__icon n-button__icon--right"
-        :class="{'n-button__icon--slot': $slots.icon }"
+        :class="{
+          'n-button__icon--slot': $slots.icon
+        }"
       >
         <n-spin
           v-if="loading"
+          :class="{
+            'simulate-transparent-stroke': type === 'primary'
+          }"
           :size="null"
           :stroke-width="4"
         />

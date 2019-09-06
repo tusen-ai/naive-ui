@@ -34,6 +34,15 @@
       >
         Loading
       </n-button>
+      <n-button
+        :loading="loading"
+        type="primary"
+        size="large"
+        round
+        @click="loading = !loading"
+      >
+        Loading
+      </n-button>
       <!--EXAMPLE_END-->
     </div>
     <n-doc-source-block>

@@ -23,7 +23,11 @@ export default {
 }
 [n-id=${id}] .simulate-transparent-background {
   background-color: ${this.ascendantBackgroundColor}!important;
-}`
+}
+[n-id=${id}] .simulate-transparent-stroke circle {
+  stroke: ${this.ascendantBackgroundColor}!important;
+}
+`
     this.cssNode.type = 'text/css'
     document.querySelector('head').appendChild(this.cssNode)
   },

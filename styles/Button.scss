@@ -37,7 +37,7 @@
     height: $tiny-height;
     padding: 0 6px;
     @include m(round) {
-      padding: 0 14px;
+      padding: 0 10px;
       border-radius: $tiny-height / 2;
     }
     @include e(content) {
@@ -69,7 +69,7 @@
     padding: 0 10px;
     @include m(round) {
       border-radius: $small-height / 2;
-      padding: 0 18px;
+      padding: 0 14px;
     }
     @include e(content) {
       line-height: $small-height;
@@ -99,7 +99,7 @@
     height: $default-height;
     padding: 0 14px;
     @include m(round) {
-      padding: 0 22px;
+      padding: 0 18px;
       border-radius: $default-height / 2;
     }
     @include e(content) {
@@ -130,7 +130,7 @@
     height: $large-height;
     padding: 0 18px;
     @include m(round) {
-      padding: 0 26px;
+      padding: 0 22px;
       border-radius: $large-height / 2;
     }
     @include e(content) {

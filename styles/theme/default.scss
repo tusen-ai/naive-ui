@@ -288,22 +288,26 @@ $scrollbar-color--hover: rgba(255,255,255,0.3);
 
 @mixin fade-in-width-expand-transition($block: "fade-in-width-expand", $duration: .2s, $delay: .1s) {
   &.#{$namespace}-#{$block}-leave-active {
-    transition: opacity $duration $default-cubic-bezier, max-width $duration $default-cubic-bezier $delay;
+    transition: opacity $duration $default-cubic-bezier, max-width $duration $default-cubic-bezier $delay, margin-right $duration $default-cubic-bezier, margin-left $duration $default-cubic-bezier;
   }
   &.#{$namespace}-#{$block}-enter-active {
-    transition: opacity $duration $default-cubic-bezier $delay, max-width $duration $default-cubic-bezier;
+    transition: opacity $duration $default-cubic-bezier $delay, max-width $duration $default-cubic-bezier, margin-right $duration $default-cubic-bezier, margin-left $duration $default-cubic-bezier;
   }
   &.#{$namespace}-#{$block}-enter-to {
     opacity: 1;
   }
   &.#{$namespace}-#{$block}-enter {
     max-width: 0!important;
+    margin-left: 0!important;
+    margin-right: 0!important;
     opacity: 0;
   }
   &.#{$namespace}-#{$block}-leave {
     opacity: 1;
   }
   &.#{$namespace}-#{$block}-leave-to {
+    margin-left: 0!important;
+    margin-right: 0!important;
     max-width: 0!important;
     opacity: 0!important;
   }
