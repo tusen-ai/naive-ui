@@ -273,8 +273,38 @@ Vue.use(naiveUi)
 <td>Function is not fulfilled</td>
 </tr>
 <tr>
+<td>Slider</td>
+<td style="text-align:center;">🤔</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
 <td>LoadingBar</td>
 <td style="text-align:center;">😍</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>AutoComplete</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Tree</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>TreeSelect</td>
+<td style="text-align:center;">🚧</td>
+<td style="text-align:center;"></td>
+<td></td>
+</tr>
+<tr>
+<td>Upload</td>
+<td style="text-align:center;">🚧</td>
 <td style="text-align:center;"></td>
 <td></td>
 </tr>
@@ -333,36 +363,6 @@ Vue.use(naiveUi)
 <td></td>
 </tr>
 <tr>
-<td>AutoComplete</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;"></td>
-<td></td>
-</tr>
-<tr>
-<td>Tree</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;"></td>
-<td></td>
-</tr>
-<tr>
-<td>TreeSelect</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;"></td>
-<td></td>
-</tr>
-<tr>
-<td>Upload</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;"></td>
-<td></td>
-</tr>
-<tr>
-<td>Slider</td>
-<td style="text-align:center;">🚧</td>
-<td style="text-align:center;"></td>
-<td></td>
-</tr>
-<tr>
 <td>Rating</td>
 <td style="text-align:center;">🚧</td>
 <td style="text-align:center;"></td>
@@ -384,19 +384,19 @@ Vue.use(naiveUi)
 <td>Menu</td>
 <td style="text-align:center;">✋</td>
 <td style="text-align:center;"></td>
-<td></td>
+<td>Not Planne</td>
 </tr>
 <tr>
 <td>Typography</td>
 <td style="text-align:center;">✋</td>
 <td style="text-align:center;"></td>
-<td></td>
+<td>Not Planne</td>
 </tr>
 <tr>
 <td>Mentions</td>
 <td style="text-align:center;">✋</td>
 <td style="text-align:center;"></td>
-<td></td>
+<td>Not Planne</td>
 </tr>
 <tr>
 <td>Calendar</td>
