@@ -142,7 +142,7 @@
           </n-tr>
           <div
             v-if="showingData.length === 0"
-            class="n-no-data-tip"
+            class="n-advance-table__no-data-tip"
           >
             No data
           </div>
@@ -615,7 +615,6 @@ export default {
       })
     },
     onAllCheckboxesClick () {
-
       this.showingData.forEach((item) => {
         this.checkBoxes[item._index] = this.allCheckboxesSelect
       })
