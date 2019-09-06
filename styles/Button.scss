@@ -6,160 +6,181 @@
   align-items: center;
   justify-content: center;
   box-shadow: inset 0 0 0 1.2px $button-default-border-color;
-  cursor: pointer;
   user-select: none;
   font-weight: 700;
   text-align: center;
-  .n-button__icon {
-    margin-right: 2px;
-    &.n-button__icon--right {
+  vertical-align: baseline;
+  border-radius: $button-border-radius;
+  cursor: pointer;
+  transition: background-color .15s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
+  @include e(icon) {
+    @include fade-in-width-expand-transition();
+    margin-right: 6px;
+    @include m(right) {
       margin-right: 0px;
       margin-left: 4px;
     }
   }
-  .n-button__content {
+  @include b(content) {
     white-space: nowrap;
   }
-  border-radius: $button-border-radius;
-  &.n-button--disabled {
+  @include m(disabled) {
     cursor: not-allowed;
-    opacity: .43;
+    opacity: .4;
   }
-  &.n-button--tiny-size {
+  @include m(loading) {
+    cursor: default;
+    opacity: .6;
+  }
+  @include m(tiny-size) {
     font-size: $button-tiny-font-size;
     height: $tiny-height;
-    padding: 0 14px;
-    &.is-round {
+    padding: 0 6px;
+    @include m(round) {
+      padding: 0 14px;
       border-radius: $tiny-height / 2;
     }
-    .n-button__content {
+    @include e(content) {
       line-height: $tiny-height;
     }
-    .n-button__icon {
+    @include e(icon) {
       height: 16px;
       width: 16px;
+      max-width: 16px;
       .n-icon {
         font-size: 16px;
         display: block;
       }
-    }
-    .n-button__icon--slot {
-      height: 14px;
-      width: 14px;
-      line-height: 14px;
-      .n-icon-slot {
+      @include m(slot) {
         height: 14px;
         width: 14px;
-        font-size: 14px;
+        line-height: 14px;
+        .n-icon-slot {
+          height: 14px;
+          width: 14px;
+          font-size: 14px;
+        }
       }
     }
   }
-  &.n-button--small-size {
+  @include m(small-size) {
     font-size: $button-small-font-size;
     height: $small-height;
-    padding: 0 18px;
-    &.is-round {
+    padding: 0 10px;
+    @include m(round) {
       border-radius: $small-height / 2;
+      padding: 0 18px;
     }
-    .n-button__content {
+    @include e(content) {
       line-height: $small-height;
     }
-    .n-button__icon {
+    @include e(icon) {
+      height: 16px;
+      width: 16px;
+      max-width: 16px;
+      .n-icon {
+        font-size: 16px;
+        display: block;
+      }
+      @include m(slot) {
+        height: 16px;
+        width: 16px;
+        line-height: 16px;
+        .n-icon-slot {
+          height: 16px;
+          width: 16px;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+  @include m(medium-size) {
+    font-size: $button-default-font-size;
+    height: $default-height;
+    padding: 0 14px;
+    @include m(round) {
+      padding: 0 22px;
+      border-radius: $default-height / 2;
+    }
+    @include e(content) {
+      line-height: $default-height;
+    }
+    @include e(icon) {
       height: 18px;
       width: 18px;
+      max-width: 18px;
       .n-icon {
         font-size: 18px;
         display: block;
       }
-    }
-    .n-button__icon--slot {
-      height: 16px;
-      line-height: 16px;
-      width: 16px;
-      .n-icon-slot {
-        height: 16px;
-        width: 16px;
-        font-size: 16px;
-      }
-    }
-  }
-  &.n-button--default-size, &.n-button--medium-size {
-    font-size: $button-default-font-size;
-    height: $default-height;
-    padding: 0 24px;
-    &.is-round {
-      border-radius: $default-height / 2;
-    }
-    .n-button__content {
-      line-height: $default-height;
-    }
-    .n-button__icon {
-      height: 20px;
-      width: 20px;
-      .n-icon {
-        font-size: 20px;
-      }
-    }
-    .n-button__icon--slot {
-      height: 18px;
-      line-height: 18px;
-      width: 18px;
-      .n-icon-slot {
+      @include m(slot) {
         height: 18px;
         width: 18px;
-        font-size: 18px;
+        line-height: 18px;
+        .n-icon-slot {
+          height: 18px;
+          width: 18px;
+          font-size: 18px;
+        }
       }
     }
   }
-  &.n-button--large-size {
+  @include m(large-size) {
     font-size: $button-large-font-size;
     height: $large-height;
-    padding: 0 24px;
-    &.is-round {
+    padding: 0 18px;
+    @include m(round) {
+      padding: 0 26px;
       border-radius: $large-height / 2;
     }
-    .n-button__content {
+    @include e(content) {
       line-height: $large-height;
     }
-    .n-button__icon {
+    @include e(icon) {
       height: 20px;
       width: 20px;
+      max-width: 20px;
       .n-icon {
         font-size: 20px;
+        display: block;
       }
-    }
-    .n-button__icon--slot {
-      line-height: 18px;
-      height: 18px;
-      width: 18px;
-      .n-icon-slot {
-        height: 18px;
-        width: 18px;
-        font-size: 18px;
+      @include m(slot) {
+        height: 20px;
+        width: 20px;
+        line-height: 20px;
+        .n-icon-slot {
+          height: 20px;
+          width: 20px;
+          font-size: 20px;
+        }
       }
     }
   }
   
-  
-  &.is-default {
+  @include m(default-type) {
     color: $button-default-text-color;
     background-color: $button-default-background-color;
-    &:hover {
-      background-color: $button-default-background-color--hover;
-    }
-    &:active {
-      background-color: $button-default-background-color--active;
+    &:not(.n-button--disabled) {
+      &:hover {
+        background-color: $button-default-background-color--hover;
+      }
+      &:active {
+        background-color: $button-default-background-color--active;
+      }
     }
   }
-  &.is-primary {
+  
+  @include m(primary-type) {
     color: #1F263EFF;
     background-color: $button-primary-background-color;
     box-shadow: none;
-    &:hover {
-      background-color: $button-primary-background-color--hover;
-    }
-    &:active {
-      background-color: $button-primary-background-color--active;
+    &:not(.n-button--disabled) {
+      &:hover {
+        background-color: $button-primary-background-color--hover;
+      }
+      &:active {
+        background-color: $button-primary-background-color--active;
+      }
     }
   }
 }
