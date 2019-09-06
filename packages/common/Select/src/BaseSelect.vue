@@ -162,13 +162,6 @@ export default {
     }
   },
   computed: {
-    firstOption () {
-      if (this.linkedOptions && this.linkedOptions.length) {
-        return this.linkedOptions[0]
-      } else {
-        return null
-      }
-    },
     filteredOptions () {
       if (this.remote) {
         return this.options
@@ -194,9 +187,6 @@ export default {
         return this.getOption(this.value)
       }
       return null
-    },
-    clearedPattern () {
-      return this.pattern.toLowerCase().trim()
     }
   },
   watch: {

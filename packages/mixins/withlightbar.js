@@ -30,6 +30,9 @@ export default {
       this.lightBarVanishTimerId = window.setTimeout(() => {
         this.showLightBar = false
       }, delay)
+    },
+    hideLightBarSync () {
+      this.showLightBar = false
     }
   }
 }

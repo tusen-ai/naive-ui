@@ -42,10 +42,6 @@ export default {
       type: String,
       default: 'default'
     },
-    verboseTransition: {
-      type: Boolean,
-      default: false
-    },
     emitOption: {
       type: Boolean,
       default: false

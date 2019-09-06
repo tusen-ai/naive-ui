@@ -52,7 +52,7 @@
              * This method to activate hideLightBar is ridiculous, however using
              * event handler still has some problem.
              */
-            hideLightBar()
+            hideLightBarSync()
           }}
           loading
         </div>
@@ -61,7 +61,7 @@
           class="n-base-select-menu__item n-base-select-menu__item--no-data"
         >
           {{
-            hideLightBar()
+            hideLightBarSync()
           }}
           {{ noDataContent }}
         </div>
@@ -70,7 +70,7 @@
           class="n-base-select-menu__item n-base-select-menu__item--not-found"
         >
           {{
-            hideLightBar()
+            hideLightBarSync()
           }}
           {{ notFoundContent }}
         </div>
