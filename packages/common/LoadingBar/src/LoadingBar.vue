@@ -78,7 +78,7 @@ export default {
           this.status = 'finishing'
         })
       } else {
-        this.$nextTick(() => {
+        this.$nextTick().then(() => this.$nextTick()).then(() => {
           this.progress = 100
           this.status = 'finishing'
         })
@@ -99,7 +99,7 @@ export default {
           this.status = 'error'
         })
       } else {
-        this.$nextTick(() => {
+        this.$nextTick().then(() => this.$nextTick()).then(() => {
           this.progress = 100
           this.status = 'error'
         })
