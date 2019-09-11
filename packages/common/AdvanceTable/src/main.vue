@@ -289,8 +289,9 @@ export default {
       if (this.pagination) {
         // TODO: check count limit is exisit
         let total = this.pagination.total
-        if (this.pagination.custom !== 'custom' && this.currentFilterColumn) {
+        if (this.pagination.custom !== true) {
           total = this.searchData.length
+          console.log('TCL: pageCount -> total', total)
         }
         return Math.ceil(total / this.pagination.limit)
       }
