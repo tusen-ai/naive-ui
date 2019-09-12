@@ -150,6 +150,7 @@
     }
   }
   .n-input__textarea {
+    margin: 0;
     padding: 10px 14px;
     resize: vertical;
     @include scrollbar;
