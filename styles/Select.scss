@@ -9,6 +9,19 @@
   color: $select-text-color;
   font-family: $default-font-family;
   text-align: start;
+  vertical-align: baseline;
+  @include m(small-size) {
+    line-height: 28px;
+    height: 28px;
+  }
+  @include m(medium-size) {
+    line-height: 34px;
+    height: 34px;
+  }
+  @include m(large-size) {
+    line-height: 40px;
+    height: 40px;
+  }
 }
 
 .n-select-detached-content-container {
