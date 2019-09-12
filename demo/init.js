@@ -68,6 +68,7 @@ import datePickerDebug from './debugComponents/datePickerDebug'
 import backTopDebug from './debugComponents/backTopDebug'
 import cancelMarkDebug from './debugComponents/cancelMarkDebug'
 import cascaderDebug from './debugComponents/cascaderDebug'
+import verticalAlignDebug from './debugComponents/verticalAlignDebug'
 
 Vue.use(NaiveUI)
 Vue.use(VueRouter)
@@ -152,7 +153,8 @@ const routes = [
       { path: '/n-loading-bar', component: loadingBarDemo },
       { path: '/n-time', component: timeDemo },
       { path: '/n-slider', component: sliderDemo },
-      { path: '/n-tree', component: treeDemo }
+      { path: '/n-tree', component: treeDemo },
+      { path: '/n-vertical-align-debug', component: verticalAlignDebug }
     ]
   },
   {

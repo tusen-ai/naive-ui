@@ -1,6 +1,17 @@
 @import './mixins/mixins.scss';
 @import './theme/default.scss';
 
-@include b(scaffold) {
-  position: relative;
+@include b(tree) {
+  ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  @include b(tree-children-wrapper) {
+    @include height-seamlessly-expand-transition();
+    margin-left: 16px;
+  }
+  @include b(tree-node) {
+    
+  }
 }

@@ -1,8 +1,8 @@
 /* istanbul ignore file */
-import Scaffold from './src/main.vue'
+import Tree from './src/main.js'
 
-Scaffold.install = function (Vue) {
-  Vue.component(Scaffold.name, Scaffold)
+Tree.install = function (Vue) {
+  Vue.component(Tree.name, Tree)
 }
 
-export default Scaffold
+export default Tree
