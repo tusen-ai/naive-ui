@@ -2,6 +2,9 @@
   <div
     ref="select"
     class="n-select"
+    :class="{
+      [`n-select--${size}-size`]: size
+    }"
     @keydown.up.prevent="() => {}"
     @keydown.down.prevent="() => {}"
     @keydown.space="handleKeyDownSpace"

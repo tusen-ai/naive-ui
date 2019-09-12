@@ -4,6 +4,8 @@
 @include b(input) {
   position: relative;
   width: 100%;
+  display: inline-block;
+  vertical-align: baseline;
   .n-input__icon {
     position: absolute;
     line-height: 18px;
@@ -63,6 +65,7 @@
   &.n-input--small-size {
     &:not(.n-input--textarea) {
       height: $small-height;
+      line-height: $small-height;
     }
     .n-input__textarea {
       font-size: $small-input-font-size;
@@ -77,6 +80,7 @@
   &.n-input--default-size, &.n-input--medium-size {
     &:not(.n-input--textarea) {
       height: $default-height;
+      line-height: $default-height;
     }
     .n-input__textarea {
       font-size: $default-input-font-size;
@@ -91,6 +95,7 @@
   &.n-input--large-size {
     &:not(.n-input--textarea) {
       height: $large-height;
+      line-height: $large-height;
     }
     .n-input__textarea {
       font-size: $large-input-font-size;

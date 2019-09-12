@@ -270,8 +270,12 @@ export default {
               path: '/n-back-top-debug'
             },
             {
-              name: 'Cascader',
+              name: 'CascaderDebug',
               path: '/n-cascader-debug'
+            },
+            {
+              name: 'VerticalAlignDebug',
+              path: '/n-vertical-align-debug'
             }
           ]
         }

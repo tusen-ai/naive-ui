@@ -40,7 +40,7 @@ export default {
     },
     size: {
       type: String,
-      default: 'default'
+      default: 'medium'
     },
     emitOption: {
       type: Boolean,
