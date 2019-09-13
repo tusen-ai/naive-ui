@@ -334,7 +334,8 @@ export default {
       }
     },
     handleDragStart (e) {
-      e.preventDefault()
+      // e.preventDefault()
+      // for n-tree component to work...
     }
   }
 }

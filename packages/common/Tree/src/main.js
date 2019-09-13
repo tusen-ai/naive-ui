@@ -5,6 +5,8 @@ import {
   menuOptions
 } from '../../../utils/data/menuModel'
 
+import NTreeNode from './node'
+
 const NTreeNodeExpandWrapper = {
   methods: {
     handleBeforeLeave () {
@@ -44,70 +46,35 @@ const NTreeNodeExpandWrapper = {
   }
 }
 
-const NTreeNode = {
-  props: {
-    data: {
-      type: Object,
-      required: true
-    },
-    expand: {
-      type: Boolean,
-      default: false
-    }
-  },
-  methods: {
-    handleClick () {
-      this.$emit('click', this.data)
-    }
-  },
-  render (h) {
-    return h('span', {
-      on: {
-        click: this.handleClick
-      }
-    }, [
-      this.data.isLeaf ? null : this.expand ? 'v ' : '> ',
-      this.data.label
-    ])
-  }
-}
-
 function genSingleNode (node, h, self) {
   if (node.isLeaf) {
-    return h('li', {
-      staticClass: 'n-tree-node'
-    }, [
-      h(NTreeNode, {
-        props: {
-          data: node,
-          expand: self.expandNodesId.includes(node.id)
-        },
-        on: {
-          click: self.handleNodeClick
-        }
-      })
-    ])
+    return h(NTreeNode, {
+      props: {
+        data: node,
+        expand: self.expandNodesId.includes(node.id),
+        draggable: self.draggable
+      },
+      on: {
+        click: self.handleNodeClick
+      }
+    })
   } else if (node.children) {
-    return h('li', {
-      staticClass: 'n-tree-node'
-    }, [
-      h(NTreeNode, {
-        props: {
-          data: node,
-          expand: self.expandNodesId.includes(node.id)
-        },
-        on: {
-          click: self.handleNodeClick
-        }
-      }),
-      h(NTreeNodeExpandWrapper, {},
-        [self.expandNodesId.includes(node.id)
-          ? h('ul', {
-            staticClass: 'n-tree-children-wrapper'
-          }, node.children.map(child => genSingleNode(child, h, self)))
-          : null]
-      )
-    ])
+    return h(NTreeNode, {
+      props: {
+        data: node,
+        expand: self.expandNodesId.includes(node.id),
+        draggable: self.draggable
+      },
+      on: {
+        click: self.handleNodeClick
+      }
+    }, [h(NTreeNodeExpandWrapper, {},
+      [self.expandNodesId.includes(node.id)
+        ? h('ul', {
+          staticClass: 'n-tree-children-wrapper'
+        }, node.children.map(child => genSingleNode(child, h, self)))
+        : null]
+    )])
   }
 }
 
@@ -125,6 +92,14 @@ export default {
     checkable: {
       type: Boolean,
       default: false
+    },
+    showCheckbox: {
+      type: Boolean,
+      default: true
+    },
+    draggable: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -169,7 +144,6 @@ export default {
     },
     handleNodeClick (node) {
       this.toggleExpand(node)
-      // console.log(this.expandNodesId)
     }
   },
   render (h) {

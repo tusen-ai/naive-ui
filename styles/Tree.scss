@@ -12,6 +12,51 @@
     margin-left: 16px;
   }
   @include b(tree-node) {
-    
+    padding: 4px 0 4px 0;
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+  @include b(tree-node-switcher) {
+    cursor: pointer;
+    display: inline-flex;
+    height: 24px;
+    width: 24px;
+    vertical-align: bottom;
+    align-items: center;
+    justify-content: center;
+    svg {
+      width: 12px;
+      height: 12px;
+      transition: transform .3s $default-cubic-bezier;
+    }
+    @include m(hide) {
+      visibility: hidden
+    }
+    @include m(expand) {
+      svg {
+        transform: rotate(90deg);
+      }
+    }
+  }
+  @include b(tree-node-checkbox) {
+    display: inline-flex;
+    height: 24px;
+    width: 16px;
+    vertical-align: bottom;
+    align-items: center;
+    justify-content: center;
+    margin-right: 4px;
+  }
+  @include b(tree-node-content) {
+    display: inline-flex;
+    height: 24px;
+    align-items: center;
+    vertical-align: bottom;
+    padding: 0 6px;
+    cursor: pointer;
+    @include m(pending) {
+      background: greenyellow;
+    }
   }
 }
