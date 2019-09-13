@@ -5,7 +5,6 @@
   position: relative;
   width: 100%;
   display: inline-block;
-  vertical-align: baseline;
   @include e(icon) {
     position: absolute;
     line-height: 18px;
