@@ -120,7 +120,7 @@
       padding-bottom: ($large-height - $height) / 2;
     }
   }
-  &.n-input--round {
+  @include m(round) {
     &.n-input--small-size {
       .n-input__input {
         border-radius: $small-height / 2;
@@ -140,12 +140,12 @@
       }
     }
   }
-  &.n-input--icon {
+  @include m(icon) {
     .n-input__input {
       padding-left: 38px!important;
     }
   }
-  &.n-input--disabled {
+  @include m(disabled) {
     cursor: not-allowed;
     .n-input__input, .n-input__textarea {
       cursor: not-allowed;
@@ -157,8 +157,8 @@
       }
     }
   }
-  &.n-input--clearable {
-    .n-input__input, .n-input__textarea, .n-input__textarea-mirror {
+  @include m(clearable) {
+    @include e(input, textarea, textarea-mirror) {
       padding-right: 32px;
     }
   }
