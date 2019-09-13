@@ -18,6 +18,7 @@
       <disabled />
       <textarea-demo />
       <clearable />
+      <autosize />
     </div>
   </div>
 </template>
@@ -32,6 +33,7 @@ import placeholder from './placeholder.demo'
 import disabled from './disabled.demo'
 import textareaDemo from './textarea.demo'
 import clearable from './clearable.demo'
+import autosize from './autosize.demo.vue'
 
 export default {
   components: {
@@ -43,7 +45,8 @@ export default {
     placeholder,
     disabled,
     textareaDemo,
-    clearable
+    clearable,
+    autosize
   },
   data () {
     return {

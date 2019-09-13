@@ -6,7 +6,7 @@
   width: 100%;
   display: inline-block;
   vertical-align: baseline;
-  .n-input__icon {
+  @include e(icon) {
     position: absolute;
     line-height: 18px;
     height: 18px;
@@ -26,17 +26,18 @@
     top: calc(50% - 9px);
     margin-left: 12px;
   }
-  .n-input__cancel-mark {
+  @include e(cancel-mark) {
     position: absolute;
     right: 14px;
     top: 50%;
     transform: translateY(-50%);
     line-height: 12px;
   }
-  .n-input__input, .n-input__textarea {
+  @include e(input, textarea) {
     -webkit-appearance: none;
     box-sizing: border-box;
     border: none;
+    font-size: inherit;
     border-radius: $input-border-radius;
     outline: none;
     color: #fff;
@@ -62,49 +63,61 @@
       opacity: 1;
     }
   }
-  &.n-input--small-size {
+  @include m(small-size) {
+    font-size: $small-input-font-size;
     &:not(.n-input--textarea) {
       height: $small-height;
       line-height: $small-height;
     }
-    .n-input__textarea {
-      font-size: $small-input-font-size;
-    }
-    .n-input__input {
+    @include e(input) {
       height: $small-height;
       line-height: $small-height;
       padding: 0 14px;
+    }
+    @include e(textarea, textarea-mirror) {
+      $height: round($small-input-font-size * 1.5);
+      line-height: $height;
       font-size: $small-input-font-size;
+      padding-top: ($small-height - $height) / 2;
+      padding-bottom: ($small-height - $height) / 2;
     }
   }
-  &.n-input--default-size, &.n-input--medium-size {
+  @include m(medium-size) {
+    font-size: $default-input-font-size;
     &:not(.n-input--textarea) {
       height: $default-height;
       line-height: $default-height;
     }
-    .n-input__textarea {
-      font-size: $default-input-font-size;
-    }
-    .n-input__input {
+    @include e(input) {
       height: $default-height;
       line-height: $default-height;
       padding: 0 14px;
-      font-size: $default-input-font-size;
+    }
+    @include e(textarea, textarea-mirror) {
+      $height: round($medium-input-font-size * 1.5);
+      line-height: $height;
+      font-size: $medium-input-font-size;
+      padding-top: ($medium-height - $height) / 2;
+      padding-bottom: ($medium-height - $height) / 2;
     }
   }
-  &.n-input--large-size {
+  @include m(large-size) {
+    font-size: $large-input-font-size;
     &:not(.n-input--textarea) {
       height: $large-height;
       line-height: $large-height;
     }
-    .n-input__textarea {
-      font-size: $large-input-font-size;
-    }
-    .n-input__input {
+    @include e(input) {
       height: $large-height;
       line-height: $large-height;
       padding: 0 14px;
+    }
+    @include e(textarea, textarea-mirror) {
+      $height: round($large-input-font-size * 1.5);
+      line-height: $height;
       font-size: $large-input-font-size;
+      padding-top: ($large-height - $height) / 2;
+      padding-bottom: ($large-height - $height) / 2;
     }
   }
   &.n-input--round {
@@ -145,23 +158,31 @@
     }
   }
   &.n-input--clearable {
-    .n-input__input, .n-input__textarea {
+    .n-input__input, .n-input__textarea, .n-input__textarea-mirror {
       padding-right: 32px;
     }
   }
-  .n-input__textarea {
+  @include e(textarea, textarea-mirror) {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: 1.5;
     margin: 0;
-    padding: 10px 14px;
+    padding-left: 14px;
+    padding-right: 14px;
     resize: vertical;
-    @include scrollbar;
-    &.n-input__textarea--small-size {
-      font-size: $small-input-font-size;
+  }
+  @include e(textarea) {
+    @include m(autosize) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
     }
-    &.n-input__textarea--default-size, &.n-input__input--medium-size {
-      font-size: $default-input-font-size;
-    }
-    &.n-input__textarea--large-size {
-      font-size: $large-input-font-size;
-    }
+  }
+  @include e(textarea-mirror) {
+    visibility: hidden;
+    position: static;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
   }
 }

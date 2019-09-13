@@ -10,15 +10,24 @@
       'n-input--clearable': clearable
     }"
   >
+    <pre
+      v-if="isTextarea && autosize"
+      ref="textAreaMirrow"
+      class="n-input__textarea-mirror"
+    >{{ value }}<br></pre>
     <textarea
       v-if="type==='textarea'"
-      ref="textarea"
+      ref="textArea"
       class="n-input__textarea"
+      :class="{
+        'n-input__textarea--autosize': autosize
+      }"
       :rows="rows"
       :placeholder="placeholder"
       :value="value"
-      :disabled="disabled === true"
+      :disabled="disabled"
       :maxlength="maxlength"
+      :minlength="minlength"
       @blur="handleBlur"
       @focus="handleFocus"
       @input="handleInput"
@@ -34,8 +43,9 @@
       :type="type"
       class="n-input__input"
       :placeholder="placeholder"
-      :disabled="disabled === true"
+      :disabled="disabled"
       :maxlength="maxlength"
+      :minlength="minlength"
       :value="value"
       @blur="handleBlur"
       @focus="handleFocus"
@@ -98,7 +108,7 @@ export default {
     },
     size: {
       type: String,
-      default: 'default'
+      default: 'medium'
     },
     rows: {
       type: [Number, String],
@@ -112,11 +122,23 @@ export default {
       type: String,
       default: null
     },
+    minlength: {
+      type: [String, Number],
+      default: null
+    },
     maxlength: {
       type: [String, Number],
-      default: 'false'
+      default: null
     },
     clearable: {
+      type: Boolean,
+      default: false
+    },
+    autosize: {
+      type: [Boolean, Object],
+      default: false
+    },
+    showWordLimit: {
       type: Boolean,
       default: false
     }
@@ -126,7 +148,44 @@ export default {
       isComposing: false
     }
   },
+  computed: {
+    isTextarea () {
+      return this.type === 'textarea'
+    },
+    isInput () {
+      return !this.isTextarea
+    }
+  },
+  mounted () {
+    this.updateTextAreaStyle()
+  },
+  updated () {
+    this.updateTextAreaStyle()
+  },
   methods: {
+    updateTextAreaStyle () {
+      if (this.isTextarea && this.autosize) {
+        const textArea = this.$refs.textArea
+        const {
+          paddingTop: stylePaddingTop,
+          paddingBottom: stylePaddingBottom,
+          lineHeight: styleLineHeight
+        } = window.getComputedStyle(textArea)
+        const paddingTop = Number(stylePaddingTop.slice(0, -2))
+        const paddingBottom = Number(stylePaddingBottom.slice(0, -2))
+        const lineHeight = Number(styleLineHeight.slice(0, -2))
+        if (this.autosize.minRows) {
+          const minRows = Math.max(this.autosize.minRows, 1)
+          const styleMinHeight = (paddingTop + paddingBottom + lineHeight * minRows) + 'px'
+          this.$refs.textAreaMirrow.style.minHeight = styleMinHeight
+        }
+        if (this.autosize.maxRows) {
+          const maxRows = Math.max(this.autosize.maxRows, this.autosize.minRows, 1)
+          const styleMaxHeight = (paddingTop + paddingBottom + lineHeight * maxRows) + 'px'
+          this.$refs.textAreaMirrow.style.maxHeight = styleMaxHeight
+        }
+      }
+    },
     handleCompositionStart () {
       this.isComposing = true
     },
