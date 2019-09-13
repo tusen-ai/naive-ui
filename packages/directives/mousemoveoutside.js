@@ -1,4 +1,4 @@
-import moveoutsideDelegate from '../utils/moveoutsideDelegate'
+import moveoutsideDelegate from '../utils/delegate/moveoutsideDelegate'
 
 const ctx = '@@mousemoveoutsideContext'
 

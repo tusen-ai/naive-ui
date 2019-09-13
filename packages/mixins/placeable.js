@@ -1,5 +1,5 @@
-import scrollDelegate from '../utils/scrollDelegate'
-import resizeDelegate from '../utils/resizeDelegate'
+import scrollDelegate from '../utils/delegate/scrollDelegate'
+import resizeDelegate from '../utils/delegate/resizeDelegate'
 import getParentNode from '../utils/dom/getParentNode'
 import getScrollParent from '../utils/dom/getScrollParent'
 import calcPlacementTransfrom from '../utils/dom/calcPlacementTransform'

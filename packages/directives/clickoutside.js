@@ -1,4 +1,4 @@
-import clickoutsideDelegate from '../utils/clickoutsideDelegate'
+import clickoutsideDelegate from '../utils/delegate/clickoutsideDelegate'
 
 const ctx = '@@clickoutsideContext'
 
