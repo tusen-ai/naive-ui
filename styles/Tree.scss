@@ -1,14 +1,19 @@
 @import './mixins/mixins.scss';
 @import './theme/default.scss';
 
+$tree-content-hover-background-color: main-color-with-alpha(.45);
+$tree-content-active-background-color: main-color-with-alpha(.3);
+$tree-content-selected-background-color: main-color-with-alpha(.3);
+
 @include b(tree) {
+  font-size: 14px;
   ul, li {
     margin: 0;
     padding: 0;
     list-style: none;
   }
   @include b(tree-children-wrapper) {
-    @include height-seamlessly-expand-transition();
+    @include height-seamlessly-expand-transition(height-seamlessly-expand, .15s);
     margin-left: 16px;
   }
   @include b(tree-node) {
@@ -28,12 +33,12 @@
     svg {
       width: 12px;
       height: 12px;
-      transition: transform .3s $default-cubic-bezier;
+      transition: transform .15s $default-cubic-bezier;
     }
     @include m(hide) {
       visibility: hidden
     }
-    @include m(expand) {
+    @include m(expanded) {
       svg {
         transform: rotate(90deg);
       }
@@ -49,14 +54,41 @@
     margin-right: 4px;
   }
   @include b(tree-node-content) {
+    position: relative;
     display: inline-flex;
     height: 24px;
+    box-sizing: border-box;
+    border-bottom: 3px solid transparent;
+    border-top: 3px solid transparent;
+    line-height: 24px;
     align-items: center;
     vertical-align: bottom;
     padding: 0 6px;
     cursor: pointer;
+    border-radius: 3px;
+    transition: .2s background-color $default-cubic-bezier, .2s border-color $default-cubic-bezier;
+    // &:hover {
+    //   background-color: $tree-content-hover-background-color;
+    // }
+    &:active {
+      background-color: $tree-content-active-background-color;
+    }
+    @include m(block) {
+      width: calc(100% - 48px);
+    }
+    @include m(selected) {
+      background-color: $tree-content-selected-background-color;
+    }
     @include m(pending) {
-      background: greenyellow;
+      @include m(pending-bottom) {
+        border-bottom: 3px solid $tree-content-hover-background-color;
+      }
+      @include m(pending-top) {
+        border-top: 3px solid $tree-content-hover-background-color;
+      }
+      @include m(pending-body) {
+        background-color: $tree-content-hover-background-color;
+      }
     }
   }
 }

@@ -2,7 +2,7 @@
   <span
     class="n-tree-node-switcher"
     :class="{
-      'n-tree-node-switcher--expand': expand,
+      'n-tree-node-switcher--expanded': expanded,
       'n-tree-node-switcher--hide': hide
     }"
     @click="handleClick"
@@ -20,7 +20,7 @@ export default {
     NTreeSwitcherIcon
   },
   props: {
-    expand: {
+    expanded: {
       type: Boolean,
       default: false
     },

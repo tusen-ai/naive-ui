@@ -12,6 +12,9 @@ $medium-height: 34px;
 $large-height: 40px;
 
 $main-color: #63E2B7;
+@function main-color-with-alpha($alpha) {
+  @return rgba(99, 226, 183, $alpha);
+}
 
 $fast-in-cubic-bezier: cubic-bezier(0.0, 0.0, 0.2, 1);
 $slow-out-cubic-bezier: cubic-bezier(0.4, 0.0, 1, 1);
@@ -288,13 +291,19 @@ $scrollbar-color--hover: rgba(255,255,255,0.3);
 }
 
 @mixin height-seamlessly-expand-transition($block: "height-seamlessly-expand", $duration: .3s, $delay: 0s) {
+  &.#{$namespace}-#{$block}-leave, &.#{$namespace}-#{$block}-enter-to {
+    opacity: 1;
+  }
+  &.#{$namespace}-#{$block}-leave-to, &.#{$namespace}-#{$block}-enter {
+    opacity: 0;
+  }
   &.#{$namespace}-#{$block}-leave-active {
     overflow: hidden;
-    transition: max-height $duration $default-cubic-bezier;
+    transition: max-height $duration $default-cubic-bezier, opacity $duration $slow-out-cubic-bezier;
   }
   &.#{$namespace}-#{$block}-enter-active {
     overflow: hidden;
-    transition: max-height $duration $default-cubic-bezier;
+    transition: max-height $duration $default-cubic-bezier, opacity $duration $fast-in-cubic-bezier;
   }
 }
 

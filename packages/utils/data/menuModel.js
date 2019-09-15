@@ -132,9 +132,37 @@ function availableParentId (parent, depth) {
 
 function rootedOptions (options) {
   return cloneDeep([{
+    isRoot: true,
     isLeaf: false,
+    key: Symbol('n-tree-root'),
     children: options || null
   }])
+}
+
+function patchedOptionsUsingProp (options, patches, prop = 'key') {
+  const patchesMap = new Map()
+  for (const [id, children] of patches) {
+    patchesMap.set(id, children)
+  }
+  function traverse (options) {
+    if (!Array.isArray(options)) return
+    for (let i = 0; i < options.length; ++i) {
+      const option = options[i]
+      const id = option[prop]
+      // console.log('iterate on option', id)
+      if (!hasChildren(option)) {
+        if (patches.has(id)) {
+          // console.log('patched on option', id)
+          option.children = patches.get(id)
+          option.loaded = true
+        }
+      }
+      traverse(option.children)
+    }
+  }
+  traverse(options)
+  // console.log('patchedOptions output', options)
+  return options
 }
 
 /**
@@ -163,6 +191,79 @@ function patchedOptions (options, patches) {
   traverse(options)
   // console.log('patchedOptions output', options)
   return cloneDeep(options)
+}
+
+function dropIsValid ([sourceNode, targetNode, type]) {
+  if (sourceNode.key === targetNode.key) return false
+  if (type === 'append') {
+    if (targetNode.key === sourceNode.parent.key) return false
+    let parent = targetNode.parent
+    while (!parent.isRoot) {
+      if (parent.key === sourceNode.key) {
+        return false
+      }
+      parent = parent.parent
+    }
+  } else if (type === 'insertBefore' || type === 'insertAfter') {
+    let parent = targetNode.parent
+    while (!parent.isRoot) {
+      if (parent.key === sourceNode.key) {
+        return false
+      }
+      parent = parent.parent
+    }
+  } else return false
+  return true
+}
+
+function treedOptions (options) {
+  const decoratedOptions = rootedOptions(options)
+  function traverse (root, parent = null) {
+    root.parent = parent
+    if (Array.isArray(root.children)) {
+      root.children.forEach(child => traverse(child, root))
+    }
+  }
+  traverse(decoratedOptions[0])
+  return decoratedOptions
+}
+
+function applyDrop ([sourceNode, targetNode, type]) {
+  if (type === 'append') {
+    const parent = sourceNode.parent
+    const index = parent.children.findIndex(child => child.key === sourceNode.key)
+    if (~index) {
+      parent.children.splice(index, 1)
+    } else {
+      throw new Error('[n-tree]: switch error')
+    }
+    if (Array.isArray(targetNode.children)) {
+      targetNode.children.push(sourceNode)
+    } else {
+      targetNode.children = [sourceNode]
+    }
+    sourceNode.parent = targetNode
+  } else if (type === 'insertBefore' || type === 'insertAfter') {
+    let parent = sourceNode.parent
+    const sourceIndex = parent.children.findIndex(child => child.key === sourceNode.key)
+    if (~sourceIndex) {
+      parent.children.splice(sourceIndex, 1)
+    } else {
+      throw new Error('[n-tree]: switch error')
+    }
+    parent = targetNode.parent
+    const targetIndex = parent.children.findIndex(child => child.key === targetNode.key)
+    if (~targetIndex) {
+      if (type === 'insertBefore') {
+        parent.children.splice(targetIndex, 0, sourceNode)
+      } else {
+        parent.children.splice(targetIndex + 1, 0, sourceNode)
+      }
+    } else {
+      throw new Error('[n-tree]: switch error')
+    }
+    sourceNode.parent = targetNode.parent
+  }
 }
 
 function linkedCascaderOptions (options, type) {
@@ -359,6 +460,10 @@ export {
   firstOptionId,
   rootedOptions,
   patchedOptions,
+  patchedOptionsUsingProp,
+  dropIsValid,
+  applyDrop,
+  treedOptions,
   linkedCascaderOptions,
   menuOptions,
   menuModel

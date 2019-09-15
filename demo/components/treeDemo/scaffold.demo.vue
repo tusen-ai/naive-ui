@@ -8,10 +8,16 @@
       style="display: block;"
     >
       <!--EXAMPLE_START-->
-      <n-tree :data="data" />
-      <!--EXAMPLE_END-->
+      <n-tree
+        ref="tree"
+        :data="data"
+      /> <!--EXAMPLE_END-->
     </div>
-    <pre class="n-doc-section__inspect">Inspect some value here</pre>
+    <div class="n-doc-section__inspect">
+      <n-button @click="handleClick">
+        dragEnter
+      </n-button>
+    </div>
     <n-doc-source-block>
       <!--SOURCE-->
     </n-doc-source-block>
@@ -19,6 +25,9 @@
 </template>
 
 <script>
+import { setTimeout } from 'timers'
+
+let key = 0
 
 function genData (layer = 4, depth = 0, prefix = '') {
   if (layer === depth) return
@@ -27,7 +36,7 @@ function genData (layer = 4, depth = 0, prefix = '') {
   for (let i = 0; i < count; ++i) {
     data.push({
       label: `${prefix}_${i}`,
-      value: `${prefix}_${i}`,
+      key: key++,
       children: genData(layer, depth + 1, `${prefix}_${i}`)
     })
   }
@@ -38,6 +47,20 @@ export default {
   data () {
     return {
       data: genData()
+    }
+  },
+  methods: {
+    handleClick () {
+      this.$refs.tree.handleDragStart({
+        key: 0,
+        isLeaf: false
+      })
+      setTimeout(() => {
+        this.$refs.tree.handleDragEnter({
+          key: 85,
+          isLeaf: false
+        })
+      }, 100)
     }
   }
 }

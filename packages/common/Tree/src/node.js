@@ -9,22 +9,48 @@ export default {
       type: Object,
       required: true
     },
-    expand: {
+    expanded: {
       type: Boolean,
       default: false
     },
-    showCheckbox: {
+    selected: {
+      type: Boolean,
+      default: false
+    },
+    checkable: {
       type: Boolean,
       default: true
     },
     draggable: {
       type: Boolean,
       default: true
+    },
+    blockNode: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
     handleSwitcherClick () {
-      this.$emit('click', this.data)
+      this.$emit('switcher-click', this.data)
+    },
+    handleContentClick () {
+      this.$emit('select', this.data)
+    },
+    handleDragOver () {
+      this.$emit('dragover', this.data)
+    },
+    handleDragEnter () {
+      this.$emit('dragenter', this.data)
+    },
+    handleDragStart () {
+      this.$emit('dragstart', this.data)
+    },
+    handleDragLeave () {
+      this.$emit('dragleave', this.data)
+    },
+    handleDrop (e, dropPosition) {
+      this.$emit('drop', this.data, dropPosition)
     }
   },
   render (h) {
@@ -33,17 +59,29 @@ export default {
     }, [
       h(NTreeNodeSwitcher, {
         props: {
-          expand: this.expand,
+          expanded: this.expanded,
           hide: this.data.isLeaf
         },
         on: {
           click: this.handleSwitcherClick
         }
       }),
-      this.showCheckbox ? h(NTreeNodeCheckbox) : null,
+      this.checkable ? h(NTreeNodeCheckbox) : null,
       h(NTreeNodeContent, {
+        props: {
+          selected: this.selected,
+          blockNode: this.blockNode
+        },
         domProps: {
           draggable: this.draggable
+        },
+        on: {
+          click: this.handleContentClick,
+          dragover: this.handleDragOver,
+          dragenter: this.handleDragEnter,
+          dragstart: this.handleDragStart,
+          dragleave: this.handleDragLeave,
+          drop: this.handleDrop
         }
       }, [
         this.data.label
