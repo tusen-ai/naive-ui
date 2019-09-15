@@ -3,12 +3,18 @@
     class="n-radio-button"
     :class="{
       'n-radio-button--disabled': disabled,
-      'n-radio-button--checked': checked
+      'n-radio-button--checked': checked,
+
     }"
     @click="handleClick"
   >
     <div class="n-radio-button__border-mask" />
-    <div class="n-radio-button__label">
+    <div
+      class="n-radio-button__label"
+      :class="{
+        'simulate-transparent-text': checked
+      }"
+    >
       <slot />
     </div>
   </div>

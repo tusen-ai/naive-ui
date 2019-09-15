@@ -1,5 +1,7 @@
 <script>
 
+import texttransparentable from '../../../mixins/texttransparentable'
+
 function mapSlot (h, defaultSlot, currentComponent) {
   /**
    * connect current component's v-model to child instance
@@ -62,6 +64,7 @@ function mapSlot (h, defaultSlot, currentComponent) {
 
 export default {
   name: 'NRadioGroup',
+  mixins: [texttransparentable],
   props: {
     value: {
       type: [Boolean, String, Number],
