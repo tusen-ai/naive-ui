@@ -1,6 +1,6 @@
-import NTreeNodeSwitcher from './switcher.vue'
-import NTreeNodeCheckbox from './checkbox.vue'
-import NTreeNodeContent from './content.vue'
+import NTreeNodeSwitcher from './TreeNodeSwitcher.vue'
+import NTreeNodeCheckbox from './TreeNodeCheckbox.vue'
+import NTreeNodeContent from './TreeNodeContent.vue'
 
 export default {
   name: 'NTreeNode',

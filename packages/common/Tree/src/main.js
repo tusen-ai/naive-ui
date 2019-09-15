@@ -6,48 +6,8 @@ import {
   menuOptions
 } from '../../../utils/data/menuModel'
 
-import NTreeNode from './node'
-
-const NTreeNodeExpandWrapper = {
-  methods: {
-    handleBeforeLeave () {
-      this.$el.style.maxHeight = this.$el.offsetHeight + 'px'
-      this.$el.style.height = this.$el.offsetHeight + 'px'
-      this.$el.getBoundingClientRect()
-    },
-    handleLeave () {
-      this.$el.style.maxHeight = 0
-      this.$el.getBoundingClientRect()
-    },
-    handleEnter () {
-      this.$nextTick().then(() => {
-        this.$el.style.height = this.$el.offsetHeight + 'px'
-        this.$el.style.maxHeight = 0
-        this.$el.getBoundingClientRect()
-        this.$el.style.maxHeight = this.$el.style.height
-      })
-    },
-    handleAfterEnter () {
-      this.$el.style.height = null
-      this.$el.style.maxHeight = null
-    }
-  },
-  render (h) {
-    return h('transition', {
-      props: {
-        name: 'n-height-seamlessly-expand'
-      },
-      on: {
-        beforeLeave: this.handleBeforeLeave,
-        leave: this.handleLeave,
-        enter: this.handleEnter,
-        afterEnter: this.handleAfterEnter
-      }
-    }, this.$slots.default)
-  }
-}
-
-// render -> genSingleNode -> internalExpandedKeys
+import NTreeNode from './TreeNode'
+import NTreeChildNodesExpandTransition from './ChildNodesExpandTransition'
 
 function genSingleNode (node, h, self) {
   const listeners = {
@@ -61,7 +21,7 @@ function genSingleNode (node, h, self) {
   const expanded = self.internalExpandedKeys.includes(node.key)
   const props = {
     data: node,
-    expanded, // self.internalExpandedKeys.includes(node.key),
+    expanded,
     selected: self.internalSelectedKeys.includes(node.key),
     draggable: self.draggable,
     drop: self.drop,
@@ -78,7 +38,7 @@ function genSingleNode (node, h, self) {
       props,
       on: listeners,
       key: node.key
-    }, [h(NTreeNodeExpandWrapper, {},
+    }, [h(NTreeChildNodesExpandTransition, {},
       [ expanded
         ? h('ul', {
           staticClass: 'n-tree-children-wrapper'
@@ -89,8 +49,6 @@ function genSingleNode (node, h, self) {
 }
 
 function convertRootedOptionsToVNodeTree (root, h, self) {
-  // console.log(self.internalExpandedKeys)
-  // console.log(self.internalSelectedKeys)
   return root.children.map(child => genSingleNode(child, h, self))
 }
 
