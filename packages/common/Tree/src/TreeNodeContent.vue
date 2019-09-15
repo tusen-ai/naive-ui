@@ -7,7 +7,8 @@
       'n-tree-node-content--pending-body': pendingPosition === 'body',
       'n-tree-node-content--pending-top': pendingPosition === 'top',
       'n-tree-node-content--selected': selected,
-      'n-tree-node-content--block': blockNode
+      'n-tree-node-content--block': blockNode,
+      'n-tree-node-content--checkable': checkable
     }"
     @dragleave="handleContentDragLeave"
     @dragstart="handleContentDragStart"
@@ -34,6 +35,10 @@ export default {
       default: false
     },
     blockNode: {
+      type: Boolean,
+      default: false
+    },
+    checkable: {
       type: Boolean,
       default: false
     }

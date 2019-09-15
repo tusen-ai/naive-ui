@@ -19,13 +19,17 @@ export default {
     },
     checkable: {
       type: Boolean,
-      default: true
+      default: false
     },
     draggable: {
       type: Boolean,
       default: true
     },
     blockNode: {
+      type: Boolean,
+      default: false
+    },
+    checked: {
       type: Boolean,
       default: false
     }
@@ -51,6 +55,9 @@ export default {
     },
     handleDrop (e, dropPosition) {
       this.$emit('drop', this.data, dropPosition)
+    },
+    handleCheck (checked) {
+      this.$emit('check', this.data, checked)
     }
   },
   render (h) {
@@ -66,11 +73,19 @@ export default {
           click: this.handleSwitcherClick
         }
       }),
-      this.checkable ? h(NTreeNodeCheckbox) : null,
+      this.checkable ? h(NTreeNodeCheckbox, {
+        props: {
+          value: this.checked
+        },
+        on: {
+          check: this.handleCheck
+        }
+      }) : null,
       h(NTreeNodeContent, {
         props: {
           selected: this.selected,
-          blockNode: this.blockNode
+          blockNode: this.blockNode,
+          checkable: this.checkable
         },
         domProps: {
           draggable: this.draggable

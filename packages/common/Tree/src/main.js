@@ -16,16 +16,19 @@ function genSingleNode (node, h, self) {
     dragenter: self.handleDragEnter,
     dragstart: self.handleDragStart,
     dragleave: self.handleDragLeave,
-    drop: self.handleDrop
+    drop: self.handleDrop,
+    check: self.handleCheck
   }
-  const expanded = self.internalExpandedKeys.includes(node.key)
+  const expanded = self.synthesizedExpandedKeys.includes(node.key)
   const props = {
     data: node,
     expanded,
-    selected: self.internalSelectedKeys.includes(node.key),
+    selected: self.synthesizedSelectedKeys.includes(node.key),
     draggable: self.draggable,
+    checkable: self.checkable,
     drop: self.drop,
-    blockNode: self.blockNode
+    blockNode: self.blockNode,
+    checked: self.synthesizedCheckedKeys.includes(node.key)
   }
   if (node.isLeaf) {
     return h(NTreeNode, {
@@ -61,7 +64,7 @@ export default {
     },
     checkable: {
       type: Boolean,
-      default: true
+      default: false
     },
     draggable: {
       type: Boolean,
@@ -69,7 +72,7 @@ export default {
     },
     blockNode: {
       type: Boolean,
-      default: true
+      default: false
     },
     checkedKeys: {
       type: Array,
@@ -90,6 +93,14 @@ export default {
     allowDrag: {
       type: Function,
       default: () => true
+    },
+    multiple: {
+      type: Boolean,
+      default: false
+    },
+    pattern: {
+      type: String,
+      default: ''
     }
   },
   created () {
@@ -99,6 +110,7 @@ export default {
     return {
       treeData: null,
       internalExpandedKeys: [],
+      internalCheckedKeys: [],
       internalSelectedKeys: [],
       draggingNodeKey: null,
       draggingNode: null,
@@ -110,6 +122,7 @@ export default {
     data (newData) {
       this.treeData = treedOptions(newData)
       this.internalExpandedKeys = []
+      this.internalCheckedKeys = []
       this.internalSelectedKeys = []
       this.draggingNodeKey = null
       this.draggingNode = null
@@ -118,24 +131,52 @@ export default {
     }
   },
   computed: {
+    hasExpandedKeys () {
+      return Array.isArray(this.expandedKeys)
+    },
+    hasSelectedKeys () {
+      return Array.isArray(this.selectedKeys)
+    },
+    hasCheckedKeys () {
+      return Array.isArray(this.checkedKeys)
+    },
     synthesizedExpandedKeys () {
-      if (Array.isArray(this.expandedKeys)) {
+      if (this.hasExpandedKeys) {
         return this.expandedKeys
       } else {
         return this.internalExpandedKeys
       }
     },
     synthesizedSelectedKeys () {
-      if (Array.isArray(this.selectedKeys)) {
+      if (this.hasSelectedKeys) {
         return this.selectedKeys
       } else {
         return this.internalSelectedKeys
+      }
+    },
+    synthesizedCheckedKeys () {
+      if (this.hasCheckedKeys) {
+        return this.checkedKeys
+      } else {
+        return this.internalCheckedKeys
       }
     }
   },
   mounted () {
   },
   methods: {
+    handleCheck (node, checked) {
+      if (!this.hasCheckedKeys) {
+        if (checked) {
+          this.internalCheckedKeys.push(node.key)
+        } else {
+          this.internalCheckedKeys.splice(
+            this.internalCheckedKeys.findIndex(key => key === node.key),
+            1
+          )
+        }
+      }
+    },
     handleDrop (node, dropType) {
       const drop = [this.draggingNode, node, dropType]
       if (dropIsValid(drop)) {
@@ -146,14 +187,18 @@ export default {
       this.dropNodeKey = null
     },
     toggleExpand (node) {
-      const index = this.internalExpandedKeys.findIndex(expandNodeId => expandNodeId === node.key)
+      const index = this.synthesizedExpandedKeys.findIndex(expandNodeId => expandNodeId === node.key)
       if (~index) {
         this.$emit('collapse', node)
-        this.internalExpandedKeys.splice(index, 1)
+        if (!this.hasExpandedKeys) {
+          this.internalExpandedKeys.splice(index, 1)
+        }
       } else {
         if (!node.isLeaf) {
           this.$emit('expand', node)
-          this.internalExpandedKeys.push(node.key)
+          if (!this.hasExpandedKeys) {
+            this.internalExpandedKeys.push(node.key)
+          }
         }
       }
     },
@@ -169,12 +214,14 @@ export default {
       this.$emit('dragenter', node)
       this.dropNodeKey = node.key
       if (node.key === this.draggingNodeKey) return
-      if (!this.internalExpandedKeys.includes(node.key) && !node.isLeaf) {
+      if (!this.synthesizedExpandedKeys.includes(node.key) && !node.isLeaf) {
         window.clearTimeout(this.expandTimerId)
         this.expandTimerId = window.setTimeout(() => {
-          if (this.dropNodeKey === node.key && !this.internalExpandedKeys.includes(node.key)) {
-            this.internalExpandedKeys.push(node.key)
-            this.$emit('expand')
+          if (this.dropNodeKey === node.key && !this.synthesizedExpandedKeys.includes(node.key)) {
+            if (!this.hasExpandedKeys) {
+              this.internalExpandedKeys.push(node.key)
+            }
+            this.$emit('expand', node.key)
           }
           this.expandTimerId = null
         }, 600)
@@ -191,7 +238,6 @@ export default {
     }
   },
   render (h) {
-    console.log(this.treeData)
     const lOptions = linkedCascaderOptions(this.treeData, 'multiple-all-options')
     const mOptions = menuOptions(lOptions)[0]
     return h('div', {

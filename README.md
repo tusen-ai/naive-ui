@@ -88,7 +88,7 @@ Vue.use(naiveUi)
 |Slider|🤔|||
 |LoadingBar|😍|||
 |AutoComplete|🚧|||
-|Tree|🚧|||
+|Tree|🤔|||
 |TreeSelect|🚧|||
 |Upload|🚧|||
 |Time|🚧|||

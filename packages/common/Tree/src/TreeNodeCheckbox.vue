@@ -1,6 +1,9 @@
 <template>
   <span class="n-tree-node-checkbox">
-    <n-checkbox />
+    <n-checkbox
+      :value="value"
+      @input="handleInput"
+    />
   </span>
 </template>
 
@@ -11,6 +14,17 @@ export default {
   name: 'NTreeNodeCheckbox',
   components: {
     NCheckbox
+  },
+  props: {
+    value: {
+      type: Boolean,
+      default: false
+    }
+  },
+  methods: {
+    handleInput (value) {
+      this.$emit('check', value)
+    }
   }
 }
 </script>

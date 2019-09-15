@@ -74,11 +74,15 @@ $tree-content-selected-background-color: main-color-with-alpha(.3);
       background-color: $tree-content-active-background-color;
     }
     @include m(block) {
-      width: calc(100% - 48px);
+      width: calc(100% - 24px);
+      @include m(checkable) {
+        width: calc(100% - 48px);
+      }
     }
     @include m(selected) {
       background-color: $tree-content-selected-background-color;
     }
+    
     @include m(pending) {
       @include m(pending-bottom) {
         border-bottom: 3px solid $tree-content-hover-background-color;
