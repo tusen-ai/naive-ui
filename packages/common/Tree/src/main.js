@@ -238,8 +238,10 @@ export default {
     }
   },
   render (h) {
+    console.log('render')
     const lOptions = linkedCascaderOptions(this.treeData, 'multiple-all-options')
     const mOptions = menuOptions(lOptions)[0]
+    console.log(mOptions)
     return h('div', {
       staticClass: 'n-tree'
     }, convertRootedOptionsToVNodeTree(mOptions, h, this))

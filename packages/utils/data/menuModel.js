@@ -234,12 +234,17 @@ function applyDrop ([sourceNode, targetNode, type]) {
     const index = parent.children.findIndex(child => child.key === sourceNode.key)
     if (~index) {
       parent.children.splice(index, 1)
+      if (!parent.children.length) {
+        parent.children = null
+        parent.isLeaf = true
+      }
     } else {
       throw new Error('[n-tree]: switch error')
     }
     if (Array.isArray(targetNode.children)) {
       targetNode.children.push(sourceNode)
     } else {
+      targetNode.isLeaf = false
       targetNode.children = [sourceNode]
     }
     sourceNode.parent = targetNode
@@ -248,6 +253,10 @@ function applyDrop ([sourceNode, targetNode, type]) {
     const sourceIndex = parent.children.findIndex(child => child.key === sourceNode.key)
     if (~sourceIndex) {
       parent.children.splice(sourceIndex, 1)
+      if (!parent.children.length) {
+        parent.children = null
+        parent.isLeaf = true
+      }
     } else {
       throw new Error('[n-tree]: switch error')
     }
@@ -258,6 +267,10 @@ function applyDrop ([sourceNode, targetNode, type]) {
         parent.children.splice(targetIndex, 0, sourceNode)
       } else {
         parent.children.splice(targetIndex + 1, 0, sourceNode)
+      }
+      if (!parent.children.length) {
+        parent.children = null
+        parent.isLeaf = true
       }
     } else {
       throw new Error('[n-tree]: switch error')

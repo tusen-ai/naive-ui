@@ -29,10 +29,10 @@ import { setTimeout } from 'timers'
 
 let key = 0
 
-function genData (layer = 4, depth = 0, prefix = '') {
+function genData (layer = 2, depth = 0, prefix = '') {
   if (layer === depth) return
   const data = []
-  const count = 4
+  const count = 2
   for (let i = 0; i < count; ++i) {
     data.push({
       label: `${prefix}_${i}`,
