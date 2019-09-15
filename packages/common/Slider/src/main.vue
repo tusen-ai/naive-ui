@@ -341,6 +341,8 @@ export default {
       this.firstHandleActive = false
       if (!this.$refs.firstHandle.contains(e.target)) {
         this.showTooltip = false
+      } else {
+        this.tooltipHoverDisplayValue = this.firstHandleValue
       }
       window.removeEventListener('mouseup', this.handleFirstHandleMouseUp)
       window.removeEventListener('mousemove', this.throttledHandleFirstHandleMouseMove)
@@ -350,6 +352,8 @@ export default {
       this.firstHandleActive = false
       if (!this.$refs.firstHandle.contains(e.target)) {
         this.showTooltip = false
+      } else {
+        this.tooltipHoverDisplayValue = this.secondHandleValue
       }
       window.removeEventListener('mouseup', this.handleSecondHandleMouseUp)
       window.removeEventListener('mousemove', this.throttledHandleSecondHandleMouseMove)
