@@ -103,9 +103,9 @@ Vue.use(naiveUi)
 |Rating|🚧|||
 |Avator|🚧|||
 |Result|🚧|||
-|Menu|✋||Not Planne|
-|Typography|✋||Not Planne|
-|Mentions|✋||Not Planne|
+|Menu|✋||Not Planned|
+|Typography|✋||Not Planned|
+|Mentions|✋||Not Planned|
 |Calendar|✋||Not Planned|
 |Carousel|✋||Not Planned|
 
@@ -121,18 +121,34 @@ Vue.use(naiveUi)
 
 ## RoadMap
 v0.3 cascader
+
 v0.4 refactor popover
+
 v0.5 finish all planned components
+
 v0.6 add keyboard event on planned components
+
 v0.7 refactor form component
+
 v0.8 refactor table component
+
 v0.9 fulfill props for all components
+
 v0.10 split icons for components
+
 v0.11 refactor css
+
 v0.12 import on demand
+
 v0.13 i18n
+
 v0.14 unit test
+
 v0.15 light theme
+
 v0.16 refactor using proper html tags
+
 v0.17 document formation
+
 v0.18 refactor document page
+
