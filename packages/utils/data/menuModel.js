@@ -139,32 +139,6 @@ function rootedOptions (options) {
   }])
 }
 
-function patchedOptionsUsingProp (options, patches, prop = 'key') {
-  const patchesMap = new Map()
-  for (const [id, children] of patches) {
-    patchesMap.set(id, children)
-  }
-  function traverse (options) {
-    if (!Array.isArray(options)) return
-    for (let i = 0; i < options.length; ++i) {
-      const option = options[i]
-      const id = option[prop]
-      // console.log('iterate on option', id)
-      if (!hasChildren(option)) {
-        if (patches.has(id)) {
-          // console.log('patched on option', id)
-          option.children = patches.get(id)
-          option.loaded = true
-        }
-      }
-      traverse(option.children)
-    }
-  }
-  traverse(options)
-  // console.log('patchedOptions output', options)
-  return options
-}
-
 /**
  *
  * @param {*} options
@@ -229,7 +203,7 @@ function treedOptions (options) {
 }
 
 function applyDrop ([sourceNode, targetNode, type]) {
-  if (type === 'append') {
+  if (type === 'append' || type === 'insertAfter') {
     const parent = sourceNode.parent
     const index = parent.children.findIndex(child => child.key === sourceNode.key)
     if (~index) {
@@ -242,13 +216,17 @@ function applyDrop ([sourceNode, targetNode, type]) {
       throw new Error('[n-tree]: switch error')
     }
     if (Array.isArray(targetNode.children)) {
-      targetNode.children.push(sourceNode)
+      if (type === 'append') {
+        targetNode.children.push(sourceNode)
+      } else {
+        targetNode.children.unshift(sourceNode)
+      }
     } else {
       targetNode.isLeaf = false
       targetNode.children = [sourceNode]
     }
     sourceNode.parent = targetNode
-  } else if (type === 'insertBefore' || type === 'insertAfter') {
+  } else if (type === 'insertBefore') {
     let parent = sourceNode.parent
     const sourceIndex = parent.children.findIndex(child => child.key === sourceNode.key)
     if (~sourceIndex) {
@@ -263,11 +241,7 @@ function applyDrop ([sourceNode, targetNode, type]) {
     parent = targetNode.parent
     const targetIndex = parent.children.findIndex(child => child.key === targetNode.key)
     if (~targetIndex) {
-      if (type === 'insertBefore') {
-        parent.children.splice(targetIndex, 0, sourceNode)
-      } else {
-        parent.children.splice(targetIndex + 1, 0, sourceNode)
-      }
+      parent.children.splice(targetIndex, 0, sourceNode)
       if (!parent.children.length) {
         parent.children = null
         parent.isLeaf = true
@@ -473,7 +447,6 @@ export {
   firstOptionId,
   rootedOptions,
   patchedOptions,
-  patchedOptionsUsingProp,
   dropIsValid,
   applyDrop,
   treedOptions,

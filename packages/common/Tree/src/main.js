@@ -30,25 +30,27 @@ function genSingleNode (node, h, self) {
     blockNode: self.blockNode,
     checked: self.synthesizedCheckedKeys.includes(node.key)
   }
-  if (node.isLeaf) {
-    return h(NTreeNode, {
-      props,
-      on: listeners,
-      key: node.key
-    })
-  } else if (node.children) {
-    return h(NTreeNode, {
-      props,
-      on: listeners,
-      key: node.key
-    }, [h(NTreeChildNodesExpandTransition, {},
-      [ expanded
+  return h(NTreeNode, {
+    props,
+    on: listeners,
+    key: node.key
+  },
+  [!node.isLeaf
+    ? h(NTreeChildNodesExpandTransition, {
+      props: {
+        transitionDisabled: self.transitionDisabled
+      }
+    },
+    [
+      expanded
         ? h('ul', {
           staticClass: 'n-tree-children-wrapper'
         }, node.children.map(child => genSingleNode(child, h, self)))
-        : null]
-    )])
-  }
+        : null
+    ]
+    )
+    : null]
+  )
 }
 
 function convertRootedOptionsToVNodeTree (root, h, self) {
@@ -115,7 +117,8 @@ export default {
       draggingNodeKey: null,
       draggingNode: null,
       dropNodeKey: null,
-      expandTimerId: null
+      expandTimerId: null,
+      transitionDisabled: false
     }
   },
   watch: {
@@ -165,6 +168,12 @@ export default {
   mounted () {
   },
   methods: {
+    disableTransition () {
+      this.transitionDisabled = true
+    },
+    enableTransition () {
+      this.transitionDisabled = false
+    },
     handleCheck (node, checked) {
       if (!this.hasCheckedKeys) {
         if (checked) {
@@ -180,7 +189,13 @@ export default {
     handleDrop (node, dropType) {
       const drop = [this.draggingNode, node, dropType]
       if (dropIsValid(drop)) {
-        applyDrop(drop)
+        this.disableTransition()
+        this.$nextTick().then(() => {
+          applyDrop(drop)
+          return this.$nextTick()
+        }).then(() => {
+          this.enableTransition()
+        })
       }
       this.draggingNodeKey = null
       this.draggingNode = null
@@ -238,10 +253,8 @@ export default {
     }
   },
   render (h) {
-    console.log('render')
     const lOptions = linkedCascaderOptions(this.treeData, 'multiple-all-options')
     const mOptions = menuOptions(lOptions)[0]
-    console.log(mOptions)
     return h('div', {
       staticClass: 'n-tree'
     }, convertRootedOptionsToVNodeTree(mOptions, h, this))

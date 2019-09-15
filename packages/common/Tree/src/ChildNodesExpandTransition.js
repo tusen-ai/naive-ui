@@ -1,4 +1,10 @@
 export default {
+  props: {
+    transitionDisabled: {
+      type: Boolean,
+      default: false
+    }
+  },
   methods: {
     handleBeforeLeave () {
       this.$el.style.maxHeight = this.$el.offsetHeight + 'px'
@@ -6,6 +12,7 @@ export default {
       this.$el.getBoundingClientRect()
     },
     handleLeave () {
+      // debugger
       this.$el.style.maxHeight = 0
       this.$el.getBoundingClientRect()
     },
@@ -21,6 +28,15 @@ export default {
       this.$el.style.height = null
       this.$el.style.maxHeight = null
     }
+  },
+  beforeDestroy () {
+    if (this.transitionDisabled) {
+      const parent = this.$el.parentElement
+      if (parent) parent.removeChild(this.$el)
+    }
+  },
+  destroyed () {
+    console.log('destroyed')
   },
   render (h) {
     return h('transition', {

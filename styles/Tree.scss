@@ -1,6 +1,7 @@
 @import './mixins/mixins.scss';
 @import './theme/default.scss';
 
+// 0.55 * 0.7
 $tree-content-hover-background-color: main-color-with-alpha(.45);
 $tree-content-active-background-color: main-color-with-alpha(.3);
 $tree-content-selected-background-color: main-color-with-alpha(.3);
@@ -17,7 +18,10 @@ $tree-content-selected-background-color: main-color-with-alpha(.3);
     margin-left: 16px;
   }
   @include b(tree-node) {
-    padding: 4px 0 4px 0;
+    padding: 3px 0 3px 0;
+    &:first-child {
+      padding-top: 6px;
+    }
     &:last-child {
       padding-bottom: 0;
     }
@@ -67,11 +71,22 @@ $tree-content-selected-background-color: main-color-with-alpha(.3);
     cursor: pointer;
     border-radius: 3px;
     transition: .2s background-color $default-cubic-bezier, .2s border-color $default-cubic-bezier;
-    // &:hover {
-    //   background-color: $tree-content-hover-background-color;
-    // }
+    &:hover {
+      background-color: $tree-content-hover-background-color;
+    }
     &:active {
       background-color: $tree-content-active-background-color;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+    @include e(padding-box) {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: transparent;
     }
     @include m(block) {
       width: calc(100% - 24px);
@@ -79,11 +94,10 @@ $tree-content-selected-background-color: main-color-with-alpha(.3);
         width: calc(100% - 48px);
       }
     }
-    @include m(selected) {
-      background-color: $tree-content-selected-background-color;
-    }
-    
     @include m(pending) {
+      &:hover {
+        background-color: transparent;
+      }
       @include m(pending-bottom) {
         border-bottom: 3px solid $tree-content-hover-background-color;
       }
@@ -93,6 +107,9 @@ $tree-content-selected-background-color: main-color-with-alpha(.3);
       @include m(pending-body) {
         background-color: $tree-content-hover-background-color;
       }
+    }
+    @include m(selected) {
+      background-color: $tree-content-selected-background-color;
     }
   }
 }

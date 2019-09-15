@@ -1,7 +1,7 @@
 <template>
   <div class="n-doc-section">
     <div class="n-doc-section__header">
-      Scaffold
+      Block Node
     </div>
     <div
       class="n-doc-section__view"
@@ -11,12 +11,8 @@
       <n-tree
         ref="tree"
         :data="data"
+        block-node
       /> <!--EXAMPLE_END-->
-    </div>
-    <div class="n-doc-section__inspect">
-      <n-button @click="handleClick">
-        dragEnter
-      </n-button>
     </div>
     <n-doc-source-block>
       <!--SOURCE-->
@@ -25,8 +21,6 @@
 </template>
 
 <script>
-import { setTimeout } from 'timers'
-
 let key = 0
 
 function genData (layer = 2, depth = 0, prefix = '') {
@@ -47,20 +41,6 @@ export default {
   data () {
     return {
       data: genData()
-    }
-  },
-  methods: {
-    handleClick () {
-      this.$refs.tree.handleDragStart({
-        key: 0,
-        isLeaf: false
-      })
-      setTimeout(() => {
-        this.$refs.tree.handleDragEnter({
-          key: 85,
-          isLeaf: false
-        })
-      }, 100)
     }
   }
 }

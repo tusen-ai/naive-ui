@@ -21,8 +21,6 @@
 </template>
 
 <script>
-import { setTimeout } from 'timers'
-
 let key = 0
 
 function genData (layer = 4, depth = 0, prefix = '') {
@@ -43,20 +41,6 @@ export default {
   data () {
     return {
       data: genData()
-    }
-  },
-  methods: {
-    handleClick () {
-      this.$refs.tree.handleDragStart({
-        key: 0,
-        isLeaf: false
-      })
-      setTimeout(() => {
-        this.$refs.tree.handleDragEnter({
-          key: 85,
-          isLeaf: false
-        })
-      }, 100)
     }
   }
 }

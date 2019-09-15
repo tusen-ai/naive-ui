@@ -5,23 +5,23 @@
   >
     <div class="n-doc-header">
       <n-gradient-text :font-size="20">
-        scaffold
+        blockNode
       </n-gradient-text>
     </div>
     <div class="n-doc-body">
       <basic-usage />
-      <scaffold />
+      <block-node />
     </div>
   </div>
 </template>
 
 <script>
 import basicUsage from './basicUsage.demo.vue'
-import scaffold from './scaffold.demo.vue'
+import blockNode from './blockNode.demo.vue'
 
 export default {
   components: {
-    scaffold,
+    blockNode,
     basicUsage
   },
   data () {

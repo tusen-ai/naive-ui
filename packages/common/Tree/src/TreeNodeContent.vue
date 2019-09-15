@@ -18,6 +18,7 @@
     @drop="handleContentDrop"
     @click="handleClick"
   >
+    <div class="n-tree-node-content__padding-box" />
     <slot />
   </span>
 </template>
