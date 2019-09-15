@@ -10,19 +10,27 @@
   font-family: $default-font-family;
   text-align: start;
   vertical-align: baseline;
+  &:not(.n-select--multiple) {
+    @include m(small-size) {
+      line-height: 28px;
+      height: 28px;
+    }
+    @include m(medium-size) {
+      line-height: 34px;
+      height: 34px;
+    }
+    @include m(large-size) {
+      line-height: 40px;
+      height: 40px;
+    }
+  }
   @include m(small-size) {
-    line-height: 28px;
-    height: 28px;
     font-size: 14px;
   }
   @include m(medium-size) {
-    line-height: 34px;
-    height: 34px;
     font-size: 14px;
   }
   @include m(large-size) {
-    line-height: 40px;
-    height: 40px;
     font-size: 15px;
   }
 }

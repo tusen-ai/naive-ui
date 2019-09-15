@@ -3,7 +3,8 @@
     ref="select"
     class="n-select"
     :class="{
-      [`n-select--${size}-size`]: size
+      [`n-select--${size}-size`]: size,
+      'n-select--multiple': multiple
     }"
     @keydown.up.prevent="() => {}"
     @keydown.down.prevent="() => {}"
