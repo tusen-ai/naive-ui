@@ -37,6 +37,8 @@
     box-sizing: border-box;
     border: none;
     font-size: inherit;
+    padding-left: 14px;
+    padding-right: 14px;
     border-radius: $input-border-radius;
     outline: none;
     color: #fff;
@@ -64,17 +66,11 @@
   }
   @include m(small-size) {
     font-size: $small-input-font-size;
-    &:not(.n-input--textarea) {
-      height: $small-height;
-      line-height: $small-height;
-    }
+    $height: round($small-input-font-size * 1.5);
     @include e(input) {
       height: $small-height;
-      line-height: $small-height;
-      padding: 0 14px;
     }
-    @include e(textarea, textarea-mirror) {
-      $height: round($small-input-font-size * 1.5);
+    @include e(input, textarea, textarea-mirror) {
       line-height: $height;
       font-size: $small-input-font-size;
       padding-top: ($small-height - $height) / 2;
@@ -82,18 +78,12 @@
     }
   }
   @include m(medium-size) {
-    font-size: $default-input-font-size;
-    &:not(.n-input--textarea) {
-      height: $default-height;
-      line-height: $default-height;
-    }
+    font-size: $medium-input-font-size;
+    $height: round($medium-input-font-size * 1.5);
     @include e(input) {
-      height: $default-height;
-      line-height: $default-height;
-      padding: 0 14px;
+      height: $medium-height;
     }
-    @include e(textarea, textarea-mirror) {
-      $height: round($medium-input-font-size * 1.5);
+    @include e(input, textarea, textarea-mirror) {
       line-height: $height;
       font-size: $medium-input-font-size;
       padding-top: ($medium-height - $height) / 2;
@@ -102,17 +92,11 @@
   }
   @include m(large-size) {
     font-size: $large-input-font-size;
-    &:not(.n-input--textarea) {
-      height: $large-height;
-      line-height: $large-height;
-    }
+    $height: round($large-input-font-size * 1.5);
     @include e(input) {
       height: $large-height;
-      line-height: $large-height;
-      padding: 0 14px;
     }
-    @include e(textarea, textarea-mirror) {
-      $height: round($large-input-font-size * 1.5);
+    @include e(input, textarea, textarea-mirror) {
       line-height: $height;
       font-size: $large-input-font-size;
       padding-top: ($large-height - $height) / 2;
@@ -162,6 +146,7 @@
     }
   }
   @include e(textarea, textarea-mirror) {
+    box-sizing: border-box;
     font-family: inherit;
     font-size: inherit;
     line-height: 1.5;
