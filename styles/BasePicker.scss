@@ -45,6 +45,7 @@
       width: 100%;
       white-space: nowrap;
       color: $select-text-color;
+      transition: color .3s $default-cubic-bezier;
       padding: 0 32px 0 14px;
       background-color: transparent;
       height: 100%;

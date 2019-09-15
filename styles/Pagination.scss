@@ -1,9 +1,34 @@
 @import './mixins/mixins.scss';
 @import './theme/default.scss';
 
-.n-pagination {
+@include b(pagination) {
   display: inline-flex;
-  .n-pagination__item {
+  @include m(transition-disabled) {
+    @include b(pagination-item) {
+      transition: none;
+      path {
+        transition: none;
+      }
+    }
+  }
+  @include b(select) {
+    width: 120px;
+  }
+  @include b(pagination-quick-jumper) {
+    white-space: nowrap;
+    display: flex;
+    width: 110px;
+    line-height: 28px;
+    @include b(input) {
+      margin: 0 8px;
+      input {
+        padding-left: 6px;
+        padding-right: 10px;
+      }
+    }
+  }
+  @include b(pagination-item) {
+    position: relative;
     cursor: pointer;
     user-select: none;
     color: $pagination-color;
@@ -12,54 +37,85 @@
     padding-left: 4px;
     padding-right: 4px;
     box-sizing: border-box;
+    transition: color .3s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+    path {
+      transition: fill .3s $default-cubic-bezier;
+    }
     &:not(:last-child) {
-      margin-right: 17px;
+      margin-right: 10px;
     }
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius:6px;
-    border:1px solid transparent;
-    .n-pagination-item__label {
-      line-height: 28px;
+    line-height: 28px;
+    @include e(more-icon, arrow-icon) {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateY(-50%) translateX(-50%);
+      path {
+        fill: $pagination-color;
+      }
+      @include m(reverse) {
+        transform: translateY(-50%) translateX(-50%) rotate(180deg);
+      }
     }
-    &.n-pagination__item--active {
-      background: $pagination-bagkround-color--active;
+    @include e(more-icon) {
+      height: 16px;
+    }
+    @include e(arrow-icon) {
+      height: 16px;
+    }
+    @include m(active) {
+      background: $pagination-background-color--active;
       color: $pagination-color--active;
       box-shadow: inset 0 0 0 1px $pagination-color--active;
     }
-    &.n-pagination__item--backward, &.n-pagination__item--forward {
+    @include m(backward, forward) {
       box-shadow: inset 0 0 0 1px  $pagination-color;
-      &.n-pagination__item--disabled {
-        i::before {
-          color: $pagination-color--disabled;
-        }
-        box-shadow: inset 0 0 0 1px $pagination-color--disabled;
-        cursor: not-allowed;
+      path {
+        fill: $pagination-color;
       }
     }
-    .n-pagination-item__fast-backward, .n-pagination-item__fast-forward {
-      .n-pagination-item__fast-backward-icon, .n-pagination-item__fast-forward-icon {
-        display: none;
-      }
-      .n-pagination-item__more-icon {
+    @include m(fast-backward, fast-forward) {
+      @include e(more-icon) {
         display: block;
       }
+      @include e(arrow-icon) {
+        display: none;
+      }
+      path {
+        fill: $pagination-color;
+      }
     }
-    &:hover {
-      .n-pagination-item__fast-backward, .n-pagination-item__fast-forward {
-        .n-pagination-item__more-icon {
+    @include m(disabled) {
+      @include m(active) {
+        background: $pagination-background-color--disabled-active;
+        box-shadow: inset 0 0 0 1px $pagination-color--disabled;
+      }
+      @include m(backward, forward) {
+        box-shadow: inset 0 0 0 1px $pagination-color--disabled;
+      }
+      path {
+        fill: $pagination-color--disabled;
+      }
+      color: $pagination-color--disabled;
+      cursor: not-allowed;
+    }
+    &:not(.n-pagination-item--disabled):hover {
+      @include m(fast-backward, fast-forward) {
+        @include e(more-icon) {
           display: none;
         }
-        .n-pagination-item__fast-backward-icon, .n-pagination-item__fast-forward-icon {
+        @include e(arrow-icon) {
           display: block;
-          .n-icon {
-            display: inline-block;
-            width: 6px;
-            &::before{
-              color: $pagination-color--active;
-            }
+          path {
+            fill: $pagination-color--active;
           }
+        }
+        path {
+          fill: $pagination-color;
         }
       }
     }

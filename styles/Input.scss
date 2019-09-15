@@ -47,7 +47,7 @@
     width: 100%;
     caret-color: $input-caret-color;
     box-shadow: none;
-    transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+    transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier;
     vertical-align: bottom;
     &:focus:hover {
       box-shadow: inset 0 0 0px 1px $main-color, 0px 0px 10px 1px #366555;

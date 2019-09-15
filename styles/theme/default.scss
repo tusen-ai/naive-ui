@@ -67,7 +67,7 @@ $select-placeholder-color--disabled: rgba(255, 255, 255, .2);
 $select-placeholder-color: rgba(255, 255, 255, .4);
 $select-background-color--active: rgba(99, 226, 183, 0.1);
 $select-item-background-color--active: rgba(96, 220, 178, 0.3);
-$select-border-radius: 8px;
+$select-border-radius: 6px;
 $select-border-color--active: $main-color;
 
 /**
@@ -77,7 +77,8 @@ $pagination-color--disabled: rgba(255,255,255,.2);
 $pagination-color: rgba(255,255,255,.6); 
 $pagination-border-radius: 4px;
 $pagination-color--active: $main-color;
-$pagination-bagkround-color--active: rgba(99,226,183,0.3);
+$pagination-background-color--active: rgba(99,226,183,0.3);
+$pagination-background-color--disabled-active: rgba(255,255,255,0.15);
 
 /**
  * n-table

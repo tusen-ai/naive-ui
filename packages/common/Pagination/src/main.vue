@@ -1,96 +1,156 @@
 <template>
-  <div class="n-pagination">
+  <div
+    class="n-pagination"
+    :class="{
+      'n-pagination--transition-disabled': transitionDisabled
+    }"
+  >
     <div
-      class="n-pagination__item n-pagination__item--backward"
+      class="n-pagination-item n-pagination-item--backward"
       :class="{
-        'n-pagination__item--disabled': currentPage === 1
+        'n-pagination-item--disabled': page <= 1 || disabled
       }"
       @click="backward"
     >
-      <n-icon type="ios-arrow-back" />
+      <icon type="backward" />
     </div>
     <div
       v-for="pageItem in pageItems"
       :key="pageItem.label"
-      class="n-pagination__item"
+      class="n-pagination-item"
       :class="{
-        'n-pagination__item--active': pageItem.active
+        'n-pagination-item--active': pageItem.active,
+        'n-pagination-item--fast-backward': pageItem.type==='fastBackward',
+        'n-pagination-item--fast-forward': pageItem.type==='fastForward',
+        'n-pagination-item--disabled': disabled
       }"
       @click="dispatchPageChangeAction(pageItem)"
     >
-      <div
+      <template
         v-if="pageItem.type==='page'"
-        class="n-pagination-item__label"
       >
         {{ pageItem.label }}
-      </div>
-      <div
+      </template>
+      <template
         v-if="pageItem.type==='fastBackward'"
-        class="n-pagination-item__fast-backward"
+        class="n-pagination-item--fast-backward"
       >
-        <div class="n-pagination-item__more-icon">
-          <n-icon type="ios-more" />
-        </div>
-        <div class="n-pagination-item__fast-backward-icon">
-          <n-icon type="ios-arrow-back" />
-          <n-icon type="ios-arrow-back" />
-        </div>
-      </div>
-      <div
+        <icon type="more" />
+        <icon type="fastBackward" />
+      </template>
+      <template
         v-if="pageItem.type==='fastForward'"
-        class="n-pagination-item__fast-forward"
+        class=""
       >
-        <div class="n-pagination-item__more-icon">
-          <n-icon type="ios-more" />
-        </div>
-        <div class="n-pagination-item__fast-forward-icon">
-          <n-icon type="ios-arrow-forward" />
-          <n-icon type="ios-arrow-forward" />
-        </div>
-      </div>
+        <icon type="more" />
+        <icon type="fastForward" />
+      </template>
     </div>
     <div
-      class="n-pagination__item n-pagination__item--forward"
+      class="n-pagination-item n-pagination-item--forward"
       :class="{
-        'n-pagination__item--disabled': currentPage === pageCount
+        'n-pagination-item--disabled': page >= pageCount || disabled
       }"
       @click="forward"
     >
-      <n-icon type="ios-arrow-forward" />
+      <icon type="forward" />
     </div>
+    <div class="n-pagination-quick-jumper">
+      Go to <n-input
+        v-model="quickJumperValue"
+        size="small"
+        :disabled="disabled"
+        @keyup="handleQuickJumperKeyUp"
+      />
+    </div>
+    <n-select
+      v-if="showSizePicker"
+      size="small"
+      placeholder="Select Page Size"
+      :options="sizeOptions"
+      :value="pageSize"
+      :disabled="disabled"
+      @input="handleSizePickerInput"
+    />
   </div>
 </template>
 
 <script>
 import { pageItems } from './utils'
-import NIcon from '../../Icon/index'
+import Icon from './Icon'
+import NSelect from '../../Select'
+import NInput from '../../Input'
 
 export default {
   name: 'NPagination',
   components: {
-    NIcon
+    NSelect,
+    NInput,
+    Icon
   },
   model: {
-    prop: 'currentPage',
-    event: 'change-current-page'
+    prop: 'page',
+    event: 'input'
   },
   props: {
-    currentPage: {
+    page: {
       type: Number,
       required: true
     },
     pageCount: {
       type: Number,
       required: true
+    },
+    showSizePicker: {
+      type: Boolean,
+      default: false
+    },
+    pageSize: {
+      type: Number,
+      default: null
+    },
+    pageSizes: {
+      type: Array,
+      default: () => []
+    },
+    showQuickJumper: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data () {
+    return {
+      quickJumperValue: '',
+      transitionDisabled: false
     }
   },
   computed: {
+    sizeOptions () {
+      return this.pageSizes.map(size => ({
+        label: `${size} / page`,
+        value: size
+      }))
+    },
     pageItems () {
-      return pageItems(this.currentPage, this.pageCount)
+      return pageItems(this.page, this.pageCount)
+    }
+  },
+  watch: {
+    page () {
+      this.transitionDisabled = true
+      this.$nextTick().then(() => {
+        this.$el.getBoundingClientRect()
+        this.transitionDisabled = false
+      })
     }
   },
   methods: {
     dispatchPageChangeAction (pageItem) {
+      if (this.disabled) return
       switch (pageItem.type) {
         case 'page':
           this.setCurrentPage(pageItem.label)
@@ -104,23 +164,41 @@ export default {
       }
     },
     setCurrentPage (page) {
-      this.$emit('change-current-page', page)
+      if (this.disabled) return
+      this.$emit('input', page)
     },
     forward () {
-      const currentPage = Math.min(this.currentPage + 1, this.pageCount)
-      this.$emit('change-current-page', currentPage)
+      if (this.disabled) return
+      const page = Math.min(this.page + 1, this.pageCount)
+      this.$emit('input', page)
     },
     backward () {
-      const currentPage = Math.max(this.currentPage - 1, 1)
-      this.$emit('change-current-page', currentPage)
+      if (this.disabled) return
+      const page = Math.max(this.page - 1, 1)
+      this.$emit('input', page)
     },
     fastForward () {
-      const currentPage = Math.min(this.currentPage + 5, this.pageCount)
-      this.$emit('change-current-page', currentPage)
+      if (this.disabled) return
+      const page = Math.min(this.page + 5, this.pageCount)
+      this.$emit('input', page)
     },
     fastBackward () {
-      const currentPage = Math.max(this.currentPage - 5, 1)
-      this.$emit('change-current-page', currentPage)
+      if (this.disabled) return
+      const page = Math.max(this.page - 5, 1)
+      this.$emit('input', page)
+    },
+    handleSizePickerInput (value) {
+      this.$emit('page-size-change', value)
+      this.$emit('update:pageSize', value)
+    },
+    handleQuickJumperKeyUp (e) {
+      if (e.code === 'Enter') {
+        const page = parseInt(this.quickJumperValue)
+        if (!Number.isNaN(page) && page >= 1 && page <= this.pageCount) {
+          this.$emit('input', page)
+          this.quickJumperValue = ''
+        }
+      }
     }
   }
 }
