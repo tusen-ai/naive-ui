@@ -40,17 +40,24 @@
 
 @mixin type-mixin ($type) {
   @include m($type + "-type") {
+    border-radius: $button-border-radius;
     color: map-get($map: $button-color, $key: $type);
     background-color: map-get($map: $button-background-color, $key: $type);
     box-shadow: map-get($map: $button-box-shadow, $key: $type);
     @include not-m(disabled) {
+      @include m(enter-pressed) {
+        background-color: map-get($map: $button-background-color, $key: $type + '-active');
+      } 
       @include m(rippling) {
-        animation: #{$type}-button-ripple .3s $default-cubic-bezier 1;
+        &::after {
+          animation-name: #{$type}-button-ripple--spread, #{$type}-button-ripple--opacity;
+          animation-duration: .6s;
+          animation-timing-function: cubic-bezier(0, .4, .5, .9), cubic-bezier(.5, .2, .8, .5);
+        }
       }
       &:not(:active):focus {
         @include not-m(enter-pressed) {
-          box-shadow: map-get($map: $button-box-shadow, $key: $type + '-focus');
-          transition: background-color .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
+          background-color: map-get($map: $button-background-color, $key: $type + '-hover');
         } 
       }
       &:hover {
@@ -65,12 +72,20 @@
 }
 
 @mixin ripple-mixin($type) {
-  @keyframes #{$type}-button-ripple {
+  @keyframes #{$type}-button-ripple--spread {
     from {
       box-shadow: map-get($map: $button-box-shadow, $key: $type + '-focus-ripple-start');
     }
     to {
-      box-shadow: map-get($map: $button-box-shadow, $key: $type + '-focus-ripple-end')
+      box-shadow: map-get($map: $button-box-shadow, $key: $type + '-focus-ripple-end');
+    }
+  }
+  @keyframes #{$type}-button-ripple--opacity {
+    from {
+      opacity: .4;
+    }
+    to {
+      opacity: 0;
     }
   }
 }
@@ -80,6 +95,7 @@
 
 @include b(button) {
   outline: none;
+  position: relative;
   border: none;
   font-family: $button-font-family;
   display: inline-flex;
@@ -89,9 +105,17 @@
   font-weight: 700;
   text-align: center;
   vertical-align: baseline;
-  border-radius: $button-border-radius;
-  transition: background-color .15s $default-cubic-bezier, opacity .15s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier;
+  transition: background-color .3s $default-cubic-bezier, opacity .15s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier;
   cursor: pointer;
+  &::after {
+    content: "";
+    border-radius: inherit;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+  }
   @include e(icon) {
     @include fade-in-width-expand-transition();
     margin-right: 6px;
