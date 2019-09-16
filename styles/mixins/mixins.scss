@@ -42,6 +42,14 @@ $BE: null;
   }
 }
 
+@mixin not-m($modifier) {
+  $BEM: '';
+  $BEM: '.' + $BE + '--' + $modifier;
+  &:not(#{$BEM}) {
+    @content
+  }
+}
+
 @mixin detachedContentWrapper {
   position: fixed;
   left: 0;

@@ -10,7 +10,7 @@ $small-height: 28px;
 $default-height: 34px;
 $medium-height: 34px;
 $large-height: 40px;
-
+$default-font-family: 'Lato';
 $main-color: #63E2B7;
 @function main-color-with-alpha($alpha) {
   @return rgba(99, 226, 183, $alpha);
@@ -39,19 +39,82 @@ $input-icon-color: rgba(255,255,255,0.2);
 /**
  * n-button
  */
+$button-font-family: $default-font-family;
 $button-border-radius: 6px;
-$button-tiny-font-size: 12px;
-$button-small-font-size: 14px;
-$button-default-font-size: 14px;
-$button-large-font-size: 16px;
-$button-default-text-color: $main-color;
-$button-default-border-color: $main-color;
-$button-default-background-color: transparent;
-$button-default-background-color--hover: rgba(99, 226, 183, .3);
-$button-default-background-color--active: rgba(99, 226, 183, .2);
-$button-primary-background-color: $main-color;
-$button-primary-background-color--hover: rgb(103, 235, 190);
-$button-primary-background-color--active: rgb(97, 218, 177);
+$button-font-size: (
+  "tiny": 12px,
+  "small": 14px,
+  "medium": 14px,
+  "large": 16px
+);
+$button-height: (
+  "tiny": 22px,
+  "small": 28px,
+  "medium": 34px,
+  "large": 40px
+);
+$button-padding: (
+  "tiny": 0 6px,
+  "small": 0 10px,
+  "medium": 0 14px,
+  "large": 0 18px
+);
+$round-button-padding: (
+  "tiny": 0 10px,
+  "small": 0 14px,
+  "medium": 0 18px,
+  "large": 0 22px
+);
+$button-icon-size: (
+  "tiny": 14px,
+  "small": 16px,
+  "medium": 18px,
+  "large": 20px
+);
+$button-border-color: (
+  "default": $main-color,
+  "primary": $main-color,
+  "info": $main-color,
+  "success": $main-color,
+  "warning": $main-color,
+  "error": $main-color
+);
+$button-box-shadow-spread: 2px;
+$button-box-shadow-ripple-spread: 4px;
+$button-box-shadow-spread-alpha: .3;
+$button-box-shadow-ripple-spread-alpha: 0;
+$button-box-shadow: (
+  'default': inset 0 0 0 1px map-get($map: $button-border-color, $key: 'default'),
+  'default-focus': (inset 0 0 0 1px map-get($map: $button-border-color, $key: 'default'), 0 0 0 $button-box-shadow-spread change-color(map-get($map: $button-border-color, $key: 'default'), $alpha: $button-box-shadow-spread-alpha)),
+  'default-focus-ripple-start': (inset 0 0 0 1px map-get($map: $button-border-color, $key: 'default'), 0 0 0 0 change-color(map-get($map: $button-border-color, $key: 'default'), $alpha: $button-box-shadow-spread-alpha), 0 0 0 0 change-color(map-get($map: $button-border-color, $key: 'default'), $alpha: 1)),  
+  'default-focus-ripple-end': (inset 0 0 0 1px map-get($map: $button-border-color, $key: 'default'), 0 0 0 $button-box-shadow-spread change-color(map-get($map: $button-border-color, $key: 'default'), $alpha: $button-box-shadow-spread-alpha), 0 0 0 $button-box-shadow-ripple-spread change-color(map-get($map: $button-border-color, $key: 'default'), $alpha: $button-box-shadow-ripple-spread-alpha)),
+  'primary': none,
+  'primary-focus': 0 0 0 $button-box-shadow-spread change-color(map-get($map: $button-border-color, $key: 'primary'), $alpha: $button-box-shadow-spread-alpha),
+  'primary-focus-ripple-start': (0 0 0 0 change-color(map-get($map: $button-border-color, $key: 'primary'), $alpha: $button-box-shadow-spread-alpha), 0 0 0 0 change-color(map-get($map: $button-border-color, $key: 'primary'), $alpha: 1)),  
+  'primary-focus-ripple-end': (0 0 0 $button-box-shadow-spread change-color(map-get($map: $button-border-color, $key: 'primary'), $alpha: $button-box-shadow-spread-alpha), 0 0 0 $button-box-shadow-ripple-spread change-color(map-get($map: $button-border-color, $key: 'primary'), $alpha: $button-box-shadow-ripple-spread-alpha)),
+);
+$button-background-color: (
+  "default": transparent,
+  "default-focus": rgba(99, 226, 183, .3),
+  "default-hover": rgba(99, 226, 183, .3),
+  "default-active": rgba(99, 226, 183, .2),
+  "primary": $main-color,
+  "primary-focus": rgb(103, 235, 190),
+  "primary-hover": rgb(103, 235, 190),
+  "primary-active": rgb(97, 218, 177),
+  "info": $main-color,
+  "success": $main-color,
+  "warning": $main-color,
+  "error": $main-color
+);
+$button-color: (
+  "default": $main-color,
+  "primary": black,
+  "info": $main-color,
+  "success": $main-color,
+  "warning": $main-color,
+  "error": $main-color
+);
 
 /**
  * n-select
@@ -124,8 +187,6 @@ $default-text-gradient-success: linear-gradient(14deg, rgba(120,205,104,1) 0%, r
 $default-text-gradient-danger: linear-gradient(214deg, rgba(224,32,32,1) 0%, rgba(250,100,0,1) 100%);
 
 $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
-
-$default-font-family: 'Lato';
 
 $scrollbar-color: rgba(255,255,255,0.2);
 $scrollbar-color--hover: rgba(255,255,255,0.3);

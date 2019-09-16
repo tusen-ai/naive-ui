@@ -1,14 +1,21 @@
 <template>
-  <div
+  <button
     class="n-button"
     :class="{
       'n-button--round': round,
       [`n-button--${type}-type`]: true,
       [`n-button--${size}-size`]: true,
       'n-button--disabled': disabled,
-      'n-button--loading': loading
+      'n-button--loading': loading,
+      'n-button--block': block,
+      'n-button--rippling': rippling,
+      'n-button--enter-pressed': enterPressed
     }"
+    :tabindex="focusable && !disabled ? 0 : -1"
     @click="handleClick"
+    @blur="handleBlur"
+    @keyup.enter="handleKeyUpEnter"
+    @keydown.enter="handleKeyDownEnter"
   >
     <transition
       name="n-fade-in-width-expand"
@@ -82,7 +89,7 @@
         </div>
       </div>
     </transition>
-  </div>
+  </button>
 </template>
 
 <script>
@@ -100,6 +107,10 @@ export default {
     texttransparentable
   ],
   props: {
+    block: {
+      type: Boolean,
+      default: false
+    },
     loading: {
       type: Boolean,
       default: false
@@ -116,12 +127,18 @@ export default {
       type: Boolean,
       default: false
     },
-    gradient: {
+    circle: {
       type: Boolean,
       default: false
     },
+    focusable: {
+      type: Boolean,
+      default: true
+    },
     type: {
-      type: String,
+      validator (value) {
+        return ['default', 'primary', 'link', 'info', 'success', 'warning', 'error'].includes(value)
+      },
       default: 'default'
     },
     icon: {
@@ -137,7 +154,9 @@ export default {
   },
   data () {
     return {
-      style: {}
+      style: {},
+      enterPressed: false,
+      rippling: false
     }
   },
   computed: {
@@ -148,13 +167,31 @@ export default {
       return this.iconPosition === 'right'
     }
   },
-  mounted () {
-  },
   methods: {
     handleClick (e) {
       if (!this.disabled) {
         this.$emit('click', e)
+        this.rippling = false
+        this.$nextTick().then(() => {
+          this.$el.getBoundingClientRect()
+          this.rippling = true
+        })
       }
+    },
+    handleKeyUpEnter (e) {
+      this.enterPressed = false
+      this.$nextTick().then(() => {
+        if (!this.disabled) {
+          this.$el.click()
+        }
+      })
+    },
+    handleKeyDownEnter (e) {
+      e.preventDefault()
+      this.enterPressed = true
+    },
+    handleBlur (e) {
+      this.enterPressed = false
     }
   }
 }

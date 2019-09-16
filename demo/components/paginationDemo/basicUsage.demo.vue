@@ -12,7 +12,9 @@
         v-model="page"
         :page-size="pageSize"
         :page-sizes="[10, 20, 30, 40]"
-        :page-count="8"
+        :page-count="100"
+        show-size-picker
+        show-quick-jumper
         :disabled="disabled"
         @page-size-change="handlePageSizeChange"
       />
