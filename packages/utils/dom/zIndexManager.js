@@ -16,7 +16,8 @@ class ZIndexManager {
     if (this.elementZIndex.has(el)) {
       console.debug('[ZIndexManager.registerElement]: do not register duplicate element')
     } else {
-      console.debug('[ZIndexManager.registerElement]: successfully register', el)
+      // console.debug('[ZIndexManager.registerElement]: successfully register', el)
+      console.debug('[ZIndexManager.registerElement]: successfully register $el')
       el.style.zIndex = this.nextZIndex
       this.elementZIndex.set(el, this.nextZIndex)
       this.nextZIndex++
@@ -25,7 +26,9 @@ class ZIndexManager {
   setNewZIndex (el) {
     console.debug('[ZIndexManager.setNewZIndex]: called')
     if (this.elementZIndex.has(el)) {
-      console.debug('[ZIndexManager.setNewZIndex]: successfully set z-index on', el, `(z-index: ${this.nextZIndex})`)
+      // console.debug('[ZIndexManager.setNewZIndex]: successfully set z-index on', el, `(z-index: ${this.nextZIndex})`)
+      console.debug('[ZIndexManager.setNewZIndex]: successfully set z-index on $el' + `(z-index: ${this.nextZIndex})`)
+
       const currentZIndex = this.elementZIndex.get(el)
       if (currentZIndex + 1 === this.nextZIndex) return
       el.style.zIndex = this.nextZIndex
@@ -38,7 +41,7 @@ class ZIndexManager {
   unregisterElement (el) {
     console.debug('[ZIndexManager.unregisterElement]: called')
     if (this.elementZIndex.has(el)) {
-      console.debug('[ZIndexManager.unregisterElement]: successfully delete', el)
+      console.debug('[ZIndexManager.unregisterElement]: successfully delete $el') //, el)
       this.elementZIndex.delete(el)
     } else {
       console.log('[ZIndexManager.unregisterElement]: element not found')

@@ -17,7 +17,8 @@ function lazyHandler (handler) {
 
 const mousemoveoutside = {
   bind (el, bindings) {
-    console.debug('[mousemoveoutside]: bind', el)
+    // console.debug('[mousemoveoutside]: bind', el)
+    console.debug('[mousemoveoutside]: bind $el')
     if (typeof bindings.value === 'function') {
       el[ctx] = {
         handler: bindings.modifiers.lazy ? lazyHandler(bindings.value) : bindings.value

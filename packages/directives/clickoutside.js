@@ -17,7 +17,8 @@ function lazyHandler (handler) {
 
 const clickoutside = {
   bind (el, bindings) {
-    console.debug('[clickoutside]: bind', el)
+    // console.debug('[clickoutside]: bind', el)
+    console.debug('[clickoutside]: bind $el')
     if (typeof bindings.value === 'function') {
       el[ctx] = {
         handler: bindings.modifiers.lazy ? lazyHandler(bindings.value) : bindings.value

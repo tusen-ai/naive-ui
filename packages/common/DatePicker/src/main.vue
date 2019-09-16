@@ -378,11 +378,11 @@ export default {
      */
     handleActivatorClick (e) {
       if (this.disabled) return
-      console.log('handleActivatorClick')
+      // console.log('handleActivatorClick')
       if (this.active) {
         e.stopPropagation()
       } else {
-        console.log('open calendar')
+        // console.log('open calendar')
         this.openCalendar()
       }
     },
@@ -399,7 +399,7 @@ export default {
     openCalendar (e) {
       if (this.disabled || this.active) return
       this.active = true
-      console.log('into open calendar')
+      // console.log('into open calendar')
       this.$nextTick().then(this.updatePosition)
     },
     closeCalendar () {
