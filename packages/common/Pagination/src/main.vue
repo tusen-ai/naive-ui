@@ -8,7 +8,7 @@
     <div
       class="n-pagination-item n-pagination-item--backward"
       :class="{
-        'n-pagination-item--disabled': page <= 1 || disabled
+        'n-pagination-item--disabled': page <= 1 || page > safePageCount || disabled
       }"
       @click="backward"
     >
@@ -49,13 +49,16 @@
     <div
       class="n-pagination-item n-pagination-item--forward"
       :class="{
-        'n-pagination-item--disabled': page >= pageCount || disabled
+        'n-pagination-item--disabled': page < 1 || page >= safePageCount || disabled
       }"
       @click="forward"
     >
       <icon type="forward" />
     </div>
-    <div class="n-pagination-quick-jumper">
+    <div
+      v-if="showQuickJumper"
+      class="n-pagination-quick-jumper"
+    >
       Go to <n-input
         v-model="quickJumperValue"
         size="small"
@@ -98,7 +101,9 @@ export default {
       required: true
     },
     pageCount: {
-      type: Number,
+      validator (value) {
+        return Number.isInteger(value) && value > 0
+      },
       required: true
     },
     showSizePicker: {
@@ -129,6 +134,9 @@ export default {
     }
   },
   computed: {
+    safePageCount () {
+      return this.pageCount <= 0 ? 1 : this.pageCount
+    },
     sizeOptions () {
       return this.pageSizes.map(size => ({
         label: `${size} / page`,
@@ -136,7 +144,7 @@ export default {
       }))
     },
     pageItems () {
-      return pageItems(this.page, this.pageCount)
+      return pageItems(this.page, this.safePageCount)
     }
   },
   watch: {
@@ -169,7 +177,7 @@ export default {
     },
     forward () {
       if (this.disabled) return
-      const page = Math.min(this.page + 1, this.pageCount)
+      const page = Math.min(this.page + 1, this.safePageCount)
       this.$emit('input', page)
     },
     backward () {
@@ -179,7 +187,7 @@ export default {
     },
     fastForward () {
       if (this.disabled) return
-      const page = Math.min(this.page + 5, this.pageCount)
+      const page = Math.min(this.page + 5, this.safePageCount)
       this.$emit('input', page)
     },
     fastBackward () {
@@ -194,7 +202,7 @@ export default {
     handleQuickJumperKeyUp (e) {
       if (e.code === 'Enter') {
         const page = parseInt(this.quickJumperValue)
-        if (!Number.isNaN(page) && page >= 1 && page <= this.pageCount) {
+        if (!Number.isNaN(page) && page >= 1 && page <= this.safePageCount) {
           this.$emit('input', page)
           this.quickJumperValue = ''
         }
