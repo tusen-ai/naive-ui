@@ -170,16 +170,16 @@ export default {
       }
     },
     nextYear () {
-      this.calendarDateTime = moment(this.calendarDateTime.add(1, 'year'))
+      this.calendarDateTime = moment(this.calendarDateTime).add(1, 'year')
     },
     prevYear () {
-      this.calendarDateTime = moment(this.calendarDateTime.subtract(1, 'year'))
+      this.calendarDateTime = moment(this.calendarDateTime).subtract(1, 'year')
     },
     nextMonth () {
-      this.calendarDateTime = moment(this.calendarDateTime.add(1, 'month'))
+      this.calendarDateTime = moment(this.calendarDateTime).add(1, 'month')
     },
     prevMonth () {
-      this.calendarDateTime = moment(this.calendarDateTime.subtract(1, 'month'))
+      this.calendarDateTime = moment(this.calendarDateTime).subtract(1, 'month')
     }
   }
 }

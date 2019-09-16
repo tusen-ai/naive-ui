@@ -27,8 +27,8 @@ export default {
       if (this.active) {
         this.noTransition = true
         this.$nextTick().then(() => {
-          if (this.$refs.self) {
-            this.$refs.self.getBoundingClientRect()
+          if (this.$el) {
+            this.$el.getBoundingClientRect()
           }
           this.noTransition = false
         })

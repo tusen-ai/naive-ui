@@ -106,8 +106,8 @@
           class="n-date-picker-calendar__dates"
         >
           <div
-            v-for="dateItem in dateArray(startCalendarDateTime, valueAsMomentArray, currentDateTime)"
-            :key="`${dateItem.timestamp}${dateItem.isDateOfDisplayMonth}`"
+            v-for="(dateItem, i) in dateArray(startCalendarDateTime, valueAsMomentArray, currentDateTime)"
+            :key="i"
             class="n-date-picker-calendar__date"
             :class="{
               'n-date-picker-calendar__date--current': dateItem.isCurrentDate,
@@ -191,8 +191,8 @@
           class="n-date-picker-calendar__dates"
         >
           <div
-            v-for="dateItem in dateArray(endCalendarDateTime, valueAsMomentArray, currentDateTime)"
-            :key="`${dateItem.timestamp}${dateItem.isDateOfDisplayMonth}`"
+            v-for="(dateItem, i) in dateArray(endCalendarDateTime, valueAsMomentArray, currentDateTime)"
+            :key="i"
             class="n-date-picker-calendar__date"
             :class="{
               'n-date-picker-calendar__date--current': dateItem.isCurrentDate,

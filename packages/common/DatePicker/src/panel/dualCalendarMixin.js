@@ -68,6 +68,28 @@ export default {
       } else return null
     }
   },
+  watch: {
+    startCalendarDateTime (newCalendarDateTime, oldCalendarDateTime) {
+      if (newCalendarDateTime.isValid() && oldCalendarDateTime) {
+        if (
+          newCalendarDateTime.year() !== oldCalendarDateTime.year() ||
+          newCalendarDateTime.month() !== oldCalendarDateTime.month()
+        ) {
+          this.banTransitionOneTick()
+        }
+      }
+    },
+    endCalendarDateTime (newCalendarDateTime, oldCalendarDateTime) {
+      if (newCalendarDateTime.isValid() && oldCalendarDateTime) {
+        if (
+          newCalendarDateTime.year() !== oldCalendarDateTime.year() ||
+          newCalendarDateTime.month() !== oldCalendarDateTime.month()
+        ) {
+          this.banTransitionOneTick()
+        }
+      }
+    }
+  },
   methods: {
     resetSelectingStatus (e) {
       if (this.$refs.startDates.contains(e.target) || this.$refs.endDates.contains(e.target)) {
