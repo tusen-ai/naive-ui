@@ -40,10 +40,11 @@
 
 <script>
 import bubblecallable from '../../../mixins/bubblecallable'
+import withlightbar from '../../../mixins/withlightbar'
 
 export default {
   name: 'NDropdownSubmenu',
-  mixins: [ bubblecallable ],
+  mixins: [ bubblecallable, withlightbar ],
   props: {
     trigger: {
       validator (trigger) {
@@ -59,9 +60,7 @@ export default {
   data () {
     return {
       active: false,
-      vanishTimerId: null,
-      showLightBar: false,
-      lightBarTop: 0
+      vanishTimerId: null
     }
   },
   computed: {
@@ -88,11 +87,11 @@ export default {
       if (this.triggerByHover) {
         this.vanishTimerId = window.setTimeout(() => {
           this.active = false
-          this.showLightBar = false
+          this.hideLightBar()
         }, this.duration)
       } else {
         this.active = false
-        this.showLightBar = false
+        this.hideLightBar()
       }
     },
     handleActivatorClick () {
@@ -122,16 +121,7 @@ export default {
       }
     },
     handleMouseEnter (e) {
-      this.bubbleCall(['NDropdown', 'NDropdownSubmenu'], 'updateLightBarPosition', this.$el)
-    },
-    updateLightBarPosition (el) {
-      if (this.$refs.activator && !this.$refs.activator.contains(el)) {
-        this.showLightBar = true
-        this.lightBarTop = el.offsetTop
-      }
-    },
-    hideLightBar () {
-      this.showLightBar = false
+      this.bubbleCall(['NDropdownMenu', 'NDropdownSubmenu'], 'updateLightBarPosition', this.$el)
     }
   }
 }

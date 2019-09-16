@@ -10,7 +10,7 @@
       <!--EXAMPLE_START-->
       <n-dropdown>
         <template v-slot:activator>
-          menu
+          <div>menu</div>
         </template>
         <n-dropdown-item
           v-for="item in items"

@@ -20,7 +20,7 @@ $popover-arrow-width: 6px;
   }
 }
 .n-popover__content {
-  transform: inherit;
+  transform-origin: inherit;
   position: relative;
   border-radius: 6px;
   background-color: rgba(75, 81, 106, 1);
@@ -83,7 +83,7 @@ $popover-arrow-width: 6px;
   }
   &[n-placement$="top-start"] {
     margin-bottom: 10px;
-    transform-origin: bottom center;
+    
     .n-popover__arrow {
       bottom: -2 * $popover-arrow-width;
       border-top-color: rgba(75, 81, 106, 1);
@@ -92,7 +92,6 @@ $popover-arrow-width: 6px;
   }
   &[n-placement$="top"] {
     margin-bottom: 10px;
-    transform-origin: bottom center;
     .n-popover__arrow {
       bottom: -2 * $popover-arrow-width;
       transform: translateX(-$popover-arrow-width);
@@ -102,7 +101,6 @@ $popover-arrow-width: 6px;
   }
   &[n-placement$="top-end"] {
     margin-bottom: 10px;
-    transform-origin: bottom center;
     .n-popover__arrow {
       bottom: -2 * $popover-arrow-width;
       border-top-color: rgba(75, 81, 106, 1);
@@ -111,7 +109,6 @@ $popover-arrow-width: 6px;
   }
   &[n-placement$="bottom-start"] {
     margin-top: 10px;
-    transform-origin: top center;
     .n-popover__arrow {
       top: -2 * $popover-arrow-width;
       border-bottom-color: rgba(75, 81, 106, 1);
@@ -120,7 +117,6 @@ $popover-arrow-width: 6px;
   }
   &[n-placement$="bottom"] {
     margin-top: 10px;
-    transform-origin: top center;
     .n-popover__arrow {
       top: -2 * $popover-arrow-width;
       transform: translateX(-$popover-arrow-width);
@@ -130,7 +126,6 @@ $popover-arrow-width: 6px;
   }
   &[n-placement$="bottom-end"] {
     margin-top: 10px;
-    transform-origin: top center;
     .n-popover__arrow {
       top: -2 * $popover-arrow-width;
       border-bottom-color: rgba(75, 81, 106, 1);
@@ -139,7 +134,6 @@ $popover-arrow-width: 6px;
   }
   &[n-placement$="left-start"] {
     margin-right: 10px;
-    transform-origin: right center;
     .n-popover__arrow {
       right: -2 * $popover-arrow-width;
       border-left-color: rgba(75, 81, 106, 1);
@@ -147,7 +141,6 @@ $popover-arrow-width: 6px;
     }
   }&[n-placement$="left"] {
     margin-right: 10px;
-    transform-origin: right center;
     .n-popover__arrow {
       right: -2 * $popover-arrow-width;
       transform: translateY(-$popover-arrow-width);
@@ -157,7 +150,6 @@ $popover-arrow-width: 6px;
   }
   &[n-placement$="left-end"] {
     margin-right: 10px;
-    transform-origin: right center;
     .n-popover__arrow {
       right: -2 * $popover-arrow-width;
       border-left-color: rgba(75, 81, 106, 1);
@@ -166,7 +158,6 @@ $popover-arrow-width: 6px;
   }
   &[n-placement$="right-start"] {
     margin-left: 10px;
-    transform-origin: left center;
     .n-popover__arrow {
       left: -2 * $popover-arrow-width;
       border-right-color: rgba(75, 81, 106, 1);
@@ -175,7 +166,6 @@ $popover-arrow-width: 6px;
   }
   &[n-placement$="right"] {
     margin-left: 10px;
-    transform-origin: left center;
     .n-popover__arrow {
       left: -2 * $popover-arrow-width;
       transform: translateY(-$popover-arrow-width);
@@ -185,7 +175,6 @@ $popover-arrow-width: 6px;
   }
   &[n-placement$="right-end"] {
     margin-left: 10px;
-    transform-origin: left center;
     .n-popover__arrow {
       left: -2 * $popover-arrow-width;
       border-right-color: rgba(75, 81, 106, 1);

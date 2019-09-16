@@ -8,11 +8,10 @@
 }
 
 @include b(dropdown-menu) {
-  @include fade-in-scale-up-transition(dropdown, inherit, .2s);
+  transform-origin: inherit;
   position: relative;
   background-color: rgba(75, 81, 106, 1);
   margin: 6px 0;
-  padding: 4px 0;
   border-radius: 6px;
   font-size: 14px;
   box-shadow:0px 2px 20px 0px rgba(0,0,0,0.16);
@@ -43,7 +42,6 @@
   }
   .n-dropdown-submenu__menu {
     @include fade-in-scale-up-transition(dropdown-submenu, left top, .2s);
-    padding: 4px 0;
     position: absolute;
     left: 100%;
     top: 0;

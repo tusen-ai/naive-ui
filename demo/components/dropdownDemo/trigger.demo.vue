@@ -13,7 +13,7 @@
         style="margin-right: 16px;"
       >
         <template v-slot:activator>
-          Trigger: hover
+          <div>Trigger: hover</div>
         </template>
         <n-dropdown-item
           v-for="item in items"
@@ -25,7 +25,7 @@
       </n-dropdown>
       <n-dropdown trigger="click">
         <template v-slot:activator>
-          Trigger: click
+          <div>Trigger: click</div>
         </template>
         <n-dropdown-item
           v-for="item in items"

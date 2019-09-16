@@ -13,7 +13,7 @@
         trigger="hover"
       >
         <template v-slot:activator>
-          menu
+          <div>menu</div>
         </template>
         <n-dropdown-item>
           item1

@@ -24,6 +24,7 @@ import NIcon from '../../Icon'
 import bubblecallable from '../../../mixins/bubblecallable'
 
 export default {
+  inject: ['NDropdownController'],
   name: 'NDropdownItem',
   components: {
     NIcon
@@ -41,7 +42,14 @@ export default {
   },
   methods: {
     handleMouseEnter (e) {
-      this.bubbleCall(['NDropdown', 'NDropdownSubmenu'], 'updateLightBarPosition', this.$el)
+      if (!(
+        this.$parent &&
+        this.$parent.$options.name === 'NDropdownSubmenu' &&
+        this.$parent.$refs.activator &&
+        this.$parent.$refs.activator.contains(this.$el)
+      )) {
+        this.bubbleCall(['NDropdownMenu', 'NDropdownSubmenu'], 'updateLightBarPosition', this.$el)
+      }
     },
     handleClick (e) {
       if (!(
@@ -50,7 +58,7 @@ export default {
         this.$parent.$refs.activator &&
         this.$parent.$refs.activator.contains(this.$el)
       )) {
-        this.bubbleCall(['NDropdown'], 'deactivate', { immediately: true })
+        this.NDropdownController.hide()
       }
       this.$emit('click', e)
     }
