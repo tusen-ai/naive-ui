@@ -41,6 +41,9 @@
       ref="contentContainer"
       v-clickoutside="handleClickOutsideMenu"
       class="n-detached-content-container n-select-detached-content-container"
+      :class="{
+        [namespace]: namespace
+      }"
     >
       <div
         ref="content"

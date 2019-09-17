@@ -38,6 +38,9 @@
     <div
       ref="contentContainer"
       class="n-detached-content-container n-cascader-detached-content-container"
+      :class="{
+        [namespace]: namespace
+      }"
     >
       <div
         ref="content"

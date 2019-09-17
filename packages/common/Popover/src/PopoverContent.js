@@ -3,6 +3,7 @@ import clickoutside from '../../../directives/clickoutside'
 import mousemoveoutside from '../../../directives/mousemoveoutside'
 import placeable from '../../../mixins/placeable'
 import zindexable from '../../../mixins/zindexable'
+import withapp from '../../../mixins/withapp'
 
 export default {
   name: 'NPopoverContent',
@@ -42,9 +43,13 @@ export default {
     maxWidth: {
       type: Number,
       default: null
+    },
+    detachedContainerClass: {
+      type: String,
+      default: 'n-popover-detached-content-container'
     }
   },
-  mixins: [placeable, zindexable],
+  mixins: [withapp, placeable, zindexable],
   directives: {
     clickoutside,
     mousemoveoutside
@@ -187,6 +192,10 @@ export default {
     // console.log('render popover content', this.$props)
     return h('div', {
       staticClass: 'n-detached-content-container',
+      class: {
+        [this.detachedContainerClass]: true,
+        [this.namespace]: this.namespace
+      },
       ref: 'contentContainer'
     }, [
       h('div', {

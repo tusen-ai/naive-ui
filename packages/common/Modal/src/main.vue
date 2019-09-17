@@ -47,7 +47,8 @@ export default {
         staticClass: 'n-modal-container',
         ref: 'contentContainer',
         class: {
-          'n-modal-container--active': this.value
+          'n-modal-container--active': this.value,
+          [this.namespace]: this.namespace
         }
       },
       [

@@ -12,7 +12,10 @@
     </div>
     <div
       ref="contentContainer"
-      class="n-detached-content-container"
+      class="n-detached-content-container n-time-picker-detached-content-container"
+      :class="{
+        [namespace]: namespace
+      }"
     >
       <div
         ref="content"
