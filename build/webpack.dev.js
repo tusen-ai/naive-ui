@@ -36,6 +36,10 @@ const webpackConfig = {
   module: {
     rules: [
       {
+        test: /\.md$/,
+        loader: ['vue-loader', path.resolve(__dirname, '../marked/NaiveUIMdLoader.js')]
+      },
+      {
         test: /\.demo\.vue$/,
         loader: ['vue-loader', path.resolve(__dirname, '../doc/NaiveUIDemoLoader.js')]
       },

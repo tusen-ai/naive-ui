@@ -1,0 +1,42 @@
+@import '../styles/mixins/config.scss';
+@import '../styles/mixins/mixins.scss';
+
+@include b(code-box) {
+  &.n-default-theme {
+    background-color: #5c657eff;
+  }
+  &.n-light-theme {
+    background-color: white;
+    color: #222222;
+    .n-divider__content {
+      color: #222222;
+    }
+  }
+  border-radius: 8px;
+  padding-top: 16px;
+  .n-divider__content {
+    cursor: pointer;
+  }
+  @include e(title) {
+    margin: 0 24px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  @include e(content) {
+    margin: 12px 24px 0 24px;
+    p {
+      font-size: 14px;
+      margin: 0;
+    }
+    code {
+      font-family: "Lato";
+      font-size: 14px;
+    }
+  }
+  @include e(view) {
+    margin: 0 24px;
+  }
+  @include e(code) {
+
+  }
+}
