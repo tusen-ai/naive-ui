@@ -2,6 +2,7 @@ import Vue from 'vue/dist/vue'
 import VueRouter from 'vue-router'
 import '../styles/index.scss'
 import 'codemirror/lib/codemirror.css'
+import 'highlight.js/styles/github.css'
 import NaiveUI from '../index'
 import SourceBlock from './SourceBlock'
 
@@ -60,6 +61,8 @@ import sliderDemo from './components/sliderDemo'
 import treeDemo from './components/treeDemo'
 
 import demo from './demo'
+import DemoSection from './DemoSection'
+import './CodeBox.scss'
 
 import popoverDebug from './debugComponents/popoverDebug'
 import routerDebug from './debugComponents/routerDebug'
@@ -74,6 +77,7 @@ Vue.use(NaiveUI)
 Vue.use(VueRouter)
 
 Vue.component(SourceBlock.name, SourceBlock)
+Vue.component('DemoSection', DemoSection)
 
 const routes = [
   {

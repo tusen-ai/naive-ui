@@ -1,22 +1,35 @@
 <template>
-  <div class="demo">
+  <n-app
+    class="demo"
+    namespace="naive-ui-doc"
+    :theme="theme"
+  >
     <n-nimbus-service-layout
       icon="md-contacts"
       :name="`NAIVE UI (${version})`"
       :padding-body="true"
       :items="items"
     >
+      <template v-slot:header>
+        <doc-header />
+      </template>
       <router-view />
     </n-nimbus-service-layout>
-  </div>
+  </n-app>
 </template>
 
 <script>
 import { version } from '../package.json'
+import DocHeader from './header.vue'
+
 export default {
+  components: {
+    DocHeader
+  },
   data () {
     return {
       version,
+      theme: 'default',
       items: [
         {
           name: 'Start',
