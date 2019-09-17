@@ -131,4 +131,10 @@ function convertMd2Demo (text) {
 }
 
 module.exports = convertMd2Demo
-convertMd2Demo(fs.readFileSync('./marked/basic.md').toString())
+// const startTime = new Date()
+// for (let i = 0; i < 100; ++i) {
+//   const md = fs.readFileSync('./marked/basic.md').toString()
+//   convertMd2Demo(md)
+// }
+// const endTime = new Date()
+// console.log(endTime - startTime)
