@@ -1,0 +1,78 @@
+@mixin setup-default-theme () {
+  $button-font-family: $default-font-family !global;
+  $button-border-radius: 6px !global;
+  $button-font-size: (
+    "tiny": 12px,
+    "small": 14px,
+    "medium": 14px,
+    "large": 16px
+  ) !global;
+  $button-height: (
+    "tiny": 22px,
+    "small": 28px,
+    "medium": 34px,
+    "large": 40px
+  ) !global;
+  $button-padding: (
+    "tiny": 0 6px,
+    "small": 0 10px,
+    "medium": 0 14px,
+    "large": 0 18px
+  ) !global;
+  $round-button-padding: (
+    "tiny": 0 10px,
+    "small": 0 14px,
+    "medium": 0 18px,
+    "large": 0 22px
+  ) !global;
+  $button-icon-size: (
+    "tiny": 14px,
+    "small": 16px,
+    "medium": 18px,
+    "large": 20px
+  ) !global;
+  $button-border-color: (
+    "default": $main-color,
+    "primary": $main-color,
+    "info": $main-color,
+    "success": $main-color,
+    "warning": $main-color,
+    "error": $main-color
+  ) !global;
+  $button-box-shadow-spread: 0px !global;
+  $button-box-shadow-ripple-spread: 4px !global;
+  $button-box-shadow-ripple-spread-alpha: 0 !global;
+  $button-box-shadow-spread-alpha: .3 !global;
+  $button-box-shadow: (
+    'default': inset 0 0 0 1px map-get($map: $button-border-color, $key: 'default'),
+    'default-focus': (inset 0 0 0 1px map-get($map: $button-border-color, $key: 'default'), 0 0 0 $button-box-shadow-spread change-color(map-get($map: $button-border-color, $key: 'default'), $alpha: $button-box-shadow-spread-alpha)),
+    'default-focus-ripple-start': (0 0 0 0 map-get($map: $button-border-color, $key: 'default')),  
+    'default-focus-ripple-end': (0 0 0 $button-box-shadow-ripple-spread map-get($map: $button-border-color, $key: 'default')),
+    'primary': none,
+    'primary-focus': 0 0 0 $button-box-shadow-spread change-color(map-get($map: $button-border-color, $key: 'primary'), $alpha: $button-box-shadow-spread-alpha),
+    'primary-focus-ripple-start': (0 0 0 0 map-get($map: $button-border-color, $key: 'primary')),  
+    'primary-focus-ripple-end': (0 0 0 $button-box-shadow-ripple-spread map-get($map: $button-border-color, $key: 'primary'))
+  ) !global;
+  $button-background-color: (
+    "default": transparent,
+    "default-focus": rgba(99, 226, 183, .3),
+    "default-hover": rgba(99, 226, 183, .3),
+    "default-active": rgba(99, 226, 183, .2),
+    "primary": $main-color,
+    "primary-focus": rgb(103, 235, 190),
+    "primary-hover": rgb(103, 235, 190),
+    "primary-active": rgb(97, 218, 177),
+    "info": $main-color,
+    "success": $main-color,
+    "warning": $main-color,
+    "error": $main-color
+  ) !global;
+  $button-color: (
+    "default": $main-color,
+    "primary": black,
+    "info": $main-color,
+    "success": $main-color,
+    "warning": $main-color,
+    "error": $main-color
+  ) !global;
+}
