@@ -293,7 +293,7 @@ export default {
           total = this.searchData.length
           console.log('TCL: pageCount -> total', total)
         }
-        return Math.ceil(total / this.pagination.limit)
+        return Math.ceil(total / this.pagination.limit) || 1
       }
       return 1
     },
