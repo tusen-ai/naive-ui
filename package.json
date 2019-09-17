@@ -16,7 +16,7 @@
     "test-release": "cross-env NODE_ENV=production webpack-dev-server --config build/webpack.release.js",
     "release-doc": "cross-env NODE_ENV=development && rm -rf doc/dist && node doc/changeDemoVersion.js && node doc/injectReadme.js && webpack --config build/webpack.doc.js && sudo bash doc/deploy-doc.sh",
     "build-doc": "cross-env NODE_ENV=development && rm -rf doc/dist && node doc/changeDemoVersion.js && node doc/injectReadme.js && webpack --config build/webpack.doc.js",
-    "build-private-doc":  "cross-env NODE_ENV=development && rm -rf doc/dist && node doc/changeDemoVersion.js && node doc/injectReadme.js && webpack --config build/webpack.private-doc.js"
+    "build-private-doc": "cross-env NODE_ENV=development && rm -rf doc/dist && node doc/changeDemoVersion.js && node doc/injectReadme.js && webpack --config build/webpack.private-doc.js"
   },
   "author": "lecong.zhang",
   "license": "ISC",
@@ -51,6 +51,7 @@
     "gulp-autoprefixer": "^6.1.0",
     "gulp-cssmin": "^0.2.0",
     "gulp-sass": "^4.0.2",
+    "highlight.js": "^9.15.10",
     "html-webpack-plugin": "^3.2.0",
     "http-server": "^0.11.1",
     "iview": "^3.4.2",
@@ -65,6 +66,7 @@
     "karma-webpack": "^3.0.5",
     "loader-utils": "^1.2.3",
     "lodash": "^4.17.15",
+    "marked": "^0.7.0",
     "memory-fs": "^0.4.1",
     "mocha": "^6.1.4",
     "prettier": "^1.18.2",

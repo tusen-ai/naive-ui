@@ -9,12 +9,13 @@
       </n-gradient-text>
     </div>
     <div class="n-doc-body">
+      <icon />
       <basic-usage />
       <disabled />
       <type />
-      <icon />
       <events />
       <loading />
+      <basic />
     </div>
   </div>
 </template>
@@ -26,6 +27,7 @@ import disabled from './disabled.demo.vue'
 import type from './type.demo.vue'
 import icon from './icon.demo.vue'
 import events from './events.demo.vue'
+import basic from './basic.md'
 
 export default {
   components: {
@@ -34,7 +36,8 @@ export default {
     disabled,
     type,
     icon,
-    events
+    events,
+    basic
   },
   data () {
     return {

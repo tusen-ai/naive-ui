@@ -1,5 +1,10 @@
 <template>
-  <div class="n-app">
+  <div
+    class="n-app"
+    :class="{
+      [`n-app--${theme}-theme`]: theme
+    }"
+  >
     <slot />
   </div>
 </template>
@@ -14,6 +19,10 @@ export default {
   },
   props: {
     namespace: {
+      type: String,
+      default: null
+    },
+    theme: {
       type: String,
       default: null
     }
