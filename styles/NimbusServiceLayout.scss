@@ -1,6 +1,8 @@
 @import './mixins/mixins.scss';
 
-.n-nimbus-service-layout{
+$layout-header-height: 64px;
+
+@include b(nimbus-service-layout) {
   background: #171D33;
   position: absolute;
   top: 0;
@@ -8,39 +10,38 @@
   left: 0;
   right: 0;
   z-index: 0;
-  .n-nimbus-service-layout__body {
+  @include e(header) {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-color: rgba(31, 38, 62, 1);
+    box-shadow: 0px 2px 6px 1px rgba(0,0,0,0.1),0px 1px 3px 0px rgba(0,0,0,0.17);
+    height: $layout-header-height;
+  }
+  @include e(body) {
     position: absolute;
     left: 272px;
     right: 0px;
     top: 0;
     bottom: 0;
     overflow: hidden;
-    &::-webkit-scrollbar {
-      width: 5px;
-    }
-    &::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    &::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,0.2);
-      border-radius: 2.5px;
-    }
-    &::-webkit-scrollbar-thumb:hover {
-      background: rgba(255,255,255,0.3);
-    }
-    &.n-nimbus-service-layout__body--active {
+    @include m(active) {
       left: 272px;
       transition: left .3s cubic-bezier(0.4, 0.0, 0.2, 1);
     }
-    &.n-nimbus-service-layout__body--collapsed {
+    @include m(collapsed) {
       left: 48px;
       transition: left .3s cubic-bezier(0.4, 0.0, 0.2, 1);
     }
-    &.n-nimbus-service-layout__body--disable-menu {
+    @include m(disable-menu) {
       left: 0px;
     }
+    @include m(with-header) {
+      top: $layout-header-height;
+    }
   }
-  .n-nimbus-service-layout__drawer {
+  @include b(nimbus-service-layout-drawer) {
     display: inline-block;
     background-color: #1f263e;
     width: 272px;
@@ -49,7 +50,11 @@
     bottom: 0;
     left: 0;
     box-shadow: 0 2px 10px 1px rgba(0, 0, 0, .2);
-    .n-nimbus-service-layout-drawer__toggle-button {
+    @include e(divider) {
+      margin: 0px 25px;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+    }
+    @include e(toggle-button) {
       transition: transform .3s cubic-bezier(0.4, 0.0, 0.2, 1);
       cursor: pointer;
       width: 36px;
@@ -67,23 +72,10 @@
       right: 0;
       overflow: hidden;
       transition: opacity .3s cubic-bezier(0.4, 0.0, 0.2, 1);
-      &::-webkit-scrollbar {
-        width: 5px;
-      }
-      &::-webkit-scrollbar-track {
-        background: transparent;
-      }
-      &::-webkit-scrollbar-thumb {
-        background: rgba(255,255,255,0.2);
-        border-radius: 2.5px;
-      }
-      &::-webkit-scrollbar-thumb:hover {
-        background: rgba(255,255,255,0.3);
-      }
       .n-nimbus-service-layout-drawer__header {
         position: relative;
         font-weight: 700;
-        height: 60px;
+        height: $layout-header-height;
         padding-left: 48px;
         font-size: 16px;
         color: #E9E9EC;
@@ -190,7 +182,7 @@
         }
       }
     }
-    &.n-nimbus-service-layout__drawer--active {
+    @include m(active) {
       transform: translateX(0);
       opacity: 1;
       transition: transform .3s cubic-bezier(0.4, 0.0, 0.2, 1), opacity .3s cubic-bezier(0.4, 0.0, 0.2, 1);
@@ -201,7 +193,7 @@
         opacity: 1;
       }
     }
-    &.n-nimbus-service-layout__drawer--collapsed {
+    @include m(collapsed) {
       opacity: 1;
       transform: translateX(-224px);
       transition: transform .3s cubic-bezier(0.4, 0.0, 0.2, 1), opacity .3s cubic-bezier(0.4, 0.0, 0.2, 1);
@@ -214,11 +206,10 @@
         opacity: 0;
       }
     }
-    .n-nimbus-service-layout-drawer__divider {
-      margin: 0px 25px;
-      border-bottom: 1px solid rgba(255, 255, 255, .08);
+    @include m(with-header) {
+      top: $layout-header-height;
     }
-    &.n-nimbus-service-layout__drawer--disabled {
+    @include m(disabled) {
       transform: translateX(-272px);
       opacity: 0;
     }

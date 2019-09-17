@@ -1,6 +1,6 @@
 /* stylelint-disable */
 @import './mixins/mixins.scss';
-@import './theme/default.scss';
+@import './themes/vars.scss';
 
 @include b(scrollbar) {
   position: relative;

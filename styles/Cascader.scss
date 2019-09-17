@@ -1,6 +1,6 @@
 /* stylelint-disable */
 @import './mixins/mixins.scss';
-@import './theme/default.scss';
+@import './themes/vars.scss';
 
 .n-cascader-light-bar-container {
   @include fade-in-transition(cascader-light-bar);
