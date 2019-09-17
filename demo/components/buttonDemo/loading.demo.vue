@@ -8,12 +8,14 @@
     >
       <!--EXAMPLE_START-->
       <n-button
+        icon="md-save"
         :loading="loading"
         @click="loading = !loading"
       >
         Loading
       </n-button>
       <n-button
+        icon="md-save"
         :loading="loading"
         icon-position="right"
         @click="loading = !loading"

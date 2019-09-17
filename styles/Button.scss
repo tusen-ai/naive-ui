@@ -8,27 +8,46 @@
     font-size: $font-size;
     height: $height;
     padding: map-get($map: $button-padding, $key: $size);
+    white-space: nowrap;
     @include m(round) {
       padding: map-get($map: $round-button-padding, $key: $size);
       border-radius: $height / 2;
     }
     @include e(content) {
+      display: inline-block;
       line-height: $height;
     }
     @include e(icon) {
+      display: inline-block;
+      position: relative;
       $icon-size: map-get($map: $button-icon-size, $key: $size);
-      height: $icon-size;
+      line-height: $height;
+      height: $height;
       width: $icon-size;
       max-width: $icon-size;
+      vertical-align: bottom;
       .n-icon {
         font-size: $icon-size;
+        vertical-align: text-bottom;
+      }
+      .n-spin {
+        height: $icon-size;
+        width: $icon-size;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
         display: block;
       }
       @include m(slot) {
-        height: $icon-size;
         width: $icon-size;
-        line-height: $icon-size;
+        font-size: $icon-size;
+        display: inline-flex;
+        align-items: center;
+        vertical-align: bottom;
         .n-icon-slot {
+          display: block;
+          line-height: $icon-size;
           height: $icon-size;
           width: $icon-size;
           font-size: $icon-size;
@@ -60,8 +79,10 @@
           background-color: map-get($map: $button-background-color, $key: $type + '-hover');
         } 
       }
-      &:hover {
-        background-color: map-get($map: $button-background-color, $key: $type + '-hover');
+      @include not-m(enter-pressed) {
+        &:hover {
+          background-color: map-get($map: $button-background-color, $key: $type + '-hover');
+        }
       }
       &:active {
         background-color: map-get($map: $button-background-color, $key: $type + '-active');
@@ -99,14 +120,13 @@
       position: relative;
       border: none;
       font-family: $button-font-family;
-      display: inline-flex;
+      display: inline-block;
       align-items: center;
       justify-content: center;
       user-select: none;
       font-weight: 700;
       text-align: center;
-      vertical-align: baseline;
-      transition: background-color .3s $default-cubic-bezier, opacity .15s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier;
+      transition: background-color .15s $default-cubic-bezier, opacity .15s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier;
       cursor: pointer;
       &::after {
         content: "";
@@ -127,6 +147,7 @@
       }
       @include e(content) {
         white-space: nowrap;
+        vertical-align: baseline;
       }
       @include m(block) {
         display: block;

@@ -26,7 +26,7 @@
         </template>
         Pull Request
       </n-button>
-      <n-button size="tiny">
+      <n-button size="small">
         <template v-slot:icon>
           <n-nimbus-icon
             type="share"
