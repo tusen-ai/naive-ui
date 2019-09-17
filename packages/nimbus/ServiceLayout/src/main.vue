@@ -5,7 +5,8 @@
       :class="{
         'n-nimbus-service-layout__body--collapsed': isCollapsed,
         'n-nimbus-service-layout__body--active': !isCollapsed,
-        'n-nimbus-service-layout__body--disable-menu': disableMenu
+        'n-nimbus-service-layout__body--disable-menu': disableMenu,
+        'n-nimbus-service-layout__body--with-header': $slots.header
       }"
     >
       <scrollbar>
@@ -19,11 +20,12 @@
       </scrollbar>
     </div>
     <div
-      class="n-nimbus-service-layout__drawer"
+      class="n-nimbus-service-layout-drawer"
       :class="{
-        'n-nimbus-service-layout__drawer--collapsed': isCollapsed,
-        'n-nimbus-service-layout__drawer--active': !isCollapsed,
-        'n-nimbus-service-layout__drawer--disabled': disableMenu,
+        'n-nimbus-service-layout-drawer--collapsed': isCollapsed,
+        'n-nimbus-service-layout-drawer--active': !isCollapsed,
+        'n-nimbus-service-layout-drawer--disabled': disableMenu,
+        'n-nimbus-service-layout-drawer--with-header': $slots.header
       }"
     >
       <div class="n-nimbus-service-layout-drawer__item-wrapper">
@@ -98,6 +100,9 @@
       >
         <img src="./toggleButton.svg">
       </div>
+    </div>
+    <div class="n-nimbus-service-layout__header">
+      <slot name="header" />
     </div>
   </div>
 </template>
