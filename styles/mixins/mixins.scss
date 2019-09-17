@@ -1,37 +1,33 @@
-// @import "./config.scss";
+@import "config.scss";
+@import "../themes/vars.scss";
+@import "../themes/light.scss";
+@import "../themes/default.scss";
 
-$namespace: 'n';
-$element-separator: '__';
-$modifier-separator: '--';
-$state-prefix: 'is-';
-$main-color: null;
-
+/**
+ * BEM related mixins
+ */
 $B: null;
 $BE: null;
-
-$theme: null;
-$first-theme-iteration-done: false;
-
-@function dark-theme() {
-  $main-color: black !global;
-  @return null;
-}
-
-@function light-theme() {
-  $main-color: white !global;
-  @return null;
-}
+$block-depth: 0;
 
 @mixin b($block) {
+  $block-depth: $block-depth + 1 !global;
   $temp-block: $B;
   $temp-block-element: $BE;
   $B: $namespace + "-" + $block !global;
   $BE: $B!global;
-  .#{$B} {
-    @content;
+  @if $theme == null or $block-depth != 1 {
+    .#{$B} {
+      @content;
+    }
+  } @else {
+    .n-#{$theme}-theme.#{$B} {
+      @content
+    }
   }
   $B: $temp-block !global;
   $BE: $temp-block-element !global;
+  $block-depth: $block-depth - 1 !global;
 }
 
 @mixin e($elements...) {
@@ -40,7 +36,7 @@ $first-theme-iteration-done: false;
   @each $element in $elements {
     $BE: $B + $element-separator + $element !global;
     .#{$BE} {
-      @content
+      @content;
     }
   }
   $BE: $temp-block-element !global;
@@ -57,7 +53,7 @@ $first-theme-iteration-done: false;
     }
   }
   #{$BEMs} {
-    @content
+    @content;
   }
 }
 
@@ -65,27 +61,45 @@ $first-theme-iteration-done: false;
   $BEM: '';
   $BEM: '.' + $BE + '--' + $modifier;
   &:not(#{$BEM}) {
-    @content
+    @content;
   }
 }
 
-@mixin themes-mixin($theme-names...) {
-  $temp-theme: $theme;
-  $theme-list: [];
-  $first-theme-iteration-done: false !global;
+/**
+ * Theme related mixins
+ */
+$common-css-attrs-generated: false;
+$theme: null;
+$in-themes-mixin: false;
+$theme-names: "default", "light";
+
+@mixin themes-mixin() {
+  $in-themes-mixin: true !global;
+  $theme: null !global;
+  @include setup-default-theme();
+  @content;
+  $common-css-attrs-generated: true !global;
   @each $theme-name in $theme-names {
-    $theme: $theme-name !global;
-    @if call($theme + "-theme") {};
-    @content;
-    $first-theme-iteration-done: true !global;
+    @if $theme-name == 'light' {
+      $theme: $theme-name !global;
+      @include setup-default-theme();
+      @include setup-light-theme();
+      @content;
+      $theme: null !global;
+    } @else if $theme-name == 'default' {
+      $theme: $theme-name !global;
+      @include setup-default-theme();
+      @content;
+      $theme: null !global;
+    }
   }
-  $first-theme-iteration-done: false !global;
-  $theme: $temp-theme !global;
+  $common-css-attrs-generated: false !global;
+  $in-themes-mixin: false !global;
 }
 
 @mixin once() {
-  @if not $first-theme-iteration-done {
-    @content
+  @if not $common-css-attrs-generated {
+    @content;
   }
 }
 
