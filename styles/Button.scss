@@ -1,5 +1,5 @@
 @import './mixins/mixins.scss';
-@import './theme/default.scss';
+@import './themes/vars.scss';
 
 @mixin size-mixin($size) {
   @include m($size + "-size") {
@@ -50,7 +50,7 @@
       } 
       @include m(rippling) {
         &::after {
-          animation-name: #{$type}-button-ripple--spread, #{$type}-button-ripple--opacity;
+          animation-name: #{$theme}-#{$type}-button-ripple--spread, #{$theme}-#{$type}-button-ripple--opacity;
           animation-duration: .6s;
           animation-timing-function: cubic-bezier(0, .4, .5, .9), cubic-bezier(.5, .2, .8, .5);
         }
@@ -67,12 +67,12 @@
         background-color: map-get($map: $button-background-color, $key: $type + '-active');
       }
     }
-    @content
+    @content;
   }
 }
 
 @mixin ripple-mixin($type) {
-  @keyframes #{$type}-button-ripple--spread {
+  @keyframes #{$theme}-#{$type}-button-ripple--spread {
     from {
       box-shadow: map-get($map: $button-box-shadow, $key: $type + '-focus-ripple-start');
     }
@@ -80,7 +80,7 @@
       box-shadow: map-get($map: $button-box-shadow, $key: $type + '-focus-ripple-end');
     }
   }
-  @keyframes #{$type}-button-ripple--opacity {
+  @keyframes #{$theme}-#{$type}-button-ripple--opacity {
     from {
       opacity: .4;
     }
@@ -90,61 +90,64 @@
   }
 }
 
-@include ripple-mixin('default');
-@include ripple-mixin('primary');
-
-@include b(button) {
-  outline: none;
-  position: relative;
-  border: none;
-  font-family: $button-font-family;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  user-select: none;
-  font-weight: 700;
-  text-align: center;
-  vertical-align: baseline;
-  transition: background-color .3s $default-cubic-bezier, opacity .15s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier;
-  cursor: pointer;
-  &::after {
-    content: "";
-    border-radius: inherit;
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-  }
-  @include e(icon) {
-    @include fade-in-width-expand-transition();
-    margin-right: 6px;
-    @include m(right) {
-      margin-right: 0px;
-      margin-left: 4px;
+@include themes-mixin() {
+  @include ripple-mixin('default');
+  @include ripple-mixin('primary');
+  @include b(button) {
+    @include once {
+      outline: none;
+      position: relative;
+      border: none;
+      font-family: $button-font-family;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      font-weight: 700;
+      text-align: center;
+      vertical-align: baseline;
+      transition: background-color .3s $default-cubic-bezier, opacity .15s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier;
+      cursor: pointer;
+      &::after {
+        content: "";
+        border-radius: inherit;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+      }
+      @include e(icon) {
+        @include fade-in-width-expand-transition();
+        margin-right: 6px;
+        @include m(right) {
+          margin-right: 0px;
+          margin-left: 4px;
+        }
+      }
+      @include e(content) {
+        white-space: nowrap;
+      }
+      @include m(block) {
+        display: block;
+      }
+      @include m(disabled) {
+        cursor: not-allowed;
+        opacity: .4;
+      }
+      @include m(loading) {
+        cursor: default;
+        opacity: .6;
+      }
+      &::-moz-focus-inner {
+        border: 0;
+      }
+      @include size-mixin('tiny');
+      @include size-mixin('small');
+      @include size-mixin('medium');
+      @include size-mixin('large');
     }
-  }
-  @include e(content) {
-    white-space: nowrap;
-  }
-  @include m(block) {
-    display: block;
-  }
-  @include m(disabled) {
-    cursor: not-allowed;
-    opacity: .4;
-  }
-  @include m(loading) {
-    cursor: default;
-    opacity: .6;
-  }
-  @include size-mixin('tiny');
-  @include size-mixin('small');
-  @include size-mixin('medium');
-  @include size-mixin('large');
-  @include type-mixin('default');
-  @include type-mixin('primary');
-  &::-moz-focus-inner {
-    border: 0;
+    @include type-mixin('default');
+    @include type-mixin('primary');
   }
 }

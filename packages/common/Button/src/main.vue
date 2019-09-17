@@ -9,7 +9,8 @@
       'n-button--loading': loading,
       'n-button--block': block,
       'n-button--rippling': rippling,
-      'n-button--enter-pressed': enterPressed
+      'n-button--enter-pressed': enterPressed,
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
     :tabindex="focusable && !disabled ? 0 : -1"
     @click="handleClick"
@@ -35,6 +36,9 @@
         />
         <n-icon
           v-else-if="icon"
+          :class="{
+            'simulate-transparent-text': type === 'primary'
+          }"
           :type="icon"
         />
         <div
@@ -78,6 +82,9 @@
         <n-icon
           v-else-if="icon"
           :type="icon"
+          :class="{
+            'simulate-transparent-text': type === 'primary'
+          }"
         />
         <div
           v-else
@@ -96,6 +103,8 @@
 import NIcon from '../../Icon'
 import NSpin from '../../Spin'
 import texttransparentable from '../../../mixins/texttransparentable'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 
 export default {
   name: 'NButton',
@@ -104,6 +113,8 @@ export default {
     NSpin
   },
   mixins: [
+    withapp,
+    themeable,
     texttransparentable
   ],
   props: {
@@ -120,7 +131,9 @@ export default {
       default: false
     },
     size: {
-      type: String,
+      validator (value) {
+        return ['small', 'medium', 'large'].includes(value)
+      },
       default: 'medium'
     },
     round: {
