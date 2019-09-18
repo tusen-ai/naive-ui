@@ -77,11 +77,9 @@ export default {
     }
   },
   mounted () {
-    if (this.value !== 0) {
+    if (this.value !== 0 && this.value !== null) {
       this.setSort(this.value)
     }
-    // this.setSort(this.value)
-    // console.log('value', this.value, this.upOpacity, this.downOpacity)
   },
   methods: {
     changeDownSort () {
