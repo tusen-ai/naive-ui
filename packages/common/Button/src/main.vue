@@ -186,6 +186,9 @@ export default {
     }
   },
   computed: {
+    avoidHollowOut () {
+      return this.ghost || !['primary', 'link', 'info', 'success', 'warning', 'error'].includes(this.type)
+    },
     simulateTransparent () {
       if (this.ghost) return false
       if (['primary', 'link', 'info', 'success', 'warning', 'error'].includes(this.type)) return true
@@ -199,6 +202,15 @@ export default {
     },
     iconOnRight () {
       return this.iconPosition === 'right'
+    }
+  },
+  watch: {
+    type (value) {
+      if (['primary', 'link', 'info', 'success', 'warning', 'error'].includes(value)) {
+        if (!this.cssNode) {
+
+        }
+      }
     }
   },
   beforeDestroy () {
