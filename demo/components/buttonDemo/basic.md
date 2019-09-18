@@ -1,7 +1,10 @@
 # Debug
 All buttons are here.
 ```html
-<div class="debug-zone">
+<div class="debug-zone"
+  n-light-theme-background-color-hint="#ececec"
+  n-default-theme-background-color-hint="transparent"
+>
   <n-button
     type="default"
     icon="md-save"
@@ -331,13 +334,14 @@ export default {
   margin-bottom: 8px;
 }
 .debug-zone {
-    border-radius: 4px;
-    background-color: transparent;
-  }
+  border-radius: 4px;
+  background-color: transparent;
+  transition: background-color .3s ease-in-out;
+}
 .n-light-theme {
   .debug-zone {
     border-radius: 4px;
-    background-color: #f2f2f2;
+    background-color: #ececec;
   }
 }
 ```
