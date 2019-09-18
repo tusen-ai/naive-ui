@@ -169,7 +169,8 @@ export default {
     return {
       style: {},
       enterPressed: false,
-      rippling: false
+      rippling: false,
+      rippleTimer: null
     }
   },
   computed: {
@@ -180,14 +181,23 @@ export default {
       return this.iconPosition === 'right'
     }
   },
+  beforeDestroy () {
+    window.clearTimeout(this.rippleTimer)
+  },
   methods: {
     handleClick (e) {
       if (!this.disabled) {
         this.$emit('click', e)
+        window.clearTimeout(this.rippleTimer)
+        this.rippleTimer = null
         this.rippling = false
         this.$nextTick().then(() => {
           this.$el.getBoundingClientRect()
           this.rippling = true
+          this.rippleTimer = window.setTimeout(() => {
+            this.rippling = false
+            this.rippleTimer = null
+          }, 600)
         })
       }
     },
