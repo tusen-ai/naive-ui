@@ -2,6 +2,20 @@
 @import './themes/vars.scss';
 @import './Detachable.scss';
 
+
+html {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  // font-weight: 400;
+}
+
+@-moz-document url-prefix() {
+  body {
+    font-weight: lighter !important;
+  }
+}
+
 body {
   margin: 0;
   font-family: $default-font-family;
