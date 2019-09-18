@@ -1,8 +1,10 @@
 /* istanbul ignore file */
-import Round from './src/main.vue'
+import Button from './src/main.vue'
+import ButtonGroup from './src/ButtonGroup'
 
-Round.install = function (Vue) {
-  Vue.component(Round.name, Round)
+Button.install = function (Vue) {
+  Vue.component(Button.name, Button)
+  Vue.component(ButtonGroup.name, ButtonGroup)
 }
 
-export default Round
+export default Button

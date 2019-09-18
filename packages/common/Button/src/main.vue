@@ -156,10 +156,6 @@ export default {
       type: Boolean,
       default: false
     },
-    circle: {
-      type: Boolean,
-      default: false
-    },
     focusable: {
       type: Boolean,
       default: true

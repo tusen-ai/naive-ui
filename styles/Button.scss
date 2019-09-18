@@ -226,3 +226,23 @@
     @include type-mixin('error');
   }
 }
+
+@include b(button-group) {
+  @include b(button) {
+    &:first-child {
+      margin-right: 0!important;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    &:last-child {
+      margin-left: 0!important;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    &:not(:first-child):not(:last-child) {
+      margin-left: 0!important;
+      margin-right: 0!important;
+      border-radius: 0!important;
+    }
+  }
+}
