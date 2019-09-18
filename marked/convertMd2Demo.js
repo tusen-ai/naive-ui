@@ -2,7 +2,7 @@ const hljs = require('highlight.js')
 const marked = require('marked')
 const fs = require('fs')
 const path = require('path')
-const prettier = require('prettier')
+// const prettier = require('prettier')
 
 const escapeMap = {
   '&': '&amp;',
@@ -116,9 +116,7 @@ function genVueComponent (parts) {
   src = src.replace(styleReg, parts.style)
   src = src.replace(demoReg, parts.template)
   // console.log(src)
-  return prettier.format(src, {
-    parser: 'html'
-  }).trim()
+  return src.trim()
 }
 
 function convertMd2Demo (text) {
