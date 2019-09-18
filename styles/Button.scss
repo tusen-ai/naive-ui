@@ -5,6 +5,7 @@
   @include m($size + "-size") {
     $height: map-get($map: $button-height, $key: $size);
     $font-size: map-get($map: $button-font-size, $key: $size);
+    border-radius: $button-border-radius;
     font-size: $font-size;
     height: $height;
     padding: map-get($map: $button-padding, $key: $size);
@@ -59,7 +60,6 @@
 
 @mixin type-mixin ($type) {
   @include m($type + "-type") {
-    border-radius: $button-border-radius;
     color: map-get($map: $button-color, $key: $type);
     background-color: map-get($map: $button-background-color, $key: $type);
     box-shadow: map-get($map: $button-box-shadow, $key: $type);
