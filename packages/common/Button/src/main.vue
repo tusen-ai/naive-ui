@@ -3,6 +3,7 @@
     class="n-button"
     :class="{
       'n-button--round': round,
+      'n-button--circle': circle,
       [`n-button--${type}-type`]: true,
       [`n-button--${size}-size`]: true,
       'n-button--disabled': disabled,
@@ -10,9 +11,11 @@
       'n-button--block': block,
       'n-button--rippling': rippling,
       'n-button--enter-pressed': enterPressed,
+      'n-button--ghost': ghost,
+      'n-button--right-icon': iconOnRight,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
-    :tabindex="focusable && !disabled ? 0 : -1"
+    :tabindex="synthesizedFocusable ? 0 : -1"
     @click="handleClick"
     @blur="handleBlur"
     @keyup.enter="handleKeyUpEnter"
@@ -29,7 +32,7 @@
         <n-spin
           v-if="loading"
           :class="{
-            'simulate-transparent-stroke': type === 'primary'
+            'simulate-transparent-stroke': simulateTransparent
           }"
           :size="null"
           :stroke-width="4"
@@ -37,7 +40,7 @@
         <n-icon
           v-else-if="icon"
           :class="{
-            'simulate-transparent-text': type === 'primary'
+            'simulate-transparent-text': simulateTransparent
           }"
           :type="icon"
         />
@@ -52,21 +55,27 @@
       </div>
     </transition>
     <div
+      v-if="!circle && $slots.default"
       class="n-button__content"
       :class="{
-        'simulate-transparent-text': type === 'primary'
+        'simulate-transparent-text': simulateTransparent
       }"
       :style="style"
     >
       <slot />
     </div>
+    <span
+      v-else
+      class="n-button__content-aligner"
+      style="visibility: hidden;"
+    >&nbsp;</span>
     <transition
       name="n-fade-in-width-expand"
       :appear="loading"
     >
       <div
         v-if="(loading || hasIcon) && iconOnRight"
-        class="n-button__icon n-button__icon--right"
+        class="n-button__icon"
         :class="{
           'n-button__icon--slot': $slots.icon
         }"
@@ -74,16 +83,15 @@
         <n-spin
           v-if="loading"
           :class="{
-            'simulate-transparent-stroke': type === 'primary'
+            'simulate-transparent-stroke': simulateTransparent
           }"
-          :size="null"
           :stroke-width="4"
         />
         <n-icon
           v-else-if="icon"
           :type="icon"
           :class="{
-            'simulate-transparent-text': type === 'primary'
+            'simulate-transparent-text': simulateTransparent
           }"
         />
         <div
@@ -130,11 +138,19 @@ export default {
       type: Boolean,
       default: false
     },
+    circle: {
+      type: Boolean,
+      default: false
+    },
     size: {
       validator (value) {
         return ['small', 'medium', 'large'].includes(value)
       },
       default: 'medium'
+    },
+    ghost: {
+      type: Boolean,
+      default: false
     },
     round: {
       type: Boolean,
@@ -174,6 +190,14 @@ export default {
     }
   },
   computed: {
+    simulateTransparent () {
+      if (this.ghost) return false
+      if (['primary', 'link', 'info', 'success', 'warning', 'error'].includes(this.type)) return true
+      else return false
+    },
+    synthesizedFocusable () {
+      return this.focusable && !this.disabled
+    },
     hasIcon () {
       return this.icon || this.$slots.icon
     },
@@ -199,6 +223,9 @@ export default {
             this.rippleTimer = null
           }, 600)
         })
+        if (this.synthesizedFocusable) {
+          this.$el.focus()
+        }
       }
     },
     handleKeyUpEnter (e) {

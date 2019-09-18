@@ -8,11 +8,17 @@
     border-radius: $button-border-radius;
     font-size: $font-size;
     height: $height;
+    line-height: $height;
     padding: map-get($map: $button-padding, $key: $size);
     white-space: nowrap;
     @include m(round) {
       padding: map-get($map: $round-button-padding, $key: $size);
       border-radius: $height / 2;
+    }
+    @include m(circle) {
+      border-radius: $height / 2;
+      width: $height;
+      padding: 0!important;
     }
     @include e(content) {
       display: inline-block;
@@ -63,6 +69,36 @@
     color: map-get($map: $button-color, $key: $type);
     background-color: map-get($map: $button-background-color, $key: $type);
     box-shadow: map-get($map: $button-box-shadow, $key: $type);
+    @include m(ghost) {
+      background-color: map-get($map: $ghost-button-background-color, $key: $type);
+      color: map-get($map: $ghost-button-color, $key: $type);
+      box-shadow: map-get($map: $button-box-shadow, $key: $type + '-ghost');
+      @include not-m(disabled) {
+        @include m(enter-pressed) {
+          background-color: map-get($map: $ghost-button-background-color, $key: $type + '-active');
+        }
+        &:not(:active):focus {
+          @include not-m(enter-pressed) {
+            background-color: map-get($map: $ghost-button-background-color, $key: $type + '-hover');
+          } 
+        }
+        @include not-m(enter-pressed) {
+          &:hover {
+            background-color: map-get($map: $ghost-button-background-color, $key: $type + '-hover');
+          }
+          &:active {
+            background-color: map-get($map: $ghost-button-background-color, $key: $type + '-active');
+          }
+        }
+      }
+      @include m(loading) {
+        @include e(icon) {
+          circle {
+            stroke: map-get($map: $ghost-button-color, $key: $type) !important;
+          }
+        }
+      }
+    }
     @include not-m(disabled) {
       @include m(enter-pressed) {
         background-color: map-get($map: $button-background-color, $key: $type + '-active');
@@ -83,9 +119,9 @@
         &:hover {
           background-color: map-get($map: $button-background-color, $key: $type + '-hover');
         }
-      }
-      &:active {
-        background-color: map-get($map: $button-background-color, $key: $type + '-active');
+        &:active {
+          background-color: map-get($map: $button-background-color, $key: $type + '-active');
+        }
       }
     }
     @content;
@@ -114,6 +150,10 @@
 @include themes-mixin() {
   @include ripple-mixin('default');
   @include ripple-mixin('primary');
+  @include ripple-mixin('error');
+  @include ripple-mixin('success');
+  @include ripple-mixin('warning');
+  @include ripple-mixin('info');
   @include b(button) {
     @include once {
       outline: none;
@@ -139,26 +179,36 @@
       }
       @include e(icon) {
         @include fade-in-width-expand-transition();
-        margin-right: 6px;
-        @include m(right) {
-          margin-right: 0px;
-          margin-left: 4px;
-        }
+      }
+      @include e(content-aligner) {
+        display: inline-block;
+        line-height: inherit;
+        height: 100%;
+        font-size: inherit;
+        white-space: nowrap;
+        visibility: hidden;
+        width: 0;
       }
       @include e(content) {
+        margin-left: 6px;
         white-space: nowrap;
-        vertical-align: baseline;
+      }
+      @include m(right-icon) {
+        @include e(content) {
+          margin-right: 6px;
+        }
       }
       @include m(block) {
         display: block;
+        width: 100%;
+      }
+      @include m(loading) {
+        cursor: default;
+        opacity: 1;
       }
       @include m(disabled) {
         cursor: not-allowed;
         opacity: .4;
-      }
-      @include m(loading) {
-        cursor: default;
-        opacity: .6;
       }
       &::-moz-focus-inner {
         border: 0;
@@ -170,5 +220,9 @@
     }
     @include type-mixin('default');
     @include type-mixin('primary');
+    @include type-mixin('info');
+    @include type-mixin('success');
+    @include type-mixin('warning');
+    @include type-mixin('error');
   }
 }

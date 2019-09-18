@@ -67,6 +67,8 @@
     "warning": $main-color,
     "error": $main-color
   ) !global;
+  $ghost-button-background-color: () !global;
+  $ghost-button-color: () !global;
   $button-color: (
     "default": $main-color,
     "primary": black,
