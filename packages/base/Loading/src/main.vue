@@ -26,7 +26,7 @@ export default {
     }
   },
   mounted () {
-    console.log(this.strokeWidth)
+    // console.log(this.strokeWidth)
   }
 }
 </script>
