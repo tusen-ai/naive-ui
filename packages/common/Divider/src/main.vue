@@ -5,7 +5,8 @@
       'n-divider--vertical': vertical,
       'n-divider--no-content': !$slots.default,
       'n-divider--dashed': dashed,
-      [`n-divider--content-position-${contentPosition}`]: $slots.default && contentPosition
+      [`n-divider--content-position-${contentPosition}`]: $slots.default && contentPosition,
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
   >
     <div
@@ -26,8 +27,15 @@
 </template>
 
 <script>
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
+
 export default {
   name: 'NDivider',
+  mixins: [
+    withapp,
+    themeable
+  ],
   props: {
     contentPosition: {
       type: String,
