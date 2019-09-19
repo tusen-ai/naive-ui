@@ -86,7 +86,7 @@
 
 <script>
 import throttle from 'lodash/throttle'
-import texttransparentable from '../../../mixins/texttransparentable'
+import hollowoutable from '../../../mixins/hollowoutable'
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 
@@ -112,7 +112,7 @@ function handleSecondHandleMouseMove (e) {
 
 export default {
   name: 'NSlider',
-  mixins: [texttransparentable, detachable, placeable],
+  mixins: [hollowoutable, detachable, placeable],
   props: {
     marks: {
       type: Object,

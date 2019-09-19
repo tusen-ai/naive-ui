@@ -321,6 +321,35 @@ All buttons are here.
       Warning
     </n-button>
   </n-button-group>
+  <n-button-group vertical>
+    <n-button
+      type="default"
+      icon="md-save"
+      round
+    >
+      Default
+    </n-button>
+    <n-button
+      type="primary"
+      icon="md-save"
+      disabled
+    >
+      Primary
+    </n-button>
+    <n-button
+      type="info"
+      icon="md-save"
+      icon-position="right"
+    >
+      Info
+    </n-button>
+    <n-button
+      type="warning"
+      icon="md-save"
+    >
+      Warning
+    </n-button>
+  </n-button-group>
 </div>
 ```
 ```js

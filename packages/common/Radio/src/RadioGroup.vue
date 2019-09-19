@@ -1,6 +1,6 @@
 <script>
 
-import texttransparentable from '../../../mixins/texttransparentable'
+import hollowoutable from '../../../mixins/hollowoutable'
 
 function mapSlot (h, defaultSlot, currentComponent) {
   /**
@@ -64,7 +64,7 @@ function mapSlot (h, defaultSlot, currentComponent) {
 
 export default {
   name: 'NRadioGroup',
-  mixins: [texttransparentable],
+  mixins: [hollowoutable],
   props: {
     value: {
       type: [Boolean, String, Number],

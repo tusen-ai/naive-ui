@@ -54,14 +54,14 @@
 
 <script>
 import NIcon from '../../Icon'
-import texttransparentable from '../../../mixins/texttransparentable'
+import hollowoutable from '../../../mixins/hollowoutable'
 
 export default {
   name: 'NStep',
   components: {
     NIcon
   },
-  mixins: [texttransparentable],
+  mixins: [hollowoutable],
   props: {
     finishStatus: {
       type: String,

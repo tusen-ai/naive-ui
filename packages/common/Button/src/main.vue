@@ -110,7 +110,7 @@
 <script>
 import NIcon from '../../Icon'
 import NSpin from '../../Spin'
-import texttransparentable from '../../../mixins/texttransparentable'
+import hollowoutable from '../../../mixins/hollowoutable'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 
@@ -123,7 +123,7 @@ export default {
   mixins: [
     withapp,
     themeable,
-    texttransparentable
+    hollowoutable
   ],
   props: {
     block: {
@@ -157,6 +157,10 @@ export default {
       default: false
     },
     focusable: {
+      type: Boolean,
+      default: true
+    },
+    text: {
       type: Boolean,
       default: true
     },
