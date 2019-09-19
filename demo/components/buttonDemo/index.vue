@@ -9,34 +9,31 @@
       </n-gradient-text>
     </div>
     <div class="n-doc-body">
+      <basic />
       <icon />
-      <basic-usage />
       <disabled />
-      <type />
       <events />
       <loading />
-      <basic />
+      <debug />
     </div>
   </div>
 </template>
 
 <script>
-import loading from './loading.demo.vue'
-import basicUsage from './basicUsage.demo.vue'
-import disabled from './disabled.demo.vue'
-import type from './type.demo.vue'
-import icon from './icon.demo.vue'
-import events from './events.demo.vue'
+import loading from './loading.md'
+import disabled from './disabled.md'
+import events from './events.md'
+import debug from './debug.md'
 import basic from './basic.md'
+import icon from './icon.md'
 
 export default {
   components: {
     loading,
-    basicUsage,
     disabled,
-    type,
     icon,
     events,
+    debug,
     basic
   },
   data () {
