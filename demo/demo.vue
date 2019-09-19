@@ -5,8 +5,6 @@
     :theme="theme"
   >
     <n-nimbus-service-layout
-      icon="md-contacts"
-      :name="`NAIVE UI (${version})`"
       :padding-body="true"
       :items="items"
     >
@@ -19,7 +17,6 @@
 </template>
 
 <script>
-import { version } from '../package.json'
 import DocHeader from './header.vue'
 
 export default {
@@ -28,7 +25,6 @@ export default {
   },
   data () {
     return {
-      version,
       theme: 'default',
       items: [
         {
@@ -331,12 +327,13 @@ body {
   margin: 0 auto;
   .n-doc-header {
     display: flex;
-    height: 60px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    align-items: center;
+    // height: 60px;
+    // border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 16px;
+    // align-items: center;
   }
   .n-doc-body {
-    padding-top: 14px;
+    // padding-top: 14px;
   }
   .n-doc-section {
     .n-doc-section__header {
