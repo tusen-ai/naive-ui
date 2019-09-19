@@ -89,7 +89,7 @@ ${parts.script}
 </script>`
   }
   if (parts.style) {
-    if (parts.script) mergedParts.code += '\n\n'
+    if (parts.template || parts.script) mergedParts.code += '\n\n'
     mergedParts.code += `<style>
 ${parts.style}
 </style>`
