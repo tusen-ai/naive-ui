@@ -1,5 +1,10 @@
 <template>
-  <div class="n-nimbus-service-layout">
+  <div
+    class="n-nimbus-service-layout"
+    :class="{
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+    }"
+  >
     <div
       class="n-nimbus-service-layout__body"
       :class="{
@@ -28,9 +33,12 @@
         'n-nimbus-service-layout-drawer--with-header': $slots.header
       }"
     >
-      <div class="n-nimbus-service-layout-drawer__item-wrapper">
+      <div class="n-nimbus-service-layout-drawer-content">
         <scrollbar>
-          <div class="n-nimbus-service-layout-drawer__header">
+          <div
+            v-if="name"
+            class="n-nimbus-service-layout-drawer-header"
+          >
             <div class="n-nimbus-service-layout-drawer-header__content">
               <div class="n-nimbus-service-layout-drawer-header__icon">
                 <n-icon
@@ -41,15 +49,15 @@
               {{ name }}
             </div>
           </div>
-          <div class="n-nimbus-service-layout-drawer__divider" />
+          <div class="n-nimbus-service-layout-drawer-divider" />
           <div
             v-for="item in itemsWithCollapseStatus"
             :key="item.name"
           >
             <div
               v-if="!item.childItems"
-              class="n-nimbus-service-layout-drawer__item"
-              :class="{ 'n-nimbus-service-layout-drawer__item--active': activeItemPath === item.path }"
+              class="n-nimbus-service-layout-drawer-item"
+              :class="{ 'n-nimbus-service-layout-drawer-item--active': activeItemPath === item.path }"
               @click="makeActive(item)"
             >
               <div class="n-nimbus-service-layout-drawer-item__icon" />
@@ -59,10 +67,10 @@
               v-else
             >
               <div
-                class="n-nimbus-service-layout-drawer__item n-nimbus-service-layout-drawer__item--is-group-header"
+                class="n-nimbus-service-layout-drawer-item n-nimbus-service-layout-drawer-item--is-group-header"
                 :class="{
-                  'n-nimbus-service-layout-drawer__item--group-item-is-choosed': !!(1 + item.childItems.findIndex(item => item.name === activeItemPath)),
-                  'n-nimbus-service-layout-drawer__item--collapsed': item.isCollapsed
+                  'n-nimbus-service-layout-drawer-item--group-item-is-choosed': !!(1 + item.childItems.findIndex(item => item.name === activeItemPath)),
+                  'n-nimbus-service-layout-drawer-item--collapsed': item.isCollapsed
                 }"
                 @click="toggleGroupHeaderCollapse(item.name)"
               >
@@ -71,9 +79,9 @@
               </div>
               <div
                 :ref="item.name"
-                class="n-nimbus-service-layout-drawer__group-items"
+                class="n-nimbus-service-layout-drawer-group-items"
                 :class="{
-                  'n-nimbus-service-layout-drawer__group-items--collapsed': item.isCollapsed
+                  'n-nimbus-service-layout-drawer-group-items--collapsed': item.isCollapsed
                 }"
               >
                 <div
@@ -82,8 +90,8 @@
                   <div
                     v-for="childItem in item.childItems"
                     :key="childItem.name"
-                    class="n-nimbus-service-layout-drawer__item n-nimbus-service-layout-drawer__item--is-group-item"
-                    :class="{ 'n-nimbus-service-layout-drawer__item--active': activeItemPath === childItem.path }"
+                    class="n-nimbus-service-layout-drawer-item n-nimbus-service-layout-drawer-item--is-group-item"
+                    :class="{ 'n-nimbus-service-layout-drawer-item--active': activeItemPath === childItem.path }"
                     @click="makeActive(childItem)"
                   >
                     <span>{{ childItem.name }}</span>
@@ -101,20 +109,23 @@
         <img src="./toggleButton.svg">
       </div>
     </div>
-    <div class="n-nimbus-service-layout__header">
+    <nav class="n-nimbus-service-layout__nav">
       <slot name="header" />
-    </div>
+    </nav>
   </div>
 </template>
 
 <script>
 import Scrollbar from '../../../common/Scrollbar'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 
 export default {
   name: 'NNimbusServiceLayout',
   components: {
     Scrollbar
   },
+  mixins: [withapp, themeable],
   props: {
     icon: {
       type: String,
@@ -122,7 +133,7 @@ export default {
     },
     name: {
       type: String,
-      required: true
+      default: null
     },
     items: {
       type: Array,
