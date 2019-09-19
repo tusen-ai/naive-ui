@@ -6,13 +6,13 @@ class HollowOutStyleManager {
   }
   styleForComponent (id, backgroundColor) {
     if (!backgroundColor) return ''
-    return `[n-background-id=${id}] .simulate-transparent-text {
+    return `[n-hollowoutable-id=${id}] .simulate-hollow-out-text {
   color: ${backgroundColor}!important;
 }
-[n-background-id=${id}] .simulate-transparent-background {
+[n-hollowoutable-id=${id}] .simulate-hollow-out-background {
   background-color: ${backgroundColor}!important;
 }
-[n-background-id=${id}] .simulate-transparent-stroke circle {
+[n-hollowoutable-id=${id}] .simulate-hollow-out-stroke circle {
   stroke: ${backgroundColor}!important;
 }
 `

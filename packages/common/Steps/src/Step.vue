@@ -29,7 +29,7 @@
           v-if="!finished || (finished && finishStatus === 'process')"
           class="n-step-indicator__index"
           :class="{
-            'simulate-transparent-text': active
+            'simulate-hollow-out-text': active
           }"
         >
           {{ index }}

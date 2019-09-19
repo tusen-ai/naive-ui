@@ -12,7 +12,7 @@
     <div
       class="n-radio-button__label"
       :class="{
-        'simulate-transparent-text': checked
+        'simulate-hollow-out-text': checked
       }"
     >
       <slot />

@@ -43,7 +43,7 @@ export default {
   },
   mounted () {
     this.hollowOutBackgroundColorId = 'x' + Math.random().toString(16).slice(9)
-    this.$el.setAttribute('n-background-id', this.hollowOutBackgroundColorId)
+    this.$el.setAttribute('n-hollowoutable-id', this.hollowOutBackgroundColorId)
     if (this.avoidHollowOut) return
     this.updateHollowOutStyle()
   },

@@ -22,14 +22,14 @@
         <div
           v-for="mark in computedMarks"
           :key="mark.label"
-          class="n-slider-dot simulate-transparent-background"
+          class="n-slider-dot simulate-hollow-out-background"
           :style="mark.style"
         />
       </div>
     </div>
     <div
       ref="firstHandle"
-      class="n-slider-handle simulate-transparent-background"
+      class="n-slider-handle simulate-hollow-out-background"
       tabindex="0"
       :style="firstHandleStyle"
       @mousedown="handleFirstHandleMouseDown"
@@ -39,7 +39,7 @@
     <div
       v-if="range"
       ref="secondHandle"
-      class="n-slider-handle simulate-transparent-background"
+      class="n-slider-handle simulate-hollow-out-background"
       tabindex="0"
       :style="secondHandleStyle"
       @mousedown="handleSecondHandleMouseDown"

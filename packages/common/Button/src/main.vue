@@ -32,7 +32,7 @@
         <n-spin
           v-if="loading"
           :class="{
-            'simulate-transparent-stroke': simulateTransparent
+            'simulate-hollow-out-stroke': simulateHollowOut
           }"
           :size="null"
           :stroke-width="4"
@@ -40,7 +40,7 @@
         <n-icon
           v-else-if="icon"
           :class="{
-            'simulate-transparent-text': simulateTransparent
+            'simulate-hollow-out-text': simulateHollowOut
           }"
           :type="icon"
         />
@@ -58,7 +58,7 @@
       v-if="!circle && $slots.default"
       class="n-button__content"
       :class="{
-        'simulate-transparent-text': simulateTransparent
+        'simulate-hollow-out-text': simulateHollowOut
       }"
       :style="style"
     >
@@ -83,7 +83,7 @@
         <n-spin
           v-if="loading"
           :class="{
-            'simulate-transparent-stroke': simulateTransparent
+            'simulate-hollow-out-stroke': simulateHollowOut
           }"
           :stroke-width="4"
         />
@@ -91,7 +91,7 @@
           v-else-if="icon"
           :type="icon"
           :class="{
-            'simulate-transparent-text': simulateTransparent
+            'simulate-hollow-out-text': simulateHollowOut
           }"
         />
         <div
@@ -193,7 +193,7 @@ export default {
     avoidHollowOut () {
       return this.ghost || !['primary', 'link', 'info', 'success', 'warning', 'error'].includes(this.type)
     },
-    simulateTransparent () {
+    simulateHollowOut () {
       if (this.ghost) return false
       if (['primary', 'link', 'info', 'success', 'warning', 'error'].includes(this.type)) return true
       else return false
