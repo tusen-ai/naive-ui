@@ -109,6 +109,7 @@ $layout-header-height: 64px;
             background-image:linear-gradient(47deg,rgba(120, 205, 104, 1) 0%,rgba(20, 166, 165, 1) 100%);
             top: 20px;
             left: 30px;
+            -webkit-clip-path: polygon(100% 0, 100% 100%, 0% 100%);
             clip-path: polygon(100% 0, 100% 100%, 0% 100%);
           }
         }
