@@ -1,7 +1,7 @@
 <template>
   <div class="nav">
     <div class="ui-logo">
-      NAIVE UI
+      NAIVE UI ({{ version }})
     </div>
     <div />
     <div class="theme-picker">
@@ -16,12 +16,14 @@
 </template>
 
 <script>
+import { version } from '../package.json'
 import withapp from '../packages/mixins/withapp'
 
 export default {
   mixins: [withapp],
   data () {
     return {
+      version,
       theme: 'default',
       options: [
         {

@@ -1,42 +1,58 @@
 @import '../styles/mixins/config.scss';
 @import '../styles/mixins/mixins.scss';
 
-@include b(code-box) {
-  &.n-default-theme {
-    background-color: #5c657eff;
-  }
-  &.n-light-theme {
-    background-color: white;
-    color: #222222;
-    .n-divider__content {
-      color: #222222;
+@include themes-mixin {
+  @include b(code-box) {
+    background-color: $service-layout-drawer-background-color;
+    border-color: $service-layout-border-color;
+    box-shadow: inset 0 0 0 1px $n-divider-color;
+    @include e(code) {
+      border-top: 1px solid $n-divider-color;
     }
-  }
-  border-radius: 8px;
-  padding-top: 16px;
-  .n-divider__content {
-    cursor: pointer;
-  }
-  @include e(title) {
-    margin: 0 24px;
-    font-size: 16px;
-    font-weight: bold;
-  }
-  @include e(content) {
-    margin: 12px 24px 0 24px;
-    p {
-      font-size: 14px;
-      margin: 0;
+    @include once {
+      &:not(:last-child) {
+        margin-bottom: 16px;
+      }
+      overflow: hidden;
+      border-radius: 8px;
+      padding-top: 16px;
+      transition: background-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier;
+      .n-divider__content {
+        cursor: pointer;
+      }
+      @include e(title) {
+        position: relative;
+        margin: 0 24px;
+        font-size: 16px;
+        font-weight: bold;
+        @include b(button) {
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+      @include e(content) {
+        margin: 12px 24px 0 24px;
+        p {
+          font-size: 14px;
+          margin: 0;
+        }
+        code {
+          font-family: "Lato";
+          font-size: 14px;
+        }
+      }
+      @include e(view) {
+        margin: 12px 24px;
+      }
+      @include e(code) {
+        padding: 0 24px 12px 24px;
+        pre {
+          margin-top: 18px;
+          margin-bottom: 6px;
+        }
+      }
     }
-    code {
-      font-family: "Lato";
-      font-size: 14px;
-    }
-  }
-  @include e(view) {
-    margin: 0 24px;
-  }
-  @include e(code) {
-
   }
 }

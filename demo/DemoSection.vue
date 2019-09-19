@@ -4,22 +4,27 @@
     :class="{
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
+    n-default-theme-background-color-hint="transparent"
+    n-light-theme-background-color-hint="white"
   >
     <div class="n-code-box__title">
       <slot name="title" />
+      <n-button
+        size="tiny"
+        ghost
+        icon="md-code"
+        circle
+        @click="toggleCodeDisplay"
+      />
     </div>
     <div class="n-code-box__content">
       <slot name="content" />
     </div>
-    <n-divider />
     <div
       class="n-code-box__view"
     >
       <slot name="demo" />
     </div>
-    <n-divider @click.native="handleDividerClick">
-      {{ !showCode ? 'Show Code' : 'Hide Code' }}
-    </n-divider>
     <div
       v-if="showCode"
       class="n-code-box__code"
@@ -32,16 +37,31 @@
 <script>
 import withapp from '../packages/mixins/withapp'
 import themeable from '../packages/mixins/themeable'
+import 'highlight.js/styles/atom-one-dark-reasonable.css'
+import 'highlight.js/styles/atom-one-light.css'
 
 export default {
   mixins: [withapp, themeable],
   data () {
     return {
-      showCode: false
+      showCode: false,
+      lightThemeCSSRef: null,
+      defaultThemeCSSRef: null
     }
   },
+  watch: {
+    synthesizedTheme (value) {
+
+    }
+  },
+  mounted () {
+    // document.querySelector('')
+  },
   methods: {
-    handleDividerClick () {
+    switchHighlightStyle () {
+
+    },
+    toggleCodeDisplay () {
       this.showCode = !this.showCode
     }
   }
