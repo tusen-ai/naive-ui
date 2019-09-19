@@ -2,6 +2,25 @@
 
 @mixin setup-light-theme () {
   @include setup-light-colors();
+  $n-color: $neutral-2 !global;
+  $secondary-color: $neutral-3 !global;
+  $n-divider-color: $neutral-6 !global;
+  $border-color: $neutral-5 !global;
+  /**
+   * service layout
+   */
+  $service-layout-drawer-background-color: $neutral-10 !global;
+  $service-layout-body-background-color: $neutral-8 !global;
+  $service-layout-nav-background-color: $neutral-10 !global;
+  $service-layout-color: $n-color !global ;
+  $service-layout-border-color: $n-divider-color !global;
+  /**
+   * Divider
+   */
+   $divider-color: $n-divider-color !global;
+  /**
+   * button
+   */
   $button-font-family: $default-font-family !global;
   $button-border-radius: 6px !global;
   $button-font-size: (
@@ -35,7 +54,7 @@
     "large": 20px
   ) !global;
   $button-border-color: (
-    "default":  $primary-6,
+    "default":  $border-color,
     "primary": $primary-6,
     "info": $info-6,
     "success": $success-6,
@@ -77,15 +96,19 @@
     'error-focus-ripple-start': (0 0 0 0 map-get($map: $button-border-color, $key: 'error')),  
     'error-focus-ripple-end': (0 0 0 $button-box-shadow-ripple-spread map-get($map: $button-border-color, $key: 'error'))
   ) !global;
-  $button-ghost-weight: 0%;
-  $button-ghost-hover-weight: 10%;
-  $button-ghost-active-weight: 15%;
-  $button-ghost-focus-weight: 10%;
+  $button-ghost-alpha: 0;
+  $button-ghost-hover-alpha: .1;
+  $button-ghost-active-alpha: .15;
+  $button-ghost-focus-alpha: .1;
+  $button-ghost-weight: percentage(red($border-color) / (255 - red($border-color)) * $button-ghost-alpha);
+  $button-ghost-hover-weight: percentage(red($border-color) / (255 - red($border-color)) * $button-ghost-hover-alpha);
+  $button-ghost-active-weight: percentage(red($border-color) / (255 - red($border-color)) * $button-ghost-active-alpha);
+  $button-ghost-focus-weight: percentage(red($border-color) / (255 - red($border-color)) * $button-ghost-focus-alpha);
   $button-background-color: (
-    "default": mix($primary-6, white, $button-ghost-weight),
-    "default-focus": mix($primary-6, white, $button-ghost-focus-weight),
-    "default-hover": mix($primary-6, white, $button-ghost-hover-weight),
-    "default-active": mix($primary-6, white, $button-ghost-active-weight),
+    "default": mix($border-color, white, $button-ghost-weight),
+    "default-focus": mix($border-color, white, $button-ghost-focus-weight),
+    "default-hover": mix($border-color, white, $button-ghost-hover-weight),
+    "default-active": mix($border-color, white, $button-ghost-active-weight),
     "primary": $primary-6,
     "primary-focus": $primary-5,
     "primary-hover": $primary-5,
@@ -107,15 +130,11 @@
     "error-hover": $error-5,
     "error-active": $error-7,
   ) !global;
-  $button-ghost-alpha: 0;
-  $button-ghost-hover-alpha: .1;
-  $button-ghost-active-alpha: .15;
-  $button-ghost-focus-alpha: .1;
   $ghost-button-background-color: (
-    "default": change-color($primary-6, $alpha: $button-ghost-alpha),
-    "default-focus": change-color($primary-6, $alpha: $button-ghost-focus-alpha),
-    "default-hover": change-color($primary-6, $alpha: $button-ghost-hover-alpha),
-    "default-active": change-color($primary-6, $alpha: $button-ghost-active-alpha),
+    "default": change-color($secondary-color, $alpha: $button-ghost-alpha),
+    "default-focus": change-color($secondary-color, $alpha: $button-ghost-focus-alpha),
+    "default-hover": change-color($secondary-color, $alpha: $button-ghost-hover-alpha),
+    "default-active": change-color($secondary-color, $alpha: $button-ghost-active-alpha),
     "primary": change-color($primary-6, $alpha: $button-ghost-alpha),
     "primary-focus": change-color($primary-6, $alpha: $button-ghost-focus-alpha),
     "primary-hover": change-color($primary-6, $alpha: $button-ghost-hover-alpha),
@@ -138,7 +157,7 @@
     "warning-active": change-color($warning-6, $alpha: $button-ghost-active-alpha),
   ) !global;
   $ghost-button-color: (
-    "default": $primary-6,
+    "default": $secondary-color,
     "primary": $primary-6,
     "info": $info-6,
     "success": $success-6,
@@ -146,11 +165,11 @@
     "error": $error-6
   )!global;
   $button-color: (
-    "default": $primary-6,
-    "primary": white,
-    "info": white,
-    "success": white,
-    "warning": white,
-    "error": white
+    "default": $secondary-color,
+    "primary": $secondary-color,
+    "info": $secondary-color,
+    "success": $secondary-color,
+    "warning": $secondary-color,
+    "error": $secondary-color
   ) !global;
 }

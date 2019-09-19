@@ -2,6 +2,23 @@
 
 @mixin setup-default-theme () {
   @include setup-dark-colors();
+  $n-color: $neutral-2 !global;
+  $n-divider-color: $neutral-5 !global;
+  /**
+   * service layout
+   */
+  $service-layout-drawer-background-color: $neutral-7 !global;
+  $service-layout-body-background-color: $neutral-8 !global;
+  $service-layout-nav-background-color: $neutral-7 !global;
+  $service-layout-color: $n-color !global;
+  $service-layout-border-color: $neutral-5 !global;
+  /**
+   * Divider
+   */
+  $divider-color: $n-color !global;
+  /**
+   * button
+   */
   $button-font-family: $default-font-family !global;
   $button-border-radius: 6px !global;
   $button-font-size: (

@@ -371,16 +371,17 @@ $scrollbar-color--hover: rgba(255,255,255,0.3);
 
 @mixin fade-in-width-expand-transition($block: "fade-in-width-expand", $duration: .2s, $delay: .1s) {
   &.#{$namespace}-#{$block}-leave-active {
-    transition: opacity $duration $default-cubic-bezier, max-width $duration $default-cubic-bezier $delay;
+    transition: opacity $duration $default-cubic-bezier, max-width $duration $default-cubic-bezier $delay, margin $duration $default-cubic-bezier $delay;
   }
   &.#{$namespace}-#{$block}-enter-active {
-    transition: opacity $duration $default-cubic-bezier $delay, max-width $duration $default-cubic-bezier;
+    transition: opacity $duration $default-cubic-bezier $delay, max-width $duration $default-cubic-bezier,  margin $duration $default-cubic-bezier;
   }
   &.#{$namespace}-#{$block}-enter-to {
     opacity: 1;
   }
   &.#{$namespace}-#{$block}-enter {
     max-width: 0!important;
+    margin: 0!important;
     opacity: 0;
   }
   &.#{$namespace}-#{$block}-leave {
@@ -389,5 +390,6 @@ $scrollbar-color--hover: rgba(255,255,255,0.3);
   &.#{$namespace}-#{$block}-leave-to {
     max-width: 0!important;
     opacity: 0!important;
+    margin: 0!important;
   }
 }
