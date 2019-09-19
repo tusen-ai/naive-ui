@@ -49,8 +49,6 @@ export default {
   },
   beforeDestroy () {
     const id = this.hollowOutBackgroundColorId
-    window.setTimeout(() => {
-      HollowOutStyleManager.unregisterComponent(id)
-    }, 1000)
+    HollowOutStyleManager.unregisterComponent(id, 1000)
   }
 }
