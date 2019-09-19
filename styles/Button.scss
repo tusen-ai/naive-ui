@@ -99,6 +99,15 @@
         }
       }
     }
+    @if $type == 'default' {
+      @include m(loading) {
+        @include e(icon) {
+          circle {
+            stroke: map-get($map: $ghost-button-color, $key: $type) !important;
+          }
+        }
+      }
+    }
     @include not-m(disabled) {
       @include m(enter-pressed) {
         background-color: map-get($map: $button-background-color, $key: $type + '-active');
@@ -190,12 +199,16 @@
         width: 0;
       }
       @include e(content) {
-        margin-left: 6px;
         white-space: nowrap;
       }
-      @include m(right-icon) {
-        @include e(content) {
+      @include m(left-icon) {
+        @include e(icon) {
           margin-right: 6px;
+        }
+      }
+      @include m(right-icon) {
+        @include e(icon) {
+          margin-left: 6px;
         }
       }
       @include m(block) {
