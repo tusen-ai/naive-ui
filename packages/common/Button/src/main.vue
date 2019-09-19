@@ -12,7 +12,7 @@
       'n-button--rippling': rippling,
       'n-button--enter-pressed': enterPressed,
       'n-button--ghost': ghost,
-      'n-button--right-icon': iconOnRight,
+      [`n-button--${iconPosition}-icon`]: iconPosition && (hasIcon || loading) && !noTextContent,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
     :tabindex="synthesizedFocusable ? 0 : -1"
@@ -144,7 +144,7 @@ export default {
     },
     size: {
       validator (value) {
-        return ['small', 'medium', 'large'].includes(value)
+        return ['tiny', 'small', 'medium', 'large'].includes(value)
       },
       default: 'medium'
     },
@@ -175,7 +175,7 @@ export default {
       default: null
     },
     iconPosition: {
-      default: null,
+      default: 'left',
       validator (iconPosition) {
         return ['left', 'right'].includes(iconPosition)
       }
@@ -190,6 +190,9 @@ export default {
     }
   },
   computed: {
+    noTextContent () {
+      return this.circle || !this.$slots.default
+    },
     avoidHollowOut () {
       return this.ghost || !['primary', 'link', 'info', 'success', 'warning', 'error'].includes(this.type)
     },
