@@ -10,6 +10,7 @@ $layout-nav-height: 64px;
     left: 0;
     right: 0;
     z-index: 0;
+    background-color: $service-layout-body-background-color;
     color: $service-layout-color;
     @include e(nav) {
       position: absolute;
@@ -64,7 +65,9 @@ $layout-nav-height: 64px;
         cursor: pointer;
         width: 36px;
         height: 36px;
-        opacity: 0.3;
+        path {
+          fill: $service-layout-toggle-button-color;
+        }
         position: absolute;
         top: 50%;
         right: 0;
@@ -131,9 +134,9 @@ $layout-nav-height: 64px;
           &:hover span {
             opacity: 1;
           }
-          &::before {
+          &::before { // item background
             content: "";
-            background-image:linear-gradient(47deg,rgba(232,232,235,.4) 0%,rgba(31,38,62,.4) 100%);
+            background-image: $service-layout-item-background-image;
             position: absolute;
             left: 0;
             right: 0;
@@ -156,8 +159,8 @@ $layout-nav-height: 64px;
               content: '';
               height: 6px;
               width: 6px;
-              border-left: 2px solid #63E2B7;
-              border-top: 2px solid #63E2B7;
+              border-left: 2px solid $n-primary-color;
+              border-top: 2px solid $n-primary-color;
               position: absolute;
               left: 240px;
               top: calc(50% - 1px);
@@ -182,9 +185,11 @@ $layout-nav-height: 64px;
         }
         @include b(nimbus-service-layout-drawer-group-items) {
           overflow: hidden;
-          transition: max-height .45s cubic-bezier(0.4, 0.0, 0.2, 1);
+          transition: max-height .3s cubic-bezier(0.4, 0.0, 0.2, 1), opacity .3s cubic-bezier(0.4, 0.0, 0.2, 1);
+          opacity: 1;
           @include m(collapsed) {
             max-height: 0;
+            opacity: 0;
           }
         }
       }

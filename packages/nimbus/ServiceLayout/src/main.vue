@@ -106,7 +106,7 @@
         class="n-nimbus-service-layout-drawer__toggle-button"
         @click="toggle"
       >
-        <img src="./toggleButton.svg">
+        <toggle-button />
       </div>
     </div>
     <nav class="n-nimbus-service-layout__nav">
@@ -119,11 +119,13 @@
 import Scrollbar from '../../../common/Scrollbar'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import toggleButton from './toggleButton'
 
 export default {
   name: 'NNimbusServiceLayout',
   components: {
-    Scrollbar
+    Scrollbar,
+    toggleButton
   },
   mixins: [withapp, themeable],
   props: {
