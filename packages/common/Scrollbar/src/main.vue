@@ -1,6 +1,9 @@
 <template>
   <div
     class="n-scrollbar"
+    :class="{
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+    }"
     @mouseenter="enterScrollWrapper"
     @mouseleave="leaveScrollWrapper"
     @dragstart.capture="handleDragStart"
@@ -61,9 +64,12 @@
 </template>
 
 <script>
+import withapp from '../../../mixins/withapp'
+import themable from '../../../mixins/themeable'
 
 export default {
   name: 'NScrollbar',
+  mixins: [withapp, themable],
   props: {
     width: {
       type: Number,
