@@ -47,5 +47,6 @@ issue fix, add delay prop
 add trigger to tooltip
 outside click delegate select
 DatePicker range Bug
-Scrollbar Firefox...
-scrollbar 在 resize 之后滚动会有问题
+// Scrollbar Firefox...
+// scrollbar 在 resize 之后滚动会有问题
+ResizeObserver Polyfill
