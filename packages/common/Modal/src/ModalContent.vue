@@ -47,20 +47,20 @@ export default {
   data () {
     return {
       slotDOM: [],
-      styleActive: false,
-      updateScrollbarTimerId: null
+      styleActive: false
+      // updateScrollbarTimerId: null
     }
   },
   watch: {
-    active (newActive) {
-      this.$nextTick().then(() => {
-        if (newActive) {
-          this.updateScrollbar()
-        } else {
-          window.clearTimeout(this.updateScrollbarTimerId)
-        }
-      })
-    }
+    // active (newActive) {
+    //   this.$nextTick().then(() => {
+    //     if (newActive) {
+    //       this.updateScrollbar()
+    //     } else {
+    //       window.clearTimeout(this.updateScrollbarTimerId)
+    //     }
+    //   })
+    // }
   },
   created () {
     if (this.active) {
@@ -74,16 +74,16 @@ export default {
     this.$nextTick().then(this.registerContent)
   },
   beforeDestroy () {
-    window.clearTimeout(this.updateScrollbarTimerId)
+    // window.clearTimeout(this.updateScrollbarTimerId)
   },
   methods: {
-    updateScrollbar () {
-      this.updateScrollbarTimerId = window.setTimeout(() => {
-        // console.log('update scrollbar')
-        this.$refs.scrollbar.updateParameters()
-        this.updateScrollbar()
-      }, 300)
-    },
+    // updateScrollbar () {
+    //   this.updateScrollbarTimerId = window.setTimeout(() => {
+    //     // console.log('update scrollbar')
+    //     this.$refs.scrollbar.updateParameters()
+    //     this.updateScrollbar()
+    //   }, 300)
+    // },
     registerContent () {
       const slots = this.$slots.default
       const els = slots.map(vNode => vNode.elm).filter(el => el)

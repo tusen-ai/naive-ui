@@ -203,9 +203,9 @@ export default {
     filteredOptions () {
       this.$nextTick().then(() => {
         this.updatePosition()
-        if (this.$refs.scrollbar) {
-          this.$refs.scrollbar.updateParameters()
-        }
+        // if (this.$refs.scrollbar) {
+        //   this.$refs.scrollbar.updateParameters()
+        // }
       })
     },
     value () {
@@ -214,9 +214,9 @@ export default {
       }
       this.$nextTick().then(() => {
         this.updatePosition()
-        if (this.$refs.scrollbar) {
-          this.$refs.scrollbar.updateParameters()
-        }
+        // if (this.$refs.scrollbar) {
+        //   this.$refs.scrollbar.updateParameters()
+        // }
       })
     }
   },

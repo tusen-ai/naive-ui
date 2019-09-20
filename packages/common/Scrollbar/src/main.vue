@@ -66,6 +66,7 @@
 <script>
 import withapp from '../../../mixins/withapp'
 import themable from '../../../mixins/themeable'
+import resizeObserverDelagate from '../../../utils/delegate/resizeObserverDelegate'
 
 export default {
   name: 'NScrollbar',
@@ -152,6 +153,9 @@ export default {
     }
   },
   watch: {
+    '$refs.scrollContent': function () {
+      throw Error('n-scrollbar\'s content ref changed, which is not expected')
+    },
     containerScrollTop () {
       this.handleVerticalScroll()
     },
@@ -162,6 +166,9 @@ export default {
   updated () {
     // console.log('[NScrollbar.updated]')
   },
+  beforeDestroy () {
+    resizeObserverDelagate.unregisterHandler(this.$refs.scrollContent)
+  },
   destroyed () {
     window.clearTimeout(this.horizontalScrollbarVanishTimerId)
     window.clearTimeout(this.verticalScrollbarVanishTimerId)
@@ -170,6 +177,7 @@ export default {
   },
   mounted () {
     this.updateParameters()
+    resizeObserverDelagate.registerHandler(this.$refs.scrollContent, this.updateParameters)
   },
   methods: {
     disableScrollbar () {
