@@ -1,7 +1,7 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
-@mixin size-mixin($size) {
+@mixin button-size-mixin($size) {
   @include m($size + "-size") {
     $height: map-get($map: $button-height, $key: $size);
     $font-size: map-get($map: $button-font-size, $key: $size);
@@ -64,7 +64,7 @@
   }
 }
 
-@mixin type-mixin ($type) {
+@mixin button-type-mixin ($type) {
   @include m($type + "-type") {
     color: map-get($map: $button-color, $key: $type);
     background-color: map-get($map: $button-background-color, $key: $type);
@@ -91,20 +91,16 @@
           }
         }
       }
-      @include m(loading) {
-        @include e(icon) {
-          circle {
-            stroke: map-get($map: $ghost-button-color, $key: $type) !important;
-          }
+      @include e(icon) {
+        circle {
+          stroke: map-get($map: $ghost-button-color, $key: $type) !important;
         }
       }
     }
     @if $type == 'default' {
-      @include m(loading) {
-        @include e(icon) {
-          circle {
-            stroke: map-get($map: $ghost-button-color, $key: $type) !important;
-          }
+      @include e(icon) {
+        circle {
+          stroke: map-get($map: $ghost-button-color, $key: $type) !important;
         }
       }
     }
@@ -226,17 +222,17 @@
       &::-moz-focus-inner {
         border: 0;
       }
-      @include size-mixin('tiny');
-      @include size-mixin('small');
-      @include size-mixin('medium');
-      @include size-mixin('large');
+      @include button-size-mixin('tiny');
+      @include button-size-mixin('small');
+      @include button-size-mixin('medium');
+      @include button-size-mixin('large');
     }
-    @include type-mixin('default');
-    @include type-mixin('primary');
-    @include type-mixin('info');
-    @include type-mixin('success');
-    @include type-mixin('warning');
-    @include type-mixin('error');
+    @include button-type-mixin('default');
+    @include button-type-mixin('primary');
+    @include button-type-mixin('info');
+    @include button-type-mixin('success');
+    @include button-type-mixin('warning');
+    @include button-type-mixin('error');
   }
 }
 
