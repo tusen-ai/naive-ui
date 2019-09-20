@@ -5,7 +5,7 @@
     :theme="theme"
   >
     <n-nimbus-service-layout
-      :padding-body="true"
+      :padding-body="false"
       :items="items"
     >
       <template v-slot:header>

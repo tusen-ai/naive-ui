@@ -1,21 +1,22 @@
 <template>
-  <div
-    ref="doc"
-    class="n-doc"
-  >
-    <div class="n-doc-header">
+  <div style="padding: 24px 56px;">
+    <n-row style="margin-bottom: 16px;">
       <n-gradient-text :font-size="20">
-        Button / n-button
+        Button
       </n-gradient-text>
-    </div>
-    <div class="n-doc-body">
-      <basic />
-      <icon />
-      <disabled />
-      <events />
-      <loading />
-      <debug />
-    </div>
+    </n-row>
+    <n-row :gutter="16">
+      <n-col span="12">
+        <basic />
+        <icon />
+        <disabled />
+        <events />
+        <loading />
+      </n-col>
+      <n-col span="12">
+        <debug />
+      </n-col>
+    </n-row>
   </div>
 </template>
 
