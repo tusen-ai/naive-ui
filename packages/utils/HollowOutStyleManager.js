@@ -38,7 +38,7 @@ class HollowOutStyleManager {
     this.updateCSSNode()
   }
   unregisterComponent (id, delay) {
-    this.idStyleMap.remove(id)
+    this.idStyleMap.delete(id)
     window.setTimeout(() => {
       this.updateCSSNode()
     }, delay)
