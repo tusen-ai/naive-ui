@@ -3,9 +3,11 @@
 @mixin setup-light-theme () {
   @include setup-light-colors();
   $n-color: $neutral-2 !global;
+  $n-selected-color: $neutral-7 !global;
   $secondary-color: $neutral-3 !global;
   $n-divider-color: $neutral-6 !global;
-  $border-color: $neutral-5 !global;
+  $n-border-color: $neutral-5 !global;
+  $n-primary-color: $primary-6 !global;
   /**
    * service layout
    */
@@ -14,10 +16,19 @@
   $service-layout-nav-background-color: $neutral-10 !global;
   $service-layout-color: $n-color !global ;
   $service-layout-border-color: $n-divider-color !global;
+  $service-layout-toggle-button-color: rgba(0, 0, 0, .15)!global;
+  $service-layout-item-background-image: linear-gradient(47deg, $neutral-7, $neutral-7) !global;
   /**
+   * scrollbar
+   */
+  $scrollbar-color: (
+    "default": rgba(0,0,0,0.25),
+    "hover": rgba(0,0,0,0.40)
+  ) !global;
+  /*
    * Divider
    */
-   $divider-color: $n-divider-color !global;
+  $divider-color: $n-divider-color !global;
   /**
    * button
    */
@@ -54,7 +65,7 @@
     "large": 20px
   ) !global;
   $button-border-color: (
-    "default":  $border-color,
+    "default":  $n-border-color,
     "primary": $primary-6,
     "info": $info-6,
     "success": $success-6,
@@ -100,15 +111,15 @@
   $button-ghost-hover-alpha: .1;
   $button-ghost-active-alpha: .15;
   $button-ghost-focus-alpha: .1;
-  $button-ghost-weight: percentage(red($border-color) / (255 - red($border-color)) * $button-ghost-alpha);
-  $button-ghost-hover-weight: percentage(red($border-color) / (255 - red($border-color)) * $button-ghost-hover-alpha);
-  $button-ghost-active-weight: percentage(red($border-color) / (255 - red($border-color)) * $button-ghost-active-alpha);
-  $button-ghost-focus-weight: percentage(red($border-color) / (255 - red($border-color)) * $button-ghost-focus-alpha);
+  $button-ghost-weight: percentage(red($n-border-color) / (255 - red($n-border-color)) * $button-ghost-alpha);
+  $button-ghost-hover-weight: percentage(red($n-border-color) / (255 - red($n-border-color)) * $button-ghost-hover-alpha);
+  $button-ghost-active-weight: percentage(red($n-border-color) / (255 - red($n-border-color)) * $button-ghost-active-alpha);
+  $button-ghost-focus-weight: percentage(red($n-border-color) / (255 - red($n-border-color)) * $button-ghost-focus-alpha);
   $button-background-color: (
-    "default": mix($border-color, white, $button-ghost-weight),
-    "default-focus": mix($border-color, white, $button-ghost-focus-weight),
-    "default-hover": mix($border-color, white, $button-ghost-hover-weight),
-    "default-active": mix($border-color, white, $button-ghost-active-weight),
+    "default": mix($n-border-color, white, $button-ghost-weight),
+    "default-focus": mix($n-border-color, white, $button-ghost-focus-weight),
+    "default-hover": mix($n-border-color, white, $button-ghost-hover-weight),
+    "default-active": mix($n-border-color, white, $button-ghost-active-weight),
     "primary": $primary-6,
     "primary-focus": $primary-5,
     "primary-hover": $primary-5,

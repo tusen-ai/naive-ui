@@ -3,7 +3,10 @@
 @mixin setup-default-theme () {
   @include setup-dark-colors();
   $n-color: $neutral-2 !global;
+  $secondary-color: $neutral-3 !global;
   $n-divider-color: $neutral-5 !global;
+  $n-border-color: $neutral-5 !global;
+  $n-primary-color: $primary-6 !global;
   /**
    * service layout
    */
@@ -12,6 +15,15 @@
   $service-layout-nav-background-color: $neutral-7 !global;
   $service-layout-color: $n-color !global;
   $service-layout-border-color: $neutral-5 !global;
+  $service-layout-toggle-button-color: rgba(255, 255, 255, .3)!global;
+  $service-layout-item-background-image: linear-gradient(47deg,rgba(232,232,235,.4) 0%,rgba(31,38,62,.4) 100%) !global;
+  /**
+   * scrollbar
+   */
+  $scrollbar-color: (
+    "default": rgba(255,255,255,0.2),
+    "hover": rgba(255,255,255,0.3)
+  ) !global;
   /**
    * Divider
    */

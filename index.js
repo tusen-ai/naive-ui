@@ -58,6 +58,7 @@ import Time from './packages/common/Time'
 import LoadingBar from './packages/common/LoadingBar'
 import Slider from './packages/common/Slider'
 import Tree from './packages/common/Tree'
+import Grid from './packages/common/Grid'
 
 function install (Vue) {
   Card.install(Vue)
@@ -120,6 +121,7 @@ function install (Vue) {
   Time.install(Vue)
   Slider.install(Vue)
   Tree.install(Vue)
+  Grid.install(Vue)
 }
 
 export default {

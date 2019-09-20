@@ -188,8 +188,8 @@ $default-text-gradient-danger: linear-gradient(214deg, rgba(224,32,32,1) 0%, rgb
 
 $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
 
-$scrollbar-color: rgba(255,255,255,0.2);
-$scrollbar-color--hover: rgba(255,255,255,0.3);
+// $scrollbar-color: rgba(255,255,255,0.2);
+// $scrollbar-color--hover: rgba(255,255,255,0.3);
 
 @mixin scrollbar {
   &::-webkit-scrollbar {
