@@ -9,13 +9,21 @@
   >
     <div class="n-code-box__title">
       <slot name="title" />
-      <n-button
-        size="tiny"
-        ghost
-        icon="md-code"
-        circle
-        @click="toggleCodeDisplay"
-      />
+      <n-tooltip
+        :placement="'top'"
+        :arrow="true"
+      >
+        <template v-slot:activator>
+          <n-button
+            size="tiny"
+            ghost
+            icon="md-code"
+            circle
+            @click="toggleCodeDisplay"
+          />
+        </template>
+        Show Code
+      </n-tooltip>
     </div>
     <div class="n-code-box__content">
       <slot name="content" />

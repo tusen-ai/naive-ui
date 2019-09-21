@@ -6,7 +6,7 @@ import './atom-one-dark-reasonable.scss'
 import './atom-one-light.scss'
 import NaiveUI from '../index'
 import SourceBlock from './SourceBlock'
-
+import VueI18n from 'vue-i18n'
 import nimbusServiceLayoutDemo from './components/nimbusServiceLayoutDemo'
 import homeDemo from './components/homeDemo'
 import gradientTextDemo from './components/gradientTextDemo'
@@ -63,6 +63,9 @@ import treeDemo from './components/treeDemo'
 
 import demo from './demo'
 import DemoSection from './DemoSection'
+import ComponentDemos from './ComponentDemos'
+import ComponentDocumentation from './ComponentDocumentation'
+import DocumentationWrapper from './DocumentationWrapper'
 import './CodeBox.scss'
 
 import popoverDebug from './debugComponents/popoverDebug'
@@ -74,11 +77,19 @@ import cancelMarkDebug from './debugComponents/cancelMarkDebug'
 import cascaderDebug from './debugComponents/cascaderDebug'
 import verticalAlignDebug from './debugComponents/verticalAlignDebug'
 
-Vue.use(NaiveUI)
+Vue.use(VueI18n)
 Vue.use(VueRouter)
+Vue.use(NaiveUI)
+
+const i18n = new VueI18n({
+  locale: 'en-us'
+})
 
 Vue.component(SourceBlock.name, SourceBlock)
 Vue.component('DemoSection', DemoSection)
+Vue.component('ComponentDemos', ComponentDemos)
+Vue.component('DocumentationWrapper', DocumentationWrapper)
+Vue.component('ComponentDocumentation', ComponentDocumentation)
 
 const routes = [
   {
@@ -181,4 +192,4 @@ router.afterEach(function () {
   Vue.prototype.$NLoadingBar.finish()
 })
 
-export { Vue, router }
+export { Vue, router, i18n }

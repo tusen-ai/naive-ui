@@ -12,6 +12,13 @@
         @change="handleThemeChange"
       />
     </div>
+    <div class="lang-picker">
+      <n-select
+        v-model="$i18n.locale"
+        size="small"
+        :options="langOptions"
+      />
+    </div>
   </div>
 </template>
 
@@ -34,6 +41,16 @@ export default {
           label: 'light',
           value: 'light'
         }
+      ],
+      langOptions: [
+        {
+          label: '中文',
+          value: 'zh-cn'
+        },
+        {
+          label: 'English',
+          value: 'en-us'
+        }
       ]
     }
   },
@@ -48,7 +65,7 @@ export default {
 <style lang="scss" scoped>
 .nav {
   display: grid;
-  grid-template-columns: 272px 1fr 160px;
+  grid-template-columns: 272px 1fr 128px 160px;
   grid-template-rows: 64px;
   align-items: center;
 }
@@ -56,6 +73,9 @@ export default {
   padding-left: 48px;
 }
 .theme-picker {
+  padding-right: 16px;
+}
+.lang-picker {
   padding-right: 48px;
 }
 </style>
