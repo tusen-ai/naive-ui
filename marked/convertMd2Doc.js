@@ -1,0 +1,108 @@
+const hljs = require('highlight.js')
+const marked = require('marked')
+// const prettier = require('prettier')
+
+const escapeMap = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#39;'
+}
+
+function escapeForHTML (input) {
+  return input.replace(/([&<>'"])/g, char => escapeMap[char])
+}
+
+// Create your custom renderer.
+const renderer = new marked.Renderer()
+renderer.code = (code, language) => {
+  // Check whether the given language is valid for highlight.js.
+  const validLang = !!(language && hljs.getLanguage(language))
+
+  // Highlight only if the language is valid.
+  // highlight.js escapes HTML in the code, but we need to escape by ourselves
+  // when we don't use it.
+  const highlighted = validLang
+    ? hljs.highlight(language, code).value
+    : escapeForHTML(code)
+
+  // Render the highlighted code with `hljs` class.
+  return `<pre><code class="${language}">${highlighted}</code></pre>`
+}
+
+// marked.setOptions({
+//   renderer
+// })
+
+function template (demos) {
+  return `<component-demos>${demos}</component-demos>`
+}
+
+function parseDemos (demosLiteral) {
+  const demoNames = demosLiteral
+    .split('\n')
+    .map(demoName => demoName.trim())
+    .filter(demoName => demoName.length)
+  const demoTags = demoNames.map(demoName => `<${demoName} />`)
+  return demoTags.join('\n')
+}
+
+function generateScript (demosLiteral) {
+  const demoNames = demosLiteral
+    .split('\n')
+    .map(demoName => demoName.trim())
+    .filter(demoName => demoName.length)
+  const importStatements = demoNames.map(demoName => `import ${demoName} from './${demoName}.md'`).join('\n')
+  const componentStatements = demoNames.join(', ')
+  const script = `<script>
+${importStatements}
+
+export default {
+  components: {
+    ${componentStatements}
+  }
+}
+</script>`
+  return script
+}
+
+function convertMd2Demo (text) {
+  const tokens = marked.lexer(text)
+  const demosIndex = tokens.findIndex(token => token.type === 'code' && token.lang === 'demo')
+  let demos = { text: '' }
+  let demosLiteral = ''
+  if (~demosIndex) {
+    demos = tokens[demosIndex]
+    demosLiteral = demos.text
+    tokens.splice(demosIndex, 1, {
+      type: 'html',
+      pre: false,
+      text: '<!--demos-->\n'
+    })
+  }
+  const documentationHTML = marked.parser(tokens)
+  const demosReg = /<!--demos-->/
+  const demoTags = parseDemos(demosLiteral)
+  const documentationContent = documentationHTML.replace(demosReg, template(demoTags))
+  const documentationTemplate = `<template><component-documentation>${documentationContent}</component-documentation></template>`
+  const documentationScript = generateScript(demosLiteral)
+  return `${documentationTemplate}\n\n${documentationScript}`
+  // console.log(vueComponent)
+  // return vueComponent
+  // console.log(marked.parser(tokens))
+  // const parts = getPartsOfDemo(tokens)
+  // const mergedParts = mergeParts(parts)
+  // const vueComponent = genVueComponent(mergedParts)
+  // console.log(vueComponent)
+  // return vueComponent
+}
+
+module.exports = convertMd2Demo
+// const startTime = new Date()
+// for (let i = 0; i < 100; ++i) {
+// const md = fs.readFileSync('./marked/component.md').toString()
+// console.log(convertMd2Demo(md))
+// }
+// const endTime = new Date()
+// console.log(endTime - startTime)
