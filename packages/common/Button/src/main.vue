@@ -71,7 +71,6 @@
     >&nbsp;</span>
     <transition
       name="n-fade-in-width-expand"
-      :appear="loading"
     >
       <div
         v-if="(loading || hasIcon) && iconOnRight"
