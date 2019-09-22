@@ -1,3 +1,5 @@
+import ResizeObserver from 'resize-observer-polyfill'
+
 class ResizeObserverDelegate {
   constructor () {
     console.log('resize observer')

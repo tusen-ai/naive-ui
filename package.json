@@ -73,6 +73,7 @@
     "prettier-eslint": "^9.0.0",
     "progress-bar-webpack-plugin": "^1.12.1",
     "regenerator-runtime": "^0.13.2",
+    "resize-observer-polyfill": "^1.5.1",
     "schema-utils": "^1.0.0",
     "showdown": "^1.9.0",
     "sinon": "^7.3.2",
