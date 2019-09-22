@@ -1,5 +1,5 @@
 # 基础
-按钮的 `type` 分为 `default`、`primary`、`info`、`success`、`warning` 和 `error`。
+按钮的 `type` 分别为 `default`、`primary`、`info`、`success`、`warning` 和 `error`。
 ```html
 <n-button>Default</n-button>
 <n-button type="primary">Primary</n-button>

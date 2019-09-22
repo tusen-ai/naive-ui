@@ -9,8 +9,10 @@ events
 shape
 ghost
 loading
+group
 debug
 ```
 ## API
 |Property|Description|Type|Default|Version|
 |-|-|-|-|-|
+|type|Type of button.|string|`'default'`||

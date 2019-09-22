@@ -1,0 +1,67 @@
+# 按钮组
+可以把几个按钮结合成按钮组。
+```html
+<n-button-group>
+  <n-button
+    type="default"
+    icon="md-save"
+    round
+  >
+    Default
+  </n-button>
+  <n-button
+    type="primary"
+    icon="md-save"
+    disabled
+  >
+    Primary
+  </n-button>
+  <n-button
+    type="info"
+    icon="md-save"
+    icon-position="right"
+  >
+    Info
+  </n-button>
+  <n-button
+    type="warning"
+    icon="md-save"
+  >
+    Warning
+  </n-button>
+</n-button-group>
+<n-button-group vertical>
+  <n-button
+    type="default"
+    icon="md-save"
+    round
+  >
+    Default
+  </n-button>
+  <n-button
+    type="primary"
+    icon="md-save"
+    disabled
+  >
+    Primary
+  </n-button>
+  <n-button
+    type="info"
+    icon="md-save"
+    icon-position="right"
+  >
+    Info
+  </n-button>
+  <n-button
+    type="warning"
+    icon="md-save"
+  >
+    Warning
+  </n-button>
+</n-button-group>
+```
+```css
+.n-button {
+  margin: 0 8px 8px 0;
+}
+```

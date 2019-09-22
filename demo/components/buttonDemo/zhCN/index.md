@@ -9,6 +9,7 @@ events
 shape
 ghost
 loading
+group
 debug
 ```
 ## API
