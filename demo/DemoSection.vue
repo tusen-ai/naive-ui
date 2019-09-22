@@ -25,7 +25,7 @@
         Show Code
       </n-tooltip>
     </div>
-    <div class="n-code-box__content">
+    <div class="n-code-box__content markdown">
       <slot name="content" />
     </div>
     <div

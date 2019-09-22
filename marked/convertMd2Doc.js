@@ -14,6 +14,10 @@ function escapeForHTML (input) {
   return input.replace(/([&<>'"])/g, char => escapeMap[char])
 }
 
+marked.setOptions({
+  gfm: true
+})
+
 // Create your custom renderer.
 const renderer = new marked.Renderer()
 renderer.code = (code, language) => {
@@ -67,12 +71,17 @@ export default {
   return script
 }
 
-function convertMd2Demo (text) {
+function convertMd2ComponentDocumentation (text) {
   const tokens = marked.lexer(text)
   const demosIndex = tokens.findIndex(token => token.type === 'code' && token.lang === 'demo')
   let demos = { text: '' }
   let demosLiteral = ''
+  let headerPart = tokens
+  let footerPart = []
+  // console.log(tokens)
   if (~demosIndex) {
+    headerPart = tokens.slice(0, demosIndex)
+    footerPart = tokens.slice(demosIndex + 1)
     demos = tokens[demosIndex]
     demosLiteral = demos.text
     tokens.splice(demosIndex, 1, {
@@ -81,10 +90,15 @@ function convertMd2Demo (text) {
       text: '<!--demos-->\n'
     })
   }
-  const documentationHTML = marked.parser(tokens)
+  headerPart.links = {}
+  footerPart.links = {}
+  const documentationHTML = `<section class="markdown header-part">${marked.parser(headerPart)}</section>\n` + '<!--demos-->\n' + `<section class="markdown footer-part">${marked.parser(footerPart)}</section>\n`
+  // console.log(documentationHTML)
+  // const classedDocumentationHTML = addClassToHTML(documentationHTML, 'markdown')
   const demosReg = /<!--demos-->/
   const demoTags = parseDemos(demosLiteral)
   const documentationContent = documentationHTML.replace(demosReg, template(demoTags))
+  // console.log(documentationContent)
   const documentationTemplate = `<template><component-documentation>${documentationContent}</component-documentation></template>`
   const documentationScript = generateScript(demosLiteral)
   return `${documentationTemplate}\n\n${documentationScript}`
@@ -98,11 +112,20 @@ function convertMd2Demo (text) {
   // return vueComponent
 }
 
-module.exports = convertMd2Demo
+// function addClassToHTML (html, className) {
+//   const classReg = /<[^!/][^>]*>/g
+//   return html.replace(classReg, (openTag) => {
+//     return openTag.replace(/>/, ` class="${className}">`)
+//   })
+// }
+
+module.exports = convertMd2ComponentDocumentation
 // const startTime = new Date()
 // for (let i = 0; i < 100; ++i) {
+
+// const fs = require('fs')
 // const md = fs.readFileSync('./marked/component.md').toString()
-// console.log(convertMd2Demo(md))
+// console.log(convertMd2ComponentDocumentation(md))
 // }
 // const endTime = new Date()
 // console.log(endTime - startTime)

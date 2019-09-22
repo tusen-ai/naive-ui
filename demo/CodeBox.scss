@@ -23,7 +23,7 @@
       @include e(title) {
         position: relative;
         margin: 0 24px;
-        font-size: 16px;
+        font-size: 18px;
         font-weight: bold;
         @include b(button) {
           position: absolute;
@@ -38,13 +38,9 @@
           font-size: 14px;
           margin: 0;
         }
-        code {
-          font-family: "Lato";
-          font-size: 14px;
-        }
       }
       @include e(view) {
-        margin: 12px 24px;
+        margin: 16px 24px 12px 24px;
       }
       @include e(code) {
         padding: 0 24px 12px 24px;

@@ -1,0 +1,63 @@
+.n-app--light-theme .markdown {
+  code {
+    background-color: rgb(244, 244, 244);
+    border: 1px solid rgb(230, 230, 230);
+  }
+}
+
+.markdown {
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+  }
+  h1 {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+  h2 {
+    font-size: 20px;
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+  p {
+    margin: 0 0 16px 0;
+    font-size: 14px;
+  }
+  code {
+    box-sizing: border-box;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, .09);
+    padding: .2em .4em;
+    font-size: 14px;
+    font-family: 'Lato';
+  }
+  table {
+    font-size: 14px;
+    width: 100%;
+    border: 1px solid rgba(34,36,38,.15);
+    border-radius: 6px;
+    text-align: left;
+    color: rgba(0,0,0,.87);
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    th {
+      background: rgb(250, 250, 250);
+      text-align: inherit;
+      color: rgba(0,0,0,.87);
+      padding: 14px 12px;
+      vertical-align: inherit;
+      font-style: none;
+      font-weight: 400;
+      text-transform: none;
+      border-bottom: 1px solid rgba(34,36,38,.1);
+      border-left: none;
+    }
+    td {
+      padding: 12px;
+      background-color: white;
+    }
+  }
+  &.footer-part {
+    margin-top: 16px;
+  }
+}
