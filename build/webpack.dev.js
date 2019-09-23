@@ -78,6 +78,11 @@ const webpackConfig = {
           limit: 10000,
           name: path.posix.join('static', '[name].[hash:7].[ext]')
         }
+      },
+      {
+        resourceQuery: /blockType=i18n/,
+        type: 'javascript/auto',
+        loader: '@kazupon/vue-i18n-loader'
       }
     ]
   },

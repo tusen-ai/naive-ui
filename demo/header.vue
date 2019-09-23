@@ -1,3 +1,16 @@
+<i18n>
+{
+  "zh-cn": {
+    "dark": "深色",
+    "light": "浅色"
+  },
+  "en-us": {
+    "dark": "Dark",
+    "light": "Light"
+  }
+}
+</i18n>
+
 <template>
   <div class="nav">
     <div class="ui-logo">
@@ -14,7 +27,7 @@
     </div>
     <div class="lang-picker">
       <n-select
-        v-model="$i18n.locale"
+        v-model="$parent.$i18n.locale"
         size="small"
         :options="langOptions"
       />
@@ -32,16 +45,6 @@ export default {
     return {
       version,
       theme: 'default',
-      options: [
-        {
-          label: 'dark',
-          value: 'default'
-        },
-        {
-          label: 'light',
-          value: 'light'
-        }
-      ],
       langOptions: [
         {
           label: '中文',
@@ -52,6 +55,26 @@ export default {
           value: 'en-us'
         }
       ]
+    }
+  },
+  computed: {
+    options: function () {
+      return [
+        {
+          label: this.$t('dark'),
+          value: 'default'
+        },
+        {
+          label: this.$t('light'),
+          value: 'light'
+        }
+      ]
+    }
+  },
+  watch: {
+    '$i18n.locale': function (value) {
+      console.log(this.$i18n)
+      console.log(this.$parent.$i18n)
     }
   },
   methods: {

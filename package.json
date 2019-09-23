@@ -26,6 +26,7 @@
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
+    "@kazupon/vue-i18n-loader": "^0.4.1",
     "@vue/babel-preset-app": "^3.8.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "@vue/test-utils": "^1.0.0-beta.29",
