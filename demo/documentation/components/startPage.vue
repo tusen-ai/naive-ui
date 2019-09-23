@@ -13,9 +13,9 @@
 </template>
 
 <script>
-import readme from '../readme'
+import readme from '../../readme'
 import docCodeEditorMixin from './docCodeEditorMixin'
-import { replaceEmojiWithImages } from '../utils'
+import { replaceEmojiWithImages } from '../../utils'
 export default {
   mixins: [docCodeEditorMixin],
   data () {

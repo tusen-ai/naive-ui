@@ -17,7 +17,7 @@ const webpackConfig = {
     chunkFilename: '[name].[hash:7].js'
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.vue', '.json', '.entry'],
     alias: config.alias,
     modules: ['node_modules']
   },
@@ -35,6 +35,10 @@ const webpackConfig = {
   },
   module: {
     rules: [
+      {
+        test: /index.entry$/,
+        loader: ['vue-loader', path.resolve(__dirname, '../demo/loaders/NaiveUIDocEntryLoader.js')]
+      },
       {
         test: /index\.md$/,
         loader: ['vue-loader', path.resolve(__dirname, '../demo/loaders/NaiveUIDocLoader.js')]
