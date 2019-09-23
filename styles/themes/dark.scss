@@ -64,12 +64,12 @@
     "large": 20px
   ) !global;
   $button-border-color: (
-    "default":  $primary-3,
+    "default":  $primary-6,
     "primary": $primary-6,
-    "info": $info-3,
-    "success": $success-3,
-    "warning": $warning-3,
-    "error": $error-3
+    "info": $info-6,
+    "success": $success-6,
+    "warning": $warning-6,
+    "error": $error-6
   ) !global;
   $button-box-shadow-spread: 0px !global;
   $button-box-shadow-ripple-spread: 4px !global;
@@ -119,22 +119,22 @@
     "primary-focus": $primary-5,
     "primary-hover": $primary-5,
     "primary-active": $primary-7,
-    "info": $info-3,
-    "info-focus": $info-2,
-    "info-hover": $info-2,
-    "info-active": $info-4,
-    "success": $success-3,
-    "success-focus": $success-2,
-    "success-hover": $success-2,
-    "success-active": $success-4,
-    "warning": $warning-3,
-    "warning-focus": $warning-2,
-    "warning-hover": $warning-2,
-    "warning-active": $warning-4,
-    "error": $error-3,
-    "error-focus": $error-2,
-    "error-hover": $error-2,
-    "error-active": $error-4,
+    "info": $info-6,
+    "info-focus": $info-5,
+    "info-hover": $info-5,
+    "info-active": $info-7,
+    "success": $success-6,
+    "success-focus": $success-5,
+    "success-hover": $success-5,
+    "success-active": $success-7,
+    "warning": $warning-6,
+    "warning-focus": $warning-5,
+    "warning-hover": $warning-5,
+    "warning-active": $warning-7,
+    "error": $error-6,
+    "error-focus": $error-5,
+    "error-hover": $error-5,
+    "error-active": $error-7,
   ) !global;
   $ghost-button-background-color: (
     "default": change-color($primary-6, $alpha: $button-ghost-alpha),
@@ -165,10 +165,10 @@
   $ghost-button-color: (
     "default": $primary-6,
     "primary": $primary-6,
-    "info": $info-3,
-    "success": $success-3,
-    "warning": $warning-3,
-    "error": $error-3
+    "info": $info-6,
+    "success": $success-6,
+    "warning": $warning-6,
+    "error": $error-6
   )!global;
   $button-color: (
     "default": $primary-6,
