@@ -1,5 +1,5 @@
 <template>
-  <demo-section>
+  <component-demo>
     <template v-slot:title>
       <!--TITLE_SLOT-->
     </template>
@@ -12,7 +12,7 @@
     <template v-slot:code>
       <!--CODE_SLOT-->
     </template>
-  </demo-section>
+  </component-demo>
 </template>
 
 <script>

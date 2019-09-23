@@ -32,14 +32,14 @@ const webpackConfig = {
     rules: [
       {
         test: /index\.md$/,
-        loader: ['vue-loader', path.resolve(__dirname, '../marked/NaiveUIDocLoader.js')]
+        loader: ['vue-loader', path.resolve(__dirname, '../demo/loaders/NaiveUIDocLoader.js')]
       },
       {
         test: {
           test: /\.md$/,
           exclude: /index\.md$/
         },
-        loader: ['vue-loader', path.resolve(__dirname, '../marked/NaiveUIMdLoader.js')]
+        loader: ['vue-loader', path.resolve(__dirname, '../demo/loaders/NaiveUIDemoLoader.js')]
       },
       {
         test: /\.demo\.vue$/,

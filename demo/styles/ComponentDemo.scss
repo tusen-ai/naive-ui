@@ -1,5 +1,5 @@
-@import '../styles/mixins/config.scss';
-@import '../styles/mixins/mixins.scss';
+@import '../../styles/mixins/config.scss';
+@import '../../styles/mixins/mixins.scss';
 
 @include themes-mixin {
   @include b(code-box) {

@@ -2,9 +2,9 @@ import Vue from 'vue/dist/vue'
 import VueRouter from 'vue-router'
 import '../styles/index.scss'
 import 'codemirror/lib/codemirror.css'
-import './atom-one-dark-reasonable.scss'
-import './atom-one-light.scss'
-import './markdown.scss'
+import './styles/atom-one-dark-reasonable.scss'
+import './styles/atom-one-light.scss'
+import './styles/markdown.scss'
 import NaiveUI from '../index'
 import SourceBlock from './SourceBlock'
 import VueI18n from 'vue-i18n'
@@ -63,11 +63,11 @@ import sliderDemo from './components/sliderDemo'
 import treeDemo from './components/treeDemo'
 
 import demo from './demo'
-import DemoSection from './DemoSection'
-import ComponentDemos from './ComponentDemos'
-import ComponentDocumentation from './ComponentDocumentation'
-import DocumentationWrapper from './DocumentationWrapper'
-import './CodeBox.scss'
+import ComponentDemo from './utils/ComponentDemo'
+import ComponentDemos from './utils/ComponentDemos'
+import ComponentDocumentation from './utils/ComponentDocumentation'
+import DocumentationWrapper from './utils/DocumentationWrapper'
+import './styles/ComponentDemo.scss'
 
 import popoverDebug from './debugComponents/popoverDebug'
 import routerDebug from './debugComponents/routerDebug'
@@ -87,7 +87,7 @@ const i18n = new VueI18n({
 })
 
 Vue.component(SourceBlock.name, SourceBlock)
-Vue.component('DemoSection', DemoSection)
+Vue.component('ComponentDemo', ComponentDemo)
 Vue.component('ComponentDemos', ComponentDemos)
 Vue.component('DocumentationWrapper', DocumentationWrapper)
 Vue.component('ComponentDocumentation', ComponentDocumentation)

@@ -37,7 +37,7 @@ marked.setOptions({
   renderer
 })
 
-const demoBlock = fs.readFileSync(path.resolve(__dirname, 'DemoBlock.vue')).toString()
+const demoBlock = fs.readFileSync(path.resolve(__dirname, 'ComponentDemoTemplate.vue')).toString()
 
 function getPartsOfDemo (tokens) {
   let template = null
