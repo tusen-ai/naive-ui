@@ -4,7 +4,7 @@
   @include setup-light-colors();
   $n-color: $neutral-2 !global;
   $n-selected-color: $neutral-7 !global;
-  $secondary-color: $neutral-3 !global;
+  $n-secondary-text-color: $neutral-3 !global;
   $n-divider-color: $neutral-6 !global;
   $n-border-color: $neutral-5 !global;
   $n-primary-color: $primary-6 !global;
@@ -142,10 +142,10 @@
     "error-active": $error-7,
   ) !global;
   $ghost-button-background-color: (
-    "default": change-color($secondary-color, $alpha: $button-ghost-alpha),
-    "default-focus": change-color($secondary-color, $alpha: $button-ghost-focus-alpha),
-    "default-hover": change-color($secondary-color, $alpha: $button-ghost-hover-alpha),
-    "default-active": change-color($secondary-color, $alpha: $button-ghost-active-alpha),
+    "default": change-color($n-secondary-text-color, $alpha: $button-ghost-alpha),
+    "default-focus": change-color($n-secondary-text-color, $alpha: $button-ghost-focus-alpha),
+    "default-hover": change-color($n-secondary-text-color, $alpha: $button-ghost-hover-alpha),
+    "default-active": change-color($n-secondary-text-color, $alpha: $button-ghost-active-alpha),
     "primary": change-color($primary-6, $alpha: $button-ghost-alpha),
     "primary-focus": change-color($primary-6, $alpha: $button-ghost-focus-alpha),
     "primary-hover": change-color($primary-6, $alpha: $button-ghost-hover-alpha),
@@ -168,7 +168,7 @@
     "warning-active": change-color($warning-6, $alpha: $button-ghost-active-alpha),
   ) !global;
   $ghost-button-color: (
-    "default": $secondary-color,
+    "default": $n-secondary-text-color,
     "primary": $primary-6,
     "info": $info-6,
     "success": $success-6,
@@ -176,11 +176,11 @@
     "error": $error-6
   )!global;
   $button-color: (
-    "default": $secondary-color,
-    "primary": $secondary-color,
-    "info": $secondary-color,
-    "success": $secondary-color,
-    "warning": $secondary-color,
-    "error": $secondary-color
+    "default": $n-secondary-text-color,
+    "primary": $n-secondary-text-color,
+    "info": $n-secondary-text-color,
+    "success": $n-secondary-text-color,
+    "warning": $n-secondary-text-color,
+    "error": $n-secondary-text-color
   ) !global;
 }

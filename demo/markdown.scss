@@ -3,6 +3,15 @@
     background-color: rgb(244, 244, 244);
     border: 1px solid rgb(230, 230, 230);
   }
+  table {
+    border: 1px solid rgba(34,36,38,.15);
+    th {
+      background: rgb(250, 250, 250);      
+    }
+    td {
+      background-color: white;
+    }
+  }
 }
 
 .markdown {
@@ -33,17 +42,15 @@
   table {
     font-size: 14px;
     width: 100%;
-    border: 1px solid rgba(34,36,38,.15);
+    border: 1px solid #40465b;
     border-radius: 6px;
     text-align: left;
-    color: rgba(0,0,0,.87);
     border-collapse: separate;
     border-spacing: 0;
     overflow: hidden;
     th {
-      background: rgb(250, 250, 250);
+      background-color: #272F46;
       text-align: inherit;
-      color: rgba(0,0,0,.87);
       padding: 14px 12px;
       vertical-align: inherit;
       font-style: none;
@@ -51,10 +58,11 @@
       text-transform: none;
       border-bottom: 1px solid rgba(34,36,38,.1);
       border-left: none;
+      font-weight: bold;
     }
     td {
       padding: 12px;
-      background-color: white;
+      background-color: #1F263E;
     }
   }
   &.footer-part {
