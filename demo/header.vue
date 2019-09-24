@@ -27,9 +27,10 @@
     </div>
     <div class="lang-picker">
       <n-select
-        v-model="$parent.$i18n.locale"
+        :value="lang"
         size="small"
         :options="langOptions"
+        @input="handleLangInput"
       />
     </div>
   </div>
@@ -41,10 +42,16 @@ import withapp from '../packages/mixins/withapp'
 
 export default {
   mixins: [withapp],
+  props: {
+    lang: {
+      type: String,
+      required: true
+    }
+  },
   data () {
     return {
       version,
-      theme: 'default',
+      theme: 'dark',
       langOptions: [
         {
           label: '中文',
@@ -62,7 +69,7 @@ export default {
       return [
         {
           label: this.$t('dark'),
-          value: 'default'
+          value: 'dark'
         },
         {
           label: this.$t('light'),
@@ -71,15 +78,12 @@ export default {
       ]
     }
   },
-  watch: {
-    '$i18n.locale': function (value) {
-      console.log(this.$i18n)
-      console.log(this.$parent.$i18n)
-    }
-  },
   methods: {
     handleThemeChange (theme) {
       this.NApp.$parent.theme = theme
+    },
+    handleLangInput (lang) {
+      this.$emit('lang-change', lang)
     }
   }
 }

@@ -42,6 +42,8 @@ tooltip css max-content 兼容性
 popover z-index 问题
 ## 2019.9.3
 popover 停止追踪的时机
+## 2019.9.24
+popover 可能 activator 和 content 不同步，在 beforeRouteEnter locale change 的时候！！！
 ## TODO
 issue fix, add delay prop
 add trigger to tooltip

@@ -9,7 +9,10 @@
       :items="items"
     >
       <template v-slot:header>
-        <doc-header />
+        <doc-header
+          :lang="lang"
+          @lang-change="handleLangChange"
+        />
       </template>
       <router-view />
     </n-nimbus-service-layout>
@@ -18,42 +21,47 @@
 
 <script>
 import DocHeader from './header.vue'
+import { i18n } from './init'
 
 export default {
   components: {
     DocHeader
   },
-  data () {
-    return {
-      theme: 'default',
-      items: [
+  beforeRouteEnter (to, from, next) {
+    console.log(i18n)
+    i18n.locale = to.params.lang
+    next()
+  },
+  beforeRouteUpdate (to, from, next) {
+    this.$i18n.locale = to.params.lang
+    next()
+  },
+  computed: {
+    items () {
+      return [
         {
           name: 'Start',
-          path: '/start'
+          path: `/${this.lang}` + '/start'
         },
         {
           name: 'Nimbus',
-          path: '/',
+          path: `/${this.lang}` + '/',
           childItems: [
             {
               name: 'Nimbus Service Layout',
-              path: '/n-nimbus-service-layout'
+              path: `/${this.lang}` + '/n-nimbus-service-layout'
             },
-            // {
-            //   name: 'Nimbus Home Layout',
-            //   path: '/n-nimbus-home-layout'
-            // },
             {
               name: 'Nimbus Form Card',
-              path: '/n-nimbus-form-card'
+              path: `/${this.lang}` + '/n-nimbus-form-card'
             },
             {
               name: 'Nimbus Confirm Card',
-              path: '/n-nimbus-confirm-card'
+              path: `/${this.lang}` + '/n-nimbus-confirm-card'
             },
             {
               name: 'Nimbus Icon',
-              path: '/n-nimbus-icon'
+              path: `/${this.lang}` + '/n-nimbus-icon'
             }
           ]
         },
@@ -62,184 +70,184 @@ export default {
           childItems: [
             {
               name: 'AdvanceTable',
-              path: '/n-advance-table'
+              path: `/${this.lang}` + '/n-advance-table'
             },
             {
               name: 'Alert',
-              path: '/n-alert'
+              path: `/${this.lang}` + '/n-alert'
             },
             {
               name: 'Anchor',
-              path: '/n-anchor'
+              path: `/${this.lang}` + '/n-anchor'
             },
             {
               name: 'App',
-              path: '/n-app'
+              path: `/${this.lang}` + '/n-app'
             },
             {
               name: 'BackTop',
-              path: '/n-back-top'
+              path: `/${this.lang}` + '/n-back-top'
             },
             {
               name: 'Badge',
-              path: '/n-badge'
+              path: `/${this.lang}` + '/n-badge'
             },
             {
               name: 'Button',
-              path: '/n-button'
+              path: `/${this.lang}` + '/n-button'
             },
             {
               name: 'Cascader',
-              path: '/n-cascader'
+              path: `/${this.lang}` + '/n-cascader'
             },
             {
               name: 'Checkbox',
-              path: '/n-checkbox'
+              path: `/${this.lang}` + '/n-checkbox'
             },
             {
               name: 'Collapse',
-              path: '/n-collapse'
+              path: `/${this.lang}` + '/n-collapse'
             },
             {
               name: 'Confirm',
-              path: '/n-confirm'
+              path: `/${this.lang}` + '/n-confirm'
             },
             {
               name: 'DatePicker',
-              path: '/n-date-picker'
+              path: `/${this.lang}` + '/n-date-picker'
             },
             {
               name: 'Divider',
-              path: '/n-divider'
+              path: `/${this.lang}` + '/n-divider'
 
             },
             {
               name: 'Drawer',
-              path: '/n-drawer'
+              path: `/${this.lang}` + '/n-drawer'
             },
             {
               name: 'Dropdown',
-              path: '/n-dropdown'
+              path: `/${this.lang}` + '/n-dropdown'
             },
             {
               name: 'Form',
-              path: '/n-form'
+              path: `/${this.lang}` + '/n-form'
             },
             {
               name: 'GradientText',
-              path: '/n-gradient-text'
+              path: `/${this.lang}` + '/n-gradient-text'
             },
             {
               name: 'Icon',
-              path: '/n-icon'
+              path: `/${this.lang}` + '/n-icon'
             },
             {
               name: 'Input',
-              path: '/n-input'
+              path: `/${this.lang}` + '/n-input'
             },
             {
               name: 'InputNumber',
-              path: '/n-input-number'
+              path: `/${this.lang}` + '/n-input-number'
             },
             {
               name: 'InputKeyValuePairs',
-              path: '/n-InputKeyValuePairs'
+              path: `/${this.lang}` + '/n-InputKeyValuePairs'
             },
             {
               name: 'LoadingBar',
-              path: '/n-loading-bar'
+              path: `/${this.lang}` + '/n-loading-bar'
             },
             {
               name: 'Message',
-              path: '/n-message'
+              path: `/${this.lang}` + '/n-message'
             },
             {
               name: 'Modal',
-              path: '/n-modal'
+              path: `/${this.lang}` + '/n-modal'
             },
             {
               name: 'Notification',
-              path: '/n-notification'
+              path: `/${this.lang}` + '/n-notification'
             },
             {
               name: 'Pagination',
-              path: '/n-pagination'
+              path: `/${this.lang}` + '/n-pagination'
             },
             {
               name: 'Popover',
-              path: '/n-popover'
+              path: `/${this.lang}` + '/n-popover'
             },
             {
               name: 'Popconfirm',
-              path: '/n-popconfirm'
+              path: `/${this.lang}` + '/n-popconfirm'
             },
             {
               name: 'Popselect',
-              path: '/n-popselect'
+              path: `/${this.lang}` + '/n-popselect'
             },
             {
               name: 'Progress',
-              path: '/n-progress'
+              path: `/${this.lang}` + '/n-progress'
             },
             {
               name: 'Radio',
-              path: '/n-radio'
+              path: `/${this.lang}` + '/n-radio'
             },
             {
               name: 'Select',
-              path: '/n-select'
+              path: `/${this.lang}` + '/n-select'
             },
             {
               name: 'Slider',
-              path: '/n-slider'
+              path: `/${this.lang}` + '/n-slider'
             },
             {
               name: 'Spin',
-              path: '/n-spin'
+              path: `/${this.lang}` + '/n-spin'
             },
             {
               name: 'Steps',
-              path: '/n-steps'
+              path: `/${this.lang}` + '/n-steps'
             },
             {
               name: 'Switch',
-              path: '/n-switch'
+              path: `/${this.lang}` + '/n-switch'
             },
             {
               name: 'Tabs',
-              path: '/n-tabs'
+              path: `/${this.lang}` + '/n-tabs'
             },
             {
               name: 'Table',
-              path: '/n-table'
+              path: `/${this.lang}` + '/n-table'
             },
             {
               name: 'Tag',
-              path: '/n-tag'
+              path: `/${this.lang}` + '/n-tag'
             },
             {
               name: 'Time',
-              path: '/n-time'
+              path: `/${this.lang}` + '/n-time'
             },
             {
               name: 'TimePicker',
-              path: '/n-time-picker'
+              path: `/${this.lang}` + '/n-time-picker'
             },
             {
               name: 'Timeline',
-              path: '/n-timeline'
+              path: `/${this.lang}` + '/n-timeline'
             },
             {
               name: 'Tooltip',
-              path: '/n-tooltip'
+              path: `/${this.lang}` + '/n-tooltip'
             },
             {
               name: 'Transfer',
-              path: '/n-transfer'
+              path: `/${this.lang}` + '/n-transfer'
             },
             {
               name: 'Tree',
-              path: '/n-tree'
+              path: `/${this.lang}` + '/n-tree'
             }
           ]
         },
@@ -248,49 +256,83 @@ export default {
           childItems: [
             {
               name: 'CancelMarkDebug',
-              path: '/n-cancel-mark-debug'
+              path: `/${this.lang}` + '/n-cancel-mark-debug'
             },
             {
               name: 'PopoverDebug',
-              path: '/n-popover-debug'
+              path: `/${this.lang}` + '/n-popover-debug'
             },
             {
               name: 'RouterDebug',
-              path: '/n-router-debug'
+              path: `/${this.lang}` + '/n-router-debug'
             },
             {
               name: 'ModalDebug',
-              path: '/n-modal-debug'
+              path: `/${this.lang}` + '/n-modal-debug'
             },
             {
               name: 'ScrollbarDebug',
-              path: '/n-scrollbar-debug'
+              path: `/${this.lang}` + '/n-scrollbar-debug'
             },
             {
               name: 'ScrollbarDebug2',
-              path: '/n-scrollbar-debug2'
+              path: `/${this.lang}` + '/n-scrollbar-debug2'
             },
             {
               name: 'DatePickerDebug',
-              path: '/n-date-picker-debug'
+              path: `/${this.lang}` + '/n-date-picker-debug'
             },
             {
               name: 'BackTopDebug',
-              path: '/n-back-top-debug'
+              path: `/${this.lang}` + '/n-back-top-debug'
             },
             {
               name: 'CascaderDebug',
-              path: '/n-cascader-debug'
+              path: `/${this.lang}` + '/n-cascader-debug'
             },
             {
               name: 'VerticalAlignDebug',
-              path: '/n-vertical-align-debug'
+              path: `/${this.lang}` + '/n-vertical-align-debug'
             }
           ]
         }
       ]
+    },
+    lang: {
+      get () {
+        return this.$route.params.lang || 'en-us'
+      },
+      set (lang) {
+        this.$router.push(changeLangInPath(
+          this.$route.fullPath,
+          lang
+        ))
+      }
+    },
+    theme: {
+      get () {
+        return this.$route.query.theme === 'light' ? 'light' : 'dark'
+      },
+      set (theme) {
+        this.$router.push({
+          query: {
+            ...this.$route.query,
+            theme
+          }
+        })
+      }
+    }
+  },
+  methods: {
+    handleLangChange (lang) {
+      this.lang = lang
     }
   }
+}
+
+function changeLangInPath (path, lang) {
+  const langReg = /^\/(zh-cn|en-us)\//
+  return path.replace(langReg, `/${lang}/`)
 }
 </script>
 

@@ -92,6 +92,12 @@ Vue.component('ComponentDemos', ComponentDemos)
 Vue.component('DocumentationWrapper', DocumentationWrapper)
 Vue.component('ComponentDocumentation', ComponentDocumentation)
 
+const withPrefix = (prefix, routes) =>
+  routes.map((route) => {
+    route.path = prefix + route.path
+    return route
+  })
+
 const routes = [
   {
     path: '/home-demo',
@@ -110,9 +116,9 @@ const routes = [
     component: cascaderDebug
   },
   {
-    path: '/start',
+    path: '/:lang/start',
     component: demo,
-    children: [
+    children: withPrefix('/:lang', [
       { path: '/start', component: startPage },
       { path: '/n-nimbus-service-layout', component: nimbusServiceLayoutDemo },
       { path: '/n-nimbus-home-layout', component: homeDemo },
@@ -123,7 +129,6 @@ const routes = [
       { path: '/n-switch', component: switchDemo },
       { path: '/n-table', component: tableDemo },
       { path: '/n-advance-table', component: advanceTableDemos },
-      // { path: '/n-advance-table', component: advanceTableDemo },
       { path: '/n-input', component: inputDemo },
       { path: '/n-select', component: selectDemo },
       { path: '/n-cascader', component: cascaderDemo },
@@ -172,11 +177,11 @@ const routes = [
       { path: '/n-slider', component: sliderDemo },
       { path: '/n-tree', component: treeDemo },
       { path: '/n-vertical-align-debug', component: verticalAlignDebug }
-    ]
+    ])
   },
   {
     path: '/*',
-    redirect: '/start'
+    redirect: '/en-us/start'
   }
 ]
 
