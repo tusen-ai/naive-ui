@@ -10,6 +10,7 @@
   display: inline-block;
   vertical-align: bottom;
   .n-base-picker__mark {
+    cursor: pointer;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -25,7 +26,7 @@
   }
   .n-base-picker-label, .n-base-picker-tags {
     cursor: pointer;
-    outline: none;
+    // outline: none;
     box-sizing: border-box;
     position: relative;
     transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
@@ -37,7 +38,8 @@
     width: 100%;
     vertical-align: bottom;
     .n-base-picker-label__input {
-      outline: none;
+      // outline: none;
+      cursor: pointer;
       box-sizing: border-box;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -102,6 +104,9 @@
     .n-base-picker-label, .n-base-picker-tags {
       box-shadow: inset 0 0 0 1px $select-border-color--active, 0px 0px 10px 1px #366555;
       background-color: $select-background-color--active;
+    }
+    .n-base-picker-input-tag {
+      width: unset;
     }
   }
   &.n-base-picker--small-size {
@@ -202,7 +207,7 @@
   }
   &.n-base-picker--focus {
     .n-base-picker-label, .n-base-picker-tags {
-      box-shadow: inset 0 0 0 1px $select-border-color--active;      
+      box-shadow: inset 0 0 0 1px $select-border-color--active;
     }
   }
   &:not(.n-base-picker--disabled) {
@@ -216,16 +221,17 @@
 }
 
 @include b(base-picker-input-tag) {
-  outline: none;
+  // outline: none;
+  width: 0;
   position: relative;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
   display: inline-block;
   max-width: 100%;
   vertical-align: bottom;
   .n-base-picker-input-tag__input {
     padding: 0;
     background-color: transparent;
-    outline: none;
+    // outline: none;
     border: none;
     max-width: 100%;
     caret-color: $input-caret-color;

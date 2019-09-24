@@ -71,7 +71,7 @@ $block-depth: 0;
 $common-css-attrs-generated: false;
 $theme: null;
 $in-themes-mixin: false;
-$theme-names: "default", "light";
+$theme-names: "dark", "light";
 
 @mixin themes-mixin() {
   $in-themes-mixin: true !global;
@@ -86,7 +86,7 @@ $theme-names: "default", "light";
       @include setup-light-theme();
       @content;
       $theme: null !global;
-    } @else if $theme-name == 'default' {
+    } @else if $theme-name == 'dark' {
       $theme: $theme-name !global;
       @include setup-dark-theme();
       @content;

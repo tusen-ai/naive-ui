@@ -3,6 +3,7 @@
     <div
       v-if="show && (clearable || arrow)"
       class="n-cancel-mark"
+      @mousedown="handleMouseDown"
       @mouseenter="handleMouseEnter"
       @mouseleave="handleMouseLeave"
     >
@@ -85,6 +86,9 @@ export default {
     },
     handleMouseLeave () {
       this.mouseHovered = false
+    },
+    handleMouseDown (e) {
+      this.$emit('mousedown', e)
     }
   }
 }

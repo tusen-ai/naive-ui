@@ -10,11 +10,12 @@
       'n-base-picker--focus': patternInputFocused
     }"
     @click="handleClick"
-    @mousedown="handleMouseDown"
+    @mousedown.capture="handleMouseDown"
   >
     <template v-if="multiple && !filterable">
       <!-- multiple -->
       <div
+        ref="focusableEl1"
         class="n-base-picker-tags"
         :tabindex="disabled ? false : '0'"
         @blur="handleBlur"
@@ -33,28 +34,28 @@
             @click.stop="handleDeleteOption(option)"
           />
         </div>
+        <n-base-cancel-mark
+          class="n-base-picker__mark"
+          arrow
+          :show="!remote"
+          :disabled="disabled"
+          :active="active"
+          :clearable="clearable && selected"
+          @clear="handleClear"
+        />
       </div>
       <div
         class="n-base-picker__placeholder"
       >
         {{ placeholder }}
       </div>
-      <n-base-cancel-mark
-        class="n-base-picker__mark"
-        arrow
-        :show="!remote"
-        :disabled="disabled"
-        :active="active"
-        :clearable="clearable && selected"
-        @clear="handleClear"
-      />
     </template>
     <template v-if="multiple && filterable">
       <!-- multiple filterable -->
       <div
         ref="patternInputWrapper"
         class="n-base-picker-tags"
-        :tabindex="(disabled || active) ? false : '0'"
+        :tabindex="(disabled || patternInputFocused) ? false : '0'"
       >
         <div
           v-for="option in selectedOptions"
@@ -89,28 +90,29 @@
             class="n-base-picker-input-tag__mirror"
           >{{ pattern ? pattern : '&nbsp;' }}</span>
         </div>
+        <n-base-cancel-mark
+          ref="cancelMark"
+          class="n-base-picker__mark"
+          arrow
+          :show="!remote"
+          :disabled="disabled"
+          :active="active"
+          :clearable="clearable && selected"
+          @clear="handleClear"
+        />
       </div>
       <div
         class="n-base-picker__placeholder"
       >
         {{ placeholder }}
       </div>
-      <n-base-cancel-mark
-        class="n-base-picker__mark"
-        arrow
-        :show="!remote"
-        :disabled="disabled"
-        :active="active"
-        :clearable="clearable && selected"
-        @clear="handleClear"
-      />
     </template>
     <template v-else-if="!multiple && filterable">
       <!-- single filterable -->
       <div
         ref="patternInputWrapper"
         class="n-base-picker-label"
-        :tabindex="(!disabled && !active) ? '0' : false"
+        :tabindex="(!disabled && !patternInputFocused) ? '0' : false"
       >
         <input
           ref="patternInput"
@@ -124,47 +126,49 @@
           @blur="handlePatternInputBlur"
           @input="handlePatternInputInput"
         >
+        <n-base-cancel-mark
+          ref="cancelMark"
+          class="n-base-picker__mark"
+          arrow
+          :show="!remote"
+          :disabled="disabled"
+          :active="active"
+          :clearable="clearable && selected"
+          @clear="handleClear"
+        />
       </div>
-      <n-base-cancel-mark
-        class="n-base-picker__mark"
-        arrow
-        :show="!remote"
-        :disabled="disabled"
-        :active="active"
-        :clearable="clearable && selected"
-        @clear="handleClear"
-      />
     </template>
     <template v-else-if="!multiple && !filterable">
       <!-- single -->
       <div
+        ref="focusableEl2"
         class="n-base-picker-label"
         :tabindex="disabled ? false : '0'"
         @blur="handleBlur"
       >
         <div
+          v-if="label && label.length"
           class="n-base-picker-label__input"
-          :class="{
-            'n-base-picker-label__input--placeholder': !(label && label.length)
-          }"
         >
-          <template v-if="label && label.length">
-            {{ label }}
-          </template>
-          <template v-else>
-            {{ labelPlaceholder }}
-          </template>
+          {{ label }}
         </div>
+        <div
+          v-else
+          key="placeholder"
+          class="n-base-picker-label__input n-base-picker-label__input--placeholder"
+        >
+          {{ labelPlaceholder }}
+        </div>
+        <n-base-cancel-mark
+          class="n-base-picker__mark"
+          arrow
+          :show="!remote"
+          :disabled="disabled"
+          :active="active"
+          :clearable="clearable && selected"
+          @clear="handleClear"
+        />
       </div>
-      <n-base-cancel-mark
-        class="n-base-picker__mark"
-        arrow
-        :show="!remote"
-        :disabled="disabled"
-        :active="active"
-        :clearable="clearable && selected"
-        @clear="handleClear"
-      />
     </template>
   </div>
 </template>
@@ -269,8 +273,14 @@ export default {
       this.$emit('clear', e)
     },
     handleMouseDown (e) {
-      if (this.filterable && this.multiple && this.active) {
-        e.preventDefault()
+      if (!this.active) return
+      const filterableElKeys = ['focusableEl1', 'patternInputWrapper', 'patternInput', 'focusableEl2']
+      for (const key of filterableElKeys) {
+        const el = this.$refs[key]
+        if (el && document.hasFocus(el)) {
+          e.preventDefault()
+          break
+        }
       }
     },
     handleClick () {

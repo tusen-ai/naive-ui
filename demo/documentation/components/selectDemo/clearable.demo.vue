@@ -27,6 +27,27 @@
         clearable
         @change="handleChange"
       />
+      <n-select
+        v-model="selectedValue"
+        placeholder="Please Select Type"
+        :options="options"
+        style="flex-grow: 1; margin-right: 12px;"
+        emit-option
+        filterable
+        clearable
+        @change="handleChange"
+      />
+      <n-select
+        v-model="selectedArray"
+        multiple
+        placeholder="Please Select Type"
+        :options="options"
+        style="flex-grow: 1;"
+        emit-option
+        filterable
+        clearable
+        @change="handleChange"
+      />
       <!--EXAMPLE_END-->
     </div>
     <pre class="n-doc-section__inspect">v-model(single): {{ JSON.stringify(selectedValue) }}, v-model(mulitple): {{ JSON.stringify(selectedArray) }}</pre>
