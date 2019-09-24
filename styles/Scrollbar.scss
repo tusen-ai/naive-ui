@@ -9,6 +9,7 @@
       position: absolute;
       cursor: pointer;
       background-color: map-get($scrollbar-color, 'default');
+      transition: background-color .2s $default-cubic-bezier;
       &:hover {
         background-color: map-get($scrollbar-color, 'hover');
       }

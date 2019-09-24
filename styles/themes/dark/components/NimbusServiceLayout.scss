@@ -1,0 +1,9 @@
+@mixin setup-dark-nimbus-service-layout {
+  $service-layout-drawer-background-color: $neutral-7 !global;
+  $service-layout-body-background-color: $neutral-8 !global;
+  $service-layout-nav-background-color: $neutral-7 !global;
+  $service-layout-color: $n-color !global;
+  $service-layout-border-color: $n-divider-color !global;
+  $service-layout-toggle-button-color: rgba(255, 255, 255, .3)!global;
+  $service-layout-item-background-image: linear-gradient(47deg,rgba(232,232,235,.4) 0%,rgba(31,38,62,.4) 100%) !global;
+}

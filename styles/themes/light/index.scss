@@ -1,0 +1,21 @@
+@import 'lightColors.scss';
+@import "components/Button.scss";
+@import "components/Divider.scss";
+@import "components/NimbusServiceLayout.scss";
+@import "components/Scrollbar.scss";
+
+@mixin setup-light-theme () {
+  @include setup-light-colors();
+  $n-primary-color: $primary-6 !global;
+
+  $n-selected-color: $neutral-7 !global;
+  $n-divider-color: $neutral-6 !global;
+  $n-border-color: $neutral-5 !global;
+  $n-secondary-text-color: $neutral-3 !global;
+  $n-color: $neutral-2 !global;
+ 
+  @include setup-light-nimbus-service-layout;
+  @include setup-light-divider;
+  @include setup-light-scrollbar;
+  @include setup-light-button;
+}

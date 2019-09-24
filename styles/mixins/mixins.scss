@@ -1,7 +1,7 @@
 @import "config.scss";
 @import "../themes/vars.scss";
-@import "../themes/light.scss";
-@import "../themes/dark.scss";
+@import "../themes/dark/index.scss";
+@import "../themes/light/index.scss";
 
 /**
  * BEM related mixins
@@ -76,19 +76,19 @@ $theme-names: "default", "light";
 @mixin themes-mixin() {
   $in-themes-mixin: true !global;
   $theme: null !global;
-  @include setup-default-theme();
+  @include setup-dark-theme();
   @content;
   $common-css-attrs-generated: true !global;
   @each $theme-name in $theme-names {
     @if $theme-name == 'light' {
       $theme: $theme-name !global;
-      @include setup-default-theme();
+      @include setup-dark-theme();
       @include setup-light-theme();
       @content;
       $theme: null !global;
     } @else if $theme-name == 'default' {
       $theme: $theme-name !global;
-      @include setup-default-theme();
+      @include setup-dark-theme();
       @content;
       $theme: null !global;
     }
