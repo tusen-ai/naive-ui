@@ -10,19 +10,26 @@
   font-family: $default-font-family;
   text-align: start;
   vertical-align: baseline;
+  transform: translateZ(0); // to avoid blink of activator when animation occurs nearby
   &:not(.n-select--multiple) {
     @include m(small-size) {
-      line-height: 28px;
       height: 28px;
     }
     @include m(medium-size) {
-      line-height: 34px;
       height: 34px;
     }
     @include m(large-size) {
-      line-height: 40px;
       height: 40px;
     }
+  }
+  @include m(small-size) {
+    line-height: 28px;
+  }
+  @include m(medium-size) {
+    line-height: 34px;
+  }
+  @include m(large-size) {
+    line-height: 40px;
   }
   @include m(small-size) {
     font-size: 14px;
