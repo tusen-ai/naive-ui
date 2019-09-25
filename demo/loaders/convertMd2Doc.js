@@ -1,5 +1,6 @@
 const hljs = require('highlight.js')
 const marked = require('marked')
+const camelCase = require('lodash/camelCase')
 // const prettier = require('prettier')
 
 const escapeMap = {
@@ -57,6 +58,7 @@ function generateScript (demosLiteral) {
     .split('\n')
     .map(demoName => demoName.trim())
     .filter(demoName => demoName.length)
+    .map(demoName => camelCase(demoName))
   const importStatements = demoNames.map(demoName => `import ${demoName} from './${demoName}.md'`).join('\n')
   const componentStatements = demoNames.join(', ')
   const script = `<script>

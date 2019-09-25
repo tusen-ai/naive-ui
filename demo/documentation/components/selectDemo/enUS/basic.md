@@ -1,51 +1,39 @@
-<template>
-  <div class="n-doc-section">
-    <div class="n-doc-section__header">
-      Multiple Select
-    </div>
-    <div
-      class="n-doc-section__view"
-      style="flex-wrap: nowrap;"
-    >
-      <!--EXAMPLE_START-->
-      <n-select
-        v-model="selectedArray"
-        multiple
-        placeholder="Please Select Type"
-        :options="options"
-        style="margin-right: 12px; width: 320px;"
-      />
-      <n-select
-        v-model="selectedArray"
-        multiple
-        size="small"
-        placeholder="Please Select Type"
-        :options="options"
-        style="margin-right: 12px; width: 320px;"
-      />
-      <!--EXAMPLE_END-->
-    </div>
-    <pre class="n-doc-section__inspect">v-model: {{ JSON.stringify(selectedArray) }}</pre>
-    <n-doc-source-block>
-      <!--SOURCE-->
-    </n-doc-source-block>
-  </div>
-</template>
-
-<script>
+# Basic
+```html
+<n-select
+  v-model="value"
+  :options="options"
+/>
+<n-select
+  v-model="value"
+  disabled
+  :options="options"
+/>
+<n-select
+  v-model="value"
+  size="small"
+  :options="options"
+/>
+<n-select
+  v-model="value"
+  size="large"
+  :options="options"
+/>
+```
+```js
 export default {
   data () {
     return {
-      selectedArray: ['song1'],
+      value: null,
       options: [
         {
           label: "Everybody's Got Something to Hide Except Me and My Monkey",
-          value: 'song0'
+          value: 'song0',
+          disabled: true
         },
         {
           label: 'Drive My Car',
-          value: 'song1',
-          disabled: true
+          value: 'song1'
         },
         {
           label: 'Norwegian Wood',
@@ -61,7 +49,7 @@ export default {
           value: 'song4'
         },
         {
-          label: 'Think For Yourseld',
+          label: 'Think For Yourself',
           value: 'song5'
         },
         {
@@ -97,4 +85,10 @@ export default {
     }
   }
 }
-</script>
+```
+```css
+.n-select {
+  width: 180px;
+  margin: 0 12px 8px 0;
+}
+```

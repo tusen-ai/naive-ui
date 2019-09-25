@@ -1,40 +1,20 @@
-<template>
-  <div class="n-doc-section">
-    <div class="n-doc-section__header">
-      Listen Scroll Event
-    </div>
-    <div
-      class="n-doc-section__view"
-      style="flex-wrap: nowrap;"
-    >
-      <!--EXAMPLE_START-->
-      <n-select
-        v-model="value"
-        placeholder="Please Select Type"
-        :options="options"
-        style="flex-grow: 1; margin-right: 12px;"
-        @scroll="handleScroll"
-      />
-      <n-select
-        v-model="array"
-        multiple
-        placeholder="Please Select Type"
-        :options="options"
-        style="flex-grow: 1;"
-        @scroll="handleScroll"
-      />
-      <!--EXAMPLE_END-->
-    </div>
-    <pre class="n-doc-section__inspect">scrollContainerScrollTop: {{ JSON.stringify(scrollContainerScrollTop) }},
-scrollContainerHeight: {{ JSON.stringify(scrollContainerHeight) }},
-scrollContentHeight: {{ JSON.stringify(scrollContentHeight) }}</pre>
-    <n-doc-source-block>
-      <!--SOURCE-->
-    </n-doc-source-block>
-  </div>
-</template>
-
-<script>
+# Scroll Event
+```html
+<n-select
+  v-model="value"
+  placeholder="Please Select Type"
+  :options="options"
+  @scroll="handleScroll"
+/>
+<pre>{{ 
+  JSON.stringify({
+    scrollContentHeight,
+    scrollContainerScrollTop,
+    scrollContainerHeight
+  }, 0, 2)
+}}</pre>
+```
+```js
 export default {
   data () {
     return {
@@ -103,4 +83,10 @@ export default {
     }
   }
 }
-</script>
+```
+```css
+.n-select {
+  width: 180px;
+  margin: 0 12px 8px 0;
+}
+```

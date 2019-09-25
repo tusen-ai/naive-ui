@@ -1,38 +1,20 @@
-<template>
-  <div class="n-doc-section">
-    <div class="n-doc-section__header">
-      Search
-    </div>
-    <div
-      class="n-doc-section__view"
-      style="flex-wrap: nowrap;"
-    >
-      <!--EXAMPLE_START-->
-      <n-select
-        v-model="selectedValue"
-        filterable
-        placeholder="Please Select Type"
-        :options="options"
-        style="flex-grow: 1; margin-right: 12px; width: 300px;"
-      />
-      <n-select
-        v-model="selectedValues"
-        multiple
-        filterable
-        placeholder="Please Select Type"
-        :options="options"
-        style="flex-grow: 1; margin-right: 12px; width: 300px;"
-      />
-      <!--EXAMPLE_END-->
-    </div>
-    <pre class="n-doc-section__inspect">v-model(single): {{ JSON.stringify(selectedValue) }}, v-model(multiple): {{ JSON.stringify(selectedValues) }}</pre>
-    <n-doc-source-block>
-      <!--SOURCE-->
-    </n-doc-source-block>
-  </div>
-</template>
-
-<script>
+# Filterable
+```html
+<n-select
+  v-model="selectedValue"
+  filterable
+  placeholder="Please Select Type"
+  :options="options"
+/>
+<n-select
+  v-model="selectedValues"
+  multiple
+  filterable
+  placeholder="Please Select Type"
+  :options="options"
+/>
+```
+```js
 export default {
   data () {
     return {
@@ -91,4 +73,10 @@ export default {
     }
   }
 }
-</script>
+```
+```css
+.n-select {
+  width: 180px;
+  margin: 0 12px 8px 0;
+}
+```

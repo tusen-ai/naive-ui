@@ -1,38 +1,35 @@
-<template>
-  <div class="n-doc-section">
-    <div class="n-doc-section__header">
-      Change Event
-    </div>
-    <div
-      class="n-doc-section__view"
-      style="flex-wrap: nowrap;"
-    >
-      <!--EXAMPLE_START-->
-      <n-select
-        v-model="selectedValue"
-        placeholder="Please Select Type"
-        :options="options"
-        style="flex-grow: 1; margin-right: 12px;"
-        @change="handleChange"
-      />
-      <n-select
-        v-model="selectedArray"
-        multiple
-        placeholder="Please Select Type"
-        :options="options"
-        style="flex-grow: 1;"
-        @change="handleChange"
-      />
-      <!--EXAMPLE_END-->
-    </div>
-    <pre class="n-doc-section__inspect">v-model(single): {{ JSON.stringify(selectedValue) }}, v-model(mulitple): {{ JSON.stringify(selectedArray) }}</pre>
-    <n-doc-source-block>
-      <!--SOURCE-->
-    </n-doc-source-block>
-  </div>
-</template>
-
-<script>
+# Events
+```html
+<n-select
+  v-model="selectedValue"
+  placeholder="Please Select Type"
+  :options="options"
+  @change="handleChange"
+/>
+<n-select
+  v-model="selectedValue"
+  placeholder="Please Select Type"
+  :options="options"
+  @change="handleChange"
+  emit-option
+/>
+<n-select
+  v-model="selectedArray"
+  multiple
+  placeholder="Please Select Type"
+  :options="options"
+  @change="handleChange"
+/>
+<n-select
+  v-model="selectedArray"
+  multiple
+  placeholder="Please Select Type"
+  :options="options"
+  emit-option
+  @change="handleChange"
+/>
+```
+```js
 export default {
   data () {
     return {
@@ -56,7 +53,7 @@ export default {
           value: 'song4'
         },
         {
-          label: 'Think For Yourseld',
+          label: 'Think For Yourself',
           value: 'song5'
         },
         {
@@ -92,8 +89,14 @@ export default {
   },
   methods: {
     handleChange (item) {
-      this.$NMessage.success('value: ' + JSON.stringify(item))
+      this.$NMessage.info('value: ' + JSON.stringify(item))
     }
   }
 }
-</script>
+```
+```css
+.n-select {
+  width: 180px;
+  margin: 0 12px 8px 0;
+}
+```

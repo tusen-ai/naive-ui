@@ -1,34 +1,17 @@
-<template>
-  <div class="n-doc-section">
-    <div class="n-doc-section__header">
-      Remote Search(single)
-    </div>
-    <div
-      class="n-doc-section__view"
-      style="flex-wrap: nowrap;"
-    >
-      <!--EXAMPLE_START-->
-      <n-select
-        v-model="value"
-        filterable
-        placeholder="Search Songs"
-        :options="options"
-        :on-search="handleSearch"
-        remote
-        :no-data-content="noDataContent"
-        :loading="loading"
-        style="flex-grow: 1; margin-right: 12px; width: 300px;"
-      />
-      <!--EXAMPLE_END-->
-    </div>
-    <pre class="n-doc-section__inspect">v-model(multiple): {{ JSON.stringify(value) }}</pre>
-    <n-doc-source-block>
-      <!--SOURCE-->
-    </n-doc-source-block>
-  </div>
-</template>
-
-<script>
+# Remote(Single)
+```html
+<n-select
+  v-model="value"
+  filterable
+  placeholder="Search Songs"
+  :options="options"
+  :on-search="handleSearch"
+  remote
+  :no-data-content="noDataContent"
+  :loading="loading"
+/>
+```
+```js
 const options = [
   {
     label: 'Drive My Car',
@@ -103,4 +86,4 @@ export default {
     }
   }
 }
-</script>
+```

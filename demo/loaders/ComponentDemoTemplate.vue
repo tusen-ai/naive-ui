@@ -9,7 +9,9 @@
     <template v-slot:demo>
       <!--DEMO_SLOT-->
     </template>
-    <template v-slot:code>
+    <template
+      v-slot:code
+    >
       <!--CODE_SLOT-->
     </template>
   </component-demo>

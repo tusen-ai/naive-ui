@@ -45,8 +45,6 @@
 <script>
 import withapp from '../../packages/mixins/withapp'
 import themeable from '../../packages/mixins/themeable'
-import 'highlight.js/styles/atom-one-dark-reasonable.css'
-import 'highlight.js/styles/atom-one-light.css'
 
 export default {
   mixins: [withapp, themeable],

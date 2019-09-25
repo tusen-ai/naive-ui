@@ -1,46 +1,34 @@
-<template>
-  <div class="n-doc-section">
-    <div class="n-doc-section__header">
-      Basic Usage
-    </div>
-    <div
-      class="n-doc-section__view"
-    >
-      <!--EXAMPLE_START-->
-      <n-select
-        v-model="selectedValue"
-        size="large"
-        placeholder="Please Select Type"
-        :options="options"
-        style="flex-grow: 1; margin-bottom: 12px;"
-      />
-      <n-select
-        v-model="selectedValue"
-        placeholder="Please Select Type"
-        :options="options"
-        style="flex-grow: 1; margin-bottom: 12px;"
-      />
-      <n-select
-        v-model="selectedValue"
-        size="small"
-        placeholder="Please Select Type"
-        :options="options"
-        style="flex-grow: 1;"
-      />
-      <!--EXAMPLE_END-->
-    </div>
-    <pre class="n-doc-section__inspect">selectedValue: {{ JSON.stringify(selectedValue) }}</pre>
-    <n-doc-source-block>
-      <!--SOURCE-->
-    </n-doc-source-block>
-  </div>
-</template>
-
-<script>
+# Multiple Select
+```html
+<n-select
+  v-model="value"
+  multiple
+  :options="options"
+/>
+<n-select
+  v-model="value"
+  multiple
+  disabled
+  :options="options"
+/>
+<n-select
+  v-model="value"
+  multiple
+  size="small"
+  :options="options"
+/>
+<n-select
+  v-model="value"
+  multiple
+  size="large"
+  :options="options"
+/>
+```
+```js
 export default {
   data () {
     return {
-      selectedValue: null,
+      value: null,
       options: [
         {
           label: "Everybody's Got Something to Hide Except Me and My Monkey",
@@ -65,7 +53,7 @@ export default {
           value: 'song4'
         },
         {
-          label: 'Think For Yourseld',
+          label: 'Think For Yourself',
           value: 'song5'
         },
         {
@@ -101,4 +89,10 @@ export default {
     }
   }
 }
-</script>
+```
+```css
+.n-select {
+  width: 180px;
+  margin: 0 12px 8px 0;
+}
+```

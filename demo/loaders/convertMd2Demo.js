@@ -30,7 +30,7 @@ renderer.code = (code, language) => {
     : escapeForHTML(code)
 
   // Render the highlighted code with `hljs` class.
-  return `<pre><code class="${language}">${highlighted}</code></pre>`
+  return `<pre v-pre><code class="${language}">${highlighted}</code></pre>`
 }
 
 marked.setOptions({
@@ -76,7 +76,7 @@ function mergeParts (parts) {
     ...parts
   }
   mergedParts.title = parts.title
-  mergedParts.content = marked(parts.content)
+  mergedParts.content = marked(parts.content || '')
   mergedParts.code = ''
   // console.log(parts)
   if (parts.template) {
