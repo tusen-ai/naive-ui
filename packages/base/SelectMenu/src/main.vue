@@ -3,7 +3,8 @@
     class="n-base-select-menu"
     :class="{
       [`n-base-select-menu--${size}-size`]: true,
-      'n-base-select-menu--multiple': multiple
+      'n-base-select-menu--multiple': multiple,
+      [`n-${theme}-theme`]: theme
     }"
     :style="{
       width: width &&(width + 'px')
@@ -90,6 +91,10 @@ export default {
   },
   mixins: [withlightbar],
   props: {
+    theme: {
+      type: String,
+      default: null
+    },
     options: {
       type: Array,
       default: null

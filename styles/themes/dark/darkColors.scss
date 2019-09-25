@@ -1,14 +1,14 @@
 @mixin setup-dark-colors {
   $neutral-1: rgb(255, 255, 255) !global;
-  $neutral-2: rgba(255, 255, 255, .85) !global;
-  $neutral-3: rgba(255, 255, 255, .65) !global;
-  $neutral-4: rgba(255, 255, 255, .45) !global;
-  $neutral-5: #40465b !global;
-  $neutral-6: #272F46 !global;
-  $neutral-7: #1F263E !global;
-  $neutral-8: #171D33 !global;
-  $neutral-9: #10142C !global;
-  $neutral-10: rgb(0, 0, 0) !global;
+  $neutral-2: rgba(255, 255, 255, .90) !global;
+  $neutral-3: rgba(255, 255, 255, .80) !global;
+  $neutral-4: rgba(255, 255, 255, .70) !global;
+  $neutral-5: hsl(227, 15%, 42%) !global; // popover border
+  $neutral-6: hsl(226, 21%, 33%) !global; // modal divider
+  $neutral-7: hsl(226, 27%, 25%) !global;
+  $neutral-8: hsl(226, 33%, 18%) !global; // drawer & card & table header
+  $neutral-9: hsl(226, 39%, 12%) !global; // bg
+  $neutral-10: hsl(226, 46%, 7%) !global;
   $primary-1: #f0fcf8 !global;
   $primary-2: #d4f7eb !global;
   $primary-3: #b8f1de !global;

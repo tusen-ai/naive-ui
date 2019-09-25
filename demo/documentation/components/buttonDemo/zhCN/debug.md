@@ -3,7 +3,7 @@
 ```html
 <div class="debug-zone"
   n-light-theme-background-color-hint="#ececec"
-  n-default-theme-background-color-hint="transparent"
+  n-dark-theme-background-color-hint="transparent"
 >
   <n-button
     type="default"

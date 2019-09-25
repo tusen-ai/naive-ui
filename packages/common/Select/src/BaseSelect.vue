@@ -4,7 +4,8 @@
     class="n-select"
     :class="{
       [`n-select--${size}-size`]: size,
-      'n-select--multiple': multiple
+      'n-select--multiple': multiple,
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
     @keydown.up.prevent="() => {}"
     @keydown.down.prevent="() => {}"
@@ -30,6 +31,7 @@
       :disabled="disabled"
       :on-search="onSearch"
       :size="size"
+      :theme="theme"
       @click="handleActivatorClick"
       @delete-last-option="handleDeleteLastOption"
       @delete-option="handleToggleOption"
@@ -54,6 +56,7 @@
             v-if="active"
             ref="contentInner"
             class="n-select-menu"
+            :theme="theme"
             :pattern="pattern"
             :options="options"
             :multiple="multiple"
@@ -84,6 +87,8 @@ import clickoutside from '../../../directives/clickoutside'
 import NBaseSelectMenu from '../../../base/SelectMenu'
 import NBasePicker from '../../../base/Picker'
 import linkedOptions from '../../../utils/data/linkedOptions'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 
 export default {
   name: 'NBaseSelect',
@@ -94,7 +99,7 @@ export default {
   directives: {
     clickoutside
   },
-  mixins: [detachable, toggleable, placeable, zindexable, Emitter],
+  mixins: [withapp, themeable, detachable, toggleable, placeable, zindexable, Emitter],
   inject: {
     formItem: {
       default: null

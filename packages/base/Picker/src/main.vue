@@ -7,7 +7,8 @@
       'n-base-picker--disabled': disabled,
       [`n-base-picker--${size}-size`]: true,
       'n-base-picker--multiple': multiple,
-      'n-base-picker--focus': patternInputFocused
+      'n-base-picker--focus': patternInputFocused,
+      [`n-${theme}-theme`]: theme
     }"
     @click="handleClick"
     @mousedown.capture="handleMouseDown"
@@ -184,6 +185,10 @@ export default {
     NIcon
   },
   props: {
+    theme: {
+      type: String,
+      default: null
+    },
     active: {
       type: Boolean,
       default: false

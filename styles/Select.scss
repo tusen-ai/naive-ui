@@ -1,51 +1,52 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
-@include b(select) {
-  display: inline-block;
-  border: none;
-  outline: none;
-  width: 100%;
-  color: $select-text-color;
-  font-family: $default-font-family;
-  text-align: start;
-  vertical-align: baseline;
-  transform: translateZ(0); // to avoid blink of activator when animation occurs nearby
-  &:not(.n-select--multiple) {
-    @include m(small-size) {
-      height: 28px;
+@include themes-mixin {
+  @include once {
+    @include b(select) {
+      display: inline-block;
+      border: none;
+      outline: none;
+      width: 100%;
+      font-family: $default-font-family;
+      text-align: start;
+      vertical-align: baseline;
+      transform: translateZ(0); // to avoid blink of activator when animation occurs nearby
+      &:not(.n-select--multiple) {
+        @include m(small-size) {
+          height: 28px;
+        }
+        @include m(medium-size) {
+          height: 34px;
+        }
+        @include m(large-size) {
+          height: 40px;
+        }
+      }
+      @include m(small-size) {
+        line-height: 28px;
+      }
+      @include m(medium-size) {
+        line-height: 34px;
+      }
+      @include m(large-size) {
+        line-height: 40px;
+      }
+      @include m(small-size) {
+        font-size: 14px;
+      }
+      @include m(medium-size) {
+        font-size: 14px;
+      }
+      @include m(large-size) {
+        font-size: 15px;
+      }
     }
-    @include m(medium-size) {
-      height: 34px;
+    @include b(select-detached-content-container) {
+      transform: translateZ(0);
     }
-    @include m(large-size) {
-      height: 40px;
+    @include b(select-menu) {
+      @include fade-in-scale-up-transition(select-menu);
     }
   }
-  @include m(small-size) {
-    line-height: 28px;
-  }
-  @include m(medium-size) {
-    line-height: 34px;
-  }
-  @include m(large-size) {
-    line-height: 40px;
-  }
-  @include m(small-size) {
-    font-size: 14px;
-  }
-  @include m(medium-size) {
-    font-size: 14px;
-  }
-  @include m(large-size) {
-    font-size: 15px;
-  }
-}
-
-.n-select-detached-content-container {
-  transform: translateZ(0);
-}
-
-@include b(select-menu) {
-  @include fade-in-scale-up-transition(select-menu);
 }
