@@ -2,7 +2,8 @@
   <div
     class="n-app"
     :class="{
-      [`n-app--${theme}-theme`]: theme
+      [`n-app--${theme}-theme`]: theme,
+      [`n-${theme}-theme`]: theme
     }"
   >
     <slot />
