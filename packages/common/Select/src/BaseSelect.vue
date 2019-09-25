@@ -353,6 +353,7 @@ export default {
       } else {
         if (this.filterable && !this.multiple) {
           this.pattern = ''
+          this.switchFocusToOuter()
         }
         this.$emit('input', option.value)
         this.emitChangeEvent(option.value)
@@ -398,11 +399,7 @@ export default {
           this.handleToggleOption(pendingOption)
         } else {
           this.closeMenu()
-          this.$refs.activator.blurPatternInput()
-          this.$nextTick().then(() => {
-            this.$refs.activator.focusPatternInputWrapper()
-          })
-          //
+          this.switchFocusToOuter()
         }
       } else {
         this.openMenu()
@@ -438,6 +435,12 @@ export default {
         this.$nextTick().then(() => {
           this.$refs.activator.focusPatternInputWrapper()
         })
+      })
+    },
+    switchFocusToOuter () {
+      this.$refs.activator.blurPatternInput()
+      this.$nextTick().then(() => {
+        this.$refs.activator.focusPatternInputWrapper()
       })
     }
   }
