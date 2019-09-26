@@ -16,15 +16,28 @@ export default {
         return true
       },
       default: () => document.body
-    },
-    cleanManually: {
-      type: Boolean,
-      default: false
+    }
+  },
+  watch: {
+    active (value) {
+      if (value && !this.contentContainerMounted) {
+        this.contentContainerMounted = true
+        this.appendContent()
+      }
+    }
+  },
+  data () {
+    return {
+      contentContainer: null,
+      contentContainerMounted: false
     }
   },
   methods: {
     detachContent () {
+      this.contentContainer = this.$refs.contentContainer
       this.$refs.contentContainer.parentNode.removeChild(this.$refs.contentContainer)
+    },
+    appendContent () {
       this.detachTarget.append(this.$refs.contentContainer)
     }
   },
@@ -36,10 +49,9 @@ export default {
   mounted () {
     this.detachTarget = document.body // getScrollParent(this.$refs.self)
     this.detachContent()
+    // this.appendContent()
   },
   beforeDestroy () {
-    if (!this.cleanManually) {
-      this.detachTarget.removeChild(this.$refs.contentContainer)
-    }
+    this.detachTarget.removeChild(this.$refs.contentContainer)
   }
 }

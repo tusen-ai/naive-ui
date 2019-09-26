@@ -62,6 +62,7 @@ export default {
   watch: {
     active (newActive) {
       if (newActive) {
+        this.$parent.transferElement()
         this.$emit('show')
       } else {
         this.$emit('hide')

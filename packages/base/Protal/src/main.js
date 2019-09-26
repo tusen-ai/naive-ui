@@ -1,10 +1,25 @@
 export default {
   name: 'NBasePortal',
   mounted () {
-    document.body.appendChild(this.$el)
+    if (this.$el.parentElement) {
+      this.$el.parentElement.removeChild(this.$el)
+    }
+    // this.transferElement()
   },
   beforeDestroy () {
     document.body.removeChild(this.$el)
+  },
+  data () {
+    return {
+      elementTransferred: false
+    }
+  },
+  methods: {
+    transferElement () {
+      if (!this.elementTransferred) {
+        document.body.appendChild(this.$el)
+      }
+    }
   },
   render () {
     const defaultSlot = this.$slots.default
