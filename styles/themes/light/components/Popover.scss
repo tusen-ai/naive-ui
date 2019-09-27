@@ -1,0 +1,4 @@
+@mixin setup-light-popover {
+  $--popover-background-color: white !global;
+  $--popover-color: $--n-secondary-text-color !global;
+}

@@ -4,6 +4,7 @@ import mousemoveoutside from '../../../directives/mousemoveoutside'
 import placeable from '../../../mixins/placeable'
 import zindexable from '../../../mixins/zindexable'
 import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 
 export default {
   name: 'NPopoverContent',
@@ -44,12 +45,16 @@ export default {
       type: Number,
       default: null
     },
+    raw: {
+      type: Boolean,
+      default: false
+    },
     detachedContainerClass: {
       type: String,
       default: 'n-popover-detached-content-container'
     }
   },
-  mixins: [withapp, placeable, zindexable],
+  mixins: [withapp, themeable, placeable, zindexable],
   directives: {
     clickoutside,
     mousemoveoutside
@@ -216,9 +221,10 @@ export default {
               attrs: {
                 'n-placement': this.placement
               },
-              staticClass: 'n-popover__content',
+              staticClass: 'n-popover-content',
               class: {
-                'n-popover__content--without-arrow': !this.arrow
+                'n-popover-content--without-arrow': !this.arrow,
+                [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme
               },
               style: this.style,
               directives: [
@@ -236,10 +242,10 @@ export default {
                 mouseleave: this.handleMouseLeave
               }
             }, [
-              ...this.$slots.default,
+              h('div', {}, this.$slots.default),
               this.arrow
                 ? h('div', {
-                  staticClass: 'n-popover__arrow'
+                  staticClass: 'n-popover-arrow'
                 })
                 : null
             ])
