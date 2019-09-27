@@ -1,6 +1,10 @@
 {
   "name": "naive-ui",
+<<<<<<< HEAD
   "version": "0.4.21",
+=======
+  "version": "0.4.22",
+>>>>>>> 224e5624634c71828698d4504e287b6ef6b6eea6
   "description": "",
   "main": "index.js",
   "scripts": {
