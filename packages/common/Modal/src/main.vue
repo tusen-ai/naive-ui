@@ -32,6 +32,11 @@ export default {
       mousedownTarget: null
     }
   },
+  computed: {
+    active () {
+      return this.value
+    }
+  },
   methods: {
     deactivate () {
       this.$emit('input', false)
