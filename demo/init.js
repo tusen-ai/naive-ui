@@ -46,7 +46,7 @@ import nimbusConfirmCardDemo from './documentation/components/nimbusConfirmCardD
 import paginationDemo from './documentation/components/paginationDemo'
 import startPage from './documentation/components/startPage'
 import collapseDemo from './documentation/components/collapseDemo'
-import tagDemo from './documentation/components/tagDemo'
+import tagDemo from './documentation/components/tag'
 import timelineDemo from './documentation/components/timelineDemo'
 import progressDemo from './documentation/components/progressDemo'
 import dividerDemo from './documentation/components/dividerDemo'
@@ -117,9 +117,9 @@ const routes = [
     component: cascaderDebug
   },
   {
-    path: '/:lang/start',
+    path: '/:lang/:theme/start',
     component: demo,
-    children: withPrefix('/:lang', [
+    children: withPrefix('/:lang/:theme', [
       { path: '/start', component: startPage },
       { path: '/n-nimbus-service-layout', component: nimbusServiceLayoutDemo },
       { path: '/n-nimbus-home-layout', component: homeDemo },
@@ -182,7 +182,7 @@ const routes = [
   },
   {
     path: '/*',
-    redirect: '/en-us/start'
+    redirect: '/en-us/dark/start'
   }
 ]
 
