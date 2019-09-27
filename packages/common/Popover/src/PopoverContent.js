@@ -101,6 +101,12 @@ export default {
   },
   mounted () {
     popoverManager.registerContent(this)
+    if (this.active) {
+      this.$parent.transferElement()
+      // this.$nextTick().then(() => {
+      //   this.updatePosition()
+      // })
+    }
     if (this.controller) {
       this.controller.updatePosition = this.updatePosition
     }
@@ -242,7 +248,7 @@ export default {
                 mouseleave: this.handleMouseLeave
               }
             }, [
-              h('div', {}, this.$slots.default),
+              ...this.$slots.default,
               this.arrow
                 ? h('div', {
                   staticClass: 'n-popover-arrow'
