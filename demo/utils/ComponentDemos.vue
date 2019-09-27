@@ -2,7 +2,7 @@
 export default {
   name: 'ComponentDemos',
   render (h) {
-    const defaultSlot = this.$slots.default
+    const defaultSlot = this.$slots.default || []
     const leftColumn = defaultSlot.filter((value, index) => index % 2 === 0)
     const rightColumn = defaultSlot.filter((value, index) => index % 2 === 1)
     return h('n-row', {
