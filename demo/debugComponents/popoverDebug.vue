@@ -20,6 +20,12 @@
         </template>
         <span>Out Out Out</span>
       </n-popover>
+      <n-tooltip arrow>
+        <template v-slot:activator>
+          <span>LongLongLongLong</span>
+        </template>
+        <span>LongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLong</span>
+      </n-tooltip>
     </div>
   </div>
 </template>
