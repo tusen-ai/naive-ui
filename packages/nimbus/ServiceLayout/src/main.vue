@@ -109,8 +109,11 @@
         <toggle-button />
       </div>
     </div>
-    <nav class="n-nimbus-service-layout__nav">
-      <slot name="header" />
+    <nav
+      v-if="$slots.nav"
+      class="n-nimbus-service-layout__nav"
+    >
+      <slot name="nav" />
     </nav>
   </div>
 </template>

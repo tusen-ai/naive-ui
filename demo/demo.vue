@@ -8,7 +8,7 @@
       :padding-body="false"
       :items="items"
     >
-      <template v-slot:header>
+      <template v-slot:nav>
         <doc-header
           :lang="lang"
           @lang-change="handleLangChange"
