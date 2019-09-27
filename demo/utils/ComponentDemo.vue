@@ -37,7 +37,9 @@
       v-if="showCode"
       class="n-code-box__code"
     >
-      <slot name="code" />
+      <n-scrollbar>
+        <slot name="code" />
+      </n-scrollbar>
     </div>
   </div>
 </template>
