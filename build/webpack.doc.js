@@ -18,7 +18,7 @@ const webpackConfig = {
     chunkFilename: '[name].[hash:7].js'
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.vue', '.json', '.entry'],
     alias: config.alias,
     modules: ['node_modules']
   },
