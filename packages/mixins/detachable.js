@@ -52,6 +52,8 @@ export default {
     // this.appendContent()
   },
   beforeDestroy () {
-    this.detachTarget.removeChild(this.$refs.contentContainer)
+    if (this.detachTarget.contains(this.$refs.contentContainer)) {
+      this.detachTarget.removeChild(this.$refs.contentContainer)
+    }
   }
 }
