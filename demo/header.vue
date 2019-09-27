@@ -19,10 +19,9 @@
     <div />
     <div class="theme-picker">
       <n-select
-        v-model="theme"
+        v-model="NApp.$parent.theme"
         size="small"
         :options="options"
-        @change="handleThemeChange"
       />
     </div>
     <div class="lang-picker">
@@ -79,9 +78,6 @@ export default {
     }
   },
   methods: {
-    handleThemeChange (theme) {
-      this.NApp.$parent.theme = theme
-    },
     handleLangInput (lang) {
       this.$emit('lang-change', lang)
     }
