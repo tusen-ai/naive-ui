@@ -1,9 +1,10 @@
-@mixin setup-base-select-menu {
-  $base-select-menu-item-color: (
-    "default": $n-color,
-    "selected": $n-color,
-    "disabled": $n-color
+@mixin setup-light-base-select-menu {
+  $--base-select-menu-item-color: (
+    "default": $--n-secondary-text-color,
+    "selected": $--n-primary-color,
+    "disabled": $--n-disabled-text-color
   ) !global;
-  $base-select-menu-background-color: white !global;
-  $base-select-menu-box-shadow: none !global;
+  $--base-select-menu-background-color: white !global;
+  $--base-select-menu-box-shadow: none !global;
+  $--base-select-menu-light-bar-background-color: change-color($primary-6, $alpha: .1) !global;
 }

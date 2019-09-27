@@ -2,8 +2,11 @@
   <div
     class="n-tag"
     :class="{
-      [`n-tag--${type}-type`]: type,
-      'n-tag--closable': closable
+      [`n-tag--${size}-size`]: true,
+      [`n-tag--${type}-type`]: true,
+      'n-tag--closable': closable,
+      'n-tag--disabled': disabled,
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
   >
     <slot />
@@ -12,34 +15,56 @@
       class="n-tag__close-mark"
       @click="handleClick"
     >
-      <icon type="md-close" />
+      <close-icon />
     </div>
   </div>
 </template>
 
 <script>
-import Icon from '../../Icon'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
+import CloseIcon from './CloseIcon'
 
 export default {
   name: 'NTag',
   components: {
-    Icon
+    CloseIcon
   },
+  mixins: [withapp, themeable],
   props: {
     type: {
-      validator (type) {
-        return ['success', 'info', 'warning', 'error'].includes(type)
+      validator (value) {
+        return ['default', 'success', 'info', 'warning', 'error'].includes(value)
       },
-      default: null
+      default: 'default'
+    },
+    size: {
+      validator (value) {
+        return ['small', 'medium', 'large'].includes(value)
+      },
+      default: 'medium'
     },
     closable: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    stopClickPropagation: {
       type: Boolean,
       default: false
     }
   },
   methods: {
-    handleClick () {
-      this.$emit('close')
+    handleClick (e) {
+      if (this.stopClickPropagation) {
+        e.stopPropagation()
+      }
+      if (!this.disabled) {
+        this.$emit('close', e)
+      }
     }
   }
 }

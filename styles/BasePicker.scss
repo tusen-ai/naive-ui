@@ -1,254 +1,276 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
-@include b(base-picker) {
-  position: relative;
-  box-shadow: none;
-  border-radius: $select-border-radius;
-  width: 100%;
-  max-width: 100%;
-  display: inline-block;
-  vertical-align: bottom;
-  .n-base-picker__mark {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 14px;
-  }
-  .n-base-picker__placeholder {
-    pointer-events: none;
-    position: absolute;
-    left: 14px;
-    top: 0;
-    color: $select-placeholder-color;
-    opacity: 1;
-  }
-  .n-base-picker-label, .n-base-picker-tags {
-    cursor: pointer;
-    // outline: none;
-    box-sizing: border-box;
-    position: relative;
-    transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
-    border-radius: $select-border-radius;
-    background-color: $select-background-color;
-  }
-  .n-base-picker-label {
-    display: inline-block;
-    width: 100%;
-    vertical-align: bottom;
-    .n-base-picker-label__input {
-      // outline: none;
-      cursor: pointer;
-      box-sizing: border-box;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      border:none;
-      width: 100%;
-      white-space: nowrap;
-      color: $select-text-color;
-      transition: color .3s $default-cubic-bezier;
-      padding: 0 32px 0 14px;
-      background-color: transparent;
-      height: 100%;
-      &::placeholder {
-        color: $select-placeholder-color;
-      }
-      &.n-base-picker-label__input--placeholder {
-        color: $select-placeholder-color;
-      }
+@mixin base-picker-size-mixin ($size) {
+  $base-picker-tag-margin: 3px;
+  $base-picker-height: map-get($map: $--n-height, $key: $size);
+  @include m($size + '-size') {
+    font-size: map-get($map: $--n-font-size, $key: $size);
+    @include e(placeholder) {
+      height: $base-picker-height;
+      line-height: $base-picker-height;
     }
-  }
-  .n-base-picker-tags {
-    display: flex;
-    padding: 3px 32px 0 14px;
-    flex-wrap: wrap;
-    align-items: center;
-    width: 100%;
-    vertical-align: bottom;
-    .n-base-picker-tag {
-      vertical-align: bottom;
-      box-sizing: border-box;
-      position: relative;
-      display: inline-block;
-      border: 1px solid #63E2B7FF;
-      color: #63E2B7FF;
-      border-radius: 4px;
-      margin-right: 7px;
-      margin-bottom: 3px;
-      font-size: 14px;
-      max-width: 100%;
-      .n-base-picker-tag__content  {
-        transform: translateY(-1px);
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-      }
-      .n-base-picker-tag__icon {
-        position: absolute;
-        right: 4px;
-        top: 50%;
-        transform: translateY(-50%);
-        i::before {
-          color: #63E2B7FF;
-        }
-      }
-    }
-  }
-  &.n-base-picker--selected {
-    .n-base-picker__placeholder {
-      opacity: 0;
-    }
-  }
-  &.n-base-picker--active {
-    .n-base-picker-label, .n-base-picker-tags {
-      box-shadow: inset 0 0 0 1px $select-border-color--active, 0px 0px 10px 1px #366555;
-      background-color: $select-background-color--active;
-    }
-    .n-base-picker-input-tag {
-      width: unset;
-    }
-  }
-  &.n-base-picker--small-size {
-    font-size: 14px;
-    .n-base-picker__placeholder {
-      height: $small-height;
-      line-height: $small-height;
-    }
-    .n-base-picker-tags {
-      min-height: $small-height;
-      .n-base-picker-tag {
-        font-size: 13px;
-        padding: 0px 22px 0 7px;
-        height: 22px;
-        line-height: 22px;
-      }
-      .n-base-picker-input-tag {
-        height: 20px;
-        line-height: 20px;
-      }
-    }
-    .n-base-picker-label {
-      height: $small-height;
-      line-height: $small-height;
-    }
-  }
-  &.n-base-picker--default-size, &.n-base-picker--medium-size {
-    font-size: 14px;
-    .n-base-picker__placeholder {
-      height: $medium-height;
-      line-height: $medium-height;
-    }
-    .n-base-picker-tags {
-      min-height: $medium-height;
-      .n-base-picker-tag {
+    @include b(base-picker-tags) {
+      min-height: $base-picker-height;
+      @include b(base-picker-tag) {
         padding: 0px 20px 0 7px;
-        height: 28px;
-        line-height: 28px;
+        height: $base-picker-height - 2 * $base-picker-tag-margin;
+        line-height: $base-picker-height - 2 * $base-picker-tag-margin;
       }
-      .n-base-picker-input-tag {
-        height: 28px;
-        line-height: 28px;
-      }
-    }
-    .n-base-picker-label {
-      height: $medium-height;
-      line-height: $medium-height;
-    }
-  }
-  &.n-base-picker--large-size {
-    font-size: 15px;
-    .n-base-picker__placeholder {
-      height: $large-height;
-      line-height: $large-height;
-    }
-    .n-base-picker-tags {
-      min-height: $large-height;
-      .n-base-picker-tag {
-        padding: 0px 20px 0 7px;
-        height: 32px;
-        line-height: 32px;
-      }
-      .n-base-picker-input-tag {
-        height: 32px;
-        line-height: 32px;
+      @include b(base-picker-input-tag) {
+        height: $base-picker-height - 2 * $base-picker-tag-margin;
+        line-height: $base-picker-height - 2 * $base-picker-tag-margin;
       }
     }
-    .n-base-picker-label {
-      height: $large-height;
-      line-height: $large-height;
-    }
-  }
-  &.n-base-picker--disabled {
-    cursor: not-allowed;
-    .n-base-picker-label, .n-base-picker-tags {
-      cursor: not-allowed;
-      background-color: rgba(255, 255, 255, 0.08);
-    }
-    .n-base-picker-tag {
-      cursor: not-allowed;
-      border-color: rgba(255, 255, 255, 0.20);
-      color: rgba(255, 255, 255, 0.20);
-    }
-    .n-base-picker__placeholder {
-      cursor: not-allowed;
-      color: rgba(255, 255, 255, 0.20);
-    }
-    .n-base-picker-label__input {
-      cursor: not-allowed;
-      color: rgba(255, 255, 255, 0.20);
-      &.n-base-picker-label__input--placeholder {
-        color: rgba(255, 255, 255, 0.20);
-      }
-      &::placeholder {
-        color: rgba(255, 255, 255, 0.20);
-      }
-    }
-  }
-  &.n-base-picker--focus {
-    .n-base-picker-label, .n-base-picker-tags {
-      box-shadow: inset 0 0 0 1px $select-border-color--active;
-    }
-  }
-  &:not(.n-base-picker--disabled) {
-    .n-base-picker-label:hover, .n-base-picker-tags:hover {
-      box-shadow: inset 0 0 0 1px $select-border-color--active;
-    }
-    .n-base-picker-label:focus, .n-base-picker-tags:focus {
-      box-shadow: inset 0 0 0 1px $select-border-color--active;
+    @include b(base-picker-label) {
+      height: $base-picker-height;
+      line-height: $base-picker-height;
     }
   }
 }
 
-@include b(base-picker-input-tag) {
-  // outline: none;
-  width: 0;
-  position: relative;
-  margin-bottom: 3px;
-  display: inline-block;
-  max-width: 100%;
-  vertical-align: bottom;
-  .n-base-picker-input-tag__input {
-    padding: 0;
-    background-color: transparent;
-    // outline: none;
-    border: none;
-    max-width: 100%;
-    caret-color: $input-caret-color;
-    color: $select-text-color;
-    height: 100%;
-    width: 1em;
-    line-height: inherit;
-    cursor: pointer;
-  }
-  .n-base-picker-input-tag__mirror {
-    position: absolute;
-    padding-right: 1em;
-    left: 0;
-    top: 0;
-    white-space: pre;
-    visibility: hidden;
-    user-select: none;
-    opacity: 0;
+@include themes-mixin {
+  @include b(base-picker) {
+    @include once {
+      @include base-picker-size-mixin('small');
+      @include base-picker-size-mixin('medium');
+      @include base-picker-size-mixin('large');
+      position: relative;
+      box-shadow: none;
+      border-radius: $--base-picker-border-radius;
+      width: 100%;
+      max-width: 100%;
+      display: inline-block;
+      vertical-align: bottom;
+      @include e(mark) {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 14px;
+      }
+      @include m(selected) {
+        @include e(placeholder) {
+          opacity: 0;
+        }
+      }
+    }
+    @include e(placeholder) {
+      @include once {
+        pointer-events: none;
+        position: absolute;
+        left: 14px;
+        top: 0;
+        opacity: 1;
+      }
+      color: map-get($--base-picker-placeholder-color, 'default');
+    }
+    @include b(base-picker-tags) {
+      @include once {
+        cursor: pointer;
+        outline: none;
+        box-sizing: border-box;
+        position: relative;
+        transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+        border-radius: $--base-picker-border-radius;
+      }
+      box-shadow: map-get($map: $--base-picker-box-shadow, $key: "default");
+      background-color: map-get($--base-picker-background-color, "default");
+    }
+    @include b(base-picker-label) {
+      @include once {
+        display: inline-block;
+        width: 100%;
+        vertical-align: bottom;
+        cursor: pointer;
+        outline: none;
+        box-sizing: border-box;
+        position: relative;
+        transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+        border-radius: $--base-picker-border-radius;
+      }
+      box-shadow: map-get($map: $--base-picker-box-shadow, $key: "default");
+      background-color: map-get($--base-picker-background-color, "default");
+      @include e(input) {
+        @include once {
+          outline: none;
+          cursor: pointer;
+          box-sizing: border-box;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          border:none;
+          width: 100%;
+          white-space: nowrap;
+          transition: color .3s $default-cubic-bezier;
+          padding: 0 32px 0 14px;
+          background-color: transparent;
+          height: 100%;
+        }
+        color: $--base-picker-color;
+        &::placeholder {
+          color: map-get($--base-picker-placeholder-color, 'default');
+        }
+        @include m(placeholder) {
+          color: map-get($--base-picker-placeholder-color, 'default');
+        }
+      }
+    }
+    @include b(base-picker-tags) {
+      @include once {
+        display: flex;
+        padding: 3px 32px 0 14px;
+        flex-wrap: wrap;
+        align-items: center;
+        width: 100%;
+        vertical-align: bottom;
+      }
+      @include b(tag) {
+        @include once {
+          // vertical-align: bottom;
+          // box-sizing: border-box;
+          // position: relative;
+          // display: inline-block;
+          // border-radius: 4px;
+          margin-right: 7px;
+          margin-bottom: 3px;
+          font-size: 14px;
+          max-width: 100%;
+          // @include e(content)  {
+          //   transform: translateY(-1px);
+          //   white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          // }
+        }
+        // border: 1px solid #63E2B7FF;
+        // color: #63E2B7FF;
+        // @include e(icon) {
+        //   @include once {
+        //     position: absolute;
+        //     right: 4px;
+        //     top: 50%;
+        //     transform: translateY(-50%);
+        //   }
+        //   i::before {
+        //     color: #63E2B7FF;
+        //   }
+        // }
+      }
+    }
+    @include not-m(disabled) {
+      @include m(active) {
+        @include b(base-picker-label) {
+          // box-shadow: inset 0 0 0 1px $select-border-color--active, 0px 0px 10px 1px #366555;
+          box-shadow: map-get($map: $--base-picker-box-shadow, $key: "active");        
+          background-color: map-get($map: $--base-picker-background-color, $key: "active");
+        }
+        @include b(base-picker-tags) {
+          // box-shadow: inset 0 0 0 1px $select-border-color--active, 0px 0px 10px 1px #366555;
+          box-shadow: map-get($map: $--base-picker-box-shadow, $key: "active");
+          background-color:  map-get($map: $--base-picker-background-color, $key: "active");
+        }
+        @include once {
+          @include b(base-picker-input-tag) {
+            display: inline-block;
+          }
+        }
+      }
+      @include b(base-picker-label) {
+        &:hover {
+          box-shadow: map-get($map: $--base-picker-box-shadow, $key: "hover");
+        }
+        &:focus {
+          box-shadow: map-get($map: $--base-picker-box-shadow, $key: "focus");
+        }
+      }
+      @include b(base-picker-tags) {
+        &:hover {
+          box-shadow: map-get($map: $--base-picker-box-shadow, $key: "hover");
+        }
+        &:focus {
+          box-shadow: map-get($map: $--base-picker-box-shadow, $key: "focus");
+        }
+      }
+      @include m(focus) {
+        @include b(base-picker-label) {
+          box-shadow: map-get($map: $--base-picker-box-shadow, $key: "focus");
+        }
+        @include b(base-picker-tags) {
+          box-shadow: map-get($map: $--base-picker-box-shadow, $key: "focus");
+        }
+      }
+    }
+    @include m(disabled) {
+      cursor: not-allowed;
+      @include b(base-picker-label) {
+        cursor: not-allowed;
+        background-color: map-get($map: $--base-picker-background-color, $key: "disabled");
+        // background-color: rgba(255, 255, 255, 0.08);
+        @include e(input) {
+          cursor: not-allowed;
+          color: map-get($--base-picker-placeholder-color, 'disabled');
+          @include m(placeholder) {
+            color: map-get($--base-picker-placeholder-color, 'disabled');
+          // color: rgba(255, 255, 255, 0.20);
+          }
+          &::placeholder {
+            color: map-get($--base-picker-placeholder-color, 'disabled');
+          }
+        }
+      }
+      @include b(base-picker-tags) {
+        cursor: not-allowed;
+        background-color: map-get($map: $--base-picker-background-color, $key: "disabled");
+      }
+      @include b(base-picker-tag) {
+        cursor: not-allowed;
+        border-color: rgba(255, 255, 255, 0.20);
+        color: rgba(255, 255, 255, 0.20);
+      }
+      @include e(placeholder) {
+        cursor: not-allowed;
+        color: map-get($--base-picker-placeholder-color, 'disabled');
+      }
+    }
+    
+    @include b(base-picker-input-tag) {
+      @include once {
+        outline: none;
+        display: none;
+        position: relative;
+        margin-bottom: 3px;
+        max-width: 100%;
+        vertical-align: bottom;
+      }
+      @include e(input) {
+        @include once {
+          padding: 0;
+          background-color: transparent;
+          outline: none;
+          border: none;
+          max-width: 100%;
+          height: 100%;
+          width: 1em;
+          line-height: inherit;
+          cursor: pointer;
+        }
+        caret-color: $--base-picker-caret-color;
+        color: $--base-picker-color;
+      }
+      @include once {
+        @include e(mirror) {
+          position: absolute;
+          padding-right: 1em;
+          left: 0;
+          top: 0;
+          white-space: pre;
+          visibility: hidden;
+          user-select: none;
+          opacity: 0;
+        }
+      }
+    }
   }
 }
+
+

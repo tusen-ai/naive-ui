@@ -125,7 +125,7 @@ $layout-nav-height: 64px;
           }
           @include m(active) {
             @include not-m(is-group-item) {
-              color: #63E2B7;
+              color: $--service-kayout-item-active-color;
             }
             span {
               opacity: 1;
@@ -159,8 +159,8 @@ $layout-nav-height: 64px;
               content: '';
               height: 6px;
               width: 6px;
-              border-left: 2px solid $n-primary-color;
-              border-top: 2px solid $n-primary-color;
+              border-left: 2px solid $--n-primary-color;
+              border-top: 2px solid $--n-primary-color;
               position: absolute;
               left: 240px;
               top: calc(50% - 1px);

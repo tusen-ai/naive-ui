@@ -4,18 +4,32 @@
 @import "components/NimbusServiceLayout.scss";
 @import "components/Scrollbar.scss";
 @import "components/BaseSelectMenu.scss";
+@import "components/BasePicker.scss";
+@import "components/BaseCancelMark.scss";
+@import "components/Tag.scss";
 
 @mixin setup-dark-theme () {
   @include setup-dark-colors();
-  $n-primary-color: $primary-6 !global;
-  $n-color: $neutral-2 !global;
-  $n-divider-color: $neutral-6 !global;
-  $n-border-color: $neutral-6 !global;
-  $n-secondary-text-color: $neutral-2 !global;
+  $--n-primary-color: $primary-6 !global;
+  $--n-primary-hover-color: $primary-5 !global;
+  $--n-primary-active-color: $primary-7 !global;
+  $--n-info-color: $info-6 !global;
+  $--n-success-color: $success-6 !global;
+  $--n-warning-color: $warning-6 !global;
+  $--n-error-color: $error-6 !global;
+
+  $n-text-color: $neutral-2 !global;
+  $--n-divider-color: $neutral-7 !global;
+  $--n-border-color: $neutral-7 !global;
+  $--n-secondary-text-color: $neutral-2 !global;
   $--n-table-header-color: mix($neutral-8, $neutral-9) !global;
+  $--n-disabled-text-color: rgba(255, 255, 255, .3) !global;
   @include setup-dark-nimbus-service-layout;
   @include setup-dark-divider;
   @include setup-dark-scrollbar;
   @include setup-dark-button;
-  @include setup-base-select-menu;
+  @include setup-dark-base-select-menu;
+  @include setup-dark-base-picker;
+  @include setup-dark-base-cancel-mark;
+  @include setup-dark-tag;
 }

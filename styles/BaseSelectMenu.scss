@@ -42,16 +42,16 @@
         opacity: 0;
       }
     }
-    background-color: $base-select-menu-background-color;
-    box-shadow: 0px 2px 20px 0px rgba(0,0,0,0.16);
+    background-color: $--base-select-menu-background-color;
+    box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.12);
     @include e(item) {
       cursor: pointer;
       position: relative;
       padding: 0px 14px;
       white-space: nowrap;
-      color: map-get($map: $base-select-menu-item-color, $key: "default");
+      color: map-get($map: $--base-select-menu-item-color, $key: "default");
       @include m(disabled) {
-        color: rgba(255, 255, 255, .3)!important;
+        color: map-get($map: $--base-select-menu-item-color, $key: "disabled");
         &::after {
           display: none;
         }
@@ -66,21 +66,21 @@
         cursor: not-allowed;
       }
       @include m(selected) {
-        color: #63E2B7FF;
+        color: map-get($map: $--base-select-menu-item-color, $key: "selected");
       }
       @include m(no-data) {
-        color: rgba(255, 255, 255, .5);
+        color: map-get($map: $--base-select-menu-item-color, $key: "disabled");
         text-align: center;
         pointer-events: none;
       }
       @include m(not-found) {
-        color: rgba(255, 255, 255, .5);
+        color: map-get($map: $--base-select-menu-item-color, $key: "disabled");
         text-align: center;
         pointer-events: none;
 
       }
       @include m(loading) {
-        color: rgba(255, 255, 255, .5);
+        color: map-get($map: $--base-select-menu-item-color, $key: "disabled");
         text-align: center;
         pointer-events: none;
       }
@@ -88,29 +88,30 @@
     @include e(light-bar) {
       position: absolute;
       width:100%;
-      background-color: $select-item-background-color--active;
+      background-color: $--base-select-menu-light-bar-background-color;
       top: 0;
       left: 0;
       transition: top .15s $default-cubic-bezier;
     }
-    
     @include m(multiple) {
       @include e(item) {
         position: relative;
         transition: color .3s $default-cubic-bezier;
         padding-right: 28px;
         &::after {
-          content: '';
-          height: 6px;
-          width: 3px;
-          border-right: 1px solid #63E2B7FF;
-          border-bottom: 1px solid #63E2B7FF;
-          position: absolute;
-          right: 14px;
-          transform: rotate(45deg) scale(.5);
-          top: calc(50% - 4px);
-          opacity: 0;
-          transition: transform .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
+          @include once {
+            content: '';
+            height: 6px;
+            width: 3px;
+            position: absolute;
+            right: 14px;
+            transform: rotate(45deg) scale(.5);
+            top: calc(50% - 4px);
+            opacity: 0;
+            transition: transform .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
+          }
+          border-right: 1px solid $--n-primary-color;
+          border-bottom: 1px solid $--n-primary-color;
         }
         @include m(selected) {
           background: none;
@@ -120,7 +121,7 @@
           }
         }
         &:active {
-          color: #63E2B7FF;
+          color: $--n-primary-color;
         }
       }
     }

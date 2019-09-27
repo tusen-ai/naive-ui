@@ -3,6 +3,9 @@
     <div
       v-if="show && (clearable || arrow)"
       class="n-cancel-mark"
+      :class="{
+        [`n-${theme}-theme`]: theme
+      }"
       @mousedown="handleMouseDown"
       @mouseenter="handleMouseEnter"
       @mouseleave="handleMouseLeave"
@@ -39,6 +42,10 @@ export default {
   name: 'NBaseCancelMark',
   components: { CancelIcon },
   props: {
+    theme: {
+      type: String,
+      default: null
+    },
     show: {
       type: Boolean,
       default: true

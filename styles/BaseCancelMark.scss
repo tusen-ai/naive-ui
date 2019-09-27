@@ -1,81 +1,95 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
-@include b(cancel-mark) {
-  @include fade-in-transition(cancel-mark);
-  user-select: none;
-  display: inline-block;
-  position: relative;
-  height: 12px;
-  width: 12px;
-  vertical-align: bottom;
-}
-
-@include b(cancel-mark-cross) {
-  @include fade-in-transition(cancel-mark);
-  position: absolute;
-  height: 12px;
-  width: 12px;
-  line-height: 12px;
-  border-radius: 8px;
-  overflow: hidden;
-  cursor: pointer;
-  .n-cancel-mark-cross__icon {
-    transition: fill .3s $default-cubic-bezier;
-    fill: rgba(255, 255, 255, .3);
-  }
-  &.n-cancel-mark-cross--arrow {
-    .n-cancel-mark-cross__icon {
-      fill: #63E2B7;
+@include themes-mixin {
+  @include b(cancel-mark) {
+    @include once {
+      @include fade-in-transition(cancel-mark);
+      user-select: none;
+      display: inline-block;
+      position: relative;
+      height: 12px;
+      width: 12px;
+      vertical-align: bottom;
     }
-  }
-  &:hover {
-    .n-cancel-mark-cross__icon {
-      fill: #63E2B7;
+    @include b(cancel-mark-cross) {
+      @include once {
+        @include fade-in-transition(cancel-mark);
+        position: absolute;
+        height: 12px;
+        width: 12px;
+        line-height: 12px;
+        border-radius: 8px;
+        overflow: hidden;
+        cursor: pointer;
+      }
+      @include e(icon) {
+        @include once {
+          transition: fill .3s $default-cubic-bezier;
+        }
+        fill: map-get($map: $--base-cancel-mark-cross-color, $key: "default");
+      }
+      @include m(arrow) {
+        @include e(icon) {
+          fill: map-get($map: $--base-cancel-mark-cross-color, $key: "hover");
+        }
+      }
+      &:hover {
+        @include e(icon) {
+          fill: map-get($map: $--base-cancel-mark-cross-color, $key: "hover");
+        }
+      }
+      &:active {
+        @include e(icon) {
+          fill: map-get($--base-cancel-mark-cross-color, "active");
+        }
+      }
     }
-  }
-  &:active {
-    .n-cancel-mark-cross__icon {
-      fill: #55be9b;
-    }
-  }
-}
-
-@include b(cancel-mark-arrow) {
-  @include fade-in-transition(cancel-mark);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 12px;
-  height: 12px;
-  border-radius: 8px;
-  overflow: hidden;
-  cursor: pointer;
-  &::after {
-    transition: transform .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
-    position: absolute;
-    content: '';
-    box-sizing: border-box;
-    width: 7px;
-    height: 7px;
-    border-left: 1px solid rgba(255, 255, 255, .4);
-    border-bottom: 1px solid rgba(255, 255, 255, .4);
-    right: 1px;
-    top: calc(50% - 4.5px);
-    transform: rotate(-45deg);
-    transform-origin: 30% 70%;
-  }
-  &.n-cancel-mark-arrow--active {
-    &::after {
-      transform: rotate(135deg);
-      border-left: 1px solid #63E2B7FF;
-      border-bottom: 1px solid #63E2B7FF;
-    }
-  }
-  &.n-cancel-mark-arrow--disabled {
-    cursor: not-allowed;
-    &::after {
-      border-color: rgba(255, 255, 255, 0.20);
+    @include b(cancel-mark-arrow) {
+      @include once {
+        @include fade-in-transition(cancel-mark);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 12px;
+        height: 12px;
+        border-radius: 8px;
+        overflow: hidden;
+        cursor: pointer;
+      }
+      &::after {
+        @include once {
+          transition: transform .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+          position: absolute;
+          content: '';
+          box-sizing: border-box;
+          width: 7px;
+          height: 7px;
+          right: 1px;
+          top: calc(50% - 4.5px);
+          transform: rotate(-45deg);
+          transform-origin: 30% 70%;
+        }
+        border-left: 1px solid map-get($map: $--base-cancel-mark-arrow-color, $key: 'default');
+        border-bottom: 1px solid map-get($map: $--base-cancel-mark-arrow-color, $key: 'default');
+      }
+      @include m(active) {
+        &::after {
+          @include once {
+            transform: rotate(135deg);
+          }
+          border-left: 1px solid map-get($map: $--base-cancel-mark-arrow-color, $key: 'active');
+          border-bottom: 1px solid map-get($map: $--base-cancel-mark-arrow-color, $key: 'active');
+        }
+      }
+      @include m(disabled) {
+        @include once {
+          cursor: not-allowed;
+        }
+        &::after {
+          border-color: rgba(255, 255, 255, 0.20);
+        }
+      }
     }
   }
 }

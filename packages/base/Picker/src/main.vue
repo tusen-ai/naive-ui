@@ -21,7 +21,18 @@
         :tabindex="disabled ? false : '0'"
         @blur="handleBlur"
       >
-        <div
+        <n-tag
+          v-for="option in selectedOptions"
+          :key="option.value"
+          :size="size"
+          closable
+          :disabled="disabled"
+          stop-click-propagation
+          @close="handleDeleteOption(option)"
+        >
+          {{ option.label }}
+        </n-tag>
+        <!-- <div
           v-for="option in selectedOptions"
           :key="option.value"
           class="n-base-picker-tag"
@@ -34,9 +45,10 @@
             type="md-close"
             @click.stop="handleDeleteOption(option)"
           />
-        </div>
+        </div> -->
         <n-base-cancel-mark
           class="n-base-picker__mark"
+          :theme="theme"
           arrow
           :show="!remote"
           :disabled="disabled"
@@ -58,20 +70,17 @@
         class="n-base-picker-tags"
         :tabindex="(disabled || patternInputFocused) ? false : '0'"
       >
-        <div
+        <n-tag
           v-for="option in selectedOptions"
           :key="option.value"
-          class="n-base-picker-tag"
+          :size="size"
+          :disabled="disabled"
+          closable
+          stop-click-propagation
+          @close="handleDeleteOption(option)"
         >
-          <div class="n-base-picker-tag__content">
-            {{ option.label }}
-          </div>
-          <n-icon
-            class="n-base-picker-tag__icon"
-            type="md-close"
-            @click.stop="handleDeleteOption(option)"
-          />
-        </div>
+          {{ option.label }}
+        </n-tag>
         <div
           class="n-base-picker-input-tag"
         >
@@ -95,6 +104,7 @@
           ref="cancelMark"
           class="n-base-picker__mark"
           arrow
+          :theme="theme"
           :show="!remote"
           :disabled="disabled"
           :active="active"
@@ -130,6 +140,7 @@
         <n-base-cancel-mark
           ref="cancelMark"
           class="n-base-picker__mark"
+          :theme="theme"
           arrow
           :show="!remote"
           :disabled="disabled"
@@ -163,6 +174,7 @@
         <n-base-cancel-mark
           class="n-base-picker__mark"
           arrow
+          :theme="theme"
           :show="!remote"
           :disabled="disabled"
           :active="active"
@@ -176,13 +188,13 @@
 
 <script>
 import NBaseCancelMark from '../../CancelMark'
-import NIcon from '../../../common/Icon'
+import NTag from '../../../common/Tag'
 
 export default {
   name: 'NBasePicker',
   components: {
     NBaseCancelMark,
-    NIcon
+    NTag
   },
   props: {
     theme: {
@@ -290,9 +302,11 @@ export default {
     },
     handleClick () {
       this.$emit('click')
-      if (this.filterable) {
-        this.focusPatternInput()
-      }
+      this.$nextTick().then(() => {
+        if (this.filterable) {
+          this.focusPatternInput()
+        }
+      })
     },
     handleDeleteOption (option) {
       this.$emit('delete-option', option)
