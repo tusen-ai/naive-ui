@@ -92,10 +92,13 @@ export default {
     },
     updatePosition (el, cb) {
       // console.log('scroll')
-      if (!this.active) return
+      if (!this.active && !this.show) return
       // console.log('[placeable.updatePosition]')
       this._getTrackedElement()
       this._getTrackingElement()
+      if (!this.trackedElement || !this.trackingElement) {
+        console.log('[placeable.updatePosition]: trakedElement or trackingElement not found!')
+      }
       // console.log(activator)
       const activatorBoundingClientRect = this.trackedElement.getBoundingClientRect()
       // console.log(activatorBoundingClientRect)

@@ -19,10 +19,9 @@
     <div />
     <div class="theme-picker">
       <n-select
-        v-model="theme"
+        v-model="NApp.$parent.theme"
         size="small"
         :options="options"
-        @change="handleThemeChange"
       />
     </div>
     <div class="lang-picker">

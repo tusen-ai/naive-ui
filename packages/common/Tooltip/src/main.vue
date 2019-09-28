@@ -62,14 +62,15 @@ export default {
     return h(NPopover, {
       on: context.listeners,
       props: {
-        ...context.props
+        ...context.props,
+        detachedContainerClass: 'n-tooltip-detached-content-container'
       },
       scopedSlots: {
         activator: () => slots.activator && slots.activator(),
         default: () => h('div', {
-          staticClass: 'n-tooltip__content',
+          staticClass: 'n-tooltip-content',
           class: {
-            'n-tooltip__content--fix-width': context.props.width !== null || context.props.maxWidth !== null
+            'n-tooltip-content--fix-width': context.props.width !== null || context.props.maxWidth !== null
           }
         }, slots.default && slots.default())
       }

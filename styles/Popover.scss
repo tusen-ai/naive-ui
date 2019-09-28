@@ -153,7 +153,8 @@
         }
         border-left-color: $--popover-background-color;
       }
-    }&[n-placement$="left"] {
+    }
+    &[n-placement$="left"] {
       @include once {
         margin-right: 10px;
       }

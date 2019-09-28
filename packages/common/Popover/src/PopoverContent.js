@@ -61,8 +61,12 @@ export default {
   },
   data () {
     return {
-      internalActive: false
+      internalActive: false,
+      show: false
     }
+  },
+  created () {
+    if (this.active) this.show = true
   },
   watch: {
     active (newActive) {
@@ -220,6 +224,14 @@ export default {
         h('transition', {
           props: {
             name: 'n-popover-fade'
+          },
+          on: {
+            enter: () => {
+              this.show = true
+            },
+            afterLeave: () => {
+              this.show = false
+            }
           }
         }, [
           this.active

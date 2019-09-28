@@ -10,6 +10,7 @@
     <div class="n-code-box__title">
       <slot name="title" />
       <n-tooltip
+        :delay="300"
         :placement="'top'"
         :arrow="true"
       >

@@ -8,6 +8,7 @@
 @import "components/BaseCancelMark.scss";
 @import "components/Tag.scss";
 @import "components/Popover.scss";
+@import "components/Tooltip.scss";
 
 @mixin setup-dark-theme () {
   @include setup-dark-colors();
@@ -19,7 +20,7 @@
   $--n-warning-color: $warning-6 !global;
   $--n-error-color: $error-6 !global;
 
-  $n-text-color: $neutral-2 !global;
+  $--n-text-color: $neutral-2 !global;
   $--n-divider-color: $neutral-7 !global;
   $--n-border-color: $neutral-7 !global;
   $--n-secondary-text-color: $neutral-2 !global;
@@ -34,4 +35,5 @@
   @include setup-dark-base-cancel-mark;
   @include setup-dark-tag;
   @include setup-dark-popover;
+  @include setup-dark-tooltip;
 }

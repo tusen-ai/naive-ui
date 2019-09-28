@@ -56,6 +56,10 @@ export default {
     controller: {
       type: Object,
       default: null
+    },
+    detachedContainerClass: {
+      type: String,
+      default: 'n-popover-detached-content-container'
     }
   },
   render (h, context) {
