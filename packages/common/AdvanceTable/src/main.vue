@@ -130,11 +130,11 @@
             >
               <!-- 批量选择 -->
               <n-checkbox
-                v-if="column.type === 'selection' && (column.canCheck && !column.canCheck(rowData,i))"
+                v-if="column.type === 'selection' && (column.disabled && !column.disabled(rowData,i))"
                 v-model="checkBoxes[rowData._index]"
               />
               <n-checkbox
-                v-else-if="column.type === 'selection' && (column.canCheck && column.canCheck(rowData,i))"
+                v-else-if="column.type === 'selection' && (column.disabled && column.disabled(rowData,i))"
                 v-model="disabledCheckBox[rowData._index]"
                 :disabled="!(disabledCheckBox[rowData._index]=false)"
               />
@@ -632,7 +632,6 @@ export default {
       })
     },
     onAllCheckboxesClick () {
-      this.allCheckboxesSelect = this.currentPageAllSelect
       this.showingData.forEach((item) => {
         this.checkBoxes[item._index] = this.currentPageAllSelect
       })
