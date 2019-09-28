@@ -52,9 +52,10 @@
               :key="column.key"
               :style="computeAlign(column)"
             >
+              <!-- 当前页全选 -->
               <n-checkbox
                 v-if="column.type === 'selection'"
-                v-model="allCheckboxesSelect"
+                v-model="currentPageAllSelect"
                 :indeterminate="!isCheckedBoxAllIndeterminate"
                 @click.native="onAllCheckboxesClick"
               />
@@ -127,8 +128,18 @@
               :style="computeAlign(column)"
               :class="computeTdClass(column, rowData)"
             >
+              <!-- 批量选择 -->
               <n-checkbox
-                v-if="column.type === 'selection'"
+                v-if="column.type === 'selection' && (column.disabled && !column.disabled(rowData,i))"
+                v-model="checkBoxes[rowData._index]"
+              />
+              <n-checkbox
+                v-else-if="column.type === 'selection' && (column.disabled && column.disabled(rowData,i))"
+                v-model="disabledCheckBox[rowData._index]"
+                :disabled="!(disabledCheckBox[rowData._index]=false)"
+              />
+              <n-checkbox
+                v-else-if="column.type === 'selection'"
                 v-model="checkBoxes[rowData._index]"
               />
               <row
@@ -151,13 +162,10 @@
         <!-- </tr> -->
         </n-tbody>
         <template v-if="loading">
-          <div style="width:100%;display:table-caption;">
-            <Loading
-              style="margin-top:20px;"
-              :circle="{ time: '1.5s' }"
-              :svg="{ height: '100px', width: '80px' }"
-            />
-          </div>
+          <n-spin
+            :spinning="loading"
+            style="width:100%;display:table-caption;"
+          />
         </template>
       </n-table>
     </div>
@@ -272,7 +280,8 @@ export default {
       currentPage: 1,
       selectedFilter: {},
       checkBoxes: [],
-      allCheckboxesSelect: false
+      disabledCheckBox: [],
+      currentPageAllSelect: false
     }
   },
   computed: {
@@ -357,21 +366,32 @@ export default {
     selectedRows () {
       return this.checkBoxes
         .map((isChecked, idx) => {
-          if (isChecked) {
+          if (isChecked && this.disabledCheckBox[idx] !== false) {
             return this.copyData[idx]
           }
         })
         .filter((item) => item !== void 0)
     },
-    isCheckedBoxAllIndeterminate () {
+    currentPageSelected () {
       let selectedLen = 0
       this.showingData.forEach((item) => {
         let realIdx = item._index
-        if (this.checkBoxes[realIdx] === true) {
+        if (this.checkBoxes[realIdx] === true && this.disabledCheckBox[realIdx] !== false) {
           selectedLen++
         }
       })
-      return selectedLen === this.showingData.length || selectedLen === 0
+      return selectedLen
+    },
+    isCheckedBoxAllIndeterminate () {
+      return this.currentPageSelected === this.showingData.length || this.currentPageSelected === 0
+    },
+    allCheckboxesSelect: {
+      get () {
+        if (this.currentPageSelected === this.showingData.length && this.showingData.length !== 0) {
+          return true
+        }
+        return false
+      }
     }
   },
   watch: {
@@ -379,6 +399,8 @@ export default {
       if (this.pagination.custom === true) {
         this.useRemoteChange()
       }
+      this.currentPageAllSelect = this.allCheckboxesSelect
+
       console.log('currentPage')
 
       this.$emit('on-page-change', this.paginationer)
@@ -388,7 +410,7 @@ export default {
       this.searchData = this.computeShowingData()
       this.searchDataNoSort = null
       this.checkBoxes = []
-      this.allCheckboxesSelect = false
+      this.currentPageAllSelect = false
     },
     currentSearchColumn () {
       this.searchData = this.computeShowingData()
@@ -398,12 +420,6 @@ export default {
       console.log('currentSortColumn')
     },
     checkBoxes () {
-      if (
-        this.selectedRows.length === this.showingData.length &&
-        this.showingData.length !== 0
-      ) {
-        this.allCheckboxesSelect = true
-      }
       this.$emit('on-selected-change', this.selectedRows)
     },
     selectedFilter: {
@@ -617,7 +633,7 @@ export default {
     },
     onAllCheckboxesClick () {
       this.showingData.forEach((item) => {
-        this.checkBoxes[item._index] = this.allCheckboxesSelect
+        this.checkBoxes[item._index] = this.currentPageAllSelect
       })
       this.checkBoxes = [].concat(this.checkBoxes)
     },

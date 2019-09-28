@@ -70,7 +70,10 @@ const sex = [
 const _columns3 = ($this) => {
   return [
     {
-      type: 'selection'
+      type: 'selection',
+      disabled (params, index) {
+        return params.row.age < 8
+      }
     },
     {
       title: 'Name',
