@@ -26,7 +26,7 @@ export default {
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, .35);
+  background-color: rgba(0, 0, 0, .4);
 }
 
 .n-modal-content {
