@@ -71,6 +71,9 @@ const _columns3 = ($this) => {
   return [
     {
       type: 'selection'
+      // canCheck (params, index) {
+      //   return params.row.age < 8
+      // }
     },
     {
       title: 'Name',
@@ -190,7 +193,7 @@ export default {
       })
     },
     getData (args) {
-      let d = new Array(20).fill(0)
+      let d = new Array(23).fill(0)
       d = d.map((item, idx) => {
         return {
           name: 'xiaobai' + idx,
