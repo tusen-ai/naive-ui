@@ -21,7 +21,7 @@ import inputDemo from './documentation/components/inputDemo'
 import selectDemo from './documentation/components/selectDemo'
 import cascaderDemo from './documentation/components/cascaderDemo'
 import inputKeyValuePairsDemo from './documentation/components/inputKeyValuePairsDemo'
-import modalDemo from './documentation/components/modalDemo'
+import modal from './documentation/components/modal'
 import nimbusFormCardDemo from './documentation/components/nimbusFormCardDemo'
 import messageDemo from './documentation/components/messageDemo'
 import tooltip from './documentation/components/tooltip'
@@ -135,7 +135,7 @@ const routes = [
       { path: '/n-select', component: selectDemo },
       { path: '/n-cascader', component: cascaderDemo },
       { path: '/n-InputKeyValuePairs', component: inputKeyValuePairsDemo },
-      { path: '/n-modal', component: modalDemo },
+      { path: '/n-modal', component: modal },
       { path: '/n-nimbus-form-card', component: nimbusFormCardDemo },
       { path: '/n-message', component: messageDemo },
       { path: '/n-tooltip', component: tooltip },

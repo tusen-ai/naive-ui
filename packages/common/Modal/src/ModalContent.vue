@@ -29,6 +29,18 @@
 <script>
 import NScrollbar from '../../Scrollbar'
 
+let mousePosition = null
+
+document.documentElement.addEventListener('click', (e) => {
+  mousePosition = {
+    x: e.clientX,
+    y: e.clientY
+  }
+  window.setTimeout(() => {
+    mousePosition = null
+  }, 32)
+}, true)
+
 export default {
   components: {
     NScrollbar
@@ -47,8 +59,15 @@ export default {
   },
   data () {
     return {
-      slotDOM: [],
       styleActive: false
+    }
+  },
+  computed: {
+    slotDOM: {
+      get () {
+        const els = this.$refs.contentInner.childNodes
+        return els
+      }
     }
   },
   created () {
@@ -56,12 +75,13 @@ export default {
       this.styleActive = true
     }
   },
-  mounted () {
-    this.$nextTick().then(this.registerContent)
-  },
-  updated () {
-    this.$nextTick().then(this.registerContent)
-  },
+  // mounted () {
+  //   this.$nextTick().then(this.registerContent)
+  // },
+  // updated () {
+  //   console.log('updated')
+  //   this.$nextTick().then(this.registerContent)
+  // },
   beforeDestroy () {
     // window.clearTimeout(this.updateScrollbarTimerId)
   },
@@ -71,11 +91,6 @@ export default {
     },
     handleMouseUp (e) {
       this.$emit('mouseup', e)
-    },
-    registerContent () {
-      const slots = this.$slots.default
-      const els = slots.map(vNode => vNode.elm).filter(el => el)
-      this.slotDOM = els
     },
     handleEnter () {
       this.styleActive = true
@@ -91,7 +106,8 @@ export default {
       if (
         (!this.$parent.$refs.activator ||
         !this.$parent.$refs.activator.childElementCount) &&
-        !this.activateEvent
+        !this.activateEvent &&
+        !mousePosition
       ) {
         return
       }
@@ -113,9 +129,19 @@ export default {
         const transformOriginX = -(offsetLeft - activatorLeft - activatorWidth / 2)
         const transformOriginY = -(offsetTop - activatorTop - scrollTop - activatorHeight / 2)
         this.$refs.contentInner.style.transformOrigin = `${transformOriginX}px ${transformOriginY}px`
-      } else {
+      } else if (
+        this.activateEvent
+      ) {
         const activatorTop = this.activateEvent.clientY
         const activatorLeft = this.activateEvent.clientX
+        const activatorWidth = 0
+        const activatorHeight = 0
+        const transformOriginX = -(offsetLeft - activatorLeft - activatorWidth / 2)
+        const transformOriginY = -(offsetTop - activatorTop - scrollTop - activatorHeight / 2)
+        this.$refs.contentInner.style.transformOrigin = `${transformOriginX}px ${transformOriginY}px`
+      } else if (mousePosition) {
+        const activatorTop = mousePosition.y
+        const activatorLeft = mousePosition.x
         const activatorWidth = 0
         const activatorHeight = 0
         const transformOriginX = -(offsetLeft - activatorLeft - activatorWidth / 2)
@@ -124,7 +150,10 @@ export default {
       }
     },
     handleBeforeLeave () {
-      this.updateTransformOrigin()
+      if (this.$parent.$refs.activator &&
+        this.$parent.$refs.activator.childElementCount) {
+        this.updateTransformOrigin()
+      }
       this.$refs.scrollbar.disableScrollbar()
       this.$emit('before-leave')
     },
