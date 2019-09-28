@@ -20,6 +20,7 @@ export default {
   },
   watch: {
     active (value) {
+      // console.log('activeChange')
       if (value && !this.contentContainerMounted) {
         this.contentContainerMounted = true
         this.appendContent()
@@ -49,7 +50,7 @@ export default {
   mounted () {
     this.detachTarget = document.body // getScrollParent(this.$refs.self)
     this.detachContent()
-    if (this.value && !this.contentContainerMounted) {
+    if (this.active && !this.contentContainerMounted) {
       this.contentContainerMounted = true
       this.appendContent()
     }

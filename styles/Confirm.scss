@@ -1,58 +1,59 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
-@include b(confirm) {
-  width: 80vw;
-  max-width: 446px;
-  margin: auto;
-  border-radius: 9px;
-  padding: 28px;
-  padding-bottom: 20px;
-  padding-top: 16px;
-  background: rgba(92, 101, 126, 1);
-  box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.16);
-  .n-confirm__wrap {
-    background: rgba(0, 0, 0, 0.3);
-    position: fixed;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .n-confirm__title {
-    display: flex;
-    justify-content: space-between;
-    font-size: 18px;
-    font-weight: bold;
-  }
-  .n-confirm__content {
-    font-size: 16px;
-    padding-right: 9px;
-    margin-top: 10px;
-    margin-bottom: 19px;
-    position: relative;
-    /* padding-left: 29px; */
-    /* display: flex; */
-  }
-  .n-confirm__content__text {
-    padding-left: 26px;
-    margin-left: 12px;
-  }
-  .n-confirm__content__icon {
-    // position: absolute;
-    vertical-align: middle;
-    margin-right: 8px;
-    // left: 0;
-    /* top: 50%;
-    transform: translateY(-50%); */
-  }
-  .n-comfirm__footer {
-    display: flex;
-    justify-content: flex-end;
-  }
-  .n-confirm__title__text {
-    display: flex;
-    align-items: center;
+@include themes-mixin {
+  @include b(confirm) {
+    @include once {
+      width: 80vw;
+      max-width: 446px;
+      margin: auto;
+      border-radius: 9px;
+      padding: 28px;
+      padding-bottom: 20px;
+      padding-top: 16px;
+      @include e(content) {
+        font-size: 16px;
+        padding-right: 9px;
+        margin-top: 10px;
+        margin-bottom: 19px;
+        position: relative;
+      }
+      @include e(footer) {
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+    @include b(confirm-title) {
+      @include once {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 18px;
+        font-weight: bold;
+        @include b(confirm-title-icon) {
+          vertical-align: middle;
+          margin-right: 8px;
+        }
+        @include b(confirm-title-content) {
+          display: flex;
+          align-items: center;
+        }
+      }
+      @include b(confirm-title-icon) {
+        @include m(confirm-type) {
+          color: $warning-6;
+        }
+        @include m(success-type) {
+          color: $success-6;
+        }
+        @include m(error-type) {
+          color: $error-6;
+        }
+      }
+      color: $--confirm-title-color;
+    }
+    background: $--confirm-background-color;
+    box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.16);
+    color: $--confirm-color;
   }
 }

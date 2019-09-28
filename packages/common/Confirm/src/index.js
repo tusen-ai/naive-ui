@@ -1,44 +1,56 @@
-import confirm from './confirm.js'
-let instanceStack = []
 
-let confirmInstance
+import Confirm from './confirm.vue'
 
-function getConfirmInstance () {
-  confirmInstance = confirm.newInstance()
-  instanceStack.push(confirmInstance)
-  return confirmInstance
-}
-function update (opts) {
-  const confirmInstance = getConfirmInstance()
-  confirmInstance.update(opts)
-  return confirmInstance
-}
-const Confirm = {
-  name: 'NConfirm',
-  confirm (options) {
-    return update({
-      type: 'confirm',
-      isActive: true,
-      ...options
-    })
-  },
-  error (options) {
-    return update({
-      type: 'error',
-      isActive: true,
-      ...options
-    })
-  },
-  success (options) {
-    return update({
-      type: 'success',
-      isActive: true,
-      ...options
-    })
-  },
-  remove () {
-    let instance = instanceStack.pop()
-    instance.remove()
+const instances = new Set()
+
+function setDataOnConfirmInstance (data, instance) {
+  for (const key of Object.keys(data)) {
+    if (key in instance.$data) {
+      instance.$data[key] = data[key]
+    }
   }
 }
-export default Confirm
+
+export default {
+  name: 'NConfirm',
+  theme: null,
+  createInstance () {
+    const instance = new this.Vue(Confirm)
+    instance.$mount()
+    instances.add(instance)
+    instance.instances = instances
+    return instance
+  },
+  confirm (options) {
+    const instance = this.createInstance()
+    setDataOnConfirmInstance({
+      type: 'confirm',
+      active: true,
+      theme: this.theme,
+      ...options
+    }, instance)
+  },
+  error (options) {
+    const instance = this.createInstance()
+    setDataOnConfirmInstance({
+      type: 'error',
+      active: true,
+      theme: this.theme,
+      ...options
+    }, instance)
+  },
+  success (options) {
+    const instance = this.createInstance()
+    setDataOnConfirmInstance({
+      type: 'success',
+      active: true,
+      theme: this.theme,
+      ...options
+    }, instance)
+  },
+  destroyAll () {
+    instances.forEach(instance => {
+      instance.active = false
+    })
+  }
+}

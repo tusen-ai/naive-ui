@@ -9,6 +9,7 @@
 @import "components/Tag.scss";
 @import "components/Popover.scss";
 @import "components/Tooltip.scss";
+@import "components/Confirm.scss";
 
 @mixin setup-light-theme () {
   @include setup-light-colors();
@@ -38,4 +39,5 @@
   @include setup-light-tag;
   @include setup-light-popover;
   @include setup-light-tooltip;
+  @include setup-light-confirm;
 }

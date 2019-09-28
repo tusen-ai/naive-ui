@@ -28,7 +28,7 @@ export default {
     DocHeader
   },
   beforeRouteEnter (to, from, next) {
-    console.log(i18n)
+    // console.log(i18n)
     i18n.locale = to.params.lang
     next()
   },

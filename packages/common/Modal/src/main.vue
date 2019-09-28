@@ -65,6 +65,12 @@ export default {
             ref: 'content',
             props: { active: this.value, activateEvent: this.activateEvent },
             on: {
+              'after-leave': () => {
+                this.$emit('after-hide')
+              },
+              beforeLeave: () => {
+                this.$emit('before-hide')
+              },
               mousedown: (e) => {
                 this.mousedownTarget = e.target
               },
