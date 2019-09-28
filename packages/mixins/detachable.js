@@ -49,6 +49,10 @@ export default {
   mounted () {
     this.detachTarget = document.body // getScrollParent(this.$refs.self)
     this.detachContent()
+    if (this.value && !this.contentContainerMounted) {
+      this.contentContainerMounted = true
+      this.appendContent()
+    }
     // this.appendContent()
   },
   beforeDestroy () {
