@@ -1,5 +1,5 @@
 @mixin setup-dark-tooltip {
-  $--tooltip-background-color: $neutral-5 !global;
+  $--tooltip-background-color: $neutral-6 !global;
   $--tooltip-color: $--n-text-color !global;
   $--tooltip-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.08) !global;
 }
