@@ -28,6 +28,9 @@
   $--n-secondary-text-color: $neutral-3 !global;
   $--n-text-color: $neutral-2 !global;
   $--n-disabled-text-color: $neutral-5 !global;
+  $--n-card-color: $neutral-10 !global;
+  $--n-dialog-color: $neutral-10 !global;
+  $--n-background-color: $neutral-10 !global;
  
   @include setup-light-nimbus-service-layout;
   @include setup-light-divider;

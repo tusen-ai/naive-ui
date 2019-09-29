@@ -1,3 +1,16 @@
+<i18n>
+{
+  "zh-cn": {
+    "show": "显示代码",
+    "hide": "收起代码"
+  },
+  "en-us": {
+    "show": "Show Code",
+    "hide": "Hide Code"
+  }
+}
+</i18n>
+
 <template>
   <div
     class="n-code-box"
@@ -23,7 +36,7 @@
             @click="toggleCodeDisplay"
           />
         </template>
-        Show Code
+        {{ !showCode ? $t('show') : $t('hide') }}
       </n-tooltip>
     </div>
     <div class="n-code-box__content markdown">

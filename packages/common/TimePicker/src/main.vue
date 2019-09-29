@@ -45,6 +45,11 @@
                   >
                     {{ hour }}
                   </div>
+                  <div
+                    v-for="i in [1, 2, 3, 4, 5, 6]"
+                    :key="i"
+                    style="height: 35px;"
+                  />
                 </n-scrollbar>
               </div>
               <div
@@ -63,6 +68,11 @@
                   >
                     {{ minute }}
                   </div>
+                  <div
+                    v-for="i in [1, 2, 3, 4, 5, 6]"
+                    :key="i"
+                    style="height: 35px;"
+                  />
                 </n-scrollbar>
               </div>
               <div
@@ -84,6 +94,11 @@
                   >
                     {{ second }}
                   </div>
+                  <div
+                    v-for="i in [1, 2, 3, 4, 5, 6]"
+                    :key="i"
+                    style="height: 35px;"
+                  />
                 </n-scrollbar>
               </div>
             </div>

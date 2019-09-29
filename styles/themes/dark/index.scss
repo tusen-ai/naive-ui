@@ -21,12 +21,21 @@
   $--n-warning-color: $warning-6 !global;
   $--n-error-color: $error-6 !global;
 
-  $--n-text-color: $neutral-2 !global;
-  $--n-divider-color: $neutral-7 !global;
-  $--n-border-color: $neutral-7 !global;
-  $--n-secondary-text-color: $neutral-2 !global;
-  $--n-table-header-color: mix($neutral-8, $neutral-9) !global;
+  $--n-text-color: $--text-1 !global;
+  $--n-popover-color: $--neutral-1 !global;
+  $--n-divider-color: $--neutral-6 !global;
+  $--n-alpha-divider-color: $--overlay-6 !global;
+  $--n-border-color: $--neutral-7 !global;
+  $--n-alpha-border-color: $--overlay-7 !global;
+  $--n-secondary-text-color: $--text-2 !global;
+  $--n-table-header-color: $--neutral-8 !global;
+  $--n-alpha-table-header-color: $--overlay-8 !global;
+  $--n-table-body-color: $--neutral-9 !global;
+  $--n-alpha-table-body-color: $--overlay-9 !global;
+  $--n-card-color: $--neutral-9 !global;
   $--n-disabled-text-color: rgba(255, 255, 255, .3) !global;
+  $--n-dialog-color: $--neutral-3 !global;
+  $--n-background-color: $--neutral-10 !global;
   @include setup-dark-nimbus-service-layout;
   @include setup-dark-divider;
   @include setup-dark-scrollbar;

@@ -1,4 +1,4 @@
 @mixin setup-dark-popover {
-  $--popover-background-color: $neutral-6 !global;
+  $--popover-background-color: $--n-popover-color !global;
   $--popover-color: $--n-secondary-text-color !global;
 }
