@@ -62,14 +62,6 @@ export default {
       styleActive: false
     }
   },
-  computed: {
-    slotDOM: {
-      get () {
-        const els = this.$refs.contentInner.childNodes
-        return els
-      }
-    }
-  },
   created () {
     if (this.active) {
       this.styleActive = true
@@ -86,6 +78,10 @@ export default {
     // window.clearTimeout(this.updateScrollbarTimerId)
   },
   methods: {
+    slotDOM () {
+      const els = this.$refs.contentInner.childNodes
+      return els
+    },
     handleMouseDown (e) {
       this.$emit('mousedown', e)
     },

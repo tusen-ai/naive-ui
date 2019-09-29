@@ -83,14 +83,13 @@ export default {
                   this.mousedownTarget = e.target
                 },
                 mouseup: (e) => {
-                  console.log('mouse up')
-                  const slotDOM = this.$refs.content.slotDOM
+                  const slotDOM = this.$refs.content.slotDOM()
                   const scollbars = this.$refs.content.$el.querySelectorAll('.n-scrollbar-rail__scrollbar')
                   const elsToAvoid = [...slotDOM, ...scollbars]
                   if (this.maskClosable) {
                     if (
                       !elsToAvoid.some(el => el.contains(e.target)) &&
-                  !elsToAvoid.some(el => el.contains(this.mousedownTarget))
+                      !elsToAvoid.some(el => el.contains(this.mousedownTarget))
                     ) {
                       this.deactivate()
                     }
