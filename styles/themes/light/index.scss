@@ -10,12 +10,11 @@
 @import "components/Table.scss";
 @import "components/AdvanceTable.scss";
 
-
 @import "components/Popover.scss";
 @import "components/Tooltip.scss";
 @import "components/Confirm.scss";
 @import "components/CheckBox.scss";
-
+@import "components/Switch.scss";
 
 @mixin setup-light-theme () {
   @include setup-light-colors();
@@ -52,4 +51,5 @@
   @include setup-light-tooltip;
   @include setup-light-confirm;
   @include setup-light-checkbox;
+  @include setup-light-switch;
 }

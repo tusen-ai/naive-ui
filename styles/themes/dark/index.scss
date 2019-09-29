@@ -14,6 +14,7 @@
 @import "components/Tooltip.scss";
 @import "components/Confirm.scss";
 @import "components/CheckBox.scss";
+@import "components/Switch.scss";
 
 @mixin setup-dark-theme () {
   @include setup-dark-colors();
@@ -54,4 +55,5 @@
   @include setup-dark-tooltip;
   @include setup-dark-confirm;
   @include setup-dark-checkbox;
+  @include setup-dark-switch;
 }
