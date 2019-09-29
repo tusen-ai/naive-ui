@@ -1,14 +1,14 @@
 @mixin setup-dark-colors {
-  $neutral-1: rgb(255, 255, 255) !global;
-  $neutral-2: rgba(255, 255, 255, .85) !global;
-  $neutral-3: rgba(255, 255, 255, .65) !global;
-  $neutral-4: rgba(255, 255, 255, .45) !global;
-  $neutral-5: #40465b !global;
-  $neutral-6: #272F46 !global;
-  $neutral-7: #1F263E !global;
-  $neutral-8: #171D33 !global;
-  $neutral-9: #10142C !global;
-  $neutral-10: rgb(0, 0, 0) !global;
+  $--neutral-1: rgb(255, 255, 255) !global;
+  $--neutral-2: rgba(255, 255, 255, .85) !global;
+  $--neutral-3: rgba(255, 255, 255, .65) !global;
+  $--neutral-4: rgba(255, 255, 255, .45) !global;
+  $--neutral-5: #40465b !global;
+  $--neutral-6: #272F46 !global;
+  $--neutral-7: #1F263E !global;
+  $--neutral-8: #171D33 !global;
+  $--neutral-9: #10142C !global;
+  $--neutral-10: rgb(0, 0, 0) !global;
   $primary-1: #e6ffee !global;
   $primary-2: #9bf2bb !global;
   $primary-3: #6ee69e !global;

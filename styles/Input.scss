@@ -67,7 +67,6 @@
   @include m(small-size) {
     font-size: $small-input-font-size;
     $height: round($small-input-font-size * 1.5);
-    height: $small-height;
     line-height: $small-height;
     @include e(input) {
       height: $small-height;
@@ -82,7 +81,6 @@
   @include m(medium-size) {
     font-size: $medium-input-font-size;
     $height: round($medium-input-font-size * 1.5);
-    height: $medium-height;
     line-height: $medium-height;
     @include e(input) {
       height: $medium-height;
@@ -97,7 +95,6 @@
   @include m(large-size) {
     font-size: $large-input-font-size;
     $height: round($large-input-font-size * 1.5);
-    height: $large-height;
     line-height: $large-height;
     @include e(input) {
       height: $large-height;

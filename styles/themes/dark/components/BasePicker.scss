@@ -1,8 +1,8 @@
 @mixin setup-dark-base-picker {
   $--base-picker-color: $--n-secondary-text-color !global;
   $--base-picker-background-color: (
-    "default": rgba(255, 255, 255, .12),
-    "disabled": rgba(255, 255, 255, .08),
+    "default": rgba(255, 255, 255, .1),
+    "disabled": rgba(255, 255, 255, .06),
     "active": change-color($primary-6, $alpha: 0.1)
   ) !global;
   $--base-picker-placeholder-color: (

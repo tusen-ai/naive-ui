@@ -1,14 +1,26 @@
 @mixin setup-dark-colors {
-  $neutral-1: rgb(255, 255, 255) !global;
-  $neutral-2: rgba(255, 255, 255, .90) !global;
-  $neutral-3: rgba(255, 255, 255, .80) !global;
-  $neutral-4: rgba(255, 255, 255, .70) !global;
-  $neutral-5: hsl(227, 15%, 42%) !global; // popover border
-  $neutral-6: hsl(226, 21%, 33%) !global; // modal divider
-  $neutral-7: hsl(226, 27%, 25%) !global;
-  $neutral-8: hsl(226, 33%, 18%) !global; // drawer & card & table header
-  $neutral-9: hsl(226, 39%, 12%) !global; // bg
-  $neutral-10: hsl(226, 46%, 7%) !global;
+  $--text-1: rgba(255, 255, 255, .9) !global;
+  $--text-2: rgba(255, 255, 255, .75) !global;
+  $--overlay-1: rgba(255, 255, 255, 0.3) !global; // popover
+  $--overlay-2: rgba(255, 255, 255, 0.26) !global; //
+  $--overlay-3: rgba(255, 255, 255, 0.22) !global; // dialog
+  $--overlay-4: rgba(255, 255, 255, 0.2) !global; //
+  $--overlay-5: rgba(255, 255, 255, 0.16) !global; //
+  $--overlay-6: rgba(255, 255, 255, 0.14) !global; // divider
+  $--overlay-7: rgba(255, 255, 255, 0.12) !global; // border
+  $--overlay-8: rgba(255, 255, 255, 0.09) !global; // table-header
+  $--overlay-9: rgba(255, 255, 255, 0.05) !global; // card & table-body
+  $--overlay-10: rgba(255, 255, 255, 0) !global; // background
+  $--neutral-1: rgb(89, 93, 119) !global; // popover
+  $--neutral-2: rgb(80, 84, 109) !global; //
+  $--neutral-3: rgb(70, 75, 99) !global; // dialog
+  $--neutral-4: rgb(65, 70, 94) !global; //
+  $--neutral-5: rgb(56, 61, 83) !global; //
+  $--neutral-6: rgb(51, 56, 78) !global; // divider
+  $--neutral-7: rgb(46, 52, 73) !global; // border
+  $--neutral-8: rgb(39, 45, 65) !global; // table-header
+  $--neutral-9: rgb(30, 36, 55) !global; // card & table-body
+  $--neutral-10: rgb(18, 24, 42) !global; // background
   $primary-1: #f0fcf8 !global;
   $primary-2: #d4f7eb !global;
   $primary-3: #b8f1de !global;

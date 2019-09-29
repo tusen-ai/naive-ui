@@ -49,7 +49,10 @@
               {{ name }}
             </div>
           </div>
-          <div class="n-nimbus-service-layout-drawer-divider" />
+          <div
+            v-if="name"
+            class="n-nimbus-service-layout-drawer-divider"
+          />
           <div
             v-for="item in itemsWithCollapseStatus"
             :key="item.name"
