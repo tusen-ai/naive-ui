@@ -2,6 +2,9 @@
   <div
     ref="tableWrapper"
     class="n-advance-table__wrapper n-advance-table"
+    :class="{
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+    }"
   >
     <div class="n-advance-table__operation">
       <div class="n-advance-table__operation--left">
@@ -30,8 +33,9 @@
     <div class="n-advance-table__tbody">
       <n-table
         ref="header"
-        style="padding:0;border-bottom-left-radius:0;border-bottom-right-radius:0;background-color: #2b3147;"
+        style="padding:0;border-bottom-left-radius:0;border-bottom-right-radius:0;"
         :style="colGroup"
+        class="n-advance-table__header"
       >
         <colgroup>
           <col
@@ -51,6 +55,10 @@
               ref="theads"
               :key="column.key"
               :style="computeAlign(column)"
+              :class="{
+                'n-advance-table__sortable-column': column.sortable
+              }"
+              @click.native="()=>sortByColumn(column)"
             >
               <!-- 当前页全选 -->
               <n-checkbox
@@ -64,6 +72,7 @@
                 v-if="column.sortable"
                 :ref="'sorter_' + (column.key || i)"
                 v-model="sortIndexs[column.key || i]"
+                class="n-advance-table__header-icon"
                 :column="column"
                 :index="i"
                 @onSortTypeChange="onSortTypeChange"
@@ -75,6 +84,7 @@
               <PopFilter
                 v-if="column.onFilter && (column.filterItems || column.asynsFilterItems)"
                 v-model="selectedFilter[column.key]"
+                class="n-advance-table__header-icon"
                 :column="column"
                 :items="column.filterItems || column.asynsFilterItems"
                 @on-filter="onFilter"
@@ -187,8 +197,9 @@ import row from '../row/index.js'
 import SortIcon from '../sortIcon'
 import PopFilter from '../popFilter'
 import searchInput from '../searchInput'
-import Loading from '../loading'
 import { noopFn } from '../../../utils/index'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 
 export default {
   name: 'NAdvanceTable',
@@ -196,9 +207,13 @@ export default {
     row,
     SortIcon,
     PopFilter,
-    searchInput,
-    Loading
+    searchInput
+
   },
+  mixins: [
+    withapp,
+    themeable
+  ],
   props: {
     search: {
       /**
@@ -485,6 +500,11 @@ export default {
           _index: idx
         }
       })
+    },
+    sortByColumn (column) {
+      if (!column.sortable || column.key === void 0) return
+      const ref = this.$refs['sorter_' + column.key][0]
+      ref.changeSort()
     },
     computeAlign (column) {
       if (column.align) {

@@ -7,6 +7,9 @@
 @import "components/BasePicker.scss";
 @import "components/BaseCancelMark.scss";
 @import "components/Tag.scss";
+@import "components/Table.scss";
+@import 'components/AdvanceTable.scss';
+
 
 @mixin setup-dark-theme () {
   @include setup-dark-colors();
@@ -32,4 +35,6 @@
   @include setup-dark-base-picker;
   @include setup-dark-base-cancel-mark;
   @include setup-dark-tag;
+  @include setup-dark-table;
+  @include setup-dark-advance-table;
 }

@@ -1,0 +1,4 @@
+@mixin setup-light-advance-table {
+  $--table-header-icon-color: $primary-6 !global;
+  $--table-scrollbar-color: #ababab !global;
+}

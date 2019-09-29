@@ -1,55 +1,127 @@
 @import "./mixins/mixins.scss";
 @import "./themes/vars.scss";
 
-@include b(table) {
-  width: 100%;
-  border-radius: 12px;
-  font-size: $table-font-size;
-  overflow: hidden;
-  box-shadow: $table-box-shadow;
-  padding-bottom: 8px;
-  background-color: $table-body-background-color;
-  table {
-    border-collapse: collapse;
-    width: 100%;
-    thead {
-      background-color: $table-header-background-color;
-      color: $primary-text-color;
-      tr {
-        th {
-          padding: 16px 6px 16px 6px;
-          text-align: left;
-          border: none;
+
+@include themes-mixin {
+  @include b(table) {
+    @include once {
+      width: 100%;
+      border-radius: 12px;
+      font-size: $table-font-size;
+      overflow: hidden;
+      padding-bottom: 8px;
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        thead {
+          tr {
+            th {
+              padding: 12px 6px 12px 6px;
+              text-align: left;
+              border: none;
+              font-weight: 400;
+            }
+            th:nth-child(1) {
+              padding-left: 32px;
+              border-radius: 12px 0 0 0;
+            }
+            th:nth-last-child(1) {
+              padding-left: 32px;
+              border-radius: 0 12px 0 0;
+            }
+          }
         }
-        th:nth-child(1) {
-          padding-left: 32px;
-          border-radius: 12px 0 0 0;
-        }
-        th:nth-last-child(1) {
-          padding-left: 32px;
-          border-radius: 0 12px 0 0;
+        tbody {
+          background-color: $--table-body-background;
+          color: $--table-body-color;
+          tr {
+            td {
+              padding: 16px 6px 12px 6px;
+              text-align: left;
+              border: none;
+            }
+            td:nth-child(1) {
+              padding-left: 32px;
+            }
+            td:nth-last-child(1) {
+              padding-left: 32px;
+            }
+          }
+          tr:hover {
+            background-color: $--table-row-hover;
+          }
         }
       }
     }
-    tbody {
-      background-color: $table-body-background-color;
-      color: $regular-text-color;
-      tr {
-        td {
-          padding: 16px 6px 12px 6px;
-          text-align: left;
-          border: none;
-        }
-        td:nth-child(1) {
-          padding-left: 32px;
-        }
-        td:nth-last-child(1) {
-          padding-left: 32px;
+    background-color: $--table-body-background;
+    box-shadow: $--table-box-shadow;
+    table {
+      thead {
+        background-color: $--table-header-background;
+        color: $--table-header-color;
+      }
+      tbody {
+        background-color: $--table-body-background;
+        color: $--table-body-color;
+        tr:hover {
+          background-color: $--table-row-hover;
         }
       }
-      tr:hover {
-        background-color: #2b3147;
-      }
+
     }
+    
   }
 }
+
+// @include b(table) {
+//   width: 100%;
+//   border-radius: 12px;
+//   font-size: $table-font-size;
+//   overflow: hidden;
+//   // box-shadow: $table-box-shadow;
+//   padding-bottom: 8px;
+//   // background-color: $table-body-background-color;
+//   table {
+//     border-collapse: collapse;
+//     width: 100%;
+//     thead {
+//       background-color: $table-header-background-color;
+//       color: $primary-text-color;
+//       tr {
+//         th {
+//           padding: 16px 6px 16px 6px;
+//           text-align: left;
+//           border: none;
+//         }
+//         th:nth-child(1) {
+//           padding-left: 32px;
+//           border-radius: 12px 0 0 0;
+//         }
+//         th:nth-last-child(1) {
+//           padding-left: 32px;
+//           border-radius: 0 12px 0 0;
+//         }
+//       }
+//     }
+//     tbody {
+//       background-color: $table-body-background-color;
+//       color: $regular-text-color;
+//       tr {
+//         td {
+//           padding: 16px 6px 12px 6px;
+//           text-align: left;
+//           border: none;
+//         }
+//         td:nth-child(1) {
+//           padding-left: 32px;
+//         }
+//         td:nth-last-child(1) {
+//           padding-left: 32px;
+//         }
+//       }
+//       tr:hover {
+//         background-color: #2b3147;
+//       }
+//     }
+//   }
+// }
