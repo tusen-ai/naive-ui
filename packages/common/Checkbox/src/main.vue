@@ -1,7 +1,8 @@
 <template>
   <div
     class="n-checkbox"
-    :class="{'n-checkbox--checked': value, 'n-checkbox--disabled': disabled, 'n-checkbox--indeterminate': indeterminate }"
+
+    :class="{'n-checkbox--checked': value, 'n-checkbox--disabled': disabled, 'n-checkbox--indeterminate': indeterminate,[`n-${synthesizedTheme}-theme`]: synthesizedTheme, }"
   >
     <div
       class="n-checkbox__checkbox"
@@ -18,8 +19,15 @@
 </template>
 
 <script>
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
+
 export default {
   name: 'NCheckbox',
+  mixins: [
+    withapp,
+    themeable
+  ],
   props: {
     label: {
       type: [Number, Boolean, String],
