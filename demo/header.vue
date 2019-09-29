@@ -78,6 +78,9 @@ export default {
     }
   },
   methods: {
+    handleThemeChange (theme) {
+      this.NApp.$parent.theme = theme
+    },
     handleLangInput (lang) {
       this.$emit('lang-change', lang)
     }
@@ -88,7 +91,7 @@ export default {
 <style lang="scss" scoped>
 .nav {
   display: grid;
-  grid-template-columns: 272px 1fr 128px 160px;
+  grid-template-columns: 272px 1fr 96px 140px;
   grid-template-rows: 64px;
   align-items: center;
 }

@@ -1,7 +1,7 @@
 export default {
   name: 'NBasePortal',
   mounted () {
-    if (this.$el.parentElement) {
+    if (this.$el.parentElement && !this.elementTransferred) {
       this.$el.parentElement.removeChild(this.$el)
     }
     // this.transferElement()
@@ -20,6 +20,7 @@ export default {
     transferElement () {
       if (!this.elementTransferred) {
         document.body.appendChild(this.$el)
+        this.elementTransferred = true
       }
     }
   },

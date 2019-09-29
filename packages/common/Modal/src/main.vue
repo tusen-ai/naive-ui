@@ -32,6 +32,11 @@ export default {
       mousedownTarget: null
     }
   },
+  computed: {
+    active () {
+      return this.value
+    }
+  },
   methods: {
     deactivate () {
       this.$emit('input', false)
@@ -60,6 +65,12 @@ export default {
             ref: 'content',
             props: { active: this.value, activateEvent: this.activateEvent },
             on: {
+              'after-leave': () => {
+                this.$emit('after-hide')
+              },
+              beforeLeave: () => {
+                this.$emit('before-hide')
+              },
               mousedown: (e) => {
                 this.mousedownTarget = e.target
               },

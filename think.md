@@ -44,6 +44,8 @@ popover z-index 问题
 popover 停止追踪的时机
 ## 2019.9.24
 popover 可能 activator 和 content 不同步，在 beforeRouteEnter locale change 的时候！！！
+## 2019.9.28
+confirm 有 bug = =...和 button 颜色相关，之后检查吧
 ## TODO
 issue fix, add delay prop
 add trigger to tooltip

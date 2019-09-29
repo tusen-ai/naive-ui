@@ -11,6 +11,9 @@
 @import "components/AdvanceTable.scss";
 
 
+@import "components/Popover.scss";
+@import "components/Tooltip.scss";
+@import "components/Confirm.scss";
 
 @mixin setup-light-theme () {
   @include setup-light-colors();
@@ -27,7 +30,7 @@
   $--n-border-color: $neutral-6 !global;
   
   $--n-secondary-text-color: $neutral-3 !global;
-  $n-text-color: $neutral-2 !global;
+  $--n-text-color: $neutral-2 !global;
   $--n-disabled-text-color: $neutral-5 !global;
  
   @include setup-light-nimbus-service-layout;
@@ -40,4 +43,7 @@
   @include setup-light-tag;
   @include setup-light-table;
   @include setup-light-advance-table;
+  @include setup-light-popover;
+  @include setup-light-tooltip;
+  @include setup-light-confirm;
 }

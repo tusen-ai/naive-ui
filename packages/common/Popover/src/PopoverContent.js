@@ -4,6 +4,7 @@ import mousemoveoutside from '../../../directives/mousemoveoutside'
 import placeable from '../../../mixins/placeable'
 import zindexable from '../../../mixins/zindexable'
 import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 
 export default {
   name: 'NPopoverContent',
@@ -44,20 +45,28 @@ export default {
       type: Number,
       default: null
     },
+    raw: {
+      type: Boolean,
+      default: false
+    },
     detachedContainerClass: {
       type: String,
       default: 'n-popover-detached-content-container'
     }
   },
-  mixins: [withapp, placeable, zindexable],
+  mixins: [withapp, themeable, placeable, zindexable],
   directives: {
     clickoutside,
     mousemoveoutside
   },
   data () {
     return {
-      internalActive: false
+      internalActive: false,
+      show: false
     }
+  },
+  created () {
+    if (this.active) this.show = true
   },
   watch: {
     active (newActive) {
@@ -96,6 +105,12 @@ export default {
   },
   mounted () {
     popoverManager.registerContent(this)
+    if (this.active) {
+      this.$parent.transferElement()
+      // this.$nextTick().then(() => {
+      //   this.updatePosition()
+      // })
+    }
     if (this.controller) {
       this.controller.updatePosition = this.updatePosition
     }
@@ -209,6 +224,14 @@ export default {
         h('transition', {
           props: {
             name: 'n-popover-fade'
+          },
+          on: {
+            enter: () => {
+              this.show = true
+            },
+            afterLeave: () => {
+              this.show = false
+            }
           }
         }, [
           this.active
@@ -216,9 +239,10 @@ export default {
               attrs: {
                 'n-placement': this.placement
               },
-              staticClass: 'n-popover__content',
+              staticClass: 'n-popover-content',
               class: {
-                'n-popover__content--without-arrow': !this.arrow
+                'n-popover-content--without-arrow': !this.arrow,
+                [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme
               },
               style: this.style,
               directives: [
@@ -239,7 +263,7 @@ export default {
               ...this.$slots.default,
               this.arrow
                 ? h('div', {
-                  staticClass: 'n-popover__arrow'
+                  staticClass: 'n-popover-arrow'
                 })
                 : null
             ])

@@ -2,7 +2,7 @@ import ResizeObserver from 'resize-observer-polyfill'
 
 class ResizeObserverDelegate {
   constructor () {
-    console.log('resize observer')
+    // console.log('resize observer')
     this.handleResize = this.handleResize.bind(this)
     this.observer = new ResizeObserver(this.handleResize)
     this.elHandlersMap = new Map()

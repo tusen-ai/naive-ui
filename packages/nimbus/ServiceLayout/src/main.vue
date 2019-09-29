@@ -11,7 +11,7 @@
         'n-nimbus-service-layout__body--collapsed': isCollapsed,
         'n-nimbus-service-layout__body--active': !isCollapsed,
         'n-nimbus-service-layout__body--disable-menu': disableMenu,
-        'n-nimbus-service-layout__body--with-header': $slots.header
+        'n-nimbus-service-layout__body--with-header': $slots.nav
       }"
     >
       <scrollbar>
@@ -30,7 +30,7 @@
         'n-nimbus-service-layout-drawer--collapsed': isCollapsed,
         'n-nimbus-service-layout-drawer--active': !isCollapsed,
         'n-nimbus-service-layout-drawer--disabled': disableMenu,
-        'n-nimbus-service-layout-drawer--with-header': $slots.header
+        'n-nimbus-service-layout-drawer--with-header': $slots.nav
       }"
     >
       <div class="n-nimbus-service-layout-drawer-content">
@@ -109,8 +109,11 @@
         <toggle-button />
       </div>
     </div>
-    <nav class="n-nimbus-service-layout__nav">
-      <slot name="header" />
+    <nav
+      v-if="$slots.nav"
+      class="n-nimbus-service-layout__nav"
+    >
+      <slot name="nav" />
     </nav>
   </div>
 </template>

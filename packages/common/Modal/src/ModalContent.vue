@@ -4,7 +4,8 @@
     :class="{
       'n-modal-content--active': styleActive
     }"
-    v-on="$listeners"
+    @mousedown="handleMouseDown"
+    @mouseup="handleMouseUp"
   >
     <n-scrollbar ref="scrollbar">
       <transition
@@ -48,19 +49,7 @@ export default {
     return {
       slotDOM: [],
       styleActive: false
-      // updateScrollbarTimerId: null
     }
-  },
-  watch: {
-    // active (newActive) {
-    //   this.$nextTick().then(() => {
-    //     if (newActive) {
-    //       this.updateScrollbar()
-    //     } else {
-    //       window.clearTimeout(this.updateScrollbarTimerId)
-    //     }
-    //   })
-    // }
   },
   created () {
     if (this.active) {
@@ -77,13 +66,12 @@ export default {
     // window.clearTimeout(this.updateScrollbarTimerId)
   },
   methods: {
-    // updateScrollbar () {
-    //   this.updateScrollbarTimerId = window.setTimeout(() => {
-    //     // console.log('update scrollbar')
-    //     this.$refs.scrollbar.updateParameters()
-    //     this.updateScrollbar()
-    //   }, 300)
-    // },
+    handleMouseDown (e) {
+      this.$emit('mousedown', e)
+    },
+    handleMouseUp (e) {
+      this.$emit('mouseup', e)
+    },
     registerContent () {
       const slots = this.$slots.default
       const els = slots.map(vNode => vNode.elm).filter(el => el)
@@ -138,10 +126,11 @@ export default {
     handleBeforeLeave () {
       this.updateTransformOrigin()
       this.$refs.scrollbar.disableScrollbar()
+      this.$emit('before-leave')
     },
     handleAfterLeave () {
       this.styleActive = false
-      // console.log('beforeLeave', this.$refs.scrollbar.disableScrollbar())
+      this.$emit('after-leave')
     }
   }
 }

@@ -1,19 +1,24 @@
 <template>
   <n-modal
-    v-model="isActive"
-    :activate-event="activateEvent"
-    @input="toggle"
+    v-model="active"
+    :activate-event="event"
+    @after-hide="handleAfterHide"
   >
-    <!-- <transition name="n-modal-content--transition"> -->
-    <div class="n-confirm">
-      <!-- <slot name="title"> -->
-      <div class="n-confirm__title">
-        <span class="n-confirm__title__text">
+    <div
+      class="n-confirm"
+      :class="{
+        [`n-${theme}-theme`]: theme
+      }"
+    >
+      <div class="n-confirm-title">
+        <span class="n-confirm-title-content">
           <n-icon
-            class="n-confirm__content__icon"
+            class="n-confirm-title-icon"
+            :class="{
+              [`n-confirm-title-icon--${type}-type`]: type
+            }"
             :type="iconType.type"
             size="28"
-            :color="iconType.color"
           />
           {{ title }}
         </span>
@@ -21,98 +26,101 @@
           type="md-close"
           size="22"
           style="cursor:pointer;"
-          @click="handleCancel"
+          @click="handleCloseClick"
         />
       </div>
-      <!-- </slot> -->
-      <!-- <slot> -->
       <div class="n-confirm__content">
-        <div
-          class="n-confirm__content__text"
-          v-html="content"
-        />
+        {{ content }}
       </div>
-      <!-- </slot> -->
-      <!-- <slot name="footer"> -->
-      <div class="n-comfirm__footer">
+      <div class="n-confirm__footer">
         <n-button
           v-if="type === 'confirm'"
-          style="margin-bottom:0;margin-right:12px;"
+          :theme="theme"
+          style="margin-right:12px;"
           round
           size="small"
-          @click="handleCancel"
+          @click="handleNegativeClick"
         >
-          {{ canCancelText }}
+          {{ negativeText }}
         </n-button>
         <n-button
-          style="margin-bottom:0;"
+          :theme="theme"
           round
           :disabled="loading === true"
           size="small"
           type="primary"
           auto-text-color
-          @click="handleOk"
+          @click="handlePositiveClick"
         >
-          {{ loading === true ? "Loading" : okText }}
+          {{ loading === true ? "Loading" : positiveText }}
         </n-button>
       </div>
-      <!-- </slot> -->
     </div>
-    <!-- </transition> -->
   </n-modal>
 </template>
 
 <script>
+import NIcon from '../../Icon'
+import NModal from '../../Modal'
+import NButton from '../../Button'
+
 export default {
   name: 'NConfirm',
+  components: {
+    NIcon,
+    NModal,
+    NButton
+  },
   data () {
     return {
-      isActive: false,
+      theme: null,
+      maskClosable: true,
+      active: false,
       content: 'content',
-      okText: 'OK',
-      canCancelText: 'Cancel',
-      type: 'error',
+      positiveText: 'Confirm',
+      negativeText: 'Cancel',
+      type: 'confirm',
       title: 'title',
-      loading: null,
-      activateEvent: null,
-      onCancel: () => {},
-      onOk: () => {}
+      loading: false,
+      event: null,
+      onPositiveClick: () => {
+        this.active = false
+      },
+      onNegativeClick: () => {
+        this.active = false
+      },
+      onCloseClick: () => {
+        this.active = false
+      },
+      instances: null
     }
   },
   computed: {
     iconType () {
       const colors = {
         error: { type: 'ios-close-circle', color: '#FF92A4' },
-        confirm: { type: 'md-alert', color: '#FF92A4' },
+        confirm: { type: 'ios-help-circle', color: '#FF92A4' },
         success: { type: 'ios-checkmark-circle', color: '#63E2B7' }
       }
       return colors[this.type]
     }
   },
-  mounted () {
-    // this.timer = setInterval(() => {
-    //   console.log(1)
-    // }, 1000)
-  },
-  beforeDestroy () {
-    // clearInterval(this.timer)
-  },
   methods: {
-    toggle (isActive) {
-      this.handleCancel()
+    handleAfterHide () {
+      this.instances.delete(this)
+      this.$destroy()
     },
-    handleCancel () {
-      this.onCancel()
-      this.isActive = false
-      setTimeout(() => {
-        this.$destroy()
-      }, 300)
+    handlePositiveClick () {
+      this.onPositiveClick(this.hide)
     },
-    handleOk () {
-      this.onOk()
-      if (this.loading !== true) {
-        this.isActive = false
-      }
+    handleNegativeClick () {
+      this.onNegativeClick(this.hide)
+    },
+    handleCloseClick () {
+      this.onCloseClick(this.hide)
+    },
+    hide () {
+      this.active = false
     }
   }
 }

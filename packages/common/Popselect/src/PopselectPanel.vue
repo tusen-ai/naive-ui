@@ -1,5 +1,6 @@
 <template>
   <n-base-select-menu
+    :theme="synthesizedTheme"
     :multiple="multiple"
     :linked-options="linkedOptions"
     :is-selected="isSelected"
@@ -12,11 +13,14 @@
 <script>
 import NBaseSelectMenu from '../../../base/SelectMenu'
 import linkedOptions from '../../../utils/data/linkedOptions'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 
 export default {
   components: {
     NBaseSelectMenu
   },
+  mixins: [withapp, themeable],
   props: {
     multiple: {
       type: Boolean,
