@@ -1,0 +1,13 @@
+@mixin setup-dark-switch {
+  $--switch-rail-background-color: (
+    "inactive": rgba(148,151,155,0.4),
+    "active": change-color($--n-primary-color, $alpha: .25)
+  )!global;
+  $--switch-switcher-color: (
+    "inactive": linear-gradient(52deg,rgba(148,151,155,1) 0%,rgba(148,151,155,1) 100%),
+    "active": linear-gradient(52deg,rgba(120,205,104,1) 0%,rgba(20,166,165,1) 100%)
+  ) !global;
+  $--switch-switcher-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.4) !global;
+  $--switch-switcher-border: 1px solid transparent !global;
+  $--switch-switcher-transition: (left .2s $default-cubic-bezier, opacity .2s $default-cubic-bezier, max-width .2s $default-cubic-bezier) !global;
+}

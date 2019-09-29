@@ -10,6 +10,7 @@
 @import "components/Popover.scss";
 @import "components/Tooltip.scss";
 @import "components/Confirm.scss";
+@import "components/Switch.scss";
 
 @mixin setup-dark-theme () {
   @include setup-dark-colors();
@@ -47,4 +48,5 @@
   @include setup-dark-popover;
   @include setup-dark-tooltip;
   @include setup-dark-confirm;
+  @include setup-dark-switch;
 }

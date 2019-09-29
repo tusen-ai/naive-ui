@@ -26,6 +26,7 @@
         :delay="300"
         :placement="'top'"
         :arrow="true"
+        :controller="controller"
       >
         <template v-slot:activator>
           <n-button
@@ -68,12 +69,18 @@ export default {
     return {
       showCode: false,
       lightThemeCSSRef: null,
-      defaultThemeCSSRef: null
+      defaultThemeCSSRef: null,
+      controller: {}
     }
   },
   watch: {
     synthesizedTheme (value) {
 
+    },
+    showCode () {
+      this.$nextTick().then(() => {
+        this.controller.updatePosition()
+      })
     }
   },
   mounted () {

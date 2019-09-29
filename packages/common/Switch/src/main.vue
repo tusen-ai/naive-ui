@@ -1,6 +1,9 @@
 <template>
   <div
     class="n-switch"
+    :class="{
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+    }"
     @click="handleClick"
   >
     <div
@@ -12,10 +15,12 @@
 
 <script>
 import Emitter from '../../../mixins/emitter'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 
 export default {
   name: 'NSwitch',
-  mixins: [ Emitter ],
+  mixins: [ withapp, themeable, Emitter ],
   inject: {
     formItem: {
       default: null

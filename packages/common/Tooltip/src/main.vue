@@ -55,6 +55,10 @@ export default {
     maxWidth: {
       type: Number,
       default: null
+    },
+    controller: {
+      type: Object,
+      default: null
     }
   },
   render (h, context) {

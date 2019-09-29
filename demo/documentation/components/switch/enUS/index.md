@@ -1,0 +1,5 @@
+# Switch
+```demo
+basic
+event
+```

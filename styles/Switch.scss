@@ -1,62 +1,79 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
-@include b(switch) {
-  display: inline-block;
-  @include e(rail) {
-    cursor: pointer;
-    position: relative;
-    height: 14px;
-    width: 30px;
-    border-radius: 7px;
-    background-color: rgba(148,151,155,0.4);
-    margin: 3px;
-    transition: background-color .2s $default-cubic-bezier;
-    &::before, &::after {
-      cursor: inherit;
-      content: "";
-      position: absolute;
-      height: 20px;
-      width: 24px;
-      max-width: 20px;
-      border-radius: 10px;
-      top: -3px;
-      left: -3px;
-      box-shadow:0px 2px 4px 0px rgba(0,0,0,0.4);
-      transition: left .2s $default-cubic-bezier, opacity .2s $default-cubic-bezier, max-width .2s $default-cubic-bezier;
+@include themes-mixin{
+  @include b(switch) {
+    @include once {
+      display: inline-block;
     }
-    @include not-m(disabled) {
-      &:active::before, &:active::after {
-        max-width: 24px;
-      }
-      @include m(active) {
-        &:active::before, &:active::after {
-          left: 9px;
+    @include e(rail) {
+      @include once {
+        cursor: pointer;
+        position: relative;
+        height: 14px;
+        width: 30px;
+        border-radius: 7px;
+        margin: 3px;
+        transition: background-color .2s $default-cubic-bezier;
+        &::before, &::after {
+          box-sizing: border-box;
+          cursor: inherit;
+          content: "";
+          position: absolute;
+          height: 20px;
+          width: 24px;
+          max-width: 20px;
+          border-radius: 10px;
+          top: -3px;
+          left: -3px;
+          // transition: left .2s $default-cubic-bezier, opacity .2s $default-cubic-bezier, max-width .2s $default-cubic-bezier;
+        }
+        &::before {
+          opacity: 1;
+        }
+        &::after {
+          opacity: 0;
+        }
+        @include not-m(disabled) {
+          &:active::before, &:active::after {
+            max-width: 24px;
+          }
+          @include m(active) {
+            &:active::before, &:active::after {
+              left: 9px;
+            }
+          }
+        }
+        @include m(active) {
+          &::before {
+            left: 13px;
+            opacity: 1;
+          }
+          &::after {
+            left: 13px;
+            opacity: 1;
+          }
         }
       }
-    }
-    &::before {
-      background-image: linear-gradient(52deg,rgba(148,151,155,1) 0%,rgba(148,151,155,1) 100%);
-      opacity: 1;
-    }
-    &::after {
-      background-image: linear-gradient(52deg,rgba(120,205,104,1) 0%,rgba(20,166,165,1) 100%);
-      opacity: 0;
-    }
-    @include m(active) {
-      background-color: rgba(97, 196, 118, .27);
+      &::before, &::after {
+        box-shadow: $--switch-switcher-box-shadow;
+        transition: $--switch-switcher-transition;
+        // border: $--switch-switcher-border;
+      }
+      background-color: map-get($map: $--switch-rail-background-color, $key: 'inactive');
       &::before {
-        left: 13px;
-        opacity: 0;
+        background-image: map-get($map: $--switch-switcher-color, $key: 'inactive');
       }
       &::after {
-        left: 13px;
-        opacity: 1;
+        background-image: map-get($map: $--switch-switcher-color, $key: 'active');
       }
-    }
-   @include m(disabled) {
-      cursor: not-allowed;
-      opacity: .5;
+      @include m(active) {
+        background-color: map-get($map: $--switch-rail-background-color, $key: 'active');
+      }
+      @include m(disabled) {
+        cursor: not-allowed;
+        opacity: .5;
+      }
     }
   }
 }
