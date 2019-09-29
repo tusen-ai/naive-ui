@@ -2,54 +2,72 @@
 @import "./themes/vars.scss";
 
 @include themes-mixin {
+  @include b(advance-table--col-border) {
+    table {
+      thead {
+        tr {
+          th {
+            border-right: $--table-td-border-right;
+          }
+        }
+      }
+      tbody {
+        tr {
+          td {
+            border-right: $--table-td-border-right;
+          }
+        }
+      }
+    }
+  }
   @include b(advance-table) {
-    @include once { 
-      @include e(wrapper){
+    @include once {
+      @include e(wrapper) {
         width: 100%;
       }
-      @include e(tbody){
+      @include e(tbody) {
         overflow: hidden;
         border-radius: 12px;
       }
-      @include e(td-text){
-        &-center{
+      @include e(td-text) {
+        &-center {
           text-align: center;
         }
-        &-left{
+        &-left {
           text-align: left;
         }
-        &-right{
+        &-right {
           text-align: right;
         }
-        @include m(ellipsis){
+        @include m(ellipsis) {
           text-overflow: ellipsis;
           overflow: hidden;
           white-space: nowrap;
-          &>*{
+          & > * {
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
           }
         }
       }
-      @include e(no-data-tip){
+      @include e(no-data-tip) {
         padding: 5px;
         text-align: center;
         width: 100%;
         display: table-cell;
       }
-      @include e(pagination){
+      @include e(pagination) {
         margin-top: 27px;
         display: flex;
         justify-content: flex-end;
       }
-      @include e(operation){
+      @include e(operation) {
         display: flex;
-        justify-content:space-between;
-        &--right,&--left{
+        justify-content: space-between;
+        &--right,
+        &--left {
           display: flex;
         }
-    
       }
       @include e(sortable-column) {
         cursor: pointer;
@@ -78,30 +96,24 @@
         &::-webkit-scrollbar:horizontal {
           height: 5px;
         }
-        table thead tr th:last-of-type {
-          padding-left: 32px;
-        }
       }
     }
-    @include e(tbody){
+
+    @include e(tbody) {
       box-shadow: 0 3px 20px 6px rgba(0, 0, 0, 0.2);
     }
     @include b(table) {
       &::-webkit-scrollbar-thumb {
         border-radius: 2.5px;
         background: $--table-scrollbar-color;
-
       }
     }
-    @include e(header){
+    @include e(header) {
       background-color: $--table-header-background;
       i {
-        color:$--table-header-icon-color;
+        color: $--table-header-icon-color;
       }
     }
-   
-  
-    
   }
 }
 
@@ -154,7 +166,7 @@
 //     }
 
 //   }
-  
+
 //   @include b(table) {
 //     // background-color: #2b3147;
 //     table {

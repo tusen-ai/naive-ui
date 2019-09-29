@@ -3,7 +3,8 @@
     ref="tableWrapper"
     class="n-advance-table__wrapper n-advance-table"
     :class="{
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
+      'n-advance-table--col-border':colBorder
     }"
   >
     <div class="n-advance-table__operation">
@@ -279,6 +280,10 @@ export default {
     loading: {
       type: [Boolean],
       default: false
+    },
+    colBorder: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -426,6 +431,7 @@ export default {
       this.searchDataNoSort = null
       this.checkBoxes = []
       this.currentPageAllSelect = false
+      this.computeScollBar()
     },
     currentSearchColumn () {
       this.searchData = this.computeShowingData()
@@ -480,7 +486,7 @@ export default {
     this.wrapper = this.$refs.tableWrapper
     this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
     this.tbodyWidth = this.relTable.offsetWidth
-    this.scrollBarWidth = this.wrapperWidth - this.tbodyWidth
+
     this.headerRealEl = this.$refs.header.$el.querySelector('thead')
 
     // console.log(this.wrapperWidth, this.tbodyWidth)
@@ -609,6 +615,13 @@ export default {
 
       event.stopPropagation()
     },
+    computeScollBar () {
+      this.$nextTick(() => {
+        this.tbodyWidth = this.relTable.offsetWidth
+        this.scrollBarWidth = this.wrapperWidth - this.tbodyWidth
+        console.log('TCL: mounted -> this.scrollBarWidth', this.wrapperWidth, this.tbodyWidth)
+      })
+    },
     computeCustomWidthStl (column) {
       if (column.width) {
         let width = column.width
@@ -645,6 +658,7 @@ export default {
     init () {
       this.$nextTick(() => {
         this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
+        this.computeScollBar()
 
         // console.log(this.relTable.offsetWidth)
 

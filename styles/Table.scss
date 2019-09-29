@@ -1,7 +1,6 @@
 @import "./mixins/mixins.scss";
 @import "./themes/vars.scss";
 
-
 @include themes-mixin {
   @include b(table) {
     @include once {
@@ -16,17 +15,17 @@
         thead {
           tr {
             th {
-              padding: 12px 6px 12px 6px;
+              padding: 12px 6px 12px 19px;
               text-align: left;
               border: none;
               font-weight: 400;
             }
             th:nth-child(1) {
-              padding-left: 32px;
+              padding-left: 21px;
               border-radius: 12px 0 0 0;
             }
             th:nth-last-child(1) {
-              padding-left: 32px;
+              padding-left: 21px;
               border-radius: 0 12px 0 0;
             }
           }
@@ -36,15 +35,15 @@
           color: $--table-body-color;
           tr {
             td {
-              padding: 16px 6px 12px 6px;
+              padding: 16px 6px 12px 19px;
               text-align: left;
               border: none;
             }
             td:nth-child(1) {
-              padding-left: 32px;
+              padding-left: 21px;
             }
             td:nth-last-child(1) {
-              padding-left: 32px;
+              padding-left: 21px;
             }
           }
           tr:hover {
@@ -55,10 +54,19 @@
     }
     background-color: $--table-body-background;
     box-shadow: $--table-box-shadow;
+
     table {
+      border-collapse: separate;
       thead {
         background-color: $--table-header-background;
         color: $--table-header-color;
+        tr {
+          th {
+            &:last-of-type {
+              border-right: 0;
+            }
+          }
+        }
       }
       tbody {
         background-color: $--table-body-background;
@@ -66,10 +74,15 @@
         tr:hover {
           background-color: $--table-row-hover;
         }
+        tr {
+          td {
+            &:last-of-type {
+              border-right: 0;
+            }
+          }
+        }
       }
-
     }
-    
   }
 }
 

@@ -6,7 +6,7 @@
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
   >
-    <table>
+    <table cellspacing="0">
       <slot>default table content</slot>
     </table>
   </div>
