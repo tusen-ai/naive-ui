@@ -2,10 +2,9 @@
 @import './themes/vars.scss';
 
 @include b(switch) {
-  & {
-    display: inline-block;
-  }
-  .n-switch__rail {
+  display: inline-block;
+  @include e(rail) {
+    cursor: pointer;
     position: relative;
     height: 14px;
     width: 30px;
@@ -14,15 +13,27 @@
     margin: 3px;
     transition: background-color .2s $default-cubic-bezier;
     &::before, &::after {
+      cursor: inherit;
       content: "";
       position: absolute;
       height: 20px;
-      width: 20px;
+      width: 24px;
+      max-width: 20px;
       border-radius: 10px;
       top: -3px;
       left: -3px;
       box-shadow:0px 2px 4px 0px rgba(0,0,0,0.4);
-      transition: left .2s $default-cubic-bezier, opacity .2s $default-cubic-bezier;
+      transition: left .2s $default-cubic-bezier, opacity .2s $default-cubic-bezier, max-width .2s $default-cubic-bezier;
+    }
+    @include not-m(disabled) {
+      &:active::before, &:active::after {
+        max-width: 24px;
+      }
+      @include m(active) {
+        &:active::before, &:active::after {
+          left: 9px;
+        }
+      }
     }
     &::before {
       background-image: linear-gradient(52deg,rgba(148,151,155,1) 0%,rgba(148,151,155,1) 100%);
@@ -32,7 +43,7 @@
       background-image: linear-gradient(52deg,rgba(120,205,104,1) 0%,rgba(20,166,165,1) 100%);
       opacity: 0;
     }
-    &.n-switch__rail--active {
+    @include m(active) {
       background-color: rgba(97, 196, 118, .27);
       &::before {
         left: 13px;
@@ -43,7 +54,7 @@
         opacity: 1;
       }
     }
-    &.n-switch__rail--disabled {
+   @include m(disabled) {
       cursor: not-allowed;
       opacity: .5;
     }
