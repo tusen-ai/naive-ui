@@ -1,12 +1,20 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
+@mixin badge-type-mixin ($type) {
+  @include m($type + '-type') {
+    @include b(badge-sup) {
+      background-color: rgba(9, 133, 91, 1);
+    }
+  }
+}
+
 @include b(badge) {
   display: inline-block;
   position: relative;
   vertical-align: middle;
-  &.n-badge--dot {
-    .n-badge-sup {
+  @include m(dot) {
+    @include b(badge-sup) {
       height: 8px;
       width: 8px;
       padding: 0;
@@ -15,30 +23,15 @@
       bottom: calc(100% - 4px);
     }
   }
-  &.n-badge--success-type {
-    .n-badge-sup {
-      background-color: rgba(9, 133, 91, 1);
-    }
-  }
-  &.n-badge--info-type {
-    .n-badge-sup {
-      background-color: rgba(56, 137, 197, 1);
-    }
-  }
-  &.n-badge--warning-type {
-    .n-badge-sup {
-      background-color: rgba(205, 135, 20, 1);
-    }
-  }
-  &.n-badge--error-type {
-    .n-badge-sup {
-      background-color: rgba(255, 109, 147, 1);
-    }
-  }
+  @include badge-type-mixin('info');
+  @include badge-type-mixin('success');
+  @include badge-type-mixin('warning');
+  @include badge-type-mixin('error');
 }
 
 @include b(badge-sup) {
-  @include fade-in-scale-up-transition(badge);
+  @include fade-in-scale-up-transition(badge, left bottom);
+  color: white;
   user-select: none;
   position: absolute;
   height: 18px;
