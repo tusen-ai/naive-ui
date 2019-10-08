@@ -17,6 +17,8 @@
 @import "components/Switch.scss";
 @import "components/Message.scss";
 @import "components/LoadingBar.scss";
+@import "components/Dropdown.scss";
+
 
 @mixin setup-light-theme () {
   @include setup-light-colors();
@@ -56,4 +58,5 @@
   @include setup-light-switch;
   @include setup-light-message;
   @include setup-light-loading-bar;
+  @include setup-light-dropdown;
 }
