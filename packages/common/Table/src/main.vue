@@ -1,14 +1,24 @@
 <template>
-  <div class="n-table">
-    <table>
+  <div
+    class="n-table"
+    :class="{
+
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+    }"
+  >
+    <table cellspacing="0">
       <slot>default table content</slot>
     </table>
   </div>
 </template>
 
 <script>
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
+
 export default {
-  name: 'NTable'
+  name: 'NTable',
+  mixins: [withapp, themeable]
 }
 </script>
 

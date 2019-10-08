@@ -2,6 +2,10 @@
   <div
     ref="tableWrapper"
     class="n-advance-table__wrapper n-advance-table"
+    :class="{
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
+      'n-advance-table--col-border':colBorder
+    }"
   >
     <div class="n-advance-table__operation">
       <div class="n-advance-table__operation--left">
@@ -30,8 +34,9 @@
     <div class="n-advance-table__tbody">
       <n-table
         ref="header"
-        style="padding:0;border-bottom-left-radius:0;border-bottom-right-radius:0;background-color: #2b3147;"
+        style="padding:0;border-bottom-left-radius:0;border-bottom-right-radius:0;"
         :style="colGroup"
+        class="n-advance-table__header"
       >
         <colgroup>
           <col
@@ -51,6 +56,10 @@
               ref="theads"
               :key="column.key"
               :style="computeAlign(column)"
+              :class="{
+                'n-advance-table__sortable-column': column.sortable
+              }"
+              @click.native="()=>sortByColumn(column)"
             >
               <!-- 当前页全选 -->
               <n-checkbox
@@ -64,6 +73,7 @@
                 v-if="column.sortable"
                 :ref="'sorter_' + (column.key || i)"
                 v-model="sortIndexs[column.key || i]"
+                class="n-advance-table__header-icon"
                 :column="column"
                 :index="i"
                 @onSortTypeChange="onSortTypeChange"
@@ -75,6 +85,7 @@
               <PopFilter
                 v-if="column.onFilter && (column.filterItems || column.asynsFilterItems)"
                 v-model="selectedFilter[column.key]"
+                class="n-advance-table__header-icon"
                 :column="column"
                 :items="column.filterItems || column.asynsFilterItems"
                 @on-filter="onFilter"
@@ -187,8 +198,9 @@ import row from '../row/index.js'
 import SortIcon from '../sortIcon'
 import PopFilter from '../popFilter'
 import searchInput from '../searchInput'
-import Loading from '../loading'
 import { noopFn } from '../../../utils/index'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 
 export default {
   name: 'NAdvanceTable',
@@ -196,9 +208,13 @@ export default {
     row,
     SortIcon,
     PopFilter,
-    searchInput,
-    Loading
+    searchInput
+
   },
+  mixins: [
+    withapp,
+    themeable
+  ],
   props: {
     search: {
       /**
@@ -264,6 +280,10 @@ export default {
     loading: {
       type: [Boolean],
       default: false
+    },
+    colBorder: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -411,6 +431,7 @@ export default {
       this.searchDataNoSort = null
       this.checkBoxes = []
       this.currentPageAllSelect = false
+      this.computeScollBar()
     },
     currentSearchColumn () {
       this.searchData = this.computeShowingData()
@@ -465,7 +486,7 @@ export default {
     this.wrapper = this.$refs.tableWrapper
     this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
     this.tbodyWidth = this.relTable.offsetWidth
-    this.scrollBarWidth = this.wrapperWidth - this.tbodyWidth
+
     this.headerRealEl = this.$refs.header.$el.querySelector('thead')
 
     // console.log(this.wrapperWidth, this.tbodyWidth)
@@ -485,6 +506,11 @@ export default {
           _index: idx
         }
       })
+    },
+    sortByColumn (column) {
+      if (!column.sortable || column.key === void 0) return
+      const ref = this.$refs['sorter_' + column.key][0]
+      ref.changeSort()
     },
     computeAlign (column) {
       if (column.align) {
@@ -589,6 +615,13 @@ export default {
 
       event.stopPropagation()
     },
+    computeScollBar () {
+      this.$nextTick(() => {
+        this.tbodyWidth = this.relTable.offsetWidth
+        this.scrollBarWidth = this.wrapperWidth - this.tbodyWidth
+        console.log('TCL: mounted -> this.scrollBarWidth', this.wrapperWidth, this.tbodyWidth)
+      })
+    },
     computeCustomWidthStl (column) {
       if (column.width) {
         let width = column.width
@@ -625,6 +658,7 @@ export default {
     init () {
       this.$nextTick(() => {
         this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
+        this.computeScollBar()
 
         // console.log(this.relTable.offsetWidth)
 

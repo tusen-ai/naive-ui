@@ -79,7 +79,7 @@ const _columns3 = ($this) => {
       title: 'Name',
       key: 'name',
       sortable: true,
-      width: 400
+      width: 300
     },
     {
       title: 'Age',

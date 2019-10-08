@@ -7,9 +7,13 @@
 @import "components/BasePicker.scss";
 @import "components/BaseCancelMark.scss";
 @import "components/Tag.scss";
+@import "components/Table.scss";
+@import "components/AdvanceTable.scss";
+
 @import "components/Popover.scss";
 @import "components/Tooltip.scss";
 @import "components/Confirm.scss";
+@import "components/CheckBox.scss";
 @import "components/Switch.scss";
 @import "components/Message.scss";
 @import "components/LoadingBar.scss";
@@ -43,9 +47,12 @@
   @include setup-light-base-picker;
   @include setup-light-base-cancel-mark;
   @include setup-light-tag;
+  @include setup-light-table;
+  @include setup-light-advance-table;
   @include setup-light-popover;
   @include setup-light-tooltip;
   @include setup-light-confirm;
+  @include setup-light-checkbox;
   @include setup-light-switch;
   @include setup-light-message;
   @include setup-light-loading-bar;

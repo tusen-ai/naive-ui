@@ -12,35 +12,6 @@
       <template v-slot:activator>
         <filterIcon :status="filterStatus" />
       </template>
-    <!-- <n-popselect-option
-      v-if="loading"
-      disabled
-      label="Loading.."
-      value="loading.."
-    />
-    <p
-      v-if="error"
-      style="text-align:center;padding:5px;"
-    >
-      Error,refresh
-      <n-icon
-        style="cursor:pointer"
-        type="md-refresh"
-        color="#999"
-        size="18"
-        @click.stop="initItems"
-      />
-    </p> -->
-    <!-- <n-scrollbar
-      style="max-height:120px;"
-    > -->
-    <!-- <n-popselect-option
-        v-for="item in filterItems"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
-      /> -->
-    <!-- </n-scrollbar> -->
     </n-popselect>
     <n-popover
       v-else

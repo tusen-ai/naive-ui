@@ -1,84 +1,201 @@
 @import "./mixins/mixins.scss";
 @import "./themes/vars.scss";
-@include b(advance-table){
-  @include e(wrapper){
-    width: 100%;
-  }
-  @include e(tbody){
-    overflow: hidden;
-    border-radius: 12px;
-    box-shadow: 0 3px 20px 6px rgba(0, 0, 0, 0.2);
-  }
-  @include e(td-text){
-    &-center{
-      text-align: center;
-    }
-    &-left{
-      text-align: left;
-    }
-    &-right{
-      text-align: right;
-    }
-    @include m(ellipsis){
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
-      &>*{
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
+
+@include themes-mixin {
+  @include b(advance-table--col-border) {
+    table {
+      thead {
+        tr {
+          th {
+            border-right: $--table-td-border-right;
+          }
+        }
+      }
+      tbody {
+        tr {
+          td {
+            border-right: $--table-td-border-right;
+          }
+        }
       }
     }
   }
-  @include e(no-data-tip){
-    padding: 5px;
-    text-align: center;
-    width: 100%;
-    display: table-cell;
-  }
-  @include e(pagination){
-    margin-top: 27px;
-    display: flex;
-    justify-content: flex-end;
-  }
-  @include e(operation){
-    display: flex;
-    justify-content:space-between;
-    &--right,&--left{
-      display: flex;
+  @include b(advance-table) {
+    @include once {
+      @include e(wrapper) {
+        width: 100%;
+      }
+      @include e(tbody) {
+        overflow: hidden;
+        border-radius: 12px;
+      }
+      @include e(td-text) {
+        &-center {
+          text-align: center;
+        }
+        &-left {
+          text-align: left;
+        }
+        &-right {
+          text-align: right;
+        }
+        @include m(ellipsis) {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+          & > * {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+          }
+        }
+      }
+      @include e(no-data-tip) {
+        padding: 5px;
+        text-align: center;
+        width: 100%;
+        display: table-cell;
+      }
+      @include e(pagination) {
+        margin-top: 27px;
+        display: flex;
+        justify-content: flex-end;
+      }
+      @include e(operation) {
+        display: flex;
+        justify-content: space-between;
+        &--right,
+        &--left {
+          display: flex;
+        }
+      }
+      @include e(sortable-column) {
+        cursor: pointer;
+      }
+      @include b(table) {
+        table {
+          word-wrap: break-word;
+          word-break: break-all;
+          table-layout: fixed;
+        }
+        &::-webkit-scrollbar {
+          width: 5px;
+        }
+        &::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        &::-webkit-scrollbar-thumb {
+          border-radius: 2.5px;
+        }
+        // &::-webkit-scrollbar-thumb:hover {
+        //   background: rgba(255, 255, 255, 0.3);
+        // }
+        &::-webkit-scrollbar-corner {
+          background: transparent;
+        }
+        &::-webkit-scrollbar:horizontal {
+          height: 5px;
+        }
+      }
     }
 
-  }
-  
-  @include b(table) {
-    // background-color: #2b3147;
-    table {
-      word-wrap: break-word;
-      word-break: break-all;
-      table-layout: fixed;
-      // width: auto;
+    @include e(tbody) {
+      box-shadow: 0 3px 20px 6px rgba(0, 0, 0, 0.2);
     }
-    &::-webkit-scrollbar {
-      width: 5px;
+    @include b(table) {
+      &::-webkit-scrollbar-thumb {
+        border-radius: 2.5px;
+        background: $--table-scrollbar-color;
+      }
     }
-    &::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    &::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 2.5px;
-    }
-    &::-webkit-scrollbar-thumb:hover {
-      background: rgba(255, 255, 255, 0.3);
-    }
-    &::-webkit-scrollbar-corner {
-      background: transparent;
-    }
-    &::-webkit-scrollbar:horizontal {
-      height: 5px;
-    }
-    table thead tr th:last-of-type {
-      padding-left: 32px;
+    @include e(header) {
+      background-color: $--table-header-background;
+      i {
+        color: $--table-header-icon-color;
+      }
     }
   }
 }
+
+// @include b(advance-table){
+//   @include e(wrapper){
+//     width: 100%;
+//   }
+//   @include e(tbody){
+//     overflow: hidden;
+//     border-radius: 12px;
+//     box-shadow: 0 3px 20px 6px rgba(0, 0, 0, 0.2);
+//   }
+//   @include e(td-text){
+//     &-center{
+//       text-align: center;
+//     }
+//     &-left{
+//       text-align: left;
+//     }
+//     &-right{
+//       text-align: right;
+//     }
+//     @include m(ellipsis){
+//       text-overflow: ellipsis;
+//       overflow: hidden;
+//       white-space: nowrap;
+//       &>*{
+//         text-overflow: ellipsis;
+//         overflow: hidden;
+//         white-space: nowrap;
+//       }
+//     }
+//   }
+//   @include e(no-data-tip){
+//     padding: 5px;
+//     text-align: center;
+//     width: 100%;
+//     display: table-cell;
+//   }
+//   @include e(pagination){
+//     margin-top: 27px;
+//     display: flex;
+//     justify-content: flex-end;
+//   }
+//   @include e(operation){
+//     display: flex;
+//     justify-content:space-between;
+//     &--right,&--left{
+//       display: flex;
+//     }
+
+//   }
+
+//   @include b(table) {
+//     // background-color: #2b3147;
+//     table {
+//       word-wrap: break-word;
+//       word-break: break-all;
+//       table-layout: fixed;
+//       // width: auto;
+//     }
+//     &::-webkit-scrollbar {
+//       width: 5px;
+//     }
+//     &::-webkit-scrollbar-track {
+//       background: transparent;
+//     }
+//     &::-webkit-scrollbar-thumb {
+//       background: rgba(255, 255, 255, 0.2);
+//       border-radius: 2.5px;
+//     }
+//     &::-webkit-scrollbar-thumb:hover {
+//       background: rgba(255, 255, 255, 0.3);
+//     }
+//     &::-webkit-scrollbar-corner {
+//       background: transparent;
+//     }
+//     &::-webkit-scrollbar:horizontal {
+//       height: 5px;
+//     }
+//     table thead tr th:last-of-type {
+//       padding-left: 32px;
+//     }
+//   }
+// }

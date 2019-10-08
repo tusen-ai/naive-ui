@@ -7,9 +7,13 @@
 @import "components/BasePicker.scss";
 @import "components/BaseCancelMark.scss";
 @import "components/Tag.scss";
+@import "components/Table.scss";
+@import 'components/AdvanceTable.scss';
+
 @import "components/Popover.scss";
 @import "components/Tooltip.scss";
 @import "components/Confirm.scss";
+@import "components/CheckBox.scss";
 @import "components/Switch.scss";
 @import "components/Message.scss";
 @import "components/LoadingBar.scss";
@@ -47,9 +51,12 @@
   @include setup-dark-base-picker;
   @include setup-dark-base-cancel-mark;
   @include setup-dark-tag;
+  @include setup-dark-table;
+  @include setup-dark-advance-table;
   @include setup-dark-popover;
   @include setup-dark-tooltip;
   @include setup-dark-confirm;
+  @include setup-dark-checkbox;
   @include setup-dark-switch;
   @include setup-dark-message;
   @include setup-dark-loading-bar;

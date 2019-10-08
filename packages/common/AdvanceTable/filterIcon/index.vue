@@ -2,9 +2,10 @@
   <span
     class="ts-funnel-container"
     :class="{'ts-funnel-container--active':status}"
+    @click.stop="()=>{}"
   >
     <n-icon
-      style="vertical-align: middle;color: #63e2b7;"
+      style="vertical-align: middle;"
       :class="{'ts-funnel-container--active':status}"
       type="ios-funnel"
       size="12"
@@ -48,7 +49,7 @@ export default {
   line-height: 16px;
 }
 .ts-funnel-container i {
-  opacity: 0.3;
+  opacity: 0.4;
 }
 .ts-funnel-container--active i{
   opacity: 1;
