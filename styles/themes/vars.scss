@@ -393,3 +393,30 @@ $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
     margin: 0!important;
   }
 }
+
+@mixin fade-up-width-expand-transition($block: "fade-up-width-expand", $duration: .2s) {
+  &.#{$namespace}-#{$block}-leave-active {
+    transition: opacity $duration $default-cubic-bezier, max-width $duration $fast-in-cubic-bezier, transform $duration $fast-in-cubic-bezier;
+  }
+  &.#{$namespace}-#{$block}-enter-active {
+    transition: opacity $duration $default-cubic-bezier, max-width $duration $fast-in-cubic-bezier, transform $duration $fast-in-cubic-bezier;
+  }
+  &.#{$namespace}-#{$block}-enter-to {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+  &.#{$namespace}-#{$block}-enter {
+    max-width: 0!important;
+    opacity: 0;
+    transform: translateY(60%);
+  }
+  &.#{$namespace}-#{$block}-leave {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  &.#{$namespace}-#{$block}-leave-to {
+    max-width: 0!important;
+    opacity: 0!important;
+    transform: translateY(60%);
+  }
+}

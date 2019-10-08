@@ -1,6 +1,96 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
+@keyframes n-number-fade-up-in {
+  from {
+    transform: translateY(60%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes n-number-fade-down-in {
+  from {
+    transform: translateY(-60%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes n-number-fade-up-out {
+  from {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-60%);
+    opacity: 0;
+  }
+}
+
+@keyframes n-number-fade-down-out {
+  from {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(60%);
+    opacity: 0;
+  }
+}
+
+@include b(scroll-numbers) {
+  white-space: nowrap;
+  @include b(scroll-number) {
+    @include fade-up-width-expand-transition($duration: 2s);
+    display: inline-block;
+    position: relative;
+    
+    @include e(old-number) {
+      display: inline-block;
+      opacity: 0;
+      @include m(top) {
+        position: absolute;
+        left: 0;
+        transform: translateY(-100%);
+      }
+      @include m(bottom) {
+        position: absolute;
+        left: 0;
+        transform: translateY(100%);
+      }
+      @include m(down-scroll) {
+        animation: n-number-fade-down-out 2s $fast-in-cubic-bezier;
+        animation-iteration-count: 1
+      }
+      @include m(up-scroll) {
+        animation: n-number-fade-up-out 2s $fast-in-cubic-bezier;
+        animation-iteration-count: 1
+      }
+    }
+    @include e(new-number) {
+      display: inline-block;
+      opacity: 1;
+      transform: translateY(0);
+      @include m(down-scroll) {
+        animation: n-number-fade-down-in 2s $fast-in-cubic-bezier;
+        animation-iteration-count: 1
+      }
+      @include m(up-scroll) {
+        animation: n-number-fade-up-in 2s $fast-in-cubic-bezier;
+        animation-iteration-count: 1
+      }
+    }
+  
+  }
+}
+
 @mixin badge-type-mixin ($type) {
   @include m($type + '-type') {
     @include b(badge-sup) {
@@ -31,6 +121,7 @@
 
 @include b(badge-sup) {
   @include fade-in-scale-up-transition(badge, left bottom);
+  overflow: hidden;
   color: white;
   user-select: none;
   position: absolute;

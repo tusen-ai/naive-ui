@@ -39,7 +39,7 @@ import backTopDemo from './documentation/components/backTopDemo'
 import dropdownDemo from './documentation/components/dropdownDemo'
 import scrollbarDebug from './debugComponents/scrollbarDebug'
 import scrollbarDebug2 from './debugComponents/scrollbarDebug2'
-import badgeDemo from './documentation/components/badgeDemo'
+import badge from './documentation/components/badge'
 import stepsDemo from './documentation/components/stepsDemo'
 import notificationDemo from './documentation/components/notificationDemo'
 import nimbusConfirmCardDemo from './documentation/components/nimbusConfirmCardDemo'
@@ -155,7 +155,7 @@ const routes = [
       { path: '/n-router-debug', component: routerDebug },
       { path: '/n-modal-debug', component: modalDebug },
       { path: '/n-scrollbar-debug', component: scrollbarDebug },
-      { path: '/n-badge', component: badgeDemo },
+      { path: '/n-badge', component: badge },
       { path: '/n-steps', component: stepsDemo },
       { path: '/n-collapse', component: collapseDemo },
       { path: '/n-progress', component: progressDemo },

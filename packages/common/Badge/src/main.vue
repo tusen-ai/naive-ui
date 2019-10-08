@@ -12,15 +12,23 @@
         v-if="(value !== null || dot) && !(hideZero && value === 0)"
         class="n-badge-sup"
       >
-        {{ dot ? null : (max === null || typeof value === 'string') ? value : (value > max ? `${max}+` : value) }}
+        <scroll-numbers
+          v-if="!dot"
+          :value="value"
+        />
       </sup>
     </transition>
   </div>
 </template>
 
 <script>
+import ScrollNumbers from './ScrollNumbers'
+
 export default {
   name: 'NBadge',
+  components: {
+    ScrollNumbers
+  },
   props: {
     value: {
       type: [String, Number],
@@ -43,6 +51,11 @@ export default {
     hideZero: {
       type: Boolean,
       default: false
+    }
+  },
+  computed: {
+    number () {
+      return (this.max === null || typeof value === 'string') ? this.value : (this.value > this.max ? `${this.max}+` : this.value)
     }
   }
 }
