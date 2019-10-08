@@ -1,11 +1,11 @@
 <template>
   <div
-    class="n-message__cell"
+    class="n-message"
     :class="{
-      [`n-message__cell--${type}`]: true
+      [`n-message--${type}`]: true
     }"
   >
-    <div class="n-message-cell__icon">
+    <div class="n-message__icon">
       <n-icon
         v-if="icon"
         size="20"
@@ -32,7 +32,7 @@
         type="md-alert"
       />
     </div>
-    <div class="n-message-cell__content">
+    <div class="n-message__content">
       {{ content }}
     </div>
   </div>

@@ -11,6 +11,7 @@
 @import "components/Tooltip.scss";
 @import "components/Confirm.scss";
 @import "components/Switch.scss";
+@import "components/Message.scss";
 
 @mixin setup-dark-theme () {
   @include setup-dark-colors();
@@ -49,4 +50,5 @@
   @include setup-dark-tooltip;
   @include setup-dark-confirm;
   @include setup-dark-switch;
+  @include setup-dark-message;
 }

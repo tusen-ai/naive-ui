@@ -1,40 +1,35 @@
 
-import Vue from 'vue'
-import NMessageCell from './MessageCell'
+import Message from './Message'
+
+function setTheme (messageContainer) {
+  const themeClasses = Array.from(messageContainer.classList).filter(c => c.endsWith('-theme'))
+  themeClasses.forEach(c => messageContainer.classList.remove(c))
+  if (this.theme) messageContainer.classList.add(`n-${this.theme}-theme`)
+}
 
 function attachMessageContainer () {
-  let messageContainer = document.querySelector('.n-message.n-message__container')
+  let messageContainer = document.querySelector('.n-message-container')
   if (!messageContainer) {
     messageContainer = document.createElement('div')
-    messageContainer.classList.add('n-message', 'n-message__container')
-    messageContainer.style = `
-          z-index: 6000;
-          position: fixed;
-          left: 0;
-          right: 0;
-          top: 20px;
-          height: 0;
-          overflow: visible;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        `
+    messageContainer.classList.add('n-message-container')
+    messageContainer.style = `z-index: ${this.options.zIndex}; top: ${this.options.top}px;`
     document.body.appendChild(messageContainer)
   }
+  setTheme.call(this, messageContainer)
   return messageContainer
 }
 
 function registerMessageEl (container, el, option) {
-  el.classList.add('is-going-to-emerge')
+  el.classList.add('n-message--enter')
   container.appendChild(el)
   el.getBoundingClientRect()
-  el.classList.remove('is-going-to-emerge')
+  el.classList.remove('n-message--enter')
   setTimeout(function () {
     setTimeout(function () {
       setTimeout(function () {
         container.removeChild(el)
       }, option.vanishTransitionTimeout)
-      el.classList.add('is-vanishing')
+      el.classList.add('n-message--leave')
     }, option.duration)
   }, option.emergeTransitionTimeout)
 }
@@ -66,9 +61,15 @@ function mixinOption (option) {
 }
 
 const NMessage = {
+  Vue: null,
+  options: {
+    zIndex: 6000,
+    top: 20
+  },
+  attachMessageContainer,
   notice (content, option) {
-    const messageContainer = attachMessageContainer()
-    const messageCell = (new Vue({ ...NMessageCell, propsData: { option, content } })).$mount()
+    const messageContainer = this.attachMessageContainer()
+    const messageCell = (new this.Vue({ ...Message, propsData: { option, content } })).$mount()
     registerMessageEl(messageContainer, messageCell.$el, mixinOption(option))
   },
   info (content, option) {

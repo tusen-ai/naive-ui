@@ -1,7 +1,9 @@
 import Message from './src/main.js'
+import install from '../../utils/installThemeableComponent'
 
 Message.install = function (Vue) {
-  Vue.prototype.$NMessage = Message
+  Message.Vue = Vue
+  install(Vue, Message, '$NMessage')
 }
 
 export default Message
