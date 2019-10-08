@@ -16,6 +16,7 @@
 @import "components/CheckBox.scss";
 @import "components/Switch.scss";
 @import "components/Message.scss";
+@import "components/LoadingBar.scss";
 
 @mixin setup-light-theme () {
   @include setup-light-colors();
@@ -54,4 +55,5 @@
   @include setup-light-checkbox;
   @include setup-light-switch;
   @include setup-light-message;
+  @include setup-light-loading-bar;
 }

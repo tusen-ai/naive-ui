@@ -58,7 +58,7 @@ import advanceTableDemos from './documentation/components/advanceTableDemos'
 import transferDemo from './documentation/components/transferDemo'
 import spinDemo from './documentation/components/spinDemo'
 import drawerDemo from './documentation/components/drawerDemo'
-import loadingBarDemo from './documentation/components/loadingBarDemo'
+import loadingBar from './documentation/components/loadingBar'
 import timeDemo from './documentation/components/timeDemo'
 import sliderDemo from './documentation/components/sliderDemo'
 import treeDemo from './documentation/components/treeDemo'
@@ -174,7 +174,7 @@ const routes = [
       { path: '/n-transfer', component: transferDemo },
       { path: '/n-spin', component: spinDemo },
       { path: '/n-drawer', component: drawerDemo },
-      { path: '/n-loading-bar', component: loadingBarDemo },
+      { path: '/n-loading-bar', component: loadingBar },
       { path: '/n-time', component: timeDemo },
       { path: '/n-slider', component: sliderDemo },
       { path: '/n-tree', component: treeDemo },
@@ -192,6 +192,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach(function (to, from, next) {
+  Vue.prototype.$NLoadingBar.theme = to.params.theme
   Vue.prototype.$NLoadingBar.start()
   next()
 })

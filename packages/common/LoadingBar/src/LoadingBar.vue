@@ -9,6 +9,9 @@
     <div
       v-show="!enter || status === 'starting'"
       class="n-loading-bar-container"
+      :class="{
+        [`n-${theme}-theme`]: theme
+      }"
     >
       <div
         ref="loadingBar"
@@ -33,7 +36,8 @@ export default {
       progress: 0,
       status: null,
       finishCallback: null,
-      enter: false
+      enter: false,
+      theme: null
     }
   },
   methods: {
