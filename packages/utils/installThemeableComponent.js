@@ -18,7 +18,9 @@ function install (Vue, Component, name) {
     return Component
   }, {
     apply (target, thisArg, argumentsList) {
-      Component.theme = getTheme(thisArg)
+      if (thisArg instanceof Vue) {
+        Component.theme = getTheme(thisArg)
+      }
       return target.bind(thisArg)(...argumentsList)
     }
   })

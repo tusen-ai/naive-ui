@@ -1,0 +1,4 @@
+# Loading Bar
+```demo
+basic
+```

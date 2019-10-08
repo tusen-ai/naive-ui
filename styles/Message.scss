@@ -1,5 +1,4 @@
 @import './mixins/mixins.scss';
-@import './themes/vars.scss';
 
 @mixin message-type-mixin ($type) {
   @include m($type) {
@@ -39,7 +38,6 @@
         font-weight: 700;
         overflow: hidden;
       }
-      // box-shadow:0px 2px 20px 0px rgba(255,255,255,0.22);
       color: $--message-text-color;
       @include once {
         @include e(content) {
@@ -58,44 +56,6 @@
           }
         }
       }
-      
-     
-      // &.n-message--info {
-      //   background-color: rgba(56, 137, 197, 1);
-      //   box-shadow:0px 2px 20px 0px rgba(56, 137, 197, 0.5);
-      //   .n-message__icon {
-      //     i::before {
-      //       color: rgba(129, 202, 255, 1);
-      //     }
-      //   }
-      // }
-      // &.n-message--success {
-      //   background-color: rgb(42, 148, 125);
-      //   box-shadow:0px 2px 20px 0px rgba(42, 148, 125, .5);
-      //   .n-message__icon {
-      //     i::before {
-      //       color: #63E2B7FF
-      //     }
-      //   }
-      // }
-      // &.n-message--error {
-      //   background-color: rgb(208, 58, 82);
-      //   box-shadow:0px 2px 20px 0px rgba(208, 58, 82, 0.6);
-      //   .n-message__icon {
-      //     i::before {
-      //       color: #FF92A4FF
-      //     }
-      //   }
-      // }
-      // &.n-message--warning {
-      //   background-color: rgba(255, 138, 0, 1);
-      //   box-shadow:0px 2px 20px 0px rgba(255, 138, 0, 0.4);
-      //   .n-message__icon {
-      //     i::before {
-      //       color: rgba(255, 255, 255, .65);
-      //     }
-      //   }
-      // }
       @include once {
         @include m(enter) {
           opacity: 0;

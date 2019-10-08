@@ -2,6 +2,7 @@ import NLoadingBar from './LoadingBar.vue'
 
 export default {
   Vue: null,
+  theme: null,
   loadingBarInstance: null,
   finishCallback () {
     if (this.loadingBarInstance) {
@@ -11,39 +12,35 @@ export default {
     }
   },
   start () {
-    if (this.loadingBarInstance) {
-      this.loadingBarInstance.start()
-    } else {
+    if (!this.loadingBarInstance) {
       this.loadingBarInstance = new this.Vue(NLoadingBar).$mount()
       document.body.appendChild(this.loadingBarInstance.$el)
-      this.loadingBarInstance.start()
     }
+    this.loadingBarInstance.theme = this.theme
+    this.loadingBarInstance.start()
   },
   error () {
-    if (this.loadingBarInstance) {
-      this.loadingBarInstance.error(this.finishCallback.bind(this))
-    } else {
+    if (!this.loadingBarInstance) {
       this.loadingBarInstance = new this.Vue(NLoadingBar).$mount()
       document.body.appendChild(this.loadingBarInstance.$el)
-      this.loadingBarInstance.error(this.finishCallback.bind(this))
     }
+    this.loadingBarInstance.theme = this.theme
+    this.loadingBarInstance.error(this.finishCallback.bind(this))
   },
   finish () {
-    if (this.loadingBarInstance) {
-      this.loadingBarInstance.finish(this.finishCallback.bind(this))
-    } else {
+    if (!this.loadingBarInstance) {
       this.loadingBarInstance = new this.Vue(NLoadingBar).$mount()
       document.body.appendChild(this.loadingBarInstance.$el)
-      this.loadingBarInstance.finish(this.finishCallback.bind(this))
     }
+    this.loadingBarInstance.theme = this.theme
+    this.loadingBarInstance.finish(this.finishCallback.bind(this))
   },
   update (percent) {
-    if (this.loadingBarInstance) {
-      this.loadingBarInstance.update(percent)
-    } else {
+    if (!this.loadingBarInstance) {
       this.loadingBarInstance = new this.Vue(NLoadingBar).$mount()
       document.body.appendChild(this.loadingBarInstance.$el)
-      this.loadingBarInstance.update(percent)
     }
+    this.loadingBarInstance.theme = this.theme
+    this.loadingBarInstance.update(percent)
   }
 }
