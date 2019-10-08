@@ -1,88 +1,121 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
-@include b(message) {
-  &.n-message__container {
-    .n-message__cell {
+@mixin message-type-mixin ($type) {
+  @include m($type) {
+    background-color: map-get($map: $--message-background-color, $key: $type);
+    box-shadow: map-get($map: $--message-box-shadow, $key: $type);
+    @include e(icon) {
+      i::before {
+        color: $--message-icon-color;
+      }
+    }
+  }
+}
+
+@include themes-mixin {
+  @include b(message-container) {
+    @include once {
+      position: fixed;
+      left: 0;
+      right: 0;
+      height: 0;
+      overflow: visible;
       display: flex;
-      transition: opacity .3s $default-cubic-bezier, transform .3s $default-cubic-bezier,  max-height .3s $default-cubic-bezier, margin-bottom .3s $default-cubic-bezier;
-      max-height: 40px;
-      opacity: 1;
-      margin-bottom: 12px;
-      padding: 0 40px;
-      height: 40px;
-      border-radius: 20px;
-      background-color: red;
-      flex-shrink: 0;
-      font-weight: 700;
-      box-shadow:0px 2px 20px 0px rgba(255,255,255,0.22);
-      color: #ffffff;
-      overflow: hidden;
-      .n-message-cell__content {
-        display: inline-block;
+      flex-direction: column;
+      align-items: center;
+    }
+    @include b(message) {
+      @include once {
+        display: flex;
+        transition: opacity .3s $default-cubic-bezier, transform .3s $default-cubic-bezier,  max-height .3s $default-cubic-bezier, margin-bottom .3s $default-cubic-bezier;
+        max-height: 40px;
+        opacity: 1;
+        margin-bottom: 12px;
+        padding: 0 40px;
         height: 40px;
-        line-height: 40px;
+        border-radius: 20px;
+        flex-shrink: 0;
+        font-weight: 700;
+        overflow: hidden;
       }
-      .n-message-cell__icon {
-        margin-right: 10px;
-        display: inline-flex;
-        height: 40px;
-        line-height: 40px;
-        align-items: center;
-        i::before {
-          font-size: 20px;
+      // box-shadow:0px 2px 20px 0px rgba(255,255,255,0.22);
+      color: $--message-text-color;
+      @include once {
+        @include e(content) {
+          display: inline-block;
+          height: 40px;
+          line-height: 40px;
         }
-      }
-      &.n-message__cell--info {
-        background-color: rgba(56, 137, 197, 1);
-        box-shadow:0px 2px 20px 0px rgba(56, 137, 197, 0.5);
-        .n-message-cell__icon {
+        @include e(icon) {
+          margin-right: 10px;
+          display: inline-flex;
+          height: 40px;
+          line-height: 40px;
+          align-items: center;
           i::before {
-            color: rgba(129, 202, 255, 1);
+            font-size: 20px;
           }
         }
       }
-      &.n-message__cell--success {
-        background-color: rgb(42, 148, 125);
-        box-shadow:0px 2px 20px 0px rgba(42, 148, 125, .5);
-        .n-message-cell__icon {
-          i::before {
-            color: #63E2B7FF
-          }
+      
+     
+      // &.n-message--info {
+      //   background-color: rgba(56, 137, 197, 1);
+      //   box-shadow:0px 2px 20px 0px rgba(56, 137, 197, 0.5);
+      //   .n-message__icon {
+      //     i::before {
+      //       color: rgba(129, 202, 255, 1);
+      //     }
+      //   }
+      // }
+      // &.n-message--success {
+      //   background-color: rgb(42, 148, 125);
+      //   box-shadow:0px 2px 20px 0px rgba(42, 148, 125, .5);
+      //   .n-message__icon {
+      //     i::before {
+      //       color: #63E2B7FF
+      //     }
+      //   }
+      // }
+      // &.n-message--error {
+      //   background-color: rgb(208, 58, 82);
+      //   box-shadow:0px 2px 20px 0px rgba(208, 58, 82, 0.6);
+      //   .n-message__icon {
+      //     i::before {
+      //       color: #FF92A4FF
+      //     }
+      //   }
+      // }
+      // &.n-message--warning {
+      //   background-color: rgba(255, 138, 0, 1);
+      //   box-shadow:0px 2px 20px 0px rgba(255, 138, 0, 0.4);
+      //   .n-message__icon {
+      //     i::before {
+      //       color: rgba(255, 255, 255, .65);
+      //     }
+      //   }
+      // }
+      @include once {
+        @include m(enter) {
+          opacity: 0;
+          transform: translateY(-12px) scale(.5);
+          transform-origin: top center;
+          max-height: 0px;
+          margin-bottom: 0;
+        }
+        @include m(leave) {
+          opacity: 0;
+          transform-origin: top center;
+          transform: translateY(-12px) scale(.5);
+          max-height: 0px;
+          margin-bottom: 0;
         }
       }
-      &.n-message__cell--error {
-        background-color: rgb(208, 58, 82);
-        box-shadow:0px 2px 20px 0px rgba(208, 58, 82, 0.6);
-        .n-message-cell__icon {
-          i::before {
-            color: #FF92A4FF
-          }
-        }
-      }
-      &.n-message__cell--warning {
-        background-color: rgba(255, 138, 0, 1);
-        box-shadow:0px 2px 20px 0px rgba(255, 138, 0, 0.4);
-        .n-message-cell__icon {
-          i::before {
-            color: rgba(255, 255, 255, .65);
-          }
-        }
-      }
-      &.is-going-to-emerge {
-        opacity: 0;
-        transform: translateY(-12px) scale(.5);
-        transform-origin: top center;
-        max-height: 0px;
-        margin-bottom: 0;
-      }
-      &.is-vanishing {
-        opacity: 0;
-        transform-origin: top center;
-        transform: translateY(-12px) scale(.5);
-        max-height: 0px;
-        margin-bottom: 0;
-      }
+      @include message-type-mixin('info');
+      @include message-type-mixin('success');
+      @include message-type-mixin('error');
+      @include message-type-mixin('warning');
     }
   }
 }

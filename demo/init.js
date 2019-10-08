@@ -23,7 +23,7 @@ import cascaderDemo from './documentation/components/cascaderDemo'
 import inputKeyValuePairsDemo from './documentation/components/inputKeyValuePairsDemo'
 import modal from './documentation/components/modal'
 import nimbusFormCardDemo from './documentation/components/nimbusFormCardDemo'
-import messageDemo from './documentation/components/messageDemo'
+import message from './documentation/components/message'
 import tooltip from './documentation/components/tooltip'
 import popover from './documentation/components/popover'
 import alertDemo from './documentation/components/alertDemo'
@@ -137,7 +137,7 @@ const routes = [
       { path: '/n-InputKeyValuePairs', component: inputKeyValuePairsDemo },
       { path: '/n-modal', component: modal },
       { path: '/n-nimbus-form-card', component: nimbusFormCardDemo },
-      { path: '/n-message', component: messageDemo },
+      { path: '/n-message', component: message },
       { path: '/n-tooltip', component: tooltip },
       { path: '/n-popover', component: popover },
       { path: '/n-notification', component: notificationDemo },

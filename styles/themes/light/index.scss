@@ -15,6 +15,7 @@
 @import "components/Confirm.scss";
 @import "components/CheckBox.scss";
 @import "components/Switch.scss";
+@import "components/Message.scss";
 
 @mixin setup-light-theme () {
   @include setup-light-colors();
@@ -52,4 +53,5 @@
   @include setup-light-confirm;
   @include setup-light-checkbox;
   @include setup-light-switch;
+  @include setup-light-message;
 }
