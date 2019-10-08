@@ -1,27 +1,38 @@
 <template>
   <transition
     name="n-fade-up-width-expand"
-    appear
+    :appear="appeared"
+    @enter="handleEnter"
   >
     <span
+      ref="numbers"
       class="n-scroll-number"
       :style="{
-        maxWidth: styleMaxWidth
+        maxWidth: styleMaxWidth,
+        width: styleMaxWidth
       }"
     >
       <span
         v-if="oldNumber !== null"
-        class="n-scroll-number__old-number n-scroll-number__old-number--top"
+        class="n-scroll-number-old-number n-scroll-number-old-number--top"
         :class="oldNumberScrollAnimationClass"
       >{{ oldNumber }}</span>
       <span
-        ref="numberWrapper"
-        class="n-scroll-number__new-number"
+        class="n-scroll-number-current-number"
         :class="newNumberScrollAnimationClass"
-      >{{ newNumber }}</span>
+      >
+        <span
+          ref="numberWrapper"
+          class="n-scroll-number-current-number__inner"
+          :class="{
+            'n-scroll-number-current-number__inner--slide-in':
+              true
+          }"
+        >{{ newNumber }}</span>
+      </span>
       <span
         v-if="oldNumber !== null"
-        class="n-scroll-number__old-number n-scroll-number__old-number--bottom"
+        class="n-scroll-number-old-number n-scroll-number-old-number--bottom"
         :class="oldNumberScrollAnimationClass"
       >{{ oldNumber }}</span>
     </span>
@@ -32,7 +43,7 @@
 export default {
   props: {
     value: {
-      type: Number,
+      type: [Number, String],
       required: true
     },
     oldOriginalNumber: {
@@ -42,6 +53,10 @@ export default {
     newOriginalNumber: {
       type: Number,
       default: null
+    },
+    appeared: {
+      type: Boolean,
+      required: true
     }
   },
   data () {
@@ -55,13 +70,13 @@ export default {
   },
   computed: {
     newNumberScrollAnimationClass () {
-      return this.active ? `n-scroll-number__new-number--${this.scrollAnimationDirection}-scroll` : null
+      return this.active ? `n-scroll-number-current-number--${this.scrollAnimationDirection}-scroll` : null
     },
     oldNumberScrollAnimationClass () {
-      return this.active ? `n-scroll-number__old-number--${this.scrollAnimationDirection}-scroll` : null
+      return this.active ? `n-scroll-number-old-number--${this.scrollAnimationDirection}-scroll` : null
     },
     styleMaxWidth () {
-      return this.maxWidth ? `${this.maxWidth + 1}px` : null
+      return this.maxWidth ? `${this.maxWidth}px` : null
     }
   },
   watch: {
@@ -73,9 +88,6 @@ export default {
   },
   mounted () {
     this.maxWidth = this.$refs.numberWrapper.offsetWidth
-  },
-  beforeDestroy () {
-    this.scrollDown()
   },
   updated () {
     this.maxWidth = this.$refs.numberWrapper.offsetWidth
@@ -102,7 +114,7 @@ export default {
         this.active = true
       })
     },
-    scrollDown (sync) {
+    scrollDown () {
       this.scrollAnimationDirection = 'down'
       this.active = false
       this.$nextTick().then(() => {

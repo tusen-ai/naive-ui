@@ -45,49 +45,75 @@
   }
 }
 
+@keyframes n-number-slide-in {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes n-number-slide-out {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
 @include b(scroll-numbers) {
   white-space: nowrap;
   @include b(scroll-number) {
-    @include fade-up-width-expand-transition($duration: 2s);
+    @include fade-up-width-expand-transition($duration: .2s);
     display: inline-block;
     position: relative;
-    
-    @include e(old-number) {
+    height: 18px;
+    @include b(scroll-number-old-number) {
       display: inline-block;
       opacity: 0;
+      position: absolute;
+      left: 0;
       @include m(top) {
-        position: absolute;
-        left: 0;
         transform: translateY(-100%);
       }
       @include m(bottom) {
-        position: absolute;
-        left: 0;
         transform: translateY(100%);
       }
       @include m(down-scroll) {
-        animation: n-number-fade-down-out 2s $fast-in-cubic-bezier;
+        animation: n-number-fade-down-out .2s $fast-in-cubic-bezier;
         animation-iteration-count: 1
       }
       @include m(up-scroll) {
-        animation: n-number-fade-up-out 2s $fast-in-cubic-bezier;
+        animation: n-number-fade-up-out .2s $fast-in-cubic-bezier;
         animation-iteration-count: 1
       }
     }
-    @include e(new-number) {
+    @include b(scroll-number-current-number) {
       display: inline-block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
       opacity: 1;
       transform: translateY(0);
       @include m(down-scroll) {
-        animation: n-number-fade-down-in 2s $fast-in-cubic-bezier;
+        animation: n-number-fade-down-in .2s $fast-in-cubic-bezier;
         animation-iteration-count: 1
       }
       @include m(up-scroll) {
-        animation: n-number-fade-up-in 2s $fast-in-cubic-bezier;
+        animation: n-number-fade-up-in .2s $fast-in-cubic-bezier;
         animation-iteration-count: 1
       }
+      @include e(inner) {
+        display: inline-block;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
     }
-  
   }
 }
 
@@ -113,10 +139,10 @@
       bottom: calc(100% - 4px);
     }
   }
-  @include badge-type-mixin('info');
-  @include badge-type-mixin('success');
-  @include badge-type-mixin('warning');
-  @include badge-type-mixin('error');
+  // @include badge-type-mixin('info');
+  // @include badge-type-mixin('success');
+  // @include badge-type-mixin('warning');
+  // @include badge-type-mixin('error');
 }
 
 @include b(badge-sup) {
@@ -128,7 +154,7 @@
   height: 18px;
   line-height: 18px;
   border-radius: 9px;
-  background-color: rgba(186, 45, 67, 1);
+  background-color: rgb(232, 0, 0);// rgba(186, 45, 67, 1);
   padding: 0 6px;
   text-align: center;
   font-size: 12px;

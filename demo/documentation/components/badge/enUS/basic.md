@@ -1,9 +1,9 @@
 # Basic
 ```html
-<n-badge hide-zero :value="value" :max="10">
+<n-badge hide-zero :value="value" :max="15">
   <n-icon type="ios-alarm" :size="24" />
 </n-badge>
-<n-badge dot>
+<n-badge dot :show="value > 0">
   <n-icon type="ios-alarm" :size="24" />
 </n-badge>
 <n-badge :value="value" type="error">
@@ -34,6 +34,6 @@ export default {
 ```
 ```css
 .n-badge {
-  margin: 0 12px 8px 0;
+  margin: 0 24px 8px 0;
 }
 ```

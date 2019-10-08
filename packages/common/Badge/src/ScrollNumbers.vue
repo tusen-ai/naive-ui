@@ -4,8 +4,14 @@
     class="n-scroll-numbers"
   >
     <scroll-number
+      v-if="max && max < value"
+      :appeared="appeared"
+      :value="'+'"
+    />
+    <scroll-number
       v-for="(number, i) in numbers"
       :key="numbers.length - i - 1"
+      :appeared="appeared"
       :old-original-number="oldValue"
       :new-original-number="newValue"
       :value="number"
@@ -30,6 +36,14 @@ export default {
     value: {
       type: [Number, String],
       default: 0
+    },
+    max: {
+      type: Number,
+      default: null
+    },
+    appeared: {
+      type: Boolean,
+      default: null
     }
   },
   data () {
@@ -49,6 +63,9 @@ export default {
       if (this.value < 1) return [0]
       const numbers = []
       let value = this.value
+      if (this.max) {
+        value = Math.min(this.max, value)
+      }
       while (value >= 1) {
         numbers.push(value % 10)
         value /= 10

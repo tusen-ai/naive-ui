@@ -7,13 +7,19 @@
     }"
   >
     <slot />
-    <transition name="n-badge--transition">
+    <transition
+      name="n-badge--transition"
+      @after-enter="handleAfterEnter"
+      @after-leave="handleAfterLeave"
+    >
       <sup
-        v-if="(value !== null || dot) && !(hideZero && value === 0)"
+        v-if="showBadge"
         class="n-badge-sup"
       >
         <scroll-numbers
           v-if="!dot"
+          :appeared="appeared"
+          :max="max"
           :value="value"
         />
       </sup>
@@ -48,14 +54,37 @@ export default {
       },
       default: null
     },
+    show: {
+      type: Boolean,
+      default: true
+    },
     hideZero: {
       type: Boolean,
       default: false
     }
   },
+  data () {
+    return {
+      appeared: false
+    }
+  },
   computed: {
     number () {
       return (this.max === null || typeof value === 'string') ? this.value : (this.value > this.max ? `${this.max}+` : this.value)
+    },
+    showBadge () {
+      return this.show && (this.value !== null || this.dot) && !(this.hideZero && this.value <= 0)
+    }
+  },
+  mounted () {
+    if (this.showBadge) this.appeared = true
+  },
+  methods: {
+    handleAfterEnter () {
+      this.appeared = true
+    },
+    handleAfterLeave () {
+      this.appeared = false
     }
   }
 }
