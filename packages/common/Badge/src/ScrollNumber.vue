@@ -1,8 +1,7 @@
 <template>
   <transition
-    name="n-fade-up-width-expand"
+    :name="isNotNumber ? 'n-fade-in-width-expand' : 'n-fade-up-width-expand'"
     :appear="appeared"
-    @enter="handleEnter"
   >
     <span
       ref="numbers"
@@ -25,8 +24,8 @@
           ref="numberWrapper"
           class="n-scroll-number-current-number__inner"
           :class="{
-            'n-scroll-number-current-number__inner--slide-in':
-              true
+            'n-scroll-number-current-number__inner--not-number':
+              isNotNumber
           }"
         >{{ newNumber }}</span>
       </span>
@@ -77,6 +76,9 @@ export default {
     },
     styleMaxWidth () {
       return this.maxWidth ? `${this.maxWidth}px` : null
+    },
+    isNotNumber () {
+      return !(typeof this.value === 'number')
     }
   },
   watch: {

@@ -396,10 +396,10 @@ $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
 
 @mixin fade-up-width-expand-transition($block: "fade-up-width-expand", $duration: .2s) {
   &.#{$namespace}-#{$block}-leave-active {
-    transition: opacity $duration $default-cubic-bezier, max-width $duration $fast-in-cubic-bezier, transform $duration $fast-in-cubic-bezier;
+    transition: opacity $duration $fast-in-cubic-bezier, max-width $duration $fast-in-cubic-bezier, transform $duration $fast-in-cubic-bezier;
   }
   &.#{$namespace}-#{$block}-enter-active {
-    transition: opacity $duration $default-cubic-bezier, max-width $duration $fast-in-cubic-bezier, transform $duration $fast-in-cubic-bezier;
+    transition: opacity $duration $fast-in-cubic-bezier, max-width $duration $fast-in-cubic-bezier, transform $duration $fast-in-cubic-bezier;
   }
   &.#{$namespace}-#{$block}-enter-to {
     opacity: 1;

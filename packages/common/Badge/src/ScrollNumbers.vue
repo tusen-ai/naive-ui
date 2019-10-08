@@ -4,17 +4,17 @@
     class="n-scroll-numbers"
   >
     <scroll-number
-      v-if="max && max < value"
-      :appeared="appeared"
-      :value="'+'"
-    />
-    <scroll-number
       v-for="(number, i) in numbers"
       :key="numbers.length - i - 1"
       :appeared="appeared"
       :old-original-number="oldValue"
       :new-original-number="newValue"
       :value="number"
+    />
+    <scroll-number
+      v-if="max && max < value"
+      :appeared="appeared"
+      :value="'+'"
     />
   </span>
   <span

@@ -45,28 +45,29 @@
   }
 }
 
-@keyframes n-number-slide-in {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
+// @keyframes n-number-slide-in {
+//   from {
+//     transform: translateX(-100%);
+//   }
+//   to {
+//     transform: translateX(0);
+//   }
+// }
 
-@keyframes n-number-slide-out {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-}
+// @keyframes n-number-slide-out {
+//   from {
+//     transform: translateX(0);
+//   }
+//   to {
+//     transform: translateX(-100%);
+//   }
+// }
 
 @include b(scroll-numbers) {
   white-space: nowrap;
   @include b(scroll-number) {
     @include fade-up-width-expand-transition($duration: .2s);
+    @include fade-in-width-expand-transition($duration: .2s, $delay: 0s);
     display: inline-block;
     position: relative;
     height: 18px;
@@ -112,6 +113,10 @@
         position: absolute;
         right: 0;
         top: 0;
+        @include m(not-number) {
+          right: unset;
+          left: 0;
+        }
       }
     }
   }
