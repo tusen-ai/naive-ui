@@ -18,6 +18,7 @@
 @import "components/Message.scss";
 @import "components/LoadingBar.scss";
 @import "components/Badge.scss";
+@import "components/Dropdown.scss";
 
 @mixin setup-dark-theme () {
   @include setup-dark-colors();
@@ -62,4 +63,5 @@
   @include setup-dark-message;
   @include setup-dark-loading-bar;
   @include setup-dark-badge;
+  @include setup-dark-dropdown;
 }

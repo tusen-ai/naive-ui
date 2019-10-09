@@ -1,0 +1,5 @@
+@mixin setup-light-dropdown {
+  $--dropdown-menu-bg-color: #fff !global;
+  $--dropdown-item-hover-bg-color: #E8E8E8 !global;
+  $--dropdown-item-hover-font-color: $primary-6 !global;
+}

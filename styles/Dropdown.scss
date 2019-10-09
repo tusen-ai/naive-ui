@@ -1,75 +1,103 @@
-@import './mixins/mixins.scss';
-@import './themes/vars.scss';
-
-@include b(dropdown) {
-  .n-dropdown__activator {
-    cursor: pointer;
-  }
-}
-
-@include b(dropdown-menu) {
-  transform-origin: inherit;
-  position: relative;
-  background-color: rgba(75, 81, 106, 1);
-  margin: 6px 0;
-  border-radius: 6px;
-  font-size: 14px;
-  box-shadow:0px 2px 20px 0px rgba(0,0,0,0.16);
-  .n-dropdown-menu-light-bar-container {
-    @include fade-in-transition(dropdown-menu-light-bar);
-    overflow: hidden;
-    position: absolute;
-    border-radius: 6px;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    .n-dropdown-menu-light-bar {
-      position: absolute;
-      width: 100%;
-      background-color: $select-item-background-color--active;
-      left: 0;
-      height: 28px;
-      transition: top .15s $default-cubic-bezier;
+@import "./mixins/mixins.scss";
+@import "./themes/vars.scss";
+@include themes-mixin {
+  @include b(popover-content) {
+    @include b(dropdown) {
+      @include once {
+        .n-dropdown__activator {
+          cursor: pointer;
+        }
+      }
     }
-  }
-}
 
-@include b(dropdown-submenu) {
-  position: relative;
-  .n-dropdown-submenu__activator {
-    cursor: pointer;
-  }
-  .n-dropdown-submenu__menu {
-    @include fade-in-scale-up-transition(dropdown-submenu, left top, .2s);
-    position: absolute;
-    left: 100%;
-    top: 0;
-    background-color: rgba(75, 81, 106, 1);
-    border-radius: 6px;
-    font-size: 14px;
-    box-shadow:0px 2px 20px 0px rgba(0,0,0,0.16);
-  }
-}
+    @include b(dropdown-menu) {
+      @include once {
+        transform-origin: inherit;
+        position: relative;
+        margin: 6px 0;
+        border-radius: 6px;
+        font-size: 14px;
+        // box-shadow:0px 2px 20px 0px rgba(0,0,0,0.16);
+        .n-dropdown-menu-light-bar-container {
+          @include fade-in-transition(dropdown-menu-light-bar);
+          overflow: hidden;
+          position: absolute;
+          border-radius: 6px;
+          top: 0;
+          right: 0;
+          left: 0;
+          bottom: 0;
+          .n-dropdown-menu-light-bar {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            height: 28px;
+            transition: top 0.15s $default-cubic-bezier;
+          }
+        }
+      }
+    }
+    @include b(dropdown-submenu) {
+      @include once {
+        position: relative;
+        .n-dropdown-submenu__activator {
+          cursor: pointer;
+        }
+        .n-dropdown-submenu__menu {
+          @include fade-in-scale-up-transition(
+            dropdown-submenu,
+            left top,
+            0.2s
+          );
+          position: absolute;
+          left: 100%;
+          top: 0;
+          border-radius: 6px;
+          font-size: 14px;
+          box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.16);
+        }
+      }
+    }
 
-@include b(dropdown-item) {
-  position: relative;
-  height: 28px;
-  line-height: 28px;
-  white-space: nowrap;
-  padding: 0 12px;
-  font-size: 14px;
-  cursor: pointer;
-  &.n-dropdown-item--with-arrow {
-    padding: 0 20px 0 12px;
-  }
-  .n-dropdown-item__arrow {
-    position: absolute;
-    right: 4px;
-    top: 50%;
-    transform: translateY(-50%);
-    .n-icon {
-      vertical-align: middle;
+    @include b(dropdown-item) {
+      @include once {
+        position: relative;
+        height: 28px;
+        line-height: 28px;
+        white-space: nowrap;
+        padding: 0 12px;
+        font-size: 14px;
+        cursor: pointer;
+        &.n-dropdown-item--with-arrow {
+          padding: 0 20px 0 12px;
+        }
+        .n-dropdown-item__arrow {
+          position: absolute;
+          right: 4px;
+          top: 50%;
+          transform: translateY(-50%);
+          .n-icon {
+            vertical-align: middle;
+          }
+        }
+      }
+    }
+    @include b(dropdown-menu) {
+      background-color: $--dropdown-menu-bg-color;
+      .n-dropdown-menu-light-bar-container {
+        .n-dropdown-menu-light-bar {
+          background-color: $--dropdown-item-hover-bg-color;
+        }
+        
+      }
+      .n-dropdown-item:hover {
+        color: $--dropdown-item-hover-font-color;
+      }
+    }
+    @include b(dropdown-submenu) {
+      .n-dropdown-submenu__menu {
+        background-color: $--dropdown-menu-bg-color;
+      }
     }
   }
 }
