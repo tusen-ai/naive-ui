@@ -110,6 +110,7 @@
       } 
       @include m(rippling) {
         &::after {
+          z-index: 1;
           animation-name: #{$theme}-#{$type}-button-ripple--spread, #{$theme}-#{$type}-button-ripple--opacity;
           animation-duration: .6s;
           animation-timing-function: cubic-bezier(0, .4, .5, .9), cubic-bezier(.5, .2, .8, .5);
@@ -239,6 +240,7 @@
 @include b(button-group) {
   white-space: nowrap;
   display: inline-block;
+  position: relative;
   @include not-m(vertical) {
     @include b(button) {
       &:first-child {
