@@ -5,9 +5,12 @@
     :class="{'n-checkbox--checked': value, 'n-checkbox--disabled': disabled, 'n-checkbox--indeterminate': indeterminate,[`n-${synthesizedTheme}-theme`]: synthesizedTheme, }"
   >
     <div
-      class="n-checkbox__checkbox"
+      class="n-checkbox-box"
       @click="handleClick"
-    />
+    >
+      <check-mark class="n-checkbox-box__check-mark" />
+      <line-mark class="n-checkbox-box__line-mark" />
+    </div>
     <div
       v-if="$slots.default"
       class="n-checkbox__label"
@@ -21,9 +24,15 @@
 <script>
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import CheckMark from './CheckMark'
+import LineMark from './LineMark'
 
 export default {
   name: 'NCheckbox',
+  components: {
+    CheckMark,
+    LineMark
+  },
   mixins: [
     withapp,
     themeable
