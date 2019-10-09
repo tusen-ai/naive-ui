@@ -4,18 +4,12 @@ Set `processing` prop to indicate it is processing.
 <n-badge dot processing>
   <div class="block" />
 </n-badge>
+<n-badge :value="20" processing>
+  <div class="block" />
+</n-badge>
 <n-badge dot type="info" processing>
   <div class="block" />
 </n-badge>
-```
-```js
-export default {
-  data() {
-    return {
-      value: 10
-    };
-  }
-};
 ```
 ```css
 .n-badge {

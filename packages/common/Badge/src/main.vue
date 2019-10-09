@@ -18,6 +18,10 @@
         v-if="showBadge"
         class="n-badge-sup"
       >
+        <div
+          v-if="processing"
+          class="n-badge-sup__ripple-mask"
+        />
         <scroll-numbers
           v-if="!dot"
           :appeared="appeared"

@@ -7,7 +7,7 @@
   <div class="block" />
 </n-badge>
 <n-button-group>
-  <n-button icon="md-add" @click="value += 1" />
+  <n-button icon="md-add" @click="value = Math.min(16, value + 1)" />
   <n-button icon="md-remove" @click="value = Math.max(0, value - 1)" />
 </n-button-group>
 ```

@@ -48,16 +48,33 @@
 @mixin badge-type-mixin ($type) {
   @include m($type + '-type') {
     @include b(badge-sup) {
-      background-color: map-get($map: $--badge-background-color, $key: $type); 
+      background-color: map-get($map: $--badge-background-color, $key: $type);
+      @include e(ripple-mask) {
+        background-color: map-get($map: $--badge-background-color, $key: $type);
+      }
     }
     @include m(processing) {
       @include b(badge-sup) {
-        &::after {
-          animation-name: #{$theme}-#{$type}-badge-ripple--spread, #{$theme}-#{$type}-badge-ripple--opacity;
-          animation-duration: 1.5s, 1.5s;
-          animation-delay: .5s, .5s;
+        &::before {
+          animation-duration: 2s, 2s;
           animation-timing-function: $fast-in-cubic-bezier, $default-cubic-bezier;
           animation-iteration-count: infinite, infinite;
+        }
+      }
+      @include not-m(dot) {
+        @include b(badge-sup) {
+          &::before {
+            animation-name: #{$theme}-#{$type}-badge-ripple--spread, #{$theme}-#{$type}-badge-ripple--opacity;
+          }
+        }
+      }
+    }
+    @include m(processing) {
+      @include m(dot) {
+        @include b(badge-sup) {
+          &::before {
+            animation-name: #{$theme}-#{$type}-dot-badge-ripple--spread, #{$theme}-#{$type}-badge-ripple--opacity;   
+          }
         }
       }
     }
@@ -66,18 +83,45 @@
 
 @mixin badge-ripple-mixin($type) {
   @keyframes #{$theme}-#{$type}-badge-ripple--spread {
-    from {
-      box-shadow: 0 0 0 0px map-get($map: $--badge-rippling-color, $key: $type);
+    0% {
+      background-color: map-get($map: $--badge-rippling-color, $key: $type);
+      transform: scale(0);
     }
-    to {
-      box-shadow: 0 0 0 4px map-get($map: $--badge-rippling-color, $key: $type);
+    25% {
+      background-color: map-get($map: $--badge-rippling-color, $key: $type);
+      transform: scale(1);
+      // box-shadow: 0 0 0 0px map-get($map: $--badge-rippling-color, $key: $type);
+    }
+    100% {
+      background-color: map-get($map: $--badge-rippling-color, $key: $type);
+      transform: scale(1.25);
+      // box-shadow: 0 0 0 4px map-get($map: $--badge-rippling-color, $key: $type);
+    }
+  }
+  @keyframes #{$theme}-#{$type}-dot-badge-ripple--spread {
+    0% {
+      background-color: map-get($map: $--badge-rippling-color, $key: $type);
+      transform: scale(0);
+    }
+    25% {
+      background-color: map-get($map: $--badge-rippling-color, $key: $type);
+      transform: scale(1);
+      // box-shadow: 0 0 0 0px map-get($map: $--badge-rippling-color, $key: $type);
+    }
+    100% {
+      background-color: map-get($map: $--badge-rippling-color, $key: $type);
+      transform: scale(1.75);
+      // box-shadow: 0 0 0 4px map-get($map: $--badge-rippling-color, $key: $type);
     }
   }
   @keyframes #{$theme}-#{$type}-badge-ripple--opacity {
-    from {
+    0% {
+      opacity: 0;
+    }
+    25% {
       opacity: $--badge-rippling-start-opacity;
     }
-    to {
+    100% {
       opacity: 0;
     }
   }
@@ -102,7 +146,10 @@
           min-width: 8px;
           left: calc(100% - 4px);
           bottom: calc(100% - 4px);
-          &::after {
+          @include e(ripple-mask) {
+            border-radius: 4px;
+          }
+          &::before {
             border-radius: 4px;
           }
         }
@@ -126,10 +173,20 @@
       padding: 0 6px;
       text-align: center;
       font-size: 12px;
-      left: calc(100% - 8px);
-      bottom: calc(100% - 8px);
+      left: calc(100% - 9px);
+      bottom: calc(100% - 9px);
       font-weight: bold;
-      &::after {
+      @include e(ripple-mask) {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 9px;
+      }
+      &::before {
+        opacity: 0;
+        transform: scale(1);
         border-radius: 9px;
         content: "";
         position: absolute;
