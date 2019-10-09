@@ -31,6 +31,10 @@ const webpackConfig = {
   module: {
     rules: [
       {
+        test: /index.entry$/,
+        loader: ['vue-loader', path.resolve(__dirname, '../demo/loaders/NaiveUIDocEntryLoader.js')]
+      },
+      {
         test: /index\.md$/,
         loader: ['vue-loader', path.resolve(__dirname, '../demo/loaders/NaiveUIDocLoader.js')]
       },
