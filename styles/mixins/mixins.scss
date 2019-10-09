@@ -17,7 +17,7 @@ $block-depth: 0;
   $temp-block-element: $BE;
   $B: $namespace + "-" + $block !global;
   $BE: $B!global;
-  @if $theme == null or $block-depth != 1 {
+  @if (not $common-css-attrs-generated) or $block-depth != 1 {
     .#{$B} {
       @content;
     }
@@ -76,7 +76,7 @@ $theme-names: "dark", "light";
 
 @mixin themes-mixin() {
   $in-themes-mixin: true !global;
-  $theme: null !global;
+  $theme: 'dark' !global;
   @include setup-dark-theme();
   @content;
   $common-css-attrs-generated: true !global;
@@ -96,6 +96,7 @@ $theme-names: "dark", "light";
   }
   $common-css-attrs-generated: false !global;
   $in-themes-mixin: false !global;
+  $theme: null !global;
 }
 
 @mixin once() {

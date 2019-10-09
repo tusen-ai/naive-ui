@@ -1,0 +1,9 @@
+@mixin setup-light-badge {
+  $--badge-background-color: (
+    "default": $error-6,
+    "info": $info-6,
+    "success": $success-6,
+    "warning": $warning-6,
+    "error": $error-6 
+  ) !global;
+}

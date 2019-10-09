@@ -3,7 +3,9 @@
     class="n-badge"
     :class="{
       'n-badge--dot': dot,
-      [`n-badge--${type}-type`]: type
+      'n-badge--processing': processing,
+      [`n-badge--${type}-type`]: type,
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
     }"
   >
     <slot />
@@ -29,12 +31,15 @@
 
 <script>
 import ScrollNumbers from './ScrollNumbers'
+import themeable from '../../../mixins/themeable'
+import withapp from '../../../mixins/withapp'
 
 export default {
   name: 'NBadge',
   components: {
     ScrollNumbers
   },
+  mixins: [withapp, themeable],
   props: {
     value: {
       type: [String, Number],
@@ -50,15 +55,19 @@ export default {
     },
     type: {
       validator () {
-        return ['success', 'error', 'warning', 'info']
+        return ['success', 'error', 'warning', 'info', 'default']
       },
-      default: null
+      default: 'default'
     },
     show: {
       type: Boolean,
       default: true
     },
-    hideZero: {
+    showZero: {
+      type: Boolean,
+      default: false
+    },
+    processing: {
       type: Boolean,
       default: false
     }
@@ -73,7 +82,7 @@ export default {
       return (this.max === null || typeof value === 'string') ? this.value : (this.value > this.max ? `${this.max}+` : this.value)
     },
     showBadge () {
-      return this.show && (this.value !== null || this.dot) && !(this.hideZero && this.value <= 0)
+      return this.show && (this.dot || (this.value !== null && !(!this.showZero && this.value <= 0)))
     }
   },
   mounted () {

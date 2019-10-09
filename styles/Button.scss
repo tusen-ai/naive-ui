@@ -238,6 +238,7 @@
 
 @include b(button-group) {
   white-space: nowrap;
+  display: inline-block;
   @include not-m(vertical) {
     @include b(button) {
       &:first-child {
@@ -254,6 +255,12 @@
         margin-left: 0!important;
         margin-right: 0!important;
         border-radius: 0!important;
+      }
+      /**
+       * Not an elegant implementation
+       */
+      &.n-button--default-type + .n-button--default-type {
+        margin-left: -1px!important;
       }
     }
   }

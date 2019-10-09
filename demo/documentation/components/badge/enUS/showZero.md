@@ -1,9 +1,10 @@
-# Basic
+# Show zero
+Set `show-zero` prop to display zero.
 ```html
-<n-badge :value="value" :max="15">
+<n-badge :value="value">
   <n-icon type="ios-alarm" :size="24" />
 </n-badge>
-<n-badge :value="value" dot>
+<n-badge :value="value" show-zero>
   <n-icon type="ios-alarm" :size="24" />
 </n-badge>
 <n-button-group>
@@ -15,7 +16,7 @@
 export default {
   data() {
     return {
-      value: 5
+      value: 0
     };
   }
 };

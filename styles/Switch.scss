@@ -4,6 +4,7 @@
 @include themes-mixin{
   @include b(switch) {
     @include once {
+      user-select: none;
       display: inline-block;
     }
     @include e(rail) {
@@ -55,10 +56,12 @@
           }
         }
       }
-      &::before, &::after {
+      &::before {
         box-shadow: $--switch-switcher-box-shadow;
         transition: $--switch-switcher-transition;
-        // border: $--switch-switcher-border;
+      }
+      &::after {
+        transition: $--switch-switcher-transition;
       }
       background-color: map-get($map: $--switch-rail-background-color, $key: 'inactive');
       &::before {

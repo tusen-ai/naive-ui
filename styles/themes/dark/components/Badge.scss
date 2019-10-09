@@ -1,0 +1,9 @@
+@mixin setup-dark-badge {
+  $--badge-background-color: (
+    "default": $--error-hs,
+    "info": $--info-hs,
+    "success": $--success-hs,
+    "error": $--error-hs,
+    "warning": $--warning-hs
+  ) !global;
+}
