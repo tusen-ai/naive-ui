@@ -67,15 +67,15 @@
 @mixin badge-ripple-mixin($type) {
   @keyframes #{$theme}-#{$type}-badge-ripple--spread {
     from {
-      box-shadow: 0 0 0 0px map-get($map: $--badge-background-color, $key: $type);
+      box-shadow: 0 0 0 0px map-get($map: $--badge-rippling-color, $key: $type);
     }
     to {
-      box-shadow: 0 0 0 4px map-get($map: $--badge-background-color, $key: $type);
+      box-shadow: 0 0 0 4px map-get($map: $--badge-rippling-color, $key: $type);
     }
   }
   @keyframes #{$theme}-#{$type}-badge-ripple--opacity {
     from {
-      opacity: .4;
+      opacity: $--badge-rippling-start-opacity;
     }
     to {
       opacity: 0;
@@ -119,7 +119,6 @@
       @include fade-in-scale-up-transition(badge, left bottom);
       transition: background-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier;
       color: white;
-      user-select: none;
       position: absolute;
       height: 18px;
       line-height: 18px;

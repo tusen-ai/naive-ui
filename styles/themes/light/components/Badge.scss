@@ -6,4 +6,12 @@
     "warning": $warning-6,
     "error": $error-6 
   ) !global;
+  $--badge-rippling-color: (
+    "default": $error-6,
+    "info": $info-6,
+    "success": $success-6,
+    "warning": $warning-6,
+    "error": $error-6
+  ) !global; 
+  $--badge-rippling-start-opacity: .4 !global;
 }

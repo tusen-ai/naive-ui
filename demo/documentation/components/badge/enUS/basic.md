@@ -1,10 +1,10 @@
 # Basic
 ```html
 <n-badge :value="value" :max="15">
-  <n-icon type="ios-alarm" :size="24" />
+  <div class="block" />
 </n-badge>
 <n-badge :value="value" dot>
-  <n-icon type="ios-alarm" :size="24" />
+  <div class="block" />
 </n-badge>
 <n-button-group>
   <n-button icon="md-add" @click="value += 1" />
@@ -23,5 +23,15 @@ export default {
 ```css
 .n-badge {
   margin: 0 32px 8px 0;
+}
+.block {
+  width: 32px;
+  height: 32px;
+  background-color: #dddddd;
+  border-radius: 4px;
+  transition: background-color .3s cubic-bezier(.4, 0, .2, 1);
+}
+.n-dark-theme .block {
+  background-color: rgba(255, 255, 255, .15);
 }
 ```

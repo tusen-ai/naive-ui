@@ -3,9 +3,13 @@
 
 @include themes-mixin {
   @include b(code-box) {
+    color: $--n-secondary-text-color;
     background-color: $--n-card-color;
     border: 1px solid $--n-divider-color;
     background-clip: padding-box;
+    @include e(title) {
+      color: $--n-text-color;
+    }
     @include e(code) {
       border-top: 1px solid $--n-divider-color;
       code {

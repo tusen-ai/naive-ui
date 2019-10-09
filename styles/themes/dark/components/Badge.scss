@@ -6,4 +6,12 @@
     "error": $--error-hs,
     "warning": $--warning-hs
   ) !global;
+  $--badge-rippling-color: (
+    "default": mix($--error-hs, white, 75%),
+    "info": mix($--info-hs, white, 75%),
+    "success": mix($--success-hs, white, 75%),
+    "error": mix($--error-hs, white, 75%),
+    "warning": mix($--warning-hs, white, 75%)
+  ) !global;
+  $--badge-rippling-start-opacity: .6 !global;
 }
