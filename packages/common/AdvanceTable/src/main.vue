@@ -712,7 +712,7 @@ export default {
       if (!this.currentSortColumn) {
         return null
       }
-      const isCustom = this.currentSortColumn.sortable === 'custom'
+      const isCustom = (this.currentSortColumn.sortable === 'custom' && this.currentFilterColumn.type !== null)
       return isCustom ? this.currentSortColumn : null
     },
     useRemoteChange () {
