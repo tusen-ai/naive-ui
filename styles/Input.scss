@@ -28,52 +28,99 @@
 
 @include themes-mixin {
   @include b(input) {
-    position: relative;
-    width: 100%;
-    display: inline-block;
-    @include e(icon) {
-      position: absolute;
-      line-height: $--input-icon-size;
-      height: $--input-icon-size;
-      width: $--input-icon-size;
-      i {
+    @include once {
+      position: relative;
+      width: 100%;
+      display: inline-block;
+      @include input-size-mixin("small");
+      @include input-size-mixin("medium");
+      @include input-size-mixin("large");
+      @include e(icon) {
+        position: absolute;
+        line-height: $--input-icon-size;
         height: $--input-icon-size;
         width: $--input-icon-size;
-        &::before {
-          font-size: $--input-icon-size;
-          line-height: $--input-icon-size;
+        i {
           height: $--input-icon-size;
           width: $--input-icon-size;
-          color: $--input-icon-color;
+          &::before {
+            font-size: $--input-icon-size;
+            line-height: $--input-icon-size;
+            height: $--input-icon-size;
+            width: $--input-icon-size;
+          }
+        }
+        left: 0;
+        top: calc(50% - 9px);
+        margin-left: 12px;
+      }
+      @include e(cancel-mark) {
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        line-height: 12px;
+      }
+      @include e(icon) {
+        i {
+          &::before {
+            color: $--input-icon-color;
+          }
         }
       }
-      left: 0;
-      top: calc(50% - 9px);
-      margin-left: 12px;
-    }
-    @include e(cancel-mark) {
-      position: absolute;
-      right: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      line-height: 12px;
+      @include e(textarea, textarea-mirror) {
+        box-sizing: border-box;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: 1.5;
+        margin: 0;
+        padding-left: 14px;
+        padding-right: 14px;
+        resize: vertical;
+      }
+      @include e(textarea) {
+        @include m(autosize) {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+        }
+      }
+      @include e(textarea-mirror) {
+        visibility: hidden;
+        position: static;
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+      }
+      @include m(clearable) {
+        @include e(input, textarea, textarea-mirror) {
+          padding-right: 32px;
+        }
+      }
+      @include m(icon) {
+        @include e(input) {
+          padding-left: 38px!important;
+        }
+      }
     }
     @include e(input, textarea) {
-      -webkit-appearance: none;
-      box-sizing: border-box;
-      border: none;
-      font-size: inherit;
-      padding-left: 14px;
-      padding-right: 14px;
-      border-radius: $--input-border-radius;
-      outline: none;
+      @include once {
+        -webkit-appearance: none;
+        box-sizing: border-box;
+        border: none;
+        font-size: inherit;
+        padding-left: 14px;
+        padding-right: 14px;
+        border-radius: $--input-border-radius;
+        outline: none;
+        font-family: $--n-font-family;
+        width: 100%;
+        transition: color .3s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+        vertical-align: bottom;
+      }
       color: map-get($--input-color, 'default');
-      font-family: $--n-font-family;
       background-color: map-get($--input-background-color, 'default');
-      width: 100%;
       caret-color: $--input-caret-color;
-      transition: color .3s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
-      vertical-align: bottom;
       box-shadow: map-get($--input-box-shadow, 'default');
       &:hover {
         box-shadow: map-get($--input-box-shadow, 'hover');
@@ -88,14 +135,6 @@
         opacity: 1;
       }
     }
-    @include input-size-mixin("small");
-    @include input-size-mixin("medium");
-    @include input-size-mixin("large");
-    @include m(icon) {
-      @include e(input) {
-        padding-left: 38px!important;
-      }
-    }
     @include m(disabled) {
       cursor: not-allowed;
       @include e(input, textarea) {
@@ -107,35 +146,6 @@
           color: map-get($--input-placeholder-color, 'disabled');
         }
       }
-    }
-    @include m(clearable) {
-      @include e(input, textarea, textarea-mirror) {
-        padding-right: 32px;
-      }
-    }
-    @include e(textarea, textarea-mirror) {
-      box-sizing: border-box;
-      font-family: inherit;
-      font-size: inherit;
-      line-height: 1.5;
-      margin: 0;
-      padding-left: 14px;
-      padding-right: 14px;
-      resize: vertical;
-    }
-    @include e(textarea) {
-      @include m(autosize) {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-      }
-    }
-    @include e(textarea-mirror) {
-      visibility: hidden;
-      position: static;
-      white-space: pre-wrap;
-      overflow-wrap: break-word;
     }
   }
 }
