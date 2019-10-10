@@ -34,14 +34,15 @@
       ul, ol {
         padding-left: 0;
         li {
-          margin-bottom: 12px;
+          line-height: 1.875;
+          margin-bottom: 0px;
           font-size: 14px;
         }
       }
       p {
         margin: 8px 0 0 0;
         font-size: 14px;
-        line-height: 21px;
+        line-height: 1.875;
       }
       a {
         color: $primary-6;
