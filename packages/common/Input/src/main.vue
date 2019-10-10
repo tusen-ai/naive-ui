@@ -7,7 +7,8 @@
       'n-input--textarea': type==='textarea',
       'n-input--round': round && type!=='textarea',
       'n-input--icon': icon,
-      'n-input--clearable': clearable
+      'n-input--clearable': clearable,
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
   >
     <pre
@@ -64,6 +65,7 @@
     </div>
     <div class="n-input__cancel-mark">
       <n-cancel-mark
+        :theme="synthesizedTheme"
         :show="!disabled && !!value"
         :clearable="clearable"
         @clear="handleClear"
@@ -76,6 +78,8 @@
 import NIcon from '../../Icon'
 import Emitter from '../../../mixins/emitter'
 import NCancelMark from '../../../base/CancelMark'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 
 export default {
   name: 'NInput',
@@ -83,7 +87,7 @@ export default {
     NIcon,
     NCancelMark
   },
-  mixins: [ Emitter ],
+  mixins: [ withapp, themeable, Emitter ],
   inject: {
     formItem: {
       default: null

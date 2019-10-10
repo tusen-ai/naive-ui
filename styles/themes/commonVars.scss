@@ -1,3 +1,5 @@
+$--n-font-family: 'Lato';
+
 $--n-height: (
   "small": 28px,
   "medium": 34px,
@@ -10,8 +12,11 @@ $--n-font-size: (
   "large": 15px
 );
 
-$--base-picker-border-radius: 6px !global;
+$--base-picker-border-radius: 6px;
 
 $--base-select-menu-box-shadow: none;
+
+$--input-icon-size: 20px;
+$--input-border-radius: 6px;
 
 $--popover-box-shadow: (0px 0px 8px 0px rgba(0,0,0,0.08));

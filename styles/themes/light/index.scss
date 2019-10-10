@@ -9,7 +9,6 @@
 @import "components/Tag.scss";
 @import "components/Table.scss";
 @import "components/AdvanceTable.scss";
-
 @import "components/Popover.scss";
 @import "components/Tooltip.scss";
 @import "components/Confirm.scss";
@@ -19,6 +18,7 @@
 @import "components/LoadingBar.scss";
 @import "components/Badge.scss";
 @import "components/Dropdown.scss";
+@import "components/Input.scss";
 
 @mixin setup-light-theme () {
   @include setup-light-colors();
@@ -60,4 +60,5 @@
   @include setup-light-loading-bar;
   @include setup-light-badge;
   @include setup-light-dropdown;
+  @include setup-light-input;
 }

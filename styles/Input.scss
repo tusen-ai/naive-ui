@@ -1,175 +1,141 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
-@include b(input) {
-  position: relative;
-  width: 100%;
-  display: inline-block;
-  @include e(icon) {
-    position: absolute;
-    line-height: 18px;
-    height: 18px;
-    width: 18px;
-    i {
-      height: 18px;
-      width: 18px;
-      &::before {
-        font-size: 20px;
-        line-height: 18px;
-        height: 18px;
-        width: 18px;
-        color: $input-icon-color;
+@mixin input-size-mixin ($size) {
+  $font-size: map-get($map: $--n-font-size, $key: $size);
+  $height: map-get($map: $--n-height, $key: $size);
+  $line-height: round($font-size * 1.5);
+  @include m($size + "-size") {
+    font-size: $font-size;
+    line-height: $line-height;
+    @include e(input) {
+      height: $height;
+    }
+    @include e(input, textarea, textarea-mirror) {
+      line-height: $line-height;
+      font-size: $font-size;
+      padding-top: ($height - $line-height) / 2;
+      padding-bottom: ($height - $line-height) / 2;
+    }
+    @include m(round) {
+      @include e(input) {
+        border-radius: $height / 2;
+        padding-left: $height / 2;
       }
     }
-    left: 0;
-    top: calc(50% - 9px);
-    margin-left: 12px;
   }
-  @include e(cancel-mark) {
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    line-height: 12px;
-  }
-  @include e(input, textarea) {
-    -webkit-appearance: none;
-    box-sizing: border-box;
-    border: none;
-    font-size: inherit;
-    padding-left: 14px;
-    padding-right: 14px;
-    border-radius: $input-border-radius;
-    outline: none;
-    color: #fff;
-    font-family: $default-font-family;
-    background-color: $input-background-color;
+}
+
+@include themes-mixin {
+  @include b(input) {
+    position: relative;
     width: 100%;
-    caret-color: $input-caret-color;
-    box-shadow: none;
-    transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier;
-    vertical-align: bottom;
-    &:focus:hover {
-      box-shadow: inset 0 0 0px 1px $main-color, 0px 0px 10px 1px #366555;
-    }
-    &:hover {
-      box-shadow: inset 0 0 0px 1px $main-color;
-    }
-    &:focus {
-      box-shadow: inset 0 0 0px 1px $main-color;
-      background-color: $focus-input-background-color;
-    }
-    &::placeholder {
-      color: $input-placeholder-color;
-      opacity: 1;
-    }
-  }
-  @include m(small-size) {
-    font-size: $small-input-font-size;
-    $height: round($small-input-font-size * 1.5);
-    line-height: $small-height;
-    @include e(input) {
-      height: $small-height;
-    }
-    @include e(input, textarea, textarea-mirror) {
-      line-height: $height;
-      font-size: $small-input-font-size;
-      padding-top: ($small-height - $height) / 2;
-      padding-bottom: ($small-height - $height) / 2;
-    }
-  }
-  @include m(medium-size) {
-    font-size: $medium-input-font-size;
-    $height: round($medium-input-font-size * 1.5);
-    line-height: $medium-height;
-    @include e(input) {
-      height: $medium-height;
-    }
-    @include e(input, textarea, textarea-mirror) {
-      line-height: $height;
-      font-size: $medium-input-font-size;
-      padding-top: ($medium-height - $height) / 2;
-      padding-bottom: ($medium-height - $height) / 2;
-    }
-  }
-  @include m(large-size) {
-    font-size: $large-input-font-size;
-    $height: round($large-input-font-size * 1.5);
-    line-height: $large-height;
-    @include e(input) {
-      height: $large-height;
-    }
-    @include e(input, textarea, textarea-mirror) {
-      line-height: $height;
-      font-size: $large-input-font-size;
-      padding-top: ($large-height - $height) / 2;
-      padding-bottom: ($large-height - $height) / 2;
-    }
-  }
-  @include m(round) {
-    &.n-input--small-size {
-      .n-input__input {
-        border-radius: $small-height / 2;
-        padding-left: $small-height / 2;
-      }
-    }
-    &.n-input--default-size, &.n-input--medium-size {
-      .n-input__input {
-        border-radius: $default-height / 2;
-        padding-left: $default-height / 2;
-      }
-    }
-    &.n-input--large-size {
-      .n-input__input {
-        border-radius: $large-height / 2;
-        padding-left: $large-height / 2;
-      }
-    }
-  }
-  @include m(icon) {
-    .n-input__input {
-      padding-left: 38px!important;
-    }
-  }
-  @include m(disabled) {
-    cursor: not-allowed;
-    .n-input__input, .n-input__textarea {
-      cursor: not-allowed;
-      background-color: $disabled-input-background-color;
-      color: $disabled-input-text-color;
-      box-shadow: none!important;
-      &::placeholder {
-        color: $disabled-input-placeholder-color;
-      }
-    }
-  }
-  @include m(clearable) {
-    @include e(input, textarea, textarea-mirror) {
-      padding-right: 32px;
-    }
-  }
-  @include e(textarea, textarea-mirror) {
-    box-sizing: border-box;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: 1.5;
-    margin: 0;
-    padding-left: 14px;
-    padding-right: 14px;
-    resize: vertical;
-  }
-  @include e(textarea) {
-    @include m(autosize) {
+    display: inline-block;
+    @include e(icon) {
       position: absolute;
-      top: 0;
+      line-height: $--input-icon-size;
+      height: $--input-icon-size;
+      width: $--input-icon-size;
+      i {
+        height: $--input-icon-size;
+        width: $--input-icon-size;
+        &::before {
+          font-size: $--input-icon-size;
+          line-height: $--input-icon-size;
+          height: $--input-icon-size;
+          width: $--input-icon-size;
+          color: $--input-icon-color;
+        }
+      }
       left: 0;
-      height: 100%;
+      top: calc(50% - 9px);
+      margin-left: 12px;
     }
-  }
-  @include e(textarea-mirror) {
-    visibility: hidden;
-    position: static;
-    white-space: pre-wrap;
-    overflow-wrap: break-word;
+    @include e(cancel-mark) {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      line-height: 12px;
+    }
+    @include e(input, textarea) {
+      -webkit-appearance: none;
+      box-sizing: border-box;
+      border: none;
+      font-size: inherit;
+      padding-left: 14px;
+      padding-right: 14px;
+      border-radius: $--input-border-radius;
+      outline: none;
+      color: map-get($--input-color, 'default');
+      font-family: $--n-font-family;
+      background-color: map-get($--input-background-color, 'default');
+      width: 100%;
+      caret-color: $--input-caret-color;
+      transition: color .3s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+      vertical-align: bottom;
+      box-shadow: map-get($--input-box-shadow, 'default');
+      &:hover {
+        box-shadow: map-get($--input-box-shadow, 'hover');
+      }
+      &:focus {
+        box-shadow: map-get($--input-box-shadow, 'focus');
+        background-color: map-get($--input-background-color, 'focus');
+      }
+      &::placeholder {
+        transition: color .3s $default-cubic-bezier;
+        color: map-get($--input-placeholder-color, 'default');
+        opacity: 1;
+      }
+    }
+    @include input-size-mixin("small");
+    @include input-size-mixin("medium");
+    @include input-size-mixin("large");
+    @include m(icon) {
+      @include e(input) {
+        padding-left: 38px!important;
+      }
+    }
+    @include m(disabled) {
+      cursor: not-allowed;
+      @include e(input, textarea) {
+        cursor: not-allowed;
+        background-color: map-get($--input-background-color, 'disabled');
+        color: map-get($--input-color, 'disabled');
+        box-shadow: map-get($--input-box-shadow, 'disabled') !important;
+        &::placeholder {
+          color: map-get($--input-placeholder-color, 'disabled');
+        }
+      }
+    }
+    @include m(clearable) {
+      @include e(input, textarea, textarea-mirror) {
+        padding-right: 32px;
+      }
+    }
+    @include e(textarea, textarea-mirror) {
+      box-sizing: border-box;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: 1.5;
+      margin: 0;
+      padding-left: 14px;
+      padding-right: 14px;
+      resize: vertical;
+    }
+    @include e(textarea) {
+      @include m(autosize) {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+      }
+    }
+    @include e(textarea-mirror) {
+      visibility: hidden;
+      position: static;
+      white-space: pre-wrap;
+      overflow-wrap: break-word;
+    }
   }
 }
