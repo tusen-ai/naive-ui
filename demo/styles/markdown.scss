@@ -118,7 +118,7 @@
       pre {
         & > code {
           background-color: white;
-          border: 1px solid rgba(34,36,38,.15);
+          border: 1px solid $--n-divider-color;
         }
       }
       :not(pre) > code {
@@ -126,7 +126,7 @@
         border: 1px solid rgb(230, 230, 230);
       }
       table {
-        border: 1px solid rgba(34,36,38,.15);
+        border: 1px solid $--n-divider-color;
         th {
           background: rgb(250, 250, 250);
           border-bottom: 1px solid $--n-divider-color;
