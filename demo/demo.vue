@@ -40,11 +40,23 @@ export default {
     items () {
       return [
         {
-          name: 'Start',
+          name: 'Naive UI',
+          path: `/${this.lang}/${this.theme}` + '/intro'
+        },
+        {
+          name: 'Getting Started',
           path: `/${this.lang}/${this.theme}` + '/start'
         },
         {
-          name: 'Nimbus',
+          name: 'Develop Guidelines',
+          path: `/${this.lang}/${this.theme}` + '/dev-guildlines'
+        },
+        {
+          name: 'Develop Status',
+          path: `/${this.lang}/${this.theme}` + '/status'
+        },
+        {
+          name: 'Nimbus Components',
           path: `/${this.lang}/${this.theme}` + '/',
           childItems: [
             {
@@ -66,7 +78,7 @@ export default {
           ]
         },
         {
-          name: 'Common',
+          name: 'Common Components',
           childItems: [
             {
               name: 'AdvanceTable',
@@ -380,7 +392,7 @@ body {
   .n-doc-section {
     .n-doc-section__header {
       font-size: 16px;
-      font-weight: bold;
+      font-weight: 700;
       margin-bottom: 12px;
     }
     .n-doc-section__view {

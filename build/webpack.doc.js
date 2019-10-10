@@ -29,72 +29,7 @@ const webpackConfig = {
     children: false
   },
   module: {
-    rules: [
-      {
-        test: /index.entry$/,
-        loader: ['vue-loader', path.resolve(__dirname, '../demo/loaders/NaiveUIDocEntryLoader.js')]
-      },
-      {
-        test: /index\.md$/,
-        loader: ['vue-loader', path.resolve(__dirname, '../demo/loaders/NaiveUIDocLoader.js')]
-      },
-      {
-        test: {
-          test: /\.md$/,
-          exclude: /index\.md$/
-        },
-        loader: ['vue-loader', path.resolve(__dirname, '../demo/loaders/NaiveUIDemoLoader.js')]
-      },
-      {
-        test: /\.demo\.vue$/,
-        loader: ['vue-loader', path.resolve(__dirname, '../doc/NaiveUIDemoLoader.js')]
-      },
-      {
-        test: {
-          test: /\.vue$/,
-          exclude: /\.demo\.vue$/
-        },
-        loader: 'vue-loader',
-        options: {
-          compilerOptions: {
-            preserveWhitespace: false
-          }
-        }
-      },
-      {
-        test: /\.(js|jsx)$/,
-        exclude: [/node_modules/],
-        loader: 'babel-loader'
-      },
-      // {
-      //   test: /\.(scss|css)$/,
-      //   use: [
-      //     'style-loader',
-      //     'css-loader',
-      //     'sass-loader'
-      //   ]
-      // },
-      {
-        test: /\.(scss|css)$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
-        })
-      },
-      {
-        test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,
-        loader: 'url-loader',
-        query: {
-          limit: 10000,
-          name: path.posix.join('static', '[name].[hash:7].[ext]')
-        }
-      },
-      {
-        resourceQuery: /blockType=i18n/,
-        type: 'javascript/auto',
-        loader: '@kazupon/vue-i18n-loader'
-      }
-    ]
+    rules: config.docLoaders
   },
   plugins: [
     new HtmlWebpackPlugin({

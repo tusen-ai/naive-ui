@@ -175,7 +175,7 @@
       font-size: 12px;
       left: calc(100% - 9px);
       bottom: calc(100% - 9px);
-      font-weight: bold;
+      font-weight: 700;
       @include e(ripple-mask) {
         position: absolute;
         top: 0;

@@ -25,7 +25,7 @@
         flex: 1;
         line-height: 1;
         font-size: 16px;
-        font-weight: bold;
+        font-weight: 700;
         color: rgba(255, 255, 255, 1);
         @include m(disabled) {
           color: rgba(255, 255, 255, 0.25);

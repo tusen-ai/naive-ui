@@ -9,6 +9,12 @@ import './styles/font.scss'
 import NaiveUI from '../index'
 import SourceBlock from './SourceBlock'
 import VueI18n from 'vue-i18n'
+
+import intro from './documentation/intro/intro'
+import start from './documentation/intro/start'
+import devGuildlines from './documentation/intro/devGuidelines'
+import status from './documentation/intro/status'
+
 import nimbusServiceLayoutDemo from './documentation/components/nimbusServiceLayoutDemo'
 import homeDemo from './documentation/components/homeDemo'
 import gradientTextDemo from './documentation/components/gradientTextDemo'
@@ -44,7 +50,6 @@ import stepsDemo from './documentation/components/stepsDemo'
 import notificationDemo from './documentation/components/notificationDemo'
 import nimbusConfirmCardDemo from './documentation/components/nimbusConfirmCardDemo'
 import paginationDemo from './documentation/components/paginationDemo'
-import startPage from './documentation/components/startPage'
 import collapseDemo from './documentation/components/collapseDemo'
 import tag from './documentation/components/tag'
 import timelineDemo from './documentation/components/timelineDemo'
@@ -121,7 +126,10 @@ const routes = [
     path: '/:lang/:theme/start',
     component: demo,
     children: withPrefix('/:lang/:theme', [
-      { path: '/start', component: startPage },
+      { path: '/intro', component: intro },
+      { path: '/start', component: start },
+      { path: '/dev-guildlines', component: devGuildlines },
+      { path: '/status', component: status },
       { path: '/n-nimbus-service-layout', component: nimbusServiceLayoutDemo },
       { path: '/n-nimbus-home-layout', component: homeDemo },
       { path: '/n-gradient-text', component: gradientTextDemo },

@@ -31,7 +31,7 @@
           }
         }
         tbody {
-          background-color: $--table-body-background;
+          background-color: $--table-body-background-color;
           color: $--table-body-color;
           tr {
             td {
@@ -52,13 +52,13 @@
         }
       }
     }
-    background-color: $--table-body-background;
+    background-color: $--table-body-background-color;
     box-shadow: $--table-box-shadow;
 
     table {
       border-collapse: separate;
       thead {
-        background-color: $--table-header-background;
+        background-color: $--table-header-background-color;
         color: $--table-header-color;
         tr {
           th {
@@ -69,7 +69,7 @@
         }
       }
       tbody {
-        background-color: $--table-body-background;
+        background-color: $--table-body-background-color;
         color: $--table-body-color;
         tr:hover {
           background-color: $--table-row-hover;

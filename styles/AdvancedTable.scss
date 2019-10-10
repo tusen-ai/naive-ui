@@ -109,7 +109,7 @@
       }
     }
     @include e(header) {
-      background-color: $--table-header-background;
+      background-color: $--table-header-background-color;
       i {
         color: $--table-header-icon-color;
       }

@@ -152,7 +152,7 @@
 
 @include b(tab-label-wrapper) {
   display: inline-block;
-  font-weight: bold;
+  font-weight: 700;
   white-space: nowrap;
   position: relative;
   @include b(tab-label-bar) {

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import readme from '../../../README.md'
+import readme from './status.vue.md'
 import { replaceEmojiWithImages } from '../../utils'
 
 export default {

@@ -14,7 +14,7 @@
 <template>
   <div class="nav">
     <div class="ui-logo">
-      NAIVE UI ({{ version }})
+      Naive UI ({{ version }})
     </div>
     <div />
     <div class="theme-picker">

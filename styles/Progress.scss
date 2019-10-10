@@ -25,7 +25,7 @@
     .n-progress-text {
       // color: rgba(98, 187, 252, 1);
       white-space: nowrap;
-      font-weight: bold;
+      font-weight: 700;
       line-height: 24px;
       width: 60px;
       .n-progress-text__percentage {
@@ -60,7 +60,7 @@
     }
     .n-progress-text {
       white-space: nowrap;
-      font-weight: bold;
+      font-weight: 700;
       // color: rgba(98, 187, 252, 1);
       .n-progress-text__percentage {
         color: inherit;
@@ -167,7 +167,7 @@
           color: rgba(23, 29, 51, 1);
           white-space: nowrap;
           text-align: right;
-          font-weight: bold;
+          font-weight: 700;
           margin-left: 14px;
           margin-right: 14px; 
           height: 33px;
@@ -191,7 +191,7 @@
           position: absolute;
           color: rgba(23, 29, 51, 1);
           white-space: nowrap;
-          font-weight: bold;
+          font-weight: 700;
           font-size: 18px;
         }
       }

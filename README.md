@@ -26,25 +26,27 @@ Run `npm run test-cov` to test all components and see detailed test coverage rep
 ## Want to see how component works
 1. Run `npm run dev`
 2. Open `http://localhost:8086/` in browser.
+
 ## Want to add your own component
 There is no guideline for now. If you want to know how to do it, you can explore by yourself or ask `lecong.zhang@tusimple.ai`.
+
 ## Publish a new version
 1. You **MUST** change your version according to [semver](https://semver.org/)
 2. `npm run release`
 3. You **MAY** publish documentation by running `npm run release-doc`
+
 ## Installation & Usage
 First install it.
-```
+
+```bash
 npm install --save-dev naive-ui
 ```
 Then add the following lines in you entry point js file.
-```
-...
+```js
 import naiveUi from 'naive-ui'
-import 'naive-ui/dist/lib/index.css
+import 'naive-ui/dist/lib/index.css'
 
 Vue.use(naiveUi)
-...
 ```
 ## Component Develop Status
 |Component|Develop status|Unit Test|Note|

@@ -4,35 +4,71 @@
 @include themes-mixin {
   @if $theme == 'dark' {
     .markdown {
+      font-size: 16px;
+      strong {
+        font-weight: 700;
+      }
       h1, h2, h3, h4, h5, h6 {
         margin: 0;
+        font-weight: 700;
       }
       h1 {
-        font-size: 24px;
-        margin-bottom: 12px;
+        font-size: 32px;
       }
       h2 {
-        font-size: 20px;
+        font-size: 24px;
         margin-top: 24px;
         margin-bottom: 12px;
       }
-      p {
-        margin: 0 0 16px 0;
-        font-size: 14px;
-        line-height: 2;
+      h3 {
+        font-size: 18px;
+        margin-top: 18px;
+        margin-bottom: 12px;
       }
-      code {
+      h4 {
+        font-size: 16px;
+        margin-top: 16px;
+        margin-bottom: 8px;
+      }
+      ul, ol {
+        padding-left: 0;
+        li {
+          margin-bottom: 12px;
+          font-size: 14px;
+        }
+      }
+      p {
+        margin: 8px 0 0 0;
+        font-size: 14px;
+        line-height: 21px;
+      }
+      a {
+        color: $primary-6;
+        font-size: 14px;
+      }
+      pre {
+        width: 100%;
+        box-sizing: border-box;
+        & > code {
+          border-radius: 6px;
+          border: 1px solid $--n-divider-color;
+          display: block;
+          padding: 12px 16px 12px 16px;
+          background-color: $--n-card-color;
+        }
+      }
+      :not(pre) > code {
         box-sizing: border-box;
         border-radius: 3px;
-        background-color: $--n-alpha-table-header-color;
-        padding: .2em .4em;
+        background-color: rgba(255, 255, 255, .12);
+        padding: 0em .4em .1em .4em;
         font-size: 14px;
         font-family: 'Lato';
       }
       table {
         font-size: 14px;
         width: 100%;
-        border: 1px solid $--n-alpha-divider-color;
+        border: 1px solid $--n-divider-color;
         border-radius: 6px;
         text-align: left;
         border-collapse: separate;
@@ -40,7 +76,7 @@
         overflow: hidden;
         // background-color: $--n-alpha-table-body-color;
         th {
-          background-color: $--n-alpha-table-header-color;
+          background-color: $--n-table-header-color;
           background-clip: padding-box;
           text-align: inherit;
           padding: 14px 12px;
@@ -49,14 +85,14 @@
           font-weight: 400;
           text-transform: none;
           border-left: none;
-          font-weight: bold;
-          border-bottom: 1px solid $--n-alpha-divider-color;
+          font-weight: 700;
+          border-bottom: 1px solid $--n-divider-color;
           &:not(:last-child) {
-            border-right: 1px solid $--n-alpha-table-header-color;
+            border-right: 1px solid $--n-table-header-color;
           }
         }
         td {
-          background-color: $--n-alpha-table-body-color;
+          background-color: $--n-table-body-color;
           background-clip: padding-box;
           padding: 12px;
         }
@@ -67,14 +103,27 @@
     }
   } @else {
     .n-app--light-theme .markdown {
-      code {
+      a {
+        color: $primary-6;
+      }
+      pre {
+        & > code {
+          background-color: white;
+          border: 1px solid rgba(34,36,38,.15);
+        }
+      }
+      :not(pre) > code {
         background-color: rgb(244, 244, 244);
         border: 1px solid rgb(230, 230, 230);
       }
       table {
         border: 1px solid rgba(34,36,38,.15);
         th {
-          background: rgb(250, 250, 250);      
+          background: rgb(250, 250, 250);
+          border-bottom: 1px solid $--n-divider-color;
+          &:not(:last-child) {
+            border-right: 1px solid rgb(250, 250, 250);
+          }   
         }
         td {
           background-color: white;
