@@ -17,7 +17,7 @@
     :class="{
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
-    n-dark-theme-background-color-hint="transparent"
+    n-dark-theme-background-color-hint="#1e2437"
     n-light-theme-background-color-hint="white"
   >
     <div class="n-code-box__title">

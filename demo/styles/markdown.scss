@@ -14,6 +14,7 @@
       }
       h1 {
         font-size: 32px;
+        margin-bottom: 12px;
       }
       h2 {
         font-size: 24px;
@@ -46,6 +47,9 @@
         color: $primary-6;
         font-size: 14px;
       }
+      code {
+        transition: background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+      }
       pre {
         width: 100%;
         box-sizing: border-box;
@@ -64,6 +68,7 @@
         padding: 0em .4em .1em .4em;
         font-size: 14px;
         font-family: 'Lato';
+        border: 1px solid transparent;
       }
       table {
         font-size: 14px;
@@ -74,10 +79,12 @@
         border-collapse: separate;
         border-spacing: 0;
         overflow: hidden;
+        transition: background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier;
         // background-color: $--n-alpha-table-body-color;
         th {
+          transition: background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
           background-color: $--n-table-header-color;
-          background-clip: padding-box;
+          // background-clip: padding-box;
           text-align: inherit;
           padding: 14px 12px;
           vertical-align: inherit;
@@ -92,8 +99,9 @@
           }
         }
         td {
+          transition: background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
           background-color: $--n-table-body-color;
-          background-clip: padding-box;
+          // background-clip: padding-box;
           padding: 12px;
         }
       }
