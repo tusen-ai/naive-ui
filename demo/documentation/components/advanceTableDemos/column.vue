@@ -185,7 +185,7 @@ const data = [
       }
     ]
 
-    asynsFilterItems() {
+    asyncFilterItems() {
       return fetch('/filteritems')
     }
     `,

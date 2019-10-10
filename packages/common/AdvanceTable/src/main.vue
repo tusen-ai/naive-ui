@@ -83,11 +83,11 @@
               {{ column.filterDropdown && column.filterDropdown() }}
               <!-- 否则默认渲染 -->
               <PopFilter
-                v-if="column.onFilter && (column.filterItems || column.asynsFilterItems)"
+                v-if="column.onFilter && (column.filterItems || column.asyncFilterItems)"
                 v-model="selectedFilter[column.key]"
                 class="n-advance-table__header-icon"
                 :column="column"
-                :items="column.filterItems || column.asynsFilterItems"
+                :items="column.filterItems || column.asyncFilterItems"
                 @on-filter="onFilter"
               />
 

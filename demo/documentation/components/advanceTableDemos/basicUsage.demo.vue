@@ -110,7 +110,7 @@ const _columns3 = ($this) => {
         return values.includes(record.sex)
       },
       filterMultiple: true,
-      asynsFilterItems () {
+      asyncFilterItems () {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
             Math.random() > 0.6
