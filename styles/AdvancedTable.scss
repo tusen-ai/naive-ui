@@ -100,7 +100,8 @@
     }
 
     @include e(tbody) {
-      box-shadow: 0 3px 20px 6px rgba(0, 0, 0, 0.2);
+      box-shadow: $--table-box-shadow;
+      border: $--table-border;
     }
     @include b(table) {
       &::-webkit-scrollbar-thumb {

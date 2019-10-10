@@ -5,7 +5,7 @@
   $--table-body-color: $--text-2 !global;
   $--table-row-hover: $--table-header-background !global;
   $--table-box-shadow: 0 3px 20px 6px rgba(0, 0, 0, .2) !global;
-  $--table-border: none;
+  $--table-border: none !global;
   //TODO:ui设计深色color
   $--table-td-border-right: none !global;
 }
