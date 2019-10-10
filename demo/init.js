@@ -17,7 +17,7 @@ import checkboxDemo from './documentation/components/checkboxDemo'
 import buttonDemo from './documentation/components/buttonDemo'
 import switchDemo from './documentation/components/switch'
 import tableDemo from './documentation/components/tableDemo'
-import inputDemo from './documentation/components/inputDemo'
+import input from './documentation/components/input'
 import selectDemo from './documentation/components/selectDemo'
 import cascaderDemo from './documentation/components/cascaderDemo'
 import inputKeyValuePairsDemo from './documentation/components/inputKeyValuePairsDemo'
@@ -131,7 +131,7 @@ const routes = [
       { path: '/n-switch', component: switchDemo },
       { path: '/n-table', component: tableDemo },
       { path: '/n-advance-table', component: advanceTableDemos },
-      { path: '/n-input', component: inputDemo },
+      { path: '/n-input', component: input },
       { path: '/n-select', component: selectDemo },
       { path: '/n-cascader', component: cascaderDemo },
       { path: '/n-InputKeyValuePairs', component: inputKeyValuePairsDemo },

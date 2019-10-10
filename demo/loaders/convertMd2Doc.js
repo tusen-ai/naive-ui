@@ -49,7 +49,7 @@ function parseDemos (demosLiteral) {
     .split('\n')
     .map(demoName => demoName.trim())
     .filter(demoName => demoName.length)
-  const demoTags = demoNames.map(demoName => `<${demoName} />`)
+  const demoTags = demoNames.map(demoName => `<${demoName}Demo />`)
   return demoTags.join('\n')
 }
 
@@ -59,8 +59,8 @@ function generateScript (demosLiteral) {
     .map(demoName => demoName.trim())
     .filter(demoName => demoName.length)
     .map(demoName => camelCase(demoName))
-  const importStatements = demoNames.map(demoName => `import ${demoName} from './${demoName}.md'`).join('\n')
-  const componentStatements = demoNames.join(', ')
+  const importStatements = demoNames.map(demoName => `import ${demoName}Demo from './${demoName}.md'`).join('\n')
+  const componentStatements = demoNames.map(demoName => demoName + 'Demo').join(', ')
   const script = `<script>
 ${importStatements}
 
