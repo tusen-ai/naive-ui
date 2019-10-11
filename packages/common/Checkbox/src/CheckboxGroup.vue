@@ -1,66 +1,56 @@
 <script>
-function mapSlot (vNodes, value, on) {
-  function transfromCheckbox (vNode) {
-    if (!Array.isArray(value)) {
-      vNode.componentOptions.propsData.value = false
-    } else {
-      vNode.componentOptions.propsData.value = !!~value.findIndex(label => label === vNode.componentOptions.propsData.label)
-    }
-    vNode.componentOptions.listeners = {
-      ...vNode.componentOptions.listeners,
-      ...on
-    }
-    return vNode
-  }
-  return vNodes.map(transfromCheckbox)
-}
-
 export default {
   name: 'NCheckboxGroup',
+  provide () {
+    return {
+      NCheckboxGroup: this
+    }
+  },
   props: {
-    // eslint-disable-next-line vue/require-default-prop
     value: {
-      type: Array
+      type: Array,
+      default: null
     }
   },
   data () {
     return {
-      labels: []
+      collectedCheckboxValues: []
     }
   },
   methods: {
-    handleChange (status, label) {
+    toggleCheckbox (checked, checkboxValue) {
       if (Array.isArray(this.value)) {
-        let newValue = this.value
-        newValue = newValue.filter(value => this.labels.has(value))
-        const index = newValue.findIndex(value => value === label)
-        if (status === true) {
+        let groupValue = Array.from(this.value)
+        groupValue = groupValue.filter(value => ~this.collectedCheckboxValues.findIndex(collectedCheckboxValue => collectedCheckboxValue === value))
+        const index = groupValue.findIndex(value => value === checkboxValue)
+        if (checked) {
           if (!~index) {
-            newValue.push(label)
-            this.$emit('input', newValue)
+            groupValue.push(checkboxValue)
+            this.$emit('input', groupValue)
+            this.$emit('change', groupValue)
           }
         } else {
           if (~index) {
-            newValue.splice(index, 1)
-            this.$emit('input', newValue)
+            groupValue.splice(index, 1)
+            this.$emit('input', groupValue)
+            this.$emit('change', groupValue)
           }
         }
       } else {
-        if (status === true) {
-          this.$emit('input', [label])
+        if (checked) {
+          this.$emit('input', [checkboxValue])
+          this.$emit('change', [checkboxValue])
         } else {
           this.$emit('input', [])
+          this.$emit('change', [])
         }
       }
     }
   },
   render (h) {
-    this.labels = new Set(this.$slots.default.map(vNode => vNode.componentOptions.propsData.label))
     return h('div', {
       staticClass: 'n-checkbox-group'
-    }, mapSlot(this.$slots.default, this.value, {
-      change: this.handleChange
-    }))
+    }, this.$slots.default)
   }
 }
 </script>

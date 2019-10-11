@@ -4,6 +4,7 @@
 @include themes-mixin{
   @include b(switch) {
     @include once {
+      vertical-align: middle;
       user-select: none;
       display: inline-block;
     }

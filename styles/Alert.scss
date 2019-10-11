@@ -2,8 +2,8 @@
 @import './themes/vars.scss';
 
 @include b(alert) {
-  color: rgba(255, 146, 164, 1);
-  border-radius: 12px;
+  // color: rgba(255, 146, 164, 1);
+  border-radius: 6px;
   position: relative;
   .n-alert__icon {
     position: absolute;
@@ -29,7 +29,7 @@
     }
     .n-alert__content {
       font-size: 14px;
-      color: rgba(255, 255, 255, 0.8);
+      // color: rgba(255, 255, 255, 0.8);
     }
   }
   &.n-alert--no-icon {

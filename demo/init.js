@@ -19,7 +19,7 @@ import nimbusServiceLayoutDemo from './documentation/components/nimbusServiceLay
 import homeDemo from './documentation/components/homeDemo'
 import gradientTextDemo from './documentation/components/gradientTextDemo'
 import iconDemo from './documentation/components/iconDemo'
-import checkboxDemo from './documentation/components/checkboxDemo'
+import checkbox from './documentation/components/checkbox'
 import buttonDemo from './documentation/components/buttonDemo'
 import switchDemo from './documentation/components/switch'
 import tableDemo from './documentation/components/tableDemo'
@@ -134,7 +134,7 @@ const routes = [
       { path: '/n-nimbus-home-layout', component: homeDemo },
       { path: '/n-gradient-text', component: gradientTextDemo },
       { path: '/n-icon', component: iconDemo },
-      { path: '/n-checkbox', component: checkboxDemo },
+      { path: '/n-checkbox', component: checkbox },
       { path: '/n-button', component: buttonDemo },
       { path: '/n-switch', component: switchDemo },
       { path: '/n-table', component: tableDemo },

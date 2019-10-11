@@ -11,6 +11,7 @@
       color: $--n-text-color;
     }
     @include e(code) {
+      transition: border-color .3s $default-cubic-bezier;
       border-top: 1px solid $--n-divider-color;
       code {
         font-family: 'FiraCode';

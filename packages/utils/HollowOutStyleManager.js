@@ -15,6 +15,9 @@ class HollowOutStyleManager {
 [n-hollowoutable-id=${id}] .simulate-hollow-out-stroke circle {
   stroke: ${backgroundColor}!important;
 }
+[n-hollowoutable-id=${id}] .simulate-hollow-out-fill path {
+  fill: ${backgroundColor}!important;
+}
 `
   }
   get styleLiteral () {
