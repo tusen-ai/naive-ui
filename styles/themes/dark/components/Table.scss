@@ -1,8 +1,8 @@
 @mixin setup-dark-table {
   $--table-header-background-color: #2b3147 !global;
   $--table-body-background-color: #1f263e !global;
-  $--table-header-color: $--neutral-3 !global;
-  $--table-body-color: $--neutral-4 !global;
+  $--table-header-color: $--text-1 !global;
+  $--table-body-color: $--text-2 !global;
   $--table-row-hover: $--table-header-background-color !global;
   $--table-box-shadow: 0 3px 20px 6px rgba(0, 0, 0, .2) !global;
   $--table-border: none !global;
