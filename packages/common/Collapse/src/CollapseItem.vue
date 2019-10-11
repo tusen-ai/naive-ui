@@ -11,17 +11,25 @@
     >
       <n-icon type="ios-arrow-forward" />{{ title }}
     </div>
-    <div
-      ref="contentContainer"
-      class="n-collapse-item__content-wrapper"
+    <transition
+      name="n-fade-in-height-expand"
+      @enter="handleEnter"
+      @after-enter="handleAfterEnter"
+      @leave="handleLeave"
     >
       <div
-        ref="content"
-        class="n-collapse-item__content-inner"
+        v-if="value"
+        ref="contentContainer"
+        class="n-collapse-item__content-wrapper"
       >
-        <slot />
+        <div
+          ref="content"
+          class="n-collapse-item__content-inner"
+        >
+          <slot />
+        </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -47,23 +55,20 @@ export default {
       default: false
     }
   },
-  watch: {
-    value (newValue) {
-      if (newValue && this.$refs.contentContainer && this.$refs.content) {
-        this.$refs.contentContainer.style.maxHeight = this.$refs.content.getBoundingClientRect().height + 'px'
-      } else {
-        this.$refs.contentContainer.style.maxHeight = 0
-      }
-    }
-  },
-  mounted () {
-    if (this.value && this.$refs.contentContainer && this.$refs.content) {
-      this.$refs.contentContainer.style.maxHeight = this.$refs.content.getBoundingClientRect().height + 'px'
-    } else {
-      this.$refs.contentContainer.style.maxHeight = 0
-    }
-  },
   methods: {
+    handleEnter () {
+      this.$refs.contentContainer.style.maxHeight = 0
+      this.$el.getBoundingClientRect()
+      this.$refs.contentContainer.style.maxHeight = this.$refs.content.offsetHeight + 'px'
+    },
+    handleAfterEnter () {
+      this.$refs.contentContainer.style.maxHeight = null
+    },
+    handleLeave () {
+      this.$refs.contentContainer.style.maxHeight = this.$refs.content.offsetHeight + 'px'
+      this.$el.getBoundingClientRect()
+      this.$refs.contentContainer.style.maxHeight = 0
+    },
     handleTitleClick () {
       const newValue = !this.value
       this.$emit('input', newValue, this.name)

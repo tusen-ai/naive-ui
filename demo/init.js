@@ -32,7 +32,7 @@ import nimbusFormCardDemo from './documentation/components/nimbusFormCardDemo'
 import message from './documentation/components/message'
 import tooltip from './documentation/components/tooltip'
 import popover from './documentation/components/popover'
-import alertDemo from './documentation/components/alertDemo'
+import alert from './documentation/components/alert'
 import datePickerDemo from './documentation/components/datePickerDemo'
 import inputNumberDemo from './documentation/components/inputNumberDemo'
 import nimbusIconDemo from './documentation/components/nimbusIconDemo'
@@ -50,7 +50,7 @@ import stepsDemo from './documentation/components/stepsDemo'
 import notificationDemo from './documentation/components/notificationDemo'
 import nimbusConfirmCardDemo from './documentation/components/nimbusConfirmCardDemo'
 import paginationDemo from './documentation/components/paginationDemo'
-import collapseDemo from './documentation/components/collapseDemo'
+import collapse from './documentation/components/collapse'
 import tag from './documentation/components/tag'
 import timelineDemo from './documentation/components/timelineDemo'
 import progressDemo from './documentation/components/progressDemo'
@@ -151,7 +151,7 @@ const routes = [
       { path: '/n-notification', component: notificationDemo },
       { path: '/n-nimbus-confirm-card', component: nimbusConfirmCardDemo },
       { path: '/n-pagination', component: paginationDemo },
-      { path: '/n-alert', component: alertDemo },
+      { path: '/n-alert', component: alert },
       { path: '/n-date-picker', component: datePickerDemo },
       { path: '/n-input-number', component: inputNumberDemo },
       { path: '/n-nimbus-icon', component: nimbusIconDemo },
@@ -165,7 +165,7 @@ const routes = [
       { path: '/n-scrollbar-debug', component: scrollbarDebug },
       { path: '/n-badge', component: badge },
       { path: '/n-steps', component: stepsDemo },
-      { path: '/n-collapse', component: collapseDemo },
+      { path: '/n-collapse', component: collapse },
       { path: '/n-progress', component: progressDemo },
       { path: '/n-tag', component: tag },
       { path: '/n-timeline', component: timelineDemo },

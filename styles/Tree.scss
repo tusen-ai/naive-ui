@@ -14,7 +14,7 @@ $tree-content-selected-background-color: main-color-with-alpha(.3);
     list-style: none;
   }
   @include b(tree-children-wrapper) {
-    @include height-seamlessly-expand-transition(height-seamlessly-expand, .15s);
+    @include fade-in-height-expand-transition(fade-in-height-expand, .15s);
     margin-left: 16px;
   }
   @include b(tree-node) {

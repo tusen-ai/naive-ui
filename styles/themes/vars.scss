@@ -352,7 +352,7 @@ $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
   }
 }
 
-@mixin height-seamlessly-expand-transition($block: "height-seamlessly-expand", $duration: .3s, $delay: 0s) {
+@mixin fade-in-height-expand-transition($block: "fade-in-height-expand", $duration: .3s, $delay: 0s) {
   &.#{$namespace}-#{$block}-leave, &.#{$namespace}-#{$block}-enter-to {
     opacity: 1;
   }

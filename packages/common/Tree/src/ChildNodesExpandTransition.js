@@ -41,7 +41,7 @@ export default {
   render (h) {
     return h('transition', {
       props: {
-        name: 'n-height-seamlessly-expand'
+        name: 'n-fade-in-height-expand'
       },
       on: {
         beforeLeave: this.handleBeforeLeave,
