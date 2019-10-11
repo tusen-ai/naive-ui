@@ -115,6 +115,9 @@
         }
       }
     }
+    @include e(label) {
+      color: $--n-secondary-text-color;
+    }
     @include m(checked, indeterminate) {
       &:focus {
         @include b(checkbox-box) {
