@@ -32,9 +32,9 @@
       </div>
     </div>
     <div
-ref="tbodyWrapper"
-         class="n-advance-table__tbody"
->
+      ref="tbodyWrapper"
+      class="n-advance-table__tbody"
+    >
       <n-table
         ref="header"
         style="padding:0;border-bottom-left-radius:0;border-bottom-right-radius:0;"
@@ -537,6 +537,11 @@ export default {
       }
       // console.log(className)
       return className
+    },
+    clearSelect () {
+      this.$nextTick(() => {
+        this.checkBoxes = []
+      })
     },
     selectRow (rowIndexs = []) {
       this.$nextTick(() => {
