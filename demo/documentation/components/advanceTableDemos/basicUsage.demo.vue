@@ -36,6 +36,14 @@
             style="cursor:pointer;"
             @click="batchDelete"
           />
+          <n-button
+            v-show="selectedRow.length"
+            color="rgba(255,255,255,.7)"
+            size="small"
+            @click="clearSelect"
+          >
+            clear select
+          </n-button>
         </div>
       </n-advance-table>
       <!--EXAMPLE_END-->
@@ -110,7 +118,7 @@ const _columns3 = ($this) => {
         return values.includes(record.sex)
       },
       filterMultiple: true,
-      asynsFilterItems () {
+      asyncFilterItems () {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
             Math.random() > 0.6
@@ -171,6 +179,9 @@ export default {
     // this.$refs.table.selectRow('all') // 可以全选当前展示数据
   },
   methods: {
+    clearSelect () {
+      this.$refs.table.clearSelect()
+    },
     batchDelete () {
       this.selectedRow.forEach((item) => {
         let index = item._index

@@ -31,7 +31,10 @@
         <slot name="table-operation-search-right" />
       </div>
     </div>
-    <div class="n-advance-table__tbody">
+    <div
+      ref="tbodyWrapper"
+      class="n-advance-table__tbody"
+    >
       <n-table
         ref="header"
         style="padding:0;border-bottom-left-radius:0;border-bottom-right-radius:0;"
@@ -83,11 +86,11 @@
               {{ column.filterDropdown && column.filterDropdown() }}
               <!-- 否则默认渲染 -->
               <PopFilter
-                v-if="column.onFilter && (column.filterItems || column.asynsFilterItems)"
+                v-if="column.onFilter && (column.filterItems || column.asyncFilterItems)"
                 v-model="selectedFilter[column.key]"
                 class="n-advance-table__header-icon"
                 :column="column"
-                :items="column.filterItems || column.asynsFilterItems"
+                :items="column.filterItems || column.asyncFilterItems"
                 @on-filter="onFilter"
               />
 
@@ -535,6 +538,11 @@ export default {
       // console.log(className)
       return className
     },
+    clearSelect () {
+      this.$nextTick(() => {
+        this.checkBoxes = []
+      })
+    },
     selectRow (rowIndexs = []) {
       this.$nextTick(() => {
         if (rowIndexs === 'all') {
@@ -618,8 +626,8 @@ export default {
     computeScollBar () {
       this.$nextTick(() => {
         this.tbodyWidth = this.relTable.offsetWidth
-        this.scrollBarWidth = this.wrapperWidth - this.tbodyWidth
-        console.log('TCL: mounted -> this.scrollBarWidth', this.wrapperWidth, this.tbodyWidth)
+        this.scrollBarWidth = this.tbodyWrapperWidth - this.tbodyWidth
+        // console.log('TCL: mounted -> this.scrollBarWidth', this.wrapperWidth, this.tbodyWidth)
       })
     },
     computeCustomWidthStl (column) {
@@ -658,6 +666,7 @@ export default {
     init () {
       this.$nextTick(() => {
         this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
+        this.tbodyWrapperWidth = this.$refs.tbodyWrapper.clientWidth
         this.computeScollBar()
 
         // console.log(this.relTable.offsetWidth)
@@ -712,7 +721,7 @@ export default {
       if (!this.currentSortColumn) {
         return null
       }
-      const isCustom = this.currentSortColumn.sortable === 'custom'
+      const isCustom = (this.currentSortColumn.sortable === 'custom' && this.currentSortColumn.type !== null)
       return isCustom ? this.currentSortColumn : null
     },
     useRemoteChange () {
