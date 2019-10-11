@@ -31,7 +31,10 @@
         <slot name="table-operation-search-right" />
       </div>
     </div>
-    <div ref="tbodyWrapper" class="n-advance-table__tbody">
+    <div
+ref="tbodyWrapper"
+         class="n-advance-table__tbody"
+>
       <n-table
         ref="header"
         style="padding:0;border-bottom-left-radius:0;border-bottom-right-radius:0;"
@@ -713,7 +716,7 @@ export default {
       if (!this.currentSortColumn) {
         return null
       }
-      const isCustom = (this.currentSortColumn.sortable === 'custom' && this.currentFilterColumn.type !== null)
+      const isCustom = (this.currentSortColumn.sortable === 'custom' && this.currentSortColumn.type !== null)
       return isCustom ? this.currentSortColumn : null
     },
     useRemoteChange () {
