@@ -31,7 +31,7 @@
         <slot name="table-operation-search-right" />
       </div>
     </div>
-    <div class="n-advance-table__tbody">
+    <div ref="tbodyWrapper" class="n-advance-table__tbody">
       <n-table
         ref="header"
         style="padding:0;border-bottom-left-radius:0;border-bottom-right-radius:0;"
@@ -618,8 +618,8 @@ export default {
     computeScollBar () {
       this.$nextTick(() => {
         this.tbodyWidth = this.relTable.offsetWidth
-        this.scrollBarWidth = this.wrapperWidth - this.tbodyWidth
-        console.log('TCL: mounted -> this.scrollBarWidth', this.wrapperWidth, this.tbodyWidth)
+        this.scrollBarWidth = this.tbodyWrapperWidth - this.tbodyWidth
+        // console.log('TCL: mounted -> this.scrollBarWidth', this.wrapperWidth, this.tbodyWidth)
       })
     },
     computeCustomWidthStl (column) {
@@ -658,6 +658,7 @@ export default {
     init () {
       this.$nextTick(() => {
         this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
+        this.tbodyWrapperWidth = this.$refs.tbodyWrapper.clientWidth
         this.computeScollBar()
 
         // console.log(this.relTable.offsetWidth)
