@@ -61,13 +61,6 @@
         transform: translateY(-50%);
         line-height: 12px;
       }
-      @include e(icon) {
-        i {
-          &::before {
-            color: $--input-icon-color;
-          }
-        }
-      }
       @include e(textarea, textarea-mirror) {
         box-sizing: border-box;
         font-family: inherit;
@@ -100,6 +93,13 @@
       @include m(icon) {
         @include e(input) {
           padding-left: 38px!important;
+        }
+      }
+    }
+    @include e(icon) {
+      i {
+        &::before {
+          color: $--input-icon-color;
         }
       }
     }
