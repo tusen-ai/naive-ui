@@ -154,9 +154,6 @@ $layout-nav-height: 64px;
             }
           }
           @include m(is-group-header) {
-            // span {
-            //   transition: color 0.3s $default-cubic-bezier;
-            // }
             &::after { // down arrow
               content: '';
               height: 6px;
@@ -170,11 +167,11 @@ $layout-nav-height: 64px;
               transform-origin: 25% 25%;
               transition: transform 0.3s $default-cubic-bezier, opacity 0.3s $default-cubic-bezier;
             }
-            @include m(group-item-is-choosed) {
-              span {
-                color: #63E2B7;
-              }
-            }
+            // @include m(group-item-is-choosed) {
+            //   span {
+            //     color: #63E2B7;
+            //   }
+            // }
             @include m(collapsed) {
               &::after {
                 transform: rotate(225deg) ;

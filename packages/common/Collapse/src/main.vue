@@ -1,32 +1,19 @@
 <script>
-function mapSlot (slot, activeNames, isAccordion, handleInput, self) {
-  const names = []
-  for (const vNode of slot) {
-    if (vNode.componentOptions && (vNode.componentOptions.tag === 'NCollapseItem' || vNode.componentOptions.tag === 'n-collapse-item')) {
-      const name = vNode.componentOptions.propsData.name
-      names.push(name)
-      vNode.componentOptions.listeners = {
-        ...vNode.componentOptions.listeners,
-        input: handleInput
-      }
-      if (isAccordion) {
-        console.log(name, activeNames)
-        if (name === activeNames) {
-          vNode.componentOptions.propsData.value = true
-        }
-      } else {
-        if (Array.isArray(activeNames) && activeNames.includes(name)) {
-          vNode.componentOptions.propsData.value = true
-        }
-      }
-    }
-  }
-  self.memorizedNames = names
-  return slot
-}
+import intersection from 'lodash/intersection'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 
 export default {
   name: 'NCollapse',
+  provide () {
+    return {
+      NCollapse: this
+    }
+  },
+  mixins: [
+    withapp,
+    themeable
+  ],
   props: {
     value: {
       type: [Array, String],
@@ -39,22 +26,22 @@ export default {
   },
   data () {
     return {
-      memorizedNames: null
+      collectedItemNames: []
     }
   },
   methods: {
-    handleInput (value, name) {
+    toggleItem (collapse, name) {
       if (this.accordion) {
-        if (value) {
-          this.$emit('input', name)
+        if (collapse) {
+          this.$emit('input', [name])
         } else {
-          this.$emit('input', null)
+          this.$emit('input', [])
         }
       } else {
         if (!Array.isArray(this.value)) {
           this.$emit('input', [name])
         } else {
-          const activeNames = Array.from(new Set(this.value.filter(v => this.memorizedNames.includes(v))))
+          const activeNames = intersection(this.value, this.collectedItemNames)
           const index = activeNames.findIndex(activeName => name === activeName)
           if (~index) {
             activeNames.splice(index, 1)
@@ -69,8 +56,11 @@ export default {
   },
   render (h) {
     return h('div', {
-      staticClass: 'n-collapse'
-    }, mapSlot(this.$slots.default, this.value, this.accordion, this.handleInput, this))
+      staticClass: 'n-collapse',
+      class: {
+        [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme
+      }
+    }, this.$slots.default)
   }
 }
 </script>

@@ -2,12 +2,15 @@
   <div
     class="n-collapse-item"
     :class="{
-      'n-collapse-item--active': value
+      'n-collapse-item--active': !collapse,
     }"
   >
     <div
       class="n-collapse-item__title"
-      @click="handleTitleClick"
+      :class="{
+        'n-collapse-item__title--active': !collapse
+      }"
+      @click="handleClick"
     >
       <n-icon type="ios-arrow-forward" />{{ title }}
     </div>
@@ -18,7 +21,7 @@
       @leave="handleLeave"
     >
       <div
-        v-if="value"
+        v-if="!collapse"
         ref="contentContainer"
         class="n-collapse-item__content-wrapper"
       >
@@ -35,11 +38,18 @@
 
 <script>
 import NIcon from '../../Icon'
+import registerable from '../../../mixins/registerable'
 
 export default {
   name: 'NCollapseItem',
   components: {
     NIcon
+  },
+  mixins: [registerable('NCollapse', 'collectedItemNames', 'name')],
+  inject: {
+    NCollapse: {
+      default: null
+    }
   },
   props: {
     title: {
@@ -53,6 +63,14 @@ export default {
     value: {
       type: Boolean,
       default: false
+    }
+  },
+  computed: {
+    collapse () {
+      if (this.NCollapse && Array.isArray(this.NCollapse.value)) {
+        return !~this.NCollapse.value.findIndex(name => name === this.name)
+      }
+      return true
     }
   },
   methods: {
@@ -69,9 +87,10 @@ export default {
       this.$el.getBoundingClientRect()
       this.$refs.contentContainer.style.maxHeight = 0
     },
-    handleTitleClick () {
-      const newValue = !this.value
-      this.$emit('input', newValue, this.name)
+    handleClick () {
+      if (this.NCollapse) {
+        this.NCollapse.toggleItem(this.collapse, this.name)
+      }
     }
   }
 }

@@ -5,48 +5,66 @@
   width: 100%;
 }
 
-@include b(collapse-item) {
-  overflow: hidden;
-  font-size: 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  padding-top: 16px;
-  &:first-child {
-    padding-top: 0px;
-  }
-  &:last-child {
-    border-bottom: none;
-  }
-  @include b(collapse-item) {
-    margin-left: 18px;
-  }
-  &.n-collapse-item--active {
-    .n-collapse-item__title {
-      .n-icon {
-        transform: rotate(90deg);
+@include themes-mixin {
+  @include b(collapse) {
+    @include b(collapse-item) {
+      @include once {
+        overflow: hidden;
+        font-size: 14px;
+        transition: border-color .3s $default-cubic-bezier;
+        margin-top: 16px;
+        &:first-child {
+          margin-top: 0px;
+        }
+        &:first-child > {
+          @include e(title) {
+            padding-top: 0px;
+          }
+        }
+        @include b(collapse-item) {
+          margin-left: 32px;
+        }
+        @include e(content-wrapper) {
+          @include fade-in-height-expand-transition($duration: .15s);
+          overflow: hidden;
+        }
+        @include m(active) {
+          @include e(title) {
+            @include m(active) {
+              @include b(icon) {
+                transform: rotate(90deg);
+              }
+            }
+          }
+        }
+      }
+      &:not(:first-child) {
+        border-top: 1px solid $--n-border-color;
+      }
+      @include e(title) {
+        @include once {
+          transition: color .3s $default-cubic-bezier;
+          position: relative;
+          cursor: pointer;
+          margin-left: 18px;
+          padding: 16px 0 0 0;
+          @include b(icon) {
+            transition: transform .15s $default-cubic-bezier;
+            font-size: 16px;
+            position: absolute;
+            left: -18px;
+            bottom: 0px;
+          }
+        }
+        color: $--n-text-color;
+      }
+      @include e(content-inner) {
+        @include once {
+          transition: color .3s $default-cubic-bezier;
+          padding-top: 16px;
+        }
+        color: $--n-secondary-text-color;
       }
     }
-  }
-  .n-collapse-item__title {
-    position: relative;
-    cursor: pointer;
-    .n-icon {
-      transition: transform .3s $default-cubic-bezier;
-      font-size: 16px;
-      position: absolute;
-      left: -18px;
-      bottom: 0;
-    }
-    color: rgba(233, 233, 236, 1);
-    margin-left: 18px;
-    margin-bottom: 16px;
-  }
-  .n-collapse-item__content-wrapper {
-    @include fade-in-height-expand-transition($duration: .15s);
-    overflow: hidden;
-    // transition: max-height .3s $default-cubic-bezier;
-  }
-  .n-collapse-item__content-inner {
-    color: rgba(233, 233, 236, .7);
-    padding-bottom: 16px;
   }
 }

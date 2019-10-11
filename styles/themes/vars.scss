@@ -361,11 +361,11 @@ $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
   }
   &.#{$namespace}-#{$block}-leave-active {
     overflow: hidden;
-    transition: max-height $duration $default-cubic-bezier, opacity $duration $slow-out-cubic-bezier;
+    transition: max-height $duration $default-cubic-bezier, opacity $duration $fast-in-cubic-bezier;
   }
   &.#{$namespace}-#{$block}-enter-active {
     overflow: hidden;
-    transition: max-height $duration $default-cubic-bezier, opacity $duration $fast-in-cubic-bezier;
+    transition: max-height $duration $default-cubic-bezier, opacity $duration $slow-out-cubic-bezier;
   }
 }
 
