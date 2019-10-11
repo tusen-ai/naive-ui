@@ -6,7 +6,8 @@ export default {
   loadingBarInstance: null,
   finishCallback () {
     if (this.loadingBarInstance) {
-      document.body.removeChild(this.loadingBarInstance.$el)
+      // document.body.removeChild(this.loadingBarInstance.$el)
+      this.loadingBarInstance.$el.remove()
       this.loadingBarInstance.$destroy()
       this.loadingBarInstance = null
     }
