@@ -3,10 +3,12 @@ import NModalOverlay from './Overlay'
 import NModalContent from './ModalContent'
 import NBasePortal from '../../../base/Protal'
 import zindexable from '../../../mixins/zindexable'
+import withapp from '../../../mixins/withapp'
 
 export default {
   name: 'NModal',
   mixins: [
+    withapp,
     zindexable
   ],
   props: {

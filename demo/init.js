@@ -58,7 +58,7 @@ import dividerDemo from './documentation/components/dividerDemo'
 import popconfirmDemo from './documentation/components/popconfirmDemo'
 import anchorDemo from './documentation/components/anchorDemo'
 import popselectDemo from './documentation/components/popselectDemo'
-import appDemo from './documentation/components/appDemo'
+import app from './documentation/components/app'
 import advanceTableDemos from './documentation/components/advanceTableDemos'
 import transferDemo from './documentation/components/transferDemo'
 import spinDemo from './documentation/components/spinDemo'
@@ -177,7 +177,7 @@ const routes = [
       { path: '/n-anchor', component: anchorDemo },
       { path: '/n-dropdown', component: dropdownDemo },
       { path: '/n-popselect', component: popselectDemo },
-      { path: '/n-app', component: appDemo },
+      { path: '/n-app', component: app },
       { path: '/n-cancel-mark-debug', component: cancelMarkDebug },
       { path: '/n-transfer', component: transferDemo },
       { path: '/n-spin', component: spinDemo },
