@@ -56,7 +56,7 @@ import timelineDemo from './documentation/components/timelineDemo'
 import progressDemo from './documentation/components/progressDemo'
 import divider from './documentation/components/divider'
 import popconfirmDemo from './documentation/components/popconfirmDemo'
-import anchorDemo from './documentation/components/anchorDemo'
+import anchor from './documentation/components/anchor'
 import popselectDemo from './documentation/components/popselectDemo'
 import app from './documentation/components/app'
 import advanceTableDemos from './documentation/components/advanceTableDemos'
@@ -174,7 +174,7 @@ const routes = [
       { path: '/n-date-picker-debug', component: datePickerDebug },
       { path: '/n-divider', component: divider },
       { path: '/n-popconfirm', component: popconfirmDemo },
-      { path: '/n-anchor', component: anchorDemo },
+      { path: '/n-anchor', component: anchor },
       { path: '/n-dropdown', component: dropdownDemo },
       { path: '/n-popselect', component: popselectDemo },
       { path: '/n-app', component: app },

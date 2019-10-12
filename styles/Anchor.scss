@@ -1,6 +1,63 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
-@include b(scaffold) {
-  position: relative;
+@include themes-mixin {
+  @include b(anchor) {
+    padding-left: 4px;
+    position: relative;
+    @include b(anchor-slot) {
+      position: absolute;
+      left: 2px;
+      width: 100%;
+      max-width: 0;
+      transition: top .15s $default-cubic-bezier, max-width .15s $default-cubic-bezier;
+      background-color: change-color($color: $--primary-6, $alpha: .2);
+      border-top-right-radius: 10.5px;
+      border-bottom-right-radius: 10.5px;
+    }
+    @include b(anchor-rail) {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      border-radius: 2px;
+      background-color: rgba(0, 0, 0, .15);
+      overflow: hidden;
+      @include e(bar) {
+        position: absolute;
+        left: 0;
+        transition: top .15s $default-cubic-bezier;
+        width: 4px;
+        background-color: $--primary-6;
+      }
+      & + {
+        @include b(anchor-link) {
+          margin-top: 0;
+        }
+      }
+    }
+    @include b(anchor-link) {
+      margin-top: 10px;
+      padding-left: 24px;
+      @include e(title) {
+        white-space: no-wrap;
+        line-height: 21px;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 14px;
+        padding-right: 16px;
+        color: $--n-text-color;
+        transition: color .3s $default-cubic-bezier;
+        &:hover {
+          color: $--n-primary-color;
+        }
+      }
+    }
+    & > {
+      @include b(anchor-link) {
+        padding-left: 16px;
+      }
+    }
+  }
 }
