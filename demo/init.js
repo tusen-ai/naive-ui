@@ -49,7 +49,7 @@ import badge from './documentation/components/badge'
 import stepsDemo from './documentation/components/stepsDemo'
 import notificationDemo from './documentation/components/notificationDemo'
 import nimbusConfirmCardDemo from './documentation/components/nimbusConfirmCardDemo'
-import paginationDemo from './documentation/components/paginationDemo'
+import pagination from './documentation/components/pagination'
 import collapse from './documentation/components/collapse'
 import tag from './documentation/components/tag'
 import timelineDemo from './documentation/components/timelineDemo'
@@ -150,7 +150,7 @@ const routes = [
       { path: '/n-popover', component: popover },
       { path: '/n-notification', component: notificationDemo },
       { path: '/n-nimbus-confirm-card', component: nimbusConfirmCardDemo },
-      { path: '/n-pagination', component: paginationDemo },
+      { path: '/n-pagination', component: pagination },
       { path: '/n-alert', component: alert },
       { path: '/n-date-picker', component: datePickerDemo },
       { path: '/n-input-number', component: inputNumberDemo },
