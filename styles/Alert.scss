@@ -1,81 +1,72 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
-@include b(alert) {
-  // color: rgba(255, 146, 164, 1);
-  border-radius: 6px;
-  position: relative;
-  .n-alert__icon {
-    position: absolute;
-    left: 15px;
-    top: 15px;
-    align-items: center;
-    justify-content: center;
-    width: 19px;
-    height: 19px;
-    .n-icon {
-      margin-left: -2px;
-      margin-top: -2px;
-      font-size: 23px;
+@mixin alert-type-mixin ($type) {
+  @include m($type + '-type') {
+    background-color: map-get($--alert-background-color, $type);
+    box-shadow: inset 0 0 0 1.2px map-get($--alert-border-color, $type);
+    @include e(icon) {
+      @include b(icon) {
+        color: map-get($--alert-icon-color, $type);
+      }
+    }
+    @include b(alert-body) {
+      @include e(title) {
+        color: map-get($--alert-title-text-color, $type);
+      }
+      @include e(content) {
+        color: map-get($--alert-content-text-color, $type);
+
+      }
     }
   }
-  .n-alert__body-wrapper {
-    padding: 15px 19px 15px 47px;
-    .n-alert__title {
-      font-size: 16px;
-      line-height: 19px;
-      margin-bottom: 9px;
-      font-weight: 700;
+}
+
+@include themes-mixin {
+  @include b(alert) {
+    @include once {
+      border-radius: 6px;
+      position: relative;
+      transition: background-color .3s $default-cubic-bezier;
+      @include e(icon) {
+        position: absolute;
+        left: 15px;
+        top: 15px;
+        align-items: center;
+        justify-content: center;
+        width: 19px;
+        height: 19px;
+        @include b(icon) {
+          transition: color .3s $default-cubic-bezier;
+          margin-left: -2px;
+          margin-top: -2px;
+          font-size: 23px;
+        }
+      }
+      @include b(alert-body) {
+        padding: 15px 19px 15px 47px;
+        @include e(title) {
+          transition: color .3s $default-cubic-bezier;
+          font-size: 16px;
+          line-height: 19px;
+          margin-bottom: 9px;
+          font-weight: 700;
+        }
+        @include e(content) {
+          transition: color .3s $default-cubic-bezier;
+          font-size: 14px;
+        }
+      }
+      @include m(no-icon) {
+        @include b(alert-body) {
+          padding-left: 19px;
+        }
+      }
     }
-    .n-alert__content {
-      font-size: 14px;
-      // color: rgba(255, 255, 255, 0.8);
-    }
+    @include alert-type-mixin('default');
+    @include alert-type-mixin('success');
+    @include alert-type-mixin('info');
+    @include alert-type-mixin('error');
+    @include alert-type-mixin('warning');
   }
-  &.n-alert--no-icon {
-    .n-alert__body-wrapper {
-      padding-left: 19px;
-    }
-  }
-  &.n-alert--success {
-    background-color: rgba(99, 226, 183, 0.2);
-    box-shadow: inset 0 0 0 1.2px rgba(99, 226, 183, .5);
-    .n-icon {
-      color: rgba(99, 226, 183, 1);
-    }
-    .n-alert__title {
-      color: rgba(99, 226, 183, 1);
-    }
-  }
-  &.n-alert--info {
-    background-color: rgba(98,187,252,0.2);
-    box-shadow: inset 0 0 0 1.2px rgba(98,187,252, .5);
-    .n-icon {
-      color: rgba(98, 187, 252, 1);
-    }
-    .n-alert__title {
-      color: rgba(98, 187, 252, 1);
-    }
-  }
-  &.n-alert--warning {
-    background-color: rgba(245, 166, 35, 0.2);
-    box-shadow: inset 0 0 0 1.2px rgba(245, 166, 35, .5);
-    .n-icon {
-      color: rgba(245, 166, 35, 1);
-    }
-    .n-alert__title {
-      color:rgba(245, 166, 35, 1);
-    }
-  }
-  &.n-alert--error {
-    background-color: rgba(255, 146, 164, 0.2);
-    box-shadow: inset 0 0 0 1.2px  rgba(255, 146, 164, 0.5);
-    .n-icon {
-      color:rgba(255, 146, 164, 1);
-    }
-    .n-alert__title {
-      color:rgba(255, 146, 164, 1);
-    }
-  }
-  
 }

@@ -19,16 +19,18 @@
 @import "components/Badge.scss";
 @import "components/Dropdown.scss";
 @import "components/Input.scss";
+@import "components/Alert.scss";
+@import "components/Anchor.scss";
 
 @mixin setup-dark-theme () {
   @include setup-dark-colors();
-  $--n-primary-color: $primary-6 !global;
-  $--n-primary-hover-color: $primary-5 !global;
-  $--n-primary-active-color: $primary-7 !global;
-  $--n-info-color: $info-6 !global;
-  $--n-success-color: $success-6 !global;
-  $--n-warning-color: $warning-6 !global;
-  $--n-error-color: $error-6 !global;
+  $--n-primary-color: $--primary-6 !global;
+  $--n-primary-hover-color: $--primary-5 !global;
+  $--n-primary-active-color: $--primary-7 !global;
+  $--n-info-color: $--info-6 !global;
+  $--n-success-color: $--success-6 !global;
+  $--n-warning-color: $--warning-6 !global;
+  $--n-error-color: $--error-6 !global;
 
   $--n-text-color: $--text-1 !global;
   $--n-popover-color: $--neutral-1 !global;
@@ -65,4 +67,6 @@
   @include setup-dark-badge;
   @include setup-dark-dropdown;
   @include setup-dark-input;
+  @include setup-dark-anchor;
+  @include setup-dark-alert;
 }

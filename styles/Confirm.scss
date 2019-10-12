@@ -41,13 +41,13 @@
       }
       @include b(confirm-title-icon) {
         @include m(confirm-type) {
-          color: $warning-6;
+          color: $--warning-6;
         }
         @include m(success-type) {
-          color: $success-6;
+          color: $--success-6;
         }
         @include m(error-type) {
-          color: $error-6;
+          color: $--error-6;
         }
       }
       color: $--confirm-title-color;

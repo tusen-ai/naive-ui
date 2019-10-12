@@ -3,7 +3,7 @@
   $--base-picker-background-color: (
     "default": rgba(255, 255, 255, .1),
     "disabled": rgba(255, 255, 255, .06),
-    "active": change-color($primary-6, $alpha: 0.1)
+    "active": change-color($--primary-6, $alpha: 0.1)
   ) !global;
   $--base-picker-placeholder-color: (
     "default": rgba(255, 255, 255, .4),
@@ -11,8 +11,8 @@
   ) !global;
   $--base-picker-box-shadow: (
     "default": none,
-    "hover": 0 0 0 1px $primary-6,
-    'focus': (inset 0 0 0px 1px $primary-6, 0 0 8px 0px change-color($primary-6, $alpha: .3)),
+    "hover": 0 0 0 1px $--primary-6,
+    'focus': (inset 0 0 0px 1px $--primary-6, 0 0 8px 0px change-color($--primary-6, $alpha: .3)),
     "disabled": none
   ) !global;
   $--base-picker-caret-color: $--n-primary-color !global; 

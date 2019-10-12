@@ -1,0 +1,37 @@
+@mixin setup-light-alert {
+  $--alert-border-color: (
+    'default': white,
+    'success': change-color($--success-6, $alpha: .3),
+    'info': change-color($--info-6, $alpha: .3),
+    'warning': change-color($--warning-6, $alpha: .3),
+    'error': change-color($--error-6, $alpha: .3)
+  ) !global;
+  $--alert-background-color: (
+    'default': white,
+    'success': change-color($--success-6, $alpha: .15),
+    'info': change-color($--info-6, $alpha: .15),
+    'warning': change-color($--warning-6, $alpha: .15),
+    'error': change-color($--error-6, $alpha: .15)
+  ) !global;
+  $--alert-title-text-color: (
+    'default': $--n-text-color,
+    'success': $--n-text-color,
+    'info': $--n-text-color,
+    'warning': $--n-text-color,
+    'error': $--n-text-color
+  ) !global;
+  $--alert-icon-color: (
+    'default': $--success-6,
+    'success': $--success-6,
+    'info': $--info-6,
+    'warning': $--warning-6,
+    'error': $--error-6
+  ) !global;
+  $--alert-content-text-color: (
+    'default': $--n-secondary-text-color,
+    'success': $--n-secondary-text-color,
+    'info': $--n-secondary-text-color,
+    'warning': $--n-secondary-text-color,
+    'error': $--n-secondary-text-color,
+  ) !global;
+}

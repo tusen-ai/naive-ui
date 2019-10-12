@@ -21,11 +21,11 @@ body {
   font-family: $default-font-family;
   min-width: 1280px;
   // background: $body-background-color;
-  // color: $primary-text-color;
+  // color: $--primary-text-color;
 }
 
 a {
-  color: $primary-text-color;
+  color: $--primary-text-color;
 }
 
 input {
