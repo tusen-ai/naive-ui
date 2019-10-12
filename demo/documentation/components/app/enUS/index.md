@@ -4,4 +4,5 @@ App is using to set global theme and set namespace for components (detached part
 ```demo
 theme
 namespace
+inherit-theme
 ```
