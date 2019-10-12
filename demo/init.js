@@ -54,7 +54,7 @@ import collapse from './documentation/components/collapse'
 import tag from './documentation/components/tag'
 import timelineDemo from './documentation/components/timelineDemo'
 import progressDemo from './documentation/components/progressDemo'
-import dividerDemo from './documentation/components/dividerDemo'
+import divider from './documentation/components/divider'
 import popconfirmDemo from './documentation/components/popconfirmDemo'
 import anchorDemo from './documentation/components/anchorDemo'
 import popselectDemo from './documentation/components/popselectDemo'
@@ -172,7 +172,7 @@ const routes = [
       { path: '/n-scrollbar-debug2', component: scrollbarDebug2 },
       { path: '/n-back-top', component: backTopDemo },
       { path: '/n-date-picker-debug', component: datePickerDebug },
-      { path: '/n-divider', component: dividerDemo },
+      { path: '/n-divider', component: divider },
       { path: '/n-popconfirm', component: popconfirmDemo },
       { path: '/n-anchor', component: anchorDemo },
       { path: '/n-dropdown', component: dropdownDemo },

@@ -40,8 +40,8 @@ renderer.code = (code, language) => {
 //   renderer
 // })
 
-function template (demos) {
-  return `<component-demos>${demos}</component-demos>`
+function template (demos, isSingleColumn = false) {
+  return `<component-demos :single-column="${isSingleColumn}">${demos}</component-demos>`
 }
 
 function parseDemos (demosLiteral) {
@@ -74,6 +74,7 @@ export default {
 }
 
 function convertMd2ComponentDocumentation (text) {
+  const isSingleColumn = !!~text.search('<!--single-column-->')
   const tokens = marked.lexer(text)
   const demosIndex = tokens.findIndex(token => token.type === 'code' && token.lang === 'demo')
   let demos = { text: '' }
@@ -99,7 +100,7 @@ function convertMd2ComponentDocumentation (text) {
   // const classedDocumentationHTML = addClassToHTML(documentationHTML, 'markdown')
   const demosReg = /<!--demos-->/
   const demoTags = parseDemos(demosLiteral)
-  const documentationContent = documentationHTML.replace(demosReg, template(demoTags))
+  const documentationContent = documentationHTML.replace(demosReg, template(demoTags, isSingleColumn))
   // console.log(documentationContent)
   const documentationTemplate = `<template><component-documentation>${documentationContent}</component-documentation></template>`
   const documentationScript = generateScript(demosLiteral)

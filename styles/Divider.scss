@@ -1,22 +1,15 @@
 @import './mixins/mixins.scss';
-@import './themes/vars.scss';
 
 @include themes-mixin {
   @include b(divider) {
-    color: $divider-color;
     @include once {
       position: relative;
       display: flex;
       width: 100%;
       font-size: 16px;
-      .n-divider__line {
-        height: 1px;
-        width: 100%;
-        margin-top: 24px;
-        margin-bottom: 24px;
-        background-color: rgba(255, 255, 255, 0.3)
-      }
-      .n-divider__content {
+      transition: background-color .3s $default-cubic-bezier;
+      @include e(content) {
+        transition: color .3s $default-cubic-bezier;
         display: flex;
         align-items: center;
         margin-left: 12px;
@@ -24,38 +17,59 @@
         white-space: nowrap;
         font-weight: 700;
       }
-      &.n-divider--content-position-left {
-        .n-divider__line {
-          &.n-divider__line--left {
+      @include m(content-position-left) {
+        @include e(line) {
+          @include m(line-left) {
             width: 28px;
           }
         }
       }
-      &.n-divider--content-position-right {
-        .n-divider__line {
-          &.n-divider__line--right {
+      @include m(content-position-right) {
+        @include e(line) {
+          @include m(line-right) {
             width: 28px;
           }
         }
       }
-      &.n-divider--dashed {
-        .n-divider__line {
+      @include m(dashed) {
+        @include e(line) {
+          background-color: transparent;
           height: 0px;
           width: 100%;
-          background: none;
-          border-color: rgba(255, 255, 255, 0.3);
           border-style: dashed;
           border-width: 1px 0 0;
         }
       }
-      &.n-divider--vertical {
+      @include m(vertical) {
         display: inline-block;
         height: 1em;
         margin: 0 8px;
         vertical-align: middle;
         width: 1px;
-        background-color: rgba(255, 255, 255, 0.3)
       }
+    }
+    color: $--divider-text-color;
+    @include once {
+      @include e(line) {
+        transition: background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+        height: 1px;
+        width: 100%;
+        margin-top: 24px;
+        margin-bottom: 24px;
+      }
+    }
+    @include not-m(dashed) {
+      @include e(line) {
+        background-color: $--divider-border-color;  
+      }
+    }
+    @include m(dashed) {
+      @include e(line) {
+        border-color: $--divider-border-color;
+      }
+    }
+    @include m(vertical) {
+      background-color: $--divider-border-color;
     }
   }
 }

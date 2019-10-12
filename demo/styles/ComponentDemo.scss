@@ -26,9 +26,6 @@
       border-radius: 8px;
       padding-top: 16px;
       transition: background-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
-      .n-divider__content {
-        cursor: pointer;
-      }
       @include e(title) {
         transition: color .3s $default-cubic-bezier;
         position: relative;
@@ -50,6 +47,7 @@
         }
       }
       @include e(view) {
+        font-size: 14px;
         margin: 16px 24px 12px 24px;
       }
       @include e(code) {
