@@ -14,12 +14,7 @@
     >
       <n-icon type="ios-arrow-forward" />{{ title }}
     </div>
-    <transition
-      name="n-fade-in-height-expand"
-      @enter="handleEnter"
-      @after-enter="handleAfterEnter"
-      @leave="handleLeave"
-    >
+    <fade-in-height-expand-transition>
       <div
         v-if="!collapse"
         ref="contentContainer"
@@ -32,18 +27,20 @@
           <slot />
         </div>
       </div>
-    </transition>
+    </fade-in-height-expand-transition>
   </div>
 </template>
 
 <script>
 import NIcon from '../../Icon'
 import registerable from '../../../mixins/registerable'
+import FadeInHeightExpandTransition from '../../../transition/FadeInHeightExpandTransition'
 
 export default {
   name: 'NCollapseItem',
   components: {
-    NIcon
+    NIcon,
+    FadeInHeightExpandTransition
   },
   mixins: [registerable('NCollapse', 'collectedItemNames', 'name')],
   inject: {
@@ -74,19 +71,6 @@ export default {
     }
   },
   methods: {
-    handleEnter () {
-      this.$refs.contentContainer.style.maxHeight = 0
-      this.$el.getBoundingClientRect()
-      this.$refs.contentContainer.style.maxHeight = this.$refs.content.offsetHeight + 'px'
-    },
-    handleAfterEnter () {
-      this.$refs.contentContainer.style.maxHeight = null
-    },
-    handleLeave () {
-      this.$refs.contentContainer.style.maxHeight = this.$refs.content.offsetHeight + 'px'
-      this.$el.getBoundingClientRect()
-      this.$refs.contentContainer.style.maxHeight = 0
-    },
     handleClick () {
       if (this.NCollapse) {
         this.NCollapse.toggleItem(this.collapse, this.name)
