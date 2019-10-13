@@ -74,7 +74,9 @@ export default {
       const {
         top
       } = this.$el.getBoundingClientRect()
-      this.memorizedTop = top
+      const containerScrollTop = this.container.scrollTop
+      const delta = containerScrollTop - this.top
+      this.memorizedTop = top + delta
     },
     handleScroll (e) {
       const containerEl = this.container.nodeName === '#document' ? this.container.documentElement : this.container
