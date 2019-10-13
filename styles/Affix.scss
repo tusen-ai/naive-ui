@@ -1,0 +1,7 @@
+@import './mixins/mixins.scss';
+
+@include b(affix) {
+  @include m(affixed) {
+    position: fixed;
+  }
+}

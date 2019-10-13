@@ -1,53 +1,45 @@
 <template>
-  <div
-    class="n-anchor"
-    :class="{
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
-    }"
+  <anchor
+    v-if="!affix"
+    :target="target"
   >
-    <div
-      ref="slot"
-      class="n-anchor-slot"
-    />
-    <div class="n-anchor-rail">
-      <div
-        ref="bar"
-        class="n-anchor-rail__bar"
-      />
-    </div>
     <slot />
-  </div>
+  </anchor>
+  <n-affix
+    v-else
+    :target="target"
+    :top="top"
+  >
+    <anchor
+      :target="target"
+    >
+      <slot />
+    </anchor>
+  </n-affix>
 </template>
 
 <script>
-import withapp from '../../../mixins/withapp'
-import themeable from '../../../mixins/themeable'
+import Anchor from './Anchor'
+import NAffix from '../../Affix'
 
 export default {
   name: 'NAnchor',
-  mixins: [withapp, themeable],
-  provide () {
-    return {
-      NAnchor: this
-    }
+  components: {
+    Anchor,
+    NAffix
   },
-  mounted () {
-  },
-  methods: {
-    updateBarPosition (linkTitleEl) {
-      const {
-        offsetHeight,
-        offsetTop,
-        offsetLeft,
-        offsetWidth
-      } = linkTitleEl
-      const barEl = this.$refs.bar
-      barEl.style.top = `${offsetTop}px`
-      barEl.style.height = `${offsetHeight}px`
-      const slotEl = this.$refs.slot
-      slotEl.style.top = `${offsetTop}px`
-      slotEl.style.height = `${offsetHeight}px`
-      slotEl.style.maxWidth = `${offsetWidth + offsetLeft}px`
+  props: {
+    top: {
+      type: Number,
+      default: null
+    },
+    target: {
+      type: Function,
+      default: null
+    },
+    affix: {
+      type: Boolean,
+      default: false
     }
   }
 }

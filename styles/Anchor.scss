@@ -22,12 +22,13 @@
       bottom: 0;
       width: 4px;
       border-radius: 2px;
-      background-color: rgba(0, 0, 0, .15);
+      transition: background-color .3s $default-cubic-bezier;
+      background-color: $--anchor-rail-background-color;
       overflow: hidden;
       @include e(bar) {
         position: absolute;
         left: 0;
-        transition: top .15s $default-cubic-bezier;
+        transition: top .15s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
         width: 4px;
         background-color: $--primary-6;
       }
@@ -40,7 +41,9 @@
     @include b(anchor-link) {
       margin-top: 10px;
       padding-left: 24px;
+      position: relative;
       @include e(title) {
+        text-decoration: none;
         white-space: no-wrap;
         line-height: 21px;
         cursor: pointer;
@@ -50,6 +53,9 @@
         color: $--n-text-color;
         transition: color .3s $default-cubic-bezier;
         &:hover {
+          color: $--n-primary-color;
+        }
+        @include m(active) {
           color: $--n-primary-color;
         }
       }

@@ -67,6 +67,7 @@ import loadingBar from './documentation/components/loadingBar'
 import timeDemo from './documentation/components/timeDemo'
 import sliderDemo from './documentation/components/sliderDemo'
 import treeDemo from './documentation/components/treeDemo'
+import affix from './documentation/components/affix'
 
 import demo from './demo'
 import ComponentDemo from './utils/ComponentDemo'
@@ -186,7 +187,8 @@ const routes = [
       { path: '/n-time', component: timeDemo },
       { path: '/n-slider', component: sliderDemo },
       { path: '/n-tree', component: treeDemo },
-      { path: '/n-vertical-align-debug', component: verticalAlignDebug }
+      { path: '/n-vertical-align-debug', component: verticalAlignDebug },
+      { path: '/n-affix', component: affix }
     ])
   },
   {

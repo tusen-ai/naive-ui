@@ -59,6 +59,7 @@ import LoadingBar from './packages/common/LoadingBar'
 import Slider from './packages/common/Slider'
 import Tree from './packages/common/Tree'
 import Grid from './packages/common/Grid'
+import Affix from './packages/common/Affix'
 
 function install (Vue) {
   Card.install(Vue)
@@ -122,6 +123,7 @@ function install (Vue) {
   Slider.install(Vue)
   Tree.install(Vue)
   Grid.install(Vue)
+  Affix.install(Vue)
 }
 
 export default {
