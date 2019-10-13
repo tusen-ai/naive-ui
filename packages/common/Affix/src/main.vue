@@ -34,14 +34,15 @@ export default {
       container: null,
       stickToTop: false,
       stickToBottom: false,
-      memorizedTop: null
+      memorizedTop: null,
+      affixTop: null
     }
   },
   computed: {
     style () {
       const style = {}
-      if (this.affixed && this.memorizedTop !== null) {
-        style.top = `${this.memorizedTop}px`
+      if (this.affixed && this.affixTop !== null) {
+        style.top = `${this.affixTop}px`
       }
       return style
     },
@@ -51,6 +52,7 @@ export default {
   },
   mounted () {
     this.init()
+    this.memorizeTop()
   },
   beforeDestroy () {
     if (this.container) {
@@ -68,6 +70,12 @@ export default {
         this.container.addEventListener('scroll', this.handleScroll)
       }
     },
+    memorizeTop () {
+      const {
+        top
+      } = this.$el.getBoundingClientRect()
+      this.memorizedTop = top
+    },
     handleScroll (e) {
       const containerEl = this.container.nodeName === '#document' ? this.container.documentElement : this.container
       let scrollTop = containerEl.scrollTop
@@ -84,12 +92,11 @@ export default {
         this.stickToBottom = false
       }
       if (!originalAffixed && this.affixed) {
-        let {
-          top
-        } = this.$el.getBoundingClientRect()
         // console.log(e, this.$el.getBoundingClientRect().top)
-        this.memorizedTop = top
+        this.affixTop = this.memorizedTop
         // debugger
+      } else {
+        this.memorizeTop()
       }
     }
   }

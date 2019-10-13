@@ -13,6 +13,9 @@
       <div
         ref="bar"
         class="n-anchor-rail__bar"
+        :class="{
+          'n-anchor-rail__bar--active': activeHref !== null
+        }"
       />
     </div>
     <slot />
@@ -31,6 +34,7 @@ function getOffsetTop (el, container) {
   const {
     top: containerTop
   } = container.getBoundingClientRect()
+  // console.log('elTop', elTop, 'containerTop', containerTop)
   return elTop - containerTop
 }
 
@@ -41,6 +45,10 @@ export default {
     target: {
       type: Function,
       default: null
+    },
+    bound: {
+      type: Number,
+      default: 12
     }
   },
   data () {
@@ -48,6 +56,20 @@ export default {
       collectedLinkHrefs: [],
       activeHref: null,
       container: null
+    }
+  },
+  watch: {
+    activeHref (value) {
+      if (value === null) {
+        const slotEl = this.$refs.slot
+        slotEl.style.maxWidth = `0px`
+        const barEl = this.$refs.bar
+        window.setTimeout(() => {
+          slotEl.style.top = null
+          barEl.style.top = null
+          // slotEl.style.top = null
+        }, 150)
+      }
     }
   },
   mounted () {
@@ -84,8 +106,20 @@ export default {
     },
     setActiveHref (href) {
       this.activeHref = href
+      const idMatchResult = /#([^#]+)$/.exec(href)
+      if (idMatchResult) {
+        const linkEl = document.getElementById(idMatchResult[1])
+        if (linkEl) {
+          const top = getOffsetTop(linkEl, this.container) + (this.container.scrollTop || 0)
+          this.container.scrollTo({
+            top: top - this.bound
+          })
+          // this.handleScroll()
+        }
+      }
     },
     handleScroll () {
+      console.log('handleScroll')
       const links = []
       this.collectedLinkHrefs.forEach(href => {
         const idMatchResult = /#([^#]+)$/.exec(href)
@@ -105,8 +139,8 @@ export default {
       // const containerScrollTop = this.container.scrollTop
       // console.log(links)
       const activeLink = links.reduce((prevLink, link) => {
-        // console.log(link.top)
-        if (link.top < 5) {
+        console.log(link.top)
+        if (link.top <= this.bound) {
           if (prevLink === null) {
             return link
           } else if (link.top > prevLink.top) {
@@ -119,6 +153,8 @@ export default {
       }, null)
       if (activeLink) {
         this.activeHref = activeLink.href
+      } else {
+        this.activeHref = null
       }
     },
     init () {

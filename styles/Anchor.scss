@@ -30,7 +30,11 @@
         left: 0;
         transition: top .15s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
         width: 4px;
-        background-color: $--primary-6;
+        height: 21px;
+        background-color: transparent;
+        @include m(active) {
+          background-color: $--primary-6;
+        }
       }
       & + {
         @include b(anchor-link) {
