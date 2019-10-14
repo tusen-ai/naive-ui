@@ -49,6 +49,11 @@ export default {
     }
   },
   methods: {
+    handleFontReady () {
+      if (this.active) {
+        this.NAnchor.updateBarPosition(this.$refs.title, false)
+      }
+    },
     handleClick (e) {
       // e.preventDefault()
       this.NAnchor.setActiveHref(this.href)

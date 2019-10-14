@@ -26,6 +26,7 @@
 import getScrollParent from '../../../utils/dom/getScrollParent'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import fontawarable from '../../../mixins/fontawarable'
 
 function getOffsetTop (el, container) {
   const {
@@ -40,7 +41,7 @@ function getOffsetTop (el, container) {
 
 export default {
   name: 'NAnchor',
-  mixins: [withapp, themeable],
+  mixins: [withapp, themeable, fontawarable],
   props: {
     target: {
       type: Function,
@@ -73,8 +74,8 @@ export default {
     }
   },
   mounted () {
-    this.init()
-    this.setActiveHref(window.location)
+    // this.init()
+    // this.setActiveHref(window.location)
     // this.blockTransitionOneTick()
   },
   provide () {
@@ -83,7 +84,14 @@ export default {
     }
   },
   methods: {
+    handleFontReady () {
+      console.log('font-ready')
+      this.init()
+      this.setActiveHref(window.location)
+      this.handleScroll(false)
+    },
     blockTransitionOneTick () {
+      console.log('block transition')
       const barEl = this.$refs.bar
       const slotEl = this.$refs.slot
       barEl.style.transition = 'none'
@@ -91,11 +99,18 @@ export default {
       barEl.getBoundingClientRect()
       slotEl.getBoundingClientRect()
       this.$nextTick().then(() => {
+        console.log('unblock transition')
         barEl.style.transition = null
         slotEl.style.transition = null
       })
     },
-    updateBarPosition (linkTitleEl) {
+    updateBarPosition (linkTitleEl, transition = true) {
+      const barEl = this.$refs.bar
+      const slotEl = this.$refs.slot
+      if (!transition) {
+        barEl.style.transition = 'none'
+        slotEl.style.transition = 'none'
+      }
       // console.log('updateBarPosition')
       const {
         offsetHeight,
@@ -111,30 +126,36 @@ export default {
       } = this.$el.getBoundingClientRect()
       const offsetTop = linkTitleClientTop - anchorClientTop
       const offsetLeft = linkTitleClientLeft - anchorClientLeft
-      const barEl = this.$refs.bar
       barEl.style.top = `${offsetTop}px`
       barEl.style.height = `${offsetHeight}px`
-      const slotEl = this.$refs.slot
       slotEl.style.top = `${offsetTop}px`
       slotEl.style.height = `${offsetHeight}px`
       slotEl.style.maxWidth = `${offsetWidth + offsetLeft}px`
+      barEl.getBoundingClientRect()
+      slotEl.getBoundingClientRect()
+      if (!transition) {
+        barEl.style.transition = null
+        slotEl.style.transition = null
+      }
     },
-    setActiveHref (href) {
-      this.activeHref = href
+    setActiveHref (href, transition = true) {
       const idMatchResult = /#([^#]+)$/.exec(href)
       if (idMatchResult) {
         const linkEl = document.getElementById(idMatchResult[1])
         if (linkEl) {
+          this.activeHref = href
           const top = getOffsetTop(linkEl, this.container) + (this.container.scrollTop || 0)
           this.container.scrollTo({
             top: top - this.bound
           })
-          this.blockTransitionOneTick()
+          if (!transition) {
+            this.blockTransitionOneTick()
+          }
           this.handleScroll()
         }
       }
     },
-    handleScroll () {
+    handleScroll (transition = true) {
       // console.log('handleScroll')
       const links = []
       this.collectedLinkHrefs.forEach(href => {
@@ -154,11 +175,16 @@ export default {
       })
       // const containerScrollTop = this.container.scrollTop
       // console.log(links)
+      const currentActiveHref = this.activeHref
       const activeLink = links.reduce((prevLink, link) => {
         // console.log(link.top)
         if (link.top <= this.bound) {
           if (prevLink === null) {
             return link
+          } else if (link.top === prevLink.top) {
+            if (link.href === currentActiveHref) {
+              return link
+            } else return prevLink
           } else if (link.top > prevLink.top) {
             return link
           } else {
@@ -167,6 +193,7 @@ export default {
         }
         return prevLink
       }, null)
+      if (!transition) this.blockTransitionOneTick()
       if (activeLink) {
         this.activeHref = activeLink.href
       } else {

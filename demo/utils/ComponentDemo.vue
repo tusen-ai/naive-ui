@@ -65,6 +65,11 @@ import themeable from '../../packages/mixins/themeable'
 
 export default {
   mixins: [withapp, themeable],
+  inject: {
+    NDocumentation: {
+      default: null
+    }
+  },
   data () {
     return {
       showCode: false,
@@ -84,7 +89,9 @@ export default {
     }
   },
   mounted () {
-    // document.querySelector('')
+    const map = this.NDocumentation.anchorLinkMap
+    map.set(this.$el.id, String(this.$scopedSlots.title()[0].text).trim())
+    this.NDocumentation.anchorLinkMap = new Map(map, this.$scopedSlots.title()[0].text.trim())
   },
   methods: {
     switchHighlightStyle () {

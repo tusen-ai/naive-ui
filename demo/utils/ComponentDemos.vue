@@ -8,7 +8,11 @@ export default {
     }
   },
   render (h) {
-    const defaultSlot = this.$slots.default || []
+    const defaultSlot = (this.$scopedSlots.default && this.$scopedSlots.default()) || []
+    // const anchorSlot = (this.$scopedSlots.anchor && this.$scopedSlots.anchor()) || []
+    // const anchor = [h('div', {
+    //   staticClass: 'n-documentation-anchor'
+    // }, anchorSlot)]
     if (this.singleColumn) {
       return h('n-row', {
         props: {
@@ -16,6 +20,7 @@ export default {
         }
       }, [
         h('n-col', { props: { span: 24 } }, defaultSlot)
+        // h('n-col', { props: { span: 4 } }, anchorSlot)
       ])
     } else {
       const leftColumn = defaultSlot.filter((value, index) => index % 2 === 0)
@@ -27,6 +32,7 @@ export default {
       }, [
         h('n-col', { props: { span: 12 } }, leftColumn),
         h('n-col', { props: { span: 12 } }, rightColumn)
+        // h('n-col', { props: { span: 4 } }, anchor)
       ])
     }
   }

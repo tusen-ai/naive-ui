@@ -46,10 +46,15 @@
       margin-top: 10px;
       padding-left: 24px;
       position: relative;
+      height: 21px;
+      line-height: 21px;
       @include e(title) {
+        max-width: 100%;
         text-decoration: none;
-        white-space: no-wrap;
+        white-space: nowrap;
         line-height: 21px;
+        text-overflow: ellipsis;
+        overflow: hidden;
         cursor: pointer;
         display: inline-block;
         font-size: 14px;

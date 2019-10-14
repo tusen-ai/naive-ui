@@ -68,6 +68,7 @@ export default {
       }
       if (this.container) {
         this.container.addEventListener('scroll', this.handleScroll)
+        this.handleScroll()
       }
     },
     memorizeTop () {

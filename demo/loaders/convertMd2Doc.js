@@ -1,6 +1,7 @@
 const hljs = require('highlight.js')
 const marked = require('marked')
 const camelCase = require('lodash/camelCase')
+const kababCase = require('lodash/kebabCase')
 // const prettier = require('prettier')
 
 const escapeMap = {
@@ -40,8 +41,16 @@ renderer.code = (code, language) => {
 //   renderer
 // })
 
-function template (demos, isSingleColumn = false) {
-  return `<component-demos :single-column="${isSingleColumn}">${demos}</component-demos>`
+function template (demos, demosLiteral, isSingleColumn = false) {
+  // return `<component-demos :single-column="${isSingleColumn}">
+  // ${demos}
+  //   <template v-slot:anchor>
+  //     ${parseDemosAsAnchor(demosLiteral)}
+  //   </template>
+  // </component-demos>`
+  return `<component-demos :single-column="${isSingleColumn}">
+  ${demos}
+  </component-demos>`
 }
 
 function parseDemos (demosLiteral) {
@@ -49,8 +58,17 @@ function parseDemos (demosLiteral) {
     .split('\n')
     .map(demoName => demoName.trim())
     .filter(demoName => demoName.length)
-  const demoTags = demoNames.map(demoName => `<${demoName}Demo />`)
+  const demoTags = demoNames.map(demoName => `<${demoName}Demo id="${kababCase(demoName)}" demo-id="${kababCase(demoName)}"/>`)
   return demoTags.join('\n')
+}
+
+function parseDemosAsAnchor (demosLiteral) {
+  const demoNames = demosLiteral
+    .split('\n')
+    .map(demoName => demoName.trim())
+    .filter(demoName => demoName.length)
+  const linkTags = demoNames.map(demoName => `<n-anchor-link :title="anchorLinkMap.get('${kababCase(demoName)}') || ''" href="#${kababCase(demoName)}"/>`)
+  return `<n-anchor :top="0" affix style="width: 132px;">${linkTags.join('\n')}</n-anchor>`
 }
 
 function generateScript (demosLiteral) {
@@ -67,6 +85,16 @@ ${importStatements}
 export default {
   components: {
     ${componentStatements}
+  },
+  provide () {
+    return {
+      NDocumentation: this
+    }
+  },
+  data () {
+    return {
+      anchorLinkMap: new Map()
+    }
   }
 }
 </script>`
@@ -100,9 +128,21 @@ function convertMd2ComponentDocumentation (text) {
   // const classedDocumentationHTML = addClassToHTML(documentationHTML, 'markdown')
   const demosReg = /<!--demos-->/
   const demoTags = parseDemos(demosLiteral)
-  const documentationContent = documentationHTML.replace(demosReg, template(demoTags, isSingleColumn))
+  const documentationContent = documentationHTML.replace(demosReg, template(demoTags, demosLiteral, isSingleColumn))
   // console.log(documentationContent)
-  const documentationTemplate = `<template><component-documentation>${documentationContent}</component-documentation></template>`
+  const documentationTemplate = `
+<template>
+  <component-documentation>
+    <div style="display: flex; flex-wrap: nowrap;">
+      <div style="flex: 1; margin-right: 16px;">
+        ${documentationContent}
+      </div>
+      <div style="width: 132px;">
+        ${parseDemosAsAnchor(demosLiteral)}
+      </div>
+    </div>
+  </component-documentation>
+</template>`
   const documentationScript = generateScript(demosLiteral)
   return `${documentationTemplate}\n\n${documentationScript}`
   // console.log(vueComponent)
