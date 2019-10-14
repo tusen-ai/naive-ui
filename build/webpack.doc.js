@@ -13,7 +13,7 @@ const webpackConfig = {
   entry: './demo/index.js',
   output: {
     path: path.resolve(__dirname, '..', 'doc', 'dist'),
-    publicPath: '',
+    publicPath: '/',
     filename: '[name].[hash:7].js',
     chunkFilename: '[name].[hash:7].js'
   },

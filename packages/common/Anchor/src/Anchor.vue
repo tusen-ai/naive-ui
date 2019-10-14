@@ -74,6 +74,8 @@ export default {
   },
   mounted () {
     this.init()
+    this.setActiveHref(window.location)
+    // this.blockTransitionOneTick()
   },
   provide () {
     return {
@@ -81,7 +83,20 @@ export default {
     }
   },
   methods: {
+    blockTransitionOneTick () {
+      const barEl = this.$refs.bar
+      const slotEl = this.$refs.slot
+      barEl.style.transition = 'none'
+      slotEl.style.transition = 'none'
+      barEl.getBoundingClientRect()
+      slotEl.getBoundingClientRect()
+      this.$nextTick().then(() => {
+        barEl.style.transition = null
+        slotEl.style.transition = null
+      })
+    },
     updateBarPosition (linkTitleEl) {
+      // console.log('updateBarPosition')
       const {
         offsetHeight,
         offsetWidth
@@ -114,12 +129,13 @@ export default {
           this.container.scrollTo({
             top: top - this.bound
           })
-          // this.handleScroll()
+          this.blockTransitionOneTick()
+          this.handleScroll()
         }
       }
     },
     handleScroll () {
-      console.log('handleScroll')
+      // console.log('handleScroll')
       const links = []
       this.collectedLinkHrefs.forEach(href => {
         const idMatchResult = /#([^#]+)$/.exec(href)
@@ -139,7 +155,7 @@ export default {
       // const containerScrollTop = this.container.scrollTop
       // console.log(links)
       const activeLink = links.reduce((prevLink, link) => {
-        console.log(link.top)
+        // console.log(link.top)
         if (link.top <= this.bound) {
           if (prevLink === null) {
             return link

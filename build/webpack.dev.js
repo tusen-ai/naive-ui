@@ -12,7 +12,7 @@ const webpackConfig = {
   entry: './demo/index.js',
   output: {
     path: path.resolve(process.cwd()),
-    publicPath: '',
+    publicPath: '/',
     filename: '[name].[hash:7].js',
     chunkFilename: '[name].[hash:7].js'
   },
@@ -25,7 +25,8 @@ const webpackConfig = {
     host: '0.0.0.0',
     port: 8086,
     publicPath: '/',
-    hot: true
+    hot: true,
+    historyApiFallback: true
   },
   performance: {
     hints: false

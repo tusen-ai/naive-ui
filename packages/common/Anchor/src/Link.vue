@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     handleClick (e) {
-      e.preventDefault()
+      // e.preventDefault()
       this.NAnchor.setActiveHref(this.href)
     }
   }
