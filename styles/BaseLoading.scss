@@ -1,0 +1,49 @@
+@import './mixins/mixins.scss';
+@import './themes/vars.scss';
+
+
+@keyframes n-base-loading-rotate {
+  to {
+    transform: rotate(1turn)
+  }
+}
+
+@keyframes n-base-loading-dash {
+  0% {
+    stroke-dasharray: 1,200;
+    stroke-dashoffset: 0
+  }
+  50% {
+    stroke-dasharray: 90,150;
+    stroke-dashoffset: -40px
+  }
+  to {
+    stroke-dasharray: 90,150;
+    stroke-dashoffset: -120px
+  }
+}
+@include themes-mixin {
+  @include b(base-loading) {
+    @include once {
+      line-height: 1;
+    }
+    @include b(base-loading-circular) {
+      @include once {
+        height: 100%;
+        width: 100%;
+        animation: n-base-loading-rotate 2s linear infinite;
+      }
+      @include b(base-loading-circular-path) {
+        stroke: $--base-loading-stroke;
+        @include once {
+          transition: stroke .3s $default-cubic-bezier;
+          animation: n-base-loading-dash 1.5s ease-in-out infinite;
+          stroke-dasharray: 90,150;
+          stroke-dashoffset: 0;
+          stroke-width: 8;
+          stroke-linecap: round;
+        }
+      }
+    }
+  }
+}

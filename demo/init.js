@@ -61,7 +61,7 @@ import popselectDemo from './documentation/components/popselectDemo'
 import app from './documentation/components/app'
 import advanceTableDemos from './documentation/components/advanceTableDemos'
 import transferDemo from './documentation/components/transferDemo'
-import spinDemo from './documentation/components/spinDemo'
+import spin from './documentation/components/spin'
 import drawerDemo from './documentation/components/drawerDemo'
 import loadingBar from './documentation/components/loadingBar'
 import timeDemo from './documentation/components/timeDemo'
@@ -181,7 +181,7 @@ const routes = [
       { path: '/n-app', component: app },
       { path: '/n-cancel-mark-debug', component: cancelMarkDebug },
       { path: '/n-transfer', component: transferDemo },
-      { path: '/n-spin', component: spinDemo },
+      { path: '/n-spin', component: spin },
       { path: '/n-drawer', component: drawerDemo },
       { path: '/n-loading-bar', component: loadingBar },
       { path: '/n-time', component: timeDemo },

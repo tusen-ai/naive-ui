@@ -1,0 +1,3 @@
+@mixin setup-dark-base-loading {
+  $--base-loading-stroke: $--n-primary-color !global;
+}
