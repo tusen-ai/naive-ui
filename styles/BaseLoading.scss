@@ -2,13 +2,13 @@
 @import './themes/vars.scss';
 
 
-@keyframes loading-rotate {
+@keyframes n-base-loading-rotate {
   to {
     transform: rotate(1turn)
   }
 }
 
-@keyframes loading-dash {
+@keyframes n-base-loading-dash {
   0% {
     stroke-dasharray: 1,200;
     stroke-dashoffset: 0
@@ -31,12 +31,13 @@
       @include once {
         height: 100%;
         width: 100%;
-        animation: loading-rotate 2s linear infinite;
+        animation: n-base-loading-rotate 2s linear infinite;
       }
       @include b(base-loading-circular-path) {
-        stroke: $--loading-border-color;
+        stroke: $--base-loading-stroke;
         @include once {
-          animation: loading-dash 1.5s ease-in-out infinite;
+          transition: stroke .3s $default-cubic-bezier;
+          animation: n-base-loading-dash 1.5s ease-in-out infinite;
           stroke-dasharray: 90,150;
           stroke-dashoffset: 0;
           stroke-width: 8;
@@ -46,20 +47,3 @@
     }
   }
 }
-// .n-base-loading {
-//   line-height: 1;
-// }
-
-// .n-base-loading-circular {
-//   height: 100%;
-//   width: 100%;
-//   animation: loading-rotate 2s linear infinite;
-//   .n-base-loading-circular-path {
-//     animation: loading-dash 1.5s ease-in-out infinite;
-//     stroke-dasharray: 90,150;
-//     stroke-dashoffset: 0;
-//     stroke-width: 8;
-//     stroke: #63E2B7;
-//     stroke-linecap: round;
-//   }
-// }

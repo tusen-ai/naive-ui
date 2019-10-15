@@ -5,32 +5,32 @@
   >
     <transition name="n-spin--transition">
       <n-base-loading
-        v-if="spinning"
-        class="n-spin"
-        :stroke-width="strokeWidth"
         :class="{
           [`n-spin--${size}-size`]: true
         }"
+        :stroke-width="strokeWidth"
         :theme="synthesizedTheme"
+        v-if="spinning"
+        class="n-spin"
       />
     </transition>
     <div
-      class="n-spin-content"
       :class="{
         'n-spin-content--spinning': spinning
       }"
+      class="n-spin-content"
     >
       <slot />
     </div>
   </div>
   <n-base-loading
-    v-else
-    class="n-spin"
-    :stroke-width="strokeWidth"
     :class="{
       [`n-spin--${size}-size`]: size
     }"
+    :stroke-width="strokeWidth"
     :theme="synthesizedTheme"
+    v-else
+    class="n-spin"
   />
 </template>
 
@@ -44,10 +44,7 @@ export default {
   components: {
     NBaseLoading
   },
-  mixins: [
-    withapp,
-    themeable
-  ],
+  mixins: [withapp, themeable],
   props: {
     size: {
       type: [String, Number],
@@ -62,8 +59,6 @@ export default {
       default: null
     }
   },
-  methods: {
-
-  }
+  methods: {}
 }
 </script>
