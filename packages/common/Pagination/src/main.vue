@@ -3,7 +3,8 @@
     class="n-pagination"
     :class="{
       'n-pagination--transition-disabled': transitionDisabled,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
+      'n-pagination--disabled': disabled
     }"
   >
     <div
@@ -60,7 +61,7 @@
       v-if="showQuickJumper"
       class="n-pagination-quick-jumper"
     >
-      Go to <n-input
+      Goto <n-input
         v-model="quickJumperValue"
         size="small"
         :disabled="disabled"

@@ -1,0 +1,20 @@
+@mixin setup-light-pagination {
+  $--pagination-item-text-color: (
+    "default": $--n-secondary-text-color,
+    "hover": $--n-primary-color,
+    "active": $--n-primary-color
+  ) !global;
+  $--pagination-item-background-color: (
+    "default": transparent,
+    "active": change-color($--n-primary-color, $alpha: .15) 
+  ) !global;
+  $--pagination-item-border-color: (
+    "default":  $--n-border-color,
+    "active": $--n-primary-color
+  ) !global;
+  $--pagination-text-color: (
+    "default": $--n-secondary-text-color,
+    "disabled": $--n-disabled-text-color
+  ) !global;
+  $--pagination-disabled-opacity: .4 !global;
+}
