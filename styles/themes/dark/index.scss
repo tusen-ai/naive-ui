@@ -3,6 +3,7 @@
 @import "components/Divider.scss";
 @import "components/NimbusServiceLayout.scss";
 @import "components/Scrollbar.scss";
+@import "components/Loading.scss";
 @import "components/BaseSelectMenu.scss";
 @import "components/BasePicker.scss";
 @import "components/BaseCancelMark.scss";
@@ -50,6 +51,7 @@
   @include setup-dark-nimbus-service-layout;
   @include setup-dark-divider;
   @include setup-dark-scrollbar;
+  @include setup-dark-loading;
   @include setup-dark-button;
   @include setup-dark-base-select-menu;
   @include setup-dark-base-picker;

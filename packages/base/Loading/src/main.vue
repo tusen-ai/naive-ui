@@ -1,5 +1,8 @@
 <template>
-  <div class="n-base-loading">
+  <div
+    class="n-base-loading"
+    :class="{[`n-${theme}-theme`]: theme}"
+  >
     <svg
       viewBox="25 25 50 50"
       class="n-base-loading-circular"
@@ -17,9 +20,20 @@
 </template>
 
 <script>
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
+
 export default {
   name: 'NBaseLoading',
+  mixins: [
+    withapp,
+    themeable
+  ],
   props: {
+    theme: {
+      type: String,
+      default: ''
+    },
     strokeWidth: {
       type: Number,
       default: null
@@ -32,42 +46,42 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.n-base-loading {
-  line-height: 1;
-}
+// .n-base-loading {
+//   line-height: 1;
+// }
 
-.n-base-loading-circular {
-  height: 100%;
-  width: 100%;
-  animation: loading-rotate 2s linear infinite;
-  .n-base-loading-circular-path {
-    animation: loading-dash 1.5s ease-in-out infinite;
-    stroke-dasharray: 90,150;
-    stroke-dashoffset: 0;
-    stroke-width: 8;
-    stroke: #63E2B7;
-    stroke-linecap: round;
-  }
-}
+// .n-base-loading-circular {
+//   height: 100%;
+//   width: 100%;
+//   animation: loading-rotate 2s linear infinite;
+//   .n-base-loading-circular-path {
+//     animation: loading-dash 1.5s ease-in-out infinite;
+//     stroke-dasharray: 90,150;
+//     stroke-dashoffset: 0;
+//     stroke-width: 8;
+//     stroke: #63E2B7;
+//     stroke-linecap: round;
+//   }
+// }
 
-@keyframes loading-rotate {
-  to {
-    transform: rotate(1turn)
-  }
-}
+// @keyframes loading-rotate {
+//   to {
+//     transform: rotate(1turn)
+//   }
+// }
 
-@keyframes loading-dash {
-  0% {
-    stroke-dasharray: 1,200;
-    stroke-dashoffset: 0
-  }
-  50% {
-    stroke-dasharray: 90,150;
-    stroke-dashoffset: -40px
-  }
-  to {
-    stroke-dasharray: 90,150;
-    stroke-dashoffset: -120px
-  }
-}
+// @keyframes loading-dash {
+//   0% {
+//     stroke-dasharray: 1,200;
+//     stroke-dashoffset: 0
+//   }
+//   50% {
+//     stroke-dasharray: 90,150;
+//     stroke-dashoffset: -40px
+//   }
+//   to {
+//     stroke-dasharray: 90,150;
+//     stroke-dashoffset: -120px
+//   }
+// }
 </style>

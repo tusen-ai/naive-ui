@@ -11,6 +11,7 @@
         :class="{
           [`n-spin--${size}-size`]: true
         }"
+        :theme="synthesizedTheme"
       />
     </transition>
     <div
@@ -29,17 +30,24 @@
     :class="{
       [`n-spin--${size}-size`]: size
     }"
+    :theme="synthesizedTheme"
   />
 </template>
 
 <script>
 import NBaseLoading from '../../../base/Loading'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 
 export default {
   name: 'NSpin',
   components: {
     NBaseLoading
   },
+  mixins: [
+    withapp,
+    themeable
+  ],
   props: {
     size: {
       type: [String, Number],
