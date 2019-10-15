@@ -3,6 +3,7 @@
 @import "components/Divider.scss";
 @import "components/NimbusServiceLayout.scss";
 @import "components/Scrollbar.scss";
+@import "components/BaseLoading.scss";
 @import "components/BaseSelectMenu.scss";
 @import "components/BasePicker.scss";
 @import "components/BaseCancelMark.scss";
@@ -47,6 +48,7 @@
   @include setup-light-nimbus-service-layout;
   @include setup-light-divider;
   @include setup-light-scrollbar;
+  @include setup-light-base-loading;
   @include setup-light-button;
   @include setup-light-base-select-menu;
   @include setup-light-base-picker;
