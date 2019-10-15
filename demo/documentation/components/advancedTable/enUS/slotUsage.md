@@ -1,65 +1,49 @@
-<template>
-  <div class="n-doc-section">
-    <div class="n-doc-section__header">
-      All Slots
-      请注意内容被挤在一起的情况
+# Slot Usage
+```html
+<n-advance-table
+  :columns="columns"
+  :data="data"
+  max-height="300px"
+  :search="search"
+  :pagination="{total:data.length,limit:10}"
+  @on-change="onChange"
+>
+  <div
+    slot="table-operation-batch-left"
+    style="display:inline-block;"
+  >
+    <div style="width:100px;">
+      table-operation-batch-left
     </div>
-    <div
-      class="n-doc-section__view"
-      style="display: block;"
-    >
-      <!--EXAMPLE_START-->
-      <n-advance-table
-        :columns="columns"
-        :data="data"
-        max-height="300px"
-        :search="search"
-        :pagination="{total:data.length,limit:10}"
-        @on-change="onChange"
-      >
-        <div
-          slot="table-operation-batch-left"
-          style="display:inline-block;"
-        >
-          <div style="width:100px;">
-            table-operation-batch-left
-          </div>
-        </div>
-        <div
-          slot="table-operation-batch-right"
-          style="display:inline-block;"
-        >
-          <div style="width:100px;display:inline-block;">
-            table-operation-batch-right
-          </div>
-        </div>
-
-        <div
-          slot="table-operation"
-          style="display:inline-block;"
-        >
-          <div style="width:100px;display:inline-block;">
-            table-operation
-          </div>
-        </div>
-        <div
-          slot="table-operation-search-right"
-          style="display:inline-block;"
-        >
-          <div style="width:100px;display:inline-block;">
-            table-operation-search-right
-          </div>
-        </div>
-      </n-advance-table>
-      <!--EXAMPLE_END-->
-    </div>
-    <n-doc-source-block>
-      <!--SOURCE-->
-    </n-doc-source-block>
   </div>
-</template>
+  <div
+    slot="table-operation-batch-right"
+    style="display:inline-block;"
+  >
+    <div style="width:100px;display:inline-block;">
+      table-operation-batch-right
+    </div>
+  </div>
 
-<script>
+  <div
+    slot="table-operation"
+    style="display:inline-block;"
+  >
+    <div style="width:100px;display:inline-block;">
+      table-operation
+    </div>
+  </div>
+  <div
+    slot="table-operation-search-right"
+    style="display:inline-block;"
+  >
+    <div style="width:100px;display:inline-block;">
+      table-operation-search-right
+    </div>
+  </div>
+</n-advance-table>
+```
+```js
 const items = [
   {
     label: 'greater than 15',
@@ -230,4 +214,4 @@ export default {
     }
   }
 }
-</script>
+```

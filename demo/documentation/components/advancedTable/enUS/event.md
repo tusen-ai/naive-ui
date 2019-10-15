@@ -1,26 +1,11 @@
-<template>
-  <div class="n-doc-section">
-    <div class="n-doc-section__header">
-      Table Event
-    </div>
-    <div
-      class="n-doc-section__view"
-      style="display: block;"
-    >
-      <!--EXAMPLE_START-->
-      <n-advance-table
-        :columns="columns"
-        :data="data"
-      />
-      <!--EXAMPLE_END-->
-    </div>
-    <!-- <n-doc-source-block> -->
-    <!--SOURCE-->
-    <!-- </n-doc-source-block> -->
-  </div>
-</template>
-
-<script>
+# Event
+```html
+<n-advance-table
+  :columns="columns"
+  :data="data"
+/>
+```
+```js
 const _columns3 = ($this) => {
   return [
     {
@@ -174,4 +159,4 @@ export default {
     }
   }
 }
-</script>
+```

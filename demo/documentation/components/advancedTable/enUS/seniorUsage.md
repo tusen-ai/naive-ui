@@ -1,45 +1,28 @@
-<template>
-  <div class="n-doc-section">
-    <div class="n-doc-section__header">
-      高级用法
-      <br>
-      设置初始值,过滤选项异步加载(单选/多选,包含加载错误处理),清除所有筛选条件,分页,loading动画
-    </div>
-    <div
-      class="n-doc-section__view"
-      style="display: block;"
+# Senior Usage
+```html
+<n-advance-table
+  ref="table"
+  :loading="loading"
+  :columns="columns"
+  :data="data"
+  max-height="300px"
+  :search="search"
+  :pagination="{total:data.length,limit:10,custom:true}"
+  @on-change="onChange"
+>
+  <div slot="table-operation-batch-left">
+    <n-button
+      size="small"
+      @click="clear"
     >
-      <!--EXAMPLE_START-->
-      <n-advance-table
-        ref="table"
-        :loading="loading"
-        :columns="columns"
-        :data="data"
-        max-height="300px"
-        :search="search"
-        :pagination="{total:data.length,limit:10,custom:true}"
-        @on-change="onChange"
-      >
-        <div slot="table-operation-batch-left">
-          <n-button
-            size="small"
-            @click="clear"
-          >
-            clear all filters
-          </n-button>
-        </div>
-      </n-advance-table>
-      <h1>Network params</h1>
-      <pre>{{ query }}</pre>
-      <!--EXAMPLE_END-->
-    </div>
-    <n-doc-source-block>
-      <!--SOURCE-->
-    </n-doc-source-block>
+      clear all filters
+    </n-button>
   </div>
-</template>
-
-<script>
+</n-advance-table>
+<h1>Network params</h1>
+<pre>{{ query }}</pre>
+```
+```js
 const items = [
   {
     label: 'age 15 asdsadsadsadsad',
@@ -223,4 +206,4 @@ export default {
     }
   }
 }
-</script>
+```

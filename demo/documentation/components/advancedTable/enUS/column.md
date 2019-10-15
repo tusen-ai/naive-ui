@@ -1,30 +1,11 @@
-<template>
-  <div class="n-doc-section">
-    <div class="n-doc-section__header">
-      Column
-      <br>
-      列描述数据对象，是 columns 中的一项
-      <br>
-      内容过长,表格下方有横向滚动条
-    </div>
-    <div
-      class="n-doc-section__view"
-      style="display: block;"
-    >
-      <!--EXAMPLE_START-->
-      <n-advance-table
-        :columns="columns"
-        :data="data"
-      />
-      <!--EXAMPLE_END-->
-    </div>
-    <!-- <n-doc-source-block> -->
-    <!--SOURCE-->
-    <!-- </n-doc-source-block> -->
-  </div>
-</template>
-
-<script>
+# Column
+```html
+<n-advance-table
+  :columns="columns"
+  :data="data"
+/>
+```
+```js
 const _columns3 = ($this) => {
   return [
     {
@@ -206,9 +187,9 @@ export default {
     }
   }
 }
-</script>
-<style>
+```
+```css
 .n-table-props-desc {
   white-space:pre-wrap;
 }
-</style>
+```

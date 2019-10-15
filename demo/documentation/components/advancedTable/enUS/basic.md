@@ -1,60 +1,41 @@
-<template>
-  <div class="n-doc-section">
-    <div class="n-doc-section__header">
-      本地排序,分页,搜索,过滤(多选过滤\单选过滤\异步过滤选项加载),本地删除,
-      <br>
-      多选删除(注意:data数据发生变化后,多选的状态将会被清空)
-      <br>
-      行添加className
-    </div>
-    <div
-      class="n-doc-section__view"
-      style="display: block;"
+# Basic
+```html
+<n-advance-table
+  ref="table"
+  :row-class-name="computeRowcls"
+  :columns="columns"
+  :data="data"
+  max-height="300px"
+  :search="search"
+  :pagination="{total:data.length,limit:10}"
+  @on-change="onChange"
+  @on-selected-change="onSelectedChange"
+>
+  <div
+    slot="table-operation-batch-left"
+    style="padding-left:27px;"
+  >
+    <n-icon
+      v-show="selectedRow.length"
+      color="rgba(255,255,255,.7)"
+      type="md-trash"
+      size="24"
+      title="delete all"
+      style="cursor:pointer;"
+      @click="batchDelete"
+    />
+    <n-button
+      v-show="selectedRow.length"
+      color="rgba(255,255,255,.7)"
+      size="small"
+      @click="clearSelect"
     >
-      <!--EXAMPLE_START-->
-      <n-advance-table
-        ref="table"
-        :row-class-name="computeRowcls"
-        :columns="columns"
-        :data="data"
-        max-height="300px"
-        :search="search"
-        :pagination="{total:data.length,limit:10}"
-        @on-change="onChange"
-        @on-selected-change="onSelectedChange"
-      >
-        <div
-          slot="table-operation-batch-left"
-          style="padding-left:27px;"
-        >
-          <n-icon
-            v-show="selectedRow.length"
-            color="rgba(255,255,255,.7)"
-            type="md-trash"
-            size="24"
-            title="delete all"
-            style="cursor:pointer;"
-            @click="batchDelete"
-          />
-          <n-button
-            v-show="selectedRow.length"
-            color="rgba(255,255,255,.7)"
-            size="small"
-            @click="clearSelect"
-          >
-            clear select
-          </n-button>
-        </div>
-      </n-advance-table>
-      <!--EXAMPLE_END-->
-    </div>
-    <n-doc-source-block>
-      <!--SOURCE-->
-    </n-doc-source-block>
+      clear select
+    </n-button>
   </div>
-</template>
-
-<script>
+</n-advance-table>
+```
+```js
 const items = [
   {
     label: 'greater than 15',
@@ -259,9 +240,9 @@ export default {
     }
   }
 }
-</script>
-<style>
+```
+```css
 .age-too-old {
   color: rgba(255, 255, 255, 0.3);
 }
-</style>
+```

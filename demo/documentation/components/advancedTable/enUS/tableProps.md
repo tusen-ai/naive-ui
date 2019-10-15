@@ -1,26 +1,11 @@
-<template>
-  <div class="n-doc-section">
-    <div class="n-doc-section__header">
-      Table Props 内容过长,表格下方有横向滚动条
-    </div>
-    <div
-      class="n-doc-section__view"
-      style="display: block;"
-    >
-      <!--EXAMPLE_START-->
-      <n-advance-table
-        :columns="columns"
-        :data="data"
-      />
-      <!--EXAMPLE_END-->
-    </div>
-    <!-- <n-doc-source-block> -->
-    <!--SOURCE-->
-    <!-- </n-doc-source-block> -->
-  </div>
-</template>
-
-<script>
+# Props
+```html
+<n-advance-table
+  :columns="columns"
+  :data="data"
+/>
+```
+```js
 const _columns3 = ($this) => {
   return [
     {
@@ -175,9 +160,9 @@ export default {
     }
   }
 }
-</script>
-<style>
+```
+```css
 .n-table-props-desc {
   white-space:pre-wrap;
 }
-</style>
+```

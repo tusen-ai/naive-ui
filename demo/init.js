@@ -59,7 +59,7 @@ import popconfirmDemo from './documentation/components/popconfirmDemo'
 import anchor from './documentation/components/anchor'
 import popselectDemo from './documentation/components/popselectDemo'
 import app from './documentation/components/app'
-import advanceTableDemos from './documentation/components/advanceTableDemos'
+import advancedTable from './documentation/components/advancedTable'
 import transferDemo from './documentation/components/transferDemo'
 import spin from './documentation/components/spin'
 import drawerDemo from './documentation/components/drawerDemo'
@@ -139,7 +139,7 @@ const routes = [
       { path: '/n-button', component: button },
       { path: '/n-switch', component: switchDemo },
       { path: '/n-table', component: tableDemo },
-      { path: '/n-advance-table', component: advanceTableDemos },
+      { path: '/n-advance-table', component: advancedTable },
       { path: '/n-input', component: input },
       { path: '/n-select', component: selectDemo },
       { path: '/n-cascader', component: cascaderDemo },
