@@ -77,9 +77,11 @@
           top: 0;
           left: 0;
           height: 100%;
+          resize: none;
         }
       }
       @include e(textarea-mirror) {
+        overflow: hidden;
         visibility: hidden;
         position: static;
         white-space: pre-wrap;
