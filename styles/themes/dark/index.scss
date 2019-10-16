@@ -22,6 +22,7 @@
 @import "components/Input.scss";
 @import "components/Alert.scss";
 @import "components/Anchor.scss";
+@import "components/BackTop.scss";
 
 @mixin setup-dark-theme () {
   @include setup-dark-colors();
@@ -71,4 +72,5 @@
   @include setup-dark-input;
   @include setup-dark-anchor;
   @include setup-dark-alert;
+  @include setup-dark-back-top;
 }

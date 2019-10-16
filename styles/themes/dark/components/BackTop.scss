@@ -1,0 +1,5 @@
+@mixin setup-dark-back-top {
+  $--back-top-button-fill: rgba(255, 255, 255, 0.45) !global;
+  $--back-top-button-fill-hover: $--primary-6 !global;
+  $--back-top-button-fill-active: rgba(77, 177, 153, 1) !global;
+}

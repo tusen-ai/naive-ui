@@ -1,35 +1,39 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
-@include b(back-top) {
-  @include fade-in-transition(back-top);
-  position: fixed;
-  right: 40px;
-  bottom: 40px;
-  border-radius: 20px;
-  width: 40px;
-  height: 40px;
-  overflow: hidden;
-  transition: box-shadow .3s $default-cubic-bezier;
-  box-shadow: 0 2px 10px 0px rgba(238, 238, 238, .45);
-  cursor: pointer;
-  svg {
-    pointer-events: none;
-  }
-  .n-back-top__button {
-    transition: fill .3s $default-cubic-bezier;
-    fill: rgba(255, 255, 255, 0.45);
-  }
-  &:hover {
-    box-shadow: 0 2px 10px 0px rgb(77, 177, 153);
-    .n-back-top__button {
-      fill: rgba(99, 226, 183, 1);
+@include themes-mixin {
+  @include b(back-top) {
+    @include fade-in-transition(back-top);
+    @include once {
+      position: fixed;
+      right: 40px;
+      bottom: 40px;
+      border-radius: 20px;
+      width: 40px;
+      height: 40px;
+      overflow: hidden;
+      transition: box-shadow .3s $default-cubic-bezier;
+      cursor: pointer;
+      svg {
+        pointer-events: none;
+      }
     }
-  }
-  &:active {
-    box-shadow: 0 2px 10px 0px rgb(77, 177, 153);
+    box-shadow: 0 2px 10px 0px rgba(238, 238, 238, .45);
     .n-back-top__button {
-      fill: rgba(77, 177, 153, 1);
+      transition: fill .3s $default-cubic-bezier;
+      fill: $--back-top-button-fill;
+    }
+    &:hover {
+      box-shadow: 0 2px 10px 0px rgb(77, 177, 153);
+      .n-back-top__button {
+        fill: $--back-top-button-fill-hover;
+      }
+    }
+    &:active {
+      box-shadow: 0 2px 10px 0px rgb(77, 177, 153);
+      .n-back-top__button {
+        fill: $--back-top-button-fill-hover;
+      }
     }
   }
 }

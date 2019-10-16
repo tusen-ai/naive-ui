@@ -1,0 +1,5 @@
+@mixin setup-light-back-top {
+  $--back-top-button-fill: $--primary-6 !global;
+  $--back-top-button-fill-hover: $--primary-5 !global;
+  $--back-top-button-fill-active: $--primary-7 !global;
+}

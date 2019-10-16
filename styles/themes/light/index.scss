@@ -22,6 +22,7 @@
 @import "components/Input.scss";
 @import "components/Alert.scss";
 @import "components/Anchor.scss";
+@import "components/BackTop.scss";
 
 @mixin setup-light-theme () {
   @include setup-light-colors();
@@ -67,4 +68,5 @@
   @include setup-light-input;
   @include setup-light-anchor;
   @include setup-light-alert;
+  @include setup-light-back-top;
 }
