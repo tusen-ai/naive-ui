@@ -6,6 +6,8 @@
       多选删除(注意:data数据发生变化后,多选的状态将会被清空)
       <br>
       行添加className
+      <br>
+      自定义渲染头
     </div>
     <div
       class="n-doc-section__view"
@@ -87,7 +89,10 @@ const _columns3 = ($this) => {
       title: 'Name',
       key: 'name',
       sortable: true,
-      width: 300
+      width: 300,
+      renderHeader(h,column){
+        return <n-tag>{column.title}</n-tag>
+      }
     },
     {
       title: 'Age',
