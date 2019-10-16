@@ -47,7 +47,7 @@ import scrollbarDebug from './debugComponents/scrollbarDebug'
 import scrollbarDebug2 from './debugComponents/scrollbarDebug2'
 import badge from './documentation/components/badge'
 import stepsDemo from './documentation/components/stepsDemo'
-import notificationDemo from './documentation/components/notificationDemo'
+import notification from './documentation/components/notification'
 import nimbusConfirmCardDemo from './documentation/components/nimbusConfirmCardDemo'
 import pagination from './documentation/components/pagination'
 import collapse from './documentation/components/collapse'
@@ -149,7 +149,7 @@ const routes = [
       { path: '/n-message', component: message },
       { path: '/n-tooltip', component: tooltip },
       { path: '/n-popover', component: popover },
-      { path: '/n-notification', component: notificationDemo },
+      { path: '/n-notification', component: notification },
       { path: '/n-nimbus-confirm-card', component: nimbusConfirmCardDemo },
       { path: '/n-pagination', component: pagination },
       { path: '/n-alert', component: alert },
