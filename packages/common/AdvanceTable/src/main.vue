@@ -62,7 +62,7 @@
               :class="{
                 'n-advance-table__sortable-column': column.sortable
               }"
-              @click.native="()=>sortByColumn(column)"
+              @click.native.self="()=>sortByColumn(column)"
             >
               <!-- 当前页全选 -->
               <n-checkbox
