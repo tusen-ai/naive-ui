@@ -6,5 +6,5 @@
   ) !global;
   $--base-select-menu-background-color: $--n-popover-color !global;
   $--base-select-menu-box-shadow: none !global;
-  $--base-select-menu-light-bar-background-color: change-color($primary-6, $alpha: .3) !global;
+  $--base-select-menu-light-bar-background-color: change-color($--primary-6, $alpha: .3) !global;
 }

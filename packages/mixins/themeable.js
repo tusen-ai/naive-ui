@@ -10,7 +10,7 @@ export default {
       if (this.theme !== null) {
         return this.theme
       } else {
-        return (this.NApp && this.NApp.theme) || null
+        return (this.NApp && this.NApp.synthesizedTheme) || null
       }
     }
   }

@@ -185,6 +185,7 @@
       }
       @include e(icon) {
         @include fade-in-width-expand-transition();
+        transition: color .3s $default-cubic-bezier;
       }
       @include e(content-aligner) {
         display: inline-block;
@@ -197,6 +198,7 @@
       }
       @include e(content) {
         white-space: nowrap;
+        transition: color .3s $default-cubic-bezier;
       }
       @include m(left-icon) {
         @include e(icon) {

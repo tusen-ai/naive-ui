@@ -2,7 +2,8 @@
   <div
     class="n-pagination"
     :class="{
-      'n-pagination--transition-disabled': transitionDisabled
+      'n-pagination--transition-disabled': transitionDisabled,
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
   >
     <div
@@ -83,6 +84,8 @@ import { pageItems } from './utils'
 import Icon from './Icon'
 import NSelect from '../../Select'
 import NInput from '../../Input'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 
 export default {
   name: 'NPagination',
@@ -91,6 +94,7 @@ export default {
     NInput,
     Icon
   },
+  mixins: [withapp, themeable],
   model: {
     prop: 'page',
     event: 'input'

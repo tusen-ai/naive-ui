@@ -1,8 +1,10 @@
 /* istanbul ignore file */
-import Scaffold from './src/main.vue'
+import Anchor from './src/main.vue'
+import AnchorLink from './src/Link.vue'
 
-Scaffold.install = function (Vue) {
-  Vue.component(Scaffold.name, Scaffold)
+Anchor.install = function (Vue) {
+  Vue.component(Anchor.name, Anchor)
+  Vue.component(AnchorLink.name, AnchorLink)
 }
 
-export default Scaffold
+export default Anchor

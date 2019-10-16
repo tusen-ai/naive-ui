@@ -19,16 +19,18 @@
 @import "components/Badge.scss";
 @import "components/Dropdown.scss";
 @import "components/Input.scss";
+@import "components/Alert.scss";
+@import "components/Anchor.scss";
 
 @mixin setup-light-theme () {
   @include setup-light-colors();
-  $--n-primary-color: $primary-6 !global;
-  $--n-primary-hover-color: $primary-5 !global;
-  $--n-primary-active-color: $primary-7 !global;
-  $--n-info-color: $info-6 !global;
-  $--n-success-color: $success-6 !global;
-  $--n-warning-color: $warning-6 !global;
-  $--n-error-color: $error-6 !global;
+  $--n-primary-color: $--primary-6 !global;
+  $--n-primary-hover-color: $--primary-5 !global;
+  $--n-primary-active-color: $--primary-7 !global;
+  $--n-info-color: $--info-6 !global;
+  $--n-success-color: $--success-6 !global;
+  $--n-warning-color: $--warning-6 !global;
+  $--n-error-color: $--error-6 !global;
   
   $n-selected-color: $neutral-7 !global;
   $--n-divider-color: $neutral-7 !global;
@@ -61,4 +63,6 @@
   @include setup-light-badge;
   @include setup-light-dropdown;
   @include setup-light-input;
+  @include setup-light-anchor;
+  @include setup-light-alert;
 }

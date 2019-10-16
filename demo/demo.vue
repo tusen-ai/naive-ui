@@ -85,6 +85,10 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-advance-table'
             },
             {
+              name: 'Affix',
+              path: `/${this.lang}/${this.theme}` + '/n-affix'
+            },
+            {
               name: 'Alert',
               path: `/${this.lang}/${this.theme}` + '/n-alert'
             },

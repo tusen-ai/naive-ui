@@ -2,8 +2,9 @@
   <div
     class="n-alert"
     :class="{
-      [`n-alert--${type}`]: true,
-      'n-alert--no-icon': noIcon
+      [`n-alert--${type}-type`]: true,
+      'n-alert--no-icon': noIcon,
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
   >
     <div
@@ -35,14 +36,14 @@
         :type="'ios-close-circle'"
       />
     </div>
-    <div class="n-alert__body-wrapper">
+    <div class="n-alert-body">
       <div
         v-if="title !== null"
-        class="n-alert__title"
+        class="n-alert-body__title"
       >
         {{ title }}
       </div>
-      <div class="n-alert__content">
+      <div class="n-alert-body__content">
         <slot />
       </div>
     </div>
@@ -51,11 +52,15 @@
 
 <script>
 import NIcon from '../../Icon'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
+
 export default {
   name: 'NAlert',
   components: {
     NIcon
   },
+  mixins: [withapp, themeable],
   props: {
     icon: {
       type: String,

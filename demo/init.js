@@ -20,7 +20,7 @@ import homeDemo from './documentation/components/homeDemo'
 import gradientTextDemo from './documentation/components/gradientTextDemo'
 import iconDemo from './documentation/components/iconDemo'
 import checkbox from './documentation/components/checkbox'
-import buttonDemo from './documentation/components/buttonDemo'
+import button from './documentation/components/button'
 import switchDemo from './documentation/components/switch'
 import tableDemo from './documentation/components/tableDemo'
 import input from './documentation/components/input'
@@ -32,8 +32,8 @@ import nimbusFormCardDemo from './documentation/components/nimbusFormCardDemo'
 import message from './documentation/components/message'
 import tooltip from './documentation/components/tooltip'
 import popover from './documentation/components/popover'
-import alertDemo from './documentation/components/alertDemo'
-import datePickerDemo from './documentation/components/datePickerDemo'
+import alert from './documentation/components/alert'
+import datePicker from './documentation/components/datePicker'
 import inputNumberDemo from './documentation/components/inputNumberDemo'
 import nimbusIconDemo from './documentation/components/nimbusIconDemo'
 import radioDemo from './documentation/components/radioDemo'
@@ -49,16 +49,16 @@ import badge from './documentation/components/badge'
 import stepsDemo from './documentation/components/stepsDemo'
 import notificationDemo from './documentation/components/notificationDemo'
 import nimbusConfirmCardDemo from './documentation/components/nimbusConfirmCardDemo'
-import paginationDemo from './documentation/components/paginationDemo'
-import collapseDemo from './documentation/components/collapseDemo'
+import pagination from './documentation/components/pagination'
+import collapse from './documentation/components/collapse'
 import tag from './documentation/components/tag'
 import timelineDemo from './documentation/components/timelineDemo'
 import progressDemo from './documentation/components/progressDemo'
-import dividerDemo from './documentation/components/dividerDemo'
+import divider from './documentation/components/divider'
 import popconfirmDemo from './documentation/components/popconfirmDemo'
-import anchorDemo from './documentation/components/anchorDemo'
+import anchor from './documentation/components/anchor'
 import popselectDemo from './documentation/components/popselectDemo'
-import appDemo from './documentation/components/appDemo'
+import app from './documentation/components/app'
 import advanceTableDemos from './documentation/components/advanceTableDemos'
 import transferDemo from './documentation/components/transferDemo'
 import spinDemo from './documentation/components/spinDemo'
@@ -67,6 +67,7 @@ import loadingBar from './documentation/components/loadingBar'
 import timeDemo from './documentation/components/timeDemo'
 import sliderDemo from './documentation/components/sliderDemo'
 import treeDemo from './documentation/components/treeDemo'
+import affix from './documentation/components/affix'
 
 import demo from './demo'
 import ComponentDemo from './utils/ComponentDemo'
@@ -135,7 +136,7 @@ const routes = [
       { path: '/n-gradient-text', component: gradientTextDemo },
       { path: '/n-icon', component: iconDemo },
       { path: '/n-checkbox', component: checkbox },
-      { path: '/n-button', component: buttonDemo },
+      { path: '/n-button', component: button },
       { path: '/n-switch', component: switchDemo },
       { path: '/n-table', component: tableDemo },
       { path: '/n-advance-table', component: advanceTableDemos },
@@ -150,9 +151,9 @@ const routes = [
       { path: '/n-popover', component: popover },
       { path: '/n-notification', component: notificationDemo },
       { path: '/n-nimbus-confirm-card', component: nimbusConfirmCardDemo },
-      { path: '/n-pagination', component: paginationDemo },
-      { path: '/n-alert', component: alertDemo },
-      { path: '/n-date-picker', component: datePickerDemo },
+      { path: '/n-pagination', component: pagination },
+      { path: '/n-alert', component: alert },
+      { path: '/n-date-picker', component: datePicker },
       { path: '/n-input-number', component: inputNumberDemo },
       { path: '/n-nimbus-icon', component: nimbusIconDemo },
       { path: '/n-radio', component: radioDemo },
@@ -165,19 +166,19 @@ const routes = [
       { path: '/n-scrollbar-debug', component: scrollbarDebug },
       { path: '/n-badge', component: badge },
       { path: '/n-steps', component: stepsDemo },
-      { path: '/n-collapse', component: collapseDemo },
+      { path: '/n-collapse', component: collapse },
       { path: '/n-progress', component: progressDemo },
       { path: '/n-tag', component: tag },
       { path: '/n-timeline', component: timelineDemo },
       { path: '/n-scrollbar-debug2', component: scrollbarDebug2 },
       { path: '/n-back-top', component: backTopDemo },
       { path: '/n-date-picker-debug', component: datePickerDebug },
-      { path: '/n-divider', component: dividerDemo },
+      { path: '/n-divider', component: divider },
       { path: '/n-popconfirm', component: popconfirmDemo },
-      { path: '/n-anchor', component: anchorDemo },
+      { path: '/n-anchor', component: anchor },
       { path: '/n-dropdown', component: dropdownDemo },
       { path: '/n-popselect', component: popselectDemo },
-      { path: '/n-app', component: appDemo },
+      { path: '/n-app', component: app },
       { path: '/n-cancel-mark-debug', component: cancelMarkDebug },
       { path: '/n-transfer', component: transferDemo },
       { path: '/n-spin', component: spinDemo },
@@ -186,7 +187,8 @@ const routes = [
       { path: '/n-time', component: timeDemo },
       { path: '/n-slider', component: sliderDemo },
       { path: '/n-tree', component: treeDemo },
-      { path: '/n-vertical-align-debug', component: verticalAlignDebug }
+      { path: '/n-vertical-align-debug', component: verticalAlignDebug },
+      { path: '/n-affix', component: affix }
     ])
   },
   {
@@ -196,17 +198,22 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 
 router.beforeEach(function (to, from, next) {
   Vue.prototype.$NLoadingBar.theme = to.params.theme
-  Vue.prototype.$NLoadingBar.start()
+  if (to.path !== from.path) {
+    Vue.prototype.$NLoadingBar.start()
+  }
   next()
 })
 
-router.afterEach(function () {
-  Vue.prototype.$NLoadingBar.finish()
+router.afterEach(function (to, from) {
+  if (to.path !== from.path) {
+    Vue.prototype.$NLoadingBar.finish()
+  }
 })
 
 export { Vue, router, i18n }

@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <title>naive-ui</title>
-    <style></style>
   </head>
   <body>
       <div id="app">

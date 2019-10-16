@@ -3,6 +3,7 @@
 
 @include b(pagination) {
   display: inline-flex;
+  vertical-align: middle;
   @include m(transition-disabled) {
     @include b(pagination-item) {
       transition: none;

@@ -172,7 +172,7 @@ $small-font-size: 12px;
 $normal-font-size: $regular-font-size;
 $meta-font-size: $small-font-size;
 
-$primary-text-color: rgba(255, 255, 255, .8);
+$--primary-text-color: rgba(255, 255, 255, .8);
 $regular-text-color: rgba(255, 255, 255, .6);
 $secondary-text-color: rgba(255, 255, 255, .4);
 
@@ -352,7 +352,7 @@ $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
   }
 }
 
-@mixin height-seamlessly-expand-transition($block: "height-seamlessly-expand", $duration: .3s, $delay: 0s) {
+@mixin fade-in-height-expand-transition($block: "fade-in-height-expand", $duration: .3s, $delay: 0s) {
   &.#{$namespace}-#{$block}-leave, &.#{$namespace}-#{$block}-enter-to {
     opacity: 1;
   }
@@ -361,11 +361,11 @@ $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
   }
   &.#{$namespace}-#{$block}-leave-active {
     overflow: hidden;
-    transition: max-height $duration $default-cubic-bezier, opacity $duration $slow-out-cubic-bezier;
+    transition: max-height $duration $default-cubic-bezier, opacity $duration $fast-in-cubic-bezier;
   }
   &.#{$namespace}-#{$block}-enter-active {
     overflow: hidden;
-    transition: max-height $duration $default-cubic-bezier, opacity $duration $fast-in-cubic-bezier;
+    transition: max-height $duration $default-cubic-bezier, opacity $duration $slow-out-cubic-bezier;
   }
 }
 

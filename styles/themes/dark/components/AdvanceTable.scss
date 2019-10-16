@@ -1,4 +1,4 @@
 @mixin setup-dark-advance-table {
-  $--table-header-icon-color: $primary-6 !global;
+  $--table-header-icon-color: $--primary-6 !global;
   $--table-scrollbar-color: rgba(255, 255, 255, 0.2) !global;
 }
