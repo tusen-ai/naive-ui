@@ -130,6 +130,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    pageSlot: {
+      type: Number,
+      default: 9
     }
   },
   data () {
@@ -149,7 +153,7 @@ export default {
       }))
     },
     pageItems () {
-      return pageItems(this.page, this.safePageCount)
+      return pageItems(this.page, this.safePageCount, this.pageSlot)
     }
   },
   watch: {
@@ -192,12 +196,12 @@ export default {
     },
     fastForward () {
       if (this.disabled) return
-      const page = Math.min(this.page + 5, this.safePageCount)
+      const page = Math.min(this.page + (this.pageSlot - 4), this.safePageCount)
       this.$emit('input', page)
     },
     fastBackward () {
       if (this.disabled) return
-      const page = Math.max(this.page - 5, 1)
+      const page = Math.max(this.page - (this.pageSlot - 4), 1)
       this.$emit('input', page)
     },
     handleSizePickerInput (value) {

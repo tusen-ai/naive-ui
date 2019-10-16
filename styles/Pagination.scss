@@ -4,7 +4,7 @@
 @include themes-mixin {
   @include b(pagination) {
     @include once {
-      display: inline-flex;
+      display: flex;
       vertical-align: middle;
       @include b(select) {
         width: 120px;

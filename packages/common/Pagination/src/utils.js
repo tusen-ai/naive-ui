@@ -11,9 +11,9 @@ function pagesToShow (currentPage, pageCount, pageSlot = 9) {
   let middleStart = currentPage
   let middleEnd = currentPage
   const middleDelta = (pageSlot - 5) / 2
-  middleEnd += middleDelta
+  middleEnd += Math.ceil(middleDelta)
   middleEnd = Math.min(Math.max(middleEnd, firstPage + pageSlot - 3), lastPage - 2)
-  middleStart -= middleDelta
+  middleStart -= Math.floor(middleDelta)
   middleStart = Math.max(Math.min(middleStart, lastPage - pageSlot + 3), firstPage + 2)
   let leftSplit = false
   let rightSplit = false
@@ -69,8 +69,8 @@ function mapPagesToPageItems (pages, currentPage) {
   })
 }
 
-function pageItems (currentPage, pageCount) {
-  const pages = pagesToShow(currentPage, pageCount)
+function pageItems (currentPage, pageCount, pageSlot) {
+  const pages = pagesToShow(currentPage, pageCount, pageSlot)
   const items = mapPagesToPageItems(pages, currentPage)
   return items
 }
