@@ -23,6 +23,7 @@
 @import "components/Alert.scss";
 @import "components/Anchor.scss";
 @import "components/Pagination.scss";
+@import "components/GradientText.scss";
 
 @mixin setup-dark-theme () {
   @include setup-dark-colors();
@@ -73,4 +74,5 @@
   @include setup-dark-anchor;
   @include setup-dark-alert;
   @include setup-dark-pagination;
+  @include setup-dark-gradient-text;
 }

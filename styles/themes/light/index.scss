@@ -23,6 +23,7 @@
 @import "components/Alert.scss";
 @import "components/Anchor.scss";
 @import "components/Pagination.scss";
+@import "components/GradientText.scss";
 
 @mixin setup-light-theme () {
   @include setup-light-colors();
@@ -69,4 +70,5 @@
   @include setup-light-anchor;
   @include setup-light-alert;
   @include setup-light-pagination;
+  @include setup-light-gradient-text;
 }
