@@ -112,8 +112,6 @@
         display: inline-flex;
         @include e(input) {
           text-align: center;
-          padding-left: 14px;
-          padding-right: 14px;
         }
       }
     }
@@ -169,13 +167,15 @@
     @include e(splitor) {
       transition: color .3s $default-cubic-bezier;
       color: map-get($--input-color, 'default');
+      padding-left: 14px;
+      padding-right: 14px;
     }
     @include m(disabled) {
       cursor: not-allowed;
       box-shadow: map-get($--input-box-shadow, 'disabled') !important;
       background-color: map-get($--input-background-color, 'disabled');
-      cursor: not-allowed;
       @include e(input, textarea) {
+        cursor: not-allowed;
         color: map-get($--input-color, 'disabled');
         &::placeholder {
           color: map-get($--input-placeholder-color, 'disabled');

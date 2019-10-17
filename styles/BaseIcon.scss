@@ -1,0 +1,10 @@
+@import './mixins/mixins.scss';
+
+@include b(base-icon) {
+  @include m(backward) {
+    transform: rotate(180deg);
+  }
+  @include m(fast-backward) {
+    transform: rotate(180deg);
+  }
+}

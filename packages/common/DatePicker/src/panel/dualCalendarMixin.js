@@ -4,6 +4,10 @@ import commonCalendarMixin from './commonCalendarMixin'
 export default {
   mixins: [commonCalendarMixin],
   props: {
+    theme: {
+      type: String,
+      default: null
+    },
     active: {
       type: Boolean,
       default: true

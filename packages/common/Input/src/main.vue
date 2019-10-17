@@ -13,6 +13,7 @@
       [`n-input--${iconPosition}-icon`]: iconPosition,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
+    @click="handleClick"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
   >
@@ -34,10 +35,10 @@
       :disabled="disabled"
       :maxlength="maxlength"
       :minlength="minlength"
+      :readonly="readonly"
       @blur="handleBlur"
       @focus="handleFocus"
       @input="handleInput"
-      @click="handleClick"
       @change="handleChange"
       @keyup="handleKeyUp"
       @compositionstart="handleCompositionStart"
@@ -48,15 +49,15 @@
       ref="input"
       :type="type"
       class="n-input__input"
-      :placeholder="placeholder"
+      :placeholder="split ? computedPlaceholder[0] : placeholder"
       :disabled="disabled"
       :maxlength="maxlength"
       :minlength="minlength"
       :value="split ? (value && value[0]) : value"
+      :readonly="readonly"
       @blur="handleBlur"
       @focus="handleFocus"
       @input="handleInput($event, 0)"
-      @click="handleClick"
       @change="handleChange"
       @keyup="handleKeyUp"
       @compositionstart="handleCompositionStart"
@@ -73,15 +74,15 @@
       ref="input"
       :type="type"
       class="n-input__input"
-      :placeholder="placeholder"
+      :placeholder="split ? computedPlaceholder[1] : placeholder"
       :disabled="disabled"
       :maxlength="maxlength"
       :minlength="minlength"
       :value="value && value[1]"
+      :readonly="readonly"
       @blur="handleBlur"
       @focus="handleFocus"
       @input="handleInput($event, 1)"
-      @click="handleClick"
       @change="handleChange"
       @keyup="handleKeyUp"
       @compositionstart="handleCompositionStart"
@@ -132,7 +133,7 @@ export default {
       default: 'text'
     },
     placeholder: {
-      type: String,
+      type: [Array, String],
       default: ''
     },
     value: {
@@ -190,6 +191,10 @@ export default {
     splitor: {
       type: String,
       default: null
+    },
+    readonly: {
+      type: [String, Boolean],
+      default: false
     }
   },
   data () {
@@ -200,6 +205,17 @@ export default {
     }
   },
   computed: {
+    computedPlaceholder () {
+      if (this.split) {
+        if (Array.isArray(this.placeholder)) {
+          return this.placeholder
+        } else {
+          return [this.placeholder, this.placeholder]
+        }
+      } else {
+        return this.placeholder
+      }
+    },
     showIcon () {
       if (this.iconPosition === 'right' && this.showCancelMark) return false
       return true

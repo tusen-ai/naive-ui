@@ -3,7 +3,7 @@
     <div ref="activator">
       <n-input
         v-model="displayTimeString"
-        class="n-date-picker-calendar__time-input"
+        class="n-date-picker-panel__time-input"
         placeholder="Select time"
         @click="handleActivatorClick"
         @input="handleTimeInput"

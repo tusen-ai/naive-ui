@@ -14,7 +14,9 @@
       }"
       @click="backward"
     >
-      <icon type="backward" />
+      <div class="n-pagination-item__arrow-icon">
+        <n-base-icon type="backward" />
+      </div>
     </div>
     <div
       v-for="pageItem in pageItems"
@@ -37,15 +39,23 @@
         v-if="pageItem.type==='fastBackward'"
         class="n-pagination-item--fast-backward"
       >
-        <icon type="more" />
-        <icon type="fastBackward" />
+        <div class="n-pagination-item__more-icon">
+          <n-base-icon type="more" />
+        </div>
+        <div class="n-pagination-item__arrow-icon">
+          <n-base-icon type="fast-backward" />
+        </div>
       </template>
       <template
         v-if="pageItem.type==='fastForward'"
         class=""
       >
-        <icon type="more" />
-        <icon type="fastForward" />
+        <div class="n-pagination-item__more-icon">
+          <n-base-icon type="more" />
+        </div>
+        <div class="n-pagination-item__arrow-icon">
+          <n-base-icon type="fast-forward" />
+        </div>
       </template>
     </div>
     <div
@@ -55,7 +65,9 @@
       }"
       @click="forward"
     >
-      <icon type="forward" />
+      <div class="n-pagination-item__arrow-icon">
+        <n-base-icon type="forward" />
+      </div>
     </div>
     <div
       v-if="showQuickJumper"
@@ -82,7 +94,7 @@
 
 <script>
 import { pageItems } from './utils'
-import Icon from './Icon'
+import NBaseIcon from '../../../base/Icon'
 import NSelect from '../../Select'
 import NInput from '../../Input'
 import withapp from '../../../mixins/withapp'
@@ -93,7 +105,7 @@ export default {
   components: {
     NSelect,
     NInput,
-    Icon
+    NBaseIcon
   },
   mixins: [withapp, themeable],
   model: {

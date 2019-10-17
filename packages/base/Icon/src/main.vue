@@ -1,17 +1,18 @@
 <template>
   <svg
     v-if="type === 'more'"
-    class="n-pagination-item__more-icon"
+    class="n-base-icon n-base-icon--more"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 512 512"
   >
     <path d="M255.8 218c-21 0-38 17-38 38s17 38 38 38 38-17 38-38-17-38-38-38zM102 218c-21 0-38 17-38 38s17 38 38 38 38-17 38-38-17-38-38-38zM410 218c-21 0-38 17-38 38s17 38 38 38 38-17 38-38-17-38-38-38z" />
   </svg>
   <svg
-    v-else-if="type === 'fastForward' || type === 'fastBackward'"
-    class="n-pagination-item__arrow-icon"
+    v-else-if="type === 'fastForward' || type === 'fastBackward' || type === 'fast-forward' || type === 'fast-backward'"
+    class="n-base-icon"
     :class="{
-      'n-pagination-item__arrow-icon--reverse': type === 'fastBackward'
+      'n-base-icon--fast-backward': type === 'fast-backward',
+      'n-base-icon--fast-forward': type === 'fast-forward'
     }"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 512 512"
@@ -23,9 +24,10 @@
   </svg>
   <svg
     v-else-if="type === 'forward' || type === 'backward'"
-    class="n-pagination-item__arrow-icon"
+    class="n-base-icon"
     :class="{
-      'n-pagination-item__arrow-icon--reverse': type === 'backward'
+      'n-base-icon--backward': type === 'backward',
+      'n-base-icon--forward': type === 'forward'
     }"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 512 512"
@@ -36,6 +38,7 @@
 
 <script>
 export default {
+  name: 'NBaseIcon',
   props: {
     type: {
       type: String,

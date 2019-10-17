@@ -62,24 +62,21 @@
         &:not(:last-child) {
           margin-right: 10px;
         }
-        @include e(more-icon) {
+        @include e(more-icon, arrow-icon) {
+          position: relative;
+          width: 16px;
           height: 16px;
-        }
-        @include e(arrow-icon) {
-          height: 16px;
+          @include b(base-icon) {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+          }
         }
       }
       color: map-get($--pagination-item-text-color, 'default');
       @include e(more-icon, arrow-icon) {
-        @include once {
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          transform: translateY(-50%) translateX(-50%);
-          @include m(reverse) {
-            transform: translateY(-50%) translateX(-50%) rotate(180deg);
-          }
-        }
         path {
           fill: map-get($--pagination-item-text-color, 'default');
         }

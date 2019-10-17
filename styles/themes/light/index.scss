@@ -24,6 +24,7 @@
 @import "components/Anchor.scss";
 @import "components/Pagination.scss";
 @import "components/GradientText.scss";
+@import "components/DatePicker.scss";
 
 @mixin setup-light-theme () {
   @include setup-light-colors();
@@ -71,4 +72,5 @@
   @include setup-light-alert;
   @include setup-light-pagination;
   @include setup-light-gradient-text;
+  @include setup-light-date-picker;
 }

@@ -43,7 +43,7 @@
       }
     }
     background-color: $--base-select-menu-background-color;
-    box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.12);
+    box-shadow: $--base-select-menu-box-shadow;
     @include e(item) {
       cursor: pointer;
       position: relative;

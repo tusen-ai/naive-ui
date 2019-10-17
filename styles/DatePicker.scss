@@ -1,299 +1,216 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
-@include b(date-picker) {
-  position: relative;
-  width: 240px;
-  @include fade-up-transition(date-picker-calendar);
-  @include fade-up-transition(date-picker-time-selector);
-  &.n-date-picker--disabled {
-    cursor: not-allowed;
-    .n-date-picker__icon {
-      color: rgba(255, 255, 255, .2);
-    }
-    .n-date-picker__editor {
-      cursor: not-allowed;
-      background-color: rgba(255, 255, 255, .08);
-      .n-date-picker__input {
-        cursor: not-allowed;
-        color: rgba(255, 255, 255, .2);
-        &::placeholder {
-          color: rgba(255, 255, 255, .2);
-        }
+@include themes-mixin {
+  @include once {
+    @include b(date-picker) {
+      position: relative;
+      width: 240px;
+      @include m(range) {
+        width: 382px;
       }
-      &:hover {
-        box-shadow: none;
-      }
-    }
+    }  
   }
-  &.n-date-picker--range {
-    width: 382px;
-  }
-  .n-date-picker__icon {
-    position: absolute;
-    right: 13px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: rgba(221, 238, 247, 0.3);
-    height: 20px;
-    transition: color .3s $default-cubic-bezier;
-  }
-  .n-date-picker__editor {
-    box-sizing: border-box;
-    border: none;
-    border-radius: $input-border-radius;
-    outline: none;
-    color: #fff;
-    font-family: $default-font-family;
-    background-color: $input-background-color;
-    height: 34px;
-    width: 100%;
-    caret-color: $input-caret-color;
-    box-shadow: none;
-    transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
-    padding: 0 14px;
-    font-size: 14px;
-    position: relative;
-    display: flex;
-    .n-date-picker__input {
-      width: 100%;
-      -webkit-appearance: none;
-      outline: none;
-      background: none;
-      color: #fff;
-      border: none;
-      padding: 0;
-      transition: color .3s $default-cubic-bezier;
-      &::placeholder {
-        transition: color .3s $default-cubic-bezier;
-        color: $input-placeholder-color;
-        opacity: 1;
-      }
-      &.n-date-picker__input--start {
-        width: 160px;
-        text-align: center;
-      }
-      &.n-date-picker__input--splitor {
-        width: 18px;
-        text-align: center;
-      }
-      &.n-date-picker__input--end {
-        width: 160px;
-        text-align: center;
-      }
-    }
-    &.n-date-picker__editor--focus {
-      &:hover {
-        box-shadow: inset 0 0 0px 1px $main-color, 0px 0px 10px 1px #366555;
-      }
-      box-shadow: inset 0 0 0px 1px $main-color;
-      background-color: $focus-input-background-color;
-    }
-    &:hover {
-      box-shadow: inset 0 0 0px 1px $main-color;
-    }
-  }
-  &.n-date-picker--small-size {
-    .n-date-picker__input {
-      height: $small-height;
-      line-height: $small-height;
-      font-size: $small-input-font-size;
-    }
-  }
-  &.n-date-picker--default-size, &.n-date-picker--medium-size {
-    .n-date-picker__input {
-      height: $default-height;
-      line-height: $default-height;
-      font-size: $default-input-font-size;
-    }
-  }
-  &.n-date-picker--large-size {
-    .n-date-picker__input {
-      height: $large-height;
-      line-height: $large-height;
-      font-size: $large-input-font-size;
-    }
-  }
-}
-
-@include b(date-picker-calendar) {
-  @include fade-in-scale-up-transition(date-picker-calendar);
-  margin-top: 4px;
-  margin-bottom: 4px;
-  width: 350px;
-  background:rgba(75,81,106,1);
-  box-shadow:0px 2px 20px 0px rgba(0,0,0,0.16);
-  border-radius: 6px;
-  color:rgba(233,233,236,1);
-  &.n-date-picker-calendar--datetimerange, &.n-date-picker-calendar--daterange {
-    width: 701px;
-    display: flex;
-    flex-wrap: wrap;
-    .n-date-picker-calendar__date-time-input-wrapper {
-      flex: 1;
-      align-items: center;
-      .n-date-picker-calendar__arrow {
-        width: 21px;
-        display: flex;
-        justify-content: center;
-        font-size: 20px;
-        color: rgba(255, 255, 255, .3); 
-      }
-    }
-    .n-date-picker-calendar__range-wrapper {
+  
+  @include b(date-picker-panel) {
+    @include once {
+      @include fade-in-scale-up-transition(date-picker-panel);
+      margin-top: 4px;
+      margin-bottom: 4px;
       width: 350px;
-      .n-date-picker-calendar__month-modifier {
-        margin-top: 12px;
+      border-radius: 6px;
+      @include b(date-picker-panel-calendar) {
+        width: 350px;
+        @include b(date-picker-panel-month-modifier) {
+          margin-top: 12px;
+        }
       }
     }
-    .n-date-picker-calendar__vertical-divider {
-      width: 1px;
-      height: calc(100% - 62px);
-      background: rgba(255, 255, 255, .1);
-      margin-top: 62px;
-    }
-    &.n-date-picker-calendar--daterange {
-      .n-date-picker-calendar__vertical-divider {
-        height:100%;
-        margin-top: 0;
+    background: $--date-picker-background-color;
+    box-shadow: $--date-picker-box-shadow;
+    color: $--date-picker-text-color;
+    @include m(datetimerange, daterange) {
+      @include once {
+        width: 701px;
+        display: flex;
+        flex-wrap: wrap;
+        @include m(daterange) {
+          @include e(vertical-divider) {
+            height: 100%;
+            margin-top: 0;
+          }
+        }
+      }
+      @include b(date-picker-panel-input-wrapper) {
+        @include once {
+          flex: 1;
+          align-items: center;
+        }
+        @include e(arrow) {
+          @include once {
+            width: 20px;
+            height: 20px;
+            position: relative;
+          }
+          @include b(base-icon) {
+            @include once {
+              position: absolute;
+              left: 0;
+              right: 0;
+              top: 0;
+              bottom: 0;
+            }
+          }
+        }
+      }
+      @include e(vertical-divider) {
+        @include once {
+          width: 1px;
+          height: calc(100% - 62px);
+          margin-top: 62px;
+        }
+        background: $--date-picker-divider-color;
       }
     }
-    .n-date-picker-calendar__actions {
-      flex: 1;
+    @include b(date-picker-panel-input-wrapper) {
+      @include once {
+        padding: 14px 24px;
+        display: flex;
+        justify-content: space-between;
+        @include b(input) {
+          width: 145px;
+        }
+      }
+      border-bottom: 1px solid $--date-picker-divider-color;
     }
-  }
-  .n-date-picker-calendar__date-time-input-wrapper {
-    padding: 14px 24px;
-    border-bottom: 1px solid rgba(255, 255, 255, .1);
-    display: flex;
-    justify-content: space-between;
-    .n-date-picker-calendar__time-input-wrapper {
-      position: relative;
+    @include b(date-picker-panel-month-modifier) {
+      @include once {
+        display: flex;
+        height: 41px;
+        align-items: center;
+        padding-left: 24px;
+        padding-right: 24px;
+        @include e(prev, next, fast-prev, fast-next) {
+          cursor: pointer;
+          width: 14px;
+          height: 14px;
+        }
+        @include e(fast-prev, next) {
+          margin-right: 10px;
+        }
+        
+      }
+      @include e(prev, next, fast-prev, fast-next) {
+        path {
+          fill: $--date-picker-icon-color;
+        }
+      }
+      @include e(month-year) {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 17px;
+        flex-grow: 1;
+        text-align: center;
+        color: $--date-picker-text-color;
+      }
     }
-    .n-date-picker-calendar__date-input, .n-date-picker-calendar__time-input {
-      width: 145px;
-    }
-  }
-  .n-date-picker-calendar__month-modifier {
-    display: flex;
-    height: 41px;
-    align-items: center;
-    padding-left: 24px;
-    padding-right: 24px;
-    .n-date-picker-calendar__prev, .n-date-picker-calendar__next, .n-date-picker-calendar__fast-prev, .n-date-picker-calendar__fast-next {
-      cursor: pointer;
+    @include b(date-picker-panel-weekdays) {
+      padding: 8px 24px 14px 24px;
       display: flex;
-      .n-icon {
-        width: 5px;
-        &::before {
-          width: 5px;
-          color: rgba(255, 255, 255, .3); 
-        }
+      justify-content: space-between;
+      @include e(day) {
+        line-height: 15px;
+        width: 30px;
+        text-align: center;
+        font-size: 12px;
       }
     }
-    .n-date-picker-calendar__fast-prev, .n-date-picker-calendar__next {
-      margin-right: 10px;
-    }
-    .n-date-picker-calendar__month-year {
-      font-size: 14px;
-      font-weight: 700;
-      line-height: 17px;
-      flex-grow: 1;
-      text-align: center;
-    }
-  }
-  .n-date-picker-calendar__weekdays {
-    padding: 8px 24px 14px 24px;
-    display: flex;
-    justify-content: space-between;
-    .n-date-picker-calendar__weekday {
-      line-height: 15px;
-      width: 30px;
-      text-align: center;
-      font-size: 12px;
-    }
-  }
-  .n-date-picker-calendar__dates {
-    padding: 8px 14px 8px 14px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    .n-date-picker-calendar__date {
-      position: relative;
-      width: 24px;
-      height: 24px;
-      line-height: 24px;
-      text-align: center;
-      font-size: 12px;
-      margin: 8px 11px;
-      border-radius: 3px;
-      cursor: pointer;
-      /** oops! */
-      transition: background-color .2s $default-cubic-bezier, color .2s $default-cubic-bezier;
-      &.n-date-picker-calendar__date--no-transition {
-        transition: none!important;
-      }
-      &:not(.n-date-picker-calendar__date--in-display-month) {
-        color: rgba(233, 233, 236, 0.4);
-      }
-      &.n-date-picker-calendar__date--current {
-        color: $main-color;
-        &::after {
-          position: absolute;
-          top: 3px;
-          right: 2px;
-          content: "";
-          height: 4px;
-          width: 4px;
-          border-radius: 2px;
-          background-color: $main-color;
-          transition: background-color .2s $default-cubic-bezier;
-        }
-      }
-      &.n-date-picker-calendar__date--selected.n-date-picker-calendar__date--in-display-month {
-        border-radius: 3px;
-        color: rgba(75, 81, 106, 1)!important;
-        background-color: $main-color!important;
+    @include b(date-picker-panel-dates) {
+      padding: 8px 14px 8px 14px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      @include e(date) {
+        position: relative;
         width: 24px;
+        height: 24px;
+        line-height: 24px;
+        text-align: center;
+        font-size: 12px;
         margin: 8px 11px;
-        &::after {
-          background-color: rgba(75, 81, 106, 1);
+        border-radius: 3px;
+        cursor: pointer;
+        /** oops! */
+        transition: background-color .2s $default-cubic-bezier, color .2s $default-cubic-bezier;
+        @include m(no-transition) {
+          transition: none!important;
         }
-      }
-      &.n-date-picker-calendar__date--in-span.n-date-picker-calendar__date--in-display-month:not(.n-date-picker-calendar__date--selected) {
-        &::before {
-          content: "";
-          position: absolute;
-          left: -11px;
-          right: -11px;
-          top: 0;
-          bottom: 0;
-          background: rgba(99,226,183,0.15);
+        @include not-m(in-display-month) {
+          color: map-get($--date-picker-item-text-color, 'inactive');
         }
-        transition: none;
-        // &::after {
-        //   right: 13px;
+        // &:not(.n-date-picker-panel-dates__date--in-display-month) {
+        //   color: rgba(233, 233, 236, 0.4);
         // }
-      }
-      &:hover {
-        background-color: rgba(99, 226, 183, 0.2);
+        @include m(current) {
+          color: map-get($--date-picker-item-text-color, 'current');
+          &::after {
+            position: absolute;
+            top: 3px;
+            right: 2px;
+            content: "";
+            height: 4px;
+            width: 4px;
+            border-radius: 2px;
+            background-color: map-get($--date-picker-item-background-color, 'active');
+            transition: background-color .2s $default-cubic-bezier;
+          }
+        }
+        &.n-date-picker-panel-dates__date--in-span.n-date-picker-panel-dates__date--in-display-month:not(.n-date-picker-panel-dates__date--selected) {
+          &::before {
+            content: "";
+            position: absolute;
+            left: -11px;
+            right: -11px;
+            top: 0;
+            bottom: 0;
+            background: map-get($--date-picker-item-background-color, 'hover');
+          }
+          transition: none;
+          // &::after {
+          //   right: 13px;
+          // }
+        }
+        &.n-date-picker-panel-dates__date--selected.n-date-picker-panel-dates__date--in-display-month {
+          border-radius: 3px;
+          color: map-get($--date-picker-item-text-color, 'active');
+          background-color: map-get($--date-picker-item-background-color, 'active');
+          width: 24px;
+          margin: 8px 11px;
+          &::after {
+            background-color: map-get($--date-picker-item-sup-color, 'active');
+          }
+        }
+        &:hover {
+          background-color: map-get($--date-picker-item-background-color, 'hover');
+        }
       }
     }
-  }
-  .n-date-picker-calendar__divider {
-    margin: 0 24px;
-    height: 1px;
-    background-color: rgba(255, 255, 255, .1);
-  }
-  .n-date-picker-calendar__actions {
-    border-top: 1px solid rgba(255, 255, 255, .1);
-    height: 47px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    .n-button {
-      margin-bottom: 0;
-      margin-right: 12px;
+    @include e(divider) {
+      margin: 0 24px;
+      height: 1px;
+      background-color: $--date-picker-divider-color;
+    }
+    @include b(date-picker-panel-actions) {
+      flex: 1;
+      border-top: 1px solid $--date-picker-divider-color;
+      height: 47px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      @include b(button) {
+        margin-bottom: 0;
+        margin-right: 12px;
+      }
     }
   }
 }
