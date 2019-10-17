@@ -15,7 +15,7 @@ export default function calcPlacementTransform (placement, activatorRect, conten
   } else if (placement === 'top-end') {
     contentTop = activatorRect.top - contentRect.height
     contentLeft = activatorRect.left + activatorRect.width - contentRect.width
-    suggesetedTransfromOrigin = 'bottom end'
+    suggesetedTransfromOrigin = 'bottom right'
   } else if (placement === 'left-start') {
     contentTop = activatorRect.top
     contentLeft = activatorRect.left - contentRect.width
