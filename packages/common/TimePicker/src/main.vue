@@ -1,15 +1,14 @@
 <template>
   <div class="n-time-picker">
-    <div ref="activator">
-      <n-input
-        v-model="displayTimeString"
-        class="n-date-picker-panel__time-input"
-        placeholder="Select time"
-        @click="handleActivatorClick"
-        @input="handleTimeInput"
-        @blur="handleTimeInputBlur"
-      />
-    </div>
+    <n-input
+      ref="activator"
+      v-model="displayTimeString"
+      class="n-date-picker-panel__time-input"
+      placeholder="Select time"
+      @click="handleActivatorClick"
+      @input="handleTimeInput"
+      @blur="handleTimeInputBlur"
+    />
     <div
       ref="contentContainer"
       class="n-detached-content-container n-time-picker-detached-content-container"
@@ -26,19 +25,22 @@
             v-if="active"
             v-clickoutside="handleClickOutside"
             class="n-time-picker-selector"
+            :class="{
+              [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+            }"
             @mouseup="handleContentMouseUp"
           >
-            <div class="n-time-picker__selection-wrapper">
+            <div class="n-time-picker-selector-time">
               <div
-                class="n-time-picker__hour"
+                class="n-time-picker-selector-time-row"
               >
                 <n-scrollbar ref="hours">
                   <div
                     v-for="hour in hours"
                     :key="hour"
-                    class="n-time-picker__item"
+                    class="n-time-picker-selector-time-row__item"
                     :class="{
-                      'n-time-picker__item--active':
+                      'n-time-picker-selector-time-row__item--active':
                         hour === computedHour
                     }"
                     @click="setHour(hour)"
@@ -53,15 +55,15 @@
                 </n-scrollbar>
               </div>
               <div
-                class="n-time-picker__minute"
+                class="n-time-picker-selector-time-row"
               >
                 <n-scrollbar ref="minutes">
                   <div
                     v-for="minute in minutes"
                     :key="minute"
-                    class="n-time-picker__item"
+                    class="n-time-picker-selector-time-row__item"
                     :class="{
-                      'n-time-picker__item--active':
+                      'n-time-picker-selector-time-row__item--active':
                         minute === computedMinute
                     }"
                     @click="setMinute(minute)"
@@ -76,17 +78,17 @@
                 </n-scrollbar>
               </div>
               <div
-                class="n-time-picker__hour"
+                class="n-time-picker-selector-time-row"
               >
                 <n-scrollbar ref="seconds">
                   <div
                     v-for="second in seconds"
                     :key="second"
-                    class="n-time-picker__item"
+                    class="n-time-picker-selector-time-row__item"
                     :class="{
-                      'n-time-picker__item--active':
+                      'n-time-picker-selector-time-row__item--active':
                         second === computedSecond,
-                      'n-time-picker__item--disabled':
+                      'n-time-picker-selector-time-row__item--disabled':
                         validator &&
                         !validator(computedHour, computedMinute, second)
                     }"
@@ -102,7 +104,7 @@
                 </n-scrollbar>
               </div>
             </div>
-            <div class="n-time-picker__actions">
+            <div class="n-time-picker-selector__actions">
               <n-button
                 size="tiny"
                 round
@@ -135,6 +137,8 @@ import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import clickoutside from '../../../directives/clickoutside'
 import zindexable from '../../../mixins/zindexable'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 
 const DEFAULT_FORMAT = 'HH:mm:ss'
 const TIME_CONST = {
@@ -177,7 +181,7 @@ export default {
   directives: {
     clickoutside
   },
-  mixins: [detachable, placeable, zindexable],
+  mixins: [detachable, placeable, zindexable, withapp, themeable],
   props: {
     stopSelectorBubble: {
       type: Boolean,
@@ -278,19 +282,19 @@ export default {
     },
     scrollTimer () {
       if (this.$refs.hours && this.$refs.hours.$el) {
-        const hour = this.$refs.hours.$el.querySelector('.n-time-picker__item--active')
+        const hour = this.$refs.hours.$el.querySelector('.n-time-picker-selector-time-row__item--active')
         if (hour) {
           this.$refs.hours.$refs.scrollContainer.scrollTo(0, hour.offsetTop)
         }
       }
       if (this.$refs.minutes && this.$refs.minutes.$el) {
-        const minute = this.$refs.minutes.$el.querySelector('.n-time-picker__item--active')
+        const minute = this.$refs.minutes.$el.querySelector('.n-time-picker-selector-time-row__item--active')
         if (minute) {
           this.$refs.minutes.$refs.scrollContainer.scrollTo(0, minute.offsetTop)
         }
       }
       if (this.$refs.seconds && this.$refs.seconds.$el) {
-        const second = this.$refs.seconds.$el.querySelector('.n-time-picker__item--active')
+        const second = this.$refs.seconds.$el.querySelector('.n-time-picker-selector-time-row__item--active')
         if (second) {
           this.$refs.seconds.$refs.scrollContainer.scrollTo(0, second.offsetTop)
         }
@@ -307,7 +311,7 @@ export default {
       }
     },
     handleClickOutside (e) {
-      if (!this.$refs.activator.contains(e.target)) {
+      if (!this.$refs.activator.$el.contains(e.target)) {
         this.closeTimeSelector()
       }
     },

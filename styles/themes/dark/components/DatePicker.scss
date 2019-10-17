@@ -12,10 +12,11 @@
     'default': $--primary-6,
     'active': $--n-dialog-color
   ) !global;
+  $--date-picker-month-text-color: $--n-text-color !global;
   $--date-picker-item-background-color: (
-    'hover': change-color($--primary-6, $alpha: .3),
+    'hover': change-color($--primary-6, $alpha: .2),
     'active': $--primary-6
   ) !global;
-  $--date-picker-divider-color: $--n-divider-color !global;
+  $--date-picker-divider-color:  rgba(255, 255, 255, .08) !global;
   $--date-picker-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.12) !global;
 }

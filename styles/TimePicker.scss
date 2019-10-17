@@ -1,49 +1,62 @@
 @import "./mixins/mixins.scss";
 @import "./themes/vars.scss";
 
-@include b(time-picker-selector) {
-  background-color: rgba(97, 104, 132, 1);
-  box-shadow:0px 2px 20px 0px rgba(0,0,0,0.16);
-  font-size: 12px;
-  border-radius: 6px;
-  margin: 4px 0;
-  width: 180px;
-  overflow: hidden;
-  @include fade-in-scale-up-transition(time-picker);
-  .n-time-picker__selection-wrapper {
-    position: relative;
-    height: 244px;
-    border-bottom: 1px solid rgba(255, 255, 255, .07);
-    display: flex;
-  }
-  .n-time-picker__hour, .n-time-picker__minute, .n-time-picker__second {
-    width: 60px;
-    height: 244px;
-    flex-direction: column;
-    .n-time-picker__item {
-      cursor: pointer;
-      height: 35px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background-color .2s $default-cubic-bezier, color .2s $default-cubic-bezier;
-      background: transparent;
-      &:hover {
-        background-color: rgba(99,226,183,0.12);
-      }
-      &.n-time-picker__item--active {
-        background-color: rgba(99,226,183,0.12);
-        color: rgba(99, 226, 183, 1);
-      }
+@include themes-mixin {
+  @include once {
+    @include b(time-picker) {
+      display: inline-block;
+      width: 180px;
     }
   }
-  .n-time-picker__actions {
-    // margin will boom! I don't know why
-    padding: 10px 15px;
-    display: flex;
-    justify-content: space-around;
-    .n-button {
-      margin: 0;
+  @include b(time-picker-selector) {
+    @include once {
+      font-size: 12px;
+      border-radius: 6px;
+      margin: 4px 0;
+      width: 180px;
+      overflow: hidden;
+      @include fade-in-scale-up-transition(time-picker);
+      @include e(actions) {
+        padding: 10px 15px;
+        display: flex;
+        justify-content: space-around;
+      }
+    }
+    background-color: $--time-picker-background-color;
+    box-shadow: $--time-picker-box-shadow;// 0px 2px 20px 0px rgba(0,0,0,0.16);
+    @include b(time-picker-selector-time) {
+      @include once {
+        height: 244px;
+        display: flex;
+        position: relative;
+      }
+      border-bottom: 1px solid $--time-picker-divider-color;
+    }
+    @include b(time-picker-selector-time-row) {
+      @include once {
+        width: 60px;
+        height: 244px;
+        flex-direction: column;
+      }
+      @include e(item) {
+        @include once {
+          cursor: pointer;
+          height: 35px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background-color .3s $default-cubic-bezier;
+          background: transparent;        
+        }
+        color: map-get($--time-picker-text-color, 'default');
+        &:hover {
+          background-color:  $--time-picker-item-background-color;
+        }
+        @include m(active) {
+          background-color: $--time-picker-item-background-color;
+          color: map-get($--time-picker-text-color, 'active');
+        }
+      }
     }
   }
 }

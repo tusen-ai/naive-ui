@@ -60,6 +60,9 @@
               top: 0;
               bottom: 0;
             }
+            path {
+              fill: $--date-picker-icon-color;
+            }
           }
         }
       }
@@ -80,6 +83,9 @@
         @include b(input) {
           width: 145px;
         }
+        @include b(time-picker) {
+          width: 145px;
+        }
       }
       border-bottom: 1px solid $--date-picker-divider-color;
     }
@@ -98,7 +104,6 @@
         @include e(fast-prev, next) {
           margin-right: 10px;
         }
-        
       }
       @include e(prev, next, fast-prev, fast-next) {
         path {
@@ -106,88 +111,105 @@
         }
       }
       @include e(month-year) {
-        font-size: 14px;
-        font-weight: 700;
-        line-height: 17px;
-        flex-grow: 1;
-        text-align: center;
-        color: $--date-picker-text-color;
+        @include once {
+          font-size: 14px;
+          font-weight: 700;
+          line-height: 17px;
+          flex-grow: 1;
+          text-align: center;
+        }
+        color: $--date-picker-month-text-color;
       }
     }
     @include b(date-picker-panel-weekdays) {
-      padding: 8px 24px 14px 24px;
-      display: flex;
-      justify-content: space-between;
+      @include once {
+        padding: 8px 24px 14px 24px;
+        display: flex;
+        justify-content: space-between;
+      }
       @include e(day) {
-        line-height: 15px;
-        width: 30px;
-        text-align: center;
-        font-size: 12px;
+        @include once {
+          line-height: 15px;
+          width: 30px;
+          text-align: center;
+          font-size: 12px;
+        }
+        color: $--date-picker-text-color;
       }
     }
     @include b(date-picker-panel-dates) {
-      padding: 8px 14px 8px 14px;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
+      @include once {
+        padding: 8px 14px 8px 14px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
       @include e(date) {
-        position: relative;
-        width: 24px;
-        height: 24px;
-        line-height: 24px;
-        text-align: center;
-        font-size: 12px;
-        margin: 8px 11px;
-        border-radius: 3px;
-        cursor: pointer;
-        /** oops! */
-        transition: background-color .2s $default-cubic-bezier, color .2s $default-cubic-bezier;
-        @include m(no-transition) {
-          transition: none!important;
+        @include once {
+          position: relative;
+          width: 24px;
+          height: 24px;
+          line-height: 24px;
+          text-align: center;
+          font-size: 12px;
+          margin: 8px 11px;
+          border-radius: 3px;
+          z-index: 0;
+          cursor: pointer;
+          transition: background-color .2s $default-cubic-bezier, color .2s $default-cubic-bezier;
+          @include m(no-transition) {
+            transition: none!important;
+          }
         }
+        
+        
         @include not-m(in-display-month) {
           color: map-get($--date-picker-item-text-color, 'inactive');
         }
-        // &:not(.n-date-picker-panel-dates__date--in-display-month) {
-        //   color: rgba(233, 233, 236, 0.4);
-        // }
         @include m(current) {
           color: map-get($--date-picker-item-text-color, 'current');
           &::after {
-            position: absolute;
-            top: 3px;
-            right: 2px;
-            content: "";
-            height: 4px;
-            width: 4px;
-            border-radius: 2px;
+            @include once {
+              position: absolute;
+              top: 3px;
+              right: 2px;
+              content: "";
+              height: 4px;
+              width: 4px;
+              border-radius: 2px;
+              transition: background-color .2s $default-cubic-bezier;
+            }
             background-color: map-get($--date-picker-item-background-color, 'active');
-            transition: background-color .2s $default-cubic-bezier;
           }
         }
-        &.n-date-picker-panel-dates__date--in-span.n-date-picker-panel-dates__date--in-display-month:not(.n-date-picker-panel-dates__date--selected) {
-          &::before {
-            content: "";
-            position: absolute;
-            left: -11px;
-            right: -11px;
-            top: 0;
-            bottom: 0;
-            background: map-get($--date-picker-item-background-color, 'hover');
+        @include m(in-display-month) {
+          @include m(in-span) {
+            @include not-m(selected) {
+              &::before {
+                @include once {
+                  content: "";
+                  z-index: -1;
+                  position: absolute;
+                  left: -11px;
+                  right: -11px;
+                  top: 0;
+                  bottom: 0;
+                }
+                background: map-get($--date-picker-item-background-color, 'hover');
+              }
+            }
           }
-          transition: none;
-          // &::after {
-          //   right: 13px;
-          // }
-        }
-        &.n-date-picker-panel-dates__date--selected.n-date-picker-panel-dates__date--in-display-month {
-          border-radius: 3px;
-          color: map-get($--date-picker-item-text-color, 'active');
-          background-color: map-get($--date-picker-item-background-color, 'active');
-          width: 24px;
-          margin: 8px 11px;
-          &::after {
-            background-color: map-get($--date-picker-item-sup-color, 'active');
+          @include m(selected) {
+            @include once {
+              border-radius: 3px;
+              width: 24px;
+              margin: 8px 11px;
+            }
+            color: map-get($--date-picker-item-text-color, 'active');
+            background-color: map-get($--date-picker-item-background-color, 'active');
+            &::after {
+              background-color: map-get($--date-picker-item-sup-color, 'active');
+            }
           }
         }
         &:hover {
@@ -196,21 +218,25 @@
       }
     }
     @include e(divider) {
-      margin: 0 24px;
-      height: 1px;
-      background-color: $--date-picker-divider-color;
+      @include once {
+        margin: 0 24px;
+        height: 1px;
+        background-color: $--date-picker-divider-color;
+      }
     }
     @include b(date-picker-panel-actions) {
-      flex: 1;
-      border-top: 1px solid $--date-picker-divider-color;
-      height: 47px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      @include b(button) {
-        margin-bottom: 0;
-        margin-right: 12px;
+      @include once {
+        flex: 1;
+        height: 47px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        @include b(button) {
+          margin-bottom: 0;
+          margin-right: 12px;
+        }
       }
+      border-top: 1px solid $--date-picker-divider-color;
     }
   }
 }
