@@ -126,6 +126,7 @@ import Scrollbar from '../../../common/Scrollbar'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import toggleButton from './toggleButton'
+import isEqual from 'lodash/isEqual'
 
 export default {
   name: 'NNimbusServiceLayout',
@@ -170,11 +171,14 @@ export default {
     $route (to, from) {
       this.syncActiveItemWithPath(to.path)
     },
-    items (newItems) {
-      this.itemsWithCollapseStatus = newItems.map(item => ({
-        ...item,
-        isCollapsed: false
-      }))
+    items (value, prevValue) {
+      // console.log(value, prevValue, isEqual(value, prevValue))
+      if (!isEqual(value, prevValue)) {
+        this.itemsWithCollapseStatus = value.map(item => ({
+          ...item,
+          isCollapsed: false
+        }))
+      }
     }
   },
   mounted () {
