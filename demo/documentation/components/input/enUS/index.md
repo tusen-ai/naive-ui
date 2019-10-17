@@ -9,4 +9,5 @@ event
 disabled
 clearable
 autosize
+split
 ```

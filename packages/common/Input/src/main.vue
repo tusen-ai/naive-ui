@@ -8,8 +8,13 @@
       'n-input--round': round && type!=='textarea',
       'n-input--icon': icon,
       'n-input--clearable': clearable,
+      'n-input--split': split,
+      'n-input--focus': focus,
+      [`n-input--${iconPosition}-icon`]: iconPosition,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
+    @mouseenter="handleMouseEnter"
+    @mouseleave="handleMouseLeave"
   >
     <pre
       v-if="isTextarea && autosize"
@@ -47,10 +52,35 @@
       :disabled="disabled"
       :maxlength="maxlength"
       :minlength="minlength"
-      :value="value"
+      :value="split ? (value && value[0]) : value"
       @blur="handleBlur"
       @focus="handleFocus"
-      @input="handleInput"
+      @input="handleInput($event, 0)"
+      @click="handleClick"
+      @change="handleChange"
+      @keyup="handleKeyUp"
+      @compositionstart="handleCompositionStart"
+      @compositionend="handleCompositionEnd"
+    >
+    <span
+      v-if="split"
+      class="n-input__splitor"
+    >
+      {{ splitor }}
+    </span>
+    <input
+      v-if="split"
+      ref="input"
+      :type="type"
+      class="n-input__input"
+      :placeholder="placeholder"
+      :disabled="disabled"
+      :maxlength="maxlength"
+      :minlength="minlength"
+      :value="value && value[1]"
+      @blur="handleBlur"
+      @focus="handleFocus"
+      @input="handleInput($event, 1)"
       @click="handleClick"
       @change="handleChange"
       @keyup="handleKeyUp"
@@ -60,13 +90,16 @@
     <div
       v-if="icon"
       class="n-input__icon"
+      :class="{
+        'n-input__icon--hide-icon': !showIcon
+      }"
     >
       <n-icon :type="icon" />
     </div>
     <div class="n-input__cancel-mark">
       <n-cancel-mark
         :theme="synthesizedTheme"
-        :show="!disabled && !!value"
+        :show="showCancelMark"
         :clearable="clearable"
         @clear="handleClear"
       />
@@ -103,8 +136,8 @@ export default {
       default: ''
     },
     value: {
-      type: [String, Number],
-      default: ''
+      type: [String, Array],
+      default: null
     },
     disabled: {
       type: Boolean,
@@ -145,14 +178,40 @@ export default {
     showWordLimit: {
       type: Boolean,
       default: false
+    },
+    split: {
+      type: Boolean,
+      default: false
+    },
+    iconPosition: {
+      type: String,
+      default: 'left'
+    },
+    splitor: {
+      type: String,
+      default: null
     }
   },
   data () {
     return {
-      isComposing: false
+      isComposing: false,
+      focus: false,
+      hover: false
     }
   },
   computed: {
+    showIcon () {
+      if (this.iconPosition === 'right' && this.showCancelMark) return false
+      return true
+    },
+    showCancelMark () {
+      if (this.disabled || !this.clearable || (!this.focus && !this.hover)) return false
+      if (this.split) {
+        return !!(Array.isArray(this.value) && (this.value[0] || this.value[1])) && (this.hover || this.focus)
+      } else {
+        return !!this.value && (this.hover || this.focus)
+      }
+    },
     isTextarea () {
       return this.type === 'textarea'
     },
@@ -197,11 +256,21 @@ export default {
       this.isComposing = false
       this.handleInput(event)
     },
-    handleInput (e) {
+    handleInput (e, index) {
       if (this.isComposing) return
-      this.$emit('input', e.target.value)
+      if (!this.split) {
+        this.$emit('input', e.target.value)
+      } else {
+        let value = this.value
+        if (!Array.isArray(value)) {
+          value = [null, null]
+        }
+        value[index] = e.target.value
+        this.$emit('input', Array.from(value))
+      }
     },
     handleBlur (e) {
+      this.focus = false
       this.$emit('blur', e)
       // 这里设计的冒泡还是针对特定元素, 否则会在其他不需要的元素上遍历
       if (this.formItem) {
@@ -209,6 +278,7 @@ export default {
       }
     },
     handleFocus (e) {
+      this.focus = true
       this.$emit('focus', e)
     },
     handleKeyUp (e) {
@@ -225,8 +295,19 @@ export default {
       this.$emit('click', e)
     },
     handleClear (e) {
-      this.$emit('change', '')
-      this.$emit('input', '')
+      if (this.split) {
+        this.$emit('change', [])
+        this.$emit('input', [])
+      } else {
+        this.$emit('change', '')
+        this.$emit('input', '')
+      }
+    },
+    handleMouseEnter () {
+      this.hover = true
+    },
+    handleMouseLeave () {
+      this.hover = false
     }
   }
 }

@@ -42,17 +42,23 @@ export default function calcPlacementTransform (placement, activatorRect, conten
     suggesetedTransfromOrigin = 'bottom left'
   } else if (placement === 'bottom-start') {
     const toWindowBottom = window.innerHeight - activatorRect.bottom
-    if (contentRect.height > toWindowBottom) {
+    const toWindowRight = window.innerWidth - activatorRect.left - contentRect.width
+    if (contentRect.height > toWindowBottom && activatorRect.top > toWindowBottom) {
       contentBottom = toWindowBottom + activatorRect.height
       contentTop = null
-      suggesetedTransfromOrigin = 'bottom left'
+      suggesetedTransfromOrigin = 'bottom'
     } else {
       contentTop = activatorRect.top + activatorRect.height
       contentBottom = null
-      suggesetedTransfromOrigin = 'top left'
+      suggesetedTransfromOrigin = 'top'
     }
-    contentLeft = activatorRect.left
-    contentRight = null
+    if (toWindowRight < 0) {
+      contentLeft = activatorRect.right - contentRect.width
+      suggesetedTransfromOrigin += ' right'
+    } else {
+      contentLeft = activatorRect.left
+      suggesetedTransfromOrigin += ' left'
+    }
   } else if (placement === 'bottom-end') {
     contentTop = activatorRect.top + activatorRect.height
     contentLeft = activatorRect.left + activatorRect.width - contentRect.width
@@ -71,7 +77,7 @@ export default function calcPlacementTransform (placement, activatorRect, conten
   return [{
     left: contentLeft && `${contentLeft}px`,
     top: contentTop && `${contentTop}px`,
-    right: contentRight && `${contentTop}px`,
+    right: contentRight && `${contentRight}px`,
     bottom: contentBottom && `${contentBottom}px`
   }, suggesetedTransfromOrigin]
 }

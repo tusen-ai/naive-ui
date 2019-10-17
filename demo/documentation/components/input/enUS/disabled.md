@@ -17,6 +17,7 @@ Input can be disabled.
   :disabled="!active"
   round
 />
+<n-input split splitor="to" v-model="value" icon="ios-calendar" icon-position="right" clearable :disabled="!active" />
 <n-switch v-model="active" />
 ```
 ```js

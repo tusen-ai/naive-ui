@@ -271,9 +271,9 @@
           background: rgba(99,226,183,0.15);
         }
         transition: none;
-        &::after {
-          right: 13px;
-        }
+        // &::after {
+        //   right: 13px;
+        // }
       }
       &:hover {
         background-color: rgba(99, 226, 183, 0.2);
