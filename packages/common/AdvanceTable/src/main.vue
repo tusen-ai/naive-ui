@@ -62,7 +62,7 @@
               :class="{
                 'n-advance-table__sortable-column': column.sortable
               }"
-              @click.native="()=>sortByColumn(column)"
+              @click.native.self="()=>sortByColumn(column)"
             >
               <!-- 当前页全选 -->
               <n-checkbox
@@ -71,7 +71,14 @@
                 :indeterminate="!isCheckedBoxAllIndeterminate"
                 @click.native="onAllCheckboxesClick"
               />
-              {{ column.title }}
+              <row
+                v-if="column.renderHeader"
+                :index="i"
+                :row="column"
+                :key-name="column.key || i"
+                :render="column.renderHeader"
+              />
+              {{ !column.renderHeader ? column.title : '' }}
               <SortIcon
                 v-if="column.sortable"
                 :ref="'sorter_' + (column.key || i)"

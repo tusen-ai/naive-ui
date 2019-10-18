@@ -10,9 +10,9 @@ export default {
   render: (h, ctx) => {
     const params = ctx.props.row
 
-    const { keyName, render, row } = ctx.props
+    const { keyName, render } = ctx.props
     if (render) {
-      return h('div', [render(h, params)])
+      return render(h, params)
     } else return h('div', [params.row[keyName]])
   }
 }

@@ -1,14 +1,14 @@
-@import "darkColors.scss";
-@import "components/Button.scss";
-@import "components/Divider.scss";
-@import "components/NimbusServiceLayout.scss";
-@import "components/Scrollbar.scss";
-@import "components/BaseLoading.scss";
-@import "components/BaseSelectMenu.scss";
-@import "components/BasePicker.scss";
-@import "components/BaseCancelMark.scss";
-@import "components/Tag.scss";
-@import "components/Table.scss";
+@import 'darkColors.scss';
+@import 'components/Button.scss';
+@import 'components/Divider.scss';
+@import 'components/NimbusServiceLayout.scss';
+@import 'components/Scrollbar.scss';
+@import 'components/BaseLoading.scss';
+@import 'components/BaseSelectMenu.scss';
+@import 'components/BasePicker.scss';
+@import 'components/BaseCancelMark.scss';
+@import 'components/Tag.scss';
+@import 'components/Table.scss';
 @import 'components/AdvanceTable.scss';
 @import "components/Popover.scss";
 @import "components/Tooltip.scss";
@@ -28,8 +28,10 @@
 @import "components/TimePicker.scss";
 @import "components/Progress.scss";
 @import "components/Timeline.scss";
+@import "components/BackTop.scss";
+@import "components/Notification.scss";
 
-@mixin setup-dark-theme () {
+@mixin setup-dark-theme() {
   @include setup-dark-colors();
   $--n-primary-color: $--primary-6 !global;
   $--n-primary-hover-color: $--primary-5 !global;
@@ -51,7 +53,7 @@
   $--n-table-body-color: $--neutral-9 !global;
   $--n-alpha-table-body-color: $--overlay-9 !global;
   $--n-card-color: $--neutral-9 !global;
-  $--n-disabled-text-color: rgba(255, 255, 255, .3) !global;
+  $--n-disabled-text-color: rgba(255, 255, 255, 0.3) !global;
   $--n-dialog-color: $--neutral-3 !global;
   $--n-background-color: $--neutral-10 !global;
   @include setup-dark-nimbus-service-layout;
@@ -83,4 +85,6 @@
   @include setup-dark-time-picker;
   @include setup-dark-progress;
   @include setup-dark-timeline;
+  @include setup-dark-back-top;
+  @include setup-dark-notification;
 }

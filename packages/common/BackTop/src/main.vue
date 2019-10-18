@@ -1,19 +1,20 @@
 <template>
   <transition name="n-back-top--transition">
     <div
-      v-if="show"
-      class="n-back-top"
+      :class="{[`n-${synthesizedTheme}-theme`]: synthesizedTheme}"
       :style="{
         right: styleRight,
         bottom: styleBottom
       }"
+      class="n-back-top"
       @click="handleClick"
+      v-if="show"
     >
       <svg
         v-if="!$slots.default"
+        viewBox="0 0 40 40"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
-        viewBox="0 0 40 40"
       >
         <title>BackTop</title>
         <g>
@@ -31,9 +32,12 @@
 
 <script>
 import getScrollParent from '../../../utils/dom/getScrollParent'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 
 export default {
   name: 'NBackTop',
+  mixins: [withapp, themeable],
   props: {
     right: {
       type: Number,
