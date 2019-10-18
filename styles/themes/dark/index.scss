@@ -26,6 +26,7 @@
 @import "components/GradientText.scss";
 @import "components/DatePicker.scss";
 @import "components/TimePicker.scss";
+@import "components/Progress.scss";
 
 @mixin setup-dark-theme () {
   @include setup-dark-colors();
@@ -79,4 +80,5 @@
   @include setup-dark-gradient-text;
   @include setup-dark-date-picker;
   @include setup-dark-time-picker;
+  @include setup-dark-progress;
 }

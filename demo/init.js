@@ -24,7 +24,7 @@ import button from './documentation/components/button'
 import switchDemo from './documentation/components/switch'
 import tableDemo from './documentation/components/tableDemo'
 import input from './documentation/components/input'
-import selectDemo from './documentation/components/selectDemo'
+import select from './documentation/components/select'
 import cascaderDemo from './documentation/components/cascaderDemo'
 import inputKeyValuePairsDemo from './documentation/components/inputKeyValuePairsDemo'
 import modal from './documentation/components/modal'
@@ -53,7 +53,7 @@ import pagination from './documentation/components/pagination'
 import collapse from './documentation/components/collapse'
 import tag from './documentation/components/tag'
 import timelineDemo from './documentation/components/timelineDemo'
-import progressDemo from './documentation/components/progressDemo'
+import progress from './documentation/components/progress'
 import divider from './documentation/components/divider'
 import popconfirmDemo from './documentation/components/popconfirmDemo'
 import anchor from './documentation/components/anchor'
@@ -141,7 +141,7 @@ const routes = [
       { path: '/n-table', component: tableDemo },
       { path: '/n-advance-table', component: advancedTable },
       { path: '/n-input', component: input },
-      { path: '/n-select', component: selectDemo },
+      { path: '/n-select', component: select },
       { path: '/n-cascader', component: cascaderDemo },
       { path: '/n-InputKeyValuePairs', component: inputKeyValuePairsDemo },
       { path: '/n-modal', component: modal },
@@ -167,7 +167,7 @@ const routes = [
       { path: '/n-badge', component: badge },
       { path: '/n-steps', component: stepsDemo },
       { path: '/n-collapse', component: collapse },
-      { path: '/n-progress', component: progressDemo },
+      { path: '/n-progress', component: progress },
       { path: '/n-tag', component: tag },
       { path: '/n-timeline', component: timelineDemo },
       { path: '/n-scrollbar-debug2', component: scrollbarDebug2 },

@@ -26,6 +26,7 @@
 @import "components/GradientText.scss";
 @import "components/DatePicker.scss";
 @import "components/TimePicker.scss";
+@import "components/Progress.scss";
 
 @mixin setup-light-theme () {
   @include setup-light-colors();
@@ -75,4 +76,5 @@
   @include setup-light-gradient-text;
   @include setup-light-date-picker;
   @include setup-light-time-picker;
+  @include setup-light-progress;
 }

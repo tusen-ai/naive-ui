@@ -1,0 +1,14 @@
+@mixin setup-light-progress {
+  $--progress-rail-color: rgba(0, 0, 0, .1) !global;
+  $--progress-fill-color: (
+    'default': $--info-6,
+    'info': $--info-6,
+    'error': $--error-6,
+    'warning': $--warning-6,
+    'success': $--success-6
+  ) !global;
+  $--progress-indicator-color: (
+    'outside': $--n-secondary-text-color,
+    'inside': white
+  ) !global;
+}
