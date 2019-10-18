@@ -109,7 +109,8 @@
             width: 28px;
             height: 28px;
             border-radius: 14px;
-            background-color: #59c3b2ff;
+            background-color: $--notification-cell__avator-background-color;
+            color: $--notification-cell__avator-color;
             text-align: center;
             font-size: 18px;
             line-height: 28px;
