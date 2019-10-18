@@ -68,7 +68,10 @@ const _columns3 = ($this) => {
       title: 'Name',
       key: 'name',
       sortable: true,
-      width: 300
+      width: 300,
+      renderHeader(h,column){
+        return <n-tag>{column.title}</n-tag>
+      }
     },
     {
       title: 'Age',
