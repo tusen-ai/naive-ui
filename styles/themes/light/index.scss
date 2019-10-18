@@ -1,34 +1,36 @@
 @import 'lightColors.scss';
-@import "components/Button.scss";
-@import "components/Divider.scss";
-@import "components/NimbusServiceLayout.scss";
-@import "components/Scrollbar.scss";
-@import "components/BaseLoading.scss";
-@import "components/BaseSelectMenu.scss";
-@import "components/BasePicker.scss";
-@import "components/BaseCancelMark.scss";
-@import "components/Tag.scss";
-@import "components/Table.scss";
-@import "components/AdvanceTable.scss";
-@import "components/Popover.scss";
-@import "components/Tooltip.scss";
-@import "components/Confirm.scss";
-@import "components/CheckBox.scss";
-@import "components/Switch.scss";
-@import "components/Message.scss";
-@import "components/LoadingBar.scss";
-@import "components/Badge.scss";
-@import "components/Dropdown.scss";
-@import "components/Input.scss";
-@import "components/Alert.scss";
-@import "components/Anchor.scss";
-@import "components/Pagination.scss";
-@import "components/GradientText.scss";
-@import "components/DatePicker.scss";
-@import "components/TimePicker.scss";
-@import "components/Progress.scss";
+@import 'components/Button.scss';
+@import 'components/Divider.scss';
+@import 'components/NimbusServiceLayout.scss';
+@import 'components/Scrollbar.scss';
+@import 'components/BaseLoading.scss';
+@import 'components/BaseSelectMenu.scss';
+@import 'components/BasePicker.scss';
+@import 'components/BaseCancelMark.scss';
+@import 'components/Tag.scss';
+@import 'components/Table.scss';
+@import 'components/AdvanceTable.scss';
+@import 'components/Popover.scss';
+@import 'components/Tooltip.scss';
+@import 'components/Confirm.scss';
+@import 'components/CheckBox.scss';
+@import 'components/Switch.scss';
+@import 'components/Message.scss';
+@import 'components/LoadingBar.scss';
+@import 'components/Badge.scss';
+@import 'components/Dropdown.scss';
+@import 'components/Input.scss';
+@import 'components/Alert.scss';
+@import 'components/Anchor.scss';
+@import 'components/Pagination.scss';
+@import 'components/GradientText.scss';
+@import 'components/DatePicker.scss';
+@import 'components/TimePicker.scss';
+@import 'components/Progress.scss';
+@import 'components/BackTop.scss';
+@import 'components/Notification.scss';
 
-@mixin setup-light-theme () {
+@mixin setup-light-theme() {
   @include setup-light-colors();
   $--n-primary-color: $--primary-6 !global;
   $--n-primary-hover-color: $--primary-5 !global;
@@ -37,18 +39,18 @@
   $--n-success-color: $--success-6 !global;
   $--n-warning-color: $--warning-6 !global;
   $--n-error-color: $--error-6 !global;
-  
+
   $n-selected-color: $neutral-7 !global;
   $--n-divider-color: $neutral-7 !global;
   $--n-border-color: $neutral-6 !global;
-  
+
   $--n-secondary-text-color: $neutral-3 !global;
   $--n-text-color: $neutral-2 !global;
   $--n-disabled-text-color: $neutral-5 !global;
   $--n-card-color: $neutral-10 !global;
   $--n-dialog-color: $neutral-10 !global;
   $--n-background-color: $neutral-10 !global;
- 
+
   @include setup-light-nimbus-service-layout;
   @include setup-light-divider;
   @include setup-light-scrollbar;
@@ -77,4 +79,6 @@
   @include setup-light-date-picker;
   @include setup-light-time-picker;
   @include setup-light-progress;
+  @include setup-light-back-top;
+  @include setup-light-notification;
 }

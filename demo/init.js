@@ -41,7 +41,7 @@ import formDemo from './documentation/components/formDemo'
 import tabsDemo from './documentation/components/tabsDemo'
 import timePicker from './documentation/components/timePicker'
 import confirm from './documentation/components/confirm'
-import backTopDemo from './documentation/components/backTopDemo'
+import backTop from './documentation/components/backTop'
 import dropdownDemo from './documentation/components/dropdownDemo'
 import scrollbarDebug from './debugComponents/scrollbarDebug'
 import scrollbarDebug2 from './debugComponents/scrollbarDebug2'
@@ -171,7 +171,7 @@ const routes = [
       { path: '/n-tag', component: tag },
       { path: '/n-timeline', component: timelineDemo },
       { path: '/n-scrollbar-debug2', component: scrollbarDebug2 },
-      { path: '/n-back-top', component: backTopDemo },
+      { path: '/n-back-top', component: backTop },
       { path: '/n-date-picker-debug', component: datePickerDebug },
       { path: '/n-divider', component: divider },
       { path: '/n-popconfirm', component: popconfirmDemo },

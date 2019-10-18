@@ -1,0 +1,12 @@
+@mixin setup-dark-notification {
+  $--notification-background-start-color: rgb(91, 197, 161) !global;
+  $--notification-background-end-color: rgba(116, 127, 157, 1) !global;
+  $--notification-text-color: #ffffff !global;
+  $--notification-cell_deactive-color: #a1d9c6 !global;
+  $--notification-cell__header-color: #ffffff !global;
+  $--notification-cell__content-color: #ffffff !global;
+  $--notification-cell__title-meta-color: rgba(255, 255, 255, 0.4) !global;
+  $--notification-cell__action-color: #00ffa9ff !global;
+  $--notification-cell__avator-background-color: #59c3b2ff !global;
+  $--notification-cell__avator-color: rgb(255, 255, 255) !global;
+}
