@@ -1,32 +1,14 @@
-<template>
-  <div class="n-doc-section">
-    <div class="n-doc-section__header">
-      Basic Usage
-    </div>
-    <div
-      class="n-doc-section__view"
-      style="flex-wrap: nowrap;"
-    >
-      <!--EXAMPLE_START-->
-      <n-popselect
-        v-model="value"
-        :options="options"
-        @change="handleChange"
-      >
-        <template v-slot:activator>
-          <n-tag>{{ value || 'popselect' }}</n-tag>
-        </template>
-      </n-popselect>
-      <!--EXAMPLE_END-->
-    </div>
-    <pre class="n-doc-section__inspect">v-model: {{ JSON.stringify(value) }}</pre>
-    <n-doc-source-block>
-      <!--SOURCE-->
-    </n-doc-source-block>
-  </div>
-</template>
-
-<script>
+# Basic
+```html
+<n-popselect
+  v-model="value"
+  :options="options"
+  @change="handleChange"
+>
+  <n-tag>{{ value || 'popselect' }}</n-tag>
+</n-popselect>
+```
+```js
 export default {
   data () {
     return {
@@ -80,4 +62,4 @@ export default {
     }
   }
 }
-</script>
+```

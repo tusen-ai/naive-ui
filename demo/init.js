@@ -57,7 +57,7 @@ import progressDemo from './documentation/components/progressDemo'
 import divider from './documentation/components/divider'
 import popconfirmDemo from './documentation/components/popconfirmDemo'
 import anchor from './documentation/components/anchor'
-import popselectDemo from './documentation/components/popselectDemo'
+import popselect from './documentation/components/popselect'
 import app from './documentation/components/app'
 import advancedTable from './documentation/components/advancedTable'
 import transferDemo from './documentation/components/transferDemo'
@@ -177,7 +177,7 @@ const routes = [
       { path: '/n-popconfirm', component: popconfirmDemo },
       { path: '/n-anchor', component: anchor },
       { path: '/n-dropdown', component: dropdownDemo },
-      { path: '/n-popselect', component: popselectDemo },
+      { path: '/n-popselect', component: popselect },
       { path: '/n-app', component: app },
       { path: '/n-cancel-mark-debug', component: cancelMarkDebug },
       { path: '/n-transfer', component: transferDemo },
