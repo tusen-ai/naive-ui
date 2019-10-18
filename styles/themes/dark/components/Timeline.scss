@@ -1,0 +1,13 @@
+@mixin setup-dark-timeline {
+  $--timeline-item-circle-border-color: (
+    'default': $--n-primary-color,
+    'info': $--info-6,
+    'error': $--error-6,
+    'success': $--success-6,
+    'warning': $--warning-6
+  ) !global;
+  $--timeline-item-title-color: $--n-text-color !global;
+  $--timeline-item-content-color: $--n-secondary-text-color !global;
+  $--timeline-item-meta-color: rgba(255, 255, 255, .45) !global;
+  $--timeline-line-background-color: rgba(255, 255, 255, .2) !global;
+}

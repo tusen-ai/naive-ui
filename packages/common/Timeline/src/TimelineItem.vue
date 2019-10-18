@@ -2,16 +2,22 @@
   <div
     class="n-timeline-item"
     :class="{
-      [`n-timeline-item--${type}-type`]: type
+      [`n-timeline-item--${type}-type`]: true
     }"
   >
     <div class="n-timeline-item-timeline">
       <div class="n-timeline-item-timeline__line" />
-      <div class="n-timeline-item-timeline__circle" />
+      <div class="n-timeline-item-timeline__circle simulate-hollow-out-background" />
     </div>
     <div class="n-timeline-item-content">
-      <div class="n-timeline-item-content__body">
-        <slot />
+      <div
+        v-if="title"
+        class="n-timeline-item-content__title"
+      >
+        {{ title }}
+      </div>
+      <div class="n-timeline-item-content__content">
+        {{ content }}
       </div>
       <div class="n-timeline-item-content__meta">
         {{ timestamp }}
@@ -21,18 +27,42 @@
 </template>
 
 <script>
+import hollowoutable from '../../../mixins/hollowoutable'
+
 export default {
+  inject: {
+    NTimeline: {
+      default: null
+    }
+  },
   name: 'NTimelineItem',
+  mixins: [hollowoutable],
   props: {
     timestamp: {
       type: [String, Number],
       default: null
     },
+    title: {
+      type: String,
+      default: null
+    },
+    content: {
+      type: String,
+      default: null
+    },
     type: {
       validator (type) {
-        return ['success', 'error', 'warning', 'info'].includes(type)
+        return ['default', 'success', 'error', 'warning', 'info'].includes(type)
       },
-      default: null
+      default: 'default'
+    }
+  },
+  computed: {
+    synthesizedTheme () {
+      if (this.NTimeline) {
+        return this.NTimeline.synthesizedTheme
+      }
+      return null
     }
   }
 }
