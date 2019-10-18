@@ -49,6 +49,7 @@ export default {
   },
   render (h, context) {
     const slots = context.scopedSlots
+    const activator = slots.activator || slots.default
     const controller = context.props.controller || {}
     return h(
       NPopover, {
@@ -57,7 +58,7 @@ export default {
           controller
         },
         scopedSlots: {
-          activator: () => slots.activator(),
+          activator: () => activator(),
           default: () => h(NPopselectPanel, {
             props: {
               ...context.props,
