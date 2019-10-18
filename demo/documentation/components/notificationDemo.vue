@@ -1,25 +1,17 @@
 <template>
   <div
-    ref="doc"
     class="n-doc"
+    ref="doc"
   >
     <div class="n-doc-header">
-      <n-gradient-text :font-size="20">
-        Notification / $nNotify
-      </n-gradient-text>
+      <n-gradient-text :font-size="20">Notification / $nNotify</n-gradient-text>
     </div>
     <div class="n-doc-body">
       <div class="n-doc-section">
-        <div class="n-doc-section__header">
-          Basic Usage
-        </div>
+        <div class="n-doc-section__header">Basic Usage</div>
         <div class="n-doc-section__view">
-          <n-button @click="notify1">
-            Wouldn't it be Nice
-          </n-button>
-          <n-button @click="notify2">
-            Satisfaction
-          </n-button>
+          <n-button @click="notify1">Wouldn't it be Nice</n-button>
+          <n-button @click="notify2">Satisfaction</n-button>
         </div>
         <div class="n-doc-section__source">
           <textarea>
