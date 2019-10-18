@@ -1,33 +1,47 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
-@include b(gradient-text) {
-  display: inline-block;
-  position: relative;
-  font-weight: 700;
-  font-size: 16px;
-  background: $default-text-gradient;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  &.n-gradient-text--default-type {
-    background: $default-text-gradient;
-    -webkit-background-clip: text;
-    background-clip: text;
+@mixin gradient-text-type-mixin ($type) {
+  @include m($type + '-type') {
+    background-image: map-get($--gradient-text-background-image, $type);
   }
-  &.n-gradient-text--warning-type {
-    background: $default-text-gradient-warning;
-    -webkit-background-clip: text;
-    background-clip: text;
-  }
-  &.n-gradient-text--danger-type {
-    background: $default-text-gradient-danger;
-    -webkit-background-clip: text;
-    background-clip: text;
-  }
-  &.n-gradient-text--success-type {
-    background: $default-text-gradient-success;
-    -webkit-background-clip: text;
-    background-clip: text;
+}
+
+@include themes-mixin {
+  @include b(gradient-text) {
+    @include once {
+      font-weight: 700;
+      font-size: inherit;
+      // background-image: $default-text-gradient;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    @include gradient-text-type-mixin(default);
+    @include gradient-text-type-mixin(success);
+    @include gradient-text-type-mixin(warning);
+    @include gradient-text-type-mixin(error);
+    @include gradient-text-type-mixin(info);
+
+    // &.n-gradient-text--default-type {
+    //   background-image: $default-text-gradient;
+    //   // -webkit-background-clip: text;
+    //   // background-clip: text;
+    // }
+    // &.n-gradient-text--warning-type {
+    //   background-image: $default-text-gradient-warning;
+    //   // -webkit-background-clip: text;
+    //   // background-clip: text;
+    // }
+    // &.n-gradient-text--danger-type {
+    //   background-image: $default-text-gradient-danger;
+    //   // -webkit-background-clip: text;
+    //   // background-clip: text;
+    // }
+    // &.n-gradient-text--success-type {
+    //   background-image: $default-text-gradient-success;
+    //   // -webkit-background-clip: text;
+    //   // background-clip: text;
+    // }
   }
 }

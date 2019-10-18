@@ -8,29 +8,33 @@
       'n-date-picker--range': isRange
     }"
   >
-    <div
-      v-if="isRange"
+    <!-- <div
+
       class="n-date-picker__editor"
       :class="{
         'n-date-picker__editor--focus': isFocus
       }"
+
+    > -->
+    <n-input
+      v-if="isRange"
+      :disabled="disabled"
+      :value="[displayStartTime, displayEndTime]"
+      :placeholder="[computedStartPlaceholder, computedEndPlaceholder]"
+      :readonly="disabled ? 'disabled' : false"
+      :splitor="splitor"
+      split
       @click="handleActivatorClick"
-    >
-      <input
-        v-model="displayStartTime"
-        class="n-date-picker__input n-date-picker__input--start"
-        :placeholder="computedStartPlaceholder"
-        :readonly="disabled ? 'disabled' : false"
-        @focus="handleFocus"
-        @blur="handleStartTimeInputBlur"
-        @input="handleStartTimeInput"
-      >
-      <input
+      @focus="handleFocus"
+      @blur="handleStartTimeInputBlur"
+      @input="handleStartTimeInput"
+    />
+    <!-- <input
         class="n-date-picker__input n-date-picker__input--splitor"
         :value="splitor"
         readonly="readonly"
-      >
-      <input
+      > -->
+    <!-- <input
         v-model="displayEndTime"
         class="n-date-picker__input n-date-picker__input--end"
         :placeholder="computedEndPlaceholder"
@@ -44,32 +48,34 @@
           size="20"
           type="ios-calendar"
         />
-      </div>
-    </div>
-    <div
-      v-else
+      </div> -->
+    <!-- </div> -->
+    <!-- <div
+
       class="n-date-picker__editor"
       :class="{
         'n-date-picker__editor--focus': isFocus
       }"
-    >
-      <input
-        v-model="displayTime"
-        class="n-date-picker__input"
-        :placeholder="computedPlaceholder"
-        :readonly="disabled ? 'disabled' : false"
-        @click="handleActivatorClick"
-        @focus="handleFocus"
-        @blur="handleTimeInputBlur"
-        @input="handleTimeInput"
-      >
-      <div class="n-date-picker__icon">
+    > -->
+    <n-input
+      v-else
+      v-model="displayTime"
+      class="n-date-picker__input"
+      :disabled="disabled"
+      :placeholder="computedPlaceholder"
+      :readonly="disabled ? 'disabled' : false"
+      @click="handleActivatorClick"
+      @focus="handleFocus"
+      @blur="handleTimeInputBlur"
+      @input="handleTimeInput"
+    />
+    <!-- <div class="n-date-picker__icon">
         <n-icon
           size="20"
           type="ios-calendar"
         />
-      </div>
-    </div>
+      </div> -->
+    <!-- </div> -->
     <div
       ref="contentContainer"
       class="n-detached-content-container n-date-picker-detached-content-container"
@@ -87,6 +93,7 @@
           :value="value"
           :active="active"
           :actions="actions"
+          :theme="synthesizedTheme"
           @input="handlePanelInput"
           @close="closeCalendar"
         />
@@ -95,6 +102,7 @@
           :value="value"
           :active="active"
           :actions="actions"
+          :theme="synthesizedTheme"
           @input="handlePanelInput"
           @close="closeCalendar"
         />
@@ -103,6 +111,7 @@
           :value="value"
           :active="active"
           :actions="actions"
+          :theme="synthesizedTheme"
           @input="handleRangePanelInput"
           @close="closeCalendar"
         />
@@ -111,6 +120,7 @@
           :value="value"
           :active="active"
           :actions="actions"
+          :theme="synthesizedTheme"
           @input="handleRangePanelInput"
           @close="closeCalendar"
         />
@@ -121,7 +131,6 @@
 
 <script>
 import moment from 'moment'
-import NIcon from '../../Icon'
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import zindexable from '../../../mixins/zindexable'
@@ -130,6 +139,9 @@ import DatetimerangePanel from './panel/datetimerange'
 import DatePanel from './panel/date'
 import DaterangePanel from './panel/daterange'
 import clickoutside from '../../../directives/clickoutside'
+import NInput from '../../Input'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 
 const DATE_FORMAT = {
   date: 'YYYY-MM-DD',
@@ -162,13 +174,15 @@ export default {
     clickoutside
   },
   components: {
-    NIcon,
+    NInput,
     DatetimePanel,
     DatePanel,
     DatetimerangePanel,
     DaterangePanel
   },
   mixins: [
+    withapp,
+    themeable,
     detachable,
     placeable,
     zindexable

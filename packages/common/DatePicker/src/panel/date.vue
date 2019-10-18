@@ -1,81 +1,64 @@
 <template>
-  <transition name="n-date-picker-calendar--transition">
+  <transition name="n-date-picker-panel--transition">
     <div
       v-if="active"
       ref="self"
-      class="n-date-picker-calendar"
+      class="n-date-picker-panel"
+      :class="{
+        [`n-${theme}-theme`]: theme
+      }"
       @click.prevent="() => {}"
     >
       <div style="width: 100%; height: 12px" />
-      <div class="n-date-picker-calendar__month-modifier">
+      <div class="n-date-picker-panel-month-modifier">
         <div
-          class="n-date-picker-calendar__fast-prev"
+          class="n-date-picker-panel-month-modifier__fast-prev"
           @click="prevYear"
         >
-          <n-icon
-            type="ios-arrow-back"
-            size="14"
-          />
-          <n-icon
-            type="ios-arrow-back"
-            size="14"
-          />
+          <n-base-icon type="fast-backward" />
         </div>
         <div
-          class="n-date-picker-calendar__prev"
+          class="n-date-picker-panel-month-modifier__prev"
           @click="prevMonth"
         >
-          <n-icon
-            type="ios-arrow-back"
-            size="14"
-          />
+          <n-base-icon type="backward" />
         </div>
-        <div class="n-date-picker-calendar__month-year">
+        <div class="n-date-picker-panel-month-modifier__month-year">
           {{ calendarDateTime.format('MMMM') }} {{ calendarDateTime.year() }}
         </div>
         <div
-          class="n-date-picker-calendar__next"
+          class="n-date-picker-panel-month-modifier__next"
           @click="nextMonth"
         >
-          <n-icon
-            type="ios-arrow-forward"
-            size="14"
-          />
+          <n-base-icon type="forward" />
         </div>
         <div
-          class="n-date-picker-calendar__fast-next"
+          class="n-date-picker-panel-month-modifier__fast-next"
           @click="nextYear"
         >
-          <n-icon
-            type="ios-arrow-forward"
-            size="14"
-          />
-          <n-icon
-            type="ios-arrow-forward"
-            size="14"
-          />
+          <n-base-icon type="fast-forward" />
         </div>
       </div>
-      <div class="n-date-picker-calendar__weekdays">
+      <div class="n-date-picker-panel-weekdays">
         <div
           v-for="weekday in weekdays"
           :key="weekday"
-          class="n-date-picker-calendar__weekday"
+          class="n-date-picker-panel-weekdays__day"
         >
           {{ weekday }}
         </div>
       </div>
-      <div class="n-date-picker-calendar__divider" />
-      <div class="n-date-picker-calendar__dates">
+      <div class="n-date-picker-panel__divider" />
+      <div class="n-date-picker-panel-dates">
         <div
           v-for="(dateItem, i) in dateArray(calendarDateTime, valueAsMoment, currentDateTime)"
           :key="i"
-          class="n-date-picker-calendar__date"
+          class="n-date-picker-panel-dates__date"
           :class="{
-            'n-date-picker-calendar__date--current': dateItem.isCurrentDate,
-            'n-date-picker-calendar__date--selected': dateItem.isSelectedDate,
-            'n-date-picker-calendar__date--in-display-month': dateItem.isDateOfDisplayMonth,
-            'n-date-picker-calendar__date--no-transition': noTransition
+            'n-date-picker-panel-dates__date--current': dateItem.isCurrentDate,
+            'n-date-picker-panel-dates__date--selected': dateItem.isSelectedDate,
+            'n-date-picker-panel-dates__date--in-display-month': dateItem.isDateOfDisplayMonth,
+            'n-date-picker-panel-dates__date--no-transition': noTransition
           }"
           @click="handleDateClick(dateItem)"
         >
@@ -88,7 +71,7 @@
       </div>
       <div
         v-if="actions && actions.length"
-        class="n-date-picker-calendar__actions"
+        class="n-date-picker-panel-actions"
       >
         <n-button
           v-if="actions.includes('now')"
@@ -115,7 +98,7 @@
 
 <script>
 import moment from 'moment'
-import NIcon from '../../../Icon'
+import NBaseIcon from '../../../../base/Icon'
 import clickoutside from '../../../../directives/clickoutside'
 import uniCalendarMixin from './uniCalendarMixin'
 
@@ -130,7 +113,7 @@ const PLACEHOLDER = 'Select date and time'
 export default {
   components: {
     NButton,
-    NIcon
+    NBaseIcon
   },
   directives: {
     clickoutside

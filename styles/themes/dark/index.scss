@@ -22,6 +22,11 @@
 @import 'components/Input.scss';
 @import 'components/Alert.scss';
 @import 'components/Anchor.scss';
+@import 'components/Pagination.scss';
+@import 'components/GradientText.scss';
+@import 'components/DatePicker.scss';
+@import 'components/TimePicker.scss';
+@import 'components/Progress.scss';
 @import 'components/BackTop.scss';
 @import 'components/Notification.scss';
 
@@ -73,6 +78,11 @@
   @include setup-dark-input;
   @include setup-dark-anchor;
   @include setup-dark-alert;
+  @include setup-dark-pagination;
+  @include setup-dark-gradient-text;
+  @include setup-dark-date-picker;
+  @include setup-dark-time-picker;
+  @include setup-dark-progress;
   @include setup-dark-back-top;
   @include setup-dark-notification;
 }

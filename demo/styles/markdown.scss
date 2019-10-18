@@ -69,6 +69,7 @@
         }
       }
       :not(pre) > code {
+        white-space: nowrap;
         box-sizing: border-box;
         border-radius: 3px;
         background-color: rgba(255, 255, 255, .12);

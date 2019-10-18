@@ -5,6 +5,10 @@ import { setDate } from '../utils'
 export default {
   mixins: [commonCalendarMixin],
   props: {
+    theme: {
+      type: String,
+      default: null
+    },
     active: {
       type: Boolean,
       default: true

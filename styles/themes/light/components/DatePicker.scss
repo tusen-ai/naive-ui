@@ -1,0 +1,22 @@
+@mixin setup-light-date-picker {
+  $--date-picker-background-color: white !global;
+  $--date-picker-text-color: $--n-secondary-text-color !global;
+  $--date-picker-icon-color: rgba(0, 0, 0, .3) !global;
+  $--date-picker-item-text-color: (
+    'inactive': $--n-disabled-text-color,
+    'default': $--n-secondary-text-color,
+    'active': $--n-dialog-color,
+    'current': $--primary-6
+  ) !global;
+  $--date-picker-item-sup-color: (
+    'default': $--primary-6,
+    'active': white
+  ) !global;
+  $--date-picker-month-text-color: $--n-text-color !global;
+  $--date-picker-item-background-color: (
+    'hover': change-color($--primary-6, $alpha: .15),
+    'active': $--primary-6
+  ) !global;
+  $--date-picker-divider-color: $--n-divider-color !global;
+  $--date-picker-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.12) !global;
+}

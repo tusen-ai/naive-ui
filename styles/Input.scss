@@ -11,14 +11,14 @@
     @include e(input) {
       height: $height;
     }
-    @include e(input, textarea, textarea-mirror) {
+    @include e(input, textarea, textarea-mirror, splitor) {
       line-height: $line-height;
       font-size: $font-size;
       padding-top: ($height - $line-height) / 2;
       padding-bottom: ($height - $line-height) / 2;
     }
     @include m(round) {
-      @include e(input) {
+      @include not-m(textarea) {
         border-radius: $height / 2;
         padding-left: $height / 2;
       }
@@ -29,9 +29,14 @@
 @include themes-mixin {
   @include b(input) {
     @include once {
+      box-sizing: border-box;
       position: relative;
       width: 100%;
       display: inline-block;
+      border-radius: $--input-border-radius;
+      transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+      padding-left: 14px;
+      padding-right: 14px;
       @include input-size-mixin("small");
       @include input-size-mixin("medium");
       @include input-size-mixin("large");
@@ -50,9 +55,7 @@
             width: $--input-icon-size;
           }
         }
-        left: 0;
         top: calc(50% - 9px);
-        margin-left: 12px;
       }
       @include e(cancel-mark) {
         position: absolute;
@@ -62,13 +65,12 @@
         line-height: 12px;
       }
       @include e(textarea, textarea-mirror) {
+        display: block;
         box-sizing: border-box;
         font-family: inherit;
         font-size: inherit;
         line-height: 1.5;
         margin: 0;
-        padding-left: 14px;
-        padding-right: 14px;
         resize: vertical;
       }
       @include e(textarea) {
@@ -77,26 +79,65 @@
           top: 0;
           left: 0;
           height: 100%;
+          resize: none;
         }
       }
       @include e(textarea-mirror) {
+        overflow: hidden;
         visibility: hidden;
         position: static;
         white-space: pre-wrap;
         overflow-wrap: break-word;
       }
       @include m(clearable) {
-        @include e(input, textarea, textarea-mirror) {
-          padding-right: 32px;
-        }
+        padding-right: 32px;
       }
       @include m(icon) {
-        @include e(input) {
+        @include m(left-icon) {
           padding-left: 38px!important;
+          @include e(icon) {
+            left: 0;
+            margin-left: 12px;
+          }
+        }
+        @include m(right-icon) {
+          padding-right: 38px!important;
+          @include e(icon) {
+            right: 0;
+            margin-right: 12px;
+          }
+        }
+      }
+      @include m(split) {
+        display: inline-flex;
+        @include e(input) {
+          text-align: center;
         }
       }
     }
+    background-color: map-get($--input-background-color, 'default');
+    box-shadow: map-get($--input-box-shadow, 'default');
+    &:hover {
+      box-shadow: map-get($--input-box-shadow, 'hover');
+    }
+    @include m(focus) {
+      box-shadow: map-get($--input-box-shadow, 'focus');
+      background-color: map-get($--input-background-color, 'focus');
+    }
+    @include m(textarea) {
+      padding-left: 0;
+      padding-right: 0;
+      @include e(textarea, textarea-mirror) {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+    }
     @include e(icon) {
+      transition: opacity .3s $default-cubic-bezier;
+      opacity: 1;
+      @include m(hide-icon) {
+        opacity: 0;
+      }
       i {
         &::before {
           color: $--input-icon-color;
@@ -109,42 +150,39 @@
         box-sizing: border-box;
         border: none;
         font-size: inherit;
-        padding-left: 14px;
-        padding-right: 14px;
-        border-radius: $--input-border-radius;
         outline: none;
         font-family: $--n-font-family;
         width: 100%;
-        transition: color .3s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
-        vertical-align: bottom;
+        transition: color .3s $default-cubic-bezier;
       }
       color: map-get($--input-color, 'default');
-      background-color: map-get($--input-background-color, 'default');
       caret-color: $--input-caret-color;
-      box-shadow: map-get($--input-box-shadow, 'default');
-      &:hover {
-        box-shadow: map-get($--input-box-shadow, 'hover');
-      }
-      &:focus {
-        box-shadow: map-get($--input-box-shadow, 'focus');
-        background-color: map-get($--input-background-color, 'focus');
-      }
+      background-color: transparent;
       &::placeholder {
         transition: color .3s $default-cubic-bezier;
         color: map-get($--input-placeholder-color, 'default');
         opacity: 1;
       }
     }
+    @include e(splitor) {
+      transition: color .3s $default-cubic-bezier;
+      color: map-get($--input-color, 'default');
+      padding-left: 14px;
+      padding-right: 14px;
+    }
     @include m(disabled) {
       cursor: not-allowed;
+      box-shadow: map-get($--input-box-shadow, 'disabled') !important;
+      background-color: map-get($--input-background-color, 'disabled');
       @include e(input, textarea) {
         cursor: not-allowed;
-        background-color: map-get($--input-background-color, 'disabled');
         color: map-get($--input-color, 'disabled');
-        box-shadow: map-get($--input-box-shadow, 'disabled') !important;
         &::placeholder {
           color: map-get($--input-placeholder-color, 'disabled');
         }
+      }
+      @include e(splitor) {
+        color: map-get($--input-color, 'disabled');
       }
     }
   }

@@ -1,18 +1,26 @@
 <template>
-  <div
+  <span
     class="n-gradient-text"
     :class="{
-      [`n-gradient-text--${type}-type`]: true
+      [`n-gradient-text--${computedType}-type`]: true,
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
-    :style="style"
+    :style="{
+      fontSize: styleFontSize,
+      backgroundImage: styleBackgroundImage
+    }"
   >
     <slot />
-  </div>
+  </span>
 </template>
 
 <script>
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
+
 export default {
   name: 'NGradientText',
+  mixins: [withapp, themeable],
   props: {
     size: {
       type: [String, Number],
@@ -25,14 +33,37 @@ export default {
     type: {
       type: String,
       default: 'default'
+    },
+    color: {
+      type: [Object, String],
+      default: null
+    },
+    gradient: {
+      type: [Object, String],
+      default: null
     }
   },
   computed: {
-    style () {
-      const style = {}
-      const fontSize = this.size || this.fontSize
-      if (fontSize) style.fontSize = fontSize + 'px'
-      return style
+    computedType () {
+      if (this.type === 'danger') return 'error'
+      return this.type
+    },
+    styleFontSize () {
+      let fontSize = this.size || this.fontSize
+      if (fontSize) fontSize = fontSize + 'px'
+      return fontSize || null
+    },
+    styleBackgroundImage () {
+      const gradient = this.color || this.gradient
+      if (typeof gradient === 'string') {
+        return gradient
+      } else if (gradient) {
+        const deg = gradient.deg || 0
+        const from = gradient.from
+        const to = gradient.to
+        return `linear-gradient(${deg}deg, ${from} 0%, ${to} 100%)`
+      }
+      return null
     }
   }
 }

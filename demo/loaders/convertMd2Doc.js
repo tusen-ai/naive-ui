@@ -134,7 +134,7 @@ function convertMd2ComponentDocumentation (text) {
 <template>
   <component-documentation>
     <div style="display: flex; flex-wrap: nowrap;">
-      <div style="flex: 1; margin-right: 16px;">
+      <div style="width: calc(100% - 148px); margin-right: 16px;">
         ${documentationContent}
       </div>
       <div style="width: 132px;">

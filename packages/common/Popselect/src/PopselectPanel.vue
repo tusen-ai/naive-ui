@@ -95,6 +95,9 @@ export default {
           this.controller && this.controller.hide()
         }
       }
+      this.$nextTick().then(() => {
+        this.controller.updatePosition()
+      })
     }
   }
 }

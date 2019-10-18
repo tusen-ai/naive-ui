@@ -15,7 +15,9 @@ Make textarea autosizable.
   v-model="value"
   type="textarea"
   placeholder="Autosizable"
-  autosize
+  :autosize="{
+    minRows: 3
+  }"
 />
 ```
 ```js

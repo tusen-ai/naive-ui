@@ -3,7 +3,8 @@
     class="n-pagination"
     :class="{
       'n-pagination--transition-disabled': transitionDisabled,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
+      'n-pagination--disabled': disabled
     }"
   >
     <div
@@ -13,7 +14,9 @@
       }"
       @click="backward"
     >
-      <icon type="backward" />
+      <div class="n-pagination-item__arrow-icon">
+        <n-base-icon type="backward" />
+      </div>
     </div>
     <div
       v-for="pageItem in pageItems"
@@ -36,15 +39,23 @@
         v-if="pageItem.type==='fastBackward'"
         class="n-pagination-item--fast-backward"
       >
-        <icon type="more" />
-        <icon type="fastBackward" />
+        <div class="n-pagination-item__more-icon">
+          <n-base-icon type="more" />
+        </div>
+        <div class="n-pagination-item__arrow-icon">
+          <n-base-icon type="fast-backward" />
+        </div>
       </template>
       <template
         v-if="pageItem.type==='fastForward'"
         class=""
       >
-        <icon type="more" />
-        <icon type="fastForward" />
+        <div class="n-pagination-item__more-icon">
+          <n-base-icon type="more" />
+        </div>
+        <div class="n-pagination-item__arrow-icon">
+          <n-base-icon type="fast-forward" />
+        </div>
       </template>
     </div>
     <div
@@ -54,13 +65,15 @@
       }"
       @click="forward"
     >
-      <icon type="forward" />
+      <div class="n-pagination-item__arrow-icon">
+        <n-base-icon type="forward" />
+      </div>
     </div>
     <div
       v-if="showQuickJumper"
       class="n-pagination-quick-jumper"
     >
-      Go to <n-input
+      Goto <n-input
         v-model="quickJumperValue"
         size="small"
         :disabled="disabled"
@@ -81,7 +94,7 @@
 
 <script>
 import { pageItems } from './utils'
-import Icon from './Icon'
+import NBaseIcon from '../../../base/Icon'
 import NSelect from '../../Select'
 import NInput from '../../Input'
 import withapp from '../../../mixins/withapp'
@@ -92,7 +105,7 @@ export default {
   components: {
     NSelect,
     NInput,
-    Icon
+    NBaseIcon
   },
   mixins: [withapp, themeable],
   model: {
@@ -129,6 +142,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    pageSlot: {
+      type: Number,
+      default: 9
     }
   },
   data () {
@@ -148,7 +165,7 @@ export default {
       }))
     },
     pageItems () {
-      return pageItems(this.page, this.safePageCount)
+      return pageItems(this.page, this.safePageCount, this.pageSlot)
     }
   },
   watch: {
@@ -191,12 +208,12 @@ export default {
     },
     fastForward () {
       if (this.disabled) return
-      const page = Math.min(this.page + 5, this.safePageCount)
+      const page = Math.min(this.page + (this.pageSlot - 4), this.safePageCount)
       this.$emit('input', page)
     },
     fastBackward () {
       if (this.disabled) return
-      const page = Math.max(this.page - 5, 1)
+      const page = Math.max(this.page - (this.pageSlot - 4), 1)
       this.$emit('input', page)
     },
     handleSizePickerInput (value) {

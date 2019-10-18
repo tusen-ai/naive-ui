@@ -17,14 +17,14 @@ import status from './documentation/intro/status'
 
 import nimbusServiceLayoutDemo from './documentation/components/nimbusServiceLayoutDemo'
 import homeDemo from './documentation/components/homeDemo'
-import gradientTextDemo from './documentation/components/gradientTextDemo'
+import gradientText from './documentation/components/gradientText'
 import iconDemo from './documentation/components/iconDemo'
 import checkbox from './documentation/components/checkbox'
 import button from './documentation/components/button'
 import switchDemo from './documentation/components/switch'
 import tableDemo from './documentation/components/tableDemo'
 import input from './documentation/components/input'
-import selectDemo from './documentation/components/selectDemo'
+import select from './documentation/components/select'
 import cascaderDemo from './documentation/components/cascaderDemo'
 import inputKeyValuePairsDemo from './documentation/components/inputKeyValuePairsDemo'
 import modal from './documentation/components/modal'
@@ -39,7 +39,7 @@ import nimbusIconDemo from './documentation/components/nimbusIconDemo'
 import radioDemo from './documentation/components/radioDemo'
 import formDemo from './documentation/components/formDemo'
 import tabsDemo from './documentation/components/tabsDemo'
-import timePickerDemo from './documentation/components/timePickerDemo'
+import timePicker from './documentation/components/timePicker'
 import confirm from './documentation/components/confirm'
 import backTop from './documentation/components/backTop'
 import dropdownDemo from './documentation/components/dropdownDemo'
@@ -47,19 +47,19 @@ import scrollbarDebug from './debugComponents/scrollbarDebug'
 import scrollbarDebug2 from './debugComponents/scrollbarDebug2'
 import badge from './documentation/components/badge'
 import stepsDemo from './documentation/components/stepsDemo'
-import notificationDemo from './documentation/components/notificationDemo'
+import notification from './documentation/components/notification'
 import nimbusConfirmCardDemo from './documentation/components/nimbusConfirmCardDemo'
 import pagination from './documentation/components/pagination'
 import collapse from './documentation/components/collapse'
 import tag from './documentation/components/tag'
 import timelineDemo from './documentation/components/timelineDemo'
-import progressDemo from './documentation/components/progressDemo'
+import progress from './documentation/components/progress'
 import divider from './documentation/components/divider'
 import popconfirmDemo from './documentation/components/popconfirmDemo'
 import anchor from './documentation/components/anchor'
-import popselectDemo from './documentation/components/popselectDemo'
+import popselect from './documentation/components/popselect'
 import app from './documentation/components/app'
-import advanceTableDemos from './documentation/components/advanceTableDemos'
+import advancedTable from './documentation/components/advancedTable'
 import transferDemo from './documentation/components/transferDemo'
 import spin from './documentation/components/spin'
 import drawerDemo from './documentation/components/drawerDemo'
@@ -133,15 +133,15 @@ const routes = [
       { path: '/status', component: status },
       { path: '/n-nimbus-service-layout', component: nimbusServiceLayoutDemo },
       { path: '/n-nimbus-home-layout', component: homeDemo },
-      { path: '/n-gradient-text', component: gradientTextDemo },
+      { path: '/n-gradient-text', component: gradientText },
       { path: '/n-icon', component: iconDemo },
       { path: '/n-checkbox', component: checkbox },
       { path: '/n-button', component: button },
       { path: '/n-switch', component: switchDemo },
       { path: '/n-table', component: tableDemo },
-      { path: '/n-advance-table', component: advanceTableDemos },
+      { path: '/n-advance-table', component: advancedTable },
       { path: '/n-input', component: input },
-      { path: '/n-select', component: selectDemo },
+      { path: '/n-select', component: select },
       { path: '/n-cascader', component: cascaderDemo },
       { path: '/n-InputKeyValuePairs', component: inputKeyValuePairsDemo },
       { path: '/n-modal', component: modal },
@@ -149,7 +149,7 @@ const routes = [
       { path: '/n-message', component: message },
       { path: '/n-tooltip', component: tooltip },
       { path: '/n-popover', component: popover },
-      { path: '/n-notification', component: notificationDemo },
+      { path: '/n-notification', component: notification },
       { path: '/n-nimbus-confirm-card', component: nimbusConfirmCardDemo },
       { path: '/n-pagination', component: pagination },
       { path: '/n-alert', component: alert },
@@ -159,7 +159,7 @@ const routes = [
       { path: '/n-radio', component: radioDemo },
       { path: '/n-form', component: formDemo },
       { path: '/n-tabs', component: tabsDemo },
-      { path: '/n-time-picker', component: timePickerDemo },
+      { path: '/n-time-picker', component: timePicker },
       { path: '/n-confirm', component: confirm },
       { path: '/n-router-debug', component: routerDebug },
       { path: '/n-modal-debug', component: modalDebug },
@@ -167,7 +167,7 @@ const routes = [
       { path: '/n-badge', component: badge },
       { path: '/n-steps', component: stepsDemo },
       { path: '/n-collapse', component: collapse },
-      { path: '/n-progress', component: progressDemo },
+      { path: '/n-progress', component: progress },
       { path: '/n-tag', component: tag },
       { path: '/n-timeline', component: timelineDemo },
       { path: '/n-scrollbar-debug2', component: scrollbarDebug2 },
@@ -177,7 +177,7 @@ const routes = [
       { path: '/n-popconfirm', component: popconfirmDemo },
       { path: '/n-anchor', component: anchor },
       { path: '/n-dropdown', component: dropdownDemo },
-      { path: '/n-popselect', component: popselectDemo },
+      { path: '/n-popselect', component: popselect },
       { path: '/n-app', component: app },
       { path: '/n-cancel-mark-debug', component: cancelMarkDebug },
       { path: '/n-transfer', component: transferDemo },

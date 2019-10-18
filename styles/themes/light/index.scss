@@ -22,6 +22,11 @@
 @import 'components/Input.scss';
 @import 'components/Alert.scss';
 @import 'components/Anchor.scss';
+@import 'components/Pagination.scss';
+@import 'components/GradientText.scss';
+@import 'components/DatePicker.scss';
+@import 'components/TimePicker.scss';
+@import 'components/Progress.scss';
 @import 'components/BackTop.scss';
 @import 'components/Notification.scss';
 
@@ -69,6 +74,11 @@
   @include setup-light-input;
   @include setup-light-anchor;
   @include setup-light-alert;
+  @include setup-light-pagination;
+  @include setup-light-gradient-text;
+  @include setup-light-date-picker;
+  @include setup-light-time-picker;
+  @include setup-light-progress;
   @include setup-light-back-top;
   @include setup-light-notification;
 }

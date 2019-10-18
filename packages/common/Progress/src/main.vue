@@ -3,7 +3,8 @@
     class="n-progress"
     :class="{
       [`n-progress--${status}`]: status,
-      [`n-progress--${type}`]: type
+      [`n-progress--${type}`]: type,
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
   >
     <div
@@ -14,14 +15,14 @@
         class="n-progress-graph"
       >
         <div
-          class="n-progress-graph__circle"
+          class="n-progress-graph-circle"
         >
           <svg viewBox="0 0 110 110">
             <g>
               <path
-                class="n-progress-graph__circle-rail"
+                class="n-progress-graph-circle-rail"
                 d="m 55 5 a 50 50 0 1 1 0 100 a 50 50 0 1 1 0 -100"
-                stroke-width="10"
+                :stroke-width="strokeWidth"
                 stroke-linecap="round"
                 fill="none"
                 :style="{
@@ -32,9 +33,9 @@
             </g>
             <g>
               <path
-                class="n-progress-graph__circle-fill"
+                class="n-progress-graph-circle-fill"
                 d="m 55 5 a 50 50 0 1 1 0 100 a 50 50 0 1 1 0 -100"
-                stroke-width="10"
+                :stroke-width="strokeWidth"
                 stroke-linecap="round"
                 fill="none"
                 :style="{
@@ -47,7 +48,7 @@
           </svg>
         </div>
       </div>
-      <div v-if="!noIndicator">
+      <div v-if="showIndicator">
         <div
           v-if="$slots.default"
           class="n-progress-custom-content"
@@ -55,7 +56,7 @@
           <slot />
         </div>
         <div
-          v-else-if="status"
+          v-else-if="status !== 'default'"
           class="n-progress-icon"
         >
           <n-icon :type="iconType" />
@@ -79,27 +80,30 @@
       <div class="n-progress-graph">
         <div
           ref="line"
-          class="n-progress-graph__line"
+          class="n-progress-graph-line"
           :class="{
-            [`n-progress-graph__line--indicator-${indicatorPosition}`]: true
+            [`n-progress-graph-line--indicator-${indicatorPosition}`]: true
           }"
         >
           <div
-            class="n-progress-graph__line-rail"
+            class="n-progress-graph-line-rail"
             :style="{
               backgroundColor: safeRailColor
             }"
           >
             <div
-              class="n-progress-graph__line-fill"
+              class="n-progress-graph-line-fill"
+              :class="{
+                'n-progress-graph-line-fill--processing': processing
+              }"
               :style="{
-                maxWidth: percentage + '%',
+                maxWidth: fillStyleMaxWidth + '%',
                 backgroundColor: safeColor
               }"
             >
               <div
                 v-if="indicatorPosition === 'inside'"
-                class="n-progress-graph__line-indicator"
+                class="n-progress-graph-line-indicator"
               >
                 {{ percentage + unit }}
               </div>
@@ -108,12 +112,13 @@
           <div
             v-if="indicatorPosition === 'inside-label'"
             ref="indicator"
-            class="n-progress-graph__line-indicator"
+            class="n-progress-graph-line-indicator"
             :style="indicatorPercentageIsCaculated ? {
               right: `${indicatorPercentage}%`,
               backgroundColor: safeColor,
               color: indicatorTextColor
             } : {
+              visibility: 'hidden',
               transition: 'none',
               right: `${indicatorPercentage}%`,
               backgroundColor: safeColor,
@@ -124,12 +129,18 @@
           </div>
         </div>
       </div>
-      <div v-if="!noIndicator && indicatorPosition === 'outside'">
+      <div v-if="showIndicator && indicatorPosition === 'outside'">
         <div
           v-if="$slots.default"
           class="n-progress-custom-content"
         >
           <slot />
+        </div>
+        <div
+          v-else-if="status === 'default'"
+          class="n-progress-icon n-progress-icon--as-text"
+        >
+          {{ percentage }}{{ unit }}
         </div>
         <div
           v-else-if="status"
@@ -157,7 +168,7 @@
         class="n-progress-graph"
       >
         <div
-          class="n-progress-graph__circle"
+          class="n-progress-graph-circle"
         >
           <svg :viewBox="`0 0 ${viewBoxWidth} ${viewBoxWidth}`">
             <g
@@ -165,7 +176,7 @@
               :key="index"
             >
               <path
-                class="n-progress-graph__circle-rail"
+                class="n-progress-graph-circle-rail"
                 :d="circlePath(viewBoxWidth / 2 - strokeWidth / 2 * (1 + 2 * index) - circleGap * index, strokeWidth, viewBoxWidth)"
                 :stroke-width="strokeWidth"
                 stroke-linecap="round"
@@ -176,7 +187,7 @@
                 }"
               />
               <path
-                class="n-progress-graph__circle-fill"
+                class="n-progress-graph-circle-fill"
                 :d="circlePath(viewBoxWidth / 2 - strokeWidth / 2 * (1 + 2 * index) - circleGap * index, strokeWidth, viewBoxWidth)"
                 :stroke-width="strokeWidth"
                 stroke-linecap="round"
@@ -191,7 +202,7 @@
           </svg>
         </div>
       </div>
-      <div v-if="!noIndicator && this.$slots.default">
+      <div v-if="showIndicator && this.$slots.default">
         <div
           class="n-progress-text"
         >
@@ -204,6 +215,9 @@
 
 <script>
 import NIcon from '../../Icon'
+import fontawareable from '../../../mixins/fontawarable'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 
 function circlePath (r, sw, vw = 100) {
   // console.log(r, sw, vw)
@@ -216,7 +230,12 @@ export default {
   components: {
     NIcon
   },
+  mixins: [withapp, themeable, fontawareable],
   props: {
+    processing: {
+      type: Boolean,
+      default: false
+    },
     type: {
       validator (type) {
         return ['line', 'circle', 'multiple-circle'].includes(type)
@@ -225,9 +244,9 @@ export default {
     },
     status: {
       validator (status) {
-        return ['success', 'error', 'warning'].includes(status)
+        return ['success', 'error', 'warning', 'info', 'default'].includes(status)
       },
-      default: null
+      default: 'default'
     },
     railColor: {
       type: [String, Array],
@@ -243,7 +262,7 @@ export default {
     },
     strokeWidth: {
       type: Number,
-      default: 10
+      default: 8
     },
     percentage: {
       type: [Number, Array],
@@ -253,9 +272,9 @@ export default {
       type: String,
       default: '%'
     },
-    noIndicator: {
+    showIndicator: {
       type: Boolean,
-      default: false
+      default: true
     },
     indicatorPosition: {
       validator (indicatorPosition) {
@@ -279,6 +298,9 @@ export default {
     }
   },
   computed: {
+    fillStyleMaxWidth () {
+      return Math.max(this.percentage - (this.indicatorPosition === 'inside-label' ? 2 : 0), 0)
+    },
     strokeDasharray () {
       if (this.type === 'multiple-circle') {
         const strokeDasharrays = this.percentage.map((v, i) => `${Math.PI * v / 100 * (this.viewBoxWidth / 2 - this.strokeWidth / 2 * (1 + 2 * i) - this.circleGap * i) * 2}, ${this.viewBoxWidth * 8}`)
@@ -295,6 +317,8 @@ export default {
           return 'md-close'
         } else if (this.status === 'warning') {
           return 'md-alert'
+        } else if (this.status === 'info') {
+          return 'md-information-circle'
         }
       } else if (this.type === 'line') {
         if (this.status === 'success') {
@@ -303,6 +327,8 @@ export default {
           return 'md-close-circle'
         } else if (this.status === 'warning') {
           return 'md-alert'
+        } else if (this.status === 'info') {
+          return 'md-information-circle'
         }
       } return ''
     },
@@ -334,19 +360,18 @@ export default {
       }
     }
   },
-  mounted () {
-    if (this.indicatorPosition === 'inside-label') {
-      this.$nextTick().then(() => {
-        this.indicatorPercentage = this.calcIndicatorPercentage()
-        console.log(this.indicatorPercentage)
-        this.$nextTick().then(() => {
-          this.$refs.indicator.getBoundingClientRect()
-          this.indicatorPercentageIsCaculated = true
-        })
-      })
-    }
-  },
   methods: {
+    handleFontReady () {
+      if (this.indicatorPosition === 'inside-label') {
+        this.$nextTick().then(() => {
+          this.indicatorPercentage = this.calcIndicatorPercentage()
+          this.$nextTick().then(() => {
+            this.$refs.indicator.getBoundingClientRect()
+            this.indicatorPercentageIsCaculated = true
+          })
+        })
+      }
+    },
     circlePath: circlePath,
     calcIndicatorPercentage () {
       const lineRect = this.$refs.line.getBoundingClientRect()

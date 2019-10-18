@@ -5,6 +5,6 @@
     "disabled": $--n-disabled-text-color
   ) !global;
   $--base-select-menu-background-color: $--n-popover-color !global;
-  $--base-select-menu-box-shadow: none !global;
-  $--base-select-menu-light-bar-background-color: change-color($--primary-6, $alpha: .3) !global;
+  $--base-select-menu-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.12) !global;
+  $--base-select-menu-light-bar-background-color: change-color($--primary-6, $alpha: .2) !global;
 }
