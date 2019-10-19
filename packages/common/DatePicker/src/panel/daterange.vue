@@ -3,7 +3,6 @@
     <div
       v-if="active"
       ref="self"
-      v-clickoutside.lazy="handleClickOutside"
       class="n-date-picker-panel n-date-picker-panel--daterange"
       :class="{
         [`n-${theme}-theme`]: theme
@@ -28,7 +27,7 @@
             <n-base-icon type="backward" />
           </div>
           <div class="n-date-picker-panel-month-modifier__month-year">
-            {{ startCalendarDateTime.format('MMMM') }} {{ startCalendarDateTime.year() }}
+            {{ startCalendarMonth }} {{ startCalendarYear }}
           </div>
           <div
             class="n-date-picker-panel-month-modifier__next"
@@ -57,7 +56,7 @@
           class="n-date-picker-panel-dates"
         >
           <div
-            v-for="(dateItem, i) in dateArray(startCalendarDateTime, valueAsMomentArray, currentDateTime)"
+            v-for="(dateItem, i) in startDateArray"
             :key="i"
             class="n-date-picker-panel-dates__date"
             :class="{
@@ -70,7 +69,7 @@
             @click="handleDateClick(dateItem)"
             @mouseenter="handleDateMouseEnter(dateItem)"
           >
-            {{ dateItem.date }}
+            {{ dateItem.dateObject.date }}
           </div>
         </div>
       </div>
@@ -93,7 +92,7 @@
             <n-base-icon type="backward" />
           </div>
           <div class="n-date-picker-panel-month-modifier__month-year">
-            {{ endCalendarDateTime.format('MMMM') }} {{ endCalendarDateTime.year() }}
+            {{ endCalendarMonth }} {{ endCalendarYear }}
           </div>
           <div
             class="n-date-picker-panel-month-modifier__next"
@@ -122,7 +121,7 @@
           class="n-date-picker-panel-dates"
         >
           <div
-            v-for="(dateItem, i) in dateArray(endCalendarDateTime, valueAsMomentArray, currentDateTime)"
+            v-for="(dateItem, i) in endDateArray"
             :key="i"
             class="n-date-picker-panel-dates__date"
             :class="{
@@ -135,7 +134,7 @@
             @click="handleDateClick(dateItem)"
             @mouseenter="handleDateMouseEnter(dateItem)"
           >
-            {{ dateItem.date }}
+            {{ dateItem.dateObject.date }}
           </div>
           <div
             v-if="!(actions && actions.length)"
@@ -171,12 +170,13 @@
 </template>
 
 <script>
-import moment from 'moment'
+// import moment from 'moment'
 import NButton from '../../../Button'
 import NBaseIcon from '../../../../base/Icon'
 import dualCalendarMixin from './dualCalendarMixin'
+import { startOfDay } from 'date-fns'
 
-const DATE_FORMAT = 'YYYY-MM-DD'
+const DATE_FORMAT = 'yyyy-MM-dd'
 const PLACEHOLDER = 'Select date and time'
 
 export default {
@@ -201,7 +201,7 @@ export default {
         this.syncCalendarTimeWithValue(this.value)
       }
     },
-    valueAsMomentArray (newValue) {
+    valueAsDateArray (newValue) {
       if (this.isSelecting) return
       if (newValue !== null) {
         this.syncCalendarTimeWithValue(newValue)
@@ -209,13 +209,13 @@ export default {
     }
   },
   created () {
-    if (this.valueAsMomentArray !== null) {
-      this.syncCalendarTimeWithValue(this.valueAsMomentArray)
+    if (this.valueAsDateArray !== null) {
+      this.syncCalendarTimeWithValue(this.valueAsDateArray)
     }
   },
   methods: {
-    adjustMoment (datetime) {
-      return moment(datetime).startOf('date')
+    adjustValue (datetime) {
+      return startOfDay(datetime)
     }
   }
 }

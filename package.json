@@ -15,8 +15,8 @@
     "test-cov": "cross-env NODE_ENV=development BABEL_ENV=test karma start test/unit/karma.conf.js && http-server test/unit/coverage",
     "test-release": "cross-env NODE_ENV=production webpack-dev-server --config build/webpack.release.js",
     "release-doc": "cross-env NODE_ENV=development && rm -rf doc/dist && node doc/changeDemoVersion.js && webpack --config build/webpack.doc.js && sudo bash doc/deploy-doc.sh",
-    "build-doc": "cross-env NODE_ENV=development && rm -rf doc/dist && node doc/changeDemoVersion.js && webpack --config build/webpack.doc.js",
-    "build-private-doc": "cross-env NODE_ENV=development && rm -rf doc/dist && node doc/changeDemoVersion.js && webpack --config build/webpack.private-doc.js"
+    "build-doc": "cross-env NODE_ENV=production && rm -rf doc/dist && node doc/changeDemoVersion.js && webpack --config build/webpack.doc.js",
+    "build-private-doc": "cross-env NODE_ENV=production && rm -rf doc/dist && node doc/changeDemoVersion.js && webpack --config build/webpack.private-doc.js"
   },
   "author": "lecong.zhang",
   "license": "ISC",
@@ -98,11 +98,12 @@
     "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
     "@vue/babel-preset-jsx": "^1.0.0",
     "async-validator": "^1.11.5",
+    "date-fns": "^2.5.1",
     "ionicons": "^4.5.8",
     "masonry-layout": "^4.2.2",
     "moment": "^2.24.0",
     "node-sass": "^4.12.0",
-    "sass-loader": "^7.1.0",
-    "resize-observer-polyfill": "^1.5.1"
+    "resize-observer-polyfill": "^1.5.1",
+    "sass-loader": "^7.1.0"
   }
 }

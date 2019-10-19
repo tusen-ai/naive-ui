@@ -28,7 +28,6 @@
             :class="{
               [`n-${synthesizedTheme}-theme`]: synthesizedTheme
             }"
-            @mouseup="handleContentMouseUp"
           >
             <div class="n-time-picker-selector-time">
               <div
@@ -183,10 +182,6 @@ export default {
   },
   mixins: [detachable, placeable, zindexable, withapp, themeable],
   props: {
-    stopSelectorBubble: {
-      type: Boolean,
-      default: false
-    },
     placement: {
       type: String,
       default: 'bottom-start'
@@ -328,12 +323,6 @@ export default {
     handleConfirmClick () {
       this.refreshTimeString()
       this.active = false
-    },
-    handleContentMouseUp (e) {
-      console.log('handleContentMouseUp')
-      if (this.stopSelectorBubble) {
-        e.stopPropagation()
-      }
     }
   }
 }

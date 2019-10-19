@@ -48,8 +48,8 @@ const webpackConfig = {
       }
     }),
     new ExtractTextPlugin('[name].[hash:7].css'),
-    new CompressionPlugin()
-    // new BundleAnalyzerPlugin()
+    new CompressionPlugin(),
+    new BundleAnalyzerPlugin()
   ]
 }
 

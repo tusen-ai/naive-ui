@@ -41,6 +41,7 @@
       @include input-size-mixin("medium");
       @include input-size-mixin("large");
       @include e(icon) {
+        transition: opacity .3s $default-cubic-bezier;
         position: absolute;
         line-height: $--input-icon-size;
         height: $--input-icon-size;
@@ -49,6 +50,7 @@
           height: $--input-icon-size;
           width: $--input-icon-size;
           &::before {
+            transition: color .3s $default-cubic-bezier;
             font-size: $--input-icon-size;
             line-height: $--input-icon-size;
             height: $--input-icon-size;
@@ -133,7 +135,6 @@
       }
     }
     @include e(icon) {
-      transition: opacity .3s $default-cubic-bezier;
       opacity: 1;
       @include m(hide-icon) {
         opacity: 0;

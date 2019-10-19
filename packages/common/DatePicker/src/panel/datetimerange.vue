@@ -20,6 +20,7 @@
           @input="handleStartDateInput"
         />
         <n-time-picker
+          :detached="false"
           class="n-date-picker-panel__time-input"
           :value="startTimeValue"
           stop-selector-bubble
@@ -38,6 +39,7 @@
           @input="handleEndDateInput"
         />
         <n-time-picker
+          :detached="false"
           class="n-date-picker-panel__time-input"
           :value="endTimeValue"
           stop-selector-bubble
@@ -66,7 +68,7 @@
             />
           </div>
           <div class="n-date-picker-panel-month-modifier__month-year">
-            {{ startCalendarDateTime.format('MMMM') }} {{ startCalendarDateTime.year() }}
+            {{ startCalendarMonth }} {{ startCalendarYear }}
           </div>
           <div
             class="n-date-picker-panel-month-modifier__next"
@@ -99,7 +101,7 @@
           class="n-date-picker-panel-dates"
         >
           <div
-            v-for="(dateItem, i) in dateArray(startCalendarDateTime, valueAsMomentArray, currentDateTime)"
+            v-for="(dateItem, i) in startDateArray"
             :key="i"
             class="n-date-picker-panel-dates__date"
             :class="{
@@ -112,7 +114,7 @@
             @click="handleDateClick(dateItem)"
             @mouseenter="handleDateMouseEnter(dateItem)"
           >
-            {{ dateItem.date }}
+            {{ dateItem.dateObject.date }}
           </div>
         </div>
       </div>
@@ -139,7 +141,7 @@
             />
           </div>
           <div class="n-date-picker-panel-month-modifier__month-year">
-            {{ endCalendarDateTime.format('MMMM') }} {{ endCalendarDateTime.year() }}
+            {{ endCalendarMonth }} {{ endCalendarYear }}
           </div>
           <div
             class="n-date-picker-panel-month-modifier__next"
@@ -172,7 +174,7 @@
           class="n-date-picker-panel-dates"
         >
           <div
-            v-for="(dateItem, i) in dateArray(endCalendarDateTime, valueAsMomentArray, currentDateTime)"
+            v-for="(dateItem, i) in endDateArray"
             :key="i"
             class="n-date-picker-panel-dates__date"
             :class="{
@@ -185,7 +187,7 @@
             @click="handleDateClick(dateItem)"
             @mouseenter="handleDateMouseEnter(dateItem)"
           >
-            {{ dateItem.date }}
+            {{ dateItem.dateObject.date }}
           </div>
           <div
             v-if="!(actions && actions.length)"
@@ -225,16 +227,18 @@
 </template>
 
 <script>
-import moment from 'moment'
+// import moment from 'moment'
 import NButton from '../../../Button'
 import NTimePicker from '../../../TimePicker'
 import NInput from '../../../Input'
 import dualCalendarMixin from './dualCalendarMixin'
 import NBaseIcon from '../../../../base/Icon'
+import { startOfSecond, format, set, getYear, getMonth, getDate, isValid } from 'date-fns'
+import { strictParse } from '../utils'
 
-const DATETIME_FORMAT = 'YYYY-MM-DD HH:mm:ss'
-const DATE_FORMAT = 'YYYY-MM-DD'
-const DATE_VALIDATE_FORMAT = ['YYYY-MM-DD', 'YYYY-MM-D', 'YYYY-M-D', 'YYYY-M-DD']
+const DATETIME_FORMAT = 'yyyy-MM-dd HH:mm:ss'
+const DATE_FORMAT = 'yyyy-MM-dd'
+const DATE_VALIDATE_FORMAT = ['yyyy-MM-dd', 'yyyy-MM-D', 'yyyy-M-D', 'yyyy-M-dd']
 const PLACEHOLDER = 'Select date and time'
 
 export default {
@@ -269,11 +273,11 @@ export default {
         this.syncCalendarTimeWithValue(this.value)
       }
     },
-    valueAsMomentArray (newValue) {
+    valueAsDateArray (newValue) {
       if (newValue !== null) {
         const [startMoment, endMoment] = newValue
-        this.startDateDisplayString = startMoment.format(this.dateFormat)
-        this.endDateDisplayString = endMoment.format(this.dateFormat)
+        this.startDateDisplayString = format(startMoment, this.dateFormat)
+        this.endDateDisplayString = format(endMoment, this.dateFormat)
         if (!this.isSelecting) {
           this.syncCalendarTimeWithValue(newValue)
         }
@@ -284,11 +288,11 @@ export default {
     }
   },
   created () {
-    if (this.valueAsMomentArray !== null) {
-      const [startMoment, endMoment] = this.valueAsMomentArray
-      this.startDateDisplayString = startMoment.format(this.dateFormat)
-      this.endDateDisplayString = endMoment.format(this.dateFormat)
-      this.syncCalendarTimeWithValue(this.valueAsMomentArray)
+    if (this.valueAsDateArray !== null) {
+      const [startMoment, endMoment] = this.valueAsDateArray
+      this.startDateDisplayString = format(startMoment, this.dateFormat)
+      this.endDateDisplayString = format(endMoment, this.dateFormat)
+      this.syncCalendarTimeWithValue(this.valueAsDateArray)
     } else {
       this.startDateDisplayString = ''
       this.endDateDisplayString = ''
@@ -296,43 +300,45 @@ export default {
   },
   methods: {
     adjustValue (datetime) {
-      return moment(datetime).startOf('second')
+      return startOfSecond(datetime)
     },
     handleStartDateInput (value) {
-      const date = moment(value, this.dateFormat, true)
-      if (date.isValid()) {
-        if (!this.valueAsMomentArray) {
-          const newValue = moment()
-          newValue.year(date.year())
-          newValue.month(date.month())
-          newValue.date(date.date())
+      const date = strictParse(value, this.dateFormat, new Date())
+      if (isValid(date)) {
+        if (!this.valueAsDateArray) {
+          const newValue = set(new Date(), {
+            year: getYear(date),
+            month: getMonth(date),
+            date: getDate(date)
+          })
           this.changeStartDateTime(this.adjustValue(newValue))
         } else {
-          const newValue = this.valueAsMomentArray[0]
-          newValue.year(date.year())
-          newValue.month(date.month())
-          newValue.date(date.date())
+          const newValue = set(this.valueAsDateArray[0], {
+            year: getYear(date),
+            month: getMonth(date),
+            date: getDate(date)
+          })
           this.changeStartDateTime(this.adjustValue(newValue))
         }
-      } else {
-        // do nothing
       }
     },
     handleEndDateInput (value) {
       /** strict check when input */
-      const date = moment(value, this.dateFormat, true)
-      if (date.isValid()) {
-        if (!this.valueAsMomentArray) {
-          const newValue = moment()
-          newValue.year(date.year())
-          newValue.month(date.month())
-          newValue.date(date.date())
+      const date = strictParse(value, this.dateFormat, new Date())
+      if (isValid(date)) {
+        if (!this.valueAsDateArray) {
+          const newValue = set(new Date(), {
+            year: getYear(date),
+            month: getMonth(date),
+            date: getDate(date)
+          })
           this.changeEndDateTime(this.adjustValue(newValue))
         } else {
-          const newValue = this.valueAsMomentArray[1]
-          newValue.year(date.year())
-          newValue.month(date.month())
-          newValue.date(date.date())
+          const newValue = set(this.valueAsDateArray[1], {
+            year: getYear(date),
+            month: getMonth(date),
+            date: getDate(date)
+          })
           this.changeEndDateTime(this.adjustValue(newValue))
         }
       } else {
@@ -340,19 +346,22 @@ export default {
       }
     },
     handleStartDateInputBlur () {
-      const date = moment(this.startDateDisplayString, this.dateValidateFormat, true)
-      if (date.isValid()) {
-        if (!this.valueAsMomentArray) {
-          const newValue = moment()
-          newValue.year(date.year())
-          newValue.month(date.month())
-          newValue.date(date.date())
+      const date = strictParse(this.startDateDisplayString, this.dateFormat, new Date())
+      // const date = moment(this.startDateDisplayString, this.dateValidateFormat, true)
+      if (isValid(date)) {
+        if (!this.valueAsDateArray) {
+          const newValue = set(new Date(), {
+            year: getYear(date),
+            month: getMonth(date),
+            date: getDate(date)
+          })
           this.changeStartDateTime(this.adjustValue(newValue))
         } else {
-          const newValue = this.valueAsMomentArray[0]
-          newValue.year(date.year())
-          newValue.month(date.month())
-          newValue.date(date.date())
+          const newValue = set(this.valueAsDateArray[0], {
+            year: getYear(date),
+            month: getMonth(date),
+            date: getDate(date)
+          })
           this.changeStartDateTime(this.adjustValue(newValue))
         }
       } else {
@@ -360,19 +369,21 @@ export default {
       }
     },
     handleEndDateInputBlur () {
-      const date = moment(this.endDateDisplayString, this.dateValidateFormat, true)
-      if (date.isValid()) {
-        if (!this.valueAsMomentArray) {
-          const newValue = moment()
-          newValue.year(date.year())
-          newValue.month(date.month())
-          newValue.date(date.date())
+      const date = strictParse(this.endDateDisplayString, this.dateFormat, new Date())
+      if (isValid(date)) {
+        if (!this.valueAsDateArray) {
+          const newValue = set(new Date(), {
+            year: getYear(date),
+            month: getMonth(date),
+            date: getDate(date)
+          })
           this.changeEndDateTime(this.adjustValue(newValue))
         } else {
-          const newValue = this.valueAsMomentArray[1]
-          newValue.year(date.year())
-          newValue.month(date.month())
-          newValue.date(date.date())
+          const newValue = set(this.valueAsDateArray[1], {
+            year: getYear(date),
+            month: getMonth(date),
+            date: getDate(date)
+          })
           this.changeEndDateTime(this.adjustValue(newValue))
         }
       } else {
@@ -384,16 +395,16 @@ export default {
      * else update datetime related string
      */
     refreshDisplayDateString (times) {
-      if (this.valueAsMomentArray === null) {
+      if (this.valueAsDateArray === null) {
         this.startDateDisplayString = ''
         this.endDateDisplayString = ''
         return
       }
       if (times === undefined) {
-        times = this.valueAsMomentArray
+        times = this.valueAsDateArray
       }
-      this.startDateDisplayString = times[0].format(this.dateFormat)
-      this.endDateDisplayString = times[1].format(this.dateFormat)
+      this.startDateDisplayString = format(times[0], this.dateFormat)
+      this.endDateDisplayString = format(times[1], this.dateFormat)
     },
     handleStartTimePickerInput (value) {
       this.changeStartDateTime(value)

@@ -19,6 +19,7 @@
           @input="handleDateInput"
         />
         <n-time-picker
+          :detached="false"
           class="n-date-picker-panel__time-input"
           :value="value"
           stop-selector-bubble
@@ -39,7 +40,7 @@
           <n-base-icon type="backward" />
         </div>
         <div class="n-date-picker-panel-month-modifier__month-year">
-          {{ calendarDateTime.format('MMMM') }} {{ calendarDateTime.year() }}
+          {{ calendarMonth }} {{ calendarYear }}
         </div>
         <div
           class="n-date-picker-panel-month-modifier__next"
@@ -66,7 +67,7 @@
       <div class="n-date-picker-panel__divider" />
       <div class="n-date-picker-panel-dates">
         <div
-          v-for="(dateItem, i) in dateArray(calendarDateTime, valueAsMoment, currentDateTime)"
+          v-for="(dateItem, i) in dateArray"
           :key="i"
           class="n-date-picker-panel-dates__date"
           :class="{
@@ -77,7 +78,7 @@
           }"
           @click="handleDateClick(dateItem)"
         >
-          {{ dateItem.date }}
+          {{ dateItem.dateObject.date }}
         </div>
         <div
           v-if="!(actions && actions.length)"
@@ -112,17 +113,17 @@
 </template>
 
 <script>
-import moment from 'moment'
+// import moment from 'moment'
 import NBaseIcon from '../../../../base/Icon'
-import clickoutside from '../../../../directives/clickoutside'
 import uniCalendarMixin from './uniCalendarMixin'
+import { startOfSecond } from 'date-fns'
 
 import NButton from '../../../Button'
 import NTimePicker from '../../../TimePicker'
 import NInput from '../../../Input'
 
-const DATETIME_FORMAT = 'YYYY-MM-DD HH:mm:ss'
-const DATE_FORMAT = 'YYYY-MM-DD'
+const DATETIME_FORMAT = 'yyyy-MM-dd HH:mm:ss'
+const DATE_FORMAT = 'yyyy-MM-dd'
 const DATE_VALIDATE_FORMAT = ['YYYY-MM-DD', 'YYYY-MM-D', 'YYYY-M-D', 'YYYY-M-DD']
 
 const PLACEHOLDER = 'Select date and time'
@@ -133,9 +134,6 @@ export default {
     NBaseIcon,
     NTimePicker,
     NInput
-  },
-  directives: {
-    clickoutside
   },
   mixins: [uniCalendarMixin],
   props: {
@@ -156,7 +154,8 @@ export default {
   },
   methods: {
     adjustValue (datetime) {
-      return moment(datetime).startOf('second')
+      return startOfSecond(datetime)
+      // return moment(datetime).startOf('second')
     },
     handleTimePickerInput (value) {
       this.$emit('input', value)

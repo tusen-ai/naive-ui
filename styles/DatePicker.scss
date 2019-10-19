@@ -5,7 +5,7 @@
   @include once {
     @include b(date-picker) {
       position: relative;
-      width: 240px;
+      width: 200px;
       @include m(range) {
         width: 382px;
       }

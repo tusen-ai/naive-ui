@@ -24,10 +24,12 @@
       :readonly="disabled ? 'disabled' : false"
       :splitor="splitor"
       split
+      icon="ios-calendar"
+      icon-position="right"
       @click="handleActivatorClick"
       @focus="handleFocus"
-      @blur="handleStartTimeInputBlur"
-      @input="handleStartTimeInput"
+      @blur="handleRangeInputBlur"
+      @input="handleRangeInput"
     />
     <!-- <input
         class="n-date-picker__input n-date-picker__input--splitor"
@@ -64,6 +66,8 @@
       :disabled="disabled"
       :placeholder="computedPlaceholder"
       :readonly="disabled ? 'disabled' : false"
+      icon="ios-calendar"
+      icon-position="right"
       @click="handleActivatorClick"
       @focus="handleFocus"
       @blur="handleTimeInputBlur"
@@ -90,6 +94,7 @@
       >
         <datetime-panel
           v-if="type === 'datetime'"
+          ref="panel"
           :value="value"
           :active="active"
           :actions="actions"
@@ -99,6 +104,7 @@
         />
         <date-panel
           v-else-if="type === 'date'"
+          ref="panel"
           :value="value"
           :active="active"
           :actions="actions"
@@ -108,6 +114,7 @@
         />
         <daterange-panel
           v-else-if="type === 'daterange'"
+          ref="panel"
           :value="value"
           :active="active"
           :actions="actions"
@@ -117,6 +124,7 @@
         />
         <datetimerange-panel
           v-else-if="type === 'datetimerange'"
+          ref="panel"
           :value="value"
           :active="active"
           :actions="actions"
@@ -130,7 +138,7 @@
 </template>
 
 <script>
-import moment from 'moment'
+// import moment from 'moment'
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import zindexable from '../../../mixins/zindexable'
@@ -142,18 +150,21 @@ import clickoutside from '../../../directives/clickoutside'
 import NInput from '../../Input'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import { format, getTime, isValid } from 'date-fns'
+import { strictParse } from './utils'
+import isEqual from 'lodash/isEqual'
 
 const DATE_FORMAT = {
-  date: 'YYYY-MM-DD',
-  datetime: 'YYYY-MM-DD HH:mm:ss',
-  daterange: 'YYYY-MM-DD',
-  datetimerange: 'YYYY-MM-DD HH:mm:ss'
+  date: 'yyyy-MM-dd',
+  datetime: 'yyyy-MM-dd HH:mm:ss',
+  daterange: 'yyyy-MM-dd',
+  datetimerange: 'yyyy-MM-dd HH:mm:ss'
 }
 const DATE_VALIDATE_FORMAT = {
-  date: ['YYYY-MM-DD', 'YYYY-MM-D', 'YYYY-M-D', 'YYYY-M-DD'],
-  datetime: ['YYYY-MM-DD HH:mm:ss', 'YYYY-MM-D HH:mm:ss', 'YYYY-M-D HH:mm:ss', 'YYYY-M-DD HH:mm:ss'],
-  daterange: ['YYYY-MM-DD', 'YYYY-MM-D', 'YYYY-M-D', 'YYYY-M-DD'],
-  datetimerange: ['YYYY-MM-DD HH:mm:ss', 'YYYY-MM-D HH:mm:ss', 'YYYY-M-D HH:mm:ss', 'YYYY-M-DD HH:mm:ss']
+  date: ['yyyy-MM-dd', 'yyyy-MM-D', 'yyyy-M-D', 'yyyy-M-dd'],
+  datetime: ['yyyy-MM-dd HH:mm:ss', 'yyyy-MM-D HH:mm:ss', 'yyyy-M-D HH:mm:ss', 'yyyy-M-dd HH:mm:ss'],
+  daterange: ['yyyy-MM-dd', 'yyyy-MM-D', 'yyyy-M-D', 'yyyy-M-dd'],
+  datetimerange: ['yyyy-MM-dd HH:mm:ss', 'yyyy-MM-D HH:mm:ss', 'yyyy-M-D HH:mm:ss', 'yyyy-M-dd HH:mm:ss']
 }
 const PLACEHOLDER = {
   date: 'Select date',
@@ -285,6 +296,7 @@ export default {
      * If new value is invalid, do nothing.
      */
     value (newValue) {
+      console.log(newValue)
       this.refresh(newValue)
     }
   },
@@ -293,7 +305,7 @@ export default {
   },
   methods: {
     handleClickOutside (e) {
-      if (!this.$refs.activator.contains(e.target)) {
+      if (this.active && !this.$refs.activator.contains(e.target)) {
         this.closeCalendar()
       }
     },
@@ -322,7 +334,7 @@ export default {
       if (value === null) {
         this.displayTime = ''
       } else {
-        this.displayTime = moment(value).format(this.computedFormat)
+        this.displayTime = format(value, this.computedFormat)
       }
     },
     refreshDisplayRange (values) {
@@ -330,8 +342,8 @@ export default {
         this.displayStartTime = ''
         this.displayEndTime = ''
       } else {
-        this.displayStartTime = moment(values[0]).format(this.computedFormat)
-        this.displayEndTime = moment(values[1]).format(this.computedFormat)
+        this.displayStartTime = format(values[0], this.computedFormat)
+        this.displayEndTime = format(values[1], this.computedFormat)
       }
     },
     /**
@@ -339,57 +351,82 @@ export default {
      */
     handleTimeInputBlur () {
       if (this.disabled) return
-      const newSelectedDateTime = moment(this.displayTime, this.computedValidateFormat, true)
-      if (newSelectedDateTime.isValid()) {
-        this.$emit('input', newSelectedDateTime.valueOf())
+      const newSelectedDateTime = strictParse(this.displayTime, this.computedFormat, new Date())
+      console.log('handle blur', this.displayTime, this.computedFormat, new Date())
+      console.log('handle blur new time', typeof newSelectedDateTime)
+      if (isValid(newSelectedDateTime)) {
+        this.$emit('input', getTime(newSelectedDateTime))
       } else {
         this.refreshDisplayTime(this.value)
       }
       this.isFocus = false
     },
-    handleStartTimeInputBlur () {
+    handleRangeInputBlur () {
       if (this.disabled) return
-      const startMoment = moment(this.displayStartTime, this.computedValidateFormat, true)
-      if (startMoment.isValid()) {
-        this.changeStartDateTime(startMoment)
-      } else {
+      const startDateTime = strictParse(this.displayStartTime, this.computedFormat, new Date())
+      const endDateTime = strictParse(this.displayEndTime, this.computedFormat, new Date())
+      if (!isValid(startDateTime) || !isValid(endDateTime)) {
         this.refresh(this.value)
+      } else {
+        this.changeStartEndTime(startDateTime, endDateTime)
       }
       this.isFocus = false
     },
-    handleEndTimeInputBlur () {
-      if (this.disabled) return
-      const endMoment = moment(this.displayStartTime, this.computedValidateFormat, true)
-      if (endMoment.isValid()) {
-        this.changeStartDateTime(endMoment)
-      } else {
-        this.refresh(this.value)
-      }
-      this.isFocus = false
-    },
+    // handleStartTimeInputBlur () {
+    //   if (this.disabled) return
+    //   const startMoment = strictParse(this.displayStartTime, this.computedFormat, null)
+    //   if (startMoment !== null) {
+    //     this.changeStartDateTime(startMoment)
+    //   } else {
+    //     this.refresh(this.value)
+    //   }
+    //   this.isFocus = false
+    // },
+    // handleEndTimeInputBlur () {
+    //   if (this.disabled) return
+    //   const endMoment = strictParse(this.displayStartTime, this.computedFormat, null)
+    //   if (endMoment !== null) {
+    //     this.changeStartDateTime(endMoment)
+    //   } else {
+    //     this.refresh(this.value)
+    //   }
+    //   this.isFocus = false
+    // },
     /**
      * Input
      */
     handleTimeInput (v) {
-      const newSelectedDateTime = moment(this.displayTime, this.computedFormat, true)
-      if (newSelectedDateTime.isValid()) {
-        this.$emit('input', newSelectedDateTime.valueOf())
+      console.log('handle input before strict parse')
+      const newSelectedDateTime = strictParse(this.displayTime, this.computedFormat, new Date())
+      console.log('handle input', this.displayTime, this.computedFormat, newSelectedDateTime)
+      console.log('handle input new time', newSelectedDateTime, typeof newSelectedDateTime)
+      if (isValid(newSelectedDateTime)) {
+        this.$emit('input', getTime(newSelectedDateTime))
       }
     },
-    handleStartTimeInput (e) {
-      const v = e.target.value
-      const newStartTime = moment(v, this.computedFormat, true)
-      if (newStartTime.isValid()) {
+    handleRangeInput (v) {
+      // const v = e.target.value
+      if (v === null) v = [null, null]
+      const [startTime, endTime] = v
+      const newStartTime = strictParse(startTime, this.computedFormat, new Date())
+      if (startTime !== this.displayStartTime && isValid(newStartTime)) {
         this.changeStartDateTime(newStartTime)
       }
-    },
-    handleEndTimeInput (e) {
-      const v = e.target.value
-      const newEndTime = moment(v, this.computedFormat, true)
-      if (newEndTime.isValid()) {
+      const newEndTime = strictParse(endTime, this.computedFormat, new Date())
+      if (endTime !== this.displayEndTime && isValid(newEndTime)) {
         this.changeEndDateTime(newEndTime)
       }
+      this.displayStartTime = startTime
+      this.displayEndTime = endTime
+      // console.log('handleRangeInput', v, newStartTime, newEndTime)
     },
+    // handleEndTimeInput (e) {
+    //   const v = e.target.value
+    //   const newEndTime = moment(v, this.computedFormat, true)
+    //   if (newEndTime.isValid()) {
+    //     this.changeEndDateTime(newEndTime)
+    //   }
+    // },
     /**
      * Click
      */
@@ -429,39 +466,46 @@ export default {
      * Utils
      */
     changeStartDateTime (time) {
+      // debugger
       if (typeof time !== 'number') {
-        time = time.valueOf()
+        time = getTime(time)
       }
       if (this.value === null) {
         this.$emit('input', [time, time])
         this.refresh([time, time])
       } else {
-        this.$emit('input', [time, Math.max(this.value[1], time)])
-        this.refresh([time, Math.max(this.value[1], time)])
+        const newValue = [time, Math.max(this.value[1], time)]
+        if (!isEqual(newValue, this.value)) {
+          this.$emit('input', newValue)
+          this.refresh(newValue)
+        }
+      }
+    },
+    changeEndDateTime (time) {
+      if (typeof time !== 'number') {
+        time = getTime(time)
+      }
+      if (this.value === null) {
+        this.$emit('input', [time, time])
+        this.refresh([time, time])
+      } else {
+        const newValue = [Math.min(this.value[0], time), time]
+        if (!isEqual(newValue, this.value)) {
+          this.$emit('input', newValue)
+          this.refresh(newValue)
+        }
       }
     },
     changeStartEndTime (startTime, endTime) {
       if (endTime === undefined) endTime = startTime
       if (typeof startTime !== 'number') {
-        startTime = startTime.valueOf()
+        startTime = getTime(startTime)
       }
       if (typeof endTime !== 'number') {
-        endTime = endTime.valueOf()
+        endTime = getTime(endTime)
       }
       this.$emit('input', [startTime, endTime])
       this.refresh([startTime, endTime])
-    },
-    changeEndDateTime (time) {
-      if (typeof time !== 'number') {
-        time = time.valueOf()
-      }
-      if (this.value === null) {
-        this.$emit('input', [time, time])
-        this.refresh([time, time])
-      } else {
-        this.$emit('input', [Math.min(this.value[0], time), time])
-        this.refresh([Math.min(this.value[0], time), time])
-      }
     }
   }
 }

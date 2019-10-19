@@ -1,6 +1,9 @@
-import moment from 'moment'
+// import moment from 'moment'
 import commonCalendarMixin from './commonCalendarMixin'
-import { setDate } from '../utils'
+import { isValid, getDate, getMonth, getYear, getTime, isSameMonth, format, addMonths, addYears, set } from 'date-fns'
+import { dateArray, strictParse } from '../utils'
+
+// import { setYMD } from '../utils'
 
 export default {
   mixins: [commonCalendarMixin],
@@ -30,49 +33,61 @@ export default {
   data () {
     return {
       displayDateString: '',
-      calendarDateTime: moment(),
-      currentDateTime: moment()
+      calendarDateTime: new Date(), // moment(),
+      currentDateTime: new Date() // moment()
     }
   },
   computed: {
+    dateArray () {
+      return dateArray(this.calendarDateTime, this.valueAsDateTime, this.currentDateTime)
+    },
+    calendarMonth () {
+      return format(this.calendarDateTime, 'MMM', 'Invalid Month')
+    },
+    calendarYear () {
+      return format(this.calendarDateTime, 'y', 'Invalid Year')
+    },
     /**
      * If value is valid return null.
      * If value is not valid, return moment(value)
      */
-    valueAsMoment () {
+    valueAsDateTime () {
       if (this.value === null || this.value === undefined) return null
-      const newSelectedDateTime = moment(this.value)
-      if (newSelectedDateTime.isValid()) {
-        return newSelectedDateTime
-      } else {
-        return null
-      }
+      return new Date(this.value)
+      // const newSelectedDateTime = new Date(this.value)
+      // return new
+      // if (newSelectedDateTime.isValid()) {
+      //   return newSelectedDateTime
+      // } else {
+      //   return null
+      // }
     }
   },
   watch: {
     calendarDateTime (newCalendarDateTime, oldCalendarDateTime) {
-      if (newCalendarDateTime.isValid() && oldCalendarDateTime) {
-        if (
-          newCalendarDateTime.year() !== oldCalendarDateTime.year() ||
-          newCalendarDateTime.month() !== oldCalendarDateTime.month()
-        ) {
-          this.banTransitionOneTick()
-        }
+      // if (newCalendarDateTime.isValid() && oldCalendarDateTime) {
+      if (
+        !isSameMonth(newCalendarDateTime, oldCalendarDateTime)
+      // newCalendarDateTime.year() !== oldCalendarDateTime.year() ||
+      // newCalendarDateTime.month() !== oldCalendarDateTime.month()
+      ) {
+        this.banTransitionOneTick()
       }
+      // }
     },
-    valueAsMoment (newValue) {
+    valueAsDateTime (newValue) {
       if (newValue !== null) {
-        this.displayDateString = newValue.format(this.dateFormat)
-        this.calendarDateTime = moment(this.valueAsMoment)
+        this.displayDateString = format(newValue, this.dateFormat) // newValue.format(this.dateFormat)
+        this.calendarDateTime = newValue
       } else {
         this.displayDateString = ''
       }
     }
   },
   created () {
-    if (this.valueAsMoment !== null) {
-      this.displayDateString = this.valueAsMoment.format(this.dateFormat)
-      this.calendarDateTime = moment(this.valueAsMoment)
+    if (this.valueAsDateTime !== null) {
+      this.displayDateString = format(this.valueAsDateTime, this.dateFormat) // this.valueAsDateTime.format(this.dateFormat)
+      this.calendarDateTime = this.valueAsDateTime
     } else {
       this.displayDateString = ''
     }
@@ -81,53 +96,78 @@ export default {
     handleClickOutside () {
       this.closeCalendar()
     },
-    setValue (newSelectedDateTime) {
-      if (newSelectedDateTime === null || newSelectedDateTime === undefined) {
-        this.$emit('input', null)
-      } else if (newSelectedDateTime.isValid()) {
-        const adjustedDateTime = this.adjustValue(newSelectedDateTime)
-        if (this.valueAsMoment === null || adjustedDateTime.valueOf() !== this.valueAsMoment.valueOf()) {
-          this.refreshDisplayDateString(adjustedDateTime)
-          this.$emit('input', adjustedDateTime.valueOf())
-        }
-      }
-    },
+    // setValue (newSelectedDateTime) {
+    //   if (newSelectedDateTime === null || newSelectedDateTime === undefined) {
+    //     this.$emit('input', null)
+    //   } else {
+    //     const adjustedDateTime = this.adjustValue(newSelectedDateTime)
+    //     if (this.valueAsDateTime === null || adjustedDateTime.valueOf() !== this.valueAsDateTime.valueOf()) {
+    //       this.refreshDisplayDateString(adjustedDateTime)
+    //       this.$emit('input', adjustedDateTime.valueOf())
+    //     }
+    //   }
+    // },
     handleDateInput (value) {
-      const date = moment(value, this.dateFormat, true)
-      if (date.isValid()) {
-        if (!this.valueAsMoment) {
-          const newValue = moment()
-          newValue.year(date.year())
-          newValue.month(date.month())
-          newValue.date(date.date())
-          this.$emit('input', this.adjustValue(newValue).valueOf())
+      const date = strictParse(value, this.dateFormat, new Date())// moment(value, this.dateFormat, true)
+      // console.log('handle date input', value)
+      if (isValid(date)) {
+        if (!this.valueAsDateTime) {
+          this.$emit('input', getTime(this.adjustValue(new Date())))
         } else {
-          const newValue = this.valueAsMoment
-          newValue.year(date.year())
-          newValue.month(date.month())
-          newValue.date(date.date())
-          this.$emit('input', this.adjustValue(newValue).valueOf())
+          const newDateTime = set(this.valueAsDateTime, {
+            year: getYear(date),
+            month: getMonth(date),
+            date: getDate(date)
+          })
+          this.$emit('input', getTime(this.adjustValue(newDateTime)))
         }
-      } else {
-        // do nothing
       }
+      // if (date.isValid()) {
+      //   if (!this.valueAsDateTime) {
+      //     const newValue = moment()
+      //     newValue.year(date.year())
+      //     newValue.month(date.month())
+      //     newValue.date(date.date())
+      //     this.$emit('input', this.adjustValue(newValue).valueOf())
+      //   } else {
+      //     const newValue = this.valueAsDateTime
+      //     newValue.year(date.year())
+      //     newValue.month(date.month())
+      //     newValue.date(date.date())
+      //     this.$emit('input', this.adjustValue(newValue).valueOf())
+      //   }
+      // } else {
+      //   // do nothing
+      // }
     },
     handleDateInputBlur () {
-      const date = moment(this.displayDateString, this.dateValidateFormat, true)
-      if (date.isValid()) {
-        if (!this.valueAsMoment) {
-          const newValue = moment()
-          newValue.year(date.year())
-          newValue.month(date.month())
-          newValue.date(date.date())
-          this.$emit('input', this.adjustValue(newValue).valueOf())
+      const date = strictParse(this.displayDateString, this.dateFormat, new Date())
+      // console.log('blur', this.displayDateString, date)
+      // const date = moment(this.displayDateString, this.dateValidateFormat, true)
+      if (isValid(date)) {
+        if (!this.valueAsDateTime) {
+          this.$emit('input', getTime(this.adjustValue(new Date())))
         } else {
-          const newValue = this.valueAsMoment
-          newValue.year(date.year())
-          newValue.month(date.month())
-          newValue.date(date.date())
-          this.$emit('input', this.adjustValue(newValue).valueOf())
+          const newDateTime = set(this.valueAsDateTime, {
+            year: getYear(date),
+            month: getMonth(date),
+            date: getDate(date)
+          })
+          this.$emit('input', getTime(this.adjustValue(newDateTime)))
         }
+        // if (!this.valueAsDateTime) {
+        //   const newValue = moment()
+        //   newValue.year(date.year())
+        //   newValue.month(date.month())
+        //   newValue.date(date.date())
+        //   this.$emit('input', this.adjustValue(newValue).valueOf())
+        // } else {
+        //   const newValue = this.valueAsDateTime
+        //   newValue.year(date.year())
+        //   newValue.month(date.month())
+        //   newValue.date(date.date())
+        //   this.$emit('input', this.adjustValue(newValue).valueOf())
+        // }
       } else {
         this.refreshDisplayDateString()
       }
@@ -137,32 +177,32 @@ export default {
       this.displayDateString = ''
     },
     setSelectedDateTimeToNow () {
-      this.$emit('input', this.adjustValue(moment()).valueOf())
-      this.calendarDateTime = moment()
+      this.$emit('input', getTime(this.adjustValue(new Date())))
+      this.calendarDateTime = new Date() // moment()
     },
     handleDateClick (dateItem) {
       // console.log(dateItem)
-      let newSelectedDateTime = moment()
-      if (this.valueAsMoment !== null) {
-        newSelectedDateTime = moment(this.valueAsMoment)
+      let newSelectedDateTime = new Date()
+      if (this.valueAsDateTime !== null) {
+        newSelectedDateTime = this.valueAsDateTime
       }
-      newSelectedDateTime = setDate(newSelectedDateTime, dateItem)
+      newSelectedDateTime = set(newSelectedDateTime, dateItem.dateObject)
       // console.log(newSelectedDateTime.format('YYYY MM DD'))
-      this.$emit('input', this.adjustValue(newSelectedDateTime).valueOf())
+      this.$emit('input', getTime(this.adjustValue(newSelectedDateTime)))
     },
     /**
      * If not selected, display nothing,
      * else update datetime related string
      */
     refreshDisplayDateString (time) {
-      if (this.valueAsMoment === null) {
+      if (this.valueAsDateTime === null) {
         this.displayDateString = ''
         return
       }
       if (time === undefined) {
-        time = this.valueAsMoment
+        time = this.valueAsDateTime
       }
-      this.displayDateString = time.format(this.dateFormat)
+      this.displayDateString = format(time, this.dateFormat)
     },
     handleConfirmClick () {
       this.$emit('confirm')
@@ -174,16 +214,16 @@ export default {
       }
     },
     nextYear () {
-      this.calendarDateTime = moment(this.calendarDateTime).add(1, 'year')
+      this.calendarDateTime = addYears(this.calendarDateTime, 1)
     },
     prevYear () {
-      this.calendarDateTime = moment(this.calendarDateTime).subtract(1, 'year')
+      this.calendarDateTime = addYears(this.calendarDateTime, -1)
     },
     nextMonth () {
-      this.calendarDateTime = moment(this.calendarDateTime).add(1, 'month')
+      this.calendarDateTime = addMonths(this.calendarDateTime, 1)
     },
     prevMonth () {
-      this.calendarDateTime = moment(this.calendarDateTime).subtract(1, 'month')
+      this.calendarDateTime = addMonths(this.calendarDateTime, -1)
     }
   }
 }

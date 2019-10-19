@@ -1,43 +1,35 @@
-import moment from 'moment'
+// import moment from 'moment'
+import { isValid, isSameDay, getDate, getMonth, getYear, isSameMonth, getTime, startOfMonth, addDays, getDay, parse, format } from 'date-fns'
 
-/**
- * change date of `time` accroding to `dateItem`
- * keep time of `time`
- * return a new Moment Object according to time
- * @param {Moment} time
- * @param {Object} dateItem
- */
-function setDate (time, dateItem) {
-  time.year(dateItem.year)
-  time.month(dateItem.month)
-  time.date(dateItem.date)
-  return moment(time)
-}
-
-function isSameDate (time, patternTime) {
-  if (Array.isArray(time)) {
-    return time.some(t => t.year() === patternTime.year() && t.month() === patternTime.month() && t.date() === patternTime.date())
+function matchDate (sourceTime, patternTime) {
+  if (Array.isArray(sourceTime)) {
+    // console.log(sourceTime, patternTime, sourceTime.some(time => isSameDay(time, patternTime)))
+    return sourceTime.some(time => isSameDay(time, patternTime))
+    // return time.some(t => t.year() === patternTime.year() && t.month() === patternTime.month() && t.date() === patternTime.date())
   } else {
-    return time.year() === patternTime.year() && time.month() === patternTime.month() && time.date() === patternTime.date()
+    return isSameDay(sourceTime, patternTime)
+    // return time.year() === patternTime.year() && time.month() === patternTime.month() && time.date() === patternTime.date()
   }
 }
 
 function dateItem (time, displayTime, selectedTime, currentTime) {
   let isInSpan = false
   if (Array.isArray(selectedTime)) {
-    if (selectedTime[0].valueOf() < time.valueOf() && time.valueOf() < selectedTime[1].valueOf()) {
+    if (selectedTime[0] < time && time < selectedTime[1]) {
       isInSpan = true
     }
   }
   return {
-    date: time.date(),
-    month: time.month(),
-    year: time.year(),
-    isDateOfDisplayMonth: time.month() === displayTime.month(),
+    dateObject: {
+      date: getDate(time), // time.date(),
+      month: getMonth(time), // time.month(),
+      year: getYear(time) // time.year(),
+    },
+    isDateOfDisplayMonth: isSameMonth(time, displayTime), // time.month() === displayTime.month(),
     isInSpan,
-    isSelectedDate: selectedTime !== null && isSameDate(selectedTime, time),
-    isCurrentDate: isSameDate(currentTime, time),
-    timestamp: time.valueOf()
+    isSelectedDate: selectedTime !== null && matchDate(selectedTime, time),
+    isCurrentDate: matchDate(currentTime, time),
+    timestamp: getTime(time) // time.valueOf()
   }
 }
 
@@ -49,32 +41,40 @@ function dateItem (time, displayTime, selectedTime, currentTime) {
  * @param {Moment} currentTime
  */
 function dateArray (displayTime, selectedTime, currentTime) {
-  const displayMonth = displayTime.month()
+  const displayMonth = getMonth(displayTime) // displayTime.month()
   /**
    * First day of current month
    */
-  const displayMonthIterator = moment(displayTime).startOf('month')
+  let displayMonthIterator = startOfMonth(displayTime) // moment(displayTime).startOf('month')
   /**
    * Last day of last month
    */
-  const lastMonthIterator = moment(displayMonthIterator).subtract(1, 'day')
+  let lastMonthIterator = addDays(displayMonthIterator, -1) // moment(displayMonthIterator).subtract(1, 'day')
   const calendarDays = []
   let protectLastMonthDateIsShownFlag = true
-  while (lastMonthIterator.day() !== 6 || protectLastMonthDateIsShownFlag) {
+  while (getDay(lastMonthIterator) !== 6 || protectLastMonthDateIsShownFlag) {
     calendarDays.unshift(dateItem(lastMonthIterator, displayTime, selectedTime, currentTime))
-    lastMonthIterator.subtract(1, 'day')
+    lastMonthIterator = addDays(lastMonthIterator, -1) // .subtract(1, 'day')
     protectLastMonthDateIsShownFlag = false
   }
-  while (displayMonthIterator.month() === displayMonth) {
+  while (getMonth(displayMonthIterator) === displayMonth) {
     calendarDays.push(dateItem(displayMonthIterator, displayTime, selectedTime, currentTime))
-    displayMonthIterator.add(1, 'day')
+    displayMonthIterator = addDays(displayMonthIterator, 1) // .add(1, 'day')
   }
   while (calendarDays.length < 42) {
     calendarDays.push(dateItem(displayMonthIterator, displayTime, selectedTime, currentTime))
-    displayMonthIterator.add(1, 'day')
+    displayMonthIterator = addDays(displayMonthIterator, 1)
+    // displayMonthIterator.add(1, 'day')
   }
-  // console.log(calendarDays)
+  // console.log(calendarDays, selectedTime)
   return calendarDays
 }
 
-export { dateArray, setDate }
+function strictParse (string, pattern, backup) {
+  const result = parse(string, pattern, backup)
+  if (!isValid(result)) return result
+  else if (format(result, pattern) === string) return result
+  else return new Date(NaN)
+}
+
+export { dateArray, strictParse }

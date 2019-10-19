@@ -1,4 +1,4 @@
-# Date
+# Datetime
 ```html
 <n-date-picker
   v-model="timestamp"

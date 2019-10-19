@@ -16,14 +16,20 @@ export default {
         return true
       },
       default: () => document.body
+    },
+    detached: {
+      type: Boolean,
+      default: true
     }
   },
   watch: {
     active (value) {
       // console.log('activeChange')
-      if (value && !this.contentContainerMounted) {
-        this.contentContainerMounted = true
-        this.appendContent()
+      if (this.detached) {
+        if (value && !this.contentContainerMounted) {
+          this.contentContainerMounted = true
+          this.appendContent()
+        }
       }
     }
   },
@@ -48,17 +54,21 @@ export default {
     }
   },
   mounted () {
-    this.detachTarget = document.body // getScrollParent(this.$refs.self)
-    this.detachContent()
-    if (this.active && !this.contentContainerMounted) {
-      this.contentContainerMounted = true
-      this.appendContent()
+    if (this.detached) {
+      this.detachTarget = document.body // getScrollParent(this.$refs.self)
+      this.detachContent()
+      if (this.active && !this.contentContainerMounted) {
+        this.contentContainerMounted = true
+        this.appendContent()
+      }
     }
     // this.appendContent()
   },
   beforeDestroy () {
-    if (this.detachTarget.contains(this.$refs.contentContainer)) {
-      this.detachTarget.removeChild(this.$refs.contentContainer)
+    if (this.detached) {
+      if (this.detachTarget.contains(this.$refs.contentContainer)) {
+        this.detachTarget.removeChild(this.$refs.contentContainer)
+      }
     }
   }
 }
