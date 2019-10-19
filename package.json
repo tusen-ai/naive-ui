@@ -101,7 +101,6 @@
     "date-fns": "^2.5.1",
     "ionicons": "^4.5.8",
     "masonry-layout": "^4.2.2",
-    "moment": "^2.24.0",
     "node-sass": "^4.12.0",
     "resize-observer-polyfill": "^1.5.1",
     "sass-loader": "^7.1.0"

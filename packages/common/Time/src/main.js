@@ -1,12 +1,12 @@
-import moment from 'moment'
+// import moment from 'moment'
 
 export default {
   name: 'NTime',
   props: {
     time: {
       validator (time) {
-        if (time === null) return
-        return moment(time).isValid()
+        if (time === null) return false
+        // return moment(time).isValid()
       },
       default: null
     },

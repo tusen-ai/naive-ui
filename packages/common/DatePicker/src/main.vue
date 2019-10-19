@@ -151,7 +151,7 @@ import NInput from '../../Input'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import { format, getTime, isValid } from 'date-fns'
-import { strictParse } from './utils'
+import { strictParse } from '../../../utils/dateUtils'
 import isEqual from 'lodash/isEqual'
 
 const DATE_FORMAT = {

@@ -236,7 +236,7 @@ import NInput from '../../../Input'
 import dualCalendarMixin from './dualCalendarMixin'
 import NBaseIcon from '../../../../base/Icon'
 import { startOfSecond, format, set, getYear, getMonth, getDate, isValid } from 'date-fns'
-import { strictParse } from '../utils'
+import { strictParse } from '../../../../utils/dateUtils'
 
 const DATETIME_FORMAT = 'yyyy-MM-dd HH:mm:ss'
 const DATE_FORMAT = 'yyyy-MM-dd'
