@@ -22,6 +22,13 @@ function getActivatorEl (componentInstance) {
  */
 export default {
   props: {
+    positionMode: {
+      type: String,
+      default: 'fixed',
+      validator (value) {
+        return ['fixed', 'absolute'].includes(value)
+      }
+    },
     placement: {
       validator (value) {
         return [
@@ -46,6 +53,11 @@ export default {
         return ['self', 'activator'].includes(value)
       },
       default: 'self'
+    }
+  },
+  computed: {
+    positionModeisAbsolute () {
+      return this.positionMode === 'absolute'
     }
   },
   watch: {
@@ -90,6 +102,18 @@ export default {
         this.trackedElement = this.getTrackedElement()
       }
     },
+    /**
+     * Need to be fulfilled!
+     */
+    updatePositionInAbsoluteMode () {
+      this.trackingElement.style.position = 'absolute'
+      this.trackingElement.style.top = '100%'
+      this.trackingElement.style.left = '0%'
+      this.trackingElement.style.right = null
+      this.trackingElement.style.bottom = null
+      this.trackingElement.style.transformOrigin = 'top left'
+      this.trackingElement.setAttribute('n-suggested-transform-origin', 'top left')
+    },
     updatePosition (el, cb) {
       // console.log('scroll')
       if (!this.active && !this.show) return
@@ -98,6 +122,10 @@ export default {
       this._getTrackingElement()
       if (!this.trackedElement || !this.trackingElement) {
         console.log('[placeable.updatePosition]: trakedElement or trackingElement not found!')
+      }
+      if (this.positionModeisAbsolute) {
+        this.updatePositionInAbsoluteMode()
+        return
       }
       // console.log(activator)
       const activatorBoundingClientRect = this.trackedElement.getBoundingClientRect()
