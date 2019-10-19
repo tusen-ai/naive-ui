@@ -13,6 +13,7 @@
       ref="contentContainer"
       class="n-detached-content-container n-time-picker-detached-content-container"
       :class="{
+        'n-detached-content-container--absolute-positioned': positionModeisAbsolute,
         [namespace]: namespace
       }"
     >

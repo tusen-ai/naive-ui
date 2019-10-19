@@ -19,6 +19,9 @@
       margin-bottom: 4px;
       width: 350px;
       border-radius: 6px;
+      @include b(time-picker) {
+        z-index: 1;
+      }
       @include b(date-picker-panel-calendar) {
         width: 350px;
         @include b(date-picker-panel-month-modifier) {

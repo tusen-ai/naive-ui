@@ -21,6 +21,7 @@
         />
         <n-time-picker
           :detached="false"
+          position-mode="absolute"
           class="n-date-picker-panel__time-input"
           :value="startTimeValue"
           stop-selector-bubble
@@ -40,6 +41,7 @@
         />
         <n-time-picker
           :detached="false"
+          position-mode="absolute"
           class="n-date-picker-panel__time-input"
           :value="endTimeValue"
           stop-selector-bubble

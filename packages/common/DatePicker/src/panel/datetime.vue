@@ -19,6 +19,7 @@
           @input="handleDateInput"
         />
         <n-time-picker
+          position-mode="absolute"
           :detached="false"
           class="n-date-picker-panel__time-input"
           :value="value"

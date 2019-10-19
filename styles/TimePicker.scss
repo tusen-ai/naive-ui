@@ -4,6 +4,7 @@
 @include themes-mixin {
   @include once {
     @include b(time-picker) {
+      position: relative;
       display: inline-block;
       width: 180px;
     }
