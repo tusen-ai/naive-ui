@@ -1,6 +1,6 @@
 // const { getOptions } = require('loader-utils')
 // const validateOptions = require('schema-utils')
-const prettier = require('prettier')
+// const prettier = require('prettier')
 
 module.exports = function (content) {
   const exampleReg = /<!--EXAMPLE_START-->([\s\S]*)?<!--EXAMPLE_END-->/
@@ -13,9 +13,9 @@ module.exports = function (content) {
   const script = content.match(scriptReg)[0]
   // console.log(styleExample)
   styleExample = styleExample === null ? '' : styleExample[1]
-  const example = prettier.format((sourceExample + '\n' + script + '\n' + styleExample), {
-    parser: 'html',
-    printWidth: 80
-  }).trim()
-  return content.replace(sourceReg, `<textarea v-pre>${example}</textarea>`)
+  // const example = prettier.format((sourceExample + '\n' + script + '\n' + styleExample), {
+  //   parser: 'html',
+  //   printWidth: 80
+  // }).trim()
+  return content.replace(sourceReg, `<textarea v-pre>${(sourceExample + '\n' + script + '\n' + styleExample)}</textarea>`)
 }

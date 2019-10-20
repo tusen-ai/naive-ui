@@ -1,7 +1,6 @@
 import Vue from 'vue/dist/vue'
 import VueRouter from 'vue-router'
 import '../styles/index.scss'
-import 'codemirror/lib/codemirror.css'
 import './styles/atom-one-dark-reasonable.scss'
 import './styles/atom-one-light.scss'
 import './styles/markdown.scss'

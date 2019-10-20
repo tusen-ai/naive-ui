@@ -34,7 +34,7 @@ const webpackConfig = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './demo/index.tpl',
-      filename: './index.html'
+      favicon: './demo/assets/images/naivelogo.png'
     }),
     new VueLoaderPlugin(),
     new webpack.LoaderOptionsPlugin({
