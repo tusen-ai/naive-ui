@@ -3,6 +3,7 @@
 </p>
 
 <h1 align="center">Naive UI</h1>
-A style first Vue-based component library.
+<p align="center">A style first Vue-based component library.</p>
+
 ## Documentation
 [www.naiveui.com](www.naiveui.com)
