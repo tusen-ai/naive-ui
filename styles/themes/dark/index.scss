@@ -30,6 +30,7 @@
 @import "components/Timeline.scss";
 @import "components/BackTop.scss";
 @import "components/Notification.scss";
+@import "components/Radio.scss";
 
 @mixin setup-dark-theme() {
   @include setup-dark-colors();
@@ -87,4 +88,5 @@
   @include setup-dark-timeline;
   @include setup-dark-back-top;
   @include setup-dark-notification;
+  @include setup-dark-radio;
 }

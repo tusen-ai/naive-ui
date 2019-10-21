@@ -35,7 +35,7 @@ import alert from './documentation/components/alert'
 import datePicker from './documentation/components/datePicker'
 import inputNumberDemo from './documentation/components/inputNumberDemo'
 import nimbusIconDemo from './documentation/components/nimbusIconDemo'
-import radioDemo from './documentation/components/radioDemo'
+import radio from './documentation/components/radio'
 import formDemo from './documentation/components/formDemo'
 import tabsDemo from './documentation/components/tabsDemo'
 import timePicker from './documentation/components/timePicker'
@@ -155,7 +155,7 @@ const routes = [
       { path: '/n-date-picker', component: datePicker },
       { path: '/n-input-number', component: inputNumberDemo },
       { path: '/n-nimbus-icon', component: nimbusIconDemo },
-      { path: '/n-radio', component: radioDemo },
+      { path: '/n-radio', component: radio },
       { path: '/n-form', component: formDemo },
       { path: '/n-tabs', component: tabsDemo },
       { path: '/n-time-picker', component: timePicker },

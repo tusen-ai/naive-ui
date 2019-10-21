@@ -8,7 +8,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const CompressionPlugin = require('compression-webpack-plugin')
 
 const webpackConfig = {
   mode: 'production',
@@ -47,7 +46,6 @@ const webpackConfig = {
       }
     }),
     new ExtractTextPlugin('[name].[hash:7].css'),
-    new CompressionPlugin(),
     new BundleAnalyzerPlugin()
   ]
 }

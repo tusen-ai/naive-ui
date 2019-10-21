@@ -30,6 +30,7 @@
 @import "components/Timeline.scss";
 @import "components/BackTop.scss";
 @import "components/Notification.scss";
+@import "components/Radio.scss";
 
 @mixin setup-light-theme() {
   @include setup-light-colors();
@@ -83,4 +84,5 @@
   @include setup-light-timeline;
   @include setup-light-back-top;
   @include setup-light-notification;
+  @include setup-light-radio;
 }

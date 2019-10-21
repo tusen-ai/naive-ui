@@ -1,0 +1,29 @@
+@mixin setup-dark-radio {
+  $--radio-box-shadow: (
+    'default': inset 0 0 0 1px rgba(255, 255, 255, 0.4),
+    'active': inset 0 0 0 1px $--n-primary-color,
+    'focus': (inset 0 0 0 1px $--n-primary-color, 0 0 0 2px change-color($--n-primary-color, $alpha: .3)),
+    'hover': inset 0 0 0 1px $--n-primary-color,
+    'disabled': inset 0 0 0 1px rgba(255, 255, 255, 0.4)
+  ) !global;
+  $--radio-label-text-color: $--n-secondary-text-color !global;
+  $--radio-control-background-color: (
+    'active': $--n-primary-color,
+    'disabled': rgba(255, 255, 255, 0.4)
+  ) !global;
+  $--radio-button-border-color: (
+    'default': rgba(255, 255, 255, 0.4),
+    'active': $--n-primary-color,
+    'hover': $--n-primary-color
+  ) !global;
+  $--radio-button-background-color: (
+    'default': transparent,
+    'active': $--n-primary-color,
+  ) !global;
+  $--radio-button-label-color: (
+    'default': $--n-secondary-text-color,
+    'active': $--n-primary-color,
+    'hover': $--n-primary-color
+  ) !global;
+  $--radio-disabled-opacity: .4 !global;
+}

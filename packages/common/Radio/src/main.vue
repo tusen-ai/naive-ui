@@ -3,8 +3,11 @@
     class="n-radio"
     :class="{
       'n-radio--disabled': disabled,
-      'n-radio--checked': checked
+      'n-radio--checked': checked,
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
+    :tabindex="disabled ? -1 : 0"
+    @keyup.enter="handleKeyUpEnter"
     @click="handleClick"
   >
     <div
@@ -21,15 +24,20 @@
 
 <script>
 import Emitter from '../../../mixins/emitter'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 
 export default {
   name: 'NRadio',
-  mixins: [ Emitter ],
+  mixins: [ withapp, themeable, Emitter ],
   model: {
     prop: 'privateValue',
     event: 'input'
   },
   inject: {
+    NRadioGroup: {
+      default: null
+    },
     formItem: {
       default: null
     }
@@ -50,18 +58,35 @@ export default {
   },
   computed: {
     checked () {
-      return this.privateValue === this.value
+      if (this.NRadioGroup) {
+        return this.NRadioGroup.value === this.value
+      } else {
+        return this.privateValue === this.value
+      }
     }
   },
   methods: {
+    handleKeyUpEnter () {
+      this.toggle()
+    },
     handleClick (e) {
       this.$emit('click', e)
+      this.toggle()
+    },
+    toggle () {
       if (this.disabled) return
       if (this.privateValue !== this.value) {
-        this.$emit('input', this.value)
+        this.emitValue('input', this.value)
         if (this.formItem) {
           this.dispatch('NFormItem', 'on-form-change', this.value)
         }
+      }
+    },
+    emitValue () {
+      if (this.NRadioGroup) {
+        this.NRadioGroup.$emit('input', this.value)
+      } else {
+        this.$emit('input', this.value)
       }
     }
   }
