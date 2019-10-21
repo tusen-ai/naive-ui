@@ -44,7 +44,7 @@ import dropdownDemo from './documentation/components/dropdownDemo'
 import scrollbarDebug from './debugComponents/scrollbarDebug'
 import scrollbarDebug2 from './debugComponents/scrollbarDebug2'
 import badge from './documentation/components/badge'
-import stepsDemo from './documentation/components/stepsDemo'
+import steps from './documentation/components/steps'
 import notification from './documentation/components/notification'
 import nimbusConfirmCardDemo from './documentation/components/nimbusConfirmCardDemo'
 import pagination from './documentation/components/pagination'
@@ -163,7 +163,7 @@ const routes = [
       { path: '/n-modal-debug', component: modalDebug },
       { path: '/n-scrollbar-debug', component: scrollbarDebug },
       { path: '/n-badge', component: badge },
-      { path: '/n-steps', component: stepsDemo },
+      { path: '/n-steps', component: steps },
       { path: '/n-collapse', component: collapse },
       { path: '/n-progress', component: progress },
       { path: '/n-tag', component: tag },
