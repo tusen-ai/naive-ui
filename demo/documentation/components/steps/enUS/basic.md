@@ -2,8 +2,7 @@
 ```html
 <n-steps
   :current="current"
-  :finish-status="finishStatus"
-  :current-status="currentStatus"
+  :status="currentStatus"
 >
   <n-step
     title="I Me Mine"
@@ -38,15 +37,6 @@
   <n-button @click="currentStatus='process'">
     current-status: process
   </n-button>
-  <n-button @click="finishStatus='error'">
-    finish-status: error
-  </n-button>
-  <n-button @click="finishStatus='process'">
-    finish-status: process
-  </n-button>
-  <n-button @click="finishStatus='success'">
-    finish-status: success
-  </n-button>
 </div>
 ```
 
@@ -55,19 +45,18 @@ export default {
   data () {
     return {
       current: null,
-      finishStatus: 'success',
       currentStatus: 'error'
     }
   },
   methods: {
     next () {
-      if (this.current === null) this.current = 0
-      else if (this.current >= 3) this.current = null
+      if (this.current === null) this.current = 1
+      else if (this.current >= 4) this.current = null
       else this.current++
     },
     prev () {
       if (this.current === 0) this.current = null
-      else if (this.current === null) this.current = 3
+      else if (this.current === null) this.current = 4
       else this.current--
     }
   }

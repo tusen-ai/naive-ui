@@ -31,6 +31,7 @@
 @import "components/BackTop.scss";
 @import "components/Notification.scss";
 @import "components/Radio.scss";
+@import "components/Steps.scss";
 
 @mixin setup-dark-theme() {
   @include setup-dark-colors();
@@ -89,4 +90,5 @@
   @include setup-dark-back-top;
   @include setup-dark-notification;
   @include setup-dark-radio;
+  @include setup-dark-step;
 }
