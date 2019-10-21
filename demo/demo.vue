@@ -234,10 +234,6 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-tabs'
             },
             {
-              name: 'Table',
-              path: `/${this.lang}/${this.theme}` + '/n-table'
-            },
-            {
               name: 'Tag',
               path: `/${this.lang}/${this.theme}` + '/n-tag'
             },

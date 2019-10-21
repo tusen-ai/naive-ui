@@ -21,7 +21,6 @@ import iconDemo from './documentation/components/iconDemo'
 import checkbox from './documentation/components/checkbox'
 import button from './documentation/components/button'
 import switchDemo from './documentation/components/switch'
-import tableDemo from './documentation/components/tableDemo'
 import input from './documentation/components/input'
 import select from './documentation/components/select'
 import cascaderDemo from './documentation/components/cascaderDemo'
@@ -54,7 +53,7 @@ import tag from './documentation/components/tag'
 import timeline from './documentation/components/timeline'
 import progress from './documentation/components/progress'
 import divider from './documentation/components/divider'
-import popconfirmDemo from './documentation/components/popconfirmDemo'
+import popconfirm from './documentation/components/popconfirm'
 import anchor from './documentation/components/anchor'
 import popselect from './documentation/components/popselect'
 import app from './documentation/components/app'
@@ -63,7 +62,7 @@ import transferDemo from './documentation/components/transferDemo'
 import spin from './documentation/components/spin'
 import drawerDemo from './documentation/components/drawerDemo'
 import loadingBar from './documentation/components/loadingBar'
-import timeDemo from './documentation/components/timeDemo'
+import time from './documentation/components/time'
 import sliderDemo from './documentation/components/sliderDemo'
 import treeDemo from './documentation/components/treeDemo'
 import affix from './documentation/components/affix'
@@ -137,7 +136,7 @@ const routes = [
       { path: '/n-checkbox', component: checkbox },
       { path: '/n-button', component: button },
       { path: '/n-switch', component: switchDemo },
-      { path: '/n-table', component: tableDemo },
+      // { path: '/n-table', component: tableDemo },
       { path: '/n-advance-table', component: advancedTable },
       { path: '/n-input', component: input },
       { path: '/n-select', component: select },
@@ -173,7 +172,7 @@ const routes = [
       { path: '/n-back-top', component: backTop },
       { path: '/n-date-picker-debug', component: datePickerDebug },
       { path: '/n-divider', component: divider },
-      { path: '/n-popconfirm', component: popconfirmDemo },
+      { path: '/n-popconfirm', component: popconfirm },
       { path: '/n-anchor', component: anchor },
       { path: '/n-dropdown', component: dropdownDemo },
       { path: '/n-popselect', component: popselect },
@@ -183,7 +182,7 @@ const routes = [
       { path: '/n-spin', component: spin },
       { path: '/n-drawer', component: drawerDemo },
       { path: '/n-loading-bar', component: loadingBar },
-      { path: '/n-time', component: timeDemo },
+      { path: '/n-time', component: time },
       { path: '/n-slider', component: sliderDemo },
       { path: '/n-tree', component: treeDemo },
       { path: '/n-vertical-align-debug', component: verticalAlignDebug },
