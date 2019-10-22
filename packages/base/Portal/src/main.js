@@ -29,11 +29,11 @@ export default {
     const childrenCount = defaultSlot && defaultSlot.length
     if (defaultSlot && childrenCount) {
       if (childrenCount !== 1) {
-        console.error(`NBaseProtal: default slot has more than one child`)
+        console.error(`NBasePortal: default slot has more than one child`)
       }
       return defaultSlot[0]
     } else {
-      console.error(`NBaseProtal: default slot is empty`)
+      console.error(`NBasePortal: default slot is empty`)
       return null
     }
   }

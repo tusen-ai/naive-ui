@@ -60,7 +60,7 @@ import app from './documentation/components/app'
 import advancedTable from './documentation/components/advancedTable'
 import transferDemo from './documentation/components/transferDemo'
 import spin from './documentation/components/spin'
-import drawerDemo from './documentation/components/drawerDemo'
+import drawer from './documentation/components/drawer'
 import loadingBar from './documentation/components/loadingBar'
 import time from './documentation/components/time'
 import sliderDemo from './documentation/components/sliderDemo'
@@ -180,7 +180,7 @@ const routes = [
       { path: '/n-cancel-mark-debug', component: cancelMarkDebug },
       { path: '/n-transfer', component: transferDemo },
       { path: '/n-spin', component: spin },
-      { path: '/n-drawer', component: drawerDemo },
+      { path: '/n-drawer', component: drawer },
       { path: '/n-loading-bar', component: loadingBar },
       { path: '/n-time', component: time },
       { path: '/n-slider', component: sliderDemo },

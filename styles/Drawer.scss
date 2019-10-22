@@ -1,13 +1,17 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
-@include b(drawer) {
-  @include slide-in-from-right-transition();
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  background-color: rgba(111, 111, 111, 1);
+@include themes-mixin {
+  @include b(drawer) {
+    @include slide-in-from-right-transition();
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: $--n-card-color;
+    color: $--n-secondary-text-color;
+    transition: background-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier;
+  }
 }
 
 @include b(drawer-overlay) {
