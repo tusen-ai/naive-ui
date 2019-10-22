@@ -12,7 +12,7 @@
 export default {
   data () {
     return {
-      value: null,
+      value: 'Sunday Morning Call1',
       options: [{
         label: 'Go Let It Out1',
         value: 'Go Let It Out1'

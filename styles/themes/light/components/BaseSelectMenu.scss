@@ -2,7 +2,8 @@
   $--base-select-menu-item-color: (
     "default": $--n-secondary-text-color,
     "selected": $--n-primary-color,
-    "disabled": $--n-disabled-text-color
+    "disabled": $--n-disabled-text-color,
+    "disabled-selected": change-color($--n-primary-color, $alpha: .4)
   ) !global;
   $--base-select-menu-background-color: white !global;
   $--base-select-menu-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.12) !global;
