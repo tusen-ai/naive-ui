@@ -40,7 +40,7 @@ import tabsDemo from './documentation/components/tabsDemo'
 import timePicker from './documentation/components/timePicker'
 import confirm from './documentation/components/confirm'
 import backTop from './documentation/components/backTop'
-import dropdownDemo from './documentation/components/dropdownDemo'
+import dropdown from './documentation/components/dropdown'
 import scrollbarDebug from './debugComponents/scrollbarDebug'
 import scrollbarDebug2 from './debugComponents/scrollbarDebug2'
 import badge from './documentation/components/badge'
@@ -174,7 +174,7 @@ const routes = [
       { path: '/n-divider', component: divider },
       { path: '/n-popconfirm', component: popconfirm },
       { path: '/n-anchor', component: anchor },
-      { path: '/n-dropdown', component: dropdownDemo },
+      { path: '/n-dropdown', component: dropdown },
       { path: '/n-popselect', component: popselect },
       { path: '/n-app', component: app },
       { path: '/n-cancel-mark-debug', component: cancelMarkDebug },
