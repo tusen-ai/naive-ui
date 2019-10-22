@@ -32,6 +32,7 @@
 @import "components/Notification.scss";
 @import "components/Radio.scss";
 @import "components/Steps.scss";
+@import "components/InputNumber.scss";
 
 @mixin setup-light-theme() {
   @include setup-light-colors();
@@ -43,16 +44,16 @@
   $--n-warning-color: $--warning-6 !global;
   $--n-error-color: $--error-6 !global;
 
-  $n-selected-color: $neutral-7 !global;
-  $--n-divider-color: $neutral-7 !global;
-  $--n-border-color: $neutral-6 !global;
+  $--n-selected-color: $--neutral-7 !global;
+  $--n-divider-color: $--neutral-7 !global;
+  $--n-border-color: $--neutral-6 !global;
 
-  $--n-secondary-text-color: $neutral-3 !global;
-  $--n-text-color: $neutral-2 !global;
-  $--n-disabled-text-color: $neutral-5 !global;
-  $--n-card-color: $neutral-10 !global;
-  $--n-dialog-color: $neutral-10 !global;
-  $--n-background-color: $neutral-10 !global;
+  $--n-secondary-text-color: $--neutral-3 !global;
+  $--n-text-color: $--neutral-2 !global;
+  $--n-disabled-text-color: $--neutral-5 !global;
+  $--n-card-color: $--neutral-10 !global;
+  $--n-dialog-color: $--neutral-10 !global;
+  $--n-background-color: $--neutral-10 !global;
 
   @include setup-light-nimbus-service-layout;
   @include setup-light-divider;
@@ -87,4 +88,5 @@
   @include setup-light-notification;
   @include setup-light-radio;
   @include setup-light-steps;
+  @include setup-light-input-number;
 }

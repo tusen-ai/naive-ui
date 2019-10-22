@@ -10,7 +10,7 @@
   ) !global;
   $--input-background-color: (
     "default": rgb(255, 255, 255),
-    "disabled": $alpha-neutral-8,
+    "disabled": $--alpha-neutral-8,
     "focus": rgb(255, 255, 255)
   ) !global;
   $--input-icon-color: $--n-disabled-text-color !global;

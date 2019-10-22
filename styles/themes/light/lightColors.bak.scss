@@ -1,16 +1,16 @@
 /** chorme and firefox render diffrently, so I save the original file */
 
 @mixin setup-light-colors {
-  $neutral-1: rgba(0, 0, 0, 1) !global;
-  $neutral-2: rgba(0, 0, 0, .85) !global;
-  $neutral-3: rgba(0, 0, 0, .45) !global;
-  $neutral-3: rgba(0, 0, 0, .25) !global;
-  $neutral-3: rgba(0, 0, 0, .15) !global;
-  $neutral-3: rgba(0, 0, 0, .09) !global;
-  $neutral-3: rgba(0, 0, 0, .04) !global;
-  $neutral-3: rgba(0, 0, 0, 1) !global;
-  $neutral-3: rgba(0, 0, 0, 1) !global;
-  $neutral-3: rgba(0, 0, 0, 1) !global;
+  $--neutral-1: rgba(0, 0, 0, 1) !global;
+  $--neutral-2: rgba(0, 0, 0, .85) !global;
+  $--neutral-3: rgba(0, 0, 0, .45) !global;
+  $--neutral-3: rgba(0, 0, 0, .25) !global;
+  $--neutral-3: rgba(0, 0, 0, .15) !global;
+  $--neutral-3: rgba(0, 0, 0, .09) !global;
+  $--neutral-3: rgba(0, 0, 0, .04) !global;
+  $--neutral-3: rgba(0, 0, 0, 1) !global;
+  $--neutral-3: rgba(0, 0, 0, 1) !global;
+  $--neutral-3: rgba(0, 0, 0, 1) !global;
   $--primary-1: #e6ffee !global;
   $--primary-2: #9bf2bb !global;
   $--primary-3: #6ee69e !global;
