@@ -1,4 +1,3 @@
-
 import Confirm from './confirm.vue'
 
 const instances = new Set()
@@ -23,30 +22,42 @@ export default {
   },
   confirm (options) {
     const instance = this.createInstance()
-    setDataOnConfirmInstance({
-      type: 'confirm',
-      active: true,
-      theme: this.theme,
-      ...options
-    }, instance)
+    setDataOnConfirmInstance(
+      {
+        type: 'confirm',
+        active: true,
+        theme: this.theme,
+        ...options
+      },
+      instance
+    )
+    return instance
   },
   error (options) {
     const instance = this.createInstance()
-    setDataOnConfirmInstance({
-      type: 'error',
-      active: true,
-      theme: this.theme,
-      ...options
-    }, instance)
+    setDataOnConfirmInstance(
+      {
+        type: 'error',
+        active: true,
+        theme: this.theme,
+        ...options
+      },
+      instance
+    )
+    return instance
   },
   success (options) {
     const instance = this.createInstance()
-    setDataOnConfirmInstance({
-      type: 'success',
-      active: true,
-      theme: this.theme,
-      ...options
-    }, instance)
+    setDataOnConfirmInstance(
+      {
+        type: 'success',
+        active: true,
+        theme: this.theme,
+        ...options
+      },
+      instance
+    )
+    return instance
   },
   destroyAll () {
     instances.forEach(instance => {

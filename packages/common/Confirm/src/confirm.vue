@@ -47,12 +47,13 @@
           :theme="theme"
           round
           :disabled="loading === true"
+          :loading="loading"
           size="small"
           type="primary"
           auto-text-color
           @click="handlePositiveClick"
         >
-          {{ loading === true ? "Loading" : positiveText }}
+         {{positiveText}}
         </n-button>
       </div>
     </div>
