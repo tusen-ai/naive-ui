@@ -1,4 +1,5 @@
 # Basic
+
 ```html
 <n-advance-table
   ref="table"
@@ -11,10 +12,7 @@
   @on-change="onChange"
   @on-selected-change="onSelectedChange"
 >
-  <div
-    slot="table-operation-batch-left"
-    style="padding-left:27px;"
-  >
+  <div slot="table-operation-batch-left" style="padding-left:27px;">
     <n-icon
       v-show="selectedRow.length"
       color="rgba(255,255,255,.7)"
@@ -35,6 +33,7 @@
   </div>
 </n-advance-table>
 ```
+
 ```js
 const items = [
   {
@@ -56,20 +55,21 @@ const sex = [
     value: 'female'
   }
 ]
-const _columns3 = ($this) => {
+const _columns3 = $this => {
   return [
     {
       type: 'selection',
-      disabled (params, index) {
+      disabled(params, index) {
         return params.row.age < 8
       }
+      // fixed: 'left'
     },
     {
       title: 'Name',
       key: 'name',
       sortable: true,
       width: 300,
-      renderHeader(h,column){
+      renderHeader(h, column) {
         return <n-tag>{column.title}</n-tag>
       }
     },
@@ -77,7 +77,7 @@ const _columns3 = ($this) => {
       title: 'Age',
       key: 'age',
       sortable: true,
-      sorter (a, b) {
+      sorter(a, b) {
         return a.age - b.age
       },
       // filterMultiple: true,
@@ -102,7 +102,7 @@ const _columns3 = ($this) => {
         return values.includes(record.sex)
       },
       filterMultiple: true,
-      asyncFilterItems () {
+      asyncFilterItems() {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
             Math.random() > 0.6
@@ -114,6 +114,8 @@ const _columns3 = ($this) => {
     },
     {
       title: '#',
+      fixed: 'right',
+      width: 200,
       render: (h, params) => {
         return (
           <n-button
@@ -130,7 +132,7 @@ const _columns3 = ($this) => {
 }
 export default {
   components: {},
-  data () {
+  data() {
     const columns = _columns3(this)
 
     return {
@@ -156,30 +158,30 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     this.data = this.getData()
     // data一定要先有值才可以再selectRow
     this.$refs.table.selectRow([1, 2, 5])
     // this.$refs.table.selectRow('all') // 可以全选当前展示数据
   },
   methods: {
-    clearSelect () {
+    clearSelect() {
       this.$refs.table.clearSelect()
     },
-    batchDelete () {
-      this.selectedRow.forEach((item) => {
+    batchDelete() {
+      this.selectedRow.forEach(item => {
         let index = item._index
         this.data[index] = null
       })
-      this.data = this.data.filter((item) => item !== null)
+      this.data = this.data.filter(item => item !== null)
     },
-    computeRowcls (params) {
+    computeRowcls(params) {
       if (params.row.age > 15) {
         return 'age-too-old'
       }
       return ''
     },
-    handleDelete (params) {
+    handleDelete(params) {
       let index = params._index
       this.data.splice(index, 1)
       this.$NMessage.success('Delete successfully,', { duration: 2000 })
@@ -187,7 +189,7 @@ export default {
         duration: 4000
       })
     },
-    getData (args) {
+    getData(args) {
       let d = new Array(20).fill(0)
       d = d.map((item, idx) => {
         return {
@@ -198,11 +200,11 @@ export default {
       })
       return d
     },
-    onSelectedChange (selectedRow) {
+    onSelectedChange(selectedRow) {
       console.log(selectedRow)
       this.selectedRow = selectedRow
     },
-    onChange (args) {
+    onChange(args) {
       /**
        * "filter": {
           "age": {
@@ -236,7 +238,7 @@ export default {
       }
        */
     },
-    clear () {
+    clear() {
       // 清除所有的Filter选项,会触发onchange事件
       this.$refs.table.setParams({})
       this.$NMessage.info('clear all filters', { duration: 5000 })
@@ -244,6 +246,7 @@ export default {
   }
 }
 ```
+
 ```css
 .age-too-old {
   color: rgba(255, 255, 255, 0.3);

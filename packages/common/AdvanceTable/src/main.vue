@@ -4,7 +4,7 @@
     class="n-advance-table__wrapper n-advance-table"
     :class="{
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
-      'n-advance-table--col-border':colBorder
+      'n-advance-table--col-border': colBorder
     }"
   >
     <div class="n-advance-table__operation">
@@ -18,10 +18,7 @@
         :style="search ? 'margin-bottom: 18px;' : ''"
       >
         <slot name="table-operation" />
-        <div
-          v-if="search"
-          class="n-advance-table__operation__search"
-        >
+        <div v-if="search" class="n-advance-table__operation__search">
           <searchInput
             ref="search"
             :options="search"
@@ -31,99 +28,21 @@
         <slot name="table-operation-search-right" />
       </div>
     </div>
-    <div
-      ref="tbodyWrapper"
-      class="n-advance-table__tbody"
-    >
-      <n-table
+    <div ref="tbodyWrapper" class="n-advance-table__tbody">
+      <!-- table head -->
+      <table-header
         ref="header"
-        style="padding:0;border-bottom-left-radius:0;border-bottom-right-radius:0;"
-        :style="colGroup"
-        class="n-advance-table__header"
-      >
-        <colgroup>
-          <col
-            v-for="(column, i) in columns"
-            :key="i"
-            :style="computeCustomWidthStl(column)"
-          >
-          <col
-            v-if="scrollBarWidth"
-            :width="scrollBarWidth"
-          >
-        </colgroup>
-        <n-thead>
-          <n-tr>
-            <n-th
-              v-for="(column, i) in columns"
-              ref="theads"
-              :key="column.key"
-              :style="computeAlign(column)"
-              :class="{
-                'n-advance-table__sortable-column': column.sortable
-              }"
-              @click.native.self="()=>sortByColumn(column)"
-            >
-              <!-- 当前页全选 -->
-              <n-checkbox
-                v-if="column.type === 'selection'"
-                v-model="currentPageAllSelect"
-                :indeterminate="!isCheckedBoxAllIndeterminate"
-                @click.native="onAllCheckboxesClick"
-              />
-              <row
-                v-if="column.renderHeader"
-                :index="i"
-                :row="column"
-                :key-name="column.key || i"
-                :render="column.renderHeader"
-              />
-              {{ !column.renderHeader ? column.title : '' }}
-              <SortIcon
-                v-if="column.sortable"
-                :ref="'sorter_' + (column.key || i)"
-                v-model="sortIndexs[column.key || i]"
-                class="n-advance-table__header-icon"
-                :column="column"
-                :index="i"
-                @onSortTypeChange="onSortTypeChange"
-              />
-
-              <!-- 优先自定义 -->
-              {{ column.filterDropdown && column.filterDropdown() }}
-              <!-- 否则默认渲染 -->
-              <PopFilter
-                v-if="column.onFilter && (column.filterItems || column.asyncFilterItems)"
-                v-model="selectedFilter[column.key]"
-                class="n-advance-table__header-icon"
-                :column="column"
-                :items="column.filterItems || column.asyncFilterItems"
-                @on-filter="onFilter"
-              />
-
-            <!-- <filterDropDown
-              v-if="column.filterItems && !column.filterDropdown"
-              :ref="'filterDropDown_' + (column.key || i)"
-              :max-height="column.filterDropDownMaxHeight"
-              :filter-fn="column.onFilter"
-              :filter-key="column.key || i"
-              :filter-items="column.filterItems"
-              :filter-multiple="column.filterMultiple || false"
-              @on-filter="
-                ({ value, key, filterFn }) => onFilter(value, key, filterFn)
-              "
-            /> -->
-            </n-th>
-            <span
-              v-if="scrollBarWidth"
-              :style="
-                'padding-left:' + scrollBarWidth + 'px;' + 'visibility:hidden;'
-              "
-              rowspan="1"
-            />
-          </n-tr>
-        </n-thead>
-      </n-table>
+        :columns="columns"
+        :col-group-stl="colGroup"
+        :scroll-bar-width="scrollBarWidth"
+        :sort-indexs="sortIndexs"
+        :selected-filter="selectedFilter"
+        :showing-data="showingData"
+        @on-checkbox-all="onAllCheckboxesClick"
+        @on-sort-change="onSortTypeChange"
+        @on-filter="onFilter"
+      />
+      <!-- table body -->
       <n-table
         ref="tbody"
         :style="tableStl"
@@ -141,36 +60,52 @@
           <n-tr
             v-for="(rowData, i) in showingData"
             :key="i"
-            :class="typeof rowClassName === 'function' ? rowClassName(rowData,i) : rowClassName"
+            :class="
+              typeof rowClassName === 'function'
+                ? rowClassName(rowData, i)
+                : rowClassName
+            "
           >
-            <n-td
-              v-for="column in columns"
-              :key="column.key"
-              :style="computeAlign(column)"
-              :class="computeTdClass(column, rowData)"
-            >
-              <!-- 批量选择 -->
-              <n-checkbox
-                v-if="column.type === 'selection' && (column.disabled && !column.disabled(rowData,i))"
-                v-model="checkBoxes[rowData._index]"
-              />
-              <n-checkbox
-                v-else-if="column.type === 'selection' && (column.disabled && column.disabled(rowData,i))"
-                v-model="disabledCheckBox[rowData._index]"
-                :disabled="!(disabledCheckBox[rowData._index]=false)"
-              />
-              <n-checkbox
-                v-else-if="column.type === 'selection'"
-                v-model="checkBoxes[rowData._index]"
-              />
-              <row
+            <template v-for="column in columns">
+              <!-- fixed列不显示 -->
+              <n-td v-if="column.fixed" :key="column.key">
+                <i />
+              </n-td>
+              <n-td
                 v-else
-                :index="i"
-                :row="rowData"
-                :key-name="column.key"
-                :render="column.render"
-              />
-            </n-td>
+                :key="column.key"
+                :style="computeAlign(column)"
+                :class="computeTdClass(column, rowData)"
+              >
+                <!-- 批量选择 -->
+                <n-checkbox
+                  v-if="
+                    column.type === 'selection' &&
+                      (column.disabled && !column.disabled(rowData, i))
+                  "
+                  v-model="checkBoxes[rowData._index]"
+                />
+                <n-checkbox
+                  v-else-if="
+                    column.type === 'selection' &&
+                      (column.disabled && column.disabled(rowData, i))
+                  "
+                  v-model="disabledCheckBox[rowData._index]"
+                  :disabled="!(disabledCheckBox[rowData._index] = false)"
+                />
+                <n-checkbox
+                  v-else-if="column.type === 'selection'"
+                  v-model="checkBoxes[rowData._index]"
+                />
+                <row
+                  v-else
+                  :index="i"
+                  :row="rowData"
+                  :key-name="column.key"
+                  :render="column.render"
+                />
+              </n-td>
+            </template>
           </n-tr>
           <div
             v-if="showingData.length === 0"
@@ -178,9 +113,9 @@
           >
             No data
           </div>
-        <!-- <tr style="display:inline-block;width:100%;"> -->
+          <!-- <tr style="display:inline-block;width:100%;"> -->
 
-        <!-- </tr> -->
+          <!-- </tr> -->
         </n-tbody>
         <template v-if="loading">
           <n-spin
@@ -195,10 +130,7 @@
       v-if="pagination !== false && showingData.length"
       class="n-advance-table__pagination"
     >
-      <n-pagination
-        v-model="currentPage"
-        :page-count="pageCount"
-      />
+      <n-pagination v-model="currentPage" :page-count="pageCount" />
     </div>
   </div>
 </template>
@@ -211,6 +143,7 @@ import searchInput from '../searchInput'
 import { noopFn } from '../../../utils/index'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import TableHeader from '../header/header'
 
 export default {
   name: 'NAdvanceTable',
@@ -218,13 +151,10 @@ export default {
     row,
     SortIcon,
     PopFilter,
-    searchInput
-
+    searchInput,
+    TableHeader
   },
-  mixins: [
-    withapp,
-    themeable
-  ],
+  mixins: [withapp, themeable],
   props: {
     search: {
       /**
@@ -400,24 +330,33 @@ export default {
             return this.copyData[idx]
           }
         })
-        .filter((item) => item !== void 0)
+        .filter(item => item !== void 0)
     },
     currentPageSelected () {
       let selectedLen = 0
-      this.showingData.forEach((item) => {
+      this.showingData.forEach(item => {
         let realIdx = item._index
-        if (this.checkBoxes[realIdx] === true && this.disabledCheckBox[realIdx] !== false) {
+        if (
+          this.checkBoxes[realIdx] === true &&
+          this.disabledCheckBox[realIdx] !== false
+        ) {
           selectedLen++
         }
       })
       return selectedLen
     },
     isCheckedBoxAllIndeterminate () {
-      return this.currentPageSelected === this.showingData.length || this.currentPageSelected === 0
+      return (
+        this.currentPageSelected === this.showingData.length ||
+        this.currentPageSelected === 0
+      )
     },
     allCheckboxesSelect: {
       get () {
-        if (this.currentPageSelected === this.showingData.length && this.showingData.length !== 0) {
+        if (
+          this.currentPageSelected === this.showingData.length &&
+          this.showingData.length !== 0
+        ) {
           return true
         }
         return false
@@ -461,7 +400,7 @@ export default {
         if (keys.length) {
           this.currentFilterColumn = {}
         }
-        this.columns.forEach((column) => {
+        this.columns.forEach(column => {
           let key = column.key
           if (keys.includes(key) && val[key] && val[key].length !== 0) {
             // TODO: 未来版本单选将会返回一个数值而不是数组!
@@ -553,13 +492,13 @@ export default {
     selectRow (rowIndexs = []) {
       this.$nextTick(() => {
         if (rowIndexs === 'all') {
-          this.showingData.forEach((item) => {
+          this.showingData.forEach(item => {
             this.checkBoxes[item._index] = true
           })
           this.checkBoxes = [].concat(this.checkBoxes)
         } else {
           if (this.showingData.length > 0) {
-            rowIndexs.forEach((idx) => {
+            rowIndexs.forEach(idx => {
               if (this.showingData[idx]) {
                 const realIdx = this.showingData[idx]._index
                 this.checkBoxes[realIdx] = true
@@ -578,21 +517,22 @@ export default {
      */
     setParams ({ filter, sorter, page, searcher }) {
       if (sorter) {
-        const ref = this.$refs['sorter_' + sorter.key][0]
-        ref.setSort(sorter.type)
+        this.sortIndexs[sorter.key] = sorter.type
+        // const ref = this.$refs['sorter_' + sorter.key][0]
+        // ref.setSort(sorter.type)
         // this.sortIndexs[sorter.key] = sorter.type
       } else {
         // clear
         this.clearSort()
       }
       this.currentFilterColumn &&
-        Object.keys(this.currentFilterColumn).forEach((key) => {
+        Object.keys(this.currentFilterColumn).forEach(key => {
           this.selectedFilter = {}
         })
       if (filter) {
         // ---- TODO: 未来版本将会去除这段代码,为了兼容老版本
-        Object.keys(filter).forEach((key) => {
-          let column = this.columns.find((item) => item.key === key)
+        Object.keys(filter).forEach(key => {
+          let column = this.columns.find(item => item.key === key)
           if (column && !column.filterMultiple) {
             if (filter[key].length) {
               filter[key] = filter[key][0]
@@ -618,7 +558,7 @@ export default {
       // TODO:测试功能 有远程 无远程 ，半有半无
     },
     clearSort () {
-      Object.keys(this.sortIndexs).forEach((key) => {
+      Object.keys(this.sortIndexs).forEach(key => {
         this.sortIndexs[key] = 0
       })
       this.currentSortColumn = null
@@ -681,9 +621,9 @@ export default {
         // this.scrollBarWidth = 5
       })
     },
-    onAllCheckboxesClick () {
-      this.showingData.forEach((item) => {
-        this.checkBoxes[item._index] = this.currentPageAllSelect
+    onAllCheckboxesClick (currentPageAllSelect) {
+      this.showingData.forEach(item => {
+        this.checkBoxes[item._index] = currentPageAllSelect
       })
       this.checkBoxes = [].concat(this.checkBoxes)
     },
@@ -710,7 +650,7 @@ export default {
       let keys = Object.keys(this.currentFilterColumn)
       currentFilterColumn = {}
 
-      keys.forEach((key) => {
+      keys.forEach(key => {
         let val = this.currentFilterColumn[key].value
         let filterFn = this.currentFilterColumn[key].filterFn
         if (filterFn === 'custom') {
@@ -728,7 +668,9 @@ export default {
       if (!this.currentSortColumn) {
         return null
       }
-      const isCustom = (this.currentSortColumn.sortable === 'custom' && this.currentSortColumn.type !== null)
+      const isCustom =
+        this.currentSortColumn.sortable === 'custom' &&
+        this.currentSortColumn.type !== null
       return isCustom ? this.currentSortColumn : null
     },
     useRemoteChange () {
@@ -737,6 +679,11 @@ export default {
       this.remoteTimter = setTimeout(() => {
         const currentFilterColumn = this.getCusomFilterData()
         const currentSortColumn = this.getCusomSorterData()
+        console.log(
+          'TCL: this.remoteTimter -> currentSortColumn',
+          currentSortColumn,
+          this.currentSortColumn
+        )
         const emitData = {
           filter: currentFilterColumn,
           sorter: currentSortColumn,
@@ -744,7 +691,7 @@ export default {
           search: this.currentSearchColumn
         }
         this.$emit('on-change', emitData)
-        this.onChange(emitData)
+        this.onChange && this.onChange(emitData)
       }, 300)
     },
     computeShowingData () {
@@ -755,10 +702,10 @@ export default {
         if (Object.keys(this.currentFilterColumn).length === 0) {
           this.searchData = []
         }
-        Object.keys(this.currentFilterColumn).forEach((key) => {
+        Object.keys(this.currentFilterColumn).forEach(key => {
           const { value, filterFn } = this.currentFilterColumn[key]
           if (value && filterFn !== 'custom') {
-            data = data.filter((item) => {
+            data = data.filter(item => {
               return filterFn(value, item.row)
             })
           }
@@ -767,7 +714,7 @@ export default {
       // compute search
       if (this.currentSearchColumn && this.search.onSearch !== 'custom') {
         const { key, word } = this.currentSearchColumn
-        data = data.filter((item) => {
+        data = data.filter(item => {
           return this.search.onSearch(key, word, item.row)
         })
       }
@@ -812,13 +759,6 @@ export default {
           })
         }
       }
-      if (type !== 0) {
-        Object.keys(this.sortIndexs).forEach((key) => {
-          if (key !== column.key) {
-            this.sortIndexs[key] = 0
-          }
-        })
-      }
       return data
     },
     onFilter (value, column) {
@@ -828,6 +768,11 @@ export default {
       this.$emit('on-filter-change', this.currentFilterColumn)
     },
     onSortTypeChange ({ i, sortable, key, type, column }) {
+      console.log(
+        'TCL: onSortTypeChange -> onSortTypeChange',
+        'onSortTypeChange'
+      )
+      this.$set(this.sortIndexs, key, type)
       this.currentSortColumn = {
         sortable,
         key,
@@ -835,7 +780,7 @@ export default {
         column,
         i
       }
-      if (this.onChange && sortable === 'custom') {
+      if (sortable === 'custom') {
         this.useRemoteChange()
       }
       this.$emit('on-sort-change', this.currentSortColumn)

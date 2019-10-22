@@ -22,7 +22,7 @@
 </template>
 <script>
 // refer to https://github.com/TuSimple/infra-ecos-webui/blob/develop/src/components/SortIcon.vue
-const computeOpacity = (val) => {
+const computeOpacity = val => {
   let self = {}
   switch (val) {
     case 0:
@@ -62,7 +62,8 @@ export default {
     column: {
       type: Object,
       required: true
-    }
+    },
+    currentKey: {}
   },
   data () {
     return {
@@ -72,8 +73,26 @@ export default {
   },
   computed: {
     opacitys () {
+      if (this.currentKey !== this.column.key) {
+        this.upOpacity = 0.4
+        this.downOpacity = 0.4
+        return 0.4
+      }
       let val = this.value
       return computeOpacity(val)
+    }
+  },
+  watch: {
+    value (val) {
+      if (val !== null) {
+        this.$emit('onSortTypeChange', {
+          i: this.index,
+          sortable: this.column.sortable,
+          key: this.column.key || this.index,
+          type: val,
+          column: this.column
+        })
+      }
     }
   },
   mounted () {
@@ -112,14 +131,6 @@ export default {
     },
     setSort (val) {
       this.$emit('input', val)
-      this.$emit('onSortTypeChange', {
-        i: this.index,
-        sortable: this.column.sortable,
-        key: this.column.key || this.index,
-        type: val,
-        column: this.column
-      })
-      // this.changeOpacity(val)
     }
   }
 }
