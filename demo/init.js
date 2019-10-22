@@ -63,7 +63,7 @@ import spin from './documentation/components/spin'
 import drawer from './documentation/components/drawer'
 import loadingBar from './documentation/components/loadingBar'
 import time from './documentation/components/time'
-import sliderDemo from './documentation/components/sliderDemo'
+import slider from './documentation/components/slider'
 import treeDemo from './documentation/components/treeDemo'
 import affix from './documentation/components/affix'
 
@@ -183,7 +183,7 @@ const routes = [
       { path: '/n-drawer', component: drawer },
       { path: '/n-loading-bar', component: loadingBar },
       { path: '/n-time', component: time },
-      { path: '/n-slider', component: sliderDemo },
+      { path: '/n-slider', component: slider },
       { path: '/n-tree', component: treeDemo },
       { path: '/n-vertical-align-debug', component: verticalAlignDebug },
       { path: '/n-affix', component: affix }
