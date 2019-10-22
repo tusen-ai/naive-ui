@@ -5,6 +5,7 @@
   :step="10"
 />
 <n-input-number
+  size="small"
   v-model="value"
 />
 ```
@@ -15,5 +16,10 @@ export default {
       value: 50
     }
   }
+}
+```
+```css
+.n-slider {
+  margin-bottom: 8px;
 }
 ```

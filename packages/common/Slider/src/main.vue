@@ -4,7 +4,8 @@
     :class="{
       'n-slider--disabled': disabled,
       'n-slider--active': active,
-      'n-slider--with-mark': marks
+      'n-slider--with-mark': marks,
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
   >
     <div
@@ -67,7 +68,6 @@
       }"
     >
       <div
-
         ref="content"
         class="n-detached-content"
       >
@@ -75,6 +75,9 @@
           <div
             v-if="showTooltip"
             class="n-slider-handle-indicator"
+            :class="{
+              [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+            }"
           >
             {{ activeHandleValue || tooltipHoverDisplayValue }}
           </div>
@@ -89,6 +92,8 @@ import throttle from 'lodash/throttle'
 import hollowoutable from '../../../mixins/hollowoutable'
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 
 function handleFirstHandleMouseMove (e) {
   const railRect = this.$refs.rail.getBoundingClientRect()
@@ -112,7 +117,7 @@ function handleSecondHandleMouseMove (e) {
 
 export default {
   name: 'NSlider',
-  mixins: [hollowoutable, detachable, placeable],
+  mixins: [withapp, themeable, hollowoutable, detachable, placeable],
   props: {
     marks: {
       type: Object,

@@ -33,6 +33,7 @@
 @import "components/Radio.scss";
 @import "components/Steps.scss";
 @import "components/InputNumber.scss";
+@import "components/Slider.scss";
 
 @mixin setup-light-theme() {
   @include setup-light-colors();
@@ -89,4 +90,5 @@
   @include setup-light-radio;
   @include setup-light-steps;
   @include setup-light-input-number;
+  @include setup-light-slider;
 }

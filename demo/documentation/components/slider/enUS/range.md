@@ -6,9 +6,11 @@
   :step="1"
 />
 <n-input-number
+  size="small"
   v-model="value[0]"
 />
 <n-input-number
+  size="small"
   v-model="value[1]"
 />
 ```
@@ -19,5 +21,13 @@ export default {
       value: [50, 70]
     }
   }
+}
+```
+```css
+.n-slider {
+  margin-bottom: 8px;
+}
+.n-input-number {
+  margin: 0 12px 8px 0;
 }
 ```

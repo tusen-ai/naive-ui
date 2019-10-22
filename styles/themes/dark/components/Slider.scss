@@ -1,0 +1,24 @@
+@mixin setup-dark-slider {
+  $--slider-rail-background-color: (
+    'default': rgba(255, 255, 255, .2),
+    'hover': rgba(255, 255, 255, .3)
+  ) !global;
+  $--slider-rail-fill-background-color: (
+    'default': $--primary-9,
+    'hover': $--primary-6
+  ) !global;
+  $--slider-handle-background-color: black !global;
+  $--slider-handle-box-shadow: (
+    'default': inset 0 0 0 2px $--primary-9,
+    'hover': inset 0 0 0 2px $--primary-6,
+    'active': (inset 0 0 0 2px $--primary-6, 0 0 0 3px change-color($--primary-6, $alpha: .2)),
+    'focus': (inset 0 0 0 2px $--primary-6, 0 0 0 3px change-color($--primary-6, $alpha: .2))
+  ) !global;
+  $--slider-indicator-background-color: $--n-dialog-color !global;
+  $--slider-indicator-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .12) !global;
+  $--slider-indicator-color: $--n-secondary-text-color !global;
+  $--slider-dot-box-shadow: (
+    'default': inset 0 0 0 2px $--primary-9,
+    'active': inset 0 0 0 2px $--primary-6
+  ) !global;
+}

@@ -33,6 +33,7 @@
 @import "components/Radio.scss";
 @import "components/Steps.scss";
 @import "components/InputNumber.scss";
+@import "components/Slider.scss";
 
 @mixin setup-dark-theme() {
   @include setup-dark-colors();
@@ -93,4 +94,5 @@
   @include setup-dark-radio;
   @include setup-dark-step;
   @include setup-dark-input-number;
+  @include setup-dark-slider;
 }
