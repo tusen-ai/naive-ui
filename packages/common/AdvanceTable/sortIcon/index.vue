@@ -23,26 +23,22 @@
 <script>
 // refer to https://github.com/TuSimple/infra-ecos-webui/blob/develop/src/components/SortIcon.vue
 const computeOpacity = val => {
-  let self = {}
+  let upOpacity = 0.4
+  let downOpacity = 0.4
   switch (val) {
-    case 0:
-      self.upOpacity = 0.4
-      self.downOpacity = 0.4
-      break
     case 1:
-      self.upOpacity = 1
-      self.downOpacity = 0.4
+      upOpacity = 1
+      downOpacity = 0.4
       break
     case -1:
-      self.upOpacity = 0.4
-      self.downOpacity = 1
-      break
-    case null:
-      self.upOpacity = 0.4
-      self.downOpacity = 0.4
+      upOpacity = 0.4
+      downOpacity = 1
       break
   }
-  return self
+  return {
+    downOpacity,
+    upOpacity
+  }
 }
 export default {
   name: 'SortIcon',
@@ -63,7 +59,10 @@ export default {
       type: Object,
       required: true
     },
-    currentKey: {}
+    currentKey: {
+      type: [String, Number],
+      required: true
+    }
   },
   data () {
     return {
@@ -73,27 +72,31 @@ export default {
   },
   computed: {
     opacitys () {
+      const normalOpacity = 0.4
       if (this.currentKey !== this.column.key) {
-        this.upOpacity = 0.4
-        this.downOpacity = 0.4
-        return 0.4
+        return {
+          upOpacity: normalOpacity,
+          downOpacity: normalOpacity
+        }
       }
       let val = this.value
       return computeOpacity(val)
     }
   },
   watch: {
-    value (val) {
-      if (val !== null) {
-        this.$emit('onSortTypeChange', {
-          i: this.index,
-          sortable: this.column.sortable,
-          key: this.column.key || this.index,
-          type: val,
-          column: this.column
-        })
-      }
-    }
+    // value (val, pldVal) {
+    //   if (val !== null) {
+    //     console.log('from watch', val, pldVal)
+    //     const sorter = {
+    //       i: this.index,
+    //       sortable: this.column.sortable,
+    //       key: this.column.key || this.index,
+    //       type: val,
+    //       column: this.column
+    //     }
+    //     this.$emit('on-sort-change', val, this.column, sorter)
+    //   }
+    // }
   },
   mounted () {
     if (this.value !== 0 && this.value !== null) {
@@ -130,7 +133,14 @@ export default {
       }
     },
     setSort (val) {
-      this.$emit('input', val)
+      const sorter = {
+        i: this.index,
+        sortable: this.column.sortable,
+        key: this.column.key || this.index,
+        type: val,
+        column: this.column
+      }
+      this.$emit('input', val, this.column, sorter)
     }
   }
 }

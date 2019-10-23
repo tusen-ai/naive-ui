@@ -10,9 +10,9 @@
         v-for="(column, i) in columns"
         :key="i"
         :style="computeCustomWidthStl(column)"
-      >
+      />
 
-      <col v-if="scrollBarWidth" :width="scrollBarWidth" >
+      <col v-if="scrollBarWidth" :width="scrollBarWidth" />
     </colgroup>
     <n-thead>
       <n-tr>
@@ -51,11 +51,10 @@
               :ref="'sorter_' + (column.key || i)"
               :value="sortIndexs[column.key || i]"
               class="n-advance-table__header-icon"
-              @input="sortInput"
-              :current-key="currentKey"
               :column="column"
               :index="i"
-              @onSortTypeChange="onSortTypeChange"
+              :current-key="currentKey"
+              @input="sortInput"
             />
 
             <!-- 优先自定义 -->
@@ -98,12 +97,30 @@ export default {
     PopFilter
   },
   props: {
-    colGroupStl: {},
-    columns: {},
-    scrollBarWidth: {},
-    sortIndexs: {},
-    selectedFilter: {},
-    showingData: {}
+    colGroupStl: {
+      type: Object,
+      default: () => ({})
+    },
+    columns: {
+      type: Array,
+      default: () => []
+    },
+    scrollBarWidth: {
+      type: [Number, String],
+      default: 0
+    },
+    sortIndexs: {
+      type: Object,
+      default: () => ({})
+    },
+    selectedFilter: {
+      type: Object,
+      default: () => ({})
+    },
+    showingData: {
+      type: Array,
+      default: () => []
+    }
   },
   data () {
     return {
@@ -118,12 +135,13 @@ export default {
       )
     },
     currentKey () {
-      let currentKey = null
+      let currentKey = ''
       Object.keys(this.sortIndexs).forEach(key => {
         if (this.sortIndexs[key] !== null) {
           currentKey = key
         }
       })
+      // console.log('TCL: currentKey -> currentKey', currentKey)
       return currentKey
     }
   },
@@ -138,8 +156,11 @@ export default {
         }
       }
     },
-    sortInput (value, column) {
-      this.$set(this.sortIndexs, column.key, value)
+    sortInput (value, column, sorter) {
+      const sortIndexs = {}
+      sortIndexs[column.key] = value
+      // console.log('TCL: sortInput -> value', sortIndexs)
+      this.$emit('on-sort-change', sortIndexs)
     },
     sortByColumn (column) {
       if (!column.sortable || column.key === void 0) return
@@ -165,19 +186,15 @@ export default {
       }
       return null
     },
-    clearSort () {
+    clearOtherSort (notClearKey) {
+      const sortIndexs = {}
       Object.keys(this.sortIndexs).forEach(key => {
-        this.sortIndexs[key] = null
+        if (key !== notClearKey) sortIndexs[key] = null
       })
+      return sortIndexs
     },
     onAllCheckboxesClick () {
       this.$emit('on-checkbox-all', this.currentPageAllSelect)
-    },
-    onSortTypeChange (sorter) {
-      this.clearSort()
-      this.sortInput(sorter.type, sorter.column)
-      console.log('TCL: onSortTypeChange -> sorter', sorter)
-      this.$emit('on-sort-change', sorter)
     },
     onFilter (value, column) {
       this.$emit('on-filter', value, column)

@@ -1,4 +1,5 @@
 # Senior Usage
+
 ```html
 <n-advance-table
   ref="table"
@@ -11,10 +12,7 @@
   @on-change="onChange"
 >
   <div slot="table-operation-batch-left">
-    <n-button
-      size="small"
-      @click="clear"
-    >
+    <n-button size="small" @click="clear">
       clear all filters
     </n-button>
   </div>
@@ -22,6 +20,7 @@
 <h1>Network params</h1>
 <pre>{{ query }}</pre>
 ```
+
 ```js
 const items = [
   {
@@ -55,7 +54,7 @@ const sex = [
     value: 'female'
   }
 ]
-const _columns3 = ($this) => {
+const _columns3 = $this => {
   return [
     {
       title: 'Name',
@@ -69,11 +68,11 @@ const _columns3 = ($this) => {
       title: 'Age',
       key: 'age',
       sortable: true,
-      sorter (a, b) {
+      sorter(a, b) {
         return a.age - b.age
       },
       // filterMultiple: true,
-      asyncFilterItems () {
+      asyncFilterItems() {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
             // 模拟概率发生错误
@@ -95,7 +94,7 @@ const _columns3 = ($this) => {
         return values.includes(record.sex)
       },
       filterMultiple: true,
-      asyncFilterItems () {
+      asyncFilterItems() {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
             Math.random() > 0.6
@@ -123,7 +122,7 @@ const _columns3 = ($this) => {
 }
 export default {
   components: {},
-  data () {
+  data() {
     const columns = _columns3(this)
     return {
       loading: false,
@@ -140,15 +139,15 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     this.$refs.table.setParams({
       filter: { age: [15] },
-      sorter: { key: 'age', type: -1 },
+      sorter: { key: 'name', type: -1 },
       searcher: { key: 'name', value: 'xiaobai' }
     })
   },
   methods: {
-    getData (args) {
+    getData(args) {
       this.loading = true
       setTimeout(() => {
         let d = new Array(20).fill(0)
@@ -163,7 +162,8 @@ export default {
         this.loading = false
       }, 3000)
     },
-    onChange (args) {
+    onChange(args) {
+      console.log('reomte change')
       this.query = args
       /**
        * "filter": {
@@ -199,7 +199,7 @@ export default {
        */
       this.getData(args)
     },
-    clear () {
+    clear() {
       // 清除所有的Filter选项,会触发onchange事件
       this.$refs.table.setParams({})
       this.$NMessage.info('clear all filters', { duration: 5000 })

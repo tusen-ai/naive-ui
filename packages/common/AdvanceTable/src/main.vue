@@ -39,7 +39,7 @@
         :selected-filter="selectedFilter"
         :showing-data="showingData"
         @on-checkbox-all="onAllCheckboxesClick"
-        @on-sort-change="onSortTypeChange"
+        @on-sort-change="onSortChange"
         @on-filter="onFilter"
       />
       <!-- table body -->
@@ -137,8 +137,8 @@
 
 <script>
 import row from '../row/index.js'
-import SortIcon from '../sortIcon'
-import PopFilter from '../popFilter'
+// import SortIcon from '../sortIcon'
+// import PopFilter from '../popFilter'
 import searchInput from '../searchInput'
 import { noopFn } from '../../../utils/index'
 import withapp from '../../../mixins/withapp'
@@ -149,8 +149,8 @@ export default {
   name: 'NAdvanceTable',
   components: {
     row,
-    SortIcon,
-    PopFilter,
+    // SortIcon,
+    // PopFilter,
     searchInput,
     TableHeader
   },
@@ -234,7 +234,6 @@ export default {
       tbodyWidth: 'auto;',
       scrollBarWidth: '0',
       searchData: [],
-      currentSortColumn: null,
       currentFilterColumn: null,
       currentSearchColumn: null,
       currentPage: 1,
@@ -245,6 +244,33 @@ export default {
     }
   },
   computed: {
+    currentSortColumn () {
+      let sorterKey = null
+      let i = 0
+      console.log(this.sortIndexs)
+      Object.keys(this.sortIndexs).forEach(key => {
+        if (this.sortIndexs[key] !== null) {
+          sorterKey = key
+        }
+      })
+      if (!sorterKey) {
+        return null
+      }
+      let sorterColumn = this.columns.find((column, idx) => {
+        i = idx
+        return column.key === sorterKey
+      })
+      if (!sorterColumn) {
+        return null
+      }
+      return {
+        sortable: sorterColumn.sortable,
+        key: sorterKey,
+        type: this.sortIndexs[sorterKey],
+        column: sorterColumn,
+        i
+      }
+    },
     paginationer () {
       if (this.pagination) {
         return {
@@ -369,9 +395,6 @@ export default {
         this.useRemoteChange()
       }
       this.currentPageAllSelect = this.allCheckboxesSelect
-
-      console.log('currentPage')
-
       this.$emit('on-page-change', this.paginationer)
     },
     data () {
@@ -385,9 +408,16 @@ export default {
     currentSearchColumn () {
       this.searchData = this.computeShowingData()
     },
-    currentSortColumn () {
+    currentSortColumn (sorter, oldSorter) {
       this.searchData = this.computeShowingData()
-      console.log('currentSortColumn')
+      //  上次的若是为custom,本次为locale sort那么也需要触发useRemoteChange
+      if (
+        sorter.sortable === 'custom' ||
+        (oldSorter && oldSorter.sortable === 'custom')
+      ) {
+        this.useRemoteChange()
+      }
+      this.$emit('on-sort-change', this.currentSortColumn)
     },
     checkBoxes () {
       this.$emit('on-selected-change', this.selectedRows)
@@ -517,7 +547,9 @@ export default {
      */
     setParams ({ filter, sorter, page, searcher }) {
       if (sorter) {
-        this.sortIndexs[sorter.key] = sorter.type
+        // console.log('this.sortIndexs', this.sortIndexs)
+        this.$set(this.sortIndexs, sorter.key, sorter.type)
+        // this.sortIndexs[sorter.key] = sorter.type
         // const ref = this.$refs['sorter_' + sorter.key][0]
         // ref.setSort(sorter.type)
         // this.sortIndexs[sorter.key] = sorter.type
@@ -767,23 +799,9 @@ export default {
       }
       this.$emit('on-filter-change', this.currentFilterColumn)
     },
-    onSortTypeChange ({ i, sortable, key, type, column }) {
-      console.log(
-        'TCL: onSortTypeChange -> onSortTypeChange',
-        'onSortTypeChange'
-      )
-      this.$set(this.sortIndexs, key, type)
-      this.currentSortColumn = {
-        sortable,
-        key,
-        type,
-        column,
-        i
-      }
-      if (sortable === 'custom') {
-        this.useRemoteChange()
-      }
-      this.$emit('on-sort-change', this.currentSortColumn)
+    onSortChange (sortIndexs) {
+      console.log('TCL: onSortTypeChange -> sortIndexs', sortIndexs)
+      this.sortIndexs = sortIndexs
     }
   }
 }
