@@ -245,12 +245,12 @@
   position: relative;
   @include not-m(vertical) {
     @include b(button) {
-      &:first-child {
+      &:first-child:not(:last-child) {
         margin-right: 0!important;
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
       }
-      &:last-child {
+      &:last-child:not(:first-child) {
         margin-left: 0!important;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;

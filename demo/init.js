@@ -16,14 +16,14 @@ import status from './documentation/intro/status'
 import nimbusServiceLayoutDemo from './documentation/components/nimbusServiceLayoutDemo'
 import homeDemo from './documentation/components/homeDemo'
 import gradientText from './documentation/components/gradientText'
-import iconDemo from './documentation/components/iconDemo'
+import icon from './documentation/components/icon'
 import checkbox from './documentation/components/checkbox'
 import button from './documentation/components/button'
 import switchDemo from './documentation/components/switch'
 import input from './documentation/components/input'
 import select from './documentation/components/select'
 import cascader from './documentation/components/cascader'
-import inputKeyValuePairsDemo from './documentation/components/inputKeyValuePairsDemo'
+import inputPairs from './documentation/components/inputPairs'
 import modal from './documentation/components/modal'
 import nimbusFormCardDemo from './documentation/components/nimbusFormCardDemo'
 import message from './documentation/components/message'
@@ -130,7 +130,7 @@ const routes = [
       { path: '/n-nimbus-service-layout', component: nimbusServiceLayoutDemo },
       { path: '/n-nimbus-home-layout', component: homeDemo },
       { path: '/n-gradient-text', component: gradientText },
-      { path: '/n-icon', component: iconDemo },
+      { path: '/n-icon', component: icon },
       { path: '/n-checkbox', component: checkbox },
       { path: '/n-button', component: button },
       { path: '/n-switch', component: switchDemo },
@@ -139,7 +139,7 @@ const routes = [
       { path: '/n-input', component: input },
       { path: '/n-select', component: select },
       { path: '/n-cascader', component: cascader },
-      { path: '/n-InputKeyValuePairs', component: inputKeyValuePairsDemo },
+      { path: '/n-custom-input', component: inputPairs },
       { path: '/n-modal', component: modal },
       { path: '/n-nimbus-form-card', component: nimbusFormCardDemo },
       { path: '/n-message', component: message },

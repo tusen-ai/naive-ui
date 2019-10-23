@@ -129,6 +129,10 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-confirm'
             },
             {
+              name: 'CustomInput',
+              path: `/${this.lang}/${this.theme}` + '/n-custom-input'
+            },
+            {
               name: 'DatePicker',
               path: `/${this.lang}/${this.theme}` + '/n-date-picker'
             },
@@ -164,10 +168,6 @@ export default {
             {
               name: 'InputNumber',
               path: `/${this.lang}/${this.theme}` + '/n-input-number'
-            },
-            {
-              name: 'InputKeyValuePairs',
-              path: `/${this.lang}/${this.theme}` + '/n-InputKeyValuePairs'
             },
             {
               name: 'LoadingBar',

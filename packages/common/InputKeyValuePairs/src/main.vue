@@ -35,21 +35,18 @@
         </div>
         <div class="n-input-key-value__item--action">
           <!-- <span> -->
-          <n-icon
-            class="n-input-key-value__item--action--icon"
-            type="md-remove-circle"
-            size="30"
-            color="#C0818B"
-            @click="remove(index)"
-          />
-          <n-icon
-            v-if="index==value.length-1"
-            class="n-input-key-value__item--action--icon"
-            type="md-add-circle"
-            size="30"
-            color="#4DB199"
-            @click="add"
-          />
+          <n-button-group>
+            <n-button
+              icon="md-remove"
+              circle
+              @click="remove(index)"
+            />
+            <n-button
+              icon="md-add"
+              circle
+              @click="add"
+            />
+          </n-button-group>
         <!-- </span> -->
         </div>
       </div>
@@ -60,12 +57,14 @@
 </template>
 
 <script>
+import NButton from '../../Button'
+import NButtonGroup from '../../Button/src/ButtonGroup'
 
 export default {
-  name: 'NInputKeyValuePairs',
-  model: {
-    prop: 'value',
-    event: 'input'
+  name: 'NCustomInput',
+  components: {
+    NButtonGroup,
+    NButton
   },
   props: {
     value: {
