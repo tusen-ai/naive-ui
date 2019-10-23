@@ -4,7 +4,7 @@
   v-model="value"
   placeholder="Please Select Something"
   :options="options"
-  all
+  :leaf-only="false"
 />
 ```
 ```js

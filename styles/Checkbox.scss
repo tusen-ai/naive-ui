@@ -29,6 +29,7 @@
         @include e(line-mark, check-mark) {
           path {
             transition: fill .3s $default-cubic-bezier;
+            fill: $--checkbox-icon-fill;
           }
         }
         @include e(line-mark) {

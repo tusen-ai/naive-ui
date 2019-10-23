@@ -29,6 +29,7 @@
       <n-base-select-menu
         v-if="selectMenuActive"
         ref="selectMenu"
+        :theme="NCascader.synthesizedTheme"
         class="n-cascader-select-menu"
         filterable
         :pattern="pattern"
@@ -43,6 +44,7 @@
     <n-base-menu-mask
       ref="mask"
       v-model="masked"
+      :duration="3000"
     />
   </div>
 </template>
@@ -62,6 +64,11 @@ import {
 
 export default {
   name: 'NCascaderMenu',
+  inject: {
+    NCascader: {
+      default: null
+    }
+  },
   components: {
     NCascaderSubmenu,
     NBaseSelectMenu,
@@ -70,7 +77,7 @@ export default {
   props: {
     size: {
       type: String,
-      default: 'default'
+      default: 'medium'
     },
     pattern: {
       type: String,
@@ -217,6 +224,12 @@ export default {
     }
   },
   watch: {
+    menuModel () {
+      this.$nextTick().then(() => {
+        // console.log('menu model')
+        this.$parent.updatePosition()
+      })
+    },
     selectMenuActive (selectMenuActive) {
       this.$nextTick().then(() => {
         this.handleMenuTypeChange(selectMenuActive)
@@ -331,7 +344,7 @@ export default {
       }
     },
     handleOptionClick (e, option) {
-      if (this.expandTriggeredByClick && !option.disabled) {
+      if (!option.disabled) {
         this.updateActiveId(option.id)
         this.updateTrackId(option.id)
         if (option.isLeaf) {
@@ -348,6 +361,9 @@ export default {
             el,
             (el, activatorRect) => {
               el.style.minWidth = activatorRect.width + 'px'
+            },
+            {
+              horizontal: true
             }
           )
         } else {

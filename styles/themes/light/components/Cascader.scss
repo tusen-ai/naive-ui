@@ -1,0 +1,15 @@
+@mixin setup-light-cascader {
+  $--cascader-menu-background-color: $--n-dialog-color !global;
+  $--cascader-option-text-color: (
+    'default': $--n-secondary-text-color,
+    'active': $--n-primary-color,
+    'disabled': $--n-disabled-text-color,
+    'disabled-active': change-color($--n-primary-color, $alpha: .4)
+  ) !global;
+  $--cascader-menu-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .12) !global;
+  $--cascader-menu-border-color: $--n-divider-color !global;
+  $--cascader-menu-lightbar-background-color: mix($--n-primary-color, $--n-dialog-color, 15%) !global;
+  $--cascader-option-arrow-background-color: rgba(0, 0, 0, 0.2) !global;
+  $--cascader-menu-mask-background-color: change-color($--n-dialog-color, $alpha: .75) !global;
+  $--cascader-menu-mask-text-color: $--n-secondary-text-color !global;
+}

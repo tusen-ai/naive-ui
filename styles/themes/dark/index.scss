@@ -34,6 +34,7 @@
 @import "components/Steps.scss";
 @import "components/InputNumber.scss";
 @import "components/Slider.scss";
+@import "components/Cascader.scss";
 
 @mixin setup-dark-theme() {
   @include setup-dark-colors();
@@ -95,4 +96,5 @@
   @include setup-dark-step;
   @include setup-dark-input-number;
   @include setup-dark-slider;
+  @include setup-dark-cascader;
 }

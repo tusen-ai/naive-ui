@@ -2,11 +2,13 @@
   <div
     class="n-cascader-option"
     :class="{
+      'n-cascader-option--selected': type === 'single' && value === NCascader.value,
       'n-cascader-option--active': active && !isLeaf,
       'n-cascader-option--tracked': tracked,
       'n-cascader-option--disabled': disabled,
       'n-cascader-option--not-leaf': !isLeaf,
-      'n-cascader-option--loading': loading
+      'n-cascader-option--loading': loading,
+      'n-cascader-option--single-type': type === 'single'
     }"
     :data-n-cascader-option-id="optionId"
     @click="handleClick"
@@ -19,7 +21,7 @@
     >
       <n-checkbox
         :disabled="disabled"
-        :value="checkboxChecked"
+        :checked="checkboxChecked"
         :indeterminate="checkboxIndeterminate"
         @click.stop="handleOptionCheck"
       />
@@ -39,21 +41,24 @@
       v-else-if="type==='single' && isLeaf"
       class="n-cascader-option__checkbox"
     >
-      <n-checkbox
+      <!-- <n-checkbox
         :disabled="disabled"
-        :value="checked"
+        :checked="checked"
         @click.stop="handleOptionCheck"
-      />
+      /> -->
     </div>
     <span
       class="n-cascader-option__label"
     >{{ label }}
     </span>
-    <div
-      class="n-cascader-option__loading"
-    >
-      <n-base-loading />
-    </div>
+    <transition name="n-fade-in--transition">
+      <div
+        v-if="loading"
+        class="n-cascader-option__loading"
+      >
+        <n-base-loading :theme="NCascader.synthesizedTheme" />
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -64,6 +69,11 @@ import NBaseLoading from '../../../base/Loading'
 
 export default {
   name: 'NCascaderOption',
+  inject: {
+    NCascader: {
+      default: null
+    }
+  },
   components: {
     NCheckbox,
     NRadio,

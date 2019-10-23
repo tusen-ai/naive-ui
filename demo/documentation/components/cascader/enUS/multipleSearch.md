@@ -6,7 +6,7 @@
   :options="options"
   filterable
   multiple
-  all
+  :leaf-only="false"
 />
 ```
 ```js

@@ -1,6 +1,7 @@
 # Cascader
 ```demo
 single-leaf-only
+trigger
 multiple-leaf-only
 single
 multiple

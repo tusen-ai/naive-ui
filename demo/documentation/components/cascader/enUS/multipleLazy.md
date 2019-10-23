@@ -3,7 +3,7 @@
 <n-cascader
   v-model="value"
   multiple
-  all
+  :leaf-only="false"
   placeholder="Please Select Something"
   :options="options"
   lazy

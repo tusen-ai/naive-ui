@@ -8,6 +8,14 @@ function getActivatorEl (componentInstance) {
   return componentInstance.currentActivatorEl || componentInstance.$refs.activator.$el || componentInstance.$refs.activator
 }
 
+function sortOrigin (origin) {
+  const origins = origin.split(' ')
+  if (origins.length === 2) {
+    if (origins[0] === 'left' || origins[0] === 'right') return origins[1] + ' ' + origins[0]
+  }
+  return origin
+}
+
 /**
  * Make $refs.content trace $refs.activator, set $refs.contentInner width by the way
  *
@@ -114,9 +122,10 @@ export default {
       this.trackingElement.style.transformOrigin = 'top left'
       this.trackingElement.setAttribute('n-suggested-transform-origin', 'top left')
     },
-    updatePosition (el, cb) {
+    updatePosition (el, cb, keepOrigin = false) {
       // console.log('scroll')
       if (!this.active && !this.show) return
+      // console.log('update position', el, cb, keepOrigin)
       // console.log('[placeable.updatePosition]')
       this._getTrackedElement()
       this._getTrackingElement()
@@ -136,14 +145,35 @@ export default {
       // console.log(contentBoundingClientRect)
       // debugger
       // console.log('scroll', activatorBoundingClientRect, contentBoundingClientRect)
-      const [placementTransform, suggsetedTransformOrigin] = calcPlacementTransfrom(this.placement, activatorBoundingClientRect, contentBoundingClientRect)
+      const [placementTransform, suggestedTransformOrigin] = calcPlacementTransfrom(this.placement, activatorBoundingClientRect, contentBoundingClientRect)
       this.trackingElement.style.position = 'absolute'
       this.trackingElement.style.top = placementTransform.top
       this.trackingElement.style.left = placementTransform.left
       this.trackingElement.style.right = placementTransform.right
       this.trackingElement.style.bottom = placementTransform.bottom
-      this.trackingElement.style.transformOrigin = suggsetedTransformOrigin
-      this.trackingElement.setAttribute('n-suggested-transform-origin', suggsetedTransformOrigin)
+      // if (suggestedTransformOrigin === 'left bottom') {
+      //   debugger
+      // }
+      // console.log(' !!! ', suggestedTransformOrigin)
+      if (keepOrigin === false) {
+        this.trackingElement.style.transformOrigin = suggestedTransformOrigin
+        this.trackingElement.setAttribute('n-suggested-transform-origin', suggestedTransformOrigin)
+      } else if (keepOrigin !== true) {
+        if (keepOrigin.horizontal) {
+          const originalTransformOrigin = this.trackingElement.style.transformOrigin
+          if (originalTransformOrigin && suggestedTransformOrigin) {
+            if (suggestedTransformOrigin.match(/top/)) {
+              this.trackingElement.style.transformOrigin = originalTransformOrigin.replace(/(top|bottom)/g, 'top')
+              this.trackingElement.setAttribute('n-suggested-transform-origin', sortOrigin(originalTransformOrigin.replace(/(top|bottom)/g, 'top')))
+            }
+            if (suggestedTransformOrigin.match(/bottom/)) {
+              this.trackingElement.style.transformOrigin = sortOrigin(originalTransformOrigin.replace(/(top|bottom)/g, 'bottom'))
+              this.trackingElement.setAttribute('n-suggested-transform-origin', sortOrigin(originalTransformOrigin.replace(/(top|bottom)/g, 'bottom')))
+            }
+          }
+        }
+      }
+
       // console.log(this.$refs.contentInner)
       if (this.$refs.contentInner) {
         let el = this.$refs.contentInner

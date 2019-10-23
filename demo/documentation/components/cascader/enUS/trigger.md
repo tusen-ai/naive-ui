@@ -1,11 +1,16 @@
-# Filterable Single
+# Trigger (Leaf Only)
 ```html
 <n-cascader
   v-model="value"
   placeholder="Please Select Something"
   :options="options"
-  filterable
-  :leaf-only="false"
+  expand-trigger="click"
+/>
+<n-cascader
+  v-model="value"
+  placeholder="Please Select Something"
+  :options="options"
+  expand-trigger="hover"
 />
 ```
 ```js
@@ -46,5 +51,11 @@ export default {
       options: genOptions()
     }
   }
+}
+```
+
+```css
+.n-cascader {
+  margin-bottom: 12px;
 }
 ```
