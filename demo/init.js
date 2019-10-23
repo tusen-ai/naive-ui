@@ -23,7 +23,7 @@ import button from './documentation/components/button'
 import switchDemo from './documentation/components/switch'
 import input from './documentation/components/input'
 import select from './documentation/components/select'
-import cascaderDemo from './documentation/components/cascaderDemo'
+import cascader from './documentation/components/cascader'
 import inputKeyValuePairsDemo from './documentation/components/inputKeyValuePairsDemo'
 import modal from './documentation/components/modal'
 import nimbusFormCardDemo from './documentation/components/nimbusFormCardDemo'
@@ -140,7 +140,7 @@ const routes = [
       { path: '/n-advance-table', component: advancedTable },
       { path: '/n-input', component: input },
       { path: '/n-select', component: select },
-      { path: '/n-cascader', component: cascaderDemo },
+      { path: '/n-cascader', component: cascader },
       { path: '/n-InputKeyValuePairs', component: inputKeyValuePairsDemo },
       { path: '/n-modal', component: modal },
       { path: '/n-nimbus-form-card', component: nimbusFormCardDemo },
