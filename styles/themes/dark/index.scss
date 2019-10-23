@@ -35,6 +35,7 @@
 @import "components/InputNumber.scss";
 @import "components/Slider.scss";
 @import "components/Cascader.scss";
+@import "components/Tabs.scss";
 
 @mixin setup-dark-theme() {
   @include setup-dark-colors();
@@ -97,4 +98,5 @@
   @include setup-dark-input-number;
   @include setup-dark-slider;
   @include setup-dark-cascader;
+  @include setup-dark-tabs;
 }

@@ -16,9 +16,9 @@
       <!--EXAMPLE_END-->
     </div>
     <pre class="n-doc-section__inspect">v-model: {{ test1 }}</pre>
-    <n-doc-source-block>
+    <pre>
       <!--SOURCE-->
-    </n-doc-source-block>
+    </pre>
   </div>
 </template>
 

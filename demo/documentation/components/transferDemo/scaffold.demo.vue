@@ -25,9 +25,9 @@
     </div>
     <pre class="n-doc-section__inspect">{{ JSON.stringify(value) }}</pre>
     <pre class="n-doc-section__inspect">{{ $refs.transfer ? $refs.transfer._data : null }}</pre>
-    <n-doc-source-block>
+    <pre>
       <!--SOURCE-->
-    </n-doc-source-block>
+    </pre>
   </div>
 </template>
 

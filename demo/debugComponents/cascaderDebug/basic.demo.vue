@@ -20,9 +20,9 @@
       <!--EXAMPLE_END-->
     </div>
     <pre class="n-doc-section__inspect">v-model: {{ JSON.stringify(value) }}</pre>
-    <n-doc-source-block>
+    <pre>
       <!--SOURCE-->
-    </n-doc-source-block>
+    </pre>
   </div>
 </template>
 

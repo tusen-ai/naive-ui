@@ -35,6 +35,7 @@
 @import "components/InputNumber.scss";
 @import "components/Slider.scss";
 @import "components/Cascader.scss";
+@import "components/Tabs.scss";
 
 @mixin setup-light-theme() {
   @include setup-light-colors();
@@ -93,4 +94,5 @@
   @include setup-light-input-number;
   @include setup-light-slider;
   @include setup-light-cascader;
+  @include setup-light-tabs;
 }

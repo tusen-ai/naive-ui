@@ -14,9 +14,9 @@
         checkable
       /> <!--EXAMPLE_END-->
     </div>
-    <n-doc-source-block>
+    <pre>
       <!--SOURCE-->
-    </n-doc-source-block>
+    </pre>
   </div>
 </template>
 

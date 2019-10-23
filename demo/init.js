@@ -6,7 +6,6 @@ import './styles/atom-one-light.scss'
 import './styles/markdown.scss'
 import './styles/font.scss'
 import NaiveUI from '../index'
-import SourceBlock from './SourceBlock'
 import VueI18n from 'vue-i18n'
 
 import intro from './documentation/intro/intro'
@@ -92,7 +91,6 @@ const i18n = new VueI18n({
   locale: 'en-us'
 })
 
-Vue.component(SourceBlock.name, SourceBlock)
 Vue.component('ComponentDemo', ComponentDemo)
 Vue.component('ComponentDemos', ComponentDemos)
 Vue.component('DocumentationWrapper', DocumentationWrapper)

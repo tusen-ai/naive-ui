@@ -37,9 +37,9 @@
       <!--EXAMPLE_END-->
     </div>
     <pre class="n-doc-section__inspect">Valid type: share, ban, pull-request, operate, edit</pre>
-    <n-doc-source-block>
+    <pre>
       <!--SOURCE-->
-    </n-doc-source-block>
+    </pre>
   </div>
 </template>
 

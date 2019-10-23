@@ -1,9 +1,10 @@
 <template>
   <div
-    class="n-tab"
+    class="n-tabs"
     :class="{
-      [`n-tab--${type}-type`]: true,
-      'n-tab--scroll': showScrollButton
+      [`n-tabs--${type}-type`]: true,
+      'n-tabs--scroll': showScrollButton,
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
   >
     <div
@@ -36,7 +37,8 @@
               class="n-tab-label"
               :class="{
                 'n-tab-label--active': value === panel.name,
-                'n-tab-label--disabled': panel.disabled
+                'n-tab-label--disabled': panel.disabled,
+                'n-tab-label--transition-disabled': transitionDisabled
               }"
               @click="handleTabClick($event, panel.name, panel.disabled)"
             >
@@ -79,10 +81,12 @@
     <slot />
   </div>
 </template>
+
 <script>
-import Emitter from '../../../mixins/emitter'
 import TabLabelCorner from './TabLabelCorner'
 import NIcon from '../../Icon'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 
 export default {
   name: 'NTabs',
@@ -95,7 +99,7 @@ export default {
     TabLabelCorner,
     NIcon
   },
-  mixins: [ Emitter ],
+  mixins: [ withapp, themeable ],
   props: {
     value: {
       type: String || Number,
@@ -122,7 +126,16 @@ export default {
       barStyleInitialized: false,
       showScrollButton: false,
       leftScrollButtonDisabled: true,
-      rightScrollButtonDisabled: false
+      rightScrollButtonDisabled: false,
+      transitionDisabled: false
+    }
+  },
+  watch: {
+    value () {
+      this.transitionDisabled = true
+      this.$nextTick().then(() => {
+        this.transitionDisabled = false
+      })
     }
   },
   mounted () {
@@ -222,6 +235,9 @@ export default {
     },
     handleCloseMarkClick (panel) {
       this.$emit('close', panel.name)
+    },
+    blockTransitionOneTick () {
+
     }
   }
 }
