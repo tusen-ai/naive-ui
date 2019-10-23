@@ -3,15 +3,18 @@
     class="n-input-number"
     :class="{
       [`n-input-number--${size}-size`]: true,
-      'n-input-number--disabled': disabled
+      'n-input-number--disabled': disabled,
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
   >
     <button
+      tabindex="-1"
       type="button"
       class="n-input-number__minus-button"
       :class="{
-        [`n-input-bumber__button--disabled`]: value !== null && safeMin !== null && value <= safeMin
+        [`n-input-number__minus-button--disabled`]: value !== null && safeMin !== null && value <= safeMin
       }"
+      @mousedown="handleMouseDown"
       @click="minus"
     >
       <n-icon type="md-remove" />
@@ -27,11 +30,13 @@
       @keyup.enter="handleEnter"
     >
     <button
+      tabindex="-1"
       type="button"
       class="n-input-number__add-button"
       :class="{
-        [`n-input-bumber__button--disabled`]: value !== null && safeMax !== null && value >= safeMax
+        [`n-input-number__add-button--disabled`]: value !== null && safeMax !== null && value >= safeMax
       }"
+      @mousedown="handleMouseDown"
       @click="add"
     >
       <n-icon type="md-add" />
@@ -43,6 +48,8 @@
 <script>
 import NIcon from '../../Icon/index'
 import Emitter from '../../../mixins/emitter'
+import themeable from '../../../mixins/themeable'
+import withapp from '../../../mixins/withapp'
 
 const DEFAULT_STEP = 1
 
@@ -64,7 +71,7 @@ export default {
   components: {
     NIcon
   },
-  mixins: [ Emitter ],
+  mixins: [ withapp, themeable, Emitter ],
   inject: {
     formItem: {
       default: null
@@ -151,6 +158,12 @@ export default {
     }
   },
   methods: {
+    handleMouseDown (e) {
+      if (document.activeElement !== this.$refs.input) {
+        this.$refs.input.focus()
+      }
+      e.preventDefault()
+    },
     formBlur (type, val) {
       if (this.formItem) {
         this.dispatch('NFormItem', 'on-form-' + type, val)

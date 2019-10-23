@@ -11,6 +11,8 @@
       [`n-${theme}-theme`]: theme
     }"
     @click="handleClick"
+    @mouseenter="handleMouseEnter"
+    @mouseleave="handleMouseLeave"
     @mousedown.capture="handleMouseDown"
   >
     <template v-if="multiple && !filterable">
@@ -32,25 +34,10 @@
         >
           {{ option.label }}
         </n-tag>
-        <!-- <div
-          v-for="option in selectedOptions"
-          :key="option.value"
-          class="n-base-picker-tag"
-        >
-          <div class="n-base-picker-tag__content">
-            {{ option.label }}
-          </div>
-          <n-icon
-            class="n-base-picker-tag__icon"
-            type="md-close"
-            @click.stop="handleDeleteOption(option)"
-          />
-        </div> -->
         <n-base-cancel-mark
           class="n-base-picker__mark"
           :theme="theme"
-          arrow
-          :show="!remote"
+          :arrow="showArrow"
           :disabled="disabled"
           :active="active"
           :clearable="clearable && selected"
@@ -103,9 +90,8 @@
         <n-base-cancel-mark
           ref="cancelMark"
           class="n-base-picker__mark"
-          arrow
+          :arrow="showArrow"
           :theme="theme"
-          :show="!remote"
           :disabled="disabled"
           :active="active"
           :clearable="clearable && selected"
@@ -141,8 +127,7 @@
           ref="cancelMark"
           class="n-base-picker__mark"
           :theme="theme"
-          arrow
-          :show="!remote"
+          :arrow="showArrow"
           :disabled="disabled"
           :active="active"
           :clearable="clearable && selected"
@@ -173,9 +158,8 @@
         </div>
         <n-base-cancel-mark
           class="n-base-picker__mark"
-          arrow
           :theme="theme"
-          :show="!remote"
+          :arrow="showArrow"
           :disabled="disabled"
           :active="active"
           :clearable="clearable && selected"
@@ -252,16 +236,20 @@ export default {
   },
   data () {
     return {
-      patternInputFocused: false
+      patternInputFocused: false,
+      hover: false
     }
   },
   computed: {
+    showArrow () {
+      if (!this.clearable) return true
+      else return !(this.hover && this.selected)
+    },
     labelPlaceholder () {
       return this.selectedOption ? this.selectedOption.label : this.placeholder
     },
     label () {
       const label = (this.selectedOption && this.selectedOption.label) || ''
-      // console.log(label)
       return label
     },
     selected () {
@@ -288,6 +276,12 @@ export default {
     },
     handleClear (e) {
       this.$emit('clear', e)
+    },
+    handleMouseEnter () {
+      this.hover = true
+    },
+    handleMouseLeave () {
+      this.hover = false
     },
     handleMouseDown (e) {
       if (!this.active) return

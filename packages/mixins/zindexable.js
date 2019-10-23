@@ -8,13 +8,16 @@ import zIndexManager from '../utils/dom/zIndexManager'
  * dependency:
  * $refs.contentContainer
  * $vm.active
+ * $vm.detached
  */
 export default {
   mounted () {
+    if (!this.detached) return
     zIndexManager.registerElement(this._getZindexableContent())
   },
   watch: {
     active (newActive) {
+      if (!this.detached) return
       console.debug('[zindexable.watch.active]:', newActive)
       if (newActive) {
         zIndexManager.setNewZIndex(this._getZindexableContent())
@@ -22,6 +25,7 @@ export default {
     }
   },
   beforeDestroy () {
+    if (!this.detached) return
     zIndexManager.unregisterElement(this._getZindexableContent())
   },
   methods: {

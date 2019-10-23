@@ -13,6 +13,7 @@
       ref="contentContainer"
       class="n-detached-content-container n-time-picker-detached-content-container"
       :class="{
+        'n-detached-content-container--absolute-positioned': positionModeisAbsolute,
         [namespace]: namespace
       }"
     >
@@ -28,7 +29,6 @@
             :class="{
               [`n-${synthesizedTheme}-theme`]: synthesizedTheme
             }"
-            @mouseup="handleContentMouseUp"
           >
             <div class="n-time-picker-selector-time">
               <div
@@ -43,7 +43,7 @@
                       'n-time-picker-selector-time-row__item--active':
                         hour === computedHour
                     }"
-                    @click="setHour(hour)"
+                    @click="setHours(hour)"
                   >
                     {{ hour }}
                   </div>
@@ -66,7 +66,7 @@
                       'n-time-picker-selector-time-row__item--active':
                         minute === computedMinute
                     }"
-                    @click="setMinute(minute)"
+                    @click="setMinutes(minute)"
                   >
                     {{ minute }}
                   </div>
@@ -92,7 +92,7 @@
                         validator &&
                         !validator(computedHour, computedMinute, second)
                     }"
-                    @click="setSecond(second)"
+                    @click="setSeconds(second)"
                   >
                     {{ second }}
                   </div>
@@ -132,13 +132,14 @@
 <script>
 import NScrollbar from '../../Scrollbar'
 import NInput from '../../Input'
-import moment from 'moment'
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import clickoutside from '../../../directives/clickoutside'
 import zindexable from '../../../mixins/zindexable'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import { isValid, startOfSecond, startOfMinute, startOfHour, setHours, setMinutes, setSeconds, getTime, format, getMinutes, getHours, getSeconds, set } from 'date-fns'
+import { strictParse } from '../../../utils/dateUtils'
 
 const DEFAULT_FORMAT = 'HH:mm:ss'
 const TIME_CONST = {
@@ -183,10 +184,6 @@ export default {
   },
   mixins: [detachable, placeable, zindexable, withapp, themeable],
   props: {
-    stopSelectorBubble: {
-      type: Boolean,
-      default: false
-    },
     placement: {
       type: String,
       default: 'bottom-start'
@@ -207,7 +204,7 @@ export default {
   data () {
     return {
       active: false,
-      displayTimeString: this.value === null ? null : moment(this.value).format(this.format),
+      displayTimeString: this.value === null ? null : format(this.value, this.format),
       ...TIME_CONST,
       memorizedValue: this.value
     }
@@ -215,18 +212,18 @@ export default {
   computed: {
     computedTime () {
       if (this.value === null) return null
-      else return moment(this.value)
+      else return new Date(this.value)
     },
     computedHour () {
-      if (this.computedTime) return this.computedTime.format('HH')
+      if (this.computedTime) return format(this.computedTime, 'HH')
       else return null
     },
     computedMinute () {
-      if (this.computedTime) return this.computedTime.format('mm')
+      if (this.computedTime) return format(this.computedTime, 'mm')
       else return null
     },
     computedSecond () {
-      if (this.computedTime) return this.computedTime.format('ss')
+      if (this.computedTime) return format(this.computedTime, 'ss')
       else return null
     }
   },
@@ -238,44 +235,45 @@ export default {
   },
   methods: {
     justifyValueAfterChangeDisplayTimeString () {
-      const time = moment(this.displayTimeString, this.format, true)
-      if (time.isValid()) {
+      const time = strictParse(this.displayTimeString, this.format, new Date())
+      if (isValid(time)) {
         if (this.computedTime !== null) {
-          const newTime = this.computedTime
-          newTime.hour(time.hour())
-          newTime.minute(time.minute())
-          newTime.second(time.second())
-          this.$emit('input', newTime.valueOf())
+          const newTime = set(this.computedTime, {
+            hours: getHours(time),
+            minutes: getMinutes(time),
+            seconds: getSeconds(time)
+          })
+          this.$emit('input', getTime(newTime))
         } else {
-          this.$emit('input', time.valueOf())
+          this.$emit('input', getTime(time))
         }
       }
     },
-    setHour (hour) {
+    setHours (hour) {
       if (this.value === null) {
-        this.$emit('input', moment().hour(hour).startOf('hour').valueOf())
+        this.$emit('input', getTime(startOfHour(new Date())))
       } else {
-        this.$emit('input', moment(this.value).hour(hour).valueOf())
+        this.$emit('input', getTime(setHours(this.value, hour)))
       }
     },
-    setMinute (minute) {
+    setMinutes (minute) {
       if (this.value === null) {
-        this.$emit('input', moment().minute(minute).startOf('minute').valueOf())
+        this.$emit('input', getTime(startOfMinute(new Date())))
       } else {
-        this.$emit('input', moment(this.value).minute(minute).valueOf())
+        this.$emit('input', getTime(setMinutes(this.value, minute)))
       }
     },
-    setSecond (second) {
+    setSeconds (second) {
       if (this.value === null) {
-        this.$emit('input', moment().second(second).startOf('second').valueOf())
+        this.$emit('input', getTime(startOfSecond(new Date())))
       } else {
-        this.$emit('input', moment(this.value).second(second).valueOf())
+        this.$emit('input', getTime(setSeconds(this.value, second)))
       }
     },
     refreshTimeString (time) {
       if (time === undefined) time = this.computedTime
       if (time === null) this.displayTimeString = ''
-      else this.displayTimeString = time.format(this.format)
+      else this.displayTimeString = format(time, this.format)
     },
     handleTimeInputBlur () {
       this.refreshTimeString()
@@ -328,12 +326,6 @@ export default {
     handleConfirmClick () {
       this.refreshTimeString()
       this.active = false
-    },
-    handleContentMouseUp (e) {
-      console.log('handleContentMouseUp')
-      if (this.stopSelectorBubble) {
-        e.stopPropagation()
-      }
     }
   }
 }

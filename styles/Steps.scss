@@ -1,163 +1,120 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
-@include b(steps) {
-  width: 100%;
-  display: flex;
+@mixin steps-status-mixin ($status) {
+  @include m($status) {
+    @include b(step-splitor) {
+      background-color: map-get($--steps-step-splitor-color, $status);
+    }
+    @include b(step-content) {
+      @include b(step-content-title) {
+        color: map-get($--steps-step-title-color, $status);
+      }
+      @include e(description) {
+        color: map-get($--steps-step-content-color, $status);
+      }
+    }
+    @include b(step-indicator) {
+      background-color: map-get($--steps-step-background-color, $status);
+      box-shadow: 0 0 0 1px map-get($--steps-step-border-color, $status);
+      @include e(icon, index) {
+        color: map-get($--steps-step-indicator-color, $status);
+      }
+    }
+  }
 }
 
-@include b(step) {
-  display: flex;
-  flex: 1;
-  .n-step__splitor {
-    transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
-    height: 1px;
-    flex: 1;
-    align-self: flex-start;
-    margin-top: 10px;
-    margin-left: 11px;
-    margin-right: 11px;
-    background-color: rgba(255,255,255,0.3);
-  }
-  .n-step__splitor.n-step__splitor--left {
-    display: none;
-  }
-  &:last-child {
-    .n-step__splitor.n-step__splitor--right {
-      display: none;
-    }
-    .n-step-content {
-      .n-step-content__title {
-        &::after {
+@include themes-mixin {
+  @include b(steps) {
+    width: 100%;
+    display: flex;
+    @include b(step) {
+      display: flex;
+      flex: 1;
+      @include steps-status-mixin('finish');
+      @include steps-status-mixin('error');
+      @include steps-status-mixin('wait');
+      @include steps-status-mixin('process');
+      @include b(step-splitor) {
+        transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+        height: 1px;
+        flex: 1;
+        align-self: flex-start;
+        margin-top: 10px;
+        margin-left: 11px;
+        margin-right: 11px;
+        background-color: rgba(255,255,255,0.3);
+        @include m(left) {
           display: none;
         }
       }
-    }
-  }
-  &.n-step--finished {
-    .n-step__splitor {
-      background-color: rgba(99,226,183,1);
-    }
-    .n-step-content {
-      .n-step-content__title {
-        color: rgba(99,226,183,1);
-      }
-      .n-step-content__description {
-        color: rgba(99,226,183,1);
-      }
-    }
-    .n-step-indicator {
-      box-shadow: 0 0 0 1px rgba(99,226,183,1);
-      .n-step-indicator__icon, .n-step-indicator__index {
-        color: rgba(99,226,183,1);
-      }
-    }
-    &.n-step--error {
-      .n-step__splitor {
-        background-color: rgba(255, 146, 164, 1);
-      }
-      .n-step-content {
-        .n-step-content__title {
-          color: rgba(255, 146, 164, 1);
+      &:last-child {
+        @include b(step-splitor) {
+          @include m(right) {
+            display: none;
+          }
         }
-        .n-step-content__description {
-          color: rgba(255, 146, 164, 1);
-        }
-      }
-      .n-step-indicator {
-        box-shadow: 0 0 0 1px rgba(255, 146, 164, 1);
-        .n-step-indicator__icon, .n-step-indicator__index {
-          color: rgba(255, 146, 164, 1);
+        @include b(step-content) {
+          @include e(title) {
+            &::after {
+              display: none;
+            }
+          }
         }
       }
     }
-  }
-  &.n-step--active {
-    .n-step-content {
-      .n-step-content__title {
-        color: rgba(99,226,183,1);
-      }
-      .n-step-content__description {
-        color: rgba(99,226,183,1);
-      }
-    }
-    .n-step-indicator {
-      background-color: rgba(99,226,183,1);
-      box-shadow: 0 0 0 1px rgba(99,226,183,1);
-      .n-step-indicator__icon, .n-step-indicator__index {
-        color: rgba(23, 29, 51, 1);
-      }
-    }
-    &.n-step--error {
-      .n-step-content {
-        .n-step-content__title {
-          color: rgba(255, 146, 164, 1);
-        }
-        .n-step-content__description {
-          color: rgba(255, 146, 164, 1);
+    @include b(step-content) {
+      flex: 1;
+      @include b(step-content-title) {
+        transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+        position: relative;
+        display: flex;
+        color: rgba(255,255,255,0.3);
+        font-weight: 700;
+        margin-left: 9px;
+        @include e(inner) {
+          white-space: nowrap;
+          flex: 0;
         }
       }
-      .n-step-indicator {
-        background-color: rgba(255, 146, 164, 1);
-        box-shadow: 0 0 0 1px rgba(255, 146, 164, 1);
-        .n-step-indicator__icon, .n-step-indicator__index {
-          color: rgba(23, 29, 51, 1);
-        }
+      @include e(description) {
+        transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+        color: rgba(255,255,255,0.3);
+        margin-top: 12px;
+        margin-left: 9px;
       }
     }
-  }
-}
-
-@include b(step-content) {
-  flex: 1;
-  .n-step-content__title {
-    transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
-    position: relative;
-    display: flex;
-    color: rgba(255,255,255,0.3);
-    font-weight: 700;
-    margin-left: 9px;
-    .n-step-content__title-inner {
-      white-space: nowrap;
-      flex: 0;
+    
+    @include b(step-indicator) {
+      position: relative;
+      height: 20px;
+      width: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.3);
+      transition: background-color .3s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier;
+      @include e(icon) {
+        @include fade-in-transition-ease-in-out(step-indicator, .3s);
+        transition: color .3s $default-cubic-bezier;
+        color: rgba(255,255,255,0.3);
+        width: 16px;
+        height: 16px;
+        font-size: 16px;
+        line-height: 16px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+      }
+      @include e(index) {
+        @include fade-in-transition-ease-in-out(step-indicator, .3s);
+        transition: color .3s $default-cubic-bezier;
+        color: rgba(255,255,255,0.3);
+        font-size: 13px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+      }
     }
-  }
-  .n-step-content__description {
-    transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
-    color: rgba(255,255,255,0.3);
-    margin-top: 12px;
-    margin-left: 9px;
-  }
-}
-
-@include b(step-indicator) {
-  position: relative;
-  height: 20px;
-  width: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.3);
-  transition: background-color .3s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier;
-  .n-step-indicator__icon {
-    @include fade-in-transition-ease-in-out(step-indicator, .3s);
-    transition: color .3s $default-cubic-bezier;
-    color: rgba(255,255,255,0.3);
-    width: 16px;
-    height: 16px;
-    font-size: 16px;
-    line-height: 16px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
-  }
-  .n-step-indicator__index {
-    @include fade-in-transition-ease-in-out(step-indicator, .3s);
-    transition: color .3s $default-cubic-bezier;
-    color: rgba(255,255,255,0.3);
-    font-size: 13px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
   }
 }

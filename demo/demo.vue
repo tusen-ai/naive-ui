@@ -234,10 +234,6 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-tabs'
             },
             {
-              name: 'Table',
-              path: `/${this.lang}/${this.theme}` + '/n-table'
-            },
-            {
               name: 'Tag',
               path: `/${this.lang}/${this.theme}` + '/n-tag'
             },
@@ -371,18 +367,6 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
-.CodeMirror {
-  border: 2px solid #5c657eff;
-  height: auto !important;
-  z-index: 0;
-  border-radius: 8px;
-  padding: 8px;
-  margin-bottom: 18px;
-}
-.CodeMirror-scroll {
-  overflow-y: hidden !important;
-  overflow-x: auto !important;
-}
 .n-doc {
   width: 720px;
   margin: 0 auto;

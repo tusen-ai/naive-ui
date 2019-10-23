@@ -1,7 +1,6 @@
 import Vue from 'vue/dist/vue'
 import VueRouter from 'vue-router'
 import '../styles/index.scss'
-import 'codemirror/lib/codemirror.css'
 import './styles/atom-one-dark-reasonable.scss'
 import './styles/atom-one-light.scss'
 import './styles/markdown.scss'
@@ -22,7 +21,6 @@ import iconDemo from './documentation/components/iconDemo'
 import checkbox from './documentation/components/checkbox'
 import button from './documentation/components/button'
 import switchDemo from './documentation/components/switch'
-import tableDemo from './documentation/components/tableDemo'
 import input from './documentation/components/input'
 import select from './documentation/components/select'
 import cascaderDemo from './documentation/components/cascaderDemo'
@@ -34,19 +32,19 @@ import tooltip from './documentation/components/tooltip'
 import popover from './documentation/components/popover'
 import alert from './documentation/components/alert'
 import datePicker from './documentation/components/datePicker'
-import inputNumberDemo from './documentation/components/inputNumberDemo'
+import inputNumber from './documentation/components/inputNumber'
 import nimbusIconDemo from './documentation/components/nimbusIconDemo'
-import radioDemo from './documentation/components/radioDemo'
+import radio from './documentation/components/radio'
 import formDemo from './documentation/components/formDemo'
-import tabsDemo from './documentation/components/tabsDemo'
+import tabs from './documentation/components/tabs'
 import timePicker from './documentation/components/timePicker'
 import confirm from './documentation/components/confirm'
 import backTop from './documentation/components/backTop'
-import dropdownDemo from './documentation/components/dropdownDemo'
+import dropdown from './documentation/components/dropdown'
 import scrollbarDebug from './debugComponents/scrollbarDebug'
 import scrollbarDebug2 from './debugComponents/scrollbarDebug2'
 import badge from './documentation/components/badge'
-import stepsDemo from './documentation/components/stepsDemo'
+import steps from './documentation/components/steps'
 import notification from './documentation/components/notification'
 import nimbusConfirmCardDemo from './documentation/components/nimbusConfirmCardDemo'
 import pagination from './documentation/components/pagination'
@@ -55,17 +53,17 @@ import tag from './documentation/components/tag'
 import timeline from './documentation/components/timeline'
 import progress from './documentation/components/progress'
 import divider from './documentation/components/divider'
-import popconfirmDemo from './documentation/components/popconfirmDemo'
+import popconfirm from './documentation/components/popconfirm'
 import anchor from './documentation/components/anchor'
 import popselect from './documentation/components/popselect'
 import app from './documentation/components/app'
 import advancedTable from './documentation/components/advancedTable'
 import transferDemo from './documentation/components/transferDemo'
 import spin from './documentation/components/spin'
-import drawerDemo from './documentation/components/drawerDemo'
+import drawer from './documentation/components/drawer'
 import loadingBar from './documentation/components/loadingBar'
-import timeDemo from './documentation/components/timeDemo'
-import sliderDemo from './documentation/components/sliderDemo'
+import time from './documentation/components/time'
+import slider from './documentation/components/slider'
 import treeDemo from './documentation/components/treeDemo'
 import affix from './documentation/components/affix'
 
@@ -138,7 +136,7 @@ const routes = [
       { path: '/n-checkbox', component: checkbox },
       { path: '/n-button', component: button },
       { path: '/n-switch', component: switchDemo },
-      { path: '/n-table', component: tableDemo },
+      // { path: '/n-table', component: tableDemo },
       { path: '/n-advance-table', component: advancedTable },
       { path: '/n-input', component: input },
       { path: '/n-select', component: select },
@@ -154,18 +152,18 @@ const routes = [
       { path: '/n-pagination', component: pagination },
       { path: '/n-alert', component: alert },
       { path: '/n-date-picker', component: datePicker },
-      { path: '/n-input-number', component: inputNumberDemo },
+      { path: '/n-input-number', component: inputNumber },
       { path: '/n-nimbus-icon', component: nimbusIconDemo },
-      { path: '/n-radio', component: radioDemo },
+      { path: '/n-radio', component: radio },
       { path: '/n-form', component: formDemo },
-      { path: '/n-tabs', component: tabsDemo },
+      { path: '/n-tabs', component: tabs },
       { path: '/n-time-picker', component: timePicker },
       { path: '/n-confirm', component: confirm },
       { path: '/n-router-debug', component: routerDebug },
       { path: '/n-modal-debug', component: modalDebug },
       { path: '/n-scrollbar-debug', component: scrollbarDebug },
       { path: '/n-badge', component: badge },
-      { path: '/n-steps', component: stepsDemo },
+      { path: '/n-steps', component: steps },
       { path: '/n-collapse', component: collapse },
       { path: '/n-progress', component: progress },
       { path: '/n-tag', component: tag },
@@ -174,18 +172,18 @@ const routes = [
       { path: '/n-back-top', component: backTop },
       { path: '/n-date-picker-debug', component: datePickerDebug },
       { path: '/n-divider', component: divider },
-      { path: '/n-popconfirm', component: popconfirmDemo },
+      { path: '/n-popconfirm', component: popconfirm },
       { path: '/n-anchor', component: anchor },
-      { path: '/n-dropdown', component: dropdownDemo },
+      { path: '/n-dropdown', component: dropdown },
       { path: '/n-popselect', component: popselect },
       { path: '/n-app', component: app },
       { path: '/n-cancel-mark-debug', component: cancelMarkDebug },
       { path: '/n-transfer', component: transferDemo },
       { path: '/n-spin', component: spin },
-      { path: '/n-drawer', component: drawerDemo },
+      { path: '/n-drawer', component: drawer },
       { path: '/n-loading-bar', component: loadingBar },
-      { path: '/n-time', component: timeDemo },
-      { path: '/n-slider', component: sliderDemo },
+      { path: '/n-time', component: time },
+      { path: '/n-slider', component: slider },
       { path: '/n-tree', component: treeDemo },
       { path: '/n-vertical-align-debug', component: verticalAlignDebug },
       { path: '/n-affix', component: affix }

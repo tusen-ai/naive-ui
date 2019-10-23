@@ -1,7 +1,3 @@
-import CodeMirror from 'codemirror'
-import 'codemirror/mode/htmlmixed/htmlmixed'
-import 'codemirror/theme/vibrant-ink.css'
-
 export default {
   mounted () {
     const textAreaNotToRender = new Set(this.$refs.doc.querySelectorAll('.not-code textarea'))
@@ -9,11 +5,9 @@ export default {
       if (textAreaNotToRender.has(ta)) {
         return
       }
-      CodeMirror.fromTextArea(ta, {
-        lineNumbers: false,
-        mode: 'htmlmixed',
-        theme: 'vibrant-ink'
-      })
+      const rows = ta.value.split('\n').length
+      ta.style.width = '100%'
+      ta.setAttribute('rows', rows)
     })
   }
 }

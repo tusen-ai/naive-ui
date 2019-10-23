@@ -1,184 +1,188 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
-@include b(radio) {
-  position: relative;
-  user-select: none;
-  display: inline-flex;
-  vertical-align: middle;
-  align-items: center;
-  margin-right: 18px;
-  .n-radio__control {
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.25);
-    transition: box-shadow .2s $default-cubic-bezier;
-    height: 14px;
-    width: 14px;
-    border-radius: 7px;
-    margin-right: 9px;
+@include themes-mixin {
+  @include b(radio) {
+    outline: none;
     position: relative;
-    &::before {
-      content: "";
-      position: absolute;
-      left: 3px;
-      top: 3px;
-      height: 8px;
-      width: 8px;
-      border-radius: 4px;
-      transform: scale(.8);
-      background-color: rgba(99, 226, 183, 1);
-      opacity: 0;
-      transition: opacity .15s $slow-out-cubic-bezier, transform .15s $slow-out-cubic-bezier;
-    }
-    &.n-radio__control--checked {
-      box-shadow: inset 0 0 0 1px rgba(99, 226, 183, 1);
+    user-select: none;
+    display: inline-flex;
+    vertical-align: middle;
+    align-items: center;
+    margin-right: 18px;
+    @include e(control) {
+      box-shadow: map-get($--radio-box-shadow, 'default');
+      transition: box-shadow .3s $default-cubic-bezier;
+      height: 14px;
+      width: 14px;
+      border-radius: 7px;
+      margin-right: 9px;
+      position: relative;
       &::before {
-        opacity: 1;
-        transform: scale(1);
-        
-        transition: opacity .15s $fast-in-cubic-bezier, transform .15s $fast-in-cubic-bezier;
-      }
-    }
-  }
-  .n-radio__label {
-    display: inline-block;
-    color: rgba(233,233,236,1);
-  }
-  &:not(.n-radio--disabled) {
-    cursor: pointer;
-    &:hover .n-radio__control {
-      box-shadow: inset 0 0 0 1px rgba(99, 226, 183, 1);
-      transition: box-shadow .2s $default-cubic-bezier;
-    }
-    &:active .n-radio__control {
-      box-shadow: inset 0 0 0 1px rgba(99, 226, 183, 1), 0px 0px 10px 1px rgba(99,226,183,0.3);
-    }
-  }
-  &.n-radio--disabled {
-    cursor: not-allowed;
-    .n-radio__control {
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.25);
-      transition: box-shadow .2s $default-cubic-bezier;
-      &::before {
+        content: "";
+        position: absolute;
+        left: 4px;
+        top: 4px;
+        height: 6px;
+        width: 6px;
+        border-radius: 4px;
         transform: scale(.8);
-        transform-origin: center;
+        background-color: map-get($--radio-control-background-color, 'active');
         opacity: 0;
-        background-color: rgba(233,233,236,0.25);
+        transition: opacity .3s $slow-out-cubic-bezier, transform .3s $slow-out-cubic-bezier;
       }
-      &.n-radio__control--checked {
+      @include m(checked) {
+        box-shadow: map-get($--radio-box-shadow, 'active');
         &::before {
-          transform: scale(1);
           opacity: 1;
+          transform: scale(1);
+          transition: opacity .3s $fast-in-cubic-bezier, transform .3s $fast-in-cubic-bezier;
         }
       }
     }
-    .n-radio__label {
-      color: rgba(233,233,236,0.25);
+    @include e(label) {
+      display: inline-block;
+      white-space: nowrap;
+      color: $--radio-label-text-color;
     }
-  }
-}
-
-@include b(radio-group) {
-  display: inline-flex;
-  vertical-align: middle;
-  .n-radio-group__splitor {
-    height: 100%;
-    width: 1px;
-    background-color: rgba(255,255,255,0.5);
-    transition: background-color .2s $default-cubic-bezier;
-    &.n-radio-group__splitor--checked {
-      background-color: #63E2B7;
-      &.n-radio-group__splitor--disabled {
-        background-color: rgba(99, 226, 183, .4);
+    @include not-m(disabled) {
+      cursor: pointer;
+      &:hover {
+        @include e(control) {
+          box-shadow: map-get($--radio-box-shadow, 'hover');
+          transition: box-shadow .3s $default-cubic-bezier;
+        }
+      }
+      &:focus:not(:active) {
+        @include e(control) {
+          box-shadow: map-get($--radio-box-shadow, 'focus');
+        }
       }
     }
-    &.n-radio-group__splitor--disabled {
-      background-color: rgba(255,255,255,0.25);
+    @include m(disabled) {
+      opacity: $--radio-disabled-opacity;
+      cursor: not-allowed;
+      @include e(control) {
+        box-shadow: map-get($--radio-box-shadow, 'disabled');
+        transition: box-shadow .3s $default-cubic-bezier;
+        &::before {
+          transform: scale(.8);
+          transform-origin: center;
+          opacity: 0;
+          background-color: map-get($--radio-control-background-color, 'disabled');
+        }
+        @include m(checked) {
+          &::before {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+      }
+      @include e(label) {
+        color: $--radio-label-text-color;
+      }
     }
   }
 }
 
-@include b(radio-button) {
-  position: relative;
-  user-select: none;
-  display: inline-flex;
-  vertical-align: middle;
-  align-items: center;
-  height: 28px;
-  line-height: 28px;
-  border-top: 1px solid rgba(255,255,255,0.5);
-  border-bottom: 1px solid rgba(255,255,255,0.5);
-  box-sizing: content-box;
-  color: rgba(233,233,236,1);
-  transition: background-color .2s $default-cubic-bezier, border-color .2s $default-cubic-bezier;
-  .n-radio-button__label {
-    height: 28px;
-    line-height: 28px;
+@include themes-mixin {
+  @include b(radio-group) {
     display: inline-block;
-    margin: 0 14px;
-    transition: color .2s $default-cubic-bezier;
-  }
-  .n-radio-button__border-mask {
-    pointer-events: none;
-    position: absolute;
-    box-shadow: inset 0 0 0 1px transparent;
-    transition: box-shadow .2s $default-cubic-bezier;
-    left: -1px;
-    bottom: -1px;
-    right: -1px;
-    top: -1px;
-  }
-  &:first-child {
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
-    border-left: 1px solid rgba(255,255,255,0.5);
-    .n-radio-button__border-mask {
-      border-top-left-radius: 6px;
-      border-bottom-left-radius: 6px;
-    }
-  }
-  &:last-child {
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-    border-right: 1px solid rgba(255,255,255,0.5);
-    .n-radio-button__border-mask {
-      border-top-right-radius: 6px;
-      border-bottom-right-radius: 6px;
-    }
-  }
-  &:not(.n-radio-button--disabled) {
-    cursor: pointer;
-    &.n-radio-button--checked {
-      background-color: #63E2B7;
-      color: #1F263E;
-      border-color: #63E2B7;
-      .n-radio-button__label {
-        color: #1F263E;
-        transition: color .2s $fast-in-cubic-bezier;
+    white-space: nowrap;
+    height: 28px;
+    @include b(radio-button) {
+      color: map-get($--radio-button-label-color, 'default');
+      outline: none;
+      position: relative;
+      user-select: none;
+      display: inline-block;
+      height: 28px;
+      line-height: 28px;
+      box-sizing: border-box;
+      padding-left: 14px;
+      padding-right: 14px;
+      white-space: nowrap;
+      border-top: 1px solid map-get($--radio-button-border-color, 'default');
+      border-bottom: 1px solid map-get($--radio-button-border-color, 'default');
+      transition: background-color .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier;
+      // @include e(label) {
+      //   color: map-get($--radio-button-label-color, 'default');
+      //   height: 26px;
+      //   line-height: 26px;
+      //   display: inline-block;
+      //   white-space: nowrap;
+      //   margin-left: 14px;
+      //   margin-right: 14px;
+      //   transition: color .3s $default-cubic-bezier;
+      // }
+      @include e(border-mask) {
+        pointer-events: none;
+        position: absolute;
+        box-shadow: inset 0 0 0 1px transparent;
+        transition: box-shadow .3s $default-cubic-bezier;
+        left: -1px;
+        bottom: -1px;
+        right: -1px;
+        top: -1px;
+      }
+      &:first-child {
+        border-top-left-radius: 6px;
+        border-bottom-left-radius: 6px;
+        border-left: 1px solid map-get($--radio-button-border-color, 'default');
+        @include e(border-mask) {
+          border-top-left-radius: 6px;
+          border-bottom-left-radius: 6px;
+        }
+      }
+      &:last-child {
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+        border-right: 1px solid map-get($--radio-button-border-color, 'default');
+        @include e(border-mask) {
+          border-top-right-radius: 6px;
+          border-bottom-right-radius: 6px;
+        }
+      }
+      @include not-m(disabled) {
+        cursor: pointer;
+        &:hover {
+          @include e(border-mask) {
+            box-shadow: inset 0 0 0 1px map-get($--radio-button-border-color, 'hover');
+            transition: box-shadow .3s $default-cubic-bezier;
+          }
+          @include not-m(checked) {
+            color: map-get($--radio-button-label-color, 'hover');
+          }
+        }
+        &:focus:not(:active) {
+          @include e(border-mask) {
+            box-shadow: inset 0 0 0 1px map-get($--radio-button-label-color, 'active'), 0 0 0 2px change-color(map-get($--radio-button-label-color, 'active'), $alpha: .3);
+          }
+        }
+      }
+      @include m(checked) {
+        background-color: map-get($--radio-button-background-color, 'active');
+        color: map-get($--radio-button-label-color, 'active');
+        border-color:  map-get($--radio-button-border-color, 'active');
+      }
+      @include m(disabled) {
+        cursor: not-allowed;
+        opacity: $--radio-disabled-opacity;
       }
     }
-    &:hover .n-radio-button__border-mask {
-      box-shadow: inset 0 0 0 1px rgba(99, 226, 183, 1);
-      transition: box-shadow .2s $default-cubic-bezier;
-    }
-    &:hover:not(.n-radio-button--checked) .n-radio-button__label {
-      color: #63E2B7;
-    }
-    &:active .n-radio-button__border-mask {
-      box-shadow: inset 0 0 0 1px rgba(99, 226, 183, 1), 0px 0px 10px 1px rgba(99,226,183,0.3);
-    }
-  }
-  &.n-radio-button--disabled {
-    cursor: not-allowed;
-    border-color: rgba(255,255,255,0.16);
-    .n-radio-button__label {
-      color: rgba(255,255,255,0.25);
-    }
-    &.n-radio-button--checked {
-      color: rgba(31, 38, 62, .25);
-      border-color: transparent;
-      background-color: rgba(99, 226, 183, .4);
-      .n-radio-button__label {
-        color: rgba(31, 38, 62, .4);
+    @include e(splitor) {
+      display: inline-block;
+      vertical-align: bottom;
+      height: 28px;
+      width: 1px;
+      background-color: map-get($--radio-button-border-color, 'default');
+      transition: background-color .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
+      @include m(checked) {
+        background-color: map-get($--radio-button-border-color, 'active');
+      }
+      @include m(disabled) {
+        opacity: $--radio-disabled-opacity;
+        // background-color: map-get($--radio-button-border-color, 'default');
       }
     }
   }

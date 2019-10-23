@@ -7,6 +7,7 @@
   placeholder="Search Songs"
   :options="options"
   :on-search="handleSearch"
+  clearable
   remote
   :no-data-content="noDataContent"
   :loading="loading"

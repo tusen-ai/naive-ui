@@ -2,34 +2,31 @@
   <div
     class="n-step"
     :class="{
-      'n-step--finished': finished,
-      'n-step--active': active,
-      [`n-step--${status}`]: status !== null
+      [`n-step--${synthesizedStatus}`]: synthesizedStatus !== null
     }"
   >
-    <div class="n-step__splitor n-step__splitor--left" />
     <div class="n-step-indicator">
       <transition name="n-step-indicator--transition">
         <div
-          v-if="finished && finishStatus !== 'process'"
+          v-if="synthesizedStatus === 'finish' || synthesizedStatus === 'error'"
           class="n-step-indicator__icon"
         >
           <n-icon
-            v-if="status === 'success'"
+            v-if="synthesizedStatus === 'finish'"
             type="md-checkmark"
           />
           <n-icon
-            v-else-if="status === 'error'"
+            v-else-if="synthesizedStatus === 'error'"
             type="md-close"
           />
         </div>
       </transition>
       <transition name="n-step-indicator--transition">
         <div
-          v-if="!finished || (finished && finishStatus === 'process')"
+          v-if="!(synthesizedStatus === 'finish' || synthesizedStatus === 'error')"
           class="n-step-indicator__index"
           :class="{
-            'simulate-hollow-out-text': active
+            'simulate-hollow-out-text': synthesizedStatus === 'process'
           }"
         >
           {{ index }}
@@ -37,10 +34,11 @@
       </transition>
     </div>
     <div class="n-step-content">
-      <div class="n-step-content__title">
-        <div class="n-step-content__title-inner">
+      <div class="n-step-content-title">
+        <div class="n-step-content-title__inner">
           {{ title }}
-        </div><div class="n-step__splitor n-step__splitor--right" />
+        </div>
+        <div class="n-step-splitor n-step-splitor--right" />
       </div>
       <div
         v-if="description !== null"
@@ -58,38 +56,36 @@ import hollowoutable from '../../../mixins/hollowoutable'
 
 export default {
   name: 'NStep',
+  inject: {
+    NSteps: {
+      default: null
+    }
+  },
   components: {
     NIcon
   },
   mixins: [hollowoutable],
   props: {
-    finishStatus: {
+    status: {
       type: String,
-      default: 'success',
-      validator (finishStatus) {
-        return ['process', 'success', 'error'].includes(finishStatus)
+      default: null,
+      validator (value) {
+        return ['process', 'finish', 'error', 'wait'].includes(value)
       }
-    },
-    currentStatus: {
-      type: String,
-      default: 'process',
-      validator (currentStatus) {
-        return ['process', 'success', 'error'].includes(currentStatus)
-      }
-    },
-    finished: {
-      type: Boolean,
-      default: false
-    },
-    active: {
-      type: Boolean,
-      default: false
     },
     title: {
       type: String,
       default: null
     },
+    subtitle: {
+      type: String,
+      default: null
+    },
     description: {
+      type: String,
+      default: null
+    },
+    content: {
       type: String,
       default: null
     },
@@ -99,14 +95,23 @@ export default {
     }
   },
   computed: {
-    status () {
-      if (this.finished) {
-        return this.finishStatus
-      } else if (this.active) {
-        return this.currentStatus
-      } else {
-        return null
+    current () {
+      return this.NSteps && this.NSteps.current
+    },
+    stepsStatus () {
+      return this.NSteps && this.NSteps.status
+    },
+    synthesizedStatus () {
+      if (this.status) {
+        return this.status
+      } else if (this.index < this.current) {
+        return 'finish'
+      } else if (this.index === this.current) {
+        return this.stepsStatus || 'process'
+      } else if (this.index > this.current) {
+        return 'wait'
       }
+      return null
     }
   }
 }

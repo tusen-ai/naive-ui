@@ -7,9 +7,10 @@ const config = require('./config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const webpackConfig = {
-  mode: 'development',
+  mode: 'production',
   entry: './demo/privateIndex.js',
   output: {
     path: path.resolve(__dirname, '..', 'doc', 'dist'),
@@ -34,7 +35,7 @@ const webpackConfig = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './demo/index.tpl',
-      filename: './index.html'
+      favicon: './demo/assets/images/naivelogo.png'
     }),
     new VueLoaderPlugin(),
     new webpack.LoaderOptionsPlugin({
@@ -44,7 +45,8 @@ const webpackConfig = {
         }
       }
     }),
-    new ExtractTextPlugin('[name].[hash:7].css')
+    new ExtractTextPlugin('[name].[hash:7].css'),
+    new BundleAnalyzerPlugin()
   ]
 }
 

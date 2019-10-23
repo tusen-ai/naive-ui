@@ -14,6 +14,7 @@
 <template>
   <div class="nav">
     <div class="ui-logo">
+      <img src="./assets/images/naivelogo.png">
       Naive UI ({{ version }})
     </div>
     <div />
@@ -96,7 +97,15 @@ export default {
   align-items: center;
 }
 .ui-logo {
-  padding-left: 48px;
+  display: flex;
+  align-items: center;
+  padding-left: 44px;
+  font-size: 18px;
+}
+.ui-logo > img {
+  margin-right: 12px;
+  height: 32px;
+  width: 32px;
 }
 .theme-picker {
   padding-right: 16px;

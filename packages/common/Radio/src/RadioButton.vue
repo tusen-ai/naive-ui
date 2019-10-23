@@ -4,19 +4,14 @@
     :class="{
       'n-radio-button--disabled': disabled,
       'n-radio-button--checked': checked,
-
+      'simulate-hollow-out-text': shouldSimulateHollowOutText
     }"
+    :tabindex="disabled ? -1 : 0"
+    @keyup.enter="handleKeyUpEnter"
     @click="handleClick"
   >
     <div class="n-radio-button__border-mask" />
-    <div
-      class="n-radio-button__label"
-      :class="{
-        'simulate-hollow-out-text': checked
-      }"
-    >
-      <slot />
-    </div>
+    <slot />
   </div>
 </template>
 
@@ -26,6 +21,11 @@ export default {
   model: {
     prop: 'privateValue',
     event: 'input'
+  },
+  inject: {
+    NRadioGroup: {
+      default: null
+    }
   },
   props: {
     value: {
@@ -42,14 +42,34 @@ export default {
     }
   },
   computed: {
+    shouldSimulateHollowOutText () {
+      return this.checked && (this.NRadioGroup.synthesizedTheme === 'dark')
+    },
     checked () {
-      return this.privateValue === this.value
+      if (this.NRadioGroup) {
+        return this.NRadioGroup.value === this.value
+      } else {
+        return this.privateValue === this.value
+      }
     }
   },
   methods: {
+    handleKeyUpEnter () {
+      this.toggle()
+    },
     handleClick () {
+      this.toggle()
+    },
+    toggle () {
       if (this.disabled) return
       if (this.privateValue !== this.value) {
+        this.emitValue(this.value)
+      }
+    },
+    emitValue () {
+      if (this.NRadioGroup) {
+        this.NRadioGroup.$emit('input', this.value)
+      } else {
         this.$emit('input', this.value)
       }
     }

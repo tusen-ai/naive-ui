@@ -1,13 +1,12 @@
 <script>
-function wrapStep (step, i, { current, finishStatus, currentStatus }) {
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
+
+function wrapStep (step, i) {
   if (step.componentOptions.tag === 'n-step') {
     step.componentOptions.propsData = {
       ...step.componentOptions.propsData,
-      index: i + 1,
-      finished: !!current && current > i,
-      active: current === i,
-      finishStatus,
-      currentStatus
+      index: i + 1
     }
   }
   return step
@@ -19,30 +18,30 @@ function mapSteps (props, steps) {
 
 export default {
   name: 'NSteps',
+  provide () {
+    return {
+      NSteps: this
+    }
+  },
+  mixins: [withapp, themeable],
   props: {
     current: {
       type: Number,
       default: null,
       required: false
     },
-    finishStatus: {
+    status: {
       type: String,
-      default: 'success',
-      validator (finishStatus) {
-        return ['process', 'success', 'error'].includes(finishStatus)
-      }
-    },
-    currentStatus: {
-      type: String,
-      default: 'process',
-      validator (currentStatus) {
-        return ['process', 'success', 'error'].includes(currentStatus)
-      }
+      default: 'process'
     }
   },
   render (h) {
+    console.log(this.synthesizedTheme)
     return h('div', {
-      staticClass: 'n-steps'
+      staticClass: 'n-steps',
+      class: {
+        [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme
+      }
     }, mapSteps({ ...this.$props }, this.$slots.default))
   }
 }

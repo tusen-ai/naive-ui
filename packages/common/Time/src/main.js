@@ -1,24 +1,25 @@
-import moment from 'moment'
+import { format, formatDistance, isValid } from 'date-fns'
 
 export default {
   name: 'NTime',
   props: {
     time: {
-      validator (time) {
-        if (time === null) return
-        return moment(time).isValid()
+      validator (value) {
+        return isValid(new Date(value))
       },
       default: null
     },
-    raw: {
-      type: Boolean,
-      default: false
-    },
     type: {
-      validator (type) {
-        return ['relative', 'date', 'datetime'].includes('type')
+      validator (value) {
+        return ['relative', 'date', 'datetime'].includes(value)
       },
       default: 'relative'
+    },
+    to: {
+      validator (value) {
+        return isValid(new Date(value))
+      },
+      default: () => new Date()
     },
     format: {
       type: String,
@@ -27,7 +28,17 @@ export default {
   },
   computed: {
     renderedTime () {
-
+      if (this.format) {
+        return format(this.time, this.format)
+      } else if (this.type === 'date') {
+        return format(this.time, 'yyyy-MM-dd')
+      } else if (this.type === 'datetime') {
+        return format(this.time, 'yyyy-MM-dd hh:mm:ss')
+      } else {
+        return formatDistance(this.time, this.to, {
+          addSuffix: true
+        })
+      }
     }
   },
   data () {
@@ -36,6 +47,6 @@ export default {
     }
   },
   render (h) {
-    return 'time'
+    return h('span', this.renderedTime)
   }
 }

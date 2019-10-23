@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import NTreeSwitcherIcon from './SwitcherIcon'
+import NTreeSwitcherIcon from './TreeSwitcherIcon'
 
 export default {
   name: 'NTreeSwitcher',

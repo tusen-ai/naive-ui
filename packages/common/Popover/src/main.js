@@ -1,5 +1,5 @@
 import NBaseContext from '../../../base/Context'
-import NBaseProtal from '../../../base/Protal'
+import NBasePortal from '../../../base/Portal'
 import NPopoverContent from './PopoverContent'
 import activatorMixin from './activatorMixin'
 import genId from '../../../utils/genId'
@@ -78,7 +78,7 @@ export default {
           id
         }
       }, [activatorSlot[0]]),
-      h(NBaseProtal, {}, [
+      h(NBasePortal, {}, [
         h(NPopoverContent, {
           props: {
             ...props,

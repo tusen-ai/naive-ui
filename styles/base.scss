@@ -42,6 +42,15 @@ input {
   overflow: visible;
 }
 
+.n-detached-content-container.n-detached-content-container--absolute-positioned {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  overflow: visible;
+}
+
 .n-detached-content {
   position: fixed;
 }

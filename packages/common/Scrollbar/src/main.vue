@@ -172,8 +172,8 @@ export default {
   destroyed () {
     window.clearTimeout(this.horizontalScrollbarVanishTimerId)
     window.clearTimeout(this.verticalScrollbarVanishTimerId)
-    window.removeEventListener('mousemove', this.handleVerticalScrollMouseMove)
-    window.removeEventListener('mouseup', this.handleVerticalScrollMouseUp)
+    window.removeEventListener('mousemove', this.handleVerticalScrollMouseMove, true)
+    window.removeEventListener('mouseup', this.handleVerticalScrollMouseUp, true)
   },
   mounted () {
     this.updateParameters()
@@ -319,8 +319,8 @@ export default {
     handleVerticalScrollMouseDown (e) {
       this.$emit('scrollstart')
       this.verticalScrollbarActivated = true
-      window.addEventListener('mousemove', this.handleVerticalScrollMouseMove)
-      window.addEventListener('mouseup', this.handleVerticalScrollMouseUp)
+      window.addEventListener('mousemove', this.handleVerticalScrollMouseMove, true)
+      window.addEventListener('mouseup', this.handleVerticalScrollMouseUp, true)
       this.memorizedVerticalTop = this.containerScrollTop
       this.memorizedMouseY = e.clientY
     },
@@ -339,8 +339,8 @@ export default {
     },
     handleVerticalScrollMouseUp (e) {
       this.$emit('scrollend')
-      window.removeEventListener('mousemove', this.handleVerticalScrollMouseMove)
-      window.removeEventListener('mouseup', this.handleVerticalScrollMouseUp)
+      window.removeEventListener('mousemove', this.handleVerticalScrollMouseMove, true)
+      window.removeEventListener('mouseup', this.handleVerticalScrollMouseUp, true)
       this.verticalScrollbarActivated = false
       this.updateParameters()
       if (!this.$el.contains(e.target)) {

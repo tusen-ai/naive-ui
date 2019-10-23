@@ -1,5 +1,5 @@
 <template>
-  <n-base-portal>
+  <n-base-portal ref="portal">
     <div class="n-detached-content-container">
       <div
         class="n-drawer-container"
@@ -21,6 +21,9 @@
           <div
             v-if="active"
             class="n-drawer"
+            :class="{
+              [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+            }"
           >
             <slot />
           </div>
@@ -31,13 +34,16 @@
 </template>
 
 <script>
-import NBasePortal from '../../../base/Protal'
+import NBasePortal from '../../../base/Portal'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 
 export default {
   name: 'NDrawer',
   components: {
     NBasePortal
   },
+  mixins: [withapp, themeable],
   props: {
     value: {
       type: Boolean,
@@ -82,7 +88,13 @@ export default {
     active (newActive) {
       if (newActive) {
         this.containerActive = true
+        this.$refs.portal.transferElement()
       }
+    }
+  },
+  mounted () {
+    if (this.active) {
+      this.$refs.portal.transferElement()
     }
   },
   created () {

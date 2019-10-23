@@ -3,22 +3,29 @@
     ref="doc"
     class="readme"
   >
-    <readme />
+    <private-readme v-if="token === 'naive'" />
+    <readme v-else />
   </div>
 </template>
 
 <script>
 import readme from './start.vue.md'
+import privateReadme from './privateStart.vue.md'
 import { replaceEmojiWithImages } from '../../utils'
 
 export default {
   components: {
-    readme
+    readme,
+    privateReadme
+  },
+  data () {
+    return {
+      token: null
+    }
   },
   mounted () {
     replaceEmojiWithImages(this.$refs.doc)
-  },
-  methods: {
+    this.token = localStorage.token
   }
 }
 </script>

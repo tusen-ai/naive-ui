@@ -12,7 +12,6 @@
           $--notification-background-end-color 100%
         );
         color: $--notification-text-color;
-
         @include once {
           position: relative;
           display: flex;
@@ -24,7 +23,7 @@
           max-height: 400px;
           width: 365px;
           border-radius: 6px;
-          box-shadow: 0 2px 25px 0 rgba(0, 0, 0, 0.5);
+          box-shadow:  0px 2px 8px 0px rgba(0,0,0,0.12);
           font-weight: 700;
           opacity: 1;
           transition: opacity 0.3s $default-cubic-bezier,

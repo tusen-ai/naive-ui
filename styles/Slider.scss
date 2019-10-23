@@ -22,10 +22,10 @@ $slider-indicator---box-shadow: 0px 2px 20px 0px rgba(0,0,0,0.16);
 
 $slider-dot---size: 8px;
 $slider-dot---box-shadow: inset 0 0 0 2px rgba(78, 143, 132, 1);
+$slider-dot---box-shadow--active: inset 0 0 0 2px rgba(99, 226, 183, 1);
 
 @include b(slider) {
   display: block;
-  width: 100%;
   padding: $slider---padding;
   position: relative;
   z-index: 0;
@@ -35,6 +35,11 @@ $slider-dot---box-shadow: inset 0 0 0 2px rgba(78, 143, 132, 1);
       background-color: $slider-rail--hover---background-color;
       @include e(fill) {
         background-color: $slider-rail__fill--hover---background-color;
+      }
+      @include b(slider-dots) {
+        @include b(slider-dot) {
+          box-shadow: $slider-dot---box-shadow--active;
+        }
       }
     }
     @include b(slider-handle) {
@@ -113,6 +118,7 @@ $slider-dot---box-shadow: inset 0 0 0 2px rgba(78, 143, 132, 1);
   top: 50%;
   right: 0;
   @include b(slider-dot) {
+    transition: box-shadow .3s $default-cubic-bezier;
     position: absolute;
     transform: translateX(-50%) translateY(-50%);
     height: $slider-dot---size;

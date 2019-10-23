@@ -1,4 +1,3 @@
-import { dateArray } from '../utils'
 import clickoutside from '../../../../directives/clickoutside'
 
 const TIME_CONST = {
@@ -19,7 +18,6 @@ export default {
     }
   },
   methods: {
-    dateArray,
     clearValue () {
       this.$emit('input', null)
     },

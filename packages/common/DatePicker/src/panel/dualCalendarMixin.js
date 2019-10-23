@@ -1,4 +1,7 @@
-import moment from 'moment'
+// import moment from 'moment'
+import { isValid, getMonth, getYear, getTime, format, addMonths, startOfMonth } from 'date-fns'
+import { dateArray } from '../../../../utils/dateUtils'
+
 import commonCalendarMixin from './commonCalendarMixin'
 
 export default {
@@ -40,9 +43,9 @@ export default {
     return {
       startDateDisplayString: '',
       endDateDisplayString: '',
-      startCalendarDateTime: moment(),
-      endCalendarDateTime: moment().add(1, 'month'),
-      currentDateTime: moment(),
+      startCalendarDateTime: new Date(),
+      endCalendarDateTime: addMonths(new Date(), 1),
+      currentDateTime: new Date(),
       calendar: [],
       isSelecting: false,
       startDateTime: null,
@@ -51,6 +54,24 @@ export default {
     }
   },
   computed: {
+    startDateArray () {
+      return dateArray(this.startCalendarDateTime, this.valueAsDateArray, this.currentDateTime)
+    },
+    endDateArray () {
+      return dateArray(this.endCalendarDateTime, this.valueAsDateArray, this.currentDateTime)
+    },
+    startCalendarMonth () {
+      return format(this.startCalendarDateTime, 'MMMM')
+    },
+    endCalendarMonth () {
+      return format(this.endCalendarDateTime, 'MMMM')
+    },
+    startCalendarYear () {
+      return format(this.startCalendarDateTime, 'yyyy')
+    },
+    endCalendarYear () {
+      return format(this.endCalendarDateTime, 'yyyy')
+    },
     startTimeValue () {
       if (this.value !== null) return this.value[0]
       else return null
@@ -63,31 +84,31 @@ export default {
      * If value is valid return null.
      * If value is not valid, return moment(value)
      */
-    valueAsMomentArray () {
+    valueAsDateArray () {
       if (this.value === null || this.value === undefined) return null
-      const startMoment = moment(this.value[0])
-      const endMoment = moment(this.value[1])
-      if (startMoment.isValid() && endMoment.isValid()) {
+      const startMoment = new Date(this.value[0])
+      const endMoment = new Date(this.value[1])
+      if (isValid(startMoment) && isValid(startMoment)) {
         return [startMoment, endMoment]
       } else return null
     }
   },
   watch: {
     startCalendarDateTime (newCalendarDateTime, oldCalendarDateTime) {
-      if (newCalendarDateTime.isValid() && oldCalendarDateTime) {
+      if (isValid(newCalendarDateTime) && oldCalendarDateTime) {
         if (
-          newCalendarDateTime.year() !== oldCalendarDateTime.year() ||
-          newCalendarDateTime.month() !== oldCalendarDateTime.month()
+          getYear(newCalendarDateTime) !== getYear(oldCalendarDateTime) ||
+          getMonth(newCalendarDateTime) !== getMonth(oldCalendarDateTime)
         ) {
           this.banTransitionOneTick()
         }
       }
     },
     endCalendarDateTime (newCalendarDateTime, oldCalendarDateTime) {
-      if (newCalendarDateTime.isValid() && oldCalendarDateTime) {
+      if (isValid(newCalendarDateTime) && oldCalendarDateTime) {
         if (
-          newCalendarDateTime.year() !== oldCalendarDateTime.year() ||
-          newCalendarDateTime.month() !== oldCalendarDateTime.month()
+          getYear(newCalendarDateTime) !== getYear(oldCalendarDateTime) ||
+          getMonth(newCalendarDateTime) !== getMonth(oldCalendarDateTime)
         ) {
           this.banTransitionOneTick()
         }
@@ -106,13 +127,14 @@ export default {
       this.closeCalendar()
     },
     syncCalendarTimeWithValue (value) {
+      // console.log('syncCalendarTimeWithValue', value)
       if (value === null) return
       const [startMoment, endMoment] = value
-      this.startCalendarDateTime = moment(startMoment)
-      if (moment(endMoment).startOf('month').valueOf() <= moment(startMoment).startOf('month').valueOf()) {
-        this.endCalendarDateTime = moment(startMoment).add(1, 'month').startOf('month')
+      this.startCalendarDateTime = new Date(startMoment)
+      if (startOfMonth(endMoment) <= startOfMonth(startMoment)) {
+        this.endCalendarDateTime = startOfMonth(addMonths(startMoment, 1))
       } else {
-        this.endCalendarDateTime = moment(endMoment).startOf('month')
+        this.endCalendarDateTime = startOfMonth(endMoment)
       }
     },
     handleDateClick (dateItem) {
@@ -145,7 +167,7 @@ export default {
     },
     changeStartDateTime (time) {
       if (typeof time !== 'number') {
-        time = time.valueOf()
+        time = getTime(time)
       }
       if (this.value === null) {
         this.$emit('input', [time, time])
@@ -155,7 +177,7 @@ export default {
     },
     changeEndDateTime (time) {
       if (typeof time !== 'number') {
-        time = time.valueOf()
+        time = getTime(time)
       }
       if (this.value === null) {
         this.$emit('input', [time, time])
@@ -166,55 +188,55 @@ export default {
     changeStartEndTime (startTime, endTime) {
       if (endTime === undefined) endTime = startTime
       if (typeof startTime !== 'number') {
-        startTime = startTime.valueOf()
+        startTime = getTime(startTime)
       }
       if (typeof endTime !== 'number') {
-        endTime = endTime.valueOf()
+        endTime = getTime(endTime)
       }
       this.$emit('input', [startTime, endTime])
     },
     /** change calendar time */
     adjustCalendarTimes (byStartCalendarTime) {
-      const startTime = this.startCalendarDateTime.startOf('month').valueOf()
-      const endTime = this.endCalendarDateTime.startOf('month').valueOf()
+      const startTime = startOfMonth(this.startCalendarDateTime)
+      const endTime = startOfMonth(this.endCalendarDateTime)
       if (startTime >= endTime) {
         if (byStartCalendarTime) {
-          this.endCalendarDateTime = moment(startTime).add(1, 'month')
+          this.endCalendarDateTime = addMonths(startTime, 1)
         } else {
-          this.startCalendarDateTime = moment(endTime).subtract(1, 'month')
+          this.startCalendarDateTime = addMonths(endTime, -1)
         }
       }
     },
     startCalendarNextYear () {
-      this.startCalendarDateTime = moment(this.startCalendarDateTime).add(1, 'year')
+      this.startCalendarDateTime = addMonths(this.startCalendarDateTime, 1)
       this.adjustCalendarTimes(true)
     },
     startCalendarPrevYear () {
-      this.startCalendarDateTime = moment(this.startCalendarDateTime).subtract(1, 'year')
+      this.startCalendarDateTime = addMonths(this.startCalendarDateTime, -1)
       this.adjustCalendarTimes(true)
     },
     startCalendarNextMonth () {
-      this.startCalendarDateTime = moment(this.startCalendarDateTime).add(1, 'month')
+      this.startCalendarDateTime = addMonths(this.startCalendarDateTime, 1)
       this.adjustCalendarTimes(true)
     },
     startCalendarPrevMonth () {
-      this.startCalendarDateTime = moment(this.startCalendarDateTime).subtract(1, 'month')
+      this.startCalendarDateTime = addMonths(this.startCalendarDateTime, -1)
       this.adjustCalendarTimes(true)
     },
     endCalendarNextYear () {
-      this.endCalendarDateTime = moment(this.endCalendarDateTime).add(1, 'year')
+      this.endCalendarDateTime = addMonths(this.endCalendarDateTime, 1)
       this.adjustCalendarTimes(false)
     },
     endCalendarPrevYear () {
-      this.endCalendarDateTime = moment(this.endCalendarDateTime).subtract(1, 'year')
+      this.endCalendarDateTime = addMonths(this.endCalendarDateTime, -1)
       this.adjustCalendarTimes(false)
     },
     endCalendarNextMonth () {
-      this.endCalendarDateTime = moment(this.endCalendarDateTime).add(1, 'month')
+      this.endCalendarDateTime = addMonths(this.endCalendarDateTime, 1)
       this.adjustCalendarTimes(false)
     },
     endCalendarPrevMonth () {
-      this.endCalendarDateTime = moment(this.endCalendarDateTime).subtract(1, 'month')
+      this.endCalendarDateTime = addMonths(this.endCalendarDateTime, -1)
       this.adjustCalendarTimes(false)
     }
   }
