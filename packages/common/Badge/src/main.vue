@@ -22,7 +22,7 @@
           v-if="processing"
           class="n-badge-sup__ripple-mask"
         />
-        <scroll-numbers
+        <n-base-slot-machine
           v-if="!dot"
           :appeared="appeared"
           :max="max"
@@ -34,14 +34,14 @@
 </template>
 
 <script>
-import ScrollNumbers from './ScrollNumbers'
 import themeable from '../../../mixins/themeable'
 import withapp from '../../../mixins/withapp'
+import NBaseSlotMachine from '../../../base/SlotMachine'
 
 export default {
   name: 'NBadge',
   components: {
-    ScrollNumbers
+    NBaseSlotMachine
   },
   mixins: [withapp, themeable],
   props: {
