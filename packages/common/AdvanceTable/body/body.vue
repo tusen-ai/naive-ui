@@ -1,6 +1,14 @@
+<!--
+ * @Author: Volankey@gmail.com
+ * @Company: Tusimple
+ * @Date: 2019-10-23 16:06:59
+ * @LastEditors: Jiwen.bai
+ * @LastEditTime: 2019-10-23 16:48:42
+ -->
 <template>
   <!-- table body -->
   <n-table
+    ref="nTable"
     :style="tableStl"
     style="border-top-left-radius:0;border-top-right-radius:0;"
     @scroll.native="onBodyScrolll"
@@ -81,14 +89,38 @@ export default {
     row
   },
   props: {
-    tableStl: {},
-    showingData: {},
-    columns: {},
-    rowClassName: {},
-    checkBoxes: {},
-    disabledCheckBox: {},
-    headerRefName: {},
-    loading: {}
+    tableStl: {
+      type: Object,
+      default: () => ({})
+    },
+    showingData: {
+      type: Array,
+      default: () => []
+    },
+    columns: {
+      type: Array,
+      default: () => []
+    },
+    rowClassName: {
+      type: [Function, String],
+      default: ''
+    },
+    checkBoxes: {
+      type: Array,
+      default: () => []
+    },
+    disabledCheckBox: {
+      type: Array,
+      default: () => []
+    },
+    headerRefName: {
+      type: String,
+      default: null
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    }
   },
   data () {
     return {}
@@ -142,8 +174,7 @@ export default {
       return className
     },
     onBodyScrolll (event) {
-      this.headerRealEl.style.transform = `translate3d(-${event.target.scrollLeft}px,0,0)`
-      event.stopPropagation()
+      this.$emit('on-scroll', event)
     }
   }
 }

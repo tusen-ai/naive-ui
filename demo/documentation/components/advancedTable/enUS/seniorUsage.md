@@ -1,3 +1,11 @@
+<!--
+ * @Author: Volankey@gmail.com
+ * @Company: Tusimple
+ * @Date: 2019-10-23 15:59:41
+ * @LastEditors: Jiwen.bai
+ * @LastEditTime: 2019-10-23 16:34:30
+ -->
+
 # Senior Usage
 
 ```html
@@ -62,7 +70,9 @@ const _columns3 = $this => {
       sortable: 'custom',
       onFilter: (value, record) => {
         return value.includes(record.name + '')
-      }
+      },
+      width: 200,
+      fixed: 'left'
     },
     {
       title: 'Age',

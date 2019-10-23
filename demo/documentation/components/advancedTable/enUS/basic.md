@@ -1,3 +1,11 @@
+<!--
+ * @Author: Volankey@gmail.com
+ * @Company: Tusimple
+ * @Date: 2019-10-23 16:03:04
+ * @LastEditors: Jiwen.bai
+ * @LastEditTime: 2019-10-23 16:04:18
+ -->
+
 # Basic
 
 ```html
@@ -76,6 +84,7 @@ const _columns3 = $this => {
     {
       title: 'Age',
       key: 'age',
+      width: 100,
       sortable: true,
       sorter(a, b) {
         return a.age - b.age
@@ -98,6 +107,7 @@ const _columns3 = $this => {
     {
       title: 'Sex',
       key: 'sex',
+      width: 100,
       onFilter: (values, record) => {
         return values.includes(record.sex)
       },
@@ -114,7 +124,6 @@ const _columns3 = $this => {
     },
     {
       title: '#',
-      fixed: 'right',
       width: 200,
       render: (h, params) => {
         return (

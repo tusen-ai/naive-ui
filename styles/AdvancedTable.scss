@@ -1,7 +1,21 @@
-@import "./mixins/mixins.scss";
-@import "./themes/vars.scss";
+@import './mixins/mixins.scss';
+@import './themes/vars.scss';
 
 @include themes-mixin {
+  .n-advance-table__fixed--left {
+    display: inline-block;
+    position: absolute;
+    z-index: 100;
+    // box-shadow: 10px 0 16px 3px rgba(0, 0, 0, 0.2);
+    .n-table {
+      width: auto;
+      box-shadow: none;
+      border-radius: 0;
+    }
+    table {
+      width: auto;
+    }
+  }
   @include b(advance-table--col-border) {
     table {
       thead {
@@ -102,6 +116,7 @@
     @include e(tbody) {
       box-shadow: $--table-box-shadow;
       border: $--table-border;
+      position: relative;
     }
     @include b(table) {
       &::-webkit-scrollbar-thumb {

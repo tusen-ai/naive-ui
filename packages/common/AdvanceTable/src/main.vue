@@ -1,3 +1,10 @@
+<!--
+ * @Author: Volankey@gmail.com
+ * @Company: Tusimple
+ * @Date: 2019-10-23 15:57:17
+ * @LastEditors: Jiwen.bai
+ * @LastEditTime: 2019-10-23 18:51:15
+ -->
 <template>
   <div
     ref="tableWrapper"
@@ -29,6 +36,31 @@
       </div>
     </div>
     <div ref="tbodyWrapper" class="n-advance-table__tbody">
+      <div class="n-advance-table__fixed--left">
+        <table-header
+          ref="fixedLeftHeader"
+          :columns="fixedLeftColumn"
+          :col-group-stl="colGroup"
+          :scroll-bar-width="scrollBarWidth"
+          :sort-indexs="sortIndexs"
+          :selected-filter="selectedFilter"
+          :showing-data="showingData"
+          @on-checkbox-all="onAllCheckboxesClick"
+          @on-sort-change="onSortChange"
+          @on-filter="onFilter"
+        />
+        <table-body
+          ref="fixedLeftTbody"
+          :table-stl="tableStl"
+          :showing-data="showingData"
+          :columns="fixedLeftColumn"
+          :row-class-name="rowClassName"
+          :check-boxes="checkBoxes"
+          :disabled-check-box="disabledCheckBox"
+          :loading="loading"
+          header-ref-name="header"
+        />
+      </div>
       <!-- table head -->
       <table-header
         ref="header"
@@ -53,6 +85,7 @@
         :disabled-check-box="disabledCheckBox"
         :loading="loading"
         header-ref-name="header"
+        @on-scroll="onBodyScrolll"
       />
     </div>
     <!-- 分页 -->
@@ -66,8 +99,6 @@
 </template>
 
 <script>
-// import SortIcon from '../sortIcon'
-// import PopFilter from '../popFilter'
 import searchInput from '../searchInput'
 import { noopFn } from '../../../utils/index'
 import withapp from '../../../mixins/withapp'
@@ -79,8 +110,6 @@ export default {
   name: 'NAdvanceTable',
   components: {
     TableBody,
-    // SortIcon,
-    // PopFilter,
     searchInput,
     TableHeader
   },
@@ -174,6 +203,30 @@ export default {
     }
   },
   computed: {
+    fixedLeftColumn () {
+      return this.columns
+        .filter(column => {
+          return column.fixed === 'left'
+        })
+        .map(item => {
+          return {
+            ...item,
+            fixed: false
+          }
+        })
+    },
+    fixedRightColumn () {
+      return this.columns
+        .filter(column => {
+          return column.fixed === 'right'
+        })
+        .map(item => {
+          return {
+            ...item,
+            fixed: false
+          }
+        })
+    },
     currentSortColumn () {
       let sorterKey = null
       let i = 0
@@ -397,7 +450,7 @@ export default {
     this.tbodyWidth = this.relTable.offsetWidth
 
     this.headerRealEl = this.$refs.header.$el.querySelector('thead')
-
+    this.fixedLeftTBodyEl = this.$refs.fixedLeftTbody.$el
     // console.log(this.wrapperWidth, this.tbodyWidth)
 
     this.init()
@@ -408,6 +461,17 @@ export default {
     // window.removeEventListener('resize', this.init)
   },
   methods: {
+    onBodyScrolll (event) {
+      this.headerRealEl.style.transform = `translate3d(-${event.target.scrollLeft}px,0,0)`
+      if (this.fixedLeftTBodyEl) {
+        this.fixedLeftTBodyEl.scrollTop = event.target.scrollTop
+      }
+      console.log(
+        'TCL: onBodyScrolll -> event.target.scrollTop',
+        event.target.scrollTop
+      )
+      event.stopPropagation()
+    },
     initData () {
       this.copyData = this.data.slice(0).map((row, idx) => {
         return {
@@ -420,29 +484,6 @@ export default {
       if (!column.sortable || column.key === void 0) return
       const ref = this.$refs['sorter_' + column.key][0]
       ref.changeSort()
-    },
-    computeAlign (column) {
-      if (column.align) {
-        return {
-          'text-align': column.align
-        }
-      }
-    },
-    computeTdClass (column, params) {
-      let className = []
-      if (column.ellipsis) {
-        className.push('n-advanced-table__td-text--ellipsis')
-      }
-      if (!column.className) {
-        return className
-      }
-      if (typeof column.className === 'string') {
-        className.push(column.className)
-      } else if (typeof column.className === 'function') {
-        className.push(column.className(params))
-      }
-      // console.log(className)
-      return className
     },
     clearSelect () {
       this.$nextTick(() => {
@@ -477,12 +518,7 @@ export default {
      */
     setParams ({ filter, sorter, page, searcher }) {
       if (sorter) {
-        // console.log('this.sortIndexs', this.sortIndexs)
         this.$set(this.sortIndexs, sorter.key, sorter.type)
-        // this.sortIndexs[sorter.key] = sorter.type
-        // const ref = this.$refs['sorter_' + sorter.key][0]
-        // ref.setSort(sorter.type)
-        // this.sortIndexs[sorter.key] = sorter.type
       } else {
         // clear
         this.clearSort()
@@ -525,37 +561,12 @@ export default {
       })
       this.currentSortColumn = null
     },
-    onBodyScrolll (event) {
-      this.headerRealEl.style.transform = `translate3d(-${event.target.scrollLeft}px,0,0)`
-
-      // this.$refs.header.$el.scrollLeft = event.target.scrollLeft
-
-      event.stopPropagation()
-    },
     computeScollBar () {
       this.$nextTick(() => {
         this.tbodyWidth = this.relTable.offsetWidth
         this.scrollBarWidth = this.tbodyWrapperWidth - this.tbodyWidth
         // console.log('TCL: mounted -> this.scrollBarWidth', this.wrapperWidth, this.tbodyWidth)
       })
-    },
-    computeCustomWidthStl (column) {
-      if (column.width) {
-        let width = column.width
-        return {
-          width: width + 'px',
-          'padding-right': this.scrollBarWidth + 'px'
-          // minWidth: width + 'px'
-        }
-      } else if (column.type === 'selection') {
-        let width = 60
-        return {
-          width: width + 'px',
-          'padding-right': this.scrollBarWidth + 'px'
-          // minWidth: width + 'px'
-        }
-      }
-      return null
     },
     computePageDivideData (data) {
       if (this.pagination && this.pagination.limit && !this.pagination.custom) {
