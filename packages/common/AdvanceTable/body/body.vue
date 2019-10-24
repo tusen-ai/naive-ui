@@ -3,7 +3,7 @@
  * @Company: Tusimple
  * @Date: 2019-10-23 16:06:59
  * @LastEditors: Jiwen.bai
- * @LastEditTime: 2019-10-23 16:48:42
+ * @LastEditTime: 2019-10-24 15:55:27
  -->
 <template>
   <!-- table body -->
@@ -18,7 +18,7 @@
         v-for="(column, i) in columns"
         :key="i"
         :style="computeCustomWidthStl(column)"
-      >
+      />
     </colgroup>
     <n-tbody v-show="!loading">
       <n-tr
@@ -31,12 +31,7 @@
         "
       >
         <template v-for="column in columns">
-          <!-- fixed列不显示 -->
-          <n-td v-if="column.fixed" :key="column.key">
-            <i />
-          </n-td>
           <n-td
-            v-else
             :key="column.key"
             :style="computeAlign(column)"
             :class="computeTdClass(column, rowData)"
@@ -159,6 +154,9 @@ export default {
     },
     computeTdClass (column, params) {
       let className = []
+      if (column.fixed) {
+        className.push('n-advance-table__td--fixed')
+      }
       if (column.ellipsis) {
         className.push('n-advanced-table__td-text--ellipsis')
       }

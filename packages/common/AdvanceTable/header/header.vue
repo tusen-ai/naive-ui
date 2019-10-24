@@ -1,3 +1,10 @@
+<!--
+ * @Author: Volankey@gmail.com
+ * @Company: Tusimple
+ * @Date: 2019-10-24 15:16:41
+ * @LastEditors: Jiwen.bai
+ * @LastEditTime: 2019-10-24 15:17:28
+ -->
 <template>
   <n-table
     ref="header"
@@ -10,19 +17,14 @@
         v-for="(column, i) in columns"
         :key="i"
         :style="computeCustomWidthStl(column)"
-      />
+      >
 
-      <col v-if="scrollBarWidth" :width="scrollBarWidth" />
+      <col v-if="scrollBarWidth" :width="scrollBarWidth" >
     </colgroup>
     <n-thead>
       <n-tr>
         <template v-for="(column, i) in columns">
-          <!-- fixed列不显示 -->
-          <n-th v-if="column.fixed" :key="column.key">
-            <i />
-          </n-th>
           <n-th
-            v-else
             ref="theads"
             :key="column.key"
             :style="computeAlign(column)"

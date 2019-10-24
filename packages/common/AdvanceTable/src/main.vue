@@ -3,7 +3,7 @@
  * @Company: Tusimple
  * @Date: 2019-10-23 15:57:17
  * @LastEditors: Jiwen.bai
- * @LastEditTime: 2019-10-23 18:51:15
+ * @LastEditTime: 2019-10-24 15:31:26
  -->
 <template>
   <div
@@ -36,7 +36,7 @@
       </div>
     </div>
     <div ref="tbodyWrapper" class="n-advance-table__tbody">
-      <div class="n-advance-table__fixed--left">
+      <div class="n-advance-table__fixed--left n-advance-table__fixed">
         <table-header
           ref="fixedLeftHeader"
           :columns="fixedLeftColumn"
@@ -105,15 +105,17 @@ import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import TableHeader from '../header/header'
 import TableBody from '../body/body'
+import store, { storeMixin } from '../store'
 
 export default {
   name: 'NAdvanceTable',
+  store,
   components: {
     TableBody,
     searchInput,
     TableHeader
   },
-  mixins: [withapp, themeable],
+  mixins: [storeMixin, withapp, themeable],
   props: {
     search: {
       /**
@@ -287,7 +289,6 @@ export default {
     },
     tableStl () {
       const stl = {
-        overflow: 'auto',
         ...this.colGroup
       }
       if (this.maxHeight) {
@@ -373,7 +374,7 @@ export default {
     }
   },
   watch: {
-    currentPage () {
+    currentPage (val) {
       if (this.pagination.custom === true) {
         this.useRemoteChange()
       }
@@ -441,7 +442,6 @@ export default {
   created () {
     this.initData()
   },
-
   mounted () {
     this.relTable = this.$refs.tbody.$el.querySelector('table')
     // this.relTHead = this.$refs.header.$el.querySelector('table')
@@ -454,6 +454,7 @@ export default {
     // console.log(this.wrapperWidth, this.tbodyWidth)
 
     this.init()
+    this.$store.commit('currentHoverRow', 1)
 
     // window.addEventListener('resize', this.init)
   },
@@ -464,13 +465,11 @@ export default {
     onBodyScrolll (event) {
       this.headerRealEl.style.transform = `translate3d(-${event.target.scrollLeft}px,0,0)`
       if (this.fixedLeftTBodyEl) {
+        // TODO: 可以优化
         this.fixedLeftTBodyEl.scrollTop = event.target.scrollTop
       }
-      console.log(
-        'TCL: onBodyScrolll -> event.target.scrollTop',
-        event.target.scrollTop
-      )
       event.stopPropagation()
+      event.preventDefault()
     },
     initData () {
       this.copyData = this.data.slice(0).map((row, idx) => {

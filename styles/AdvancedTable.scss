@@ -2,20 +2,6 @@
 @import './themes/vars.scss';
 
 @include themes-mixin {
-  .n-advance-table__fixed--left {
-    display: inline-block;
-    position: absolute;
-    z-index: 100;
-    // box-shadow: 10px 0 16px 3px rgba(0, 0, 0, 0.2);
-    .n-table {
-      width: auto;
-      box-shadow: none;
-      border-radius: 0;
-    }
-    table {
-      width: auto;
-    }
-  }
   @include b(advance-table--col-border) {
     table {
       thead {
@@ -35,6 +21,27 @@
     }
   }
   @include b(advance-table) {
+    .n-advance-table__fixed {
+      display: inline-block;
+      position: absolute;
+      z-index: 100;
+      // box-shadow: 10px 0 16px 3px rgba(0, 0, 0, 0.2);
+      .n-table {
+        width: auto;
+        box-shadow: none;
+        overflow: hidden;
+        border-radius: 0;
+      }
+      table {
+        width: auto;
+      }
+    }
+    .n-advance-table__td--fixed {
+      visibility: hidden;
+    }
+    @include b(table) {
+      overflow: auto;
+    }
     @include once {
       @include e(wrapper) {
         width: 100%;
@@ -125,6 +132,7 @@
       }
     }
     @include e(header) {
+      overflow: hidden;
       background-color: $--table-header-background-color;
       i {
         color: $--table-header-icon-color;
