@@ -2,18 +2,19 @@
   <div
     class="n-popconfirm-content"
     :class="{
-      'n-popconfirm-content--no-icon': noIcon
+      'n-popconfirm-content--no-icon': !showIcon
     }"
   >
     <div class="n-popconfirm-content__body">
       <slot
-        v-if="!noIcon"
+        v-if="showIcon"
         name="icon"
       >
         <n-icon
-          type="md-alert"
           color="rgba(255, 138, 0, 1)"
-        />
+        >
+          <md-alert />
+        </n-icon>
       </slot>
       <slot />
     </div>
@@ -43,10 +44,14 @@
 
 <script>
 import NButton from '../../Button'
+import NIcon from '../../Icon'
+import mdAlert from '../../../icons/md-alert'
 
 export default {
   components: {
-    NButton
+    NButton,
+    NIcon,
+    mdAlert
   },
   props: {
     positiveText: {
@@ -57,9 +62,9 @@ export default {
       type: String,
       default: 'Cancel'
     },
-    noIcon: {
+    showIcon: {
       type: Boolean,
-      default: false
+      default: true
     },
     controller: {
       type: Object,

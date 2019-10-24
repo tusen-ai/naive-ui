@@ -3,12 +3,12 @@
     class="n-alert"
     :class="{
       [`n-alert--${type}-type`]: true,
-      'n-alert--no-icon': noIcon,
+      'n-alert--no-icon': showIcon === false,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
   >
     <div
-      v-if="!noIcon"
+      v-if="showIcon"
       class="n-alert__icon"
     >
       <slot
@@ -16,25 +16,25 @@
         name="icon"
       />
       <n-icon
-        v-else-if="icon"
-        :type="icon"
-      />
-      <n-icon
         v-else-if="type==='success'"
-        :type="'ios-checkmark-circle'"
-      />
+      >
+        <ios-checkmark-circle />
+      </n-icon>
       <n-icon
         v-else-if="type==='info'"
-        :type="'ios-information-circle'"
-      />
+      >
+        <ios-information-circle />
+      </n-icon>
       <n-icon
         v-else-if="type==='warning'"
-        :type="'ios-alert'"
-      />
+      >
+        <ios-alert />
+      </n-icon>
       <n-icon
         v-else-if="type==='error'"
-        :type="'ios-close-circle'"
-      />
+      >
+        <ios-close-circle />
+      </n-icon>
     </div>
     <div class="n-alert-body">
       <div
@@ -54,11 +54,19 @@
 import NIcon from '../../Icon'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import iosCheckmarkCircle from '../../../icons/ios-checkmark-circle'
+import iosAlert from '../../../icons/ios-alert'
+import iosInformationCircle from '../../../icons/ios-information-circle'
+import iosCloseCircle from '../../../icons/ios-close-circle'
 
 export default {
   name: 'NAlert',
   components: {
-    NIcon
+    NIcon,
+    iosCheckmarkCircle,
+    iosAlert,
+    iosInformationCircle,
+    iosCloseCircle
   },
   mixins: [withapp, themeable],
   props: {
@@ -70,9 +78,9 @@ export default {
       type: String,
       default: null
     },
-    noIcon: {
+    showIcon: {
       type: Boolean,
-      default: false
+      default: true
     },
     type: {
       validator (type) {

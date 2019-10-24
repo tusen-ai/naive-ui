@@ -89,13 +89,16 @@
       @compositionend="handleCompositionEnd"
     >
     <div
-      v-if="icon"
-      class="n-input__icon"
-      :class="{
-        'n-input__icon--hide-icon': !showIcon
-      }"
+      v-if="$slots.affix"
+      class="n-input__affix"
     >
-      <n-icon :type="icon" />
+      <slot name="affix" />
+    </div>
+    <div
+      v-if="$slots.suffix"
+      class="n-input__suffix"
+    >
+      <slot name="suffix" />
     </div>
     <div class="n-input__cancel-mark">
       <n-cancel-mark

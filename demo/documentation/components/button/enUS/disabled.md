@@ -23,8 +23,20 @@ Button can be disabled
 <n-button
   disabled
   circle
-  icon="md-save"
-/>
+>
+  <template v-slot:icon>
+    <md-save />
+  </template>
+</n-button>
+```
+```js
+import mdSave from 'naive-ui/packages/icons/md-save'
+
+export default {
+  components: {
+    mdSave
+  }
+}
 ```
 ```css
 .n-button {

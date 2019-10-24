@@ -174,7 +174,7 @@
 import NButton from '../../../Button'
 import NBaseIcon from '../../../../base/Icon'
 import dualCalendarMixin from './dualCalendarMixin'
-import { startOfDay } from 'date-fns'
+import startOfDay from 'date-fns/startOfDay'
 
 const DATE_FORMAT = 'yyyy-MM-dd'
 const PLACEHOLDER = 'Select date and time'

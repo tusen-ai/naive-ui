@@ -117,7 +117,7 @@
 // import moment from 'moment'
 import NBaseIcon from '../../../../base/Icon'
 import uniCalendarMixin from './uniCalendarMixin'
-import { startOfSecond } from 'date-fns'
+import startOfSecond from 'date-fns/startOfSecond'
 
 import NButton from '../../../Button'
 import NTimePicker from '../../../TimePicker'

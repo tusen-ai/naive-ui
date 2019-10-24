@@ -16,7 +16,8 @@
     "test-release": "cross-env NODE_ENV=production webpack-dev-server --config build/webpack.release.js",
     "release-doc": "cross-env NODE_ENV=development && rm -rf doc/dist && webpack --config build/webpack.doc.js && sudo bash doc/deploy-doc.sh",
     "build-doc": "cross-env NODE_ENV=production && rm -rf doc/dist && webpack --config build/webpack.doc.js",
-    "build-private-doc": "cross-env NODE_ENV=production && rm -rf doc/dist && webpack --config build/webpack.private-doc.js"
+    "build-private-doc": "cross-env NODE_ENV=production && rm -rf doc/dist && webpack --config build/webpack.private-doc.js",
+    "test-size": "webpack --config build/webpack.test-size.js"    
   },
   "author": "lecong.zhang",
   "license": "ISC",

@@ -144,10 +144,10 @@
   )!global;
   $button-color: (
     "default": $--n-secondary-text-color,
-    "primary": $--n-secondary-text-color,
-    "info": $--n-secondary-text-color,
-    "success": $--n-secondary-text-color,
-    "warning": $--n-secondary-text-color,
-    "error": $--n-secondary-text-color
+    "primary": white,
+    "info": white,
+    "success": white,
+    "warning": white,
+    "error": white
   ) !global;
 }

@@ -100,7 +100,7 @@
 // import moment from 'moment'
 import NBaseIcon from '../../../../base/Icon'
 import uniCalendarMixin from './uniCalendarMixin'
-import { startOfDay } from 'date-fns'
+import startOfDay from 'date-fns/startOfDay'
 
 import NButton from '../../../Button'
 

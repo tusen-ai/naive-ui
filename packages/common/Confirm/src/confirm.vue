@@ -17,17 +17,21 @@
             :class="{
               [`n-confirm-title-icon--${type}-type`]: type
             }"
-            :type="iconType.type"
             size="28"
-          />
+          >
+            <component :is="iconType.type" />
+          </n-icon>
           {{ title }}
         </span>
         <n-icon
+          class="n-confirm-title__close-mark"
           type="md-close"
           size="22"
           style="cursor:pointer;"
           @click="handleCloseClick"
-        />
+        >
+          <md-close />
+        </n-icon>
       </div>
       <div class="n-confirm__content">
         {{ content }}
@@ -53,7 +57,7 @@
           auto-text-color
           @click="handlePositiveClick"
         >
-         {{positiveText}}
+          {{ positiveText }}
         </n-button>
       </div>
     </div>
@@ -64,13 +68,21 @@
 import NIcon from '../../Icon'
 import NModal from '../../Modal'
 import NButton from '../../Button'
+import iosCheckmarkCircle from '../../../icons/ios-checkmark-circle'
+import mdClose from '../../../icons/md-close'
+import iosHelpCircle from '../../../icons/ios-help-circle'
+import iosCloseCircle from '../../../icons/ios-close-circle'
 
 export default {
   name: 'NConfirm',
   components: {
     NIcon,
     NModal,
-    NButton
+    NButton,
+    mdClose,
+    iosHelpCircle,
+    iosCheckmarkCircle,
+    iosCloseCircle
   },
   data () {
     return {
@@ -99,9 +111,9 @@ export default {
   computed: {
     iconType () {
       const colors = {
-        error: { type: 'ios-close-circle', color: '#FF92A4' },
-        confirm: { type: 'ios-help-circle', color: '#FF92A4' },
-        success: { type: 'ios-checkmark-circle', color: '#63E2B7' }
+        error: { type: 'ios-close-circle' },
+        confirm: { type: 'ios-help-circle' },
+        success: { type: 'ios-checkmark-circle' }
       }
       return colors[this.type]
     }

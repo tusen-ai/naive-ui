@@ -1,4 +1,6 @@
-import { format, formatDistance, isValid } from 'date-fns'
+import format from 'date-fns/format'
+import formatDistance from 'date-fns/formatDistance'
+import isValid from 'date-fns/isValid'
 
 export default {
   name: 'NTime',

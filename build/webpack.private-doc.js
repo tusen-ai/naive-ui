@@ -10,7 +10,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const webpackConfig = {
-  mode: 'production',
+  mode: 'development',
   entry: './demo/privateIndex.js',
   output: {
     path: path.resolve(__dirname, '..', 'doc', 'dist'),

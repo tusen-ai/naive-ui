@@ -1,50 +1,11 @@
-<template>
-  <div
-    class="n-message"
-    :class="{
-      [`n-message--${type}`]: true
-    }"
-  >
-    <div class="n-message__icon">
-      <n-icon
-        v-if="icon"
-        size="20"
-        :type="icon"
-      />
-      <n-icon
-        v-else-if="type === 'success'"
-        size="20"
-        type="md-checkmark-circle"
-      />
-      <n-icon
-        v-else-if="type === 'error'"
-        size="20"
-        type="md-close-circle"
-      />
-      <n-icon
-        v-else-if="type === 'info'"
-        size="20"
-        type="md-information-circle"
-      />
-      <n-icon
-        v-else-if="type === 'warning'"
-        size="20"
-        type="md-alert"
-      />
-    </div>
-    <div class="n-message__content">
-      {{ content }}
-    </div>
-  </div>
-</template>
-
 <script>
 import NIcon from '../../Icon/index'
+import mdCheckmarkCircle from '../../../icons/md-checkmark-circle'
+import mdAlert from '../../../icons/md-alert'
+import mdInformationCircle from '../../../icons/md-information-circle'
+import mdCloseCircle from '../../../icons/md-close-circle'
 
 export default {
-  components: {
-    NIcon
-  },
   props: {
     option: {
       type: Object,
@@ -62,6 +23,41 @@ export default {
     icon () {
       return this.option.icon
     }
+  },
+  render (h) {
+    let icon = null
+    if (this.icon) {
+      icon = h(this.icon)
+    } else if (this.type === 'success') {
+      icon = h(mdCheckmarkCircle)
+    } else if (this.type === 'error') {
+      icon = h(mdCloseCircle)
+    } else if (this.type === 'info') {
+      icon = h(mdInformationCircle)
+    } else if (this.type === 'warning') {
+      icon = h(mdAlert)
+    }
+    return h('div', {
+      staticClass: 'n-message',
+      class: {
+        [`n-message--${this.type}`]: true
+      }
+    }, [
+      h('div', {
+        staticClass: 'n-message__icon'
+      }, [
+        h(NIcon, {
+          props: {
+            size: 20
+          }
+        }, [
+          icon
+        ])
+      ]),
+      h('div', {
+        staticClass: 'n-message__content'
+      }, this.content)
+    ])
   }
 }
 </script>

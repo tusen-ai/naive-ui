@@ -5,8 +5,8 @@
     background-color: map-get($map: $--message-background-color, $key: $type);
     box-shadow: map-get($map: $--message-box-shadow, $key: $type);
     @include e(icon) {
-      i::before {
-        color: $--message-icon-color;
+      path {
+        fill: $--message-icon-color;
       }
     }
   }

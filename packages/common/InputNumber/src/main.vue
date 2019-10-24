@@ -17,7 +17,7 @@
       @mousedown="handleMouseDown"
       @click="minus"
     >
-      <n-icon type="md-remove" />
+      <n-icon><md-remove /></n-icon>
     </button>
     <input
       ref="input"
@@ -39,7 +39,9 @@
       @mousedown="handleMouseDown"
       @click="add"
     >
-      <n-icon type="md-add" />
+      <n-icon>
+        <md-add />
+      </n-icon>
     </button>
     <div class="n-input-number__border-layer" />
   </div>
@@ -50,6 +52,8 @@ import NIcon from '../../Icon/index'
 import Emitter from '../../../mixins/emitter'
 import themeable from '../../../mixins/themeable'
 import withapp from '../../../mixins/withapp'
+import mdRemove from '../../../icons/md-remove'
+import mdAdd from '../../../icons/md-add'
 
 const DEFAULT_STEP = 1
 
@@ -69,7 +73,9 @@ function parseNumber (number) {
 export default {
   name: 'NInputNumber',
   components: {
-    NIcon
+    NIcon,
+    mdRemove,
+    mdAdd
   },
   mixins: [ withapp, themeable, Emitter ],
   inject: {
