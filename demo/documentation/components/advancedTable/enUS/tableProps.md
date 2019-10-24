@@ -1,43 +1,44 @@
+<!--
+ * @Author: Volankey@gmail.com
+ * @Company: Tusimple
+ * @Date: 2019-10-24 16:38:36
+ * @LastEditors: Jiwen.bai
+ * @LastEditTime: 2019-10-24 16:40:05
+ -->
+
 # Props
+
 ```html
-<n-advance-table
-  :columns="columns"
-  :data="data"
-/>
+<n-advance-table :columns="columns" :data="data" />
 ```
+
 ```js
-const _columns3 = ($this) => {
+const _columns3 = $this => {
   return [
     {
       title: '属性',
       key: 'name',
       width: 180
-
     },
     {
       title: '说明',
       key: 'desc',
       width: 500,
-      render (h, params) {
-        return <pre class="n-table-props-desc">
-          {params.row.desc}
-        </pre>
+      render(h, params) {
+        return <pre class="n-table-props-desc">{params.row.desc}</pre>
       }
     },
     {
       title: '类型',
       key: 'type',
       width: 200
-
     },
     {
       title: '默认值',
       key: 'default',
       width: 500,
-      render (h, params) {
-        return <pre class="n-table-props-desc">
-          {params.row.default}
-        </pre>
+      render(h, params) {
+        return <pre class="n-table-props-desc">{params.row.default}</pre>
       }
     }
   ]
@@ -45,12 +46,18 @@ const _columns3 = ($this) => {
 const data = [
   {
     name: 'columns',
-    desc: '表格是否加载中',
-    type: 'Boolean',
-    default: `false`
+    desc: '表格列配置项',
+    type: 'Array',
+    default: `[]`
   },
   {
     name: 'loading',
+    desc: '表格是否加载中',
+    type: 'boolean',
+    default: `false`
+  },
+  {
+    name: 'max-height',
     desc: '最大高度,超出后会固定头部,并显示滚动条',
     type: 'number | string',
     default: `auto`
@@ -68,7 +75,7 @@ const data = [
             - {row,_index} 行数据以及在源data数据中的索引
             - index行索引`,
     type: '[Array, String, Object, Function]',
-    default: ``
+    default: `''`
   },
   {
     name: 'search',
@@ -146,12 +153,10 @@ const data = [
     type: 'number | string',
     default: `auto`
   }
-
 ]
 export default {
-  components: {
-  },
-  data () {
+  components: {},
+  data() {
     const columns = _columns3(this)
 
     return {
@@ -161,8 +166,9 @@ export default {
   }
 }
 ```
+
 ```css
 .n-table-props-desc {
-  white-space:pre-wrap;
+  white-space: pre-wrap;
 }
 ```
