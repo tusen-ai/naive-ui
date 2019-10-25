@@ -57,13 +57,13 @@ import anchor from './documentation/components/anchor'
 import popselect from './documentation/components/popselect'
 import app from './documentation/components/app'
 import advancedTable from './documentation/components/advancedTable'
-import transferDemo from './documentation/components/transferDemo'
+import transfer from './documentation/components/transfer'
 import spin from './documentation/components/spin'
 import drawer from './documentation/components/drawer'
 import loadingBar from './documentation/components/loadingBar'
 import time from './documentation/components/time'
 import slider from './documentation/components/slider'
-import treeDemo from './documentation/components/treeDemo'
+import tree from './documentation/components/tree'
 import affix from './documentation/components/affix'
 
 import demo from './demo'
@@ -176,13 +176,13 @@ const routes = [
       { path: '/n-popselect', component: popselect },
       { path: '/n-app', component: app },
       { path: '/n-cancel-mark-debug', component: cancelMarkDebug },
-      { path: '/n-transfer', component: transferDemo },
+      { path: '/n-transfer', component: transfer },
       { path: '/n-spin', component: spin },
       { path: '/n-drawer', component: drawer },
       { path: '/n-loading-bar', component: loadingBar },
       { path: '/n-time', component: time },
       { path: '/n-slider', component: slider },
-      { path: '/n-tree', component: treeDemo },
+      { path: '/n-tree', component: tree },
       { path: '/n-vertical-align-debug', component: verticalAlignDebug },
       { path: '/n-affix', component: affix }
     ])
