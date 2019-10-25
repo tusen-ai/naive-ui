@@ -1,8 +1,12 @@
-// const fs = require('fs')
-// const path = require('path')
-// const _ = require('lodash')
+const fs = require('fs')
+const path = require('path')
+const _ = require('lodash')
 
-// const files = fs.readdirSync(__dirname).filter(name => name.endsWith('.svg'))
+const files = fs.readdirSync(__dirname).filter(name => name.endsWith('.vue'))
+
+// console.log(files.map(file => file.replace('.vue', '')).map(file => `import ${_.camelCase(file)} from 'naive-ui/lib/icons/${file}'`).join('\n'))
+
+console.log(files.map(file => file.replace('.vue', '')).map(file => `'${file}'`).join(',\n'))
 
 // // files.forEach(name => {
 // //   const file = fs.readFileSync(path.resolve(__dirname, name)).toString()
