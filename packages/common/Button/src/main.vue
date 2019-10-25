@@ -60,11 +60,11 @@
     >
       <slot />
     </div>
-    <span
+    <!-- <span
       v-else
       class="n-button__content-aligner"
       style="visibility: hidden;"
-    >&nbsp;</span>
+    >&nbsp;</span> -->
     <transition
       name="n-fade-in-width-expand"
     >
