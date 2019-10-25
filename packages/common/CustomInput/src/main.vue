@@ -83,8 +83,12 @@ export default {
         return [{
           key: '',
           value: ''
-        } ]
+        }]
       }
+    },
+    preset: {
+      type: String,
+      default: null
     },
     title: {
       type: String,

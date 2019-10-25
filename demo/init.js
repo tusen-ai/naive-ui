@@ -23,7 +23,7 @@ import switchDemo from './documentation/components/switch'
 import input from './documentation/components/input'
 import select from './documentation/components/select'
 import cascader from './documentation/components/cascader'
-import inputPairs from './documentation/components/inputPairs'
+import customInput from './documentation/components/customInput'
 import modal from './documentation/components/modal'
 import nimbusFormCardDemo from './documentation/components/nimbusFormCardDemo'
 import message from './documentation/components/message'
@@ -139,7 +139,7 @@ const routes = [
       { path: '/n-input', component: input },
       { path: '/n-select', component: select },
       { path: '/n-cascader', component: cascader },
-      { path: '/n-custom-input', component: inputPairs },
+      { path: '/n-custom-input', component: customInput },
       { path: '/n-modal', component: modal },
       { path: '/n-nimbus-form-card', component: nimbusFormCardDemo },
       { path: '/n-message', component: message },
