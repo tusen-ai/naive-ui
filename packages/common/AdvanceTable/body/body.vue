@@ -3,7 +3,7 @@
  * @Company: Tusimple
  * @Date: 2019-10-23 16:06:59
  * @LastEditors: Jiwen.bai
- * @LastEditTime: 2019-10-24 15:55:27
+ * @LastEditTime: 2019-10-25 16:28:53
  -->
 <template>
   <!-- table body -->
@@ -18,7 +18,7 @@
         v-for="(column, i) in columns"
         :key="i"
         :style="computeCustomWidthStl(column)"
-      />
+      >
     </colgroup>
     <n-tbody v-show="!loading">
       <n-tr
@@ -29,6 +29,8 @@
             ? rowClassName(rowData, i)
             : rowClassName
         "
+        @mouseenter.native="e => onRowHover(e, rowData, i)"
+        @mouseleave.native="e => onRowLeave(e, rowData, i)"
       >
         <template v-for="column in columns">
           <n-td
@@ -78,11 +80,14 @@
 
 <script>
 import row from '../row/index.js'
+import { addClass, removeClass } from '../utils'
+import { storageMixin } from '../store'
 
 export default {
   components: {
     row
   },
+  mixins: [storageMixin],
   props: {
     tableStl: {
       type: Object,
@@ -120,6 +125,21 @@ export default {
   data () {
     return {}
   },
+  watch: {
+    '$store.state.currentHoverRow' (index, oldIndex) {
+      const hoverClassName = 'n-table__tr--hover'
+      const rowsDom = this.$el.querySelectorAll('table tr')
+      const oldRowDom = rowsDom[oldIndex]
+      const newRowDom = rowsDom[index]
+      console.log('TCL: newRowDom', newRowDom)
+      if (oldRowDom) {
+        removeClass(oldRowDom, hoverClassName)
+      }
+      if (newRowDom) {
+        addClass(newRowDom, hoverClassName)
+      }
+    }
+  },
   mounted () {
     if (this.headerRefName) {
       let headerRef = this.$parent.$refs[this.headerRefName]
@@ -127,6 +147,13 @@ export default {
     }
   },
   methods: {
+    onRowHover (e, rowData, index) {
+      console.log('TCL: onRowHover -> e, rowData, index', e, rowData, index)
+      this.$store.commit('currentHoverRow', index)
+    },
+    onRowLeave (e, rowData) {
+      this.$store.commit('currentHoverRow', null)
+    },
     computeCustomWidthStl (column) {
       if (column.width) {
         let width = column.width

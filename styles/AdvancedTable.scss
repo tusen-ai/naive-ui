@@ -98,6 +98,9 @@
           word-wrap: break-word;
           word-break: break-all;
           table-layout: fixed;
+          tbody tr:hover {
+            background-color: transparent;
+          }
         }
         &::-webkit-scrollbar {
           width: 5px;
@@ -130,12 +133,18 @@
         border-radius: 2.5px;
         background: $--table-scrollbar-color;
       }
+      tr.n-table__tr--hover {
+        background-color: $--table-row-hover;
+      }
     }
     @include e(header) {
       overflow: hidden;
       background-color: $--table-header-background-color;
       i {
         color: $--table-header-icon-color;
+      }
+      th {
+        box-sizing: border-box;
       }
     }
   }

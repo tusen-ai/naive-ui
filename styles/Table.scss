@@ -1,5 +1,5 @@
-@import "./mixins/mixins.scss";
-@import "./themes/vars.scss";
+@import './mixins/mixins.scss';
+@import './themes/vars.scss';
 
 @include themes-mixin {
   @include b(table) {
@@ -34,6 +34,7 @@
           background-color: $--table-body-background-color;
           color: $--table-body-color;
           tr {
+            transition: background-color 0.3s;
             td {
               padding: 16px 6px 12px 19px;
               text-align: left;

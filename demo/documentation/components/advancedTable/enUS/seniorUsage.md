@@ -3,7 +3,7 @@
  * @Company: Tusimple
  * @Date: 2019-10-23 15:59:41
  * @LastEditors: Jiwen.bai
- * @LastEditTime: 2019-10-23 16:34:30
+ * @LastEditTime: 2019-10-25 18:58:58
  -->
 
 # Senior Usage
@@ -18,6 +18,7 @@
   :search="search"
   :pagination="{total:data.length,limit:10,custom:true}"
   @on-change="onChange"
+  max-width="420px"
 >
   <div slot="table-operation-batch-left">
     <n-button size="small" @click="clear">

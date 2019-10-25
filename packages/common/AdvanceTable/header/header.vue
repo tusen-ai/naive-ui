@@ -3,7 +3,7 @@
  * @Company: Tusimple
  * @Date: 2019-10-24 15:16:41
  * @LastEditors: Jiwen.bai
- * @LastEditTime: 2019-10-24 15:17:28
+ * @LastEditTime: 2019-10-25 19:24:21
  -->
 <template>
   <n-table
@@ -17,9 +17,9 @@
         v-for="(column, i) in columns"
         :key="i"
         :style="computeCustomWidthStl(column)"
-      >
+      />
 
-      <col v-if="scrollBarWidth" :width="scrollBarWidth" >
+      <col v-if="scrollBarWidth" :width="scrollBarWidth" />
     </colgroup>
     <n-thead>
       <n-tr>
@@ -99,6 +99,10 @@ export default {
     PopFilter
   },
   props: {
+    height: {
+      type: Number,
+      default: null
+    },
     colGroupStl: {
       type: Object,
       default: () => ({})
@@ -152,11 +156,19 @@ export default {
       this.$emit('on-checkbox-all-change', v)
     },
     computeAlign (column) {
+      let stl = {}
+
       if (column.align) {
-        return {
+        Object.assign(stl, {
           'text-align': column.align
-        }
+        })
       }
+      let height = this.height
+      console.log('TCL: computeAlign -> this.height', this.height)
+      if (height !== null) {
+        stl.height = `${height}px`
+      }
+      return stl
     },
     sortInput (value, column, sorter) {
       const sortIndexs = {}

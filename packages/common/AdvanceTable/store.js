@@ -1,22 +1,45 @@
 /*
  * @Author: Volankey@gmail.com
  * @Company: Tusimple
- * @Date: 2019-10-24 14:03:55
+ * @Date: 2019-10-25 11:31:12
  * @LastEditors: Jiwen.bai
- * @LastEditTime: 2019-10-24 14:49:04
+ * @LastEditTime: 2019-10-25 11:33:00
  */
-import Vue from 'vue'
-import Vuex from './TableStore'
-Vue.use(Vuex)
-
-export default new Vuex.Store()
-export const storeMixin = {
-  beforeCreate: function vuexInit () {
-    const options = this.$options
-    // store injection
-    if (options.store) {
-      this.$store =
-        typeof options.store === 'function' ? options.store() : options.store
-    }
+let Vue = null
+export class Store {
+  constructor (options = {}) {
+    const store = this
+    store._vm = new Vue({
+      data: {
+        $$state: {
+          currentHoverRow: 1
+        }
+      }
+    })
   }
+  get state () {
+    return this._vm._data.$$state
+  }
+  commit (type, payload) {
+    Vue.set(this._vm._data.$$state, type, payload)
+    // this.state[type] = payload
+  }
+}
+
+function vuexInit () {
+  const options = this.$options
+  const _Vue = options.Vue
+  if (_Vue) {
+    Vue = _Vue
+  }
+  // store injection
+  if (options.store) {
+    this.$store =
+      typeof options.store === 'function' ? options.store() : options.store
+  } else if (options.parent && options.parent.$store) {
+    this.$store = options.parent.$store
+  }
+}
+export const storageMixin = {
+  beforeCreate: vuexInit
 }

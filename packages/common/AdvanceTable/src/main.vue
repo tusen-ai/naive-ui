@@ -3,7 +3,7 @@
  * @Company: Tusimple
  * @Date: 2019-10-23 15:57:17
  * @LastEditors: Jiwen.bai
- * @LastEditTime: 2019-10-24 15:31:26
+ * @LastEditTime: 2019-10-25 19:23:59
  -->
 <template>
   <div
@@ -35,13 +35,17 @@
         <slot name="table-operation-search-right" />
       </div>
     </div>
-    <div ref="tbodyWrapper" class="n-advance-table__tbody">
+    <div
+      ref="tbodyWrapper"
+      class="n-advance-table__tbody"
+      :style="tableWrapperStl"
+    >
       <div class="n-advance-table__fixed--left n-advance-table__fixed">
         <table-header
           ref="fixedLeftHeader"
+          :height="headerHeight"
           :columns="fixedLeftColumn"
           :col-group-stl="colGroup"
-          :scroll-bar-width="scrollBarWidth"
           :sort-indexs="sortIndexs"
           :selected-filter="selectedFilter"
           :showing-data="showingData"
@@ -93,6 +97,9 @@
       v-if="pagination !== false && showingData.length"
       class="n-advance-table__pagination"
     >
+      <button @click="add">
+        {{ $store.state.currentHoverRow }}
+      </button>
       <n-pagination v-model="currentPage" :page-count="pageCount" />
     </div>
   </div>
@@ -105,17 +112,18 @@ import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import TableHeader from '../header/header'
 import TableBody from '../body/body'
-import store, { storeMixin } from '../store'
-
+import { Store, storageMixin } from '../store'
 export default {
+  store () {
+    return new Store()
+  },
   name: 'NAdvanceTable',
-  store,
   components: {
     TableBody,
     searchInput,
     TableHeader
   },
-  mixins: [storeMixin, withapp, themeable],
+  mixins: [storageMixin, withapp, themeable],
   props: {
     search: {
       /**
@@ -189,6 +197,7 @@ export default {
   },
   data () {
     return {
+      headerHeight: 0,
       copyData: [],
       sortIndexs: {},
       wrapperWidth: 'unset',
@@ -205,6 +214,16 @@ export default {
     }
   },
   computed: {
+    tableWrapperStl () {
+      let stl = {}
+      if (this.maxWidth) {
+        stl.maxWidth =
+          typeof this.maxWidth === 'number'
+            ? this.maxWidth + 'px'
+            : this.maxWidth
+      }
+      return stl
+    },
     fixedLeftColumn () {
       return this.columns
         .filter(column => {
@@ -297,12 +316,6 @@ export default {
             ? this.maxHeight + 'px'
             : this.maxHeight
       }
-      if (this.maxWidth) {
-        stl.maxWidth =
-          typeof this.maxWidth === 'number'
-            ? this.maxWidth + 'px'
-            : this.maxWidth
-      }
       if (this.minHeight !== 'unset') {
         stl.minHeight =
           typeof this.minHeight === 'number'
@@ -374,6 +387,9 @@ export default {
     }
   },
   watch: {
+    '$store.state.currentHoverRow' (index, oldIndex) {
+      console.log('TCL: index, oldIndex', index, oldIndex)
+    },
     currentPage (val) {
       if (this.pagination.custom === true) {
         this.useRemoteChange()
@@ -450,11 +466,11 @@ export default {
     this.tbodyWidth = this.relTable.offsetWidth
 
     this.headerRealEl = this.$refs.header.$el.querySelector('thead')
+    this.headerHeight = this.headerRealEl.offsetHeight
     this.fixedLeftTBodyEl = this.$refs.fixedLeftTbody.$el
     // console.log(this.wrapperWidth, this.tbodyWidth)
 
     this.init()
-    this.$store.commit('currentHoverRow', 1)
 
     // window.addEventListener('resize', this.init)
   },
@@ -462,6 +478,12 @@ export default {
     // window.removeEventListener('resize', this.init)
   },
   methods: {
+    add () {
+      this.$store.commit(
+        'currentHoverRow',
+        this.$store.state.currentHoverRow + 1
+      )
+    },
     onBodyScrolll (event) {
       this.headerRealEl.style.transform = `translate3d(-${event.target.scrollLeft}px,0,0)`
       if (this.fixedLeftTBodyEl) {
