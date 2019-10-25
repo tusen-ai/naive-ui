@@ -1,12 +1,19 @@
+<!--
+ * @Author: Volankey@gmail.com
+ * @Company: Tusimple
+ * @Date: 2019-10-24 16:36:44
+ * @LastEditors: Jiwen.bai
+ * @LastEditTime: 2019-10-24 16:37:22
+ -->
+
 # Event
+
 ```html
-<n-advance-table
-  :columns="columns"
-  :data="data"
-/>
+<n-advance-table :columns="columns" :data="data" />
 ```
+
 ```js
-const _columns3 = ($this) => {
+const _columns3 = $this => {
   return [
     {
       title: '名称',
@@ -19,15 +26,15 @@ const _columns3 = ($this) => {
     {
       title: '返回值',
       key: 'returns',
-      render (h, params) {
-        const arr = params.row.returns.map((item) => {
-          return <li>{item.name} <pre>{item.desc}</pre></li>
+      render(h, params) {
+        const arr = params.row.returns.map(item => {
+          return (
+            <li>
+              {item.name} <pre>{item.desc}</pre>
+            </li>
+          )
         })
-        return (
-          <ul>
-            {arr}
-          </ul>
-        )
+        return <ul>{arr}</ul>
       }
     }
   ]
@@ -35,10 +42,12 @@ const _columns3 = ($this) => {
 const data = [
   {
     name: 'on-change',
-    desc: '远程事件触发(排序,搜索,分页,过滤等 custom=true的条件下),可在这里调用获取data数据,改变data',
-    returns: [{
-      name: 'filtersData',
-      desc: ` 
+    desc:
+      '远程事件触发(排序,搜索,分页,过滤等 custom=true的条件下),可在这里调用获取data数据,改变data',
+    returns: [
+      {
+        name: 'filtersData',
+        desc: `
       example:
       {
         "filter": {
@@ -71,29 +80,33 @@ const data = [
           "word": "xiaobai"
         }
       }`
-    }]
+      }
+    ]
   },
   {
     name: 'on-page-change',
     desc: '页码发生改变触发',
-    returns: [{
-      name: 'paginationer',
-      desc: `
+    returns: [
+      {
+        name: 'paginationer',
+        desc: `
         {
           "currentPage": ,
           "total": ,
           "limit": ,
-          "custom": 
+          "custom":
         },`
-    }]
+      }
+    ]
   },
   {
     name: 'on-filter-change',
     desc: '过滤数据发生改变触发',
-    returns: [{
-      name: 'filter',
-      desc: `
-      example: 
+    returns: [
+      {
+        name: 'filter',
+        desc: `
+      example:
       {
         "age": {
           "value": [
@@ -101,15 +114,25 @@ const data = [
           ]
         }
       }`
-    }]
-
+      }
+    ]
+  },
+  {
+    name: 'on-selected-change',
+    desc: 'checkbox选中项发生改变',
+    returns: [
+      {
+        name: '选中的行数据,数组'
+      }
+    ]
   },
   {
     name: 'on-sort-change',
     desc: '排序数据发生改变触发',
-    returns: [{
-      name: 'sorter',
-      desc: `
+    returns: [
+      {
+        name: 'sorter',
+        desc: `
       example:
       {
           "sortable": "custom",
@@ -124,14 +147,13 @@ const data = [
           "i": 1
       }
       `
-    }]
-
+      }
+    ]
   }
 ]
 export default {
-  components: {
-  },
-  data () {
+  components: {},
+  data() {
     const columns = _columns3(this)
 
     return {
@@ -141,10 +163,8 @@ export default {
       search: {
         // 如果你不传入search.column,那么搜索框左侧的搜索选项不会显示
         columns: [
-          { label: 'Name',
-            value: 'name' },
-          { label: 'Age',
-            value: 'age' }
+          { label: 'Name', value: 'name' },
+          { label: 'Age', value: 'age' }
         ],
         onSearch: (key, word, record) => {
           switch (key) {
