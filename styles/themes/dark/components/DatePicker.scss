@@ -1,5 +1,5 @@
 @mixin setup-dark-date-picker {
-  $--date-picker-background-color: $--n-dialog-color !global;
+  $--date-picker-background-color: $--n-popover-color !global;
   $--date-picker-text-color: $--n-secondary-text-color !global;
   $--date-picker-icon-color: rgba(255, 255, 255, .3) !global;
   $--date-picker-item-text-color: (

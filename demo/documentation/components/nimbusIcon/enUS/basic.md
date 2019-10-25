@@ -1,0 +1,29 @@
+# Basic
+```html
+<n-nimbus-icon
+  type="share"
+  :size="24"
+/>
+<n-nimbus-icon
+  type="ban"
+  :size="24"
+/>
+<n-nimbus-icon
+  type="pull-request"
+  :size="24"
+  color="#63E2B7"
+/>
+<n-nimbus-icon
+  type="operate"
+  :size="24"
+  color="#63E2B7"
+/>
+<n-nimbus-icon
+  :size="24"
+  type="edit"
+/>
+<n-nimbus-icon
+  :size="24"
+  type="close"
+/>
+```

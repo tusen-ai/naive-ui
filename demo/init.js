@@ -31,7 +31,7 @@ import popover from './documentation/components/popover'
 import alert from './documentation/components/alert'
 import datePicker from './documentation/components/datePicker'
 import inputNumber from './documentation/components/inputNumber'
-import nimbusIconDemo from './documentation/components/nimbusIconDemo'
+import nimbusIcon from './documentation/components/nimbusIcon'
 import radio from './documentation/components/radio'
 import formDemo from './documentation/components/formDemo'
 import tabs from './documentation/components/tabs'
@@ -150,7 +150,7 @@ const routes = [
       { path: '/n-alert', component: alert },
       { path: '/n-date-picker', component: datePicker },
       { path: '/n-input-number', component: inputNumber },
-      { path: '/n-nimbus-icon', component: nimbusIconDemo },
+      { path: '/n-nimbus-icon', component: nimbusIcon },
       { path: '/n-radio', component: radio },
       { path: '/n-form', component: formDemo },
       { path: '/n-tabs', component: tabs },
