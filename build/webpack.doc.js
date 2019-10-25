@@ -9,7 +9,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const webpackConfig = {
-  mode: 'development',
+  mode: 'production',
   entry: './demo/index.js',
   output: {
     path: path.resolve(__dirname, '..', 'doc', 'dist'),

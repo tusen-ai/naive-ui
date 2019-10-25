@@ -41,11 +41,9 @@
             max-height: 0;
             opacity: 0;
             transform: translateX(calc(100% + 15px));
-
             .n-notification-cell__avator {
               top: 0;
             }
-
             .n-notification-cell__close-mark {
               top: 0;
             }
@@ -64,7 +62,6 @@
         .n-notification-cell__wrapper {
           position: relative;
           width: 100%;
-
           .n-notification-cell__deactivator {
             @include once {
               position: absolute;
@@ -150,12 +147,11 @@
               color: $--notification-cell__title-meta-color;
               font-size: 12px;
             }
-
             .n-notification-cell__content {
+              font-family: $default-font-family;
               color: $--notification-cell__content-color;
-              white-space: wrap;
+              white-space: pre-wrap;
             }
-
             .n-notification-cell__action {
               color: $--notification-cell__action-color;
               cursor: pointer;
