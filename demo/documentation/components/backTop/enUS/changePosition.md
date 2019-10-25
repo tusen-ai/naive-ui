@@ -1,7 +1,6 @@
 # Change Position
 ```html
  <n-back-top
-  content-selector=".n-code-box"
   :right="40"
   :bottom="100"
   :visibility-height="200"

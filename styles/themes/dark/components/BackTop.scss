@@ -1,5 +1,10 @@
 @mixin setup-dark-back-top {
-  $--back-top-button-fill: rgba(255, 255, 255, 0.45) !global;
-  $--back-top-button-fill-hover: $--primary-6 !global;
-  $--back-top-button-fill-active: rgba(77, 177, 153, 1) !global;
+  $--back-top-button-fill: rgba(255, 255, 255, 0.3) !global;
+  $--back-top-button-fill-hover: $--n-primary-color !global;
+  $--back-top-button-fill-active: $--primary-7 !global;
+  $--back-top-box-shadow: (
+    'default': 0 2px 8px 0px rgba(0, 0, 0, .12),
+    'hover': 0 2px 12px 0px change-color($--n-primary-color, $alpha: .5),
+    'active': 0 2px 12px 0px change-color($--n-primary-color, $alpha: .5)
+  ) !global;
 }
