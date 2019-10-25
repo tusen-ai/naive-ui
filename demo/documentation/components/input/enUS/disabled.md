@@ -25,7 +25,7 @@ Input can be disabled.
 <n-switch v-model="active" />
 ```
 ```js
-import iosCalendar from 'naive-ui/packages/icons/ios-calendar'
+import iosCalendar from 'naive-ui/lib/icons/ios-calendar'
 
 export default {
   components: {

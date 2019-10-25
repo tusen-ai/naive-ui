@@ -22,7 +22,7 @@
 </n-input>
 ```
 ```js
-import iosCalendar from 'naive-ui/packages/icons/ios-calendar'
+import iosCalendar from 'naive-ui/lib/icons/ios-calendar'
 
 export default {
   components: {

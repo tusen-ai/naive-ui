@@ -77,7 +77,7 @@ Button can be grouped.
 </n-button-group>
 ```
 ```js
-import mdSave from 'naive-ui/packages/icons/md-save'
+import mdSave from 'naive-ui/lib/icons/md-save'
 
 export default {
   components: {

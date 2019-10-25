@@ -6,7 +6,7 @@
 </n-button>
 ```
 ```js
-import mdHourglass from 'naive-ui/packages/icons/md-hourglass'
+import mdHourglass from 'naive-ui/lib/icons/md-hourglass'
 
 export default {
   data() {

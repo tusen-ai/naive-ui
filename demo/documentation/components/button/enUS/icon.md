@@ -15,7 +15,7 @@ Using icon in button
 </n-button>
 ```
 ```js
-import mdSave from 'naive-ui/packages/icons/md-save'
+import mdSave from 'naive-ui/lib/icons/md-save'
 
 export default {
   components: {

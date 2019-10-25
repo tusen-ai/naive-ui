@@ -14,7 +14,7 @@
 </n-alert>
 ```
 ```js
-import iosAirplane from 'naive-ui/packages/icons/ios-airplane'
+import iosAirplane from 'naive-ui/lib/icons/ios-airplane'
 
 export default {
   components: {

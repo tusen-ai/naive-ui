@@ -23,8 +23,8 @@
 </div>
 ```
 ```js
-import mdAdd from 'naive-ui/packages/icons/md-add'
-import mdRemove from 'naive-ui/packages/icons/md-remove'
+import mdAdd from 'naive-ui/lib/icons/md-add'
+import mdRemove from 'naive-ui/lib/icons/md-remove'
 
 export default {
   components: {

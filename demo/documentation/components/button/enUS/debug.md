@@ -447,7 +447,7 @@ List all buttons here for debug usage.
 </div>
 ```
 ```js
-import mdSave from 'naive-ui/packages/icons/md-save'
+import mdSave from 'naive-ui/lib/icons/md-save'
 
 export default {
   components: {

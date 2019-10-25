@@ -24,7 +24,7 @@ Use icon in input.
 </n-input>
 ```
 ```js
-import mdSearch from 'naive-ui/packages/icons/md-search'
+import mdSearch from 'naive-ui/lib/icons/md-search'
 
 export default {
   components: {

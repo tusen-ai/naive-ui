@@ -18,9 +18,9 @@
 </n-icon>
 ```
 ```js
-import mdCash from 'naive-ui/packages/icons/md-cash'
-import mdContacts from 'naive-ui/packages/icons/md-contacts'
-import iosContacts from 'naive-ui/packages/icons/ios-contacts'
+import mdCash from 'naive-ui/lib/icons/md-cash'
+import mdContacts from 'naive-ui/lib/icons/md-contacts'
+import iosContacts from 'naive-ui/lib/icons/ios-contacts'
 
 export default {
   components: {

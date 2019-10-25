@@ -48,8 +48,8 @@
 ```
 
 ```js
-import mdArrowRoundBack from 'naive-ui/packages/icons/md-arrow-round-back'
-import mdArrowRoundForward from 'naive-ui/packages/icons/md-arrow-round-forward'
+import mdArrowRoundBack from 'naive-ui/lib/icons/md-arrow-round-back'
+import mdArrowRoundForward from 'naive-ui/lib/icons/md-arrow-round-forward'
 
 export default {
   components: {

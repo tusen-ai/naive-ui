@@ -13,7 +13,7 @@ Ghost button has transparent background.
 <n-button type="error" ghost disabled>Error</n-button>
 ```
 ```js
-import mdSave from 'naive-ui/packages/icons/md-save'
+import mdSave from 'naive-ui/lib/icons/md-save'
 
 export default {
   components: {
