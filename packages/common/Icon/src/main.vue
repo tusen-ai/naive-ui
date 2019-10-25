@@ -2,10 +2,6 @@
 export default {
   name: 'NIcon',
   props: {
-    // type: {
-    //   type: Object,
-    //   default: null
-    // },
     size: {
       type: [Number, String],
       default: null

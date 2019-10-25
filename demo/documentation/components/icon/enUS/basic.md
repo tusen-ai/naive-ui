@@ -12,7 +12,7 @@
 </n-icon>
 <n-icon
   size="40"
-  color="#000000"
+  color="red"
 >
   <md-cash />
 </n-icon>
