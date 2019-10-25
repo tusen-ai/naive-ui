@@ -40,24 +40,25 @@
       @include input-size-mixin("small");
       @include input-size-mixin("medium");
       @include input-size-mixin("large");
-      @include e(icon) {
+      @include e(suffix, affix) {
         transition: opacity .3s $default-cubic-bezier;
         position: absolute;
         line-height: $--input-icon-size;
         height: $--input-icon-size;
         width: $--input-icon-size;
-        i {
-          height: $--input-icon-size;
-          width: $--input-icon-size;
-          &::before {
-            transition: color .3s $default-cubic-bezier;
-            font-size: $--input-icon-size;
-            line-height: $--input-icon-size;
-            height: $--input-icon-size;
-            width: $--input-icon-size;
+        @include b(icon) {
+          font-size: $--input-icon-size;;
+          path {
+            transition: fill .3s $default-cubic-bezier;
           }
         }
         top: calc(50% - 9px);
+      }
+      @include e(suffix) {
+        right: 12px;
+      }
+      @include e(affix) {
+        left: 12px;
       }
       @include e(cancel-mark) {
         position: absolute;
@@ -94,22 +95,27 @@
       @include m(clearable) {
         padding-right: 32px;
       }
-      @include m(icon) {
-        @include m(left-icon) {
-          padding-left: 38px!important;
-          @include e(icon) {
-            left: 0;
-            margin-left: 12px;
-          }
-        }
-        @include m(right-icon) {
-          padding-right: 38px!important;
-          @include e(icon) {
-            right: 0;
-            margin-right: 12px;
-          }
-        }
+      @include m(suffix) {
+        padding-right: 38px!important;
       }
+      @include m(affix) {
+        padding-left: 38px!important;
+      }
+      // @include m(icon) {
+      //   @include m(left-icon) {
+          
+      //     @include e(icon) {
+      //       left: 0;
+      //       margin-left: 12px;
+      //     }
+      //   }
+      //   @include m(right-icon) {
+      //     @include e(icon) {
+      //       right: 0;
+      //       margin-right: 12px;
+      //     }
+      //   }
+      // }
       @include m(split) {
         display: inline-flex;
         @include e(input) {
@@ -134,15 +140,13 @@
         padding-right: 14px;
       }
     }
-    @include e(icon) {
+    @include e(suffix, affix) {
       opacity: 1;
-      @include m(hide-icon) {
+      @include m(hide) {
         opacity: 0;
       }
-      i {
-        &::before {
-          color: $--input-icon-color;
-        }
+      @include b(icon) {
+        fill: $--input-icon-color;
       }
     }
     @include e(input, textarea) {
@@ -180,6 +184,11 @@
         color: map-get($--input-color, 'disabled');
         &::placeholder {
           color: map-get($--input-placeholder-color, 'disabled');
+        }
+      }
+      @include e(suffix, affix) {
+        @include b(icon) {
+          fill: map-get($--input-placeholder-color, 'disabled');
         }
       }
       @include e(splitor) {

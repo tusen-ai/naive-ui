@@ -25,12 +25,19 @@
   style="display: flex; justify-content: center; flex-wrap: wrap; margin-top: 48px;"
 >
   <n-button
-    icon="md-arrow-round-back"
     @click="prev"
-  /><n-button
-    icon="md-arrow-round-forward"
+  >
+    <template v-slot:icon>
+      <md-arrow-round-back />
+    </template>
+  </n-button>
+  <n-button
     @click="next"
-  />
+  >
+    <template v-slot:icon>
+      <md-arrow-round-forward />
+    </template>
+  </n-button>
   <n-button @click="currentStatus='error'">
     current-status: error
   </n-button>
@@ -41,7 +48,14 @@
 ```
 
 ```js
+import mdArrowRoundBack from 'naive-ui/packages/icons/md-arrow-round-back'
+import mdArrowRoundForward from 'naive-ui/packages/icons/md-arrow-round-forward'
+
 export default {
+  components: {
+    mdArrowRoundBack,
+    mdArrowRoundForward
+  },
   data () {
     return {
       current: null,

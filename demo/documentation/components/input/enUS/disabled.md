@@ -17,11 +17,20 @@ Input can be disabled.
   :disabled="!active"
   round
 />
-<n-input split splitor="to" v-model="value" icon="ios-calendar" icon-position="right" clearable :disabled="!active" />
+<n-input split splitor="to" v-model="value" clearable :disabled="!active">
+  <template v-slot:affix>
+    <n-icon><ios-calendar /></n-icon>
+  </template>
+</n-input>
 <n-switch v-model="active" />
 ```
 ```js
+import iosCalendar from 'naive-ui/packages/icons/ios-calendar'
+
 export default {
+  components: {
+    iosCalendar
+  },
   data() {
     return {
       active: false,

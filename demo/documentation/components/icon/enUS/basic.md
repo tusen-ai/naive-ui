@@ -1,7 +1,6 @@
 # Basic
 ```html
 <n-icon
-  type="ios-contacts"
   size="40"
 >
   <ios-contacts/>

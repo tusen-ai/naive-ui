@@ -8,14 +8,6 @@
       'n-date-picker--range': isRange
     }"
   >
-    <!-- <div
-
-      class="n-date-picker__editor"
-      :class="{
-        'n-date-picker__editor--focus': isFocus
-      }"
-
-    > -->
     <n-input
       v-if="isRange"
       :disabled="disabled"
@@ -24,41 +16,15 @@
       :readonly="disabled ? 'disabled' : false"
       :splitor="splitor"
       split
-      icon="ios-calendar"
-      icon-position="right"
       @click="handleActivatorClick"
       @focus="handleFocus"
       @blur="handleRangeInputBlur"
       @input="handleRangeInput"
-    />
-    <!-- <input
-        class="n-date-picker__input n-date-picker__input--splitor"
-        :value="splitor"
-        readonly="readonly"
-      > -->
-    <!-- <input
-        v-model="displayEndTime"
-        class="n-date-picker__input n-date-picker__input--end"
-        :placeholder="computedEndPlaceholder"
-        :readonly="disabled ? 'disabled' : false"
-        @focus="handleFocus"
-        @blur="handleEndTimeInputBlur"
-        @input="handleEndTimeInput"
-      >
-      <div class="n-date-picker__icon">
-        <n-icon
-          size="20"
-          type="ios-calendar"
-        />
-      </div> -->
-    <!-- </div> -->
-    <!-- <div
-
-      class="n-date-picker__editor"
-      :class="{
-        'n-date-picker__editor--focus': isFocus
-      }"
-    > -->
+    >
+      <template v-slot:suffix>
+        <n-icon><ios-calendar /></n-icon>
+      </template>
+    </n-input>
     <n-input
       v-else
       v-model="displayTime"
@@ -66,20 +32,15 @@
       :disabled="disabled"
       :placeholder="computedPlaceholder"
       :readonly="disabled ? 'disabled' : false"
-      icon="ios-calendar"
-      icon-position="right"
       @click="handleActivatorClick"
       @focus="handleFocus"
       @blur="handleTimeInputBlur"
       @input="handleTimeInput"
-    />
-    <!-- <div class="n-date-picker__icon">
-        <n-icon
-          size="20"
-          type="ios-calendar"
-        />
-      </div> -->
-    <!-- </div> -->
+    >
+      <template v-slot:suffix>
+        <n-icon><ios-calendar /></n-icon>
+      </template>
+    </n-input>
     <div
       ref="contentContainer"
       class="n-detached-content-container n-date-picker-detached-content-container"
@@ -138,7 +99,6 @@
 </template>
 
 <script>
-// import moment from 'moment'
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import zindexable from '../../../mixins/zindexable'
@@ -148,6 +108,8 @@ import DatePanel from './panel/date'
 import DaterangePanel from './panel/daterange'
 import clickoutside from '../../../directives/clickoutside'
 import NInput from '../../Input'
+import NIcon from '../../Icon'
+import iosCalendar from '../../../icons/ios-calendar'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import format from 'date-fns/format'
@@ -188,10 +150,12 @@ export default {
   },
   components: {
     NInput,
+    NIcon,
     DatetimePanel,
     DatePanel,
     DatetimerangePanel,
-    DaterangePanel
+    DaterangePanel,
+    iosCalendar
   },
   mixins: [
     withapp,

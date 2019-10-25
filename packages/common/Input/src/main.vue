@@ -10,7 +10,8 @@
       'n-input--clearable': clearable,
       'n-input--split': split,
       'n-input--focus': focus,
-      [`n-input--${iconPosition}-icon`]: iconPosition,
+      'n-input--suffix': $slots.suffix,
+      'n-input--affix': $slots.affix,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
     @click="handleClick"
@@ -97,6 +98,9 @@
     <div
       v-if="$slots.suffix"
       class="n-input__suffix"
+      :class="{
+        'n-input__suffix--hide': !showIcon
+      }"
     >
       <slot name="suffix" />
     </div>
@@ -112,7 +116,6 @@
 </template>
 
 <script>
-import NIcon from '../../Icon'
 import Emitter from '../../../mixins/emitter'
 import NCancelMark from '../../../base/CancelMark'
 import withapp from '../../../mixins/withapp'
@@ -121,7 +124,6 @@ import themeable from '../../../mixins/themeable'
 export default {
   name: 'NInput',
   components: {
-    NIcon,
     NCancelMark
   },
   mixins: [ withapp, themeable, Emitter ],
@@ -187,10 +189,6 @@ export default {
       type: Boolean,
       default: false
     },
-    iconPosition: {
-      type: String,
-      default: 'left'
-    },
     splitor: {
       type: String,
       default: null
@@ -220,7 +218,7 @@ export default {
       }
     },
     showIcon () {
-      if (this.iconPosition === 'right' && this.showCancelMark) return false
+      if (this.$slots.suffix && this.showCancelMark) return false
       return true
     },
     showCancelMark () {

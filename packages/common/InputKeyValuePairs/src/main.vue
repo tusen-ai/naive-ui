@@ -37,15 +37,21 @@
           <!-- <span> -->
           <n-button-group>
             <n-button
-              icon="md-remove"
               circle
               @click="remove(index)"
-            />
+            >
+              <template v-slot:icon>
+                <md-remove />
+              </template>
+            </n-button>
             <n-button
-              icon="md-add"
               circle
               @click="add"
-            />
+            >
+              <template v-slot:icon>
+                <md-add />
+              </template>
+            </n-button>
           </n-button-group>
         <!-- </span> -->
         </div>
@@ -59,12 +65,16 @@
 <script>
 import NButton from '../../Button'
 import NButtonGroup from '../../Button/src/ButtonGroup'
+import mdAdd from '../../../icons/md-add'
+import mdRemove from '../../../icons/md-remove'
 
 export default {
   name: 'NCustomInput',
   components: {
     NButtonGroup,
-    NButton
+    NButton,
+    mdAdd,
+    mdRemove
   },
   props: {
     value: {

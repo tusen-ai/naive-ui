@@ -59,7 +59,9 @@
           v-else-if="status !== 'default'"
           class="n-progress-icon"
         >
-          <n-icon :type="iconType" />
+          <n-icon>
+            <component :is="iconType" />
+          </n-icon>
         </div>
         <div
           v-else
@@ -146,7 +148,9 @@
           v-else-if="status"
           class="n-progress-icon"
         >
-          <n-icon :type="iconType" />
+          <n-icon>
+            <component :is="iconType" />
+          </n-icon>
         </div>
         <div
           v-else
@@ -215,6 +219,10 @@
 
 <script>
 import NIcon from '../../Icon'
+import mdCheckmark from '../../../icons/md-checkmark'
+import mdClose from '../../../icons/md-close'
+import mdAlert from '../../../icons/md-alert'
+import mdInformationCircle from '../../../icons/md-information-circle'
 import fontawareable from '../../../mixins/fontawarable'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
@@ -228,7 +236,11 @@ function circlePath (r, sw, vw = 100) {
 export default {
   name: 'NProgress',
   components: {
-    NIcon
+    NIcon,
+    mdCheckmark,
+    mdClose,
+    mdAlert,
+    mdInformationCircle
   },
   mixins: [withapp, themeable, fontawareable],
   props: {

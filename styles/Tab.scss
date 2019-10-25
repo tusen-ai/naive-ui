@@ -18,10 +18,10 @@
         align-self: center;
         cursor: pointer;
         transition: color .3s $default-cubic-bezier;
-        color: map-get($--tabs-tab-scroll-button-color, 'default');
+        fill: map-get($--tabs-tab-scroll-button-color, 'default');
         @include m(disabled) {
           cursor: not-allowed;
-          color: map-get($--tabs-tab-scroll-button-color, 'disabled');
+          fill: map-get($--tabs-tab-scroll-button-color, 'disabled');
         }
         @include m(left) {
           margin-right: 8px;
@@ -55,7 +55,7 @@
           cursor: not-allowed;
         }
         @include e(close) {
-          color: map-get($--tabs-tab-close-button-color, 'default');
+          fill: map-get($--tabs-tab-close-button-color, 'default');
           margin-left: 8px;
           font-size: 20px;
           line-height: 20px;

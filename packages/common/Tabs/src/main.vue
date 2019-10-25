@@ -19,7 +19,9 @@
         }"
         @click="scroll('left')"
       >
-        <n-icon type="ios-arrow-back" />
+        <n-icon>
+          <ios-arrow-back />
+        </n-icon>
       </div>
       <div
         ref="navScroll"
@@ -56,7 +58,9 @@
                 class="n-tab-label__close"
                 @click.stop="handleCloseMarkClick(panel)"
               >
-                <n-icon type="md-close" />
+                <n-icon>
+                  <md-close />
+                </n-icon>
               </div>
             </div>
           </div>
@@ -75,7 +79,9 @@
         }"
         @click="scroll('right')"
       >
-        <n-icon type="ios-arrow-forward" />
+        <n-icon>
+          <ios-arrow-forward />
+        </n-icon>
       </div>
     </div>
     <slot />
@@ -87,6 +93,9 @@ import TabLabelCorner from './TabLabelCorner'
 import NIcon from '../../Icon'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import iosArrowBack from '../../../icons/ios-arrow-back'
+import iosArrowForward from '../../../icons/ios-arrow-forward'
+import mdClose from '../../../icons/md-close'
 
 export default {
   name: 'NTabs',
@@ -97,7 +106,10 @@ export default {
   },
   components: {
     TabLabelCorner,
-    NIcon
+    NIcon,
+    iosArrowBack,
+    iosArrowForward,
+    mdClose
   },
   mixins: [ withapp, themeable ],
   props: {
