@@ -101,12 +101,24 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-app'
             },
             {
+              name: 'AutoComplete',
+              path: `/${this.lang}/${this.theme}` + '/n-auto-complete'
+            },
+            {
+              name: 'Avator',
+              path: `/${this.lang}/${this.theme}` + '/n-avator'
+            },
+            {
               name: 'BackTop',
               path: `/${this.lang}/${this.theme}` + '/n-back-top'
             },
             {
               name: 'Badge',
               path: `/${this.lang}/${this.theme}` + '/n-badge'
+            },
+            {
+              name: 'Breadcrumb',
+              path: `/${this.lang}/${this.theme}` + '/n-breadcrumb'
             },
             {
               name: 'Button',
@@ -137,6 +149,10 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-date-picker'
             },
             {
+              name: 'Descriptions',
+              path: `/${this.lang}/${this.theme}` + '/n-descriptions'
+            },
+            {
               name: 'Divider',
               path: `/${this.lang}/${this.theme}` + '/n-divider'
 
@@ -148,6 +164,10 @@ export default {
             {
               name: 'Dropdown',
               path: `/${this.lang}/${this.theme}` + '/n-dropdown'
+            },
+            {
+              name: 'Empty',
+              path: `/${this.lang}/${this.theme}` + '/n-empty'
             },
             {
               name: 'Form',
@@ -170,8 +190,20 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-input-number'
             },
             {
+              name: 'Layout',
+              path: `/${this.lang}/${this.theme}` + '/n-layout'
+            },
+            {
+              name: 'List',
+              path: `/${this.lang}/${this.theme}` + '/n-list'
+            },
+            {
               name: 'LoadingBar',
               path: `/${this.lang}/${this.theme}` + '/n-loading-bar'
+            },
+            {
+              name: 'Menu',
+              path: `/${this.lang}/${this.theme}` + '/n-menu'
             },
             {
               name: 'Message',
@@ -210,6 +242,10 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-radio'
             },
             {
+              name: 'Result',
+              path: `/${this.lang}/${this.theme}` + '/n-result'
+            },
+            {
               name: 'Select',
               path: `/${this.lang}/${this.theme}` + '/n-select'
             },
@@ -220,6 +256,10 @@ export default {
             {
               name: 'Spin',
               path: `/${this.lang}/${this.theme}` + '/n-spin'
+            },
+            {
+              name: 'Statistic',
+              path: `/${this.lang}/${this.theme}` + '/n-statistic'
             },
             {
               name: 'Steps',

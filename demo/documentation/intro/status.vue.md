@@ -4,18 +4,18 @@
 |Component|Develop Status|Unit Test|Note|
 |--|:--:|:--:|--|
 |Alert|😍|❌||
-|Button|😍|🆗||
-|Checkbox|😍|🆗||
+|Button|😍|❌||
+|Checkbox|😍|❌||
 |DatePicker|😍|❌||
 |TimePicker|😍|❌||
-|GradientText|😍|🆗||
-|Icon|😍|🆗||
-|Input|😍|🆗||
-|Message|😍|❌|Code clean in need|
-|Modal|😍|❌|Code clean in need|
+|GradientText|😍|❌||
+|Icon|😍|❌||
+|Input|😍|❌||
+|Message|😍|❌||
+|Modal|😍|❌||
 |Notification|😍|❌|Code clean in need|
-|Pagination|😍|🆗|Unit test is not enough|
-|Select|😍|🆗|Multiple search is not done|
+|Pagination|😍|❌||
+|Select|😍|❌||
 |Switch|😍|❌||
 |Tooltip|😍|❌||
 |Popover|😍|❌||
@@ -28,7 +28,7 @@
 |Divider|😍|||
 |Popconfirm|😍|||
 |BackTop|😍|||
-|Progress|😍||Multiple Value|
+|Progress|😍|||
 |Timeline|😍|||
 |Collapse|😍|||
 |Cascader|😍|||
@@ -57,8 +57,10 @@
 |Rating|🚧|||
 |Avator|🚧|||
 |Result|🚧|||
-|Menu|✋||Not Planned|
-|Typography|✋||Not Planned|
+|Menu|🚧|||
+|Markdown|🚧|||
+|Description|🚧|||
+|Typography|🚧|||
 |Mentions|✋||Not Planned|
 |Calendar|✋||Not Planned|
 |Carousel|✋||Not Planned|
