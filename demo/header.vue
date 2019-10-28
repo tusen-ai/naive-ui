@@ -14,7 +14,7 @@
 <template>
   <div class="nav">
     <div class="ui-logo">
-      <img src="./assets/images/naivelogo.png">
+      <img src="./assets/images/naivelogo.svg">
       Naive UI ({{ version }})
     </div>
     <div />
