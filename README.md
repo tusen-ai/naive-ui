@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="144px" src="https://naiveui.oss-cn-hongkong.aliyuncs.com/Naive%20UI%20-%20LOGO.svg" />
+  <img width="144px" src="https://naiveui.oss-cn-hongkong.aliyuncs.com/naivelogo.svg" />
 </p>
 
 <h1 align="center">Naive UI</h1>
