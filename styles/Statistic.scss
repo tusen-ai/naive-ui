@@ -1,0 +1,42 @@
+@import './mixins/mixins.scss';
+
+@include themes-mixin {
+  @include b(statistic) {
+    font-family: 'Lato';
+    @include b(statistic-value) {
+      margin-top: 4px;
+      font-weight: 700;
+      @include e(prefix) {
+        font-size: 18px;
+        color: $--statistic-value-prefix-text-color;
+        transition: .3s color $default-cubic-bezier;
+        @include b(icon) {
+          vertical-align: -0.125em;
+          fill: $--statistic-value-prefix-text-color;
+          transition: .3s fill $default-cubic-bezier;
+        }
+      }
+      @include e(content) {
+        font-size: 24px;
+        color: $--statistic-value-content-text-color;
+        transition: .3s color $default-cubic-bezier;
+      }
+      @include e(suffix) {
+        font-size: 18px;
+        color: $--statistic-value-suffix-text-color;
+        transition: .3s color $default-cubic-bezier;
+        @include b(icon) {
+          vertical-align: -0.125em;
+          fill: $--statistic-value-prefix-text-color;
+          transition: .3s fill $default-cubic-bezier;
+        }
+      }
+    }
+    @include e(label) {
+      font-weight: 700;
+      color: $--statistic-value-label-text-color;
+      transition: .3s color $default-cubic-bezier;
+      font-size: 14px;
+    }
+  }
+}

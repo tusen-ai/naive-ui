@@ -1,5 +1,11 @@
 <template>
-  <div class="n-row">
+  <div
+    class="n-row"
+    :style="{
+      margin: `${-verticalGutter}px ${- horizontalGutter / 2}px`,
+      width: `calc(100% + ${horizontalGutter}px)`
+    }"
+  >
     <slot />
   </div>
 </template>
@@ -14,8 +20,24 @@ export default {
   name: 'NRow',
   props: {
     gutter: {
-      type: Number,
+      type: [Array, Number],
       default: 0
+    }
+  },
+  computed: {
+    verticalGutter () {
+      if (Array.isArray(this.gutter)) {
+        return this.gutter[1]
+      }
+      return 0
+    },
+    horizontalGutter () {
+      if (Array.isArray(this.gutter)) {
+        return this.gutter[0]
+      } if (this.gutter) {
+        return this.gutter
+      }
+      return 0
     }
   }
 }

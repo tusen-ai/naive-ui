@@ -10,19 +10,34 @@
   @include m($span + '-span') {
     width: percentage($number: 1 / 24 * $span);
   }
+  @include m($span + '-offset') {
+    margin-left: percentage($number: 1 / 24 * $span);
+  }
+  @include m($span + '-push') {
+    left: percentage($number: 1 / 24 * $span);
+  }
+  @include m($span + '-pull') {
+    right: percentage($number: 1 / 24 * $span);
+  }
 }
 
 @include b(col) {
   vertical-align: top;
   box-sizing: border-box;
   display: inline-block;
+  position: relative;
   @for $i from 1 through 24 {
     @include col-size-mixin($i);
   }
-  &:first-child {
-    padding-left: 0!important;
+  @include e(box) {
+    position: relative;
+    width: 100%;
+    height: 100%;
   }
-  &:last-child {
-    padding-right: 0!important;
-  }
+  // &:first-child {
+  //   padding-left: 0!important;
+  // }
+  // &:last-child {
+  //   padding-right: 0!important;
+  // }
 }

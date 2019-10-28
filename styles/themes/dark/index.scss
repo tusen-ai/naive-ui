@@ -36,6 +36,7 @@
 @import "components/Slider.scss";
 @import "components/Cascader.scss";
 @import "components/Tabs.scss";
+@import "components/Statistic.scss";
 
 @mixin setup-dark-theme() {
   @include setup-dark-colors();
@@ -99,4 +100,5 @@
   @include setup-dark-slider;
   @include setup-dark-cascader;
   @include setup-dark-tabs;
+  @include setup-dark-statistic;
 }

@@ -178,6 +178,10 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-gradient-text'
             },
             {
+              name: 'Grid',
+              path: `/${this.lang}/${this.theme}` + '/n-grid'
+            },
+            {
               name: 'Icon',
               path: `/${this.lang}/${this.theme}` + '/n-icon'
             },

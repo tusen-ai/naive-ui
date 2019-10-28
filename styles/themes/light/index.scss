@@ -36,6 +36,7 @@
 @import "components/Slider.scss";
 @import "components/Cascader.scss";
 @import "components/Tabs.scss";
+@import "components/Statistic.scss";
 
 @mixin setup-light-theme() {
   @include setup-light-colors();
@@ -95,4 +96,5 @@
   @include setup-light-slider;
   @include setup-light-cascader;
   @include setup-light-tabs;
+  @include setup-light-statistic;
 }

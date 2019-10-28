@@ -64,6 +64,8 @@ import time from './documentation/components/time'
 import slider from './documentation/components/slider'
 import tree from './documentation/components/tree'
 import affix from './documentation/components/affix'
+import statistic from './documentation/components/statistic'
+import grid from './documentation/components/grid'
 
 import demo from './demo'
 import ComponentDemo from './utils/ComponentDemo'
@@ -183,7 +185,9 @@ const routes = [
       { path: '/n-slider', component: slider },
       { path: '/n-tree', component: tree },
       { path: '/n-vertical-align-debug', component: verticalAlignDebug },
-      { path: '/n-affix', component: affix }
+      { path: '/n-affix', component: affix },
+      { path: '/n-statistic', component: statistic },
+      { path: '/n-grid', component: grid}
     ])
   },
   {
