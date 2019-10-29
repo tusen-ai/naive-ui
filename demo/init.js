@@ -66,6 +66,7 @@ import tree from './documentation/components/tree'
 import affix from './documentation/components/affix'
 import statistic from './documentation/components/statistic'
 import grid from './documentation/components/grid'
+import breadcrumb from './documentation/components/breadcrumb'
 
 import demo from './demo'
 import ComponentDemo from './utils/ComponentDemo'
@@ -187,7 +188,8 @@ const routes = [
       { path: '/n-vertical-align-debug', component: verticalAlignDebug },
       { path: '/n-affix', component: affix },
       { path: '/n-statistic', component: statistic },
-      { path: '/n-grid', component: grid}
+      { path: '/n-grid', component: grid },
+      { path: '/n-breadcrumb', component: breadcrumb }
     ])
   },
   {

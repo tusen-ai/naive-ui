@@ -1,8 +1,10 @@
 /* istanbul ignore file */
-import Scaffold from './src/main.vue'
+import Breadcrumb from './src/main.vue'
+import BreadcrumbItem from './src/BreadcrumbItem.vue'
 
-Scaffold.install = function (Vue) {
-  Vue.component(Scaffold.name, Scaffold)
+Breadcrumb.install = function (Vue) {
+  Vue.component(Breadcrumb.name, Breadcrumb)
+  Vue.component(BreadcrumbItem.name, BreadcrumbItem)
 }
 
-export default Scaffold
+export default Breadcrumb

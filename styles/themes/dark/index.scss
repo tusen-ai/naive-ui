@@ -37,6 +37,7 @@
 @import "components/Cascader.scss";
 @import "components/Tabs.scss";
 @import "components/Statistic.scss";
+@import "components/Breadcrumb.scss";
 
 @mixin setup-dark-theme() {
   @include setup-dark-colors();
@@ -101,4 +102,5 @@
   @include setup-dark-cascader;
   @include setup-dark-tabs;
   @include setup-dark-statistic;
+  @include setup-dark-breadcrumb;
 }

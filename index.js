@@ -61,6 +61,7 @@ import Tree from './packages/common/Tree'
 import Grid from './packages/common/Grid'
 import Affix from './packages/common/Affix'
 import Statistic from './packages/common/Statistic'
+import Breadcrumb from './packages/common/Breadcrumb'
 
 function install (Vue) {
   Card.install(Vue)
@@ -126,6 +127,7 @@ function install (Vue) {
   Grid.install(Vue)
   Affix.install(Vue)
   Statistic.install(Vue)
+  Breadcrumb.install(Vue)
 }
 
 export default {
