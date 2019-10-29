@@ -17,6 +17,7 @@
   @include b(input-number) {
     position: relative;
     border-radius: $--input-number-border-radius;
+    box-sizing: border-box;
     width: 152px;
     display: inline-block;
     outline: none;
@@ -96,6 +97,7 @@
     }
     @include e(input) {
       outline: none;
+      box-sizing: border-box;
       border-radius: $--input-number-border-radius;
       background-color: map-get($--input-number-background-color, 'default');
       box-shadow: inset 0 0 0px 1px map-get($--input-number-border-color, 'default');
@@ -115,7 +117,7 @@
       transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier;
       border: none;
       color: map-get($--input-number-text-color, 'default');
-      width: 84px;
+      width: 100%;
       text-align: center;
       padding: 0 34px;
       caret-color: $--input-number-caret-color;
