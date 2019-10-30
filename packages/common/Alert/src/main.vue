@@ -43,7 +43,10 @@
       >
         {{ title }}
       </div>
-      <div class="n-alert-body__content">
+      <div
+        v-if="$slots.default"
+        class="n-alert-body__content"
+      >
         <slot />
       </div>
     </div>
