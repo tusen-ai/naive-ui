@@ -281,9 +281,9 @@ export default {
           newValue[0] === oldValue[0] &&
           newValue[1] === oldValue[1]
         )) {
-          this.$emit('change', newValue)
+          this.$emit('change', newValue, oldValue)
         }
-      } else { this.$emit('change', newValue) }
+      } else { this.$emit('change', newValue, oldValue) }
     }
   },
   created () {
