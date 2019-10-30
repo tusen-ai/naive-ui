@@ -1,4 +1,5 @@
 import clickoutside from '../../../../directives/clickoutside'
+import focusDetector from './focusDetector'
 
 const TIME_CONST = {
   weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -11,6 +12,9 @@ export default {
   directives: {
     clickoutside
   },
+  components: {
+    focusDetector
+  },
   data () {
     return {
       noTransition: false,
@@ -20,6 +24,9 @@ export default {
   methods: {
     clearValue () {
       this.$emit('input', null)
+    },
+    handleBlur (e) {
+      this.$emit('blur', e)
     },
     banTransitionOneTick () {
       if (this.active) {

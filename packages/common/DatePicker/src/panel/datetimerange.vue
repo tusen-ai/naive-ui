@@ -3,6 +3,7 @@
     <div
       v-if="active"
       ref="self"
+      tabindex="0"
       class="n-date-picker-panel n-date-picker-panel--datetimerange"
       :class="{
         [`n-${theme}-theme`]: theme
@@ -224,6 +225,7 @@
         v-else
         style="height: 12px"
       />
+      <focus-detector @focus="handleBlur" />
     </div>
   </transition>
 </template>

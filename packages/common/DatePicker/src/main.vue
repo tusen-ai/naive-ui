@@ -10,12 +10,15 @@
   >
     <n-input
       v-if="isRange"
+      ref="input"
+      :lazy-focus="true"
       :disabled="disabled"
       :value="[displayStartTime, displayEndTime]"
       :placeholder="[computedStartPlaceholder, computedEndPlaceholder]"
       :readonly="disabled ? 'disabled' : false"
-      :splitor="splitor"
-      split
+      :seperator="seperator"
+      :force-focus="active"
+      pair
       @click="handleActivatorClick"
       @focus="handleFocus"
       @blur="handleRangeInputBlur"
@@ -27,9 +30,12 @@
     </n-input>
     <n-input
       v-else
+      ref="input"
       v-model="displayTime"
       class="n-date-picker__input"
+      :force-focus="active"
       :disabled="disabled"
+      :lazy-focus="true"
       :placeholder="computedPlaceholder"
       :readonly="disabled ? 'disabled' : false"
       @click="handleActivatorClick"
@@ -60,6 +66,7 @@
           :active="active"
           :actions="actions"
           :theme="synthesizedTheme"
+          @blur="handlePanelBlur"
           @input="handlePanelInput"
           @close="closeCalendar"
         />
@@ -71,6 +78,7 @@
           :actions="actions"
           :theme="synthesizedTheme"
           @input="handlePanelInput"
+          @blur="handlePanelBlur"
           @close="closeCalendar"
         />
         <daterange-panel
@@ -81,6 +89,7 @@
           :actions="actions"
           :theme="synthesizedTheme"
           @input="handleRangePanelInput"
+          @blur="handlePanelBlur"
           @close="closeCalendar"
         />
         <datetimerange-panel
@@ -92,6 +101,7 @@
           :theme="synthesizedTheme"
           @input="handleRangePanelInput"
           @close="closeCalendar"
+          @blur="handlePanelBlur"
         />
       </div>
     </div>
@@ -190,7 +200,7 @@ export default {
       },
       default: 'date'
     },
-    splitor: {
+    seperator: {
       type: String,
       default: 'to'
     },
@@ -220,8 +230,7 @@ export default {
       displayTime: '',
       displayStartTime: '',
       displayEndTime: '',
-      active: false,
-      isFocus: false
+      active: false
     }
   },
   computed: {
@@ -261,15 +270,32 @@ export default {
      * If new value is valid, set calendarTime and refresh display strings.
      * If new value is invalid, do nothing.
      */
-    value (newValue) {
-      console.log(newValue)
+    value (newValue, oldValue) {
       this.refresh(newValue)
+      if (this.isRange) {
+        if (!(
+          Array.isArray(newValue) &&
+          Array.isArray(oldValue) &&
+          newValue.length === 2 &&
+          newValue.length === oldValue.length &&
+          newValue[0] === oldValue[0] &&
+          newValue[1] === oldValue[1]
+        )) {
+          this.$emit('change', newValue)
+        }
+      } else { this.$emit('change', newValue) }
     }
   },
   created () {
     this.refresh(this.value)
   },
   methods: {
+    /**
+     * this blur is not really blur event, its key tab out of panel
+     */
+    handlePanelBlur () {
+      this.closeCalendar(true)
+    },
     handleClickOutside (e) {
       if (this.active && !this.$refs.activator.contains(e.target)) {
         this.closeCalendar()
@@ -315,19 +341,26 @@ export default {
     /**
      * Blur
      */
-    handleTimeInputBlur () {
+    afterBlur (e) {
+      if (this.active) {
+        window.setTimeout(() => {
+          if (!(this.$refs.panel && this.$refs.panel.$el.contains(document.activeElement))) {
+            this.closeCalendar()
+          }
+        }, 0)
+      }
+    },
+    handleTimeInputBlur (e) {
       if (this.disabled) return
       const newSelectedDateTime = strictParse(this.displayTime, this.computedFormat, new Date())
-      console.log('handle blur', this.displayTime, this.computedFormat, new Date())
-      console.log('handle blur new time', typeof newSelectedDateTime)
       if (isValid(newSelectedDateTime)) {
         this.$emit('input', getTime(newSelectedDateTime))
       } else {
         this.refreshDisplayTime(this.value)
       }
-      this.isFocus = false
+      this.afterBlur(e)
     },
-    handleRangeInputBlur () {
+    handleRangeInputBlur (e) {
       if (this.disabled) return
       const startDateTime = strictParse(this.displayStartTime, this.computedFormat, new Date())
       const endDateTime = strictParse(this.displayEndTime, this.computedFormat, new Date())
@@ -336,28 +369,8 @@ export default {
       } else {
         this.changeStartEndTime(startDateTime, endDateTime)
       }
-      this.isFocus = false
+      this.afterBlur(e)
     },
-    // handleStartTimeInputBlur () {
-    //   if (this.disabled) return
-    //   const startMoment = strictParse(this.displayStartTime, this.computedFormat, null)
-    //   if (startMoment !== null) {
-    //     this.changeStartDateTime(startMoment)
-    //   } else {
-    //     this.refresh(this.value)
-    //   }
-    //   this.isFocus = false
-    // },
-    // handleEndTimeInputBlur () {
-    //   if (this.disabled) return
-    //   const endMoment = strictParse(this.displayStartTime, this.computedFormat, null)
-    //   if (endMoment !== null) {
-    //     this.changeStartDateTime(endMoment)
-    //   } else {
-    //     this.refresh(this.value)
-    //   }
-    //   this.isFocus = false
-    // },
     /**
      * Input
      */
@@ -386,13 +399,6 @@ export default {
       this.displayEndTime = endTime
       // console.log('handleRangeInput', v, newStartTime, newEndTime)
     },
-    // handleEndTimeInput (e) {
-    //   const v = e.target.value
-    //   const newEndTime = moment(v, this.computedFormat, true)
-    //   if (newEndTime.isValid()) {
-    //     this.changeEndDateTime(newEndTime)
-    //   }
-    // },
     /**
      * Click
      */
@@ -411,7 +417,7 @@ export default {
      */
     handleFocus () {
       if (this.disabled) return
-      this.isFocus = true
+      if (!this.active) this.openCalendar()
     },
     /**
      * Calendar
@@ -419,11 +425,18 @@ export default {
     openCalendar (e) {
       if (this.disabled || this.active) return
       this.active = true
-      // console.log('into open calendar')
       this.$nextTick().then(this.updatePosition)
     },
-    closeCalendar () {
-      this.active = false
+    closeCalendar (returnFocus = false) {
+      if (this.active) {
+        this.active = false
+        this.$emit('blur', this.value)
+        if (returnFocus) {
+          if (this.$refs.input && this.$refs.input.$el) {
+            this.$refs.input.$el.focus()
+          }
+        }
+      }
     },
     toggleCalendar () {
 

@@ -3,6 +3,7 @@
     <div
       v-if="active"
       ref="self"
+      tabindex="0"
       class="n-date-picker-panel"
       :class="{
         [`n-${theme}-theme`]: theme
@@ -109,6 +110,7 @@
           Confirm
         </n-button>
       </div>
+      <focus-detector @focus="handleBlur" />
     </div>
   </transition>
 </template>
