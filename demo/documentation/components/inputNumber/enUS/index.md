@@ -6,4 +6,5 @@ event
 min-max
 size
 step
+validator
 ```
