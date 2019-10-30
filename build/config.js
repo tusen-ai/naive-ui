@@ -45,7 +45,10 @@ exports.docLoaders = [
   {
     test: /\.(js|jsx)$/,
     exclude: [/node_modules/],
-    loader: 'babel-loader'
+    loader: 'babel-loader',
+    options: {
+      plugins: ['@babel/plugin-syntax-dynamic-import']
+    }
   },
   {
     test: /\.(scss|css)$/,
