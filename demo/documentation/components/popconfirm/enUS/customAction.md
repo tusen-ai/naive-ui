@@ -1,6 +1,6 @@
 # Custom Action
 ```html
-<n-popconfirm :controller="controller">
+<n-popconfirm>
   <template v-slot:activator>
     <n-button>Quit</n-button>
   </template>
