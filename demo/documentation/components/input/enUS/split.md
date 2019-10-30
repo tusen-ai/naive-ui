@@ -1,21 +1,21 @@
-# Split
+# Pair
 ```html
-<n-input split splitor="to" v-model="value">
+<n-input pair seperator="to" v-model="value">
   <template v-slot:affix>
     <n-icon><ios-calendar /></n-icon>
   </template>
 </n-input>
-<n-input split splitor="to" v-model="value">
+<n-input pair seperator="to" v-model="value">
   <template v-slot:suffix>
     <n-icon><ios-calendar /></n-icon>
   </template>
 </n-input>
-<n-input split splitor="to" v-model="value" clearable>
+<n-input pair seperator="to" v-model="value" clearable>
   <template v-slot:suffix>
     <n-icon><ios-calendar /></n-icon>
   </template>
 </n-input>
-<n-input split splitor="to" v-model="value" clearable>
+<n-input pair seperator="to" v-model="value" clearable>
   <template v-slot:affix>
     <n-icon><ios-calendar /></n-icon>
   </template>

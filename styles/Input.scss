@@ -12,15 +12,62 @@
       height: $height;
     }
     @include e(input, textarea, textarea-mirror, splitor) {
+      padding-left: 14px;
+      padding-right: 14px;
       line-height: $line-height;
       font-size: $font-size;
       padding-top: ($height - $line-height) / 2;
       padding-bottom: ($height - $line-height) / 2;
     }
+    @include m(suffix) {
+      @include not-m(split) {
+        @include e(input) {
+          padding-right: 38px!important;
+        }
+      }
+      @include m(split) {
+        @include e(input) {
+          &:not(:first-child) {
+            padding-right: 38px!important;
+          }
+        }
+      }
+    }
+    @include m(affix) {
+      @include not-m(split) {
+        @include e(input) {
+          padding-left: 38px!important;
+        }
+      }
+      @include m(split) {
+        @include e(input) {
+          &:first-child {
+            padding-left: 38px!important;
+          }
+        }
+      }
+    }
+    @include m(clearable) {
+      @include not-m(split) {
+        @include e(input) {
+          padding-right: 38px!important;
+        }
+      }
+      @include m(split) {
+        @include e(input) {
+          &:not(:first-child) {
+            padding-right: 38px!important;
+          }
+        }
+      }
+    }
     @include m(round) {
       @include not-m(textarea) {
+        @include e(input) {
+          padding-left: $height / 2;
+          padding-right: $height / 2;
+        }
         border-radius: $height / 2;
-        padding-left: $height / 2;
       }
     }
   }
@@ -29,14 +76,13 @@
 @include themes-mixin {
   @include b(input) {
     @include once {
+      outline: none;
       box-sizing: border-box;
       position: relative;
       width: 100%;
       display: inline-block;
       border-radius: $--input-border-radius;
       transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
-      padding-left: 14px;
-      padding-right: 14px;
       @include input-size-mixin("small");
       @include input-size-mixin("medium");
       @include input-size-mixin("large");
@@ -92,15 +138,7 @@
         white-space: pre-wrap;
         overflow-wrap: break-word;
       }
-      @include m(clearable) {
-        padding-right: 32px;
-      }
-      @include m(suffix) {
-        padding-right: 38px!important;
-      }
-      @include m(affix) {
-        padding-left: 38px!important;
-      }
+      
       // @include m(icon) {
       //   @include m(left-icon) {
           
@@ -172,8 +210,8 @@
     @include e(splitor) {
       transition: color .3s $default-cubic-bezier;
       color: map-get($--input-color, 'default');
-      padding-left: 14px;
-      padding-right: 14px;
+      padding-left: 0px;
+      padding-right: 0px;
     }
     @include m(disabled) {
       cursor: not-allowed;
