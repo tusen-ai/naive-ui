@@ -6,7 +6,7 @@
     'disabled': $--n-disabled-text-color,
     'disabled-active': change-color($--n-primary-color, $alpha: .4)
   ) !global;
-  $--cascader-menu-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .12) !global;
+  $--cascader-menu-box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.18) !global;
   $--cascader-menu-border-color: rgba(255, 255, 255, 0.1) !global;
   $--cascader-menu-lightbar-background-color: mix($--primary-6, $--n-dialog-color, 20%) !global;
   $--cascader-option-arrow-background-color: rgba(255, 255, 255, 0.3) !global;

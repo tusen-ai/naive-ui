@@ -44,6 +44,8 @@
         p {
           font-size: 14px;
           margin: 0;
+          margin-bottom: 8px;
+          line-height: 1.625;
         }
       }
       @include e(view) {
