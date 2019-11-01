@@ -1,0 +1,201 @@
+<template>
+  <div
+    class="n-form-item"
+    :class="{
+      [`n-form-item--${synthesizedLabelPosition}-label`]: synthesizedLabelPosition,
+      [`n-form-item--required`]: synthesizedRequired
+    }"
+  >
+    <label
+      v-if="label || $slots.label"
+      :class="`n-form-item-label`"
+      :style="synthesizedLabelStyle"
+    >
+      <span :class="`n-form-item-label__span`">
+        <template v-if="$slots.label">
+          <slot name="label" />
+        </template>
+        <template v-else>
+          {{ label }}
+        </template>
+      </span>
+    </label>
+    <div
+      class="n-form-item-content"
+      :class="validated ? `n-form-item-content--error` : `n-form-item-content--pass`"
+    >
+      <slot />
+      <div :class="`n-form-item-explain`">
+        {{ explain }}
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import AsyncValidator from 'async-validator'
+import get from 'lodash/get'
+import registerable from '../../../mixins/registerable'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
+
+export default {
+  name: 'NFormItem',
+  mixins: [
+    registerable('NForm', 'items', 'path'),
+    withapp,
+    themeable
+  ],
+  props: {
+    label: {
+      type: String,
+      default: null
+    },
+    labelWidth: {
+      type: Number,
+      default: null
+    },
+    labelStyle: {
+      type: String,
+      default: null
+    },
+    labelPosition: {
+      type: String,
+      default: 'top'
+    },
+    path: {
+      type: String,
+      default: null
+    },
+    rulePath: {
+      type: String,
+      default: null
+    },
+    required: {
+      type: Boolean,
+      default: false
+    },
+    showRequireMark: {
+      type: Boolean,
+      default: false
+    },
+    rule: {
+      type: [Object, Array],
+      default: null
+    }
+  },
+  inject: ['NForm'],
+  provide () {
+    return {
+      NFormItem: this
+    }
+  },
+  data () {
+    return {
+      explain: null,
+      validated: false
+    }
+  },
+  computed: {
+    synthesizedLabelStyle () {
+      return {
+        ...this.labelStyle,
+        width: this.styleLabelWidth
+      }
+    },
+    synthesizedLabelWidth () {
+      if (this.labelWidth) return this.labelWidth
+      if (this.NForm && this.NForm.labelWidth) return this.NForm.labelWidth
+      return null
+    },
+    styleLabelWidth () {
+      if (this.synthesizedLabelPosition === 'top') return null
+      if (this.synthesizedLabelWidth === null) return null
+      return `${this.synthesizedLabelWidth}px`
+    },
+    synthesizedRulePath () {
+      if (this.rulePath) return this.rulePath
+      else if (this.path) {
+        const keys = this.path.split('.')
+        return keys[keys.length - 1]
+      } else return null
+    },
+    synthesizedLabelPosition () {
+      if (this.labelPosition) return this.labelPosition
+      if (this.NForm && this.NForm.labelPosition) return this.NForm.labelPosition
+      return 'top'
+    },
+    synthesizedRequired () {
+      if (this.required) return this.required
+      if (this.NForm && this.NForm.required) return this.NForm.required
+      return false
+    },
+    synthesizedRules () {
+      let rules = []
+      if (this.required) {
+        rules.push({
+          trigger: 'blur',
+          required: true
+        })
+      }
+      if (this.rule) {
+        if (Array.isArray(this.rule)) {
+          rules = rules.concat(this.rule)
+        } else {
+          rules.push(this.rule)
+        }
+      }
+      if (this.NForm && this.NForm.rules && get(this.NForm.rules, this.synthesizedRulePath, null)) {
+        const rule = get(this.NForm.rules, this.path)
+        if (Array.isArray(rule)) {
+          rules = rules.concat(rule)
+        } else {
+          rules.push(rule)
+        }
+      }
+      return rules
+    }
+  },
+  created () {
+    this.addValidationEventListeners()
+  },
+  methods: {
+    handleContentBlur () {
+      this.validate('blur')
+    },
+    handleContentChange () {
+      this.validate('change')
+    },
+    validate (trigger = null, callback = null) {
+      if (!this.path) {
+        return
+      }
+      const rules = this.synthesizedRules
+      const path = this.path
+      const value = get(this.NForm.value, this.path, null)
+      const activeRules = !trigger ? rules : rules.filter(rule => rule.trigger === trigger)
+      if (!activeRules.length) return
+      const asyncValidator = new AsyncValidator({ [path]: activeRules })
+      asyncValidator.validate({ [path]: value }, (errors, fields) => {
+        if (errors) {
+          this.explain = errors[0].message
+          this.validated = true
+        } else {
+          this.cleanValidationEffect()
+        }
+        callback((errors && errors[0].message) || false, fields)
+      })
+    },
+    cleanValidationEffect () {
+      this.explain = null
+      this.validated = false
+    },
+    addValidationEventListeners () {
+      const rules = this.synthesizedRules
+      if (rules.length >= 0) {
+        this.$on('form-item-blur', this.handleContentBlur)
+        this.$on('form-item-change', this.handleContentChange)
+      }
+    }
+  }
+}
+</script>

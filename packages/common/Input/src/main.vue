@@ -136,7 +136,7 @@ export default {
   },
   mixins: [ withapp, themeable, Emitter ],
   inject: {
-    formItem: {
+    NFormItem: {
       default: null
     }
   },
@@ -322,8 +322,8 @@ export default {
         this.focus = false
         this.triggerBlur(e)
       }
-      if (this.formItem) {
-        this.dispatch('NFormItem', 'on-form-blur', e.target.value)
+      if (this.NFormItem) {
+        this.dispatch('NFormItem', 'form-item-blur', e.target.value)
       }
     },
     handleInputFocus (e) {
@@ -347,8 +347,8 @@ export default {
       this.$emit('keyup', e)
     },
     handleChange (e) {
-      if (this.formItem) {
-        this.dispatch('NFormItem', 'on-form-change', e.target.value)
+      if (this.NFormItem) {
+        this.dispatch('NFormItem', 'form-item-change', e.target.value)
       }
       this.$emit('change', e.target.value)
     },

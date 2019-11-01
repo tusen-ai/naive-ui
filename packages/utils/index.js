@@ -23,9 +23,9 @@ const deepClone = (obj) => {
   return cloneObj
 }
 
-const getObjValue = (obj, keys) => {
-  return keys.reduce((res, n) => (res !== undefined && res[n] !== undefined ? res[n] : null), obj)
-}
+// const getObjValue = (obj, keys) => {
+//   return keys.reduce((res, n) => (res !== undefined && res[n] !== undefined ? res[n] : null), obj)
+// }
 
 /**
  * transfer function into promise
@@ -44,7 +44,6 @@ const noopFn = () => {}
 export {
   getScrollParent,
   deepClone,
-  getObjValue,
   funcToPromise,
   noopFn
 }

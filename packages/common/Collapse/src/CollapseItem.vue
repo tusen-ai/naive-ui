@@ -36,7 +36,7 @@
 <script>
 import NIcon from '../../Icon'
 import iosArrowForward from '../../../icons/ios-arrow-forward'
-import registerable from '../../../mixins/registerable'
+import collectable from '../../../mixins/collectable'
 import FadeInHeightExpandTransition from '../../../transition/FadeInHeightExpandTransition'
 
 export default {
@@ -46,7 +46,7 @@ export default {
     FadeInHeightExpandTransition,
     iosArrowForward
   },
-  mixins: [registerable('NCollapse', 'collectedItemNames', 'name')],
+  mixins: [collectable('NCollapse', 'collectedItemNames', 'name')],
   inject: {
     NCollapse: {
       default: null

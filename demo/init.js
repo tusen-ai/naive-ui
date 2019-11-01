@@ -34,6 +34,7 @@ import inputNumber from './documentation/components/inputNumber'
 import nimbusIcon from './documentation/components/nimbusIcon'
 import radio from './documentation/components/radio'
 import formDemo from './documentation/components/formDemo'
+import form from './documentation/components/form'
 import tabs from './documentation/components/tabs'
 import timePicker from './documentation/components/timePicker'
 import confirm from './documentation/components/confirm'
@@ -156,6 +157,7 @@ const routes = [
       { path: '/n-nimbus-icon', component: nimbusIcon },
       { path: '/n-radio', component: radio },
       { path: '/n-form', component: formDemo },
+      { path: '/n-new-form', component: form},
       { path: '/n-tabs', component: tabs },
       { path: '/n-time-picker', component: timePicker },
       { path: '/n-confirm', component: confirm },

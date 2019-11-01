@@ -5,9 +5,10 @@
   width: 100%;
   font-size: 14px;
   color: rgba(255, 255, 255, 1);
-  &.n-form--inline {
-    display: flex;
-    align-items: center;
+  @include m(inline) {
+    width: auto;
+    display: inline-flex;
+    align-items: flex-end;
     align-content: space-around;
     flex-wrap: nowrap;
     .n-form-item:not(:last-child) {
@@ -56,21 +57,33 @@
   width: 100%;
   align-items: center;
   margin-bottom: 24px;
-  .n-form-item__label {
-    flex-grow: 0;
-    padding: 10px 10px 10px 0; 
-    overflow-wrap: break-word;
+  @include m(top-label) {
+    align-items: flex-start;
+    flex-direction: column;
+    margin: 0 18px 0 0;
+    @include b(form-item-label) {
+      width: 100%;
+      padding-bottom: 8px;
+      padding-left: 2px;
+    }
   }
-  .n-form-item__label-span {
-    display: inline-block;
-  } 
-  .n-form-item__content {
+  @include b(form-item-label) {
+    height: 22px;
+    box-sizing: border-box;
+    font-size: 13px;
+    flex-grow: 0;
+    overflow-wrap: break-word;
+    @include e(span) {
+      display: inline-block;
+    }
+  }
+  @include b(form-item-content) {
     position: relative;
     flex-grow: 1;
   }
-  .n-form-item__validate {
-    position: absolute;
-    bottom: -22px;
+  @include b(form-item-explain) {
+    min-height: 22px;
+    line-height: 1.5;
     color: rgba(255, 146, 164, 1);
     font-size: 14px;
   }

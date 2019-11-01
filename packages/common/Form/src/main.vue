@@ -9,13 +9,13 @@
   </form>
 </template>
 <script>
-import { deepClone, getObjValue } from '../../../utils/index'
+import cloneDeep from 'lodash/cloneDeep'
 
 export default {
   name: 'NForm',
   provide () {
     return {
-      form: this
+      NForm: this
     }
   },
   props: {
@@ -25,13 +25,13 @@ export default {
     },
     labelWidth: {
       type: Number,
-      default: 80
+      default: null
     },
     labelPosition: {
       type: String,
-      default: 'right' // ['top', 'right', 'left', 'center']
+      default: 'top' // ['top', 'right', 'left', 'center']
     },
-    model: {
+    value: {
       type: Object,
       default: function () {
         return {}
@@ -43,95 +43,59 @@ export default {
         return {}
       }
     },
-    requiredLogo: {
+    showRequireMark: {
       type: Boolean,
       default: true
     }
   },
   data () {
     return {
-      initialValue: ''
+      initialValue: null,
+      items: {}
     }
   },
   created () {
-    this.initialValue = deepClone(this.model)
+    this.initialValue = cloneDeep(this.model)
   },
   methods: {
-    getLabelPosClass (labelPosition) {
-      return 'n-form--lable-' + labelPosition
-    },
     /**
      * form validation, validate all prop-elements by default,
      * can use specify the scope of validation by param part.
      *
-     * @param {Funtion} cb callback
+     * @param {Funtion} callback callback
      * @param {Array} scope  to specify the scope of validation
      * @return {Boolean} validation passed or not
      */
-    validate (cb, scope = [], target = this, res = false) {
-      let promise
-      let isCallback = typeof cb === 'function'
-      if (!isCallback && window.Promise) {
-        promise = new Promise((resolve, reject) => {
-          cb = (valid) => valid ? resolve(valid) : reject(valid)
-        })
-      }
+    validate (callback, shouldFieldBeValidated = () => true) {
+      console.log(this.items)
       let valid = true
       let fields = {}
-      for (let i = 0; i < target.$children.length; i++) {
-        let child = target.$children[i]
-        let componentName = child.$options.name
-        let flag = scope.length > 0 ? scope.indexOf(child.prop) > -1 : true
-        if (componentName === 'NFormItem' && child.prop && flag) {
-          child.validate('', (errors, field) => {
-            if (errors) {
-              valid = false
-            }
-            fields = Object.assign({}, fields, field)
-          })
-        } else if (['NFormItem', 'NForm'].indexOf(componentName) === -1) {
-          if (!this.validate(null, [], child, true)) {
-            valid = false
+      for (const key of Object.keys(this.items)) {
+        const formItemInstances = this.items[key]
+        for (const formItemInstance of formItemInstances) {
+          if (shouldFieldBeValidated(formItemInstance.path)) {
+            formItemInstance.validate(null, (errors, field) => {
+              if (errors) {
+                valid = false
+              }
+              fields = Object.assign({}, fields, field)
+            })
           }
         }
-        if (i === target.$children.length - 1 && isCallback) {
-          cb(valid, fields)
-        }
       }
-
-      if (res) {
-        return valid
+      if (callback) {
+        callback(valid, fields)
       }
-
-      if (promise) {
-        return promise
-      }
+      return Promise.resolve(valid)
     },
-    /**
-     * just can reset the value with prop in form-item
-     */
     resetForm (target = this) {
-      for (let i = 0; i < target.$children.length; i++) {
-        let child = target.$children[i]
-        let componentName = child.$options.name
-        if (componentName === 'NFormItem' && child.prop) {
-          let keys = child.prop.split('.')
-          let obj = this.model
-          let j = 0
-          keys.forEach((m, n) => {
-            if (n !== keys.length - 1) {
-              obj = obj[m]
-            }
-            j = n
-          })
-          obj[keys[j]] = getObjValue(this.initialValue, keys)
-          if (child.validateFlag) {
-            child.clearValidateClass()
-          }
-        } else if (['NFormItem', 'NForm'].indexOf(componentName) === -1) {
-          this.resetForm(child)
+      for (const key of Object.keys(this.items)) {
+        const formItemInstances = this.items[key]
+        for (const formItemInstance of formItemInstances) {
+          formItemInstance.cleanValidationEffect()
         }
       }
+      this.value = this.initialValue
     }
   }
 }

@@ -174,6 +174,10 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-form'
             },
             {
+              name: 'Form 2',
+              path: `/${this.lang}/${this.theme}` + '/n-new-form'
+            },
+            {
               name: 'GradientText',
               path: `/${this.lang}/${this.theme}` + '/n-gradient-text'
             },

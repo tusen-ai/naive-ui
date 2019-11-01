@@ -23,7 +23,7 @@ export default {
   name: 'NSwitch',
   mixins: [ withapp, themeable, Emitter ],
   inject: {
-    formItem: {
+    NFormItem: {
       default: null
     }
   },
@@ -46,8 +46,8 @@ export default {
     handleClick () {
       if (!this.disabled) {
         this.$emit('input', !this.value)
-        if (this.formItem) {
-          this.dispatch('NFormItem', 'on-form-change', !this.value)
+        if (this.NFormItem) {
+          this.dispatch('NFormItem', 'form-item-change', !this.value)
         }
       }
     }

@@ -79,7 +79,7 @@ export default {
   },
   mixins: [ withapp, themeable, Emitter ],
   inject: {
-    formItem: {
+    NFormItem: {
       default: null
     }
   },
@@ -175,7 +175,7 @@ export default {
       e.preventDefault()
     },
     formBlur (type, val) {
-      if (this.formItem) {
+      if (this.NFormItem) {
         this.dispatch('NFormItem', 'on-form-' + type, val)
       }
     },

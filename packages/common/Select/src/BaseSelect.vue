@@ -101,7 +101,7 @@ export default {
   },
   mixins: [withapp, themeable, detachable, toggleable, placeable, zindexable, Emitter],
   inject: {
-    formItem: {
+    NFormItem: {
       default: null
     }
   },
@@ -214,8 +214,8 @@ export default {
       })
     },
     value () {
-      if (this.formItem) {
-        this.dispatch('NFormItem', 'on-form-change', this.value)
+      if (this.NFormItem) {
+        this.dispatch('NFormItem', 'form-item-change', this.value)
       }
       this.$nextTick().then(() => {
         this.updatePosition()
