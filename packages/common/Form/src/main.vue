@@ -29,7 +29,7 @@ export default {
     },
     labelPosition: {
       type: String,
-      default: 'top' // ['top', 'right', 'left', 'center']
+      default: 'top'
     },
     value: {
       type: Object,

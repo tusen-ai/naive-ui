@@ -26,7 +26,12 @@
     >
       <slot />
       <div :class="`n-form-item-explain`">
-        {{ explain }}
+        <transition name="n-fade-down">
+          <span
+            v-if="explain"
+            class="n-form-item-explain__content"
+          >{{ explain }}</span>
+        </transition>
       </div>
     </div>
   </div>
@@ -131,10 +136,17 @@ export default {
     },
     synthesizedRules () {
       let rules = []
+      const validator = (rule, value) => {
+        if (value !== undefined && value !== null && value !== '') {
+          return true
+        }
+        return Error(`${this.label || this.path} is required!`)
+      }
       if (this.required) {
         rules.push({
-          trigger: 'blur',
-          required: true
+          trigger: ['blur', 'change', 'input'],
+          required: true,
+          validator
         })
       }
       if (this.rule) {
@@ -156,6 +168,11 @@ export default {
     }
   },
   created () {
+    /**
+     * This is buggy!
+     * Because if it's child change, rules is not updated
+     * However I need to make it work first
+     */
     this.addValidationEventListeners()
   },
   methods: {
@@ -165,6 +182,12 @@ export default {
     handleContentChange () {
       this.validate('change')
     },
+    handleContentFocus () {
+      this.validate('focus')
+    },
+    handleContentInput () {
+      this.validate('input')
+    },
     validate (trigger = null, callback = null) {
       if (!this.path) {
         return
@@ -172,10 +195,17 @@ export default {
       const rules = this.synthesizedRules
       const path = this.path
       const value = get(this.NForm.value, this.path, null)
-      const activeRules = !trigger ? rules : rules.filter(rule => rule.trigger === trigger)
+      const activeRules = !trigger ? rules : rules.filter(rule => {
+        if (Array.isArray(rule.trigger)) {
+          return rule.trigger.includes(trigger)
+        } else {
+          return rule.trigger === trigger
+        }
+      })
       if (!activeRules.length) return
       const asyncValidator = new AsyncValidator({ [path]: activeRules })
       asyncValidator.validate({ [path]: value }, (errors, fields) => {
+        console.log('validate', errors, fields)
         if (errors) {
           this.explain = errors[0].message
           this.validated = true
@@ -192,8 +222,10 @@ export default {
     addValidationEventListeners () {
       const rules = this.synthesizedRules
       if (rules.length >= 0) {
-        this.$on('form-item-blur', this.handleContentBlur)
-        this.$on('form-item-change', this.handleContentChange)
+        this.$on('blur', this.handleContentBlur)
+        this.$on('input', this.handleContentInput)
+        this.$on('focus', this.handleContentFocus)
+        this.$on('change', this.handleContentChange)
       }
     }
   }

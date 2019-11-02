@@ -124,22 +124,17 @@
 </template>
 
 <script>
-import Emitter from '../../../mixins/emitter'
 import NCancelMark from '../../../base/CancelMark'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import asformitem from '../../../mixins/asformitem'
 
 export default {
   name: 'NInput',
   components: {
     NCancelMark
   },
-  mixins: [ withapp, themeable, Emitter ],
-  inject: {
-    NFormItem: {
-      default: null
-    }
-  },
+  mixins: [ withapp, themeable, asformitem() ],
   props: {
     type: {
       type: String,
@@ -322,9 +317,6 @@ export default {
         this.focus = false
         this.triggerBlur(e)
       }
-      if (this.NFormItem) {
-        this.dispatch('NFormItem', 'form-item-blur', e.target.value)
-      }
     },
     handleInputFocus (e) {
       this.$emit('input-focus')
@@ -347,9 +339,6 @@ export default {
       this.$emit('keyup', e)
     },
     handleChange (e) {
-      if (this.NFormItem) {
-        this.dispatch('NFormItem', 'form-item-change', e.target.value)
-      }
       this.$emit('change', e.target.value)
     },
     handleClick (e) {

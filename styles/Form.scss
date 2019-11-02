@@ -6,13 +6,15 @@
   font-size: 14px;
   color: rgba(255, 255, 255, 1);
   @include m(inline) {
-    width: auto;
+    width: 100%;
     display: inline-flex;
     align-items: flex-end;
     align-content: space-around;
-    flex-wrap: nowrap;
-    .n-form-item:not(:last-child) {
-      margin-right: 10px;
+    @include b(form-item) {
+      width: auto;
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
   .n-form-item__label--top {
@@ -71,21 +73,25 @@
     height: 22px;
     box-sizing: border-box;
     font-size: 13px;
-    flex-grow: 0;
-    overflow-wrap: break-word;
-    @include e(span) {
-      display: inline-block;
-    }
   }
   @include b(form-item-content) {
     position: relative;
     flex-grow: 1;
   }
   @include b(form-item-explain) {
-    min-height: 22px;
+    box-sizing: border-box;
+    margin-top: 4px;
+    min-height: 20px;
     line-height: 1.5;
     color: rgba(255, 146, 164, 1);
-    font-size: 14px;
+    font-size: 13px;
+    padding-left: 2px;
+    transform-origin: top left;
+    @include e(content) {
+      display: inline-block;
+      @include fade-down-transition($from-offset: -3px);
+      // @include fade-in-scale-up-transition();
+    }
   }
   .n-form-item__content--pass {
     .n-form-item__validate {

@@ -220,20 +220,37 @@ $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
   }
 }
 
+@mixin fade-down-transition ($name: 'fade-down', $from-offset: -4px) {
+  &.#{$namespace}-#{$name}-enter, &.#{$namespace}-#{$name}-leave-to {
+    opacity: 0;
+    transform: translateY($from-offset);
+  }
+  &.#{$namespace}-#{$name}-enter-to, &.#{$namespace}-#{$name}-leave {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  &.#{$namespace}-#{$name}-leave-active {
+    transition: opacity .3s $default-cubic-bezier, transform .3s $default-cubic-bezier;
+  }
+  &.#{$namespace}-#{$name}-enter-active {
+    transition: opacity .3s $default-cubic-bezier, transform .3s $default-cubic-bezier;
+  }
+}
+
 @mixin fade-up-transition($block) {
-  .#{$namespace}-#{$block}--transition-enter, .#{$namespace}-#{$block}--transition-leave-to {
+  &.#{$namespace}-#{$block}--transition-enter, .#{$namespace}-#{$block}--transition-leave-to {
     opacity: 0;
     transform: translateY(4px);
   }
-  .#{$namespace}-#{$block}--transition-leave-active {
+  &.#{$namespace}-#{$block}--transition-leave-active {
     transition: opacity .3s $slow-out-cubic-bezier, transform .3s $slow-out-cubic-bezier;
   }
-  .#{$namespace}-#{$block}--transition-enter-active {
+  &.#{$namespace}-#{$block}--transition-enter-active {
     transition: opacity .3s $fast-in-cubic-bezier, transform .3s $fast-in-cubic-bezier;
   }
 }
 
-@mixin fade-in-scale-up-transition($block: 'fade-in-scale-up', $origin: inherit, $duration: .2s) {
+@mixin fade-in-scale-up-transition($block: 'fade-in-scale-up', $origin: inherit, $duration: .2s, $start-scale: 0.9) {
   &.#{$namespace}-#{$block}--transition-leave-active {
     transform-origin: $origin;
     transition: opacity $duration $slow-out-cubic-bezier, transform $duration $slow-out-cubic-bezier;
@@ -244,7 +261,7 @@ $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
   }
   &.#{$namespace}-#{$block}--transition-enter, &.#{$namespace}-#{$block}--transition-leave-to {
     opacity: 0;
-    transform: scale(.9);
+    transform: scale($start-scale);
   }
   &.#{$namespace}-#{$block}--transition-leave, &.#{$namespace}-#{$block}--transition-enter-to {
     opacity: 1; 

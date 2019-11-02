@@ -6,13 +6,13 @@
   :value="formValue"
   ref="form"
 >
-  <n-form-item label="Name" path="name">
-    <n-input v-model="formValue.name" placeholder="Input Name" />
+  <n-form-item label="Name" path="user.name" required>
+    <n-input v-model="formValue.user.name" placeholder="Input Name" />
   </n-form-item>
-  <n-form-item label="Age" path="age">
-    <n-input placeholder="Input Age" v-model="formValue.age"/>
+  <n-form-item label="Age" path="user.age" required>
+    <n-input placeholder="Input Age" v-model="formValue.user.age"/>
   </n-form-item>
-  <n-form-item label="Phone" path="phone">
+  <n-form-item label="Phone" path="phone" required>
     <n-input placeholder="Phone Number" v-model="formValue.phone"/>
   </n-form-item>
   <n-form-item v-model="formValue.phone">
@@ -29,8 +29,10 @@ export default {
   data () {
     return {
       formValue: {
-        name: '',
-        age: '',
+        user: {
+          name: '',
+          age: ''
+        },
         phone: ''
       }
     }
