@@ -198,7 +198,7 @@ export default {
     },
     lazyFocus: {
       type: Boolean,
-      default: true
+      default: false
     },
     forceFocus: {
       type: Boolean,

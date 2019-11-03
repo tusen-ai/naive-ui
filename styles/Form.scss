@@ -4,11 +4,10 @@
 @include b(form) {
   width: 100%;
   font-size: 14px;
-  color: rgba(255, 255, 255, 1);
   @include m(inline) {
     width: 100%;
     display: inline-flex;
-    align-items: flex-end;
+    align-items: flex-start;
     align-content: space-around;
     @include b(form-item) {
       width: auto;
@@ -17,95 +16,51 @@
       }
     }
   }
-  .n-form-item__label--top {
-    display: block;
-    .n-form-item__label {
-      display: block;
-      padding-top: 0;
-      overflow-wrap: unset;
-      padding-top: 0;
-      align-items: center;
-      text-align: left;
-    }
-  }
-  .n-form-item__label--require .n-form-item__label-span::before {
-    float: right;
-    content: '*';
-    color:rgba(255, 146, 164, 1);
-    margin-left: 5px;
-  }
-  .n-form-item__label--left .n-form-item__label {
-    text-align: left;
-  }
-  .n-form-item__label--right .n-form-item__label {
-    text-align: right;
-  }
-  .n-form-item__label--center .n-form-item__label {
-    text-align: center;
-  }
-  .n-form--disable {
-    box-shadow: inset 0 0 0px 1px rgb(99, 96, 96);
-    background-color: rgba(255, 255, 255, 0.1);
-    cursor: not-allowed;
-    &:hover {
-      box-shadow: inset 0 0 0px 1px rgb(99, 96, 96);
-      background-color: rgba(255, 255, 255, 0.1);
-    }
-  }
 }
 
-@include b(form-item) {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  margin-bottom: 24px;
-  @include m(top-label) {
-    align-items: flex-start;
-    flex-direction: column;
-    margin: 0 18px 0 0;
+@include themes-mixin {
+  @include b(form-item) {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 24px;
+    @include m(top-labelled) {
+      align-items: flex-start;
+      flex-direction: column;
+      margin-right: 18px;
+      @include m(no-label) {
+        padding-top: 22px;
+      }
+      @include b(form-item-label) {
+        width: 100%;
+        padding-bottom: 8px;
+        padding-left: 2px;
+      }
+    }
+    @include m(has-feedback) {
+      margin-bottom: 2px;
+    }
     @include b(form-item-label) {
-      width: 100%;
-      padding-bottom: 8px;
+      transition: color .3s $default-cubic-bezier;
+      color: $--n-text-color;
+      height: 22px;
+      box-sizing: border-box;
+      font-size: 13px;
+    }
+    @include b(form-item-blank) {
+      position: relative;
+      flex-grow: 1;
+    }
+    @include b(form-item-feedback) {
       padding-left: 2px;
-    }
-  }
-  @include b(form-item-label) {
-    height: 22px;
-    box-sizing: border-box;
-    font-size: 13px;
-  }
-  @include b(form-item-content) {
-    position: relative;
-    flex-grow: 1;
-  }
-  @include b(form-item-explain) {
-    box-sizing: border-box;
-    margin-top: 4px;
-    min-height: 20px;
-    line-height: 1.5;
-    color: rgba(255, 146, 164, 1);
-    font-size: 13px;
-    padding-left: 2px;
-    transform-origin: top left;
-    @include e(content) {
-      display: inline-block;
+      padding-top: 6px;
+      box-sizing: border-box;
+      min-height: 20px;
+      color: $--error-6;
+      font-size: 13px;
+      transform-origin: top left;
+      transition: color .3s $default-cubic-bezier;
       @include fade-down-transition($from-offset: -3px);
-      // @include fade-in-scale-up-transition();
-    }
-  }
-  .n-form-item__content--pass {
-    .n-form-item__validate {
-      visibility: hidden;
-    }
-  }
-  .n-form-item__content--error {
-    .n-form-item__validate {
-      visibility: visible;
-    }
-    // 后期可以通过属性优化, 精确定位
-    input, select, textarea {
-      box-shadow: inset 0 0 0px 1px rgba(255, 146, 164, 1);
-      background-color: rgba(255, 255, 255, 0.1);
-    }
+    } 
   }
 }

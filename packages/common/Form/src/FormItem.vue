@@ -2,8 +2,11 @@
   <div
     class="n-form-item"
     :class="{
-      [`n-form-item--${synthesizedLabelPosition}-label`]: synthesizedLabelPosition,
-      [`n-form-item--required`]: synthesizedRequired
+      [`n-form-item--${synthesizedLabelPosition}-labelled`]: synthesizedLabelPosition,
+      [`n-form-item--required`]: synthesizedRequired,
+      [`n-form-item--no-label`]: !(label || $slots.label),
+      [`n-form-item--has-feedback`]: hasFeedback,
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
   >
     <label
@@ -11,29 +14,31 @@
       :class="`n-form-item-label`"
       :style="synthesizedLabelStyle"
     >
-      <span :class="`n-form-item-label__span`">
-        <template v-if="$slots.label">
-          <slot name="label" />
-        </template>
-        <template v-else>
-          {{ label }}
-        </template>
-      </span>
+      <template v-if="$slots.label">
+        <slot name="label" />
+      </template>
+      <template v-else>
+        {{ label }}
+      </template>
     </label>
     <div
-      class="n-form-item-content"
-      :class="validated ? `n-form-item-content--error` : `n-form-item-content--pass`"
+      class="n-form-item-blank"
+      :class="validated ? `n-form-item-blank--error` : `n-form-item-blank--pass`"
     >
       <slot />
-      <div :class="`n-form-item-explain`">
-        <transition name="n-fade-down">
-          <span
-            v-if="explain"
-            class="n-form-item-explain__content"
-          >{{ explain }}</span>
-        </transition>
-      </div>
     </div>
+    <transition
+      name="n-fade-down"
+      @before-enter="handleBeforeEnter"
+      @after-leave="handleAfterLeave"
+    >
+      <div
+        v-if="explain"
+        class="n-form-item-feedback"
+      >
+        {{ explain }}
+      </div>
+    </transition>
   </div>
 </template>
 <script>
@@ -97,7 +102,8 @@ export default {
   data () {
     return {
       explain: null,
-      validated: false
+      validated: false,
+      hasFeedback: false
     }
   },
   computed: {
@@ -227,6 +233,12 @@ export default {
         this.$on('focus', this.handleContentFocus)
         this.$on('change', this.handleContentChange)
       }
+    },
+    handleBeforeEnter () {
+      this.hasFeedback = true
+    },
+    handleAfterLeave () {
+      this.hasFeedback = false
     }
   }
 }
