@@ -200,7 +200,7 @@ export default {
       }
       const rules = this.synthesizedRules
       const path = this.path
-      const value = get(this.NForm.value, this.path, null)
+      const value = get(this.NForm.model, this.path, null)
       const activeRules = !trigger ? rules : rules.filter(rule => {
         if (Array.isArray(rule.trigger)) {
           return rule.trigger.includes(trigger)

@@ -20,44 +20,41 @@
 
 @include themes-mixin {
   @include b(form-item) {
-    display: flex;
     width: 100%;
-    align-items: center;
-    margin-bottom: 24px;
+    padding-bottom: 24px;
     @include m(top-labelled) {
-      align-items: flex-start;
-      flex-direction: column;
       margin-right: 18px;
       @include m(no-label) {
-        padding-top: 22px;
+        padding-top: 24px;
       }
       @include b(form-item-label) {
+        display: block;
         width: 100%;
         padding-bottom: 8px;
         padding-left: 2px;
       }
     }
     @include m(has-feedback) {
-      margin-bottom: 2px;
+      padding-bottom: 0px;
     }
     @include b(form-item-label) {
+      display: inline-block;
       transition: color .3s $default-cubic-bezier;
       color: $--n-text-color;
-      height: 22px;
+      height: 24px;
       box-sizing: border-box;
-      font-size: 13px;
+      font-size: 14px;
     }
     @include b(form-item-blank) {
       position: relative;
-      flex-grow: 1;
     }
     @include b(form-item-feedback) {
       padding-left: 2px;
-      padding-top: 6px;
+      padding-top: 4px;
       box-sizing: border-box;
-      min-height: 20px;
+      min-height: 24px;
       color: $--error-6;
-      font-size: 13px;
+      font-size: 14px;
       transform-origin: top left;
       transition: color .3s $default-cubic-bezier;
       @include fade-down-transition($from-offset: -3px);

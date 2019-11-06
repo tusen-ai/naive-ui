@@ -31,7 +31,7 @@ export default {
       type: String,
       default: 'top'
     },
-    value: {
+    model: {
       type: Object,
       default: function () {
         return {}
