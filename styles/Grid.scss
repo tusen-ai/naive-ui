@@ -2,6 +2,9 @@
 @import './themes/vars.scss';
 
 @include b(row) {
+  @include m(flex) {
+    display: flex;
+  }
   width: 100%;
   position: relative;
 }
@@ -34,10 +37,4 @@
     width: 100%;
     height: 100%;
   }
-  // &:first-child {
-  //   padding-left: 0!important;
-  // }
-  // &:last-child {
-  //   padding-right: 0!important;
-  // }
 }

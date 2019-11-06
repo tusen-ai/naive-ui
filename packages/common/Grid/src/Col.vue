@@ -8,7 +8,7 @@
       [`n-col--${offset}-offset`]: offset
     }"
     :style="{
-      padding: `${verticalGutter}px ${horizontalGutter / 2}px`
+      padding: `${ verticalGutter / 2 }px ${ horizontalGutter / 2 }px`
     }"
   >
     <div
