@@ -29,10 +29,13 @@
       @after-leave="handleAfterLeave"
     >
       <div
-        v-if="explain"
+        v-if="explains.length"
         class="n-form-item-feedback"
       >
-        {{ explain }}
+        <span
+          v-for="(explain, i) in explains"
+          :key="i"
+        >{{ explain }}<br v-if="i + 1 !== explains.length"></span>
       </div>
     </transition>
   </div>
@@ -97,7 +100,7 @@ export default {
   },
   data () {
     return {
-      explain: null,
+      explains: [],
       validated: false,
       hasFeedback: false
     }
@@ -122,8 +125,7 @@ export default {
     synthesizedRulePath () {
       if (this.rulePath) return this.rulePath
       else if (this.path) {
-        const keys = this.path.split('.')
-        return keys[keys.length - 1]
+        return this.path
       } else return null
     },
     synthesizedLabelPosition () {
@@ -190,7 +192,7 @@ export default {
     handleContentInput () {
       this.validate('input')
     },
-    validate (trigger = null, callback = null) {
+    validate (trigger = null) {
       if (!this.path) {
         return
       }
@@ -205,20 +207,20 @@ export default {
         }
       })
       if (!activeRules.length) return
-      const asyncValidator = new AsyncValidator({ [path]: activeRules })
-      asyncValidator.validate({ [path]: value }, (errors, fields) => {
-        console.log('validate', errors, fields)
-        if (errors) {
-          this.explain = errors[0].message
+      const validator = new AsyncValidator({ [path]: activeRules })
+      validator.validate({ [path]: value }, {}, (errors, fields) => {
+        // console.log('validate', errors, fields)
+        if (errors && errors.length) {
+          this.explains = errors.map(error => error.message)
           this.validated = true
         } else {
           this.cleanValidationEffect()
         }
-        callback((errors && errors[0].message) || false, fields)
+        // callback((errors && errors[0].message) || false, fields)
       })
     },
     cleanValidationEffect () {
-      this.explain = null
+      this.explains = []
       this.validated = false
     },
     addValidationEventListeners () {

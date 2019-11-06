@@ -2,5 +2,6 @@
 <!--single-column-->
 ```demo
 inline
-basic
+custom-rule
+debug
 ```

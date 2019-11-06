@@ -1,4 +1,4 @@
-# Basic
+# Debug
 ```html
 <n-form :model="model" ref="form">
   <n-row :gutter="[28, 0]">
