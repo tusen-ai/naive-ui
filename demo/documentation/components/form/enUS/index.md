@@ -2,4 +2,5 @@
 <!--single-column-->
 ```demo
 inline
+basic
 ```

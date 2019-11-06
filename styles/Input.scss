@@ -138,22 +138,6 @@
         white-space: pre-wrap;
         overflow-wrap: break-word;
       }
-      
-      // @include m(icon) {
-      //   @include m(left-icon) {
-          
-      //     @include e(icon) {
-      //       left: 0;
-      //       margin-left: 12px;
-      //     }
-      //   }
-      //   @include m(right-icon) {
-      //     @include e(icon) {
-      //       right: 0;
-      //       margin-right: 12px;
-      //     }
-      //   }
-      // }
       @include m(split) {
         display: inline-flex;
         @include e(input) {
@@ -199,7 +183,7 @@
         transition: color .3s $default-cubic-bezier;
       }
       color: map-get($--input-color, 'default');
-      caret-color: $--input-caret-color;
+      caret-color: map-get($--input-caret-color, 'default');
       background-color: transparent;
       &::placeholder {
         transition: color .3s $default-cubic-bezier;
@@ -231,6 +215,22 @@
       }
       @include e(splitor) {
         color: map-get($--input-color, 'disabled');
+      }
+    }
+  }
+  @include as-form-item {
+    @include with-status(error) {
+      @include b(input) {
+        box-shadow: map-get($--input-box-shadow, 'error-default');
+        &:hover {
+          box-shadow: map-get($--input-box-shadow, 'error-hover');
+        }
+        @include m(focus) {
+          box-shadow: map-get($--input-box-shadow, 'error-focus');
+        }
+        @include e(input, textarea) {
+          caret-color: map-get($--input-caret-color, 'error');
+        }
       }
     }
   }

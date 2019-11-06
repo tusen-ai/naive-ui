@@ -3,7 +3,10 @@
     'default': $--n-secondary-text-color,
     'disabled': rgba(0, 0, 0, .3)
   ) !global;
-  $--input-caret-color: initial !global;
+  $--input-caret-color: (
+    'default': $--primary-6,
+    'error': $--error-6 
+  ) !global;
   $--input-placeholder-color: (
     "default": $--n-disabled-text-color,
     "disabled": $--n-disabled-text-color,
@@ -18,6 +21,9 @@
     "default": inset 0 0 0 1px $--n-border-color,
     "hover": inset 0 0 0 1px $--primary-5,
     "focus": (inset 0 0 0 1px $--primary-5, 0 0 0 2px change-color($--primary-5, $alpha: .3)),
-    "disabled": inset 0 0 0 1px $--n-border-color
+    "disabled": inset 0 0 0 1px $--n-border-color,
+    "error-default": inset 0 0 0 1px $--error-6,
+    "error-hover": inset 0 0 0 1px $--error-6,
+    "error-focus": (inset 0 0 0 1px $--error-6, 0 0 0 2px change-color($--error-6, $alpha: .3)),
   ) !global;
 }

@@ -3,7 +3,7 @@
 <n-form
   inline
   :label-width="80"
-  :value="formValue"
+  :model="formValue"
   ref="form"
 >
   <n-form-item label="Name" path="user.name" required>
