@@ -3,7 +3,7 @@
  * @Company: Tusimple
  * @Date: 2019-10-24 16:16:09
  * @LastEditors: Jiwen.bai
- * @LastEditTime: 2019-10-24 16:28:37
+ * @LastEditTime: 2019-11-06 10:30:17
  -->
 <template>
   <div
@@ -25,8 +25,7 @@
         :style="search ? 'margin-bottom: 18px;' : ''"
       >
         <slot name="table-operation" />
-        <div v-if="search"
-class="n-advance-table__operation__search">
+        <div v-if="search" class="n-advance-table__operation__search">
           <searchInput
             ref="search"
             :options="search"
@@ -36,8 +35,7 @@ class="n-advance-table__operation__search">
         <slot name="table-operation-search-right" />
       </div>
     </div>
-    <div ref="tbodyWrapper"
-class="n-advance-table__tbody">
+    <div ref="tbodyWrapper" class="n-advance-table__tbody">
       <n-table
         ref="header"
         style="padding:0;border-bottom-left-radius:0;border-bottom-right-radius:0;"
@@ -50,8 +48,7 @@ class="n-advance-table__tbody">
             :key="i"
             :style="computeCustomWidthStl(column)"
           >
-          <col v-if="scrollBarWidth"
-:width="scrollBarWidth" >
+          <col v-if="scrollBarWidth" :width="scrollBarWidth" >
         </colgroup>
         <n-thead>
           <n-tr>
@@ -209,8 +206,7 @@ class="n-advance-table__tbody">
       v-if="pagination !== false && showingData.length"
       class="n-advance-table__pagination"
     >
-      <n-pagination v-model="currentPage"
-:page-count="pageCount" />
+      <n-pagination v-model="currentPage" :page-count="pageCount" />
     </div>
   </div>
 </template>
@@ -464,6 +460,7 @@ export default {
       this.searchData = this.computeShowingData()
       this.searchDataNoSort = null
       this.checkBoxes = []
+      this.disabledCheckBox = []
       this.currentPageAllSelect = false
       this.computeScollBar()
     },
