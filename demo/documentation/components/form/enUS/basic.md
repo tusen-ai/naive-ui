@@ -73,6 +73,27 @@
       </n-row>
     </n-col>
   </n-row>
+  <n-row :gutter="28">
+    <n-col :span="12">
+      <n-form-item label="Tmpfs" path="Tmpfs" required>
+        <n-input v-model="model.Tmpfs" />
+      </n-form-item>
+    </n-col>
+    <n-col :span="12">
+      <n-row :gutter="16">
+        <n-col :span="18">
+          <n-form-item label="Shm Size" path="shmSize" required>
+            <n-input v-model="model.shmSize" />
+          </n-form-item>
+        </n-col>
+        <n-col :span="6">
+          <n-form-item label="Host" path="host" required>
+            <n-switch v-model="model.host" />
+          </n-form-item>
+        </n-col>
+      </n-row>
+    </n-col>
+  </n-row>
   <n-row :gutter="[0, 24]">
     <n-col :span="24">
       <div style="display: flex; justify-content: flex-end;">
@@ -105,7 +126,10 @@ export default {
         status: {
           value: null,
           type: null
-        }
+        },
+        host: false,
+        tmpfs: null,
+        shmSize: null
       },
       generalOptions: [
         'groode',

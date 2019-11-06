@@ -92,4 +92,33 @@
       }
     }
   }
+  @include as-form-item {
+    @include with-status(error) {
+      @include b(cancel-mark-cross) {
+        @include m(arrow) {
+          @include e(icon) {
+            fill: map-get($map: $--base-cancel-mark-cross-color, $key: "error-hover");
+          }
+        }
+        &:hover {
+          @include e(icon) {
+            fill: map-get($map: $--base-cancel-mark-cross-color, $key: "error-hover");
+          }
+        }
+        &:active {
+          @include e(icon) {
+            fill: map-get($--base-cancel-mark-cross-color, "error-active");
+          }
+        }
+      }
+      @include b(cancel-mark-arrow) {
+        @include m(active) {
+          &::after {
+            border-left: 1px solid map-get($map: $--base-cancel-mark-arrow-color, $key: 'error-active');
+            border-bottom: 1px solid map-get($map: $--base-cancel-mark-arrow-color, $key: 'error-active');
+          }
+        }
+      }
+    }
+  }
 }

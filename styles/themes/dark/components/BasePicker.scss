@@ -3,7 +3,8 @@
   $--base-picker-background-color: (
     "default": rgba(255, 255, 255, .1),
     "disabled": rgba(255, 255, 255, .06),
-    "active": change-color($--primary-6, $alpha: 0.1)
+    "active": change-color($--primary-6, $alpha: 0.1),
+    "error-active": change-color($--error-6, $alpha: 0.1)
   ) !global;
   $--base-picker-placeholder-color: (
     "default": rgba(255, 255, 255, .4),
@@ -12,8 +13,16 @@
   $--base-picker-box-shadow: (
     "default": none,
     "hover": inset 0 0 0 1px $--primary-6,
-    'focus': (inset 0 0 0px 1px $--primary-6, 0 0 8px 0px change-color($--primary-6, $alpha: .3)),
-    "disabled": none
+    "focus": (inset 0 0 0px 1px $--primary-6, 0 0 8px 0px change-color($--primary-6, $alpha: .3)),
+    "active": inset 0 0 0 1px $--primary-6,
+    "disabled": none,
+    "error-default": inset 0 0 0 1px $--error-6,
+    "error-hover": inset 0 0 0 1px $--error-6,
+    "error-active": inset 0 0 0 1px $--error-6,
+    "error-focus": (inset 0 0 0 1px $--error-6, 0 0 8px 0 change-color($--error-6, $alpha: .3))
   ) !global;
-  $--base-picker-caret-color: $--n-primary-color !global; 
+  $--base-picker-caret-color: (
+    "default": $--n-primary-color,
+    "error": $--error-6
+  ) !global; 
 }

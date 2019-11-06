@@ -200,6 +200,10 @@ export default {
       type: Boolean,
       default: false
     },
+    lazyActive: {
+      type: Boolean,
+      default: false
+    },
     forceFocus: {
       type: Boolean,
       default: false
@@ -217,7 +221,7 @@ export default {
   },
   computed: {
     pressEnterToActivateInput () {
-      return this.lazyFocus
+      return this.lazyFocus || this.lazyActive
     },
     computedPlaceholder () {
       if (this.pair) {

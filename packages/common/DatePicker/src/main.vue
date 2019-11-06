@@ -21,6 +21,7 @@
       pair
       @click="handleActivatorClick"
       @focus="handleFocus"
+      @wrapper-blur="handleRangeInputWrapperBlur"
       @blur="handleRangeInputBlur"
       @input="handleRangeInput"
     >
@@ -40,6 +41,7 @@
       :readonly="disabled ? 'disabled' : false"
       @click="handleActivatorClick"
       @focus="handleFocus"
+      @wrapper-blur="handleTimeInputWrapperBlur"
       @blur="handleTimeInputBlur"
       @input="handleTimeInput"
     >
@@ -355,6 +357,9 @@ export default {
         }, 0)
       }
     },
+    handleTimeInputWrapperBlur (e) {
+      this.$emit('blur', this.value)
+    },
     handleTimeInputBlur (e) {
       if (this.disabled) return
       const newSelectedDateTime = strictParse(this.displayTime, this.computedFormat, new Date())
@@ -364,6 +369,9 @@ export default {
         this.refreshDisplayTime(this.value)
       }
       this.afterBlur(e)
+    },
+    handleRangeInputWrapperBlur (e) {
+      this.$emit('blur', this.value)
     },
     handleRangeInputBlur (e) {
       if (this.disabled) return

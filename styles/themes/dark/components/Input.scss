@@ -14,7 +14,9 @@
   $--input-background-color: (
     "default": rgba(255, 255, 255, .1),
     "disabled": rgba(255, 255, 255, .06),
-    "focus": change-color($--primary-6, $alpha: 0.1)
+    "focus": change-color($--primary-6, $alpha: 0.1),
+    "error-focus": change-color($--error-6, $alpha: 0.1),
+
   ) !global;
   $--input-icon-color: rgba(255, 255, 255, 0.2) !global;
   $--input-box-shadow: (

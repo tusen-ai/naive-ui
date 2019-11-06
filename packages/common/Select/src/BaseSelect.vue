@@ -263,6 +263,7 @@ export default {
       }
     },
     handlePickerBlur () {
+      this.$emit('blur', this.value)
       this.closeMenu()
     },
     handleClickOutsideMenu (e) {

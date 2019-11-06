@@ -37,6 +37,14 @@
     @include m(has-feedback) {
       padding-bottom: 0px;
     }
+    @include m(required) {
+      @include b(form-item-label) {
+        &::after {
+          content: '*';
+          color: $--error-6;
+        }
+      }
+    }
     @include b(form-item-label) {
       display: inline-block;
       transition: color .3s $default-cubic-bezier;
@@ -44,8 +52,15 @@
       height: 24px;
       box-sizing: border-box;
       font-size: 14px;
+      &::after {
+        transition: color .3s $default-cubic-bezier;
+      }
     }
     @include b(form-item-blank) {
+      line-height: 34px;
+      min-height: 34px;
+      display: flex;
+      align-items: center;
       position: relative;
     }
     @include b(form-item-feedback) {

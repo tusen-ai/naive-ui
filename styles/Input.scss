@@ -227,6 +227,7 @@
         }
         @include m(focus) {
           box-shadow: map-get($--input-box-shadow, 'error-focus');
+          background-color: map-get($--input-background-color, 'error-focus');
         }
         @include e(input, textarea) {
           caret-color: map-get($--input-caret-color, 'error');

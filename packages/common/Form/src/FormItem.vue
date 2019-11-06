@@ -14,12 +14,8 @@
       :class="`n-form-item-label`"
       :style="synthesizedLabelStyle"
     >
-      <template v-if="$slots.label">
-        <slot name="label" />
-      </template>
-      <template v-else>
-        {{ label }}
-      </template>
+      <template v-if="$slots.label"><slot name="label" /></template>
+      <template v-else>{{ label }}</template>
     </label>
     <div
       class="n-form-item-blank"
