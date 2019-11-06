@@ -112,16 +112,20 @@
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import zindexable from '../../../mixins/zindexable'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
+import asformitem from '../../../mixins/asformitem'
+import clickoutside from '../../../directives/clickoutside'
+
 import DatetimePanel from './panel/datetime'
 import DatetimerangePanel from './panel/datetimerange'
 import DatePanel from './panel/date'
 import DaterangePanel from './panel/daterange'
-import clickoutside from '../../../directives/clickoutside'
+
 import NInput from '../../Input'
 import NIcon from '../../Icon'
 import iosCalendar from '../../../icons/ios-calendar'
-import withapp from '../../../mixins/withapp'
-import themeable from '../../../mixins/themeable'
+
 import format from 'date-fns/format'
 import getTime from 'date-fns/getTime'
 import isValid from 'date-fns/isValid'
@@ -172,7 +176,8 @@ export default {
     themeable,
     detachable,
     placeable,
-    zindexable
+    zindexable,
+    asformitem()
   ],
   props: {
     disabled: {
