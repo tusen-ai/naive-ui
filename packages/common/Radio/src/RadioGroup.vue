@@ -2,26 +2,12 @@
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import hollowoutable from '../../../mixins/hollowoutable'
+import asformitem from '../../../mixins/asformitem'
 
 function mapSlot (h, defaultSlot, currentComponent) {
-  /**
-   * connect current component's v-model to child instance
-   */
-  // const wrapInstance = instance => {
-  //   if (instance.componentOptions.tag === 'n-radio' || instance.componentOptions.tag === 'n-radio-button') {
-  //     instance.componentOptions.propsData.privateValue = currentComponent.value
-  //     instance.componentOptions.listeners = {
-  //       ...instance.componentOptions.listeners,
-  //       input: (v) => {
-  //         currentComponent.$emit('input', v)
-  //       }
-  //     }
-  //     return instance
-  //   } else return null
-  // }
   const mappedSlot = []
   for (let i = 0; i < defaultSlot.length; ++i) {
-    const wrappedInstance = defaultSlot[i] // wrapInstance(defaultSlot[i])
+    const wrappedInstance = defaultSlot[i]
     if (wrappedInstance === null) {
       console.error('[naive ui]: Please don\'t use tags other than `n-radio` and `n-radio-button` in `n-radio-group`.')
       continue
@@ -34,7 +20,6 @@ function mapSlot (h, defaultSlot, currentComponent) {
       const lastInstanceDisabled = lastInstanceComponentOptions.propsData.disabled
       const currentInstanceChecked = currentComponent.$props.value === wrappedInstance.componentOptions.propsData.value
       const currentInstanceDisabled = wrappedInstance.componentOptions.propsData.disabled
-
       let lastInstancePriority
       let currentInstancePriority
       if (currentComponent.synthesizedTheme === 'dark') {
@@ -82,7 +67,7 @@ function mapSlot (h, defaultSlot, currentComponent) {
 
 export default {
   name: 'NRadioGroup',
-  mixins: [withapp, themeable, hollowoutable],
+  mixins: [withapp, themeable, hollowoutable, asformitem()],
   provide () {
     return {
       NRadioGroup: this

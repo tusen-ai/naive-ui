@@ -94,6 +94,7 @@ import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import asformitem from '../../../mixins/asformitem'
 
 function handleFirstHandleMouseMove (e) {
   const railRect = this.$refs.rail.getBoundingClientRect()
@@ -117,7 +118,7 @@ function handleSecondHandleMouseMove (e) {
 
 export default {
   name: 'NSlider',
-  mixins: [withapp, themeable, hollowoutable, detachable, placeable],
+  mixins: [withapp, themeable, hollowoutable, detachable, placeable, asformitem()],
   props: {
     marks: {
       type: Object,

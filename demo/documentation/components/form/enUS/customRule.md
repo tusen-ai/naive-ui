@@ -11,14 +11,18 @@
   <n-row>
     <n-col :span="24">
       <n-form-item path="password" label="Password">
-        <n-input v-model="model.password" @input="handlePasswordInput"/>
+        <n-input v-model="model.password" @input="handlePasswordInput" type="password"/>
       </n-form-item>
     </n-col>
   </n-row>
   <n-row>
     <n-col :span="24">
-      <n-form-item path="reenteredPassword" label="Re-enter Password" ref="reenteredPassword">
-        <n-input v-model="model.reenteredPassword"/>
+      <n-form-item
+        path="reenteredPassword"
+        label="Re-enter Password"
+        ref="reenteredPassword"
+      >
+        <n-input v-model="model.reenteredPassword" type="password"/>
       </n-form-item>
     </n-col>
   </n-row>
@@ -48,16 +52,16 @@ export default {
         age: [
           {
             validator (rule, value) {
-              return /\d+/.test(value)
+              return /^\d*$/.test(value)
             },
-            message: 'Age should be an integer',
+            message: 'Please input an integer',
             trigger: 'input'
           },
           {
             validator (rule, value) {
               return Number(value) > 18
             },
-            message: 'Age should be greater than 18',
+            message: 'Age should be above 18',
             trigger: 'input'
           }
         ],
@@ -70,7 +74,7 @@ export default {
           {
             validator: this.validatePasswordSame,
             message: 'Password is not same as re-entered password!',
-            trigger: 'blur'
+            trigger: ['blur', 'password-input']
           },
           {
             required: true,
@@ -82,7 +86,9 @@ export default {
   },
   methods: {
     handlePasswordInput () {
-      this.$refs.reenteredPassword.validate('input')
+      if (this.model.reenteredPassword) {
+        this.$refs.reenteredPassword.validate('password-input')
+      }
     },
     handleValidateButtonClick (e) {
       e.preventDefault()

@@ -134,7 +134,12 @@ export default {
   components: {
     NCancelMark
   },
-  mixins: [ withapp, themeable, asformitem() ],
+  mixins: [ withapp, themeable, asformitem({
+    change: 'change',
+    blur: 'blur',
+    focus: 'focus',
+    input: 'input'
+  })],
   props: {
     type: {
       type: String,

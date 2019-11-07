@@ -138,6 +138,7 @@ import clickoutside from '../../../directives/clickoutside'
 import zindexable from '../../../mixins/zindexable'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import asformitem from '../../../mixins/asformitem'
 import isValid from 'date-fns/isValid'
 import startOfSecond from 'date-fns/startOfSecond'
 import startOfMinute from 'date-fns/startOfMinute'
@@ -194,7 +195,7 @@ export default {
   directives: {
     clickoutside
   },
-  mixins: [detachable, placeable, zindexable, withapp, themeable],
+  mixins: [detachable, placeable, zindexable, withapp, themeable, asformitem()],
   props: {
     placement: {
       type: String,

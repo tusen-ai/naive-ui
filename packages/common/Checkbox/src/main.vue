@@ -36,6 +36,7 @@
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import hollowoutable from '../../../mixins/hollowoutable'
+import asformitem from '../../../mixins/asformitem'
 import CheckMark from './CheckMark'
 import LineMark from './LineMark'
 import collectable from '../../../mixins/collectable'
@@ -55,6 +56,7 @@ export default {
     withapp,
     themeable,
     hollowoutable,
+    asformitem(),
     collectable('NCheckboxGroup', 'collectedCheckboxValues')
   ],
   model: {

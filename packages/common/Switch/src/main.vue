@@ -15,13 +15,13 @@
 </template>
 
 <script>
-import Emitter from '../../../mixins/emitter'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import asformitem from '../../../mixins/asformitem'
 
 export default {
   name: 'NSwitch',
-  mixins: [ withapp, themeable, Emitter ],
+  mixins: [ withapp, themeable, asformitem() ],
   inject: {
     NFormItem: {
       default: null
@@ -46,9 +46,6 @@ export default {
     handleClick () {
       if (!this.disabled) {
         this.$emit('input', !this.value)
-        if (this.NFormItem) {
-          this.dispatch('NFormItem', 'form-item-change', !this.value)
-        }
       }
     }
   }

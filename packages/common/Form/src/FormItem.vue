@@ -41,7 +41,7 @@
   </div>
 </template>
 <script>
-import AsyncValidator from 'async-validator'
+import Schema from 'async-validator'
 import get from 'lodash/get'
 import registerable from '../../../mixins/registerable'
 import withapp from '../../../mixins/withapp'
@@ -74,6 +74,10 @@ export default {
     path: {
       type: String,
       default: null
+    },
+    first: {
+      type: Boolean,
+      default: false
     },
     rulePath: {
       type: String,
@@ -192,9 +196,14 @@ export default {
     handleContentInput () {
       this.validate('input')
     },
-    validate (trigger = null) {
+    validate (trigger = null, options = null) {
       if (!this.path) {
         return
+      }
+      if (!options) {
+        options = {}
+        options.first = this.first
+        options.supressWarning = this.supressWarning
       }
       const rules = this.synthesizedRules
       const path = this.path
@@ -207,8 +216,8 @@ export default {
         }
       })
       if (!activeRules.length) return
-      const validator = new AsyncValidator({ [path]: activeRules })
-      validator.validate({ [path]: value }, {}, (errors, fields) => {
+      const validator = new Schema({ [path]: activeRules })
+      validator.validate({ [path]: value }, options, (errors, fields) => {
         // console.log('validate', errors, fields)
         if (errors && errors.length) {
           this.explains = errors.map(error => error.message)

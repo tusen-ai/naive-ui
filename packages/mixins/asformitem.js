@@ -1,8 +1,7 @@
 export default function (events = {
   change: 'change',
   blur: 'blur',
-  focus: 'focus',
-  input: 'input'
+  focus: 'focus'
 }) {
   return {
     inject: {
