@@ -74,12 +74,7 @@ export default {
         const formItemInstances = this.items[key]
         for (const formItemInstance of formItemInstances) {
           if (shouldFieldBeValidated(formItemInstance.path)) {
-            formItemInstance.validate(null, (errors, field) => {
-              if (errors) {
-                valid = false
-              }
-              fields = Object.assign({}, fields, field)
-            })
+            formItemInstance.validate()
           }
         }
       }

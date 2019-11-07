@@ -244,6 +244,9 @@ export default {
     computedTime (time) {
       this.refreshTimeString(time)
       this.$nextTick().then(this.scrollTimer)
+    },
+    value (value, oldValue) {
+      this.$emit('change', value, oldValue)
     }
   },
   methods: {

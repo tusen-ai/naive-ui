@@ -68,19 +68,24 @@ function mapSlot (h, defaultSlot, currentComponent) {
 export default {
   name: 'NRadioGroup',
   mixins: [withapp, themeable, hollowoutable, asformitem()],
-  provide () {
-    return {
-      NRadioGroup: this
-    }
-  },
   props: {
     value: {
       type: [Boolean, String, Number],
       default: null
     }
   },
+  watch: {
+    value (value, oldValue) {
+      this.$emit('change', value, oldValue)
+    }
+  },
+  provide () {
+    return {
+      NRadioGroup: this,
+      NFormItem: null
+    }
+  },
   render (h) {
-    // console.log('render radio')
     return h('div', {
       staticClass: 'n-radio-group',
       class: {
