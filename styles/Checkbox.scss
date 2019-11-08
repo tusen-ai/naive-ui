@@ -21,7 +21,6 @@
         width: 14px;
         vertical-align: middle;
         box-sizing: border-box;
-        background-color: transparent;
         border-radius: 4px;
         position: relative;
         transition: box-shadow 0.3s $default-cubic-bezier,
@@ -104,6 +103,7 @@
       }
     }
     @include b(checkbox-box) {
+      background-color: map-get($--checkbox-background-color, 'default');
       box-shadow: inset 0 0 0 1px $--checkbox-border-color;
       @include e(line-mark) {
         path {
@@ -134,7 +134,7 @@
     }
     @include m(disabled) {
       @include b(checkbox-box) {
-        background-color: $--checkbox-disabled-bg-color;
+        background-color: map-get($--checkbox-background-color, 'disabled');
         box-shadow: inset 0 0 0 1px $--checkbox-disabled;
         @include e(check-mark) {
           path {
