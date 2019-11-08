@@ -24,7 +24,7 @@
     .n-advance-table__fixed--active {
       transition: box-shadow 0.2s;
       &.n-advance-table__fixed--right {
-        box-shadow: 0 10px 16px 5px rgba(0, 0, 0, 0.2);
+        box-shadow: -10px 0 7px -5px rgba(0, 0, 0, 0.2);
       }
       &.n-advance-table__fixed--left {
         box-shadow: 10px 0 16px -5px rgba(0, 0, 0, 0.2);
