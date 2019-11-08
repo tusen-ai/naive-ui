@@ -6,5 +6,5 @@
   $--checkbox-indeterminate-color: $--neutral-10 !global;
   $--checkbox-disabled: $border-color !global;
   $--checkbox-disabled-bg-color: rgba(255, 255, 255, 0.16) !global;
-  $--checkbox-icon-fill: black !global;
+  $--checkbox-icon-fill: $--n-background-color !global;
 }
