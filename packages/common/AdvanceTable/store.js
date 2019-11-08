@@ -3,7 +3,7 @@
  * @Company: Tusimple
  * @Date: 2019-10-25 11:31:12
  * @LastEditors: Jiwen.bai
- * @LastEditTime: 2019-10-25 11:33:00
+ * @LastEditTime: 2019-11-07 11:13:03
  */
 let Vue = null
 export class Store {
@@ -12,7 +12,8 @@ export class Store {
     store._vm = new Vue({
       data: {
         $$state: {
-          currentHoverRow: 1
+          currentHoverRow: 1,
+          currentTableEl: null
         }
       }
     })

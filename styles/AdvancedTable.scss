@@ -21,15 +21,42 @@
     }
   }
   @include b(advance-table) {
+    .n-advance-table__fixed--active {
+      transition: box-shadow 0.2s;
+      &.n-advance-table__fixed--right {
+        box-shadow: 0 10px 16px 5px rgba(0, 0, 0, 0.2);
+      }
+      &.n-advance-table__fixed--left {
+        box-shadow: 10px 0 16px -5px rgba(0, 0, 0, 0.2);
+      }
+    }
+    .n-advance-table__fixed--left {
+      margin-right: -5px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      .n-advance-table__header {
+        border-radius: 0;
+      }
+    }
+    .n-advance-table__fixed--right {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      right: 0;
+      top: 0;
+      .n-advance-table__header {
+        border-radius: 0;
+      }
+    }
     .n-advance-table__fixed {
       display: inline-block;
       position: absolute;
       z-index: 100;
+      overflow: hidden;
       // box-shadow: 10px 0 16px 3px rgba(0, 0, 0, 0.2);
-      .n-table {
+      .n-table.n-advance-table__body {
         width: auto;
         box-shadow: none;
-        overflow: hidden;
+        overflow-y: auto;
         border-radius: 0;
       }
       table {
@@ -41,6 +68,7 @@
     }
     @include b(table) {
       overflow: auto;
+      padding-bottom: 0;
     }
     @include once {
       @include e(wrapper) {
@@ -103,7 +131,7 @@
           }
         }
         &::-webkit-scrollbar {
-          width: 5px;
+          width: 8px;
         }
         &::-webkit-scrollbar-track {
           background: transparent;
@@ -118,7 +146,7 @@
           background: transparent;
         }
         &::-webkit-scrollbar:horizontal {
-          height: 5px;
+          height: 8px;
         }
       }
     }

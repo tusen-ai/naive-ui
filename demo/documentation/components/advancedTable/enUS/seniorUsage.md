@@ -3,7 +3,7 @@
  * @Company: Tusimple
  * @Date: 2019-10-23 15:59:41
  * @LastEditors: Jiwen.bai
- * @LastEditTime: 2019-10-25 18:58:58
+ * @LastEditTime: 2019-11-07 13:52:07
  -->
 
 # Senior Usage
@@ -18,7 +18,7 @@
   :search="search"
   :pagination="{total:data.length,limit:10,custom:true}"
   @on-change="onChange"
-  max-width="420px"
+  max-width="480px"
 >
   <div slot="table-operation-batch-left">
     <n-button size="small" @click="clear">
@@ -72,12 +72,14 @@ const _columns3 = $this => {
       onFilter: (value, record) => {
         return value.includes(record.name + '')
       },
-      width: 200,
+      width: 280,
       fixed: 'left'
     },
     {
       title: 'Age',
       key: 'age',
+      width: 100,
+
       sortable: true,
       sorter(a, b) {
         return a.age - b.age
@@ -101,6 +103,7 @@ const _columns3 = $this => {
     {
       title: 'Sex',
       key: 'sex',
+      width: 100,
       onFilter: (values, record) => {
         return values.includes(record.sex)
       },
@@ -117,6 +120,8 @@ const _columns3 = $this => {
     },
     {
       title: '#',
+      width: 150,
+      fixed: 'right',
       render: (h, params) => {
         return (
           <n-button

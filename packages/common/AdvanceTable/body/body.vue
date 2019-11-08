@@ -3,15 +3,18 @@
  * @Company: Tusimple
  * @Date: 2019-10-23 16:06:59
  * @LastEditors: Jiwen.bai
- * @LastEditTime: 2019-10-25 16:28:53
+ * @LastEditTime: 2019-11-07 16:17:14
  -->
 <template>
   <!-- table body -->
   <n-table
     ref="nTable"
-    :style="tableStl"
-    style="border-top-left-radius:0;border-top-right-radius:0;"
+    :style="computeTbodyStl"
+    style="border-top-left-radius:0;border-top-right-radius:0;box-sizing: border-box;"
+    class="n-advance-table__body"
     @scroll.native="onBodyScrolll"
+    @mouseenter.native="onMouseEnter"
+    @mouseleave.native="onMouseLeave"
   >
     <colgroup v-if="showingData.length !== 0">
       <col
@@ -24,6 +27,7 @@
       <n-tr
         v-for="(rowData, i) in showingData"
         :key="i"
+        :style="computeTrStl"
         :class="
           typeof rowClassName === 'function'
             ? rowClassName(rowData, i)
@@ -68,13 +72,24 @@
           </n-td>
         </template>
       </n-tr>
-      <div v-if="showingData.length === 0" class="n-advance-table__no-data-tip">
+      <div
+        v-if="showingData.length === 0 && !loading && !fixed"
+        class="n-advance-table__no-data-tip"
+      >
         No data
       </div>
     </n-tbody>
     <template v-if="loading">
-      <n-spin :spinning="loading" style="width:100%;display:table-caption;" />
+      <n-spin
+        :spinning="loading"
+        style="width:100%;display:table-caption;overflow:hidden;z-index:1000;position:relative;"
+      />
     </template>
+    <!-- <div
+      v-if="scrollBarHorizontalHeight"
+      class="n-advance-table-scroll-bar-placeholder"
+      :style="{ height: scrollBarHorizontalHeight + 'px' }"
+    /> -->
   </n-table>
 </template>
 
@@ -89,6 +104,30 @@ export default {
   },
   mixins: [storageMixin],
   props: {
+    fixed: {
+      type: Boolean,
+      default: false
+    },
+    trHeight: {
+      type: Number,
+      default: 0
+    },
+    height: {
+      type: Number,
+      default: 0
+    },
+    tbodyWrapperOffsetHeight: {
+      type: Number,
+      default: 0
+    },
+    scrollBarHorizontalHeight: {
+      type: Number,
+      default: 0
+    },
+    scrollBarVerticalWidth: {
+      type: [Number, String],
+      default: 0
+    },
     tableStl: {
       type: Object,
       default: () => ({})
@@ -125,6 +164,29 @@ export default {
   data () {
     return {}
   },
+  computed: {
+    computeTrStl () {
+      return {
+        height: this.trHeight ? this.trHeight + 'px' : null
+      }
+    },
+    computeTbodyStl () {
+      if (this.fixed && this.height) {
+        console.log(
+          'TCL: computeTbodyStl -> this.tbodyWrapperOffsetHeight',
+          this.height
+        )
+        return Object.assign({}, this.tableStl, {
+          height: this.height + 'px',
+          marginRight: this.scrollBarVerticalWidth
+            ? -this.scrollBarVerticalWidth + 'px'
+            : null
+        })
+      } else {
+        return this.tableStl
+      }
+    }
+  },
   watch: {
     '$store.state.currentHoverRow' (index, oldIndex) {
       const hoverClassName = 'n-table__tr--hover'
@@ -147,8 +209,14 @@ export default {
     }
   },
   methods: {
+    onMouseEnter (e) {
+      console.log('TCL: onMouseEnter ->  e.current.targe', e.currentTarget)
+      this.$store.commit('currentTableEl', e.currentTarget)
+    },
+    onMouseLeave (e) {
+      this.$store.commit('currentTableEl', null)
+    },
     onRowHover (e, rowData, index) {
-      console.log('TCL: onRowHover -> e, rowData, index', e, rowData, index)
       this.$store.commit('currentHoverRow', index)
     },
     onRowLeave (e, rowData) {
@@ -179,6 +247,7 @@ export default {
         }
       }
     },
+
     computeTdClass (column, params) {
       let className = []
       if (column.fixed) {

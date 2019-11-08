@@ -3,7 +3,7 @@
  * @Company: Tusimple
  * @Date: 2019-10-23 15:57:17
  * @LastEditors: Jiwen.bai
- * @LastEditTime: 2019-10-25 19:23:59
+ * @LastEditTime: 2019-11-07 16:15:57
  -->
 <template>
   <div
@@ -40,7 +40,12 @@
       class="n-advance-table__tbody"
       :style="tableWrapperStl"
     >
-      <div class="n-advance-table__fixed--left n-advance-table__fixed">
+      <div
+        v-if="fixedLeftColumn.length"
+        v-show="showingData.length && !loading"
+        class="n-advance-table__fixed--left n-advance-table__fixed"
+        :class="fixedLeftColumndClass"
+      >
         <table-header
           ref="fixedLeftHeader"
           :height="headerHeight"
@@ -49,6 +54,7 @@
           :sort-indexs="sortIndexs"
           :selected-filter="selectedFilter"
           :showing-data="showingData"
+          :current-page-selected="currentPageSelected"
           @on-checkbox-all="onAllCheckboxesClick"
           @on-sort-change="onSortChange"
           @on-filter="onFilter"
@@ -61,8 +67,12 @@
           :row-class-name="rowClassName"
           :check-boxes="checkBoxes"
           :disabled-check-box="disabledCheckBox"
-          :loading="loading"
           header-ref-name="header"
+          :scroll-bar-vertical-width="scrollBarWidth"
+          :height="tbodyWrapperHeight"
+          :tr-height="trHeight"
+          :fixed="true"
+          @on-scroll="onBodyScrolll"
         />
       </div>
       <!-- table head -->
@@ -74,12 +84,13 @@
         :sort-indexs="sortIndexs"
         :selected-filter="selectedFilter"
         :showing-data="showingData"
+        :current-page-selected="currentPageSelected"
         @on-checkbox-all="onAllCheckboxesClick"
         @on-sort-change="onSortChange"
         @on-filter="onFilter"
       />
       <!-- table body -->
-      <TableBody
+      <table-body
         ref="tbody"
         :table-stl="tableStl"
         :showing-data="showingData"
@@ -91,6 +102,40 @@
         header-ref-name="header"
         @on-scroll="onBodyScrolll"
       />
+      <div
+        v-if="fixedRightColumn.length"
+        v-show="showingData.length && !loading"
+        class="n-advance-table__fixed--right n-advance-table__fixed"
+        :class="fixedRightColumndClass"
+      >
+        <table-header
+          ref="fixedRightHeader"
+          :height="headerHeight"
+          :columns="fixedRightColumn"
+          :col-group-stl="colGroup"
+          :sort-indexs="sortIndexs"
+          :selected-filter="selectedFilter"
+          :showing-data="showingData"
+          :current-page-selected="currentPageSelected"
+          @on-checkbox-all="onAllCheckboxesClick"
+          @on-sort-change="onSortChange"
+          @on-filter="onFilter"
+        />
+        <table-body
+          ref="fixedRightTbody"
+          :table-stl="tableStl"
+          :showing-data="showingData"
+          :columns="fixedRightColumn"
+          :row-class-name="rowClassName"
+          :check-boxes="checkBoxes"
+          :disabled-check-box="disabledCheckBox"
+          header-ref-name="header"
+          :height="tbodyWrapperHeight"
+          :tr-height="trHeight"
+          :fixed="true"
+          @on-scroll="onBodyScrolll"
+        />
+      </div>
     </div>
     <!-- 分页 -->
     <div
@@ -210,10 +255,23 @@ export default {
       selectedFilter: {},
       checkBoxes: [],
       disabledCheckBox: [],
-      currentPageAllSelect: false
+      currentPageAllSelect: false,
+      tbodyWrapperHeight: 0,
+      trHeight: 0,
+      horizontalScrollLeft: 0
     }
   },
   computed: {
+    fixedLeftColumndClass () {
+      return {
+        'n-advance-table__fixed--active': this.horizontalScrollLeft > 0
+      }
+    },
+    fixedRightColumndClass () {
+      return {
+        'n-advance-table__fixed--active': this.horizontalScrollLeft <= 0
+      }
+    },
     tableWrapperStl () {
       let stl = {}
       if (this.maxWidth) {
@@ -325,7 +383,7 @@ export default {
       return stl
     },
     colGroup () {
-      let stl = { width: `100%` }
+      let stl = {}
       if (this.maxWidth) {
         stl.maxWidth =
           typeof this.maxWidth === 'number'
@@ -467,7 +525,10 @@ export default {
 
     this.headerRealEl = this.$refs.header.$el.querySelector('thead')
     this.headerHeight = this.headerRealEl.offsetHeight
-    this.fixedLeftTBodyEl = this.$refs.fixedLeftTbody.$el
+    this.fixedLeftTBodyEl =
+      this.$refs.fixedLeftTbody && this.$refs.fixedLeftTbody.$el
+    this.fixedRightTBodyEl =
+      this.$refs.fixedRightTbody && this.$refs.fixedRightTbody.$el
     // console.log(this.wrapperWidth, this.tbodyWidth)
 
     this.init()
@@ -485,11 +546,26 @@ export default {
       )
     },
     onBodyScrolll (event) {
-      this.headerRealEl.style.transform = `translate3d(-${event.target.scrollLeft}px,0,0)`
-      if (this.fixedLeftTBodyEl) {
-        // TODO: 可以优化
-        this.fixedLeftTBodyEl.scrollTop = event.target.scrollTop
-      }
+      const currentEl = this.$store.state.currentTableEl
+      console.log('TCL: onBodyScrolll -> currentEl', currentEl)
+      const scrollEls = [
+        this.fixedLeftTBodyEl,
+        this.$refs.tbody.$el,
+        this.fixedRightTBodyEl
+      ]
+      window.requestAnimationFrame(() => {
+        if (currentEl === this.$refs.tbody.$el) {
+          const left = currentEl.scrollLeft
+          this.horizontalScrollLeft = left
+          this.headerRealEl.style.transform = `translate3d(-${this.horizontalScrollLeft}px,0,0)`
+        }
+        scrollEls
+          .filter(item => item !== currentEl && item !== null)
+          .forEach(el => {
+            el.scrollTop = currentEl.scrollTop
+          })
+      })
+
       event.stopPropagation()
       event.preventDefault()
     },
@@ -582,10 +658,26 @@ export default {
       })
       this.currentSortColumn = null
     },
+    computeHorizontalScrollBarHeight () {
+      const tbody = this.$refs.tbody.$el
+      console.log('TCL: computeHorizontalScrollBarHeight -> tbody', tbody)
+      this.tbodyWrapperHeight = tbody.clientHeight
+      this.tbodyWrapperOffsetHeight = tbody.offsetHeight
+      this.scrollBarHorizontalHeight =
+        this.tbodyWrapperOffsetHeight - this.tbodyWrapperHeight
+      console.log(
+        'TCL: computeHorizontalScrollBarHeight -> this.scrollBarHorizontalHeight',
+        this.scrollBarHorizontalHeight
+      )
+    },
     computeScollBar () {
       this.$nextTick(() => {
-        this.tbodyWidth = this.relTable.offsetWidth
-        this.scrollBarWidth = this.tbodyWrapperWidth - this.tbodyWidth
+        let tr = this.relTable.querySelector('tr')
+        this.trHeight = tr ? tr.offsetHeight : 0
+        const tbody = this.$refs.tbody.$el
+
+        this.scrollBarWidth = tbody.offsetWidth - tbody.clientWidth
+        this.computeHorizontalScrollBarHeight()
         // console.log('TCL: mounted -> this.scrollBarWidth', this.wrapperWidth, this.tbodyWidth)
       })
     },
@@ -608,6 +700,9 @@ export default {
       this.$nextTick(() => {
         this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
         this.tbodyWrapperWidth = this.$refs.tbodyWrapper.clientWidth
+        this.tbodyWrapperHeight = this.$refs.tbodyWrapper.clientHeight
+        this.tbodyWrapperOffsetHeight = this.$refs.tbodyWrapper.offsetHeight
+
         this.computeScollBar()
 
         // console.log(this.relTable.offsetWidth)

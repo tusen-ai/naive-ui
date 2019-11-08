@@ -3,7 +3,7 @@
  * @Company: Tusimple
  * @Date: 2019-10-24 15:16:41
  * @LastEditors: Jiwen.bai
- * @LastEditTime: 2019-10-25 19:24:21
+ * @LastEditTime: 2019-11-06 13:34:35
  -->
 <template>
   <n-table
@@ -99,6 +99,10 @@ export default {
     PopFilter
   },
   props: {
+    currentPageSelected: {
+      type: Number,
+      default: 0
+    },
     height: {
       type: Number,
       default: null
