@@ -1,5 +1,5 @@
-@import "./mixins/mixins.scss";
-@import "./themes/vars.scss";
+@import './mixins/mixins.scss';
+@import './themes/vars.scss';
 
 @include themes-mixin {
   @include b(advance-table--col-border) {
@@ -112,7 +112,7 @@
     @include e(header) {
       background-color: $--table-header-background-color;
       i {
-        color: $--table-header-icon-color;
+        fill: $--table-header-icon-color;
       }
     }
   }
