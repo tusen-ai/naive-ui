@@ -27,6 +27,10 @@ export default {
       type: Number,
       default: null
     },
+    labelAlign: {
+      type: String,
+      default: 'left'
+    },
     labelPosition: {
       type: String,
       default: 'top'

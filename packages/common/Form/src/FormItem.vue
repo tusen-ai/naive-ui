@@ -3,9 +3,11 @@
     class="n-form-item"
     :class="{
       [`n-form-item--${synthesizedLabelPosition}-labelled`]: synthesizedLabelPosition,
+      [`n-form-item--${synthesizedLabelAlign}-label-aligned`]: synthesizedLabelAlign,
       [`n-form-item--required`]: synthesizedRequired,
       [`n-form-item--no-label`]: !(label || $slots.label),
       [`n-form-item--has-feedback`]: hasFeedback,
+      [`n-form-item--may-have-feedback`]: path,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
   >
@@ -17,27 +19,29 @@
       <template v-if="$slots.label"><slot name="label" /></template>
       <template v-else>{{ label }}</template>
     </label>
-    <div
-      class="n-form-item-blank"
-      :class="validated ? `n-form-item-blank--error` : `n-form-item-blank--pass`"
-    >
-      <slot />
-    </div>
-    <transition
-      name="n-fade-down"
-      @before-enter="handleBeforeEnter"
-      @after-leave="handleAfterLeave"
-    >
+    <div class="n-form-item-control">
       <div
-        v-if="explains.length"
-        class="n-form-item-feedback"
+        class="n-form-item-blank"
+        :class="validated ? `n-form-item-blank--error` : `n-form-item-blank--pass`"
       >
-        <span
-          v-for="(explain, i) in explains"
-          :key="i"
-        >{{ explain }}<br v-if="i + 1 !== explains.length"></span>
+        <slot />
       </div>
-    </transition>
+      <transition
+        name="n-fade-down"
+        @before-enter="handleBeforeEnter"
+        @after-leave="handleAfterLeave"
+      >
+        <div
+          v-if="explains.length"
+          class="n-form-item-feedback"
+        >
+          <span
+            v-for="(explain, i) in explains"
+            :key="i"
+          >{{ explain }}<br v-if="i + 1 !== explains.length"></span>
+        </div>
+      </transition>
+    </div>
   </div>
 </template>
 <script>
@@ -67,9 +71,13 @@ export default {
       type: String,
       default: null
     },
+    labelAlign: {
+      type: String,
+      default: null
+    },
     labelPosition: {
       type: String,
-      default: 'top'
+      default: null
     },
     path: {
       type: String,
@@ -110,10 +118,21 @@ export default {
     }
   },
   computed: {
+    labelWidthStyle () {
+      if (/\d$/.test(String(this.synthesizedLabelWidth))) {
+        return {
+          width: `${this.synthesizedLabelWidth}px`
+        }
+      } else {
+        return {
+          width: this.synthesizedLabelWidth
+        }
+      }
+    },
     synthesizedLabelStyle () {
       return {
-        ...this.labelStyle,
-        width: this.styleLabelWidth
+        ...this.labelWidthStyle,
+        ...this.labelStyle
       }
     },
     synthesizedLabelWidth () {
@@ -136,6 +155,11 @@ export default {
       if (this.labelPosition) return this.labelPosition
       if (this.NForm && this.NForm.labelPosition) return this.NForm.labelPosition
       return 'top'
+    },
+    synthesizedLabelAlign () {
+      if (this.labelAlign) return this.labelAlign
+      if (this.NForm && this.NForm.labelAlign) return this.NForm.labelAlign
+      return 'left'
     },
     synthesizedRequired () {
       if (this.required) return this.required

@@ -122,4 +122,28 @@
       caret-color: $--input-number-caret-color;
     }
   }
+  @include as-form-item {
+    @include with-status(error) {
+      @include b(input-number) {
+        @include e(border-layer) {
+          box-shadow: map-get($--input-number-box-shadow, 'error-default');
+        }
+        @include e(input) {
+          &:hover ~ {
+            @include e(border-layer) {
+              box-shadow: map-get($--input-number-box-shadow, 'error-hover');
+            }
+          }
+          &:focus {
+            background-color: map-get($--input-number-background-color, 'error-focus');
+            & ~ {
+              @include e(border-layer) {
+                box-shadow: map-get($--input-number-box-shadow, 'error-focus');
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
