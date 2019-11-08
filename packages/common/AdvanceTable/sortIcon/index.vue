@@ -138,10 +138,10 @@ export default {
   display: inline-block;
   width: 14px;
   height: 12px;
-  margin-top: -1px;
   vertical-align: middle;
   cursor: pointer;
   position: relative;
+  top: 1px;
 }
 .ts-sort-container i:first-child {
   top: 0;
