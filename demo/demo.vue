@@ -79,6 +79,10 @@ export default {
             {
               name: 'App',
               path: `/${this.lang}/${this.theme}` + '/n-app'
+            },
+            {
+              name: 'ThemeConsumer',
+              path: `/${this.lang}/${this.theme}` + '/n-theme-consumer'
             }
           ]
         },
@@ -107,7 +111,7 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-button'
             },
             {
-              name: 'Card',
+              name: 'Card (in progress)',
               path: `/${this.lang}/${this.theme}` + '/n-card'
             },
             {

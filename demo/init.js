@@ -66,6 +66,7 @@ import affix from './documentation/components/affix'
 import statistic from './documentation/components/statistic'
 import grid from './documentation/components/grid'
 import breadcrumb from './documentation/components/breadcrumb'
+import themeConsumer from './documentation/components/themeConsumer'
 
 import demo from './demo'
 import ComponentDemo from './utils/ComponentDemo'
@@ -83,6 +84,7 @@ import backTopDebug from './debugComponents/backTopDebug'
 import cancelMarkDebug from './debugComponents/cancelMarkDebug'
 import cascaderDebug from './debugComponents/cascaderDebug'
 import verticalAlignDebug from './debugComponents/verticalAlignDebug'
+import ThemeConsumer from '../packages/common/ThemeConsumer'
 
 Vue.use(VueI18n)
 Vue.use(VueRouter)
@@ -187,7 +189,8 @@ const routes = [
       { path: '/n-affix', component: affix },
       { path: '/n-statistic', component: statistic },
       { path: '/n-grid', component: grid },
-      { path: '/n-breadcrumb', component: breadcrumb }
+      { path: '/n-breadcrumb', component: breadcrumb },
+      { path: '/n-theme-consumer', component: themeConsumer }
     ])
   },
   {

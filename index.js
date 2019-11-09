@@ -62,6 +62,7 @@ import Grid from './packages/common/Grid'
 import Affix from './packages/common/Affix'
 import Statistic from './packages/common/Statistic'
 import Breadcrumb from './packages/common/Breadcrumb'
+import ThemeConsumer from './packages/common/ThemeConsumer'
 
 function install (Vue) {
   Card.install(Vue)
@@ -128,6 +129,7 @@ function install (Vue) {
   Affix.install(Vue)
   Statistic.install(Vue)
   Breadcrumb.install(Vue)
+  ThemeConsumer.install(Vue)
 }
 
 export default {
