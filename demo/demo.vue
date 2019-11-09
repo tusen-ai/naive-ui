@@ -262,7 +262,7 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-loading-bar'
             },
             {
-              name: 'Menu',
+              name: 'Menu (in progress)',
               path: `/${this.lang}/${this.theme}` + '/n-menu'
             },
             {
