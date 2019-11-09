@@ -4,6 +4,7 @@
     :class="{
       'n-form--inline': inline
     }"
+    @keydown.enter.prevent="handleKeyDownEnter"
   >
     <slot />
   </form>
@@ -31,7 +32,7 @@ export default {
       type: String,
       default: 'left'
     },
-    labelPosition: {
+    labelPlacement: {
       type: String,
       default: 'top'
     },
@@ -95,6 +96,9 @@ export default {
         }
       }
       this.value = this.initialValue
+    },
+    handleKeyDownEnter () {
+
     }
   }
 }

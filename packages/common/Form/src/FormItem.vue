@@ -2,12 +2,11 @@
   <div
     class="n-form-item"
     :class="{
-      [`n-form-item--${synthesizedLabelPosition}-labelled`]: synthesizedLabelPosition,
+      [`n-form-item--${synthesizedLabelPlacement}-labelled`]: synthesizedLabelPlacement,
       [`n-form-item--${synthesizedLabelAlign}-label-aligned`]: synthesizedLabelAlign,
       [`n-form-item--required`]: synthesizedRequired,
       [`n-form-item--no-label`]: !(label || $slots.label),
       [`n-form-item--has-feedback`]: hasFeedback,
-      [`n-form-item--may-have-feedback`]: path,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
   >
@@ -26,21 +25,23 @@
       >
         <slot />
       </div>
-      <transition
-        name="n-fade-down"
-        @before-enter="handleBeforeEnter"
-        @after-leave="handleAfterLeave"
-      >
-        <div
-          v-if="explains.length"
-          class="n-form-item-feedback"
+      <div v-if="path" class="n-form-item-feedback-wrapper">
+        <transition
+          name="n-fade-down"
+          @before-enter="handleBeforeEnter"
+          @after-leave="handleAfterLeave"
         >
-          <span
-            v-for="(explain, i) in explains"
-            :key="i"
-          >{{ explain }}<br v-if="i + 1 !== explains.length"></span>
-        </div>
-      </transition>
+          <div
+            v-if="explains.length"
+            class="n-form-item-feedback"
+          >
+            <span
+              v-for="(explain, i) in explains"
+              :key="i"
+            >{{ explain }}<br v-if="i + 1 !== explains.length"></span>
+          </div>
+        </transition>
+      </div>
     </div>
   </div>
 </template>
@@ -75,7 +76,7 @@ export default {
       type: String,
       default: null
     },
-    labelPosition: {
+    labelPlacement: {
       type: String,
       default: null
     },
@@ -141,7 +142,7 @@ export default {
       return null
     },
     styleLabelWidth () {
-      if (this.synthesizedLabelPosition === 'top') return null
+      if (this.synthesizedLabelPlacement === 'top') return null
       if (this.synthesizedLabelWidth === null) return null
       return `${this.synthesizedLabelWidth}px`
     },
@@ -151,9 +152,9 @@ export default {
         return this.path
       } else return null
     },
-    synthesizedLabelPosition () {
-      if (this.labelPosition) return this.labelPosition
-      if (this.NForm && this.NForm.labelPosition) return this.NForm.labelPosition
+    synthesizedLabelPlacement () {
+      if (this.labelPlacement) return this.labelPlacement
+      if (this.NForm && this.NForm.labelPlacement) return this.NForm.labelPlacement
       return 'top'
     },
     synthesizedLabelAlign () {
