@@ -42,9 +42,10 @@
             <div class="n-nimbus-service-layout-drawer-header__content">
               <div class="n-nimbus-service-layout-drawer-header__icon">
                 <n-icon
-                  :type="icon"
                   :size="22"
-                />
+                >
+                  <slot name="drawer-header-icon" />
+                </n-icon>
               </div>
               {{ name }}
             </div>
