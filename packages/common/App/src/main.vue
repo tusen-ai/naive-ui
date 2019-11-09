@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'NApp',
+  name: 'NConfigProvider',
   provide () {
     return {
       NApp: this

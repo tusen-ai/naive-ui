@@ -1,5 +1,5 @@
 <template>
-  <n-app
+  <n-config-provider
     class="demo"
     namespace="naive-ui-doc"
     :theme="theme"
@@ -16,7 +16,7 @@
       </template>
       <router-view />
     </n-nimbus-service-layout>
-  </n-app>
+  </n-config-provider>
 </template>
 
 <script>
@@ -77,12 +77,12 @@ export default {
           name: 'Config Components',
           childItems: [
             {
-              name: 'App',
-              path: `/${this.lang}/${this.theme}` + '/n-app'
+              name: 'Config Provider',
+              path: `/${this.lang}/${this.theme}` + '/n-config-provider'
             },
             {
-              name: 'ThemeConsumer',
-              path: `/${this.lang}/${this.theme}` + '/n-theme-consumer'
+              name: 'Config Consumer',
+              path: `/${this.lang}/${this.theme}` + '/n-config-consumer'
             }
           ]
         },
@@ -127,7 +127,7 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-dropdown'
             },
             {
-              name: 'GradientText',
+              name: 'Gradient Text',
               path: `/${this.lang}/${this.theme}` + '/n-gradient-text'
             },
             {
@@ -144,7 +144,7 @@ export default {
           name: 'Data Input Components',
           childItems: [
             {
-              name: 'AutoComplete (in progress)',
+              name: 'Auto Complete (in progress)',
               path: `/${this.lang}/${this.theme}` + '/n-auto-complete'
             },
             {
@@ -156,11 +156,11 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-checkbox'
             },
             {
-              name: 'CustomInput (in progress)',
+              name: 'Custom Input (in progress)',
               path: `/${this.lang}/${this.theme}` + '/n-custom-input'
             },
             {
-              name: 'DatePicker',
+              name: 'Date Picker',
               path: `/${this.lang}/${this.theme}` + '/n-date-picker'
             },
             {
@@ -172,7 +172,7 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-input'
             },
             {
-              name: 'InputNumber',
+              name: 'Input Number',
               path: `/${this.lang}/${this.theme}` + '/n-input-number'
             },
             {
@@ -192,7 +192,7 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-switch'
             },
             {
-              name: 'TimePicker',
+              name: 'Time Picker',
               path: `/${this.lang}/${this.theme}` + '/n-time-picker'
             },
             {
@@ -205,7 +205,7 @@ export default {
           name: 'Data Display Components',
           childItems: [
             {
-              name: 'AdvanceTable (in progress)',
+              name: 'Advanced Table (in progress)',
               path: `/${this.lang}/${this.theme}` + '/n-advance-table'
             },
             {
@@ -258,7 +258,7 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-breadcrumb'
             },
             {
-              name: 'LoadingBar',
+              name: 'Loading Bar',
               path: `/${this.lang}/${this.theme}` + '/n-loading-bar'
             },
             {

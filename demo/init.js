@@ -53,7 +53,7 @@ import divider from './documentation/components/divider'
 import popconfirm from './documentation/components/popconfirm'
 import anchor from './documentation/components/anchor'
 import popselect from './documentation/components/popselect'
-import app from './documentation/components/app'
+import configProvider from './documentation/components/configProvider'
 import advancedTable from './documentation/components/advancedTable'
 import transfer from './documentation/components/transfer'
 import spin from './documentation/components/spin'
@@ -66,7 +66,7 @@ import affix from './documentation/components/affix'
 import statistic from './documentation/components/statistic'
 import grid from './documentation/components/grid'
 import breadcrumb from './documentation/components/breadcrumb'
-import themeConsumer from './documentation/components/themeConsumer'
+import configConsumer from './documentation/components/configConsumer'
 
 import demo from './demo'
 import ComponentDemo from './utils/ComponentDemo'
@@ -84,7 +84,6 @@ import backTopDebug from './debugComponents/backTopDebug'
 import cancelMarkDebug from './debugComponents/cancelMarkDebug'
 import cascaderDebug from './debugComponents/cascaderDebug'
 import verticalAlignDebug from './debugComponents/verticalAlignDebug'
-import ThemeConsumer from '../packages/common/ThemeConsumer'
 
 Vue.use(VueI18n)
 Vue.use(VueRouter)
@@ -176,7 +175,7 @@ const routes = [
       { path: '/n-anchor', component: anchor },
       { path: '/n-dropdown', component: dropdown },
       { path: '/n-popselect', component: popselect },
-      { path: '/n-app', component: app },
+      { path: '/n-config-provider', component: configProvider },
       { path: '/n-cancel-mark-debug', component: cancelMarkDebug },
       { path: '/n-transfer', component: transfer },
       { path: '/n-spin', component: spin },
@@ -190,7 +189,7 @@ const routes = [
       { path: '/n-statistic', component: statistic },
       { path: '/n-grid', component: grid },
       { path: '/n-breadcrumb', component: breadcrumb },
-      { path: '/n-theme-consumer', component: themeConsumer }
+      { path: '/n-config-consumer', component: configConsumer }
     ])
   },
   {

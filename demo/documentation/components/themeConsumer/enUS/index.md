@@ -1,4 +1,0 @@
-# Theme Consumer
-```demo
-basic
-```
