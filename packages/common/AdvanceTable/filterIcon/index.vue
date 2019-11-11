@@ -1,15 +1,16 @@
 <template>
   <span
     class="ts-funnel-container"
-    :class="{'ts-funnel-container--active':status}"
-    @click.stop="()=>{}"
+    :class="{ 'ts-funnel-container--active': status }"
+    @click.stop="() => {}"
   >
     <n-icon
       style="vertical-align: middle;"
-      :class="{'ts-funnel-container--active':status}"
-      type="ios-funnel"
-      size="12"
-    />
+      :class="{ 'ts-funnel-container--active': status }"
+      size="14"
+    >
+      <ios-funnel />
+    </n-icon>
     <!-- <n-popover
       trigger="click"
       style="padding:0;"
@@ -25,11 +26,15 @@
       </template>
       <slot />
     </n-popover> -->
-
   </span>
 </template>
 <script>
+import iosFunnel from 'naive-ui/lib/icons/ios-funnel'
+
 export default {
+  components: {
+    iosFunnel
+  },
   props: {
     status: {
       type: Boolean,
@@ -51,11 +56,10 @@ export default {
 .ts-funnel-container i {
   opacity: 0.4;
 }
-.ts-funnel-container--active i{
+.ts-funnel-container--active i {
   opacity: 1;
 }
 .ts-funnel-container:hover i {
   opacity: 1;
 }
-
 </style>
