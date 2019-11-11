@@ -4,12 +4,14 @@ import NModalContent from './ModalContent'
 import NBasePortal from '../../../base/Portal'
 import zindexable from '../../../mixins/zindexable'
 import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 
 export default {
   name: 'NModal',
   mixins: [
     withapp,
-    zindexable
+    zindexable,
+    themeable
   ],
   props: {
     activateEvent: {
@@ -25,6 +27,14 @@ export default {
     maskClosable: {
       type: Boolean,
       default: true
+    },
+    preSet: {
+      type: String,
+      default: ''
+    },
+    title: {
+      type: String,
+      default: 'Title'
     }
   },
   data () {
@@ -35,6 +45,15 @@ export default {
   computed: {
     active () {
       return this.value
+    },
+    props () {
+      let obj = { active: this.value, activateEvent: this.activateEvent, preSet: this.preSet }
+      switch (this.preSet) {
+        case 'confirm':
+          obj.title = this.title
+          break
+      }
+      return obj
     }
   },
   watch: {
@@ -48,6 +67,7 @@ export default {
     if (this.active) {
       this.$refs.portal.transferElement()
     }
+    console.log('this.$scopedSlots', this.namespace)
   },
   methods: {
     deactivate () {
@@ -73,7 +93,10 @@ export default {
           h(NModalContent,
             {
               ref: 'content',
-              props: { active: this.value, activateEvent: this.activateEvent },
+              props: this.props,
+              class: {
+                [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme
+              },
               on: {
                 'after-leave': () => {
                   this.$emit('after-hide')
@@ -84,6 +107,7 @@ export default {
                 mousedown: (e) => {
                   this.mousedownTarget = e.target
                 },
+                deactivate: this.deactivate,
                 mouseup: (e) => {
                   const slotDOM = this.$refs.content.slotDOM()
                   const scollbars = this.$refs.content.$el.querySelectorAll('.n-scrollbar-rail__scrollbar')
@@ -97,9 +121,10 @@ export default {
                     }
                   }
                 }
-              }
-            },
-            this.$scopedSlots.default()
+              },
+              scopedSlots: this.$scopedSlots
+              // slots: this.$slots
+            }
           )
         ])
       }

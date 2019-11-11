@@ -38,6 +38,8 @@
 @import "components/Tabs.scss";
 @import "components/Statistic.scss";
 @import "components/Breadcrumb.scss";
+@import "components/NimbusForm.scss";
+@import "components/Modal.scss";
 
 @mixin setup-light-theme() {
   @include setup-light-colors();
@@ -99,4 +101,6 @@
   @include setup-light-tabs;
   @include setup-light-statistic;
   @include setup-light-breadcrumb;
+  @include setup-light-nimbus-form;
+  @include setup-light-modal;
 }

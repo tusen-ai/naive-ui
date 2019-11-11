@@ -1,0 +1,6 @@
+@mixin setup-dark-nimbus-form {
+  $--nimbus-form-background-color: $--n-dialog-color !global;
+  $--nimbus-form-title-color: $--n-text-color !global;
+  $--nimbus-form-text-color: $--n-secondary-text-color !global;
+  $--nimbus-form-divider-color: $--n-divider-color !global;
+}

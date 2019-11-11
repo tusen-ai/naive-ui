@@ -6,9 +6,14 @@
 >
   Start Me up
 </n-button>
-<n-modal v-model="isActive">
+<n-modal v-model="isActive"  title="lalala">
+   <!-- <template v-slot:footer> -->
+     <div slot="header">111</div>
+     <div slot="content">mamama</div>
+     <!-- <div slot="footer">test11111</div> -->
+   <!-- </template> -->
   <div style="background: rgb(46, 52, 68); padding: 24px; border-radius: 8px; color: white;">
-    <div>If you start me up, If you start me up, I'll never stop.</div>
+    <div>If1 you start me up, If you start me up, I'll never stop.</div>
     <n-input v-model="inputValue" />
     inputValue: {{ inputValue }}<br>
     <n-tooltip>

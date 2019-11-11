@@ -38,6 +38,8 @@
 @import "components/Tabs.scss";
 @import "components/Statistic.scss";
 @import "components/Breadcrumb.scss";
+@import "components/NimbusForm.scss";
+@import "components/Modal.scss";
 
 @mixin setup-dark-theme() {
   @include setup-dark-colors();
@@ -103,4 +105,6 @@
   @include setup-dark-tabs;
   @include setup-dark-statistic;
   @include setup-dark-breadcrumb;
+  @include setup-dark-nimbus-form;
+  @include setup-dark-modal;
 }

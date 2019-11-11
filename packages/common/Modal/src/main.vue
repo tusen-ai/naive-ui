@@ -16,6 +16,7 @@ export default {
       return h(Modal, {
         props: context.props,
         scopedSlots: context.scopedSlots,
+        slots: context.slots,
         on: context.listeners
       })
     }

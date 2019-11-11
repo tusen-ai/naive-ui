@@ -18,8 +18,18 @@
           v-if="active"
           ref="contentInner"
           style="margin: auto;"
+          class="n-modal-content-slot"
         >
-          <slot />
+          <n-confirm v-if="preSet==='confirm'" ref="confirm" :deactivate="()=>{this.$emit('deactivate')}">
+            <slot slot="content" name="content" />
+            <slot slot="footer" name="footer" />
+          </n-confirm>
+          <n-form v-else-if="preSet==='form'" title="test" :deactivate="()=>{this.$emit('deactivate')}">
+            <slot slot="header" name="header" />
+            <slot slot="content" name="content" />
+            <slot slot="footer" name="footer" />
+          </n-form>
+          <slot v-else />
         </div>
       </transition>
     </n-scrollbar>
@@ -28,6 +38,8 @@
 
 <script>
 import NScrollbar from '../../Scrollbar'
+import NConfirm from './Confirm'
+import NForm from './Form'
 
 let mousePosition = null
 
@@ -43,7 +55,9 @@ document.documentElement.addEventListener('click', (e) => {
 
 export default {
   components: {
-    NScrollbar
+    NScrollbar,
+    NConfirm,
+    NForm
   },
   props: {
     active: {
@@ -55,6 +69,14 @@ export default {
         return e instanceof MouseEvent
       },
       default: null
+    },
+    preSet: {
+      type: String,
+      default: ''
+    },
+    title: {
+      type: String,
+      default: 'title'
     }
   },
   data () {
@@ -66,6 +88,11 @@ export default {
     if (this.active) {
       this.styleActive = true
     }
+  },
+  mounted () {
+    console.log('contentInner', this.$slots)
+    // this.$refs.confirm.$slots.footer = this.$scopedSlots.footer && this.$scopedSlots.footer()
+    // this.$slots.default = this.$scopedSlots.default && this.$scopedSlots.default()
   },
   // mounted () {
   //   this.$nextTick().then(this.registerContent)
@@ -162,36 +189,5 @@ export default {
 </script>
 
 <style lang="scss">
-.n-modal-content-inner--measure {
-  transform: scale(1)!important;
-}
 
-.n-modal-content {
-  & > .n-scrollbar {
-    & > .n-scrollbar-container > .n-scrollbar-content {
-      min-height: 100%;
-      display: flex;
-    }
-  }
-  &:not(.n-modal-content--active) {
-    visibility: hidden;
-  }
-}
-
-.n-modal-content--transition-enter-active {
-  opacity: 1;
-  transition: opacity .3s cubic-bezier(.4, 0, .2, 1), transform .3s cubic-bezier(0.0, 0.0, 0.2, 1);
-  transform: scale(1);
-}
-
-.n-modal-content--transition-leave-active {
-  opacity: 1;
-  transition: opacity .3s cubic-bezier(.4, 0, .2, 1), transform .3s cubic-bezier(0.4, 0.0, 1, 1);
-  transform: scale(1);
-}
-
-.n-modal-content--transition-enter, .n-modal-content--transition-leave-to {
-  opacity: 0;
-  transform: scale(.5);
-}
 </style>
