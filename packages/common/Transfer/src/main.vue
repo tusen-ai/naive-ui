@@ -10,7 +10,7 @@
         <div class="n-transfer-list-header__checkbox">
           <div class="n-transfer-list-light-bar" />
           <n-checkbox
-            :value="sourceHeaderCheckboxChecked"
+            :checked="sourceHeaderCheckboxChecked"
             :indeterminate="sourceHeaderCheckboxIndeterminate"
             :disabled="sourceHeaderCheckboxDisabled"
             @input="handleSourceHeaderCheckboxInput"
@@ -79,7 +79,7 @@
       <div class="n-transfer-list-header">
         <div class="n-transfer-list-header__checkbox">
           <n-checkbox
-            :value="targetHeaderCheckboxChecked"
+            :checked="targetHeaderCheckboxChecked"
             :indeterminate="targetHeaderCheckboxIndeterminate"
             :disabled="targetHeaderCheckboxDisabled"
             @input="handleTargetHeaderCheckboxInput"

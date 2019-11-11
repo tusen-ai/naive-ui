@@ -28,7 +28,7 @@ When activate-input-when-focused is set to false, blur event & focus event will 
   @keyup="handleKeyUp"
   @input="handleInput"
   placeholder="Operate to trigger events"
-  :activate-input-when-focused="false"
+  :lazy-focus="true"
 />
 <n-input
   pair
@@ -36,7 +36,7 @@ When activate-input-when-focused is set to false, blur event & focus event will 
   v-model="pair"
   @blur="handleBlur"
   @focus="handleFocus"
-  :activate-input-when-focused="false"
+  :lazy-focus="true"
 />
 ```
 ```js

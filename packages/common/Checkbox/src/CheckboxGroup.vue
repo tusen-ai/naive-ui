@@ -21,6 +21,11 @@ export default {
       collectedCheckboxValues: []
     }
   },
+  watch: {
+    value (value, oldValue) {
+      this.$emit('change', value, oldValue)
+    }
+  },
   methods: {
     toggleCheckbox (checked, checkboxValue) {
       if (Array.isArray(this.value)) {

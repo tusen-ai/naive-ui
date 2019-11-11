@@ -23,7 +23,6 @@ function mapSlot (h, defaultSlot, currentComponent) {
       let lastInstancePriority
       let currentInstancePriority
       if (currentComponent.synthesizedTheme === 'dark') {
-        console.log('dark theme')
         /**
          * Priority of button splitor:
          * !disabled  checked >
@@ -34,7 +33,6 @@ function mapSlot (h, defaultSlot, currentComponent) {
         lastInstancePriority = (!lastInstanceDisabled ? 2 : 0) + (lastInstanceChecked ? 1 : 0)
         currentInstancePriority = (!currentInstanceDisabled ? 2 : 0) + (currentInstanceChecked ? 1 : 0)
       } else {
-        console.log('light theme')
         /**
          * Priority of button splitor:
          * !disabled  checked >

@@ -4,7 +4,7 @@
     :class="{
       [`n-form-item--${synthesizedLabelPlacement}-labelled`]: synthesizedLabelPlacement,
       [`n-form-item--${synthesizedLabelAlign}-label-aligned`]: synthesizedLabelAlign,
-      [`n-form-item--required`]: synthesizedRequired,
+      [`n-form-item--required`]: synthesizedRequired && showRequireMark,
       [`n-form-item--no-label`]: !(label || $slots.label),
       [`n-form-item--has-feedback`]: hasFeedback,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
@@ -98,7 +98,7 @@ export default {
     },
     showRequireMark: {
       type: Boolean,
-      default: false
+      default: true
     },
     rule: {
       type: [Object, Array],
@@ -163,25 +163,13 @@ export default {
       return 'left'
     },
     synthesizedRequired () {
-      if (this.required) return this.required
-      if (this.NForm && this.NForm.required) return this.NForm.required
+      if (this.synthesizedRules.some(rule => rule.required)) return true
+      if (this.required) return true
+      if (this.NForm && this.NForm.required) return true
       return false
     },
     synthesizedRules () {
       let rules = []
-      const validator = (rule, value) => {
-        if (value !== undefined && value !== null && value !== '') {
-          return true
-        }
-        return Error(`${this.label || this.path} is required!`)
-      }
-      if (this.required) {
-        rules.push({
-          trigger: ['blur', 'change', 'input'],
-          required: true,
-          validator
-        })
-      }
       if (this.rule) {
         if (Array.isArray(this.rule)) {
           rules = rules.concat(this.rule)
@@ -242,8 +230,10 @@ export default {
       })
       if (!activeRules.length) return
       const validator = new Schema({ [path]: activeRules })
+      // console.log(trigger, { [path]: value })
       validator.validate({ [path]: value }, options, (errors, fields) => {
         // console.log('validate', errors, fields)
+        // debugger
         if (errors && errors.length) {
           this.explains = errors.map(error => error.message)
           this.validated = true

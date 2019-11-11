@@ -4,15 +4,16 @@
   inline
   :label-width="80"
   :model="formValue"
+  :rules="rules"
   ref="form"
 >
-  <n-form-item label="Name" path="user.name" required>
+  <n-form-item label="Name" path="user.name">
     <n-input v-model="formValue.user.name" placeholder="Input Name" />
   </n-form-item>
-  <n-form-item label="Age" path="user.age" required>
+  <n-form-item label="Age" path="user.age">
     <n-input placeholder="Input Age" v-model="formValue.user.age"/>
   </n-form-item>
-  <n-form-item label="Phone" path="phone" required>
+  <n-form-item label="Phone" path="phone">
     <n-input placeholder="Phone Number" v-model="formValue.phone"/>
   </n-form-item>
   <n-form-item v-model="formValue.phone">
@@ -34,6 +35,25 @@ export default {
           age: ''
         },
         phone: ''
+      },
+      rules: {
+        user: {
+          name: {
+            required: true,
+            message: 'Please input your name',
+            trigger: 'blur'
+          },
+          age: {
+            required: true,
+            message: 'Please input your age',
+            trigger: 'input'
+          }
+        },
+        phone: {
+          required: true,
+          message: 'Please input your number',
+          trigger: ['input']
+        }
       }
     }
   },

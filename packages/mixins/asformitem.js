@@ -4,6 +4,9 @@ export default function (events = {
   focus: 'focus'
 }) {
   return {
+    provide: {
+      NFormItem: null
+    },
     inject: {
       NFormItem: {
         default: null
