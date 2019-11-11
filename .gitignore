@@ -2,8 +2,10 @@ node_modules
 dist
 docDist
 doc/dist
+test-size
 test/unit/coverage
 package-lock.json
 yarn.lock
+lib
 .vscode
 *.swp

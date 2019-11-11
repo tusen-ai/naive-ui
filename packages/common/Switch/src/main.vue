@@ -4,11 +4,12 @@
     :class="{
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
+    :tabindex="!disabled ? 0 : false"
     @click="handleClick"
   >
     <div
       class="n-switch__rail"
-      :class="{ 'n-switch__rail--active': active, 'n-switch__rail--disabled': disabled }"
+      :class="{ 'n-switch__rail--active': value, 'n-switch__rail--disabled': disabled }"
     />
   </div>
 </template>
@@ -22,16 +23,12 @@ export default {
   name: 'NSwitch',
   mixins: [ withapp, themeable, Emitter ],
   inject: {
-    formItem: {
+    NFormItem: {
       default: null
     }
   },
-  model: {
-    prop: 'active',
-    event: 'change'
-  },
   props: {
-    active: {
+    value: {
       type: Boolean,
       required: true
     },
@@ -40,12 +37,17 @@ export default {
       default: false
     }
   },
+  watch: {
+    value (value, oldValue) {
+      this.$emit('change', value, oldValue)
+    }
+  },
   methods: {
     handleClick () {
       if (!this.disabled) {
-        this.$emit('change', !this.active)
-        if (this.formItem) {
-          this.dispatch('NFormItem', 'on-form-change', !this.active)
+        this.$emit('input', !this.value)
+        if (this.NFormItem) {
+          this.dispatch('NFormItem', 'form-item-change', !this.value)
         }
       }
     }

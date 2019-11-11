@@ -51,23 +51,30 @@ export default {
     const slots = context.scopedSlots
     const activator = slots.activator || slots.default
     const controller = context.props.controller || {}
-    return h(
-      NPopover, {
-        props: {
-          trigger: 'click',
-          controller
-        },
-        scopedSlots: {
-          activator: () => activator(),
-          default: () => h(NPopselectPanel, {
+    const onHide = context.listeners.hide || (() => {})
+    const onShow = context.listeners.show || (() => {})
+
+    return h(NPopover, {
+      props: {
+        trigger: 'click',
+        controller
+      },
+      on: {
+        show: onShow,
+        hide: onHide
+      },
+      scopedSlots: {
+        activator: () => activator(),
+        default: () =>
+          h(NPopselectPanel, {
             props: {
               ...context.props,
               controller
             },
             on: context.listeners
           })
-        }
-      })
+      }
+    })
   }
 }
 </script>

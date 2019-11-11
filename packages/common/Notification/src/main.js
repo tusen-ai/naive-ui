@@ -1,8 +1,7 @@
-import Vue from 'vue'
 import NNotificationCell from './NotificationCell'
 import { getTheme } from '../../../utils/installThemeableComponent'
 
-function setTheme(notificationContainer) {
+function setTheme (notificationContainer) {
   let theme = getTheme(this)
   const themeClasses = Array.from(notificationContainer.classList).filter(c =>
     c.endsWith('-theme')
@@ -11,7 +10,7 @@ function setTheme(notificationContainer) {
   if (theme) notificationContainer.classList.add(`n-${theme}-theme`)
 }
 
-function attachNotificationContainer() {
+function attachNotificationContainer () {
   let notificationContainer = document.querySelector(
     '.n-notification.n-notification__container'
   )
@@ -46,10 +45,10 @@ const defaultOptions = {
 const defaultNotification = {
   duration: null,
   avator: null,
-  actionCallback: () => {}
+  action: () => {}
 }
 
-function mountNotificationEl(container, vm, option) {
+function mountNotificationEl (container, vm, option) {
   const el = vm.$el
   el.classList.add('is-going-to-emerge')
   container.appendChild(el)
@@ -59,13 +58,13 @@ function mountNotificationEl(container, vm, option) {
     vm.$refs.body.getBoundingClientRect().height}px`
 }
 
-function removeNotificationEl(container, el, option, notificationVueInstance) {
-  setTimeout(function() {
+function removeNotificationEl (container, el, option, notificationVueInstance) {
+  setTimeout(function () {
     if (container.contains(el)) {
-      container.removeChild(el)
       const notification = notificationVueInstance.notification
-      if (notification.afterCloseCallback) {
-        notification.afterCloseCallback(notificationVueInstance)
+      container.removeChild(el)
+      if (notification.afterClose) {
+        notification.afterClose(notificationVueInstance)
       }
     }
   }, option.vanishTransitionTimeout)
@@ -73,25 +72,32 @@ function removeNotificationEl(container, el, option, notificationVueInstance) {
   el.style['max-height'] = '0'
 }
 
-const NMessage = {
-  notify(notification, type = 'success', option = defaultOptions) {
+const Notification = {
+  notify (notification, type = 'success', option = defaultOptions) {
     notification = { ...defaultNotification, ...notification }
     const notificationContainer = attachNotificationContainer()
     setTheme.call(this, notificationContainer)
-    const notificationCell = new Vue({
+    const notificationCell = new Notification.Vue({
       ...NNotificationCell,
       propsData: { type, notification: notification },
-      mounted() {
+      mounted () {
         if (notification.duration) {
           setTimeout(this.close, notification.duration)
         }
       },
       methods: {
-        close() {
+        close () {
+          if (notification.beforeClose) {
+            let shouldClose = false
+            notification.beforeClose(() => {
+              shouldClose = true
+            })
+            if (!shouldClose) return
+          }
           removeNotificationEl(notificationContainer, this.$el, option, this)
         },
-        handleActionClick() {
-          notification.actionCallback(this)
+        handleActionClick () {
+          notification.action(this)
         }
       }
     }).$mount()
@@ -99,4 +105,4 @@ const NMessage = {
   }
 }
 
-export default NMessage
+export default Notification

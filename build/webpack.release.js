@@ -4,28 +4,28 @@
 const path = require('path')
 const webpack = require('webpack')
 const config = require('./config')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const glob = require('glob')
+
+const entry = {}
+glob.sync('./packages/icons/*.vue').concat('./index.js').forEach(filePath => {
+  const entryName = filePath.replace(/^\.\/packages\//, '').replace(/\.(vue|js)$/, '')
+  entry[entryName] = filePath
+})
 
 const webpackConfig = {
   mode: 'development',
-  entry: './index.js',
+  entry,
   output: {
-    path: path.resolve(process.cwd()),
-    publicPath: '',
-    filename: '[name].[hash:7].js',
-    chunkFilename: '[name].[hash:7].js'
+    path: path.resolve(process.cwd(), 'lib'),
+    // publicPath: '',
+    filename: '[name].js'
+    // chunkFilename: '[name].js'
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: config.alias,
     modules: ['node_modules']
-  },
-  devServer: {
-    host: '0.0.0.0',
-    port: 8086,
-    publicPath: '/',
-    hot: true
   },
   performance: {
     hints: false
@@ -63,10 +63,6 @@ const webpackConfig = {
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './demo/index.tpl',
-      favicon: './demo/assets/images/naivelogo.png'
-    }),
     new VueLoaderPlugin(),
     new webpack.LoaderOptionsPlugin({
       vue: {

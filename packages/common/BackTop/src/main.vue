@@ -1,6 +1,7 @@
 <template>
   <transition name="n-back-top--transition">
     <div
+      v-if="show"
       :class="{[`n-${synthesizedTheme}-theme`]: synthesizedTheme}"
       :style="{
         right: styleRight,
@@ -8,7 +9,6 @@
       }"
       class="n-back-top"
       @click="handleClick"
-      v-if="show"
     >
       <svg
         v-if="!$slots.default"
@@ -47,17 +47,13 @@ export default {
       type: Number,
       default: 40
     },
-    contentSelector: {
-      type: String,
-      default: null
-    },
     /**
      * container is the place where we place event listener
      * if content is documentElement, the listener should be placed at #document,
      * which doesn't has scrollTop...
      */
-    containerSelector: {
-      type: String,
+    target: {
+      type: Function,
       default: null
     },
     visibilityHeight: {
@@ -90,19 +86,10 @@ export default {
   },
   methods: {
     init () {
-      if (this.containerSelector) {
-        this.container = document.querySelector(this.containerSelector)
-      }
-      if (this.contentSelector) {
-        this.content = document.querySelector(this.contentSelector)
-        if (!this.content) {
-          throw new Error('[n-back-top]: content not found')
-        } else {
-          this.container = getScrollParent(this.content)
-        }
-        if (!this.content) {
-          this.container = document
-        }
+      if (this.target) {
+        this.container = this.target()
+      } else {
+        this.container = getScrollParent(this.$el)
       }
       if (this.container) {
         this.container.addEventListener('scroll', this.handleScroll)
@@ -120,7 +107,6 @@ export default {
           behavior: 'smooth'
         })
       }
-
       this.$emit('click')
     },
     handleScroll () {

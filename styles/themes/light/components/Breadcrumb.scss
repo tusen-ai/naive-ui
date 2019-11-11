@@ -1,0 +1,9 @@
+@mixin setup-light-breadcrumb {
+  $--breadcrumb-link-text-color: (
+    'default': $--n-secondary-text-color,
+    'active': $--n-text-color
+  ) !global;
+  $--breadcrumb-seperator-text-color: (
+    'default': $--n-secondary-text-color
+  ) !global;
+}

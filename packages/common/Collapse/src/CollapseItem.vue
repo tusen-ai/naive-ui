@@ -12,7 +12,9 @@
       }"
       @click="handleClick"
     >
-      <n-icon type="ios-arrow-forward" />{{ title }}
+      <n-icon type="ios-arrow-forward">
+        <ios-arrow-forward />
+      </n-icon>{{ title }}
     </div>
     <fade-in-height-expand-transition>
       <div
@@ -33,16 +35,18 @@
 
 <script>
 import NIcon from '../../Icon'
-import registerable from '../../../mixins/registerable'
+import iosArrowForward from '../../../icons/ios-arrow-forward'
+import collectable from '../../../mixins/collectable'
 import FadeInHeightExpandTransition from '../../../transition/FadeInHeightExpandTransition'
 
 export default {
   name: 'NCollapseItem',
   components: {
     NIcon,
-    FadeInHeightExpandTransition
+    FadeInHeightExpandTransition,
+    iosArrowForward
   },
-  mixins: [registerable('NCollapse', 'collectedItemNames', 'name')],
+  mixins: [collectable('NCollapse', 'collectedItemNames', 'name')],
   inject: {
     NCollapse: {
       default: null

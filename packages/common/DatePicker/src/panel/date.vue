@@ -3,6 +3,7 @@
     <div
       v-if="active"
       ref="self"
+      tabindex="0"
       class="n-date-picker-panel"
       :class="{
         [`n-${theme}-theme`]: theme
@@ -92,6 +93,7 @@
           Confirm
         </n-button>
       </div>
+      <focus-detector @focus="handleBlur" />
     </div>
   </transition>
 </template>
@@ -100,7 +102,7 @@
 // import moment from 'moment'
 import NBaseIcon from '../../../../base/Icon'
 import uniCalendarMixin from './uniCalendarMixin'
-import { startOfDay } from 'date-fns'
+import startOfDay from 'date-fns/startOfDay'
 
 import NButton from '../../../Button'
 

@@ -21,10 +21,14 @@
     }
   }
   @include b(advance-table) {
+    @include fade-in-scale-up-transition(table-loading);
+    .n-table {
+      box-shadow: none;
+    }
     .n-advance-table__fixed--active {
       transition: box-shadow 0.2s;
       &.n-advance-table__fixed--right {
-        box-shadow: -10px 0 7px -5px rgba(0, 0, 0, 0.2);
+        box-shadow: -10px 0 16px -5px rgba(0, 0, 0, 0.2);
         border-right: none;
       }
       &.n-advance-table__fixed--left {
@@ -57,7 +61,7 @@
       display: inline-block;
       position: absolute;
       z-index: 100;
-      overflow: hidden;
+
       // box-shadow: 10px 0 16px 3px rgba(0, 0, 0, 0.2);
       .n-table.n-advance-table__body {
         width: auto;
@@ -72,9 +76,57 @@
     .n-advance-table__td--fixed {
       visibility: hidden;
     }
+    .n-advance-table--no-data {
+      .n-advance-table__fixed--active {
+        &.n-advance-table__fixed--right {
+          .n-advance-table__header {
+            box-shadow: -10px 0 16px -5px rgba(0, 0, 0, 0.2);
+            th {
+              border-right: none;
+            }
+          }
+        }
+        &.n-advance-table__fixed--left {
+          .n-advance-table__header {
+            box-shadow: 10px 0 16px -5px rgba(0, 0, 0, 0.2);
+            th {
+              border-right: none;
+            }
+          }
+        }
+      }
+      td {
+        border-right: none;
+      }
+      .n-advance-table__body {
+        td {
+          border: none;
+        }
+      }
+      .n-advance-table__fixed {
+        box-shadow: none;
+        border: none;
+      }
+      .n-advance-table__fixed--left {
+        thead {
+          th {
+            border-right: $--table-td-border-right;
+            border-top-right-radius: 0;
+          }
+        }
+      }
+    }
     @include b(table) {
       overflow: auto;
       padding-bottom: 0;
+    }
+    @include e(loading) {
+      height: 100%;
+      position: absolute;
+      width: 100%;
+      top: 0;
+      background-color: rgba(255, 255, 255, 0.5);
+      z-index: 200;
     }
     @include once {
       @include e(wrapper) {
@@ -109,7 +161,9 @@
         padding: 5px;
         text-align: center;
         width: 100%;
-        display: table-cell;
+        position: absolute;
+        bottom: 8px;
+        z-index: 300;
       }
       @include e(pagination) {
         margin-top: 27px;
@@ -175,7 +229,7 @@
       overflow: hidden;
       background-color: $--table-header-background-color;
       i {
-        color: $--table-header-icon-color;
+        fill: $--table-header-icon-color;
       }
       th {
         box-sizing: border-box;

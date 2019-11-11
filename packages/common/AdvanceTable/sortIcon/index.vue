@@ -1,30 +1,35 @@
 <template>
   <span class="ts-sort-container">
     <n-icon
-      type="md-arrow-dropdown"
+      :size="fontSize"
       :style="{
-        fontSize: fontSize,
-        opacity: opacitys.downOpacity,
-        transform: 'scale(0.8)'
+        opacity: opacitys.downOpacity
       }"
       @click.stop="changeDownSort()"
-    />
+    >
+      <md-arrow-dropdown />
+    </n-icon>
     <n-icon
       type="md-arrow-dropup"
+      :size="fontSize"
       :style="{
-        fontSize: fontSize,
-        opacity: opacitys.upOpacity,
-        transform: 'scale(0.8)'
+        opacity: opacitys.upOpacity
       }"
       @click.stop="changeUpSort()"
-    />
+    >
+      <md-arrow-dropup />
+    </n-icon>
   </span>
 </template>
 <script>
 // refer to https://github.com/TuSimple/infra-ecos-webui/blob/develop/src/components/SortIcon.vue
+import mdArrowDropdown from 'naive-ui/lib/icons/md-arrow-dropdown'
+import mdArrowDropup from 'naive-ui/lib/icons/md-arrow-dropup'
+
 const computeOpacity = val => {
   let upOpacity = 0.4
   let downOpacity = 0.4
+
   switch (val) {
     case 1:
       upOpacity = 1
@@ -42,10 +47,14 @@ const computeOpacity = val => {
 }
 export default {
   name: 'SortIcon',
+  components: {
+    mdArrowDropdown,
+    mdArrowDropup
+  },
   props: {
     fontSize: {
-      type: String,
-      default: '12px'
+      type: Number,
+      default: 17
     },
     value: {
       type: Number,
@@ -80,6 +89,7 @@ export default {
         }
       }
       let val = this.value
+      console.log(this.currentKey)
       return computeOpacity(val)
     }
   },
@@ -151,10 +161,10 @@ export default {
   display: inline-block;
   width: 14px;
   height: 12px;
-  margin-top: -1px;
   vertical-align: middle;
   cursor: pointer;
   position: relative;
+  top: 1px;
 }
 .ts-sort-container i:first-child {
   top: 0;
@@ -164,9 +174,7 @@ export default {
   height: 19px;
   position: absolute;
   transition: color 0.2s ease-in-out;
-  font-size: 19px !important;
   font-weight: 400;
-  vertical-align: middle;
 }
 .ts-sort-container i:last-child {
   bottom: 0;

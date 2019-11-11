@@ -71,14 +71,18 @@ function parseDemosAsAnchor (demosLiteral) {
   return `<n-anchor :top="0" affix style="width: 132px;">${linkTags.join('\n')}</n-anchor>`
 }
 
-function generateScript (demosLiteral) {
+function generateScript (demosLiteral, components = []) {
   const demoNames = demosLiteral
     .split('\n')
     .map(demoName => demoName.trim())
     .filter(demoName => demoName.length)
     .map(demoName => camelCase(demoName))
-  const importStatements = demoNames.map(demoName => `import ${demoName}Demo from './${demoName}.md'`).join('\n')
-  const componentStatements = demoNames.map(demoName => demoName + 'Demo').join(', ')
+  components = components.map(component => camelCase(component))
+  const importStatements = demoNames
+    .map(demoName => `import ${demoName}Demo from './${demoName}.md'`)
+    .concat(components.map(component => `import ${component} from './${component}'`))
+    .join('\n')
+  const componentStatements = demoNames.map(demoName => demoName + 'Demo').concat(components).join(', ')
   const script = `<script>
 ${importStatements}
 
@@ -104,6 +108,13 @@ export default {
 function convertMd2ComponentDocumentation (text) {
   const isSingleColumn = !!~text.search('<!--single-column-->')
   const tokens = marked.lexer(text)
+  const componentsIndex = tokens.findIndex(token => token.type === 'code' && token.lang === 'component')
+  let components = []
+  if (~componentsIndex) {
+    components = tokens[componentsIndex].text
+    components = components.split('\n').map(component => component.trim()).filter(component => component.length)
+    tokens.splice(componentsIndex, 1)
+  }
   const demosIndex = tokens.findIndex(token => token.type === 'code' && token.lang === 'demo')
   let demos = { text: '' }
   let demosLiteral = ''
@@ -143,7 +154,8 @@ function convertMd2ComponentDocumentation (text) {
     </div>
   </component-documentation>
 </template>`
-  const documentationScript = generateScript(demosLiteral)
+  const documentationScript = generateScript(demosLiteral, components)
+  // if (components.length) console.log(`${documentationTemplate}\n\n${documentationScript}`)
   return `${documentationTemplate}\n\n${documentationScript}`
   // console.log(vueComponent)
   // return vueComponent

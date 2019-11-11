@@ -82,13 +82,13 @@ import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import toggleable from '../../../mixins/toggleable'
 import zindexable from '../../../mixins/zindexable'
-import Emitter from '../../../mixins/emitter'
 import clickoutside from '../../../directives/clickoutside'
 import NBaseSelectMenu from '../../../base/SelectMenu'
 import NBasePicker from '../../../base/Picker'
 import linkedOptions from '../../../utils/data/linkedOptions'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import asformitem from '../../../mixins/asformitem'
 
 export default {
   name: 'NBaseSelect',
@@ -99,9 +99,9 @@ export default {
   directives: {
     clickoutside
   },
-  mixins: [withapp, themeable, detachable, toggleable, placeable, zindexable, Emitter],
+  mixins: [withapp, themeable, detachable, toggleable, placeable, zindexable, asformitem()],
   inject: {
-    formItem: {
+    NFormItem: {
       default: null
     }
   },
@@ -208,21 +208,13 @@ export default {
     filteredOptions () {
       this.$nextTick().then(() => {
         this.updatePosition()
-        // if (this.$refs.scrollbar) {
-        //   this.$refs.scrollbar.updateParameters()
-        // }
       })
     },
-    value () {
-      if (this.formItem) {
-        this.dispatch('NFormItem', 'on-form-change', this.value)
-      }
+    value (value) {
       this.$nextTick().then(() => {
         this.updatePosition()
-        // if (this.$refs.scrollbar) {
-        //   this.$refs.scrollbar.updateParameters()
-        // }
       })
+      this.emitChangeEvent(value)
     }
   },
   mounted () {
@@ -271,6 +263,7 @@ export default {
       }
     },
     handlePickerBlur () {
+      this.$emit('blur', this.value)
       this.closeMenu()
     },
     handleClickOutsideMenu (e) {
@@ -354,14 +347,12 @@ export default {
           this.pattern = ''
         }
         this.$emit('input', newValue)
-        this.emitChangeEvent(newValue)
       } else {
         if (this.filterable && !this.multiple) {
           this.pattern = ''
           this.switchFocusToOuter()
         }
         this.$emit('input', option.value)
-        this.emitChangeEvent(option.value)
         this.closeMenu()
       }
     },
@@ -386,7 +377,6 @@ export default {
         this.closeMenu()
       }
       this.$emit('input', null)
-      this.emitChangeEvent(null)
     },
     /**
      * scroll events on menu

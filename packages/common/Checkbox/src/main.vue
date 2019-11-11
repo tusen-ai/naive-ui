@@ -38,7 +38,7 @@ import themeable from '../../../mixins/themeable'
 import hollowoutable from '../../../mixins/hollowoutable'
 import CheckMark from './CheckMark'
 import LineMark from './LineMark'
-import registerable from '../../../mixins/registerable'
+import collectable from '../../../mixins/collectable'
 
 export default {
   name: 'NCheckbox',
@@ -55,7 +55,7 @@ export default {
     withapp,
     themeable,
     hollowoutable,
-    registerable('NCheckboxGroup', 'collectedCheckboxValues')
+    collectable('NCheckboxGroup', 'collectedCheckboxValues')
   ],
   model: {
     prop: 'checked',

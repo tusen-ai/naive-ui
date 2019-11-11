@@ -18,9 +18,9 @@
     <pre class="n-doc-section__inspect">range1 v-model: {{ JSON.stringify(range1) }}
 range2 v-model: {{ JSON.stringify(range2) }}
 range3 v-model: {{ JSON.stringify(range3) }}</pre>
-    <n-doc-source-block>
+    <pre>
       <!--SOURCE-->
-    </n-doc-source-block>
+    </pre>
   </div>
 </template>
 

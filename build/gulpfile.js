@@ -21,4 +21,10 @@ function copyfont () {
     .pipe(dest('../dist/lib/resources/'))
 }
 
-exports.build = series(compile, copyfont)
+function copyicon () {
+  return src('../packages/icons/*.vue')
+    .pipe(cssmin())
+    .pipe(dest('../lib/icons'))
+}
+
+exports.build = series(compile, copyfont, copyicon)

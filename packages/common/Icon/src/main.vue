@@ -1,20 +1,7 @@
-<template>
-  <i
-    class="n-icon"
-    :class="classes"
-    :style="styles"
-    v-on="$listeners"
-  />
-</template>
 <script>
-const prefixCls = 'ion'
 export default {
   name: 'NIcon',
   props: {
-    type: {
-      type: String,
-      default: ''
-    },
     size: {
       type: [Number, String],
       default: null
@@ -25,22 +12,25 @@ export default {
     }
   },
   computed: {
-    classes () {
-      return [
-        {
-          [`${prefixCls}-${this.type}`]: this.type !== ''
-        }
-      ]
-    },
     styles () {
       let style = {}
       if (this.size) {
         style['font-size'] = `${this.size}px`
       }
       if (this.color) {
-        style.color = this.color
+        style.fill = this.color
       }
       return style
+    }
+  },
+  render (h) {
+    if (this.$parent && this.$parent.$options.name === 'NIcon') return this.$slots.default
+    else {
+      return h('i', {
+        staticClass: 'n-icon',
+        style: this.styles,
+        on: this.$listeners
+      }, this.$slots.default)
     }
   }
 }

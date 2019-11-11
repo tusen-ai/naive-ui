@@ -38,20 +38,16 @@
           :stroke-width="4"
         />
         <n-icon
-          v-else-if="icon"
-          :class="{
-            'simulate-hollow-out-text': simulateHollowOut
-          }"
-          :type="icon"
-        />
-        <div
           v-else
+          :class="{
+            'simulate-hollow-out-fill': simulateHollowOut
+          }"
           class="n-icon-slot"
         >
           <slot
             name="icon"
           />
-        </div>
+        </n-icon>
       </div>
     </transition>
     <div
@@ -64,11 +60,11 @@
     >
       <slot />
     </div>
-    <span
+    <!-- <span
       v-else
       class="n-button__content-aligner"
       style="visibility: hidden;"
-    >&nbsp;</span>
+    >&nbsp;</span> -->
     <transition
       name="n-fade-in-width-expand"
     >
@@ -87,27 +83,22 @@
           :stroke-width="4"
         />
         <n-icon
-          v-else-if="icon"
-          :type="icon"
-          :class="{
-            'simulate-hollow-out-text': simulateHollowOut
-          }"
-        />
-        <div
           v-else
           class="n-icon-slot"
+          :class="{
+            'simulate-hollow-out-fill': simulateHollowOut
+          }"
         >
           <slot
             name="icon"
           />
-        </div>
+        </n-icon>
       </div>
     </transition>
   </button>
 </template>
 
 <script>
-import NIcon from '../../Icon'
 import NSpin from '../../Spin'
 import hollowoutable from '../../../mixins/hollowoutable'
 import withapp from '../../../mixins/withapp'
@@ -116,7 +107,6 @@ import themeable from '../../../mixins/themeable'
 export default {
   name: 'NButton',
   components: {
-    NIcon,
     NSpin
   },
   mixins: [

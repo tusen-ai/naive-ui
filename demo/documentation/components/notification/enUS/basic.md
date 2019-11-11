@@ -13,25 +13,30 @@ export default {
     notify1 () {
       this.$nNotify({
         title: `Wouldn't it be Nice`,
-        titleMeta: 'From the Beach Boys',
-        content: `Wouldn't it be nice if we were older
+        subtitle: 'From the Beach Boys',
+        content: `Wouldn't it be nice if we were olderxxxxxxxxxxxxxxxxxxxxxxxx
 Then we wouldn't have to wait so long
 And wouldn't it be nice to live together
 In the kind of world where we belong`,
         meta: '2019-5-27 15:11',
-        action: 'Mark as read',
+        action: [{
+          name: 'Mark as read',
+          onClick: (notificationVueInstance) => {
+            notificationVueInstance.close()
+          }
+        }],
         avator: null,
-        duration: 3000,
-        afterCloseCallback: (notificationVueInstance) => {
+        beforeClose: (next) => {
+          next()
+        },
+        afterClose: (notificationVueInstance) => {
           const notification = notificationVueInstance.notification
           this.$NMessage.success(notification.title)
         },
-        actionCallback: (notificationVueInstance) => {
-          notificationVueInstance.close()
-        }
       })
     },
     notify2 () {
+      let markAsRead = false
       this.$nNotify({
         title: 'Satisfaction',
         content: `I cant get no satisfaction
@@ -39,13 +44,21 @@ I cant get no satisfaction
 Cause I try and I try and I try and I try
 I cant get no, I cant get no`,
         meta: '2019-5-27 15:11',
-        action: 'Mark as read',
-        avator: null,
-        actionCallback: (notificationVueInstance) => {
-          const notification = notificationVueInstance.notification
-          this.$NMessage.success(notification.title)
-          notificationVueInstance.close()
-        }
+        beforeClose: (next) => {
+          if (markAsRead) next()
+        },
+        action: [
+          {
+            name: 'Mark as read',
+            onClick: (notificationVueInstance) => {
+              const notification = notificationVueInstance.notification
+              this.$NMessage.success(notification.title)
+              markAsRead = true
+              notificationVueInstance.close()
+            }
+          }
+        ],
+        avator: null
       })
     }
   }

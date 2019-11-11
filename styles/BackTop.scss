@@ -18,21 +18,21 @@
         pointer-events: none;
       }
     }
-    box-shadow: 0 2px 10px 0px rgba(238, 238, 238, .45);
-    .n-back-top__button {
+    box-shadow: map-get($--back-top-box-shadow, 'default');
+    @include e(button) {
       transition: fill .3s $default-cubic-bezier;
       fill: $--back-top-button-fill;
     }
     &:hover {
-      box-shadow: 0 2px 10px 0px rgb(77, 177, 153);
-      .n-back-top__button {
+      box-shadow: map-get($--back-top-box-shadow, 'hover');
+      @include e(button) {
         fill: $--back-top-button-fill-hover;
       }
     }
     &:active {
-      box-shadow: 0 2px 10px 0px rgb(77, 177, 153);
-      .n-back-top__button {
-        fill: $--back-top-button-fill-hover;
+      box-shadow: map-get($--back-top-box-shadow, 'active');
+      @include e(button) {
+        fill: $--back-top-button-fill-active;
       }
     }
   }

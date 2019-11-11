@@ -32,10 +32,13 @@
           <n-button
             size="tiny"
             ghost
-            icon="md-code"
             circle
             @click="toggleCodeDisplay"
-          />
+          >
+            <template v-slot:icon>
+              <md-code />
+            </template>
+          </n-button>
         </template>
         {{ !showCode ? $t('show') : $t('hide') }}
       </n-tooltip>
@@ -62,8 +65,12 @@
 <script>
 import withapp from '../../packages/mixins/withapp'
 import themeable from '../../packages/mixins/themeable'
+import mdCode from '../../packages/icons/md-code'
 
 export default {
+  components: {
+    mdCode
+  },
   mixins: [withapp, themeable],
   inject: {
     NDocumentation: {

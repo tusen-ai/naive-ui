@@ -1,0 +1,37 @@
+@import './mixins/mixins.scss';
+
+@include themes-mixin {
+  @include b(breadcrumb) {
+    @include b(breadcrumb-item) {
+      @include once {
+        transition: color .3s $default-cubic-bezier;
+        @include b(icon) {
+          vertical-align: -.125em;
+        }
+      }
+      color: map-get($--breadcrumb-link-text-color, 'default');
+      @include b(icon) {
+        transition: fill .3s $default-cubic-bezier;
+        fill: map-get($--breadcrumb-link-text-color, 'default');
+      }
+      @include e(seperator) {
+        @include once {
+          transition: color .3s $default-cubic-bezier;
+          margin: 0 4px;
+        }
+        color: map-get($--breadcrumb-seperator-text-color, 'default');
+      }
+      &:last-child {
+        color: map-get($--breadcrumb-link-text-color, 'active');
+        @include b(icon) {
+          fill: map-get($--breadcrumb-link-text-color, 'active');
+        }
+        @include once {
+          @include e(seperator) {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

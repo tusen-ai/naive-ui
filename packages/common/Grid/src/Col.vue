@@ -2,14 +2,24 @@
   <div
     class="n-col"
     :class="{
-      [`n-col--${span}-span`]: true
+      [`n-col--${span}-span`]: true,
+      [`n-col--${computedPush}-push`]: computedPush > 0,
+      [`n-col--${-computedPush}-pull`]: computedPush < 0,
+      [`n-col--${offset}-offset`]: offset
     }"
     :style="{
-      paddingLeft: gutter / 2 + 'px',
-      paddingRight: gutter / 2 + 'px'
+      padding: `${ verticalGutter / 2 }px ${ horizontalGutter / 2 }px`
     }"
   >
-    <slot />
+    <div
+      v-if="gutter"
+      class="n-col__box"
+    >
+      <slot />
+    </div>
+    <template v-else>
+      <slot />
+    </template>
   </div>
 </template>
 
@@ -25,11 +35,32 @@ export default {
     span: {
       type: [String, Number],
       required: true
+    },
+    push: {
+      type: [String, Number],
+      default: null
+    },
+    pull: {
+      type: [String, Number],
+      default: null
+    },
+    offset: {
+      type: [String, Number],
+      default: null
     }
   },
   computed: {
     gutter () {
       return this.NRow.gutter
+    },
+    verticalGutter () {
+      return this.NRow.verticalGutter
+    },
+    horizontalGutter () {
+      return this.NRow.horizontalGutter
+    },
+    computedPush () {
+      return this.push - this.pull
     }
   }
 }

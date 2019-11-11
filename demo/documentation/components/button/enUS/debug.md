@@ -7,354 +7,455 @@ List all buttons here for debug usage.
 >
   <n-button
     type="default"
-    icon="md-save"
     round
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Default
   </n-button>
   <n-button
     type="primary"
-    icon="md-save"
     disabled
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Primary
   </n-button>
   <n-button
     type="info"
-    icon="md-save"
     icon-position="right"
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Info
   </n-button>
   <n-button
     type="warning"
-    icon="md-save"
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Warning
   </n-button>
   <n-button
     type="success"
-    icon="md-save"
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Success
   </n-button>
   <n-button
     type="error"
-    icon="md-save"
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Error
   </n-button>
   <n-button
     type="default"
-    icon="md-save"
     ghost
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Default
   </n-button>
   <n-button
     type="primary"
-    icon="md-save"
     ghost
     round
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Primary
   </n-button>
   <n-button
     type="info"
-    icon="md-save"
     ghost
     disabled
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Info
   </n-button>
   <n-button
     type="warning"
-    icon="md-save"
     ghost
     icon-position="right"
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Warning
   </n-button>
   <n-button
     type="success"
-    icon="md-save"
     ghost
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Success
   </n-button>
   <n-button
     type="error"
-    icon="md-save"
     ghost
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Error
   </n-button>
   <n-button
     type="default"
-    icon="md-save"
     loading
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Default
   </n-button>
   <n-button
     type="primary"
-    icon="md-save"
     loading
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Primary
   </n-button>
   <n-button
     type="info"
-    icon="md-save"
     loading
     round
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Info
   </n-button>
   <n-button
     type="warning"
-    icon="md-save"
     loading
     disabled
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Warning
   </n-button>
   <n-button
     type="success"
-    icon="md-save"
     loading
     icon-position="right"
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Success
   </n-button>
   <n-button
     type="error"
-    icon="md-save"
     loading
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Error
   </n-button>
   <n-button
     type="default"
-    icon="md-save"
     ghost
     loading
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Default
   </n-button>
   <n-button
     type="primary"
-    icon="md-save"
     ghost
     loading
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Primary
   </n-button>
   <n-button
     type="info"
-    icon="md-save"
     ghost
     loading
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Info
   </n-button>
   <n-button
     type="warning"
-    icon="md-save"
     ghost
     loading
     round
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Warning
   </n-button>
   <n-button
     type="success"
-    icon="md-save"
     ghost
     loading
     disabled
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Success
   </n-button>
   <n-button
     type="error"
-    icon="md-save"
     ghost
     loading
     icon-position="right"
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Error
   </n-button>
   <n-button
     type="default"
-    icon="md-save"
     round
     block
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Default
   </n-button>
   <n-button
     type="primary"
-    icon="md-save"
     disabled
     block
     size="small"
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Primary
   </n-button>
   <n-button
     type="info"
-    icon="md-save"
     icon-position="right"
     block
     size="large"
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Info
   </n-button>
   <n-button
     type="warning"
-    icon="md-save"
     block
     ghost
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Warning
   </n-button>
   <n-button
     type="success"
-    icon="md-save"
     block
     loading
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Success
   </n-button>
   <n-button
     type="error"
-    icon="md-save"
     block
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Error
   </n-button>
   <n-button
     type="primary"
-    icon="md-save"
     disabled
     circle
     size="small"
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Primary
   </n-button>
   <n-button
     type="info"
-    icon="md-save"
     icon-position="right"
     circle
     size="large"
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Info
   </n-button>
   <n-button
     type="warning"
-    icon="md-save"
     circle
     ghost
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Warning
   </n-button>
   <n-button
     type="success"
-    icon="md-save"
     circle
     loading
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Success
   </n-button>
   <n-button
     type="error"
-    icon="md-save"
     circle
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Error
   </n-button>
   <n-button
     type="error"
-    icon="md-save"
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Error
   </n-button>
   <n-button
     type="error"
-    icon="md-save"
     size="large"
-  />
+  >
+    <template v-slot:icon>
+      <md-save />
+    </template>
+  </n-button>
   <n-button
     type="error"
     round
-    icon="md-save"
     size="large"
-  />
+  >
+    <template v-slot:icon>
+      <md-save />
+    </template>
+  </n-button>
   <n-button-group>
     <n-button
       type="default"
-      icon="md-save"
       round
     >
+      <template v-slot:icon>
+        <md-save />
+      </template>
       Default
     </n-button>
     <n-button
       type="primary"
-      icon="md-save"
       disabled
     >
+      <template v-slot:icon>
+        <md-save />
+      </template>
       Primary
     </n-button>
     <n-button
       type="info"
-      icon="md-save"
       icon-position="right"
     >
+      <template v-slot:icon>
+        <md-save />
+      </template>
       Info
     </n-button>
     <n-button
       type="warning"
-      icon="md-save"
     >
+      <template v-slot:icon>
+        <md-save />
+      </template>
       Warning
     </n-button>
   </n-button-group>
   <n-button-group vertical>
     <n-button
       type="default"
-      icon="md-save"
       round
     >
+      <template v-slot:icon>
+        <md-save />
+      </template>
       Default
     </n-button>
     <n-button
       type="primary"
-      icon="md-save"
       disabled
     >
+      <template v-slot:icon>
+        <md-save />
+      </template>
       Primary
     </n-button>
     <n-button
       type="info"
-      icon="md-save"
       icon-position="right"
     >
+      <template v-slot:icon>
+        <md-save />
+      </template>
       Info
     </n-button>
     <n-button
       type="warning"
-      icon="md-save"
     >
+      <template v-slot:icon>
+        <md-save />
+      </template>
       Warning
     </n-button>
   </n-button-group>
 </div>
 ```
 ```js
-export default {
+import mdSave from 'naive-ui/lib/icons/md-save'
 
+export default {
+  components: {
+    mdSave
+  },
+  mounted () {
+    console.log(this)
+  }
 }
 ```
 ```css

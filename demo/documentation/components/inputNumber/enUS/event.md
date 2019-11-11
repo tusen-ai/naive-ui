@@ -3,6 +3,7 @@
 <n-input-number
   v-model="value"
   @change="handleChange"
+  @blur="handleBlur"
 />
 ```
 ```js
@@ -15,7 +16,10 @@ export default {
   methods: {
     handleChange (newValue) {
       this.$NMessage.info(`value: ${newValue}`)
-    }
+    },
+    handleBlur (e, v) {
+      this.$NMessage.info(`blur: ` + v)
+    },
   }
 }
 ```

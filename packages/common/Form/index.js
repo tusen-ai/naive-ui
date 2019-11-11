@@ -1,6 +1,6 @@
 /* istanbul ignore file */
 import Form from './src/main.vue'
-import FormItem from './src/form-item.vue'
+import FormItem from './src/FormItem.vue'
 
 Form.install = function (Vue) {
   Vue.component(Form.name, Form)

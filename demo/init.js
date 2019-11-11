@@ -6,7 +6,6 @@ import './styles/atom-one-light.scss'
 import './styles/markdown.scss'
 import './styles/font.scss'
 import NaiveUI from '../index'
-import SourceBlock from './SourceBlock'
 import VueI18n from 'vue-i18n'
 
 import intro from './documentation/intro/intro'
@@ -17,14 +16,13 @@ import status from './documentation/intro/status'
 import nimbusServiceLayoutDemo from './documentation/components/nimbusServiceLayoutDemo'
 import homeDemo from './documentation/components/homeDemo'
 import gradientText from './documentation/components/gradientText'
-import iconDemo from './documentation/components/iconDemo'
 import checkbox from './documentation/components/checkbox'
 import button from './documentation/components/button'
 import switchDemo from './documentation/components/switch'
 import input from './documentation/components/input'
 import select from './documentation/components/select'
-import cascaderDemo from './documentation/components/cascaderDemo'
-import inputKeyValuePairsDemo from './documentation/components/inputKeyValuePairsDemo'
+import cascader from './documentation/components/cascader'
+import customInput from './documentation/components/customInput'
 import modal from './documentation/components/modal'
 import nimbusFormCardDemo from './documentation/components/nimbusFormCardDemo'
 import message from './documentation/components/message'
@@ -33,9 +31,10 @@ import popover from './documentation/components/popover'
 import alert from './documentation/components/alert'
 import datePicker from './documentation/components/datePicker'
 import inputNumber from './documentation/components/inputNumber'
-import nimbusIconDemo from './documentation/components/nimbusIconDemo'
+import nimbusIcon from './documentation/components/nimbusIcon'
 import radio from './documentation/components/radio'
 import formDemo from './documentation/components/formDemo'
+import form from './documentation/components/form'
 import tabs from './documentation/components/tabs'
 import timePicker from './documentation/components/timePicker'
 import confirm from './documentation/components/confirm'
@@ -58,14 +57,17 @@ import anchor from './documentation/components/anchor'
 import popselect from './documentation/components/popselect'
 import app from './documentation/components/app'
 import advancedTable from './documentation/components/advancedTable'
-import transferDemo from './documentation/components/transferDemo'
+import transfer from './documentation/components/transfer'
 import spin from './documentation/components/spin'
 import drawer from './documentation/components/drawer'
 import loadingBar from './documentation/components/loadingBar'
 import time from './documentation/components/time'
 import slider from './documentation/components/slider'
-import treeDemo from './documentation/components/treeDemo'
+import tree from './documentation/components/tree'
 import affix from './documentation/components/affix'
+import statistic from './documentation/components/statistic'
+import grid from './documentation/components/grid'
+import breadcrumb from './documentation/components/breadcrumb'
 
 import demo from './demo'
 import ComponentDemo from './utils/ComponentDemo'
@@ -92,7 +94,6 @@ const i18n = new VueI18n({
   locale: 'en-us'
 })
 
-Vue.component(SourceBlock.name, SourceBlock)
 Vue.component('ComponentDemo', ComponentDemo)
 Vue.component('ComponentDemos', ComponentDemos)
 Vue.component('DocumentationWrapper', DocumentationWrapper)
@@ -132,7 +133,7 @@ const routes = [
       { path: '/n-nimbus-service-layout', component: nimbusServiceLayoutDemo },
       { path: '/n-nimbus-home-layout', component: homeDemo },
       { path: '/n-gradient-text', component: gradientText },
-      { path: '/n-icon', component: iconDemo },
+      { path: '/n-icon', component: () => import('./documentation/components/icon') },
       { path: '/n-checkbox', component: checkbox },
       { path: '/n-button', component: button },
       { path: '/n-switch', component: switchDemo },
@@ -140,8 +141,8 @@ const routes = [
       { path: '/n-advance-table', component: advancedTable },
       { path: '/n-input', component: input },
       { path: '/n-select', component: select },
-      { path: '/n-cascader', component: cascaderDemo },
-      { path: '/n-InputKeyValuePairs', component: inputKeyValuePairsDemo },
+      { path: '/n-cascader', component: cascader },
+      { path: '/n-custom-input', component: customInput },
       { path: '/n-modal', component: modal },
       { path: '/n-nimbus-form-card', component: nimbusFormCardDemo },
       { path: '/n-message', component: message },
@@ -153,9 +154,10 @@ const routes = [
       { path: '/n-alert', component: alert },
       { path: '/n-date-picker', component: datePicker },
       { path: '/n-input-number', component: inputNumber },
-      { path: '/n-nimbus-icon', component: nimbusIconDemo },
+      { path: '/n-nimbus-icon', component: nimbusIcon },
       { path: '/n-radio', component: radio },
       { path: '/n-form', component: formDemo },
+      { path: '/n-new-form', component: form},
       { path: '/n-tabs', component: tabs },
       { path: '/n-time-picker', component: timePicker },
       { path: '/n-confirm', component: confirm },
@@ -178,15 +180,18 @@ const routes = [
       { path: '/n-popselect', component: popselect },
       { path: '/n-app', component: app },
       { path: '/n-cancel-mark-debug', component: cancelMarkDebug },
-      { path: '/n-transfer', component: transferDemo },
+      { path: '/n-transfer', component: transfer },
       { path: '/n-spin', component: spin },
       { path: '/n-drawer', component: drawer },
       { path: '/n-loading-bar', component: loadingBar },
       { path: '/n-time', component: time },
       { path: '/n-slider', component: slider },
-      { path: '/n-tree', component: treeDemo },
+      { path: '/n-tree', component: tree },
       { path: '/n-vertical-align-debug', component: verticalAlignDebug },
-      { path: '/n-affix', component: affix }
+      { path: '/n-affix', component: affix },
+      { path: '/n-statistic', component: statistic },
+      { path: '/n-grid', component: grid },
+      { path: '/n-breadcrumb', component: breadcrumb }
     ])
   },
   {

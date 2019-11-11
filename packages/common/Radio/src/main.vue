@@ -38,7 +38,7 @@ export default {
     NRadioGroup: {
       default: null
     },
-    formItem: {
+    NFormItem: {
       default: null
     }
   },
@@ -77,8 +77,8 @@ export default {
       if (this.disabled) return
       if (this.privateValue !== this.value) {
         this.emitValue('input', this.value)
-        if (this.formItem) {
-          this.dispatch('NFormItem', 'on-form-change', this.value)
+        if (this.NFormItem) {
+          this.dispatch('NFormItem', 'form-item-change', this.value)
         }
       }
     },

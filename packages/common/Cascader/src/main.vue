@@ -25,7 +25,11 @@ export default {
     },
     size: {
       type: String,
-      default: 'default'
+      default: 'medium'
+    },
+    expandTrigger: {
+      type: String,
+      default: 'click'
     },
     emitItem: {
       type: Boolean,
@@ -38,6 +42,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    leafOnly: {
+      type: Boolean,
+      default: true
     },
     all: {
       type: Boolean,
@@ -75,7 +83,7 @@ export default {
       setactive: this.handleSetActive.bind(this)
     }
     return h(BaseCascader, {
-      props: { ...this.$props, enableAllOptions: this.$props.all, active: this.active, placement: 'bottom-start' },
+      props: { ...this.$props, enableAllOptions: !this.$props.leafOnly, active: this.active, placement: 'bottom-start' },
       on
     })
   }

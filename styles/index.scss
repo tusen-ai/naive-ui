@@ -14,7 +14,7 @@
 @import "./Input.scss";
 @import "./Select.scss";
 @import "./Cascader.scss";
-@import "./InputKeyValuePairs.scss";
+@import "./CustomInput.scss";
 @import "./Message.scss";
 @import "./Tooltip.scss";
 @import "./Notification.scss";
@@ -51,10 +51,13 @@
 @import './Grid.scss';
 @import './Affix.scss';
 @import './BaseIcon.scss';
+@import './Statistic.scss';
+@import './Breadcrumb.scss';
 
 @import "./NimbusServiceLayout.scss";
 @import "./Popover.scss";
 @import "./AdvancedTable.scss";
 @import "./NimbusIcon.scss";
 @import "./Confirm.scss";
-@import "./BaseLoading.scss"
+@import "./BaseLoading.scss";
+@import "./BaseSlotMachine.scss";

@@ -126,46 +126,22 @@
       }
       @include b(tag) {
         @include once {
-          // vertical-align: bottom;
-          // box-sizing: border-box;
-          // position: relative;
-          // display: inline-block;
-          // border-radius: 4px;
           margin-right: 7px;
           margin-bottom: 3px;
           font-size: 14px;
           max-width: 100%;
-          // @include e(content)  {
-          //   transform: translateY(-1px);
-          //   white-space: nowrap;
           text-overflow: ellipsis;
           overflow: hidden;
-          // }
         }
-        // border: 1px solid #63E2B7FF;
-        // color: #63E2B7FF;
-        // @include e(icon) {
-        //   @include once {
-        //     position: absolute;
-        //     right: 4px;
-        //     top: 50%;
-        //     transform: translateY(-50%);
-        //   }
-        //   i::before {
-        //     color: #63E2B7FF;
-        //   }
-        // }
       }
     }
     @include not-m(disabled) {
       @include m(active) {
         @include b(base-picker-label) {
-          // box-shadow: inset 0 0 0 1px $select-border-color--active, 0px 0px 10px 1px #366555;
           box-shadow: map-get($map: $--base-picker-box-shadow, $key: "active");        
           background-color: map-get($map: $--base-picker-background-color, $key: "active");
         }
         @include b(base-picker-tags) {
-          // box-shadow: inset 0 0 0 1px $select-border-color--active, 0px 0px 10px 1px #366555;
           box-shadow: map-get($map: $--base-picker-box-shadow, $key: "active");
           background-color:  map-get($map: $--base-picker-background-color, $key: "active");
         }
@@ -205,13 +181,11 @@
       @include b(base-picker-label) {
         cursor: not-allowed;
         background-color: map-get($map: $--base-picker-background-color, $key: "disabled");
-        // background-color: rgba(255, 255, 255, 0.08);
         @include e(input) {
           cursor: not-allowed;
           color: map-get($--base-picker-placeholder-color, 'disabled');
           @include m(placeholder) {
             color: map-get($--base-picker-placeholder-color, 'disabled');
-          // color: rgba(255, 255, 255, 0.20);
           }
           &::placeholder {
             color: map-get($--base-picker-placeholder-color, 'disabled');
@@ -254,7 +228,7 @@
           line-height: inherit;
           cursor: pointer;
         }
-        caret-color: $--base-picker-caret-color;
+        caret-color: map-get($--base-picker-caret-color, 'default');
         color: $--base-picker-color;
       }
       @include once {
@@ -267,6 +241,55 @@
           visibility: hidden;
           user-select: none;
           opacity: 0;
+        }
+      }
+    }
+  }
+  @include as-form-item {
+    @include with-status (error) {
+      @include b(base-picker) {
+        @include b(base-picker-tags) {
+          box-shadow: map-get($map: $--base-picker-box-shadow, $key: "error-default");
+        }
+        @include b(base-picker-label) {
+          box-shadow: map-get($map: $--base-picker-box-shadow, $key: "error-default");
+        }
+        @include not-m(disabled) {
+          @include m(active) {
+            @include b(base-picker-label) {
+              box-shadow: map-get($map: $--base-picker-box-shadow, $key: "error-active");
+              background-color: map-get($map: $--base-picker-background-color, $key: "error-active");
+
+            }
+            @include b(base-picker-tags) {
+              box-shadow: map-get($map: $--base-picker-box-shadow, $key: "error-active");
+              background-color: map-get($map: $--base-picker-background-color, $key: "error-active");
+            }
+          }
+          @include b(base-picker-label) {
+            &:hover {
+              box-shadow: map-get($map: $--base-picker-box-shadow, $key: "error-hover");
+            }
+            &:focus {
+              box-shadow: map-get($map: $--base-picker-box-shadow, $key: "error-focus");
+            }
+          }
+          @include b(base-picker-tags) {
+            &:hover {
+              box-shadow: map-get($map: $--base-picker-box-shadow, $key: "error-hover");
+            }
+            &:focus {
+              box-shadow: map-get($map: $--base-picker-box-shadow, $key: "error-focus");
+            }
+          }
+          @include m(focus) {
+            @include b(base-picker-label) {
+              box-shadow: map-get($map: $--base-picker-box-shadow, $key: "error-focus");
+            }
+            @include b(base-picker-tags) {
+              box-shadow: map-get($map: $--base-picker-box-shadow, $key: "error-focus");
+            }
+          }
         }
       }
     }

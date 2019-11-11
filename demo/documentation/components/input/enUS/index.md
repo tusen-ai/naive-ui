@@ -10,4 +10,5 @@ disabled
 clearable
 autosize
 split
+lazy-focus
 ```

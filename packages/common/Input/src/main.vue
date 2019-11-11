@@ -1,30 +1,36 @@
 <template>
   <div
+    ref="wrapper"
     class="n-input"
     :class="{
       'n-input--disabled': disabled,
       [`n-input--${size}-size`]: true,
       'n-input--textarea': type==='textarea',
       'n-input--round': round && type!=='textarea',
-      'n-input--icon': icon,
       'n-input--clearable': clearable,
-      'n-input--split': split,
-      'n-input--focus': focus,
-      [`n-input--${iconPosition}-icon`]: iconPosition,
+      'n-input--split': pair,
+      'n-input--focus': forceFocus || focus,
+      'n-input--suffix': $slots.suffix,
+      'n-input--affix': $slots.affix,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
+    :tabindex="!disabled && (pressEnterToActivateInput && !inputFocused) ? 0 : false"
+    @focus="handleWrapperFocus"
+    @blur="handleWrapperBlur"
+    @keyup.enter="handleWrapperKeyUpEnter"
+    @keyup.esc="handleWrapperKeyUpEsc"
     @click="handleClick"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
   >
     <pre
       v-if="isTextarea && autosize"
-      ref="textAreaMirrow"
+      ref="textareaMirrow"
       class="n-input__textarea-mirror"
     >{{ value }}<br></pre>
     <textarea
       v-if="type==='textarea'"
-      ref="textArea"
+      ref="textarea"
       class="n-input__textarea"
       :class="{
         'n-input__textarea--autosize': autosize
@@ -36,8 +42,9 @@
       :maxlength="maxlength"
       :minlength="minlength"
       :readonly="readonly"
-      @blur="handleBlur"
-      @focus="handleFocus"
+      :tabindex="pressEnterToActivateInput && !inputFocused ? -1 : false"
+      @blur="handleInputBlur"
+      @focus="handleInputFocus"
       @input="handleInput"
       @change="handleChange"
       @keyup="handleKeyUp"
@@ -49,14 +56,15 @@
       ref="input"
       :type="type"
       class="n-input__input"
-      :placeholder="split ? computedPlaceholder[0] : placeholder"
+      :tabindex="pressEnterToActivateInput && !inputFocused ? -1 : false"
+      :placeholder="pair ? computedPlaceholder[0] : placeholder"
       :disabled="disabled"
       :maxlength="maxlength"
       :minlength="minlength"
-      :value="split ? (value && value[0]) : value"
+      :value="pair ? (value && value[0]) : value"
       :readonly="readonly"
-      @blur="handleBlur"
-      @focus="handleFocus"
+      @blur="handleInputBlur"
+      @focus="handleInputFocus"
       @input="handleInput($event, 0)"
       @change="handleChange"
       @keyup="handleKeyUp"
@@ -64,24 +72,25 @@
       @compositionend="handleCompositionEnd"
     >
     <span
-      v-if="split"
+      v-if="pair"
       class="n-input__splitor"
     >
-      {{ splitor }}
+      {{ seperator }}
     </span>
     <input
-      v-if="split"
-      ref="input"
+      v-if="pair"
+      ref="secondInput"
       :type="type"
       class="n-input__input"
-      :placeholder="split ? computedPlaceholder[1] : placeholder"
+      :tabindex="pressEnterToActivateInput && !inputFocused ? -1 : false"
+      :placeholder="pair ? computedPlaceholder[1] : placeholder"
       :disabled="disabled"
       :maxlength="maxlength"
       :minlength="minlength"
       :value="value && value[1]"
       :readonly="readonly"
-      @blur="handleBlur"
-      @focus="handleFocus"
+      @blur="handleInputBlur"
+      @focus="handleInputFocus"
       @input="handleInput($event, 1)"
       @change="handleChange"
       @keyup="handleKeyUp"
@@ -89,13 +98,19 @@
       @compositionend="handleCompositionEnd"
     >
     <div
-      v-if="icon"
-      class="n-input__icon"
+      v-if="$slots.affix"
+      class="n-input__affix"
+    >
+      <slot name="affix" />
+    </div>
+    <div
+      v-if="$slots.suffix"
+      class="n-input__suffix"
       :class="{
-        'n-input__icon--hide-icon': !showIcon
+        'n-input__suffix--hide': !showIcon
       }"
     >
-      <n-icon :type="icon" />
+      <slot name="suffix" />
     </div>
     <div class="n-input__cancel-mark">
       <n-cancel-mark
@@ -109,24 +124,17 @@
 </template>
 
 <script>
-import NIcon from '../../Icon'
-import Emitter from '../../../mixins/emitter'
 import NCancelMark from '../../../base/CancelMark'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import asformitem from '../../../mixins/asformitem'
 
 export default {
   name: 'NInput',
   components: {
-    NIcon,
     NCancelMark
   },
-  mixins: [ withapp, themeable, Emitter ],
-  inject: {
-    formItem: {
-      default: null
-    }
-  },
+  mixins: [ withapp, themeable, asformitem() ],
   props: {
     type: {
       type: String,
@@ -156,10 +164,6 @@ export default {
       type: Boolean,
       default: false
     },
-    icon: {
-      type: String,
-      default: null
-    },
     minlength: {
       type: [String, Number],
       default: null
@@ -180,20 +184,28 @@ export default {
       type: Boolean,
       default: false
     },
-    split: {
+    pair: {
       type: Boolean,
       default: false
     },
-    iconPosition: {
-      type: String,
-      default: 'left'
-    },
-    splitor: {
+    seperator: {
       type: String,
       default: null
     },
     readonly: {
       type: [String, Boolean],
+      default: false
+    },
+    lazyFocus: {
+      type: Boolean,
+      default: false
+    },
+    lazyActive: {
+      type: Boolean,
+      default: false
+    },
+    forceFocus: {
+      type: Boolean,
       default: false
     }
   },
@@ -201,12 +213,18 @@ export default {
     return {
       isComposing: false,
       focus: false,
-      hover: false
+      hover: false,
+      inputFocused: false,
+      shouldReturnFocusToWrapper: false,
+      waitingBlurCallback: false
     }
   },
   computed: {
+    pressEnterToActivateInput () {
+      return this.lazyFocus || this.lazyActive
+    },
     computedPlaceholder () {
-      if (this.split) {
+      if (this.pair) {
         if (Array.isArray(this.placeholder)) {
           return this.placeholder
         } else {
@@ -217,12 +235,12 @@ export default {
       }
     },
     showIcon () {
-      if (this.iconPosition === 'right' && this.showCancelMark) return false
+      if (this.$slots.suffix && this.showCancelMark) return false
       return true
     },
     showCancelMark () {
       if (this.disabled || !this.clearable || (!this.focus && !this.hover)) return false
-      if (this.split) {
+      if (this.pair) {
         return !!(Array.isArray(this.value) && (this.value[0] || this.value[1])) && (this.hover || this.focus)
       } else {
         return !!this.value && (this.hover || this.focus)
@@ -244,24 +262,24 @@ export default {
   methods: {
     updateTextAreaStyle () {
       if (this.isTextarea && this.autosize) {
-        const textArea = this.$refs.textArea
+        const textarea = this.$refs.textarea
         const {
           paddingTop: stylePaddingTop,
           paddingBottom: stylePaddingBottom,
           lineHeight: styleLineHeight
-        } = window.getComputedStyle(textArea)
+        } = window.getComputedStyle(textarea)
         const paddingTop = Number(stylePaddingTop.slice(0, -2))
         const paddingBottom = Number(stylePaddingBottom.slice(0, -2))
         const lineHeight = Number(styleLineHeight.slice(0, -2))
         if (this.autosize.minRows) {
           const minRows = Math.max(this.autosize.minRows, 1)
           const styleMinHeight = (paddingTop + paddingBottom + lineHeight * minRows) + 'px'
-          this.$refs.textAreaMirrow.style.minHeight = styleMinHeight
+          this.$refs.textareaMirrow.style.minHeight = styleMinHeight
         }
         if (this.autosize.maxRows) {
           const maxRows = Math.max(this.autosize.maxRows, this.autosize.minRows, 1)
           const styleMaxHeight = (paddingTop + paddingBottom + lineHeight * maxRows) + 'px'
-          this.$refs.textAreaMirrow.style.maxHeight = styleMaxHeight
+          this.$refs.textareaMirrow.style.maxHeight = styleMaxHeight
         }
       }
     },
@@ -274,7 +292,7 @@ export default {
     },
     handleInput (e, index) {
       if (this.isComposing) return
-      if (!this.split) {
+      if (!this.pair) {
         this.$emit('input', e.target.value)
       } else {
         let value = this.value
@@ -285,33 +303,53 @@ export default {
         this.$emit('input', Array.from(value))
       }
     },
-    handleBlur (e) {
-      this.focus = false
-      this.$emit('blur', e)
-      // 这里设计的冒泡还是针对特定元素, 否则会在其他不需要的元素上遍历
-      if (this.formItem) {
-        this.dispatch('NFormItem', 'on-form-blur', e.target.value)
+    handleInputBlur (e) {
+      this.$emit('input-blur')
+      if (this.pressEnterToActivateInput || this.pair) {
+        this.inputFocused = false
+        if (this.shouldReturnFocusToWrapper) {
+          this.$nextTick().then(() => {
+            this.$emit('blur', e, this.value)
+            this.$refs.wrapper.focus()
+            this.shouldReturnFocusToWrapper = false
+          })
+        } else {
+          this.focus = false
+          this.triggerBlurAsync(e)
+        }
+      } else {
+        this.focus = false
+        this.triggerBlur(e)
       }
     },
-    handleFocus (e) {
-      this.focus = true
-      this.$emit('focus', e)
+    handleInputFocus (e) {
+      this.$emit('input-focus')
+      if (this.pressEnterToActivateInput || this.pair) {
+        this.focus = true
+        if (!this.waitingBlurCallback) {
+          /**
+           * in case of pair
+           */
+          this.$emit('focus', e, this.value)
+        }
+        this.inputFocused = true
+      } else {
+        this.focus = true
+        this.$emit('focus', e, this.value)
+      }
     },
     handleKeyUp (e) {
       if (this.isComposing) return
       this.$emit('keyup', e)
     },
     handleChange (e) {
-      if (this.formItem) {
-        this.dispatch('NFormItem', 'on-form-change', e.target.value)
-      }
       this.$emit('change', e.target.value)
     },
     handleClick (e) {
       this.$emit('click', e)
     },
-    handleClear (e) {
-      if (this.split) {
+    handleClear () {
+      if (this.pair) {
         this.$emit('change', [])
         this.$emit('input', [])
       } else {
@@ -324,6 +362,61 @@ export default {
     },
     handleMouseLeave () {
       this.hover = false
+    },
+    handleWrapperFocus (e) {
+      if (this.pressEnterToActivateInput) {
+        this.focus = true
+        if (!this.shouldReturnFocusToWrapper) {
+          this.$emit('wrapper-focus', e, this.value)
+        }
+      }
+    },
+    triggerBlur (e, fromWrapper = false) {
+      if (fromWrapper) return
+      if (!(
+        // document.activeElement === this.$refs.wrapper ||
+        document.activeElement === this.$refs.textarea ||
+        document.activeElement === this.$refs.input ||
+        document.activeElement === this.$refs.secondInput
+      ) || e.target === document.activeElement) this.$emit('blur', e, this.value)
+    },
+    triggerBlurAsync (e, fromWrapper = false) {
+      if (!fromWrapper) this.waitingBlurCallback = true
+      window.setTimeout(() => {
+        this.triggerBlur(e, fromWrapper)
+        if (!fromWrapper) this.waitingBlurCallback = false
+      }, 0)
+    },
+    handleWrapperBlur (e) {
+      if (this.pressEnterToActivateInput) {
+        this.focus = false
+        this.$emit('wrapper-blur')
+        this.triggerBlurAsync(e, true)
+      }
+    },
+    handleWrapperKeyUpEnter () {
+      if (this.pressEnterToActivateInput) {
+        if (this.inputFocused) return
+        if (this.type === 'textarea') {
+          this.$refs.textarea.focus()
+        } else {
+          this.$refs.input.focus()
+        }
+      }
+    },
+    handleWrapperKeyUpEsc () {
+      if (this.pressEnterToActivateInput) {
+        this.shouldReturnFocusToWrapper = true
+        if (this.$refs.textarea) {
+          this.$refs.textarea.blur()
+        }
+        if (this.$refs.input) {
+          this.$refs.input.blur()
+        }
+        if (this.$refs.secondInput) {
+          this.$refs.secondInput.blur()
+        }
+      }
     }
   }
 }

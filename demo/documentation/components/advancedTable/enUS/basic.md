@@ -1,11 +1,3 @@
-<!--
- * @Author: Volankey@gmail.com
- * @Company: Tusimple
- * @Date: 2019-10-23 16:03:04
- * @LastEditors: Jiwen.bai
- * @LastEditTime: 2019-10-23 16:04:18
- -->
-
 # Basic
 
 ```html

@@ -53,9 +53,9 @@
       <!--EXAMPLE_END-->
     </div>
     <pre class="n-doc-section__inspect">Inspect some value here</pre>
-    <n-doc-source-block>
+    <pre>
       <!--SOURCE-->
-    </n-doc-source-block>
+    </pre>
   </div>
 </template>
 

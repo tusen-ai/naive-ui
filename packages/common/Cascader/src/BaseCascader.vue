@@ -18,6 +18,8 @@
     <n-base-picker
       ref="activator"
       class="n-cascader-picker"
+      :size="size"
+      :theme="synthesizedTheme"
       :active="active"
       :pattern="pattern"
       :placeholder="placeholder"
@@ -51,6 +53,9 @@
             v-if="active"
             ref="menu"
             v-clickoutside="handleMenuClickOutside"
+            :class="{
+              [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+            }"
             :value="value"
             :multiple="multiple"
             :options="patchedOptions"
@@ -77,6 +82,8 @@ import NBasePicker from '../../../base/Picker'
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import toggleable from '../../../mixins/toggleable'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 import clickoutside from '../../../directives/clickoutside'
 import CascaderMenu from './CascaderMenu'
 import { getType, traverseWithCallback } from './utils'
@@ -92,10 +99,15 @@ export default {
     CascaderMenu,
     NBasePicker
   },
+  provide () {
+    return {
+      NCascader: this
+    }
+  },
   directives: {
     clickoutside
   },
-  mixins: [detachable, toggleable, placeable],
+  mixins: [withapp, themeable, detachable, toggleable, placeable],
   props: {
     options: {
       type: Array,
@@ -115,7 +127,7 @@ export default {
     },
     size: {
       type: String,
-      default: 'default'
+      default: 'medium'
     },
     filterable: {
       type: Boolean,
@@ -321,7 +333,7 @@ export default {
       this.$emit('input', null)
     },
     handleActivatorBlur () {
-      this.closeMenu()
+      // this.closeMenu()
     },
     handleActivatorClick () {
       if (this.filterable) {
@@ -362,7 +374,9 @@ export default {
     },
     handlePatternChange () {
       this.$nextTick().then(() => {
-        this.updatePosition()
+        this.updatePosition(undefined, undefined, {
+          horizontal: true
+        })
       })
     },
     /**

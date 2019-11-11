@@ -16,14 +16,19 @@
     @mouseenter.native="onMouseEnter"
     @mouseleave.native="onMouseLeave"
   >
-    <colgroup v-if="showingData.length !== 0">
+    <colgroup>
       <col
         v-for="(column, i) in columns"
         :key="i"
         :style="computeCustomWidthStl(column)"
       >
     </colgroup>
-    <n-tbody v-show="!loading">
+    <n-tbody>
+      <template v-if="showingData.length === 0">
+        <n-tr>
+          <n-td v-for="column in columns" :key="column.key" />
+        </n-tr>
+      </template>
       <n-tr
         v-for="(rowData, i) in showingData"
         :key="i"
@@ -72,19 +77,7 @@
           </n-td>
         </template>
       </n-tr>
-      <div
-        v-if="showingData.length === 0 && !loading && !fixed"
-        class="n-advance-table__no-data-tip"
-      >
-        No data
-      </div>
     </n-tbody>
-    <template v-if="loading">
-      <n-spin
-        :spinning="loading"
-        style="width:100%;display:table-caption;overflow:hidden;z-index:1000;position:relative;"
-      />
-    </template>
     <!-- <div
       v-if="scrollBarHorizontalHeight"
       class="n-advance-table-scroll-bar-placeholder"

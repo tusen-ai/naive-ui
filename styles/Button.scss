@@ -33,11 +33,10 @@
       width: $icon-size;
       max-width: $icon-size;
       vertical-align: bottom;
-      .n-icon {
+      @include b(icon) {
         font-size: $icon-size;
-        vertical-align: text-bottom;
       }
-      .n-spin {
+      @include b(spin) {
         height: $icon-size;
         width: $icon-size;
         position: absolute;
@@ -52,7 +51,7 @@
         display: inline-flex;
         align-items: center;
         vertical-align: bottom;
-        .n-icon-slot {
+        @include b(icon-slot) {
           display: block;
           line-height: $icon-size;
           height: $icon-size;
@@ -92,6 +91,9 @@
         }
       }
       @include e(icon) {
+        path {
+          fill: map-get($map: $ghost-button-color, $key: $type) !important;
+        }
         circle {
           stroke: map-get($map: $ghost-button-color, $key: $type) !important;
         }
@@ -99,6 +101,9 @@
     }
     @if $type == 'default' {
       @include e(icon) {
+        path {
+          fill: map-get($map: $ghost-button-color, $key: $type) !important;
+        }
         circle {
           stroke: map-get($map: $ghost-button-color, $key: $type) !important;
         }
@@ -186,6 +191,11 @@
       @include e(icon) {
         @include fade-in-width-expand-transition();
         transition: color .3s $default-cubic-bezier;
+        @include b(icon) {
+          path {
+            transition: fill .3s $default-cubic-bezier;
+          }
+        }
       }
       @include e(content-aligner) {
         display: inline-block;
@@ -245,12 +255,12 @@
   position: relative;
   @include not-m(vertical) {
     @include b(button) {
-      &:first-child {
+      &:first-child:not(:last-child) {
         margin-right: 0!important;
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
       }
-      &:last-child {
+      &:last-child:not(:first-child) {
         margin-left: 0!important;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;

@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import registerable from '../../../mixins/registerable'
+import collectable from '../../../mixins/collectable'
 
 export default {
   name: 'NAnchorLink',
@@ -27,7 +27,7 @@ export default {
       default: null
     }
   },
-  mixins: [registerable('NAnchor', 'collectedLinkHrefs', 'href')],
+  mixins: [collectable('NAnchor', 'collectedLinkHrefs', 'href')],
   props: {
     title: {
       type: String,

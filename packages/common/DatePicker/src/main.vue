@@ -8,78 +8,47 @@
       'n-date-picker--range': isRange
     }"
   >
-    <!-- <div
-
-      class="n-date-picker__editor"
-      :class="{
-        'n-date-picker__editor--focus': isFocus
-      }"
-
-    > -->
     <n-input
       v-if="isRange"
+      ref="input"
+      :lazy-focus="true"
       :disabled="disabled"
       :value="[displayStartTime, displayEndTime]"
       :placeholder="[computedStartPlaceholder, computedEndPlaceholder]"
       :readonly="disabled ? 'disabled' : false"
-      :splitor="splitor"
-      split
-      icon="ios-calendar"
-      icon-position="right"
+      :seperator="seperator"
+      :force-focus="active"
+      pair
       @click="handleActivatorClick"
       @focus="handleFocus"
+      @wrapper-blur="handleRangeInputWrapperBlur"
       @blur="handleRangeInputBlur"
       @input="handleRangeInput"
-    />
-    <!-- <input
-        class="n-date-picker__input n-date-picker__input--splitor"
-        :value="splitor"
-        readonly="readonly"
-      > -->
-    <!-- <input
-        v-model="displayEndTime"
-        class="n-date-picker__input n-date-picker__input--end"
-        :placeholder="computedEndPlaceholder"
-        :readonly="disabled ? 'disabled' : false"
-        @focus="handleFocus"
-        @blur="handleEndTimeInputBlur"
-        @input="handleEndTimeInput"
-      >
-      <div class="n-date-picker__icon">
-        <n-icon
-          size="20"
-          type="ios-calendar"
-        />
-      </div> -->
-    <!-- </div> -->
-    <!-- <div
-
-      class="n-date-picker__editor"
-      :class="{
-        'n-date-picker__editor--focus': isFocus
-      }"
-    > -->
+    >
+      <template v-slot:suffix>
+        <n-icon><ios-calendar /></n-icon>
+      </template>
+    </n-input>
     <n-input
       v-else
+      ref="input"
       v-model="displayTime"
       class="n-date-picker__input"
+      :force-focus="active"
       :disabled="disabled"
+      :lazy-focus="true"
       :placeholder="computedPlaceholder"
       :readonly="disabled ? 'disabled' : false"
-      icon="ios-calendar"
-      icon-position="right"
       @click="handleActivatorClick"
       @focus="handleFocus"
+      @wrapper-blur="handleTimeInputWrapperBlur"
       @blur="handleTimeInputBlur"
       @input="handleTimeInput"
-    />
-    <!-- <div class="n-date-picker__icon">
-        <n-icon
-          size="20"
-          type="ios-calendar"
-        />
-      </div> -->
-    <!-- </div> -->
+    >
+      <template v-slot:suffix>
+        <n-icon><ios-calendar /></n-icon>
+      </template>
+    </n-input>
     <div
       ref="contentContainer"
       class="n-detached-content-container n-date-picker-detached-content-container"
@@ -99,6 +68,7 @@
           :active="active"
           :actions="actions"
           :theme="synthesizedTheme"
+          @blur="handlePanelBlur"
           @input="handlePanelInput"
           @close="closeCalendar"
         />
@@ -110,6 +80,7 @@
           :actions="actions"
           :theme="synthesizedTheme"
           @input="handlePanelInput"
+          @blur="handlePanelBlur"
           @close="closeCalendar"
         />
         <daterange-panel
@@ -120,6 +91,7 @@
           :actions="actions"
           :theme="synthesizedTheme"
           @input="handleRangePanelInput"
+          @blur="handlePanelBlur"
           @close="closeCalendar"
         />
         <datetimerange-panel
@@ -131,6 +103,7 @@
           :theme="synthesizedTheme"
           @input="handleRangePanelInput"
           @close="closeCalendar"
+          @blur="handlePanelBlur"
         />
       </div>
     </div>
@@ -138,19 +111,26 @@
 </template>
 
 <script>
-// import moment from 'moment'
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import zindexable from '../../../mixins/zindexable'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
+import asformitem from '../../../mixins/asformitem'
+import clickoutside from '../../../directives/clickoutside'
+
 import DatetimePanel from './panel/datetime'
 import DatetimerangePanel from './panel/datetimerange'
 import DatePanel from './panel/date'
 import DaterangePanel from './panel/daterange'
-import clickoutside from '../../../directives/clickoutside'
+
 import NInput from '../../Input'
-import withapp from '../../../mixins/withapp'
-import themeable from '../../../mixins/themeable'
-import { format, getTime, isValid } from 'date-fns'
+import NIcon from '../../Icon'
+import iosCalendar from '../../../icons/ios-calendar'
+
+import format from 'date-fns/format'
+import getTime from 'date-fns/getTime'
+import isValid from 'date-fns/isValid'
 import { strictParse } from '../../../utils/dateUtils'
 import isEqual from 'lodash/isEqual'
 
@@ -186,17 +166,20 @@ export default {
   },
   components: {
     NInput,
+    NIcon,
     DatetimePanel,
     DatePanel,
     DatetimerangePanel,
-    DaterangePanel
+    DaterangePanel,
+    iosCalendar
   },
   mixins: [
     withapp,
     themeable,
     detachable,
     placeable,
-    zindexable
+    zindexable,
+    asformitem()
   ],
   props: {
     disabled: {
@@ -224,7 +207,7 @@ export default {
       },
       default: 'date'
     },
-    splitor: {
+    seperator: {
       type: String,
       default: 'to'
     },
@@ -254,8 +237,7 @@ export default {
       displayTime: '',
       displayStartTime: '',
       displayEndTime: '',
-      active: false,
-      isFocus: false
+      active: false
     }
   },
   computed: {
@@ -295,15 +277,32 @@ export default {
      * If new value is valid, set calendarTime and refresh display strings.
      * If new value is invalid, do nothing.
      */
-    value (newValue) {
-      console.log(newValue)
+    value (newValue, oldValue) {
       this.refresh(newValue)
+      if (this.isRange) {
+        if (!(
+          Array.isArray(newValue) &&
+          Array.isArray(oldValue) &&
+          newValue.length === 2 &&
+          newValue.length === oldValue.length &&
+          newValue[0] === oldValue[0] &&
+          newValue[1] === oldValue[1]
+        )) {
+          this.$emit('change', newValue, oldValue)
+        }
+      } else { this.$emit('change', newValue, oldValue) }
     }
   },
   created () {
     this.refresh(this.value)
   },
   methods: {
+    /**
+     * this blur is not really blur event, its key tab out of panel
+     */
+    handlePanelBlur () {
+      this.closeCalendar(true)
+    },
     handleClickOutside (e) {
       if (this.active && !this.$refs.activator.contains(e.target)) {
         this.closeCalendar()
@@ -349,19 +348,32 @@ export default {
     /**
      * Blur
      */
-    handleTimeInputBlur () {
+    afterBlur (e) {
+      if (this.active) {
+        window.setTimeout(() => {
+          if (!(this.$refs.panel && this.$refs.panel.$el.contains(document.activeElement))) {
+            this.closeCalendar()
+          }
+        }, 0)
+      }
+    },
+    handleTimeInputWrapperBlur (e) {
+      this.$emit('blur', this.value)
+    },
+    handleTimeInputBlur (e) {
       if (this.disabled) return
       const newSelectedDateTime = strictParse(this.displayTime, this.computedFormat, new Date())
-      console.log('handle blur', this.displayTime, this.computedFormat, new Date())
-      console.log('handle blur new time', typeof newSelectedDateTime)
       if (isValid(newSelectedDateTime)) {
         this.$emit('input', getTime(newSelectedDateTime))
       } else {
         this.refreshDisplayTime(this.value)
       }
-      this.isFocus = false
+      this.afterBlur(e)
     },
-    handleRangeInputBlur () {
+    handleRangeInputWrapperBlur (e) {
+      this.$emit('blur', this.value)
+    },
+    handleRangeInputBlur (e) {
       if (this.disabled) return
       const startDateTime = strictParse(this.displayStartTime, this.computedFormat, new Date())
       const endDateTime = strictParse(this.displayEndTime, this.computedFormat, new Date())
@@ -370,28 +382,8 @@ export default {
       } else {
         this.changeStartEndTime(startDateTime, endDateTime)
       }
-      this.isFocus = false
+      this.afterBlur(e)
     },
-    // handleStartTimeInputBlur () {
-    //   if (this.disabled) return
-    //   const startMoment = strictParse(this.displayStartTime, this.computedFormat, null)
-    //   if (startMoment !== null) {
-    //     this.changeStartDateTime(startMoment)
-    //   } else {
-    //     this.refresh(this.value)
-    //   }
-    //   this.isFocus = false
-    // },
-    // handleEndTimeInputBlur () {
-    //   if (this.disabled) return
-    //   const endMoment = strictParse(this.displayStartTime, this.computedFormat, null)
-    //   if (endMoment !== null) {
-    //     this.changeStartDateTime(endMoment)
-    //   } else {
-    //     this.refresh(this.value)
-    //   }
-    //   this.isFocus = false
-    // },
     /**
      * Input
      */
@@ -420,13 +412,6 @@ export default {
       this.displayEndTime = endTime
       // console.log('handleRangeInput', v, newStartTime, newEndTime)
     },
-    // handleEndTimeInput (e) {
-    //   const v = e.target.value
-    //   const newEndTime = moment(v, this.computedFormat, true)
-    //   if (newEndTime.isValid()) {
-    //     this.changeEndDateTime(newEndTime)
-    //   }
-    // },
     /**
      * Click
      */
@@ -445,7 +430,7 @@ export default {
      */
     handleFocus () {
       if (this.disabled) return
-      this.isFocus = true
+      if (!this.active) this.openCalendar()
     },
     /**
      * Calendar
@@ -453,11 +438,18 @@ export default {
     openCalendar (e) {
       if (this.disabled || this.active) return
       this.active = true
-      // console.log('into open calendar')
       this.$nextTick().then(this.updatePosition)
     },
-    closeCalendar () {
-      this.active = false
+    closeCalendar (returnFocus = false) {
+      if (this.active) {
+        this.active = false
+        this.$emit('blur', this.value)
+        if (returnFocus) {
+          if (this.$refs.input && this.$refs.input.$el) {
+            this.$refs.input.$el.focus()
+          }
+        }
+      }
     },
     toggleCalendar () {
 

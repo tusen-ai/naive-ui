@@ -99,6 +99,20 @@ $theme-names: "dark", "light";
   $theme: null !global;
 }
 
+@mixin as-form-item {
+  .n-form-item {
+    .n-form-item-blank {
+      @content;
+    }
+  }
+}
+
+@mixin with-status ($status) {
+  &.n-form-item-blank--#{$status} {
+    @content;
+  }
+}
+
 @mixin once() {
   @if not $common-css-attrs-generated {
     @content;

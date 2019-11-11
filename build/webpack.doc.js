@@ -9,7 +9,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const webpackConfig = {
-  mode: 'development',
+  mode: 'production',
   entry: './demo/index.js',
   output: {
     path: path.resolve(__dirname, '..', 'doc', 'dist'),
@@ -34,7 +34,7 @@ const webpackConfig = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './demo/index.tpl',
-      favicon: './demo/assets/images/naivelogo.png'
+      favicon: './demo/assets/images/naivelogo.svg'
     }),
     new VueLoaderPlugin(),
     new webpack.LoaderOptionsPlugin({

@@ -41,13 +41,24 @@
       }
       @include b(confirm-title-icon) {
         @include m(confirm-type) {
-          color: $--warning-6;
+          path {
+            fill: $--warning-6;
+          }
         }
         @include m(success-type) {
-          color: $--success-6;
+          path {
+            fill: $--success-6;
+          }
         }
         @include m(error-type) {
-          color: $--error-6;
+          path {
+            fill: $--error-6;
+          }
+        }
+      }
+      @include e(close-mark) {
+        path {
+          fill: $--n-secondary-text-color;
         }
       }
       color: $--confirm-title-color;

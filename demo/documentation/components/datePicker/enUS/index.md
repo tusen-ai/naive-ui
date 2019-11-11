@@ -6,4 +6,5 @@ daterange
 datetimerange
 disabled
 actions
+events
 ```

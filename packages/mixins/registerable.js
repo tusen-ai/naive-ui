@@ -1,34 +1,44 @@
 export default function (
   inject,
-  collectionProperty,
-  registerProperty = 'value'
+  collectionKey,
+  registerKey = 'value'
 ) {
   return {
     watch: {
-      [registerProperty]: function (value, oldValue) {
+      [registerKey]: function (value, oldValue) {
         if (this[inject]) {
-          this.registerValue(value, oldValue)
+          this.registerInstance(value, oldValue)
         }
       }
     },
     created () {
       if (this[inject]) {
-        this.registerValue(this[registerProperty])
+        this.registerInstance(this[registerKey])
       }
     },
     beforeDestroy () {
       if (this[inject]) {
-        this.registerValue(undefined, this[registerProperty])
+        this.registerInstance(undefined, this[registerKey])
       }
     },
     methods: {
-      registerValue (value = undefined, oldValue = undefined) {
+      registerInstance (key = undefined, oldKey = undefined) {
+        if (!key && !oldKey) return
         if (this[inject]) {
-          const values = new Set(this[inject][collectionProperty])
-          if (oldValue !== undefined) values.delete(oldValue)
-          if (value !== undefined) values.add(value)
-          this[inject][collectionProperty] = Array.from(values)
+          const collection = this[inject][collectionKey]
+          if (oldKey !== undefined) this.removeInstance(collection, oldKey)
+          if (key !== undefined) this.addInstance(collection, key)
         }
+      },
+      removeInstance (collection, key) {
+        if (!collection[key]) collection[key] = []
+        const indexOfInstance = collection[key].findIndex(instance => instance === this)
+        if (~indexOfInstance) collection[key].splice(indexOfInstance, 1)
+      },
+      addInstance (collection, key) {
+        if (!collection[key]) collection[key] = []
+        const indexOfInstance = collection[key].findIndex(instance => instance === this)
+        if (!~indexOfInstance) collection[key].push(this)
       }
     }
   }

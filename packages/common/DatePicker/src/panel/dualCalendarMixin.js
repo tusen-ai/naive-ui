@@ -1,5 +1,11 @@
 // import moment from 'moment'
-import { isValid, getMonth, getYear, getTime, format, addMonths, startOfMonth } from 'date-fns'
+import addMonths from 'date-fns/addMonths'
+import format from 'date-fns/format'
+import getTime from 'date-fns/getTime'
+import getYear from 'date-fns/getYear'
+import getMonth from 'date-fns/getMonth'
+import startOfMonth from 'date-fns/startOfMonth'
+import isValid from 'date-fns/isValid'
 import { dateArray } from '../../../../utils/dateUtils'
 
 import commonCalendarMixin from './commonCalendarMixin'

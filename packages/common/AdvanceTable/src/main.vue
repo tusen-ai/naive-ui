@@ -1,9 +1,9 @@
 <!--
  * @Author: Volankey@gmail.com
  * @Company: Tusimple
- * @Date: 2019-10-23 15:57:17
+ * @Date: 2019-10-24 16:16:09
  * @LastEditors: Jiwen.bai
- * @LastEditTime: 2019-11-07 16:15:57
+ * @LastEditTime: 2019-11-06 10:30:17
  -->
 <template>
   <div
@@ -38,11 +38,13 @@
     <div
       ref="tbodyWrapper"
       class="n-advance-table__tbody"
+      :class="{
+        'n-advance-table--no-data': showingData.length === 0
+      }"
       :style="tableWrapperStl"
     >
       <div
         v-if="fixedLeftColumn.length"
-        v-show="showingData.length && !loading"
         class="n-advance-table__fixed--left n-advance-table__fixed"
         :class="fixedLeftColumndClass"
       >
@@ -54,7 +56,7 @@
           :sort-indexs="sortIndexs"
           :selected-filter="selectedFilter"
           :showing-data="showingData"
-          :current-page-selected="currentPageSelected"
+          :current-page-selected="currentPageSelectedLen"
           @on-checkbox-all="onAllCheckboxesClick"
           @on-sort-change="onSortChange"
           @on-filter="onFilter"
@@ -71,6 +73,7 @@
           :scroll-bar-vertical-width="scrollBarWidth"
           :height="tbodyWrapperHeight"
           :tr-height="trHeight"
+          :loading="loading"
           :fixed="true"
           @on-scroll="onBodyScrolll"
         />
@@ -84,7 +87,7 @@
         :sort-indexs="sortIndexs"
         :selected-filter="selectedFilter"
         :showing-data="showingData"
-        :current-page-selected="currentPageSelected"
+        :current-page-selected="currentPageSelectedLen"
         @on-checkbox-all="onAllCheckboxesClick"
         @on-sort-change="onSortChange"
         @on-filter="onFilter"
@@ -100,11 +103,11 @@
         :disabled-check-box="disabledCheckBox"
         :loading="loading"
         header-ref-name="header"
+        style="min-height: 42px"
         @on-scroll="onBodyScrolll"
       />
       <div
         v-if="fixedRightColumn.length"
-        v-show="showingData.length && !loading"
         class="n-advance-table__fixed--right n-advance-table__fixed"
         :class="fixedRightColumndClass"
       >
@@ -116,7 +119,7 @@
           :sort-indexs="sortIndexs"
           :selected-filter="selectedFilter"
           :showing-data="showingData"
-          :current-page-selected="currentPageSelected"
+          :current-page-selected="currentPageSelectedLen"
           @on-checkbox-all="onAllCheckboxesClick"
           @on-sort-change="onSortChange"
           @on-filter="onFilter"
@@ -130,11 +133,29 @@
           :check-boxes="checkBoxes"
           :disabled-check-box="disabledCheckBox"
           header-ref-name="header"
+          :loading="loading"
           :height="tbodyWrapperHeight"
           :tr-height="trHeight"
           :fixed="true"
           @on-scroll="onBodyScrolll"
         />
+      </div>
+
+      <!-- loading -->
+      <transition name="n-table-loading--transition">
+        <div v-if="loading" class="n-advance-table__loading">
+          <n-spin
+            :spinning="true"
+            style="width:100%;overflow:hidden;z-index:200;position:absolute;top:50%;"
+          />
+        </div>
+      </transition>
+
+      <div
+        v-if="showingData.length === 0 && !loading"
+        class="n-advance-table__no-data-tip"
+      >
+        No data
       </div>
     </div>
     <!-- 分页 -->
@@ -142,9 +163,6 @@
       v-if="pagination !== false && showingData.length"
       class="n-advance-table__pagination"
     >
-      <button @click="add">
-        {{ $store.state.currentHoverRow }}
-      </button>
       <n-pagination v-model="currentPage" :page-count="pageCount" />
     </div>
   </div>
@@ -413,7 +431,7 @@ export default {
         })
         .filter(item => item !== void 0)
     },
-    currentPageSelected () {
+    currentPageSelectedLen () {
       let selectedLen = 0
       this.showingData.forEach(item => {
         let realIdx = item._index
@@ -427,15 +445,19 @@ export default {
       return selectedLen
     },
     isCheckedBoxAllIndeterminate () {
-      return (
-        this.currentPageSelected === this.showingData.length ||
-        this.currentPageSelected === 0
-      )
+      if (
+        this.currentPageSelectedLen !== this.showingData.length &&
+        this.showingData.length !== 0 &&
+        this.currentPageSelectedLen !== 0
+      ) {
+        return true
+      }
+      return false
     },
     allCheckboxesSelect: {
       get () {
         if (
-          this.currentPageSelected === this.showingData.length &&
+          this.currentPageSelectedLen === this.showingData.length &&
           this.showingData.length !== 0
         ) {
           return true
@@ -448,11 +470,14 @@ export default {
     '$store.state.currentHoverRow' (index, oldIndex) {
       console.log('TCL: index, oldIndex', index, oldIndex)
     },
-    currentPage (val) {
+    // allCheckboxesSelect (val) {
+    //   this.currentPageAllSelect = val
+    // },
+    currentPage () {
       if (this.pagination.custom === true) {
         this.useRemoteChange()
       }
-      this.currentPageAllSelect = this.allCheckboxesSelect
+      // this.currentPageAllSelect = this.allCheckboxesSelect
       this.$emit('on-page-change', this.paginationer)
     },
     data () {
@@ -460,6 +485,7 @@ export default {
       this.searchData = this.computeShowingData()
       this.searchDataNoSort = null
       this.checkBoxes = []
+      this.disabledCheckBox = []
       this.currentPageAllSelect = false
       this.computeScollBar()
     },
@@ -539,12 +565,6 @@ export default {
     // window.removeEventListener('resize', this.init)
   },
   methods: {
-    add () {
-      this.$store.commit(
-        'currentHoverRow',
-        this.$store.state.currentHoverRow + 1
-      )
-    },
     onBodyScrolll (event) {
       const currentEl = this.$store.state.currentTableEl
       console.log('TCL: onBodyScrolll -> currentEl', currentEl)
@@ -560,7 +580,9 @@ export default {
           this.headerRealEl.style.transform = `translate3d(-${this.horizontalScrollLeft}px,0,0)`
         }
         scrollEls
-          .filter(item => item !== currentEl && item !== null)
+          .filter(
+            item => item !== currentEl && item !== null && item !== undefined
+          )
           .forEach(el => {
             el.scrollTop = currentEl.scrollTop
           })
@@ -710,9 +732,10 @@ export default {
         // this.scrollBarWidth = 5
       })
     },
-    onAllCheckboxesClick (currentPageAllSelect) {
+    onAllCheckboxesClick () {
+      this.currentPageAllSelect = !this.currentPageAllSelect
       this.showingData.forEach(item => {
-        this.checkBoxes[item._index] = currentPageAllSelect
+        this.checkBoxes[item._index] = this.currentPageAllSelect
       })
       this.checkBoxes = [].concat(this.checkBoxes)
     },
@@ -847,6 +870,13 @@ export default {
             }
           })
         }
+      }
+      if (type !== 0) {
+        Object.keys(this.sortIndexs).forEach(key => {
+          if (key !== column.key) {
+            this.sortIndexs[key] = 0
+          }
+        })
       }
       return data
     },

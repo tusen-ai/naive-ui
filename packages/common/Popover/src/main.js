@@ -66,6 +66,12 @@ export default {
     const slots = context.scopedSlots
     const defaultSlot = slots.default && slots.default()
     const activatorSlot = slots.activator && slots.activator()
+    let activatorVNode = activatorSlot[0]
+    if (!activatorVNode.tag) {
+      activatorVNode = h('span', {
+        staticClass: 'n-popover-text-wrapper'
+      }, [activatorVNode])
+    }
     const id = genId()
     const props = context.props
     const listeners = context.listeners
@@ -77,7 +83,7 @@ export default {
           controller,
           id
         }
-      }, [activatorSlot[0]]),
+      }, [activatorVNode]),
       h(NBasePortal, {}, [
         h(NPopoverContent, {
           props: {

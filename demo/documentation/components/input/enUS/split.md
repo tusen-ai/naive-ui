@@ -1,12 +1,33 @@
-# Split
+# Pair
 ```html
-<n-input split splitor="to" v-model="value" />
-<n-input split splitor="to" v-model="value" icon="ios-calendar" icon-position="right"/>
-<n-input split splitor="to" v-model="value" icon="ios-calendar" icon-position="right" clearable />
-<n-input split splitor="to" v-model="value" icon="ios-calendar" clearable />
+<n-input pair seperator="to" v-model="value">
+  <template v-slot:affix>
+    <n-icon><ios-calendar /></n-icon>
+  </template>
+</n-input>
+<n-input pair seperator="to" v-model="value">
+  <template v-slot:suffix>
+    <n-icon><ios-calendar /></n-icon>
+  </template>
+</n-input>
+<n-input pair seperator="to" v-model="value" clearable>
+  <template v-slot:suffix>
+    <n-icon><ios-calendar /></n-icon>
+  </template>
+</n-input>
+<n-input pair seperator="to" v-model="value" clearable>
+  <template v-slot:affix>
+    <n-icon><ios-calendar /></n-icon>
+  </template>
+</n-input>
 ```
 ```js
+import iosCalendar from 'naive-ui/lib/icons/ios-calendar'
+
 export default {
+  components: {
+    iosCalendar
+  },
   data () {
     return {
       value: []

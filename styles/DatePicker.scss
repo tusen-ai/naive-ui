@@ -5,15 +5,16 @@
   @include once {
     @include b(date-picker) {
       position: relative;
-      width: 200px;
+      // width: 200px;
       @include m(range) {
-        width: 382px;
+        // width: 382px;
       }
     }  
   }
   
   @include b(date-picker-panel) {
     @include once {
+      outline: none;
       @include fade-in-scale-up-transition(date-picker-panel);
       margin-top: 4px;
       margin-bottom: 4px;
@@ -165,7 +166,9 @@
           }
         }
         
-        
+        &:hover {
+          background-color: map-get($--date-picker-item-background-color, 'hover');
+        }
         @include not-m(in-display-month) {
           color: map-get($--date-picker-item-text-color, 'inactive');
         }
@@ -202,21 +205,18 @@
               }
             }
           }
-          @include m(selected) {
-            @include once {
-              border-radius: 3px;
-              width: 24px;
-              margin: 8px 11px;
-            }
-            color: map-get($--date-picker-item-text-color, 'active');
-            background-color: map-get($--date-picker-item-background-color, 'active');
-            &::after {
-              background-color: map-get($--date-picker-item-sup-color, 'active');
-            }
-          }
         }
-        &:hover {
-          background-color: map-get($--date-picker-item-background-color, 'hover');
+        @include m(selected) {
+          @include once {
+            border-radius: 3px;
+            width: 24px;
+            margin: 8px 11px;
+          }
+          color: map-get($--date-picker-item-text-color, 'active');
+          background-color: map-get($--date-picker-item-background-color, 'active');
+          &::after {
+            background-color: map-get($--date-picker-item-sup-color, 'active');
+          }
         }
       }
     }

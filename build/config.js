@@ -3,7 +3,8 @@ const path = require('path')
 exports.alias = {
   main: path.resolve(__dirname, '../src'),
   packages: path.resolve(__dirname, '../packages'),
-  examples: path.resolve(__dirname, '../examples')
+  examples: path.resolve(__dirname, '../examples'),
+  'naive-ui/lib': path.resolve(__dirname, '../lib')
 }
 
 exports.docLoaders = [
@@ -26,14 +27,13 @@ exports.docLoaders = [
     },
     loader: ['vue-loader', path.resolve(__dirname, '../demo/loaders/NaiveUIDemoLoader.js')]
   },
-  {
-    test: /\.demo\.vue$/,
-    loader: ['vue-loader', path.resolve(__dirname, '../doc/NaiveUIDemoLoader.js')]
-  },
+  // {
+  //   test: /\.demo\.vue$/,
+  //   loader: ['vue-loader', path.resolve(__dirname, '../doc/NaiveUIDemoLoader.js')]
+  // },
   {
     test: {
-      test: /\.vue$/,
-      exclude: /\.demo\.vue$/
+      test: /\.vue$/
     },
     loader: 'vue-loader',
     options: {
@@ -45,7 +45,10 @@ exports.docLoaders = [
   {
     test: /\.(js|jsx)$/,
     exclude: [/node_modules/],
-    loader: 'babel-loader'
+    loader: 'babel-loader',
+    options: {
+      plugins: ['@babel/plugin-syntax-dynamic-import']
+    }
   },
   {
     test: /\.(scss|css)$/,

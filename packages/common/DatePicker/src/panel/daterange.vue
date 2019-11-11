@@ -3,6 +3,7 @@
     <div
       v-if="active"
       ref="self"
+      tabindex="0"
       class="n-date-picker-panel n-date-picker-panel--daterange"
       :class="{
         [`n-${theme}-theme`]: theme
@@ -165,6 +166,7 @@
           Confirm
         </n-button>
       </div>
+      <focus-detector @focus="handleBlur" />
     </div>
   </transition>
 </template>
@@ -174,7 +176,7 @@
 import NButton from '../../../Button'
 import NBaseIcon from '../../../../base/Icon'
 import dualCalendarMixin from './dualCalendarMixin'
-import { startOfDay } from 'date-fns'
+import startOfDay from 'date-fns/startOfDay'
 
 const DATE_FORMAT = 'yyyy-MM-dd'
 const PLACEHOLDER = 'Select date and time'

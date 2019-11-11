@@ -13,7 +13,7 @@ import RoundButton from './packages/common/Button'
 import Switch from './packages/common/Switch'
 import Select from './packages/common/Select'
 import Cascader from './packages/common/Cascader'
-import InputKeyValuePairs from './packages/common/InputKeyValuePairs'
+import CustomInput from './packages/common/CustomInput'
 import Modal from './packages/common/Modal'
 import Input from './packages/common/Input'
 import Message from './packages/common/Message'
@@ -34,7 +34,7 @@ import HomeLayout from './packages/nimbus/HomeLayout'
 import Navbar from './packages/nimbus/Navbar'
 import ServiceLayout from './packages/nimbus/ServiceLayout'
 import NimbusFormCard from './packages/nimbus/FormCard'
-import NimbusConfirmCard from './packages/nimbus/ConfirmCard'
+import NimbusConfirmCard from './packages/deprecated/ConfirmCard'
 import NimbusIcon from './packages/nimbus/Icon'
 import Scrollbar from './packages/common/Scrollbar'
 import Steps from './packages/common/Steps'
@@ -60,6 +60,8 @@ import Slider from './packages/common/Slider'
 import Tree from './packages/common/Tree'
 import Grid from './packages/common/Grid'
 import Affix from './packages/common/Affix'
+import Statistic from './packages/common/Statistic'
+import Breadcrumb from './packages/common/Breadcrumb'
 
 function install (Vue) {
   Card.install(Vue)
@@ -95,7 +97,7 @@ function install (Vue) {
   NimbusIcon.install(Vue)
   Radio.install(Vue)
   Cascader.install(Vue)
-  InputKeyValuePairs.install(Vue)
+  CustomInput.install(Vue)
   Form.install(Vue)
   Tabs.install(Vue)
   TimePicker.install(Vue)
@@ -124,6 +126,8 @@ function install (Vue) {
   Tree.install(Vue)
   Grid.install(Vue)
   Affix.install(Vue)
+  Statistic.install(Vue)
+  Breadcrumb.install(Vue)
 }
 
 export default {

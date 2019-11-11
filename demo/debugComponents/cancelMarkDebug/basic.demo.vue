@@ -34,9 +34,9 @@
     <pre class="n-doc-section__inspect">
       <n-button @click="toggleActive">toggleActive</n-button><n-button @click="toggleShow">toggleShow</n-button>
     </pre>
-    <n-doc-source-block>
+    <pre>
       <!--SOURCE-->
-    </n-doc-source-block>
+    </pre>
   </div>
 </template>
 

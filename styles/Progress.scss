@@ -37,7 +37,7 @@
     }
     $fill-color: map-get($--progress-fill-color, $type);
     @include b(progress-icon) {
-      color: $fill-color;
+      fill: $fill-color;
       @include m(as-text) {
         color: map-get($--progress-indicator-color, 'outside');
       }
@@ -95,6 +95,7 @@
         height: 18px;
         line-height: 18px;
         font-size: 18px;
+        transition: fill .3s $default-cubic-bezier;
         @include m(as-text) {
           text-align: center;
           width: 40px;
@@ -150,6 +151,7 @@
       @include b(progress-text) {
         white-space: nowrap;
         font-weight: 700;
+        transition: color .3s $default-cubic-bezier;
         // color: rgba(98, 187, 252, 1);
         @include e(percentage) {
           color: inherit;
@@ -188,10 +190,11 @@
       @include b(progress-graph-circle) {
         vertical-align: bottom;
         @include b(progress-graph-circle-rail) {
+          transition: stroke .3s $default-cubic-bezier;
           stroke: $--progress-rail-color;
         }
         @include b(progress-graph-circle-fill) {
-          transition: stroke-dasharray .3s $default-cubic-bezier;
+          transition: stroke .3s $default-cubic-bezier, stroke-dasharray .3s $default-cubic-bezier;
         }
       }
       @include b(progress-graph-line) {
@@ -207,6 +210,7 @@
           @include b(progress-graph-line-indicator) {
             background-color: none;
             color: map-get($--progress-indicator-color, 'inside');
+            transition: color .3s $default-cubic-bezier;
             white-space: nowrap;
             text-align: right;
             font-weight: 700;
@@ -222,14 +226,14 @@
           display: flex;
           align-items: center;
           @include b(progress-graph-line-rail) {
-            transition: right .2s $default-cubic-bezier;
+            transition: background-color .3s $default-cubic-bezier, right .2s $default-cubic-bezier;
             flex: 1;
           }
           @include b(progress-graph-line-indicator) {
             transform: translateZ(0); // to avoid strange offset
             display: flex;
             vertical-align: center;
-            transition: right .2s $default-cubic-bezier;
+            transition: right .2s $default-cubic-bezier, color .3s $default-cubic-bezier;
             height: 21px;
             line-height: 21px;
             padding: 0 10px;
@@ -246,6 +250,7 @@
           overflow: hidden;
           height: 10px;
           background-color: $--progress-rail-color;
+          transition: background-color .3s $default-cubic-bezier;
           border-radius: 5px;
           @include b(progress-graph-line-fill) {
             position: relative;
@@ -253,7 +258,7 @@
             height: 10px;
             width: 100%;
             max-width: 0%;
-            transition: max-width .2s $default-cubic-bezier;
+            transition: background-color .3s $default-cubic-bezier, max-width .2s $default-cubic-bezier;
           }
         }
       }

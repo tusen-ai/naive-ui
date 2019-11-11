@@ -295,7 +295,7 @@
                   />
                 </n-form-item>
               </template>
-              <span>Test nesting formItem in resetForm</span>
+              <span>Test nesting NFormItem in resetForm</span>
             </n-popover>
             <n-form-item
               prop="inputNumber"

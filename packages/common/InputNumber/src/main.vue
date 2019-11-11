@@ -12,12 +12,12 @@
       type="button"
       class="n-input-number__minus-button"
       :class="{
-        [`n-input-number__minus-button--disabled`]: value !== null && safeMin !== null && value <= safeMin
+        [`n-input-number__minus-button--disabled`]: !minusable
       }"
       @mousedown="handleMouseDown"
       @click="minus"
     >
-      <n-icon type="md-remove" />
+      <n-icon><md-remove /></n-icon>
     </button>
     <input
       ref="input"
@@ -25,8 +25,8 @@
       type="text"
       :value="value"
       :disabled="disabled ? 'disabled' : false"
+      @focus="handleFocus"
       @blur="handleBlur"
-      @input="handleInput"
       @keyup.enter="handleEnter"
     >
     <button
@@ -34,12 +34,14 @@
       type="button"
       class="n-input-number__add-button"
       :class="{
-        [`n-input-number__add-button--disabled`]: value !== null && safeMax !== null && value >= safeMax
+        [`n-input-number__add-button--disabled`]: !addable
       }"
       @mousedown="handleMouseDown"
       @click="add"
     >
-      <n-icon type="md-add" />
+      <n-icon>
+        <md-add />
+      </n-icon>
     </button>
     <div class="n-input-number__border-layer" />
   </div>
@@ -50,6 +52,8 @@ import NIcon from '../../Icon/index'
 import Emitter from '../../../mixins/emitter'
 import themeable from '../../../mixins/themeable'
 import withapp from '../../../mixins/withapp'
+import mdRemove from '../../../icons/md-remove'
+import mdAdd from '../../../icons/md-add'
 
 const DEFAULT_STEP = 1
 
@@ -69,11 +73,13 @@ function parseNumber (number) {
 export default {
   name: 'NInputNumber',
   components: {
-    NIcon
+    NIcon,
+    mdRemove,
+    mdAdd
   },
   mixins: [ withapp, themeable, Emitter ],
   inject: {
-    formItem: {
+    NFormItem: {
       default: null
     }
   },
@@ -101,6 +107,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    validator: {
+      type: Function,
+      default: null
     }
   },
   computed: {
@@ -114,12 +124,29 @@ export default {
       if (parsedNumber !== null) return parsedNumber
       else return null
     },
+    minusable () {
+      if (this.validator) {
+        if (this.value !== null) return this.validator(this.value - this.step)
+        else return false
+      } else {
+        return !(this.value !== null && this.safeMin !== null && this.value <= this.safeMin)
+      }
+    },
+    addable () {
+      if (this.validator) {
+        if (this.value !== null) return this.validator(this.value + this.step)
+        else return false
+      } else {
+        return !(this.value !== null && this.safeMax !== null && this.value >= this.safeMax)
+      }
+    },
     safeMax () {
       const parsedNumber = parseNumber(this.max)
       if (parsedNumber !== null) return parsedNumber
       else return null
     },
     aValidValue () {
+      if (this.validator) return null
       if (this.safeMin !== null) {
         return Math.max(0, this.safeMin)
       } else if (this.safeMax !== null) {
@@ -131,29 +158,12 @@ export default {
   },
   watch: {
     value (newValue, oldValue) {
-      if (newValue !== null) {
-        if (this.safeMax !== null && newValue > this.safeMax) {
-          newValue = this.safeMax
-        }
-        if (this.safeMin !== null && newValue < this.safeMin) {
-          newValue = this.safeMin
-        }
-      }
-      this.$emit('change', newValue, oldValue)
-      this.formBlur('change', newValue)
-      /**
-       * newValue === oldValue won't trigger watcher!
-       * so the call stack won't fall in loop
-       */
-      this.$emit('input', newValue)
-    }
-  },
-  created () {
-    if (this.value !== null) {
-      if (this.safeMax !== null && this.value > this.safeMax) {
-        this.$emit('input', this.safeMax)
-      } else if (this.safeMin !== null && this.value < this.safeMin) {
-        this.$emit('input', this.safeMin)
+      const adjustedValue = this.adjustValue(newValue)
+      if (adjustedValue === newValue) {
+        this.$emit('change', newValue, oldValue)
+        this.formBlur('change', newValue)
+      } else {
+        this.$emit('input', adjustedValue)
       }
     }
   },
@@ -165,48 +175,66 @@ export default {
       e.preventDefault()
     },
     formBlur (type, val) {
-      if (this.formItem) {
+      if (this.NFormItem) {
         this.dispatch('NFormItem', 'on-form-' + type, val)
       }
     },
+    handleFocus (e) {
+      this.$emit('focus', e, this.value)
+    },
     add () {
+      if (!this.addable) return
       if (this.value === null) {
         this.$emit('input', this.aValidValue)
       } else {
-        const valueAfterChange = this.value + this.safeStep
+        const valueAfterChange = this.adjustValue(this.value + this.safeStep)
         this.$emit('input', valueAfterChange)
       }
     },
     minus () {
+      console.log('minus', this.minusable)
+      if (!this.minusable) return
       if (this.value === null) {
         this.$emit('input', this.aValidValue)
       } else {
-        const valueAfterChange = this.value - this.safeStep
+        const valueAfterChange = this.adjustValue(this.value - this.safeStep)
         this.$emit('input', valueAfterChange)
       }
-    },
-    handleInput (e) {
-
     },
     handleEnter (e) {
-      this.$refs.input.blur()
+      const value = this.adjustValue(this.$refs.input.value)
+      this.$refs.input.value = value
+      this.$emit('input', value)
+    },
+    adjustValue (value) {
+      value = String(value).trim() || ''
+      if (value.trim() === '') {
+        value = null
+      } else if (Number.isNaN(Number(value))) {
+        value = this.value
+      } else {
+        value = Number(value)
+      }
+      if (value === null) {
+        return null
+      } if (this.validator) {
+        if (this.validator(value)) {
+          return value
+        } else {
+          return null
+        }
+      } else {
+        if (this.safeMin !== null && value < this.safeMin) value = this.safeMin
+        else if (this.safeMax !== null && value > this.safeMax) value = this.safeMax
+      }
+      return value
     },
     handleBlur (e) {
-      const value = e.target.value
-      if (value === '') {
-        this.$emit('input', null)
-        this.formBlur('blur', value)
-        return
-      }
-      const parsedNumber = Number(value)
-      if (Number.isNaN(parsedNumber)) {
-        e.target.value = String(this.value)
-      } else {
-        const valueAfterChange = parsedNumber
-        e.target.value = String(parsedNumber)
-        this.$emit('input', valueAfterChange)
-      }
-      this.formBlur('blur', parsedNumber)
+      const value = this.adjustValue(e.target.value)
+      e.target.value = value
+      this.$emit('input', value)
+      this.$emit('blur', e, value)
+      this.formBlur('blur', value)
     }
   }
 }

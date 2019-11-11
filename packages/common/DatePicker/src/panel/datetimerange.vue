@@ -3,6 +3,7 @@
     <div
       v-if="active"
       ref="self"
+      tabindex="0"
       class="n-date-picker-panel n-date-picker-panel--datetimerange"
       :class="{
         [`n-${theme}-theme`]: theme
@@ -224,6 +225,7 @@
         v-else
         style="height: 12px"
       />
+      <focus-detector @focus="handleBlur" />
     </div>
   </transition>
 </template>
@@ -235,7 +237,13 @@ import NTimePicker from '../../../TimePicker'
 import NInput from '../../../Input'
 import dualCalendarMixin from './dualCalendarMixin'
 import NBaseIcon from '../../../../base/Icon'
-import { startOfSecond, format, set, getYear, getMonth, getDate, isValid } from 'date-fns'
+import startOfSecond from 'date-fns/startOfSecond'
+import format from 'date-fns/format'
+import set from 'date-fns/set'
+import getYear from 'date-fns/getYear'
+import getMonth from 'date-fns/getMonth'
+import getDate from 'date-fns/getDate'
+import isValid from 'date-fns/isValid'
 import { strictParse } from '../../../../utils/dateUtils'
 
 const DATETIME_FORMAT = 'yyyy-MM-dd HH:mm:ss'

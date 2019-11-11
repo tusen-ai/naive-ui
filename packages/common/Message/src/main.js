@@ -1,6 +1,6 @@
 import Message from './Message'
 
-function setTheme(messageContainer) {
+function setTheme (messageContainer) {
   const themeClasses = Array.from(messageContainer.classList).filter(c =>
     c.endsWith('-theme')
   )
@@ -8,7 +8,7 @@ function setTheme(messageContainer) {
   if (this.theme) messageContainer.classList.add(`n-${this.theme}-theme`)
 }
 
-function attachMessageContainer() {
+function attachMessageContainer () {
   let messageContainer = document.querySelector('.n-message-container')
   if (!messageContainer) {
     messageContainer = document.createElement('div')
@@ -20,14 +20,14 @@ function attachMessageContainer() {
   return messageContainer
 }
 
-function registerMessageEl(container, el, option) {
+function registerMessageEl (container, el, option) {
   el.classList.add('n-message--enter')
   container.appendChild(el)
   el.getBoundingClientRect()
   el.classList.remove('n-message--enter')
-  setTimeout(function() {
-    setTimeout(function() {
-      setTimeout(function() {
+  setTimeout(function () {
+    setTimeout(function () {
+      setTimeout(function () {
         container.removeChild(el)
       }, option.vanishTransitionTimeout)
       el.classList.add('n-message--leave')
@@ -44,7 +44,7 @@ function registerMessageEl(container, el, option) {
  * @param {string} option.icon
  * @param {string} option.iconColor
  */
-function mixinOption(option) {
+function mixinOption (option) {
   const defaultOptions = {
     duration: 3000,
     emergeTransitionTimeout: 300,
@@ -68,8 +68,8 @@ const NMessage = {
     top: 20
   },
   attachMessageContainer,
-  notice(content, option) {
-    console.log('test', this)
+  notice (content, option) {
+    // console.log('test', this)
     const messageContainer = this.attachMessageContainer()
     const messageCell = new this.Vue({
       ...Message,
@@ -77,22 +77,22 @@ const NMessage = {
     }).$mount()
     registerMessageEl(messageContainer, messageCell.$el, mixinOption(option))
   },
-  info(content, option) {
+  info (content, option) {
     option = mixinOption(option)
     option.type = 'info'
     this.notice(content, option)
   },
-  success(content, option) {
+  success (content, option) {
     option = mixinOption(option)
     option.type = 'success'
     this.notice(content, option)
   },
-  warning(content, option) {
+  warning (content, option) {
     option = mixinOption(option)
     option.type = 'warning'
     this.notice(content, option)
   },
-  error(content, option) {
+  error (content, option) {
     option = mixinOption(option)
     option.type = 'error'
     this.notice(content, option)

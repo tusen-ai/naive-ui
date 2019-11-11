@@ -133,16 +133,44 @@ export default {
     registerListeners () {
       const el = this.$el
       if (el) {
-        el.removeEventListener('click', this.handleClick)
-        el.removeEventListener('mouseenter', this.handleMouseEnter)
-        el.removeEventListener('mouseleave', this.handleMouseLeave)
+        if (!el['@n-popover-context']) el['@n-popover-context'] = {}
+        const elContext = el['@n-popover-context']
         if (this.triggeredByClick) {
-          /// console.log('register click')
+          if (!(elContext.handleClick === this.handleClick)) {
+            el.removeEventListener('click', elContext.handleClick)
+            el.addEventListener('click', this.handleClick)
+            elContext.handleClick = this.handleClick
+          }
+          if (elContext.handleMouseEnter) {
+            el.removeEventListener('mouseenter', elContext.handleMouseEnter)
+            el.removeEventListener('mouseenter', this.handleMouseEnter)
+            elContext.handleMouseEnter = null
+          }
+          if (elContext.handleMouseLeave) {
+            el.removeEventListener('mouseenter', elContext.handleMouseLeave)
+            el.removeEventListener('mouseleave', this.handleMouseLeave)
+            elContext.handleMouseLeave = null
+          }
+          // console.log('register click')
+          // debugger
           el.addEventListener('click', this.handleClick)
         } else if (this.triggeredByHover) {
           // console.log('register hover')
-          el.addEventListener('mouseenter', this.handleMouseEnter)
-          el.addEventListener('mouseleave', this.handleMouseLeave)
+          if (!(elContext.handleMouseLeave === this.handleMouseLeave)) {
+            el.removeEventListener('mouseleave', elContext.handleMouseLeave)
+            el.addEventListener('mouseleave', this.handleMouseLeave)
+            elContext.handleMouseLeave = this.handleMouseLeave
+          }
+          if (!(elContext.handleMouseEnter === this.handleMouseEnter)) {
+            el.removeEventListener('mouseenter', elContext.handleMouseEnter)
+            el.addEventListener('mouseenter', this.handleMouseEnter)
+            elContext.handleMouseEnter = this.handleMouseEnter
+          }
+          if (elContext.handleClick) {
+            el.removeEventListener('click', elContext.handleMouseEnter)
+            el.removeEventListener('click', this.handleMouseEnter)
+            elContext.handleMouseEnter = null
+          }
         }
       }
     }

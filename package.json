@@ -1,22 +1,23 @@
 {
   "name": "naive-ui",
-  "version": "0.5.9",
+  "version": "0.5.14",
   "description": "",
   "main": "index.js",
   "scripts": {
     "release": "npm run build && npm publish",
-    "build": "cross-env NODE_ENV=development && gulp --gulpfile build/gulpfile.js build",
+    "build": "rm -rf lib && cross-env NODE_ENV=development && gulp --gulpfile build/gulpfile.js build",
     "demo": "cross-env NODE_ENV=development && gulp --gulpfile build/gulpfile.js build && webpack-dev-server --config build/webpack.demo.js",
-    "dev": "cross-env NODE_ENV=development && node doc/changeDemoVersion.js && webpack-dev-server --config build/webpack.dev.js",
+    "dev": "cross-env NODE_ENV=development && webpack-dev-server --config build/webpack.dev.js",
     "serve": "npm run dev",
     "lint": "eslint packages/**/*.{js,vue} test/**/*.{js,vue} build/**/*.{js,vue} demo/**/*.{js,vue} && stylelint \"styles/**/*.scss\"",
     "lint-style": "stylelint  \"styles/**/*.scss\"",
     "test": "cross-env NODE_ENV=development BABEL_ENV=test karma start test/unit/karma.conf.js",
     "test-cov": "cross-env NODE_ENV=development BABEL_ENV=test karma start test/unit/karma.conf.js && http-server test/unit/coverage",
     "test-release": "cross-env NODE_ENV=production webpack-dev-server --config build/webpack.release.js",
-    "release-doc": "cross-env NODE_ENV=development && rm -rf doc/dist && node doc/changeDemoVersion.js && webpack --config build/webpack.doc.js && sudo bash doc/deploy-doc.sh",
-    "build-doc": "cross-env NODE_ENV=production && rm -rf doc/dist && node doc/changeDemoVersion.js && webpack --config build/webpack.doc.js",
-    "build-private-doc": "cross-env NODE_ENV=production && rm -rf doc/dist && node doc/changeDemoVersion.js && webpack --config build/webpack.private-doc.js"
+    "release-doc": "cross-env NODE_ENV=development && rm -rf doc/dist && webpack --config build/webpack.doc.js && sudo bash doc/deploy-doc.sh",
+    "build-doc": "cross-env NODE_ENV=production && rm -rf doc/dist && webpack --config build/webpack.doc.js",
+    "build-private-doc": "cross-env NODE_ENV=production && rm -rf doc/dist && webpack --config build/webpack.private-doc.js",
+    "test-size": "webpack --config build/webpack.test-size.js"
   },
   "author": "lecong.zhang",
   "license": "ISC",
@@ -24,6 +25,7 @@
     "registry": "***REMOVED***"
   },
   "devDependencies": {
+    "@babel/cli": "^7.6.4",
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
     "@kazupon/vue-i18n-loader": "^0.4.1",
@@ -47,6 +49,7 @@
     "eslint-plugin-vue": "^5.2.2",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^3.0.1",
+    "glob": "^7.1.5",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^6.1.0",
     "gulp-cssmin": "^0.2.0",

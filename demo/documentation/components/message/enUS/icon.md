@@ -6,6 +6,8 @@
 </n-button>
 ```
 ```js
+import mdHourglass from 'naive-ui/lib/icons/md-hourglass'
+
 export default {
   data() {
     return {}
@@ -13,7 +15,7 @@ export default {
   methods: {
     emitMessage() {
       this.$NMessage.warning("I never needed anybody's help in any way", {
-        icon: "md-hourglass"
+        icon: mdHourglass
       })
     }
   }

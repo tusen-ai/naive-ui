@@ -1,9 +1,15 @@
-// import moment from 'moment'
 import commonCalendarMixin from './commonCalendarMixin'
-import { isValid, getDate, getMonth, getYear, getTime, isSameMonth, format, addMonths, addYears, set } from 'date-fns'
+import addMonths from 'date-fns/addMonths'
+import addYears from 'date-fns/addYears'
+import isSameMonth from 'date-fns/isSameMonth'
+import getTime from 'date-fns/getTime'
+import format from 'date-fns/format'
+import set from 'date-fns/set'
+import getYear from 'date-fns/getYear'
+import getMonth from 'date-fns/getMonth'
+import getDate from 'date-fns/getDate'
+import isValid from 'date-fns/isValid'
 import { dateArray, strictParse } from '../../../../utils/dateUtils'
-
-// import { setYMD } from '../utils'
 
 export default {
   mixins: [commonCalendarMixin],
