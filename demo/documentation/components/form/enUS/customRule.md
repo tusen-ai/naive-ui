@@ -1,31 +1,19 @@
 # Custom Rules
 ```html
 <n-form :model="model" ref="form" :rules="rules">
-  <n-row>
-    <n-col :span="24">
-      <n-form-item path="age" label="Age">
-        <n-input v-model="model.age"/>
-      </n-form-item>
-    </n-col>
-  </n-row>
-  <n-row>
-    <n-col :span="24">
-      <n-form-item path="password" label="Password">
-        <n-input v-model="model.password" @input="handlePasswordInput" type="password"/>
-      </n-form-item>
-    </n-col>
-  </n-row>
-  <n-row>
-    <n-col :span="24">
-      <n-form-item
-        path="reenteredPassword"
-        label="Re-enter Password"
-        ref="reenteredPassword"
-      >
-        <n-input v-model="model.reenteredPassword" type="password"/>
-      </n-form-item>
-    </n-col>
-  </n-row>
+  <n-form-item-row path="age" label="Age">
+    <n-input v-model="model.age"/>
+  </n-form-item-row>
+  <n-form-item-row path="password" label="Password">
+    <n-input v-model="model.password" @input="handlePasswordInput" type="password"/>
+  </n-form-item-row>
+  <n-form-item-row
+    path="reenteredPassword"
+    label="Re-enter Password"
+    ref="reenteredPassword"
+  >
+    <n-input :disabled="!model.password" v-model="model.reenteredPassword" type="password"/>
+  </n-form-item-row>
   <n-row :gutter="[0, 24]">
     <n-col :span="24">
       <div style="display: flex; justify-content: flex-end;">
@@ -51,18 +39,18 @@ export default {
       rules: {
         age: [
           {
+            required: true,
             validator (rule, value) {
-              return /^\d*$/.test(value)
+              if (!value) {
+                return new Error('Age is required')
+              } else if (!/^\d*$/.test(value)) {
+                return new Error('Age should be an integer')
+              } else if (Number(value) < 18) {
+                return new Error('Age should be above 18')
+              }
+              return true
             },
-            message: 'Please input an integer',
-            trigger: 'input'
-          },
-          {
-            validator (rule, value) {
-              return Number(value) > 18
-            },
-            message: 'Age should be above 18',
-            trigger: 'input'
+            trigger: ['input', 'blur']
           }
         ],
         reenteredPassword: [
@@ -78,7 +66,8 @@ export default {
           },
           {
             required: true,
-            trigger: 'blur'
+            message: 'Re-entered Password is required',
+            trigger: ['input', 'blur']
           }
         ]
       }

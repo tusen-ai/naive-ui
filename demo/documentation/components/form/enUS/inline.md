@@ -46,7 +46,7 @@ export default {
           age: {
             required: true,
             message: 'Please input your age',
-            trigger: 'input'
+            trigger: ['input', 'blur']
           }
         },
         phone: {

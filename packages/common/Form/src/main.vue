@@ -4,7 +4,7 @@
     :class="{
       'n-form--inline': inline
     }"
-    @keydown.enter.prevent="handleKeyDownEnter"
+    @keydown.enter="handleKeyDownEnter"
   >
     <slot />
   </form>
@@ -97,8 +97,10 @@ export default {
       }
       this.value = this.initialValue
     },
-    handleKeyDownEnter () {
-
+    handleKeyDownEnter (e) {
+      if (e.target.tagName === 'INPUT' && e.target.getAttribute('type')) {
+        e.preventDefault()
+      }
     }
   }
 }
