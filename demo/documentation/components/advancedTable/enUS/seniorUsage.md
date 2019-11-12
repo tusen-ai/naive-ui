@@ -166,7 +166,7 @@ export default {
     getData(args) {
       this.loading = true
       setTimeout(() => {
-        let d = new Array(20).fill(0)
+        let d = new Array(0).fill(0)
         d = d.map((item, idx) => {
           return {
             name: 'xiaobai213213132123213111121' + idx,

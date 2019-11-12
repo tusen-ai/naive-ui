@@ -72,36 +72,6 @@
           @on-sort-change="onSortChange"
           @on-filter="onFilter"
         />
-
-        <!-- <table-header
-          ref="fixedLeftHeader"
-          :height="headerHeight"
-          :columns="fixedLeftColumn"
-          :col-group-stl="colGroup"
-          :sort-indexs="sortIndexs"
-          :selected-filter="selectedFilter"
-          :showing-data="showingData"
-          :current-page-selected="currentPageSelectedLen"
-          @on-checkbox-all="onAllCheckboxesClick"
-          @on-sort-change="onSortChange"
-          @on-filter="onFilter"
-        />
-        <table-body
-          ref="fixedLeftTbody"
-          :table-stl="tableStl"
-          :showing-data="showingData"
-          :columns="fixedLeftColumn"
-          :row-class-name="rowClassName"
-          :check-boxes="checkBoxes"
-          :disabled-check-box="disabledCheckBox"
-          header-ref-name="header"
-          :scroll-bar-vertical-width="scrollBarWidth"
-          :height="tbodyWrapperHeight"
-          :tr-height="trHeight"
-          :loading="loading"
-          :fixed="true"
-          @on-scroll="onBodyScrolll"
-        /> -->
       </div>
       <!-- table head -->
       <base-table
@@ -124,32 +94,6 @@
         @on-sort-change="onSortChange"
         @on-filter="onFilter"
       />
-      <!-- <table-header
-        ref="header"
-        :columns="columns"
-        :col-group-stl="colGroup"
-        :scroll-bar-width="scrollBarWidth"
-        :sort-indexs="sortIndexs"
-        :selected-filter="selectedFilter"
-        :showing-data="showingData"
-        :current-page-selected="currentPageSelectedLen"
-        @on-checkbox-all="onAllCheckboxesClick"
-        @on-sort-change="onSortChange"
-        @on-filter="onFilter"
-      /> -->
-      <!-- table body -->
-      <!-- <table-body
-        ref="tbody"
-        :table-stl="tableStl"
-        :showing-data="showingData"
-        :columns="columns"
-        :row-class-name="rowClassName"
-        :check-boxes="checkBoxes"
-        :disabled-check-box="disabledCheckBox"
-        :loading="loading"
-        style="min-height: 42px"
-        @on-scroll="onBodyScrolll"
-      /> -->
       <div
         v-if="fixedRightColumn.length"
         class="n-advance-table__fixed--right n-advance-table__fixed"
@@ -177,34 +121,6 @@
           @on-sort-change="onSortChange"
           @on-filter="onFilter"
         />
-        <!-- <table-header
-          ref="fixedRightHeader"
-          :height="headerHeight"
-          :columns="fixedRightColumn"
-          :col-group-stl="colGroup"
-          :sort-indexs="sortIndexs"
-          :selected-filter="selectedFilter"
-          :showing-data="showingData"
-          :current-page-selected="currentPageSelectedLen"
-          @on-checkbox-all="onAllCheckboxesClick"
-          @on-sort-change="onSortChange"
-          @on-filter="onFilter"
-        />
-        <table-body
-          ref="fixedRightTbody"
-          :table-stl="tableStl"
-          :showing-data="showingData"
-          :columns="fixedRightColumn"
-          :row-class-name="rowClassName"
-          :check-boxes="checkBoxes"
-          :disabled-check-box="disabledCheckBox"
-          header-ref-name="header"
-          :loading="loading"
-          :height="tbodyWrapperHeight"
-          :tr-height="trHeight"
-          :fixed="true"
-          @on-scroll="onBodyScrolll"
-        /> -->
       </div>
 
       <!-- loading -->
@@ -604,29 +520,14 @@ export default {
     this.initData()
   },
   mounted () {
-    this.mainTBodyEl = this.$refs.mainTable.$refs.tbody.$el
-    this.relTable = this.mainTBodyEl.querySelector('table')
-    // this.relTHead = this.$refs.header.$el.querySelector('table')
-    this.wrapper = this.$refs.tableWrapper
-    this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
-    this.tbodyWidth = this.relTable.offsetWidth
-
-    this.headerRealEl = this.$refs.mainTable.$refs.header.$el.querySelector(
-      'thead'
-    )
-    this.headerHeight = this.headerRealEl.offsetHeight
-    this.fixedLeftTBodyEl =
-      this.$refs.fixedLeftTable && this.$refs.fixedLeftTable.$refs.tbody.$el
-    this.fixedRightTBodyEl =
-      this.$refs.fixedLeftTable && this.$refs.fixedRightTable.$refs.tbody.$el
     // console.log(this.wrapperWidth, this.tbodyWidth)
 
     this.init()
 
-    // window.addEventListener('resize', this.init)
+    window.addEventListener('resize', this.init)
   },
   beforeDestroy () {
-    // window.removeEventListener('resize', this.init)
+    window.removeEventListener('resize', this.init)
   },
   methods: {
     onBodyScrolll (event) {
@@ -748,8 +649,9 @@ export default {
       const tbody = this.mainTBodyEl
       this.tbodyWrapperHeight = tbody.clientHeight
       this.tbodyWrapperOffsetHeight = tbody.offsetHeight
-      this.scrollBarHorizontalHeight =
-        this.tbodyWrapperOffsetHeight - this.tbodyWrapperHeight
+      // this.scrollBarHorizontalHeight =
+      //   this.tbodyWrapperOffsetHeight - this.tbodyWrapperHeight
+      this.scrollBarHorizontalHeight = 8
     },
     computeScollBar () {
       this.$nextTick(() => {
@@ -757,7 +659,9 @@ export default {
         this.trHeight = tr ? tr.offsetHeight : 0
         const tbody = this.mainTBodyEl
 
-        this.scrollBarWidth = tbody.offsetWidth - tbody.clientWidth
+        // this.scrollBarWidth = tbody.offsetWidth - tbody.clientWidth
+        this.scrollBarWidth = 8
+
         this.computeHorizontalScrollBarHeight()
       })
     },
@@ -778,6 +682,22 @@ export default {
     },
     init () {
       this.$nextTick(() => {
+        this.mainTBodyEl = this.$refs.mainTable.$refs.tbody.$el
+        this.relTable = this.mainTBodyEl.querySelector('table')
+        // this.relTHead = this.$refs.header.$el.querySelector('table')
+        this.wrapper = this.$refs.tableWrapper
+        this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
+        this.tbodyWidth = this.relTable.offsetWidth
+
+        this.headerRealEl = this.$refs.mainTable.$refs.header.$el.querySelector(
+          'thead'
+        )
+        this.headerHeight = this.headerRealEl.offsetHeight
+        this.fixedLeftTBodyEl =
+          this.$refs.fixedLeftTable && this.$refs.fixedLeftTable.$refs.tbody.$el
+        this.fixedRightTBodyEl =
+          this.$refs.fixedLeftTable &&
+          this.$refs.fixedRightTable.$refs.tbody.$el
         this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
         this.tbodyWrapperWidth = this.$refs.tbodyWrapper.clientWidth
         this.tbodyWrapperHeight = this.$refs.tbodyWrapper.clientHeight
