@@ -69,6 +69,7 @@ import breadcrumb from './documentation/components/breadcrumb'
 import configConsumer from './documentation/components/configConsumer'
 import descriptions from './documentation/components/descriptions'
 import list from './documentation/components/list'
+import card from './documentation/components/card'
 
 import demo from './demo'
 import ComponentDemo from './utils/ComponentDemo'
@@ -193,7 +194,8 @@ const routes = [
       { path: '/n-breadcrumb', component: breadcrumb },
       { path: '/n-config-consumer', component: configConsumer },
       { path: '/n-descriptions', component: descriptions},
-      { path: '/n-list', component: list}
+      { path: '/n-list', component: list},
+      { path: '/n-card', component: card }
     ])
   },
   {

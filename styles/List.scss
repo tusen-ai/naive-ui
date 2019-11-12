@@ -1,0 +1,33 @@
+@import './mixins/mixins.scss';
+
+@include themes-mixin {
+  @include b(list) {
+    font-size: 14px;
+    color: $--n-secondary-text-color;
+    background-color: $--n-card-color;
+    padding: 0;
+    list-style-type: none;
+    @include m(bordered) {
+      border-radius: 6px;
+      border: 1px solid $--n-border-color;
+      @include b(list-item) {
+        padding: 12px 18px;
+        &:not(:last-child) {
+          border-bottom: 1px solid $--n-border-color;
+        }
+      }
+      @include e(header, footer) {
+        padding: 12px 18px;
+        &:not(:last-child) {
+          border-bottom: 1px solid $--n-border-color;
+        }
+      }
+    }
+    @include e(header, footer) {
+      box-sizing: border-box;
+    }
+    @include b(list-item) {
+      box-sizing: border-box;
+    }
+  }
+}

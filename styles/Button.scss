@@ -254,6 +254,13 @@
   display: inline-block;
   position: relative;
   @include not-m(vertical) {
+    @include m(block) {
+      display: flex;
+      flex-wrap: nowrap;
+      @include b(button) {
+        flex-grow: 1;
+      }
+    }
     @include b(button) {
       &:first-child:not(:last-child) {
         margin-right: 0!important;

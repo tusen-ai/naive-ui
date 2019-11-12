@@ -1,89 +1,138 @@
 @import './mixins/mixins.scss';
 
-@include b(card) {
-  .mask {
+$--card-margin-left: (
+  'small': 16px,
+  'medium': 24px
+);
+
+$--card-margin-top: (
+  'small': 12px,
+  'medium': 16px
+);
+
+$--card-margin-bottom: (
+  'small': 9px,
+  'medium': 12px
+);
+
+@mixin card-size-mixin ($size) {
+  @include m($size + '-size') {
+    @include m(title-segmented) {
+      @include b(card-title) {
+        &:not(:last-child) {
+          margin-bottom: 0;
+          padding-bottom: map-get($--card-margin-bottom, $size);
+        }
+      }
+    }
+    @include m(content-segmented) {
+      @include e(content) {
+        &:not(:last-child) {
+          margin-bottom: 0;
+          padding-bottom: map-get($--card-margin-bottom, $size);
+        }
+      }
+    }
+    @include m(extra-segmented) {
+      @include e(extra) {
+        &:not(:last-child) {
+          margin-bottom: 0;
+          padding-bottom: map-get($--card-margin-bottom, $size);
+        }
+      }
+    }
+    @include b(card-title) {
+      padding: 0px map-get($--card-margin-left, $size);
+      margin: map-get($--card-margin-top, $size) 0 map-get($--card-margin-bottom, $size) 0;
+      @include e(main) {
+        font-size: 18px;
+      }
+      @include e(extra) {
+        font-size: 14px;
+      }
+    }
+    @include e(content, extra) {
+      padding: 0px map-get($--card-margin-left, $size);
+      margin: map-get($--card-margin-bottom, $size) 0;
+      font-size: 14px;
+    }
+    @include e(action) {
+      background-color: $--n-table-header-color;
+      padding: map-get($--card-margin-bottom, $size) map-get($--card-margin-left, $size);
+      font-size: 14px;
+    }
+  }
+}
+
+@include themes-mixin {
+  @include b(card) {
+    display: block;
     overflow: hidden;
-    position: absolute;
-    padding: 12px 24px 18px 24px;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    border-radius: 4px;
-    background-color: rgba(255, 255, 255, .7);
-    transition: background-color .2s ease-out;
-  }
-
-  .mask .alert {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .lock {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-  }
-
-  .lock-description {
-    white-space: nowrap;
-    overflow: hidden;
-  }
-
-  & .lock .lock-description {
-    color: rgba(81, 90, 110, 0);
-    transition: color .2s ease-out;
-  }
-
-  &:hover .lock .lock-description {
-    color: rgba(81, 90, 110, 1);
-    transition: color .2s ease-out;
-  }
-
-  & {
+    width: 100%;
+    box-sizing: border-box;
     position: relative;
-    cursor: pointer;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 12px 24px 18px 24px;
-    display: inline-block;
-    transition: box-shadow .2s;
-  }
-
-  &:hover {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
-  }
-
-  .title {
-    margin-top: 6px;
-    font-size: 18px;
-    color: #17233D;
-  }
-
-  .content {
-    margin-top: 6px;
-    font-size: 14px;
-  }
-
-  .ribbon {
-    display: flex;
-    align-items: center;
-    color: white;
-    background: rgb(81, 90, 110);
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 12px;
-  }
-
-  .intro {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include m(bordered) {
+      border: 1px solid $--n-divider-color;
+    }
+    border-radius: 6px;
+    @include card-size-mixin('small');
+    @include card-size-mixin('medium');
+    @include b(card-cover) {
+      width: 100%;
+      img {
+        display: block;
+        width: 100%;
+      }
+    }
+    @include m(title-segmented) {
+      @include b(card-title) {
+        &:not(:last-child) {
+          border-bottom: 1px solid $--n-divider-color;
+        }
+      }
+    }
+    @include m(content-segmented) {
+      @include e(content) {
+        &:not(:last-child) {
+          border-bottom: 1px solid $--n-divider-color;
+        }
+      }
+    }
+    @include m(extra-segmented) {
+      @include e(extra) {
+        &:not(:last-child) {
+          border-bottom: 1px solid $--n-divider-color;
+        }
+      }
+    }
+    @include b(card-title) {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      @include e(main) {
+        font-weight: 700;
+        font-size: 18px;
+        color: $--n-text-color;
+      }
+      @include e(extra) {
+        font-weight: 400;
+        font-size: 14px;
+        color: $--n-secondary-text-color;
+      }
+    }
+    @include e(content) {
+      line-height: 1.5;
+      font-size: 14px;
+    }
+    @include e(extra) {
+      line-height: 1.5;
+      font-size: 14px;
+    }
+    @include e(action) {
+      background-color: $--n-table-header-color;
+      line-height: 1.5;
+      font-size: 14px;
+    }
   }
 }

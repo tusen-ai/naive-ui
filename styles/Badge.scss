@@ -94,6 +94,12 @@
       display: inline-block;
       position: relative;
       vertical-align: middle;
+      @include m(as-is) {
+        display: inline-flex;
+        @include b(badge-sup) {
+          position: static;
+        }
+      }
       @include m(dot) {
         @include b(badge-sup) {
           height: 8px;
