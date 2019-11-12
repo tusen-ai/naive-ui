@@ -2,7 +2,6 @@
   <div class="n-filter-wraper">
     <n-popselect
       v-if="!loading && !error"
-
       v-model="selectedValue"
       cancelable
       :multiple="column.filterMultiple"
@@ -13,25 +12,14 @@
         <filterIcon :status="filterStatus" />
       </template>
     </n-popselect>
-    <n-popover
-      v-else
-      placement="bottom"
-      trigger="click"
-    >
+    <n-popover v-else placement="bottom" trigger="click">
       <template v-slot:activator>
         <filterIcon :status="filterStatus" />
       </template>
-      <p
-        v-if="loading"
-        class="n-filter-tip-line"
-      >
+      <p v-if="loading" class="n-filter-tip-line">
         Loading...
       </p>
-      <p
-        v-if="error"
-        class="n-filter-tip-line"
-        style=""
-      >
+      <p v-if="error" class="n-filter-tip-line" style="">
         Error,refresh
         <n-icon
           style="cursor:pointer"
@@ -39,7 +27,9 @@
           color="#999"
           size="18"
           @click.stop="initItems"
-        />
+        >
+          <md-refresh />
+        </n-icon>
       </p>
     </n-popover>
   </div>
@@ -47,10 +37,12 @@
 
 <script>
 import filterIcon from '../filterIcon'
+import mdRefresh from 'naive-ui/lib/icons/md-refresh'
 
 export default {
   components: {
-    filterIcon
+    filterIcon,
+    mdRefresh
   },
   props: {
     value: {
@@ -79,7 +71,11 @@ export default {
   },
   computed: {
     filterStatus () {
-      return this.selectedValue !== null && this.selectedValue !== undefined && this.selectedValue.length !== 0
+      return (
+        this.selectedValue !== null &&
+        this.selectedValue !== undefined &&
+        this.selectedValue.length !== 0
+      )
     }
   },
   watch: {
@@ -100,15 +96,18 @@ export default {
       this.error = false
       if (typeof this.items === 'function') {
         this.loading = true
-        this.items().then((items) => {
-          this.filterItems = items
-          this.loading = false
-        }, (err) => {
-          console.error(err)
-          this.error = true
-          this.loading = false
-          throw err
-        })
+        this.items().then(
+          items => {
+            this.filterItems = items
+            this.loading = false
+          },
+          err => {
+            console.error(err)
+            this.error = true
+            this.loading = false
+            throw err
+          }
+        )
       } else {
         this.filterItems = this.items
       }
@@ -125,8 +124,8 @@ export default {
 .n-filter-wraper {
   display: inline-block;
 }
-.n-filter-tip-line{
-  text-align:center;
-  padding:5px;
+.n-filter-tip-line {
+  text-align: center;
+  padding: 5px;
 }
 </style>
