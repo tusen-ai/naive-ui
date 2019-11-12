@@ -63,6 +63,8 @@ import Affix from './packages/common/Affix'
 import Statistic from './packages/common/Statistic'
 import Breadcrumb from './packages/common/Breadcrumb'
 import ConfigConsumer from './packages/common/ConfigConsumer'
+import Descriptions from './packages/common/Descriptions'
+import List from './packages/common/List'
 
 function install (Vue) {
   Card.install(Vue)
@@ -130,6 +132,8 @@ function install (Vue) {
   Statistic.install(Vue)
   Breadcrumb.install(Vue)
   ConfigConsumer.install(Vue)
+  Descriptions.install(Vue)
+  List.install(Vue)
 }
 
 export default {

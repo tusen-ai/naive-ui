@@ -209,7 +209,7 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-advance-table'
             },
             {
-              name: 'Descriptions (in progress)',
+              name: 'Descriptions',
               path: `/${this.lang}/${this.theme}` + '/n-descriptions'
             },
             {
@@ -327,7 +327,7 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-progress'
             },
             {
-              name: 'Result',
+              name: 'Result (in progress)',
               path: `/${this.lang}/${this.theme}` + '/n-result'
             },
             {

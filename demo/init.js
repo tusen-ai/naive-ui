@@ -67,6 +67,8 @@ import statistic from './documentation/components/statistic'
 import grid from './documentation/components/grid'
 import breadcrumb from './documentation/components/breadcrumb'
 import configConsumer from './documentation/components/configConsumer'
+import descriptions from './documentation/components/descriptions'
+import list from './documentation/components/list'
 
 import demo from './demo'
 import ComponentDemo from './utils/ComponentDemo'
@@ -189,7 +191,9 @@ const routes = [
       { path: '/n-statistic', component: statistic },
       { path: '/n-grid', component: grid },
       { path: '/n-breadcrumb', component: breadcrumb },
-      { path: '/n-config-consumer', component: configConsumer }
+      { path: '/n-config-consumer', component: configConsumer },
+      { path: '/n-descriptions', component: descriptions},
+      { path: '/n-list', component: list}
     ])
   },
   {

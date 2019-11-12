@@ -25,6 +25,7 @@ $layout-nav-height: 64px;
       height: $layout-nav-height;
     }
     @include e(body) {
+      font-size: 14px;
       position: absolute;
       left: 272px;
       right: 0px;
