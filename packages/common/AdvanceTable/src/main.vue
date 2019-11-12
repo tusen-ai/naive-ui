@@ -48,7 +48,32 @@
         class="n-advance-table__fixed--left n-advance-table__fixed"
         :class="fixedLeftColumndClass"
       >
-        <table-header
+        <base-table
+          ref="fixedLeftTable"
+          :header-height="headerHeight"
+          :columns="fixedLeftColumn"
+          :col-group-stl="colGroup"
+          :sort-indexs="sortIndexs"
+          :selected-filter="selectedFilter"
+          :showing-data="showingData"
+          :current-page-selected="currentPageSelectedLen"
+          :table-stl="tableStl"
+          :row-class-name="rowClassName"
+          :check-boxes="checkBoxes"
+          :disabled-check-box="disabledCheckBox"
+          header-ref-name="header"
+          :scroll-bar-vertical-width="scrollBarWidth"
+          :tbody-height="tbodyWrapperHeight"
+          :tr-height="trHeight"
+          :loading="loading"
+          :fixed="true"
+          @on-scroll="onBodyScrolll"
+          @on-checkbox-all="onAllCheckboxesClick"
+          @on-sort-change="onSortChange"
+          @on-filter="onFilter"
+        />
+
+        <!-- <table-header
           ref="fixedLeftHeader"
           :height="headerHeight"
           :columns="fixedLeftColumn"
@@ -76,10 +101,30 @@
           :loading="loading"
           :fixed="true"
           @on-scroll="onBodyScrolll"
-        />
+        /> -->
       </div>
       <!-- table head -->
-      <table-header
+      <base-table
+        ref="mainTable"
+        :table-stl="tableStl"
+        :showing-data="showingData"
+        :columns="columns"
+        :row-class-name="rowClassName"
+        :check-boxes="checkBoxes"
+        :disabled-check-box="disabledCheckBox"
+        :loading="loading"
+        :col-group-stl="colGroup"
+        :scroll-bar-width="scrollBarWidth"
+        :sort-indexs="sortIndexs"
+        :selected-filter="selectedFilter"
+        :current-page-selected="currentPageSelectedLen"
+        :body-min-height="42"
+        @on-scroll="onBodyScrolll"
+        @on-checkbox-all="onAllCheckboxesClick"
+        @on-sort-change="onSortChange"
+        @on-filter="onFilter"
+      />
+      <!-- <table-header
         ref="header"
         :columns="columns"
         :col-group-stl="colGroup"
@@ -91,9 +136,9 @@
         @on-checkbox-all="onAllCheckboxesClick"
         @on-sort-change="onSortChange"
         @on-filter="onFilter"
-      />
+      /> -->
       <!-- table body -->
-      <table-body
+      <!-- <table-body
         ref="tbody"
         :table-stl="tableStl"
         :showing-data="showingData"
@@ -102,16 +147,37 @@
         :check-boxes="checkBoxes"
         :disabled-check-box="disabledCheckBox"
         :loading="loading"
-        header-ref-name="header"
         style="min-height: 42px"
         @on-scroll="onBodyScrolll"
-      />
+      /> -->
       <div
         v-if="fixedRightColumn.length"
         class="n-advance-table__fixed--right n-advance-table__fixed"
         :class="fixedRightColumndClass"
       >
-        <table-header
+        <base-table
+          ref="fixedRightTable"
+          :header-height="headerHeight"
+          :columns="fixedRightColumn"
+          :col-group-stl="colGroup"
+          :sort-indexs="sortIndexs"
+          :selected-filter="selectedFilter"
+          :showing-data="showingData"
+          :current-page-selected="currentPageSelectedLen"
+          :table-stl="tableStl"
+          :row-class-name="rowClassName"
+          :check-boxes="checkBoxes"
+          :disabled-check-box="disabledCheckBox"
+          :tbody-height="tbodyWrapperHeight"
+          :tr-height="trHeight"
+          :loading="loading"
+          :fixed="true"
+          @on-scroll="onBodyScrolll"
+          @on-checkbox-all="onAllCheckboxesClick"
+          @on-sort-change="onSortChange"
+          @on-filter="onFilter"
+        />
+        <!-- <table-header
           ref="fixedRightHeader"
           :height="headerHeight"
           :columns="fixedRightColumn"
@@ -138,7 +204,7 @@
           :tr-height="trHeight"
           :fixed="true"
           @on-scroll="onBodyScrolll"
-        />
+        /> -->
       </div>
 
       <!-- loading -->
@@ -173,18 +239,17 @@ import searchInput from '../searchInput'
 import { noopFn } from '../../../utils/index'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
-import TableHeader from '../header/header'
-import TableBody from '../body/body'
 import { Store, storageMixin } from '../store'
+import BaseTable from '../baseTable/baseTable'
+
 export default {
   store () {
     return new Store()
   },
   name: 'NAdvanceTable',
   components: {
-    TableBody,
     searchInput,
-    TableHeader
+    BaseTable
   },
   mixins: [storageMixin, withapp, themeable],
   props: {
@@ -366,7 +431,6 @@ export default {
         let total = this.pagination.total
         if (this.pagination.custom !== true) {
           total = this.searchData.length
-          console.log('TCL: pageCount -> total', total)
         }
         return Math.ceil(total / this.pagination.limit) || 1
       }
@@ -467,9 +531,6 @@ export default {
     }
   },
   watch: {
-    '$store.state.currentHoverRow' (index, oldIndex) {
-      console.log('TCL: index, oldIndex', index, oldIndex)
-    },
     // allCheckboxesSelect (val) {
     //   this.currentPageAllSelect = val
     // },
@@ -543,18 +604,21 @@ export default {
     this.initData()
   },
   mounted () {
-    this.relTable = this.$refs.tbody.$el.querySelector('table')
+    this.mainTBodyEl = this.$refs.mainTable.$refs.tbody.$el
+    this.relTable = this.mainTBodyEl.querySelector('table')
     // this.relTHead = this.$refs.header.$el.querySelector('table')
     this.wrapper = this.$refs.tableWrapper
     this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
     this.tbodyWidth = this.relTable.offsetWidth
 
-    this.headerRealEl = this.$refs.header.$el.querySelector('thead')
+    this.headerRealEl = this.$refs.mainTable.$refs.header.$el.querySelector(
+      'thead'
+    )
     this.headerHeight = this.headerRealEl.offsetHeight
     this.fixedLeftTBodyEl =
-      this.$refs.fixedLeftTbody && this.$refs.fixedLeftTbody.$el
+      this.$refs.fixedLeftTable && this.$refs.fixedLeftTable.$refs.tbody.$el
     this.fixedRightTBodyEl =
-      this.$refs.fixedRightTbody && this.$refs.fixedRightTbody.$el
+      this.$refs.fixedLeftTable && this.$refs.fixedRightTable.$refs.tbody.$el
     // console.log(this.wrapperWidth, this.tbodyWidth)
 
     this.init()
@@ -567,14 +631,14 @@ export default {
   methods: {
     onBodyScrolll (event) {
       const currentEl = this.$store.state.currentTableEl
-      console.log('TCL: onBodyScrolll -> currentEl', currentEl)
       const scrollEls = [
         this.fixedLeftTBodyEl,
-        this.$refs.tbody.$el,
+        this.mainTBodyEl,
         this.fixedRightTBodyEl
       ]
+
       window.requestAnimationFrame(() => {
-        if (currentEl === this.$refs.tbody.$el) {
+        if (currentEl === this.mainTBodyEl) {
           const left = currentEl.scrollLeft
           this.horizontalScrollLeft = left
           this.headerRealEl.style.transform = `translate3d(-${this.horizontalScrollLeft}px,0,0)`
@@ -681,26 +745,20 @@ export default {
       this.currentSortColumn = null
     },
     computeHorizontalScrollBarHeight () {
-      const tbody = this.$refs.tbody.$el
-      console.log('TCL: computeHorizontalScrollBarHeight -> tbody', tbody)
+      const tbody = this.mainTBodyEl
       this.tbodyWrapperHeight = tbody.clientHeight
       this.tbodyWrapperOffsetHeight = tbody.offsetHeight
       this.scrollBarHorizontalHeight =
         this.tbodyWrapperOffsetHeight - this.tbodyWrapperHeight
-      console.log(
-        'TCL: computeHorizontalScrollBarHeight -> this.scrollBarHorizontalHeight',
-        this.scrollBarHorizontalHeight
-      )
     },
     computeScollBar () {
       this.$nextTick(() => {
         let tr = this.relTable.querySelector('tr')
         this.trHeight = tr ? tr.offsetHeight : 0
-        const tbody = this.$refs.tbody.$el
+        const tbody = this.mainTBodyEl
 
         this.scrollBarWidth = tbody.offsetWidth - tbody.clientWidth
         this.computeHorizontalScrollBarHeight()
-        // console.log('TCL: mounted -> this.scrollBarWidth', this.wrapperWidth, this.tbodyWidth)
       })
     },
     computePageDivideData (data) {
@@ -791,11 +849,6 @@ export default {
       this.remoteTimter = setTimeout(() => {
         const currentFilterColumn = this.getCusomFilterData()
         const currentSortColumn = this.getCusomSorterData()
-        console.log(
-          'TCL: this.remoteTimter -> currentSortColumn',
-          currentSortColumn,
-          this.currentSortColumn
-        )
         const emitData = {
           filter: currentFilterColumn,
           sorter: currentSortColumn,
@@ -887,7 +940,6 @@ export default {
       this.$emit('on-filter-change', this.currentFilterColumn)
     },
     onSortChange (sortIndexs) {
-      console.log('TCL: onSortTypeChange -> sortIndexs', sortIndexs)
       this.sortIndexs = sortIndexs
     }
   }

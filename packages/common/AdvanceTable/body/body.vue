@@ -21,7 +21,7 @@
         v-for="(column, i) in columns"
         :key="i"
         :style="computeCustomWidthStl(column)"
-      >
+      />
     </colgroup>
     <n-tbody>
       <template v-if="showingData.length === 0">
@@ -105,6 +105,10 @@ export default {
       type: Number,
       default: 0
     },
+    minHeight: {
+      type: Number,
+      default: 0
+    },
     height: {
       type: Number,
       default: 0
@@ -165,12 +169,9 @@ export default {
     },
     computeTbodyStl () {
       if (this.fixed && this.height) {
-        console.log(
-          'TCL: computeTbodyStl -> this.tbodyWrapperOffsetHeight',
-          this.height
-        )
         return Object.assign({}, this.tableStl, {
           height: this.height + 'px',
+          minHeight: this.minHeight + 'px',
           marginRight: this.scrollBarVerticalWidth
             ? -this.scrollBarVerticalWidth + 'px'
             : null
@@ -186,13 +187,14 @@ export default {
       const rowsDom = this.$el.querySelectorAll('table tr')
       const oldRowDom = rowsDom[oldIndex]
       const newRowDom = rowsDom[index]
-      console.log('TCL: newRowDom', newRowDom)
-      if (oldRowDom) {
-        removeClass(oldRowDom, hoverClassName)
-      }
-      if (newRowDom) {
-        addClass(newRowDom, hoverClassName)
-      }
+      window.requestAnimationFrame(() => {
+        if (oldRowDom) {
+          removeClass(oldRowDom, hoverClassName)
+        }
+        if (newRowDom) {
+          addClass(newRowDom, hoverClassName)
+        }
+      })
     }
   },
   mounted () {
@@ -203,7 +205,6 @@ export default {
   },
   methods: {
     onMouseEnter (e) {
-      console.log('TCL: onMouseEnter ->  e.current.targe', e.currentTarget)
       this.$store.commit('currentTableEl', e.currentTarget)
     },
     onMouseLeave (e) {
