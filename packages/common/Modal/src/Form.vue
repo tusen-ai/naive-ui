@@ -17,12 +17,12 @@
           'n-nimbus-form-card__header--sticky': sticky
         }"
       >
-        <span class="n-nimbus-form-card__title">{{ title }}</span>
+        <slot name="header">
+          <span class="n-nimbus-form-card__title">{{ title }}</span>
+        </slot>
         <div class="n-nimbus-form-card__right-header">
-          <div>
-            <slot name="header" />
-          </div>
           <div
+            v-if="closable"
             class="n-nimbus-form-card__deactivator"
             @click="deactivate"
           />
@@ -67,15 +67,15 @@ export default {
     },
     title: {
       type: String,
-      required: true
-    },
-    deactivate: {
-      type: Function,
-      required: true
+      default: 'Form'
     },
     sticky: {
       type: Boolean,
       default: false
+    },
+    closable: {
+      type: Boolean,
+      default: true
     }
   },
   mounted () {
@@ -136,6 +136,9 @@ export default {
           }, timeout)
         }
       }
+    },
+    deactivate () {
+      this.$emit('deactivate')
     }
   }
 }

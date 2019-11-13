@@ -15,10 +15,6 @@
     &:not(.n-modal-content--active) {
       visibility: hidden;
     }
-    .n-modal-content-slot {
-      background:　$--modal-background-color;
-      color: $--modal-text-color;
-    }
   }
 }
 

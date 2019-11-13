@@ -28,13 +28,30 @@ export default {
       type: Boolean,
       default: true
     },
-    preSet: {
+    preset: {
       type: String,
       default: ''
     },
     title: {
       type: String,
       default: 'Title'
+    },
+    closable: {
+      type: Boolean,
+      default: true
+    },
+    // for confirm
+    cancelText: {
+      type: String,
+      default: 'Cancel'
+    },
+    submitText: {
+      type: String,
+      default: 'Confirm'
+    },
+    content: {
+      type: String,
+      default: 'content'
     }
   },
   data () {
@@ -47,12 +64,22 @@ export default {
       return this.value
     },
     props () {
-      let obj = { active: this.value, activateEvent: this.activateEvent, preSet: this.preSet }
-      switch (this.preSet) {
-        case 'confirm':
-          obj.title = this.title
-          break
+      let obj = {
+        active: this.value,
+        activateEvent: this.activateEvent,
+        preset: this.preset,
+        title: this.title,
+        closable: this.closable,
+        cancelText: this.cancelText,
+        submitText: this.submitText,
+        content: this.content
       }
+      // switch (this.preset) {
+      //   case 'confirm':
+      // obj.title = this.title
+      //     break
+      // }
+
       return obj
     }
   },
@@ -97,7 +124,25 @@ export default {
               class: {
                 [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme
               },
+              // deactivate: this.deactivate,
               on: {
+                'deactivate': () => {
+                  this.deactivate()
+                },
+                'cancel': () => {
+                  if (this.$listeners.cancel) {
+                    this.$emit('cancel')
+                  } else {
+                    this.deactivate()
+                  }
+                },
+                'submit': () => {
+                  if (this.$listeners.cancel) {
+                    this.$emit('submit')
+                  } else {
+                    this.deactivate()
+                  }
+                },
                 'after-leave': () => {
                   this.$emit('after-hide')
                 },
@@ -107,7 +152,6 @@ export default {
                 mousedown: (e) => {
                   this.mousedownTarget = e.target
                 },
-                deactivate: this.deactivate,
                 mouseup: (e) => {
                   const slotDOM = this.$refs.content.slotDOM()
                   const scollbars = this.$refs.content.$el.querySelectorAll('.n-scrollbar-rail__scrollbar')

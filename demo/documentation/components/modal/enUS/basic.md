@@ -6,10 +6,10 @@
 >
   Start Me up
 </n-button>
-<n-modal v-model="isActive"  title="lalala">
+<n-modal v-model="isActive" preset="confirm" title="lalala" :closable="false" cancel-text="test">
    <!-- <template v-slot:footer> -->
      <div slot="header">111</div>
-     <div slot="content">mamama</div>
+     <!-- <div slot="content">mamama</div> -->
      <!-- <div slot="footer">test11111</div> -->
    <!-- </template> -->
   <div style="background: rgb(46, 52, 68); padding: 24px; border-radius: 8px; color: white;">

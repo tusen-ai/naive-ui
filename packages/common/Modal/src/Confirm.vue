@@ -16,10 +16,12 @@
         >
           <component :is="iconType.type" />
         </n-icon>
-        {{ title }}
-        <slot name="header" />
+        <slot name="header">
+          {{ title }}
+        </slot>
       </span>
       <n-icon
+        v-if="closable"
         class="n-confirm-title__close-mark"
         type="md-close"
         size="22"
@@ -44,7 +46,7 @@
           size="small"
           @click="handleNegativeClick"
         >
-          {{ negativeText }}
+          {{ cancelText }}
         </n-button>
         <n-button
           :theme="synthesizedTheme"
@@ -56,7 +58,7 @@
           auto-text-color
           @click="handlePositiveClick"
         >
-          {{ positiveText }}
+          {{ submitText }}
         </n-button>
       </slot>
     </div>
@@ -88,26 +90,33 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'confirm'
+      default: 'Confirm'
+    },
+    closable: {
+      type: Boolean,
+      default: true
+    },
+    cancelText: {
+      type: String,
+      default: 'Cancel'
+    },
+    submitText: {
+      type: String,
+      default: 'Confirm'
+    },
+    content: {
+      type: String,
+      default: 'content'
     }
   },
   data () {
     return {
       maskClosable: true,
-      content: 'content',
-      positiveText: 'Confirm',
-      negativeText: 'Cancel',
+      // content: 'content',
+      // positiveText: 'Confirm',
+      // negativeText: 'Cancel',
       type: 'confirm',
       loading: false,
-      onPositiveClick: () => {
-        this.active = false
-      },
-      onNegativeClick: () => {
-        this.active = false
-      },
-      onCloseClick: () => {
-        this.active = false
-      },
       instances: null
     }
   },
@@ -123,16 +132,13 @@ export default {
   },
   methods: {
     handlePositiveClick () {
-      this.onPositiveClick(this.hide)
+      this.$emit('submit')
     },
     handleNegativeClick () {
-      this.onNegativeClick(this.hide)
+      this.$emit('cancel')
     },
     handleCloseClick () {
-      this.onCloseClick(this.hide)
-    },
-    hide () {
-      this.active = false
+      this.$emit('deactivate')
     }
   }
 }

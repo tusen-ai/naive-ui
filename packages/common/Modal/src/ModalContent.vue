@@ -20,11 +20,28 @@
           style="margin: auto;"
           class="n-modal-content-slot"
         >
-          <n-confirm v-if="preSet==='confirm'" ref="confirm" :deactivate="()=>{this.$emit('deactivate')}">
+          <n-confirm
+            v-if="preset==='confirm'"
+            ref="confirm"
+            :title="title"
+            :closable="closable"
+            :cancel-text="cancelText"
+            :submit-text="submitText"
+            :content="content"
+            @deactivate="deactivate"
+            @cancel="cancel"
+            @submit="submit"
+          >
+            <slot slot="header" name="header" />
             <slot slot="content" name="content" />
             <slot slot="footer" name="footer" />
           </n-confirm>
-          <n-form v-else-if="preSet==='form'" title="test" :deactivate="()=>{this.$emit('deactivate')}">
+          <n-form
+            v-else-if="preset==='form'"
+            :title="title"
+            :closable="closable"
+            @deactivate="deactivate"
+          >
             <slot slot="header" name="header" />
             <slot slot="content" name="content" />
             <slot slot="footer" name="footer" />
@@ -70,13 +87,30 @@ export default {
       },
       default: null
     },
-    preSet: {
+    preset: {
       type: String,
       default: ''
     },
     title: {
       type: String,
       default: 'title'
+    },
+    closable: {
+      type: Boolean,
+      default: true
+    },
+    // for confirm
+    cancelText: {
+      type: String,
+      default: 'Cancel'
+    },
+    submitText: {
+      type: String,
+      default: 'Confirm'
+    },
+    content: {
+      type: String,
+      default: 'content'
     }
   },
   data () {
@@ -183,6 +217,15 @@ export default {
     handleAfterLeave () {
       this.styleActive = false
       this.$emit('after-leave')
+    },
+    deactivate () {
+      this.$emit('deactivate')
+    },
+    cancel () {
+      this.$emit('cancel')
+    },
+    submit () {
+      this.$emit('submit')
     }
   }
 }
