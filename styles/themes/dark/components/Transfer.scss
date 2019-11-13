@@ -1,0 +1,29 @@
+@mixin setup-dark-transfer {
+  $--transfer-panel-background-color: (
+    'default': rgba(255, 255, 255, .1)
+  ) !global;
+  $--transfer-panel-header-background-color: (
+    'default': rgba(255, 255, 255, .1)
+  ) !global;
+  $--transfer-panel-header-text-color: (
+    'default': $--n-text-color
+  ) !global;
+  $--transfer-panel-header-label-text-color: (
+    'default': $--n-secondary-text-color,
+    'disabled': $--n-disabled-text-color
+  ) !global;
+  $--transfer-gap-button-background-color: (
+    'default': rgba(255, 255, 255, 0.3),
+    'disabled': rgba(255, 255, 255, .15),
+    'hover': $--primary-6,
+    'active': $--primary-7
+  ) !global;
+  $--transfer-item-text-color: (
+    'default': $--n-secondary-text-color,
+    'disabled': $--n-disabled-text-color
+  ) !global;
+  $--tranfer-item-lightbar-background-color: (
+    'default': change-color($--n-primary-color, $alpha: .3)
+  ) !global;
+  $--transfer-panel-border-color: transparent !global;
+}

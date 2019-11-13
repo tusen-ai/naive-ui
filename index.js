@@ -35,7 +35,7 @@ import Navbar from './packages/nimbus/Navbar'
 import ServiceLayout from './packages/nimbus/ServiceLayout'
 import NimbusFormCard from './packages/nimbus/FormCard'
 import NimbusConfirmCard from './packages/deprecated/ConfirmCard'
-import NimbusIcon from './packages/nimbus/Icon'
+import NimbusIcon from './packages/deprecated/Icon'
 import Scrollbar from './packages/common/Scrollbar'
 import Steps from './packages/common/Steps'
 import Confirm from './packages/common/Confirm'
@@ -62,6 +62,9 @@ import Grid from './packages/common/Grid'
 import Affix from './packages/common/Affix'
 import Statistic from './packages/common/Statistic'
 import Breadcrumb from './packages/common/Breadcrumb'
+import ConfigConsumer from './packages/common/ConfigConsumer'
+import Descriptions from './packages/common/Descriptions'
+import List from './packages/common/List'
 
 function install (Vue) {
   Card.install(Vue)
@@ -128,6 +131,9 @@ function install (Vue) {
   Affix.install(Vue)
   Statistic.install(Vue)
   Breadcrumb.install(Vue)
+  ConfigConsumer.install(Vue)
+  Descriptions.install(Vue)
+  List.install(Vue)
 }
 
 export default {

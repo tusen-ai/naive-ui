@@ -25,6 +25,7 @@ $layout-nav-height: 64px;
       height: $layout-nav-height;
     }
     @include e(body) {
+      font-size: 14px;
       position: absolute;
       left: 272px;
       right: 0px;
@@ -96,9 +97,7 @@ $layout-nav-height: 64px;
           @include e(icon) {
             position: absolute;
             left: 22px;
-            i::before {
-              color: #626778FF;
-            }
+            fill: $--n-text-color;
           }
         }
         @include b(nimbus-service-layout-drawer-item) {

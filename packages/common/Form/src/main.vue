@@ -4,6 +4,7 @@
     :class="{
       'n-form--inline': inline
     }"
+    @keydown.enter="handleKeyDownEnter"
   >
     <slot />
   </form>
@@ -27,7 +28,11 @@ export default {
       type: Number,
       default: null
     },
-    labelPosition: {
+    labelAlign: {
+      type: String,
+      default: 'left'
+    },
+    labelPlacement: {
       type: String,
       default: 'top'
     },
@@ -74,12 +79,7 @@ export default {
         const formItemInstances = this.items[key]
         for (const formItemInstance of formItemInstances) {
           if (shouldFieldBeValidated(formItemInstance.path)) {
-            formItemInstance.validate(null, (errors, field) => {
-              if (errors) {
-                valid = false
-              }
-              fields = Object.assign({}, fields, field)
-            })
+            formItemInstance.validate()
           }
         }
       }
@@ -96,6 +96,11 @@ export default {
         }
       }
       this.value = this.initialValue
+    },
+    handleKeyDownEnter (e) {
+      if (e.target.tagName === 'INPUT' && e.target.getAttribute('type')) {
+        e.preventDefault()
+      }
     }
   }
 }

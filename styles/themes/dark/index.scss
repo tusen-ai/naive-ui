@@ -40,6 +40,7 @@
 @import "components/Breadcrumb.scss";
 @import "components/NimbusForm.scss";
 @import "components/Modal.scss";
+@import "components/Transfer.scss";
 
 @mixin setup-dark-theme() {
   @include setup-dark-colors();
@@ -107,4 +108,5 @@
   @include setup-dark-breadcrumb;
   @include setup-dark-nimbus-form;
   @include setup-dark-modal;
+  @include setup-dark-transfer;
 }

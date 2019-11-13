@@ -14,9 +14,6 @@
   >
     <div
       class="n-checkbox-box"
-      :class="{
-        'simulate-hollow-out-fill': !disabled
-      }"
       @click="handleClick"
     >
       <check-mark class="n-checkbox-box__check-mark" />
@@ -35,7 +32,7 @@
 <script>
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
-import hollowoutable from '../../../mixins/hollowoutable'
+import asformitem from '../../../mixins/asformitem'
 import CheckMark from './CheckMark'
 import LineMark from './LineMark'
 import collectable from '../../../mixins/collectable'
@@ -54,7 +51,7 @@ export default {
   mixins: [
     withapp,
     themeable,
-    hollowoutable,
+    asformitem(),
     collectable('NCheckboxGroup', 'collectedCheckboxValues')
   ],
   model: {

@@ -1,8 +1,12 @@
 <script>
+import asformitem from '../../../mixins/asformitem'
+
 export default {
   name: 'NCheckboxGroup',
+  mixins: [ asformitem() ],
   provide () {
     return {
+      NFormItem: null,
       NCheckboxGroup: this
     }
   },
@@ -15,6 +19,11 @@ export default {
   data () {
     return {
       collectedCheckboxValues: []
+    }
+  },
+  watch: {
+    value (value, oldValue) {
+      this.$emit('change', value, oldValue)
     }
   },
   methods: {

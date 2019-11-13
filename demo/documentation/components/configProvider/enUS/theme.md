@@ -1,10 +1,10 @@
 # Theme
 Set theme of inner components of app.
 ```html
-<n-app :theme="theme">
+<n-config-provider :theme="theme">
   <n-button @click="theme = 'dark'">Dark</n-button>
   <n-button @click="theme = 'light'">Light</n-button>
-</n-app>
+</n-config-provider>
 ```
 ```js
 export default {

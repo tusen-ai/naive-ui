@@ -1,11 +1,16 @@
 <template>
-  <div class="n-transfer">
+  <div
+    class="n-transfer"
+    :class="{
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+    }"
+  >
     <div class="n-transfer-list">
       <div class="n-transfer-list-header">
         <div class="n-transfer-list-header__checkbox">
           <div class="n-transfer-list-light-bar" />
           <n-checkbox
-            :value="sourceHeaderCheckboxChecked"
+            :checked="sourceHeaderCheckboxChecked"
             :indeterminate="sourceHeaderCheckboxIndeterminate"
             :disabled="sourceHeaderCheckboxDisabled"
             @input="handleSourceHeaderCheckboxInput"
@@ -74,7 +79,7 @@
       <div class="n-transfer-list-header">
         <div class="n-transfer-list-header__checkbox">
           <n-checkbox
-            :value="targetHeaderCheckboxChecked"
+            :checked="targetHeaderCheckboxChecked"
             :indeterminate="targetHeaderCheckboxIndeterminate"
             :disabled="targetHeaderCheckboxDisabled"
             @input="handleTargetHeaderCheckboxInput"
@@ -135,6 +140,9 @@ import NTransferButton from './TransferButton'
 import cloneDeep from 'lodash/cloneDeep'
 import withlightbar from '../../../mixins/withlightbar'
 import withsecondlightbar from '../../../mixins/withsecondlightbar'
+import asformitem from '../../../mixins/asformitem'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 
 export default {
   name: 'NTransfer',
@@ -144,7 +152,7 @@ export default {
     NTransferListItem,
     NTransferButton
   },
-  mixins: [withlightbar, withsecondlightbar],
+  mixins: [withapp, themeable, asformitem(), withlightbar, withsecondlightbar],
   props: {
     value: {
       type: Array,
@@ -244,6 +252,9 @@ export default {
       }).then(() => {
         this.init = false
       })
+    },
+    value (value, oldValue) {
+      this.$emit('change', value, oldValue)
     }
   },
   mounted () {
@@ -259,7 +270,6 @@ export default {
     emitInputEvent (value) {
       const newValue = this.cleanValue(value)
       this.$emit('input', newValue)
-      this.$emit('change', newValue)
     },
     cleanValue (value) {
       if (Array.isArray(value)) {

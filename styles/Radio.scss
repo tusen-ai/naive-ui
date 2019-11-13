@@ -92,7 +92,9 @@
     display: inline-block;
     white-space: nowrap;
     height: 28px;
+    line-height: 28px;
     @include b(radio-button) {
+      vertical-align: bottom;
       color: map-get($--radio-button-label-color, 'default');
       outline: none;
       position: relative;

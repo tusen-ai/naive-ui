@@ -2,12 +2,14 @@
   $--input-number-border-color: (
     'default': $--n-border-color,
     'hover': $--n-primary-color,
-    'focus': $--n-primary-color
+    'focus': $--n-primary-color,
+    'error': $--error-6
   )!global;
   $--input-number-background-color: (
     'default': rgb(255, 255, 255),
     'disabled': $--neutral-8,
-    'focus': rgb(255, 255, 255)
+    'focus': rgb(255, 255, 255),
+    'error-focus': rgb(255, 255, 255)
   ) !global;
   $--input-number-text-color: (
     'default': $--n-secondary-text-color,
@@ -30,6 +32,9 @@
     "default": inset 0 0 0 1px $--n-border-color,
     "hover": inset 0 0 0 1px $--primary-5,
     "focus": (inset 0 0 0 1px $--primary-5, 0 0 0 2px change-color($--primary-5, $alpha: .3)),
+    "error-default": inset 0 0 0 1px $--error-5,
+    "error-hover": inset 0 0 0 1px $--error-5,
+    "error-focus": (inset 0 0 0 1px $--error-5, 0 0 0 2px change-color($--error-5, $alpha: .3)),
     "disabled": inset 0 0 0 1px $--n-border-color
   ) !global;
 }

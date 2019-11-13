@@ -15,7 +15,7 @@
       <div class="n-transfer-list-item__checkbox">
         <n-checkbox
           :disabled="disabled"
-          :value="checked"
+          :checked="checked"
           @input="handleInput"
         />
       </div>

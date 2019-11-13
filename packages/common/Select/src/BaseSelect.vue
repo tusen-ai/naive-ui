@@ -376,7 +376,11 @@ export default {
       if (!this.multiple && this.filterable) {
         this.closeMenu()
       }
-      this.$emit('input', null)
+      if (this.multiple) {
+        this.$emit('input', [])
+      } else {
+        this.$emit('input', null)
+      }
     },
     /**
      * scroll events on menu

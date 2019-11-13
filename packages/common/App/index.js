@@ -1,8 +1,9 @@
 /* istanbul ignore file */
-import Scaffold from './src/main.vue'
+import ConfigProvider from './src/main.vue'
 
-Scaffold.install = function (Vue) {
-  Vue.component(Scaffold.name, Scaffold)
+ConfigProvider.install = function (Vue) {
+  Vue.component(ConfigProvider.name, ConfigProvider)
+  Vue.component('NApp', ConfigProvider)
 }
 
-export default Scaffold
+export default ConfigProvider

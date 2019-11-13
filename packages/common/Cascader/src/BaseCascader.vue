@@ -87,6 +87,7 @@ import themeable from '../../../mixins/themeable'
 import clickoutside from '../../../directives/clickoutside'
 import CascaderMenu from './CascaderMenu'
 import { getType, traverseWithCallback } from './utils'
+import asformitem from '../../../mixins/asformitem'
 
 import {
   rootedOptions,
@@ -107,7 +108,7 @@ export default {
   directives: {
     clickoutside
   },
-  mixins: [withapp, themeable, detachable, toggleable, placeable],
+  mixins: [withapp, themeable, detachable, toggleable, placeable, asformitem()],
   props: {
     options: {
       type: Array,

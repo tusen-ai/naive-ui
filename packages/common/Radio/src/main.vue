@@ -23,22 +23,19 @@
 </template>
 
 <script>
-import Emitter from '../../../mixins/emitter'
+import asformitem from '../../../mixins/asformitem'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 
 export default {
   name: 'NRadio',
-  mixins: [ withapp, themeable, Emitter ],
+  mixins: [ withapp, themeable, asformitem() ],
   model: {
     prop: 'privateValue',
     event: 'input'
   },
   inject: {
     NRadioGroup: {
-      default: null
-    },
-    NFormItem: {
       default: null
     }
   },
@@ -65,6 +62,11 @@ export default {
       }
     }
   },
+  watch: {
+    value (value, oldValue) {
+      this.$emit('change', value, oldValue)
+    }
+  },
   methods: {
     handleKeyUpEnter () {
       this.toggle()
@@ -77,9 +79,6 @@ export default {
       if (this.disabled) return
       if (this.privateValue !== this.value) {
         this.emitValue('input', this.value)
-        if (this.NFormItem) {
-          this.dispatch('NFormItem', 'form-item-change', this.value)
-        }
       }
     },
     emitValue () {

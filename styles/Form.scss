@@ -21,7 +21,18 @@
 @include themes-mixin {
   @include b(form-item) {
     width: 100%;
-    padding-bottom: 24px;
+    @include m(right-label-aligned) {
+      @include b(form-item-label) {
+        text-align: right;
+        &::before {
+          content: '* ';
+          color: $--error-6;
+        }
+        &::after {
+          display: none;
+        }
+      }
+    }
     @include m(top-labelled) {
       margin-right: 18px;
       @include m(no-label) {
@@ -32,6 +43,22 @@
         width: 100%;
         padding-bottom: 8px;
         padding-left: 2px;
+      }
+    }
+    @include m(left-labelled) {
+      display: flex;
+      flex-wrap: nowrap;
+      @include b(form-item-label) {
+        line-height: 40px;
+        box-sizing: border-box;
+        padding-right: 12px;
+        white-space: nowrap;
+        height: 40px;
+        flex-shrink: 0;
+        flex-grow: 0;
+      }
+      @include b(form-item-control) {
+        flex-grow: 1;
       }
     }
     @include m(has-feedback) {
@@ -57,22 +84,26 @@
       }
     }
     @include b(form-item-blank) {
-      line-height: 34px;
+      padding-top: 3px;
+      padding-bottom: 3px;
       min-height: 34px;
       display: flex;
       align-items: center;
       position: relative;
     }
-    @include b(form-item-feedback) {
+    @include b(form-item-feedback-wrapper) {
       padding-left: 2px;
-      padding-top: 4px;
+      padding-top: 0px;
       box-sizing: border-box;
-      min-height: 24px;
+      min-height: 20px;
       color: $--error-6;
       font-size: 14px;
       transform-origin: top left;
+      line-height: 1.25;
       transition: color .3s $default-cubic-bezier;
-      @include fade-down-transition($from-offset: -3px);
+      @include b(form-item-feedback) {
+        @include fade-down-transition($from-offset: -3px);
+      }
     } 
   }
 }

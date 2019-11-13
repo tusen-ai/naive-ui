@@ -1,7 +1,7 @@
 # Namespace
 Some parts of component are detached to `document.body`. If you want to add a class to those detached elements, use `namespace` prop of app. Open devtools to see detached content.
 ```html
-<n-app :namespace="ns">
+<n-config-provider :namespace="ns">
   <n-button
     @click="isActive = true"
   >
@@ -48,7 +48,7 @@ Some parts of component are detached to `document.body`. If you want to add a cl
       </template>
     </n-nimbus-form-card>
   </n-modal>
-</n-app>
+</n-config-provider>
 ```
 ```js
 export default {

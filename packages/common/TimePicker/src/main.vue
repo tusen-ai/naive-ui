@@ -4,9 +4,13 @@
       ref="activator"
       v-model="displayTimeString"
       class="n-date-picker-panel__time-input"
+      :force-focus="active"
       placeholder="Select time"
+      lazy-focus
+      @focus="handleTimeInputFocus"
       @click="handleActivatorClick"
       @input="handleTimeInput"
+      @wrapper-blur-to-outside="handleTimeInputWrapperBlur"
       @blur="handleTimeInputBlur"
     />
     <div
@@ -24,7 +28,9 @@
         <transition name="n-time-picker--transition">
           <div
             v-if="active"
+            ref="panel"
             v-clickoutside="handleClickOutside"
+            tabindex="0"
             class="n-time-picker-selector"
             :class="{
               [`n-${synthesizedTheme}-theme`]: synthesizedTheme
@@ -138,6 +144,7 @@ import clickoutside from '../../../directives/clickoutside'
 import zindexable from '../../../mixins/zindexable'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import asformitem from '../../../mixins/asformitem'
 import isValid from 'date-fns/isValid'
 import startOfSecond from 'date-fns/startOfSecond'
 import startOfMinute from 'date-fns/startOfMinute'
@@ -194,7 +201,7 @@ export default {
   directives: {
     clickoutside
   },
-  mixins: [detachable, placeable, zindexable, withapp, themeable],
+  mixins: [detachable, placeable, zindexable, withapp, themeable, asformitem()],
   props: {
     placement: {
       type: String,
@@ -243,9 +250,21 @@ export default {
     computedTime (time) {
       this.refreshTimeString(time)
       this.$nextTick().then(this.scrollTimer)
+    },
+    value (value, oldValue) {
+      this.$emit('change', value, oldValue)
     }
   },
   methods: {
+    afterBlur (e) {
+      if (this.active) {
+        window.setTimeout(() => {
+          if (!(this.$refs.panel && this.$refs.panel.contains(document.activeElement))) {
+            this.closeTimeSelector()
+          }
+        }, 0)
+      }
+    },
     justifyValueAfterChangeDisplayTimeString () {
       const time = strictParse(this.displayTimeString, this.format, new Date())
       if (isValid(time)) {
@@ -287,8 +306,20 @@ export default {
       if (time === null) this.displayTimeString = ''
       else this.displayTimeString = format(time, this.format)
     },
+    handleTimeInputWrapperBlur () {
+      if (!this.active) {
+        this.$emit('blur', this.value)
+      }
+    },
+    handleTimeInputFocus () {
+      if (this.disabled) return
+      if (!this.active) {
+        this.openTimeSelector()
+      }
+    },
     handleTimeInputBlur () {
       this.refreshTimeString()
+      this.afterBlur()
     },
     scrollTimer () {
       if (this.$refs.hours && this.$refs.hours.$el) {
@@ -325,8 +356,13 @@ export default {
         this.closeTimeSelector()
       }
     },
-    closeTimeSelector () {
+    closeTimeSelector (returnFocus = false) {
       this.active = false
+      if (returnFocus) {
+
+      } else {
+        this.$emit('blur', this.value)
+      }
     },
     handleTimeInput () {
       this.justifyValueAfterChangeDisplayTimeString()
@@ -337,7 +373,7 @@ export default {
     },
     handleConfirmClick () {
       this.refreshTimeString()
-      this.active = false
+      this.closeTimeSelector()
     }
   }
 }

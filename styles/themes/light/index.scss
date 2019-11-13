@@ -40,6 +40,7 @@
 @import "components/Breadcrumb.scss";
 @import "components/NimbusForm.scss";
 @import "components/Modal.scss";
+@import "components/Transfer.scss";
 
 @mixin setup-light-theme() {
   @include setup-light-colors();
@@ -55,6 +56,7 @@
   $--n-divider-color: $--neutral-7 !global;
   $--n-border-color: $--neutral-6 !global;
 
+  $--n-table-header-color: $--neutral-8 !global;
   $--n-secondary-text-color: $--neutral-3 !global;
   $--n-text-color: $--neutral-2 !global;
   $--n-disabled-text-color: $--neutral-5 !global;
@@ -103,4 +105,5 @@
   @include setup-light-breadcrumb;
   @include setup-light-nimbus-form;
   @include setup-light-modal;
+  @include setup-light-transfer;
 }

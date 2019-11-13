@@ -31,9 +31,7 @@ import popover from './documentation/components/popover'
 import alert from './documentation/components/alert'
 import datePicker from './documentation/components/datePicker'
 import inputNumber from './documentation/components/inputNumber'
-import nimbusIcon from './documentation/components/nimbusIcon'
 import radio from './documentation/components/radio'
-import formDemo from './documentation/components/formDemo'
 import form from './documentation/components/form'
 import tabs from './documentation/components/tabs'
 import timePicker from './documentation/components/timePicker'
@@ -55,7 +53,7 @@ import divider from './documentation/components/divider'
 import popconfirm from './documentation/components/popconfirm'
 import anchor from './documentation/components/anchor'
 import popselect from './documentation/components/popselect'
-import app from './documentation/components/app'
+import configProvider from './documentation/components/configProvider'
 import advancedTable from './documentation/components/advancedTable'
 import transfer from './documentation/components/transfer'
 import spin from './documentation/components/spin'
@@ -68,6 +66,9 @@ import affix from './documentation/components/affix'
 import statistic from './documentation/components/statistic'
 import grid from './documentation/components/grid'
 import breadcrumb from './documentation/components/breadcrumb'
+import configConsumer from './documentation/components/configConsumer'
+import descriptions from './documentation/components/descriptions'
+import list from './documentation/components/list'
 
 import demo from './demo'
 import ComponentDemo from './utils/ComponentDemo'
@@ -154,10 +155,8 @@ const routes = [
       { path: '/n-alert', component: alert },
       { path: '/n-date-picker', component: datePicker },
       { path: '/n-input-number', component: inputNumber },
-      { path: '/n-nimbus-icon', component: nimbusIcon },
       { path: '/n-radio', component: radio },
-      { path: '/n-form', component: formDemo },
-      { path: '/n-new-form', component: form},
+      { path: '/n-form', component: form},
       { path: '/n-tabs', component: tabs },
       { path: '/n-time-picker', component: timePicker },
       { path: '/n-confirm', component: confirm },
@@ -178,7 +177,7 @@ const routes = [
       { path: '/n-anchor', component: anchor },
       { path: '/n-dropdown', component: dropdown },
       { path: '/n-popselect', component: popselect },
-      { path: '/n-app', component: app },
+      { path: '/n-config-provider', component: configProvider },
       { path: '/n-cancel-mark-debug', component: cancelMarkDebug },
       { path: '/n-transfer', component: transfer },
       { path: '/n-spin', component: spin },
@@ -191,7 +190,10 @@ const routes = [
       { path: '/n-affix', component: affix },
       { path: '/n-statistic', component: statistic },
       { path: '/n-grid', component: grid },
-      { path: '/n-breadcrumb', component: breadcrumb }
+      { path: '/n-breadcrumb', component: breadcrumb },
+      { path: '/n-config-consumer', component: configConsumer },
+      { path: '/n-descriptions', component: descriptions},
+      { path: '/n-list', component: list}
     ])
   },
   {
