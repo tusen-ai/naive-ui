@@ -51,6 +51,7 @@ import Dropdown from './packages/common/Dropdown'
 import Popselect from './packages/common/Popselect'
 import App from './packages/common/App'
 import CancelMark from './packages/base/CancelMark'
+import SelectMenu from './packages/base/SelectMenu'
 import Transfer from './packages/common/Transfer'
 import Spin from './packages/common/Spin'
 import Drawer from './packages/common/Drawer'
@@ -134,6 +135,7 @@ function install (Vue) {
   ConfigConsumer.install(Vue)
   Descriptions.install(Vue)
   List.install(Vue)
+  SelectMenu.install(Vue)
 }
 
 export default {

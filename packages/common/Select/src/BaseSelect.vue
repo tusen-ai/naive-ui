@@ -16,6 +16,9 @@
     @keyup.space="handleKeyUpSpace"
     @keyup.esc="handleKeyUpEsc"
   >
+    <n-base-select-option-collector v-if="useSlot">
+      <slot />
+    </n-base-select-option-collector>
     <n-base-picker
       ref="activator"
       class="n-select-picker"
@@ -58,19 +61,23 @@
             class="n-select-menu"
             :theme="synthesizedTheme"
             :pattern="pattern"
-            :options="options"
+            :options="filteredOptions"
             :multiple="multiple"
             :size="size"
-            :linked-options="linkedOptions"
+            :remote="remote"
             :loading="loading"
             :no-data-content="noDataContent"
             :not-found-content="notFoundContent"
             :emit-option="emitOption"
             :filterable="filterable"
             :is-selected="isSelected"
+            :pattern-matched="patternMatched"
+            :use-slot="useSlot"
             @menu-toggle-option="handleToggleOption"
             @menu-scroll="handleMenuScroll"
-          />
+          >
+            <n-base-select-render-options v-if="useSlot" :options="filteredOptions" />
+          </n-base-select-menu>
         </transition>
       </div>
     </div>
@@ -83,9 +90,12 @@ import placeable from '../../../mixins/placeable'
 import toggleable from '../../../mixins/toggleable'
 import zindexable from '../../../mixins/zindexable'
 import clickoutside from '../../../directives/clickoutside'
-import NBaseSelectMenu from '../../../base/SelectMenu'
+import {
+  NBaseSelectMenu,
+  NBaseSelectOptionCollector,
+  NBaseSelectRenderOptions
+} from '../../../base/SelectMenu'
 import NBasePicker from '../../../base/Picker'
-import linkedOptions from '../../../utils/data/linkedOptions'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import asformitem from '../../../mixins/asformitem'
@@ -94,7 +104,9 @@ export default {
   name: 'NBaseSelect',
   components: {
     NBaseSelectMenu,
-    NBasePicker
+    NBasePicker,
+    NBaseSelectOptionCollector,
+    NBaseSelectRenderOptions
   },
   directives: {
     clickoutside
@@ -105,7 +117,16 @@ export default {
       default: null
     }
   },
+  provide () {
+    return {
+      NSelect: this
+    }
+  },
   props: {
+    useSlot: {
+      type: Boolean,
+      default: false
+    },
     clearable: {
       type: Boolean,
       default: false
@@ -170,22 +191,28 @@ export default {
     return {
       scrolling: false,
       pattern: '',
-      memorizedValueOptionMap: new Map()
+      memorizedValueOptionMap: new Map(),
+      collectedOptions: []
     }
   },
   computed: {
+    synthesizedOptions () {
+      console.log('useSlot', this.useSlot)
+      if (this.useSlot) {
+        return this.collectedOptions
+      } else {
+        return this.options
+      }
+    },
     filteredOptions () {
       if (this.remote) {
-        return this.options
-      } else if (!this.filterable || !this.pattern.trim().length) return this.options
-      return this.options.filter(option => this.patternMatched(option.label))
-    },
-    linkedOptions () {
-      return linkedOptions(this.filteredOptions)
+        return this.synthesizedOptions
+      } else if (!this.filterable || !this.pattern.trim().length) return this.synthesizedOptions
+      return this.synthesizedOptions.filter(option => this.patternMatched(option.label))
     },
     valueOptionMap () {
       const valueToOption = new Map()
-      this.options.forEach(option => valueToOption.set(option.value, option))
+      this.synthesizedOptions.forEach(option => valueToOption.set(option.value, option))
       return valueToOption
     },
     selectedOptions () {
@@ -202,7 +229,7 @@ export default {
     }
   },
   watch: {
-    options () {
+    synthesizedOptions () {
       this.$nextTick().then(this.updateMemorizedOptions)
     },
     filteredOptions () {
@@ -264,7 +291,7 @@ export default {
     },
     handlePickerBlur () {
       this.$emit('blur', this.value)
-      this.closeMenu()
+      // this.closeMenu()
     },
     handleClickOutsideMenu (e) {
       if (this.active) {
@@ -336,7 +363,7 @@ export default {
         }
         let newValue = []
         if (Array.isArray(this.value)) {
-          const optionValues = new Set(this.options.map(option => option.value))
+          const optionValues = new Set(this.synthesizedOptions.map(option => option.value))
           newValue = this.value.filter(value => optionValues.has(value) || this.memorizedValueOptionMap.has(value))
         }
         const index = newValue.findIndex(value => value === option.value)

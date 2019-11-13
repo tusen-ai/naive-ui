@@ -7,12 +7,39 @@
   :options="options"
 />
 <n-select
+  v-model="selectedValue"
+  filterable
+  placeholder="Please Select Type"
+>
+  <n-select-option 
+    v-for="option in options"
+    :key="options.value"
+    :label="option.label"
+    :value="option.value"
+    :disabled="option.disabled"
+  />
+</n-select>
+<n-select
   v-model="selectedValues"
   multiple
   filterable
   placeholder="Please Select Type"
   :options="options"
 />
+<n-select
+  v-model="selectedValues"
+  multiple
+  filterable
+  placeholder="Please Select Type"
+>
+  <n-select-option 
+    v-for="option in options"
+    :key="options.value"
+    :label="option.label"
+    :value="option.value"
+    :disabled="option.disabled"
+  />
+</n-select>
 ```
 ```js
 export default {

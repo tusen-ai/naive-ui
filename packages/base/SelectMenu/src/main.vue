@@ -26,23 +26,27 @@
           />
         </transition>
         <template v-if="!loading">
-          <div
-            v-for="option in linkedOptions"
-            ref="menuOptions"
-            :key="option.value"
-            :data-id="option.id"
-            class="n-base-select-menu__item"
-            :class="{
-              'n-base-select-menu__item--selected':
-                isSelected(option),
-              'n-base-select-menu__item--disabled':
-                option.disabled
-            }"
-            @click="handleOptionClick($event, option)"
-            @mouseenter="handleOptionMouseEnter($event, option)"
-          >
-            {{ option.label }}
-          </div>
+          <template v-if="!useSlot">
+            <div
+              v-for="option in linkedOptions"
+              :key="option.value"
+              :data-id="option.id"
+              class="n-base-select-menu__item"
+              :class="{
+                'n-base-select-menu__item--selected':
+                  isSelected(option),
+                'n-base-select-menu__item--disabled':
+                  option.disabled
+              }"
+              @click="handleOptionClick($event, option)"
+              @mouseenter="handleOptionMouseEnter($event, option)"
+            >
+              {{ option.label }}
+            </div>
+          </template>
+          <template v-else>
+            <slot />
+          </template>
         </template>
         <div
           v-if="loading"
@@ -58,7 +62,7 @@
           loading
         </div>
         <div
-          v-else-if="options && options.length === 0"
+          v-else-if="linkedOptions && linkedOptions.length === 0"
           class="n-base-select-menu__item n-base-select-menu__item--no-data"
         >
           {{
@@ -83,23 +87,29 @@
 <script>
 import withlightbar from '../../../mixins/withlightbar'
 import NScrollbar from '../../../common/Scrollbar'
+import linkedOptions from '../../../utils/data/linkedOptions'
 
 export default {
   name: 'NBaseSelectMenu',
+  provide () {
+    return {
+      NBaseSelectMenu: this
+    }
+  },
   components: {
     NScrollbar
   },
   mixins: [withlightbar],
   props: {
+    useSlot: {
+      type: Boolean,
+      default: false
+    },
     theme: {
       type: String,
       default: null
     },
     options: {
-      type: Array,
-      default: null
-    },
-    linkedOptions: {
       type: Array,
       default: null
     },
@@ -151,6 +161,13 @@ export default {
     }
   },
   computed: {
+    index2Id () {
+      const index2Id = new Map()
+      this.linkedOptions.forEach((option, index) => {
+        index2Id.set(index, option.id)
+      })
+      return index2Id
+    },
     id2Option () {
       const id2Option = new Map()
       for (const option of this.linkedOptions) {
@@ -160,6 +177,9 @@ export default {
     },
     firstOptionId () {
       return this.linkedOptions.firstAvailableOptionId
+    },
+    linkedOptions () {
+      return linkedOptions(this.options)
     }
   },
   watch: {

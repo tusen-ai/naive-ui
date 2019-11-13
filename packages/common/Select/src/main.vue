@@ -109,8 +109,9 @@ export default {
       scroll: this.handleScroll.bind(this)
     }
     return h(NSelect, {
-      props: { ...this.$props, options: this.computedOptions, active: this.active, placement: 'bottom-start', widthMode: 'activator' },
-      on
+      props: { ...this.$props, options: this.computedOptions, active: this.active, placement: 'bottom-start', widthMode: 'activator', useSlot: !!this.$scopedSlots.default },
+      on,
+      scopedSlots: this.$scopedSlots
     })
   }
 }
