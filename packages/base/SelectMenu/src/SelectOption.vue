@@ -1,10 +1,10 @@
 <template>
   <div
-    class="n-base-select-menu__item"
+    class="n-base-select-option"
     :class="{
-      'n-base-select-menu__item--selected':
+      'n-base-select-option--selected':
         isSelected,
-      'n-base-select-menu__item--disabled':
+      'n-base-select-option--disabled':
         disabled
     }"
     :data-id="optionId"
@@ -49,10 +49,6 @@ export default {
       type: Number,
       required: true
     },
-    selected: {
-      type: Boolean,
-      default: false
-    },
     disabled: {
       type: Boolean,
       default: false
@@ -89,7 +85,6 @@ export default {
     }
   },
   mounted () {
-    console.log('select option mounted')
     if (this.NBaseSelectOptionCollector) {
       this.NBaseSelectOptionCollector.collectOptions()
     }

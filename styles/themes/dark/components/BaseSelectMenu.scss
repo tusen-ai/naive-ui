@@ -1,5 +1,5 @@
 @mixin setup-dark-base-select-menu {
-  $--base-select-menu-item-color: (
+  $--base-select-menu-option-color: (
     "default": $--n-secondary-text-color,
     "selected": $--n-primary-color,
     "disabled": $--n-disabled-text-color,

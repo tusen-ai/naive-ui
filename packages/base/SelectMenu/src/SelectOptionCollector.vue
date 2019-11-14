@@ -56,7 +56,6 @@ export default {
   },
   render (h) {
     const children = this.$scopedSlots.default ? this.$scopedSlots.default() : []
-    console.log('render collector', children)
     children.forEach((child, index) => {
       child.componentOptions.propsData.index = index
       child.componentOptions.propsData.show = false

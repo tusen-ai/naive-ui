@@ -296,11 +296,6 @@ export default {
     },
     handleClick () {
       this.$emit('click')
-      // this.$nextTick().then(() => {
-      //   if (this.filterable) {
-      //     this.focusPatternInput()
-      //   }
-      // })
     },
     handleDeleteOption (option) {
       this.$emit('delete-option', option)

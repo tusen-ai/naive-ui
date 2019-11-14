@@ -197,7 +197,6 @@ export default {
   },
   computed: {
     synthesizedOptions () {
-      console.log('useSlot', this.useSlot)
       if (this.useSlot) {
         return this.collectedOptions
       } else {

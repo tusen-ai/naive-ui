@@ -2,7 +2,7 @@
 /**
  * Warning: There are some potential problems if there are too many items!
  */
-import NSelect from './BaseSelect'
+import NSelect from './Select'
 
 export default {
   name: 'NSelect',

@@ -17,7 +17,7 @@
       ref="scrollbar"
       @scroll="handleMenuScroll"
     >
-      <div class="n-base-select-menu__item-wrapper">
+      <div class="n-base-select-menu__option-wrapper">
         <transition name="n-base-select-menu__light-bar--transition">
           <div
             v-if="showLightBar"
@@ -27,22 +27,14 @@
         </transition>
         <template v-if="!loading">
           <template v-if="!useSlot">
-            <div
-              v-for="option in linkedOptions"
+            <n-select-option
+              v-for="(option, index) in linkedOptions"
               :key="option.value"
-              :data-id="option.id"
-              class="n-base-select-menu__item"
-              :class="{
-                'n-base-select-menu__item--selected':
-                  isSelected(option),
-                'n-base-select-menu__item--disabled':
-                  option.disabled
-              }"
-              @click="handleOptionClick($event, option)"
-              @mouseenter="handleOptionMouseEnter($event, option)"
-            >
-              {{ option.label }}
-            </div>
+              :label="option.label"
+              :value="option.value"
+              :index="index"
+              :disabled="option.disabled"
+            />
           </template>
           <template v-else>
             <slot />
@@ -50,7 +42,7 @@
         </template>
         <div
           v-if="loading"
-          class="n-base-select-menu__item n-base-select-menu__item--loading"
+          class="n-base-select-menu__option n-base-select-menu__option--loading"
         >
           {{
             /**
@@ -63,7 +55,7 @@
         </div>
         <div
           v-else-if="linkedOptions && linkedOptions.length === 0"
-          class="n-base-select-menu__item n-base-select-menu__item--no-data"
+          class="n-base-select-menu__option n-base-select-menu__option--no-data"
         >
           {{
             hideLightBarSync()
@@ -72,7 +64,7 @@
         </div>
         <div
           v-else-if="filterable && (pattern.length && !linkedOptions.length)"
-          class="n-base-select-menu__item n-base-select-menu__item--not-found"
+          class="n-base-select-menu__option n-base-select-menu__option--not-found"
         >
           {{
             hideLightBarSync()
@@ -88,6 +80,7 @@
 import withlightbar from '../../../mixins/withlightbar'
 import NScrollbar from '../../../common/Scrollbar'
 import linkedOptions from '../../../utils/data/linkedOptions'
+import NSelectOption from './SelectOption'
 
 export default {
   name: 'NBaseSelectMenu',
@@ -97,7 +90,8 @@ export default {
     }
   },
   components: {
-    NScrollbar
+    NScrollbar,
+    NSelectOption
   },
   mixins: [withlightbar],
   props: {
