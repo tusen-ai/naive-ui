@@ -17,7 +17,7 @@
       ref="scrollbar"
       @scroll="handleMenuScroll"
     >
-      <div class="n-base-select-menu__option-wrapper">
+      <div class="n-base-select-option-wrapper">
         <transition name="n-base-select-menu__light-bar--transition">
           <div
             v-if="showLightBar"
@@ -42,7 +42,7 @@
         </template>
         <div
           v-if="loading"
-          class="n-base-select-menu__option n-base-select-menu__option--loading"
+          class="n-base-select-option n-base-select-option--loading"
         >
           {{
             /**
@@ -55,7 +55,7 @@
         </div>
         <div
           v-else-if="linkedOptions && linkedOptions.length === 0"
-          class="n-base-select-menu__option n-base-select-menu__option--no-data"
+          class="n-base-select-option n-base-select-option--no-data"
         >
           {{
             hideLightBarSync()
@@ -64,7 +64,7 @@
         </div>
         <div
           v-else-if="filterable && (pattern.length && !linkedOptions.length)"
-          class="n-base-select-menu__option n-base-select-menu__option--not-found"
+          class="n-base-select-option n-base-select-option--not-found"
         >
           {{
             hideLightBarSync()
