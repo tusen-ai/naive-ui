@@ -55,8 +55,8 @@
 
 <script>
 import NScrollbar from '../../Scrollbar'
-import NConfirm from './Confirm'
-import NForm from './Form'
+import NConfirm from './presets/Confirm'
+import NForm from './presets/Form'
 
 let mousePosition = null
 
@@ -230,7 +230,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-
-</style>

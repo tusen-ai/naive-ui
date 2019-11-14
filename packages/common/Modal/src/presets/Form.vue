@@ -54,8 +54,8 @@
 </template>
 
 <script>
-import withapp from '../../../mixins/withapp'
-import themeable from '../../../mixins/themeable'
+import withapp from '../../../../mixins/withapp'
+import themeable from '../../../../mixins/themeable'
 
 export default {
   name: 'NForm',

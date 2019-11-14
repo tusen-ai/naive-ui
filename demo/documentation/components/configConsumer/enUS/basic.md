@@ -4,7 +4,7 @@
   @theme-change="handleThemeChange"
   @namespace-change="handleNamespaceChange"
 >
-  <template slot-scope="{ theme, namespace }">
+  <template v-slot="{ theme, namespace }">
     <div>
       <div>theme: {{ theme }}</div>
       <div>namespace: {{ namespace }}</div>
