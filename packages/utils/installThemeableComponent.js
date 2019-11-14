@@ -1,4 +1,4 @@
-function getTheme(component) {
+function getTheme (component) {
   let cursor = component
   while (cursor.$parent) {
     const name = cursor.$options.name
@@ -13,16 +13,16 @@ function getTheme(component) {
   return null
 }
 
-function install(Vue, Component, name) {
+function install (Vue, Component, name) {
   const prototypeProxy = new Proxy(
-    function() {
+    function () {
       return Component
     },
     {
-      apply(target, thisArg, argumentsList) {
+      apply (target, thisArg, argumentsList) {
         if (thisArg instanceof Vue) {
           Component.theme = getTheme(thisArg)
-          console.log('theme', getTheme(thisArg))
+          // console.log('theme', getTheme(thisArg))
         }
         return target.bind(thisArg)(...argumentsList)
       }

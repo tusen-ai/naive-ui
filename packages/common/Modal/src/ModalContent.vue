@@ -21,30 +21,43 @@
           class="n-modal-content-slot"
         >
           <n-confirm
-            v-if="preset==='confirm'"
+            v-if="preset === 'confirm'"
             ref="confirm"
+            :theme="theme"
             :title="title"
             :closable="closable"
-            :cancel-text="cancelText"
-            :submit-text="submitText"
+            :positive-text="positiveText"
+            :negative-text="negativeText"
             :content="content"
-            @deactivate="deactivate"
-            @cancel="cancel"
-            @submit="submit"
+            @close-click="handleCloseClick"
+            @negative-click="handlePositiveClick"
+            @positive-click="handleNegativeClick"
           >
-            <slot slot="header" name="header" />
-            <slot slot="content" name="content" />
-            <slot slot="footer" name="footer" />
+            <template v-slot:header>
+              <slot name="header" />
+            </template>
+            <template v-slot:content>
+              <slot name="content" />
+            </template>
+            <template v-slot:footer>
+              <slot name="footer" />
+            </template>
           </n-confirm>
           <n-form
-            v-else-if="preset==='form'"
+            v-else-if="preset === 'form'"
             :title="title"
             :closable="closable"
-            @deactivate="deactivate"
+            @close-click="handleCloseClick"
           >
-            <slot slot="header" name="header" />
-            <slot slot="content" name="content" />
-            <slot slot="footer" name="footer" />
+            <template v-slot:header>
+              <slot name="header" />
+            </template>
+            <template v-slot:content>
+              <slot name="content" />
+            </template>
+            <template v-slot:footer>
+              <slot name="footer" />
+            </template>
           </n-form>
           <slot v-else />
         </div>
@@ -55,8 +68,9 @@
 
 <script>
 import NScrollbar from '../../Scrollbar'
-import NConfirm from './presets/Confirm'
-import NForm from './presets/Form'
+import NConfirm from 'packages/presets/Confirm'
+import NForm from 'packages/presets/Form'
+import themeable from '../../../mixins/themeable'
 
 let mousePosition = null
 
@@ -76,6 +90,7 @@ export default {
     NConfirm,
     NForm
   },
+  mixins: [themeable],
   props: {
     active: {
       type: Boolean,
@@ -99,19 +114,21 @@ export default {
       type: Boolean,
       default: true
     },
-    // for confirm
-    cancelText: {
+    // For preset: confirm
+    negativeText: {
       type: String,
-      default: 'Cancel'
+      default: undefined
     },
-    submitText: {
+    positiveText: {
       type: String,
-      default: 'Confirm'
+      default: undefined
     },
     content: {
       type: String,
-      default: 'content'
+      default: undefined
     }
+    // For preset: form
+    // For preset: card
   },
   data () {
     return {
@@ -123,24 +140,9 @@ export default {
       this.styleActive = true
     }
   },
-  mounted () {
-    console.log('contentInner', this.$slots)
-    // this.$refs.confirm.$slots.footer = this.$scopedSlots.footer && this.$scopedSlots.footer()
-    // this.$slots.default = this.$scopedSlots.default && this.$scopedSlots.default()
-  },
-  // mounted () {
-  //   this.$nextTick().then(this.registerContent)
-  // },
-  // updated () {
-  //   console.log('updated')
-  //   this.$nextTick().then(this.registerContent)
-  // },
-  beforeDestroy () {
-    // window.clearTimeout(this.updateScrollbarTimerId)
-  },
   methods: {
     slotDOM () {
-      const els = this.$refs.contentInner.childNodes
+      const els = (this.$refs.contentInner && this.$refs.contentInner.childNodes) || []
       return els
     },
     handleMouseDown (e) {
@@ -155,9 +157,6 @@ export default {
       this.$nextTick().then(() => {
         this.updateTransformOrigin()
       })
-    },
-    handleAfterEnter () {
-      // console.log('afterEnter', this.$refs.scrollbar.enableScrollbar())
     },
     updateTransformOrigin () {
       if (
@@ -218,14 +217,15 @@ export default {
       this.styleActive = false
       this.$emit('after-leave')
     },
-    deactivate () {
+    handleCloseClick () {
+      this.$emit('close-click')
       this.$emit('deactivate')
     },
-    cancel () {
-      this.$emit('cancel')
+    handleNegativeClick () {
+      this.$emit('positive-click')
     },
-    submit () {
-      this.$emit('submit')
+    handlePositiveClick () {
+      this.$emit('negative-click')
     }
   }
 }

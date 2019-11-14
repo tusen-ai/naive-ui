@@ -2,19 +2,22 @@
   <div
     class="n-confirm"
     :class="{
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${theme}-theme`]: theme
     }"
   >
     <div class="n-confirm-title">
       <span class="n-confirm-title-content">
         <n-icon
+          v-if="showIcon"
           class="n-confirm-title-icon"
           :class="{
             [`n-confirm-title-icon--${type}-type`]: type
           }"
           size="28"
         >
-          <component :is="iconType.type" />
+          <slot name="icon">
+            <component :is="iconType" />
+          </slot>
         </n-icon>
         <slot name="header">
           {{ title }}
@@ -39,17 +42,17 @@
     <div class="n-confirm__footer">
       <slot name="footer">
         <n-button
-          v-if="type === 'confirm'"
-          :theme="synthesizedTheme"
+          v-if="negativeText"
+          :theme="theme"
           style="margin-right:12px;"
           round
           size="small"
           @click="handleNegativeClick"
         >
-          {{ cancelText }}
+          {{ negativeText }}
         </n-button>
         <n-button
-          :theme="synthesizedTheme"
+          :theme="theme"
           round
           :disabled="loading === true"
           :loading="loading"
@@ -58,21 +61,20 @@
           auto-text-color
           @click="handlePositiveClick"
         >
-          {{ submitText }}
+          {{ positiveText }}
         </n-button>
       </slot>
     </div>
   </div>
 </template>
 <script>
-import NIcon from '../../../Icon'
-import NButton from '../../../Button'
-import iosCheckmarkCircle from '../../../../icons/ios-checkmark-circle'
-import mdClose from '../../../../icons/md-close'
-import iosHelpCircle from '../../../../icons/ios-help-circle'
-import iosCloseCircle from '../../../../icons/ios-close-circle'
-import withapp from '../../../../mixins/withapp'
-import themeable from '../../../../mixins/themeable'
+import NIcon from 'packages/common/Icon'
+import NButton from 'packages/common/Button'
+import iosCheckmarkCircle from 'packages/icons/ios-checkmark-circle'
+import mdClose from 'packages/icons/md-close'
+import iosHelpCircle from 'packages/icons/ios-help-circle'
+import iosCloseCircle from 'packages/icons/ios-close-circle'
+import themeable from 'packages/mixins/themeable'
 
 export default {
   name: 'NConfirm',
@@ -84,8 +86,12 @@ export default {
     iosCheckmarkCircle,
     iosCloseCircle
   },
-  mixins: [withapp, themeable],
+  mixins: [themeable],
   props: {
+    type: {
+      type: String,
+      default: 'confirm'
+    },
     title: {
       type: String,
       default: 'Confirm'
@@ -94,49 +100,46 @@ export default {
       type: Boolean,
       default: true
     },
-    cancelText: {
+    negativeText: {
       type: String,
       default: 'Cancel'
     },
-    submitText: {
+    positiveText: {
       type: String,
       default: 'Confirm'
     },
     content: {
       type: String,
       default: 'content'
-    }
-  },
-  data () {
-    return {
-      maskClosable: true,
-      // content: 'content',
-      // positiveText: 'Confirm',
-      // negativeText: 'Cancel',
-      type: 'confirm',
-      loading: false,
-      instances: null
+    },
+    showIcon: {
+      type: Boolean,
+      default: true
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
     iconType () {
       const colors = {
-        error: { type: 'ios-close-circle' },
-        confirm: { type: 'ios-help-circle' },
-        success: { type: 'ios-checkmark-circle' }
+        error: 'ios-close-circle',
+        confirm: 'ios-help-circle',
+        success: 'ios-checkmark-circle'
       }
       return colors[this.type]
     }
   },
   methods: {
     handlePositiveClick () {
-      this.$emit('submit')
+      this.$emit('positive-click')
     },
     handleNegativeClick () {
-      this.$emit('cancel')
+      this.$emit('negative-click')
     },
     handleCloseClick () {
-      this.$emit('deactivate')
+      this.$emit('close-click')
     }
   }
 }

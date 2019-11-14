@@ -41,17 +41,17 @@ export default {
       default: true
     },
     // for confirm
-    cancelText: {
+    negativeText: {
       type: String,
-      default: 'Cancel'
+      default: undefined
     },
-    submitText: {
+    positiveText: {
       type: String,
-      default: 'Confirm'
+      default: undefined
     },
     content: {
       type: String,
-      default: 'content'
+      default: undefined
     }
   },
   data () {
@@ -62,25 +62,6 @@ export default {
   computed: {
     active () {
       return this.value
-    },
-    props () {
-      let obj = {
-        active: this.value,
-        activateEvent: this.activateEvent,
-        preset: this.preset,
-        title: this.title,
-        closable: this.closable,
-        cancelText: this.cancelText,
-        submitText: this.submitText,
-        content: this.content
-      }
-      // switch (this.preset) {
-      //   case 'confirm':
-      // obj.title = this.title
-      //     break
-      // }
-
-      return obj
     }
   },
   watch: {
@@ -94,7 +75,6 @@ export default {
     if (this.active) {
       this.$refs.portal.transferElement()
     }
-    console.log('this.$scopedSlots', this.namespace)
   },
   methods: {
     deactivate () {
@@ -120,34 +100,31 @@ export default {
           h(NModalContent,
             {
               ref: 'content',
-              props: this.props,
+              props: {
+                ...this.$props,
+                active: this.active
+              },
               class: {
                 [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme
               },
-              // deactivate: this.deactivate,
               on: {
-                'deactivate': () => {
+                deactivate: () => {
                   this.deactivate()
                 },
-                'cancel': () => {
-                  if (this.$listeners.cancel) {
-                    this.$emit('cancel')
-                  } else {
-                    this.deactivate()
-                  }
+                closeClick: () => {
+                  this.$emit('close-click')
                 },
-                'submit': () => {
-                  if (this.$listeners.cancel) {
-                    this.$emit('submit')
-                  } else {
-                    this.deactivate()
-                  }
+                negativeClick: () => {
+                  this.$emit('negative-click')
                 },
-                'after-leave': () => {
-                  this.$emit('after-hide')
+                positiveClick: () => {
+                  this.$emit('positive-click')
                 },
                 beforeLeave: () => {
                   this.$emit('before-hide')
+                },
+                afterLeave: () => {
+                  this.$emit('after-hide')
                 },
                 mousedown: (e) => {
                   this.mousedownTarget = e.target
@@ -167,7 +144,6 @@ export default {
                 }
               },
               scopedSlots: this.$scopedSlots
-              // slots: this.$slots
             }
           )
         ])
