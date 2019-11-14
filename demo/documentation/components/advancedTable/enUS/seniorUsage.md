@@ -33,56 +33,60 @@
 ```js
 const items = [
   {
-    label: 'age 15 asdsadsadsadsad',
+    label: "age 15 asdsadsadsadsad",
     value: 15
   },
   {
-    label: 'age 14',
+    label: "age 14",
     value: 14
   },
   {
-    label: 'age 13',
+    label: "age 13",
     value: 13
   },
   {
-    label: 'age 12',
+    label: "age 12",
     value: 12
   },
   {
-    label: 'age 11',
+    label: "age 11",
     value: 11
   }
-]
+];
 const sex = [
   {
-    label: 'male',
-    value: 'male'
+    label: "male",
+    value: "male"
   },
   {
-    label: 'female',
-    value: 'female'
+    label: "female",
+    value: "female"
   }
-]
+];
 const _columns3 = $this => {
   return [
     {
-      title: 'Name',
-      key: 'name',
-      sortable: 'custom',
-      onFilter: (value, record) => {
-        return value.includes(record.name + '')
-      },
-      width: 280,
-      fixed: 'left'
+      type: "selection",
+      fixed: "left"
     },
     {
-      title: 'Age',
-      key: 'age',
+      title: "Name",
+      key: "name",
+      sortable: "custom",
+      onFilter: (value, record) => {
+        return value.includes(record.name + "");
+      },
+      width: 280,
+      fixed: "left"
+    },
+    {
+      title: "Age",
+      key: "age",
       width: 100,
 
       sortable: true,
       sorter(a, b) {
-        return a.age - b.age
+        return a.age - b.age;
       },
       // filterMultiple: true,
       asyncFilterItems() {
@@ -91,21 +95,21 @@ const _columns3 = $this => {
             // 模拟概率发生错误
             Math.random() > 0.6
               ? resolve(items)
-              : reject(new Error('network error'))
-          }, 1000)
-        })
+              : reject(new Error("network error"));
+          }, 1000);
+        });
       },
-      onFilter: 'custom',
+      onFilter: "custom",
       render: (h, params) => {
-        return <b>{params.row.age}</b>
+        return <b>{params.row.age}</b>;
       }
     },
     {
-      title: 'Sex',
-      key: 'sex',
+      title: "Sex",
+      key: "sex",
       width: 100,
       onFilter: (values, record) => {
-        return values.includes(record.sex)
+        return values.includes(record.sex);
       },
       filterMultiple: true,
       asyncFilterItems() {
@@ -113,15 +117,15 @@ const _columns3 = $this => {
           setTimeout(() => {
             Math.random() > 0.6
               ? resolve(sex)
-              : reject(new Error('network error'))
-          }, 1000)
-        })
+              : reject(new Error("network error"));
+          }, 1000);
+        });
       }
     },
     {
-      title: '#',
+      title: "#",
       width: 150,
-      fixed: 'right',
+      fixed: "right",
       render: (h, params) => {
         return (
           <n-button
@@ -131,15 +135,15 @@ const _columns3 = $this => {
           >
             delete
           </n-button>
-        )
+        );
       }
     }
-  ]
-}
+  ];
+};
 export default {
   components: {},
   data() {
-    const columns = _columns3(this)
+    const columns = _columns3(this);
     return {
       loading: false,
       data: [],
@@ -147,40 +151,40 @@ export default {
       columns,
       search: {
         columns: [
-          { label: 'Name', value: 'name' },
-          { label: 'Age', value: 'age' }
+          { label: "Name", value: "name" },
+          { label: "Age", value: "age" }
         ],
-        onSearch: 'custom',
-        placeholder: 'search from net'
+        onSearch: "custom",
+        placeholder: "search from net"
       }
-    }
+    };
   },
   mounted() {
     this.$refs.table.setParams({
       filter: { age: [15] },
-      sorter: { key: 'name', type: -1 },
-      searcher: { key: 'name', value: 'xiaobai' }
-    })
+      sorter: { key: "name", type: -1 },
+      searcher: { key: "name", value: "xiaobai" }
+    });
   },
   methods: {
     getData(args) {
-      this.loading = true
+      this.loading = true;
       setTimeout(() => {
-        let d = new Array(0).fill(0)
+        let d = new Array(20).fill(0);
         d = d.map((item, idx) => {
           return {
-            name: 'xiaobai213213132123213111121' + idx,
+            name: "xiaobai213213132123213111121" + idx,
             age: Math.ceil(Math.random() * 20),
-            sex: Math.random() > 0.5 ? 'male' : 'female'
-          }
-        })
-        this.data = d
-        this.loading = false
-      }, 3000)
+            sex: Math.random() > 0.5 ? "male" : "female"
+          };
+        });
+        this.data = d;
+        this.loading = false;
+      }, 3000);
     },
     onChange(args) {
-      console.log('reomte change')
-      this.query = args
+      console.log("reomte change");
+      this.query = args;
       /**
        * "filter": {
           "age": {
@@ -213,13 +217,13 @@ export default {
         }
       }
        */
-      this.getData(args)
+      this.getData(args);
     },
     clear() {
       // 清除所有的Filter选项,会触发onchange事件
-      this.$refs.table.setParams({})
-      this.$NMessage.info('clear all filters', { duration: 5000 })
+      this.$refs.table.setParams({});
+      this.$NMessage.info("clear all filters", { duration: 5000 });
     }
   }
-}
+};
 ```

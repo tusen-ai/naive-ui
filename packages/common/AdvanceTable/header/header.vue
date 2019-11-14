@@ -17,9 +17,9 @@
         v-for="(column, i) in columns"
         :key="i"
         :style="computeCustomWidthStl(column)"
-      />
+      >
 
-      <col v-if="scrollBarWidth" :width="scrollBarWidth" />
+      <col v-if="scrollBarWidth" :width="scrollBarWidth" >
     </colgroup>
     <n-thead>
       <n-tr>
@@ -37,7 +37,7 @@
             <n-checkbox
               v-if="column.type === 'selection'"
               v-model="currentPageAllSelect"
-              :indeterminate="!isCheckedBoxAllIndeterminate"
+              :indeterminate="isCheckedBoxAllIndeterminate"
               @click.native="onAllCheckboxesClick"
             />
             <row
@@ -140,8 +140,9 @@ export default {
   computed: {
     isCheckedBoxAllIndeterminate () {
       return (
-        this.currentPageSelected === this.showingData.length ||
-        this.currentPageSelected === 0
+        this.currentPageSelected !== this.showingData.length &&
+        this.showingData.length !== 0 &&
+        this.currentPageSelected !== 0
       )
     },
     currentKey () {

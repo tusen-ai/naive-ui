@@ -56,7 +56,7 @@
           :sort-indexs="sortIndexs"
           :selected-filter="selectedFilter"
           :showing-data="showingData"
-          :current-page-selected="currentPageSelectedLen"
+          :current-page-selected-len="currentPageSelectedLen"
           :table-stl="tableStl"
           :row-class-name="rowClassName"
           :check-boxes="checkBoxes"
@@ -87,7 +87,7 @@
         :scroll-bar-width="scrollBarWidth"
         :sort-indexs="sortIndexs"
         :selected-filter="selectedFilter"
-        :current-page-selected="currentPageSelectedLen"
+        :current-page-selected-len="currentPageSelectedLen"
         :body-min-height="42"
         @on-scroll="onBodyScrolll"
         @on-checkbox-all="onAllCheckboxesClick"
@@ -107,7 +107,7 @@
           :sort-indexs="sortIndexs"
           :selected-filter="selectedFilter"
           :showing-data="showingData"
-          :current-page-selected="currentPageSelectedLen"
+          :current-page-selected-len="currentPageSelectedLen"
           :table-stl="tableStl"
           :row-class-name="rowClassName"
           :check-boxes="checkBoxes"
@@ -143,9 +143,15 @@
     <!-- 分页 -->
     <div
       v-if="pagination !== false && showingData.length"
+      :style="tableWrapperStl"
       class="n-advance-table__pagination"
     >
-      <n-pagination v-model="currentPage" :page-count="pageCount" />
+      <n-pagination
+        v-model="currentPage"
+        :page-count="pageCount"
+        :page-slot="paginationer.pageSlot || 5"
+        :show-quick-jumper="paginationer.quickJumper || true"
+      />
     </div>
   </div>
 </template>
@@ -593,6 +599,12 @@ export default {
           }
         }
       })
+    },
+    sort (columnKey, order) {
+      this.$set(this.sortIndexs, columnKey, order)
+    },
+    filter (filterOptions) {
+      this.selectedFilter = filterOptions
     },
     /**
      * {key:[value,value1],key1:[v1,v2]}
