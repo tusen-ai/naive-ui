@@ -11,7 +11,7 @@
       line-height: map-get($map: $--n-height, $key: $size);
       font-size: map-get($map: $--n-font-size, $key: $size);
     }
-    @include e(light-bar) {
+    @include b(base-select-menu-light-bar) {
       height: map-get($map: $--n-height, $key: $size);
       line-height: map-get($map: $--n-height, $key: $size);
       font-size: map-get($map: $--n-font-size, $key: $size);
@@ -32,18 +32,18 @@
       position: relative;
       overflow: hidden;
       border-radius: 6px;
-      @include e(option-wrapper) {
+      @include b(base-select-menu-option-wrapper) {
         position: relative;
         width: 100%;
       }
       /** transition of menu light bar */
-      .n-base-select-menu__light-bar--transition-enter-active {
+      .n-base-select-menu-light-bar--transition-enter-active {
         transition: opacity .15s $fast-in-cubic-bezier, top .3s $default-cubic-bezier!important;
       }
-      .n-base-select-menu__light-bar--transition-leave-active {
+      .n-base-select-menu-light-bar--transition-leave-active {
         transition: opacity .15s $slow-out-cubic-bezier, top .3s $default-cubic-bezier!important;
       }
-      .n-base-select-menu__light-bar--transition-enter, .n-base-select-menu__light-bar--transition-leave-to {
+      .n-base-select-menu-light-bar--transition-enter, .n-base-select-menu-light-bar--transition-leave-to {
         opacity: 0;
       }
     }
@@ -90,7 +90,7 @@
         pointer-events: none;
       }
     }
-    @include e(light-bar) {
+    @include b(base-select-menu-light-bar) {
       position: absolute;
       width:100%;
       background-color: $--base-select-menu-light-bar-background-color;

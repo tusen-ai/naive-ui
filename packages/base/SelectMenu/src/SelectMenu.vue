@@ -17,11 +17,11 @@
       ref="scrollbar"
       @scroll="handleMenuScroll"
     >
-      <div class="n-base-select-option-wrapper">
-        <transition name="n-base-select-menu__light-bar--transition">
+      <div class="n-base-select-menu-option-wrapper">
+        <transition name="n-base-select-menu-light-bar--transition">
           <div
             v-if="showLightBar"
-            class="n-base-select-menu__light-bar"
+            class="n-base-select-menu-light-bar"
             :style="{ top: `${lightBarTop}px` }"
           />
         </transition>

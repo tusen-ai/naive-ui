@@ -33,10 +33,9 @@
         class="n-cascader-select-menu"
         filterable
         :pattern="pattern"
-        :options="linkedSelectOptions"
+        :options="filteredSelectOptions"
         :multiple="multiple"
         :size="size"
-        :linked-options="linkedSelectOptions"
         :is-selected="isSelected"
         @menu-toggle-option="handleSelectMenuToggleOption"
       />
@@ -52,7 +51,6 @@
 import NBaseMenuMask from '../../../base/MenuMask'
 import NBaseSelectMenu from '../../../base/SelectMenu'
 import NCascaderSubmenu from './CascaderSubmenu'
-import linkedOptions from '../../../utils/data/linkedOptions'
 import { getType, traverseWithCallback, minus, merge } from './utils'
 
 import {
@@ -215,9 +213,6 @@ export default {
         }
       })
       return filteredSelectOptions
-    },
-    linkedSelectOptions () {
-      return linkedOptions(this.filteredSelectOptions, this)
     },
     valueSet () {
       return new Set(this.value)
