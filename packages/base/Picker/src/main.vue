@@ -296,11 +296,11 @@ export default {
     },
     handleClick () {
       this.$emit('click')
-      this.$nextTick().then(() => {
-        if (this.filterable) {
-          this.focusPatternInput()
-        }
-      })
+      // this.$nextTick().then(() => {
+      //   if (this.filterable) {
+      //     this.focusPatternInput()
+      //   }
+      // })
     },
     handleDeleteOption (option) {
       this.$emit('delete-option', option)
@@ -323,11 +323,9 @@ export default {
       }
     },
     handlePatternInputFocus (e) {
-      // console.log('handlePatternInputFocus')
       this.patternInputFocused = true
     },
     handlePatternInputBlur (e) {
-      // console.log('handlePatternInputBlur')
       this.patternInputFocused = false
       this.handleBlur()
     },
@@ -337,14 +335,15 @@ export default {
       }
     },
     focusPatternInput () {
-      if (this.$refs.patternInput) {
-        // console.log('focusPatternInput')
-        this.$refs.patternInput.focus()
-      }
+      // if set to sync it won't work when mode is multiple filterable
+      this.$nextTick().then(() => {
+        if (this.$refs.patternInput) {
+          this.$refs.patternInput.focus()
+        }
+      })
     },
     blurPatternInput () {
       if (this.$refs.patternInput) {
-        // console.log('blurPatternInput')
         this.$refs.patternInput.blur()
       }
     }

@@ -48,6 +48,8 @@ popover 可能 activator 和 content 不同步，在 beforeRouteEnter locale cha
 confirm 有 bug = =...和 button 颜色相关，之后检查吧
 ## 2019.10.21
 Radio Button 默认主题下是否 hollow out，这是个问题
+## 2019.11.14
+base picker focus 问题
 ## TODO
 issue fix, add delay prop
 add trigger to tooltip
