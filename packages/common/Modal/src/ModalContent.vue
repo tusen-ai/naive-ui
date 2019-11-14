@@ -30,8 +30,8 @@
             :negative-text="negativeText"
             :content="content"
             @close-click="handleCloseClick"
-            @negative-click="handlePositiveClick"
-            @positive-click="handleNegativeClick"
+            @negative-click="handleNegativeClick"
+            @positive-click="handlePositiveClick"
           >
             <template v-slot:header>
               <slot name="header" />
@@ -219,13 +219,12 @@ export default {
     },
     handleCloseClick () {
       this.$emit('close-click')
-      this.$emit('deactivate')
     },
     handleNegativeClick () {
-      this.$emit('positive-click')
+      this.$emit('negative-click')
     },
     handlePositiveClick () {
-      this.$emit('negative-click')
+      this.$emit('positive-click')
     }
   }
 }

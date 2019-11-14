@@ -111,19 +111,28 @@ export default {
                 deactivate: () => {
                   this.deactivate()
                 },
-                closeClick: () => {
+                'close-click': () => {
+                  if (!this.$listeners['close-click']) {
+                    this.deactivate()
+                  }
                   this.$emit('close-click')
                 },
-                negativeClick: () => {
+                'negative-click': () => {
+                  if (!this.$listeners['negative-click']) {
+                    this.deactivate()
+                  }
                   this.$emit('negative-click')
                 },
-                positiveClick: () => {
+                'positive-click': () => {
+                  if (!this.$listeners['positive-click']) {
+                    this.deactivate()
+                  }
                   this.$emit('positive-click')
                 },
-                beforeLeave: () => {
+                'before-leave': () => {
                   this.$emit('before-hide')
                 },
-                afterLeave: () => {
+                'after-leave': () => {
                   this.$emit('after-hide')
                 },
                 mousedown: (e) => {
