@@ -4,12 +4,14 @@ import NModalContent from './ModalContent'
 import NBasePortal from '../../../base/Portal'
 import zindexable from '../../../mixins/zindexable'
 import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 
 export default {
   name: 'NModal',
   mixins: [
     withapp,
-    zindexable
+    zindexable,
+    themeable
   ],
   props: {
     activateEvent: {
@@ -25,6 +27,31 @@ export default {
     maskClosable: {
       type: Boolean,
       default: true
+    },
+    preset: {
+      type: String,
+      default: ''
+    },
+    title: {
+      type: String,
+      default: 'Title'
+    },
+    closable: {
+      type: Boolean,
+      default: true
+    },
+    // for confirm
+    cancelText: {
+      type: String,
+      default: 'Cancel'
+    },
+    submitText: {
+      type: String,
+      default: 'Confirm'
+    },
+    content: {
+      type: String,
+      default: 'content'
     }
   },
   data () {
@@ -35,6 +62,25 @@ export default {
   computed: {
     active () {
       return this.value
+    },
+    props () {
+      let obj = {
+        active: this.value,
+        activateEvent: this.activateEvent,
+        preset: this.preset,
+        title: this.title,
+        closable: this.closable,
+        cancelText: this.cancelText,
+        submitText: this.submitText,
+        content: this.content
+      }
+      // switch (this.preset) {
+      //   case 'confirm':
+      // obj.title = this.title
+      //     break
+      // }
+
+      return obj
     }
   },
   watch: {
@@ -48,6 +94,7 @@ export default {
     if (this.active) {
       this.$refs.portal.transferElement()
     }
+    console.log('this.$scopedSlots', this.namespace)
   },
   methods: {
     deactivate () {
@@ -73,8 +120,29 @@ export default {
           h(NModalContent,
             {
               ref: 'content',
-              props: { active: this.value, activateEvent: this.activateEvent },
+              props: this.props,
+              class: {
+                [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme
+              },
+              // deactivate: this.deactivate,
               on: {
+                'deactivate': () => {
+                  this.deactivate()
+                },
+                'cancel': () => {
+                  if (this.$listeners.cancel) {
+                    this.$emit('cancel')
+                  } else {
+                    this.deactivate()
+                  }
+                },
+                'submit': () => {
+                  if (this.$listeners.cancel) {
+                    this.$emit('submit')
+                  } else {
+                    this.deactivate()
+                  }
+                },
                 'after-leave': () => {
                   this.$emit('after-hide')
                 },
@@ -97,9 +165,10 @@ export default {
                     }
                   }
                 }
-              }
-            },
-            this.$scopedSlots.default()
+              },
+              scopedSlots: this.$scopedSlots
+              // slots: this.$slots
+            }
           )
         ])
       }

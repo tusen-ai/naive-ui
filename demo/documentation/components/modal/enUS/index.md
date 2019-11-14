@@ -2,4 +2,7 @@
 ```demo
 basic
 maskClosable
+confirmBasic
+confirmSlot
+formBasic
 ```

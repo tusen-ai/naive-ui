@@ -1,0 +1,36 @@
+@import './mixins/mixins.scss';
+
+.n-modal-content-inner--measure {
+  transform: scale(1)!important;
+}
+
+@include themes-mixin {
+  @include b(modal-content) {
+    & > .n-scrollbar {
+      & > .n-scrollbar-container > .n-scrollbar-content {
+        min-height: 100%;
+        display: flex;
+      }
+    }
+    &:not(.n-modal-content--active) {
+      visibility: hidden;
+    }
+  }
+}
+
+.n-modal-content--transition-enter-active {
+  opacity: 1;
+  transition: opacity .3s cubic-bezier(.4, 0, .2, 1), transform .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+  transform: scale(1);
+}
+
+.n-modal-content--transition-leave-active {
+  opacity: 1;
+  transition: opacity .3s cubic-bezier(.4, 0, .2, 1), transform .3s cubic-bezier(0.4, 0.0, 1, 1);
+  transform: scale(1);
+}
+
+.n-modal-content--transition-enter, .n-modal-content--transition-leave-to {
+  opacity: 0;
+  transform: scale(.5);
+}
