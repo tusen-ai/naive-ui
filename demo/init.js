@@ -43,7 +43,6 @@ import scrollbarDebug2 from './debugComponents/scrollbarDebug2'
 import badge from './documentation/components/badge'
 import steps from './documentation/components/steps'
 import notification from './documentation/components/notification'
-import nimbusConfirmCardDemo from './documentation/components/nimbusConfirmCardDemo'
 import pagination from './documentation/components/pagination'
 import collapse from './documentation/components/collapse'
 import tag from './documentation/components/tag'
@@ -151,7 +150,6 @@ const routes = [
       { path: '/n-tooltip', component: tooltip },
       { path: '/n-popover', component: popover },
       { path: '/n-notification', component: notification },
-      { path: '/n-nimbus-confirm-card', component: nimbusConfirmCardDemo },
       { path: '/n-pagination', component: pagination },
       { path: '/n-alert', component: alert },
       { path: '/n-date-picker', component: datePicker },

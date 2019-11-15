@@ -102,6 +102,7 @@ export default {
               ref: 'content',
               props: {
                 ...this.$props,
+                theme: this.synthesizedTheme,
                 active: this.active
               },
               class: {
@@ -111,11 +112,11 @@ export default {
                 deactivate: () => {
                   this.deactivate()
                 },
-                'close-click': () => {
-                  if (!this.$listeners['close-click']) {
+                'close': () => {
+                  if (!this.$listeners['close']) {
                     this.deactivate()
                   }
-                  this.$emit('close-click')
+                  this.$emit('close')
                 },
                 'negative-click': () => {
                   if (!this.$listeners['negative-click']) {

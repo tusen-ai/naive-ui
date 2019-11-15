@@ -6,26 +6,33 @@
 >
   Start Me up
 </n-button>
-<n-modal v-model="isActive" :mask-closable="false">
-  <div style="background: #5C657EFF; padding: 24px; border-radius: 8px;">
-    <div>If you start me up, If you start me up, I'll never stop.</div>
-    <n-input v-model="inputValue" />
-    inputValue: {{ inputValue }}<br>
-    <n-button
-      size="small"
-      @click="isActive = false"
-    >
-      Close it
-    </n-button>
-  </div>
-</n-modal>
+<n-modal v-model="isActive" 
+  :mask-closable="false"
+  preset="confirm" 
+  title="Confirm modal"
+  content="Are you sure ?" 
+  :closable="false"
+  positive-text="submit"
+  @positive-click="cancelCallback"
+  @negative-click="submitCallback"
+  negative-text="cancel"
+/>
 ```
 ```js
 export default {
   data () {
     return {
       isActive: false,
-      inputValue: ''
+    }
+  },
+  methods: {
+    cancelCallback () {
+      this.$NMessage.success('cancel')
+      this.isActive = false
+    },
+    submitCallback () {
+      this.$NMessage.success('submit')
+      this.isActive = false
     }
   }
 }

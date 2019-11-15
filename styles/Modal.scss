@@ -6,6 +6,9 @@
 
 @include themes-mixin {
   @include b(modal-content) {
+    @include b(card) {
+      background-color: $--n-dialog-color;
+    }
     & > .n-scrollbar {
       & > .n-scrollbar-container > .n-scrollbar-content {
         min-height: 100%;

@@ -1,4 +1,4 @@
-# Confirm Slot
+# Use Preset Confirm (Slot)
 ```html
 <n-button
   size="small"

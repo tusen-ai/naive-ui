@@ -4,5 +4,4 @@ basic
 maskClosable
 confirmBasic
 confirmSlot
-formBasic
 ```

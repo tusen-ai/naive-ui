@@ -66,10 +66,6 @@ export default {
             {
               name: 'Nimbus Form Card',
               path: `/${this.lang}/${this.theme}` + '/n-nimbus-form-card'
-            },
-            {
-              name: 'Nimbus Confirm Card',
-              path: `/${this.lang}/${this.theme}` + '/n-nimbus-confirm-card'
             }
           ]
         },

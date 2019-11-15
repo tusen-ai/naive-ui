@@ -2,17 +2,23 @@
 
 $--card-margin-left: (
   'small': 16px,
-  'medium': 24px
+  'medium': 24px,
+  'large': 32px,
+  'huge': 40px
 );
 
 $--card-margin-top: (
   'small': 12px,
-  'medium': 16px
+  'medium': 16px,
+  'large': 20px,
+  'huge': 24px
 );
 
 $--card-margin-bottom: (
-  'small': 9px,
-  'medium': 12px
+  'small': 8px,
+  'medium': 12px,
+  'large': 16px,
+  'huge': 20px
 );
 
 @mixin card-size-mixin ($size) {
@@ -25,6 +31,12 @@ $--card-margin-bottom: (
         }
       }
     }
+    @include m(title-soft-segmented) {
+      @include b(card-title) {
+        padding: map-get($--card-margin-top, $size) 0 map-get($--card-margin-bottom, $size) 0;
+        margin: 0 map-get($--card-margin-left, $size);
+      }
+    }
     @include m(content-segmented) {
       @include e(content) {
         &:not(:last-child) {
@@ -33,8 +45,28 @@ $--card-margin-bottom: (
         }
       }
     }
+    @include m(content-soft-segmented) {
+      @include e(content) {
+        padding: 0;
+        margin: map-get($--card-margin-bottom, $size) map-get($--card-margin-left, $size);
+        &:not(:last-child) {
+          margin-bottom: 0;
+          padding-bottom: map-get($--card-margin-bottom, $size);
+        }
+      }
+    }
     @include m(extra-segmented) {
       @include e(extra) {
+        &:not(:last-child) {
+          margin-bottom: 0;
+          padding-bottom: map-get($--card-margin-bottom, $size);
+        }
+      }
+    }
+    @include m(extra-soft-segmented) {
+      @include e(extra) {
+        padding: 0;
+        margin: map-get($--card-margin-bottom, $size) map-get($--card-margin-left, $size);
         &:not(:last-child) {
           margin-bottom: 0;
           padding-bottom: map-get($--card-margin-bottom, $size);
@@ -71,12 +103,16 @@ $--card-margin-bottom: (
     width: 100%;
     box-sizing: border-box;
     position: relative;
+    background-color: $--n-background-color;
+    color: $--n-secondary-text-color;
     @include m(bordered) {
-      border: 1px solid $--n-divider-color;
+      border: 1px solid $--n-alpha-divider-color;
     }
     border-radius: 6px;
     @include card-size-mixin('small');
     @include card-size-mixin('medium');
+    @include card-size-mixin('large');
+    @include card-size-mixin('huge');
     @include b(card-cover) {
       width: 100%;
       img {
@@ -84,24 +120,24 @@ $--card-margin-bottom: (
         width: 100%;
       }
     }
-    @include m(title-segmented) {
+    @include m(title-segmented, title-soft-segmented) {
       @include b(card-title) {
         &:not(:last-child) {
-          border-bottom: 1px solid $--n-divider-color;
+          border-bottom: 1px solid $--n-alpha-divider-color;
         }
       }
     }
-    @include m(content-segmented) {
+    @include m(content-segmented, content-soft-segmented) {
       @include e(content) {
         &:not(:last-child) {
-          border-bottom: 1px solid $--n-divider-color;
+          border-bottom: 1px solid $--n-alpha-divider-color;
         }
       }
     }
-    @include m(extra-segmented) {
+    @include m(extra-segmented, extra-soft-segmented) {
       @include e(extra) {
         &:not(:last-child) {
-          border-bottom: 1px solid $--n-divider-color;
+          border-bottom: 1px solid $--n-alpha-divider-color;
         }
       }
     }
@@ -109,16 +145,19 @@ $--card-margin-bottom: (
       box-sizing: border-box;
       display: flex;
       align-items: center;
-      justify-content: space-between;
       @include e(main) {
         font-weight: 700;
         font-size: 18px;
         color: $--n-text-color;
+        flex: 1;
       }
       @include e(extra) {
         font-weight: 400;
         font-size: 14px;
         color: $--n-secondary-text-color;
+      }
+      @include e(close-mark) {
+        fill: $--n-secondary-text-color;
       }
     }
     @include e(content) {

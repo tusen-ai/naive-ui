@@ -1,4 +1,4 @@
-# Confirm Basic
+# Use Preset Confirm
 ```html
 <n-button
   size="small"
@@ -11,10 +11,10 @@
   title="Confirm modal"
   content="Are you sure ?" 
   :closable="false"
-  submit-text="submit"
-  @cancel="cancelCallback"
-  @submit="submitCallback"
-  cancel-text="cancel">
+  positive-text="submit"
+  @positive-click="cancelCallback"
+  @negative-click="submitCallback"
+  negative-text="cancel">
 </n-modal>
 ```
 ```js

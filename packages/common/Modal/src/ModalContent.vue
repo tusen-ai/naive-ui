@@ -29,7 +29,7 @@
             :positive-text="positiveText"
             :negative-text="negativeText"
             :content="content"
-            @close-click="handleCloseClick"
+            @close="handleCloseClick"
             @negative-click="handleNegativeClick"
             @positive-click="handlePositiveClick"
           >
@@ -47,7 +47,7 @@
             v-else-if="preset === 'form'"
             :title="title"
             :closable="closable"
-            @close-click="handleCloseClick"
+            @close="handleCloseClick"
           >
             <template v-slot:header>
               <slot name="header" />
@@ -218,7 +218,7 @@ export default {
       this.$emit('after-leave')
     },
     handleCloseClick () {
-      this.$emit('close-click')
+      this.$emit('close')
     },
     handleNegativeClick () {
       this.$emit('negative-click')

@@ -139,7 +139,7 @@ export default {
       this.$emit('negative-click')
     },
     handleCloseClick () {
-      this.$emit('close-click')
+      this.$emit('close')
     }
   }
 }

@@ -12,7 +12,7 @@
       :negative-text="negativeText"
       :title="title"
       :loading="loading"
-      @close-click="handleCloseClick"
+      @close="handleCloseClick"
       @negative-click="handleNegativeClick"
       @positive-click="handlePositiveClick"
     />
