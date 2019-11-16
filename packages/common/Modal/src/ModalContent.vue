@@ -68,8 +68,8 @@
 
 <script>
 import NScrollbar from '../../Scrollbar'
-import NConfirm from 'packages/presets/Confirm'
-import NForm from 'packages/presets/Form'
+import NConfirm from '../../../presets/Confirm'
+import NForm from '../../../presets/Form'
 import themeable from '../../../mixins/themeable'
 
 let mousePosition = null

@@ -21,7 +21,7 @@
 
 <script>
 import NModal from '../../Modal'
-import NConfirm from 'packages/presets/Confirm'
+import NConfirm from '../../../presets/Confirm'
 
 export default {
   name: 'NConfirm',

@@ -68,13 +68,13 @@
   </div>
 </template>
 <script>
-import NIcon from 'packages/common/Icon'
-import NButton from 'packages/common/Button'
-import iosCheckmarkCircle from 'packages/icons/ios-checkmark-circle'
-import mdClose from 'packages/icons/md-close'
-import iosHelpCircle from 'packages/icons/ios-help-circle'
-import iosCloseCircle from 'packages/icons/ios-close-circle'
-import themeable from 'packages/mixins/themeable'
+import NIcon from '../../../common/Icon'
+import NButton from '../../../common/Button'
+import iosCheckmarkCircle from '../../../icons/ios-checkmark-circle'
+import mdClose from '../../../icons/md-close'
+import iosHelpCircle from '../../../icons/ios-help-circle'
+import iosCloseCircle from '../../../icons/ios-close-circle'
+import themeable from '../../../mixins/themeable'
 
 export default {
   name: 'NConfirm',

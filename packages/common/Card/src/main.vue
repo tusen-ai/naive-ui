@@ -52,8 +52,8 @@
 <script>
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
-import mdClose from 'packages/icons/md-close'
-import NIcon from 'packages/common/Icon'
+import mdClose from '../../../icons/md-close'
+import NIcon from '../../../common/Icon'
 
 export default {
   name: 'NCard',
