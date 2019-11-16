@@ -62,10 +62,6 @@ export default {
             {
               name: 'Nimbus Service Layout',
               path: `/${this.lang}/${this.theme}` + '/n-nimbus-service-layout'
-            },
-            {
-              name: 'Nimbus Form Card',
-              path: `/${this.lang}/${this.theme}` + '/n-nimbus-form-card'
             }
           ]
         },

@@ -24,7 +24,6 @@ import select from './documentation/components/select'
 import cascader from './documentation/components/cascader'
 import customInput from './documentation/components/customInput'
 import modal from './documentation/components/modal'
-import nimbusFormCardDemo from './documentation/components/nimbusFormCardDemo'
 import message from './documentation/components/message'
 import tooltip from './documentation/components/tooltip'
 import popover from './documentation/components/popover'
@@ -145,7 +144,6 @@ const routes = [
       { path: '/n-cascader', component: cascader },
       { path: '/n-custom-input', component: customInput },
       { path: '/n-modal', component: modal },
-      { path: '/n-nimbus-form-card', component: nimbusFormCardDemo },
       { path: '/n-message', component: message },
       { path: '/n-tooltip', component: tooltip },
       { path: '/n-popover', component: popover },
