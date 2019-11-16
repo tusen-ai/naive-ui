@@ -19,7 +19,7 @@
         {{ title }}
       </div>
       <div v-if="$slots['title-extra']" class="n-card-title__extra">
-        <slot name="title-extra" />
+        <slot name="header-extra" />
       </div>
       <n-icon
         class="n-card-title__close-mark"
@@ -32,9 +32,9 @@
       </n-icon>
     </div>
     <div v-else-if="$slots.title" class="n-card__title">
-      <slot name="title" />
+      <slot name="header" />
       <div v-if="$slots['title-extra']" class="n-card-title__extra">
-        <slot name="title-extra" />
+        <slot name="header-extra" />
       </div>
     </div>
     <div class="n-card__content">
