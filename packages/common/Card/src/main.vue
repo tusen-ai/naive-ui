@@ -14,34 +14,30 @@
     <div v-if="$slots.cover" class="n-card-cover">
       <slot name="cover" />
     </div>
-    <div v-if="title" class="n-card-title">
+    <div class="n-card-title">
       <div class="n-card-title__main">
-        {{ title }}
+        <slot name="header">
+          {{ title }}
+        </slot>
       </div>
       <div v-if="$slots['title-extra']" class="n-card-title__extra">
         <slot name="header-extra" />
       </div>
       <n-icon
+        v-if="closable"
         class="n-card-title__close-mark"
         type="md-close"
         size="22"
-        style="cursor:pointer;"
         @click="handleCloseClick"
       >
         <md-close />
       </n-icon>
     </div>
-    <div v-else-if="$slots.title" class="n-card__title">
-      <slot name="header" />
-      <div v-if="$slots['title-extra']" class="n-card-title__extra">
-        <slot name="header-extra" />
-      </div>
-    </div>
     <div class="n-card__content">
       <slot />
     </div>
     <div v-if="$slots.extra" class="n-card__extra">
-      <slot name="extra" />
+      <slot name="footer" />
     </div>
     <div v-if="$slots.action" class="n-card__action">
       <slot name="action" />

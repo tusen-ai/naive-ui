@@ -17,11 +17,11 @@
       content: 'soft'
     }"
   >
-    <template v-slot:title-extra>
+    <template v-slot:header-extra>
       Oops!
     </template>
     Content
-    <template v-slot:extra>
+    <template v-slot:footer>
       Footer
     </template>
   </n-card>

@@ -21,7 +21,7 @@
     n-light-theme-background-color-hint="white"
   >
     <div class="n-code-box__title">
-      <slot name="header" />
+      <slot name="title" />
       <n-tooltip
         :delay="300"
         :placement="'top'"

@@ -103,7 +103,7 @@ $--card-margin-bottom: (
     width: 100%;
     box-sizing: border-box;
     position: relative;
-    background-color: $--n-background-color;
+    background-color: $--n-card-color;
     color: $--n-secondary-text-color;
     @include m(bordered) {
       border: 1px solid $--n-alpha-divider-color;
@@ -157,6 +157,7 @@ $--card-margin-bottom: (
         color: $--n-secondary-text-color;
       }
       @include e(close-mark) {
+        cursor: pointer;
         fill: $--n-secondary-text-color;
       }
     }

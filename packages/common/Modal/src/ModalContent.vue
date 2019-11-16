@@ -23,6 +23,7 @@
           <n-confirm
             v-if="preset === 'confirm'"
             ref="confirm"
+            :style="bodyStyle"
             :theme="theme"
             :title="title"
             :closable="closable"
@@ -59,6 +60,30 @@
               <slot name="footer" />
             </template>
           </n-form>
+          <n-card
+            v-if="preset === 'card'"
+            :style="bodyStyle"
+            :title="title"
+            :closable="closable"
+            :size="size"
+            :bordered="bordered"
+            :segmented="segmented"
+            @close="handleCloseClick"
+          >
+            <template v-slot:header>
+              <slot name="header" />
+            </template>
+            <template v-slot:header-extra>
+              <slot name="header-extra" />
+            </template>
+            <template v-slot:footer>
+              <slot name="footer" />
+            </template>
+            <template v-slot:action>
+              <slot name="action" />
+            </template>
+            <slot />
+          </n-card>
           <slot v-else />
         </div>
       </transition>
@@ -70,7 +95,9 @@
 import NScrollbar from '../../Scrollbar'
 import NConfirm from '../../../presets/Confirm'
 import NForm from '../../../presets/Form'
+import NCard from '../../../common/Card'
 import themeable from '../../../mixins/themeable'
+import presetProps from './presetProps'
 
 let mousePosition = null
 
@@ -88,7 +115,8 @@ export default {
   components: {
     NScrollbar,
     NConfirm,
-    NForm
+    NForm,
+    NCard
   },
   mixins: [themeable],
   props: {
@@ -106,29 +134,7 @@ export default {
       type: String,
       default: ''
     },
-    title: {
-      type: String,
-      default: 'title'
-    },
-    closable: {
-      type: Boolean,
-      default: true
-    },
-    // For preset: confirm
-    negativeText: {
-      type: String,
-      default: undefined
-    },
-    positiveText: {
-      type: String,
-      default: undefined
-    },
-    content: {
-      type: String,
-      default: undefined
-    }
-    // For preset: form
-    // For preset: card
+    ...presetProps
   },
   data () {
     return {

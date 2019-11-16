@@ -5,6 +5,7 @@ import NBasePortal from '../../../base/Portal'
 import zindexable from '../../../mixins/zindexable'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import presetProps from './presetProps'
 
 export default {
   name: 'NModal',
@@ -40,19 +41,7 @@ export default {
       type: Boolean,
       default: true
     },
-    // for confirm
-    negativeText: {
-      type: String,
-      default: undefined
-    },
-    positiveText: {
-      type: String,
-      default: undefined
-    },
-    content: {
-      type: String,
-      default: undefined
-    }
+    ...presetProps
   },
   data () {
     return {
