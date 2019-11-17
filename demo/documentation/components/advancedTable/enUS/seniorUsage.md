@@ -18,6 +18,7 @@
   :search="search"
   :pagination="{total:data.length,limit:10,custom:true}"
   @on-change="onChange"
+  @on-filter-change="onFilterChange"
   max-width="480px"
 >
   <div slot="table-operation-batch-left">
@@ -76,7 +77,7 @@ const _columns3 = $this => {
       onFilter: (value, record) => {
         return value.includes(record.name + "");
       },
-      width: 280,
+      width: 150,
       fixed: "left"
     },
     {
@@ -88,7 +89,7 @@ const _columns3 = $this => {
       sorter(a, b) {
         return a.age - b.age;
       },
-      // filterMultiple: true,
+      filterMultiple: true,
       asyncFilterItems() {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
@@ -185,6 +186,7 @@ export default {
     onChange(args) {
       console.log("reomte change");
       this.query = args;
+      console.log("TCL: onChange -> args", args);
       /**
        * "filter": {
           "age": {
@@ -218,6 +220,9 @@ export default {
       }
        */
       this.getData(args);
+    },
+    onFilterChange(data) {
+      console.log("TCL: onFilterChange -> data", data);
     },
     clear() {
       // 清除所有的Filter选项,会触发onchange事件

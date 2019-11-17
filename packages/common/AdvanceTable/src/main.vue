@@ -506,10 +506,13 @@ export default {
             )
             this.currentFilterColumn[key] = {
               value: [].concat(val[key]),
-              filterFn: column.onFilter
+              filterFn: column.onFilter,
+              filterMultiple: column.filterMultiple
             }
           }
         })
+
+        this.$emit('on-filter-change', this.getFilterData())
       }
     },
     currentFilterColumn: {
@@ -604,7 +607,28 @@ export default {
       this.$set(this.sortIndexs, columnKey, order)
     },
     filter (filterOptions) {
+      // ---- TODO: 未来版本将会去除这段代码,为了兼容老版本
+      Object.keys(filterOptions).forEach(key => {
+        let column = this.columns.find(item => item.key === key)
+        if (column && !column.filterMultiple) {
+          if (filterOptions[key].length) {
+            filterOptions[key] = filterOptions[key][0]
+          } else {
+            delete filterOptions[key]
+          }
+        }
+      })
+      // ----
       this.selectedFilter = filterOptions
+    },
+    search (columnKey,word) {
+      const searcher = {
+        key:columnKey,
+        word:word
+      }
+      if (searcher && this.search) {
+        this.$refs.search.setSearch(searcher)
+      }
     },
     /**
      * {key:[value,value1],key1:[v1,v2]}
@@ -619,10 +643,9 @@ export default {
         // clear
         this.clearSort()
       }
-      this.currentFilterColumn &&
-        Object.keys(this.currentFilterColumn).forEach(key => {
-          this.selectedFilter = {}
-        })
+
+      this.currentFilterColumn ? (this.selectedFilter = {}) : void 0
+
       if (filter) {
         // ---- TODO: 未来版本将会去除这段代码,为了兼容老版本
         Object.keys(filter).forEach(key => {
@@ -744,7 +767,7 @@ export default {
         this.useRemoteChange()
       }
     },
-    getCusomFilterData () {
+    getFilterData (option = 'all') {
       if (!this.currentFilterColumn) {
         return null
       }
@@ -755,9 +778,14 @@ export default {
       keys.forEach(key => {
         let val = this.currentFilterColumn[key].value
         let filterFn = this.currentFilterColumn[key].filterFn
-        if (filterFn === 'custom') {
+        let filterMultiple = this.currentFilterColumn[key].filterMultiple
+        if (option === 'custom' && filterFn === 'custom') {
           currentFilterColumn[key] = {
-            value: val
+            value: filterMultiple ? val : val[0]
+          }
+        } else if (option !== 'custom') {
+          currentFilterColumn[key] = {
+            value: filterMultiple ? val : val[0]
           }
         }
       })
@@ -766,7 +794,7 @@ export default {
       }
       return currentFilterColumn
     },
-    getCusomSorterData () {
+    getCustomSorterData () {
       if (!this.currentSortColumn) {
         return null
       }
@@ -779,8 +807,8 @@ export default {
       clearTimeout(this.remoteTimter)
 
       this.remoteTimter = setTimeout(() => {
-        const currentFilterColumn = this.getCusomFilterData()
-        const currentSortColumn = this.getCusomSorterData()
+        const currentFilterColumn = this.getFilterData('custom')
+        const currentSortColumn = this.getCustomSorterData()
         const emitData = {
           filter: currentFilterColumn,
           sorter: currentSortColumn,
@@ -869,7 +897,6 @@ export default {
       if (column.onFilter === 'custom') {
         this.useRemoteChange()
       }
-      this.$emit('on-filter-change', this.currentFilterColumn)
     },
     onSortChange (sortIndexs) {
       this.sortIndexs = sortIndexs
