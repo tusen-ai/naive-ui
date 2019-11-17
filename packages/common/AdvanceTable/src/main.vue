@@ -311,6 +311,7 @@ export default {
       }
       return {
         sortable: sorterColumn.sortable,
+        sorter: sorterColumn.sorter,
         key: sorterKey,
         type: this.sortIndexs[sorterKey],
         column: sorterColumn,
@@ -458,8 +459,8 @@ export default {
       this.processedData = this.computeShowingData()
       //  上次的若是为custom,本次为locale sort那么也需要触发useRemoteChange
       if (
-        sorter.sortable === 'custom' ||
-        (oldSorter && oldSorter.sortable === 'custom')
+        sorter.sorter === 'custom' ||
+        (oldSorter && oldSorter.sorter === 'custom')
       ) {
         this.useRemoteChange()
       }
@@ -471,6 +472,7 @@ export default {
     selectedFilter: {
       deep: true,
       handler (val) {
+        console.log('TCL: handler -> val', val)
         this.currentFilterColumn = null
         let keys = Object.keys(val)
         if (keys.length) {
@@ -617,28 +619,15 @@ export default {
      */
     setParams ({ filter, sorter, page }) {
       if (sorter) {
-        this.$set(this.sortIndexs, sorter.key, sorter.type)
+        this.sort(sorter.key, sorter.type)
       } else {
-        // clear
         this.clearSort()
       }
 
       this.currentFilterColumn ? (this.selectedFilter = {}) : void 0
 
       if (filter) {
-        // ---- TODO: 未来版本将会去除这段代码,为了兼容老版本
-        Object.keys(filter).forEach(key => {
-          let column = this.columns.find(item => item.key === key)
-          if (column && !column.filterMultiple) {
-            if (filter[key].length) {
-              filter[key] = filter[key][0]
-            } else {
-              delete filter[key]
-            }
-          }
-        })
-        // ----
-        this.selectedFilter = filter
+        this.filter(filter)
       }
       if (page) {
         this.$nextTick(() => {
@@ -773,7 +762,7 @@ export default {
         return null
       }
       const isCustom =
-        this.currentSortColumn.sortable === 'custom' &&
+        this.currentSortColumn.sorter === 'custom' &&
         this.currentSortColumn.type !== null
       return isCustom ? this.currentSortColumn : null
     },
@@ -837,12 +826,12 @@ export default {
             a = a.row
             b = b.row
             if (type > 0) {
-              if (column.sorter) {
+              if (column.sorter && typeof column.sorter === 'function') {
                 return column.sorter(a, b)
               }
               return ('' + a[key]).localeCompare('' + b[key])
             } else {
-              if (column.sorter) {
+              if (column.sorter && typeof column.sorter === 'function') {
                 return column.sorter(b, a)
               }
               return ('' + b[key]).localeCompare('' + a[key])

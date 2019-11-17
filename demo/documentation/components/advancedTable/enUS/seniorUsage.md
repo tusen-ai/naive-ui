@@ -73,7 +73,10 @@ const _columns3 = $this => {
     {
       title: "Name",
       key: "name",
-      sortable: "custom",
+      sortable: true,
+      sorter: (a, b) => {
+        return a.age - b.age;
+      },
       onFilter: (value, record) => {
         return value.includes(record.name + "");
       },
@@ -163,8 +166,7 @@ export default {
   mounted() {
     this.$refs.table.setParams({
       filter: { age: [15] },
-      sorter: { key: "name", type: -1 },
-      searcher: { key: "name", value: "xiaobai" }
+      sorter: { key: "name", type: -1 }
     });
   },
   methods: {
