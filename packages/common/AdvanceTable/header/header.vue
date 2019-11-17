@@ -27,7 +27,7 @@
           <n-th
             ref="theads"
             :key="column.key"
-            :style="computeAlign(column)"
+            :style="computeThStl(column)"
             :class="{
               'n-advance-table__sortable-column': column.sortable
             }"
@@ -160,7 +160,7 @@ export default {
     onCheckBoxChange (v) {
       this.$emit('on-checkbox-all-change', v)
     },
-    computeAlign (column) {
+    computeThStl (column) {
       let stl = {}
 
       if (column.align) {
@@ -169,7 +169,7 @@ export default {
         })
       }
       let height = this.height
-      console.log('TCL: computeAlign -> this.height', this.height)
+      console.log('TCL: computeThStl -> this.height', this.height)
       if (height !== null) {
         stl.height = `${height}px`
       }

@@ -14,27 +14,6 @@
       'n-advance-table--col-border': colBorder
     }"
   >
-    <div class="n-advance-table__operation">
-      <div class="n-advance-table__operation--left">
-        <slot name="table-operation-batch-left" />
-        <section class="n-advance-table__operation__bacth" />
-        <slot name="table-operation-batch-right" />
-      </div>
-      <div
-        class="n-advance-table__operation--right"
-        :style="search ? 'margin-bottom: 18px;' : ''"
-      >
-        <slot name="table-operation" />
-        <div v-if="search" class="n-advance-table__operation__search">
-          <searchInput
-            ref="search"
-            :options="search"
-            @on-change="handleSearch"
-          />
-        </div>
-        <slot name="table-operation-search-right" />
-      </div>
-    </div>
     <div
       ref="tbodyWrapper"
       class="n-advance-table__tbody"
@@ -157,7 +136,7 @@
 </template>
 
 <script>
-import searchInput from '../searchInput'
+// import searchInput from '../searchInput'
 import { noopFn } from '../../../utils/index'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
@@ -170,21 +149,21 @@ export default {
   },
   name: 'NAdvanceTable',
   components: {
-    searchInput,
+    // searchInput,
     BaseTable
   },
   mixins: [storageMixin, withapp, themeable],
   props: {
-    search: {
-      /**
-       * @description if onSearch === 'custom' will exec this.onChange
-       * columns:{label,value}
-       * placeholder @description search input placeholder
-       * onSearch @type Function | String 'custom' @returns Boolean, @description used in locale @example ( key, word,row)=>{return row.xxx.includes[word]}
-       */
-      type: [Object, Boolean],
-      default: false
-    },
+    // search: {
+    //   /**
+    //    * @description if onSearch === 'custom' will exec this.onChange
+    //    * columns:{label,value}
+    //    * placeholder @description search input placeholder
+    //    * onSearch @type Function | String 'custom' @returns Boolean, @description used in locale @example ( key, word,row)=>{return row.xxx.includes[word]}
+    //    */
+    //   type: [Object, Boolean],
+    //   default: false
+    // },
     pagination: {
       /**
        * @description pagination === false will now show pagination
@@ -253,9 +232,9 @@ export default {
       wrapperWidth: 'unset',
       tbodyWidth: 'auto;',
       scrollBarWidth: '0',
-      searchData: [],
+      processedData: [],
       currentFilterColumn: null,
-      currentSearchColumn: null,
+      // currentSearchColumn: null,
       currentPage: 1,
       selectedFilter: {},
       checkBoxes: [],
@@ -352,17 +331,17 @@ export default {
         // TODO: check count limit is exisit
         let total = this.pagination.total
         if (this.pagination.custom !== true) {
-          total = this.searchData.length
+          total = this.processedData.length
         }
         return Math.ceil(total / this.pagination.limit) || 1
       }
       return 1
     },
     showingData () {
-      let data = this.searchData
+      let data = this.processedData
       if (data === null) {
         data = []
-      } else if (!this.searchData.length) {
+      } else if (!this.processedData.length) {
         data = this.copyData
       }
       data = this.computePageDivideData(data)
@@ -465,18 +444,18 @@ export default {
     },
     data () {
       this.initData()
-      this.searchData = this.computeShowingData()
-      this.searchDataNoSort = null
+      this.processedData = this.computeShowingData()
+      this.processedDataNoSort = null
       this.checkBoxes = []
       this.disabledCheckBox = []
       this.currentPageAllSelect = false
       this.computeScollBar()
     },
     currentSearchColumn () {
-      this.searchData = this.computeShowingData()
+      this.processedData = this.computeShowingData()
     },
     currentSortColumn (sorter, oldSorter) {
-      this.searchData = this.computeShowingData()
+      this.processedData = this.computeShowingData()
       //  上次的若是为custom,本次为locale sort那么也需要触发useRemoteChange
       if (
         sorter.sortable === 'custom' ||
@@ -517,7 +496,7 @@ export default {
     },
     currentFilterColumn: {
       handler () {
-        this.searchData = this.computeShowingData()
+        this.processedData = this.computeShowingData()
         console.log('currentFilterColumn')
         // because after filter length maybe change , so need to reset current page
         this.currentPage = 1
@@ -621,22 +600,22 @@ export default {
       // ----
       this.selectedFilter = filterOptions
     },
-    search (columnKey,word) {
-      const searcher = {
-        key:columnKey,
-        word:word
-      }
-      if (searcher && this.search) {
-        this.$refs.search.setSearch(searcher)
-      }
-    },
+    // search (columnKey,word) {
+    //   const searcher = {
+    //     key:columnKey,
+    //     word:word
+    //   }
+    //   if (searcher && this.search) {
+    //     this.$refs.search.setSearch(searcher)
+    //   }
+    // },
     /**
      * {key:[value,value1],key1:[v1,v2]}
      * {key:value}
      * number
      * {key:value}
      */
-    setParams ({ filter, sorter, page, searcher }) {
+    setParams ({ filter, sorter, page }) {
       if (sorter) {
         this.$set(this.sortIndexs, sorter.key, sorter.type)
       } else {
@@ -660,11 +639,6 @@ export default {
         })
         // ----
         this.selectedFilter = filter
-      }
-      if (searcher && this.search) {
-        this.$refs.search.setSearch(searcher)
-      } else if (!searcher && this.search) {
-        this.$refs.search.clearSearch()
       }
       if (page) {
         this.$nextTick(() => {
@@ -692,7 +666,7 @@ export default {
       this.$nextTick(() => {
         let tr = this.relTable.querySelector('tr')
         this.trHeight = tr ? tr.offsetHeight : 0
-        const tbody = this.mainTBodyEl
+        // const tbody = this.mainTBodyEl
 
         // this.scrollBarWidth = tbody.offsetWidth - tbody.clientWidth
         this.scrollBarWidth = 8
@@ -710,7 +684,7 @@ export default {
           start = (this.currentPage - 2) * this.pagination.limit
           end = start + this.pagination.limit
           this.currentPage = this.currentPage - 1
-          data = this.searchData.slice(start, end)
+          data = this.processedData.slice(start, end)
         }
       }
       return data
@@ -752,21 +726,21 @@ export default {
       })
       this.checkBoxes = [].concat(this.checkBoxes)
     },
-    handleSearch ({ key, word }) {
-      this.currentSearchColumn = {
-        key,
-        word
-      }
-      if (word.length === 0) {
-        this.currentSearchColumn = null
-      } else {
-        // because after search ,length maybe change , so need to reset current page
-        this.currentPage = 1
-      }
-      if (this.search.onSearch === 'custom') {
-        this.useRemoteChange()
-      }
-    },
+    // handleSearch ({ key, word }) {
+    //   this.currentSearchColumn = {
+    //     key,
+    //     word
+    //   }
+    //   if (word.length === 0) {
+    //     this.currentSearchColumn = null
+    //   } else {
+    //     // because after search ,length maybe change , so need to reset current page
+    //     this.currentPage = 1
+    //   }
+    //   if (this.search.onSearch === 'custom') {
+    //     this.useRemoteChange()
+    //   }
+    // },
     getFilterData (option = 'all') {
       if (!this.currentFilterColumn) {
         return null
@@ -812,8 +786,8 @@ export default {
         const emitData = {
           filter: currentFilterColumn,
           sorter: currentSortColumn,
-          pagination: this.paginationer,
-          search: this.currentSearchColumn
+          pagination: this.paginationer
+          // search: this.currentSearchColumn
         }
         this.$emit('on-change', emitData)
         this.onChange && this.onChange(emitData)
@@ -825,7 +799,7 @@ export default {
       if (this.currentFilterColumn) {
         // const { filterFn, value } = this.operatingfilter
         if (Object.keys(this.currentFilterColumn).length === 0) {
-          this.searchData = []
+          this.processedData = []
         }
         Object.keys(this.currentFilterColumn).forEach(key => {
           const { value, filterFn } = this.currentFilterColumn[key]
@@ -836,14 +810,6 @@ export default {
           }
         })
       }
-      // compute search
-      if (this.currentSearchColumn && this.search.onSearch !== 'custom') {
-        const { key, word } = this.currentSearchColumn
-        data = data.filter(item => {
-          return this.search.onSearch(key, word, item.row)
-        })
-      }
-
       // compute sort
       if (this.currentSortColumn) {
         data = this.computeSortData(data)
@@ -858,13 +824,13 @@ export default {
       let { sortable, key, type, column } = this.currentSortColumn
       // use remote sort
       if (sortable === true) {
-        if (!this.searchDataNoSort && this.data.length !== 0) {
-          this.searchDataNoSort = data.slice(0)
+        if (!this.processedDataNoSort && this.data.length !== 0) {
+          this.processedDataNoSort = data.slice(0)
         }
         if (type === 0 || type === null) {
-          if (this.searchDataNoSort) {
-            data = this.searchDataNoSort
-            this.searchDataNoSort = null
+          if (this.processedDataNoSort) {
+            data = this.processedDataNoSort
+            this.processedDataNoSort = null
           }
         } else {
           data = data.sort((a, b) => {
