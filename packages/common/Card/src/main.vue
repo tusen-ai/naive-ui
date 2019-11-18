@@ -2,9 +2,9 @@
   <div
     class="n-card"
     :class="{
-      [`n-card--title${(segmented && segmented.title === 'soft') ? '-soft' : ''}-segmented`]: segmented === true || (segmented && segmented.title),
+      [`n-card--title${(segmented && segmented.header === 'soft') ? '-soft' : ''}-segmented`]: segmented === true || (segmented && segmented.header),
       [`n-card--content${(segmented && segmented.content === 'soft') ? '-soft' : ''}-segmented`]: segmented === true || (segmented && segmented.content),
-      [`n-card--extra${(segmented && segmented.extra === 'soft') ? '-soft' : ''}-segmented`]: segmented === true || (segmented && segmented.extra),
+      [`n-card--extra${(segmented && segmented.footer === 'soft') ? '-soft' : ''}-segmented`]: segmented === true || (segmented && segmented.footer),
       [`n-card--action${(segmented && segmented.action === 'soft') ? '-soft' : ''}-segmented`]: segmented === true || (segmented && segmented.action),
       [`n-card--${size}-size`]: true,
       'n-card--bordered': bordered,
@@ -20,7 +20,7 @@
           {{ title }}
         </slot>
       </div>
-      <div v-if="$slots['title-extra']" class="n-card-title__extra">
+      <div v-if="$slots['header-extra']" class="n-card-title__extra">
         <slot name="header-extra" />
       </div>
       <n-icon
@@ -36,7 +36,7 @@
     <div class="n-card__content">
       <slot />
     </div>
-    <div v-if="$slots.extra" class="n-card__extra">
+    <div v-if="$slots.footer" class="n-card__extra">
       <slot name="footer" />
     </div>
     <div v-if="$slots.action" class="n-card__action">
