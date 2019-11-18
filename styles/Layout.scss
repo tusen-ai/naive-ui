@@ -1,0 +1,106 @@
+@import './mixins/mixins.scss';
+
+@include themes-mixin {
+  @include b(layout) {
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    transition: margin-left .3s $default-cubic-bezier;
+    flex-direction: column;
+    @include m(has-sider) {
+      flex-direction: row;
+      @include b(layout-content) {
+        // width: 100%;
+      }
+    }
+    @include m(absolute-positioned) {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+  }
+  @include b(layout-header) {
+    box-sizing: border-box;
+    width: 100%;
+    background-color: $--n-card-color;
+    @include m(absolute-positioned) {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+    }
+    @include m(bordered) {
+      border-bottom: solid 1px $--n-divider-color;
+    }
+  }
+  @include b(layout-content) {
+    // flex-shrink: 0;
+    // flex-grow: 1;
+    box-sizing: border-box;
+    position: relative;
+    transition: margin-left .3s $default-cubic-bezier;
+  }
+  @include b(layout-footer) {
+    box-sizing: border-box;
+  }
+  @include b(layout-sider) {
+    box-sizing: border-box;
+    position: relative;
+    width: 272px;
+    background-color: $--n-card-color;
+    @include e(toggle-button) {
+      transition: transform .3s $default-cubic-bezier;
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      path {
+        transition: fill .3s $default-cubic-bezier;
+        fill: $service-layout-toggle-button-color;
+      }
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateX(50%) translateY(-50%);
+    }
+    @include m(bordered) {
+      border-right: solid 1px $--n-divider-color;
+    }
+    @include m(collapsed) {
+      transform: translateX(-224px);
+      @include e(toggle-button) {
+        transform: translateX(50%) translateY(-50%) rotate(180deg);
+      }
+    }
+    @include m(absolute-positioned) {
+      z-index: 1;
+      transition: transform .3s $default-cubic-bezier;
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      & + {
+        @include b(layout-content) {
+          margin-left: 272px;
+        }
+        @include b(layout) {
+          margin-left: 272px;
+        }
+      }
+      @include m(collapsed) {
+        & + {
+          @include b(layout-content) {
+            margin-left: 48px;
+          }
+        }
+        & + {
+          @include b(layout) {
+            margin-left: 48px;
+          }
+        }
+      }
+    }
+  }
+}

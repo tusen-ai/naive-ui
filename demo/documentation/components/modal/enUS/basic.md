@@ -13,7 +13,7 @@
     :bordered="false"
     size="huge"
     :segmented="{
-      title: 'soft',
+      header: 'soft',
       content: 'soft'
     }"
   >

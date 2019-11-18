@@ -103,7 +103,7 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-button'
             },
             {
-              name: 'Card (in progress)',
+              name: 'Card',
               path: `/${this.lang}/${this.theme}` + '/n-card'
             },
             {

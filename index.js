@@ -28,16 +28,14 @@ import Radio from './packages/common/Radio'
 import Form from './packages/common/Form'
 import Tabs from './packages/common/Tabs'
 import TimePicker from './packages/common/TimePicker'
-import ServiceCard from './packages/nimbus/ServiceCard'
-import HomeLayout from './packages/nimbus/HomeLayout'
-import Navbar from './packages/nimbus/Navbar'
+import Layout from './packages/common/Layout'
 import ServiceLayout from './packages/nimbus/ServiceLayout'
 import NimbusFormCard from './packages/nimbus/FormCard'
 import NimbusConfirmCard from './packages/deprecated/ConfirmCard'
 import NimbusIcon from './packages/deprecated/Icon'
 import Scrollbar from './packages/common/Scrollbar'
 import Steps from './packages/common/Steps'
-import Confirm from './packages/common/Confirm'
+import ConfirmModal from './packages/common/Confirm'
 import Badge from './packages/common/Badge'
 import Tag from './packages/common/Tag'
 import BackTop from './packages/common/BackTop'
@@ -64,6 +62,8 @@ import ConfigConsumer from './packages/common/ConfigConsumer'
 import Descriptions from './packages/common/Descriptions'
 import List from './packages/common/List'
 
+import Confirm from './packages/presets/Confirm'
+
 /**
  * debug usage
  * to be removed
@@ -75,13 +75,11 @@ function install (Vue) {
   Card.install(Vue)
   Icon.install(Vue)
   ServiceLayout.install(Vue)
-  Navbar.install(Vue)
   Loader.install(Vue)
-  HomeLayout.install(Vue)
+  Layout.install(Vue)
   GradientText.install(Vue)
   ColumnGroup.install(Vue)
   WithPadding.install(Vue)
-  ServiceCard.install(Vue)
   MasonryGroup.install(Vue)
   Table.install(Vue)
   AdvanceTable.install(Vue)
@@ -112,6 +110,7 @@ function install (Vue) {
   Scrollbar.install(Vue)
   Steps.install(Vue)
   Confirm.install(Vue)
+  ConfirmModal.install(Vue)
   Progress.install(Vue)
   Badge.install(Vue)
   Tag.install(Vue)

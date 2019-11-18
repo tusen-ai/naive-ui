@@ -68,6 +68,7 @@ import configConsumer from './documentation/components/configConsumer'
 import descriptions from './documentation/components/descriptions'
 import list from './documentation/components/list'
 import card from './documentation/components/card'
+import layout from './documentation/components/layout'
 
 import demo from './demo'
 import ComponentDemo from './utils/ComponentDemo'
@@ -131,7 +132,7 @@ const routes = [
       { path: '/dev-guildlines', component: devGuildlines },
       { path: '/status', component: status },
       { path: '/n-nimbus-service-layout', component: nimbusServiceLayoutDemo },
-      { path: '/n-nimbus-home-layout', component: homeDemo },
+      { path: '/n-layout', component: layout },
       { path: '/n-gradient-text', component: gradientText },
       { path: '/n-icon', component: () => import('./documentation/components/icon') },
       { path: '/n-checkbox', component: checkbox },
