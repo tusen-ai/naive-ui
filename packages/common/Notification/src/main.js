@@ -44,7 +44,7 @@ const defaultOptions = {
 
 const defaultNotification = {
   duration: null,
-  avator: null,
+  avatar: null,
   action: () => {}
 }
 

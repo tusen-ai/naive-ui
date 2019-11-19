@@ -7,8 +7,8 @@
   >
     <div class="n-notification-cell__wrapper">
       <div
-        v-if="!notification.avator"
-        class="n-notification-cell__avator"
+        v-if="!notification.avatar"
+        class="n-notification-cell__avatar"
       >
         !
       </div>

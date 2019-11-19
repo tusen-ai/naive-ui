@@ -14,11 +14,10 @@ import devGuildlines from './documentation/intro/devGuidelines'
 import status from './documentation/intro/status'
 
 import nimbusServiceLayoutDemo from './documentation/components/nimbusServiceLayoutDemo'
-import homeDemo from './documentation/components/homeDemo'
 import gradientText from './documentation/components/gradientText'
 import checkbox from './documentation/components/checkbox'
 import button from './documentation/components/button'
-import switchDemo from './documentation/components/switch'
+import nswitch from './documentation/components/switch'
 import input from './documentation/components/input'
 import select from './documentation/components/select'
 import cascader from './documentation/components/cascader'
@@ -69,6 +68,7 @@ import descriptions from './documentation/components/descriptions'
 import list from './documentation/components/list'
 import card from './documentation/components/card'
 import layout from './documentation/components/layout'
+import avatar from './documentation/components/avatar'
 
 import demo from './demo'
 import ComponentDemo from './utils/ComponentDemo'
@@ -108,10 +108,6 @@ const withPrefix = (prefix, routes) =>
 
 const routes = [
   {
-    path: '/home-demo',
-    component: homeDemo
-  },
-  {
     path: '/:lang/:theme/n-popover-debug',
     component: popoverDebug
   },
@@ -137,7 +133,7 @@ const routes = [
       { path: '/n-icon', component: () => import('./documentation/components/icon') },
       { path: '/n-checkbox', component: checkbox },
       { path: '/n-button', component: button },
-      { path: '/n-switch', component: switchDemo },
+      { path: '/n-switch', component: nswitch },
       // { path: '/n-table', component: tableDemo },
       { path: '/n-advance-table', component: advancedTable },
       { path: '/n-input', component: input },
@@ -192,7 +188,8 @@ const routes = [
       { path: '/n-config-consumer', component: configConsumer },
       { path: '/n-descriptions', component: descriptions},
       { path: '/n-list', component: list},
-      { path: '/n-card', component: card }
+      { path: '/n-card', component: card },
+      { path: '/n-avatar', component: avatar }
     ])
   },
   {

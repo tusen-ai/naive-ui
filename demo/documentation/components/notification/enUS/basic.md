@@ -25,7 +25,7 @@ In the kind of world where we belong`,
             notificationVueInstance.close()
           }
         }],
-        avator: null,
+        avatar: null,
         beforeClose: (next) => {
           next()
         },
@@ -58,7 +58,7 @@ I cant get no, I cant get no`,
             }
           }
         ],
-        avator: null
+        avatar: null
       })
     }
   }

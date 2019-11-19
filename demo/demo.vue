@@ -82,7 +82,7 @@ export default {
           name: 'Layout Components',
           childItems: [
             {
-              name: 'Layout (in progress)',
+              name: 'Layout',
               path: `/${this.lang}/${this.theme}` + '/n-layout'
             },
             {
@@ -95,8 +95,8 @@ export default {
           name: 'Common Components',
           childItems: [
             {
-              name: 'Avator (in progress)',
-              path: `/${this.lang}/${this.theme}` + '/n-avator'
+              name: 'Avatar (in progress)',
+              path: `/${this.lang}/${this.theme}` + '/n-avatar'
             },
             {
               name: 'Button',

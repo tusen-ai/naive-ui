@@ -61,7 +61,7 @@ import Breadcrumb from './packages/common/Breadcrumb'
 import ConfigConsumer from './packages/common/ConfigConsumer'
 import Descriptions from './packages/common/Descriptions'
 import List from './packages/common/List'
-
+import Avatar from './packages/common/Avator'
 import Confirm from './packages/presets/Confirm'
 
 /**
@@ -138,6 +138,7 @@ function install (Vue) {
   ConfigConsumer.install(Vue)
   Descriptions.install(Vue)
   List.install(Vue)
+  Avatar.install(Vue)
 }
 
 export default {

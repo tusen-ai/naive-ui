@@ -1,0 +1,42 @@
+@import './mixins/mixins.scss';
+
+@mixin avatar-size-mixin($size) {
+  @include m($size + '-size') {
+    $width: map-get($--n-height, $size);
+    width: $width;
+    height: $width;
+    @include m(circle-shaped, round-shaped) {
+      border-radius: $width / 2;
+    }
+    @include e(text) {
+      line-height: 1.25;
+    }
+  }
+}
+
+@include themes-mixin {
+  @include b(avatar) {
+    @include avatar-size-mixin('small');
+    @include avatar-size-mixin('medium');
+    @include avatar-size-mixin('large');
+    background-color: rgba(128, 128, 128, .5);
+    font-size: 14px;
+    display: inline-block;
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    text-align: center;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+    @include e(text) {
+      color: white;
+      white-space: nowrap;
+      display: inline-block;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+    }
+  }
+}

@@ -55,7 +55,7 @@
 |Layout|🚧|||
 |Affix|😍|||
 |Rating|🚧|||
-|Avator|🚧|||
+|Avatar|🚧|||
 |Result|🚧|||
 |Menu|🚧|||
 |Markdown|🚧|||
