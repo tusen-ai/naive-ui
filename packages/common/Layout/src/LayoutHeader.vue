@@ -22,7 +22,7 @@ export default {
   props: {
     bordered: {
       type: Boolean,
-      default: true
+      default: false
     }
   }
 }

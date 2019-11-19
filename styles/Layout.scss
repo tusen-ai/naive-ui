@@ -8,10 +8,13 @@
     flex-wrap: nowrap;
     transition: margin-left .3s $default-cubic-bezier;
     flex-direction: column;
+    overflow: auto;
     @include m(has-sider) {
       flex-direction: row;
-      @include b(layout-content) {
-        // width: 100%;
+      & > {
+        @include b(layout) {
+          flex: 1;
+        }
       }
     }
     @include m(absolute-positioned) {
@@ -45,13 +48,20 @@
   }
   @include b(layout-footer) {
     box-sizing: border-box;
+    @include m(absolute-positioned) {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
   }
   @include b(layout-sider) {
     box-sizing: border-box;
     position: relative;
-    width: 272px;
     background-color: $--n-card-color;
+    transition: min-width .3s  $default-cubic-bezier, max-width .3s $default-cubic-bezier, transform .3s $default-cubic-bezier;
     @include e(toggle-button) {
+      z-index: 1;
       transition: transform .3s $default-cubic-bezier;
       cursor: pointer;
       width: 36px;
@@ -65,42 +75,28 @@
       right: 0;
       transform: translateX(50%) translateY(-50%);
     }
+    @include e(content) {
+      opacity: 0;
+      transition: opacity .3s $default-cubic-bezier,;
+    }
+    @include m(show-content) {
+      @include e(content) {
+        opacity: 1;
+      }
+    }
     @include m(bordered) {
       border-right: solid 1px $--n-divider-color;
     }
     @include m(collapsed) {
-      transform: translateX(-224px);
       @include e(toggle-button) {
         transform: translateX(50%) translateY(-50%) rotate(180deg);
       }
     }
     @include m(absolute-positioned) {
-      z-index: 1;
-      transition: transform .3s $default-cubic-bezier;
       position: absolute;
       left: 0;
       top: 0;
       bottom: 0;
-      & + {
-        @include b(layout-content) {
-          margin-left: 272px;
-        }
-        @include b(layout) {
-          margin-left: 272px;
-        }
-      }
-      @include m(collapsed) {
-        & + {
-          @include b(layout-content) {
-            margin-left: 48px;
-          }
-        }
-        & + {
-          @include b(layout) {
-            margin-left: 48px;
-          }
-        }
-      }
     }
   }
 }
