@@ -1,7 +1,6 @@
 import Card from './packages/common/Card'
 import Icon from './packages/common/Icon'
 import GradientText from './packages/common/GradientText'
-import ColumnGroup from './packages/common/ColumnGroup'
 import WithPadding from './packages/common/WithPadding'
 import WithMargin from './packages/common/WithMargin'
 import MasonryGroup from './packages/common/MasonryGroup'
@@ -78,7 +77,6 @@ function install (Vue) {
   Loader.install(Vue)
   Layout.install(Vue)
   GradientText.install(Vue)
-  ColumnGroup.install(Vue)
   WithPadding.install(Vue)
   MasonryGroup.install(Vue)
   Table.install(Vue)
