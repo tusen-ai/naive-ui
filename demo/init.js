@@ -69,6 +69,7 @@ import list from './documentation/components/list'
 import card from './documentation/components/card'
 import layout from './documentation/components/layout'
 import avatar from './documentation/components/avatar'
+import result from './documentation/components/result'
 
 import demo from './demo'
 import ComponentDemo from './utils/ComponentDemo'
@@ -189,7 +190,8 @@ const routes = [
       { path: '/n-descriptions', component: descriptions},
       { path: '/n-list', component: list},
       { path: '/n-card', component: card },
-      { path: '/n-avatar', component: avatar }
+      { path: '/n-avatar', component: avatar },
+      { path: '/n-result', component: result }
     ])
   },
   {

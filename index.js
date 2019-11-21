@@ -62,6 +62,7 @@ import Descriptions from './packages/common/Descriptions'
 import List from './packages/common/List'
 import Avatar from './packages/common/Avator'
 import Confirm from './packages/presets/Confirm'
+import Result from './packages/common/Result'
 
 /**
  * debug usage
@@ -137,6 +138,7 @@ function install (Vue) {
   Descriptions.install(Vue)
   List.install(Vue)
   Avatar.install(Vue)
+  Result.install(Vue)
 }
 
 export default {

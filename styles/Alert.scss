@@ -5,6 +5,7 @@
   @include m($type + '-type') {
     background-color: map-get($--alert-background-color, $type);
     box-shadow: inset 0 0 0 1.2px map-get($--alert-border-color, $type);
+    text-align: left;
     @include e(icon) {
       @include b(icon) {
         path {
