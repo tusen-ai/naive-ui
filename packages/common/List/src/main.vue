@@ -3,6 +3,7 @@
     class="n-list"
     :class="{
       'n-list--bordered': bordered,
+      [`n-list--${size}-size`]: size,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
   >
@@ -24,9 +25,13 @@ export default {
   name: 'NList',
   mixins: [withapp, themeable],
   props: {
+    size: {
+      type: String,
+      default: 'medium'
+    },
     bordered: {
       type: Boolean,
-      default: true
+      default: false
     }
   }
 }

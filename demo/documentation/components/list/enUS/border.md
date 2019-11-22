@@ -1,6 +1,6 @@
-# Basic
+# Border
 ```html
-<n-list bordered>
+<n-list>
   <template v-slot:header>
     hhh
   </template>
@@ -21,7 +21,14 @@
     </n-thing>
   </n-list-item>
   <n-list-item>
-    <n-thing title="Thing" title-extra="extra" description="description" />
+    <n-thing title="Thing" title-extra="extra" description="description">
+      Biu<br>
+      Biu<br>
+      Biu<br>
+    </n-thing>
+    <template v-slot:suffix>
+      <n-button>Suffix</n-button>
+    </template>
   </n-list-item>
 </n-list>
 ```

@@ -209,12 +209,16 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-empty'
             },
             {
-              name: 'List (in progress)',
+              name: 'List',
               path: `/${this.lang}/${this.theme}` + '/n-list'
             },
             {
               name: 'Statistic',
               path: `/${this.lang}/${this.theme}` + '/n-statistic'
+            },
+            {
+              name: 'Thing',
+              path: `/${this.lang}/${this.theme}` + '/n-thing'
             },
             {
               name: 'Time',
