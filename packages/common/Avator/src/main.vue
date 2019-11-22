@@ -2,8 +2,15 @@
   <span
     class="n-avatar"
     :class="{
-      [`n-avatar--${size}-size`]: true,
-      [`n-avatar--circle-shaped`]: circle || round
+      [`n-avatar--${size}-size`]: typeof size !== 'number',
+      [`n-avatar--circle-shaped`]: circle || round,
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+    }"
+    :style="{
+      width: styleWidth,
+      height: styleWidth,
+      borderRadius: styleBorderRadius,
+      ...synthesizedStyle
     }"
   >
     <img v-if="!$slots.default && src" :src="src">
@@ -31,7 +38,7 @@ export default {
   mixins: [withapp, themeable],
   props: {
     size: {
-      type: String,
+      type: [String, Number],
       default: 'medium'
     },
     src: {
@@ -60,6 +67,19 @@ export default {
     styleTransfrom () {
       if (this.ratio !== 1) return `translateX(-50%) translateY(-50%) scale(${this.ratio})`
       return 'translateX(-50%) translateY(-50%)'
+    },
+    styleWidth () {
+      if (typeof this.size === 'number') {
+        return `${this.size}px`
+      }
+      return null
+    },
+    styleBorderRadius () {
+      if (!this.circle && !this.round) return null
+      if (typeof this.size === 'number') {
+        return `${this.size / 2}px`
+      }
+      return null
     }
   },
   updated () {
@@ -74,8 +94,9 @@ export default {
         const elWidth = this.$el.offsetWidth
         const textWidth = this.$refs.text.offsetWidth
         const elHeight = this.$el.offsetHeight
-        const textHeight = this.$el.offsetHeight
-        const ratio = Math.min(elWidth / textWidth * 0.85, elHeight / textHeight * 0.85)
+        const textHeight = this.$refs.text.offsetHeight
+        const radix = (this.circle || this.round) ? 0.75 : 0.85
+        const ratio = Math.min(elWidth / textWidth * radix, elHeight / textHeight * radix)
         this.ratio = Math.min(1, ratio)
       }
     }

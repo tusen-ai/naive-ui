@@ -11,6 +11,11 @@
     @include e(text) {
       line-height: 1.25;
     }
+    @include b(icon) {
+      position: relative;
+      top: 4px;
+      font-size: $width - 8px;
+    }
   }
 }
 
@@ -19,7 +24,13 @@
     @include avatar-size-mixin('small');
     @include avatar-size-mixin('medium');
     @include avatar-size-mixin('large');
-    background-color: rgba(128, 128, 128, .5);
+    @include b(icon) {
+      transition: fill .3s $default-cubic-bezier;
+      fill: white;
+    }
+    color: white;
+    transition: background-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier;
+    background-color: $--overlay-5;
     font-size: 14px;
     display: inline-block;
     position: relative;
@@ -31,7 +42,6 @@
       height: 100%;
     }
     @include e(text) {
-      color: white;
       white-space: nowrap;
       display: inline-block;
       position: absolute;

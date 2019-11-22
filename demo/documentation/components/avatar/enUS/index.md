@@ -1,4 +1,9 @@
 # Avatar
 ```demo
-basic
+size
+shape
+color
+badge
+icon
+name-size
 ```

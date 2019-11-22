@@ -106,7 +106,7 @@
           width: 8px;
           padding: 0;
           min-width: 8px;
-          left: calc(100% - 4px);
+          left: 100%;
           bottom: calc(100% - 4px);
           @include e(ripple-mask) {
             border-radius: 4px;
@@ -135,7 +135,8 @@
       padding: 0 6px;
       text-align: center;
       font-size: 12px;
-      left: calc(100% - 9px);
+      transform: translateX(-50%);
+      left: 100%;
       bottom: calc(100% - 9px);
       font-weight: 700;
       @include e(ripple-mask) {

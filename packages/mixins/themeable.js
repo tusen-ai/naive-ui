@@ -3,6 +3,10 @@ export default {
     theme: {
       type: String,
       default: null
+    },
+    themedStyle: {
+      type: Object,
+      default: null
     }
   },
   computed: {
@@ -12,6 +16,12 @@ export default {
       } else {
         return (this.NApp && this.NApp.synthesizedTheme) || null
       }
+    },
+    synthesizedStyle () {
+      if (this.themedStyle && this.synthesizedTheme && this.themedStyle[this.synthesizedTheme]) {
+        return this.themedStyle[this.synthesizedTheme]
+      }
+      return null
     }
   }
 }
