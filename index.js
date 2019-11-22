@@ -64,6 +64,7 @@ import Avatar from './packages/common/Avator'
 import Confirm from './packages/presets/Confirm'
 import Result from './packages/common/Result'
 import Thing from './packages/common/Thing'
+import AutoComplete from './packages/common/AutoComplete'
 
 /**
  * debug usage
@@ -141,6 +142,7 @@ function install (Vue) {
   Avatar.install(Vue)
   Result.install(Vue)
   Thing.install(Vue)
+  AutoComplete.install(Vue)
 }
 
 export default {
