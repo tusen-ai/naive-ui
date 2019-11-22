@@ -71,6 +71,7 @@ import layout from './documentation/components/layout'
 import avatar from './documentation/components/avatar'
 import result from './documentation/components/result'
 import thing from './documentation/components/thing'
+import autoComplete from './documentation/components/autoComplete'
 
 import demo from './demo'
 import ComponentDemo from './utils/ComponentDemo'
@@ -193,7 +194,8 @@ const routes = [
       { path: '/n-card', component: card },
       { path: '/n-avatar', component: avatar },
       { path: '/n-result', component: result },
-      { path: '/n-thing', component: thing }
+      { path: '/n-thing', component: thing },
+      { path: '/n-auto-complete', component: autoComplete }
     ])
   },
   {

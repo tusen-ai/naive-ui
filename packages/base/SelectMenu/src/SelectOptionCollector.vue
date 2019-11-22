@@ -9,6 +9,9 @@ export default {
   inject: {
     NSelect: {
       default: null
+    },
+    NAutoComplete: {
+      default: null
     }
   },
   data () {
@@ -18,10 +21,17 @@ export default {
       mounting: true
     }
   },
+  computed: {
+    injection () {
+      if (this.NSelect) return this.NSelect
+      if (this.NAutoComplete) return this.NAutoComplete
+      return null
+    }
+  },
   watch: {
     options (value) {
-      if (this.NSelect) {
-        this.NSelect.collectedOptions = value
+      if (this.injection) {
+        this.injection.collectedOptions = value
       }
     }
   },

@@ -11,6 +11,7 @@
       <template v-slot:nav>
         <doc-header
           :lang="lang"
+          :items="flattenedItems"
           @lang-change="handleLangChange"
         />
       </template>
@@ -382,6 +383,19 @@ export default {
           ]
         }
       ]
+    },
+    flattenedItems () {
+      const flattenedItems = []
+      const traverse = items => {
+        if (items) {
+          items.forEach(item => {
+            if (item.childItems) traverse(item.childItems)
+            else flattenedItems.push(item)
+          })
+        }
+      }
+      traverse(this.items)
+      return flattenedItems
     },
     lang: {
       get () {
