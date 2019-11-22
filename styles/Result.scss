@@ -4,7 +4,29 @@
   @include b(result) {
     font-size: 14px;
     color: $--n-secondary-text-color;
+    transition: color .3s $default-cubic-bezier;
+    @include m(success-status) {
+      @include b(result-icon) {
+        fill: $--success-6;
+      }
+    }
+    @include m(info-status) {
+      @include b(result-icon) {
+        fill: $--info-6;
+      }
+    }
+    @include m(warning-status) {
+      @include b(result-icon) {
+        fill: $--warning-6;
+      }
+    }
+    @include m(error-status) {
+      @include b(result-icon) {
+        fill: $--error-6;
+      }
+    }
     @include b(result-icon) {
+      transition: fill .3s $default-cubic-bezier;
       display: flex;
       justify-content: center;
       @include e(status-image) {
@@ -18,6 +40,7 @@
         font-size: 32px;
         font-weight: 700;
         color: $--n-text-color;
+        transition: color .3s $default-cubic-bezier;
         text-align: center;
       }
       @include e(description) {
