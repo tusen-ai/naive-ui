@@ -104,6 +104,7 @@ $--card-margin-bottom: (
     box-sizing: border-box;
     position: relative;
     background-color: $--n-card-color;
+    transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
     color: $--n-secondary-text-color;
     @include m(bordered) {
       border: 1px solid $--n-alpha-divider-color;
@@ -122,6 +123,7 @@ $--card-margin-bottom: (
     }
     @include m(title-segmented, title-soft-segmented) {
       @include b(card-title) {
+        transition: border-color .3s $default-cubic-bezier;
         &:not(:last-child) {
           border-bottom: 1px solid $--n-alpha-divider-color;
         }
@@ -129,6 +131,7 @@ $--card-margin-bottom: (
     }
     @include m(content-segmented, content-soft-segmented) {
       @include e(content) {
+        transition: border-color .3s $default-cubic-bezier;
         &:not(:last-child) {
           border-bottom: 1px solid $--n-alpha-divider-color;
         }
@@ -136,6 +139,7 @@ $--card-margin-bottom: (
     }
     @include m(extra-segmented, extra-soft-segmented) {
       @include e(extra) {
+        transition: border-color .3s $default-cubic-bezier;
         &:not(:last-child) {
           border-bottom: 1px solid $--n-alpha-divider-color;
         }
@@ -149,16 +153,19 @@ $--card-margin-bottom: (
         font-weight: 700;
         font-size: 18px;
         color: $--n-text-color;
+        transition: color .3s $default-cubic-bezier;
         flex: 1;
       }
       @include e(extra) {
         font-weight: 400;
         font-size: 14px;
         color: $--n-secondary-text-color;
+        transition: color .3s $default-cubic-bezier;
       }
       @include e(close-mark) {
         cursor: pointer;
         fill: $--n-secondary-text-color;
+        transition: fill .3s $default-cubic-bezier
       }
     }
     @include e(content) {
@@ -170,6 +177,7 @@ $--card-margin-bottom: (
       font-size: 14px;
     }
     @include e(action) {
+      transition: background-color .3s $default-cubic-bezier;
       background-color: $--n-table-header-color;
       line-height: 1.5;
       font-size: 14px;

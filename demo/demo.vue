@@ -319,7 +319,7 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-progress'
             },
             {
-              name: 'Result (in progress)',
+              name: 'Result',
               path: `/${this.lang}/${this.theme}` + '/n-result'
             },
             {
