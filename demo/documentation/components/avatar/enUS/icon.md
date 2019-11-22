@@ -1,11 +1,9 @@
 # Icon
 ```html
 <n-avatar>
-  <template v-slot:icon>
-    <n-icon>
-      <md-cash />
-    </n-icon>
-  </template>
+  <n-icon>
+    <md-cash />
+  </n-icon>
 </n-avatar>
 ```
 ```js

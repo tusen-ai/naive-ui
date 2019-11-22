@@ -12,9 +12,7 @@
       line-height: 1.25;
     }
     @include b(icon) {
-      position: relative;
-      top: 4px;
-      font-size: $width - 8px;
+      font-size: $width;
     }
   }
 }
@@ -27,6 +25,7 @@
     @include b(icon) {
       transition: fill .3s $default-cubic-bezier;
       fill: white;
+      vertical-align: bottom;
     }
     color: white;
     transition: background-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier;

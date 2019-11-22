@@ -95,7 +95,7 @@ export default {
           name: 'Common Components',
           childItems: [
             {
-              name: 'Avatar (in progress)',
+              name: 'Avatar',
               path: `/${this.lang}/${this.theme}` + '/n-avatar'
             },
             {
