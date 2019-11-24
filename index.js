@@ -65,6 +65,7 @@ import Confirm from './packages/presets/Confirm'
 import Result from './packages/common/Result'
 import Thing from './packages/common/Thing'
 import AutoComplete from './packages/common/AutoComplete'
+import Empty from './packages/common/Empty'
 
 /**
  * debug usage
@@ -143,6 +144,7 @@ function install (Vue) {
   Result.install(Vue)
   Thing.install(Vue)
   AutoComplete.install(Vue)
+  Empty.install(Vue)
 }
 
 export default {

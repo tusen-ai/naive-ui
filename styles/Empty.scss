@@ -1,0 +1,21 @@
+@import "./mixins/mixins.scss";
+
+@include themes-mixin () {
+  @include b(empty) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include e(icon) {
+      fill: $--n-disabled-text-color;
+      width: 48px;
+      height: 48px;
+    }
+    @include e(description) {
+      margin-top: 8px;
+      color: $--n-disabled-text-color;
+    }
+    @include e(extra) {
+      margin-top: 16px;
+    }
+  }
+}
