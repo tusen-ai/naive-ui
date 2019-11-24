@@ -1,13 +1,7 @@
 <template>
-  <svg viewBox="0 0 61 61">
-    <g>
-      <path d="M30,0h0a2,2,0,0,1,2,2v8a2,2,0,0,1-2,2h0a2,2,0,0,1-2-2V2A2,2,0,0,1,30,0Z" transform="translate(0 0)" />
-      <path id="Rectangle-Copy-6" class="cls-1" d="M0,31H0a2,2,0,0,1,2-2h8a2,2,0,0,1,2,2h0a2,2,0,0,1-2,2H2A2,2,0,0,1,0,31Z" transform="translate(0 0)" />
-      <path id="Rectangle-Copy-7" class="cls-1" d="M49,31h0a2,2,0,0,1,2-2h8a2,2,0,0,1,2,2h0a2,2,0,0,1-2,2H51A2,2,0,0,1,49,31Z" transform="translate(0 0)" />
-      <path id="Rectangle-Copy-3" class="cls-1" d="M31,49h0a2,2,0,0,1,2,2v8a2,2,0,0,1-2,2h0a2,2,0,0,1-2-2V51A2,2,0,0,1,31,49Z" transform="translate(0 0)" />
-      <path id="Rectangle-Copy" class="cls-1" d="M9.34,8.91a2.08,2.08,0,0,1,2.93,0l5.57,5.54a2.06,2.06,0,0,1,0,2.91h0a2.07,2.07,0,0,1-2.93,0L9.34,11.82a2.06,2.06,0,0,1,0-2.91Z" transform="translate(0 0)" />
-      <path id="Rectangle-Copy-2" class="cls-1" d="M43.47,17.8a2.08,2.08,0,0,0,2.93,0L52,12.27a2.06,2.06,0,0,0,0-2.91h0a2.07,2.07,0,0,0-2.93,0l-5.57,5.54a2.06,2.06,0,0,0,0,2.91Z" transform="translate(0 0)" /><path id="Rectangle-Copy-10" class="cls-1" d="M8.48,52.13a2.07,2.07,0,0,0,2.93,0L17,46.59a2,2,0,0,0,0-2.9h0a2.07,2.07,0,0,0-2.93,0L8.48,49.22a2.06,2.06,0,0,0,0,2.91Z" transform="translate(0 0)" />
-      <path id="Rectangle-Copy-9" class="cls-1" d="M43.28,42.68a2.06,2.06,0,0,0,0,2.91h0l5.58,5.54a2.06,2.06,0,1,0,2.93-2.91h0l-5.58-5.54A2.07,2.07,0,0,0,43.28,42.68Z" transform="translate(0 0)" />
+  <svg viewBox="0 0 60 60">
+    <g id="Group-6">
+      <path id="Rectangle" class="cls-1" d="M30,0h0a1.09,1.09,0,0,1,1,1.17V5.83A1.09,1.09,0,0,1,30,7h0a1.09,1.09,0,0,1-1-1.17V1.17A1.09,1.09,0,0,1,30,0Z" transform="translate(0 0)" /><path id="Rectangle-Copy-6" class="cls-1" d="M0,30H0a1.09,1.09,0,0,1,1.17-1H5.83A1.09,1.09,0,0,1,7,30H7a1.09,1.09,0,0,1-1.17,1H1.17A1.09,1.09,0,0,1,0,30Z" transform="translate(0 0)" /><path id="Rectangle-Copy-7" class="cls-1" d="M53,30h0a1.09,1.09,0,0,1,1.17-1h4.66A1.09,1.09,0,0,1,60,30h0a1.09,1.09,0,0,1-1.17,1H54.17A1.09,1.09,0,0,1,53,30Z" transform="translate(0 0)" /><path id="Rectangle-Copy-7-Copy" class="cls-1" d="M46.29,13.71h0a1.1,1.1,0,0,1,.12-1.53l3.3-3.3a1.09,1.09,0,0,1,1.53-.12h0a1.09,1.09,0,0,1-.12,1.53l-3.3,3.3A1.1,1.1,0,0,1,46.29,13.71Z" transform="translate(0 0)" /><path id="Rectangle-Copy-7-Copy-2" class="cls-1" d="M13.71,13.71h0a1.1,1.1,0,0,1-1.53-.12l-3.3-3.3a1.09,1.09,0,0,1-.12-1.53h0a1.09,1.09,0,0,1,1.53.12l3.3,3.3A1.1,1.1,0,0,1,13.71,13.71Z" transform="translate(0 0)" /><path id="Rectangle-Copy-7-Copy-3" class="cls-1" d="M12.71,45.29h0a1.1,1.1,0,0,1-.12,1.53l-3.3,3.3a1.09,1.09,0,0,1-1.53.12h0a1.09,1.09,0,0,1,.12-1.53l3.3-3.3A1.1,1.1,0,0,1,12.71,45.29Z" transform="translate(0 0)" /><path id="Rectangle-Copy-7-Copy-4" class="cls-1" d="M46.29,45.29h0a1.1,1.1,0,0,1,1.53.12l3.3,3.3a1.09,1.09,0,0,1,.12,1.53h0a1.09,1.09,0,0,1-1.53-.12l-3.3-3.3A1.1,1.1,0,0,1,46.29,45.29Z" transform="translate(0 0)" /><path id="Rectangle-Copy-3" class="cls-1" d="M30,53h0a1.09,1.09,0,0,1,1,1.17v4.66A1.09,1.09,0,0,1,30,60h0a1.09,1.09,0,0,1-1-1.17V54.17A1.09,1.09,0,0,1,30,53Z" transform="translate(0 0)" />
     </g>
   </svg>
 </template>
