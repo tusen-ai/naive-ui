@@ -1,5 +1,5 @@
-@import './mixins/mixins.scss';
-@import './themes/vars.scss';
+@import "./mixins/mixins.scss";
+@import "./themes/vars.scss";
 
 @include themes-mixin {
   @include b(advance-table--col-border) {
@@ -228,7 +228,8 @@
       }
     }
     @include e(header) {
-      overflow: hidden;
+      overflow: scroll;
+      margin-bottom: -8px;
       background-color: $--table-header-background-color;
       i {
         fill: $--table-header-icon-color;

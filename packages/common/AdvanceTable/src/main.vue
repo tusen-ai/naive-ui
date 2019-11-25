@@ -68,6 +68,7 @@
         :selected-filter="selectedFilter"
         :current-page-selected-len="currentPageSelectedLen"
         :body-min-height="42"
+        :scroll-bar-vertical-width="scrollBarWidth"
         @on-scroll="onBodyScrolll"
         @on-checkbox-all="onAllCheckboxesClick"
         @on-sort-change="onSortChange"
@@ -364,6 +365,7 @@ export default {
             ? this.minHeight + 'px'
             : this.minHeight
       }
+
       return stl
     },
     colGroup () {
@@ -655,10 +657,10 @@ export default {
       this.$nextTick(() => {
         let tr = this.relTable.querySelector('tr')
         this.trHeight = tr ? tr.offsetHeight : 0
-        // const tbody = this.mainTBodyEl
+        const tbody = this.mainTBodyEl
 
         // this.scrollBarWidth = tbody.offsetWidth - tbody.clientWidth
-        this.scrollBarWidth = 8
+        this.scrollBarWidth = tbody.offsetWidth - tbody.clientWidth
 
         this.computeHorizontalScrollBarHeight()
       })

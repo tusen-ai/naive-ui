@@ -19,7 +19,7 @@
         :style="computeCustomWidthStl(column)"
       >
 
-      <col v-if="scrollBarWidth" :width="scrollBarWidth" >
+      <!-- <col v-if="scrollBarWidth" :width="scrollBarWidth" > -->
     </colgroup>
     <n-thead>
       <n-tr>
@@ -75,13 +75,13 @@
             />
           </n-th>
         </template>
-        <span
+        <!-- <span
           v-if="scrollBarWidth"
           :style="
             'padding-left:' + scrollBarWidth + 'px;' + 'visibility:hidden;'
           "
           rowspan="1"
-        />
+        /> -->
       </n-tr>
     </n-thead>
   </n-table>
