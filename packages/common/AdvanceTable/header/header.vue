@@ -64,7 +64,7 @@
             <!-- 否则默认渲染 -->
             <PopFilter
               v-if="
-                column.onFilter &&
+                column.filterable &&
                   (column.filterItems || column.asyncFilterItems)
               "
               v-model="selectedFilter[column.key]"

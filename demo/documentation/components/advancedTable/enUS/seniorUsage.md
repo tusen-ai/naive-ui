@@ -90,6 +90,7 @@ const _columns3 = $this => {
       sorter(a, b) {
         return a.age - b.age;
       },
+      filterable: true,
       filterMultiple: true,
       asyncFilterItems() {
         return new Promise((resolve, reject) => {
@@ -101,7 +102,7 @@ const _columns3 = $this => {
           }, 1000);
         });
       },
-      onFilter: "custom",
+      filter: "custom",
       render: (h, params) => {
         return <b>{params.row.age}</b>;
       }
@@ -110,7 +111,8 @@ const _columns3 = $this => {
       title: "Sex",
       key: "sex",
       width: 100,
-      onFilter: (values, record) => {
+      filterable: true,
+      filter: (values, record) => {
         return values.includes(record.sex);
       },
       filterMultiple: true,

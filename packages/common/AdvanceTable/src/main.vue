@@ -489,7 +489,7 @@ export default {
             )
             this.currentFilterColumn[key] = {
               value: [].concat(val[key]),
-              filterFn: column.onFilter,
+              filterFn: column.filter,
               filterMultiple: column.filterMultiple
             }
           }
@@ -794,7 +794,7 @@ export default {
         }
         Object.keys(this.currentFilterColumn).forEach(key => {
           const { value, filterFn } = this.currentFilterColumn[key]
-          if (value && filterFn !== 'custom') {
+          if (value && filterFn !== 'custom' && filterFn) {
             data = data.filter(item => {
               return filterFn(value, item.row)
             })
@@ -851,7 +851,7 @@ export default {
       return data
     },
     onFilter (value, column) {
-      if (column.onFilter === 'custom') {
+      if (column.filter === 'custom') {
         this.useRemoteChange()
       }
     },
