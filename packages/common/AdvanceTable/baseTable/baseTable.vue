@@ -10,6 +10,7 @@
       :showing-data="showingData"
       :scroll-bar-width="scrollBarVerticalWidth"
       :current-page-selected="currentPageSelectedLen"
+      :fixed="fixed"
       @on-checkbox-all="onAllCheckboxesClick"
       @on-sort-change="onSortChange"
       @on-filter="onFilter"

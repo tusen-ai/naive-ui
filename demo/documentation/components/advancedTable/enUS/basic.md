@@ -9,6 +9,7 @@
   max-height="300px"
   :search="search"
   :pagination="{total:data.length,limit:10}"
+  class="n-table--basic"
   @on-change="onChange"
   @on-selected-change="onSelectedChange"
 >

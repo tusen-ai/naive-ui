@@ -74,9 +74,7 @@ const _columns3 = $this => {
       title: "Name",
       key: "name",
       sortable: true,
-      sorter: (a, b) => {
-        return a.age - b.age;
-      },
+      sorter: "custom",
       onFilter: (value, record) => {
         return value.includes(record.name + "");
       },

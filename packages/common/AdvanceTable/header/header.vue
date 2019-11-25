@@ -9,7 +9,7 @@
   <n-table
     ref="header"
     style="padding:0;border-bottom-left-radius:0;border-bottom-right-radius:0;"
-    :style="colGroupStl"
+    :style="colHeaderGroupStl"
     class="n-advance-table__header"
   >
     <colgroup>
@@ -130,6 +130,10 @@ export default {
     showingData: {
       type: Array,
       default: () => []
+    },
+    fixed: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -138,6 +142,13 @@ export default {
     }
   },
   computed: {
+    colHeaderGroupStl () {
+      return {
+        ...this.colGroupStl,
+        overflow: this.scrollBarWidth && !this.fixed ? 'scroll' : 'hidden',
+        marginBottom: this.scrollBarWidth && !this.fixed ? null : 'unset'
+      }
+    },
     isCheckedBoxAllIndeterminate () {
       return (
         this.currentPageSelected !== this.showingData.length &&
