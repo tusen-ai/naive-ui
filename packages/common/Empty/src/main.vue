@@ -4,6 +4,7 @@
     :class="{
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
+    :style="synthesizedStyle"
   >
     <div class="n-empty__icon">
       <empty-icon />
