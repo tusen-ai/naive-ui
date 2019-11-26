@@ -5,14 +5,18 @@
       [`n-app--${theme}-theme`]: theme,
       [`n-${theme}-theme`]: theme
     }"
+    :style="synthesizedStyle"
   >
     <slot />
   </div>
 </template>
 
 <script>
+import themeable from '../../../mixins/themeable'
+
 export default {
   name: 'NConfigProvider',
+  mixins: [themeable],
   provide () {
     return {
       NApp: this
@@ -27,19 +31,6 @@ export default {
     namespace: {
       type: String,
       default: null
-    },
-    theme: {
-      type: String,
-      default: null
-    }
-  },
-  computed: {
-    synthesizedTheme () {
-      if (this.theme !== null) {
-        return this.theme
-      } else {
-        return (this.NApp && this.NApp.synthesizedTheme) || null
-      }
     }
   }
 }

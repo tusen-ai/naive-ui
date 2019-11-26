@@ -7,7 +7,7 @@
       transition: color .3s $default-cubic-bezier;
       font-size: 14px;
       @include b(thing-avatar) {
-        margin-right: 16px;
+        margin-right: 12px;
         margin-top: 2px;
       }
       @include b(thing-avatar-header-wrapper) {
@@ -40,17 +40,17 @@
         }
         @include e(content) {
           &:not(:first-child) {
-            margin-top: 16px;
+            margin-top: 12px;
           }
         }
         @include e(footer) {
           &:not(:first-child) {
-            margin-top: 16px;
+            margin-top: 12px;
           }
         }
         @include e(action) {
           &:not(:first-child) {
-            margin-top: 16px;
+            margin-top: 12px;
           }
         }
       }

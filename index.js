@@ -45,7 +45,7 @@ import Popconfirm from './packages/common/Popconfirm'
 import Anchor from './packages/common/Anchor'
 import Dropdown from './packages/common/Dropdown'
 import Popselect from './packages/common/Popselect'
-import App from './packages/common/App'
+import ConfigProvider from './packages/common/ConfigProvider'
 import Transfer from './packages/common/Transfer'
 import Spin from './packages/common/Spin'
 import Drawer from './packages/common/Drawer'
@@ -124,7 +124,7 @@ function install (Vue) {
   Anchor.install(Vue)
   Dropdown.install(Vue)
   Popselect.install(Vue)
-  App.install(Vue)
+  ConfigProvider.install(Vue)
   CancelMark.install(Vue)
   Transfer.install(Vue)
   Spin.install(Vue)
