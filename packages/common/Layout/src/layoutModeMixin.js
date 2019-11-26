@@ -6,8 +6,10 @@ export default {
   },
   props: {
     mode: {
-      type: String,
-      default: 'default'
+      default: 'default',
+      validator (value) {
+        return ['default', 'absolute'].includes(value)
+      }
     }
   }
 }

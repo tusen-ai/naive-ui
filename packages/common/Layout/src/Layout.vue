@@ -6,7 +6,8 @@
       'n-layout--has-sider': hasSider,
     }"
     :style="{
-      marginLeft: styleMarginLeft
+      marginLeft: styleMarginLeft,
+      transition: transitionBlocked ? 'none' : null
     }"
   >
     <n-scrollbar v-if="!useNativeScrollbar">
@@ -28,10 +29,6 @@ export default {
     }
   },
   props: {
-    mode: {
-      type: String,
-      default: 'default'
-    },
     useNativeScrollbar: {
       type: Boolean,
       default: true
@@ -43,7 +40,8 @@ export default {
       siderWidth: null,
       collapsedSiderWidth: null,
       siderMode: null,
-      siderCollapsed: null
+      siderCollapsed: null,
+      childLayoutTransitionBlocked: false
     }
   },
   computed: {
@@ -58,6 +56,21 @@ export default {
         }
       }
       return null
+    },
+    transitionBlocked () {
+      if (this.NLayout && this.NLayout.childLayoutTransitionBlocked) {
+        return true
+      } else {
+        return false
+      }
+    }
+  },
+  methods: {
+    blockChildLayoutTransitionOneTick () {
+      this.childLayoutTransitionBlocked = true
+      this.$nextTick().then(() => {
+        this.childLayoutTransitionBlocked = false
+      })
     }
   }
 }

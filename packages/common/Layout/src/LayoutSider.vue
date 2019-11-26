@@ -9,9 +9,10 @@
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
     :style="{
+      ...synthesizedStyle,
       transform: styleTransform,
       maxWidth: styleMaxWidth,
-      width: styleWidth
+      width: styleWidth,
     }"
   >
     <n-scrollbar v-if="!useNativeScrollbar">
@@ -37,13 +38,14 @@ import layoutModeMixin from './layoutModeMixin'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import ToggleButton from './ToggleButton'
+import asthemecontext from '../../../mixins/asthemecontext'
 
 export default {
   name: 'NLayoutSider',
   components: {
     ToggleButton
   },
-  mixins: [ withapp, themeable, layoutModeMixin ],
+  mixins: [ withapp, themeable, asthemecontext, layoutModeMixin ],
   props: {
     bordered: {
       type: Boolean,
@@ -160,6 +162,7 @@ export default {
   mounted () {
     const NLayout = this.NLayout
     if (NLayout) {
+      NLayout.blockChildLayoutTransitionOneTick()
       NLayout.hasSider = true
       NLayout.siderWidth = this.width
       NLayout.collapsedSiderWidth = this.collapsedWidth

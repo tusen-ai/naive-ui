@@ -61,7 +61,7 @@ Use `collapsed-width` and `width` to set sider's width.
 export default {
   data () {
     return {
-      collapsed: false
+      collapsed: true
     }
   }
 }
