@@ -206,7 +206,7 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-descriptions'
             },
             {
-              name: 'Empty (in progress)',
+              name: 'Empty',
               path: `/${this.lang}/${this.theme}` + '/n-empty'
             },
             {

@@ -1,3 +1,4 @@
 @mixin setup-light-thing {
-  
+  $--thing-header-text-color: $--n-text-color !global;
+  $--thing-text-color: $--n-secondary-text-color !global;
 }

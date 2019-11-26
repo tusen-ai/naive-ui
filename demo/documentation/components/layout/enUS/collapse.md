@@ -20,7 +20,7 @@ Use `collapsed-width` and `width` to set sider's width.
       @collapse="collapsed = true"
       @expand="collapsed = false"
     >
-      <h1>Sider</h1>
+      <p>Sider Sider Sider Sider Sider Sider</p>
     </n-layout-sider>
     <n-layout>
       <n-layout-content>

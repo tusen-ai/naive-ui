@@ -1,6 +1,7 @@
 <script>
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import asthemecontext from '../../../mixins/asthemecontext'
 
 function isDescriptionsItem (vNode) {
   return (
@@ -13,7 +14,7 @@ function isDescriptionsItem (vNode) {
 
 export default {
   name: 'NDescriptions',
-  mixins: [withapp, themeable],
+  mixins: [withapp, themeable, asthemecontext],
   props: {
     title: {
       type: String,
@@ -135,6 +136,7 @@ export default {
     }, row))
     return h('div', {
       staticClass: 'n-descriptions',
+      style: this.synthesizedStyle,
       class: {
         [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme,
         [`n-descriptions--${this.labelPlacement}-label-placement`]: true,

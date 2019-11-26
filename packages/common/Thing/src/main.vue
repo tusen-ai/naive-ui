@@ -6,15 +6,18 @@
     }"
     :style="synthesizedStyle"
   >
-    <div v-if="$slots.avatar && contentIndent" class="n-thing-avatar">
+    <div v-if="$slots.avatar && contentIndented" class="n-thing-avatar">
       <slot name="avatar" />
     </div>
     <div class="n-thing-main">
-      <div v-if="!contentIndent" class="n-thing-avatar-header-wrapper">
-        <div v-if="$slots.avatar && !contentIndent" class="n-thing-avatar">
+      <div
+        v-if="!contentIndented && ($slots.header || title || $slots['header-extra'] || titleExtra || $slots.avatar)"
+        class="n-thing-avatar-header-wrapper"
+      >
+        <div v-if="$slots.avatar && !contentIndented" class="n-thing-avatar">
           <slot name="avatar" />
         </div>
-        <div class="n-thing-header-wrapper">
+        <div v-if="$slots.header || title || $slots['header-extra'] || titleExtra" class="n-thing-header-wrapper">
           <div class="n-thing-header">
             <div v-if="$slots.header || title" class="n-thing-header__title">
               <slot name="header">
@@ -35,7 +38,7 @@
         </div>
       </div>
       <template v-else>
-        <div class="n-thing-header">
+        <div v-if="$slots.header || title || $slots['header-extra'] || titleExtra" class="n-thing-header">
           <div v-if="$slots.header || title" class="n-thing-header__title">
             <slot name="header">
               {{ title }}
@@ -71,10 +74,11 @@
 <script>
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import asthemecontext from '../../../mixins/asthemecontext'
 
 export default {
   name: 'NThing',
-  mixins: [ withapp, themeable ],
+  mixins: [ withapp, themeable, asthemecontext ],
   props: {
     title: {
       type: String,
@@ -92,13 +96,10 @@ export default {
       type: String,
       default: null
     },
-    contentIndent: {
+    contentIndented: {
       type: Boolean,
       default: false
     }
-  },
-  mounted () {
-    console.log(this.$slots, this.titleExtra)
   }
 }
 </script>

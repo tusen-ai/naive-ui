@@ -9,10 +9,17 @@ export default {
       default: null
     }
   },
+  inject: {
+    NThemedComponent: {
+      default: null
+    }
+  },
   computed: {
     synthesizedTheme () {
       if (this.theme !== null) {
         return this.theme
+      } else if (this.NThemedComponent && this.NThemedComponent.synthesizedTheme) {
+        return this.NThemedComponent.synthesizedTheme
       } else {
         return (this.NApp && this.NApp.synthesizedTheme) || null
       }
