@@ -1,6 +1,6 @@
 # Basic
 ```html
-<n-descriptions label-placement="top" header="Description">
+<n-descriptions label-placement="top" title="Description">
   <n-descriptions-item>
     <template v-slot:label>
       Breakfast
