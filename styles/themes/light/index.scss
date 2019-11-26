@@ -41,6 +41,16 @@
 @import "components/NimbusForm.scss";
 @import "components/Modal.scss";
 @import "components/Transfer.scss";
+@import "components/Thing.scss";
+@import "components/List.scss";
+@import "components/Layout.scss";
+@import "components/Form.scss";
+@import "components/Empty.scss";
+@import "components/Drawer.scss";
+@import "components/Descriptions.scss";
+@import "components/Card.scss";
+@import "components/AutoComplete.scss";
+@import "components/Affix.scss";
 
 @mixin setup-light-theme() {
   @include setup-light-colors();
@@ -107,4 +117,14 @@
   @include setup-light-nimbus-form;
   @include setup-light-modal;
   @include setup-light-transfer;
+  @include setup-light-thing;
+  @include setup-light-list;
+  @include setup-light-layout;
+  @include setup-light-form;
+  @include setup-light-empty;
+  @include setup-light-drawer;
+  @include setup-light-descriptions;
+  @include setup-light-card;
+  @include setup-light-auto-complete;
+  @include setup-light-affix;
 }

@@ -41,6 +41,16 @@
 @import "components/NimbusForm.scss";
 @import "components/Modal.scss";
 @import "components/Transfer.scss";
+@import "components/Thing.scss";
+@import "components/List.scss";
+@import "components/Layout.scss";
+@import "components/Form.scss";
+@import "components/Empty.scss";
+@import "components/Drawer.scss";
+@import "components/Descriptions.scss";
+@import "components/Card.scss";
+@import "components/AutoComplete.scss";
+@import "components/Affix.scss";
 
 @mixin setup-dark-theme() {
   @include setup-dark-colors();
@@ -109,4 +119,14 @@
   @include setup-dark-nimbus-form;
   @include setup-dark-modal;
   @include setup-dark-transfer;
+  @include setup-dark-thing;
+  @include setup-dark-list;
+  @include setup-dark-layout;
+  @include setup-dark-form;
+  @include setup-dark-empty;
+  @include setup-dark-drawer;
+  @include setup-dark-descriptions;
+  @include setup-dark-card;
+  @include setup-dark-auto-complete;
+  @include setup-dark-affix;
 }
