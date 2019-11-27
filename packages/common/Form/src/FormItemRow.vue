@@ -1,20 +1,32 @@
 <script>
 import NFormItemCol from './FormItemCol'
 import NRow from '../../Grid/src/main'
+import NFormItem from './FormItem'
 
 export default {
   name: 'NFormItemRow',
-  functional: true,
-  render (h, context) {
+  props: {
+    ...NRow.props,
+    ...NFormItem.props
+  },
+  methods: {
+    validate (...args) {
+      if (this.$refs.formItemCol) {
+        return this.$refs.formItemCol.validate(...args)
+      }
+    }
+  },
+  render (h) {
     return h(NRow, {
-      props: context.props,
+      props: { ...this.$props },
       scopedSlots: {
         default: () => h(NFormItemCol, {
+          ref: 'formItemCol',
           props: {
             span: 24,
-            ...context.props
+            ...this.$props
           },
-          scopedSlots: context.scopedSlots
+          scopedSlots: this.$scopedSlots
         })
       }
     })

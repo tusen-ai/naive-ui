@@ -76,12 +76,29 @@ export default {
   methods: {
     handlePasswordInput () {
       if (this.model.reenteredPassword) {
-        this.$refs.reenteredPassword.validate('password-input')
+        this.$refs.reenteredPassword.validate('password-input', ({
+          valid,
+          errors
+        }) => {
+          if (valid) {
+            this.$NMessage.success('password ok')
+          } else {
+            console.log(errors)
+            this.$NMessage.error('password not ok')
+          }
+        })
       }
     },
     handleValidateButtonClick (e) {
       e.preventDefault()
-      this.$refs.form.validate()
+      this.$refs.form.validate((valid, errors) => {
+        console.log(valid, errors)
+        if (valid) {
+          this.$NMessage.success(String(valid))
+        } else {
+          this.$NMessage.error(String(valid))
+        }
+      })
     },
     validatePasswordStartWith (rule, value) {
       return this.model.password && this.model.password.startsWith(value) && this.model.password.length >= value.length

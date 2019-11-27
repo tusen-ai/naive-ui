@@ -71,22 +71,35 @@ export default {
      * @param {Array} scope  to specify the scope of validation
      * @return {Boolean} validation passed or not
      */
-    validate (callback, shouldFieldBeValidated = () => true) {
-      console.log(this.items)
-      let valid = true
-      let fields = {}
-      for (const key of Object.keys(this.items)) {
-        const formItemInstances = this.items[key]
-        for (const formItemInstance of formItemInstances) {
-          if (shouldFieldBeValidated(formItemInstance.path)) {
-            formItemInstance.validate()
+    validate (afterValidate, shouldFieldBeValidated = () => true) {
+      return new Promise((resolve, reject) => {
+        const validateFormItemInstances = []
+        for (const key of Object.keys(this.items)) {
+          const formItemInstances = this.items[key]
+          for (const formItemInstance of formItemInstances) {
+            if (formItemInstance.path) {
+              validateFormItemInstances.push(formItemInstance._validate())
+            }
           }
         }
-      }
-      if (callback) {
-        callback(valid, fields)
-      }
-      return Promise.resolve(valid)
+        Promise
+          .all(validateFormItemInstances)
+          .then(results => {
+            if (results.some(result => !result.valid)) {
+              const errors = results.filter(result => result.errors).map(result => result.errors)
+              if (afterValidate) {
+                afterValidate(false, errors)
+              } else {
+                reject(errors)
+              }
+            } else {
+              if (afterValidate) afterValidate(true)
+              else {
+                resolve()
+              }
+            }
+          })
+      })
     },
     resetForm (target = this) {
       for (const key of Object.keys(this.items)) {

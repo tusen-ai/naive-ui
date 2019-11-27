@@ -207,7 +207,14 @@ export default {
   methods: {
     handleValidateButtonClick (e) {
       e.preventDefault()
-      this.$refs.form.validate()
+      this.$refs.form.validate((valid, errors) => {
+        console.log(valid, errors)
+        if (valid) {
+          this.$NMessage.success(String(valid))
+        } else {
+          this.$NMessage.error(String(valid))
+        }
+      })
     }
   }
 }

@@ -4,15 +4,26 @@ import NCol from '../../Grid/src/Col'
 
 export default {
   name: 'NFormItemCol',
-  functional: true,
-  render (h, context) {
+  props: {
+    ...NCol.props,
+    ...NFormItem.props
+  },
+  methods: {
+    validate (...args) {
+      if (this.$refs.formItem) {
+        return this.$refs.formItem.validate(...args)
+      }
+    }
+  },
+  render (h) {
     return h(NCol, {
-      props: context.props,
+      props: { ...this.$props },
       scopedSlots: {
         default: () => {
           return h(NFormItem, {
-            props: context.props,
-            scopedSlots: context.scopedSlots
+            ref: 'formItem',
+            props: { ...this.$props },
+            scopedSlots: this.$scopedSlots
           })
         }
       }

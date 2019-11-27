@@ -60,7 +60,14 @@ export default {
   methods: {
     handleValidateClick (e) {
       e.preventDefault()
-      this.$refs.form.validate()
+      this.$refs.form.validate((valid, errors) => {
+        if (valid) {
+          this.$NMessage.success(String(valid))
+        } else {
+          console.log(errors)
+          this.$NMessage.error(String(valid))
+        }
+      })
     }
   }
 }

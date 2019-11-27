@@ -198,20 +198,50 @@ export default {
   },
   methods: {
     handleContentBlur () {
-      this.validate('blur')
+      this._validate('blur')
     },
     handleContentChange () {
-      this.validate('change')
+      this._validate('change')
     },
     handleContentFocus () {
-      this.validate('focus')
+      this._validate('focus')
     },
     handleContentInput () {
-      this.validate('input')
+      this._validate('input')
     },
-    validate (trigger = null, options = null) {
+    validate (trigger = null, afterValidate, options = null) {
+      return new Promise((resolve, reject) => {
+        this._validate(trigger, options).then(({
+          valid,
+          errors
+        }) => {
+          if (valid) {
+            if (afterValidate) {
+              afterValidate({
+                valid
+              })
+            } else {
+              resolve()
+            }
+          } else {
+            if (afterValidate) {
+              afterValidate({
+                valid,
+                errors
+              })
+            } else {
+              // eslint-disable-next-line prefer-promise-reject-errors
+              reject({
+                errors
+              })
+            }
+          }
+        })
+      })
+    },
+    _validate (trigger = null, options = null) {
       if (!this.path) {
-        return
+        throw new Error('[naive-ui/form-item/validate]: validate form-item without path')
       }
       if (!options) {
         options = {}
@@ -221,26 +251,46 @@ export default {
       const rules = this.synthesizedRules
       const path = this.path
       const value = get(this.NForm.model, this.path, null)
-      const activeRules = !trigger ? rules : rules.filter(rule => {
+      const activeRules = (!trigger ? rules : rules.filter(rule => {
         if (Array.isArray(rule.trigger)) {
           return rule.trigger.includes(trigger)
         } else {
           return rule.trigger === trigger
         }
-      })
-      if (!activeRules.length) return
-      const validator = new Schema({ [path]: activeRules })
-      // console.log(trigger, { [path]: value })
-      validator.validate({ [path]: value }, options, (errors, fields) => {
-        // console.log('validate', errors, fields)
-        // debugger
-        if (errors && errors.length) {
-          this.explains = errors.map(error => error.message)
-          this.validated = true
-        } else {
-          this.cleanValidationEffect()
+      })).map(rule => {
+        const originValidator = rule.validator
+        if (typeof originValidator === 'function') {
+          rule.validator = (...args) => {
+            const validateResult = originValidator(...args)
+            if (validateResult instanceof Error) {
+              return validateResult
+            }
+            return !!validateResult
+          }
         }
-        // callback((errors && errors[0].message) || false, fields)
+        return rule
+      })
+      if (!activeRules.length) {
+        return Promise.resolve({
+          valid: true
+        })
+      }
+      const validator = new Schema({ [path]: activeRules })
+      return new Promise((resolve, reject) => {
+        validator.validate({ [path]: value }, options, (errors, fields) => {
+          if (errors && errors.length) {
+            this.explains = errors.map(error => error.message)
+            resolve({
+              valid: false,
+              errors
+            })
+          } else {
+            this.cleanValidationEffect()
+            resolve({
+              valid: true
+            })
+          }
+        })
       })
     },
     cleanValidationEffect () {
