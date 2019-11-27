@@ -41,6 +41,7 @@
 @import "components/NimbusForm.scss";
 @import "components/Modal.scss";
 @import "components/Transfer.scss";
+@import "components/Menu.scss";
 @import "components/Thing.scss";
 @import "components/List.scss";
 @import "components/Layout.scss";
@@ -119,6 +120,7 @@
   @include setup-dark-nimbus-form;
   @include setup-dark-modal;
   @include setup-dark-transfer;
+  @include setup-dark-menu;
   @include setup-dark-thing;
   @include setup-dark-list;
   @include setup-dark-layout;

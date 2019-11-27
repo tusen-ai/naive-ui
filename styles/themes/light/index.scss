@@ -41,6 +41,7 @@
 @import "components/NimbusForm.scss";
 @import "components/Modal.scss";
 @import "components/Transfer.scss";
+@import "components/Menu.scss";
 @import "components/Thing.scss";
 @import "components/List.scss";
 @import "components/Layout.scss";
@@ -118,6 +119,7 @@
   @include setup-light-nimbus-form;
   @include setup-light-modal;
   @include setup-light-transfer;
+  @include setup-light-menu;
   @include setup-light-thing;
   @include setup-light-list;
   @include setup-light-layout;
