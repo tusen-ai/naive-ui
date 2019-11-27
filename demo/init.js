@@ -47,6 +47,7 @@ import nimbusConfirmCardDemo from './documentation/components/nimbusConfirmCardD
 import pagination from './documentation/components/pagination'
 import collapse from './documentation/components/collapse'
 import tag from './documentation/components/tag'
+import menu from './documentation/components/menu'
 import timeline from './documentation/components/timeline'
 import progress from './documentation/components/progress'
 import divider from './documentation/components/divider'
@@ -168,6 +169,7 @@ const routes = [
       { path: '/n-collapse', component: collapse },
       { path: '/n-progress', component: progress },
       { path: '/n-tag', component: tag },
+      { path: '/n-menu', component: menu },
       { path: '/n-timeline', component: timeline },
       { path: '/n-scrollbar-debug2', component: scrollbarDebug2 },
       { path: '/n-back-top', component: backTop },

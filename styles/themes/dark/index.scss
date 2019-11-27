@@ -41,6 +41,7 @@
 @import "components/NimbusForm.scss";
 @import "components/Modal.scss";
 @import "components/Transfer.scss";
+@import "components/Menu.scss";
 
 @mixin setup-dark-theme() {
   @include setup-dark-colors();
@@ -109,4 +110,5 @@
   @include setup-dark-nimbus-form;
   @include setup-dark-modal;
   @include setup-dark-transfer;
+  @include setup-dark-menu;
 }

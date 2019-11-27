@@ -65,6 +65,7 @@ import Breadcrumb from './packages/common/Breadcrumb'
 import ConfigConsumer from './packages/common/ConfigConsumer'
 import Descriptions from './packages/common/Descriptions'
 import List from './packages/common/List'
+import Menu from './packages/common/Menu'
 
 function install (Vue) {
   Card.install(Vue)
@@ -134,6 +135,7 @@ function install (Vue) {
   ConfigConsumer.install(Vue)
   Descriptions.install(Vue)
   List.install(Vue)
+  Menu.install(Vue)
 }
 
 export default {

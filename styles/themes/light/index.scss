@@ -41,6 +41,7 @@
 @import "components/NimbusForm.scss";
 @import "components/Modal.scss";
 @import "components/Transfer.scss";
+@import "components/Menu.scss";
 
 @mixin setup-light-theme() {
   @include setup-light-colors();
@@ -106,4 +107,5 @@
   @include setup-light-nimbus-form;
   @include setup-light-modal;
   @include setup-light-transfer;
+  @include setup-light-menu;
 }
