@@ -96,18 +96,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.n-modal-activator {
-  display: inline-block;
-}
-
-.n-modal-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 0;
-  width: 0;
-  display: flex;
-}
-</style>

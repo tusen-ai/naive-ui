@@ -21,31 +21,69 @@
           class="n-modal-content-slot"
         >
           <n-confirm
-            v-if="preset==='confirm'"
+            v-if="preset === 'confirm'"
             ref="confirm"
+            :style="bodyStyle"
+            :theme="theme"
             :title="title"
             :closable="closable"
-            :cancel-text="cancelText"
-            :submit-text="submitText"
+            :positive-text="positiveText"
+            :negative-text="negativeText"
             :content="content"
-            @deactivate="deactivate"
-            @cancel="cancel"
-            @submit="submit"
+            @close="handleCloseClick"
+            @negative-click="handleNegativeClick"
+            @positive-click="handlePositiveClick"
           >
-            <slot slot="header" name="header" />
-            <slot slot="content" name="content" />
-            <slot slot="footer" name="footer" />
+            <template v-slot:header>
+              <slot name="header" />
+            </template>
+            <template v-slot:content>
+              <slot name="content" />
+            </template>
+            <template v-slot:footer>
+              <slot name="footer" />
+            </template>
           </n-confirm>
           <n-form
-            v-else-if="preset==='form'"
+            v-else-if="preset === 'form'"
             :title="title"
             :closable="closable"
-            @deactivate="deactivate"
+            @close="handleCloseClick"
           >
-            <slot slot="header" name="header" />
-            <slot slot="content" name="content" />
-            <slot slot="footer" name="footer" />
+            <template v-slot:header>
+              <slot name="header" />
+            </template>
+            <template v-slot:content>
+              <slot name="content" />
+            </template>
+            <template v-slot:footer>
+              <slot name="footer" />
+            </template>
           </n-form>
+          <n-card
+            v-if="preset === 'card'"
+            :style="bodyStyle"
+            :title="title"
+            :closable="closable"
+            :size="size"
+            :bordered="bordered"
+            :segmented="segmented"
+            @close="handleCloseClick"
+          >
+            <template v-slot:header>
+              <slot name="header" />
+            </template>
+            <template v-slot:header-extra>
+              <slot name="header-extra" />
+            </template>
+            <template v-slot:footer>
+              <slot name="footer" />
+            </template>
+            <template v-slot:action>
+              <slot name="action" />
+            </template>
+            <slot />
+          </n-card>
           <slot v-else />
         </div>
       </transition>
@@ -55,8 +93,11 @@
 
 <script>
 import NScrollbar from '../../Scrollbar'
-import NConfirm from './Confirm'
-import NForm from './Form'
+import NConfirm from '../../../presets/Confirm'
+import NForm from '../../../presets/Form'
+import NCard from '../../../common/Card'
+import themeable from '../../../mixins/themeable'
+import presetProps from './presetProps'
 
 let mousePosition = null
 
@@ -74,8 +115,10 @@ export default {
   components: {
     NScrollbar,
     NConfirm,
-    NForm
+    NForm,
+    NCard
   },
+  mixins: [themeable],
   props: {
     active: {
       type: Boolean,
@@ -91,27 +134,7 @@ export default {
       type: String,
       default: ''
     },
-    title: {
-      type: String,
-      default: 'title'
-    },
-    closable: {
-      type: Boolean,
-      default: true
-    },
-    // for confirm
-    cancelText: {
-      type: String,
-      default: 'Cancel'
-    },
-    submitText: {
-      type: String,
-      default: 'Confirm'
-    },
-    content: {
-      type: String,
-      default: 'content'
-    }
+    ...presetProps
   },
   data () {
     return {
@@ -123,24 +146,9 @@ export default {
       this.styleActive = true
     }
   },
-  mounted () {
-    console.log('contentInner', this.$slots)
-    // this.$refs.confirm.$slots.footer = this.$scopedSlots.footer && this.$scopedSlots.footer()
-    // this.$slots.default = this.$scopedSlots.default && this.$scopedSlots.default()
-  },
-  // mounted () {
-  //   this.$nextTick().then(this.registerContent)
-  // },
-  // updated () {
-  //   console.log('updated')
-  //   this.$nextTick().then(this.registerContent)
-  // },
-  beforeDestroy () {
-    // window.clearTimeout(this.updateScrollbarTimerId)
-  },
   methods: {
     slotDOM () {
-      const els = this.$refs.contentInner.childNodes
+      const els = (this.$refs.contentInner && this.$refs.contentInner.childNodes) || []
       return els
     },
     handleMouseDown (e) {
@@ -155,9 +163,6 @@ export default {
       this.$nextTick().then(() => {
         this.updateTransformOrigin()
       })
-    },
-    handleAfterEnter () {
-      // console.log('afterEnter', this.$refs.scrollbar.enableScrollbar())
     },
     updateTransformOrigin () {
       if (
@@ -218,19 +223,15 @@ export default {
       this.styleActive = false
       this.$emit('after-leave')
     },
-    deactivate () {
-      this.$emit('deactivate')
+    handleCloseClick () {
+      this.$emit('close')
     },
-    cancel () {
-      this.$emit('cancel')
+    handleNegativeClick () {
+      this.$emit('negative-click')
     },
-    submit () {
-      this.$emit('submit')
+    handlePositiveClick () {
+      this.$emit('positive-click')
     }
   }
 }
 </script>
-
-<style lang="scss">
-
-</style>

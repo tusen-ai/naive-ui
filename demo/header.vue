@@ -17,7 +17,9 @@
       <img src="./assets/images/naivelogo.svg">
       Naive UI ({{ version }})
     </div>
-    <div />
+    <div style="width: 200px; margin-left: 48px;">
+      <n-auto-complete v-model="searchInputValue" placeholder="Search in Naive UI" :options="searchOptions" @select="handleSelect" />
+    </div>
     <div class="theme-picker">
       <n-select
         v-model="NApp.$parent.theme"
@@ -46,10 +48,15 @@ export default {
     lang: {
       type: String,
       required: true
+    },
+    items: {
+      type: Array,
+      default: () => []
     }
   },
   data () {
     return {
+      searchInputValue: '',
       version,
       theme: 'dark',
       langOptions: [
@@ -65,6 +72,16 @@ export default {
     }
   },
   computed: {
+    searchOptions () {
+      if (!this.searchInputValue) return []
+      return this.items.filter(item => {
+        // console.log(item.name.toLowerCase(), this.searchInputValue.toLowerCase())
+        return ~item.name.toLowerCase().indexOf(this.searchInputValue.toLowerCase())
+      }).slice(0, 6).map(item => ({
+        label: item.name,
+        value: item.path
+      }))
+    },
     options: function () {
       return [
         {
@@ -79,6 +96,10 @@ export default {
     }
   },
   methods: {
+    handleSelect (value) {
+      this.$router.push(value)
+      document.body.focus()
+    },
     handleThemeChange (theme) {
       this.NApp.$parent.theme = theme
     },

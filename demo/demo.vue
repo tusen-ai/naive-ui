@@ -11,6 +11,7 @@
       <template v-slot:nav>
         <doc-header
           :lang="lang"
+          :items="flattenedItems"
           @lang-change="handleLangChange"
         />
       </template>
@@ -62,14 +63,6 @@ export default {
             {
               name: 'Nimbus Service Layout',
               path: `/${this.lang}/${this.theme}` + '/n-nimbus-service-layout'
-            },
-            {
-              name: 'Nimbus Form Card',
-              path: `/${this.lang}/${this.theme}` + '/n-nimbus-form-card'
-            },
-            {
-              name: 'Nimbus Confirm Card',
-              path: `/${this.lang}/${this.theme}` + '/n-nimbus-confirm-card'
             }
           ]
         },
@@ -90,7 +83,7 @@ export default {
           name: 'Layout Components',
           childItems: [
             {
-              name: 'Layout (in progress)',
+              name: 'Layout',
               path: `/${this.lang}/${this.theme}` + '/n-layout'
             },
             {
@@ -103,15 +96,15 @@ export default {
           name: 'Common Components',
           childItems: [
             {
-              name: 'Avator (in progress)',
-              path: `/${this.lang}/${this.theme}` + '/n-avator'
+              name: 'Avatar',
+              path: `/${this.lang}/${this.theme}` + '/n-avatar'
             },
             {
               name: 'Button',
               path: `/${this.lang}/${this.theme}` + '/n-button'
             },
             {
-              name: 'Card (in progress)',
+              name: 'Card',
               path: `/${this.lang}/${this.theme}` + '/n-card'
             },
             {
@@ -217,16 +210,20 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-descriptions'
             },
             {
-              name: 'Empty (in progress)',
+              name: 'Empty',
               path: `/${this.lang}/${this.theme}` + '/n-empty'
             },
             {
-              name: 'List (in progress)',
+              name: 'List',
               path: `/${this.lang}/${this.theme}` + '/n-list'
             },
             {
               name: 'Statistic',
               path: `/${this.lang}/${this.theme}` + '/n-statistic'
+            },
+            {
+              name: 'Thing',
+              path: `/${this.lang}/${this.theme}` + '/n-thing'
             },
             {
               name: 'Time',
@@ -331,7 +328,7 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-progress'
             },
             {
-              name: 'Result (in progress)',
+              name: 'Result',
               path: `/${this.lang}/${this.theme}` + '/n-result'
             },
             {
@@ -390,6 +387,19 @@ export default {
           ]
         }
       ]
+    },
+    flattenedItems () {
+      const flattenedItems = []
+      const traverse = items => {
+        if (items) {
+          items.forEach(item => {
+            if (item.childItems) traverse(item.childItems)
+            else flattenedItems.push(item)
+          })
+        }
+      }
+      traverse(this.items)
+      return flattenedItems
     },
     lang: {
       get () {

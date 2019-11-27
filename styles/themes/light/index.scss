@@ -42,6 +42,16 @@
 @import "components/Modal.scss";
 @import "components/Transfer.scss";
 @import "components/Menu.scss";
+@import "components/Thing.scss";
+@import "components/List.scss";
+@import "components/Layout.scss";
+@import "components/Form.scss";
+@import "components/Empty.scss";
+@import "components/Drawer.scss";
+@import "components/Descriptions.scss";
+@import "components/Card.scss";
+@import "components/AutoComplete.scss";
+@import "components/Affix.scss";
 
 @mixin setup-light-theme() {
   @include setup-light-colors();
@@ -55,7 +65,9 @@
 
   $--n-selected-color: $--neutral-7 !global;
   $--n-divider-color: $--neutral-7 !global;
+  $--n-alpha-divider-color: $--overlay-7 !global;
   $--n-border-color: $--neutral-6 !global;
+  $--n-alpha-border-color: $--overlay-6 !global;
 
   $--n-table-header-color: $--neutral-8 !global;
   $--n-secondary-text-color: $--neutral-3 !global;
@@ -108,4 +120,14 @@
   @include setup-light-modal;
   @include setup-light-transfer;
   @include setup-light-menu;
+  @include setup-light-thing;
+  @include setup-light-list;
+  @include setup-light-layout;
+  @include setup-light-form;
+  @include setup-light-empty;
+  @include setup-light-drawer;
+  @include setup-light-descriptions;
+  @include setup-light-card;
+  @include setup-light-auto-complete;
+  @include setup-light-affix;
 }

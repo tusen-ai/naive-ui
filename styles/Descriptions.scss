@@ -1,48 +1,109 @@
 @import './mixins/mixins.scss';
 
+@mixin descriptions-size-mixin ($size) {
+  $descriptions-bordered-padding: (
+    'small': (8px 12px),
+    'medium': (12px 16px),
+    'large': (16px 24px),
+  );
+  $descriptions-padding: (
+    'small': 8px,
+    'medium': 12px,
+    'large': 16px,
+  );
+  @include m($size + '-size') {
+    @include b(descriptions-header) {
+      margin-bottom: map-get($descriptions-padding, $size);
+    }
+    @include m(bordered) {
+      @include b(descriptions-table-wrapper) {
+        @include b(descriptions-table) {
+          @include b(descriptions-table-row) {
+            @include b(descriptions-table-header) {
+              padding: map-get($descriptions-bordered-padding, $size);
+            }
+            @include b(descriptions-table-content) {
+              padding: map-get($descriptions-bordered-padding, $size);
+            }
+            &:last-child {
+              @include b(descriptions-table-content) {
+                padding: map-get($descriptions-bordered-padding, $size);
+              }
+            }
+          }
+        }
+      }
+    }
+    @include b(descriptions-table-wrapper) {
+      @include b(descriptions-table) {
+        @include b(descriptions-table-row) {
+          @include b(descriptions-table-content) {
+            padding: 0 0 map-get($descriptions-padding, $size) 0;  
+          }
+          &:last-child {
+            @include b(descriptions-table-content) {
+              padding: 0;
+            }
+          } 
+        }
+      }
+    }
+  }
+}
+
 @include themes-mixin {
   @include b(descriptions) {
-    @include m(left-label-align) {
-      th {
-        text-align: left;
+    @include once {
+      @include descriptions-size-mixin('small');
+      @include descriptions-size-mixin('medium');
+      @include descriptions-size-mixin('large');
+      @include m(left-label-align) {
+        th {
+          text-align: left;
+        }
       }
-    }
-    @include m(center-label-align) {
-      th {
-        text-align: center;
+      @include m(center-label-align) {
+        th {
+          text-align: center;
+        }
       }
-    }
-    @include m(right-label-align) {
-      th {
-        text-align: right;
+      @include m(right-label-align) {
+        th {
+          text-align: right;
+        }
       }
     }
     @include m(bordered) {
       @include b(descriptions-table-wrapper) {
-        border-radius: 6px;
-        overflow: hidden;
-        border: 1px solid $--n-border-color;
+        @include once {
+          border-radius: 6px;
+          overflow: hidden;
+        }
+        border: 1px solid $--descriptions-border-color;
         @include b(descriptions-table) {
           @include b(descriptions-table-row) {
             &:not(:last-child) {
-              border-bottom: 1px solid $--n-border-color;
+              @include b(descriptions-table-content) {
+                border-bottom: 1px solid $--descriptions-border-color;
+              }
+              @include b(descriptions-table-header) {
+                background-clip: padding-box;
+                border-bottom: 1px solid $--descriptions-border-color;
+              }
             }
             @include b(descriptions-table-header) {
-              padding: 12px 16px;
-              background: $--n-table-header-color;
+              @include once {
+                font-weight: 400;
+              }
+              background: $--descriptions-header-background-color;
               &:not(:last-child) {
-                border-right: 1px solid $--n-border-color;
+                border-right: 1px solid $--descriptions-border-color;
               }
             }
             @include b(descriptions-table-content) {
-              padding: 12px 16px;
+              background: $--descriptions-content-background-color;
               &:not(:last-child) {
-                border-right: 1px solid $--n-border-color;
-              }
-            }
-            &:last-child {
-              @include b(descriptions-table-content) {
-                padding: 12px 16px;
+                border-right: 1px solid $--descriptions-border-color;
               }
             }
           }
@@ -50,54 +111,73 @@
       }
     }
     @include b(descriptions-header) {
-      transition: color .3s $default-cubic-bezier;
-      color: $--n-text-color;
-      font-weight: 700;
-      font-size: 18px;
-      margin-bottom: 12px;
+      @include once {
+        font-weight: 700;
+        font-size: 18px;
+        transition: color .3s $default-cubic-bezier;
+      }
+      color: $--descriptions-header-text-color;
     }
     @include b(descriptions-table-wrapper) {
-      transition: border-color .3s $default-cubic-bezier;
+      @include once {
+        transition: border-color .3s $default-cubic-bezier;
+      }
       @include b(descriptions-table) {
-        width: 100%;
-        border-collapse: collapse;
-        box-sizing: border-box;
-        @include b(descriptions-table-row) {
+        @include once {
+          width: 100%;
+          border-collapse: separate;
+          border-spacing: 0;
           box-sizing: border-box;
-          transition: border-color .3s $default-cubic-bezier;
-          @include b(descriptions-table-header) {
-            font-weight: 400;
-            line-height: 1.5;
-            display: table-cell;
+        }
+        @include b(descriptions-table-row) {
+          @include once {
             box-sizing: border-box;
-            color: $--n-text-color;
-            transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+            transition: border-color .3s $default-cubic-bezier;
+          }
+          @include b(descriptions-table-header) {
+            @include once {
+              font-weight: 700;
+              line-height: 1.5;
+              display: table-cell;
+              box-sizing: border-box;
+              transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+            }
+            color: $--descriptions-header-text-color;
           }
           @include b(descriptions-table-content) {
             @include e(content) {
-              color: $--n-secondary-text-color;
-              transition: color .3s $default-cubic-bezier;
-              display: inline-block;
+              color: $--descriptions-content-text-color;
+              @include once {
+                transition: color .3s $default-cubic-bezier;
+                display: inline-block;
+              }
             }
             @include e(label) {
-              color: $--n-text-color;
-              transition: color .3s $default-cubic-bezier;
-              display: inline-block;
-              margin-right: 14px;
+              color: $--descriptions-header-text-color;
+              @include once {
+                font-weight: 700;
+                transition: color .3s $default-cubic-bezier;
+                display: inline-block;
+                margin-right: 14px;
+              } 
             }
-            vertical-align: top;
-            line-height: 1.5;
-            display: table-cell;
-            box-sizing: border-box;
-            transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
-            color: $--n-secondary-text-color;
-            padding: 0 0 16px 0;
-          }
-          &:last-child {
-            @include b(descriptions-table-content) {
-              padding: 0;
+            @include once {
+              vertical-align: top;
+              line-height: 1.5;
+              display: table-cell;
+              box-sizing: border-box;
+              transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+              padding: 0 0 16px 0;  
             }
+            color: $--descriptions-content-text-color;
           }
+          @include once {
+            &:last-child {
+              @include b(descriptions-table-content) {
+                padding: 0;
+              }
+            }
+          } 
         }
       }
     }

@@ -6,6 +6,7 @@
       'n-badge--processing': processing,
       [`n-badge--${type}-type`]: type,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
+      [`n-badge--as-is`]: !$slots.default
     }"
   >
     <slot />

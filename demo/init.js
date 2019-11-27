@@ -14,17 +14,15 @@ import devGuildlines from './documentation/intro/devGuidelines'
 import status from './documentation/intro/status'
 
 import nimbusServiceLayoutDemo from './documentation/components/nimbusServiceLayoutDemo'
-import homeDemo from './documentation/components/homeDemo'
 import gradientText from './documentation/components/gradientText'
 import checkbox from './documentation/components/checkbox'
 import button from './documentation/components/button'
-import switchDemo from './documentation/components/switch'
+import nswitch from './documentation/components/switch'
 import input from './documentation/components/input'
 import select from './documentation/components/select'
 import cascader from './documentation/components/cascader'
 import customInput from './documentation/components/customInput'
 import modal from './documentation/components/modal'
-import nimbusFormCardDemo from './documentation/components/nimbusFormCardDemo'
 import message from './documentation/components/message'
 import tooltip from './documentation/components/tooltip'
 import popover from './documentation/components/popover'
@@ -43,7 +41,6 @@ import scrollbarDebug2 from './debugComponents/scrollbarDebug2'
 import badge from './documentation/components/badge'
 import steps from './documentation/components/steps'
 import notification from './documentation/components/notification'
-import nimbusConfirmCardDemo from './documentation/components/nimbusConfirmCardDemo'
 import pagination from './documentation/components/pagination'
 import collapse from './documentation/components/collapse'
 import tag from './documentation/components/tag'
@@ -70,6 +67,13 @@ import breadcrumb from './documentation/components/breadcrumb'
 import configConsumer from './documentation/components/configConsumer'
 import descriptions from './documentation/components/descriptions'
 import list from './documentation/components/list'
+import card from './documentation/components/card'
+import layout from './documentation/components/layout'
+import avatar from './documentation/components/avatar'
+import result from './documentation/components/result'
+import thing from './documentation/components/thing'
+import autoComplete from './documentation/components/autoComplete'
+import empty from './documentation/components/empty'
 
 import demo from './demo'
 import ComponentDemo from './utils/ComponentDemo'
@@ -109,10 +113,6 @@ const withPrefix = (prefix, routes) =>
 
 const routes = [
   {
-    path: '/home-demo',
-    component: homeDemo
-  },
-  {
     path: '/:lang/:theme/n-popover-debug',
     component: popoverDebug
   },
@@ -133,12 +133,12 @@ const routes = [
       { path: '/dev-guildlines', component: devGuildlines },
       { path: '/status', component: status },
       { path: '/n-nimbus-service-layout', component: nimbusServiceLayoutDemo },
-      { path: '/n-nimbus-home-layout', component: homeDemo },
+      { path: '/n-layout', component: layout },
       { path: '/n-gradient-text', component: gradientText },
       { path: '/n-icon', component: () => import('./documentation/components/icon') },
       { path: '/n-checkbox', component: checkbox },
       { path: '/n-button', component: button },
-      { path: '/n-switch', component: switchDemo },
+      { path: '/n-switch', component: nswitch },
       // { path: '/n-table', component: tableDemo },
       { path: '/n-advance-table', component: advancedTable },
       { path: '/n-input', component: input },
@@ -146,12 +146,10 @@ const routes = [
       { path: '/n-cascader', component: cascader },
       { path: '/n-custom-input', component: customInput },
       { path: '/n-modal', component: modal },
-      { path: '/n-nimbus-form-card', component: nimbusFormCardDemo },
       { path: '/n-message', component: message },
       { path: '/n-tooltip', component: tooltip },
       { path: '/n-popover', component: popover },
       { path: '/n-notification', component: notification },
-      { path: '/n-nimbus-confirm-card', component: nimbusConfirmCardDemo },
       { path: '/n-pagination', component: pagination },
       { path: '/n-alert', component: alert },
       { path: '/n-date-picker', component: datePicker },
@@ -195,7 +193,13 @@ const routes = [
       { path: '/n-breadcrumb', component: breadcrumb },
       { path: '/n-config-consumer', component: configConsumer },
       { path: '/n-descriptions', component: descriptions},
-      { path: '/n-list', component: list}
+      { path: '/n-list', component: list},
+      { path: '/n-card', component: card },
+      { path: '/n-avatar', component: avatar },
+      { path: '/n-result', component: result },
+      { path: '/n-thing', component: thing },
+      { path: '/n-auto-complete', component: autoComplete },
+      { path: '/n-empty', component: empty }
     ])
   },
   {

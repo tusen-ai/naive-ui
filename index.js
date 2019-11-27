@@ -1,8 +1,6 @@
 import Card from './packages/common/Card'
 import Icon from './packages/common/Icon'
-import Loader from './packages/base/Loading'
 import GradientText from './packages/common/GradientText'
-import ColumnGroup from './packages/common/ColumnGroup'
 import WithPadding from './packages/common/WithPadding'
 import WithMargin from './packages/common/WithMargin'
 import MasonryGroup from './packages/common/MasonryGroup'
@@ -29,16 +27,14 @@ import Radio from './packages/common/Radio'
 import Form from './packages/common/Form'
 import Tabs from './packages/common/Tabs'
 import TimePicker from './packages/common/TimePicker'
-import ServiceCard from './packages/nimbus/ServiceCard'
-import HomeLayout from './packages/nimbus/HomeLayout'
-import Navbar from './packages/nimbus/Navbar'
+import Layout from './packages/common/Layout'
 import ServiceLayout from './packages/nimbus/ServiceLayout'
 import NimbusFormCard from './packages/nimbus/FormCard'
 import NimbusConfirmCard from './packages/deprecated/ConfirmCard'
 import NimbusIcon from './packages/deprecated/Icon'
 import Scrollbar from './packages/common/Scrollbar'
 import Steps from './packages/common/Steps'
-import Confirm from './packages/common/Confirm'
+import ConfirmModal from './packages/common/Confirm'
 import Badge from './packages/common/Badge'
 import Tag from './packages/common/Tag'
 import BackTop from './packages/common/BackTop'
@@ -49,8 +45,7 @@ import Popconfirm from './packages/common/Popconfirm'
 import Anchor from './packages/common/Anchor'
 import Dropdown from './packages/common/Dropdown'
 import Popselect from './packages/common/Popselect'
-import App from './packages/common/App'
-import CancelMark from './packages/base/CancelMark'
+import ConfigProvider from './packages/common/ConfigProvider'
 import Transfer from './packages/common/Transfer'
 import Spin from './packages/common/Spin'
 import Drawer from './packages/common/Drawer'
@@ -66,18 +61,28 @@ import ConfigConsumer from './packages/common/ConfigConsumer'
 import Descriptions from './packages/common/Descriptions'
 import List from './packages/common/List'
 import Menu from './packages/common/Menu'
+import Avatar from './packages/common/Avator'
+import Confirm from './packages/presets/Confirm'
+import Result from './packages/common/Result'
+import Thing from './packages/common/Thing'
+import AutoComplete from './packages/common/AutoComplete'
+import Empty from './packages/common/Empty'
+
+/**
+ * debug usage
+ * to be removed
+ */
+import Loader from './packages/base/Loading'
+import CancelMark from './packages/base/CancelMark'
 
 function install (Vue) {
   Card.install(Vue)
   Icon.install(Vue)
   ServiceLayout.install(Vue)
-  Navbar.install(Vue)
   Loader.install(Vue)
-  HomeLayout.install(Vue)
+  Layout.install(Vue)
   GradientText.install(Vue)
-  ColumnGroup.install(Vue)
   WithPadding.install(Vue)
-  ServiceCard.install(Vue)
   MasonryGroup.install(Vue)
   Table.install(Vue)
   AdvanceTable.install(Vue)
@@ -108,6 +113,7 @@ function install (Vue) {
   Scrollbar.install(Vue)
   Steps.install(Vue)
   Confirm.install(Vue)
+  ConfirmModal.install(Vue)
   Progress.install(Vue)
   Badge.install(Vue)
   Tag.install(Vue)
@@ -119,7 +125,7 @@ function install (Vue) {
   Anchor.install(Vue)
   Dropdown.install(Vue)
   Popselect.install(Vue)
-  App.install(Vue)
+  ConfigProvider.install(Vue)
   CancelMark.install(Vue)
   Transfer.install(Vue)
   Spin.install(Vue)
@@ -136,6 +142,11 @@ function install (Vue) {
   Descriptions.install(Vue)
   List.install(Vue)
   Menu.install(Vue)
+  Avatar.install(Vue)
+  Result.install(Vue)
+  Thing.install(Vue)
+  AutoComplete.install(Vue)
+  Empty.install(Vue)
 }
 
 export default {

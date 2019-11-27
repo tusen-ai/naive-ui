@@ -1,9 +1,8 @@
 @import './mixins/mixins.scss';
 
-$layout-nav-height: 64px;
-
 @include themes-mixin() {
   @include b(nimbus-service-layout) {
+    $layout-nav-height: 64px;
     position: absolute;
     top: 0;
     bottom: 0;

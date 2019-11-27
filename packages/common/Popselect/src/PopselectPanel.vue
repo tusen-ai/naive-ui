@@ -2,7 +2,7 @@
   <n-base-select-menu
     :theme="synthesizedTheme"
     :multiple="multiple"
-    :linked-options="linkedOptions"
+    :options="options"
     :is-selected="isSelected"
     :width="width"
     size="small"
@@ -12,7 +12,6 @@
 
 <script>
 import NBaseSelectMenu from '../../../base/SelectMenu'
-import linkedOptions from '../../../utils/data/linkedOptions'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 
@@ -47,11 +46,6 @@ export default {
     controller: {
       type: Object,
       default: null
-    }
-  },
-  computed: {
-    linkedOptions () {
-      return linkedOptions(this.options)
     }
   },
   methods: {

@@ -2,7 +2,7 @@
 ```demo
 basic
 maskClosable
-confirmBasic
-confirmSlot
-formBasic
+preset-confirm
+preset-confirm-slot
+preset-card
 ```

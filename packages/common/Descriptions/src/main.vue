@@ -1,12 +1,22 @@
 <script>
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import asthemecontext from '../../../mixins/asthemecontext'
+
+function isDescriptionsItem (vNode) {
+  return (
+    vNode.componentOptions &&
+    vNode.componentOptions.Ctor &&
+    vNode.componentOptions.Ctor.extendOptions &&
+    vNode.componentOptions.Ctor.extendOptions.name === 'NDescriptionsItem'
+  )
+}
 
 export default {
   name: 'NDescriptions',
-  mixins: [withapp, themeable],
+  mixins: [withapp, themeable, asthemecontext],
   props: {
-    header: {
+    title: {
       type: String,
       default: null
     },
@@ -19,16 +29,22 @@ export default {
       default: null
     },
     labelPlacement: {
-      type: String,
-      default: 'top'
+      default: 'top',
+      validator (value) {
+        return ['left', 'top'].includes(value)
+      }
     },
     labelAlign: {
-      type: String,
-      default: 'left'
+      default: 'left',
+      validator (value) {
+        return ['left', 'top'].includes(value)
+      }
     },
     size: {
-      type: String,
-      default: 'medium'
+      default: 'medium',
+      validator (value) {
+        return ['small', 'medium', 'large'].includes(value)
+      }
     },
     bordered: {
       type: Boolean,
@@ -42,6 +58,10 @@ export default {
   },
   render (h) {
     let children = this.$scopedSlots.default ? this.$scopedSlots.default() : []
+    if (children.some(child => !isDescriptionsItem(child))) {
+      console.warn('[naive-ui/n-descriptions]: `n-descriptions` only takes `n-descriptions-item` as children.')
+    }
+    children = children.filter(child => isDescriptionsItem(child))
     children = children.reduce((state, item, index) => {
       const isLastIteration = children.length - 1 === index
       const propsData = item.componentOptions.propsData
@@ -116,10 +136,12 @@ export default {
     }, row))
     return h('div', {
       staticClass: 'n-descriptions',
+      style: this.synthesizedStyle,
       class: {
         [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme,
         [`n-descriptions--${this.labelPlacement}-label-placement`]: true,
         [`n-descriptions--${this.labelAlign}-label-align`]: true,
+        [`n-descriptions--${this.size}-size`]: true,
         [`n-descriptions--bordered`]: this.bordered
       }
     }, [

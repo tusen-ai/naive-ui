@@ -1,6 +1,14 @@
 <template>
   <li class="n-list-item">
-    <slot />
+    <div v-if="$slots.prefix" class="n-list-item__prefix">
+      <slot name="prefix" />
+    </div>
+    <div v-if="$slots.default" class="n-list-item__main">
+      <slot />
+    </div>
+    <div v-if="$slots.suffix" class="n-list-item__suffix">
+      <slot name="suffix" />
+    </div>
   </li>
 </template>
 

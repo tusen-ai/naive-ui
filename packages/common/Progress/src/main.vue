@@ -223,6 +223,8 @@ import mdCheckmark from '../../../icons/md-checkmark'
 import mdClose from '../../../icons/md-close'
 import mdAlert from '../../../icons/md-alert'
 import mdInformationCircle from '../../../icons/md-information-circle'
+import mdCheckmarkCircle from '../../../icons/md-checkmark-circle'
+import mdCloseCircle from '../../../icons/md-close-circle'
 import fontawareable from '../../../mixins/fontawarable'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
@@ -240,7 +242,9 @@ export default {
     mdCheckmark,
     mdClose,
     mdAlert,
-    mdInformationCircle
+    mdInformationCircle,
+    mdCheckmarkCircle,
+    mdCloseCircle
   },
   mixins: [withapp, themeable, fontawareable],
   props: {

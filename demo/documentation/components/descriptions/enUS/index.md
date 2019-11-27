@@ -6,4 +6,5 @@ columns
 span
 placement
 bordered
+size
 ```

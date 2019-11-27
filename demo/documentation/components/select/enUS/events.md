@@ -25,9 +25,38 @@
   multiple
   placeholder="Please Select Type"
   :options="options"
+/>
+<n-select
+  v-model="selectedValue"
+  size="large"
+  :options="options"
   emit-option
   @change="handleChange"
-/>
+>
+  <n-select-option 
+    v-for="option in options"
+    :key="options.value"
+    :label="option.label"
+    :value="option.value"
+    :disabled="option.disabled"
+  />
+</n-select>
+<n-select
+  v-model="selectedArray"
+  size="large"
+  multiple
+  :options="options"
+  emit-option
+  @change="handleChange"
+>
+  <n-select-option 
+    v-for="option in options"
+    :key="options.value"
+    :label="option.label"
+    :value="option.value"
+    :disabled="option.disabled"
+  />
+</n-select>
 ```
 ```js
 export default {

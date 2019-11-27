@@ -175,7 +175,7 @@
       align-items: center;
       justify-content: center;
       user-select: none;
-      font-weight: 700;
+      // font-weight: 700;
       text-align: center;
       transition: background-color .2s $default-cubic-bezier, opacity .15s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier;
       cursor: pointer;
@@ -254,6 +254,13 @@
   display: inline-block;
   position: relative;
   @include not-m(vertical) {
+    @include m(block) {
+      display: flex;
+      flex-wrap: nowrap;
+      @include b(button) {
+        flex-grow: 1;
+      }
+    }
     @include b(button) {
       &:first-child:not(:last-child) {
         margin-right: 0!important;
