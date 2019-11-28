@@ -1,6 +1,7 @@
 # Config Consumer
-Config Consumer is built for get global config of Naive UI. It will help when you want to build a component which support themes or other mutable features.
+Config Consumer is built for getting config (usually as global config) of Config Provider. It will be helpful when you want to build a component which supports themes or other mutable features.
 ## Demos
 ```demo
 basic
+theme-environment
 ```

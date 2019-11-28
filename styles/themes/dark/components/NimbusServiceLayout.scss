@@ -5,6 +5,7 @@
   $service-layout-color: $--n-secondary-text-color !global;
   $service-layout-border-color: $--n-divider-color !global;
   $service-layout-toggle-button-color: rgba(255, 255, 255, .3)!global;
-  $service-layout-item-background-image: linear-gradient(47deg,rgba(232,232,235,.4) 0%,rgba(31,38,62,.4) 100%) !global;
+  $service-layout-item-background-image: linear-gradient(90deg, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, .03) 40%, rgba(0, 0, 0, .09) 60%, rgba(0, 0, 0, .09) 100%) !global;
   $--service-kayout-item-active-color: $--primary-6 !global;
+  $--service-layout-item-background-position: 0% !global;
 }
