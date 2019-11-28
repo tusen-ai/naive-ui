@@ -76,27 +76,24 @@ export default {
   methods: {
     handlePasswordInput () {
       if (this.model.reenteredPassword) {
-        this.$refs.reenteredPassword.validate('password-input', ({
-          valid,
-          errors
-        }) => {
-          if (valid) {
-            this.$NMessage.success('password ok')
+        this.$refs.reenteredPassword.validate('password-input', (errors => {
+          if (!errors) {
+            this.$NMessage.success('Valid')
           } else {
             console.log(errors)
-            this.$NMessage.error('password not ok')
+            this.$NMessage.error('Invalid')
           }
-        })
+        }))
       }
     },
     handleValidateButtonClick (e) {
       e.preventDefault()
-      this.$refs.form.validate((valid, errors) => {
-        console.log(valid, errors)
-        if (valid) {
-          this.$NMessage.success(String(valid))
+      this.$refs.form.validate(errors => {
+        if (!errors) {
+          this.$NMessage.success('Valid')
         } else {
-          this.$NMessage.error(String(valid))
+          console.log(errors)
+          this.$NMessage.error('Invalid')
         }
       })
     },

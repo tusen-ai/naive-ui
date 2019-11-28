@@ -209,7 +209,7 @@ export default {
     handleContentInput () {
       this._validate('input')
     },
-    validate (trigger = null, afterValidate, options = null) {
+    validate (trigger = null, afterValidate, options) {
       return new Promise((resolve, reject) => {
         this._validate(trigger, options).then(({
           valid,
@@ -217,18 +217,13 @@ export default {
         }) => {
           if (valid) {
             if (afterValidate) {
-              afterValidate({
-                valid
-              })
+              afterValidate()
             } else {
               resolve()
             }
           } else {
             if (afterValidate) {
-              afterValidate({
-                valid,
-                errors
-              })
+              afterValidate(errors)
             } else {
               // eslint-disable-next-line prefer-promise-reject-errors
               reject({
@@ -239,7 +234,9 @@ export default {
         })
       })
     },
-    _validate (trigger = null, options = null) {
+    _validate (trigger = null, options = {
+      suppressWarning: true
+    }) {
       if (!this.path) {
         throw new Error('[naive-ui/form-item/validate]: validate form-item without path')
       }
