@@ -21,7 +21,7 @@ export default {
       } else if (this.NThemedComponent && this.NThemedComponent.synthesizedTheme) {
         return this.NThemedComponent.synthesizedTheme
       } else {
-        return (this.NApp && this.NApp.synthesizedTheme) || null
+        return (this.NConfigProvider && this.NConfigProvider.synthesizedTheme) || null
       }
     },
     synthesizedStyle () {
@@ -29,6 +29,11 @@ export default {
         return this.themedStyle[this.synthesizedTheme]
       }
       return null
+    },
+    synthesizedThemeEnvironment () {
+      if (this.synthesizedTheme && this.NConfigProvider && this.NConfigProvider.themeEnvironment) {
+        return this.NConfigProvider.themeEnvironment[this.synthesizedTheme] || null
+      }
     }
   }
 }

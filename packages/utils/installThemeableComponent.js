@@ -5,7 +5,7 @@ function getTheme (component) {
     if (cursor.synthesizedTheme) {
       return cursor.synthesizedTheme
     }
-    if (name === 'NApp') {
+    if (name === 'NConfigProvider') {
       return cursor.theme || null
     }
     cursor = cursor.$parent

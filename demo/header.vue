@@ -22,7 +22,7 @@
     </div>
     <div class="theme-picker">
       <n-select
-        v-model="NApp.$parent.theme"
+        v-model="NConfigProvider.$parent.theme"
         size="small"
         :options="options"
       />
@@ -101,7 +101,7 @@ export default {
       document.body.focus()
     },
     handleThemeChange (theme) {
-      this.NApp.$parent.theme = theme
+      this.NConfigProvider.$parent.theme = theme
     },
     handleLangInput (lang) {
       this.$emit('lang-change', lang)
