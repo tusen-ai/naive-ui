@@ -65,9 +65,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.n-row {
-  width: 100%;
-}
-</style>

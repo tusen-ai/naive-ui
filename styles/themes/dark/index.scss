@@ -52,6 +52,7 @@
 @import "components/Card.scss";
 @import "components/AutoComplete.scss";
 @import "components/Affix.scss";
+@import "components/Avatar.scss";
 
 @mixin setup-dark-theme() {
   @include setup-dark-colors();
@@ -131,4 +132,5 @@
   @include setup-dark-card;
   @include setup-dark-auto-complete;
   @include setup-dark-affix;
+  @include setup-dark-avatar;
 }

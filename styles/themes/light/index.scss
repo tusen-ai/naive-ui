@@ -52,6 +52,7 @@
 @import "components/Card.scss";
 @import "components/AutoComplete.scss";
 @import "components/Affix.scss";
+@import "components/Avatar.scss";
 
 @mixin setup-light-theme() {
   @include setup-light-colors();
@@ -130,4 +131,5 @@
   @include setup-light-card;
   @include setup-light-auto-complete;
   @include setup-light-affix;
+  @include setup-light-avatar;
 }
