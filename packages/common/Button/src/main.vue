@@ -31,16 +31,14 @@
       >
         <n-spin
           v-if="loading"
-          :class="{
-            'simulate-hollow-out-stroke': simulateHollowOut
-          }"
+          :stroke="simulateHollowOut ? ascendantBackgroundColor : null"
           :size="null"
           :stroke-width="4"
         />
         <n-icon
           v-else
-          :class="{
-            'simulate-hollow-out-fill': simulateHollowOut
+          :style="{
+            fill: simulateHollowOut ? ascendantBackgroundColor : null
           }"
           class="n-icon-slot"
         >
@@ -53,10 +51,9 @@
     <div
       v-if="!circle && $slots.default"
       class="n-button__content"
-      :class="{
-        'simulate-hollow-out-text': simulateHollowOut
+      :style="{
+        color: simulateHollowOut ? ascendantBackgroundColor : null
       }"
-      :style="style"
     >
       <slot />
     </div>
@@ -77,16 +74,14 @@
       >
         <n-spin
           v-if="loading"
-          :class="{
-            'simulate-hollow-out-stroke': simulateHollowOut
-          }"
+          :stroke="simulateHollowOut ? ascendantBackgroundColor : null"
           :stroke-width="4"
         />
         <n-icon
           v-else
           class="n-icon-slot"
-          :class="{
-            'simulate-hollow-out-fill': simulateHollowOut
+          :style="{
+            fill: simulateHollowOut ? ascendantBackgroundColor : null
           }"
         >
           <slot
@@ -172,7 +167,6 @@ export default {
   },
   data () {
     return {
-      style: {},
       enterPressed: false,
       rippling: false,
       rippleTimer: null

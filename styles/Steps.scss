@@ -17,8 +17,11 @@
     @include b(step-indicator) {
       background-color: map-get($--steps-step-background-color, $status);
       box-shadow: 0 0 0 1px map-get($--steps-step-border-color, $status);
-      @include e(icon, index) {
+      @include e(index) {
         color: map-get($--steps-step-indicator-color, $status);
+      }
+      @include e(icon) {
+        fill: map-get($--steps-step-indicator-color, $status);
       }
     }
   }
@@ -95,7 +98,7 @@
       @include e(icon) {
         @include fade-in-transition-ease-in-out(step-indicator, .3s);
         transition: color .3s $default-cubic-bezier;
-        color: rgba(255,255,255,0.3);
+        fill: rgba(255,255,255,0.3);
         width: 16px;
         height: 16px;
         font-size: 16px;

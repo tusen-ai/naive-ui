@@ -23,14 +23,17 @@
         <div
           v-for="mark in computedMarks"
           :key="mark.label"
-          class="n-slider-dot simulate-hollow-out-background"
-          :style="mark.style"
+          class="n-slider-dot"
+          :style="{
+            backgroundColor: ascendantBackgroundColor,
+            ...mark.style
+          }"
         />
       </div>
     </div>
     <div
       ref="firstHandle"
-      class="n-slider-handle simulate-hollow-out-background"
+      class="n-slider-handle"
       tabindex="0"
       :style="firstHandleStyle"
       @mousedown="handleFirstHandleMouseDown"
@@ -40,7 +43,7 @@
     <div
       v-if="range"
       ref="secondHandle"
-      class="n-slider-handle simulate-hollow-out-background"
+      class="n-slider-handle"
       tabindex="0"
       :style="secondHandleStyle"
       @mousedown="handleSecondHandleMouseDown"
@@ -221,12 +224,14 @@ export default {
     },
     firstHandleStyle () {
       return {
+        backgroundColor: this.ascendantBackgroundColor,
         left: ((this.firstHandleValue - this.min) / (this.max - this.min) * 100) + '%',
         zIndex: this.firstHandleActive ? 1 : 0
       }
     },
     secondHandleStyle () {
       return {
+        backgroundColor: this.ascendantBackgroundColor,
         left: ((this.secondHandleValue - this.min) / (this.max - this.min) * 100) + '%',
         zIndex: this.secondHandleActive ? 1 : 0
       }

@@ -13,20 +13,22 @@
         >
           <n-icon
             v-if="synthesizedStatus === 'finish'"
-            type="md-checkmark"
-          />
+          >
+            <md-checkmark />
+          </n-icon>
           <n-icon
             v-else-if="synthesizedStatus === 'error'"
-            type="md-close"
-          />
+          >
+            <md-close />
+          </n-icon>
         </div>
       </transition>
       <transition name="n-step-indicator--transition">
         <div
           v-if="!(synthesizedStatus === 'finish' || synthesizedStatus === 'error')"
           class="n-step-indicator__index"
-          :class="{
-            'simulate-hollow-out-text': synthesizedStatus === 'process'
+          :style="{
+            color: synthesizedStatus === 'process' ? ascendantBackgroundColor : null
           }"
         >
           {{ index }}
@@ -53,6 +55,8 @@
 <script>
 import NIcon from '../../Icon'
 import hollowoutable from '../../../mixins/hollowoutable'
+import mdClose from '../../../icons/md-close'
+import mdCheckmark from '../../../icons/md-checkmark'
 
 export default {
   name: 'NStep',
@@ -62,7 +66,9 @@ export default {
     }
   },
   components: {
-    NIcon
+    NIcon,
+    mdCheckmark,
+    mdClose
   },
   mixins: [hollowoutable],
   props: {
