@@ -1,6 +1,6 @@
 <script>
 import NFormItemCol from './FormItemCol'
-import NRow from '../../Grid/src/main'
+import NRow from '../../Grid/src/Row'
 import NFormItem from './FormItem'
 
 export default {

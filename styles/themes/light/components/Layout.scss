@@ -1,3 +1,8 @@
 @mixin setup-light-layout {
-  
+  $--layout-header-background-color: $--n-card-color !global;
+  $--layout-header-border-color: $--n-divider-color !global;
+  $--layout-footer-border-color: $--n-divider-color !global;
+  $--layout-sider-border-color: $--n-divider-color !global;
+  $--layout-sider-background-color: $--n-card-color !global;
+  $--layout-sider-toggle-button-fill:  rgba(0, 0, 0, .15) !global;
 }

@@ -7,7 +7,12 @@
   >
     <div class="n-timeline-item-timeline">
       <div class="n-timeline-item-timeline__line" />
-      <div class="n-timeline-item-timeline__circle simulate-hollow-out-background" />
+      <div
+        class="n-timeline-item-timeline__circle"
+        :style="{
+          backgroundColor: ascendantBackgroundColor
+        }"
+      />
     </div>
     <div class="n-timeline-item-content">
       <div

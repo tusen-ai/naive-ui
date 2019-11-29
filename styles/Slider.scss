@@ -101,7 +101,7 @@
       top: 50%;
       right: 0;
       @include b(slider-dot) {
-        transition: box-shadow .3s $default-cubic-bezier;
+        transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
         position: absolute;
         transform: translateX(-50%) translateY(-50%);
         height: $--slider-dot-size;

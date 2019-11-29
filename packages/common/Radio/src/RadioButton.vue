@@ -3,8 +3,7 @@
     class="n-radio-button"
     :class="{
       'n-radio-button--disabled': disabled,
-      'n-radio-button--checked': checked,
-      'simulate-hollow-out-text': shouldSimulateHollowOutText
+      'n-radio-button--checked': checked
     }"
     :tabindex="disabled ? -1 : 0"
     @keyup.enter="handleKeyUpEnter"
@@ -42,9 +41,9 @@ export default {
     }
   },
   computed: {
-    shouldSimulateHollowOutText () {
-      return this.checked && (this.NRadioGroup.synthesizedTheme === 'dark')
-    },
+    // shouldSimulateHollowOutText () {
+    //   return this.checked && (this.NRadioGroup.synthesizedTheme === 'dark')
+    // },
     checked () {
       if (this.NRadioGroup) {
         return this.NRadioGroup.value === this.value

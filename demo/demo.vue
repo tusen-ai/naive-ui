@@ -128,10 +128,6 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-icon'
             },
             {
-              name: 'Menu',
-              path: `/${this.lang}/${this.theme}` + '/n-menu'
-            },
-            {
               name: 'Tag',
               path: `/${this.lang}/${this.theme}` + '/n-tag'
             }
@@ -263,7 +259,7 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-loading-bar'
             },
             {
-              name: 'Menu (in progress)',
+              name: 'Menu',
               path: `/${this.lang}/${this.theme}` + '/n-menu'
             },
             {

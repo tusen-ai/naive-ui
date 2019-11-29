@@ -5,4 +5,6 @@ Config Provider is using to set global theme and set namespace for components (d
 theme
 namespace
 inherit-theme
+theme-environment
+transparent
 ```

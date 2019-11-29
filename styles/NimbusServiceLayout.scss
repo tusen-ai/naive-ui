@@ -136,14 +136,16 @@
           }
           &::before { // item background
             content: "";
+            background-size: 300%;
             background-image: $service-layout-item-background-image;
+            background-position: $--service-layout-item-background-position;
             position: absolute;
             left: 0;
             right: 0;
             top: 0;
             bottom: 0;
             z-index: -1;
-            transition: opacity 0.3s $default-cubic-bezier;
+            transition: opacity 0.3s $default-cubic-bezier, background-position .3s $default-cubic-bezier;
             opacity: 0;
           }
           @include m(active) {

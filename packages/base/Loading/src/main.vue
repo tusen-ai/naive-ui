@@ -9,7 +9,8 @@
     >
       <circle
         :style="{
-          strokeWidth
+          strokeWidth,
+          stroke
         }"
         class="n-base-loading-circular-path"
         cx="50"
@@ -31,6 +32,10 @@ export default {
     },
     strokeWidth: {
       type: Number,
+      default: null
+    },
+    stroke: {
+      type: String,
       default: null
     }
   },
