@@ -5,7 +5,6 @@
   type="datetime"
   :disabledTime= "disabledTime"
 />
-{{timestamp}}
 <n-date-picker v-model="timestamp2" type="datetime" />
 ```
 ```js

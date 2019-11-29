@@ -320,7 +320,7 @@ export default {
         return
       }
       if (this.value === null) {
-        this.$emit('input', getTime(startOfHour(new Date())))
+        this.$emit('input', getTime(setHours(startOfHour(new Date()), hour)))
       } else {
         this.$emit('input', getTime(setHours(this.value, hour)))
       }

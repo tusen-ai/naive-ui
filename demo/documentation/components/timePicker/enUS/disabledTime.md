@@ -1,4 +1,4 @@
-# Basic
+# Disabled Time
 ```html
 <n-time-picker
   v-model="time0"
@@ -6,7 +6,7 @@
   :disabledMinutes="disabledMinutes"
   :disabledSeconds="disabledSeconds"
 />
-<n-time-picker v-model="time1" />
+
 ```
 ```js
 export default {

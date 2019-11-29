@@ -25,6 +25,9 @@
           position-mode="absolute"
           class="n-date-picker-panel__time-input"
           :value="startTimeValue"
+          :disabled-hours="disabledHours(startTimeValue)"
+          :disabled-minutes="disabledMinutes(startTimeValue)"
+          :disabled-seconds="disabledSeconds(startTimeValue)"
           stop-selector-bubble
           @input="handleStartTimePickerInput"
         />
@@ -45,6 +48,9 @@
           position-mode="absolute"
           class="n-date-picker-panel__time-input"
           :value="endTimeValue"
+          :disabled-hours="disabledHours(endTimeValue)"
+          :disabled-minutes="disabledMinutes(endTimeValue)"
+          :disabled-seconds="disabledSeconds(endTimeValue)"
           stop-selector-bubble
           @input="handleEndTimePickerInput"
         />

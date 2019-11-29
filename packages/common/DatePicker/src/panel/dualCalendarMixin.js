@@ -7,6 +7,12 @@ import getMonth from 'date-fns/getMonth'
 import startOfMonth from 'date-fns/startOfMonth'
 import isValid from 'date-fns/isValid'
 import { dateArray } from '../../../../utils/dateUtils'
+import startOfSecond from 'date-fns/startOfSecond'
+import startOfMinute from 'date-fns/startOfMinute'
+import startOfHour from 'date-fns/startOfHour'
+import setHours from 'date-fns/setHours'
+import setMinutes from 'date-fns/setMinutes'
+import setSeconds from 'date-fns/setSeconds'
 
 import commonCalendarMixin from './commonCalendarMixin'
 
@@ -253,6 +259,42 @@ export default {
     endCalendarPrevMonth () {
       this.endCalendarDateTime = addMonths(this.endCalendarDateTime, -1)
       this.adjustCalendarTimes(false)
+    },
+    disabledHours (value) {
+      let self = this
+      return function (hour) {
+        let newVal = null
+        if (value === null) {
+          newVal = getTime(startOfHour(new Date()))
+        } else {
+          newVal = getTime(setHours(value, hour))
+        }
+        return self.disabledTime(newVal)
+      }
+    },
+    disabledMinutes (value) {
+      let self = this
+      return function (minute) {
+        let newVal = null
+        if (value === null) {
+          newVal = getTime(startOfMinute(new Date()))
+        } else {
+          newVal = getTime(setMinutes(value, minute))
+        }
+        return self.disabledTime(newVal)
+      }
+    },
+    disabledSeconds (value) {
+      let self = this
+      return function (second) {
+        let newVal = null
+        if (value === null) {
+          newVal = getTime(startOfSecond(new Date()))
+        } else {
+          newVal = getTime(setSeconds(value, second))
+        }
+        return self.disabledTime(newVal)
+      }
     }
   }
 }
