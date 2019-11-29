@@ -8,7 +8,16 @@
       width: 100%;
       font-size: 16px;
       transition: background-color .3s $default-cubic-bezier;
-      @include e(content) {
+      @include not-m(vertical) {
+        margin-top: 24px;
+        margin-bottom: 24px;
+        @include not-m(no-title) {
+          display: flex;
+          align-items: center;
+        }
+      }
+      
+      @include e(title) {
         transition: color .3s $default-cubic-bezier;
         display: flex;
         align-items: center;
@@ -17,16 +26,16 @@
         white-space: nowrap;
         font-weight: 700;
       }
-      @include m(content-position-left) {
+      @include m(title-position-left) {
         @include e(line) {
-          @include m(line-left) {
+          @include m(left) {
             width: 28px;
           }
         }
       }
-      @include m(content-position-right) {
+      @include m(title-position-right) {
         @include e(line) {
-          @include m(line-right) {
+          @include m(right) {
             width: 28px;
           }
         }
@@ -54,8 +63,6 @@
         transition: background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
         height: 1px;
         width: 100%;
-        margin-top: 24px;
-        margin-bottom: 24px;
       }
     }
     @include not-m(dashed) {

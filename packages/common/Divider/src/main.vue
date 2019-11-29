@@ -3,11 +3,12 @@
     class="n-divider"
     :class="{
       'n-divider--vertical': vertical,
-      'n-divider--no-content': !$slots.default,
+      'n-divider--no-title': !$slots.default,
       'n-divider--dashed': dashed,
-      [`n-divider--content-position-${contentPosition}`]: $slots.default && contentPosition,
+      [`n-divider--title-position-${contentPosition || titlePlacement}`]: $slots.default && (contentPosition || titlePlacement),
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
+    :style="synthesizedStyle"
   >
     <div
       v-if="!vertical"
@@ -15,7 +16,7 @@
     />
     <div
       v-if="!vertical && $slots.default"
-      class="n-divider__content"
+      class="n-divider__title"
     >
       <slot />
     </div>
@@ -29,15 +30,21 @@
 <script>
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import asthemecontext from '../../../mixins/asthemecontext'
 
 export default {
   name: 'NDivider',
   mixins: [
     withapp,
-    themeable
+    themeable,
+    asthemecontext
   ],
   props: {
     contentPosition: {
+      type: String,
+      default: null
+    },
+    titlePlacement: {
       type: String,
       default: 'center'
     },
