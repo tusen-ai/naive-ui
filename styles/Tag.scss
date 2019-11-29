@@ -12,47 +12,61 @@
     line-height: $height;
     height: $height;
     font-size: map-get($font-size, $size);
+    @include m(round) {
+      padding-left: $height / 2;
+      padding-right: $height / 2;
+      border-radius: $height / 2;
+      @include m(closable) {
+        padding-right: 8px + $height / 2;
+        @include e(close-mark) { 
+          right: $height / 2 - 8px;
+        }
+      }
+    }
   }
 }
 
 @mixin tag-type-mixin($type) {
   @include m($type + '-type') {
-    @include not-m(disabled) {
-      box-shadow: inset 0 0 0 1px map-get($map: $--tag-border-color, $key: $type);
-      color: map-get($map: $--tag-color, $key: $type);
-      background-color: map-get($map: $--tag-background-color, $key: $type);
-      @include e(close-mark) {
-        path {
-          fill: map-get($map: $--tag-close-mark-color, $key: $type);
+    @include not-m(checkable) {
+      @include not-m(disabled) {
+        box-shadow: inset 0 0 0 1px map-get($map: $--tag-border-color, $key: $type);
+        color: map-get($map: $--tag-color, $key: $type);
+        background-color: map-get($map: $--tag-background-color, $key: $type);
+        @include e(close-mark) {
+          path {
+            fill: map-get($map: $--tag-close-mark-color, $key: $type);
+          }
+          &:hover {
+            path {
+              fill: map-get($map: $--tag-close-mark-color, $key: $type + '-hover');
+            }
+          }
+          &:active {
+            path {
+              fill: map-get($map: $--tag-close-mark-color, $key: $type + '-active');
+            }
+          }
         }
         &:hover {
-          path {
-            fill: map-get($map: $--tag-close-mark-color, $key: $type + '-hover');
-          }
+          background-color: map-get($map: $--tag-background-color, $key: $type + '-hover');
         }
         &:active {
+          background-color: map-get($map: $--tag-background-color, $key: $type + '-active');
+        }
+      }
+      @include m(disabled) {
+        box-shadow: inset 0 0 0 1px map-get($map: $--tag-border-color, $key: $type + '-disabled');
+        color: map-get($map: $--tag-color, $key: $type + '-disabled');
+        background-color: map-get($map: $--tag-background-color, $key: $type + '-disabled');
+        @include e(close-mark) {
           path {
-            fill: map-get($map: $--tag-close-mark-color, $key: $type + '-active');
+            fill: map-get($map: $--tag-close-mark-color, $key: $type + '-disabled');
           }
         }
       }
-      &:hover {
-        background-color: map-get($map: $--tag-background-color, $key: $type + '-hover');
-      }
-      &:active {
-        background-color: map-get($map: $--tag-background-color, $key: $type + '-active');
-      }
     }
-    @include m(disabled) {
-      box-shadow: inset 0 0 0 1px map-get($map: $--tag-border-color, $key: $type + '-disabled');
-      color: map-get($map: $--tag-color, $key: $type + '-disabled');
-      background-color: map-get($map: $--tag-background-color, $key: $type + '-disabled');
-      @include e(close-mark) {
-        path {
-          fill: map-get($map: $--tag-close-mark-color, $key: $type + '-disabled');
-        }
-      }
-    }
+    
   }
 }
 
@@ -69,17 +83,23 @@
       box-sizing: border-box;
       cursor: default;
       display: inline-block;
-      transition: background-color .2s $default-cubic-bezier;
+      transition: background-color .2s $default-cubic-bezier, color .3s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
       @include e(close-mark) {
         cursor: pointer;
         path {
           transition: fill .2s $default-cubic-bezier;
         }
       }
+      @include m(checkable) {
+        cursor: pointer;
+      }
       @include m(disabled) {
         cursor: not-allowed !important;
         @include e(close-mark) { 
           cursor: not-allowed !important;
+        }
+        @include m(checkable) {
+          opacity: .4;
         }
       }
       @include m(closable) {
@@ -101,90 +121,36 @@
     @include tag-type-mixin('success');
     @include tag-type-mixin('warning');
     @include tag-type-mixin('error');
+    @include m(checkable) {
+      box-shadow: none;
+      color: map-get($--tag-color, 'checkable-default');
+      background-color: map-get($map: $--tag-background-color, $key: 'checkable-default');
+      @include not-m(disabled) {
+        &:hover {
+          @include not-m(checked) {
+            color: map-get($--tag-color, 'checkable-hover');
+          }
+          background-color: map-get($map: $--tag-background-color, $key: 'checkable-hover');
+        }
+        &:active {
+          @include not-m(checked) {
+            color: map-get($--tag-color, 'checkable-active');
+          }
+          background-color: map-get($map: $--tag-background-color, $key: 'checkable-active');
+        }
+      }
+      @include m(checked) {
+        color: map-get($--tag-color, 'checkable-active');
+        background-color: map-get($map: $--tag-background-color, $key: 'checkable-active');
+        @include not-m(disabled) {
+          &:hover {
+            background-color: map-get($map: $--tag-background-color, $key: 'checkable-checked-hover');
+          }
+          &:active {
+            background-color: map-get($map: $--tag-background-color, $key: 'checkable-checked-active');
+          }
+        }
+      }
+    }
   }
-  //   &.n-tag--default-type {
-  //     box-shadow: inset 0 0 0 1px rgba(99,226,183,1);
-  //     color: rgba(99, 226, 183, 1);
-  //     .n-tag__close-mark {
-  //       color: rgba(99, 226, 183, 0.5);
-  //       &:hover {
-  //         color: rgba(99, 226, 183, 1);
-  //       }
-  //     }
-  //     &:hover {
-  //       background-color: rgba(99, 226, 183, 0.3);
-  //     }
-  //     &:active {
-  //       background-color: rgba(99, 226, 183, 0.2);
-  //     }
-  //   }
-  //   &.n-tag--success-type {
-  //     box-shadow: inset 0 0 0 1px rgba(99, 226, 183, 1);
-  //     color:  rgba(99, 226, 183, 1);
-  //     .n-tag__close-mark {
-  //       path {
-  //         fill: rgba(99, 226, 183, 0.5);
-  //       }
-  //       &:hover {
-  //         path{
-  //           fill: rgba(99, 226, 183, 1); 
-  //         }
-  //       }
-  //     }
-  //     &:hover {
-  //       background-color: rgba(99, 226, 183, 0.3);
-  //     }
-  //     &:active {
-  //       background-color: rgba(99, 226, 183, 0.2);
-  //     }
-  //   }
-  //   &.n-tag--info-type {
-  //     box-shadow: inset 0 0 0 1px rgba(98, 187, 252, 1);
-  //     color: rgba(98, 187, 252, 1);
-  //     .n-tag__close-mark {
-  //       color: rgba(98, 187, 252, 0.5);
-  //       &:hover {
-  //         color: rgba(98, 187, 252, 1);
-  //       }
-  //     }
-  //     &:hover {
-  //       background-color: rgba(98, 187, 252, 0.3);
-  //     }
-  //     &:active {
-  //       background-color: rgba(98, 187, 252, 0.2);
-  //     }
-  //   }
-  //   &.n-tag--warning-type {
-  //     box-shadow: inset 0 0 0 1px rgba(245, 166, 35, 1);
-  //     color: rgba(245, 166, 35, 1);
-  //     .n-tag__close-mark {
-  //       color: rgba(245, 166, 35, 0.5);
-  //       &:hover {
-  //         color: rgba(245, 166, 35, 1);
-  //       }
-  //     }
-  //     &:hover {
-  //       background-color: rgba(245, 166, 35, 0.3);
-  //     }
-  //     &:active {
-  //       background-color: rgba(245, 166, 35, 0.2);
-  //     }
-  //   }
-  //   &.n-tag--error-type {
-  //     box-shadow: inset 0 0 0 1px rgba(255, 146, 164, 1);
-  //     color: rgba(255, 146, 164, 1);
-  //     .n-tag__close-mark {
-  //       color: rgba(255, 146, 164, 0.5);
-  //       &:hover {
-  //         color: rgba(255, 146, 164, 1);
-  //       }
-  //     }
-  //     &:hover {
-  //       background-color: rgba(255, 146, 164, 0.3);
-  //     }
-  //     &:active {
-  //       background-color: rgba(255, 146, 164, 0.2);
-  //     }
-  //   }
-  // }
 }

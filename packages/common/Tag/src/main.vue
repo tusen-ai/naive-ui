@@ -4,16 +4,21 @@
     :class="{
       [`n-tag--${size}-size`]: true,
       [`n-tag--${type}-type`]: true,
-      'n-tag--closable': closable,
+      'n-tag--closable': !checkable && closable,
       'n-tag--disabled': disabled,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
+      'n-tag--checkable': checkable,
+      'n-tag--checked': checkable && checked,
+      'n-tag--round': round
     }"
+    :style="synthesizedStyle"
+    @click="handleClick"
   >
     <slot />
     <div
-      v-if="closable"
+      v-if="!checkable && closable"
       class="n-tag__close-mark"
-      @click="handleClick"
+      @click="handleCloseClick"
     >
       <close-icon />
     </div>
@@ -31,12 +36,34 @@ export default {
     CloseIcon
   },
   mixins: [withapp, themeable],
+  model: {
+    prop: 'checked',
+    event: 'input'
+  },
   props: {
     type: {
       validator (value) {
         return ['default', 'success', 'info', 'warning', 'error'].includes(value)
       },
       default: 'default'
+    },
+    round: {
+      type: Boolean,
+      default: false
+    },
+    checked: {
+      type: Boolean,
+      default: false
+    },
+    value: {
+      validator () {
+        return true
+      },
+      default: undefined
+    },
+    checkable: {
+      type: Boolean,
+      default: false
     },
     size: {
       validator (value) {
@@ -59,6 +86,14 @@ export default {
   },
   methods: {
     handleClick (e) {
+      if (!this.disabled) {
+        if (this.checkable) {
+          this.$emit('change', !this.checked)
+          this.$emit('input', !this.checked)
+        }
+      }
+    },
+    handleCloseClick (e) {
       if (this.stopClickPropagation) {
         e.stopPropagation()
       }

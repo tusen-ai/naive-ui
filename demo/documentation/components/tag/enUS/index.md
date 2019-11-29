@@ -3,4 +3,6 @@
 ```demo
 basic
 disabled
+size
+checkable
 ```
