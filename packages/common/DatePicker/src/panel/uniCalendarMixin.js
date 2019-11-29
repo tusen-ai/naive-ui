@@ -10,6 +10,12 @@ import getMonth from 'date-fns/getMonth'
 import getDate from 'date-fns/getDate'
 import isValid from 'date-fns/isValid'
 import { dateArray, strictParse } from '../../../../utils/dateUtils'
+import startOfSecond from 'date-fns/startOfSecond'
+import startOfMinute from 'date-fns/startOfMinute'
+import startOfHour from 'date-fns/startOfHour'
+import setHours from 'date-fns/setHours'
+import setMinutes from 'date-fns/setMinutes'
+import setSeconds from 'date-fns/setSeconds'
 
 export default {
   mixins: [commonCalendarMixin],
@@ -34,6 +40,12 @@ export default {
     actions: {
       type: Array,
       default: () => ['now', 'confirm']
+    },
+    disabledTime: {
+      type: Function,
+      default: () => {
+        return false
+      }
     }
   },
   data () {
@@ -187,7 +199,10 @@ export default {
       this.calendarDateTime = new Date() // moment()
     },
     handleDateClick (dateItem) {
-      // console.log(dateItem)
+      console.log('dateItem11111111111', dateItem)
+      if (this.disabledTime(dateItem.timestamp)) {
+        return
+      }
       let newSelectedDateTime = new Date()
       if (this.valueAsDateTime !== null) {
         newSelectedDateTime = this.valueAsDateTime
@@ -230,6 +245,33 @@ export default {
     },
     prevMonth () {
       this.calendarDateTime = addMonths(this.calendarDateTime, -1)
+    },
+    disabledHours (hour) {
+      let newVal = null
+      if (this.value === null) {
+        newVal = getTime(startOfHour(new Date()))
+      } else {
+        newVal = getTime(setHours(this.value, hour))
+      }
+      return this.disabledTime(newVal)
+    },
+    disabledMinutes (minute) {
+      let newVal = null
+      if (this.value === null) {
+        newVal = getTime(startOfMinute(new Date()))
+      } else {
+        newVal = getTime(setMinutes(this.value, minute))
+      }
+      return this.disabledTime(newVal)
+    },
+    disabledSeconds (second) {
+      let newVal = null
+      if (this.value === null) {
+        newVal = getTime(startOfSecond(new Date()))
+      } else {
+        newVal = getTime(setSeconds(this.value, second))
+      }
+      return this.disabledTime(newVal)
     }
   }
 }

@@ -25,6 +25,9 @@
           class="n-date-picker-panel__time-input"
           :value="value"
           stop-selector-bubble
+          :disabled-hours="disabledHours"
+          :disabled-minutes="disabledMinutes"
+          :disabled-seconds="disabledSeconds"
           @input="handleTimePickerInput"
         />
       </div>
@@ -76,7 +79,8 @@
             'n-date-picker-panel-dates__date--current': dateItem.isCurrentDate,
             'n-date-picker-panel-dates__date--selected': dateItem.isSelectedDate,
             'n-date-picker-panel-dates__date--in-display-month': dateItem.isDateOfDisplayMonth,
-            'n-date-picker-panel-dates__date--no-transition': noTransition
+            'n-date-picker-panel-dates__date--no-transition': noTransition,
+            'n-date-picker-panel-dates__date--disabled': disabledTime(dateItem.timestamp)
           }"
           @click="handleDateClick(dateItem)"
         >

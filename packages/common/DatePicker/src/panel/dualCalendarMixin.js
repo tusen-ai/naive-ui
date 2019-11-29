@@ -43,6 +43,12 @@ export default {
     actions: {
       type: Array,
       default: () => ['clear', 'confirm']
+    },
+    disabledTime: {
+      type: Function,
+      default: () => {
+        return false
+      }
     }
   },
   data () {
@@ -144,6 +150,9 @@ export default {
       }
     },
     handleDateClick (dateItem) {
+      if (this.disabledTime(dateItem.timestamp)) {
+        return
+      }
       if (!this.isSelecting) {
         this.isSelecting = true
         this.memorizedStartDateTime = dateItem.timestamp

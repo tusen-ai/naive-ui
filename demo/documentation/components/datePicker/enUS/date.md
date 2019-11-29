@@ -3,7 +3,9 @@
 <n-date-picker
   v-model="timestamp"
   type="date"
+  :disabledTime="disabledTime"
 />
+{{timestamp}}
 <n-date-picker v-model="timestamp2" type="date" />
 ```
 ```js
@@ -12,6 +14,12 @@ export default {
     return {
       timestamp: null,
       timestamp2: 1000000
+    }
+  },
+  methods: {
+    disabledTime (current) {
+      // console.log('current', current)
+      return (current >= 1574092800000) && (current < 1574438400000)
     }
   }
 }

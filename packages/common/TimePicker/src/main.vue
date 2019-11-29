@@ -46,8 +46,8 @@
                     :key="hour"
                     class="n-time-picker-selector-time-row__item"
                     :class="{
-                      'n-time-picker-selector-time-row__item--active':
-                        hour === computedHour
+                      'n-time-picker-selector-time-row__item--active': hour === computedHour,
+                      'n-time-picker-selector-time-row__item--disabled': isHourDisabled(hour)
                     }"
                     @click="setHours(hour)"
                   >
@@ -69,8 +69,8 @@
                     :key="minute"
                     class="n-time-picker-selector-time-row__item"
                     :class="{
-                      'n-time-picker-selector-time-row__item--active':
-                        minute === computedMinute
+                      'n-time-picker-selector-time-row__item--active': minute === computedMinute,
+                      'n-time-picker-selector-time-row__item--disabled': isMinuteDisabled(minute)
                     }"
                     @click="setMinutes(minute)"
                   >
@@ -95,8 +95,8 @@
                       'n-time-picker-selector-time-row__item--active':
                         second === computedSecond,
                       'n-time-picker-selector-time-row__item--disabled':
-                        validator &&
-                        !validator(computedHour, computedMinute, second)
+                        isSecondDisabled(second) ||
+                        (validator && !validator(computedHour, computedMinute, second))
                     }"
                     @click="setSeconds(second)"
                   >
@@ -218,6 +218,24 @@ export default {
     validator: {
       type: Function,
       default: null
+    },
+    disabledHours: {
+      type: Function,
+      default: () => {
+        return []
+      }
+    },
+    disabledMinutes: {
+      type: Function,
+      default: () => {
+        return []
+      }
+    },
+    disabledSeconds: {
+      type: Function,
+      default: () => {
+        return false
+      }
     }
   },
   data () {
@@ -244,6 +262,23 @@ export default {
     computedSecond () {
       if (this.computedTime) return format(this.computedTime, 'ss')
       else return null
+    },
+    isHourDisabled () {
+      return function (hour) {
+        return this.disabledHours(hour) || this.disabledHours(Number(hour))
+      }
+    },
+    isMinuteDisabled () {
+      return function (minute) {
+        return this.disabledMinutes(minute, this.computedHour) ||
+      this.disabledMinutes(Number(minute), this.computedHour)
+      }
+    },
+    isSecondDisabled () {
+      return function (second) {
+        return this.disabledSeconds(second, this.computedHour, this.computedMinute) ||
+      this.disabledSeconds(Number(second), this.computedHour, this.computedMinute)
+      }
     }
   },
   watch: {
@@ -281,6 +316,9 @@ export default {
       }
     },
     setHours (hour) {
+      if (this.isHourDisabled(hour)) {
+        return
+      }
       if (this.value === null) {
         this.$emit('input', getTime(startOfHour(new Date())))
       } else {
@@ -288,6 +326,9 @@ export default {
       }
     },
     setMinutes (minute) {
+      if (this.isMinuteDisabled(minute)) {
+        return
+      }
       if (this.value === null) {
         this.$emit('input', getTime(startOfMinute(new Date())))
       } else {
@@ -295,6 +336,9 @@ export default {
       }
     },
     setSeconds (second) {
+      if (this.isSecondDisabled(second)) {
+        return
+      }
       if (this.value === null) {
         this.$emit('input', getTime(startOfSecond(new Date())))
       } else {

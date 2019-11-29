@@ -218,6 +218,10 @@
             background-color: map-get($--date-picker-item-sup-color, 'active');
           }
         }
+        @include m(disabled) {
+          cursor: not-allowed;
+          opacity: 0.45;
+        }
       }
     }
     @include e(divider) {

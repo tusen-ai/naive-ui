@@ -58,6 +58,10 @@
           background-color: $--time-picker-item-background-color;
           color: map-get($--time-picker-text-color, 'active');
         }
+        @include m(disabled) {
+          opacity: 0.45;
+          cursor: not-allowed;
+        }
       }
     }
   }

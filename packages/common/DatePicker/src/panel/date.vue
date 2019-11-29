@@ -59,11 +59,12 @@
             'n-date-picker-panel-dates__date--current': dateItem.isCurrentDate,
             'n-date-picker-panel-dates__date--selected': dateItem.isSelectedDate,
             'n-date-picker-panel-dates__date--in-display-month': dateItem.isDateOfDisplayMonth,
-            'n-date-picker-panel-dates__date--no-transition': noTransition
+            'n-date-picker-panel-dates__date--no-transition': noTransition,
+            'n-date-picker-panel-dates__date--disabled': disabledTime(dateItem.timestamp)
           }"
           @click="handleDateClick(dateItem)"
         >
-          {{ dateItem.dateObject.date }}
+          {{ dateItem.dateObject.date }} {{ disabledTime(dateItem.timestamp) }}
         </div>
         <div
           v-if="!(actions && actions.length)"
