@@ -32,7 +32,6 @@
         <n-spin
           v-if="loading"
           :stroke="simulateHollowOut ? ascendantBackgroundColor : null"
-          :size="null"
           :stroke-width="4"
         />
         <n-icon

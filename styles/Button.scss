@@ -91,7 +91,7 @@
         }
       }
       @include e(icon) {
-        path {
+        @include b(icon) {
           fill: map-get($map: $ghost-button-color, $key: $type) !important;
         }
         circle {
@@ -101,7 +101,7 @@
     }
     @if $type == 'default' {
       @include e(icon) {
-        path {
+        @include b(icon) {
           fill: map-get($map: $ghost-button-color, $key: $type) !important;
         }
         circle {
@@ -191,11 +191,6 @@
       @include e(icon) {
         @include fade-in-width-expand-transition();
         transition: color .3s $default-cubic-bezier;
-        @include b(icon) {
-          path {
-            transition: fill .3s $default-cubic-bezier;
-          }
-        }
       }
       @include e(content-aligner) {
         display: inline-block;

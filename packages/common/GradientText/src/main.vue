@@ -6,6 +6,7 @@
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
     :style="{
+      ...synthesizedStyle,
       fontSize: styleFontSize,
       backgroundImage: styleBackgroundImage
     }"

@@ -1,8 +1,11 @@
-.n-icon {
+@import './mixins/mixins.scss';
+
+@include b(icon) {
   height: 1em;
   width: 1em;
   line-height: 1em;
   text-align: center;
   display: inline-block;
   position: relative;
+  transition: fill .3s $default-cubic-bezier;
 }

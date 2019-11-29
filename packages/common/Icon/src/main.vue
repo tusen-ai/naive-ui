@@ -1,6 +1,10 @@
 <script>
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
+
 export default {
   name: 'NIcon',
+  mixins: [ withapp, themeable ],
   props: {
     size: {
       type: [Number, String],
@@ -28,7 +32,10 @@ export default {
     else {
       return h('i', {
         staticClass: 'n-icon',
-        style: this.styles,
+        style: {
+          ...this.styles,
+          ...this.synthesizedStyle
+        },
         on: this.$listeners
       }, this.$slots.default)
     }
