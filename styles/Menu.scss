@@ -48,7 +48,9 @@ $layout-nav-height: 64px;
             // }
             &::before { // item background
               content: "";
+              background-size: 300%;
               background-image: $menu-item-selected-background-image;
+              background-position: $--menu-item-background-position;
               position: absolute;
               left: 0;
               right: 0;
