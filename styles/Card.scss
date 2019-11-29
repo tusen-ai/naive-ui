@@ -24,7 +24,7 @@ $--card-margin-bottom: (
 @mixin card-size-mixin ($size) {
   @include m($size + '-size') {
     @include m(title-segmented) {
-      @include b(card-title) {
+      @include b(card-header) {
         &:not(:last-child) {
           margin-bottom: 0;
           padding-bottom: map-get($--card-margin-bottom, $size);
@@ -32,7 +32,7 @@ $--card-margin-bottom: (
       }
     }
     @include m(title-soft-segmented) {
-      @include b(card-title) {
+      @include b(card-header) {
         padding: map-get($--card-margin-top, $size) 0 map-get($--card-margin-bottom, $size) 0;
         margin: 0 map-get($--card-margin-left, $size);
       }
@@ -55,16 +55,16 @@ $--card-margin-bottom: (
         }
       }
     }
-    @include m(extra-segmented) {
-      @include e(extra) {
+    @include m(footer-segmented) {
+      @include e(footer) {
         &:not(:last-child) {
           margin-bottom: 0;
           padding-bottom: map-get($--card-margin-bottom, $size);
         }
       }
     }
-    @include m(extra-soft-segmented) {
-      @include e(extra) {
+    @include m(footer-soft-segmented) {
+      @include e(footer) {
         padding: 0;
         margin: map-get($--card-margin-bottom, $size) map-get($--card-margin-left, $size);
         &:not(:last-child) {
@@ -73,7 +73,7 @@ $--card-margin-bottom: (
         }
       }
     }
-    @include b(card-title) {
+    @include b(card-header) {
       padding: 0px map-get($--card-margin-left, $size);
       margin: map-get($--card-margin-top, $size) 0 map-get($--card-margin-bottom, $size) 0;
       @include e(main) {
@@ -83,13 +83,13 @@ $--card-margin-bottom: (
         font-size: 14px;
       }
     }
-    @include e(content, extra) {
+    @include e(content, footer) {
       padding: 0px map-get($--card-margin-left, $size);
       margin: map-get($--card-margin-bottom, $size) 0;
       font-size: 14px;
     }
     @include e(action) {
-      background-color: $--n-table-header-color;
+      background-color: $--card-action-background-color;
       padding: map-get($--card-margin-bottom, $size) map-get($--card-margin-left, $size);
       font-size: 14px;
     }
@@ -98,89 +98,110 @@ $--card-margin-bottom: (
 
 @include themes-mixin {
   @include b(card) {
-    display: block;
-    overflow: hidden;
-    width: 100%;
-    box-sizing: border-box;
-    position: relative;
-    background-color: $--n-card-color;
-    transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
-    color: $--n-secondary-text-color;
-    @include m(bordered) {
-      border: 1px solid $--n-alpha-divider-color;
-    }
-    border-radius: 6px;
-    @include card-size-mixin('small');
-    @include card-size-mixin('medium');
-    @include card-size-mixin('large');
-    @include card-size-mixin('huge');
-    @include b(card-cover) {
+    @include once {
+      display: block;
+      overflow: hidden;
       width: 100%;
-      img {
-        display: block;
+      box-sizing: border-box;
+      position: relative;
+      transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+      border-radius: 6px;
+      @include card-size-mixin('small');
+      @include card-size-mixin('medium');
+      @include card-size-mixin('large');
+      @include card-size-mixin('huge');
+      @include b(card-cover) {
         width: 100%;
+        img {
+          display: block;
+          width: 100%;
+        }
       }
     }
+    background-color: $--card-background-color;
+    color: $--card-text-color;
+    @include m(bordered) {
+      border: 1px solid $--card-border-color;
+    }
     @include m(title-segmented, title-soft-segmented) {
-      @include b(card-title) {
-        transition: border-color .3s $default-cubic-bezier;
+      @include b(card-header) {
+        @include once {
+          transition: border-color .3s $default-cubic-bezier;
+        }
         &:not(:last-child) {
-          border-bottom: 1px solid $--n-alpha-divider-color;
+          border-bottom: 1px solid $--card-border-color;
         }
       }
     }
     @include m(content-segmented, content-soft-segmented) {
       @include e(content) {
-        transition: border-color .3s $default-cubic-bezier;
+        @include once {
+          transition: border-color .3s $default-cubic-bezier;
+        }
         &:not(:last-child) {
-          border-bottom: 1px solid $--n-alpha-divider-color;
+          border-bottom: 1px solid $--card-border-color;
         }
       }
     }
-    @include m(extra-segmented, extra-soft-segmented) {
-      @include e(extra) {
-        transition: border-color .3s $default-cubic-bezier;
+    @include m(footer-segmented, footer-soft-segmented) {
+      @include e(footer) {
+        @include once {
+          transition: border-color .3s $default-cubic-bezier;
+        }
         &:not(:last-child) {
-          border-bottom: 1px solid $--n-alpha-divider-color;
+          border-bottom: 1px solid $--card-border-color;
         }
       }
     }
-    @include b(card-title) {
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
+    @include b(card-header) {
+      @include once {
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+      }
+      
       @include e(main) {
-        font-weight: 700;
-        font-size: 18px;
-        color: $--n-text-color;
-        transition: color .3s $default-cubic-bezier;
-        flex: 1;
+        @include once {
+          font-weight: 700;
+          font-size: 18px;
+          transition: color .3s $default-cubic-bezier;
+          flex: 1;
+        }
+        color: $--card-title-text-color;
       }
       @include e(extra) {
-        font-weight: 400;
-        font-size: 14px;
-        color: $--n-secondary-text-color;
-        transition: color .3s $default-cubic-bezier;
+        @include once {
+          font-weight: 400;
+          font-size: 14px;
+          transition: color .3s $default-cubic-bezier;
+        }
+        color: $--card-text-color;
       }
       @include e(close-mark) {
-        cursor: pointer;
-        fill: $--n-secondary-text-color;
-        transition: fill .3s $default-cubic-bezier
+        @include once {
+          cursor: pointer;
+          transition: fill .3s $default-cubic-bezier
+        }
+        fill: $--card-text-color;
       }
     }
-    @include e(content) {
-      line-height: 1.5;
-      font-size: 14px;
-    }
-    @include e(extra) {
-      line-height: 1.5;
-      font-size: 14px;
+    @include once {
+      @include e(content) {
+        line-height: 1.5;
+        font-size: 14px;
+      }
+      @include e(footer) {
+        line-height: 1.5;
+        font-size: 14px;
+      }
     }
     @include e(action) {
-      transition: background-color .3s $default-cubic-bezier;
-      background-color: $--n-table-header-color;
-      line-height: 1.5;
-      font-size: 14px;
+      @include once {
+        transition: background-color .3s $default-cubic-bezier;
+        line-height: 1.5;
+        font-size: 14px;
+      }
+      background-color: $--card-action-background-color;
     }
   }
 }

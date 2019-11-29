@@ -4,28 +4,29 @@
     :class="{
       [`n-card--title${(segmented && segmented.header === 'soft') ? '-soft' : ''}-segmented`]: segmented === true || (segmented && segmented.header),
       [`n-card--content${(segmented && segmented.content === 'soft') ? '-soft' : ''}-segmented`]: segmented === true || (segmented && segmented.content),
-      [`n-card--extra${(segmented && segmented.footer === 'soft') ? '-soft' : ''}-segmented`]: segmented === true || (segmented && segmented.footer),
+      [`n-card--footer${(segmented && segmented.footer === 'soft') ? '-soft' : ''}-segmented`]: segmented === true || (segmented && segmented.footer),
       [`n-card--action${(segmented && segmented.action === 'soft') ? '-soft' : ''}-segmented`]: segmented === true || (segmented && segmented.action),
       [`n-card--${size}-size`]: true,
       'n-card--bordered': bordered,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
+    :style="synthesizedStyle"
   >
     <div v-if="$slots.cover" class="n-card-cover">
       <slot name="cover" />
     </div>
-    <div class="n-card-title">
-      <div class="n-card-title__main">
+    <div class="n-card-header">
+      <div class="n-card-header__main">
         <slot name="header">
           {{ title }}
         </slot>
       </div>
-      <div v-if="$slots['header-extra']" class="n-card-title__extra">
+      <div v-if="$slots['header-extra']" class="n-card-header__extra">
         <slot name="header-extra" />
       </div>
       <n-icon
         v-if="closable"
-        class="n-card-title__close-mark"
+        class="n-card-header__close-mark"
         type="md-close"
         size="22"
         @click="handleCloseClick"
@@ -36,7 +37,7 @@
     <div class="n-card__content">
       <slot />
     </div>
-    <div v-if="$slots.footer" class="n-card__extra">
+    <div v-if="$slots.footer" class="n-card__footer">
       <slot name="footer" />
     </div>
     <div v-if="$slots.action" class="n-card__action">
@@ -48,8 +49,9 @@
 <script>
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
-import mdClose from '../../../icons/md-close'
+import asthemecontext from '../../../mixins/asthemecontext'
 import NIcon from '../../../common/Icon'
+import mdClose from '../../../icons/md-close'
 
 export default {
   name: 'NCard',
@@ -57,7 +59,7 @@ export default {
     mdClose,
     NIcon
   },
-  mixins: [withapp, themeable],
+  mixins: [withapp, themeable, asthemecontext],
   props: {
     title: {
       type: String,

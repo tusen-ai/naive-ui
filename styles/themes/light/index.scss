@@ -53,6 +53,7 @@
 @import "components/AutoComplete.scss";
 @import "components/Affix.scss";
 @import "components/Avatar.scss";
+@import "components/Collapse.scss";
 
 @mixin setup-light-theme() {
   @include setup-light-colors();
@@ -132,4 +133,5 @@
   @include setup-light-auto-complete;
   @include setup-light-affix;
   @include setup-light-avatar;
+  @include setup-light-collapse;
 }
