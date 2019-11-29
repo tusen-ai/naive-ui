@@ -1,12 +1,10 @@
 @import './mixins/mixins.scss';
-@import './themes/vars.scss';
-
-@include b(collapse) {
-  width: 100%;
-}
 
 @include themes-mixin {
   @include b(collapse) {
+    @include once {
+      width: 100%;
+    }
     @include b(collapse-item) {
       @include once {
         overflow: hidden;
@@ -17,7 +15,7 @@
           margin-top: 0px;
         }
         &:first-child > {
-          @include e(title) {
+          @include e(header) {
             padding-top: 0px;
           }
         }
@@ -29,7 +27,7 @@
           overflow: hidden;
         }
         @include m(active) {
-          @include e(title) {
+          @include e(header) {
             @include m(active) {
               @include b(icon) {
                 transform: rotate(90deg);
@@ -39,9 +37,9 @@
         }
       }
       &:not(:first-child) {
-        border-top: 1px solid $--n-border-color;
+        border-top: 1px solid $--collapse-border-color;
       }
-      @include e(title) {
+      @include e(header) {
         @include once {
           transition: color .3s $default-cubic-bezier;
           position: relative;
@@ -56,9 +54,9 @@
             bottom: 0px;
           }
         }
-        color: $--n-text-color;
+        color: $--collapse-header-text-color;
         @include b(icon) {
-          fill: $--n-text-color;
+          fill: $--collapse-header-text-color;
         }
       }
       @include e(content-inner) {
@@ -66,7 +64,7 @@
           transition: color .3s $default-cubic-bezier;
           padding-top: 16px;
         }
-        color: $--n-secondary-text-color;
+        color: $--collapse-content-text-color;
       }
     }
   }

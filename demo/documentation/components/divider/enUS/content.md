@@ -1,11 +1,11 @@
 # Title
 ```html
 I love her.
-<n-divider content-position="left">
+<n-divider title-placement="left">
   A Happy Ending
 </n-divider>
 She love him.
-<n-divider content-position="right">
+<n-divider title-placement="right">
   A Happy Ending
 </n-divider>
 He love me.

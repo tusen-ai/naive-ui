@@ -7,10 +7,10 @@
   <n-collapse-item title="right" name="2">
     <div>good</div>
   </n-collapse-item>
-</n-collapse>
- <n-collapse-item title="right" name="1">
+  <n-collapse-item title="right" name="3">
     <div>test</div>
   </n-collapse-item>
+</n-collapse>
 ```
 ```js
 export default {

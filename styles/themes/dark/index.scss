@@ -53,6 +53,7 @@
 @import "components/AutoComplete.scss";
 @import "components/Affix.scss";
 @import "components/Avatar.scss";
+@import "components/Collapse.scss";
 
 @mixin setup-dark-theme() {
   @include setup-dark-colors();
@@ -133,4 +134,5 @@
   @include setup-dark-auto-complete;
   @include setup-dark-affix;
   @include setup-dark-avatar;
+  @include setup-dark-collapse;
 }

@@ -2,6 +2,7 @@
 import intersection from 'lodash/intersection'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import asthemecontext from '../../../mixins/asthemecontext'
 
 export default {
   name: 'NCollapse',
@@ -12,7 +13,8 @@ export default {
   },
   mixins: [
     withapp,
-    themeable
+    themeable,
+    asthemecontext
   ],
   props: {
     value: {
@@ -59,7 +61,8 @@ export default {
       staticClass: 'n-collapse',
       class: {
         [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme
-      }
+      },
+      style: this.synthesizedStyle
     }, this.$slots.default)
   }
 }

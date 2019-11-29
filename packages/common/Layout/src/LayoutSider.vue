@@ -1,5 +1,5 @@
 <template>
-  <div
+  <aside
     class="n-layout-sider"
     :class="{
       [`n-layout-sider--${mode}-positioned`]: mode,
@@ -30,7 +30,7 @@
     >
       <toggle-button />
     </div>
-  </div>
+  </aside>
 </template>
 
 <script>
