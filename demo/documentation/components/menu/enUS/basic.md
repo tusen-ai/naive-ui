@@ -1,6 +1,6 @@
 # Basic
 ```html
-<div style="width:500px;background:red;">
+<div style="width:500px">
   <n-menu :title="'Test'" 
     v-model="selected" 
     :defaultOpenNames="initOpenKeys"

@@ -6,7 +6,6 @@ $layout-nav-height: 64px;
 
 @include themes-mixin() {
   @include b(menu) {
-    background-color: $menu-background-color;
     width: 100%;
     transition:width .3s;
     @include b(menu-container) {
@@ -44,8 +43,25 @@ $layout-nav-height: 64px;
                 clip-path: polygon(100% 0, 100% 100%, 0% 100%);
               }
             }
-            @include m(selected) {
+            // @include m(selected) {
+            //   background-image: $menu-item-selected-background-image;
+            // }
+            &::before { // item background
+              content: "";
               background-image: $menu-item-selected-background-image;
+              position: absolute;
+              left: 0;
+              right: 0;
+              top: 0;
+              bottom: 0;
+              z-index: 0;
+              transition: opacity 0.3s $default-cubic-bezier;
+              opacity: 0;
+            }
+            @include m(selected) {
+              &::before {
+                opacity: .9;
+              }
             }
             @include m(disabled) {
               opacity: 0.45;
