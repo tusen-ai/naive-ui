@@ -1,5 +1,5 @@
 # 加载中
-按钮有加载状态
+按钮有加载状态。
 ```html
 <n-button
   icon="md-save"

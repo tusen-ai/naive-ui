@@ -1,5 +1,5 @@
 # 禁用
-按钮可以被禁用
+按钮可以被禁用。
 ```html
 <n-button
   size="small"

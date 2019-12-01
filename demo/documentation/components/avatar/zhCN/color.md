@@ -10,5 +10,5 @@
      color: 'red',
     backgroundColor: 'yellow'
   }
-}">Liu<br>Dehua</n-avatar>
+}">刘<br>德华</n-avatar>
 ```
