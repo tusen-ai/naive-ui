@@ -1,56 +1,67 @@
 <template>
-  <div
-    class="n-dropdown-submenu"
-    @mouseenter="handleMouseEnter"
+  <n-dropdown-item
+    ref="selectOption"
+    :label="label"
+    :value="value"
   >
     <div
       ref="activator"
-      class="n-dropdown-submenu__activator"
-      @click="handleActivatorClick"
-      @mouseenter="handleMouseEnterActivator"
-      @mouseleave="handleMouseLeaveActivator"
+      class="n-dropdown-submenu-activator"
     >
       <slot name="activator" />
     </div>
     <transition
-      name="n-dropdown-submenu--transition"
+      name="n-fade-in-scale-up--transition"
     >
-      <div
-        v-if="active"
-        class="n-dropdown-submenu__menu"
-        @mouseenter="handleMouseEnterMenu"
-        @mouseleave="handleMouseLeaveMenu"
+      <n-dropdown-menu
+        v-if="menuActivated"
+        ref="dropdownMenu"
+        :theme="synthesizedTheme"
+        class="n-dropdown-submenu"
+        :auto-focus="false"
       >
-        <transition name="n-dropdown-menu-light-bar--transition">
-          <div
-            v-if="showLightBar"
-            class="n-dropdown-menu-light-bar-container"
-          >
-            <div
-              class="n-dropdown-menu-light-bar"
-              :style="{ top: `${lightBarTop}px` }"
-            />
-          </div>
-        </transition>
         <slot />
-      </div>
+      </n-dropdown-menu>
     </transition>
-  </div>
+  </n-dropdown-item>
 </template>
 
 <script>
-import bubblecallable from '../../../mixins/bubblecallable'
-import withlightbar from '../../../mixins/withlightbar'
+import NDropdownMenu from './DropdownMenu'
+import NDropdownItem from './DropdownItem'
+import themeable from '../../../mixins/themeable'
 
 export default {
   name: 'NDropdownSubmenu',
-  mixins: [ bubblecallable, withlightbar ],
+  components: {
+    NDropdownMenu,
+    NDropdownItem
+  },
+  mixins: [themeable],
+  provide () {
+    return {
+      NDropdownSubmenu: this
+    }
+  },
+  inject: {
+    NDropdownMenu: {
+      default: null
+    },
+    NBaseSelectMenu: {
+      default: null
+    },
+    NDropdownSubmenu: {
+      default: null
+    }
+  },
   props: {
-    trigger: {
-      validator (trigger) {
-        return ['click', 'hover'].includes(trigger)
-      },
-      default: 'hover'
+    label: {
+      type: String,
+      default: undefined
+    },
+    value: {
+      type: Number,
+      required: true
     },
     duration: {
       type: Number,
@@ -60,18 +71,59 @@ export default {
   data () {
     return {
       active: false,
-      vanishTimerId: null
+      vanishTimerId: null,
+      collectedOptions: [],
+      menuActivated: false
     }
   },
   computed: {
-    triggerByHover () {
-      return this.trigger === 'hover'
+    pendingOption () {
+      if (this.NBaseSelectMenu) {
+        return this.NBaseSelectMenu.pendingOption
+      }
+      return null
     },
-    triggerByClick () {
-      return this.trigger === 'click'
+    pendingOptionId () {
+      if (this.pendingOption) {
+        return this.pendingOption.id
+      }
+      return null
+    },
+    menuPendingToBeActivated () {
+      /**
+       * Here value is index + 1
+       * pendingOptiondId also means index + 1
+       */
+      if (this.value && this.pendingOptionId) {
+        return this.value === this.pendingOptionId
+      }
+      return false
+    }
+  },
+  watch: {
+    menuPendingToBeActivated (value) {
+      let rootDropdownMenu = this.NDropdownMenu
+      while (rootDropdownMenu.NDropdownMenu) {
+        rootDropdownMenu = rootDropdownMenu.NDropdownMenu
+      }
+      if (value) {
+        this.$nextTick().then(() => {
+          rootDropdownMenu.pendingSubMenuInstance = this
+        })
+      } else {
+        rootDropdownMenu.pendingSubMenuInstance = null
+      }
     }
   },
   methods: {
+    handleMouseEnter () {
+      this.activate()
+    },
+    handleMouseLeave (e) {
+      if (this.$el.parentElement.contains(e.relatedTarget)) {
+        this.deactivate()
+      }
+    },
     activate () {
       if (this.vanishTimerId) {
         window.clearTimeout(this.vanishTimerId)
@@ -84,44 +136,9 @@ export default {
         window.clearTimeout(this.vanishTimerId)
         this.vanishTimerId = null
       }
-      if (this.triggerByHover) {
-        this.vanishTimerId = window.setTimeout(() => {
-          this.active = false
-          this.hideLightBar()
-        }, this.duration)
-      } else {
+      this.vanishTimerId = window.setTimeout(() => {
         this.active = false
-        this.hideLightBar()
-      }
-    },
-    handleActivatorClick () {
-      if (this.triggerByClick) {
-        this.active = !this.active
-      }
-    },
-    handleMouseEnterMenu () {
-      if (this.triggerByHover) {
-        this.activate()
-      }
-    },
-    handleMouseLeaveMenu (e) {
-      if (this.triggerByHover) {
-        this.deactivate()
-      }
-      this.hideLightBar()
-    },
-    handleMouseEnterActivator () {
-      if (this.triggerByHover) {
-        this.activate()
-      }
-    },
-    handleMouseLeaveActivator (e) {
-      if (this.triggerByHover) {
-        this.deactivate()
-      }
-    },
-    handleMouseEnter (e) {
-      this.bubbleCall(['NDropdownMenu', 'NDropdownSubmenu'], 'updateLightBarPosition', this.$el)
+      }, this.duration)
     }
   }
 }

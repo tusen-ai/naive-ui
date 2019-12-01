@@ -2,7 +2,7 @@
 ```html
 <n-dropdown
   placement="bottom-start"
-  trigger="hover"
+  trigger="click"
 >
   <template v-slot:activator>
     <div>menu</div>
@@ -18,11 +18,7 @@
   </n-dropdown-item>
   <n-dropdown-submenu>
     <template v-slot:activator>
-      <n-dropdown-item
-        arrow
-      >
-        submenu
-      </n-dropdown-item>
+      submenu
     </template>
     <n-dropdown-item>
       item4
@@ -32,11 +28,7 @@
     </n-dropdown-item>
     <n-dropdown-submenu>
       <template v-slot:activator>
-        <n-dropdown-item
-          arrow
-        >
-          submenu2
-        </n-dropdown-item>
+        submenu2
       </template>
       <n-dropdown-item>
         item6

@@ -15,6 +15,7 @@
   >
     <n-scrollbar
       ref="scrollbar"
+      :without-scrollbar="withoutScrollbar"
       @scroll="handleMenuScroll"
     >
       <div class="n-base-select-menu-option-wrapper">
@@ -94,6 +95,10 @@ export default {
   },
   mixins: [withlightbar],
   props: {
+    withoutScrollbar: {
+      type: Boolean,
+      default: false
+    },
     useSlot: {
       type: Boolean,
       default: false
@@ -182,8 +187,9 @@ export default {
         this.pendingOption = null
       })
     },
-    pendingOption (newValue) {
-      if (newValue === null) {
+    pendingOption (value) {
+      this.$emit('pending-option-change', value)
+      if (value === null) {
         this.$nextTick().then(() => {
           this.hideLightBar()
         })
@@ -240,7 +246,9 @@ export default {
         this.pendingOption = this.id2Option.get(id)
         this.pendingOptionElement = el
         this.updateLightBarPosition(this.pendingOptionElement)
-        this.$refs.scrollbar.scrollToElement(this.pendingOptionElement)
+        if (this.$refs.scrollbar) {
+          this.$refs.scrollbar.scrollToElement(this.pendingOptionElement)
+        }
       }
     }
   }

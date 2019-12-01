@@ -15,9 +15,6 @@ export default {
     },
     NDropdownMenu: {
       default: null
-    },
-    NDropdownSubmenu: {
-      default: null
     }
   },
   data () {
@@ -32,7 +29,6 @@ export default {
       if (this.NSelect) return this.NSelect
       if (this.NAutoComplete) return this.NAutoComplete
       if (this.NDropdownMenu) return this.NDropdownMenu
-      if (this.NDropdownSubmenu) return this.NDropdownSubmenu
       return null
     }
   },
@@ -56,21 +52,13 @@ export default {
       this.options = []
       const children = this.$scopedSlots.default ? this.$scopedSlots.default() : []
       children.forEach(child => {
-        const content = (child.componentOptions.children || []).map(c => c.text).join('').trim() || child.componentOptions.propsData.value
         child.key = child.componentOptions.propsData.value
-        child.componentOptions.propsData = {
-          label: content,
-          ...child.componentOptions.propsData
-        }
         this.options.push(child.componentOptions.propsData)
       })
     }
   },
   render (h) {
     const children = this.$scopedSlots.default ? this.$scopedSlots.default() : []
-    children.forEach(child => {
-      child.componentOptions.propsData.show = false
-    })
     return h('div', {
       staticClass: 'n-base-selector-option-collector',
       style: {

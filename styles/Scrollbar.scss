@@ -57,7 +57,7 @@
       }
       .n-scrollbar-content {
         width: fit-content;
-        overflow: hidden;
+        // overflow: hidden;
         min-width: 100%;
         /** stylelint-disable */
         width: -moz-fit-content;    /* Firefox/Gecko */

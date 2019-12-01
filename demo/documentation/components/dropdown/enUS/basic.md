@@ -8,9 +8,8 @@
     v-for="item in items"
     :key="item"
     @click="handleClick(item)"
-  >
-    {{ item }}
-  </n-dropdown-item>
+    :label="item"
+  />
 </n-dropdown>
 ```
 ```js

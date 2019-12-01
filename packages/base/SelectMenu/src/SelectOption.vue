@@ -10,15 +10,13 @@
     :data-id="optionId"
     @click="handleClick"
     @mouseenter="handleMouseEnter"
+    @mouseleave="handleMouseLeave"
   >
-    <template v-if="$slots.default">
+    <template v-if="$scopedSlots.default">
       <slot />
     </template>
     <template v-else-if="label">
       {{ label }}
-    </template>
-    <template v-else>
-      {{ value }}
     </template>
   </div>
 </template>
@@ -74,7 +72,7 @@ export default {
     }
   },
   watch: {
-    option () {
+    value () {
       this.$nextTick().then(() => {
         this.NBaseSelectOptionCollector.collectOptions()
       })
@@ -100,6 +98,9 @@ export default {
     handleMouseEnter (e) {
       this.NBaseSelectMenu.handleOptionMouseEnter(e, this.processedOption)
       this.$emit('mouseenter', e)
+    },
+    handleMouseLeave (e) {
+      this.$emit('mouseleave', e)
     }
   }
 }

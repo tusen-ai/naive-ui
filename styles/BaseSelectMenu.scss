@@ -30,7 +30,7 @@
       margin-bottom: 4px;
       z-index: 0;
       position: relative;
-      overflow: hidden;
+      // overflow: hidden;
       border-radius: 6px;
       @include b(base-select-menu-option-wrapper) {
         position: relative;

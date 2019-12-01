@@ -6,7 +6,7 @@ import DropdownDivider from './src/DropdownDivider'
 
 Dropdown.install = function (Vue) {
   Vue.component(Dropdown.name, Dropdown)
-  Vue.component(DropdownItem.name, DropdownItem)
+  Vue.component('NDropdownItem', DropdownItem)
   Vue.component(DropdownDivider.name, DropdownDivider)
   Vue.component(DropdownSubmenu.name, DropdownSubmenu)
 }

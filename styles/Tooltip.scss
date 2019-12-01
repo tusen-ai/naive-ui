@@ -4,7 +4,7 @@
 @include themes-mixin {
   .n-tooltip-detached-content-container {
     @include b(popover-content) {
-      background-color: $--tooltip-background-color;
+      background: none;
       color: $--tooltip-color;
       box-shadow: $--tooltip-box-shadow;
       &[n-placement$="top-start"] {
@@ -70,6 +70,10 @@
       @include b(tooltip-content) {
         padding: 8px 14px;
         white-space: nowrap;
+        background-color: $--tooltip-background-color;
+        color: $--tooltip-color;
+        border-radius: 6px;
+        transition: background-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier;
         @include m(fix-width) {
           white-space: normal;
           width: max-content;
