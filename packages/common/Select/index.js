@@ -4,7 +4,7 @@ import SelectOption from './src/SelectOption'
 
 Select.install = function (Vue) {
   Vue.component(Select.name, Select)
-  Vue.component(SelectOption.name, SelectOption)
+  Vue.component('NSelectOption', SelectOption)
 }
 
 export default Select

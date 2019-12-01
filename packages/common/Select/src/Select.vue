@@ -76,7 +76,9 @@
             @menu-toggle-option="handleToggleOption"
             @menu-scroll="handleMenuScroll"
           >
-            <n-base-select-render-options v-if="useSlot" :options="filteredOptions" />
+            <n-base-select-render-options v-if="useSlot" :filter="patternMatched">
+              <slot />
+            </n-base-select-render-options>
           </n-base-select-menu>
         </transition>
       </div>

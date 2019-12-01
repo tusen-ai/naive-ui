@@ -28,11 +28,10 @@
         <template v-if="!loading">
           <template v-if="!useSlot">
             <n-select-option
-              v-for="(option, index) in linkedOptions"
+              v-for="option in linkedOptions"
               :key="option.value"
               :label="option.label"
               :value="option.value"
-              :index="index"
               :disabled="option.disabled"
             />
           </template>
@@ -155,12 +154,12 @@ export default {
     }
   },
   computed: {
-    index2Id () {
-      const index2Id = new Map()
-      this.linkedOptions.forEach((option, index) => {
-        index2Id.set(index, option.id)
+    value2Id () {
+      const value2Id = new Map()
+      this.linkedOptions.forEach(option => {
+        value2Id.set(option.value, option.id)
       })
-      return index2Id
+      return value2Id
     },
     id2Option () {
       const id2Option = new Map()

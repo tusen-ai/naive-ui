@@ -43,10 +43,6 @@ export default {
       validator () {
         return true
       },
-      default: undefined
-    },
-    index: {
-      type: Number,
       required: true
     },
     disabled: {
@@ -58,9 +54,9 @@ export default {
     isSelected () {
       return this.processedOption && this.NBaseSelectMenu.isSelected(this.processedOption)
     },
-    index2Id () {
+    value2Id () {
       if (this.NBaseSelectMenu) {
-        return this.NBaseSelectMenu.index2Id
+        return this.NBaseSelectMenu.value2Id
       } return null
     },
     id2Option () {
@@ -69,8 +65,8 @@ export default {
       } return null
     },
     optionId () {
-      if (this.index2Id === null) return null
-      return this.index2Id.get(this.index)
+      if (this.value2Id === null) return null
+      return this.value2Id.get(this.value)
     },
     processedOption () {
       if (this.id2Option === null) return null

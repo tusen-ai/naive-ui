@@ -7,7 +7,6 @@ import BaseSelectRenderOptions from './src/SelectRenderOptions'
 BaseSelectMenu.install = function (Vue) {
   Vue.component(BaseSelectMenu.name, BaseSelectMenu)
   Vue.component(BaseSelectOption.name, BaseSelectOption)
-  Vue.component('NSelectOption', BaseSelectOption)
   Vue.component(BaseSelectOptionCollector.name, BaseSelectOptionCollector)
 }
 

@@ -12,6 +12,12 @@ export default {
     },
     NAutoComplete: {
       default: null
+    },
+    NDropdownMenu: {
+      default: null
+    },
+    NDropdownSubmenu: {
+      default: null
     }
   },
   data () {
@@ -25,6 +31,8 @@ export default {
     injection () {
       if (this.NSelect) return this.NSelect
       if (this.NAutoComplete) return this.NAutoComplete
+      if (this.NDropdownMenu) return this.NDropdownMenu
+      if (this.NDropdownSubmenu) return this.NDropdownSubmenu
       return null
     }
   },
@@ -47,27 +55,20 @@ export default {
       if (this.stopCollecting || this.mounting) return
       this.options = []
       const children = this.$scopedSlots.default ? this.$scopedSlots.default() : []
-      children.forEach((child, index) => {
+      children.forEach(child => {
         const content = (child.componentOptions.children || []).map(c => c.text).join('').trim() || child.componentOptions.propsData.value
         child.key = child.componentOptions.propsData.value
         child.componentOptions.propsData = {
           label: content,
           ...child.componentOptions.propsData
         }
-        this.options.push({
-          ...child.componentOptions.propsData,
-          render: (index) => {
-            child.componentOptions.propsData.index = index
-            return child
-          }
-        })
+        this.options.push(child.componentOptions.propsData)
       })
     }
   },
   render (h) {
     const children = this.$scopedSlots.default ? this.$scopedSlots.default() : []
-    children.forEach((child, index) => {
-      child.componentOptions.propsData.index = index
+    children.forEach(child => {
       child.componentOptions.propsData.show = false
     })
     return h('div', {
