@@ -1,5 +1,5 @@
 # 形状
-按钮拥有不同的形状
+按钮拥有不同的形状。
 ```html
 <n-button circle icon="md-save" />
 <n-button type="primary" round>Primary</n-button>

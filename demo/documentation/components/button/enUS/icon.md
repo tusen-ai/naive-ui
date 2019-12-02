@@ -1,5 +1,5 @@
 # Icon
-Using icon in button
+Use icon in button.
 ```html
 <n-button>
   <template v-slot:icon>

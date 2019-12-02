@@ -1,10 +1,10 @@
-# Slots
+# 插槽
 ```html
-<n-card title="Card Slots Demo">
+<n-card title="卡片插槽示例">
   <template v-slot:header-extra>
     v-slot:header-extra
   </template>
-  Card Content
+  卡片内容
   <template v-slot:footer>
     v-slot:footer
   </template>

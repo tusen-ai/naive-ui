@@ -1,16 +1,16 @@
-# Title
+# 标题
 ```html
-I love her.
+我爱她。
 <n-divider title-placement="left">
-  A Happy Ending
+  大团圆结局
 </n-divider>
-She loves him.
+她爱他。
 <n-divider title-placement="right">
-  A Happy Ending
+  大团圆结局
 </n-divider>
-He loves me.
+他爱我。
 <n-divider dashed>
-  A Happy Ending
+  大团圆结局
 </n-divider>
-Oops.
+完了。
 ```
