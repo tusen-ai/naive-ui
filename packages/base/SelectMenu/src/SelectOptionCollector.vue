@@ -1,4 +1,14 @@
 <script>
+import {
+  getDefaultSlotOf,
+  getComponentNameOf,
+  getOptionPropsDataOf
+} from '../../../utils/component'
+
+import {
+  VALID_COMPONENT
+} from './config'
+
 export default {
   name: 'NBaseSelectOptionCollector',
   provide () {
@@ -20,8 +30,8 @@ export default {
   data () {
     return {
       options: [],
-      stopCollecting: false,
-      mounting: true
+      isDestroying: false,
+      isMounting: true
     }
   },
   computed: {
@@ -40,25 +50,30 @@ export default {
     }
   },
   mounted () {
-    this.mounting = false
+    this.isMounting = false
     this.collectOptions()
   },
   beforeDestroy () {
-    this.stopCollecting = true
+    this.isDestroying = true
   },
   methods: {
-    collectOptions (force) {
-      if (this.stopCollecting || this.mounting) return
+    collectOptions (force = false) {
+      if (!force && (this.isDestroying || this.isMounting)) return
       this.options = []
-      const children = this.$scopedSlots.default ? this.$scopedSlots.default() : []
-      children.forEach(child => {
-        child.key = child.componentOptions.propsData.value
-        this.options.push(child.componentOptions.propsData)
+      const children = getDefaultSlotOf(this)
+      children.forEach((child, index) => {
+        child.key = index
+        if (child.componentOptions) {
+          if (VALID_COMPONENT.includes(getComponentNameOf(child))) {
+            const propsData = getOptionPropsDataOf(child)
+            this.options.push(propsData)
+          }
+        }
       })
     }
   },
   render (h) {
-    const children = this.$scopedSlots.default ? this.$scopedSlots.default() : []
+    const children = getDefaultSlotOf(this)
     return h('div', {
       staticClass: 'n-base-selector-option-collector',
       style: {

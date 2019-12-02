@@ -25,16 +25,25 @@
       @include base-select-size-mixin("small");
       @include base-select-size-mixin("medium");
       @include base-select-size-mixin("large");
+      @include base-select-size-mixin("huge");
       outline: none;
       margin-top: 4px;
       margin-bottom: 4px;
       z-index: 0;
       position: relative;
-      // overflow: hidden;
       border-radius: 6px;
       @include b(base-select-menu-option-wrapper) {
         position: relative;
         width: 100%;
+      }
+      @include b(base-select-menu-light-bar-wrapper) {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        overflow: hidden;
+        border-radius: 6px;
       }
       /** transition of menu light bar */
       .n-base-select-menu-light-bar--transition-enter-active {

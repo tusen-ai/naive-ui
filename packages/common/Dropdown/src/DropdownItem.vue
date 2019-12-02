@@ -3,7 +3,11 @@ import NBaseSelectOption from '../../../base/SelectMenu/src/SelectOption'
 
 export default {
   props: {
-    label: {
+    asSubmenu: {
+      type: Boolean,
+      default: false
+    },
+    name: {
       type: String,
       default: undefined
     },
@@ -12,14 +16,35 @@ export default {
       required: true
     }
   },
+  inject: {
+    NDropdownMenu: {
+      default: null
+    }
+  },
   render (h) {
     return h(NBaseSelectOption, {
       props: {
-        label: this.label,
+        label: this.name,
         value: this.value
       },
       scopedSlots: this.$scopedSlots,
-      on: this.$listeners
+      on: {
+        ...this.$listeners,
+        click: (...args) => {
+          if (this.$listeners.click) {
+            this.$listeners.click(...args)
+          }
+          if (!this.asSubmenu) {
+            if (this.NDropdownMenu) {
+              let rootDropdownMenu = this.NDropdownMenu
+              while (rootDropdownMenu.NDropdownMenu) {
+                rootDropdownMenu = rootDropdownMenu.NDropdownMenu
+              }
+              rootDropdownMenu.handleSelectItem(this.name)
+            }
+          }
+        }
+      }
     })
   }
 }

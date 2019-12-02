@@ -41,6 +41,10 @@ export default {
       type: Number,
       default: null
     },
+    minWidth: {
+      type: Number,
+      default: null
+    },
     maxWidth: {
       type: Number,
       default: null
@@ -86,6 +90,9 @@ export default {
       }
       if (this.maxWidth) {
         style.maxWidth = this.maxWidth + 'px'
+      }
+      if (this.minWidth) {
+        style.minWidth = this.minWidth + 'px'
       }
       return style
     },
@@ -202,6 +209,9 @@ export default {
     getTrackedElement () {
       // console.log('getTrackedEleme')
       return this.activator().$el
+    },
+    getZindexableContent () {
+      return this.$el
     }
   },
   render (h) {

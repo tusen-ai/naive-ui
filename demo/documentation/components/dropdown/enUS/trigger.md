@@ -1,30 +1,28 @@
-# Trigger
+# Basic
 ```html
-<n-dropdown
-  trigger="hover"
-  style="margin-right: 16px;"
->
+<n-dropdown @select="handleSelect" trigger="hover">
   <template v-slot:activator>
-    <div>Trigger: hover</div>
+    <n-button>I want to hover!</n-button>
   </template>
   <n-dropdown-item
-    v-for="item in items"
-    :key="item"
-    @click="handleClick(item)"
+    v-for="hotel in hotels"
+    :key="hotel"
+    :name="hotel.toLowerCase()"
   >
-    {{ item }}
+    {{ hotel }}
   </n-dropdown-item>
 </n-dropdown>
-<n-dropdown trigger="click">
+
+<n-dropdown @select="handleSelect" trigger="click">
   <template v-slot:activator>
-    <div>Trigger: click</div>
+    <n-button>I want to click!</n-button>
   </template>
   <n-dropdown-item
-    v-for="item in items"
-    :key="item"
-    @click="handleClick(item)"
+    v-for="hotel in hotels"
+    :key="hotel"
+    :name="hotel.toLowerCase()"
   >
-    {{ item }}
+    {{ hotel }}
   </n-dropdown-item>
 </n-dropdown>
 ```
@@ -32,13 +30,21 @@
 export default {
   data () {
     return {
-      items: ['item1longlonglong', 'item2longlonglong', 'item3longlonglong', 'item4longlonglong']
+      hotels: [
+        'Marina Bay Sands, Singapore', 'Brown’s Hotel, London', 'Atlantis Bahamas, Nassau', 'The Beverly Hills Hotel, Los Angeles'
+      ]
     }
   },
   methods: {
-    handleClick (item) {
-      this.$NMessage.info(item)
+    handleSelect (name) {
+      this.$NMessage.info(name)
     }
   }
+}
+```
+
+```css
+.n-button {
+  margin: 0 8px 12px 0;
 }
 ```

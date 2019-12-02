@@ -16,10 +16,10 @@ export default {
     zIndexManager.registerElement(this._getZindexableContent())
   },
   watch: {
-    active (newActive) {
+    active (value) {
       if (!this.detached) return
-      console.debug('[zindexable.watch.active]:', newActive)
-      if (newActive) {
+      console.debug('[zindexable.watch.active]:', value)
+      if (value) {
         zIndexManager.setNewZIndex(this._getZindexableContent())
       }
     }

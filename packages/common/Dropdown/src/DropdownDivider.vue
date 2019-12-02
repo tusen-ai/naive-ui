@@ -1,5 +1,5 @@
 <template>
-  <div class="n-dropdown-divider" />
+  <n-divider class="n-dropdown-divider" />
 </template>
 
 <script>

@@ -5,16 +5,35 @@
   @include b(popover-content) {
     @include once {
       position: relative;
+      @include b(dropdown-menu) {
+        outline: none;
+        @include b(base-select-menu) {
+          @include m(small-size, medium-size) {
+            @include b(base-select-menu-option-wrapper) {
+              padding-top: 4px;
+              padding-bottom: 4px;
+            }
+          }
+          @include m(large-size, huge-size) {
+            @include b(base-select-menu-option-wrapper) {
+              padding-top: 6px;
+              padding-bottom: 6px;
+            }
+          }
+        }
+      }
+      @include b(dropdown-divider) {
+        margin: 4px 0;
+      }
       @include b(dropdown-submenu) {
         @include fade-in-scale-up-transition($origin: (left top));
         margin-top: 0;
         position: absolute !important;
         left: calc(100% + 6px);
-        top: 0;
+        top: -4px;
       }
       @include b(base-select-menu) {
         outline: none;
-        margin-top: 0;
       }
     }
   }

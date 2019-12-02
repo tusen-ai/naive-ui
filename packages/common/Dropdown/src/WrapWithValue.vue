@@ -1,13 +1,25 @@
 <script>
+import {
+  isDropdownRelatedComponent
+} from '../../../utils/component'
+
 export default {
   functional: true,
   render (h, context) {
     const defaultSlot = context.scopedSlots.default()
-    return defaultSlot.map((vNode, index) => {
-      vNode.componentOptions.propsData.value = index + 1
-      vNode.key = index + 1
-      return vNode
+    let counter = 1
+    defaultSlot.forEach((vNode, index) => {
+      if (vNode.componentOptions) {
+        if (isDropdownRelatedComponent(vNode)) {
+          /**
+           * id of options start from 1
+           */
+          vNode.componentOptions.propsData.value = counter++
+        }
+      }
+      vNode.key = index
     })
+    return defaultSlot
   }
 }
 </script>

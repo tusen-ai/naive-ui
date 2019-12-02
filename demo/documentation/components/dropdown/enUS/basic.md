@@ -1,27 +1,30 @@
 # Basic
 ```html
-<n-dropdown>
+<n-dropdown @select="handleSelect">
   <template v-slot:activator>
-    <div>menu</div>
+    <n-button>I want to go sleep!</n-button>
   </template>
   <n-dropdown-item
-    v-for="item in items"
-    :key="item"
-    @click="handleClick(item)"
-    :label="item"
-  />
+    v-for="hotel in hotels"
+    :key="hotel"
+    :name="hotel.toLowerCase()"
+  >
+    {{ hotel }}
+  </n-dropdown-item>
 </n-dropdown>
 ```
 ```js
 export default {
   data () {
     return {
-      items: ['item1longlonglong', 'item2longlonglong', 'item3longlonglong', 'item4longlonglong']
+      hotels: [
+        'Marina Bay Sands, Singapore', 'Brown’s Hotel, London', 'Atlantis Bahamas, Nassau', 'The Beverly Hills Hotel, Los Angeles'
+      ]
     }
   },
   methods: {
-    handleClick (item) {
-      this.$NMessage.info(item)
+    handleSelect (name) {
+      this.$NMessage.info(name)
     }
   }
 }

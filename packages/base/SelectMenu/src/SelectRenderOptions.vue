@@ -1,4 +1,13 @@
 <script>
+import {
+  getComponentNameOf,
+  getOptionPropsDataOf
+} from '../../../utils/component'
+
+import {
+  VALID_COMPONENT
+} from './config'
+
 export default {
   name: 'NSelectRenderOptions',
   functional: true,
@@ -6,11 +15,21 @@ export default {
     const defaultSlot = context.scopedSlots.default()
     const filteredDefaultSlot = defaultSlot
       .filter(vNode => {
-        const value = vNode.componentOptions.propsData.label || (vNode.componentOptions.children || []).map(c => c.text).join('').trim() || vNode.componentOptions.propsData.value
-        const filter = context.props.filter
-        if (filter) {
-          return filter(value)
-        } return true
+        if (VALID_COMPONENT.includes(getComponentNameOf(vNode))) {
+          if (vNode.componentOptions) {
+            const filter = context.props.filter
+            const filterable = context.props.filterable
+            const remote = context.props.remote
+            if (!remote && filterable && filter) {
+              const pattern = context.props.pattern
+              const option = getOptionPropsDataOf(vNode)
+              return filter(pattern, option)
+            }
+            return true
+          }
+          return true
+        }
+        return true
       })
     return filteredDefaultSlot
   }

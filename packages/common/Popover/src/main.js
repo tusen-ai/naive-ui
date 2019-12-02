@@ -45,6 +45,10 @@ export default {
       type: Number,
       default: null
     },
+    minWidth: {
+      type: Number,
+      default: null
+    },
     maxWidth: {
       type: Number,
       default: null

@@ -29,6 +29,18 @@ export default {
     autoFocus: {
       type: Boolean,
       default: true
+    },
+    size: {
+      type: String,
+      default: undefined
+    },
+    controller: {
+      type: Object,
+      default: null
+    },
+    submenuWidth: {
+      type: Number,
+      default: null
     }
   },
   data () {
@@ -40,6 +52,13 @@ export default {
     }
   },
   computed: {
+    inheritedSubmenuWidth () {
+      if (this.NDropdownMenu) {
+        return this.NDropdownMenu.inheritedSubmenuWidth
+      } else {
+        return this.submenuWidth
+      }
+    },
     options () {
       return this.collectedOptions
     }
@@ -50,9 +69,17 @@ export default {
     }
   },
   methods: {
+    handleSelectItem (name) {
+      /**
+       * Can only be called at root level menu
+       */
+      this.controller.hide()
+      this.$emit('select', name)
+    },
     handleKeyDownLeft () {
       if (this.activeMenuInstance.NDropdownSubmenu) {
         this.activeMenuInstance.NDropdownSubmenu.menuActivated = false
+        this.pendingSubMenuInstance = this.activeMenuInstance.NDropdownSubmenu
       }
       if (this.activeMenuInstance.NDropdownMenu) {
         this.activeMenuInstance = this.activeMenuInstance.NDropdownMenu
@@ -80,10 +107,23 @@ export default {
       }
     },
     handleKeyDown (e) {
-      if (e.keyCode === 37) this.handleKeyDownLeft()
-      if (e.keyCode === 38) this.handleKeyDownUp()
-      if (e.keyCode === 39) this.handleKeyDownRight()
-      if (e.keyCode === 40) this.handleKeyDownDown()
+      if (!this.NDropdownMenu) {
+        if (e.keyCode === 37) this.handleKeyDownLeft()
+        if (e.keyCode === 38) this.handleKeyDownUp()
+        if (e.keyCode === 39) this.handleKeyDownRight()
+        if (e.keyCode === 40) this.handleKeyDownDown()
+      }
+    },
+    handleMouseEnter () {
+      if (this.NDropdownMenu) {
+        let rootDropdownMenu = this.NDropdownMenu
+        while (rootDropdownMenu.NDropdownMenu) {
+          rootDropdownMenu = rootDropdownMenu.NDropdownMenu
+        }
+        rootDropdownMenu.activeMenuInstance = this
+      } else {
+        this.activeMenuInstance = this
+      }
     }
   },
   render (h) {
@@ -93,7 +133,8 @@ export default {
     return h('div', {
       staticClass: 'n-dropdown-menu',
       on: {
-        keydown: this.handleKeyDown
+        keydown: this.handleKeyDown,
+        mouseenter: this.handleMouseEnter
       },
       attrs: {
         tabindex: '0'
@@ -113,7 +154,7 @@ export default {
           useSlot: !!this.$scopedSlots.default,
           isSelected: () => false,
           options: this.options,
-          size: 'medium',
+          size: this.size,
           theme: this.synthesizedTheme
         }
       }, [

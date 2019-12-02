@@ -19,13 +19,15 @@
       @scroll="handleMenuScroll"
     >
       <div class="n-base-select-menu-option-wrapper">
-        <transition name="n-base-select-menu-light-bar--transition">
-          <div
-            v-if="showLightBar"
-            class="n-base-select-menu-light-bar"
-            :style="{ top: `${lightBarTop}px` }"
-          />
-        </transition>
+        <div class="n-base-select-menu-light-bar-wrapper">
+          <transition name="n-base-select-menu-light-bar--transition">
+            <div
+              v-if="showLightBar"
+              class="n-base-select-menu-light-bar"
+              :style="{ top: `${lightBarTop}px` }"
+            />
+          </transition>
+        </div>
         <template v-if="!loading">
           <template v-if="!useSlot">
             <n-select-option
@@ -44,31 +46,18 @@
           v-if="loading"
           class="n-base-select-option n-base-select-option--loading"
         >
-          {{
-            /**
-             * This method to activate hideLightBar is ridiculous, however using
-             * event handler still has some problem.
-             */
-            hideLightBarSync()
-          }}
           loading
         </div>
         <div
-          v-else-if="linkedOptions && linkedOptions.length === 0"
+          v-else-if="noData"
           class="n-base-select-option n-base-select-option--no-data"
         >
-          {{
-            hideLightBarSync()
-          }}
           {{ noDataContent }}
         </div>
         <div
-          v-else-if="filterable && (pattern.length && !linkedOptions.length)"
+          v-else-if="notFound"
           class="n-base-select-option n-base-select-option--not-found"
         >
-          {{
-            hideLightBarSync()
-          }}
           {{ notFoundContent }}
         </div>
       </div>
@@ -95,6 +84,10 @@ export default {
   },
   mixins: [withlightbar],
   props: {
+    theme: {
+      type: String,
+      default: null
+    },
     withoutScrollbar: {
       type: Boolean,
       default: false
@@ -102,10 +95,6 @@ export default {
     useSlot: {
       type: Boolean,
       default: false
-    },
-    theme: {
-      type: String,
-      default: null
     },
     options: {
       type: Array,
@@ -159,6 +148,12 @@ export default {
     }
   },
   computed: {
+    notFound () {
+      return this.filterable && (this.pattern.length && !this.linkedOptions.length)
+    },
+    noData () {
+      return this.linkedOptions && this.linkedOptions.length === 0
+    },
     value2Id () {
       const value2Id = new Map()
       this.linkedOptions.forEach(option => {
@@ -181,6 +176,21 @@ export default {
     }
   },
   watch: {
+    notFound (value) {
+      if (value) {
+        this.hideLightBarSync()
+      }
+    },
+    noData (value) {
+      if (value) {
+        this.hideLightBarSync()
+      }
+    },
+    loading (value) {
+      if (value) {
+        this.hideLightBarSync()
+      }
+    },
     linkedOptions () {
       this.$nextTick().then(() => {
         this.hideLightBar()
@@ -188,7 +198,6 @@ export default {
       })
     },
     pendingOption (value) {
-      this.$emit('pending-option-change', value)
       if (value === null) {
         this.$nextTick().then(() => {
           this.hideLightBar()

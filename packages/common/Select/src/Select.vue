@@ -71,12 +71,11 @@
             :emit-option="emitOption"
             :filterable="filterable"
             :is-selected="isSelected"
-            :pattern-matched="patternMatched"
             :use-slot="useSlot"
             @menu-toggle-option="handleToggleOption"
             @menu-scroll="handleMenuScroll"
           >
-            <n-base-select-render-options v-if="useSlot" :filter="patternMatched">
+            <n-base-select-render-options v-if="useSlot" :filterable="filterable" :remote="remote" :filter="filter" :pattern="pattern">
               <slot />
             </n-base-select-render-options>
           </n-base-select-menu>
@@ -101,6 +100,14 @@ import NBasePicker from '../../../base/Picker'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import asformitem from '../../../mixins/asformitem'
+
+function patternMatched (pattern, value) {
+  try {
+    return 1 + value.toString().toLowerCase().indexOf(pattern.trim().toLowerCase())
+  } catch (err) {
+    return false
+  }
+}
 
 export default {
   name: 'NBaseSelect',
@@ -154,7 +161,7 @@ export default {
     },
     size: {
       type: String,
-      default: 'default'
+      default: 'medium'
     },
     emitOption: {
       type: Boolean,
@@ -174,7 +181,7 @@ export default {
     },
     onSearch: {
       type: Function,
-      default: null
+      default: () => {}
     },
     loading: {
       type: Boolean,
@@ -182,11 +189,23 @@ export default {
     },
     noDataContent: {
       type: [String, Function],
-      default: 'no data'
+      default: 'No Data'
     },
     notFoundContent: {
       type: [String, Function],
-      default: 'none result matched'
+      default: 'No Result'
+    },
+    filter: {
+      type: Function,
+      default: (pattern, option) => {
+        if (!option) return false
+        if (option.label !== undefined) {
+          return patternMatched(pattern, option.label)
+        } else if (option.value !== undefined) {
+          return patternMatched(pattern, option.value)
+        }
+        return false
+      }
     }
   },
   data () {
@@ -209,7 +228,7 @@ export default {
       if (this.remote) {
         return this.synthesizedOptions
       } else if (!this.filterable || !this.pattern.trim().length) return this.synthesizedOptions
-      return this.synthesizedOptions.filter(option => this.patternMatched(option.label))
+      return this.synthesizedOptions.filter(option => this.filter(this.pattern, option))
     },
     valueOptionMap () {
       const valueToOption = new Map()
@@ -304,13 +323,6 @@ export default {
     /**
      * data utils methods
      */
-    patternMatched (value) {
-      try {
-        return 1 + value.toString().toLowerCase().indexOf(this.pattern.trim().toLowerCase())
-      } catch (err) {
-        return false
-      }
-    },
     mapValuesToOptions (values) {
       if (!Array.isArray(values)) return []
       if (this.remote) {

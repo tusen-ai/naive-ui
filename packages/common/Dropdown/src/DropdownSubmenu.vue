@@ -3,6 +3,9 @@
     ref="selectOption"
     :label="label"
     :value="value"
+    as-submenu
+    @mouseenter="handleMouseEnter"
+    @mouseleave="handleMouseLeave"
   >
     <div
       ref="activator"
@@ -14,8 +17,9 @@
       name="n-fade-in-scale-up--transition"
     >
       <n-dropdown-menu
-        v-if="menuActivated"
+        v-if="menuActivated && menuPendingToBeActivated"
         ref="dropdownMenu"
+        :style="style"
         :theme="synthesizedTheme"
         class="n-dropdown-submenu"
         :auto-focus="false"
@@ -66,17 +70,49 @@ export default {
     duration: {
       type: Number,
       default: 300
+    },
+    width: {
+      type: Number,
+      default: null
+    },
+    minWidth: {
+      type: Number,
+      default: null
+    },
+    maxWidth: {
+      type: Number,
+      default: null
     }
   },
   data () {
     return {
-      active: false,
       vanishTimerId: null,
       collectedOptions: [],
       menuActivated: false
     }
   },
   computed: {
+    synthesizedStyleWidth () {
+      if (this.NDropdownMenu.inheritedSubmenuWidth) {
+        return this.NDropdownMenu.inheritedSubmenuWidth + 'px'
+      }
+      return null
+    },
+    style () {
+      const style = {}
+      if (this.width) {
+        style.width = this.width + 'px'
+      } else if (this.synthesizedStyleWidth) {
+        style.width = this.synthesizedStyleWidth
+      }
+      if (this.minWidth) {
+        style.minWidth = this.minWidth + 'px'
+      }
+      if (this.maxWidth) {
+        style.maxWidth = this.maxWidth + 'px'
+      }
+      return style
+    },
     pendingOption () {
       if (this.NBaseSelectMenu) {
         return this.NBaseSelectMenu.pendingOption
@@ -129,7 +165,7 @@ export default {
         window.clearTimeout(this.vanishTimerId)
         this.vanishTimerId = null
       }
-      this.active = true
+      this.menuActivated = true
     },
     deactivate () {
       if (this.vanishTimerId) {
@@ -137,7 +173,7 @@ export default {
         this.vanishTimerId = null
       }
       this.vanishTimerId = window.setTimeout(() => {
-        this.active = false
+        this.menuActivated = false
       }, this.duration)
     }
   }
