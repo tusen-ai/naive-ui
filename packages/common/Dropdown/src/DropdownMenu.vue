@@ -49,6 +49,10 @@ export default {
     submenuMinWidth: {
       type: Number,
       default: null
+    },
+    focusable: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -86,7 +90,7 @@ export default {
     }
   },
   mounted () {
-    if (this.autoFocus) {
+    if (this.autoFocus && this.focusable) {
       this.$el.focus()
     }
   },
@@ -138,6 +142,7 @@ export default {
     },
     handleBlur () {
       this.controller.hide()
+      this.$emit('blur')
     },
     handleMouseEnter () {
       if (this.NDropdownMenu) {
@@ -161,9 +166,6 @@ export default {
         keydown: this.handleKeyDown,
         mouseenter: this.handleMouseEnter,
         blur: this.handleBlur
-      },
-      attrs: {
-        tabindex: '0'
       }
     }, [
       h(NBaseSelectOptionCollector, {

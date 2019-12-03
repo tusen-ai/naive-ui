@@ -61,6 +61,18 @@ export default {
         return ['self', 'activator'].includes(value)
       },
       default: 'self'
+    },
+    x: {
+      type: Number,
+      default: null
+    },
+    y: {
+      type: Number,
+      default: null
+    },
+    manuallyPositioned: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -73,6 +85,12 @@ export default {
       if (newValue) {
         this.$nextTick().then(this.updatePosition)
       }
+    },
+    x () {
+      this.$nextTick().then(this.updatePosition)
+    },
+    y () {
+      this.$nextTick().then(this.updatePosition)
     }
   },
   data () {
@@ -123,21 +141,39 @@ export default {
       this.trackingElement.setAttribute('n-suggested-transform-origin', 'top left')
     },
     updatePosition (el, cb, keepOrigin = false) {
-      // console.log('scroll')
       if (!this.active && !this.show) return
-      // console.log('update position', el, cb, keepOrigin)
-      // console.log('[placeable.updatePosition]')
-      this._getTrackedElement()
+      if (!this.manuallyPositioned) {
+        this._getTrackedElement()
+      }
       this._getTrackingElement()
-      if (!this.trackedElement || !this.trackingElement) {
-        console.log('[placeable.updatePosition]: trakedElement or trackingElement not found!')
+      if (this.manuallyPositioned) {
+        if (!this.trackingElement) {
+          console.error('[naive-ui/placeable/updatePosition]: trackingElement not found!')
+        }
+      } else {
+        if (!this.trackedElement || !this.trackingElement) {
+          console.error('[naive-ui/placeable/updatePosition]: trakedElement or trackingElement not found!')
+        }
       }
       if (this.positionModeisAbsolute) {
         this.updatePositionInAbsoluteMode()
         return
       }
       // console.log(activator)
-      const activatorBoundingClientRect = this.trackedElement.getBoundingClientRect()
+      let activatorBoundingClientRect = null
+      if (!this.manuallyPositioned) {
+        activatorBoundingClientRect = this.trackedElement.getBoundingClientRect()
+      } else {
+        activatorBoundingClientRect = {
+          top: this.y,
+          left: this.x,
+          height: 0,
+          width: 0,
+          right: this.x,
+          bottom: this.y
+        }
+        // console.log(activatorBoundingClientRect)
+      }
       // console.log(activatorBoundingClientRect)
       // console.log(this.$refs.popoverBody)
       // debugger
@@ -146,6 +182,7 @@ export default {
       // debugger
       // console.log('scroll', activatorBoundingClientRect, contentBoundingClientRect)
       const [placementTransform, suggestedTransformOrigin] = calcPlacementTransfrom(this.placement, activatorBoundingClientRect, contentBoundingClientRect)
+      // console.log(placementTransform)
       this.trackingElement.style.position = 'absolute'
       this.trackingElement.style.top = placementTransform.top
       this.trackingElement.style.left = placementTransform.left

@@ -5,6 +5,7 @@ trigger
 placement
 cascade
 size
+manual-position
 ```
 # Placeholder
 # Placeholder

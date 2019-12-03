@@ -8,4 +8,5 @@ event
 placement
 raw-content
 width
+manual-position
 ```

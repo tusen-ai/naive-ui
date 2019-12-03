@@ -57,6 +57,10 @@ export default {
       type: Boolean,
       default: false
     },
+    manuallyPositioned: {
+      type: Boolean,
+      default: false
+    },
     detachedContainerClass: {
       type: String,
       default: 'n-popover-detached-content-container'
@@ -66,6 +70,11 @@ export default {
   directives: {
     clickoutside,
     mousemoveoutside
+  },
+  inject: {
+    NBasePortal: {
+      default: null
+    }
   },
   data () {
     return {
@@ -87,6 +96,9 @@ export default {
     }
   },
   computed: {
+    detached () {
+      return this.NBasePortal.elementTransferred
+    },
     style () {
       const style = {}
       if (this.width) {

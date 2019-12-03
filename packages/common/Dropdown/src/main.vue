@@ -8,7 +8,7 @@ export default {
   props: {
     trigger: {
       validator (value) {
-        return ['click', 'hover'].includes(value)
+        return ['click', 'hover', 'manual'].includes(value)
       },
       default: 'click'
     },
@@ -49,6 +49,26 @@ export default {
     submenuWidth: {
       type: Number,
       default: null
+    },
+    value: {
+      type: Boolean,
+      default: false
+    },
+    manuallyPositioned: {
+      type: Boolean,
+      default: false
+    },
+    x: {
+      type: Number,
+      default: null
+    },
+    y: {
+      type: Number,
+      default: null
+    },
+    focusable: {
+      type: Boolean,
+      default: true
     }
   },
   render (h, context) {
@@ -64,6 +84,10 @@ export default {
         width: context.props.width,
         minWidth: context.props.minWidth,
         maxWidth: context.props.maxWidth,
+        value: context.props.value,
+        manuallyPositioned: context.props.manuallyPositioned,
+        x: context.props.x,
+        y: context.props.y,
         arrow: false,
         raw: true,
         shadow: false,
@@ -75,19 +99,25 @@ export default {
         },
         default () {
           return h(NDropdownMenu, {
+            attrs: {
+              tabindex: context.props.focusable ? '0' : '-1'
+            },
             props: {
               autoFocus: context.props.autoFocus,
               size: context.props.size,
               controller,
-              submenuWidth: context.props.submenuWidth
+              submenuWidth: context.props.submenuWidth,
+              focusable: context.props.focusable
             },
             on: {
+              blur: context.listeners.blur || (() => {}),
               select: context.listeners.select || (() => {})
             },
             scopedSlots: context.scopedSlots
           })
         }
-      }
+      },
+      on: context.listeners
     })
   }
 }

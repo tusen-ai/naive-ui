@@ -3,43 +3,85 @@
 <n-dropdown
   placement="bottom-start"
   trigger="click"
-  size="medium"
-  :width="160"
-  :submenu-width="160"
+  size="small"
+  :focusable="false"
 >
   <template v-slot:activator>
-    <div>menu</div>
+    <n-button>Small Some</n-button>
   </template>
-  <n-dropdown-item>
-    item1
+  <n-dropdown-item name="gatsby">
+    Gatsby
   </n-dropdown-item>
-  <n-dropdown-item>
-    item2
+  <n-dropdown-item name="daisy">
+    Daisy
   </n-dropdown-item>
   <n-dropdown-divider />
-  <n-dropdown-item>
-    item3
+  <n-dropdown-item name="nick">
+    Nick
   </n-dropdown-item>
   <n-dropdown-submenu>
     <template v-slot:activator>
-      submenu
+      Others
     </template>
-    <n-dropdown-item>
-      item4
+    <n-dropdown-item name="jordan baker">
+      Jordan Baker
     </n-dropdown-item>
     <n-dropdown-divider />
-    <n-dropdown-item>
-      item5
+    <n-dropdown-item name="tom buchanan">
+      Tom Buchanan
     </n-dropdown-item>
     <n-dropdown-submenu>
       <template v-slot:activator>
-        submenu2
+        Others
       </template>
-      <n-dropdown-item>
-        item6
+      <n-dropdown-item name="chicken">
+        Chicken
       </n-dropdown-item>
-      <n-dropdown-item>
-        item7
+      <n-dropdown-item name="beef">
+        Beef
+      </n-dropdown-item>
+    </n-dropdown-submenu>
+  </n-dropdown-submenu>
+</n-dropdown>
+<n-dropdown
+  placement="bottom-start"
+  trigger="click"
+  size="medium"
+  :focusable="false"
+>
+  <template v-slot:activator>
+    <n-button>Medium Some</n-button>
+  </template>
+  <n-dropdown-item name="gatsby">
+    Gatsby
+  </n-dropdown-item>
+  <n-dropdown-item name="daisy">
+    Daisy
+  </n-dropdown-item>
+  <n-dropdown-divider />
+  <n-dropdown-item name="nick">
+    Nick
+  </n-dropdown-item>
+  <n-dropdown-submenu>
+    <template v-slot:activator>
+      Others
+    </template>
+    <n-dropdown-item name="jordan baker">
+      Jordan Baker
+    </n-dropdown-item>
+    <n-dropdown-divider />
+    <n-dropdown-item name="tom buchanan">
+      Tom Buchanan
+    </n-dropdown-item>
+    <n-dropdown-submenu>
+      <template v-slot:activator>
+        Others
+      </template>
+      <n-dropdown-item name="chicken">
+        Chicken
+      </n-dropdown-item>
+      <n-dropdown-item name="beef">
+        Beef
       </n-dropdown-item>
     </n-dropdown-submenu>
   </n-dropdown-submenu>
@@ -48,84 +90,48 @@
   placement="bottom-start"
   trigger="click"
   size="large"
+  :focusable="false"
 >
   <template v-slot:activator>
-    <div>menu</div>
+    <n-button>Large Some</n-button>
   </template>
-  <n-dropdown-item>
-    item1
+  <n-dropdown-item name="gatsby">
+    Gatsby
   </n-dropdown-item>
-  <n-dropdown-item>
-    item2
+  <n-dropdown-item name="daisy">
+    Daisy
   </n-dropdown-item>
   <n-dropdown-divider />
-  <n-dropdown-item>
-    item3
+  <n-dropdown-item name="nick">
+    Nick
   </n-dropdown-item>
   <n-dropdown-submenu>
     <template v-slot:activator>
-      submenu
+      Others
     </template>
-    <n-dropdown-item>
-      item4
+    <n-dropdown-item name="jordan baker">
+      Jordan Baker
     </n-dropdown-item>
     <n-dropdown-divider />
-    <n-dropdown-item>
-      item5
+    <n-dropdown-item name="tom buchanan">
+      Tom Buchanan
     </n-dropdown-item>
     <n-dropdown-submenu>
       <template v-slot:activator>
-        submenu2
+        Others
       </template>
-      <n-dropdown-item>
-        item6
+      <n-dropdown-item name="chicken">
+        Chicken
       </n-dropdown-item>
-      <n-dropdown-item>
-        item7
+      <n-dropdown-item name="beef">
+        Beef
       </n-dropdown-item>
     </n-dropdown-submenu>
   </n-dropdown-submenu>
 </n-dropdown>
-<n-dropdown
-  placement="bottom-start"
-  trigger="click"
-  size="huge"
->
-  <template v-slot:activator>
-    <div>menu</div>
-  </template>
-  <n-dropdown-item>
-    item1
-  </n-dropdown-item>
-  <n-dropdown-item>
-    item2
-  </n-dropdown-item>
-  <n-dropdown-divider />
-  <n-dropdown-item>
-    item3
-  </n-dropdown-item>
-  <n-dropdown-submenu>
-    <template v-slot:activator>
-      submenu
-    </template>
-    <n-dropdown-item>
-      item4
-    </n-dropdown-item>
-    <n-dropdown-divider />
-    <n-dropdown-item>
-      item5
-    </n-dropdown-item>
-    <n-dropdown-submenu>
-      <template v-slot:activator>
-        submenu2
-      </template>
-      <n-dropdown-item>
-        item6
-      </n-dropdown-item>
-      <n-dropdown-item>
-        item7
-      </n-dropdown-item>
-    </n-dropdown-submenu>
-  </n-dropdown-submenu>
-</n-dropdown>
+```
+```css
+.n-button {
+  margin: 0 8px 12px 0;
+}
 ```

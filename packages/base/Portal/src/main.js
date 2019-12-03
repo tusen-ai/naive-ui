@@ -1,5 +1,10 @@
 export default {
   name: 'NBasePortal',
+  provide () {
+    return {
+      NBasePortal: this
+    }
+  },
   mounted () {
     if (this.$el.parentElement && !this.elementTransferred) {
       this.$el.parentElement.removeChild(this.$el)
