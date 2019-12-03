@@ -125,7 +125,7 @@ export default {
       ) {
         this.pendingSubMenuInstance.menuActivated = true
         this.$nextTick().then(() => {
-          this.activeMenuInstance = this.pendingSubMenuInstance.$refs.dropdownMenu
+          this.activeMenuInstance = this.pendingSubMenuInstance.$refs.content
           this.$nextTick().then(() => {
             this.activeMenuInstance.$refs.selectMenu.next()
           })

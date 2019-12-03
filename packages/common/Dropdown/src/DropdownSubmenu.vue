@@ -1,6 +1,6 @@
 <template>
   <n-dropdown-item
-    ref="selectOption"
+    ref="activator"
     :label="label"
     name="n-dropdown-submenu-item"
     :value="value"
@@ -9,7 +9,6 @@
     @mouseleave="handleMouseLeave"
   >
     <div
-      ref="activator"
       class="n-dropdown-submenu-activator"
     >
       <slot name="activator">
@@ -23,8 +22,8 @@
       name="n-fade-in-scale-up--transition"
     >
       <n-dropdown-menu
-        v-if="menuActivated && menuPendingToBeActivated"
-        ref="dropdownMenu"
+        v-if="active"
+        ref="content"
         :style="style"
         :theme="synthesizedTheme"
         class="n-dropdown-submenu"
@@ -42,6 +41,7 @@ import NDropdownItem from './DropdownItem'
 import themeable from '../../../mixins/themeable'
 import NIcon from '../../Icon'
 import iosArrowForward from '../../../icons/ios-arrow-forward'
+import placeable from '../../../mixins/placeable'
 
 export default {
   name: 'NDropdownSubmenu',
@@ -51,7 +51,7 @@ export default {
     NIcon,
     iosArrowForward
   },
-  mixins: [themeable],
+  mixins: [themeable, placeable],
   provide () {
     return {
       NDropdownSubmenu: this
@@ -96,6 +96,14 @@ export default {
     maxWidth: {
       type: Number,
       default: null
+    },
+    positionMode: {
+      type: String,
+      default: 'absolute'
+    },
+    placement: {
+      type: String,
+      default: 'right-start'
     }
   },
   data () {
@@ -106,6 +114,9 @@ export default {
     }
   },
   computed: {
+    active () {
+      return this.menuActivated && this.menuPendingToBeActivated
+    },
     synthesizedStyleWidth () {
       if (this.NDropdownMenu.inheritedSubmenuWidth) {
         return this.NDropdownMenu.inheritedSubmenuWidth + 'px'

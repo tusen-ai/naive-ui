@@ -8,13 +8,3 @@ width
 size
 manual-position
 ```
-# Placeholder
-# Placeholder
-# Placeholder
-# Placeholder
-# Placeholder
-# Placeholder
-# Placeholder
-# Placeholder
-# Placeholder
-# Placeholder

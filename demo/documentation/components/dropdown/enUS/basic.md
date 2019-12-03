@@ -1,6 +1,6 @@
 # Basic
 ```html
-<n-dropdown @select="handleSelect">
+<n-dropdown @select="handleSelect" :focusable="false">
   <template v-slot:activator>
     <n-button>I want to go sleep!</n-button>
   </template>

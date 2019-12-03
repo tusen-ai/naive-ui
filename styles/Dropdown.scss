@@ -79,8 +79,8 @@
         @include fade-in-scale-up-transition($origin: (left top));
         margin-top: 0;
         position: absolute !important;
-        left: calc(100% + 6px);
-        top: -4px;
+        margin-left: 6px;
+        margin-right: 6px;
       }
       @include b(base-select-menu) {
         outline: none;
