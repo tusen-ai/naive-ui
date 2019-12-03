@@ -53,6 +53,10 @@ export default {
       type: Number,
       default: null
     },
+    shadow: {
+      type: Boolean,
+      default: true
+    },
     placement: {
       type: String,
       default: 'bottom'

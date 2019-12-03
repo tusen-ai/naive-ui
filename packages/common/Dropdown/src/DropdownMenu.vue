@@ -41,6 +41,14 @@ export default {
     submenuWidth: {
       type: Number,
       default: null
+    },
+    submenuMaxWidth: {
+      type: Number,
+      default: null
+    },
+    submenuMinWidth: {
+      type: Number,
+      default: null
     }
   },
   data () {
@@ -57,6 +65,20 @@ export default {
         return this.NDropdownMenu.inheritedSubmenuWidth
       } else {
         return this.submenuWidth
+      }
+    },
+    inheritedSubmenuMinWidth () {
+      if (this.NDropdownMenu) {
+        return this.NDropdownMenu.inheritedSubmenuMinWidth
+      } else {
+        return this.submenuMinWidth
+      }
+    },
+    inheritedSubmenuMaxWidth () {
+      if (this.NDropdownMenu) {
+        return this.NDropdownMenu.inheritedSubmenuMaxWidth
+      } else {
+        return this.submenuMaxWidth
       }
     },
     options () {
@@ -114,6 +136,9 @@ export default {
         if (e.keyCode === 40) this.handleKeyDownDown()
       }
     },
+    handleBlur () {
+      this.controller.hide()
+    },
     handleMouseEnter () {
       if (this.NDropdownMenu) {
         let rootDropdownMenu = this.NDropdownMenu
@@ -134,7 +159,8 @@ export default {
       staticClass: 'n-dropdown-menu',
       on: {
         keydown: this.handleKeyDown,
-        mouseenter: this.handleMouseEnter
+        mouseenter: this.handleMouseEnter,
+        blur: this.handleBlur
       },
       attrs: {
         tabindex: '0'

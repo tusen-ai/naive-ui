@@ -65,8 +65,7 @@
         &[n-placement$="right-end"] {
           margin-left: 6px;
         }
-      }
-      
+      } 
     }
     &[n-placement$="top-start"] {
       @include once {
@@ -218,7 +217,9 @@
     }
     background-color: $--popover-background-color;
     color: $--popover-color;
-    box-shadow: $--popover-box-shadow;
+    @include not-m(without-shadow) {
+      box-shadow: $--popover-box-shadow;
+    }
     @include b(popover-arrow) {
       border-width: 6px;
       pointer-events: none;

@@ -13,8 +13,25 @@
               padding-top: 4px;
               padding-bottom: 4px;
             }
+            @include b(base-select-option) {
+              padding: 0 20px;
+            }
+          }
+          @include m(small-size) {
+            @include b(base-select-option) {
+              padding: 0 16px;
+            }
           }
           @include m(large-size, huge-size) {
+            @include b(base-select-menu-option-wrapper) {
+              padding-top: 8px;
+              padding-bottom: 8px;
+            }
+            @include b(base-select-option) {
+              padding: 0 24px;
+            }
+          }
+          @include m(large-size) {
             @include b(base-select-menu-option-wrapper) {
               padding-top: 6px;
               padding-bottom: 6px;

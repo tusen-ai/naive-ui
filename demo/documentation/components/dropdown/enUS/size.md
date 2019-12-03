@@ -3,7 +3,7 @@
 <n-dropdown
   placement="bottom-start"
   trigger="click"
-  size="small"
+  size="medium"
   :width="160"
   :submenu-width="160"
 >

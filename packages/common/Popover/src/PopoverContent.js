@@ -49,6 +49,10 @@ export default {
       type: Number,
       default: null
     },
+    shadow: {
+      type: Boolean,
+      default: true
+    },
     raw: {
       type: Boolean,
       default: false
@@ -252,7 +256,8 @@ export default {
               staticClass: 'n-popover-content',
               class: {
                 'n-popover-content--without-arrow': !this.arrow,
-                [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme
+                [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme,
+                'n-popover-content--without-shadow': !this.shadow
               },
               style: this.style,
               directives: [

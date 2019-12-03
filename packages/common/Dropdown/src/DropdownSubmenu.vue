@@ -98,6 +98,18 @@ export default {
       }
       return null
     },
+    synthesizedStyleMinWidth () {
+      if (this.NDropdownMenu.inheritedSubmenuMinWidth) {
+        return this.NDropdownMenu.inheritedSubmenuMinWidth + 'px'
+      }
+      return null
+    },
+    synthesizedStyleMaxWidth () {
+      if (this.NDropdownMenu.inheritedSubmenuMaxWidth) {
+        return this.NDropdownMenu.inheritedSubmenuMaxWidth + 'px'
+      }
+      return null
+    },
     style () {
       const style = {}
       if (this.width) {

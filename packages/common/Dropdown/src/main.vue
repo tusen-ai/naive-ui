@@ -55,7 +55,6 @@ export default {
     const slots = context.scopedSlots
     const activatorSlot = slots.activator && slots.activator()
     const controller = {}
-    console.log(context.props)
     return h(NPopover, {
       props: {
         trigger: context.props.trigger,
@@ -67,6 +66,7 @@ export default {
         maxWidth: context.props.maxWidth,
         arrow: false,
         raw: true,
+        shadow: false,
         controller
       },
       scopedSlots: {
