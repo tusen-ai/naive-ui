@@ -2,6 +2,7 @@
   <n-dropdown-item
     ref="selectOption"
     :label="label"
+    name="n-dropdown-submenu-item"
     :value="value"
     as-submenu
     @mouseenter="handleMouseEnter"
@@ -11,7 +12,12 @@
       ref="activator"
       class="n-dropdown-submenu-activator"
     >
-      <slot name="activator" />
+      <slot name="activator">
+        {{ label }}
+      </slot>
+      <n-icon v-if="arrow" class="n-dropdown-submenu-activator__arrow">
+        <ios-arrow-forward />
+      </n-icon>
     </div>
     <transition
       name="n-fade-in-scale-up--transition"
@@ -34,12 +40,16 @@
 import NDropdownMenu from './DropdownMenu'
 import NDropdownItem from './DropdownItem'
 import themeable from '../../../mixins/themeable'
+import NIcon from '../../Icon'
+import iosArrowForward from '../../../icons/ios-arrow-forward'
 
 export default {
   name: 'NDropdownSubmenu',
   components: {
     NDropdownMenu,
-    NDropdownItem
+    NDropdownItem,
+    NIcon,
+    iosArrowForward
   },
   mixins: [themeable],
   provide () {
@@ -59,6 +69,10 @@ export default {
     }
   },
   props: {
+    arrow: {
+      type: Boolean,
+      default: true
+    },
     label: {
       type: String,
       default: undefined

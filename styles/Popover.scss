@@ -22,6 +22,7 @@
   @include b(popover-content) {
     $popover-arrow-width: 6px;
     @include once {
+      transition: background-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier;
       @include popover-transition;
       transform-origin: inherit;
       transform: scale(.99999);
@@ -221,6 +222,7 @@
       box-shadow: $--popover-box-shadow;
     }
     @include b(popover-arrow) {
+      transition: border-color .3s $default-cubic-bezier;
       border-width: 6px;
       pointer-events: none;
       position: absolute;

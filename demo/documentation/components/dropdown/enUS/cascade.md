@@ -3,6 +3,7 @@
 <n-dropdown
   placement="bottom-start"
   trigger="click"
+  @select="handleSelect"
 >
   <template v-slot:activator>
     <n-button>People and something to eat</n-button>
@@ -41,4 +42,13 @@
     </n-dropdown-submenu>
   </n-dropdown-submenu>
 </n-dropdown>
+```
+```js
+export default {
+  methods: {
+    handleSelect (name) {
+      this.$NMessage.info(name)
+    }
+  }
+}
 ```

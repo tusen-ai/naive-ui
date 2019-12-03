@@ -9,6 +9,10 @@ export default {
     },
     name: {
       type: String,
+      required: true
+    },
+    label: {
+      type: String,
       default: undefined
     },
     value: {
@@ -24,7 +28,7 @@ export default {
   render (h) {
     return h(NBaseSelectOption, {
       props: {
-        label: this.name,
+        label: this.$scopedSlots.default ? '' : (this.label || this.name),
         value: this.value
       },
       scopedSlots: this.$scopedSlots,

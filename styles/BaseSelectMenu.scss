@@ -32,6 +32,7 @@
       z-index: 0;
       position: relative;
       border-radius: 6px;
+      transition: background-color .3s $default-cubic-bezier;
       @include b(base-select-menu-option-wrapper) {
         position: relative;
         width: 100%;
@@ -63,6 +64,7 @@
       position: relative;
       padding: 0px 14px;
       white-space: nowrap;
+      transition: color .3s $default-cubic-bezier;
       color: map-get($map: $--base-select-menu-option-color, $key: "default");
       @include m(selected) {
         color: map-get($map: $--base-select-menu-option-color, $key: "selected");
@@ -100,6 +102,7 @@
       }
     }
     @include b(base-select-menu-light-bar) {
+      transition: background-color .3s $default-cubic-bezier;
       position: absolute;
       width:100%;
       background-color: $--base-select-menu-light-bar-background-color;

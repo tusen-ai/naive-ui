@@ -1,6 +1,6 @@
 # Placement
 ```html
-<n-dropdown @select="handleSelect" placement="bottom-start">
+<n-dropdown @select="handleSelect" placement="bottom-start" :focusable="false">
   <template v-slot:activator>
     <n-button>I want to go sleep!</n-button>
   </template>

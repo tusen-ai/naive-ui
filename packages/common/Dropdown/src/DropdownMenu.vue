@@ -132,6 +132,22 @@ export default {
         })
       }
     },
+    handleKeyUpEnter () {
+      if (this.activeMenuInstance) {
+        if (this.activeMenuInstance.$refs.selectMenu) {
+          const selectMenu = this.activeMenuInstance.$refs.selectMenu
+          if (selectMenu.pendingOption) {
+            this.$emit('select', selectMenu.pendingOption.name)
+            this.controller.hide()
+          }
+        }
+      }
+    },
+    handleKeyUp (e) {
+      if (e.keyCode === 13) {
+        this.handleKeyUpEnter()
+      }
+    },
     handleKeyDown (e) {
       if (!this.NDropdownMenu) {
         if (e.keyCode === 37) this.handleKeyDownLeft()
@@ -165,7 +181,8 @@ export default {
       on: {
         keydown: this.handleKeyDown,
         mouseenter: this.handleMouseEnter,
-        blur: this.handleBlur
+        blur: this.handleBlur,
+        keyup: this.handleKeyUp
       }
     }, [
       h(NBaseSelectOptionCollector, {

@@ -1,19 +1,16 @@
-# Manually Positioned
-For some special case, you may want to manually position the dropdown. For example, right click to activate dropdown in some area.
+# Width
+`width`, `max-width`, `min-width`, `submenu-width`, `submenu-max-width`, `sub-min-width` can be set.
 ```html
-<div style="width: 200px; height: 200px; background-color: rgba(0, 128, 0, .5);" @contextmenu="handleContextMenu">
-  Right Click
-</div>
 <n-dropdown
   placement="bottom-start"
-  trigger="manual"
-  manually-positioned
+  trigger="click"
+  :width="180"
+  :submenu-width="180"
   @select="handleSelect"
-  @blur="handleBlur"
-  :x="x"
-  :y="y"
-  v-model="showDropdown"
 >
+  <template v-slot:activator>
+    <n-button>People and something to eat</n-button>
+  </template>
   <n-dropdown-item name="gatsby">
     Gatsby
   </n-dropdown-item>
@@ -53,27 +50,7 @@ For some special case, you may want to manually position the dropdown. For examp
 export default {
   methods: {
     handleSelect (name) {
-      this.showDropdown = false
       this.$NMessage.info(name)
-    },
-    handleBlur () {
-      this.showDropdown = false
-    },
-    handleContextMenu (e) {
-      e.preventDefault()
-      this.showDropdown = false
-      this.$nextTick().then(() => {
-        this.showDropdown = true
-        this.x = e.clientX
-        this.y = e.clientY
-      })
-    }
-  },
-  data () {
-    return {
-      showDropdown: false,
-      x: 0,
-      y: 0
     }
   }
 }

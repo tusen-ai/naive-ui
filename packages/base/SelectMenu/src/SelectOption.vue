@@ -12,12 +12,9 @@
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
   >
-    <template v-if="$scopedSlots.default">
-      <slot />
-    </template>
-    <template v-else-if="label">
+    <slot>
       {{ label }}
-    </template>
+    </slot>
   </div>
 </template>
 
@@ -34,8 +31,8 @@ export default {
   },
   props: {
     label: {
-      type: [String, Array],
-      default: null
+      type: String,
+      required: true
     },
     value: {
       validator () {

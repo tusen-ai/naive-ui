@@ -64,17 +64,16 @@ export default {
     detachedContainerClass: {
       type: String,
       default: 'n-popover-detached-content-container'
+    },
+    detached: {
+      type: Boolean,
+      default: true
     }
   },
   mixins: [withapp, themeable, placeable, zindexable],
   directives: {
     clickoutside,
     mousemoveoutside
-  },
-  inject: {
-    NBasePortal: {
-      default: null
-    }
   },
   data () {
     return {
@@ -96,9 +95,6 @@ export default {
     }
   },
   computed: {
-    detached () {
-      return this.NBasePortal.elementTransferred
-    },
     style () {
       const style = {}
       if (this.width) {

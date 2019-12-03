@@ -8,9 +8,8 @@
     v-for="hotel in hotels"
     :key="hotel"
     :name="hotel.toLowerCase()"
-  >
-    {{ hotel }}
-  </n-dropdown-item>
+    :label="hotel"
+  />
 </n-dropdown>
 ```
 ```js

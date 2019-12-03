@@ -3,8 +3,23 @@
 
 @include themes-mixin {
   @include b(popover-content) {
+    @include b(dropdown-submenu-activator) {
+      @include e(arrow) {
+        fill: $--n-secondary-text-color;
+      }
+    }
     @include once {
       position: relative;
+      @include b(dropdown-submenu-activator) {
+        display: inline-block;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        @include e(arrow) {
+          position: relative;
+          right: -8px;
+        }
+      }
       @include b(dropdown-menu) {
         outline: none;
         @include b(base-select-menu) {
@@ -16,10 +31,22 @@
             @include b(base-select-option) {
               padding: 0 20px;
             }
+            @include b(dropdown-submenu-activator) {
+              @include e(arrow) {
+                font-size: 16px;
+                margin-left: 16px;
+              }
+            }
           }
           @include m(small-size) {
             @include b(base-select-option) {
               padding: 0 16px;
+            }
+            @include b(dropdown-submenu-activator) {
+              @include e(arrow) {
+                font-size: 16px;
+                margin-left: 12px;
+              }
             }
           }
           @include m(large-size, huge-size) {
@@ -29,6 +56,12 @@
             }
             @include b(base-select-option) {
               padding: 0 24px;
+            }
+            @include b(dropdown-submenu-activator) {
+              @include e(arrow) {
+                font-size: 16px;
+                margin-left: 20px;
+              }
             }
           }
           @include m(large-size) {

@@ -4,6 +4,7 @@
   placement="bottom-start"
   trigger="click"
   size="small"
+  @select="handleSelect"
   :focusable="false"
 >
   <template v-slot:activator>
@@ -47,6 +48,7 @@
   placement="bottom-start"
   trigger="click"
   size="medium"
+  @select="handleSelect"
   :focusable="false"
 >
   <template v-slot:activator>
@@ -91,6 +93,7 @@
   trigger="click"
   size="large"
   :focusable="false"
+  @select="handleSelect"
 >
   <template v-slot:activator>
     <n-button>Large Some</n-button>
@@ -129,6 +132,15 @@
     </n-dropdown-submenu>
   </n-dropdown-submenu>
 </n-dropdown>
+```
+```js
+export default {
+  methods: {
+    handleSelect (name) {
+      this.$NMessage.info(name)
+    }
+  }
+}
 ```
 ```css
 .n-button {

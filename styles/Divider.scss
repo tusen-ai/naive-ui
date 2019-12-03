@@ -16,7 +16,6 @@
           align-items: center;
         }
       }
-      
       @include e(title) {
         transition: color .3s $default-cubic-bezier;
         display: flex;

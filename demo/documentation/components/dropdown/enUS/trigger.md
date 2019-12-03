@@ -8,9 +8,8 @@
     v-for="hotel in hotels"
     :key="hotel"
     :name="hotel.toLowerCase()"
-  >
-    {{ hotel }}
-  </n-dropdown-item>
+    :label="hotel"
+  />
 </n-dropdown>
 
 <n-dropdown @select="handleSelect" trigger="click" :focusable="false">
@@ -21,9 +20,8 @@
     v-for="hotel in hotels"
     :key="hotel"
     :name="hotel.toLowerCase()"
-  >
-    {{ hotel }}
-  </n-dropdown-item>
+    :label="hotel"
+  />
 </n-dropdown>
 
 <n-dropdown @select="handleSelect" trigger="manual" v-model="showDropdown">
@@ -34,9 +32,8 @@
     v-for="hotel in hotels"
     :key="hotel"
     :name="hotel.toLowerCase()"
-  >
-    {{ hotel }}
-  </n-dropdown-item>
+    :label="hotel"
+  />
 </n-dropdown>
 ```
 ```js
