@@ -2,7 +2,7 @@
 ```html
 <n-dropdown @select="handleSelect" :focusable="false">
   <template v-slot:activator>
-    <n-button>I want to go sleep!</n-button>
+    <n-button>Money Force Us to Work Rather Than Sleep</n-button>
   </template>
   <n-dropdown-item
     v-for="hotel in hotels"

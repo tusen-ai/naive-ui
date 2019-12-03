@@ -14,15 +14,15 @@ For some special case, you may want to manually position the dropdown. For examp
   :y="y"
   v-model="showDropdown"
 >
-  <n-dropdown-item name="gatsby">
-    Gatsby
+  <n-dropdown-item name="jay gatsby">
+    Jay Gatsby
   </n-dropdown-item>
-  <n-dropdown-item name="daisy">
-    Daisy
+  <n-dropdown-item name="daisy buchanan">
+    Daisy Buchanan
   </n-dropdown-item>
   <n-dropdown-divider />
-  <n-dropdown-item name="nick">
-    Nick
+  <n-dropdown-item name="nick carraway">
+    Nick Carraway
   </n-dropdown-item>
   <n-dropdown-submenu>
     <template v-slot:activator>

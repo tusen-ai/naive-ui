@@ -9,17 +9,17 @@
   @select="handleSelect"
 >
   <template v-slot:activator>
-    <n-button>People and something to eat</n-button>
+    <n-button>People and Some Food to Eat</n-button>
   </template>
-  <n-dropdown-item name="gatsby">
-    Gatsby
+  <n-dropdown-item name="jay gatsby">
+    Jay Gatsby
   </n-dropdown-item>
-  <n-dropdown-item name="daisy">
-    Daisy
+  <n-dropdown-item name="daisy buchanan">
+    Daisy Buchanan
   </n-dropdown-item>
   <n-dropdown-divider />
-  <n-dropdown-item name="nick">
-    Nick
+  <n-dropdown-item name="nick carraway">
+    Nick Carraway
   </n-dropdown-item>
   <n-dropdown-submenu>
     <template v-slot:activator>

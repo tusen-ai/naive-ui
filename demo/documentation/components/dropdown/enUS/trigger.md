@@ -2,7 +2,7 @@
 ```html
 <n-dropdown @select="handleSelect" trigger="hover">
   <template v-slot:activator>
-    <n-button>I want to hover!</n-button>
+    <n-button>Hover! On the Green Light!</n-button>
   </template>
   <n-dropdown-item
     v-for="hotel in hotels"
@@ -14,7 +14,7 @@
 
 <n-dropdown @select="handleSelect" trigger="click" :focusable="false">
   <template v-slot:activator>
-    <n-button>I want to click!</n-button>
+    <n-button>Click! On the Green Light</n-button>
   </template>
   <n-dropdown-item
     v-for="hotel in hotels"
@@ -26,7 +26,7 @@
 
 <n-dropdown @select="handleSelect" trigger="manual" v-model="showDropdown">
   <template v-slot:activator>
-    <n-button @click="handleClick">Oh! By Myself!</n-button>
+    <n-button @click="handleClick">Oh! Manually By Myself!</n-button>
   </template>
   <n-dropdown-item
     v-for="hotel in hotels"
