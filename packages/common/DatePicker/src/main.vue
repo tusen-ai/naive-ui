@@ -68,7 +68,8 @@
           :active="active"
           :actions="actions"
           :theme="synthesizedTheme"
-          :disabled-time="disabledTime"
+          :date-disabled="dateDisabled"
+          :time-disabled="timeDisabled"
           @blur="handlePanelBlur"
           @input="handlePanelInput"
           @close="closeCalendar"
@@ -80,7 +81,7 @@
           :active="active"
           :actions="actions"
           :theme="synthesizedTheme"
-          :disabled-time="disabledTime"
+          :date-disabled="dateDisabled"
           @input="handlePanelInput"
           @blur="handlePanelBlur"
           @close="closeCalendar"
@@ -92,7 +93,7 @@
           :active="active"
           :actions="actions"
           :theme="synthesizedTheme"
-          :disabled-time="disabledTime"
+          :date-disabled="dateDisabled"
           @input="handleRangePanelInput"
           @blur="handlePanelBlur"
           @close="closeCalendar"
@@ -104,7 +105,8 @@
           :active="active"
           :actions="actions"
           :theme="synthesizedTheme"
-          :disabled-time="disabledTime"
+          :date-disabled="dateDisabled"
+          :time-disabled="timeDisabled"
           @input="handleRangePanelInput"
           @close="closeCalendar"
           @blur="handlePanelBlur"
@@ -234,6 +236,24 @@ export default {
     actions: {
       type: Array,
       default: undefined
+    },
+    dateDisabled: {
+      type: Function,
+      default: () => {
+        return false
+      }
+    },
+    timeDisabled: {
+      type: Function,
+      default: () => {
+        return false
+      }
+    },
+    rangeTimeDisabled: {
+      type: Function,
+      default: () => {
+        return false
+      }
     },
     disabledTime: {
       type: Function,

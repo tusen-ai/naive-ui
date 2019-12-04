@@ -60,11 +60,11 @@
             'n-date-picker-panel-dates__date--selected': dateItem.isSelectedDate,
             'n-date-picker-panel-dates__date--in-display-month': dateItem.isDateOfDisplayMonth,
             'n-date-picker-panel-dates__date--no-transition': noTransition,
-            'n-date-picker-panel-dates__date--disabled': disabledTime(dateItem.timestamp)
+            'n-date-picker-panel-dates__date--disabled': dateDisabled(dateItem.timestamp)
           }"
           @click="handleDateClick(dateItem)"
         >
-          {{ dateItem.dateObject.date }} {{ disabledTime(dateItem.timestamp) }}
+          {{ dateItem.dateObject.date }} {{ dateDisabled(dateItem.timestamp) }}
         </div>
         <div
           v-if="!(actions && actions.length)"

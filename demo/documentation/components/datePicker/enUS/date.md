@@ -18,7 +18,6 @@ export default {
   },
   methods: {
     disabledTime (current) {
-      // console.log('current', current)
       return (current >= 1574092800000) && (current < 1574438400000)
     }
   }

@@ -2,9 +2,9 @@
 ```html
 <n-time-picker
   v-model="time0"
-  :disabledHours="disabledHours"
-  :disabledMinutes="disabledMinutes"
-  :disabledSeconds="disabledSeconds"
+  :hourDisabled="disabledHours"
+  :minuteDisabled="disabledMinutes"
+  :secondDisabled="disabledSeconds"
 />
 
 ```
@@ -22,12 +22,16 @@ export default {
     },
     disabledMinutes (minute, selectedHour) {
       if(Number(selectedHour) === 17) {
-        return minute > 13 &&  minute < 40
+        return minute >=0  &&  minute < 9
+      } else {
+        return false
       }
     },
-    disabledSeconds (second, selectedHour, selectedMinute) {
+    disabledSeconds (second, selectedMinute, selectedHour) {
        if(Number(selectedHour) === 17 && Number(selectedMinute) === 10)  {
         return second > 13 &&  second < 40
+      } else {
+        return false
       }
     }
   }

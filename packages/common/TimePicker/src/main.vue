@@ -146,9 +146,9 @@ import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import asformitem from '../../../mixins/asformitem'
 import isValid from 'date-fns/isValid'
-import startOfSecond from 'date-fns/startOfSecond'
-import startOfMinute from 'date-fns/startOfMinute'
-import startOfHour from 'date-fns/startOfHour'
+// import startOfSecond from 'date-fns/startOfSecond'
+// import startOfMinute from 'date-fns/startOfMinute'
+// import startOfHour from 'date-fns/startOfHour'
 import format from 'date-fns/format'
 import set from 'date-fns/set'
 import setHours from 'date-fns/setHours'
@@ -219,19 +219,19 @@ export default {
       type: Function,
       default: null
     },
-    disabledHours: {
+    hourDisabled: {
       type: Function,
       default: () => {
-        return []
+        return false
       }
     },
-    disabledMinutes: {
+    minuteDisabled: {
       type: Function,
       default: () => {
-        return []
+        return false
       }
     },
-    disabledSeconds: {
+    secondDisabled: {
       type: Function,
       default: () => {
         return false
@@ -243,7 +243,10 @@ export default {
       active: false,
       displayTimeString: this.value === null ? null : format(this.value, this.format),
       ...TIME_CONST,
-      memorizedValue: this.value
+      memorizedValue: this.value,
+      selectedHour: null,
+      selectedMinute: null,
+      selectedSecond: null
     }
   },
   computed: {
@@ -264,20 +267,21 @@ export default {
       else return null
     },
     isHourDisabled () {
+      let self = this
       return function (hour) {
-        return this.disabledHours(hour) || this.disabledHours(Number(hour))
+        return self.hourDisabled(Number(hour))
       }
     },
     isMinuteDisabled () {
+      let self = this
       return function (minute) {
-        return this.disabledMinutes(minute, this.computedHour) ||
-      this.disabledMinutes(Number(minute), this.computedHour)
+        return self.minuteDisabled(Number(minute), Number(self.computedHour))
       }
     },
     isSecondDisabled () {
+      let self = this
       return function (second) {
-        return this.disabledSeconds(second, this.computedHour, this.computedMinute) ||
-      this.disabledSeconds(Number(second), this.computedHour, this.computedMinute)
+        return self.secondDisabled(Number(second), Number(this.computedMinute), Number(self.computedHour))
       }
     }
   },
@@ -288,6 +292,9 @@ export default {
     },
     value (value, oldValue) {
       this.$emit('change', value, oldValue)
+      this.checkHour()
+      this.checkMinute()
+      this.checkSecond()
     }
   },
   methods: {
@@ -320,30 +327,33 @@ export default {
         return
       }
       if (this.value === null) {
-        this.$emit('input', getTime(setHours(startOfHour(new Date()), hour)))
+        this.$emit('input', getTime(setHours(new Date(new Date().toLocaleDateString()), hour)))
       } else {
         this.$emit('input', getTime(setHours(this.value, hour)))
       }
+      this.selectedHour = hour
     },
     setMinutes (minute) {
       if (this.isMinuteDisabled(minute)) {
         return
       }
       if (this.value === null) {
-        this.$emit('input', getTime(startOfMinute(new Date())))
+        this.$emit('input', getTime(setMinutes(new Date(new Date().toLocaleDateString()), minute)))
       } else {
         this.$emit('input', getTime(setMinutes(this.value, minute)))
       }
+      this.selectedMinute = minute
     },
     setSeconds (second) {
       if (this.isSecondDisabled(second)) {
         return
       }
       if (this.value === null) {
-        this.$emit('input', getTime(startOfSecond(new Date())))
+        this.$emit('input', getTime(setSeconds(new Date(new Date().toLocaleDateString()), second)))
       } else {
         this.$emit('input', getTime(setSeconds(this.value, second)))
       }
+      this.selectedSecond = second
     },
     refreshTimeString (time) {
       if (time === undefined) time = this.computedTime
@@ -418,6 +428,36 @@ export default {
     handleConfirmClick () {
       this.refreshTimeString()
       this.closeTimeSelector()
+    },
+    checkHour () {
+      if (this.isHourDisabled(this.computedHour)) {
+        for (let i = 0; i < 60; i++) {
+          if (!this.isHourDisabled(i)) {
+            this.setHours(i)
+            break
+          }
+        }
+      }
+    },
+    checkMinute () {
+      if (this.isMinuteDisabled(this.computedMinute)) {
+        for (let i = 0; i < 60; i++) {
+          if (!this.isMinuteDisabled(i)) {
+            this.setMinutes(i)
+            break
+          }
+        }
+      }
+    },
+    checkSecond () {
+      if (this.isSecondDisabled(this.computedSecond)) {
+        for (let i = 0; i < 60; i++) {
+          if (!this.isSecondDisabled(i)) {
+            this.setSeconds(i)
+            break
+          }
+        }
+      }
     }
   }
 }

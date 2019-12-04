@@ -10,12 +10,6 @@ import getMonth from 'date-fns/getMonth'
 import getDate from 'date-fns/getDate'
 import isValid from 'date-fns/isValid'
 import { dateArray, strictParse } from '../../../../utils/dateUtils'
-import startOfSecond from 'date-fns/startOfSecond'
-import startOfMinute from 'date-fns/startOfMinute'
-import startOfHour from 'date-fns/startOfHour'
-import setHours from 'date-fns/setHours'
-import setMinutes from 'date-fns/setMinutes'
-import setSeconds from 'date-fns/setSeconds'
 
 export default {
   mixins: [commonCalendarMixin],
@@ -41,10 +35,20 @@ export default {
       type: Array,
       default: () => ['now', 'confirm']
     },
-    disabledTime: {
+    dateDisabled: {
       type: Function,
       default: () => {
         return false
+      }
+    },
+    timeDisabled: {
+      type: Function,
+      default: () => {
+        return {
+          hourDisabled: () => false,
+          minuteDisabled: () => false,
+          secondDisabled: () => false
+        }
       }
     }
   },
@@ -52,7 +56,12 @@ export default {
     return {
       displayDateString: '',
       calendarDateTime: new Date(), // moment(),
-      currentDateTime: new Date() // moment()
+      currentDateTime: new Date(), // moment()
+      selectedDate: null,
+      hourDisabled: () => true,
+      minuteDisabled: () => true,
+      secondDisabled: () => true
+
     }
   },
   computed: {
@@ -199,8 +208,7 @@ export default {
       this.calendarDateTime = new Date() // moment()
     },
     handleDateClick (dateItem) {
-      console.log('dateItem11111111111', dateItem)
-      if (this.disabledTime(dateItem.timestamp)) {
+      if (this.dateDisabled(dateItem.timestamp)) {
         return
       }
       let newSelectedDateTime = new Date()
@@ -208,7 +216,11 @@ export default {
         newSelectedDateTime = this.valueAsDateTime
       }
       newSelectedDateTime = set(newSelectedDateTime, dateItem.dateObject)
-      // console.log(newSelectedDateTime.format('YYYY MM DD'))
+      this.selectedDate = dateItem.dateObject
+      let timeDisabled = this.timeDisabled(dateItem.timestamp)
+      this.hourDisabled = timeDisabled.hourDisabled || function () { return false }
+      this.minuteDisabled = timeDisabled.minuteDisabled || function () { return false }
+      this.secondDisabled = timeDisabled.secondDisabled || function () { return false }
       this.$emit('input', getTime(this.adjustValue(newSelectedDateTime)))
     },
     /**
@@ -245,33 +257,6 @@ export default {
     },
     prevMonth () {
       this.calendarDateTime = addMonths(this.calendarDateTime, -1)
-    },
-    disabledHours (hour) {
-      let newVal = null
-      if (this.value === null) {
-        newVal = getTime(startOfHour(new Date()))
-      } else {
-        newVal = getTime(setHours(this.value, hour))
-      }
-      return this.disabledTime(newVal)
-    },
-    disabledMinutes (minute) {
-      let newVal = null
-      if (this.value === null) {
-        newVal = getTime(startOfMinute(new Date()))
-      } else {
-        newVal = getTime(setMinutes(this.value, minute))
-      }
-      return this.disabledTime(newVal)
-    },
-    disabledSeconds (second) {
-      let newVal = null
-      if (this.value === null) {
-        newVal = getTime(startOfSecond(new Date()))
-      } else {
-        newVal = getTime(setSeconds(this.value, second))
-      }
-      return this.disabledTime(newVal)
     }
   }
 }

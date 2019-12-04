@@ -7,12 +7,6 @@ import getMonth from 'date-fns/getMonth'
 import startOfMonth from 'date-fns/startOfMonth'
 import isValid from 'date-fns/isValid'
 import { dateArray } from '../../../../utils/dateUtils'
-import startOfSecond from 'date-fns/startOfSecond'
-import startOfMinute from 'date-fns/startOfMinute'
-import startOfHour from 'date-fns/startOfHour'
-import setHours from 'date-fns/setHours'
-import setMinutes from 'date-fns/setMinutes'
-import setSeconds from 'date-fns/setSeconds'
 
 import commonCalendarMixin from './commonCalendarMixin'
 
@@ -50,10 +44,20 @@ export default {
       type: Array,
       default: () => ['clear', 'confirm']
     },
-    disabledTime: {
+    dateDisabled: {
       type: Function,
       default: () => {
         return false
+      }
+    },
+    timeDisabled: {
+      type: Function,
+      default: () => {
+        return {
+          hourDisabled: () => false,
+          minuteDisabled: () => false,
+          secondDisabled: () => false
+        }
       }
     }
   },
@@ -68,7 +72,13 @@ export default {
       isSelecting: false,
       startDateTime: null,
       memorizedStartDateTime: null,
-      endDateTime: null
+      endDateTime: null,
+      startHourDisabled: () => true,
+      startMinuteDisabled: () => true,
+      startSecondDisabled: () => true,
+      endHourDisabled: () => true,
+      endMinuteDisabled: () => true,
+      endSecondDisabled: () => true
     }
   },
   computed: {
@@ -155,8 +165,8 @@ export default {
         this.endCalendarDateTime = startOfMonth(endMoment)
       }
     },
-    handleDateClick (dateItem) {
-      if (this.disabledTime(dateItem.timestamp)) {
+    handleDateClick (dateItem, partial) {
+      if (this.dateDisabled(dateItem.timestamp, partial)) {
         return
       }
       if (!this.isSelecting) {
@@ -166,6 +176,10 @@ export default {
       } else {
         this.isSelecting = false
       }
+      let timeDisabled = this.timeDisabled(dateItem.timestamp, partial)
+      this[partial + 'HourDisabled'] = timeDisabled.hourDisabled || function () { return false }
+      this[partial + 'MinuteDisabled'] = timeDisabled.minuteDisabled || function () { return false }
+      this[partial + 'SecondDisabled'] = timeDisabled.secondDisabled || function () { return false }
     },
     handleDateMouseEnter (dateItem) {
       if (this.isSelecting) {
@@ -260,40 +274,40 @@ export default {
       this.endCalendarDateTime = addMonths(this.endCalendarDateTime, -1)
       this.adjustCalendarTimes(false)
     },
-    disabledHours (value) {
+    isStartHourDisabled () {
       let self = this
       return function (hour) {
-        let newVal = null
-        if (value === null) {
-          newVal = getTime(startOfHour(new Date()))
-        } else {
-          newVal = getTime(setHours(value, hour))
-        }
-        return self.disabledTime(newVal)
+        return self.startHourDisabled(hour)
       }
     },
-    disabledMinutes (value) {
+    isStartMinuteDisabled () {
       let self = this
-      return function (minute) {
-        let newVal = null
-        if (value === null) {
-          newVal = getTime(startOfMinute(new Date()))
-        } else {
-          newVal = getTime(setMinutes(value, minute))
-        }
-        return self.disabledTime(newVal)
+      return function (minute, selectedHour) {
+        return self.startMinuteDisabled(minute, selectedHour)
       }
     },
-    disabledSeconds (value) {
+    isStartSecondDisabled () {
       let self = this
-      return function (second) {
-        let newVal = null
-        if (value === null) {
-          newVal = getTime(startOfSecond(new Date()))
-        } else {
-          newVal = getTime(setSeconds(value, second))
-        }
-        return self.disabledTime(newVal)
+      return function (second, selectedMinute, selectedHour) {
+        return self.startSecondDisabled(second, selectedMinute, selectedHour)
+      }
+    },
+    isEndHourDisabled () {
+      let self = this
+      return function (hour) {
+        return self.endHourDisabled(hour)
+      }
+    },
+    isEndMinuteDisabled () {
+      let self = this
+      return function (minute, selectedHour) {
+        return self.endMinuteDisabled(minute, selectedHour)
+      }
+    },
+    isEndSecondDisabled () {
+      let self = this
+      return function (second, selectedMinute, selectedHour) {
+        return self.endSecondDisabled(second, selectedMinute, selectedHour)
       }
     }
   }

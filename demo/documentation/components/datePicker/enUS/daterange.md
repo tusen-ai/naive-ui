@@ -21,7 +21,6 @@ export default {
   methods: {
     disabledTime (current) {
       return (current >= 1574092800000) && (current < 1576771200000)
-      
     }
   }
 }
