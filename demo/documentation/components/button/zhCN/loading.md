@@ -2,18 +2,22 @@
 按钮有加载状态。
 ```html
 <n-button
-  icon="md-save"
   :loading="loading"
   @click="loading = !loading"
 >
+  <template v-slot:icon>
+    <md-save />
+  </template>
   Loading
 </n-button>
 <n-button
-  icon="md-save"
   :loading="loading"
   icon-position="right"
   @click="loading = !loading"
 >
+  <template v-slot:icon>
+    <md-save />
+  </template>
   Loading
 </n-button>
 <n-button
@@ -42,7 +46,12 @@
 ```
 
 ```js
+import mdSave from 'naive-ui/lib/icons/md-save'
+
 export default {
+  components: {
+    mdSave
+  },
   data () {
     return {
       loading: false

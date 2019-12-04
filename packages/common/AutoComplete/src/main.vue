@@ -55,7 +55,7 @@ import asthemecontext from '../../../mixins/asthemecontext'
 import clickoutside from '../../../directives/clickoutside'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
-// import asformitem from '../../../mixins/asformitem'
+import asformitem from '../../../mixins/asformitem'
 
 import {
   NBaseSelectMenu,
@@ -76,11 +76,12 @@ export default {
   },
   mixins: [
     withapp,
-    asthemecontext,
     themeable,
+    asthemecontext,
     detachable,
     zindexable,
-    placeable
+    placeable,
+    asformitem()
   ],
   props: {
     placeholder: {

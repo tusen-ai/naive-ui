@@ -1,4 +1,4 @@
-# After Select
+# Actions After Select
 ```html
 <n-auto-complete
   :options="options"

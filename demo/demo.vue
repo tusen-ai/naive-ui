@@ -137,7 +137,7 @@ export default {
           name: 'Data Input Components',
           childItems: [
             {
-              name: 'Auto Complete (in progress)',
+              name: 'Auto Complete',
               path: `/${this.lang}/${this.theme}` + '/n-auto-complete'
             },
             {

@@ -4,61 +4,86 @@
 <n-button-group>
   <n-button
     type="default"
-    icon="md-save"
     round
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Default
   </n-button>
   <n-button
     type="primary"
-    icon="md-save"
     disabled
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Primary
   </n-button>
   <n-button
     type="info"
-    icon="md-save"
     icon-position="right"
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Info
   </n-button>
   <n-button
     type="warning"
-    icon="md-save"
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Warning
   </n-button>
 </n-button-group>
 <n-button-group vertical>
   <n-button
     type="default"
-    icon="md-save"
     round
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Default
   </n-button>
   <n-button
     type="primary"
-    icon="md-save"
     disabled
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Primary
   </n-button>
   <n-button
     type="info"
-    icon="md-save"
     icon-position="right"
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Info
   </n-button>
   <n-button
     type="warning"
-    icon="md-save"
   >
+    <template v-slot:icon>
+      <md-save />
+    </template>
     Warning
   </n-button>
 </n-button-group>
+```
+```js
+import mdSave from 'naive-ui/lib/icons/md-save'
+
+export default {
+  components: {
+    mdSave
+  }
+}
 ```
 ```css
 .n-button {

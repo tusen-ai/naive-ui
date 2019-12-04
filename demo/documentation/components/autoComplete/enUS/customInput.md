@@ -1,4 +1,4 @@
-# Custom Input
+# Custom Input Element
 ```html
 <n-auto-complete :options="options" v-model="value">
   <template v-slot:activator="{ handleInput, handleBlur, handleFocus, value }">
