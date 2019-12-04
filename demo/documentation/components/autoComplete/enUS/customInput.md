@@ -1,6 +1,17 @@
-# Basic
+# Custom Input
 ```html
-<n-auto-complete :options="options" v-model="value" placeholder="Email" />
+<n-auto-complete :options="options" v-model="value">
+  <template v-slot:activator="{ handleInput, handleBlur, handleFocus, value }">
+    <n-input
+      type="textarea"
+      @input="handleInput"
+      @focus="handleFocus"
+      @blur="handleBlur"
+      :value="value"
+      placeholder="Email"
+    />
+  </template>
+</n-auto-complete>
 ```
 ```js
 export default {

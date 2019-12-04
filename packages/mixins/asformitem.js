@@ -4,8 +4,10 @@ export default function (events = {
   focus: 'focus'
 }) {
   return {
-    provide: {
-      NFormItem: null
+    provide () {
+      return {
+        NFormItem: null
+      }
     },
     inject: {
       NFormItem: {

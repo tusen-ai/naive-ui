@@ -28,6 +28,7 @@
 <script>
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import asthemecontext from '../../../mixins/asthemecontext'
 import CloseIcon from './CloseIcon'
 
 export default {
@@ -35,7 +36,7 @@ export default {
   components: {
     CloseIcon
   },
-  mixins: [withapp, themeable],
+  mixins: [withapp, themeable, asthemecontext],
   model: {
     prop: 'checked',
     event: 'input'
