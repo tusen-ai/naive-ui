@@ -32,6 +32,7 @@
       :fixed="fixed"
       @on-scroll="onBodyScrolll"
     />
+    <slot />
   </div>
 </template>
 

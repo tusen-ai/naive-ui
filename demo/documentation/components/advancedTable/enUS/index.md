@@ -1,5 +1,7 @@
 # Advanced Table
+
 <!--single-column-->
+
 ```demo
 basic
 column

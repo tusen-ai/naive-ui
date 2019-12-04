@@ -16,69 +16,114 @@
 const _columns3 = $this => {
   return [
     {
-      title: '属性',
-      key: 'name',
+      title: "属性",
+      key: "name",
       width: 180
     },
     {
-      title: '说明',
-      key: 'desc',
+      title: "说明",
+      key: "desc",
       width: 500,
       render(h, params) {
-        return <pre class="n-table-props-desc">{params.row.desc}</pre>
+        return <pre class="n-table-props-desc">{params.row.desc}</pre>;
       }
     },
     {
-      title: '类型',
-      key: 'type',
+      title: "类型",
+      key: "type",
       width: 200
     },
     {
-      title: '默认值',
-      key: 'default',
+      title: "默认值",
+      key: "default",
       width: 500,
       render(h, params) {
-        return <pre class="n-table-props-desc">{params.row.default}</pre>
+        return <pre class="n-table-props-desc">{params.row.default}</pre>;
       }
     }
-  ]
-}
+  ];
+};
 const data = [
   {
-    name: 'columns',
-    desc: '表格列配置项',
-    type: 'Array',
+    name: "columns",
+    desc: "表格列配置项",
+    type: "Array",
     default: `[]`
   },
   {
-    name: 'loading',
-    desc: '表格是否加载中',
-    type: 'boolean',
+    name: "loading",
+    desc: "表格是否加载中",
+    type: "boolean",
     default: `false`
   },
   {
-    name: 'max-height',
-    desc: '最大高度,超出后会固定头部,并显示滚动条',
-    type: 'number | string',
+    name: "max-width",
+    desc: "表格最大宽度,超出显示横向滚动条",
+    type: "[String|Number]",
+    default: `unset`
+  },
+  {
+    name: "max-height",
+    desc: "最大高度,超出后会固定头部,并显示滚动条",
+    type: "number | string",
     default: `auto`
   },
   {
-    name: 'data',
-    desc: '显示的结构化数据',
-    type: 'Array',
-    default: '[]'
+    name: "data",
+    desc: "显示的结构化数据",
+    type: "Array",
+    default: "[]"
   },
   {
-    name: 'row-class-name',
+    name: "row-class-name",
     desc: `行的css className
             当为Function时传入参数是
             - {row,_index} 行数据以及在源data数据中的索引
             - index行索引`,
-    type: '[Array, String, Object, Function]',
+    type: "[Array, String, Object, Function]",
     default: `''`
   },
   {
-    name: 'search',
+    name: "pagination",
+    desc: "分页功能",
+    type: "Object, Boolean",
+    default: `
+    example1: 远程分页触发on-change事件
+        "pagination": {
+          "total": 20,//items总数
+          "limit": 10,//每页显示数量
+          "custom": true,
+          pageSlot:5,
+          quickJumper:true
+        },
+    -----------
+    example2: 本地分页
+      "pagination": {
+          "total": 20,
+          "limit": 10,
+        },
+    `
+  },
+  {
+    name: "minHeight",
+    desc: "最小高度",
+    type: "number | string",
+    default: `unset`
+  },
+  {
+    name: "maxHeight",
+    desc: "最大高度,超出后会固定头部,并显示滚动条",
+    type: "number | string",
+    default: `auto`
+  },
+  {
+    name: "被废弃的onChange",
+    desc: "同event中的on-change,未来将会被废弃!",
+    type: "Function",
+    default: `()=>{}`
+  },
+  {
+    name: "被废弃的search",
     desc: `是否显示搜索,如果传入一个Object格式需要如下:
       example1: 本地搜索
       {
@@ -113,58 +158,21 @@ const data = [
         placeholder: 'search in local data'
       }
     `,
-    type: 'Object,Boolean',
+    type: "Object,Boolean",
     default: `false`
-  },
-  {
-    name: 'pagination',
-    desc: '分页功能',
-    type: 'Object, Boolean',
-    default: `
-    example1: 远程分页触发on-change事件
-        "pagination": {
-          "total": 20,//items总数
-          "limit": 10,//每页显示数量
-          "custom": true
-        },
-    -----------
-    example2: 本地分页
-      "pagination": {
-          "total": 20,
-          "limit": 10,
-        },
-    `
-  },
-  {
-    name: 'onChange',
-    desc: '同event中的on-change,未来将会被废弃!',
-    type: 'Function',
-    default: `()=>{}`
-  },
-  {
-    name: 'minHeight',
-    desc: '最小高度',
-    type: 'number | string',
-    default: `unset`
-  },
-  {
-    name: 'maxHeight',
-    desc: '最大高度,超出后会固定头部,并显示滚动条',
-    type: 'number | string',
-    default: `auto`
   }
-]
+];
 export default {
   components: {},
   data() {
-    const columns = _columns3(this)
+    const columns = _columns3(this);
 
     return {
       columns,
       data
-    }
+    };
   }
-}
+};
 ```
 
 ```css

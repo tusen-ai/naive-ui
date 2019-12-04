@@ -16,10 +16,10 @@
   :data="data"
   max-height="300px"
   :search="search"
-  :pagination="{total:data.length,limit:10,custom:true}"
+  :pagination="pagination"
   @on-change="onChange"
   @on-filter-change="onFilterChange"
-  max-width="480px"
+  :max-width="480"
 >
   <div slot="table-operation-batch-left">
     <n-button size="small" @click="clear">
@@ -162,6 +162,15 @@ export default {
         placeholder: "search from net"
       }
     };
+  },
+  computed: {
+    pagination() {
+      return {
+        total: this.data.length,
+        limit: 10,
+        custom: true
+      };
+    }
   },
   mounted() {
     this.$refs.table.setParams({

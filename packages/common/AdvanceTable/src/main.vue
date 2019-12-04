@@ -73,7 +73,9 @@
         @on-checkbox-all="onAllCheckboxesClick"
         @on-sort-change="onSortChange"
         @on-filter="onFilter"
-      />
+      >
+        <slot name="append" />
+      </base-table>
       <div
         v-if="fixedRightColumn.length"
         class="n-advance-table__fixed--right n-advance-table__fixed"
@@ -131,6 +133,7 @@
         :page-count="pageCount"
         :page-slot="paginationer.pageSlot || 5"
         :show-quick-jumper="paginationer.quickJumper || true"
+        :disabled="loading"
       />
     </div>
   </div>
@@ -566,11 +569,11 @@ export default {
         this.checkBoxes = []
       })
     },
-    selectRow (rowIndexs = []) {
+    toggleRowSelection (rowIndexs = [], selected = true) {
       this.$nextTick(() => {
         if (rowIndexs === 'all') {
           this.showingData.forEach(item => {
-            this.checkBoxes[item._index] = true
+            this.checkBoxes[item._index] = selected
           })
           this.checkBoxes = [].concat(this.checkBoxes)
         } else {
@@ -578,13 +581,16 @@ export default {
             rowIndexs.forEach(idx => {
               if (this.showingData[idx]) {
                 const realIdx = this.showingData[idx]._index
-                this.checkBoxes[realIdx] = true
+                this.checkBoxes[realIdx] = selected
               }
             })
             this.checkBoxes = [].concat(this.checkBoxes)
           }
         }
       })
+    },
+    page (pageNum) {
+      this.currentPage = pageNum
     },
     sort (columnKey, order) {
       this.$set(this.sortIndexs, columnKey, order)
@@ -621,7 +627,7 @@ export default {
      */
     setParams ({ filter, sorter, page }) {
       if (sorter) {
-        this.sort(sorter.key, sorter.type)
+        this.sort(sorter.key, sorter.order)
       } else {
         this.clearSort()
       }
@@ -776,7 +782,10 @@ export default {
         const currentSortColumn = this.getCustomSorterData()
         const emitData = {
           filter: currentFilterColumn,
-          sorter: currentSortColumn,
+          sorter: {
+            key: currentSortColumn.key,
+            order: currentSortColumn.type
+          },
           pagination: this.paginationer
           // search: this.currentSearchColumn
         }

@@ -8,7 +8,7 @@
 
 import Scaffold from './src/main.vue'
 
-Scaffold.install = function(Vue) {
+Scaffold.install = function (Vue) {
   Scaffold.Vue = Vue
   Vue.component(Scaffold.name, Scaffold)
 }
