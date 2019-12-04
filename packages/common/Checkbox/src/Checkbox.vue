@@ -32,6 +32,7 @@
 <script>
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import asthemecontext from '../../../mixins/asthemecontext'
 import asformitem from '../../../mixins/asformitem'
 import CheckMark from './CheckMark'
 import LineMark from './LineMark'
@@ -51,6 +52,7 @@ export default {
   mixins: [
     withapp,
     themeable,
+    asthemecontext,
     asformitem(),
     collectable('NCheckboxGroup', 'collectedCheckboxValues')
   ],

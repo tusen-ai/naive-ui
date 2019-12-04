@@ -1,4 +1,4 @@
-# Trigger (Leaf Only)
+# Trigger
 ```html
 <n-cascader
   v-model="value"

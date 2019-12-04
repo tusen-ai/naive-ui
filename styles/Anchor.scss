@@ -60,13 +60,13 @@
         display: inline-block;
         font-size: 14px;
         padding-right: 16px;
-        color: $--n-text-color;
+        color: map-get($--anchor-link-title-text-color, 'default');;
         transition: color .3s $default-cubic-bezier;
         &:hover, &:focus {
-          color: $--n-primary-color;
+          color: map-get($--anchor-link-title-text-color, 'hover');
         }
         @include m(active) {
-          color: $--n-primary-color;
+          color: map-get($--anchor-link-title-text-color, 'active');
         }
       }
     }

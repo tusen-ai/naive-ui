@@ -117,7 +117,7 @@
       }
     }
     @include e(label) {
-      color: $--n-secondary-text-color;
+      color: map-get($--checkbox-label-text-color, 'default');
     }
     @include m(checked, indeterminate) {
       &:focus {
@@ -148,7 +148,7 @@
         }
       }
       @include e(label) {
-        color: $--n-disabled-text-color;
+        color: map-get($--checkbox-label-text-color, 'disabled');
       }
     }
   }

@@ -9,4 +9,8 @@
   ) !global;
   $--checkbox-disabled: $--neutral-5 !global;
   $--checkbox-icon-fill: white !global;
+  $--checkbox-label-text-color: (
+    'default': $--n-secondary-text-color,
+    'disabled': $--n-disabled-text-color
+  ) !global;
 }

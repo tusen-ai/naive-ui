@@ -127,8 +127,8 @@
             opacity: 0;
             transition: transform .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
           }
-          border-right: 1px solid $--n-primary-color;
-          border-bottom: 1px solid $--n-primary-color;
+          border-right: 1px solid $--base-select-menu-option-check-mark-color;
+          border-bottom: 1px solid $--base-select-menu-option-check-mark-color;
         }
         @include m(selected) {
           background: none;
@@ -138,7 +138,7 @@
           }
         }
         &:active {
-          color: $--n-primary-color;
+          color: map-get($map: $--base-select-menu-option-color, $key: "active");
         }
       }
     }

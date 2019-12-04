@@ -2,7 +2,7 @@
 /**
  * Warning: There are some potential problems if there are too many items!
  */
-import BaseCascader from './BaseCascader'
+import BaseCascader from './Cascader'
 
 export default {
   name: 'NCascader',

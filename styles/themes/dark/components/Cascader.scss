@@ -12,4 +12,5 @@
   $--cascader-option-arrow-background-color: rgba(255, 255, 255, 0.3) !global;
   $--cascader-menu-mask-background-color: change-color($--n-dialog-color, $alpha: .75) !global;
   $--cascader-menu-mask-text-color: $--n-secondary-text-color !global;
+  $--cascader-item-check-mark-color: $--n-primary-color !global;
 }
