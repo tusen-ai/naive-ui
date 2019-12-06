@@ -1,28 +1,27 @@
-function getTheme (component) {
-  let cursor = component
+function getTheme (componentInstance, property) {
+  let cursor = componentInstance
   while (cursor.$parent) {
     const name = cursor.$options.name
     if (cursor.synthesizedTheme) {
       return cursor.synthesizedTheme
     }
     if (name === 'NConfigProvider') {
-      return cursor.theme || null
+      return cursor.synthesizedTheme || null
     }
     cursor = cursor.$parent
   }
   return null
 }
 
-function install (Vue, Component, name) {
+function install (Vue, property, name) {
   const prototypeProxy = new Proxy(
     function () {
-      return Component
+      return property
     },
     {
       apply (target, thisArg, argumentsList) {
         if (thisArg instanceof Vue) {
-          Component.theme = getTheme(thisArg)
-          // console.log('theme', getTheme(thisArg))
+          property.theme = getTheme(thisArg, property)
         }
         return target.bind(thisArg)(...argumentsList)
       }

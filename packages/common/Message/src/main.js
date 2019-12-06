@@ -1,13 +1,5 @@
 import Message from './Message'
 
-function setTheme (messageContainer) {
-  const themeClasses = Array.from(messageContainer.classList).filter(c =>
-    c.endsWith('-theme')
-  )
-  themeClasses.forEach(c => messageContainer.classList.remove(c))
-  if (this.theme) messageContainer.classList.add(`n-${this.theme}-theme`)
-}
-
 function attachMessageContainer () {
   let messageContainer = document.querySelector('.n-message-container')
   if (!messageContainer) {
@@ -16,11 +8,10 @@ function attachMessageContainer () {
     messageContainer.style = `z-index: ${this.options.zIndex}; top: ${this.options.top}px;`
     document.body.appendChild(messageContainer)
   }
-  setTheme.call(this, messageContainer)
   return messageContainer
 }
 
-function registerMessageEl (container, el, option) {
+function mountMessage (container, el, option) {
   el.classList.add('n-message--enter')
   container.appendChild(el)
   el.getBoundingClientRect()
@@ -67,15 +58,15 @@ const NMessage = {
     zIndex: 6000,
     top: 20
   },
+  theme: null,
   attachMessageContainer,
   notice (content, option) {
-    // console.log('test', this)
     const messageContainer = this.attachMessageContainer()
     const messageCell = new this.Vue({
       ...Message,
-      propsData: { option, content }
+      propsData: { option: { theme: this.theme, ...option }, content }
     }).$mount()
-    registerMessageEl(messageContainer, messageCell.$el, mixinOption(option))
+    mountMessage(messageContainer, messageCell.$el, mixinOption(option))
   },
   info (content, option) {
     option = mixinOption(option)

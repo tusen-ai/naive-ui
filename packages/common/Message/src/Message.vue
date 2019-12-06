@@ -27,7 +27,8 @@ export default {
   render (h) {
     let icon = null
     if (this.icon) {
-      icon = h(this.icon)
+      if (typeof this.icon === 'function') icon = this.icon(h)
+      else icon = h(this.icon)
     } else if (this.type === 'success') {
       icon = h(mdCheckmarkCircle)
     } else if (this.type === 'error') {
@@ -37,10 +38,12 @@ export default {
     } else if (this.type === 'warning') {
       icon = h(mdAlert)
     }
+    const theme = this.option.theme
     return h('div', {
       staticClass: 'n-message',
       class: {
-        [`n-message--${this.type}`]: true
+        [`n-message--${this.type}`]: true,
+        [`n-${theme}-theme`]: theme
       }
     }, [
       h('div', {
