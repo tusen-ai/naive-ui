@@ -3,10 +3,16 @@
 <div class="container">
   <div class="padding"></div>
   <div class="content">
-    <n-affix :top="60"><n-tag>Top 50px</n-tag></n-affix>
+    <n-row>
+      <n-col :span="12">
+        <n-affix :top="60"><n-tag>Top 50px</n-tag></n-affix>
+      </n-col>
+      <n-col :span="12">
+        <n-affix :bottom="60"><n-tag>Bottom 60px</n-tag></n-affix>
+      </n-col>
+    </n-row>
     <!-- <n-affix :bottom="60" style="margin-left: 80px"><n-tag>Bottom 50px</n-tag></n-affix>
     <n-affix :top="60" :bottom="60" style="margin-left: 200px"><n-tag>Top 50px & Bottom 50px</n-tag></n-affix> -->
-    <!-- <n-affix :bottom="60"><n-tag>Bottom 60px</n-tag></n-affix> -->
   </div>
 </div>
 ```
@@ -17,7 +23,6 @@
   background-color: rgba(128, 128, 128, .3);
   border-radius: 6px;
   overflow: auto;
-  position: relative;
 }
 
 .padding {

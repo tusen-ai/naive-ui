@@ -2,7 +2,8 @@
   <div
     class="n-affix"
     :class="{
-      [`n-affix--affixed`]: affixed
+      [`n-affix--affixed`]: affixed,
+      [`n-affix--absolute-positioned`]: position === 'absolute'
     }"
     :style="style"
   >
@@ -27,6 +28,10 @@ export default {
     bottom: {
       type: Number,
       default: null
+    },
+    position: {
+      type: String,
+      default: 'fix'
     }
   },
   data () {
@@ -34,25 +39,27 @@ export default {
       container: null,
       stickToTop: false,
       stickToBottom: false,
-      memorizedTop: null,
-      affixTop: null
+      bottomAffixedTriggerScrollTop: null,
+      topAffixedTriggerScrollTop: null
     }
   },
   computed: {
+    affixed () {
+      return this.stickToBottom || this.stickToTop
+    },
     style () {
       const style = {}
-      if (this.affixed && this.affixTop !== null) {
-        style.top = `${this.affixTop}px`
+      if (this.stickToTop && this.top !== null) {
+        style.top = `${this.top}px`
+      }
+      if (this.stickToBottom && this.bottom !== null) {
+        style.bottom = `${this.bottom}px`
       }
       return style
-    },
-    affixed () {
-      return this.stickToTop || this.stickToBottom
     }
   },
   mounted () {
     this.init()
-    this.memorizeTop()
   },
   beforeDestroy () {
     if (this.container) {
@@ -71,35 +78,36 @@ export default {
         this.handleScroll()
       }
     },
-    memorizeTop () {
-      const {
-        top
-      } = this.$el.getBoundingClientRect()
-      const containerScrollTop = this.container.scrollTop
-      const delta = containerScrollTop - this.top
-      this.memorizedTop = top + delta
-    },
     handleScroll (e) {
       const containerEl = this.container.nodeName === '#document' ? this.container.documentElement : this.container
-      let scrollTop = containerEl.scrollTop
-      let scrollBottom = containerEl.scrollBottom
-      const originalAffixed = this.affixed
-      if (this.top !== null && scrollTop >= this.top) {
+      if (this.affixed) {
+        if (containerEl.scrollTop <= this.topAffixedTriggerScrollTop) {
+          this.stickToTop = false
+          this.topAffixedTriggerScrollTop = null
+        }
+        if (containerEl.scrollTop >= this.bottomAffixedTriggerScrollTop) {
+          this.stickToBottom = false
+          this.bottomAffixedTriggerScrollTop = null
+        }
+        return
+      }
+      const containerRect = containerEl.getBoundingClientRect()
+      const affixRect = this.$el.getBoundingClientRect()
+      const pxToTop = affixRect.top - containerRect.top
+      const pxToBottom = containerRect.bottom - affixRect.bottom
+      if (this.top !== null && pxToTop <= this.top) {
         this.stickToTop = true
+        this.topAffixedTriggerScrollTop = containerEl.scrollTop - (this.top - pxToTop)
       } else {
         this.stickToTop = false
+        this.topAffixedTriggerScrollTop = null
       }
-      if (this.bottom !== null && scrollBottom >= this.bottom) {
+      if (this.bottom !== null && pxToBottom <= this.bottom) {
         this.stickToBottom = true
+        this.bottomAffixedTriggerScrollTop = containerEl.scrollTop + this.bottom - pxToBottom
       } else {
         this.stickToBottom = false
-      }
-      if (!originalAffixed && this.affixed) {
-        // console.log(e, this.$el.getBoundingClientRect().top)
-        this.affixTop = this.memorizedTop
-        // debugger
-      } else {
-        this.memorizeTop()
+        this.bottomAffixedTriggerScrollTop = null
       }
     }
   }

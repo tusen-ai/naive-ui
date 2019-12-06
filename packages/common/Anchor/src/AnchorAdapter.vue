@@ -9,6 +9,8 @@
     v-else
     :target="target"
     :top="top"
+    :bottom="bottom"
+    :position="position"
   >
     <anchor
       :target="target"
@@ -40,6 +42,14 @@ export default {
     affix: {
       type: Boolean,
       default: false
+    },
+    position: {
+      type: String,
+      default: undefined
+    },
+    bottom: {
+      type: String,
+      default: undefined
     }
   }
 }
