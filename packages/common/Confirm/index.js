@@ -1,5 +1,5 @@
 import Confirm from './src/index.js'
-import { install } from '../../utils/installThemeableProperty'
+import { install } from '../../utils/installThemeAwarableProperty'
 
 Confirm.install = function (Vue) {
   Confirm.Vue = Vue
