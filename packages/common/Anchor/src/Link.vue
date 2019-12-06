@@ -43,9 +43,6 @@ export default {
       return this.href && this.NAnchor.activeHref === this.href
     }
   },
-  mounted () {
-    console.log(this.$slots.default)
-  },
   watch: {
     active: function (value) {
       if (value) this.NAnchor.updateBarPosition(this.$refs.title)
