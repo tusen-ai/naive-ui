@@ -55,7 +55,6 @@ export default {
       }
     },
     handleClick (e) {
-      // e.preventDefault()
       this.NAnchor.setActiveHref(this.href)
     }
   }

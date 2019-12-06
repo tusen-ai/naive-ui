@@ -4,6 +4,7 @@
     :class="{
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
+    :style="synthesizedStyle"
   >
     <div
       ref="slot"
@@ -28,19 +29,22 @@ import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import fontawarable from '../../../mixins/fontawarable'
 
-function getOffsetTop (el, container) {
+function getOffset (el, container) {
   const {
-    top: elTop
+    top: elTop,
+    height
   } = el.getBoundingClientRect()
   const {
     top: containerTop
   } = container.getBoundingClientRect()
-  // console.log('elTop', elTop, 'containerTop', containerTop)
-  return elTop - containerTop
+  return {
+    top: elTop - containerTop,
+    height
+  }
 }
 
 export default {
-  name: 'NAnchor',
+  name: 'NBaseAnchor',
   mixins: [withapp, themeable, fontawarable],
   props: {
     target: {
@@ -68,15 +72,9 @@ export default {
         window.setTimeout(() => {
           slotEl.style.top = null
           barEl.style.top = null
-          // slotEl.style.top = null
         }, 150)
       }
     }
-  },
-  mounted () {
-    // this.init()
-    // this.setActiveHref(window.location)
-    // this.blockTransitionOneTick()
   },
   provide () {
     return {
@@ -85,13 +83,11 @@ export default {
   },
   methods: {
     handleFontReady () {
-      console.log('font-ready')
       this.init()
       this.setActiveHref(window.location)
       this.handleScroll(false)
     },
     blockTransitionOneTick () {
-      console.log('block transition')
       const barEl = this.$refs.bar
       const slotEl = this.$refs.slot
       barEl.style.transition = 'none'
@@ -99,7 +95,6 @@ export default {
       barEl.getBoundingClientRect()
       slotEl.getBoundingClientRect()
       this.$nextTick().then(() => {
-        console.log('unblock transition')
         barEl.style.transition = null
         slotEl.style.transition = null
       })
@@ -111,7 +106,6 @@ export default {
         barEl.style.transition = 'none'
         slotEl.style.transition = 'none'
       }
-      // console.log('updateBarPosition')
       const {
         offsetHeight,
         offsetWidth
@@ -144,7 +138,7 @@ export default {
         const linkEl = document.getElementById(idMatchResult[1])
         if (linkEl) {
           this.activeHref = href
-          const top = getOffsetTop(linkEl, this.container) + (this.container.scrollTop || 0)
+          const top = getOffset(linkEl, this.container).top + (this.container.scrollTop || 0)
           this.container.scrollTo({
             top: top - this.bound
           })
@@ -156,28 +150,32 @@ export default {
       }
     },
     handleScroll (transition = true) {
-      // console.log('handleScroll')
       const links = []
       this.collectedLinkHrefs.forEach(href => {
         const idMatchResult = /#([^#]+)$/.exec(href)
         if (idMatchResult) {
           const linkEl = document.getElementById(idMatchResult[1])
           if (linkEl) {
+            const {
+              top,
+              height
+            } = getOffset(linkEl, this.container)
             links.push({
-              top: getOffsetTop(linkEl, this.container),
+              top,
+              height,
               href
             })
           }
         }
       })
       links.sort((a, b) => {
-        return a.top > b.top
+        return a.top > b.top || a.top === b.top ? a.height < b.height : false
       })
-      // const containerScrollTop = this.container.scrollTop
-      // console.log(links)
       const currentActiveHref = this.activeHref
-      const activeLink = links.reduce((prevLink, link) => {
-        // console.log(link.top)
+      const activeLink = links.reduce((prevLink, link, index) => {
+        if (index === links.length - 1 && link.top + link.height < 0) {
+          return null
+        }
         if (link.top <= this.bound) {
           if (prevLink === null) {
             return link

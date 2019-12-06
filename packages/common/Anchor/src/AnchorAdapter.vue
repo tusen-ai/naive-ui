@@ -14,22 +14,22 @@
     :offset-bottom="offsetBottom"
     :position="position"
   >
-    <n-anchor
+    <n-base-anchor
       :target="target"
     >
       <slot />
-    </n-anchor>
+    </n-base-anchor>
   </n-affix>
 </template>
 
 <script>
-import NAnchor from './Anchor'
+import NBaseAnchor from './BaseAnchor'
 import NAffix from '../../Affix'
 
 export default {
   name: 'NAnchor',
   components: {
-    NAnchor,
+    NBaseAnchor,
     NAffix
   },
   props: {
