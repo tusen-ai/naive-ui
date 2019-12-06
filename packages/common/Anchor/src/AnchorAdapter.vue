@@ -10,24 +10,26 @@
     :target="target"
     :top="top"
     :bottom="bottom"
+    :offset-top="offsetTop"
+    :offset-bottom="offsetBottom"
     :position="position"
   >
-    <anchor
+    <n-anchor
       :target="target"
     >
       <slot />
-    </anchor>
+    </n-anchor>
   </n-affix>
 </template>
 
 <script>
-import Anchor from './Anchor'
+import NAnchor from './Anchor'
 import NAffix from '../../Affix'
 
 export default {
   name: 'NAnchor',
   components: {
-    Anchor,
+    NAnchor,
     NAffix
   },
   props: {
@@ -48,7 +50,15 @@ export default {
       default: undefined
     },
     bottom: {
-      type: String,
+      type: Number,
+      default: undefined
+    },
+    offsetBottom: {
+      type: Number,
+      default: undefined
+    },
+    offsetTop: {
+      type: Number,
       default: undefined
     }
   }

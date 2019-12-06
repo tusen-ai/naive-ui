@@ -21,7 +21,15 @@ export default {
       type: Function,
       default: null
     },
+    offsetTop: {
+      type: Number,
+      default: null
+    },
     top: {
+      type: Number,
+      default: null
+    },
+    offsetBottom: {
       type: Number,
       default: null
     },
@@ -47,13 +55,25 @@ export default {
     affixed () {
       return this.stickToBottom || this.stickToTop
     },
+    synthesizedOffsetTop () {
+      return this.offsetTop || this.top
+    },
+    synthesizedTop () {
+      return this.top || this.offsetTop
+    },
+    synthesizedBottom () {
+      return this.bottom || this.offsetBottom
+    },
+    synthesizedOffsetBottom () {
+      return this.offsetBottom || this.bottom
+    },
     style () {
       const style = {}
-      if (this.stickToTop && this.top !== null) {
-        style.top = `${this.top}px`
+      if (this.stickToTop && this.synthesizedOffsetTop !== null) {
+        style.top = `${this.synthesizedTop}px`
       }
-      if (this.stickToBottom && this.bottom !== null) {
-        style.bottom = `${this.bottom}px`
+      if (this.stickToBottom && this.synthesizedOffsetBottom !== null) {
+        style.bottom = `${this.synthesizedBottom}px`
       }
       return style
     }
@@ -81,11 +101,11 @@ export default {
     handleScroll (e) {
       const containerEl = this.container.nodeName === '#document' ? this.container.documentElement : this.container
       if (this.affixed) {
-        if (containerEl.scrollTop <= this.topAffixedTriggerScrollTop) {
+        if (containerEl.scrollTop < this.topAffixedTriggerScrollTop) {
           this.stickToTop = false
           this.topAffixedTriggerScrollTop = null
         }
-        if (containerEl.scrollTop >= this.bottomAffixedTriggerScrollTop) {
+        if (containerEl.scrollTop > this.bottomAffixedTriggerScrollTop) {
           this.stickToBottom = false
           this.bottomAffixedTriggerScrollTop = null
         }
@@ -95,16 +115,16 @@ export default {
       const affixRect = this.$el.getBoundingClientRect()
       const pxToTop = affixRect.top - containerRect.top
       const pxToBottom = containerRect.bottom - affixRect.bottom
-      if (this.top !== null && pxToTop <= this.top) {
+      if (this.synthesizedOffsetTop !== null && pxToTop <= this.synthesizedOffsetTop) {
         this.stickToTop = true
-        this.topAffixedTriggerScrollTop = containerEl.scrollTop - (this.top - pxToTop)
+        this.topAffixedTriggerScrollTop = containerEl.scrollTop - (this.synthesizedOffsetTop - pxToTop)
       } else {
         this.stickToTop = false
         this.topAffixedTriggerScrollTop = null
       }
-      if (this.bottom !== null && pxToBottom <= this.bottom) {
+      if (this.synthesizedOffsetBottom !== null && pxToBottom <= this.synthesizedOffsetBottom) {
         this.stickToBottom = true
-        this.bottomAffixedTriggerScrollTop = containerEl.scrollTop + this.bottom - pxToBottom
+        this.bottomAffixedTriggerScrollTop = containerEl.scrollTop + this.synthesizedOffsetBottom - pxToBottom
       } else {
         this.stickToBottom = false
         this.bottomAffixedTriggerScrollTop = null

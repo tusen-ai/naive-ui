@@ -7,10 +7,10 @@ Affix can be `absolute` or `fix` positioned. You may need some css tricks to mak
     <div class="content">
       <n-row>
         <n-col :span="12">
-          <n-affix :top="60" position="absolute"><n-tag>Top 50px</n-tag></n-affix>
+          <n-affix :offset-top="60" position="absolute"><n-tag>Top 50px</n-tag></n-affix>
         </n-col>
         <n-col :span="12">
-          <n-affix :bottom="60" position="absolute"><n-tag>Bottom 60px</n-tag></n-affix>
+          <n-affix :offset-bottom="60" position="absolute"><n-tag>Bottom 60px</n-tag></n-affix>
         </n-col>
       </n-row>
     </div>
