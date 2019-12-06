@@ -1,5 +1,5 @@
 import Message from './src/main.js'
-import { install } from '../../utils/installThemeableProperty'
+import { install } from '../../utils/installThemeAwarableProperty'
 
 Message.install = function (Vue) {
   Message.Vue = Vue

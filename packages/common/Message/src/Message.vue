@@ -14,6 +14,10 @@ export default {
     content: {
       type: String,
       default: ''
+    },
+    theme: {
+      type: String,
+      default: null
     }
   },
   computed: {
@@ -38,12 +42,11 @@ export default {
     } else if (this.type === 'warning') {
       icon = h(mdAlert)
     }
-    const theme = this.option.theme
     return h('div', {
       staticClass: 'n-message',
       class: {
         [`n-message--${this.type}`]: true,
-        [`n-${theme}-theme`]: theme
+        [`n-${this.theme}-theme`]: this.theme
       }
     }, [
       h('div', {

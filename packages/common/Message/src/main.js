@@ -1,4 +1,4 @@
-import Message from './Message'
+import MessageEnvironment from './MessageEnvironment'
 
 function attachMessageContainer () {
   let messageContainer = document.querySelector('.n-message-container')
@@ -11,7 +11,15 @@ function attachMessageContainer () {
   return messageContainer
 }
 
-function mountMessage (container, el, option) {
+function detachMessageContainer () {
+  let messageContainer = document.querySelector('.n-message-container')
+  if (messageContainer) {
+    messageContainer.parentElement.removeChild(messageContainer)
+  }
+}
+
+function mountMessage (container, instance, option, instances) {
+  const el = instance.$el
   el.classList.add('n-message--enter')
   container.appendChild(el)
   el.getBoundingClientRect()
@@ -19,7 +27,12 @@ function mountMessage (container, el, option) {
   setTimeout(function () {
     setTimeout(function () {
       setTimeout(function () {
+        instance.$destroy()
+        instances.delete(instance)
         container.removeChild(el)
+        if (!instances.size) {
+          detachMessageContainer()
+        }
       }, option.vanishTransitionTimeout)
       el.classList.add('n-message--leave')
     }, option.duration)
@@ -60,33 +73,42 @@ const NMessage = {
   },
   theme: null,
   attachMessageContainer,
+  instances: new Set(),
+  handleThemeChange (theme) {
+    for (const instance of this.instances) {
+      instance.theme = theme
+    }
+  },
   notice (content, option) {
     const messageContainer = this.attachMessageContainer()
-    const messageCell = new this.Vue({
-      ...Message,
-      propsData: { option: { theme: this.theme, ...option }, content }
-    }).$mount()
-    mountMessage(messageContainer, messageCell.$el, mixinOption(option))
+    const messageInstance = new this.Vue(MessageEnvironment)
+    messageInstance.option = option
+    messageInstance.content = content
+    messageInstance.theme = this.theme
+    messageInstance.$mount()
+    this.instances.add(messageInstance)
+    mountMessage(messageContainer, messageInstance, mixinOption(option), this.instances)
+    return messageInstance
   },
   info (content, option) {
     option = mixinOption(option)
     option.type = 'info'
-    this.notice(content, option)
+    return this.notice(content, option)
   },
   success (content, option) {
     option = mixinOption(option)
     option.type = 'success'
-    this.notice(content, option)
+    return this.notice(content, option)
   },
   warning (content, option) {
     option = mixinOption(option)
     option.type = 'warning'
-    this.notice(content, option)
+    return this.notice(content, option)
   },
   error (content, option) {
     option = mixinOption(option)
     option.type = 'error'
-    this.notice(content, option)
+    return this.notice(content, option)
   }
 }
 

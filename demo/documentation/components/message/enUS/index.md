@@ -3,4 +3,5 @@
 basic
 icon
 timing
+about-theme
 ```
