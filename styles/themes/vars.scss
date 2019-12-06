@@ -250,7 +250,7 @@ $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
   }
 }
 
-@mixin fade-in-scale-up-transition($block: 'fade-in-scale-up', $origin: inherit, $duration: .2s, $start-scale: 0.9) {
+@mixin fade-in-scale-up-transition($block: 'fade-in-scale-up', $origin: inherit, $duration: .2s, $start-scale: 0.9, $original-transform: ()) {
   &.#{$namespace}-#{$block}--transition-leave-active {
     transform-origin: $origin;
     transition: opacity $duration $slow-out-cubic-bezier, transform $duration $slow-out-cubic-bezier;
@@ -261,11 +261,11 @@ $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
   }
   &.#{$namespace}-#{$block}--transition-enter, &.#{$namespace}-#{$block}--transition-leave-to {
     opacity: 0;
-    transform: scale($start-scale);
+    transform: scale($start-scale) $original-transform;
   }
   &.#{$namespace}-#{$block}--transition-leave, &.#{$namespace}-#{$block}--transition-enter-to {
     opacity: 1; 
-    transform: scale(1);
+    transform: scale(1) $original-transform;
   }
 }
 
