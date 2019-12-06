@@ -1,5 +1,5 @@
 import NNotificationCell from './NotificationCell'
-import { getTheme } from '../../../utils/installThemeableComponent'
+import { getTheme } from '../../../utils/installThemeableProperty'
 
 function setTheme (notificationContainer) {
   let theme = getTheme(this)

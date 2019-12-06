@@ -1,8 +1,8 @@
 /* istanbul ignore file */
 import LoadingBar from './src/main.js'
-import { install } from '../../utils/installThemeableComponent'
+import { install } from '../../utils/installThemeableProperty'
 
-LoadingBar.install = function(Vue) {
+LoadingBar.install = function (Vue) {
   install(Vue, LoadingBar, '$NLoadingBar')
   LoadingBar.Vue = Vue
 }
