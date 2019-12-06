@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import ScrollBar from './src/ScrollbarAdaptor.vue'
+import ScrollBar from './src/Scrollbar.vue'
 
 ScrollBar.install = function (Vue) {
   Vue.component(ScrollBar.name, ScrollBar)

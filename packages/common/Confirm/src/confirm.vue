@@ -1,11 +1,13 @@
 <template>
   <n-modal
     v-model="active"
+    :theme="theme"
     :activate-event="event"
     :mask-closable="maskClosable"
     @after-hide="handleAfterHide"
   >
     <n-confirm
+      :theme="theme"
       :type="type"
       :content="content"
       :positive-text="positiveText"

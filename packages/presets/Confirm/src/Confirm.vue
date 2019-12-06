@@ -2,8 +2,9 @@
   <div
     class="n-confirm"
     :class="{
-      [`n-${theme}-theme`]: theme
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
+    :style="synthesizedStyle"
   >
     <div class="n-confirm-title">
       <span class="n-confirm-title-content">
@@ -74,7 +75,9 @@ import iosCheckmarkCircle from '../../../icons/ios-checkmark-circle'
 import mdClose from '../../../icons/md-close'
 import iosHelpCircle from '../../../icons/ios-help-circle'
 import iosCloseCircle from '../../../icons/ios-close-circle'
+import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import asthemecontext from '../../../mixins/asthemecontext'
 
 export default {
   name: 'NConfirm',
@@ -86,7 +89,7 @@ export default {
     iosCheckmarkCircle,
     iosCloseCircle
   },
-  mixins: [themeable],
+  mixins: [withapp, themeable, asthemecontext],
   props: {
     type: {
       type: String,

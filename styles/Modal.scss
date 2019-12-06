@@ -9,6 +9,9 @@
     @include b(card) {
       background-color: $--n-dialog-color;
     }
+    @include b(confirm) {
+      width: 80vw;
+    }
     & > .n-scrollbar {
       & > .n-scrollbar-container > .n-scrollbar-content {
         min-height: 100%;

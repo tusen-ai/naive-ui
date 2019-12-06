@@ -4,7 +4,8 @@
 @include themes-mixin {
   @include b(confirm) {
     @include once {
-      width: 80vw;
+      box-sizing: border-box;
+      width: 100%;
       max-width: 446px;
       margin: auto;
       border-radius: 9px;
@@ -64,7 +65,6 @@
       color: $--confirm-title-color;
     }
     background: $--confirm-background-color;
-    box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.16);
     color: $--confirm-color;
   }
 }

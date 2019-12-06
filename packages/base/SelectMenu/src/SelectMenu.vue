@@ -255,9 +255,7 @@ export default {
         this.pendingOption = this.id2Option.get(id)
         this.pendingOptionElement = el
         this.updateLightBarPosition(this.pendingOptionElement)
-        if (this.$refs.scrollbar) {
-          this.$refs.scrollbar.scrollToElement(this.pendingOptionElement)
-        }
+        this.$refs.scrollbar.scrollToElement(this.pendingOptionElement)
       }
     }
   }

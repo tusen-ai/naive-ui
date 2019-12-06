@@ -1,5 +1,9 @@
 <template>
+  <div v-if="withoutScrollbar">
+    <slot />
+  </div>
   <div
+    v-else
     class="n-scrollbar"
     :class="{
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
@@ -79,6 +83,10 @@ export default {
     duration: {
       type: Number,
       default: 0
+    },
+    withoutScrollbar: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
