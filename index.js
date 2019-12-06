@@ -67,6 +67,7 @@ import Result from './packages/common/Result'
 import Thing from './packages/common/Thing'
 import AutoComplete from './packages/common/AutoComplete'
 import Empty from './packages/common/Empty'
+import Element from './packages/common/Element'
 
 /**
  * debug usage
@@ -147,6 +148,7 @@ function install (Vue) {
   Thing.install(Vue)
   AutoComplete.install(Vue)
   Empty.install(Vue)
+  Element.install(Vue)
 }
 
 export default {

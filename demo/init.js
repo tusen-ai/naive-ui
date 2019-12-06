@@ -74,6 +74,7 @@ import result from './documentation/components/result'
 import thing from './documentation/components/thing'
 import autoComplete from './documentation/components/autoComplete'
 import empty from './documentation/components/empty'
+import theme from './documentation/theme'
 
 import demo from './demo'
 import ComponentDemo from './utils/ComponentDemo'
@@ -199,7 +200,8 @@ const routes = [
       { path: '/n-result', component: result },
       { path: '/n-thing', component: thing },
       { path: '/n-auto-complete', component: autoComplete },
-      { path: '/n-empty', component: empty }
+      { path: '/n-empty', component: empty },
+      { path: '/n-theme', component: theme }
     ])
   },
   {

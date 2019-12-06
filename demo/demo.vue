@@ -53,8 +53,8 @@ export default {
           path: `/${this.lang}/${this.theme}` + '/dev-guildlines'
         },
         {
-          name: 'Develop Status',
-          path: `/${this.lang}/${this.theme}` + '/status'
+          name: 'Create Themed Component',
+          path: `/${this.lang}/${this.theme}` + '/n-theme'
         },
         {
           name: 'Nimbus Components',
