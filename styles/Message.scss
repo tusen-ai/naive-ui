@@ -29,7 +29,7 @@
   @include b(message) {
     @include once {
       display: flex;
-      transition: opacity .3s $default-cubic-bezier, transform .3s $default-cubic-bezier,  max-height .3s $default-cubic-bezier, margin-bottom .3s $default-cubic-bezier;
+      transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier, transform .3s $default-cubic-bezier,  max-height .3s $default-cubic-bezier, margin-bottom .3s $default-cubic-bezier;
       max-height: 40px;
       opacity: 1;
       margin-bottom: 12px;
