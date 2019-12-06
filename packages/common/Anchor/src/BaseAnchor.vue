@@ -8,7 +8,7 @@
   >
     <div
       ref="slot"
-      class="n-anchor-slot"
+      class="n-anchor-link-background"
     />
     <div class="n-anchor-rail">
       <div
