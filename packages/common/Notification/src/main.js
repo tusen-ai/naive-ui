@@ -1,108 +1,98 @@
-import NNotificationCell from './NotificationCell'
-import { getTheme } from '../../../utils/installThemeableProperty'
+import NNotificationEnvironment from './NotificationEnvironment'
+import NNotificationContainer from './notificationContainer'
+import { getTheme } from '../../../utils/installThemeAwarableProperty'
 
-function setTheme (notificationContainer) {
-  let theme = getTheme(this)
-  const themeClasses = Array.from(notificationContainer.classList).filter(c =>
-    c.endsWith('-theme')
-  )
-  themeClasses.forEach(c => notificationContainer.classList.remove(c))
-  if (theme) notificationContainer.classList.add(`n-${theme}-theme`)
-}
-
-function attachNotificationContainer () {
-  let notificationContainer = document.querySelector(
-    '.n-notification.n-notification__container'
-  )
-  if (!notificationContainer) {
-    notificationContainer = document.createElement('div')
-    notificationContainer.classList.add(
-      'n-notification',
-      'n-notification__container'
-    )
-    notificationContainer.style = `
-          z-index: 4000;
-          position: fixed;
-          left: 0;
-          right: 15px;
-          top: 10px;
-          height: 0;
-          overflow: visible;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-end;
-        `
-    document.body.appendChild(notificationContainer)
+function mountNotificationContainer (Vue) {
+  let container = Notification.container
+  if (!container) {
+    container = new Vue(NNotificationContainer)
+    container.$mount()
+    Notification.container = container
+    document.body.appendChild(container.$el)
   }
-  return notificationContainer
+  return container
 }
 
-const defaultOptions = {
-  emergeTransitionTimeout: 300,
-  vanishTransitionTimeout: 300
-}
-
-const defaultNotification = {
-  duration: null,
-  avatar: null,
-  action: () => {}
-}
-
-function mountNotificationEl (container, vm, option) {
-  const el = vm.$el
-  el.classList.add('is-going-to-emerge')
-  container.appendChild(el)
-  el.getBoundingClientRect()
-  el.classList.remove('is-going-to-emerge')
-  el.style['max-height'] = `${30 +
-    vm.$refs.body.getBoundingClientRect().height}px`
-}
-
-function removeNotificationEl (container, el, option, notificationVueInstance) {
-  setTimeout(function () {
-    if (container.contains(el)) {
-      const notification = notificationVueInstance.notification
-      container.removeChild(el)
-      if (notification.afterClose) {
-        notification.afterClose(notificationVueInstance)
-      }
+function unmountNotificationContainer () {
+  const container = Notification.container
+  if (container) {
+    const el = container.$el
+    if (el && el.parentElement) {
+      el.parentElement.removeChild(el)
     }
-  }, option.vanishTransitionTimeout)
-  el.classList.add('is-vanishing')
-  el.style['max-height'] = '0'
+    container.$destroy()
+    Notification.container = null
+  }
+}
+
+function mountNotification (container, instance) {
+  Notification.instanceCount++
+  Notification.instances.add(instance)
+  instance.$mount()
+  const el = instance.$el
+  const slot = container.$refs.scrollbar.$refs.scrollContent
+  slot.appendChild(el)
+}
+
+function unmountNotification (instance) {
+  Notification.instanceCount--
+  Notification.instances.delete(instance)
+  const el = instance.$el
+  if (el && el.parentElement) {
+    el.parentElement.removeChild(el)
+  }
+  instance.$destroy()
+  if (!Notification.instanceCount) {
+    unmountNotificationContainer()
+  }
+}
+
+function updateNotification (instance, option) {
+  Object.keys(option).forEach(key => {
+    if (instance.hasOwnProperty(key)) {
+      instance[key] = option[key]
+    }
+  })
 }
 
 const Notification = {
-  notify (notification, type = 'success', option = defaultOptions) {
-    notification = { ...defaultNotification, ...notification }
-    const notificationContainer = attachNotificationContainer()
-    setTheme.call(this, notificationContainer)
-    const notificationCell = new Notification.Vue({
-      ...NNotificationCell,
-      propsData: { type, notification: notification },
-      mounted () {
-        if (notification.duration) {
-          setTimeout(this.close, notification.duration)
-        }
-      },
-      methods: {
-        close () {
-          if (notification.beforeClose) {
-            let shouldClose = false
-            notification.beforeClose(() => {
-              shouldClose = true
-            })
-            if (!shouldClose) return
-          }
-          removeNotificationEl(notificationContainer, this.$el, option, this)
-        },
-        handleActionClick () {
-          notification.action(this)
+  theme: null,
+  instances: new WeakSet(),
+  instanceCount: 0,
+  configProvidersToWatchThemeChange: new WeakSet(),
+  container: null,
+  handleThemeChange (theme) {
+    const container = Notification.container
+    if (container) {
+      container.theme = theme
+    }
+  },
+  notify (options, type = 'default') {
+    const { theme, configProvider } = getTheme(this)
+    const container = mountNotificationContainer(Notification.Vue)
+    if (container) {
+      container.theme = theme
+    }
+    const configProviders = Notification.configProvidersToWatchThemeChange
+    if (!configProviders.has(configProvider)) {
+      configProviders.add(configProvider)
+      configProvider.$watch('synthesizedTheme', Notification.handleThemeChange)
+    }
+    const notificationOptions = { theme, type, ...options }
+    const instance = new Notification.Vue(Object.assign(
+      NNotificationEnvironment,
+      {
+        propsData: {
+          onDestroy: unmountNotification
         }
       }
-    }).$mount()
-    mountNotificationEl(notificationContainer, notificationCell, option)
+    ))
+    updateNotification(instance, notificationOptions)
+    mountNotification(container, instance)
+    return this.instance
   }
 }
+
+window.test = Notification.instances
 
 export default Notification

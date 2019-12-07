@@ -1,5 +1,5 @@
 <template>
-  <div v-if="withoutScrollbar">
+  <div v-if="withoutScrollbar" ref="scrollContent">
     <slot />
   </div>
   <div

@@ -1,4 +1,5 @@
 # Notification
 ```demo
 basic
+type
 ```

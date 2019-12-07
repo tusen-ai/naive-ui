@@ -13,7 +13,7 @@ export default {
     notify1 () {
       this.$nNotify({
         title: `Wouldn't it be Nice`,
-        subtitle: 'From the Beach Boys',
+        description: 'From the Beach Boys',
         content: `Wouldn't it be nice if we were olderxxxxxxxxxxxxxxxxxxxxxxxx
 Then we wouldn't have to wait so long
 And wouldn't it be nice to live together
@@ -26,7 +26,7 @@ In the kind of world where we belong`,
           }
         }],
         avatar: null,
-        beforeClose: (next) => {
+        onClose: (next) => {
           next()
         },
         afterClose: (notificationVueInstance) => {
@@ -44,7 +44,7 @@ I cant get no satisfaction
 Cause I try and I try and I try and I try
 I cant get no, I cant get no`,
         meta: '2019-5-27 15:11',
-        beforeClose: (next) => {
+        onClose: (next) => {
           if (markAsRead) next()
         },
         action: [
@@ -62,5 +62,10 @@ I cant get no, I cant get no`,
       })
     }
   }
+}
+```
+```css
+.n-button {
+  margin: 0 12px 8px 0;
 }
 ```

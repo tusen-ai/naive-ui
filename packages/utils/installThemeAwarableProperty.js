@@ -30,8 +30,7 @@ function getTheme (componentInstance, property, configProviderToWatchThemeChange
       configProviderToWatchThemeChange.add(lastThemedConfigProvider)
     }
   }
-  console.log('getTheme', theme)
-  return theme
+  return { theme, configProvider: lastThemedConfigProvider }
 }
 
 function install (Vue, property, name) {
@@ -44,7 +43,8 @@ function install (Vue, property, name) {
     {
       apply (target, thisArg, argumentsList) {
         if (thisArg instanceof Vue) {
-          property.theme = getTheme(thisArg, property, configProviderToWatchThemeChange)
+          const { theme } = getTheme(thisArg, property, configProviderToWatchThemeChange)
+          property.theme = theme
         }
         return target.bind(thisArg)(...argumentsList)
       }
