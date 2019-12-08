@@ -26,7 +26,6 @@ function unmountNotificationContainer () {
 }
 
 function mountNotification (container, instance) {
-  Notification.instanceCount++
   Notification.instances.add(instance)
   instance.$mount()
   const el = instance.$el
@@ -35,14 +34,13 @@ function mountNotification (container, instance) {
 }
 
 function unmountNotification (instance) {
-  Notification.instanceCount--
   Notification.instances.delete(instance)
   const el = instance.$el
   if (el && el.parentElement) {
     el.parentElement.removeChild(el)
   }
   instance.$destroy()
-  if (!Notification.instanceCount) {
+  if (!Notification.instances.size) {
     unmountNotificationContainer()
   }
 }
@@ -57,8 +55,7 @@ function updateNotification (instance, option) {
 
 const Notification = {
   theme: null,
-  instances: new WeakSet(),
-  instanceCount: 0,
+  instances: new Set(),
   configProvidersToWatchThemeChange: new WeakSet(),
   container: null,
   handleThemeChange (theme) {

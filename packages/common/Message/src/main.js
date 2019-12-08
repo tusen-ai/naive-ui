@@ -1,78 +1,77 @@
 import MessageEnvironment from './MessageEnvironment'
+import MessageContainer from './MessageContainer'
 
-function attachMessageContainer () {
-  let messageContainer = document.querySelector('.n-message-container')
-  if (!messageContainer) {
-    messageContainer = document.createElement('div')
-    messageContainer.classList.add('n-message-container')
-    messageContainer.style = `z-index: ${this.options.zIndex}; top: ${this.options.top}px;`
-    document.body.appendChild(messageContainer)
+function mountMessageContainer () {
+  if (!Message.container) {
+    const container = new Message.Vue(MessageContainer)
+    container.$mount()
+    document.body.appendChild(container.$el)
+    Message.container = container
   }
-  return messageContainer
+  return Message.container
 }
 
-function detachMessageContainer () {
-  let messageContainer = document.querySelector('.n-message-container')
-  if (messageContainer) {
-    messageContainer.parentElement.removeChild(messageContainer)
+function unmountMessageContainer () {
+  const container = Message.container
+  if (Message.instances.size) {
+    const instances = Array.from(Message.instances)
+    instances.forEach(instance => unmountMessage(instance))
+  }
+  if (container) {
+    const el = container.$el
+    if (el) {
+      el.parentElement.removeChild(el)
+    }
+    Message.container = null
+    container.$destroy()
   }
 }
 
-function mountMessage (container, instance, option, instances) {
+function createMessage (content, option) {
+  const instance = new Message.Vue(Object.assign(MessageEnvironment, {
+    propsData: {
+      duration: option.duration,
+      onDestroy: unmountMessage
+    }
+  }))
+  updateMessage(instance, content, option)
+  return instance
+}
+
+function mountMessage (instance) {
+  if (!Message.container) throw new Error('[naive-ui/message]: container not exist when try to mount message')
+  Message.instances.add(instance)
+  instance.$mount()
+  Message.container.$el.appendChild(instance.$el)
+}
+
+function updateMessage (instance, content, option) {
+  instance.icon = option.icon
+  instance.type = option.type
+  instance.content = content
+  instance.theme = Message.theme
+}
+
+function unmountMessage (instance) {
+  Message.instances.delete(instance)
   const el = instance.$el
-  el.classList.add('n-message--enter')
-  container.appendChild(el)
-  el.getBoundingClientRect()
-  el.classList.remove('n-message--enter')
-  setTimeout(function () {
-    setTimeout(function () {
-      setTimeout(function () {
-        instance.$destroy()
-        instances.delete(instance)
-        container.removeChild(el)
-        if (!instances.size) {
-          detachMessageContainer()
-        }
-      }, option.vanishTransitionTimeout)
-      el.classList.add('n-message--leave')
-    }, option.duration)
-  }, option.emergeTransitionTimeout)
-}
-
-/**
- * Create options for message
- * @param {Object} option
- * @param {string} option.type
- * @param {number} option.duration  by millisecond
- * @param {string} option.color
- * @param {string} option.icon
- * @param {string} option.iconColor
- */
-function mixinOption (option) {
-  const defaultOptions = {
-    duration: 3000,
-    emergeTransitionTimeout: 300,
-    vanishTransitionTimeout: 300,
-    type: 'success',
-    color: null,
-    icon: null,
-    iconColor: null
+  if (el && el.parentElement) {
+    el.parentElement.removeChild(el)
   }
-  if (option) {
-    return { ...defaultOptions, ...option }
-  } else {
-    return defaultOptions
+  instance.$destroy()
+  if (!Message.instances.size) {
+    unmountMessageContainer()
   }
 }
 
-const NMessage = {
+const Message = {
   Vue: null,
+  container: null,
   options: {
     zIndex: 6000,
     top: 20
   },
   theme: null,
-  attachMessageContainer,
   instances: new Set(),
   handleThemeChange (theme) {
     for (const instance of this.instances) {
@@ -80,36 +79,31 @@ const NMessage = {
     }
   },
   notice (content, option) {
-    const messageContainer = this.attachMessageContainer()
-    const messageInstance = new this.Vue(MessageEnvironment)
-    messageInstance.option = option
-    messageInstance.content = content
-    messageInstance.theme = this.theme
-    messageInstance.$mount()
-    this.instances.add(messageInstance)
-    mountMessage(messageContainer, messageInstance, mixinOption(option), this.instances)
-    return messageInstance
+    mountMessageContainer()
+    const instance = createMessage(content, option)
+    mountMessage(instance)
+    return instance
   },
-  info (content, option) {
-    option = mixinOption(option)
+  info (content, option = {}) {
     option.type = 'info'
     return this.notice(content, option)
   },
-  success (content, option) {
-    option = mixinOption(option)
+  success (content, option = {}) {
     option.type = 'success'
     return this.notice(content, option)
   },
-  warning (content, option) {
-    option = mixinOption(option)
+  warning (content, option = {}) {
     option.type = 'warning'
     return this.notice(content, option)
   },
-  error (content, option) {
-    option = mixinOption(option)
+  error (content, option = {}) {
     option.type = 'error'
+    return this.notice(content, option)
+  },
+  loading (content, option = {}) {
+    option.type = 'loading'
     return this.notice(content, option)
   }
 }
 
-export default NMessage
+export default Message

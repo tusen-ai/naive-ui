@@ -12,6 +12,9 @@
 <n-button @click="emitSuccess">
   Success
 </n-button>
+<n-button @click="emitLoading">
+  Loading
+</n-button>
 ```
 ```js
 export default {
@@ -33,6 +36,11 @@ export default {
     emitSuccess() {
       this.$NMessage.success(
         "'Cause you walked hand in hand With another man in my place"
+      )
+    },
+    emitLoading() {
+      this.$NMessage.loading(
+        "If I were you, I will realize that I love you more than any other guy"
       )
     }
   }
