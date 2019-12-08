@@ -150,4 +150,30 @@
     "warning": white,
     "error": white
   ) !global;
+  $--text-button-color: (
+    "default": $--n-secondary-text-color,
+    "default-hover": $--n-secondary-text-color,
+    "default-active": $--n-secondary-text-color,
+    "default-focus": $--n-secondary-text-color,
+    "primary": $--primary-6,
+    "primary-hover": $--primary-5,
+    "primary-active": $--primary-7,
+    "primary-focus": $--primary-5,
+    "info": $--info-6,
+    "info-hover": $--info-5,
+    "info-active": $--info-7,
+    "info-focus": $--info-5,
+    "success": $--success-6,
+    "success-hover": $--success-5,
+    "success-active": $--success-7,
+    "success-focus": $--success-5,
+    "warning": $--warning-6,
+    "warning-hover": $--warning-5,
+    "warning-active": $--warning-7,
+    "warning-focus": $--warning-5,
+    "error": $--error-6,
+    "error-hover": $--error-5,
+    "error-active": $--error-7,
+    "error-focus": $--error-5,
+  ) !global;
 }

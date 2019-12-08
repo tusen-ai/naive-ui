@@ -7,9 +7,11 @@
     $font-size: map-get($map: $button-font-size, $key: $size);
     border-radius: $button-border-radius;
     font-size: $font-size;
-    height: $height;
-    line-height: $height;
-    padding: map-get($map: $button-padding, $key: $size);
+    @include not-m(text) {
+      height: $height;
+      line-height: $height;
+      padding: map-get($map: $button-padding, $key: $size);
+    }
     white-space: nowrap;
     @include m(round) {
       padding: map-get($map: $round-button-padding, $key: $size);
@@ -22,7 +24,7 @@
     }
     @include e(content) {
       display: inline-block;
-      line-height: $height;
+      line-height: inherit;
     }
     @include e(icon) {
       display: inline-block;
@@ -60,6 +62,11 @@
         }
       }
     }
+    @include m(text) {
+      padding: 0;
+      font-weight: 700;
+      border-radius: 0;
+    }
   }
 }
 
@@ -68,6 +75,39 @@
     color: map-get($map: $button-color, $key: $type);
     background-color: map-get($map: $button-background-color, $key: $type);
     box-shadow: map-get($map: $button-box-shadow, $key: $type);
+    @include m(text) {
+      box-shadow: none;
+      background-color: transparent;
+      color: map-get($--text-button-color, $type);
+      @include not-m(disabled) {
+        @include m(rippling) {
+          &::after {
+            display: none;
+          }
+        }
+        @include m(enter-pressed) {
+          background-color: transparent;
+          color: map-get($--text-button-color, $type + '-active');
+        }
+        &:not(:active):focus {
+          @include not-m(enter-pressed) {
+            background-color: transparent;
+            color: map-get($--text-button-color, $type + '-focus');
+          } 
+        }
+        @include not-m(enter-pressed) {
+          &:hover {
+            background-color: transparent;
+            color: map-get($--text-button-color, $type + '-hover');
+          }
+          &:active {
+            background-color: transparent;
+            color: map-get($--text-button-color, $type + '-active');
+
+          }
+        }
+      }
+    }
     @include m(ghost) {
       background-color: map-get($map: $ghost-button-background-color, $key: $type);
       color: map-get($map: $ghost-button-color, $key: $type);

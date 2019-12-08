@@ -12,6 +12,7 @@
       'n-button--rippling': rippling,
       'n-button--enter-pressed': enterPressed,
       'n-button--ghost': ghost,
+      'n-button--text': text,
       [`n-button--${iconPosition}-icon`]: iconPosition && (hasIcon || loading) && !noTextContent,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
@@ -56,11 +57,6 @@
     >
       <slot />
     </div>
-    <!-- <span
-      v-else
-      class="n-button__content-aligner"
-      style="visibility: hidden;"
-    >&nbsp;</span> -->
     <transition
       name="n-fade-in-width-expand"
     >
@@ -109,6 +105,10 @@ export default {
     hollowoutable
   ],
   props: {
+    text: {
+      type: Boolean,
+      default: false
+    },
     block: {
       type: Boolean,
       default: false
@@ -140,10 +140,6 @@ export default {
       default: false
     },
     focusable: {
-      type: Boolean,
-      default: true
-    },
-    text: {
       type: Boolean,
       default: true
     },
@@ -180,6 +176,7 @@ export default {
     },
     simulateHollowOut () {
       if (this.ghost) return false
+      if (this.text) return false
       if (['primary', 'link', 'info', 'success', 'warning', 'error'].includes(this.type)) return true
       else return false
     },
@@ -209,17 +206,19 @@ export default {
     handleClick (e) {
       if (!this.disabled) {
         this.$emit('click', e)
-        window.clearTimeout(this.rippleTimer)
-        this.rippleTimer = null
-        this.rippling = false
-        this.$nextTick().then(() => {
-          this.$el.getBoundingClientRect()
-          this.rippling = true
-          this.rippleTimer = window.setTimeout(() => {
-            this.rippling = false
-            this.rippleTimer = null
-          }, 600)
-        })
+        if (!this.text) {
+          window.clearTimeout(this.rippleTimer)
+          this.rippleTimer = null
+          this.rippling = false
+          this.$nextTick().then(() => {
+            this.$el.getBoundingClientRect()
+            this.rippling = true
+            this.rippleTimer = window.setTimeout(() => {
+              this.rippling = false
+              this.rippleTimer = null
+            }, 600)
+          })
+        }
         if (this.synthesizedFocusable) {
           this.$el.focus()
         }
