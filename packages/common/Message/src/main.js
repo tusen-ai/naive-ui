@@ -15,7 +15,7 @@ function unmountMessageContainer () {
   const container = Message.container
   if (Message.instances.size) {
     const instances = Array.from(Message.instances)
-    instances.forEach(instance => unmountMessage(instance))
+    instances.forEach(unmountMessage)
   }
   if (container) {
     const el = container.$el

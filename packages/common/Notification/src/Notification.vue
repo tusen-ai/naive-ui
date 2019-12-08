@@ -2,13 +2,13 @@
   <div
     :class="{
       [`n-${theme}-theme`]: theme,
-      'n-notification--no-avatar': !avatar && !type,
+      'n-notification--no-avatar': noAvatar,
       [`n-notification--${type}-type`]: type
     }"
     class="n-notification"
   >
     <div
-      v-if="avatar || type"
+      v-if="!noAvatar"
       class="n-notification__avatar"
     >
       <render v-if="avatar" :render="avatar" />
@@ -20,6 +20,7 @@
       </n-icon>
     </div>
     <div
+      v-if="closable"
       class="n-notification__close"
       @click="handleCloseClick"
     >
@@ -31,7 +32,7 @@
       ref="body"
       class="n-notification-main"
     >
-      <div class="n-notification-main__header">
+      <div v-if="title" class="n-notification-main__header">
         <render :render="title" />
       </div>
       <div
@@ -40,8 +41,8 @@
       >
         <render :render="description" />
       </div>
-      <pre class="n-notification-main__content"><render :render="content" /></pre>
-      <div v-if="meta && action" class="n-notification-main-footer">
+      <pre v-if="content" class="n-notification-main__content"><render :render="content" /></pre>
+      <div v-if="meta || action" class="n-notification-main-footer">
         <div v-if="meta" class="n-notification-main-footer__meta">
           <render :render="meta" />
         </div>
@@ -54,6 +55,7 @@
 </template>
 
 <script>
+import themeable from '../../../mixins/themeable'
 import asthemecontext from '../../../mixins/asthemecontext'
 import NIcon from '../../Icon'
 import mdClose from '../../../icons/md-close'
@@ -73,8 +75,12 @@ export default {
     mdInformationCircle,
     mdCloseCircle
   },
-  mixins: [ asthemecontext ],
+  mixins: [ themeable, asthemecontext ],
   props: {
+    closable: {
+      type: Boolean,
+      default: true
+    },
     type: {
       validator (value) {
         return ['info', 'success', 'warning', 'error', 'default'].includes(value)
@@ -104,10 +110,11 @@ export default {
     action: {
       type: [Object, Function],
       default: null
-    },
-    theme: {
-      type: String,
-      default: null
+    }
+  },
+  computed: {
+    noAvatar () {
+      return !(this.avatar || this.type !== 'default')
     }
   },
   methods: {

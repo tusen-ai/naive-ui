@@ -17,15 +17,10 @@
 export default {
   methods: {
     notify (type) {
-      this.$nNotify({
-        title: `Wouldn't it be Nice`,
-        description: 'From the Beach Boys',
-        content: `Wouldn't it be nice if we were older.
-Then we wouldn't have to wait so long.
-And wouldn't it be nice to live together.
-In the kind of world where we belong.`,
-        meta: '2019-5-27 15:11'
-      }, type)
+      this.$NNotification[type]({
+        content: `Keep Calm And Make Epic Shit`,
+        meta: 'From Evan You'
+      })
     }
   }
 }

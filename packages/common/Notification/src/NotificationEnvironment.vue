@@ -7,6 +7,10 @@ export default {
     onDestroy: {
       type: Function,
       required: true
+    },
+    duration: {
+      type: Number,
+      default: 0
     }
   },
   data () {
@@ -20,15 +24,22 @@ export default {
       content: null,
       meta: null,
       action: null,
-      actions: null,
-      onClose: next => next()
+      closable: true,
+      onClose: next => next(),
+      onAfterOpen: () => {},
+      onAfterClose: () => {}
+    }
+  },
+  mounted () {
+    if (this.duration) {
+      window.setTimeout(this.close, this.duration)
     }
   },
   methods: {
     deactivate () {
-      this.hide()
+      this.close()
     },
-    hide () {
+    close () {
       this.active = false
     },
     handleEnter () {
@@ -44,6 +55,7 @@ export default {
     handleAfterEnter () {
       this.$el.style.height = null
       this.$el.style.maxHeight = null
+      this.onAfterOpen(this)
     },
     handleBeforeLeave () {
       this.$el.style.maxHeight = this.$el.offsetHeight + 'px'
@@ -56,9 +68,10 @@ export default {
     },
     handleAfterLeave () {
       this.onDestroy(this)
+      this.onAfterClose()
     },
     handleClose () {
-      this.onClose(this.hide)
+      this.onClose(this.close)
     }
   },
   render (h) {
@@ -85,7 +98,7 @@ export default {
           content: this.content,
           meta: this.meta,
           action: this.action,
-          actions: this.actions
+          closable: this.closable
         },
         on: {
           close: () => {

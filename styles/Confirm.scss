@@ -59,7 +59,7 @@
       }
       @include e(close-mark) {
         path {
-          fill: $--n-secondary-text-color;
+          fill: $--confirm-close-fill;
         }
       }
       color: $--confirm-title-color;

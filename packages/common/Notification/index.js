@@ -1,9 +1,9 @@
 import Notification from './src/main.js'
+import { install } from '../../utils/installThemeAwarableProperty'
 
 Notification.install = function (Vue) {
   Notification.Vue = Vue
-  Vue.prototype.$NNotification = Notification
-  Vue.prototype.$nNotify = Notification.notify
+  install(Vue, Notification, '$NNotification')
 }
 
 export default Notification

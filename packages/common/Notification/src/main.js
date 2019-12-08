@@ -1,11 +1,14 @@
 import NNotificationEnvironment from './NotificationEnvironment'
 import NNotificationContainer from './notificationContainer'
-import { getTheme } from '../../../utils/installThemeAwarableProperty'
 
-function mountNotificationContainer (Vue) {
+function mountNotificationContainer () {
   let container = Notification.container
   if (!container) {
-    container = new Vue(NNotificationContainer)
+    container = new Notification.Vue(Object.assign(NNotificationContainer, {
+      propsData: {
+        scrollable: Notification.scrollable
+      }
+    }))
     container.$mount()
     Notification.container = container
     document.body.appendChild(container.$el)
@@ -15,6 +18,10 @@ function mountNotificationContainer (Vue) {
 
 function unmountNotificationContainer () {
   const container = Notification.container
+  if (Notification.instances.size) {
+    const instances = Array.from(Notification.instances)
+    instances.forEach(unmountNotification)
+  }
   if (container) {
     const el = container.$el
     if (el && el.parentElement) {
@@ -25,12 +32,34 @@ function unmountNotificationContainer () {
   }
 }
 
-function mountNotification (container, instance) {
+function createNotification (option) {
+  const instance = new Notification.Vue(Object.assign(
+    NNotificationEnvironment,
+    {
+      propsData: {
+        onDestroy: unmountNotification,
+        duration: option.duration
+      }
+    }
+  ))
+  updateNotification(instance, option)
+  return instance
+}
+
+function mountNotification (instance) {
+  if (!Notification.container) {
+    throw new Error('[naive-ui/notification]: container not exist when try to mount notification')
+  }
   Notification.instances.add(instance)
   instance.$mount()
   const el = instance.$el
-  const slot = container.$refs.scrollbar.$refs.scrollContent
-  slot.appendChild(el)
+  if (Notification.scrollable) {
+    const slot = Notification.container.$refs.scrollbar.$refs.scrollContent
+    slot.appendChild(el)
+  } else {
+    const slot = Notification.container.$el
+    slot.appendChild(el)
+  }
 }
 
 function unmountNotification (instance) {
@@ -56,40 +85,48 @@ function updateNotification (instance, option) {
 const Notification = {
   theme: null,
   instances: new Set(),
-  configProvidersToWatchThemeChange: new WeakSet(),
   container: null,
+  _scrollable: true,
+  get scrollable () {
+    return Notification._scrollable
+  },
+  set scrollable (value) {
+    if (value !== Notification._scrollable) {
+      Notification._scrollable = value
+      unmountNotificationContainer()
+    }
+  },
   handleThemeChange (theme) {
     const container = Notification.container
     if (container) {
       container.theme = theme
     }
+    Notification.instances.forEach(instance => {
+      instance.theme = theme
+    })
   },
-  notify (options, type = 'default') {
-    const { theme, configProvider } = getTheme(this)
-    const container = mountNotificationContainer(Notification.Vue)
-    if (container) {
-      container.theme = theme
+  open (options, type = 'default') {
+    mountNotificationContainer()
+    if (Notification.container && Notification.theme) {
+      Notification.container.theme = Notification.theme
     }
-    const configProviders = Notification.configProvidersToWatchThemeChange
-    if (!configProviders.has(configProvider)) {
-      configProviders.add(configProvider)
-      configProvider.$watch('synthesizedTheme', Notification.handleThemeChange)
-    }
-    const notificationOptions = { theme, type, ...options }
-    const instance = new Notification.Vue(Object.assign(
-      NNotificationEnvironment,
-      {
-        propsData: {
-          onDestroy: unmountNotification
-        }
-      }
-    ))
-    updateNotification(instance, notificationOptions)
-    mountNotification(container, instance)
-    return this.instance
+    const notificationOptions = { theme: Notification.theme, type, ...options }
+    const instance = createNotification(notificationOptions)
+    mountNotification(instance)
+    return instance
+  },
+  success (option) {
+    return this.open(option, 'success')
+  },
+  info (option) {
+    return this.open(option, 'info')
+  },
+  warning (option) {
+    return this.open(option, 'warning')
+  },
+  error (option) {
+    return this.open(option, 'error')
   }
 }
-
-window.test = Notification.instances
 
 export default Notification

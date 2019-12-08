@@ -65,6 +65,10 @@
   $--n-warning-color: $--warning-6 !global;
   $--n-error-color: $--error-6 !global;
 
+  $--n-text-color: $--text-1 !global;
+  $--n-secondary-text-color: $--text-2 !global;
+  $--n-meta-text-color: $--text-3 !global;
+  $--n-close-color: $--text-3 !global;
   $--n-selected-color: $--neutral-7 !global;
   $--n-divider-color: $--neutral-7 !global;
   $--n-alpha-divider-color: $--overlay-7 !global;
@@ -72,8 +76,7 @@
   $--n-alpha-border-color: $--overlay-6 !global;
   $--n-popover-color: $--neutral-10 !global;
   $--n-table-header-color: $--neutral-8 !global;
-  $--n-secondary-text-color: $--neutral-3 !global;
-  $--n-text-color: $--neutral-2 !global;
+
   $--n-disabled-text-color: $--neutral-5 !global;
   $--n-card-color: $--neutral-10 !global;
   $--n-dialog-color: $--neutral-10 !global;
