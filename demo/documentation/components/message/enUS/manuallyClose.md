@@ -4,7 +4,7 @@
   Open
 </n-button>
 <n-button @click="closeMessage">
-  Cloase
+  Close
 </n-button>
 ```
 ```js
