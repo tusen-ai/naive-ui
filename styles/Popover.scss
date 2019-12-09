@@ -1,35 +1,44 @@
 @import "./mixins/mixins.scss";
 @import "./themes/vars.scss";
 
-@mixin popover-transition {
-  &.n-popover-fade-enter-to, &.n-popover-fade-leave {
+@mixin popover-content-transition {
+  &#{&}-transition-enter-to, &#{&}-transition-leave {
     transform:  scaleX(.999999); // scale is set to 99999 to get rid of a ridiculous render bug of chrome
     opacity: 1;
   }
-  &.n-popover-fade-enter, &.n-popover-fade-leave-to {
+  &#{&}-transition-enter, &#{&}-transition-leave-to {
     opacity: 0;
     transform: scale(.85);
   }
-  &.n-popover-fade-enter-active {
+  &#{&}-transition-enter-active {
     transition: opacity .15s $fast-in-cubic-bezier, transform .15s $fast-in-cubic-bezier;
   }
-  &.n-popover-fade-leave-active {
+  &#{&}-transition-leave-active {
     transition: opacity .15s $slow-out-cubic-bezier, transform .15s $slow-out-cubic-bezier;
   }
 }
 
 @include themes-mixin {
   @include b(popover-content) {
-    $popover-arrow-width: 6px;
     @include once {
+      @include popover-content-transition;
       transition: background-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier;
-      @include popover-transition;
       transform-origin: inherit;
       transform: scale(.99999);
       position: relative;
       border-radius: 6px;
-      font-size: 12px;
-      opacity: 1;
+      font-size: 13px;
+      @include b(popover-arrow) {
+        transition: border-color .3s $default-cubic-bezier;
+        border-width: 6px;
+        pointer-events: none;
+        position: absolute;
+        display: block;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+      }
       @include m(without-arrow) {
         &[n-placement$="top-start"] {
           margin-bottom: 6px;
@@ -74,7 +83,7 @@
       }
       @include b(popover-arrow) {
         @include once {
-          bottom: -2 * $popover-arrow-width;
+          bottom: -2 * $--popover-arrow-width;
           left: 10px;
         }
         border-top-color: $--popover-background-color;
@@ -86,8 +95,8 @@
       }
       @include b(popover-arrow) {
         @include once {
-          bottom: -2 * $popover-arrow-width;
-          transform: translateX(-$popover-arrow-width);
+          bottom: -2 * $--popover-arrow-width;
+          transform: translateX(-$--popover-arrow-width);
           left: 50%;
         }
         border-top-color: $--popover-background-color;
@@ -99,7 +108,7 @@
       }
       @include b(popover-arrow) {
         @include once {
-          bottom: -2 * $popover-arrow-width;
+          bottom: -2 * $--popover-arrow-width;
           right: 10px;
         } 
         border-top-color: $--popover-background-color;
@@ -111,7 +120,7 @@
       }
       @include b(popover-arrow) {
         @include once {
-          top: -2 * $popover-arrow-width;
+          top: -2 * $--popover-arrow-width;
           left: 10px;
         }
         border-bottom-color: $--popover-background-color;
@@ -123,8 +132,8 @@
       }
       @include b(popover-arrow) {
         @include once {
-          top: -2 * $popover-arrow-width;
-          transform: translateX(-$popover-arrow-width);
+          top: -2 * $--popover-arrow-width;
+          transform: translateX(-$--popover-arrow-width);
           left: 50%;
         }
         border-bottom-color: $--popover-background-color;
@@ -136,7 +145,7 @@
       }
       @include b(popover-arrow) {
         @include once {
-          top: -2 * $popover-arrow-width;
+          top: -2 * $--popover-arrow-width;
           right: 10px;
         }
         border-bottom-color: $--popover-background-color;
@@ -148,7 +157,7 @@
       }
       @include b(popover-arrow) {
         @include once {
-          right: -2 * $popover-arrow-width;
+          right: -2 * $--popover-arrow-width;
           top: 10px;
         }
         border-left-color: $--popover-background-color;
@@ -160,8 +169,8 @@
       }
       @include b(popover-arrow) {
         @include once {
-          right: -2 * $popover-arrow-width;
-          transform: translateY(-$popover-arrow-width);
+          right: -2 * $--popover-arrow-width;
+          transform: translateY(-$--popover-arrow-width);
           top: 50%;
         }
         border-left-color: $--popover-background-color;
@@ -173,7 +182,7 @@
       }
       @include b(popover-arrow) {
         @include once {
-          right: -2 * $popover-arrow-width;
+          right: -2 * $--popover-arrow-width;
           bottom: 10px;
         }
         border-left-color: $--popover-background-color;
@@ -185,7 +194,7 @@
       }
       @include b(popover-arrow) {
         @include once {
-          left: -2 * $popover-arrow-width;
+          left: -2 * $--popover-arrow-width;
           top: 10px;
         }
         border-right-color: $--popover-background-color;
@@ -197,8 +206,8 @@
       }
       @include b(popover-arrow) {
         @include once {
-          left: -2 * $popover-arrow-width;
-          transform: translateY(-$popover-arrow-width);
+          left: -2 * $--popover-arrow-width;
+          transform: translateY(-$--popover-arrow-width);
           top: 50%;
         }
         border-right-color: $--popover-background-color;
@@ -210,7 +219,7 @@
       }
       @include b(popover-arrow) {
         @include once {
-          left: -2 * $popover-arrow-width;
+          left: -2 * $--popover-arrow-width;
           bottom: 10px;
         }
         border-right-color: $--popover-background-color;
@@ -221,16 +230,11 @@
     @include not-m(without-shadow) {
       box-shadow: $--popover-box-shadow;
     }
-    @include b(popover-arrow) {
-      transition: border-color .3s $default-cubic-bezier;
-      border-width: 6px;
-      pointer-events: none;
-      position: absolute;
-      display: block;
-      width: 0;
-      height: 0;
-      border-color: transparent;
-      border-style: solid;
+    @include m(fix-width) {
+      white-space: normal;
+      width: max-content;
+      box-sizing: border-box;
+      word-break: break-all;
     }
   }
 }

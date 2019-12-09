@@ -5,6 +5,7 @@ import placeable from '../../../mixins/placeable'
 import zindexable from '../../../mixins/zindexable'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import asthemecontext from '../../../mixins/asthemecontext'
 
 export default {
   name: 'NPopoverContent',
@@ -68,9 +69,13 @@ export default {
     detached: {
       type: Boolean,
       default: true
+    },
+    contentClass: {
+      type: String,
+      default: null
     }
   },
-  mixins: [withapp, themeable, placeable, zindexable],
+  mixins: [withapp, themeable, asthemecontext, placeable, zindexable],
   directives: {
     clickoutside,
     mousemoveoutside
@@ -245,7 +250,7 @@ export default {
       }, [
         h('transition', {
           props: {
-            name: 'n-popover-fade'
+            name: 'n-popover-content-transition'
           },
           on: {
             enter: () => {
@@ -265,7 +270,9 @@ export default {
               class: {
                 'n-popover-content--without-arrow': !this.arrow,
                 [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme,
-                'n-popover-content--without-shadow': !this.shadow
+                'n-popover-content--without-shadow': !this.shadow,
+                [this.contentClass]: this.contentClass,
+                'n-popover-content--fix-width': this.width !== null || this.maxWidth !== null
               },
               style: this.style,
               directives: [

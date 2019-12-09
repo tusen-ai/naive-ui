@@ -41,7 +41,7 @@
       flex-shrink: 0;
       font-weight: 700;
       overflow: hidden;
-      &-transition-enter, &-transition-leave-to {
+      &#{&}-transition-enter, &#{&}-transition-leave-to {
         opacity: 0;
         transform: translateY(-12px) scale(.5);
         transform-origin: top center;

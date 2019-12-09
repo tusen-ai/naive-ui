@@ -14,6 +14,9 @@ export default {
       message: null
     }
   },
+  beforeDestroy () {
+    this.closeMessage()
+  },
   methods: {
     openMessage () {
       if (!this.message) {

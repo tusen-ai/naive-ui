@@ -67,7 +67,11 @@ export default {
     },
     detachedContainerClass: {
       type: String,
-      default: 'n-popover-detached-content-container'
+      default: 'n-popover'
+    },
+    contentClass: {
+      type: String,
+      default: null
     },
     manuallyPositioned: {
       type: Boolean,

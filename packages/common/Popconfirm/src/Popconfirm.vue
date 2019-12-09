@@ -33,7 +33,8 @@ export default {
     return h(NPopover, {
       props: {
         ...context.props,
-        controller
+        controller,
+        detachedContainerClass: 'n-popconfirm'
       },
       scopedSlots: {
         activator: () => slots.activator && slots.activator(),
