@@ -54,6 +54,7 @@
 @import "components/Affix.scss";
 @import "components/Avatar.scss";
 @import "components/Collapse.scss";
+@import "components/Result.scss";
 
 @mixin setup-dark-theme() {
   @include setup-dark-colors();
@@ -137,4 +138,5 @@
   @include setup-dark-affix;
   @include setup-dark-avatar;
   @include setup-dark-collapse;
+  @include setup-dark-result;
 }

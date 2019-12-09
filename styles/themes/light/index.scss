@@ -54,6 +54,7 @@
 @import "components/Affix.scss";
 @import "components/Avatar.scss";
 @import "components/Collapse.scss";
+@import "components/Result.scss";
 
 @mixin setup-light-theme() {
   @include setup-light-colors();
@@ -137,4 +138,5 @@
   @include setup-light-affix;
   @include setup-light-avatar;
   @include setup-light-collapse;
+  @include setup-light-result;
 }
