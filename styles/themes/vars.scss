@@ -375,14 +375,23 @@ $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
   }
   &.#{$namespace}-#{$block}-leave-to, &.#{$namespace}-#{$block}-enter {
     opacity: 0;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
   }
   &.#{$namespace}-#{$block}-leave-active {
     overflow: hidden;
-    transition: max-height $duration $default-cubic-bezier, opacity $duration $fast-in-cubic-bezier;
+    transition:
+      max-height $duration $default-cubic-bezier,
+      opacity $duration $fast-in-cubic-bezier,
+      margin-top $duration $default-cubic-bezier,
+      margin-bottom $duration $default-cubic-bezier;
   }
   &.#{$namespace}-#{$block}-enter-active {
     overflow: hidden;
-    transition: max-height $duration $default-cubic-bezier, opacity $duration $slow-out-cubic-bezier;
+    transition: max-height $duration $default-cubic-bezier,
+      opacity $duration $slow-out-cubic-bezier,
+      margin-top $duration $default-cubic-bezier,
+      margin-bottom $duration $default-cubic-bezier;
   }
 }
 
