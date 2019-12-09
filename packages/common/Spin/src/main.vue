@@ -32,6 +32,7 @@
     :stroke="stroke"
     :stroke-width="strokeWidth"
     :theme="synthesizedTheme"
+    :style="synthesizedStyle"
     class="n-spin"
   />
 </template>
@@ -40,13 +41,14 @@
 import NBaseLoading from '../../../base/Loading'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import asthemecontext from '../../../mixins/asthemecontext'
 
 export default {
   name: 'NSpin',
   components: {
     NBaseLoading
   },
-  mixins: [withapp, themeable],
+  mixins: [ withapp, themeable, asthemecontext ],
   props: {
     stroke: {
       type: String,

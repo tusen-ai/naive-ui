@@ -1,8 +1,11 @@
 <template>
   <div
+    n-light-theme-background-color-hint="white"
+    n-dark-theme-background-color-hint="rgb(70, 75, 99)"
     class="n-confirm"
     :class="{
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
+      'n-confirm--bordered': bordered
     }"
     :style="synthesizedStyle"
   >
@@ -120,6 +123,10 @@ export default {
       default: true
     },
     loading: {
+      type: Boolean,
+      default: false
+    },
+    bordered: {
       type: Boolean,
       default: false
     }
