@@ -26,7 +26,6 @@
       }
     }
     @include b(result-icon) {
-      transition: fill .3s $default-cubic-bezier;
       display: flex;
       justify-content: center;
       @include e(status-image) {
