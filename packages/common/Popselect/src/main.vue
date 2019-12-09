@@ -53,10 +53,10 @@ export default {
     const controller = context.props.controller || {}
     const onHide = context.listeners.hide || (() => {})
     const onShow = context.listeners.show || (() => {})
-
     return h(NPopover, {
       props: {
         trigger: 'click',
+        detachedContainerClass: 'n-popselect',
         controller
       },
       on: {
