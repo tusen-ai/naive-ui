@@ -1,10 +1,11 @@
 <template>
-  <anchor
+  <n-base-anchor
     v-if="!affix"
+    ref="anchor"
     :target="target"
   >
     <slot />
-  </anchor>
+  </n-base-anchor>
   <n-affix
     v-else
     :target="target"
@@ -15,6 +16,7 @@
     :position="position"
   >
     <n-base-anchor
+      ref="anchor"
       :target="target"
     >
       <slot />
@@ -60,6 +62,11 @@ export default {
     offsetTop: {
       type: Number,
       default: undefined
+    }
+  },
+  methods: {
+    scrollTo (href) {
+      this.$refs.anchor.setActiveHref(href)
     }
   }
 }
