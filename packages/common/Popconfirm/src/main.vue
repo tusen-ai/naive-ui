@@ -14,9 +14,9 @@ export default {
       type: String,
       default: 'Cancel'
     },
-    noIcon: {
+    showIcon: {
       type: Boolean,
-      default: false
+      default: true
     },
     trigger: {
       type: String,
