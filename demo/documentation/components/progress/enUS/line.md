@@ -13,12 +13,12 @@
 <n-progress
   type="line"
   :percentage="percentage"
-  :indicator-position="'inside'"
+  :indicator-placement="'inside'"
 />
 <n-progress
   type="line"
   :percentage="percentage"
-  :indicator-position="'inside-label'"
+  :indicator-placement="'inside-label'"
 />
 <n-progress
   type="line"
@@ -35,13 +35,13 @@
   type="line"
   status="info"
   :percentage="percentage"
-  :indicator-position="'inside'"
+  :indicator-placement="'inside'"
 />
 <n-progress
   type="line"
   status="info"
   :percentage="percentage"
-  :indicator-position="'inside-label'"
+  :indicator-placement="'inside-label'"
 />
 <n-progress
   type="line"
@@ -58,13 +58,13 @@
   type="line"
   status="success"
   :percentage="percentage"
-  :indicator-position="'inside'"
+  :indicator-placement="'inside'"
 />
 <n-progress
   type="line"
   status="success"
   :percentage="percentage"
-  :indicator-position="'inside-label'"
+  :indicator-placement="'inside-label'"
 />
 <n-progress
   type="line"
@@ -81,13 +81,13 @@
   type="line"
   status="warning"
   :percentage="percentage"
-  :indicator-position="'inside'"
+  :indicator-placement="'inside'"
 />
 <n-progress
   type="line"
   status="warning"
   :percentage="percentage"
-  :indicator-position="'inside-label'"
+  :indicator-placement="'inside-label'"
 />
 <n-progress
   type="line"
@@ -104,13 +104,13 @@
   type="line"
   status="error"
   :percentage="percentage"
-  :indicator-position="'inside'"
+  :indicator-placement="'inside'"
 />
 <n-progress
   type="line"
   status="error"
   :percentage="percentage"
-  :indicator-position="'inside-label'"
+  :indicator-placement="'inside-label'"
 />
 <n-button @click="minus">
   Minus 10%

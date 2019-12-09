@@ -18,22 +18,22 @@
       <n-icon
         v-else-if="type==='success'"
       >
-        <ios-checkmark-circle />
+        <md-checkmark-circle />
       </n-icon>
       <n-icon
         v-else-if="type==='info'"
       >
-        <ios-information-circle />
+        <md-information-circle />
       </n-icon>
       <n-icon
         v-else-if="type==='warning'"
       >
-        <ios-alert />
+        <md-alert />
       </n-icon>
       <n-icon
         v-else-if="type==='error'"
       >
-        <ios-close-circle />
+        <md-close-circle />
       </n-icon>
     </div>
     <div class="n-alert-body">
@@ -57,19 +57,19 @@
 import NIcon from '../../Icon'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
-import iosCheckmarkCircle from '../../../icons/ios-checkmark-circle'
-import iosAlert from '../../../icons/ios-alert'
-import iosInformationCircle from '../../../icons/ios-information-circle'
-import iosCloseCircle from '../../../icons/ios-close-circle'
+import mdCheckmarkCircle from '../../../icons/md-checkmark-circle'
+import mdAlert from '../../../icons/md-alert'
+import mdInformationCircle from '../../../icons/md-information-circle'
+import mdCloseCircle from '../../../icons/md-close-circle'
 
 export default {
   name: 'NAlert',
   components: {
     NIcon,
-    iosCheckmarkCircle,
-    iosAlert,
-    iosInformationCircle,
-    iosCloseCircle
+    mdCheckmarkCircle,
+    mdAlert,
+    mdInformationCircle,
+    mdCloseCircle
   },
   mixins: [withapp, themeable],
   props: {

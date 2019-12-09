@@ -84,7 +84,7 @@
           ref="line"
           class="n-progress-graph-line"
           :class="{
-            [`n-progress-graph-line--indicator-${indicatorPosition}`]: true
+            [`n-progress-graph-line--indicator-${synthesizedIndicatorPlacement}`]: true
           }"
         >
           <div
@@ -104,7 +104,7 @@
               }"
             >
               <div
-                v-if="indicatorPosition === 'inside'"
+                v-if="synthesizedIndicatorPlacement === 'inside'"
                 class="n-progress-graph-line-indicator"
               >
                 {{ percentage + unit }}
@@ -112,7 +112,7 @@
             </div>
           </div>
           <div
-            v-if="indicatorPosition === 'inside-label'"
+            v-if="synthesizedIndicatorPlacement === 'inside-label'"
             ref="indicator"
             class="n-progress-graph-line-indicator"
             :style="indicatorPercentageIsCaculated ? {
@@ -131,7 +131,7 @@
           </div>
         </div>
       </div>
-      <div v-if="showIndicator && indicatorPosition === 'outside'">
+      <div v-if="showIndicator && synthesizedIndicatorPlacement === 'outside'">
         <div
           v-if="$slots.default"
           class="n-progress-custom-content"
@@ -228,10 +228,9 @@ import mdCloseCircle from '../../../icons/md-close-circle'
 import fontawareable from '../../../mixins/fontawarable'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import asthemecontext from '../../../mixins/asthemecontext'
 
 function circlePath (r, sw, vw = 100) {
-  // console.log(r, sw, vw)
-  // console.log(`m ${vw / 2} ${vw / 2 - r} a ${r} ${r} 0 1 1 0 ${2 * r} a ${r} ${r} 0 1 1 0 -${2 * r}`)
   return `m ${vw / 2} ${vw / 2 - r} a ${r} ${r} 0 1 1 0 ${2 * r} a ${r} ${r} 0 1 1 0 -${2 * r}`
 }
 
@@ -246,7 +245,7 @@ export default {
     mdCheckmarkCircle,
     mdCloseCircle
   },
-  mixins: [withapp, themeable, fontawareable],
+  mixins: [withapp, themeable, asthemecontext, fontawareable],
   props: {
     processing: {
       type: Boolean,
@@ -293,8 +292,14 @@ export default {
       default: true
     },
     indicatorPosition: {
-      validator (indicatorPosition) {
-        return ['inside', 'inside-label', 'outside'].includes(indicatorPosition)
+      validator (value) {
+        return ['inside', 'inside-label', 'outside'].includes(value)
+      },
+      default: 'outside'
+    },
+    indicatorPlacement: {
+      validator (value) {
+        return ['inside', 'inside-label', 'outside'].includes(value)
       },
       default: 'outside'
     },
@@ -314,8 +319,11 @@ export default {
     }
   },
   computed: {
+    synthesizedIndicatorPlacement () {
+      return this.indicatorPlacement || this.indicatorPosition
+    },
     fillStyleMaxWidth () {
-      return Math.max(this.percentage - (this.indicatorPosition === 'inside-label' ? 2 : 0), 0)
+      return Math.max(this.percentage - (this.synthesizedIndicatorPlacement === 'inside-label' ? 2 : 0), 0)
     },
     strokeDasharray () {
       if (this.type === 'multiple-circle') {
@@ -369,7 +377,7 @@ export default {
   },
   watch: {
     percentage (newPercentage) {
-      if (this.indicatorPosition === 'inside-label') {
+      if (this.synthesizedIndicatorPlacement === 'inside-label') {
         this.$nextTick().then(() => {
           this.indicatorPercentage = this.calcIndicatorPercentage()
         })
@@ -378,7 +386,7 @@ export default {
   },
   methods: {
     handleFontReady () {
-      if (this.indicatorPosition === 'inside-label') {
+      if (this.synthesizedIndicatorPlacement === 'inside-label') {
         this.$nextTick().then(() => {
           this.indicatorPercentage = this.calcIndicatorPercentage()
           this.$nextTick().then(() => {
