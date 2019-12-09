@@ -2,6 +2,7 @@
 
 @include themes-mixin {
   @include b(breadcrumb) {
+    white-space: nowrap;
     @include b(breadcrumb-item) {
       @include once {
         transition: color .3s $default-cubic-bezier;

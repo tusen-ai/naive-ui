@@ -17,7 +17,7 @@
 <n-alert title="Warning Text" type="warning" closable>
   Honey disconnect the phone
 </n-alert>
-<n-alert title="Error Text" type="error" closable >
+<n-alert title="Error Text" type="error" closable>
   I'm back in the U.S.S.R.
 </n-alert>
 ```
