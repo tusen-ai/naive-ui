@@ -1,4 +1,4 @@
-# Selection Usage
+# Selection
 
 Rows can be selectable by making first column as a selectable column.
 
@@ -57,7 +57,7 @@ export default {
   },
   computed: {
     pagination() {
-      return { total: this.data.length, limit: 10 };
+      return { total: this.data.length, limit: 5 };
     }
   },
   methods: {

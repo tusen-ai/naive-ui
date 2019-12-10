@@ -12,6 +12,7 @@ Table is used to displays rows of data.
 ```demo
 basic
 select
+filterAndSorter
 ```
 
 ## API

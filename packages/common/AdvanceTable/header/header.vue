@@ -231,7 +231,6 @@ export default {
     },
     selectedAllCheckedChange (v) {
       this.$store.commit('selectedAllChecked', v)
-      console.log('TCL: selectedAllCheckedChange -> this.$store', this.$store)
     },
     onFilter (value, column) {
       this.$emit('on-filter', value, column)
