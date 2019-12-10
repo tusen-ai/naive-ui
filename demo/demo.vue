@@ -76,6 +76,10 @@ export default {
             {
               name: 'Config Consumer',
               path: `/${this.lang}/${this.theme}` + '/n-config-consumer'
+            },
+            {
+              name: 'Element',
+              path: `/${this.lang}/${this.theme}` + '/n-element'
             }
           ]
         },
