@@ -1,18 +1,8 @@
 <template>
-  <n-app
-    class="demo"
-    namespace="naive-ui-doc"
-    :theme="theme"
-  >
-    <n-nimbus-service-layout
-      :padding-body="false"
-      :items="items"
-    >
+  <n-app class="demo" namespace="naive-ui-doc" :theme="theme">
+    <n-nimbus-service-layout :padding-body="false" :items="items">
       <template v-slot:nav>
-        <doc-header
-          :lang="lang"
-          @lang-change="handleLangChange"
-        />
+        <doc-header :lang="lang" @lang-change="handleLangChange" />
       </template>
       <router-view />
     </n-nimbus-service-layout>
@@ -155,7 +145,6 @@ export default {
             {
               name: 'Divider',
               path: `/${this.lang}/${this.theme}` + '/n-divider'
-
             },
             {
               name: 'Drawer',
@@ -282,6 +271,10 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-tabs'
             },
             {
+              name: 'Table',
+              path: `/${this.lang}/${this.theme}` + '/n-table'
+            },
+            {
               name: 'Tag',
               path: `/${this.lang}/${this.theme}` + '/n-tag'
             },
@@ -363,10 +356,7 @@ export default {
         return this.$route.params.lang || 'en-us'
       },
       set (lang) {
-        this.$router.push(changeLangInPath(
-          this.$route.fullPath,
-          lang
-        ))
+        this.$router.push(changeLangInPath(this.$route.fullPath, lang))
       }
     },
     theme: {
@@ -374,10 +364,7 @@ export default {
         return this.$route.params.theme === 'light' ? 'light' : 'dark'
       },
       set (theme) {
-        this.$router.push(changeThemeInPath(
-          this.$route.fullPath,
-          theme
-        ))
+        this.$router.push(changeThemeInPath(this.$route.fullPath, theme))
       }
     }
   },

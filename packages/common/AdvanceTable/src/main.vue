@@ -151,7 +151,7 @@ export default {
   store () {
     return new Store()
   },
-  name: 'NAdvanceTable',
+  name: 'NAdvancedTable',
   components: {
     // searchInput,
     BaseTable
@@ -243,7 +243,6 @@ export default {
       selectedFilter: {},
       checkBoxes: [],
       disabledCheckBox: [],
-      currentPageAllSelect: false,
       tbodyWrapperHeight: 0,
       trHeight: 0,
       horizontalScrollLeft: 0
@@ -336,7 +335,7 @@ export default {
         // TODO: check count limit is exisit
         let total = this.pagination.total
         if (this.pagination.custom !== true) {
-          total = this.processedData.length
+          total = this.data.length
         }
         return Math.ceil(total / this.pagination.limit) || 1
       }
@@ -442,9 +441,11 @@ export default {
     //   this.currentPageAllSelect = val
     // },
     currentPage () {
+      this.computeCurrentPageSelection()
       if (this.pagination.custom === true) {
         this.useRemoteChange()
       }
+
       // this.currentPageAllSelect = this.allCheckboxesSelect
       this.$emit('on-page-change', this.paginationer)
     },
@@ -455,6 +456,7 @@ export default {
       this.checkBoxes = []
       this.disabledCheckBox = []
       this.currentPageAllSelect = false
+      this.$store.commit('selectedAllChecked', false)
       this.computeScollBar()
     },
     currentSearchColumn () {
@@ -671,6 +673,13 @@ export default {
         this.computeHorizontalScrollBarHeight()
       })
     },
+    computeCurrentPageSelection () {
+      const needChecked =
+        (this.currentPageSelectedLen > 0 &&
+          this.currentPageSelectedLen === this.showingData.length) ||
+        this.isCheckedBoxAllIndeterminate
+      this.$store.commit('selectedAllChecked', needChecked)
+    },
     computePageDivideData (data) {
       if (this.pagination && this.pagination.limit && !this.pagination.custom) {
         let start = (this.currentPage - 1) * this.pagination.limit
@@ -717,9 +726,8 @@ export default {
       })
     },
     onAllCheckboxesClick () {
-      this.currentPageAllSelect = !this.currentPageAllSelect
       this.showingData.forEach(item => {
-        this.checkBoxes[item._index] = this.currentPageAllSelect
+        this.checkBoxes[item._index] = this.$store.state.selectedAllChecked
       })
       this.checkBoxes = [].concat(this.checkBoxes)
     },

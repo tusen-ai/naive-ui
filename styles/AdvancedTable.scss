@@ -167,7 +167,7 @@
         text-align: center;
         width: 100%;
         position: absolute;
-        bottom: 8px;
+        bottom: 0;
         z-index: 300;
       }
       @include e(pagination) {

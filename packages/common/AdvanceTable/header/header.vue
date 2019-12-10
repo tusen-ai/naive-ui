@@ -36,8 +36,9 @@
             <!-- 当前页全选 -->
             <n-checkbox
               v-if="column.type === 'selection'"
-              v-model="currentPageAllSelect"
+              :checked="$store.state.selectedAllChecked"
               :indeterminate="isCheckedBoxAllIndeterminate"
+              @change="selectedAllCheckedChange"
               @click.native="onAllCheckboxesClick"
             />
             <row
@@ -91,6 +92,7 @@
 import row from '../row/index.js'
 import SortIcon from '../sortIcon'
 import PopFilter from '../popFilter'
+import { storageMixin } from '../store'
 
 export default {
   components: {
@@ -98,6 +100,7 @@ export default {
     SortIcon,
     PopFilter
   },
+  mixins: [storageMixin],
   props: {
     currentPageSelected: {
       type: Number,
@@ -225,6 +228,10 @@ export default {
     },
     onAllCheckboxesClick () {
       this.$emit('on-checkbox-all', this.currentPageAllSelect)
+    },
+    selectedAllCheckedChange (v) {
+      this.$store.commit('selectedAllChecked', v)
+      console.log('TCL: selectedAllCheckedChange -> this.$store', this.$store)
     },
     onFilter (value, column) {
       this.$emit('on-filter', value, column)

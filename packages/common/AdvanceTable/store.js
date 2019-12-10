@@ -13,7 +13,8 @@ export class Store {
       data: {
         $$state: {
           currentHoverRow: 1,
-          currentTableEl: null
+          currentTableEl: null,
+          selectedAllChecked: false
         }
       }
     })
