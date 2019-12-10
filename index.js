@@ -1,8 +1,6 @@
 import Card from './packages/common/Card'
 import Icon from './packages/common/Icon'
 import GradientText from './packages/common/GradientText'
-import WithPadding from './packages/common/WithPadding'
-import WithMargin from './packages/common/WithMargin'
 import MasonryGroup from './packages/common/MasonryGroup'
 import Table from './packages/common/Table'
 import AdvanceTable from './packages/common/AdvanceTable'
@@ -75,6 +73,7 @@ import Element from './packages/common/Element'
  */
 import Loader from './packages/base/Loading'
 import CancelMark from './packages/base/CancelMark'
+import IconTransition from './packages/base/IconTransition'
 
 function install (Vue) {
   Card.install(Vue)
@@ -83,11 +82,9 @@ function install (Vue) {
   Loader.install(Vue)
   Layout.install(Vue)
   GradientText.install(Vue)
-  WithPadding.install(Vue)
   MasonryGroup.install(Vue)
   Table.install(Vue)
   AdvanceTable.install(Vue)
-  WithMargin.install(Vue)
   CheckBox.install(Vue)
   RoundButton.install(Vue)
   Switch.install(Vue)
@@ -149,6 +146,7 @@ function install (Vue) {
   AutoComplete.install(Vue)
   Empty.install(Vue)
   Element.install(Vue)
+  IconTransition.install(Vue)
 }
 
 export default {
