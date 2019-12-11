@@ -124,7 +124,7 @@
     </div>
     <!-- 分页 -->
     <div
-      v-if="pagination !== false && showingData.length"
+      v-if="pagination !== false"
       :style="tableWrapperStl"
       class="n-advance-table__pagination"
     >
@@ -146,6 +146,17 @@ import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import { Store, storageMixin } from '../store'
 import BaseTable from '../baseTable/baseTable'
+
+const sortOrderMap = {
+  ascend: -1,
+  descend: 1,
+  unset: 0
+}
+const sortOrderReverseMap = {
+  '-1': 'descend',
+  '1': 'ascend',
+  '0': 'unset'
+}
 
 export default {
   store () {
@@ -334,9 +345,9 @@ export default {
       if (this.pagination) {
         // TODO: check count limit is exisit
         let total = this.pagination.total
-        if (this.pagination.custom !== true) {
-          total = this.data.length
-        }
+        // if (this.pagination.custom !== true) {
+        //   total = this.data.length
+        // }
         return Math.ceil(total / this.pagination.limit) || 1
       }
       return 1
@@ -348,7 +359,9 @@ export default {
       } else if (!this.processedData.length) {
         data = this.copyData
       }
-      data = this.computePageDivideData(data)
+      if (this.pagination.custom !== true) {
+        data = this.computePageDivideData(data)
+      }
       return data
     },
     tableStl () {
@@ -442,9 +455,10 @@ export default {
     // },
     currentPage () {
       this.computeCurrentPageSelection()
-      if (this.pagination.custom === true) {
-        this.useRemoteChange()
-      }
+      // if (this.pagination.custom === true) {
+      this.useRemoteChange()
+      this.mainTBodyEl.scrollTo(0, 0)
+      // }
 
       // this.currentPageAllSelect = this.allCheckboxesSelect
       this.$emit('on-page-change', this.paginationer)
@@ -465,12 +479,13 @@ export default {
     currentSortColumn (sorter, oldSorter) {
       this.processedData = this.computeShowingData()
       //  上次的若是为custom,本次为locale sort那么也需要触发useRemoteChange
-      if (
-        sorter.sorter === 'custom' ||
-        (oldSorter && oldSorter.sorter === 'custom')
-      ) {
-        this.useRemoteChange()
-      }
+      // if (
+      //   sorter.sorter === 'custom' ||
+      //   (oldSorter && oldSorter.sorter === 'custom')
+      // ) {
+      //   this.useRemoteChange()
+      // }
+      this.useRemoteChange()
       this.$emit('on-sort-change', this.currentSortColumn)
     },
     checkBoxes () {
@@ -518,6 +533,15 @@ export default {
   },
   mounted () {
     // console.log(this.wrapperWidth, this.tbodyWidth)
+    this.columns.forEach((column, i) => {
+      if (column.defaultSortOrder) {
+        this.$set(
+          this.sortIndexs,
+          column.key || i,
+          sortOrderMap[column.defaultSortOrder]
+        )
+      }
+    })
 
     this.init()
 
@@ -546,7 +570,7 @@ export default {
             item => item !== currentEl && item !== null && item !== undefined
           )
           .forEach(el => {
-            el.scrollTop = currentEl.scrollTop
+            if (currentEl) el.scrollTop = currentEl.scrollTop
           })
       })
 
@@ -595,21 +619,29 @@ export default {
       this.currentPage = pageNum
     },
     sort (columnKey, order) {
-      this.$set(this.sortIndexs, columnKey, order)
+      if (columnKey == null) {
+        this.clearSort()
+        return
+      }
+      this.$set(this.sortIndexs, columnKey, sortOrderMap[order])
     },
     filter (filterOptions) {
-      // ---- TODO: 未来版本将会去除这段代码,为了兼容老版本
-      Object.keys(filterOptions).forEach(key => {
-        let column = this.columns.find(item => item.key === key)
-        if (column && !column.filterMultiple) {
-          if (filterOptions[key].length) {
-            filterOptions[key] = filterOptions[key][0]
-          } else {
-            delete filterOptions[key]
-          }
-        }
-      })
-      // ----
+      // // ---- TODO: 未来版本将会去除这段代码,为了兼容老版本
+      // Object.keys(filterOptions).forEach(key => {
+      //   let column = this.columns.find(item => item.key === key)
+      //   if (column && !column.filterMultiple) {
+      //     if (filterOptions[key].length) {
+      //       filterOptions[key] = filterOptions[key][0]
+      //     } else {
+      //       delete filterOptions[key]
+      //     }
+      //   }
+      // })
+      // // ----
+      if (filterOptions === null) {
+        this.selectedFilter = {}
+        return
+      }
       this.selectedFilter = filterOptions
     },
     // search (columnKey,word) {
@@ -651,7 +683,6 @@ export default {
       Object.keys(this.sortIndexs).forEach(key => {
         this.sortIndexs[key] = 0
       })
-      this.currentSortColumn = null
     },
     computeHorizontalScrollBarHeight () {
       const tbody = this.mainTBodyEl
@@ -756,45 +787,44 @@ export default {
 
       keys.forEach(key => {
         let val = this.currentFilterColumn[key].value
-        let filterFn = this.currentFilterColumn[key].filterFn
-        let filterMultiple = this.currentFilterColumn[key].filterMultiple
-        if (option === 'custom' && filterFn === 'custom') {
-          currentFilterColumn[key] = {
-            value: filterMultiple ? val : val[0]
-          }
-        } else if (option !== 'custom') {
-          currentFilterColumn[key] = {
-            value: filterMultiple ? val : val[0]
-          }
-        }
+        // let filterFn = this.currentFilterColumn[key].filterFn
+        // let filterMultiple = this.currentFilterColumn[key].filterMultiple
+        currentFilterColumn[key] = val
       })
       if (Object.keys(currentFilterColumn).length === 0) {
         currentFilterColumn = null
       }
       return currentFilterColumn
     },
-    getCustomSorterData () {
-      if (!this.currentSortColumn) {
-        return null
-      }
-      const isCustom =
-        this.currentSortColumn.sorter === 'custom' &&
-        this.currentSortColumn.type !== null
-      return isCustom ? this.currentSortColumn : null
-    },
+    // getCustomSorterData () {
+    //   if (!this.currentSortColumn) {
+    //     return null
+    //   }
+    //   const isCustom =
+    //     this.currentSortColumn.sorter === 'custom' &&
+    //     this.currentSortColumn.type !== null
+    //   return isCustom ? this.currentSortColumn : null
+    // },
     useRemoteChange () {
       clearTimeout(this.remoteTimter)
 
       this.remoteTimter = setTimeout(() => {
         const currentFilterColumn = this.getFilterData('custom')
-        const currentSortColumn = this.getCustomSorterData()
+        const currentSortColumn = this.currentSortColumn
+
+        const sortType =
+          currentSortColumn && Number(currentSortColumn.type).toString()
         const emitData = {
-          filter: currentFilterColumn,
-          sorter: {
-            key: currentSortColumn.key,
-            order: currentSortColumn.type
-          },
-          pagination: this.paginationer
+          filter: currentFilterColumn || null,
+          sorter:
+            currentSortColumn && currentSortColumn.type !== 0
+              ? {
+                field: currentSortColumn.key,
+                order: sortOrderReverseMap[sortType],
+                column: currentSortColumn.column
+              }
+              : null,
+          pagination: this.paginationer || null
           // search: this.currentSearchColumn
         }
         this.$emit('on-change', emitData)
@@ -868,9 +898,9 @@ export default {
       return data
     },
     onFilter (value, column) {
-      if (column.filter === 'custom') {
-        this.useRemoteChange()
-      }
+      // if (column.filter === 'custom') {
+      this.useRemoteChange()
+      // }
     },
     onSortChange (sortIndexs) {
       this.sortIndexs = sortIndexs

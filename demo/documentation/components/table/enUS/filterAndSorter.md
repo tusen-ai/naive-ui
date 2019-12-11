@@ -1,12 +1,19 @@
 # Filter and sorter
 
 ```html
+<n-button @click="sortName" style="margin-right:5px;">sort name</n-button>
+<n-button @click="clearFilters" style="margin-right:5px;"
+  >clear filters</n-button
+>
+<n-button @click="clearFiltersAndSorters">clear filters and sorters</n-button>
+
 <n-advanced-table
+  style="margin-top:10px;"
   ref="table"
   :columns="columns"
   :data="data"
   :pagination="pagination"
-  @on-selected-change="onSelectedChange"
+  @on-change="onChange"
 >
 </n-advanced-table>
 ```
@@ -16,11 +23,16 @@ const _columns = $this => {
   return [
     {
       title: "Name",
-      key: "name"
+      key: "name",
+      sortable: true,
+      sorter(rowA, rowB) {
+        return rowA.name.length - rowB.name.length;
+      }
     },
     {
       title: "Age",
       key: "age",
+      defaultSortOrder: "ascend",
       sortable: true,
       sorter(rowA, rowB) {
         return rowA.age - rowB.age;
@@ -86,6 +98,20 @@ export default {
       return { total: this.data.length, limit: 5 };
     }
   },
-  methods: {}
+  methods: {
+    onChange({ filter, sorter, pagination }) {
+      console.log(filter, sorter, pagination);
+    },
+    sortName() {
+      this.$refs.table.sort("name", "ascend");
+    },
+    clearFilters() {
+      this.$refs.table.filter(null);
+    },
+    clearFiltersAndSorters() {
+      this.$refs.table.filter(null);
+      this.$refs.table.sort(null);
+    }
+  }
 };
 ```

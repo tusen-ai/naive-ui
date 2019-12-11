@@ -226,6 +226,8 @@
         border-radius: 2.5px;
         background: $--table-scrollbar-color;
       }
+      scroll-behavior: smooth;
+
       tr.n-table__tr--hover {
         background-color: $--table-row-hover;
       }

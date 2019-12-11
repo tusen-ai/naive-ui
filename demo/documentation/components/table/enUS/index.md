@@ -13,6 +13,8 @@ Table is used to displays rows of data.
 basic
 select
 filterAndSorter
+ajaxUsage
+fixedHeader
 ```
 
 ## API
