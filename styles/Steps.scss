@@ -94,89 +94,93 @@ $--steps-indicator-icon-size: (
 
 @include themes-mixin {
   @include b(steps) {
-    width: 100%;
-    display: flex;
-    @include steps-size-mixin('small');
-    @include steps-size-mixin('medium');
+    @include once {
+      @include steps-size-mixin('small');
+      @include steps-size-mixin('medium');
+      width: 100%;
+      display: flex;
+      @include b(step-splitor) {
+        transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+        height: 1px;
+        flex: 1;
+        align-self: flex-start;
+        margin-left: 12px;
+        margin-right: 12px;
+      }
+      @include b(step-content) {
+        flex: 1;
+        @include b(step-content-header) {
+          transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+          position: relative;
+          display: flex;
+          font-weight: 700;
+          margin-left: 9px;
+          @include e(title) {
+            white-space: nowrap;
+            flex: 0;
+          }
+        }
+        @include e(description) {
+          transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+          margin-top: 12px;
+          margin-left: 9px;
+        }
+      }
+      @include b(step-indicator) {
+        transition: background-color .3s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @include b(step-indicator-slot) {
+          position: relative;
+          @include e(index) {
+            display: inline-block;
+            text-align: center;
+            transition: color .3s $default-cubic-bezier;
+            position: absolute;
+            left: 0;
+            top: 0;
+            transform: scale(0.9999);
+          }
+        }
+      }
+      @include m(vertical) {
+        flex-direction: column;
+        $step-margin-bottom: 16px;
+        @include b(step) {
+          margin-bottom: $step-margin-bottom;
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+        @include b(step-indicator) {
+          @include b(step-splitor) {
+            position: absolute;
+            bottom: -$step-margin-bottom / 2;
+            width: 1px;
+            margin: 0 !important;
+          }
+        }
+        @include b(step-content) {
+          @include e(description) {
+            margin-top: 8px;
+          }
+        }
+      }
+    }
     @include b(step) {
       @include steps-status-mixin('finish');
       @include steps-status-mixin('error');
       @include steps-status-mixin('wait');
       @include steps-status-mixin('process');
-      position: relative;
-      display: flex;
-      flex: 1;
-      &:last-child {
-        @include b(step-splitor) {
-          display: none;
-        }
-      }
-    }
-    @include m(vertical) {
-      flex-direction: column;
-      $step-margin-bottom: 16px;
-      @include b(step) {
-        margin-bottom: $step-margin-bottom;
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-      @include b(step-indicator) {
-        @include b(step-splitor) {
-          position: absolute;
-          bottom: -$step-margin-bottom / 2;
-          width: 1px;
-          margin: 0 !important;
-        }
-      }
-      @include b(step-content) {
-        @include e(description) {
-          margin-top: 8px;
-        }
-      }
-    }
-    @include b(step-splitor) {
-      transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
-      height: 1px;
-      flex: 1;
-      align-self: flex-start;
-      margin-left: 12px;
-      margin-right: 12px;
-    }
-    @include b(step-content) {
-      flex: 1;
-      @include b(step-content-header) {
-        transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+      @include once {
         position: relative;
         display: flex;
-        font-weight: 700;
-        margin-left: 9px;
-        @include e(title) {
-          white-space: nowrap;
-          flex: 0;
-        }
-      }
-      @include e(description) {
-        transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
-        margin-top: 12px;
-        margin-left: 9px;
-      }
-    }
-    @include b(step-indicator) {
-      transition: background-color .3s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      @include b(step-indicator-slot) {
-        position: relative;
-        @include e(index) {
-          display: inline-block;
-          text-align: center;
-          transition: color .3s $default-cubic-bezier;
-          position: absolute;
-          left: 0;
-          top: 0;
-          transform: scale(0.9999);
+        flex: 1;
+        &:last-child {
+          @include b(step-splitor) {
+            display: none;
+          }
         }
       }
     }
