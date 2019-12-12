@@ -383,6 +383,10 @@ export default {
             {
               name: 'VerticalAlignDebug',
               path: `/${this.lang}/${this.theme}` + '/n-vertical-align-debug'
+            },
+            {
+              name: 'IconTransitionDebug',
+              path: `/${this.lang}/${this.theme}` + '/n-icon-transition-debug'
             }
           ]
         }

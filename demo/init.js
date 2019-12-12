@@ -93,6 +93,7 @@ import backTopDebug from './debugComponents/backTopDebug'
 import cancelMarkDebug from './debugComponents/cancelMarkDebug'
 import cascaderDebug from './debugComponents/cascaderDebug'
 import verticalAlignDebug from './debugComponents/verticalAlignDebug'
+import iconTransitionDebug from './debugComponents/iconTransitionDebug'
 
 Vue.use(VueI18n)
 Vue.use(VueRouter)
@@ -114,6 +115,7 @@ const withPrefix = (prefix, routes) =>
   })
 
 const routes = [
+  
   {
     path: '/:lang/:theme/n-popover-debug',
     component: popoverDebug
@@ -203,7 +205,11 @@ const routes = [
       { path: '/n-auto-complete', component: autoComplete },
       { path: '/n-empty', component: empty },
       { path: '/n-theme', component: theme },
-      { path: '/n-element', component: element }
+      { path: '/n-element', component: element },
+      {
+        path: '/n-icon-transition-debug',
+        component: iconTransitionDebug
+      },
     ])
   },
   {
