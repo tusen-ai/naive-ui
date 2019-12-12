@@ -5,4 +5,5 @@ inline
 custom-rule
 debug
 left
+change-debug
 ```

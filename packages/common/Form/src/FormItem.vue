@@ -29,6 +29,7 @@
         <transition
           name="n-fade-down"
           @before-enter="handleBeforeEnter"
+          @before-leave="handleBeforeLeave"
           @after-leave="handleAfterLeave"
         >
           <div
@@ -115,7 +116,8 @@ export default {
     return {
       explains: [],
       validated: false,
-      hasFeedback: false
+      hasFeedback: false,
+      feedbackTransitionBlocked: true
     }
   },
   computed: {
@@ -188,6 +190,11 @@ export default {
       return rules
     }
   },
+  watch: {
+    path () {
+      this._initData()
+    }
+  },
   created () {
     /**
      * This is buggy!
@@ -201,6 +208,21 @@ export default {
       this.explains = []
       this.validated = false
       this.hasFeedback = false
+      this.blockFeedbackTransition(this.$refs.feedback)
+    },
+    handleBeforeLeave (feedback) {
+      if (this.feedbackTransitionBlocked) {
+        if (feedback) {
+          feedback.style.transition = 'none'
+        }
+      } else {
+        if (feedback) {
+          feedback.style.transition = null
+        }
+      }
+    },
+    blockFeedbackTransition () {
+      this.feedbackTransitionBlocked = true
     },
     handleContentBlur () {
       this._validate('blur')
@@ -310,10 +332,12 @@ export default {
       }
     },
     handleBeforeEnter () {
+      this.feedbackTransitionBlocked = false
       this.hasFeedback = true
     },
     handleAfterLeave () {
       this.hasFeedback = false
+      this.feedbackTransitionBlocked = false
     }
   }
 }
