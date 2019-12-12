@@ -17,7 +17,7 @@
     <div v-if="$slots.cover" class="n-card-cover">
       <slot name="cover" />
     </div>
-    <div class="n-card-header">
+    <div v-if="$slots.header || $scopedSlots.header || title" class="n-card-header">
       <div class="n-card-header__main">
         <slot name="header">
           {{ title }}
@@ -65,7 +65,7 @@ export default {
   props: {
     title: {
       type: String,
-      required: true
+      default: null
     },
     segmented: {
       type: [Boolean, Object],
