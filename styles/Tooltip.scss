@@ -5,12 +5,14 @@
   .#{block(tooltip)} {
     @include b(tooltip-content) {
       &.#{block(popover-content)} {
+        @include once {
+          padding: 8px 14px;
+          white-space: nowrap;
+          border-radius: 6px;
+        }
         box-shadow: $--tooltip-box-shadow;
-        padding: 8px 14px;
-        white-space: nowrap;
         background-color: $--tooltip-background-color;
         color: $--tooltip-color;
-        border-radius: 6px;
         &[n-placement$="top-start"] {
           @include b(popover-arrow) {
             border-top-color: $--tooltip-background-color;

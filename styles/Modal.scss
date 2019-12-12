@@ -1,9 +1,5 @@
 @import './mixins/mixins.scss';
 
-.n-modal-content-inner--measure {
-  transform: scale(1)!important;
-}
-
 @include themes-mixin {
   @include b(modal-content) {
     @include b(card) {
@@ -12,19 +8,27 @@
     @include b(confirm) {
       width: 80vw;
     }
-    & > .n-scrollbar {
-      & > .n-scrollbar-container > .n-scrollbar-content {
-        min-height: 100%;
-        display: flex;
+    & > {
+      @include b(scrollbar) {
+        & > {
+          @include b(scrollbar-container) {
+            & > {
+              @include b(scrollbar-content) {
+                min-height: 100%;
+                display: flex;
+              }
+            }
+          }
+        }
       }
     }
-    &:not(.n-modal-content--active) {
+    @include not-m(active) {
       visibility: hidden;
     }
   }
 }
 
-.n-modal-container {
+@include b(modal-container) {
   position: fixed;
   left: 0;
   top: 0;
@@ -33,7 +37,7 @@
   display: flex;
 }
 
-.n-modal-overlay {
+@include b(modal-overlay) {
   position: fixed;
   left: 0;
   right: 0;
@@ -42,7 +46,7 @@
   background-color: rgba(0, 0, 0, .4);
 }
 
-.n-modal-content {
+@include b(modal-content) {
   position: fixed;
   left: 0;
   right: 0;

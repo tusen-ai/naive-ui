@@ -50,7 +50,6 @@ export default {
     return !this.transparent ? h(this.as, {
       staticClass: 'n-config-provider',
       class: {
-        [`n-config-provider--${this.theme}-theme`]: this.theme,
         [`n-${this.theme}-theme`]: this.theme
       },
       style: this.synthesizedStyle
