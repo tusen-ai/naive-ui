@@ -1,8 +1,9 @@
-# Basic
+# Vertical
 ```html
 <n-steps
   :current="current"
   :status="currentStatus"
+  vertical
 >
   <n-step
     title="I Me Mine"

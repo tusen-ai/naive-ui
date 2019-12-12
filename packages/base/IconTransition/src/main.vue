@@ -24,6 +24,7 @@ export default {
 
 <style>
 .n-icon-transition-enter, .n-icon-transition-leave-to {
+  /* make sure it apply to element */
   transform: scale(.75)!important;
   opacity: 0;
 }

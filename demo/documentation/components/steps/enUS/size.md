@@ -1,6 +1,8 @@
-# Basic
+# Size
+Steps has `small`, `medium` size.
 ```html
 <n-steps
+  size="small"
   :current="current"
   :status="currentStatus"
 >
