@@ -457,7 +457,7 @@ export default {
       this.computeCurrentPageSelection()
       // if (this.pagination.custom === true) {
       this.useRemoteChange()
-      this.mainTBodyEl.scrollTo(0, 0)
+      this.bodyScrollToTop()
       // }
 
       // this.currentPageAllSelect = this.allCheckboxesSelect
@@ -551,6 +551,22 @@ export default {
     window.removeEventListener('resize', this.init)
   },
   methods: {
+    bodyScrollToTop () {
+      const scrollEls = [
+        this.fixedLeftTBodyEl,
+        this.mainTBodyEl,
+        this.fixedRightTBodyEl
+      ]
+      scrollEls.forEach(el => {
+        if (el) {
+          el.classList.add('n-table--scroll-smooth')
+          window.requestAnimationFrame(() => {
+            el.scrollTop = 0
+            el.classList.remove('n-table--scroll-smooth')
+          })
+        }
+      })
+    },
     onBodyScrolll (event) {
       const currentEl = this.$store.state.currentTableEl
       const scrollEls = [

@@ -15,6 +15,7 @@ select
 filterAndSorter
 ajaxUsage
 fixedHeader
+fixedHeaderColumn
 ```
 
 ## API
