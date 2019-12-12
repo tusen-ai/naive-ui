@@ -1,5 +1,5 @@
 import NNotificationEnvironment from './NotificationEnvironment'
-import NNotificationContainer from './notificationContainer'
+import NNotificationContainer from './NotificationContainer'
 
 function mountNotificationContainer () {
   let container = Notification.container

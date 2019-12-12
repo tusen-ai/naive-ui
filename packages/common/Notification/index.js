@@ -1,4 +1,4 @@
-import Notification from './src/main.js'
+import Notification from './src/NotificationPlugin'
 import { install } from '../../utils/installThemeAwarableProperty'
 
 Notification.install = function (Vue) {
