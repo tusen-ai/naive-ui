@@ -23,6 +23,11 @@ export default function (events = {
           }
         })
       })
+    },
+    beforeDestroy () {
+      if (this.NFormItem) {
+        this.NFormItem._initData()
+      }
     }
   }
 }

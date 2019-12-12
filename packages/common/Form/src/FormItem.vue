@@ -197,6 +197,11 @@ export default {
     this.addValidationEventListeners()
   },
   methods: {
+    _initData () {
+      this.explains = []
+      this.validated = false
+      this.hasFeedback = false
+    },
     handleContentBlur () {
       this._validate('blur')
     },
@@ -238,7 +243,8 @@ export default {
       suppressWarning: true
     }) {
       if (!this.path) {
-        throw new Error('[naive-ui/form-item/validate]: validate form-item without path')
+        console.warn('[naive-ui/form-item/validate]: validate form-item without path')
+        return
       }
       if (!options) {
         options = {}
