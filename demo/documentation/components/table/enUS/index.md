@@ -16,6 +16,7 @@ filterAndSorter
 ajaxUsage
 fixedHeader
 fixedHeaderColumn
+ellipsis
 ```
 
 ## API

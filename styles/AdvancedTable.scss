@@ -155,19 +155,13 @@
           text-overflow: ellipsis;
           overflow: hidden;
           white-space: nowrap;
-          & > * {
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-          }
         }
       }
       @include e(no-data-tip) {
-        padding: 5px;
         text-align: center;
         width: 100%;
         position: absolute;
-        bottom: 0;
+        bottom: 8px;
         z-index: 300;
       }
       @include e(pagination) {

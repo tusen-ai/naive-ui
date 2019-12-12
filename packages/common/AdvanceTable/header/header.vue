@@ -42,13 +42,15 @@
               @click.native="onAllCheckboxesClick"
             />
             <row
-              v-if="column.renderHeader"
+              v-else
               :index="i"
-              :row="column"
               :key-name="column.key || i"
+              :row="column"
+              :title="column.title"
+              :column="column"
               :render="column.renderHeader"
             />
-            {{ !column.renderHeader ? column.title : "" }}
+            <!-- {{ !column.renderHeader ? column.title : "" }} -->
             <SortIcon
               v-if="column.sortable"
               :ref="'sorter_' + (column.key || i)"

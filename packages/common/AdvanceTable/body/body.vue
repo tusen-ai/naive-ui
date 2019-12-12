@@ -73,6 +73,7 @@
               :row="rowData"
               :key-name="column.key"
               :render="column.render"
+              :column="column"
             />
           </n-td>
         </template>
@@ -246,9 +247,6 @@ export default {
       let className = []
       if (column.fixed) {
         className.push('n-advance-table__td--fixed')
-      }
-      if (column.ellipsis) {
-        className.push('n-advanced-table__td-text--ellipsis')
       }
       if (!column.className) {
         return className
