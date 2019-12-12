@@ -11,7 +11,7 @@
     'disabled': rgba(0, 0, 0, .2)
   ) !global;
   $--tabs-tab-close-button-color: (
-    'default': rgba(0, 0, 0, .3),
+    'default': $--n-close-color
   ) !global;
   $--tabs-card-tab-background-color: $--neutral-8 !global;
   $--tabs-card-tab-panel-background-color: white !global;

@@ -6,6 +6,27 @@
     width: 100%;
     border-radius: 6px;
     transition: background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+    @include m(medium-size) {
+      @include b(tab-label) {
+        @include e(label) {
+          font-size: 14px !important;
+        }
+      }
+    }
+    @include m(large-size) {
+      @include b(tab-label) {
+        @include e(label) {
+          font-size: 16px !important;
+        }
+      }
+    }
+    @include m(huge-size) {
+      @include b(tab-label) {
+        @include e(label) {
+          font-size: 18px !important;
+        }
+      }
+    }
     @include b(tab-nav) {
       display: flex;
       @include e(scroll) {
@@ -57,9 +78,9 @@
         @include e(close) {
           fill: map-get($--tabs-tab-close-button-color, 'default');
           margin-left: 8px;
-          font-size: 20px;
-          line-height: 20px;
-          height: 20px;
+          font-size: 16px;
+          line-height: 16px;
+          height: 16px;
           cursor: pointer;
           transition: color .3s $default-cubic-bezier;
         }

@@ -4,6 +4,7 @@
     :class="{
       [`n-tabs--${type}-type`]: true,
       'n-tabs--scroll': showScrollButton,
+      [`n-tabs--${size}-size`]: size,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
   >
@@ -127,9 +128,13 @@ export default {
       type: Boolean,
       default: false
     },
-    addable: {
+    bodered: {
       type: Boolean,
       default: false
+    },
+    size: {
+      type: String,
+      default: 'medium'
     }
   },
   data () {
