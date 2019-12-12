@@ -17,6 +17,7 @@ ajaxUsage
 fixedHeader
 fixedHeaderColumn
 ellipsis
+renderHeader
 ```
 
 ## API
