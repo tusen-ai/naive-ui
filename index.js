@@ -32,7 +32,7 @@ import NimbusConfirmCard from './packages/deprecated/ConfirmCard'
 import NimbusIcon from './packages/deprecated/Icon'
 import Scrollbar from './packages/common/Scrollbar'
 import Steps from './packages/common/Steps'
-import ConfirmModal from './packages/common/Confirm'
+import ConfirmPlugin from './packages/common/Confirm'
 import Badge from './packages/common/Badge'
 import Tag from './packages/common/Tag'
 import BackTop from './packages/common/BackTop'
@@ -60,7 +60,6 @@ import Descriptions from './packages/common/Descriptions'
 import List from './packages/common/List'
 import Menu from './packages/common/Menu'
 import Avatar from './packages/common/Avator'
-import Confirm from './packages/presets/Confirm'
 import Result from './packages/common/Result'
 import Thing from './packages/common/Thing'
 import AutoComplete from './packages/common/AutoComplete'
@@ -110,8 +109,7 @@ function install (Vue) {
   TimePicker.install(Vue)
   Scrollbar.install(Vue)
   Steps.install(Vue)
-  Confirm.install(Vue)
-  ConfirmModal.install(Vue)
+  ConfirmPlugin.install(Vue)
   Progress.install(Vue)
   Badge.install(Vue)
   Tag.install(Vue)

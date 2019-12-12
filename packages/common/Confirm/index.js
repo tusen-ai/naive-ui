@@ -1,9 +1,12 @@
-import Confirm from './src/index.js'
+import ConfirmPlugin from './src/ConfirmPlugin.js'
+import Confirm from './src/Confirm'
 import { install } from '../../utils/installThemeAwarableProperty'
 
-Confirm.install = function (Vue) {
-  Confirm.Vue = Vue
+ConfirmPlugin.install = function (Vue) {
+  ConfirmPlugin.Vue = Vue
   install(Vue, Confirm, '$NModal')
+  Vue.component(Confirm.name, Confirm)
+  Vue.component('NNimbusConfirmCard', Confirm)
 }
 
-export default Confirm
+export default ConfirmPlugin

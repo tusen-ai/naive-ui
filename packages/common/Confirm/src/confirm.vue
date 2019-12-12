@@ -1,76 +1,155 @@
 <template>
-  <n-modal
-    v-model="active"
-    :theme="theme"
-    :activate-event="event"
-    :mask-closable="maskClosable"
-    @after-hide="handleAfterHide"
+  <div
+    n-light-theme-background-color-hint="white"
+    n-dark-theme-background-color-hint="rgb(70, 75, 99)"
+    class="n-confirm"
+    :class="{
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
+      'n-confirm--bordered': bordered
+    }"
+    :style="synthesizedStyle"
   >
-    <n-confirm
-      :theme="theme"
-      :type="type"
-      :content="content"
-      :positive-text="positiveText"
-      :negative-text="negativeText"
-      :title="title"
-      :loading="loading"
-      @close="handleCloseClick"
-      @negative-click="handleNegativeClick"
-      @positive-click="handlePositiveClick"
-    />
-  </n-modal>
+    <div class="n-confirm-title">
+      <span class="n-confirm-title-content">
+        <n-icon
+          v-if="showIcon"
+          class="n-confirm-title-icon"
+          :class="{
+            [`n-confirm-title-icon--${type}-type`]: type
+          }"
+          size="28"
+        >
+          <slot name="icon">
+            <component :is="iconType" />
+          </slot>
+        </n-icon>
+        <slot name="header">
+          {{ title }}
+        </slot>
+      </span>
+      <n-icon
+        v-if="closable"
+        class="n-confirm-title__close-mark"
+        type="md-close"
+        size="22"
+        style="cursor:pointer;"
+        @click="handleCloseClick"
+      >
+        <md-close />
+      </n-icon>
+    </div>
+    <div class="n-confirm__content">
+      <slot name="content">
+        {{ content }}
+      </slot>
+    </div>
+    <div class="n-confirm__footer">
+      <slot name="footer">
+        <n-button
+          v-if="negativeText"
+          :theme="theme"
+          style="margin-right:12px;"
+          round
+          size="small"
+          @click="handleNegativeClick"
+        >
+          {{ negativeText }}
+        </n-button>
+        <n-button
+          :theme="theme"
+          round
+          :disabled="loading === true"
+          :loading="loading"
+          size="small"
+          type="primary"
+          auto-text-color
+          @click="handlePositiveClick"
+        >
+          {{ positiveText }}
+        </n-button>
+      </slot>
+    </div>
+  </div>
 </template>
-
 <script>
-import NModal from '../../Modal'
-import NConfirm from '../../../presets/Confirm'
+import NIcon from '../../../common/Icon'
+import NButton from '../../../common/Button'
+import iosCheckmarkCircle from '../../../icons/ios-checkmark-circle'
+import mdClose from '../../../icons/md-close'
+import iosHelpCircle from '../../../icons/ios-help-circle'
+import iosCloseCircle from '../../../icons/ios-close-circle'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
+import asthemecontext from '../../../mixins/asthemecontext'
 
 export default {
   name: 'NConfirm',
   components: {
-    NModal,
-    NConfirm
+    NIcon,
+    NButton,
+    mdClose,
+    iosHelpCircle,
+    iosCheckmarkCircle,
+    iosCloseCircle
   },
-  data () {
-    return {
-      theme: null,
-      maskClosable: true,
-      active: false,
-      content: null,
-      positiveText: 'Confirm',
-      negativeText: 'Cancel',
-      type: 'confirm',
-      title: null,
-      loading: false,
-      event: null,
-      onPositiveClick: () => {
-        this.active = false
-      },
-      onNegativeClick: () => {
-        this.active = false
-      },
-      onCloseClick: () => {
-        this.active = false
-      },
-      instances: null
+  mixins: [withapp, themeable, asthemecontext],
+  props: {
+    type: {
+      type: String,
+      default: 'confirm'
+    },
+    title: {
+      type: String,
+      default: 'Confirm'
+    },
+    closable: {
+      type: Boolean,
+      default: true
+    },
+    negativeText: {
+      type: String,
+      default: 'Cancel'
+    },
+    positiveText: {
+      type: String,
+      default: 'Confirm'
+    },
+    content: {
+      type: String,
+      default: 'content'
+    },
+    showIcon: {
+      type: Boolean,
+      default: true
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    bordered: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    iconType () {
+      const colors = {
+        error: 'ios-close-circle',
+        confirm: 'ios-help-circle',
+        success: 'ios-checkmark-circle'
+      }
+      return colors[this.type]
     }
   },
   methods: {
-    handleAfterHide () {
-      this.instances.delete(this)
-      this.$destroy()
-    },
     handlePositiveClick () {
-      this.onPositiveClick(this.hide)
+      this.$emit('positive-click')
     },
     handleNegativeClick () {
-      this.onNegativeClick(this.hide)
+      this.$emit('negative-click')
     },
     handleCloseClick () {
-      this.onCloseClick(this.hide)
-    },
-    hide () {
-      this.active = false
+      this.$emit('close')
     }
   }
 }

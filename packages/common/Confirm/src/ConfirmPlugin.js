@@ -1,4 +1,4 @@
-import Confirm from './confirm.vue'
+import ConfirmEnvironment from './ConfirmEnvironment.vue'
 
 const instances = new Set()
 
@@ -14,7 +14,7 @@ export default {
   name: 'NConfirm',
   theme: null,
   createInstance () {
-    const instance = new this.Vue(Confirm)
+    const instance = new this.Vue(ConfirmEnvironment)
     instance.$mount()
     instances.add(instance)
     instance.instances = instances
