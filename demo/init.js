@@ -76,6 +76,8 @@ import autoComplete from './documentation/components/autoComplete'
 import empty from './documentation/components/empty'
 import theme from './documentation/theme'
 import element from './documentation/components/element'
+import code from './documentation/components/code'
+import log from './documentation/components/log'
 
 import demo from './demo'
 import ComponentDemo from './utils/ComponentDemo'
@@ -115,7 +117,6 @@ const withPrefix = (prefix, routes) =>
   })
 
 const routes = [
-  
   {
     path: '/:lang/:theme/n-popover-debug',
     component: popoverDebug
@@ -206,6 +207,8 @@ const routes = [
       { path: '/n-empty', component: empty },
       { path: '/n-theme', component: theme },
       { path: '/n-element', component: element },
+      { path: '/n-log', component: log },
+      { path: '/n-code', component: code },
       {
         path: '/n-icon-transition-debug',
         component: iconTransitionDebug

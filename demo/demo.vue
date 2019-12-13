@@ -206,6 +206,10 @@ export default {
               path: `/${this.lang}/${this.theme}` + '/n-advance-table'
             },
             {
+              name: 'Code',
+              path: `/${this.lang}/${this.theme}` + '/n-code'
+            },
+            {
               name: 'Descriptions',
               path: `/${this.lang}/${this.theme}` + '/n-descriptions'
             },
@@ -216,6 +220,10 @@ export default {
             {
               name: 'List',
               path: `/${this.lang}/${this.theme}` + '/n-list'
+            },
+            {
+              name: 'Log',
+              path: `/${this.lang}/${this.theme}` + '/n-log'
             },
             {
               name: 'Statistic',
