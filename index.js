@@ -66,7 +66,6 @@ import AutoComplete from './packages/common/AutoComplete'
 import Empty from './packages/common/Empty'
 import Element from './packages/common/Element'
 import Log from './packages/common/Log'
-import Code from './packages/common/Code'
 
 /**
  * debug usage
@@ -148,7 +147,6 @@ function install (Vue) {
   Element.install(Vue)
   IconTransition.install(Vue)
   Log.install(Vue)
-  Code.install(Vue)
 }
 
 export default {

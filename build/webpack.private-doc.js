@@ -11,6 +11,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 const webpackConfig = {
   mode: 'production',
+  // mode: 'development',
   entry: './demo/privateIndex.js',
   output: {
     path: path.resolve(__dirname, '..', 'doc', 'dist'),
