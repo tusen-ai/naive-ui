@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="n-advance-table__base-table-wrapper">
     <table-header
       ref="header"
       :height="headerHeight"
@@ -11,6 +11,7 @@
       :scroll-bar-width="scrollBarVerticalWidth"
       :current-page-selected="currentPageSelectedLen"
       :fixed="fixed"
+      :style="stl"
       @on-checkbox-all="onAllCheckboxesClick"
       @on-sort-change="onSortChange"
       @on-filter="onFilter"
@@ -18,6 +19,7 @@
     <table-body
       ref="tbody"
       :table-stl="tableStl"
+      :style="stl"
       :showing-data="showingData"
       :columns="columns"
       :row-class-name="rowClassName"
@@ -48,6 +50,10 @@ export default {
   },
   mixins: [storageMixin],
   props: {
+    scrollX: {
+      type: [Number, String],
+      default: 0
+    },
     bodyMinHeight: {
       type: Number,
       default: 0
@@ -135,6 +141,17 @@ export default {
     loading: {
       type: Boolean,
       default: false
+    }
+  },
+  computed: {
+    stl () {
+      let stl = {}
+      if (this.scrollX) {
+        stl.width =
+          typeof this.scrollX === 'number' ? this.scrollX + 'px' : this.scrollX
+        stl.minWidth = '100%'
+      }
+      return stl
     }
   },
   methods: {

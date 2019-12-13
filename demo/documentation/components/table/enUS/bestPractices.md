@@ -17,7 +17,7 @@
   :loading="loading"
   :pagination="pagination"
   :max-height="300"
-  max-width="600px"
+  scroll-x="1500px"
   @on-change="onChange"
 >
 </n-advanced-table>
@@ -40,7 +40,7 @@ const _columns = $this => {
     {
       title: "User",
       key: "name",
-      width: 150,
+      width: 180,
       fixed: "left",
       sortable: true,
       sorter: "custom",
@@ -60,6 +60,15 @@ const _columns = $this => {
       }
     },
     {
+      title: "Age",
+      key: "age",
+      width: 100,
+      fixed: "left",
+      render(h, params) {
+        return <span>{params.row.dob.age}</span>;
+      }
+    },
+    {
       title: "Gender",
       key: "gender",
       align: "center",
@@ -70,15 +79,22 @@ const _columns = $this => {
         { label: "Female", value: "female" }
       ]
     },
+
     {
       title: "Phone",
-      key: "phone",
-      width: 120
+      key: "phone"
+    },
+    {
+      title: "RegisterTime",
+      key: "registerTime",
+      render(h, params) {
+        return <n-time time={new Date(params.row.registered.date)} />;
+      }
     },
     {
       title: "Address",
       key: "address",
-      width: 150,
+      width: 170,
       render(h, params) {
         const loc = params.row.location;
         const address = `${loc.country} ${loc.state} ${loc.city} ${loc.street
@@ -97,7 +113,6 @@ const _columns = $this => {
     {
       title: "Email",
       key: "email",
-      width: 150,
       render(h, params) {
         return (
           <a class="mail-link" href={"mailto:" + params.row.email}>
@@ -131,7 +146,7 @@ export default {
   mounted() {
     this.getData().then(data => {
       this.data = data.results;
-      this.total = 100;
+      this.total = 92;
     });
   },
   computed: {
@@ -151,7 +166,9 @@ export default {
         params.results = this.pagination.limit;
       }
       if (!params.page) {
-        params.page = this.pagination.currentPage;
+        params.page = 1;
+      } else if (params.page === 10) {
+        params.results = 2;
       }
       let url = "https://randomuser.me/api";
       let paramsArr = [];

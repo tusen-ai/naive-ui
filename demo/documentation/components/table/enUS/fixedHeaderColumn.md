@@ -4,7 +4,7 @@ A Solution for displaying large amounts of data with long columns.
 
 Note that:
 
-> Specify the width of columns if header and cell do not align properly. If specified width is not working or have gutter between columns, please try to leave one column at least without width to fit fluid layout, or make sure no long word to break table layout.A fixed value which is greater than table width for `max-width` is recommended. The sum of unfixed columns should not greater than `max-width`.
+> Specify the width of columns if header and cell do not align properly. If specified width is not working or have gutter between columns, please try to leave one column at least without width to fit fluid layout, or make sure no long word to break table layout.A fixed value which is greater than table width for `scroll-x` is recommended. The sum of unfixed columns should not greater than `scroll-x`.
 
 ```html
 <n-advanced-table
@@ -13,7 +13,7 @@ Note that:
   :data="data"
   :pagination="pagination"
   max-height="250px"
-  max-width="600px"
+  scroll-x="1300px"
 >
 </n-advanced-table>
 ```
@@ -35,7 +35,6 @@ const _columns = $this => {
     {
       title: "Row",
       key: "row",
-      width: 100,
       render(h, params, index) {
         console.log("TCL: render -> params", params);
         return <span> row {index}</span>;
@@ -44,7 +43,6 @@ const _columns = $this => {
     {
       title: "Row1",
       key: "row1",
-      width: 100,
       render(h, params, index) {
         console.log("TCL: render -> params", params);
         return <span>row {index}</span>;
@@ -53,7 +51,6 @@ const _columns = $this => {
     {
       title: "Row2",
       key: "row2",
-      width: 100,
       render(h, params, index) {
         console.log("TCL: render -> params", params);
         return <span>row {index}</span>;

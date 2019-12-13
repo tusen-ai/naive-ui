@@ -55,6 +55,7 @@
       <!-- table head -->
       <base-table
         ref="mainTable"
+        :scroll-x="scrollX"
         :table-stl="tableStl"
         :showing-data="showingData"
         :columns="columns"
@@ -63,12 +64,12 @@
         :disabled-check-box="disabledCheckBox"
         :loading="loading"
         :col-group-stl="colGroup"
-        :scroll-bar-width="scrollBarWidth"
         :sort-indexs="sortIndexs"
         :selected-filter="selectedFilter"
         :current-page-selected-len="currentPageSelectedLen"
         :body-min-height="42"
         :scroll-bar-vertical-width="scrollBarWidth"
+        @scroll.native="onTableWrapperScroll"
         @on-scroll="onBodyScrolll"
         @on-checkbox-all="onAllCheckboxesClick"
         @on-sort-change="onSortChange"
@@ -239,6 +240,10 @@ export default {
     colBorder: {
       type: Boolean,
       default: true
+    },
+    scrollX: {
+      type: [Number, String],
+      default: 0
     }
   },
   data () {
@@ -269,17 +274,17 @@ export default {
     },
     fixedRightColumndClass () {
       return {
-        'n-advance-table__fixed--active': this.horizontalScrollLeft <= 0
+        'n-advance-table__fixed--active': this.horizontalScrollLeft < 0
       }
     },
     tableWrapperStl () {
       let stl = {}
-      if (this.maxWidth) {
-        stl.maxWidth =
-          typeof this.maxWidth === 'number'
-            ? this.maxWidth + 'px'
-            : this.maxWidth
-      }
+      // if (this.maxWidth) {
+      //   stl.maxWidth =
+      //     typeof this.maxWidth === 'number'
+      //       ? this.maxWidth + 'px'
+      //       : this.maxWidth
+      // }
       return stl
     },
     fixedLeftColumn () {
@@ -387,12 +392,7 @@ export default {
     },
     colGroup () {
       let stl = {}
-      if (this.maxWidth) {
-        stl.maxWidth =
-          typeof this.maxWidth === 'number'
-            ? this.maxWidth + 'px'
-            : this.maxWidth
-      }
+
       return stl
     },
     headColWidth () {
@@ -481,6 +481,7 @@ export default {
       this.disabledCheckBox = []
       this.currentPageAllSelect = false
       this.$store.commit('selectedAllChecked', false)
+
       this.computeScollBar()
     },
     currentSearchColumn () {
@@ -542,7 +543,6 @@ export default {
     this.initData()
   },
   mounted () {
-    // console.log(this.wrapperWidth, this.tbodyWidth
     this.init()
 
     window.addEventListener('resize', this.init)
@@ -564,6 +564,11 @@ export default {
           )
         }
       })
+    },
+    onTableWrapperScroll (event) {
+      const el = event.target
+      const left = el.scrollLeft
+      this.horizontalScrollLeft = left - 1
     },
     bodyScrollToTop () {
       const scrollEls = [
@@ -590,11 +595,6 @@ export default {
       ]
 
       window.requestAnimationFrame(() => {
-        if (currentEl === this.mainTBodyEl) {
-          const left = currentEl.scrollLeft
-          this.horizontalScrollLeft = left
-          this.headerRealEl.style.transform = `translate3d(-${this.horizontalScrollLeft}px,0,0)`
-        }
         scrollEls
           .filter(
             item => item !== currentEl && item !== null && item !== undefined
@@ -656,39 +656,12 @@ export default {
       this.$set(this.sortIndexs, columnKey, sortOrderMap[order])
     },
     filter (filterOptions) {
-      // // ---- TODO: 未来版本将会去除这段代码,为了兼容老版本
-      // Object.keys(filterOptions).forEach(key => {
-      //   let column = this.columns.find(item => item.key === key)
-      //   if (column && !column.filterMultiple) {
-      //     if (filterOptions[key].length) {
-      //       filterOptions[key] = filterOptions[key][0]
-      //     } else {
-      //       delete filterOptions[key]
-      //     }
-      //   }
-      // })
-      // // ----
       if (filterOptions === null) {
         this.selectedFilter = {}
         return
       }
       this.selectedFilter = filterOptions
     },
-    // search (columnKey,word) {
-    //   const searcher = {
-    //     key:columnKey,
-    //     word:word
-    //   }
-    //   if (searcher && this.search) {
-    //     this.$refs.search.setSearch(searcher)
-    //   }
-    // },
-    /**
-     * {key:[value,value1],key1:[v1,v2]}
-     * {key:value}
-     * number
-     * {key:value}
-     */
     setParams ({ filter, sorter, page }) {
       if (sorter) {
         this.sort(sorter.key, sorter.order)
@@ -714,24 +687,14 @@ export default {
         this.sortIndexs[key] = 0
       })
     },
-    computeHorizontalScrollBarHeight () {
-      const tbody = this.mainTBodyEl
-      this.tbodyWrapperHeight = tbody.clientHeight
-      this.tbodyWrapperOffsetHeight = tbody.offsetHeight
-      // this.scrollBarHorizontalHeight =
-      //   this.tbodyWrapperOffsetHeight - this.tbodyWrapperHeight
-      this.scrollBarHorizontalHeight = 8
-    },
     computeScollBar () {
       this.$nextTick(() => {
         let tr = this.relTable.querySelector('tr')
         this.trHeight = tr ? tr.offsetHeight : 0
         const tbody = this.mainTBodyEl
-
-        // this.scrollBarWidth = tbody.offsetWidth - tbody.clientWidth
+        this.tbodyWrapperHeight = tbody.clientHeight
+        this.tbodyWrapperOffsetHeight = tbody.offsetHeight
         this.scrollBarWidth = tbody.offsetWidth - tbody.clientWidth
-
-        this.computeHorizontalScrollBarHeight()
       })
     },
     computeCurrentPageSelection () {
@@ -759,11 +722,11 @@ export default {
     init () {
       this.$nextTick(() => {
         this.mainTBodyEl = this.$refs.mainTable.$refs.tbody.$el
+        this.mainTBodyWrapperEl = this.$refs.mainTable.$el
+
         this.relTable = this.mainTBodyEl.querySelector('table')
         // this.relTHead = this.$refs.header.$el.querySelector('table')
-        this.wrapper = this.$refs.tableWrapper
         this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
-        this.tbodyWidth = this.relTable.offsetWidth
 
         this.headerRealEl = this.$refs.mainTable.$refs.header.$el.querySelector(
           'thead'
@@ -776,14 +739,12 @@ export default {
           this.$refs.fixedRightTable.$refs.tbody.$el
         this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
         this.tbodyWrapperWidth = this.$refs.tbodyWrapper.clientWidth
-        this.tbodyWrapperHeight = this.$refs.tbodyWrapper.clientHeight
-        this.tbodyWrapperOffsetHeight = this.$refs.tbodyWrapper.offsetHeight
+
+        this.horizontalScrollLeft =
+          this.mainTBodyWrapperEl.clientWidth > parseInt(this.scrollX) ? 0 : -1
 
         this.computeScollBar()
 
-        // console.log(this.relTable.offsetWidth)
-
-        // this.scrollBarWidth = 5
       })
     },
     onAllCheckboxesClick () {
