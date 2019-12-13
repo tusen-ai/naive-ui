@@ -77,6 +77,7 @@ import empty from './documentation/components/empty'
 import theme from './documentation/theme'
 import element from './documentation/components/element'
 import log from './documentation/components/log'
+import code from './documentation/components/code'
 
 import demo from './demo'
 import ComponentDemo from './utils/ComponentDemo'
@@ -217,7 +218,7 @@ const routes = [
       { path: '/n-theme', component: theme },
       { path: '/n-element', component: element },
       { path: '/n-log', component: log },
-      { path: '/n-code', component: () => import('./documentation/components/code') },
+      { path: '/n-code', component: code },
       {
         path: '/n-icon-transition-debug',
         component: iconTransitionDebug
