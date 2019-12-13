@@ -5,7 +5,11 @@
 <n-button @click="clearFilters" style="margin-right:5px;"
   >clear filters</n-button
 >
-<n-button @click="clearFiltersAndSorters">clear filters and sorters</n-button>
+<n-button @click="clearFiltersAndSorters" style="margin-right:5px;"
+  >clear filters and sorters</n-button
+>
+
+<n-button @click="tryRoute">try set default by router query</n-button>
 
 <n-advanced-table
   style="margin-top:10px;"
@@ -20,7 +24,13 @@
 
 ```js
 const _columns = $this => {
-  return [
+  const query = $this.$route.query;
+  const orderKey = query.orderKey;
+  const order = query.order;
+  const filter = query.filter;
+  const filterKey = query.filterKey;
+
+  const columns = [
     {
       title: "Name",
       key: "name",
@@ -32,7 +42,6 @@ const _columns = $this => {
     {
       title: "Age",
       key: "age",
-      defaultSortOrder: "ascend",
       sortable: true,
       sorter(rowA, rowB) {
         return rowA.age - rowB.age;
@@ -42,6 +51,8 @@ const _columns = $this => {
       title: "Address",
       key: "address",
       filterable: true,
+      filterMultiple: true,
+      defaultFilter: ["London", "New York"],
       filterItems: [
         {
           label: "London",
@@ -57,6 +68,17 @@ const _columns = $this => {
       }
     }
   ];
+  // set default order or filter
+  columns.forEach(column => {
+    if (column.key === orderKey) {
+      column.defaultSortOrder = order;
+    }
+    if (column.key === filterKey) {
+      column.defaultFilter = filter;
+    }
+  });
+  console.log("TCL: columns", columns);
+  return columns;
 };
 
 const data = [
@@ -86,7 +108,9 @@ const data = [
   }
 ];
 export default {
+  watch: {},
   data() {
+    console.log("route", this.$route);
     return {
       data: data,
       columns: _columns(this),
@@ -111,6 +135,19 @@ export default {
     clearFiltersAndSorters() {
       this.$refs.table.filter(null);
       this.$refs.table.sort(null);
+    },
+    tryRoute() {
+      this.$router.push({
+        path: this.$route.path,
+        hash: "#filter-and-sorter",
+        query: {
+          orderKey: "age",
+          order: "descend",
+          filterKey: "address",
+          filter: "London"
+        }
+      });
+      this.columns = _columns(this);
     }
   }
 };

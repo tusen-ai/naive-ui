@@ -1,4 +1,4 @@
-# Ajax
+# Best Practices
 
 > filter,sorter,pagination should use `custom`
 
@@ -16,30 +16,54 @@
   :data="data"
   :loading="loading"
   :pagination="pagination"
+  :max-height="300"
+  max-width="600px"
   @on-change="onChange"
 >
 </n-advanced-table>
 ```
 
 ```js
+const toolTip = (h, activator, content) => {
+  const scopedSlots = {
+    activator: () => activator
+  };
+  return (
+    <n-tooltip delay={100} maxWidth={200} arrow scopedSlots={scopedSlots}>
+      {content}
+    </n-tooltip>
+  );
+};
+
 const _columns = $this => {
   return [
     {
-      title: "Name",
+      title: "User",
       key: "name",
+      width: 150,
+      fixed: "left",
       sortable: true,
       sorter: "custom",
       render(h, params) {
         return (
-          <span>
-            {params.row.name.first} {params.row.name.last}
-          </span>
+          <div class="user-base-info">
+            <img src={params.row.picture.thumbnail} class="avatar" />
+            <div
+              title={params.row.name.first + " " + params.row.name.last}
+              style="max-width:100px;"
+              class="text-overflow"
+            >
+              {params.row.name.first} {params.row.name.last}
+            </div>
+          </div>
         );
       }
     },
     {
       title: "Gender",
       key: "gender",
+      align: "center",
+      width: 100,
       filterable: true,
       filterItems: [
         { label: "Male", value: "male" },
@@ -47,8 +71,50 @@ const _columns = $this => {
       ]
     },
     {
+      title: "Phone",
+      key: "phone",
+      width: 120
+    },
+    {
+      title: "Address",
+      key: "address",
+      width: 150,
+      render(h, params) {
+        const loc = params.row.location;
+        const address = `${loc.country} ${loc.state} ${loc.city} ${loc.street
+          .name +
+          " " +
+          loc.street.number}`;
+        return toolTip(
+          h,
+          <div style="max-width:130px;" class="text-overflow">
+            {address}
+          </div>,
+          address
+        );
+      }
+    },
+    {
       title: "Email",
-      key: "email"
+      key: "email",
+      width: 150,
+      render(h, params) {
+        return (
+          <a class="mail-link" href={"mailto:" + params.row.email}>
+            {" "}
+            {params.row.email}{" "}
+          </a>
+        );
+      }
+    },
+    {
+      title: "Action",
+      key: "action",
+      width: 150,
+      fixed: "right",
+      render(h, params) {
+        return <span>action</span>;
+      }
     }
   ];
 };
@@ -70,7 +136,12 @@ export default {
   },
   computed: {
     pagination() {
-      return { total: this.total, limit: 5, custom: true };
+      return {
+        total: this.total,
+        limit: 10,
+        custom: true,
+        showQuickJumper: true
+      };
     }
   },
   methods: {
@@ -134,4 +205,25 @@ export default {
     }
   }
 };
+```
+
+```css
+/deep/ .user-base-info {
+  display: flex;
+  align-items: center;
+}
+/deep/ .avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+/deep/ .mail-link {
+  color: blue;
+}
+/deep/ .text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 ```

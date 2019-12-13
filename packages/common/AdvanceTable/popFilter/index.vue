@@ -17,7 +17,7 @@
         <filterIcon :status="filterStatus" />
       </template>
       <p v-if="loading" class="n-filter-tip-line">
-        Loading...
+        <n-spin size="small" />
       </p>
       <p v-if="error" class="n-filter-tip-line" style="">
         Error,refresh

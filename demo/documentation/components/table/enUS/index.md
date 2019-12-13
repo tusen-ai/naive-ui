@@ -1,5 +1,7 @@
 # Table
 
+<!--single-column-->
+
 Table is used to displays rows of data.
 
 # When To Use
@@ -13,11 +15,14 @@ Table is used to displays rows of data.
 basic
 select
 filterAndSorter
+asyncFilterItems
+filterMultiple
 ajaxUsage
 fixedHeader
 fixedHeaderColumn
 ellipsis
 renderHeader
+bestPractices
 ```
 
 ## API

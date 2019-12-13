@@ -132,7 +132,9 @@
         v-model="currentPage"
         :page-count="pageCount"
         :page-slot="paginationer.pageSlot || 5"
-        :show-quick-jumper="paginationer.quickJumper || true"
+        :show-quick-jumper="
+          paginationer.showQuickJumper ? paginationer.showQuickJumper : false
+        "
         :disabled="loading"
       />
     </div>
@@ -148,8 +150,8 @@ import { Store, storageMixin } from '../store'
 import BaseTable from '../baseTable/baseTable'
 
 const sortOrderMap = {
-  ascend: -1,
-  descend: 1,
+  ascend: 1,
+  descend: -1,
   unset: 0
 }
 const sortOrderReverseMap = {
@@ -450,6 +452,14 @@ export default {
     }
   },
   watch: {
+    columns: {
+      handler () {
+        this.$nextTick(() => {
+          this.setDefaultOrderAndFilter()
+        })
+      },
+      immediate: true
+    },
     // allCheckboxesSelect (val) {
     //   this.currentPageAllSelect = val
     // },
@@ -532,17 +542,7 @@ export default {
     this.initData()
   },
   mounted () {
-    // console.log(this.wrapperWidth, this.tbodyWidth)
-    this.columns.forEach((column, i) => {
-      if (column.defaultSortOrder) {
-        this.$set(
-          this.sortIndexs,
-          column.key || i,
-          sortOrderMap[column.defaultSortOrder]
-        )
-      }
-    })
-
+    // console.log(this.wrapperWidth, this.tbodyWidth
     this.init()
 
     window.addEventListener('resize', this.init)
@@ -551,6 +551,20 @@ export default {
     window.removeEventListener('resize', this.init)
   },
   methods: {
+    setDefaultOrderAndFilter () {
+      this.columns.forEach((column, i) => {
+        if (column.defaultFilter) {
+          this.$set(this.selectedFilter, column.key || i, column.defaultFilter)
+        }
+        if (column.defaultSortOrder) {
+          this.$set(
+            this.sortIndexs,
+            column.key || i,
+            sortOrderMap[column.defaultSortOrder]
+          )
+        }
+      })
+    },
     bodyScrollToTop () {
       const scrollEls = [
         this.fixedLeftTBodyEl,
@@ -856,10 +870,19 @@ export default {
           this.processedData = []
         }
         Object.keys(this.currentFilterColumn).forEach(key => {
+          console.log(
+            'TCL: computeShowingData -> this.currentFilterColumn',
+            this.currentFilterColumn
+          )
           const { value, filterFn } = this.currentFilterColumn[key]
           if (value && filterFn !== 'custom' && filterFn) {
             data = data.filter(item => {
-              return filterFn(value, item.row)
+              for (let i = 0; i < value.length; i++) {
+                if (filterFn(value[i], item.row)) {
+                  return true
+                }
+              }
+              return false
             })
           }
         })
@@ -868,6 +891,7 @@ export default {
       if (this.currentSortColumn) {
         data = this.computeSortData(data)
       }
+
       if (data.length === 0) {
         data = null
       }
@@ -878,14 +902,20 @@ export default {
       let { sortable, key, type, column } = this.currentSortColumn
       // use remote sort
       if (sortable === true) {
-        if (!this.processedDataNoSort && this.data.length !== 0) {
-          this.processedDataNoSort = data.slice(0)
-        }
+        // console.log(
+        //   'TCL: computeSortData -> this.processedDataNoSort ',
+        //   this.processedDataNoSort
+        // )
+
+        // if (!this.processedDataNoSort && this.data.length !== 0) {
+        //   this.processedDataNoSort = data.slice(0)
+        // }
         if (type === 0 || type === null) {
-          if (this.processedDataNoSort) {
-            data = this.processedDataNoSort
-            this.processedDataNoSort = null
-          }
+          // if (this.processedDataNoSort) {
+          //   data = this.processedDataNoSort
+          //   this.processedDataNoSort = null
+          // }
+          return data
         } else {
           data = data.sort((a, b) => {
             a = a.row

@@ -22,12 +22,8 @@ export default {
       }
 
       return h(
-        'div',
+        'span',
         {
-          class: {
-            'n-advance-table__td-text': true,
-            'n-advance-table__td-text--ellipsis': column.ellipsis
-          },
           domProps: {
             title: column.ellipsis ? params.row[keyName] : ''
           }

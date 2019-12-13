@@ -142,6 +142,9 @@
         border-radius: 12px;
       }
       @include e(td-text) {
+        span {
+          cursor: text;
+        }
         &-center {
           text-align: center;
         }

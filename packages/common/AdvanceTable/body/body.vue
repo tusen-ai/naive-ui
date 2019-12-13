@@ -21,7 +21,7 @@
         v-for="(column, i) in columns"
         :key="i"
         :style="computeCustomWidthStl(column)"
-      />
+      >
     </colgroup>
     <n-tbody>
       <template v-if="showingData.length === 0">
@@ -247,6 +247,13 @@ export default {
       let className = []
       if (column.fixed) {
         className.push('n-advance-table__td--fixed')
+      }
+      if (column.ellipsis) {
+        className.push('n-advance-table__td-text')
+        className.push('n-advance-table__td-text--ellipsis')
+
+        //  'n-advance-table__td-text': true,
+        //     'n-advance-table__td-text--ellipsis': column.ellipsis
       }
       if (!column.className) {
         return className

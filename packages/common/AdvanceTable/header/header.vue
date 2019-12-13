@@ -28,9 +28,7 @@
             ref="theads"
             :key="column.key"
             :style="computeThStl(column)"
-            :class="{
-              'n-advance-table__sortable-column': column.sortable
-            }"
+            :class="computeThClass(column)"
             @click.native.self="() => sortByColumn(column)"
           >
             <!-- 当前页全选 -->
@@ -176,6 +174,14 @@ export default {
     onCheckBoxChange (v) {
       this.$emit('on-checkbox-all-change', v)
     },
+    computeThClass (column) {
+      const classes = {
+        'n-advance-table__sortable-column': column.sortable,
+        'n-advance-table__td-text': column.ellipsis,
+        'n-advance-table__td-text--ellipsis': column.ellipsis
+      }
+      return classes
+    },
     computeThStl (column) {
       let stl = {}
 
@@ -185,7 +191,7 @@ export default {
         })
       }
       let height = this.height
-      console.log('TCL: computeThStl -> this.height', this.height)
+
       if (height !== null) {
         stl.height = `${height}px`
       }
