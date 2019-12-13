@@ -248,6 +248,7 @@ export default {
   },
   data () {
     return {
+      isOnlyViewChange: false,
       headerHeight: 0,
       copyData: [],
       sortIndexs: {},
@@ -314,7 +315,6 @@ export default {
     currentSortColumn () {
       let sorterKey = null
       let i = 0
-      console.log(this.sortIndexs)
       Object.keys(this.sortIndexs).forEach(key => {
         if (this.sortIndexs[key] !== null) {
           sorterKey = key
@@ -466,6 +466,7 @@ export default {
     currentPage () {
       this.computeCurrentPageSelection()
       // if (this.pagination.custom === true) {
+
       this.useRemoteChange()
       this.bodyScrollToTop()
       // }
@@ -505,7 +506,6 @@ export default {
     selectedFilter: {
       deep: true,
       handler (val) {
-        console.log('TCL: handler -> val', val)
         this.currentFilterColumn = null
         let keys = Object.keys(val)
         if (keys.length) {
@@ -514,10 +514,6 @@ export default {
         this.columns.forEach(column => {
           let key = column.key
           if (keys.includes(key) && val[key] && val[key].length !== 0) {
-            // TODO: 未来版本单选将会返回一个数值而不是数组!
-            console.warn(
-              '[NAIVE-UI]: n-advance-table filter filterMultiple=false will return not a array in future'
-            )
             this.currentFilterColumn[key] = {
               value: [].concat(val[key]),
               filterFn: column.filter,
@@ -645,22 +641,44 @@ export default {
         }
       })
     },
-    page (pageNum) {
+    page (pageNum, isOnlyViewChange = true) {
+      this.isOnlyViewChange = isOnlyViewChange
+
       this.currentPage = pageNum
+      this.$nextTick(() => {
+        this.isOnlyViewChange = !isOnlyViewChange
+      })
     },
-    sort (columnKey, order) {
+    sort (columnKey, order, isOnlyViewChange = true) {
+      this.isOnlyViewChange = isOnlyViewChange
+
       if (columnKey == null) {
         this.clearSort()
         return
       }
       this.$set(this.sortIndexs, columnKey, sortOrderMap[order])
+      this.$nextTick(() => {
+        this.isOnlyViewChange = !isOnlyViewChange
+      })
     },
-    filter (filterOptions) {
+    filter (filterOptions, isOnlyViewChange = true) {
+      this.isOnlyViewChange = isOnlyViewChange
+
       if (filterOptions === null) {
         this.selectedFilter = {}
         return
       }
+      Object.keys(filterOptions).forEach(key => {
+        const col = this.columns.find(column => column.key === key)
+        if (!col.filterMultiple) {
+          filterOptions[key] = filterOptions[key][0]
+        }
+      })
       this.selectedFilter = filterOptions
+
+      this.$nextTick(() => {
+        this.isOnlyViewChange = !isOnlyViewChange
+      })
     },
     setParams ({ filter, sorter, page }) {
       if (sorter) {
@@ -744,7 +762,6 @@ export default {
           this.mainTBodyWrapperEl.clientWidth > parseInt(this.scrollX) ? 0 : -1
 
         this.computeScollBar()
-
       })
     },
     onAllCheckboxesClick () {
@@ -797,6 +814,7 @@ export default {
     //   return isCustom ? this.currentSortColumn : null
     // },
     useRemoteChange () {
+      if (this.isOnlyViewChange) return
       clearTimeout(this.remoteTimter)
 
       this.remoteTimter = setTimeout(() => {

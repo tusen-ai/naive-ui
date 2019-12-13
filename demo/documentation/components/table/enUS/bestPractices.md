@@ -62,8 +62,9 @@ const _columns = $this => {
     {
       title: "Age",
       key: "age",
-      width: 100,
+      width: 80,
       fixed: "left",
+      align: "center",
       render(h, params) {
         return <span>{params.row.dob.age}</span>;
       }
@@ -71,7 +72,6 @@ const _columns = $this => {
     {
       title: "Gender",
       key: "gender",
-      align: "center",
       width: 100,
       filterable: true,
       filterItems: [
@@ -128,7 +128,14 @@ const _columns = $this => {
       width: 150,
       fixed: "right",
       render(h, params) {
-        return <span>action</span>;
+        return [
+          <a
+            onClick={() => $this.invite(params.row)}
+            style="color:pink;cursor:pointer;margin-right:10px;"
+          >
+            Goto
+          </a>
+        ];
       }
     }
   ];
@@ -144,10 +151,17 @@ export default {
     };
   },
   mounted() {
-    this.getData().then(data => {
-      this.data = data.results;
-      this.total = 92;
-    });
+    // this.getDataByQuey();
+  },
+  watch: {
+    "$route.query": {
+      handler(query) {
+        this.$nextTick(() => {
+          this.getDataByQuey();
+        });
+      },
+      immediate: true
+    }
   },
   computed: {
     pagination() {
@@ -160,7 +174,19 @@ export default {
     }
   },
   methods: {
-    getData(params = {}) {
+    getDataByQuey() {
+      const query = this.$route.query;
+      const page = query.page ? +query.page : 1;
+      const sorter = query.sorter ? JSON.parse(query.sorter) : null;
+      const filter = query.filter ? JSON.parse(query.filter) : null;
+      this.fetchData(page, sorter, filter);
+      this.$refs.table.page(page);
+      // this.$refs.table.sorter(sorter) : null);
+      console.warn("TCL: getDataByQuey -> filter", filter);
+
+      this.$refs.table.filter(filter);
+    },
+    apiGetData(params = {}) {
       this.loading = true;
       if (!params.results) {
         params.results = this.pagination.limit;
@@ -190,9 +216,15 @@ export default {
           this.loading = false;
         });
     },
-    onChange({ filter, sorter, pagination }) {
+    fetchData(page, sorter, filter) {
+      console.warn(
+        "TCL: fetchData -> page, sorter, filter",
+        page,
+        sorter,
+        filter
+      );
       let params = {
-        page: pagination.currentPage
+        page
       };
       if (sorter) {
         Object.assign(params, {
@@ -205,10 +237,36 @@ export default {
           ...filter
         });
       }
-      this.getData(params).then(data => {
+      this.total = 92;
+      this.apiGetData(params).then(data => {
         this.data = data.results;
       });
-      console.log(filter, sorter, pagination);
+    },
+    invite(personData) {
+      const coordinates = personData.location.coordinates;
+      window.open(
+        `http://maps.google.com/maps?q=${coordinates.latitude},${coordinates.longitude}`
+      );
+    },
+    onChange({ filter, sorter, pagination }) {
+      console.warn(
+        "TCL: onChange -> { filter, sorter, pagination }",
+        {
+          filter,
+          sorter,
+          pagination
+        },
+        this.$route
+      );
+      if (window.location.pathname)
+        this.$router.push({
+          ...this.$route,
+          query: {
+            filter: JSON.stringify(filter),
+            sorter: JSON.stringify(sorter),
+            page: pagination.currentPage
+          }
+        });
     },
     sortName() {
       this.$refs.table.sort("name", "ascend");
