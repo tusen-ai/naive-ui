@@ -4,7 +4,7 @@ import { install } from '../../utils/installThemeAwarableProperty'
 
 ConfirmPlugin.install = function (Vue) {
   ConfirmPlugin.Vue = Vue
-  install(Vue, Confirm, '$NModal')
+  install(Vue, ConfirmPlugin, '$NModal')
   Vue.component(Confirm.name, Confirm)
   Vue.component('NNimbusConfirmCard', Confirm)
 }
