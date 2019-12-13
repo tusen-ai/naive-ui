@@ -15,6 +15,7 @@
 
 @include b(message-container) {
   @include once {
+    z-index: 6000;
     position: fixed;
     top: 12px;
     left: 0;
