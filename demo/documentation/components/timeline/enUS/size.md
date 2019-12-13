@@ -1,6 +1,6 @@
-# Basic
+# Size
 ```html
-<n-timeline>
+<n-timeline size="large">
   <n-timeline-item 
     content="Oops"
   />

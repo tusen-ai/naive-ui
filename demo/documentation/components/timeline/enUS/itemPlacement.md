@@ -1,6 +1,7 @@
-# Basic
+# Item Placement
+Left. .thgiR
 ```html
-<n-timeline>
+<n-timeline item-placement="left">
   <n-timeline-item 
     content="Oops"
   />
