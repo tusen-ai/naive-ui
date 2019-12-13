@@ -2,4 +2,5 @@
 ```demo
 basic
 card
+flex-label
 ```

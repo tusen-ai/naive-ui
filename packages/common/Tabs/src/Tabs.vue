@@ -5,18 +5,20 @@
       [`n-tabs--${type}-type`]: true,
       'n-tabs--scroll': showScrollButton,
       [`n-tabs--${size}-size`]: size,
+      [`n-tabs--flex`]: justifyContent,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
   >
     <div
       ref="nav"
-      class="n-tab-nav"
+      class="n-tabs-nav"
+      :style="navStyle"
     >
       <div
         v-if="showScrollButton"
-        class="n-tab-nav__scroll-button n-tab-nav__scroll-button--left"
+        class="n-tabs-nav-scroll-button n-tabs-nav-scroll-button--left"
         :class="{
-          'n-tab-nav__scroll-button--disabled': leftScrollButtonDisabled
+          'n-tabs-nav-scroll-button--disabled': leftScrollButtonDisabled
         }"
         @click="scroll('left')"
       >
@@ -26,37 +28,30 @@
       </div>
       <div
         ref="navScroll"
-        class="n-tab-nav__scroll"
+        class="n-tabs-nav-scroll"
       >
         <div
           ref="labelWrapper"
-          class="n-tab-label-wrapper"
+          class="n-tabs-label-wrapper"
         >
-          <div>
+          <div :style="labelWrapperStyle">
             <div
               v-for="(panel, i) in panels"
               :key="i"
               :ref="`label(${i})`"
-              class="n-tab-label"
+              class="n-tabs-label"
               :class="{
-                'n-tab-label--active': value === panel.name,
-                'n-tab-label--disabled': panel.disabled,
-                'n-tab-label--transition-disabled': transitionDisabled
+                'n-tabs-label--active': value === panel.name,
+                'n-tabs-label--disabled': panel.disabled
               }"
               @click="handleTabClick($event, panel.name, panel.disabled)"
             >
-              <tab-label-corner
-                v-if="value === panel.name && type === 'card'"
-                direction="left"
-              />
-              <tab-label-corner
-                v-if="value === panel.name && type === 'card'"
-                direction="right"
-              />
-              <span class="n-tab-label__label">{{ panel.label }}</span>
+              <!-- <n-tab-label-corner v-if="typeIsCard" class="n-tabs-label__corner n-tabs-label__corner--left" direction="left" />
+              <n-tab-label-corner v-if="typeIsCard" class="n-tabs-label__corner n-tabs-label__corner--right" direction="right" /> -->
+              <span class="n-tabs-label__label">{{ panel.label }}</span>
               <div
-                v-if="closable && type === 'card'"
-                class="n-tab-label__close"
+                v-if="closable && typeIsCard"
+                class="n-tabs-label__close"
                 @click.stop="handleCloseMarkClick(panel)"
               >
                 <n-icon>
@@ -66,17 +61,17 @@
             </div>
           </div>
           <div
-            v-if="type === 'line'"
+            v-if="!typeIsCard"
             ref="labelBar"
-            class="n-tab-label-bar"
+            class="n-tabs-label-bar"
           />
         </div>
       </div>
       <div
         v-if="showScrollButton"
-        class="n-tab-nav__scroll-button n-tab-nav__scroll-button--right"
+        class="n-tabs-nav-scroll-button n-tabs-nav-scroll-button--right"
         :class="{
-          'n-tab-nav__scroll-button--disabled': rightScrollButtonDisabled
+          'n-tabs-nav-scroll-button--disabled': rightScrollButtonDisabled
         }"
         @click="scroll('right')"
       >
@@ -90,7 +85,6 @@
 </template>
 
 <script>
-import TabLabelCorner from './TabLabelCorner'
 import NIcon from '../../Icon'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
@@ -106,7 +100,6 @@ export default {
     }
   },
   components: {
-    TabLabelCorner,
     NIcon,
     iosArrowBack,
     iosArrowForward,
@@ -128,6 +121,12 @@ export default {
       type: Boolean,
       default: false
     },
+    justifyContent: {
+      validator (value) {
+        return ['space-between', 'space-around', 'space-evenly'].includes(value)
+      },
+      default: null
+    },
     bodered: {
       type: Boolean,
       default: false
@@ -135,6 +134,10 @@ export default {
     size: {
       type: String,
       default: 'medium'
+    },
+    navStyle: {
+      type: [String, Object],
+      default: null
     }
   },
   data () {
@@ -143,16 +146,24 @@ export default {
       barStyleInitialized: false,
       showScrollButton: false,
       leftScrollButtonDisabled: true,
-      rightScrollButtonDisabled: false,
-      transitionDisabled: false
+      rightScrollButtonDisabled: false
+    }
+  },
+  computed: {
+    typeIsCard () {
+      return this.type === 'card'
+    },
+    labelWrapperStyle () {
+      if (!this.justifyContent) return null
+      return {
+        display: 'flex',
+        justifyContent: this.justifyContent
+      }
     }
   },
   watch: {
-    value () {
-      this.transitionDisabled = true
-      this.$nextTick().then(() => {
-        this.transitionDisabled = false
-      })
+    showScrollButton (value) {
+      this.$emit('scrollable-change', value)
     }
   },
   mounted () {
@@ -160,7 +171,6 @@ export default {
       let index = 0
       for (const panel of this.panels) {
         if (panel.name === this.value) {
-        // this.$el.getBoundingClientRect()
           this.updateBarPosition(this.$refs[`label(${index})`][0])
           break
         }
@@ -235,13 +245,17 @@ export default {
       if (this.$refs.labelBar) {
         this.$refs.labelBar.style.left = labelEl.offsetLeft + 'px'
         this.$refs.labelBar.style.width = this.$el.offsetWidth + 'px'
-        this.$refs.labelBar.style.maxWidth = labelEl.offsetWidth + 1 + 'px'
+        if (this.type === 'card') {
+          this.$refs.labelBar.style.maxWidth = labelEl.offsetWidth + 'px'
+        } else {
+          this.$refs.labelBar.style.maxWidth = labelEl.offsetWidth + 1 + 'px'
+        }
       }
     },
     handleTabClick (e, panelName, disabled) {
       if (!disabled) {
         this.setPanelActive(panelName)
-        this.updateBarPosition(e.target)
+        this.updateBarPosition(e.currentTarget)
       }
     },
     setPanelActive (tabLabel) {
@@ -252,9 +266,6 @@ export default {
     },
     handleCloseMarkClick (panel) {
       this.$emit('close', panel.name)
-    },
-    blockTransitionOneTick () {
-
     }
   }
 }
