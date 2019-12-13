@@ -99,7 +99,7 @@ ${mergedParts.code}
   return mergedParts
 }
 
-function genVueComponent (parts) {
+function genVueComponent (parts, noRunning = false) {
   const titleReg = /<!--TITLE_SLOT-->/
   const contentReg = /<!--CONTENT_SLOT-->/
   const codeReg = /<!--CODE_SLOT-->/
@@ -117,7 +117,7 @@ function genVueComponent (parts) {
   if (parts.code) {
     src = src.replace(codeReg, parts.code)
   }
-  if (parts.script) {
+  if (parts.script && !noRunning) {
     src = src.replace(scriptReg, parts.script)
   }
   if (parts.style) {
@@ -130,10 +130,11 @@ function genVueComponent (parts) {
 }
 
 function convertMd2Demo (text) {
+  const noRunning = /<!--no-running-->/.test(text)
   const tokens = marked.lexer(text)
   const parts = getPartsOfDemo(tokens)
   const mergedParts = mergeParts(parts)
-  const vueComponent = genVueComponent(mergedParts)
+  const vueComponent = genVueComponent(mergedParts, noRunning)
   // console.log(vueComponent)
   return vueComponent
 }

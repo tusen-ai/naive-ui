@@ -1,16 +1,6 @@
 <script>
-import hljs from 'highlight.js'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
-
-function generateCodeHTML (language, code, trim) {
-  const languageValid = !!(language && hljs.getLanguage(language))
-  if (trim) code = code.trim()
-  return {
-    valid: languageValid,
-    content: hljs.highlight(language, code).value
-  }
-}
 
 export default {
   name: 'NCode',
@@ -27,6 +17,10 @@ export default {
     trim: {
       type: Boolean,
       default: true
+    },
+    hljs: {
+      type: Object,
+      default: null
     }
   },
   watch: {
@@ -37,15 +31,31 @@ export default {
       this.$nextTick(this.setCode)
     }
   },
+  created () {
+    if (!this.hljs && !this.$naive.hljs) {
+      console.error('[naive-ui/code]: hljs is not set.')
+    }
+  },
   mounted () {
     this.setCode()
   },
   methods: {
+    getHljs () {
+      return this.hljs || this.$naive.hljs
+    },
+    generateCodeHTML (language, code, trim) {
+      const languageValid = !!(language && this.getHljs().getLanguage(language))
+      if (trim) code = code.trim()
+      return {
+        valid: languageValid,
+        content: this.getHljs().highlight(language, code).value
+      }
+    },
     setCode () {
       const {
         valid,
         content
-      } = generateCodeHTML(this.language, this.code, this.trim)
+      } = this.generateCodeHTML(this.language, this.code, this.trim)
       if (valid) {
         this.$el.innerHTML = content
       } else {

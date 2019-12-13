@@ -14,12 +14,7 @@ def say_hello():
 <n-code :code="cppCode" language="cpp" />
 ```
 ```js
-import NCode from 'naive-ui/lib/common/Code'
-
 export default {
-  components: {
-    NCode
-  },
   data () {
     return {
       cppCode: `int main () {

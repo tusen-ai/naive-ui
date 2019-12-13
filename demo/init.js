@@ -76,7 +76,6 @@ import autoComplete from './documentation/components/autoComplete'
 import empty from './documentation/components/empty'
 import theme from './documentation/theme'
 import element from './documentation/components/element'
-import code from './documentation/components/code'
 import log from './documentation/components/log'
 
 import demo from './demo'
@@ -97,9 +96,19 @@ import cascaderDebug from './debugComponents/cascaderDebug'
 import verticalAlignDebug from './debugComponents/verticalAlignDebug'
 import iconTransitionDebug from './debugComponents/iconTransitionDebug'
 
+import hljs from 'highlight.js/lib/highlight'
+import javascript from 'highlight.js/lib/languages/javascript'
+import python from 'highlight.js/lib/languages/python'
+import cpp from 'highlight.js/lib/languages/cpp'
+
+hljs.registerLanguage('javascript', javascript)
+hljs.registerLanguage('python', python)
+hljs.registerLanguage('cpp', cpp)
+
 Vue.use(VueI18n)
 Vue.use(VueRouter)
 Vue.use(NaiveUI)
+NaiveUI.setHljs(hljs)
 
 const i18n = new VueI18n({
   locale: 'en-us'
@@ -208,7 +217,7 @@ const routes = [
       { path: '/n-theme', component: theme },
       { path: '/n-element', component: element },
       { path: '/n-log', component: log },
-      { path: '/n-code', component: code },
+      { path: '/n-code', component: () => import('./documentation/components/code') },
       {
         path: '/n-icon-transition-debug',
         component: iconTransitionDebug

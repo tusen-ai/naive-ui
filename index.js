@@ -66,6 +66,7 @@ import AutoComplete from './packages/common/AutoComplete'
 import Empty from './packages/common/Empty'
 import Element from './packages/common/Element'
 import Log from './packages/common/Log'
+import Code from './packages/common/Code'
 
 /**
  * debug usage
@@ -75,7 +76,17 @@ import Loader from './packages/base/Loading'
 import CancelMark from './packages/base/CancelMark'
 import IconTransition from './packages/base/IconTransition'
 
+const naiveUI = {
+  install,
+  setHljs
+}
+
+function setHljs (hljs) {
+  naiveUI.hljs = hljs
+}
+
 function install (Vue) {
+  Vue.prototype.$naive = naiveUI
   Card.install(Vue)
   Icon.install(Vue)
   ServiceLayout.install(Vue)
@@ -147,8 +158,7 @@ function install (Vue) {
   Element.install(Vue)
   IconTransition.install(Vue)
   Log.install(Vue)
+  Code.install(Vue)
 }
 
-export default {
-  install
-}
+export default naiveUI
