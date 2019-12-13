@@ -49,7 +49,7 @@ export default {
       onNegativeClick: () => {
         this.active = false
       },
-      onCloseClick: () => {
+      onClose: () => {
         this.active = false
       },
       instances: null
@@ -67,7 +67,7 @@ export default {
       this.onNegativeClick(this.hide)
     },
     handleCloseClick () {
-      this.onCloseClick(this.hide)
+      this.onClose(this.hide)
     },
     hide () {
       this.active = false

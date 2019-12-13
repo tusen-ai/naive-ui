@@ -2,7 +2,7 @@ import ConfirmEnvironment from './ConfirmEnvironment.vue'
 
 const instances = new Set()
 
-function setDataOnConfirmInstance (data, instance) {
+function updateConfirm (data, instance) {
   for (const key of Object.keys(data)) {
     if (key in instance.$data) {
       instance.$data[key] = data[key]
@@ -21,8 +21,11 @@ export default {
     return instance
   },
   confirm (options) {
+    this.open.bind(this)(options)
+  },
+  open (options) {
     const instance = this.createInstance()
-    setDataOnConfirmInstance(
+    updateConfirm(
       {
         type: 'confirm',
         active: true,
@@ -35,7 +38,7 @@ export default {
   },
   error (options) {
     const instance = this.createInstance()
-    setDataOnConfirmInstance(
+    updateConfirm(
       {
         type: 'error',
         active: true,
@@ -48,7 +51,7 @@ export default {
   },
   success (options) {
     const instance = this.createInstance()
-    setDataOnConfirmInstance(
+    updateConfirm(
       {
         type: 'success',
         active: true,
