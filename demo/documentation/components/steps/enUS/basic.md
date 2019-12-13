@@ -37,20 +37,20 @@
     </template>
   </n-button>
 </n-button-group>
-<n-button-group>
-  <n-button @click="currentStatus='error'">
-    current error
-  </n-button>
-  <n-button @click="currentStatus='process'">
-    current process
-  </n-button>
-  <n-button @click="currentStatus='wait'">
-    current wait
-  </n-button>
-  <n-button @click="currentStatus='finish'">
-    current finish
-  </n-button>
-</n-button-group>
+<n-radio-group v-model="currentStatus" size="medium">
+  <n-radio-button value="error">
+    Error
+  </n-radio-button>
+  <n-radio-button value="process">
+    Process
+  </n-radio-button>
+  <n-radio-button value="wait">
+    Wait
+  </n-radio-button>
+  <n-radio-button  value="finish">
+    Finish
+  </n-radio-button>
+</n-radio-group>
 ```
 
 ```js
@@ -64,7 +64,7 @@ export default {
   },
   data () {
     return {
-      current: null,
+      current: 1,
       currentStatus: 'error'
     }
   },
