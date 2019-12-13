@@ -41,6 +41,10 @@ export default {
       type: Boolean,
       default: true
     },
+    detached: {
+      type: Boolean,
+      default: true
+    },
     ...presetProps
   },
   data () {
