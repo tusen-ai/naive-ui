@@ -25,7 +25,7 @@
       </div>
     </div>
     <div
-      class="n-scrollbar-vertical-rail"
+      class="n-scrollbar-rail n-scrollbar-rail--vertical"
       :style="{width: scrollbarSize}"
     >
       <transition name="n-scrollbar--transition">
@@ -45,7 +45,7 @@
       </transition>
     </div>
     <div
-      class="n-scrollbar-horizontal-rail"
+      class="n-scrollbar-rail n-scrollbar-rail--horizontal"
       :style="{height: scrollbarSize}"
     >
       <transition name="n-scrollbar--transition">

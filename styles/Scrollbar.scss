@@ -4,81 +4,75 @@
 
 @include themes-mixin {
   @include b(scrollbar) {
-    & > {
-      @include b(scrollbar-vertical-rail) {
-        > .n-scrollbar-rail__scrollbar {
-          @include fade-in-transition(scrollbar);
-          position: absolute;
-          cursor: pointer;
-          background-color: map-get($scrollbar-color, 'default');
-          transition: background-color .2s $default-cubic-bezier;
-          &:hover {
-            background-color: map-get($scrollbar-color, 'hover');
-          }
-        }
-      }
-      @include b(scrollbar-horizontal-rail) {
-        > .n-scrollbar-rail__scrollbar {
-          @include fade-in-transition(scrollbar);
-          position: absolute;
-          cursor: pointer;
-          background-color: map-get($scrollbar-color, 'default');
-          transition: background-color .2s $default-cubic-bezier;
-          &:hover {
-            background-color: map-get($scrollbar-color, 'hover');
-          }
-        }
-      }
-    }
     @include once {
       position: relative;
       height: 100%;
-      @include b(scrollbar-vertical-rail) {
-        position: absolute;
-        user-select: none;
-        -moz-user-select: none;
-      }
-      @include b(scrollbar-horizontal-rail) {
-        position: absolute;
-        user-select: none;
-        -moz-user-select: none;
-      }
-      .n-scrollbar-horizontal-rail {
-        left: 0;
-        right: 0;
-        bottom: 2.5px;
-        .n-scrollbar-rail__scrollbar {
-          right: 0;
+    }
+    & > {
+      @include once {
+        @include b(scrollbar-container) {
+          width: 100%;
+          overflow: scroll;
+          height: 100%;
+          max-height: inherit;
+          scrollbar-width: 0;
+          &::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+          }
+          & > {
+            @include b(scrollbar-content) {
+              width: fit-content;
+              overflow: hidden;
+              min-width: 100%;
+              /** stylelint-disable */
+              width: -moz-fit-content;    /* Firefox/Gecko */
+              width: -webkit-fit-content; /* Chrome */
+              /* stylelint-enable */
+            }
+          }
         }
       }
-      .n-scrollbar-vertical-rail {
-        position: absolute;
-        right: 2.5px;
-        top: 0;
-        bottom: 0;
-        .n-scrollbar-rail__scrollbar {
-          bottom: 0;
+      @include b(scrollbar-rail) {
+        @include once {
+          position: absolute;
+          user-select: none;
+          -moz-user-select: none;
+          @include m(horizontal) {
+            left: 0;
+            right: 0;
+            bottom: 2.5px;
+            & > {
+              @include e(scrollbar) {
+                right: 0;
+              }
+            }
+          }
+          @include m(vertical) {
+            right: 2.5px;
+            top: 0;
+            bottom: 0;
+            & > {
+              @include e(scrollbar) {
+                bottom: 0;
+              }
+            }
+          }
         }
-      }
-      .n-scrollbar-container {
-        width: 100%;
-        overflow: scroll;
-        height: 100%;
-        max-height: inherit;
-        scrollbar-width: none;
-        &::-webkit-scrollbar {
-          width: 0;
-          height: 0;
+        & > {
+          @include e(scrollbar) {
+            @include once {
+              @include fade-in-transition(scrollbar);
+              position: absolute;
+              cursor: pointer;
+            }
+            background-color: map-get($scrollbar-color, 'default');
+            transition: background-color .2s $default-cubic-bezier;
+            &:hover {
+              background-color: map-get($scrollbar-color, 'hover');
+            }
+          }
         }
-      }
-      .n-scrollbar-content {
-        width: fit-content;
-        // overflow: hidden;
-        min-width: 100%;
-        /** stylelint-disable */
-        width: -moz-fit-content;    /* Firefox/Gecko */
-        width: -webkit-fit-content; /* Chrome */
-        /* stylelint-enable */
       }
     }
   }
