@@ -4,14 +4,30 @@
 
 @include themes-mixin {
   @include b(scrollbar) {
-    .n-scrollbar-rail__scrollbar {
-      @include fade-in-transition(scrollbar);
-      position: absolute;
-      cursor: pointer;
-      background-color: map-get($scrollbar-color, 'default');
-      transition: background-color .2s $default-cubic-bezier;
-      &:hover {
-        background-color: map-get($scrollbar-color, 'hover');
+    & > {
+      @include b(scrollbar-vertical-rail) {
+        > .n-scrollbar-rail__scrollbar {
+          @include fade-in-transition(scrollbar);
+          position: absolute;
+          cursor: pointer;
+          background-color: map-get($scrollbar-color, 'default');
+          transition: background-color .2s $default-cubic-bezier;
+          &:hover {
+            background-color: map-get($scrollbar-color, 'hover');
+          }
+        }
+      }
+      @include b(scrollbar-horizontal-rail) {
+        > .n-scrollbar-rail__scrollbar {
+          @include fade-in-transition(scrollbar);
+          position: absolute;
+          cursor: pointer;
+          background-color: map-get($scrollbar-color, 'default');
+          transition: background-color .2s $default-cubic-bezier;
+          &:hover {
+            background-color: map-get($scrollbar-color, 'hover');
+          }
+        }
       }
     }
     @include once {

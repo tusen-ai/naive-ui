@@ -1,13 +1,129 @@
 <template>
-  <div>log</div>
+  <div
+    class="n-log"
+    :style="{
+      lineHeight: lineHeight,
+      height: styleHeight
+    }"
+    @wheel="handleWheel"
+  >
+    <n-scrollbar ref="scrollbar" theme="dark" @scroll="handleScroll">
+      <pre
+        class="n-log__line n-log__line--padding"
+        :style="{
+          lineHeight: lineHeight,
+          height: paddingStyleHeight
+        }"
+      >{{ topLoading ? "Loading More" : 'Wheel Up to View More' }}</pre>
+      <pre class="n-log__lines">{{ processedLog }}</pre>
+      <!-- <pre v-for="(line, index) in synthesizedLines" :key="index" class="n-log__line">{{ line }}</pre> -->
+      <pre
+        class="n-log__line n-log__line--padding"
+        :style="{
+          lineHeight: lineHeight,
+          height: paddingStyleHeight
+        }"
+      >{{ bottomLoading ? "Loading More" : 'Wheel Down to View More' }}</pre>
+    </n-scrollbar>
+  </div>
 </template>
 
 <script>
+import NScrollbar from '../../Scrollbar'
 
 export default {
   name: 'NLog',
+  components: {
+    NScrollbar
+  },
   props: {
-
+    topLoading: {
+      type: Boolean,
+      default: true
+    },
+    bottomLoading: {
+      type: Boolean,
+      default: true
+    },
+    trim: {
+      type: Boolean,
+      default: false
+    },
+    log: {
+      type: String,
+      default: null
+    },
+    lines: {
+      type: Array,
+      default: () => []
+    },
+    lineHeight: {
+      type: Number,
+      default: 1.25
+    },
+    rows: {
+      type: Number,
+      default: 20
+    },
+    offsetTop: {
+      type: Number,
+      default: 0
+    },
+    offsetBottom: {
+      type: Number,
+      default: 0
+    }
+  },
+  data () {
+    return {
+      memorizedScrollTop: 0,
+      memorizedScrollBottom: null
+    }
+  },
+  computed: {
+    paddingStyleHeight () {
+      return `${this.lineHeight}em`
+    },
+    styleHeight () {
+      return `${this.rows * this.lineHeight}em`
+    },
+    processedLog () {
+      console.log(this.log.trim())
+      if (this.trim && this.log) return this.log.trim()
+      else return this.log
+    },
+    synthesizedLines () {
+      if (this.lines.length) return this.lines
+      if (!this.log) return []
+      return this.log.split('\n')
+    }
+  },
+  methods: {
+    handleScroll (e, container, content) {
+      const containerHeight = container.offsetHeight
+      const containerScrollTop = container.scrollTop
+      const contentHeight = content.offsetHeight
+      const scrollTop = containerScrollTop
+      const scrollBottom = contentHeight - containerScrollTop - containerHeight
+      if (scrollTop <= this.offsetTop) this.$emit('reach-top')
+      if (scrollBottom <= this.offsetBottom) this.$emit('reach-bottom')
+    },
+    handleWheel (e) {
+      if (this.$refs.scrollbar && this.$refs.scrollbar.$refs.scrollContainer) {
+        const container = this.$refs.scrollbar.$refs.scrollContainer
+        const containerHeight = container.offsetHeight
+        const containerScrollTop = container.scrollTop
+        if (this.$refs.scrollbar.$refs.scrollContent) {
+          const content = this.$refs.scrollbar.$refs.scrollContent
+          const contentHeight = content.offsetHeight
+          const scrollTop = containerScrollTop
+          const scrollBottom = contentHeight - containerScrollTop - containerHeight
+          const deltaY = e.deltaY
+          if (scrollTop === 0 && deltaY < 0) this.$emit('reach-top')
+          if (scrollBottom === 0 && deltaY > 0) this.$emit('reach-bottom')
+        }
+      }
+    }
   }
 }
 </script>

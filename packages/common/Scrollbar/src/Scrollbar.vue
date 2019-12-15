@@ -302,7 +302,6 @@ export default {
     },
     handleHorizontalScrollMouseMove (e) {
       if (this.horizontalScrollbarActivated) {
-        console.log('here')
         window.clearTimeout(this.horizontalScrollbarVanishTimerId)
         window.clearTimeout(this.verticalScrollbarVanishTimerId)
         const dX = (e.clientX - this.memorizedMouseX)
