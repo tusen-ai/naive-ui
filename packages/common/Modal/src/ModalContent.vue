@@ -9,7 +9,7 @@
   >
     <n-scrollbar ref="scrollbar">
       <transition
-        name="n-modal-content--transition"
+        name="n-modal-content-transition"
         @enter="handleEnter"
         @after-leave="handleAfterLeave"
         @before-leave="handleBeforeLeave"

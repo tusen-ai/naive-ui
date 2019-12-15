@@ -45,7 +45,8 @@
     @include notification-type-mixin(default);
     background-color: $--notification-background-color;
     color: $--notification-text-color;
-    transition:
+    @include once {
+      transition:
       background-color .3s $default-cubic-bezier,
       color .3s $default-cubic-bezier,
       opacity .3s $default-cubic-bezier,
@@ -53,7 +54,6 @@
       max-height .3s $default-cubic-bezier,
       margin-bottom .3s linear,
       box-shadow .3s $default-cubic-bezier;
-    @include once {
       font-family: $default-font-family;
       font-size: 14px;
       font-weight: 400;

@@ -1,5 +1,5 @@
 <template>
-  <transition name="n-modal-overlay--transition">
+  <transition name="n-modal-overlay-transition">
     <div
       v-if="active"
       :key="'overlay'"
