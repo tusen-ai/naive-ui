@@ -19,7 +19,7 @@
         <div class="n-transfer-list-header__header">
           Source
         </div>
-        <div class="n-transfer-list-header__label">
+        <div class="n-transfer-list-header__extra">
           {{ sourceCheckedValueSet.size }} / {{ sourceOptions.length }}
         </div>
       </div>
@@ -28,7 +28,7 @@
         @mouseleave="handleSourceListMouseLeave"
       >
         <n-scrollbar ref="leftScrollbar">
-          <ul class="n-transfer-list-body-content">
+          <ul class="n-transfer-list-content">
             <transition name="n-transfer-list-light-bar--transition">
               <div
                 v-if="showLightBar"
@@ -88,7 +88,7 @@
         <div class="n-transfer-list-header__header">
           Target
         </div>
-        <div class="n-transfer-list-header__label">
+        <div class="n-transfer-list-header__extra">
           {{ targetCheckedValueSet.size }} / {{ targetOptions.length }}
         </div>
       </div>
@@ -97,7 +97,7 @@
         @mouseleave="handleTargetListMouseLeave"
       >
         <n-scrollbar ref="rightScrollbar">
-          <ul class="n-transfer-list-body-content">
+          <ul class="n-transfer-list-content">
             <transition name="n-transfer-list-light-bar--transition">
               <div
                 v-if="showSecondLightBar"
@@ -234,7 +234,6 @@ export default {
     targetOptions () {
       const valueSet = Array.isArray(this.value) ? new Set(this.value) : new Set()
       return this.options.filter(option => valueSet.has(option.value))
-      // value.filter(v => this.valueToOptionMap.has(v)).map(v => this.valueToOptionMap.get(v))
     },
     orderedOptions () {
       return this.sourceOptions.concat(this.targetOptions)
