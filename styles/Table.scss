@@ -1,11 +1,11 @@
-@import './mixins/mixins.scss';
-@import './themes/vars.scss';
+@import "./mixins/mixins.scss";
+@import "./themes/vars.scss";
 
 @include themes-mixin {
   @include b(table) {
     @include once {
       width: 100%;
-      border-radius: 12px;
+      border-radius: 6px;
       font-size: $table-font-size;
       overflow: hidden;
       padding-bottom: 8px;
