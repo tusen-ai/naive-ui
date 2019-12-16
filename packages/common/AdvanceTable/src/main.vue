@@ -911,9 +911,9 @@ export default {
         }
       }
       if (type !== 0) {
-        Object.keys(this.sortIndexs).forEach(key => {
-          if (key !== column.key) {
-            this.sortIndexs[key] = 0
+        Object.keys(this.sortIndexs).forEach(sorterKey => {
+          if (sorterKey !== column.key) {
+            this.sortIndexs[sorterKey] = 0
           }
         })
       }
