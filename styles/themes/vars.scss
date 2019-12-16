@@ -271,10 +271,10 @@ $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
 
 @mixin fade-in-transition($block: "fade-in", $enter-duration: .2s, $leave-duration: .2s) {
   &.#{$namespace}-#{$block}--transition-enter-active {
-    transition: opacity $enter-duration $default-cubic-bezier;
+    transition: all $enter-duration $default-cubic-bezier !important;
   }
   &.#{$namespace}-#{$block}--transition-leave-active {
-    transition: opacity $leave-duration $default-cubic-bezier;
+    transition: all $leave-duration $default-cubic-bezier !important;
   }
   &.#{$namespace}-#{$block}--transition-enter,
   &.#{$namespace}-#{$block}--transition-leave-to {
