@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import Timeline from './src/main.vue'
+import Timeline from './src/Timeline.vue'
 import TimelineItem from './src/TimelineItem.vue'
 
 Timeline.install = function (Vue) {

@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import Radio from './src/main.vue'
+import Radio from './src/Radio.vue'
 import RadioGroup from './src/RadioGroup.vue'
 import RadioButton from './src/RadioButton.vue'
 

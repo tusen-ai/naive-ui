@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import Dropdown from './src/main.vue'
+import Dropdown from './src/Dropdown.vue'
 import DropdownSubmenu from './src/DropdownSubmenu'
 import DropdownItem from './src/DropdownItem'
 import DropdownDivider from './src/DropdownDivider'

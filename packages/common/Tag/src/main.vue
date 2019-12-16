@@ -20,7 +20,7 @@
       class="n-tag__close-mark"
       @click="handleCloseClick"
     >
-      <close-icon />
+      <md-close />
     </div>
   </div>
 </template>
@@ -29,12 +29,12 @@
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import asthemecontext from '../../../mixins/asthemecontext'
-import CloseIcon from './CloseIcon'
+import mdClose from '../../../icons/md-close'
 
 export default {
   name: 'NTag',
   components: {
-    CloseIcon
+    mdClose
   },
   mixins: [withapp, themeable, asthemecontext],
   model: {

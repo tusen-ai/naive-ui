@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import Descriptions from './src/main.vue'
+import Descriptions from './src/Descriptions.vue'
 import DescriptionsItem from './src/DescriptionsItem.vue'
 
 Descriptions.install = function (Vue) {

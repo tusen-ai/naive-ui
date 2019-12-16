@@ -37,9 +37,9 @@ renderer.code = (code, language) => {
   return `<pre><code class="${language}">${highlighted}</code></pre>`
 }
 
-// marked.setOptions({
-//   renderer
-// })
+marked.setOptions({
+  renderer
+})
 
 function template (demos, demosLiteral, isSingleColumn = false) {
   // return `<component-demos :single-column="${isSingleColumn}">
