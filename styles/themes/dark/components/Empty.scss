@@ -1,0 +1,5 @@
+@mixin setup-dark-empty {
+  $--empty-text-color: $--n-disabled-text-color !global;
+  $--empty-icon-fill: $--n-disabled-text-color !global;
+  $--empty-extra-text-color: $--n-secondary-text-color !global;
+}

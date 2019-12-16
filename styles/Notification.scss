@@ -2,161 +2,177 @@
 
 @import './themes/vars.scss';
 
+@include b(notification-container) {
+  z-index: 4000;
+  position: fixed;
+  top: 12px;
+  left: 0;
+  right: 0;
+  height: 0;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  @include b(scrollbar-container) {
+    height: -moz-fit-content !important;
+    height: fit-content !important;
+    max-height: 100vh !important;
+    @include b(scrollbar-content) {
+      padding-top: 12px;
+    }
+  }
+  @include m(scrollable) {
+    top: 0;
+  }
+}
+
+@mixin notification-type-mixin ($type) {
+  @include m($type + '-type') {
+    @include e(avatar) {
+      @include b(icon) {
+        fill: map-get($--notification-avatar-fill, $type);
+      }
+    }
+  }
+}
+
 @include themes-mixin {
   @include b(notification) {
-    &.n-notification__container {
-      .n-notification__cell {
-        background: linear-gradient(
-          225deg,
-          $--notification-background-start-color 0%,
-          $--notification-background-end-color 100%
-        );
-        color: $--notification-text-color;
-        @include once {
-          position: relative;
+    @include notification-type-mixin(success);
+    @include notification-type-mixin(info);
+    @include notification-type-mixin(warning);
+    @include notification-type-mixin(error);
+    @include notification-type-mixin(default);
+    background-color: $--notification-background-color;
+    color: $--notification-text-color;
+    @include once {
+      transition:
+      background-color .3s $default-cubic-bezier,
+      color .3s $default-cubic-bezier,
+      opacity .3s $default-cubic-bezier,
+      transform .3s $default-cubic-bezier,
+      max-height .3s $default-cubic-bezier,
+      margin-bottom .3s linear,
+      box-shadow .3s $default-cubic-bezier;
+      font-family: $default-font-family;
+      font-size: 14px;
+      font-weight: 400;
+      position: relative;
+      display: flex;
+      overflow: hidden;
+      flex-shrink: 0;
+      margin-bottom: 12px;
+      margin-left: 12px;
+      margin-right: 16px;
+      padding-left: 16px;
+      padding-right: 16px;
+      width: 365px;
+      border-radius: 6px;
+      box-shadow:  0px 2px 12px 0px rgba(0, 0, 0, 0.18);
+      box-sizing: border-box;
+      opacity: 1;
+      &-transition-enter, &-transition-leave-to {
+        opacity: 0;
+        margin-bottom: 0;
+        transform: translateX(calc(100% + 16px));
+      }
+      &-transition-leave, &-transition-enter-to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      @include m(no-avatar) {
+        @include b(notification-main) {
+          margin-left: 8px;
+          width: calc(100% - 8px);
+        }
+      }
+    }
+    @include e(close) {
+      @include once {
+        position: absolute;
+        top: 16px;
+        right: 12px;
+        font-size: 20px;
+        cursor: pointer;
+      }
+      @include b(icon) {
+        fill: $--notification-close-fill;
+      }
+    }
+    @include e(avatar) {
+      @include once {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        width: 28px;
+        height: 28px;
+        font-size: 28px;
+      }
+    }
+    @include b(notification-main) {
+      @include once {
+        padding-top: 16px;
+        padding-bottom: 16px;
+        box-sizing: border-box;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-left: 40px;
+        width: calc(100% - 40px);
+        @include b(notification-main-footer) {
           display: flex;
-          overflow: hidden;
-          flex-shrink: 0;
-          box-sizing: border-box;
-          margin-bottom: 9px;
-          padding: 15px;
-          max-height: 400px;
-          width: 365px;
-          border-radius: 6px;
-          box-shadow:  0px 2px 12px 0px rgba(0, 0, 0, 0.18);
-          font-weight: 700;
-          opacity: 1;
-          transition: opacity 0.3s $default-cubic-bezier,
-            transform 0.3s $default-cubic-bezier,
-            max-height 0.3s $default-cubic-bezier, margin-bottom 0.3s linear,
-            padding-top 0.3s $default-cubic-bezier,
-            padding-bottom 0.3s $default-cubic-bezier;
-          transform: translateX(0);
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 8px;
         }
+      }
+      @include e(header) {
         @include once {
-          &.is-going-to-emerge {
-            margin-bottom: 0;
-            padding-top: 0;
-            padding-bottom: 0;
-            max-height: 0;
-            opacity: 0;
-            transform: translateX(calc(100% + 15px));
-            .n-notification-cell__avator {
-              top: 0;
-            }
-            .n-notification-cell__close-mark {
-              top: 0;
-            }
-          }
-
-          &.is-vanishing {
-            margin-bottom: 0;
-            padding-top: 0;
-            padding-bottom: 0;
-            max-height: 0;
-            opacity: 0;
-            transform: translateX(calc(100% + 15px));
-          }
+          font-weight: 700;
+          font-size: 16px;
+          transition: color .3s $default-cubic-bezier;
         }
-
-        .n-notification-cell__wrapper {
-          position: relative;
-          width: 100%;
-          .n-notification-cell__deactivator {
-            @include once {
-              position: absolute;
-              top: 0;
-              right: 0;
-              width: 15px;
-              height: 15px;
-              cursor: pointer;
-              transition: top 0.3s $default-cubic-bezier;
-            }
-
-            &::before {
-              position: absolute;
-              top: -2px;
-              box-sizing: content-box;
-              width: 6px;
-              height: 6px;
-              border-right: 2px solid $--notification-cell_deactive-color;
-              border-bottom: 2px solid $--notification-cell_deactive-color;
-              content: '';
-              transform: rotate(45deg);
-            }
-
-            &::after {
-              position: absolute;
-              top: 7px;
-              box-sizing: content-box;
-              width: 6px;
-              height: 6px;
-              border-top: 2px solid $--notification-cell_deactive-color;
-              border-left: 2px solid $--notification-cell_deactive-color;
-              content: '';
-              transform: rotate(45deg);
-            }
+        color: $--notification-header-text-color;
+      }
+      @include e(description) {
+        @include once {
+          margin-top: 8px;
+          font-size: 12px;
+          transition: color .3s $default-cubic-bezier;
+        }
+        color: $--notification-description-text-color;
+      }
+      @include e(content) {
+        @include once {
+          line-height: 1.25;
+          margin: 12px 0 0 0;
+          font-family: inherit;
+          &:first-child {
+            margin: 0;
           }
-
-          .n-notification-cell__avator {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 28px;
-            height: 28px;
-            border-radius: 14px;
-            background-color: $--notification-cell__avator-background-color;
-            color: $--notification-cell__avator-color;
-            text-align: center;
-            font-size: 18px;
-            line-height: 28px;
-            transition: top 0.3s $default-cubic-bezier;
+          white-space: pre-wrap;
+          word-wrap: break-word;
+          transition: color .3s $default-cubic-bezier;
+        }
+        color: $--notification-content-text-color;
+      }
+      @include b(notification-main-footer) {
+        @include once {
+          margin-top: 12px;
+        }
+        @include e(meta) {
+          @include once {
+            font-size: 12px;
+            transition: color .3s $default-cubic-bezier;
           }
-
-          .n-notification-cell__body {
-            @include once {
-              display: flex;
-              flex-direction: column;
-              margin-left: 41px;
-              width: calc(100% - 41px);
-              font-size: 14px;
-            }
-            @include once {
-              .n-notification-cell__title-meta {
-                margin-bottom: 8px;
-              }
-            }
-            @include once {
-              .n-notification-cell__footer {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                margin-top: 8px;
-              }
-            }
-
-            .n-notification-cell__header {
-              margin-bottom: 8px;
-              color: $--notification-cell__header-color;
-              font-weight: 700;
-              font-size: 16px;
-            }
-
-            .n-notification-cell__title-meta,
-            .n-notification-cell__meta {
-              color: $--notification-cell__title-meta-color;
-              font-size: 12px;
-            }
-            .n-notification-cell__content {
-              font-family: $default-font-family;
-              color: $--notification-cell__content-color;
-              white-space: pre-wrap;
-            }
-            .n-notification-cell__action {
-              color: $--notification-cell__action-color;
-              cursor: pointer;
-            }
+          color: $--notification-description-text-color;
+        }
+        @include e(action) {
+          @include once {
+            cursor: pointer;
+            transition: color .3s $default-cubic-bezier;
           }
+          color: $--notification-action-text-color;
         }
       }
     }

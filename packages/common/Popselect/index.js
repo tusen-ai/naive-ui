@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import Popselect from './src/main.vue'
+import Popselect from './src/Popselect.vue'
 
 Popselect.install = function (Vue) {
   Vue.component(Popselect.name, Popselect)

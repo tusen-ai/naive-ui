@@ -7,6 +7,9 @@
     padding: 5px 0;
     position: relative;
     z-index: 0;
+    width: calc(100% - 14px);
+    margin-left: 7px;
+    margin-right: 7px;
     cursor: pointer;
     &:hover {
       @include b(slider-rail) {
@@ -98,7 +101,7 @@
       top: 50%;
       right: 0;
       @include b(slider-dot) {
-        transition: box-shadow .3s $default-cubic-bezier;
+        transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
         position: absolute;
         transform: translateX(-50%) translateY(-50%);
         height: $--slider-dot-size;

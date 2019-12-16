@@ -6,9 +6,9 @@
     }"
   >
     <div
-      class="n-collapse-item__title"
+      class="n-collapse-item__header"
       :class="{
-        'n-collapse-item__title--active': !collapse
+        'n-collapse-item__header--active': !collapse
       }"
       @click="handleClick"
     >
@@ -60,10 +60,6 @@ export default {
     name: {
       type: String,
       default: null
-    },
-    value: {
-      type: Boolean,
-      default: false
     }
   },
   computed: {

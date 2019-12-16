@@ -1,127 +1,217 @@
 <template>
-  <div
-    class="n-dropdown-submenu"
+  <n-dropdown-item
+    ref="activator"
+    :label="label"
+    name="n-dropdown-submenu-item"
+    :value="value"
+    as-submenu
     @mouseenter="handleMouseEnter"
+    @mouseleave="handleMouseLeave"
   >
     <div
-      ref="activator"
-      class="n-dropdown-submenu__activator"
-      @click="handleActivatorClick"
-      @mouseenter="handleMouseEnterActivator"
-      @mouseleave="handleMouseLeaveActivator"
+      class="n-dropdown-submenu-activator"
     >
-      <slot name="activator" />
+      <slot name="activator">
+        {{ label }}
+      </slot>
+      <n-icon v-if="arrow" class="n-dropdown-submenu-activator__arrow">
+        <ios-arrow-forward />
+      </n-icon>
     </div>
     <transition
-      name="n-dropdown-submenu--transition"
+      name="n-fade-in-scale-up--transition"
     >
-      <div
+      <n-dropdown-menu
         v-if="active"
-        class="n-dropdown-submenu__menu"
-        @mouseenter="handleMouseEnterMenu"
-        @mouseleave="handleMouseLeaveMenu"
+        ref="content"
+        :style="style"
+        :theme="synthesizedTheme"
+        class="n-dropdown-submenu"
+        :auto-focus="false"
       >
-        <transition name="n-dropdown-menu-light-bar--transition">
-          <div
-            v-if="showLightBar"
-            class="n-dropdown-menu-light-bar-container"
-          >
-            <div
-              class="n-dropdown-menu-light-bar"
-              :style="{ top: `${lightBarTop}px` }"
-            />
-          </div>
-        </transition>
         <slot />
-      </div>
+      </n-dropdown-menu>
     </transition>
-  </div>
+  </n-dropdown-item>
 </template>
 
 <script>
-import bubblecallable from '../../../mixins/bubblecallable'
-import withlightbar from '../../../mixins/withlightbar'
+import NDropdownMenu from './DropdownMenu'
+import NDropdownItem from './DropdownItem'
+import themeable from '../../../mixins/themeable'
+import NIcon from '../../Icon'
+import iosArrowForward from '../../../icons/ios-arrow-forward'
+import placeable from '../../../mixins/placeable'
 
 export default {
   name: 'NDropdownSubmenu',
-  mixins: [ bubblecallable, withlightbar ],
+  components: {
+    NDropdownMenu,
+    NDropdownItem,
+    NIcon,
+    iosArrowForward
+  },
+  mixins: [themeable, placeable],
+  provide () {
+    return {
+      NDropdownSubmenu: this
+    }
+  },
+  inject: {
+    NDropdownMenu: {
+      default: null
+    },
+    NBaseSelectMenu: {
+      default: null
+    },
+    NDropdownSubmenu: {
+      default: null
+    }
+  },
   props: {
-    trigger: {
-      validator (trigger) {
-        return ['click', 'hover'].includes(trigger)
-      },
-      default: 'hover'
+    arrow: {
+      type: Boolean,
+      default: true
+    },
+    label: {
+      type: String,
+      default: undefined
+    },
+    value: {
+      type: Number,
+      required: true
     },
     duration: {
       type: Number,
       default: 300
+    },
+    width: {
+      type: Number,
+      default: null
+    },
+    minWidth: {
+      type: Number,
+      default: null
+    },
+    maxWidth: {
+      type: Number,
+      default: null
+    },
+    positionMode: {
+      type: String,
+      default: 'absolute'
+    },
+    placement: {
+      type: String,
+      default: 'right-start'
     }
   },
   data () {
     return {
-      active: false,
-      vanishTimerId: null
+      vanishTimerId: null,
+      collectedOptions: [],
+      menuActivated: false
     }
   },
   computed: {
-    triggerByHover () {
-      return this.trigger === 'hover'
+    active () {
+      return this.menuActivated && this.menuPendingToBeActivated
     },
-    triggerByClick () {
-      return this.trigger === 'click'
+    synthesizedStyleWidth () {
+      if (this.NDropdownMenu.inheritedSubmenuWidth) {
+        return this.NDropdownMenu.inheritedSubmenuWidth + 'px'
+      }
+      return null
+    },
+    synthesizedStyleMinWidth () {
+      if (this.NDropdownMenu.inheritedSubmenuMinWidth) {
+        return this.NDropdownMenu.inheritedSubmenuMinWidth + 'px'
+      }
+      return null
+    },
+    synthesizedStyleMaxWidth () {
+      if (this.NDropdownMenu.inheritedSubmenuMaxWidth) {
+        return this.NDropdownMenu.inheritedSubmenuMaxWidth + 'px'
+      }
+      return null
+    },
+    style () {
+      const style = {}
+      if (this.width) {
+        style.width = this.width + 'px'
+      } else if (this.synthesizedStyleWidth) {
+        style.width = this.synthesizedStyleWidth
+      }
+      if (this.minWidth) {
+        style.minWidth = this.minWidth + 'px'
+      }
+      if (this.maxWidth) {
+        style.maxWidth = this.maxWidth + 'px'
+      }
+      return style
+    },
+    pendingOption () {
+      if (this.NBaseSelectMenu) {
+        return this.NBaseSelectMenu.pendingOption
+      }
+      return null
+    },
+    pendingOptionId () {
+      if (this.pendingOption) {
+        return this.pendingOption.id
+      }
+      return null
+    },
+    menuPendingToBeActivated () {
+      /**
+       * Here value is index + 1
+       * pendingOptiondId also means index + 1
+       */
+      if (this.value && this.pendingOptionId) {
+        return this.value === this.pendingOptionId
+      }
+      return false
+    }
+  },
+  watch: {
+    menuPendingToBeActivated (value) {
+      let rootDropdownMenu = this.NDropdownMenu
+      while (rootDropdownMenu.NDropdownMenu) {
+        rootDropdownMenu = rootDropdownMenu.NDropdownMenu
+      }
+      if (value) {
+        this.$nextTick().then(() => {
+          rootDropdownMenu.pendingSubMenuInstance = this
+        })
+      } else {
+        rootDropdownMenu.pendingSubMenuInstance = null
+      }
     }
   },
   methods: {
+    handleMouseEnter () {
+      this.activate()
+    },
+    handleMouseLeave (e) {
+      if (this.$el.parentElement.contains(e.relatedTarget)) {
+        this.deactivate()
+      }
+    },
     activate () {
       if (this.vanishTimerId) {
         window.clearTimeout(this.vanishTimerId)
         this.vanishTimerId = null
       }
-      this.active = true
+      this.menuActivated = true
     },
     deactivate () {
       if (this.vanishTimerId) {
         window.clearTimeout(this.vanishTimerId)
         this.vanishTimerId = null
       }
-      if (this.triggerByHover) {
-        this.vanishTimerId = window.setTimeout(() => {
-          this.active = false
-          this.hideLightBar()
-        }, this.duration)
-      } else {
-        this.active = false
-        this.hideLightBar()
-      }
-    },
-    handleActivatorClick () {
-      if (this.triggerByClick) {
-        this.active = !this.active
-      }
-    },
-    handleMouseEnterMenu () {
-      if (this.triggerByHover) {
-        this.activate()
-      }
-    },
-    handleMouseLeaveMenu (e) {
-      if (this.triggerByHover) {
-        this.deactivate()
-      }
-      this.hideLightBar()
-    },
-    handleMouseEnterActivator () {
-      if (this.triggerByHover) {
-        this.activate()
-      }
-    },
-    handleMouseLeaveActivator (e) {
-      if (this.triggerByHover) {
-        this.deactivate()
-      }
-    },
-    handleMouseEnter (e) {
-      this.bubbleCall(['NDropdownMenu', 'NDropdownSubmenu'], 'updateLightBarPosition', this.$el)
+      this.vanishTimerId = window.setTimeout(() => {
+        this.menuActivated = false
+      }, this.duration)
     }
   }
 }

@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import NCheckbox from './src/main.vue'
+import NCheckbox from './src/Checkbox.vue'
 import NCheckboxGroup from './src/CheckboxGroup.vue'
 
 NCheckbox.install = function (Vue) {

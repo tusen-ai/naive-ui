@@ -6,7 +6,12 @@
     @include b(scrollbar-container) {
       max-height: map-get($map: $--n-height, $key: $size) * 7.6;
     }
-    @include e(item, light-bar) {
+    @include b(base-select-option) {
+      height: map-get($map: $--n-height, $key: $size);
+      line-height: map-get($map: $--n-height, $key: $size);
+      font-size: map-get($map: $--n-font-size, $key: $size);
+    }
+    @include b(base-select-menu-light-bar) {
       height: map-get($map: $--n-height, $key: $size);
       line-height: map-get($map: $--n-height, $key: $size);
       font-size: map-get($map: $--n-font-size, $key: $size);
@@ -20,72 +25,84 @@
       @include base-select-size-mixin("small");
       @include base-select-size-mixin("medium");
       @include base-select-size-mixin("large");
+      @include base-select-size-mixin("huge");
       outline: none;
       margin-top: 4px;
       margin-bottom: 4px;
       z-index: 0;
       position: relative;
-      overflow: hidden;
       border-radius: 6px;
-      @include e(item-wrapper) {
+      transition: background-color .3s $default-cubic-bezier;
+      @include b(base-select-menu-option-wrapper) {
         position: relative;
         width: 100%;
       }
+      @include b(base-select-menu-light-bar-wrapper) {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        overflow: hidden;
+        border-radius: 6px;
+      }
       /** transition of menu light bar */
-      .n-base-select-menu__light-bar--transition-enter-active {
+      .n-base-select-menu-light-bar--transition-enter-active {
         transition: opacity .15s $fast-in-cubic-bezier, top .3s $default-cubic-bezier!important;
       }
-      .n-base-select-menu__light-bar--transition-leave-active {
+      .n-base-select-menu-light-bar--transition-leave-active {
         transition: opacity .15s $slow-out-cubic-bezier, top .3s $default-cubic-bezier!important;
       }
-      .n-base-select-menu__light-bar--transition-enter, .n-base-select-menu__light-bar--transition-leave-to {
+      .n-base-select-menu-light-bar--transition-enter, .n-base-select-menu-light-bar--transition-leave-to {
         opacity: 0;
       }
     }
     background-color: $--base-select-menu-background-color;
     box-shadow: $--base-select-menu-box-shadow;
-    @include e(item) {
+    @include b(base-select-option) {
       cursor: pointer;
       position: relative;
       padding: 0px 14px;
       white-space: nowrap;
-      color: map-get($map: $--base-select-menu-item-color, $key: "default");
+      transition: color .3s $default-cubic-bezier;
+      color: map-get($map: $--base-select-menu-option-color, $key: "default");
       @include m(selected) {
-        color: map-get($map: $--base-select-menu-item-color, $key: "selected");
+        color: map-get($map: $--base-select-menu-option-color, $key: "selected");
       }
       @include m(disabled) {
-        color: map-get($map: $--base-select-menu-item-color, $key: "disabled");
+        color: map-get($map: $--base-select-menu-option-color, $key: "disabled");
         &::after {
           display: none;
         }
         @include m(selected) {
-          color: map-get($map: $--base-select-menu-item-color, $key: "disabled-selected");
+          color: map-get($map: $--base-select-menu-option-color, $key: "disabled-selected");
           &::after {
-            border-right: 1px solid map-get($map: $--base-select-menu-item-color, $key: "disabled-selected");
-            border-bottom: 1px solid map-get($map: $--base-select-menu-item-color, $key: "disabled-selected");
+            border-right: 1px solid map-get($map: $--base-select-menu-option-color, $key: "disabled-selected");
+            border-bottom: 1px solid map-get($map: $--base-select-menu-option-color, $key: "disabled-selected");
             display: block;
           }
         }
         cursor: not-allowed;
       }
       @include m(no-data) {
-        color: map-get($map: $--base-select-menu-item-color, $key: "disabled");
+        color: map-get($map: $--base-select-menu-option-color, $key: "disabled");
         text-align: center;
         pointer-events: none;
       }
       @include m(not-found) {
-        color: map-get($map: $--base-select-menu-item-color, $key: "disabled");
+        color: map-get($map: $--base-select-menu-option-color, $key: "disabled");
         text-align: center;
         pointer-events: none;
 
       }
       @include m(loading) {
-        color: map-get($map: $--base-select-menu-item-color, $key: "disabled");
+        color: map-get($map: $--base-select-menu-option-color, $key: "disabled");
         text-align: center;
         pointer-events: none;
       }
     }
-    @include e(light-bar) {
+    @include b(base-select-menu-light-bar) {
+      transition: background-color .3s $default-cubic-bezier;
       position: absolute;
       width:100%;
       background-color: $--base-select-menu-light-bar-background-color;
@@ -94,7 +111,7 @@
       transition: top .15s $default-cubic-bezier;
     }
     @include m(multiple) {
-      @include e(item) {
+      @include b(base-select-option) {
         position: relative;
         transition: color .3s $default-cubic-bezier;
         padding-right: 28px;
@@ -110,8 +127,8 @@
             opacity: 0;
             transition: transform .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
           }
-          border-right: 1px solid $--n-primary-color;
-          border-bottom: 1px solid $--n-primary-color;
+          border-right: 1px solid $--base-select-menu-option-check-mark-color;
+          border-bottom: 1px solid $--base-select-menu-option-check-mark-color;
         }
         @include m(selected) {
           background: none;
@@ -121,7 +138,7 @@
           }
         }
         &:active {
-          color: $--n-primary-color;
+          color: map-get($map: $--base-select-menu-option-color, $key: "active");
         }
       }
     }

@@ -3,7 +3,14 @@
   $--checkbox-border-color: $--neutral-5 !global;
   $--checkbox-border-color--active: $--primary-6 !global;
   $--checkbox-indeterminate-color: $--neutral-10 !global;
+  $--checkbox-background-color: (
+    'default': rgba(255, 255, 255, 1),
+    'disabled': $--neutral-8
+  ) !global;
   $--checkbox-disabled: $--neutral-5 !global;
-  $--checkbox-disabled-bg-color: $--neutral-8 !global;
   $--checkbox-icon-fill: white !global;
+  $--checkbox-label-text-color: (
+    'default': $--n-secondary-text-color,
+    'disabled': $--n-disabled-text-color
+  ) !global;
 }

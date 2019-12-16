@@ -1,78 +1,93 @@
 @import './mixins/mixins.scss';
-@import './themes/vars.scss';
 
 @include themes-mixin {
   @include b(anchor) {
-    padding-left: 4px;
-    position: relative;
-    @include b(anchor-slot) {
-      position: absolute;
-      left: 2px;
-      width: 100%;
-      max-width: 0;
-      transition: top .15s $default-cubic-bezier, max-width .15s $default-cubic-bezier;
-      background-color: change-color($color: $--primary-6, $alpha: .2);
-      border-top-right-radius: 10.5px;
-      border-bottom-right-radius: 10.5px;
+    @include once {
+      padding-left: 4px;
+      position: relative;
+    }
+    @include b(anchor-link-background) {
+      @include once {
+        position: absolute;
+        left: 2px;
+        width: 100%;
+        max-width: 0;
+        transition: top .15s $default-cubic-bezier, max-width .15s $default-cubic-bezier;
+        border-top-right-radius: 10.5px;
+        border-bottom-right-radius: 10.5px;
+      }
+      background-color: $--anchor-link-background-color;
     }
     @include b(anchor-rail) {
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 4px;
-      border-radius: 2px;
-      transition: background-color .3s $default-cubic-bezier;
-      background-color: $--anchor-rail-background-color;
-      overflow: hidden;
-      @include e(bar) {
+      @include once {
         position: absolute;
         left: 0;
-        transition: top .15s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+        top: 0;
+        bottom: 0;
         width: 4px;
-        height: 21px;
-        background-color: transparent;
+        border-radius: 2px;
+        transition: background-color .3s $default-cubic-bezier;
+        overflow: hidden;
+      }
+      background-color: $--anchor-rail-background-color;
+      @include e(bar) {
+        @include once {
+          position: absolute;
+          left: 0;
+          transition: top .15s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+          width: 4px;
+          height: 21px;
+          background-color: transparent;
+        }
         @include m(active) {
           background-color: $--primary-6;
         }
       }
-      & + {
-        @include b(anchor-link) {
-          margin-top: 0;
+      @include once {
+        & + {
+          @include b(anchor-link) {
+            margin-top: 0;
+          }
         }
       }
     }
     @include b(anchor-link) {
-      margin-top: 10px;
-      padding-left: 24px;
-      position: relative;
-      height: 21px;
-      line-height: 21px;
-      @include e(title) {
-        outline: none;
-        max-width: 100%;
-        text-decoration: none;
-        white-space: nowrap;
+      @include once {
+        margin-top: 10px;
+        padding-left: 16px;
+        position: relative;
+        min-height: 21px;
         line-height: 21px;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        cursor: pointer;
-        display: inline-block;
-        font-size: 14px;
-        padding-right: 16px;
-        color: $--n-text-color;
-        transition: color .3s $default-cubic-bezier;
-        &:hover, &:focus {
-          color: $--n-primary-color;
-        }
-        @include m(active) {
-          color: $--n-primary-color;
+        display: flex;
+        flex-direction: column;
+        & > {
+            @include b(anchor-link) {
+            padding-left: 16px;
+          }
         }
       }
-    }
-    & > {
-      @include b(anchor-link) {
-        padding-left: 16px;
+      @include e(title) {
+        @include once {
+          outline: none;
+          max-width: 100%;
+          text-decoration: none;
+          white-space: nowrap;
+          line-height: 21px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          cursor: pointer;
+          display: inline-block;
+          font-size: 14px;
+          padding-right: 16px;
+          transition: color .3s $default-cubic-bezier;
+        }
+        color: map-get($--anchor-link-title-text-color, 'default');;
+        &:hover, &:focus {
+          color: map-get($--anchor-link-title-text-color, 'hover');
+        }
+        @include m(active) {
+          color: map-get($--anchor-link-title-text-color, 'active');
+        }
       }
     }
   }

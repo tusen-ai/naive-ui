@@ -23,6 +23,9 @@ export default {
       this.$el.style.maxHeight = 0
       this.$el.getBoundingClientRect()
     },
+    handleAfterLeave () {
+      this.$emit('after-leave')
+    },
     handleEnter () {
       this.$nextTick().then(() => {
         this.$el.style.height = this.$el.offsetHeight + 'px'
@@ -45,7 +48,8 @@ export default {
         beforeLeave: this.handleBeforeLeave,
         leave: this.handleLeave,
         enter: this.handleEnter,
-        afterEnter: this.handleAfterEnter
+        afterEnter: this.handleAfterEnter,
+        afterLeave: this.handleAfterLeave
       }
     }, this.$slots.default)
   }

@@ -1,4 +1,4 @@
-import Modal from './src/main.vue'
+import Modal from './src/Modal.vue'
 
 Modal.install = function (Vue) {
   Vue.component(Modal.name, Modal)

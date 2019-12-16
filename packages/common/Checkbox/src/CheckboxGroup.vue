@@ -1,8 +1,20 @@
 <script>
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
+import asthemecontext from '../../../mixins/asthemecontext'
+import asformitem from '../../../mixins/asformitem'
+
 export default {
   name: 'NCheckboxGroup',
+  mixins: [
+    withapp,
+    themeable,
+    asthemecontext,
+    asformitem()
+  ],
   provide () {
     return {
+      NFormItem: null,
       NCheckboxGroup: this
     }
   },
@@ -15,6 +27,11 @@ export default {
   data () {
     return {
       collectedCheckboxValues: []
+    }
+  },
+  watch: {
+    value (value, oldValue) {
+      this.$emit('change', value, oldValue)
     }
   },
   methods: {

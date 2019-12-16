@@ -4,7 +4,14 @@
   $--checkbox-border-color: $border-color !global;
   $--checkbox-border-color--active: $--primary-6 !global;
   $--checkbox-indeterminate-color: $--neutral-10 !global;
+  $--checkbox-background-color: (
+    'default': rgba(255, 255, 255, 0),
+    'disabled': rgba(255, 255, 255, 0.16)
+  ) !global;
   $--checkbox-disabled: $border-color !global;
-  $--checkbox-disabled-bg-color: rgba(255, 255, 255, 0.16) !global;
-  $--checkbox-icon-fill: black !global;
+  $--checkbox-icon-fill: $--n-background-color !global;
+  $--checkbox-label-text-color: (
+    'default': $--n-secondary-text-color,
+    'disabled': $--n-disabled-text-color
+  ) !global;
 }

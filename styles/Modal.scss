@@ -1,0 +1,86 @@
+@import './mixins/mixins.scss';
+
+@include themes-mixin {
+  @include b(modal-content) {
+    @include b(card) {
+      background-color: $--n-dialog-color;
+    }
+    @include once {
+      @include b(confirm) {
+        width: 80vw;
+      }
+    }
+  }
+}
+
+@include b(modal-container) {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 0;
+  width: 0;
+  display: flex;
+}
+
+@include b(modal-overlay) {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .4);
+  &#{&}-transition-enter-active {
+    transition: background-color .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+  }
+  
+  &#{&}-transition-leave-active {
+    transition: background-color .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+  }
+  
+  &#{&}-transition-enter, &#{&}-transition-leave-to {
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+
+@include b(modal-content) {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: visible;
+  & > {
+    @include b(scrollbar) {
+      & > {
+        @include b(scrollbar-container) {
+          & > {
+            @include b(scrollbar-content) {
+              min-height: 100%;
+              display: flex;
+            }
+          }
+        }
+      }
+    }
+  }
+  @include not-m(active) {
+    visibility: hidden;
+  }
+}
+
+@include b(modal-content-slot) {
+  &#{&}-transition-enter-active {
+    opacity: 1;
+    transition: opacity .3s cubic-bezier(.4, 0, .2, 1), transform .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+    transform: scale(1);
+  }
+  &#{&}-transition-leave-active {
+    opacity: 1;
+    transition: opacity .3s cubic-bezier(.4, 0, .2, 1), transform .3s cubic-bezier(0.4, 0.0, 1, 1);
+    transform: scale(1);
+  }
+  &#{&}-transition-enter, &#{&}-transition-leave-to {
+    opacity: 0;
+    transform: scale(.5);
+  }
+}

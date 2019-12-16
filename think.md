@@ -84,9 +84,14 @@ confirm 有 bug = =...和 button 颜色相关，之后检查吧
 
 Radio Button 默认主题下是否 hollow out，这是个问题
 
-## 2019.11.12
+## 2019.11.14
 
-table 在浏览器尺寸发生变化的时候冻结列会发生 1px 的挤出
+base picker focus 问题
+
+## 2019.12.3
+
+Dropdown Submenu 定位问题
+还有那个... Modal + border 的问题，怎么解决
 
 ## TODO
 

@@ -45,6 +45,7 @@
               </template>
             </n-button>
             <n-button
+              v-if="index===value.length-1"
               circle
               @click="add"
             >

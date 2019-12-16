@@ -11,6 +11,7 @@
   }
   @include b(time-picker-selector) {
     @include once {
+      outline: none;
       font-size: 12px;
       border-radius: 6px;
       margin: 4px 0;

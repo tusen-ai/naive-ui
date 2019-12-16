@@ -1,6 +1,21 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
+@mixin radio-group-size-mixin ($size) {
+  @include m($size + '-size') {
+    line-height: map-get($--n-height, $size);
+    height: map-get($--n-height, $size);
+    @include b(radio-button) {
+      line-height: map-get($--n-height, $size);
+      height: map-get($--n-height, $size);
+      font-size: map-get($--n-font-size, $size);
+    }
+    @include e(splitor) {
+      height: map-get($--n-height, $size);
+    }
+  }
+}
+
 @include themes-mixin {
   @include b(radio) {
     @include once {
@@ -89,58 +104,76 @@
 
 @include themes-mixin {
   @include b(radio-group) {
-    display: inline-block;
-    white-space: nowrap;
-    height: 28px;
-    @include b(radio-button) {
-      color: map-get($--radio-button-label-color, 'default');
-      outline: none;
-      position: relative;
-      user-select: none;
+    @include once {
+      @include radio-group-size-mixin('small');
+      @include radio-group-size-mixin('medium');
+      @include radio-group-size-mixin('large');
       display: inline-block;
+      white-space: nowrap;
       height: 28px;
       line-height: 28px;
-      box-sizing: border-box;
-      padding-left: 14px;
-      padding-right: 14px;
-      white-space: nowrap;
+    }
+    @include b(radio-button) {
+      @include once {
+        vertical-align: bottom;
+        outline: none;
+        position: relative;
+        user-select: none;
+        display: inline-block;
+        height: 28px;
+        line-height: 28px;
+        box-sizing: border-box;
+        padding-left: 14px;
+        padding-right: 14px;
+        white-space: nowrap;
+        transition: background-color .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier;
+        @include e(border-mask) {
+          pointer-events: none;
+          position: absolute;
+          box-shadow: inset 0 0 0 $--radio-border-mask-width transparent;
+          transition: box-shadow .3s $default-cubic-bezier;
+          left: -1px;
+          bottom: -1px;
+          right: -1px;
+          top: -1px;
+        }
+      }
+      color: map-get($--radio-button-label-color, 'default');
       border-top: 1px solid map-get($--radio-button-border-color, 'default');
       border-bottom: 1px solid map-get($--radio-button-border-color, 'default');
-      transition: background-color .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier;
-      @include e(border-mask) {
-        pointer-events: none;
-        position: absolute;
-        box-shadow: inset 0 0 0 $--radio-border-mask-width transparent;
-        transition: box-shadow .3s $default-cubic-bezier;
-        left: -1px;
-        bottom: -1px;
-        right: -1px;
-        top: -1px;
-      }
+      
       &:first-child {
-        border-top-left-radius: 6px;
-        border-bottom-left-radius: 6px;
-        border-left: 1px solid map-get($--radio-button-border-color, 'default');
-        @include e(border-mask) {
+        @include once {
           border-top-left-radius: 6px;
           border-bottom-left-radius: 6px;
+          @include e(border-mask) {
+            border-top-left-radius: 6px;
+            border-bottom-left-radius: 6px;
+          }
         }
+        border-left: 1px solid map-get($--radio-button-border-color, 'default');
       }
       &:last-child {
-        border-top-right-radius: 6px;
-        border-bottom-right-radius: 6px;
-        border-right: 1px solid map-get($--radio-button-border-color, 'default');
-        @include e(border-mask) {
+        @include once {
           border-top-right-radius: 6px;
           border-bottom-right-radius: 6px;
+          @include e(border-mask) {
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
+          }
         }
+        border-right: 1px solid map-get($--radio-button-border-color, 'default');        
       }
       @include not-m(disabled) {
-        cursor: pointer;
+        @include once {
+          cursor: pointer;
+        }
         &:hover {
           @include e(border-mask) {
-            box-shadow: inset 0 0 0 $--radio-border-mask-width map-get($--radio-button-border-color, 'hover');
-            transition: box-shadow .3s $default-cubic-bezier;
+            box-shadow: map-get($--radio-button-box-shadow, 'hover');
+            @include once {
+              transition: box-shadow .3s $default-cubic-bezier;
+            }
           }
           @include not-m(checked) {
             color: map-get($--radio-button-label-color, 'hover');
@@ -148,7 +181,7 @@
         }
         &:focus:not(:active) {
           @include e(border-mask) {
-            box-shadow: inset 0 0 0 1px map-get($--radio-button-label-color, 'active'), 0 0 0 2px change-color(map-get($--radio-button-label-color, 'active'), $alpha: .3);
+            box-shadow: map-get($--radio-button-box-shadow, 'focus')
           }
         }
       }
@@ -158,23 +191,26 @@
         border-color:  map-get($--radio-button-border-color, 'active');
       }
       @include m(disabled) {
-        cursor: not-allowed;
+        @include once {
+          cursor: not-allowed;
+        }
         opacity: $--radio-disabled-opacity;
       }
     }
     @include e(splitor) {
-      display: inline-block;
-      vertical-align: bottom;
-      height: 28px;
-      width: 1px;
+      @include once {
+        display: inline-block;
+        vertical-align: bottom;
+        height: 28px;
+        width: 1px;
+        transition: background-color .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
+      }
       background-color: map-get($--radio-button-border-color, 'default');
-      transition: background-color .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
       @include m(checked) {
         background-color: map-get($--radio-button-border-color, 'active');
       }
       @include m(disabled) {
         opacity: $--radio-disabled-opacity;
-        // background-color: map-get($--radio-button-border-color, 'default');
       }
     }
   }

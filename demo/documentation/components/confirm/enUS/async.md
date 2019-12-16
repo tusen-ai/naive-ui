@@ -16,7 +16,7 @@
 export default {
   methods: {
     handleClick(e) {
-      const confirmInstance = this.$NModal.success({
+      const confirmInstance = this.$NConfirm.success({
         title: "Success",
         content:
           "Premium designed icons for use in web, iOS, Android, and desktop apps. Support for SVG and web font. Completely open source, MIT licensed and built by the Ionic Framework team.",

@@ -1,6 +1,7 @@
 @mixin setup-dark-colors {
   $--text-1: rgba(255, 255, 255, .9) !global;
   $--text-2: rgba(255, 255, 255, .75) !global;
+  $--text-3: rgba(255, 255, 255, .45) !global;
   $--overlay-1: rgba(255, 255, 255, 0.3) !global; // popover
   $--overlay-2: rgba(255, 255, 255, 0.26) !global; //
   $--overlay-3: rgba(255, 255, 255, 0.22) !global; // dialog

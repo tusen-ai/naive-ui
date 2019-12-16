@@ -1,0 +1,10 @@
+@mixin setup-light-result {
+  $--result-icon-fill: (
+    'error': $--error-6,
+    'success': $--success-6,
+    'warning': $--warning-6,
+    'info': $--info-6
+  ) !global;
+  $--result-header-text-color: $--n-text-color !global;
+  $--result-description-text-color: $--n-secondary-text-color !global;
+}

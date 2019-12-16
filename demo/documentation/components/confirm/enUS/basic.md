@@ -19,7 +19,7 @@
 export default {
   methods: {
     handleConfirm (e) {
-      const confirmInstance = this.$NModal.confirm({
+      const confirmInstance = this.$NConfirm.open({
         title: "Confirm",
         content: "Are u sure to ...?",
         onPositiveClick: (hide) => {
@@ -33,7 +33,7 @@ export default {
       });
     },
     handleSuccess (e) {
-      const confirmInstance = this.$NModal.success({
+      const confirmInstance = this.$NConfirm.success({
         title: "Success",
         content:
           "Premium designed icons for use in web, iOS, Android, and desktop apps. Support for SVG and web font. Completely open source, MIT licensed and built by the Ionic Framework team.",
@@ -44,7 +44,7 @@ export default {
       });
     },
     handleError(e) {
-      const confirmInstance = this.$NModal.error({
+      const confirmInstance = this.$NConfirm.error({
         title: "Error",
         content: "这是一个测试？",
         onPositiveClick: (hide) => {

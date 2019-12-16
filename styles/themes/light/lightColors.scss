@@ -1,14 +1,17 @@
 @mixin setup-light-colors {
-  $--alpha-neutral-1: rgba(0, 0, 0, 1) !global;
-  $--alpha-neutral-2: rgba(0, 0, 0, .85) !global;
-  $--alpha-neutral-3: rgba(0, 0, 0, .65) !global;
-  $--alpha-neutral-4: rgba(0, 0, 0, .45) !global;
-  $--alpha-neutral-5: rgba(0, 0, 0, .25) !global;
-  $--alpha-neutral-6: rgba(0, 0, 0, .15) !global;
-  $--alpha-neutral-7: rgba(0, 0, 0, .09) !global;
-  $--alpha-neutral-8: rgba(0, 0, 0, .04) !global;
-  $--alpha-neutral-9: rgba(0, 0, 0, .02) !global;
-  $--alpha-neutral-10: rgba(0, 0, 0, 0) !global;
+  $--text-1: rgba(0, 0, 0, .9) !global;
+  $--text-2: rgba(0, 0, 0, .7) !global;
+  $--text-3: rgba(0, 0, 0, .45) !global;
+  $--overlay-1: rgba(0, 0, 0, 1) !global;
+  $--overlay-2: rgba(0, 0, 0, .85) !global;
+  $--overlay-3: rgba(0, 0, 0, .65) !global;
+  $--overlay-4: rgba(0, 0, 0, .45) !global;
+  $--overlay-5: rgba(0, 0, 0, .25) !global;
+  $--overlay-6: rgba(0, 0, 0, .15) !global;
+  $--overlay-7: rgba(0, 0, 0, .09) !global;
+  $--overlay-8: rgba(0, 0, 0, .04) !global;
+  $--overlay-9: rgba(0, 0, 0, .02) !global;
+  $--overlay-10: rgba(0, 0, 0, 0) !global;
   $--neutral-1: rgb(0, 0, 0) !global;
   $--neutral-2: rgb(38, 38, 38) !global;
   $--neutral-3: rgb(89, 89, 89) !global;

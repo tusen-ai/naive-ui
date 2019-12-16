@@ -1,0 +1,5 @@
+@mixin setup-light-menu {
+  $menu-background-color: $--neutral-10 !global;
+  $menu-item-selected-background-image: linear-gradient(47deg, $--neutral-7, $--neutral-7) !global;
+  $--service-kayout-item-active-color: $--primary-6 !global;
+}

@@ -1,5 +1,4 @@
 # Icon
-# Basic
 ```html
 <n-button @click="emitMessage">
   Hourglass Icon
@@ -15,7 +14,7 @@ export default {
   methods: {
     emitMessage() {
       this.$NMessage.warning("I never needed anybody's help in any way", {
-        icon: mdHourglass
+        icon: h => h(mdHourglass)
       })
     }
   }

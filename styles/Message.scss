@@ -1,7 +1,8 @@
 @import './mixins/mixins.scss';
 
 @mixin message-type-mixin ($type) {
-  @include m($type) {
+  @include m($type + '-type') {
+    color: map-get($--message-text-color, $type);
     background-color: map-get($map: $--message-background-color, $key: $type);
     box-shadow: map-get($map: $--message-box-shadow, $key: $type);
     @include e(icon) {
@@ -12,71 +13,65 @@
   }
 }
 
+@include b(message-container) {
+  @include once {
+    z-index: 6000;
+    position: fixed;
+    top: 12px;
+    left: 0;
+    right: 0;
+    height: 0;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 @include themes-mixin {
-  @include b(message-container) {
+  @include b(message) {
     @include once {
-      position: fixed;
-      left: 0;
-      right: 0;
-      height: 0;
-      overflow: visible;
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      transition: color .3s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier, transform .3s $default-cubic-bezier,  max-height .3s $default-cubic-bezier, margin-bottom .3s $default-cubic-bezier;
+      max-height: 40px;
+      opacity: 1;
+      margin-bottom: 12px;
+      padding: 0 40px;
+      height: 40px;
+      border-radius: 20px;
+      flex-shrink: 0;
+      font-weight: 700;
+      overflow: hidden;
+      &#{&}-transition-enter, &#{&}-transition-leave-to {
+        opacity: 0;
+        transform: translateY(-12px) scale(.5);
+        transform-origin: top center;
+        max-height: 0;
+        margin-bottom: 0;
+      }
     }
-    @include b(message) {
-      @include once {
-        display: flex;
-        transition: opacity .3s $default-cubic-bezier, transform .3s $default-cubic-bezier,  max-height .3s $default-cubic-bezier, margin-bottom .3s $default-cubic-bezier;
-        max-height: 40px;
-        opacity: 1;
-        margin-bottom: 12px;
-        padding: 0 40px;
+    @include once {
+      @include e(content) {
+        display: inline-block;
         height: 40px;
-        border-radius: 20px;
-        flex-shrink: 0;
-        font-weight: 700;
-        overflow: hidden;
+        line-height: 40px;
+        font-size: 15px;
       }
-      color: $--message-text-color;
-      @include once {
-        @include e(content) {
-          display: inline-block;
-          height: 40px;
-          line-height: 40px;
-          font-size: 15px;
-        }
-        @include e(icon) {
-          margin-right: 10px;
-          display: inline-flex;
-          height: 40px;
-          line-height: 40px;
-          align-items: center;
-          i::before {
-            font-size: 20px;
-          }
+      @include e(icon) {
+        margin-right: 10px;
+        display: inline-flex;
+        height: 40px;
+        line-height: 40px;
+        align-items: center;
+        i::before {
+          font-size: 20px;
         }
       }
-      @include once {
-        @include m(enter) {
-          opacity: 0;
-          transform: translateY(-12px) scale(.5);
-          transform-origin: top center;
-          max-height: 0px;
-          margin-bottom: 0;
-        }
-        @include m(leave) {
-          opacity: 0;
-          transform-origin: top center;
-          transform: translateY(-12px) scale(.5);
-          max-height: 0px;
-          margin-bottom: 0;
-        }
-      }
-      @include message-type-mixin('info');
-      @include message-type-mixin('success');
-      @include message-type-mixin('error');
-      @include message-type-mixin('warning');
     }
+    @include message-type-mixin('info');
+    @include message-type-mixin('success');
+    @include message-type-mixin('error');
+    @include message-type-mixin('warning');
+    @include message-type-mixin('loading');
   }
 }

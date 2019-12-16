@@ -1,4 +1,5 @@
 # Timing
+Specify the duration of messages.
 ```html
 <n-button @click="emitInfo">
   Last for 5 second

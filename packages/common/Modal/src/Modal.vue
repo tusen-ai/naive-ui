@@ -4,12 +4,15 @@ import NModalContent from './ModalContent'
 import NBasePortal from '../../../base/Portal'
 import zindexable from '../../../mixins/zindexable'
 import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
+import presetProps from './presetProps'
 
 export default {
   name: 'NModal',
   mixins: [
     withapp,
-    zindexable
+    zindexable,
+    themeable
   ],
   props: {
     activateEvent: {
@@ -25,7 +28,24 @@ export default {
     maskClosable: {
       type: Boolean,
       default: true
-    }
+    },
+    preset: {
+      type: String,
+      default: ''
+    },
+    title: {
+      type: String,
+      default: 'Title'
+    },
+    closable: {
+      type: Boolean,
+      default: true
+    },
+    detached: {
+      type: Boolean,
+      default: true
+    },
+    ...presetProps
   },
   data () {
     return {
@@ -73,13 +93,41 @@ export default {
           h(NModalContent,
             {
               ref: 'content',
-              props: { active: this.value, activateEvent: this.activateEvent },
+              props: {
+                ...this.$props,
+                theme: this.synthesizedTheme,
+                active: this.active
+              },
+              class: {
+                [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme
+              },
               on: {
+                deactivate: () => {
+                  this.deactivate()
+                },
+                'close': () => {
+                  if (!this.$listeners['close']) {
+                    this.deactivate()
+                  }
+                  this.$emit('close')
+                },
+                'negative-click': () => {
+                  if (!this.$listeners['negative-click']) {
+                    this.deactivate()
+                  }
+                  this.$emit('negative-click')
+                },
+                'positive-click': () => {
+                  if (!this.$listeners['positive-click']) {
+                    this.deactivate()
+                  }
+                  this.$emit('positive-click')
+                },
+                'before-leave': () => {
+                  this.$emit('before-hide')
+                },
                 'after-leave': () => {
                   this.$emit('after-hide')
-                },
-                beforeLeave: () => {
-                  this.$emit('before-hide')
                 },
                 mousedown: (e) => {
                   this.mousedownTarget = e.target
@@ -97,9 +145,9 @@ export default {
                     }
                   }
                 }
-              }
-            },
-            this.$scopedSlots.default()
+              },
+              scopedSlots: this.$scopedSlots
+            }
           )
         ])
       }
@@ -107,18 +155,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.n-modal-activator {
-  display: inline-block;
-}
-
-.n-modal-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 0;
-  width: 0;
-  display: flex;
-}
-</style>

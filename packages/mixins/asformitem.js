@@ -1,10 +1,14 @@
 export default function (events = {
   change: 'change',
   blur: 'blur',
-  focus: 'focus',
-  input: 'input'
+  focus: 'focus'
 }) {
   return {
+    provide () {
+      return {
+        NFormItem: null
+      }
+    },
     inject: {
       NFormItem: {
         default: null
@@ -19,6 +23,11 @@ export default function (events = {
           }
         })
       })
+    },
+    beforeDestroy () {
+      if (this.NFormItem) {
+        this.NFormItem._initData()
+      }
     }
   }
 }

@@ -1,0 +1,8 @@
+@mixin setup-dark-layout {
+  $--layout-header-background-color: $--n-card-color !global;
+  $--layout-header-border-color: $--n-divider-color !global;
+  $--layout-footer-border-color: $--n-divider-color !global;
+  $--layout-sider-border-color: $--n-divider-color !global;
+  $--layout-sider-background-color: $--n-card-color !global;
+  $--layout-sider-toggle-button-fill:  rgba(255, 255, 255, .3)!global;
+}

@@ -1,6 +1,8 @@
 <template>
   <span class="n-breadcrumb-item">
-    <slot />
+    <span class="n-breadcrumb-item__link" @click="handleClick">
+      <slot />
+    </span>
     <span class="n-breadcrumb-item__seperator">
       {{ seperator }}
     </span>
@@ -18,6 +20,11 @@ export default {
   computed: {
     seperator () {
       return this.NBreadcrumb.seperator
+    }
+  },
+  methods: {
+    handleClick (e) {
+      this.$emit('click', e)
     }
   }
 }

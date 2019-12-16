@@ -1,0 +1,34 @@
+@import "./mixins/mixins.scss";
+
+@include themes-mixin {
+  @include b(empty) {
+    @include once {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    @include e(icon) {
+      @include once {
+        transition: fill .3s $default-cubic-bezier;
+        width: 40px;
+        height: 40px;
+      }
+      fill: $--empty-icon-fill;
+    }
+    @include e(description) {
+      @include once {
+        margin-top: 8px;
+        transition: color .3s $default-cubic-bezier;
+      }
+      color: $--empty-text-color;
+    }
+    @include e(extra) {
+      @include once {
+        text-align: center;
+        transition: color .3s $default-cubic-bezier;
+        margin-top: 16px;
+      }
+      color: $--empty-extra-text-color;
+    }
+  }
+}

@@ -1,0 +1,123 @@
+@import './mixins/mixins.scss';
+
+@include themes-mixin {
+  @include b(layout) {
+    @include once {
+      box-sizing: border-box;
+      position: relative;
+      display: flex;
+      flex-wrap: nowrap;
+      transition: margin-left .3s $default-cubic-bezier;
+      flex-direction: column;
+      overflow: auto;
+      @include m(has-sider) {
+        flex-direction: row;
+        & > {
+          @include b(layout) {
+            flex: 1;
+          }
+        }
+      }
+      @include m(absolute-positioned) {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+      }
+    }
+  }
+  @include b(layout-header) {
+    @include once {
+      transition: background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+      box-sizing: border-box;
+      width: 100%;
+      @include m(absolute-positioned) {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+      }
+    }
+    background-color: $--layout-header-background-color;
+    @include m(bordered) {
+      border-bottom: solid 1px $--layout-header-border-color;
+    }
+  }
+  @include b(layout-content) {
+    @include once {
+      box-sizing: border-box;
+      position: relative;
+    }
+    transition: margin-left .3s $default-cubic-bezier;
+  }
+  @include b(layout-footer) {
+    @include once {
+      transition: border-color .3s $default-cubic-bezier;
+      box-sizing: border-box;
+      @include m(absolute-positioned) {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+    }
+    @include m(bordered) {
+      border-top: solid 1px $--layout-footer-border-color;
+    }
+  }
+  @include b(layout-sider) {
+    @include once {
+      box-sizing: border-box;
+      position: relative;
+      transition: min-width .3s  $default-cubic-bezier, max-width .3s $default-cubic-bezier, transform .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+    }  
+    background-color: $--layout-sider-background-color;
+    @include e(toggle-button) {
+      @include once {
+        z-index: 1;
+        transition: transform .3s $default-cubic-bezier;
+        cursor: pointer;
+        width: 36px;
+        height: 36px;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateX(50%) translateY(-50%);
+      }
+      path {
+        @include once {
+          transition: fill .3s $default-cubic-bezier;
+        }
+        fill: $--layout-sider-toggle-button-fill;
+      }
+    }
+    @include once {
+      @include e(content) {
+        opacity: 0;
+        transition: opacity .3s $default-cubic-bezier;
+      }
+    }
+    @include once {
+      @include m(show-content) {
+        @include e(content) {
+          opacity: 1;
+        }
+      }
+      @include m(collapsed) {
+        @include e(toggle-button) {
+          transform: translateX(50%) translateY(-50%) rotate(180deg);
+        }
+      }
+      @include m(absolute-positioned) {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+      }
+    }
+    @include m(bordered) {
+      border-right: solid 1px $--layout-sider-border-color;
+    }
+  }
+}

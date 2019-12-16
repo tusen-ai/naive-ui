@@ -2,4 +2,5 @@
 ```demo
 basic
 async
+use-component
 ```

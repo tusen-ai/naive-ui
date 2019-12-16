@@ -1,0 +1,31 @@
+@mixin setup-light-transfer {
+  $--transfer-list-background-color: (
+    'default': $--n-background-color
+  ) !global;
+  $--transfer-list-header-background-color: (
+    'default': $--n-table-header-color
+  ) !global;
+  $--transfer-list-header-text-color: (
+    'default': $--n-text-color,
+    'disabled': $--n-disabled-text-color
+  ) !global;
+  $--transfer-list-header-extra-text-color: (
+    'default': $--n-secondary-text-color,
+    'disabled': $--n-disabled-text-color
+  ) !global;
+  $--transfer-gap-button-background-color: (
+    'default': rgba(0, 0, 0, .2),
+    'disabled': rgba(0, 0, 0, .1),
+    'hover': $--primary-6,
+    'active': $--primary-7
+  ) !global;
+  $--transfer-item-text-color: (
+    'default': $--n-secondary-text-color,
+    'disabled': $--n-disabled-text-color
+  ) !global;
+  $--tranfer-item-lightbar-background-color: (
+    'default': change-color($--n-primary-color, $alpha: .2)
+  ) !global;
+  $--transfer-list-border-color: $--n-border-color !global;
+  $--transfer-header-border-color: transparent !global; 
+}

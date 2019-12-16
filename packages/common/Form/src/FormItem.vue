@@ -2,8 +2,9 @@
   <div
     class="n-form-item"
     :class="{
-      [`n-form-item--${synthesizedLabelPosition}-labelled`]: synthesizedLabelPosition,
-      [`n-form-item--required`]: synthesizedRequired,
+      [`n-form-item--${synthesizedLabelPlacement}-labelled`]: synthesizedLabelPlacement,
+      [`n-form-item--${synthesizedLabelAlign}-label-aligned`]: synthesizedLabelAlign,
+      [`n-form-item--required`]: synthesizedRequired && showRequireMark,
       [`n-form-item--no-label`]: !(label || $slots.label),
       [`n-form-item--has-feedback`]: hasFeedback,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
@@ -17,31 +18,36 @@
       <template v-if="$slots.label"><slot name="label" /></template>
       <template v-else>{{ label }}</template>
     </label>
-    <div
-      class="n-form-item-blank"
-      :class="validated ? `n-form-item-blank--error` : `n-form-item-blank--pass`"
-    >
-      <slot />
-    </div>
-    <transition
-      name="n-fade-down"
-      @before-enter="handleBeforeEnter"
-      @after-leave="handleAfterLeave"
-    >
+    <div class="n-form-item-control">
       <div
-        v-if="explains.length"
-        class="n-form-item-feedback"
+        class="n-form-item-blank"
+        :class="validated ? `n-form-item-blank--error` : `n-form-item-blank--pass`"
       >
-        <span
-          v-for="(explain, i) in explains"
-          :key="i"
-        >{{ explain }}<br v-if="i + 1 !== explains.length"></span>
+        <slot />
       </div>
-    </transition>
+      <div v-if="path" class="n-form-item-feedback-wrapper">
+        <transition
+          name="n-fade-down"
+          @before-enter="handleBeforeEnter"
+          @before-leave="handleBeforeLeave"
+          @after-leave="handleAfterLeave"
+        >
+          <div
+            v-if="explains.length"
+            class="n-form-item-feedback"
+          >
+            <span
+              v-for="(explain, i) in explains"
+              :key="i"
+            >{{ explain }}<br v-if="i + 1 !== explains.length"></span>
+          </div>
+        </transition>
+      </div>
+    </div>
   </div>
 </template>
 <script>
-import AsyncValidator from 'async-validator'
+import Schema from 'async-validator'
 import get from 'lodash/get'
 import registerable from '../../../mixins/registerable'
 import withapp from '../../../mixins/withapp'
@@ -67,13 +73,21 @@ export default {
       type: String,
       default: null
     },
-    labelPosition: {
+    labelAlign: {
       type: String,
-      default: 'top'
+      default: null
+    },
+    labelPlacement: {
+      type: String,
+      default: null
     },
     path: {
       type: String,
       default: null
+    },
+    first: {
+      type: Boolean,
+      default: false
     },
     rulePath: {
       type: String,
@@ -85,7 +99,7 @@ export default {
     },
     showRequireMark: {
       type: Boolean,
-      default: false
+      default: true
     },
     rule: {
       type: [Object, Array],
@@ -102,14 +116,26 @@ export default {
     return {
       explains: [],
       validated: false,
-      hasFeedback: false
+      hasFeedback: false,
+      feedbackTransitionBlocked: true
     }
   },
   computed: {
+    labelWidthStyle () {
+      if (/\d$/.test(String(this.synthesizedLabelWidth))) {
+        return {
+          width: `${this.synthesizedLabelWidth}px`
+        }
+      } else {
+        return {
+          width: this.synthesizedLabelWidth
+        }
+      }
+    },
     synthesizedLabelStyle () {
       return {
-        ...this.labelStyle,
-        width: this.styleLabelWidth
+        ...this.labelWidthStyle,
+        ...this.labelStyle
       }
     },
     synthesizedLabelWidth () {
@@ -118,7 +144,7 @@ export default {
       return null
     },
     styleLabelWidth () {
-      if (this.synthesizedLabelPosition === 'top') return null
+      if (this.synthesizedLabelPlacement === 'top') return null
       if (this.synthesizedLabelWidth === null) return null
       return `${this.synthesizedLabelWidth}px`
     },
@@ -128,31 +154,24 @@ export default {
         return this.path
       } else return null
     },
-    synthesizedLabelPosition () {
-      if (this.labelPosition) return this.labelPosition
-      if (this.NForm && this.NForm.labelPosition) return this.NForm.labelPosition
+    synthesizedLabelPlacement () {
+      if (this.labelPlacement) return this.labelPlacement
+      if (this.NForm && this.NForm.labelPlacement) return this.NForm.labelPlacement
       return 'top'
     },
+    synthesizedLabelAlign () {
+      if (this.labelAlign) return this.labelAlign
+      if (this.NForm && this.NForm.labelAlign) return this.NForm.labelAlign
+      return 'left'
+    },
     synthesizedRequired () {
-      if (this.required) return this.required
-      if (this.NForm && this.NForm.required) return this.NForm.required
+      if (this.synthesizedRules.some(rule => rule.required)) return true
+      if (this.required) return true
+      if (this.NForm && this.NForm.required) return true
       return false
     },
     synthesizedRules () {
       let rules = []
-      const validator = (rule, value) => {
-        if (value !== undefined && value !== null && value !== '') {
-          return true
-        }
-        return Error(`${this.label || this.path} is required!`)
-      }
-      if (this.required) {
-        rules.push({
-          trigger: ['blur', 'change', 'input'],
-          required: true,
-          validator
-        })
-      }
       if (this.rule) {
         if (Array.isArray(this.rule)) {
           rules = rules.concat(this.rule)
@@ -171,6 +190,11 @@ export default {
       return rules
     }
   },
+  watch: {
+    path () {
+      this._initData()
+    }
+  },
   created () {
     /**
      * This is buggy!
@@ -180,43 +204,118 @@ export default {
     this.addValidationEventListeners()
   },
   methods: {
+    _initData () {
+      this.explains = []
+      this.validated = false
+      this.hasFeedback = false
+      this.blockFeedbackTransition(this.$refs.feedback)
+    },
+    handleBeforeLeave (feedback) {
+      if (this.feedbackTransitionBlocked) {
+        if (feedback) {
+          feedback.style.transition = 'none'
+        }
+      } else {
+        if (feedback) {
+          feedback.style.transition = null
+        }
+      }
+    },
+    blockFeedbackTransition () {
+      this.feedbackTransitionBlocked = true
+    },
     handleContentBlur () {
-      this.validate('blur')
+      this._validate('blur')
     },
     handleContentChange () {
-      this.validate('change')
+      this._validate('change')
     },
     handleContentFocus () {
-      this.validate('focus')
+      this._validate('focus')
     },
     handleContentInput () {
-      this.validate('input')
+      this._validate('input')
     },
-    validate (trigger = null) {
+    validate (trigger = null, afterValidate, options) {
+      return new Promise((resolve, reject) => {
+        this._validate(trigger, options).then(({
+          valid,
+          errors
+        }) => {
+          if (valid) {
+            if (afterValidate) {
+              afterValidate()
+            } else {
+              resolve()
+            }
+          } else {
+            if (afterValidate) {
+              afterValidate(errors)
+            } else {
+              // eslint-disable-next-line prefer-promise-reject-errors
+              reject({
+                errors
+              })
+            }
+          }
+        })
+      })
+    },
+    _validate (trigger = null, options = {
+      suppressWarning: true
+    }) {
       if (!this.path) {
+        console.warn('[naive-ui/form-item/validate]: validate form-item without path')
         return
+      }
+      if (!options) {
+        options = {}
+        options.first = this.first
+        options.supressWarning = this.supressWarning
       }
       const rules = this.synthesizedRules
       const path = this.path
       const value = get(this.NForm.model, this.path, null)
-      const activeRules = !trigger ? rules : rules.filter(rule => {
+      const activeRules = (!trigger ? rules : rules.filter(rule => {
         if (Array.isArray(rule.trigger)) {
           return rule.trigger.includes(trigger)
         } else {
           return rule.trigger === trigger
         }
-      })
-      if (!activeRules.length) return
-      const validator = new AsyncValidator({ [path]: activeRules })
-      validator.validate({ [path]: value }, {}, (errors, fields) => {
-        // console.log('validate', errors, fields)
-        if (errors && errors.length) {
-          this.explains = errors.map(error => error.message)
-          this.validated = true
-        } else {
-          this.cleanValidationEffect()
+      })).map(rule => {
+        const originValidator = rule.validator
+        if (typeof originValidator === 'function') {
+          rule.validator = (...args) => {
+            const validateResult = originValidator(...args)
+            if (validateResult instanceof Error) {
+              return validateResult
+            }
+            return !!validateResult
+          }
         }
-        // callback((errors && errors[0].message) || false, fields)
+        return rule
+      })
+      if (!activeRules.length) {
+        return Promise.resolve({
+          valid: true
+        })
+      }
+      const validator = new Schema({ [path]: activeRules })
+      return new Promise((resolve, reject) => {
+        validator.validate({ [path]: value }, options, (errors, fields) => {
+          if (errors && errors.length) {
+            this.explains = errors.map(error => error.message)
+            resolve({
+              valid: false,
+              errors
+            })
+          } else {
+            this.cleanValidationEffect()
+            resolve({
+              valid: true
+            })
+          }
+        })
       })
     },
     cleanValidationEffect () {
@@ -233,10 +332,12 @@ export default {
       }
     },
     handleBeforeEnter () {
+      this.feedbackTransitionBlocked = false
       this.hasFeedback = true
     },
     handleAfterLeave () {
       this.hasFeedback = false
+      this.feedbackTransitionBlocked = false
     }
   }
 }

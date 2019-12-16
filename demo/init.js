@@ -14,26 +14,22 @@ import devGuildlines from './documentation/intro/devGuidelines'
 import status from './documentation/intro/status'
 
 import nimbusServiceLayoutDemo from './documentation/components/nimbusServiceLayoutDemo'
-import homeDemo from './documentation/components/homeDemo'
 import gradientText from './documentation/components/gradientText'
 import checkbox from './documentation/components/checkbox'
 import button from './documentation/components/button'
-import switchDemo from './documentation/components/switch'
+import nswitch from './documentation/components/switch'
 import input from './documentation/components/input'
 import select from './documentation/components/select'
 import cascader from './documentation/components/cascader'
 import customInput from './documentation/components/customInput'
 import modal from './documentation/components/modal'
-import nimbusFormCardDemo from './documentation/components/nimbusFormCardDemo'
 import message from './documentation/components/message'
 import tooltip from './documentation/components/tooltip'
 import popover from './documentation/components/popover'
 import alert from './documentation/components/alert'
 import datePicker from './documentation/components/datePicker'
 import inputNumber from './documentation/components/inputNumber'
-import nimbusIcon from './documentation/components/nimbusIcon'
 import radio from './documentation/components/radio'
-import formDemo from './documentation/components/formDemo'
 import form from './documentation/components/form'
 import tabs from './documentation/components/tabs'
 import timePicker from './documentation/components/timePicker'
@@ -45,17 +41,17 @@ import scrollbarDebug2 from './debugComponents/scrollbarDebug2'
 import badge from './documentation/components/badge'
 import steps from './documentation/components/steps'
 import notification from './documentation/components/notification'
-import nimbusConfirmCardDemo from './documentation/components/nimbusConfirmCardDemo'
 import pagination from './documentation/components/pagination'
 import collapse from './documentation/components/collapse'
 import tag from './documentation/components/tag'
+import menu from './documentation/components/menu'
 import timeline from './documentation/components/timeline'
 import progress from './documentation/components/progress'
 import divider from './documentation/components/divider'
 import popconfirm from './documentation/components/popconfirm'
 import anchor from './documentation/components/anchor'
 import popselect from './documentation/components/popselect'
-import app from './documentation/components/app'
+import configProvider from './documentation/components/configProvider'
 import advancedTable from './documentation/components/advancedTable'
 import table from './documentation/components/table'
 
@@ -70,6 +66,20 @@ import affix from './documentation/components/affix'
 import statistic from './documentation/components/statistic'
 import grid from './documentation/components/grid'
 import breadcrumb from './documentation/components/breadcrumb'
+import configConsumer from './documentation/components/configConsumer'
+import descriptions from './documentation/components/descriptions'
+import list from './documentation/components/list'
+import card from './documentation/components/card'
+import layout from './documentation/components/layout'
+import avatar from './documentation/components/avatar'
+import result from './documentation/components/result'
+import thing from './documentation/components/thing'
+import autoComplete from './documentation/components/autoComplete'
+import empty from './documentation/components/empty'
+import theme from './documentation/theme'
+import element from './documentation/components/element'
+import log from './documentation/components/log'
+import code from './documentation/components/code'
 
 import demo from './demo'
 import ComponentDemo from './utils/ComponentDemo'
@@ -87,10 +97,21 @@ import backTopDebug from './debugComponents/backTopDebug'
 import cancelMarkDebug from './debugComponents/cancelMarkDebug'
 import cascaderDebug from './debugComponents/cascaderDebug'
 import verticalAlignDebug from './debugComponents/verticalAlignDebug'
+import iconTransitionDebug from './debugComponents/iconTransitionDebug'
+
+import hljs from 'highlight.js/lib/highlight'
+import javascript from 'highlight.js/lib/languages/javascript'
+import python from 'highlight.js/lib/languages/python'
+import cpp from 'highlight.js/lib/languages/cpp'
+
+hljs.registerLanguage('javascript', javascript)
+hljs.registerLanguage('python', python)
+hljs.registerLanguage('cpp', cpp)
 
 Vue.use(VueI18n)
 Vue.use(VueRouter)
 Vue.use(NaiveUI)
+NaiveUI.setHljs(hljs)
 
 const i18n = new VueI18n({
   locale: 'en-us'
@@ -108,10 +129,6 @@ const withPrefix = (prefix, routes) =>
   })
 
 const routes = [
-  {
-    path: '/home-demo',
-    component: homeDemo
-  },
   {
     path: '/:lang/:theme/n-popover-debug',
     component: popoverDebug
@@ -133,7 +150,7 @@ const routes = [
       { path: '/dev-guildlines', component: devGuildlines },
       { path: '/status', component: status },
       { path: '/n-nimbus-service-layout', component: nimbusServiceLayoutDemo },
-      { path: '/n-nimbus-home-layout', component: homeDemo },
+      { path: '/n-layout', component: layout },
       { path: '/n-gradient-text', component: gradientText },
       {
         path: '/n-icon',
@@ -141,7 +158,7 @@ const routes = [
       },
       { path: '/n-checkbox', component: checkbox },
       { path: '/n-button', component: button },
-      { path: '/n-switch', component: switchDemo },
+      { path: '/n-switch', component: nswitch },
       // { path: '/n-table', component: tableDemo },
       { path: '/n-advance-table', component: advancedTable },
       { path: '/n-table', component: table },
@@ -150,20 +167,16 @@ const routes = [
       { path: '/n-cascader', component: cascader },
       { path: '/n-custom-input', component: customInput },
       { path: '/n-modal', component: modal },
-      { path: '/n-nimbus-form-card', component: nimbusFormCardDemo },
       { path: '/n-message', component: message },
       { path: '/n-tooltip', component: tooltip },
       { path: '/n-popover', component: popover },
       { path: '/n-notification', component: notification },
-      { path: '/n-nimbus-confirm-card', component: nimbusConfirmCardDemo },
       { path: '/n-pagination', component: pagination },
       { path: '/n-alert', component: alert },
       { path: '/n-date-picker', component: datePicker },
       { path: '/n-input-number', component: inputNumber },
-      { path: '/n-nimbus-icon', component: nimbusIcon },
       { path: '/n-radio', component: radio },
-      { path: '/n-form', component: formDemo },
-      { path: '/n-new-form', component: form },
+      { path: '/n-form', component: form },
       { path: '/n-tabs', component: tabs },
       { path: '/n-time-picker', component: timePicker },
       { path: '/n-confirm', component: confirm },
@@ -175,6 +188,7 @@ const routes = [
       { path: '/n-collapse', component: collapse },
       { path: '/n-progress', component: progress },
       { path: '/n-tag', component: tag },
+      { path: '/n-menu', component: menu },
       { path: '/n-timeline', component: timeline },
       { path: '/n-scrollbar-debug2', component: scrollbarDebug2 },
       { path: '/n-back-top', component: backTop },
@@ -184,7 +198,7 @@ const routes = [
       { path: '/n-anchor', component: anchor },
       { path: '/n-dropdown', component: dropdown },
       { path: '/n-popselect', component: popselect },
-      { path: '/n-app', component: app },
+      { path: '/n-config-provider', component: configProvider },
       { path: '/n-cancel-mark-debug', component: cancelMarkDebug },
       { path: '/n-transfer', component: transfer },
       { path: '/n-spin', component: spin },
@@ -197,7 +211,24 @@ const routes = [
       { path: '/n-affix', component: affix },
       { path: '/n-statistic', component: statistic },
       { path: '/n-grid', component: grid },
-      { path: '/n-breadcrumb', component: breadcrumb }
+      { path: '/n-breadcrumb', component: breadcrumb },
+      { path: '/n-config-consumer', component: configConsumer },
+      { path: '/n-descriptions', component: descriptions },
+      { path: '/n-list', component: list },
+      { path: '/n-card', component: card },
+      { path: '/n-avatar', component: avatar },
+      { path: '/n-result', component: result },
+      { path: '/n-thing', component: thing },
+      { path: '/n-auto-complete', component: autoComplete },
+      { path: '/n-empty', component: empty },
+      { path: '/n-theme', component: theme },
+      { path: '/n-element', component: element },
+      { path: '/n-log', component: log },
+      { path: '/n-code', component: code },
+      {
+        path: '/n-icon-transition-debug',
+        component: iconTransitionDebug
+      }
     ])
   },
   {

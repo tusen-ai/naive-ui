@@ -11,6 +11,10 @@ $B: null;
 $BE: null;
 $block-depth: 0;
 
+@function block ($block) {
+  @return $namespace + "-" + $block;
+}
+
 @mixin b($block) {
   $block-depth: $block-depth + 1 !global;
   $temp-block: $B;

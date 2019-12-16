@@ -1,9 +1,9 @@
-import Message from './src/main.js'
-import { install } from '../../utils/installThemeableComponent'
+import MessagePlugin from './src/MessagePlugin'
+import { install } from '../../utils/installThemeAwarableProperty'
 
-Message.install = function(Vue) {
-  Message.Vue = Vue
-  install(Vue, Message, '$NMessage')
+MessagePlugin.install = function (Vue) {
+  MessagePlugin.Vue = Vue
+  install(Vue, MessagePlugin, '$NMessage')
 }
 
-export default Message
+export default MessagePlugin

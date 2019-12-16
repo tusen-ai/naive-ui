@@ -9,7 +9,7 @@
   >
     <n-scrollbar ref="scrollbar">
       <transition
-        name="n-modal-content--transition"
+        name="n-modal-content-slot-transition"
         @enter="handleEnter"
         @after-leave="handleAfterLeave"
         @before-leave="handleBeforeLeave"
@@ -18,8 +18,57 @@
           v-if="active"
           ref="contentInner"
           style="margin: auto;"
+          class="n-modal-content-slot"
         >
-          <slot />
+          <n-confirm
+            v-if="preset === 'confirm'"
+            ref="confirm"
+            :style="bodyStyle"
+            :theme="theme"
+            :title="title"
+            :closable="closable"
+            :positive-text="positiveText"
+            :negative-text="negativeText"
+            :content="content"
+            @close="handleCloseClick"
+            @negative-click="handleNegativeClick"
+            @positive-click="handlePositiveClick"
+          >
+            <template v-slot:header>
+              <slot name="header" />
+            </template>
+            <template v-slot:content>
+              <slot name="content" />
+            </template>
+            <template v-slot:footer>
+              <slot name="footer" />
+            </template>
+          </n-confirm>
+          <n-card
+            v-if="preset === 'card'"
+            :style="bodyStyle"
+            :title="title"
+            :closable="closable"
+            :size="size"
+            :bordered="bordered"
+            :segmented="segmented"
+            @close="handleCloseClick"
+          >
+            <template v-slot:header>
+              <slot name="header" />
+            </template>
+            <template v-slot:header-extra>
+              <slot name="header-extra" />
+            </template>
+            <template v-slot:footer>
+              <slot name="footer" />
+            </template>
+            <template v-slot:action>
+              <slot name="action" />
+            </template>
+            <slot />
+          </n-card>
+          <slot v-else />
         </div>
       </transition>
     </n-scrollbar>
@@ -28,6 +77,10 @@
 
 <script>
 import NScrollbar from '../../Scrollbar'
+import NConfirm from '../../Confirm/src/Confirm'
+import NCard from '../../../common/Card'
+import themeable from '../../../mixins/themeable'
+import presetProps from './presetProps'
 
 let mousePosition = null
 
@@ -43,8 +96,11 @@ document.documentElement.addEventListener('click', (e) => {
 
 export default {
   components: {
-    NScrollbar
+    NScrollbar,
+    NConfirm,
+    NCard
   },
+  mixins: [themeable],
   props: {
     active: {
       type: Boolean,
@@ -55,7 +111,12 @@ export default {
         return e instanceof MouseEvent
       },
       default: null
-    }
+    },
+    preset: {
+      type: String,
+      default: ''
+    },
+    ...presetProps
   },
   data () {
     return {
@@ -67,19 +128,9 @@ export default {
       this.styleActive = true
     }
   },
-  // mounted () {
-  //   this.$nextTick().then(this.registerContent)
-  // },
-  // updated () {
-  //   console.log('updated')
-  //   this.$nextTick().then(this.registerContent)
-  // },
-  beforeDestroy () {
-    // window.clearTimeout(this.updateScrollbarTimerId)
-  },
   methods: {
     slotDOM () {
-      const els = this.$refs.contentInner.childNodes
+      const els = (this.$refs.contentInner && this.$refs.contentInner.childNodes) || []
       return els
     },
     handleMouseDown (e) {
@@ -94,9 +145,6 @@ export default {
       this.$nextTick().then(() => {
         this.updateTransformOrigin()
       })
-    },
-    handleAfterEnter () {
-      // console.log('afterEnter', this.$refs.scrollbar.enableScrollbar())
     },
     updateTransformOrigin () {
       if (
@@ -156,42 +204,16 @@ export default {
     handleAfterLeave () {
       this.styleActive = false
       this.$emit('after-leave')
+    },
+    handleCloseClick () {
+      this.$emit('close')
+    },
+    handleNegativeClick () {
+      this.$emit('negative-click')
+    },
+    handlePositiveClick () {
+      this.$emit('positive-click')
     }
   }
 }
 </script>
-
-<style lang="scss">
-.n-modal-content-inner--measure {
-  transform: scale(1)!important;
-}
-
-.n-modal-content {
-  & > .n-scrollbar {
-    & > .n-scrollbar-container > .n-scrollbar-content {
-      min-height: 100%;
-      display: flex;
-    }
-  }
-  &:not(.n-modal-content--active) {
-    visibility: hidden;
-  }
-}
-
-.n-modal-content--transition-enter-active {
-  opacity: 1;
-  transition: opacity .3s cubic-bezier(.4, 0, .2, 1), transform .3s cubic-bezier(0.0, 0.0, 0.2, 1);
-  transform: scale(1);
-}
-
-.n-modal-content--transition-leave-active {
-  opacity: 1;
-  transition: opacity .3s cubic-bezier(.4, 0, .2, 1), transform .3s cubic-bezier(0.4, 0.0, 1, 1);
-  transform: scale(1);
-}
-
-.n-modal-content--transition-enter, .n-modal-content--transition-leave-to {
-  opacity: 0;
-  transform: scale(.5);
-}
-</style>

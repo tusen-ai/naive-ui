@@ -9,7 +9,6 @@ export default {
       }
       return defaultSlot[0]
     } else {
-      console.error(`NBaseContext: default slot is empty`)
       return null
     }
   }

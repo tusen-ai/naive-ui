@@ -26,6 +26,10 @@ export default {
     format: {
       type: String,
       default: null
+    },
+    transparent: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
@@ -61,6 +65,6 @@ export default {
     }
   },
   render (h) {
-    return h('span', this.renderedTime)
+    return this.transparent ? this._v(this.renderedTime) : h('time', this.renderedTime)
   }
 }

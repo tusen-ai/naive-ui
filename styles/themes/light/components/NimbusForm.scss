@@ -1,0 +1,6 @@
+@mixin setup-light-nimbus-form {
+  $--nimbus-form-background-color:white !global;;
+  $--nimbus-form-title-color: $--n-text-color !global;
+  $--nimbus-form-text-color: $--n-secondary-text-color !global;
+  $--nimbus-form-divider-color:$--n-divider-color !global;
+}

@@ -42,9 +42,10 @@
             <div class="n-nimbus-service-layout-drawer-header__content">
               <div class="n-nimbus-service-layout-drawer-header__icon">
                 <n-icon
-                  :type="icon"
                   :size="22"
-                />
+                >
+                  <slot name="drawer-header-icon" />
+                </n-icon>
               </div>
               {{ name }}
             </div>
@@ -171,9 +172,9 @@ export default {
     $route (to, from) {
       this.syncActiveItemWithPath(to.path)
     },
-    items (value, prevValue) {
-      // console.log(value, prevValue, isEqual(value, prevValue))
-      if (!isEqual(value, prevValue)) {
+    items (value, oldValue) {
+      // console.log(value, oldValue, isEqual(value, oldValue))
+      if (!isEqual(value, oldValue)) {
         this.itemsWithCollapseStatus = value.map(item => ({
           ...item,
           isCollapsed: false

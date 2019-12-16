@@ -2,9 +2,10 @@
 ```component
 icons
 ```
-
-<icons />
-
+## Demos
 ```demo
 basic
 ```
+## Search Icons
+<icons />
+

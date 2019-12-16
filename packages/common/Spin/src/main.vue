@@ -5,12 +5,13 @@
   >
     <transition name="n-spin--transition">
       <n-base-loading
+        v-if="spinning"
         :class="{
           [`n-spin--${size}-size`]: true
         }"
+        :stroke="stroke"
         :stroke-width="strokeWidth"
         :theme="synthesizedTheme"
-        v-if="spinning"
         class="n-spin"
       />
     </transition>
@@ -24,12 +25,14 @@
     </div>
   </div>
   <n-base-loading
+    v-else
     :class="{
       [`n-spin--${size}-size`]: size
     }"
+    :stroke="stroke"
     :stroke-width="strokeWidth"
     :theme="synthesizedTheme"
-    v-else
+    :style="synthesizedStyle"
     class="n-spin"
   />
 </template>
@@ -38,14 +41,19 @@
 import NBaseLoading from '../../../base/Loading'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import asthemecontext from '../../../mixins/asthemecontext'
 
 export default {
   name: 'NSpin',
   components: {
     NBaseLoading
   },
-  mixins: [withapp, themeable],
+  mixins: [ withapp, themeable, asthemecontext ],
   props: {
+    stroke: {
+      type: String,
+      default: null
+    },
     size: {
       type: [String, Number],
       default: 'medium'

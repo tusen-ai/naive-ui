@@ -13,7 +13,7 @@
   ) !global;
   $--input-background-color: (
     "default": rgb(255, 255, 255),
-    "disabled": $--alpha-neutral-8,
+    "disabled": $--overlay-8,
     "focus": rgb(255, 255, 255),
     "error-focus": rgb(255, 255, 255)
   ) !global;

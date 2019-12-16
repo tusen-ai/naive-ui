@@ -2,79 +2,76 @@
 @import "./themes/vars.scss";
 
 @include themes-mixin {
-  .n-tooltip-detached-content-container {
-    @include b(popover-content) {
-      background-color: $--tooltip-background-color;
-      color: $--tooltip-color;
-      box-shadow: $--tooltip-box-shadow;
-      &[n-placement$="top-start"] {
-        @include b(popover-arrow) {
-          border-top-color: $--tooltip-background-color;
+  .#{block(tooltip)} {
+    @include b(tooltip-content) {
+      &.#{block(popover-content)} {
+        @include once {
+          padding: 8px 14px;
+          white-space: nowrap;
+          border-radius: 6px;
         }
-      }
-      &[n-placement$="top"] {
-        @include b(popover-arrow) {
-          border-top-color: $--tooltip-background-color;
+        box-shadow: $--tooltip-box-shadow;
+        background-color: $--tooltip-background-color;
+        color: $--tooltip-color;
+        &[n-placement$="top-start"] {
+          @include b(popover-arrow) {
+            border-top-color: $--tooltip-background-color;
+          }
         }
-      }
-      &[n-placement$="top-end"] {
-        @include b(popover-arrow) {
-          border-top-color: $--tooltip-background-color;
+        &[n-placement$="top"] {
+          @include b(popover-arrow) {
+            border-top-color: $--tooltip-background-color;
+          }
         }
-      }
-      &[n-placement$="bottom-start"] {
-        @include b(popover-arrow) {
-          border-bottom-color: $--tooltip-background-color;
+        &[n-placement$="top-end"] {
+          @include b(popover-arrow) {
+            border-top-color: $--tooltip-background-color;
+          }
         }
-      }
-      &[n-placement$="bottom"] {
-        @include b(popover-arrow) {
-          border-bottom-color: $--tooltip-background-color;
+        &[n-placement$="bottom-start"] {
+          @include b(popover-arrow) {
+            border-bottom-color: $--tooltip-background-color;
+          }
         }
-      }
-      &[n-placement$="bottom-end"] {
-        @include b(popover-arrow) {
-          border-bottom-color: $--tooltip-background-color;
+        &[n-placement$="bottom"] {
+          @include b(popover-arrow) {
+            border-bottom-color: $--tooltip-background-color;
+          }
         }
-      }
-      &[n-placement$="left-start"] {
-        @include b(popover-arrow) {
-          border-left-color: $--tooltip-background-color;
+        &[n-placement$="bottom-end"] {
+          @include b(popover-arrow) {
+            border-bottom-color: $--tooltip-background-color;
+          }
         }
-      }
-      &[n-placement$="left"] {
-        @include b(popover-arrow) {
-          border-left-color: $--tooltip-background-color;
+        &[n-placement$="left-start"] {
+          @include b(popover-arrow) {
+            border-left-color: $--tooltip-background-color;
+          }
         }
-      }
-      &[n-placement$="left-end"] {
-        @include b(popover-arrow) {
-          border-left-color: $--tooltip-background-color;
+        &[n-placement$="left"] {
+          @include b(popover-arrow) {
+            border-left-color: $--tooltip-background-color;
+          }
         }
-      }
-      &[n-placement$="right-start"] {
-        @include b(popover-arrow) {
-          border-right-color: $--tooltip-background-color;
+        &[n-placement$="left-end"] {
+          @include b(popover-arrow) {
+            border-left-color: $--tooltip-background-color;
+          }
         }
-      }
-      &[n-placement$="right"] {
-        @include b(popover-arrow) {
-          border-right-color: $--tooltip-background-color;
+        &[n-placement$="right-start"] {
+          @include b(popover-arrow) {
+            border-right-color: $--tooltip-background-color;
+          }
         }
-      }
-      &[n-placement$="right-end"] {
-        @include b(popover-arrow) {
-          border-right-color: $--tooltip-background-color;
+        &[n-placement$="right"] {
+          @include b(popover-arrow) {
+            border-right-color: $--tooltip-background-color;
+          }
         }
-      }
-      @include b(tooltip-content) {
-        padding: 8px 14px;
-        white-space: nowrap;
-        @include m(fix-width) {
-          white-space: normal;
-          width: max-content;
-          max-width: 100%;
-          box-sizing: border-box;
+        &[n-placement$="right-end"] {
+          @include b(popover-arrow) {
+            border-right-color: $--tooltip-background-color;
+          }
         }
       }
     }

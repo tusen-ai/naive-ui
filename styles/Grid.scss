@@ -1,12 +1,10 @@
 @import './mixins/mixins.scss';
-@import './themes/vars.scss';
 
 @include b(row) {
   @include m(flex) {
     display: flex;
   }
   width: 100%;
-  position: relative;
 }
 
 @mixin col-size-mixin ($span) {
@@ -28,7 +26,7 @@
   vertical-align: top;
   box-sizing: border-box;
   display: inline-block;
-  position: relative;
+  // position: relative;
   @for $i from 1 through 24 {
     @include col-size-mixin($i);
   }

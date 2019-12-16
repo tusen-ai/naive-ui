@@ -37,7 +37,8 @@ export default {
       status: null,
       finishCallback: null,
       enter: false,
-      theme: null
+      theme: null,
+      activeAction: null
     }
   },
   methods: {
@@ -50,14 +51,14 @@ export default {
     start (fromProgress = 0, toProgress = 80) {
       if (this.status === null) {
         this.status = 'starting'
-        return this.$nextTick().then(() => {
-          this.$refs.loadingBar.getBoundingClientRect()
+        this.activeAction = this.$nextTick().then(() => {
           this.progress = toProgress
           return this.$nextTick()
         })
+        return this.activeAction
       } else {
         this.progress = fromProgress
-        return this.$nextTick().then(() => {
+        this.activeAction = this.$nextTick().then(() => {
           this.$refs.loadingBar.style.transition = 'none'
           this.$refs.loadingBar.getBoundingClientRect()
           this.$refs.loadingBar.style.transition = null
@@ -65,24 +66,25 @@ export default {
           this.progress = toProgress
           return this.$nextTick()
         })
+        return this.activeAction
       }
     },
     finish (callback) {
       this.finishCallback = callback
       if (this.status === 'finishing') {
-        this.start(100, 100).then(() => {
+        this.activeAction = this.start(100, 100).then(() => {
           this.finish(callback)
         })
       } else if (this.status === null) {
         this.progress = 100
-        this.$nextTick().then(() => {
+        this.activeAction = this.$nextTick().then(() => {
           this.$refs.loadingBar.style.transition = 'none'
           this.$refs.loadingBar.getBoundingClientRect()
           this.$refs.loadingBar.style.transition = null
           this.status = 'finishing'
         })
       } else {
-        this.$nextTick().then(() => this.$nextTick()).then(() => {
+        this.activeAction = this.activeAction.then(() => {
           this.progress = 100
           this.status = 'finishing'
         })
@@ -91,19 +93,19 @@ export default {
     error (callback) {
       this.finishCallback = callback
       if (this.status === 'error') {
-        this.start(100, 100).then(() => {
+        this.activeAction = this.start(100, 100).then(() => {
           this.error(callback)
         })
       } else if (this.status === null) {
         this.progress = 100
-        this.$nextTick().then(() => {
+        this.activeAction = this.$nextTick().then(() => {
           this.$refs.loadingBar.style.transition = 'none'
           this.$refs.loadingBar.getBoundingClientRect()
           this.$refs.loadingBar.style.transition = null
           this.status = 'error'
         })
       } else {
-        this.$nextTick().then(() => this.$nextTick()).then(() => {
+        this.activeAction = this.activeAction.then(() => {
           this.progress = 100
           this.status = 'error'
         })

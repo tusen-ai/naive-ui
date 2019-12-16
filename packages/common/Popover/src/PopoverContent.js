@@ -5,6 +5,7 @@ import placeable from '../../../mixins/placeable'
 import zindexable from '../../../mixins/zindexable'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import asthemecontext from '../../../mixins/asthemecontext'
 
 export default {
   name: 'NPopoverContent',
@@ -41,20 +42,40 @@ export default {
       type: Number,
       default: null
     },
+    minWidth: {
+      type: Number,
+      default: null
+    },
     maxWidth: {
       type: Number,
       default: null
     },
+    shadow: {
+      type: Boolean,
+      default: true
+    },
     raw: {
+      type: Boolean,
+      default: false
+    },
+    manuallyPositioned: {
       type: Boolean,
       default: false
     },
     detachedContainerClass: {
       type: String,
       default: 'n-popover-detached-content-container'
+    },
+    detached: {
+      type: Boolean,
+      default: true
+    },
+    contentClass: {
+      type: String,
+      default: null
     }
   },
-  mixins: [withapp, themeable, placeable, zindexable],
+  mixins: [withapp, themeable, asthemecontext, placeable, zindexable],
   directives: {
     clickoutside,
     mousemoveoutside
@@ -86,6 +107,9 @@ export default {
       }
       if (this.maxWidth) {
         style.maxWidth = this.maxWidth + 'px'
+      }
+      if (this.minWidth) {
+        style.minWidth = this.minWidth + 'px'
       }
       return style
     },
@@ -202,6 +226,9 @@ export default {
     getTrackedElement () {
       // console.log('getTrackedEleme')
       return this.activator().$el
+    },
+    getZindexableContent () {
+      return this.$el
     }
   },
   render (h) {
@@ -223,7 +250,7 @@ export default {
       }, [
         h('transition', {
           props: {
-            name: 'n-popover-fade'
+            name: 'n-popover-content-transition'
           },
           on: {
             enter: () => {
@@ -242,7 +269,10 @@ export default {
               staticClass: 'n-popover-content',
               class: {
                 'n-popover-content--without-arrow': !this.arrow,
-                [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme
+                [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme,
+                'n-popover-content--without-shadow': !this.shadow,
+                [this.contentClass]: this.contentClass,
+                'n-popover-content--fix-width': this.width !== null || this.maxWidth !== null
               },
               style: this.style,
               directives: [

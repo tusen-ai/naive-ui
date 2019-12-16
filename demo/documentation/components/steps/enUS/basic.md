@@ -21,9 +21,7 @@
     description="Something in the way she moves Attracts me like no other lover"
   />
 </n-steps>
-<div
-  style="display: flex; justify-content: center; flex-wrap: wrap; margin-top: 48px;"
->
+<n-button-group>
   <n-button
     @click="prev"
   >
@@ -38,13 +36,21 @@
       <md-arrow-round-forward />
     </template>
   </n-button>
-  <n-button @click="currentStatus='error'">
-    current-status: error
-  </n-button>
-  <n-button @click="currentStatus='process'">
-    current-status: process
-  </n-button>
-</div>
+</n-button-group>
+<n-radio-group v-model="currentStatus" size="medium">
+  <n-radio-button value="error">
+    Error
+  </n-radio-button>
+  <n-radio-button value="process">
+    Process
+  </n-radio-button>
+  <n-radio-button value="wait">
+    Wait
+  </n-radio-button>
+  <n-radio-button  value="finish">
+    Finish
+  </n-radio-button>
+</n-radio-group>
 ```
 
 ```js
@@ -58,7 +64,7 @@ export default {
   },
   data () {
     return {
-      current: null,
+      current: 1,
       currentStatus: 'error'
     }
   },
@@ -74,5 +80,11 @@ export default {
       else this.current--
     }
   }
+}
+```
+
+```css
+.n-button-group {
+  margin: 8px 16px 8px 0;
 }
 ```

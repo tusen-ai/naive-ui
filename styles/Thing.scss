@@ -1,0 +1,67 @@
+@import "./mixins/mixins.scss";
+
+@include themes-mixin {
+  @include b(thing) {
+    @include once {
+      display: flex;
+      transition: color .3s $default-cubic-bezier;
+      font-size: 14px;
+      @include b(thing-avatar) {
+        margin-right: 12px;
+        margin-top: 2px;
+      }
+      @include b(thing-avatar-header-wrapper) {
+        display: flex;
+        flex-wrap: nowrap;
+        @include b(thing-header-wrapper) {
+          flex: 1;
+        }
+      }
+      @include b(thing-main) {
+        flex-grow: 1;
+        @include b(thing-header) {
+          display: flex;
+          margin-bottom: 4px;
+          @include e(title) {
+            font-size: 16px;
+            font-weight: 700;
+            transition: color .3s $default-cubic-bezier;
+          }
+          @include e(extra) {
+  
+          }
+          justify-content: space-between;
+          align-items: center;
+        }
+        @include e(description) {
+          &:not(:last-child) {
+            margin-bottom: 4px;
+          }
+        }
+        @include e(content) {
+          &:not(:first-child) {
+            margin-top: 12px;
+          }
+        }
+        @include e(footer) {
+          &:not(:first-child) {
+            margin-top: 12px;
+          }
+        }
+        @include e(action) {
+          &:not(:first-child) {
+            margin-top: 12px;
+          }
+        }
+      }
+    }
+    color: $--thing-text-color;
+    @include b(thing-main) {
+      @include b(thing-header) {
+        @include e(title) {
+          color: $--thing-header-text-color;
+        }
+      }
+    }
+  }
+}

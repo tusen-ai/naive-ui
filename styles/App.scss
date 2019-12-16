@@ -1,6 +1,0 @@
-@import './mixins/mixins.scss';
-@import './themes/vars.scss';
-
-@include b(app) {
-  position: relative;
-}

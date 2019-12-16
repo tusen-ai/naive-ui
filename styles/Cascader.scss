@@ -2,13 +2,6 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
-@include b(cascader) {
-  width: 100%;
-}
-
-@include b(cascader-detached-content-container) {
-  transform: translateZ(0);
-}
 
 [n-suggested-transform-origin="bottom left"] {
   .n-cascader-select-menu--transition-leave {
@@ -103,39 +96,53 @@
 }
 
 @include themes-mixin {
+  @include b(cascader) {
+    @include once {
+      width: 100%;
+    }
+  }
+  @include b(cascader-detached-content-container) {
+    @include once {
+      transform: translateZ(0);
+    }
+  }
   @include b(cascader-menu) {
-    @include fade-in-scale-up-transition(cascader-menu, inherit, .2s);
-    transform-origin: inherit;
-    position: relative;
-    margin-top: 4px;
-    margin-bottom: 4px;
-    min-height: 1px;
-    @include b(cascader-select-menu) {
-      // box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.16);
-      @include fade-in-scale-up-transition(cascader-select-menu, inherit, .2s);
-      margin: 0;
+    @include once {
+      @include fade-in-scale-up-transition(cascader-menu, inherit, .2s);
+      transform-origin: inherit;
+      position: relative;
+      margin-top: 4px;
+      margin-bottom: 4px;
+      @include b(cascader-select-menu) {
+        @include fade-in-scale-up-transition(cascader-select-menu, inherit, .2s);
+        margin: 0;
+      }
     }
     @include b(cascader-cascader-menu) {
-      display: flex;
-      flex-wrap: nowrap;
+      @include once {
+        display: flex;
+        flex-wrap: nowrap;
+        border-radius: 6px;
+        @include fade-in-scale-up-transition(cascader-cascader-menu, inherit, .2s);
+      }
       box-shadow: $--cascader-menu-box-shadow;
-      border-radius: 6px;
-      @include fade-in-scale-up-transition(cascader-cascader-menu, inherit, .2s);
       @include b(cascader-submenu) {
-        position: relative;
-        overflow: hidden;
-        min-width: 182px;
-        height: 204px;
-        @include b(scrollbar-content) {
+        @include once {
           position: relative;
-        }
-        &:first-child {
-          border-top-left-radius: 6px;
-          border-bottom-left-radius: 6px;
-        }
-        &:last-child {
-          border-top-right-radius: 6px;
-          border-bottom-right-radius: 6px;
+          overflow: hidden;
+          min-width: 182px;
+          height: 204px;
+          @include b(scrollbar-content) {
+            position: relative;
+          }
+          &:first-child {
+            border-top-left-radius: 6px;
+            border-bottom-left-radius: 6px;
+          }
+          &:last-child {
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
+          }
         }
         &:not(:first-child) {
           border-left: 1px solid $--cascader-menu-border-color;
@@ -144,21 +151,21 @@
       }
     }
     @include b(cascader-option) {
-      box-sizing: border-box;
-      min-width: 182px;
-      height: $default-height;
-      line-height: $default-height;
-      background-color: transparent;
-      transition: background-color .2s $default-cubic-bezier, color 0.2s $default-cubic-bezier;
-      height: 34px;
-      line-height: 34px;
-      display: flex;
-      padding: 0px 24px 0 33px;
-      white-space: nowrap;
-      position: relative;
+      @include once {
+        box-sizing: border-box;
+        min-width: 182px;
+        background-color: transparent;
+        transition: background-color .2s $default-cubic-bezier, color 0.2s $default-cubic-bezier;
+        height: 34px;
+        line-height: 34px;
+        display: flex;
+        padding: 0px 24px 0 33px;
+        white-space: nowrap;
+        position: relative;
+        font-size: 14px;
+        cursor: pointer;
+      }
       color: map-get($--cascader-option-text-color, 'default');
-      font-size: 14px;
-      cursor: pointer;
       @include not-m(not-leaf) {
         &::after {
           @include once {
@@ -172,42 +179,46 @@
             opacity: 0;
             transition: transform .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
           }
-          border-right: 1px solid $--n-primary-color;
-          border-bottom: 1px solid $--n-primary-color;
+          border-right: 1px solid $--cascader-item-check-mark-color;
+          border-bottom: 1px solid $--cascader-item-check-mark-color;
         }
       }
-      @include m(single-type) {
-        padding: 0px 24px 0 18px;
-      }
-      @include e(checkbox) {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        left: 10px;
-        display: block;
-      }
-      @include e(radio) {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        left: 10px;
-        display: block;
-      }
-      @include e(loading) {
-        @include fade-in-transition;
-        position: absolute;
-        width: 14px;
-        height: 14px;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        display: block;
+      @include once {
+        @include m(single-type) {
+          padding: 0px 24px 0 18px;
+        }
+        @include e(checkbox) {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          left: 10px;
+          display: block;
+        }
+        @include e(radio) {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          left: 10px;
+          display: block;
+        }
+        @include e(loading) {
+          @include fade-in-transition;
+          position: absolute;
+          width: 14px;
+          height: 14px;
+          right: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+          display: block;
+        }
       }
       @include m(selected) {
         color: map-get($--cascader-option-text-color, 'active');
-        &::after {
-          transform: rotate(45deg) scale(1);
-          opacity: 1;
+        @include once {
+          &::after {
+            transform: rotate(45deg) scale(1);
+            opacity: 1;
+          }
         }
       }
       @include m(active) {
@@ -215,65 +226,77 @@
       }
       @include m(disabled) {
         color: map-get($--cascader-option-text-color, 'disabled');
-        cursor: not-allowed;
+        @include once {
+          cursor: not-allowed;
+        }
       }
       @include m(tracked) {
         background-color: $--cascader-menu-lightbar-background-color;
       }
       @include m(not-leaf) {
         &::after {
-          content: '';
-          position: absolute;
-          width: 5px;
-          height: 5px;
+          @include once {
+            content: '';
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            transform: rotate(45deg) translateY(-50%);
+            right: 18px;
+            top: 50%;
+            opacity: 1;
+            transition: opacity .3s $default-cubic-bezier;
+          }
           border-top: 2px solid $--cascader-option-arrow-background-color;
           border-right: 2px solid $--cascader-option-arrow-background-color;
-          transform: rotate(45deg) translateY(-50%);
-          right: 18px;
-          top: 50%;
-          opacity: 1;
-          transition: opacity .3s $default-cubic-bezier;
         }
       }
-      @include m(loading) {
-        @include m(not-leaf) {
-          &::after {
-            opacity: 0;
+      @include once {
+        @include m(loading) {
+          @include m(not-leaf) {
+            &::after {
+              opacity: 0;
+            }
           }
         }
       }
     }
     @include b(base-menu-mask) {
-      @include fade-in-transition(base-menu-mask);
+      @include once {
+        @include fade-in-transition(base-menu-mask);
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 14px;
+        border-radius: 6px;
+      }
       color: $--cascader-menu-mask-text-color;
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 14px;
-      border-radius: 6px;
       background-color: $--cascader-menu-mask-background-color;
     }
     @include b(cascader-light-bar-container) {
-      @include fade-in-transition(cascader-light-bar);
-      overflow: hidden;
-      position: absolute;
-      top: 0;
-      right: 0;
-      left: 0;
-      bottom: 0;
-      @include b(cascader-light-bar) {
+      @include once {
+        @include fade-in-transition(cascader-light-bar);
+        overflow: hidden;
         position: absolute;
-        width: 100%;
-        background-color: $--cascader-menu-lightbar-background-color;
+        top: 0;
+        right: 0;
         left: 0;
-        height: 34px;
-        transition: top .15s $default-cubic-bezier;
+        bottom: 0;
+      }
+      @include b(cascader-light-bar) {
+        @include once {
+          position: absolute;
+          width: 100%;
+          left: 0;
+          height: 34px;
+          transition: top .15s $default-cubic-bezier;
+        }
+        background-color: $--cascader-menu-lightbar-background-color;
       }
     }  
   }

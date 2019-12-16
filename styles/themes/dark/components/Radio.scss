@@ -22,9 +22,13 @@
   ) !global;
   $--radio-button-label-color: (
     'default': $--n-secondary-text-color,
-    'active': $--n-primary-color,
+    'active': black,
     'hover': $--n-primary-color
   ) !global;
   $--radio-disabled-opacity: .4 !global;
   $--radio-border-mask-width: 1px !global;
+  $--radio-button-box-shadow: (
+    'focus': (inset 0 0 0 1px $--n-primary-color, 0 0 0 2px change-color($--n-primary-color, $alpha: .3)),
+    'hover': inset 0 0 0 $--radio-border-mask-width $--n-primary-color
+  ) !global;
 }

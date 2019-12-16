@@ -1,6 +1,3 @@
 @mixin setup-dark-dropdown {
-  $--dropdown-menu-bg-color:#4b516a !global;
-  $--dropdown-item-hover-bg-color: rgba(96, 220, 178, 0.3) !global;
-  $--dropdown-item-hover-font-color: #fff !global;
-  
+  $--dropdown-item-suffix-fill: $--n-secondary-text-color !global;
 }

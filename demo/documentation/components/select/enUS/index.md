@@ -2,13 +2,15 @@
 Select
 ## Demo
 ```demo
+slot-api
 basic
 multiple
 events
 filterable
-clearable
-scroll-event
 remote
 remote-multiple
+clearable
+scroll-event
 ```
 ## API
+

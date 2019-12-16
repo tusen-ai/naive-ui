@@ -11,7 +11,7 @@
   type="line"
   color="red"
   rail-color="yellow"
-  indicator-position="inside-label"
+  indicator-placement="inside-label"
   indicator-text-color="green"
   :percentage="20"
 />

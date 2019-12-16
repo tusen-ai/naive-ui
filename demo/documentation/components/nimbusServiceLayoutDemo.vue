@@ -15,11 +15,13 @@
         </div>
         <div class="n-doc-section__view">
           <n-nimbus-service-layout
-            icon="md-musical-notes"
             name="Oasis"
             :items="items"
             :disable-menu="disableMenu"
           >
+            <template v-slot:drawer-header-icon>
+              <md-musical-notes />
+            </template>
             Take me to the place where you go<br>
             Where nobody knows if it's night or day<br>
             But please don't put your life in the hands<br>
@@ -37,7 +39,6 @@
         </div>
         <div class="n-doc-section__source">
           <textarea><n-nimbus-service-layout
-  icon="md-musical-notes"
   name="Oasis"
   :items="[
     {
@@ -76,6 +77,9 @@
   ]"
   :disable-menu="disableMenu"
 >
+  <template v-slot:drawer-header-icon>
+    <md-musical-notes />
+  </template>
   Take me to the place where you go<br>
   Where nobody knows if it's night or day<br>
   But please don't put your life in the hands<br>
@@ -91,7 +95,11 @@
 
 <script>
 import docCodeEditorMixin from './docCodeEditorMixin'
+import mdMusicalNotes from 'naive-ui/lib/icons/md-musical-notes'
 export default {
+  components: {
+    mdMusicalNotes
+  },
   mixins: [docCodeEditorMixin],
   data () {
     return {

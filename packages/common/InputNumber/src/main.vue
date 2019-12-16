@@ -49,9 +49,9 @@
 
 <script>
 import NIcon from '../../Icon/index'
-import Emitter from '../../../mixins/emitter'
 import themeable from '../../../mixins/themeable'
 import withapp from '../../../mixins/withapp'
+import asformitem from '../../../mixins/asformitem'
 import mdRemove from '../../../icons/md-remove'
 import mdAdd from '../../../icons/md-add'
 
@@ -77,7 +77,7 @@ export default {
     mdRemove,
     mdAdd
   },
-  mixins: [ withapp, themeable, Emitter ],
+  mixins: [ withapp, themeable, asformitem() ],
   inject: {
     NFormItem: {
       default: null
@@ -161,7 +161,6 @@ export default {
       const adjustedValue = this.adjustValue(newValue)
       if (adjustedValue === newValue) {
         this.$emit('change', newValue, oldValue)
-        this.formBlur('change', newValue)
       } else {
         this.$emit('input', adjustedValue)
       }
@@ -173,11 +172,6 @@ export default {
         this.$refs.input.focus()
       }
       e.preventDefault()
-    },
-    formBlur (type, val) {
-      if (this.NFormItem) {
-        this.dispatch('NFormItem', 'on-form-' + type, val)
-      }
     },
     handleFocus (e) {
       this.$emit('focus', e, this.value)
@@ -234,7 +228,6 @@ export default {
       e.target.value = value
       this.$emit('input', value)
       this.$emit('blur', e, value)
-      this.formBlur('blur', value)
     }
   }
 }

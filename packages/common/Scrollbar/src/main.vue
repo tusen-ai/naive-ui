@@ -1,5 +1,9 @@
 <template>
+  <div v-if="withoutScrollbar" ref="scrollContent">
+    <slot />
+  </div>
   <div
+    v-else
     class="n-scrollbar"
     :class="{
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
@@ -21,7 +25,7 @@
       </div>
     </div>
     <div
-      class="n-scrollbar-vertical-rail"
+      class="n-scrollbar-rail n-scrollbar-rail--vertical"
       :style="{width: scrollbarSize}"
     >
       <transition name="n-scrollbar--transition">
@@ -41,7 +45,7 @@
       </transition>
     </div>
     <div
-      class="n-scrollbar-horizontal-rail"
+      class="n-scrollbar-rail n-scrollbar-rail--horizontal"
       :style="{height: scrollbarSize}"
     >
       <transition name="n-scrollbar--transition">
@@ -79,6 +83,10 @@ export default {
     duration: {
       type: Number,
       default: 0
+    },
+    withoutScrollbar: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -294,7 +302,6 @@ export default {
     },
     handleHorizontalScrollMouseMove (e) {
       if (this.horizontalScrollbarActivated) {
-        console.log('here')
         window.clearTimeout(this.horizontalScrollbarVanishTimerId)
         window.clearTimeout(this.verticalScrollbarVanishTimerId)
         const dX = (e.clientX - this.memorizedMouseX)

@@ -1,12 +1,12 @@
 export default {
   inject: {
-    NApp: {
+    NConfigProvider: {
       default: null
     }
   },
   computed: {
     namespace () {
-      return (this.NApp && this.NApp.namespace) || null
+      return (this.NConfigProvider && this.NConfigProvider.namespace) || null
     }
   }
 }

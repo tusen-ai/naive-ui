@@ -1,18 +1,18 @@
-import HollowOutStyleManager from '../utils/HollowOutStyleManager'
+// import HollowOutStyleManager from '../utils/HollowOutStyleManager'
 
 export default {
   watch: {
     synthesizedTheme (value) {
       if (this.avoidHollowOut) return
       this.$nextTick().then(() => {
+        console.log('update style')
         this.updateHollowOutStyle(value)
       })
     }
   },
   data () {
     return {
-      ascendantBackgroundColor: null,
-      CSSNode: null
+      ascendantBackgroundColor: null
     }
   },
   methods: {
@@ -38,17 +38,17 @@ export default {
           break
         }
       }
-      HollowOutStyleManager.registerComponent(this.hollowOutBackgroundColorId, this.ascendantBackgroundColor)
+      // HollowOutStyleManager.registerComponent(this.hollowOutBackgroundColorId, this.ascendantBackgroundColor)
     }
   },
   mounted () {
-    this.hollowOutBackgroundColorId = 'x' + Math.random().toString(16).slice(9)
-    this.$el.setAttribute('n-hollowoutable-id', this.hollowOutBackgroundColorId)
+    // this.hollowOutBackgroundColorId = 'x' + Math.random().toString(16).slice(9)
+    // this.$el.setAttribute('n-hollowoutable-id', this.hollowOutBackgroundColorId)
     if (this.avoidHollowOut) return
     this.updateHollowOutStyle()
   },
   beforeDestroy () {
-    const id = this.hollowOutBackgroundColorId
-    HollowOutStyleManager.unregisterComponent(id, 1000)
+    // const id = this.hollowOutBackgroundColorId
+    // HollowOutStyleManager.unregisterComponent(id, 1000)
   }
 }

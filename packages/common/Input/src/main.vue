@@ -134,7 +134,12 @@ export default {
   components: {
     NCancelMark
   },
-  mixins: [ withapp, themeable, asformitem() ],
+  mixins: [ withapp, themeable, asformitem({
+    change: 'change',
+    blur: 'blur',
+    focus: 'focus',
+    input: 'input'
+  })],
   props: {
     type: {
       type: String,
@@ -372,13 +377,20 @@ export default {
       }
     },
     triggerBlur (e, fromWrapper = false) {
-      if (fromWrapper) return
+      // if (fromWrapper) return
       if (!(
         // document.activeElement === this.$refs.wrapper ||
         document.activeElement === this.$refs.textarea ||
         document.activeElement === this.$refs.input ||
         document.activeElement === this.$refs.secondInput
-      ) || e.target === document.activeElement) this.$emit('blur', e, this.value)
+      ) || e.target === document.activeElement) {
+        // prev line is for devtool case
+        if (!fromWrapper) {
+          this.$emit('blur', e, this.value)
+        } else {
+          this.$emit('wrapper-blur-to-outside', this.value)
+        }
+      }
     },
     triggerBlurAsync (e, fromWrapper = false) {
       if (!fromWrapper) this.waitingBlurCallback = true

@@ -1,78 +1,40 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
-@include b(transfer) {
-  display: flex;
-  @include b(transfer-list) {
-    width: 182px;
-    height: 312px;
-    background-color: rgba(75,81,106,1);
-    border-radius: 6px;
-    @include b(transfer-list-header) {
-      background:rgba(255,255,255,0.2);
+/**
+ * There are some theme related hard codes in transfer.
+ * Emmm, when I am writing these code I can't figure out a better solution.
+ * So just let it be.
+ * ...
+ * When I find myself in times of trouble
+ * blablabla
+ * ...
+ */
+@include themes-mixin {
+  @include b(transfer) {
+    @include once {
       display: flex;
-      border-radius: 6px 6px 0 0;
-      align-items: center;
-      height: 40px;
-      @include e(checkbox) {
-        position: relative;
-        padding: 0 8px 0 14px;
-        @include b(checkbox) {
-          display: block;
-        }
-      }
-      @include e(header) {
-        flex: 1;
-        line-height: 1;
-        font-size: 16px;
-        font-weight: 700;
-        color: rgba(255, 255, 255, 1);
-        @include m(disabled) {
-          color: rgba(255, 255, 255, 0.25);
-        }
-      }
-      @include e(label) {
-        font-size: 12px;
-        justify-self: flex-end;
-        margin-right: 14px;
-      }
     }
-    @include b(transfer-list-body) {
-      overflow: hidden;
-      position: relative;
-      height: 272px;
-      @include b(scrollbar-content) {
-        width: 100%;
+    @include b(transfer-list) {
+      @include once {
+        background-clip: padding-box;
+        width: 182px;
+        height: 311px;
+        transition: background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+        border-radius: 6px;
       }
-      @include b(transfer-list-body-content) {
-        padding: 0;
-        margin: 0;
-        position: relative;
-        @include b(transfer-list-light-bar) {
-          @include fade-in-transition(transfer-list-light-bar);
-          height: 34px;
-          transition: top .15s $default-cubic-bezier;
-          background-color: rgba(96, 220, 178, 0.3);
-          width: 100%;
-          position: absolute;
-        }
-        @include b(transfer-list-item) {
-          @include slide-right-transition(transfer-list-item-source);
-          @include slide-left-transition(transfer-list-item-target);
-          position: relative;
-          cursor: pointer;
-          max-height: 34px;
+      background-color: map-get($--transfer-list-background-color, 'default');
+      border: 1px solid $--transfer-list-border-color;
+      @include b(transfer-list-header) {
+        @include once {
+          box-sizing: border-box;
+          margin: -1px -1px 0 -1px;
+          transition: background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
           display: flex;
+          border-radius: 6px 6px 0 0;
           align-items: center;
-          font-size: 14px;
-          height: 34px;
-          color: rgba(255, 255, 255, 1);
-          @include e(label) {
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-            padding-right: 4px;
-          }
+          height: 40px;
+          background-clip: padding-box;
           @include e(checkbox) {
             position: relative;
             padding: 0 8px 0 14px;
@@ -80,54 +42,157 @@
               display: block;
             }
           }
+        }
+        background-color: map-get($--transfer-list-header-background-color, 'default');
+        border-top: 1px solid $--transfer-header-border-color;
+        border-left: 1px solid $--transfer-header-border-color;
+        border-right: 1px solid $--transfer-header-border-color; 
+        @include e(header) {
+          @include once {
+            flex: 1;
+            line-height: 1;
+            font-size: 16px;
+            font-weight: 700;
+            transition: color .3s $default-cubic-bezier;
+          }
+          color: map-get($--transfer-list-header-text-color, 'default');
           @include m(disabled) {
-            color: rgba(255, 255, 255, 0.25);
+            color: map-get($--transfer-list-header-text-color, 'disabled');
+          }
+        }
+        @include e(extra) {
+          @include once {
+            transition: color .3s $default-cubic-bezier;
+            font-size: 12px;
+            justify-self: flex-end;
+            margin-right: 14px;
+            white-space: nowrap;
+          }
+          color: map-get($--transfer-list-header-extra-text-color, 'default');
+        }
+      }
+      @include b(transfer-list-body) {
+        /** hard-code **/
+        @if $theme == 'dark' {
+          margin-left: -1px;
+          margin-right: -1px;
+        } @else {
+          padding: 0 1px;
+        }
+        @include once {
+          box-sizing: border-box;
+          overflow: hidden;
+          position: relative;
+          height: 272px;
+          border-bottom-right-radius: 6px;
+          border-bottom-left-radius: 6px;
+          @include b(scrollbar-content) {
+            width: 100%;
+          }
+        }
+        @include b(transfer-list-content) {
+          @include once {
+            padding: 0;
+            margin: 0;
+            position: relative;
+          }
+          @include b(transfer-list-light-bar) {
+            @include once {
+              @include fade-in-transition(transfer-list-light-bar);
+              height: 34px;
+              transition: top .15s $default-cubic-bezier;
+              width: 100%;
+              position: absolute;
+            }
+            background-color: map-get($--tranfer-item-lightbar-background-color, 'default');
+          }
+          @include b(transfer-list-item) {
+            @include once {
+              @include slide-right-transition(transfer-list-item-source);
+              @include slide-left-transition(transfer-list-item-target);
+              transition: color .3s $default-cubic-bezier;
+              position: relative;
+              cursor: pointer;
+              max-height: 34px;
+              display: flex;
+              align-items: center;
+              font-size: 14px;
+              height: 34px;
+              @include e(extra) {
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                padding-right: 4px;
+              }
+            }
+            color: map-get($--transfer-item-text-color, 'default');
+            @include e(checkbox) {
+              @include once {
+                position: relative;
+                padding: 0 8px 0 14px;
+                @include b(checkbox) {
+                  display: block;
+                }
+              }
+              @if $theme == 'dark' {
+                padding-left: 15px;
+              }
+            }
+            @include m(disabled) {
+              @include once {
+                cursor: not-allowed;
+              }
+              color: map-get($--transfer-item-text-color, 'disabled');
+            }
+          }
+        }
+      }
+    }
+    @include b(transfer-gap) {
+      @include once {
+        width: 96px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      @include b(transfer-button) {
+        @include once {
+          width: 36px;
+          height: 36px;
+          border-radius: 18px;
+          cursor: pointer;
+          &:first-child {
+            margin-bottom: 12px;
+          }
+          @include m(to) {
+            transform: rotate(180deg);
+          }
+        }
+        @include e(icon) {
+          @include once {
+            pointer-events: none;
+            transition: fill .3s $default-cubic-bezier;
+          }
+          fill: map-get($--transfer-gap-button-background-color, 'default');
+        }
+        &:hover {
+          @include e(icon) {
+            fill: map-get($--transfer-gap-button-background-color, 'hover');
+          }
+        }
+        &:active {
+          @include e(icon) {
+            fill: map-get($--transfer-gap-button-background-color, 'active');
+          }
+        }
+        @include m(disabled) {
+          @include once {
             cursor: not-allowed;
           }
-          @include m(selected) {
-            color: rgba(99, 226, 183, 1);
+          @include e(icon) {
+            fill: map-get($--transfer-gap-button-background-color, 'disabled') !important;
           }
-        }
-      }
-      
-    }
-  }
-  @include b(transfer-gap) {
-    width: 96px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    @include b(transfer-button) {
-      width: 36px;
-      height: 36px;
-      border-radius: 18px;
-      cursor: pointer;
-      &:first-child {
-        margin-bottom: 12px;
-      }
-      @include e(icon) {
-        pointer-events: none;
-        fill: rgba(255, 255, 255, 0.3);
-        transition: fill .3s $default-cubic-bezier;
-      }
-      &:hover {
-        @include e(icon) {
-          fill: rgba(99, 226, 183, 1);
-        }
-      }
-      &:active {
-        @include e(icon) {
-          fill: rgba(77, 177, 153, 1);
-        }
-      }
-      @include m(to) {
-        transform: rotate(180deg);
-      }
-      @include m(disabled) {
-        cursor: not-allowed;
-        @include e(icon) {
-          fill: rgba(255, 255, 255, .15)!important;
         }
       }
     }

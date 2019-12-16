@@ -1,5 +1,5 @@
 # Disabled
-Button can be disabled
+Button can be disabled.
 ```html
 <n-button
   size="small"

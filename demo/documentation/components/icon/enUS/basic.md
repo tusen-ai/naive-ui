@@ -7,12 +7,20 @@
 </n-icon>
 <n-icon
   size="40"
+  color="rgb(255, 0, 0)"
 >
   <md-contacts/>
 </n-icon>
 <n-icon
   size="40"
-  color="red"
+  :themed-style="{
+    dark: {
+      fill: 'yellow'
+    },
+    light: {
+      fill: 'red'
+    }
+  }"
 >
   <md-cash />
 </n-icon>

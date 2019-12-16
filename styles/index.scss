@@ -3,11 +3,7 @@
 @import "./Card.scss";
 @import "./Icon.scss";
 @import "./GradientText.scss";
-@import "./ColumnGroup.scss";
-@import "./WithPadding.scss";
-@import "./ServiceCard.scss";
 @import "./Table.scss";
-@import "./WithMargin.scss";
 @import "./Checkbox.scss";
 @import "./Button.scss";
 @import "./Switch.scss";
@@ -25,7 +21,7 @@
 @import './Radio.scss';
 @import './Form.scss';
 @import './TimePicker.scss';
-@import './Tab.scss';
+@import './Tabs.scss';
 @import './Scrollbar.scss';
 @import './Steps.scss';
 @import './Progress.scss';
@@ -53,7 +49,12 @@
 @import './BaseIcon.scss';
 @import './Statistic.scss';
 @import './Breadcrumb.scss';
-
+@import './Descriptions.scss';
+@import "./Menu.scss";
+@import "./Code.scss";
+@import './List.scss';
+@import './Layout.scss';
+@import './Avatar.scss';
 @import "./NimbusServiceLayout.scss";
 @import "./Popover.scss";
 @import "./AdvancedTable.scss";
@@ -61,3 +62,9 @@
 @import "./Confirm.scss";
 @import "./BaseLoading.scss";
 @import "./BaseSlotMachine.scss";
+@import "./Modal.scss";
+@import "./Result.scss";
+@import "./Thing.scss";
+@import "./AutoComplete.scss";
+@import "./Empty.scss";
+@import "./Log.scss";

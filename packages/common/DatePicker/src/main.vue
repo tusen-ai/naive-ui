@@ -21,7 +21,7 @@
       pair
       @click="handleActivatorClick"
       @focus="handleFocus"
-      @wrapper-blur="handleRangeInputWrapperBlur"
+      @wrapper-blur-to-outside="handleRangeInputWrapperBlur"
       @blur="handleRangeInputBlur"
       @input="handleRangeInput"
     >
@@ -41,7 +41,7 @@
       :readonly="disabled ? 'disabled' : false"
       @click="handleActivatorClick"
       @focus="handleFocus"
-      @wrapper-blur="handleTimeInputWrapperBlur"
+      @wrapper-blur-to-outside="handleTimeInputWrapperBlur"
       @blur="handleTimeInputBlur"
       @input="handleTimeInput"
     >
@@ -358,7 +358,9 @@ export default {
       }
     },
     handleTimeInputWrapperBlur (e) {
-      this.$emit('blur', this.value)
+      if (!this.active) {
+        this.$emit('blur', this.value)
+      }
     },
     handleTimeInputBlur (e) {
       if (this.disabled) return
@@ -371,7 +373,9 @@ export default {
       this.afterBlur(e)
     },
     handleRangeInputWrapperBlur (e) {
-      this.$emit('blur', this.value)
+      if (!this.active) {
+        this.$emit('blur', this.value)
+      }
     },
     handleRangeInputBlur (e) {
       if (this.disabled) return
@@ -421,7 +425,6 @@ export default {
       if (this.active) {
         e.stopPropagation()
       } else {
-        // console.log('open calendar')
         this.openCalendar()
       }
     },
@@ -443,11 +446,12 @@ export default {
     closeCalendar (returnFocus = false) {
       if (this.active) {
         this.active = false
-        this.$emit('blur', this.value)
         if (returnFocus) {
           if (this.$refs.input && this.$refs.input.$el) {
             this.$refs.input.$el.focus()
           }
+        } else {
+          this.$emit('blur', this.value)
         }
       }
     },

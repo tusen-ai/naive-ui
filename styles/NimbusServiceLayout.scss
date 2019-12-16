@@ -1,9 +1,8 @@
 @import './mixins/mixins.scss';
 
-$layout-nav-height: 64px;
-
 @include themes-mixin() {
   @include b(nimbus-service-layout) {
+    $layout-nav-height: 64px;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -25,6 +24,7 @@ $layout-nav-height: 64px;
       height: $layout-nav-height;
     }
     @include e(body) {
+      font-size: 14px;
       position: absolute;
       left: 272px;
       right: 0px;
@@ -96,9 +96,7 @@ $layout-nav-height: 64px;
           @include e(icon) {
             position: absolute;
             left: 22px;
-            i::before {
-              color: #626778FF;
-            }
+            fill: $--n-text-color;
           }
         }
         @include b(nimbus-service-layout-drawer-item) {
@@ -138,14 +136,16 @@ $layout-nav-height: 64px;
           }
           &::before { // item background
             content: "";
+            background-size: 300%;
             background-image: $service-layout-item-background-image;
+            background-position: $--service-layout-item-background-position;
             position: absolute;
             left: 0;
             right: 0;
             top: 0;
             bottom: 0;
             z-index: -1;
-            transition: opacity 0.3s $default-cubic-bezier;
+            transition: opacity 0.3s $default-cubic-bezier, background-position .3s $default-cubic-bezier;
             opacity: 0;
           }
           @include m(active) {
