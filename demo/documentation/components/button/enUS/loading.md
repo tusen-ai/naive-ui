@@ -10,6 +10,7 @@ Button has loading status.
   </template>
   Loading
 </n-button>
+<br>
 <n-button
   :loading="loading"
   icon-position="right"
@@ -20,6 +21,7 @@ Button has loading status.
   </template>
   Loading
 </n-button>
+<br>
 <n-button
   :loading="loading"
   size="small"
@@ -27,6 +29,7 @@ Button has loading status.
 >
   Loading
 </n-button>
+<br>
 <n-button
   :loading="loading"
   size="large"
@@ -34,6 +37,7 @@ Button has loading status.
 >
   Loading
 </n-button>
+<br>
 <n-button
   :loading="loading"
   type="primary"
