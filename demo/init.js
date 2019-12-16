@@ -52,7 +52,6 @@ import popconfirm from './documentation/components/popconfirm'
 import anchor from './documentation/components/anchor'
 import popselect from './documentation/components/popselect'
 import configProvider from './documentation/components/configProvider'
-import advancedTable from './documentation/components/advancedTable'
 import table from './documentation/components/table'
 
 import transfer from './documentation/components/transfer'
@@ -160,7 +159,6 @@ const routes = [
       { path: '/n-button', component: button },
       { path: '/n-switch', component: nswitch },
       // { path: '/n-table', component: tableDemo },
-      { path: '/n-advance-table', component: advancedTable },
       { path: '/n-table', component: table },
       { path: '/n-input', component: input },
       { path: '/n-select', component: select },

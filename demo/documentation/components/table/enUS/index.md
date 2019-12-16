@@ -13,6 +13,7 @@ Table is used to displays rows of data.
 
 ```demo
 basic
+customStyle
 select
 filterAndSorter
 asyncFilterItems
@@ -25,4 +26,4 @@ renderHeader
 bestPractices
 ```
 
-## API
+## Column

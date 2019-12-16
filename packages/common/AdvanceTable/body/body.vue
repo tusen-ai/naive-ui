@@ -244,13 +244,13 @@ export default {
     },
 
     computeTdClass (column, params) {
-      let className = []
+      let className = {}
       if (column.fixed) {
-        className.push('n-advance-table__td--fixed')
+        className['n-advance-table__td--fixed'] = true
       }
       if (column.ellipsis) {
-        className.push('n-advance-table__td-text')
-        className.push('n-advance-table__td-text--ellipsis')
+        className['n-advance-table__td-text'] = true
+        className['n-advance-table__td-text--ellipsis'] = true
 
         //  'n-advance-table__td-text': true,
         //     'n-advance-table__td-text--ellipsis': column.ellipsis
@@ -259,9 +259,11 @@ export default {
         return className
       }
       if (typeof column.className === 'string') {
-        className.push(column.className)
+        className[column.className] = true
       } else if (typeof column.className === 'function') {
-        className.push(column.className(params))
+        column.className(column, params).forEach(name => {
+          className[name] = true
+        })
       }
       // console.log(className)
       return className
@@ -273,5 +275,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

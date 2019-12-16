@@ -185,7 +185,7 @@ export default {
       this.$refs.table.page(page);
 
       this.$refs.table.filter(filter);
-      this.$refs.table.sort(sorter.field, sorter.order);
+      sorter && this.$refs.table.sort(sorter.field, sorter.order);
     },
     apiGetData(params = {}) {
       this.loading = true;

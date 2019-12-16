@@ -246,7 +246,7 @@ export default {
   },
   data () {
     return {
-      triggerOnChange: false,
+      triggerOnChange: true,
       headerHeight: 0,
       copyData: [],
       sortIndexs: {},
