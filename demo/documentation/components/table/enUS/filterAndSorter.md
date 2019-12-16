@@ -127,14 +127,14 @@ export default {
       console.log(filter, sorter, pagination);
     },
     sortName() {
-      this.$refs.table.sort("name", "ascend", false);
+      this.$refs.table.sort("name", "ascend", true);
     },
     clearFilters() {
-      this.$refs.table.filter(null, false);
+      this.$refs.table.filter(null, true);
     },
     clearFiltersAndSorters() {
-      this.$refs.table.filter(null, false);
-      this.$refs.table.sort(null, false);
+      this.$refs.table.filter(null, true);
+      this.$refs.table.sort(null, true);
     },
     tryRoute() {
       this.$router.push({

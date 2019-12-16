@@ -180,11 +180,12 @@ export default {
       const sorter = query.sorter ? JSON.parse(query.sorter) : null;
       const filter = query.filter ? JSON.parse(query.filter) : null;
       this.fetchData(page, sorter, filter);
-      this.$refs.table.page(page);
       // this.$refs.table.sorter(sorter) : null);
       console.warn("TCL: getDataByQuey -> filter", filter);
+      this.$refs.table.page(page);
 
       this.$refs.table.filter(filter);
+      this.$refs.table.sort(sorter.field, sorter.order);
     },
     apiGetData(params = {}) {
       this.loading = true;
@@ -258,6 +259,12 @@ export default {
         },
         this.$route
       );
+      sorter = sorter
+        ? {
+            field: sorter.field,
+            order: sorter.order
+          }
+        : null;
       if (window.location.pathname)
         this.$router.push({
           ...this.$route,

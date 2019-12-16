@@ -248,7 +248,7 @@ export default {
   },
   data () {
     return {
-      isOnlyViewChange: false,
+      triggerOnChange: false,
       headerHeight: 0,
       copyData: [],
       sortIndexs: {},
@@ -641,16 +641,17 @@ export default {
         }
       })
     },
-    page (pageNum, isOnlyViewChange = true) {
-      this.isOnlyViewChange = isOnlyViewChange
+    page (pageNum, triggerOnChange = false) {
+      this.triggerOnChange = triggerOnChange
 
-      this.currentPage = pageNum
       this.$nextTick(() => {
-        this.isOnlyViewChange = !isOnlyViewChange
+        this.currentPage = pageNum
+
+        this.triggerOnChange = !triggerOnChange
       })
     },
-    sort (columnKey, order, isOnlyViewChange = true) {
-      this.isOnlyViewChange = isOnlyViewChange
+    sort (columnKey, order, triggerOnChange = false) {
+      this.triggerOnChange = triggerOnChange
 
       if (columnKey == null) {
         this.clearSort()
@@ -658,11 +659,11 @@ export default {
       }
       this.$set(this.sortIndexs, columnKey, sortOrderMap[order])
       this.$nextTick(() => {
-        this.isOnlyViewChange = !isOnlyViewChange
+        this.triggerOnChange = !triggerOnChange
       })
     },
-    filter (filterOptions, isOnlyViewChange = true) {
-      this.isOnlyViewChange = isOnlyViewChange
+    filter (filterOptions, triggerOnChange = false) {
+      this.triggerOnChange = triggerOnChange
 
       if (filterOptions === null) {
         this.selectedFilter = {}
@@ -677,10 +678,14 @@ export default {
       this.selectedFilter = filterOptions
 
       this.$nextTick(() => {
-        this.isOnlyViewChange = !isOnlyViewChange
+        this.triggerOnChange = !triggerOnChange
       })
     },
-    setParams ({ filter, sorter, page }) {
+    /**
+     * @deprecated
+     * 废弃的,
+     */
+    _setParams ({ filter, sorter, page }) {
       if (sorter) {
         this.sort(sorter.key, sorter.order)
       } else {
@@ -814,7 +819,7 @@ export default {
     //   return isCustom ? this.currentSortColumn : null
     // },
     useRemoteChange () {
-      if (this.isOnlyViewChange) return
+      if (!this.triggerOnChange) return
       clearTimeout(this.remoteTimter)
 
       this.remoteTimter = setTimeout(() => {
@@ -849,10 +854,6 @@ export default {
           this.processedData = []
         }
         Object.keys(this.currentFilterColumn).forEach(key => {
-          console.log(
-            'TCL: computeShowingData -> this.currentFilterColumn',
-            this.currentFilterColumn
-          )
           const { value, filterFn } = this.currentFilterColumn[key]
           if (value && filterFn !== 'custom' && filterFn) {
             data = data.filter(item => {
