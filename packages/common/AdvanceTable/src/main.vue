@@ -11,16 +11,14 @@
     class="n-advance-table__wrapper n-advance-table"
     :class="{
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
-      'n-advance-table--col-border': colBorder
+      'n-advance-table--col-border': colBorder,
+      'n-advance-table--no-data': showingData.length === 0
     }"
   >
     <div
       ref="tbodyWrapper"
       class="n-advance-table__tbody"
-      :class="{
-        'n-advance-table--no-data': showingData.length === 0
-      }"
-      :style="tableWrapperStl"
+      :style="tbodyWrapperStl"
     >
       <div
         v-if="fixedLeftColumn.length"
@@ -126,7 +124,7 @@
     <!-- 分页 -->
     <div
       v-if="pagination !== false"
-      :style="tableWrapperStl"
+      :style="tbodyWrapperStl"
       class="n-advance-table__pagination"
     >
       <n-pagination
@@ -278,7 +276,7 @@ export default {
         'n-advance-table__fixed--active': this.horizontalScrollLeft < 0
       }
     },
-    tableWrapperStl () {
+    tbodyWrapperStl () {
       let stl = {}
       // if (this.maxWidth) {
       //   stl.maxWidth =
@@ -528,9 +526,8 @@ export default {
     currentFilterColumn: {
       handler () {
         this.processedData = this.computeShowingData()
-        console.log('currentFilterColumn')
         // because after filter length maybe change , so need to reset current page
-        this.currentPage = 1
+        if (this.triggerOnChange) this.currentPage = 1
       },
       deep: true
     }
@@ -644,9 +641,8 @@ export default {
     page (pageNum, triggerOnChange = false) {
       this.triggerOnChange = triggerOnChange
 
+      this.currentPage = pageNum
       this.$nextTick(() => {
-        this.currentPage = pageNum
-
         this.triggerOnChange = !triggerOnChange
       })
     },

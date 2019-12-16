@@ -1,6 +1,6 @@
 # Best Practices
 
-> filter,sorter,pagination should use `custom`
+> filter,sorter,pagination should use `custom`,query map to router url
 
 ```html
 <n-button @click="sortName" style="margin-right:5px;">sort name</n-button>
