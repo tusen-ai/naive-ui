@@ -27,8 +27,6 @@ import Tabs from './packages/common/Tabs'
 import TimePicker from './packages/common/TimePicker'
 import Layout from './packages/common/Layout'
 import ServiceLayout from './packages/nimbus/ServiceLayout'
-import NimbusFormCard from './packages/nimbus/FormCard'
-import NimbusConfirmCard from './packages/deprecated/ConfirmCard'
 import NimbusIcon from './packages/deprecated/Icon'
 import Scrollbar from './packages/common/Scrollbar'
 import Steps from './packages/common/Steps'
@@ -69,6 +67,12 @@ import Log from './packages/common/Log'
 import Code from './packages/common/Code'
 
 /**
+ * Deprecated Components
+ */
+import NimbusFormCard from './packages/deprecated/NimbusFormCard'
+import NimbusConfirmCard from './packages/deprecated/ConfirmCard'
+
+/**
  * debug usage
  * to be removed
  */
@@ -76,17 +80,17 @@ import Loader from './packages/base/Loading'
 import CancelMark from './packages/base/CancelMark'
 import IconTransition from './packages/base/IconTransition'
 
-const naiveUI = {
+const NaiveUI = {
   install,
   setHljs
 }
 
 function setHljs (hljs) {
-  naiveUI.hljs = hljs
+  NaiveUI.hljs = hljs
 }
 
 function install (Vue) {
-  Vue.prototype.$naive = naiveUI
+  Vue.prototype.$naive = NaiveUI
   Card.install(Vue)
   Icon.install(Vue)
   ServiceLayout.install(Vue)
@@ -161,4 +165,4 @@ function install (Vue) {
   Code.install(Vue)
 }
 
-export default naiveUI
+export default NaiveUI
