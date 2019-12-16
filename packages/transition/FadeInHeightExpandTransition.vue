@@ -4,6 +4,10 @@ export default {
     transitionDisabled: {
       type: Boolean,
       default: false
+    },
+    width: {
+      type: Boolean,
+      default: false
     }
   },
   beforeDestroy () {
@@ -14,13 +18,21 @@ export default {
   },
   methods: {
     handleBeforeLeave () {
-      this.$el.style.maxHeight = this.$el.offsetHeight + 'px'
-      this.$el.style.height = this.$el.offsetHeight + 'px'
+      if (this.width) {
+        this.$el.style.maxWidth = this.$el.offsetWidth + 'px'
+        this.$el.style.width = this.$el.offsetWidth + 'px'
+      } else {
+        this.$el.style.maxHeight = this.$el.offsetHeight + 'px'
+        this.$el.style.height = this.$el.offsetHeight + 'px'
+      }
       this.$el.getBoundingClientRect()
     },
     handleLeave () {
-      // debugger
-      this.$el.style.maxHeight = 0
+      if (this.width) {
+        this.$el.style.maxWidth = 0
+      } else {
+        this.$el.style.maxHeight = 0
+      }
       this.$el.getBoundingClientRect()
     },
     handleAfterLeave () {
@@ -28,21 +40,38 @@ export default {
     },
     handleEnter () {
       this.$nextTick().then(() => {
-        this.$el.style.height = this.$el.offsetHeight + 'px'
-        this.$el.style.maxHeight = 0
+        if (this.width) {
+          this.$el.style.width = this.$el.offsetWidth + 'px'
+          this.$el.style.maxWidth = 0
+        } else {
+          this.$el.style.height = this.$el.offsetHeight + 'px'
+          this.$el.style.maxHeight = 0
+        }
+        this.$el.style.transition = 'none'
         this.$el.getBoundingClientRect()
-        this.$el.style.maxHeight = this.$el.style.height
+        this.$el.style.transition = null
+        this.$el.getBoundingClientRect()
+        if (this.width) {
+          this.$el.style.maxWidth = this.$el.style.width
+        } else {
+          this.$el.style.maxHeight = this.$el.style.height
+        }
       })
     },
     handleAfterEnter () {
-      this.$el.style.height = null
-      this.$el.style.maxHeight = null
+      if (this.width) {
+        this.$el.style.width = null
+        this.$el.style.maxWidth = null
+      } else {
+        this.$el.style.height = null
+        this.$el.style.maxHeight = null
+      }
     }
   },
   render (h) {
     return h('transition', {
       props: {
-        name: 'n-fade-in-height-expand'
+        name: this.width ? 'n-fade-in-width-expand' : 'n-fade-in-height-expand'
       },
       on: {
         beforeLeave: this.handleBeforeLeave,
