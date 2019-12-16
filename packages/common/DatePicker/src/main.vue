@@ -5,7 +5,8 @@
     :class="{
       [`n-date-picker--${size}-size`]: true,
       'n-date-picker--disabled': disabled,
-      'n-date-picker--range': isRange
+      'n-date-picker--range': isRange,
+      'n-date-picker--error': isErrorValue
     }"
   >
     <n-input
@@ -33,7 +34,6 @@
       v-else
       ref="input"
       v-model="displayTime"
-      class="n-date-picker__input"
       :force-focus="active"
       :disabled="disabled"
       :lazy-focus="true"
@@ -73,6 +73,7 @@
           @blur="handlePanelBlur"
           @input="handlePanelInput"
           @close="closeCalendar"
+          @checkValue="checkValue"
         />
         <date-panel
           v-else-if="type === 'date'"
@@ -85,6 +86,7 @@
           @input="handlePanelInput"
           @blur="handlePanelBlur"
           @close="closeCalendar"
+          @checkValue="checkValue"
         />
         <daterange-panel
           v-else-if="type === 'daterange'"
@@ -97,6 +99,7 @@
           @input="handleRangePanelInput"
           @blur="handlePanelBlur"
           @close="closeCalendar"
+          @checkValue="checkValue"
         />
         <datetimerange-panel
           v-else-if="type === 'datetimerange'"
@@ -110,6 +113,7 @@
           @input="handleRangePanelInput"
           @close="closeCalendar"
           @blur="handlePanelBlur"
+          @checkValue="checkValue"
         />
       </div>
     </div>
@@ -267,7 +271,8 @@ export default {
       displayTime: '',
       displayStartTime: '',
       displayEndTime: '',
-      active: false
+      active: false,
+      isErrorValue: false
     }
   },
   computed: {
@@ -341,7 +346,10 @@ export default {
     /**
      * Panel Input
      */
-    handlePanelInput (value, valueString) {
+    handlePanelInput (value, valueString, isErrorValue) {
+      if (isErrorValue) {
+        console.log('11111111111')
+      }
       this.$emit('input', value, 'unavailable for now')
       this.refresh(value)
     },
@@ -430,8 +438,9 @@ export default {
         this.$emit('input', getTime(newSelectedDateTime))
       }
     },
-    handleRangeInput (v) {
+    handleRangeInput (v, isErrorValue) {
       // const v = e.target.value
+      console.log('handleRangeInput', isErrorValue)
       if (v === null) v = [null, null]
       const [startTime, endTime] = v
       const newStartTime = strictParse(startTime, this.computedFormat, new Date())
@@ -532,6 +541,9 @@ export default {
       }
       this.$emit('input', [startTime, endTime])
       this.refresh([startTime, endTime])
+    },
+    checkValue (isErrorValue) {
+      this.isErrorValue = isErrorValue
     }
   }
 }

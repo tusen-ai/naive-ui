@@ -163,6 +163,10 @@
           round
           auto-text-color
           type="primary"
+          class="n-date-picker-panel-actions__confirm"
+          :class="{
+            'n-date-picker-panel-actions__confirm--disabled': isErrorDateTime
+          }"
           @click="handleConfirmClick"
         >
           Confirm

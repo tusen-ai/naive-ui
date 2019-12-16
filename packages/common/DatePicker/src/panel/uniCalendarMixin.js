@@ -60,8 +60,10 @@ export default {
       selectedDate: null,
       hourDisabled: () => true,
       minuteDisabled: () => true,
-      secondDisabled: () => true
-
+      secondDisabled: () => true,
+      isErrorTime: false,
+      initialValue: null,
+      isErrorDate: false
     }
   },
   computed: {
@@ -118,6 +120,9 @@ export default {
     } else {
       this.displayDateString = ''
     }
+  },
+  mounted () {
+    this.checkDate(this.value)
   },
   methods: {
     handleClickOutside () {
@@ -206,6 +211,7 @@ export default {
     setSelectedDateTimeToNow () {
       this.$emit('input', getTime(this.adjustValue(new Date())))
       this.calendarDateTime = new Date() // moment()
+      this.checkDate(getTime(this.adjustValue(new Date())))
     },
     handleDateClick (dateItem) {
       if (this.dateDisabled(dateItem.timestamp)) {
@@ -217,6 +223,7 @@ export default {
       }
       newSelectedDateTime = set(newSelectedDateTime, dateItem.dateObject)
       this.selectedDate = dateItem.dateObject
+      this.checkDate(dateItem.timestamp)
       let timeDisabled = this.timeDisabled(dateItem.timestamp)
       this.hourDisabled = timeDisabled.hourDisabled || function () { return false }
       this.minuteDisabled = timeDisabled.minuteDisabled || function () { return false }
@@ -238,6 +245,9 @@ export default {
       this.displayDateString = format(time, this.dateFormat)
     },
     handleConfirmClick () {
+      if (this.isErrorDate || this.isErrorTime) {
+        return
+      }
       this.$emit('confirm')
       this.closeCalendar()
     },
@@ -257,6 +267,14 @@ export default {
     },
     prevMonth () {
       this.calendarDateTime = addMonths(this.calendarDateTime, -1)
+    },
+    checkValue (isErrorTime) {
+      this.isErrorTime = isErrorTime
+      this.$emit('checkValue', isErrorTime)
+    },
+    checkDate (date) {
+      this.isErrorDate = this.dateDisabled(date)
+      this.$emit('checkValue', this.isErrorDate)
     }
   }
 }

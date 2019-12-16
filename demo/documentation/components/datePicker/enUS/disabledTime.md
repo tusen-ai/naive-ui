@@ -12,6 +12,7 @@
   :date-disabled = "dateDisabled"
   :timeDisabled= "timeDisabled"
 />
+{{timestamp2}}
 <n-date-picker
   v-model="timestamp3"
   type="daterange"
@@ -28,41 +29,36 @@
 export default {
   data () {
     return {
-      timestamp1: null,
-      timestamp2: null,
-      timestamp3: null,
-      timestamp4: null,
+      timestamp1: 1576339200000,
+      timestamp2: 1576339200000,
+      timestamp3: [1576339200000, 1576339200000],
+      timestamp4: [1576585320000,1576585320000],
     }
   },
   methods: {
     dateDisabled (current) {
-      console.log(current)
-      return current > 1576598400000 && current < 1576857600000
+      return current >= 1576339200000 && current <= 1576425600000
       // Tue Nov 12 2019 17:49:42 GMT+0800 (China Standard Time) -
       // Fri Nov 15 2019 17:49:42 GMT+0800 (China Standard Time)
     },
     timeDisabled (current) {
-      console.log('current', current)
       return {
         hourDisabled: (hour) => {
-          if (current===1576598400000) {
+          if (current===1576512000000) {
             return hour > 1 && hour <= 19
           } else {
-            return true
+            return false
           }
         },
         minuteDisabled: (minute, selectedHour) => {
-          console.log('selectedHour', selectedHour)
-          if(current===1576598400000 && selectedHour===15) {
+          if(current===1576512000000 && selectedHour===22) {
             return minute>=20 && minute<=30
-          } else if (current===1576512000000) {
-            return minute>=0
-            }else {
+          } else {
             return false
           }
         },
         secondDisabled: (second, selectedMinute, selectedHour) => {
-          if(current===1576598400000 && selectedHour===12 && selectedMinute>=40 && selectedMinute<=50) {
+          if(current===1576512000000 && selectedHour===12 && selectedMinute>=40 && selectedMinute<=50) {
             return second>=20 && second<=30
           }　else {
             return false
@@ -70,43 +66,25 @@ export default {
         },
       }
     },
-    dateRangeDisabled(current, type) {
-      if (type === 'start') {
-        console.log('start', current)
-        return current > 1576598400000 && current < 1576857600000
-      } else if (type==='end') {
-        return current<=1577462400000
-      } else {
-        return false
-      }
+    dateRangeDisabled(current) {
+        return current >= 1576339200000 && current <= 1576425600000
     },
     timeRangeDisabled(current, type) {
       if (type === 'start') {
         return {
           hourDisabled: (hour) => {
-            if (current===1576598400000) {
+            if (current[0]===1576512000000) {
               return hour > 1 && hour <= 19
-            } else {
-              return true
-            }
+            } 
           },
           minuteDisabled: (minute, selectedHour) => {
-            console.log('selectedHour', selectedHour)
-            // debugger
-            if(current===1576598400000 && selectedHour===20) {
-              // debugger
+            if(current[0]===1576512000000 && selectedHour===20) {
               return minute>=20 && minute<=30
-            } else if (current===1576512000000) {
-              return minute>=0
-              }else {
-              return false
-            }
+            } 
           },
           secondDisabled: (second, selectedMinute, selectedHour) => {
-            if(current===1576598400000 && selectedHour===12 && selectedMinute>=40 && selectedMinute<=50) {
+            if(current[0]===1576512000000 && selectedHour===12 && selectedMinute>=40 && selectedMinute<=50) {
               return second>=20 && second<=30
-            }　else {
-              return false
             }
           },
         }

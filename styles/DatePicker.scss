@@ -9,6 +9,13 @@
       @include m(range) {
         // width: 382px;
       }
+      @include m (error) {
+        @include b(input) {
+          @include e(input) {
+            color: red;
+          }
+        }
+      }
     }  
   }
   
@@ -90,6 +97,14 @@
         @include b(time-picker) {
           width: 145px;
         }
+        @include b(input) {
+          @include m(error) {
+            color: red;
+            @include e(input) {
+              color: red;
+            }
+          }
+        }
       }
       border-bottom: 1px solid $--date-picker-divider-color;
     }
@@ -147,6 +162,12 @@
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
+        @include e(date-input) {
+          color: red;
+          @include m(error) {
+            color: red;
+          }
+        }
       }
       @include e(date) {
         @include once {
@@ -241,6 +262,12 @@
         @include b(button) {
           margin-bottom: 0;
           margin-right: 12px;
+        }
+        @include e(confirm) {
+          @include m(disabled) {
+            cursor: not-allowed;
+            opacity: 0.5;
+          }
         }
       }
       border-top: 1px solid $--date-picker-divider-color;

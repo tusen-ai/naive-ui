@@ -14,7 +14,9 @@
       >
         <n-input
           v-model="displayDateString"
-          class="n-date-picker-panel-dates__date-input"
+          :class="{
+            'n-input--error': isErrorDate
+          }"
           placeholder="Select date"
           @blur="handleDateInputBlur"
           @input="handleDateInput"
@@ -29,6 +31,7 @@
           :minute-disabled="minuteDisabled"
           :second-disabled="secondDisabled"
           @input="handleTimePickerInput"
+          @checkValue="checkValue"
         />
       </div>
       <div class="n-date-picker-panel-month-modifier">
@@ -109,6 +112,10 @@
           round
           auto-text-color
           type="primary"
+          class="n-date-picker-panel-actions__confirm"
+          :class="{
+            'n-date-picker-panel-actions__confirm--disabled': isErrorTime || isErrorDate
+          }"
           @click="handleConfirmClick"
         >
           Confirm
@@ -157,6 +164,17 @@ export default {
     return {
       dateFormat: DATE_FORMAT,
       detaValidateFormat: DATE_VALIDATE_FORMAT
+    }
+  },
+  watch: {
+    active () {
+      if (this.active) {
+        this.initialValue = this.value
+      } else {
+        if (this.isErrorTime || this.isErrorDate) {
+          this.$emit('input', this.initialValue)
+        }
+      }
     }
   },
   methods: {

@@ -64,7 +64,7 @@
           }"
           @click="handleDateClick(dateItem)"
         >
-          {{ dateItem.dateObject.date }} {{ dateDisabled(dateItem.timestamp) }}
+          {{ dateItem.dateObject.date }}
         </div>
         <div
           v-if="!(actions && actions.length)"
@@ -89,6 +89,10 @@
           round
           auto-text-color
           type="primary"
+          class="n-date-picker-panel-actions__confirm"
+          :class="{
+            'n-date-picker-panel-actions__confirm--disabled': isErrorTime || isErrorDate
+          }"
           @click="handleConfirmClick"
         >
           Confirm

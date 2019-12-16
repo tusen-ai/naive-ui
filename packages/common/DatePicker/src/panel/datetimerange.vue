@@ -25,11 +25,12 @@
           position-mode="absolute"
           class="n-date-picker-panel__time-input"
           :value="startTimeValue"
-          :hour-disabled="isStartHourDisabled(startTimeValue)"
-          :minute-disabled="isStartMinuteDisabled(startTimeValue)"
-          :second-disabled="isStartSecondDisabled(startTimeValue)"
+          :hour-disabled="isStartHourDisabled(currentDate)"
+          :minute-disabled="isStartMinuteDisabled(currentDate)"
+          :second-disabled="isStartSecondDisabled(currentDate)"
           stop-selector-bubble
           @input="handleStartTimePickerInput"
+          @checkValue="checkStartTime"
         />
         <div class="n-date-picker-panel-input-wrapper__arrow">
           <n-base-icon
@@ -48,11 +49,13 @@
           position-mode="absolute"
           class="n-date-picker-panel__time-input"
           :value="endTimeValue"
-          :hour-disabled="isEndHourDisabled(endTimeValue)"
-          :minute-disabled="isEndMinuteDisabled(endTimeValue)"
-          :second-disabled="isEndSecondDisabled(endTimeValue)"
+          :hour-disabled="isEndHourDisabled(currentDate)"
+          :minute-disabled="isEndMinuteDisabled(currentDate)"
+          :second-disabled="isEndSecondDisabled(currentDate)"
+          :is-error-val="isErrorEndTime"
           stop-selector-bubble
           @input="handleEndTimePickerInput"
+          @checkValue="checkEndTime"
         />
       </div>
       <div
@@ -119,9 +122,9 @@
               'n-date-picker-panel-dates__date--in-display-month': dateItem.isDateOfDisplayMonth,
               'n-date-picker-panel-dates__date--in-span': dateItem.isInSpan,
               'n-date-picker-panel-dates__date--no-transition': noTransition,
-              'n-date-picker-panel-dates__date--disabled': dateDisabled(dateItem.timestamp, 'start')
+              'n-date-picker-panel-dates__date--disabled': dateDisabled(dateItem.timestamp)
             }"
-            @click="handleDateClick(dateItem, 'start')"
+            @click="handleDateClick(dateItem)"
             @mouseenter="handleDateMouseEnter(dateItem)"
           >
             {{ dateItem.dateObject.date }}
@@ -193,10 +196,10 @@
               'n-date-picker-panel-dates__date--in-display-month': dateItem.isDateOfDisplayMonth,
               'n-date-picker-panel-dates__date--in-span': dateItem.isInSpan,
               'n-date-picker-panel-dates__date--no-transition': noTransition,
-              'n-date-picker-panel-dates__date--disabled': dateDisabled(dateItem.timestamp, 'end')
+              'n-date-picker-panel-dates__date--disabled': dateDisabled(dateItem.timestamp)
             }"
             @click="handleDateClick(dateItem)"
-            @mouseenter="handleDateMouseEnter(dateItem, 'end')"
+            @mouseenter="handleDateMouseEnter(dateItem)"
           >
             {{ dateItem.dateObject.date }}
           </div>
@@ -220,6 +223,10 @@
         </n-button>
         <n-button
           v-if="actions.includes('confirm')"
+          class="n-date-picker-panel-actions__confirm"
+          :class="{
+            'n-date-picker-panel-actions__confirm--disabled': isErrorDateTime
+          }"
           size="tiny"
           round
           auto-text-color
