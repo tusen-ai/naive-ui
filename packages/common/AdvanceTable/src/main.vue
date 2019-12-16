@@ -893,7 +893,7 @@ export default {
           // }
           return data
         } else {
-          data = data.sort((a, b) => {
+          data.sort((a, b) => {
             a = a.row
             b = b.row
             if (type > 0) {
