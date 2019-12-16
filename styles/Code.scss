@@ -84,6 +84,13 @@
     .hljs-link {
       text-decoration: underline;
     }
+
+    .hljs-function .hljs-params {
+      color: #383a42;
+    }
+    .hljs-function .hljs-params .hljs-typing {
+      color: #383a42;
+    }
   }
   &.#{block(dark-theme)} {
     .hljs {

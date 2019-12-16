@@ -4,4 +4,5 @@ Config Consumer is built for getting config (usually as global config) of Config
 ```demo
 basic
 theme-environment
+color
 ```

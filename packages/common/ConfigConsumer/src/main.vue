@@ -1,6 +1,7 @@
 <script>
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import styleScheme from '../../../utils/colors'
 
 export default {
   name: 'NConfigConsumer',
@@ -20,7 +21,8 @@ export default {
     const defaultSlot = this.$scopedSlots.default ? this.$scopedSlots.default({
       theme: this.synthesizedTheme,
       namespace: this.NConfigProvider ? this.NConfigProvider.inheritedNamespace : null,
-      themeEnvironment: this.synthesizedThemeEnvironment
+      themeEnvironment: this.synthesizedThemeEnvironment,
+      styleScheme: this.synthesizedTheme ? styleScheme[this.synthesizedTheme] : null
     }) : []
     if (defaultSlot.length > 1) {
       console.warn('[naive-ui/config-consumer]: Config consumer only takes single child node')
