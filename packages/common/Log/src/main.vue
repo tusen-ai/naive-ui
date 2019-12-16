@@ -1,41 +1,40 @@
 <template>
   <div
     class="n-log"
+    :class="{
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+    }"
     :style="{
       lineHeight: lineHeight,
       height: styleHeight
     }"
     @wheel="handleWheel"
   >
-    <n-scrollbar ref="scrollbar" theme="dark" @scroll="handleScroll">
-      <pre
-        class="n-log__line n-log__line--padding"
-        :style="{
-          lineHeight: lineHeight,
-          height: paddingStyleHeight
-        }"
-      >{{ topLoading ? "Loading More" : 'Wheel Up to View More' }}</pre>
+    <n-scrollbar ref="scrollbar" @scroll="handleScroll">
       <pre class="n-log__lines">{{ processedLog }}</pre>
       <!-- <pre v-for="(line, index) in synthesizedLines" :key="index" class="n-log__line">{{ line }}</pre> -->
-      <pre
-        class="n-log__line n-log__line--padding"
-        :style="{
-          lineHeight: lineHeight,
-          height: paddingStyleHeight
-        }"
-      >{{ bottomLoading ? "Loading More" : 'Wheel Down to View More' }}</pre>
     </n-scrollbar>
+    <n-fade-in-height-expand-transition width>
+      <n-log-loader v-if="topLoading || bottomLoading" />
+    </n-fade-in-height-expand-transition>
   </div>
 </template>
 
 <script>
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 import NScrollbar from '../../Scrollbar'
+import NLogLoader from './LogLoader'
+import NFadeInHeightExpandTransition from '../../../transition/FadeInHeightExpandTransition'
 
 export default {
   name: 'NLog',
   components: {
-    NScrollbar
+    NScrollbar,
+    NLogLoader,
+    NFadeInHeightExpandTransition
   },
+  mixins: [ withapp, themeable ],
   props: {
     topLoading: {
       type: Boolean,

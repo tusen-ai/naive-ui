@@ -64,7 +64,7 @@ export default {
       setTimeout(() => {
         this.log = log + this.log
         this.topLoading = false
-      }, 3000)
+      }, 6000)
     },
     handleReachBottom () {
       if (this.bottomLoading) return
@@ -72,7 +72,7 @@ export default {
       setTimeout(() => {
         this.log = this.log + log
         this.bottomLoading = false
-      }, 3000)
+      }, 6000)
     }
   }
 }
