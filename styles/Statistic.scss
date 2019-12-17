@@ -3,7 +3,9 @@
 @include themes-mixin {
   @include b(statistic) {
     @include once {
+      /* stylelint-disable */
       font-family: 'Lato';
+      /* stylelint-enable */
     }
     @include b(statistic-value) {
       @include once {
