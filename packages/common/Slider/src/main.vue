@@ -7,10 +7,13 @@
       'n-slider--with-mark': marks,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
+    @keydown.right="handleKeyDownRight"
+    @keydown.left="handleKeyDownLeft"
   >
     <div
       ref="rail"
       class="n-slider-rail"
+      @click="handleRailClick"
     >
       <div
         class="n-slider-rail__fill"
@@ -82,7 +85,7 @@
               [`n-${synthesizedTheme}-theme`]: synthesizedTheme
             }"
           >
-            {{ activeHandleValue || tooltipHoverDisplayValue }}
+            {{ activeHandleValue === null ? tooltipHoverDisplayValue : activeHandleValue }}
           </div>
         </transition>
       </div>
@@ -161,7 +164,10 @@ export default {
       showTooltip: false,
       firstHandleActive: false,
       secondHandleActive: false,
+      firstHandleClicked: false,
+      secondHandleClicked: false,
       memoziedOtherValue: null,
+      valueChangedByRailClick: true,
       tooltipHoverDisplayValue: ''
     }
   },
@@ -238,33 +244,56 @@ export default {
     },
     active () {
       return this.firstHandleActive || this.secondHandleActive
+    },
+    clicked () {
+      return this.firstHandleClicked || this.secondHandleClicked
     }
   },
   watch: {
     value (newValue, oldValue) {
-      if (this.range && newValue && this.showTooltip) {
+      if (this.range && newValue) {
         if (oldValue && oldValue[1] !== newValue[1]) {
           this.$nextTick().then(() => {
-            this.firstHandleActive = false
-            this.secondHandleActive = true
+            if (!this.valueChangedByRailClick) {
+              this.firstHandleActive = false
+              this.secondHandleActive = true
+            } else {
+              this.valueChangedByRailClick = false
+            }
             this.switchFocus()
           })
         } else if (oldValue && oldValue[0] !== newValue[0]) {
           this.$nextTick().then(() => {
-            this.firstHandleActive = true
-            this.secondHandleActive = false
+            if (!this.valueChangedByRailClick) {
+              this.firstHandleActive = true
+              this.secondHandleActive = false
+            } else {
+              this.valueChangedByRailClick = false
+            }
             this.switchFocus()
           })
         } else if (newValue[0] === newValue[1]) {
           this.$nextTick().then(() => {
-            this.firstHandleActive = false
-            this.secondHandleActive = true
+            if (!this.valueChangedByRailClick) {
+              this.firstHandleActive = false
+              this.secondHandleActive = true
+            } else {
+              this.valueChangedByRailClick = false
+            }
             this.switchFocus()
           })
         }
       }
       this.$nextTick().then(() => {
-        this.updatePosition()
+        if (this.range) {
+          if (newValue && oldValue) {
+            if (newValue[0] !== oldValue[0] || newValue[1] !== oldValue[1]) {
+              this.updatePosition()
+            }
+          }
+        } else {
+          this.updatePosition()
+        }
       })
     }
   },
@@ -273,6 +302,85 @@ export default {
     window.removeEventListener('mouseup', this.handleFirstHandleMouseUp)
   },
   methods: {
+    handleRailClick (e) {
+      this.valueChangedByRailClick = true
+      const railRect = this.$refs.rail.getBoundingClientRect()
+      const offsetRatio = (e.clientX - railRect.left) / railRect.width
+      const newValue = this.min + (this.max - this.min) * offsetRatio
+      if (!this.range) {
+        this.emitInputEvent(newValue)
+        this.$refs.firstHandle.focus()
+      } else {
+        if (this.value) {
+          if (Math.abs(this.firstHandleValue - newValue) < Math.abs(this.secondHandleValue - newValue)) {
+            this.emitInputEvent([newValue, this.secondHandleValue])
+            this.$refs.firstHandle.focus()
+          } else {
+            this.emitInputEvent([this.firstHandleValue, newValue])
+            this.$refs.secondHandle.focus()
+          }
+        } else {
+          this.emitInputEvent([newValue, newValue])
+          this.$refs.firstHandle.focus()
+        }
+      }
+    },
+    handleKeyDownRight () {
+      let firstHandleFocused = false
+      let handleValue = null
+      if (document.activeElement === this.$refs.firstHandle) {
+        firstHandleFocused = true
+        handleValue = this.firstHandleValue
+      } else {
+        handleValue = this.secondHandleValue
+      }
+      let nextValue = Math.floor(handleValue / this.step) * this.step + this.step
+      if (this.marks) {
+        for (let key of Object.keys(this.marks)) {
+          key = Number(key)
+          if (key > handleValue && key < nextValue) {
+            nextValue = key
+          }
+        }
+      }
+      if (this.range) {
+        if (firstHandleFocused) {
+          this.emitInputEvent([nextValue, this.secondHandleValue])
+        } else {
+          this.emitInputEvent([this.firstHandleValue, nextValue])
+        }
+      } else {
+        this.emitInputEvent(nextValue)
+      }
+    },
+    handleKeyDownLeft () {
+      let firstHandleFocused = false
+      let handleValue = null
+      if (document.activeElement === this.$refs.firstHandle) {
+        firstHandleFocused = true
+        handleValue = this.firstHandleValue
+      } else {
+        handleValue = this.secondHandleValue
+      }
+      let nextValue = Math.ceil(handleValue / this.step) * this.step - this.step
+      if (this.marks) {
+        for (let key of Object.keys(this.marks)) {
+          key = Number(key)
+          if (key < handleValue && key > nextValue) {
+            nextValue = key
+          }
+        }
+      }
+      if (this.range) {
+        if (firstHandleFocused) {
+          this.emitInputEvent([nextValue, this.secondHandleValue])
+        } else {
+          this.emitInputEvent([this.firstHandleValue, nextValue])
+        }
+      } else {
+        this.emitInputEvent(nextValue)
+      }
+    },
     switchFocus () {
       if (this.range) {
         const firstHandle = this.$refs.firstHandle
@@ -319,13 +427,9 @@ export default {
     },
     justifyValue (value) {
       let justifiedValue = value
-      if (this.min !== null) {
-        justifiedValue = Math.max(this.min, justifiedValue)
-      }
-      if (this.max !== null) {
-        justifiedValue = Math.min(this.max, justifiedValue)
-      }
-      justifiedValue = Math.round(justifiedValue / this.step) * this.step
+      justifiedValue = Math.max(this.min, justifiedValue)
+      justifiedValue = Math.min(this.max, justifiedValue)
+      justifiedValue = Math.round((justifiedValue - this.min) / this.step) * this.step + this.min
       if (this.marks) {
         const closestMarkValue = this.getClosestMarkValue(value)
         if (closestMarkValue !== null && Math.abs(justifiedValue - value) > Math.abs(closestMarkValue - value)) {
@@ -339,6 +443,7 @@ export default {
         this.memoziedOtherValue = this.secondHandleValue
       }
       this.firstHandleActive = true
+      this.firstHandleClicked = true
       window.addEventListener('mouseup', this.handleFirstHandleMouseUp)
       window.addEventListener('mousemove', this.throttledHandleFirstHandleMouseMove)
     },
@@ -347,12 +452,15 @@ export default {
         this.memoziedOtherValue = this.firstHandleValue
       }
       this.secondHandleActive = true
+      this.secondHandleClicked = true
       window.addEventListener('mouseup', this.handleSecondHandleMouseUp)
       window.addEventListener('mousemove', this.throttledHandleSecondHandleMouseMove)
     },
     handleFirstHandleMouseUp (e) {
       this.secondHandleActive = false
       this.firstHandleActive = false
+      this.secondHandleClicked = false
+      this.firstHandleClicked = false
       if (!this.$refs.firstHandle.contains(e.target)) {
         this.showTooltip = false
       } else {
@@ -364,6 +472,8 @@ export default {
     handleSecondHandleMouseUp (e) {
       this.secondHandleActive = false
       this.firstHandleActive = false
+      this.secondHandleClicked = false
+      this.firstHandleClicked = false
       if (!this.$refs.firstHandle.contains(e.target)) {
         this.showTooltip = false
       } else {
@@ -412,7 +522,7 @@ export default {
       }
     },
     handleFirstHandleMouseLeave () {
-      if (!this.active) {
+      if (!this.active || !this.clicked) {
         this.showTooltip = false
       }
     },
@@ -428,7 +538,7 @@ export default {
       }
     },
     handleSecondHandleMouseLeave () {
-      if (!this.active) {
+      if (!this.active || !this.clicked) {
         this.showTooltip = false
       }
     },

@@ -3,14 +3,30 @@
 
 @include themes-mixin {
   @include b(slider) {
-    display: block;
-    padding: 5px 0;
-    position: relative;
-    z-index: 0;
-    width: calc(100% - 14px);
-    margin-left: 7px;
-    margin-right: 7px;
-    cursor: pointer;
+    @include once {
+      display: block;
+      padding: 5px 0;
+      position: relative;
+      z-index: 0;
+      width: calc(100% - 14px);
+      margin-left: 7px;
+      margin-right: 7px;
+      cursor: pointer;
+      @include b(slider-marks) {
+        position: absolute;
+        top: 14px;
+        left: 0;
+        right: 0;
+        @include b(slider-mark) {
+          position: absolute;
+          transform: translateX(-50%);
+        }
+      }
+      @include m(with-mark) {
+        width: calc(100% - 24px);
+        margin: 8px 12px 32px 12px;
+      }
+    }
     &:hover {
       @include b(slider-rail) {
         background-color: map-get($--slider-rail-background-color, 'hover');
@@ -43,38 +59,41 @@
         box-shadow: map-get($--slider-handle-box-shadow, 'hover');
       }
     }
-    @include m(with-mark) {
-      margin: 8px 12px 32px 12px;
-    }
     @include b(slider-rail) {
-      width: 100%;
+      @include once {
+        width: 100%;
+        position: relative;
+      }
       height: $--slider-rail-height;
       background-color: map-get($--slider-rail-background-color, 'default');
-      position: relative;
       transition: background-color .2s $default-cubic-bezier;
       border-radius: $--slider-rail-height / 2;
       @include e(fill) {
-        transition: background-color .3s $default-cubic-bezier;
-        background-color: map-get($--slider-rail-fill-background-color, 'default');
-        border-radius: $--slider-rail-height / 2;
-        position: absolute;
-        top: 0;
-        bottom: 0;
+        @include once {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          border-radius: $--slider-rail-height / 2;
+          transition: background-color .3s $default-cubic-bezier;
+        }
+        background-color: map-get($--slider-rail-fill-background-color, 'default');  
       }
     }
     @include b(slider-handle) {
-      outline: none;
-      height: $--slider-handle-size;
-      width: $--slider-handle-size;
-      border-radius: $--slider-handle-size / 2;
+      @include once {
+        outline: none;
+        height: $--slider-handle-size;
+        width: $--slider-handle-size;
+        border-radius: $--slider-handle-size / 2;
+        transition: box-shadow .2s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+        position: absolute;
+        top: 0;
+        transform: translateX(-50%);
+        overflow: hidden;
+        cursor: pointer;
+      }
       background-color: $--slider-handle-background-color;
       box-shadow: map-get($--slider-handle-box-shadow, 'default');
-      transition: box-shadow .2s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
-      position: absolute;
-      top: 0;
-      transform: translateX(-50%);
-      overflow: hidden;
-      cursor: pointer;
       &:hover {
         box-shadow: map-get($--slider-handle-box-shadow, 'hover');
       }
@@ -85,42 +104,39 @@
         box-shadow: map-get($--slider-handle-box-shadow, 'focus');
       }
     }
-    @include b(slider-marks) {
-      position: absolute;
-      top: 14px;
-      left: 0;
-      right: 0;
-      @include b(slider-mark) {
-        position: absolute;
-        transform: translateX(-50%);
-      }
-    }
     @include b(slider-dots) {
-      position: absolute;
-      left: 0;
-      top: 50%;
-      right: 0;
-      @include b(slider-dot) {
-        transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+      @include once {
         position: absolute;
-        transform: translateX(-50%) translateY(-50%);
-        height: $--slider-dot-size;
-        width: $--slider-dot-size;
-        border-radius: $--slider-dot-size / 2;
-        overflow: hidden;
+        left: 0;
+        top: 50%;
+        right: 0;
+      }
+      @include b(slider-dot) {
+        @include once {
+          transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+          position: absolute;
+          transform: translateX(-50%) translateY(-50%);
+          height: $--slider-dot-size;
+          width: $--slider-dot-size;
+          border-radius: $--slider-dot-size / 2;
+          overflow: hidden;
+        }
         box-shadow: map-get($--slider-dot-box-shadow, 'default');
       }
     }
   }
   @include b(slider-handle-indicator) {
-    @include fade-in-scale-up-transition();
+    @include once {
+      @include fade-in-scale-up-transition();
+      transform: scale(0.99999);
+      font-size: 14px;
+      padding: 8px 12px;
+      margin-bottom: 12px;
+      border-radius: 4px;
+    }
     color: $--slider-indicator-color;
-    font-size: 14px;
-    padding: 8px 12px;
-    margin-bottom: 12px;
     background-color: $--slider-indicator-background-color;
     box-shadow: $--slider-indicator-box-shadow;
-    border-radius: 4px;
   }
 }
 

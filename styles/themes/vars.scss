@@ -265,7 +265,7 @@ $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
   }
   &.#{$namespace}-#{$block}--transition-leave, &.#{$namespace}-#{$block}--transition-enter-to {
     opacity: 1; 
-    transform: scale(1) $original-transform;
+    transform: scale(0.99999) $original-transform;
   }
 }
 
