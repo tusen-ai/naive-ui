@@ -404,7 +404,7 @@ export default {
             }
           }
           if (!item.children) {
-            newValues.push(option.value)
+            newValues.push(item.value)
           }
         }
         traverseMultiple(option)
