@@ -1,13 +1,6 @@
 <template>
-  <n-config-provider
-    class="demo"
-    namespace="naive-ui-doc"
-    :theme="theme"
-  >
-    <n-nimbus-service-layout
-      :padding-body="false"
-      :items="items"
-    >
+  <n-config-provider class="demo" namespace="naive-ui-doc" :theme="theme">
+    <n-nimbus-service-layout :padding-body="false" :items="items">
       <template v-slot:nav>
         <doc-header
           :lang="lang"
@@ -202,8 +195,8 @@ export default {
           name: 'Data Display Components',
           childItems: [
             {
-              name: 'Advanced Table (in progress)',
-              path: `/${this.lang}/${this.theme}` + '/n-advance-table'
+              name: 'Table',
+              path: `/${this.lang}/${this.theme}` + '/n-table'
             },
             {
               name: 'Code',
@@ -418,10 +411,7 @@ export default {
         return this.$route.params.lang || 'en-us'
       },
       set (lang) {
-        this.$router.push(changeLangInPath(
-          this.$route.fullPath,
-          lang
-        ))
+        this.$router.push(changeLangInPath(this.$route.fullPath, lang))
       }
     },
     theme: {
@@ -429,10 +419,7 @@ export default {
         return this.$route.params.theme === 'light' ? 'light' : 'dark'
       },
       set (theme) {
-        this.$router.push(changeThemeInPath(
-          this.$route.fullPath,
-          theme
-        ))
+        this.$router.push(changeThemeInPath(this.$route.fullPath, theme))
       }
     }
   },
