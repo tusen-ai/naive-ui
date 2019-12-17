@@ -11,11 +11,12 @@
     @wheel="handleWheel"
   >
     <n-scrollbar ref="scrollbar" @scroll="handleScroll">
-      <pre class="n-log__lines">{{ processedLog }}</pre>
+      <!-- <pre class="n-log__lines">{{ processedLog }}</pre> -->
+      <n-log-line v-for="(line, index) in synthesizedLines" :key="index" :line="line" />
       <!-- <pre v-for="(line, index) in synthesizedLines" :key="index" class="n-log__line">{{ line }}</pre> -->
     </n-scrollbar>
     <n-fade-in-height-expand-transition width>
-      <n-log-loader v-if="topLoading || bottomLoading" />
+      <n-log-loader v-if="loading" />
     </n-fade-in-height-expand-transition>
   </div>
 </template>
@@ -26,23 +27,21 @@ import themeable from '../../../mixins/themeable'
 import NScrollbar from '../../Scrollbar'
 import NLogLoader from './LogLoader'
 import NFadeInHeightExpandTransition from '../../../transition/FadeInHeightExpandTransition'
+import NLogLine from './LogLine'
 
 export default {
   name: 'NLog',
   components: {
     NScrollbar,
     NLogLoader,
+    NLogLine,
     NFadeInHeightExpandTransition
   },
   mixins: [ withapp, themeable ],
   props: {
-    topLoading: {
+    loading: {
       type: Boolean,
-      default: true
-    },
-    bottomLoading: {
-      type: Boolean,
-      default: true
+      default: false
     },
     trim: {
       type: Boolean,
@@ -71,6 +70,10 @@ export default {
     offsetBottom: {
       type: Number,
       default: 0
+    },
+    hljs: {
+      type: Object,
+      default: null
     }
   },
   data () {
@@ -87,7 +90,6 @@ export default {
       return `${this.rows * this.lineHeight}em`
     },
     processedLog () {
-      console.log(this.log.trim())
       if (this.trim && this.log) return this.log.trim()
       else return this.log
     },
@@ -98,6 +100,9 @@ export default {
     }
   },
   methods: {
+    getHljs () {
+      return this.hljs || this.$naive.hljs
+    },
     handleScroll (e, container, content) {
       const containerHeight = container.offsetHeight
       const containerScrollTop = container.scrollTop

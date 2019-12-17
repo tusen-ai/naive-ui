@@ -6,31 +6,31 @@
     font-family: 'FiraCode', monospace;
     font-size: 14px;
     color: $--n-secondary-text-color;
-    border-radius: 6px;
-    width: 100%;
     box-sizing: border-box;
-    border: 1px solid $--n-border-color;
+    transition: border-color .3s $default-cubic-bezier;
+    @include m(top-bordered) {
+      border-top: 1px solid $--n-border-color;
+    }
+    @include m(bottom-bordered) {
+      border-bottom: 1px solid $--n-border-color;
+    }
     @include b(scrollbar-content) {
+      padding-top: 8px;
+      padding-bottom: 8px;
       overflow: hidden;
     }
     @include e(lines) {
-      padding: 0 8px;
       margin: 0;
       white-space: pre-wrap;
     }
     @include e(line) {
-      padding: 0 8px;
       margin: 0;
-      &:first-child {
-        margin-top: 8px;
-      }
-      &:last-child {
-        margin-bottom: 8px;
-      }
     }
     @include b(log-loader) {
       @include fade-in-width-expand-transition($duration: .3s, $delay: 0s);
-      box-shadow: $--popover-box-shadow;
+      box-sizing: border-box;
+      border: 1px solid $--n-border-color;
+      // box-shadow: $--popover-box-shadow;
       position: absolute;
       right: 16px;
       top: 8px;
