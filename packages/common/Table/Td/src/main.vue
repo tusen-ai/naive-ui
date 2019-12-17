@@ -1,6 +1,6 @@
 <template>
   <td>
-    <slot/>
+    <slot />
   </td>
 </template>
 
@@ -10,6 +10,3 @@ export default {
   props: {}
 }
 </script>
-
-<style lang="scss" scoped>
-</style>
