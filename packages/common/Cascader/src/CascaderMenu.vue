@@ -351,9 +351,9 @@ export default {
       this.$nextTick().then(() => {
         this.typeIsSelect = typeisSelect
         if (typeisSelect) {
-          const el = this.$refs.selectMenu.$el
+          const $el = this.$refs.selectMenu.$el
           this.$parent.updatePosition(
-            el,
+            $el,
             (el, activatorRect) => {
               el.style.minWidth = activatorRect.width + 'px'
             },
@@ -396,14 +396,14 @@ export default {
           this.$refs.mask.showOnce(`Not all child nodes of "${option.label}" have been loaded`)
           return
         }
-        const traverseMultiple = option => {
-          if (!option || option.disabled) return
-          if (Array.isArray(option.children)) {
-            for (const child of option.children) {
+        const traverseMultiple = item => {
+          if (!item || item.disabled) return
+          if (Array.isArray(item.children)) {
+            for (const child of item.children) {
               traverseMultiple(child)
             }
           }
-          if (!option.children) {
+          if (!item.children) {
             newValues.push(option.value)
           }
         }

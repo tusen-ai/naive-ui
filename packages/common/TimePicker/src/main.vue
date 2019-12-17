@@ -312,7 +312,6 @@ export default {
     }
   },
   mounted () {
-    console.log('enter timePicker')
     this.checkValue()
   },
   methods: {
@@ -430,9 +429,7 @@ export default {
     },
     closeTimeSelector (returnFocus = false) {
       this.active = false
-      if (returnFocus) {
-
-      } else {
+      if (!returnFocus) {
         this.$emit('blur', this.value)
       }
     },
@@ -454,7 +451,6 @@ export default {
       this.isErrorVal = this.isHourDisabled(this.computedHour) || this.isMinuteDisabled(this.computedMinute) ||
       this.isSecondDisabled(this.computedSecond)
       this.$emit('checkValue', this.isErrorVal)
-      console.log('this.checkTime', this.isErrorVal)
     }
     // checkHour () {
     //   if (this.isHourDisabled(this.computedHour)) {

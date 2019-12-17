@@ -268,12 +268,12 @@ export default {
 
       // console.log(this.$refs.contentInner)
       if (this.$refs.contentInner) {
-        let el = this.$refs.contentInner
+        let element = this.$refs.contentInner
         if (this.$refs.contentInner.$el) {
-          el = this.$refs.contentInner.$el
+          element = this.$refs.contentInner.$el
         }
         if (this.widthMode === 'activator') {
-          el.style.minWidth = activatorBoundingClientRect.width + 'px'
+          element.style.minWidth = activatorBoundingClientRect.width + 'px'
         }
       }
       if (el && cb) {

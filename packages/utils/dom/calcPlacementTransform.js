@@ -59,11 +59,11 @@ export default function calcPlacementTransform (placement, activatorRect, conten
     const toWindowRight = window.innerWidth - activatorRect.left - contentRect.width
     if (contentRect.height > toWindowBottom && activatorRect.top > toWindowBottom) {
       contentBottom = toWindowBottom + activatorRect.height
-      contentTop = null
+      // contentTop = null
       suggesetedTransfromOrigin = 'bottom'
     } else {
       contentTop = activatorRect.top + activatorRect.height
-      contentBottom = null
+      // contentBottom = null
       suggesetedTransfromOrigin = 'top'
     }
     if (toWindowRight < 0) {
