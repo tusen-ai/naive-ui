@@ -12,9 +12,15 @@ function pagesToShow (currentPage, pageCount, pageSlot = 9) {
   let middleEnd = currentPage
   const middleDelta = (pageSlot - 5) / 2
   middleEnd += Math.ceil(middleDelta)
-  middleEnd = Math.min(Math.max(middleEnd, firstPage + pageSlot - 3), lastPage - 2)
+  middleEnd = Math.min(
+    Math.max(middleEnd, firstPage + pageSlot - 3),
+    lastPage - 2
+  )
   middleStart -= Math.floor(middleDelta)
-  middleStart = Math.max(Math.min(middleStart, lastPage - pageSlot + 3), firstPage + 2)
+  middleStart = Math.max(
+    Math.min(middleStart, lastPage - pageSlot + 3),
+    firstPage + 2
+  )
   let leftSplit = false
   let rightSplit = false
   if (middleStart > firstPage + 2) leftSplit = true
@@ -31,10 +37,13 @@ function pagesToShow (currentPage, pageCount, pageSlot = 9) {
   }
   if (rightSplit) {
     items.push(-1)
-  } else if (middleEnd === lastPage - 2 && !(items[items.length - 1] === lastPage - 1)) {
+  } else if (
+    middleEnd === lastPage - 2 &&
+    items[items.length - 1] !== lastPage - 1
+  ) {
     items.push(lastPage - 1)
   }
-  if (!(items[items.length - 1] === lastPage)) items.push(lastPage)
+  if (items[items.length - 1] !== lastPage) items.push(lastPage)
   return items
 }
 

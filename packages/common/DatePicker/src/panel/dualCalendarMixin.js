@@ -61,10 +61,18 @@ export default {
   },
   computed: {
     startDateArray () {
-      return dateArray(this.startCalendarDateTime, this.valueAsDateArray, this.currentDateTime)
+      return dateArray(
+        this.startCalendarDateTime,
+        this.valueAsDateArray,
+        this.currentDateTime
+      )
     },
     endDateArray () {
-      return dateArray(this.endCalendarDateTime, this.valueAsDateArray, this.currentDateTime)
+      return dateArray(
+        this.endCalendarDateTime,
+        this.valueAsDateArray,
+        this.currentDateTime
+      )
     },
     startCalendarMonth () {
       return format(this.startCalendarDateTime, 'MMMM')
@@ -94,7 +102,7 @@ export default {
       if (this.value === null || this.value === undefined) return null
       const startMoment = new Date(this.value[0])
       const endMoment = new Date(this.value[1])
-      if (isValid(startMoment) && isValid(startMoment)) {
+      if (isValid(startMoment)) {
         return [startMoment, endMoment]
       } else return null
     }
@@ -123,7 +131,10 @@ export default {
   },
   methods: {
     resetSelectingStatus (e) {
-      if (this.$refs.startDates.contains(e.target) || this.$refs.endDates.contains(e.target)) {
+      if (
+        this.$refs.startDates.contains(e.target) ||
+        this.$refs.endDates.contains(e.target)
+      ) {
         // do nothing
       } else {
         this.isSelecting = false
@@ -155,9 +166,15 @@ export default {
     handleDateMouseEnter (dateItem) {
       if (this.isSelecting) {
         if (dateItem.timestamp >= this.memorizedStartDateTime) {
-          this.changeStartEndTime(this.memorizedStartDateTime, dateItem.timestamp)
+          this.changeStartEndTime(
+            this.memorizedStartDateTime,
+            dateItem.timestamp
+          )
         } else {
-          this.changeStartEndTime(dateItem.timestamp, this.memorizedStartDateTime)
+          this.changeStartEndTime(
+            dateItem.timestamp,
+            this.memorizedStartDateTime
+          )
         }
       }
     },

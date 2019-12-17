@@ -67,8 +67,7 @@ export default {
       this.controller.hide = this.deactivate
     }
   },
-  beforeUpdate () {
-  },
+  beforeUpdate () {},
   updated () {
     // console.log('Activator Updated', this.id)
     popoverManager.registerActivator(this)
@@ -136,7 +135,7 @@ export default {
         if (!el['@n-popover-context']) el['@n-popover-context'] = {}
         const elContext = el['@n-popover-context']
         if (this.triggeredByClick) {
-          if (!(elContext.handleClick === this.handleClick)) {
+          if (elContext.handleClick !== this.handleClick) {
             el.removeEventListener('click', elContext.handleClick)
             el.addEventListener('click', this.handleClick)
             elContext.handleClick = this.handleClick
@@ -156,12 +155,12 @@ export default {
           el.addEventListener('click', this.handleClick)
         } else if (this.triggeredByHover) {
           // console.log('register hover')
-          if (!(elContext.handleMouseLeave === this.handleMouseLeave)) {
+          if (elContext.handleMouseLeave !== this.handleMouseLeave) {
             el.removeEventListener('mouseleave', elContext.handleMouseLeave)
             el.addEventListener('mouseleave', this.handleMouseLeave)
             elContext.handleMouseLeave = this.handleMouseLeave
           }
-          if (!(elContext.handleMouseEnter === this.handleMouseEnter)) {
+          if (elContext.handleMouseEnter !== this.handleMouseEnter) {
             el.removeEventListener('mouseenter', elContext.handleMouseEnter)
             el.addEventListener('mouseenter', this.handleMouseEnter)
             elContext.handleMouseEnter = this.handleMouseEnter

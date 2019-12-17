@@ -44,6 +44,7 @@ const _columns = $this => {
       title: "Address",
       key: "address",
       filterable: true,
+      defaultFilter: "London",
       asyncFilterItems() {
         return getFilters().then(list => {
           return list;
