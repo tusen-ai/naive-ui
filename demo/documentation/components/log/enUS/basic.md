@@ -9,8 +9,7 @@
     :log="log"
     @reach-top="handleReachTop"
     @reach-bottom="handleReachBottom"
-    :bottom-loading="bottomLoading"
-    :top-loading="topLoading"
+    :loading="loading"
     trim
   />
   <template v-slot:action>
@@ -31,14 +30,8 @@ function log () {
 export default {
   data () {
     return {
-      topLoading: false,
-      bottomLoading: false,
+      loading: false,
       log: log()
-    }
-  },
-  computed: {
-    loading () {
-      return this.topLoading || this.bottomLoading
     }
   },
   methods: {
@@ -46,19 +39,19 @@ export default {
       this.log = ''
     },
     handleReachTop () {
-      if (this.topLoading) return
-      this.topLoading = true
+      if (this.loading) return
+      this.loading = true
       setTimeout(() => {
         this.log = log() + this.log
-        this.topLoading = false
+        this.loading = false
       }, 1000)
     },
     handleReachBottom () {
-      if (this.bottomLoading) return
-      this.bottomLoading = true
+      if (this.loading) return
+      this.loading = true
       setTimeout(() => {
         this.log = this.log + log()
-        this.bottomLoading = false
+        this.loading = false
       }, 1000)
     }
   }

@@ -14,11 +14,20 @@
     @include m(bottom-bordered) {
       border-bottom: 1px solid $--n-border-color;
     }
-    @include b(scrollbar-content) {
-      padding-top: 8px;
-      padding-bottom: 8px;
-      overflow: hidden;
+    @include b(scrollbar) {
+      @include b(scrollbar-content) {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        overflow: hidden;
+      }
+      @include b(scrollbar-rail) {
+        @include m(vertical) {
+          top: 8px;
+          bottom: 8px
+        }
+      }
     }
+    
     @include e(lines) {
       margin: 0;
       white-space: pre-wrap;

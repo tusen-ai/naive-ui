@@ -11,9 +11,7 @@
     @wheel="handleWheel"
   >
     <n-scrollbar ref="scrollbar" @scroll="handleScroll">
-      <!-- <pre class="n-log__lines">{{ processedLog }}</pre> -->
       <n-log-line v-for="(line, index) in synthesizedLines" :key="index" :line="line" />
-      <!-- <pre v-for="(line, index) in synthesizedLines" :key="index" class="n-log__line">{{ line }}</pre> -->
     </n-scrollbar>
     <n-fade-in-height-expand-transition width>
       <n-log-loader v-if="loading" />
@@ -26,8 +24,8 @@ import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import NScrollbar from '../../Scrollbar'
 import NLogLoader from './LogLoader'
-import NFadeInHeightExpandTransition from '../../../transition/FadeInHeightExpandTransition'
 import NLogLine from './LogLine'
+import NFadeInHeightExpandTransition from '../../../transition/FadeInHeightExpandTransition'
 
 export default {
   name: 'NLog',
