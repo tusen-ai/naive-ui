@@ -25,16 +25,26 @@
       @include base-select-size-mixin("small");
       @include base-select-size-mixin("medium");
       @include base-select-size-mixin("large");
+      @include base-select-size-mixin("huge");
       outline: none;
       margin-top: 4px;
       margin-bottom: 4px;
       z-index: 0;
       position: relative;
-      overflow: hidden;
       border-radius: 6px;
+      transition: background-color .3s $default-cubic-bezier;
       @include b(base-select-menu-option-wrapper) {
         position: relative;
         width: 100%;
+      }
+      @include b(base-select-menu-light-bar-wrapper) {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        overflow: hidden;
+        border-radius: 6px;
       }
       /** transition of menu light bar */
       .n-base-select-menu-light-bar--transition-enter-active {
@@ -54,6 +64,7 @@
       position: relative;
       padding: 0px 14px;
       white-space: nowrap;
+      transition: color .3s $default-cubic-bezier;
       color: map-get($map: $--base-select-menu-option-color, $key: "default");
       @include m(selected) {
         color: map-get($map: $--base-select-menu-option-color, $key: "selected");
@@ -91,6 +102,7 @@
       }
     }
     @include b(base-select-menu-light-bar) {
+      transition: background-color .3s $default-cubic-bezier;
       position: absolute;
       width:100%;
       background-color: $--base-select-menu-light-bar-background-color;
@@ -115,8 +127,8 @@
             opacity: 0;
             transition: transform .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
           }
-          border-right: 1px solid $--n-primary-color;
-          border-bottom: 1px solid $--n-primary-color;
+          border-right: 1px solid $--base-select-menu-option-check-mark-color;
+          border-bottom: 1px solid $--base-select-menu-option-check-mark-color;
         }
         @include m(selected) {
           background: none;
@@ -126,7 +138,7 @@
           }
         }
         &:active {
-          color: $--n-primary-color;
+          color: map-get($map: $--base-select-menu-option-color, $key: "active");
         }
       }
     }

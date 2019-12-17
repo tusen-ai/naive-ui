@@ -1,8 +1,6 @@
 import Card from './packages/common/Card'
 import Icon from './packages/common/Icon'
 import GradientText from './packages/common/GradientText'
-import WithPadding from './packages/common/WithPadding'
-import WithMargin from './packages/common/WithMargin'
 import MasonryGroup from './packages/common/MasonryGroup'
 import Table from './packages/common/Table'
 import AdvanceTable from './packages/common/AdvanceTable'
@@ -29,12 +27,10 @@ import Tabs from './packages/common/Tabs'
 import TimePicker from './packages/common/TimePicker'
 import Layout from './packages/common/Layout'
 import ServiceLayout from './packages/nimbus/ServiceLayout'
-import NimbusFormCard from './packages/nimbus/FormCard'
-import NimbusConfirmCard from './packages/deprecated/ConfirmCard'
 import NimbusIcon from './packages/deprecated/Icon'
 import Scrollbar from './packages/common/Scrollbar'
 import Steps from './packages/common/Steps'
-import ConfirmModal from './packages/common/Confirm'
+import ConfirmPlugin from './packages/common/Confirm'
 import Badge from './packages/common/Badge'
 import Tag from './packages/common/Tag'
 import BackTop from './packages/common/BackTop'
@@ -62,11 +58,19 @@ import Descriptions from './packages/common/Descriptions'
 import List from './packages/common/List'
 import Menu from './packages/common/Menu'
 import Avatar from './packages/common/Avator'
-import Confirm from './packages/presets/Confirm'
 import Result from './packages/common/Result'
 import Thing from './packages/common/Thing'
 import AutoComplete from './packages/common/AutoComplete'
 import Empty from './packages/common/Empty'
+import Element from './packages/common/Element'
+import Log from './packages/common/Log'
+import Code from './packages/common/Code'
+
+/**
+ * Deprecated Components
+ */
+import NimbusFormCard from './packages/deprecated/NimbusFormCard'
+import NimbusConfirmCard from './packages/deprecated/ConfirmCard'
 
 /**
  * debug usage
@@ -74,19 +78,28 @@ import Empty from './packages/common/Empty'
  */
 import Loader from './packages/base/Loading'
 import CancelMark from './packages/base/CancelMark'
+import IconTransition from './packages/base/IconTransition'
+
+const NaiveUI = {
+  install,
+  setHljs
+}
+
+function setHljs (hljs) {
+  NaiveUI.hljs = hljs
+}
 
 function install (Vue) {
+  Vue.prototype.$naive = NaiveUI
   Card.install(Vue)
   Icon.install(Vue)
   ServiceLayout.install(Vue)
   Loader.install(Vue)
   Layout.install(Vue)
   GradientText.install(Vue)
-  WithPadding.install(Vue)
   MasonryGroup.install(Vue)
   Table.install(Vue)
   AdvanceTable.install(Vue)
-  WithMargin.install(Vue)
   CheckBox.install(Vue)
   RoundButton.install(Vue)
   Switch.install(Vue)
@@ -112,8 +125,7 @@ function install (Vue) {
   TimePicker.install(Vue)
   Scrollbar.install(Vue)
   Steps.install(Vue)
-  Confirm.install(Vue)
-  ConfirmModal.install(Vue)
+  ConfirmPlugin.install(Vue)
   Progress.install(Vue)
   Badge.install(Vue)
   Tag.install(Vue)
@@ -147,8 +159,10 @@ function install (Vue) {
   Thing.install(Vue)
   AutoComplete.install(Vue)
   Empty.install(Vue)
+  Element.install(Vue)
+  IconTransition.install(Vue)
+  Log.install(Vue)
+  Code.install(Vue)
 }
 
-export default {
-  install
-}
+export default NaiveUI

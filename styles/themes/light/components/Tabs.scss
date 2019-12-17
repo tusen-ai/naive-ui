@@ -8,15 +8,17 @@
   $--tabs-tab-bar-background-color: $--n-primary-color !global;
   $--tabs-tab-scroll-button-color: (
     'default': rgba(0, 0, 0, .3),
-    'disabled': rgba(0, 0, 0, .2)
+    'disabled': rgba(0, 0, 0, .12)
   ) !global;
   $--tabs-tab-close-button-color: (
-    'default': rgba(0, 0, 0, .3),
+    'default': $--n-close-color
   ) !global;
-  $--tabs-card-tab-background-color: $--neutral-8 !global;
-  $--tabs-card-tab-panel-background-color: white !global;
+  $--tabs-card-tab-background-color: $--overlay-8 !global;
   $--tabs-card-tab-border-color: $--n-divider-color !global;
-  $--tabs-card-tab-border-width: 1px !global;
-  $--tabs-card-tab-text-color: $--n-secondary-text-color !global;
-  $--tabs-card-label-divider-color: rgba(0, 0, 0, .3) !global;
+  $--tabs-card-tab-text-color: (
+    'default': $--n-secondary-text-color,
+    'active': $--n-text-color
+  ) !global;
+  $--tabs-nav-border-color: $--n-alpha-divider-color !global;
+  $--tabs-panel-text-color: $--n-secondary-text-color !global;
 }

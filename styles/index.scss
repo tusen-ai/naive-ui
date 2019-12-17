@@ -3,9 +3,7 @@
 @import "./Card.scss";
 @import "./Icon.scss";
 @import "./GradientText.scss";
-@import "./WithPadding.scss";
 @import "./Table.scss";
-@import "./WithMargin.scss";
 @import "./Checkbox.scss";
 @import "./Button.scss";
 @import "./Switch.scss";
@@ -23,7 +21,7 @@
 @import './Radio.scss';
 @import './Form.scss';
 @import './TimePicker.scss';
-@import './Tab.scss';
+@import './Tabs.scss';
 @import './Scrollbar.scss';
 @import './Steps.scss';
 @import './Progress.scss';
@@ -53,7 +51,7 @@
 @import './Breadcrumb.scss';
 @import './Descriptions.scss';
 @import "./Menu.scss";
-
+@import "./Code.scss";
 @import './List.scss';
 @import './Layout.scss';
 @import './Avatar.scss';
@@ -69,3 +67,4 @@
 @import "./Thing.scss";
 @import "./AutoComplete.scss";
 @import "./Empty.scss";
+@import "./Log.scss";

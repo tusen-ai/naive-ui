@@ -1,10 +1,10 @@
-# Slots Demo
+# Slots
 ```html
 <n-card title="Card Slots Demo">
   <template v-slot:header-extra>
     v-slot:header-extra
   </template>
-  Card content
+  Card Content
   <template v-slot:footer>
     v-slot:footer
   </template>

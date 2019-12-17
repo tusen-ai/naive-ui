@@ -182,7 +182,7 @@ $--card-margin-bottom: (
           cursor: pointer;
           transition: fill .3s $default-cubic-bezier
         }
-        fill: $--card-text-color;
+        fill: $--card-close-fill;
       }
     }
     @include once {

@@ -1,5 +1,8 @@
 @mixin setup-light-tag {
   $--tag-color: (
+    'checkable-default': $--n-secondary-text-color,
+    'checkable-hover': $--primary-6,
+    'checkable-active': white,
     'default': $--n-secondary-text-color,
     'default-disabled': $--n-disabled-text-color,
     'success': $--success-6,
@@ -12,6 +15,11 @@
     'error-disabled': $--n-disabled-text-color,
   ) !global;
   $--tag-background-color: (
+    'checkable-default': transparent,
+    'checkable-hover': transparent,
+    'checkable-active': $--primary-6,
+    'checkable-checked-hover': $--primary-5,
+    'checkable-checked-active': $--primary-7,
     'default': $--neutral-9,
     'default-hover': $--neutral-9,
     'default-active': $--neutral-9,

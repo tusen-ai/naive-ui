@@ -3,5 +3,8 @@
 @include b(affix) {
   @include m(affixed) {
     position: fixed;
+    @include m(absolute-positioned) {
+      position: absolute;
+    }
   }
 }

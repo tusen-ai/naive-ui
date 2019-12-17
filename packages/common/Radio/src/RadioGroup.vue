@@ -70,6 +70,12 @@ export default {
     value: {
       type: [Boolean, String, Number],
       default: null
+    },
+    size: {
+      default: 'small',
+      validator (value) {
+        return ['small', 'medium', 'large'].includes(value)
+      }
     }
   },
   watch: {
@@ -87,7 +93,8 @@ export default {
     return h('div', {
       staticClass: 'n-radio-group',
       class: {
-        [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme
+        [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme,
+        [`n-radio-group--${this.size}-size`]: this.size
       }
     }, mapSlot(h, this.$slots.default, this))
   }

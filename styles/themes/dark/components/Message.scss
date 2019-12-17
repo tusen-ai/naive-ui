@@ -1,16 +1,24 @@
 @mixin setup-dark-message {
-  $--message-text-color: white !global;
+  $--message-text-color: (
+    "info": white,
+    "success": white,
+    "error": white,
+    "warning": white,
+    "loading": $--n-secondary-text-color
+  ) !global;
   $--message-icon-color: rgba(255, 255, 255, .5) !global;
   $--message-background-color: (
     "info": $--info-hs,
     "success": $--success-hs,
     "error": $--error-hs,
-    "warning": $--warning-hs
+    "warning": $--warning-hs,
+    "loading": $--n-popover-color
   ) !global;
   $--message-box-shadow: (
     "info": 0 2px 15px 0 rgba(56, 137, 197, .5),
     "success": 0 2px 15px 0 rgba(42, 148, 125, .5),
     "error": 0 2px 15px 0 rgba(208, 58, 82, .5),
-    "warning": 0 2px 15px 0 rgba(240, 138, 0, .5)
+    "warning": 0 2px 15px 0 rgba(240, 138, 0, .5),
+    "loading": 0 2px 15px 0 rgba(0, 0, 0, .3),
   ) !global;
 }

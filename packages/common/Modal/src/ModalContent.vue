@@ -9,7 +9,7 @@
   >
     <n-scrollbar ref="scrollbar">
       <transition
-        name="n-modal-content--transition"
+        name="n-modal-content-slot-transition"
         @enter="handleEnter"
         @after-leave="handleAfterLeave"
         @before-leave="handleBeforeLeave"
@@ -44,22 +44,6 @@
               <slot name="footer" />
             </template>
           </n-confirm>
-          <n-form
-            v-else-if="preset === 'form'"
-            :title="title"
-            :closable="closable"
-            @close="handleCloseClick"
-          >
-            <template v-slot:header>
-              <slot name="header" />
-            </template>
-            <template v-slot:content>
-              <slot name="content" />
-            </template>
-            <template v-slot:footer>
-              <slot name="footer" />
-            </template>
-          </n-form>
           <n-card
             v-if="preset === 'card'"
             :style="bodyStyle"
@@ -93,8 +77,7 @@
 
 <script>
 import NScrollbar from '../../Scrollbar'
-import NConfirm from '../../../presets/Confirm'
-import NForm from '../../../presets/Form'
+import NConfirm from '../../Confirm/src/Confirm'
 import NCard from '../../../common/Card'
 import themeable from '../../../mixins/themeable'
 import presetProps from './presetProps'
@@ -115,7 +98,6 @@ export default {
   components: {
     NScrollbar,
     NConfirm,
-    NForm,
     NCard
   },
   mixins: [themeable],

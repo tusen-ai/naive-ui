@@ -6,41 +6,42 @@
     }"
   >
     <div class="n-step-indicator">
-      <transition name="n-step-indicator--transition">
-        <div
-          v-if="synthesizedStatus === 'finish' || synthesizedStatus === 'error'"
-          class="n-step-indicator__icon"
-        >
+      <div
+        class="n-step-indicator-slot"
+      >
+        <n-base-icon-transition>
+          <div
+            v-if="!(synthesizedStatus === 'finish' || synthesizedStatus === 'error')"
+            key="index"
+            class="n-step-indicator-slot__index"
+            :style="{
+              color: synthesizedStatus === 'process' ? ascendantBackgroundColor : null
+            }"
+          >
+            {{ index }}
+          </div>
           <n-icon
-            v-if="synthesizedStatus === 'finish'"
+            v-else-if="synthesizedStatus === 'finish'"
+            key="finish"
           >
             <md-checkmark />
           </n-icon>
           <n-icon
             v-else-if="synthesizedStatus === 'error'"
+            key="error"
           >
             <md-close />
           </n-icon>
-        </div>
-      </transition>
-      <transition name="n-step-indicator--transition">
-        <div
-          v-if="!(synthesizedStatus === 'finish' || synthesizedStatus === 'error')"
-          class="n-step-indicator__index"
-          :style="{
-            color: synthesizedStatus === 'process' ? ascendantBackgroundColor : null
-          }"
-        >
-          {{ index }}
-        </div>
-      </transition>
+        </n-base-icon-transition>
+      </div>
+      <div v-if="vertical" class="n-step-splitor" />
     </div>
     <div class="n-step-content">
-      <div class="n-step-content-title">
-        <div class="n-step-content-title__inner">
+      <div class="n-step-content-header">
+        <div class="n-step-content-header__title">
           {{ title }}
         </div>
-        <div class="n-step-splitor n-step-splitor--right" />
+        <div v-if="!vertical" class="n-step-splitor" />
       </div>
       <div
         v-if="description !== null"
@@ -54,9 +55,11 @@
 
 <script>
 import NIcon from '../../Icon'
-import hollowoutable from '../../../mixins/hollowoutable'
+import NBaseIconTransition from '../../../base/IconTransition'
 import mdClose from '../../../icons/md-close'
 import mdCheckmark from '../../../icons/md-checkmark'
+import themeable from '../../../mixins/themeable'
+import hollowoutable from '../../../mixins/hollowoutable'
 
 export default {
   name: 'NStep',
@@ -68,9 +71,10 @@ export default {
   components: {
     NIcon,
     mdCheckmark,
-    mdClose
+    mdClose,
+    NBaseIconTransition
   },
-  mixins: [hollowoutable],
+  mixins: [ themeable, hollowoutable ],
   props: {
     status: {
       type: String,
@@ -101,6 +105,9 @@ export default {
     }
   },
   computed: {
+    vertical () {
+      return !!(this.NSteps && this.NSteps.vertical)
+    },
     current () {
       return this.NSteps && this.NSteps.current
     },

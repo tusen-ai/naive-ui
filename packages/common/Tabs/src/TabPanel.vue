@@ -2,9 +2,6 @@
   <div
     v-if="NTab && name === NTab.value"
     class="n-tab-panel"
-    :class="{
-      [`n-tab-panel--${type}-type`]: true
-    }"
   >
     <slot />
   </div>

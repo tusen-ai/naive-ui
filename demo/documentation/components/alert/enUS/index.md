@@ -1,7 +1,7 @@
 # Alert
 ```demo
 basic
+closable
 icon
-custom-icon
 no-icon
 ```

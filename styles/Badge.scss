@@ -97,6 +97,8 @@
       @include m(as-is) {
         display: inline-flex;
         @include b(badge-sup) {
+          @include fade-in-scale-up-transition(badge, left bottom, $original-transform: translateX(0));
+          transform: translateX(0);
           position: static;
         }
       }
@@ -125,7 +127,7 @@
   }
   @include once {
     @include b(badge-sup) {
-      @include fade-in-scale-up-transition(badge, left bottom);
+      @include fade-in-scale-up-transition(badge, left bottom, $original-transform: (translateX(-50%)));
       transition: background-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier;
       color: white;
       position: absolute;

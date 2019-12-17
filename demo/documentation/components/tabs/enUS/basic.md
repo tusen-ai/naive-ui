@@ -1,101 +1,82 @@
 # Basic
 ```html
-<n-tabs
-  v-model="name"
-  closable
->
-  <n-tab-panel
-    name="a"
-    label="aaaaaaaa"
+<n-card title="Song of" style="margin-bottom: 16px;">
+  <n-tabs
+    v-model="name"
   >
-    Name: a. <br>
-  </n-tab-panel>
-  <n-tab-panel
-    name="b"
-    label="bbbbbbbb"
+    <n-tab-panel
+      name="oasis"
+      label="Oasis"
+    >
+      Wonderwall
+    </n-tab-panel>
+    <n-tab-panel
+      name="the beatles"
+      label="the Beatles"
+    >
+      Hey Jude
+    </n-tab-panel>
+    <n-tab-panel
+      name="jay chou"
+      label="Jay Chou"
+    >
+      Qilixiang
+    </n-tab-panel>
+  </n-tabs>
+</n-card>
+<n-card>
+  <n-tabs
+    v-model="func"
+    size="large"
   >
-    Name: b. <br>
-    We can control the element display by setting the tab's name attribute.<br>
-    Also we can use tab-panel's active attribute to init the display.
-    And tab-panels's active attribute is the first priority.
-  </n-tab-panel>
-  <n-tab-panel
-    name="c"
-    label="cccccccc"
-  >
-    Name: a. <br>
-  </n-tab-panel>
-  <n-tab-panel
-    name="d"
-    label="dddddddd"
-  >
-    Name: b. <br>
-    We can control the element display by setting the tab's name attribute.<br>
-    Also we can use tab-panel's active attribute to init the display.
-    And tab-panels's active attribute is the first priority.
-  </n-tab-panel>
-  <n-tab-panel
-    name="e"
-    label="eeeeeeee"
-  >
-    Name: a. <br>
-  </n-tab-panel>
-  <n-tab-panel
-    name="f"
-    label="ffffffff"
-  >
-    Name: b. <br>
-    We can control the element display by setting the tab's name attribute.<br>
-    Also we can use tab-panel's active attribute to init the display.
-    And tab-panels's active attribute is the first priority.
-  </n-tab-panel>
-  <n-tab-panel
-    name="i"
-    label="iiiiiiii"
-  >
-    Name: a. <br>
-  </n-tab-panel>
-  <n-tab-panel
-    name="f"
-    label="jjjjjjjj"
-  >
-    Name: b. <br>
-    We can control the element display by setting the tab's name attribute.<br>
-    Also we can use tab-panel's active attribute to init the display.
-    And tab-panels's active attribute is the first priority.
-  </n-tab-panel>
-  <n-tab-panel
-    name="g"
-    label="gggggggg"
-  >
-    Name: a. <br>
-  </n-tab-panel>
-  <n-tab-panel
-    name="h"
-    label="hhhhhhhh"
-  >
-    Name: b. <br>
-    We can control the element display by setting the tab's name attribute.<br>
-    Also we can use tab-panel's active attribute to init the display.
-    And tab-panels's active attribute is the first priority.
-  </n-tab-panel>
-  <n-tab-panel
-    disabled
-    label="Disabled"
-  />
-</n-tabs>
+    <n-tab-panel
+      name="signin"
+      label="Sign in"
+    >
+      <n-form>
+        <n-form-item-row label="Username">
+          <n-input />
+        </n-form-item-row>
+        <n-form-item-row label="Password">
+          <n-input />
+        </n-form-item-row>
+      </n-form>
+      <n-button type="primary" block>Sign In</n-button>
+    </n-tab-panel>
+    <n-tab-panel
+      name="signup"
+      label="Sign Up"
+    >
+      <n-form>
+        <n-form-item-row label="Username">
+          <n-input />
+        </n-form-item-row>
+        <n-form-item-row label="Password">
+          <n-input />
+        </n-form-item-row>
+        <n-form-item-row label="Reenter Password">
+          <n-input />
+        </n-form-item-row>
+      </n-form>
+      <n-button type="primary" block>Sign Up</n-button>
+    </n-tab-panel>
+  </n-tabs>
+</n-card>
 ```
+
 ```js
 export default {
   data () {
     return {
-      name: 'b'
-    }
-  },
-  methods: {
-    updateName () {
-      this.name = this.name === 'a' ? 'b' : 'a'
+      name: 'oasis',
+      func: 'signin'
     }
   }
+}
+```
+
+```css
+.n-button {
+  margin-top: 12px;
 }
 ```

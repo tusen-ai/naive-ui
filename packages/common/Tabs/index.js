@@ -1,4 +1,4 @@
-import Tab from './src/main.vue'
+import Tab from './src/Tabs.vue'
 import NTabPanel from './src/TabPanel.vue'
 
 Tab.install = function (Vue) {

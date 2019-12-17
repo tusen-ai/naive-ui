@@ -10,13 +10,15 @@
       'n-card--bordered': bordered,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
+    n-light-theme-background-color-hint="white"
+    n-dark-theme-background-color-hint="rgb(70, 75, 99)"
     :style="synthesizedStyle"
   >
     <div v-if="$slots.cover" class="n-card-cover">
       <slot name="cover" />
     </div>
-    <div class="n-card-header">
-      <div class="n-card-header__main">
+    <div v-if="$slots.header || $scopedSlots.header || title" class="n-card-header">
+      <div class="n-card-header__main" :style="headerStyle">
         <slot name="header">
           {{ title }}
         </slot>
@@ -34,7 +36,7 @@
         <md-close />
       </n-icon>
     </div>
-    <div class="n-card__content">
+    <div class="n-card__content" :style="contentStyle">
       <slot />
     </div>
     <div v-if="$slots.footer" class="n-card__footer">
@@ -63,7 +65,15 @@ export default {
   props: {
     title: {
       type: String,
-      required: true
+      default: null
+    },
+    contentStyle: {
+      type: [Object, String],
+      default: null
+    },
+    headerStyle: {
+      type: [Object, String],
+      default: null
     },
     segmented: {
       type: [Boolean, Object],

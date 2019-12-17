@@ -5,6 +5,7 @@ export default {
     synthesizedTheme (value) {
       if (this.avoidHollowOut) return
       this.$nextTick().then(() => {
+        console.log('update style')
         this.updateHollowOutStyle(value)
       })
     }

@@ -1,4 +1,4 @@
-# Divider
+# Spin
 ```demo
 basic
 wrap

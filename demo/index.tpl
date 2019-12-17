@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>naive-ui</title>
+    <title>Naive UI</title>
   </head>
   <body>
       <div id="app">

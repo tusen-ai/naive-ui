@@ -2,17 +2,25 @@
 
 @include themes-mixin {
   @include b(breadcrumb) {
+    white-space: nowrap;
     @include b(breadcrumb-item) {
       @include once {
         transition: color .3s $default-cubic-bezier;
         @include b(icon) {
-          vertical-align: -.125em;
+          font-size: 16px;
+          vertical-align: -.2em;
         }
       }
-      color: map-get($--breadcrumb-link-text-color, 'default');
       @include b(icon) {
         transition: fill .3s $default-cubic-bezier;
         fill: map-get($--breadcrumb-link-text-color, 'default');
+      }
+      @include e(link) {
+        @include once {
+          transition: color .3s $default-cubic-bezier;
+          cursor: pointer;
+        }
+        color: map-get($--breadcrumb-link-text-color, 'default');
       }
       @include e(seperator) {
         @include once {
@@ -21,8 +29,19 @@
         }
         color: map-get($--breadcrumb-seperator-text-color, 'default');
       }
+      &:hover {
+        @include b(icon) {
+          fill: map-get($--breadcrumb-link-text-color, 'hover');
+        }
+        @include e(link) {
+          color: map-get($--breadcrumb-link-text-color, 'hover');
+        }
+      }
       &:last-child {
-        color: map-get($--breadcrumb-link-text-color, 'active');
+        @include e(link) {
+          cursor: unset;
+          color: map-get($--breadcrumb-link-text-color, 'active');
+        }
         @include b(icon) {
           fill: map-get($--breadcrumb-link-text-color, 'active');
         }

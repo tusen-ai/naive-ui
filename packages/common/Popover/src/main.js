@@ -45,9 +45,17 @@ export default {
       type: Number,
       default: null
     },
+    minWidth: {
+      type: Number,
+      default: null
+    },
     maxWidth: {
       type: Number,
       default: null
+    },
+    shadow: {
+      type: Boolean,
+      default: true
     },
     placement: {
       type: String,
@@ -59,15 +67,31 @@ export default {
     },
     detachedContainerClass: {
       type: String,
-      default: 'n-popover-detached-content-container'
+      default: 'n-popover'
+    },
+    contentClass: {
+      type: String,
+      default: null
+    },
+    manuallyPositioned: {
+      type: Boolean,
+      default: false
+    },
+    x: {
+      type: Number,
+      default: null
+    },
+    y: {
+      type: Number,
+      default: null
     }
   },
   render (h, context) {
     const slots = context.scopedSlots
     const defaultSlot = slots.default && slots.default()
-    const activatorSlot = slots.activator && slots.activator()
+    const activatorSlot = (slots.activator && slots.activator()) || []
     let activatorVNode = activatorSlot[0]
-    if (!activatorVNode.tag) {
+    if (activatorVNode && !activatorVNode.tag) {
       activatorVNode = h('span', {
         staticClass: 'n-popover-text-wrapper'
       }, [activatorVNode])

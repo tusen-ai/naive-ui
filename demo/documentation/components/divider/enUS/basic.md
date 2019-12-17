@@ -2,5 +2,5 @@
 ```html
 I love her.
 <n-divider />
-She love him.
+She loves him.
 ```

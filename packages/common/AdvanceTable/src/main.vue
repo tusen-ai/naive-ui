@@ -11,235 +11,175 @@
     class="n-advance-table__wrapper n-advance-table"
     :class="{
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
-      'n-advance-table--col-border': colBorder
+      'n-advance-table--col-border': colBorder,
+      'n-advance-table--no-data': showingData.length === 0
     }"
   >
-    <div class="n-advance-table__operation">
-      <div class="n-advance-table__operation--left">
-        <slot name="table-operation-batch-left" />
-        <section class="n-advance-table__operation__bacth" />
-        <slot name="table-operation-batch-right" />
-      </div>
+    <div
+      ref="tbodyWrapper"
+      class="n-advance-table__tbody"
+      :style="tbodyWrapperStl"
+    >
       <div
-        class="n-advance-table__operation--right"
-        :style="search ? 'margin-bottom: 18px;' : ''"
+        v-if="fixedLeftColumn.length"
+        class="n-advance-table__fixed--left n-advance-table__fixed"
+        :class="fixedLeftColumndClass"
       >
-        <slot name="table-operation" />
-        <div v-if="search" class="n-advance-table__operation__search">
-          <searchInput
-            ref="search"
-            :options="search"
-            @on-change="handleSearch"
+        <base-table
+          ref="fixedLeftTable"
+          :header-height="headerHeight"
+          :columns="fixedLeftColumn"
+          :col-group-stl="colGroup"
+          :sort-indexs="sortIndexs"
+          :selected-filter="selectedFilter"
+          :showing-data="showingData"
+          :current-page-selected-len="currentPageSelectedLen"
+          :table-stl="tableStl"
+          :row-class-name="rowClassName"
+          :check-boxes="checkBoxes"
+          :disabled-check-box="disabledCheckBox"
+          header-ref-name="header"
+          :scroll-bar-vertical-width="scrollBarWidth"
+          :tbody-height="tbodyWrapperHeight"
+          :tr-height="trHeight"
+          :loading="loading"
+          :fixed="true"
+          @on-scroll="onBodyScrolll"
+          @on-checkbox-all="onAllCheckboxesClick"
+          @on-sort-change="onSortChange"
+          @on-filter="onFilter"
+        />
+      </div>
+      <!-- table head -->
+      <base-table
+        ref="mainTable"
+        :scroll-x="scrollX"
+        :table-stl="tableStl"
+        :showing-data="showingData"
+        :columns="columns"
+        :row-class-name="rowClassName"
+        :check-boxes="checkBoxes"
+        :disabled-check-box="disabledCheckBox"
+        :loading="loading"
+        :col-group-stl="colGroup"
+        :sort-indexs="sortIndexs"
+        :selected-filter="selectedFilter"
+        :current-page-selected-len="currentPageSelectedLen"
+        :body-min-height="42"
+        :scroll-bar-vertical-width="scrollBarWidth"
+        @scroll.native="onTableWrapperScroll"
+        @on-scroll="onBodyScrolll"
+        @on-checkbox-all="onAllCheckboxesClick"
+        @on-sort-change="onSortChange"
+        @on-filter="onFilter"
+      >
+        <slot name="append" />
+      </base-table>
+      <div
+        v-if="fixedRightColumn.length"
+        class="n-advance-table__fixed--right n-advance-table__fixed"
+        :class="fixedRightColumndClass"
+      >
+        <base-table
+          ref="fixedRightTable"
+          :header-height="headerHeight"
+          :columns="fixedRightColumn"
+          :col-group-stl="colGroup"
+          :sort-indexs="sortIndexs"
+          :selected-filter="selectedFilter"
+          :showing-data="showingData"
+          :current-page-selected-len="currentPageSelectedLen"
+          :table-stl="tableStl"
+          :row-class-name="rowClassName"
+          :check-boxes="checkBoxes"
+          :disabled-check-box="disabledCheckBox"
+          :tbody-height="tbodyWrapperHeight"
+          :tr-height="trHeight"
+          :loading="loading"
+          :fixed="true"
+          @on-scroll="onBodyScrolll"
+          @on-checkbox-all="onAllCheckboxesClick"
+          @on-sort-change="onSortChange"
+          @on-filter="onFilter"
+        />
+      </div>
+
+      <!-- loading -->
+      <transition name="n-table-loading--transition">
+        <div v-if="loading" class="n-advance-table__loading">
+          <n-spin
+            :spinning="true"
+            style="width:100%;overflow:hidden;z-index:200;position:absolute;top:50%;"
           />
         </div>
-        <slot name="table-operation-search-right" />
+      </transition>
+
+      <div
+        v-if="showingData.length === 0 && !loading"
+        class="n-advance-table__no-data-tip"
+      >
+        No data
       </div>
-    </div>
-    <div ref="tbodyWrapper" class="n-advance-table__tbody">
-      <n-table
-        ref="header"
-        style="padding:0;border-bottom-left-radius:0;border-bottom-right-radius:0;"
-        :style="colGroup"
-        class="n-advance-table__header"
-      >
-        <colgroup>
-          <col
-            v-for="(column, i) in columns"
-            :key="i"
-            :style="computeCustomWidthStl(column)"
-          >
-          <col v-if="scrollBarWidth" :width="scrollBarWidth" >
-        </colgroup>
-        <n-thead>
-          <n-tr>
-            <n-th
-              v-for="(column, i) in columns"
-              ref="theads"
-              :key="column.key"
-              :style="computeAlign(column)"
-              :class="{
-                'n-advance-table__sortable-column': column.sortable
-              }"
-              @click.native.self="() => sortByColumn(column)"
-            >
-              <!-- 当前页全选 -->
-              <n-checkbox
-                v-if="column.type === 'selection'"
-                v-model="currentPageAllSelect"
-                :indeterminate="isCheckedBoxAllIndeterminate"
-                @click.native="onAllCheckboxesClick"
-              />
-              <row
-                v-if="column.renderHeader"
-                :index="i"
-                :row="column"
-                :key-name="column.key || i"
-                :render="column.renderHeader"
-              />
-              {{ !column.renderHeader ? column.title : "" }}
-              <SortIcon
-                v-if="column.sortable"
-                :ref="'sorter_' + (column.key || i)"
-                v-model="sortIndexs[column.key || i]"
-                class="n-advance-table__header-icon"
-                :column="column"
-                :index="i"
-                @onSortTypeChange="onSortTypeChange"
-              />
-
-              <!-- 优先自定义 -->
-              {{ column.filterDropdown && column.filterDropdown() }}
-              <!-- 否则默认渲染 -->
-              <PopFilter
-                v-if="
-                  column.onFilter &&
-                    (column.filterItems || column.asyncFilterItems)
-                "
-                v-model="selectedFilter[column.key]"
-                class="n-advance-table__header-icon"
-                :column="column"
-                :items="column.filterItems || column.asyncFilterItems"
-                @on-filter="onFilter"
-              />
-
-              <!-- <filterDropDown
-              v-if="column.filterItems && !column.filterDropdown"
-              :ref="'filterDropDown_' + (column.key || i)"
-              :max-height="column.filterDropDownMaxHeight"
-              :filter-fn="column.onFilter"
-              :filter-key="column.key || i"
-              :filter-items="column.filterItems"
-              :filter-multiple="column.filterMultiple || false"
-              @on-filter="
-                ({ value, key, filterFn }) => onFilter(value, key, filterFn)
-              "
-            /> -->
-            </n-th>
-            <span
-              v-if="scrollBarWidth"
-              :style="
-                'padding-left:' + scrollBarWidth + 'px;' + 'visibility:hidden;'
-              "
-              rowspan="1"
-            />
-          </n-tr>
-        </n-thead>
-      </n-table>
-      <n-table
-        ref="tbody"
-        :style="tableStl"
-        style="border-top-left-radius:0;border-top-right-radius:0;"
-        @scroll.native="onBodyScrolll"
-      >
-        <colgroup v-if="showingData.length !== 0">
-          <col
-            v-for="(column, i) in columns"
-            :key="i"
-            :style="computeCustomWidthStl(column)"
-          >
-        </colgroup>
-        <n-tbody v-show="!loading">
-          <n-tr
-            v-for="(rowData, i) in showingData"
-            :key="i"
-            :class="
-              typeof rowClassName === 'function'
-                ? rowClassName(rowData, i)
-                : rowClassName
-            "
-          >
-            <n-td
-              v-for="column in columns"
-              :key="column.key"
-              :style="computeAlign(column)"
-              :class="computeTdClass(column, rowData)"
-            >
-              <!-- 批量选择 -->
-              <n-checkbox
-                v-if="
-                  column.type === 'selection' &&
-                    (column.disabled && !column.disabled(rowData, i))
-                "
-                v-model="checkBoxes[rowData._index]"
-              />
-              <n-checkbox
-                v-else-if="
-                  column.type === 'selection' &&
-                    (column.disabled && column.disabled(rowData, i))
-                "
-                v-model="disabledCheckBox[rowData._index]"
-                :disabled="!(disabledCheckBox[rowData._index] = false)"
-              />
-              <n-checkbox
-                v-else-if="column.type === 'selection'"
-                v-model="checkBoxes[rowData._index]"
-              />
-              <row
-                v-else
-                :index="i"
-                :row="rowData"
-                :key-name="column.key"
-                :render="column.render"
-              />
-            </n-td>
-          </n-tr>
-          <div
-            v-if="showingData.length === 0"
-            class="n-advance-table__no-data-tip"
-          >
-            No data
-          </div>
-          <!-- <tr style="display:inline-block;width:100%;"> -->
-
-          <!-- </tr> -->
-        </n-tbody>
-        <template v-if="loading">
-          <n-spin
-            :spinning="loading"
-            style="width:100%;display:table-caption;"
-          />
-        </template>
-      </n-table>
     </div>
     <!-- 分页 -->
     <div
-      v-if="pagination !== false && showingData.length"
+      v-if="pagination !== false"
+      :style="tbodyWrapperStl"
       class="n-advance-table__pagination"
     >
-      <n-pagination v-model="currentPage" :page-count="pageCount" />
+      <n-pagination
+        v-model="currentPage"
+        :page-count="pageCount"
+        :page-slot="paginationer.pageSlot || 5"
+        :show-quick-jumper="
+          paginationer.showQuickJumper ? paginationer.showQuickJumper : false
+        "
+        :disabled="loading"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import row from '../row/index.js'
-import SortIcon from '../sortIcon'
-import PopFilter from '../popFilter'
-import searchInput from '../searchInput'
+// import searchInput from '../searchInput'
 import { noopFn } from '../../../utils/index'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import { Store, storageMixin } from '../store'
+import BaseTable from '../baseTable/baseTable'
+
+const sortOrderMap = {
+  ascend: 1,
+  descend: -1,
+  unset: 0
+}
+const sortOrderReverseMap = {
+  '-1': 'descend',
+  '1': 'ascend',
+  '0': 'unset'
+}
 
 export default {
-  name: 'NAdvanceTable',
-  components: {
-    row,
-    SortIcon,
-    PopFilter,
-    searchInput
+  store () {
+    return new Store()
   },
-  mixins: [withapp, themeable],
+  name: 'NAdvancedTable',
+  components: {
+    // searchInput,
+    BaseTable
+  },
+  mixins: [storageMixin, withapp, themeable],
   props: {
-    search: {
-      /**
-       * @description if onSearch === 'custom' will exec this.onChange
-       * columns:{label,value}
-       * placeholder @description search input placeholder
-       * onSearch @type Function | String 'custom' @returns Boolean, @description used in locale @example ( key, word,row)=>{return row.xxx.includes[word]}
-       */
-      type: [Object, Boolean],
-      default: false
-    },
+    // search: {
+    //   /**
+    //    * @description if onSearch === 'custom' will exec this.onChange
+    //    * columns:{label,value}
+    //    * placeholder @description search input placeholder
+    //    * onSearch @type Function | String 'custom' @returns Boolean, @description used in locale @example ( key, word,row)=>{return row.xxx.includes[word]}
+    //    */
+    //   type: [Object, Boolean],
+    //   default: false
+    // },
     pagination: {
       /**
        * @description pagination === false will now show pagination
@@ -298,27 +238,105 @@ export default {
     colBorder: {
       type: Boolean,
       default: true
+    },
+    scrollX: {
+      type: [Number, String],
+      default: 0
     }
   },
   data () {
     return {
+      triggerOnChange: true,
+      headerHeight: 0,
       copyData: [],
       sortIndexs: {},
       wrapperWidth: 'unset',
       tbodyWidth: 'auto;',
       scrollBarWidth: '0',
-      searchData: [],
-      currentSortColumn: null,
+      processedData: [],
       currentFilterColumn: null,
-      currentSearchColumn: null,
+      // currentSearchColumn: null,
       currentPage: 1,
       selectedFilter: {},
       checkBoxes: [],
       disabledCheckBox: [],
-      currentPageAllSelect: false
+      tbodyWrapperHeight: 0,
+      trHeight: 0,
+      horizontalScrollLeft: 0
     }
   },
   computed: {
+    fixedLeftColumndClass () {
+      return {
+        'n-advance-table__fixed--active': this.horizontalScrollLeft > 0
+      }
+    },
+    fixedRightColumndClass () {
+      return {
+        'n-advance-table__fixed--active': this.horizontalScrollLeft < 0
+      }
+    },
+    tbodyWrapperStl () {
+      let stl = {}
+      // if (this.maxWidth) {
+      //   stl.maxWidth =
+      //     typeof this.maxWidth === 'number'
+      //       ? this.maxWidth + 'px'
+      //       : this.maxWidth
+      // }
+      return stl
+    },
+    fixedLeftColumn () {
+      return this.columns
+        .filter(column => {
+          return column.fixed === 'left'
+        })
+        .map(item => {
+          return {
+            ...item,
+            fixed: false
+          }
+        })
+    },
+    fixedRightColumn () {
+      return this.columns
+        .filter(column => {
+          return column.fixed === 'right'
+        })
+        .map(item => {
+          return {
+            ...item,
+            fixed: false
+          }
+        })
+    },
+    currentSortColumn () {
+      let sorterKey = null
+      let i = 0
+      Object.keys(this.sortIndexs).forEach(key => {
+        if (this.sortIndexs[key] !== null) {
+          sorterKey = key
+        }
+      })
+      if (!sorterKey) {
+        return null
+      }
+      let sorterColumn = this.columns.find((column, idx) => {
+        i = idx
+        return column.key === sorterKey
+      })
+      if (!sorterColumn) {
+        return null
+      }
+      return {
+        sortable: sorterColumn.sortable,
+        sorter: sorterColumn.sorter,
+        key: sorterKey,
+        type: this.sortIndexs[sorterKey],
+        column: sorterColumn,
+        i
+      }
+    },
     paginationer () {
       if (this.pagination) {
         return {
@@ -332,27 +350,27 @@ export default {
       if (this.pagination) {
         // TODO: check count limit is exisit
         let total = this.pagination.total
-        if (this.pagination.custom !== true) {
-          total = this.searchData.length
-          console.log('TCL: pageCount -> total', total)
-        }
+        // if (this.pagination.custom !== true) {
+        //   total = this.data.length
+        // }
         return Math.ceil(total / this.pagination.limit) || 1
       }
       return 1
     },
     showingData () {
-      let data = this.searchData
+      let data = this.processedData
       if (data === null) {
         data = []
-      } else if (!this.searchData.length) {
+      } else if (!this.processedData.length) {
         data = this.copyData
       }
-      data = this.computePageDivideData(data)
+      if (this.pagination.custom !== true) {
+        data = this.computePageDivideData(data)
+      }
       return data
     },
     tableStl () {
       const stl = {
-        overflow: 'auto',
         ...this.colGroup
       }
       if (this.maxHeight) {
@@ -361,28 +379,18 @@ export default {
             ? this.maxHeight + 'px'
             : this.maxHeight
       }
-      if (this.maxWidth) {
-        stl.maxWidth =
-          typeof this.maxWidth === 'number'
-            ? this.maxWidth + 'px'
-            : this.maxWidth
-      }
       if (this.minHeight !== 'unset') {
         stl.minHeight =
           typeof this.minHeight === 'number'
             ? this.minHeight + 'px'
             : this.minHeight
       }
+
       return stl
     },
     colGroup () {
-      let stl = { width: `100%` }
-      if (this.maxWidth) {
-        stl.maxWidth =
-          typeof this.maxWidth === 'number'
-            ? this.maxWidth + 'px'
-            : this.maxWidth
-      }
+      let stl = {}
+
       return stl
     },
     headColWidth () {
@@ -442,34 +450,53 @@ export default {
     }
   },
   watch: {
-    allCheckboxesSelect (val) {
-      this.currentPageAllSelect = val
+    columns: {
+      handler () {
+        this.$nextTick(() => {
+          this.setDefaultOrderAndFilter()
+        })
+      },
+      immediate: true
     },
+    // allCheckboxesSelect (val) {
+    //   this.currentPageAllSelect = val
+    // },
     currentPage () {
-      if (this.pagination.custom === true) {
-        this.useRemoteChange()
-      }
-      this.currentPageAllSelect = this.allCheckboxesSelect
+      this.computeCurrentPageSelection()
+      // if (this.pagination.custom === true) {
 
-      console.log('currentPage')
+      this.useRemoteChange()
+      this.bodyScrollToTop()
+      // }
 
+      // this.currentPageAllSelect = this.allCheckboxesSelect
       this.$emit('on-page-change', this.paginationer)
     },
     data () {
       this.initData()
-      this.searchData = this.computeShowingData()
-      this.searchDataNoSort = null
+      this.processedData = this.computeShowingData()
+      this.processedDataNoSort = null
       this.checkBoxes = []
       this.disabledCheckBox = []
       this.currentPageAllSelect = false
+      this.$store.commit('selectedAllChecked', false)
+
       this.computeScollBar()
     },
     currentSearchColumn () {
-      this.searchData = this.computeShowingData()
+      this.processedData = this.computeShowingData()
     },
-    currentSortColumn () {
-      this.searchData = this.computeShowingData()
-      console.log('currentSortColumn')
+    currentSortColumn (sorter, oldSorter) {
+      this.processedData = this.computeShowingData()
+      //  上次的若是为custom,本次为locale sort那么也需要触发useRemoteChange
+      // if (
+      //   sorter.sorter === 'custom' ||
+      //   (oldSorter && oldSorter.sorter === 'custom')
+      // ) {
+      //   this.useRemoteChange()
+      // }
+      this.useRemoteChange()
+      this.$emit('on-sort-change', this.currentSortColumn)
     },
     checkBoxes () {
       this.$emit('on-selected-change', this.selectedRows)
@@ -485,24 +512,22 @@ export default {
         this.columns.forEach(column => {
           let key = column.key
           if (keys.includes(key) && val[key] && val[key].length !== 0) {
-            // TODO: 未来版本单选将会返回一个数值而不是数组!
-            console.warn(
-              '[NAIVE-UI]: n-advance-table filter filterMultiple=false will return not a array in future'
-            )
             this.currentFilterColumn[key] = {
               value: [].concat(val[key]),
-              filterFn: column.onFilter
+              filterFn: column.filter,
+              filterMultiple: column.filterMultiple
             }
           }
         })
+
+        this.$emit('on-filter-change', this.getFilterData())
       }
     },
     currentFilterColumn: {
       handler () {
-        this.searchData = this.computeShowingData()
-        console.log('currentFilterColumn')
+        this.processedData = this.computeShowingData()
         // because after filter length maybe change , so need to reset current page
-        this.currentPage = 1
+        if (this.triggerOnChange) this.currentPage = 1
       },
       deep: true
     }
@@ -510,26 +535,71 @@ export default {
   created () {
     this.initData()
   },
-
   mounted () {
-    this.relTable = this.$refs.tbody.$el.querySelector('table')
-    // this.relTHead = this.$refs.header.$el.querySelector('table')
-    this.wrapper = this.$refs.tableWrapper
-    this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
-    this.tbodyWidth = this.relTable.offsetWidth
-
-    this.headerRealEl = this.$refs.header.$el.querySelector('thead')
-
-    // console.log(this.wrapperWidth, this.tbodyWidth)
-
     this.init()
 
-    // window.addEventListener('resize', this.init)
+    window.addEventListener('resize', this.init)
   },
   beforeDestroy () {
-    // window.removeEventListener('resize', this.init)
+    window.removeEventListener('resize', this.init)
   },
   methods: {
+    setDefaultOrderAndFilter () {
+      this.columns.forEach((column, i) => {
+        if (column.defaultFilter) {
+          this.$set(this.selectedFilter, column.key || i, column.defaultFilter)
+        }
+        if (column.defaultSortOrder) {
+          this.$set(
+            this.sortIndexs,
+            column.key || i,
+            sortOrderMap[column.defaultSortOrder]
+          )
+        }
+      })
+    },
+    onTableWrapperScroll (event) {
+      const el = event.target
+      const left = el.scrollLeft
+      this.horizontalScrollLeft = left - 1
+    },
+    bodyScrollToTop () {
+      const scrollEls = [
+        this.fixedLeftTBodyEl,
+        this.mainTBodyEl,
+        this.fixedRightTBodyEl
+      ]
+      scrollEls.forEach(el => {
+        if (el) {
+          el.classList.add('n-table--scroll-smooth')
+          window.requestAnimationFrame(() => {
+            el.scrollTop = 0
+            el.classList.remove('n-table--scroll-smooth')
+          })
+        }
+      })
+    },
+    onBodyScrolll (event) {
+      const currentEl = this.$store.state.currentTableEl
+      const scrollEls = [
+        this.fixedLeftTBodyEl,
+        this.mainTBodyEl,
+        this.fixedRightTBodyEl
+      ]
+
+      window.requestAnimationFrame(() => {
+        scrollEls
+          .filter(
+            item => item !== currentEl && item !== null && item !== undefined
+          )
+          .forEach(el => {
+            if (currentEl) el.scrollTop = currentEl.scrollTop
+          })
+      })
+
+      event.stopPropagation()
+      event.preventDefault()
+    },
     initData () {
       this.copyData = this.data.slice(0).map((row, idx) => {
         return {
@@ -543,39 +613,16 @@ export default {
       const ref = this.$refs['sorter_' + column.key][0]
       ref.changeSort()
     },
-    computeAlign (column) {
-      if (column.align) {
-        return {
-          'text-align': column.align
-        }
-      }
-    },
-    computeTdClass (column, params) {
-      let className = []
-      if (column.ellipsis) {
-        className.push('n-advanced-table__td-text--ellipsis')
-      }
-      if (!column.className) {
-        return className
-      }
-      if (typeof column.className === 'string') {
-        className.push(column.className)
-      } else if (typeof column.className === 'function') {
-        className.push(column.className(params))
-      }
-      // console.log(className)
-      return className
-    },
     clearSelect () {
       this.$nextTick(() => {
         this.checkBoxes = []
       })
     },
-    selectRow (rowIndexs = []) {
+    toggleRowSelection (rowIndexs = [], selected = true) {
       this.$nextTick(() => {
         if (rowIndexs === 'all') {
           this.showingData.forEach(item => {
-            this.checkBoxes[item._index] = true
+            this.checkBoxes[item._index] = selected
           })
           this.checkBoxes = [].concat(this.checkBoxes)
         } else {
@@ -583,7 +630,7 @@ export default {
             rowIndexs.forEach(idx => {
               if (this.showingData[idx]) {
                 const realIdx = this.showingData[idx]._index
-                this.checkBoxes[realIdx] = true
+                this.checkBoxes[realIdx] = selected
               }
             })
             this.checkBoxes = [].concat(this.checkBoxes)
@@ -591,44 +638,60 @@ export default {
         }
       })
     },
+    page (pageNum, triggerOnChange = false) {
+      this.triggerOnChange = triggerOnChange
+
+      this.currentPage = pageNum
+      this.$nextTick(() => {
+        this.triggerOnChange = !triggerOnChange
+      })
+    },
+    sort (columnKey, order, triggerOnChange = false) {
+      this.triggerOnChange = triggerOnChange
+
+      if (columnKey == null) {
+        this.clearSort()
+        return
+      }
+      this.$set(this.sortIndexs, columnKey, sortOrderMap[order])
+      this.$nextTick(() => {
+        this.triggerOnChange = !triggerOnChange
+      })
+    },
+    filter (filterOptions, triggerOnChange = false) {
+      this.triggerOnChange = triggerOnChange
+
+      if (filterOptions === null) {
+        this.selectedFilter = {}
+        return
+      }
+      Object.keys(filterOptions).forEach(key => {
+        const col = this.columns.find(column => column.key === key)
+        if (!col.filterMultiple) {
+          filterOptions[key] = filterOptions[key][0]
+        }
+      })
+      this.selectedFilter = filterOptions
+
+      this.$nextTick(() => {
+        this.triggerOnChange = !triggerOnChange
+      })
+    },
     /**
-     * {key:[value,value1],key1:[v1,v2]}
-     * {key:value}
-     * number
-     * {key:value}
+     * @deprecated
+     * 废弃的,
      */
-    setParams ({ filter, sorter, page, searcher }) {
+    _setParams ({ filter, sorter, page }) {
       if (sorter) {
-        const ref = this.$refs['sorter_' + sorter.key][0]
-        ref.setSort(sorter.type)
-        // this.sortIndexs[sorter.key] = sorter.type
+        this.sort(sorter.key, sorter.order)
       } else {
-        // clear
         this.clearSort()
       }
-      this.currentFilterColumn &&
-        Object.keys(this.currentFilterColumn).forEach(key => {
-          this.selectedFilter = {}
-        })
+
+      this.currentFilterColumn ? (this.selectedFilter = {}) : void 0
+
       if (filter) {
-        // ---- TODO: 未来版本将会去除这段代码,为了兼容老版本
-        Object.keys(filter).forEach(key => {
-          let column = this.columns.find(item => item.key === key)
-          if (column && !column.filterMultiple) {
-            if (filter[key].length) {
-              filter[key] = filter[key][0]
-            } else {
-              delete filter[key]
-            }
-          }
-        })
-        // ----
-        this.selectedFilter = filter
-      }
-      if (searcher && this.search) {
-        this.$refs.search.setSearch(searcher)
-      } else if (!searcher && this.search) {
-        this.$refs.search.clearSearch()
+        this.filter(filter)
       }
       if (page) {
         this.$nextTick(() => {
@@ -642,39 +705,23 @@ export default {
       Object.keys(this.sortIndexs).forEach(key => {
         this.sortIndexs[key] = 0
       })
-      this.currentSortColumn = null
-    },
-    onBodyScrolll (event) {
-      this.headerRealEl.style.transform = `translate3d(-${event.target.scrollLeft}px,0,0)`
-
-      // this.$refs.header.$el.scrollLeft = event.target.scrollLeft
-
-      event.stopPropagation()
     },
     computeScollBar () {
       this.$nextTick(() => {
-        this.tbodyWidth = this.relTable.offsetWidth
-        this.scrollBarWidth = this.tbodyWrapperWidth - this.tbodyWidth
-        // console.log('TCL: mounted -> this.scrollBarWidth', this.wrapperWidth, this.tbodyWidth)
+        let tr = this.relTable.querySelector('tr')
+        this.trHeight = tr ? tr.offsetHeight : 0
+        const tbody = this.mainTBodyEl
+        this.tbodyWrapperHeight = tbody.clientHeight
+        this.tbodyWrapperOffsetHeight = tbody.offsetHeight
+        this.scrollBarWidth = tbody.offsetWidth - tbody.clientWidth
       })
     },
-    computeCustomWidthStl (column) {
-      if (column.width) {
-        let width = column.width
-        return {
-          width: width + 'px',
-          'padding-right': this.scrollBarWidth + 'px'
-          // minWidth: width + 'px'
-        }
-      } else if (column.type === 'selection') {
-        let width = 60
-        return {
-          width: width + 'px',
-          'padding-right': this.scrollBarWidth + 'px'
-          // minWidth: width + 'px'
-        }
-      }
-      return null
+    computeCurrentPageSelection () {
+      const needChecked =
+        (this.currentPageSelectedLen > 0 &&
+          this.currentPageSelectedLen === this.showingData.length) ||
+        this.isCheckedBoxAllIndeterminate
+      this.$store.commit('selectedAllChecked', needChecked)
     },
     computePageDivideData (data) {
       if (this.pagination && this.pagination.limit && !this.pagination.custom) {
@@ -686,44 +733,60 @@ export default {
           start = (this.currentPage - 2) * this.pagination.limit
           end = start + this.pagination.limit
           this.currentPage = this.currentPage - 1
-          data = this.searchData.slice(start, end)
+          data = this.processedData.slice(start, end)
         }
       }
       return data
     },
     init () {
       this.$nextTick(() => {
+        this.mainTBodyEl = this.$refs.mainTable.$refs.tbody.$el
+        this.mainTBodyWrapperEl = this.$refs.mainTable.$el
+
+        this.relTable = this.mainTBodyEl.querySelector('table')
+        // this.relTHead = this.$refs.header.$el.querySelector('table')
+        this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
+
+        this.headerRealEl = this.$refs.mainTable.$refs.header.$el.querySelector(
+          'thead'
+        )
+        this.headerHeight = this.headerRealEl.offsetHeight
+        this.fixedLeftTBodyEl =
+          this.$refs.fixedLeftTable && this.$refs.fixedLeftTable.$refs.tbody.$el
+        this.fixedRightTBodyEl =
+          this.$refs.fixedLeftTable &&
+          this.$refs.fixedRightTable.$refs.tbody.$el
         this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
         this.tbodyWrapperWidth = this.$refs.tbodyWrapper.clientWidth
+
+        this.horizontalScrollLeft =
+          this.mainTBodyWrapperEl.clientWidth > parseInt(this.scrollX) ? 0 : -1
+
         this.computeScollBar()
-
-        // console.log(this.relTable.offsetWidth)
-
-        // this.scrollBarWidth = 5
       })
     },
     onAllCheckboxesClick () {
       this.showingData.forEach(item => {
-        this.checkBoxes[item._index] = this.currentPageAllSelect
+        this.checkBoxes[item._index] = this.$store.state.selectedAllChecked
       })
       this.checkBoxes = [].concat(this.checkBoxes)
     },
-    handleSearch ({ key, word }) {
-      this.currentSearchColumn = {
-        key,
-        word
-      }
-      if (word.length === 0) {
-        this.currentSearchColumn = null
-      } else {
-        // because after search ,length maybe change , so need to reset current page
-        this.currentPage = 1
-      }
-      if (this.search.onSearch === 'custom') {
-        this.useRemoteChange()
-      }
-    },
-    getCusomFilterData () {
+    // handleSearch ({ key, word }) {
+    //   this.currentSearchColumn = {
+    //     key,
+    //     word
+    //   }
+    //   if (word.length === 0) {
+    //     this.currentSearchColumn = null
+    //   } else {
+    //     // because after search ,length maybe change , so need to reset current page
+    //     this.currentPage = 1
+    //   }
+    //   if (this.search.onSearch === 'custom') {
+    //     this.useRemoteChange()
+    //   }
+    // },
+    getFilterData (option = 'all') {
       if (!this.currentFilterColumn) {
         return null
       }
@@ -733,41 +796,49 @@ export default {
 
       keys.forEach(key => {
         let val = this.currentFilterColumn[key].value
-        let filterFn = this.currentFilterColumn[key].filterFn
-        if (filterFn === 'custom') {
-          currentFilterColumn[key] = {
-            value: val
-          }
-        }
+        // let filterFn = this.currentFilterColumn[key].filterFn
+        // let filterMultiple = this.currentFilterColumn[key].filterMultiple
+        currentFilterColumn[key] = val
       })
       if (Object.keys(currentFilterColumn).length === 0) {
         currentFilterColumn = null
       }
       return currentFilterColumn
     },
-    getCusomSorterData () {
-      if (!this.currentSortColumn) {
-        return null
-      }
-      const isCustom =
-        this.currentSortColumn.sortable === 'custom' &&
-        this.currentSortColumn.type !== null
-      return isCustom ? this.currentSortColumn : null
-    },
+    // getCustomSorterData () {
+    //   if (!this.currentSortColumn) {
+    //     return null
+    //   }
+    //   const isCustom =
+    //     this.currentSortColumn.sorter === 'custom' &&
+    //     this.currentSortColumn.type !== null
+    //   return isCustom ? this.currentSortColumn : null
+    // },
     useRemoteChange () {
+      if (!this.triggerOnChange) return
       clearTimeout(this.remoteTimter)
 
       this.remoteTimter = setTimeout(() => {
-        const currentFilterColumn = this.getCusomFilterData()
-        const currentSortColumn = this.getCusomSorterData()
+        const currentFilterColumn = this.getFilterData('custom')
+        const currentSortColumn = this.currentSortColumn
+
+        const sortType =
+          currentSortColumn && Number(currentSortColumn.type).toString()
         const emitData = {
-          filter: currentFilterColumn,
-          sorter: currentSortColumn,
-          pagination: this.paginationer,
-          search: this.currentSearchColumn
+          filter: currentFilterColumn || null,
+          sorter:
+            currentSortColumn && currentSortColumn.type !== 0
+              ? {
+                field: currentSortColumn.key,
+                order: sortOrderReverseMap[sortType],
+                column: currentSortColumn.column
+              }
+              : null,
+          pagination: this.paginationer || null
+          // search: this.currentSearchColumn
         }
         this.$emit('on-change', emitData)
-        this.onChange(emitData)
+        this.onChange && this.onChange(emitData)
       }, 300)
     },
     computeShowingData () {
@@ -776,29 +847,27 @@ export default {
       if (this.currentFilterColumn) {
         // const { filterFn, value } = this.operatingfilter
         if (Object.keys(this.currentFilterColumn).length === 0) {
-          this.searchData = []
+          this.processedData = []
         }
         Object.keys(this.currentFilterColumn).forEach(key => {
           const { value, filterFn } = this.currentFilterColumn[key]
-          if (value && filterFn !== 'custom') {
+          if (value && filterFn !== 'custom' && filterFn) {
             data = data.filter(item => {
-              return filterFn(value, item.row)
+              for (let i = 0; i < value.length; i++) {
+                if (filterFn(value[i], item.row)) {
+                  return true
+                }
+              }
+              return false
             })
           }
         })
       }
-      // compute search
-      if (this.currentSearchColumn && this.search.onSearch !== 'custom') {
-        const { key, word } = this.currentSearchColumn
-        data = data.filter(item => {
-          return this.search.onSearch(key, word, item.row)
-        })
-      }
-
       // compute sort
       if (this.currentSortColumn) {
         data = this.computeSortData(data)
       }
+
       if (data.length === 0) {
         data = null
       }
@@ -809,25 +878,31 @@ export default {
       let { sortable, key, type, column } = this.currentSortColumn
       // use remote sort
       if (sortable === true) {
-        if (!this.searchDataNoSort && this.data.length !== 0) {
-          this.searchDataNoSort = data.slice(0)
-        }
+        // console.log(
+        //   'TCL: computeSortData -> this.processedDataNoSort ',
+        //   this.processedDataNoSort
+        // )
+
+        // if (!this.processedDataNoSort && this.data.length !== 0) {
+        //   this.processedDataNoSort = data.slice(0)
+        // }
         if (type === 0 || type === null) {
-          if (this.searchDataNoSort) {
-            data = this.searchDataNoSort
-            this.searchDataNoSort = null
-          }
+          // if (this.processedDataNoSort) {
+          //   data = this.processedDataNoSort
+          //   this.processedDataNoSort = null
+          // }
+          return data
         } else {
-          data = data.sort((a, b) => {
+          data.sort((a, b) => {
             a = a.row
             b = b.row
             if (type > 0) {
-              if (column.sorter) {
+              if (column.sorter && typeof column.sorter === 'function') {
                 return column.sorter(a, b)
               }
               return ('' + a[key]).localeCompare('' + b[key])
             } else {
-              if (column.sorter) {
+              if (column.sorter && typeof column.sorter === 'function') {
                 return column.sorter(b, a)
               }
               return ('' + b[key]).localeCompare('' + a[key])
@@ -836,32 +911,21 @@ export default {
         }
       }
       if (type !== 0) {
-        Object.keys(this.sortIndexs).forEach(key => {
-          if (key !== column.key) {
-            this.sortIndexs[key] = 0
+        Object.keys(this.sortIndexs).forEach(sorterKey => {
+          if (sorterKey !== column.key) {
+            this.sortIndexs[sorterKey] = 0
           }
         })
       }
       return data
     },
     onFilter (value, column) {
-      if (column.onFilter === 'custom') {
-        this.useRemoteChange()
-      }
-      this.$emit('on-filter-change', this.currentFilterColumn)
+      // if (column.filter === 'custom') {
+      this.useRemoteChange()
+      // }
     },
-    onSortTypeChange ({ i, sortable, key, type, column }) {
-      this.currentSortColumn = {
-        sortable,
-        key,
-        type,
-        column,
-        i
-      }
-      if (this.onChange && sortable === 'custom') {
-        this.useRemoteChange()
-      }
-      this.$emit('on-sort-change', this.currentSortColumn)
+    onSortChange (sortIndexs) {
+      this.sortIndexs = sortIndexs
     }
   }
 }

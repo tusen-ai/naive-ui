@@ -18,7 +18,14 @@
       Naive UI ({{ version }})
     </div>
     <div style="width: 200px; margin-left: 48px;">
-      <n-auto-complete v-model="searchInputValue" placeholder="Search in Naive UI" :options="searchOptions" @select="handleSelect" />
+      <n-auto-complete
+        v-model="searchInputValue"
+        placeholder="Search in Naive UI"
+        :options="searchOptions"
+        clear-after-select
+        blur-after-select
+        @select="handleSelect"
+      />
     </div>
     <div class="theme-picker">
       <n-select

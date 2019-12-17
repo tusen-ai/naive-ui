@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import Form from './src/main.vue'
+import Form from './src/Form.vue'
 import FormItem from './src/FormItem.vue'
 import FormItemCol from './src/FormItemCol'
 import FormItemRow from './src/FormItemRow'

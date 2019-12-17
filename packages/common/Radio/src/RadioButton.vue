@@ -41,9 +41,6 @@ export default {
     }
   },
   computed: {
-    // shouldSimulateHollowOutText () {
-    //   return this.checked && (this.NRadioGroup.synthesizedTheme === 'dark')
-    // },
     checked () {
       if (this.NRadioGroup) {
         return this.NRadioGroup.value === this.value

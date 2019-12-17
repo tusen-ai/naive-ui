@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "0.5.21",
+  "version": "0.6.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -96,7 +96,7 @@
     "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
     "@vue/babel-preset-jsx": "^1.0.0",
     "async-validator": "^1.11.5",
-    "date-fns": "^2.5.1",
+    "date-fns": "^2.6.0",
     "ionicons": "^4.5.8",
     "masonry-layout": "^4.2.2",
     "node-sass": "^4.12.0",

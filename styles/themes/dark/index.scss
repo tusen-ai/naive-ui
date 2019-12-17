@@ -54,6 +54,7 @@
 @import "components/Affix.scss";
 @import "components/Avatar.scss";
 @import "components/Collapse.scss";
+@import "components/Result.scss";
 
 @mixin setup-dark-theme() {
   @include setup-dark-colors();
@@ -65,13 +66,15 @@
   $--n-warning-color: $--warning-6 !global;
   $--n-error-color: $--error-6 !global;
 
+  $--n-close-color: $--text-3 !global;
   $--n-text-color: $--text-1 !global;
+  $--n-secondary-text-color: $--text-2 !global;
+  $--n-meta-text-color: $--text-3 !global;
   $--n-popover-color: $--neutral-1 !global;
   $--n-divider-color: $--neutral-6 !global;
   $--n-alpha-divider-color: $--overlay-6 !global;
   $--n-border-color: $--neutral-7 !global;
   $--n-alpha-border-color: $--overlay-7 !global;
-  $--n-secondary-text-color: $--text-2 !global;
   $--n-table-header-color: $--neutral-8 !global;
   $--n-alpha-table-header-color: $--overlay-8 !global;
   $--n-table-body-color: $--neutral-9 !global;
@@ -135,4 +138,5 @@
   @include setup-dark-affix;
   @include setup-dark-avatar;
   @include setup-dark-collapse;
+  @include setup-dark-result;
 }

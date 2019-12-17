@@ -4,6 +4,7 @@ export default {
       Vue.prototype.$naive = {}
     }
     const naive = Vue.prototype.$naive
+    console.info('naive theme', naive)
     // naive.theme
   }
 }

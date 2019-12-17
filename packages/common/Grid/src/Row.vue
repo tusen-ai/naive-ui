@@ -5,7 +5,7 @@
       'n-row--flex': flex
     }"
     :style="{
-      margin: `0px ${ -horizontalGutter / 2}px`,
+      margin: `0px ${-horizontalGutter / 2}px`,
       width: `calc(100% + ${horizontalGutter}px)`,
       alignItems: alignItems,
       justifyContent: justifyContent
@@ -51,7 +51,8 @@ export default {
     horizontalGutter () {
       if (Array.isArray(this.gutter)) {
         return this.gutter[0]
-      } if (this.gutter) {
+      }
+      if (this.gutter) {
         return this.gutter
       }
       return 0

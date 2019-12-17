@@ -3,29 +3,32 @@
 
 @include b(popconfirm-content) {
   padding: 14px 16px;
-  &.n-popconfirm-content--no-icon {
-    .n-popconfirm-content__body {
+  @include m(no-icon) {
+    @include e(body) {
       padding-left: 0;
     }
   }
-  .n-popconfirm-content__body {
+  @include e(body) {
     font-size: 13px;
     white-space: nowrap;
     padding-left: 22px;
     position: relative;
-    .n-icon {
+    @include b(icon) {
       position: absolute;
       font-size: 18px;
       left: 0;
-      top: -1px;
+      top: 0;
     }
   }
-  .n-popconfirm-content__action {
+  @include e(action) {
     margin-top: 14px;
     display: flex;
     justify-content: flex-end;
-    .n-button:not(:last-child) {
+    @include b(button) {
       margin-right: 12px;
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
 }

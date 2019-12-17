@@ -13,66 +13,69 @@ export default {
   props: {
     clearable: {
       type: Boolean,
-      default: false
+      default: undefined
     },
     items: {
       type: Array,
-      default: null
+      default: undefined
     },
     options: {
       type: Array,
-      default: null
+      default: undefined
     },
     value: {
       validator () {
         return true
       },
-      required: false,
-      default: null
+      default: undefined
     },
     placeholder: {
       type: String,
-      default: 'Please Select'
+      default: undefined
     },
     multiple: {
       type: Boolean,
-      default: false
+      default: undefined
     },
     size: {
       type: String,
-      default: 'medium'
+      default: undefined
     },
     emitOption: {
       type: Boolean,
-      default: false
+      default: undefined
     },
     filterable: {
       type: Boolean,
-      default: false
+      default: undefined
+    },
+    filter: {
+      type: Function,
+      default: undefined
     },
     disabled: {
       type: Boolean,
-      default: false
+      default: undefined
     },
     remote: {
       type: Boolean,
-      default: false
+      default: undefined
     },
     onSearch: {
       type: Function,
-      default: null
+      default: undefined
     },
     loading: {
       type: Boolean,
-      default: false
+      default: undefined
     },
     noDataContent: {
       type: [String, Function],
-      default: 'no data'
+      default: undefined
     },
     notFoundContent: {
       type: [String, Function],
-      default: 'none result matched'
+      default: undefined
     }
   },
   data () {

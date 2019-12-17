@@ -10,4 +10,8 @@
   ) !global;
   $--checkbox-disabled: $border-color !global;
   $--checkbox-icon-fill: $--n-background-color !global;
+  $--checkbox-label-text-color: (
+    'default': $--n-secondary-text-color,
+    'disabled': $--n-disabled-text-color
+  ) !global;
 }

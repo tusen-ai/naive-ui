@@ -1,7 +1,8 @@
 @mixin setup-dark-breadcrumb {
   $--breadcrumb-link-text-color: (
-    'default': $--n-secondary-text-color,
-    'active': $--n-text-color
+    'default': $--neutral-4,
+    'active': $--n-text-color,
+    'hover': $--primary-6
   ) !global;
   $--breadcrumb-seperator-text-color: (
     'default': $--n-secondary-text-color

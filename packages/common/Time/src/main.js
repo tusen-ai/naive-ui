@@ -65,6 +65,6 @@ export default {
     }
   },
   render (h) {
-    return this.transparent ? this.renderedTime : h('time', this.renderedTime)
+    return this.transparent ? this._v(this.renderedTime) : h('time', this.renderedTime)
   }
 }

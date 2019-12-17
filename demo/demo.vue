@@ -1,13 +1,6 @@
 <template>
-  <n-config-provider
-    class="demo"
-    namespace="naive-ui-doc"
-    :theme="theme"
-  >
-    <n-nimbus-service-layout
-      :padding-body="false"
-      :items="items"
-    >
+  <n-config-provider class="demo" namespace="naive-ui-doc" :theme="theme">
+    <n-nimbus-service-layout :padding-body="false" :items="items">
       <template v-slot:nav>
         <doc-header
           :lang="lang"
@@ -53,8 +46,8 @@ export default {
           path: `/${this.lang}/${this.theme}` + '/dev-guildlines'
         },
         {
-          name: 'Develop Status',
-          path: `/${this.lang}/${this.theme}` + '/status'
+          name: 'Create Themed Component',
+          path: `/${this.lang}/${this.theme}` + '/n-theme'
         },
         {
           name: 'Nimbus Components',
@@ -76,6 +69,10 @@ export default {
             {
               name: 'Config Consumer',
               path: `/${this.lang}/${this.theme}` + '/n-config-consumer'
+            },
+            {
+              name: 'Element',
+              path: `/${this.lang}/${this.theme}` + '/n-element'
             }
           ]
         },
@@ -137,7 +134,7 @@ export default {
           name: 'Data Input Components',
           childItems: [
             {
-              name: 'Auto Complete (in progress)',
+              name: 'Auto Complete',
               path: `/${this.lang}/${this.theme}` + '/n-auto-complete'
             },
             {
@@ -198,8 +195,12 @@ export default {
           name: 'Data Display Components',
           childItems: [
             {
-              name: 'Advanced Table (in progress)',
-              path: `/${this.lang}/${this.theme}` + '/n-advance-table'
+              name: 'Table',
+              path: `/${this.lang}/${this.theme}` + '/n-table'
+            },
+            {
+              name: 'Code',
+              path: `/${this.lang}/${this.theme}` + '/n-code'
             },
             {
               name: 'Descriptions',
@@ -212,6 +213,10 @@ export default {
             {
               name: 'List',
               path: `/${this.lang}/${this.theme}` + '/n-list'
+            },
+            {
+              name: 'Log',
+              path: `/${this.lang}/${this.theme}` + '/n-log'
             },
             {
               name: 'Statistic',
@@ -379,6 +384,10 @@ export default {
             {
               name: 'VerticalAlignDebug',
               path: `/${this.lang}/${this.theme}` + '/n-vertical-align-debug'
+            },
+            {
+              name: 'IconTransitionDebug',
+              path: `/${this.lang}/${this.theme}` + '/n-icon-transition-debug'
             }
           ]
         }
@@ -402,10 +411,7 @@ export default {
         return this.$route.params.lang || 'en-us'
       },
       set (lang) {
-        this.$router.push(changeLangInPath(
-          this.$route.fullPath,
-          lang
-        ))
+        this.$router.push(changeLangInPath(this.$route.fullPath, lang))
       }
     },
     theme: {
@@ -413,10 +419,7 @@ export default {
         return this.$route.params.theme === 'light' ? 'light' : 'dark'
       },
       set (theme) {
-        this.$router.push(changeThemeInPath(
-          this.$route.fullPath,
-          theme
-        ))
+        this.$router.push(changeThemeInPath(this.$route.fullPath, theme))
       }
     }
   },

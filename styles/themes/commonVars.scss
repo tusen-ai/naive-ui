@@ -3,13 +3,16 @@ $--n-font-family: 'Lato';
 $--n-height: (
   "small": 28px,
   "medium": 34px,
-  "large": 40px
+  "large": 40px,
+  "huge": 48px
 );
 
 $--n-font-size: (
+  "tiny": 13px,
   "small": 14px,
   "medium": 14px,
-  "large": 15px
+  "large": 15px,
+  "huge": 16px
 );
 
 $--base-picker-border-radius: 6px;
@@ -21,7 +24,8 @@ $--input-number-border-radius: 6px;
 $--input-icon-size: 20px;
 $--input-border-radius: 6px;
 
-$--popover-box-shadow: (0px 0px 8px 0px rgba(0,0,0,0.08));
+$--popover-box-shadow: (0px 2px 12px 0px rgba(0, 0, 0, 0.18));
+$--popover-arrow-width: 6px;
 
 $--slider-rail-height: 4px;
 $--slider-dot-size: 8px;

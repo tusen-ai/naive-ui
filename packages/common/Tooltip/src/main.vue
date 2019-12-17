@@ -67,16 +67,12 @@ export default {
       on: context.listeners,
       props: {
         ...context.props,
-        detachedContainerClass: 'n-tooltip-detached-content-container'
+        detachedContainerClass: 'n-tooltip',
+        contentClass: 'n-tooltip-content'
       },
       scopedSlots: {
         activator: () => slots.activator && slots.activator(),
-        default: () => h('div', {
-          staticClass: 'n-tooltip-content',
-          class: {
-            'n-tooltip-content--fix-width': context.props.width !== null || context.props.maxWidth !== null
-          }
-        }, slots.default && slots.default())
+        default: () => slots.default && slots.default()
       }
     })
   }

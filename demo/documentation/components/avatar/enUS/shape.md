@@ -1,4 +1,4 @@
-# Size
+# Shape
 
 Avatar can be circle shaped.
 

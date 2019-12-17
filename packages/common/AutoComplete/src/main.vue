@@ -1,9 +1,11 @@
 <template>
-  <div class="n-auto-complete">
+  <div class="n-auto-complete" @keydown.down="handleKeyDownDown" @keydown.up="handleKeyDownUp" @keyup.enter="handleKeyUpEnter" @keydown.enter="handleKeyDownEnter">
     <n-base-select-option-collector v-if="!!$slots.default">
       <slot />
     </n-base-select-option-collector>
-    <n-input ref="activator" :value="value" :placeholder="placeholder" @focus="active = true" @input="handleInput" />
+    <slot name="activator" :handle-input="handleInput" :handle-focus="handleFocus" :handle-blur="handleBlur" :value="value">
+      <n-input ref="activator" :value="value" :placeholder="placeholder" :size="size" @focus="canBeActivated = true" @input="handleInput" @blur="handleBlur" />
+    </slot>
     <div
       ref="contentContainer"
       v-clickoutside="handleClickOutsideMenu"
@@ -49,10 +51,12 @@ import NInput from '../../Input'
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
 import zindexable from '../../../mixins/zindexable'
+import asthemecontext from '../../../mixins/asthemecontext'
 import clickoutside from '../../../directives/clickoutside'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import asformitem from '../../../mixins/asformitem'
+
 import {
   NBaseSelectMenu,
   NBaseSelectOptionCollector,
@@ -73,6 +77,7 @@ export default {
   mixins: [
     withapp,
     themeable,
+    asthemecontext,
     detachable,
     zindexable,
     placeable,
@@ -85,7 +90,15 @@ export default {
     },
     value: {
       type: String,
-      required: true
+      default: null
+    },
+    blurAfterSelect: {
+      type: Boolean,
+      default: false
+    },
+    clearAfterSelect: {
+      type: Boolean,
+      default: false
     },
     size: {
       type: String,
@@ -114,10 +127,13 @@ export default {
   },
   data () {
     return {
-      active: false
+      canBeActivated: false
     }
   },
   computed: {
+    active () {
+      return !!this.value && this.canBeActivated && !!this.filteredOptions.length
+    },
     filteredOptions () {
       return this.options.map(literal => typeof literal === 'string' ? ({
         label: literal,
@@ -126,21 +142,75 @@ export default {
     }
   },
   methods: {
-    isSelected () {
-
+    handleKeyDownEnter (e) {
+      if (this.$refs.contentInner) {
+        const pendingOption = this.$refs.contentInner.pendingOption
+        if (pendingOption) {
+          e.preventDefault()
+        }
+      }
+    },
+    handleKeyDownDown () {
+      if (this.$refs.contentInner) {
+        this.$refs.contentInner.next()
+      }
+    },
+    handleKeyDownUp () {
+      if (this.$refs.contentInner) {
+        this.$refs.contentInner.prev()
+      }
+    },
+    handleKeyUpEnter () {
+      if (this.$refs.contentInner) {
+        const pendingOption = this.$refs.contentInner.pendingOption
+        this.select(pendingOption)
+      }
+    },
+    select (option) {
+      if (option) {
+        if (this.clearAfterSelect) {
+          this.$emit('input', null)
+        } else {
+          this.$emit('input', option.label)
+        }
+        this.$emit('select', option.value)
+        this.canBeActivated = false
+        if (this.blurAfterSelect) {
+          this.blur()
+        }
+      }
+    },
+    getTrackedElement () {
+      return this.$el
+    },
+    isSelected () {},
+    handleFocus () {
+      this.canBeActivated = true
+    },
+    handleBlur () {
+      this.canBeActivated = false
     },
     handleInput (value) {
       this.$emit('input', value)
-      this.active = true
+      this.canBeActivated = true
     },
     handleToggleOption (option) {
-      this.$emit('input', option.label)
-      this.$emit('select', option.value)
-      this.active = false
+      this.select(option)
     },
     handleClickOutsideMenu (e) {
-      if (!this.$refs.activator.$el.contains(e.target)) {
-        this.active = false
+      if (this.$refs.activator) {
+        if (!this.$refs.activator.$el.contains(e.target)) {
+          this.canBeActivated = false
+        }
+      } else {
+        if (!this.$el.contains(e.target)) {
+          this.canBeActivated = false
+        }
+      }
+    },
+    blur () {
+      if (this.$el.contains(document.activeElement)) {
+        document.activeElement.blur()
       }
     }
   }

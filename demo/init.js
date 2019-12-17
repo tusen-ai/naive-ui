@@ -52,7 +52,8 @@ import popconfirm from './documentation/components/popconfirm'
 import anchor from './documentation/components/anchor'
 import popselect from './documentation/components/popselect'
 import configProvider from './documentation/components/configProvider'
-import advancedTable from './documentation/components/advancedTable'
+import table from './documentation/components/table'
+
 import transfer from './documentation/components/transfer'
 import spin from './documentation/components/spin'
 import drawer from './documentation/components/drawer'
@@ -74,6 +75,10 @@ import result from './documentation/components/result'
 import thing from './documentation/components/thing'
 import autoComplete from './documentation/components/autoComplete'
 import empty from './documentation/components/empty'
+import theme from './documentation/theme'
+import element from './documentation/components/element'
+import log from './documentation/components/log'
+import code from './documentation/components/code'
 
 import demo from './demo'
 import ComponentDemo from './utils/ComponentDemo'
@@ -91,10 +96,21 @@ import backTopDebug from './debugComponents/backTopDebug'
 import cancelMarkDebug from './debugComponents/cancelMarkDebug'
 import cascaderDebug from './debugComponents/cascaderDebug'
 import verticalAlignDebug from './debugComponents/verticalAlignDebug'
+import iconTransitionDebug from './debugComponents/iconTransitionDebug'
+
+import hljs from 'highlight.js/lib/highlight'
+import javascript from 'highlight.js/lib/languages/javascript'
+import python from 'highlight.js/lib/languages/python'
+import cpp from 'highlight.js/lib/languages/cpp'
+
+hljs.registerLanguage('javascript', javascript)
+hljs.registerLanguage('python', python)
+hljs.registerLanguage('cpp', cpp)
 
 Vue.use(VueI18n)
 Vue.use(VueRouter)
 Vue.use(NaiveUI)
+NaiveUI.setHljs(hljs)
 
 const i18n = new VueI18n({
   locale: 'en-us'
@@ -106,7 +122,7 @@ Vue.component('DocumentationWrapper', DocumentationWrapper)
 Vue.component('ComponentDocumentation', ComponentDocumentation)
 
 const withPrefix = (prefix, routes) =>
-  routes.map((route) => {
+  routes.map(route => {
     route.path = prefix + route.path
     return route
   })
@@ -135,12 +151,15 @@ const routes = [
       { path: '/n-nimbus-service-layout', component: nimbusServiceLayoutDemo },
       { path: '/n-layout', component: layout },
       { path: '/n-gradient-text', component: gradientText },
-      { path: '/n-icon', component: () => import('./documentation/components/icon') },
+      {
+        path: '/n-icon',
+        component: () => import('./documentation/components/icon')
+      },
       { path: '/n-checkbox', component: checkbox },
       { path: '/n-button', component: button },
       { path: '/n-switch', component: nswitch },
       // { path: '/n-table', component: tableDemo },
-      { path: '/n-advance-table', component: advancedTable },
+      { path: '/n-table', component: table },
       { path: '/n-input', component: input },
       { path: '/n-select', component: select },
       { path: '/n-cascader', component: cascader },
@@ -155,7 +174,7 @@ const routes = [
       { path: '/n-date-picker', component: datePicker },
       { path: '/n-input-number', component: inputNumber },
       { path: '/n-radio', component: radio },
-      { path: '/n-form', component: form},
+      { path: '/n-form', component: form },
       { path: '/n-tabs', component: tabs },
       { path: '/n-time-picker', component: timePicker },
       { path: '/n-confirm', component: confirm },
@@ -192,14 +211,22 @@ const routes = [
       { path: '/n-grid', component: grid },
       { path: '/n-breadcrumb', component: breadcrumb },
       { path: '/n-config-consumer', component: configConsumer },
-      { path: '/n-descriptions', component: descriptions},
-      { path: '/n-list', component: list},
+      { path: '/n-descriptions', component: descriptions },
+      { path: '/n-list', component: list },
       { path: '/n-card', component: card },
       { path: '/n-avatar', component: avatar },
       { path: '/n-result', component: result },
       { path: '/n-thing', component: thing },
       { path: '/n-auto-complete', component: autoComplete },
-      { path: '/n-empty', component: empty }
+      { path: '/n-empty', component: empty },
+      { path: '/n-theme', component: theme },
+      { path: '/n-element', component: element },
+      { path: '/n-log', component: log },
+      { path: '/n-code', component: code },
+      {
+        path: '/n-icon-transition-debug',
+        component: iconTransitionDebug
+      }
     ])
   },
   {
@@ -213,7 +240,7 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach(function (to, from, next) {
+router.beforeEach(function(to, from, next) {
   Vue.prototype.$NLoadingBar.theme = to.params.theme
   if (to.path !== from.path) {
     Vue.prototype.$NLoadingBar.start()
@@ -221,7 +248,7 @@ router.beforeEach(function (to, from, next) {
   next()
 })
 
-router.afterEach(function (to, from) {
+router.afterEach(function(to, from) {
   if (to.path !== from.path) {
     Vue.prototype.$NLoadingBar.finish()
   }

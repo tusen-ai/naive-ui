@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import List from './src/main.vue'
+import List from './src/List.vue'
 import ListItem from './src/ListItem.vue'
 
 List.install = function (Vue) {

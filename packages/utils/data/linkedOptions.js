@@ -48,7 +48,7 @@ export default function linkedOptions (options) {
   const decoratedOptions = cloneDeep(options).map((option, index) => {
     return {
       ...option,
-      id: index
+      id: index + 1
     }
   })
   markAvailableOptionIds(decoratedOptions)

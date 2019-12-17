@@ -1,5 +1,4 @@
 @import './mixins/mixins.scss';
-@import './themes/vars.scss';
 
 @include themes-mixin {
   @include b(back-top) {
@@ -8,30 +7,28 @@
       position: fixed;
       right: 40px;
       bottom: 40px;
-      border-radius: 20px;
-      width: 40px;
+      min-width: 40px;
       height: 40px;
-      overflow: hidden;
-      transition: box-shadow .3s $default-cubic-bezier;
       cursor: pointer;
-      svg {
-        pointer-events: none;
+    }
+    @include e(default-button) {
+      @include once {
+        transition: box-shadow .3s $default-cubic-bezier, fill .3s $default-cubic-bezier;;
+        border-radius: 20px;
+        height: 40px;
+        width: 40px;
+        svg {
+          pointer-events: none;
+        }
       }
-    }
-    box-shadow: map-get($--back-top-box-shadow, 'default');
-    @include e(button) {
-      transition: fill .3s $default-cubic-bezier;
       fill: $--back-top-button-fill;
-    }
-    &:hover {
-      box-shadow: map-get($--back-top-box-shadow, 'hover');
-      @include e(button) {
+      box-shadow: map-get($--back-top-box-shadow, 'default');
+      &:hover {
+        box-shadow: map-get($--back-top-box-shadow, 'hover');
         fill: $--back-top-button-fill-hover;
       }
-    }
-    &:active {
-      box-shadow: map-get($--back-top-box-shadow, 'active');
-      @include e(button) {
+      &:active {
+        box-shadow: map-get($--back-top-box-shadow, 'active');
         fill: $--back-top-button-fill-active;
       }
     }

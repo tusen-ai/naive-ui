@@ -1,60 +1,59 @@
 @import './mixins/mixins.scss';
 
+@mixin result-status-mixin ($status){
+  @include e($status + '-status') {
+    @include b(result-icon) {
+      @include b(icon) {
+        fill: map-get($--result-icon-fill, $status);
+      }
+    }
+  }
+}
+
 @include themes-mixin {
   @include b(result) {
-    font-size: 14px;
-    color: $--n-secondary-text-color;
-    transition: color .3s $default-cubic-bezier;
-    @include m(success-status) {
+    color: $--result-description-text-color;
+    @include result-status-mixin('success');
+    @include result-status-mixin('info');
+    @include result-status-mixin('warning');
+    @include result-status-mixin('error');
+    @include once {
+      font-size: 14px;
+      transition: color .3s $default-cubic-bezier;
       @include b(result-icon) {
-        fill: $--success-6;
+        display: flex;
+        justify-content: center;
+        @include e(status-image) {
+          width: 80px;
+          height: 80px;
+        }
       }
-    }
-    @include m(info-status) {
-      @include b(result-icon) {
-        fill: $--info-6;
+      @include b(result-content) {
+        margin-top: 24px;
       }
-    }
-    @include m(warning-status) {
-      @include b(result-icon) {
-        fill: $--warning-6;
-      }
-    }
-    @include m(error-status) {
-      @include b(result-icon) {
-        fill: $--error-6;
-      }
-    }
-    @include b(result-icon) {
-      transition: fill .3s $default-cubic-bezier;
-      display: flex;
-      justify-content: center;
-      @include e(status-image) {
-        width: 80px;
-        height: 80px;
+      @include b(result-footer) {
+        margin-top: 24px;
+        text-align: center;
       }
     }
     @include b(result-header) {
       @include e(title) {
-        margin-top: 16px;
-        font-size: 32px;
-        font-weight: 700;
-        color: $--n-text-color;
-        transition: color .3s $default-cubic-bezier;
-        text-align: center;
+        @include once {
+          margin-top: 16px;
+          font-size: 32px;
+          font-weight: 700;
+          transition: color .3s $default-cubic-bezier;
+          text-align: center;
+        }
+        color: $--result-header-text-color;
       }
-      @include e(description) {
-        margin-top: 4px;
-        text-align: center;
-        font-size: 14px;
+      @include once {
+        @include e(description) {
+          margin-top: 4px;
+          text-align: center;
+          font-size: 14px;
+        }
       }
-    }
-    @include b(result-content) {
-      margin-top: 24px;
-    }
-    @include b(result-footer) {
-      margin-top: 24px;
-      text-align: center;
     }
   }
 }

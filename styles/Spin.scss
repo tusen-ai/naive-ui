@@ -1,66 +1,69 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
-@include b(spin) {
-  display: inline-block;
-  @include fade-in-transition(spin);
-  @include m(in-small-size) {
-    width: 14px;
-    height: 14px;
-    @include b(base-loading-circular-path) {
-      stroke-width: 8!important;
+@include themes-mixin {
+  @include once {
+    @include b(spin) {
+      display: inline-block;
+      @include fade-in-transition(spin);
+      @include m(in-small-size) {
+        width: 14px;
+        height: 14px;
+        @include b(base-loading-circular-path) {
+          stroke-width: 8!important;
+        }
+      }
+      @include m(in-medium-size) {
+        width: 16px;
+        height: 16px;
+        @include b(base-loading-circular-path) {
+          stroke-width: 7!important;
+        }
+      }
+      @include m(in-large-size) {
+        width: 18px;
+        height: 18px;
+        @include b(base-loading-circular-path) {
+          stroke-width: 6!important;
+        }
+      }
+      @include m(small-size) {
+        width: 28px;
+        height: 28px;
+        @include b(base-loading-circular-path) {
+          stroke-width: 6!important;
+        }
+      }
+      @include m(medium-size) {
+        width: 34px;
+        height: 34px;
+        @include b(base-loading-circular-path) {
+          stroke-width: 5!important;
+        }
+      }
+      @include m(large-size) {
+        width: 40px;
+        height: 40px;
+        @include b(base-loading-circular-path) {
+          stroke-width: 4.25!important;
+        }
+      }
     }
-  }
-  @include m(in-medium-size) {
-    width: 16px;
-    height: 16px;
-    @include b(base-loading-circular-path) {
-      stroke-width: 7!important;
-    }
-  }
-  @include m(in-large-size) {
-    width: 18px;
-    height: 18px;
-    @include b(base-loading-circular-path) {
-      stroke-width: 6!important;
-    }
-  }
-  @include m(small-size) {
-    width: 28px;
-    height: 28px;
-    @include b(base-loading-circular-path) {
-      stroke-width: 6!important;
-    }
-  }
-  @include m(medium-size) {
-    width: 34px;
-    height: 34px;
-    @include b(base-loading-circular-path) {
-      stroke-width: 5!important;
-    }
-  }
-  @include m(large-size) {
-    width: 40px;
-    height: 40px;
-    @include b(base-loading-circular-path) {
-      stroke-width: 4.25!important;
-    }
-  }
-}
-
-@include b(spin-container) {
-  position: relative;
-  @include b(spin) {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-  }
-  @include b(spin-content) {
-    opacity: 1;
-    transition: opacity .2s $default-cubic-bezier;
-    @include m(spinning) {
-      opacity: .5;
-    }
+    @include b(spin-container) {
+      position: relative;
+      @include b(spin) {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+      }
+      @include b(spin-content) {
+        opacity: 1;
+        transition: opacity .2s $default-cubic-bezier;
+        @include m(spinning) {
+          opacity: .5;
+        }
+      }
+    }    
   }
 }

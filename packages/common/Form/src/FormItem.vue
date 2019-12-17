@@ -15,13 +15,19 @@
       :class="`n-form-item-label`"
       :style="synthesizedLabelStyle"
     >
-      <template v-if="$slots.label"><slot name="label" /></template>
+      <template
+        v-if="$slots.label"
+      ><slot
+        name="label"
+      /></template>
       <template v-else>{{ label }}</template>
     </label>
     <div class="n-form-item-control">
       <div
         class="n-form-item-blank"
-        :class="validated ? `n-form-item-blank--error` : `n-form-item-blank--pass`"
+        :class="
+          validated ? `n-form-item-blank--error` : `n-form-item-blank--pass`
+        "
       >
         <slot />
       </div>
@@ -29,16 +35,16 @@
         <transition
           name="n-fade-down"
           @before-enter="handleBeforeEnter"
+          @before-leave="handleBeforeLeave"
           @after-leave="handleAfterLeave"
         >
-          <div
-            v-if="explains.length"
-            class="n-form-item-feedback"
-          >
+          <div v-if="explains.length" class="n-form-item-feedback">
             <span
               v-for="(explain, i) in explains"
               :key="i"
-            >{{ explain }}<br v-if="i + 1 !== explains.length"></span>
+            >{{ explain }}<br
+              v-if="i + 1 !== explains.length"
+            ></span>
           </div>
         </transition>
       </div>
@@ -54,11 +60,7 @@ import themeable from '../../../mixins/themeable'
 
 export default {
   name: 'NFormItem',
-  mixins: [
-    registerable('NForm', 'items', 'path'),
-    withapp,
-    themeable
-  ],
+  mixins: [registerable('NForm', 'items', 'path'), withapp, themeable],
   props: {
     label: {
       type: String,
@@ -115,7 +117,8 @@ export default {
     return {
       explains: [],
       validated: false,
-      hasFeedback: false
+      hasFeedback: false,
+      feedbackTransitionBlocked: true
     }
   },
   computed: {
@@ -154,7 +157,7 @@ export default {
     },
     synthesizedLabelPlacement () {
       if (this.labelPlacement) return this.labelPlacement
-      if (this.NForm && this.NForm.labelPlacement) return this.NForm.labelPlacement
+      if (this.NForm && this.NForm.labelPlacement) { return this.NForm.labelPlacement }
       return 'top'
     },
     synthesizedLabelAlign () {
@@ -177,7 +180,11 @@ export default {
           rules.push(this.rule)
         }
       }
-      if (this.NForm && this.NForm.rules && get(this.NForm.rules, this.synthesizedRulePath, null)) {
+      if (
+        this.NForm &&
+        this.NForm.rules &&
+        get(this.NForm.rules, this.synthesizedRulePath, null)
+      ) {
         const rule = get(this.NForm.rules, this.path)
         if (Array.isArray(rule)) {
           rules = rules.concat(rule)
@@ -186,6 +193,11 @@ export default {
         }
       }
       return rules
+    }
+  },
+  watch: {
+    path () {
+      this._initData()
     }
   },
   created () {
@@ -197,6 +209,26 @@ export default {
     this.addValidationEventListeners()
   },
   methods: {
+    _initData () {
+      this.explains = []
+      this.validated = false
+      this.hasFeedback = false
+      this.blockFeedbackTransition(this.$refs.feedback)
+    },
+    handleBeforeLeave (feedback) {
+      if (this.feedbackTransitionBlocked) {
+        if (feedback) {
+          feedback.style.transition = 'none'
+        }
+      } else {
+        if (feedback) {
+          feedback.style.transition = null
+        }
+      }
+    },
+    blockFeedbackTransition () {
+      this.feedbackTransitionBlocked = true
+    },
     handleContentBlur () {
       this._validate('blur')
     },
@@ -209,12 +241,9 @@ export default {
     handleContentInput () {
       this._validate('input')
     },
-    validate (trigger = null, afterValidate, options) {
+    validate (trigger, afterValidate, options) {
       return new Promise((resolve, reject) => {
-        this._validate(trigger, options).then(({
-          valid,
-          errors
-        }) => {
+        this._validate(trigger, options).then(({ valid, errors }) => {
           if (valid) {
             if (afterValidate) {
               afterValidate()
@@ -234,11 +263,17 @@ export default {
         })
       })
     },
-    _validate (trigger = null, options = {
-      suppressWarning: true
-    }) {
+    _validate (
+      trigger = null,
+      options = {
+        suppressWarning: true
+      }
+    ) {
       if (!this.path) {
-        throw new Error('[naive-ui/form-item/validate]: validate form-item without path')
+        console.warn(
+          '[naive-ui/form-item/validate]: validate form-item without path'
+        )
+        return
       }
       if (!options) {
         options = {}
@@ -248,13 +283,16 @@ export default {
       const rules = this.synthesizedRules
       const path = this.path
       const value = get(this.NForm.model, this.path, null)
-      const activeRules = (!trigger ? rules : rules.filter(rule => {
-        if (Array.isArray(rule.trigger)) {
-          return rule.trigger.includes(trigger)
-        } else {
-          return rule.trigger === trigger
-        }
-      })).map(rule => {
+      const activeRules = (!trigger
+        ? rules
+        : rules.filter(rule => {
+          if (Array.isArray(rule.trigger)) {
+            return rule.trigger.includes(trigger)
+          } else {
+            return rule.trigger === trigger
+          }
+        })
+      ).map(rule => {
         const originValidator = rule.validator
         if (typeof originValidator === 'function') {
           rule.validator = (...args) => {
@@ -304,10 +342,12 @@ export default {
       }
     },
     handleBeforeEnter () {
+      this.feedbackTransitionBlocked = false
       this.hasFeedback = true
     },
     handleAfterLeave () {
       this.hasFeedback = false
+      this.feedbackTransitionBlocked = false
     }
   }
 }

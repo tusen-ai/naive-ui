@@ -1,0 +1,38 @@
+@import './mixins/mixins.scss';
+
+@include b(log) {
+  font-family: 'FiraCode', monospace;
+  font-size: 14px;
+  background-color: rgba(0, 0, 0, .95);
+  color: rgba(255, 255, 255, .75);
+  border-radius: 6px;
+  width: 100%;
+  box-sizing: border-box;
+  @include b(scrollbar-content) {
+    overflow: hidden;
+  }
+  @include e(lines) {
+    padding: 0 8px;
+    margin: 0;
+    white-space: pre-wrap;
+  }
+  @include e(line) {
+    padding: 0 8px;
+    margin: 0;
+    @include m(padding) {
+      font-family: 'Lato';
+      border-radius: 6px;
+      background-color: rgba(255, 255, 255, .3);
+      margin: 8px;
+      width: calc(100% - 16px);
+      text-align: center;
+      padding: 4px 0;
+      &:first-child {
+        margin-top: 8px;
+      }
+      &:last-child {
+        margin-bottom: 8px;
+      }
+    }
+  }
+}

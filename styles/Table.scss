@@ -5,7 +5,7 @@
   @include b(table) {
     @include once {
       width: 100%;
-      border-radius: 12px;
+      border-radius: 6px;
       font-size: $table-font-size;
       overflow: hidden;
       padding-bottom: 8px;
@@ -34,6 +34,7 @@
           background-color: $--table-body-background-color;
           color: $--table-body-color;
           tr {
+            transition: background-color 0.3s;
             td {
               padding: 16px 6px 12px 19px;
               text-align: left;

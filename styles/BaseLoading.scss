@@ -38,7 +38,7 @@
         @include once {
           transition: stroke .3s $default-cubic-bezier;
           animation: n-base-loading-dash 1.5s ease-in-out infinite;
-          stroke-dasharray: 90,150;
+          stroke-dasharray: 90, 150;
           stroke-dashoffset: 0;
           stroke-width: 8;
           stroke-linecap: round;

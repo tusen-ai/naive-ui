@@ -1,9 +1,6 @@
 # Basic
-# Basic
 ```html
-<n-auto-complete :options="options" v-model="value"/>
-<br>
-{{ value }}
+<n-auto-complete :options="options" v-model="value" placeholder="Email" />
 ```
 ```js
 export default {
@@ -13,10 +10,13 @@ export default {
         '@gmail.com',
         '@163.com',
         '@qq.com'
-      ].map(suffix => ({
-        label: this.value + suffix,
-        value: this.value + suffix,
-      }))
+      ].map(suffix => {
+        const prefix = this.value.split('@')[0]
+        return {
+          label: prefix + suffix,
+          value: prefix + suffix,
+        }
+      })
     }
   },
   data () {

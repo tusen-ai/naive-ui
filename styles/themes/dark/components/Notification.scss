@@ -1,12 +1,16 @@
 @mixin setup-dark-notification {
-  $--notification-background-start-color: rgb(91, 197, 161) !global;
-  $--notification-background-end-color: rgba(116, 127, 157, 1) !global;
-  $--notification-text-color: #ffffff !global;
-  $--notification-cell_deactive-color: #a1d9c6 !global;
-  $--notification-cell__header-color: #ffffff !global;
-  $--notification-cell__content-color: #ffffff !global;
-  $--notification-cell__title-meta-color: rgba(255, 255, 255, 0.4) !global;
-  $--notification-cell__action-color: #00ffa9ff !global;
-  $--notification-cell__avator-background-color: #59c3b2ff !global;
-  $--notification-cell__avator-color: rgb(255, 255, 255) !global;
+  $--notification-avatar-fill: (
+    'default': $--n-secondary-text-color,
+    'success': $--success-6,
+    'info': $--info-6,
+    'warning': $--warning-6,
+    'error': $--error-6
+  ) !global;
+  $--notification-background-color: $--n-popover-color !global;
+  $--notification-text-color: $--n-secondary-text-color !global;
+  $--notification-close-fill: $--n-close-color !global;
+  $--notification-header-text-color: $--n-text-color !global;
+  $--notification-content-text-color: $--n-secondary-text-color !global;
+  $--notification-description-text-color: $--n-meta-text-color  !global;
+  $--notification-action-text-color: $--n-secondary-text-color !global;
 }

@@ -29,9 +29,23 @@ export default function calcPlacementTransform (placement, activatorRect, conten
     contentLeft = activatorRect.left - contentRect.width
     suggesetedTransfromOrigin = 'bottom right'
   } else if (placement === 'right-start') {
-    contentTop = activatorRect.top
-    contentLeft = activatorRect.left + activatorRect.width
-    suggesetedTransfromOrigin = 'top left'
+    console.log(activatorRect, contentRect)
+    const toWindowBottom = window.innerHeight - activatorRect.top - contentRect.height
+    const toWindowRight = window.innerWidth - activatorRect.right - contentRect.width
+    if (toWindowBottom < 0) {
+      contentBottom = window.innerHeight - activatorRect.bottom
+      suggesetedTransfromOrigin = 'bottom'
+    } else {
+      contentTop = activatorRect.top
+      suggesetedTransfromOrigin = 'top'
+    }
+    if (toWindowRight < 0) {
+      contentRight = window.innerWidth - activatorRect.left
+      suggesetedTransfromOrigin += ' right'
+    } else {
+      contentLeft = activatorRect.left + activatorRect.width
+      suggesetedTransfromOrigin += ' left'
+    }
   } else if (placement === 'right') {
     contentTop = activatorRect.top + activatorRect.height / 2 - contentRect.height / 2
     contentLeft = activatorRect.left + activatorRect.width

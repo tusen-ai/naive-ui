@@ -31,8 +31,8 @@ export default {
       return null
     },
     synthesizedThemeEnvironment () {
-      if (this.synthesizedTheme && this.NConfigProvider && this.NConfigProvider.themeEnvironment) {
-        return this.NConfigProvider.themeEnvironment[this.synthesizedTheme] || null
+      if (this.synthesizedTheme && this.NConfigProvider && this.NConfigProvider.inheritedThemeEnvironment) {
+        return this.NConfigProvider.inheritedThemeEnvironment[this.synthesizedTheme] || null
       }
     }
   }

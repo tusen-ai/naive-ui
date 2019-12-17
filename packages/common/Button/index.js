@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import Button from './src/main.vue'
+import Button from './src/Button.vue'
 import ButtonGroup from './src/ButtonGroup'
 
 Button.install = function (Vue) {

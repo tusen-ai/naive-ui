@@ -77,7 +77,7 @@ export default {
     mdRemove,
     mdAdd
   },
-  mixins: [ withapp, themeable, asformitem() ],
+  mixins: [withapp, themeable, asformitem()],
   inject: {
     NFormItem: {
       default: null
@@ -116,8 +116,7 @@ export default {
   computed: {
     safeStep () {
       const parsedNumber = parseNumber(this.step)
-      if (parsedNumber !== null) return parsedNumber === 0 ? DEFAULT_STEP : Math.abs(parsedNumber)
-      else return DEFAULT_STEP
+      if (parsedNumber !== null) { return parsedNumber === 0 ? DEFAULT_STEP : Math.abs(parsedNumber) } else return DEFAULT_STEP
     },
     safeMin () {
       const parsedNumber = parseNumber(this.min)
@@ -129,7 +128,11 @@ export default {
         if (this.value !== null) return this.validator(this.value - this.step)
         else return false
       } else {
-        return !(this.value !== null && this.safeMin !== null && this.value <= this.safeMin)
+        return !(
+          this.value !== null &&
+          this.safeMin !== null &&
+          this.value <= this.safeMin
+        )
       }
     },
     addable () {
@@ -137,7 +140,11 @@ export default {
         if (this.value !== null) return this.validator(this.value + this.step)
         else return false
       } else {
-        return !(this.value !== null && this.safeMax !== null && this.value >= this.safeMax)
+        return !(
+          this.value !== null &&
+          this.safeMax !== null &&
+          this.value >= this.safeMax
+        )
       }
     },
     safeMax () {
@@ -211,7 +218,8 @@ export default {
       }
       if (value === null) {
         return null
-      } if (this.validator) {
+      }
+      if (this.validator) {
         if (this.validator(value)) {
           return value
         } else {
@@ -219,7 +227,7 @@ export default {
         }
       } else {
         if (this.safeMin !== null && value < this.safeMin) value = this.safeMin
-        else if (this.safeMax !== null && value > this.safeMax) value = this.safeMax
+        else if (this.safeMax !== null && value > this.safeMax) { value = this.safeMax }
       }
       return value
     },
