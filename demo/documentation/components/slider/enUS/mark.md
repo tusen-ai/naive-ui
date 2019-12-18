@@ -29,9 +29,6 @@ export default {
 }
 ```
 ```css
-.n-slider {
-  margin-bottom: 8px;
-}
 .n-input-number {
   margin: 0 12px 8px 0;
 }

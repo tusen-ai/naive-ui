@@ -1,49 +1,45 @@
 <template>
   <div
     class="n-log"
+    :class="{
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+    }"
     :style="{
       lineHeight: lineHeight,
       height: styleHeight
     }"
     @wheel="handleWheel"
   >
-    <n-scrollbar ref="scrollbar" theme="dark" @scroll="handleScroll">
-      <pre
-        class="n-log__line n-log__line--padding"
-        :style="{
-          lineHeight: lineHeight,
-          height: paddingStyleHeight
-        }"
-      >{{ topLoading ? "Loading More" : 'Wheel Up to View More' }}</pre>
-      <pre class="n-log__lines">{{ processedLog }}</pre>
-      <!-- <pre v-for="(line, index) in synthesizedLines" :key="index" class="n-log__line">{{ line }}</pre> -->
-      <pre
-        class="n-log__line n-log__line--padding"
-        :style="{
-          lineHeight: lineHeight,
-          height: paddingStyleHeight
-        }"
-      >{{ bottomLoading ? "Loading More" : 'Wheel Down to View More' }}</pre>
+    <n-scrollbar ref="scrollbar" @scroll="handleScroll">
+      <n-log-line v-for="(line, index) in synthesizedLines" :key="index" :line="line" />
     </n-scrollbar>
+    <n-fade-in-height-expand-transition width>
+      <n-log-loader v-if="loading" />
+    </n-fade-in-height-expand-transition>
   </div>
 </template>
 
 <script>
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 import NScrollbar from '../../Scrollbar'
+import NLogLoader from './LogLoader'
+import NLogLine from './LogLine'
+import NFadeInHeightExpandTransition from '../../../transition/FadeInHeightExpandTransition'
 
 export default {
   name: 'NLog',
   components: {
-    NScrollbar
+    NScrollbar,
+    NLogLoader,
+    NLogLine,
+    NFadeInHeightExpandTransition
   },
+  mixins: [ withapp, themeable ],
   props: {
-    topLoading: {
+    loading: {
       type: Boolean,
-      default: true
-    },
-    bottomLoading: {
-      type: Boolean,
-      default: true
+      default: false
     },
     trim: {
       type: Boolean,
@@ -72,6 +68,10 @@ export default {
     offsetBottom: {
       type: Number,
       default: 0
+    },
+    hljs: {
+      type: Object,
+      default: null
     }
   },
   data () {
@@ -88,7 +88,6 @@ export default {
       return `${this.rows * this.lineHeight}em`
     },
     processedLog () {
-      console.log(this.log.trim())
       if (this.trim && this.log) return this.log.trim()
       else return this.log
     },
@@ -99,6 +98,9 @@ export default {
     }
   },
   methods: {
+    getHljs () {
+      return this.hljs || this.$naive.hljs
+    },
     handleScroll (e, container, content) {
       const containerHeight = container.offsetHeight
       const containerScrollTop = container.scrollTop

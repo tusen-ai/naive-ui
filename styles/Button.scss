@@ -46,6 +46,7 @@
         top: 50%;
         transform: translateY(-50%);
         display: block;
+        @include icon-switch-transition($top: 50%, $original-transform: translateY(-50%));
       }
       @include m(slot) {
         width: $icon-size;
@@ -54,6 +55,11 @@
         align-items: center;
         vertical-align: bottom;
         @include b(icon-slot) {
+          @include icon-switch-transition($top: 50%, $original-transform: translateY(-50%));
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
           display: block;
           line-height: $icon-size;
           height: $icon-size;

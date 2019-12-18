@@ -265,16 +265,16 @@ $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
   }
   &.#{$namespace}-#{$block}--transition-leave, &.#{$namespace}-#{$block}--transition-enter-to {
     opacity: 1; 
-    transform: scale(1) $original-transform;
+    transform: scale(0.99999) $original-transform;
   }
 }
 
 @mixin fade-in-transition($block: "fade-in", $enter-duration: .2s, $leave-duration: .2s) {
   &.#{$namespace}-#{$block}--transition-enter-active {
-    transition: opacity $enter-duration $default-cubic-bezier;
+    transition: all $enter-duration $default-cubic-bezier !important;
   }
   &.#{$namespace}-#{$block}--transition-leave-active {
-    transition: opacity $leave-duration $default-cubic-bezier;
+    transition: all $leave-duration $default-cubic-bezier !important;
   }
   &.#{$namespace}-#{$block}--transition-enter,
   &.#{$namespace}-#{$block}--transition-leave-to {
@@ -397,26 +397,30 @@ $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
 
 @mixin fade-in-width-expand-transition($block: "fade-in-width-expand", $duration: .2s, $delay: .1s) {
   &.#{$namespace}-#{$block}-leave-active {
-    transition: opacity $duration $default-cubic-bezier, max-width $duration $default-cubic-bezier $delay, margin $duration $default-cubic-bezier $delay;
+    transition: opacity $duration $default-cubic-bezier, max-width $duration $default-cubic-bezier $delay,
+      margin-left $duration $default-cubic-bezier $delay,
+      margin-right $duration $default-cubic-bezier $delay;
   }
   &.#{$namespace}-#{$block}-enter-active {
-    transition: opacity $duration $default-cubic-bezier $delay, max-width $duration $default-cubic-bezier,  margin $duration $default-cubic-bezier;
+    transition: opacity $duration $default-cubic-bezier $delay, max-width $duration $default-cubic-bezier,
+      margin-left $duration $default-cubic-bezier,
+      margin-right $duration $default-cubic-bezier;
   }
   &.#{$namespace}-#{$block}-enter-to {
     opacity: 1;
   }
   &.#{$namespace}-#{$block}-enter {
-    max-width: 0!important;
-    margin: 0!important;
-    opacity: 0;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    opacity: 0!important;
   }
   &.#{$namespace}-#{$block}-leave {
     opacity: 1;
   }
   &.#{$namespace}-#{$block}-leave-to {
-    max-width: 0!important;
-    opacity: 0!important;
-    margin: 0!important;
+    opacity: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 }
 
@@ -444,5 +448,25 @@ $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
     max-width: 0!important;
     opacity: 0!important;
     transform: translateY(60%);
+  }
+}
+
+@mixin icon-switch-transition ($original-transform: (), $left: 0, $top: 0) {
+  &.n-icon-switch-enter, &.n-icon-switch-leave-to {
+    /* make sure it apply to element */
+    transform: $original-transform scale(.75);
+    opacity: 0;
+  }
+  &.n-icon-switch-enter-to, &.n-icon-switch-leave {
+    transform: scale(0.9999) $original-transform;
+    opacity: 1;
+  }
+  &.n-icon-switch-leave-active, &.n-icon-switch-enter-active {
+    transform-origin: center;
+    position: absolute;
+    left: $left;
+    top: $top;
+    transition:
+      all .3s cubic-bezier(.4, 0, .2, 1) !important;
   }
 }
