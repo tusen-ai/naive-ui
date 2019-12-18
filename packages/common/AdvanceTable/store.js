@@ -2,8 +2,8 @@
  * @Author: Volankey@gmail.com
  * @Company: Tusimple
  * @Date: 2019-10-25 11:31:12
- * @LastEditors: Jiwen.bai
- * @LastEditTime: 2019-11-07 11:13:03
+ * @LastEditors  : Jiwen.bai
+ * @LastEditTime : 2019-12-18 17:46:19
  */
 let Vue = null
 export class Store {
@@ -35,11 +35,10 @@ function vuexInit () {
     Vue = _Vue
   }
   // store injection
-  if (options.store) {
-    this.$store =
-      typeof options.store === 'function' ? options.store() : options.store
-  } else if (options.parent && options.parent.$store) {
-    this.$store = options.parent.$store
+  if (options.parent && options.parent.$tableStore) {
+    this.$tableStore = options.parent.$tableStore
+  } else if (!this.$tableStore) {
+    this.$tableStore = new Store()
   }
 }
 export const storageMixin = {
