@@ -145,7 +145,7 @@
 import { noopFn } from '../../../utils/index'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
-import { Store, storageMixin } from '../store'
+import { storageMixin } from '../store'
 import BaseTable from '../baseTable/baseTable'
 
 const sortOrderMap = {
@@ -160,9 +160,6 @@ const sortOrderReverseMap = {
 }
 
 export default {
-  store () {
-    return new Store()
-  },
   name: 'NAdvancedTable',
   components: {
     // searchInput,
@@ -479,7 +476,7 @@ export default {
       this.checkBoxes = []
       this.disabledCheckBox = []
       this.currentPageAllSelect = false
-      this.$store.commit('selectedAllChecked', false)
+      this.$tableStore.commit('selectedAllChecked', false)
 
       this.computeScollBar()
     },
@@ -580,7 +577,7 @@ export default {
       })
     },
     onBodyScrolll (event) {
-      const currentEl = this.$store.state.currentTableEl
+      const currentEl = this.$tableStore.state.currentTableEl
       const scrollEls = [
         this.fixedLeftTBodyEl,
         this.mainTBodyEl,
@@ -721,7 +718,7 @@ export default {
         (this.currentPageSelectedLen > 0 &&
           this.currentPageSelectedLen === this.showingData.length) ||
         this.isCheckedBoxAllIndeterminate
-      this.$store.commit('selectedAllChecked', needChecked)
+      this.$tableStore.commit('selectedAllChecked', needChecked)
     },
     computePageDivideData (data) {
       if (this.pagination && this.pagination.limit && !this.pagination.custom) {
@@ -767,7 +764,7 @@ export default {
     },
     onAllCheckboxesClick () {
       this.showingData.forEach(item => {
-        this.checkBoxes[item._index] = this.$store.state.selectedAllChecked
+        this.checkBoxes[item._index] = this.$tableStore.state.selectedAllChecked
       })
       this.checkBoxes = [].concat(this.checkBoxes)
     },

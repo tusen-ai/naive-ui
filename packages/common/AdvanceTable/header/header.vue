@@ -17,7 +17,7 @@
         v-for="(column, i) in columns"
         :key="i"
         :style="computeCustomWidthStl(column)"
-      >
+      />
 
       <!-- <col v-if="scrollBarWidth" :width="scrollBarWidth" > -->
     </colgroup>
@@ -34,7 +34,7 @@
             <!-- 当前页全选 -->
             <n-checkbox
               v-if="column.type === 'selection'"
-              :checked="$store.state.selectedAllChecked"
+              :checked="$tableStore.state.selectedAllChecked"
               :indeterminate="isCheckedBoxAllIndeterminate"
               @change="selectedAllCheckedChange"
               @click.native="onAllCheckboxesClick"
@@ -238,7 +238,7 @@ export default {
       this.$emit('on-checkbox-all', this.currentPageAllSelect)
     },
     selectedAllCheckedChange (v) {
-      this.$store.commit('selectedAllChecked', v)
+      this.$tableStore.commit('selectedAllChecked', v)
     },
     onFilter (value, column) {
       this.$emit('on-filter', value, column)
