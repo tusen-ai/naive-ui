@@ -7,7 +7,6 @@ Before you use highlight, see Note section of the page to make sure you won't mi
   @require-top="handlerequireTop"
   @require-bottom="handlerequireBottom"
   :loading="loading"
-  highlight
   language="naive-log"
   trim
 />

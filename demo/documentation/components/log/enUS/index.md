@@ -26,6 +26,7 @@ NaiveUI.setHljs(hljs)
 ```demo
 size
 event
+scroll
 highlight
 loading
 ```

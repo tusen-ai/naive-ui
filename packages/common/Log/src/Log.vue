@@ -66,10 +66,6 @@ export default {
       type: Number,
       default: 1.25
     },
-    highlight: {
-      type: Boolean,
-      default: false
-    },
     language: {
       type: String,
       default: null
@@ -94,10 +90,14 @@ export default {
   data () {
     return {
       memorizedScrollTop: 0,
+      dismissEvent: false,
       memorizedScrollBottom: null
     }
   },
   computed: {
+    highlight () {
+      return this.language !== null
+    },
     styleHeight () {
       const lineHeight = Math.floor(this.fontSize * this.lineHeight)
       return `calc(${this.rows * lineHeight}px)`
@@ -112,6 +112,12 @@ export default {
       return this.hljs || this.$naive.hljs
     },
     handleScroll (e, container, content) {
+      if (this.dismissEvent) {
+        this.$nextTick().then(() => {
+          this.dismissEvent = false
+        })
+        return
+      }
       const containerHeight = container.offsetHeight
       const containerScrollTop = container.scrollTop
       const contentHeight = content.offsetHeight
@@ -127,6 +133,12 @@ export default {
       }
     },
     handleWheel (e) {
+      if (this.dismissEvent) {
+        this.$nextTick().then(() => {
+          this.dismissEvent = false
+        })
+        return
+      }
       if (this.$refs.scrollbar && this.$refs.scrollbar.$refs.scrollContainer) {
         const container = this.$refs.scrollbar.$refs.scrollContainer
         const containerHeight = container.offsetHeight
@@ -140,6 +152,22 @@ export default {
           if (scrollTop === 0 && deltaY < 0) this.$emit('require-more', 'top')
           if (scrollBottom === 0 && deltaY > 0) this.$emit('require-more', 'bottom')
         }
+      }
+    },
+    scrollToTop (dismissEvent = false) {
+      this.scrollTo(dismissEvent, 'top')
+    },
+    scrollToBottom (dismissEvent = false) {
+      this.scrollTo(dismissEvent, 'bottom')
+    },
+    scrollTo (dismissEvent = false, to) {
+      if (dismissEvent) {
+        this.dismissEvent = true
+      }
+      if (to === 'bottom') {
+        this.$refs.scrollbar.scrollToBottom()
+      } else {
+        this.$refs.scrollbar.scrollToTop()
       }
     }
   }
