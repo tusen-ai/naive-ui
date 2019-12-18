@@ -1,19 +1,10 @@
 # Loading
 ```html
 <n-switch v-model="loading" />
-<n-card title="Random String Logs" :segmented="{
-  header: 'soft',
-  content: 'hard'
-}">
-  <n-log
-    style="margin-top: -12px; margin-bottom: -12px;"
-    :loading="loading"
-    :log="log"
-  />
-  <template v-slot:action>
-    Loading?
-  </template>
-</n-card>
+<n-log
+  :loading="loading"
+  :log="log"
+/>
 ```
 
 ```js

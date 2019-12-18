@@ -1,5 +1,5 @@
 <template>
-  <pre class="n-log__line" />
+  <pre class="n-log__line">{{ highlight ? null : line }}</pre>
 </template>
 
 <script>
@@ -8,23 +8,52 @@ export default {
     line: {
       type: String,
       default: null
+    }
+  },
+  inject: {
+    NLog: {
+      default: null
+    }
+  },
+  computed: {
+    highlight () {
+      return this.NLog.highlight
     },
-    language: {
-      type: String,
-      default: 'javascript'
+    language () {
+      return this.NLog.language
+    },
+    trim () {
+      return this.NLog.trim
+    },
+    trimedLine () {
+      if (this.trim) return (this.line || '').trim()
+      else return this.line
     }
   },
   watch: {
     line (value) {
-      this.$el.innerHTML = this.getHljs().highlight(this.language, value).value
+      this.setInnerHTML()
     }
   },
   mounted () {
-    this.$el.innerHTML = this.getHljs().highlight(this.language, this.line).value
+    this.setInnerHTML()
   },
   methods: {
+    setInnerHTML () {
+      if (this.highlight) {
+        this.$el.innerHTML = this.generateCodeHTML(this.language, this.trimedLine, false).content
+      }
+    },
     getHljs () {
       return this.hljs || this.$naive.hljs
+    },
+    generateCodeHTML (language, code, trim) {
+      const languageValid = !!(language && this.getHljs().getLanguage(language))
+      if (trim) code = code.trim()
+      return {
+        valid: languageValid,
+        content: this.getHljs().highlight(language, code).value
+      }
     }
   }
 }

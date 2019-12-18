@@ -1,5 +1,13 @@
 @import "./mixins/mixins.scss";
 
+@include themes-mixin {
+  @include b(code) {
+    [class^=hljs] {
+      color: $--n-secondary-text-color;
+    }
+  }
+}
+
 @include b(code) {
   margin: 0;
   font-size: 14px;
@@ -12,7 +20,6 @@
       display: block;
       overflow-x: auto;
       padding: 0.5em;
-      color: #383a42;
       background: #fafafa;
     }
   

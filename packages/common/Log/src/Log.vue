@@ -1,6 +1,6 @@
 <template>
   <div
-    class="n-log"
+    class="n-log n-code"
     :class="{
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
@@ -35,6 +35,11 @@ export default {
     NLogLine,
     NFadeInHeightExpandTransition
   },
+  provide () {
+    return {
+      NLog: this
+    }
+  },
   mixins: [ withapp, themeable ],
   props: {
     loading: {
@@ -49,6 +54,10 @@ export default {
       type: String,
       default: null
     },
+    fontSize: {
+      type: Number,
+      default: 14
+    },
     lines: {
       type: Array,
       default: () => []
@@ -57,9 +66,13 @@ export default {
       type: Number,
       default: 1.25
     },
+    language: {
+      type: String,
+      default: null
+    },
     rows: {
       type: Number,
-      default: 20
+      default: 15
     },
     offsetTop: {
       type: Number,
@@ -77,22 +90,19 @@ export default {
   data () {
     return {
       memorizedScrollTop: 0,
+      dismissEvent: false,
       memorizedScrollBottom: null
     }
   },
   computed: {
-    paddingStyleHeight () {
-      return `${this.lineHeight}em`
+    highlight () {
+      return this.language !== null
     },
     styleHeight () {
-      return `${this.rows * this.lineHeight}em`
-    },
-    processedLog () {
-      if (this.trim && this.log) return this.log.trim()
-      else return this.log
+      const lineHeight = Math.floor(this.fontSize * this.lineHeight)
+      return `calc(${this.rows * lineHeight}px)`
     },
     synthesizedLines () {
-      if (this.lines.length) return this.lines
       if (!this.log) return []
       return this.log.split('\n')
     }
@@ -102,15 +112,33 @@ export default {
       return this.hljs || this.$naive.hljs
     },
     handleScroll (e, container, content) {
+      if (this.dismissEvent) {
+        this.$nextTick().then(() => {
+          this.dismissEvent = false
+        })
+        return
+      }
       const containerHeight = container.offsetHeight
       const containerScrollTop = container.scrollTop
       const contentHeight = content.offsetHeight
       const scrollTop = containerScrollTop
       const scrollBottom = contentHeight - containerScrollTop - containerHeight
-      if (scrollTop <= this.offsetTop) this.$emit('reach-top')
-      if (scrollBottom <= this.offsetBottom) this.$emit('reach-bottom')
+      if (scrollTop <= this.offsetTop) {
+        this.$emit('require-more', 'top')
+        this.$emit('reach-top')
+      }
+      if (scrollBottom <= this.offsetBottom) {
+        this.$emit('require-more', 'bottom')
+        this.$emit('reach-bottom')
+      }
     },
     handleWheel (e) {
+      if (this.dismissEvent) {
+        this.$nextTick().then(() => {
+          this.dismissEvent = false
+        })
+        return
+      }
       if (this.$refs.scrollbar && this.$refs.scrollbar.$refs.scrollContainer) {
         const container = this.$refs.scrollbar.$refs.scrollContainer
         const containerHeight = container.offsetHeight
@@ -121,9 +149,25 @@ export default {
           const scrollTop = containerScrollTop
           const scrollBottom = contentHeight - containerScrollTop - containerHeight
           const deltaY = e.deltaY
-          if (scrollTop === 0 && deltaY < 0) this.$emit('reach-top')
-          if (scrollBottom === 0 && deltaY > 0) this.$emit('reach-bottom')
+          if (scrollTop === 0 && deltaY < 0) this.$emit('require-more', 'top')
+          if (scrollBottom === 0 && deltaY > 0) this.$emit('require-more', 'bottom')
         }
+      }
+    },
+    scrollToTop (dismissEvent = false) {
+      this.scrollTo(dismissEvent, 'top')
+    },
+    scrollToBottom (dismissEvent = false) {
+      this.scrollTo(dismissEvent, 'bottom')
+    },
+    scrollTo (dismissEvent = false, to) {
+      if (dismissEvent) {
+        this.dismissEvent = true
+      }
+      if (to === 'bottom') {
+        this.$refs.scrollbar.scrollToBottom()
+      } else {
+        this.$refs.scrollbar.scrollToTop()
       }
     }
   }
