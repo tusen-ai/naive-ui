@@ -106,6 +106,14 @@ import cpp from 'highlight.js/lib/languages/cpp'
 hljs.registerLanguage('javascript', javascript)
 hljs.registerLanguage('python', python)
 hljs.registerLanguage('cpp', cpp)
+hljs.registerLanguage('naive-log', () => ({
+  contains: [
+    {
+      className: 'number',
+      begin: /\d+/
+    }
+  ]
+}))
 
 Vue.use(VueI18n)
 Vue.use(VueRouter)

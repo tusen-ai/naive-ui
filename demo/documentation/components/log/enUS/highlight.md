@@ -1,21 +1,16 @@
-# Basic
+# Highlight
+Before you use highlight, see Note section of the page to make sure you won't miss messages that are important to make it work.
+
 ```html
-<n-card title="Random String Logs" :segmented="{
-  header: 'soft',
-  content: 'hard'
-}">
-  <n-log
-    style="margin-top: -12px; margin-bottom: -12px;"
-    :log="log"
-    @reach-top="handleReachTop"
-    @reach-bottom="handleReachBottom"
-    :loading="loading"
-    trim
-  />
-  <template v-slot:action>
-    <n-button @click="clear">Clear</n-button>
-  </template>
-</n-card>
+<n-log
+  :log="log"
+  @require-top="handlerequireTop"
+  @require-bottom="handlerequireBottom"
+  :loading="loading"
+  highlight
+  language="naive-log"
+  trim
+/>
 ```
 
 ```js
@@ -38,7 +33,7 @@ export default {
     clear () {
       this.log = ''
     },
-    handleReachTop () {
+    handlerequireTop () {
       if (this.loading) return
       this.loading = true
       setTimeout(() => {
@@ -46,7 +41,7 @@ export default {
         this.loading = false
       }, 1000)
     },
-    handleReachBottom () {
+    handlerequireBottom () {
       if (this.loading) return
       this.loading = true
       setTimeout(() => {
