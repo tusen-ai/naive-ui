@@ -1,5 +1,5 @@
-@import './mixins/mixins.scss';
-@import './themes/vars.scss';
+@import "./mixins/mixins.scss";
+@import "./themes/vars.scss";
 
 @include themes-mixin {
   @include b(advance-table--col-border) {
@@ -21,15 +21,121 @@
     }
   }
   @include b(advance-table) {
+    .n-advance-table__fixed {
+      display: inline-block;
+      position: absolute;
+      z-index: 100;
+      overflow: hidden;
+      top: 0px;
+      // box-shadow: 10px 0 16px 3px rgba(0, 0, 0, 0.2);
+      .n-table.n-advance-table__body {
+        width: auto;
+        box-shadow: none;
+        overflow-y: auto;
+        border-radius: 0;
+      }
+      .n-advance-table__base-table-wrapper {
+        overflow: unset;
+      }
+      table {
+        width: auto;
+      }
+    }
+    .n-advance-table__td--fixed {
+      visibility: hidden;
+    }
+    @include e(fixed) {
+      @include m(left) {
+        border-right: $--table-td-border-right;
+      }
+    }
+
+    @include e(loading) {
+      background-color: $--table-loading-background;
+    }
     @include once {
+      @include e(loading) {
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        top: 0;
+        background-color: $--table-loading-background;
+        z-index: 200;
+      }
+      @include e(fixed) {
+        @include m(left) {
+          margin-right: -5px;
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+          @include e(header) {
+            border-radius: 0;
+            margin-right: -8px;
+            overflow: hidden;
+            margin-bottom: 0;
+          }
+        }
+        @include m(right) {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+          // border-left: $--table-td-border-right;
+
+          right: 0;
+          top: 0;
+          @include e(header) {
+            border-radius: 0;
+          }
+        }
+        @include m(active) {
+          transition: box-shadow 0.2s;
+          @include m(right) {
+            border-left: none !important;
+            // box-shadow: inset -15px 0px 10px -15px rgba(0, 0, 0, 0.2);
+            box-shadow: -10px -9px 16px -5px rgba(0, 0, 0, 0.2);
+          }
+          @include m(left) {
+            border-right: none !important;
+            // box-shadow: 10px 0 16px -5px rgba(0, 0, 0, 0.2);
+            box-shadow: 10px -9px 16px -5px rgba(0, 0, 0, 0.2);
+          }
+        }
+      }
+      @include e(base-table-wrapper) {
+        overflow: auto;
+        &::-webkit-scrollbar-thumb {
+          border-radius: 2.5px;
+        }
+        &::-webkit-scrollbar {
+          width: 8px;
+        }
+        &::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        &::-webkit-scrollbar-thumb {
+          border-radius: 2.5px;
+        }
+        &::-webkit-scrollbar-corner {
+          background: transparent;
+        }
+        &::-webkit-scrollbar:horizontal {
+          height: 8px;
+        }
+      }
+      @include b(table) {
+        overflow-y: auto;
+        padding-bottom: 0;
+        box-shadow: none;
+      }
       @include e(wrapper) {
         width: 100%;
       }
       @include e(tbody) {
         overflow: hidden;
-        border-radius: 12px;
+        border-radius: 6px;
       }
       @include e(td-text) {
+        span {
+          cursor: text;
+        }
         &-center {
           text-align: center;
         }
@@ -43,18 +149,14 @@
           text-overflow: ellipsis;
           overflow: hidden;
           white-space: nowrap;
-          & > * {
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-          }
         }
       }
       @include e(no-data-tip) {
-        padding: 5px;
         text-align: center;
         width: 100%;
-        display: table-cell;
+        position: absolute;
+        bottom: 8px;
+        z-index: 300;
       }
       @include e(pagination) {
         margin-top: 27px;
@@ -77,9 +179,12 @@
           word-wrap: break-word;
           word-break: break-all;
           table-layout: fixed;
+          tbody tr:hover {
+            background-color: transparent;
+          }
         }
         &::-webkit-scrollbar {
-          width: 5px;
+          width: 8px;
         }
         &::-webkit-scrollbar-track {
           background: transparent;
@@ -94,109 +199,80 @@
           background: transparent;
         }
         &::-webkit-scrollbar:horizontal {
-          height: 5px;
+          height: 8px;
         }
       }
     }
 
+    @include e(base-table-wrapper) {
+      &::-webkit-scrollbar-thumb {
+        background: $--table-scrollbar-color;
+      }
+    }
     @include e(tbody) {
       box-shadow: $--table-box-shadow;
       border: $--table-border;
+      position: relative;
     }
     @include b(table) {
       &::-webkit-scrollbar-thumb {
         border-radius: 2.5px;
         background: $--table-scrollbar-color;
       }
+      @include m(scroll-smooth) {
+        scroll-behavior: smooth;
+        color: red;
+      }
+
+      tr.n-table__tr--hover {
+        background-color: $--table-row-hover;
+      }
     }
     @include e(header) {
+      overflow: scroll;
+      margin-bottom: -8px;
       background-color: $--table-header-background-color;
       i {
         fill: $--table-header-icon-color;
       }
+      th {
+        box-sizing: border-box;
+      }
+    }
+    @include m(no-data) {
+      @include e(fixed) {
+        box-shadow: none;
+        border: none;
+        overflow: visible;
+        @include m(active) {
+          @include m(right) {
+            @include e(header) {
+              box-shadow: -10px 0 16px -5px rgba(0, 0, 0, 0.2);
+            }
+          }
+          @include m(left) {
+            @include e(header) {
+              box-shadow: 10px 0 16px -5px rgba(0, 0, 0, 0.2);
+              th:last-of-type {
+                border: none;
+              }
+            }
+          }
+        }
+        @include m(left) {
+          thead {
+            th {
+              border-top-right-radius: 0;
+              border-right: $--table-td-border-right;
+            }
+          }
+        }
+      }
+      table {
+        td {
+          border: none;
+        }
+      }
     }
   }
 }
-
-// @include b(advance-table){
-//   @include e(wrapper){
-//     width: 100%;
-//   }
-//   @include e(tbody){
-//     overflow: hidden;
-//     border-radius: 12px;
-//     box-shadow: 0 3px 20px 6px rgba(0, 0, 0, 0.2);
-//   }
-//   @include e(td-text){
-//     &-center{
-//       text-align: center;
-//     }
-//     &-left{
-//       text-align: left;
-//     }
-//     &-right{
-//       text-align: right;
-//     }
-//     @include m(ellipsis){
-//       text-overflow: ellipsis;
-//       overflow: hidden;
-//       white-space: nowrap;
-//       &>*{
-//         text-overflow: ellipsis;
-//         overflow: hidden;
-//         white-space: nowrap;
-//       }
-//     }
-//   }
-//   @include e(no-data-tip){
-//     padding: 5px;
-//     text-align: center;
-//     width: 100%;
-//     display: table-cell;
-//   }
-//   @include e(pagination){
-//     margin-top: 27px;
-//     display: flex;
-//     justify-content: flex-end;
-//   }
-//   @include e(operation){
-//     display: flex;
-//     justify-content:space-between;
-//     &--right,&--left{
-//       display: flex;
-//     }
-
-//   }
-
-//   @include b(table) {
-//     // background-color: #2b3147;
-//     table {
-//       word-wrap: break-word;
-//       word-break: break-all;
-//       table-layout: fixed;
-//       // width: auto;
-//     }
-//     &::-webkit-scrollbar {
-//       width: 5px;
-//     }
-//     &::-webkit-scrollbar-track {
-//       background: transparent;
-//     }
-//     &::-webkit-scrollbar-thumb {
-//       background: rgba(255, 255, 255, 0.2);
-//       border-radius: 2.5px;
-//     }
-//     &::-webkit-scrollbar-thumb:hover {
-//       background: rgba(255, 255, 255, 0.3);
-//     }
-//     &::-webkit-scrollbar-corner {
-//       background: transparent;
-//     }
-//     &::-webkit-scrollbar:horizontal {
-//       height: 5px;
-//     }
-//     table thead tr th:last-of-type {
-//       padding-left: 32px;
-//     }
-//   }
-// }

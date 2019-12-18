@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "0.5.28",
+  "version": "0.6.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -45,8 +45,9 @@
     "css-loader": "^2.1.1",
     "emoji-regex": "^8.0.0",
     "emoji-unicode": "^1.0.10",
-    "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.2.2",
+    "eslint": "^6.6.0",
+    "babel-eslint": "^10.0.3",
+    "eslint-plugin-vue": "^5.0.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^3.0.1",
     "glob": "^7.1.5",
@@ -96,7 +97,7 @@
     "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
     "@vue/babel-preset-jsx": "^1.0.0",
     "async-validator": "^1.11.5",
-    "date-fns": "^2.5.1",
+    "date-fns": "^2.6.0",
     "ionicons": "^4.5.8",
     "masonry-layout": "^4.2.2",
     "node-sass": "^4.12.0",

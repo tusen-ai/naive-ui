@@ -26,7 +26,7 @@
       <div
         v-if="(hasIcon || loading) && !iconOnRight"
         class="n-button__icon"
-        :class="{'n-button__icon--slot': $slots.icon }"
+        :class="{ 'n-button__icon--slot': $slots.icon }"
       >
         <n-icon-switch-transition>
           <n-spin
@@ -110,11 +110,7 @@ export default {
     NIconSwitchTransition,
     NFadeInHeightExpandTransition
   },
-  mixins: [
-    withapp,
-    themeable,
-    hollowoutable
-  ],
+  mixins: [withapp, themeable, hollowoutable],
   props: {
     text: {
       type: Boolean,
@@ -156,7 +152,15 @@ export default {
     },
     type: {
       validator (value) {
-        return ['default', 'primary', 'link', 'info', 'success', 'warning', 'error'].includes(value)
+        return [
+          'default',
+          'primary',
+          'link',
+          'info',
+          'success',
+          'warning',
+          'error'
+        ].includes(value)
       },
       default: 'default'
     },
@@ -183,13 +187,21 @@ export default {
       return this.circle || !this.$slots.default
     },
     avoidHollowOut () {
-      return this.ghost || !['primary', 'link', 'info', 'success', 'warning', 'error'].includes(this.type)
+      return (
+        this.ghost ||
+        !['primary', 'link', 'info', 'success', 'warning', 'error'].includes(
+          this.type
+        )
+      )
     },
     simulateHollowOut () {
       if (this.ghost) return false
       if (this.text) return false
-      if (['primary', 'link', 'info', 'success', 'warning', 'error'].includes(this.type)) return true
-      else return false
+      if (
+        ['primary', 'link', 'info', 'success', 'warning', 'error'].includes(
+          this.type
+        )
+      ) { return true } else return false
     },
     synthesizedFocusable () {
       return this.focusable && !this.disabled
@@ -203,9 +215,13 @@ export default {
   },
   watch: {
     type (value) {
-      if (['primary', 'link', 'info', 'success', 'warning', 'error'].includes(value)) {
+      if (
+        ['primary', 'link', 'info', 'success', 'warning', 'error'].includes(
+          value
+        )
+      ) {
         if (!this.cssNode) {
-
+          // TODO: something
         }
       }
     }

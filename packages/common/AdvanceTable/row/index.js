@@ -5,14 +5,31 @@ export default {
     render: Function,
     row: Object,
     index: Number,
-    keyName: String
+    keyName: [String, Number],
+    column: Object,
+    title: String
   },
   render: (h, ctx) => {
-    const params = ctx.props.row
+    const params = ctx.props.row || {}
 
-    const { keyName, render } = ctx.props
+    const { keyName, render, index, column, title } = ctx.props
     if (render) {
-      return render(h, params)
-    } else return h('div', [params.row[keyName]])
+      return render(h, params, index)
+    } else {
+      if (title) {
+        params.row = {}
+        params.row[keyName] = title
+      }
+
+      return h(
+        'span',
+        {
+          domProps: {
+            title: column.ellipsis ? params.row[keyName] : ''
+          }
+        },
+        [params.row[keyName]]
+      )
+    }
   }
 }
