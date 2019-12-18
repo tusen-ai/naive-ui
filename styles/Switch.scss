@@ -17,7 +17,7 @@
         width: 30px;
         border-radius: 7px;
         margin: 3px;
-        transition: background-color .2s $default-cubic-bezier;
+        transition: background-color .3s $default-cubic-bezier;
         &::before, &::after {
           box-sizing: border-box;
           cursor: inherit;
@@ -29,7 +29,8 @@
           border-radius: 10px;
           top: -3px;
           left: -3px;
-          // transition: left .2s $default-cubic-bezier, opacity .2s $default-cubic-bezier, max-width .2s $default-cubic-bezier;
+          background-size: 800% 800%;
+          transition: left .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier, max-width .3s $default-cubic-bezier, background-position .3s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier;
         }
         &::before {
           opacity: 1;
@@ -60,10 +61,10 @@
       }
       &::before {
         box-shadow: $--switch-switcher-box-shadow;
-        transition: $--switch-switcher-transition;
+        background-position: $--switch-background-position;
       }
       &::after {
-        transition: $--switch-switcher-transition;
+        background-position: $--switch-background-position;
       }
       background-color: map-get($map: $--switch-rail-background-color, $key: 'inactive');
       &::before {
