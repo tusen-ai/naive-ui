@@ -134,6 +134,7 @@ $--steps-indicator-icon-size: (
         @include b(step-indicator-slot) {
           position: relative;
           @include e(index) {
+            @include icon-switch-transition();
             display: inline-block;
             text-align: center;
             transition: color .3s $default-cubic-bezier;
@@ -141,6 +142,9 @@ $--steps-indicator-icon-size: (
             left: 0;
             top: 0;
             transform: scale(0.9999);
+          }
+          @include b(icon) {
+            @include icon-switch-transition();
           }
         }
       }

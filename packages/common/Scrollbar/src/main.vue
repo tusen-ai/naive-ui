@@ -25,6 +25,7 @@
       </div>
     </div>
     <div
+      ref="verticalRail"
       class="n-scrollbar-rail n-scrollbar-rail--vertical"
       :style="{width: scrollbarSize}"
     >
@@ -45,6 +46,7 @@
       </transition>
     </div>
     <div
+      ref="horizontalRail"
       class="n-scrollbar-rail n-scrollbar-rail--horizontal"
       :style="{height: scrollbarSize}"
     >
@@ -95,6 +97,8 @@ export default {
       contentWidth: null,
       containerHeight: null,
       containerWidth: null,
+      verticalRailHeight: null,
+      horizontalRailWidth: null,
       containerScrollTop: null,
       containerScrollLeft: null,
       horizontalScrollbarVanishTimerId: null,
@@ -112,27 +116,27 @@ export default {
   },
   computed: {
     verticalScrollbarHeight () {
-      if (this.containerHeight === null || this.contentHeight === null) return 0
+      if (this.containerHeight === null || this.contentHeight === null || this.verticalRailHeight === null) return 0
       else {
-        return (this.containerHeight * this.containerHeight / this.contentHeight + this.width * 1.5)
+        return (this.verticalRailHeight * this.containerHeight / this.contentHeight + this.width * 1.5)
       }
     },
     verticalScrollbarHeightPx () {
       return this.verticalScrollbarHeight + 'px'
     },
     horizontalScrollbarWidth () {
-      if (this.containerWidth === null || this.contentWidth === null) return 0
+      if (this.containerWidth === null || this.contentWidth === null || this.horizontalRailWidth === null) return 0
       else {
-        return (this.containerWidth * this.containerWidth / this.contentWidth + this.width * 1.5)
+        return (this.horizontalRailWidth * this.containerWidth / this.contentWidth + this.width * 1.5)
       }
     },
     horizontalScrollbarWidthPx () {
       return this.horizontalScrollbarWidth + 'px'
     },
     verticalScrollbarTop () {
-      if (this.containerHeight === null || this.containerScrollTop === null || this.contentHeight === null) return 0
+      if (this.containerHeight === null || this.containerScrollTop === null || this.contentHeight === null || this.verticalRailHeight === null) return 0
       else {
-        return this.containerScrollTop / (this.contentHeight - this.containerHeight) * (this.containerHeight - this.verticalScrollbarHeight)
+        return this.containerScrollTop / (this.contentHeight - this.containerHeight) * (this.verticalRailHeight - this.verticalScrollbarHeight)
       }
     },
     verticalScrollbarTopPx () {
@@ -141,7 +145,7 @@ export default {
     horizontalScrollbarLeft () {
       if (this.containerWidth === null || this.containerScrollLeft === null || this.contentWidth === null) return 0
       else {
-        return this.containerScrollLeft / (this.contentWidth - this.containerWidth) * (this.containerWidth - this.horizontalScrollbarWidth)
+        return this.containerScrollLeft / (this.contentWidth - this.containerWidth) * (this.horizontalRailWidth - this.horizontalScrollbarWidth)
       }
     },
     horizontalScrollbarLeftPx () {
@@ -286,6 +290,12 @@ export default {
       if (this.$refs.scrollContainer) {
         this.containerHeight = this.$refs.scrollContainer.offsetHeight
         this.containerWidth = this.$refs.scrollContainer.offsetWidth
+      }
+      if (this.$refs.horizontalRail) {
+        this.horizontalRailWidth = this.$refs.horizontalRail.offsetWidth
+      }
+      if (this.$refs.verticalRail) {
+        this.verticalRailHeight = this.$refs.verticalRail.offsetHeight
       }
     },
     updateParameters () {

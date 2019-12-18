@@ -9,7 +9,7 @@
       <div
         class="n-step-indicator-slot"
       >
-        <n-base-icon-transition>
+        <n-icon-switch-transition>
           <div
             v-if="!(synthesizedStatus === 'finish' || synthesizedStatus === 'error')"
             key="index"
@@ -32,7 +32,7 @@
           >
             <md-close />
           </n-icon>
-        </n-base-icon-transition>
+        </n-icon-switch-transition>
       </div>
       <div v-if="vertical" class="n-step-splitor" />
     </div>
@@ -55,11 +55,11 @@
 
 <script>
 import NIcon from '../../Icon'
-import NBaseIconTransition from '../../../base/IconTransition'
 import mdClose from '../../../icons/md-close'
 import mdCheckmark from '../../../icons/md-checkmark'
 import themeable from '../../../mixins/themeable'
 import hollowoutable from '../../../mixins/hollowoutable'
+import NIconSwitchTransition from '../../../transition/IconSwitchTransition'
 
 export default {
   name: 'NStep',
@@ -72,7 +72,7 @@ export default {
     NIcon,
     mdCheckmark,
     mdClose,
-    NBaseIconTransition
+    NIconSwitchTransition
   },
   mixins: [ themeable, hollowoutable ],
   props: {

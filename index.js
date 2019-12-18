@@ -78,7 +78,7 @@ import NimbusConfirmCard from './packages/deprecated/ConfirmCard'
  */
 import Loader from './packages/base/Loading'
 import CancelMark from './packages/base/CancelMark'
-import IconTransition from './packages/base/IconTransition'
+import IconTransition from './packages/transition/IconSwitchTransition'
 
 const NaiveUI = {
   install,

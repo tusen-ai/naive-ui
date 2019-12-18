@@ -13,8 +13,7 @@
       'n-button--enter-pressed': enterPressed,
       'n-button--ghost': ghost,
       'n-button--text': text,
-      [`n-button--${iconPosition}-icon`]:
-        iconPosition && (hasIcon || loading) && !noTextContent,
+      [`n-button--${iconPosition}-icon`]: iconPosition && !noTextContent,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
     :tabindex="synthesizedFocusable ? 0 : -1"
@@ -23,28 +22,35 @@
     @keyup.enter="handleKeyUpEnter"
     @keydown.enter="handleKeyDownEnter"
   >
-    <transition name="n-fade-in-width-expand">
+    <n-fade-in-height-expand-transition width>
       <div
         v-if="(hasIcon || loading) && !iconOnRight"
         class="n-button__icon"
         :class="{ 'n-button__icon--slot': $slots.icon }"
       >
-        <n-spin
-          v-if="loading"
-          :stroke="simulateHollowOut ? ascendantBackgroundColor : null"
-          :stroke-width="4"
-        />
-        <n-icon
-          v-else
-          :style="{
-            fill: simulateHollowOut ? ascendantBackgroundColor : null
-          }"
-          class="n-icon-slot"
-        >
-          <slot name="icon" />
-        </n-icon>
+        <n-icon-switch-transition>
+          <n-spin
+            v-if="loading"
+            key="loading"
+            class="n-icon-slot"
+            :stroke="simulateHollowOut ? ascendantBackgroundColor : null"
+            :stroke-width="4"
+          />
+          <n-icon
+            v-else
+            key="icon"
+            :style="{
+              fill: simulateHollowOut ? ascendantBackgroundColor : null
+            }"
+            class="n-icon-slot"
+          >
+            <slot
+              name="icon"
+            />
+          </n-icon>
+        </n-icon-switch-transition>
       </div>
-    </transition>
+    </n-fade-in-height-expand-transition>
     <div
       v-if="!circle && $slots.default"
       class="n-button__content"
@@ -54,7 +60,7 @@
     >
       <slot />
     </div>
-    <transition name="n-fade-in-width-expand">
+    <n-fade-in-height-expand-transition width>
       <div
         v-if="(loading || hasIcon) && iconOnRight"
         class="n-button__icon"
@@ -62,35 +68,47 @@
           'n-button__icon--slot': $slots.icon
         }"
       >
-        <n-spin
-          v-if="loading"
-          :stroke="simulateHollowOut ? ascendantBackgroundColor : null"
-          :stroke-width="4"
-        />
-        <n-icon
-          v-else
-          class="n-icon-slot"
-          :style="{
-            fill: simulateHollowOut ? ascendantBackgroundColor : null
-          }"
-        >
-          <slot name="icon" />
-        </n-icon>
+        <n-icon-switch-transition>
+          <n-spin
+            v-if="loading"
+            key="loading"
+            :stroke="simulateHollowOut ? ascendantBackgroundColor : null"
+            :stroke-width="4"
+          />
+          <n-icon
+            v-else
+            key="icon"
+            class="n-icon-slot"
+            :style="{
+              fill: simulateHollowOut ? ascendantBackgroundColor : null
+            }"
+          >
+            <slot
+              name="icon"
+            />
+          </n-icon>
+        </n-icon-switch-transition>
       </div>
-    </transition>
+    </n-fade-in-height-expand-transition>
   </button>
 </template>
 
 <script>
 import NSpin from '../../Spin'
+import NFadeInHeightExpandTransition from '../../../transition/FadeInHeightExpandTransition'
 import hollowoutable from '../../../mixins/hollowoutable'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import NIcon from '../../Icon'
+import NIconSwitchTransition from '../../../transition/IconSwitchTransition'
 
 export default {
   name: 'NButton',
   components: {
-    NSpin
+    NSpin,
+    NIcon,
+    NIconSwitchTransition,
+    NFadeInHeightExpandTransition
   },
   mixins: [withapp, themeable, hollowoutable],
   props: {

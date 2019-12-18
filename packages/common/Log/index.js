@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import NLog from './src/main.vue'
+import NLog from './src/Log.vue'
 
 NLog.install = function (Vue) {
   Vue.component(NLog.name, NLog)
