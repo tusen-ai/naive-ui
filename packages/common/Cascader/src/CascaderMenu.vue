@@ -134,6 +134,10 @@ export default {
     onLoad: {
       type: Function,
       default: () => {}
+    },
+    filter: {
+      type: [String, Function],
+      default: null
     }
   },
   data () {
@@ -193,9 +197,21 @@ export default {
       const filteredSelectOptions = []
       const type = this.type
       traverseWithCallback(this.menuOptions, option => {
-        if (Array.isArray(option.path) && option.path.some(
-          label => ~label.indexOf(this.pattern)
-        )) {
+        let flag = false
+        if (this.filter && option.label) {
+          let path = option.path.map((item) => {
+            return {
+              label: item,
+              value: item
+            }
+          })
+          flag = this.filter(this.pattern, { label: option.label, value: option.value }, path)
+        } else {
+          flag = option.path.some(
+            label => ~label.indexOf(this.pattern)
+          )
+        }
+        if (Array.isArray(option.path) && flag) {
           if (type === 'multiple' || type === 'single') {
             // console.log()
             if (option.isLeaf) {

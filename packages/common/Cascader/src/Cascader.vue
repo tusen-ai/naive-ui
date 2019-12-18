@@ -62,6 +62,7 @@
             :enable-all-options="enableAllOptions"
             :pattern="pattern"
             :filterable="filterable"
+            :filter="filter"
             :expand-trigger="expandTrigger"
             :active-id.sync="activeId"
             :lazy="lazy"
@@ -163,6 +164,14 @@ export default {
     splitor: {
       type: String,
       default: ' / '
+    },
+    filter: {
+      type: [String, Function],
+      default: null
+    },
+    test: {
+      type: String,
+      default: null
     }
   },
   data () {
@@ -258,6 +267,9 @@ export default {
         this.updatePosition()
       })
     }
+  },
+  mounted () {
+    console.log('mounted', this.filter, this.test)
   },
   methods: {
     openMenu () {

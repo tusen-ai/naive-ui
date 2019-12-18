@@ -5,14 +5,12 @@
   type="date"
   :date-disabled = "dateDisabled"
 />
-{{timestamp1}}
 <n-date-picker
   v-model="timestamp2"
   type="datetime"
   :date-disabled = "dateDisabled"
   :timeDisabled= "timeDisabled"
 />
-{{timestamp2}}
 <n-date-picker
   v-model="timestamp3"
   type="daterange"
@@ -30,9 +28,9 @@ export default {
   data () {
     return {
       timestamp1: 1576339200000,
-      timestamp2: 1576339200000,
-      timestamp3: [1576339200000, 1576339200000],
-      timestamp4: [1576585320000,1576585320000],
+      timestamp2: null,
+      timestamp3: null,
+      timestamp4: null,
     }
   },
   methods: {
