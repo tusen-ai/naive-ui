@@ -93,6 +93,9 @@ base picker focus 问题
 Dropdown Submenu 定位问题
 还有那个... Modal + border 的问题，怎么解决
 
+## 2019.12.20
+Anchor Bug 复现 at typography
+
 ## TODO
 
 issue fix, add delay prop

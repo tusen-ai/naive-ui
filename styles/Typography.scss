@@ -125,6 +125,7 @@
     font-size: 14px;
     display: inline-block;
     transition: color .3s $default-cubic-bezier;
+    color: $--n-secondary-text-color;
     @include m(code) {
       transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
       white-space: nowrap;
@@ -146,6 +147,18 @@
     }
     @include m(underline) {
       text-decoration: underline;
+    }
+    @include m(info-type) {
+      color: $--info-6;
+    }
+    @include m(success-type) {
+      color: $--success-6;
+    }
+    @include m(warning-type) {
+      color: $--warning-6;
+    }
+    @include m(error-type) {
+      color: $--error-6;
     }
   }
   @include b(hr) {
