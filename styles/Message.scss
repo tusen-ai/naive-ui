@@ -6,7 +6,7 @@
     background-color: map-get($map: $--message-background-color, $key: $type);
     box-shadow: map-get($map: $--message-box-shadow, $key: $type);
     @include e(icon) {
-      path {
+      @include b(icon) {
         fill: $--message-icon-color;
       }
     }
@@ -63,7 +63,10 @@
         height: 40px;
         line-height: 40px;
         align-items: center;
-        i::before {
+        @include b(icon) {
+          svg {
+            @include icon-switch-transition();
+          }
           font-size: 20px;
         }
       }
