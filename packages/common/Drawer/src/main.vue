@@ -21,6 +21,9 @@
           <div
             v-if="active"
             class="n-drawer"
+            :style="{
+              width: styleWidth
+            }"
             :class="{
               [`n-${synthesizedTheme}-theme`]: synthesizedTheme
             }"
@@ -57,7 +60,7 @@ export default {
     },
     width: {
       type: Number,
-      default: null
+      default: 251
     },
     height: {
       type: Number,
@@ -68,6 +71,10 @@ export default {
         return ['top', 'right', 'bottom', 'left'].includes(placement)
       },
       default: 'right'
+    },
+    target: {
+      type: Function,
+      default: null
     },
     maskClosable: {
       type: Boolean,
@@ -82,6 +89,10 @@ export default {
   computed: {
     active () {
       return this.value
+    },
+    styleWidth () {
+      if (!this.width) return null
+      return this.width + 'px'
     }
   },
   watch: {

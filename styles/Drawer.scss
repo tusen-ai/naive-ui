@@ -3,7 +3,7 @@
 
 @include themes-mixin {
   @include b(drawer) {
-    @include slide-in-from-right-transition();
+    @include slide-in-from-right-transition($duration: .3s);
     padding: 16px 24px;
     position: absolute;
     top: 0;

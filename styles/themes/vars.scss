@@ -302,10 +302,10 @@ $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
 
 @mixin slide-in-from-right-transition($duration: .3s) {
   &.#{$namespace}-slide-in-from-right-leave-active {
-    transition: transform $duration cubic-bezier(.78, .14, .15, .86);
+    transition: transform $duration $default-cubic-bezier;
   }
   &.#{$namespace}-slide-in-from-right-enter-active {
-    transition: transform $duration cubic-bezier(.7, .3, .1, 1);
+    transition: transform $duration $default-cubic-bezier;
   }
   &.#{$namespace}-slide-in-from-right-enter-to {
     transform: translateX(0);
