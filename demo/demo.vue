@@ -127,6 +127,10 @@ export default {
             {
               name: 'Tag',
               path: `/${this.lang}/${this.theme}` + '/n-tag'
+            },
+            {
+              name: 'Typography',
+              path: `/${this.lang}/${this.theme}` + '/n-typography'
             }
           ]
         },

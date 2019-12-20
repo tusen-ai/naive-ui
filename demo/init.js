@@ -53,7 +53,7 @@ import anchor from './documentation/components/anchor'
 import popselect from './documentation/components/popselect'
 import configProvider from './documentation/components/configProvider'
 import table from './documentation/components/table'
-
+import typography from './documentation/components/typography'
 import transfer from './documentation/components/transfer'
 import spin from './documentation/components/spin'
 import drawer from './documentation/components/drawer'
@@ -231,6 +231,9 @@ const routes = [
       { path: '/n-element', component: element },
       { path: '/n-log', component: log },
       { path: '/n-code', component: code },
+      {
+        path: '/n-typography', component: typography
+      },
       {
         path: '/n-icon-transition-debug',
         component: iconTransitionDebug
