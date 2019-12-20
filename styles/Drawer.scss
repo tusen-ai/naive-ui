@@ -4,6 +4,7 @@
 @include themes-mixin {
   @include b(drawer) {
     @include slide-in-from-right-transition();
+    padding: 16px 24px;
     position: absolute;
     top: 0;
     bottom: 0;

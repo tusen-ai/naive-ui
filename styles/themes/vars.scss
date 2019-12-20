@@ -10,7 +10,6 @@ $small-height: 28px;
 $default-height: 34px;
 $medium-height: 34px;
 $large-height: 40px;
-$default-font-family: 'Lato';
 $main-color: #63E2B7;
 @function main-color-with-alpha($alpha) {
   @return rgba(99, 226, 183, $alpha);
@@ -39,7 +38,6 @@ $input-icon-color: rgba(255,255,255,0.2);
 /**
  * n-button
  */
-$button-font-family: $default-font-family;
 $button-border-radius: 6px;
 $button-font-size: (
   "tiny": 12px,

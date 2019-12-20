@@ -3,7 +3,7 @@
 @include themes-mixin {
   @include b(statistic) {
     @include once {
-      font-family: 'Lato';
+      font-family: $--n-font-family;
     }
     @include b(statistic-value) {
       @include once {

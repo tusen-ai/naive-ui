@@ -41,14 +41,14 @@
       color: $--n-secondary-text-color;
       background-color: $--n-dialog-color;
       line-height: 34px;
-      font-family: 'Lato';
+      font-family: $--n-font-family;
       white-space: nowrap;
       overflow: hidden;
       @include e(content) {
         display: inline-block;
         vertical-align: bottom;
         line-height: 34px;
-        font-family: 'Lato';
+        font-family: $--n-font-family;
         padding-left: 40px;
         padding-right: 20px;
         white-space: nowrap;

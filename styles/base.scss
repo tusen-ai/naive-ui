@@ -1,7 +1,9 @@
 @import './fonts/Lato.scss';
-@import './themes/vars.scss';
+@import './themes/commonVars.scss';
+@import './themes/light/index.scss';
 @import './Detachable.scss';
 
+@include setup-light-theme();
 
 html {
   -moz-osx-font-smoothing: grayscale;
@@ -18,18 +20,16 @@ html {
 
 body {
   margin: 0;
-  font-family: $default-font-family;
+  font-family: $--n-font-family;
   min-width: 1280px;
-  // background: $body-background-color;
-  // color: $--primary-text-color;
 }
 
 a {
-  color: $--primary-text-color;
+  color: $--primary-6;
 }
 
 input {
-  font-family: $default-font-family;
+  font-family: $--n-font-family;
   font-size: inherit;
 }
 
