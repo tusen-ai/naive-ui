@@ -1,0 +1,175 @@
+@import './mixins/mixins.scss';
+
+@include themes-mixin {
+  @include b(h1) {
+    font-size: 32px;
+    font-weight: 700;
+    color: $--n-text-color;
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+    transition: color .3s $default-cubic-bezier;
+    margin: 24px 0 12px 0;
+  }
+  @include b(h2) {
+    font-size: 24px;
+    font-weight: 700;
+    color: $--n-text-color;
+    transition: color .3s $default-cubic-bezier;
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+    margin: 24px 0 12px 0;
+  }
+  @include b(h3) {
+    font-size: 18px;
+    font-weight: 700;
+    color: $--n-text-color;
+    transition: color .3s $default-cubic-bezier;
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+    margin: 18px 0 12px 0;
+  }
+  @include b(h4) {
+    font-size: 16px;
+    font-weight: 700;
+    color: $--n-text-color;
+    transition: color .3s $default-cubic-bezier;
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+    margin: 18px 0 12px 0;
+  }
+  @include b(h5) {
+    font-size: 14px;
+    font-weight: 700;
+    color: $--n-text-color;
+    transition: color .3s $default-cubic-bezier;
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+    margin: 18px 0 12px 0;
+  }
+  @include b(h6) {
+    font-size: 14px;
+    font-weight: 700;
+    color: $--n-text-color;
+    transition: color .3s $default-cubic-bezier;
+    &:first-child {
+      margin-top: 0;
+    }
+    margin: 18px 0 12px 0;
+  }
+  @include b(p) {
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+    transition: color .3s $default-cubic-bezier;
+    margin: 8px 0 8px 0;
+    font-size: 14px;
+    line-height: 1.625;
+    color: $--n-secondary-text-color;
+  }
+  @include b(ul) {
+    margin: 12px 0;
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+    padding-left: 1.625em;
+  }
+  @include b(ol) {
+    margin: 12px 0;
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+    padding-left: 1.625em;
+  }
+  @include b(li) {
+    transition: color .3s $default-cubic-bezier;
+    line-height: 1.625;
+    margin-bottom: 0px;
+    font-size: 14px;
+    color: $--n-secondary-text-color;
+  }
+  @include b(a) {
+    transition: color .3s $default-cubic-bezier;
+    color: $--n-primary-color;
+    text-decoration: underline;
+  }
+  @include b(text) {
+    font-size: 14px;
+    display: inline-block;
+    transition: color .3s $default-cubic-bezier;
+    @include m(code) {
+      transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+      white-space: nowrap;
+      box-sizing: border-box;
+      background-clip: padding-box;
+      color: $--n-secondary-text-color;
+      padding: 0em .4em .1em .4em;
+      border-radius: 3px;
+      font-size: 14px;
+      font-family: $--n-font-family;
+      background-color: $--n-alpha-input-color;
+      border: 1px solid $--n-alpha-border-color;
+    }
+    @include m(strong) {
+      font-weight: 700;
+    }
+    @include m(italic) {
+      font-style: italic;
+    }
+    @include m(underline) {
+      text-decoration: underline;
+    }
+  }
+  @include b(hr) {
+    margin: 12px 0;
+    transition: border-color .3s $default-cubic-bezier;
+    border-top: 1px solid $--n-divider-color;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+  }
+  @include b(blockquote) {
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+    line-height: 1.625;
+    margin: 0;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    transition: color .3s $default-cubic-bezier;
+    border-left: 4px solid $--n-divider-color;
+    padding-left: 12px;
+    color: $--n-meta-text-color;
+  }
+}

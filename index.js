@@ -65,6 +65,7 @@ import Empty from './packages/common/Empty'
 import Element from './packages/common/Element'
 import Log from './packages/common/Log'
 import Code from './packages/common/Code'
+import Typography from './packages/common/Typography'
 
 /**
  * Deprecated Components
@@ -163,6 +164,7 @@ function install (Vue) {
   IconTransition.install(Vue)
   Log.install(Vue)
   Code.install(Vue)
+  Typography.install(Vue)
 }
 
 export default NaiveUI
