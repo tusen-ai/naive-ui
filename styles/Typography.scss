@@ -68,6 +68,36 @@ $--header-bar-width: (
           left: -(map-get($--header-prefix-width, $level));
         }
       }
+      @include m(default-type) {
+        &::before {
+          background-color: $--primary-6;
+        }
+      }
+      @include m(primary-type) {
+        &::before {
+          background-color: $--primary-6;
+        }
+      }
+      @include m(info-type) {
+        &::before {
+          background-color: $--info-6;
+        }
+      }
+      @include m(success-type) {
+        &::before {
+          background-color: $--success-6;
+        }
+      }
+      @include m(warning-type) {
+        &::before {
+          background-color: $--warning-6;
+        }
+      }
+      @include m(error-type) {
+        &::before {
+          background-color: $--error-6;
+        }
+      }
     }
   }
 }
@@ -131,7 +161,6 @@ $--header-bar-width: (
     text-decoration: underline;
   }
   @include b(text) {
-    font-size: 14px;
     display: inline-block;
     transition: color .3s $default-cubic-bezier;
     color: $--n-secondary-text-color;
@@ -144,7 +173,7 @@ $--header-bar-width: (
       color: $--n-secondary-text-color;
       padding: .15em .45em .15em .45em;
       border-radius: 3px;
-      font-size: 13px;
+      font-size: .85em;
       background-color: $--n-alpha-input-color;
       border: 1px solid $--n-alpha-border-color;
     }
@@ -156,6 +185,9 @@ $--header-bar-width: (
     }
     @include m(underline) {
       text-decoration: underline;
+    }
+    @include m(primary-type) {
+      color: $--primary-6;
     }
     @include m(info-type) {
       color: $--info-6;
@@ -190,7 +222,7 @@ $--header-bar-width: (
     margin-top: 12px;
     margin-bottom: 12px;
     transition: color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
-    border-left: 4px solid $--n-divider-color;
+    border-left: 4px solid $--n-border-color;
     padding-left: 12px;
     color: $--n-secondary-text-color;
     @include m(align-text) {

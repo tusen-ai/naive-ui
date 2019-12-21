@@ -6,7 +6,7 @@ export default level =>({
   props: {
     type: {
       type: String,
-      default: null
+      default: 'default'
     },
     prefix: {
       type: String,
