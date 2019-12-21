@@ -25,7 +25,7 @@ export default {
     const attrs = props
     const theme = getTheme(context.parent)
     const defaultSlot = context.slots.default || (context.scopedSlots.default && context.scopedSlots.default())
-    return h(isCode ? 'code' : 'span', {
+    return h(isCode ? 'code' : isDelete ? 'del' : 'span', {
       staticClass: 'n-text',
       class: {
         [`n-${theme}-theme`]: theme,
@@ -39,7 +39,9 @@ export default {
       },
       attrs,
       on
-    }, defaultSlot)
+    }, isDelete & isCode ? [
+       h('del', {}, defaultSlot)
+    ] : defaultSlot)
   }
 }
 </script>

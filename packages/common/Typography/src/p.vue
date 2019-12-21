@@ -6,7 +6,7 @@ export default {
   functional: true,
   render (h, context) {
     const on = context.listeners
-    const attrs = context.props
+    const attrs = context.data.attrs
     const theme = getTheme(context.parent)
     const defaultSlot = context.slots.default || (context.scopedSlots.default && context.scopedSlots.default())
     return h('p', {

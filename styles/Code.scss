@@ -11,7 +11,7 @@
 @include b(code) {
   margin: 0;
   font-size: 14px;
-  font-family: 'FiraCode', monospace;
+  font-family: $--n-mono-font-family, monospace;
   [class^=hljs] {
     transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
   }

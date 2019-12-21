@@ -1,9 +1,4 @@
-import H1 from './src/h1'
-import H2 from './src/h2'
-import H3 from './src/h3'
-import H4 from './src/h4'
-import H5 from './src/h5'
-import H6 from './src/h6'
+import header from './src/header'
 import A from './src/A'
 import P from './src/P'
 import Blockquote from './src/blockquote'
@@ -15,6 +10,12 @@ import Text from './src/text'
 
 const Typography = {
   install (Vue) {
+    const H1 = header(1)
+    const H2 = header(2)
+    const H3 = header(3)
+    const H4 = header(4)
+    const H5 = header(5)
+    const H6 = header(6)
     Vue.component(H1.name, H1)
     Vue.component(H2.name, H2)
     Vue.component(H3.name, H3)

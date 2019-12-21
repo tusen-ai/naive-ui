@@ -1,81 +1,84 @@
 @import './mixins/mixins.scss';
 
+$--header-font-size: (
+  '1': 32px,
+  '2': 26px,
+  '3': 18px,
+  '4': 16px,
+  '5': 14px,
+  '6': 14px
+);
+
+$--header-margin: (
+  '1': 24px 0 12px 0,
+  '2': 24px 0 12px 0,
+  '3': 18px 0 12px 0,
+  '4': 18px 0 12px 0,
+  '5': 18px 0 12px 0,
+  '6': 18px 0 12px 0
+);
+
+$--header-prefix-width: (
+  '1': 16px,
+  '2': 16px,
+  '3': 12px,
+  '4': 12px,
+  '5': 12px,
+  '6': 12px
+);
+
+$--header-bar-width: (
+  '1': 4px,
+  '2': 4px,
+  '3': 3px,
+  '4': 3px,
+  '5': 3px,
+  '6': 3px
+);
+
+@mixin header-mixin($level) {
+  @include b('h' + $level) {
+    font-size: map-get($--header-font-size, $level);
+    font-weight: 700;
+    color: $--n-text-color;
+    &:first-child {
+      margin-top: 0
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+    margin: map-get($--header-margin, $level);
+    transition: color .3s $default-cubic-bezier;
+    @include m(prefix-bar) {
+      position: relative;
+      padding-left: map-get($--header-prefix-width, $level);
+      &::before {
+        content: '';
+        width: map-get($--header-bar-width, $level);
+        border-radius:  map-get($--header-bar-width, $level) / 2;
+        background-color: $--n-primary-color;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        position: absolute;
+      }
+      @include m(align-text) {
+        padding-left: 0;
+        &::before {
+          left: -(map-get($--header-prefix-width, $level));
+        }
+      }
+    }
+  }
+}
+
 @include themes-mixin {
-  @include b(h1) {
-    font-size: 32px;
-    font-weight: 700;
-    color: $--n-text-color;
-    &:first-child {
-      margin-top: 0;
-    }
-    &:last-child {
-      margin-bottom: 0;
-    }
-    transition: color .3s $default-cubic-bezier;
-    margin: 24px 0 12px 0;
-  }
-  @include b(h2) {
-    font-size: 24px;
-    font-weight: 700;
-    color: $--n-text-color;
-    transition: color .3s $default-cubic-bezier;
-    &:first-child {
-      margin-top: 0;
-    }
-    &:last-child {
-      margin-bottom: 0;
-    }
-    margin: 24px 0 12px 0;
-  }
-  @include b(h3) {
-    font-size: 18px;
-    font-weight: 700;
-    color: $--n-text-color;
-    transition: color .3s $default-cubic-bezier;
-    &:first-child {
-      margin-top: 0;
-    }
-    &:last-child {
-      margin-bottom: 0;
-    }
-    margin: 18px 0 12px 0;
-  }
-  @include b(h4) {
-    font-size: 16px;
-    font-weight: 700;
-    color: $--n-text-color;
-    transition: color .3s $default-cubic-bezier;
-    &:first-child {
-      margin-top: 0;
-    }
-    &:last-child {
-      margin-bottom: 0;
-    }
-    margin: 18px 0 12px 0;
-  }
-  @include b(h5) {
-    font-size: 14px;
-    font-weight: 700;
-    color: $--n-text-color;
-    transition: color .3s $default-cubic-bezier;
-    &:first-child {
-      margin-top: 0;
-    }
-    &:last-child {
-      margin-bottom: 0;
-    }
-    margin: 18px 0 12px 0;
-  }
-  @include b(h6) {
-    font-size: 14px;
-    font-weight: 700;
-    color: $--n-text-color;
-    transition: color .3s $default-cubic-bezier;
-    &:first-child {
-      margin-top: 0;
-    }
-    margin: 18px 0 12px 0;
-  }
+  @include header-mixin('1');
+  @include header-mixin('2');
+  @include header-mixin('3');
+  @include header-mixin('4');
+  @include header-mixin('5');
+  @include header-mixin('6');
   @include b(p) {
     &:first-child {
       margin-top: 0;
@@ -98,6 +101,9 @@
       margin-bottom: 0;
     }
     padding-left: 1.625em;
+    @include m(align-text) {
+      padding-left: 0;
+    }
   }
   @include b(ol) {
     margin: 12px 0;
@@ -108,6 +114,9 @@
       margin-bottom: 0;
     }
     padding-left: 1.625em;
+    @include m(align-text) {
+      padding-left: 0;
+    }
   }
   @include b(li) {
     transition: color .3s $default-cubic-bezier;
@@ -127,15 +136,15 @@
     transition: color .3s $default-cubic-bezier;
     color: $--n-secondary-text-color;
     @include m(code) {
+      font-family: $--n-mono-font-family;
       transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
       white-space: nowrap;
       box-sizing: border-box;
       background-clip: padding-box;
       color: $--n-secondary-text-color;
-      padding: 0em .4em .1em .4em;
+      padding: .15em .45em .15em .45em;
       border-radius: 3px;
-      font-size: 14px;
-      font-family: $--n-font-family;
+      font-size: 13px;
       background-color: $--n-alpha-input-color;
       border: 1px solid $--n-alpha-border-color;
     }
@@ -180,9 +189,12 @@
     margin: 0;
     margin-top: 12px;
     margin-bottom: 12px;
-    transition: color .3s $default-cubic-bezier;
+    transition: color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
     border-left: 4px solid $--n-divider-color;
     padding-left: 12px;
-    color: $--n-meta-text-color;
+    color: $--n-secondary-text-color;
+    @include m(align-text) {
+      margin-left: -16px;
+    }
   }
 }

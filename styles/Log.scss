@@ -3,7 +3,7 @@
 @include themes-mixin {
   @include b(log) {
     position: relative;
-    font-family: 'FiraCode', monospace;
+    font-family: $--n-mono-font-family, monospace;
     font-size: 14px;
     color: $--n-secondary-text-color;
     box-sizing: border-box;

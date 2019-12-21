@@ -4,6 +4,7 @@ Naive UI provides some basic styling for common HTML tags. It also provides some
 
 ## Demos
 ```demo
-tags
+header
 text
+tags
 ```
