@@ -13,10 +13,10 @@
         border-collapse: separate;
         border-spacing: 0;
         overflow: hidden;
-        transition: background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier;
+        transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
         // background-color: $--n-alpha-table-body-color;
         th {
-          transition: background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+          transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
           background-color: $--n-table-header-color;
           // background-clip: padding-box;
           text-align: inherit;
@@ -33,7 +33,7 @@
           }
         }
         td {
-          transition: background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+          transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
           background-color: $--n-table-body-color;
           // background-clip: padding-box;
           padding: 12px;

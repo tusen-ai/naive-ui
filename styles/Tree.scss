@@ -37,7 +37,7 @@ $tree-content-selected-background-color: main-color-with-alpha(.3);
     svg {
       width: 12px;
       height: 12px;
-      transition: transform .15s $default-cubic-bezier;
+      transition: transform .15s $--n-ease-in-out-cubic-bezier;
     }
     @include m(hide) {
       visibility: hidden
@@ -70,7 +70,7 @@ $tree-content-selected-background-color: main-color-with-alpha(.3);
     padding: 0 6px;
     cursor: pointer;
     border-radius: 3px;
-    transition: .2s background-color $default-cubic-bezier, .2s border-color $default-cubic-bezier;
+    transition: .2s background-color $--n-ease-in-out-cubic-bezier, .2s border-color $--n-ease-in-out-cubic-bezier;
     &:hover {
       background-color: $tree-content-hover-background-color;
     }

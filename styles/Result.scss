@@ -19,7 +19,7 @@
     @include result-status-mixin('error');
     @include once {
       font-size: 14px;
-      transition: color .3s $default-cubic-bezier;
+      transition: color .3s $--n-ease-in-out-cubic-bezier;
       @include b(result-icon) {
         display: flex;
         justify-content: center;
@@ -42,7 +42,7 @@
           margin-top: 16px;
           font-size: 32px;
           font-weight: 700;
-          transition: color .3s $default-cubic-bezier;
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
           text-align: center;
         }
         color: $--result-header-text-color;

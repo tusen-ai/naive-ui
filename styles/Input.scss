@@ -82,12 +82,12 @@
       width: 100%;
       display: inline-block;
       border-radius: $--input-border-radius;
-      transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+      transition: box-shadow .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
       @include input-size-mixin("small");
       @include input-size-mixin("medium");
       @include input-size-mixin("large");
       @include e(suffix, affix) {
-        transition: opacity .3s $default-cubic-bezier;
+        transition: opacity .3s $--n-ease-in-out-cubic-bezier;
         position: absolute;
         line-height: $--input-icon-size;
         height: $--input-icon-size;
@@ -95,7 +95,7 @@
         @include b(icon) {
           font-size: $--input-icon-size;;
           path {
-            transition: fill .3s $default-cubic-bezier;
+            transition: fill .3s $--n-ease-in-out-cubic-bezier;
           }
         }
         top: calc(50% - 9px);
@@ -180,19 +180,19 @@
         outline: none;
         font-family: $--n-font-family;
         width: 100%;
-        transition: color .3s $default-cubic-bezier;
+        transition: color .3s $--n-ease-in-out-cubic-bezier;
       }
       color: map-get($--input-color, 'default');
       caret-color: map-get($--input-caret-color, 'default');
       background-color: transparent;
       &::placeholder {
-        transition: color .3s $default-cubic-bezier;
+        transition: color .3s $--n-ease-in-out-cubic-bezier;
         color: map-get($--input-placeholder-color, 'default');
         opacity: 1;
       }
     }
     @include e(splitor) {
-      transition: color .3s $default-cubic-bezier;
+      transition: color .3s $--n-ease-in-out-cubic-bezier;
       color: map-get($--input-color, 'default');
       padding-left: 0px;
       padding-right: 0px;

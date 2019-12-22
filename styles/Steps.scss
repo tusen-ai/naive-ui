@@ -100,7 +100,7 @@ $--steps-indicator-icon-size: (
       width: 100%;
       display: flex;
       @include b(step-splitor) {
-        transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+        transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
         height: 1px;
         flex: 1;
         align-self: flex-start;
@@ -110,7 +110,7 @@ $--steps-indicator-icon-size: (
       @include b(step-content) {
         flex: 1;
         @include b(step-content-header) {
-          transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+          transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
           position: relative;
           display: flex;
           font-weight: 700;
@@ -121,13 +121,13 @@ $--steps-indicator-icon-size: (
           }
         }
         @include e(description) {
-          transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+          transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
           margin-top: 12px;
           margin-left: 9px;
         }
       }
       @include b(step-indicator) {
-        transition: background-color .3s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier;
+        transition: background-color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -137,7 +137,7 @@ $--steps-indicator-icon-size: (
             @include icon-switch-transition();
             display: inline-block;
             text-align: center;
-            transition: color .3s $default-cubic-bezier;
+            transition: color .3s $--n-ease-in-out-cubic-bezier;
             position: absolute;
             left: 0;
             top: 0;

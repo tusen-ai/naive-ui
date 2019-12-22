@@ -7,7 +7,7 @@
     font-size: 14px;
     color: $--n-secondary-text-color;
     box-sizing: border-box;
-    transition: border-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier;
+    transition: border-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
     @include b(scrollbar) {
       @include b(scrollbar-content) {
         // padding-top: 8px;
@@ -30,7 +30,7 @@
     }
     @include b(log-loader) {
       @include fade-in-width-expand-transition($duration: .3s, $delay: 0s);
-      transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+      transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
       box-sizing: border-box;
       border: 1px solid $--n-border-color;
       position: absolute;

@@ -9,7 +9,7 @@
     }
     @include e(icon) {
       @include once {
-        transition: fill .3s $default-cubic-bezier;
+        transition: fill .3s $--n-ease-in-out-cubic-bezier;
         width: 40px;
         height: 40px;
       }
@@ -18,14 +18,14 @@
     @include e(description) {
       @include once {
         margin-top: 8px;
-        transition: color .3s $default-cubic-bezier;
+        transition: color .3s $--n-ease-in-out-cubic-bezier;
       }
       color: $--empty-text-color;
     }
     @include e(extra) {
       @include once {
         text-align: center;
-        transition: color .3s $default-cubic-bezier;
+        transition: color .3s $--n-ease-in-out-cubic-bezier;
         margin-top: 16px;
       }
       color: $--empty-extra-text-color;

@@ -7,7 +7,7 @@
       position: relative;
       display: flex;
       flex-wrap: nowrap;
-      transition: margin-left .3s $default-cubic-bezier;
+      transition: margin-left .3s $--n-ease-in-out-cubic-bezier;
       flex-direction: column;
       overflow: auto;
       @include m(has-sider) {
@@ -29,7 +29,7 @@
   }
   @include b(layout-header) {
     @include once {
-      transition: background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+      transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
       box-sizing: border-box;
       width: 100%;
       @include m(absolute-positioned) {
@@ -49,11 +49,11 @@
       box-sizing: border-box;
       position: relative;
     }
-    transition: margin-left .3s $default-cubic-bezier;
+    transition: margin-left .3s $--n-ease-in-out-cubic-bezier;
   }
   @include b(layout-footer) {
     @include once {
-      transition: border-color .3s $default-cubic-bezier;
+      transition: border-color .3s $--n-ease-in-out-cubic-bezier;
       box-sizing: border-box;
       @include m(absolute-positioned) {
         position: absolute;
@@ -70,13 +70,13 @@
     @include once {
       box-sizing: border-box;
       position: relative;
-      transition: min-width .3s  $default-cubic-bezier, max-width .3s $default-cubic-bezier, transform .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+      transition: min-width .3s  $--n-ease-in-out-cubic-bezier, max-width .3s $--n-ease-in-out-cubic-bezier, transform .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
     }  
     background-color: $--layout-sider-background-color;
     @include e(toggle-button) {
       @include once {
         z-index: 1;
-        transition: transform .3s $default-cubic-bezier;
+        transition: transform .3s $--n-ease-in-out-cubic-bezier;
         cursor: pointer;
         width: 36px;
         height: 36px;
@@ -87,7 +87,7 @@
       }
       path {
         @include once {
-          transition: fill .3s $default-cubic-bezier;
+          transition: fill .3s $--n-ease-in-out-cubic-bezier;
         }
         fill: $--layout-sider-toggle-button-fill;
       }
@@ -95,7 +95,7 @@
     @include once {
       @include e(content) {
         opacity: 0;
-        transition: opacity .3s $default-cubic-bezier;
+        transition: opacity .3s $--n-ease-in-out-cubic-bezier;
       }
     }
     @include once {

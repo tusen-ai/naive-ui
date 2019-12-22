@@ -20,7 +20,7 @@
       box-sizing: border-box;
       border-bottom: 1px solid $service-layout-border-color;
       // box-shadow: 0px 2px 6px 1px rgba(0,0,0,0.1),0px 1px 3px 0px rgba(0,0,0,0.17);
-      transition: background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+      transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
       height: $layout-nav-height;
     }
     @include e(body) {
@@ -32,7 +32,7 @@
       bottom: 0;
       overflow: hidden;
       background-color: $service-layout-body-background-color;
-      transition: background-color .3s $default-cubic-bezier, left .3s $default-cubic-bezier;
+      transition: background-color .3s $--n-ease-in-out-cubic-bezier, left .3s $--n-ease-in-out-cubic-bezier;
       @include m(active) {
         left: 272px;
       }
@@ -55,19 +55,19 @@
       top: 0;
       bottom: 0;
       left: 0;
-      transition: transform .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+      transition: transform .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
       // box-shadow: 0 2px 10px 1px rgba(0, 0, 0, .2);
       @include b(nimbus-service-layout-drawer-divider) {
         margin: 0px 25px;
         border-bottom: 1px solid rgba(255, 255, 255, .08);
       }
       @include e(toggle-button) {
-        transition: transform .3s $default-cubic-bezier;
+        transition: transform .3s $--n-ease-in-out-cubic-bezier;
         cursor: pointer;
         width: 36px;
         height: 36px;
         path {
-          transition: fill .3s $default-cubic-bezier;
+          transition: fill .3s $--n-ease-in-out-cubic-bezier;
           fill: $service-layout-toggle-button-color;
         }
         position: absolute;
@@ -81,7 +81,7 @@
         left: 0;
         right: 0;
         overflow: hidden;
-        transition: opacity .3s $default-cubic-bezier;
+        transition: opacity .3s $--n-ease-in-out-cubic-bezier;
         @include b(nimbus-service-layout-drawer-header) {
           position: relative;
           font-weight: 700;
@@ -120,7 +120,7 @@
             }
           }
           span {
-            transition: opacity 0.3s $default-cubic-bezier, color 0.3s $default-cubic-bezier;
+            transition: opacity 0.3s $--n-ease-in-out-cubic-bezier, color 0.3s $--n-ease-in-out-cubic-bezier;
             opacity: 1;
           }
           @include m(active) {
@@ -145,7 +145,7 @@
             top: 0;
             bottom: 0;
             z-index: -1;
-            transition: opacity 0.3s $default-cubic-bezier, background-position .3s $default-cubic-bezier;
+            transition: opacity 0.3s $--n-ease-in-out-cubic-bezier, background-position .3s $--n-ease-in-out-cubic-bezier;
             opacity: 0;
           }
           @include m(active) {
@@ -165,7 +165,7 @@
               top: calc(50% - 1px);
               transform: rotate(45deg);
               transform-origin: 25% 25%;
-              transition: transform 0.3s $default-cubic-bezier, opacity 0.3s $default-cubic-bezier;
+              transition: transform 0.3s $--n-ease-in-out-cubic-bezier, opacity 0.3s $--n-ease-in-out-cubic-bezier;
             }
             // @include m(group-item-is-choosed) {
             //   span {
@@ -184,7 +184,7 @@
         }
         @include b(nimbus-service-layout-drawer-group-items) {
           overflow: hidden;
-          transition: max-height .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
+          transition: max-height .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier;
           opacity: 1;
           @include m(collapsed) {
             max-height: 0;
@@ -195,7 +195,7 @@
       @include m(active) {
         transform: translateX(0);
         opacity: 1;
-        // transition: transform .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+        // transition: transform .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
         @include e(toggle-button) {
           transform: translateX(50%) translateY(-50%) rotate(0deg);
         }
@@ -206,7 +206,7 @@
       @include m(collapsed) {
         opacity: 1;
         transform: translateX(-224px);
-        // transition: transform .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+        // transition: transform .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
         pointer-events: none;
         @include e(toggle-button) {
           transform: translateX(50%) translateY(-50%) rotate(180deg);

@@ -66,7 +66,7 @@
       }
       height: $--slider-rail-height;
       background-color: map-get($--slider-rail-background-color, 'default');
-      transition: background-color .2s $default-cubic-bezier;
+      transition: background-color .2s $--n-ease-in-out-cubic-bezier;
       border-radius: $--slider-rail-height / 2;
       @include e(fill) {
         @include once {
@@ -74,7 +74,7 @@
           top: 0;
           bottom: 0;
           border-radius: $--slider-rail-height / 2;
-          transition: background-color .3s $default-cubic-bezier;
+          transition: background-color .3s $--n-ease-in-out-cubic-bezier;
         }
         background-color: map-get($--slider-rail-fill-background-color, 'default');  
       }
@@ -85,7 +85,7 @@
         height: $--slider-handle-size;
         width: $--slider-handle-size;
         border-radius: $--slider-handle-size / 2;
-        transition: box-shadow .2s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+        transition: box-shadow .2s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
         position: absolute;
         top: 0;
         transform: translateX(-50%);
@@ -113,7 +113,7 @@
       }
       @include b(slider-dot) {
         @include once {
-          transition: box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+          transition: box-shadow .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
           position: absolute;
           transform: translateX(-50%) translateY(-50%);
           height: $--slider-dot-size;

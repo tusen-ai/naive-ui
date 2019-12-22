@@ -13,7 +13,7 @@
   font-size: 14px;
   font-family: $--n-mono-font-family, monospace;
   [class^=hljs] {
-    transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+    transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
   }
   &.#{block(light-theme)} {
     .hljs {

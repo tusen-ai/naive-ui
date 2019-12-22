@@ -83,11 +83,11 @@
       box-sizing: border-box;
       cursor: default;
       display: inline-block;
-      transition: background-color .2s $default-cubic-bezier, color .3s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
+      transition: background-color .2s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier;
       @include e(close-mark) {
         cursor: pointer;
         path {
-          transition: fill .2s $default-cubic-bezier;
+          transition: fill .2s $--n-ease-in-out-cubic-bezier;
         }
       }
       @include m(checkable) {
@@ -105,7 +105,7 @@
       @include m(closable) {
         padding-right: 18px;
         @include e(close-mark) {
-          transition: color .3s $default-cubic-bezier;
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
           right: 3px;
           top: 50%;
           transform: translateY(-50%);

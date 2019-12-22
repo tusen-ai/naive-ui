@@ -25,7 +25,7 @@
       }
       @include e(icon) {
         @include once {
-          transition: fill .3s $default-cubic-bezier;
+          transition: fill .3s $--n-ease-in-out-cubic-bezier;
         }
         fill: map-get($map: $--base-cancel-mark-cross-color, $key: "default");
       }
@@ -59,7 +59,7 @@
       }
       &::after {
         @include once {
-          transition: transform .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+          transition: transform .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
           position: absolute;
           content: '';
           box-sizing: border-box;

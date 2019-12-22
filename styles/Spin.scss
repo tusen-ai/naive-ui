@@ -59,7 +59,7 @@
       }
       @include b(spin-content) {
         opacity: 1;
-        transition: opacity .2s $default-cubic-bezier;
+        transition: opacity .2s $--n-ease-in-out-cubic-bezier;
         @include m(spinning) {
           opacity: .5;
         }

@@ -26,7 +26,7 @@ $--tabs-tab-font-size: (
       @include tabs-size-mixin('large');
       @include tabs-size-mixin('huge');
       width: 100%;
-      transition: background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+      transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
       @include m(flex) {
         @include b(tabs-nav) {
           @include b(tabs-nav-scroll) {
@@ -45,7 +45,7 @@ $--tabs-tab-font-size: (
       @include once {
         display: flex;
         background-clip: padding-box;
-        transition: border-color .3s $default-cubic-bezier;
+        transition: border-color .3s $--n-ease-in-out-cubic-bezier;
         @include b(tabs-nav-scroll) {
           overflow: hidden;
         }
@@ -57,7 +57,7 @@ $--tabs-tab-font-size: (
           line-height: 20px;
           align-self: center;
           cursor: pointer;
-          transition: color .3s $default-cubic-bezier;
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
           @include m(left) {
             margin-right: 8px;
           }
@@ -87,7 +87,7 @@ $--tabs-tab-font-size: (
           bottom: 2px;
           height: 2px;
           border-radius: 1px;
-          transition: left .2s $default-cubic-bezier, max-width .2s $default-cubic-bezier;
+          transition: left .2s $--n-ease-in-out-cubic-bezier, max-width .2s $--n-ease-in-out-cubic-bezier;
         }
         background-color: $--tabs-tab-bar-background-color;
       }
@@ -98,7 +98,7 @@ $--tabs-tab-font-size: (
           flex-wrap: nowrap;
           display: inline-flex;
           align-items: center;
-          transition: background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+          transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
           @include m(disabled) {
             cursor: not-allowed;
           }
@@ -110,13 +110,13 @@ $--tabs-tab-font-size: (
             line-height: 16px;
             height: 16px;
             cursor: pointer;
-            transition: color .3s $default-cubic-bezier;
+            transition: color .3s $--n-ease-in-out-cubic-bezier;
           }
           fill: map-get($--tabs-tab-close-button-color, 'default');
         }
         @include e(label) {
           @include once {
-            transition: color .3s $default-cubic-bezier;
+            transition: color .3s $--n-ease-in-out-cubic-bezier;
           }
           color: map-get($--tabs-tab-text-color, 'default');
         }
@@ -126,7 +126,7 @@ $--tabs-tab-font-size: (
       @include once {
         width: 100%;
         margin-top: 8px;
-        transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+        transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
       }
       color: $--tabs-panel-text-color;
     }

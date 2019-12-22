@@ -5,26 +5,26 @@
     white-space: nowrap;
     @include b(breadcrumb-item) {
       @include once {
-        transition: color .3s $default-cubic-bezier;
+        transition: color .3s $--n-ease-in-out-cubic-bezier;
         @include b(icon) {
           font-size: 16px;
           vertical-align: -.2em;
         }
       }
       @include b(icon) {
-        transition: fill .3s $default-cubic-bezier;
+        transition: fill .3s $--n-ease-in-out-cubic-bezier;
         fill: map-get($--breadcrumb-link-text-color, 'default');
       }
       @include e(link) {
         @include once {
-          transition: color .3s $default-cubic-bezier;
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
           cursor: pointer;
         }
         color: map-get($--breadcrumb-link-text-color, 'default');
       }
       @include e(seperator) {
         @include once {
-          transition: color .3s $default-cubic-bezier;
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
           margin: 0 4px;
         }
         color: map-get($--breadcrumb-seperator-text-color, 'default');

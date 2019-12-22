@@ -155,7 +155,7 @@
         box-sizing: border-box;
         min-width: 182px;
         background-color: transparent;
-        transition: background-color .2s $default-cubic-bezier, color 0.2s $default-cubic-bezier;
+        transition: background-color .2s $--n-ease-in-out-cubic-bezier, color 0.2s $--n-ease-in-out-cubic-bezier;
         height: 34px;
         line-height: 34px;
         display: flex;
@@ -177,7 +177,7 @@
             transform: rotate(45deg) scale(.5);
             top: calc(50% - 4px);
             opacity: 0;
-            transition: transform .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
+            transition: transform .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier;
           }
           border-right: 1px solid $--cascader-item-check-mark-color;
           border-bottom: 1px solid $--cascader-item-check-mark-color;
@@ -244,7 +244,7 @@
             right: 18px;
             top: 50%;
             opacity: 1;
-            transition: opacity .3s $default-cubic-bezier;
+            transition: opacity .3s $--n-ease-in-out-cubic-bezier;
           }
           border-top: 2px solid $--cascader-option-arrow-background-color;
           border-right: 2px solid $--cascader-option-arrow-background-color;
@@ -294,7 +294,7 @@
           width: 100%;
           left: 0;
           height: 34px;
-          transition: top .15s $default-cubic-bezier;
+          transition: top .15s $--n-ease-in-out-cubic-bezier;
         }
         background-color: $--cascader-menu-lightbar-background-color;
       }

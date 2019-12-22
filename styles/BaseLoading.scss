@@ -36,7 +36,7 @@
       @include b(base-loading-circular-path) {
         stroke: $--base-loading-stroke;
         @include once {
-          transition: stroke .3s $default-cubic-bezier;
+          transition: stroke .3s $--n-ease-in-out-cubic-bezier;
           animation: n-base-loading-dash 1.5s ease-in-out infinite;
           stroke-dasharray: 90, 150;
           stroke-dashoffset: 0;

@@ -28,7 +28,7 @@
         display: flex;
         width: 110px;
         line-height: 28px;
-        transition: color .3s $default-cubic-bezier;
+        transition: color .3s $--n-ease-in-out-cubic-bezier;
         @include b(input) {
           margin: 0 8px;
           input {
@@ -50,14 +50,14 @@
         padding-right: 4px;
         box-sizing: border-box;
         opacity: 1;
-        transition: color .3s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
+        transition: color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius:6px;
         line-height: 28px;
         path {
-          transition: fill .3s $default-cubic-bezier;
+          transition: fill .3s $--n-ease-in-out-cubic-bezier;
         }
         &:not(:last-child) {
           margin-right: 10px;

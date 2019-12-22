@@ -12,7 +12,7 @@
         left: 2px;
         width: 100%;
         max-width: 0;
-        transition: top .15s $default-cubic-bezier, max-width .15s $default-cubic-bezier;
+        transition: top .15s $--n-ease-in-out-cubic-bezier, max-width .15s $--n-ease-in-out-cubic-bezier;
         border-top-right-radius: 10.5px;
         border-bottom-right-radius: 10.5px;
       }
@@ -26,7 +26,7 @@
         bottom: 0;
         width: 4px;
         border-radius: 2px;
-        transition: background-color .3s $default-cubic-bezier;
+        transition: background-color .3s $--n-ease-in-out-cubic-bezier;
         overflow: hidden;
       }
       background-color: $--anchor-rail-background-color;
@@ -34,7 +34,7 @@
         @include once {
           position: absolute;
           left: 0;
-          transition: top .15s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+          transition: top .15s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
           width: 4px;
           height: 21px;
           background-color: transparent;
@@ -79,7 +79,7 @@
           display: inline-block;
           font-size: 14px;
           padding-right: 16px;
-          transition: color .3s $default-cubic-bezier;
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
         }
         color: map-get($--anchor-link-title-text-color, 'default');;
         &:hover, &:focus {

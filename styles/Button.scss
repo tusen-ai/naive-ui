@@ -223,7 +223,7 @@
       user-select: none;
       // font-weight: 700;
       text-align: center;
-      transition: background-color .2s $default-cubic-bezier, opacity .15s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier;
+      transition: background-color .2s $--n-ease-in-out-cubic-bezier, opacity .15s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier;
       cursor: pointer;
       &::after {
         content: "";
@@ -236,7 +236,7 @@
       }
       @include e(icon) {
         @include fade-in-width-expand-transition();
-        transition: color .3s $default-cubic-bezier;
+        transition: color .3s $--n-ease-in-out-cubic-bezier;
       }
       @include e(content-aligner) {
         display: inline-block;
@@ -249,7 +249,7 @@
       }
       @include e(content) {
         white-space: nowrap;
-        transition: color .3s $default-cubic-bezier;
+        transition: color .3s $--n-ease-in-out-cubic-bezier;
       }
       @include m(left-icon) {
         @include e(icon) {

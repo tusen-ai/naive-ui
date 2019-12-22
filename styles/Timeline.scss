@@ -87,7 +87,7 @@ $--timeline-header-margin-top: (
       @include b(timeline-item-content) {
         @include e(title) {
           @include once {
-            transition: color .3s $default-cubic-bezier;
+            transition: color .3s $--n-ease-in-out-cubic-bezier;
             font-size: 14px;
             font-weight: 700;
             margin-bottom: 6px;
@@ -96,14 +96,14 @@ $--timeline-header-margin-top: (
         }
         @include e(content) {
           @include once {
-            transition: color .3s $default-cubic-bezier;
+            transition: color .3s $--n-ease-in-out-cubic-bezier;
             font-size: 14px;
           }
           color: $--timeline-item-content-color;
         }
         @include e(meta) {
           @include once {
-            transition: color .3s $default-cubic-bezier;
+            transition: color .3s $--n-ease-in-out-cubic-bezier;
             font-size: 12px;
             margin-top: 6px;
             margin-bottom: 20px;
@@ -121,7 +121,7 @@ $--timeline-header-margin-top: (
         }
         @include once {
           @include e(circle) {
-            transition: background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+            transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
             width: 14px;
             height: 14px;
             border-radius: 7px;
@@ -132,7 +132,7 @@ $--timeline-header-margin-top: (
         }
         @include e(line) {
           @include once {
-            transition: background-color .3s $default-cubic-bezier;
+            transition: background-color .3s $--n-ease-in-out-cubic-bezier;
             position: absolute;
             top: 14px;
             left: 6px;

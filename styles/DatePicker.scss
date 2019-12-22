@@ -160,7 +160,7 @@
           border-radius: 3px;
           z-index: 0;
           cursor: pointer;
-          transition: background-color .2s $default-cubic-bezier, color .2s $default-cubic-bezier;
+          transition: background-color .2s $--n-ease-in-out-cubic-bezier, color .2s $--n-ease-in-out-cubic-bezier;
           @include m(no-transition) {
             transition: none!important;
           }
@@ -183,7 +183,7 @@
               height: 4px;
               width: 4px;
               border-radius: 2px;
-              transition: background-color .2s $default-cubic-bezier;
+              transition: background-color .2s $--n-ease-in-out-cubic-bezier;
             }
             background-color: map-get($--date-picker-item-background-color, 'active');
           }

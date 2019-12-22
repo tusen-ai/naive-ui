@@ -97,7 +97,7 @@
           height: 18px;
           line-height: 18px;
           font-size: 18px;
-          transition: fill .3s $default-cubic-bezier;
+          transition: fill .3s $--n-ease-in-out-cubic-bezier;
           @include m(as-text) {
             text-align: center;
             width: 40px;
@@ -126,7 +126,7 @@
           align-items: center;
           color: inherit;
           font-size: 36px;
-          transition: color .3s $default-cubic-bezier;
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
         }
         @include b(progress-icon) {
           position: absolute;
@@ -141,7 +141,7 @@
         @include b(progress-text) {
           white-space: nowrap;
           font-weight: 700;
-          transition: color .3s $default-cubic-bezier;
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
           @include e(percentage) {
             color: inherit;
             font-size: 28px;
@@ -157,7 +157,7 @@
         width: 200px;
         color: inherit;
         @include b(progress-text) {
-          transition: color .3s $default-cubic-bezier;
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
           position: absolute;
           left: 50%;
           top: 50%;
@@ -186,12 +186,12 @@
             vertical-align: bottom;
           }
           @include b(progress-graph-circle-fill) {
-            transition: stroke .3s $default-cubic-bezier, stroke-dasharray .3s $default-cubic-bezier;
+            transition: stroke .3s $--n-ease-in-out-cubic-bezier, stroke-dasharray .3s $--n-ease-in-out-cubic-bezier;
           }
         }
         @include b(progress-graph-circle-rail) {
           @include once {
-            transition: stroke .3s $default-cubic-bezier;
+            transition: stroke .3s $--n-ease-in-out-cubic-bezier;
           }
           stroke: $--progress-rail-color;
         }
@@ -211,7 +211,7 @@
           @include b(progress-graph-line-indicator) {
             @include once {
               background-color: transparent;
-              transition: color .3s $default-cubic-bezier;
+              transition: color .3s $--n-ease-in-out-cubic-bezier;
               white-space: nowrap;
               text-align: right;
               font-weight: 700;
@@ -230,7 +230,7 @@
             display: flex;
             align-items: center;
             @include b(progress-graph-line-rail) {
-              transition: background-color .3s $default-cubic-bezier, right .2s $default-cubic-bezier;
+              transition: background-color .3s $--n-ease-in-out-cubic-bezier, right .2s $--n-ease-in-out-cubic-bezier;
               flex: 1;
             }
           }
@@ -239,7 +239,7 @@
               transform: translateZ(0); // to avoid strange offset
               display: flex;
               vertical-align: middle;
-              transition: right .2s $default-cubic-bezier, color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+              transition: right .2s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
               height: 21px;
               line-height: 21px;
               padding: 0 10px;
@@ -264,11 +264,11 @@
               height: 10px;
               width: 100%;
               max-width: 0%;
-              transition: background-color .3s $default-cubic-bezier, max-width .2s $default-cubic-bezier;
+              transition: background-color .3s $--n-ease-in-out-cubic-bezier, max-width .2s $--n-ease-in-out-cubic-bezier;
             }
           }
           background-color: $--progress-rail-color;
-          transition: background-color .3s $default-cubic-bezier;
+          transition: background-color .3s $--n-ease-in-out-cubic-bezier;
         }
       }
     }

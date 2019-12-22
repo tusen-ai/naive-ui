@@ -48,7 +48,7 @@
       left: 0;
       box-shadow: inset 0 0 0px 1px map-get($--input-number-border-color, 'default');
       border-radius: $--input-number-border-radius;
-      transition: box-shadow .3s $default-cubic-bezier;
+      transition: box-shadow .3s $--n-ease-in-out-cubic-bezier;
       pointer-events: none;
     }
     @include e(minus-button, add-button) {
@@ -67,7 +67,7 @@
         fill: map-get($--input-number-button-text-color, 'default');
       }
       font-size: 14px;
-      transition: background-color .3s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier;
+      transition: background-color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier;
       box-shadow: inset 0 0 0px 1px map-get($--input-number-border-color, 'default');
       &:hover ~ {
         @include e(border-layer) {
@@ -79,7 +79,7 @@
         color: map-get($--input-number-button-text-color, 'hover');
       }
       &:active {
-        transition: color .3s $default-cubic-bezier, background-color .15s $default-cubic-bezier;
+        transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .15s $--n-ease-in-out-cubic-bezier;
         background-color: map-get($--input-number-button-background-color, 'active')
       }
       @include m(disabled) {
@@ -119,7 +119,7 @@
           }
         }
       }
-      transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier;
+      transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier;
       border: none;
       color: map-get($--input-number-text-color, 'default');
       width: 100%;

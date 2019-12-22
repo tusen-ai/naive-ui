@@ -20,7 +20,7 @@
         background-clip: padding-box;
         width: 182px;
         height: 311px;
-        transition: background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+        transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
         border-radius: 6px;
       }
       background-color: map-get($--transfer-list-background-color, 'default');
@@ -29,7 +29,7 @@
         @include once {
           box-sizing: border-box;
           margin: -1px -1px 0 -1px;
-          transition: background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+          transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
           display: flex;
           border-radius: 6px 6px 0 0;
           align-items: center;
@@ -53,7 +53,7 @@
             line-height: 1;
             font-size: 16px;
             font-weight: 700;
-            transition: color .3s $default-cubic-bezier;
+            transition: color .3s $--n-ease-in-out-cubic-bezier;
           }
           color: map-get($--transfer-list-header-text-color, 'default');
           @include m(disabled) {
@@ -62,7 +62,7 @@
         }
         @include e(extra) {
           @include once {
-            transition: color .3s $default-cubic-bezier;
+            transition: color .3s $--n-ease-in-out-cubic-bezier;
             font-size: 12px;
             justify-self: flex-end;
             margin-right: 14px;
@@ -100,7 +100,7 @@
             @include once {
               @include fade-in-transition(transfer-list-light-bar);
               height: 34px;
-              transition: top .15s $default-cubic-bezier;
+              transition: top .15s $--n-ease-in-out-cubic-bezier;
               width: 100%;
               position: absolute;
             }
@@ -110,7 +110,7 @@
             @include once {
               @include slide-right-transition(transfer-list-item-source);
               @include slide-left-transition(transfer-list-item-target);
-              transition: color .3s $default-cubic-bezier;
+              transition: color .3s $--n-ease-in-out-cubic-bezier;
               position: relative;
               cursor: pointer;
               max-height: 34px;
@@ -172,7 +172,7 @@
         @include e(icon) {
           @include once {
             pointer-events: none;
-            transition: fill .3s $default-cubic-bezier;
+            transition: fill .3s $--n-ease-in-out-cubic-bezier;
           }
           fill: map-get($--transfer-gap-button-background-color, 'default');
         }

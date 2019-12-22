@@ -104,7 +104,7 @@ $--card-margin-bottom: (
       width: 100%;
       box-sizing: border-box;
       position: relative;
-      transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+      transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
       border-radius: 6px;
       @include card-size-mixin('small');
       @include card-size-mixin('medium');
@@ -126,7 +126,7 @@ $--card-margin-bottom: (
     @include m(title-segmented, title-soft-segmented) {
       @include b(card-header) {
         @include once {
-          transition: border-color .3s $default-cubic-bezier;
+          transition: border-color .3s $--n-ease-in-out-cubic-bezier;
         }
         &:not(:last-child) {
           border-bottom: 1px solid $--card-border-color;
@@ -136,7 +136,7 @@ $--card-margin-bottom: (
     @include m(content-segmented, content-soft-segmented) {
       @include e(content) {
         @include once {
-          transition: border-color .3s $default-cubic-bezier;
+          transition: border-color .3s $--n-ease-in-out-cubic-bezier;
         }
         &:not(:last-child) {
           border-bottom: 1px solid $--card-border-color;
@@ -146,7 +146,7 @@ $--card-margin-bottom: (
     @include m(footer-segmented, footer-soft-segmented) {
       @include e(footer) {
         @include once {
-          transition: border-color .3s $default-cubic-bezier;
+          transition: border-color .3s $--n-ease-in-out-cubic-bezier;
         }
         &:not(:last-child) {
           border-bottom: 1px solid $--card-border-color;
@@ -164,7 +164,7 @@ $--card-margin-bottom: (
         @include once {
           font-weight: 700;
           font-size: 18px;
-          transition: color .3s $default-cubic-bezier;
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
           flex: 1;
         }
         color: $--card-title-text-color;
@@ -173,14 +173,14 @@ $--card-margin-bottom: (
         @include once {
           font-weight: 400;
           font-size: 14px;
-          transition: color .3s $default-cubic-bezier;
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
         }
         color: $--card-text-color;
       }
       @include e(close-mark) {
         @include once {
           cursor: pointer;
-          transition: fill .3s $default-cubic-bezier
+          transition: fill .3s $--n-ease-in-out-cubic-bezier
         }
         fill: $--card-close-fill;
       }
@@ -197,7 +197,7 @@ $--card-margin-bottom: (
     }
     @include e(action) {
       @include once {
-        transition: background-color .3s $default-cubic-bezier;
+        transition: background-color .3s $--n-ease-in-out-cubic-bezier;
         line-height: 1.5;
         font-size: 14px;
       }

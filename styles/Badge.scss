@@ -13,7 +13,7 @@
       @include b(badge-sup) {
         &::before {
           animation-duration: 2s, 2s;
-          animation-timing-function: $fast-in-cubic-bezier, $default-cubic-bezier;
+          animation-timing-function: $fast-in-cubic-bezier, $--n-ease-in-out-cubic-bezier;
           animation-iteration-count: infinite, infinite;
         }
       }
@@ -128,7 +128,7 @@
   @include once {
     @include b(badge-sup) {
       @include fade-in-scale-up-transition(badge, left bottom, $original-transform: (translateX(-50%)));
-      transition: background-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier;
+      transition: background-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
       color: white;
       position: absolute;
       height: 18px;

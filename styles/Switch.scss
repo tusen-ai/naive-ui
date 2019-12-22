@@ -17,7 +17,7 @@
         width: 30px;
         border-radius: 7px;
         margin: 3px;
-        transition: background-color .3s $default-cubic-bezier;
+        transition: background-color .3s $--n-ease-in-out-cubic-bezier;
         &::before, &::after {
           box-sizing: border-box;
           cursor: inherit;
@@ -30,7 +30,7 @@
           top: -3px;
           left: -3px;
           background-size: 800% 800%;
-          transition: left .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier, max-width .3s $default-cubic-bezier, background-position .3s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier;
+          transition: left .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier, max-width .3s $--n-ease-in-out-cubic-bezier, background-position .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier;
         }
         &::before {
           opacity: 1;
