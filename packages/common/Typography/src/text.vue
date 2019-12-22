@@ -4,25 +4,47 @@ import getTheme from './getTheme'
 export default {
   name: 'NText',
   functional: true,
+  props: {
+    code: {
+      type: Boolean,
+      default: false
+    },
+    type: {
+      type: String,
+      default: 'default'
+    },
+    delete: {
+      type: Boolean,
+      default: false
+    },
+    strong: {
+      type: Boolean,
+      default: false
+    },
+    italic: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    underline: {
+      type: Boolean,
+      default: false
+    },
+  },
   render (h, context) {
     const props = context.props
     const type = props.type
-    const isCode = props.code !== undefined
-    const isDelete = props.delete !== undefined
-    const isStrong = props.strong !== undefined
-    const isItalic = props.italic !== undefined
-    const isDisabled = props.disabled !== undefined
-    const isUnderline = props.underline !== undefined
-    delete props.type
-    delete props.code
-    delete props.delete
-    delete props.strong
-    delete props.italic
-    delete props.disabled
-    delete props.underline
-    console.log(props)
+    const isCode = props.code
+    const isDelete = props.delete
+    const isStrong = props.strong
+    const isItalic = props.italic
+    const isDisabled = props.disabled
+    const isUnderline = props.underline
     const on = context.listeners
-    const attrs = props
+    const attrs = context.data.attrs
     const theme = getTheme(context.parent)
     const defaultSlot = context.slots.default || (context.scopedSlots.default && context.scopedSlots.default())
     return h(isCode ? 'code' : isDelete ? 'del' : 'span', {
