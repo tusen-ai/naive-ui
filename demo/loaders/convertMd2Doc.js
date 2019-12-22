@@ -1,45 +1,8 @@
-const hljs = require('highlight.js')
 const marked = require('marked')
 const camelCase = require('lodash/camelCase')
 const kababCase = require('lodash/kebabCase')
-// const prettier = require('prettier')
-
-const escapeMap = {
-  '&': '&amp;',
-  '<': '&lt;',
-  '>': '&gt;',
-  '"': '&quot;',
-  "'": '&#39;'
-}
-
-function escapeForHTML (input) {
-  return input.replace(/([&<>'"])/g, char => escapeMap[char])
-}
-
-marked.setOptions({
-  gfm: true
-})
-
-// Create your custom renderer.
-const renderer = new marked.Renderer()
-renderer.code = (code, language) => {
-  // Check whether the given language is valid for highlight.js.
-  const validLang = !!(language && hljs.getLanguage(language))
-
-  // Highlight only if the language is valid.
-  // highlight.js escapes HTML in the code, but we need to escape by ourselves
-  // when we don't use it.
-  const highlighted = validLang
-    ? hljs.highlight(language, code).value
-    : escapeForHTML(code)
-
-  // Render the highlighted code with `hljs` class.
-  return `<pre><code class="${language}">${highlighted}</code></pre>`
-}
-
-marked.setOptions({
-  renderer
-})
+const renderer = require('./mdRenderer')
+const mdLoader = require('./NaiveUIMdLoader')
 
 function template (demos, demosLiteral, isSingleColumn = false) {
   // return `<component-demos :single-column="${isSingleColumn}">
@@ -106,6 +69,10 @@ export default {
 }
 
 function convertMd2ComponentDocumentation (text) {
+  const isNoDemo = !!~text.search('<!--no-demo-->')
+  if (isNoDemo) {
+    return mdLoader(text)
+  }
   const isSingleColumn = !!~text.search('<!--single-column-->')
   const tokens = marked.lexer(text)
   const componentsIndex = tokens.findIndex(token => token.type === 'code' && token.lang === 'component')
@@ -134,7 +101,13 @@ function convertMd2ComponentDocumentation (text) {
   }
   headerPart.links = {}
   footerPart.links = {}
-  const documentationHTML = `<section class="markdown header-part">${marked.parser(headerPart)}</section>\n` + '<!--demos-->\n' + `<section class="markdown footer-part">${marked.parser(footerPart)}</section>\n`
+  const documentationHTML = `<section class="markdown header-part">${marked.parser(headerPart, {
+    gfm: true,
+    renderer
+  })}</section>\n` + '<!--demos-->\n' + `<section class="markdown footer-part">${marked.parser(footerPart, {
+    gfm: true,
+    renderer
+  })}</section>\n`
   // console.log(documentationHTML)
   // const classedDocumentationHTML = addClassToHTML(documentationHTML, 'markdown')
   const demosReg = /<!--demos-->/

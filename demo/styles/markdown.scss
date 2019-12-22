@@ -4,81 +4,6 @@
 @include themes-mixin {
   @if $theme == 'dark' {
     .markdown {
-      font-size: 16px;
-      strong {
-        font-weight: 700;
-      }
-      h1, h2, h3, h4, h5, h6 {
-        transition: color .3s $default-cubic-bezier;
-        margin: 0;
-        font-weight: 700;
-      }
-      h1 {
-        font-size: 32px;
-        margin-bottom: 12px;
-      }
-      h2 {
-        font-size: 24px;
-        margin-top: 24px;
-        margin-bottom: 12px;
-      }
-      h3 {
-        font-size: 18px;
-        margin-top: 18px;
-        margin-bottom: 12px;
-      }
-      h4 {
-        font-size: 16px;
-        margin-top: 16px;
-        margin-bottom: 8px;
-      }
-      ul, ol {
-        padding-left: 0;
-        li {
-          transition: color .3s $default-cubic-bezier;
-          line-height: 1.875;
-          margin-bottom: 0px;
-          font-size: 14px;
-          color: $--n-secondary-text-color;
-        }
-      }
-      p {
-        transition: color .3s $default-cubic-bezier;
-        margin: 8px 0 0 0;
-        font-size: 14px;
-        line-height: 1.875;
-        color: $--n-secondary-text-color;
-      }
-      a {
-        transition: color .3s $default-cubic-bezier;
-        color: $--primary-6;
-        font-size: 14px;
-      }
-      code {
-        transition: background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier,  color .3s $default-cubic-bezier;
-      }
-      pre {
-        width: 100%;
-        box-sizing: border-box;
-        & > code {
-          border-radius: 6px;
-          border: 1px solid $--n-divider-color;
-          display: block;
-          padding: 12px 16px 12px 16px;
-          background-color: $--n-card-color;
-        }
-      }
-      :not(pre) > code {
-        white-space: nowrap;
-        box-sizing: border-box;
-        border-radius: 3px;
-        background-color: rgba(255, 255, 255, .12);
-        color: $--n-secondary-text-color;
-        padding: 0em .4em .1em .4em;
-        font-size: 14px;
-        font-family: $--n-font-family;
-        border: 1px solid transparent;
-      }
       table {
         font-size: 14px;
         width: 100%;
@@ -120,22 +45,6 @@
     }
   } @else {
     .n-light-theme .markdown {
-      p, li, code {
-        color: $--n-secondary-text-color;
-      }
-      a {
-        color: $--primary-6;
-      }
-      pre {
-        & > code {
-          background-color: white;
-          border: 1px solid $--n-divider-color;
-        }
-      }
-      :not(pre) > code {
-        background-color: rgb(244, 244, 244);
-        border: 1px solid rgb(230, 230, 230);
-      }
       table {
         border: 1px solid $--n-divider-color;
         th {

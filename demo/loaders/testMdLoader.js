@@ -1,5 +1,9 @@
+const mdLoader = require('./NaiveUIMdLoader')
 const marked = require('marked')
-const renderer = require('./mdRenderer')
+const fs = require('fs')
+const path = require('path')
+const content = fs.readFileSync(path.resolve(__dirname, '../documentation/intro/start.vue.md')).toString()
+// console.log('rendered', mdLoader(content))
 
 function parseMdAsAnchor (content) {
   const tokens = marked.lexer(content)
@@ -11,19 +15,4 @@ function parseMdAsAnchor (content) {
   return `<n-anchor :top="24" position="absolute" affix style="width: 132px;">${linkTags.join('\n')}</n-anchor>`
 }
 
-module.exports = function (content) {
-  return `<template>
-  <component-documentation>
-    <div style="display: flex; flex-wrap: nowrap;">
-      <div style="width: calc(100% - 148px); margin-right: 16px;">
-        ${marked(content, {
-          renderer
-        })}
-      </div>
-      <div style="width: 132px;">
-        ${parseMdAsAnchor(content)}
-      </div>
-    </div>
-  </component-documentation>
-</template>`
-}
+console.log(parseMdAsAnchor(content))

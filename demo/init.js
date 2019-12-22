@@ -1,17 +1,13 @@
 import Vue from 'vue/dist/vue'
 import VueRouter from 'vue-router'
 import '../styles/index.scss'
-import './styles/atom-one-dark-reasonable.scss'
-import './styles/atom-one-light.scss'
 import './styles/markdown.scss'
-import './styles/font.scss'
 import NaiveUI from '../index'
 import VueI18n from 'vue-i18n'
 
 import intro from './documentation/intro/intro'
 import start from './documentation/intro/start'
 import devGuildlines from './documentation/intro/devGuidelines'
-import status from './documentation/intro/status'
 
 import nimbusServiceLayoutDemo from './documentation/components/nimbusServiceLayoutDemo'
 import gradientText from './documentation/components/gradientText'
@@ -155,7 +151,6 @@ const routes = [
       { path: '/intro', component: intro },
       { path: '/start', component: start },
       { path: '/dev-guildlines', component: devGuildlines },
-      { path: '/status', component: status },
       { path: '/n-nimbus-service-layout', component: nimbusServiceLayoutDemo },
       { path: '/n-layout', component: layout },
       { path: '/n-gradient-text', component: gradientText },
