@@ -1,8 +1,8 @@
 const marked = require('marked')
 const camelCase = require('lodash/camelCase')
 const kababCase = require('lodash/kebabCase')
-const renderer = require('./mdRenderer')
 const mdLoader = require('./NaiveUIMdLoader')
+const mdRenderer = require('./mdRenderer')
 
 function template (demos, demosLiteral, isSingleColumn = false) {
   // return `<component-demos :single-column="${isSingleColumn}">
@@ -103,10 +103,10 @@ function convertMd2ComponentDocumentation (text) {
   footerPart.links = {}
   const documentationHTML = `<section class="markdown header-part">${marked.parser(headerPart, {
     gfm: true,
-    renderer
+    renderer: mdRenderer
   })}</section>\n` + '<!--demos-->\n' + `<section class="markdown footer-part">${marked.parser(footerPart, {
     gfm: true,
-    renderer
+    renderer: mdRenderer
   })}</section>\n`
   // console.log(documentationHTML)
   // const classedDocumentationHTML = addClassToHTML(documentationHTML, 'markdown')

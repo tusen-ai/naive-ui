@@ -18,10 +18,10 @@
   warningColor: $--error-5;
   warningHoverColor: $--error-6;
   warningActiveColor: $--error-7;
-  textPrimaryColor: $--text-1;
-  textSecondaryColor: $--text-2;
-  textTertiaryColor: $--text-3;
-  textDisabledColor: rgba(255, 255, 255, 0.3);
+  primaryTextColor: $--text-1;
+  secondaryTextColor: $--text-2;
+  tertiaryTextColor: $--text-3;
+  disabledTextColor: rgba(255, 255, 255, 0.3);
   popoverBackgroundColor: $--neutral-1;
   dialogBackgroundColor: $--neutral-3;
   cardBackgroundColor: $--neutral-9;
@@ -31,5 +31,5 @@
   dividerOverlayColor: $--overlay-6 ;
   borderColor: $--neutral-7;
   borderOverlayColor: $--overlay-7;
-  cubicBezierEaseInOut: cubic-bezier(.4, 0, .2, 1);
+  easeInOutCubicBezier: cubic-bezier(.4, 0, .2, 1);
 }

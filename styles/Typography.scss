@@ -44,9 +44,6 @@ $--header-bar-width: (
     &:first-child {
       margin-top: 0
     }
-    &:last-child {
-      margin-bottom: 0;
-    }
     margin: map-get($--header-margin, $level);
     transition: color .3s $default-cubic-bezier;
     @include m(prefix-bar) {
