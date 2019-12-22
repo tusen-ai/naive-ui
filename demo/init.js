@@ -81,7 +81,6 @@ import ComponentDemo from './utils/ComponentDemo'
 import ComponentDemos from './utils/ComponentDemos'
 import ComponentDocumentation from './utils/ComponentDocumentation'
 import DocumentationWrapper from './utils/DocumentationWrapper'
-import './styles/ComponentDemo.scss'
 import './styles/demo.scss'
 
 import popoverDebug from './debugComponents/popoverDebug'

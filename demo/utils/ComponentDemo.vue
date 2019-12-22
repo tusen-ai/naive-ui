@@ -12,16 +12,17 @@
 </i18n>
 
 <template>
-  <div
-    class="n-code-box"
-    :class="{
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+  <n-card
+    class="demo-card"
+    :segmented="{
+      footer: true
     }"
-    n-dark-theme-background-color-hint="#1e2437"
-    n-light-theme-background-color-hint="white"
+    :content-style="contentStyle"
   >
-    <div class="n-code-box__title">
+    <template v-slot:header>
       <slot name="title" />
+    </template>
+    <template v-slot:header-extra>
       <n-tooltip
         :delay="300"
         :placement="'top'"
@@ -42,36 +43,28 @@
         </template>
         {{ !showCode ? $t('show') : $t('hide') }}
       </n-tooltip>
-    </div>
-    <div class="n-code-box__content markdown">
-      <slot name="content" />
-    </div>
+    </template>
+    <slot name="content" />
     <div
-      class="n-code-box__view"
+      class="demo-card__view"
     >
       <slot name="demo" />
     </div>
-    <div
-      v-if="showCode"
-      class="n-code-box__code"
-    >
+    <template v-slot:footer v-if="showCode">
       <n-scrollbar>
         <slot name="code" />
       </n-scrollbar>
-    </div>
-  </div>
+    </template>
+  </n-card>
 </template>
 
 <script>
-import withapp from '../../packages/mixins/withapp'
-import themeable from '../../packages/mixins/themeable'
 import mdCode from '../../packages/icons/md-code'
 
 export default {
   components: {
     mdCode
   },
-  mixins: [withapp, themeable],
   inject: {
     NDocumentation: {
       default: null
@@ -80,18 +73,18 @@ export default {
   data () {
     return {
       showCode: false,
-      lightThemeCSSRef: null,
-      defaultThemeCSSRef: null,
+      contentStyle: null,
       controller: {}
     }
   },
   watch: {
-    synthesizedTheme (value) {
-
-    },
     showCode () {
+      this.contentStyle = {
+        transition: 'none'
+      }
       this.$nextTick().then(() => {
         this.controller.updatePosition()
+        this.contentStyle = null
       })
     }
   },
@@ -101,9 +94,6 @@ export default {
     this.NDocumentation.anchorLinkMap = new Map(map, this.$scopedSlots.title()[0].text.trim())
   },
   methods: {
-    switchHighlightStyle () {
-
-    },
     toggleCodeDisplay () {
       this.showCode = !this.showCode
     }

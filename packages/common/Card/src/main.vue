@@ -2,10 +2,9 @@
   <div
     class="n-card"
     :class="{
-      [`n-card--title${(segmented && segmented.header === 'soft') ? '-soft' : ''}-segmented`]: segmented === true || (segmented && segmented.header),
       [`n-card--content${(segmented && segmented.content === 'soft') ? '-soft' : ''}-segmented`]: segmented === true || (segmented && segmented.content),
       [`n-card--footer${(segmented && segmented.footer === 'soft') ? '-soft' : ''}-segmented`]: segmented === true || (segmented && segmented.footer),
-      [`n-card--action${(segmented && segmented.action === 'soft') ? '-soft' : ''}-segmented`]: segmented === true || (segmented && segmented.action),
+      [`n-card--action-segmented`]: segmented === true || (segmented && segmented.action),
       [`n-card--${size}-size`]: true,
       'n-card--bordered': bordered,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme

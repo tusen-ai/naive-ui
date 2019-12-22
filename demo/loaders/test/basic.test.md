@@ -8,3 +8,11 @@ There are `default`, `primary`, `info`, `success`, `warning` and `error` type of
 <n-button type="warning">Warning</n-button>
 <n-button type="Error">Error</n-button>
 ```
+```js
+const a = 1
+```
+```css
+.test {
+  height: 100px;
+}
+```

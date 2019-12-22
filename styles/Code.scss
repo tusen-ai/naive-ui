@@ -11,7 +11,10 @@
 @include b(code) {
   margin: 0;
   font-size: 14px;
-  font-family: $--n-mono-font-family, monospace;
+  font-family: $--n-mono-font-family;
+  code {
+    font-family: $--n-mono-font-family;
+  }
   [class^=hljs] {
     transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
   }

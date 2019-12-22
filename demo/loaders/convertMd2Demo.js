@@ -1,7 +1,9 @@
 const marked = require('marked')
 const fs = require('fs')
 const path = require('path')
-const mdRenderer = require('./mdRenderer')
+const createRenderer = require('./mdRenderer')
+const mdRenderer = createRenderer()
+const codeRenderer = createRenderer(false)
 // const prettier = require('prettier')
 
 const demoBlock = fs.readFileSync(path.resolve(__dirname, 'ComponentDemoTemplate.vue')).toString()
@@ -64,7 +66,7 @@ ${parts.style}
   mergedParts.code = marked(`\`\`\`html
 ${mergedParts.code}
 \`\`\``, {
-  renderer: mdRenderer
+  renderer: codeRenderer
 })
   // console.log(mergedParts.code)
   return mergedParts

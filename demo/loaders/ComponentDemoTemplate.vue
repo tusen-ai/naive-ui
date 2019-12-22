@@ -21,6 +21,8 @@
 /** SCRIPT_SLOT */
 </script>
 
-<style scoped>
-/**STYLE_SLOT*/
+<style scoped lang="scss">
+.demo-card__view {
+  /**STYLE_SLOT*/
+}
 </style>

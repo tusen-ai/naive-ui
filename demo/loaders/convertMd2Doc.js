@@ -2,7 +2,8 @@ const marked = require('marked')
 const camelCase = require('lodash/camelCase')
 const kababCase = require('lodash/kebabCase')
 const mdLoader = require('./NaiveUIMdLoader')
-const mdRenderer = require('./mdRenderer')
+const createRenderer = require('./mdRenderer')
+const mdRenderer = createRenderer()
 
 function template (demos, demosLiteral, isSingleColumn = false) {
   // return `<component-demos :single-column="${isSingleColumn}">

@@ -23,53 +23,47 @@ $--card-margin-bottom: (
 
 @mixin card-size-mixin ($size) {
   @include m($size + '-size') {
-    @include m(title-segmented) {
-      @include b(card-header) {
-        &:not(:last-child) {
-          margin-bottom: 0;
-          padding-bottom: map-get($--card-margin-bottom, $size);
-        }
-      }
-    }
-    @include m(title-soft-segmented) {
-      @include b(card-header) {
-        padding: map-get($--card-margin-top, $size) 0 map-get($--card-margin-bottom, $size) 0;
-        margin: 0 map-get($--card-margin-left, $size);
-      }
-    }
     @include m(content-segmented) {
-      @include e(content) {
-        &:not(:last-child) {
-          margin-bottom: 0;
-          padding-bottom: map-get($--card-margin-bottom, $size);
+      & > {
+        @include e(content) {
+          &:not(:first-child) {
+            margin-top: 0;
+            padding-top: map-get($--card-margin-bottom, $size);
+          }
         }
       }
     }
     @include m(content-soft-segmented) {
-      @include e(content) {
-        padding: 0;
-        margin: map-get($--card-margin-bottom, $size) map-get($--card-margin-left, $size);
-        &:not(:last-child) {
-          margin-bottom: 0;
-          padding-bottom: map-get($--card-margin-bottom, $size);
+      & > {
+        @include e(content) {
+          padding: 0;
+          margin: map-get($--card-margin-bottom, $size) map-get($--card-margin-left, $size);
+          &:not(:first-child) {
+            margin-top: 0;
+            padding-top: map-get($--card-margin-bottom, $size);
+          }
         }
       }
     }
     @include m(footer-segmented) {
-      @include e(footer) {
-        &:not(:last-child) {
-          margin-bottom: 0;
-          padding-bottom: map-get($--card-margin-bottom, $size);
+      & > {
+        @include e(footer) {
+          &:not(:first-child) {
+            margin-top: 0;
+            padding-top: map-get($--card-margin-bottom, $size);
+          }
         }
       }
     }
     @include m(footer-soft-segmented) {
-      @include e(footer) {
-        padding: 0;
-        margin: map-get($--card-margin-bottom, $size) map-get($--card-margin-left, $size);
-        &:not(:last-child) {
-          margin-bottom: 0;
-          padding-bottom: map-get($--card-margin-bottom, $size);
+      & > {
+        @include e(footer) {
+          padding: 0;
+          margin: map-get($--card-margin-bottom, $size) map-get($--card-margin-left, $size);
+          &:not(:first-child) {
+            margin-top: 0;
+            padding-top: map-get($--card-margin-bottom, $size);
+          }
         }
       }
     }
@@ -123,13 +117,10 @@ $--card-margin-bottom: (
     @include m(bordered) {
       border: 1px solid $--card-border-color;
     }
-    @include m(title-segmented, title-soft-segmented) {
-      @include b(card-header) {
-        @include once {
-          transition: border-color .3s $--n-ease-in-out-cubic-bezier;
-        }
-        &:not(:last-child) {
-          border-bottom: 1px solid $--card-border-color;
+    @include m(action-segmented) {
+      @include e(action) {
+        &:not(:first-child) {
+          border-top: 1px solid $--card-border-color;
         }
       }
     }
@@ -138,8 +129,8 @@ $--card-margin-bottom: (
         @include once {
           transition: border-color .3s $--n-ease-in-out-cubic-bezier;
         }
-        &:not(:last-child) {
-          border-bottom: 1px solid $--card-border-color;
+        &:not(:first-child) {
+          border-top: 1px solid $--card-border-color;
         }
       }
     }
@@ -148,8 +139,8 @@ $--card-margin-bottom: (
         @include once {
           transition: border-color .3s $--n-ease-in-out-cubic-bezier;
         }
-        &:not(:last-child) {
-          border-bottom: 1px solid $--card-border-color;
+        &:not(:first-child) {
+          border-top: 1px solid $--card-border-color;
         }
       }
     }
@@ -159,7 +150,6 @@ $--card-margin-bottom: (
         display: flex;
         align-items: center;
       }
-      
       @include e(main) {
         @include once {
           font-weight: 700;
@@ -180,26 +170,30 @@ $--card-margin-bottom: (
       @include e(close-mark) {
         @include once {
           cursor: pointer;
-          transition: fill .3s $--n-ease-in-out-cubic-bezier
+          transition: fill .3s $--n-ease-in-out-cubic-bezier;
         }
         fill: $--card-close-fill;
       }
     }
     @include once {
       @include e(content) {
+        box-sizing: border-box;
         line-height: 1.5;
         font-size: 14px;
       }
       @include e(footer) {
+        box-sizing: border-box;
         line-height: 1.5;
         font-size: 14px;
       }
     }
     @include e(action) {
       @include once {
-        transition: background-color .3s $--n-ease-in-out-cubic-bezier;
+        box-sizing: border-box;
+        transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
         line-height: 1.5;
         font-size: 14px;
+        background-clip: padding-box;
       }
       background-color: $--card-action-background-color;
     }

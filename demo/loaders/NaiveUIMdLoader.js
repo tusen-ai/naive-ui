@@ -1,5 +1,6 @@
 const marked = require('marked')
-const renderer = require('./mdRenderer')
+const createRenderer = require('./mdRenderer')
+const renderer = createRenderer()
 
 function parseMdAsAnchor (content) {
   const tokens = marked.lexer(content)
