@@ -57,9 +57,9 @@ export default {
         content
       } = this.generateCodeHTML(this.language, this.code, this.trim)
       if (valid) {
-        this.$el.innerHTML = content
+        this.$refs.code.innerHTML = content
       } else {
-        this.$el.textContent = content
+        this.$refs.code.textContent = content
       }
     }
   },
@@ -69,7 +69,11 @@ export default {
       class: {
         [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme
       }
-    })
+    }, [
+      h('code', {
+        ref: 'code'
+      })
+    ])
   }
 }
 </script>
