@@ -12,7 +12,7 @@ The following code shows how to set hljs of Naive UI. Importing highlight.js on 
 import Vue from 'vue'
 import NaiveUI from 'naive-ui'
 import hljs from 'highlight.js/lib/highlight'
-import javascript from 'highlight.js/lib/languages/javascript'
+import cpp from 'highlight.js/lib/languages/cpp'
 
 hljs.registerLanguage('cpp', cpp)
 Vue.use(NaiveUI)
