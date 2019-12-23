@@ -18,8 +18,8 @@ export default {
     synthesizedTheme () {
       if (this.theme !== null) {
         return this.theme
-      } else if (this.NThemedComponent && this.NThemedComponent.synthesizedTheme) {
-        return this.NThemedComponent.synthesizedTheme
+      } else if (this.NThemedComponent && this.NThemedComponent.theme) {
+        return this.NThemedComponent.theme
       } else {
         return (this.NConfigProvider && this.NConfigProvider.synthesizedTheme) || null
       }
