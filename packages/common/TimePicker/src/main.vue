@@ -3,7 +3,10 @@
     <n-input
       ref="activator"
       v-model="displayTimeString"
-      class="n-date-picker-panel__time-input"
+      class="n-date-picker-panel__time-input n-time-picker-input"
+      :class="{
+        'n-time-picker-input--error': isErrorValue
+      }"
       :force-focus="active"
       placeholder="Select time"
       lazy-focus
@@ -46,8 +49,8 @@
                     :key="hour"
                     class="n-time-picker-selector-time-row__item"
                     :class="{
-                      'n-time-picker-selector-time-row__item--active':
-                        hour === computedHour
+                      'n-time-picker-selector-time-row__item--active': hour === computedHour,
+                      'n-time-picker-selector-time-row__item--disabled': isHourDisabled(hour)
                     }"
                     @click="setHours(hour)"
                   >
@@ -69,8 +72,8 @@
                     :key="minute"
                     class="n-time-picker-selector-time-row__item"
                     :class="{
-                      'n-time-picker-selector-time-row__item--active':
-                        minute === computedMinute
+                      'n-time-picker-selector-time-row__item--active': minute === computedMinute,
+                      'n-time-picker-selector-time-row__item--disabled': isMinuteDisabled(minute)
                     }"
                     @click="setMinutes(minute)"
                   >
@@ -95,8 +98,8 @@
                       'n-time-picker-selector-time-row__item--active':
                         second === computedSecond,
                       'n-time-picker-selector-time-row__item--disabled':
-                        validator &&
-                        !validator(computedHour, computedMinute, second)
+                        isSecondDisabled(second) ||
+                        (validator && !validator(computedHour, computedMinute, second))
                     }"
                     @click="setSeconds(second)"
                   >
@@ -110,7 +113,7 @@
                 </n-scrollbar>
               </div>
             </div>
-            <div class="n-time-picker-selector__actions">
+            <div class="n-time-picker-selector-actions">
               <n-button
                 size="tiny"
                 round
@@ -123,6 +126,10 @@
                 round
                 auto-text-color
                 type="primary"
+                class="n-time-picker-selector-actions__confirm"
+                :class="{
+                  'n-time-picker-selector-actions__confirm--disabled': isErrorVal
+                }"
                 @click="handleConfirmClick"
               >
                 Confirm
@@ -218,6 +225,24 @@ export default {
     validator: {
       type: Function,
       default: null
+    },
+    hourDisabled: {
+      type: Function,
+      default: () => {
+        return false
+      }
+    },
+    minuteDisabled: {
+      type: Function,
+      default: () => {
+        return false
+      }
+    },
+    secondDisabled: {
+      type: Function,
+      default: () => {
+        return false
+      }
     }
   },
   data () {
@@ -225,7 +250,11 @@ export default {
       active: false,
       displayTimeString: this.value === null ? null : format(this.value, this.format),
       ...TIME_CONST,
-      memorizedValue: this.value
+      memorizedValue: this.value,
+      selectedHour: null,
+      selectedMinute: null,
+      selectedSecond: null
+      // isErrorVal: false
     }
   },
   computed: {
@@ -244,6 +273,28 @@ export default {
     computedSecond () {
       if (this.computedTime) return format(this.computedTime, 'ss')
       else return null
+    },
+    isHourDisabled () {
+      let self = this
+      return function (hour) {
+        return self.hourDisabled(Number(hour)) || false
+      }
+    },
+    isMinuteDisabled () {
+      let self = this
+      return function (minute) {
+        return self.minuteDisabled(Number(minute), Number(self.computedHour)) || false
+      }
+    },
+    isSecondDisabled () {
+      let self = this
+      return function (second) {
+        return self.secondDisabled(Number(second), Number(this.computedMinute), Number(self.computedHour)) || false
+      }
+    },
+    isErrorVal () {
+      return this.isHourDisabled(this.computedHour) || this.isMinuteDisabled(this.computedMinute) ||
+    this.isSecondDisabled(this.computedSecond)
     }
   },
   watch: {
@@ -253,8 +304,19 @@ export default {
     },
     value (value, oldValue) {
       this.$emit('change', value, oldValue)
+      // this.checkValue()
+    },
+    active (newVal) {
+      if (!newVal) {
+        if (this.isErrorVal) {
+          this.$emit('input', this.memorizedValue)
+        }
+      }
     }
   },
+  // mounted () {
+  //   this.checkValue()
+  // },
   methods: {
     afterBlur (e) {
       if (this.active) {
@@ -281,25 +343,37 @@ export default {
       }
     },
     setHours (hour) {
+      if (this.isHourDisabled(hour)) {
+        return
+      }
       if (this.value === null) {
-        this.$emit('input', getTime(startOfHour(new Date())))
+        this.$emit('input', getTime(setHours(startOfHour(new Date()), hour)))
       } else {
         this.$emit('input', getTime(setHours(this.value, hour)))
       }
+      this.selectedHour = hour
     },
     setMinutes (minute) {
+      if (this.isMinuteDisabled(minute)) {
+        return
+      }
       if (this.value === null) {
-        this.$emit('input', getTime(startOfMinute(new Date())))
+        this.$emit('input', getTime(setMinutes(startOfMinute(new Date()), minute)))
       } else {
         this.$emit('input', getTime(setMinutes(this.value, minute)))
       }
+      this.selectedMinute = minute
     },
     setSeconds (second) {
+      if (this.isSecondDisabled(second)) {
+        return
+      }
       if (this.value === null) {
-        this.$emit('input', getTime(startOfSecond(new Date())))
+        this.$emit('input', getTime(setSeconds(startOfSecond(new Date()), second)))
       } else {
         this.$emit('input', getTime(setSeconds(this.value, second)))
       }
+      this.selectedSecond = second
     },
     refreshTimeString (time) {
       if (time === undefined) time = this.computedTime
@@ -358,9 +432,7 @@ export default {
     },
     closeTimeSelector (returnFocus = false) {
       this.active = false
-      if (returnFocus) {
-
-      } else {
+      if (!returnFocus) {
         this.$emit('blur', this.value)
       }
     },
@@ -372,6 +444,9 @@ export default {
       this.active = false
     },
     handleConfirmClick () {
+      if (this.isErrorVal) {
+        return
+      }
       this.refreshTimeString()
       this.closeTimeSelector()
     }

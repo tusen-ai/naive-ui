@@ -58,6 +58,10 @@ export default {
     onLoad: {
       type: Function,
       default: () => {}
+    },
+    filter: {
+      type: Function,
+      default: null
     }
   },
   data () {

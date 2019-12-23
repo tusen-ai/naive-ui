@@ -61,7 +61,7 @@
         display: flex;
         flex-direction: column;
         & > {
-            @include b(anchor-link) {
+          @include b(anchor-link) {
             padding-left: 16px;
           }
         }
@@ -81,7 +81,7 @@
           padding-right: 16px;
           transition: color .3s $--n-ease-in-out-cubic-bezier;
         }
-        color: map-get($--anchor-link-title-text-color, 'default');;
+        color: map-get($--anchor-link-title-text-color, 'default');
         &:hover, &:focus {
           color: map-get($--anchor-link-title-text-color, 'hover');
         }

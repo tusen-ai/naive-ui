@@ -45,6 +45,6 @@ export default {
       value: null,
       options: genOptions()
     }
-  }
+  },
 }
 ```

@@ -4,9 +4,9 @@ import NPopoverContent from './PopoverContent'
 import activatorMixin from './activatorMixin'
 import genId from '../../../utils/genId'
 
-function mixin (component, mixin) {
+function mixin (component, mixins) {
   component.mixins = component.mixins || []
-  component.mixins.push(mixin)
+  component.mixins.push(mixins)
   return component
 }
 

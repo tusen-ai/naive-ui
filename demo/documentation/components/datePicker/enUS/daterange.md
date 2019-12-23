@@ -3,6 +3,7 @@
 <n-date-picker
   v-model="range1"
   type="daterange"
+  :disabledTime="disabledTime"
 />
 <n-date-picker
   v-model="range2"
@@ -16,6 +17,11 @@ export default {
       range1: null,
       range2: [1562774466000, 1567180866000]
     };
+  },
+  methods: {
+    disabledTime (current) {
+      return (current >= 1574092800000) && (current < 1576771200000)
+    }
   }
 }
 ```

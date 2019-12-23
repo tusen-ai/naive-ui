@@ -2,6 +2,7 @@
 
 @include setup-dark-theme($in-js-env: true);
 
+/* stylelint-disable */
 :export {
   primaryColor: $--primary-5;
   primaryHoverColor: $--primary-6;

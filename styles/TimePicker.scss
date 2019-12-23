@@ -8,6 +8,19 @@
       display: inline-block;
       width: 180px;
     }
+    @include b(time-picker-input) {
+      @include m(error) {
+        color: red;
+        input {
+          color: red!important;
+        }
+        // @include b(input) {
+        //   @include e(input) {
+        //     color: red
+        //   }
+        // }
+      }
+    }
   }
   @include b(time-picker-selector) {
     @include once {
@@ -18,10 +31,16 @@
       width: 180px;
       overflow: hidden;
       @include fade-in-scale-up-transition(time-picker);
-      @include e(actions) {
+      @include b(time-picker-selector-actions) {
         padding: 10px 15px;
         display: flex;
         justify-content: space-around;
+        @include e(confirm) {
+          @include m(disabled) {
+            cursor: not-allowed;
+            opacity: 0.5;
+          }
+        }
       }
     }
     background-color: $--time-picker-background-color;
@@ -57,6 +76,10 @@
         @include m(active) {
           background-color: $--time-picker-item-background-color;
           color: map-get($--time-picker-text-color, 'active');
+        }
+        @include m(disabled) {
+          opacity: 0.45;
+          cursor: not-allowed;
         }
       }
     }

@@ -9,6 +9,8 @@ import getYear from 'date-fns/getYear'
 import getMonth from 'date-fns/getMonth'
 import getDate from 'date-fns/getDate'
 import isValid from 'date-fns/isValid'
+import startOfHour from 'date-fns/startOfHour'
+import setHours from 'date-fns/setHours'
 import { dateArray, strictParse } from '../../../../utils/dateUtils'
 
 export default {
@@ -34,13 +36,30 @@ export default {
     actions: {
       type: Array,
       default: () => ['now', 'confirm']
+    },
+    dateDisabled: {
+      type: Function,
+      default: () => {
+        return false
+      }
+    },
+    timeDisabled: {
+      type: Function,
+      default: () => {
+        return {
+          hourDisabled: () => false,
+          minuteDisabled: () => false,
+          secondDisabled: () => false
+        }
+      }
     }
   },
   data () {
     return {
       displayDateString: '',
       calendarDateTime: new Date(), // moment(),
-      currentDateTime: new Date() // moment()
+      currentDateTime: new Date(), // moment()
+      selectedDate: null
     }
   },
   computed: {
@@ -67,6 +86,42 @@ export default {
       // } else {
       //   return null
       // }
+    },
+    isErrorDate () {
+      if (!this.value) {
+        return false
+      }
+      return this.dateDisabled(setHours(startOfHour(new Date(this.value)), 0).getTime())
+    },
+    isErrorTime () {
+      if (!this.value) {
+        return false
+      }
+      const time = new Date(this.value)
+      const hour = time.getHours()
+      const minute = time.getMinutes()
+      const second = time.getMinutes()
+      return this.hourDisabled(hour) ||
+          this.minuteDisabled(minute, hour) ||
+          this.secondDisabled(second, minute, hour)
+    },
+    isErrorDateTime () {
+      return this.isErrorDate || this.isErrorTime
+    },
+    currentDate () {
+      if (!this.value) {
+        return null
+      }
+      return setHours(startOfHour(new Date(this.value)), 0).getTime()
+    },
+    hourDisabled () {
+      return this.timeDisabled(this.currentDate).hourDisabled || function () { return false }
+    },
+    minuteDisabled () {
+      return this.timeDisabled(this.currentDate).minuteDisabled || function () { return false }
+    },
+    secondDisabled () {
+      return this.timeDisabled(this.currentDate).secondDisabled || function () { return false }
     }
   },
   watch: {
@@ -88,6 +143,9 @@ export default {
       } else {
         this.displayDateString = ''
       }
+    },
+    isErrorDateTime () {
+      this.$emit('check-value', this.isErrorDateTime)
     }
   },
   created () {
@@ -96,6 +154,11 @@ export default {
       this.calendarDateTime = this.valueAsDateTime
     } else {
       this.displayDateString = ''
+    }
+  },
+  mounted () {
+    if (this.isErrorDateTime) {
+      this.$emit('check-value', this.isErrorDateTime)
     }
   },
   methods: {
@@ -115,7 +178,6 @@ export default {
     // },
     handleDateInput (value) {
       const date = strictParse(value, this.dateFormat, new Date())// moment(value, this.dateFormat, true)
-      // console.log('handle date input', value)
       if (isValid(date)) {
         if (!this.valueAsDateTime) {
           this.$emit('input', getTime(this.adjustValue(new Date())))
@@ -185,15 +247,18 @@ export default {
     setSelectedDateTimeToNow () {
       this.$emit('input', getTime(this.adjustValue(new Date())))
       this.calendarDateTime = new Date() // moment()
+      // this.checkDate(getTime(this.adjustValue(new Date())))
     },
     handleDateClick (dateItem) {
-      // console.log(dateItem)
+      if (this.dateDisabled(dateItem.timestamp)) {
+        return
+      }
       let newSelectedDateTime = new Date()
       if (this.valueAsDateTime !== null) {
         newSelectedDateTime = this.valueAsDateTime
       }
       newSelectedDateTime = set(newSelectedDateTime, dateItem.dateObject)
-      // console.log(newSelectedDateTime.format('YYYY MM DD'))
+      this.selectedDate = dateItem.dateObject
       this.$emit('input', getTime(this.adjustValue(newSelectedDateTime)))
     },
     /**
@@ -211,6 +276,9 @@ export default {
       this.displayDateString = format(time, this.dateFormat)
     },
     handleConfirmClick () {
+      if (this.isErrorDate || this.isErrorTime) {
+        return
+      }
       this.$emit('confirm')
       this.closeCalendar()
     },

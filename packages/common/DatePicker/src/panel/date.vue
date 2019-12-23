@@ -59,7 +59,8 @@
             'n-date-picker-panel-dates__date--current': dateItem.isCurrentDate,
             'n-date-picker-panel-dates__date--selected': dateItem.isSelectedDate,
             'n-date-picker-panel-dates__date--in-display-month': dateItem.isDateOfDisplayMonth,
-            'n-date-picker-panel-dates__date--no-transition': noTransition
+            'n-date-picker-panel-dates__date--no-transition': noTransition,
+            'n-date-picker-panel-dates__date--disabled': dateDisabled(dateItem.timestamp)
           }"
           @click="handleDateClick(dateItem)"
         >
@@ -88,6 +89,10 @@
           round
           auto-text-color
           type="primary"
+          class="n-date-picker-panel-actions__confirm"
+          :class="{
+            'n-date-picker-panel-actions__confirm--disabled': isErrorTime || isErrorDate
+          }"
           @click="handleConfirmClick"
         >
           Confirm

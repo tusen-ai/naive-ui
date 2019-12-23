@@ -334,7 +334,7 @@ export default {
     },
     addValidationEventListeners () {
       const rules = this.synthesizedRules
-      if (rules.length >= 0) {
+      if (rules.length > 0) {
         this.$on('blur', this.handleContentBlur)
         this.$on('input', this.handleContentInput)
         this.$on('focus', this.handleContentFocus)

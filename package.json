@@ -10,7 +10,7 @@
     "dev": "cross-env NODE_ENV=development && webpack-dev-server --config build/webpack.dev.js",
     "serve": "npm run dev",
     "lint": "eslint packages/**/*.{js,vue} test/**/*.{js,vue} build/**/*.{js,vue} demo/**/*.{js,vue} && stylelint \"styles/**/*.scss\"",
-    "lint-style": "stylelint  \"styles/**/*.scss\"",
+    "lint-style": "stylelint \"styles/**/*.scss\"  --fix",
     "test": "cross-env NODE_ENV=development BABEL_ENV=test karma start test/unit/karma.conf.js",
     "test-cov": "cross-env NODE_ENV=development BABEL_ENV=test karma start test/unit/karma.conf.js && http-server test/unit/coverage",
     "test-release": "cross-env NODE_ENV=production webpack-dev-server --config build/webpack.release.js",

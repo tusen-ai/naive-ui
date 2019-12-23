@@ -93,7 +93,7 @@
         height: $--input-icon-size;
         width: $--input-icon-size;
         @include b(icon) {
-          font-size: $--input-icon-size;;
+          font-size: $--input-icon-size;
           path {
             transition: fill .3s $--n-ease-in-out-cubic-bezier;
           }

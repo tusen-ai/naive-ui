@@ -155,12 +155,12 @@ export default {
       }
     },
     scrollToTop (dismissEvent = false) {
-      this.scrollTo(dismissEvent, 'top')
+      this.scrollTo('top', dismissEvent)
     },
     scrollToBottom (dismissEvent = false) {
-      this.scrollTo(dismissEvent, 'bottom')
+      this.scrollTo('bottom', dismissEvent)
     },
-    scrollTo (dismissEvent = false, to) {
+    scrollTo (to, dismissEvent = false) {
       if (dismissEvent) {
         this.dismissEvent = true
       }
