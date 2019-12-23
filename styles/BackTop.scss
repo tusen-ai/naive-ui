@@ -13,7 +13,7 @@
     }
     @include e(default-button) {
       @include once {
-        transition: box-shadow .3s $default-cubic-bezier, fill .3s $default-cubic-bezier;
+        transition: box-shadow .3s $--n-ease-in-out-cubic-bezier, fill .3s $--n-ease-in-out-cubic-bezier;
         border-radius: 20px;
         height: 40px;
         width: 40px;

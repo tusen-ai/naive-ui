@@ -94,9 +94,9 @@
         height: 24px;
         box-sizing: border-box;
         font-size: 14px;
-        transition: color .3s $default-cubic-bezier;
+        transition: color .3s $--n-ease-in-out-cubic-bezier;
         &::after {
-          transition: color .3s $default-cubic-bezier;
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
         }
       }
       color: $--n-text-color;
@@ -111,7 +111,7 @@
         font-size: 14px;
         transform-origin: top left;
         line-height: 1.25;
-        transition: color .3s $default-cubic-bezier;
+        transition: color .3s $--n-ease-in-out-cubic-bezier;
         @include b(form-item-feedback) {
           @include fade-down-transition($from-offset: -3px);
         }

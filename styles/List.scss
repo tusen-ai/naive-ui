@@ -4,7 +4,7 @@
   @include b(list) {
     @include once {
       font-size: 14px;
-      transition: background-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+      transition: background-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
       padding: 0;
       list-style-type: none;
     }
@@ -36,7 +36,7 @@
       @include once {
         padding: 12px 0;
         box-sizing: border-box;
-        transition: border-color .3s $default-cubic-bezier;
+        transition: border-color .3s $--n-ease-in-out-cubic-bezier;
       }
       &:not(:last-child) {
         border-bottom: 1px solid $--n-border-color;
@@ -49,7 +49,7 @@
         display: flex;
         flex-wrap: nowrap;
         align-items: center;
-        transition: border-color .3s $default-cubic-bezier;
+        transition: border-color .3s $--n-ease-in-out-cubic-bezier;
         @include e(prefix) {
           margin-right: 20px;
           flex: 0;

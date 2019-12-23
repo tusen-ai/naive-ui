@@ -1,5 +1,5 @@
 @mixin setup-dark-button {
-  $button-font-family: $default-font-family !global;
+  $button-font-family: $--n-font-family !global;
   $button-border-radius: 6px !global;
   $button-font-size: (
     "tiny": 12px,

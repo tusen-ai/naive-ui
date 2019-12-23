@@ -10,7 +10,6 @@ $small-height: 28px;
 $default-height: 34px;
 $medium-height: 34px;
 $large-height: 40px;
-$default-font-family: 'Lato';
 $main-color: #63E2B7;
 @function main-color-with-alpha($alpha) {
   @return rgba(99, 226, 183, $alpha);
@@ -39,7 +38,6 @@ $input-icon-color: rgba(255,255,255,0.2);
 /**
  * n-button
  */
-$button-font-family: $default-font-family;
 $button-border-radius: 6px;
 $button-font-size: (
   "tiny": 12px,
@@ -186,7 +184,7 @@ $default-text-gradient-warning: linear-gradient(252deg, rgba(247,181,0,1) 0%, rg
 $default-text-gradient-success: linear-gradient(14deg, rgba(120,205,104,1) 0%, rgba(20,166,165,1) 100%);
 $default-text-gradient-danger: linear-gradient(214deg, rgba(224,32,32,1) 0%, rgba(250,100,0,1) 100%);
 
-$default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
+$--n-ease-in-out-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
 
 // $scrollbar-color: rgba(255,255,255,0.2);
 // $scrollbar-color--hover: rgba(255,255,255,0.3);
@@ -230,10 +228,10 @@ $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
     transform: translateY(0);
   }
   &.#{$namespace}-#{$name}-leave-active {
-    transition: opacity .3s $default-cubic-bezier, transform .3s $default-cubic-bezier;
+    transition: opacity .3s $--n-ease-in-out-cubic-bezier, transform .3s $--n-ease-in-out-cubic-bezier;
   }
   &.#{$namespace}-#{$name}-enter-active {
-    transition: opacity .3s $default-cubic-bezier, transform .3s $default-cubic-bezier;
+    transition: opacity .3s $--n-ease-in-out-cubic-bezier, transform .3s $--n-ease-in-out-cubic-bezier;
   }
 }
 
@@ -271,10 +269,10 @@ $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
 
 @mixin fade-in-transition($block: "fade-in", $enter-duration: .2s, $leave-duration: .2s) {
   &.#{$namespace}-#{$block}--transition-enter-active {
-    transition: all $enter-duration $default-cubic-bezier !important;
+    transition: all $enter-duration $--n-ease-in-out-cubic-bezier !important;
   }
   &.#{$namespace}-#{$block}--transition-leave-active {
-    transition: all $leave-duration $default-cubic-bezier !important;
+    transition: all $leave-duration $--n-ease-in-out-cubic-bezier !important;
   }
   &.#{$namespace}-#{$block}--transition-enter,
   &.#{$namespace}-#{$block}--transition-leave-to {
@@ -292,22 +290,22 @@ $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
     opacity: 1;
   }
   &.#{$namespace}-#{$block}--transition-enter-active {
-    transition: opacity $duration $default-cubic-bezier;
+    transition: opacity $duration $--n-ease-in-out-cubic-bezier;
   }
   &.#{$namespace}-#{$block}--transition-enter, &.#{$namespace}-#{$block}--transition-leave-to {
     opacity: 0;
   }
   &.#{$namespace}-#{$block}--transition-leave-to {
-    transition: opacity $duration $default-cubic-bezier;
+    transition: opacity $duration $--n-ease-in-out-cubic-bezier;
   }
 }
 
 @mixin slide-in-from-right-transition($duration: .3s) {
   &.#{$namespace}-slide-in-from-right-leave-active {
-    transition: transform $duration cubic-bezier(.78, .14, .15, .86);
+    transition: transform $duration $--n-ease-in-out-cubic-bezier;
   }
   &.#{$namespace}-slide-in-from-right-enter-active {
-    transition: transform $duration cubic-bezier(.7, .3, .1, 1);
+    transition: transform $duration $--n-ease-in-out-cubic-bezier;
   }
   &.#{$namespace}-slide-in-from-right-enter-to {
     transform: translateX(0);
@@ -325,10 +323,10 @@ $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
 
 @mixin slide-right-transition($block, $duration: .3s, $delay: .3s) {
   &.#{$namespace}-#{$block}--transition-leave-active {
-    transition: transform $duration $slow-out-cubic-bezier, max-height $duration $default-cubic-bezier $delay;
+    transition: transform $duration $slow-out-cubic-bezier, max-height $duration $--n-ease-in-out-cubic-bezier $delay;
   }
   &.#{$namespace}-#{$block}--transition-enter-active {
-    transition: transform $duration $fast-in-cubic-bezier $delay, max-height $duration $default-cubic-bezier;
+    transition: transform $duration $fast-in-cubic-bezier $delay, max-height $duration $--n-ease-in-out-cubic-bezier;
   }
   &.#{$namespace}-#{$block}--transition-enter-to {
     transform: translateX(0);
@@ -348,10 +346,10 @@ $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
 
 @mixin slide-left-transition($block, $duration: .3s, $delay: .3s) {
   &.#{$namespace}-#{$block}--transition-leave-active {
-    transition: transform $duration $slow-out-cubic-bezier, max-height $duration $default-cubic-bezier $delay;
+    transition: transform $duration $slow-out-cubic-bezier, max-height $duration $--n-ease-in-out-cubic-bezier $delay;
   }
   &.#{$namespace}-#{$block}--transition-enter-active {
-    transition: transform $duration $fast-in-cubic-bezier $delay, max-height $duration $default-cubic-bezier;
+    transition: transform $duration $fast-in-cubic-bezier $delay, max-height $duration $--n-ease-in-out-cubic-bezier;
   }
   &.#{$namespace}-#{$block}--transition-enter-to {
     transform: translateX(0);
@@ -381,30 +379,30 @@ $default-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
   &.#{$namespace}-#{$block}-leave-active {
     overflow: hidden;
     transition:
-      max-height $duration $default-cubic-bezier,
+      max-height $duration $--n-ease-in-out-cubic-bezier,
       opacity $duration $fast-in-cubic-bezier,
-      margin-top $duration $default-cubic-bezier,
-      margin-bottom $duration $default-cubic-bezier;
+      margin-top $duration $--n-ease-in-out-cubic-bezier,
+      margin-bottom $duration $--n-ease-in-out-cubic-bezier;
   }
   &.#{$namespace}-#{$block}-enter-active {
     overflow: hidden;
-    transition: max-height $duration $default-cubic-bezier,
+    transition: max-height $duration $--n-ease-in-out-cubic-bezier,
       opacity $duration $slow-out-cubic-bezier,
-      margin-top $duration $default-cubic-bezier,
-      margin-bottom $duration $default-cubic-bezier;
+      margin-top $duration $--n-ease-in-out-cubic-bezier,
+      margin-bottom $duration $--n-ease-in-out-cubic-bezier;
   }
 }
 
 @mixin fade-in-width-expand-transition($block: "fade-in-width-expand", $duration: .2s, $delay: .1s) {
   &.#{$namespace}-#{$block}-leave-active {
-    transition: opacity $duration $default-cubic-bezier, max-width $duration $default-cubic-bezier $delay,
-      margin-left $duration $default-cubic-bezier $delay,
-      margin-right $duration $default-cubic-bezier $delay;
+    transition: opacity $duration $--n-ease-in-out-cubic-bezier, max-width $duration $--n-ease-in-out-cubic-bezier $delay,
+      margin-left $duration $--n-ease-in-out-cubic-bezier $delay,
+      margin-right $duration $--n-ease-in-out-cubic-bezier $delay;
   }
   &.#{$namespace}-#{$block}-enter-active {
-    transition: opacity $duration $default-cubic-bezier $delay, max-width $duration $default-cubic-bezier,
-      margin-left $duration $default-cubic-bezier,
-      margin-right $duration $default-cubic-bezier;
+    transition: opacity $duration $--n-ease-in-out-cubic-bezier $delay, max-width $duration $--n-ease-in-out-cubic-bezier,
+      margin-left $duration $--n-ease-in-out-cubic-bezier,
+      margin-right $duration $--n-ease-in-out-cubic-bezier;
   }
   &.#{$namespace}-#{$block}-enter-to {
     opacity: 1;

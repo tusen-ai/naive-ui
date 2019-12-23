@@ -36,7 +36,7 @@ export default {
     },
     createMessage() {
       this.message = this.$NMessage[this.type](
-        '' + this.count
+        '' + this.count, { duration: 300000 }
       )
     },
   }

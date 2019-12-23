@@ -1,17 +1,13 @@
 import Vue from 'vue/dist/vue'
 import VueRouter from 'vue-router'
 import '../styles/index.scss'
-import './styles/atom-one-dark-reasonable.scss'
-import './styles/atom-one-light.scss'
 import './styles/markdown.scss'
-import './styles/font.scss'
 import NaiveUI from '../index'
 import VueI18n from 'vue-i18n'
 
 import intro from './documentation/intro/intro'
 import start from './documentation/intro/start'
 import devGuildlines from './documentation/intro/devGuidelines'
-import status from './documentation/intro/status'
 
 import nimbusServiceLayoutDemo from './documentation/components/nimbusServiceLayoutDemo'
 import gradientText from './documentation/components/gradientText'
@@ -53,7 +49,7 @@ import anchor from './documentation/components/anchor'
 import popselect from './documentation/components/popselect'
 import configProvider from './documentation/components/configProvider'
 import table from './documentation/components/table'
-
+import typography from './documentation/components/typography'
 import transfer from './documentation/components/transfer'
 import spin from './documentation/components/spin'
 import drawer from './documentation/components/drawer'
@@ -85,7 +81,6 @@ import ComponentDemo from './utils/ComponentDemo'
 import ComponentDemos from './utils/ComponentDemos'
 import ComponentDocumentation from './utils/ComponentDocumentation'
 import DocumentationWrapper from './utils/DocumentationWrapper'
-import './styles/ComponentDemo.scss'
 import './styles/demo.scss'
 
 import popoverDebug from './debugComponents/popoverDebug'
@@ -121,7 +116,7 @@ Vue.use(NaiveUI)
 NaiveUI.setHljs(hljs)
 
 const i18n = new VueI18n({
-  locale: 'en-us'
+  locale: 'en-US'
 })
 
 Vue.component('ComponentDemo', ComponentDemo)
@@ -155,7 +150,6 @@ const routes = [
       { path: '/intro', component: intro },
       { path: '/start', component: start },
       { path: '/dev-guildlines', component: devGuildlines },
-      { path: '/status', component: status },
       { path: '/n-nimbus-service-layout', component: nimbusServiceLayoutDemo },
       { path: '/n-layout', component: layout },
       { path: '/n-gradient-text', component: gradientText },
@@ -232,6 +226,9 @@ const routes = [
       { path: '/n-log', component: log },
       { path: '/n-code', component: code },
       {
+        path: '/n-typography', component: typography
+      },
+      {
         path: '/n-icon-transition-debug',
         component: iconTransitionDebug
       }
@@ -239,7 +236,7 @@ const routes = [
   },
   {
     path: '/*',
-    redirect: '/en-us/dark/start'
+    redirect: '/en-US/dark/start'
   }
 ]
 

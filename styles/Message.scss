@@ -6,7 +6,7 @@
     background-color: map-get($map: $--message-background-color, $key: $type);
     box-shadow: map-get($map: $--message-box-shadow, $key: $type);
     @include e(icon) {
-      path {
+      @include b(icon) {
         fill: $--message-icon-color;
       }
     }
@@ -32,7 +32,7 @@
   @include b(message) {
     @include once {
       display: flex;
-      transition: color .3s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier, transform .3s $default-cubic-bezier,  max-height .3s $default-cubic-bezier, margin-bottom .3s $default-cubic-bezier;
+      transition: color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier, transform .3s $--n-ease-in-out-cubic-bezier,  max-height .3s $--n-ease-in-out-cubic-bezier, margin-bottom .3s $--n-ease-in-out-cubic-bezier;
       max-height: 40px;
       opacity: 1;
       margin-bottom: 12px;
@@ -40,7 +40,7 @@
       height: 40px;
       border-radius: 20px;
       flex-shrink: 0;
-      font-weight: 700;
+      font-weight: 500;
       overflow: hidden;
       &#{&}-transition-enter, &#{&}-transition-leave-to {
         opacity: 0;
@@ -63,7 +63,10 @@
         height: 40px;
         line-height: 40px;
         align-items: center;
-        i::before {
+        @include b(icon) {
+          svg {
+            @include icon-switch-transition();
+          }
           font-size: 20px;
         }
       }

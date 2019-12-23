@@ -3,25 +3,23 @@
 @include themes-mixin {
   @include b(statistic) {
     @include once {
-      /* stylelint-disable */
-      font-family: 'Lato';
-      /* stylelint-enable */
+      font-family: $--n-font-family;
     }
     @include b(statistic-value) {
       @include once {
         margin-top: 4px;
-        font-weight: 700;
+        font-weight: 500;
       }
       @include e(prefix) {
         @include once {
           font-size: 18px;
-          transition: .3s color $default-cubic-bezier;
+          transition: .3s color $--n-ease-in-out-cubic-bezier;
         }
         color: $--statistic-value-prefix-text-color;
         @include b(icon) {
           @include once {
             vertical-align: -0.125em;
-            transition: .3s fill $default-cubic-bezier;
+            transition: .3s fill $--n-ease-in-out-cubic-bezier;
           }
           fill: $--statistic-value-prefix-text-color;
         }
@@ -29,20 +27,20 @@
       @include e(content) {
         @include once {
           font-size: 24px;
-          transition: .3s color $default-cubic-bezier;
+          transition: .3s color $--n-ease-in-out-cubic-bezier;
         }
         color: $--statistic-value-content-text-color;
       }
       @include e(suffix) {
         @include once {
           font-size: 18px;
-          transition: .3s color $default-cubic-bezier;
+          transition: .3s color $--n-ease-in-out-cubic-bezier;
         }
         color: $--statistic-value-suffix-text-color;
         @include b(icon) {
           @include once {
             vertical-align: -0.125em;
-            transition: .3s fill $default-cubic-bezier;
+            transition: .3s fill $--n-ease-in-out-cubic-bezier;
           }
           fill: $--statistic-value-prefix-text-color;
         }
@@ -50,8 +48,8 @@
     }
     @include e(label) {
       @include once {
-        font-weight: 700;
-        transition: .3s color $default-cubic-bezier;
+        font-weight: 500;
+        transition: .3s color $--n-ease-in-out-cubic-bezier;
         font-size: 14px;
       }
       color: $--statistic-value-label-text-color;

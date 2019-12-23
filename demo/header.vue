@@ -1,10 +1,10 @@
 <i18n>
 {
-  "zh-cn": {
+  "zh-CN": {
     "dark": "深色",
     "light": "浅色"
   },
-  "en-us": {
+  "en-US": {
     "dark": "Dark",
     "light": "Light"
   }
@@ -69,11 +69,11 @@ export default {
       langOptions: [
         {
           label: '中文',
-          value: 'zh-cn'
+          value: 'zh-CN'
         },
         {
           label: 'English',
-          value: 'en-us'
+          value: 'en-US'
         }
       ]
     }

@@ -1,17 +1,42 @@
 # Custom Action
 ```html
-<n-popconfirm>
+<n-popconfirm :controller="controller">
   <template v-slot:activator>
-    <n-button>Quit</n-button>
+    <n-button>Quote</n-button>
   </template>
-  Are you sure to quit this game?
+  For example, if I were to write about elephants, I’d have had no idea what words to use.
   <template v-slot:action>
     <n-button
       size="tiny"
-      @click="handleOopsClick"
+      @click="handleClick"
     >
-      oops!
+      Maybe
     </n-button>
   </template>
 </n-popconfirm>
+<n-popconfirm positive-text="Oops!">
+  <template v-slot:activator>
+    <n-button>Quote</n-button>
+  </template>
+  For example, if I were to write about elephants, I’d have had no idea what words to use.
+</n-popconfirm>
+```
+```js
+export default {
+  data () {
+    return {
+      controller: {}
+    }
+  },
+  methods: {
+    handleClick () {
+      this.controller.hide()
+    }
+  }
+}
+```
+```css
+.n-button {
+  margin-right: 8px;
+}
 ```

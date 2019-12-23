@@ -40,22 +40,22 @@
         overflow: hidden;
         transform: top center;
         transition:
-          transform $duration $default-cubic-bezier,
-          max-height $duration $default-cubic-bezier,
+          transform $duration $--n-ease-in-out-cubic-bezier,
+          max-height $duration $--n-ease-in-out-cubic-bezier,
           opacity $duration $fast-in-cubic-bezier,
-          margin-top $duration $default-cubic-bezier,
-          margin-bottom $duration $default-cubic-bezier;
+          margin-top $duration $--n-ease-in-out-cubic-bezier,
+          margin-bottom $duration $--n-ease-in-out-cubic-bezier;
       }
       &.n-fade-in-height-expand-enter-active {
         overflow: hidden;
-        transition: max-height $duration $default-cubic-bezier,
+        transition: max-height $duration $--n-ease-in-out-cubic-bezier,
           opacity $duration $slow-out-cubic-bezier,
-          margin-top $duration $default-cubic-bezier,
-          margin-bottom $duration $default-cubic-bezier;
+          margin-top $duration $--n-ease-in-out-cubic-bezier,
+          margin-bottom $duration $--n-ease-in-out-cubic-bezier;
       }
       border-radius: 6px;
       position: relative;
-      transition: background-color .3s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier;
+      transition: background-color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier;
       @include e(icon) {
         position: absolute;
         left: 12px;
@@ -82,10 +82,10 @@
       @include b(alert-body) {
         padding: 16px 16px 16px 48px;
         @include e(title) {
-          transition: color .3s $default-cubic-bezier;
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
           font-size: 16px;
           line-height: 19px;
-          font-weight: 700;
+          font-weight: 500;
           & + {
             @include e(content) {
               margin-top: 9px;
@@ -93,7 +93,7 @@
           }
         }
         @include e(content) {
-          transition: color .3s $default-cubic-bezier;
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
           font-size: 14px;
         }
       }

@@ -4,7 +4,7 @@
 @include themes-mixin {
   @include b(confirm) {
     @include once {
-      transition: background-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier;
+      transition: background-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
       box-sizing: border-box;
       width: 100%;
       max-width: 446px;
@@ -27,12 +27,12 @@
     }
     @include b(confirm-title) {
       @include once {
-        transition: color .3s $default-cubic-bezier;
+        transition: color .3s $--n-ease-in-out-cubic-bezier;
         display: flex;
         justify-content: space-between;
         align-items: center;
         font-size: 18px;
-        font-weight: 700;
+        font-weight: 500;
         @include b(confirm-title-icon) {
           vertical-align: middle;
           margin-right: 8px;

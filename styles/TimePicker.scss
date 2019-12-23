@@ -66,7 +66,7 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: background-color .3s $default-cubic-bezier;
+          transition: background-color .3s $--n-ease-in-out-cubic-bezier;
           background: transparent;        
         }
         color: map-get($--time-picker-text-color, 'default');

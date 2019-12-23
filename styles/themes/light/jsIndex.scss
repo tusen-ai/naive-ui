@@ -19,10 +19,10 @@
   warningColor: $--error-5;
   warningHoverColor: $--error-6;
   warningActiveColor: $--error-7;
-  textPrimaryColor: $--text-1;
-  textSecondaryColor: $--text-2;
-  textTertiaryColor: $--text-3;
-  textDisabledColor: $--neutral-5;
+  primaryTextColor: $--text-1;
+  secondaryTextColor: $--text-2;
+  tertiaryTextColor: $--text-3;
+  disabledTextColor: $--neutral-5;
   popoverBackgroundColor: $--neutral-10;
   dialogBackgroundColor: $--neutral-10;
   cardBackgroundColor: $--neutral-10;
@@ -32,6 +32,5 @@
   dividerOverlayColor: $--overlay-7;
   borderColor: $--neutral-6;
   borderOverlayColor: $--overlay-6;
-  cubicBezierEaseInOut: cubic-bezier(.4, 0, .2, 1);
+  easeInOutCubicBezier: cubic-bezier(.4, 0, .2, 1);
 }
-/* stylelint-enable */

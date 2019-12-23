@@ -22,14 +22,14 @@
   @include b(popover-content) {
     @include once {
       @include popover-content-transition;
-      transition: background-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier;
+      transition: background-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
       transform-origin: inherit;
       transform: scale(.99999);
       position: relative;
       border-radius: 6px;
       font-size: 13px;
       @include b(popover-arrow) {
-        transition: border-color .3s $default-cubic-bezier;
+        transition: border-color .3s $--n-ease-in-out-cubic-bezier;
         border-width: 6px;
         pointer-events: none;
         position: absolute;

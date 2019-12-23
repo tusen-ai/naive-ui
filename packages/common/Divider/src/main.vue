@@ -10,10 +10,10 @@
     }"
     :style="synthesizedStyle"
   >
-    <div
+    <hr
       v-if="!vertical"
       class="n-divider__line n-divider__line--left"
-    />
+    >
     <div
       v-if="!vertical && $slots.default"
       class="n-divider__title"

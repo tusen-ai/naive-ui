@@ -62,7 +62,7 @@
         left: 14px;
         top: 0;
         opacity: 1;
-        transition: color .3s $default-cubic-bezier;
+        transition: color .3s $--n-ease-in-out-cubic-bezier;
       }
       color: map-get($--base-picker-placeholder-color, 'default');
     }
@@ -72,7 +72,7 @@
         outline: none;
         box-sizing: border-box;
         position: relative;
-        transition: color .3s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+        transition: color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
         border-radius: $--base-picker-border-radius;
       }
       box-shadow: map-get($map: $--base-picker-box-shadow, $key: "default");
@@ -87,7 +87,7 @@
         outline: none;
         box-sizing: border-box;
         position: relative;
-        transition: color .3s $default-cubic-bezier, box-shadow .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+        transition: color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
         border-radius: $--base-picker-border-radius;
       }
       box-shadow: map-get($map: $--base-picker-box-shadow, $key: "default");
@@ -102,14 +102,14 @@
           border:none;
           width: 100%;
           white-space: nowrap;
-          transition: color .3s $default-cubic-bezier;
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
           padding: 0 32px 0 14px;
           background-color: transparent;
           height: 100%;
         }
         color: $--base-picker-color;
         &::placeholder {
-          transition: color .3s $default-cubic-bezier;
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
           color: map-get($--base-picker-placeholder-color, 'default');
         }
         @include m(placeholder) {

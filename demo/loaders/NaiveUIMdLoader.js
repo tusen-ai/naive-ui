@@ -1,41 +1,30 @@
-const hljs = require('highlight.js')
 const marked = require('marked')
-// const prettier = require('prettier')
+const createRenderer = require('./mdRenderer')
+const renderer = createRenderer()
 
-const escapeMap = {
-  '&': '&amp;',
-  '<': '&lt;',
-  '>': '&gt;',
-  '"': '&quot;',
-  "'": '&#39;'
+function parseMdAsAnchor (content) {
+  const tokens = marked.lexer(content)
+  const titles = tokens.filter(token => token.type === 'heading' && token.depth === 2).map(token => token.text)
+  const linkTags = titles.map(title => {
+    const href = title.replace(/ /g, '-')
+    return `<n-anchor-link title="${title}" href="#${href}"/>`
+  })
+  return `<n-anchor :top="24" position="absolute" affix style="width: 132px;">${linkTags.join('\n')}</n-anchor>`
 }
-
-function escapeForHTML (input) {
-  return input.replace(/([&<>'"])/g, char => escapeMap[char])
-}
-
-// Create your custom renderer.
-const renderer = new marked.Renderer()
-renderer.code = (code, language) => {
-  // Check whether the given language is valid for highlight.js.
-  const validLang = !!(language && hljs.getLanguage(language))
-
-  // Highlight only if the language is valid.
-  // highlight.js escapes HTML in the code, but we need to escape by ourselves
-  // when we don't use it.
-  const highlighted = validLang
-    ? hljs.highlight(language, code).value
-    : escapeForHTML(code)
-
-  // Render the highlighted code with `hljs` class.
-  return `<pre v-pre><code class="${language}">${highlighted}</code></pre>`
-}
-
-marked.setOptions({
-  renderer
-})
 
 module.exports = function (content) {
-  // console.log(convertMd2Doc(content))
-  return `<template><div class="markdown">${marked(content)}</div></template>`
+  return `<template>
+  <component-documentation>
+    <div style="display: flex; flex-wrap: nowrap;">
+      <div style="width: calc(100% - 184px); margin-right: 24x;">
+        ${marked(content, {
+    renderer
+  })}
+      </div>
+      <div style="width: 160px;">
+        ${parseMdAsAnchor(content)}
+      </div>
+    </div>
+  </component-documentation>
+</template>`
 }

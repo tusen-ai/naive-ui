@@ -47,14 +47,14 @@
     color: $--notification-text-color;
     @include once {
       transition:
-        background-color .3s $default-cubic-bezier,
-        color .3s $default-cubic-bezier,
-        opacity .3s $default-cubic-bezier,
-        transform .3s $default-cubic-bezier,
-        max-height .3s $default-cubic-bezier,
+        background-color .3s $--n-ease-in-out-cubic-bezier,
+        color .3s $--n-ease-in-out-cubic-bezier,
+        opacity .3s $--n-ease-in-out-cubic-bezier,
+        transform .3s $--n-ease-in-out-cubic-bezier,
+        max-height .3s $--n-ease-in-out-cubic-bezier,
         margin-bottom .3s linear,
-        box-shadow .3s $default-cubic-bezier;
-      font-family: $default-font-family;
+        box-shadow .3s $--n-ease-in-out-cubic-bezier;
+      font-family: $--n-font-family;
       font-size: 14px;
       font-weight: 400;
       position: relative;
@@ -127,9 +127,9 @@
       }
       @include e(header) {
         @include once {
-          font-weight: 700;
+          font-weight: 500;
           font-size: 16px;
-          transition: color .3s $default-cubic-bezier;
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
         }
         color: $--notification-header-text-color;
       }
@@ -137,7 +137,7 @@
         @include once {
           margin-top: 8px;
           font-size: 12px;
-          transition: color .3s $default-cubic-bezier;
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
         }
         color: $--notification-description-text-color;
       }
@@ -151,7 +151,7 @@
           }
           white-space: pre-wrap;
           word-wrap: break-word;
-          transition: color .3s $default-cubic-bezier;
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
         }
         color: $--notification-content-text-color;
       }
@@ -162,14 +162,14 @@
         @include e(meta) {
           @include once {
             font-size: 12px;
-            transition: color .3s $default-cubic-bezier;
+            transition: color .3s $--n-ease-in-out-cubic-bezier;
           }
           color: $--notification-description-text-color;
         }
         @include e(action) {
           @include once {
             cursor: pointer;
-            transition: color .3s $default-cubic-bezier;
+            transition: color .3s $--n-ease-in-out-cubic-bezier;
           }
           color: $--notification-action-text-color;
         }

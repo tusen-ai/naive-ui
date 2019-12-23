@@ -45,7 +45,7 @@
             </template>
           </n-confirm>
           <n-card
-            v-if="preset === 'card'"
+            v-else-if="preset === 'card'"
             :style="bodyStyle"
             :title="title"
             :closable="closable"
@@ -127,6 +127,13 @@ export default {
     if (this.active) {
       this.styleActive = true
     }
+  },
+  updated () {
+    this.$nextTick().then(() => {
+      console.log('modal rerender')
+      console.log(this.$slots.default[1].text)
+      console.log(this.$scopedSlots.default()[1].text)
+    })
   },
   methods: {
     slotDOM () {

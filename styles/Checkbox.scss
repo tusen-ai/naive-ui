@@ -22,11 +22,11 @@
         box-sizing: border-box;
         border-radius: 4px;
         position: relative;
-        transition: box-shadow 0.3s $default-cubic-bezier,
-          background-color 0.3s $default-cubic-bezier;
+        transition: box-shadow 0.3s $--n-ease-in-out-cubic-bezier,
+          background-color 0.3s $--n-ease-in-out-cubic-bezier;
         @include e(line-mark, check-mark) {
           path {
-            transition: fill .3s $default-cubic-bezier;
+            transition: fill .3s $--n-ease-in-out-cubic-bezier;
             fill: $--checkbox-icon-fill;
           }
         }
@@ -40,9 +40,9 @@
           opacity: 0;
           transform: scale(0.5);
           transform-origin: center;
-          transition: transform 0.3s $default-cubic-bezier,
-            opacity 0.3s $default-cubic-bezier,
-            border-color 0.3s $default-cubic-bezier;
+          transition: transform 0.3s $--n-ease-in-out-cubic-bezier,
+            opacity 0.3s $--n-ease-in-out-cubic-bezier,
+            border-color 0.3s $--n-ease-in-out-cubic-bezier;
         }
         @include e(check-mark) {
           content: "";
@@ -55,13 +55,13 @@
           opacity: 0;
           transform: scale(0.5);
           transform-origin: center;
-          transition: transform 0.3s $default-cubic-bezier,
-            opacity 0.3s $default-cubic-bezier,
-            border-color 0.3s $default-cubic-bezier;
+          transition: transform 0.3s $--n-ease-in-out-cubic-bezier,
+            opacity 0.3s $--n-ease-in-out-cubic-bezier,
+            border-color 0.3s $--n-ease-in-out-cubic-bezier;
         }
       }
       @include e(label) {
-        transition: color .3s $default-cubic-bezier;
+        transition: color .3s $--n-ease-in-out-cubic-bezier;
         user-select: none;
         padding-left: 8px;
       }

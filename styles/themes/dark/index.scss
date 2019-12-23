@@ -83,6 +83,7 @@
   $--n-disabled-text-color: rgba(255, 255, 255, 0.3) !global;
   $--n-dialog-color: $--neutral-3 !global;
   $--n-background-color: $--neutral-10 !global;
+  $--n-alpha-input-color: rgba(255, 255, 255, .12) !global;
   @if ($in-js-env != true) {
     @include setup-dark-nimbus-service-layout;
     @include setup-dark-divider;

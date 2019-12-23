@@ -24,12 +24,12 @@
       @include avatar-size-mixin('medium');
       @include avatar-size-mixin('large');
       @include b(icon) {
-        transition: fill .3s $default-cubic-bezier;
+        transition: fill .3s $--n-ease-in-out-cubic-bezier;
         fill: white;
         vertical-align: bottom;
       }
       color: white;
-      transition: background-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier;
+      transition: background-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
       font-size: 14px;
       display: inline-block;
       position: relative;

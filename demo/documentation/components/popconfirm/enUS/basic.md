@@ -1,12 +1,24 @@
 # Basic
 ```html
 <n-popconfirm
-  positive-text="ok"
-  negative-text="not ok"
+  @positive-click="handlePositiveClick"
+  @negative-click="handleNegativeClick"
 >
   <template v-slot:activator>
-    <n-button>Quit</n-button>
+    <n-button>Quote</n-button>
   </template>
-  Are you sure to quit this game?
+  Things pass us by. Nobody can catch them. That's the way we live our lives.
 </n-popconfirm>
+```
+```js
+export default {
+  methods: {
+    handlePositiveClick () {
+      this.$NMessage.success('Yes')
+    },
+    handleNegativeClick () {
+      this.$NMessage.warning('No')
+    }
+  }
+}
 ```

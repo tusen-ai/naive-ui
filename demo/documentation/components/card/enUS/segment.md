@@ -1,10 +1,9 @@
 # Segmented
-`header`, `content`, `footer` and `action` can be `hard` or `soft` segmented.
+`content`, `footer` and `action` can be `hard` or `soft` segmented. Segment border will appear at the top of segmented.
 ```html
 <n-card title="Card Segmented Demo" :segmented="{
-  header: 'soft',
   content: 'hard',
-  footer: 'hard'
+  footer: 'soft'
 }">
   <template v-slot:header-extra>
     v-slot:header-extra

@@ -9,14 +9,14 @@ $layout-nav-height: 64px;
     width: 100%;
     transition:width .3s;
     @include b(menu-container) {
-      transition: transform .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+      transition: transform .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
       @include b(menu-divider) {
         margin: 0px 25px;
         border-bottom: 1px solid rgba(255, 255, 255, .08);
       }
       @include b(menu-content) {
         overflow: hidden;
-        transition: opacity .3s $default-cubic-bezier;
+        transition: opacity .3s $--n-ease-in-out-cubic-bezier;
 
         @include b(menu-list) {
           list-style: none;
@@ -57,7 +57,7 @@ $layout-nav-height: 64px;
               top: 0;
               bottom: 0;
               z-index: 0;
-              transition: opacity 0.3s $default-cubic-bezier;
+              transition: opacity 0.3s $--n-ease-in-out-cubic-bezier;
               opacity: 0;
             }
             @include m(selected) {
@@ -116,7 +116,7 @@ $layout-nav-height: 64px;
           top: calc(50% - 3px);
           transform: rotate(45deg) ;
           transform-origin: 25% 25%;
-          transition: transform 0.3s $default-cubic-bezier, opacity 0.3s $default-cubic-bezier;
+          transition: transform 0.3s $--n-ease-in-out-cubic-bezier, opacity 0.3s $--n-ease-in-out-cubic-bezier;
         }
         @include m(collapsed) {
           &::after {

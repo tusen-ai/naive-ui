@@ -65,7 +65,7 @@ export default {
       .n-nimbus-confirm-card__title {
         line-height: 19px;
         font-size: 18px;
-        font-weight: 700;
+        font-weight: 500;
         color: #E9E9ECFF;
       }
       .n-nimbus-confirm-card__right-header {

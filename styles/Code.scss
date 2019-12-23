@@ -11,9 +11,12 @@
 @include b(code) {
   margin: 0;
   font-size: 14px;
-  font-family: 'FiraCode', monospace;
+  font-family: $--n-mono-font-family;
+  code {
+    font-family: $--n-mono-font-family;
+  }
   [class^=hljs] {
-    transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier;
+    transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
   }
   &.#{block(light-theme)} {
     .hljs {
@@ -85,7 +88,7 @@
     }
   
     .hljs-strong {
-      font-weight: 700;
+      font-weight: 500;
     }
   
     .hljs-link {
@@ -165,7 +168,7 @@
       font-style: italic;
     }
     .hljs-strong {
-      font-weight: 700;
+      font-weight: 500;
     }
     .hljs-link {
       text-decoration: underline;

@@ -94,13 +94,11 @@
 </template>
 
 <script>
-import docCodeEditorMixin from './docCodeEditorMixin'
 import mdMusicalNotes from 'naive-ui/lib/icons/md-musical-notes'
 export default {
   components: {
     mdMusicalNotes
   },
-  mixins: [docCodeEditorMixin],
   data () {
     return {
       disableMenu: false,

@@ -112,15 +112,15 @@
     }
     @include b(descriptions-header) {
       @include once {
-        font-weight: 700;
+        font-weight: 500;
         font-size: 18px;
-        transition: color .3s $default-cubic-bezier;
+        transition: color .3s $--n-ease-in-out-cubic-bezier;
       }
       color: $--descriptions-header-text-color;
     }
     @include b(descriptions-table-wrapper) {
       @include once {
-        transition: border-color .3s $default-cubic-bezier;
+        transition: border-color .3s $--n-ease-in-out-cubic-bezier;
       }
       @include b(descriptions-table) {
         @include once {
@@ -132,15 +132,15 @@
         @include b(descriptions-table-row) {
           @include once {
             box-sizing: border-box;
-            transition: border-color .3s $default-cubic-bezier;
+            transition: border-color .3s $--n-ease-in-out-cubic-bezier;
           }
           @include b(descriptions-table-header) {
             @include once {
-              font-weight: 700;
+              font-weight: 500;
               line-height: 1.5;
               display: table-cell;
               box-sizing: border-box;
-              transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+              transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
             }
             color: $--descriptions-header-text-color;
           }
@@ -148,15 +148,15 @@
             @include e(content) {
               color: $--descriptions-content-text-color;
               @include once {
-                transition: color .3s $default-cubic-bezier;
+                transition: color .3s $--n-ease-in-out-cubic-bezier;
                 display: inline-block;
               }
             }
             @include e(label) {
               color: $--descriptions-header-text-color;
               @include once {
-                font-weight: 700;
-                transition: color .3s $default-cubic-bezier;
+                font-weight: 500;
+                transition: color .3s $--n-ease-in-out-cubic-bezier;
                 display: inline-block;
                 margin-right: 14px;
               } 
@@ -166,7 +166,7 @@
               line-height: 1.5;
               display: table-cell;
               box-sizing: border-box;
-              transition: color .3s $default-cubic-bezier, background-color .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier;
+              transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
               padding: 0 0 16px 0;  
             }
             color: $--descriptions-content-text-color;

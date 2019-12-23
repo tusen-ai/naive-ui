@@ -80,6 +80,7 @@
   $--n-card-color: $--neutral-10 !global;
   $--n-dialog-color: $--neutral-10 !global;
   $--n-background-color: $--neutral-10 !global;
+  $--n-alpha-input-color: rgba(0, 0, 0, .04) !global;
   @if ($in-js-env != true) {
     @include setup-light-nimbus-service-layout;
     @include setup-light-divider;

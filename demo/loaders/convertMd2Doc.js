@@ -1,45 +1,9 @@
-const hljs = require('highlight.js')
 const marked = require('marked')
 const camelCase = require('lodash/camelCase')
 const kababCase = require('lodash/kebabCase')
-// const prettier = require('prettier')
-
-const escapeMap = {
-  '&': '&amp;',
-  '<': '&lt;',
-  '>': '&gt;',
-  '"': '&quot;',
-  "'": '&#39;'
-}
-
-function escapeForHTML (input) {
-  return input.replace(/([&<>'"])/g, char => escapeMap[char])
-}
-
-marked.setOptions({
-  gfm: true
-})
-
-// Create your custom renderer.
-const renderer = new marked.Renderer()
-renderer.code = (code, language) => {
-  // Check whether the given language is valid for highlight.js.
-  const validLang = !!(language && hljs.getLanguage(language))
-
-  // Highlight only if the language is valid.
-  // highlight.js escapes HTML in the code, but we need to escape by ourselves
-  // when we don't use it.
-  const highlighted = validLang
-    ? hljs.highlight(language, code).value
-    : escapeForHTML(code)
-
-  // Render the highlighted code with `hljs` class.
-  return `<pre><code class="${language}">${highlighted}</code></pre>`
-}
-
-marked.setOptions({
-  renderer
-})
+const mdLoader = require('./NaiveUIMdLoader')
+const createRenderer = require('./mdRenderer')
+const mdRenderer = createRenderer()
 
 function template (demos, demosLiteral, isSingleColumn = false) {
   // return `<component-demos :single-column="${isSingleColumn}">
@@ -106,6 +70,10 @@ export default {
 }
 
 function convertMd2ComponentDocumentation (text) {
+  const isNoDemo = !!~text.search('<!--no-demo-->')
+  if (isNoDemo) {
+    return mdLoader(text)
+  }
   const isSingleColumn = !!~text.search('<!--single-column-->')
   const tokens = marked.lexer(text)
   const componentsIndex = tokens.findIndex(token => token.type === 'code' && token.lang === 'component')
@@ -134,7 +102,13 @@ function convertMd2ComponentDocumentation (text) {
   }
   headerPart.links = {}
   footerPart.links = {}
-  const documentationHTML = `<section class="markdown header-part">${marked.parser(headerPart)}</section>\n` + '<!--demos-->\n' + `<section class="markdown footer-part">${marked.parser(footerPart)}</section>\n`
+  const documentationHTML = `<section class="markdown header-part">${marked.parser(headerPart, {
+    gfm: true,
+    renderer: mdRenderer
+  })}</section>\n` + '<!--demos-->\n' + `<section class="markdown footer-part">${marked.parser(footerPart, {
+    gfm: true,
+    renderer: mdRenderer
+  })}</section>\n`
   // console.log(documentationHTML)
   // const classedDocumentationHTML = addClassToHTML(documentationHTML, 'markdown')
   const demosReg = /<!--demos-->/
@@ -145,10 +119,10 @@ function convertMd2ComponentDocumentation (text) {
 <template>
   <component-documentation>
     <div style="display: flex; flex-wrap: nowrap;">
-      <div style="width: calc(100% - 148px); margin-right: 16px;">
+      <div style="width: calc(100% - 184px); margin-right: 24px;">
         ${documentationContent}
       </div>
-      <div style="width: 132px;">
+      <div style="width: 160px;">
         ${parseDemosAsAnchor(demosLiteral)}
       </div>
     </div>

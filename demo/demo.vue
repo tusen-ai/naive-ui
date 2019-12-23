@@ -1,5 +1,5 @@
 <template>
-  <n-config-provider class="demo" namespace="naive-ui-doc" :theme="theme">
+  <n-config-provider class="demo" namespace="naive-ui-doc" :theme="theme" :language="lang">
     <n-nimbus-service-layout :padding-body="false" :items="items">
       <template v-slot:nav>
         <doc-header
@@ -127,6 +127,10 @@ export default {
             {
               name: 'Tag',
               path: `/${this.lang}/${this.theme}` + '/n-tag'
+            },
+            {
+              name: 'Typography',
+              path: `/${this.lang}/${this.theme}` + '/n-typography'
             }
           ]
         },
@@ -408,7 +412,7 @@ export default {
     },
     lang: {
       get () {
-        return this.$route.params.lang || 'en-us'
+        return this.$route.params.lang || 'en-US'
       },
       set (lang) {
         this.$router.push(changeLangInPath(this.$route.fullPath, lang))
@@ -431,7 +435,7 @@ export default {
 }
 
 function changeLangInPath (path, lang) {
-  const langReg = /^\/(zh-cn|en-us)\//
+  const langReg = /^\/(zh-CN|en-US)\//
   return path.replace(langReg, `/${lang}/`)
 }
 
@@ -470,7 +474,7 @@ body {
   .n-doc-section {
     .n-doc-section__header {
       font-size: 16px;
-      font-weight: 700;
+      font-weight: 500;
       margin-bottom: 12px;
     }
     .n-doc-section__view {

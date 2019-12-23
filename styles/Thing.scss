@@ -4,7 +4,7 @@
   @include b(thing) {
     @include once {
       display: flex;
-      transition: color .3s $default-cubic-bezier;
+      transition: color .3s $--n-ease-in-out-cubic-bezier;
       font-size: 14px;
       @include b(thing-avatar) {
         margin-right: 12px;
@@ -24,8 +24,8 @@
           margin-bottom: 4px;
           @include e(title) {
             font-size: 16px;
-            font-weight: 700;
-            transition: color .3s $default-cubic-bezier;
+            font-weight: 500;
+            transition: color .3s $--n-ease-in-out-cubic-bezier;
           }
           // @include e(extra) {
   

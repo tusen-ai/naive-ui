@@ -1,41 +1,10 @@
-const hljs = require('highlight.js')
 const marked = require('marked')
 const fs = require('fs')
 const path = require('path')
+const createRenderer = require('./mdRenderer')
+const mdRenderer = createRenderer()
+const codeRenderer = createRenderer(false)
 // const prettier = require('prettier')
-
-const escapeMap = {
-  '&': '&amp;',
-  '<': '&lt;',
-  '>': '&gt;',
-  '"': '&quot;',
-  "'": '&#39;'
-}
-
-function escapeForHTML (input) {
-  return input.replace(/([&<>'"])/g, char => escapeMap[char])
-}
-
-// Create your custom renderer.
-const renderer = new marked.Renderer()
-renderer.code = (code, language) => {
-  // Check whether the given language is valid for highlight.js.
-  const validLang = !!(language && hljs.getLanguage(language))
-
-  // Highlight only if the language is valid.
-  // highlight.js escapes HTML in the code, but we need to escape by ourselves
-  // when we don't use it.
-  const highlighted = validLang
-    ? hljs.highlight(language, code).value
-    : escapeForHTML(code)
-
-  // Render the highlighted code with `hljs` class.
-  return `<pre v-pre><code class="${language}">${highlighted}</code></pre>`
-}
-
-marked.setOptions({
-  renderer
-})
 
 const demoBlock = fs.readFileSync(path.resolve(__dirname, 'ComponentDemoTemplate.vue')).toString()
 
@@ -65,7 +34,9 @@ function getPartsOfDemo (tokens) {
     script: script,
     style: style,
     title: title,
-    content: marked.parser(contentTokens)
+    content: marked.parser(contentTokens, {
+      renderer: mdRenderer
+    })
   }
 }
 
@@ -74,7 +45,7 @@ function mergeParts (parts) {
     ...parts
   }
   mergedParts.title = parts.title
-  mergedParts.content = marked(parts.content || '')
+  mergedParts.content = parts.content
   mergedParts.code = ''
   // console.log(parts)
   if (parts.template) {
@@ -94,7 +65,9 @@ ${parts.style}
   }
   mergedParts.code = marked(`\`\`\`html
 ${mergedParts.code}
-\`\`\``)
+\`\`\``, {
+    renderer: codeRenderer
+  })
   // console.log(mergedParts.code)
   return mergedParts
 }

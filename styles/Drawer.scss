@@ -3,14 +3,15 @@
 
 @include themes-mixin {
   @include b(drawer) {
-    @include slide-in-from-right-transition();
+    @include slide-in-from-right-transition($duration: .3s);
+    padding: 16px 24px;
     position: absolute;
     top: 0;
     bottom: 0;
     right: 0;
     background-color: $--n-card-color;
     color: $--n-secondary-text-color;
-    transition: background-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier;
+    transition: background-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
   }
 }
 

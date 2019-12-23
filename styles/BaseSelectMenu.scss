@@ -32,7 +32,7 @@
       z-index: 0;
       position: relative;
       border-radius: 6px;
-      transition: background-color .3s $default-cubic-bezier;
+      transition: background-color .3s $--n-ease-in-out-cubic-bezier;
       @include b(base-select-menu-option-wrapper) {
         position: relative;
         width: 100%;
@@ -48,10 +48,10 @@
       }
       /** transition of menu light bar */
       .n-base-select-menu-light-bar--transition-enter-active {
-        transition: opacity .15s $fast-in-cubic-bezier, top .3s $default-cubic-bezier!important;
+        transition: opacity .15s $fast-in-cubic-bezier, top .3s $--n-ease-in-out-cubic-bezier!important;
       }
       .n-base-select-menu-light-bar--transition-leave-active {
-        transition: opacity .15s $slow-out-cubic-bezier, top .3s $default-cubic-bezier!important;
+        transition: opacity .15s $slow-out-cubic-bezier, top .3s $--n-ease-in-out-cubic-bezier!important;
       }
       .n-base-select-menu-light-bar--transition-enter, .n-base-select-menu-light-bar--transition-leave-to {
         opacity: 0;
@@ -64,7 +64,7 @@
       position: relative;
       padding: 0px 14px;
       white-space: nowrap;
-      transition: color .3s $default-cubic-bezier;
+      transition: color .3s $--n-ease-in-out-cubic-bezier;
       color: map-get($map: $--base-select-menu-option-color, $key: "default");
       @include m(selected) {
         color: map-get($map: $--base-select-menu-option-color, $key: "selected");
@@ -102,18 +102,17 @@
       }
     }
     @include b(base-select-menu-light-bar) {
-      // transition: background-color .3s $default-cubic-bezier;
+      transition: background-color .3s $--n-ease-in-out-cubic-bezier, top .15s $--n-ease-in-out-cubic-bezier;
       position: absolute;
       width:100%;
       background-color: $--base-select-menu-light-bar-background-color;
       top: 0;
       left: 0;
-      transition: top .15s $default-cubic-bezier;
     }
     @include m(multiple) {
       @include b(base-select-option) {
         position: relative;
-        transition: color .3s $default-cubic-bezier;
+        transition: color .3s $--n-ease-in-out-cubic-bezier;
         padding-right: 28px;
         &::after {
           @include once {
@@ -125,7 +124,7 @@
             transform: rotate(45deg) scale(.5);
             top: calc(50% - 4px);
             opacity: 0;
-            transition: transform .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
+            transition: transform .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier;
           }
           border-right: 1px solid $--base-select-menu-option-check-mark-color;
           border-bottom: 1px solid $--base-select-menu-option-check-mark-color;

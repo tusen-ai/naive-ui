@@ -26,7 +26,7 @@ export default {
             span: 24,
             ...this.$props
           },
-          scopedSlots: this.$scopedSlots
+          scopedSlots: { ...this.$scopedSlots }
         })
       }
     })

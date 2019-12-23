@@ -5,6 +5,7 @@ import mdAlert from '../../../icons/md-alert'
 import mdInformationCircle from '../../../icons/md-information-circle'
 import mdCloseCircle from '../../../icons/md-close-circle'
 import NBaseLoading from '../../../base/Loading'
+import IconSwitchTransition from '../../../transition/IconSwitchTransition'
 
 export default {
   props: {
@@ -31,19 +32,28 @@ export default {
       if (typeof this.icon === 'function') icon = this.icon(h)
       else icon = h(this.icon)
     } else if (this.type === 'success') {
-      icon = h(mdCheckmarkCircle)
+      icon = h(mdCheckmarkCircle, {
+        key: 'success'
+      })
     } else if (this.type === 'error') {
-      icon = h(mdCloseCircle)
+      icon = h(mdCloseCircle, {
+        key: 'info'
+      })
     } else if (this.type === 'info') {
-      icon = h(mdInformationCircle)
+      icon = h(mdInformationCircle, {
+        key: 'warning'
+      })
     } else if (this.type === 'warning') {
-      icon = h(mdAlert)
+      icon = h(mdAlert, {
+        key: 'error'
+      })
     } else if (this.type === 'loading') {
       icon = h(NBaseLoading, {
         props: {
           theme: this.theme,
           strokeWidth: 6
-        }
+        },
+        key: 'loading'
       })
     }
     return h('div', {
@@ -61,7 +71,9 @@ export default {
             size: 20
           }
         }, [
-          icon
+          h(IconSwitchTransition, [
+            icon
+          ])
         ])
       ]),
       h('div', {

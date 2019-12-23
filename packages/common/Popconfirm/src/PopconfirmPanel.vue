@@ -26,7 +26,7 @@
             round
             @click="handleNegativeClick"
           >
-            {{ negativeText }}
+            {{ translatedNegativeText }}
           </n-button>
           <n-button
             round
@@ -34,7 +34,7 @@
             type="primary"
             @click="handlePositiveClick"
           >
-            {{ positiveText }}
+            {{ translatedPositiveText }}
           </n-button>
         </slot>
       </div>
@@ -46,21 +46,24 @@
 import NButton from '../../Button'
 import NIcon from '../../Icon'
 import mdAlert from '../../../icons/md-alert'
+import locale from '../../../mixins/locale'
 
 export default {
+  name: 'NPopconfirmPanel',
   components: {
     NButton,
     NIcon,
     mdAlert
   },
+  mixins: [ locale ],
   props: {
     positiveText: {
       type: String,
-      default: 'Confirm'
+      default: null
     },
     negativeText: {
       type: String,
-      default: 'Cancel'
+      default: null
     },
     showIcon: {
       type: Boolean,
@@ -74,6 +77,14 @@ export default {
   data () {
     return {
       showPopconfirm: false
+    }
+  },
+  computed: {
+    translatedPositiveText () {
+      return this.t('positiveText') || this.positiveText
+    },
+    translatedNegativeText () {
+      return this.t('negativeText') || this.negativeText
     }
   },
   methods: {

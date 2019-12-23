@@ -29,7 +29,7 @@
     }
     @include e(control) {
       box-shadow: map-get($--radio-box-shadow, 'default');
-      transition: box-shadow .3s $default-cubic-bezier;
+      transition: box-shadow .3s $--n-ease-in-out-cubic-bezier;
       height: 14px;
       width: 14px;
       border-radius: 7px;
@@ -67,7 +67,7 @@
       &:hover {
         @include e(control) {
           box-shadow: map-get($--radio-box-shadow, 'hover');
-          transition: box-shadow .3s $default-cubic-bezier;
+          transition: box-shadow .3s $--n-ease-in-out-cubic-bezier;
         }
       }
       &:focus:not(:active) {
@@ -81,7 +81,7 @@
       cursor: not-allowed;
       @include e(control) {
         box-shadow: map-get($--radio-box-shadow, 'disabled');
-        transition: box-shadow .3s $default-cubic-bezier;
+        transition: box-shadow .3s $--n-ease-in-out-cubic-bezier;
         &::before {
           transform: scale(.8);
           transform-origin: center;
@@ -126,12 +126,12 @@
         padding-left: 14px;
         padding-right: 14px;
         white-space: nowrap;
-        transition: background-color .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier, border-color .3s $default-cubic-bezier, color .3s $default-cubic-bezier;
+        transition: background-color .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
         @include e(border-mask) {
           pointer-events: none;
           position: absolute;
           box-shadow: inset 0 0 0 $--radio-border-mask-width transparent;
-          transition: box-shadow .3s $default-cubic-bezier;
+          transition: box-shadow .3s $--n-ease-in-out-cubic-bezier;
           left: -1px;
           bottom: -1px;
           right: -1px;
@@ -172,7 +172,7 @@
           @include e(border-mask) {
             box-shadow: map-get($--radio-button-box-shadow, 'hover');
             @include once {
-              transition: box-shadow .3s $default-cubic-bezier;
+              transition: box-shadow .3s $--n-ease-in-out-cubic-bezier;
             }
           }
           @include not-m(checked) {
@@ -203,7 +203,7 @@
         vertical-align: bottom;
         height: 28px;
         width: 1px;
-        transition: background-color .3s $default-cubic-bezier, opacity .3s $default-cubic-bezier;
+        transition: background-color .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier;
       }
       background-color: map-get($--radio-button-border-color, 'default');
       @include m(checked) {
