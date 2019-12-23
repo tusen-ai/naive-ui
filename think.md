@@ -96,6 +96,16 @@ Dropdown Submenu 定位问题
 ## 2019.12.20
 Anchor Bug 复现 at typography
 
+## 2019.12.23
+Damn eslint
+```
+What fixed it for me was using double quotes and an escaping slash like so:
+"lint": "eslint \"**/*.{js,jsx}\" --quiet",
+
+Previously, it would not work with single quotes:
+"lint": "eslint '**/*.{js,jsx}' --quiet",
+```
+
 ## TODO
 
 issue fix, add delay prop

@@ -50,7 +50,7 @@
     >
       <slot name="demo" />
     </div>
-    <template v-slot:footer v-if="showCode">
+    <template v-if="showCode" v-slot:footer>
       <n-scrollbar>
         <slot name="code" />
       </n-scrollbar>

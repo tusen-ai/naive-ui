@@ -9,7 +9,7 @@
     "demo": "cross-env NODE_ENV=development && gulp --gulpfile build/gulpfile.js build && webpack-dev-server --config build/webpack.demo.js",
     "dev": "cross-env NODE_ENV=development && webpack-dev-server --config build/webpack.dev.js",
     "serve": "npm run dev",
-    "lint": "eslint packages/**/*.{js,vue} test/**/*.{js,vue} build/**/*.{js,vue} demo/**/*.{js,vue} --quiet --no-error-on-unmatched-pattern && stylelint \"styles/**/*.scss\"",
+    "lint": "eslint --quiet --no-error-on-unmatched-pattern \"packages/**/*.{js,vue}\" \"test/**/*.{js,vue}\" \"build/**/*.{js,vue}\" \"demo/**/*.{js,vue}\"",
     "lint-style": "stylelint \"styles/**/*.scss\"  --fix",
     "test": "cross-env NODE_ENV=development BABEL_ENV=test karma start test/unit/karma.conf.js",
     "test-cov": "cross-env NODE_ENV=development BABEL_ENV=test karma start test/unit/karma.conf.js && http-server test/unit/coverage",
