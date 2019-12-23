@@ -205,6 +205,20 @@ export default {
       this.showHorizontalScrollbar = true
       this.showVeriticalScrollbar = true
     },
+    scrollToTop (smooth = false) {
+      if (this.$refs.scrollContainer) {
+        this.$refs.scrollContainer.scrollTo({
+          top: 0
+        })
+      }
+    },
+    scrollToBottom (smooth = false) {
+      if (this.$refs.scrollContainer) {
+        this.$refs.scrollContainer.scrollTo({
+          top: this.$refs.scrollContent.offsetHeight
+        })
+      }
+    },
     scrollToElement (el) {
       if (el.offsetTop < this.$refs.scrollContainer.scrollTop) {
         this.$refs.scrollContainer.scrollTo({

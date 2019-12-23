@@ -1,4 +1,4 @@
-# Basic
+# Debug
 ```html
 <n-card title="Random String Logs" :segmented="{
   header: 'soft',
@@ -7,8 +7,7 @@
   <n-log
     style="margin-top: -12px; margin-bottom: -12px;"
     :log="log"
-    @reach-top="handleReachTop"
-    @reach-bottom="handleReachBottom"
+    @require-more="handleRequireMore"
     :loading="loading"
     trim
   />
@@ -38,19 +37,15 @@ export default {
     clear () {
       this.log = ''
     },
-    handleReachTop () {
+    handleRequireMore (from) {
       if (this.loading) return
       this.loading = true
       setTimeout(() => {
-        this.log = log() + this.log
-        this.loading = false
-      }, 1000)
-    },
-    handleReachBottom () {
-      if (this.loading) return
-      this.loading = true
-      setTimeout(() => {
-        this.log = this.log + log()
+        if (from === 'top') {
+          this.log = log() + this.log
+        } else if (from === 'bottom') {
+          this.log = this.log + log()
+        }
         this.loading = false
       }, 1000)
     }

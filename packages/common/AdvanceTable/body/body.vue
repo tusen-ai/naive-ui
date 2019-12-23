@@ -183,7 +183,7 @@ export default {
     }
   },
   watch: {
-    '$store.state.currentHoverRow' (index, oldIndex) {
+    '$tableStore.state.currentHoverRow' (index, oldIndex) {
       const hoverClassName = 'n-table__tr--hover'
       const rowsDom = this.$el.querySelectorAll('table tr')
       const oldRowDom = rowsDom[oldIndex]
@@ -206,16 +206,16 @@ export default {
   },
   methods: {
     onMouseEnter (e) {
-      this.$store.commit('currentTableEl', e.currentTarget)
+      this.$tableStore.commit('currentTableEl', e.currentTarget)
     },
     onMouseLeave (e) {
-      this.$store.commit('currentTableEl', null)
+      this.$tableStore.commit('currentTableEl', null)
     },
     onRowHover (e, rowData, index) {
-      this.$store.commit('currentHoverRow', index)
+      this.$tableStore.commit('currentHoverRow', index)
     },
     onRowLeave (e, rowData) {
-      this.$store.commit('currentHoverRow', null)
+      this.$tableStore.commit('currentHoverRow', null)
     },
     computeCustomWidthStl (column) {
       if (column.width) {
