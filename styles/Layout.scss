@@ -24,6 +24,9 @@
         right: 0;
         top: 0;
         bottom: 0;
+        @include b(layout-sider) {
+          z-index: 1;
+        }
       }
     }
   }
