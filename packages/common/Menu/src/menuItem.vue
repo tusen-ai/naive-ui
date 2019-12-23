@@ -6,7 +6,7 @@
       'n-menu-item--selected': isSelected,
       'n-menu-item--disabled': isDisabled
     }"
-    @click="handelClick"
+    @click="handleClick"
   >
     <span
       v-if="hasIcon"
@@ -73,7 +73,7 @@ export default {
     }
   },
   methods: {
-    handelClick () {
+    handleClick () {
       if (!this.isDisabled) {
         this.NMenu.changeSelect(this.name)
         this.$emit('click', this)

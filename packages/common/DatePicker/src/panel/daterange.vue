@@ -66,9 +66,9 @@
               'n-date-picker-panel-dates__date--in-display-month': dateItem.isDateOfDisplayMonth,
               'n-date-picker-panel-dates__date--in-span': dateItem.isInSpan,
               'n-date-picker-panel-dates__date--no-transition': noTransition,
-              'n-date-picker-panel-dates__date--disabled': dateDisabled(dateItem.timestamp, 'start')
+              'n-date-picker-panel-dates__date--disabled': dateDisabled(dateItem.timestamp)
             }"
-            @click="handleDateClick(dateItem, 'start')"
+            @click="handleDateClick(dateItem)"
             @mouseenter="handleDateMouseEnter(dateItem)"
           >
             {{ dateItem.dateObject.date }}
@@ -132,9 +132,9 @@
               'n-date-picker-panel-dates__date--in-display-month': dateItem.isDateOfDisplayMonth,
               'n-date-picker-panel-dates__date--in-span': dateItem.isInSpan,
               'n-date-picker-panel-dates__date--no-transition': noTransition,
-              'n-date-picker-panel-dates__date--disabled': dateDisabled(dateItem.timestamp, 'end')
+              'n-date-picker-panel-dates__date--disabled': dateDisabled(dateItem.timestamp)
             }"
-            @click="handleDateClick(dateItem, 'end' )"
+            @click="handleDateClick(dateItem)"
             @mouseenter="handleDateMouseEnter(dateItem)"
           >
             {{ dateItem.dateObject.date }}

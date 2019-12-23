@@ -168,10 +168,6 @@ export default {
     filter: {
       type: [String, Function],
       default: null
-    },
-    test: {
-      type: String,
-      default: null
     }
   },
   data () {
@@ -267,9 +263,6 @@ export default {
         this.updatePosition()
       })
     }
-  },
-  mounted () {
-    console.log('mounted', this.filter, this.test)
   },
   methods: {
     openMenu () {

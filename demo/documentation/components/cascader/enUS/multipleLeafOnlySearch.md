@@ -5,7 +5,6 @@
   placeholder="Please Select Something"
   :options="options"
   filterable
-  test="1111"
   multiple
 />
 ```

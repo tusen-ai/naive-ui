@@ -11,7 +11,7 @@
         'n-sub-menu-header--has-icon': hasIcon,
         'n-sub-menu-header--disabled': disabled,
       }"
-      @click="clickCallback"
+      @click="handleClick"
     >
       <span
         v-if="hasIcon"
@@ -90,7 +90,7 @@ export default {
     this.setCollapsed()
   },
   methods: {
-    clickCallback () {
+    handleClick () {
       if (!this.disabled) {
         this.isCollapsed = !this.isCollapsed
         this.NMenu.openKeysChangeCallback(this.name)

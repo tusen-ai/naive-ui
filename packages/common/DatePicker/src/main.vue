@@ -73,7 +73,7 @@
           @blur="handlePanelBlur"
           @input="handlePanelInput"
           @close="closeCalendar"
-          @checkValue="checkValue"
+          @check-value="checkValue"
         />
         <date-panel
           v-else-if="type === 'date'"
@@ -86,7 +86,7 @@
           @input="handlePanelInput"
           @blur="handlePanelBlur"
           @close="closeCalendar"
-          @checkValue="checkValue"
+          @check-value="checkValue"
         />
         <daterange-panel
           v-else-if="type === 'daterange'"
@@ -99,7 +99,7 @@
           @input="handleRangePanelInput"
           @blur="handlePanelBlur"
           @close="closeCalendar"
-          @checkValue="checkValue"
+          @check-value="checkValue"
         />
         <datetimerange-panel
           v-else-if="type === 'datetimerange'"
@@ -113,7 +113,7 @@
           @input="handleRangePanelInput"
           @close="closeCalendar"
           @blur="handlePanelBlur"
-          @checkValue="checkValue"
+          @check-value="checkValue"
         />
       </div>
     </div>
@@ -348,7 +348,6 @@ export default {
      */
     handlePanelInput (value, valueString, isErrorValue) {
       if (isErrorValue) {
-        console.log('11111111111')
       }
       this.$emit('input', value, 'unavailable for now')
       this.refresh(value)
@@ -430,17 +429,13 @@ export default {
      * Input
      */
     handleTimeInput (v) {
-      console.log('handle input before strict parse')
       const newSelectedDateTime = strictParse(this.displayTime, this.computedFormat, new Date())
-      console.log('handle input', this.displayTime, this.computedFormat, newSelectedDateTime)
-      console.log('handle input new time', newSelectedDateTime, typeof newSelectedDateTime)
       if (isValid(newSelectedDateTime)) {
         this.$emit('input', getTime(newSelectedDateTime))
       }
     },
     handleRangeInput (v, isErrorValue) {
       // const v = e.target.value
-      console.log('handleRangeInput', isErrorValue)
       if (v === null) v = [null, null]
       const [startTime, endTime] = v
       const newStartTime = strictParse(startTime, this.computedFormat, new Date())
@@ -453,14 +448,12 @@ export default {
       }
       this.displayStartTime = startTime
       this.displayEndTime = endTime
-      // console.log('handleRangeInput', v, newStartTime, newEndTime)
     },
     /**
      * Click
      */
     handleActivatorClick (e) {
       if (this.disabled) return
-      // console.log('handleActivatorClick')
       if (this.active) {
         e.stopPropagation()
       } else {

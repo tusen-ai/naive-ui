@@ -30,7 +30,6 @@
           :second-disabled="isStartSecondDisabled(currentDate)"
           stop-selector-bubble
           @input="handleStartTimePickerInput"
-          @checkValue="checkStartTime"
         />
         <div class="n-date-picker-panel-input-wrapper__arrow">
           <n-base-icon
@@ -55,7 +54,6 @@
           :is-error-val="isErrorEndTime"
           stop-selector-bubble
           @input="handleEndTimePickerInput"
-          @checkValue="checkEndTime"
         />
       </div>
       <div
@@ -295,7 +293,10 @@ export default {
   watch: {
     active (newActive) {
       if (newActive) {
+        this.initialValue = this.value
         this.syncCalendarTimeWithValue(this.value)
+      } else if (this.isErrorDateTime) {
+        this.$emit('input', this.initialTime)
       }
     },
     valueAsDateArray (newValue) {

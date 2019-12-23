@@ -9,6 +9,8 @@ import getYear from 'date-fns/getYear'
 import getMonth from 'date-fns/getMonth'
 import getDate from 'date-fns/getDate'
 import isValid from 'date-fns/isValid'
+import startOfHour from 'date-fns/startOfHour'
+import setHours from 'date-fns/setHours'
 import { dateArray, strictParse } from '../../../../utils/dateUtils'
 
 export default {
@@ -57,13 +59,7 @@ export default {
       displayDateString: '',
       calendarDateTime: new Date(), // moment(),
       currentDateTime: new Date(), // moment()
-      selectedDate: null,
-      hourDisabled: () => true,
-      minuteDisabled: () => true,
-      secondDisabled: () => true,
-      isErrorTime: false,
-      initialValue: null,
-      isErrorDate: false
+      selectedDate: null
     }
   },
   computed: {
@@ -90,6 +86,42 @@ export default {
       // } else {
       //   return null
       // }
+    },
+    isErrorDate () {
+      if (!this.value) {
+        return false
+      }
+      return this.dateDisabled(setHours(startOfHour(new Date(this.value)), 0).getTime())
+    },
+    isErrorTime () {
+      if (!this.value) {
+        return false
+      }
+      const time = new Date(this.value)
+      const hour = time.getHours()
+      const minute = time.getMinutes()
+      const second = time.getMinutes()
+      return this.hourDisabled(hour) ||
+          this.minuteDisabled(minute, hour) ||
+          this.secondDisabled(second, minute, hour)
+    },
+    isErrorDateTime () {
+      return this.isErrorDate || this.isErrorTime
+    },
+    currentDate () {
+      if (!this.value) {
+        return null
+      }
+      return setHours(startOfHour(new Date(this.value)), 0).getTime()
+    },
+    hourDisabled () {
+      return this.timeDisabled(this.currentDate).hourDisabled || function () { return false }
+    },
+    minuteDisabled () {
+      return this.timeDisabled(this.currentDate).minuteDisabled || function () { return false }
+    },
+    secondDisabled () {
+      return this.timeDisabled(this.currentDate).secondDisabled || function () { return false }
     }
   },
   watch: {
@@ -111,6 +143,9 @@ export default {
       } else {
         this.displayDateString = ''
       }
+    },
+    isErrorDateTime () {
+      this.$emit('check-value', this.isErrorDateTime)
     }
   },
   created () {
@@ -122,7 +157,9 @@ export default {
     }
   },
   mounted () {
-    this.checkDate(this.value)
+    if (this.isErrorDateTime) {
+      this.$emit('check-value', this.isErrorDateTime)
+    }
   },
   methods: {
     handleClickOutside () {
@@ -141,7 +178,6 @@ export default {
     // },
     handleDateInput (value) {
       const date = strictParse(value, this.dateFormat, new Date())// moment(value, this.dateFormat, true)
-      // console.log('handle date input', value)
       if (isValid(date)) {
         if (!this.valueAsDateTime) {
           this.$emit('input', getTime(this.adjustValue(new Date())))
@@ -211,7 +247,7 @@ export default {
     setSelectedDateTimeToNow () {
       this.$emit('input', getTime(this.adjustValue(new Date())))
       this.calendarDateTime = new Date() // moment()
-      this.checkDate(getTime(this.adjustValue(new Date())))
+      // this.checkDate(getTime(this.adjustValue(new Date())))
     },
     handleDateClick (dateItem) {
       if (this.dateDisabled(dateItem.timestamp)) {
@@ -223,11 +259,6 @@ export default {
       }
       newSelectedDateTime = set(newSelectedDateTime, dateItem.dateObject)
       this.selectedDate = dateItem.dateObject
-      this.checkDate(dateItem.timestamp)
-      let timeDisabled = this.timeDisabled(dateItem.timestamp)
-      this.hourDisabled = timeDisabled.hourDisabled || function () { return false }
-      this.minuteDisabled = timeDisabled.minuteDisabled || function () { return false }
-      this.secondDisabled = timeDisabled.secondDisabled || function () { return false }
       this.$emit('input', getTime(this.adjustValue(newSelectedDateTime)))
     },
     /**
@@ -267,14 +298,6 @@ export default {
     },
     prevMonth () {
       this.calendarDateTime = addMonths(this.calendarDateTime, -1)
-    },
-    checkValue (isErrorTime) {
-      this.isErrorTime = isErrorTime
-      this.$emit('checkValue', isErrorTime)
-    },
-    checkDate (date) {
-      this.isErrorDate = this.dateDisabled(date)
-      this.$emit('checkValue', this.isErrorDate)
     }
   }
 }

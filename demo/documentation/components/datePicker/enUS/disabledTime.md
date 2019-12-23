@@ -42,53 +42,53 @@ export default {
     timeDisabled (current) {
       return {
         hourDisabled: (hour) => {
-          if (current===1576512000000) {
+          if (current === 1576512000000) {
             return hour > 1 && hour <= 19
           } else {
             return false
           }
         },
         minuteDisabled: (minute, selectedHour) => {
-          if(current===1576512000000 && selectedHour===22) {
-            return minute>=20 && minute<=30
+          if (current === 1576512000000 && selectedHour === 22) {
+            return minute >= 20 && minute <= 30
           } else {
             return false
           }
         },
         secondDisabled: (second, selectedMinute, selectedHour) => {
-          if(current===1576512000000 && selectedHour===12 && selectedMinute>=40 && selectedMinute<=50) {
-            return second>=20 && second<=30
-          }　else {
+          if (current === 1576512000000 && selectedHour === 12 && selectedMinute >= 40 && selectedMinute <= 50) {
+            return second >= 20 && second <= 30
+          } else {
             return false
           }
         },
       }
     },
-    dateRangeDisabled(current) {
-        return current >= 1576339200000 && current <= 1576425600000
+    dateRangeDisabled (current) {
+      return current >= 1576339200000 && current <= 1576425600000
     },
-    timeRangeDisabled(current, type) {
+    timeRangeDisabled (current, type) {
       if (type === 'start') {
         return {
           hourDisabled: (hour) => {
-            if (current[0]===1576512000000) {
+            if (current[0] === 1576512000000) {
               return hour > 1 && hour <= 19
-            } 
+            }
           },
           minuteDisabled: (minute, selectedHour) => {
-            if(current[0]===1576512000000 && selectedHour===20) {
-              return minute>=20 && minute<=30
-            } 
+            if (current[0] === 1576512000000 && selectedHour === 20) {
+              return minute >= 20 && minute <= 30
+            }
           },
           secondDisabled: (second, selectedMinute, selectedHour) => {
-            if(current[0]===1576512000000 && selectedHour===12 && selectedMinute>=40 && selectedMinute<=50) {
-              return second>=20 && second<=30
+            if (current[0] === 1576512000000 && selectedHour === 12 && selectedMinute >= 40 && selectedMinute <= 50) {
+              return second >= 20 && second <= 30
             }
           },
         }
       }
-    }
-  }
+    },
+  },
 }
 ```
 ```css

@@ -6,7 +6,6 @@
   :options="options"
   filterable
   :filter="filter1"
-  test="1111"
   multiple
   style="margin-bottom:10px;"
 />

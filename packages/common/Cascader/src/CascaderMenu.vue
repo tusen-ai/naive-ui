@@ -158,11 +158,9 @@ export default {
       return this.expandTrigger === 'click'
     },
     linkedCascaderOptions () {
-      // console.log('linkedCascaderOptions called')
       return linkedCascaderOptions(this.options, this.type)
     },
     menuOptions () {
-      // console.log('menuOptions called')
       return menuOptions(this.linkedCascaderOptions, this.value, this.type)
     },
     menuModel () {
@@ -367,9 +365,9 @@ export default {
       this.$nextTick().then(() => {
         this.typeIsSelect = typeisSelect
         if (typeisSelect) {
-          const $el = this.$refs.selectMenu.$el
+          const element = this.$refs.selectMenu.$el
           this.$parent.updatePosition(
-            $el,
+            element,
             (el, activatorRect) => {
               el.style.minWidth = activatorRect.width + 'px'
             },

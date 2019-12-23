@@ -31,7 +31,6 @@
           :minute-disabled="minuteDisabled"
           :second-disabled="secondDisabled"
           @input="handleTimePickerInput"
-          @checkValue="checkValue"
         />
       </div>
       <div class="n-date-picker-panel-month-modifier">

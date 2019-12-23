@@ -5,7 +5,7 @@
       v-model="displayTimeString"
       class="n-date-picker-panel__time-input n-time-picker-input"
       :class="{
-        'n-time-picker-input--error': isErrorVal
+        'n-time-picker-input--error': isErrorValue
       }"
       :force-focus="active"
       placeholder="Select time"
@@ -153,9 +153,9 @@ import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import asformitem from '../../../mixins/asformitem'
 import isValid from 'date-fns/isValid'
-// import startOfSecond from 'date-fns/startOfSecond'
-// import startOfMinute from 'date-fns/startOfMinute'
-// import startOfHour from 'date-fns/startOfHour'
+import startOfSecond from 'date-fns/startOfSecond'
+import startOfMinute from 'date-fns/startOfMinute'
+import startOfHour from 'date-fns/startOfHour'
 import format from 'date-fns/format'
 import set from 'date-fns/set'
 import setHours from 'date-fns/setHours'
@@ -253,8 +253,8 @@ export default {
       memorizedValue: this.value,
       selectedHour: null,
       selectedMinute: null,
-      selectedSecond: null,
-      isErrorVal: false
+      selectedSecond: null
+      // isErrorVal: false
     }
   },
   computed: {
@@ -283,7 +283,6 @@ export default {
     isMinuteDisabled () {
       let self = this
       return function (minute) {
-        console.log('enter hour check', minute, self.computedHour, self.minuteDisabled(Number(minute), Number(self.computedHour)))
         return self.minuteDisabled(Number(minute), Number(self.computedHour)) || false
       }
     },
@@ -292,6 +291,10 @@ export default {
       return function (second) {
         return self.secondDisabled(Number(second), Number(this.computedMinute), Number(self.computedHour)) || false
       }
+    },
+    isErrorVal () {
+      return this.isHourDisabled(this.computedHour) || this.isMinuteDisabled(this.computedMinute) ||
+    this.isSecondDisabled(this.computedSecond)
     }
   },
   watch: {
@@ -301,7 +304,7 @@ export default {
     },
     value (value, oldValue) {
       this.$emit('change', value, oldValue)
-      this.checkValue()
+      // this.checkValue()
     },
     active (newVal) {
       if (!newVal) {
@@ -311,9 +314,9 @@ export default {
       }
     }
   },
-  mounted () {
-    this.checkValue()
-  },
+  // mounted () {
+  //   this.checkValue()
+  // },
   methods: {
     afterBlur (e) {
       if (this.active) {
@@ -344,7 +347,7 @@ export default {
         return
       }
       if (this.value === null) {
-        this.$emit('input', getTime(setHours(new Date(new Date().toLocaleDateString()), hour)))
+        this.$emit('input', getTime(setHours(startOfHour(new Date()), hour)))
       } else {
         this.$emit('input', getTime(setHours(this.value, hour)))
       }
@@ -355,7 +358,7 @@ export default {
         return
       }
       if (this.value === null) {
-        this.$emit('input', getTime(setMinutes(new Date(new Date().toLocaleDateString()), minute)))
+        this.$emit('input', getTime(setMinutes(startOfMinute(new Date()), minute)))
       } else {
         this.$emit('input', getTime(setMinutes(this.value, minute)))
       }
@@ -366,7 +369,7 @@ export default {
         return
       }
       if (this.value === null) {
-        this.$emit('input', getTime(setSeconds(new Date(new Date().toLocaleDateString()), second)))
+        this.$emit('input', getTime(setSeconds(startOfSecond(new Date()), second)))
       } else {
         this.$emit('input', getTime(setSeconds(this.value, second)))
       }
@@ -446,42 +449,7 @@ export default {
       }
       this.refreshTimeString()
       this.closeTimeSelector()
-    },
-    checkValue () {
-      this.isErrorVal = this.isHourDisabled(this.computedHour) || this.isMinuteDisabled(this.computedMinute) ||
-      this.isSecondDisabled(this.computedSecond)
-      this.$emit('checkValue', this.isErrorVal)
     }
-    // checkHour () {
-    //   if (this.isHourDisabled(this.computedHour)) {
-    //     for (let i = 0; i < 60; i++) {
-    //       if (!this.isHourDisabled(i)) {
-    //         this.setHours(i)
-    //         break
-    //       }
-    //     }
-    //   }
-    // },
-    // checkMinute () {
-    //   if (this.isMinuteDisabled(this.computedMinute)) {
-    //     for (let i = 0; i < 60; i++) {
-    //       if (!this.isMinuteDisabled(i)) {
-    //         this.setMinutes(i)
-    //         break
-    //       }
-    //     }
-    //   }
-    // },
-    // checkSecond () {
-    //   if (this.isSecondDisabled(this.computedSecond)) {
-    //     for (let i = 0; i < 60; i++) {
-    //       if (!this.isSecondDisabled(i)) {
-    //         this.setSeconds(i)
-    //         break
-    //       }
-    //     }
-    //   }
-    // }
   }
 }
 </script>
