@@ -328,7 +328,6 @@ function linkedCascaderOptions (options, type) {
 
 function menuOptions (cascaderOptions, value, type) {
   const valueSet = new Set(value)
-  const checkedOptions = []
   function traverse (options) {
     if (!Array.isArray(options)) return
     const length = options.length
@@ -349,7 +348,6 @@ function menuOptions (cascaderOptions, value, type) {
           } else {
             option.checked = valueSet.has(option.value)
             if (option.checked) {
-              checkedOptions.push(option)
               option.checkedLeafCount = 1
               if (option.disabled) {
                 option.availableLeafCount = 0
@@ -370,7 +368,6 @@ function menuOptions (cascaderOptions, value, type) {
           option.checkedLeafCount = NaN
         }
         option.checked = valueSet.has(option.value)
-        checkedOptions.push(option)
       } else if (type === 'single' || type === 'single-all-options') {
         if (hasChildren(option)) {
           traverse(option.children)

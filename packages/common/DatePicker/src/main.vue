@@ -346,9 +346,7 @@ export default {
     /**
      * Panel Input
      */
-    handlePanelInput (value, valueString, isErrorValue) {
-      if (isErrorValue) {
-      }
+    handlePanelInput (value, valueString) {
       this.$emit('input', value, 'unavailable for now')
       this.refresh(value)
     },
