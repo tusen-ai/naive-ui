@@ -39,7 +39,7 @@ $--header-bar-width: (
 @mixin header-mixin($level) {
   @include b('h' + $level) {
     font-size: map-get($--header-font-size, $level);
-    font-weight: 700;
+    font-weight: 500;
     color: $--n-text-color;
     &:first-child {
       margin-top: 0
@@ -176,7 +176,7 @@ $--header-bar-width: (
       border: 1px solid $--n-alpha-border-color;
     }
     @include m(strong) {
-      font-weight: 700;
+      font-weight: 500;
     }
     @include m(italic) {
       font-style: italic;

@@ -77,7 +77,7 @@ $--tabs-tab-font-size: (
     @include b(tabs-label-wrapper) {
       @include once {
         display: inline-block;
-        font-weight: 700;
+        font-weight: 500;
         white-space: nowrap;
         position: relative;
       }

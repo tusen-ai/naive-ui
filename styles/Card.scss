@@ -152,7 +152,7 @@ $--card-margin-bottom: (
       }
       @include e(main) {
         @include once {
-          font-weight: 700;
+          font-weight: 500;
           font-size: 18px;
           transition: color .3s $--n-ease-in-out-cubic-bezier;
           flex: 1;

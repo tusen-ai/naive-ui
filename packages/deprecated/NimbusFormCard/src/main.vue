@@ -172,7 +172,7 @@ export default {
       .n-nimbus-form-card__title {
         line-height: 19px;
         font-size: 16px;
-        font-weight: 700;
+        font-weight: 500;
         color: #ffffff;
       }
       .n-nimbus-form-card__right-header {

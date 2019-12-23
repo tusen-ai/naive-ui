@@ -140,7 +140,7 @@
         }
         @include b(progress-text) {
           white-space: nowrap;
-          font-weight: 700;
+          font-weight: 500;
           transition: color .3s $--n-ease-in-out-cubic-bezier;
           @include e(percentage) {
             color: inherit;
@@ -214,7 +214,7 @@
               transition: color .3s $--n-ease-in-out-cubic-bezier;
               white-space: nowrap;
               text-align: right;
-              font-weight: 700;
+              font-weight: 500;
               margin-left: 14px;
               margin-right: 14px; 
               height: 21px;
@@ -246,7 +246,7 @@
               border-radius: 10.5px;
               position: absolute;
               white-space: nowrap;
-              font-weight: 700;
+              font-weight: 500;
               font-size: 14px;
             }
             color: map-get($--progress-indicator-color, 'inside');

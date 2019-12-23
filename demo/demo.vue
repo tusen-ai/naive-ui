@@ -474,7 +474,7 @@ body {
   .n-doc-section {
     .n-doc-section__header {
       font-size: 16px;
-      font-weight: 700;
+      font-weight: 500;
       margin-bottom: 12px;
     }
     .n-doc-section__view {

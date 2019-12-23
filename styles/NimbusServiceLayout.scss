@@ -84,7 +84,7 @@
         transition: opacity .3s $--n-ease-in-out-cubic-bezier;
         @include b(nimbus-service-layout-drawer-header) {
           position: relative;
-          font-weight: 700;
+          font-weight: 500;
           height: $layout-nav-height;
           padding-left: 48px;
           font-size: 16px;

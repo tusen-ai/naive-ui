@@ -89,7 +89,7 @@ $--timeline-header-margin-top: (
           @include once {
             transition: color .3s $--n-ease-in-out-cubic-bezier;
             font-size: 14px;
-            font-weight: 700;
+            font-weight: 500;
             margin-bottom: 6px;
           }
           color: $--timeline-item-title-color;

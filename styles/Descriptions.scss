@@ -112,7 +112,7 @@
     }
     @include b(descriptions-header) {
       @include once {
-        font-weight: 700;
+        font-weight: 500;
         font-size: 18px;
         transition: color .3s $--n-ease-in-out-cubic-bezier;
       }
@@ -136,7 +136,7 @@
           }
           @include b(descriptions-table-header) {
             @include once {
-              font-weight: 700;
+              font-weight: 500;
               line-height: 1.5;
               display: table-cell;
               box-sizing: border-box;
@@ -155,7 +155,7 @@
             @include e(label) {
               color: $--descriptions-header-text-color;
               @include once {
-                font-weight: 700;
+                font-weight: 500;
                 transition: color .3s $--n-ease-in-out-cubic-bezier;
                 display: inline-block;
                 margin-right: 14px;

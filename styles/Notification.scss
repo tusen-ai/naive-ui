@@ -128,7 +128,7 @@
       }
       @include e(header) {
         @include once {
-          font-weight: 700;
+          font-weight: 500;
           font-size: 16px;
           transition: color .3s $--n-ease-in-out-cubic-bezier;
         }

@@ -11,7 +11,7 @@
   @include b(gradient-text) {
     @include once {
       display: inline-block;
-      font-weight: 700;
+      font-weight: 500;
       font-size: inherit;
       background-clip: text;
       -webkit-background-clip: text;

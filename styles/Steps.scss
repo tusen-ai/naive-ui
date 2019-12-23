@@ -113,7 +113,7 @@ $--steps-indicator-icon-size: (
           transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
           position: relative;
           display: flex;
-          font-weight: 700;
+          font-weight: 500;
           margin-left: 9px;
           @include e(title) {
             white-space: nowrap;
