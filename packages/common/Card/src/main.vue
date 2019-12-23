@@ -54,6 +54,8 @@ import asthemecontext from '../../../mixins/asthemecontext'
 import NIcon from '../../../common/Icon'
 import mdClose from '../../../icons/md-close'
 
+window.cardSlots = []
+
 export default {
   name: 'NCard',
   components: {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <n-button @click="isActive = true">active</n-button>
-    <modal-wrapper :is-active="isActive"/>
+    <modal-wrapper v-model="isActive"/>
   </div>
 </template>
 

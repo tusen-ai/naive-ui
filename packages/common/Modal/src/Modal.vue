@@ -146,7 +146,7 @@ export default {
                   }
                 }
               },
-              scopedSlots: this.$scopedSlots
+              scopedSlots: { ...this.$scopedSlots }
             }
           )
         ])

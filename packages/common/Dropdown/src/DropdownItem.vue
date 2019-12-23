@@ -31,7 +31,7 @@ export default {
         label: this.$scopedSlots.default ? '' : (this.label || this.name),
         value: this.value
       },
-      scopedSlots: this.$scopedSlots,
+      scopedSlots: { ...this.$scopedSlots },
       on: {
         ...this.$listeners,
         click: (...args) => {

@@ -1,5 +1,5 @@
 <template>
-  <modal :is-active="isActive"/>
+  <modal v-model="value"/>
 </template>
 
 <script>
@@ -10,7 +10,7 @@ export default {
     modal
   },
   props: {
-    isActive: {
+    value: {
       type: Boolean,
       default: false
     }

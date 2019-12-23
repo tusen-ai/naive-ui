@@ -174,7 +174,7 @@ export default {
   },
   render (h) {
     const options = h(WrapWithValue, {
-      scopedSlots: this.$scopedSlots
+      scopedSlots: { ...this.$scopedSlots }
     })
     return h('div', {
       staticClass: 'n-dropdown-menu',

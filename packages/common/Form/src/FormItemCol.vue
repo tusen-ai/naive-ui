@@ -23,7 +23,7 @@ export default {
           return h(NFormItem, {
             ref: 'formItem',
             props: { ...this.$props },
-            scopedSlots: this.$scopedSlots
+            scopedSlots: { ...this.$scopedSlots }
           })
         }
       }

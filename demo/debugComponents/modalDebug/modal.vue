@@ -1,56 +1,28 @@
 <template>
-  <n-modal v-model="isActive">
-    <n-nimbus-form-card
-      width="1032"
-      title="Parklife"
-      :deactivate="() => isActive = false"
-    >
-      <template v-slot:header>
-        {{ time }}
-      </template>
-      <template v-slot:footer>
-        v-slot:footer
-      </template>
-      <template v-slot:content>
-        <n-input
-          v-model="time"
-        />
-        <n-select
-          v-model="selectedValue"
-          size="small"
-          placeholder="Please Select Type"
-          :items="items"
-          style="flex-grow: 1;"
-        />
-        <n-tooltip
-          placement="bottom"
-          trigger="click"
-          style="margin-right: 12px;"
-        >
-          <template v-slot:activator>
-            <n-button style="margin: 0;">
-              California Girls(Click)
-            </n-button>
-          </template>
-          <span>
-            I wish they all could be California girls
-          </span>
-        </n-tooltip>
-      </template>
-    </n-nimbus-form-card>
+  <n-modal v-model="value">
+    <template v-slot:header>
+      <n-input v-model="time" /> {{ time }}
+      <n-button>Look at it</n-button>
+    </template>
+    <n-input v-model="time" /> {{ time }}
+    <template v-slot:footer>
+      <n-input v-model="time" /> {{ time }}
+      <n-button>Look at it</n-button>
+    </template>
   </n-modal>
 </template>
 <script>
 export default {
   props: {
-    isActive: {
+    value: {
       type: Boolean,
       default: false
     }
   },
   data () {
     return {
-      time: null,
+      isActive: false,
+      time: '666',
       selectedValue: null,
       items: [
         {
