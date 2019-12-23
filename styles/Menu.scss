@@ -57,7 +57,7 @@ $layout-nav-height: 64px;
               top: 0;
               bottom: 0;
               z-index: 0;
-              transition: opacity 0.3s $default-cubic-bezier;
+              transition: opacity 0.3s $--n-ease-in-out-cubic-bezier;
               opacity: 0;
             }
             @include m(selected) {
