@@ -1,6 +1,6 @@
 import getTheme from './getTheme'
 
-export default level =>({
+export default level => ({
   name: 'NH' + level,
   functional: true,
   props: {

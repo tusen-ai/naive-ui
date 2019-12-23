@@ -41,8 +41,8 @@
           transform: scale(0.5);
           transform-origin: center;
           transition: transform 0.3s $--n-ease-in-out-cubic-bezier,
-          opacity 0.3s $--n-ease-in-out-cubic-bezier,
-          border-color 0.3s $--n-ease-in-out-cubic-bezier;
+            opacity 0.3s $--n-ease-in-out-cubic-bezier,
+            border-color 0.3s $--n-ease-in-out-cubic-bezier;
         }
         @include e(check-mark) {
           content: "";
@@ -56,8 +56,8 @@
           transform: scale(0.5);
           transform-origin: center;
           transition: transform 0.3s $--n-ease-in-out-cubic-bezier,
-          opacity 0.3s $--n-ease-in-out-cubic-bezier,
-          border-color 0.3s $--n-ease-in-out-cubic-bezier;
+            opacity 0.3s $--n-ease-in-out-cubic-bezier,
+            border-color 0.3s $--n-ease-in-out-cubic-bezier;
         }
       }
       @include e(label) {

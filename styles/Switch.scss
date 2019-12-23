@@ -62,17 +62,13 @@
       &::before {
         box-shadow: $--switch-switcher-box-shadow;
         background-position: $--switch-background-position;
-      }
-      &::after {
-        background-position: $--switch-background-position;
-      }
-      background-color: map-get($map: $--switch-rail-background-color, $key: 'inactive');
-      &::before {
         background-image: map-get($map: $--switch-switcher-color, $key: 'inactive');
       }
       &::after {
+        background-position: $--switch-background-position;
         background-image: map-get($map: $--switch-switcher-color, $key: 'active');
       }
+      background-color: map-get($map: $--switch-rail-background-color, $key: 'inactive');
       @include m(active) {
         background-color: map-get($map: $--switch-rail-background-color, $key: 'active');
       }

@@ -31,8 +31,8 @@ function createRenderer (wrapCodeWithCard = true) {
       return `<n-a title="${title}" href="${href}">${text}</n-a>`
     },
     list (body, ordered, start) {
-      const type = ordered ? 'n-ol' : 'n-ul',
-        startatt = (ordered && start !== 1) ? (' start="' + start + '"') : ''
+      const type = ordered ? 'n-ol' : 'n-ul'
+      const startatt = (ordered && start !== 1) ? (' start="' + start + '"') : ''
       return `<${type}${startatt}>\n` + body + `</${type}>\n`
     },
     listitem (text) {
@@ -43,9 +43,10 @@ function createRenderer (wrapCodeWithCard = true) {
     }
   }
 
-  Object.keys(overrides).forEach(key => renderer[key] = overrides[key])
+  Object.keys(overrides).forEach(key => {
+    renderer[key] = overrides[key]
+  })
   return renderer
 }
-
 
 module.exports = createRenderer

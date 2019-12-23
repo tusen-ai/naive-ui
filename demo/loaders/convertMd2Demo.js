@@ -66,8 +66,8 @@ ${parts.style}
   mergedParts.code = marked(`\`\`\`html
 ${mergedParts.code}
 \`\`\``, {
-  renderer: codeRenderer
-})
+    renderer: codeRenderer
+  })
   // console.log(mergedParts.code)
   return mergedParts
 }

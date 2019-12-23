@@ -32,7 +32,7 @@ export default {
     underline: {
       type: Boolean,
       default: false
-    },
+    }
   },
   render (h, context) {
     const props = context.props
@@ -61,8 +61,8 @@ export default {
       },
       attrs,
       on
-    }, isDelete & isCode ? [
-       h('del', {}, defaultSlot)
+    }, isDelete && isCode ? [
+      h('del', {}, defaultSlot)
     ] : defaultSlot)
   }
 }

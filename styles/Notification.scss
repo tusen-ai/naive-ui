@@ -47,13 +47,13 @@
     color: $--notification-text-color;
     @include once {
       transition:
-      background-color .3s $--n-ease-in-out-cubic-bezier,
-      color .3s $--n-ease-in-out-cubic-bezier,
-      opacity .3s $--n-ease-in-out-cubic-bezier,
-      transform .3s $--n-ease-in-out-cubic-bezier,
-      max-height .3s $--n-ease-in-out-cubic-bezier,
-      margin-bottom .3s linear,
-      box-shadow .3s $--n-ease-in-out-cubic-bezier;
+        background-color .3s $--n-ease-in-out-cubic-bezier,
+        color .3s $--n-ease-in-out-cubic-bezier,
+        opacity .3s $--n-ease-in-out-cubic-bezier,
+        transform .3s $--n-ease-in-out-cubic-bezier,
+        max-height .3s $--n-ease-in-out-cubic-bezier,
+        margin-bottom .3s linear,
+        box-shadow .3s $--n-ease-in-out-cubic-bezier;
       font-family: $--n-font-family;
       font-size: 14px;
       font-weight: 400;

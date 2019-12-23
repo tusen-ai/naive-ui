@@ -18,8 +18,8 @@ module.exports = function (content) {
     <div style="display: flex; flex-wrap: nowrap;">
       <div style="width: calc(100% - 184px); margin-right: 24x;">
         ${marked(content, {
-          renderer
-        })}
+    renderer
+  })}
       </div>
       <div style="width: 160px;">
         ${parseMdAsAnchor(content)}

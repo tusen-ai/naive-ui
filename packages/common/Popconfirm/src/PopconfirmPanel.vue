@@ -74,17 +74,17 @@ export default {
       required: true
     }
   },
+  data () {
+    return {
+      showPopconfirm: false
+    }
+  },
   computed: {
     translatedPositiveText () {
       return this.t('positiveText') || this.positiveText
     },
     translatedNegativeText () {
       return this.t('negativeText') || this.negativeText
-    }
-  },
-  data () {
-    return {
-      showPopconfirm: false
     }
   },
   methods: {
