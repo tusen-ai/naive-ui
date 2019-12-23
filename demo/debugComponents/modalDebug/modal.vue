@@ -1,28 +1,19 @@
 <template>
   <n-modal v-model="isActive">
-    <template v-slot:activator>
-      <n-button
-        size="small"
-        @click="isActive = true"
-      >
-        Parklife
-      </n-button>
-    </template>
     <n-nimbus-form-card
       width="1032"
       title="Parklife"
       :deactivate="() => isActive = false"
     >
       <template v-slot:header>
-        v-slot:header
+        {{ time }}
       </template>
       <template v-slot:footer>
         v-slot:footer
       </template>
       <template v-slot:content>
-        <n-date-picker
+        <n-input
           v-model="time"
-          type="datetime"
         />
         <n-select
           v-model="selectedValue"
@@ -51,9 +42,14 @@
 </template>
 <script>
 export default {
+  props: {
+    isActive: {
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
-      isActive: true,
       time: null,
       selectedValue: null,
       items: [
