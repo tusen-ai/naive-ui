@@ -1,23 +1,23 @@
-# Basic
+# Event
 ```html
 <n-popconfirm
   @positive-click="handlePositiveClick"
   @negative-click="handleNegativeClick"
 >
   <template v-slot:activator>
-    <n-button>Quote</n-button>
+    <n-button>Quit</n-button>
   </template>
-  Things pass us by. Nobody can catch them. That's the way we live our lives.
+  Are you sure to quit this game?
 </n-popconfirm>
 ```
 ```js
 export default {
   methods: {
     handlePositiveClick () {
-      this.$NMessage.success('Yes')
+      this.$NMessage.info('positive click')
     },
     handleNegativeClick () {
-      this.$NMessage.warning('No')
+      this.$NMessage.info('negative click')
     }
   }
 }

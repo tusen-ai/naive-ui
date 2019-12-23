@@ -1,10 +1,10 @@
 <i18n>
 {
-  "zh-cn": {
+  "zh-CN": {
     "show": "显示代码",
     "hide": "收起代码"
   },
-  "en-us": {
+  "en-US": {
     "show": "Show Code",
     "hide": "Hide Code"
   }

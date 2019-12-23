@@ -116,7 +116,7 @@ Vue.use(NaiveUI)
 NaiveUI.setHljs(hljs)
 
 const i18n = new VueI18n({
-  locale: 'en-us'
+  locale: 'en-US'
 })
 
 Vue.component('ComponentDemo', ComponentDemo)
@@ -236,7 +236,7 @@ const routes = [
   },
   {
     path: '/*',
-    redirect: '/en-us/dark/start'
+    redirect: '/en-US/dark/start'
   }
 ]
 

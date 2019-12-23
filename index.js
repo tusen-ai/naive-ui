@@ -67,6 +67,9 @@ import Log from './packages/common/Log'
 import Code from './packages/common/Code'
 import Typography from './packages/common/Typography'
 
+import zhCN from './packages/locale/zhCN'
+import enUS from './packages/locale/enUS'
+
 /**
  * Deprecated Components
  */
@@ -83,7 +86,18 @@ import IconTransition from './packages/transition/IconSwitchTransition'
 
 const NaiveUI = {
   install,
-  setHljs
+  setHljs,
+  setHighlightjs: setHljs,
+  locales: {
+    'zh-CN': zhCN,
+    'en-US': enUS
+  },
+  fallbackLocale: enUS,
+  addLocale
+}
+
+function addLocale () {
+
 }
 
 function setHljs (hljs) {

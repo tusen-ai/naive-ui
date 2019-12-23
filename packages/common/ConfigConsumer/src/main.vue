@@ -20,6 +20,7 @@ export default {
   render (h) {
     const defaultSlot = this.$scopedSlots.default ? this.$scopedSlots.default({
       theme: this.synthesizedTheme,
+      language: this.NConfigProvider ? this.NConfigProvider.inheritedLanguage : null,
       namespace: this.NConfigProvider ? this.NConfigProvider.inheritedNamespace : null,
       themeEnvironment: this.synthesizedThemeEnvironment,
       styleScheme: this.synthesizedTheme ? styleScheme[this.synthesizedTheme] : null

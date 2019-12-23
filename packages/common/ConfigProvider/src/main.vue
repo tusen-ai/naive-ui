@@ -30,6 +30,18 @@ export default {
     themeEnvironment: {
       type: Object,
       default: null
+    },
+    language: {
+      validator (value) {
+        return ['zh-CN', 'en-US'].includes(value)
+      },
+      default: null
+    },
+    lang: {
+      validator (value) {
+        return ['zh-CN', 'en-US'].includes(value)
+      },
+      default: null
     }
   },
   computed: {
@@ -38,6 +50,10 @@ export default {
     },
     inheritedNamespace () {
       return this.namespace || (this.NConfigProvider ? this.NConfigProvider.inheritedNamespace : null)
+    },
+    inheritedLanguage () {
+      const language = this.language || this.lang
+      return language || (this.NConfigProvider ? this.NConfigProvider.inheritedLanguage : null)
     }
   },
   render (h) {

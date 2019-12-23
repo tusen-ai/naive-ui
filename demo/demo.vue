@@ -1,5 +1,5 @@
 <template>
-  <n-config-provider class="demo" namespace="naive-ui-doc" :theme="theme">
+  <n-config-provider class="demo" namespace="naive-ui-doc" :theme="theme" :language="lang">
     <n-nimbus-service-layout :padding-body="false" :items="items">
       <template v-slot:nav>
         <doc-header
@@ -412,7 +412,7 @@ export default {
     },
     lang: {
       get () {
-        return this.$route.params.lang || 'en-us'
+        return this.$route.params.lang || 'en-US'
       },
       set (lang) {
         this.$router.push(changeLangInPath(this.$route.fullPath, lang))
@@ -435,7 +435,7 @@ export default {
 }
 
 function changeLangInPath (path, lang) {
-  const langReg = /^\/(zh-cn|en-us)\//
+  const langReg = /^\/(zh-CN|en-US)\//
   return path.replace(langReg, `/${lang}/`)
 }
 

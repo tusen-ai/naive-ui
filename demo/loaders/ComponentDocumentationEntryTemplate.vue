@@ -1,7 +1,7 @@
 <template>
   <documentation-wrapper>
-    <en-us />
-    <zh-cn />
+    <en-US />
+    <zh-CN />
   </documentation-wrapper>
 </template>
 
@@ -11,8 +11,8 @@ import enUS from './enUS/index.md'
 
 export default {
   components: {
-    'en-us': enUS,
-    'zh-cn': zhCN
+    'en-US': enUS,
+    'zh-CN': zhCN
   }
 }
 </script>
