@@ -5,6 +5,7 @@ datetime
 daterange
 datetimerange
 disabled
+disabledTime
 actions
 events
 ```

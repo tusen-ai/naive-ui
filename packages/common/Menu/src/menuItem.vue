@@ -6,13 +6,13 @@
       'n-menu-item--selected': isSelected,
       'n-menu-item--disabled': isDisabled
     }"
-    @click="clickCallback"
+    @click="handleClick"
   >
     <span
       v-if="hasIcon"
       class="n-menu-title-icon"
     />
-    <span>{{ title }}{{ isDisabled }}</span>
+    <span>{{ title }}</span>
   </li>
 </template>
 <script>
@@ -73,8 +73,8 @@ export default {
     }
   },
   methods: {
-    clickCallback () {
-      if (!this.disabled) {
+    handleClick () {
+      if (!this.isDisabled) {
         this.NMenu.changeSelect(this.name)
         this.$emit('click', this)
       }

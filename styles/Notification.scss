@@ -47,13 +47,13 @@
     color: $--notification-text-color;
     @include once {
       transition:
-      background-color .3s $default-cubic-bezier,
-      color .3s $default-cubic-bezier,
-      opacity .3s $default-cubic-bezier,
-      transform .3s $default-cubic-bezier,
-      max-height .3s $default-cubic-bezier,
-      margin-bottom .3s linear,
-      box-shadow .3s $default-cubic-bezier;
+        background-color .3s $default-cubic-bezier,
+        color .3s $default-cubic-bezier,
+        opacity .3s $default-cubic-bezier,
+        transform .3s $default-cubic-bezier,
+        max-height .3s $default-cubic-bezier,
+        margin-bottom .3s linear,
+        box-shadow .3s $default-cubic-bezier;
       font-family: $default-font-family;
       font-size: 14px;
       font-weight: 400;
@@ -114,7 +114,6 @@
         padding-top: 16px;
         padding-bottom: 16px;
         box-sizing: border-box;
-        width: 100%;
         display: flex;
         flex-direction: column;
         margin-left: 40px;

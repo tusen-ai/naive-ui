@@ -102,7 +102,7 @@
       }
     }
     @include b(base-select-menu-light-bar) {
-      transition: background-color .3s $default-cubic-bezier;
+      // transition: background-color .3s $default-cubic-bezier;
       position: absolute;
       width:100%;
       background-color: $--base-select-menu-light-bar-background-color;

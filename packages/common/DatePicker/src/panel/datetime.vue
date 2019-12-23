@@ -14,7 +14,9 @@
       >
         <n-input
           v-model="displayDateString"
-          class="n-date-picker-panel-dates__date-input"
+          :class="{
+            'n-input--error': isErrorDate
+          }"
           placeholder="Select date"
           @blur="handleDateInputBlur"
           @input="handleDateInput"
@@ -25,6 +27,9 @@
           class="n-date-picker-panel__time-input"
           :value="value"
           stop-selector-bubble
+          :hour-disabled="hourDisabled"
+          :minute-disabled="minuteDisabled"
+          :second-disabled="secondDisabled"
           @input="handleTimePickerInput"
         />
       </div>
@@ -76,7 +81,8 @@
             'n-date-picker-panel-dates__date--current': dateItem.isCurrentDate,
             'n-date-picker-panel-dates__date--selected': dateItem.isSelectedDate,
             'n-date-picker-panel-dates__date--in-display-month': dateItem.isDateOfDisplayMonth,
-            'n-date-picker-panel-dates__date--no-transition': noTransition
+            'n-date-picker-panel-dates__date--no-transition': noTransition,
+            'n-date-picker-panel-dates__date--disabled': dateDisabled(dateItem.timestamp)
           }"
           @click="handleDateClick(dateItem)"
         >
@@ -105,6 +111,10 @@
           round
           auto-text-color
           type="primary"
+          class="n-date-picker-panel-actions__confirm"
+          :class="{
+            'n-date-picker-panel-actions__confirm--disabled': isErrorTime || isErrorDate
+          }"
           @click="handleConfirmClick"
         >
           Confirm
@@ -153,6 +163,17 @@ export default {
     return {
       dateFormat: DATE_FORMAT,
       detaValidateFormat: DATE_VALIDATE_FORMAT
+    }
+  },
+  watch: {
+    active () {
+      if (this.active) {
+        this.initialValue = this.value
+      } else {
+        if (this.isErrorTime || this.isErrorDate) {
+          this.$emit('input', this.initialValue)
+        }
+      }
     }
   },
   methods: {

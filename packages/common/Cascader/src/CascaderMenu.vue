@@ -134,6 +134,10 @@ export default {
     onLoad: {
       type: Function,
       default: () => {}
+    },
+    filter: {
+      type: [String, Function],
+      default: null
     }
   },
   data () {
@@ -154,11 +158,9 @@ export default {
       return this.expandTrigger === 'click'
     },
     linkedCascaderOptions () {
-      // console.log('linkedCascaderOptions called')
       return linkedCascaderOptions(this.options, this.type)
     },
     menuOptions () {
-      // console.log('menuOptions called')
       return menuOptions(this.linkedCascaderOptions, this.value, this.type)
     },
     menuModel () {
@@ -193,9 +195,21 @@ export default {
       const filteredSelectOptions = []
       const type = this.type
       traverseWithCallback(this.menuOptions, option => {
-        if (Array.isArray(option.path) && option.path.some(
-          label => ~label.indexOf(this.pattern)
-        )) {
+        let flag = false
+        if (this.filter && option.label) {
+          let path = option.path.map((item) => {
+            return {
+              label: item,
+              value: item
+            }
+          })
+          flag = this.filter(this.pattern, { label: option.label, value: option.value }, path)
+        } else {
+          flag = option.path.some(
+            label => ~label.indexOf(this.pattern)
+          )
+        }
+        if (Array.isArray(option.path) && flag) {
           if (type === 'multiple' || type === 'single') {
             // console.log()
             if (option.isLeaf) {
@@ -351,9 +365,9 @@ export default {
       this.$nextTick().then(() => {
         this.typeIsSelect = typeisSelect
         if (typeisSelect) {
-          const el = this.$refs.selectMenu.$el
+          const element = this.$refs.selectMenu.$el
           this.$parent.updatePosition(
-            el,
+            element,
             (el, activatorRect) => {
               el.style.minWidth = activatorRect.width + 'px'
             },
@@ -396,15 +410,15 @@ export default {
           this.$refs.mask.showOnce(`Not all child nodes of "${option.label}" have been loaded`)
           return
         }
-        const traverseMultiple = option => {
-          if (!option || option.disabled) return
-          if (Array.isArray(option.children)) {
-            for (const child of option.children) {
+        const traverseMultiple = item => {
+          if (!item || item.disabled) return
+          if (Array.isArray(item.children)) {
+            for (const child of item.children) {
               traverseMultiple(child)
             }
           }
-          if (!option.children) {
-            newValues.push(option.value)
+          if (!item.children) {
+            newValues.push(item.value)
           }
         }
         traverseMultiple(option)

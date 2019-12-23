@@ -146,10 +146,10 @@ function rootedOptions (options) {
  */
 function patchedOptions (options, patches) {
   // console.log('patchedOptions input', options, patches)
-  function traverse (options, depth = 0, parentId = 0) {
-    if (!Array.isArray(options)) return
-    for (let i = 0; i < options.length; ++i) {
-      const option = options[i]
+  function traverse (items, depth = 0, parentId = 0) {
+    if (!Array.isArray(items)) return
+    for (let i = 0; i < items.length; ++i) {
+      const option = items[i]
       const id = `${parentId}_${i + 1}`
       // console.log('iterate on option', id)
       if (!hasChildren(option)) {
@@ -254,13 +254,13 @@ function applyDrop ([sourceNode, targetNode, type]) {
 }
 
 function linkedCascaderOptions (options, type) {
-  const linkedCascaderOptions = options
+  const cascaderOptions = options
   const path = []
-  function traverse (options, parent = null, depth = 0, parentId = 0) {
-    if (!Array.isArray(options)) return
-    const length = options.length
+  function traverse (items, parent = null, depth = 0, parentId = 0) {
+    if (!Array.isArray(items)) return
+    const length = items.length
     for (let i = 0; i < length; ++i) {
-      const option = options[i]
+      const option = items[i]
       if (depth > 0) path.push(option.label)
       /**
        * option.type determine option ui status
@@ -319,16 +319,15 @@ function linkedCascaderOptions (options, type) {
       }
       if (depth > 0) path.pop()
     }
-    markAvailableSiblingIds(options)
-    markFirstAvailableChildId(options)
+    markAvailableSiblingIds(items)
+    markFirstAvailableChildId(items)
   }
-  traverse(linkedCascaderOptions)
-  return linkedCascaderOptions
+  traverse(cascaderOptions)
+  return cascaderOptions
 }
 
-function menuOptions (linkedCascaderOptions, value, type) {
+function menuOptions (cascaderOptions, value, type) {
   const valueSet = new Set(value)
-  const checkedOptions = []
   function traverse (options) {
     if (!Array.isArray(options)) return
     const length = options.length
@@ -349,7 +348,6 @@ function menuOptions (linkedCascaderOptions, value, type) {
           } else {
             option.checked = valueSet.has(option.value)
             if (option.checked) {
-              checkedOptions.push(option)
               option.checkedLeafCount = 1
               if (option.disabled) {
                 option.availableLeafCount = 0
@@ -370,7 +368,6 @@ function menuOptions (linkedCascaderOptions, value, type) {
           option.checkedLeafCount = NaN
         }
         option.checked = valueSet.has(option.value)
-        checkedOptions.push(option)
       } else if (type === 'single' || type === 'single-all-options') {
         if (hasChildren(option)) {
           traverse(option.children)
@@ -379,18 +376,18 @@ function menuOptions (linkedCascaderOptions, value, type) {
       }
     }
   }
-  traverse(linkedCascaderOptions)
+  traverse(cascaderOptions)
   // console.log('menuOptions', linkedCascaderOptions)
-  return linkedCascaderOptions
+  return cascaderOptions
 }
 
 function optionPath (options, optionId) {
   const path = []
   if (optionId === null) return path
   let done = false
-  function traverseOptions (options) {
-    if (!Array.isArray(options) || !options.length) return
-    for (const option of options) {
+  function traverseOptions (items) {
+    if (!Array.isArray(items) || !items.length) return
+    for (const option of items) {
       if (done) return
       path.push(option)
       if (option.id === optionId) {
@@ -429,8 +426,8 @@ function menuModel (options, activeId, trackId, loadingId) {
      */
     if (option.depth === 0) continue
     if (hasChildren(option)) {
-      model.push(option.children.map(option => {
-        return processedOption(option, activeIds, trackId, loadingId)
+      model.push(option.children.map(item => {
+        return processedOption(item, activeIds, trackId, loadingId)
       }))
     }
   }

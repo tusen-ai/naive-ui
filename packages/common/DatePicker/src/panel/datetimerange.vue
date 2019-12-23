@@ -25,6 +25,9 @@
           position-mode="absolute"
           class="n-date-picker-panel__time-input"
           :value="startTimeValue"
+          :hour-disabled="isStartHourDisabled(currentDate)"
+          :minute-disabled="isStartMinuteDisabled(currentDate)"
+          :second-disabled="isStartSecondDisabled(currentDate)"
           stop-selector-bubble
           @input="handleStartTimePickerInput"
         />
@@ -45,6 +48,10 @@
           position-mode="absolute"
           class="n-date-picker-panel__time-input"
           :value="endTimeValue"
+          :hour-disabled="isEndHourDisabled(currentDate)"
+          :minute-disabled="isEndMinuteDisabled(currentDate)"
+          :second-disabled="isEndSecondDisabled(currentDate)"
+          :is-error-val="isErrorEndTime"
           stop-selector-bubble
           @input="handleEndTimePickerInput"
         />
@@ -112,7 +119,8 @@
               'n-date-picker-panel-dates__date--selected': dateItem.isSelectedDate,
               'n-date-picker-panel-dates__date--in-display-month': dateItem.isDateOfDisplayMonth,
               'n-date-picker-panel-dates__date--in-span': dateItem.isInSpan,
-              'n-date-picker-panel-dates__date--no-transition': noTransition
+              'n-date-picker-panel-dates__date--no-transition': noTransition,
+              'n-date-picker-panel-dates__date--disabled': dateDisabled(dateItem.timestamp)
             }"
             @click="handleDateClick(dateItem)"
             @mouseenter="handleDateMouseEnter(dateItem)"
@@ -185,7 +193,8 @@
               'n-date-picker-panel-dates__date--selected': dateItem.isSelectedDate,
               'n-date-picker-panel-dates__date--in-display-month': dateItem.isDateOfDisplayMonth,
               'n-date-picker-panel-dates__date--in-span': dateItem.isInSpan,
-              'n-date-picker-panel-dates__date--no-transition': noTransition
+              'n-date-picker-panel-dates__date--no-transition': noTransition,
+              'n-date-picker-panel-dates__date--disabled': dateDisabled(dateItem.timestamp)
             }"
             @click="handleDateClick(dateItem)"
             @mouseenter="handleDateMouseEnter(dateItem)"
@@ -212,6 +221,10 @@
         </n-button>
         <n-button
           v-if="actions.includes('confirm')"
+          class="n-date-picker-panel-actions__confirm"
+          :class="{
+            'n-date-picker-panel-actions__confirm--disabled': isErrorDateTime
+          }"
           size="tiny"
           round
           auto-text-color
@@ -280,7 +293,10 @@ export default {
   watch: {
     active (newActive) {
       if (newActive) {
+        this.initialValue = this.value
         this.syncCalendarTimeWithValue(this.value)
+      } else if (this.isErrorDateTime) {
+        this.$emit('input', this.initialTime)
       }
     },
     valueAsDateArray (newValue) {

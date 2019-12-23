@@ -6,6 +6,8 @@ import getYear from 'date-fns/getYear'
 import getMonth from 'date-fns/getMonth'
 import startOfMonth from 'date-fns/startOfMonth'
 import isValid from 'date-fns/isValid'
+import startOfHour from 'date-fns/startOfHour'
+import setHours from 'date-fns/setHours'
 import { dateArray } from '../../../../utils/dateUtils'
 
 import commonCalendarMixin from './commonCalendarMixin'
@@ -43,6 +45,22 @@ export default {
     actions: {
       type: Array,
       default: () => ['clear', 'confirm']
+    },
+    dateDisabled: {
+      type: Function,
+      default: () => {
+        return false
+      }
+    },
+    timeDisabled: {
+      type: Function,
+      default: () => {
+        return {
+          hourDisabled: () => false,
+          minuteDisabled: () => false,
+          secondDisabled: () => false
+        }
+      }
     }
   },
   data () {
@@ -56,7 +74,19 @@ export default {
       isSelecting: false,
       startDateTime: null,
       memorizedStartDateTime: null,
-      endDateTime: null
+      endDateTime: null,
+      initialTime: null
+      // startHourDisabled: () => true,
+      // startMinuteDisabled: () => true,
+      // startSecondDisabled: () => true,
+      // endHourDisabled: () => true,
+      // endMinuteDisabled: () => true,
+      // endSecondDisabled: () => true
+      // isErrorStartTime: false,
+      // isErrorEndTime: false,
+      // isErrorStartDate: false,
+      // isErrorEndDate: false
+      // currentDate: []
     }
   },
   computed: {
@@ -105,6 +135,109 @@ export default {
       if (isValid(startMoment)) {
         return [startMoment, endMoment]
       } else return null
+    },
+    isStartHourDisabled () {
+      return function (val) {
+        const timeDisabled = this.timeDisabled(this.currentDate, 'start')
+        const startHourDisabled = (timeDisabled && timeDisabled.hourDisabled) || function () { return false }
+        return function (hour) {
+          return startHourDisabled(hour)
+        }
+      }
+    },
+    isStartMinuteDisabled () {
+      return function (val) {
+        const timeDisabled = this.timeDisabled(this.currentDate, 'start')
+        const startMinuteDisabled = (timeDisabled && timeDisabled.minuteDisabled) || function () { return false }
+        return function (minute, selectedHour) {
+          return startMinuteDisabled(minute, selectedHour)
+        }
+      }
+    },
+    isStartSecondDisabled () {
+      return function (val) {
+        const timeDisabled = this.timeDisabled(this.currentDate, 'start')
+        const startSecondDisabled = (timeDisabled && timeDisabled.secondDisabled) || function () { return false }
+        return function (second, selectedMinute, selectedHour) {
+          return startSecondDisabled(second, selectedMinute, selectedHour)
+        }
+      }
+    },
+    isEndHourDisabled () {
+      return function (val) {
+        const timeDisabled = this.timeDisabled(this.currentDate, 'end')
+        const endHourDisabled = (timeDisabled && timeDisabled.hourDisabled) || function () { return false }
+        return function (hour) {
+          return endHourDisabled(hour)
+        }
+      }
+    },
+    isEndMinuteDisabled () {
+      return function (val) {
+        const timeDisabled = this.timeDisabled(this.currentDate, 'end')
+        const endMinuteDisabled = (timeDisabled && timeDisabled.minuteDisabled) || function () { return false }
+        return function (minute, selectedHour) {
+          return endMinuteDisabled(minute, selectedHour)
+        }
+      }
+    },
+    isEndSecondDisabled () {
+      return function (val) {
+        const timeDisabled = this.timeDisabled(this.currentDate, 'end')
+        const endSecondDisabled = (timeDisabled && timeDisabled.secondDisabled) || function () { return false }
+        return function (second, selectedMinute, selectedHour) {
+          return endSecondDisabled(second, selectedMinute, selectedHour)
+        }
+      }
+    },
+    currentDate () {
+      if (!this.value) {
+        return [null, null]
+      }
+      let date = []
+      this.value.forEach((item, index) => {
+        if (item) {
+          date[index] = setHours(startOfHour(new Date(item)), 0).getTime()
+        }
+      })
+      return date
+    },
+    isErrorDateTime () {
+      if (!this.value) {
+        return false
+      }
+      return this.isErrorStartTime || this.isErrorEndTime ||
+      this.isErrorStartDate || this.isErrorEndDate
+    },
+    isErrorStartTime () {
+      if (!this.value) {
+        return false
+      }
+      const startDateTime = new Date(this.value[0])
+      return this.isStartHourDisabled(this.value)(startDateTime.getHours()) ||
+          this.isStartMinuteDisabled(this.value)(startDateTime.getMinutes(), startDateTime.getHours()) ||
+          this.isStartSecondDisabled(this.value)(startDateTime.getSeconds(), startDateTime.getMinutes(), startDateTime.getHours())
+    },
+    isErrorEndTime () {
+      if (!this.value) {
+        return false
+      }
+      let endDateTime = new Date(this.value[1])
+      return this.isEndHourDisabled(this.value)(endDateTime.getHours()) ||
+          this.isEndMinuteDisabled(this.value)(endDateTime.getMinutes(), endDateTime.getHours()) ||
+          this.isEndSecondDisabled(this.value)(endDateTime.getSeconds(), endDateTime.getMinutes(), endDateTime.getHours())
+    },
+    isErrorStartDate () {
+      if (!this.value) {
+        return false
+      }
+      return this.dateDisabled(setHours(startOfHour(new Date(this.value[0])), 0).getTime())
+    },
+    isErrorEndDate () {
+      if (!this.value) {
+        return false
+      }
+      return this.dateDisabled(setHours(startOfHour(new Date(this.value[1])), 0).getTime())
     }
   },
   watch: {
@@ -127,6 +260,14 @@ export default {
           this.banTransitionOneTick()
         }
       }
+    },
+    isErrorDateTime (val) {
+      this.$emit('check-value', this.isErrorDateTime)
+    }
+  },
+  mounted () {
+    if (this.isErrorDateTime) {
+      this.$emit('check-value', this.isErrorDateTime)
     }
   },
   methods: {
@@ -144,7 +285,6 @@ export default {
       this.closeCalendar()
     },
     syncCalendarTimeWithValue (value) {
-      // console.log('syncCalendarTimeWithValue', value)
       if (value === null) return
       const [startMoment, endMoment] = value
       this.startCalendarDateTime = new Date(startMoment)
@@ -155,6 +295,9 @@ export default {
       }
     },
     handleDateClick (dateItem) {
+      if (this.dateDisabled(dateItem.timestamp)) {
+        return
+      }
       if (!this.isSelecting) {
         this.isSelecting = true
         this.memorizedStartDateTime = dateItem.timestamp
@@ -179,6 +322,9 @@ export default {
       }
     },
     handleConfirmClick () {
+      if (this.isErrorDateTime) {
+        return
+      }
       this.$emit('confirm')
       this.closeCalendar()
     },

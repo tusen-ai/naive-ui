@@ -62,6 +62,7 @@
             :enable-all-options="enableAllOptions"
             :pattern="pattern"
             :filterable="filterable"
+            :filter="filter"
             :expand-trigger="expandTrigger"
             :active-id.sync="activeId"
             :lazy="lazy"
@@ -163,6 +164,10 @@ export default {
     splitor: {
       type: String,
       default: ' / '
+    },
+    filter: {
+      type: [String, Function],
+      default: null
     }
   },
   data () {

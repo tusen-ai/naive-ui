@@ -376,7 +376,7 @@ export default {
         }
         let newValue = []
         if (Array.isArray(this.value)) {
-          const optionValues = new Set(this.synthesizedOptions.map(option => option.value))
+          const optionValues = new Set(this.synthesizedOptions.map(item => item.value))
           newValue = this.value.filter(value => optionValues.has(value) || this.memorizedValueOptionMap.has(value))
         }
         const index = newValue.findIndex(value => value === option.value)

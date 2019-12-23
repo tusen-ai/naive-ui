@@ -101,9 +101,9 @@ export default {
         body.appendChild(footerPatch)
         if (timeout) {
           window.setTimeout(() => {
-            const body = this.$refs.body
-            if (body) {
-              body.removeChild(footerPatch)
+            const bodyDom = this.$refs.body
+            if (bodyDom) {
+              bodyDom.removeChild(footerPatch)
             }
           }, timeout)
         }
@@ -122,9 +122,9 @@ export default {
         body.appendChild(headerPatch)
         if (timeout) {
           window.setTimeout(() => {
-            const body = this.$refs.body
-            if (body) {
-              body.removeChild(headerPatch)
+            const bodyDom = this.$refs.body
+            if (bodyDom) {
+              bodyDom.removeChild(headerPatch)
             }
           }, timeout)
         }

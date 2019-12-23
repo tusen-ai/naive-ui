@@ -6,12 +6,12 @@
       class="n-sub-menu-header"
       :style="{paddingLeft: paddingLeft + 'px'}"
       :class="{
-        'n-sub-menu-header--collapsed': collapsed,
-        'n-sub-menu-header--active': !collapsed,
+        'n-sub-menu-header--collapsed': isCollapsed,
+        'n-sub-menu-header--active': !isCollapsed,
         'n-sub-menu-header--has-icon': hasIcon,
         'n-sub-menu-header--disabled': disabled,
       }"
-      @click="clickCallback"
+      @click="handleClick"
     >
       <span
         v-if="hasIcon"
@@ -20,7 +20,7 @@
       <span>{{ title }}</span>
     </div>
     <fade-in-height-expand-transition>
-      <ul v-if="!collapsed" class="n-sub-menu-content">
+      <ul v-if="!isCollapsed" class="n-sub-menu-content">
         <slot />
       </ul>
     </fade-in-height-expand-transition>
@@ -77,27 +77,31 @@ export default {
       }
       return padding
     },
-    collapsed: {
-      get: function () {
-        let indexs = this.NMenu.openNames || this.NMenu.defaultOpenNames
-        if (indexs && indexs.includes(this.name)) {
-          this.isCollapsed = false
-        } else {
-          this.isCollapsed = true
-        }
-        return this.isCollapsed
-      },
-      set: function (val) {
-        this.isCollapsed = val
-      }
+    openNames () {
+      return this.NMenu.openNames || this.NMenu.defaultOpenNames
     }
   },
+  watch: {
+    openNames (value) {
+      this.setCollapsed()
+    }
+  },
+  mounted () {
+    this.setCollapsed()
+  },
   methods: {
-    clickCallback () {
+    handleClick () {
       if (!this.disabled) {
-        this.collapsed = !this.collapsed
+        this.isCollapsed = !this.isCollapsed
         this.NMenu.openKeysChangeCallback(this.name)
         this.$emit('click', this)
+      }
+    },
+    setCollapsed () {
+      if (this.openNames && this.openNames.includes(this.name)) {
+        this.isCollapsed = false
+      } else {
+        this.isCollapsed = true
       }
     }
   }

@@ -5,7 +5,8 @@
     :class="{
       [`n-date-picker--${size}-size`]: true,
       'n-date-picker--disabled': disabled,
-      'n-date-picker--range': isRange
+      'n-date-picker--range': isRange,
+      'n-date-picker--error': isErrorValue
     }"
   >
     <n-input
@@ -33,7 +34,6 @@
       v-else
       ref="input"
       v-model="displayTime"
-      class="n-date-picker__input"
       :force-focus="active"
       :disabled="disabled"
       :lazy-focus="true"
@@ -68,9 +68,12 @@
           :active="active"
           :actions="actions"
           :theme="synthesizedTheme"
+          :date-disabled="dateDisabled"
+          :time-disabled="timeDisabled"
           @blur="handlePanelBlur"
           @input="handlePanelInput"
           @close="closeCalendar"
+          @check-value="checkValue"
         />
         <date-panel
           v-else-if="type === 'date'"
@@ -79,9 +82,11 @@
           :active="active"
           :actions="actions"
           :theme="synthesizedTheme"
+          :date-disabled="dateDisabled"
           @input="handlePanelInput"
           @blur="handlePanelBlur"
           @close="closeCalendar"
+          @check-value="checkValue"
         />
         <daterange-panel
           v-else-if="type === 'daterange'"
@@ -90,9 +95,11 @@
           :active="active"
           :actions="actions"
           :theme="synthesizedTheme"
+          :date-disabled="dateDisabled"
           @input="handleRangePanelInput"
           @blur="handlePanelBlur"
           @close="closeCalendar"
+          @check-value="checkValue"
         />
         <datetimerange-panel
           v-else-if="type === 'datetimerange'"
@@ -101,9 +108,12 @@
           :active="active"
           :actions="actions"
           :theme="synthesizedTheme"
+          :date-disabled="dateDisabled"
+          :time-disabled="timeDisabled"
           @input="handleRangePanelInput"
           @close="closeCalendar"
           @blur="handlePanelBlur"
+          @check-value="checkValue"
         />
       </div>
     </div>
@@ -230,6 +240,30 @@ export default {
     actions: {
       type: Array,
       default: undefined
+    },
+    dateDisabled: {
+      type: Function,
+      default: () => {
+        return false
+      }
+    },
+    timeDisabled: {
+      type: Function,
+      default: () => {
+        return false
+      }
+    },
+    rangeTimeDisabled: {
+      type: Function,
+      default: () => {
+        return false
+      }
+    },
+    disabledTime: {
+      type: Function,
+      default: () => {
+        return false
+      }
     }
   },
   data () {
@@ -237,7 +271,8 @@ export default {
       displayTime: '',
       displayStartTime: '',
       displayEndTime: '',
-      active: false
+      active: false,
+      isErrorValue: false
     }
   },
   computed: {
@@ -392,15 +427,12 @@ export default {
      * Input
      */
     handleTimeInput (v) {
-      console.log('handle input before strict parse')
       const newSelectedDateTime = strictParse(this.displayTime, this.computedFormat, new Date())
-      console.log('handle input', this.displayTime, this.computedFormat, newSelectedDateTime)
-      console.log('handle input new time', newSelectedDateTime, typeof newSelectedDateTime)
       if (isValid(newSelectedDateTime)) {
         this.$emit('input', getTime(newSelectedDateTime))
       }
     },
-    handleRangeInput (v) {
+    handleRangeInput (v, isErrorValue) {
       // const v = e.target.value
       if (v === null) v = [null, null]
       const [startTime, endTime] = v
@@ -414,14 +446,12 @@ export default {
       }
       this.displayStartTime = startTime
       this.displayEndTime = endTime
-      // console.log('handleRangeInput', v, newStartTime, newEndTime)
     },
     /**
      * Click
      */
     handleActivatorClick (e) {
       if (this.disabled) return
-      // console.log('handleActivatorClick')
       if (this.active) {
         e.stopPropagation()
       } else {
@@ -502,6 +532,9 @@ export default {
       }
       this.$emit('input', [startTime, endTime])
       this.refresh([startTime, endTime])
+    },
+    checkValue (isErrorValue) {
+      this.isErrorValue = isErrorValue
     }
   }
 }

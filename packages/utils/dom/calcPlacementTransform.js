@@ -3,7 +3,7 @@ export default function calcPlacementTransform (placement, activatorRect, conten
   let contentTop = null
   let contentRight = null
   let contentBottom = null
-  let suggesetedTransfromOrigin = 'none'
+  let suggesetedTransfromOrigin
   if (placement === 'top-start') {
     contentTop = activatorRect.top - contentRect.height
     contentLeft = activatorRect.left
@@ -29,7 +29,6 @@ export default function calcPlacementTransform (placement, activatorRect, conten
     contentLeft = activatorRect.left - contentRect.width
     suggesetedTransfromOrigin = 'bottom right'
   } else if (placement === 'right-start') {
-    console.log(activatorRect, contentRect)
     const toWindowBottom = window.innerHeight - activatorRect.top - contentRect.height
     const toWindowRight = window.innerWidth - activatorRect.right - contentRect.width
     if (toWindowBottom < 0) {
@@ -59,11 +58,11 @@ export default function calcPlacementTransform (placement, activatorRect, conten
     const toWindowRight = window.innerWidth - activatorRect.left - contentRect.width
     if (contentRect.height > toWindowBottom && activatorRect.top > toWindowBottom) {
       contentBottom = toWindowBottom + activatorRect.height
-      contentTop = null
+      // contentTop = null
       suggesetedTransfromOrigin = 'bottom'
     } else {
       contentTop = activatorRect.top + activatorRect.height
-      contentBottom = null
+      // contentBottom = null
       suggesetedTransfromOrigin = 'top'
     }
     if (toWindowRight < 0) {

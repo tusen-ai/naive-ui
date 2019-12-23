@@ -1,6 +1,5 @@
 import {
   rootedOptions,
-  patchedOptions,
   linkedOptions,
   menuOptions
 } from 'packages/utils/component/menuModel'
