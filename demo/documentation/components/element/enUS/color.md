@@ -1,7 +1,7 @@
 # Style Scheme
 
 ```html
-<n-element as="span" class="myel">
+<n-element as="div" class="myel">
   <template v-slot="{ styleScheme }">
     <pre
       :style="{

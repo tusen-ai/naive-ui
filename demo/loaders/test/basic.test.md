@@ -1,18 +1,14 @@
-# Basic
-There are `default`, `primary`, `info`, `success`, `warning` and `error` type of button
+# Style Scheme
+
 ```html
-<n-button>Default</n-button>
-<n-button type="primary">Primary</n-button>
-<n-button type="info">Info</n-button>
-<n-button type="success">Success</n-button>
-<n-button type="warning">Warning</n-button>
-<n-button type="Error">Error</n-button>
-```
-```js
-const a = 1
-```
-```css
-.test {
-  height: 100px;
-}
+<n-element as="div" class="myel">
+  <template v-slot="{ styleScheme }">
+    <pre
+      :style="{
+        color: styleScheme.textSecondaryColor,
+        transition: `color .3s ${styleScheme.cubicBezierEaseInOut}`
+      }"
+    >{{ JSON.stringify(styleScheme, 0, 2) }}</pre>
+  </template>
+</n-element>
 ```

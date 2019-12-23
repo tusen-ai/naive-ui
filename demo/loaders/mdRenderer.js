@@ -12,7 +12,7 @@ function createRenderer (wrapCodeWithCard = true) {
       const highlighted = hljs.highlight(language, code).value
       return `${wrapCodeWithCard ? '<n-card size="small">' : ''}<n-config-consumer transparent>
   <template v-slot="{ theme }">
-    <pre class="n-code" :class="'n-' + theme + '-theme'"><code>${highlighted}</code></pre>
+    <pre class="n-code" :class="'n-' + theme + '-theme'"><code v-pre>${highlighted}</code></pre>
   </template>
 </n-config-consumer>${wrapCodeWithCard ? '</n-card>' : ''}`
     },
