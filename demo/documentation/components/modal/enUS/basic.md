@@ -13,8 +13,8 @@
     :bordered="false"
     size="huge"
     :segmented="{
-      header: 'soft',
-      content: 'soft'
+      content: 'soft',
+      footer: 'soft'
     }"
   >
     <template v-slot:header-extra>
