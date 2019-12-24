@@ -174,7 +174,7 @@ export default {
       const currentActiveHref = this.activeHref
       const activeLink = links.reduce((prevLink, link, index) => {
         if (index === links.length - 1 && link.top + link.height < 0) {
-          return null
+          return prevLink
         }
         if (link.top <= this.bound) {
           if (prevLink === null) {
@@ -191,6 +191,7 @@ export default {
         }
         return prevLink
       }, null)
+      console.log(activeLink)
       if (!transition) this.blockTransitionOneTick()
       if (activeLink) {
         this.activeHref = activeLink.href
