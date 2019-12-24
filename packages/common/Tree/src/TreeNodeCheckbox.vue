@@ -1,7 +1,7 @@
 <template>
   <span class="n-tree-node-checkbox">
     <n-checkbox
-      :value="value"
+      :checked="value"
       @input="handleInput"
     />
   </span>

@@ -35,9 +35,6 @@ export default {
       if (parent) parent.removeChild(this.$el)
     }
   },
-  destroyed () {
-    console.log('destroyed')
-  },
   render (h) {
     return h('transition', {
       props: {
