@@ -8,6 +8,12 @@ function isDropdownRelatedComponent (vNode) {
 }
 
 function getComponentNameOf (vNode) {
+  /**
+   * Functional component
+   */
+  if (vNode.fnOptions && vNode.fnOptions.name) {
+    return vNode.fnOptions.name
+  }
   if (
     vNode.componentOptions &&
     vNode.componentOptions.Ctor &&
@@ -30,7 +36,13 @@ function getSlotOf (componentInstance, slotName) {
 }
 
 function getOptionPropsDataOf (vNode) {
-  const propsData = vNode.componentOptions.propsData || {}
+  /**
+   * Functional component
+   */
+  const propsData =
+    (vNode.componentOptions && vNode.componentOptions.propsData) ||
+    vNode.data.props ||
+    {}
   if (!isDropdownRelatedComponent(vNode)) {
     /**
      * Select Option
@@ -42,7 +54,7 @@ function getOptionPropsDataOf (vNode) {
         try {
           propsData.label = vNode.componentOptions.children[0].text.trim()
         } catch (err) {
-          console.error(['naive-ui/select-option: Select Option only accept pure text as children.'])
+          console.error(['[naive-ui/select-option]: Select Option only accept pure text as children.'])
           propsData.label = null
         }
       } else if (propsData.value) {
