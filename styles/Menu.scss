@@ -57,7 +57,7 @@ $layout-nav-height: 64px;
               top: 0;
               bottom: 0;
               z-index: 0;
-              transition: opacity 0.3s $--n-ease-in-out-cubic-bezier;
+              transition: opacity 0.3s $--n-ease-in-out-cubic-bezier, background-position .3s $--n-ease-in-out-cubic-bezier;
               opacity: 0;
             }
             @include m(selected) {
@@ -102,6 +102,8 @@ $layout-nav-height: 64px;
       cursor: pointer;
       font-size: 14px;
       position: relative;
+      overflow: hidden;
+      transition: border-color .3s $--n-ease-in-out-cubic-bezier;
       @include b(sub-menu-header) {
         position: relative;
         padding: 16px 0;
@@ -130,9 +132,9 @@ $layout-nav-height: 64px;
       }
       @include b(sub-menu-content) {
         padding: 0;
+        overflow: hidden;
         @include fade-in-height-expand-transition();
       }
-      
     }
     @include b(menu-item-group) {
       @include b(menu-item-group-title) {
