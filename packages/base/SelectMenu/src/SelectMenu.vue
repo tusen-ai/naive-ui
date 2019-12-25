@@ -19,15 +19,7 @@
       @scroll="handleMenuScroll"
     >
       <div class="n-base-select-menu-option-wrapper">
-        <div class="n-base-select-menu-light-bar-wrapper">
-          <transition name="n-base-select-menu-light-bar--transition">
-            <div
-              v-if="showLightBar"
-              class="n-base-select-menu-light-bar"
-              :style="{ top: `${lightBarTop}px` }"
-            />
-          </transition>
-        </div>
+        <n-select-menu-light-bar ref="lightBar" />
         <template v-if="!loading">
           <template v-if="!useSlot">
             <n-select-option
@@ -39,7 +31,9 @@
             />
           </template>
           <template v-else>
-            <slot />
+            <n-render-options :mirror="mirror">
+              <slot />
+            </n-render-options>
           </template>
         </template>
         <div
@@ -66,10 +60,11 @@
 </template>
 
 <script>
-import withlightbar from '../../../mixins/withlightbar'
 import NScrollbar from '../../../common/Scrollbar'
 import linkedOptions from '../../../utils/data/linkedOptions'
 import NSelectOption from './SelectOption'
+import NSelectMenuLightBar from './SelectMenuLightBar'
+import NRenderOptions from './SelectRenderOptions'
 
 export default {
   name: 'NBaseSelectMenu',
@@ -80,9 +75,10 @@ export default {
   },
   components: {
     NScrollbar,
-    NSelectOption
+    NSelectOption,
+    NSelectMenuLightBar,
+    NRenderOptions
   },
-  mixins: [withlightbar],
   props: {
     theme: {
       type: String,
@@ -139,6 +135,10 @@ export default {
     width: {
       type: Number,
       default: null
+    },
+    mirror: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -206,6 +206,21 @@ export default {
     }
   },
   methods: {
+    hideLightBar () {
+      if (this.$refs.lightBar) {
+        this.$refs.lightBar.hideLightBar()
+      }
+    },
+    hideLightBarSync () {
+      if (this.$refs.lightBar) {
+        this.$refs.lightBar.hideLightBarSync()
+      }
+    },
+    updateLightBarPosition (el) {
+      if (this.$refs.lightBar) {
+        this.$refs.lightBar.updateLightBarPosition(el)
+      }
+    },
     handleMenuScroll (e, scrollContainer, scrollContent) {
       this.$emit('menu-scroll', e, scrollContainer, scrollContent)
     },
@@ -217,6 +232,9 @@ export default {
         this.updateLightBarPosition(e.target)
         this.pendingOption = option
       }
+    },
+    handleOptionMouseLeave (e, option) {
+
     },
     handleKeyUpUp () {
       this.prev()

@@ -5,8 +5,7 @@ import asthemecontext from '../../../mixins/asthemecontext'
 import WrapWithValue from './WrapWithValue'
 import {
   NBaseSelectMenu,
-  NBaseSelectOptionCollector,
-  NBaseSelectRenderOptions
+  NBaseSelectOptionCollector
 } from '../../../base/SelectMenu'
 
 export default {
@@ -202,15 +201,7 @@ export default {
           size: this.size,
           theme: this.synthesizedTheme
         }
-      }, [
-        h(NBaseSelectRenderOptions, {
-          scopedSlots: {
-            default () {
-              return options
-            }
-          }
-        })
-      ])
+      }, options)
     ])
   }
 }

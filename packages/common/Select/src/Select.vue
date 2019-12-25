@@ -64,7 +64,6 @@
             :options="filteredOptions"
             :multiple="multiple"
             :size="size"
-            :remote="remote"
             :loading="loading"
             :no-data-content="noDataContent"
             :not-found-content="notFoundContent"
@@ -72,12 +71,11 @@
             :filterable="filterable"
             :is-selected="isSelected"
             :use-slot="useSlot"
+            :mirror="false"
             @menu-toggle-option="handleToggleOption"
             @menu-scroll="handleMenuScroll"
           >
-            <n-base-select-render-options v-if="useSlot" :filterable="filterable" :remote="remote" :filter="filter" :pattern="pattern">
-              <slot />
-            </n-base-select-render-options>
+            <slot />
           </n-base-select-menu>
         </transition>
       </div>
@@ -93,8 +91,7 @@ import zindexable from '../../../mixins/zindexable'
 import clickoutside from '../../../directives/clickoutside'
 import {
   NBaseSelectMenu,
-  NBaseSelectOptionCollector,
-  NBaseSelectRenderOptions
+  NBaseSelectOptionCollector
 } from '../../../base/SelectMenu'
 import NBasePicker from '../../../base/Picker'
 import withapp from '../../../mixins/withapp'
@@ -114,8 +111,7 @@ export default {
   components: {
     NBaseSelectMenu,
     NBasePicker,
-    NBaseSelectOptionCollector,
-    NBaseSelectRenderOptions
+    NBaseSelectOptionCollector
   },
   directives: {
     clickoutside

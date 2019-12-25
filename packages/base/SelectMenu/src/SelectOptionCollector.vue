@@ -63,11 +63,13 @@ export default {
       const children = getDefaultSlotOf(this)
       children.forEach((child, index) => {
         child.key = index
-        if (child.componentOptions) {
-          if (VALID_COMPONENT.includes(getComponentNameOf(child))) {
-            const propsData = getOptionPropsDataOf(child)
-            this.options.push(propsData)
-          }
+        /**
+         * If component name is valid,
+         * there must be data
+         */
+        if (VALID_COMPONENT.includes(getComponentNameOf(child))) {
+          const propsData = getOptionPropsDataOf(child)
+          this.options.push({ ...propsData, children: child.children })
         }
       })
     }
