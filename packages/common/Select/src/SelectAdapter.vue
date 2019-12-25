@@ -78,11 +78,6 @@ export default {
       default: undefined
     }
   },
-  data () {
-    return {
-      active: false
-    }
-  },
   computed: {
     computedOptions () {
       if (this.options) return this.options
@@ -97,9 +92,6 @@ export default {
     handleChange (...args) {
       this.$emit('change', ...args)
     },
-    handleSetActive (active) {
-      this.active = active
-    },
     handleScroll (e, scrollContainer, scrollContent) {
       this.$emit('scroll', e, scrollContainer, scrollContent)
     }
@@ -108,11 +100,10 @@ export default {
     const on = {
       input: this.handleInput.bind(this),
       change: this.handleChange.bind(this),
-      setactive: this.handleSetActive.bind(this),
       scroll: this.handleScroll.bind(this)
     }
     return h(NSelect, {
-      props: { ...this.$props, options: this.computedOptions, active: this.active, placement: 'bottom-start', widthMode: 'activator', useSlot: !!this.$scopedSlots.default },
+      props: { ...this.$props, options: this.computedOptions, placement: 'bottom-start', widthMode: 'activator', useSlot: !!this.$scopedSlots.default },
       on,
       scopedSlots: { ...this.$scopedSlots }
     })

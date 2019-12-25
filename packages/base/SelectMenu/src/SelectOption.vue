@@ -13,49 +13,50 @@ export default {
       required: true
     },
     value: {
-      validator () {
-        return true
-      },
+      type: [String, Number],
       required: true
     },
     disabled: {
       type: Boolean,
       default: false
+    },
+    isSelected: {
+      type: Boolean,
+      default: false
+    },
+    mirror: {
+      type: Boolean,
+      default: true
     }
   },
   render (h, context) {
-    const SelectMenu = context.injections.NBaseSelectMenu
-    let optionId = null
-    if (SelectMenu && SelectMenu.value2Id) {
-      optionId = SelectMenu.value2Id.get(context.props.value)
+    const option = {
+      label: context.props.label,
+      value: context.props.value
     }
-    let id2Option = null
-    if (SelectMenu && SelectMenu.id2Option) {
-      id2Option = SelectMenu.id2Option
-    }
-    let option = null
-    if (optionId !== null && id2Option !== null) {
-      option = id2Option.get(optionId)
-    }
-    let isSelected = false
-    if (SelectMenu && SelectMenu.isSelected && option) {
-      isSelected = SelectMenu.isSelected(option)
+    const selectMenu = context.injections.NBaseSelectMenu
+    let optionId = context.props.value
+    let isSelected = context.props.isSelected
+    if (context.props.mirror) {
+      if (selectMenu && selectMenu.isSelected && option) {
+        isSelected = selectMenu.isSelected({ value: context.props.value })
+      }
     }
     const listeners = context.listeners || {}
     function handleClick (e) {
-      SelectMenu.handleOptionClick(e, option)
+      selectMenu.handleOptionClick(e, option)
       listeners.click && listeners.click(e)
     }
     function handleMouseEnter (e) {
-      SelectMenu.handleOptionMouseEnter(e, option)
+      selectMenu.handleOptionMouseEnter(e, option)
       listeners.mouseenter && listeners.mouseenter(e)
     }
     function handleMouseLeave (e) {
-      SelectMenu.handleOptionMouseLeave(e, option)
+      selectMenu.handleOptionMouseLeave(e, option)
       listeners.mouseleave && listeners.mouseleave(e)
     }
     let on = {}
-    if (SelectMenu) {
+    if (selectMenu) {
       on = {
         click: handleClick,
         mouseenter: handleMouseEnter,

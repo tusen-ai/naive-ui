@@ -45,10 +45,10 @@ function markAvailableOptionIds (options) {
 }
 
 export default function linkedOptions (options) {
-  const decoratedOptions = cloneDeep(options).map((option, index) => {
+  const decoratedOptions = cloneDeep(options).map((option) => {
     return {
       ...option,
-      id: index + 1
+      id: option.value
     }
   })
   markAvailableOptionIds(decoratedOptions)

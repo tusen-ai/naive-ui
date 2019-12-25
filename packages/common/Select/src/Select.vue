@@ -56,7 +56,7 @@
       >
         <transition name="n-select-menu--transition">
           <n-base-select-menu
-            v-if="active"
+            v-show="active"
             ref="contentInner"
             class="n-select-menu"
             :theme="synthesizedTheme"
@@ -74,9 +74,7 @@
             :mirror="false"
             @menu-toggle-option="handleToggleOption"
             @menu-scroll="handleMenuScroll"
-          >
-            <slot />
-          </n-base-select-menu>
+          />
         </transition>
       </div>
     </div>
@@ -86,7 +84,6 @@
 <script>
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
-import toggleable from '../../../mixins/toggleable'
 import zindexable from '../../../mixins/zindexable'
 import clickoutside from '../../../directives/clickoutside'
 import {
@@ -116,7 +113,7 @@ export default {
   directives: {
     clickoutside
   },
-  mixins: [withapp, themeable, detachable, toggleable, placeable, zindexable, asformitem()],
+  mixins: [ withapp, themeable, detachable, placeable, zindexable, asformitem() ],
   inject: {
     NFormItem: {
       default: null
@@ -206,6 +203,7 @@ export default {
   },
   data () {
     return {
+      active: false,
       scrolling: false,
       pattern: '',
       memorizedValueOptionMap: new Map(),
@@ -264,6 +262,12 @@ export default {
     this.updateMemorizedOptions()
   },
   methods: {
+    activate () {
+      this.active = true
+    },
+    deactivate () {
+      this.active = false
+    },
     /**
      * remote related methods
      */
@@ -388,8 +392,8 @@ export default {
           this.pattern = ''
           this.switchFocusToOuter()
         }
-        this.$emit('input', option.value)
         this.closeMenu()
+        this.$emit('input', option.value)
       }
     },
     handleDeleteLastOption (e) {

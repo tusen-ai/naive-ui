@@ -18,12 +18,15 @@ export default {
       return context.children
     } else {
       const selectMenu = context.injections.NBaseSelectMenu
-      const options = (selectMenu && selectMenu.linkedOptions) || []
+      const options = selectMenu && selectMenu.linkedOptions
+      const isSelected = selectMenu.isSelected
       return options.map(option => {
         return h(SelectOption, {
           props: {
             label: option.label,
-            value: option.value
+            value: option.value,
+            isSelected: isSelected(option.value),
+            mirror: false
           },
           scopedSlots: {
             default () {

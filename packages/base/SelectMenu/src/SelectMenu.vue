@@ -28,6 +28,8 @@
               :label="option.label"
               :value="option.value"
               :disabled="option.disabled"
+              :is-selected="isSelected(option.value)"
+              :mirror="false"
             />
           </template>
           <template v-else>
@@ -153,13 +155,6 @@ export default {
     },
     noData () {
       return this.linkedOptions && this.linkedOptions.length === 0
-    },
-    value2Id () {
-      const value2Id = new Map()
-      this.linkedOptions.forEach(option => {
-        value2Id.set(option.value, option.id)
-      })
-      return value2Id
     },
     id2Option () {
       const id2Option = new Map()
