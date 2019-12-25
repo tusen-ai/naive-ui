@@ -191,7 +191,6 @@ export default {
         }
         return prevLink
       }, null)
-      console.log(activeLink)
       if (!transition) this.blockTransitionOneTick()
       if (activeLink) {
         this.activeHref = activeLink.href
