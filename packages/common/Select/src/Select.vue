@@ -343,7 +343,7 @@ export default {
     isSelected (option) {
       if (this.multiple) {
         if (!Array.isArray(this.value)) return false
-        return 1 + this.value.findIndex(value => value === option.value)
+        return !!~this.value.findIndex(value => value === option.value)
       } else {
         return option.value === this.value
       }
