@@ -25,7 +25,7 @@ export default {
           props: {
             label: option.label,
             value: option.value,
-            isSelected: isSelected(option.value),
+            isSelected: isSelected({ value: option.value }),
             mirror: false
           },
           scopedSlots: {

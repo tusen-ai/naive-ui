@@ -28,7 +28,7 @@
               :label="option.label"
               :value="option.value"
               :disabled="option.disabled"
-              :is-selected="isSelected(option.value)"
+              :is-selected="isSelected({ value: option.value })"
               :mirror="false"
             />
           </template>
