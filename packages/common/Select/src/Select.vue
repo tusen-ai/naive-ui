@@ -54,7 +54,10 @@
         ref="content"
         class="n-detached-content-content"
       >
-        <transition name="n-select-menu--transition">
+        <transition
+          name="n-select-menu--transition"
+          @after-leave="handleMenuAfterLeave"
+        >
           <n-base-select-menu
             v-show="active"
             ref="contentInner"
@@ -295,8 +298,10 @@ export default {
         }
       }
     },
-    closeMenu () {
+    handleMenuAfterLeave () {
       this.pattern = ''
+    },
+    closeMenu () {
       this.deactivate()
     },
     handleActivatorClick () {
@@ -389,7 +394,6 @@ export default {
         this.$emit('input', newValue)
       } else {
         if (this.filterable && !this.multiple) {
-          this.pattern = ''
           this.switchFocusToOuter()
         }
         this.closeMenu()

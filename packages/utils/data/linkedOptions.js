@@ -6,27 +6,27 @@
  */
 import cloneDeep from 'lodash/cloneDeep'
 
-function markAvailableOptionIds (options) {
+function markAvailableOptionValues (options) {
   const length = options.length
   if (length === 0) return
   let lastAvailableOption = null
-  options.firstAvailableOptionId = null
+  options.firstAvailableOptionValue = null
   for (let i = 0; i < length; ++i) {
     const option = options[i]
     if (!option.disabled) {
-      options.firstAvailableOptionId = option.id
+      options.firstAvailableOptionValue = option.value
       break
     }
   }
   for (let i = 0; i < length; ++i) {
     const option = options[i]
-    option.nextAvailableOptionId = null
-    option.prevAvailableOptionId = null
+    option.nextAvailableOptionValue = null
+    option.prevAvailableOptionValue = null
   }
   for (let i = 0; i <= length * 2; ++i) {
     const option = options[i % length]
     if (lastAvailableOption) {
-      option.prevAvailableOptionId = lastAvailableOption.id
+      option.prevAvailableOptionValue = lastAvailableOption.value
     }
     if (!option.disabled) {
       lastAvailableOption = option
@@ -36,7 +36,7 @@ function markAvailableOptionIds (options) {
   for (let i = length * 2; i >= 0; --i) {
     const option = options[i % length]
     if (lastAvailableOption) {
-      option.nextAvailableOptionId = lastAvailableOption.id
+      option.nextAvailableOptionValue = lastAvailableOption.value
     }
     if (!option.disabled) {
       lastAvailableOption = option
@@ -45,12 +45,7 @@ function markAvailableOptionIds (options) {
 }
 
 export default function linkedOptions (options) {
-  const decoratedOptions = cloneDeep(options).map((option) => {
-    return {
-      ...option,
-      id: option.value
-    }
-  })
-  markAvailableOptionIds(decoratedOptions)
+  const decoratedOptions = cloneDeep(options)
+  markAvailableOptionValues(decoratedOptions)
   return decoratedOptions
 }

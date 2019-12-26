@@ -1,4 +1,8 @@
 <script>
+import {
+  createValueAttribute
+} from './utils'
+
 export default {
   name: 'NBaseSelectOption',
   functional: true,
@@ -9,49 +13,64 @@ export default {
   },
   props: {
     label: {
-      type: String,
+      validator (value) {
+        return typeof value === 'string'
+      },
       required: true
     },
     value: {
-      type: [String, Number],
+      validator (value) {
+        const type = typeof value
+        return type === 'string' || type === 'number'
+      },
       required: true
     },
     disabled: {
-      type: Boolean,
+      validator (value) {
+        return typeof value === 'boolean'
+      },
       default: false
     },
     isSelected: {
-      type: Boolean,
+      validator (value) {
+        return typeof value === 'boolean'
+      },
       default: false
     },
     mirror: {
-      type: Boolean,
+      validator (value) {
+        return typeof value === 'boolean'
+      },
       default: true
     }
   },
   render (h, context) {
     const option = {
       label: context.props.label,
-      value: context.props.value
+      value: context.props.value,
+      disabled: context.props.disabled
     }
     const selectMenu = context.injections.NBaseSelectMenu
-    let optionId = context.props.value
-    let isSelected = context.props.isSelected
+    const disabled = context.props.disabled
+    let selected = context.props.isSelected
     if (context.props.mirror) {
       if (selectMenu && selectMenu.isSelected && option) {
-        isSelected = selectMenu.isSelected({ value: context.props.value })
+        selected = selectMenu.isSelected({ value: context.props.value })
       }
     }
     const listeners = context.listeners || {}
     function handleClick (e) {
+      if (disabled) return
       selectMenu.handleOptionClick(e, option)
       listeners.click && listeners.click(e)
     }
     function handleMouseEnter (e) {
+      if (disabled) return
       selectMenu.handleOptionMouseEnter(e, option)
       listeners.mouseenter && listeners.mouseenter(e)
     }
     function handleMouseLeave (e) {
+      if (disabled) return
       selectMenu.handleOptionMouseLeave(e, option)
       listeners.mouseleave && listeners.mouseleave(e)
     }
@@ -66,16 +85,14 @@ export default {
       on = listeners
     }
     let attrs = {}
-    if (optionId !== null) {
-      attrs = {
-        'data-id': optionId
-      }
+    attrs = {
+      'n-value': createValueAttribute(context.props.value)
     }
     return h('div', {
       staticClass: 'n-base-select-option',
       class: {
-        'n-base-select-option--selected': isSelected,
-        'n-base-select-option--disabled': context.props.disabled
+        'n-base-select-option--selected': selected,
+        'n-base-select-option--disabled': disabled
       },
       key: context.props.value,
       attrs,

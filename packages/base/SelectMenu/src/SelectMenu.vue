@@ -67,6 +67,9 @@ import linkedOptions from '../../../utils/data/linkedOptions'
 import NSelectOption from './SelectOption'
 import NSelectMenuLightBar from './SelectMenuLightBar'
 import NRenderOptions from './SelectRenderOptions'
+import {
+  createValueAttribute
+} from './utils'
 
 export default {
   name: 'NBaseSelectMenu',
@@ -156,15 +159,15 @@ export default {
     noData () {
       return this.linkedOptions && this.linkedOptions.length === 0
     },
-    id2Option () {
-      const id2Option = new Map()
+    value2Option () {
+      const value2Option = new Map()
       for (const option of this.linkedOptions) {
-        id2Option.set(option.id, option)
+        value2Option.set(option.value, option)
       }
-      return id2Option
+      return value2Option
     },
-    firstOptionId () {
-      return this.linkedOptions.firstAvailableOptionId
+    firstOptionValue () {
+      return this.linkedOptions.firstAvailableOptionValue
     },
     linkedOptions () {
       return linkedOptions(this.options)
@@ -225,7 +228,7 @@ export default {
     handleOptionMouseEnter (e, option) {
       if (!option.disabled) {
         this.updateLightBarPosition(e.target)
-        this.pendingOption = option
+        this.pendingOption = this.value2Option.get(option.value)
       }
     },
     handleOptionMouseLeave (e, option) {
@@ -250,22 +253,25 @@ export default {
       this.$emit('menu-toggle-option', option)
     },
     next () {
-      if (this.pendingOption === null) {
-        this.setPendingOptionElementId(this.linkedOptions.firstAvailableOptionId)
+      if (
+        this.pendingOption === null &&
+        this.linkedOptions.firstAvailableOptionValue !== null
+      ) {
+        this.setPendingOptionElementValue(this.linkedOptions.firstAvailableOptionValue)
       } else {
-        this.setPendingOptionElementId(this.pendingOption.nextAvailableOptionId)
+        this.setPendingOptionElementValue(this.pendingOption.nextAvailableOptionValue)
       }
     },
     prev () {
       if (this.pendingOption) {
-        this.setPendingOptionElementId(this.pendingOption.prevAvailableOptionId)
+        this.setPendingOptionElementValue(this.pendingOption.prevAvailableOptionValue)
       }
     },
-    setPendingOptionElementId (id) {
+    setPendingOptionElementValue (value) {
       const menu = this.$el
-      if (menu && id !== null) {
-        const el = menu.querySelector(`[data-id="${id}"]`)
-        this.pendingOption = this.id2Option.get(id)
+      if (menu && value !== null) {
+        const el = menu.querySelector(`[n-value="${createValueAttribute(value)}"]`)
+        this.pendingOption = this.value2Option.get(value)
         this.pendingOptionElement = el
         this.updateLightBarPosition(this.pendingOptionElement)
         this.$refs.scrollbar.scrollToElement(this.pendingOptionElement)

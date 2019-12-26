@@ -20,7 +20,7 @@
       Happy
     </n-select-option>
   </n-select> -->
-  <n-select v-model="value" :options="options" />
+  <n-select v-model="value" :options="options" multiple />
 </template>
 <script>
 export default {

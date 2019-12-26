@@ -6,7 +6,7 @@
 <body>
   <div id="app">
     <template>
-      <el-select v-model="value" placeholder="请选择">
+      <el-select v-model="value" placeholder="请选择" multiple>
         <el-option
           v-for="item in options"
           :key="item.value"
@@ -22,7 +22,7 @@
 <script>var Main = {
   data() {
     var options = []
-    for (let i = 0; i < 3000; ++i) {
+    for (let i = 0; i < 2500; ++i) {
       options.push({
         label: String(i),
         value: i

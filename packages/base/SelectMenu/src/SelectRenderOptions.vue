@@ -25,6 +25,7 @@ export default {
           props: {
             label: option.label,
             value: option.value,
+            disabled: option.disabled,
             isSelected: isSelected({ value: option.value }),
             mirror: false
           },
