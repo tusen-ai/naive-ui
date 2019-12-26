@@ -63,15 +63,12 @@ export default {
     }
   },
   mounted () {
-    // console.log('[Activator.mounted] id', this.id)
-    // console.log('[Activator.mounted] active', this.active)
     this.registerListeners()
     if (this.controller) {
       this.controller.show = this.activate
       this.controller.hide = this.deactivate
     }
   },
-  beforeUpdate () {},
   updated () {
     this.registerListeners()
     if (this.controller) {
