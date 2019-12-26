@@ -353,6 +353,14 @@ export default {
         return option.value === this.value
       }
     },
+    normalizeOption (option) {
+      const normalizedOption = {
+        label: option.label,
+        value: option.value,
+        disabled: option.disabled
+      }
+      return normalizedOption
+    },
     /**
      * event utils methods
      */
@@ -363,11 +371,11 @@ export default {
             this.$emit('change', null)
           } else {
             let options = this.mapValuesToOptions(newValue)
-            this.$emit('change', options)
+            this.$emit('change', options.map(this.normalizeOption))
           }
         } else {
           const option = this.getOption(newValue)
-          this.$emit('change', option)
+          this.$emit('change', this.normalizeOption(option))
         }
       } else {
         this.$emit('change', newValue)
