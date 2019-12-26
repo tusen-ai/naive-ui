@@ -34,7 +34,7 @@ export default {
       props: {
         ...context.props,
         controller,
-        detachedContainerClass: 'n-popconfirm'
+        containerClass: 'n-popconfirm'
       },
       scopedSlots: {
         activator: () => slots.activator && slots.activator(),

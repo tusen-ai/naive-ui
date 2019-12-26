@@ -56,7 +56,7 @@ export default {
     return h(NPopover, {
       props: {
         trigger: 'click',
-        detachedContainerClass: 'n-popselect',
+        containerClass: 'n-popselect',
         controller
       },
       on: {

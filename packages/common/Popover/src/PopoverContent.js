@@ -62,9 +62,9 @@ export default {
       type: Boolean,
       default: false
     },
-    detachedContainerClass: {
+    containerClass: {
       type: String,
-      default: 'n-popover-detached-content-container'
+      default: undefined
     },
     detached: {
       type: Boolean,
@@ -82,16 +82,19 @@ export default {
   },
   data () {
     return {
+      memorizedId: null,
       internalActive: false,
       show: false
     }
   },
   created () {
+    this.memorizedId = this.id
+    popoverManager.registerContent(this.memorizedId, this)
     if (this.active) this.show = true
   },
   watch: {
-    active (newActive) {
-      if (newActive) {
+    active (value) {
+      if (value) {
         this.$parent.transferElement()
         this.$emit('show')
       } else {
@@ -128,7 +131,6 @@ export default {
     }
   },
   mounted () {
-    popoverManager.registerContent(this)
     if (this.active) {
       this.$parent.transferElement()
       // this.$nextTick().then(() => {
@@ -143,13 +145,12 @@ export default {
 
   },
   updated () {
-    popoverManager.registerContent(this)
     if (this.controller) {
       this.controller.updatePosition = this.updatePosition
     }
   },
   beforeDestroy () {
-    popoverManager.unregisterContent(this)
+    popoverManager.unregisterContent(this.memorizedId)
   },
   methods: {
     cancelVanishTimer () {
@@ -174,7 +175,7 @@ export default {
       this.internalActive = false
     },
     activator () {
-      return popoverManager.getActivatorInstance(this)
+      return popoverManager.getActivatorInstance(this.memorizedId)
     },
     handleMouseEnter () {
       this.cancelVanishTimer()
@@ -236,7 +237,7 @@ export default {
     return h('div', {
       staticClass: 'n-detached-content-container',
       class: {
-        [this.detachedContainerClass]: true,
+        [this.containerClass]: true,
         [this.namespace]: this.namespace
       },
       ref: 'contentContainer'

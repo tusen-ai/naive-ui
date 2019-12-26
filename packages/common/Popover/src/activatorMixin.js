@@ -35,6 +35,10 @@ export default {
       default: null
     }
   },
+  created () {
+    this.memorizedId = this.id
+    popoverManager.registerActivator(this.memorizedId, this)
+  },
   computed: {
     triggeredByClick () {
       return this.trigger === 'click'
@@ -52,6 +56,7 @@ export default {
   },
   data () {
     return {
+      memorizedId: null,
       internalActive: false,
       delayTimerId: null,
       vanishTimerId: null
@@ -60,7 +65,6 @@ export default {
   mounted () {
     // console.log('[Activator.mounted] id', this.id)
     // console.log('[Activator.mounted] active', this.active)
-    popoverManager.registerActivator(this)
     this.registerListeners()
     if (this.controller) {
       this.controller.show = this.activate
@@ -69,8 +73,6 @@ export default {
   },
   beforeUpdate () {},
   updated () {
-    // console.log('Activator Updated', this.id)
-    popoverManager.registerActivator(this)
     this.registerListeners()
     if (this.controller) {
       this.controller.show = this.activate
@@ -78,8 +80,7 @@ export default {
     }
   },
   beforeDestroy () {
-    // console.log('Activator Destroyed', this.id)
-    popoverManager.unregisterActivator(this)
+    popoverManager.unregisterActivator(this.memorizedId)
     if (this.controller) {
       this.controller.show = null
       this.controller.hide = null
@@ -101,8 +102,7 @@ export default {
       this.internalActive = false
     },
     content () {
-      // console.log(popoverManager, this)
-      return popoverManager.getContentInstance(this)
+      return popoverManager.getContentInstance(this.memorizedId)
     },
     handleClick () {
       if (this.triggeredByClick) {
