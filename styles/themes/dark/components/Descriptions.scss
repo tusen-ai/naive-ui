@@ -1,7 +1,7 @@
 @mixin setup-dark-descriptions {
   $--descriptions-header-background-color: $--n-table-header-color !global;
   $--descriptions-header-text-color: $--n-text-color !global;
-  $--descriptions-content-text-color: $--n-text-color !global;
+  $--descriptions-content-text-color: $--n-secondary-text-color !global;
   $--descriptions-content-background-color: $--n-card-color !global;
   $--descriptions-border-color: $--n-alpha-border-color !global;
 }
