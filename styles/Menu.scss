@@ -57,7 +57,7 @@ $layout-nav-height: 64px;
               top: 0;
               bottom: 0;
               z-index: 0;
-              transition: opacity 0.3s $--n-ease-in-out-cubic-bezier;
+              transition: opacity 0.3s $--n-ease-in-out-cubic-bezier, background-position .3s $--n-ease-in-out-cubic-bezier;
               opacity: 0;
             }
             @include m(selected) {
@@ -132,7 +132,6 @@ $layout-nav-height: 64px;
         padding: 0;
         @include fade-in-height-expand-transition();
       }
-      
     }
     @include b(menu-item-group) {
       @include b(menu-item-group-title) {

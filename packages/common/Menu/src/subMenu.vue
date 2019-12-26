@@ -20,7 +20,10 @@
       <span>{{ title }}</span>
     </div>
     <fade-in-height-expand-transition>
-      <ul v-if="!isCollapsed" class="n-sub-menu-content">
+      <ul
+        v-if="!isCollapsed"
+        class="n-sub-menu-content"
+      >
         <slot />
       </ul>
     </fade-in-height-expand-transition>
@@ -61,11 +64,6 @@ export default {
       default: false
     }
   },
-  data () {
-    return {
-      isCollapsed: true
-    }
-  },
   computed: {
     hasIcon () {
       return this.NMenu.haIcon && this.$parent.$options.name === 'NMenu'
@@ -79,29 +77,16 @@ export default {
     },
     openNames () {
       return this.NMenu.openNames || this.NMenu.defaultOpenNames
+    },
+    isCollapsed () {
+      return !this.openNames.includes(this.name)
     }
-  },
-  watch: {
-    openNames (value) {
-      this.setCollapsed()
-    }
-  },
-  mounted () {
-    this.setCollapsed()
   },
   methods: {
     handleClick () {
       if (!this.disabled) {
-        this.isCollapsed = !this.isCollapsed
         this.NMenu.openKeysChangeCallback(this.name)
         this.$emit('click', this)
-      }
-    },
-    setCollapsed () {
-      if (this.openNames && this.openNames.includes(this.name)) {
-        this.isCollapsed = false
-      } else {
-        this.isCollapsed = true
       }
     }
   }
