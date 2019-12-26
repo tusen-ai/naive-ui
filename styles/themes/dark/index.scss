@@ -55,6 +55,7 @@
 @import "components/Avatar.scss";
 @import "components/Collapse.scss";
 @import "components/Result.scss";
+@import "components/Tree.scss";
 
 @mixin setup-dark-theme($in-js-env: false) {
   @include setup-dark-colors();
@@ -141,5 +142,6 @@
     @include setup-dark-avatar;
     @include setup-dark-collapse;
     @include setup-dark-result;
+    @include setup-dark-tree;
   }
 }

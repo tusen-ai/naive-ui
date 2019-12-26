@@ -203,7 +203,7 @@ function treedOptions (options) {
 }
 
 function applyDrop ([sourceNode, targetNode, type]) {
-  if (type === 'append' || type === 'insertAfter') {
+  if (type === 'append') {
     const parent = sourceNode.parent
     const index = parent.children.findIndex(child => child.key === sourceNode.key)
     if (~index) {
@@ -213,7 +213,7 @@ function applyDrop ([sourceNode, targetNode, type]) {
         parent.isLeaf = true
       }
     } else {
-      throw new Error('[n-tree]: switch error')
+      throw new Error('[naive-ui/n-tree]: switch error')
     }
     if (Array.isArray(targetNode.children)) {
       if (type === 'append') {
@@ -226,7 +226,7 @@ function applyDrop ([sourceNode, targetNode, type]) {
       targetNode.children = [sourceNode]
     }
     sourceNode.parent = targetNode
-  } else if (type === 'insertBefore') {
+  } else if (type === 'insertBefore' || type === 'insertAfter') {
     let parent = sourceNode.parent
     const sourceIndex = parent.children.findIndex(child => child.key === sourceNode.key)
     if (~sourceIndex) {
@@ -236,10 +236,11 @@ function applyDrop ([sourceNode, targetNode, type]) {
         parent.isLeaf = true
       }
     } else {
-      throw new Error('[n-tree]: switch error')
+      throw new Error('[naive-ui/n-tree]: switch error')
     }
     parent = targetNode.parent
-    const targetIndex = parent.children.findIndex(child => child.key === targetNode.key)
+    let targetIndex = parent.children.findIndex(child => child.key === targetNode.key)
+    if (type === 'insertAfter') targetIndex += 1
     if (~targetIndex) {
       parent.children.splice(targetIndex, 0, sourceNode)
       if (!parent.children.length) {
@@ -247,7 +248,7 @@ function applyDrop ([sourceNode, targetNode, type]) {
         parent.isLeaf = true
       }
     } else {
-      throw new Error('[n-tree]: switch error')
+      throw new Error('[naive-ui/n-tree]: switch error')
     }
     sourceNode.parent = targetNode.parent
   }

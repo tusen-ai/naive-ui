@@ -32,6 +32,10 @@ export default {
     checked: {
       type: Boolean,
       default: false
+    },
+    icon: {
+      type: Function,
+      default: null
     }
   },
   methods: {
@@ -101,7 +105,9 @@ export default {
       }, [
         this.data.label
       ]),
-      this.$slots.default
+      (
+        this.icon && typeof this.icon === 'function' ? [this.icon()] : []
+      ).concat(this.$slots.default)
     ])
   }
 }

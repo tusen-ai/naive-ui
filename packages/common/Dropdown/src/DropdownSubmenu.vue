@@ -156,19 +156,18 @@ export default {
       }
       return null
     },
-    pendingOptionId () {
+    pendingOptionValue () {
+      /**
+       * Don't use id since id can't be a prop for option
+       */
       if (this.pendingOption) {
-        return this.pendingOption.id
+        return this.pendingOption.value
       }
       return null
     },
     menuPendingToBeActivated () {
-      /**
-       * Here value is index + 1
-       * pendingOptiondId also means index + 1
-       */
-      if (this.value && this.pendingOptionId) {
-        return this.value === this.pendingOptionId
+      if (this.value && this.pendingOptionValue) {
+        return this.value === this.pendingOptionValue
       }
       return false
     }

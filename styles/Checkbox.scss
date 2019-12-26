@@ -4,11 +4,13 @@
   @include once {
     @include b(checkbox-group) {
       font-size: 14px;
+      line-height: 14px;
       @include b(checkbox) {
         margin-right: 18px;
       }
     }
     @include b(checkbox) {
+      line-height: 14px;
       outline: none;
       font-size: 14px;
       cursor: pointer;

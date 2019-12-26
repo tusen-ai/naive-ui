@@ -55,6 +55,7 @@
 @import "components/Avatar.scss";
 @import "components/Collapse.scss";
 @import "components/Result.scss";
+@import "components/Tree.scss";
 
 @mixin setup-light-theme($in-js-env: false) {
   @include setup-light-colors();
@@ -138,5 +139,6 @@
     @include setup-light-avatar;
     @include setup-light-collapse;
     @include setup-light-result;
+    @include setup-light-tree;
   }
 }

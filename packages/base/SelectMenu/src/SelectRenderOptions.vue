@@ -1,37 +1,42 @@
 <script>
-import {
-  getComponentNameOf,
-  getOptionPropsDataOf
-} from '../../../utils/component'
-
-import {
-  VALID_COMPONENT
-} from './config'
+import SelectOption from './SelectOption'
 
 export default {
   name: 'NSelectRenderOptions',
   functional: true,
+  inject: {
+    NBaseSelectMenu: {
+      default: null
+    },
+    mirror: {
+      type: Boolean,
+      default: true
+    }
+  },
   render (h, context) {
-    const defaultSlot = context.scopedSlots.default()
-    const filteredDefaultSlot = defaultSlot
-      .filter(vNode => {
-        if (VALID_COMPONENT.includes(getComponentNameOf(vNode))) {
-          if (vNode.componentOptions) {
-            const filter = context.props.filter
-            const filterable = context.props.filterable
-            const remote = context.props.remote
-            if (!remote && filterable && filter) {
-              const pattern = context.props.pattern
-              const option = getOptionPropsDataOf(vNode)
-              return filter(pattern, option)
+    if (context.props.mirror) {
+      return context.children
+    } else {
+      const selectMenu = context.injections.NBaseSelectMenu
+      const options = selectMenu && selectMenu.linkedOptions
+      const isSelected = selectMenu.isSelected
+      return options.map(option => {
+        return h(SelectOption, {
+          props: {
+            label: option.label,
+            value: option.value,
+            disabled: option.disabled,
+            isSelected: isSelected({ value: option.value }),
+            mirror: false
+          },
+          scopedSlots: {
+            default () {
+              return option.children
             }
-            return true
           }
-          return true
-        }
-        return true
+        })
       })
-    return filteredDefaultSlot
+    }
   }
 }
 </script>

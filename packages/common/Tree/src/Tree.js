@@ -6,10 +6,12 @@ import {
   menuOptions
 } from '../../../utils/data/menuModel'
 
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
 import NTreeNode from './TreeNode'
 import NTreeChildNodesExpandTransition from './ChildNodesExpandTransition'
 
-function genSingleNode (node, h, self) {
+function createNode (node, h, self) {
   const listeners = {
     'switcher-click': self.handleSwitcherClick,
     select: self.handleSelect,
@@ -45,7 +47,7 @@ function genSingleNode (node, h, self) {
       expanded
         ? h('ul', {
           staticClass: 'n-tree-children-wrapper'
-        }, node.children.map(child => genSingleNode(child, h, self)))
+        }, node.children.map(child => createNode(child, h, self)))
         : null
     ]
     )
@@ -54,11 +56,12 @@ function genSingleNode (node, h, self) {
 }
 
 function convertRootedOptionsToVNodeTree (root, h, self) {
-  return root.children.map(child => genSingleNode(child, h, self))
+  return root.children.map(child => createNode(child, h, self))
 }
 
 export default {
   name: 'NTree',
+  mixins: [ withapp, themeable ],
   props: {
     data: {
       type: Array,
@@ -77,6 +80,18 @@ export default {
       default: false
     },
     checkedKeys: {
+      type: Array,
+      default: null
+    },
+    defaultCheckedKeys: {
+      type: Array,
+      default: null
+    },
+    expandedKeys: {
+      type: Array,
+      default: null
+    },
+    defaultExpandedKeys: {
       type: Array,
       default: null
     },
@@ -103,9 +118,36 @@ export default {
     pattern: {
       type: String,
       default: ''
+    },
+    onExpand: {
+      type: Function,
+      default: () => {
+        return (node, next) => {
+          next()
+        }
+      }
+    },
+    onSelect: {
+      type: Function,
+      default: () => {
+        return (node, next) => {
+          next()
+        }
+      }
+    },
+    onDrop: {
+      type: Function,
+      default: () => {
+        return (node, next) => {
+          next()
+        }
+      }
     }
   },
   created () {
+    this.internalCheckedKeys = this.defaultCheckedKeys || this.internalCheckedKeys
+    this.internalExpandedKeys = this.defaultExpandedKeys || this.internalExpandedKeys
+    this.internalSelectedKeys = this.defaultSelectedKeys || this.internalSelectedKeys
     this.treeData = treedOptions(this.data)
   },
   data () {
@@ -116,7 +158,7 @@ export default {
       internalSelectedKeys: [],
       draggingNodeKey: null,
       draggingNode: null,
-      dropNodeKey: null,
+      droppingNodeKey: null,
       expandTimerId: null,
       transitionDisabled: false
     }
@@ -129,7 +171,7 @@ export default {
       this.internalSelectedKeys = []
       this.draggingNodeKey = null
       this.draggingNode = null
-      this.dropNodeKey = null
+      this.droppingNodeKey = null
       this.expandTimerId = null
     }
   },
@@ -165,9 +207,16 @@ export default {
       }
     }
   },
-  mounted () {
-  },
   methods: {
+    getSelectedKeys () {
+      return this.synthesizedSelectedKeys
+    },
+    getCheckedKeys () {
+      return this.synthesizedCheckedKeys
+    },
+    getExpandedKeys () {
+      return this.synthesizedExpandedKeys
+    },
     disableTransition () {
       this.transitionDisabled = true
     },
@@ -199,7 +248,6 @@ export default {
       }
       this.draggingNodeKey = null
       this.draggingNode = null
-      this.dropNodeKey = null
     },
     toggleExpand (node) {
       const index = this.synthesizedExpandedKeys.findIndex(expandNodeId => expandNodeId === node.key)
@@ -227,23 +275,23 @@ export default {
     },
     handleDragEnter (node) {
       this.$emit('dragenter', node)
-      this.dropNodeKey = node.key
+      this.droppingNodeKey = node.key
       if (node.key === this.draggingNodeKey) return
       if (!this.synthesizedExpandedKeys.includes(node.key) && !node.isLeaf) {
         window.clearTimeout(this.expandTimerId)
         this.expandTimerId = window.setTimeout(() => {
-          if (this.dropNodeKey === node.key && !this.synthesizedExpandedKeys.includes(node.key)) {
+          if (this.droppingNodeKey === node.key && !this.synthesizedExpandedKeys.includes(node.key)) {
             if (!this.hasExpandedKeys) {
               this.internalExpandedKeys.push(node.key)
             }
             this.$emit('expand', node.key)
           }
           this.expandTimerId = null
-        }, 600)
+        }, 800)
       }
     },
     handleDragLeave (node) {
-      this.dropNodeKey = null
+      this.droppingNodeKey = null
       this.$emit('dragleave', node)
     },
     handleDragStart (node) {
@@ -256,7 +304,10 @@ export default {
     const lOptions = linkedCascaderOptions(this.treeData, 'multiple-all-options')
     const mOptions = menuOptions(lOptions)[0]
     return h('div', {
-      staticClass: 'n-tree'
+      staticClass: 'n-tree',
+      class: {
+        [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme
+      }
     }, convertRootedOptionsToVNodeTree(mOptions, h, this))
   }
 }

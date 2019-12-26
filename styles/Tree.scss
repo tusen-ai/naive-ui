@@ -1,115 +1,111 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
-// 0.55 * 0.7
-$tree-content-hover-background-color: main-color-with-alpha(.45);
-$tree-content-active-background-color: main-color-with-alpha(.3);
-$tree-content-selected-background-color: main-color-with-alpha(.3);
-
-@include b(tree) {
-  font-size: 14px;
-  ul, li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  @include b(tree-children-wrapper) {
-    @include fade-in-height-expand-transition(fade-in-height-expand, .15s);
-    margin-left: 16px;
-  }
-  @include b(tree-node) {
-    padding: 3px 0 3px 0;
-    &:first-child {
-      padding-top: 6px;
+@include themes-mixin {
+  @include b(tree) {
+    font-size: 14px;
+    color: $--n-secondary-text-color;
+    transition: color .3s $--n-ease-in-out-cubic-bezier;
+    ul, li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
     }
-    &:last-child {
-      padding-bottom: 0;
+    @include b(tree-children-wrapper) {
+      @include fade-in-height-expand-transition(fade-in-height-expand, .15s);
+      margin-left: 16px;
     }
-  }
-  @include b(tree-node-switcher) {
-    cursor: pointer;
-    display: inline-flex;
-    height: 24px;
-    width: 24px;
-    vertical-align: bottom;
-    align-items: center;
-    justify-content: center;
-    svg {
-      width: 12px;
-      height: 12px;
+    @include b(tree-node) {
+      padding: 3px 0 3px 0;
+      &:first-child {
+        padding-top: 6px;
+      }
+      &:last-child {
+        padding-bottom: 0;
+      }
+    }
+    @include b(tree-node-switcher) {
+      cursor: pointer;
+      display: inline-flex;
+      height: 24px;
+      width: 24px;
+      align-items: center;
+      justify-content: center;
       transition: transform .15s $--n-ease-in-out-cubic-bezier;
-    }
-    @include m(hide) {
-      visibility: hidden
-    }
-    @include m(expanded) {
-      svg {
+      vertical-align: bottom;
+      @include b(icon) {
+        fill: $--n-secondary-text-color;
+      }
+      @include m(hide) {
+        visibility: hidden
+      }
+      @include m(expanded) {
         transform: rotate(90deg);
       }
     }
-  }
-  @include b(tree-node-checkbox) {
-    display: inline-flex;
-    height: 24px;
-    width: 16px;
-    vertical-align: bottom;
-    align-items: center;
-    justify-content: center;
-    margin-right: 4px;
-  }
-  @include b(tree-node-content) {
-    position: relative;
-    display: inline-flex;
-    height: 24px;
-    box-sizing: border-box;
-    border-bottom: 3px solid transparent;
-    border-top: 3px solid transparent;
-    line-height: 24px;
-    align-items: center;
-    vertical-align: bottom;
-    padding: 0 6px;
-    cursor: pointer;
-    border-radius: 3px;
-    transition: .2s background-color $--n-ease-in-out-cubic-bezier, .2s border-color $--n-ease-in-out-cubic-bezier;
-    &:hover {
-      background-color: $tree-content-hover-background-color;
+    @include b(tree-node-checkbox) {
+      display: inline-flex;
+      height: 24px;
+      width: 16px;
+      vertical-align: bottom;
+      align-items: center;
+      justify-content: center;
+      margin-right: 4px;
     }
-    &:active {
-      background-color: $tree-content-active-background-color;
-    }
-    &:last-child {
-      margin-bottom: 0;
-    }
-    @include e(padding-box) {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background-color: transparent;
-    }
-    @include m(block) {
-      width: calc(100% - 24px);
-      @include m(checkable) {
-        width: calc(100% - 48px);
-      }
-    }
-    @include m(pending) {
+    @include b(tree-node-content) {
+      position: relative;
+      display: inline-flex;
+      height: 24px;
+      box-sizing: border-box;
+      border-bottom: 3px solid transparent;
+      border-top: 3px solid transparent;
+      line-height: 24px;
+      align-items: center;
+      vertical-align: bottom;
+      padding: 0 6px;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: .2s background-color $--n-ease-in-out-cubic-bezier, .2s border-color $--n-ease-in-out-cubic-bezier;
       &:hover {
+        background-color: map-get($--tree-node-background-color, 'hover');
+      }
+      &:active {
+        background-color: map-get($--tree-node-background-color, 'active');
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+      @include e(padding-box) {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
         background-color: transparent;
       }
-      @include m(pending-bottom) {
-        border-bottom: 3px solid $tree-content-hover-background-color;
+      @include m(block) {
+        width: calc(100% - 24px);
+        @include m(checkable) {
+          width: calc(100% - 48px);
+        }
       }
-      @include m(pending-top) {
-        border-top: 3px solid $tree-content-hover-background-color;
+      @include m(pending) {
+        &:hover {
+          background-color: transparent;
+        }
+        @include m(pending-bottom) {
+          border-bottom: 3px solid map-get($--tree-node-background-color, 'hover');
+        }
+        @include m(pending-top) {
+          border-top: 3px solid map-get($--tree-node-background-color, 'hover');
+        }
+        @include m(pending-body) {
+          background-color: map-get($--tree-node-background-color, 'hover');
+        }
       }
-      @include m(pending-body) {
-        background-color: $tree-content-hover-background-color;
+      @include m(selected) {
+        background-color: map-get($--tree-node-background-color, 'selected');
       }
-    }
-    @include m(selected) {
-      background-color: $tree-content-selected-background-color;
     }
   }
 }
