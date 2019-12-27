@@ -113,7 +113,7 @@ export default {
               blur: context.listeners.blur || (() => {}),
               select: context.listeners.select || (() => {})
             },
-            scopedSlots: context.scopedSlots
+            scopedSlots: { ...context.scopedSlots }
           })
         }
       },

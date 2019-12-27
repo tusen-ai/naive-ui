@@ -55,10 +55,10 @@ export default {
       this.$emit('click')
     },
     handleContentDragStart (e) {
-      e.dataTransfer.setData('text', 'naive-ui')
       this.$emit('dragstart', e)
     },
     handleContentDragEnter (e) {
+      if (e.currentTarget && e.relatedTarget && e.currentTarget.contains(e.relatedTarget)) return
       this.$emit('dragenter')
     },
     handleDragOverContent (e) {
@@ -81,6 +81,7 @@ export default {
       this.$emit('dragend')
     },
     handleContentDragLeave (e) {
+      if (e.currentTarget && e.relatedTarget && e.currentTarget.contains(e.relatedTarget)) return
       this.pending = false
       this.$emit('dragleave')
     },

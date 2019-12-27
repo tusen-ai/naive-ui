@@ -1,0 +1,7 @@
+@mixin setup-light-tree {
+  $--tree-node-background-color: (
+    'hover': change-color($--primary-6, $alpha: .15),
+    'active': change-color($--primary-6, $alpha: .25),
+    'selected': change-color($--primary-6, $alpha: .25)
+  ) !global;
+}

@@ -1,0 +1,7 @@
+@mixin setup-dark-tree {
+  $--tree-node-background-color: (
+    'hover': change-color($--primary-6, $alpha: .45),
+    'active': change-color($--primary-6, $alpha: .3),
+    'selected': change-color($--primary-6, $alpha: .3)
+  ) !global;
+}

@@ -19,15 +19,7 @@
       @scroll="handleMenuScroll"
     >
       <div class="n-base-select-menu-option-wrapper">
-        <div class="n-base-select-menu-light-bar-wrapper">
-          <transition name="n-base-select-menu-light-bar--transition">
-            <div
-              v-if="showLightBar"
-              class="n-base-select-menu-light-bar"
-              :style="{ top: `${lightBarTop}px` }"
-            />
-          </transition>
-        </div>
+        <n-select-menu-light-bar ref="lightBar" />
         <template v-if="!loading">
           <template v-if="!useSlot">
             <n-select-option
@@ -36,10 +28,14 @@
               :label="option.label"
               :value="option.value"
               :disabled="option.disabled"
+              :is-selected="isSelected({ value: option.value })"
+              :mirror="false"
             />
           </template>
           <template v-else>
-            <slot />
+            <n-render-options :mirror="mirror">
+              <slot />
+            </n-render-options>
           </template>
         </template>
         <div
@@ -66,10 +62,14 @@
 </template>
 
 <script>
-import withlightbar from '../../../mixins/withlightbar'
 import NScrollbar from '../../../common/Scrollbar'
 import linkedOptions from '../../../utils/data/linkedOptions'
 import NSelectOption from './SelectOption'
+import NSelectMenuLightBar from './SelectMenuLightBar'
+import NRenderOptions from './SelectRenderOptions'
+import {
+  createValueAttribute
+} from './utils'
 
 export default {
   name: 'NBaseSelectMenu',
@@ -80,9 +80,10 @@ export default {
   },
   components: {
     NScrollbar,
-    NSelectOption
+    NSelectOption,
+    NSelectMenuLightBar,
+    NRenderOptions
   },
-  mixins: [withlightbar],
   props: {
     theme: {
       type: String,
@@ -139,6 +140,10 @@ export default {
     width: {
       type: Number,
       default: null
+    },
+    mirror: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -154,22 +159,15 @@ export default {
     noData () {
       return this.linkedOptions && this.linkedOptions.length === 0
     },
-    value2Id () {
-      const value2Id = new Map()
-      this.linkedOptions.forEach(option => {
-        value2Id.set(option.value, option.id)
-      })
-      return value2Id
-    },
-    id2Option () {
-      const id2Option = new Map()
+    value2Option () {
+      const value2Option = new Map()
       for (const option of this.linkedOptions) {
-        id2Option.set(option.id, option)
+        value2Option.set(option.value, option)
       }
-      return id2Option
+      return value2Option
     },
-    firstOptionId () {
-      return this.linkedOptions.firstAvailableOptionId
+    firstOptionValue () {
+      return this.linkedOptions.firstAvailableOptionValue
     },
     linkedOptions () {
       return linkedOptions(this.options)
@@ -206,6 +204,21 @@ export default {
     }
   },
   methods: {
+    hideLightBar () {
+      if (this.$refs.lightBar) {
+        this.$refs.lightBar.hideLightBar()
+      }
+    },
+    hideLightBarSync () {
+      if (this.$refs.lightBar) {
+        this.$refs.lightBar.hideLightBarSync()
+      }
+    },
+    updateLightBarPosition (el) {
+      if (this.$refs.lightBar) {
+        this.$refs.lightBar.updateLightBarPosition(el)
+      }
+    },
     handleMenuScroll (e, scrollContainer, scrollContent) {
       this.$emit('menu-scroll', e, scrollContainer, scrollContent)
     },
@@ -215,8 +228,11 @@ export default {
     handleOptionMouseEnter (e, option) {
       if (!option.disabled) {
         this.updateLightBarPosition(e.target)
-        this.pendingOption = option
+        this.pendingOption = this.value2Option.get(option.value)
       }
+    },
+    handleOptionMouseLeave (e, option) {
+
     },
     handleKeyUpUp () {
       this.prev()
@@ -237,22 +253,25 @@ export default {
       this.$emit('menu-toggle-option', option)
     },
     next () {
-      if (this.pendingOption === null) {
-        this.setPendingOptionElementId(this.linkedOptions.firstAvailableOptionId)
+      if (
+        this.pendingOption === null &&
+        this.linkedOptions.firstAvailableOptionValue !== null
+      ) {
+        this.setPendingOptionElementValue(this.linkedOptions.firstAvailableOptionValue)
       } else {
-        this.setPendingOptionElementId(this.pendingOption.nextAvailableOptionId)
+        this.setPendingOptionElementValue(this.pendingOption.nextAvailableOptionValue)
       }
     },
     prev () {
       if (this.pendingOption) {
-        this.setPendingOptionElementId(this.pendingOption.prevAvailableOptionId)
+        this.setPendingOptionElementValue(this.pendingOption.prevAvailableOptionValue)
       }
     },
-    setPendingOptionElementId (id) {
+    setPendingOptionElementValue (value) {
       const menu = this.$el
-      if (menu && id !== null) {
-        const el = menu.querySelector(`[data-id="${id}"]`)
-        this.pendingOption = this.id2Option.get(id)
+      if (menu && value !== null) {
+        const el = menu.querySelector(`[n-value="${createValueAttribute(value)}"]`)
+        this.pendingOption = this.value2Option.get(value)
         this.pendingOptionElement = el
         this.updateLightBarPosition(this.pendingOptionElement)
         this.$refs.scrollbar.scrollToElement(this.pendingOptionElement)

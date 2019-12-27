@@ -220,6 +220,7 @@ export default {
       }
     },
     scrollToElement (el) {
+      if (this.withoutScrollbar) return
       if (el.offsetTop < this.$refs.scrollContainer.scrollTop) {
         this.$refs.scrollContainer.scrollTo({
           top: el.offsetTop,

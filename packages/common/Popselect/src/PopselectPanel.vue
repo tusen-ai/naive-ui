@@ -53,7 +53,7 @@ export default {
       if (!option) return false
       const value = option.value
       if (this.multiple) {
-        if (Array.isArray(this.value)) return ~this.value.findIndex(v => v === value)
+        if (Array.isArray(this.value)) return !!~this.value.findIndex(v => v === value)
       } else {
         return this.value === value
       }

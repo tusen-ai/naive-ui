@@ -93,6 +93,7 @@ import cancelMarkDebug from './debugComponents/cancelMarkDebug'
 import cascaderDebug from './debugComponents/cascaderDebug'
 import verticalAlignDebug from './debugComponents/verticalAlignDebug'
 import iconTransitionDebug from './debugComponents/iconTransitionDebug'
+import selectDebug from './debugComponents/selectDebug'
 
 import hljs from 'highlight.js/lib/highlight'
 import javascript from 'highlight.js/lib/languages/javascript'
@@ -233,7 +234,8 @@ const routes = [
       {
         path: '/n-icon-transition-debug',
         component: iconTransitionDebug
-      }
+      },
+      { path: '/n-select-debug', component: selectDebug }
     ])
   },
   {

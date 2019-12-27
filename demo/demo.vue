@@ -396,6 +396,10 @@ export default {
             {
               name: 'IconTransitionDebug',
               path: `/${this.lang}/${this.theme}` + '/n-icon-transition-debug'
+            },
+            {
+              name: 'SelectDebug',
+              path: `/${this.lang}/${this.theme}` + '/n-select-debug'
             }
           ]
         }

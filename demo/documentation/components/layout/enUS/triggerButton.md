@@ -12,7 +12,6 @@
       :collapsed-width="120"
       :width="240"
       :collapsed="collapsed"
-      show-toggle-button
       @collapse="collapsed = true"
       @expand="collapsed = false"
     >
@@ -40,7 +39,6 @@
       :collapsed-width="120"
       :width="240"
       :collapsed="collapsed"
-      show-toggle-button
       @collapse="collapsed = true"
       @expand="collapsed = false"
     >

@@ -54,9 +54,12 @@
         ref="content"
         class="n-detached-content-content"
       >
-        <transition name="n-select-menu--transition">
+        <transition
+          name="n-select-menu--transition"
+          @after-leave="handleMenuAfterLeave"
+        >
           <n-base-select-menu
-            v-if="active"
+            v-show="active"
             ref="contentInner"
             class="n-select-menu"
             :theme="synthesizedTheme"
@@ -64,7 +67,6 @@
             :options="filteredOptions"
             :multiple="multiple"
             :size="size"
-            :remote="remote"
             :loading="loading"
             :no-data-content="noDataContent"
             :not-found-content="notFoundContent"
@@ -72,13 +74,10 @@
             :filterable="filterable"
             :is-selected="isSelected"
             :use-slot="useSlot"
+            :mirror="false"
             @menu-toggle-option="handleToggleOption"
             @menu-scroll="handleMenuScroll"
-          >
-            <n-base-select-render-options v-if="useSlot" :filterable="filterable" :remote="remote" :filter="filter" :pattern="pattern">
-              <slot />
-            </n-base-select-render-options>
-          </n-base-select-menu>
+          />
         </transition>
       </div>
     </div>
@@ -88,13 +87,11 @@
 <script>
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'
-import toggleable from '../../../mixins/toggleable'
 import zindexable from '../../../mixins/zindexable'
 import clickoutside from '../../../directives/clickoutside'
 import {
   NBaseSelectMenu,
-  NBaseSelectOptionCollector,
-  NBaseSelectRenderOptions
+  NBaseSelectOptionCollector
 } from '../../../base/SelectMenu'
 import NBasePicker from '../../../base/Picker'
 import withapp from '../../../mixins/withapp'
@@ -114,13 +111,12 @@ export default {
   components: {
     NBaseSelectMenu,
     NBasePicker,
-    NBaseSelectOptionCollector,
-    NBaseSelectRenderOptions
+    NBaseSelectOptionCollector
   },
   directives: {
     clickoutside
   },
-  mixins: [withapp, themeable, detachable, toggleable, placeable, zindexable, asformitem()],
+  mixins: [ withapp, themeable, detachable, placeable, zindexable, asformitem() ],
   inject: {
     NFormItem: {
       default: null
@@ -210,6 +206,7 @@ export default {
   },
   data () {
     return {
+      active: false,
       scrolling: false,
       pattern: '',
       memorizedValueOptionMap: new Map(),
@@ -268,6 +265,12 @@ export default {
     this.updateMemorizedOptions()
   },
   methods: {
+    activate () {
+      this.active = true
+    },
+    deactivate () {
+      this.active = false
+    },
     /**
      * remote related methods
      */
@@ -295,8 +298,10 @@ export default {
         }
       }
     },
-    closeMenu () {
+    handleMenuAfterLeave () {
       this.pattern = ''
+    },
+    closeMenu () {
       this.deactivate()
     },
     handleActivatorClick () {
@@ -343,10 +348,18 @@ export default {
     isSelected (option) {
       if (this.multiple) {
         if (!Array.isArray(this.value)) return false
-        return 1 + this.value.findIndex(value => value === option.value)
+        return !!~this.value.findIndex(value => value === option.value)
       } else {
         return option.value === this.value
       }
+    },
+    normalizeOption (option) {
+      const normalizedOption = {
+        label: option.label,
+        value: option.value,
+        disabled: option.disabled
+      }
+      return normalizedOption
     },
     /**
      * event utils methods
@@ -358,11 +371,11 @@ export default {
             this.$emit('change', null)
           } else {
             let options = this.mapValuesToOptions(newValue)
-            this.$emit('change', options)
+            this.$emit('change', options.map(this.normalizeOption))
           }
         } else {
           const option = this.getOption(newValue)
-          this.$emit('change', option)
+          this.$emit('change', this.normalizeOption(option))
         }
       } else {
         this.$emit('change', newValue)
@@ -389,11 +402,10 @@ export default {
         this.$emit('input', newValue)
       } else {
         if (this.filterable && !this.multiple) {
-          this.pattern = ''
           this.switchFocusToOuter()
         }
-        this.$emit('input', option.value)
         this.closeMenu()
+        this.$emit('input', option.value)
       }
     },
     handleDeleteLastOption (e) {

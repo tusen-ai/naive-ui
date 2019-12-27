@@ -1,0 +1,26 @@
+# 基础
+```html
+<n-gradient-text
+  type="error"
+>
+  永生
+</n-gradient-text>
+<br/>
+<n-gradient-text
+  type="info"
+>
+  永生
+</n-gradient-text>
+<br/>
+<n-gradient-text
+  type="warning"
+>
+  拖家带口
+</n-gradient-text>
+<br/>
+<n-gradient-text
+  type="success"
+>
+  回到苏联
+</n-gradient-text>
+```

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>@import url("https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css");</style>
+</head>
+<body>
+  <div id="app">
+    <template>
+      <el-select v-model="value" placeholder="请选择" multiple>
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
+    </template>
+    </div>
+   
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
+<script>var Main = {
+  data() {
+    var options = []
+    for (let i = 0; i < 2500; ++i) {
+      options.push({
+        label: String(i),
+        value: i
+      })
+    }
+    return {
+      options,
+      value: ''
+    }
+  }
+}
+var Ctor = Vue.extend(Main)
+new Ctor().$mount('#app')</script>
+ </body>
+</html>

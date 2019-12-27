@@ -7,17 +7,19 @@
     }"
     @click="handleClick"
   >
-    <n-tree-switcher-icon />
+    <n-icon>
+      <md-arrow-dropright />
+    </n-icon>
   </span>
 </template>
 
 <script>
-import NTreeSwitcherIcon from './TreeSwitcherIcon'
+import mdArrowDropright from '../../../icons/md-arrow-dropright'
 
 export default {
   name: 'NTreeSwitcher',
   components: {
-    NTreeSwitcherIcon
+    mdArrowDropright
   },
   props: {
     expanded: {
