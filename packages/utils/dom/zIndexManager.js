@@ -22,6 +22,7 @@ class ZIndexManager {
       this.elementZIndex.set(el, this.nextZIndex)
       this.nextZIndex++
     }
+    this.afterManipulation()
   }
   setNewZIndex (el) {
     console.debug('[ZIndexManager.setNewZIndex]: called')
@@ -37,6 +38,7 @@ class ZIndexManager {
     } else {
       console.debug('[ZIndexManager.setNewZIndex]: element not found, please register it first')
     }
+    this.afterManipulation()
   }
   unregisterElement (el) {
     console.debug('[ZIndexManager.unregisterElement]: called')
@@ -44,11 +46,27 @@ class ZIndexManager {
       console.debug('[ZIndexManager.unregisterElement]: successfully delete $el') //, el)
       this.elementZIndex.delete(el)
     } else {
-      console.log('[ZIndexManager.unregisterElement]: element not found')
+      console.error('[ZIndexManager.unregisterElement]: element not found')
     }
+    this.afterManipulation()
+  }
+  afterManipulation () {
     if (!this.elementCount) {
       this.nextZIndex = 2000
     }
+    if (this.nextZIndex - this.elementCount > 2500) this.rearrangeZIndex()
+  }
+  rearrangeZIndex () {
+    const elementZIndexPair = Array.from(this.elementZIndex.entries())
+    elementZIndexPair.sort((pair1, pair2) => {
+      return pair1[1] - pair2[1]
+    })
+    this.nextZIndex = 2000
+    elementZIndexPair.forEach(pair => {
+      const el = pair[0]
+      const zIndex = this.nextZIndex++
+      if (zIndex !== el.style.zIndex) el.style.zIndex = zIndex
+    })
   }
 }
 

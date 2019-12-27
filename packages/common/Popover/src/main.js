@@ -65,7 +65,7 @@ export default {
       type: Object,
       default: null
     },
-    detachedContainerClass: {
+    containerClass: {
       type: String,
       default: 'n-popover'
     },
