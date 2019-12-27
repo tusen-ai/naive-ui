@@ -96,7 +96,6 @@ export default {
     }
   },
   render (h) {
-    let _this = this
     const siderProps = {
       'show-toggle-button': true,
       'show-trigger': true,
@@ -124,9 +123,9 @@ export default {
           return h('NMenuItem', {
             props: props,
             on: {
-              click: function () {
-                if (_this.$router && item.path) {
-                  _this.$router.push(item.path)
+              click: () => {
+                if (this.$router && item.path) {
+                  this.$router.push(item.path)
                 }
               }
             }

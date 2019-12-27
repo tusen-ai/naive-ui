@@ -20,6 +20,7 @@ $layout-nav-height: 64px;
 
         @include b(menu-list) {
           list-style: none;
+          margin: 0;
           padding: 0;
           @include b(menu-item) {
             cursor: pointer;
