@@ -8,19 +8,6 @@
       display: inline-block;
       width: 180px;
     }
-    @include b(time-picker-input) {
-      @include m(error) {
-        color: red;
-        input {
-          color: red!important;
-        }
-        // @include b(input) {
-        //   @include e(input) {
-        //     color: red
-        //   }
-        // }
-      }
-    }
   }
   @include b(time-picker-selector) {
     @include once {
@@ -44,10 +31,10 @@
       }
     }
     background-color: $--time-picker-background-color;
-    box-shadow: $--time-picker-box-shadow;// 0px 2px 20px 0px rgba(0,0,0,0.16);
+    box-shadow: $--time-picker-box-shadow;
     @include b(time-picker-selector-time) {
       @include once {
-        height: 244px;
+        height: 245px;
         display: flex;
         position: relative;
       }
@@ -56,8 +43,14 @@
     @include b(time-picker-selector-time-row) {
       @include once {
         width: 60px;
-        height: 244px;
+        height: 245px;
         flex-direction: column;
+        transition: box-shadow .3s $--n-ease-in-out-cubic-bezier;
+        @include m(transition-disabled) {
+          @include e(item) {
+            transition: background-color .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier;
+          }
+        }
       }
       @include e(item) {
         @include once {
@@ -66,20 +59,30 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: background-color .3s $--n-ease-in-out-cubic-bezier;
-          background: transparent;        
+          transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier;
+          background: transparent; 
         }
         color: map-get($--time-picker-text-color, 'default');
-        &:hover {
-          background-color:  $--time-picker-item-background-color;
+        @include not-m(disabled) {
+          &:hover {
+            background-color:  map-get($--time-picker-item-background-color, 'hover');
+          }
         }
         @include m(active) {
-          background-color: $--time-picker-item-background-color;
+          background-color: map-get($--time-picker-item-background-color, 'hover');
           color: map-get($--time-picker-text-color, 'active');
         }
         @include m(disabled) {
           opacity: 0.45;
           cursor: not-allowed;
+        }
+      }
+      @include m(invalid) {
+        @include e(item) {
+          @include m(active) {
+            background-color: map-get($--time-picker-item-background-color, 'invalid');
+            color: map-get($--time-picker-text-color, 'invalid');
+          }
         }
       }
     }
