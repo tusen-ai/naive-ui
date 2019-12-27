@@ -5,20 +5,18 @@
   @include once {
     @include b(date-picker) {
       position: relative;
-      // width: 200px;
-      @include m(range) {
-        // width: 382px;
-      }
-      @include m (error) {
-        @include b(input) {
-          @include e(input) {
-            color: red;
-          }
+    }
+  }  
+  @include b(date-picker) {
+    @include m(invalid) {
+      @include b(input) {
+        @include e(input) {
+          text-decoration: line-through;
+          text-decoration-color: $--date-picker-text-decoration-color;
         }
       }
-    }  
-  }
-  
+    }
+  } 
   @include b(date-picker-panel) {
     @include once {
       outline: none;
@@ -97,12 +95,13 @@
         @include b(time-picker) {
           width: 145px;
         }
+        
+      }
+      @include m(date-invalid) {
         @include b(input) {
-          @include m(error) {
-            color: red;
-            @include e(input) {
-              color: red;
-            }
+          @include e(input) {
+            text-decoration: line-through;
+            text-decoration-color: $--date-picker-text-decoration-color;
           }
         }
       }
@@ -186,15 +185,10 @@
             transition: none!important;
           }
         }
-        
         &:hover {
           background-color: map-get($--date-picker-item-background-color, 'hover');
         }
-        @include not-m(in-display-month) {
-          color: map-get($--date-picker-item-text-color, 'inactive');
-        }
         @include m(current) {
-          color: map-get($--date-picker-item-text-color, 'current');
           &::after {
             @include once {
               position: absolute;
