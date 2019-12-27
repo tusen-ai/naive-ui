@@ -1,9 +1,15 @@
 <template>
-  <div class="n-time-picker">
+  <div
+    class="n-time-picker"
+    :class="{
+      'n-time-picker--invalid': isValueInvalid,
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+    }"
+  >
     <n-input
       ref="activator"
       v-model="displayTimeString"
-      class="n-date-picker-panel__time-input n-time-picker-input"
+      class="n-time-picker-input"
       :force-focus="active"
       placeholder="Select time"
       lazy-focus
@@ -282,17 +288,12 @@ export default {
     }
   },
   watch: {
-    computedTime (time) {
-      this.refreshTimeString(time)
+    computedTime (value) {
+      this.refreshTimeString(value)
       this.$nextTick().then(this.scrollTimer)
     },
     value (value, oldValue) {
       this.$emit('change', value, oldValue)
-      this.$nextTick().then(() => {
-        if (!this.isValueInvalid) {
-          this.memorizedValue = this.value
-        }
-      })
     },
     active (value) {
       if (this.isValueInvalid) {

@@ -9,6 +9,27 @@
       width: 180px;
     }
   }
+  @include b(time-picker) {
+    @include m(invalid) {
+      & > {
+        @include b(input) {
+          @include e(input) {
+            text-decoration: line-through;
+            text-decoration-color: $--time-picker-text-decoration-color;
+          }
+        }
+      }
+    }
+    @include m(transition-disabled) {
+      & > {
+        @include b(input) {
+          input {
+            transition: none;
+          }
+        }
+      }
+    }
+  }
   @include b(time-picker-selector) {
     @include once {
       outline: none;

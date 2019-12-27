@@ -5,6 +5,7 @@
     'active': $--n-primary-color,
     'invalid': $--error-6
   ) !global;
+  $--time-picker-text-decoration-color: $--n-secondary-text-color !global;
   $--time-picker-item-background-color: (
     'hover': change-color($--n-primary-color, $alpha: .15),
     'invalid': change-color($--error-6, $alpha: .15)
