@@ -84,7 +84,7 @@ export default {
       return this.items.filter(item => {
         // console.log(item.name.toLowerCase(), this.searchInputValue.toLowerCase())
         return ~item.name.toLowerCase().indexOf(this.searchInputValue.toLowerCase())
-      }).slice(0, 6).map(item => ({
+      }).map(item => ({
         label: item.name,
         value: item.path
       }))
