@@ -3,25 +3,25 @@
 <n-date-picker
   v-model="timestamp1"
   type="date"
-  :date-disabled = "dateDisabled"
+  :is-date-disabled = "dateDisabled"
 />
 <n-date-picker
   v-model="timestamp2"
   type="datetime"
-  :date-disabled = "dateDisabled"
-  :timeDisabled= "timeDisabled"
+  :is-date-disabled = "dateDisabled"
+  :is-time-disabled= "timeDisabled"
 />
-<n-date-picker
+<!-- <n-date-picker
   v-model="timestamp3"
   type="daterange"
-  :date-disabled = "dateRangeDisabled"
+  :is-date-disabled = "dateRangeDisabled"
 />
 <n-date-picker
   v-model="timestamp4"
   type="datetimerange"
-  :date-disabled = "dateRangeDisabled"
-  :time-disabled= "timeRangeDisabled"
-/>
+  :is-date-disabled = "dateRangeDisabled"
+  :is-time-disabled= "timeRangeDisabled"
+/> -->
 ```
 ```js
 export default {
@@ -35,33 +35,34 @@ export default {
   },
   methods: {
     dateDisabled (current) {
-      return current >= 1576339200000 && current <= 1576425600000
-      // Tue Nov 12 2019 17:49:42 GMT+0800 (China Standard Time) -
-      // Fri Nov 15 2019 17:49:42 GMT+0800 (China Standard Time)
+      const month = (new Date(current)).getMonth()
+      const date = (new Date(current)).getDate()
+      return month === 11 && date < 15
     },
     timeDisabled (current) {
+      const month = (new Date(current)).getMonth()
       return {
-        hourDisabled: (hour) => {
-          if (current === 1576512000000) {
+        isHourDisabled: (hour) => {
+          if (month === 11) {
             return hour > 1 && hour <= 19
           } else {
             return false
           }
         },
-        minuteDisabled: (minute, selectedHour) => {
-          if (current === 1576512000000 && selectedHour === 22) {
+        isMinuteDisabled: (minute, selectedHour) => {
+          if (month === 11 && selectedHour === 22) {
             return minute >= 20 && minute <= 30
           } else {
             return false
           }
         },
-        secondDisabled: (second, selectedMinute, selectedHour) => {
-          if (current === 1576512000000 && selectedHour === 12 && selectedMinute >= 40 && selectedMinute <= 50) {
+        isSecondDisabled: (second, selectedMinute, selectedHour) => {
+          if (month === 11 && selectedHour === 12 && selectedMinute >= 40 && selectedMinute <= 50) {
             return second >= 20 && second <= 30
           } else {
             return false
           }
-        },
+        }
       }
     },
     dateRangeDisabled (current) {

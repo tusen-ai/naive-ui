@@ -25,9 +25,9 @@
           position-mode="absolute"
           class="n-date-picker-panel__time-input"
           :value="startTimeValue"
-          :hour-disabled="isStartHourDisabled(currentDate)"
-          :minute-disabled="isStartMinuteDisabled(currentDate)"
-          :second-disabled="isStartSecondDisabled(currentDate)"
+          :is-hour-disabled="isStartHourDisabled(currentDate)"
+          :is-minute-disabled="isStartMinuteDisabled(currentDate)"
+          :is-second-disabled="isStartSecondDisabled(currentDate)"
           stop-selector-bubble
           @input="handleStartTimePickerInput"
         />
@@ -48,10 +48,9 @@
           position-mode="absolute"
           class="n-date-picker-panel__time-input"
           :value="endTimeValue"
-          :hour-disabled="isEndHourDisabled(currentDate)"
-          :minute-disabled="isEndMinuteDisabled(currentDate)"
-          :second-disabled="isEndSecondDisabled(currentDate)"
-          :is-error-val="isErrorEndTime"
+          :is-hour-disabled="isEndHourDisabled(currentDate)"
+          :is-minute-disabled="isEndMinuteDisabled(currentDate)"
+          :is-second-disabled="isEndSecondDisabled(currentDate)"
           stop-selector-bubble
           @input="handleEndTimePickerInput"
         />

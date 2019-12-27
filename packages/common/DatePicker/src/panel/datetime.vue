@@ -11,12 +11,12 @@
     >
       <div
         class="n-date-picker-panel-input-wrapper"
+        :class="{
+          'n-date-picker-panel-input-wrapper--date-invalid': isDateInvalid
+        }"
       >
         <n-input
           v-model="displayDateString"
-          :class="{
-            'n-input--error': isErrorDate
-          }"
           placeholder="Select date"
           @blur="handleDateInputBlur"
           @input="handleDateInput"
@@ -27,9 +27,9 @@
           class="n-date-picker-panel__time-input"
           :value="value"
           stop-selector-bubble
-          :hour-disabled="hourDisabled"
-          :minute-disabled="minuteDisabled"
-          :second-disabled="secondDisabled"
+          :is-hour-disabled="isHourDisabled"
+          :is-minute-disabled="isMinuteDisabled"
+          :is-second-disabled="isSecondDisabled"
           @input="handleTimePickerInput"
         />
       </div>
@@ -82,7 +82,7 @@
             'n-date-picker-panel-dates__date--selected': dateItem.isSelectedDate,
             'n-date-picker-panel-dates__date--in-display-month': dateItem.isDateOfDisplayMonth,
             'n-date-picker-panel-dates__date--no-transition': noTransition,
-            'n-date-picker-panel-dates__date--disabled': dateDisabled(dateItem.timestamp)
+            'n-date-picker-panel-dates__date--disabled': isDateDisabled(dateItem.timestamp)
           }"
           @click="handleDateClick(dateItem)"
         >
@@ -113,7 +113,7 @@
           type="primary"
           class="n-date-picker-panel-actions__confirm"
           :class="{
-            'n-date-picker-panel-actions__confirm--disabled': isErrorTime || isErrorDate
+            'n-date-picker-panel-actions__confirm--disabled': isTimeInvalid || isDateInvalid
           }"
           @click="handleConfirmClick"
         >
@@ -170,7 +170,7 @@ export default {
       if (this.active) {
         this.initialValue = this.value
       } else {
-        if (this.isErrorTime || this.isErrorDate) {
+        if (this.isTimeInvalid || this.isDateInvalid) {
           this.$emit('input', this.initialValue)
         }
       }
@@ -179,7 +179,6 @@ export default {
   methods: {
     adjustValue (datetime) {
       return startOfSecond(datetime)
-      // return moment(datetime).startOf('second')
     },
     handleTimePickerInput (value) {
       this.$emit('input', value)

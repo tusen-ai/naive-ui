@@ -9,6 +9,11 @@ const TIME_CONST = {
 }
 
 export default {
+  inject: {
+    NDatePicker: {
+      default: null
+    }
+  },
   directives: {
     clickoutside
   },

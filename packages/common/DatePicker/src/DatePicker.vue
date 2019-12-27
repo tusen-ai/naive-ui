@@ -3,10 +3,11 @@
     ref="activator"
     class="n-date-picker"
     :class="{
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
       [`n-date-picker--${size}-size`]: true,
       'n-date-picker--disabled': disabled,
       'n-date-picker--range': isRange,
-      'n-date-picker--error': isErrorValue
+      'n-date-picker--invalid': isValueInvalid
     }"
   >
     <n-input
@@ -68,12 +69,11 @@
           :active="active"
           :actions="actions"
           :theme="synthesizedTheme"
-          :date-disabled="dateDisabled"
-          :time-disabled="timeDisabled"
+          :is-date-disabled="isDateDisabled"
+          :is-time-disabled="isTimeDisabled"
           @blur="handlePanelBlur"
           @input="handlePanelInput"
           @close="closeCalendar"
-          @check-value="checkValue"
         />
         <date-panel
           v-else-if="type === 'date'"
@@ -82,11 +82,10 @@
           :active="active"
           :actions="actions"
           :theme="synthesizedTheme"
-          :date-disabled="dateDisabled"
+          :is-date-disabled="isDateDisabled"
           @input="handlePanelInput"
           @blur="handlePanelBlur"
           @close="closeCalendar"
-          @check-value="checkValue"
         />
         <daterange-panel
           v-else-if="type === 'daterange'"
@@ -95,11 +94,11 @@
           :active="active"
           :actions="actions"
           :theme="synthesizedTheme"
-          :date-disabled="dateDisabled"
+          :date-disabled="isDateDisabled"
           @input="handleRangePanelInput"
           @blur="handlePanelBlur"
           @close="closeCalendar"
-          @check-value="checkValue"
+          @check-value="setInvalidStatus"
         />
         <datetimerange-panel
           v-else-if="type === 'datetimerange'"
@@ -108,12 +107,12 @@
           :active="active"
           :actions="actions"
           :theme="synthesizedTheme"
-          :date-disabled="dateDisabled"
-          :time-disabled="timeDisabled"
+          :date-disabled="isDateDisabled"
+          :time-disabled="isTimeDisabled"
           @input="handleRangePanelInput"
           @close="closeCalendar"
           @blur="handlePanelBlur"
-          @check-value="checkValue"
+          @check-value="setInvalidStatus"
         />
       </div>
     </div>
@@ -173,6 +172,11 @@ export default {
   name: 'NDatePicker',
   directives: {
     clickoutside
+  },
+  provide () {
+    return {
+      NDatePicker: this
+    }
   },
   components: {
     NInput,
@@ -241,17 +245,13 @@ export default {
       type: Array,
       default: undefined
     },
-    dateDisabled: {
+    isDateDisabled: {
       type: Function,
-      default: () => {
-        return false
-      }
+      default: undefined
     },
-    timeDisabled: {
+    isTimeDisabled: {
       type: Function,
-      default: () => {
-        return false
-      }
+      default: undefined
     },
     rangeTimeDisabled: {
       type: Function,
@@ -272,7 +272,7 @@ export default {
       displayStartTime: '',
       displayEndTime: '',
       active: false,
-      isErrorValue: false
+      isValueInvalid: false
     }
   },
   computed: {
@@ -312,20 +312,20 @@ export default {
      * If new value is valid, set calendarTime and refresh display strings.
      * If new value is invalid, do nothing.
      */
-    value (newValue, oldValue) {
-      this.refresh(newValue)
+    value (value, oldValue) {
+      this.refresh(value)
       if (this.isRange) {
         if (!(
-          Array.isArray(newValue) &&
+          Array.isArray(value) &&
           Array.isArray(oldValue) &&
-          newValue.length === 2 &&
-          newValue.length === oldValue.length &&
-          newValue[0] === oldValue[0] &&
-          newValue[1] === oldValue[1]
+          value.length === 2 &&
+          value.length === oldValue.length &&
+          value[0] === oldValue[0] &&
+          value[1] === oldValue[1]
         )) {
-          this.$emit('change', newValue, oldValue)
+          this.$emit('change', value, oldValue)
         }
-      } else { this.$emit('change', newValue, oldValue) }
+      } else { this.$emit('change', value, oldValue) }
     }
   },
   created () {
@@ -432,7 +432,7 @@ export default {
         this.$emit('input', getTime(newSelectedDateTime))
       }
     },
-    handleRangeInput (v, isErrorValue) {
+    handleRangeInput (v, isValueInvalid) {
       // const v = e.target.value
       if (v === null) v = [null, null]
       const [startTime, endTime] = v
@@ -533,8 +533,9 @@ export default {
       this.$emit('input', [startTime, endTime])
       this.refresh([startTime, endTime])
     },
-    checkValue (isErrorValue) {
-      this.isErrorValue = isErrorValue
+    setInvalidStatus (isValueInvalid) {
+      this.isValueInvalid = isValueInvalid
+      console.log('valid status is set')
     }
   }
 }

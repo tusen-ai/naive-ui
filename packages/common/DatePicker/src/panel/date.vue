@@ -60,7 +60,7 @@
             'n-date-picker-panel-dates__date--selected': dateItem.isSelectedDate,
             'n-date-picker-panel-dates__date--in-display-month': dateItem.isDateOfDisplayMonth,
             'n-date-picker-panel-dates__date--no-transition': noTransition,
-            'n-date-picker-panel-dates__date--disabled': dateDisabled(dateItem.timestamp)
+            'n-date-picker-panel-dates__date--disabled': isDateDisabled(dateItem.timestamp)
           }"
           @click="handleDateClick(dateItem)"
         >
@@ -91,7 +91,7 @@
           type="primary"
           class="n-date-picker-panel-actions__confirm"
           :class="{
-            'n-date-picker-panel-actions__confirm--disabled': isErrorTime || isErrorDate
+            'n-date-picker-panel-actions__confirm--disabled': isTimeInvalid || isDateInvalid
           }"
           @click="handleConfirmClick"
         >
