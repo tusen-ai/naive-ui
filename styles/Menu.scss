@@ -117,7 +117,7 @@ $layout-nav-height: 64px;
           top: calc(50% - 3px);
           transform: rotate(45deg) ;
           transform-origin: 25% 25%;
-          transition: transform 0.3s $--n-ease-in-out-cubic-bezier, opacity 0.3s $--n-ease-in-out-cubic-bezier;
+          transition: transform 0.3s $--n-ease-in-out-cubic-bezier, opacity 0.3s $--n-ease-in-out-cubic-bezier, border-color 0.3s $--n-ease-in-out-cubic-bezier;
         }
         @include m(collapsed) {
           &::after {

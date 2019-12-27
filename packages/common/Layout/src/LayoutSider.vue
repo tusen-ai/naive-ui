@@ -15,7 +15,7 @@
       width: styleWidth,
     }"
   >
-    <n-scrollbar v-if="!useNativeScrollbar">
+    <n-scrollbar v-if="!useNativeScrollbar" class="n-layout-sider__content">
       <slot />
     </n-scrollbar>
     <div v-else class="n-layout-sider__content">
@@ -156,11 +156,8 @@ export default {
     } else {
       this.styleWidth = `${this.width}px`
     }
-  },
-  mounted () {
     const NLayout = this.NLayout
     if (NLayout) {
-      NLayout.blockChildLayoutTransitionOneTick()
       NLayout.hasSider = true
       NLayout.siderWidth = this.width
       NLayout.collapsedSiderWidth = this.collapsedWidth

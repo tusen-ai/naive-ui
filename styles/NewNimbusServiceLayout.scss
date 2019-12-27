@@ -2,8 +2,6 @@
 
 @include themes-mixin() {
   @include b(new-nimbus-service-layout) {
-    color: $service-layout-color;
-    background-color: $service-layout-body-background-color;
     @include e(header) {
       height: 64px;
       @include m(hide) {

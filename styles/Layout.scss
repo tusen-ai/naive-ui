@@ -2,12 +2,14 @@
 
 @include themes-mixin {
   @include b(layout) {
+    color: $--layout-text-color;
+    background-color: $--layout-back-color;
     @include once {
       box-sizing: border-box;
       position: relative;
       display: flex;
       flex-wrap: nowrap;
-      transition: margin-left .3s $--n-ease-in-out-cubic-bezier;
+      transition: margin-left .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
       flex-direction: column;
       overflow: auto;
       @include m(has-sider) {
