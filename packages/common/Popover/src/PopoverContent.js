@@ -62,9 +62,9 @@ export default {
       type: Boolean,
       default: false
     },
-    detachedContainerClass: {
+    containerClass: {
       type: String,
-      default: 'n-popover-detached-content-container'
+      default: undefined
     },
     detached: {
       type: Boolean,
@@ -82,16 +82,19 @@ export default {
   },
   data () {
     return {
+      memorizedId: null,
       internalActive: false,
       show: false
     }
   },
   created () {
+    this.memorizedId = this.id
+    popoverManager.registerContent(this.memorizedId, this)
     if (this.active) this.show = true
   },
   watch: {
-    active (newActive) {
-      if (newActive) {
+    active (value) {
+      if (value) {
         this.$parent.transferElement()
         this.$emit('show')
       } else {
@@ -128,12 +131,8 @@ export default {
     }
   },
   mounted () {
-    popoverManager.registerContent(this)
     if (this.active) {
       this.$parent.transferElement()
-      // this.$nextTick().then(() => {
-      //   this.updatePosition()
-      // })
     }
     if (this.controller) {
       this.controller.updatePosition = this.updatePosition
@@ -143,13 +142,12 @@ export default {
 
   },
   updated () {
-    popoverManager.registerContent(this)
     if (this.controller) {
       this.controller.updatePosition = this.updatePosition
     }
   },
   beforeDestroy () {
-    popoverManager.unregisterContent(this)
+    popoverManager.unregisterContent(this.memorizedId)
   },
   methods: {
     cancelVanishTimer () {
@@ -174,7 +172,7 @@ export default {
       this.internalActive = false
     },
     activator () {
-      return popoverManager.getActivatorInstance(this)
+      return popoverManager.getActivatorInstance(this.memorizedId)
     },
     handleMouseEnter () {
       this.cancelVanishTimer()
@@ -183,24 +181,20 @@ export default {
       if (this.triggeredByHover) {
         if (!this.active) return
         this.cancelVanishTimer()
-        // console.log('[PopoverContent.handleMouseLeave]')
         const activator = this.activator()
         activator.vanishTimerId = window.setTimeout(() => {
           if (activator && activator.$el) {
             const activatorEl = activator.$el
             if (activatorEl.contains(e.target)) {
-              // console.log('[PopoverContent.handleMouseLeave] move on activator, do nothing')
               return
             }
           }
-          // console.log('[PopoverContent.handleMouseLeave] move on outside, close the popover')
           activator.vanishTimerId = null
           this.deactivate()
         }, this.duration)
       }
     },
     handleMouseMoveOutside (e) {
-      // console.log('[PopoverContent.handleMouseMoveOutside')
       if (this.triggeredByHover) {
         this.handleMouseLeave(e)
       }
@@ -211,20 +205,16 @@ export default {
         if (activator && activator.$el) {
           const activatorEl = activator.$el
           if (activatorEl.contains(e.target)) {
-            // console.log('[PopoverContent.handleClickOutside] click at activator, do nothing')
             return
           }
         }
-        // console.log('[PopoverContent.handleClickOutside] click at outside, close the popover')
         this.deactivate()
       }
     },
     getTrackingElement () {
-      // console.log('getTrackingElement', this.activator().$el)
       return this.$refs.content
     },
     getTrackedElement () {
-      // console.log('getTrackedEleme')
       return this.activator().$el
     },
     getZindexableContent () {
@@ -232,11 +222,10 @@ export default {
     }
   },
   render (h) {
-    // console.log('render popover content', this.$props)
     return h('div', {
       staticClass: 'n-detached-content-container',
       class: {
-        [this.detachedContainerClass]: true,
+        [this.containerClass]: true,
         [this.namespace]: this.namespace
       },
       ref: 'contentContainer'

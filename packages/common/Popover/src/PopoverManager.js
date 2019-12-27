@@ -1,64 +1,25 @@
-function abstractRegister (self, componentInstance, mapKey, reverseMapKey) {
-  if (componentInstance && componentInstance.id) {
-    const map = self[mapKey]
-    const reverseMap = self[reverseMapKey]
-    const id = componentInstance.id
-    const memorizedId = reverseMap.get(componentInstance)
-    if (map.has(id)) {
-      map.delete(id)
-    }
-    if (map.has(memorizedId)) {
-      map.delete(memorizedId)
-    }
-    map.set(id, componentInstance)
-    reverseMap.set(componentInstance, id)
-  }
-}
-
-function abstractUnregister (self, componentInstance, mapKey, reverseMapKey) {
-  if (componentInstance && componentInstance.id) {
-    const map = self[mapKey]
-    const reverseMap = self[reverseMapKey]
-    const id = componentInstance.id
-    const memorizedId = reverseMap.get(componentInstance)
-    if (map.has(id)) {
-      map.delete(id)
-    }
-    if (map.has(memorizedId)) {
-      map.delete(memorizedId)
-    }
-    map.delete(componentInstance)
-  }
-}
-
 class PopoverManager {
   constructor () {
-    this.id2activator = new Map()
-    this.activator2id = new Map()
-    this.id2content = new Map()
-    this.content2id = new Map()
+    this.id2Content = new Map()
+    this.id2Activator = new Map()
   }
-  registerActivator (activator) {
-    // console.log(`[PopoverManager.registerActivator]`)
-    abstractRegister(this, activator, 'id2activator', 'activator2id')
+  registerActivator (key, instance) {
+    this.id2Activator.set(key, instance)
   }
-  registerContent (content) {
-    // console.log(`[PopoverManager.registerContent]`)
-    abstractRegister(this, content, 'id2content', 'content2id')
+  registerContent (key, instance) {
+    this.id2Content.set(key, instance)
   }
-  unregisterActivator (activator) {
-    // console.log(`[PopoverManager.unregisterActivator]`)
-    abstractUnregister(this, activator, 'id2activator', 'activator2id')
+  unregisterActivator (key) {
+    this.id2Activator.delete(key)
   }
-  unregisterContent (content) {
-    // console.log(`[PopoverManager.unregisterContent]`)
-    abstractUnregister(this, content, 'id2content', 'content2id')
+  unregisterContent (key) {
+    this.id2Content.delete(key)
   }
-  getContentInstance (activator) {
-    return this.id2content.get(activator.id) || null
+  getContentInstance (key) {
+    return this.id2Content.get(key) || null
   }
-  getActivatorInstance (content) {
-    return this.id2activator.get(content.id) || null
+  getActivatorInstance (key) {
+    return this.id2Activator.get(key) || null
   }
 }
 

@@ -67,7 +67,7 @@ export default {
       on: context.listeners,
       props: {
         ...context.props,
-        detachedContainerClass: 'n-tooltip',
+        containerClass: 'n-tooltip',
         contentClass: 'n-tooltip-content'
       },
       scopedSlots: {
