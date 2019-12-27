@@ -47,10 +47,6 @@ export default {
       type: String,
       default: null
     },
-    title: {
-      type: String,
-      default: null
-    },
     indent: {
       type: Number,
       default: 32
@@ -61,11 +57,15 @@ export default {
     },
     defaultOpenNames: {
       type: Array,
-      default: null
+      default: () => {
+        return []
+      }
     },
     openNames: {
       type: Array,
-      default: null
+      default: () => {
+        return null
+      }
     },
     hasIcon: {
       type: Boolean,
@@ -88,11 +88,11 @@ export default {
       this.$emit('input', value)
     },
     openKeysChangeCallback (val) {
-      let indexs = this.openNames
-      if (!this.openNames.includes(val)) {
-        indexs.push(val)
-      } else {
+      let indexs = this.openNames || []
+      if (this.openNames && this.openNames.includes(val)) {
         indexs.splice(indexs.findIndex(item => item === val), 1)
+      } else {
+        indexs.push(val)
       }
       this.$emit('openNamesChange', indexs)
     }

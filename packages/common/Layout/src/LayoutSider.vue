@@ -16,9 +16,7 @@
     }"
   >
     <n-scrollbar v-if="!useNativeScrollbar">
-      <div class="n-layout-sider__content">
-        <slot />
-      </div>
+      <slot />
     </n-scrollbar>
     <div v-else class="n-layout-sider__content">
       <slot />

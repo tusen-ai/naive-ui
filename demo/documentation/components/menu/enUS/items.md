@@ -1,6 +1,6 @@
 # items
 ```html
-<n-menu :title="'Test'" 
+<n-menu
   v-model="selected" 
   :defaultOpenNames="initOpenKeys"
   :openNames="opens" 

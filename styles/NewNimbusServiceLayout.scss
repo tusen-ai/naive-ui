@@ -1,0 +1,34 @@
+@import './mixins/mixins.scss';
+
+@include themes-mixin() {
+  @include b(new-nimbus-service-layout) {
+    // color: $service-layout-color;
+    // height: 100%;
+    color: $service-layout-color;
+    background-color: $service-layout-body-background-color;
+    @include e(header) {
+      height: 64px;
+      @include m(hide) {
+        display: none;
+      }
+    }
+    @include b(nimbus-service-layout-container) {
+      @include b(nimbus-service-layout-container-sider-header) {
+        display: flex;
+        @include e(icon) {
+          margin-right: 5px;
+          @include m(hide) {
+            display: none;
+          }
+        }
+      }
+      @include m(has-top) {
+        top: 64px;    
+      }
+    }
+    
+    // @include e(content) {
+    //   background-color: red;
+    // }
+  }
+}

@@ -1,7 +1,7 @@
 # Basic
 ```html
 <div style="width:500px">
-  <n-menu :title="'Test'" 
+  <n-menu 
     v-model="selected" 
     :defaultOpenNames="initOpenKeys"
     :openNames="opens" 
