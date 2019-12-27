@@ -15,7 +15,7 @@
         @include b(input) {
           @include e(input) {
             text-decoration: line-through;
-            text-decoration-color: $--time-picker-text-decoration-color;
+            text-decoration-color: map-get($--time-picker-text-decoration-color, 'default');
           }
         }
       }
@@ -80,9 +80,10 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier;
+          transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier, text-decoration-color .3s $--n-ease-in-out-cubic-bezier;
           background: transparent; 
         }
+        text-decoration-color: transparent;
         color: map-get($--time-picker-text-color, 'default');
         @include not-m(disabled) {
           &:hover {
@@ -102,7 +103,8 @@
         @include e(item) {
           @include m(active) {
             background-color: map-get($--time-picker-item-background-color, 'invalid');
-            color: map-get($--time-picker-text-color, 'invalid');
+            text-decoration: line-through;
+            text-decoration-color: map-get($--time-picker-text-decoration-color, 'active');
           }
         }
       }
