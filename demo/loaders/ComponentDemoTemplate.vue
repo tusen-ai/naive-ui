@@ -22,7 +22,7 @@
 </script>
 
 <style scoped lang="scss">
-.demo-card__view {
+.demo-card__view, .naive-ui-doc {
   /**STYLE_SLOT*/
 }
 </style>
