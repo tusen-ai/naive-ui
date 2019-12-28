@@ -248,14 +248,14 @@ $--n-ease-in-out-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
   }
 }
 
-@mixin fade-in-scale-up-transition($block: 'fade-in-scale-up', $origin: inherit, $duration: .2s, $start-scale: 0.9, $original-transform: ()) {
+@mixin fade-in-scale-up-transition($block: 'fade-in-scale-up', $origin: inherit, $duration: .2s, $start-scale: 0.9, $original-transform: (), $original-transition: ()) {
   &.#{$namespace}-#{$block}--transition-leave-active {
     transform-origin: $origin;
-    transition: opacity $duration $slow-out-cubic-bezier, transform $duration $slow-out-cubic-bezier;
+    transition: opacity $duration $slow-out-cubic-bezier, transform $duration $slow-out-cubic-bezier, $original-transition;
   }
   &.#{$namespace}-#{$block}--transition-enter-active {
     transform-origin: $origin;
-    transition: opacity $duration $fast-in-cubic-bezier, transform $duration $fast-in-cubic-bezier;
+    transition: opacity $duration $fast-in-cubic-bezier, transform $duration $fast-in-cubic-bezier, $original-transition;
   }
   &.#{$namespace}-#{$block}--transition-enter, &.#{$namespace}-#{$block}--transition-leave-to {
     opacity: 0;

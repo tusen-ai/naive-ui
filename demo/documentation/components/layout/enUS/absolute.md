@@ -13,10 +13,10 @@ All layout components can use absolute positioning. It can be used when you want
         Cool Sider
       </n-layout-sider>
       <n-layout mode="absolute">
-        <h1>Long</h1><h1>Long</h1><h1>Long</h1>
-        <h1>Long</h1><h1>Long</h1><h1>Long</h1>
-        <h1>Long</h1><h1>Long</h1><h1>Long</h1>
-        <h1>Long</h1><h1>Long</h1><h1>Long</h1>
+        <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>
+        <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>
+        <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>
+        <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>
       </n-layout>
     </n-layout>
     <n-layout-footer mode="absolute" style="height: 64px">

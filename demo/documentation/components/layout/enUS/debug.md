@@ -13,14 +13,14 @@
       @collapse="collapsed = true"
       @expand="collapsed = false"
     >
-      <h1>Sider</h1>
+      <n-h1>Sider</n-h1>
     </n-layout-sider>
     <n-layout mode="absolute" :use-native-scrollbar="false">
       <n-layout-content>
         <span>Content</span>
       </n-layout-content>
       <n-layout-footer>
-        <h1>Footer</h1>
+        <n-h1>Footer</n-h1>
       </n-layout-footer>
     </n-layout>
   </n-layout>
