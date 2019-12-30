@@ -109,12 +109,14 @@ Previously, it would not work with single quotes:
 ## 2019.12.30
 为了按需引入打包大小依旧可控，需要用某种方式让互相的依赖变为外部依赖。或者就维持原本的文件结构，这样的话需要的是 babel。看起来还是有点麻烦，之后再解决吧。
 
-## TODO
 
-issue fix, add delay prop
-add trigger to tooltip
-outside click delegate select
-DatePicker range Bug
+## TODO
+Focus Detector on Time Selector
+
+// issue fix, add delay prop
+// add trigger to tooltip
+// outside click delegate select
+// DatePicker range Bug
 // Scrollbar Firefox...
 // scrollbar 在 resize 之后滚动会有问题
-ResizeObserver Polyfill
+// ResizeObserver Polyfill
