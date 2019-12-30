@@ -15,7 +15,7 @@
           overflow: scroll;
           height: 100%;
           max-height: inherit;
-          scrollbar-width: 0;
+          scrollbar-width: none;
           &::-webkit-scrollbar {
             width: 0;
             height: 0;
