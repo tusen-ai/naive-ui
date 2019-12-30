@@ -310,11 +310,11 @@ export default {
     },
     afterBlur (e) {
       if (this.active) {
-        window.setTimeout(() => {
+        this.$nextTick().then(() => {
           if (!(this.$refs.panel && this.$refs.panel.contains(document.activeElement))) {
             this.closeTimeSelector()
           }
-        }, 0)
+        })
       }
     },
     justifyValueAfterChangeDisplayTimeString () {

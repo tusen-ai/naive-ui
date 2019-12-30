@@ -391,7 +391,7 @@ export default {
       if (this.active) {
         window.setTimeout(() => {
           if (!(this.$refs.panel && this.$refs.panel.$el.contains(document.activeElement))) {
-            // this.closeCalendar()
+            this.closeCalendar()
           }
         }, 0)
       }
