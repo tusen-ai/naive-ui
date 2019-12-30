@@ -111,13 +111,13 @@ export default {
       return this.isTimeDisabled(this.currentDate)
     },
     isHourDisabled () {
-      return this.timePickerValidator.isHourDisabled || undefined
+      return this.timePickerValidator.isHourDisabled || (() => false)
     },
     isMinuteDisabled () {
-      return this.timePickerValidator.isMinuteDisabled || undefined
+      return this.timePickerValidator.isMinuteDisabled || (() => false)
     },
     isSecondDisabled () {
-      return this.timePickerValidator.isSecondDisabled || undefined
+      return this.timePickerValidator.isSecondDisabled || (() => false)
     }
   },
   watch: {
@@ -125,7 +125,7 @@ export default {
       if (
         !isSameMonth(newCalendarDateTime, oldCalendarDateTime)
       ) {
-        this.banTransitionOneTick()
+        this.disableTransitionOneTick()
       }
     },
     valueAsDateTime (newValue) {

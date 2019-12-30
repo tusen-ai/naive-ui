@@ -7,7 +7,9 @@
       [`n-date-picker--${size}-size`]: true,
       'n-date-picker--disabled': disabled,
       'n-date-picker--range': isRange,
-      'n-date-picker--invalid': isValueInvalid
+      'n-date-picker--invalid': isValueInvalid && !isRange,
+      'n-date-picker--start-invalid': isStartValueInvalid,
+      'n-date-picker--end-invalid': isEndValueInvalid
     }"
   >
     <n-input
@@ -94,7 +96,7 @@
           :active="active"
           :actions="actions"
           :theme="synthesizedTheme"
-          :date-disabled="isDateDisabled"
+          :is-date-disabled="isDateDisabled"
           @input="handleRangePanelInput"
           @blur="handlePanelBlur"
           @close="closeCalendar"
@@ -107,8 +109,8 @@
           :active="active"
           :actions="actions"
           :theme="synthesizedTheme"
-          :date-disabled="isDateDisabled"
-          :time-disabled="isTimeDisabled"
+          :is-date-disabled="isDateDisabled"
+          :is-time-disabled="isTimeDisabled"
           @input="handleRangePanelInput"
           @close="closeCalendar"
           @blur="handlePanelBlur"
@@ -272,7 +274,9 @@ export default {
       displayStartTime: '',
       displayEndTime: '',
       active: false,
-      isValueInvalid: false
+      isValueInvalid: false,
+      isEndValueInvalid: false,
+      isStartValueInvalid: false
     }
   },
   computed: {
@@ -387,7 +391,7 @@ export default {
       if (this.active) {
         window.setTimeout(() => {
           if (!(this.$refs.panel && this.$refs.panel.$el.contains(document.activeElement))) {
-            this.closeCalendar()
+            // this.closeCalendar()
           }
         }, 0)
       }
@@ -492,7 +496,6 @@ export default {
      * Utils
      */
     changeStartDateTime (time) {
-      // debugger
       if (typeof time !== 'number') {
         time = getTime(time)
       }
@@ -535,7 +538,12 @@ export default {
     },
     setInvalidStatus (isValueInvalid) {
       this.isValueInvalid = isValueInvalid
-      console.log('valid status is set')
+    },
+    setStartInvalidStatus (isStartValueInvalid) {
+      this.isStartValueInvalid = isStartValueInvalid
+    },
+    setEndInvalidStatus (isEndValueInvalid) {
+      this.isEndValueInvalid = isEndValueInvalid
     }
   }
 }

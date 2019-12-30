@@ -23,8 +23,12 @@ export default {
   data () {
     return {
       noTransition: false,
+      memorizedValue: null,
       ...TIME_CONST
     }
+  },
+  created () {
+    this.memorizedValue = this.value
   },
   methods: {
     clearValue () {
@@ -33,7 +37,7 @@ export default {
     handleBlur (e) {
       this.$emit('blur', e)
     },
-    banTransitionOneTick () {
+    disableTransitionOneTick () {
       if (this.active) {
         this.noTransition = true
         this.$nextTick().then(() => {

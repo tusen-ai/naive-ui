@@ -9,18 +9,28 @@
   }  
   @include b(date-picker) {
     @include m(invalid) {
-      @include b(input) {
-        @include e(input) {
-          text-decoration: line-through;
-          text-decoration-color: $--date-picker-text-decoration-color;
-        }
+      input {
+        text-decoration: line-through;
+        text-decoration-color: $--date-picker-text-decoration-color;
+      }
+    }
+    @include m(start-invalid) {
+      input:nth-of-type(1) {
+        text-decoration: line-through;
+        text-decoration-color: $--date-picker-text-decoration-color;
+      }
+    }
+    @include m(end-invalid) {
+      input:nth-of-type(2) {
+        text-decoration: line-through;
+        text-decoration-color: $--date-picker-text-decoration-color;
       }
     }
   } 
-  @include b(date-picker-panel) {
+  @include b(date-panel) {
     @include once {
       outline: none;
-      @include fade-in-scale-up-transition(date-picker-panel);
+      @include fade-in-scale-up-transition(date-panel);
       margin-top: 4px;
       margin-bottom: 4px;
       width: 350px;
@@ -28,9 +38,9 @@
       @include b(time-picker) {
         z-index: 1;
       }
-      @include b(date-picker-panel-calendar) {
+      @include b(date-panel-calendar) {
         width: 350px;
-        @include b(date-picker-panel-month-modifier) {
+        @include b(date-panel-month) {
           margin-top: 12px;
         }
       }
@@ -50,7 +60,7 @@
           }
         }
       }
-      @include b(date-picker-panel-input-wrapper) {
+      @include b(date-panel-input-wrapper) {
         @include once {
           flex: 1;
           align-items: center;
@@ -69,9 +79,7 @@
               top: 0;
               bottom: 0;
             }
-            path {
-              fill: $--date-picker-icon-color;
-            }
+            fill: $--date-picker-icon-color;
           }
         }
       }
@@ -84,7 +92,7 @@
         background: $--date-picker-divider-color;
       }
     }
-    @include b(date-picker-panel-input-wrapper) {
+    @include b(date-panel-input-wrapper) {
       @include once {
         padding: 14px 24px;
         display: flex;
@@ -95,11 +103,10 @@
         @include b(time-picker) {
           width: 145px;
         }
-        
       }
-      @include m(date-invalid) {
-        @include b(input) {
-          @include e(input) {
+      @include b(date-panel-date-input) {
+        @include m(invalid) {
+          input {
             text-decoration: line-through;
             text-decoration-color: $--date-picker-text-decoration-color;
           }
@@ -107,7 +114,7 @@
       }
       border-bottom: 1px solid $--date-picker-divider-color;
     }
-    @include b(date-picker-panel-month-modifier) {
+    @include b(date-panel-month) {
       @include once {
         display: flex;
         height: 41px;
@@ -124,9 +131,7 @@
         }
       }
       @include e(prev, next, fast-prev, fast-next) {
-        path {
-          fill: $--date-picker-icon-color;
-        }
+        fill: $--date-picker-icon-color;
       }
       @include e(month-year) {
         @include once {
@@ -139,7 +144,7 @@
         color: $--date-picker-month-text-color;
       }
     }
-    @include b(date-picker-panel-weekdays) {
+    @include b(date-panel-weekdays) {
       @include once {
         padding: 8px 24px 14px 24px;
         display: flex;
@@ -155,20 +160,14 @@
         color: $--date-picker-text-color;
       }
     }
-    @include b(date-picker-panel-dates) {
+    @include b(date-panel-dates) {
       @include once {
         padding: 8px 14px 8px 14px;
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
-        @include e(date-input) {
-          color: red;
-          @include m(error) {
-            color: red;
-          }
-        }
       }
-      @include e(date) {
+      @include b(date-panel-date) {
         @include once {
           position: relative;
           width: 24px;
@@ -181,12 +180,16 @@
           z-index: 0;
           cursor: pointer;
           transition: background-color .2s $--n-ease-in-out-cubic-bezier, color .2s $--n-ease-in-out-cubic-bezier;
-          @include m(no-transition) {
+          @include m(transition-disabled) {
             transition: none!important;
           }
         }
-        &:hover {
-          background-color: map-get($--date-picker-item-background-color, 'hover');
+        @include not-m(disabled) {
+          @include not-m(selected) {
+            &:hover {
+              background-color: map-get($--date-picker-item-background-color, 'hover');
+            }
+          }
         }
         @include m(current) {
           &::after {
@@ -203,21 +206,19 @@
             background-color: map-get($--date-picker-item-background-color, 'active');
           }
         }
-        @include m(in-display-month) {
-          @include m(in-span) {
-            @include not-m(selected) {
-              &::before {
-                @include once {
-                  content: "";
-                  z-index: -1;
-                  position: absolute;
-                  left: -11px;
-                  right: -11px;
-                  top: 0;
-                  bottom: 0;
-                }
-                background: map-get($--date-picker-item-background-color, 'hover');
+        @include m(covered) {
+          @include not-m(selected) {
+            &::before {
+              @include once {
+                content: "";
+                z-index: -1;
+                position: absolute;
+                left: -11px;
+                right: -11px;
+                top: 0;
+                bottom: 0;
               }
+              background: map-get($--date-picker-item-background-color, 'hover');
             }
           }
         }
@@ -233,9 +234,16 @@
             background-color: map-get($--date-picker-item-sup-color, 'active');
           }
         }
+        @include m(excluded) {
+          @include once {
+            opacity: 0.45;
+          }
+        }
         @include m(disabled) {
-          cursor: not-allowed;
-          opacity: 0.45;
+          @include once {
+            cursor: not-allowed;
+            opacity: 0.45 !important;
+          }
         }
       }
     }
@@ -246,7 +254,7 @@
         background-color: $--date-picker-divider-color;
       }
     }
-    @include b(date-picker-panel-actions) {
+    @include b(date-panel-actions) {
       @include once {
         flex: 1;
         height: 47px;
@@ -256,12 +264,6 @@
         @include b(button) {
           margin-bottom: 0;
           margin-right: 12px;
-        }
-        @include e(confirm) {
-          @include m(disabled) {
-            cursor: not-allowed;
-            opacity: 0.5;
-          }
         }
       }
       border-top: 1px solid $--date-picker-divider-color;

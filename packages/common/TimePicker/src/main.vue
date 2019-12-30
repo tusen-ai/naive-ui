@@ -275,15 +275,15 @@ export default {
       else return new Date(this.value)
     },
     computedHour () {
-      if (this.computedTime) return format(this.computedTime, 'HH')
+      if (this.computedTime) return Number(format(this.computedTime, 'HH'))
       else return null
     },
     computedMinute () {
-      if (this.computedTime) return format(this.computedTime, 'mm')
+      if (this.computedTime) return Number(format(this.computedTime, 'mm'))
       else return null
     },
     computedSecond () {
-      if (this.computedTime) return format(this.computedTime, 'ss')
+      if (this.computedTime) return Number(format(this.computedTime, 'ss'))
       else return null
     }
   },
