@@ -22,6 +22,7 @@
           <n-base-select-menu
             v-if="active"
             ref="contentInner"
+            auto-pending-first-option
             class="n-select-menu"
             :theme="synthesizedTheme"
             :pattern="value"
