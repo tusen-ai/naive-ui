@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import CancelIcon from './CancelIcon'
+import CancelIcon from './CancelIcon.vue'
 export default {
   name: 'NBaseCancelMark',
   components: { CancelIcon },

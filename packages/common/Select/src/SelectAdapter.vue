@@ -2,7 +2,7 @@
 /**
  * Warning: There are some potential problems if there are too many items!
  */
-import NSelect from './Select'
+import NSelect from './Select.vue'
 
 export default {
   name: 'NSelect',

@@ -64,9 +64,9 @@
 <script>
 import NScrollbar from '../../../common/Scrollbar'
 import linkedOptions from '../../../utils/data/linkedOptions'
-import NSelectOption from './SelectOption'
-import NSelectMenuLightBar from './SelectMenuLightBar'
-import NRenderOptions from './SelectRenderOptions'
+import NSelectOption from './SelectOption.vue'
+import NSelectMenuLightBar from './SelectMenuLightBar.vue'
+import NRenderOptions from './SelectRenderOptions.vue'
 import {
   createValueAttribute
 } from './utils'
