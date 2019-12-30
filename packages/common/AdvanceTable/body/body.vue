@@ -98,11 +98,11 @@ import { addClass, removeClass } from '../utils'
 import { storageMixin } from '../store'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
-import NScrollbar from '../../Scrollbar'
+// import NScrollbar from '../../Scrollbar'
 
 export default {
   components: {
-    NScrollbar,
+    // NScrollbar,
     row
   },
   mixins: [ withapp, themeable, storageMixin ],
