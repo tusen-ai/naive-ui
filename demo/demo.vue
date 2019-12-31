@@ -56,6 +56,10 @@ export default {
             {
               name: 'Nimbus Service Layout',
               path: `/${this.lang}/${this.theme}` + '/n-nimbus-service-layout'
+            },
+            {
+              name: 'New Nimbus Service Layout',
+              path: `/${this.lang}/${this.theme}` + '/n-nimbus-service-layout-new'
             }
           ]
         },

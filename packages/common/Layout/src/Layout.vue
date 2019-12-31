@@ -4,6 +4,7 @@
     :class="{
       [`n-layout--${mode}-positioned`]: mode,
       'n-layout--has-sider': hasSider,
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
     :style="{
       marginLeft: styleMarginLeft,
@@ -19,10 +20,12 @@
 
 <script>
 import layoutModeMixin from './layoutModeMixin'
+import themeable from '../../../mixins/themeable'
+import withapp from '../../../mixins/withapp'
 
 export default {
   name: 'NLayout',
-  mixins: [ layoutModeMixin ],
+  mixins: [ withapp, themeable, layoutModeMixin ],
   provide () {
     return {
       NLayout: this

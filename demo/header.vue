@@ -129,7 +129,6 @@ export default {
   align-items: center;
   padding-left: 44px;
   font-size: 18px;
-  transition: color .3s cubic-bezier(.4, 0, .2, 1);
 }
 .ui-logo > img {
   margin-right: 12px;

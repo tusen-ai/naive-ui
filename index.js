@@ -26,6 +26,7 @@ import Tabs from './packages/common/Tabs'
 import TimePicker from './packages/common/TimePicker'
 import Layout from './packages/common/Layout'
 import ServiceLayout from './packages/nimbus/ServiceLayout'
+import NewServiceLayout from './packages/nimbus/NewServiceLayout'
 import NimbusIcon from './packages/deprecated/Icon'
 import Scrollbar from './packages/common/Scrollbar'
 import Steps from './packages/common/Steps'
@@ -108,6 +109,7 @@ function install (Vue) {
   Card.install(Vue)
   Icon.install(Vue)
   ServiceLayout.install(Vue)
+  NewServiceLayout.install(Vue)
   Loader.install(Vue)
   Layout.install(Vue)
   GradientText.install(Vue)

@@ -75,11 +75,8 @@ export default {
       }
       return padding
     },
-    openNames () {
-      return this.NMenu.openNames || this.NMenu.defaultOpenNames
-    },
     isCollapsed () {
-      return !this.openNames.includes(this.name)
+      return !(this.NMenu.currentOpenNames.includes(this.name))
     }
   },
   methods: {

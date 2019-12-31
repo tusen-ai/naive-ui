@@ -2,12 +2,14 @@
 
 @include themes-mixin {
   @include b(layout) {
+    color: $--layout-text-color;
+    background-color: $--layout-back-color;
     @include once {
       box-sizing: border-box;
       position: relative;
       display: flex;
       flex-wrap: nowrap;
-      transition: margin-left .3s $--n-ease-in-out-cubic-bezier;
+      transition: margin-left .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
       flex-direction: column;
       overflow: auto;
       @include m(has-sider) {
@@ -117,6 +119,14 @@
         left: 0;
         top: 0;
         bottom: 0;
+        @include e(content) {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          overflow: auto;
+        }
       }
     }
     @include m(bordered) {
