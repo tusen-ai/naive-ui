@@ -116,6 +116,10 @@ export default {
     manuallyPositioned: {
       type: Boolean,
       default: false
+    },
+    flip: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
@@ -229,7 +233,7 @@ export default {
       // console.log(contentBoundingClientRect)
       // debugger
       // console.log('scroll', activatorBoundingClientRect, contentBoundingClientRect)
-      const [placementTransform, suggestedTransformOrigin] = calcPlacementTransfrom(this.placement, activatorBoundingClientRect, contentBoundingClientRect)
+      const [placementTransform, suggestedTransformOrigin] = calcPlacementTransfrom(this.placement, activatorBoundingClientRect, contentBoundingClientRect, this.flip)
       // console.log(this.trackingElement, this.positionMode, this.positionModeisAbsolute)
       if (this.positionModeisAbsolute) {
         const position = getPositionInAbsoluteMode(this.placement, suggestedTransformOrigin)

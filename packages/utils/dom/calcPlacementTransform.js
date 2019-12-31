@@ -19,7 +19,10 @@ const lengthToCompare = {
   right: 'width'
 }
 
-function getAdjustedPlacementOfTrackingElement (placement = 'bottom-start', trackedRect, trackingRect) {
+function getAdjustedPlacementOfTrackingElement (placement = 'bottom-start', trackedRect, trackingRect, flip) {
+  if (!flip) {
+    return placement
+  }
   let [direction, position] = placement.split('-')
   let newPosition = position
   if (position === 'start') {
@@ -141,7 +144,7 @@ function getPosition (placement, trackedRect, trackingRect) {
   return position
 }
 
-function calcPlacementTransform (placement, activatorRect, contentRect) {
+function calcPlacementTransform (placement, activatorRect, contentRect, flip) {
   const trackedRect = {
     left: parseInt(activatorRect.left),
     top: parseInt(activatorRect.top),
@@ -151,7 +154,7 @@ function calcPlacementTransform (placement, activatorRect, contentRect) {
     height: parseInt(activatorRect.height)
   }
   const trackingRect = contentRect
-  const adjustedPlacement = getAdjustedPlacementOfTrackingElement(placement, trackedRect, trackingRect)
+  const adjustedPlacement = getAdjustedPlacementOfTrackingElement(placement, trackedRect, trackingRect, flip)
   const suggesetedTransfromOrigin = getTransformOriginByPlacement(adjustedPlacement)
   const position = getPosition(adjustedPlacement, trackedRect, trackingRect)
   return [position, suggesetedTransfromOrigin]
