@@ -1,34 +1,32 @@
 # Basic
 ```html
-<div style="position:relative;height: 600px">
-{{openNames}}111
+<div style="position: relative; height: 600px">
  <n-nimbus-service-layout
     name="Oasis"
     :items="items"
     :disable-menu="disableMenu"
     v-model="selected"
-    :open-names="openNames"
     @openNamesChange="changeOpen"
     @select="changeSelect"
   >
-   <template v-slot:drawer-header-icon>
-              <md-musical-notes />
-            </template>
-            Take me to the place where you go<br>
-            Where nobody knows if it's night or day<br>
-            But please don't put your life in the hands<br>
-            Of a Rock n Roll band<br>
-            Who'll throw it all away
-            <n-button @click="disableMenu = !disableMenu">
-              toggleDisableMenu
-            </n-button>
-          </n-nimbus-service-layout>
+    <template v-slot:drawer-header-icon>
+      <md-musical-notes />
+    </template>
+    Take me to the place where you go<br>
+    Where nobody knows if it's night or day<br>
+    But please don't put your life in the hands<br>
+    Of a Rock n Roll band<br>
+    Who'll throw it all away
+    <n-button @click="disableMenu = !disableMenu">
+      toggleDisableMenu
+    </n-button>
   </n-nimbus-service-layout>
 </div>
 
 ```
 ```js
 import mdMusicalNotes from 'naive-ui/lib/icons/md-musical-notes'
+
 export default {
   components: {
     mdMusicalNotes
@@ -37,7 +35,6 @@ export default {
     return {
        disableMenu: false,
        selected: null,
-       openNames: [],
       items: [
         {
           name: 'n-config-provider',
@@ -57,10 +54,10 @@ export default {
   },
   methods: {
     changeOpen (names) {
-      console.log('names', names)
+      // console.log('names', names)
     },
     changeSelect (val) {
-      console.log('changeSelect', val)
+      // console.log('changeSelect', val)
     }
   }
 };
