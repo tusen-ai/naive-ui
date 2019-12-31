@@ -40,13 +40,13 @@ export default {
     openNames: {
       type: Array,
       default: () => {
-        return null
+        return undefined
       }
     },
     defaultOpenNames: {
       type: Array,
       default: () => {
-        return null
+        return undefined
       }
     }
 
@@ -202,7 +202,6 @@ export default {
             createMenu(this.items)
           )]
         ),
-        // this.$slots.default
         h('NLayout', {
           props: {
             'mode': 'absolute',

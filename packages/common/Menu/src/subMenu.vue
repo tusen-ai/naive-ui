@@ -75,19 +75,14 @@ export default {
       }
       return padding
     },
-    openNames () {
-      return this.NMenu.openNames || this.NMenu.defaultOpenNames || []
-    },
     isCollapsed () {
-      return !(this.openNames && this.openNames.includes(this.name))
+      return !(this.NMenu.currentOpenNames.includes(this.name))
     }
   },
   methods: {
     handleClick () {
-      console.log('enter Clickkkkk')
       if (!this.disabled) {
         this.NMenu.openKeysChangeCallback(this.name)
-        console.log('this.openNames', this.openNames)
         this.$emit('click', this)
       }
     }

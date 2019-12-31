@@ -1,7 +1,8 @@
-# items
+# DefaultOpenNames
 ```html
 <n-menu
   v-model="selected" 
+  :defaultOpenNames="opens"
   :items="items"
   @select="changeSelect"
   @openNamesChange="changeOpen"
@@ -13,18 +14,12 @@ export default {
   data () {
     return {
       selected: 'sub1',
+      initOpenKeys: ['subMenu', "subMenu2","subMenu22"],
+      opens: ['subMenu'],
       items: [
         {
-          title: 'num1',
-          name: 'num1',
-        },
-        {
-          title: 'num2',
-          name: 'num2',
-        },
-        {
-          title: 'num3',
-          name: 'num3',
+          title: 'menu1',
+          name: 'menu1',
         },
         {
           title: 'subMenu',
@@ -39,40 +34,10 @@ export default {
                   title: 'subsub001',
                   name: 'subsub001'
                 },
-              ]
-            }
-          ]
-        },
-        {
-          title: 'subMenu2',
-          name: 'subMenu2',
-          groupTitle: 'group1',
-          children: [
-            {
-              title:'sub2',
-              name: 'sub2',
-              children: [
                 {
                   title: 'subsub002',
                   name: 'subsub002'
-                },
-              ]
-            }
-          ]
-        },
-        {
-          title: 'subMenu3',
-          name: 'subMenu3',
-          groupTitle: 'group1',
-          children: [
-            {
-              title:'sub3',
-              name: 'sub3',
-              children: [
-                {
-                  title: 'subsub003',
-                  name: 'subsub003'
-                },
+                }
               ]
             }
           ]

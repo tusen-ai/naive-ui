@@ -1,8 +1,10 @@
-# Basic
+# Disabled
 ```html
 <div>
+  Slot:
   <n-menu 
     v-model="selected" 
+    :defaultOpenNames="initOpenKeys"
     @openNamesChange="changeOpen"
     @select="changeSelect"
 
@@ -13,12 +15,12 @@
     <n-menu-item title="num1" name="num1"></n-menu-item>
     <n-menu-item title="num2" name="num2"></n-menu-item>
     <n-menu-item title="num3" name="num3"></n-menu-item>
-    <n-sub-menu title="subMenu" name="subMenu">
+    <n-sub-menu title="subMenu" name="subMenu" disabled>
       <n-menu-item title="sub1" name="sub1"></n-menu-item>
     </n-sub-menu>
     <n-sub-menu title="subMenu2" name="subMenu2">
       <n-sub-menu title="subMenu22" name="subMenu22">
-        <n-menu-item title="sub222" name="sub222"></n-menu-item>
+        <n-menu-item title="sub222" name="sub222" disabled></n-menu-item>
       </n-sub-menu>
     </n-sub-menu>
     <n-sub-menu title="subMenu3" name="subMenu3">
@@ -28,6 +30,15 @@
       </n-item-group>
     </n-sub-menu>
   </n-menu>
+  Items:
+  <n-menu
+  v-model="selected" 
+  :openNames="opens"
+  :items="items"
+  @select="changeSelect"
+  @openNamesChange="changeOpen"
+  >
+</n-menu>
 </div>
 
 ```
@@ -36,6 +47,36 @@ export default {
   data () {
     return {
       selected: 'sub1',
+      initOpenKeys: [],
+      opens: [],
+      items: [
+        {
+          title: 'menu1',
+          name: 'menu1',
+          disabled: true,
+        },
+        {
+          title: 'subMenu',
+          name: 'subMenu',
+          groupTitle: 'group1',
+          children: [
+            {
+              title:'sub1',
+              name: 'sub1',
+              children: [
+                {
+                  title: 'subsub001',
+                  name: 'subsub001'
+                },
+                {
+                  title: 'subsub002',
+                  name: 'subsub002'
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   methods: {
