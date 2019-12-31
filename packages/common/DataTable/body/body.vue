@@ -9,7 +9,7 @@
   <!-- table body -->
   <div
     ref="scrollContainer"
-    class="n-table n-advance-table__body"
+    class="n-table n-data-table__body"
     :class="{
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
@@ -85,7 +85,7 @@
       </tbody>
       <!-- <div
     v-if="scrollBarHorizontalHeight"
-    class="n-advance-table-scroll-bar-placeholder"
+    class="n-data-table-scroll-bar-placeholder"
     :style="{ height: scrollBarHorizontalHeight + 'px' }"
   /> -->
     </table>
@@ -261,14 +261,14 @@ export default {
     computeTdClass (column, params) {
       let className = {}
       if (column.fixed) {
-        className['n-advance-table__td--fixed'] = true
+        className['n-data-table__td--fixed'] = true
       }
       if (column.ellipsis) {
-        className['n-advance-table__td-text'] = true
-        className['n-advance-table__td-text--ellipsis'] = true
+        className['n-data-table__td-text'] = true
+        className['n-data-table__td-text--ellipsis'] = true
 
-        //  'n-advance-table__td-text': true,
-        //     'n-advance-table__td-text--ellipsis': column.ellipsis
+        //  'n-data-table__td-text': true,
+        //     'n-data-table__td-text--ellipsis': column.ellipsis
       }
       if (!column.className) {
         return className

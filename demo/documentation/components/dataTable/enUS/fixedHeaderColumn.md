@@ -7,7 +7,7 @@ Note that:
 > Specify the width of columns if header and cell do not align properly. If specified width is not working or have gutter between columns, please try to leave one column at least without width to fit fluid layout, or make sure no long word to break table layout.A fixed value which is greater than table width for `scroll-x` is recommended. The sum of unfixed columns should not greater than `scroll-x`.
 
 ```html
-<n-advanced-table
+<n-data-table
   ref="table"
   :columns="columns"
   :data="data"
@@ -15,7 +15,7 @@ Note that:
   max-height="250px"
   scroll-x="1300px"
 >
-</n-advanced-table>
+</n-data-table>
 ```
 
 ```js

@@ -1,5 +1,5 @@
 <template>
-  <div class="n-advance-table__base-table-wrapper">
+  <div class="n-data-table__base-table-wrapper">
     <table-header
       ref="header"
       :height="headerHeight"

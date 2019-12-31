@@ -8,21 +8,21 @@
 <template>
   <div
     ref="tableWrapper"
-    class="n-advance-table__wrapper n-advance-table"
+    class="n-data-table__wrapper n-data-table"
     :class="{
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
-      'n-advance-table--col-border': colBorder,
-      'n-advance-table--no-data': showingData.length === 0
+      'n-data-table--col-border': colBorder,
+      'n-data-table--no-data': showingData.length === 0
     }"
   >
     <div
       ref="tbodyWrapper"
-      class="n-advance-table__tbody"
+      class="n-data-table__tbody"
       :style="tbodyWrapperStl"
     >
       <div
         v-if="fixedLeftColumn.length"
-        class="n-advance-table__fixed--left n-advance-table__fixed"
+        class="n-data-table__fixed--left n-data-table__fixed"
         :class="fixedLeftColumndClass"
       >
         <base-table
@@ -77,7 +77,7 @@
       </base-table>
       <div
         v-if="fixedRightColumn.length"
-        class="n-advance-table__fixed--right n-advance-table__fixed"
+        class="n-data-table__fixed--right n-data-table__fixed"
         :class="fixedRightColumndClass"
       >
         <base-table
@@ -106,7 +106,7 @@
 
       <!-- loading -->
       <transition name="n-table-loading--transition">
-        <div v-if="loading" class="n-advance-table__loading">
+        <div v-if="loading" class="n-data-table__loading">
           <n-spin
             :spinning="true"
             style="width:100%;overflow:hidden;z-index:200;position:absolute;top:50%;"
@@ -116,7 +116,7 @@
 
       <div
         v-if="showingData.length === 0 && !loading"
-        class="n-advance-table__no-data-tip"
+        class="n-data-table__no-data-tip"
       >
         No data
       </div>
@@ -125,7 +125,7 @@
     <div
       v-if="pagination !== false"
       :style="tbodyWrapperStl"
-      class="n-advance-table__pagination"
+      class="n-data-table__pagination"
     >
       <n-pagination
         v-model="currentPage"
@@ -160,7 +160,7 @@ const sortOrderReverseMap = {
 }
 
 export default {
-  name: 'NAdvancedTable',
+  name: 'NDataTable',
   components: {
     // searchInput,
     BaseTable
@@ -265,12 +265,12 @@ export default {
   computed: {
     fixedLeftColumndClass () {
       return {
-        'n-advance-table__fixed--active': this.horizontalScrollLeft > 0
+        'n-data-table__fixed--active': this.horizontalScrollLeft > 0
       }
     },
     fixedRightColumndClass () {
       return {
-        'n-advance-table__fixed--active': this.horizontalScrollLeft < this.tbodyWrapperWidth
+        'n-data-table__fixed--active': this.horizontalScrollLeft < this.tbodyWrapperWidth
       }
     },
     tbodyWrapperStl () {

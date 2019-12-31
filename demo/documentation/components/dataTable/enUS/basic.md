@@ -1,15 +1,13 @@
-# Ellipsis
-
-> Ellipsize cell content via setting `column.ellipsis`.
+# Basic Usage
 
 ```html
-<n-advanced-table
+<n-data-table
   ref="table"
   :columns="columns"
   :data="data"
   :pagination="pagination"
 >
-</n-advanced-table>
+</n-data-table>
 ```
 
 ```js
@@ -25,15 +23,24 @@ const _columns = $this => {
     },
     {
       title: "Address",
-      key: "address",
-      width: 100,
-      ellipsis: true
+      key: "address"
     },
     {
-      title: "Another Address",
-      key: "anotherAddress",
-      width: 100,
-      ellipsis: true
+      title: "Tags",
+      key: "tags",
+      render(h, params) {
+        const arr = params.row.tags.map(tagKey => {
+          return (
+            <n-tag
+              style="margin-right:5px;"
+              type={tagKey.length > 5 ? "warning" : "default"}
+            >
+              {tagKey}
+            </n-tag>
+          );
+        });
+        return arr;
+      }
     },
     {
       title: "Action",
@@ -55,7 +62,6 @@ const data = [
     name: "John Brown",
     age: 32,
     address: "New York No. 1 Lake Park",
-    anotherAddress: "New York No. 1 Lake Park",
     tags: ["nice", "developer"]
   },
   {
@@ -63,8 +69,6 @@ const data = [
     name: "Jim Green",
     age: 42,
     address: "London No. 1 Lake Park",
-    anotherAddress: "New York No. 1 Lake Park",
-
     tags: ["loser"]
   },
   {
@@ -72,8 +76,6 @@ const data = [
     name: "Joe Black",
     age: 32,
     address: "Sidney No. 1 Lake Park",
-    anotherAddress: "New York No. 1 Lake Park",
-
     tags: ["cool", "teacher"]
   }
 ];

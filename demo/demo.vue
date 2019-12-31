@@ -232,12 +232,12 @@ export default {
               group: true,
               childItems: [
                 {
-                  name: 'Table',
-                  path: `/${this.lang}/${this.theme}` + '/n-table'
-                },
-                {
                   name: 'Code',
                   path: `/${this.lang}/${this.theme}` + '/n-code'
+                },
+                {
+                  name: 'DataTable',
+                  path: `/${this.lang}/${this.theme}` + '/n-data-table'
                 },
                 {
                   name: 'Descriptions',

@@ -1,45 +1,62 @@
-# Custom Style
-
-> Row: Set row-class-name prop with a function to assign a class name to certain rows.
-> Column: Set className key to columns prop's object to assign a class name to a certain column.
+# Custom render column header
 
 ```html
-Custom row styles:
-
-<n-advanced-table
+<n-data-table
   ref="table"
   :columns="columns"
   :data="data"
   :pagination="pagination"
-  :row-class-name="rowClassName"
 >
-</n-advanced-table>
-
-Custom column styles:
-
-<n-advanced-table
-  ref="table"
-  :columns="columns1"
-  :data="data"
-  :pagination="pagination"
->
-</n-advanced-table>
+</n-data-table>
 ```
 
 ```js
+const toolTip = (h, activator, content) => {
+  const scopedSlots = {
+    activator: () => activator
+  };
+  return (
+    <n-tooltip arrow scopedSlots={scopedSlots}>
+      {content}
+    </n-tooltip>
+  );
+};
 const _columns = $this => {
   return [
     {
       title: "Name",
-      key: "name"
+      key: "name",
+      renderHeader(h, column) {
+        return toolTip(
+          h,
+          <n-gradient-text size="24" type="danger">
+            {column.title}
+          </n-gradient-text>,
+          "custom header: name"
+        );
+      }
     },
     {
       title: "Age",
-      key: "age"
+      key: "age",
+      renderHeader(h, column) {
+        return (
+          <n-gradient-text size="20" type="info">
+            {column.title}
+          </n-gradient-text>
+        );
+      }
     },
     {
       title: "Address",
-      key: "address"
+      key: "address",
+      renderHeader(h, column) {
+        return (
+          <n-gradient-text size="16" type="warning">
+            {column.title}
+          </n-gradient-text>
+        );
+      }
     },
     {
       title: "Tags",
@@ -99,26 +116,7 @@ export default {
   data() {
     return {
       data: data,
-      columns: _columns(this),
-      columns1: [
-        {
-          title: "Name",
-          key: "name"
-        },
-        {
-          title: "Age",
-          key: "age",
-          className: "age"
-        },
-        {
-          title: "Address",
-          key: "address"
-        },
-        {
-          title: "Tags",
-          key: "tags"
-        }
-      ]
+      columns: _columns(this)
     };
   },
   computed: {
@@ -129,23 +127,7 @@ export default {
   methods: {
     sendMail(rowData) {
       this.$NMessage.info("send mail to " + rowData.name);
-    },
-    rowClassName(params, index) {
-      console.log("TCL: rowClassName -> row", params, index);
-      if (params.row.age > 32) {
-        return "too-old";
-      }
-      return "";
     }
   }
 };
-```
-
-```css
-/deep/ .too-old {
-  color: red;
-}
-/deep/ .age {
-  background: skyblue;
-}
 ```

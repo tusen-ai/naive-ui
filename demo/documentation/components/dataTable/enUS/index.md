@@ -1,4 +1,4 @@
-# Table
+# DataTable
 
 <!--single-column-->
 

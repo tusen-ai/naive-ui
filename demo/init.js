@@ -48,7 +48,7 @@ import popconfirm from './documentation/components/popconfirm'
 import anchor from './documentation/components/anchor'
 import popselect from './documentation/components/popselect'
 import configProvider from './documentation/components/configProvider'
-import table from './documentation/components/table'
+import dataTable from './documentation/components/dataTable'
 import typography from './documentation/components/typography'
 import transfer from './documentation/components/transfer'
 import spin from './documentation/components/spin'
@@ -162,7 +162,7 @@ const routes = [
       { path: '/n-button', component: button },
       { path: '/n-switch', component: nswitch },
       // { path: '/n-table', component: tableDemo },
-      { path: '/n-table', component: table },
+      { path: '/n-data-table', component: dataTable },
       { path: '/n-input', component: input },
       { path: '/n-select', component: select },
       { path: '/n-cascader', component: cascader },

@@ -1,28 +1,22 @@
-# Selection
+# Fixed Header
 
-Rows can be selectable by making first column as a selectable column.
+Display large amounts of data in scrollable view.
 
 ```html
-selected items: {{selectedData.length}}
-<n-advanced-table
+<n-data-table
   ref="table"
   :columns="columns"
   :data="data"
   :pagination="pagination"
+  max-height="250px"
   @on-selected-change="onSelectedChange"
 >
-</n-advanced-table>
+</n-data-table>
 ```
 
 ```js
 const _columns = $this => {
   return [
-    {
-      type: "selection",
-      disabled(params, index) {
-        return params.row.name === "Edward King 3";
-      }
-    },
     {
       title: "Name",
       key: "name"
@@ -57,7 +51,7 @@ export default {
   },
   computed: {
     pagination() {
-      return { total: this.data.length, limit: 5 };
+      return { total: this.data.length, limit: 10 };
     }
   },
   methods: {

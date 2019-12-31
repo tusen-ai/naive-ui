@@ -2,7 +2,7 @@
 @import "./themes/vars.scss";
 
 @include themes-mixin {
-  @include b(advance-table--col-border) {
+  @include b(data-table--col-border) {
     table {
       thead {
         tr {
@@ -20,28 +20,28 @@
       }
     }
   }
-  @include b(advance-table) {
-    .n-advance-table__fixed {
+  @include b(data-table) {
+    .n-data-table__fixed {
       display: inline-block;
       position: absolute;
       z-index: 100;
       overflow: hidden;
       top: 0px;
       // box-shadow: 10px 0 16px 3px rgba(0, 0, 0, 0.2);
-      .n-table.n-advance-table__body {
+      .n-table.n-data-table__body {
         width: auto;
         box-shadow: none;
         overflow-y: auto;
         border-radius: 0;
       }
-      .n-advance-table__base-table-wrapper {
+      .n-data-table__base-table-wrapper {
         overflow: unset;
       }
       table {
         width: auto;
       }
     }
-    .n-advance-table__td--fixed {
+    .n-data-table__td--fixed {
       visibility: hidden;
     }
     @include e(fixed) {

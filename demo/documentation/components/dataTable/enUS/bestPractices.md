@@ -9,7 +9,7 @@
 >
 <n-button @click="clearFiltersAndSorters">clear filters and sorters</n-button>
 
-<n-advanced-table
+<n-data-table
   style="margin-top:10px;"
   ref="table"
   :columns="columns"
@@ -20,7 +20,7 @@
   scroll-x="1500px"
   @on-change="onChange"
 >
-</n-advanced-table>
+</n-data-table>
 ```
 
 ```js

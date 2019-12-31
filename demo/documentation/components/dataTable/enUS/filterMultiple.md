@@ -1,7 +1,9 @@
-# Async filter items
+# Filter multiple
 
 ```html
-<n-advanced-table
+<n-button @click="clearFilters">clear filters</n-button>
+
+<n-data-table
   style="margin-top:10px;"
   ref="table"
   :columns="columns"
@@ -9,7 +11,7 @@
   :pagination="pagination"
   @on-change="onChange"
 >
-</n-advanced-table>
+</n-data-table>
 ```
 
 ```js
@@ -26,7 +28,7 @@ const getFilters = () => {
           value: "New York"
         }
       ]);
-    }, 10000);
+    }, 3000);
   });
 };
 const _columns = $this => {
@@ -38,13 +40,27 @@ const _columns = $this => {
     {
       title: "Age",
       key: "age",
-      defaultSortOrder: "ascend"
+      filterable: true,
+      filterMultiple: true,
+      filterItems: [
+        {
+          label: "32",
+          value: 32
+        },
+        {
+          label: 42,
+          value: 42
+        }
+      ],
+      filter(value, record) {
+        return record.age === value;
+      }
     },
     {
       title: "Address",
       key: "address",
       filterable: true,
-      defaultFilter: "London",
+      filterMultiple: true,
       asyncFilterItems() {
         return getFilters().then(list => {
           return list;
@@ -99,6 +115,9 @@ export default {
   methods: {
     onChange({ filter, sorter, pagination }) {
       console.log(filter, sorter, pagination);
+    },
+    clearFilters() {
+      this.$refs.table.filter(null);
     }
   }
 };

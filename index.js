@@ -2,7 +2,7 @@ import Card from './packages/common/Card'
 import Icon from './packages/common/Icon'
 import GradientText from './packages/common/GradientText'
 import Table from './packages/common/Table'
-import AdvanceTable from './packages/common/AdvanceTable'
+import DataTable from './packages/common/DataTable'
 import CheckBox from './packages/common/Checkbox'
 import RoundButton from './packages/common/Button'
 import Switch from './packages/common/Switch'
@@ -111,7 +111,7 @@ function install (Vue) {
   Layout.install(Vue)
   GradientText.install(Vue)
   Table.install(Vue)
-  AdvanceTable.install(Vue)
+  DataTable.install(Vue)
   CheckBox.install(Vue)
   RoundButton.install(Vue)
   Switch.install(Vue)

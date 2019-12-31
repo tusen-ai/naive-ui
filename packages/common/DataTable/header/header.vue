@@ -10,7 +10,7 @@
     ref="header"
     style="padding:0;border-bottom-left-radius:0;border-bottom-right-radius:0;"
     :style="colHeaderGroupStl"
-    class="n-advance-table__header"
+    class="n-data-table__header"
   >
     <colgroup>
       <col
@@ -53,7 +53,7 @@
               v-if="column.sortable"
               :ref="'sorter_' + (column.key || i)"
               :value="sortIndexs[column.key || i]"
-              class="n-advance-table__header-icon"
+              class="n-data-table__header-icon"
               :column="column"
               :index="i"
               :current-key="currentKey"
@@ -69,7 +69,7 @@
                   (column.filterItems || column.asyncFilterItems)
               "
               v-model="selectedFilter[column.key]"
-              class="n-advance-table__header-icon"
+              class="n-data-table__header-icon"
               :column="column"
               :items="column.filterItems || column.asyncFilterItems"
               @on-filter="onFilter"
@@ -176,9 +176,9 @@ export default {
     },
     computeThClass (column) {
       const classes = {
-        'n-advance-table__sortable-column': column.sortable,
-        'n-advance-table__td-text': column.ellipsis,
-        'n-advance-table__td-text--ellipsis': column.ellipsis
+        'n-data-table__sortable-column': column.sortable,
+        'n-data-table__td-text': column.ellipsis,
+        'n-data-table__td-text--ellipsis': column.ellipsis
       }
       return classes
     },
