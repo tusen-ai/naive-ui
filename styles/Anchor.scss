@@ -12,7 +12,7 @@
         left: 2px;
         width: 100%;
         max-width: 0;
-        transition: top .15s $--n-ease-in-out-cubic-bezier, max-width .15s $--n-ease-in-out-cubic-bezier;
+        transition: top .15s $--n-ease-in-out-cubic-bezier, max-width .15s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
         border-top-right-radius: 10.5px;
         border-bottom-right-radius: 10.5px;
       }

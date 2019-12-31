@@ -1,8 +1,8 @@
 /* istanbul ignore file */
-import Scaffold from './src/main.vue'
+import DatePicker from './src/DatePicker.vue'
 
-Scaffold.install = function (Vue) {
-  Vue.component(Scaffold.name, Scaffold)
+DatePicker.install = function (Vue) {
+  Vue.component(DatePicker.name, DatePicker)
 }
 
-export default Scaffold
+export default DatePicker

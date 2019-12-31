@@ -4,7 +4,7 @@
  * Todo: Refactor to avoid link list, since it will make component intrinsic
  * logic more complex
  */
-import cloneDeep from 'lodash/cloneDeep'
+import cloneDeep from 'lodash-es/cloneDeep'
 
 function markAvailableOptionValues (options) {
   const length = options.length

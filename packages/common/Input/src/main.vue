@@ -376,27 +376,32 @@ export default {
         }
       }
     },
-    triggerBlur (e, fromWrapper = false) {
-      // if (fromWrapper) return
+    triggerBlur (e, blurTargetIsWrapper = false) {
+      /**
+       * In Chrome, Firefox, Safari, this only happens when devtool opened
+       * However only Chrome and Firefox will refocus at input element
+       */
+      const devtoolIsOpened = e.target === document.activeElement
       if (!(
-        // document.activeElement === this.$refs.wrapper ||
         document.activeElement === this.$refs.textarea ||
         document.activeElement === this.$refs.input ||
         document.activeElement === this.$refs.secondInput
-      ) || e.target === document.activeElement) {
-        // prev line is for devtool case
-        if (!fromWrapper) {
+      ) || devtoolIsOpened) {
+        if (!blurTargetIsWrapper) {
+          if (devtoolIsOpened && this.pressEnterToActivateInput) {
+            this.$refs.wrapper.focus()
+          }
           this.$emit('blur', e, this.value)
         } else {
           this.$emit('wrapper-blur-to-outside', this.value)
         }
       }
     },
-    triggerBlurAsync (e, fromWrapper = false) {
-      if (!fromWrapper) this.waitingBlurCallback = true
+    triggerBlurAsync (e, blurTargetIsWrapper = false) {
+      if (!blurTargetIsWrapper) this.waitingBlurCallback = true
       window.setTimeout(() => {
-        this.triggerBlur(e, fromWrapper)
-        if (!fromWrapper) this.waitingBlurCallback = false
+        this.triggerBlur(e, blurTargetIsWrapper)
+        if (!blurTargetIsWrapper) this.waitingBlurCallback = false
       }, 0)
     },
     handleWrapperBlur (e) {

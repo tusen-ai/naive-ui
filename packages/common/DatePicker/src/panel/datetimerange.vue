@@ -1,21 +1,24 @@
 <template>
-  <transition name="n-date-picker-panel--transition">
+  <transition name="n-date-panel--transition">
     <div
-      v-if="active"
+      v-show="active"
       ref="self"
       tabindex="0"
-      class="n-date-picker-panel n-date-picker-panel--datetimerange"
+      class="n-date-panel n-date-panel--datetimerange"
       :class="{
         [`n-${theme}-theme`]: theme
       }"
       @click.capture="resetSelectingStatus"
     >
       <div
-        class="n-date-picker-panel-input-wrapper"
+        class="n-date-panel-input-wrapper"
       >
         <n-input
           v-model="startDateDisplayString"
-          class="n-date-picker-panel-dates__date-input"
+          class="n-date-panel-date-input"
+          :class="{
+            'n-date-panel-date-input--invalid': isStartValueInvalid
+          }"
           placeholder="Select date"
           @blur="handleStartDateInputBlur"
           @input="handleStartDateInput"
@@ -23,22 +26,24 @@
         <n-time-picker
           :detached="false"
           position-mode="absolute"
-          class="n-date-picker-panel__time-input"
           :value="startTimeValue"
-          :hour-disabled="isStartHourDisabled(currentDate)"
-          :minute-disabled="isStartMinuteDisabled(currentDate)"
-          :second-disabled="isStartSecondDisabled(currentDate)"
+          :is-hour-disabled="isStartHourDisabled"
+          :is-minute-disabled="isStartMinuteDisabled"
+          :is-second-disabled="isStartSecondDisabled"
           stop-selector-bubble
           @input="handleStartTimePickerInput"
         />
-        <div class="n-date-picker-panel-input-wrapper__arrow">
+        <div class="n-date-panel-input-wrapper__arrow">
           <n-base-icon
             type="forward"
           />
         </div>
         <n-input
           v-model="endDateDisplayString"
-          class="n-date-picker-panel-dates__date-input"
+          class="n-date-panel-date-input"
+          :class="{
+            'n-date-panel-date-input--invalid': isEndValueInvalid
+          }"
           placeholder="Select date"
           @blur="handleEndDateInputBlur"
           @input="handleEndDateInput"
@@ -46,23 +51,21 @@
         <n-time-picker
           :detached="false"
           position-mode="absolute"
-          class="n-date-picker-panel__time-input"
           :value="endTimeValue"
-          :hour-disabled="isEndHourDisabled(currentDate)"
-          :minute-disabled="isEndMinuteDisabled(currentDate)"
-          :second-disabled="isEndSecondDisabled(currentDate)"
-          :is-error-val="isErrorEndTime"
+          :is-hour-disabled="isEndHourDisabled"
+          :is-minute-disabled="isEndMinuteDisabled"
+          :is-second-disabled="isEndSecondDisabled"
           stop-selector-bubble
           @input="handleEndTimePickerInput"
         />
       </div>
       <div
         ref="startDates"
-        class="n-date-picker-panel-calendar"
+        class="n-date-panel-calendar"
       >
-        <div class="n-date-picker-panel-month-modifier">
+        <div class="n-date-panel-month">
           <div
-            class="n-date-picker-panel-month-modifier__fast-prev"
+            class="n-date-panel-month__fast-prev"
             @click="startCalendarPrevYear"
           >
             <n-base-icon
@@ -70,18 +73,18 @@
             />
           </div>
           <div
-            class="n-date-picker-panel-month-modifier__prev"
+            class="n-date-panel-month__prev"
             @click="startCalendarPrevMonth"
           >
             <n-base-icon
               type="backward"
             />
           </div>
-          <div class="n-date-picker-panel-month-modifier__month-year">
+          <div class="n-date-panel-month__month-year">
             {{ startCalendarMonth }} {{ startCalendarYear }}
           </div>
           <div
-            class="n-date-picker-panel-month-modifier__next"
+            class="n-date-panel-month__next"
             @click="startCalendarNextMonth"
           >
             <n-base-icon
@@ -89,7 +92,7 @@
             />
           </div>
           <div
-            class="n-date-picker-panel-month-modifier__fast-next"
+            class="n-date-panel-month__fast-next"
             @click="startCalendarNextYear"
           >
             <n-base-icon
@@ -97,30 +100,30 @@
             />
           </div>
         </div>
-        <div class="n-date-picker-panel-weekdays">
+        <div class="n-date-panel-weekdays">
           <div
             v-for="weekday in weekdays"
             :key="weekday"
-            class="n-date-picker-panel-weekdays__day"
+            class="n-date-panel-weekdays__day"
           >
             {{ weekday }}
           </div>
         </div>
-        <div class="n-date-picker-panel__divider" />
+        <div class="n-date-panel__divider" />
         <div
-          class="n-date-picker-panel-dates"
+          class="n-date-panel-dates"
         >
           <div
             v-for="(dateItem, i) in startDateArray"
             :key="i"
-            class="n-date-picker-panel-dates__date"
+            class="n-date-panel-date"
             :class="{
-              'n-date-picker-panel-dates__date--current': dateItem.isCurrentDate,
-              'n-date-picker-panel-dates__date--selected': dateItem.isSelectedDate,
-              'n-date-picker-panel-dates__date--in-display-month': dateItem.isDateOfDisplayMonth,
-              'n-date-picker-panel-dates__date--in-span': dateItem.isInSpan,
-              'n-date-picker-panel-dates__date--no-transition': noTransition,
-              'n-date-picker-panel-dates__date--disabled': dateDisabled(dateItem.timestamp)
+              'n-date-panel-date--current': dateItem.isCurrentDate,
+              'n-date-panel-date--selected': dateItem.isSelectedDate,
+              'n-date-panel-date--excluded': !dateItem.isDateOfDisplayMonth,
+              'n-date-panel-date--covered': dateItem.isInSpan,
+              'n-date-panel-date--transition-disabled': noTransition,
+              'n-date-panel-date--disabled': isCalendarDateDisabled(dateItem.timestamp)
             }"
             @click="handleDateClick(dateItem)"
             @mouseenter="handleDateMouseEnter(dateItem)"
@@ -129,14 +132,14 @@
           </div>
         </div>
       </div>
-      <div><div class="n-date-picker-panel__vertical-divider" /></div>
+      <div><div class="n-date-panel__vertical-divider" /></div>
       <div
         ref="endDates"
-        class="n-date-picker-panel-calendar"
+        class="n-date-panel-calendar"
       >
-        <div class="n-date-picker-panel-month-modifier">
+        <div class="n-date-panel-month">
           <div
-            class="n-date-picker-panel-month-modifier__fast-prev"
+            class="n-date-panel-month__fast-prev"
             @click="endCalendarPrevYear"
           >
             <n-base-icon
@@ -144,18 +147,18 @@
             />
           </div>
           <div
-            class="n-date-picker-panel-month-modifier__prev"
+            class="n-date-panel-month__prev"
             @click="endCalendarPrevMonth"
           >
             <n-base-icon
               type="backward"
             />
           </div>
-          <div class="n-date-picker-panel-month-modifier__month-year">
+          <div class="n-date-panel-month__month-year">
             {{ endCalendarMonth }} {{ endCalendarYear }}
           </div>
           <div
-            class="n-date-picker-panel-month-modifier__next"
+            class="n-date-panel-month__next"
             @click="endCalendarNextMonth"
           >
             <n-base-icon
@@ -163,7 +166,7 @@
             />
           </div>
           <div
-            class="n-date-picker-panel-month-modifier__fast-next"
+            class="n-date-panel-month__fast-next"
             @click="endCalendarNextYear"
           >
             <n-base-icon
@@ -171,30 +174,30 @@
             />
           </div>
         </div>
-        <div class="n-date-picker-panel-weekdays">
+        <div class="n-date-panel-weekdays">
           <div
             v-for="weekday in weekdays"
             :key="weekday"
-            class="n-date-picker-panel-weekdays__day"
+            class="n-date-panel-weekdays__day"
           >
             {{ weekday }}
           </div>
         </div>
-        <div class="n-date-picker-panel__divider" />
+        <div class="n-date-panel__divider" />
         <div
-          class="n-date-picker-panel-dates"
+          class="n-date-panel-dates"
         >
           <div
             v-for="(dateItem, i) in endDateArray"
             :key="i"
-            class="n-date-picker-panel-dates__date"
+            class="n-date-panel-date"
             :class="{
-              'n-date-picker-panel-dates__date--current': dateItem.isCurrentDate,
-              'n-date-picker-panel-dates__date--selected': dateItem.isSelectedDate,
-              'n-date-picker-panel-dates__date--in-display-month': dateItem.isDateOfDisplayMonth,
-              'n-date-picker-panel-dates__date--in-span': dateItem.isInSpan,
-              'n-date-picker-panel-dates__date--no-transition': noTransition,
-              'n-date-picker-panel-dates__date--disabled': dateDisabled(dateItem.timestamp)
+              'n-date-panel-date--current': dateItem.isCurrentDate,
+              'n-date-panel-date--selected': dateItem.isSelectedDate,
+              'n-date-panel-date--excluded': !dateItem.isDateOfDisplayMonth,
+              'n-date-panel-date--covered': dateItem.isInSpan,
+              'n-date-panel-date--transition-disabled': noTransition,
+              'n-date-panel-date--disabled': isCalendarDateDisabled(dateItem.timestamp)
             }"
             @click="handleDateClick(dateItem)"
             @mouseenter="handleDateMouseEnter(dateItem)"
@@ -209,7 +212,7 @@
       </div>
       <div
         v-if="actions && actions.length"
-        class="n-date-picker-panel-actions"
+        class="n-date-panel-actions"
       >
         <n-button
           v-if="actions.includes('clear')"
@@ -221,10 +224,7 @@
         </n-button>
         <n-button
           v-if="actions.includes('confirm')"
-          class="n-date-picker-panel-actions__confirm"
-          :class="{
-            'n-date-picker-panel-actions__confirm--disabled': isErrorDateTime
-          }"
+          :disabled="isRangeInvalid"
           size="tiny"
           round
           auto-text-color
@@ -244,7 +244,6 @@
 </template>
 
 <script>
-// import moment from 'moment'
 import NButton from '../../../Button'
 import NTimePicker from '../../../TimePicker'
 import NInput from '../../../Input'
@@ -291,12 +290,12 @@ export default {
     }
   },
   watch: {
-    active (newActive) {
-      if (newActive) {
-        this.initialValue = this.value
+    active (value) {
+      if (value) {
+        this.memorizedValue = this.value
         this.syncCalendarTimeWithValue(this.value)
-      } else if (this.isErrorDateTime) {
-        this.$emit('input', this.initialTime)
+      } else if (this.isRangeInvalid) {
+        this.$emit('input', this.memorizedValue)
       }
     },
     valueAsDateArray (newValue) {
@@ -323,6 +322,7 @@ export default {
       this.startDateDisplayString = ''
       this.endDateDisplayString = ''
     }
+    this.memorizedValue = this.value
   },
   methods: {
     adjustValue (datetime) {

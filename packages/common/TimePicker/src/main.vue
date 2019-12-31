@@ -1,12 +1,15 @@
 <template>
-  <div class="n-time-picker">
+  <div
+    class="n-time-picker"
+    :class="{
+      'n-time-picker--invalid': isValueInvalid,
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+    }"
+  >
     <n-input
       ref="activator"
       v-model="displayTimeString"
-      class="n-date-picker-panel__time-input n-time-picker-input"
-      :class="{
-        'n-time-picker-input--error': isErrorValue
-      }"
+      class="n-time-picker-input"
       :force-focus="active"
       placeholder="Select time"
       lazy-focus
@@ -42,6 +45,10 @@
             <div class="n-time-picker-selector-time">
               <div
                 class="n-time-picker-selector-time-row"
+                :class="{
+                  'n-time-picker-selector-time-row--invalid': isHourInvalid,
+                  'n-time-picker-selector-time-row--transition-disabled': hourTransitionDisabled
+                }"
               >
                 <n-scrollbar ref="hours">
                   <div
@@ -50,21 +57,24 @@
                     class="n-time-picker-selector-time-row__item"
                     :class="{
                       'n-time-picker-selector-time-row__item--active': hour === computedHour,
-                      'n-time-picker-selector-time-row__item--disabled': isHourDisabled(hour)
+                      'n-time-picker-selector-time-row__item--disabled':
+                        isHourDisabled(hour)
                     }"
-                    @click="setHours(hour)"
+                    @click="handleHourClick(hour)"
                   >
                     {{ hour }}
                   </div>
                   <div
-                    v-for="i in [1, 2, 3, 4, 5, 6]"
-                    :key="i"
-                    style="height: 35px;"
+                    style="height: 210px;"
                   />
                 </n-scrollbar>
               </div>
               <div
                 class="n-time-picker-selector-time-row"
+                :class="{
+                  'n-time-picker-selector-time-row--transition-disabled': minuteTransitionDisabled,
+                  'n-time-picker-selector-time-row--invalid': isMinuteInvalid
+                }"
               >
                 <n-scrollbar ref="minutes">
                   <div
@@ -73,21 +83,23 @@
                     class="n-time-picker-selector-time-row__item"
                     :class="{
                       'n-time-picker-selector-time-row__item--active': minute === computedMinute,
-                      'n-time-picker-selector-time-row__item--disabled': isMinuteDisabled(minute)
+                      'n-time-picker-selector-time-row__item--disabled': isMinuteDisabled(minute, computedHour)
                     }"
-                    @click="setMinutes(minute)"
+                    @click="handleMinuteClick(minute)"
                   >
                     {{ minute }}
                   </div>
                   <div
-                    v-for="i in [1, 2, 3, 4, 5, 6]"
-                    :key="i"
-                    style="height: 35px;"
+                    style="height: 210px;"
                   />
                 </n-scrollbar>
               </div>
               <div
                 class="n-time-picker-selector-time-row"
+                :class="{
+                  'n-time-picker-selector-time-row--invalid': isSecondInvalid,
+                  'n-time-picker-selector-time-row--transition-disabled': secondTransitionDisabled,
+                }"
               >
                 <n-scrollbar ref="seconds">
                   <div
@@ -97,18 +109,14 @@
                     :class="{
                       'n-time-picker-selector-time-row__item--active':
                         second === computedSecond,
-                      'n-time-picker-selector-time-row__item--disabled':
-                        isSecondDisabled(second) ||
-                        (validator && !validator(computedHour, computedMinute, second))
+                      'n-time-picker-selector-time-row__item--disabled': isSecondDisabled(second, computedMinute, computedHour)
                     }"
-                    @click="setSeconds(second)"
+                    @click="handleSecondClick(second)"
                   >
                     {{ second }}
                   </div>
                   <div
-                    v-for="i in [1, 2, 3, 4, 5, 6]"
-                    :key="i"
-                    style="height: 35px;"
+                    style="height: 210px;"
                   />
                 </n-scrollbar>
               </div>
@@ -127,9 +135,7 @@
                 auto-text-color
                 type="primary"
                 class="n-time-picker-selector-actions__confirm"
-                :class="{
-                  'n-time-picker-selector-actions__confirm--disabled': isErrorVal
-                }"
+                :disabled="isValueInvalid"
                 @click="handleConfirmClick"
               >
                 Confirm
@@ -175,28 +181,7 @@ const TIME_CONST = {
   seconds: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59']
 }
 
-// function ranges () {
-
-// }
-
-// function validateRange (ranges) {
-//   const rangeReg = /((\d\d):(\d\d):(\d\d))\s*-\s*((\d\d):(\d\d):(\d\d))/
-//   if (typeof ranges === 'string') {
-//     const result = ranges.match(rangeReg)
-//     if (!result) return false
-//     else {
-//       const [time1, hour1, min1, sec1, time2, hour2, min2, sec2] = result.slice(1)
-//       if ()
-//     }
-//   } else if (Array.isArray(ranges)) {
-
-//   } else {
-//     return false
-//   }
-// }
-
 /**
- * Use range to disabled time since validator will need time picker to loop all available options.
  * Warning: this component shouldn't change v-model's timestamp's date
  */
 export default {
@@ -222,23 +207,19 @@ export default {
       type: String,
       default: DEFAULT_FORMAT
     },
-    validator: {
-      type: Function,
-      default: null
-    },
-    hourDisabled: {
+    isHourDisabled: {
       type: Function,
       default: () => {
         return false
       }
     },
-    minuteDisabled: {
+    isMinuteDisabled: {
       type: Function,
       default: () => {
         return false
       }
     },
-    secondDisabled: {
+    isSecondDisabled: {
       type: Function,
       default: () => {
         return false
@@ -251,80 +232,89 @@ export default {
       displayTimeString: this.value === null ? null : format(this.value, this.format),
       ...TIME_CONST,
       memorizedValue: this.value,
-      selectedHour: null,
-      selectedMinute: null,
-      selectedSecond: null
-      // isErrorVal: false
+      hourTransitionDisabled: false,
+      minuteTransitionDisabled: false,
+      secondTransitionDisabled: false
     }
   },
   computed: {
+    isHourInvalid () {
+      if (this.value === null) return false
+      return this.isHourDisabled(this.computedHour)
+    },
+    isMinuteInvalid () {
+      if (this.value === null) return false
+      return this.isMinuteDisabled(this.computedMinute, this.computedHour)
+    },
+    isSecondInvalid () {
+      if (this.value === null) return false
+      return this.isSecondDisabled(this.computedSecond, this.computedMinute, this.computedHour)
+    },
+    isValueInvalid () {
+      return this.isHourInvalid || this.isMinuteInvalid || this.isSecondInvalid
+    },
+    message () {
+      const invalidUnits = []
+      if (this.isHourInvalid) {
+        invalidUnits.push('hour')
+      }
+      if (this.isMinuteInvalid) {
+        invalidUnits.push('minute')
+      }
+      if (this.isSecondInvalid) {
+        invalidUnits.push('second')
+      }
+      if (invalidUnits.length) {
+        return invalidUnits.join(', ') + 'is invalid'
+      } else {
+        return null
+      }
+    },
     computedTime () {
       if (this.value === null) return null
       else return new Date(this.value)
     },
     computedHour () {
-      if (this.computedTime) return format(this.computedTime, 'HH')
+      if (this.computedTime) return Number(format(this.computedTime, 'HH'))
       else return null
     },
     computedMinute () {
-      if (this.computedTime) return format(this.computedTime, 'mm')
+      if (this.computedTime) return Number(format(this.computedTime, 'mm'))
       else return null
     },
     computedSecond () {
-      if (this.computedTime) return format(this.computedTime, 'ss')
+      if (this.computedTime) return Number(format(this.computedTime, 'ss'))
       else return null
-    },
-    isHourDisabled () {
-      let self = this
-      return function (hour) {
-        return self.hourDisabled(Number(hour)) || false
-      }
-    },
-    isMinuteDisabled () {
-      let self = this
-      return function (minute) {
-        return self.minuteDisabled(Number(minute), Number(self.computedHour)) || false
-      }
-    },
-    isSecondDisabled () {
-      let self = this
-      return function (second) {
-        return self.secondDisabled(Number(second), Number(this.computedMinute), Number(self.computedHour)) || false
-      }
-    },
-    isErrorVal () {
-      return this.isHourDisabled(this.computedHour) || this.isMinuteDisabled(this.computedMinute) ||
-    this.isSecondDisabled(this.computedSecond)
     }
   },
   watch: {
-    computedTime (time) {
-      this.refreshTimeString(time)
+    computedTime (value) {
+      this.refreshTimeString(value)
       this.$nextTick().then(this.scrollTimer)
     },
     value (value, oldValue) {
       this.$emit('change', value, oldValue)
-      // this.checkValue()
     },
-    active (newVal) {
-      if (!newVal) {
-        if (this.isErrorVal) {
-          this.$emit('input', this.memorizedValue)
-        }
+    active (value) {
+      if (this.isValueInvalid) {
+        this.$emit('input', this.memorizedValue)
       }
     }
   },
-  // mounted () {
-  //   this.checkValue()
-  // },
   methods: {
+    disableTransitionOneTick (unit) {
+      this[unit + 'TransitionDisabled'] = true
+      this.$nextTick().then(() => {
+        this[unit + 'TransitionDisabled'] = false
+      })
+    },
     afterBlur (e) {
       if (this.active) {
-        window.setTimeout(() => {
+        this.$nextTick().then(() => {
           if (!(this.$refs.panel && this.$refs.panel.contains(document.activeElement))) {
             this.closeTimeSelector()
           }
-        }, 0)
+        })
       }
     },
     justifyValueAfterChangeDisplayTimeString () {
@@ -342,7 +332,7 @@ export default {
         }
       }
     },
-    setHours (hour) {
+    handleHourClick (hour) {
       if (this.isHourDisabled(hour)) {
         return
       }
@@ -351,10 +341,10 @@ export default {
       } else {
         this.$emit('input', getTime(setHours(this.value, hour)))
       }
-      this.selectedHour = hour
+      this.disableTransitionOneTick('hour')
     },
-    setMinutes (minute) {
-      if (this.isMinuteDisabled(minute)) {
+    handleMinuteClick (minute) {
+      if (this.isMinuteDisabled(minute, this.computedHour)) {
         return
       }
       if (this.value === null) {
@@ -362,10 +352,10 @@ export default {
       } else {
         this.$emit('input', getTime(setMinutes(this.value, minute)))
       }
-      this.selectedMinute = minute
+      this.disableTransitionOneTick('minute')
     },
-    setSeconds (second) {
-      if (this.isSecondDisabled(second)) {
+    handleSecondClick (second) {
+      if (this.isSecondDisabled(second, this.computedMinute, this.computedHour)) {
         return
       }
       if (this.value === null) {
@@ -373,7 +363,7 @@ export default {
       } else {
         this.$emit('input', getTime(setSeconds(this.value, second)))
       }
-      this.selectedSecond = second
+      this.disableTransitionOneTick('second')
     },
     refreshTimeString (time) {
       if (time === undefined) time = this.computedTime
@@ -444,7 +434,7 @@ export default {
       this.active = false
     },
     handleConfirmClick () {
-      if (this.isErrorVal) {
+      if (this.isValueInvalid) {
         return
       }
       this.refreshTimeString()

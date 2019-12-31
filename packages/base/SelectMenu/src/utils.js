@@ -1,4 +1,4 @@
-function createValueAttribute (value) {
+export const createValueAttribute = function createValueAttribute (value) {
   if (typeof value === 'string') {
     return 's-' + value
   } else if (typeof value === 'number') {
@@ -8,5 +8,3 @@ function createValueAttribute (value) {
     return 'invalid'
   }
 }
-
-exports.createValueAttribute = createValueAttribute

@@ -7,96 +7,105 @@
  -->
 <template>
   <!-- table body -->
-  <n-table
-    ref="nTable"
+  <div
+    ref="scrollContainer"
+    class="n-table n-advance-table__body"
+    :class="{
+      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+    }"
     :style="computeTbodyStl"
     style="border-top-left-radius:0;border-top-right-radius:0;box-sizing: border-box;"
-    class="n-advance-table__body"
-    @scroll.native="onBodyScrolll"
-    @mouseenter.native="onMouseEnter"
-    @mouseleave.native="onMouseLeave"
+    @scroll="onBodyScrolll"
+    @mouseenter="onMouseEnter"
+    @mouseleave="onMouseLeave"
   >
-    <colgroup>
-      <col
-        v-for="(column, i) in columns"
-        :key="i"
-        :style="computeCustomWidthStl(column)"
-      >
-    </colgroup>
-    <n-tbody>
-      <template v-if="showingData.length === 0">
-        <n-tr>
-          <n-td v-for="column in columns" :key="column.key" />
-        </n-tr>
-      </template>
-      <n-tr
-        v-for="(rowData, i) in showingData"
-        :key="i"
-        :style="computeTrStl"
-        :class="
-          typeof rowClassName === 'function'
-            ? rowClassName(rowData, i)
-            : rowClassName
-        "
-        @mouseenter.native="e => onRowHover(e, rowData, i)"
-        @mouseleave.native="e => onRowLeave(e, rowData, i)"
-      >
-        <template v-for="column in columns">
-          <n-td
-            :key="column.key"
-            :style="computeAlign(column)"
-            :class="computeTdClass(column, rowData)"
-          >
-            <!-- 批量选择 -->
-            <n-checkbox
-              v-if="
-                column.type === 'selection' &&
-                  (column.disabled && !column.disabled(rowData, i))
-              "
-              v-model="checkBoxes[rowData._index]"
-            />
-            <n-checkbox
-              v-else-if="
-                column.type === 'selection' &&
-                  (column.disabled && column.disabled(rowData, i))
-              "
-              v-model="disabledCheckBox[rowData._index]"
-              :disabled="!(disabledCheckBox[rowData._index] = false)"
-            />
-            <n-checkbox
-              v-else-if="column.type === 'selection'"
-              v-model="checkBoxes[rowData._index]"
-            />
-            <row
-              v-else
-              :index="i"
-              :row="rowData"
-              :key-name="column.key"
-              :render="column.render"
-              :column="column"
-            />
-          </n-td>
+    <table ref="scrollContent" cellspacing="0">
+      <colgroup>
+        <col
+          v-for="(column, i) in columns"
+          :key="i"
+          :style="computeCustomWidthStl(column)"
+        >
+      </colgroup>
+      <tbody>
+        <template v-if="showingData.length === 0">
+          <n-tr>
+            <n-td v-for="column in columns" :key="column.key" />
+          </n-tr>
         </template>
-      </n-tr>
-    </n-tbody>
-    <!-- <div
-      v-if="scrollBarHorizontalHeight"
-      class="n-advance-table-scroll-bar-placeholder"
-      :style="{ height: scrollBarHorizontalHeight + 'px' }"
-    /> -->
-  </n-table>
+        <n-tr
+          v-for="(rowData, i) in showingData"
+          :key="i"
+          :style="computeTrStl"
+          :class="
+            typeof rowClassName === 'function'
+              ? rowClassName(rowData, i)
+              : rowClassName
+          "
+          @mouseenter.native="e => onRowHover(e, rowData, i)"
+          @mouseleave.native="e => onRowLeave(e, rowData, i)"
+        >
+          <template v-for="column in columns">
+            <n-td
+              :key="column.key"
+              :style="computeAlign(column)"
+              :class="computeTdClass(column, rowData)"
+            >
+              <!-- 批量选择 -->
+              <n-checkbox
+                v-if="
+                  column.type === 'selection' &&
+                    (column.disabled && !column.disabled(rowData, i))
+                "
+                v-model="checkBoxes[rowData._index]"
+              />
+              <n-checkbox
+                v-else-if="
+                  column.type === 'selection' &&
+                    (column.disabled && column.disabled(rowData, i))
+                "
+                v-model="disabledCheckBox[rowData._index]"
+                :disabled="!(disabledCheckBox[rowData._index] = false)"
+              />
+              <n-checkbox
+                v-else-if="column.type === 'selection'"
+                v-model="checkBoxes[rowData._index]"
+              />
+              <row
+                v-else
+                :index="i"
+                :row="rowData"
+                :key-name="column.key"
+                :render="column.render"
+                :column="column"
+              />
+            </n-td>
+          </template>
+        </n-tr>
+      </tbody>
+      <!-- <div
+    v-if="scrollBarHorizontalHeight"
+    class="n-advance-table-scroll-bar-placeholder"
+    :style="{ height: scrollBarHorizontalHeight + 'px' }"
+  /> -->
+    </table>
+  </div>
 </template>
 
 <script>
 import row from '../row/index.js'
 import { addClass, removeClass } from '../utils'
 import { storageMixin } from '../store'
+import withapp from '../../../mixins/withapp'
+import themeable from '../../../mixins/themeable'
+// import NScrollbar from '../../Scrollbar'
 
 export default {
   components: {
+    // NScrollbar,
     row
   },
-  mixins: [storageMixin],
+  mixins: [ withapp, themeable, storageMixin ],
   props: {
     fixed: {
       type: Boolean,
@@ -205,6 +214,12 @@ export default {
     }
   },
   methods: {
+    getScrollContainer () {
+      return this.$refs.scrollContainer || null
+    },
+    getScrollContent () {
+      return this.$refs.scrollContent || null
+    },
     onMouseEnter (e) {
       this.$tableStore.commit('currentTableEl', e.currentTarget)
     },

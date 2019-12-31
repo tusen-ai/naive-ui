@@ -37,19 +37,19 @@ export default {
       type: Array,
       default: () => ['now', 'confirm']
     },
-    dateDisabled: {
+    isDateDisabled: {
       type: Function,
       default: () => {
         return false
       }
     },
-    timeDisabled: {
+    isTimeDisabled: {
       type: Function,
       default: () => {
         return {
-          hourDisabled: () => false,
-          minuteDisabled: () => false,
-          secondDisabled: () => false
+          isHourDisabled: () => false,
+          isMinuteDisabled: () => false,
+          isSecondDisabled: () => false
         }
       }
     }
@@ -57,8 +57,8 @@ export default {
   data () {
     return {
       displayDateString: '',
-      calendarDateTime: new Date(), // moment(),
-      currentDateTime: new Date(), // moment()
+      calendarDateTime: new Date(),
+      currentDateTime: new Date(),
       selectedDate: null
     }
   },
@@ -79,21 +79,14 @@ export default {
     valueAsDateTime () {
       if (this.value === null || this.value === undefined) return null
       return new Date(this.value)
-      // const newSelectedDateTime = new Date(this.value)
-      // return new
-      // if (newSelectedDateTime.isValid()) {
-      //   return newSelectedDateTime
-      // } else {
-      //   return null
-      // }
     },
-    isErrorDate () {
-      if (!this.value) {
+    isDateInvalid () {
+      if (this.value === null) {
         return false
       }
-      return this.dateDisabled(setHours(startOfHour(new Date(this.value)), 0).getTime())
+      return this.isDateDisabled(new Date(this.value))
     },
-    isErrorTime () {
+    isTimeInvalid () {
       if (!this.value) {
         return false
       }
@@ -101,12 +94,12 @@ export default {
       const hour = time.getHours()
       const minute = time.getMinutes()
       const second = time.getMinutes()
-      return this.hourDisabled(hour) ||
-          this.minuteDisabled(minute, hour) ||
-          this.secondDisabled(second, minute, hour)
+      return this.isHourDisabled(hour) ||
+          this.isMinuteDisabled(minute, hour) ||
+          this.isSecondDisabled(second, minute, hour)
     },
-    isErrorDateTime () {
-      return this.isErrorDate || this.isErrorTime
+    isDateTimeInvalid () {
+      return this.isDateInvalid || this.isTimeInvalid
     },
     currentDate () {
       if (!this.value) {
@@ -114,27 +107,26 @@ export default {
       }
       return setHours(startOfHour(new Date(this.value)), 0).getTime()
     },
-    hourDisabled () {
-      return this.timeDisabled(this.currentDate).hourDisabled || function () { return false }
+    timePickerValidator () {
+      return this.isTimeDisabled(this.currentDate)
     },
-    minuteDisabled () {
-      return this.timeDisabled(this.currentDate).minuteDisabled || function () { return false }
+    isHourDisabled () {
+      return this.timePickerValidator.isHourDisabled || (() => false)
     },
-    secondDisabled () {
-      return this.timeDisabled(this.currentDate).secondDisabled || function () { return false }
+    isMinuteDisabled () {
+      return this.timePickerValidator.isMinuteDisabled || (() => false)
+    },
+    isSecondDisabled () {
+      return this.timePickerValidator.isSecondDisabled || (() => false)
     }
   },
   watch: {
     calendarDateTime (newCalendarDateTime, oldCalendarDateTime) {
-      // if (newCalendarDateTime.isValid() && oldCalendarDateTime) {
       if (
         !isSameMonth(newCalendarDateTime, oldCalendarDateTime)
-      // newCalendarDateTime.year() !== oldCalendarDateTime.year() ||
-      // newCalendarDateTime.month() !== oldCalendarDateTime.month()
       ) {
-        this.banTransitionOneTick()
+        this.disableTransitionOneTick()
       }
-      // }
     },
     valueAsDateTime (newValue) {
       if (newValue !== null) {
@@ -144,8 +136,10 @@ export default {
         this.displayDateString = ''
       }
     },
-    isErrorDateTime () {
-      this.$emit('check-value', this.isErrorDateTime)
+    isDateTimeInvalid (value) {
+      // debugger
+      this.NDatePicker.setInvalidStatus(value)
+      // this.$emit('check-value', this.isDateTimeInvalid)
     }
   },
   created () {
@@ -155,11 +149,7 @@ export default {
     } else {
       this.displayDateString = ''
     }
-  },
-  mounted () {
-    if (this.isErrorDateTime) {
-      this.$emit('check-value', this.isErrorDateTime)
-    }
+    this.NDatePicker.setInvalidStatus(this.isDateTimeInvalid)
   },
   methods: {
     handleClickOutside () {
@@ -246,11 +236,10 @@ export default {
     },
     setSelectedDateTimeToNow () {
       this.$emit('input', getTime(this.adjustValue(new Date())))
-      this.calendarDateTime = new Date() // moment()
-      // this.checkDate(getTime(this.adjustValue(new Date())))
+      this.calendarDateTime = new Date()
     },
     handleDateClick (dateItem) {
-      if (this.dateDisabled(dateItem.timestamp)) {
+      if (this.isDateDisabled(dateItem.timestamp)) {
         return
       }
       let newSelectedDateTime = new Date()
@@ -276,7 +265,7 @@ export default {
       this.displayDateString = format(time, this.dateFormat)
     },
     handleConfirmClick () {
-      if (this.isErrorDate || this.isErrorTime) {
+      if (this.isDateInvalid || this.isTimeInvalid) {
         return
       }
       this.$emit('confirm')

@@ -10,10 +10,10 @@ Sometimes you will find native scrollbar doesn't meet the style of naive-ui. You
         Cool Sider
       </n-layout-sider>
       <n-layout mode="absolute" :use-native-scrollbar="false">
-        <h1>Long</h1><h1>Long</h1><h1>Long</h1>
-        <h1>Long</h1><h1>Long</h1><h1>Long</h1>
-        <h1>Long</h1><h1>Long</h1><h1>Long</h1>
-        <h1>Long</h1><h1>Long</h1><h1>Long</h1>
+        <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>
+        <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>
+        <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>
+        <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>
       </n-layout>
     </n-layout>
     <n-layout-footer mode="absolute" style="height: 64px">

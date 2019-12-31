@@ -1,7 +1,6 @@
 import Card from './packages/common/Card'
 import Icon from './packages/common/Icon'
 import GradientText from './packages/common/GradientText'
-import MasonryGroup from './packages/common/MasonryGroup'
 import Table from './packages/common/Table'
 import AdvanceTable from './packages/common/AdvanceTable'
 import CheckBox from './packages/common/Checkbox'
@@ -114,7 +113,6 @@ function install (Vue) {
   Loader.install(Vue)
   Layout.install(Vue)
   GradientText.install(Vue)
-  MasonryGroup.install(Vue)
   Table.install(Vue)
   AdvanceTable.install(Vue)
   CheckBox.install(Vue)

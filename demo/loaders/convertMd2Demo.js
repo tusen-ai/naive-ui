@@ -77,7 +77,7 @@ function genVueComponent (parts, noRunning = false) {
   const contentReg = /<!--CONTENT_SLOT-->/
   const codeReg = /<!--CODE_SLOT-->/
   const scriptReg = /\/\*\*\sSCRIPT_SLOT\s\*\//
-  const styleReg = /\/\*\*STYLE_SLOT\*\//
+  const styleReg = /\/\*\*STYLE_SLOT\*\//g
   const demoReg = /<!--DEMO_SLOT-->/
   let src = demoBlock
   // console.log(src)

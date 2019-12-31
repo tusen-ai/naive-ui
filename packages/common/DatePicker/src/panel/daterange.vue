@@ -1,10 +1,10 @@
 <template>
-  <transition name="n-date-picker-panel--transition">
+  <transition name="n-date-panel--transition">
     <div
-      v-if="active"
+      v-show="active"
       ref="self"
       tabindex="0"
-      class="n-date-picker-panel n-date-picker-panel--daterange"
+      class="n-date-panel n-date-panel--daterange"
       :class="{
         [`n-${theme}-theme`]: theme
       }"
@@ -12,61 +12,61 @@
     >
       <div
         ref="startDates"
-        class="n-date-picker-panel-calendar"
+        class="n-date-panel-calendar"
       >
-        <div class="n-date-picker-panel-month-modifier">
+        <div class="n-date-panel-month">
           <div
-            class="n-date-picker-panel-month-modifier__fast-prev"
+            class="n-date-panel-month__fast-prev"
             @click="startCalendarPrevYear"
           >
             <n-base-icon type="fast-backward" />
           </div>
           <div
-            class="n-date-picker-panel-month-modifier__prev"
+            class="n-date-panel-month__prev"
             @click="startCalendarPrevMonth"
           >
             <n-base-icon type="backward" />
           </div>
-          <div class="n-date-picker-panel-month-modifier__month-year">
+          <div class="n-date-panel-month__month-year">
             {{ startCalendarMonth }} {{ startCalendarYear }}
           </div>
           <div
-            class="n-date-picker-panel-month-modifier__next"
+            class="n-date-panel-month__next"
             @click="startCalendarNextMonth"
           >
             <n-base-icon type="forward" />
           </div>
           <div
-            class="n-date-picker-panel-month-modifier__fast-next"
+            class="n-date-panel-month__fast-next"
             @click="startCalendarNextYear"
           >
             <n-base-icon type="fast-forward" />
           </div>
         </div>
-        <div class="n-date-picker-panel-weekdays">
+        <div class="n-date-panel-weekdays">
           <div
             v-for="weekday in weekdays"
             :key="weekday"
-            class="n-date-picker-panel-weekdays__day"
+            class="n-date-panel-weekdays__day"
           >
             {{ weekday }}
           </div>
         </div>
-        <div class="n-date-picker-panel__divider" />
+        <div class="n-date-panel__divider" />
         <div
-          class="n-date-picker-panel-dates"
+          class="n-date-panel-dates"
         >
           <div
             v-for="(dateItem, i) in startDateArray"
             :key="i"
-            class="n-date-picker-panel-dates__date"
+            class="n-date-panel-date"
             :class="{
-              'n-date-picker-panel-dates__date--current': dateItem.isCurrentDate,
-              'n-date-picker-panel-dates__date--selected': dateItem.isSelectedDate,
-              'n-date-picker-panel-dates__date--in-display-month': dateItem.isDateOfDisplayMonth,
-              'n-date-picker-panel-dates__date--in-span': dateItem.isInSpan,
-              'n-date-picker-panel-dates__date--no-transition': noTransition,
-              'n-date-picker-panel-dates__date--disabled': dateDisabled(dateItem.timestamp)
+              'n-date-panel-date--current': dateItem.isCurrentDate,
+              'n-date-panel-date--selected': dateItem.isSelectedDate,
+              'n-date-panel-date--excluded': !dateItem.isDateOfDisplayMonth,
+              'n-date-panel-date--covered': dateItem.isInSpan,
+              'n-date-panel-date--transition-disabled': noTransition,
+              'n-date-panel-date--disabled': isCalendarDateDisabled(dateItem.timestamp)
             }"
             @click="handleDateClick(dateItem)"
             @mouseenter="handleDateMouseEnter(dateItem)"
@@ -75,64 +75,64 @@
           </div>
         </div>
       </div>
-      <div><div class="n-date-picker-panel__vertical-divider" /></div>
+      <div><div class="n-date-panel__vertical-divider" /></div>
       <div
         ref="endDates"
-        class="n-date-picker-panel-calendar"
+        class="n-date-panel-calendar"
       >
-        <div class="n-date-picker-panel-month-modifier">
+        <div class="n-date-panel-month">
           <div
-            class="n-date-picker-panel-month-modifier__fast-prev"
+            class="n-date-panel-month__fast-prev"
             @click="endCalendarPrevYear"
           >
             <n-base-icon type="fast-backward" />
           </div>
           <div
-            class="n-date-picker-panel-month-modifier__prev"
+            class="n-date-panel-month__prev"
             @click="endCalendarPrevMonth"
           >
             <n-base-icon type="backward" />
           </div>
-          <div class="n-date-picker-panel-month-modifier__month-year">
+          <div class="n-date-panel-month__month-year">
             {{ endCalendarMonth }} {{ endCalendarYear }}
           </div>
           <div
-            class="n-date-picker-panel-month-modifier__next"
+            class="n-date-panel-month__next"
             @click="endCalendarNextMonth"
           >
             <n-base-icon type="forward" />
           </div>
           <div
-            class="n-date-picker-panel-month-modifier__fast-next"
+            class="n-date-panel-month__fast-next"
             @click="endCalendarNextYear"
           >
             <n-base-icon type="fast-forward" />
           </div>
         </div>
-        <div class="n-date-picker-panel-weekdays">
+        <div class="n-date-panel-weekdays">
           <div
             v-for="weekday in weekdays"
             :key="weekday"
-            class="n-date-picker-panel-weekdays__day"
+            class="n-date-panel-weekdays__day"
           >
             {{ weekday }}
           </div>
         </div>
-        <div class="n-date-picker-panel__divider" />
+        <div class="n-date-panel__divider" />
         <div
-          class="n-date-picker-panel-dates"
+          class="n-date-panel-dates"
         >
           <div
             v-for="(dateItem, i) in endDateArray"
             :key="i"
-            class="n-date-picker-panel-dates__date"
+            class="n-date-panel-date"
             :class="{
-              'n-date-picker-panel-dates__date--current': dateItem.isCurrentDate,
-              'n-date-picker-panel-dates__date--selected': dateItem.isSelectedDate,
-              'n-date-picker-panel-dates__date--in-display-month': dateItem.isDateOfDisplayMonth,
-              'n-date-picker-panel-dates__date--in-span': dateItem.isInSpan,
-              'n-date-picker-panel-dates__date--no-transition': noTransition,
-              'n-date-picker-panel-dates__date--disabled': dateDisabled(dateItem.timestamp)
+              'n-date-panel-date--current': dateItem.isCurrentDate,
+              'n-date-panel-date--selected': dateItem.isSelectedDate,
+              'n-date-panel-date--excluded': !dateItem.isDateOfDisplayMonth,
+              'n-date-panel-date--covered': dateItem.isInSpan,
+              'n-date-panel-date--transition-disabled': noTransition,
+              'n-date-panel-date--disabled': isCalendarDateDisabled(dateItem.timestamp)
             }"
             @click="handleDateClick(dateItem)"
             @mouseenter="handleDateMouseEnter(dateItem)"
@@ -147,7 +147,7 @@
       </div>
       <div
         v-if="actions && actions.length"
-        class="n-date-picker-panel-actions"
+        class="n-date-panel-actions"
       >
         <n-button
           v-if="actions.includes('clear')"
@@ -163,10 +163,7 @@
           round
           auto-text-color
           type="primary"
-          class="n-date-picker-panel-actions__confirm"
-          :class="{
-            'n-date-picker-panel-actions__confirm--disabled': isErrorDateTime
-          }"
+          :disabled="isRangeInvalid"
           @click="handleConfirmClick"
         >
           Confirm
@@ -178,7 +175,6 @@
 </template>
 
 <script>
-// import moment from 'moment'
 import NButton from '../../../Button'
 import NBaseIcon from '../../../../base/Icon'
 import dualCalendarMixin from './dualCalendarMixin'

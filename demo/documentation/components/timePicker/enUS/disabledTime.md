@@ -1,10 +1,12 @@
-# Disabled Time
+# Disable Time
+You can disable some time.
+
 ```html
 <n-time-picker
   v-model="time0"
-  :hourDisabled="disabledHours"
-  :minuteDisabled="disabledMinutes"
-  :secondDisabled="disabledSeconds"
+  :is-hour-disabled="isHourDisabled"
+  :is-minute-disabled="isMinuteDisabled"
+  :is-second-disabled="isSecondDisabled"
 />
 
 ```
@@ -12,24 +14,25 @@
 export default {
   data () {
     return {
-      time0: null,
-      time1: 1563937380000,
+      time0: null
     }
   },
   methods: {
-    disabledHours (hour) {
-      return hour > 13 && hour < 16
+    isHourDisabled (hour) {
+      return hour % 2 === 0
     },
-    disabledMinutes (minute, selectedHour) {
-      if (Number(selectedHour) === 17) {
-        return minute >= 0 && minute < 9
+    isMinuteDisabled (minute, selectedHour) {
+      if (selectedHour === null) return false
+      if (Number(selectedHour) < 12) {
+        return minute < 30
       } else {
         return false
       }
     },
-    disabledSeconds (second, selectedMinute, selectedHour) {
-      if (Number(selectedHour) === 17 && Number(selectedMinute) === 10) {
-        return second > 13 && second < 40
+    isSecondDisabled (second, selectedMinute, selectedHour) {
+      if (selectedHour === null || selectedMinute === null) return false
+      if (Number(selectedHour) > 20 && Number(selectedMinute) < 30) {
+        return second < 40
       } else {
         return false
       }

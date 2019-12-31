@@ -13,6 +13,7 @@
     @dragstart.capture="handleDragStart"
   >
     <div
+      v-if="!container"
       ref="scrollContainer"
       class="n-scrollbar-container"
       @scroll="handleScroll"
@@ -24,6 +25,9 @@
         <slot />
       </div>
     </div>
+    <template v-else>
+      <slot />
+    </template>
     <div
       ref="verticalRail"
       class="n-scrollbar-rail n-scrollbar-rail--vertical"
@@ -89,6 +93,14 @@ export default {
     withoutScrollbar: {
       type: Boolean,
       default: false
+    },
+    container: {
+      type: Function,
+      default: null
+    },
+    content: {
+      type: Function,
+      default: null
     }
   },
   data () {
@@ -179,7 +191,7 @@ export default {
     // console.log('[NScrollbar.updated]')
   },
   beforeDestroy () {
-    resizeObserverDelagate.unregisterHandler(this.$refs.scrollContent)
+    resizeObserverDelagate.unregisterHandler(this._content())
   },
   destroyed () {
     window.clearTimeout(this.horizontalScrollbarVanishTimerId)
@@ -189,9 +201,27 @@ export default {
   },
   mounted () {
     this.updateParameters()
-    resizeObserverDelagate.registerHandler(this.$refs.scrollContent, this.updateParameters)
+    this.$nextTick().then(() => {
+      if (this.container) {
+        const containerEl = this.container()
+        containerEl.addEventListener('scroll', this.handleScroll)
+      }
+    })
+    resizeObserverDelagate.registerHandler(this._content(), this.updateParameters)
   },
   methods: {
+    _container () {
+      if (this.container) {
+        return this.container()
+      }
+      return this.$refs.scrollContainer
+    },
+    _content () {
+      if (this.content) {
+        return this.content()
+      }
+      return this.$refs.scrollContent
+    },
     disableScrollbar () {
       this.hideScrollbar()
       this.disabled = true
@@ -206,30 +236,30 @@ export default {
       this.showVeriticalScrollbar = true
     },
     scrollToTop (smooth = false) {
-      if (this.$refs.scrollContainer) {
-        this.$refs.scrollContainer.scrollTo({
+      if (this._container()) {
+        this._container().scrollTo({
           top: 0
         })
       }
     },
     scrollToBottom (smooth = false) {
-      if (this.$refs.scrollContainer) {
-        this.$refs.scrollContainer.scrollTo({
-          top: this.$refs.scrollContent.offsetHeight
+      if (this._container()) {
+        this._container().scrollTo({
+          top: this._content().offsetHeight
         })
       }
     },
     scrollToElement (el) {
       if (this.withoutScrollbar) return
-      if (el.offsetTop < this.$refs.scrollContainer.scrollTop) {
-        this.$refs.scrollContainer.scrollTo({
+      if (el.offsetTop < this._container().scrollTop) {
+        this._container().scrollTo({
           top: el.offsetTop,
           left: 0,
           behavior: 'smooth'
         })
-      } else if (el.offsetTop + el.offsetHeight > this.$refs.scrollContainer.scrollTop + this.$refs.scrollContainer.offsetHeight) {
-        this.$refs.scrollContainer.scrollTo({
-          top: el.offsetTop + el.offsetHeight - this.$refs.scrollContainer.offsetHeight,
+      } else if (el.offsetTop + el.offsetHeight > this._container().scrollTop + this._container().offsetHeight) {
+        this._container().scrollTo({
+          top: el.offsetTop + el.offsetHeight - this._container().offsetHeight,
           left: 0,
           behavior: 'smooth'
         })
@@ -285,26 +315,26 @@ export default {
     },
     handleScroll (e) {
       if (this.disabled) return
-      this.$emit('scroll', e, this.$refs.scrollContainer, this.$refs.scrollContent)
+      this.$emit('scroll', e, this._container(), this._content())
       this.updateScrollParameters()
     },
     updateScrollParameters () {
-      if (this.$refs.scrollContainer) {
-        this.containerScrollTop = this.$refs.scrollContainer.scrollTop
-        this.containerScrollLeft = this.$refs.scrollContainer.scrollLeft
+      if (this._container()) {
+        this.containerScrollTop = this._container().scrollTop
+        this.containerScrollLeft = this._container().scrollLeft
       }
     },
     updatePositionParameters () {
       /**
        * Don't use getClientBoundingRect because element may be scale transformed
        */
-      if (this.$refs.scrollContent) {
-        this.contentHeight = this.$refs.scrollContent.offsetHeight
-        this.contentWidth = this.$refs.scrollContent.offsetWidth
+      if (this._content()) {
+        this.contentHeight = this._content().offsetHeight
+        this.contentWidth = this._content().offsetWidth
       }
-      if (this.$refs.scrollContainer) {
-        this.containerHeight = this.$refs.scrollContainer.offsetHeight
-        this.containerWidth = this.$refs.scrollContainer.offsetWidth
+      if (this._container()) {
+        this.containerHeight = this._container().offsetHeight
+        this.containerWidth = this._container().offsetWidth
       }
       if (this.$refs.horizontalRail) {
         this.horizontalRailWidth = this.$refs.horizontalRail.offsetWidth
@@ -335,7 +365,7 @@ export default {
         let toScrollLeft = this.memorizedHorizontalLeft + dScrollLeft
         toScrollLeft = Math.min(toScrollLeftUpperBound, toScrollLeft)
         toScrollLeft = Math.max(toScrollLeft, 0)
-        this.$refs.scrollContainer.scrollLeft = toScrollLeft
+        this._container().scrollLeft = toScrollLeft
       }
     },
     handleHorizontalScrollMouseUp (e) {
@@ -366,7 +396,7 @@ export default {
         let toScrollTop = this.memorizedVerticalTop + dScrollTop
         toScrollTop = Math.min(toScrollTopUpperBound, toScrollTop)
         toScrollTop = Math.max(toScrollTop, 0)
-        this.$refs.scrollContainer.scrollTop = toScrollTop
+        this._container().scrollTop = toScrollTop
       }
     },
     handleVerticalScrollMouseUp (e) {
