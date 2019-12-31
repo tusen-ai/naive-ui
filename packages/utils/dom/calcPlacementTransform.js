@@ -20,26 +20,42 @@ const lengthToCompare = {
 }
 
 function getAdjustedPlacementOfTrackingElement (placement = 'bottom-start', trackedRect, trackingRect) {
-  const [direction, position] = placement.split('-')
-  if (trackedRect[direction] >= trackingRect[lengthToCompare[direction]]) {
-    return placement
-  } else if (trackedRect[oppositeDirection[direction]] >= trackingRect[lengthToCompare[direction]]) {
-    if (position) return `${oppositeDirection[direction]}-${position}`
-    else return oppositeDirection[direction]
-  } else {
-    const [direction1, direction2] = adjacentDirections[direction]
-    let adjacentDirectionWithMoreSpace = direction1
-    if (trackedRect[direction1] < trackedRect[direction2]) {
-      adjacentDirectionWithMoreSpace = direction2
+  let [direction, position] = placement.split('-')
+  let newPosition = position
+  if (position === 'start') {
+    let adjacentDirection = adjacentDirections[direction][1]
+    if (trackedRect[adjacentDirection] <= trackingRect[lengthToCompare[adjacentDirection]]) {
+      newPosition = 'end'
     }
-    if (trackedRect[adjacentDirectionWithMoreSpace] < trackingRect[lengthToCompare[adjacentDirections]]) {
-      /**
-       * If no direction has required space, simply not flip tracking element to any side.
-       */
-      return placement
+  } else if (position === 'end') {
+    let adjacentDirection = adjacentDirections[direction][0]
+    if (trackedRect[adjacentDirection] <= trackingRect[lengthToCompare[adjacentDirection]]) {
+      newPosition = 'start'
     }
-    return adjacentDirectionWithMoreSpace
   }
+  if (trackedRect[direction] >= trackingRect[lengthToCompare[direction]]) {
+    return direction + '-' + newPosition
+  } else if (trackedRect[oppositeDirection[direction]] >= trackingRect[lengthToCompare[direction]]) {
+    if (position) {
+      return `${oppositeDirection[direction]}-${newPosition}`
+    } else return oppositeDirection[direction]
+  } else {
+    return direction + '-' + newPosition
+  }
+  // else {
+  //   const [direction1, direction2] = adjacentDirections[direction]
+  //   let adjacentDirectionWithMoreSpace = direction1
+  //   if (trackedRect[direction1] < trackedRect[direction2]) {
+  //     adjacentDirectionWithMoreSpace = direction2
+  //   }
+  //   if (trackedRect[adjacentDirectionWithMoreSpace] < trackingRect[lengthToCompare[adjacentDirections]]) {
+  //     /**
+  //      * If no direction has required space, simply not flip tracking element to any side.
+  //      */
+  //     return placement
+  //   }
+  //   return adjacentDirectionWithMoreSpace
+  // }
 }
 
 const placementToTransformOrigin = {
