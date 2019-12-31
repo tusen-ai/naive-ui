@@ -87,7 +87,7 @@ $--tabs-tab-font-size: (
           bottom: 2px;
           height: 2px;
           border-radius: 1px;
-          transition: left .2s $--n-ease-in-out-cubic-bezier, max-width .2s $--n-ease-in-out-cubic-bezier;
+          transition: left .2s $--n-ease-in-out-cubic-bezier, max-width .2s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
         }
         background-color: $--tabs-tab-bar-background-color;
       }
