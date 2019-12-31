@@ -112,6 +112,7 @@ Previously, it would not work with single quotes:
 
 ## TODO
 Focus Detector on Time Selector
+Select 需要进一步重构，现在这种状况 collector 在 corner case 中不会调 updated 钩子，要把 key 换成 value
 
 // issue fix, add delay prop
 // add trigger to tooltip
