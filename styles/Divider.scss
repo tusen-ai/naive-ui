@@ -6,6 +6,7 @@
       position: relative;
       display: flex;
       width: 100%;
+      box-sizing: border-box;
       font-size: 16px;
       transition: background-color .3s $--n-ease-in-out-cubic-bezier;
       @include not-m(vertical) {
@@ -63,6 +64,7 @@
         transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
         height: 1px;
         width: 100%;
+        margin: 0;
       }
     }
     @include not-m(dashed) {
