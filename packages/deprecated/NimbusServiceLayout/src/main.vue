@@ -3,20 +3,14 @@
 import Scrollbar from '../../../common/Scrollbar'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
-import toggleButton from './toggleButton'
 
 export default {
   name: 'NNimbusServiceLayout',
   components: {
-    Scrollbar,
-    toggleButton
+    Scrollbar
   },
   mixins: [withapp, themeable],
   props: {
-    icon: {
-      type: String,
-      default: 'md-settings'
-    },
     name: {
       type: String,
       default: null
@@ -28,10 +22,6 @@ export default {
     paddingBody: {
       type: Boolean,
       default: true
-    },
-    disableMenu: {
-      type: Boolean,
-      default: false
     },
     value: {
       type: String,
@@ -49,7 +39,6 @@ export default {
         return undefined
       }
     }
-
   },
   data () {
     return {
@@ -104,14 +93,24 @@ export default {
       'bordered': true,
       'mode': 'absolute',
       'show-content': !this.collapsed,
-      'use-native-scrollbar': false
+      'use-native-scrollbar': false,
+      'scroll-content-style': {
+        width: '100%'
+      }
     }
     const createMenu = items => {
       return items.map(item => {
         const props = {
-          title: item.name,
+          title: item.title || item.name,
           name: item.name,
           disabled: !!item.disabled
+        }
+        if (item.group) {
+          return h('NMenuItemGroup', {
+            props
+          },
+          createMenu(item.childItems)
+          )
         }
         if (item.childItems) {
           return h('NSubMenu', {
@@ -134,7 +133,7 @@ export default {
       })
     }
     return h('NLayout', {
-      staticClass: 'n-new-nimbus-service-layout',
+      staticClass: 'n-nbs',
       class: {
         [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme
       },
@@ -142,27 +141,23 @@ export default {
         mode: 'absolute'
       }
     }, [
-      h('NLayoutHeader', {
-        staticClass: 'n-new-nimbus-service-layout__header',
-        class: {
-          'n-new-nimbus-service-layout__header--hide': !this.$slots.nav
+      this.$slots.nav ? h('NLayoutHeader', {
+        staticStyle: {
+          height: '64px'
         },
         props: {
           bordered: true
         }
-      }, this.$slots.nav),
-
+      }, this.$slots.nav) : null,
       h('NLayout', {
-        staticClass: 'n-nimbus-service-layout-container',
-        class: {
-          'n-nimbus-service-layout-container--has-top': this.$slots.nav
+        style: {
+          top: this.$slots.nav ? '64px' : null
         },
         props: {
           mode: 'absolute'
         }
       }, [
         h('NLayoutSider', {
-          class: 'n-nimbus-service-layout-container-sider',
           props: siderProps,
           on: {
             collapse: () => {
@@ -174,28 +169,54 @@ export default {
           }
         },
         [
-          h('div', {
-            style: { 'padding-left': '24px', 'font-size': '16px', 'font-weight': 700 },
-            class: 'n-nimbus-service-layout-container-sider-header'
+          this.name ? h('div', {
+            staticStyle: {
+              alignItems: 'center',
+              height: '64px',
+              paddingLeft: '32px',
+              fontSize: '16px',
+              fontWeight: '500',
+              display: 'flex',
+              position: 'relative'
+            }
           }, [
-            h('NIcon', {
-              staticClass: 'n-nimbus-service-layout-container-sider-header__icon',
-              class: {
-                'n-nimbus-service-layout-container-sider-header__icon--hide': !this.$slots['drawer-header-icon']
-              },
-              props: { size: 22 }
-            },
-            this.$slots['drawer-header-icon']),
+            this.$slots['drawer-header-icon'] ? h(
+              'NConfigConsumer', {
+                props: {
+                  transparent: true
+                },
+                scopedSlots: {
+                  default: ({ styleScheme }) => {
+                    return h('NIcon', {
+                      props: { size: 20 },
+                      staticStyle: {
+                        position: 'absolute',
+                        left: '6px',
+                        top: '50%',
+                        transform: 'translateY(-50%)'
+                      },
+                      style: {
+                        fill: (styleScheme && styleScheme.secondaryTextColor) || null
+                      }
+                    }, this.$slots['drawer-header-icon'])
+                  }
+                }
+              }) : null,
             h('span', {}, this.name)
-          ]
-          ),
+          ]) : null,
+          this.name ? h('n-divider', {
+            staticStyle: {
+              margin: '0',
+              padding: '0 24px 0 6px'
+            }
+          }) : null,
           h('NMenu',
             {
               props: {
                 value: this.value || this.activeItem,
                 openNames: this.openNames,
                 defaultOpenNames: this.defaultOpenNames || this.subMenuNames,
-                indent: 24
+                indent: 32
               },
               on: this.$listeners
             },
@@ -205,9 +226,13 @@ export default {
         h('NLayout', {
           props: {
             'mode': 'absolute',
-            'use-native-scrollbar': false
-          },
-          class: 'n-new-nimbus-service-layout-container__content'
+            'use-native-scrollbar': false,
+            'scroll-content-style': {
+              width: '100%',
+              boxSizing: 'border-box',
+              padding: this.paddingBody ? '21px 48px' : null
+            }
+          }
         }, this.$slots.default)
       ])
     ])

@@ -89,3 +89,18 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.n-nimbus-icon {
+  height: 1em;
+  width: 1em;
+  line-height: 1em;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+
+}
+.n-nimbus-icon svg {
+  pointer-events: none;
+}
+</style>

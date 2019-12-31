@@ -16,10 +16,12 @@
       v-if="!container"
       ref="scrollContainer"
       class="n-scrollbar-container"
+      :style="containerStyle"
       @scroll="handleScroll"
     >
       <div
         ref="scrollContent"
+        :style="contentStyle"
         class="n-scrollbar-content"
       >
         <slot />
@@ -100,6 +102,14 @@ export default {
     },
     content: {
       type: Function,
+      default: null
+    },
+    contentStyle: {
+      type: Object,
+      default: null
+    },
+    containerStyle: {
+      type: Object,
       default: null
     }
   },
