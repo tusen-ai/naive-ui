@@ -3,7 +3,7 @@
 @include themes-mixin {
   @include b(layout) {
     color: $--layout-text-color;
-    background-color: $--layout-back-color;
+    background-color: $--layout-background-color;
     @include once {
       box-sizing: border-box;
       position: relative;
