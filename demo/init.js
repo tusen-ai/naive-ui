@@ -9,8 +9,7 @@ import intro from './documentation/intro/intro'
 import start from './documentation/intro/start'
 import devGuildlines from './documentation/intro/devGuidelines'
 
-import nimbusServiceLayoutDemo from './documentation/components/nimbusServiceLayoutDemo'
-import newNimbusServiceLayout from './documentation/components/newNimbusServiceLayout'
+import nimbusServiceLayoutDemo from './documentation/deprecated/nimbusServiceLayout'
 import gradientText from './documentation/components/gradientText'
 import checkbox from './documentation/components/checkbox'
 import button from './documentation/components/button'
@@ -153,7 +152,6 @@ const routes = [
       { path: '/start', component: start },
       { path: '/dev-guildlines', component: devGuildlines },
       { path: '/n-nimbus-service-layout', component: nimbusServiceLayoutDemo },
-      { path: '/n-nimbus-service-layout-new', component: newNimbusServiceLayout },
       { path: '/n-layout', component: layout },
       { path: '/n-gradient-text', component: gradientText },
       {
