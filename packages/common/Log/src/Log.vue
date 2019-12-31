@@ -11,7 +11,11 @@
     @wheel="handleWheel"
   >
     <n-scrollbar ref="scrollbar" @scroll="handleScroll">
-      <n-log-line v-for="(line, index) in synthesizedLines" :key="index" :line="line" />
+      <n-log-line
+        v-for="(line, index) in synthesizedLines"
+        :key="index"
+        :line="line"
+      />
     </n-scrollbar>
     <n-fade-in-height-expand-transition width>
       <n-log-loader v-if="loading" />
@@ -26,6 +30,7 @@ import NScrollbar from '../../Scrollbar'
 import NLogLoader from './LogLoader'
 import NLogLine from './LogLine'
 import NFadeInHeightExpandTransition from '../../../transition/FadeInHeightExpandTransition'
+import { throttle } from 'lodash'
 
 export default {
   name: 'NLog',
@@ -40,7 +45,7 @@ export default {
       NLog: this
     }
   },
-  mixins: [ withapp, themeable ],
+  mixins: [withapp, themeable],
   props: {
     loading: {
       type: Boolean,
@@ -107,6 +112,9 @@ export default {
       return this.log.split('\n')
     }
   },
+  created () {
+    this.handleWheel = throttle(this.handleWheel, 300)
+  },
   methods: {
     getHljs () {
       return this.hljs || this.$naive.hljs
@@ -132,6 +140,7 @@ export default {
         this.$emit('reach-bottom')
       }
     },
+
     handleWheel (e) {
       if (this.dismissEvent) {
         this.$nextTick().then(() => {
@@ -147,10 +156,13 @@ export default {
           const content = this.$refs.scrollbar.$refs.scrollContent
           const contentHeight = content.offsetHeight
           const scrollTop = containerScrollTop
-          const scrollBottom = contentHeight - containerScrollTop - containerHeight
+          const scrollBottom =
+            contentHeight - containerScrollTop - containerHeight
           const deltaY = e.deltaY
           if (scrollTop === 0 && deltaY < 0) this.$emit('require-more', 'top')
-          if (scrollBottom === 0 && deltaY > 0) this.$emit('require-more', 'bottom')
+          if (scrollBottom <= 0 && deltaY > 0) {
+            this.$emit('require-more', 'bottom')
+          }
         }
       }
     },
