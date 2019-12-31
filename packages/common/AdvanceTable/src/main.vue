@@ -270,7 +270,7 @@ export default {
     },
     fixedRightColumndClass () {
       return {
-        'n-advance-table__fixed--active': this.horizontalScrollLeft < 0
+        'n-advance-table__fixed--active': this.horizontalScrollLeft < this.tbodyWrapperWidth
       }
     },
     tbodyWrapperStl () {
@@ -751,7 +751,7 @@ export default {
         this.fixedLeftTBodyEl =
           this.$refs.fixedLeftTable && this.$refs.fixedLeftTable.$refs.tbody.$el
         this.fixedRightTBodyEl =
-          this.$refs.fixedLeftTable &&
+          this.$refs.fixedRightTable &&
           this.$refs.fixedRightTable.$refs.tbody.$el
         this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
         this.tbodyWrapperWidth = this.$refs.tbodyWrapper.clientWidth

@@ -16,7 +16,7 @@ export default {
     if (render) {
       return render(h, params, index)
     } else {
-      if (title) {
+      if (title && title.length) {
         params.row = {}
         params.row[keyName] = title
       }
