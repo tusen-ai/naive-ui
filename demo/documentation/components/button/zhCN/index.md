@@ -3,6 +3,7 @@
 ## 演示
 ```demo
 basic
+text
 disabled
 icon
 events
