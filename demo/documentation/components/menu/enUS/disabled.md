@@ -7,8 +7,7 @@
     :defaultOpenNames="initOpenKeys"
     @openNamesChange="changeOpen"
     @select="changeSelect"
-
-    >
+  >
     <template v-slot:drawer-header-icon>
       <div style="overflow:hidden">1111</div>
     </template>
@@ -24,21 +23,20 @@
       </n-sub-menu>
     </n-sub-menu>
     <n-sub-menu title="subMenu3" name="subMenu3">
-      <n-item-group title="group">
+      <n-menu-item-group title="group">
         <n-menu-item title="sub1" name="sub6"></n-menu-item>
         <n-menu-item title="sub1" name="sub7"></n-menu-item>
-      </n-item-group>
+      </n-menu-item-group>
     </n-sub-menu>
   </n-menu>
   Items:
   <n-menu
-  v-model="selected" 
-  :openNames="opens"
-  :items="items"
-  @select="changeSelect"
-  @openNamesChange="changeOpen"
-  >
-</n-menu>
+    v-model="selected" 
+    :openNames="opens"
+    :items="items"
+    @select="changeSelect"
+    @openNamesChange="changeOpen"
+  />
 </div>
 
 ```
@@ -58,10 +56,10 @@ export default {
         {
           title: 'subMenu',
           name: 'subMenu',
-          groupTitle: 'group1',
           children: [
             {
               title:'sub1',
+              group: true,
               name: 'sub1',
               children: [
                 {
@@ -81,9 +79,11 @@ export default {
   },
   methods: {
     changeOpen (names) {
+      this.opens = names
       console.log('names', names)
     },
-    changeSelect (val) {
+    changeSelect (name) {
+      this.selected = name
       console.log('changeSelect', val)
     }
   }

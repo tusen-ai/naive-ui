@@ -24,11 +24,26 @@ export default {
         {
           title: 'subMenu',
           name: 'subMenu',
-          groupTitle: 'group1',
           children: [
             {
-              title:'sub1',
+              title:'group1',
               name: 'sub1',
+              group: true,
+              children: [
+                {
+                  title: 'subsub001',
+                  name: 'subsub001'
+                },
+                {
+                  title: 'subsub002',
+                  name: 'subsub002'
+                }
+              ]
+            },
+            {
+              title:'group2',
+              name: 'sub1',
+              group: true,
               children: [
                 {
                   title: 'subsub001',
