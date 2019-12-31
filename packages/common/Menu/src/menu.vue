@@ -47,10 +47,6 @@ export default {
       type: String,
       default: null
     },
-    title: {
-      type: String,
-      default: null
-    },
     indent: {
       type: Number,
       default: 32
@@ -61,11 +57,15 @@ export default {
     },
     defaultOpenNames: {
       type: Array,
-      default: null
+      default: () => {
+        return undefined
+      }
     },
     openNames: {
       type: Array,
-      default: null
+      default: () => {
+        return undefined
+      }
     },
     hasIcon: {
       type: Boolean,
@@ -76,7 +76,16 @@ export default {
   data () {
     return {
       componentName: 'NMenu',
-      isCollapsed: false
+      isCollapsed: false,
+      currentOpenNames: this.openNames || this.defaultOpenNames || []
+    }
+  },
+  watch: {
+    openNames (val) {
+      this.currentOpenNames = val
+    },
+    defaultOpenNames (val) {
+      this.currentOpenNames = val
     }
   },
   methods: {
@@ -88,11 +97,14 @@ export default {
       this.$emit('input', value)
     },
     openKeysChangeCallback (val) {
-      let indexs = this.openNames
-      if (!this.openNames.includes(val)) {
-        indexs.push(val)
-      } else {
+      let indexs = [...this.currentOpenNames]
+      if (indexs.includes(val)) {
         indexs.splice(indexs.findIndex(item => item === val), 1)
+      } else {
+        indexs.push(val)
+      }
+      if (typeof (this.openNames) === 'undefined') {
+        this.currentOpenNames = indexs
       }
       this.$emit('openNamesChange', indexs)
     }

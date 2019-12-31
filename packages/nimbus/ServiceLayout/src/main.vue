@@ -130,7 +130,7 @@ import toggleButton from './toggleButton'
 import isEqual from 'lodash/isEqual'
 
 export default {
-  name: 'NNimbusServiceLayout',
+  name: 'NOldNimbusServiceLayout',
   components: {
     Scrollbar,
     toggleButton
