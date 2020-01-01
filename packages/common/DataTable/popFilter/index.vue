@@ -114,7 +114,7 @@ export default {
     },
     onSelectedChange (val) {
       this.$emit('input', val)
-      this.$emit('on-filter', val, this.column)
+      this.$emit('filter', val, this.column)
     }
   }
 }

@@ -114,6 +114,7 @@ Previously, it would not work with single quotes:
 Focus Detector on Time Selector
 Select 需要进一步重构，现在这种状况 collector 在 corner case 中不会调 updated 钩子，要把 key 换成 value
 Menu Root Indent = 0 可以造成问题
+Md Loader 对于 strong 的处理
 
 // issue fix, add delay prop
 // add trigger to tooltip

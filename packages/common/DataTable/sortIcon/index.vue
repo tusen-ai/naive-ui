@@ -104,7 +104,7 @@ export default {
     //       type: val,
     //       column: this.column
     //     }
-    //     this.$emit('on-sort-change', val, this.column, sorter)
+    //     this.$emit('sort-change', val, this.column, sorter)
     //   }
     // }
   },

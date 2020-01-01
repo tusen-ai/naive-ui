@@ -7,103 +7,99 @@
  -->
 <template>
   <div
-    ref="tableWrapper"
-    class="n-data-table__wrapper n-data-table"
+    ref="wrapper"
+    class="n-data-table"
     :class="{
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
-      'n-data-table--col-border': colBorder,
+      'n-data-table--bordered': bordered,
       'n-data-table--no-data': showingData.length === 0
     }"
   >
     <div
-      ref="tbodyWrapper"
-      class="n-data-table__tbody"
-      :style="tbodyWrapperStl"
+      ref="tableWrapper"
+      class="n-data-table-tables-wrapper"
     >
-      <div
-        v-if="fixedLeftColumn.length"
-        class="n-data-table__fixed--left n-data-table__fixed"
-        :class="fixedLeftColumndClass"
-      >
-        <base-table
-          ref="fixedLeftTable"
-          :header-height="headerHeight"
-          :columns="fixedLeftColumn"
-          :col-group-stl="colGroup"
-          :sort-indexs="sortIndexs"
-          :selected-filter="selectedFilter"
-          :showing-data="showingData"
-          :current-page-selected-len="currentPageSelectedLen"
-          :table-stl="tableStl"
-          :row-class-name="rowClassName"
-          :check-boxes="checkBoxes"
-          :disabled-check-box="disabledCheckBox"
-          header-ref-name="header"
-          :scroll-bar-vertical-width="scrollBarWidth"
-          :tbody-height="tbodyWrapperHeight"
-          :tr-height="trHeight"
-          :loading="loading"
-          :fixed="true"
-          @on-scroll="onBodyScrolll"
-          @on-checkbox-all="onAllCheckboxesClick"
-          @on-sort-change="onSortChange"
-          @on-filter="onFilter"
-        />
-      </div>
       <!-- table head -->
       <base-table
         ref="mainTable"
         :scroll-x="scrollX"
-        :table-stl="tableStl"
+        :body-style="bodyStyle"
         :showing-data="showingData"
         :columns="columns"
         :row-class-name="rowClassName"
         :check-boxes="checkBoxes"
         :disabled-check-box="disabledCheckBox"
         :loading="loading"
-        :col-group-stl="colGroup"
-        :sort-indexs="sortIndexs"
+        :sort-indexes="sortIndexes"
         :selected-filter="selectedFilter"
-        :current-page-selected-len="currentPageSelectedLen"
+        :current-page-selected-len="currentPageSelectedLength"
         :body-min-height="42"
-        :scroll-bar-vertical-width="scrollBarWidth"
-        @scroll.native="onTableWrapperScroll"
-        @on-scroll="onBodyScrolll"
-        @on-checkbox-all="onAllCheckboxesClick"
-        @on-sort-change="onSortChange"
-        @on-filter="onFilter"
+        @header-scroll="handleMainTableHeaderScroll"
+        @scroll="handleMainTableBodyScroll"
+        @check-all="handleCheckAll"
+        @sort-change="onSortChange"
+        @filter="onFilter"
       >
         <slot name="append" />
       </base-table>
       <div
         v-if="fixedRightColumn.length"
-        class="n-data-table__fixed--right n-data-table__fixed"
-        :class="fixedRightColumndClass"
+        class="n-data-table-table-wrapper n-data-table-table-wrapper--right-fixed"
+        :class="{
+          'n-data-table-table-wrapper--active': mainTableScrollContainerWidth && mainTableScrollContainerWidth + horizontalScrollLeft !== scrollX
+        }"
       >
         <base-table
-          ref="fixedRightTable"
+          ref="rightFixedTable"
+          placement="right"
           :header-height="headerHeight"
           :columns="fixedRightColumn"
-          :col-group-stl="colGroup"
-          :sort-indexs="sortIndexs"
+          :sort-indexes="sortIndexes"
           :selected-filter="selectedFilter"
           :showing-data="showingData"
-          :current-page-selected-len="currentPageSelectedLen"
-          :table-stl="tableStl"
+          :current-page-selected-len="currentPageSelectedLength"
+          :body-style="bodyStyle"
           :row-class-name="rowClassName"
           :check-boxes="checkBoxes"
           :disabled-check-box="disabledCheckBox"
-          :tbody-height="tbodyWrapperHeight"
           :tr-height="trHeight"
           :loading="loading"
           :fixed="true"
-          @on-scroll="onBodyScrolll"
-          @on-checkbox-all="onAllCheckboxesClick"
-          @on-sort-change="onSortChange"
-          @on-filter="onFilter"
+          @scroll="handleFixedTableBodyScroll"
+          @check-all="handleCheckAll"
+          @sort-change="onSortChange"
+          @filter="onFilter"
         />
       </div>
-
+      <div
+        v-if="fixedLeftColumn.length"
+        class="n-data-table-table-wrapper n-data-table-table-wrapper--left-fixed"
+        :class="{
+          'n-data-table-table-wrapper--active': horizontalScrollLeft > 0
+        }"
+      >
+        <base-table
+          ref="leftFixedTable"
+          :header-height="headerHeight"
+          :columns="fixedLeftColumn"
+          :sort-indexes="sortIndexes"
+          :selected-filter="selectedFilter"
+          :showing-data="showingData"
+          :current-page-selected-len="currentPageSelectedLength"
+          :body-style="bodyStyle"
+          :row-class-name="rowClassName"
+          :check-boxes="checkBoxes"
+          :disabled-check-box="disabledCheckBox"
+          header-ref-name="header"
+          :tr-height="trHeight"
+          :loading="loading"
+          :fixed="true"
+          @scroll="handleFixedTableBodyScroll"
+          @check-all="handleCheckAll"
+          @sort-change="onSortChange"
+          @filter="onFilter"
+        />
+      </div>
       <!-- loading -->
       <transition name="n-table-loading--transition">
         <div v-if="loading" class="n-data-table__loading">
@@ -113,7 +109,6 @@
           />
         </div>
       </transition>
-
       <div
         v-if="showingData.length === 0 && !loading"
         class="n-data-table__no-data-tip"
@@ -124,7 +119,6 @@
     <!-- 分页 -->
     <div
       v-if="pagination !== false"
-      :style="tbodyWrapperStl"
       class="n-data-table__pagination"
     >
       <n-pagination
@@ -141,8 +135,6 @@
 </template>
 
 <script>
-// import searchInput from '../searchInput'
-import { noopFn } from '../../../utils/index'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import { storageMixin } from '../store'
@@ -162,21 +154,10 @@ const sortOrderReverseMap = {
 export default {
   name: 'NDataTable',
   components: {
-    // searchInput,
     BaseTable
   },
   mixins: [storageMixin, withapp, themeable],
   props: {
-    // search: {
-    //   /**
-    //    * @description if onSearch === 'custom' will exec this.onChange
-    //    * columns:{label,value}
-    //    * placeholder @description search input placeholder
-    //    * onSearch @type Function | String 'custom' @returns Boolean, @description used in locale @example ( key, word,row)=>{return row.xxx.includes[word]}
-    //    */
-    //   type: [Object, Boolean],
-    //   default: false
-    // },
     pagination: {
       /**
        * @description pagination === false will now show pagination
@@ -198,7 +179,7 @@ export default {
     },
     onChange: {
       type: Function,
-      default: noopFn
+      default: () => {}
     },
     minHeight: {
       type: [Number, String],
@@ -206,16 +187,12 @@ export default {
     },
     maxHeight: {
       type: [Number, String],
-      default: 'auto'
+      default: null
     },
     maxWidth: {
       type: [Number, String],
-      default: 'auto'
+      default: null
     },
-    // hoverColor: {
-    //   default: '#323850',
-    //   type: String
-    // },
     columns: {
       type: Array,
       required: true
@@ -232,57 +209,34 @@ export default {
       type: [Boolean],
       default: false
     },
-    colBorder: {
+    bordered: {
       type: Boolean,
       default: true
     },
     scrollX: {
-      type: [Number, String],
-      default: 0
+      type: Number,
+      default: null
     }
   },
   data () {
     return {
       triggerOnChange: true,
-      headerHeight: 0,
-      copyData: [],
-      sortIndexs: {},
-      wrapperWidth: 'unset',
-      tbodyWidth: 'auto;',
-      scrollBarWidth: '0',
+      headerHeight: null,
+      clonedData: [],
+      sortIndexes: {},
+      tbodyWidth: null,
       processedData: [],
       currentFilterColumn: null,
-      // currentSearchColumn: null,
       currentPage: 1,
       selectedFilter: {},
       checkBoxes: [],
       disabledCheckBox: [],
-      tbodyWrapperHeight: 0,
-      trHeight: 0,
+      trHeight: null,
+      mainTableScrollContainerWidth: null,
       horizontalScrollLeft: 0
     }
   },
   computed: {
-    fixedLeftColumndClass () {
-      return {
-        'n-data-table__fixed--active': this.horizontalScrollLeft > 0
-      }
-    },
-    fixedRightColumndClass () {
-      return {
-        'n-data-table__fixed--active': this.horizontalScrollLeft < this.tbodyWrapperWidth
-      }
-    },
-    tbodyWrapperStl () {
-      let stl = {}
-      // if (this.maxWidth) {
-      //   stl.maxWidth =
-      //     typeof this.maxWidth === 'number'
-      //       ? this.maxWidth + 'px'
-      //       : this.maxWidth
-      // }
-      return stl
-    },
     fixedLeftColumn () {
       return this.columns
         .filter(column => {
@@ -310,8 +264,8 @@ export default {
     currentSortColumn () {
       let sorterKey = null
       let i = 0
-      Object.keys(this.sortIndexs).forEach(key => {
-        if (this.sortIndexs[key] !== null) {
+      Object.keys(this.sortIndexes).forEach(key => {
+        if (this.sortIndexes[key] !== null) {
           sorterKey = key
         }
       })
@@ -329,7 +283,7 @@ export default {
         sortable: sorterColumn.sortable,
         sorter: sorterColumn.sorter,
         key: sorterKey,
-        type: this.sortIndexs[sorterKey],
+        type: this.sortIndexes[sorterKey],
         column: sorterColumn,
         i
       }
@@ -346,7 +300,7 @@ export default {
     pageCount () {
       if (this.pagination) {
         // TODO: check count limit is exisit
-        let total = this.pagination.total
+        const total = this.pagination.total
         // if (this.pagination.custom !== true) {
         //   total = this.data.length
         // }
@@ -359,59 +313,37 @@ export default {
       if (data === null) {
         data = []
       } else if (!this.processedData.length) {
-        data = this.copyData
+        data = this.clonedData
       }
       if (this.pagination.custom !== true) {
         data = this.computePageDivideData(data)
       }
       return data
     },
-    tableStl () {
-      const stl = {
-        ...this.colGroup
-      }
-      if (this.maxHeight) {
-        stl.maxHeight =
-          typeof this.maxHeight === 'number'
-            ? this.maxHeight + 'px'
-            : this.maxHeight
-      }
-      if (this.minHeight !== 'unset') {
-        stl.minHeight =
-          typeof this.minHeight === 'number'
-            ? this.minHeight + 'px'
-            : this.minHeight
-      }
-
-      return stl
+    styleMaxHeight () {
+      if (typeof this.maxHeight === 'number') return this.maxHeight + 'px'
+      return this.maxHeight
     },
-    colGroup () {
-      let stl = {}
-
-      return stl
+    styleMinHeight () {
+      if (typeof this.minHeight === 'number') return this.minHeight + 'px'
+      return this.minHeight
     },
-    headColWidth () {
-      return (
-        (this.wrapperWidth - this.scrollBarWidth) /
-        this.columns.length
-      ).toFixed(3)
-    },
-    colWidth () {
-      return (
-        (this.wrapperWidth - this.scrollBarWidth) /
-        this.columns.length
-      ).toFixed(3)
+    bodyStyle () {
+      return {
+        maxHeight: this.styleMaxHeight,
+        minHeight: this.styleMinHeight
+      }
     },
     selectedRows () {
       return this.checkBoxes
         .map((isChecked, idx) => {
           if (isChecked && this.disabledCheckBox[idx] !== false) {
-            return this.copyData[idx]
+            return this.clonedData[idx]
           }
         })
         .filter(item => item !== void 0)
     },
-    currentPageSelectedLen () {
+    currentPageSelectedLength () {
       let selectedLen = 0
       this.showingData.forEach(item => {
         let realIdx = item._index
@@ -426,24 +358,22 @@ export default {
     },
     isCheckedBoxAllIndeterminate () {
       if (
-        this.currentPageSelectedLen !== this.showingData.length &&
+        this.currentPageSelectedLength !== this.showingData.length &&
         this.showingData.length !== 0 &&
-        this.currentPageSelectedLen !== 0
+        this.currentPageSelectedLength !== 0
       ) {
         return true
       }
       return false
     },
-    allCheckboxesSelect: {
-      get () {
-        if (
-          this.currentPageSelectedLen === this.showingData.length &&
-          this.showingData.length !== 0
-        ) {
-          return true
-        }
-        return false
+    allCheckboxesSelect () {
+      if (
+        this.currentPageSelectedLength === this.showingData.length &&
+        this.showingData.length !== 0
+      ) {
+        return true
       }
+      return false
     }
   },
   watch: {
@@ -463,7 +393,7 @@ export default {
       // if (this.pagination.custom === true) {
 
       this.useRemoteChange()
-      this.bodyScrollToTop()
+      this.scrollMainTableBodyToTop()
       // }
 
       // this.currentPageAllSelect = this.allCheckboxesSelect
@@ -471,20 +401,15 @@ export default {
     },
     data () {
       this.initData()
-      this.processedData = this.computeShowingData()
+      this.processedData = this.createShowingData()
       this.processedDataNoSort = null
       this.checkBoxes = []
       this.disabledCheckBox = []
       this.currentPageAllSelect = false
       this.$tableStore.commit('selectedAllChecked', false)
-
-      this.computeScollBar()
-    },
-    currentSearchColumn () {
-      this.processedData = this.computeShowingData()
     },
     currentSortColumn (sorter, oldSorter) {
-      this.processedData = this.computeShowingData()
+      this.processedData = this.createShowingData()
       //  上次的若是为custom,本次为locale sort那么也需要触发useRemoteChange
       // if (
       //   sorter.sorter === 'custom' ||
@@ -493,7 +418,7 @@ export default {
       //   this.useRemoteChange()
       // }
       this.useRemoteChange()
-      this.$emit('on-sort-change', this.currentSortColumn)
+      this.$emit('sort-change', this.currentSortColumn)
     },
     checkBoxes () {
       this.$emit('on-selected-change', this.selectedRows)
@@ -516,13 +441,12 @@ export default {
             }
           }
         })
-
-        this.$emit('on-filter-change', this.getFilterData())
+        this.$emit('filter-change', this.getFilterData())
       }
     },
     currentFilterColumn: {
       handler () {
-        this.processedData = this.computeShowingData()
+        this.processedData = this.createShowingData()
         // because after filter length maybe change , so need to reset current page
         if (this.triggerOnChange) this.currentPage = 1
       },
@@ -533,12 +457,11 @@ export default {
     this.initData()
   },
   mounted () {
-    this.init()
-
-    window.addEventListener('resize', this.init)
+    this.collectDOMSizes()
+    window.addEventListener('resize', this.collectDOMSizes)
   },
   beforeDestroy () {
-    window.removeEventListener('resize', this.init)
+    window.removeEventListener('resize', this.collectDOMSizes)
   },
   methods: {
     setDefaultOrderAndFilter () {
@@ -548,57 +471,77 @@ export default {
         }
         if (column.defaultSortOrder) {
           this.$set(
-            this.sortIndexs,
+            this.sortIndexes,
             column.key || i,
             sortOrderMap[column.defaultSortOrder]
           )
         }
       })
     },
-    onTableWrapperScroll (event) {
-      const el = event.target
-      const left = el.scrollLeft
-      this.horizontalScrollLeft = left - 1
+    scrollMainTableBodyToTop () {
+      const {
+        body
+      } = this.getScrollElements
+      body.scrollTop = 0
     },
-    bodyScrollToTop () {
-      const scrollEls = [
-        this.fixedLeftTBodyEl,
-        this.mainTBodyEl,
-        this.fixedRightTBodyEl
-      ]
-      scrollEls.forEach(el => {
-        if (el) {
-          el.classList.add('n-table--scroll-smooth')
-          window.requestAnimationFrame(() => {
-            el.scrollTop = 0
-            el.classList.remove('n-table--scroll-smooth')
-          })
+    getScrollElements () {
+      const header = this.$refs.mainTable.getHeaderElement()
+      const body = this.$refs.mainTable ? this.$refs.mainTable.getBodyElement() : null
+      const fixedLeftBody = this.$refs.leftFixedTable ? this.$refs.leftFixedTable.getBodyElement() : null
+      const fixedRightBody = this.$refs.rightFixedTable ? this.$refs.rightFixedTable.getBodyElement() : null
+      return {
+        header,
+        body,
+        fixedLeftBody,
+        fixedRightBody
+      }
+    },
+    handleMainTableHeaderScroll (e) {
+      const {
+        scrollLeft
+      } = e.target
+      const {
+        body: bodyEl
+      } = this.getScrollElements()
+      bodyEl.scrollLeft = scrollLeft
+      this.horizontalScrollLeft = scrollLeft
+    },
+    handleMainTableBodyScroll (e) {
+      this.handleTableBodyScroll(e, true)
+    },
+    handleFixedTableBodyScroll (e) {
+      this.handleTableBodyScroll(e, false)
+    },
+    handleTableBodyScroll (e, isMainTable = false) {
+      const {
+        scrollTop,
+        scrollLeft
+      } = e.target
+      const {
+        header: headerEl,
+        body: bodyEl,
+        fixedLeftBody: leftBodyEl,
+        fixedRightBody: rightBodyEl
+      } = this.getScrollElements()
+      if (isMainTable) {
+        if (headerEl) {
+          headerEl.scrollLeft = scrollLeft
+          this.horizontalScrollLeft = scrollLeft
         }
-      })
-    },
-    onBodyScrolll (event) {
-      const currentEl = this.$tableStore.state.currentTableEl
-      const scrollEls = [
-        this.fixedLeftTBodyEl,
-        this.mainTBodyEl,
-        this.fixedRightTBodyEl
-      ]
-
-      window.requestAnimationFrame(() => {
-        scrollEls
-          .filter(
-            item => item !== currentEl && item !== null && item !== undefined
-          )
-          .forEach(el => {
-            if (currentEl) el.scrollTop = currentEl.scrollTop
-          })
-      })
-
-      event.stopPropagation()
-      event.preventDefault()
+      }
+      if (bodyEl && bodyEl.scrollTop !== scrollTop) {
+        bodyEl.scrollTop = scrollTop
+      }
+      if (leftBodyEl && leftBodyEl.scrollTop !== scrollTop) {
+        leftBodyEl.scrollTop = scrollTop
+      }
+      if (rightBodyEl && rightBodyEl.scrollTop !== scrollTop) {
+        rightBodyEl.scrollTop = scrollTop
+      }
+      this.mainTableScrollContainerWidth = bodyEl.offsetWidth
     },
     initData () {
-      this.copyData = this.data.slice(0).map((row, idx) => {
+      this.clonedData = this.data.slice(0).map((row, idx) => {
         return {
           row,
           _index: idx
@@ -650,7 +593,7 @@ export default {
         this.clearSort()
         return
       }
-      this.$set(this.sortIndexs, columnKey, sortOrderMap[order])
+      this.$set(this.sortIndexes, columnKey, sortOrderMap[order])
       this.$nextTick(() => {
         this.triggerOnChange = !triggerOnChange
       })
@@ -699,24 +642,14 @@ export default {
       // TODO:测试功能 有远程 无远程 ，半有半无
     },
     clearSort () {
-      Object.keys(this.sortIndexs).forEach(key => {
-        this.sortIndexs[key] = 0
-      })
-    },
-    computeScollBar () {
-      this.$nextTick(() => {
-        let tr = this.relTable.querySelector('tr')
-        this.trHeight = tr ? tr.offsetHeight : 0
-        const tbody = this.mainTBodyEl
-        this.tbodyWrapperHeight = tbody.clientHeight
-        this.tbodyWrapperOffsetHeight = tbody.offsetHeight
-        this.scrollBarWidth = tbody.offsetWidth - tbody.clientWidth
+      Object.keys(this.sortIndexes).forEach(key => {
+        this.sortIndexes[key] = 0
       })
     },
     computeCurrentPageSelection () {
       const needChecked =
-        (this.currentPageSelectedLen > 0 &&
-          this.currentPageSelectedLen === this.showingData.length) ||
+        (this.currentPageSelectedLength > 0 &&
+          this.currentPageSelectedLength === this.showingData.length) ||
         this.isCheckedBoxAllIndeterminate
       this.$tableStore.commit('selectedAllChecked', needChecked)
     },
@@ -735,54 +668,21 @@ export default {
       }
       return data
     },
-    init () {
-      this.$nextTick(() => {
-        this.mainTBodyEl = this.$refs.mainTable.$refs.tbody.$el
-        this.mainTBodyWrapperEl = this.$refs.mainTable.$el
+    collectDOMSizes () {
+      this.headerEl = this.$refs.mainTable.$refs.header.$el.querySelector(
+        'thead'
+      )
+      this.headerHeight = this.headerEl.offsetHeight
 
-        this.relTable = this.mainTBodyEl.querySelector('table')
-        // this.relTHead = this.$refs.header.$el.querySelector('table')
-        this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
-
-        this.headerRealEl = this.$refs.mainTable.$refs.header.$el.querySelector(
-          'thead'
-        )
-        this.headerHeight = this.headerRealEl.offsetHeight
-        this.fixedLeftTBodyEl =
-          this.$refs.fixedLeftTable && this.$refs.fixedLeftTable.$refs.tbody.$el
-        this.fixedRightTBodyEl =
-          this.$refs.fixedRightTable &&
-          this.$refs.fixedRightTable.$refs.tbody.$el
-        this.wrapperWidth = this.$refs.tableWrapper.offsetWidth
-        this.tbodyWrapperWidth = this.$refs.tbodyWrapper.clientWidth
-
-        this.horizontalScrollLeft =
-          this.mainTBodyWrapperEl.clientWidth > parseInt(this.scrollX) ? 0 : -1
-
-        this.computeScollBar()
-      })
+      const { body: mainTableScrollContainer } = this.getScrollElements()
+      this.mainTableScrollContainerWidth = mainTableScrollContainer.offsetWidth
     },
-    onAllCheckboxesClick () {
+    handleCheckAll () {
       this.showingData.forEach(item => {
         this.checkBoxes[item._index] = this.$tableStore.state.selectedAllChecked
       })
       this.checkBoxes = [].concat(this.checkBoxes)
     },
-    // handleSearch ({ key, word }) {
-    //   this.currentSearchColumn = {
-    //     key,
-    //     word
-    //   }
-    //   if (word.length === 0) {
-    //     this.currentSearchColumn = null
-    //   } else {
-    //     // because after search ,length maybe change , so need to reset current page
-    //     this.currentPage = 1
-    //   }
-    //   if (this.search.onSearch === 'custom') {
-    //     this.useRemoteChange()
-    //   }
-    // },
     getFilterData (option = 'all') {
       if (!this.currentFilterColumn) {
         return null
@@ -802,15 +702,6 @@ export default {
       }
       return currentFilterColumn
     },
-    // getCustomSorterData () {
-    //   if (!this.currentSortColumn) {
-    //     return null
-    //   }
-    //   const isCustom =
-    //     this.currentSortColumn.sorter === 'custom' &&
-    //     this.currentSortColumn.type !== null
-    //   return isCustom ? this.currentSortColumn : null
-    // },
     useRemoteChange () {
       if (!this.triggerOnChange) return
       clearTimeout(this.remoteTimter)
@@ -832,14 +723,13 @@ export default {
               }
               : null,
           pagination: this.paginationer || null
-          // search: this.currentSearchColumn
         }
-        this.$emit('on-change', emitData)
+        this.$emit('change', emitData)
         this.onChange && this.onChange(emitData)
       }, 300)
     },
-    computeShowingData () {
-      let data = this.copyData
+    createShowingData () {
+      let data = this.clonedData
       // compute filter
       if (this.currentFilterColumn) {
         // const { filterFn, value } = this.operatingfilter
@@ -862,7 +752,7 @@ export default {
       }
       // compute sort
       if (this.currentSortColumn) {
-        data = this.computeSortData(data)
+        data = this.createSortedData(data)
       }
 
       if (data.length === 0) {
@@ -870,13 +760,13 @@ export default {
       }
       return data
     },
-    computeSortData (data) {
+    createSortedData (data) {
       data = data.slice(0)
       let { sortable, key, type, column } = this.currentSortColumn
       // use remote sort
       if (sortable === true) {
         // console.log(
-        //   'TCL: computeSortData -> this.processedDataNoSort ',
+        //   'TCL: createSortedData -> this.processedDataNoSort ',
         //   this.processedDataNoSort
         // )
 
@@ -908,9 +798,9 @@ export default {
         }
       }
       if (type !== 0) {
-        Object.keys(this.sortIndexs).forEach(sorterKey => {
+        Object.keys(this.sortIndexes).forEach(sorterKey => {
           if (sorterKey !== column.key) {
-            this.sortIndexs[sorterKey] = 0
+            this.sortIndexes[sorterKey] = 0
           }
         })
       }
@@ -921,8 +811,8 @@ export default {
       this.useRemoteChange()
       // }
     },
-    onSortChange (sortIndexs) {
-      this.sortIndexs = sortIndexs
+    onSortChange (sortIndexes) {
+      this.sortIndexes = sortIndexes
     }
   }
 }

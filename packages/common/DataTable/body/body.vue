@@ -6,50 +6,56 @@
  * @LastEditTime: 2019-11-07 16:17:14
  -->
 <template>
-  <!-- table body -->
-  <div
-    ref="scrollContainer"
-    class="n-table n-data-table__body"
-    :class="{
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+  <n-scrollbar
+    ref="scrollbar"
+    class="n-data-table-base-table-body"
+    :style="tbodyStyle"
+    :content-style="{
+      width: contentStyleWidth
     }"
-    :style="computeTbodyStl"
-    style="border-top-left-radius:0;border-top-right-radius:0;box-sizing: border-box;"
-    @scroll="onBodyScrolll"
-    @mouseenter="onMouseEnter"
-    @mouseleave="onMouseLeave"
+    :horizontal-rail-style="{ zIndex: 1 }"
+    :vertical-rail-style="{ zIndex: 1 }"
+    :show-rail="!fixed"
+    @mouseenter="handleMouseEnter"
+    @mouseleave="handleMouseLeave"
+    @scroll="handleScroll"
   >
-    <table ref="scrollContent" cellspacing="0">
+    <table cellspacing="0">
       <colgroup>
         <col
-          v-for="(column, i) in columns"
-          :key="i"
-          :style="computeCustomWidthStl(column)"
+          v-for="(column, index) in columns"
+          :key="index"
+          :style="createCustomWidthStyle(column, index, placement)"
         >
       </colgroup>
       <tbody>
         <template v-if="showingData.length === 0">
-          <n-tr>
-            <n-td v-for="column in columns" :key="column.key" />
-          </n-tr>
+          <tr>
+            <td v-for="column in columns" :key="column.key" />
+          </tr>
         </template>
-        <n-tr
+        <tr
           v-for="(rowData, i) in showingData"
           :key="i"
-          :style="computeTrStl"
+          class="n-data-table-tr"
+          :style="{
+            height: trHeight && trHeight + 'px'
+          }"
           :class="
             typeof rowClassName === 'function'
               ? rowClassName(rowData, i)
               : rowClassName
           "
-          @mouseenter.native="e => onRowHover(e, rowData, i)"
-          @mouseleave.native="e => onRowLeave(e, rowData, i)"
+          @mouseenter="e => onRowHover(e, rowData, i)"
+          @mouseleave="e => onRowLeave(e, rowData, i)"
         >
           <template v-for="column in columns">
-            <n-td
+            <td
               :key="column.key"
-              :style="computeAlign(column)"
-              :class="computeTdClass(column, rowData)"
+              :style="{
+                textAlign: column.align || null
+              }"
+              :class="createTdClass(column, rowData)"
             >
               <!-- 批量选择 -->
               <n-checkbox
@@ -79,63 +85,54 @@
                 :render="column.render"
                 :column="column"
               />
-            </n-td>
+            </td>
           </template>
-        </n-tr>
+        </tr>
       </tbody>
-      <!-- <div
-    v-if="scrollBarHorizontalHeight"
-    class="n-data-table-scroll-bar-placeholder"
-    :style="{ height: scrollBarHorizontalHeight + 'px' }"
-  /> -->
     </table>
-  </div>
+  </n-scrollbar>
 </template>
 
 <script>
 import row from '../row/index.js'
-import { addClass, removeClass } from '../utils'
+import { addClass, removeClass, createCustomWidthStyle } from '../utils'
 import { storageMixin } from '../store'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
-// import NScrollbar from '../../Scrollbar'
+import NScrollbar from '../../Scrollbar'
 
 export default {
   components: {
-    // NScrollbar,
+    NScrollbar,
     row
   },
   mixins: [ withapp, themeable, storageMixin ],
   props: {
+    placement: {
+      type: String,
+      default: null
+    },
+    scrollX: {
+      type: Number,
+      default: null
+    },
     fixed: {
       type: Boolean,
       default: false
     },
     trHeight: {
       type: Number,
-      default: 0
+      default: null
     },
     minHeight: {
       type: Number,
-      default: 0
-    },
-    height: {
-      type: Number,
-      default: 0
+      default: null
     },
     tbodyWrapperOffsetHeight: {
       type: Number,
-      default: 0
+      default: null
     },
-    scrollBarHorizontalHeight: {
-      type: Number,
-      default: 0
-    },
-    scrollBarVerticalWidth: {
-      type: [Number, String],
-      default: 0
-    },
-    tableStl: {
+    bodyStyle: {
       type: Object,
       default: () => ({})
     },
@@ -159,10 +156,6 @@ export default {
       type: Array,
       default: () => []
     },
-    headerRefName: {
-      type: String,
-      default: null
-    },
     loading: {
       type: Boolean,
       default: false
@@ -172,28 +165,23 @@ export default {
     return {}
   },
   computed: {
-    computeTrStl () {
-      return {
-        height: this.trHeight ? this.trHeight + 'px' : null
-      }
+    contentStyleWidth () {
+      return this.scrollX && `${this.scrollX}px`
     },
-    computeTbodyStl () {
+    tbodyStyle () {
       if (this.fixed && this.height) {
-        return Object.assign({}, this.tableStl, {
+        return Object.assign({}, this.bodyStyle, {
           height: this.height + 'px',
-          minHeight: this.minHeight + 'px',
-          marginRight: this.scrollBarVerticalWidth
-            ? -this.scrollBarVerticalWidth + 'px'
-            : null
+          minHeight: this.minHeight + 'px'
         })
       } else {
-        return this.tableStl
+        return this.bodyStyle
       }
     }
   },
   watch: {
     '$tableStore.state.currentHoverRow' (index, oldIndex) {
-      const hoverClassName = 'n-table__tr--hover'
+      const hoverClassName = 'n-data-table-tr--hover'
       const rowsDom = this.$el.querySelectorAll('table tr')
       const oldRowDom = rowsDom[oldIndex]
       const newRowDom = rowsDom[index]
@@ -207,23 +195,14 @@ export default {
       })
     }
   },
-  mounted () {
-    if (this.headerRefName) {
-      let headerRef = this.$parent.$refs[this.headerRefName]
-      this.headerRealEl = headerRef.$el.querySelector('thead')
-    }
-  },
   methods: {
     getScrollContainer () {
-      return this.$refs.scrollContainer || null
+      return this.$refs.scrollbar.$refs.scrollContainer
     },
-    getScrollContent () {
-      return this.$refs.scrollContent || null
-    },
-    onMouseEnter (e) {
+    handleMouseEnter (e) {
       this.$tableStore.commit('currentTableEl', e.currentTarget)
     },
-    onMouseLeave (e) {
+    handleMouseLeave (e) {
       this.$tableStore.commit('currentTableEl', null)
     },
     onRowHover (e, rowData, index) {
@@ -232,43 +211,12 @@ export default {
     onRowLeave (e, rowData) {
       this.$tableStore.commit('currentHoverRow', null)
     },
-    computeCustomWidthStl (column) {
-      if (column.width) {
-        let width = column.width
-        return {
-          width: width + 'px',
-          'padding-right': this.scrollBarWidth + 'px'
-          // minWidth: width + 'px'
-        }
-      } else if (column.type === 'selection') {
-        let width = 60
-        return {
-          width: width + 'px',
-          'padding-right': this.scrollBarWidth + 'px'
-          // minWidth: width + 'px'
-        }
-      }
-      return null
-    },
-    computeAlign (column) {
-      if (column.align) {
-        return {
-          'text-align': column.align
-        }
-      }
-    },
-
-    computeTdClass (column, params) {
+    createCustomWidthStyle: createCustomWidthStyle,
+    createTdClass (column, params) {
       let className = {}
-      if (column.fixed) {
-        className['n-data-table__td--fixed'] = true
-      }
       if (column.ellipsis) {
         className['n-data-table__td-text'] = true
         className['n-data-table__td-text--ellipsis'] = true
-
-        //  'n-data-table__td-text': true,
-        //     'n-data-table__td-text--ellipsis': column.ellipsis
       }
       if (!column.className) {
         return className
@@ -283,11 +231,9 @@ export default {
       // console.log(className)
       return className
     },
-    onBodyScrolll (event) {
-      this.$emit('on-scroll', event)
+    handleScroll (event) {
+      this.$emit('scroll', event)
     }
   }
 }
 </script>
-
-<style></style>

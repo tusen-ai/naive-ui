@@ -7,7 +7,7 @@
   :columns="columns"
   :data="data"
   :pagination="pagination"
-  @on-change="onChange"
+  @change="onChange"
 >
 </n-data-table>
 ```

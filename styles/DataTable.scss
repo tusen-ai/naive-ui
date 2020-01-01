@@ -1,0 +1,250 @@
+@import "./mixins/mixins.scss";
+@import "./themes/vars.scss";
+
+@include themes-mixin {
+  @include b(data-table) {
+    width: 100%;
+    font-size: $table-font-size;
+    padding-bottom: 8px;
+    @include b(data-table-tr) {
+      @include m(hover) {
+        background-color: $--table-row-hover;
+      }
+    }
+    table {
+      word-wrap: break-word;
+      word-break: break-all;
+      table-layout: fixed;
+      tbody tr:hover {
+        background-color: transparent;
+      }
+    }
+    table {
+      thead {
+        tr {
+          th {
+            padding: 12px 6px 12px 19px;
+            text-align: left;
+            border: none;
+            font-weight: 400;
+          }
+          th:nth-child(1) {
+            padding-left: 21px;
+          }
+          th:nth-last-child(1) {
+            padding-left: 21px;
+          }
+        }
+      }
+      tbody {
+        background-color: $--table-body-background-color;
+        color: $--table-body-color;
+        tr {
+          transition: background-color 0.3s;
+          td {
+            padding: 16px 6px 12px 19px;
+            text-align: left;
+            border: none;
+          }
+          td:nth-child(1) {
+            padding-left: 21px;
+          }
+          td:nth-last-child(1) {
+            padding-left: 21px;
+          }
+        }
+        tr:hover {
+          background-color: $--table-row-hover;
+        }
+      }
+    }
+    background-color: $--table-body-background-color;
+    table {
+      border-collapse: separate;
+      thead {
+        background-color: $--table-header-background-color;
+        color: $--table-header-color;
+        tr {
+          th {
+            &:last-of-type {
+              border-right: 0;
+            }
+          }
+        }
+      }
+      tbody {
+        background-color: $--table-body-background-color;
+        color: $--table-body-color;
+        tr:hover {
+          background-color: $--table-row-hover;
+        }
+        tr {
+          td {
+            &:last-of-type {
+              border-right: 0;
+            }
+          }
+        }
+      }
+    }
+    @include m(bordered) {
+      th {
+        border-right: $--table-td-border-right;
+      }
+      td {
+        border-right: $--table-td-border-right;
+      }
+    }
+  }
+  @include b(data-table) {
+    @include b(data-table-tables-wrapper) {
+      position: relative;
+      border: $--table-border;
+      border-radius: 6px;
+      overflow: hidden;
+      @include b(data-table-table-wrapper) {
+        @include m(left-fixed) {
+          left: 0;
+          border-right: 1px solid $--n-border-color;
+          @include m(active) {
+            transition: box-shadow 0.2s;
+            border-right: 1px solid transparent;
+            box-shadow: $--table-fixed-column-box-shadow
+          }
+        }
+        @include m(right-fixed) {
+          right: 0;
+          border-left: 1px solid $--n-border-color;
+          @include m(active) {
+            border-left: 1px solid transparent;
+            box-shadow: $--table-fixed-column-box-shadow
+          }
+        }
+        @include m(left-fixed, right-fixed) {
+          border-radius: 0;
+          th {
+            border-radius: 0;
+          }
+          top: 0;
+          bottom: 0;
+          position: absolute;
+          display: inline-block;
+          overflow: hidden;
+          transition: box-shadow .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
+          @include b(data-table-base-table-wrapper) {
+            table {
+              width: unset;
+            }
+          }
+        }
+      }
+      @include b(data-table-base-table-wrapper) {
+        position: relative;
+        table {
+          width: 100%;
+        }
+      }
+    }
+    @include e(loading) {
+      background-color: $--table-loading-background;
+    }
+    @include once {
+      @include e(loading) {
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        top: 0;
+        background-color: $--table-loading-background;
+      }
+      @include e(td-text) {
+        span {
+          cursor: text;
+        }
+        &-center {
+          text-align: center;
+        }
+        &-left {
+          text-align: left;
+        }
+        &-right {
+          text-align: right;
+        }
+        @include m(ellipsis) {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+      }
+      @include e(no-data-tip) {
+        text-align: center;
+        width: 100%;
+        position: absolute;
+        bottom: 8px;
+      }
+      @include e(pagination) {
+        margin-top: 27px;
+        display: flex;
+        justify-content: flex-end;
+      }
+      @include e(operation) {
+        display: flex;
+        justify-content: space-between;
+        &--right,
+        &--left {
+          display: flex;
+        }
+      }
+      @include e(sortable-column) {
+        cursor: pointer;
+      }
+    }
+    @include b(data-table-base-table-header) {
+      overflow: scroll;
+      &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+      }
+      i {
+        fill: $--table-header-icon-color;
+      }
+      th {
+        box-sizing: border-box;
+      }
+    }
+    @include m(no-data) {
+      @include e(fixed) {
+        box-shadow: none;
+        border: none;
+        overflow: visible;
+        @include m(active) {
+          @include m(right) {
+            @include e(header) {
+              box-shadow: -10px 0 16px -5px rgba(0, 0, 0, 0.2);
+            }
+          }
+          @include m(left) {
+            @include e(header) {
+              box-shadow: 10px 0 16px -5px rgba(0, 0, 0, 0.2);
+              th:last-of-type {
+                border: none;
+              }
+            }
+          }
+        }
+        @include m(left) {
+          thead {
+            th {
+              border-top-right-radius: 0;
+              border-right: $--table-td-border-right;
+            }
+          }
+        }
+      }
+      table {
+        td {
+          border: none;
+        }
+      }
+    }
+  }
+}

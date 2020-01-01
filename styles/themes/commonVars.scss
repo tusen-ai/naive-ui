@@ -26,8 +26,10 @@ $--input-number-border-radius: 6px;
 $--input-icon-size: 20px;
 $--input-border-radius: 6px;
 
-$--popover-box-shadow: (0px 2px 12px 0px rgba(0, 0, 0, 0.18));
+$--popover-box-shadow: (0 2px 12px 0 rgba(0, 0, 0, 0.18));
 $--popover-arrow-width: 6px;
+
+$--table-fixed-column-box-shadow: (0 0 12px 0 rgba(0, 0, 0, .18));
 
 $--slider-rail-height: 4px;
 $--slider-dot-size: 8px;

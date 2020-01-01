@@ -1,38 +1,36 @@
 <template>
-  <div class="n-data-table__base-table-wrapper">
+  <div class="n-data-table-base-table-wrapper">
     <table-header
       ref="header"
+      :placement="placement"
       :height="headerHeight"
       :columns="columns"
-      :col-group-stl="colGroupStl"
-      :sort-indexs="sortIndexs"
+      :sort-indexes="sortIndexes"
       :selected-filter="selectedFilter"
       :showing-data="showingData"
-      :scroll-bar-width="scrollBarVerticalWidth"
       :current-page-selected="currentPageSelectedLen"
       :fixed="fixed"
-      :style="stl"
-      @on-checkbox-all="onAllCheckboxesClick"
-      @on-sort-change="onSortChange"
-      @on-filter="onFilter"
+      :scroll-x="scrollX"
+      @scroll="handleHeaderScroll"
+      @check-all="handleCheckboxClick"
+      @sort-change="onSortChange"
+      @filter="onFilter"
     />
     <table-body
-      ref="tbody"
-      :table-stl="tableStl"
-      :style="stl"
+      ref="body"
+      :placement="placement"
+      :body-style="bodyStyle"
+      :scroll-x="scrollX"
       :showing-data="showingData"
       :columns="columns"
       :row-class-name="rowClassName"
       :check-boxes="checkBoxes"
       :disabled-check-box="disabledCheckBox"
-      :header-ref-name="'header'"
-      :scroll-bar-vertical-width="scrollBarVerticalWidth"
-      :height="tbodyHeight"
       :min-height="bodyMinHeight"
       :tr-height="trHeight"
       :loading="loading"
       :fixed="fixed"
-      @on-scroll="onBodyScrolll"
+      @scroll="handleBodyScroll"
     />
     <slot />
   </div>
@@ -50,13 +48,17 @@ export default {
   },
   mixins: [storageMixin],
   props: {
+    placement: {
+      type: String,
+      default: null
+    },
     scrollX: {
-      type: [Number, String],
-      default: 0
+      type: Number,
+      default: null
     },
     bodyMinHeight: {
       type: Number,
-      default: 0
+      default: null
     },
     currentPageSelectedLen: {
       type: Number,
@@ -70,19 +72,11 @@ export default {
       type: Number,
       default: null
     },
-    tbodyHeight: {
-      type: Number,
-      default: 0
-    },
-    colGroupStl: {
-      type: Object,
-      default: () => ({})
-    },
     columns: {
       type: Array,
       default: () => []
     },
-    sortIndexs: {
+    sortIndexes: {
       type: Object,
       default: () => ({})
     },
@@ -100,25 +94,13 @@ export default {
     },
     trHeight: {
       type: Number,
-      default: 0
+      default: null
     },
     height: {
       type: Number,
       default: 0
     },
-    tbodyWrapperOffsetHeight: {
-      type: Number,
-      default: 0
-    },
-    scrollBarHorizontalHeight: {
-      type: Number,
-      default: 0
-    },
-    scrollBarVerticalWidth: {
-      type: [Number, String],
-      default: 0
-    },
-    tableStl: {
+    bodyStyle: {
       type: Object,
       default: () => ({})
     },
@@ -134,42 +116,33 @@ export default {
       type: Array,
       default: () => []
     },
-    headerRefName: {
-      type: String,
-      default: null
-    },
     loading: {
       type: Boolean,
       default: false
     }
   },
-  computed: {
-    stl () {
-      let stl = {}
-      if (this.scrollX) {
-        stl.width =
-          typeof this.scrollX === 'number' ? this.scrollX + 'px' : this.scrollX
-        stl.minWidth = '100%'
-      }
-      return stl
-    }
-  },
   methods: {
-    onAllCheckboxesClick (...args) {
-      this.$emit('on-checkbox-all', ...args)
+    getHeaderElement () {
+      return this.$refs.header.$el
+    },
+    getBodyElement () {
+      return this.$refs.body.getScrollContainer()
+    },
+    handleCheckboxClick (...args) {
+      this.$emit('check-all', ...args)
     },
     onSortChange (...args) {
-      this.$emit('on-sort-change', ...args)
+      this.$emit('sort-change', ...args)
     },
     onFilter (...args) {
-      this.$emit('on-filter', ...args)
+      this.$emit('filter', ...args)
     },
-    onBodyScrolll (...args) {
-      this.$emit('on-scroll', ...args)
+    handleBodyScroll (...args) {
+      this.$emit('scroll', ...args)
+    },
+    handleHeaderScroll (...args) {
+      this.$emit('header-scroll', ...args)
     }
   }
 }
 </script>
-
-<style>
-</style>

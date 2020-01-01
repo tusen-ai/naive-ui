@@ -17,8 +17,8 @@
   :loading="loading"
   :pagination="pagination"
   :max-height="300"
-  scroll-x="1500px"
-  @on-change="onChange"
+  :scroll-x="1500"
+  @change="onChange"
 >
 </n-data-table>
 ```

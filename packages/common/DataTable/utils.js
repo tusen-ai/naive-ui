@@ -12,3 +12,20 @@ export const removeClass = (dom, className) => {
 export const addClass = (dom, className) => {
   dom.classList.add(className)
 }
+
+export const createCustomWidthStyle = function createCustomWidthStyle (column, index, placement) {
+  if (column.width) {
+    let width = column.width
+    if (index === 0 && placement === 'right') width += 1
+    return {
+      width: width + 'px'
+    }
+  } else if (column.type === 'selection') {
+    let width = 60
+    if (index === 0 && placement === 'right') width += 1
+    return {
+      width: width + 'px'
+    }
+  }
+  return null
+}
