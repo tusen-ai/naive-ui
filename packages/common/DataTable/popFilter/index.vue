@@ -1,0 +1,131 @@
+<template>
+  <div class="n-filter-wraper">
+    <n-popselect
+      v-if="!loading && !error"
+      v-model="selectedValue"
+      cancelable
+      :multiple="column.filterMultiple"
+      :options="filterItems"
+      @change="onSelectedChange"
+    >
+      <template v-slot:activator>
+        <filterIcon :status="filterStatus" />
+      </template>
+    </n-popselect>
+    <n-popover v-else placement="bottom" trigger="click">
+      <template v-slot:activator>
+        <filterIcon :status="filterStatus" />
+      </template>
+      <p v-if="loading" class="n-filter-tip-line">
+        <n-spin size="small" />
+      </p>
+      <p v-if="error" class="n-filter-tip-line" style="">
+        Error,refresh
+        <n-icon
+          style="cursor:pointer"
+          type="md-refresh"
+          color="#999"
+          size="18"
+          @click.stop="initItems"
+        >
+          <md-refresh />
+        </n-icon>
+      </p>
+    </n-popover>
+  </div>
+</template>
+
+<script>
+import filterIcon from '../filterIcon'
+import mdRefresh from 'naive-ui/lib/icons/md-refresh'
+
+export default {
+  components: {
+    filterIcon,
+    mdRefresh
+  },
+  props: {
+    value: {
+      required: true,
+      validator () {
+        return true
+      }
+    },
+    column: {
+      type: Object,
+      required: true
+    },
+    items: {
+      type: [Array, Function],
+      required: true
+    }
+  },
+  data () {
+    const selectedValue = this.value || null
+    return {
+      selectedValue: selectedValue,
+      filterItems: [],
+      loading: false,
+      error: false
+    }
+  },
+  computed: {
+    filterStatus () {
+      return (
+        this.selectedValue !== null &&
+        this.selectedValue !== undefined &&
+        this.selectedValue.length !== 0
+      )
+    }
+  },
+  watch: {
+    items (val, oldVal) {
+      this.initItems()
+    },
+    value (val, oldVal) {
+      if (val !== oldVal) {
+        this.selectedValue = val
+      }
+    }
+  },
+  created () {
+    this.initItems()
+  },
+  methods: {
+    initItems () {
+      this.error = false
+      if (typeof this.items === 'function') {
+        this.loading = true
+        this.items().then(
+          items => {
+            this.filterItems = items
+            this.loading = false
+          },
+          err => {
+            console.error(err)
+            this.error = true
+            this.loading = false
+            throw err
+          }
+        )
+      } else {
+        this.filterItems = this.items
+      }
+    },
+    onSelectedChange (val) {
+      this.$emit('input', val)
+      this.$emit('filter', val, this.column)
+    }
+  }
+}
+</script>
+
+<style scoped>
+.n-filter-wraper {
+  display: inline-block;
+}
+.n-filter-tip-line {
+  text-align: center;
+  padding: 5px;
+}
+</style>

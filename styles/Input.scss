@@ -111,7 +111,8 @@
         line-height: 12px;
       }
       @include e(textarea, textarea-mirror) {
-        display: block;
+        display: inline-block;
+        vertical-align: bottom;
         box-sizing: border-box;
         font-family: inherit;
         font-size: inherit;

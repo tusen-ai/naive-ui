@@ -39,11 +39,9 @@ const funcToPromise = (fn, receiver) => {
     })
   }
 }
-const noopFn = () => {}
 
 export {
   getScrollParent,
   deepClone,
-  funcToPromise,
-  noopFn
+  funcToPromise
 }

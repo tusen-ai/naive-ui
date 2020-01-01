@@ -8,8 +8,8 @@
     :class="{
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
-    @mouseenter="enterScrollWrapper"
-    @mouseleave="leaveScrollWrapper"
+    @mouseenter="handleMouseEnterWrapper"
+    @mouseleave="handleMouseLeaveWrapper"
     @dragstart.capture="handleDragStart"
   >
     <div
@@ -31,9 +31,10 @@
       <slot />
     </template>
     <div
+      v-if="showRail"
       ref="verticalRail"
       class="n-scrollbar-rail n-scrollbar-rail--vertical"
-      :style="{width: scrollbarSize}"
+      :style="{...horizontalRailStyle, width: scrollbarSize }"
     >
       <transition name="n-scrollbar--transition">
         <div
@@ -52,9 +53,10 @@
       </transition>
     </div>
     <div
+      v-if="showRail"
       ref="horizontalRail"
       class="n-scrollbar-rail n-scrollbar-rail--horizontal"
-      :style="{height: scrollbarSize}"
+      :style="{ ...verticalRailStyle, height: scrollbarSize }"
     >
       <transition name="n-scrollbar--transition">
         <div
@@ -111,6 +113,18 @@ export default {
     containerStyle: {
       type: Object,
       default: null
+    },
+    horizontalRailStyle: {
+      type: Object,
+      default: null
+    },
+    verticalRailStyle: {
+      type: Object,
+      default: null
+    },
+    showRail: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -275,13 +289,15 @@ export default {
         })
       }
     },
-    enterScrollWrapper () {
+    handleMouseEnterWrapper () {
+      this.$emit('mouse-enter')
       if (this.disabled) return
       this.displayHorizontalScrollbar()
       this.displayVerticalScrollbar()
       this.updateParameters()
     },
-    leaveScrollWrapper () {
+    handleMouseLeaveWrapper () {
+      this.$emit('mouse-leave')
       if (this.disabled) return
       this.hideScrollbar()
     },
