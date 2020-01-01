@@ -1,5 +1,4 @@
 # Tag
-...
 ```demo
 basic
 disabled
