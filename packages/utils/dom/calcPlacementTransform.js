@@ -5,12 +5,12 @@ const oppositeDirection = {
   right: 'left'
 }
 
-const adjacentDirections = {
-  top: ['left', 'right'],
-  right: ['top', 'bottom'],
-  bottom: ['left', 'right'],
-  left: ['top', 'bottom']
-}
+// const adjacentDirections = {
+//   top: ['left', 'right'],
+//   right: ['top', 'bottom'],
+//   bottom: ['left', 'right'],
+//   left: ['top', 'bottom']
+// }
 
 const lengthToCompare = {
   top: 'height',
@@ -19,21 +19,46 @@ const lengthToCompare = {
   right: 'width'
 }
 
-function getAdjustedPlacementOfTrackingElement (placement = 'bottom-start', trackedRect, trackingRect, flip) {
+const placementToTransformOrigin = {
+  'bottom-start': 'top left',
+  'bottom': 'top center',
+  'bottom-end': 'top right',
+  'top-start': 'bottom left',
+  'top': 'bottom',
+  'top-end': 'bottom right',
+  'right-start': 'top left',
+  'right': 'center left',
+  'right-end': 'bottom left',
+  'left-start': 'top right',
+  'left': 'center right',
+  'left-end': 'bottom right'
+}
+
+const positionDirections = {
+  'bottom-start': 'right',
+  'bottom-end': 'left',
+  'top-start': 'right',
+  'top-end': 'left',
+  'right-start': 'bottom',
+  'right-end': 'top',
+  'left-start': 'bottom',
+  'left-end': 'top'
+}
+const oppositePosition = {
+  'start': 'end',
+  'end': 'start'
+}
+
+export function getAdjustedPlacementOfTrackingElement (placement = 'bottom-start', trackedRect, trackingRect, flip) {
   if (!flip) {
     return placement
   }
-  let [direction, position] = placement.split('-')
+  const [direction, position] = placement.split('-')
   let newPosition = position
-  if (position === 'start') {
-    let adjacentDirection = adjacentDirections[direction][1]
-    if (trackedRect[adjacentDirection] <= trackingRect[lengthToCompare[adjacentDirection]]) {
-      newPosition = 'end'
-    }
-  } else if (position === 'end') {
-    let adjacentDirection = adjacentDirections[direction][0]
-    if (trackedRect[adjacentDirection] <= trackingRect[lengthToCompare[adjacentDirection]]) {
-      newPosition = 'start'
+  if (position) {
+    const adjacentPositionDirection = positionDirections[placement]
+    if (trackedRect[adjacentPositionDirection] + trackedRect[lengthToCompare[adjacentPositionDirection]] <= trackingRect[lengthToCompare[adjacentPositionDirection]]) {
+      newPosition = oppositePosition[position]
     }
   }
   if (trackedRect[direction] >= trackingRect[lengthToCompare[direction]]) {
@@ -61,26 +86,11 @@ function getAdjustedPlacementOfTrackingElement (placement = 'bottom-start', trac
   // }
 }
 
-const placementToTransformOrigin = {
-  'bottom-start': 'top left',
-  'bottom': 'top center',
-  'bottom-end': 'top right',
-  'top-start': 'bottom left',
-  'top': 'bottom',
-  'top-end': 'bottom right',
-  'right-start': 'top left',
-  'right': 'center left',
-  'right-end': 'bottom left',
-  'left-start': 'top right',
-  'left': 'center right',
-  'left-end': 'bottom right'
-}
-
-function getTransformOriginByPlacement (placement) {
+export function getTransformOriginByPlacement (placement) {
   return placementToTransformOrigin[placement] || null
 }
 
-function getPosition (placement, trackedRect, trackingRect) {
+export function getPosition (placement, trackedRect, trackingRect) {
   const position = {
     left: null,
     right: null,
@@ -144,20 +154,20 @@ function getPosition (placement, trackedRect, trackingRect) {
   return position
 }
 
-function calcPlacementTransform (placement, activatorRect, contentRect, flip) {
-  const trackedRect = {
-    left: parseInt(activatorRect.left),
-    top: parseInt(activatorRect.top),
-    bottom: parseInt(window.innerHeight - activatorRect.bottom),
-    right: parseInt(window.innerWidth - activatorRect.right),
-    width: parseInt(activatorRect.width),
-    height: parseInt(activatorRect.height)
-  }
-  const trackingRect = contentRect
-  const adjustedPlacement = getAdjustedPlacementOfTrackingElement(placement, trackedRect, trackingRect, flip)
-  const suggesetedTransfromOrigin = getTransformOriginByPlacement(adjustedPlacement)
-  const position = getPosition(adjustedPlacement, trackedRect, trackingRect)
-  return [position, suggesetedTransfromOrigin, adjustedPlacement]
-}
+// function calcPlacementTransform (placement, activatorRect, contentRect, flip) {
+//   const trackedRect = {
+//     left: parseInt(activatorRect.left),
+//     top: parseInt(activatorRect.top),
+//     bottom: parseInt(window.innerHeight - activatorRect.bottom),
+//     right: parseInt(window.innerWidth - activatorRect.right),
+//     width: parseInt(activatorRect.width),
+//     height: parseInt(activatorRect.height)
+//   }
+//   const trackingRect = contentRect
+//   const adjustedPlacement = getAdjustedPlacementOfTrackingElement(placement, trackedRect, trackingRect, flip)
+//   const suggesetedTransfromOrigin = getTransformOriginByPlacement(adjustedPlacement)
+//   const position = getPosition(adjustedPlacement, trackedRect, trackingRect)
+//   return [position, suggesetedTransfromOrigin, adjustedPlacement]
+// }
 
-export default calcPlacementTransform
+// export default calcPlacementTransform
