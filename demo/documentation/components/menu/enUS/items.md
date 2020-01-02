@@ -29,11 +29,11 @@ export default {
         {
           title: 'subMenu',
           name: 'subMenu',
-          groupTitle: 'group1',
           children: [
             {
               title:'sub1',
               name: 'sub1',
+              group: true,
               children: [
                 {
                   title: 'subsub001',
@@ -46,9 +46,9 @@ export default {
         {
           title: 'subMenu2',
           name: 'subMenu2',
-          groupTitle: 'group1',
           children: [
             {
+              group: true,
               title:'sub2',
               name: 'sub2',
               children: [
@@ -63,9 +63,9 @@ export default {
         {
           title: 'subMenu3',
           name: 'subMenu3',
-          groupTitle: 'group1',
           children: [
             {
+              group: true,
               title:'sub3',
               name: 'sub3',
               children: [

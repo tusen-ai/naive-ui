@@ -2,7 +2,7 @@ import Card from './packages/common/Card'
 import Icon from './packages/common/Icon'
 import GradientText from './packages/common/GradientText'
 import Table from './packages/common/Table'
-import AdvanceTable from './packages/common/AdvanceTable'
+import DataTable from './packages/common/DataTable'
 import CheckBox from './packages/common/Checkbox'
 import RoundButton from './packages/common/Button'
 import Switch from './packages/common/Switch'
@@ -25,9 +25,6 @@ import Form from './packages/common/Form'
 import Tabs from './packages/common/Tabs'
 import TimePicker from './packages/common/TimePicker'
 import Layout from './packages/common/Layout'
-import ServiceLayout from './packages/nimbus/ServiceLayout'
-import NewServiceLayout from './packages/nimbus/NewServiceLayout'
-import NimbusIcon from './packages/deprecated/Icon'
 import Scrollbar from './packages/common/Scrollbar'
 import Steps from './packages/common/Steps'
 import ConfirmPlugin from './packages/common/Confirm'
@@ -74,7 +71,9 @@ import enUS from './packages/locale/enUS'
  * Deprecated Components
  */
 import NimbusFormCard from './packages/deprecated/NimbusFormCard'
-import NimbusConfirmCard from './packages/deprecated/ConfirmCard'
+import NimbusConfirmCard from './packages/deprecated/NimbusConfirmCard'
+import NimbusServiceLayout from './packages/deprecated/NimbusServiceLayout'
+import NimbusIcon from './packages/deprecated/NimbusIcon'
 
 /**
  * debug usage
@@ -108,30 +107,25 @@ function install (Vue) {
   Vue.prototype.$naive = NaiveUI
   Card.install(Vue)
   Icon.install(Vue)
-  ServiceLayout.install(Vue)
-  NewServiceLayout.install(Vue)
   Loader.install(Vue)
   Layout.install(Vue)
   GradientText.install(Vue)
   Table.install(Vue)
-  AdvanceTable.install(Vue)
+  DataTable.install(Vue)
   CheckBox.install(Vue)
   RoundButton.install(Vue)
   Switch.install(Vue)
   Select.install(Vue)
   Modal.install(Vue)
-  NimbusFormCard.install(Vue)
   Input.install(Vue)
   Message.install(Vue)
   Notification.install(Vue)
-  NimbusConfirmCard.install(Vue)
   Pagination.install(Vue)
   Tooltip.install(Vue)
   Popup.install(Vue)
   Alert.install(Vue)
   DatePicker.install(Vue)
   InputNumber.install(Vue)
-  NimbusIcon.install(Vue)
   Radio.install(Vue)
   Cascader.install(Vue)
   CustomInput.install(Vue)
@@ -179,6 +173,13 @@ function install (Vue) {
   Log.install(Vue)
   Code.install(Vue)
   Typography.install(Vue)
+  /**
+   * Deprecated
+   */
+  NimbusServiceLayout.install(Vue)
+  NimbusConfirmCard.install(Vue)
+  NimbusFormCard.install(Vue)
+  NimbusIcon.install(Vue)
 }
 
 export default NaiveUI

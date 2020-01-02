@@ -31,7 +31,8 @@ export default {
     return {
       options: [],
       isDestroying: false,
-      isMounting: true
+      isMounting: true,
+      isUpdatingOptions: false
     }
   },
   computed: {
@@ -52,6 +53,14 @@ export default {
   mounted () {
     this.isMounting = false
     this.collectOptions()
+  },
+  updated () {
+    if (!this.isUpdatingOptions) {
+      this.isUpdatingOptions = true
+      this.collectOptions()
+    } else {
+      this.isUpdatingOptions = false
+    }
   },
   beforeDestroy () {
     this.isDestroying = true

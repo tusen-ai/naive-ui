@@ -11,7 +11,7 @@
       transition: transitionBlocked ? 'none' : null
     }"
   >
-    <n-scrollbar v-if="!useNativeScrollbar">
+    <n-scrollbar v-if="!useNativeScrollbar" :content-style="scrollContentStyle" :container-style="scrollContainerStyle">
       <slot />
     </n-scrollbar>
     <slot v-else />
@@ -35,6 +35,14 @@ export default {
     useNativeScrollbar: {
       type: Boolean,
       default: true
+    },
+    scrollContentStyle: {
+      type: Object,
+      default: null
+    },
+    scrollContainerStyle: {
+      type: Object,
+      default: null
     }
   },
   data () {

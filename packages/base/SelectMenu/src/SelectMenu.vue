@@ -144,6 +144,10 @@ export default {
     mirror: {
       type: Boolean,
       default: true
+    },
+    autoPendingFirstOption: {
+      type: Boolean,
+      defa: false
     }
   },
   data () {
@@ -191,8 +195,12 @@ export default {
     },
     linkedOptions () {
       this.$nextTick().then(() => {
-        this.hideLightBar()
-        this.pendingOption = null
+        if (this.autoPendingFirstOption) {
+          this.setPendingOptionElementValue(this.linkedOptions.firstAvailableOptionValue)
+        } else {
+          this.hideLightBar()
+          this.pendingOption = null
+        }
       })
     },
     pendingOption (value) {
@@ -201,6 +209,11 @@ export default {
           this.hideLightBar()
         })
       }
+    }
+  },
+  mounted () {
+    if (this.autoPendingFirstOption) {
+      this.setPendingOptionElementValue(this.linkedOptions.firstAvailableOptionValue)
     }
   },
   methods: {

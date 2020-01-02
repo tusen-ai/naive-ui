@@ -9,8 +9,7 @@ import intro from './documentation/intro/intro'
 import start from './documentation/intro/start'
 import devGuildlines from './documentation/intro/devGuidelines'
 
-import nimbusServiceLayoutDemo from './documentation/components/nimbusServiceLayoutDemo'
-import newNimbusServiceLayout from './documentation/components/newNimbusServiceLayout'
+import nimbusServiceLayoutDemo from './documentation/deprecated/nimbusServiceLayout'
 import gradientText from './documentation/components/gradientText'
 import checkbox from './documentation/components/checkbox'
 import button from './documentation/components/button'
@@ -49,7 +48,7 @@ import popconfirm from './documentation/components/popconfirm'
 import anchor from './documentation/components/anchor'
 import popselect from './documentation/components/popselect'
 import configProvider from './documentation/components/configProvider'
-import table from './documentation/components/table'
+import dataTable from './documentation/components/dataTable'
 import typography from './documentation/components/typography'
 import transfer from './documentation/components/transfer'
 import spin from './documentation/components/spin'
@@ -153,7 +152,6 @@ const routes = [
       { path: '/start', component: start },
       { path: '/dev-guildlines', component: devGuildlines },
       { path: '/n-nimbus-service-layout', component: nimbusServiceLayoutDemo },
-      { path: '/n-nimbus-service-layout-new', component: newNimbusServiceLayout },
       { path: '/n-layout', component: layout },
       { path: '/n-gradient-text', component: gradientText },
       {
@@ -164,7 +162,7 @@ const routes = [
       { path: '/n-button', component: button },
       { path: '/n-switch', component: nswitch },
       // { path: '/n-table', component: tableDemo },
-      { path: '/n-table', component: table },
+      { path: '/n-data-table', component: dataTable },
       { path: '/n-input', component: input },
       { path: '/n-select', component: select },
       { path: '/n-cascader', component: cascader },
