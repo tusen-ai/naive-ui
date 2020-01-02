@@ -129,11 +129,11 @@ export default {
     }
   },
   updated () {
-    this.$nextTick().then(() => {
-      console.log('modal rerender')
-      console.log(this.$slots.default[1].text)
-      console.log(this.$scopedSlots.default()[1].text)
-    })
+    // this.$nextTick().then(() => {
+    //   console.log('modal rerender')
+    //   console.log(this.$slots.default[1].text)
+    //   console.log(this.$scopedSlots.default()[1].text)
+    // })
   },
   methods: {
     slotDOM () {
