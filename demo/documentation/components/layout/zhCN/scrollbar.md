@@ -1,5 +1,5 @@
-# Use Built-in Scrollbar
-Sometimes you will find native scrollbar doesn't meet the style of naive-ui. You can use built-in scrollbar of naive-ui (on sider, layout or content).
+# 使用内置滚动条
+有时原生滚动条与naive-ui的样式不协调。可以（在侧边栏、布局或内容）使用naive-ui内置的滚动条。
 ```html
 <n-layout style="height: 480px;">
     <n-layout-header style="height: 64px;">
