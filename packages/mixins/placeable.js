@@ -144,7 +144,8 @@ export default {
     return {
       trackingElement: null,
       trackedElement: null,
-      scrollListeners: []
+      scrollListeners: [],
+      adjustedPlacement: this.placement
     }
   },
   mounted () {
@@ -233,15 +234,13 @@ export default {
       // console.log(contentBoundingClientRect)
       // debugger
       // console.log('scroll', activatorBoundingClientRect, contentBoundingClientRect)
-      const [placementTransform, suggestedTransformOrigin] = calcPlacementTransfrom(this.placement, activatorBoundingClientRect, contentBoundingClientRect, this.flip)
-      // console.log(this.trackingElement, this.positionMode, this.positionModeisAbsolute)
+      const [placementTransform, suggestedTransformOrigin, adjustedPlacement] = calcPlacementTransfrom(this.placement, activatorBoundingClientRect, contentBoundingClientRect, this.flip)
+      this.adjustedPlacement = adjustedPlacement
       if (this.positionModeisAbsolute) {
         const position = getPositionInAbsoluteMode(this.placement, suggestedTransformOrigin)
-        // console.log(suggestedTransformOrigin, position)
         this.updatePositionInAbsoluteMode(position, suggestedTransformOrigin)
         return
       }
-      // console.log(placementTransform)
       this.trackingElement.style.position = 'absolute'
       this.trackingElement.style.top = placementTransform.top
       this.trackingElement.style.left = placementTransform.left

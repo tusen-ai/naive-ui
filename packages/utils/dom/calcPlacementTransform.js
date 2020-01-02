@@ -37,13 +37,13 @@ function getAdjustedPlacementOfTrackingElement (placement = 'bottom-start', trac
     }
   }
   if (trackedRect[direction] >= trackingRect[lengthToCompare[direction]]) {
-    return direction + '-' + newPosition
+    return newPosition ? (direction + '-' + newPosition) : direction
   } else if (trackedRect[oppositeDirection[direction]] >= trackingRect[lengthToCompare[direction]]) {
     if (position) {
       return `${oppositeDirection[direction]}-${newPosition}`
     } else return oppositeDirection[direction]
   } else {
-    return direction + '-' + newPosition
+    return newPosition ? (direction + '-' + newPosition) : direction
   }
   // else {
   //   const [direction1, direction2] = adjacentDirections[direction]
@@ -157,7 +157,7 @@ function calcPlacementTransform (placement, activatorRect, contentRect, flip) {
   const adjustedPlacement = getAdjustedPlacementOfTrackingElement(placement, trackedRect, trackingRect, flip)
   const suggesetedTransfromOrigin = getTransformOriginByPlacement(adjustedPlacement)
   const position = getPosition(adjustedPlacement, trackedRect, trackingRect)
-  return [position, suggesetedTransfromOrigin]
+  return [position, suggesetedTransfromOrigin, adjustedPlacement]
 }
 
 export default calcPlacementTransform

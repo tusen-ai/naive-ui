@@ -253,7 +253,7 @@ export default {
           this.active
             ? h('div', {
               attrs: {
-                'n-placement': this.placement
+                'n-placement': this.adjustedPlacement
               },
               staticClass: 'n-popover-content',
               class: {
