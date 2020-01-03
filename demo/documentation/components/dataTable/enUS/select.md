@@ -20,7 +20,7 @@ const _columns = $this => {
     {
       type: "selection",
       disabled(params, index) {
-        return params.row.name === "Edward King 3";
+        return params.name === "Edward King 3";
       }
     },
     {

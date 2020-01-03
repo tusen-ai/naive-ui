@@ -5,14 +5,10 @@
       :placement="placement"
       :height="headerHeight"
       :columns="columns"
-      :sort-indexes="sortIndexes"
-      :selected-filter="selectedFilter"
-      :showing-data="showingData"
-      :current-page-selected="currentPageSelectedLen"
+      :data="data"
       :fixed="fixed"
       :scroll-x="scrollX"
       @scroll="handleHeaderScroll"
-      @check-all="handleCheckboxClick"
       @sort-change="onSortChange"
       @filter="onFilter"
     />
@@ -21,11 +17,9 @@
       :placement="placement"
       :body-style="bodyStyle"
       :scroll-x="scrollX"
-      :showing-data="showingData"
+      :data="data"
       :columns="columns"
       :row-class-name="rowClassName"
-      :check-boxes="checkBoxes"
-      :disabled-check-box="disabledCheckBox"
       :min-height="bodyMinHeight"
       :tr-height="trHeight"
       :loading="loading"
@@ -39,14 +33,12 @@
 <script>
 import TableHeader from '../header/header'
 import TableBody from '../body/body'
-import { storageMixin } from '../store'
 
 export default {
   components: {
     TableHeader,
     TableBody
   },
-  mixins: [storageMixin],
   props: {
     placement: {
       type: String,
@@ -60,14 +52,6 @@ export default {
       type: Number,
       default: null
     },
-    currentPageSelectedLen: {
-      type: Number,
-      default: 0
-    },
-    currentPageSelected: {
-      type: Number,
-      default: 0
-    },
     headerHeight: {
       type: Number,
       default: null
@@ -76,15 +60,7 @@ export default {
       type: Array,
       default: () => []
     },
-    sortIndexes: {
-      type: Object,
-      default: () => ({})
-    },
-    selectedFilter: {
-      type: Object,
-      default: () => ({})
-    },
-    showingData: {
+    data: {
       type: Array,
       default: () => []
     },
@@ -108,14 +84,6 @@ export default {
       type: [Function, String],
       default: ''
     },
-    checkBoxes: {
-      type: Array,
-      default: () => []
-    },
-    disabledCheckBox: {
-      type: Array,
-      default: () => []
-    },
     loading: {
       type: Boolean,
       default: false
@@ -127,9 +95,6 @@ export default {
     },
     getBodyElement () {
       return this.$refs.body.getScrollContainer()
-    },
-    handleCheckboxClick (...args) {
-      this.$emit('check-all', ...args)
     },
     onSortChange (...args) {
       this.$emit('sort-change', ...args)

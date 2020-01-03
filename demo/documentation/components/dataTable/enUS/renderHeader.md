@@ -62,7 +62,7 @@ const _columns = $this => {
       title: "Tags",
       key: "tags",
       render(h, params) {
-        const arr = params.row.tags.map(tagKey => {
+        const arr = params.tags.map(tagKey => {
           return (
             <n-tag
               style="margin-right:5px;"
@@ -80,7 +80,7 @@ const _columns = $this => {
       key: "actions",
       render(h, params) {
         return (
-          <n-button size="small" onClick={() => $this.sendMail(params.row)}>
+          <n-button size="small" onClick={() => $this.sendMail(params)}>
             Send mail
           </n-button>
         );

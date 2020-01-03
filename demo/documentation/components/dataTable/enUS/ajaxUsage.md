@@ -32,7 +32,7 @@ const _columns = $this => {
       render(h, params) {
         return (
           <span>
-            {params.row.name.first} {params.row.name.last}
+            {params.name.first} {params.name.last}
           </span>
         );
       }

@@ -2,19 +2,19 @@
   <div class="n-filter-wraper">
     <n-popselect
       v-if="!loading && !error"
-      v-model="selectedValue"
+      v-model="value"
       cancelable
       :multiple="column.filterMultiple"
-      :options="filterItems"
-      @change="onSelectedChange"
+      :options="finalOptions"
+      @change="onChange"
     >
       <template v-slot:activator>
-        <filterIcon :status="filterStatus" />
+        <filterIcon :active="active" />
       </template>
     </n-popselect>
     <n-popover v-else placement="bottom" trigger="click">
       <template v-slot:activator>
-        <filterIcon :status="filterStatus" />
+        <filterIcon :active="active" />
       </template>
       <p v-if="loading" class="n-filter-tip-line">
         <n-spin size="small" />
@@ -55,66 +55,59 @@ export default {
       type: Object,
       required: true
     },
-    items: {
+    options: {
       type: [Array, Function],
       required: true
     }
   },
   data () {
-    const selectedValue = this.value || null
     return {
-      selectedValue: selectedValue,
-      filterItems: [],
+      finalOptions: typeof this.options === 'function' ? [] : this.options,
       loading: false,
       error: false
     }
   },
   computed: {
-    filterStatus () {
-      return (
-        this.selectedValue !== null &&
-        this.selectedValue !== undefined &&
-        this.selectedValue.length !== 0
-      )
+    active () {
+      if (Array.isArray(this.value)) return !!this.value.length
+      return !!this.value
     }
   },
   watch: {
-    items (val, oldVal) {
-      this.initItems()
-    },
-    value (val, oldVal) {
-      if (val !== oldVal) {
-        this.selectedValue = val
+    options (value) {
+      if (typeof this.options === 'function') {
+        this.asyncInitializeOptions()
+      } else {
+        this.finalOptions = value
       }
     }
   },
-  created () {
-    this.initItems()
+  mounted () {
+    if (typeof this.options === 'function') {
+      this.asyncInitializeOptions()
+    }
   },
   methods: {
-    initItems () {
+    asyncInitializeOptions () {
       this.error = false
-      if (typeof this.items === 'function') {
-        this.loading = true
-        this.items().then(
-          items => {
-            this.filterItems = items
-            this.loading = false
-          },
-          err => {
-            console.error(err)
-            this.error = true
-            this.loading = false
-            throw err
-          }
-        )
-      } else {
-        this.filterItems = this.items
-      }
+      this.loading = true
+      this.options().then(
+        options => {
+          this.finalOptions = options
+          this.loading = false
+        },
+        err => {
+          this.error = true
+          this.loading = false
+          console.error(err)
+        }
+      )
     },
-    onSelectedChange (val) {
-      this.$emit('input', val)
-      this.$emit('filter', val, this.column)
+    onChange (filters) {
+      this.$emit('filter-change', {
+        columnKey: this.column.key,
+        filters
+      })
     }
   }
 }

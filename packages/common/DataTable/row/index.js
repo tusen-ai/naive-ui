@@ -11,24 +11,21 @@ export default {
   },
   render: (h, ctx) => {
     const params = ctx.props.row || {}
-
     const { keyName, render, index, column, title } = ctx.props
     if (render) {
       return render(h, params, index)
     } else {
       if (title && title.length) {
-        params.row = {}
-        params.row[keyName] = title
+        params[keyName] = title
       }
-
       return h(
         'span',
         {
           domProps: {
-            title: column.ellipsis ? params.row[keyName] : ''
+            title: column.ellipsis ? params[keyName] : ''
           }
         },
-        [params.row[keyName]]
+        [params[keyName]]
       )
     }
   }

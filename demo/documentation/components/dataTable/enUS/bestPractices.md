@@ -47,13 +47,13 @@ const _columns = $this => {
       render(h, params) {
         return (
           <div class="user-base-info">
-            <img src={params.row.picture.thumbnail} class="avatar" />
+            <img src={params.picture.thumbnail} class="avatar" />
             <div
-              title={params.row.name.first + " " + params.row.name.last}
+              title={params.name.first + " " + params.name.last}
               style="max-width:100px;"
               class="text-overflow"
             >
-              {params.row.name.first} {params.row.name.last}
+              {params.name.first} {params.name.last}
             </div>
           </div>
         );
@@ -66,7 +66,7 @@ const _columns = $this => {
       fixed: "left",
       align: "center",
       render(h, params) {
-        return <span>{params.row.dob.age}</span>;
+        return <span>{params.dob.age}</span>;
       }
     },
     {
@@ -88,7 +88,7 @@ const _columns = $this => {
       title: "RegisterTime",
       key: "registerTime",
       render(h, params) {
-        return <n-time time={new Date(params.row.registered.date)} />;
+        return <n-time time={new Date(params.registered.date)} />;
       }
     },
     {
@@ -96,7 +96,7 @@ const _columns = $this => {
       key: "address",
       width: 170,
       render(h, params) {
-        const loc = params.row.location;
+        const loc = params.location;
         const address = `${loc.country} ${loc.state} ${loc.city} ${loc.street
           .name +
           " " +
@@ -115,9 +115,9 @@ const _columns = $this => {
       key: "email",
       render(h, params) {
         return (
-          <a class="mail-link" href={"mailto:" + params.row.email}>
+          <a class="mail-link" href={"mailto:" + params.email}>
             {" "}
-            {params.row.email}{" "}
+            {params.email}{" "}
           </a>
         );
       }
@@ -130,7 +130,7 @@ const _columns = $this => {
       render(h, params) {
         return [
           <a
-            onClick={() => $this.invite(params.row)}
+            onClick={() => $this.invite(params)}
             style="color:pink;cursor:pointer;margin-right:10px;"
           >
             Goto

@@ -40,7 +40,7 @@ const _columns = $this => {
       key: "actions",
       render(h, params) {
         return (
-          <n-button size="small" onClick={() => $this.sendMail(params.row)}>
+          <n-button size="small" onClick={() => $this.sendMail(params)}>
             Send mail
           </n-button>
         );

@@ -109,7 +109,7 @@ export default {
             // }
           },
           render: (h, params) => {
-            return <b>{params.row.age}</b>
+            return <b>{params.age}</b>
           }
         },
         {

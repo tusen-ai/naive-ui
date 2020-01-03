@@ -43,15 +43,13 @@
                 'n-data-table__td-text': column.ellipsis,
                 'n-data-table__td-text--ellipsis': column.ellipsis
               }"
-              @click.self="() => sortByColumn(column)"
             >
               <!-- 当前页全选 -->
               <n-checkbox
                 v-if="column.type === 'selection'"
-                :checked="$tableStore.state.selectedAllChecked"
-                :indeterminate="isCheckedBoxAllIndeterminate"
-                @change="selectedAllCheckedChange"
-                @click.native="handleCheckboxClick"
+                :checked="checkboxChecked"
+                :indeterminate="checkboxIndererminate"
+                @input="handleCheckboxInput(column)"
               />
               <row
                 v-else
@@ -64,28 +62,24 @@
               />
               <!-- {{ !column.renderHeader ? column.title : "" }} -->
               <SortIcon
-                v-if="column.sortable"
-                :ref="'sorter_' + (column.key || i)"
-                :value="sortIndexes[column.key || i]"
+                v-if="column.sortable || column.sorter"
                 class="n-data-table__header-icon"
+                :active-sorter="activeSorter"
                 :column="column"
-                :index="i"
-                :current-key="currentKey"
-                @input="sortInput"
+                @sorter-change="handleSorterChange"
               />
               <!-- 优先自定义 -->
               {{ column.filterDropdown && column.filterDropdown() }}
               <!-- 否则默认渲染 -->
               <PopFilter
                 v-if="
-                  column.filterable &&
-                    (column.filterItems || column.asyncFilterItems)
+                  column.filterable && (column.filterItems || column.asyncFilterItems)
                 "
-                v-model="selectedFilter[column.key]"
+                :value="activeFilters.filter(filter => filter.key === column.key).map(filter => filter.value)"
                 class="n-data-table__header-icon"
                 :column="column"
-                :items="column.filterItems || column.asyncFilterItems"
-                @filter="onFilter"
+                :options="column.filterItems || column.asyncFilterItems"
+                @filter-change="handleFilterChange"
               />
             </th>
           </template>
@@ -100,9 +94,19 @@ import row from '../row/index.js'
 import SortIcon from '../sortIcon'
 import PopFilter from '../popFilter'
 import { createCustomWidthStyle } from '../utils'
-import { storageMixin } from '../store'
 import themeable from '../../../mixins/themeable'
 import withapp from '../../../mixins/withapp'
+
+function createActiveFilters (allFilters, columnKey, filters) {
+  allFilters = allFilters.filter(filter => filter.columnKey !== columnKey)
+  if (!Array.isArray(filters)) {
+    filters = [filters]
+  }
+  return allFilters.concat(filters.map(filter => ({
+    columnKey,
+    optionValue: filter
+  })))
+}
 
 export default {
   components: {
@@ -110,7 +114,12 @@ export default {
     SortIcon,
     PopFilter
   },
-  mixins: [withapp, themeable, storageMixin],
+  inject: {
+    NDataTable: {
+      default: null
+    }
+  },
+  mixins: [withapp, themeable],
   props: {
     placement: {
       type: String,
@@ -120,10 +129,6 @@ export default {
       type: Number,
       default: null
     },
-    currentPageSelected: {
-      type: Number,
-      default: 0
-    },
     height: {
       type: Number,
       default: null
@@ -132,15 +137,7 @@ export default {
       type: Array,
       default: () => []
     },
-    sortIndexes: {
-      type: Object,
-      default: () => ({})
-    },
-    selectedFilter: {
-      type: Object,
-      default: () => ({})
-    },
-    showingData: {
+    data: {
       type: Array,
       default: () => []
     },
@@ -149,12 +146,19 @@ export default {
       default: false
     }
   },
-  data () {
-    return {
-      currentPageAllSelect: false
-    }
-  },
   computed: {
+    checkboxIndererminate () {
+      return this.NDataTable.someRowsChecked
+    },
+    checkboxChecked () {
+      return this.NDataTable.allRowsChecked
+    },
+    activeFilters () {
+      return this.NDataTable.activeFilters
+    },
+    activeSorter () {
+      return this.NDataTable.activeSorter
+    },
     headerStyleWidth () {
       return this.scrollX && `${this.scrollX}px`
     },
@@ -162,50 +166,28 @@ export default {
       return {
         overflow: !this.fixed ? 'scroll' : 'hidden'
       }
-    },
-    isCheckedBoxAllIndeterminate () {
-      return (
-        this.currentPageSelected !== this.showingData.length &&
-        this.showingData.length !== 0 &&
-        this.currentPageSelected !== 0
-      )
-    },
-    currentKey () {
-      let currentKey = ''
-      Object.keys(this.sortIndexes).forEach(key => {
-        if (this.sortIndexes[key] !== null) {
-          currentKey = key
-        }
-      })
-      // console.log('TCL: currentKey -> currentKey', currentKey)
-      return currentKey
     }
   },
   methods: {
+    handleFilterChange ({
+      columnKey,
+      filters
+    }) {
+      this.NDataTable.activeFilters = createActiveFilters(this.activeFilters, columnKey, filters)
+    },
+    handleSorterChange (sorter) {
+      this.NDataTable.activeSorter = sorter
+    },
     handleScroll (e) {
       this.$emit('scroll', e)
     },
-    sortInput (value, column, sorter) {
-      const sortIndexes = {}
-      sortIndexes[column.key] = value
-      // console.log('TCL: sortInput -> value', sortIndexes)
-      this.$emit('sort-change', sortIndexes)
-    },
-    sortByColumn (column) {
-      if (!column.sortable || column.key === void 0) return
-      const ref = this.$refs['sorter_' + column.key][0]
-      ref.changeSort()
-      // this.$set(this.sortIndexes, column.key, value)
-    },
     createCustomWidthStyle: createCustomWidthStyle,
-    handleCheckboxClick () {
-      this.$emit('check-all', this.currentPageAllSelect)
-    },
-    selectedAllCheckedChange (v) {
-      this.$tableStore.commit('selectedAllChecked', v)
-    },
-    onFilter (value, column) {
-      this.$emit('filter', value, column)
+    handleCheckboxInput (column) {
+      if (this.checkboxIndererminate || this.checkboxChecked) {
+        this.NDataTable.clearCheckAll(column)
+      } else {
+        this.NDataTable.checkAll(column)
+      }
     }
   }
 }
