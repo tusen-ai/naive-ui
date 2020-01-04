@@ -10,6 +10,7 @@ export const createClassObject = function createClassObject (classString) {
   if (typeof classString === 'string') {
     return classString.split(' ').filter(className => className).reduce((classObject, className) => {
       classObject[className] = true
+      return classObject
     }, {})
   }
   return classString
