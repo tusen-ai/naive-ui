@@ -1,5 +1,5 @@
 # Config Provider
-Config Provider is using to set global theme and set namespace for components (detached parts).
+Config Provider is used to set global theme and set namespace for components (detached parts).
 ## Demos
 ```demo
 theme
