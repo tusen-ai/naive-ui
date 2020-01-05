@@ -11,13 +11,9 @@
       }
       @include m(transition-disabled) {
         @include b(pagination-item) {
-          @include not-m(backward) {
-            @include not-m(forward) {
-              transition: none;
-              path {
-                transition: none;
-              }
-            }
+          transition: none;
+          path {
+            transition: none;
           }
         }
       }

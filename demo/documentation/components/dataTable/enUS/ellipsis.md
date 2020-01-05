@@ -8,12 +8,11 @@
   :columns="columns"
   :data="data"
   :pagination="pagination"
->
-</n-data-table>
+/>
 ```
 
 ```js
-const _columns = $this => {
+const createColumns = instance => {
   return [
     {
       title: "Name",
@@ -40,14 +39,14 @@ const _columns = $this => {
       key: "actions",
       render(h, params) {
         return (
-          <n-button size="small" onClick={() => $this.sendMail(params)}>
+          <n-button size="small" onClick={() => instance.sendMail(params)}>
             Send mail
           </n-button>
-        );
+        )
       }
     }
-  ];
-};
+  ]
+}
 
 const data = [
   {
@@ -64,7 +63,6 @@ const data = [
     age: 42,
     address: "London No. 1 Lake Park",
     anotherAddress: "New York No. 1 Lake Park",
-
     tags: ["loser"]
   },
   {
@@ -73,26 +71,21 @@ const data = [
     age: 32,
     address: "Sidney No. 1 Lake Park",
     anotherAddress: "New York No. 1 Lake Park",
-
     tags: ["cool", "teacher"]
   }
-];
+]
 export default {
   data() {
     return {
       data: data,
-      columns: _columns(this)
-    };
-  },
-  computed: {
-    pagination() {
-      return { total: this.data.length, limit: 10 };
+      columns: createColumns(this),
+      pagination: { limit: 10 }
     }
   },
   methods: {
     sendMail(rowData) {
-      this.$NMessage.info("send mail to " + rowData.name);
+      this.$NMessage.info("Send mail to " + rowData.name)
     }
   }
-};
+}
 ```

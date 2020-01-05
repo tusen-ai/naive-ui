@@ -76,7 +76,7 @@ export default {
           title: 'Name',
           key: 'name',
           filterMultiple: false,
-          filterItems: [{
+          filterOptions: [{
             label: 'xiaobai1',
             value: 'xiaobai1'
           }],
@@ -92,7 +92,7 @@ export default {
             return a.age - b.age
           },
           filterMultiple: true, // 多选 onFilter接受参数为数组
-          filterItems: [{
+          filterOptions: [{
             label: '14',
             value: 14
           }, {

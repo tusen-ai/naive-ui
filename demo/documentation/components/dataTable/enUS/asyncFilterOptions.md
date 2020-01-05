@@ -1,4 +1,4 @@
-# Async filter items
+# Async Filter Options
 ```html
 <n-data-table
   ref="table"
@@ -41,7 +41,7 @@ const columns = [
     key: "address",
     filterable: true,
     defaultFilter: "London",
-    asyncFilterItems() {
+    asyncFilterOptions() {
       return createFilterOptions().then(list => {
         return list
       })

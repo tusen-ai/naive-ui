@@ -6,12 +6,11 @@
   :columns="columns"
   :data="data"
   :pagination="pagination"
->
-</n-data-table>
+/>
 ```
 
 ```js
-const _columns = $this => {
+const createColumns = instance => {
   return [
     {
       title: "Name",
@@ -28,33 +27,33 @@ const _columns = $this => {
     {
       title: "Tags",
       key: "tags",
-      render(h, params) {
-        const arr = params.tags.map(tagKey => {
+      render (h, row) {
+        const tags = row.tags.map(tagKey => {
           return (
             <n-tag
-              style="margin-right:5px;"
+              style="margin-right:5px"
               type={tagKey.length > 5 ? "warning" : "default"}
             >
               {tagKey}
             </n-tag>
-          );
-        });
-        return arr;
+          )
+        })
+        return tags
       }
     },
     {
       title: "Action",
       key: "actions",
-      render(h, params) {
+      render (h, row) {
         return (
-          <n-button size="small" onClick={() => $this.sendMail(params)}>
+          <n-button size="small" onClick={() => instance.sendMail(row)}>
             Send mail
           </n-button>
-        );
+        )
       }
     }
-  ];
-};
+  ]
+}
 
 const data = [
   {
@@ -78,23 +77,23 @@ const data = [
     address: "Sidney No. 1 Lake Park",
     tags: ["cool", "teacher"]
   }
-];
+]
 export default {
   data() {
     return {
       data: data,
-      columns: _columns(this)
-    };
+      columns: createColumns(this)
+    }
   },
   computed: {
     pagination() {
-      return { total: this.data.length, limit: 10 };
+      return { total: this.data.length, limit: 10 }
     }
   },
   methods: {
     sendMail(rowData) {
-      this.$NMessage.info("send mail to " + rowData.name);
+      this.$NMessage.info("send mail to " + rowData.name)
     }
   }
-};
+}
 ```

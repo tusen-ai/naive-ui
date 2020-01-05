@@ -11,14 +11,14 @@
 import render from '../../../utils/render'
 
 export default {
-  name: 'Row',
+  name: 'NDataTableCell',
   components: {
     render
   },
   props: {
     row: {
       type: Object,
-      required: true
+      default: null
     },
     index: {
       type: Number,

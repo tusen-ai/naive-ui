@@ -10,7 +10,6 @@
     <div
       class="n-data-table-tables-wrapper"
     >
-      <!-- table head -->
       <base-table
         ref="mainTable"
         :scroll-x="scrollX"
@@ -22,7 +21,6 @@
         :body-min-height="42"
         @header-scroll="handleMainTableHeaderScroll"
         @scroll="e => handleTableBodyScroll(e, 'main')"
-        @filter="onFilter"
       >
         <slot name="append" />
       </base-table>
@@ -45,7 +43,6 @@
           :loading="loading"
           :fixed="true"
           @scroll="e => handleTableBodyScroll(e, 'right')"
-          @filter="onFilter"
         />
       </div>
       <div
@@ -67,10 +64,8 @@
           :loading="loading"
           :fixed="true"
           @scroll="e => handleTableBodyScroll(e, 'left')"
-          @filter="onFilter"
         />
       </div>
-      <!-- loading -->
       <transition name="n-table-loading--transition">
         <div v-if="loading" class="n-data-table__loading">
           <n-spin
@@ -86,7 +81,6 @@
         No data
       </div>
     </div>
-    <!-- 分页 -->
     <div
       v-if="pagination !== false"
       class="n-data-table__pagination"
@@ -97,6 +91,8 @@
         :page-slot="pagination.pageSlot || 5"
         :show-quick-jumper="!!pagination.showQuickJumper"
         :disabled="loading"
+        @change="handlePageChange"
+        @page-size-change="handlePageSizeChange"
       />
     </div>
   </div>
@@ -107,6 +103,12 @@ import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import { setCheckStatusOfRow } from '../utils'
 import BaseTable from '../baseTable/baseTable'
+
+function getFlagOfOrder (order) {
+  if (order === 'ascend') return 1
+  else if (order === 'descend') return -1
+  return 0
+}
 
 export default {
   name: 'NDataTable',
@@ -209,7 +211,10 @@ export default {
             .map(filter => filter.filterOptionValue)
           if (!activeFilterOptionValues.length) continue
           const columnToFilter = this.columns.find(column => column.key === columnKey)
-          if (columnToFilter && columnToFilter.filter) {
+          /**
+           * When async, filter won't be set, so data won't be filtered
+           */
+          if (columnToFilter && typeof columnToFilter.filter === 'function') {
             if (this.filterMode === 'and') {
               if (activeFilterOptionValues.some(filterOptionValue => !columnToFilter.filter(filterOptionValue, row))) {
                 return false
@@ -227,12 +232,20 @@ export default {
       }) : []
     },
     pageCount () {
+      if (this.pagination.pageCount) return this.pagination.pageCount
       if (this.filteredData.length === 0) return 1
       const { limit } = this.pagination
       return Math.ceil(this.filteredData.length / limit)
     },
     sortedData () {
       if (this.activeSorter) {
+        /**
+         * When async, activeSorter.sorter should be true
+         */
+        if (
+          this.activeSorter.sorter === true ||
+          typeof this.activeSorter.sorter !== 'function'
+        ) return this.filteredData
         const filteredData = this.filteredData.slice(0)
         const columnKey = this.activeSorter.columnKey
         /**
@@ -250,15 +263,19 @@ export default {
           }
           return 0
         })
-        return filteredData.sort((row1, row2) => order * sorter(row1, row2))
+        return filteredData.sort((row1, row2) => getFlagOfOrder(order) * sorter(row1, row2))
       }
       return this.filteredData
     },
     paginatedData () {
-      if (!this.pagination) return this.filteredData
+      if (!this.pagination) return this.sortedData
       const {
         limit
       } = this.pagination
+      /**
+       * When async, limit should be false
+       */
+      if (!limit) return this.sortedData
       const startIndex = (this.currentPage - 1) * limit
       return this.sortedData.slice(startIndex, startIndex + limit)
     },
@@ -290,15 +307,13 @@ export default {
   },
   watch: {
     currentPage () {
-      this.useRemoteChange()
       this.scrollMainTableBodyToTop()
     },
     activeSorter (value) {
-      this.$emit('sort-change', value)
-      this.$emit('sorter-change', value)
+      this.$emit('sorter-change', value ? { ...value } : value)
     },
     activeFilters (value) {
-      this.$emit('filter-change', value)
+      this.$emit('filters-change', value.map(filter => ({ ...filter })))
     },
     checkedRows (value) {
       this.$emit('select', value)
@@ -316,6 +331,12 @@ export default {
     window.removeEventListener('resize', this.collectDOMSizes)
   },
   methods: {
+    handlePageChange (value) {
+      this.$emit('page-change', value)
+    },
+    handlePageSizeChange (value) {
+      this.$emit('page-size-change', value)
+    },
     scrollMainTableBodyToTop () {
       const {
         body
@@ -388,8 +409,8 @@ export default {
         this.mainTableScrollContainerWidth = bodyEl.offsetWidth
       }
     },
-    page (pageNum) {
-      this.currentPage = pageNum
+    page (page) {
+      this.currentPage = page
     },
     sort (columnKey, order = 'ascend') {
       if (!columnKey) this.activeSorter = null
@@ -400,9 +421,21 @@ export default {
         this.activeSorter = {
           columnKey,
           sorter,
-          order: order === 'ascend' ? 1 : -1
+          order: order
         }
       }
+    },
+    clearSorter () {
+      this.activeSorter = null
+    },
+    clearFilter () {
+      this.clearFilters()
+    },
+    clearFilters () {
+      this.filters([])
+    },
+    filters (filters) {
+      this.filter(filters)
     },
     filter (filters) {
       if (!filters) {
@@ -438,12 +471,6 @@ export default {
         }
         setCheckStatusOfRow(this.checkedRows, row, false)
       })
-    },
-    onFilter (value, column) {
-      this.useRemoteChange()
-    },
-    useRemoteChange () {
-      // unknown usage..
     }
   }
 }

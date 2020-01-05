@@ -10,8 +10,7 @@
   :data="data"
   :pagination="pagination"
   :row-class-name="rowClassName"
->
-</n-data-table>
+/>
 ```
 
 ```js
@@ -37,7 +36,7 @@ const data = [
     address: "Sidney No. 1 Lake Park",
     tags: ["cool", "teacher"]
   }
-];
+]
 
 export default {
   data() {
@@ -62,11 +61,11 @@ export default {
           key: "tags"
         }
       ]
-    };
+    }
   },
   computed: {
     pagination() {
-      return { total: this.data.length, limit: 10 }
+      return { limit: 10 }
     }
   },
   methods: {
@@ -80,14 +79,14 @@ export default {
       return null
     }
   }
-};
+}
 ```
 
 ```css
 /deep/ .too-old {
-  color: red;
+  color: red
 }
 /deep/ .age {
-  background: skyblue;
+  background: skyblue
 }
 ```

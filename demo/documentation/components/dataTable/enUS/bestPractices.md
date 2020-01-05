@@ -3,293 +3,262 @@
 > filter,sorter,pagination should use `custom`,query map to router url
 
 ```html
-<n-button @click="sortName" style="margin-right:5px;">sort name</n-button>
-<n-button @click="clearFilters" style="margin-right:5px;"
-  >clear filters</n-button
->
-<n-button @click="clearFiltersAndSorters">clear filters and sorters</n-button>
+<n-button @click='sortName'>sort name</n-button>
+<n-button @click='clearFilters'>clear filters</n-button>
+<n-button @click='clearFiltersAndSorters'>clear filters and sorters</n-button>
 
 <n-data-table
-  style="margin-top:10px;"
-  ref="table"
-  :columns="columns"
-  :data="data"
-  :loading="loading"
-  :pagination="pagination"
-  :max-height="300"
-  :scroll-x="1500"
-  @change="onChange"
->
-</n-data-table>
+  ref='table'
+  :columns='columns'
+  :data='data'
+  :loading='loading'
+  :pagination='pagination'
+  :max-height='300'
+  :scroll-x='1500'
+  @page-change="handlePageChange"
+  @sorter-change="handleSorterChange"
+  @filters-change="handleFiltersChange"
+/>
 ```
 
 ```js
 const toolTip = (h, activator, content) => {
   const scopedSlots = {
     activator: () => activator
-  };
+  }
   return (
     <n-tooltip delay={100} maxWidth={200} arrow scopedSlots={scopedSlots}>
       {content}
     </n-tooltip>
-  );
-};
+  )
+}
 
-const _columns = $this => {
+const createColumns = instance => {
   return [
     {
-      title: "User",
-      key: "name",
+      title: 'User',
+      key: 'name',
       width: 180,
-      fixed: "left",
+      fixed: 'left',
       sortable: true,
-      sorter: "custom",
-      render(h, params) {
+      sorter: 'custom',
+      render (h, params) {
         return (
-          <div class="user-base-info">
-            <img src={params.picture.thumbnail} class="avatar" />
+          <div class='user-base-info'>
+            <img src={params.picture.thumbnail} class='avatar' />
             <div
-              title={params.name.first + " " + params.name.last}
-              style="max-width:100px;"
-              class="text-overflow"
+              title={params.name.first + ' ' + params.name.last}
+              style='max-width:100px'
+              class='text-overflow'
             >
               {params.name.first} {params.name.last}
             </div>
           </div>
-        );
+        )
       }
     },
     {
-      title: "Age",
-      key: "age",
+      title: 'Age',
+      key: 'age',
       width: 80,
-      fixed: "left",
-      align: "center",
-      render(h, params) {
-        return <span>{params.dob.age}</span>;
+      fixed: 'left',
+      align: 'center',
+      render (h, params) {
+        return <span>{params.dob.age}</span>
       }
     },
     {
-      title: "Gender",
-      key: "gender",
+      title: 'Gender',
+      key: 'gender',
       width: 100,
       filterable: true,
-      filterItems: [
-        { label: "Male", value: "male" },
-        { label: "Female", value: "female" }
+      filterOptions: [
+        { label: 'Male', value: 'male' },
+        { label: 'Female', value: 'female' }
       ]
     },
-
     {
-      title: "Phone",
-      key: "phone"
+      title: 'Phone',
+      key: 'phone'
     },
     {
-      title: "RegisterTime",
-      key: "registerTime",
-      render(h, params) {
-        return <n-time time={new Date(params.registered.date)} />;
+      title: 'RegisterTime',
+      key: 'registerTime',
+      render (h, params) {
+        return <n-time time={new Date(params.registered.date)} />
       }
     },
     {
-      title: "Address",
-      key: "address",
+      title: 'Address',
+      key: 'address',
       width: 170,
-      render(h, params) {
-        const loc = params.location;
+      render (h, params) {
+        const loc = params.location
         const address = `${loc.country} ${loc.state} ${loc.city} ${loc.street
           .name +
-          " " +
-          loc.street.number}`;
+          ' ' +
+          loc.street.number}`
         return toolTip(
           h,
-          <div style="max-width:130px;" class="text-overflow">
+          <div style='max-width:130px' class='text-overflow'>
             {address}
           </div>,
           address
-        );
+        )
       }
     },
     {
-      title: "Email",
-      key: "email",
-      render(h, params) {
+      title: 'Email',
+      key: 'email',
+      render (h, params) {
         return (
-          <a class="mail-link" href={"mailto:" + params.email}>
-            {" "}
-            {params.email}{" "}
+          <a class='mail-link' href={'mailto:' + params.email}>
+            {' '}
+            {params.email}{' '}
           </a>
-        );
+        )
       }
     },
     {
-      title: "Action",
-      key: "action",
+      title: 'Action',
+      key: 'action',
       width: 150,
-      fixed: "right",
-      render(h, params) {
+      fixed: 'right',
+      render (h, params) {
         return [
           <a
-            onClick={() => $this.invite(params)}
-            style="color:pink;cursor:pointer;margin-right:10px;"
+            onClick={() => instance.invite(params)}
+            style='color:pinkcursor:pointermargin-right:10px'
           >
             Goto
           </a>
-        ];
+        ]
       }
     }
-  ];
-};
+  ]
+}
 
 export default {
-  data() {
+  data () {
     return {
       data: [],
-      columns: _columns(this),
+      columns: createColumns(this),
       loading: false,
-      total: 0
-    };
-  },
-  mounted() {
-    // this.getDataByQuey();
+      pageCount: 0
+    }
   },
   watch: {
-    "$route.query": {
+    '$route.query': {
       handler(query) {
         this.$nextTick(() => {
-          this.getDataByQuey();
-        });
+          this.setTableByURLQuery()
+        })
       },
       immediate: true
     }
   },
   computed: {
-    pagination() {
+    pagination () {
       return {
-        total: this.total,
-        limit: 10,
-        custom: true,
+        pageCount: this.pageCount,
         showQuickJumper: true
-      };
+      }
     }
   },
   methods: {
-    getDataByQuey() {
-      const query = this.$route.query;
-      const page = query.page ? +query.page : 1;
-      const sorter = query.sorter ? JSON.parse(query.sorter) : null;
-      const filter = query.filter ? JSON.parse(query.filter) : null;
-      this.fetchData(page, sorter, filter);
-      // this.$refs.table.sorter(sorter) : null);
-      console.warn("TCL: getDataByQuey -> filter", filter);
-      this.$refs.table.page(page);
-
-      this.$refs.table.filter(filter);
-      sorter && this.$refs.table.sort(sorter.field, sorter.order);
+    handlePageChange (page) {
+      this.setRouteQuery({
+        page
+      })
     },
-    apiGetData(params = {}) {
-      this.loading = true;
+    handleFiltersChange (filters) {
+      this.setRouteQuery({
+        filters: JSON.stringify(filters)
+      })
+    },
+    handleSorterChange (sorter) {
+      this.setRouteQuery({
+        sorter: JSON.stringify(sorter)
+      })
+    },
+    setTableByURLQuery () {
+      const query = this.$route.query
+      const page = query.page ? +query.page : 1
+      const sorter = query.sorter ? JSON.parse(query.sorter) : null
+      const filters = query.filters ? JSON.parse(query.filters) : []
+      this.fetchData(page, sorter, filters)
+      this.$refs.table.page(page)
+      this.$refs.table.filters(filters)
+      sorter && this.$refs.table.sort(sorter.columnKey, sorter.order)
+    },
+    getRandomUsers (params = {}) {
+      this.loading = true
       if (!params.results) {
-        params.results = this.pagination.limit;
+        params.results = 6
       }
       if (!params.page) {
-        params.page = 1;
+        params.page = 1
       } else if (params.page === 10) {
-        params.results = 2;
+        params.results = 2
       }
-      let url = "https://randomuser.me/api";
-      let paramsArr = [];
+      let URL = 'https://randomuser.me/api'
+      const querys = []
       Object.keys(params).forEach(key => {
-        if (Array.isArray(params[key])) {
-          params[key].forEach(value => {
-            paramsArr.push(`${key}[]=${value}`);
-          });
-        } else paramsArr.push(`${key}=${params[key]}`);
-      });
-      if (paramsArr.length) {
-        url = url + "?" + paramsArr.join("&");
+        querys.push(`${key}=${JSON.stringify(params[key])}`)
+      })
+      if (querys.length) {
+        URL = URL + '?' + querys.join('&')
       }
-      console.log("TCL: fetch -> url", url);
-
-      return fetch(url)
+      return fetch(URL)
         .then(res => res.json())
         .finally(() => {
-          this.loading = false;
-        });
+          this.loading = false
+        })
     },
-    fetchData(page, sorter, filter) {
-      console.warn(
-        "TCL: fetchData -> page, sorter, filter",
-        page,
-        sorter,
-        filter
-      );
-      let params = {
+    fetchData (page, sorter, filter) {
+      const params = {
         page
-      };
-      if (sorter) {
-        Object.assign(params, {
-          sortField: sorter.field,
-          sortOrder: sorter.order
-        });
       }
-      if (filter) {
-        Object.assign(params, {
-          ...filter
-        });
-      }
-      this.total = 92;
-      this.apiGetData(params).then(data => {
-        this.data = data.results;
-      });
+      sorter && Object.assign(params, sorter)
+      filter && Object.assign(params, filter)
+      this.pageCount = 92
+      this.getRandomUsers(params).then(data => {
+        this.data = data.results
+      })
     },
-    invite(personData) {
-      const coordinates = personData.location.coordinates;
-      window.open(
-        `http://maps.google.com/maps?q=${coordinates.latitude},${coordinates.longitude}`
-      );
+    invite (personData) {
+      const coordinates = personData.location.coordinates
+      window.open(`http://maps.google.com/maps?q=${coordinates.latitude},${coordinates.longitude}`)
     },
-    onChange({ filter, sorter, pagination }) {
-      console.warn(
-        "TCL: onChange -> { filter, sorter, pagination }",
-        {
-          filter,
-          sorter,
-          pagination
-        },
-        this.$route
-      );
-      sorter = sorter
-        ? {
-            field: sorter.field,
-            order: sorter.order
-          }
-        : null;
-      if (window.location.pathname)
-        this.$router.push({
-          ...this.$route,
-          query: {
-            filter: JSON.stringify(filter),
-            sorter: JSON.stringify(sorter),
-            page: pagination.currentPage
-          }
-        });
+    setRouteQuery (query) {
+      const prevQuery = this.$route.query || {}
+      this.$router.push({
+        ...this.$route,
+        query: {
+          ...prevQuery,
+          ...query
+        }
+      }).catch(err => {})
     },
     sortName() {
-      this.$refs.table.sort("name", "ascend");
+      this.$refs.table.sort('name', 'ascend')
     },
     clearFilters() {
-      this.$refs.table.filter(null);
+      this.$refs.table.clearFilters()
     },
     clearFiltersAndSorters() {
-      this.$refs.table.filter(null);
-      this.$refs.table.sort(null);
+      this.$refs.table.clearFilters()
+      this.$refs.table.clearSorter()
     }
   }
-};
+}
 ```
 
 ```css
+.n-button {
+  margin: 0 8px 12px 0;
+}
+
 /deep/ .user-base-info {
   display: flex;
   align-items: center;

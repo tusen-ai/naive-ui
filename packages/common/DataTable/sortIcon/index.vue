@@ -5,7 +5,7 @@
       :style="{
         opacity: arrowOpacity.desc
       }"
-      @click.stop="setSorter(-1)"
+      @click.stop="setSorter('descend')"
     >
       <md-arrow-dropdown />
     </n-icon>
@@ -15,7 +15,7 @@
       :style="{
         opacity: arrowOpacity.asc
       }"
-      @click.stop="setSorter(1)"
+      @click.stop="setSorter('ascend')"
     >
       <md-arrow-dropup />
     </n-icon>
@@ -46,11 +46,32 @@ export default {
     }
   },
   computed: {
+    hasControlledSortOrder () {
+      return this.column.sortOrder !== undefined
+    },
+    controlledSortOrder () {
+      if (this.column.sortOrder) return this.column.sortOrder
+      return null
+    },
     isSorterActive () {
+      if (this.hasControlledSortOrder) {
+        if (this.controlledSortOrder === null) {
+          return {
+            asc: false,
+            desc: false
+          }
+        }
+        if (this.controlledSortOrder) {
+          return {
+            asc: this.controlledSortOrder === 'ascend',
+            desc: this.controlledSortOrder === 'descend'
+          }
+        }
+      }
       if (this.activeSorter && (this.activeSorter.columnKey === this.column.key)) {
         return {
-          asc: this.activeSorter.order === 1,
-          desc: this.activeSorter.order === -1
+          asc: this.activeSorter.order === 'ascend',
+          desc: this.activeSorter.order === 'descend'
         }
       }
       return {
@@ -59,21 +80,15 @@ export default {
       }
     },
     arrowOpacity () {
-      if (!this.activeSorter || (this.activeSorter.columnKey !== this.column.key)) {
-        return {
-          asc: 0.4,
-          desc: 0.4
-        }
-      }
       return {
-        asc: this.activeSorter.order === 1 ? 1 : 0.4,
-        desc: this.activeSorter.order === -1 ? 1 : 0.4
+        asc: this.isSorterActive.asc ? 1 : 0.4,
+        desc: this.isSorterActive.desc ? 1 : 0.4
       }
     }
   },
   methods: {
     setSorter (order) {
-      if ((this.isSorterActive.asc && order === 1) || (this.isSorterActive.desc && order === -1)) {
+      if ((this.isSorterActive.asc && order === 'ascend') || (this.isSorterActive.desc && order === 'descend')) {
         this.$emit('sorter-change', null)
       } else {
         this.$emit('sorter-change', {

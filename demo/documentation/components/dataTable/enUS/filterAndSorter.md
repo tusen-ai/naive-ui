@@ -38,7 +38,7 @@ const columns = [
     filterable: true,
     filterMultiple: true,
     defaultFilter: ['London', 'New York'],
-    filterItems: [
+    filterOptions: [
       {
         label: 'London',
         value: 'London'

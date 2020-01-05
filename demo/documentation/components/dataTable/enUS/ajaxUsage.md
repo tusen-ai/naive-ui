@@ -3,135 +3,136 @@
 > filter,sorter,pagination should use `custom`
 
 ```html
-<n-button @click="sortName" style="margin-right:5px;">sort name</n-button>
-<n-button @click="clearFilters" style="margin-right:5px;"
-  >clear filters</n-button
->
+<n-button @click="sortName">sort name</n-button>
+<n-button @click="clearFilters">clear filters</n-button>
 <n-button @click="clearFiltersAndSorters">clear filters and sorters</n-button>
 
 <n-data-table
-  style="margin-top:10px;"
   ref="table"
   :columns="columns"
   :data="data"
   :loading="loading"
   :pagination="pagination"
-  @change="onChange"
->
-</n-data-table>
+  @sorter-change="handleSorterChange"
+  @filters-change="handleFiltersChange"
+  @page-change="handlePageChange"
+/>
 ```
 
 ```js
-const _columns = $this => {
-  return [
-    {
-      title: "Name",
-      key: "name",
-      sortable: true,
-      sorter: "custom",
-      render(h, params) {
-        return (
-          <span>
-            {params.name.first} {params.name.last}
-          </span>
-        );
-      }
-    },
-    {
-      title: "Gender",
-      key: "gender",
-      filterable: true,
-      filterItems: [
-        { label: "Male", value: "male" },
-        { label: "Female", value: "female" }
-      ]
-    },
-    {
-      title: "Email",
-      key: "email"
-    }
-  ];
-};
+const nameColumn = {
+  title: 'Name',
+  key: 'name',
+  sorter: true,
+  render (h, row) {
+    return (
+      <span>
+        { row.name.first } { row.name.last }
+      </span>
+    )
+  }
+}
+
+const columns = [
+  nameColumn,
+  {
+    title: 'Gender',
+    key: 'gender',
+    filterable: true,
+    filterOptions: [
+      { label: 'Male', value: 'male' },
+      { label: 'Female', value: 'female' }
+    ]
+  },
+  {
+    title: 'Email',
+    key: 'email'
+  }
+]
 
 export default {
-  data() {
+  data () {
     return {
       data: [],
-      columns: _columns(this),
+      columns,
+      nameColumn,
       loading: false,
       total: 0
-    };
+    }
   },
   mounted() {
     this.getData().then(data => {
-      this.data = data.results;
-      this.total = 100;
-    });
+      this.data = data.results
+      this.total = 100
+    })
   },
   computed: {
-    pagination() {
-      return { total: this.total, limit: 5, custom: true };
+    pagination () {
+      if (!this.total) return false
+      return { pageCount: this.total, limit: false }
     }
   },
   methods: {
-    getData(params = {}) {
-      this.loading = true;
+    getData (params = {}) {
+      this.loading = true
       if (!params.results) {
-        params.results = this.pagination.limit;
+        params.results = 8
       }
-      if (!params.page) {
-        params.page = this.pagination.currentPage;
-      }
-      let url = "https://randomuser.me/api";
-      let paramsArr = [];
+      let url = 'https://randomuser.me/api'
+      let paramsArr = []
       Object.keys(params).forEach(key => {
         if (Array.isArray(params[key])) {
           params[key].forEach(value => {
-            paramsArr.push(`${key}[]=${value}`);
-          });
-        } else paramsArr.push(`${key}=${params[key]}`);
-      });
+            paramsArr.push(`${key}[]=${value}`)
+          })
+        } else paramsArr.push(`${key}=${params[key]}`)
+      })
       if (paramsArr.length) {
-        url = url + "?" + paramsArr.join("&");
+        url = url + '?' + paramsArr.join('&')
       }
-      console.log("TCL: fetch -> url", url);
-
       return fetch(url)
         .then(res => res.json())
         .finally(() => {
-          this.loading = false;
-        });
+          this.loading = false
+        })
     },
-    onChange({ filter, sorter, pagination }) {
-      let params = {
-        page: pagination.currentPage
-      };
-      if (sorter) {
-        Object.assign(params, {
-          sortField: sorter.field,
-          sortOrder: sorter.order
-        });
-      }
-      if (filter) {
-        Object.assign(params, {
-          ...filter
-        });
-      }
-      this.getData(params).then(data => {
-        this.data = data.results;
-      });
-      console.log(filter, sorter, pagination);
+    sortName () {
+      this.$refs.table.sort('name', 'ascend')
     },
-    sortName() {
-      this.$refs.table.sort("name", "ascend");
+    handleSorterChange (sorter) {
+      this.getData().then(data => {
+        this.data = data.results
+        this.total = 100
+      })
     },
-    clearFilters() {
-      this.$refs.table.filter(null);
+    handleFiltersChange (filters) {
+      this.getData().then(data => {
+        this.data = data.results
+        this.total = 50
+      })
     },
-    clearFiltersAndSorters() {
-      this.$refs.table.filter(null);
-      this.$refs.table.sort(null);
+    handlePageChange (currentPage) {
+      console.log('handle page change')
+      this.getData({
+        page: currentPage
+      }).then(data => {
+        this.data = data.results
+        this.total = 50
+      })
+    },
+    clearFilters () {
+      this.$refs.table.clearFilters()
+    },
+    clearFiltersAndSorters () {
+      this.$refs.table.clearFilters()
+      this.$refs.table.clearSorter()
     }
   }
-};
+}
+```
+
+```css
+.n-button {
+  margin: 0 8px 12px 0;
+}
 ```

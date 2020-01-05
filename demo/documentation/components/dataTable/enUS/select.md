@@ -20,7 +20,7 @@ const columns = [
   {
     type: "selection",
     disabled(params, index) {
-      return params.name === "Edward King 3";
+      return params.name === "Edward King 3"
     }
   },
   {
@@ -37,22 +37,23 @@ const columns = [
   }
 ]
 
-const data = [];
+const data = []
 for (let i = 0; i < 46; i++) {
   data.push({
     key: i,
     name: `Edward King ${i}`,
     age: 32,
     address: `London, Park Lane no. ${i}`
-  });
+  })
 }
+
 export default {
   data() {
     return {
       data,
       columns,
       selectedRows: []
-    };
+    }
   },
   computed: {
     pagination() {
@@ -67,5 +68,5 @@ export default {
       this.selectedRows = rows
     }
   }
-};
+}
 ```

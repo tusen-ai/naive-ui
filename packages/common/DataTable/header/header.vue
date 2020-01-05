@@ -44,30 +44,23 @@
                 :indeterminate="checkboxIndererminate"
                 @input="handleCheckboxInput(column)"
               />
-              <row
-                v-else
-                :index="i"
-                :key-name="column.key || i"
-                :row="column"
-                :title="column.title"
-                :column="column"
-                :render="column.renderHeader"
-              />
-              <!-- {{ !column.renderHeader ? column.title : "" }} -->
+              <template v-if="column.renderHeader">
+                <render :render="h => column.renderHeader(h, column, i)" />
+              </template>
+              <template v-else>
+                {{ column.title }}
+              </template>
               <SortIcon
                 v-if="column.sortable || column.sorter"
                 :active-sorter="activeSorter"
                 :column="column"
                 @sorter-change="handleSorterChange"
               />
-              <!-- 优先自定义 -->
-              {{ column.filterDropdown && column.filterDropdown() }}
-              <!-- 否则默认渲染 -->
               <PopFilter
-                v-if="column.filterable && (column.filterItems || column.asyncFilterItems)"
+                v-if="column.filterOptions || column.asyncFilterOptions"
                 :value="createFilterOptionValues(activeFilters, column)"
                 :column="column"
-                :options="column.filterItems || column.asyncFilterItems"
+                :options="column.filterOptions || column.asyncFilterOptions"
                 @filter-change="handleFilterChange"
               />
             </th>
@@ -79,12 +72,12 @@
 </template>
 
 <script>
-import row from '../row/index.js'
 import SortIcon from '../sortIcon'
 import PopFilter from '../popFilter'
 import { createCustomWidthStyle } from '../utils'
 import themeable from '../../../mixins/themeable'
 import withapp from '../../../mixins/withapp'
+import render from '../../../utils/render'
 
 function createActiveFilters (allFilters, columnKey, filters) {
   allFilters = allFilters.filter(filter => filter.columnKey !== columnKey)
@@ -107,7 +100,7 @@ function createFilterOptionValues (activeFilters, column) {
 
 export default {
   components: {
-    row,
+    render,
     SortIcon,
     PopFilter
   },
@@ -172,6 +165,9 @@ export default {
     }) {
       this.NDataTable.activeFilters = createActiveFilters(this.activeFilters, columnKey, filters)
     },
+    /**
+     * TODO: following methods should be hoist to NDataTable
+     */
     handleSorterChange (sorter) {
       this.NDataTable.activeSorter = sorter
     },
