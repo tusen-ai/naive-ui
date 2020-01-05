@@ -38,6 +38,10 @@ export default {
   created () {
     this.memorizedId = this.id
     popoverManager.registerActivator(this.memorizedId, this)
+    if (this.controller) {
+      this.controller.show = this.activate
+      this.controller.hide = this.deactivate
+    }
   },
   computed: {
     triggeredByClick () {
@@ -64,6 +68,8 @@ export default {
   },
   mounted () {
     this.registerListeners()
+  },
+  beforeUpdate () {
     if (this.controller) {
       this.controller.show = this.activate
       this.controller.hide = this.deactivate
@@ -71,10 +77,6 @@ export default {
   },
   updated () {
     this.registerListeners()
-    if (this.controller) {
-      this.controller.show = this.activate
-      this.controller.hide = this.deactivate
-    }
   },
   beforeDestroy () {
     popoverManager.unregisterActivator(this.memorizedId)

@@ -36,7 +36,6 @@ const _columns = $this => {
       title: "Row",
       key: "row",
       render(h, params, index) {
-        console.log("TCL: render -> params", params);
         return <span> row {index}</span>;
       }
     },
@@ -44,7 +43,6 @@ const _columns = $this => {
       title: "Row1",
       key: "row1",
       render(h, params, index) {
-        console.log("TCL: render -> params", params);
         return <span>row {index}</span>;
       }
     },
@@ -52,7 +50,6 @@ const _columns = $this => {
       title: "Row2",
       key: "row2",
       render(h, params, index) {
-        console.log("TCL: render -> params", params);
         return <span>row {index}</span>;
       }
     },

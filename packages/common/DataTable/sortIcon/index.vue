@@ -22,7 +22,6 @@
   </span>
 </template>
 <script>
-// refer to https://github.com/TuSimple/infra-ecos-webui/blob/develop/src/components/SortIcon.vue
 import mdArrowDropdown from 'naive-ui/lib/icons/md-arrow-dropdown'
 import mdArrowDropup from 'naive-ui/lib/icons/md-arrow-dropup'
 
@@ -87,31 +86,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.ts-sort-container {
-  display: inline-block;
-  width: 14px;
-  height: 12px;
-  vertical-align: middle;
-  cursor: pointer;
-  position: relative;
-  top: 1px;
-}
-.ts-sort-container i:first-child {
-  top: 0;
-}
-.ts-sort-container i {
-  display: block;
-  height: 19px;
-  position: absolute;
-  transition: color 0.2s ease-in-out;
-  font-weight: 400;
-}
-.ts-sort-container i:last-child {
-  bottom: 0;
-}
-.ts-sort-container i:hover {
-  opacity: 1 !important;
-}
-</style>

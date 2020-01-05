@@ -1,10 +1,3 @@
-<!--
- * @Author: Volankey@gmail.com
- * @Company: Tusimple
- * @Date: 2019-10-24 16:16:09
- * @LastEditors: Jiwen.bai
- * @LastEditTime: 2019-11-06 10:30:17
- -->
 <template>
   <div
     class="n-data-table"
@@ -120,7 +113,7 @@ export default {
   components: {
     BaseTable
   },
-  mixins: [withapp, themeable],
+  mixins: [ withapp, themeable ],
   provide () {
     return {
       NDataTable: this
@@ -128,22 +121,7 @@ export default {
   },
   props: {
     pagination: {
-      /**
-       * @description pagination === false will now show pagination
-       *
-       * @param {total,limit,custom}
-       *
-       * emit event => on-page-change
-       *
-       * and
-       *
-       * if(custom===true){
-       *   exec this.props.onChange
-       * }
-       *
-       *
-       */
-      type: [Object, Boolean],
+      type: [ Object, Boolean ],
       default: false
     },
     onChange: {
@@ -151,16 +129,22 @@ export default {
       default: () => {}
     },
     minHeight: {
-      type: [Number, String],
+      type: [ Number, String ],
       default: 'unset'
     },
     maxHeight: {
-      type: [Number, String],
+      type: [ Number, String ],
       default: null
     },
     maxWidth: {
-      type: [Number, String],
+      type: [ Number, String ],
       default: null
+    },
+    filterMode: {
+      validator (value) {
+        return ['and', 'or'].includes(value)
+      },
+      default: 'or'
     },
     columns: {
       type: Array,
@@ -198,7 +182,7 @@ export default {
       horizontalScrollLeft: 0,
 
       scrollingPart: null, // main left right header
-      scrollRAFId: null, // RequestAnimationFrame
+      scrollTimerId: null, // RequestAnimationFrame
 
       checkedRows: [],
       activeFilters: [],
@@ -222,11 +206,20 @@ export default {
         for (const columnKey of Object.keys(row)) {
           const activeFilterOptionValues = this.activeFilters
             .filter(filter => filter.columnKey === columnKey)
-            .map(filter => filter.optionValue)
-          const columnToFilter = this.columns.find(column => column.columnKey === columnKey)
+            .map(filter => filter.filterOptionValue)
+          if (!activeFilterOptionValues.length) continue
+          const columnToFilter = this.columns.find(column => column.key === columnKey)
           if (columnToFilter && columnToFilter.filter) {
-            if (activeFilterOptionValues.some(optionValue => !columnToFilter.filter(optionValue, row))) {
-              return false
+            if (this.filterMode === 'and') {
+              if (activeFilterOptionValues.some(filterOptionValue => !columnToFilter.filter(filterOptionValue, row))) {
+                return false
+              }
+            } else {
+              if (activeFilterOptionValues.some(filterOptionValue => columnToFilter.filter(filterOptionValue, row))) {
+                return true
+              } else {
+                return false
+              }
             }
           }
         }
@@ -300,9 +293,19 @@ export default {
       this.useRemoteChange()
       this.scrollMainTableBodyToTop()
     },
+    activeSorter (value) {
+      this.$emit('sort-change', value)
+      this.$emit('sorter-change', value)
+    },
+    activeFilters (value) {
+      this.$emit('filter-change', value)
+    },
+    checkedRows (value) {
+      this.$emit('select', value)
+    },
     data () {
       this.currentPageAllSelect = false
-      /** init logic should be fulfilled */
+      /** TODO: init logic should be fulfilled */
     }
   },
   mounted () {
@@ -332,23 +335,31 @@ export default {
       }
     },
     handleMainTableHeaderScroll (e) {
-      const {
-        scrollLeft
-      } = e.target
-      const {
-        body: bodyEl
-      } = this.getScrollElements()
-      bodyEl.scrollLeft = scrollLeft
-      this.horizontalScrollLeft = scrollLeft
+      if (!this.scrollingPart || this.scrollingPart === 'head') {
+        if (this.scrollingPart !== 'head') this.scrollingPart = 'head'
+        if (this.scrollTimerId) window.clearTimeout(this.scrollTimerId)
+        this.scrollTimerId = window.setTimeout(() => {
+          this.scrollingPart = null
+          this.scrollTimerId = null
+        }, 200)
+        const {
+          scrollLeft
+        } = e.target
+        const {
+          body: bodyEl
+        } = this.getScrollElements()
+        bodyEl.scrollLeft = scrollLeft
+        this.horizontalScrollLeft = scrollLeft
+      }
     },
     handleTableBodyScroll (e, part) {
       if (!this.scrollingPart || this.scrollingPart === part) {
         if (this.scrollingPart !== part) this.scrollingPart = part
-        if (this.scrollRAFId) window.cancelAnimationFrame(this.scrollRAFId)
-        this.scrollRAFId = window.requestAnimationFrame(() => {
+        if (this.scrollTimerId) window.clearTimeout(this.scrollTimerId)
+        this.scrollTimerId = window.setTimeout(() => {
           this.scrollingPart = null
-          this.scrollRAFId = null
-        })
+          this.scrollTimerId = null
+        }, 200)
         const {
           scrollTop,
           scrollLeft
@@ -377,36 +388,32 @@ export default {
         this.mainTableScrollContainerWidth = bodyEl.offsetWidth
       }
     },
-    page (pageNum, triggerOnChange = false) {
-      this.triggerOnChange = triggerOnChange
+    page (pageNum) {
       this.currentPage = pageNum
-      this.$nextTick(() => {
-        this.triggerOnChange = !triggerOnChange
-      })
     },
-    sort (columnKey, order, triggerOnChange = false) {
-      this.triggerOnChange = triggerOnChange
-      if (columnKey == null) {
-        return
-      }
-      this.$nextTick(() => {
-        this.triggerOnChange = !triggerOnChange
-      })
-    },
-    filter (filterOptions, triggerOnChange = false) {
-      this.triggerOnChange = triggerOnChange
-      if (filterOptions === null) {
-        return
-      }
-      Object.keys(filterOptions).forEach(key => {
-        const col = this.columns.find(column => column.key === key)
-        if (!col.filterMultiple) {
-          filterOptions[key] = filterOptions[key][0]
+    sort (columnKey, order = 'ascend') {
+      if (!columnKey) this.activeSorter = null
+      else {
+        const columnToSort = this.columns.find(column => column.key === columnKey)
+        if (!columnToSort) return
+        const sorter = columnToSort.sorter || null
+        this.activeSorter = {
+          columnKey,
+          sorter,
+          order: order === 'ascend' ? 1 : -1
         }
-      })
-      this.$nextTick(() => {
-        this.triggerOnChange = !triggerOnChange
-      })
+      }
+    },
+    filter (filters) {
+      if (!filters) {
+        this.activeFilters = []
+      } else {
+        if (Array.isArray(filters)) {
+          this.activeFilters = filters
+        } else {
+          this.activeFilters = [ filters ]
+        }
+      }
     },
     collectDOMSizes () {
       this.headerEl = this.$refs.mainTable.$refs.header.$el.querySelector(

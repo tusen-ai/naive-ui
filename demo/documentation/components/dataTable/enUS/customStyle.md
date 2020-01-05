@@ -4,8 +4,6 @@
 > Column: Set className key to columns prop's object to assign a class name to a certain column.
 
 ```html
-Custom row styles:
-
 <n-data-table
   ref="table"
   :columns="columns"
@@ -14,64 +12,9 @@ Custom row styles:
   :row-class-name="rowClassName"
 >
 </n-data-table>
-
-Custom column styles:
-
-<n-data-table
-  ref="table"
-  :columns="columns1"
-  :data="data"
-  :pagination="pagination"
->
-</n-data-table>
 ```
 
 ```js
-const _columns = $this => {
-  return [
-    {
-      title: "Name",
-      key: "name"
-    },
-    {
-      title: "Age",
-      key: "age"
-    },
-    {
-      title: "Address",
-      key: "address"
-    },
-    {
-      title: "Tags",
-      key: "tags",
-      render(h, params) {
-        const arr = params.tags.map(tagKey => {
-          return (
-            <n-tag
-              style="margin-right:5px;"
-              type={tagKey.length > 5 ? "warning" : "default"}
-            >
-              {tagKey}
-            </n-tag>
-          );
-        });
-        return arr;
-      }
-    },
-    {
-      title: "Action",
-      key: "actions",
-      render(h, params) {
-        return (
-          <n-button size="small" onClick={() => $this.sendMail(params)}>
-            Send mail
-          </n-button>
-        );
-      }
-    }
-  ];
-};
-
 const data = [
   {
     key: "1",
@@ -95,12 +38,12 @@ const data = [
     tags: ["cool", "teacher"]
   }
 ];
+
 export default {
   data() {
     return {
       data: data,
-      columns: _columns(this),
-      columns1: [
+      columns: [
         {
           title: "Name",
           key: "name"
@@ -123,19 +66,18 @@ export default {
   },
   computed: {
     pagination() {
-      return { total: this.data.length, limit: 10 };
+      return { total: this.data.length, limit: 10 }
     }
   },
   methods: {
-    sendMail(rowData) {
-      this.$NMessage.info("send mail to " + rowData.name);
+    sendMail(row) {
+      this.$NMessage.info("send mail to " + row.name)
     },
-    rowClassName(params, index) {
-      console.log("TCL: rowClassName -> row", params, index);
-      if (params.age > 32) {
-        return "too-old";
+    rowClassName(row, index) {
+      if (row.age > 32) {
+        return "too-old"
       }
-      return "";
+      return null
     }
   }
 };

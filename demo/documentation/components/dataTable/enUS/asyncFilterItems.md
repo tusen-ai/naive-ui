@@ -1,19 +1,15 @@
 # Async filter items
-
 ```html
 <n-data-table
-  style="margin-top:10px;"
   ref="table"
   :columns="columns"
   :data="data"
   :pagination="pagination"
-  @change="onChange"
->
-</n-data-table>
+/>
 ```
 
 ```js
-const getFilters = () => {
+const createFilterOptions = () => {
   return new Promise(resolve => {
     setTimeout(() => {
       resolve([
@@ -25,37 +21,36 @@ const getFilters = () => {
           label: "New York",
           value: "New York"
         }
-      ]);
-    }, 10000);
-  });
-};
-const _columns = $this => {
-  return [
-    {
-      title: "Name",
-      key: "name"
+      ])
+    }, 10000)
+  })
+}
+
+const columns = [
+  {
+    title: "Name",
+    key: "name"
+  },
+  {
+    title: "Age",
+    key: "age",
+    defaultSortOrder: "ascend"
+  },
+  {
+    title: "Address",
+    key: "address",
+    filterable: true,
+    defaultFilter: "London",
+    asyncFilterItems() {
+      return createFilterOptions().then(list => {
+        return list
+      })
     },
-    {
-      title: "Age",
-      key: "age",
-      defaultSortOrder: "ascend"
-    },
-    {
-      title: "Address",
-      key: "address",
-      filterable: true,
-      defaultFilter: "London",
-      asyncFilterItems() {
-        return getFilters().then(list => {
-          return list;
-        });
-      },
-      filter(value, record) {
-        return record.address.indexOf(value) >= 0;
-      }
+    filter(value, record) {
+      return record.address.indexOf(value) >= 0
     }
-  ];
-};
+  }
+]
 
 const data = [
   {
@@ -82,24 +77,18 @@ const data = [
     age: 32,
     address: "London No. 2 Lake Park"
   }
-];
+]
 export default {
   data() {
     return {
-      data: data,
-      columns: _columns(this),
-      selectedData: []
-    };
+      data,
+      columns
+    }
   },
   computed: {
     pagination() {
-      return { total: this.data.length, limit: 5 };
-    }
-  },
-  methods: {
-    onChange({ filter, sorter, pagination }) {
-      console.log(filter, sorter, pagination);
+      return { limit: 5 }
     }
   }
-};
+}
 ```

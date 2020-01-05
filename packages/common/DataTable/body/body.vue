@@ -1,10 +1,3 @@
-<!--
- * @Author: Volankey@gmail.com
- * @Company: Tusimple
- * @Date: 2019-10-23 16:06:59
- * @LastEditors: Jiwen.bai
- * @LastEditTime: 2019-11-07 16:17:14
- -->
 <template>
   <n-scrollbar
     ref="scrollbar"
@@ -44,7 +37,7 @@
               'n-data-table-tr--hover': hoveringRowIndex === index
             },
             createClassObject(typeof rowClassName === 'function'
-              ? createClassString(rowClassName(rowData, index))
+              ? createClassObject(rowClassName(rowData, index))
               : rowClassName)
           )"
           @mouseenter="handleTrMouseEnter(index)"
@@ -65,12 +58,10 @@
                 :checked="checkedRows.includes(rowData)"
                 @input="checked => handleCheckboxInput(rowData, checked)"
               />
-              <row
+              <cell
                 v-else
                 :index="index"
                 :row="rowData"
-                :key-name="column.key"
-                :render="column.render"
                 :column="column"
               />
             </td>
@@ -82,7 +73,7 @@
 </template>
 
 <script>
-import row from '../row/index.js'
+import cell from '../cell/index.vue'
 import { createCustomWidthStyle, setCheckStatusOfRow, createClassObject } from '../utils'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
@@ -91,7 +82,7 @@ import NScrollbar from '../../Scrollbar'
 export default {
   components: {
     NScrollbar,
-    row
+    cell
   },
   inject: {
     NDataTable: {

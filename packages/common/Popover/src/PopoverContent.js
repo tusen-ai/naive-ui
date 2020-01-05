@@ -91,6 +91,9 @@ export default {
     this.memorizedId = this.id
     popoverManager.registerContent(this.memorizedId, this)
     if (this.active) this.show = true
+    if (this.controller) {
+      this.controller.updatePosition = this.updatePosition
+    }
   },
   watch: {
     active (value) {
@@ -134,14 +137,8 @@ export default {
     if (this.active) {
       this.$parent.transferElement()
     }
-    if (this.controller) {
-      this.controller.updatePosition = this.updatePosition
-    }
   },
   beforeUpdate () {
-
-  },
-  updated () {
     if (this.controller) {
       this.controller.updatePosition = this.updatePosition
     }

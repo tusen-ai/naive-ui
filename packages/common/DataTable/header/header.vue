@@ -1,10 +1,3 @@
-<!--
- * @Author: Volankey@gmail.com
- * @Company: Tusimple
- * @Date: 2019-10-24 15:16:41
- * @LastEditors: Jiwen.bai
- * @LastEditTime: 2019-11-06 13:34:35
- -->
 <template>
   <div
     ref="header"
@@ -63,7 +56,6 @@
               <!-- {{ !column.renderHeader ? column.title : "" }} -->
               <SortIcon
                 v-if="column.sortable || column.sorter"
-                class="n-data-table__header-icon"
                 :active-sorter="activeSorter"
                 :column="column"
                 @sorter-change="handleSorterChange"
@@ -72,11 +64,8 @@
               {{ column.filterDropdown && column.filterDropdown() }}
               <!-- 否则默认渲染 -->
               <PopFilter
-                v-if="
-                  column.filterable && (column.filterItems || column.asyncFilterItems)
-                "
-                :value="activeFilters.filter(filter => filter.key === column.key).map(filter => filter.value)"
-                class="n-data-table__header-icon"
+                v-if="column.filterable && (column.filterItems || column.asyncFilterItems)"
+                :value="createFilterOptionValues(activeFilters, column)"
                 :column="column"
                 :options="column.filterItems || column.asyncFilterItems"
                 @filter-change="handleFilterChange"
@@ -104,8 +93,16 @@ function createActiveFilters (allFilters, columnKey, filters) {
   }
   return allFilters.concat(filters.map(filter => ({
     columnKey,
-    optionValue: filter
+    filterOptionValue: filter
   })))
+}
+
+function createFilterOptionValues (activeFilters, column) {
+  const activeFilterOptionValues = activeFilters.filter(filter => filter.columnKey === column.key).map(filter => filter.filterOptionValue)
+  if (column.filterMultiple) {
+    return activeFilterOptionValues
+  }
+  return activeFilterOptionValues[0]
 }
 
 export default {
@@ -181,7 +178,8 @@ export default {
     handleScroll (e) {
       this.$emit('scroll', e)
     },
-    createCustomWidthStyle: createCustomWidthStyle,
+    createCustomWidthStyle,
+    createFilterOptionValues,
     handleCheckboxInput (column) {
       if (this.checkboxIndererminate || this.checkboxChecked) {
         this.NDataTable.clearCheckAll(column)
