@@ -38,6 +38,9 @@ export default {
       }
     }
   },
+  created () {
+    if (this.avoidHollowOut) this.hollowOutColorTransitionDisabled = false
+  },
   mounted () {
     if (this.avoidHollowOut) return
     this.updateHollowOutStyle()
