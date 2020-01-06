@@ -169,7 +169,8 @@ export default {
     }
   },
   watch: {
-    page () {
+    page (value) {
+      this.$emit('change', value)
       this.transitionDisabled = true
       this.$nextTick().then(() => {
         this.$el.getBoundingClientRect()

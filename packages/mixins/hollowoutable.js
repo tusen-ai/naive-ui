@@ -5,14 +5,14 @@ export default {
     synthesizedTheme (value) {
       if (this.avoidHollowOut) return
       this.$nextTick().then(() => {
-        console.log('update style')
         this.updateHollowOutStyle(value)
       })
     }
   },
   data () {
     return {
-      ascendantBackgroundColor: null
+      ascendantBackgroundColor: null,
+      hollowOutColorTransitionDisabled: true
     }
   },
   methods: {
@@ -27,28 +27,22 @@ export default {
         const backgroundColorHint = cursor.getAttribute(`n-${theme}-theme-background-color-hint`)
         if (backgroundColorHint === 'transparent') continue
         if (backgroundColorHint) {
-          // console.log(cursor, backgroundColorHint, theme)
           this.ascendantBackgroundColor = backgroundColorHint
           break
         }
         const backgroundColor = getComputedStyle(cursor).backgroundColor
         if (backgroundColor && backgroundColor !== 'rgba(0, 0, 0, 0)') {
-          // console.log(cursor, backgroundColor)
           this.ascendantBackgroundColor = backgroundColor
           break
         }
       }
-      // HollowOutStyleManager.registerComponent(this.hollowOutBackgroundColorId, this.ascendantBackgroundColor)
     }
   },
   mounted () {
-    // this.hollowOutBackgroundColorId = 'x' + Math.random().toString(16).slice(9)
-    // this.$el.setAttribute('n-hollowoutable-id', this.hollowOutBackgroundColorId)
     if (this.avoidHollowOut) return
     this.updateHollowOutStyle()
-  },
-  beforeDestroy () {
-    // const id = this.hollowOutBackgroundColorId
-    // HollowOutStyleManager.unregisterComponent(id, 1000)
+    this.$nextTick().then(() => {
+      this.hollowOutColorTransitionDisabled = false
+    })
   }
 }

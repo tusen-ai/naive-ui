@@ -19,78 +19,74 @@ Note that:
 ```
 
 ```js
-const _columns = $this => {
-  return [
-    {
-      title: "Name",
-      key: "name",
-      width: 200,
-      fixed: "left"
-    },
-    {
-      title: "Age",
-      key: "age",
-      width: 100
-    },
-    {
-      title: "Row",
-      key: "row",
-      render(h, params, index) {
-        console.log("TCL: render -> params", params);
-        return <span> row {index}</span>;
-      }
-    },
-    {
-      title: "Row1",
-      key: "row1",
-      render(h, params, index) {
-        console.log("TCL: render -> params", params);
-        return <span>row {index}</span>;
-      }
-    },
-    {
-      title: "Row2",
-      key: "row2",
-      render(h, params, index) {
-        console.log("TCL: render -> params", params);
-        return <span>row {index}</span>;
-      }
-    },
-    {
-      title: "Address",
-      key: "address",
-      width: 200,
-      fixed: "right"
+const columns = [
+  {
+    title: "Name",
+    key: "name",
+    width: 200,
+    fixed: "left"
+  },
+  {
+    title: "Age",
+    key: "age",
+    width: 100
+  },
+  {
+    title: "Row",
+    key: "row",
+    render(h, params, index) {
+      return <span> row {index}</span>
     }
-  ];
-};
+  },
+  {
+    title: "Row1",
+    key: "row1",
+    render(h, params, index) {
+      return <span>row {index}</span>
+    }
+  },
+  {
+    title: "Row2",
+    key: "row2",
+    render(h, params, index) {
+      return <span>row {index}</span>
+    }
+  },
+  {
+    title: "Address",
+    key: "address",
+    width: 200,
+    fixed: "right"
+  }
+]
 
-const data = [];
+const data = []
 for (let i = 0; i < 46; i++) {
   data.push({
     key: i,
     name: `Edward King ${i}`,
     age: 32,
     address: `London, Park Lane no. ${i}`
-  });
+  })
 }
+
 export default {
   data() {
     return {
-      data: data,
-      columns: _columns(this),
+      data,
+      columns,
       selectedData: []
-    };
+    }
   },
   computed: {
-    pagination() {
-      return { total: this.data.length, limit: 10 };
+    pagination () {
+      return { limit: 10 }
     }
   },
   methods: {
     sendMail(rowData) {
-      this.$NMessage.info("send mail to " + rowData.name);
+      this.$NMessage.info("send mail to " + rowData.name)
     }
   }
-};
+}
 ```

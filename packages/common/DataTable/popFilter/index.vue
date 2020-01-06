@@ -1,48 +1,26 @@
 <template>
   <div class="n-filter-wraper">
     <n-popselect
-      v-if="!loading && !error"
-      v-model="selectedValue"
+      :value="value"
       cancelable
       :multiple="column.filterMultiple"
-      :options="filterItems"
-      @change="onSelectedChange"
+      :options="finalOptions"
+      :loading="loading"
+      @input="onPopselectInput"
     >
       <template v-slot:activator>
-        <filterIcon :status="filterStatus" />
+        <filterIcon :active="active" />
       </template>
     </n-popselect>
-    <n-popover v-else placement="bottom" trigger="click">
-      <template v-slot:activator>
-        <filterIcon :status="filterStatus" />
-      </template>
-      <p v-if="loading" class="n-filter-tip-line">
-        <n-spin size="small" />
-      </p>
-      <p v-if="error" class="n-filter-tip-line" style="">
-        Error,refresh
-        <n-icon
-          style="cursor:pointer"
-          type="md-refresh"
-          color="#999"
-          size="18"
-          @click.stop="initItems"
-        >
-          <md-refresh />
-        </n-icon>
-      </p>
-    </n-popover>
   </div>
 </template>
 
 <script>
 import filterIcon from '../filterIcon'
-import mdRefresh from 'naive-ui/lib/icons/md-refresh'
 
 export default {
   components: {
-    filterIcon,
-    mdRefresh
+    filterIcon
   },
   props: {
     value: {
@@ -55,77 +33,57 @@ export default {
       type: Object,
       required: true
     },
-    items: {
+    options: {
       type: [Array, Function],
       required: true
     }
   },
   data () {
-    const selectedValue = this.value || null
     return {
-      selectedValue: selectedValue,
-      filterItems: [],
-      loading: false,
-      error: false
+      finalOptions: typeof this.options === 'function' ? [] : this.options,
+      loading: false
     }
   },
   computed: {
-    filterStatus () {
-      return (
-        this.selectedValue !== null &&
-        this.selectedValue !== undefined &&
-        this.selectedValue.length !== 0
-      )
+    active () {
+      if (Array.isArray(this.value)) return !!this.value.length
+      return !!this.value
     }
   },
   watch: {
-    items (val, oldVal) {
-      this.initItems()
-    },
-    value (val, oldVal) {
-      if (val !== oldVal) {
-        this.selectedValue = val
+    options (value) {
+      if (typeof this.options === 'function') {
+        this.asyncInitializeOptions()
+      } else {
+        this.finalOptions = value
       }
     }
   },
-  created () {
-    this.initItems()
+  mounted () {
+    if (typeof this.options === 'function') {
+      this.asyncInitializeOptions()
+    }
   },
   methods: {
-    initItems () {
-      this.error = false
-      if (typeof this.items === 'function') {
-        this.loading = true
-        this.items().then(
-          items => {
-            this.filterItems = items
-            this.loading = false
-          },
-          err => {
-            console.error(err)
-            this.error = true
-            this.loading = false
-            throw err
-          }
-        )
-      } else {
-        this.filterItems = this.items
-      }
+    asyncInitializeOptions () {
+      this.loading = true
+      this.options().then(
+        options => {
+          this.finalOptions = options
+          this.loading = false
+        },
+        err => {
+          this.loading = false
+          console.error(err)
+        }
+      )
     },
-    onSelectedChange (val) {
-      this.$emit('input', val)
-      this.$emit('filter', val, this.column)
+    onPopselectInput (filters) {
+      this.$emit('filter-change', {
+        columnKey: this.column.key,
+        filters
+      })
     }
   }
 }
 </script>
-
-<style scoped>
-.n-filter-wraper {
-  display: inline-block;
-}
-.n-filter-tip-line {
-  text-align: center;
-  padding: 5px;
-}
-</style>

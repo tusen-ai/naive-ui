@@ -45,11 +45,7 @@
       </n-tooltip>
     </template>
     <slot name="content" />
-    <div
-      class="demo-card__view"
-    >
-      <slot name="demo" />
-    </div>
+    <slot name="demo" />
     <template v-if="showCode" v-slot:footer>
       <n-scrollbar>
         <slot name="code" />

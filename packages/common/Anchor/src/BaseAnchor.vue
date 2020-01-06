@@ -173,7 +173,7 @@ export default {
       })
       const currentActiveHref = this.activeHref
       const activeLink = links.reduce((prevLink, link, index) => {
-        if (index === links.length - 1 && link.top + link.height < 0) {
+        if (link.top + link.height < 0) {
           return prevLink
         }
         if (link.top <= this.bound) {

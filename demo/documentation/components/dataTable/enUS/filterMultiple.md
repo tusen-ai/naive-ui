@@ -4,14 +4,12 @@
 <n-button @click="clearFilters">clear filters</n-button>
 
 <n-data-table
-  style="margin-top:10px;"
+  style="margin-top:10px"
   ref="table"
   :columns="columns"
   :data="data"
   :pagination="pagination"
-  @change="onChange"
->
-</n-data-table>
+/>
 ```
 
 ```js
@@ -27,10 +25,10 @@ const getFilters = () => {
           label: "New York",
           value: "New York"
         }
-      ]);
-    }, 3000);
-  });
-};
+      ])
+    }, 3000)
+  })
+}
 const _columns = $this => {
   return [
     {
@@ -42,7 +40,7 @@ const _columns = $this => {
       key: "age",
       filterable: true,
       filterMultiple: true,
-      filterItems: [
+      filterOptions: [
         {
           label: "32",
           value: 32
@@ -53,7 +51,7 @@ const _columns = $this => {
         }
       ],
       filter(value, record) {
-        return record.age === value;
+        return record.age === value
       }
     },
     {
@@ -61,17 +59,17 @@ const _columns = $this => {
       key: "address",
       filterable: true,
       filterMultiple: true,
-      asyncFilterItems() {
+      asyncFilterOptions() {
         return getFilters().then(list => {
-          return list;
-        });
+          return list
+        })
       },
       filter(value, record) {
-        return record.address.indexOf(value) >= 0;
+        return record.address.indexOf(value) >= 0
       }
     }
-  ];
-};
+  ]
+}
 
 const data = [
   {
@@ -98,27 +96,24 @@ const data = [
     age: 32,
     address: "London No. 2 Lake Park"
   }
-];
+]
 export default {
   data() {
     return {
       data: data,
       columns: _columns(this),
       selectedData: []
-    };
+    }
   },
   computed: {
     pagination() {
-      return { total: this.data.length, limit: 5 };
+      return { total: this.data.length, limit: 5 }
     }
   },
   methods: {
-    onChange({ filter, sorter, pagination }) {
-      console.log(filter, sorter, pagination);
-    },
     clearFilters() {
-      this.$refs.table.filter(null);
+      this.$refs.table.filter(null)
     }
   }
-};
+}
 ```

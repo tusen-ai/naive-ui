@@ -33,6 +33,9 @@
             v-if="loading"
             key="loading"
             class="n-icon-slot"
+            :style="{
+              transition: hollowOutColorTransitionDisabled ? 'none' : null
+            }"
             :stroke="simulateHollowOut ? ascendantBackgroundColor : null"
             :stroke-width="4"
           />
@@ -40,6 +43,7 @@
             v-else
             key="icon"
             :style="{
+              transition: hollowOutColorTransitionDisabled ? 'none' : null,
               fill: simulateHollowOut ? ascendantBackgroundColor : null
             }"
             class="n-icon-slot"
@@ -55,6 +59,7 @@
       v-if="!circle && $slots.default"
       class="n-button__content"
       :style="{
+        transition: hollowOutColorTransitionDisabled ? 'none' : null,
         color: simulateHollowOut ? ascendantBackgroundColor : null
       }"
     >
@@ -72,6 +77,9 @@
           <n-spin
             v-if="loading"
             key="loading"
+            :style="{
+              transition: hollowOutColorTransitionDisabled ? 'none' : null
+            }"
             :stroke="simulateHollowOut ? ascendantBackgroundColor : null"
             :stroke-width="4"
           />
@@ -80,6 +88,7 @@
             key="icon"
             class="n-icon-slot"
             :style="{
+              transition: hollowOutColorTransitionDisabled ? 'none' : null,
               fill: simulateHollowOut ? ascendantBackgroundColor : null
             }"
           >

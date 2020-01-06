@@ -1,11 +1,11 @@
-# Namespace
-Some parts of component are detached to `document.body`. If you want to add a class to those detached elements, use `namespace` prop of app. Open devtools to see detached content.
+# 命名空间
+组件的一部分是游离于 `document.body`的。如需给这些游离的元素添加class，使用应用的 `namespace` 属性。打开开发者工具查看游离的内容。
 ```html
 <n-config-provider :namespace="ns">
   <n-button
     @click="isActive = true"
   >
-    Activate Component with Detached Content
+    激活含游离内容的组件
   </n-button>
   <n-modal v-model="isActive">
     <n-nimbus-form-card
@@ -27,7 +27,7 @@ Some parts of component are detached to `document.body`. If you want to add a cl
         <n-select
           v-model="selectedValue"
           size="small"
-          placeholder="Please Select Type"
+          placeholder="请选择类型"
           :items="items"
           style="flex-grow: 1;"
         />
@@ -38,11 +38,11 @@ Some parts of component are detached to `document.body`. If you want to add a cl
         >
           <template v-slot:activator>
             <n-button style="margin: 0;">
-              California Girls(Click)
+              超跑女神（点击）
             </n-button>
           </template>
           <span>
-            I wish they all could be California girls
+            我希望它们全都是超跑女神
           </span>
         </n-tooltip>
       </template>
@@ -60,55 +60,55 @@ export default {
       selectedValue: null,
       items: [
         {
-          label: "Everybody's Got Something to Hide Except Me and My Monkey",
+          label: "不能说的秘密",
           value: 'song0'
         },
         {
-          label: 'Drive My Car',
+          label: '一路向北',
           value: 'song1'
         },
         {
-          label: 'Norwegian Wood',
+          label: '米兰的小铁匠',
           value: 'song2'
         },
         {
-          label: "You Won't See",
+          label: "你听得到",
           value: 'song3'
         },
         {
-          label: 'Nowhere Man',
+          label: '阳光宅男',
           value: 'song4'
         },
         {
-          label: 'Think For Yourself',
+          label: '你好吗',
           value: 'song5'
         },
         {
-          label: 'The Word',
+          label: '简单爱',
           value: 'song6'
         },
         {
-          label: 'Michelle',
+          label: '娘子',
           value: 'song7'
         },
         {
-          label: 'What goes on',
+          label: '说好的幸福呢',
           value: 'song8'
         },
         {
-          label: 'Girl',
+          label: '可爱女人',
           value: 'song9'
         },
         {
-          label: "I'm looking through you",
+          label: "那里都是你",
           value: 'song10'
         },
         {
-          label: 'In My Life',
+          label: '无双',
           value: 'song11'
         },
         {
-          label: 'Wait',
+          label: '等你下课',
           value: 'song12'
         }
       ]

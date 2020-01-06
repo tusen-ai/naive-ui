@@ -2,7 +2,7 @@ export default {
   functional: true,
   props: {
     render: {
-      type: [String, Function],
+      type: [String, Number, Function],
       default: () => {}
     }
   },
@@ -12,6 +12,8 @@ export default {
       return render(h)
     } else if (typeof render === 'string') {
       return context._v(render)
+    } else if (typeof render === 'number') {
+      return context._v(String(render))
     } else {
       return null
     }
