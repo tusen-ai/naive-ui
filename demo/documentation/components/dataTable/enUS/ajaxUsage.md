@@ -69,7 +69,7 @@ export default {
   computed: {
     pagination () {
       if (!this.total) return false
-      return { pageCount: this.total, limit: false }
+      return { pageCount: this.total, pageSize: false }
     }
   },
   methods: {

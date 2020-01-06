@@ -2,7 +2,7 @@
   <div
     ref="header"
     :class="{
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${theme}-theme`]: theme
     }"
     :style="headerStyle"
     class="n-data-table-base-table-header"
@@ -20,7 +20,6 @@
           :key="index"
           :style="createCustomWidthStyle(column, index, placement)"
         >
-      <!-- <col v-if="scrollBarWidth" :width="scrollBarWidth" > -->
       </colgroup>
       <thead>
         <tr>
@@ -32,12 +31,11 @@
                 height: height && `${height}px`
               }"
               :class="{
-                'n-data-table__sortable-column': column.sortable,
+                'n-data-table__sortable-column': column.sorter || column.sortOrder,
                 'n-data-table__td-text': column.ellipsis,
                 'n-data-table__td-text--ellipsis': column.ellipsis
               }"
             >
-              <!-- 当前页全选 -->
               <n-checkbox
                 v-if="column.type === 'selection'"
                 :checked="checkboxChecked"
@@ -50,18 +48,14 @@
               <template v-else>
                 {{ column.title }}
               </template>
-              <SortIcon
-                v-if="column.sortable || column.sorter"
-                :active-sorter="activeSorter"
+              <sort-button
+                v-if="column.sorter || column.sortOrder"
                 :column="column"
-                @sorter-change="handleSorterChange"
               />
-              <PopFilter
+              <filter-button
                 v-if="column.filterOptions || column.asyncFilterOptions"
-                :value="createFilterOptionValues(activeFilters, column)"
                 :column="column"
                 :options="column.filterOptions || column.asyncFilterOptions"
-                @filter-change="handleFilterChange"
               />
             </th>
           </template>
@@ -72,44 +66,22 @@
 </template>
 
 <script>
-import SortIcon from '../sortIcon'
-import PopFilter from '../popFilter'
+import SortButton from '../HeaderButton/SortButton'
+import FilterButton from '../HeaderButton/FilterButton'
 import { createCustomWidthStyle } from '../utils'
-import themeable from '../../../mixins/themeable'
-import withapp from '../../../mixins/withapp'
-import render from '../../../utils/render'
-
-function createActiveFilters (allFilters, columnKey, filters) {
-  allFilters = allFilters.filter(filter => filter.columnKey !== columnKey)
-  if (!Array.isArray(filters)) {
-    filters = [filters]
-  }
-  return allFilters.concat(filters.map(filter => ({
-    columnKey,
-    filterOptionValue: filter
-  })))
-}
-
-function createFilterOptionValues (activeFilters, column) {
-  const activeFilterOptionValues = activeFilters.filter(filter => filter.columnKey === column.key).map(filter => filter.filterOptionValue)
-  if (column.filterMultiple) {
-    return activeFilterOptionValues
-  }
-  return activeFilterOptionValues[0]
-}
+import render from '../../../../utils/render'
 
 export default {
   components: {
     render,
-    SortIcon,
-    PopFilter
+    SortButton,
+    FilterButton
   },
   inject: {
     NDataTable: {
       default: null
     }
   },
-  mixins: [withapp, themeable],
   props: {
     placement: {
       type: String,
@@ -137,6 +109,9 @@ export default {
     }
   },
   computed: {
+    theme () {
+      return this.NDataTable.synthesizedTheme
+    },
     checkboxIndererminate () {
       return this.NDataTable.someRowsChecked
     },
@@ -144,10 +119,7 @@ export default {
       return this.NDataTable.allRowsChecked
     },
     activeFilters () {
-      return this.NDataTable.activeFilters
-    },
-    activeSorter () {
-      return this.NDataTable.activeSorter
+      return this.NDataTable.synthesizedActiveFilters
     },
     headerStyleWidth () {
       return this.scrollX && `${this.scrollX}px`
@@ -159,23 +131,10 @@ export default {
     }
   },
   methods: {
-    handleFilterChange ({
-      columnKey,
-      filters
-    }) {
-      this.NDataTable.activeFilters = createActiveFilters(this.activeFilters, columnKey, filters)
-    },
-    /**
-     * TODO: following methods should be hoist to NDataTable
-     */
-    handleSorterChange (sorter) {
-      this.NDataTable.activeSorter = sorter
-    },
     handleScroll (e) {
       this.$emit('scroll', e)
     },
     createCustomWidthStyle,
-    createFilterOptionValues,
     handleCheckboxInput (column) {
       if (this.checkboxIndererminate || this.checkboxChecked) {
         this.NDataTable.clearCheckAll(column)

@@ -86,13 +86,13 @@
       class="n-data-table__pagination"
     >
       <n-pagination
-        v-model="currentPage"
-        :page-count="pageCount"
-        :page-slot="pagination.pageSlot || 5"
+        :page="synthesizedCurrentPage"
+        :page-count="synthesizedPageCount"
+        :page-slot="pagination.pageSlot"
         :show-quick-jumper="!!pagination.showQuickJumper"
-        :disabled="loading"
-        @change="handlePageChange"
-        @page-size-change="handlePageSizeChange"
+        :disabled="loading || !!pagination.disabled"
+        :on-change="synthesizedOnPageChange"
+        :on-page-size-change="synthesizedOnPageSizeChange"
       />
     </div>
   </div>
@@ -101,8 +101,8 @@
 <script>
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
-import { setCheckStatusOfRow } from '../utils'
-import BaseTable from '../baseTable/baseTable'
+import { setCheckStatusOfRow } from './utils'
+import BaseTable from './BaseTable.vue'
 
 function getFlagOfOrder (order) {
   if (order === 'ascend') return 1
@@ -185,11 +185,14 @@ export default {
 
       scrollingPart: null, // main left right header
       scrollTimerId: null, // RequestAnimationFrame
-
       checkedRows: [],
-      activeFilters: [],
-      activeSorter: null,
-      currentPage: 1
+      /** internal filters state */
+      internalActiveFilters: [],
+      /** internal sorter state */
+      internalActiveSorter: null,
+      /** internal pagination state */
+      internalCurrentPage: 1,
+      internalPageSize: null
     }
   },
   computed: {
@@ -206,7 +209,7 @@ export default {
     filteredData () {
       return this.data ? this.data.filter(row => {
         for (const columnKey of Object.keys(row)) {
-          const activeFilterOptionValues = this.activeFilters
+          const activeFilterOptionValues = this.synthesizedActiveFilters
             .filter(filter => filter.columnKey === columnKey)
             .map(filter => filter.filterOptionValue)
           if (!activeFilterOptionValues.length) continue
@@ -231,29 +234,76 @@ export default {
         return true
       }) : []
     },
-    pageCount () {
+    synthesizedActiveFilters () {
+      return this.internalActiveFilters
+    },
+    synthesizedActiveSorter () {
+      const columnToSort = this.columns.find(column => column.sortOrder)
+      if (columnToSort) {
+        return {
+          columnKey: columnToSort.key,
+          order: columnToSort.sortOrder,
+          sorter: columnToSort.sorter
+        }
+      }
+      return this.internalActiveSorter
+    },
+    synthesizedCurrentPage () {
+      return this.pagination.page || this.internalCurrentPage
+    },
+    synthesizedOnPageChange () {
+      return page => {
+        this.pagination.onChange && this.pagination.onChange(page)
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        this.internalCurrentPage = page
+        this.$emit('change', {
+          pagination: {
+            page: this.internalCurrentPage,
+            pageSize: this.internalPageSize,
+            ...this.pagination
+          }
+        })
+        this.$emit('page-change', page)
+      }
+    },
+    synthesizedOnPageSizeChange () {
+      return pageSize => {
+        this.pagination.onPageSizeChange && this.pagination.onPageSizeChange(pageSize)
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        this.internalPageSize = pageSize
+        this.$emit('change', {
+          pagination: {
+            page: this.internalCurrentPage,
+            pageSize: this.internalPageSize,
+            ...this.pagination
+          }
+        })
+        this.$emit('page-size-change')
+      }
+    },
+    synthesizedPageCount () {
       if (this.pagination.pageCount) return this.pagination.pageCount
       if (this.filteredData.length === 0) return 1
-      const { limit } = this.pagination
-      return Math.ceil(this.filteredData.length / limit)
+      const { pageSize } = this.pagination
+      return Math.ceil(this.filteredData.length / pageSize)
     },
     sortedData () {
-      if (this.activeSorter) {
+      if (this.synthesizedActiveSorter) {
         /**
-         * When async, activeSorter.sorter should be true
+         * When async, synthesizedActiveSorter.sorter should be true
          */
         if (
-          this.activeSorter.sorter === true ||
-          typeof this.activeSorter.sorter !== 'function'
+          this.synthesizedActiveSorter.sorter === true ||
+          typeof this.synthesizedActiveSorter.sorter !== 'function'
         ) return this.filteredData
         const filteredData = this.filteredData.slice(0)
-        const columnKey = this.activeSorter.columnKey
+        const columnKey = this.synthesizedActiveSorter.columnKey
         /**
          * 1 for asc
          * -1 for desc
          */
-        const order = this.activeSorter.order
-        const sorter = this.activeSorter.sorter || ((row1, row2) => {
+        const order = this.synthesizedActiveSorter.order
+        const sorter = this.synthesizedActiveSorter.sorter || ((row1, row2) => {
           const value1 = row1[columnKey]
           const value2 = row2[columnKey]
           if (typeof value1 === 'number') {
@@ -270,14 +320,14 @@ export default {
     paginatedData () {
       if (!this.pagination) return this.sortedData
       const {
-        limit
+        pageSize
       } = this.pagination
       /**
-       * When async, limit should be false
+       * When async, pageSize should be false
        */
-      if (!limit) return this.sortedData
-      const startIndex = (this.currentPage - 1) * limit
-      return this.sortedData.slice(startIndex, startIndex + limit)
+      if (!pageSize) return this.sortedData
+      const startIndex = (this.internalCurrentPage - 1) * pageSize
+      return this.sortedData.slice(startIndex, startIndex + pageSize)
     },
     styleMaxHeight () {
       if (typeof this.maxHeight === 'number') return this.maxHeight + 'px'
@@ -306,20 +356,13 @@ export default {
     }
   },
   watch: {
-    currentPage () {
+    synthesizedCurrentPage () {
       this.scrollMainTableBodyToTop()
-    },
-    activeSorter (value) {
-      this.$emit('sorter-change', value ? { ...value } : value)
-    },
-    activeFilters (value) {
-      this.$emit('filters-change', value.map(filter => ({ ...filter })))
     },
     checkedRows (value) {
       this.$emit('select', value)
     },
     data () {
-      this.currentPageAllSelect = false
       /** TODO: init logic should be fulfilled */
     }
   },
@@ -331,11 +374,23 @@ export default {
     window.removeEventListener('resize', this.collectDOMSizes)
   },
   methods: {
-    handlePageChange (value) {
-      this.$emit('page-change', value)
+    changeSorter (sorter) {
+      this.internalActiveSorter = sorter
+      this.$emit('sorter-change', sorter)
     },
-    handlePageSizeChange (value) {
-      this.$emit('page-size-change', value)
+    changeFilters (filters) {
+      if (!filters) {
+        this.internalActiveFilters = []
+        this.$emit('filters-change', [])
+      } else {
+        if (Array.isArray(filters)) {
+          this.internalActiveFilters = filters
+          this.$emit('filters-change', filters)
+        } else {
+          this.internalActiveFilters = [ filters ]
+          this.$emit('filters-change', [ filters ])
+        }
+      }
     },
     scrollMainTableBodyToTop () {
       const {
@@ -410,15 +465,15 @@ export default {
       }
     },
     page (page) {
-      this.currentPage = page
+      this.internalCurrentPage = page
     },
     sort (columnKey, order = 'ascend') {
-      if (!columnKey) this.activeSorter = null
+      if (!columnKey) this.internalActiveSorter = null
       else {
         const columnToSort = this.columns.find(column => column.key === columnKey)
         if (!columnToSort) return
         const sorter = columnToSort.sorter || null
-        this.activeSorter = {
+        this.internalActiveSorter = {
           columnKey,
           sorter,
           order: order
@@ -426,7 +481,7 @@ export default {
       }
     },
     clearSorter () {
-      this.activeSorter = null
+      this.internalActiveSorter = null
     },
     clearFilter () {
       this.clearFilters()
@@ -438,15 +493,7 @@ export default {
       this.filter(filters)
     },
     filter (filters) {
-      if (!filters) {
-        this.activeFilters = []
-      } else {
-        if (Array.isArray(filters)) {
-          this.activeFilters = filters
-        } else {
-          this.activeFilters = [ filters ]
-        }
-      }
+      this.changeFilters(filters)
     },
     collectDOMSizes () {
       this.headerEl = this.$refs.mainTable.$refs.header.$el.querySelector(

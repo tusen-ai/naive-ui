@@ -1,6 +1,4 @@
-# Ellipsis
-
-> Ellipsize cell content via setting `column.ellipsis`.
+# Controlled Pagination
 
 ```html
 <n-data-table
@@ -24,23 +22,32 @@ const createColumns = instance => {
     },
     {
       title: "Address",
-      key: "address",
-      width: 100,
-      ellipsis: true
+      key: "address"
     },
     {
-      title: "Another Address",
-      key: "anotherAddress",
-      width: 100,
-      ellipsis: true
+      title: "Tags",
+      key: "tags",
+      render (h, row) {
+        const tags = row.tags.map(tagKey => {
+          return (
+            <n-tag
+              style="margin-right:5px"
+              type={tagKey.length > 5 ? "warning" : "default"}
+            >
+              {tagKey}
+            </n-tag>
+          )
+        })
+        return tags
+      }
     },
     {
       title: "Action",
       key: "actions",
-      render(h, params) {
+      render (h, row) {
         return (
-          <n-button size="small" onClick={() => instance.sendMail(params)}>
-            Send mail
+          <n-button size="small">
+            Oops
           </n-button>
         )
       }
@@ -50,42 +57,41 @@ const createColumns = instance => {
 
 const data = [
   {
-    key: "1",
     name: "John Brown",
     age: 32,
     address: "New York No. 1 Lake Park",
-    anotherAddress: "New York No. 1 Lake Park",
     tags: ["nice", "developer"]
   },
   {
-    key: "2",
     name: "Jim Green",
     age: 42,
     address: "London No. 1 Lake Park",
-    anotherAddress: "New York No. 1 Lake Park",
     tags: ["loser"]
   },
   {
-    key: "3",
     name: "Joe Black",
     age: 32,
     address: "Sidney No. 1 Lake Park",
-    anotherAddress: "New York No. 1 Lake Park",
     tags: ["cool", "teacher"]
   }
 ]
+
 export default {
   data() {
     return {
-      data: data,
+      data,
       columns: createColumns(this),
-      pagination: { pageSize: 10 }
+      pagination: {
+        page: 2,
+        pageCount: data.length,
+        pageSize: 1,
+        onChange: page => {
+          this.pagination.page = page
+        }
+      }
     }
   },
   methods: {
-    sendMail(rowData) {
-      this.$NMessage.info("Send mail to " + rowData.name)
-    }
   }
 }
 ```

@@ -1,0 +1,110 @@
+<template>
+  <div class="n-filter-wraper">
+    <n-popselect
+      :value="activeFilterOptionValues"
+      cancelable
+      :multiple="column.filterMultiple"
+      :options="finalOptions"
+      :loading="loading"
+      @input="handleFilterChange"
+    >
+      <template v-slot:activator>
+        filter {{ active ? 'active' : null }}
+      </template>
+    </n-popselect>
+  </div>
+</template>
+
+<script>
+function createFilterOptionValues (activeFilters, column) {
+  const activeFilterOptionValues = activeFilters.filter(filter => filter.columnKey === column.key).map(filter => filter.filterOptionValue)
+  if (column.filterMultiple) {
+    return activeFilterOptionValues
+  }
+  return activeFilterOptionValues[0]
+}
+
+function createActiveFilters (allFilters, columnKey, filters) {
+  allFilters = allFilters.filter(filter => filter.columnKey !== columnKey)
+  if (!Array.isArray(filters)) {
+    filters = [filters]
+  }
+  return allFilters.concat(filters.map(filter => ({
+    columnKey,
+    filterOptionValue: filter
+  })))
+}
+
+export default {
+  inject: {
+    NDataTable: {
+      default: null
+    }
+  },
+  props: {
+    column: {
+      type: Object,
+      required: true
+    },
+    options: {
+      type: [Array, Function],
+      required: true
+    }
+  },
+  data () {
+    return {
+      finalOptions: typeof this.options === 'function' ? [] : this.options,
+      loading: false
+    }
+  },
+  computed: {
+    activeFilters () {
+      return this.NDataTable.synthesizedActiveFilters
+    },
+    activeFilterOptionValues () {
+      return createFilterOptionValues(this.activeFilters, this.column)
+    },
+    active () {
+      if (Array.isArray(this.activeFilterOptionValues)) return !!this.activeFilterOptionValues.length
+      return !!this.activeFilterOptionValues
+    }
+  },
+  watch: {
+    options (value) {
+      if (typeof this.options === 'function') {
+        this.asyncInitializeOptions()
+      } else {
+        this.finalOptions = value
+      }
+    }
+  },
+  mounted () {
+    if (typeof this.options === 'function') {
+      this.asyncInitializeOptions()
+    }
+  },
+  methods: {
+    handleFilterChange (filterOptionValues) {
+      const nextActiveFilters = createActiveFilters(
+        this.activeFilters,
+        this.column.key,
+        filterOptionValues
+      )
+      this.NDataTable.changeFilters(nextActiveFilters)
+    },
+    asyncInitializeOptions () {
+      this.loading = true
+      this.options().then(
+        options => {
+          this.finalOptions = options
+          this.loading = false
+        },
+        err => {
+          this.loading = false
+          console.error(err)
+        }
+      )
+    }
+  }
+}
+</script>

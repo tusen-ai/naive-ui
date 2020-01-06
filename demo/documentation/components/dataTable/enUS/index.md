@@ -13,6 +13,7 @@ Table is used to displays rows of data.
 
 ```demo
 basic
+control-page
 customStyle
 select
 filterAndSorter

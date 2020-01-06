@@ -73,11 +73,9 @@
 </template>
 
 <script>
-import cell from '../cell/index.vue'
+import cell from './Cell.vue'
 import { createCustomWidthStyle, setCheckStatusOfRow, createClassObject } from '../utils'
-import withapp from '../../../mixins/withapp'
-import themeable from '../../../mixins/themeable'
-import NScrollbar from '../../Scrollbar'
+import NScrollbar from '../../../Scrollbar'
 
 export default {
   components: {
@@ -89,7 +87,6 @@ export default {
       default: null
     }
   },
-  mixins: [ withapp, themeable ],
   props: {
     placement: {
       type: String,

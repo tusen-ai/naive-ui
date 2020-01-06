@@ -31,8 +31,8 @@
 </template>
 
 <script>
-import TableHeader from '../header/header'
-import TableBody from '../body/body'
+import TableHeader from './TableParts/Header'
+import TableBody from './TableParts/Body'
 
 export default {
   components: {

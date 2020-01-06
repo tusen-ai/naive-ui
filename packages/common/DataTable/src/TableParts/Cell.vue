@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import render from '../../../utils/render'
+import render from '../../../../utils/render'
 
 export default {
   name: 'NDataTableCell',

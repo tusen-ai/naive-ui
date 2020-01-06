@@ -57,7 +57,7 @@ export default {
   },
   computed: {
     pagination() {
-      return { total: this.data.length, limit: 5 }
+      return { total: this.data.length, pageSize: 5 }
     }
   },
   methods: {
