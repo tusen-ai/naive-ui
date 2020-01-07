@@ -38,13 +38,19 @@
       }
       tbody {
         background-color: $--table-body-background-color;
-        color: $--table-body-color;
+        color: $--table-body-text-color;
         tr {
           transition: background-color 0.3s;
           td {
             padding: 16px 6px 12px 19px;
             text-align: left;
             border: none;
+            border-bottom: 1px solid $--data-table-border-color;
+          }
+          &:last-of-type {
+            td {
+              border-bottom: none;
+            }
           }
           td:nth-child(1) {
             padding-left: 21px;
@@ -63,7 +69,7 @@
       border-collapse: separate;
       thead {
         background-color: $--table-header-background-color;
-        color: $--table-header-color;
+        color: $--table-header-text-color;
         tr {
           th {
             &:last-of-type {
@@ -74,7 +80,7 @@
       }
       tbody {
         background-color: $--table-body-background-color;
-        color: $--table-body-color;
+        color: $--table-body-text-color;
         tr:hover {
           background-color: $--table-row-hover;
         }
@@ -108,7 +114,7 @@
           border-right: 1px solid $--n-border-color;
           @include m(active) {
             transition: box-shadow 0.2s;
-            border-right: 1px solid transparent;
+            // border-right: 1px solid transparent;
             box-shadow: $--table-fixed-column-box-shadow
           }
         }
@@ -116,7 +122,7 @@
           right: 0;
           border-left: 1px solid $--n-border-color;
           @include m(active) {
-            border-left: 1px solid transparent;
+            // border-left: 1px solid transparent;
             box-shadow: $--table-fixed-column-box-shadow
           }
         }
@@ -200,15 +206,66 @@
     }
     @include b(data-table-base-table-header) {
       overflow: scroll;
+      border-bottom: 1px solid $--data-table-border-color;
       &::-webkit-scrollbar {
         width: 0;
         height: 0;
       }
-      i {
-        fill: $--table-header-icon-color;
-      }
       th {
         box-sizing: border-box;
+        position: relative;
+        font-weight: 500;
+        @include b(data-table-sort-button) {
+          height: 14px;
+          width: 14px;
+          margin-left: 4px;
+          position: relative;
+          display: inline-block;
+          vertical-align: middle;
+          @include m(asc) {
+            @include e(asc-icon) {
+              fill: $--n-primary-color;
+            }
+          }
+          @include m(desc) {
+            @include e(desc-icon) {
+              fill: $--n-primary-color;
+            }
+          }
+          @include e(asc-icon) {
+            bottom: calc(50% - 2px);
+            left: 0;
+          }
+          @include e(desc-icon) {
+            top: calc(50% - 2px);
+            left: 0;
+          }
+          @include e(asc-icon, desc-icon) {
+            transition: fill .2s $--n-ease-in-out-cubic-bezier;
+            fill: change-color($--n-secondary-text-color, $alpha: .3);
+            position: absolute;
+          }
+        }
+        @include b(data-table-filter-button) {
+          position: absolute;
+          right: 0;
+          width: 36px;
+          top: 0;
+          bottom: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          @include m(active) {
+            @include b(icon) {
+              fill: $--n-primary-color;
+            }
+          }
+          @include b(icon) {
+            fill: change-color($--n-secondary-text-color, $alpha: .3);
+            transition: fill .2s $--n-ease-in-out-cubic-bezier;
+            font-size: 14px;
+          }
+        }
       }
     }
     @include m(no-data) {

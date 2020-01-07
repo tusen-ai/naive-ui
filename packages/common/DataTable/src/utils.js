@@ -12,13 +12,13 @@ export const createClassObject = function createClassObject (classString) {
 export const createCustomWidthStyle = function createCustomWidthStyle (column, index, placement) {
   if (column.width) {
     let width = column.width
-    if (index === 0 && placement === 'right') width += 1
+    if (index === 0 && placement === 'right') width += 0
     return {
       width: width + 'px'
     }
   } else if (column.type === 'selection') {
     let width = 60
-    if (index === 0 && placement === 'right') width += 1
+    if (index === 0 && placement === 'right') width += 0
     return {
       width: width + 'px'
     }

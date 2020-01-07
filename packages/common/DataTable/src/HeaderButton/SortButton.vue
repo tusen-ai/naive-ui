@@ -1,44 +1,28 @@
 <template>
-  <span>
-    <span
-      :style="{
-        opacity: arrowOpacity.desc
-      }"
-      @click="setSorter('descend')"
+  <span
+    class="n-data-table-sort-button"
+    :class="{
+      'n-data-table-sort-button--asc': currentColumnActive && synthesizedSortOrder === 'ascend',
+      'n-data-table-sort-button--desc': currentColumnActive && synthesizedSortOrder === 'descend'
+    }"
+  >
+    <n-icon
+      class="n-data-table-sort-button__desc-icon"
     >
-      DESC
-    </span>
-    <span
-      :style="{
-        opacity: arrowOpacity.asc
-      }"
-      @click="setSorter('ascend')"
+      <ios-arrow-down />
+    </n-icon>
+    <n-icon
+      class="n-data-table-sort-button__asc-icon"
     >
-      ASC
-    </span>
+      <ios-arrow-up />
+    </n-icon>
   </span>
 </template>
 
 <script>
-function getNextOrderOf (order) {
-  if (!order) return 'ascend'
-  else if (order === 'ascend') return 'descend'
-  return false
-}
-
-function createNextSorter (columnKey, activeSorter, sorter) {
-  const currentOrder = (activeSorter && activeSorter.order) || false
-  let nextOrder = getNextOrderOf(false)
-  if (activeSorter && activeSorter.columnKey === columnKey) {
-    nextOrder = getNextOrderOf(currentOrder)
-  }
-  if (!nextOrder) return null
-  return {
-    columnKey,
-    order: nextOrder,
-    sorter
-  }
-}
+import iosArrowUp from '../../../../icons/ios-arrow-up'
+import iosArrowDown from '../../../../icons/ios-arrow-down'
+import NIcon from '../../../Icon'
 
 export default {
   name: 'SortIcon',
@@ -46,6 +30,11 @@ export default {
     NDataTable: {
       default: null
     }
+  },
+  components: {
+    NIcon,
+    iosArrowUp,
+    iosArrowDown
   },
   props: {
     fontSize: {
@@ -60,10 +49,10 @@ export default {
   computed: {
     activeSorter () {
       const activeSorter = this.NDataTable.synthesizedActiveSorter
-      if (activeSorter && activeSorter.columnKey === this.column.key) {
-        return activeSorter
-      }
-      return null
+      return activeSorter
+    },
+    currentColumnActive () {
+      return this.activeSorter && this.activeSorter.columnKey === this.column.key
     },
     synthesizedSortOrder () {
       if (this.activeSorter) {
@@ -73,18 +62,6 @@ export default {
     },
     synthesizedColumnSorter () {
       return this.column.sorter || null
-    },
-    arrowOpacity () {
-      return {
-        asc: (this.activeSorter && this.synthesizedSortOrder === 'ascend') ? 1 : 0.4,
-        desc: (this.activeSorter && this.synthesizedSortOrder === 'descend') ? 1 : 0.4
-      }
-    }
-  },
-  methods: {
-    setSorter (order) {
-      const nextSorter = createNextSorter(this.column.key, this.activeSorter, this.synthesizedColumnSorter)
-      this.NDataTable.changeSorter(nextSorter)
     }
   }
 }
