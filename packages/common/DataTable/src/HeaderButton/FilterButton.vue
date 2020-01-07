@@ -1,5 +1,10 @@
 <template>
-  <div class="n-filter-wraper">
+  <div
+    class="n-data-table-filter-button"
+    :class="{
+      'n-data-table-filter-button--active': active
+    }"
+  >
     <n-popselect
       :value="activeFilterOptionValues"
       cancelable
@@ -9,13 +14,18 @@
       @input="handleFilterChange"
     >
       <template v-slot:activator>
-        filter {{ active ? 'active' : null }}
+        <n-icon>
+          <ios-funnel />
+        </n-icon>
       </template>
     </n-popselect>
   </div>
 </template>
 
 <script>
+import NIcon from '../../../Icon'
+import iosFunnel from '../../../../icons/ios-funnel'
+
 function createFilterOptionValues (activeFilters, column) {
   const activeFilterOptionValues = activeFilters.filter(filter => filter.columnKey === column.key).map(filter => filter.filterOptionValue)
   /** default is multiple */
@@ -41,6 +51,10 @@ export default {
     NDataTable: {
       default: null
     }
+  },
+  components: {
+    NIcon,
+    iosFunnel
   },
   props: {
     column: {

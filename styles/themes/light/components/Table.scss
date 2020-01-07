@@ -1,10 +1,10 @@
 @mixin setup-light-table {
-  $--table-header-background-color: #e8e8e8 !global;
-  $--table-body-background-color: #fff !global;
-  $--table-header-color: #262626 !global;
-  $--table-body-color: #595959 !global;
-  $--table-row-hover: rgba(0,0,0,0.03) !global;
-  $--table-box-shadow: none !global;
-  $--table-border:1px solid rgba(0,0,0,0.15) !global;
-  $--table-td-border-right: 1px solid $--overlay-6 !global;
+  $--table-header-background-color: $--n-background-color !global;
+  $--table-body-background-color: $--n-card-color !global;
+  $--table-header-text-color: $--text-1 !global;
+  $--table-body-text-color: $--text-2 !global;
+  $--table-row-hover: $--n-background-color !global;
+  $--table-border: 1px solid $--n-divider-color !global;
+  $--table-td-border-right: 1px solid $--n-divider-color !global;
+  $--data-table-border-color: $--n-divider-color !global;
 }

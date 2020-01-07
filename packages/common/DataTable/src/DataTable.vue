@@ -12,6 +12,7 @@
     >
       <base-table
         ref="mainTable"
+        :header-height="headerHeight"
         :scroll-x="scrollX"
         :body-style="bodyStyle"
         :data="paginatedData"

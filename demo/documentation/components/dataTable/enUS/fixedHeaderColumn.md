@@ -13,7 +13,7 @@ Note that:
   :data="data"
   :pagination="pagination"
   max-height="250px"
-  :scroll-x="1300"
+  :scroll-x="1800"
 >
 </n-data-table>
 ```

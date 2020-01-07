@@ -31,10 +31,11 @@
                 height: height && `${height}px`
               }"
               :class="{
-                'n-data-table__sortable-column': column.sorter || column.sortOrder,
+                'n-data-table__sortable-column': column.sorter || column.sortOrder !== undefined,
                 'n-data-table__td-text': column.ellipsis,
                 'n-data-table__td-text--ellipsis': column.ellipsis
               }"
+              @click="handleHeaderClick(column)"
             >
               <n-checkbox
                 v-if="column.type === 'selection'"
@@ -71,11 +72,36 @@ import FilterButton from '../HeaderButton/FilterButton'
 import { createCustomWidthStyle } from '../utils'
 import render from '../../../../utils/render'
 
+function getNextOrderOf (order) {
+  if (!order) return 'ascend'
+  else if (order === 'ascend') return 'descend'
+  return false
+}
+
+function createNextSorter (columnKey, activeSorter, sorter) {
+  const currentOrder = (activeSorter && activeSorter.order) || false
+  let nextOrder = getNextOrderOf(false)
+  if (activeSorter && activeSorter.columnKey === columnKey) {
+    nextOrder = getNextOrderOf(currentOrder)
+  }
+  if (!nextOrder) return null
+  return {
+    columnKey,
+    order: nextOrder,
+    sorter
+  }
+}
+
 export default {
   components: {
     render,
     SortButton,
     FilterButton
+  },
+  provide () {
+    return {
+      NDataTableHeader: this
+    }
   },
   inject: {
     NDataTable: {
@@ -141,6 +167,11 @@ export default {
       } else {
         this.NDataTable.checkAll(column)
       }
+    },
+    handleHeaderClick (column) {
+      const activeSorter = this.NDataTable.synthesizedActiveSorter
+      const nextSorter = createNextSorter(column.key, activeSorter, column.sorter)
+      this.NDataTable.changeSorter(nextSorter)
     }
   }
 }
