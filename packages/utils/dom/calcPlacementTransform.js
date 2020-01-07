@@ -54,21 +54,19 @@ export function getAdjustedPlacementOfTrackingElement (placement = 'bottom-start
     return placement
   }
   const [direction, position] = placement.split('-')
-  let newPosition = position
+  let adjustedPosition = position
   if (position) {
     const adjacentPositionDirection = positionDirections[placement]
     if (trackedRect[adjacentPositionDirection] + trackedRect[lengthToCompare[adjacentPositionDirection]] <= trackingRect[lengthToCompare[adjacentPositionDirection]]) {
-      newPosition = oppositePosition[position]
+      adjustedPosition = oppositePosition[position]
     }
   }
   if (trackedRect[direction] >= trackingRect[lengthToCompare[direction]]) {
-    return newPosition ? (direction + '-' + newPosition) : direction
+    return adjustedPosition ? (direction + '-' + adjustedPosition) : direction
   } else if (trackedRect[oppositeDirection[direction]] >= trackingRect[lengthToCompare[direction]]) {
-    if (position) {
-      return `${oppositeDirection[direction]}-${newPosition}`
-    } else return oppositeDirection[direction]
+    return adjustedPosition ? `${oppositeDirection[direction]}-${adjustedPosition}` : oppositeDirection[direction]
   } else {
-    return newPosition ? (direction + '-' + newPosition) : direction
+    return adjustedPosition ? (direction + '-' + adjustedPosition) : direction
   }
   // else {
   //   const [direction1, direction2] = adjacentDirections[direction]

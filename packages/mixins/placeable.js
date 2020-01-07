@@ -12,17 +12,12 @@ function getContentEl (componentInstance) {
   return componentInstance.$refs.content.$el || componentInstance.$refs.content
 }
 
-function getContentInner (contentInner) {
-  if (contentInner) {
-    let element = contentInner
-    if (contentInner.$el) {
-      element = contentInner.$el
-    }
-    return element
-  }
+function getContentInner (instance) {
+  const contentInnerRef = instance.$refs.contentInner
+  return (contentInnerRef && contentInnerRef.$el) || contentInnerRef || null
 }
 
-function getActivatorBoundingClientRect (manuallyPositioned, x, y, trackedElement) {
+function getActivatorRect (manuallyPositioned, x, y, trackedElement) {
   if (manuallyPositioned) {
     return {
       top: y,
@@ -33,7 +28,7 @@ function getActivatorBoundingClientRect (manuallyPositioned, x, y, trackedElemen
       bottom: window.innerHeight - y
     }
   } else {
-    let activatorRect = trackedElement.getBoundingClientRect()
+    const activatorRect = trackedElement.getBoundingClientRect()
     return {
       left: parseInt(activatorRect.left),
       top: parseInt(activatorRect.top),
@@ -200,7 +195,7 @@ export default {
     /**
      * Need to be fulfilled!
      */
-    setTrackingElementPosition (position, transformOrigin) {
+    setOffsetOfTrackingElement (position, transformOrigin) {
       this.trackingElement.style.position = 'absolute'
       this.trackingElement.style.top = position.top
       this.trackingElement.style.left = position.left
@@ -224,25 +219,25 @@ export default {
           return
         }
       }
-      const activatorBoundingClientRect = getActivatorBoundingClientRect(this.manuallyPositioned, this.x, this.y, this.trackedElement)
+      const activatorRect = getActivatorRect(this.manuallyPositioned, this.x, this.y, this.trackedElement)
       const contentBoundingClientRect = {
         width: this.trackingElement.offsetWidth,
         height: this.trackingElement.offsetHeight
       }
-      const adjustedPlacement = getAdjustedPlacementOfTrackingElement(this.placement, activatorBoundingClientRect, contentBoundingClientRect, this.flip)
+      const adjustedPlacement = getAdjustedPlacementOfTrackingElement(this.placement, activatorRect, contentBoundingClientRect, this.flip)
       const suggestedTransformOrigin = getTransformOriginByPlacement(adjustedPlacement)
-      let position = getPosition(adjustedPlacement, activatorBoundingClientRect, contentBoundingClientRect)
+      let offset = getPosition(adjustedPlacement, activatorRect, contentBoundingClientRect)
       this.adjustedPlacement = adjustedPlacement
       if (this.positionModeisAbsolute) {
-        position = getPositionInAbsoluteMode(this.placement, suggestedTransformOrigin)
+        offset = getPositionInAbsoluteMode(this.placement, suggestedTransformOrigin)
       }
-      this.setTrackingElementPosition(position, suggestedTransformOrigin)
-      const contentInner = getContentInner(this.$refs.contentInner)
-      if (this.widthMode === 'activator') {
-        contentInner.style.minWidth = activatorBoundingClientRect.width + 'px'
+      this.setOffsetOfTrackingElement(offset, suggestedTransformOrigin)
+      const contentInner = getContentInner(this)
+      if (this.widthMode === 'activator' && contentInner) {
+        contentInner.style.minWidth = activatorRect.width + 'px'
       }
       if (el && cb) {
-        cb(el, activatorBoundingClientRect, contentBoundingClientRect)
+        cb(el, activatorRect, contentBoundingClientRect)
       }
     },
     registerResizeListener () {
