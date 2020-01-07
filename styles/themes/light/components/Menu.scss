@@ -1,8 +1,8 @@
 @mixin setup-light-menu {
-  $--menu-background-color: $--n-background-color !global;
   $--menu-item-background-image: linear-gradient(90deg, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, .03) 40%, rgba(0, 0, 0, .09) 60%, rgba(0, 0, 0, .09) 100%) !global;
   $--menu-item-background-position: 100% !global;
   $--menu-item-group-text-color: $--n-meta-text-color !global;
   $--menu-item-text-color: $--n-secondary-text-color !global;
   $--menu-sub-menu-text-color: $--n-text-color !global;
+  $--menu-sub-menu-arrow-color: $--n-primary-color !global;
 }

@@ -4,7 +4,6 @@
 
 @include themes-mixin() {
   @include b(menu) {
-    background-color: $--menu-background-color;
     color: $--menu-item-text-color;
     @include once {
       transition: background-color .3s $--n-ease-in-out-cubic-bezier;
@@ -101,8 +100,8 @@
           }
         }
         &::after { // down arrow 
-          border-left: 2px solid $--n-primary-color;
-          border-top: 2px solid $--n-primary-color;
+          border-left: 2px solid  $--menu-sub-menu-arrow-color;
+          border-top: 2px solid  $--menu-sub-menu-arrow-color;
           @include once {
             content: '';
             height: 6px;

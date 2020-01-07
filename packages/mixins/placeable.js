@@ -41,7 +41,7 @@ function getActivatorRect (manuallyPositioned, x, y, trackedElement) {
 }
 
 function getPositionInAbsoluteMode (placement) {
-  let position = {
+  const position = {
     top: null,
     bottom: null,
     left: null,
@@ -72,7 +72,7 @@ function getPositionInAbsoluteMode (placement) {
     position.bottom = '0'
     position.right = '100%'
   } else {
-    console.error('[naive-ui/placeable/getPositionInAbsoluteMode]: placement not implemented')
+    console.error('placement ' + placement + ' is not supported.')
   }
   return position
 }
