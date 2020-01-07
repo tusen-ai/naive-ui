@@ -1,4 +1,5 @@
 @mixin setup-dark-menu {
+  $--menu-background-color: $--neutral-9 !global;
   $--menu-item-background-image: linear-gradient(90deg, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, .03) 40%, rgba(0, 0, 0, .09) 60%, rgba(0, 0, 0, .09) 100%) !global;
   $--menu-item-background-position: 0% !global;
   $--menu-item-group-text-color: $--n-meta-text-color !global;
