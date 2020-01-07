@@ -23,11 +23,15 @@
 function getNextOrderOf (order) {
   if (!order) return 'ascend'
   else if (order === 'ascend') return 'descend'
-  return null
+  return false
 }
 
-function createNextSorter (columnKey, currentOrder, sorter) {
-  const nextOrder = getNextOrderOf(currentOrder)
+function createNextSorter (columnKey, activeSorter, sorter) {
+  const currentOrder = (activeSorter && activeSorter.order) || false
+  let nextOrder = getNextOrderOf(false)
+  if (activeSorter && activeSorter.columnKey === columnKey) {
+    nextOrder = getNextOrderOf(currentOrder)
+  }
   if (!nextOrder) return null
   return {
     columnKey,
@@ -62,14 +66,12 @@ export default {
       return null
     },
     synthesizedSortOrder () {
-      if (this.column.sortOrder !== undefined) {
-        return this.column.sortOrder
-      } else if (this.activeSorter) {
+      if (this.activeSorter) {
         return this.activeSorter.order
       }
-      return null
+      return false
     },
-    synthesizedSorter () {
+    synthesizedColumnSorter () {
       return this.column.sorter || null
     },
     arrowOpacity () {
@@ -81,7 +83,7 @@ export default {
   },
   methods: {
     setSorter (order) {
-      const nextSorter = createNextSorter(this.column.key, this.synthesizedSortOrder, this.synthesizedSorter)
+      const nextSorter = createNextSorter(this.column.key, this.activeSorter, this.synthesizedColumnSorter)
       this.NDataTable.changeSorter(nextSorter)
     }
   }

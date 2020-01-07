@@ -3,7 +3,7 @@
     <n-popselect
       :value="activeFilterOptionValues"
       cancelable
-      :multiple="column.filterMultiple"
+      :multiple="column.filterMultiple === false ? false : true"
       :options="finalOptions"
       :loading="loading"
       @input="handleFilterChange"
@@ -18,7 +18,8 @@
 <script>
 function createFilterOptionValues (activeFilters, column) {
   const activeFilterOptionValues = activeFilters.filter(filter => filter.columnKey === column.key).map(filter => filter.filterOptionValue)
-  if (column.filterMultiple) {
+  /** default is multiple */
+  if (column.filterMultiple !== false) {
     return activeFilterOptionValues
   }
   return activeFilterOptionValues[0]
@@ -90,7 +91,7 @@ export default {
         this.column.key,
         filterOptionValues
       )
-      this.NDataTable.changeFilters(nextActiveFilters)
+      this.NDataTable.changeFilters(nextActiveFilters, this.column)
     },
     asyncInitializeOptions () {
       this.loading = true

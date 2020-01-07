@@ -9,8 +9,6 @@
       :fixed="fixed"
       :scroll-x="scrollX"
       @scroll="handleHeaderScroll"
-      @sort-change="onSortChange"
-      @filter="onFilter"
     />
     <table-body
       ref="body"
@@ -95,12 +93,6 @@ export default {
     },
     getBodyElement () {
       return this.$refs.body.getScrollContainer()
-    },
-    onSortChange (...args) {
-      this.$emit('sort-change', ...args)
-    },
-    onFilter (...args) {
-      this.$emit('filter', ...args)
     },
     handleBodyScroll (...args) {
       this.$emit('scroll', ...args)
