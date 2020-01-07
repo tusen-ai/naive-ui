@@ -48,31 +48,29 @@ function getPositionInAbsoluteMode (placement, origin) {
     right: null
   }
   if (placement === 'bottom-start') {
-    if (~origin.indexOf('top')) {
-      position.top = '100%'
-    }
-    if (~origin.indexOf('bottom')) {
-      position.bottom = '100%'
-    }
-    if (~origin.indexOf('left')) {
-      position.left = '0'
-    }
-    if (~origin.indexOf('right')) {
-      position.right = '0'
-    }
+    position.top = '100%'
+    position.left = '0'
+  } else if (placement === 'bottom-end') {
+    position.top = '100%'
+    position.right = '0'
+  } else if (placement === 'top-start') {
+    position.bottom = '100%'
+    position.left = '0'
+  } else if (placement === 'top-end') {
+    position.bottom = '100%'
+    position.right = '0'
   } else if (placement === 'right-start') {
-    if (~origin.indexOf('top')) {
-      position.top = '0'
-    }
-    if (~origin.indexOf('bottom')) {
-      position.bottom = '0'
-    }
-    if (~origin.indexOf('left')) {
-      position.left = '100%'
-    }
-    if (~origin.indexOf('right')) {
-      position.right = '100%'
-    }
+    position.top = '0'
+    position.left = '100%'
+  } else if (placement === 'right-end') {
+    position.bottom = '0'
+    position.left = '100%'
+  } else if (placement === 'left-start') {
+    position.top = '0'
+    position.right = '100%'
+  } else if (placement === 'left-end') {
+    position.bottom = '0'
+    position.right = '100%'
   } else {
     console.error('[naive-ui/placeable/getPositionInAbsoluteMode]: placement not implemented')
   }
@@ -229,7 +227,7 @@ export default {
       let offset = getPosition(adjustedPlacement, activatorRect, contentBoundingClientRect)
       this.adjustedPlacement = adjustedPlacement
       if (this.positionModeisAbsolute) {
-        offset = getPositionInAbsoluteMode(this.placement, suggestedTransformOrigin)
+        offset = getPositionInAbsoluteMode(adjustedPlacement)
       }
       this.setOffsetOfTrackingElement(offset, suggestedTransformOrigin)
       const contentInner = getContentInner(this)
