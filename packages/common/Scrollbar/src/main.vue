@@ -154,7 +154,7 @@ export default {
     verticalScrollbarHeight () {
       if (this.containerHeight === null || this.contentHeight === null || this.verticalRailHeight === null) return 0
       else {
-        return (this.verticalRailHeight * this.containerHeight / this.contentHeight + this.width * 1.5)
+        return Math.min(this.containerHeight, (this.verticalRailHeight * this.containerHeight / this.contentHeight + this.width * 1.5))
       }
     },
     verticalScrollbarHeightPx () {

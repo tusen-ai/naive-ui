@@ -2,7 +2,7 @@ import scrollDelegate from '../utils/delegate/scrollDelegate'
 import resizeDelegate from '../utils/delegate/resizeDelegate'
 import getParentNode from '../utils/dom/getParentNode'
 import getScrollParent from '../utils/dom/getScrollParent'
-import calcPlacementTransfrom from '../utils/dom/calcPlacementTransform'
+import { getAdjustedPlacementOfTrackingElement, getTransformOriginByPlacement, getPosition } from '../utils/dom/calcPlacementTransform'
 
 function getActivatorEl (componentInstance) {
   return componentInstance.$refs.activator.$el || componentInstance.$refs.activator
@@ -12,12 +12,32 @@ function getContentEl (componentInstance) {
   return componentInstance.$refs.content.$el || componentInstance.$refs.content
 }
 
-function sortOrigin (origin) {
-  const origins = origin.split(' ')
-  if (origins.length === 2) {
-    if (origins[0] === 'left' || origins[0] === 'right') return origins[1] + ' ' + origins[0]
+function getContentInner (instance) {
+  const contentInnerRef = instance.$refs.contentInner
+  return (contentInnerRef && contentInnerRef.$el) || contentInnerRef || null
+}
+
+function getActivatorRect (manuallyPositioned, x, y, trackedElement) {
+  if (manuallyPositioned) {
+    return {
+      top: y,
+      left: x,
+      height: 0,
+      width: 0,
+      right: window.innerWidth - x,
+      bottom: window.innerHeight - y
+    }
+  } else {
+    const activatorRect = trackedElement.getBoundingClientRect()
+    return {
+      left: parseInt(activatorRect.left),
+      top: parseInt(activatorRect.top),
+      bottom: parseInt(window.innerHeight - activatorRect.bottom),
+      right: parseInt(window.innerWidth - activatorRect.right),
+      width: parseInt(activatorRect.width),
+      height: parseInt(activatorRect.height)
+    }
   }
-  return origin
 }
 
 function getPositionInAbsoluteMode (placement, origin) {
@@ -116,6 +136,10 @@ export default {
     manuallyPositioned: {
       type: Boolean,
       default: false
+    },
+    flip: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
@@ -124,8 +148,8 @@ export default {
     }
   },
   watch: {
-    active (newValue) {
-      if (newValue) {
+    active (value) {
+      if (value) {
         this.$nextTick().then(this.updatePosition)
       }
     },
@@ -140,19 +164,14 @@ export default {
     return {
       trackingElement: null,
       trackedElement: null,
-      scrollListeners: []
+      scrollListeners: [],
+      adjustedPlacement: this.placement
     }
   },
   mounted () {
-    this._getTrackingElement()
-    if (this.trackingElement) {
-      this.trackingElement.style.position = 'absolute'
-    }
-    this.$nextTick().then(() => {
-      this.registerScrollListeners()
-      this.registerResizeListener()
-      this.updatePosition()
-    })
+    this.registerScrollListeners()
+    this.registerResizeListener()
+    this.updatePosition()
   },
   beforeDestroy () {
     this.unregisterScrollListeners()
@@ -176,7 +195,7 @@ export default {
     /**
      * Need to be fulfilled!
      */
-    updatePositionInAbsoluteMode (position, transformOrigin) {
+    setOffsetOfTrackingElement (position, transformOrigin) {
       this.trackingElement.style.position = 'absolute'
       this.trackingElement.style.top = position.top
       this.trackingElement.style.left = position.left
@@ -185,99 +204,40 @@ export default {
       this.trackingElement.style.transformOrigin = transformOrigin
       this.trackingElement.setAttribute('n-suggested-transform-origin', transformOrigin)
     },
-    updatePosition (el, cb, keepOrigin = false) {
+    updatePosition (el, cb) {
       if (!this.active && !this.show) return
-      if (!this.manuallyPositioned) {
-        this._getTrackedElement()
-      }
       this._getTrackingElement()
       if (this.manuallyPositioned) {
         if (!this.trackingElement) {
           console.error('[naive-ui/placeable/updatePosition]: trackingElement not found!')
+          return
         }
       } else {
+        this._getTrackedElement()
         if (!this.trackedElement || !this.trackingElement) {
           console.error('[naive-ui/placeable/updatePosition]: trakedElement or trackingElement not found!')
+          return
         }
       }
-
-      // console.log(activator)
-      let activatorBoundingClientRect = null
-      if (!this.manuallyPositioned) {
-        activatorBoundingClientRect = this.trackedElement.getBoundingClientRect()
-      } else {
-        activatorBoundingClientRect = {
-          top: this.y,
-          left: this.x,
-          height: 0,
-          width: 0,
-          right: this.x,
-          bottom: this.y
-        }
-        // console.log(activatorBoundingClientRect)
-      }
-      // console.log(activatorBoundingClientRect)
-      // console.log(this.$refs.popoverBody)
-      // debugger
+      const activatorRect = getActivatorRect(this.manuallyPositioned, this.x, this.y, this.trackedElement)
       const contentBoundingClientRect = {
         width: this.trackingElement.offsetWidth,
         height: this.trackingElement.offsetHeight
       }
-
-      // console.log(contentBoundingClientRect.width, contentBoundingClientRect.height)
-      // console.log(contentBoundingClientRect2.width, contentBoundingClientRect2.height)
-      // console.log(contentBoundingClientRect)
-      // debugger
-      // console.log('scroll', activatorBoundingClientRect, contentBoundingClientRect)
-      const [placementTransform, suggestedTransformOrigin] = calcPlacementTransfrom(this.placement, activatorBoundingClientRect, contentBoundingClientRect)
-      // console.log(this.trackingElement, this.positionMode, this.positionModeisAbsolute)
+      const adjustedPlacement = getAdjustedPlacementOfTrackingElement(this.placement, activatorRect, contentBoundingClientRect, this.flip)
+      const suggestedTransformOrigin = getTransformOriginByPlacement(adjustedPlacement)
+      let offset = getPosition(adjustedPlacement, activatorRect, contentBoundingClientRect)
+      this.adjustedPlacement = adjustedPlacement
       if (this.positionModeisAbsolute) {
-        const position = getPositionInAbsoluteMode(this.placement, suggestedTransformOrigin)
-        // console.log(suggestedTransformOrigin, position)
-        this.updatePositionInAbsoluteMode(position, suggestedTransformOrigin)
-        return
+        offset = getPositionInAbsoluteMode(this.placement, suggestedTransformOrigin)
       }
-      // console.log(placementTransform)
-      this.trackingElement.style.position = 'absolute'
-      this.trackingElement.style.top = placementTransform.top
-      this.trackingElement.style.left = placementTransform.left
-      this.trackingElement.style.right = placementTransform.right
-      this.trackingElement.style.bottom = placementTransform.bottom
-      // if (suggestedTransformOrigin === 'left bottom') {
-      //   debugger
-      // }
-      // console.log(' !!! ', suggestedTransformOrigin)
-      if (keepOrigin === false) {
-        this.trackingElement.style.transformOrigin = suggestedTransformOrigin
-        this.trackingElement.setAttribute('n-suggested-transform-origin', suggestedTransformOrigin)
-      } else if (keepOrigin !== true) {
-        if (keepOrigin.horizontal) {
-          const originalTransformOrigin = this.trackingElement.style.transformOrigin
-          if (originalTransformOrigin && suggestedTransformOrigin) {
-            if (suggestedTransformOrigin.match(/top/)) {
-              this.trackingElement.style.transformOrigin = originalTransformOrigin.replace(/(top|bottom)/g, 'top')
-              this.trackingElement.setAttribute('n-suggested-transform-origin', sortOrigin(originalTransformOrigin.replace(/(top|bottom)/g, 'top')))
-            }
-            if (suggestedTransformOrigin.match(/bottom/)) {
-              this.trackingElement.style.transformOrigin = sortOrigin(originalTransformOrigin.replace(/(top|bottom)/g, 'bottom'))
-              this.trackingElement.setAttribute('n-suggested-transform-origin', sortOrigin(originalTransformOrigin.replace(/(top|bottom)/g, 'bottom')))
-            }
-          }
-        }
-      }
-
-      // console.log(this.$refs.contentInner)
-      if (this.$refs.contentInner) {
-        let element = this.$refs.contentInner
-        if (this.$refs.contentInner.$el) {
-          element = this.$refs.contentInner.$el
-        }
-        if (this.widthMode === 'activator') {
-          element.style.minWidth = activatorBoundingClientRect.width + 'px'
-        }
+      this.setOffsetOfTrackingElement(offset, suggestedTransformOrigin)
+      const contentInner = getContentInner(this)
+      if (this.widthMode === 'activator' && contentInner) {
+        contentInner.style.minWidth = activatorRect.width + 'px'
       }
       if (el && cb) {
-        cb(el, activatorBoundingClientRect, contentBoundingClientRect)
+        cb(el, activatorRect, contentBoundingClientRect)
       }
     },
     registerResizeListener () {
@@ -292,7 +252,6 @@ export default {
         this.scrollListeners.push([currentElement, this.updatePosition])
         currentElement = getParentNode(currentElement)
       }
-      // console.log(this.scrollListeners)
       for (const [el, handler] of this.scrollListeners) {
         scrollDelegate.registerHandler(el, handler)
       }
