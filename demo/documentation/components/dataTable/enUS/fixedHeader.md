@@ -9,58 +9,56 @@ Display large amounts of data in scrollable view.
   :data="data"
   :pagination="pagination"
   max-height="250px"
-  @on-selected-change="onSelectedChange"
->
-</n-data-table>
+  @select="onSelectedChange"
+/>
 ```
 
 ```js
-const _columns = $this => {
-  return [
-    {
-      title: "Name",
-      key: "name"
-    },
-    {
-      title: "Age",
-      key: "age"
-    },
-    {
-      title: "Address",
-      key: "address"
-    }
-  ];
-};
+const columns = [
+  {
+    title: "Name",
+    key: "name"
+  },
+  {
+    title: "Age",
+    key: "age"
+  },
+  {
+    title: "Address",
+    key: "address"
+  }
+]
 
-const data = [];
+const data = []
 for (let i = 0; i < 46; i++) {
   data.push({
     key: i,
     name: `Edward King ${i}`,
     age: 32,
     address: `London, Park Lane no. ${i}`
-  });
+  })
 }
+
 export default {
   data() {
     return {
       data: data,
-      columns: _columns(this),
+      columns,
       selectedData: []
-    };
+    }
   },
   computed: {
     pagination() {
-      return { total: this.data.length, limit: 10 };
+      return { limit: 10 }
     }
   },
   methods: {
     sendMail(rowData) {
-      this.$NMessage.info("send mail to " + rowData.name);
+      this.$NMessage.info("send mail to " + rowData.name)
     },
     onSelectedChange(selectedData) {
-      this.selectedData = selectedData;
+      this.selectedData = selectedData
     }
   }
-};
+}
 ```

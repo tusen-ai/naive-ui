@@ -40,6 +40,10 @@ export default {
     controller: {
       type: Object,
       default: null
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {

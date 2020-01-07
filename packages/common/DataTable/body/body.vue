@@ -1,23 +1,14 @@
-<!--
- * @Author: Volankey@gmail.com
- * @Company: Tusimple
- * @Date: 2019-10-23 16:06:59
- * @LastEditors: Jiwen.bai
- * @LastEditTime: 2019-11-07 16:17:14
- -->
 <template>
   <n-scrollbar
     ref="scrollbar"
     class="n-data-table-base-table-body"
-    :style="tbodyStyle"
+    :style="style"
     :content-style="{
       width: contentStyleWidth
     }"
     :horizontal-rail-style="{ zIndex: 1 }"
     :vertical-rail-style="{ zIndex: 1 }"
     :show-rail="!fixed"
-    @mouseenter="handleMouseEnter"
-    @mouseleave="handleMouseLeave"
     @scroll="handleScroll"
   >
     <table cellspacing="0">
@@ -29,25 +20,28 @@
         >
       </colgroup>
       <tbody>
-        <template v-if="showingData.length === 0">
+        <template v-if="data.length === 0">
           <tr>
             <td v-for="column in columns" :key="column.key" />
           </tr>
         </template>
         <tr
-          v-for="(rowData, i) in showingData"
-          :key="i"
+          v-for="(rowData, index) in data"
+          :key="index"
           class="n-data-table-tr"
           :style="{
             height: trHeight && trHeight + 'px'
           }"
-          :class="
-            typeof rowClassName === 'function'
-              ? rowClassName(rowData, i)
-              : rowClassName
-          "
-          @mouseenter="e => onRowHover(e, rowData, i)"
-          @mouseleave="e => onRowLeave(e, rowData, i)"
+          :class="Object.assign(
+            {
+              'n-data-table-tr--hover': hoveringRowIndex === index
+            },
+            createClassObject(typeof rowClassName === 'function'
+              ? createClassObject(rowClassName(rowData, index))
+              : rowClassName)
+          )"
+          @mouseenter="handleTrMouseEnter(index)"
+          @mouseleave="handleTrMouseLeave"
         >
           <template v-for="column in columns">
             <td
@@ -59,30 +53,15 @@
             >
               <!-- 批量选择 -->
               <n-checkbox
-                v-if="
-                  column.type === 'selection' &&
-                    (column.disabled && !column.disabled(rowData, i))
-                "
-                v-model="checkBoxes[rowData._index]"
+                v-if="column.type === 'selection'"
+                :disabled="column.disabled && column.disabled(rowData)"
+                :checked="checkedRows.includes(rowData)"
+                @input="checked => handleCheckboxInput(rowData, checked)"
               />
-              <n-checkbox
-                v-else-if="
-                  column.type === 'selection' &&
-                    (column.disabled && column.disabled(rowData, i))
-                "
-                v-model="disabledCheckBox[rowData._index]"
-                :disabled="!(disabledCheckBox[rowData._index] = false)"
-              />
-              <n-checkbox
-                v-else-if="column.type === 'selection'"
-                v-model="checkBoxes[rowData._index]"
-              />
-              <row
+              <cell
                 v-else
-                :index="i"
+                :index="index"
                 :row="rowData"
-                :key-name="column.key"
-                :render="column.render"
                 :column="column"
               />
             </td>
@@ -94,9 +73,8 @@
 </template>
 
 <script>
-import row from '../row/index.js'
-import { addClass, removeClass, createCustomWidthStyle } from '../utils'
-import { storageMixin } from '../store'
+import cell from '../cell/index.vue'
+import { createCustomWidthStyle, setCheckStatusOfRow, createClassObject } from '../utils'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import NScrollbar from '../../Scrollbar'
@@ -104,9 +82,14 @@ import NScrollbar from '../../Scrollbar'
 export default {
   components: {
     NScrollbar,
-    row
+    cell
   },
-  mixins: [ withapp, themeable, storageMixin ],
+  inject: {
+    NDataTable: {
+      default: null
+    }
+  },
+  mixins: [ withapp, themeable ],
   props: {
     placement: {
       type: String,
@@ -128,15 +111,11 @@ export default {
       type: Number,
       default: null
     },
-    tbodyWrapperOffsetHeight: {
-      type: Number,
-      default: null
-    },
     bodyStyle: {
       type: Object,
       default: () => ({})
     },
-    showingData: {
+    data: {
       type: Array,
       default: () => []
     },
@@ -146,29 +125,24 @@ export default {
     },
     rowClassName: {
       type: [Function, String],
-      default: ''
-    },
-    checkBoxes: {
-      type: Array,
-      default: () => []
-    },
-    disabledCheckBox: {
-      type: Array,
-      default: () => []
+      default: null
     },
     loading: {
       type: Boolean,
       default: false
     }
   },
-  data () {
-    return {}
-  },
   computed: {
+    hoveringRowIndex () {
+      return this.NDataTable.hoveringRowIndex
+    },
+    checkedRows () {
+      return this.NDataTable.checkedRows
+    },
     contentStyleWidth () {
       return this.scrollX && `${this.scrollX}px`
     },
-    tbodyStyle () {
+    style () {
       if (this.fixed && this.height) {
         return Object.assign({}, this.bodyStyle, {
           height: this.height + 'px',
@@ -179,37 +153,19 @@ export default {
       }
     }
   },
-  watch: {
-    '$tableStore.state.currentHoverRow' (index, oldIndex) {
-      const hoverClassName = 'n-data-table-tr--hover'
-      const rowsDom = this.$el.querySelectorAll('table tr')
-      const oldRowDom = rowsDom[oldIndex]
-      const newRowDom = rowsDom[index]
-      window.requestAnimationFrame(() => {
-        if (oldRowDom) {
-          removeClass(oldRowDom, hoverClassName)
-        }
-        if (newRowDom) {
-          addClass(newRowDom, hoverClassName)
-        }
-      })
-    }
-  },
   methods: {
+    createClassObject,
+    handleCheckboxInput (row, checked) {
+      setCheckStatusOfRow(this.NDataTable.checkedRows, row, checked)
+    },
     getScrollContainer () {
       return this.$refs.scrollbar.$refs.scrollContainer
     },
-    handleMouseEnter (e) {
-      this.$tableStore.commit('currentTableEl', e.currentTarget)
+    handleTrMouseEnter (index) {
+      this.NDataTable.hoveringRowIndex = index
     },
-    handleMouseLeave (e) {
-      this.$tableStore.commit('currentTableEl', null)
-    },
-    onRowHover (e, rowData, index) {
-      this.$tableStore.commit('currentHoverRow', index)
-    },
-    onRowLeave (e, rowData) {
-      this.$tableStore.commit('currentHoverRow', null)
+    handleTrMouseLeave () {
+      this.NDataTable.hoveringRowIndex = null
     },
     createCustomWidthStyle: createCustomWidthStyle,
     createTdClass (column, params) {

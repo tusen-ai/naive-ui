@@ -3,6 +3,7 @@
     :theme="synthesizedTheme"
     :multiple="multiple"
     :options="options"
+    :loading="loading"
     :is-selected="isSelected"
     :width="width"
     size="small"
@@ -46,6 +47,22 @@ export default {
     controller: {
       type: Object,
       default: null
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    }
+  },
+  watch: {
+    options () {
+      this.$nextTick().then(() => {
+        this.controller && this.controller.updatePosition()
+      })
+    },
+    loading () {
+      this.$nextTick().then(() => {
+        this.controller && this.controller.updatePosition()
+      })
     }
   },
   methods: {

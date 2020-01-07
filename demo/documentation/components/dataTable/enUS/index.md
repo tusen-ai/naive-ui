@@ -16,7 +16,7 @@ basic
 customStyle
 select
 filterAndSorter
-asyncFilterItems
+asyncFilterOptions
 filterMultiple
 ajaxUsage
 fixedHeader
@@ -57,8 +57,8 @@ bestPractices
 | filter           | Filter function for local filter.If you need network sorter,set to `custom`                               | Function \| 'custom'          | -       |
 | filterMultiple   | Whether multiple filters can be selected                                                                  | boolean                       | false   |
 | defaultFilter    | default filter selected                                                                                   | String                        | -       |
-| filterItems      | Filter menu config,format as [{label,value}]                                                              | object[]                      | -       |
-| asyncFilterItems | async filter menu config ,Function returns [{label,value}]                                                | Function                      | -       |
+| filterOptions      | Filter menu config,format as [{label,value}]                                                              | object[]                      | -       |
+| asyncFilterOptions | async filter menu config ,Function returns [{label,value}]                                                | Function                      | -       |
 | fixed            | Set column to be fixed: 'left' 'right'                                                                    | 'left'\| 'right'              | -       |
 | width            | Width of this column                                                                                      | string                        | number  | - |
 

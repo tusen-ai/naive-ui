@@ -6,34 +6,34 @@
   :columns="columns"
   :data="data"
   :pagination="pagination"
->
-</n-data-table>
+/>
 ```
 
 ```js
-const toolTip = (h, activator, content) => {
+const renderTooltip = (h, activator, content) => {
   const scopedSlots = {
     activator: () => activator
-  };
+  }
   return (
     <n-tooltip arrow scopedSlots={scopedSlots}>
       {content}
     </n-tooltip>
-  );
-};
-const _columns = $this => {
+  )
+}
+
+const createColumns = instance => {
   return [
     {
       title: "Name",
       key: "name",
       renderHeader(h, column) {
-        return toolTip(
+        return renderTooltip(
           h,
           <n-gradient-text size="24" type="danger">
             {column.title}
           </n-gradient-text>,
           "custom header: name"
-        );
+        )
       }
     },
     {
@@ -44,7 +44,7 @@ const _columns = $this => {
           <n-gradient-text size="20" type="info">
             {column.title}
           </n-gradient-text>
-        );
+        )
       }
     },
     {
@@ -55,39 +55,39 @@ const _columns = $this => {
           <n-gradient-text size="16" type="warning">
             {column.title}
           </n-gradient-text>
-        );
+        )
       }
     },
     {
       title: "Tags",
       key: "tags",
-      render(h, params) {
-        const arr = params.row.tags.map(tagKey => {
+      render (h, params) {
+        const arr = params.tags.map(tagKey => {
           return (
             <n-tag
-              style="margin-right:5px;"
+              style="margin-right:5px"
               type={tagKey.length > 5 ? "warning" : "default"}
             >
               {tagKey}
             </n-tag>
-          );
-        });
-        return arr;
+          )
+        })
+        return arr
       }
     },
     {
       title: "Action",
       key: "actions",
-      render(h, params) {
+      render (h, params) {
         return (
-          <n-button size="small" onClick={() => $this.sendMail(params.row)}>
+          <n-button size="small" onClick={() => instance.sendMail(params)}>
             Send mail
           </n-button>
-        );
+        )
       }
     }
-  ];
-};
+  ]
+}
 
 const data = [
   {
@@ -111,23 +111,23 @@ const data = [
     address: "Sidney No. 1 Lake Park",
     tags: ["cool", "teacher"]
   }
-];
+]
 export default {
   data() {
     return {
       data: data,
-      columns: _columns(this)
-    };
+      columns: createColumns(this)
+    }
   },
   computed: {
     pagination() {
-      return { total: this.data.length, limit: 10 };
+      return { total: this.data.length, limit: 10 }
     }
   },
   methods: {
     sendMail(rowData) {
-      this.$NMessage.info("send mail to " + rowData.name);
+      this.$NMessage.info("send mail to " + rowData.name)
     }
   }
-};
+}
 ```

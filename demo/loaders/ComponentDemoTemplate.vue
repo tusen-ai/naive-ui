@@ -7,7 +7,11 @@
       <!--CONTENT_SLOT-->
     </template>
     <template v-slot:demo>
+      <div
+        class="demo-card__view"
+      >
       <!--DEMO_SLOT-->
+      </div>
     </template>
     <template
       v-slot:code

@@ -1,12 +1,12 @@
 <template>
   <span
     class="ts-funnel-container"
-    :class="{ 'ts-funnel-container--active': status }"
+    :class="{ 'ts-funnel-container--active': active }"
     @click.stop="() => {}"
   >
     <n-icon
       style="vertical-align: middle;"
-      :class="{ 'ts-funnel-container--active': status }"
+      :class="{ 'ts-funnel-container--active': active }"
       size="14"
     >
       <ios-funnel />
@@ -19,7 +19,7 @@
       <template v-slot:activator>
         <n-icon
           style="vertical-align: middle;color: #63e2b7;"
-          :class="{'ts-funnel-container--active':status}"
+          :class="{'ts-funnel-container--active':active}"
           type="ios-funnel"
           size="12"
         />
@@ -36,7 +36,7 @@ export default {
     iosFunnel
   },
   props: {
-    status: {
+    active: {
       type: Boolean,
       required: true
     }
