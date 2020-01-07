@@ -40,7 +40,7 @@ function getActivatorRect (manuallyPositioned, x, y, trackedElement) {
   }
 }
 
-function getPositionInAbsoluteMode (placement, origin) {
+function getPositionInAbsoluteMode (placement) {
   let position = {
     top: null,
     bottom: null,
