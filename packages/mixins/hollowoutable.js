@@ -1,11 +1,35 @@
-// import HollowOutStyleManager from '../utils/HollowOutStyleManager'
+function getNextBackgroundOf (el) {
+  const computedStyle = window.getComputedStyle(el)
+  const prevBackgroundColor = computedStyle.backgroundColor
+  const transition = computedStyle.transition || ''
+  const transitionProperty = computedStyle.transitionProperty || ''
+  const transitionProperties = transitionProperty.split(', ')
+  const transitionDuration = computedStyle.transitionDuration || ''
+  const transitionDurations = transitionDuration.split(', ')
+  let indexOfBackgroundColorTransition = transitionProperties.findIndex(property => property === 'background-color')
+  if (!~indexOfBackgroundColorTransition) {
+    indexOfBackgroundColorTransition = transitionProperties.findIndex(property => property === 'all')
+  }
+  if (!~indexOfBackgroundColorTransition) return computedStyle.backgroundColor
+  const backgroundColorTransitionDuration = transitionDurations[indexOfBackgroundColorTransition]
+  if (backgroundColorTransitionDuration === '0s') return computedStyle.backgroundColor
+  const memorizedTransition = el.style.transition
+  const memorizedBackgroundColor = el.style.backgroundColor
+  el.style.transition = transition ? 'none' : transition + ', background-color 0s'
+  const nextBackgroundColor = computedStyle.backgroundColor
+  el.style.backgroundColor = prevBackgroundColor
+  void (el.offsetHeight)
+  el.style.transition = memorizedTransition
+  el.style.backgroundColor = memorizedBackgroundColor
+  return nextBackgroundColor
+}
 
 export default {
   watch: {
     synthesizedTheme (value) {
       if (this.avoidHollowOut) return
       this.$nextTick().then(() => {
-        this.updateHollowOutStyle(value)
+        this.setHollowOutAffect(value)
       })
     }
   },
@@ -17,22 +41,12 @@ export default {
   },
   methods: {
     setHollowOutAffect () {
-      this.updateHollowOutStyle()
-    },
-    updateHollowOutStyle (theme) {
       let cursor = this.$el
-      theme = theme || this.synthesizedTheme
       while (cursor.parentElement) {
         cursor = cursor.parentElement
-        const backgroundColorHint = cursor.getAttribute(`n-${theme}-theme-background-color-hint`)
-        if (backgroundColorHint === 'transparent') continue
-        if (backgroundColorHint) {
-          this.ascendantBackgroundColor = backgroundColorHint
-          break
-        }
-        const backgroundColor = getComputedStyle(cursor).backgroundColor
+        const backgroundColor = window.getComputedStyle(cursor).backgroundColor
         if (backgroundColor && backgroundColor !== 'rgba(0, 0, 0, 0)') {
-          this.ascendantBackgroundColor = backgroundColor
+          this.ascendantBackgroundColor = getNextBackgroundOf(cursor)
           break
         }
       }
@@ -43,7 +57,7 @@ export default {
   },
   mounted () {
     if (this.avoidHollowOut) return
-    this.updateHollowOutStyle()
+    this.setHollowOutAffect()
     this.$nextTick().then(() => {
       this.hollowOutColorTransitionDisabled = false
     })

@@ -9,8 +9,6 @@
       'n-card--bordered': bordered,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
-    n-light-theme-background-color-hint="white"
-    n-dark-theme-background-color-hint="rgb(70, 75, 99)"
     :style="synthesizedStyle"
   >
     <div v-if="$slots.cover" class="n-card-cover">
