@@ -26,6 +26,7 @@
       @include base-select-size-mixin("medium");
       @include base-select-size-mixin("large");
       @include base-select-size-mixin("huge");
+      overflow: hidden;
       outline: none;
       margin-top: 4px;
       margin-bottom: 4px;
@@ -39,12 +40,10 @@
       }
       @include b(base-select-menu-light-bar-wrapper) {
         position: absolute;
-        left: 0;
-        right: 0;
+        left: -6px;
+        right: -6px;
         top: 0;
         bottom: 0;
-        overflow: hidden;
-        border-radius: 6px;
       }
       /** transition of menu light bar */
       .n-base-select-menu-light-bar--transition-enter-active {
@@ -104,7 +103,7 @@
     @include b(base-select-menu-light-bar) {
       transition: background-color .3s $--n-ease-in-out-cubic-bezier, top .15s $--n-ease-in-out-cubic-bezier;
       position: absolute;
-      width:100%;
+      width: 100%;
       background-color: $--base-select-menu-light-bar-background-color;
       top: 0;
       left: 0;

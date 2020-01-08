@@ -116,6 +116,7 @@ Select 需要进一步重构，现在这种状况 collector 在 corner case 中�
 Menu Root Indent = 0 可以造成问题
 Md Loader 对于 strong 的处理
 用 RAF 优化 scrollbar 性能
+Anchor 切换有 bug，忽然闪现第一个
 
 // issue fix, add delay prop
 // add trigger to tooltip

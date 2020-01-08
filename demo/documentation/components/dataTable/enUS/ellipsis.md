@@ -79,7 +79,7 @@ export default {
     return {
       data: data,
       columns: createColumns(this),
-      pagination: { limit: 10 }
+      pagination: { pageSize: 10 }
     }
   },
   methods: {

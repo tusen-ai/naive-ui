@@ -116,7 +116,7 @@ $--header-bar-width: (
     transition: color .3s $--n-ease-in-out-cubic-bezier;
     margin: 8px 0 8px 0;
     font-size: 14px;
-    line-height: 1.625;
+    line-height: 1.75;
     color: $--n-secondary-text-color;
   }
   @include b(ul) {

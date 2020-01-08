@@ -23,6 +23,9 @@ class ScrollDelegate {
         handlers.splice(handlerIndex, 1)
         --this.handlerCount
       }
+      if (!handlers.length) {
+        this.handlers.delete(el)
+      }
     }
     if (!this.handlerCount) {
       console.debug('[ScrollDelegate]: remove handler from window')

@@ -197,6 +197,7 @@ export default {
     },
     avoidHollowOut () {
       return (
+        this.text ||
         this.ghost ||
         !['primary', 'link', 'info', 'success', 'warning', 'error'].includes(
           this.type

@@ -9,11 +9,10 @@
       :fixed="fixed"
       :scroll-x="scrollX"
       @scroll="handleHeaderScroll"
-      @sort-change="onSortChange"
-      @filter="onFilter"
     />
     <table-body
       ref="body"
+      :main="main"
       :placement="placement"
       :body-style="bodyStyle"
       :scroll-x="scrollX"
@@ -21,7 +20,7 @@
       :columns="columns"
       :row-class-name="rowClassName"
       :min-height="bodyMinHeight"
-      :tr-height="trHeight"
+      :tr-heights="trHeights"
       :loading="loading"
       :fixed="fixed"
       @scroll="handleBodyScroll"
@@ -31,8 +30,8 @@
 </template>
 
 <script>
-import TableHeader from '../header/header'
-import TableBody from '../body/body'
+import TableHeader from './TableParts/Header'
+import TableBody from './TableParts/Body'
 
 export default {
   components: {
@@ -40,6 +39,10 @@ export default {
     TableBody
   },
   props: {
+    main: {
+      type: Boolean,
+      default: false
+    },
     placement: {
       type: String,
       default: null
@@ -68,8 +71,8 @@ export default {
       type: Boolean,
       default: false
     },
-    trHeight: {
-      type: Number,
+    trHeights: {
+      type: Array,
       default: null
     },
     height: {
@@ -95,12 +98,6 @@ export default {
     },
     getBodyElement () {
       return this.$refs.body.getScrollContainer()
-    },
-    onSortChange (...args) {
-      this.$emit('sort-change', ...args)
-    },
-    onFilter (...args) {
-      this.$emit('filter', ...args)
     },
     handleBodyScroll (...args) {
       this.$emit('scroll', ...args)

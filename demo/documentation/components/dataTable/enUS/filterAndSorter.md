@@ -106,7 +106,7 @@ export default {
   },
   computed: {
     pagination () {
-      return { limit: 5 }
+      return { pageSize: 5 }
     }
   },
   methods: {

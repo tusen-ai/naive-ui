@@ -65,7 +65,7 @@ export default {
   },
   computed: {
     pagination() {
-      return { limit: 10 }
+      return { pageSize: 10 }
     }
   },
   methods: {

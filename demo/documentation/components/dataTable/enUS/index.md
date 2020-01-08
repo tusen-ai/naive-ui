@@ -13,6 +13,9 @@ Table is used to displays rows of data.
 
 ```demo
 basic
+controlled-page
+controlled-filter
+controlled-sorter
 customStyle
 select
 filterAndSorter
