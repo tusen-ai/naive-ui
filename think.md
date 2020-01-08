@@ -117,6 +117,9 @@ Menu Root Indent = 0 可以造成问题
 Md Loader 对于 strong 的处理
 用 RAF 优化 scrollbar 性能
 Anchor 切换有 bug，忽然闪现第一个
+Notification content close
+Safari select lightbar container overflow 边角
+Chrome lightbar offset @table fitler
 
 // issue fix, add delay prop
 // add trigger to tooltip

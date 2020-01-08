@@ -26,7 +26,6 @@
       @include base-select-size-mixin("medium");
       @include base-select-size-mixin("large");
       @include base-select-size-mixin("huge");
-      overflow: hidden;
       outline: none;
       margin-top: 4px;
       margin-bottom: 4px;
@@ -40,10 +39,12 @@
       }
       @include b(base-select-menu-light-bar-wrapper) {
         position: absolute;
-        left: -6px;
-        right: -6px;
+        left: 0px;
+        right: 0px;
         top: 0;
         bottom: 0;
+        overflow: hidden;
+        border-radius: 6px;
       }
       /** transition of menu light bar */
       .n-base-select-menu-light-bar--transition-enter-active {
