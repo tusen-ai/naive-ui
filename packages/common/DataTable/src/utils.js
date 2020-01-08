@@ -1,4 +1,4 @@
-export const createClassObject = function createClassObject (classString) {
+export function createClassObject (classString) {
   if (!classString) return {}
   if (typeof classString === 'string') {
     return classString.split(' ').filter(className => className).reduce((classObject, className) => {
@@ -9,16 +9,14 @@ export const createClassObject = function createClassObject (classString) {
   return classString
 }
 
-export const createCustomWidthStyle = function createCustomWidthStyle (column, index, placement) {
+export function createCustomWidthStyle (column, index, placement) {
   if (column.width) {
-    let width = column.width
-    if (index === 0 && placement === 'right') width += 0
+    const width = column.width
     return {
       width: width + 'px'
     }
   } else if (column.type === 'selection') {
-    let width = 60
-    if (index === 0 && placement === 'right') width += 0
+    const width = 48
     return {
       width: width + 'px'
     }
@@ -26,7 +24,7 @@ export const createCustomWidthStyle = function createCustomWidthStyle (column, i
   return null
 }
 
-export const setCheckStatusOfRow = function setCheckStatusOfRow (checkedRows, row, checked) {
+export function setCheckStatusOfRow (checkedRows, row, checked) {
   while (true) {
     const checkedRowIndex = checkedRows.findIndex(checkedRow => checkedRow === row)
     if (~checkedRowIndex) checkedRows.splice(checkedRowIndex, 1)

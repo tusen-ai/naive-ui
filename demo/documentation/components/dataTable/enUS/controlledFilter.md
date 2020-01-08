@@ -17,6 +17,7 @@ const addressColumn = {
   title: 'Address',
   key: 'address',
   activeFilterOptionValues: [],
+  sorter: 'default',
   filterOptions: [
     {
       label: 'London',

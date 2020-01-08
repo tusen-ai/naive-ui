@@ -44,6 +44,18 @@ export default {
     loading: {
       type: Boolean,
       default: false
+    },
+    arrow: {
+      type: Boolean,
+      default: true
+    },
+    show: {
+      type: Boolean,
+      default: false
+    },
+    trigger: {
+      type: String,
+      default: 'click'
     }
   },
   methods: {
@@ -59,8 +71,9 @@ export default {
     const onShow = context.listeners.show || (() => {})
     return h(NPopover, {
       props: {
-        trigger: 'click',
+        trigger: context.props.trigger,
         containerClass: 'n-popselect',
+        arrow: context.props.arrow,
         controller
       },
       on: {

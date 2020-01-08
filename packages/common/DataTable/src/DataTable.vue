@@ -4,7 +4,7 @@
     :class="{
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
       'n-data-table--bordered': bordered,
-      'n-data-table--no-data': paginatedData.length === 0
+      'n-data-table--empty': paginatedData.length === 0
     }"
   >
     <div
@@ -77,7 +77,7 @@
       </transition>
       <div
         v-if="paginatedData.length === 0 && !loading"
-        class="n-data-table__no-data-tip"
+        class="n-data-table__empty"
       >
         No data
       </div>

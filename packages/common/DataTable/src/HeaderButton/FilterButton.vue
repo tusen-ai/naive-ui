@@ -2,21 +2,27 @@
   <div
     class="n-data-table-filter-button"
     :class="{
-      'n-data-table-filter-button--active': active
+      'n-data-table-filter-button--active': active,
+      'n-data-table-filter-button--popover-visible': popoverVisible
     }"
   >
     <n-popselect
       :value="activeFilterOptionValues"
       cancelable
+      :arrow="false"
       :multiple="column.filterMultiple === false ? false : true"
       :options="finalOptions"
       :loading="loading"
       @input="handleFilterChange"
+      @show="popoverVisible = true"
+      @hide="popoverVisible = false"
     >
       <template v-slot:activator>
-        <n-icon>
-          <ios-funnel />
-        </n-icon>
+        <div class="n-data-table-filter-button__icon-wrapper">
+          <n-icon>
+            <ios-funnel />
+          </n-icon>
+        </div>
       </template>
     </n-popselect>
   </div>
@@ -69,7 +75,8 @@ export default {
   data () {
     return {
       finalOptions: typeof this.options === 'function' ? [] : this.options,
-      loading: false
+      loading: false,
+      popoverVisible: false
     }
   },
   computed: {

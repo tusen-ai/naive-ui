@@ -9,6 +9,7 @@
     @scroll="handleScroll"
   >
     <table
+      class="n-data-table-table"
       cellspacing="0"
       :style="{
         width: headerStyleWidth
@@ -17,25 +18,26 @@
       <colgroup>
         <col
           v-for="(column, index) in columns"
-          :key="index"
+          :key="column.key"
           :style="createCustomWidthStyle(column, index, placement)"
         >
       </colgroup>
-      <thead>
-        <tr>
-          <template v-for="(column, i) in columns">
+      <thead class="n-data-table-thead">
+        <tr class="n-data-table-tr">
+          <template v-for="(column, index) in columns">
             <th
               :key="column.key"
               :style="{
                 textAlign: column.align || null,
                 height: height && `${height}px`
               }"
+              class="n-data-table-th"
               :class="{
-                'n-data-table__sortable-column': column.sorter || column.sortOrder !== undefined,
-                'n-data-table__td-text': column.ellipsis,
-                'n-data-table__td-text--ellipsis': column.ellipsis
+                'n-data-table-th--filterable': isColumnFilterable(column),
+                'n-data-table-th--sortable': isColumnSortable(column),
+                'n-data-table-th--ellipsis': column.ellipsis
               }"
-              @click="handleHeaderClick(column)"
+              @click="handleHeaderClick($event, column)"
             >
               <n-checkbox
                 v-if="column.type === 'selection'"
@@ -44,17 +46,18 @@
                 @input="handleCheckboxInput(column)"
               />
               <template v-if="column.renderHeader">
-                <render :render="h => column.renderHeader(h, column, i)" />
+                <render :render="h => column.renderHeader(h, column, index)" />
               </template>
               <template v-else>
                 {{ column.title }}
               </template>
               <sort-button
-                v-if="column.sorter || column.sortOrder"
+                v-if="isColumnSortable(column)"
                 :column="column"
               />
               <filter-button
-                v-if="column.filterOptions || column.asyncFilterOptions"
+                v-if="isColumnFilterable(column)"
+                :ref="`${column.key}Filter`"
                 :column="column"
                 :options="column.filterOptions || column.asyncFilterOptions"
               />
@@ -71,6 +74,14 @@ import SortButton from '../HeaderButton/SortButton'
 import FilterButton from '../HeaderButton/FilterButton'
 import { createCustomWidthStyle } from '../utils'
 import render from '../../../../utils/render'
+
+function isColumnSortable (column) {
+  return !!(column.sorter || column.sortOrder !== undefined)
+}
+
+function isColumnFilterable (column) {
+  return !!(column.filterOptions || column.asyncFilterOptions)
+}
 
 function getNextOrderOf (order) {
   if (!order) return 'ascend'
@@ -157,10 +168,12 @@ export default {
     }
   },
   methods: {
+    isColumnSortable,
+    isColumnFilterable,
+    createCustomWidthStyle,
     handleScroll (e) {
       this.$emit('scroll', e)
     },
-    createCustomWidthStyle,
     handleCheckboxInput (column) {
       if (this.checkboxIndererminate || this.checkboxChecked) {
         this.NDataTable.clearCheckAll(column)
@@ -168,7 +181,11 @@ export default {
         this.NDataTable.checkAll(column)
       }
     },
-    handleHeaderClick (column) {
+    handleHeaderClick (e, column) {
+      let filterRef = this.$refs[`${column.key}Filter`]
+      if (Array.isArray(filterRef)) filterRef = filterRef[0]
+      const filterElement = filterRef && filterRef.$el
+      if (filterElement && filterElement.contains(e.target)) return
       const activeSorter = this.NDataTable.synthesizedActiveSorter
       const nextSorter = createNextSorter(column.key, activeSorter, column.sorter)
       this.NDataTable.changeSorter(nextSorter)

@@ -11,7 +11,7 @@
     :show-rail="!fixed"
     @scroll="handleScroll"
   >
-    <table cellspacing="0">
+    <table class="n-data-table-table">
       <colgroup>
         <col
           v-for="(column, index) in columns"
@@ -19,12 +19,7 @@
           :style="createCustomWidthStyle(column, index, placement)"
         >
       </colgroup>
-      <tbody>
-        <template v-if="data.length === 0">
-          <tr>
-            <td v-for="column in columns" :key="column.key" />
-          </tr>
-        </template>
+      <tbody class="n-data-table-tbody">
         <tr
           v-for="(rowData, index) in data"
           :key="index"
@@ -49,11 +44,16 @@
               :style="{
                 textAlign: column.align || null
               }"
-              :class="createTdClass(column, rowData)"
+              class="n-data-table-td"
+              :class="{
+                'n-data-table-td--ellipsis': column.ellipsis,
+                [`n-data-table-td--${column.align}-align`]: column.align,
+                ...(column.className && createClassObject(column.className))
+              }"
             >
-              <!-- 批量选择 -->
               <n-checkbox
                 v-if="column.type === 'selection'"
+                :key="currentPage"
                 :disabled="column.disabled && column.disabled(rowData)"
                 :checked="checkedRows.includes(rowData)"
                 @input="checked => handleCheckboxInput(rowData, checked)"
@@ -130,6 +130,12 @@ export default {
     }
   },
   computed: {
+    currentPage () {
+      const pagination = this.NDataTable.synthesizedPagination
+      if (!pagination) return -1
+      if (!pagination.page) return -1
+      return pagination.page
+    },
     hoveringRowIndex () {
       return this.NDataTable.hoveringRowIndex
     },
@@ -165,25 +171,6 @@ export default {
       this.NDataTable.hoveringRowIndex = null
     },
     createCustomWidthStyle: createCustomWidthStyle,
-    createTdClass (column, params) {
-      let className = {}
-      if (column.ellipsis) {
-        className['n-data-table__td-text'] = true
-        className['n-data-table__td-text--ellipsis'] = true
-      }
-      if (!column.className) {
-        return className
-      }
-      if (typeof column.className === 'string') {
-        className[column.className] = true
-      } else if (typeof column.className === 'function') {
-        column.className(column, params).forEach(name => {
-          className[name] = true
-        })
-      }
-      // console.log(className)
-      return className
-    },
     handleScroll (event) {
       this.$emit('scroll', event)
     }

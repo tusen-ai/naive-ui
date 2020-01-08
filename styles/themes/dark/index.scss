@@ -1,7 +1,6 @@
 @import 'darkColors.scss';
 @import 'components/Button.scss';
 @import 'components/Divider.scss';
-@import 'components/NimbusServiceLayout.scss';
 @import 'components/Scrollbar.scss';
 @import 'components/BaseLoading.scss';
 @import 'components/BaseSelectMenu.scss';
@@ -38,7 +37,6 @@
 @import "components/Tabs.scss";
 @import "components/Statistic.scss";
 @import "components/Breadcrumb.scss";
-@import "components/NimbusForm.scss";
 @import "components/Modal.scss";
 @import "components/Transfer.scss";
 @import "components/Menu.scss";
@@ -86,7 +84,6 @@
   $--n-background-color: $--neutral-10 !global;
   $--n-alpha-input-color: rgba(255, 255, 255, .12) !global;
   @if ($in-js-env != true) {
-    @include setup-dark-nimbus-service-layout;
     @include setup-dark-divider;
     @include setup-dark-scrollbar;
     @include setup-dark-base-loading;
@@ -125,7 +122,6 @@
     @include setup-dark-tabs;
     @include setup-dark-statistic;
     @include setup-dark-breadcrumb;
-    @include setup-dark-nimbus-form;
     @include setup-dark-modal;
     @include setup-dark-transfer;
     @include setup-dark-menu;

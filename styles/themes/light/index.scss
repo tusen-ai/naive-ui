@@ -1,7 +1,6 @@
 @import 'lightColors.scss';
 @import "components/Button.scss";
 @import "components/Divider.scss";
-@import "components/NimbusServiceLayout.scss";
 @import "components/Scrollbar.scss";
 @import "components/BaseLoading.scss";
 @import "components/BaseSelectMenu.scss";
@@ -38,7 +37,6 @@
 @import "components/Tabs.scss";
 @import "components/Statistic.scss";
 @import "components/Breadcrumb.scss";
-@import "components/NimbusForm.scss";
 @import "components/Modal.scss";
 @import "components/Transfer.scss";
 @import "components/Menu.scss";
@@ -83,7 +81,6 @@
   $--n-background-color: $--neutral-9 !global;
   $--n-alpha-input-color: rgba(0, 0, 0, .04) !global;
   @if ($in-js-env != true) {
-    @include setup-light-nimbus-service-layout;
     @include setup-light-divider;
     @include setup-light-scrollbar;
     @include setup-light-base-loading;
@@ -122,7 +119,6 @@
     @include setup-light-tabs;
     @include setup-light-statistic;
     @include setup-light-breadcrumb;
-    @include setup-light-nimbus-form;
     @include setup-light-modal;
     @include setup-light-transfer;
     @include setup-light-menu;

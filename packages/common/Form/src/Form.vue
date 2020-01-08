@@ -73,17 +73,17 @@ export default {
      */
     validate (afterValidate, shouldFieldBeValidated = () => true) {
       return new Promise((resolve, reject) => {
-        const validateFormItemInstances = []
+        const formItemValidationPromises = []
         for (const key of Object.keys(this.items)) {
           const formItemInstances = this.items[key]
           for (const formItemInstance of formItemInstances) {
             if (formItemInstance.path) {
-              validateFormItemInstances.push(formItemInstance._validate())
+              formItemValidationPromises.push(formItemInstance._validate())
             }
           }
         }
         Promise
-          .all(validateFormItemInstances)
+          .all(formItemValidationPromises)
           .then(results => {
             if (results.some(result => !result.valid)) {
               const errors = results.filter(result => result.errors).map(result => result.errors)
