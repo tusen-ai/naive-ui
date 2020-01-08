@@ -1,5 +1,5 @@
 # 命名空间
-组件的一部分是游离于 `document.body`的。如需给这些游离的元素添加class，使用应用的 `namespace` 属性。打开开发者工具查看游离的内容。
+组件的一部分是游离于 `document.body` 的。如需给这些游离的元素添加class，使用应用的 `namespace` 属性。打开开发者工具查看游离的内容。
 ```html
 <n-config-provider :namespace="ns">
   <n-button
