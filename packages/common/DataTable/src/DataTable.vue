@@ -12,6 +12,7 @@
     >
       <base-table
         ref="mainTable"
+        main
         :header-height="headerHeight"
         :scroll-x="scrollX"
         :body-style="bodyStyle"
@@ -29,7 +30,7 @@
         v-if="rightFixedColumns.length"
         class="n-data-table-table-wrapper n-data-table-table-wrapper--right-fixed"
         :class="{
-          'n-data-table-table-wrapper--active': mainTableScrollContainerWidth && mainTableScrollContainerWidth + horizontalScrollLeft !== scrollX
+          'n-data-table-table-wrapper--active': mainTableScrollContainerWidth && mainTableScrollContainerWidth + horizontalScrollLeft < scrollX
         }"
       >
         <base-table
@@ -40,7 +41,7 @@
           :data="paginatedData"
           :body-style="bodyStyle"
           :row-class-name="rowClassName"
-          :tr-height="trHeight"
+          :tr-heights="trHeights"
           :loading="loading"
           :fixed="true"
           @scroll="e => handleTableBodyScroll(e, 'right')"
@@ -61,7 +62,7 @@
           :body-style="bodyStyle"
           :row-class-name="rowClassName"
           header-ref-name="header"
-          :tr-height="trHeight"
+          :tr-heights="trHeights"
           :loading="loading"
           :fixed="true"
           @scroll="e => handleTableBodyScroll(e, 'left')"
@@ -183,16 +184,16 @@ export default {
   },
   data () {
     return {
-      triggerOnChange: true,
       headerHeight: null,
-      trHeight: null,
-
+      /** collected tr heights of main table */
+      trHeights: [],
       hoveringRowIndex: null,
       mainTableScrollContainerWidth: null,
       horizontalScrollLeft: 0,
-
-      scrollingPart: null, // main left right header
-      scrollTimerId: null, // RequestAnimationFrame
+      /* which part is being scrolling: main left right header */
+      scrollingPart: null,
+      scrollTimerId: null,
+      /** internal checked rows */
       checkedRows: [],
       /** internal filters state */
       internalActiveFilters: [],
@@ -434,15 +435,6 @@ export default {
       }
     })
   },
-  mounted () {
-    this.collectDOMSizes()
-    /** TODO: use resize observer */
-    window.addEventListener('resize', this.collectDOMSizes)
-  },
-  beforeDestroy () {
-    /** TODO: use resize observer */
-    window.removeEventListener('resize', this.collectDOMSizes)
-  },
   methods: {
     changeSorter (sorter) {
       this.internalActiveSorter = sorter
@@ -587,11 +579,13 @@ export default {
     },
     collectDOMSizes () {
       const {
-        header: headerEl
+        header: headerEl,
+        body: mainTableScrollContainer
       } = this.getScrollElements()
       this.headerHeight = headerEl.offsetHeight
-      const { body: mainTableScrollContainer } = this.getScrollElements()
       this.mainTableScrollContainerWidth = mainTableScrollContainer.offsetWidth
+      const trHeights = Array.from(mainTableScrollContainer.querySelectorAll('tr')).map(el => el.offsetHeight)
+      this.trHeights = trHeights
     },
     checkAll (column) {
       this.paginatedData.forEach(row => {

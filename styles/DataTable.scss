@@ -13,9 +13,10 @@
       border-radius: 6px;
       overflow: hidden;
       @include b(data-table-table-wrapper) {
+        transition: border-color .3s $--n-ease-in-out-cubic-bezier;
         @include m(left-fixed) {
           left: 0;
-          border-right: 1px solid $--n-border-color;
+          border-right: 1px solid $--n-divider-color;
           @include m(active) {
             transition: box-shadow 0.2s;
             box-shadow: $--table-fixed-column-box-shadow
@@ -23,7 +24,7 @@
         }
         @include m(right-fixed) {
           right: 0;
-          border-left: 1px solid $--n-border-color;
+          border-left: 1px solid $--n-divider-color;
           @include m(active) {
             box-shadow: $--table-fixed-column-box-shadow
           }

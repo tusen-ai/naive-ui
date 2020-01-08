@@ -12,6 +12,7 @@
     />
     <table-body
       ref="body"
+      :main="main"
       :placement="placement"
       :body-style="bodyStyle"
       :scroll-x="scrollX"
@@ -19,7 +20,7 @@
       :columns="columns"
       :row-class-name="rowClassName"
       :min-height="bodyMinHeight"
-      :tr-height="trHeight"
+      :tr-heights="trHeights"
       :loading="loading"
       :fixed="fixed"
       @scroll="handleBodyScroll"
@@ -38,6 +39,10 @@ export default {
     TableBody
   },
   props: {
+    main: {
+      type: Boolean,
+      default: false
+    },
     placement: {
       type: String,
       default: null
@@ -66,8 +71,8 @@ export default {
       type: Boolean,
       default: false
     },
-    trHeight: {
-      type: Number,
+    trHeights: {
+      type: Array,
       default: null
     },
     height: {

@@ -10,9 +10,8 @@
   >
     <table
       class="n-data-table-table"
-      cellspacing="0"
       :style="{
-        width: headerStyleWidth
+        minWidth: scrollX && `${scrollX}px`
       }"
     >
       <colgroup>
@@ -157,9 +156,6 @@ export default {
     },
     activeFilters () {
       return this.NDataTable.synthesizedActiveFilters
-    },
-    headerStyleWidth () {
-      return this.scrollX && `${this.scrollX}px`
     },
     headerStyle () {
       return {

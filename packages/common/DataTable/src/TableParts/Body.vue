@@ -4,7 +4,7 @@
     class="n-data-table-base-table-body"
     :style="style"
     :content-style="{
-      width: contentStyleWidth
+      minWidth: scrollX && `${scrollX}px`
     }"
     :horizontal-rail-style="{ zIndex: 1 }"
     :vertical-rail-style="{ zIndex: 1 }"
@@ -19,13 +19,13 @@
           :style="createCustomWidthStyle(column, index, placement)"
         >
       </colgroup>
-      <tbody class="n-data-table-tbody">
+      <tbody ref="tbody" class="n-data-table-tbody">
         <tr
           v-for="(rowData, index) in data"
           :key="index"
           class="n-data-table-tr"
           :style="{
-            height: trHeight && trHeight + 'px'
+            height: (!main || null) && (trHeights[index] && trHeights[index] + 'px')
           }"
           :class="Object.assign(
             {
@@ -76,6 +76,7 @@
 import cell from './Cell.vue'
 import { createCustomWidthStyle, setCheckStatusOfRow, createClassObject } from '../utils'
 import NScrollbar from '../../../Scrollbar'
+import resizeObserverDelegate from '../../../../utils/delegate/resizeObserverDelegate'
 
 export default {
   components: {
@@ -88,6 +89,10 @@ export default {
     }
   },
   props: {
+    main: {
+      type: Boolean,
+      default: false
+    },
     placement: {
       type: String,
       default: null
@@ -100,8 +105,8 @@ export default {
       type: Boolean,
       default: false
     },
-    trHeight: {
-      type: Number,
+    trHeights: {
+      type: Array,
       default: null
     },
     minHeight: {
@@ -142,9 +147,6 @@ export default {
     checkedRows () {
       return this.NDataTable.checkedRows
     },
-    contentStyleWidth () {
-      return this.scrollX && `${this.scrollX}px`
-    },
     style () {
       if (this.fixed && this.height) {
         return Object.assign({}, this.bodyStyle, {
@@ -156,7 +158,23 @@ export default {
       }
     }
   },
+  mounted () {
+    if (this.main) {
+      resizeObserverDelegate.registerHandler(this.$refs.tbody, this.handleTbodyResize)
+      this.handleTbodyResize()
+    }
+  },
+  beforeDestroy () {
+    if (this.main) {
+      resizeObserverDelegate.unregisterHandler(this.$refs.tbody)
+    }
+  },
   methods: {
+    handleTbodyResize () {
+      if (this.main) {
+        this.NDataTable.collectDOMSizes()
+      }
+    },
     createClassObject,
     handleCheckboxInput (row, checked) {
       setCheckStatusOfRow(this.NDataTable.checkedRows, row, checked)

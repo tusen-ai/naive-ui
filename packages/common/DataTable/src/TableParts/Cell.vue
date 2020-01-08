@@ -1,6 +1,6 @@
 <template>
   <span v-if="column.render" :title="title">
-    <render :render="(h) => column.render(h, row, index)" />
+    <render :render="h => column.render(h, row, index)" />
   </span>
   <span v-else :title="title">
     {{ row[column.key] }}
