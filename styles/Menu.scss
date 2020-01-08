@@ -4,109 +4,128 @@
 
 @include themes-mixin() {
   @include b(menu) {
-    width: 100%;
-    box-sizing: border-box;
-    font-size: 14px;
+    color: $--menu-item-text-color;
+    @include once {
+      transition: background-color .3s $--n-ease-in-out-cubic-bezier;
+      width: 100%;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
     @include b(menu-list) {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      @include b(menu-item) {
-        cursor: pointer;
-        color: $--menu-item-text-color;
-        transition: color .3s $--n-ease-in-out-cubic-bezier;
-        position: relative;
-        height: 48px;
-        display: flex;
-        align-items: center;
-        font-size: 14px;
+      @include once {
         list-style: none;
-        line-height: 1.5;
-        @include e(icon) {
-          &::before {
-            content: '';
-            width: 10px;
-            height: 10px;
-            position: absolute;
-            background-image:linear-gradient(47deg,rgba(120, 205, 104, 1) 0%,rgba(20, 166, 165, 1) 100%);
-            top: 20px;
-            left: 30px;
-            clip-path: polygon(100% 0, 100% 100%, 0% 100%);
+        margin: 0;
+        padding: 0;
+      }
+      @include b(menu-item) {
+        color: $--menu-item-text-color;
+        @include once {
+          cursor: pointer;
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
+          position: relative;
+          height: 48px;
+          display: flex;
+          align-items: center;
+          font-size: 14px;
+          list-style: none;
+          line-height: 1.5;
+          // @include e(icon) {
+          //   &::before {
+          //     content: '';
+          //     width: 10px;
+          //     height: 10px;
+          //     position: absolute;
+          //     background-image:linear-gradient(47deg,rgba(120, 205, 104, 1) 0%,rgba(20, 166, 165, 1) 100%);
+          //     top: 20px;
+          //     left: 30px;
+          //     clip-path: polygon(100% 0, 100% 100%, 0% 100%);
+          //   }
+          // }
+          @include m(selected) {
+            &::before {
+              opacity: .9;
+            }
+          }
+          @include m(disabled) {
+            opacity: 0.45;
+            cursor: not-allowed;
           }
         }
         &::before {
-          content: "";
-          background-size: 300%;
           background-image: $--menu-item-background-image;
           background-position: $--menu-item-background-position;
-          position: absolute;
-          left: 0;
-          right: 0;
-          top: 0;
-          bottom: 0;
-          z-index: 0;
-          transition: opacity 0.3s $--n-ease-in-out-cubic-bezier, background-position .3s $--n-ease-in-out-cubic-bezier;
-          opacity: 0;
-        }
-        @include m(selected) {
-          &::before {
-            opacity: .9;
+          @include once {
+            content: "";
+            background-size: 300%;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 0;
+            transition: opacity 0.3s $--n-ease-in-out-cubic-bezier, background-position .3s $--n-ease-in-out-cubic-bezier;
+            opacity: 0; 
           }
-        }
-        @include m(disabled) {
-          opacity: 0.45;
-          cursor: not-allowed;
         }
       }
     }
     @include b(sub-menu) {
-      cursor: pointer;
-      position: relative;
-      @include b(sub-menu-header) {
-        font-weight: 500;
-        font-size: 14px;
-        color: $--menu-sub-menu-text-color;
-        transition: color .3s $--n-ease-in-out-cubic-bezier;
-        height: 48px;
-        display: flex;
-        align-items: center;
-        position: relative;
-        &::after { // down arrow
-          content: '';
-          height: 6px;
-          width: 6px;
-          border-left: 2px solid $--n-primary-color;
-          border-top: 2px solid $--n-primary-color;
-          position: absolute;
-          right: 24px;
-          top: calc(50% - 3px);
-          transform: rotate(45deg) ;
-          transform-origin: 25% 25%;
-          transition: transform 0.2s $--n-ease-in-out-cubic-bezier, opacity 0.3s $--n-ease-in-out-cubic-bezier, border-color 0.3s $--n-ease-in-out-cubic-bezier;
-        }
-        @include m(collapsed) {
-          &::after {
-            transform: rotate(225deg);
-          }
-        }
-        @include m(disabled) {
-          opacity: 0.45;
-          cursor: not-allowed;
+      @include once {
+        cursor: pointer;
+        position: relative; 
+        list-style: none;
+        @include b(sub-menu-content) {
+          padding: 0;
+          @include fade-in-height-expand-transition($duration: .2s);
         }
       }
-      @include b(sub-menu-content) {
-        padding: 0;
-        @include fade-in-height-expand-transition($duration: .2s);
+      @include b(sub-menu-header) {
+        color: $--menu-sub-menu-text-color;
+        @include once {
+          font-weight: 500;
+          font-size: 14px;
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
+          height: 48px;
+          display: flex;
+          align-items: center;
+          position: relative;
+          @include m(collapsed) {
+            &::after {
+              transform: rotate(225deg);
+            }
+          }
+          @include m(disabled) {
+            opacity: 0.45;
+            cursor: not-allowed;
+          }
+        }
+        &::after { // down arrow 
+          border-left: 2px solid  $--menu-sub-menu-arrow-color;
+          border-top: 2px solid  $--menu-sub-menu-arrow-color;
+          @include once {
+            content: '';
+            height: 6px;
+            width: 6px;
+            position: absolute;
+            right: 24px;
+            top: calc(50% - 3px);
+            transform: rotate(45deg) ;
+            transform-origin: 25% 25%;
+            transition: transform 0.2s $--n-ease-in-out-cubic-bezier, opacity 0.3s $--n-ease-in-out-cubic-bezier, border-color 0.3s $--n-ease-in-out-cubic-bezier;
+          }
+        }
       }
     }
     @include b(menu-item-group) {
       @include b(menu-item-group-title) {
-        cursor: default;
-        height: 40px;
-        display: flex;
-        align-items: center;
         color: $--menu-item-group-text-color;
-        transition: color .3s $--n-ease-in-out-cubic-bezier;
+        @include once {
+          cursor: default;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
+        }        
       }
     }
   }
