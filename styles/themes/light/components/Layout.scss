@@ -1,6 +1,6 @@
 @mixin setup-light-layout {
   $--layout-text-color: $--n-secondary-text-color !global;
-  $--layout-back-color: $--neutral-9 !global;
+  $--layout-background-color: $--neutral-9 !global;
   $--layout-header-background-color: $--n-card-color !global;
   $--layout-header-border-color: $--n-divider-color !global;
   $--layout-footer-border-color: $--n-divider-color !global;
