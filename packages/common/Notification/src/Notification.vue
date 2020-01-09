@@ -3,6 +3,7 @@
     :class="{
       [`n-${theme}-theme`]: theme,
       'n-notification--no-avatar': noAvatar,
+      'n-notification--closable': closable,
       [`n-notification--${type}-type`]: type
     }"
     class="n-notification"
