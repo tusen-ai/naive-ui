@@ -32,7 +32,7 @@ function parseDemosAsAnchor (demosLiteral) {
     .map(demoName => demoName.trim())
     .filter(demoName => demoName.length)
   const linkTags = demoNames.map(demoName => `<n-anchor-link :title="anchorLinkMap.get('${kababCase(demoName)}') || ''" href="#${kababCase(demoName)}"/>`)
-  return `<n-anchor :top="24" position="absolute" affix style="width: 160px;">${linkTags.join('\n')}</n-anchor>`
+  return `<n-anchor :top="24" :bound="16" position="absolute" affix style="width: 160px;">${linkTags.join('\n')}</n-anchor>`
 }
 
 function generateScript (demosLiteral, components = []) {

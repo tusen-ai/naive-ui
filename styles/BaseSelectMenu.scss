@@ -39,8 +39,8 @@
       }
       @include b(base-select-menu-light-bar-wrapper) {
         position: absolute;
-        left: 0;
-        right: 0;
+        left: 0px;
+        right: 0px;
         top: 0;
         bottom: 0;
         overflow: hidden;
@@ -104,7 +104,7 @@
     @include b(base-select-menu-light-bar) {
       transition: background-color .3s $--n-ease-in-out-cubic-bezier, top .15s $--n-ease-in-out-cubic-bezier;
       position: absolute;
-      width:100%;
+      width: 100%;
       background-color: $--base-select-menu-light-bar-background-color;
       top: 0;
       left: 0;

@@ -16,7 +16,8 @@
         transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
         // background-color: $--n-alpha-table-body-color;
         th {
-          transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
+          color: $--text-1;
+          transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
           background-color: $--n-table-header-color;
           // background-clip: padding-box;
           text-align: inherit;
@@ -33,7 +34,8 @@
           }
         }
         td {
-          transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
+          color: $--text-2;
+          transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
           background-color: $--n-table-body-color;
           // background-clip: padding-box;
           padding: 12px;
@@ -48,6 +50,7 @@
       table {
         border: 1px solid $--n-divider-color;
         th {
+          color: $--text-1;
           background: rgb(250, 250, 250);
           border-bottom: 1px solid $--n-divider-color;
           &:not(:last-child) {
@@ -55,6 +58,7 @@
           }   
         }
         td {
+          color: $--text-2;
           background-color: white;
         }
       }

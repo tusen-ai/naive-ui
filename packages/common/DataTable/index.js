@@ -1,4 +1,4 @@
-import DataTable from './src/main.vue'
+import DataTable from './src/DataTable.vue'
 
 DataTable.install = function (Vue) {
   DataTable.Vue = Vue

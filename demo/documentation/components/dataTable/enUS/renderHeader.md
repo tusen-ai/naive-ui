@@ -121,7 +121,7 @@ export default {
   },
   computed: {
     pagination() {
-      return { total: this.data.length, limit: 10 }
+      return { total: this.data.length, pageSize: 10 }
     }
   },
   methods: {
