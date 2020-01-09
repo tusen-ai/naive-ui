@@ -2,54 +2,67 @@ function getTransitionTimingFunctions (transitionTimingFunction) {
   return transitionTimingFunction.replace(/([^\d]),/g, '$1#').split('# ')
 }
 
-function getComputedTransition (computedStyle) {
-  const transitionProperty = computedStyle.transitionProperty || ''
-  const transitionProperties = transitionProperty.split(', ')
-  const transitionDuration = computedStyle.transitionDuration || ''
-  const transitionDurations = transitionDuration.split(', ')
-  const transitionTimingFunction = computedStyle.transitionTimingFunction || ''
-  const transitionTimingFunctions = getTransitionTimingFunctions(transitionTimingFunction)
-  const transitionDelay = computedStyle.transitionDelay || ''
-  const transitionDelays = transitionDelay.split(', ')
-  const transitionWithoutBackgroundColor = transitionProperties.map((prop, i) => (prop !== 'background-color' ? [
+function getTransition (computedStyle) {
+  const transitionProperties = computedStyle.transitionProperty.split(', ')
+  const transitionDurations = computedStyle.transitionDuration.split(', ')
+  const transitionTimingFunctions = getTransitionTimingFunctions(computedStyle.transitionTimingFunction)
+  const transitionDelays = computedStyle.transitionDelay.split(', ')
+  const indexOfBackgroundColorTransition = transitionProperties.findIndex(property => property === 'background-color')
+  const indexOfAllTransition = transitionProperties.findIndex(property => property === 'all')
+  if (~indexOfBackgroundColorTransition) {
+    const duration = transitionDurations[indexOfBackgroundColorTransition]
+    if (!duration) {
+      return {
+        backgroundColorTransitioned: false
+      }
+    }
+  }
+  if (~indexOfAllTransition) {
+    const duration = transitionDurations[indexOfAllTransition]
+    if (!duration) {
+      return {
+        backgroundColorTransitioned: false
+      }
+    } else {
+      return {
+        allTransitioned: true,
+        transitionWithoutBackgroundColor: 'none'
+      }
+    }
+  }
+  const transitionWithoutBackgroundColor = transitionProperties.map((prop, i) => (prop === 'background-color' ? null : [
     transitionProperties[i],
     transitionDurations[i],
     transitionTimingFunctions[i],
     transitionDelays[i]
-  ].join(' ') : null)).filter(v => v !== null).join(', ')
+  ].join(' '))).filter(v => v !== null).join(', ') || 'none'
   return {
-    transitionProperties,
-    transitionDurations,
-    transitionWithoutBackgroundColor: transitionProperties.includes('all') ? 'none' : transitionWithoutBackgroundColor
+    backgroundColorTransitioned: true,
+    transitionWithoutBackgroundColor
   }
 }
 
-function getNextBackgroundOf (el) {
-  console.log('getNextBackgroundOf called')
+function getNextBackgroundColorOf (el) {
   const computedStyle = window.getComputedStyle(el)
   const prevBackgroundColor = computedStyle.backgroundColor
   const {
-    transitionProperties,
-    transitionDurations,
+    allTransitioned,
+    backgroundColorTransitioned,
     transitionWithoutBackgroundColor
-  } = getComputedTransition(computedStyle)
-  let indexOfBackgroundColorTransition = transitionProperties.findIndex(property => property === 'background-color')
-  if (!~indexOfBackgroundColorTransition) {
-    indexOfBackgroundColorTransition = transitionProperties.findIndex(property => property === 'all')
-    if (~indexOfBackgroundColorTransition) {
-      console.warn(`[naive-ui/hollowoutable]: 
+  } = getTransition(computedStyle)
+  if (!backgroundColorTransitioned && !allTransitioned) {
+    return prevBackgroundColor
+  }
+  if (allTransitioned) {
+    console.warn(`[naive-ui/hollowoutable]: 
 background-color of`, el, `is transitioned by \`all\` property,
 naive-ui can't read read all potential transition properties in this case.
 When theme is changed it may cause losing some transition on it beside background-color transition.
 To be avoid of this issue, specified all potential transition property explicitly.`)
-    }
   }
-  if (!~indexOfBackgroundColorTransition) return computedStyle.backgroundColor
-  const backgroundColorTransitionDuration = transitionDurations[indexOfBackgroundColorTransition]
-  if (backgroundColorTransitionDuration === '0s') return computedStyle.backgroundColor
   const memorizedTransition = el.style.transition
   const memorizedBackgroundColor = el.style.backgroundColor
-  el.style.transition = transitionWithoutBackgroundColor || 'none'
+  el.style.transition = transitionWithoutBackgroundColor
   const nextBackgroundColor = computedStyle.backgroundColor
   el.style.backgroundColor = prevBackgroundColor
   void (el.offsetHeight)
@@ -82,7 +95,7 @@ export default {
       if (this.avoidHollowOut) return
       cache()
       this.$nextTick().then(() => {
-        this.setHollowOutAffect(value)
+        this.updateHollowOutAffect(value)
         uncache()
       })
     }
@@ -94,7 +107,7 @@ export default {
     }
   },
   methods: {
-    setHollowOutAffect () {
+    updateHollowOutAffect () {
       let cursor = this.$el
       while (cursor.parentElement) {
         cursor = cursor.parentElement
@@ -107,7 +120,7 @@ export default {
               break
             }
           }
-          this.ascendantBackgroundColor = getNextBackgroundOf(cursor)
+          this.ascendantBackgroundColor = getNextBackgroundColorOf(cursor)
           if (cachedNextBackgroundColor) {
             cachedNextBackgroundColor.set(cursor, this.ascendantBackgroundColor)
           }
@@ -122,7 +135,7 @@ export default {
   mounted () {
     if (this.avoidHollowOut) return
     cache()
-    this.setHollowOutAffect()
+    this.updateHollowOutAffect()
     this.$nextTick().then(() => {
       this.hollowOutColorTransitionDisabled = false
       uncache()
