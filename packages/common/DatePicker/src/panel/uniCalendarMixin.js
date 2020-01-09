@@ -35,7 +35,7 @@ export default {
     },
     actions: {
       type: Array,
-      default: () => ['now', 'confirm']
+      default: () => ['now', 'clear', 'confirm']
     },
     isDateDisabled: {
       type: Function,

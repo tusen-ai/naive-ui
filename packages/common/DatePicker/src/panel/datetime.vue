@@ -98,6 +98,14 @@
         class="n-date-panel-actions"
       >
         <n-button
+          v-if="actions.includes('clear')"
+          size="tiny"
+          round
+          @click="clearValue"
+        >
+          Clear
+        </n-button>
+        <n-button
           v-if="actions.includes('now')"
           size="tiny"
           round
