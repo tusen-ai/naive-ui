@@ -2,6 +2,7 @@
   <n-base-anchor
     v-if="!affix"
     ref="anchor"
+    :bound="bound"
     :target="target"
   >
     <slot />
@@ -62,6 +63,10 @@ export default {
     offsetTop: {
       type: Number,
       default: undefined
+    },
+    bound: {
+      type: Number,
+      default: 12
     }
   },
   methods: {
