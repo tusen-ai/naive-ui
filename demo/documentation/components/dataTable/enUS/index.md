@@ -13,20 +13,18 @@ Table is used to displays rows of data.
 
 ```demo
 basic
+filterAndSorter
+select
 controlled-page
 controlled-filter
 controlled-sorter
-customStyle
-select
-filterAndSorter
-asyncFilterOptions
-filterMultiple
-ajaxUsage
 fixedHeader
 fixedHeaderColumn
 ellipsis
 renderHeader
-bestPractices
+customStyle
+ajaxUsage
+asyncFilterOptions
 ```
 
 ## Props

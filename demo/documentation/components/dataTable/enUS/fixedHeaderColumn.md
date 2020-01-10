@@ -14,68 +14,63 @@ Note that:
   :pagination="pagination"
   max-height="250px"
   :scroll-x="1800"
->
-</n-data-table>
+/>
 ```
 
 ```js
 const columns = [
   {
-    title: "Name",
-    key: "name",
+    title: 'Name',
+    key: 'name',
     width: 200,
-    fixed: "left"
+    fixed: 'left'
   },
   {
-    title: "Age",
-    key: "age",
+    title: 'Age',
+    key: 'age',
     width: 100
   },
   {
-    title: "Row",
-    key: "row",
-    render(h, params, index) {
-      return <span> row {index}</span>
+    title: 'Row',
+    key: 'row',
+    render (h, row, index) {
+      return h('span', ['row ', index])
     }
   },
   {
-    title: "Row1",
-    key: "row1",
-    render(h, params, index) {
-      return <span>row {index}</span>
+    title: 'Row1',
+    key: 'row1',
+    render(h, row, index) {
+      return h('span', ['row ', index])
     }
   },
   {
-    title: "Row2",
-    key: "row2",
-    render(h, params, index) {
-      return <span>row {index}</span>
+    title: 'Row2',
+    key: 'row2',
+    render(h, row, index) {
+      return h('span', ['row ', index])
     }
   },
   {
-    title: "Address",
-    key: "address",
+    title: 'Address',
+    key: 'address',
     width: 200,
-    fixed: "right"
+    fixed: 'right'
   }
 ]
 
-const data = []
-for (let i = 0; i < 46; i++) {
-  data.push({
-    key: i,
-    name: `Edward King ${i}`,
-    age: 32,
-    address: `London, Park Lane no. ${i}`
-  })
-}
+const data = Array.apply(null, { length: 46 }).map((_, index) => ({
+  name: `Edward King ${index}`,
+  age: 32,
+  address: `London, Park Lane no. ${index}`
+}))
+
 
 export default {
   data() {
     return {
       data,
-      columns,
-      selectedData: []
+      columns
     }
   },
   computed: {
@@ -85,7 +80,7 @@ export default {
   },
   methods: {
     sendMail(rowData) {
-      this.$NMessage.info("send mail to " + rowData.name)
+      this.$NMessage.info('send mail to ' + rowData.name)
     }
   }
 }

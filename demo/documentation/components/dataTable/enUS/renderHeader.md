@@ -1,89 +1,66 @@
-# Custom render column header
+# Custom Render Column Header
 
 ```html
 <n-data-table
-  ref="table"
-  :columns="columns"
-  :data="data"
-  :pagination="pagination"
+  ref='table'
+  :columns='columns'
+  :data='data'
+  :pagination='pagination'
 />
 ```
 
 ```js
 const renderTooltip = (h, activator, content) => {
   const scopedSlots = {
-    activator: () => activator
+    activator: () => activator,
+    default: () => content
   }
-  return (
-    <n-tooltip arrow scopedSlots={scopedSlots}>
-      {content}
-    </n-tooltip>
-  )
+  return h('n-tooltip', {
+    props: {
+      arrow: true
+    },
+    scopedSlots
+  })
 }
 
 const createColumns = instance => {
   return [
     {
-      title: "Name",
-      key: "name",
-      renderHeader(h, column) {
+      key: 'name',
+      title (h, column) {
         return renderTooltip(
           h,
-          <n-gradient-text size="24" type="danger">
-            {column.title}
-          </n-gradient-text>,
-          "custom header: name"
+          h('n-gradient-text', {
+            props: {
+              size: 24,
+              type: 'danger'
+            }
+          }, 'Name'),
+          'Tooltip Content'
         )
       }
     },
     {
-      title: "Age",
-      key: "age",
-      renderHeader(h, column) {
-        return (
-          <n-gradient-text size="20" type="info">
-            {column.title}
-          </n-gradient-text>
-        )
+      key: 'age',
+      title (h, column) {
+        return h('n-gradient-text', {
+          props: {
+            size: '20',
+            type: 'info'
+          }
+        }, 'Age')
       }
     },
     {
-      title: "Address",
-      key: "address",
-      renderHeader(h, column) {
-        return (
-          <n-gradient-text size="16" type="warning">
-            {column.title}
-          </n-gradient-text>
-        )
-      }
-    },
-    {
-      title: "Tags",
-      key: "tags",
-      render (h, params) {
-        const arr = params.tags.map(tagKey => {
-          return (
-            <n-tag
-              style="margin-right:5px"
-              type={tagKey.length > 5 ? "warning" : "default"}
-            >
-              {tagKey}
-            </n-tag>
-          )
-        })
-        return arr
-      }
-    },
-    {
-      title: "Action",
-      key: "actions",
-      render (h, params) {
-        return (
-          <n-button size="small" onClick={() => instance.sendMail(params)}>
-            Send mail
-          </n-button>
-        )
+      key: 'address',
+      title (h, column) {
+        return h(
+          'n-gradient-text', {
+          props: {
+            size: '16',
+            type: 'warning'
+          }
+        }, 'Address')
       }
     }
   ]
@@ -91,42 +68,33 @@ const createColumns = instance => {
 
 const data = [
   {
-    key: "1",
-    name: "John Brown",
+    key: '1',
+    name: 'John Brown',
     age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"]
+    address: 'New York No. 1 Lake Park'
   },
   {
-    key: "2",
-    name: "Jim Green",
+    key: '2',
+    name: 'Jim Green',
     age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"]
+    address: 'London No. 1 Lake Park'
   },
   {
-    key: "3",
-    name: "Joe Black",
+    key: '3',
+    name: 'Joe Black',
     age: 32,
-    address: "Sidney No. 1 Lake Park",
-    tags: ["cool", "teacher"]
+    address: 'Sidney No. 1 Lake Park'
   }
 ]
+
 export default {
-  data() {
+  data () {
     return {
       data: data,
-      columns: createColumns(this)
-    }
-  },
-  computed: {
-    pagination() {
-      return { total: this.data.length, pageSize: 10 }
-    }
-  },
-  methods: {
-    sendMail(rowData) {
-      this.$NMessage.info("send mail to " + rowData.name)
+      columns: createColumns(this),
+      pagination: {
+        pageSize: 10
+      }
     }
   }
 }

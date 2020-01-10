@@ -13,43 +13,48 @@
 const createColumns = instance => {
   return [
     {
-      title: "Name",
-      key: "name"
+      title: 'Name',
+      key: 'name'
     },
     {
-      title: "Age",
-      key: "age"
+      title: 'Age',
+      key: 'age'
     },
     {
-      title: "Address",
-      key: "address"
+      title: 'Address',
+      key: 'address'
     },
     {
-      title: "Tags",
-      key: "tags",
+      title: 'Tags',
+      key: 'tags',
       render (h, row) {
         const tags = row.tags.map(tagKey => {
           return (
-            <n-tag
-              style="margin-right:5px"
-              type={tagKey.length > 5 ? "warning" : "default"}
-            >
-              {tagKey}
-            </n-tag>
+            h('n-tag', {
+              staticStyle: {
+                marginRight: '6px'
+              },
+              props: {
+                type: 'info'
+              }
+            }, [ tagKey ])
           )
         })
         return tags
       }
     },
     {
-      title: "Action",
-      key: "actions",
+      title: 'Action',
+      key: 'actions',
       render (h, row) {
-        return (
-          <n-button size="small" onClick={() => instance.sendMail(row)}>
-            Send mail
-          </n-button>
-        )
+        return h('n-button', {
+          props: {
+            size: 'small'
+          },
+          on: {
+            click: () => instance.sendMail(row)
+          }
+        }, [ 'Send Email' ])
       }
     }
   ]
@@ -57,27 +62,28 @@ const createColumns = instance => {
 
 const data = [
   {
-    key: "1",
-    name: "John Brown",
+    key: '1',
+    name: 'John Brown',
     age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"]
+    address: 'New York No. 1 Lake Park',
+    tags: ['nice', 'developer']
   },
   {
-    key: "2",
-    name: "Jim Green",
+    key: '2',
+    name: 'Jim Green',
     age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"]
+    address: 'London No. 1 Lake Park',
+    tags: ['loser']
   },
   {
-    key: "3",
-    name: "Joe Black",
+    key: '3',
+    name: 'Joe Black',
     age: 32,
-    address: "Sidney No. 1 Lake Park",
-    tags: ["cool", "teacher"]
+    address: 'Sidney No. 1 Lake Park',
+    tags: ['cool', 'teacher']
   }
 ]
+
 export default {
   data() {
     return {
@@ -92,7 +98,7 @@ export default {
   },
   methods: {
     sendMail(rowData) {
-      this.$NMessage.info("send mail to " + rowData.name)
+      this.$NMessage.info('send mail to ' + rowData.name)
     }
   }
 }

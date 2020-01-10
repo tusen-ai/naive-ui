@@ -1,11 +1,10 @@
-# Filter and sorter
+# Uncontrolled Filter and Sorter
 
 ```html
 <n-button @click='sortName'>Sort By Name (Ascend)</n-button>
-<n-button @click='filterAddress'>Filter Address London</n-button>
+<n-button @click='filterAddress'>Filter Address (London)</n-button>
 <n-button @click='clearFilters'>Clear Filters</n-button>
 <n-button @click='clearSorter'>Clear Sorter</n-button>
-<n-button @click='useRouteParams'>Use Query from Route</n-button>
 <n-data-table
   ref='table'
   :columns='columns'
@@ -19,25 +18,18 @@ const columns = [
   {
     title: 'Name',
     key: 'name',
-    sortable: true,
-    sorter (rowA, rowB) {
-      return rowA.name.length - rowB.name.length
-    }
+    defaultSortOrder: 'ascend',
+    sorter: 'default'
   },
   {
     title: 'Age',
     key: 'age',
-    sortable: true,
-    sorter (rowA, rowB) {
-      return rowA.age - rowB.age
-    }
+    sorter: (row1, row2) => row2.age - row1.age
   },
   {
     title: 'Address',
     key: 'address',
-    filterable: true,
-    filterMultiple: true,
-    defaultFilter: ['London', 'New York'],
+    defaultFilterOptionValues: ['London', 'New York'],
     filterOptions: [
       {
         label: 'London',
@@ -48,8 +40,8 @@ const columns = [
         value: 'New York'
       }
     ],
-    filter (value, record) {
-      return record.address.indexOf(value) >= 0
+    filter (value, row) {
+      return ~row.address.indexOf(value)
     }
   }
 ]
@@ -78,35 +70,11 @@ const data = [
 ]
 
 export default {
-  watch: {
-    $route (value) {
-      const {
-        sortColumnKey,
-        order,
-        filterColumnKey,
-        filterOptionValue
-      } = value.query
-      if (sortColumnKey) {
-        this.$refs.table.sort(sortColumnKey, order)
-      }
-      if (filterColumnKey) {
-        this.$refs.table.filter({
-          columnKey: filterColumnKey,
-          filterOptionValue
-        })
-      }
-    }
-  },
   data () {
     return {
       data: data,
       columns,
-      selectedData: []
-    }
-  },
-  computed: {
-    pagination () {
-      return { pageSize: 5 }
+      pagination: { pageSize: 5 }
     }
   },
   methods: {
@@ -124,18 +92,6 @@ export default {
     },
     clearSorter () {
       this.$refs.table.sort(null)
-    },
-    useRouteParams () {
-      this.$router.push({
-        path: this.$route.path,
-        hash: '#filter-and-sorter',
-        query: {
-          sortColumnKey: 'age',
-          order: 'descend',
-          filterColumnKey: 'address',
-          filterOptionValue: 'London'
-        }
-      })
     }
   }
 }

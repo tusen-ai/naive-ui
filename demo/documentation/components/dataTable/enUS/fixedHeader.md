@@ -9,55 +9,45 @@ Display large amounts of data in scrollable view.
   :data="data"
   :pagination="pagination"
   max-height="250px"
-  @select="onSelectedChange"
 />
 ```
 
 ```js
 const columns = [
   {
-    title: "Name",
-    key: "name"
+    title: 'Name',
+    key: 'name'
   },
   {
-    title: "Age",
-    key: "age"
+    title: 'Age',
+    key: 'age'
   },
   {
-    title: "Address",
-    key: "address"
+    title: 'Address',
+    key: 'address'
   }
 ]
 
-const data = []
-for (let i = 0; i < 46; i++) {
-  data.push({
-    key: i,
-    name: `Edward King ${i}`,
-    age: 32,
-    address: `London, Park Lane no. ${i}`
-  })
-}
+const data = Array.apply(null, { length: 46 }).map((_, index) => ({
+  name: `Edward King ${index}`,
+  age: 32,
+  address: `London, Park Lane no. ${index}`
+}))
+
 
 export default {
   data() {
     return {
-      data: data,
+      data,
       columns,
-      selectedData: []
-    }
-  },
-  computed: {
-    pagination() {
-      return { pageSize: 10 }
+      pagination: {
+        pageSize: 15
+      }
     }
   },
   methods: {
-    sendMail(rowData) {
-      this.$NMessage.info("send mail to " + rowData.name)
-    },
-    onSelectedChange(selectedData) {
-      this.selectedData = selectedData
+    sendMail (rowData) {
+      this.$NMessage.info('send mail to ' + rowData.name)
     }
   }
 }
