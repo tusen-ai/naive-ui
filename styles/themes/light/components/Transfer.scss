@@ -1,6 +1,6 @@
 @mixin setup-light-transfer {
   $--transfer-list-background-color: (
-    'default': $--n-background-color
+    'default': $--n-card-color
   ) !global;
   $--transfer-list-header-background-color: (
     'default': $--n-table-header-color
