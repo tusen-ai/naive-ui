@@ -47,8 +47,8 @@ const columns = [
         value: 'New York'
       }
     ],
-    filter (value, record) {
-      return record.address.indexOf(value) >= 0
+    filter (value, row) {
+      return row.address.indexOf(value) >= 0
     }
   }
 ]

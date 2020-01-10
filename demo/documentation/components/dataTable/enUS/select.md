@@ -18,51 +18,45 @@ You have selected {{ selectedRows.length }} row{{ selectedRows.length < 2 ? '': 
 ```js
 const columns = [
   {
-    type: "selection",
-    disabled(params, index) {
-      return params.name === "Edward King 3"
+    type: 'selection',
+    disabled (row, index) {
+      return row.name === 'Edward King 3'
     }
   },
   {
-    title: "Name",
-    key: "name"
+    title: 'Name',
+    key: 'name'
   },
   {
-    title: "Age",
-    key: "age"
+    title: 'Age',
+    key: 'age'
   },
   {
-    title: "Address",
-    key: "address"
+    title: 'Address',
+    key: 'address'
   }
 ]
 
-const data = []
-for (let i = 0; i < 46; i++) {
-  data.push({
-    key: i,
-    name: `Edward King ${i}`,
-    age: 32,
-    address: `London, Park Lane no. ${i}`
-  })
-}
+const data = Array.apply(null, { length: 46 }).map((_, index) => ({
+  name: `Edward King ${index}`,
+  age: 32,
+  address: `London, Park Lane no. ${index}`
+}))
 
 export default {
   data() {
     return {
       data,
       columns,
-      selectedRows: []
-    }
-  },
-  computed: {
-    pagination() {
-      return { total: this.data.length, pageSize: 5 }
+      selectedRows: [],
+      pagination: {
+        pageSize: 5
+      }
     }
   },
   methods: {
     sendMail(rowData) {
-      this.$NMessage.info("send mail to " + rowData.name)
+      this.$NMessage.info('send mail to ' + rowData.name)
     },
     handleSelect (rows) {
       this.selectedRows = rows

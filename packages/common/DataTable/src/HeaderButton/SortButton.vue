@@ -59,9 +59,6 @@ export default {
         return this.activeSorter.order
       }
       return false
-    },
-    synthesizedColumnSorter () {
-      return this.column.sorter || null
     }
   }
 }

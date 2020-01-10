@@ -1,4 +1,4 @@
-# Async Filter Options
+# Async Filter Options (to be deprecated)
 ```html
 <n-data-table
   ref="table"
@@ -14,12 +14,12 @@ const createFilterOptions = () => {
     setTimeout(() => {
       resolve([
         {
-          label: "London",
-          value: "London"
+          label: 'London',
+          value: 'London'
         },
         {
-          label: "New York",
-          value: "New York"
+          label: 'New York',
+          value: 'New York'
         }
       ])
     }, 10000)
@@ -28,19 +28,16 @@ const createFilterOptions = () => {
 
 const columns = [
   {
-    title: "Name",
-    key: "name"
+    title: 'Name',
+    key: 'name'
   },
   {
-    title: "Age",
-    key: "age",
-    defaultSortOrder: "ascend"
+    title: 'Age',
+    key: 'age'
   },
   {
-    title: "Address",
-    key: "address",
-    filterable: true,
-    defaultFilter: "London",
+    title: 'Address',
+    key: 'address',
     asyncFilterOptions() {
       return createFilterOptions().then(list => {
         return list
@@ -54,28 +51,28 @@ const columns = [
 
 const data = [
   {
-    key: "1",
-    name: "John Brown",
+    key: '1',
+    name: 'John Brown',
     age: 32,
-    address: "New York No. 1 Lake Park"
+    address: 'New York No. 1 Lake Park'
   },
   {
-    key: "2",
-    name: "Jim Green",
+    key: '2',
+    name: 'Jim Green',
     age: 42,
-    address: "London No. 1 Lake Park"
+    address: 'London No. 1 Lake Park'
   },
   {
-    key: "3",
-    name: "Joe Black",
+    key: '3',
+    name: 'Joe Black',
     age: 32,
-    address: "Sidney No. 1 Lake Park"
+    address: 'Sidney No. 1 Lake Park'
   },
   {
-    key: "4",
-    name: "Jim Red",
+    key: '4',
+    name: 'Jim Red',
     age: 32,
-    address: "London No. 2 Lake Park"
+    address: 'London No. 2 Lake Park'
   }
 ]
 export default {
