@@ -26,7 +26,7 @@
             round
             @click="handleNegativeClick"
           >
-            {{ translatedNegativeText }}
+            {{ localizedNegativeText }}
           </n-button>
           <n-button
             round
@@ -34,7 +34,7 @@
             type="primary"
             @click="handlePositiveClick"
           >
-            {{ translatedPositiveText }}
+            {{ localizedPositiveText }}
           </n-button>
         </slot>
       </div>
@@ -80,11 +80,11 @@ export default {
     }
   },
   computed: {
-    translatedPositiveText () {
-      return this.t('positiveText') || this.positiveText
+    localizedPositiveText () {
+      return this.t('Popconfirm', 'positiveText') || this.positiveText
     },
-    translatedNegativeText () {
-      return this.t('negativeText') || this.negativeText
+    localizedNegativeText () {
+      return this.t('Popconfirm', 'negativeText') || this.negativeText
     }
   },
   methods: {
