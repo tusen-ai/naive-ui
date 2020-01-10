@@ -81,7 +81,7 @@
           round
           @click="clearValue"
         >
-          Clear
+          {{ localeNamespace.clear }}
         </n-button>
         <n-button
           v-if="actions.includes('now')"
@@ -89,7 +89,7 @@
           round
           @click="setSelectedDateTimeToNow"
         >
-          Now
+          {{ localeNamespace.now }}
         </n-button>
         <n-button
           v-if="actions.includes('confirm')"
@@ -100,7 +100,7 @@
           :disabled="isDateInvalid"
           @click="handleConfirmClick"
         >
-          Confirm
+          {{ localeNamespace.confirm }}
         </n-button>
       </div>
       <focus-detector @focus="handleBlur" />
@@ -119,8 +119,6 @@ const DATETIME_FORMAT = 'yyyy-MM-dd HH:mm:ss'
 const DATE_FORMAT = 'yyyy-MM-dd'
 const DATE_VALIDATE_FORMAT = ['YYYY-MM-DD', 'YYYY-MM-D', 'YYYY-M-D', 'YYYY-M-DD']
 
-const PLACEHOLDER = 'Select date and time'
-
 export default {
   components: {
     NButton,
@@ -128,10 +126,6 @@ export default {
   },
   mixins: [uniCalendarMixin],
   props: {
-    placeholder: {
-      type: String,
-      default: PLACEHOLDER
-    },
     format: {
       type: String,
       default: DATETIME_FORMAT

@@ -18,7 +18,7 @@
       :lazy-focus="true"
       :disabled="disabled"
       :value="[displayStartTime, displayEndTime]"
-      :placeholder="[computedStartPlaceholder, computedEndPlaceholder]"
+      :placeholder="[localizedStartPlaceholder, localizedEndPlaceholder]"
       :readonly="disabled ? 'disabled' : false"
       :seperator="seperator"
       :force-focus="active"
@@ -40,7 +40,7 @@
       :force-focus="active"
       :disabled="disabled"
       :lazy-focus="true"
-      :placeholder="computedPlaceholder"
+      :placeholder="localizedPlacehoder"
       :readonly="disabled ? 'disabled' : false"
       @click="handleActivatorClick"
       @focus="handleFocus"
@@ -129,7 +129,7 @@ import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import asformitem from '../../../mixins/asformitem'
 import clickoutside from '../../../directives/clickoutside'
-
+import locale from '../../../mixins/locale'
 import DatetimePanel from './panel/datetime'
 import DatetimerangePanel from './panel/datetimerange'
 import DatePanel from './panel/date'
@@ -161,14 +161,6 @@ const PLACEHOLDER = {
   date: 'Select date',
   datetime: 'Select date and time'
 }
-const START_PLACEHOLDER = {
-  datetimerange: 'Start date and time',
-  daterange: 'Start date'
-}
-const END_PLACEHOLDER = {
-  datetimerange: 'End date and time',
-  daterange: 'End date'
-}
 
 export default {
   name: 'NDatePicker',
@@ -195,6 +187,7 @@ export default {
     detachable,
     placeable,
     zindexable,
+    locale,
     asformitem()
   ],
   props: {
@@ -280,26 +273,44 @@ export default {
     }
   },
   computed: {
+    localeNamespace () {
+      return this.tns('DatePicker')
+    },
     isRange () {
       return ['daterange', 'datetimerange'].includes(this.type)
     },
-    computedPlaceholder () {
+    localizedPlacehoder () {
       if (this.placeholder === null) {
-        return PLACEHOLDER[this.type]
+        if (this.type === 'date') {
+          return this.localeNamespace.datePlaceholder
+        } else if (this.type === 'datetime') {
+          return this.localeNamespace.datetimePlaceholder
+        }
+        return this.placeholder
       } else {
         return this.placeholder
       }
     },
-    computedStartPlaceholder () {
-      if (this.placeholder === null) {
-        return START_PLACEHOLDER[this.type]
+    localizedStartPlaceholder () {
+      if (this.startPlaceholder === null) {
+        if (this.type === 'daterange') {
+          return this.localeNamespace.startDatePlaceholder
+        } else if (this.type === 'datetimerange') {
+          return this.localeNamespace.startDatetimePlaceholder
+        }
+        return this.startPlaceholder
       } else {
         return this.startPlaceholder
       }
     },
-    computedEndPlaceholder () {
-      if (this.placeholder === null) {
-        return END_PLACEHOLDER[this.type]
+    localizedEndPlaceholder () {
+      if (this.endPlaceholder === null) {
+        if (this.type === 'daterange') {
+          return this.localeNamespace.endDatePlaceholder
+        } else if (this.type === 'datetimerange') {
+          return this.localeNamespace.endDatetimePlaceholder
+        }
+        return this.endPlaceholder
       } else {
         return this.endPlaceholder
       }
