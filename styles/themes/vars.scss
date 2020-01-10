@@ -408,6 +408,7 @@ $--n-ease-in-out-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
     opacity: 1;
   }
   &.#{$namespace}-#{$block}-enter {
+    max-width: 0;
     margin-left: 0 !important;
     margin-right: 0 !important;
     opacity: 0!important;
@@ -416,6 +417,7 @@ $--n-ease-in-out-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
     opacity: 1;
   }
   &.#{$namespace}-#{$block}-leave-to {
+    max-width: 0 !important;
     opacity: 0 !important;
     margin-left: 0 !important;
     margin-right: 0 !important;

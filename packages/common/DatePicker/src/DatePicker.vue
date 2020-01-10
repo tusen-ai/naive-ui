@@ -157,10 +157,6 @@ const DATE_VALIDATE_FORMAT = {
   daterange: ['yyyy-MM-dd', 'yyyy-MM-D', 'yyyy-M-D', 'yyyy-M-dd'],
   datetimerange: ['yyyy-MM-dd HH:mm:ss', 'yyyy-MM-D HH:mm:ss', 'yyyy-M-D HH:mm:ss', 'yyyy-M-dd HH:mm:ss']
 }
-const PLACEHOLDER = {
-  date: 'Select date',
-  datetime: 'Select date and time'
-}
 
 export default {
   name: 'NDatePicker',
