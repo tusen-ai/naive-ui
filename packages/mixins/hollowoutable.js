@@ -1,77 +1,51 @@
-function getTransitionTimingFunctions (transitionTimingFunction) {
-  return transitionTimingFunction.replace(/([^\d]),/g, '$1#').split('# ')
+function createStyleObject (computedStyle) {
+  const style = {}
+  const length = computedStyle.length
+  for (let index = 0; index < length; ++index) {
+    const key = computedStyle[index]
+    if (~key.indexOf('ransition')) continue
+    style[key] = computedStyle[key]
+  }
+  return style
 }
 
-function getTransition (computedStyle) {
-  const transitionProperties = computedStyle.transitionProperty.split(', ')
-  const transitionDurations = computedStyle.transitionDuration.split(', ')
-  const transitionTimingFunctions = getTransitionTimingFunctions(computedStyle.transitionTimingFunction)
-  const transitionDelays = computedStyle.transitionDelay.split(', ')
-  const indexOfBackgroundColorTransition = transitionProperties.findIndex(property => property === 'background-color')
-  const indexOfAllTransition = transitionProperties.findIndex(property => property === 'all')
-  if (~indexOfBackgroundColorTransition) {
-    const duration = transitionDurations[indexOfBackgroundColorTransition]
-    if (!duration) {
-      return {
-        backgroundColorTransitioned: false
-      }
+function createDiffedStyleObject (style, computedStyle) {
+  const diffedStyle = {}
+  for (const key of Object.keys(style)) {
+    if (~key.indexOf('ransition')) continue
+    if (computedStyle[key] !== style[key]) {
+      diffedStyle[key] = style[key]
     }
   }
-  if (~indexOfAllTransition) {
-    const duration = transitionDurations[indexOfAllTransition]
-    if (!duration) {
-      return {
-        backgroundColorTransitioned: false
-      }
-    } else {
-      return {
-        allTransitioned: true,
-        transitionWithoutBackgroundColor: 'none'
-      }
-    }
-  }
-  const transitionWithoutBackgroundColor = transitionProperties.map((prop, i) => (prop === 'background-color' ? null : [
-    transitionProperties[i],
-    transitionDurations[i],
-    transitionTimingFunctions[i],
-    transitionDelays[i]
-  ].join(' '))).filter(v => v !== null).join(', ') || 'none'
-  return {
-    backgroundColorTransitioned: true,
-    transitionWithoutBackgroundColor
-  }
+  return diffedStyle
 }
 
 function getNextBackgroundColorOf (el) {
   const computedStyle = window.getComputedStyle(el)
-  const prevBackgroundColor = computedStyle.backgroundColor
-  const {
-    allTransitioned,
-    backgroundColorTransitioned,
-    transitionWithoutBackgroundColor
-  } = getTransition(computedStyle)
-  if (!backgroundColorTransitioned && !allTransitioned) {
-    return prevBackgroundColor
-  }
-  if (allTransitioned) {
-    console.warn(`[naive-ui/hollowoutable]: 
-background-color of`, el, `is transitioned by \`all\` property,
-naive-ui can't read read all potential transition properties in this case.
-When theme is changed it may cause losing some transition on it beside background-color transition.
-To be avoid of this issue, specified all potential transition property explicitly.`)
-  }
+  const prevStyle = createStyleObject(computedStyle)
   const memorizedTransition = el.style.transition
   const memorizedBackgroundColor = el.style.backgroundColor
-  el.style.transition = transitionWithoutBackgroundColor
+  el.style.transition = 'none'
   const nextBackgroundColor = computedStyle.backgroundColor
-  el.style.backgroundColor = prevBackgroundColor
+  const diffedStyle = createDiffedStyleObject(prevStyle, computedStyle)
+  const memorizedInlineStyle = {}
+  for (const key of Object.keys(diffedStyle)) {
+    if (~key.indexOf('ransition')) continue
+    memorizedInlineStyle[key] = el.style[key]
+    el.style[key] = diffedStyle[key]
+  }
   void (el.offsetHeight)
+  for (const key of Object.keys(diffedStyle)) {
+    if (~key.indexOf('ransition')) continue
+    el.style[key] = memorizedInlineStyle[key]
+  }
   el.style.transition = memorizedTransition
   el.style.backgroundColor = memorizedBackgroundColor
   return nextBackgroundColor
 }
 
 let cachedNextBackgroundColor = null
+let cachedCSSStyleDeclaration = new WeakMap()
 let callCount = 0
 
 function cache () {
@@ -111,7 +85,15 @@ export default {
       let cursor = this.$el
       while (cursor.parentElement) {
         cursor = cursor.parentElement
-        const backgroundColor = window.getComputedStyle(cursor).backgroundColor
+        let backgroundColor = null
+        let CSSStyleDeclaration = cachedCSSStyleDeclaration.get(cursor)
+        if (CSSStyleDeclaration) {
+          backgroundColor = CSSStyleDeclaration.backgroundColor
+        } else {
+          CSSStyleDeclaration = window.getComputedStyle(cursor)
+          cachedCSSStyleDeclaration.set(cursor, CSSStyleDeclaration)
+          backgroundColor = CSSStyleDeclaration.backgroundColor
+        }
         if (backgroundColor && backgroundColor !== 'rgba(0, 0, 0, 0)') {
           if (cachedNextBackgroundColor) {
             const nextBackgroundColor = cachedNextBackgroundColor.get(cursor)
