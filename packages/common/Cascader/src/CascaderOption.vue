@@ -97,7 +97,7 @@ export default {
       required: true
     },
     value: {
-      validator: () => true,
+      type: [Number, String],
       default: null
     },
     active: {

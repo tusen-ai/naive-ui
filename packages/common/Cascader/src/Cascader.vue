@@ -44,44 +44,48 @@
         [namespace]: namespace
       }"
     >
-      <div
-        ref="content"
-        class="n-detached-content"
-      >
-        <transition name="n-cascader-menu--transition">
-          <cascader-menu
-            v-if="active"
-            ref="menu"
-            v-clickoutside="handleMenuClickOutside"
-            :class="{
-              [`n-${synthesizedTheme}-theme`]: synthesizedTheme
-            }"
-            :value="value"
-            :multiple="multiple"
-            :options="patchedOptions"
-            :enable-all-options="enableAllOptions"
-            :pattern="pattern"
-            :filterable="filterable"
-            :filter="filter"
-            :expand-trigger="expandTrigger"
-            :active-id.sync="activeId"
-            :lazy="lazy"
-            :on-load="onLoad"
-            :patches.sync="patches"
-            :loading.sync="loading"
-            :loading-id.sync="loadingId"
-            @input="handleMenuInput"
-          />
-        </transition>
-      </div>
+      <n-base-portal ref="portal1">
+        <cascader-menu
+          ref="menu"
+          v-clickoutside="handleMenuClickOutside"
+          :active="active && !selectMenuActive"
+          :class="{
+            [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+          }"
+          :value="value"
+          :multiple="multiple"
+          :options="menuOptions"
+          :pattern="pattern"
+          :filterable="filterable"
+          :expand-trigger="expandTrigger"
+          :active-id.sync="activeId"
+          :lazy="lazy"
+          :on-load="onLoad"
+          :patches.sync="patches"
+          :loading.sync="loading"
+          :loading-id.sync="loadingId"
+          :theme="synthesizedTheme"
+          @input="handleMenuInput"
+        />
+      </n-base-portal>
+      <n-base-portal ref="portal2">
+        <cascader-select-menu
+          :value="value"
+          :active="active && selectMenuActive"
+          :theme="synthesizedTheme"
+          :pattern="pattern"
+          :size="size"
+          :multiple="multiple"
+          :options="menuOptions"
+          @input="handleMenuInput"
+        />
+      </n-base-portal>
     </div>
   </div>
 </template>
 
 <script>
 import NBasePicker from '../../../base/Picker'
-import detachable from '../../../mixins/detachable'
-import placeable from '../../../mixins/placeable'
 import toggleable from '../../../mixins/toggleable'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
@@ -89,17 +93,23 @@ import clickoutside from '../../../directives/clickoutside'
 import CascaderMenu from './CascaderMenu'
 import { getType, traverseWithCallback } from './utils'
 import asformitem from '../../../mixins/asformitem'
+import NBasePortal from '../../../base/Portal'
+import CascaderSelectMenu from './CascaderSelectMenu'
 
 import {
   rootedOptions,
-  patchedOptions
+  patchedOptions,
+  linkedCascaderOptions,
+  menuOptions
 } from '../../../utils/data/menuModel'
 
 export default {
   name: 'NBaseCascader',
   components: {
     CascaderMenu,
-    NBasePicker
+    CascaderSelectMenu,
+    NBasePicker,
+    NBasePortal
   },
   provide () {
     return {
@@ -109,7 +119,7 @@ export default {
   directives: {
     clickoutside
   },
-  mixins: [withapp, themeable, detachable, toggleable, placeable, asformitem()],
+  mixins: [withapp, themeable, toggleable, asformitem()],
   props: {
     options: {
       type: Array,
@@ -187,6 +197,9 @@ export default {
   },
   computed: {
     type: getType,
+    selectMenuActive () {
+      return !!(this.filterable && this.pattern && this.pattern.trim().length)
+    },
     rootedOptions () {
       return rootedOptions(this.options)
     },
@@ -196,6 +209,12 @@ export default {
        * options.
        */
       return patchedOptions(this.rootedOptions, this.patches)
+    },
+    linkedCascaderOptions () {
+      return linkedCascaderOptions(this.patchedOptions, this.type)
+    },
+    menuOptions () {
+      return menuOptions(this.linkedCascaderOptions, this.value, this.type)
     },
     selectedOptions () {
       if (this.multiple) {
@@ -244,24 +263,19 @@ export default {
     }
   },
   watch: {
+    active () {
+      if (this.$refs.portal1) {
+        this.$refs.portal1.transferElement()
+      }
+      if (this.$refs.portal2) {
+        this.$refs.portal2.transferElement()
+      }
+    },
     patches () {
       console.log('patched updated!')
     },
     options () {
       this.activeId = null
-    },
-    pattern () {
-      this.handlePatternChange()
-    },
-    selectedOptions () {
-      this.$nextTick().then(() => {
-        this.updatePosition()
-      })
-    },
-    selectedOption () {
-      this.$nextTick().then(() => {
-        this.updatePosition()
-      })
     }
   },
   methods: {
@@ -377,13 +391,6 @@ export default {
         this.$emit('input', null)
       }
       this.$el.focus()
-    },
-    handlePatternChange () {
-      this.$nextTick().then(() => {
-        this.updatePosition(undefined, undefined, {
-          horizontal: true
-        })
-      })
     },
     /**
      * Important for blur input state!

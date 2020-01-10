@@ -262,7 +262,12 @@ function linkedCascaderOptions (options, type) {
     const length = items.length
     for (let i = 0; i < length; ++i) {
       const option = items[i]
-      if (depth > 0) path.push(option.label)
+      if (depth > 0) {
+        path.push({
+          value: option.value,
+          label: option.label
+        })
+      }
       /**
        * option.type determine option ui status
        */
@@ -276,7 +281,7 @@ function linkedCascaderOptions (options, type) {
        */
       option.depth = depth
       /**
-       * options.id to suport track option
+       * options.id to support track option
        */
       option.id = `${parentId}_${i + 1}`
       /**

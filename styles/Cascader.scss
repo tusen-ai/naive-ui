@@ -3,152 +3,50 @@
 @import './themes/vars.scss';
 
 
-[n-suggested-transform-origin="bottom left"] {
-  .n-cascader-select-menu--transition-leave {
-    left: 0;
-    bottom: 0;
-    position: absolute;
-  }
-  .n-cascader-select-menu--transition-leave-active {
-    left: 0;
-    bottom: 0;
-    position: absolute;
-  }
-  .n-cascader-cascader-menu--transition-leave {
-    left: 0;
-    bottom: 0;
-    position: absolute;
-  }
-  .n-cascader-cascader-menu--transition-leave-active {
-    left: 0;
-    bottom: 0;
-    position: absolute;
-  }
-}
-
-[n-suggested-transform-origin="bottom right"] {
-  .n-cascader-select-menu--transition-leave {
-    right: 0;
-    bottom: 0;
-    position: absolute;
-  }
-  .n-cascader-select-menu--transition-leave-active {
-    right: 0;
-    bottom: 0;
-    position: absolute;
-  }
-  .n-cascader-cascader-menu--transition-leave {
-    right: 0;
-    bottom: 0;
-    position: absolute;
-  }
-  .n-cascader-cascader-menu--transition-leave-active {
-    right: 0;
-    bottom: 0;
-    position: absolute;
-  }
-}
-
-[n-suggested-transform-origin="top left"] {
-  .n-cascader-select-menu--transition-leave {
-    left: 0;
-    top: 0;
-    position: absolute;
-  }
-  .n-cascader-select-menu--transition-leave-active {
-    left: 0;
-    top: 0;
-    position: absolute;
-  }
-  .n-cascader-cascader-menu--transition-leave {
-    left: 0;
-    top: 0;
-    position: absolute;
-  }
-  .n-cascader-cascader-menu--transition-leave-active {
-    left: 0;
-    top: 0;
-    position: absolute;
-  }
-}
-
-[n-suggested-transform-origin="top right"] {
-  .n-cascader-select-menu--transition-leave {
-    right: 0;
-    top: 0;
-    position: absolute;
-  }
-  .n-cascader-select-menu--transition-leave-active {
-    right: 0;
-    top: 0;
-    position: absolute;
-  }
-  .n-cascader-cascader-menu--transition-leave {
-    right: 0;
-    top: 0;
-    position: absolute;
-  }
-  .n-cascader-cascader-menu--transition-leave-active {
-    right: 0;
-    top: 0;
-    position: absolute;
-  }
-}
-
 @include themes-mixin {
   @include b(cascader) {
     @include once {
       width: 100%;
     }
   }
-  @include b(cascader-detached-content-container) {
+  @include b(cascader-menu-wrapper) {
     @include once {
-      transform: translateZ(0);
+      @include fade-in-scale-up-transition(cascader-menu, inherit, .2s);
+    }
+    @include b(base-select-menu) {
+      box-shadow: none;
     }
   }
   @include b(cascader-menu) {
     @include once {
-      @include fade-in-scale-up-transition(cascader-menu, inherit, .2s);
-      transform-origin: inherit;
-      position: relative;
-      margin-top: 4px;
-      margin-bottom: 4px;
-      @include b(cascader-select-menu) {
-        @include fade-in-scale-up-transition(cascader-select-menu, inherit, .2s);
-        margin: 0;
-      }
+      display: flex;
+      flex-wrap: nowrap;
+      border-radius: 6px;
+      @include fade-in-scale-up-transition(cascader-cascader-menu, inherit, .2s);
     }
-    @include b(cascader-cascader-menu) {
+    box-shadow: $--cascader-menu-box-shadow;
+    @include b(cascader-submenu) {
       @include once {
-        display: flex;
-        flex-wrap: nowrap;
-        border-radius: 6px;
-        @include fade-in-scale-up-transition(cascader-cascader-menu, inherit, .2s);
-      }
-      box-shadow: $--cascader-menu-box-shadow;
-      @include b(cascader-submenu) {
-        @include once {
+        position: relative;
+        overflow: hidden;
+        min-width: 182px;
+        height: 204px;
+        @include b(scrollbar-content) {
           position: relative;
-          overflow: hidden;
-          min-width: 182px;
-          height: 204px;
-          @include b(scrollbar-content) {
-            position: relative;
-          }
-          &:first-child {
-            border-top-left-radius: 6px;
-            border-bottom-left-radius: 6px;
-          }
-          &:last-child {
-            border-top-right-radius: 6px;
-            border-bottom-right-radius: 6px;
-          }
         }
-        &:not(:first-child) {
-          border-left: 1px solid $--cascader-menu-border-color;
+        &:first-child {
+          border-top-left-radius: 6px;
+          border-bottom-left-radius: 6px;
         }
-        background-color: $--cascader-menu-background-color;
+        &:last-child {
+          border-top-right-radius: 6px;
+          border-bottom-right-radius: 6px;
+        }
       }
+      &:not(:first-child) {
+        border-left: 1px solid $--cascader-menu-border-color;
+      }
+      background-color: $--cascader-menu-background-color;
     }
     @include b(cascader-option) {
       @include once {
@@ -298,6 +196,6 @@
         }
         background-color: $--cascader-menu-lightbar-background-color;
       }
-    }  
+    }
   }
 }

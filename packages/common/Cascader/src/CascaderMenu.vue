@@ -1,44 +1,31 @@
 <template>
   <div
-    class="n-cascader-menu"
-    :class="{
-      'n-cascader-menu--masked': masked
-    }"
-    @mousedown.prevent="() => {}"
+    class="n-detached-content"
   >
-    <transition name="n-cascader-cascader-menu--transition">
-      <div
-        v-if="!selectMenuActive"
-        class="n-cascader-cascader-menu"
-      >
-        <n-cascader-submenu
-          v-for="(submenuOptions, index) in menuModel"
-          :key="index"
-          :size="size"
-          :options="submenuOptions"
-          :depth="index + 1"
-          :menu-is-loading="loading"
-          @option-click="handleOptionClick"
-          @option-mouseenter="handleOptionMouseEnter"
-          @option-mouseleave="handleOptionMouseLeave"
-          @option-check="handleCascaderOptionCheck"
-        />
+    <transition name="n-cascader-menu--transition">
+      <div v-if="active" ref="content" class="n-cascader-menu-wrapper">
+        <div
+          class="n-cascader-menu"
+          :class="{
+            [`n-${theme}-theme`]: theme,
+            'n-cascader-menu--masked': masked
+          }"
+          @mousedown.prevent="() => {}"
+        >
+          <n-cascader-submenu
+            v-for="(submenuOptions, index) in menuModel"
+            :key="index"
+            :size="size"
+            :options="submenuOptions"
+            :depth="index + 1"
+            :menu-is-loading="loading"
+            @option-click="handleOptionClick"
+            @option-mouseenter="handleOptionMouseEnter"
+            @option-mouseleave="handleOptionMouseLeave"
+            @option-check="handleCascaderOptionCheck"
+          />
+        </div>
       </div>
-    </transition>
-    <transition name="n-cascader-select-menu--transition">
-      <n-base-select-menu
-        v-if="selectMenuActive"
-        ref="selectMenu"
-        :theme="NCascader.synthesizedTheme"
-        class="n-cascader-select-menu"
-        filterable
-        :pattern="pattern"
-        :options="filteredSelectOptions"
-        :multiple="multiple"
-        :size="size"
-        :is-selected="isSelected"
-        @menu-toggle-option="handleSelectMenuToggleOption"
-      />
     </transition>
     <n-base-menu-mask
       ref="mask"
@@ -49,14 +36,13 @@
 </template>
 <script>
 import NBaseMenuMask from '../../../base/MenuMask'
-import NBaseSelectMenu from '../../../base/SelectMenu'
 import NCascaderSubmenu from './CascaderSubmenu'
-import { getType, traverseWithCallback, minus, merge } from './utils'
+import placeable from '../../../mixins/placeable'
+import { getType, minus, merge, getPickerElement } from './utils'
+import zindexable from '../../../mixins/zindexable'
 
 import {
   firstOptionId,
-  linkedCascaderOptions,
-  menuOptions,
   menuModel
 } from '../../../utils/data/menuModel'
 
@@ -69,10 +55,18 @@ export default {
   },
   components: {
     NCascaderSubmenu,
-    NBaseSelectMenu,
     NBaseMenuMask
   },
+  mixins: [ placeable, zindexable ],
   props: {
+    placement: {
+      type: String,
+      default: 'bottom-start'
+    },
+    active: {
+      type: Boolean,
+      default: false
+    },
     size: {
       type: String,
       default: 'medium'
@@ -89,19 +83,11 @@ export default {
       validator: () => true,
       default: null
     },
-    activeValue: {
-      validator: () => true,
-      default: null
-    },
     options: {
       type: Array,
       required: true
     },
     multiple: {
-      type: Boolean,
-      default: false
-    },
-    enableAllOptions: {
       type: Boolean,
       default: false
     },
@@ -135,8 +121,8 @@ export default {
       type: Function,
       default: () => {}
     },
-    filter: {
-      type: [String, Function],
+    theme: {
+      type: String,
       default: null
     }
   },
@@ -157,14 +143,8 @@ export default {
     expandTriggeredByClick () {
       return this.expandTrigger === 'click'
     },
-    linkedCascaderOptions () {
-      return linkedCascaderOptions(this.options, this.type)
-    },
-    menuOptions () {
-      return menuOptions(this.linkedCascaderOptions, this.value, this.type)
-    },
     menuModel () {
-      return menuModel(this.menuOptions, this.activeId, this.trackId, this.loadingId)
+      return menuModel(this.options, this.activeId, this.trackId, this.loadingId)
     },
     firstCascaderOption () {
       if (this.menuModel && this.menuModel[0] && this.menuModel[0][0]) {
@@ -183,65 +163,14 @@ export default {
       return idOptionMap
     },
     firstOptionId () {
-      return firstOptionId(this.menuOptions)
-    },
-    /**
-     * filterable related attributes
-     */
-    selectMenuActive () {
-      return this.filterable && this.pattern && this.pattern.trim().length
-    },
-    filteredSelectOptions () {
-      const filteredSelectOptions = []
-      const type = this.type
-      traverseWithCallback(this.menuOptions, option => {
-        let flag = false
-        if (this.filter && option.label) {
-          let path = option.path.map((item) => {
-            return {
-              label: item,
-              value: item
-            }
-          })
-          flag = this.filter(this.pattern, { label: option.label, value: option.value }, path)
-        } else {
-          flag = option.path.some(
-            label => ~label.indexOf(this.pattern)
-          )
-        }
-        if (Array.isArray(option.path) && flag) {
-          if (type === 'multiple' || type === 'single') {
-            // console.log()
-            if (option.isLeaf) {
-              filteredSelectOptions.push({
-                value: option.value,
-                label: option.path.join(' / ')
-              })
-            }
-          } else {
-            filteredSelectOptions.push({
-              value: option.value,
-              label: option.path.join(' / ')
-            })
-          }
-        }
-      })
-      return filteredSelectOptions
-    },
-    valueSet () {
-      return new Set(this.value)
+      return firstOptionId(this.options)
     }
   },
   watch: {
     menuModel () {
       this.$nextTick().then(() => {
         // console.log('menu model')
-        this.$parent.updatePosition()
-      })
-    },
-    selectMenuActive (selectMenuActive) {
-      this.$nextTick().then(() => {
-        this.handleMenuTypeChange(selectMenuActive)
+        this.updatePosition()
       })
     },
     activeId (id) {
@@ -275,11 +204,11 @@ export default {
   },
   mounted () {
     if (this.lazy && !this.options[0].children) {
-      const option = this.menuOptions[0]
+      const option = this.options[0]
       if (!this.loading) {
         this.updateLoadingStatus(true)
         this.$refs.mask.show(`Loading`)
-        this.onLoad(option, (children) => this.$parent.resolveLoad(option, children, () => {
+        this.onLoad(option, (children) => this.NCascader.resolveLoad(option, children, () => {
           this.hideMask()
         }), () => this.rejectLoad(() => {
           this.hideMask()
@@ -288,21 +217,16 @@ export default {
     }
   },
   methods: {
+    getZindexableContent () {
+      return this.$el
+    },
+    getTrackedElement () {
+      return getPickerElement(this)
+    },
     hideMask () {
       if (this.$refs.mask) {
         this.$refs.mask.hide()
       }
-    },
-    isSelected (option) {
-      if (this.multiple) {
-        return this.valueSet.has(option.value)
-      } else {
-        return this.value === option.value
-      }
-    },
-    handleSelectMenuToggleOption (option) {
-      // console.log('handleSelectMenuToggleOption', option)
-      this.handleSelectOptionCheck(option)
     },
     optionPath (optionId) {
       const path = []
@@ -347,7 +271,7 @@ export default {
           if (!this.loading) {
             this.updateLoadingStatus(true)
             this.updateLoadingId(option.id)
-            this.onLoad(option, (children) => this.$parent.resolveLoad(option, children), () => this.rejectLoad())
+            this.onLoad(option, (children) => this.NCascader.resolveLoad(option, children), () => this.rejectLoad())
           }
         }
       }
@@ -359,46 +283,6 @@ export default {
         if (option.isLeaf) {
           this.handleCascaderOptionCheck(option.id)
         }
-      }
-    },
-    handleMenuTypeChange (typeisSelect) {
-      this.$nextTick().then(() => {
-        this.typeIsSelect = typeisSelect
-        if (typeisSelect) {
-          const element = this.$refs.selectMenu.$el
-          this.$parent.updatePosition(
-            element,
-            (el, activatorRect) => {
-              el.style.minWidth = activatorRect.width + 'px'
-            },
-            {
-              horizontal: true
-            }
-          )
-        } else {
-          this.$parent.updatePosition()
-        }
-      })
-    },
-    handleSelectOptionCheck (option) {
-      if (option.disabled) return
-      if (this.type === 'multiple' || this.type === 'multiple-all-options') {
-        if (Array.isArray(this.value)) {
-          const index = this.value.findIndex(v => v === option.value)
-          if (~index) {
-            const newValue = this.value
-            newValue.splice(index, 1)
-            this.$emit('input', newValue)
-          } else {
-            const newValue = this.value
-            newValue.push(option.value)
-            this.$emit('input', newValue)
-          }
-        } else {
-          this.$emit('input', [option.value])
-        }
-      } else {
-        this.$emit('input', option.value)
       }
     },
     handleCascaderOptionCheck (optionId) {
@@ -491,17 +375,10 @@ export default {
             this.updateActiveId(this.firstOptionId)
           }
         }
-      } else if (this.typeIsSelect) {
-        // console.log('prev: search menu')
-        const selectMenu = this.$refs.selectMenu
-        if (selectMenu) {
-          selectMenu.prev()
-        }
       }
     },
     next () {
       if (!this.filterable || (this.filterable && !this.pattern.length)) {
-        // console.log('next: cascader menu')
         if (this.trackId) {
           const option = this.idOptionMap.get(this.trackId)
           if (option && option.nextAvailableSiblingId) {
@@ -515,24 +392,10 @@ export default {
             this.updateActiveId(this.firstOptionId)
           }
         }
-      } else if (this.typeIsSelect) {
-        // console.log('next: search menu')
-        const selectMenu = this.$refs.selectMenu
-        if (selectMenu) {
-          selectMenu.next()
-        }
       }
     },
     enter () {
-      if (this.typeIsSelect) {
-        const selectMenu = this.$refs.selectMenu
-        if (selectMenu) {
-          const pendingOption = selectMenu.pendingOption
-          // console.log(pendingOption)
-          this.handleSelectOptionCheck(pendingOption)
-          return true
-        }
-      } else if (this.trackId) {
+      if (this.trackId) {
         this.handleCascaderOptionCheck(this.trackId)
         return true
       }
