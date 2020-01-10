@@ -19,12 +19,13 @@
           :class="{
             'n-date-panel-date-input--invalid': isStartValueInvalid
           }"
-          placeholder="Select date"
+          :placeholder="localeNamespace.selectDate"
           @blur="handleStartDateInputBlur"
           @input="handleStartDateInput"
         />
         <n-time-picker
           :detached="false"
+          :placeholder="localeNamespace.selectTime"
           position-mode="absolute"
           :value="startTimeValue"
           :is-hour-disabled="isStartHourDisabled"
@@ -44,12 +45,13 @@
           :class="{
             'n-date-panel-date-input--invalid': isEndValueInvalid
           }"
-          placeholder="Select date"
+          :placeholder="localeNamespace.selectDate"
           @blur="handleEndDateInputBlur"
           @input="handleEndDateInput"
         />
         <n-time-picker
           :detached="false"
+          :placeholder="localeNamespace.selectTime"
           position-mode="absolute"
           :value="endTimeValue"
           :is-hour-disabled="isEndHourDisabled"
@@ -220,7 +222,7 @@
           round
           @click="clearValue"
         >
-          Clear
+          {{ localeNamespace.clear }}
         </n-button>
         <n-button
           v-if="actions.includes('confirm')"
@@ -231,7 +233,7 @@
           type="primary"
           @click="handleConfirmClick"
         >
-          Confirm
+          {{ localeNamespace.confirm }}
         </n-button>
       </div>
       <div
@@ -261,7 +263,6 @@ import { strictParse } from '../../../../utils/dateUtils'
 const DATETIME_FORMAT = 'yyyy-MM-dd HH:mm:ss'
 const DATE_FORMAT = 'yyyy-MM-dd'
 const DATE_VALIDATE_FORMAT = ['yyyy-MM-dd', 'yyyy-MM-D', 'yyyy-M-D', 'yyyy-M-dd']
-const PLACEHOLDER = 'Select date and time'
 
 export default {
   components: {
@@ -272,10 +273,6 @@ export default {
   },
   mixins: [dualCalendarMixin],
   props: {
-    placeholder: {
-      type: String,
-      default: PLACEHOLDER
-    },
     format: {
       type: String,
       default: DATETIME_FORMAT

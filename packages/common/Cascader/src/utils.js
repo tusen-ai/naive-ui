@@ -41,11 +41,16 @@ function merge (arrA, arrB) {
   return Array.from(mergedSet)
 }
 
+function getPickerElement (instance) {
+  return instance.NCascader.$refs.activator.$el
+}
+
 export {
   getType,
   validateType,
   isLeaf,
   traverseWithCallback,
   minus,
-  merge
+  merge,
+  getPickerElement
 }

@@ -41,6 +41,7 @@ export default {
     handleEnter () {
       this.$nextTick().then(() => {
         if (this.width) {
+          this.$el.style.maxWidth = 'unset'
           this.$el.style.width = this.$el.offsetWidth + 'px'
           this.$el.style.maxWidth = 0
         } else {

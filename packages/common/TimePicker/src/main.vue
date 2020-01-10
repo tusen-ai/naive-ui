@@ -11,7 +11,7 @@
       v-model="displayTimeString"
       class="n-time-picker-input"
       :force-focus="active"
-      placeholder="Select time"
+      :placeholder="placeholder || 'Select time'"
       lazy-focus
       @focus="handleTimeInputFocus"
       @click="handleActivatorClick"
@@ -195,6 +195,10 @@ export default {
   },
   mixins: [detachable, placeable, zindexable, withapp, themeable, asformitem()],
   props: {
+    placeholder: {
+      type: String,
+      default: null
+    },
     placement: {
       type: String,
       default: 'bottom-start'
