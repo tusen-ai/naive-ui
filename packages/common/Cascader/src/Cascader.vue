@@ -46,12 +46,13 @@
     >
       <n-base-portal ref="portal1">
         <cascader-menu
-          ref="menu"
+          ref="menu1"
           v-clickoutside="handleMenuClickOutside"
           :active="active && !selectMenuActive"
           :class="{
             [`n-${synthesizedTheme}-theme`]: synthesizedTheme
           }"
+          :type="type"
           :value="value"
           :multiple="multiple"
           :options="menuOptions"
@@ -70,6 +71,8 @@
       </n-base-portal>
       <n-base-portal ref="portal2">
         <cascader-select-menu
+          ref="menu2"
+          :type="type"
           :value="value"
           :active="active && selectMenuActive"
           :theme="synthesizedTheme"
@@ -271,9 +274,6 @@ export default {
         this.$refs.portal2.transferElement()
       }
     },
-    patches () {
-      console.log('patched updated!')
-    },
     options () {
       this.activeId = null
     }
@@ -308,29 +308,38 @@ export default {
       if (!this.active) {
         this.openMenu()
       } else {
-        if (this.$refs.menu) {
-          this.$refs.menu.enter()
+        if (this.$refs.menu1) {
+          this.$refs.menu1.enter()
+        }
+        if (this.$refs.menu2) {
+          this.$refs.menu2.enter()
         }
       }
     },
     handleKeyUpUp () {
-      if (this.active && this.$refs.menu) {
-        this.$refs.menu.prev()
+      if (this.active && this.$refs.menu1) {
+        this.$refs.menu1.prev()
+      }
+      if (this.active && this.$refs.menu2) {
+        this.$refs.menu2.prev()
       }
     },
     handleKeyUpDown () {
-      if (this.active && this.$refs.menu) {
-        this.$refs.menu.next()
+      if (this.active && this.$refs.menu1) {
+        this.$refs.menu1.next()
+      }
+      if (this.active && this.$refs.menu2) {
+        this.$refs.menu2.next()
       }
     },
     handleKeyUpLeft () {
-      if (this.active && this.$refs.menu) {
-        this.$refs.menu.shallow()
+      if (this.active && this.$refs.menu1) {
+        this.$refs.menu1.shallow()
       }
     },
     handleKeyUpRight () {
-      if (this.active && this.$refs.menu) {
-        this.$refs.menu.deep()
+      if (this.active && this.$refs.menu1) {
+        this.$refs.menu1.deep()
       }
     },
     handleMenuInput (value) {
@@ -353,7 +362,7 @@ export default {
       this.$emit('input', null)
     },
     handleActivatorBlur () {
-      // this.closeMenu()
+      this.closeMenu()
     },
     handleActivatorClick () {
       if (this.filterable) {
@@ -376,7 +385,6 @@ export default {
       }
     },
     handlePatternInput (e) {
-      // console.log('NBaseCascader, handlePatternInput,', e)
       this.pattern = e.target.value
     },
     handleDeleteOption (option) {

@@ -1,24 +1,23 @@
 <template>
-  <div class="n-detached-content">
-    <transition name="n-cascader-menu--transition">
-      <div v-if="active" ref="content" class="n-cascader-menu-wrapper">
-        <div
+  <div class="n-detached-content-container">
+    <div ref="content" class="n-detached-content">
+      <transition name="n-cascader-menu--transition">
+        <n-base-select-menu
+          v-if="active"
+          ref="contentInner"
           class="n-cascader-menu"
-          @mousedown.prevent="() => {}"
-        >
-          <n-base-select-menu
-            :theme="theme"
-            filterable
-            :pattern="pattern"
-            :options="filteredSelectOptions"
-            :multiple="multiple"
-            :size="size"
-            :is-selected="isSelected"
-            @menu-toggle-option="handleSelectMenuToggleOption"
-          />
-        </div>
-      </div>
-    </transition>
+          :theme="theme"
+          filterable
+          :pattern="pattern"
+          :options="filteredSelectOptions"
+          :multiple="multiple"
+          :size="size"
+          :is-selected="isSelected"
+          @mousedown.native.prevent="() => {}"
+          @menu-toggle-option="handleSelectMenuToggleOption"
+        />
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -40,6 +39,10 @@ export default {
   },
   mixins: [ placeable, zindexable ],
   props: {
+    type: {
+      type: String,
+      required: true
+    },
     placement: {
       type: String,
       default: 'bottom-start'
@@ -49,7 +52,7 @@ export default {
       default: 'activator'
     },
     value: {
-      type: [String, Number],
+      type: [String, Number, Array],
       default: null
     },
     active: {
@@ -81,13 +84,19 @@ export default {
       default: (pattern, _, path) => path.some(option => option.label && ~(option.label.indexOf(pattern)))
     }
   },
+  data () {
+    return {
+      /** for zindexable, shouldn't be changed */
+      detached: true
+    }
+  },
   computed: {
     selectOptions () {
       const selectOptions = []
       const type = this.type
       traverseWithCallback(this.options, option => {
         if (
-          ((type === 'mutiple' || type === 'single') && option.isLeaf) ||
+          ((type === 'multiple' || type === 'single') && option.isLeaf) ||
           (type !== 'multiple' && type !== 'single')
         ) {
           if (option.isRoot) return
@@ -166,6 +175,18 @@ export default {
         }
       } else {
         this.$emit('input', option.value)
+      }
+    },
+    prev () {
+      this.$refs.contentInner && this.$refs.contentInner.prev()
+    },
+    next () {
+      this.$refs.contentInner && this.$refs.contentInner.next()
+    },
+    enter () {
+      if (this.$refs.contentInner) {
+        const pendingOption = this.$refs.contentInner.pendingOption
+        this.handleSelectOptionCheck(pendingOption)
       }
     }
   }

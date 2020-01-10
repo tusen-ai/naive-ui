@@ -383,8 +383,8 @@ function menuOptions (cascaderOptions, value, type) {
     }
   }
   traverse(cascaderOptions)
-  // console.log('menuOptions', linkedCascaderOptions)
-  return cascaderOptions
+  /** create a new Object for change detection */
+  return [cascaderOptions[0]]
 }
 
 function optionPath (options, optionId) {

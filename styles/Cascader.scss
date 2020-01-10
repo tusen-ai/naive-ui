@@ -9,20 +9,22 @@
       width: 100%;
     }
   }
-  @include b(cascader-menu-wrapper) {
-    @include once {
-      @include fade-in-scale-up-transition(cascader-menu, inherit, .2s);
-    }
-    @include b(base-select-menu) {
-      box-shadow: none;
-    }
-  }
   @include b(cascader-menu) {
     @include once {
+      @include fade-in-scale-up-transition(cascader-menu, inherit, .2s);
+      position: relative;
+      margin: 4px 0;
       display: flex;
       flex-wrap: nowrap;
       border-radius: 6px;
-      @include fade-in-scale-up-transition(cascader-cascader-menu, inherit, .2s);
+      overflow: hidden;
+      /** 
+       * if width not set, cascader select menu's inner scroll area's width is 
+       * not correct, which won't change after select menu width is set
+       */
+      @include b(scrollbar) {
+        width: 100%;
+      }
     }
     box-shadow: $--cascader-menu-box-shadow;
     @include b(cascader-submenu) {
@@ -157,24 +159,6 @@
           }
         }
       }
-    }
-    @include b(base-menu-mask) {
-      @include once {
-        @include fade-in-transition(base-menu-mask);
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 14px;
-        border-radius: 6px;
-      }
-      color: $--cascader-menu-mask-text-color;
-      background-color: $--cascader-menu-mask-background-color;
     }
     @include b(cascader-light-bar-container) {
       @include once {

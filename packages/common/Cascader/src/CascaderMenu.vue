@@ -1,14 +1,14 @@
 <template>
   <div
-    class="n-detached-content"
+    class="n-detached-content-container"
   >
-    <transition name="n-cascader-menu--transition">
-      <div v-if="active" ref="content" class="n-cascader-menu-wrapper">
+    <div ref="content" class="n-detached-content">
+      <transition name="n-cascader-menu--transition">
         <div
+          v-if="active"
           class="n-cascader-menu"
           :class="{
-            [`n-${theme}-theme`]: theme,
-            'n-cascader-menu--masked': masked
+            [`n-${theme}-theme`]: theme
           }"
           @mousedown.prevent="() => {}"
         >
@@ -24,21 +24,21 @@
             @option-mouseleave="handleOptionMouseLeave"
             @option-check="handleCascaderOptionCheck"
           />
+          <n-base-menu-mask
+            ref="mask"
+            :theme="theme"
+            :duration="3000"
+          />
         </div>
-      </div>
-    </transition>
-    <n-base-menu-mask
-      ref="mask"
-      v-model="masked"
-      :duration="3000"
-    />
+      </transition>
+    </div>
   </div>
 </template>
 <script>
 import NBaseMenuMask from '../../../base/MenuMask'
 import NCascaderSubmenu from './CascaderSubmenu'
 import placeable from '../../../mixins/placeable'
-import { getType, minus, merge, getPickerElement } from './utils'
+import { minus, merge, getPickerElement } from './utils'
 import zindexable from '../../../mixins/zindexable'
 
 import {
@@ -59,6 +59,10 @@ export default {
   },
   mixins: [ placeable, zindexable ],
   props: {
+    type: {
+      type: String,
+      required: true
+    },
     placement: {
       type: String,
       default: 'bottom-start'
@@ -80,7 +84,7 @@ export default {
       default: false
     },
     value: {
-      validator: () => true,
+      type: [String, Number, Array],
       default: null
     },
     options: {
@@ -129,14 +133,11 @@ export default {
   data () {
     return {
       trackId: null,
-      masked: false
+      /** for zindexable, shouldn't be changed */
+      detached: true
     }
   },
   computed: {
-    /**
-     * cascader related attributes
-     */
-    type: getType,
     expandTriggeredByHover () {
       return this.expandTrigger === 'hover'
     },
@@ -167,6 +168,24 @@ export default {
     }
   },
   watch: {
+    active (value) {
+      if (value) {
+        this.$nextTick().then(() => {
+          if (this.lazy && !this.options[0].children) {
+            const option = this.options[0]
+            if (!this.loading) {
+              this.updateLoadingStatus(true)
+              this.$refs.mask.show(`Loading`)
+              this.onLoad(option, (children) => this.NCascader.resolveLoad(option, children, () => {
+                this.hideMask()
+              }), () => this.rejectLoad(() => {
+                this.hideMask()
+              }))
+            }
+          }
+        })
+      }
+    },
     menuModel () {
       this.$nextTick().then(() => {
         // console.log('menu model')
@@ -200,20 +219,6 @@ export default {
           }
         }
       })
-    }
-  },
-  mounted () {
-    if (this.lazy && !this.options[0].children) {
-      const option = this.options[0]
-      if (!this.loading) {
-        this.updateLoadingStatus(true)
-        this.$refs.mask.show(`Loading`)
-        this.onLoad(option, (children) => this.NCascader.resolveLoad(option, children, () => {
-          this.hideMask()
-        }), () => this.rejectLoad(() => {
-          this.hideMask()
-        }))
-      }
     }
   },
   methods: {
@@ -291,7 +296,7 @@ export default {
       if (this.type === 'multiple') {
         const newValues = []
         if (!option.determined) {
-          this.$refs.mask.showOnce(`Not all child nodes of "${option.label}" have been loaded`)
+          this.$refs.mask.showOnce(`Please load all ${option.label}'s descedants before checking it.`)
           return
         }
         const traverseMultiple = item => {
@@ -361,7 +366,6 @@ export default {
     },
     prev () {
       if (!this.filterable || (this.filterable && !this.pattern.length)) {
-        // console.log('prev: cascader menu')
         if (this.trackId) {
           const option = this.idOptionMap.get(this.trackId)
           if (option && option.prevAvailableSiblingId) {
@@ -397,9 +401,7 @@ export default {
     enter () {
       if (this.trackId) {
         this.handleCascaderOptionCheck(this.trackId)
-        return true
       }
-      return false
     }
   }
 }
