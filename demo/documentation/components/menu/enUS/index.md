@@ -5,4 +5,5 @@ items
 disabled
 openNames
 defaultOpenNames
+icon
 ```

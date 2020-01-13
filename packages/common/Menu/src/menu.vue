@@ -4,6 +4,7 @@
     :class="{
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
       [`n-menu--${mode}`]: mode,
+      'n-menu--collapsed': collapsed
     }"
   >
     <ul class="n-menu-list">
@@ -25,6 +26,14 @@ export default {
   },
   mixins: [withapp, themeable],
   props: {
+    collapsed: {
+      type: Boolean,
+      default: false
+    },
+    collapsedWidth: {
+      type: Number,
+      default: null
+    },
     value: {
       type: String,
       default: null
@@ -41,6 +50,10 @@ export default {
       type: String,
       default: 'vertical'
     },
+    iconSize: {
+      type: Number,
+      default: 20
+    },
     defaultOpenNames: {
       type: Array,
       default: undefined
@@ -49,10 +62,6 @@ export default {
       type: Array,
       default: undefined
     }
-    // hasIcon: {
-    //   type: Boolean,
-    //   default: false
-    // }
   },
   data () {
     return {

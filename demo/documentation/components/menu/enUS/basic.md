@@ -5,11 +5,7 @@
     v-model="selected" 
     @openNamesChange="changeOpen"
     @select="changeSelect"
-
-    >
-    <template v-slot:drawer-header-icon>
-      <div style="overflow:hidden">1111</div>
-    </template>
+  >
     <n-menu-item title="num1" name="num1"></n-menu-item>
     <n-menu-item title="num2" name="num2"></n-menu-item>
     <n-menu-item title="num3" name="num3"></n-menu-item>
@@ -47,7 +43,4 @@ export default {
     }
   }
 };
-```
-```css
-
 ```

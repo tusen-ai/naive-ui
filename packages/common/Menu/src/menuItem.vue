@@ -8,13 +8,22 @@
     }"
     @click="handleClick"
   >
-    <!-- <span
-      v-if="hasIcon"
-      class="n-menu-title-icon"
-    /> -->
-    <slot>
-      <render :render="title" />
-    </slot>
+    <div
+      v-if="$slots.icon"
+      class="n-menu-item__icon"
+      :style="{
+        width: iconSize && (iconSize + 'px'),
+        height: iconSize && (iconSize + 'px'),
+        fontSize: iconSize && (iconSize + 'px'),
+      }"
+    >
+      <slot name="icon" />
+    </div>
+    <div class="n-menu-item__header">
+      <slot>
+        <render :render="title" />
+      </slot>
+    </div>
   </li>
 </template>
 <script>
@@ -59,7 +68,16 @@ export default {
     }
   },
   computed: {
+    iconSize () {
+      return this.NMenu && this.NMenu.iconSize
+    },
+    isFirstLevel () {
+      return !this.NSubMenu && !this.NMenuItemGroup
+    },
     paddingLeft () {
+      if (this.isFirstLevel && this.NMenu.collapsedWidth !== null && this.NMenu.collapsed) {
+        return this.NMenu.collapsedWidth / 2 - this.iconSize / 2
+      }
       if (this.NMenuItemGroup) {
         return this.NMenu.indent / 2 + this.NMenuItemGroup.paddingLeft
       } else if (this.NSubMenu) {

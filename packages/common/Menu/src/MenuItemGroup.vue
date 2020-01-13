@@ -40,6 +40,9 @@ export default {
     }
   },
   computed: {
+    isFirstLevel () {
+      return !this.NSubMenu && !this.NMenuItemGroup
+    },
     paddingLeft () {
       if (this.NMenuItemGroup) {
         return this.NMenu.indent / 2 + this.NMenuItemGroup.paddingLeft
