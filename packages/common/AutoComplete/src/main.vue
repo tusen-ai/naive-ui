@@ -24,6 +24,7 @@
             ref="contentInner"
             auto-pending-first-option
             class="n-select-menu"
+            :mirror="false"
             :theme="synthesizedTheme"
             :pattern="value"
             :options="filteredOptions"

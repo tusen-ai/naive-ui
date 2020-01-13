@@ -32,7 +32,6 @@
       :remote="remote"
       :clearable="clearable"
       :disabled="disabled"
-      :on-search="onSearch"
       :size="size"
       :theme="synthesizedTheme"
       @click="handleActivatorClick"

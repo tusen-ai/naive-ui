@@ -199,7 +199,8 @@ export default {
           isSelected: () => false,
           options: this.options,
           size: this.size,
-          theme: this.synthesizedTheme
+          theme: this.synthesizedTheme,
+          mirror: true
         }
       }, options)
     ])

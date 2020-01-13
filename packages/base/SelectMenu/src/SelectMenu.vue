@@ -7,7 +7,7 @@
       [`n-${theme}-theme`]: theme
     }"
     :style="{
-      width: width &&(width + 'px')
+      width: width && (width + 'px')
     }"
     @keyup.up.stop="handleKeyUpUp"
     @keyup.down.stop="handleKeyUpDown"
@@ -143,7 +143,7 @@ export default {
     },
     mirror: {
       type: Boolean,
-      default: true
+      required: true
     },
     autoPendingFirstOption: {
       type: Boolean,
