@@ -84,7 +84,7 @@
       </div>
     </div>
     <div
-      v-if="pagination !== false"
+      v-if="pagination"
       class="n-data-table__pagination"
     >
       <n-pagination
@@ -201,7 +201,7 @@ export default {
       internalActiveSorter: null,
       /** internal pagination state */
       internalCurrentPage: 1,
-      internalPageSize: null
+      internalPageSize: 10
     }
   },
   computed: {
@@ -245,12 +245,12 @@ export default {
     },
     synthesizedActiveFilters () {
       const columnsWithControlledFilter = this.columns.filter(column => {
-        return Array.isArray(column.activeFilterOptionValues)
+        return Array.isArray(column.filterOptionValues)
       })
       const keyOfColumnsToFilter = columnsWithControlledFilter.map(column => column.key)
       const controlledActiveFilters = []
       columnsWithControlledFilter.forEach(column => {
-        column.activeFilterOptionValues.forEach(filterOptionValue => {
+        column.filterOptionValues.forEach(filterOptionValue => {
           controlledActiveFilters.push({
             columnKey: column.key,
             filterOptionValue
@@ -280,10 +280,14 @@ export default {
       if (columnsWithControlledSortOrder.length) return null
       return this.internalActiveSorter
     },
+    synthesizedPageSize () {
+      return this.pagination.pageSize || this.internalPageSize
+    },
     synthesizedCurrentPage () {
       return this.pagination.page || this.internalCurrentPage
     },
     synthesizedPagination () {
+      if (!this.pagination) return null
       return {
         ...this.pagination,
         /**
@@ -292,7 +296,7 @@ export default {
          * key still exists but value is undefined
          */
         page: this.synthesizedCurrentPage,
-        pageSize: this.synthesizedPageCount,
+        pageSize: this.synthesizedPageSize,
         pageCount: this.synthesizedPageCount
       }
     },
@@ -353,9 +357,9 @@ export default {
         const sorter = (activeSorter.sorter === 'default' && ((row1, row2) => {
           const value1 = row1[columnKey]
           const value2 = row2[columnKey]
-          if (typeof value1 === 'number') {
+          if (typeof value1 === 'number' && typeof value2 === 'number') {
             return value1 - value2
-          } else if (typeof row1[columnKey] === 'string') {
+          } else if (typeof value1 === 'string' && typeof value2 === 'string') {
             return value1.localeCompare(value2)
           }
           return 0
@@ -448,7 +452,7 @@ export default {
     changeFilters (filters, sourceColumn) {
       if (!filters) {
         this.internalActiveFilters = []
-        this.$emit('filters-change', [], sourceColumn)
+        this.$emit('filters-change', [], createShallowClonedObject(sourceColumn))
         this.$emit('change', {
           pagination: this.synthesizedPagination,
           sorter: this.synthesizedActiveSorter,
@@ -457,7 +461,7 @@ export default {
       } else {
         if (Array.isArray(filters)) {
           this.internalActiveFilters = filters
-          this.$emit('filters-change', createShallowClonedArray(filters), sourceColumn)
+          this.$emit('filters-change', createShallowClonedArray(filters), createShallowClonedObject(sourceColumn))
           this.$emit('change', {
             pagination: createShallowClonedObject(this.synthesizedPagination),
             sorter: createShallowClonedObject(this.synthesizedActiveSorter),

@@ -155,7 +155,7 @@
           round
           @click="clearValue"
         >
-          Clear
+          {{ localeNamespace.clear }}
         </n-button>
         <n-button
           v-if="actions.includes('confirm')"
@@ -166,7 +166,7 @@
           :disabled="isRangeInvalid"
           @click="handleConfirmClick"
         >
-          Confirm
+          {{ localeNamespace.confirm }}
         </n-button>
       </div>
       <focus-detector @focus="handleBlur" />
@@ -181,7 +181,6 @@ import dualCalendarMixin from './dualCalendarMixin'
 import startOfDay from 'date-fns/startOfDay'
 
 const DATE_FORMAT = 'yyyy-MM-dd'
-const PLACEHOLDER = 'Select date and time'
 
 export default {
   components: {
@@ -190,10 +189,6 @@ export default {
   },
   mixins: [dualCalendarMixin],
   props: {
-    placeholder: {
-      type: String,
-      default: PLACEHOLDER
-    },
     format: {
       type: String,
       default: DATE_FORMAT

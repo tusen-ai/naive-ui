@@ -10,7 +10,6 @@ import getHours from 'date-fns/getHours'
 import getMinutes from 'date-fns/getMinutes'
 import getSeconds from 'date-fns/getSeconds'
 import { dateArray } from '../../../../utils/dateUtils'
-
 import commonCalendarMixin from './commonCalendarMixin'
 
 export default {
@@ -79,6 +78,7 @@ export default {
     }
   },
   computed: {
+
     selectingPhase () {
       if (this.isSelecting) return 'end'
       else return 'start'
@@ -98,10 +98,10 @@ export default {
       )
     },
     startCalendarMonth () {
-      return format(this.startCalendarDateTime, 'MMMM')
+      return this.localeNamespace[format(this.startCalendarDateTime, 'MMM')]
     },
     endCalendarMonth () {
-      return format(this.endCalendarDateTime, 'MMMM')
+      return this.localeNamespace[format(this.endCalendarDateTime, 'MMM')]
     },
     startCalendarYear () {
       return format(this.startCalendarDateTime, 'yyyy')

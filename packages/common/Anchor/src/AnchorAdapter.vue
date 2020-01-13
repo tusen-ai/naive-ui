@@ -18,6 +18,7 @@
   >
     <n-base-anchor
       ref="anchor"
+      :bound="bound"
       :target="target"
     >
       <slot />

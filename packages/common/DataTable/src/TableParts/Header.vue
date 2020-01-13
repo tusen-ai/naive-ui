@@ -40,16 +40,17 @@
             >
               <n-checkbox
                 v-if="column.type === 'selection'"
+                :key="currentPage"
                 :checked="checkboxChecked"
                 :indeterminate="checkboxIndererminate"
                 @input="handleCheckboxInput(column)"
               />
-              <template v-if="column.renderHeader">
-                <render :render="h => column.renderHeader(h, column, index)" />
-              </template>
-              <template v-else>
-                {{ column.title }}
-              </template>
+              <render
+                :render="typeof column.title === 'function'
+                  ? h => (column.title)(h, column, index)
+                  : column.title
+                "
+              />
               <sort-button
                 v-if="isColumnSortable(column)"
                 :column="column"
@@ -145,6 +146,12 @@ export default {
     }
   },
   computed: {
+    pagination () {
+      return this.NDataTable.synthesizedPagination
+    },
+    currentPage () {
+      return (this.pagination && this.pagination.page) || null
+    },
     theme () {
       return this.NDataTable.synthesizedTheme
     },

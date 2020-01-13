@@ -16,7 +16,7 @@
 const addressColumn = {
   title: 'Address',
   key: 'address',
-  activeFilterOptionValues: [],
+  filterOptionValues: [],
   sorter: 'default',
   filterOptions: [
     {
@@ -28,8 +28,8 @@ const addressColumn = {
       value: 'New York'
     }
   ],
-  filter (value, record) {
-    return ~record.address.indexOf(value)
+  filter (value, row) {
+    return ~row.address.indexOf(value)
   }
 }
 
@@ -85,13 +85,13 @@ export default {
   },
   methods: {
     filterAddress () {
-      this.addressColumn.activeFilterOptionValues = ['London']
+      this.addressColumn.filterOptionValues = ['London']
     },
     unfilterAddress () {
-      this.addressColumn.activeFilterOptionValues = []
+      this.addressColumn.filterOptionValues = []
     },
     handleFiltersChange (filters, sourceColumn) {
-      this.addressColumn.activeFilterOptionValues = filters.filter(
+      this.addressColumn.filterOptionValues = filters.filter(
         filter => filter.columnKey === sourceColumn.key
       ).map(filter => filter.filterOptionValue)
     }

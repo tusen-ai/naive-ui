@@ -67,10 +67,10 @@ export default {
       return dateArray(this.calendarDateTime, this.valueAsDateTime, this.currentDateTime)
     },
     calendarMonth () {
-      return format(this.calendarDateTime, 'MMM', 'Invalid Month')
+      return this.localeNamespace[format(this.calendarDateTime, 'MMM')]
     },
     calendarYear () {
-      return format(this.calendarDateTime, 'y', 'Invalid Year')
+      return this.localeNamespace[format(this.calendarDateTime, 'yyyy')]
     },
     /**
      * If value is valid return null.

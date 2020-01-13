@@ -1,12 +1,6 @@
 # Ajax
 
-> filter,sorter,pagination should use `custom`
-
 ```html
-<n-button @click="sortName">sort name</n-button>
-<n-button @click="clearFilters">clear filters</n-button>
-<n-button @click="clearFiltersAndSorters">clear filters and sorters</n-button>
-
 <n-data-table
   ref="table"
   :columns="columns"
@@ -24,31 +18,36 @@ const nameColumn = {
   title: 'Name',
   key: 'name',
   sorter: true,
+  sortOrder: false,
   render (h, row) {
-    return (
-      <span>
-        { row.name.first } { row.name.last }
-      </span>
-    )
+    return h('span', [row.name.first, ' ', row.name.last])
   }
+}
+
+const genderColumn = {
+  title: 'Gender',
+  key: 'gender',
+  filterable: true,
+  filterOptionValues: [],
+  filterOptions: [
+    { label: 'Male', value: 'male' },
+    { label: 'Female', value: 'female' }
+  ]
 }
 
 const columns = [
   nameColumn,
-  {
-    title: 'Gender',
-    key: 'gender',
-    filterable: true,
-    filterOptions: [
-      { label: 'Male', value: 'male' },
-      { label: 'Female', value: 'female' }
-    ]
-  },
+  genderColumn,
   {
     title: 'Email',
     key: 'email'
   }
 ]
+
+function createQueryString (querys) {
+  const queryString = Object.keys(querys).map(key => `${key}=${querys[key]}`).join('&')
+  return queryString ? '?' + queryString : ''
+}
 
 export default {
   data () {
@@ -56,76 +55,63 @@ export default {
       data: [],
       columns,
       nameColumn,
+      genderColumn,
+      pagination: {
+        page: 1,
+        pageCount: 100,
+        pageSize: false
+      },
       loading: false,
-      total: 0
     }
   },
-  mounted() {
+  mounted () {
     this.getData().then(data => {
       this.data = data.results
-      this.total = 100
     })
-  },
-  computed: {
-    pagination () {
-      if (!this.total) return false
-      return { pageCount: this.total, pageSize: false }
-    }
   },
   methods: {
     getData (params = {}) {
       this.loading = true
-      if (!params.results) {
-        params.results = 8
-      }
-      let url = 'https://randomuser.me/api'
-      let paramsArr = []
-      Object.keys(params).forEach(key => {
-        if (Array.isArray(params[key])) {
-          params[key].forEach(value => {
-            paramsArr.push(`${key}[]=${value}`)
-          })
-        } else paramsArr.push(`${key}=${params[key]}`)
-      })
-      if (paramsArr.length) {
-        url = url + '?' + paramsArr.join('&')
-      }
-      return fetch(url)
+      !params.results && (params.results = 8)
+      const URL = 'https://randomuser.me/api' + createQueryString(params)
+      return fetch(URL)
         .then(res => res.json())
         .finally(() => {
           this.loading = false
         })
     },
-    sortName () {
-      this.$refs.table.sort('name', 'ascend')
-    },
     handleSorterChange (sorter) {
-      this.getData().then(data => {
-        this.data = data.results
-        this.total = 100
-      })
+      if (!sorter) {
+        this.nameColumn.sortOrder = false
+        this.getData().then(data => {
+          this.data = data.results
+        })
+        return
+      }
+      if (sorter.columnKey === 'name') {
+        this.getData().then(data => {
+          this.data = data.results
+          this.nameColumn.sortOrder = sorter.sortOrder
+        })
+      }
     },
-    handleFiltersChange (filters) {
+    handleFiltersChange (filters, initiatorColumn) {
       this.getData().then(data => {
         this.data = data.results
-        this.total = 50
+        if (initiatorColumn.key === 'gender') {
+          this.genderColumn.filterOptionValues = filters
+            .filter(filter => filter.columnKey === 'gender')
+            .map(filter => filter.filterOptionValue)
+        }
       })
     },
     handlePageChange (currentPage) {
-      console.log('handle page change')
       this.getData({
         page: currentPage
       }).then(data => {
         this.data = data.results
-        this.total = 50
+        this.pagination.page = currentPage
       })
-    },
-    clearFilters () {
-      this.$refs.table.clearFilters()
-    },
-    clearFiltersAndSorters () {
-      this.$refs.table.clearFilters()
-      this.$refs.table.clearSorter()
     }
   }
 }

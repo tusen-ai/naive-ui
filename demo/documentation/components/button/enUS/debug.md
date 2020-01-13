@@ -469,7 +469,7 @@ export default {
 .debug-zone {
   border-radius: 4px;
   background-color: rgb(48, 48, 48);
-  transition: background-color .3s ease-in-out;
+  transition: all .3s ease-in-out;
 }
 
 .debug-zone.n-light-theme {
