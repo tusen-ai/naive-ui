@@ -24,16 +24,16 @@ function getActivatorRect (manuallyPositioned, x, y, trackedElement) {
       left: x,
       height: 0,
       width: 0,
-      right: window.innerWidth - x,
-      bottom: window.innerHeight - y
+      right: document.documentElement.clientWidth - x - window.pageXOffset,
+      bottom: document.documentElement.clientHeight - y - window.pageYOffset
     }
   } else {
     const activatorRect = trackedElement.getBoundingClientRect()
     return {
-      left: parseInt(activatorRect.left),
-      top: parseInt(activatorRect.top),
-      bottom: parseInt(window.innerHeight - activatorRect.bottom),
-      right: parseInt(window.innerWidth - activatorRect.right),
+      left: parseInt(activatorRect.left + window.pageXOffset),
+      top: parseInt(activatorRect.top + window.pageYOffset),
+      bottom: parseInt(document.documentElement.clientHeight - activatorRect.bottom - window.pageYOffset),
+      right: parseInt(document.documentElement.clientWidth - activatorRect.right - window.pageXOffset),
       width: parseInt(activatorRect.width),
       height: parseInt(activatorRect.height)
     }
