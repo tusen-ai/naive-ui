@@ -3,6 +3,7 @@ dist
 docDist
 doc/dist
 test-size
+test-bundle
 test/unit/coverage
 package-lock.json
 yarn.lock

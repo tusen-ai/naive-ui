@@ -3,17 +3,21 @@ const resolve = require('@rollup/plugin-node-resolve')
 const strip = require('@rollup/plugin-strip')
 const path = require('path')
 const { terser } = require('rollup-plugin-terser')
+const naiveSCSSVariable = require('./playground/naiveScssVarPlugin')
 
 module.exports = {
-  input: 'packages/common/Select/index.js',
+  preserveModules: true,
+  input: 'index.js',
   output: {
     format: 'esm',
-    file: 'lib/select/index.js'
+    dir: 'test-bundle'
   },
   plugins: [
     vue(),
+    naiveSCSSVariable(),
     strip(),
     resolve({
+      extensions: ['.js', '.json', '.vue'],
       jail: path.resolve(__dirname, 'packages')
     }),
     terser({
