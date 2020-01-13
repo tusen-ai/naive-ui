@@ -57,7 +57,8 @@ export function getAdjustedPlacementOfTrackingElement (placement = 'bottom-start
   let adjustedPosition = position
   if (position) {
     const adjacentPositionDirection = positionDirections[placement]
-    if (trackedRect[adjacentPositionDirection] + trackedRect[lengthToCompare[adjacentPositionDirection]] <= trackingRect[lengthToCompare[adjacentPositionDirection]]) {
+    if (trackedRect[adjacentPositionDirection] + trackedRect[lengthToCompare[adjacentPositionDirection]] <= trackingRect[lengthToCompare[adjacentPositionDirection]] &&
+    trackingRect[lengthToCompare[adjacentPositionDirection]] > trackedRect[lengthToCompare[adjacentPositionDirection]]) {
       adjustedPosition = oppositePosition[position]
     }
   }
