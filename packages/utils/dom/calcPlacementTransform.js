@@ -57,10 +57,21 @@ export function getAdjustedPlacementOfTrackingElement (placement = 'bottom-start
   let adjustedPosition = position
   if (position) {
     const adjacentPositionDirection = positionDirections[placement]
-    if (trackedRect[adjacentPositionDirection] + trackedRect[lengthToCompare[adjacentPositionDirection]] <= trackingRect[lengthToCompare[adjacentPositionDirection]] &&
-    trackingRect[lengthToCompare[adjacentPositionDirection]] > trackedRect[lengthToCompare[adjacentPositionDirection]]) {
-      adjustedPosition = oppositePosition[position]
+    if (trackingRect[lengthToCompare[adjacentPositionDirection]] > trackedRect[lengthToCompare[adjacentPositionDirection]]) {
+      if (trackedRect[adjacentPositionDirection] + trackedRect[lengthToCompare[adjacentPositionDirection]] <= trackingRect[lengthToCompare[adjacentPositionDirection]]) {
+        adjustedPosition = oppositePosition[position]
+      }
+    } else if (trackingRect[lengthToCompare[adjacentPositionDirection]] < trackedRect[lengthToCompare[adjacentPositionDirection]]) {
+      if (trackedRect[oppositeDirection[adjacentPositionDirection]] < 0 && trackedRect[adjacentPositionDirection] > 0) {
+        adjustedPosition = oppositePosition[position]
+      }
     }
+    // if (
+    //   (trackedRect[adjacentPositionDirection] + trackedRect[lengthToCompare[adjacentPositionDirection]] <= trackingRect[lengthToCompare[adjacentPositionDirection]] &&
+    //   trackingRect[lengthToCompare[adjacentPositionDirection]] > trackedRect[lengthToCompare[adjacentPositionDirection]]) ||
+    // (trackedRect[oppositeDirection[adjacentPositionDirection]] < 0 && trackedRect[adjacentPositionDirection] > 0)) {
+    //   adjustedPosition = oppositePosition[position]
+    // }
   }
   if (trackedRect[direction] >= trackingRect[lengthToCompare[direction]]) {
     return adjustedPosition ? (direction + '-' + adjustedPosition) : direction
