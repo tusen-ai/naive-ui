@@ -76,8 +76,9 @@
         @if $theme == 'dark' {
           margin-left: -1px;
           margin-right: -1px;
-        } @else {
-          padding: 0 1px;
+        } @else if $theme == 'light' {
+          margin-left: 0;
+          margin-right:0;
         }
         @include once {
           box-sizing: border-box;
@@ -134,8 +135,11 @@
                   display: block;
                 }
               }
+              /** hard-code **/
               @if $theme == 'dark' {
                 padding-left: 15px;
+              } @else if $theme == 'light' {
+                padding-left: 14px;
               }
             }
             @include m(disabled) {
