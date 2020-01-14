@@ -39,6 +39,11 @@ export default {
       default: null
     }
   },
+  data () {
+    return {
+      delayedPaddingLeft: null
+    }
+  },
   computed: {
     isFirstLevel () {
       return !this.NSubMenu && !this.NMenuItemGroup
@@ -52,6 +57,16 @@ export default {
         return (this.NMenu.rootIndent || this.NMenu.indent) / 2
       }
     }
+  },
+  watch: {
+    paddingLeft (value) {
+      this.$nextTick().then(() => {
+        this.delayedPaddingLeft = value
+      })
+    }
+  },
+  created () {
+    this.delayedPaddingLeft = this.paddingLeft
   }
 }
 </script>

@@ -31,18 +31,24 @@ export default {
       },
       default: false
     },
+    // payload: {
+    //   validator (value) {
+    //     return typeof value === 'string'
+    //   },
+    //   default: null
+    // },
     isSelected: {
       validator (value) {
         return typeof value === 'boolean'
       },
       default: false
-    },
-    mirror: {
-      validator (value) {
-        return typeof value === 'boolean'
-      },
-      default: true
     }
+    // mirror: {
+    //   validator (value) {
+    //     return typeof value === 'boolean'
+    //   },
+    //   default: true
+    // }
   },
   render (h, context) {
     const option = {
@@ -53,11 +59,15 @@ export default {
     const selectMenu = context.injections.NBaseSelectMenu
     const disabled = context.props.disabled
     let selected = context.props.isSelected
-    if (context.props.mirror) {
-      if (selectMenu && selectMenu.isSelected && option) {
-        selected = selectMenu.isSelected({ value: context.props.value })
-      }
-    }
+    // if (context.props.mirror) {
+    //   if (selectMenu && selectMenu.isSelected && option) {
+    //     if (context.props.payload) {
+    //       selected = selectMenu.isSelected({ value: context.props.value, payload: context.props.payload })
+    //     } else {
+    //       selected = selectMenu.isSelected({ value: context.props.value })
+    //     }
+    //   }
+    // }
     const listeners = context.listeners || {}
     function handleClick (e) {
       if (disabled) return
@@ -92,7 +102,8 @@ export default {
       staticClass: 'n-base-select-option',
       class: {
         'n-base-select-option--selected': selected,
-        'n-base-select-option--disabled': disabled
+        'n-base-select-option--disabled': disabled,
+        ...context.data.class
       },
       key: context.props.value,
       attrs,

@@ -25,6 +25,10 @@ export default {
     }
   },
   props: {
+    type: {
+      type: String,
+      default: 'dropdown'
+    },
     autoFocus: {
       type: Boolean,
       default: true
@@ -63,6 +67,12 @@ export default {
     }
   },
   computed: {
+    showAsMenuPopover () {
+      if (this.NDropdownMenu) {
+        return this.NDropdownMenu.showAsMenuPopover
+      }
+      return this.type === 'menu'
+    },
     inheritedSubmenuWidth () {
       if (this.NDropdownMenu) {
         return this.NDropdownMenu.inheritedSubmenuWidth
@@ -95,6 +105,7 @@ export default {
   },
   methods: {
     handleSelectItem (name) {
+      console.log('handleSelectItem')
       /**
        * Can only be called at root level menu
        */
@@ -177,6 +188,9 @@ export default {
     })
     return h('div', {
       staticClass: 'n-dropdown-menu',
+      class: {
+        'n-dropdown-menu--as-menu-popover': this.showAsMenuPopover
+      },
       on: {
         keydown: this.handleKeyDown,
         mouseenter: this.handleMouseEnter,
@@ -194,15 +208,21 @@ export default {
       h(NBaseSelectMenu, {
         ref: 'selectMenu',
         props: {
+          withoutLightBar: this.showAsMenuPopover,
           withoutScrollbar: true,
           useSlot: !!this.$scopedSlots.default,
-          isSelected: () => false,
           options: this.options,
           size: this.size,
+          isSelected: () => false,
           theme: this.synthesizedTheme,
           mirror: true
+        },
+        scopedSlots: {
+          default () {
+            return options
+          }
         }
-      }, options)
+      })
     ])
   }
 }

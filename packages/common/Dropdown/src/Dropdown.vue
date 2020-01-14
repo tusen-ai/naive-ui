@@ -69,6 +69,14 @@ export default {
     focusable: {
       type: Boolean,
       default: true
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    type: {
+      type: String,
+      default: 'dropdown'
     }
   },
   render (h, context) {
@@ -91,6 +99,7 @@ export default {
         arrow: false,
         raw: true,
         shadow: false,
+        disabled: context.props.disabled,
         controller
       },
       scopedSlots: {
@@ -103,6 +112,7 @@ export default {
               tabindex: context.props.focusable ? '0' : '-1'
             },
             props: {
+              type: context.props.type,
               autoFocus: context.props.autoFocus,
               size: context.props.size,
               controller,

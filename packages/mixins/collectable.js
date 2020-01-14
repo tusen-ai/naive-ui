@@ -1,18 +1,19 @@
 export default function (
-  inject,
+  injectionName,
   collectionProperty,
-  registerProperty = 'value'
+  registerProperty = 'value',
+  flatten = false
 ) {
   return {
     computed: {
       activeInjection () {
-        if (Array.isArray(inject)) {
-          const activeInjectionIndex = inject.findIndex(key => this[key])
+        if (Array.isArray(injectionName)) {
+          const activeInjectionIndex = injectionName.findIndex(key => this[key])
           if (~activeInjectionIndex) {
-            return this[inject[activeInjectionIndex]]
+            return this[injectionName[activeInjectionIndex]]
           }
         } else {
-          return this[inject]
+          return this[injectionName]
         }
         return null
       }
@@ -36,12 +37,26 @@ export default function (
     },
     methods: {
       registerValue (value = undefined, oldValue = undefined) {
+        if (this.disabledCollectable) {
+          return
+        }
         if (this.activeInjection) {
           const values = new Set(this.activeInjection[collectionProperty])
-          if (oldValue !== undefined) values.delete(oldValue)
-          if (value !== undefined) values.add(value)
+          if (oldValue !== undefined) {
+            if (flatten && Array.isArray(value)) {
+              value.forEach(registeredValue => values.delete(registeredValue))
+            } else {
+              values.delete(oldValue)
+            }
+          }
+          if (value !== undefined) {
+            if (flatten && Array.isArray(value)) {
+              value.forEach(valueToRegister => values.add(valueToRegister))
+            } else {
+              values.add(value)
+            }
+          }
           this.activeInjection[collectionProperty] = Array.from(values)
-          // console.log(this.activeInjection[collectionProperty])
         }
       }
     }

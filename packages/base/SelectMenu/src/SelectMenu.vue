@@ -19,7 +19,7 @@
       @scroll="handleMenuScroll"
     >
       <div class="n-base-select-menu-option-wrapper">
-        <n-select-menu-light-bar ref="lightBar" />
+        <n-select-menu-light-bar v-if="!withoutLightBar" ref="lightBar" />
         <template v-if="!loading">
           <template v-if="!useSlot">
             <n-select-option
@@ -32,10 +32,11 @@
               :mirror="false"
             />
           </template>
+          <template v-else-if="!mirror">
+            <n-render-options />
+          </template>
           <template v-else>
-            <n-render-options :mirror="mirror">
-              <slot />
-            </n-render-options>
+            <slot />
           </template>
         </template>
         <div
@@ -88,6 +89,10 @@ export default {
     theme: {
       type: String,
       default: null
+    },
+    withoutLightBar: {
+      type: Boolean,
+      default: false
     },
     withoutScrollbar: {
       type: Boolean,

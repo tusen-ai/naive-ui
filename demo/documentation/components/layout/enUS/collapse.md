@@ -13,62 +13,62 @@ Use `collapsed-width` and `width` to set sider's width.
   <n-layout>
     <n-layout-sider
       collapse-mode="width"
-      :collapsed-width="80"
+      :collapsed-width="48"
       :width="240"
       :collapsed="collapsed"
       show-toggle-button
       @collapse="collapsed = true"
       @expand="collapsed = false"
     >
-      <n-menu :collapsed="collapsed" :collapsed-width="80" v-model="activeMenuItemName">
-        <n-menu-item title="num1" name="num1">
+      <n-menu :collapsed="collapsed" :collapsed-width="48" v-model="activeMenuItemName">
+        <n-menu-item title="1800" name="1800">
           <template v-slot:icon>
             <n-icon>
-              <ios-airplane />
+              <md-notifications-outline />
             </n-icon>
           </template>
         </n-menu-item>
-        <n-menu-item title="num2" name="num2">
+        <n-menu-item title="1900" name="1900">
           <template v-slot:icon>
             <n-icon>
-              <ios-airplane />
+              <md-notifications-outline />
             </n-icon>
           </template>
         </n-menu-item>
-        <n-menu-item title="num3" name="num3">
+        <n-menu-item title="2000" name="2000">
           <template v-slot:icon>
             <n-icon>
-              <ios-airplane />
+              <md-notifications-outline />
             </n-icon>
           </template>
         </n-menu-item>
-        <n-sub-menu title="subMenu" name="subMenu">
+        <n-sub-menu title="2001" name="2001">
           <template v-slot:icon>
             <n-icon>
-              <ios-airplane />
+              <md-notifications-outline />
             </n-icon>
           </template>
-          <n-menu-item title="sub1" name="sub1"></n-menu-item>
+          <n-menu-item title="2002" name="2002"></n-menu-item>
         </n-sub-menu>
-        <n-sub-menu title="subMenu2" name="subMenu2">
+        <n-sub-menu title="2003" name="2003">
         <template v-slot:icon>
             <n-icon>
-              <ios-airplane />
+              <md-notifications-outline />
             </n-icon>
           </template>
-          <n-sub-menu title="subMenu22" name="subMenu22">
-            <n-menu-item title="sub222" name="sub222"></n-menu-item>
+          <n-sub-menu title="2004" name="2004">
+            <n-menu-item title="2005" name="2005"></n-menu-item>
           </n-sub-menu>
         </n-sub-menu>
-        <n-sub-menu title="subMenu3" name="subMenu3">
+        <n-sub-menu title="2006" name="2006">
           <template v-slot:icon>
             <n-icon>
-              <ios-airplane />
+              <md-notifications-outline />
             </n-icon>
           </template>
-          <n-sub-menu title="group" name="subMenu4">
-            <n-menu-item title="sub1" name="sub6"></n-menu-item>
-            <n-menu-item title="sub1" name="sub7"></n-menu-item>
+          <n-sub-menu title="2007" name="2007">
+            <n-menu-item title="2008" name="2008"></n-menu-item>
+            <n-menu-item title="2009" name="2009"></n-menu-item>
           </n-sub-menu>
         </n-sub-menu>
       </n-menu>
@@ -110,11 +110,11 @@ Use `collapsed-width` and `width` to set sider's width.
 ```
 
 ```js
-import iosAirplane from 'naive-ui/lib/icons/ios-airplane'
+import mdNotificationsOutline from 'naive-ui/lib/icons/md-notifications-outline'
 
 export default {
   components: {
-    iosAirplane
+    mdNotificationsOutline
   },
   data () {
     return {

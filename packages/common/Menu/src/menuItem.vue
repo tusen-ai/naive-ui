@@ -1,13 +1,48 @@
 <template>
+  <li v-if="!shouldRenderAsDropItem & isFirstLevel" class="n-menu-item-wrapper">
+    <n-tooltip trigger="hover" :disabled="!NMenu.collapsed" placement="right" :delay="300">
+      <template v-slot:activator>
+        <div
+          class="n-menu-item"
+          :style="{ paddingLeft: delayedPaddingLeft + 'px' }"
+          :class="{
+            'n-menu-item--selected': selected,
+            'n-menu-item--disabled': synthesizedDisabled
+          }"
+          @click="handleClick"
+        >
+          <div
+            v-if="$slots.icon"
+            class="n-menu-item__icon"
+            :style="{
+              width: iconSize && (iconSize + 'px'),
+              height: iconSize && (iconSize + 'px'),
+              fontSize: iconSize && (iconSize + 'px'),
+            }"
+          >
+            <slot name="icon" />
+          </div>
+          <div class="n-menu-item__header">
+            <slot>
+              <render :render="title" />
+            </slot>
+          </div>
+        </div>
+      </template>
+      <render :render="title" />
+    </n-tooltip>
+  </li>
   <li
+    v-else-if="!shouldRenderAsDropItem"
     class="n-menu-item"
-    :style="{ paddingLeft: paddingLeft + 'px' }"
+    :style="{ paddingLeft: delayedPaddingLeft + 'px' }"
     :class="{
-      'n-menu-item--selected': isSelected,
+      'n-menu-item--selected': selected,
       'n-menu-item--disabled': synthesizedDisabled
     }"
     @click="handleClick"
   >
+    <!-- identical part start -->
     <div
       v-if="$slots.icon"
       class="n-menu-item__icon"
@@ -19,26 +54,33 @@
     >
       <slot name="icon" />
     </div>
+    <!-- identical part start end -->
     <div class="n-menu-item__header">
       <slot>
         <render :render="title" />
       </slot>
     </div>
   </li>
+  <n-dropdown-item v-else :name="name" :label="title" :value="value" :selected="selected" />
 </template>
+
 <script>
-import registerable from '../../../mixins/registerable'
+import collectable from '../../../mixins/collectable'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import render from '../../../utils/render'
+import NTooltip from '../../Tooltip'
+import NDropdownItem from '../../Dropdown/src/DropdownItem'
 
 export default {
   name: 'NMenuItem',
   components: {
+    NTooltip,
+    NDropdownItem,
     render
   },
   mixins: [
-    registerable('NMenu'),
+    collectable('NSubMenu', 'menuItemNames', 'name', true),
     withapp,
     themeable
   ],
@@ -51,11 +93,18 @@ export default {
     },
     NMenuItemGroup: {
       default: null
+    },
+    NMenuUl: {
+      default: null
     }
   },
   props: {
+    value: {
+      type: Number,
+      default: null
+    },
     title: {
-      type: [String, Function],
+      type: [ String, Function ],
       default: null
     },
     name: {
@@ -67,7 +116,19 @@ export default {
       default: false
     }
   },
+  data () {
+    return {
+      delayedPaddingLeft: null
+    }
+  },
   computed: {
+    disabledCollectable () {
+      return this.shouldRenderAsDropItem
+    },
+    shouldRenderAsDropItem () {
+      if (this.NMenuUl) return false
+      return !this.isFirstLevel && this.NMenu.collapsed
+    },
     iconSize () {
       return this.NMenu && this.NMenu.iconSize
     },
@@ -89,13 +150,23 @@ export default {
     synthesizedDisabled () {
       return ((this.NSubMenu && this.NSubMenu.synthesizedDisabled) || this.disabled)
     },
-    isSelected () {
+    selected () {
       if (this.NMenu.value === this.name) {
         return true
       } else {
         return false
       }
     }
+  },
+  watch: {
+    paddingLeft (value) {
+      this.$nextTick().then(() => {
+        this.delayedPaddingLeft = value
+      })
+    }
+  },
+  created () {
+    this.delayedPaddingLeft = this.paddingLeft
   },
   methods: {
     handleClick () {

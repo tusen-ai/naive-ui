@@ -59,6 +59,10 @@ export default {
     controller: {
       type: Object,
       default: null
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   render (h, context) {

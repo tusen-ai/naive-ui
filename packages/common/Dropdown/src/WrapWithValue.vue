@@ -6,6 +6,7 @@ import {
 export default {
   functional: true,
   render (h, context) {
+    if (!context.scopedSlots.default) return []
     const defaultSlot = context.scopedSlots.default()
     let counter = 1
     defaultSlot.forEach((vNode, index) => {

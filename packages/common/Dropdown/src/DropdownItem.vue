@@ -18,6 +18,10 @@ export default {
     value: {
       type: Number,
       required: true
+    },
+    selected: {
+      type: Boolean,
+      default: false
     }
   },
   inject: {
@@ -29,7 +33,12 @@ export default {
     return h(NBaseSelectOption, {
       props: {
         label: this.$scopedSlots.default ? '' : (this.label || this.name),
-        value: this.value
+        value: this.value,
+        isSelected: this.selected
+      },
+      class: {
+        'n-dropdown-item': true,
+        'n-dropdown-item--as-submenu': this.asSubmenu
       },
       scopedSlots: { ...this.$scopedSlots },
       on: {

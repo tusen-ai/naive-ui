@@ -1,10 +1,12 @@
-const DROPDOWN_RELATED_COMPONENT = ['NDropdownItem', 'NDropdownSubmenu']
+const DROPDOWN_RELATED_COMPONENT = ['NDropdownItem', 'NDropdownSubmenu', 'NMenuItem', 'NSubMenu']
+const SELECT_OPTION_LIKE_COMPONENT = ['NBaseSelectOption', 'NDropdownItem', 'NDropdownSubmenu', 'NMenuItem', 'NSubMenu']
+
+function isSelectOptionLikeComponent (vNode) {
+  return SELECT_OPTION_LIKE_COMPONENT.includes(getComponentNameOf(vNode))
+}
 
 function isDropdownRelatedComponent (vNode) {
-  if (DROPDOWN_RELATED_COMPONENT.includes(getComponentNameOf(vNode))) {
-    return true
-  }
-  return false
+  return DROPDOWN_RELATED_COMPONENT.includes(getComponentNameOf(vNode))
 }
 
 function getComponentNameOf (vNode) {
@@ -30,8 +32,8 @@ function getDefaultSlotOf (componentInstance) {
 }
 
 function getSlotOf (componentInstance, slotName) {
-  if (componentInstance.$slots[slotName]) return componentInstance.$slots[slotName]
-  if (componentInstance.$scopedSlots[slotName]) return componentInstance.$scopedSlots[slotName]()
+  if (componentInstance.$slots[slotName]) return componentInstance.$slots[slotName] || []
+  if (componentInstance.$scopedSlots[slotName]) return componentInstance.$scopedSlots[slotName]() || []
   return []
 }
 
@@ -74,5 +76,6 @@ export {
   getDefaultSlotOf,
   getComponentNameOf,
   getOptionPropsDataOf,
-  isDropdownRelatedComponent
+  isDropdownRelatedComponent,
+  isSelectOptionLikeComponent
 }

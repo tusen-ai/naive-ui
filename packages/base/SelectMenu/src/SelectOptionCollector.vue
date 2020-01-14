@@ -1,13 +1,9 @@
 <script>
 import {
   getDefaultSlotOf,
-  getComponentNameOf,
-  getOptionPropsDataOf
+  getOptionPropsDataOf,
+  isSelectOptionLikeComponent
 } from '../../../utils/component'
-
-import {
-  VALID_COMPONENT
-} from './config'
 
 export default {
   name: 'NBaseSelectOptionCollector',
@@ -76,7 +72,7 @@ export default {
          * If component name is valid,
          * there must be data
          */
-        if (VALID_COMPONENT.includes(getComponentNameOf(child))) {
+        if (isSelectOptionLikeComponent(child)) {
           const propsData = getOptionPropsDataOf(child)
           this.options.push({ ...propsData, children: child.children })
         }

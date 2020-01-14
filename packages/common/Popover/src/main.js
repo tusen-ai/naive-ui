@@ -84,6 +84,10 @@ export default {
     y: {
       type: Number,
       default: null
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   render (h, context) {

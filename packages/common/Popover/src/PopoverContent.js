@@ -247,43 +247,42 @@ export default {
             }
           }
         }, [
-          this.active
-            ? h('div', {
-              attrs: {
-                'n-placement': this.adjustedPlacement
+          this.active ? h('div', {
+            attrs: {
+              'n-placement': this.adjustedPlacement
+            },
+            staticClass: 'n-popover-content',
+            class: {
+              'n-popover-content--without-arrow': !this.arrow,
+              [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme,
+              'n-popover-content--without-shadow': !this.shadow,
+              [this.contentClass]: this.contentClass,
+              'n-popover-content--fix-width': this.width !== null || this.maxWidth !== null
+            },
+            style: this.style,
+            directives: [
+              // { name: 'show', rawName: 'v-show', value: this.active },
+              {
+                name: 'clickoutside',
+                value: this.handleClickOutside
               },
-              staticClass: 'n-popover-content',
-              class: {
-                'n-popover-content--without-arrow': !this.arrow,
-                [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme,
-                'n-popover-content--without-shadow': !this.shadow,
-                [this.contentClass]: this.contentClass,
-                'n-popover-content--fix-width': this.width !== null || this.maxWidth !== null
-              },
-              style: this.style,
-              directives: [
-                {
-                  name: 'clickoutside',
-                  value: this.handleClickOutside
-                },
-                {
-                  name: 'mousemoveoutside',
-                  value: this.handleMouseMoveOutside
-                }
-              ],
-              on: {
-                mouseenter: this.handleMouseEnter,
-                mouseleave: this.handleMouseLeave
+              {
+                name: 'mousemoveoutside',
+                value: this.handleMouseMoveOutside
               }
-            }, [
-              ...this.$slots.default,
-              this.arrow
-                ? h('div', {
-                  staticClass: 'n-popover-arrow'
-                })
-                : null
-            ])
-            : null
+            ],
+            on: {
+              mouseenter: this.handleMouseEnter,
+              mouseleave: this.handleMouseLeave
+            }
+          }, [
+            ...(this.$slots.default || []),
+            this.arrow
+              ? h('div', {
+                staticClass: 'n-popover-arrow'
+              })
+              : null
+          ]) : null
         ])
       ])
     ])

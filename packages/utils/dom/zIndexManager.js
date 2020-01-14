@@ -12,7 +12,7 @@ class ZIndexManager {
     return this.elementZIndex.size
   }
   registerElement (el) {
-    console.debug('[ZIndexManager.registerElement]: called')
+    console.debug('[ZIndexManager.registerElement]: called', el)
     if (this.elementZIndex.has(el)) {
       console.debug('[ZIndexManager.registerElement]: do not register duplicate element')
     } else {

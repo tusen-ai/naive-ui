@@ -2,8 +2,9 @@
   <n-dropdown-item
     ref="activator"
     :label="label"
-    name="n-dropdown-submenu-item"
+    :name="name"
     :value="value"
+    :selected="selected"
     as-submenu
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
@@ -69,6 +70,10 @@ export default {
     }
   },
   props: {
+    name: {
+      type: String,
+      default: 'n-dropdown-submenu-item'
+    },
     arrow: {
       type: Boolean,
       default: true
@@ -104,6 +109,10 @@ export default {
     placement: {
       type: String,
       default: 'right-start'
+    },
+    selected: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
