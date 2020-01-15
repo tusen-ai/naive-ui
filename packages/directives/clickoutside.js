@@ -35,20 +35,29 @@ const clickoutside = {
     //   clickoutsideDelegate.registerHandler(el, el[ctx].handler, false)
     // }
   },
-  update (el, bindings) {
-    console.debug('[clickoutside]: update')
-    if (typeof bindings.value === 'function') {
-      clickoutsideDelegate.unregisterHandler(el[ctx].handler)
-      el[ctx].handler = bindings.value
-      clickoutsideDelegate.registerHandler(el, el[ctx].handler, false)
-    }
-  },
+  // update (el, bindings) {
+  //   console.debug('[clickoutside]: update', el)
+  //   if (typeof bindings.value === 'function') {
+  //     clickoutsideDelegate.unregisterHandler(el[ctx].handler)
+  //     el[ctx].handler = bindings.value
+  //     clickoutsideDelegate.registerHandler(el, el[ctx].handler, false)
+  //   }
+  // },
   componentUpdated (el, bindings) {
     console.debug('[clickoutside]: componentUpdated')
     if (typeof bindings.value === 'function') {
-      clickoutsideDelegate.unregisterHandler(el[ctx].handler)
-      el[ctx].handler = bindings.value
-      clickoutsideDelegate.registerHandler(el, el[ctx].handler, false)
+      if (el[ctx] && el[ctx].handler) {
+        if (el[ctx].handler !== bindings.value) {
+          clickoutsideDelegate.unregisterHandler(el[ctx].handler)
+          el[ctx].handler = bindings.value
+          clickoutsideDelegate.registerHandler(el, el[ctx].handler, false)
+        }
+      } else {
+        el[ctx].handler = bindings.value
+        clickoutsideDelegate.registerHandler(el, el[ctx].handler, false)
+      }
+    } else {
+      console.error('[mousemoveoutside]: binding value is not a function')
     }
   },
   unbind (el) {

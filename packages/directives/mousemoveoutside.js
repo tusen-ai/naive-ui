@@ -29,20 +29,29 @@ const mousemoveoutside = {
   inserted () {
     console.debug('[mousemoveoutside]: inserted')
   },
-  update (el, bindings) {
-    console.debug('[mousemoveoutside]: update')
-    if (typeof bindings.value === 'function') {
-      moveoutsideDelegate.unregisterHandler(el[ctx].handler)
-      el[ctx].handler = bindings.value
-      moveoutsideDelegate.registerHandler(el, el[ctx].handler)
-    }
-  },
+  // update (el, bindings) {
+  //   console.debug('[mousemoveoutside]: update')
+  //   if (typeof bindings.value === 'function') {
+  //     moveoutsideDelegate.unregisterHandler(el[ctx].handler)
+  //     el[ctx].handler = bindings.value
+  //     moveoutsideDelegate.registerHandler(el, el[ctx].handler)
+  //   }
+  // },
   componentUpdated (el, bindings) {
     console.debug('[mousemoveoutside]: componentUpdated')
     if (typeof bindings.value === 'function') {
-      moveoutsideDelegate.unregisterHandler(el[ctx].handler)
-      el[ctx].handler = bindings.value
-      moveoutsideDelegate.registerHandler(el, el[ctx].handler)
+      if (el[ctx] && el[ctx].handler) {
+        if (el[ctx].handler !== bindings.value) {
+          moveoutsideDelegate.unregisterHandler(el[ctx].handler)
+          el[ctx].handler = bindings.value
+          moveoutsideDelegate.registerHandler(el, el[ctx].handler)
+        }
+      } else {
+        el[ctx].handler = bindings.value
+        moveoutsideDelegate.registerHandler(el, el[ctx].handler)
+      }
+    } else {
+      console.error('[mousemoveoutside]: binding value is not a function')
     }
   },
   unbind (el) {
