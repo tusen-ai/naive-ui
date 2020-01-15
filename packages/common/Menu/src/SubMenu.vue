@@ -25,7 +25,7 @@
       <template v-slot:activator>
         <div
           class="n-sub-menu-item n-dropdown"
-          :style="{paddingLeft: delayedPaddingLeft + 'px'}"
+          :style="{ paddingLeft: delayedPaddingLeft + 'px' }"
           :class="{
             'n-sub-menu-item--collapsed': isCollapsed,
             'n-sub-menu-item--active': !isCollapsed,
@@ -161,7 +161,7 @@ export default {
       return this.menuItemNames.includes(this.NMenu.value)
     },
     disabledCollectable () {
-      return !this.shouldBeRenderedAsDropdownSubmenu
+      return this.shouldBeRenderedAsDropdownSubmenu
     },
     shouldBeRenderedAsDropdownSubmenu () {
       return this.NMenu.collapsed && !this.isFirstLevel

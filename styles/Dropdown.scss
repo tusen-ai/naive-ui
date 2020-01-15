@@ -11,22 +11,33 @@
     @include b(dropdown-menu) {
       @include m(as-menu-popover) {
         @include b(base-select-menu) {
-          @include b(base-select-option) {
+          @include once {
+            padding: 4px 0;
+          }
+          @include b(dropdown-item) {
+            @include once {
+              &:first-child {
+                margin-top: 0;
+              }
+              &:last-child {
+                margin-bottom: 0;
+              }
+              margin: 4px 0;
+            }
             &:hover {
-              color: $--primary-6;
+              color: map-get($--dropdown-item-text-color, 'hover');
               @include b(dropdown-submenu-activator) {
                 @include b(icon) {
-                  fill: $--primary-6;
+                  fill: map-get($--dropdown-item-text-color, 'hover');
                 }
               }
             }
             @include m(selected) {
-              background-color: $--base-select-menu-light-bar-background-color;
+              color: map-get($--dropdown-item-text-color, 'selected');
+              background-color: map-get($--dropdown-item-background-color, 'selected');
             }
-          }
-          @include b(dropdown-item) {
             @include m(as-submenu) {
-              background-color: transparent !important;
+              background-color: transparent;
             }
           }
         }
@@ -54,7 +65,7 @@
               padding-top: 4px;
               padding-bottom: 4px;
             }
-            @include b(base-select-option) {
+            @include b(dropdown-item) {
               padding: 0 20px;
             }
             @include b(dropdown-divider) {
@@ -72,7 +83,7 @@
               padding-top: 4px;
               padding-bottom: 4px;
             }
-            @include b(base-select-option) {
+            @include b(dropdown-item) {
               padding: 0 20px;
             }
             @include b(dropdown-divider) {
@@ -90,7 +101,7 @@
               padding-top: 6px;
               padding-bottom: 6px;
             }
-            @include b(base-select-option) {
+            @include b(dropdown-item) {
               padding: 0 24px;
             }
             @include b(dropdown-divider) {
@@ -108,7 +119,7 @@
               padding-top: 8px;
               padding-bottom: 8px;
             }
-            @include b(base-select-option) {
+            @include b(dropdown-item) {
               padding: 0 24px;
             }
             @include b(dropdown-submenu-activator) {

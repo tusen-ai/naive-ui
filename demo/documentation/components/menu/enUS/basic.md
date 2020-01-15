@@ -18,10 +18,9 @@
       </n-sub-menu>
     </n-sub-menu>
     <n-sub-menu title="subMenu3" name="subMenu3">
-      <n-menu-handleSelectup title="group">
-        <n-menu-item title="sub1" name="sub6"></n-menu-item>
-        <n-menu-item title="sub1" name="sub7"></n-menu-item>
-      </n-menu-handleSelectup>
+      <n-menu-item title="sub1" name="sub8"></n-menu-item>
+      <n-menu-item title="sub1" name="sub6"></n-menu-item>
+      <n-menu-item title="sub1" name="sub7"></n-menu-item>
     </n-sub-menu>
   </n-menu>
 </div>

@@ -46,7 +46,7 @@
         <ios-airplane />
       </n-icon>
     </template>
-    <n-sub-menu title="group">
+    <n-sub-menu title="group" name="group">
       <n-menu-item title="sub1" name="sub6"></n-menu-item>
       <n-menu-item title="sub1" name="sub7"></n-menu-item>
     </n-sub-menu>

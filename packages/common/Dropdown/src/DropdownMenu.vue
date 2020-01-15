@@ -105,7 +105,6 @@ export default {
   },
   methods: {
     handleSelectItem (name) {
-      console.log('handleSelectItem')
       /**
        * Can only be called at root level menu
        */

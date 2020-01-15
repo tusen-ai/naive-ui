@@ -1,5 +1,5 @@
 <template>
-  <li v-if="!shouldRenderAsDropItem & isFirstLevel" class="n-menu-item-wrapper">
+  <li v-if="!shouldBeRenderedAsDropdownItem & isFirstLevel" class="n-menu-item-wrapper">
     <n-tooltip trigger="hover" :disabled="!NMenu.collapsed" placement="right" :delay="300">
       <template v-slot:activator>
         <div
@@ -33,7 +33,7 @@
     </n-tooltip>
   </li>
   <li
-    v-else-if="!shouldRenderAsDropItem"
+    v-else-if="!shouldBeRenderedAsDropdownItem"
     class="n-menu-item"
     :style="{ paddingLeft: delayedPaddingLeft + 'px' }"
     :class="{
@@ -123,9 +123,9 @@ export default {
   },
   computed: {
     disabledCollectable () {
-      return this.shouldRenderAsDropItem
+      return this.shouldBeRenderedAsDropdownItem
     },
-    shouldRenderAsDropItem () {
+    shouldBeRenderedAsDropdownItem () {
       if (this.NMenuUl) return false
       return !this.isFirstLevel && this.NMenu.collapsed
     },
