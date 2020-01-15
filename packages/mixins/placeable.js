@@ -205,6 +205,7 @@ export default {
     updatePosition (el, cb) {
       if (!this.active && !this.show) return
       this._getTrackingElement()
+      this.trackingElement.style.position = 'absolute'
       if (this.manuallyPositioned) {
         if (!this.trackingElement) {
           console.error('[naive-ui/placeable/updatePosition]: trackingElement not found!')
@@ -218,6 +219,10 @@ export default {
         }
       }
       const activatorRect = getActivatorRect(this.manuallyPositioned, this.x, this.y, this.trackedElement)
+      const contentInner = getContentInner(this)
+      if (this.widthMode === 'activator' && contentInner) {
+        contentInner.style.minWidth = activatorRect.width + 'px'
+      }
       const contentBoundingClientRect = {
         width: this.trackingElement.offsetWidth,
         height: this.trackingElement.offsetHeight
@@ -230,10 +235,6 @@ export default {
         offset = getPositionInAbsoluteMode(adjustedPlacement)
       }
       this.setOffsetOfTrackingElement(offset, suggestedTransformOrigin)
-      const contentInner = getContentInner(this)
-      if (this.widthMode === 'activator' && contentInner) {
-        contentInner.style.minWidth = activatorRect.width + 'px'
-      }
       if (el && cb) {
         cb(el, activatorRect, contentBoundingClientRect)
       }

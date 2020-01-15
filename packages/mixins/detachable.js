@@ -55,7 +55,6 @@ export default {
   },
   mounted () {
     if (this.detached) {
-      this.detachTarget = document.body // getScrollParent(this.$refs.self)
       this.detachContent()
       if (this.active && !this.contentContainerMounted) {
         this.contentContainerMounted = true
