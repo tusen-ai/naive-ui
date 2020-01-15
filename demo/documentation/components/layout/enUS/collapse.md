@@ -20,32 +20,37 @@ Use `collapsed-width` and `width` to set sider's width.
       @collapse="collapsed = true"
       @expand="collapsed = false"
     >
-      <n-menu :collapsed="collapsed" :collapsed-width="48" v-model="activeMenuItemName">
+      <n-menu
+        :collapsed="collapsed"
+        :collapsed-width="48"
+        :collapsed-icon-size="24"
+        v-model="activeMenuItemName"
+      >
         <n-menu-item title="1800" name="1800">
           <template v-slot:icon>
             <n-icon>
-              <md-notifications-outline />
+              <md-contacts />
             </n-icon>
           </template>
         </n-menu-item>
         <n-menu-item title="1900" name="1900">
           <template v-slot:icon>
             <n-icon>
-              <md-notifications-outline />
+              <md-contacts />
             </n-icon>
           </template>
         </n-menu-item>
         <n-menu-item title="2000" name="2000">
           <template v-slot:icon>
             <n-icon>
-              <md-notifications-outline />
+              <md-contacts />
             </n-icon>
           </template>
         </n-menu-item>
         <n-sub-menu title="2001" name="2001">
           <template v-slot:icon>
             <n-icon>
-              <md-notifications-outline />
+              <md-contacts />
             </n-icon>
           </template>
           <n-menu-item title="2002" name="2002"></n-menu-item>
@@ -53,7 +58,7 @@ Use `collapsed-width` and `width` to set sider's width.
         <n-sub-menu title="2003" name="2003">
         <template v-slot:icon>
             <n-icon>
-              <md-notifications-outline />
+              <md-contacts />
             </n-icon>
           </template>
           <n-sub-menu title="2004" name="2004">
@@ -63,7 +68,7 @@ Use `collapsed-width` and `width` to set sider's width.
         <n-sub-menu title="2006" name="2006">
           <template v-slot:icon>
             <n-icon>
-              <md-notifications-outline />
+              <md-contacts />
             </n-icon>
           </template>
           <n-sub-menu title="2007" name="2007">
@@ -110,11 +115,11 @@ Use `collapsed-width` and `width` to set sider's width.
 ```
 
 ```js
-import mdNotificationsOutline from 'naive-ui/lib/icons/md-notifications-outline'
+import mdContacts from 'naive-ui/lib/icons/md-contacts'
 
 export default {
   components: {
-    mdNotificationsOutline
+    mdContacts
   },
   data () {
     return {

@@ -34,6 +34,10 @@ export default {
       type: Number,
       default: null
     },
+    collapsedIconSize: {
+      type: Number,
+      default: undefined
+    },
     value: {
       type: String,
       default: null

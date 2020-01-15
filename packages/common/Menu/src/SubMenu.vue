@@ -18,7 +18,7 @@
       trigger="click"
       :focusable="false"
       :disabled="!isFirstLevel || !NMenu.collapsed"
-      placement="right"
+      placement="right-start"
       type="menu"
       @select="handleDropdownSelect"
     >
@@ -27,8 +27,8 @@
           class="n-sub-menu-item n-dropdown"
           :style="{ paddingLeft: delayedPaddingLeft + 'px' }"
           :class="{
-            'n-sub-menu-item--collapsed': isCollapsed,
-            'n-sub-menu-item--active': !isCollapsed,
+            'n-sub-menu-item--collapsed': contentCollapsed,
+            'n-sub-menu-item--active': !contentCollapsed,
             'n-sub-menu-item--disabled': disabled,
           }"
           @click="handleClick"
@@ -37,9 +37,9 @@
             v-if="$slots.icon"
             class="n-sub-menu-item__icon"
             :style="{
-              width: iconSize && (iconSize + 'px'),
-              height: iconSize && (iconSize + 'px'),
-              fontSize: iconSize && (iconSize + 'px'),
+              width: maxIconSize && (maxIconSize + 'px'),
+              height: maxIconSize && (maxIconSize + 'px'),
+              fontSize: activeIconSize && (activeIconSize + 'px'),
             }"
           >
             <slot name="icon" />
@@ -58,8 +58,8 @@
       class="n-sub-menu-item n-dropdown"
       :style="{paddingLeft: delayedPaddingLeft + 'px'}"
       :class="{
-        'n-sub-menu-item--collapsed': isCollapsed,
-        'n-sub-menu-item--active': !isCollapsed,
+        'n-sub-menu-item--collapsed': contentCollapsed,
+        'n-sub-menu-item--active': !contentCollapsed,
         'n-sub-menu-item--disabled': disabled,
       }"
       @click="handleClick"
@@ -83,7 +83,7 @@
     </div>
     <fade-in-height-expand-transition>
       <n-menu-ul
-        v-show="!isCollapsed"
+        v-show="!contentCollapsed"
         class="n-sub-menu-content"
       >
         <slot />
@@ -166,8 +166,24 @@ export default {
     shouldBeRenderedAsDropdownSubmenu () {
       return this.NMenu.collapsed && !this.isFirstLevel
     },
+    useCollapsedIconSize () {
+      return this.NMenu.collapsed && this.isFirstLevel
+    },
+    maxIconSize () {
+      return Math.max(this.collapsedIconSize, this.iconSize)
+    },
+    activeIconSize () {
+      if (this.useCollapsedIconSize) {
+        return this.collapsedIconSize
+      } else {
+        return this.iconSize
+      }
+    },
     iconSize () {
       return this.NMenu && this.NMenu.iconSize
+    },
+    collapsedIconSize () {
+      return this.NMenu.collapsedIconSize || this.NMenu.iconSize
     },
     isFirstLevel () {
       return !this.NSubMenu && !this.NMenuItemGroup
@@ -187,7 +203,7 @@ export default {
         return this.NMenu.rootIndent || this.NMenu.indent
       }
     },
-    isCollapsed () {
+    contentCollapsed () {
       return this.NMenu.collapsed || !(this.NMenu.synthesizedOpenNames.includes(this.name))
     }
   },

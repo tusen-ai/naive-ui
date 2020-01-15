@@ -1,5 +1,5 @@
 <template>
-  <li v-if="!shouldBeRenderedAsDropdownItem & isFirstLevel" class="n-menu-item-wrapper">
+  <li v-if="!shouldBeRenderedAsDropdownItem && isFirstLevel" class="n-menu-item-wrapper">
     <n-tooltip trigger="hover" :disabled="!NMenu.collapsed" placement="right" :delay="300">
       <template v-slot:activator>
         <div
@@ -15,9 +15,9 @@
             v-if="$slots.icon"
             class="n-menu-item__icon"
             :style="{
-              width: iconSize && (iconSize + 'px'),
-              height: iconSize && (iconSize + 'px'),
-              fontSize: iconSize && (iconSize + 'px'),
+              width: maxIconSize && (maxIconSize + 'px'),
+              height: maxIconSize && (maxIconSize + 'px'),
+              fontSize: activeIconSize && (activeIconSize + 'px'),
             }"
           >
             <slot name="icon" />
@@ -129,8 +129,24 @@ export default {
       if (this.NMenuUl) return false
       return !this.isFirstLevel && this.NMenu.collapsed
     },
+    useCollapsedIconSize () {
+      return this.NMenu.collapsed && this.isFirstLevel
+    },
+    maxIconSize () {
+      return Math.max(this.collapsedIconSize, this.iconSize)
+    },
+    activeIconSize () {
+      if (this.useCollapsedIconSize) {
+        return this.collapsedIconSize
+      } else {
+        return this.iconSize
+      }
+    },
+    collapsedIconSize () {
+      return this.NMenu.collapsedIconSize || this.NMenu.iconSize
+    },
     iconSize () {
-      return this.NMenu && this.NMenu.iconSize
+      return this.NMenu.iconSize
     },
     isFirstLevel () {
       return !this.NSubMenu && !this.NMenuItemGroup

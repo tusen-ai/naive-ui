@@ -68,11 +68,13 @@
           list-style: none;
           line-height: 1.5;
           @include e(icon) {
-            transition: padding-right .3s $--n-ease-in-out-cubic-bezier;
+            transition: font-size .3s $--n-ease-in-out-cubic-bezier, padding-right .3s $--n-ease-in-out-cubic-bezier;
             box-sizing: content-box;
             flex-shrink: 0;
             padding-right: 8px;
             display: inline-flex;
+            align-items: center;
+            justify-content: center;
           }
           @include e(header) {
             transition: color .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier;
@@ -169,11 +171,13 @@
           align-items: center;
           position: relative;
           @include e(icon) {
-            transition: padding-right .3s $--n-ease-in-out-cubic-bezier;
+            transition: font-size .3s $--n-ease-in-out-cubic-bezier, padding-right .3s $--n-ease-in-out-cubic-bezier;
             padding-right: 8px;
             box-sizing: content-box;
             flex-shrink: 0;
             display: inline-flex;
+            align-items: center;
+            justify-content: center;
           }
           @include e(header) {
             transition: color .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier;
