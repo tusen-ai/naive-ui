@@ -4,7 +4,7 @@
       <div
         v-if="showLightBar"
         class="n-base-select-menu-light-bar"
-        :style="{ top: `${lightBarTop}px` }"
+        :style="{ top: lightBarStyleTop }"
       />
     </transition>
   </div>
