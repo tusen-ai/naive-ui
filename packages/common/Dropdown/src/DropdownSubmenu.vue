@@ -22,8 +22,12 @@
     <transition
       name="n-fade-in-scale-up--transition"
     >
+      <!--
+        magic here, if use v-if, dropdown won't woring in menu. It can't
+        exists at same time with n-submenu selectedInside property
+      -->
       <n-dropdown-menu
-        v-if="active"
+        v-show="active"
         ref="content"
         :style="style"
         :theme="synthesizedTheme"
@@ -189,10 +193,10 @@ export default {
       }
       if (value) {
         this.$nextTick().then(() => {
-          rootDropdownMenu.pendingSubMenuInstance = this
+          rootDropdownMenu.pendingSubmenuInstance = this
         })
       } else {
-        rootDropdownMenu.pendingSubMenuInstance = null
+        rootDropdownMenu.pendingSubmenuInstance = null
       }
     }
   },

@@ -1,5 +1,5 @@
 <template>
-  <n-dropdown-submenu v-if="shouldBeRenderedAsDropdownSubmenu && !NMenuUl" :value="value" :label="title" :name="name" :selected="NMenu.activeNames.includes(name)">
+  <n-dropdown-submenu v-if="shouldBeRenderedAsDropdownSubmenu && !NMenuUl" :value="value" :label="title" :name="name" :selected="selectedInside">
     <template v-slot:activator>
       <render :render="title" />
     </template>
@@ -7,35 +7,35 @@
   </n-dropdown-submenu>
   <li
     v-else
-    class="n-sub-menu"
+    class="n-submenu"
     :class="{
-      'n-sub-menu--selected-inside': selectedInside
+      'n-submenu--selected-inside': selectedInside
     }"
   >
     <n-dropdown
       v-if="isFirstLevel"
       size="large"
-      trigger="click"
+      trigger="hover"
       :focusable="false"
-      :disabled="!isFirstLevel || !NMenu.collapsed"
+      :disabled="!NMenu.collapsed"
       placement="right-start"
       type="menu"
       @select="handleDropdownSelect"
     >
       <template v-slot:activator>
         <div
-          class="n-sub-menu-item n-dropdown"
+          class="n-submenu-item n-dropdown"
           :style="{ paddingLeft: delayedPaddingLeft + 'px' }"
           :class="{
-            'n-sub-menu-item--collapsed': contentCollapsed,
-            'n-sub-menu-item--active': !contentCollapsed,
-            'n-sub-menu-item--disabled': disabled,
+            'n-submenu-item--collapsed': contentCollapsed,
+            'n-submenu-item--active': !contentCollapsed,
+            'n-submenu-item--disabled': disabled,
           }"
           @click="handleClick"
         >
           <div
             v-if="$slots.icon"
-            class="n-sub-menu-item__icon"
+            class="n-submenu-item__icon"
             :style="{
               width: maxIconSize && (maxIconSize + 'px'),
               height: maxIconSize && (maxIconSize + 'px'),
@@ -44,7 +44,7 @@
           >
             <slot name="icon" />
           </div>
-          <div class="n-sub-menu-item__header">
+          <div class="n-submenu-item__header">
             <slot name="header">
               <render :render="title" />
             </slot>
@@ -55,18 +55,18 @@
     </n-dropdown>
     <div
       v-else
-      class="n-sub-menu-item n-dropdown"
+      class="n-submenu-item n-dropdown"
       :style="{paddingLeft: delayedPaddingLeft + 'px'}"
       :class="{
-        'n-sub-menu-item--collapsed': contentCollapsed,
-        'n-sub-menu-item--active': !contentCollapsed,
-        'n-sub-menu-item--disabled': disabled,
+        'n-submenu-item--collapsed': contentCollapsed,
+        'n-submenu-item--active': !contentCollapsed,
+        'n-submenu-item--disabled': disabled,
       }"
       @click="handleClick"
     >
       <div
         v-if="$slots.icon"
-        class="n-sub-menu-item__icon"
+        class="n-submenu-item__icon"
         :style="{
           width: iconSize && (iconSize + 'px'),
           height: iconSize && (iconSize + 'px'),
@@ -75,7 +75,7 @@
       >
         <slot name="icon" />
       </div>
-      <div class="n-sub-menu-item__header">
+      <div class="n-submenu-item__header">
         <slot name="header">
           <render :render="title" />
         </slot>
@@ -84,7 +84,7 @@
     <fade-in-height-expand-transition>
       <n-menu-ul
         v-show="!contentCollapsed"
-        class="n-sub-menu-content"
+        class="n-submenu-content"
       >
         <slot />
       </n-menu-ul>
@@ -101,7 +101,7 @@ import NDropdownSubmenu from '../../Dropdown/src/DropdownSubmenu'
 import NMenuUl from './MenuUl'
 
 export default {
-  name: 'NSubMenu',
+  name: 'NSubmenu',
   components: {
     FadeInHeightExpandTransition,
     NDropdown,
@@ -110,11 +110,11 @@ export default {
     render
   },
   mixins: [
-    collectable('NSubMenu', 'menuItemNames', 'menuItemNames', true)
+    collectable('NSubmenu', 'menuItemNames', 'menuItemNames', true)
   ],
   provide () {
     return {
-      NSubMenu: this,
+      NSubmenu: this,
       NMenuItemGroup: null
     }
   },
@@ -122,7 +122,7 @@ export default {
     NMenu: {
       default: null
     },
-    NSubMenu: {
+    NSubmenu: {
       default: null
     },
     NMenuItemGroup: {
@@ -160,9 +160,6 @@ export default {
     selectedInside () {
       return this.menuItemNames.includes(this.NMenu.value)
     },
-    disabledCollectable () {
-      return this.shouldBeRenderedAsDropdownSubmenu
-    },
     shouldBeRenderedAsDropdownSubmenu () {
       return this.NMenu.collapsed && !this.isFirstLevel
     },
@@ -186,7 +183,7 @@ export default {
       return this.NMenu.collapsedIconSize || this.NMenu.iconSize
     },
     isFirstLevel () {
-      return !this.NSubMenu && !this.NMenuItemGroup
+      return !this.NSubmenu && !this.NMenuItemGroup
     },
     synthesizedDisabled () {
       return (this.NMenu && this.NMenu.disabled) || this.disabled
@@ -197,8 +194,8 @@ export default {
       }
       if (this.NMenuItemGroup) {
         return this.NMenu.indent / 2 + this.NMenuItemGroup.paddingLeft
-      } else if (this.NSubMenu) {
-        return this.NMenu.indent + this.NSubMenu.paddingLeft
+      } else if (this.NSubmenu) {
+        return this.NMenu.indent + this.NSubmenu.paddingLeft
       } else {
         return this.NMenu.rootIndent || this.NMenu.indent
       }
@@ -208,13 +205,6 @@ export default {
     }
   },
   watch: {
-    selectedInside (value) {
-      if (!value) {
-        this.NMenu.activeNames = Array.from(new Set(this.NMenu.activeNames).delete(this.name))
-      } else {
-        this.NMenu.activeNames = Array.from(new Set(this.NMenu.activeNames).add(this.name))
-      }
-    },
     paddingLeft (value) {
       this.$nextTick().then(() => {
         this.delayedPaddingLeft = value
@@ -223,9 +213,6 @@ export default {
   },
   created () {
     this.delayedPaddingLeft = this.paddingLeft
-    if (this.selectedInside) {
-      this.NMenu.activeNames = Array.from(new Set(this.NMenu.activeNames).add(this.name))
-    }
   },
   methods: {
     handleDropdownSelect (value) {

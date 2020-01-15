@@ -6,7 +6,7 @@ export default function (
 ) {
   return {
     computed: {
-      activeInjection () {
+      activeCollectableInjection () {
         if (Array.isArray(injectionName)) {
           const activeInjectionIndex = injectionName.findIndex(key => this[key])
           if (~activeInjectionIndex) {
@@ -20,28 +20,25 @@ export default function (
     },
     watch: {
       [registerProperty]: function (value, oldValue) {
-        if (this.activeInjection) {
+        if (this.activeCollectableInjection) {
           this.registerValue(value, oldValue)
         }
       }
     },
     created () {
-      if (this.activeInjection) {
+      if (this.activeCollectableInjection) {
         this.registerValue(this[registerProperty])
       }
     },
     beforeDestroy () {
-      if (this.activeInjection) {
+      if (this.activeCollectableInjection) {
         this.registerValue(undefined, this[registerProperty])
       }
     },
     methods: {
       registerValue (value = undefined, oldValue = undefined) {
-        if (this.disabledCollectable) {
-          return
-        }
-        if (this.activeInjection) {
-          const values = new Set(this.activeInjection[collectionProperty])
+        if (this.activeCollectableInjection) {
+          const values = new Set(this.activeCollectableInjection[collectionProperty])
           if (oldValue !== undefined) {
             if (flatten && Array.isArray(value)) {
               value.forEach(registeredValue => values.delete(registeredValue))
@@ -56,7 +53,7 @@ export default function (
               values.add(value)
             }
           }
-          this.activeInjection[collectionProperty] = Array.from(values)
+          this.activeCollectableInjection[collectionProperty] = Array.from(values)
         }
       }
     }

@@ -25,15 +25,15 @@
           }
         }
       }
-      @include b(sub-menu) {
+      @include b(submenu) {
         @include m(selected-inside) {
-          @include b(sub-menu-item) {
+          @include b(submenu-item) {
             @include e(icon) {
               fill: $--primary-6;
             }
           }
         }
-        @include b(sub-menu-item) {
+        @include b(submenu-item) {
           @include e(icon) {
             fill: $--n-text-color;
           }
@@ -133,9 +133,9 @@
         // }
       }
     }
-    @include b(sub-menu) {
+    @include b(submenu) {
       @include m(selected-inside) {
-        @include b(sub-menu-item) {
+        @include b(submenu-item) {
           @include e(header) {
             color: $--primary-6
           }
@@ -147,13 +147,13 @@
       @include once {
         cursor: pointer;
         position: relative; 
-        @include b(sub-menu-content) {
+        @include b(submenu-content) {
           padding: 0;
           list-style: none;
           @include fade-in-height-expand-transition($duration: .2s);
         }
       }
-      @include b(sub-menu-item) {
+      @include b(submenu-item) {
         @include e(header) {
           color: $--n-text-color;
         }
@@ -205,8 +205,8 @@
         }
         /** ::after is the arrow of submenu */
         &::after {
-          border-left: 2px solid  $--menu-sub-menu-arrow-color;
-          border-top: 2px solid  $--menu-sub-menu-arrow-color;
+          border-left: 2px solid  $--menu-submenu-arrow-color;
+          border-top: 2px solid  $--menu-submenu-arrow-color;
           @include once {
             content: '';
             height: 6px;

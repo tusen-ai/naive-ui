@@ -62,7 +62,7 @@ export default {
     return {
       active: true,
       collectedOptions: [],
-      pendingSubMenuInstance: null,
+      pendingSubmenuInstance: null,
       activeMenuInstance: this
     }
   },
@@ -114,7 +114,7 @@ export default {
     handleKeyDownLeft () {
       if (this.activeMenuInstance.NDropdownSubmenu) {
         this.activeMenuInstance.NDropdownSubmenu.menuActivated = false
-        this.pendingSubMenuInstance = this.activeMenuInstance.NDropdownSubmenu
+        this.pendingSubmenuInstance = this.activeMenuInstance.NDropdownSubmenu
       }
       if (this.activeMenuInstance.NDropdownMenu) {
         this.activeMenuInstance = this.activeMenuInstance.NDropdownMenu
@@ -128,13 +128,13 @@ export default {
     },
     handleKeyDownRight () {
       if (
-        this.pendingSubMenuInstance &&
+        this.pendingSubmenuInstance &&
         this.activeMenuInstance &&
-        this.pendingSubMenuInstance !== this.activeMenuInstance.NDropdownSubmenu
+        this.pendingSubmenuInstance !== this.activeMenuInstance.NDropdownSubmenu
       ) {
-        this.pendingSubMenuInstance.menuActivated = true
+        this.pendingSubmenuInstance.menuActivated = true
         this.$nextTick().then(() => {
-          this.activeMenuInstance = this.pendingSubMenuInstance.$refs.content
+          this.activeMenuInstance = this.pendingSubmenuInstance.$refs.content
           this.$nextTick().then(() => {
             this.activeMenuInstance.$refs.selectMenu.next()
           })

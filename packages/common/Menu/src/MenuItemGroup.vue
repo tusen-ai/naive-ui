@@ -25,7 +25,7 @@ export default {
   provide () {
     return {
       NMenuItemGroup: this,
-      NSubMenu: null
+      NSubmenu: null
     }
   },
   inject: {
@@ -35,7 +35,7 @@ export default {
     NMenu: {
       default: null
     },
-    NSubMenu: {
+    NSubmenu: {
       default: null
     }
   },
@@ -46,13 +46,13 @@ export default {
   },
   computed: {
     isFirstLevel () {
-      return !this.NSubMenu && !this.NMenuItemGroup
+      return !this.NSubmenu && !this.NMenuItemGroup
     },
     paddingLeft () {
       if (this.NMenuItemGroup) {
         return this.NMenu.indent / 2 + this.NMenuItemGroup.paddingLeft
-      } else if (this.NSubMenu) {
-        return this.NMenu.indent / 2 + this.NSubMenu.paddingLeft
+      } else if (this.NSubmenu) {
+        return this.NMenu.indent / 2 + this.NSubmenu.paddingLeft
       } else {
         return (this.NMenu.rootIndent || this.NMenu.indent) / 2
       }

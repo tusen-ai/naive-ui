@@ -22,35 +22,35 @@
       </n-icon>
     </template>
   </n-menu-item>
-  <n-sub-menu title="subMenu" name="subMenu">
+  <n-submenu title="subMenu" name="subMenu">
     <template v-slot:icon>
       <n-icon>
         <ios-airplane />
       </n-icon>
     </template>
     <n-menu-item title="sub1" name="sub1"></n-menu-item>
-  </n-sub-menu>
-  <n-sub-menu title="subMenu2" name="subMenu2">
+  </n-submenu>
+  <n-submenu title="subMenu2" name="subMenu2">
   <template v-slot:icon>
       <n-icon>
         <ios-airplane />
       </n-icon>
     </template>
-    <n-sub-menu title="subMenu22" name="subMenu22">
+    <n-submenu title="subMenu22" name="subMenu22">
       <n-menu-item title="sub222" name="sub222"></n-menu-item>
-    </n-sub-menu>
-  </n-sub-menu>
-  <n-sub-menu title="subMenu3" name="subMenu3">
+    </n-submenu>
+  </n-submenu>
+  <n-submenu title="subMenu3" name="subMenu3">
     <template v-slot:icon>
       <n-icon>
         <ios-airplane />
       </n-icon>
     </template>
-    <n-sub-menu title="group" name="group">
+    <n-submenu title="group" name="group">
       <n-menu-item title="sub1" name="sub6"></n-menu-item>
       <n-menu-item title="sub1" name="sub7"></n-menu-item>
-    </n-sub-menu>
-  </n-sub-menu>
+    </n-submenu>
+  </n-submenu>
 </n-menu>
 ```
 ```js

@@ -69,7 +69,6 @@ export default {
   },
   data () {
     return {
-      activeNames: [],
       internalOpenNames: this.openNames || this.defaultOpenNames || []
     }
   },

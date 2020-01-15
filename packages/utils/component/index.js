@@ -1,5 +1,5 @@
-const DROPDOWN_RELATED_COMPONENT = ['NDropdownItem', 'NDropdownSubmenu', 'NMenuItem', 'NSubMenu']
-const SELECT_OPTION_LIKE_COMPONENT = ['NBaseSelectOption', 'NDropdownItem', 'NDropdownSubmenu', 'NMenuItem', 'NSubMenu']
+const DROPDOWN_RELATED_COMPONENT = ['NDropdownItem', 'NDropdownSubmenu', 'NMenuItem', 'NSubmenu']
+const SELECT_OPTION_LIKE_COMPONENT = ['NBaseSelectOption', 'NDropdownItem', 'NDropdownSubmenu', 'NMenuItem', 'NSubmenu']
 
 function isSelectOptionLikeComponent (vNode) {
   return SELECT_OPTION_LIKE_COMPONENT.includes(getComponentNameOf(vNode))

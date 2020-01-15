@@ -113,7 +113,7 @@ export default {
           )
         }
         if (item.childItems) {
-          return h('NSubMenu', {
+          return h('NSubmenu', {
             props
           },
           createMenu(item.childItems)

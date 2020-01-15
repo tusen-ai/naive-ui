@@ -80,7 +80,7 @@ export default {
     render
   },
   mixins: [
-    collectable('NSubMenu', 'menuItemNames', 'name', true),
+    collectable('NSubmenu', 'menuItemNames', 'name'),
     withapp,
     themeable
   ],
@@ -88,7 +88,7 @@ export default {
     NMenu: {
       default: null
     },
-    NSubMenu: {
+    NSubmenu: {
       default: null
     },
     NMenuItemGroup: {
@@ -122,9 +122,6 @@ export default {
     }
   },
   computed: {
-    disabledCollectable () {
-      return this.shouldBeRenderedAsDropdownItem
-    },
     shouldBeRenderedAsDropdownItem () {
       if (this.NMenuUl) return false
       return !this.isFirstLevel && this.NMenu.collapsed
@@ -149,7 +146,7 @@ export default {
       return this.NMenu.iconSize
     },
     isFirstLevel () {
-      return !this.NSubMenu && !this.NMenuItemGroup
+      return !this.NSubmenu && !this.NMenuItemGroup
     },
     paddingLeft () {
       if (this.isFirstLevel && this.NMenu.collapsedWidth !== null && this.NMenu.collapsed) {
@@ -157,14 +154,14 @@ export default {
       }
       if (this.NMenuItemGroup) {
         return this.NMenu.indent / 2 + this.NMenuItemGroup.paddingLeft
-      } else if (this.NSubMenu) {
-        return this.NMenu.indent + this.NSubMenu.paddingLeft
+      } else if (this.NSubmenu) {
+        return this.NMenu.indent + this.NSubmenu.paddingLeft
       } else {
         return this.NMenu.rootIndent || this.NMenu.indent
       }
     },
     synthesizedDisabled () {
-      return ((this.NSubMenu && this.NSubMenu.synthesizedDisabled) || this.disabled)
+      return ((this.NSubmenu && this.NSubmenu.synthesizedDisabled) || this.disabled)
     },
     selected () {
       if (this.NMenu.value === this.name) {
