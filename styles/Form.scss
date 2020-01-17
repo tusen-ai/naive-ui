@@ -62,13 +62,13 @@
         position: relative;
       }
     }
-    @include m(right-label-aligned) {
+    @include m(required) {
       @include b(form-item-label) {
-        @include once {
-          text-align: right;
-          &::after {
-            display: none;
+        &::after {
+          @include once {
+            content: ' *';
           }
+          color: $--error-6;
         }
         &::before {
           @include once {
@@ -77,14 +77,33 @@
           color: $--error-6;
         }
       }
-    }
-    @include m(required) {
-      @include b(form-item-label) {
-        &::after {
+      @include m(no-label) {
+        &::before {
           @include once {
-            content: '*';
+            content: '* ';
+            white-space: pre-wrap;
           }
           color: $--error-6;
+        }
+      }
+    }
+    @include m(right-label-aligned) {
+      @include b(form-item-label) {
+        @include once {
+          text-align: right;
+          &::after {
+            display: none;
+          }
+        }
+      }
+    }
+    @include m(left-label-aligned) {
+      @include b(form-item-label) {
+        @include once {
+          text-align: left;
+          &::before {
+            display: none;
+          }
         }
       }
     }
