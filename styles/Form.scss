@@ -77,15 +77,6 @@
           color: $--error-6;
         }
       }
-      @include m(no-label) {
-        &::before {
-          @include once {
-            content: '* ';
-            white-space: pre-wrap;
-          }
-          color: $--error-6;
-        }
-      }
     }
     @include m(right-label-aligned) {
       @include b(form-item-label) {
