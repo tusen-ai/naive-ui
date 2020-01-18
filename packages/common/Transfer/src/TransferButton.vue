@@ -21,15 +21,25 @@
 </template>
 
 <script>
+import createValidator from '../../../utils/validateProp'
+
 export default {
   props: {
     to: {
-      type: Boolean,
+      validator: createValidator(['boolean']),
       default: false
-    },
-    disabled: {
-      type: Boolean,
-      default: false
+    }
+  },
+  inject: {
+    NTransfer: {
+      default: null
+    }
+  },
+  computed: {
+    disabled () {
+      if (this.NTransfer.disabled) return true
+      if (this.to) return this.NTransfer.sourceCheckedValues.length === 0
+      else return this.NTransfer.targetCheckedValues.length === 0
     }
   },
   methods: {

@@ -58,7 +58,7 @@ export default {
   ],
   model: {
     prop: 'checked',
-    event: 'input'
+    event: 'change'
   },
   props: {
     value: {
@@ -103,8 +103,7 @@ export default {
       if (this.NCheckboxGroup) {
         this.NCheckboxGroup.toggleCheckbox(!this.synthesizedChecked, this.value)
       } else {
-        this.$emit('input', !this.synthesizedChecked)
-        this.$emit('change', !this.synthesizedChecked, this.value)
+        this.$emit('change', !this.synthesizedChecked, this.synthesizedChecked)
       }
     },
     handleClick (e) {

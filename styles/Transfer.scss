@@ -1,6 +1,76 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
+@keyframes slide-in-from-left {
+  0% {
+    max-height: 0;
+    transform: translateX(-100%);
+  }
+
+  50% {
+    max-height: 34px;
+    transform: translateX(-100%);
+  }
+
+  100% {
+    max-height: 34px;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out-to-right {
+  0% {
+    max-height: 34px;
+    transform: translateX(0%);
+  }
+
+  50% {
+    max-height: 34px;
+    transform: translateX(100%);
+  }
+
+  100% {
+    max-height: 0px;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slide-in-from-right {
+  0% {
+    max-height: 0;
+    transform: translateX(100%);
+  }
+
+  50% {
+    max-height: 34px;
+    transform: translateX(100%);
+  }
+
+  100% {
+    max-height: 34px;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out-to-left {
+  0% {
+    max-height: 34px;
+    transform: translateX(0%);
+  }
+
+  50% {
+    max-height: 34px;
+    transform: translateX(-100%);
+  }
+
+  100% {
+    max-height: 0px;
+    transform: translateX(-100%);
+  }
+}
+
+
+
 /**
  * There are some theme related hard codes in transfer.
  * Emmm, when I am writing these code I can't figure out a better solution.
@@ -96,6 +166,11 @@
             padding: 0;
             margin: 0;
             position: relative;
+            @include m(animation-disabled) {
+              @include b(transfer-list-item) {
+                animation: none !important;
+              }
+            }
           }
           @include b(transfer-list-light-bar) {
             @include once {
@@ -109,8 +184,6 @@
           }
           @include b(transfer-list-item) {
             @include once {
-              @include slide-right-transition(transfer-list-item-source);
-              @include slide-left-transition(transfer-list-item-target);
               transition: color .3s $--n-ease-in-out-cubic-bezier;
               position: relative;
               cursor: pointer;
@@ -124,6 +197,24 @@
                 overflow: hidden;
                 white-space: nowrap;
                 padding-right: 4px;
+              }
+              @include m(source) {
+                animation-fill-mode: forwards;
+                @include m(enter) {
+                  animation: .3s slide-in-from-right;
+                }
+                @include m(leave) {
+                  animation: .3s slide-out-to-right;
+                }
+              }
+              @include m(target) {
+                animation-fill-mode: forwards;
+                @include m(enter) {
+                  animation: .3s slide-in-from-left;
+                }
+                @include m(leave) {
+                  animation: .3s slide-out-to-left;
+                }
               }
             }
             color: map-get($--transfer-item-text-color, 'default');

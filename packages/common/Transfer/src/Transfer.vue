@@ -8,68 +8,44 @@
     <div class="n-transfer-list">
       <div class="n-transfer-list-header">
         <div class="n-transfer-list-header__checkbox">
-          <div class="n-transfer-list-light-bar" />
-          <n-checkbox
-            :checked="sourceHeaderCheckboxChecked"
-            :indeterminate="sourceHeaderCheckboxIndeterminate"
-            :disabled="sourceHeaderCheckboxDisabled"
-            @input="handleSourceHeaderCheckboxInput"
-          />
+          <n-transfer-header-checkbox :source="true" :theme="synthesizedTheme" @change="handleSourceHeaderCheckboxChange" />
         </div>
         <div class="n-transfer-list-header__header">
           Source
         </div>
-        <div class="n-transfer-list-header__extra">
-          {{ sourceCheckedValueSet.size }} / {{ sourceOptions.length }}
-        </div>
+        <n-transfer-header-extra :source="true" />
       </div>
       <div
         class="n-transfer-list-body"
         @mouseleave="handleSourceListMouseLeave"
       >
-        <n-scrollbar ref="leftScrollbar">
-          <ul class="n-transfer-list-content">
-            <transition name="n-transfer-list-light-bar--transition">
-              <div
-                v-if="showLightBar"
-                class="n-transfer-list-light-bar"
-                :style="{
-                  top: lightBarStyleTop
-                }"
-              />
-            </transition>
-            <n-transfer-list-item
-              v-for="option in memorizedSourceOptions"
+        <n-scrollbar @scroll="handleSourceListScroll">
+          <ul ref="sourceList" class="n-transfer-list-content n-transfer-list-content--animation-disabled">
+            <n-transfer-light-bar ref="lightBar" />
+            <n-transfer-source-list-item
+              v-for="(option, index) in memorizedSourceOptions"
+              ref="sourceListItems"
               :key="option.value"
-              :show="sourceValueSet.has(option.value)"
+              :index="index"
               :value="option.value"
-              :checked="sourceCheckedValueSet.has(option.value)"
-              :disabled="option.disabled"
-              source
-              :title="option.label"
-              @click="handleSourceCheckboxInput(
-                !sourceCheckedValueSet.has(option.value),
-                option.value
-              )"
+              :disabled="!!option.disabled"
+              :label="option.label"
+              @click="handleSourceCheckboxClick"
               @mouseenter="handleSourceOptionMouseEnter"
               @mouseleave="handleSourceOptionMouseLeave"
-            >
-              {{ option.label }}
-            </n-transfer-list-item>
+            />
           </ul>
         </n-scrollbar>
       </div>
     </div>
     <div class="n-transfer-gap">
       <n-transfer-button
-        to
-        :disabled="toTargetButtonDisabled"
+        :to="true"
         @click="handleToTargetClick"
       >
         To Target
       </n-transfer-button>
       <n-transfer-button
-        :disabled="toSourceButtonDisabled"
         @click="handleToSourceClick"
       >
         To Source
@@ -78,53 +54,32 @@
     <div class="n-transfer-list">
       <div class="n-transfer-list-header">
         <div class="n-transfer-list-header__checkbox">
-          <n-checkbox
-            :checked="targetHeaderCheckboxChecked"
-            :indeterminate="targetHeaderCheckboxIndeterminate"
-            :disabled="targetHeaderCheckboxDisabled"
-            @input="handleTargetHeaderCheckboxInput"
-          />
+          <n-transfer-header-checkbox :theme="synthesizedTheme" @change="handleTargetHeaderCheckboxChange" />
         </div>
         <div class="n-transfer-list-header__header">
           Target
         </div>
-        <div class="n-transfer-list-header__extra">
-          {{ targetCheckedValueSet.size }} / {{ targetOptions.length }}
-        </div>
+        <n-transfer-header-extra />
       </div>
       <div
         class="n-transfer-list-body"
         @mouseleave="handleTargetListMouseLeave"
       >
-        <n-scrollbar ref="rightScrollbar">
-          <ul class="n-transfer-list-content">
-            <transition name="n-transfer-list-light-bar--transition">
-              <div
-                v-if="showSecondLightBar"
-                class="n-transfer-list-light-bar"
-                :style="{
-                  top: secondLightBarStyleTop
-                }"
-              />
-            </transition>
-            <n-transfer-list-item
-              v-for="option in memorizedTargetOptions"
+        <n-scrollbar ref="rightScrollbar" @scroll="handleTargetListScroll">
+          <ul ref="targetList" class="n-transfer-list-content n-transfer-list-content--animation-disabled">
+            <n-transfer-light-bar ref="secondLightBar" />
+            <n-transfer-target-list-item
+              v-for="(option, index) in targetOptions"
+              ref="targetListItems"
               :key="option.value"
-              :show="targetValueSet.has(option.value)"
+              :index="index"
               :value="option.value"
-              :checked="targetCheckedValueSet.has(option.value)"
-              :disabled="option.disabled"
-              target
-              :title="option.label"
-              @click="handleTargetCheckboxInput(
-                !targetCheckedValueSet.has(option.value),
-                option.value
-              )"
+              :disabled="!!option.disabled"
+              :label="option.label"
+              @click="handleTargetCheckboxClick"
               @mouseenter="handleTargetOptionMouseEnter"
               @mouseleave="handleTargetOptionMouseLeave"
-            >
-              {{ option.label }}
-            </n-transfer-list-item>
+            />
           </ul>
         </n-scrollbar>
       </div>
@@ -133,26 +88,37 @@
 </template>
 
 <script>
-import NCheckbox from '../../Checkbox'
 import NScrollbar from '../../Scrollbar'
-import NTransferListItem from './TransferListItem'
+import NTransferHeaderCheckbox from './TransferHeaderCheckbox'
+import NTransferHeaderExtra from './TransferHeaderExtra'
+import NTransferSourceListItem from './TransferSourceListItem'
+import NTransferTargetListItem from './TransferTargetListItem'
 import NTransferButton from './TransferButton'
 import cloneDeep from 'lodash/cloneDeep'
-import withlightbar from '../../../mixins/withlightbar'
-import withsecondlightbar from '../../../mixins/withsecondlightbar'
 import asformitem from '../../../mixins/asformitem'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import NTransferLightBar from './TransferLightBar'
+import debounce from 'lodash-es/debounce'
+
+const SCROLL_VISIBLE_BUFFER = 1200
 
 export default {
   name: 'NTransfer',
   components: {
-    NCheckbox,
+    NTransferHeaderCheckbox,
+    NTransferHeaderExtra,
     NScrollbar,
-    NTransferListItem,
-    NTransferButton
+    NTransferSourceListItem,
+    NTransferTargetListItem,
+    NTransferButton,
+    NTransferLightBar
   },
-  mixins: [withapp, themeable, asformitem(), withlightbar, withsecondlightbar],
+  mixins: [withapp, themeable, asformitem()],
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
   props: {
     value: {
       type: Array,
@@ -167,204 +133,280 @@ export default {
       default: false
     }
   },
+  provide () {
+    return {
+      NTransfer: this
+    }
+  },
   data () {
     return {
       sourceCheckedValues: [],
       targetCheckedValues: [],
       memorizedSourceOptions: null,
-      memorizedTargetOptions: null,
-      init: true,
-      active: true
+      sourceListVisibleMinIndex: -SCROLL_VISIBLE_BUFFER / 34,
+      sourceListVisibleMaxIndex: SCROLL_VISIBLE_BUFFER / 34,
+      targetListVisibleMinIndex: -SCROLL_VISIBLE_BUFFER / 34,
+      targetListVisibleMaxIndex: SCROLL_VISIBLE_BUFFER / 34,
+      initialized: false
     }
   },
   computed: {
-    toTargetButtonDisabled () {
-      return this.disabled || this.sourceCheckedValueSet.size === 0
-    },
-    toSourceButtonDisabled () {
-      return this.disabled || this.targetCheckedValueSet.size === 0
-    },
-    sourceEnabledOptions () {
-      return this.sourceOptions.filter(option => !option.disabled)
-    },
-    targetEnabledOptions () {
-      return this.targetOptions.filter(option => !option.disabled)
+    mergedDisabledStatus () {
+      return {
+        source: this.memorizedSourceOptions.every(option => option.disabled),
+        target: this.targetOptions.every(option => option.disabled)
+      }
     },
     sourceHeaderCheckboxDisabled () {
-      return this.disabled || !this.sourceEnabledOptions.length
+      return this.disabled || this.mergedDisabledStatus.source
     },
     targetHeaderCheckboxDisabled () {
-      return this.disabled || !this.targetEnabledOptions.length
+      return this.disabled || this.mergedDisabledStatus.target
     },
     sourceHeaderCheckboxChecked () {
-      return this.sourceCheckedValueSet.size === this.sourceOptions.length && !!this.sourceOptions.length
+      return this.sourceCheckedValues.length === this.memorizedSourceOptions.length && !!this.memorizedSourceOptions.length
     },
     targetHeaderCheckboxChecked () {
-      return this.targetCheckedValueSet.size === this.targetOptions.length && !!this.targetOptions.length
+      return this.targetCheckedValues.length === this.targetOptions.length && !!this.targetOptions.length
     },
     valueToOptionMap () {
       const map = new Map()
       this.options.forEach(option => {
-        map.set(option.value, option)
+        map.set(option.value, { ...option })
       })
       return map
     },
     sourceHeaderCheckboxIndeterminate () {
-      return this.sourceCheckedValueSet.size !== 0 && this.sourceCheckedValueSet.size < this.sourceOptions.length
+      return this.sourceCheckedValues.length !== 0 && this.sourceCheckedValues.length < this.memorizedSourceOptions.length
     },
     targetHeaderCheckboxIndeterminate () {
-      return this.targetCheckedValueSet.size !== 0 && this.targetCheckedValueSet.size < this.targetOptions.length
-    },
-    sourceValueSet () {
-      return new Set(this.sourceOptions.map(option => option.value))
-    },
-    targetValueSet () {
-      return new Set(this.targetOptions.map(option => option.value))
+      return this.targetCheckedValues.length !== 0 && this.targetCheckedValues.length < this.targetOptions.length
     },
     sourceCheckedValueSet () {
-      return new Set(this.sourceCheckedValues.filter(value => this.valueToOptionMap.has(value)))
+      const valueToOptionMap = this.valueToOptionMap
+      return new Set(this.sourceCheckedValues.filter(value => valueToOptionMap.has(value)))
     },
     targetCheckedValueSet () {
-      return new Set(this.targetCheckedValues.filter(value => this.valueToOptionMap.has(value)))
+      const valueToOptionMap = this.valueToOptionMap
+      return new Set(this.targetCheckedValues.filter(value => valueToOptionMap.has(value)))
     },
-    sourceOptions () {
-      const valueSet = Array.isArray(this.value) ? new Set(this.value) : new Set()
-      return this.options.filter(option => !valueSet.has(option.value))
+    valueSet () {
+      return Array.isArray(this.value) ? new Set(this.value) : new Set()
+    },
+    sourceValueSet () {
+      return this.mergedValueSet.sourceValueSet
+    },
+    targetValueSet () {
+      return this.mergedValueSet.targetValueSet
+    },
+    targetOptionsWithShowStatus () {
+      return this.targetOptions.map((option, index) => {
+        const show = true
+        option.show = show
+        option.index = index
+        return option
+      })
+    },
+    mergedValueSet () {
+      const valueSet = this.valueSet
+      const sourceValueSet = new Set()
+      const targetValueSet = new Set()
+      this.options.forEach(option => {
+        if (valueSet.has(option.value)) {
+          targetValueSet.add(option.value)
+        } else {
+          sourceValueSet.add(option.value)
+        }
+      })
+      return {
+        sourceValueSet,
+        targetValueSet
+      }
     },
     targetOptions () {
-      const valueSet = Array.isArray(this.value) ? new Set(this.value) : new Set()
-      return this.options.filter(option => valueSet.has(option.value))
-    },
-    orderedOptions () {
-      return this.sourceOptions.concat(this.targetOptions)
+      const vModelValue = Array.isArray(this.value) ? this.value : []
+      const valueMap = this.valueToOptionMap
+      const targetOptions = []
+      vModelValue.forEach(value => {
+        const option = valueMap.get(value)
+        if (option !== undefined) targetOptions.push(option)
+      })
+      return targetOptions
     }
   },
   watch: {
     options (newOptions) {
-      this.init = true
+      this.initialized = false
+      const valueSet = this.valueSet
+      this.memorizedSourceOptions = cloneDeep(this.options.filter(option => !valueSet.has(option.value)))
+      this.sourceCheckedValues = []
+      this.targetCheckedValues = []
       this.$nextTick().then(() => {
-        this.memorizedSourceOptions = cloneDeep(newOptions)
-        this.memorizedTargetOptions = cloneDeep(newOptions)
-        this.sourceCheckedValues = []
-        this.targetCheckedValues = []
-        return this.$nextTick()
-      }).then(() => {
-        this.init = false
+        this.initialized = true
       })
-    },
-    value (value, oldValue) {
-      this.$emit('change', value, oldValue)
     }
   },
   mounted () {
-    this.$nextTick().then(() => {
-      this.init = false
-    })
+    this.initialized = true
   },
   created () {
-    this.memorizedSourceOptions = cloneDeep(this.options)
-    this.memorizedTargetOptions = cloneDeep(this.options)
+    const valueSet = this.valueSet
+    this.memorizedSourceOptions = cloneDeep(this.options.filter(option => !valueSet.has(option.value)))
   },
   methods: {
-    emitInputEvent (value) {
+    handleSourceListScroll: debounce(function (_, container) {
+      const scrollTop = container.scrollTop
+      this.sourceListVisibleMinIndex = (scrollTop - SCROLL_VISIBLE_BUFFER) / 34
+      this.sourceListVisibleMaxIndex = (scrollTop + SCROLL_VISIBLE_BUFFER) / 34
+    }, 128),
+    handleTargetListScroll: debounce(function (_, container) {
+      const scrollTop = container.scrollTop
+      this.targetListVisibleMinIndex = (scrollTop - SCROLL_VISIBLE_BUFFER) / 34
+      this.targetListVisibleMaxIndex = (scrollTop + SCROLL_VISIBLE_BUFFER) / 34
+    }, 128),
+    emitChangeEvent (value) {
       const newValue = this.cleanValue(value)
-      this.$emit('input', newValue)
+      this.$emit('change', newValue)
     },
     cleanValue (value) {
       if (Array.isArray(value)) {
         return value.filter((v) => this.valueToOptionMap.has(v))
       } else return null
     },
-    handleSourceHeaderCheckboxInput (value) {
+    handleSourceHeaderCheckboxChange (value) {
       if (this.sourceHeaderCheckboxIndeterminate) {
+        (this.$refs.sourceListItems || []).forEach(listItem => listItem.setChecked(false))
         this.sourceCheckedValues = []
         return
       }
       if (value) {
-        const newValues = this.sourceOptions.filter(option => !option.disabled).map(option => option.value).concat(this.sourceCheckedValues)
+        (this.$refs.sourceListItems || []).forEach(listItem => listItem.setChecked(true))
+        const newValues = this.memorizedSourceOptions.filter(option => !option.disabled).map(option => option.value).concat(this.sourceCheckedValues)
         this.sourceCheckedValues = Array.from(new Set(newValues))
       } else {
+        (this.$refs.sourceListItems || []).forEach(listItem => listItem.setChecked(false))
         this.sourceCheckedValues = []
       }
     },
-    handleTargetHeaderCheckboxInput (value) {
+    handleTargetHeaderCheckboxChange (value) {
       if (this.targetHeaderCheckboxIndeterminate) {
+        (this.$refs.targetListItems || []).forEach(listItem => listItem.setChecked(false))
         this.targetCheckedValues = []
         return
       }
       if (value) {
+        (this.$refs.targetListItems || []).forEach(listItem => listItem.setChecked(true))
         const newValues = this.targetOptions.filter(option => !option.disabled).map(option => option.value).concat(this.targetCheckedValues)
         this.targetCheckedValues = Array.from(new Set(newValues))
       } else {
+        (this.$refs.targetListItems || []).forEach(listItem => listItem.setChecked(false))
         this.targetCheckedValues = []
       }
     },
-    handleTargetCheckboxInput (checked, value) {
+    handleTargetCheckboxClick (checked, optionValue) {
       if (checked) {
-        this.targetCheckedValues.push(value)
+        this.targetCheckedValues.push(optionValue)
       } else {
-        const index = this.targetCheckedValues.findIndex(v => v === value)
-        if (~index) this.targetCheckedValues.splice(index, 1)
+        const index = this.targetCheckedValues.findIndex(v => v === optionValue)
+        if (~index) {
+          this.targetCheckedValues.splice(index, 1)
+        }
       }
     },
-    handleSourceCheckboxInput (checked, value) {
+    handleSourceCheckboxClick (checked, optionValue) {
       if (checked) {
-        this.sourceCheckedValues.push(value)
+        this.sourceCheckedValues.push(optionValue)
       } else {
-        const index = this.sourceCheckedValues.findIndex(v => v === value)
-        if (~index) this.sourceCheckedValues.splice(index, 1)
+        const index = this.sourceCheckedValues.findIndex(v => v === optionValue)
+        if (~index) {
+          this.sourceCheckedValues.splice(index, 1)
+        }
       }
     },
     handleToTargetClick () {
+      const enteredItemEls = Array.from(this.$el.getElementsByClassName('n-transfer-list-item--enter'))
+      const length = enteredItemEls.length
+      for (let i = 0; i < length; ++i) {
+        enteredItemEls[i].classList.remove('n-transfer-list-item--enter')
+      }
+      this.$refs.sourceList.classList.remove('n-transfer-list-content--animation-disabled')
+      this.$refs.targetList.classList.remove('n-transfer-list-content--animation-disabled')
+      const sourceCheckedValues = this.sourceCheckedValues
+      /** create new value */
       let newValue = Array.isArray(this.value) ? this.value : []
-      newValue = this.sourceCheckedValues.concat(newValue)
-      const headTargetOptions = this.sourceCheckedValues.map(value => this.valueToOptionMap.get(value)).map(option => ({
-        ...option
-      }))
-      const tailTargetOptions = this.memorizedTargetOptions.filter(option => !this.sourceCheckedValueSet.has(option.value)).map(option => ({
-        ...option
-      }))
-      const reorderedTargetOptions = headTargetOptions.concat(tailTargetOptions)
-      this.memorizedTargetOptions = reorderedTargetOptions
-      this.$nextTick().then(() => {
-        this.emitInputEvent(newValue)
+      newValue = sourceCheckedValues.concat(newValue)
+      /** play source leave animation */
+      const sourceCheckedValueSet = this.sourceCheckedValueSet
+      this.$refs.sourceListItems.forEach(listItem => {
+        if (sourceCheckedValueSet.has(listItem.value)) {
+          listItem.leave()
+        }
       })
+      window.setTimeout(() => {
+        /** disable animation before apply dom change */
+        this.$refs.sourceList.classList.add('n-transfer-list-content--animation-disabled')
+        /** after animation is done change memorized source options to remove dom */
+        this.memorizedSourceOptions = this.memorizedSourceOptions.filter(option => !sourceCheckedValueSet.has(option.value))
+      }, 300)
+      /** clear check */
+      ;(this.$refs.sourceListItems || []).forEach(listItem => listItem.setChecked(false))
       this.sourceCheckedValues = []
+      /** emit new value */
+      /** auto play target options enter animation */
+      this.$emit('change', newValue)
     },
     handleToSourceClick () {
+      const enteredItemEls = Array.from(this.$el.getElementsByClassName('n-transfer-list-item--enter'))
+      const length = enteredItemEls.length
+      for (let i = 0; i < length; ++i) {
+        enteredItemEls[i].classList.remove('n-transfer-list-item--enter')
+      }
+      this.$refs.sourceList.classList.remove('n-transfer-list-content--animation-disabled')
+      this.$refs.targetList.classList.remove('n-transfer-list-content--animation-disabled')
+      /** create new value */
       let newValue = Array.isArray(this.value) ? this.value : []
-      newValue = newValue.filter(value => !this.targetCheckedValueSet.has(value))
-      const headSourceOptions = this.targetCheckedValues.map(value => this.valueToOptionMap.get(value)).map(option => ({
-        ...option
-      }))
-      const tailSourceOptions = this.memorizedSourceOptions.filter(option => !this.targetCheckedValueSet.has(option.value)).map(option => ({
-        ...option
-      }))
-      const reorderedSourceOptions = headSourceOptions.concat(tailSourceOptions)
-      this.memorizedSourceOptions = reorderedSourceOptions
-      this.$nextTick().then(() => {
-        this.emitInputEvent(newValue)
+      const targetValueSet = this.targetCheckedValueSet
+      /** play target leave animation */
+      this.$refs.targetListItems.forEach(listItem => {
+        if (targetValueSet.has(listItem.value)) {
+          listItem.leave()
+        }
       })
+      window.setTimeout(() => {
+        this.$refs.targetList.classList.add('n-transfer-list-content--animation-disabled')
+        /** disable animation before apply dom change */
+        this.targetAnimationDisabled = true
+        /** after animation is done change value to remove dom */
+        newValue = newValue.filter(value => !targetValueSet.has(value))
+        /** emit new value */
+        this.emitChangeEvent(newValue)
+      }, 300)
+      /** change memorized source options */
+      const valueToOptionMap = this.valueToOptionMap
+      const newSourceOptions = this.targetCheckedValues.map(value => valueToOptionMap.get(value))
+      this.memorizedSourceOptions = newSourceOptions.concat(this.memorizedSourceOptions)
+      /** clear check */
+      ;(this.$refs.targetListItems || []).forEach(listItem => listItem.setChecked(false))
       this.targetCheckedValues = []
     },
-    handleSourceOptionMouseEnter (e) {
-      this.updateLightBarPosition(e.target)
-    },
-    handleTargetOptionMouseEnter (e) {
-      this.updateSecondLightBarPosition(e.target)
-    },
-    handleSourceOptionMouseLeave (e) {
-      this.hideLightBar()
-    },
-    handleTargetOptionMouseLeave (e) {
-      this.hideSecondLightBar()
-    },
-    handleSourceListMouseLeave () {
-      this.hideLightBar()
-    },
-    handleTargetListMouseLeave () {
-      this.hideSecondLightBar()
-    }
+    handleSourceOptionMouseEnter: debounce(function (e) {
+      this.$refs.lightBar.updateLightBarPosition(e.target)
+    }, 128),
+    handleTargetOptionMouseEnter: debounce(function (e) {
+      this.$refs.secondLightBar.updateLightBarPosition(e.target)
+    }, 128),
+    handleSourceOptionMouseLeave: debounce(function (e) {
+      this.$refs.lightBar.hideLightBar()
+    }, 128),
+    handleTargetOptionMouseLeave: debounce(function (e) {
+      this.$refs.secondLightBar.hideLightBar()
+    }, 128),
+    handleSourceListMouseLeave: debounce(function () {
+      this.$refs.lightBar.hideLightBar()
+    }, 128),
+    handleTargetListMouseLeave: debounce(function () {
+      this.$refs.secondLightBar.hideLightBar()
+    }, 128)
   }
 }
 </script>
