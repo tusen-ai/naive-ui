@@ -16,9 +16,6 @@
     @keyup.space="handleKeyUpSpace"
     @keyup.esc="handleKeyUpEsc"
   >
-    <n-base-select-option-collector v-if="useSlot">
-      <slot />
-    </n-base-select-option-collector>
     <n-base-picker
       ref="activator"
       class="n-select-picker"
@@ -58,7 +55,7 @@
           @after-leave="handleMenuAfterLeave"
         >
           <n-base-select-menu
-            v-show="active"
+            v-if="active"
             ref="contentInner"
             class="n-select-menu"
             :theme="synthesizedTheme"
@@ -69,10 +66,8 @@
             :loading="loading"
             :no-data-content="noDataContent"
             :not-found-content="notFoundContent"
-            :emit-option="emitOption"
             :filterable="filterable"
-            :is-selected="isSelected"
-            :use-slot="useSlot"
+            :is-selected="isOptionSelected"
             :mirror="false"
             @menu-toggle-option="handleToggleOption"
             @menu-scroll="handleMenuScroll"
@@ -89,8 +84,7 @@ import placeable from '../../../mixins/placeable'
 import zindexable from '../../../mixins/zindexable'
 import clickoutside from '../../../directives/clickoutside'
 import {
-  NBaseSelectMenu,
-  NBaseSelectOptionCollector
+  NBaseSelectMenu
 } from '../../../base/SelectMenu'
 import NBasePicker from '../../../base/Picker'
 import withapp from '../../../mixins/withapp'
@@ -106,20 +100,18 @@ function patternMatched (pattern, value) {
 }
 
 export default {
-  name: 'NBaseSelect',
+  name: 'NSelect',
   components: {
     NBaseSelectMenu,
-    NBasePicker,
-    NBaseSelectOptionCollector
+    NBasePicker
   },
   directives: {
     clickoutside
   },
   mixins: [ withapp, themeable, detachable, placeable, zindexable, asformitem() ],
-  inject: {
-    NFormItem: {
-      default: null
-    }
+  model: {
+    prop: 'value',
+    event: 'change'
   },
   provide () {
     return {
@@ -127,23 +119,16 @@ export default {
     }
   },
   props: {
-    useSlot: {
-      type: Boolean,
-      default: false
-    },
     clearable: {
       type: Boolean,
       default: false
     },
     options: {
       type: Array,
-      default: null
+      default: () => []
     },
     value: {
-      validator () {
-        return true
-      },
-      required: false,
+      type: [String, Number, Array],
       default: null
     },
     placeholder: {
@@ -157,10 +142,6 @@ export default {
     size: {
       type: String,
       default: 'medium'
-    },
-    emitOption: {
-      type: Boolean,
-      default: false
     },
     filterable: {
       type: Boolean,
@@ -182,14 +163,6 @@ export default {
       type: Boolean,
       default: false
     },
-    noDataContent: {
-      type: [String, Function],
-      default: 'No Data'
-    },
-    notFoundContent: {
-      type: [String, Function],
-      default: 'No Result'
-    },
     filter: {
       type: Function,
       default: (pattern, option) => {
@@ -201,6 +174,27 @@ export default {
         }
         return false
       }
+    },
+    placement: {
+      type: String,
+      default: 'bottom-start'
+    },
+    widthMode: {
+      type: String,
+      default: 'activator'
+    },
+    /** deprecated */
+    items: {
+      type: Array,
+      default: undefined
+    },
+    noDataContent: {
+      type: [String, Function],
+      default: 'No Data'
+    },
+    notFoundContent: {
+      type: [String, Function],
+      default: 'No Result'
     }
   },
   data () {
@@ -208,28 +202,36 @@ export default {
       active: false,
       scrolling: false,
       pattern: '',
-      memorizedValueOptionMap: new Map(),
-      collectedOptions: []
+      memorizedValueToOptionMap: new Map()
     }
   },
   computed: {
-    synthesizedOptions () {
-      if (this.useSlot) {
-        return this.collectedOptions
-      } else {
-        return this.options
-      }
+    adpatedOptions () {
+      /**
+       * If use deprecated API, make it work at first
+       */
+      if (this.items) return this.items
+      else if (this.options) return this.options
+      return []
     },
     filteredOptions () {
+      const options = this.adpatedOptions
       if (this.remote) {
-        return this.synthesizedOptions
-      } else if (!this.filterable || !this.pattern.trim().length) return this.synthesizedOptions
-      return this.synthesizedOptions.filter(option => this.filter(this.pattern, option))
+        return options
+      } else {
+        const trimmedPattern = this.pattern.trim()
+        if (trimmedPattern.length || !this.filterable) {
+          return options
+        } else {
+          const filter = this.filter
+          return options.filter(option => filter(trimmedPattern, option))
+        }
+      }
     },
-    valueOptionMap () {
-      const valueToOption = new Map()
-      this.synthesizedOptions.forEach(option => valueToOption.set(option.value, option))
-      return valueToOption
+    valueToOptionMap () {
+      const valueToOptionMap = new Map()
+      this.adpatedOptions.forEach(option => valueToOptionMap.set(option.value, option))
+      return valueToOptionMap
     },
     selectedOptions () {
       if (this.multiple) {
@@ -245,22 +247,21 @@ export default {
     }
   },
   watch: {
-    synthesizedOptions () {
-      this.$nextTick().then(this.updateMemorizedOptions)
+    options () {
+      this.updateMemorizedOptions()
     },
     filteredOptions () {
       this.$nextTick().then(() => {
         this.updatePosition()
       })
     },
-    value (value) {
+    value () {
       this.$nextTick().then(() => {
         this.updatePosition()
       })
-      this.emitChangeEvent(value)
     }
   },
-  mounted () {
+  created () {
     this.updateMemorizedOptions()
   },
   methods: {
@@ -274,14 +275,19 @@ export default {
      * remote related methods
      */
     updateMemorizedOptions () {
-      if (this.remote && this.multiple) {
-        for (const option of this.selectedOptions) {
-          this.memorizedValueOptionMap.set(option.value, option)
-        }
-      } else if (this.remote && !this.multiple) {
-        const option = this.selectedOption
-        if (option) {
-          this.memorizedValueOptionMap.set(option.value, option)
+      const remote = this.remote
+      const multiple = this.multiple
+      if (remote) {
+        const memorizedValueToOptionMap = this.memorizedValueToOptionMap
+        if (multiple) {
+          this.selectedOptions.forEach(option => {
+            memorizedValueToOptionMap.set(option.value, option)
+          })
+        } else {
+          const option = this.selectedOption
+          if (option) {
+            memorizedValueToOptionMap.set(option.value, option)
+          }
         }
       }
     },
@@ -315,7 +321,7 @@ export default {
     },
     handlePickerBlur () {
       this.$emit('blur', this.value)
-      this.closeMenu()
+      // this.closeMenu()
     },
     handleClickOutsideMenu (e) {
       if (this.active) {
@@ -329,22 +335,35 @@ export default {
      */
     mapValuesToOptions (values) {
       if (!Array.isArray(values)) return []
-      if (this.remote) {
-        return values
-          .filter(value => this.valueOptionMap.has(value) || this.memorizedValueOptionMap.has(value))
-          .map(value => this.valueOptionMap.has(value) ? this.valueOptionMap.get(value) : this.memorizedValueOptionMap.get(value))
+      const remote = this.remote
+      const valueToOptionMap = this.valueToOptionMap
+      const options = []
+      if (remote) {
+        const memorizedValueToOptionMap = this.memorizedValueToOptionMap
+        values.forEach(value => {
+          if (valueToOptionMap.has(value)) {
+            options.push(valueToOptionMap.get(value))
+          } else if (memorizedValueToOptionMap.has(value)) {
+            options.push(memorizedValueToOptionMap.get(value))
+          }
+        })
       } else {
-        return values.filter(value => this.valueOptionMap.has(value)).map(value => this.valueOptionMap.get(value))
+        values.forEach(value => {
+          if (valueToOptionMap.has(value)) {
+            options.push(valueToOptionMap.get(value))
+          }
+        })
       }
+      return options
     },
     getOption (value) {
-      if (this.remote) {
-        return this.valueOptionMap.get(value) || this.memorizedValueOptionMap.get(value) || null
-      } else {
-        return this.valueOptionMap.get(value) || null
+      if (this.valueToOptionMap.has(value)) {
+        return this.valueToOptionMap.get(value)
+      } else if (this.remote && this.memorizedValueToOptionMap.has(value)) {
+        return this.memorizedValueToOptionMap.get(value)
       }
     },
-    isSelected (option) {
+    isOptionSelected (option) {
       if (this.multiple) {
         if (!Array.isArray(this.value)) return false
         return !!~this.value.findIndex(value => value === option.value)
@@ -352,45 +371,25 @@ export default {
         return option.value === this.value
       }
     },
-    normalizeOption (option) {
-      const normalizedOption = {
-        label: option.label,
-        value: option.value,
-        disabled: option.disabled
-      }
-      return normalizedOption
-    },
-    /**
-     * event utils methods
-     */
-    emitChangeEvent (newValue) {
-      if (this.emitOption) {
-        if (this.multiple) {
-          if (newValue === null) {
-            this.$emit('change', null)
-          } else {
-            let options = this.mapValuesToOptions(newValue)
-            this.$emit('change', options.map(this.normalizeOption))
-          }
-        } else {
-          const option = this.getOption(newValue)
-          this.$emit('change', this.normalizeOption(option))
-        }
+    clearMultipleSelectValue (value) {
+      if (!Array.isArray(value)) return []
+      const remote = this.remote
+      const valueToOptionMap = this.valueToOptionMap
+      if (remote) {
+        const memorizedValueToOptionMap = this.memorizedValueToOptionMap
+        return value.filter(v => valueToOptionMap.has(v) || memorizedValueToOptionMap.has(v))
       } else {
-        this.$emit('change', newValue)
+        return value.filter(v => valueToOptionMap.has(v))
       }
     },
     handleToggleOption (option) {
       if (this.disabled) return
       if (this.multiple) {
+        const memorizedValueToOptionMap = this.memorizedValueToOptionMap
         if (this.remote) {
-          this.memorizedValueOptionMap.set(option.value, option)
+          memorizedValueToOptionMap.set(option.value, option)
         }
-        let newValue = []
-        if (Array.isArray(this.value)) {
-          const optionValues = new Set(this.synthesizedOptions.map(item => item.value))
-          newValue = this.value.filter(value => optionValues.has(value) || this.memorizedValueOptionMap.has(value))
-        }
+        const newValue = this.clearMultipleSelectValue(this.value)
         const index = newValue.findIndex(value => value === option.value)
         if (~index) {
           newValue.splice(index, 1)
@@ -398,28 +397,30 @@ export default {
           newValue.push(option.value)
           this.pattern = ''
         }
-        this.$emit('input', newValue)
+        this.$emit('change', newValue)
       } else {
         if (this.filterable && !this.multiple) {
           this.switchFocusToOuter()
         }
         this.closeMenu()
-        this.$emit('input', option.value)
+        this.$emit('change', option.value)
       }
     },
     handleDeleteLastOption (e) {
       if (!this.pattern.length) {
-        const newValue = this.value
+        const newValue = this.clearMultipleSelectValue(this.value)
         if (Array.isArray(newValue)) {
           newValue.pop()
-          this.$emit('input', newValue)
+          this.$emit('change', newValue)
         }
       }
     },
     handlePatternInput (e) {
-      this.pattern = e.target.value
+      const value = e.target.value
+      this.pattern = value
       if (this.onSearch) {
-        this.onSearch(e.target.value)
+        this.onSearch(value)
+        this.$emit('search', value)
       }
     },
     handleClear (e) {
@@ -428,9 +429,9 @@ export default {
         this.closeMenu()
       }
       if (this.multiple) {
-        this.$emit('input', [])
+        this.$emit('change', [])
       } else {
-        this.$emit('input', null)
+        this.$emit('change', null)
       }
     },
     /**

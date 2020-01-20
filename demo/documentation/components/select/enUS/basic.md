@@ -19,19 +19,6 @@
   size="large"
   :options="options"
 />
-<n-select
-  v-model="value"
-  size="large"
-  :options="options"
->
-  <n-select-option 
-    v-for="option in options"
-    :key="options.value"
-    :label="option.label"
-    :value="option.value"
-    :disabled="option.disabled"
-  />
-</n-select>
 ```
 ```js
 export default {

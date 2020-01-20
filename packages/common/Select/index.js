@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import Select from './src/SelectAdapter.vue'
+import Select from './src/Select.vue'
 import SelectOption from './src/SelectOption.vue'
 
 Select.install = function (Vue) {

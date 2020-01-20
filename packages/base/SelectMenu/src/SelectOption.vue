@@ -1,11 +1,6 @@
 <script>
-import {
-  createValueAttribute
-} from './utils'
-
 export default {
   name: 'NBaseSelectOption',
-  functional: true,
   inject: {
     NBaseSelectMenu: {
       default: null
@@ -36,61 +31,44 @@ export default {
         return typeof value === 'boolean'
       },
       default: false
+    },
+    index: {
+      validator (value) {
+        return typeof value === 'number'
+      },
+      required: true
     }
   },
-  render (h, context) {
-    const option = {
-      label: context.props.label,
-      value: context.props.value,
-      disabled: context.props.disabled
-    }
-    const selectMenu = context.injections.NBaseSelectMenu
-    const disabled = context.props.disabled
-    let selected = context.props.isSelected
-    const listeners = context.listeners || {}
-    function handleClick (e) {
-      if (disabled) return
-      selectMenu.handleOptionClick(e, option)
-      listeners.click && listeners.click(e)
-    }
-    function handleMouseEnter (e) {
-      if (disabled) return
-      selectMenu.handleOptionMouseEnter(e, option)
-      listeners.mouseenter && listeners.mouseenter(e)
-    }
-    function handleMouseLeave (e) {
-      if (disabled) return
-      selectMenu.handleOptionMouseLeave(e, option)
-      listeners.mouseleave && listeners.mouseleave(e)
-    }
-    let on = {}
-    if (selectMenu) {
-      on = {
-        click: handleClick,
-        mouseenter: handleMouseEnter,
-        mouseleave: handleMouseLeave
+  methods: {
+    createOption () {
+      return {
+        label: this.label,
+        value: this.value,
+        disabled: this.disabled,
+        _index: this.index
       }
-    } else {
-      on = listeners
+    },
+    handleClick (e) {
+      if (this.disabled) return
+      this.NBaseSelectMenu.handleOptionClick(e, this.createOption())
+    },
+    handleMouseEnter (e) {
+      if (this.disabled) return
+      this.NBaseSelectMenu.handleOptionMouseEnter(e, this.createOption())
     }
-    let attrs = {}
-    attrs = {
-      'n-value': createValueAttribute(context.props.value)
-    }
+  },
+  render (h) {
     return h('div', {
       staticClass: 'n-base-select-option',
       class: {
-        'n-base-select-option--selected': selected,
-        'n-base-select-option--disabled': disabled,
-        ...context.data.class
+        'n-base-select-option--selected': this.isSelected,
+        'n-base-select-option--disabled': this.disabled
       },
-      key: context.props.value,
-      attrs,
-      on,
-      props: {
-        ...context.props
+      on: {
+        click: this.handleClick,
+        mouseenter: this.handleMouseEnter
       }
-    }, (context.scopedSlots.default && context.scopedSlots.default()) || [ context.props.label ])
+    }, [ this.label ])
   }
 }
 </script>

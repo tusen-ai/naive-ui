@@ -26,7 +26,7 @@
 export default {
   data () {
     const options = []
-    for (let i = 0; i < 2500; ++i) {
+    for (let i = 0; i < 10000; ++i) {
       options.push({
         label: String(i),
         value: i

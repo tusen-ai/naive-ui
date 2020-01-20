@@ -273,20 +273,26 @@ export default {
         })
       }
     },
-    scrollToElement (el) {
+    scrollToElement (el, getTop = el => el.offsetTop, getHeight = el => el.offsetHeight) {
       if (this.withoutScrollbar) return
-      if (el.offsetTop < this._container().scrollTop) {
-        this._container().scrollTo({
-          top: el.offsetTop,
+      const top = getTop(el)
+      const container = this._container()
+      if (top < container.scrollTop) {
+        container.scrollTo({
+          top,
           left: 0,
           behavior: 'smooth'
         })
-      } else if (el.offsetTop + el.offsetHeight > this._container().scrollTop + this._container().offsetHeight) {
-        this._container().scrollTo({
-          top: el.offsetTop + el.offsetHeight - this._container().offsetHeight,
-          left: 0,
-          behavior: 'smooth'
-        })
+      } else {
+        const elHeight = getHeight(el)
+        const containerHeight = container.offsetHeight
+        if (top + elHeight > container.scrollTop + containerHeight) {
+          container.scrollTo({
+            top: top + elHeight - containerHeight,
+            left: 0,
+            behavior: 'smooth'
+          })
+        }
       }
     },
     handleMouseEnterWrapper () {

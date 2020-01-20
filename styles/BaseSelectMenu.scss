@@ -3,15 +3,21 @@
 
 @mixin base-select-size-mixin ($size) {
   @include m($size + '-size') {
+    max-height: map-get($map: $--n-height, $key: $size) * 7.6;
+    @include b(virtual-scroller) {
+      height: 100%;
+      max-height: map-get($map: $--n-height, $key: $size) * 7.6;
+      scrollbar-width: none;
+      -moz-scrollbar-width: none;
+      &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+      }
+    }
     @include b(scrollbar-container) {
       max-height: map-get($map: $--n-height, $key: $size) * 7.6;
     }
     @include b(base-select-option) {
-      height: map-get($map: $--n-height, $key: $size);
-      line-height: map-get($map: $--n-height, $key: $size);
-      font-size: map-get($map: $--n-font-size, $key: $size);
-    }
-    @include b(base-select-menu-light-bar) {
       height: map-get($map: $--n-height, $key: $size);
       line-height: map-get($map: $--n-height, $key: $size);
       font-size: map-get($map: $--n-font-size, $key: $size);
@@ -36,25 +42,6 @@
       @include b(base-select-menu-option-wrapper) {
         position: relative;
         width: 100%;
-      }
-      @include b(base-select-menu-light-bar-wrapper) {
-        position: absolute;
-        left: 0px;
-        right: 0px;
-        top: 0;
-        bottom: 0;
-        overflow: hidden;
-        border-radius: 6px;
-      }
-      /** transition of menu light bar */
-      .n-base-select-menu-light-bar--transition-enter-active {
-        transition: opacity .15s $fast-in-cubic-bezier, top .3s $--n-ease-in-out-cubic-bezier!important;
-      }
-      .n-base-select-menu-light-bar--transition-leave-active {
-        transition: opacity .15s $slow-out-cubic-bezier, top .3s $--n-ease-in-out-cubic-bezier!important;
-      }
-      .n-base-select-menu-light-bar--transition-enter, .n-base-select-menu-light-bar--transition-leave-to {
-        opacity: 0;
       }
     }
     background-color: $--base-select-menu-background-color;
@@ -100,14 +87,6 @@
         text-align: center;
         pointer-events: none;
       }
-    }
-    @include b(base-select-menu-light-bar) {
-      transition: background-color .3s $--n-ease-in-out-cubic-bezier, top .15s $--n-ease-in-out-cubic-bezier;
-      position: absolute;
-      width: 100%;
-      background-color: $--base-select-menu-light-bar-background-color;
-      top: 0;
-      left: 0;
     }
     @include m(multiple) {
       @include b(base-select-option) {

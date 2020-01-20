@@ -15,50 +15,56 @@
   >
     <n-scrollbar
       ref="scrollbar"
+      :theme="theme"
       :without-scrollbar="withoutScrollbar"
+      :container="getScrollContainer"
+      :content="getScrollContent"
       @scroll="handleMenuScroll"
     >
       <div class="n-base-select-menu-option-wrapper">
-        <n-select-menu-light-bar v-if="!withoutLightBar" ref="lightBar" />
         <template v-if="!loading">
-          <template v-if="!useSlot">
-            <n-select-option
-              v-for="option in linkedOptions"
-              :key="option.value"
-              :label="option.label"
-              :value="option.value"
-              :disabled="option.disabled"
-              :is-selected="isSelected({ value: option.value })"
-              :mirror="false"
-            />
-          </template>
-          <template v-else-if="!mirror">
-            <n-render-options />
-          </template>
-          <template v-else>
-            <slot />
-          </template>
+          <recycle-scroller
+            ref="virtualScroller"
+            class="n-virtual-scroller"
+            :items="linkedOptions"
+            :item-size="itemSize"
+            key-field="value"
+          >
+            <template v-slot:before>
+              <n-base-light-bar ref="lightBar" :item-size="itemSize" :theme="theme" />
+            </template>
+            <template v-slot="{ item: option }">
+              <n-select-option
+                :key="option.value"
+                :index="option._index"
+                :label="option.label"
+                :value="option.value"
+                :disabled="option.disabled"
+                :is-selected="isSelected({ value: option.value })"
+              />
+            </template>
+          </recycle-scroller>
         </template>
-        <div
-          v-if="loading"
-          class="n-base-select-option n-base-select-option--loading"
-        >
-          loading
-        </div>
-        <div
-          v-else-if="noData"
-          class="n-base-select-option n-base-select-option--no-data"
-        >
-          {{ noDataContent }}
-        </div>
-        <div
-          v-else-if="notFound"
-          class="n-base-select-option n-base-select-option--not-found"
-        >
-          {{ notFoundContent }}
-        </div>
       </div>
     </n-scrollbar>
+    <div
+      v-if="loading"
+      class="n-base-select-option n-base-select-option--loading"
+    >
+      loading
+    </div>
+    <div
+      v-else-if="noData"
+      class="n-base-select-option n-base-select-option--no-data"
+    >
+      {{ noDataContent }}
+    </div>
+    <div
+      v-else-if="notFound"
+      class="n-base-select-option n-base-select-option--not-found"
+    >
+      {{ notFoundContent }}
+    </div>
   </div>
 </template>
 
@@ -66,11 +72,9 @@
 import NScrollbar from '../../../common/Scrollbar'
 import linkedOptions from '../../../utils/data/linkedOptions'
 import NSelectOption from './SelectOption.vue'
-import NSelectMenuLightBar from './SelectMenuLightBar.vue'
-import NRenderOptions from './SelectRenderOptions.vue'
-import {
-  createValueAttribute
-} from './utils'
+import NBaseLightBar from '../../LightBar'
+import debounce from 'lodash-es/debounce'
+import { RecycleScroller } from 'vue-virtual-scroller'
 
 export default {
   name: 'NBaseSelectMenu',
@@ -81,9 +85,9 @@ export default {
   },
   components: {
     NScrollbar,
+    NBaseLightBar,
     NSelectOption,
-    NSelectMenuLightBar,
-    NRenderOptions
+    RecycleScroller
   },
   props: {
     theme: {
@@ -95,10 +99,6 @@ export default {
       default: false
     },
     withoutScrollbar: {
-      type: Boolean,
-      default: false
-    },
-    useSlot: {
       type: Boolean,
       default: false
     },
@@ -118,21 +118,9 @@ export default {
       type: String,
       default: 'default'
     },
-    emitOption: {
-      type: Boolean,
-      default: false
-    },
     loading: {
       type: Boolean,
       default: false
-    },
-    noDataContent: {
-      type: [String, Function],
-      default: 'no data'
-    },
-    notFoundContent: {
-      type: [String, Function],
-      default: 'none result matched'
     },
     pattern: {
       type: String,
@@ -146,13 +134,22 @@ export default {
       type: Number,
       default: null
     },
-    mirror: {
-      type: Boolean,
-      required: true
-    },
     autoPendingFirstOption: {
       type: Boolean,
       defa: false
+    },
+    /** deprecated */
+    emitOption: {
+      type: Boolean,
+      default: false
+    },
+    noDataContent: {
+      type: [String, Function],
+      default: 'no data'
+    },
+    notFoundContent: {
+      type: [String, Function],
+      default: 'none result matched'
     }
   },
   data () {
@@ -180,28 +177,35 @@ export default {
     },
     linkedOptions () {
       return linkedOptions(this.options)
+    },
+    itemSize () {
+      return ({
+        small: 28,
+        medium: 34,
+        lerge: 40
+      })[this.size]
     }
   },
   watch: {
     notFound (value) {
       if (value) {
-        this.hideLightBarSync()
+        this.hideLightBar(0)
       }
     },
     noData (value) {
       if (value) {
-        this.hideLightBarSync()
+        this.hideLightBar(0)
       }
     },
     loading (value) {
       if (value) {
-        this.hideLightBarSync()
+        this.hideLightBar(0)
       }
     },
     linkedOptions () {
       this.$nextTick().then(() => {
         if (this.autoPendingFirstOption) {
-          this.setPendingOptionElementValue(this.linkedOptions.firstAvailableOptionValue)
+          this.setPendingOptionIndex(this.linkedOptions.firstAvailableOptionIndex)
         } else {
           this.hideLightBar()
           this.pendingOption = null
@@ -218,40 +222,21 @@ export default {
   },
   mounted () {
     if (this.autoPendingFirstOption) {
-      this.setPendingOptionElementValue(this.linkedOptions.firstAvailableOptionValue)
+      this.setPendingOptionIndex(this.linkedOptions.firstAvailableOptionIndex)
     }
   },
   methods: {
-    hideLightBar () {
-      if (this.$refs.lightBar) {
-        this.$refs.lightBar.hideLightBar()
-      }
-    },
-    hideLightBarSync () {
-      if (this.$refs.lightBar) {
-        this.$refs.lightBar.hideLightBarSync()
-      }
-    },
-    updateLightBarPosition (el) {
-      if (this.$refs.lightBar) {
-        this.$refs.lightBar.updateLightBarPosition(el)
-      }
-    },
     handleMenuScroll (e, scrollContainer, scrollContent) {
       this.$emit('menu-scroll', e, scrollContainer, scrollContent)
     },
     handleToggleOption (option) {
       this.emit('menu-toggle-option', option)
     },
-    handleOptionMouseEnter (e, option) {
+    handleOptionMouseEnter: debounce(function (e, option) {
       if (!option.disabled) {
-        this.updateLightBarPosition(e.target)
-        this.pendingOption = this.value2Option.get(option.value)
+        this.setPendingOptionIndex(option._index, false)
       }
-    },
-    handleOptionMouseLeave (e, option) {
-
-    },
+    }, 64),
     handleKeyUpUp () {
       this.prev()
     },
@@ -273,26 +258,60 @@ export default {
     next () {
       if (
         this.pendingOption === null &&
-        this.linkedOptions.firstAvailableOptionValue !== null
+        this.linkedOptions.firstAvailableOptionIndex !== null
       ) {
-        this.setPendingOptionElementValue(this.linkedOptions.firstAvailableOptionValue)
+        this.setPendingOptionIndex(
+          this.linkedOptions.firstAvailableOptionIndex
+        )
       } else {
-        this.setPendingOptionElementValue(this.pendingOption.nextAvailableOptionValue)
+        this.setPendingOptionIndex(
+          this.pendingOption.nextAvailableOptionIndex
+        )
       }
     },
     prev () {
       if (this.pendingOption) {
-        this.setPendingOptionElementValue(this.pendingOption.prevAvailableOptionValue)
+        this.setPendingOptionIndex(
+          this.pendingOption.prevAvailableOptionIndex
+        )
       }
     },
-    setPendingOptionElementValue (value) {
-      const menu = this.$el
-      if (menu && value !== null) {
-        const el = menu.querySelector(`[n-value="${createValueAttribute(value)}"]`)
-        this.pendingOption = this.value2Option.get(value)
-        this.pendingOptionElement = el
-        this.updateLightBarPosition(this.pendingOptionElement)
-        this.$refs.scrollbar.scrollToElement(this.pendingOptionElement)
+    setPendingOptionIndex (index, doScroll = true) {
+      if (index !== null) {
+        this.pendingOption = this.linkedOptions[index]
+        const itemSize = this.itemSize
+        const offsetTop = itemSize * index
+        this.updateLightBarTop({
+          offsetTop
+        })
+        doScroll && this.$refs.scrollbar.scrollToElement({}, () => offsetTop, () => itemSize)
+      }
+    },
+    /**
+     * scrollbar related
+     */
+    getScrollContainer () {
+      return this.$refs.virtualScroller.$el
+    },
+    getScrollContent () {
+      return this.$refs.virtualScroller.$refs.wrapper
+    },
+    /**
+     * light-bar related
+     */
+    updateLightBarTop (el) {
+      if (this.$refs.lightBar) {
+        this.$refs.lightBar.updateLightBarTop(el)
+      }
+    },
+    hideLightBar () {
+      if (this.$refs.lightBar) {
+        this.$refs.lightBar.hideLightBar()
+      }
+    },
+    hideLightBarSync () {
+      if (this.$refs.lightBar) {
+        this.$refs.lightBar.hideLightBar(0)
       }
     }
   }

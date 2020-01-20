@@ -2,7 +2,6 @@
 Select
 ## Demo
 ```demo
-slot-api
 basic
 multiple
 events

@@ -9,37 +9,44 @@ import cloneDeep from 'lodash-es/cloneDeep'
 function markAvailableOptionValues (options) {
   const length = options.length
   if (length === 0) return
-  let lastAvailableOption = null
+  // let lastAvailableOption = null
+  let lastAvailableOptionIndex = null
   options.firstAvailableOptionValue = null
+  options.firstAvailableOptionIndex = null
   for (let i = 0; i < length; ++i) {
     const option = options[i]
-    if (!option.disabled) {
-      options.firstAvailableOptionValue = option.value
-      break
+    if (!option.disabled && options.firstAvailableOptionIndex === null) {
+      // options.firstAvailableOptionValue = option.value
+      options.firstAvailableOptionIndex = i
     }
-  }
-  for (let i = 0; i < length; ++i) {
-    const option = options[i]
-    option.nextAvailableOptionValue = null
-    option.prevAvailableOptionValue = null
+    // option.nextAvailableOptionValue = null
+    option.nextAvailableOptionIndex = null
+    // option.prevAvailableOptionValue = null
+    option.prevAvailableOptionIndex = null
+    option._index = i
   }
   for (let i = 0; i <= length * 2; ++i) {
     const option = options[i % length]
-    if (lastAvailableOption) {
-      option.prevAvailableOptionValue = lastAvailableOption.value
+    if (lastAvailableOptionIndex !== null) {
+      // option.prevAvailableOptionValue = lastAvailableOption.value
+      option.prevAvailableOptionIndex = lastAvailableOptionIndex
     }
     if (!option.disabled) {
-      lastAvailableOption = option
+      // lastAvailableOption = option
+      lastAvailableOptionIndex = i % length
     }
   }
-  lastAvailableOption = null
+  // lastAvailableOption = null
+  lastAvailableOptionIndex = null
   for (let i = length * 2; i >= 0; --i) {
     const option = options[i % length]
-    if (lastAvailableOption) {
-      option.nextAvailableOptionValue = lastAvailableOption.value
+    if (lastAvailableOptionIndex !== null) {
+      // option.nextAvailableOptionValue = lastAvailableOption.value
+      option.nextAvailableOptionIndex = lastAvailableOptionIndex
     }
     if (!option.disabled) {
-      lastAvailableOption = option
+      // lastAvailableOption = option
+      lastAvailableOptionIndex = i % length
     }
   }
 }

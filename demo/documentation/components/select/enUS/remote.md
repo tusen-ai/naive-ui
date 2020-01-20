@@ -11,24 +11,6 @@
   :no-data-content="noDataContent"
   :loading="loading"
 />
-<n-select
-  v-model="value"
-  filterable
-  placeholder="Search Songs"
-  :on-search="handleSearch"
-  clearable
-  remote
-  :no-data-content="noDataContent"
-  :loading="loading"
->
-  <n-select-option 
-    v-for="option in options"
-    :key="options.value"
-    :label="option.label"
-    :value="option.value"
-    :disabled="option.disabled"
-  />
-</n-select>
 ```
 ```js
 const options = [
