@@ -1,7 +1,7 @@
 <template>
   <transition name="n-cancel-mark--transition">
     <div
-      v-if="show && (clearable || arrow)"
+      v-if="loading || (show && (clearable || arrow))"
       class="n-cancel-mark"
       :class="{
         [`n-${theme}-theme`]: theme
@@ -10,9 +10,11 @@
       @mouseenter="handleMouseEnter"
       @mouseleave="handleMouseLeave"
     >
-      <transition name="n-cancel-mark--transition">
+      <icon-switch-transition>
+        <n-base-loading v-if="loading" :theme="theme" class="n-cancel-mark-spin" />
         <div
-          v-if="!arrow || (mouseHovered && clearable)"
+          v-else-if="!arrow || (mouseHovered && clearable)"
+          key="cross"
           class="n-cancel-mark-cross"
           :class="{
             'n-cancel-mark-cross--arrow': arrow
@@ -21,26 +23,32 @@
         >
           <cancel-icon />
         </div>
-      </transition>
-      <transition name="n-cancel-mark--transition">
         <div
-          v-if="(arrow && !clearable) || (arrow && !mouseHovered)"
+          v-else-if="(arrow && !clearable) || (arrow && !mouseHovered)"
+          key="arrow"
           class="n-cancel-mark-arrow"
           :class="{
             'n-cancel-mark-arrow--active': active,
             'n-cancel-mark-arrow--disabled': disabled
           }"
         />
-      </transition>
+      </icon-switch-transition>
     </div>
   </transition>
 </template>
 
 <script>
 import CancelIcon from './CancelIcon.vue'
+import IconSwitchTransition from '../../../transition/IconSwitchTransition'
+import NBaseLoading from '../../Loading'
+
 export default {
   name: 'NBaseCancelMark',
-  components: { CancelIcon },
+  components: {
+    CancelIcon,
+    NBaseLoading,
+    IconSwitchTransition
+  },
   props: {
     theme: {
       type: String,
@@ -63,6 +71,10 @@ export default {
       default: false
     },
     disabled: {
+      type: Boolean,
+      default: false
+    },
+    loading: {
       type: Boolean,
       default: false
     }

@@ -12,9 +12,17 @@
       width: 12px;
       vertical-align: bottom;
     }
+    @include b(cancel-mark-spin) {
+      @include icon-switch-transition();
+      transform: scale(0.9999);
+      position: absolute;
+      height: 12px;
+      width: 12px;
+    }
     @include b(cancel-mark-cross) {
       @include once {
-        @include fade-in-transition(cancel-mark);
+        @include icon-switch-transition();
+        transform: scale(0.9999);
         position: absolute;
         height: 12px;
         width: 12px;
@@ -47,7 +55,9 @@
     }
     @include b(cancel-mark-arrow) {
       @include once {
-        @include fade-in-transition(cancel-mark);
+        // @include fade-in-transition(cancel-mark);
+        @include icon-switch-transition();
+        transform: scale(0.9999);
         position: absolute;
         top: 0;
         left: 0;

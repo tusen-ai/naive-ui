@@ -36,6 +36,7 @@
         </n-tag>
         <n-base-cancel-mark
           class="n-base-picker__mark"
+          :loading="loading"
           :theme="theme"
           :arrow="showArrow"
           :disabled="disabled"
@@ -95,6 +96,7 @@
           :disabled="disabled"
           :active="active"
           :clearable="clearable && selected"
+          :loading="loading"
           @clear="handleClear"
         />
       </div>
@@ -126,6 +128,7 @@
         <n-base-cancel-mark
           ref="cancelMark"
           class="n-base-picker__mark"
+          :loading="loading"
           :theme="theme"
           :arrow="showArrow"
           :disabled="disabled"
@@ -163,6 +166,7 @@
           :disabled="disabled"
           :active="active"
           :clearable="clearable && selected"
+          :loading="loading"
           @clear="handleClear"
         />
       </div>
@@ -232,6 +236,10 @@ export default {
     size: {
       type: String,
       default: 'medium'
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
