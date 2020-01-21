@@ -40,15 +40,13 @@
               <n-select-option
                 v-if="option.type === OPTION_TYPE.OPTION"
                 :index="option.index"
-                :label="option.data.label"
-                :value="option.data.value"
-                :disabled="option.data.disabled"
+                :data="option.data"
                 :grouped="option.grouped"
                 :selected="isOptionSelected({ value: option.data.value })"
               />
               <n-select-group-header
                 v-else-if="option.type === OPTION_TYPE.GROUP_HEADER"
-                :name="option.data.name"
+                :data="option.data"
               />
             </template>
           </recycle-scroller>
@@ -62,6 +60,9 @@
       <slot name="empty">
         <n-empty description="No Data" />
       </slot>
+    </div>
+    <div v-if="$slots.action" class="n-base-select-menu__action">
+      <slot name="action" />
     </div>
   </div>
 </template>
@@ -218,14 +219,14 @@ export default {
       const pendingWrappedOption = this.pendingWrappedOption
       return pendingWrappedOption && pendingWrappedOption.data
     },
-    handleOptionMouseEnter: debounce(function (e, option) {
-      if (!option.disabled) {
-        this.setPendingWrappedOptionIndex(option.index, false)
+    handleOptionMouseEnter: debounce(function (e, index, optionData) {
+      if (!optionData.disabled) {
+        this.setPendingWrappedOptionIndex(index, false)
       }
     }, 64),
-    handleOptionClick (e, option) {
-      if (!option.disabled) {
-        this.toggleOption(option)
+    handleOptionClick (e, index, optionData) {
+      if (!optionData.disabled) {
+        this.toggleOption(optionData)
       }
     },
     toggleOption (option) {

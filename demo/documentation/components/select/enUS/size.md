@@ -1,18 +1,24 @@
-# Multiple Select
-Select multiple value.
+# Size
+Select has different size.
+
 ```html
 <n-select
   v-model="value"
-  multiple
+  size="small"
   :options="options"
 />
 <n-select
   v-model="value"
-  multiple
-  disabled
+  size="medium"
+  :options="options"
+/>
+<n-select
+  v-model="value"
+  size="large"
   :options="options"
 />
 ```
+
 ```js
 export default {
   data () {

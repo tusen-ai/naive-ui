@@ -3,7 +3,6 @@
 
 @mixin base-select-size-mixin ($size) {
   @include m($size + '-size') {
-    max-height: map-get($map: $--n-height, $key: $size) * 7.6;
     @include b(virtual-scroller) {
       height: 100%;
       max-height: map-get($map: $--n-height, $key: $size) * 7.6;
@@ -44,9 +43,14 @@
       position: relative;
       border-radius: 6px;
       transition: background-color .3s $--n-ease-in-out-cubic-bezier;
+      font-size: $--n-secondary-text-color;
       @include b(base-select-menu-option-wrapper) {
         position: relative;
         width: 100%;
+      }
+      @include e(action) {
+        padding: 8px 14px;
+        font-size: 14px;
       }
     }
     background-color: $--base-select-menu-background-color;
@@ -91,6 +95,9 @@
         text-align: center;
         pointer-events: none;
       }
+    }
+    @include e(action) {
+      border-top: 1px solid $--n-divider-color;
     }
     @include m(multiple) {
       @include b(base-select-option) {

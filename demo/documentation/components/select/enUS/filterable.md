@@ -1,16 +1,17 @@
 # Filterable
+Go go go, Filter.
 ```html
 <n-select
   v-model="selectedValue"
   filterable
-  placeholder="Please Select Type"
+  placeholder="Please Select a Song"
   :options="options"
 />
 <n-select
   v-model="selectedValues"
   multiple
   filterable
-  placeholder="Please Select Type"
+  placeholder="Please Select Songs"
   :options="options"
 />
 ```

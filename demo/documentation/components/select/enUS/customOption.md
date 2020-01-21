@@ -1,13 +1,36 @@
-# Group
-Group options together.
+# Custom Option Render
+After a long time of consideration, I decide to drop slot API. However, there is still a way to render options as you like.
 ```html
 <n-select
-  filterable
-  v-model=value
-  :options='options'
+  v-model="value"
+  :options="options"
 />
 ```
 ```js
+import mdMusicalNote from 'naive-ui/lib/icons/md-musical-note'
+
+function render (h, option, selected) {
+  return [
+    h('n-config-consumer', {
+      props: {
+        transparent: true
+      },
+      scopedSlots: {
+        default ({ styleScheme }) {
+          return h('n-icon', {
+            style: {
+              fill: selected ? styleScheme.primaryColor : styleScheme.tertiaryTextColor,
+              verticalAlign: 'middle',
+              marginRight: '4px',
+            }
+          }, [h(mdMusicalNote)])
+        }
+      }
+    }),
+    option.label
+  ]
+}
+
 export default {
   data () {
     return {
@@ -16,6 +39,7 @@ export default {
         {
           type: 'group',
           name: 'Rubber Soul',
+          render: (h, data) => h('span', [ data.name, '(Cool!)']),
           children: [
             {
               label: 'Everybody\'s Got Something to Hide Except Me and My Monkey',
@@ -72,11 +96,15 @@ export default {
               label: 'Wait',
               value: 'song12'
             }
-          ]
+          ].map(v => {
+            v.render = render
+            return v
+          })
         },
         {
           type: 'group',
           name: 'Let It Be',
+          render: (h, data) => h('span', [ data.name, '(Cool!)']),
           children: [
             {
               label: 'Two Of Us',
@@ -126,7 +154,10 @@ export default {
               label: 'Get Back',
               value: 'Get Back'
             }
-          ]
+          ].map(v => {
+            v.render = render
+            return v
+          })
         }
       ]
     }

@@ -7,24 +7,9 @@ export default {
     }
   },
   props: {
-    label: {
-      validator (value) {
-        return typeof value === 'string'
-      },
+    data: {
+      type: Object,
       required: true
-    },
-    value: {
-      validator (value) {
-        const type = typeof value
-        return type === 'string' || type === 'number'
-      },
-      required: true
-    },
-    disabled: {
-      validator (value) {
-        return typeof value === 'boolean'
-      },
-      default: false
     },
     selected: {
       validator (value) {
@@ -46,36 +31,29 @@ export default {
     }
   },
   methods: {
-    createOption () {
-      return {
-        label: this.label,
-        value: this.value,
-        disabled: this.disabled,
-        index: this.index
-      }
-    },
     handleClick (e) {
       if (this.disabled) return
-      this.NBaseSelectMenu.handleOptionClick(e, this.createOption())
+      this.NBaseSelectMenu.handleOptionClick(e, this.index, this.data)
     },
     handleMouseEnter (e) {
       if (this.disabled) return
-      this.NBaseSelectMenu.handleOptionMouseEnter(e, this.createOption())
+      this.NBaseSelectMenu.handleOptionMouseEnter(e, this.index, this.data)
     }
   },
   render (h) {
+    const children = (this.data.render && this.data.render(h, this.data, this.selected)) || [ this.data.label ]
     return h('div', {
       staticClass: 'n-base-select-option',
       class: {
         'n-base-select-option--selected': this.selected,
-        'n-base-select-option--disabled': this.disabled,
+        'n-base-select-option--disabled': this.data.disabled,
         'n-base-select-option--grouped': this.grouped
       },
       on: {
         click: this.handleClick,
         mouseenter: this.handleMouseEnter
       }
-    }, [ this.label ])
+    }, Array.isArray(children) ? children : [ children ])
   }
 }
 </script>

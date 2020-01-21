@@ -1,4 +1,5 @@
-# Events
+# Change Event
+Why change event is an example? Because at first there isn't much to write.
 ```html
 <n-select
   v-model="selectedValue"
@@ -7,24 +8,11 @@
   @change="handleChange"
 />
 <n-select
-  v-model="selectedValue"
-  placeholder="Please Select Type"
-  :options="options"
-  @change="handleChange"
-  emit-option
-/>
-<n-select
   v-model="selectedArray"
   multiple
   placeholder="Please Select Type"
   :options="options"
   @change="handleChange"
-/>
-<n-select
-  v-model="selectedArray"
-  multiple
-  placeholder="Please Select Type"
-  :options="options"
 />
 ```
 ```js

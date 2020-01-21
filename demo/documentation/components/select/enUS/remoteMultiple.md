@@ -1,4 +1,5 @@
 # Remote(Multiple)
+Async example for multiple select.
 ```html
 <n-select
   v-model="selectedValues"
@@ -6,11 +7,10 @@
   filterable
   placeholder="Search Songs"
   :options="options"
-  :on-search="handleSearch"
+  :loading="loading"
   clearable
   remote
-  :no-data-content="noDataContent"
-  :loading="loading"
+  @search="handleSearch"
 />
 ```
 ```js

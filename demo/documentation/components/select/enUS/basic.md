@@ -1,4 +1,5 @@
 # Basic
+Basic usage for select
 ```html
 <n-select
   v-model="value"
@@ -7,16 +8,6 @@
 <n-select
   v-model="value"
   disabled
-  :options="options"
-/>
-<n-select
-  v-model="value"
-  size="small"
-  :options="options"
-/>
-<n-select
-  v-model="value"
-  size="large"
   :options="options"
 />
 ```
