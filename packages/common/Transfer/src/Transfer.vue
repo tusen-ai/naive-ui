@@ -20,7 +20,7 @@
         @mouseleave="handleSourceListMouseLeave"
       >
         <n-scrollbar @scroll="handleSourceListScroll">
-          <ul ref="sourceList" class="n-transfer-list-content n-transfer-list-content--animation-disabled">
+          <ul ref="sourceList" class="n-transfer-list-content">
             <n-transfer-light-bar ref="lightBar" />
             <n-transfer-source-list-item
               v-for="(option, index) in memorizedSourceOptions"
@@ -66,7 +66,7 @@
         @mouseleave="handleTargetListMouseLeave"
       >
         <n-scrollbar ref="rightScrollbar" @scroll="handleTargetListScroll">
-          <ul ref="targetList" class="n-transfer-list-content n-transfer-list-content--animation-disabled">
+          <ul ref="targetList" class="n-transfer-list-content">
             <n-transfer-light-bar ref="secondLightBar" />
             <n-transfer-target-list-item
               v-for="(option, index) in targetOptions"
@@ -101,7 +101,8 @@ import themeable from '../../../mixins/themeable'
 import NTransferLightBar from './TransferLightBar'
 import debounce from 'lodash-es/debounce'
 
-const SCROLL_VISIBLE_BUFFER = 1200
+const ITEM_HEIGHT = 34
+const SCROLL_VISIBLE_BUFFER = ITEM_HEIGHT * 20
 
 export default {
   name: 'NTransfer',
@@ -143,10 +144,12 @@ export default {
       sourceCheckedValues: [],
       targetCheckedValues: [],
       memorizedSourceOptions: null,
-      sourceListVisibleMinIndex: -SCROLL_VISIBLE_BUFFER / 34,
-      sourceListVisibleMaxIndex: SCROLL_VISIBLE_BUFFER / 34,
-      targetListVisibleMinIndex: -SCROLL_VISIBLE_BUFFER / 34,
-      targetListVisibleMaxIndex: SCROLL_VISIBLE_BUFFER / 34,
+      sourceListVisibleMinIndex: parseInt(-SCROLL_VISIBLE_BUFFER / ITEM_HEIGHT),
+      sourceListVisibleMaxIndex: parseInt(SCROLL_VISIBLE_BUFFER / ITEM_HEIGHT),
+      targetListVisibleMinIndex: parseInt(-SCROLL_VISIBLE_BUFFER / ITEM_HEIGHT),
+      targetListVisibleMaxIndex: parseInt(SCROLL_VISIBLE_BUFFER / ITEM_HEIGHT),
+      enableSourceEnterAnimation: false,
+      enableTargetEnterAnimation: false,
       initialized: false
     }
   },
@@ -199,14 +202,6 @@ export default {
     targetValueSet () {
       return this.mergedValueSet.targetValueSet
     },
-    targetOptionsWithShowStatus () {
-      return this.targetOptions.map((option, index) => {
-        const show = true
-        option.show = show
-        option.index = index
-        return option
-      })
-    },
     mergedValueSet () {
       const valueSet = this.valueSet
       const sourceValueSet = new Set()
@@ -256,13 +251,13 @@ export default {
   methods: {
     handleSourceListScroll: debounce(function (_, container) {
       const scrollTop = container.scrollTop
-      this.sourceListVisibleMinIndex = (scrollTop - SCROLL_VISIBLE_BUFFER) / 34
-      this.sourceListVisibleMaxIndex = (scrollTop + SCROLL_VISIBLE_BUFFER) / 34
+      this.sourceListVisibleMinIndex = parseInt((scrollTop - SCROLL_VISIBLE_BUFFER) / ITEM_HEIGHT)
+      this.sourceListVisibleMaxIndex = parseInt((scrollTop + SCROLL_VISIBLE_BUFFER) / ITEM_HEIGHT)
     }, 128),
     handleTargetListScroll: debounce(function (_, container) {
       const scrollTop = container.scrollTop
-      this.targetListVisibleMinIndex = (scrollTop - SCROLL_VISIBLE_BUFFER) / 34
-      this.targetListVisibleMaxIndex = (scrollTop + SCROLL_VISIBLE_BUFFER) / 34
+      this.targetListVisibleMinIndex = parseInt((scrollTop - SCROLL_VISIBLE_BUFFER) / ITEM_HEIGHT)
+      this.targetListVisibleMaxIndex = parseInt((scrollTop + SCROLL_VISIBLE_BUFFER) / ITEM_HEIGHT)
     }, 128),
     emitChangeEvent (value) {
       const newValue = this.cleanValue(value)
@@ -324,13 +319,12 @@ export default {
       }
     },
     handleToTargetClick () {
+      this.enableTargetEnterAnimation = true
       const enteredItemEls = Array.from(this.$el.getElementsByClassName('n-transfer-list-item--enter'))
       const length = enteredItemEls.length
       for (let i = 0; i < length; ++i) {
         enteredItemEls[i].classList.remove('n-transfer-list-item--enter')
       }
-      this.$refs.sourceList.classList.remove('n-transfer-list-content--animation-disabled')
-      this.$refs.targetList.classList.remove('n-transfer-list-content--animation-disabled')
       const sourceCheckedValues = this.sourceCheckedValues
       /** create new value */
       let newValue = Array.isArray(this.value) ? this.value : []
@@ -343,26 +337,23 @@ export default {
         }
       })
       window.setTimeout(() => {
-        /** disable animation before apply dom change */
-        this.$refs.sourceList.classList.add('n-transfer-list-content--animation-disabled')
         /** after animation is done change memorized source options to remove dom */
         this.memorizedSourceOptions = this.memorizedSourceOptions.filter(option => !sourceCheckedValueSet.has(option.value))
+        this.enableTargetEnterAnimation = false
       }, 300)
       /** clear check */
-      ;(this.$refs.sourceListItems || []).forEach(listItem => listItem.setChecked(false))
       this.sourceCheckedValues = []
       /** emit new value */
       /** auto play target options enter animation */
       this.$emit('change', newValue)
     },
     handleToSourceClick () {
+      this.enableSourceEnterAnimation = true
       const enteredItemEls = Array.from(this.$el.getElementsByClassName('n-transfer-list-item--enter'))
       const length = enteredItemEls.length
       for (let i = 0; i < length; ++i) {
         enteredItemEls[i].classList.remove('n-transfer-list-item--enter')
       }
-      this.$refs.sourceList.classList.remove('n-transfer-list-content--animation-disabled')
-      this.$refs.targetList.classList.remove('n-transfer-list-content--animation-disabled')
       /** create new value */
       let newValue = Array.isArray(this.value) ? this.value : []
       const targetValueSet = this.targetCheckedValueSet
@@ -373,20 +364,19 @@ export default {
         }
       })
       window.setTimeout(() => {
-        this.$refs.targetList.classList.add('n-transfer-list-content--animation-disabled')
         /** disable animation before apply dom change */
         this.targetAnimationDisabled = true
         /** after animation is done change value to remove dom */
         newValue = newValue.filter(value => !targetValueSet.has(value))
         /** emit new value */
         this.emitChangeEvent(newValue)
+        this.enableSourceEnterAnimation = false
       }, 300)
       /** change memorized source options */
       const valueToOptionMap = this.valueToOptionMap
       const newSourceOptions = this.targetCheckedValues.map(value => valueToOptionMap.get(value))
       this.memorizedSourceOptions = newSourceOptions.concat(this.memorizedSourceOptions)
       /** clear check */
-      ;(this.$refs.targetListItems || []).forEach(listItem => listItem.setChecked(false))
       this.targetCheckedValues = []
     },
     handleSourceOptionMouseEnter: debounce(function (e) {

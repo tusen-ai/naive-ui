@@ -26,7 +26,7 @@ export default {
       },
       default: false
     },
-    isSelected: {
+    selected: {
       validator (value) {
         return typeof value === 'boolean'
       },
@@ -45,7 +45,7 @@ export default {
         label: this.label,
         value: this.value,
         disabled: this.disabled,
-        _index: this.index
+        index: this.index
       }
     },
     handleClick (e) {
@@ -61,7 +61,7 @@ export default {
     return h('div', {
       staticClass: 'n-base-select-option',
       class: {
-        'n-base-select-option--selected': this.isSelected,
+        'n-base-select-option--selected': this.selected,
         'n-base-select-option--disabled': this.disabled
       },
       on: {

@@ -83,6 +83,8 @@ import Loader from './packages/base/Loading'
 import CancelMark from './packages/base/CancelMark'
 import IconTransition from './packages/transition/IconSwitchTransition'
 
+import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
+
 const NaiveUI = {
   install,
   setHljs,

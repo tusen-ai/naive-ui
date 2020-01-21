@@ -1,8 +1,5 @@
 <template>
   <div class="n-auto-complete" @keydown.down="handleKeyDownDown" @keydown.up="handleKeyDownUp" @keyup.enter="handleKeyUpEnter" @keydown.enter="handleKeyDownEnter">
-    <n-base-select-option-collector v-if="!!$slots.default">
-      <slot />
-    </n-base-select-option-collector>
     <slot name="activator" :handle-input="handleInput" :handle-focus="handleFocus" :handle-blur="handleBlur" :value="value">
       <n-input ref="activator" :value="value" :placeholder="placeholder" :size="size" @focus="canBeActivated = true" @input="handleInput" @blur="handleBlur" />
     </slot>
@@ -36,7 +33,7 @@
             :not-found-content="'Not Found'"
             :emit-option="false"
             :filterable="false"
-            :is-selected="isSelected"
+            :is-option-selected="isSelected"
             :use-slot="!!$slots.default"
             @menu-toggle-option="handleToggleOption"
           >
@@ -60,18 +57,14 @@ import themeable from '../../../mixins/themeable'
 import asformitem from '../../../mixins/asformitem'
 
 import {
-  NBaseSelectMenu,
-  NBaseSelectOptionCollector,
-  NBaseSelectRenderOptions
+  NBaseSelectMenu
 } from '../../../base/SelectMenu'
 
 export default {
   name: 'NAutoComplete',
   components: {
     NInput,
-    NBaseSelectMenu,
-    NBaseSelectOptionCollector,
-    NBaseSelectRenderOptions
+    NBaseSelectMenu
   },
   directives: {
     clickoutside
@@ -146,7 +139,7 @@ export default {
   methods: {
     handleKeyDownEnter (e) {
       if (this.$refs.contentInner) {
-        const pendingOption = this.$refs.contentInner.pendingOption
+        const pendingOption = this.$refs.contentInner.getPendingOption()
         if (pendingOption) {
           e.preventDefault()
         }
@@ -164,7 +157,7 @@ export default {
     },
     handleKeyUpEnter () {
       if (this.$refs.contentInner) {
-        const pendingOption = this.$refs.contentInner.pendingOption
+        const pendingOption = this.$refs.contentInner.getPendingOption()
         this.select(pendingOption)
       }
     },

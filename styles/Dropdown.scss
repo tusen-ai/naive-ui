@@ -26,9 +26,11 @@
             }
             &:hover {
               color: map-get($--dropdown-item-text-color, 'hover');
-              @include b(dropdown-submenu-activator) {
-                @include b(icon) {
-                  fill: map-get($--dropdown-item-text-color, 'hover');
+              & > {
+                @include b(dropdown-submenu-activator) {
+                  @include b(icon) {
+                    fill: map-get($--dropdown-item-text-color, 'hover');
+                  }
                 }
               }
             }

@@ -1,5 +1,11 @@
 <template>
-  <n-dropdown-submenu v-if="shouldBeRenderedAsDropdownSubmenu && !NMenuUl" :value="value" :label="title" :name="name" :selected="selectedInside">
+  <n-dropdown-submenu
+    v-if="shouldBeRenderedAsDropdownSubmenu && !NMenuUl"
+    :value="value"
+    :label="title"
+    :name="name"
+    :selected="selectedInside"
+  >
     <template v-slot:activator>
       <render :render="title" />
     </template>
@@ -15,7 +21,7 @@
     <n-dropdown
       v-if="isFirstLevel"
       size="large"
-      trigger="hover"
+      trigger="click"
       :focusable="false"
       :disabled="!NMenu.collapsed"
       placement="right-start"
@@ -29,7 +35,7 @@
           :class="{
             'n-submenu-item--collapsed': contentCollapsed,
             'n-submenu-item--active': !contentCollapsed,
-            'n-submenu-item--disabled': disabled,
+            'n-submenu-item--disabled': disabled
           }"
           @click="handleClick"
         >
@@ -55,12 +61,12 @@
     </n-dropdown>
     <div
       v-else
-      class="n-submenu-item n-dropdown"
-      :style="{paddingLeft: delayedPaddingLeft + 'px'}"
+      class="n-submenu-item n-submenu-item--as-dropdown"
+      :style="{ paddingLeft: delayedPaddingLeft + 'px' }"
       :class="{
         'n-submenu-item--collapsed': contentCollapsed,
         'n-submenu-item--active': !contentCollapsed,
-        'n-submenu-item--disabled': disabled,
+        'n-submenu-item--disabled': disabled
       }"
       @click="handleClick"
     >
@@ -93,7 +99,6 @@
 </template>
 
 <script>
-import collectable from '../../../mixins/collectable'
 import FadeInHeightExpandTransition from '../../../transition/FadeInHeightExpandTransition'
 import render from '../../../utils/render'
 import NDropdown from '../../Dropdown/src/Dropdown'
@@ -108,29 +113,6 @@ export default {
     NDropdownSubmenu,
     NMenuUl,
     render
-  },
-  mixins: [
-    collectable('NSubmenu', 'menuItemNames', 'menuItemNames', true)
-  ],
-  provide () {
-    return {
-      NSubmenu: this,
-      NMenuItemGroup: null
-    }
-  },
-  inject: {
-    NMenu: {
-      default: null
-    },
-    NSubmenu: {
-      default: null
-    },
-    NMenuItemGroup: {
-      default: null
-    },
-    NMenuUl: {
-      default: null
-    }
   },
   props: {
     value: {
@@ -211,7 +193,31 @@ export default {
       })
     }
   },
+  mounted () {
+    // console.log('submenu mounted', this.name)
+  },
+  provide () {
+    return {
+      NSubmenu: this,
+      NMenuItemGroup: null
+    }
+  },
+  inject: {
+    NMenu: {
+      default: null
+    },
+    NSubmenu: {
+      default: null
+    },
+    NMenuItemGroup: {
+      default: null
+    },
+    NMenuUl: {
+      default: null
+    }
+  },
   created () {
+    // console.log('submenu created', this.name)
     this.delayedPaddingLeft = this.paddingLeft
   },
   methods: {

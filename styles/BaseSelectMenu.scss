@@ -53,6 +53,8 @@
       white-space: nowrap;
       transition: color .3s $--n-ease-in-out-cubic-bezier;
       color: map-get($map: $--base-select-menu-option-color, $key: "default");
+      text-overflow: ellipsis;
+      overflow: hidden;
       @include m(selected) {
         color: map-get($map: $--base-select-menu-option-color, $key: "selected");
       }

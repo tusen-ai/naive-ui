@@ -4,8 +4,7 @@ import themeable from '../../../mixins/themeable'
 import asthemecontext from '../../../mixins/asthemecontext'
 import WrapWithValue from './WrapWithValue'
 import {
-  NBaseSelectMenu,
-  NBaseSelectOptionCollector
+  NBaseSelectMenu
 } from '../../../base/SelectMenu'
 
 export default {
@@ -61,7 +60,6 @@ export default {
   data () {
     return {
       active: true,
-      collectedOptions: [],
       pendingSubmenuInstance: null,
       activeMenuInstance: this
     }
@@ -95,10 +93,20 @@ export default {
       }
     },
     options () {
-      return this.collectedOptions
+      return []
     }
   },
+  created () {
+    console.log('dropdown menu created')
+  },
+  beforeDestroy () {
+    console.log('dropdown menu beforeDestroy')
+  },
+  destroyed () {
+    console.log('dropdown menu destroyed')
+  },
   mounted () {
+    console.log('dropdown menu mounted')
     if (this.autoFocus && this.focusable) {
       this.$el.focus()
     }
@@ -197,13 +205,6 @@ export default {
         keyup: this.handleKeyUp
       }
     }, [
-      h(NBaseSelectOptionCollector, {
-        scopedSlots: {
-          default () {
-            return options
-          }
-        }
-      }),
       h(NBaseSelectMenu, {
         ref: 'selectMenu',
         props: {

@@ -1,15 +1,20 @@
 <template>
   <li
+    v-if="visible"
     class="n-transfer-list-item n-transfer-list-item--target"
     :class="{
       'n-transfer-list-item--disabled': disabled,
       'n-transfer-list-item--enter': enableEnterAnimation
     }"
+    :style="{
+      height: styleHeight,
+      maxHeight: styleHeight
+    }"
     @click="handleClick"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
   >
-    <div v-if="visible" class="n-transfer-list-item__checkbox">
+    <div class="n-transfer-list-item__checkbox">
       <n-simple-checkbox
         :theme="NTransfer.synthesizedTheme"
         :disabled="disabled"
@@ -17,7 +22,6 @@
       />
     </div>
     <div
-      v-if="visible"
       class="n-transfer-list-item__label"
     >
       {{ label }}
@@ -45,7 +49,7 @@ export default {
     },
     disabled: {
       validator: createValidator(['boolean']),
-      required: true
+      default: false
     },
     index: {
       validator: createValidator(['number']),
@@ -64,12 +68,29 @@ export default {
     }
   },
   computed: {
+    styleHeight () {
+      const index = this.index
+      if (index === this.NTransfer.targetListVisibleMinIndex) {
+        return (34 * (index + 1)) + 'px'
+      }
+      if (index === this.NTransfer.targetListVisibleMaxIndex) {
+        return (34 * (this.NTransfer.memorizedSourceOptions.length - index)) + 'px'
+      }
+      return null
+    },
     visible () {
-      return this.NTransfer.targetListVisibleMinIndex < this.index && this.index < this.NTransfer.targetListVisibleMaxIndex
+      return this.NTransfer.targetListVisibleMinIndex <= this.index && this.index <= this.NTransfer.targetListVisibleMaxIndex
+    }
+  },
+  watch: {
+    visible (value) {
+      if (value && !this.NTransfer.enableTargetEnterAnimation) {
+        this.enableEnterAnimation = false
+      }
     }
   },
   created () {
-    if (this.NTransfer.initialized) {
+    if (this.NTransfer.initialized && this.NTransfer.enableTargetEnterAnimation) {
       this.enableEnterAnimation = true
     }
   },
@@ -97,7 +118,7 @@ export default {
       }
     },
     leave () {
-      this.$el.classList.add('n-transfer-list-item--leave')
+      if (this.$el && this.$el.classList) this.$el.classList.add('n-transfer-list-item--leave')
     }
   }
 }

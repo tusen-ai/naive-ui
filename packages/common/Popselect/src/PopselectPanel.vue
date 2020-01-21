@@ -4,7 +4,7 @@
     :multiple="multiple"
     :options="options"
     :loading="loading"
-    :is-selected="isSelected"
+    :is-option-selected="isSelected"
     :width="width"
     size="small"
     @menu-toggle-option="handleMenuToggleOption"

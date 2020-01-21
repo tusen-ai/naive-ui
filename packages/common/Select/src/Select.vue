@@ -67,7 +67,7 @@
             :no-data-content="noDataContent"
             :not-found-content="notFoundContent"
             :filterable="filterable"
-            :is-selected="isOptionSelected"
+            :is-option-selected="isOptionSelected"
             :mirror="false"
             @menu-toggle-option="handleToggleOption"
             @menu-scroll="handleMenuScroll"
@@ -445,7 +445,7 @@ export default {
      */
     handleKeyUpEnter (e) {
       if (this.active) {
-        const pendingOption = this.$refs.contentInner && this.$refs.contentInner.pendingOption
+        const pendingOption = this.$refs.contentInner && this.$refs.contentInner.getPendingOption()
         if (pendingOption) {
           this.handleToggleOption(pendingOption)
         } else {

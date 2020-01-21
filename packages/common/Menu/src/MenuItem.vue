@@ -1,5 +1,9 @@
 <template>
-  <li v-if="!shouldBeRenderedAsDropdownItem && isFirstLevel" class="n-menu-item-wrapper">
+  <li
+    v-if="!shouldBeRenderedAsDropdownItem && isFirstLevel"
+    :key="name"
+    class="n-menu-item-wrapper"
+  >
     <n-tooltip trigger="hover" :disabled="!NMenu.collapsed" placement="right" :delay="300">
       <template v-slot:activator>
         <div
@@ -34,6 +38,7 @@
   </li>
   <li
     v-else-if="!shouldBeRenderedAsDropdownItem"
+    :key="name"
     class="n-menu-item"
     :style="{ paddingLeft: delayedPaddingLeft + 'px' }"
     :class="{
@@ -80,7 +85,7 @@ export default {
     render
   },
   mixins: [
-    collectable('NSubmenu', 'menuItemNames', 'name'),
+    collectable('NSubmenu', 'menuItemNames', 'name', true),
     withapp,
     themeable
   ],
@@ -122,6 +127,9 @@ export default {
     }
   },
   computed: {
+    disabledCollectable () {
+      return !this.NMenuUl
+    },
     shouldBeRenderedAsDropdownItem () {
       if (this.NMenuUl) return false
       return !this.isFirstLevel && this.NMenu.collapsed

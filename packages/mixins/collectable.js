@@ -2,8 +2,16 @@ export default function (
   injectionName,
   collectionProperty,
   registerProperty = 'value',
-  flatten = false
+  bubble = false
 ) {
+  const registerPropertyChangeHandler = function (value, oldValue) {
+    if (this.activeCollectableInjection) {
+      this.registerValue(value, oldValue)
+    }
+  }
+  const watch = {
+    [registerProperty]: registerPropertyChangeHandler
+  }
   return {
     computed: {
       activeCollectableInjection () {
@@ -18,42 +26,47 @@ export default function (
         return null
       }
     },
-    watch: {
-      [registerProperty]: function (value, oldValue) {
-        if (this.activeCollectableInjection) {
-          this.registerValue(value, oldValue)
-        }
-      }
-    },
+    watch,
     created () {
       if (this.activeCollectableInjection) {
         this.registerValue(this[registerProperty])
       }
     },
+    mounted () {
+      if (this.activeCollectableInjection) {
+        this.registerValue(this[registerProperty])
+      }
+    },
     beforeDestroy () {
+      console.log('before destroy', this.name, this.$el)
       if (this.activeCollectableInjection) {
         this.registerValue(undefined, this[registerProperty])
       }
     },
+    destroyed () {
+      console.log('destroyed', this.name)
+    },
     methods: {
       registerValue (value = undefined, oldValue = undefined) {
-        if (this.activeCollectableInjection) {
-          const values = new Set(this.activeCollectableInjection[collectionProperty])
+        if (this.disabledCollectable) return
+        console.log('registerValue')
+        let currentInjection = this.activeCollectableInjection
+        while (currentInjection) {
+          const collectedValues = currentInjection[collectionProperty]
           if (oldValue !== undefined) {
-            if (flatten && Array.isArray(value)) {
-              value.forEach(registeredValue => values.delete(registeredValue))
-            } else {
-              values.delete(oldValue)
+            const oldValueIndex = collectedValues.findIndex(collectedValue => collectedValue === oldValue)
+            if (~oldValueIndex) {
+              collectedValues.splice(oldValueIndex, 1)
             }
           }
           if (value !== undefined) {
-            if (flatten && Array.isArray(value)) {
-              value.forEach(valueToRegister => values.add(valueToRegister))
-            } else {
-              values.add(value)
+            const valueIndex = collectedValues.findIndex(collectedValue => collectedValue === value)
+            if (!~valueIndex) {
+              collectedValues.push(value)
             }
           }
-          this.activeCollectableInjection[collectionProperty] = Array.from(values)
+          if (!bubble) return
+          currentInjection = currentInjection[injectionName] || null
         }
       }
     }

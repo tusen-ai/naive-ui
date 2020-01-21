@@ -12,7 +12,7 @@
           :options="filteredSelectOptions"
           :multiple="multiple"
           :size="size"
-          :is-selected="isSelected"
+          :is-option-selected="isSelected"
           @mousedown.native.prevent="() => {}"
           @menu-toggle-option="handleSelectMenuToggleOption"
         />
@@ -185,7 +185,7 @@ export default {
     },
     enter () {
       if (this.$refs.contentInner) {
-        const pendingOption = this.$refs.contentInner.pendingOption
+        const pendingOption = this.$refs.contentInner.getPendingOption()
         this.handleSelectOptionCheck(pendingOption)
       }
     }

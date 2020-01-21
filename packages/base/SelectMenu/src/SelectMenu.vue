@@ -26,21 +26,21 @@
           <recycle-scroller
             ref="virtualScroller"
             class="n-virtual-scroller"
-            :items="linkedOptions"
+            :items="flattenedOptions"
             :item-size="itemSize"
-            key-field="value"
+            key-field="key"
           >
             <template v-slot:before>
               <n-base-light-bar ref="lightBar" :item-size="itemSize" :theme="theme" />
             </template>
             <template v-slot="{ item: option }">
               <n-select-option
-                :key="option.value"
-                :index="option._index"
-                :label="option.label"
-                :value="option.value"
-                :disabled="option.disabled"
-                :is-selected="isSelected({ value: option.value })"
+                :key="option.data.value"
+                :index="option.index"
+                :label="option.data.label"
+                :value="option.data.value"
+                :disabled="option.data.disabled"
+                :selected="isOptionSelected({ value: option.data.value })"
               />
             </template>
           </recycle-scroller>
@@ -70,7 +70,11 @@
 
 <script>
 import NScrollbar from '../../../common/Scrollbar'
-import linkedOptions from '../../../utils/data/linkedOptions'
+import {
+  getPrevAvailableIndex,
+  getNextAvailableIndex,
+  flattenedOptions
+} from '../../../utils/data/flattenedOptions'
 import NSelectOption from './SelectOption.vue'
 import NBaseLightBar from '../../LightBar'
 import debounce from 'lodash-es/debounce'
@@ -126,7 +130,7 @@ export default {
       type: String,
       default: null
     },
-    isSelected: {
+    isOptionSelected: {
       type: Function,
       required: true
     },
@@ -136,7 +140,7 @@ export default {
     },
     autoPendingFirstOption: {
       type: Boolean,
-      defa: false
+      default: false
     },
     /** deprecated */
     emitOption: {
@@ -155,34 +159,29 @@ export default {
   data () {
     return {
       active: true,
-      pendingOption: null
+      pendingWrappedOption: null
     }
   },
   computed: {
+    pendingWrappedOptionIndex () {
+      const pendingWrappedOption = this.pendingWrappedOption
+      if (!pendingWrappedOption) return null
+      return pendingWrappedOption.index
+    },
+    flattenedOptions () {
+      return flattenedOptions(this.options)
+    },
     notFound () {
-      return this.filterable && (this.pattern.length && !this.linkedOptions.length)
+      return this.filterable && (this.pattern.length && !this.flattenedOptions.length)
     },
     noData () {
-      return this.linkedOptions && this.linkedOptions.length === 0
-    },
-    value2Option () {
-      const value2Option = new Map()
-      for (const option of this.linkedOptions) {
-        value2Option.set(option.value, option)
-      }
-      return value2Option
-    },
-    firstOptionValue () {
-      return this.linkedOptions.firstAvailableOptionValue
-    },
-    linkedOptions () {
-      return linkedOptions(this.options)
+      return this.flattenedOptions && this.flattenedOptions.length === 0
     },
     itemSize () {
       return ({
         small: 28,
         medium: 34,
-        lerge: 40
+        large: 40
       })[this.size]
     }
   },
@@ -202,17 +201,18 @@ export default {
         this.hideLightBar(0)
       }
     },
-    linkedOptions () {
+    flattenedOptions () {
       this.$nextTick().then(() => {
         if (this.autoPendingFirstOption) {
-          this.setPendingOptionIndex(this.linkedOptions.firstAvailableOptionIndex)
+          const firstAvailableOptionIndex = getNextAvailableIndex(this.flattenedOptions, null)
+          this.setPendingWrappedOptionIndex(firstAvailableOptionIndex)
         } else {
           this.hideLightBar()
-          this.pendingOption = null
+          this.pendingWrappedOption = null
         }
       })
     },
-    pendingOption (value) {
+    pendingWrappedOption (value) {
       if (value === null) {
         this.$nextTick().then(() => {
           this.hideLightBar()
@@ -222,63 +222,67 @@ export default {
   },
   mounted () {
     if (this.autoPendingFirstOption) {
-      this.setPendingOptionIndex(this.linkedOptions.firstAvailableOptionIndex)
+      const firstAvailableOptionIndex = getNextAvailableIndex(this.flattenedOptions, null)
+      this.setPendingWrappedOptionIndex(firstAvailableOptionIndex)
     }
   },
   methods: {
     handleMenuScroll (e, scrollContainer, scrollContent) {
       this.$emit('menu-scroll', e, scrollContainer, scrollContent)
     },
-    handleToggleOption (option) {
-      this.emit('menu-toggle-option', option)
+    getPendingOption () {
+      const pendingWrappedOption = this.pendingWrappedOption
+      return pendingWrappedOption && pendingWrappedOption.data
     },
     handleOptionMouseEnter: debounce(function (e, option) {
       if (!option.disabled) {
-        this.setPendingOptionIndex(option._index, false)
+        this.setPendingWrappedOptionIndex(option.index, false)
       }
     }, 64),
+    handleOptionClick (e, option) {
+      if (!option.disabled) {
+        this.toggleOption(option)
+      }
+    },
+    toggleOption (option) {
+      this.$emit('menu-toggle-option', option)
+    },
+    handleMenuMouseLeave () {
+      this.hideLightBar()
+      this.pendingWrappedOption = null
+    },
+    /**
+     * keyboard related methods
+     */
     handleKeyUpUp () {
       this.prev()
     },
     handleKeyUpDown () {
       this.next()
     },
-    handleOptionClick (e, option) {
-      if (!option.disabled) {
-        this.toggleOption(option)
-      }
-    },
-    handleMenuMouseLeave () {
-      this.hideLightBar()
-      this.pendingOption = null
-    },
-    toggleOption (option) {
-      this.$emit('menu-toggle-option', option)
-    },
     next () {
       if (
-        this.pendingOption === null &&
-        this.linkedOptions.firstAvailableOptionIndex !== null
+        this.pendingWrappedOption === null
       ) {
-        this.setPendingOptionIndex(
-          this.linkedOptions.firstAvailableOptionIndex
+        this.setPendingWrappedOptionIndex(
+          getNextAvailableIndex(this.flattenedOptions, null)
         )
       } else {
-        this.setPendingOptionIndex(
-          this.pendingOption.nextAvailableOptionIndex
+        this.setPendingWrappedOptionIndex(
+          getNextAvailableIndex(this.flattenedOptions, this.pendingWrappedOptionIndex)
         )
       }
     },
     prev () {
-      if (this.pendingOption) {
-        this.setPendingOptionIndex(
-          this.pendingOption.prevAvailableOptionIndex
+      if (this.pendingWrappedOption) {
+        this.setPendingWrappedOptionIndex(
+          getPrevAvailableIndex(this.flattenedOptions, this.pendingWrappedOptionIndex)
         )
       }
     },
-    setPendingOptionIndex (index, doScroll = true) {
+    setPendingWrappedOptionIndex (index, doScroll = true) {
       if (index !== null) {
-        this.pendingOption = this.linkedOptions[index]
+        this.pendingWrappedOption = this.flattenedOptions[index]
         const itemSize = this.itemSize
         const offsetTop = itemSize * index
         this.updateLightBarTop({
@@ -291,10 +295,10 @@ export default {
      * scrollbar related
      */
     getScrollContainer () {
-      return this.$refs.virtualScroller.$el
+      return this.$refs.virtualScroller && this.$refs.virtualScroller.$el
     },
     getScrollContent () {
-      return this.$refs.virtualScroller.$refs.wrapper
+      return this.$refs.virtualScroller && this.$refs.virtualScroller.$refs.wrapper
     },
     /**
      * light-bar related
