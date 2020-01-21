@@ -86,17 +86,6 @@
         }
         cursor: not-allowed;
       }
-      @include m(no-data) {
-        color: map-get($map: $--base-select-menu-option-color, $key: "disabled");
-        text-align: center;
-        pointer-events: none;
-      }
-      @include m(not-found) {
-        color: map-get($map: $--base-select-menu-option-color, $key: "disabled");
-        text-align: center;
-        pointer-events: none;
-
-      }
       @include m(loading) {
         color: map-get($map: $--base-select-menu-option-color, $key: "disabled");
         text-align: center;

@@ -6,6 +6,7 @@
       'n-base-select-menu--multiple': multiple,
       [`n-${theme}-theme`]: theme
     }"
+
     :style="{
       width: width && (width + 'px')
     }"
@@ -14,6 +15,7 @@
     @mousedown.prevent="() => {}"
   >
     <n-scrollbar
+      v-show="!empty"
       ref="scrollbar"
       :theme="theme"
       :without-scrollbar="withoutScrollbar"
@@ -22,7 +24,7 @@
       @scroll="handleMenuScroll"
     >
       <div class="n-base-select-menu-option-wrapper">
-        <template v-if="!loading">
+        <template v-show="empty">
           <recycle-scroller
             ref="virtualScroller"
             class="n-virtual-scroller"
@@ -54,39 +56,30 @@
       </div>
     </n-scrollbar>
     <div
-      v-if="loading"
-      class="n-base-select-option n-base-select-option--loading"
+      v-if="empty"
+      style="padding: 14px 0;"
     >
-      loading
-    </div>
-    <div
-      v-else-if="noData"
-      class="n-base-select-option n-base-select-option--no-data"
-    >
-      {{ noDataContent }}
-    </div>
-    <div
-      v-else-if="notFound"
-      class="n-base-select-option n-base-select-option--not-found"
-    >
-      {{ notFoundContent }}
+      <slot name="empty">
+        <n-empty description="No Data" />
+      </slot>
     </div>
   </div>
 </template>
 
 <script>
 import NScrollbar from '../../../common/Scrollbar'
+import NSelectOption from './SelectOption.vue'
+import NSelectGroupHeader from './SelectGroupHeader.vue'
+import NBaseLightBar from '../../LightBar'
+import NEmpty from '../../../common/Empty'
+import { RecycleScroller } from 'vue-virtual-scroller'
+import debounce from 'lodash-es/debounce'
 import {
   getPrevAvailableIndex,
   getNextAvailableIndex,
   flattenOptions,
   OPTION_TYPE
-} from '../../../utils/data/flattenedOptions'
-import NSelectOption from './SelectOption.vue'
-import NSelectGroupHeader from './SelectGroupHeader.vue'
-import NBaseLightBar from '../../LightBar'
-import debounce from 'lodash-es/debounce'
-import { RecycleScroller } from 'vue-virtual-scroller'
+} from '../../../utils/component/select'
 
 export default {
   name: 'NBaseSelectMenu',
@@ -99,6 +92,7 @@ export default {
     NScrollbar,
     NBaseLightBar,
     NSelectOption,
+    NEmpty,
     NSelectGroupHeader,
     RecycleScroller
   },
@@ -131,10 +125,6 @@ export default {
       type: String,
       default: 'default'
     },
-    loading: {
-      type: Boolean,
-      default: false
-    },
     pattern: {
       type: String,
       default: null
@@ -155,14 +145,6 @@ export default {
     emitOption: {
       type: Boolean,
       default: false
-    },
-    noDataContent: {
-      type: [String, Function],
-      default: 'no data'
-    },
-    notFoundContent: {
-      type: [String, Function],
-      default: 'none result matched'
     }
   },
   data () {
@@ -182,11 +164,9 @@ export default {
       const flattenedOptions = flattenOptions(this.options)
       return flattenedOptions
     },
-    notFound () {
-      return this.filterable && (this.pattern.length && !this.flattenedOptions.length)
-    },
-    noData () {
-      return this.flattenedOptions && this.flattenedOptions.length === 0
+    empty () {
+      const flattenedOptions = this.flattenedOptions
+      return flattenedOptions && flattenedOptions.length === 0
     },
     itemSize () {
       return ({
@@ -197,17 +177,7 @@ export default {
     }
   },
   watch: {
-    notFound (value) {
-      if (value) {
-        this.hideLightBar(0)
-      }
-    },
-    noData (value) {
-      if (value) {
-        this.hideLightBar(0)
-      }
-    },
-    loading (value) {
+    empty (value) {
       if (value) {
         this.hideLightBar(0)
       }

@@ -31,6 +31,7 @@
       :disabled="disabled"
       :size="size"
       :theme="synthesizedTheme"
+      :loading="loading"
       @click="handleActivatorClick"
       @delete-last-option="handleDeleteLastOption"
       @delete-option="handleToggleOption"
@@ -64,16 +65,23 @@
             :options="filteredOptions"
             :multiple="multiple"
             :size="size"
-            :loading="loading"
-            :no-data-content="noDataContent"
-            :not-found-content="notFoundContent"
             :filterable="filterable"
             :is-option-selected="isOptionSelected"
             :mirror="false"
             @menu-toggle-option="handleToggleOption"
             @menu-scroll="handleMenuScroll"
             @menu-visible="handleMenuVisible"
-          />
+          >
+            <template v-if="$slots.empty" v-slot:empty>
+              <slot name="empty" />
+            </template>
+            <template v-if="$slots.unmatch" v-slot:unmatch>
+              <slot name="unmatch" />
+            </template>
+            <template v-if="$slots.action" v-slot:action>
+              <slot name="action" />
+            </template>
+          </n-base-select-menu>
         </transition>
       </div>
     </div>
@@ -91,7 +99,7 @@ import {
 import {
   filterOptions,
   valueToOptionMap
-} from '../../../utils/data/flattenedOptions'
+} from '../../../utils/component/select'
 import NBasePicker from '../../../base/Picker'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
@@ -193,14 +201,6 @@ export default {
     items: {
       type: Array,
       default: undefined
-    },
-    noDataContent: {
-      type: [String, Function],
-      default: 'No Data'
-    },
-    notFoundContent: {
-      type: [String, Function],
-      default: 'No Result'
     }
   },
   data () {
@@ -208,8 +208,7 @@ export default {
       active: false,
       scrolling: false,
       pattern: '',
-      memorizedValueToOptionMap: new Map(),
-      disablePlaceableTracingWhenActive: true
+      memorizedValueToOptionMap: new Map()
     }
   },
   computed: {
@@ -273,7 +272,6 @@ export default {
   methods: {
     activate () {
       this.active = true
-      this.disablePlaceableTracingWhenActive = true
     },
     deactivate () {
       this.active = false
@@ -442,7 +440,6 @@ export default {
       }
     },
     handleMenuVisible () {
-      this.disablePlaceableTracingWhenActive = false
       this.updatePosition()
     },
     /**

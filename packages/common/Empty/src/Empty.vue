@@ -7,7 +7,7 @@
     :style="synthesizedStyle"
   >
     <div class="n-empty__icon">
-      <empty-icon />
+      <ios-remove-circle-outline />
     </div>
     <div v-if="showDescription" class="n-empty__description">
       <slot>
@@ -21,14 +21,14 @@
 </template>
 
 <script>
-import EmptyIcon from './EmptyIcon'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import iosRemoveCircleOutline from '../../../icons/ios-remove-circle-outline'
 
 export default {
   name: 'NEmpty',
   components: {
-    EmptyIcon
+    iosRemoveCircleOutline
   },
   mixins: [ withapp, themeable ],
   props: {
