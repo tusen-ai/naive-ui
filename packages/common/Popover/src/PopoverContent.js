@@ -84,13 +84,13 @@ export default {
     return {
       memorizedId: null,
       internalActive: false,
-      show: false
+      keepPlaceableTracingWhenInactive: false
     }
   },
   created () {
     this.memorizedId = this.id
     popoverManager.registerContent(this.memorizedId, this)
-    if (this.active) this.show = true
+    if (this.active) this.keepPlaceableTracingWhenInactive = true
     if (this.controller) {
       this.controller.updatePosition = this.updatePosition
     }
@@ -240,10 +240,10 @@ export default {
           },
           on: {
             enter: () => {
-              this.show = true
+              this.keepPlaceableTracingWhenInactive = true
             },
             afterLeave: () => {
-              this.show = false
+              this.keepPlaceableTracingWhenInactive = false
             }
           }
         }, [

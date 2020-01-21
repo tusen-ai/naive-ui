@@ -32,6 +32,12 @@ export default {
       },
       default: false
     },
+    grouped: {
+      validator (value) {
+        return typeof value === 'boolean'
+      },
+      default: false
+    },
     index: {
       validator (value) {
         return typeof value === 'number'
@@ -62,7 +68,8 @@ export default {
       staticClass: 'n-base-select-option',
       class: {
         'n-base-select-option--selected': this.selected,
-        'n-base-select-option--disabled': this.disabled
+        'n-base-select-option--disabled': this.disabled,
+        'n-base-select-option--grouped': this.grouped
       },
       on: {
         click: this.handleClick,

@@ -29,18 +29,24 @@
             :items="flattenedOptions"
             :item-size="itemSize"
             key-field="key"
+            @visible="handleMenuVisible"
           >
             <template v-slot:before>
               <n-base-light-bar ref="lightBar" :item-size="itemSize" :theme="theme" />
             </template>
             <template v-slot="{ item: option }">
               <n-select-option
-                :key="option.data.value"
+                v-if="option.type === OPTION_TYPE.OPTION"
                 :index="option.index"
                 :label="option.data.label"
                 :value="option.data.value"
                 :disabled="option.data.disabled"
+                :grouped="option.grouped"
                 :selected="isOptionSelected({ value: option.data.value })"
+              />
+              <n-select-group-header
+                v-else-if="option.type === OPTION_TYPE.GROUP_HEADER"
+                :name="option.data.name"
               />
             </template>
           </recycle-scroller>
@@ -73,9 +79,11 @@ import NScrollbar from '../../../common/Scrollbar'
 import {
   getPrevAvailableIndex,
   getNextAvailableIndex,
-  flattenedOptions
+  flattenOptions,
+  OPTION_TYPE
 } from '../../../utils/data/flattenedOptions'
 import NSelectOption from './SelectOption.vue'
+import NSelectGroupHeader from './SelectGroupHeader.vue'
 import NBaseLightBar from '../../LightBar'
 import debounce from 'lodash-es/debounce'
 import { RecycleScroller } from 'vue-virtual-scroller'
@@ -91,6 +99,7 @@ export default {
     NScrollbar,
     NBaseLightBar,
     NSelectOption,
+    NSelectGroupHeader,
     RecycleScroller
   },
   props: {
@@ -159,7 +168,8 @@ export default {
   data () {
     return {
       active: true,
-      pendingWrappedOption: null
+      pendingWrappedOption: null,
+      OPTION_TYPE
     }
   },
   computed: {
@@ -169,7 +179,8 @@ export default {
       return pendingWrappedOption.index
     },
     flattenedOptions () {
-      return flattenedOptions(this.options)
+      const flattenedOptions = flattenOptions(this.options)
+      return flattenedOptions
     },
     notFound () {
       return this.filterable && (this.pattern.length && !this.flattenedOptions.length)
@@ -227,6 +238,9 @@ export default {
     }
   },
   methods: {
+    handleMenuVisible () {
+      this.$emit('menu-visible')
+    },
     handleMenuScroll (e, scrollContainer, scrollContent) {
       this.$emit('menu-scroll', e, scrollContainer, scrollContent)
     },

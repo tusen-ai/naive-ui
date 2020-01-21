@@ -22,6 +22,11 @@
       line-height: map-get($map: $--n-height, $key: $size);
       font-size: map-get($map: $--n-font-size, $key: $size);
     }
+    @include b(base-select-group-header) {
+      height: map-get($map: $--n-height, $key: $size);
+      line-height: map-get($map: $--n-height, $key: $size);
+      font-size: map-get($map: $--n-font-size, $key: $size) - 2px;
+    }
   }
 }
 
@@ -46,15 +51,23 @@
     }
     background-color: $--base-select-menu-background-color;
     box-shadow: $--base-select-menu-box-shadow;
+    @include b(base-select-group-header) {
+      cursor: default;
+      color: $--n-meta-text-color;
+      padding: 0 14px;
+    }
     @include b(base-select-option) {
       cursor: pointer;
       position: relative;
-      padding: 0px 14px;
+      padding: 0 14px;
       white-space: nowrap;
       transition: color .3s $--n-ease-in-out-cubic-bezier;
       color: map-get($map: $--base-select-menu-option-color, $key: "default");
       text-overflow: ellipsis;
       overflow: hidden;
+      @include m(grouped) {
+        padding: 0 21px;
+      }
       @include m(selected) {
         color: map-get($map: $--base-select-menu-option-color, $key: "selected");
       }

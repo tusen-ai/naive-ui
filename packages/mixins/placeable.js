@@ -190,9 +190,6 @@ export default {
         this.trackedElement = this.getTrackedElement()
       }
     },
-    /**
-     * Need to be fulfilled!
-     */
     setOffsetOfTrackingElement (position, transformOrigin) {
       this.trackingElement.style.position = 'absolute'
       this.trackingElement.style.top = position.top
@@ -203,7 +200,12 @@ export default {
       this.trackingElement.setAttribute('n-suggested-transform-origin', transformOrigin)
     },
     updatePosition (el, cb) {
-      if (!this.active && !this.show) return
+      if (!this.active) {
+        if (!this.keepPlaceableTracingWhenInactive) return
+      }
+      if (this.active) {
+        if (this.disablePlaceableTracingWhenActive) return
+      }
       this._getTrackingElement()
       this.trackingElement.style.position = 'absolute'
       if (this.manuallyPositioned) {

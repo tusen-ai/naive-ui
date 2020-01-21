@@ -58,6 +58,7 @@
             v-if="active"
             ref="contentInner"
             class="n-select-menu"
+            auto-pending-first-option
             :theme="synthesizedTheme"
             :pattern="pattern"
             :options="filteredOptions"
@@ -71,6 +72,7 @@
             :mirror="false"
             @menu-toggle-option="handleToggleOption"
             @menu-scroll="handleMenuScroll"
+            @menu-visible="handleMenuVisible"
           />
         </transition>
       </div>
@@ -86,6 +88,10 @@ import clickoutside from '../../../directives/clickoutside'
 import {
   NBaseSelectMenu
 } from '../../../base/SelectMenu'
+import {
+  filterOptions,
+  valueToOptionMap
+} from '../../../utils/data/flattenedOptions'
 import NBasePicker from '../../../base/Picker'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
@@ -202,7 +208,8 @@ export default {
       active: false,
       scrolling: false,
       pattern: '',
-      memorizedValueToOptionMap: new Map()
+      memorizedValueToOptionMap: new Map(),
+      disablePlaceableTracingWhenActive: true
     }
   },
   computed: {
@@ -220,18 +227,17 @@ export default {
         return options
       } else {
         const trimmedPattern = this.pattern.trim()
-        if (trimmedPattern.length || !this.filterable) {
+        if (!trimmedPattern.length || !this.filterable) {
           return options
         } else {
-          const filter = this.filter
-          return options.filter(option => filter(trimmedPattern, option))
+          const filter = option => this.filter(trimmedPattern, option)
+          const filteredOptions = filterOptions(options, filter)
+          return filteredOptions
         }
       }
     },
     valueToOptionMap () {
-      const valueToOptionMap = new Map()
-      this.adpatedOptions.forEach(option => valueToOptionMap.set(option.value, option))
-      return valueToOptionMap
+      return valueToOptionMap(this.options)
     },
     selectedOptions () {
       if (this.multiple) {
@@ -267,6 +273,7 @@ export default {
   methods: {
     activate () {
       this.active = true
+      this.disablePlaceableTracingWhenActive = true
     },
     deactivate () {
       this.active = false
@@ -433,6 +440,10 @@ export default {
       } else {
         this.$emit('change', null)
       }
+    },
+    handleMenuVisible () {
+      this.disablePlaceableTracingWhenActive = false
+      this.updatePosition()
     },
     /**
      * scroll events on menu

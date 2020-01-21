@@ -10,6 +10,7 @@ remote
 remote-multiple
 clearable
 scroll-event
+group
 ```
 ## API
 
