@@ -1,4 +1,7 @@
 # Custom Width
+
+Set width of select menu.
+
 ```html
 <n-popselect
   v-model="value"

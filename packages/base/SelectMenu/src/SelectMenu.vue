@@ -26,6 +26,7 @@
       <div class="n-base-select-menu-option-wrapper">
         <template v-show="empty">
           <recycle-scroller
+            v-if="virtualScroll"
             ref="virtualScroller"
             class="n-virtual-scroller"
             :items="flattenedOptions"
@@ -50,6 +51,24 @@
               />
             </template>
           </recycle-scroller>
+          <template v-else>
+            <n-base-light-bar ref="lightBar" :item-size="itemSize" :theme="theme" />
+            <template v-for="option in flattenedOptions">
+              <n-select-option
+                v-if="option.type === OPTION_TYPE.OPTION"
+                :key="option.key"
+                :index="option.index"
+                :data="option.data"
+                :grouped="option.grouped"
+                :selected="isOptionSelected({ value: option.data.value })"
+              />
+              <n-select-group-header
+                v-else-if="option.type === OPTION_TYPE.GROUP_HEADER"
+                :key="option.key"
+                :data="option.data"
+              />
+            </template>
+          </template>
         </template>
       </div>
     </n-scrollbar>
@@ -142,6 +161,10 @@ export default {
       type: Boolean,
       default: false
     },
+    virtualScroll: {
+      type: Boolean,
+      default: true
+    },
     /** deprecated */
     emitOption: {
       type: Boolean,
@@ -156,6 +179,17 @@ export default {
     }
   },
   computed: {
+    /**
+     * scrollbar related
+     */
+    getScrollContainer () {
+      if (this.virtualScroll) return () => this.$refs.virtualScroller && this.$refs.virtualScroller.$el
+      return null
+    },
+    getScrollContent () {
+      if (this.virtualScroll) return () => this.$refs.virtualScroller && this.$refs.virtualScroller.$refs.wrapper
+      return null
+    },
     pendingWrappedOptionIndex () {
       const pendingWrappedOption = this.pendingWrappedOption
       if (!pendingWrappedOption) return null
@@ -171,9 +205,11 @@ export default {
     },
     itemSize () {
       return ({
+        tiny: 22,
         small: 28,
         medium: 34,
-        large: 40
+        large: 40,
+        huge: 46
       })[this.size]
     }
   },
@@ -275,15 +311,6 @@ export default {
         })
         doScroll && this.$refs.scrollbar.scrollToElement({}, () => offsetTop, () => itemSize)
       }
-    },
-    /**
-     * scrollbar related
-     */
-    getScrollContainer () {
-      return this.$refs.virtualScroller && this.$refs.virtualScroller.$el
-    },
-    getScrollContent () {
-      return this.$refs.virtualScroller && this.$refs.virtualScroller.$refs.wrapper
     },
     /**
      * light-bar related

@@ -1,6 +1,12 @@
 <template>
-  <div class="n-auto-complete" @keydown.down="handleKeyDownDown" @keydown.up="handleKeyDownUp" @keyup.enter="handleKeyUpEnter" @keydown.enter="handleKeyDownEnter">
-    <slot name="activator" :handle-input="handleInput" :handle-focus="handleFocus" :handle-blur="handleBlur" :value="value">
+  <div
+    class="n-auto-complete"
+    @keydown.down="handleKeyDownDown"
+    @keydown.up="handleKeyDownUp"
+    @keyup.enter="handleKeyUpEnter"
+    @keydown.enter="handleKeyDownEnter"
+  >
+    <slot :handle-input="handleInput" :handle-focus="handleFocus" :handle-blur="handleBlur" :value="value">
       <n-input ref="activator" :value="value" :placeholder="placeholder" :size="size" @focus="canBeActivated = true" @input="handleInput" @blur="handleBlur" />
     </slot>
     <div
@@ -36,9 +42,7 @@
             :is-option-selected="isSelected"
             :use-slot="!!$slots.default"
             @menu-toggle-option="handleToggleOption"
-          >
-            <n-base-select-render-options v-if="!!$slots.default" :options="filteredOptions" />
-          </n-base-select-menu>
+          />
         </transition>
       </div>
     </div>

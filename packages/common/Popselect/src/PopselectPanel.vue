@@ -6,6 +6,7 @@
     :loading="loading"
     :is-option-selected="isSelected"
     :width="width"
+    :virtual-scroll="false"
     size="small"
     @menu-toggle-option="handleMenuToggleOption"
   />

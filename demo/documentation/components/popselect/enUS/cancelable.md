@@ -1,4 +1,5 @@
 # Cancelable
+Make single value popselect cancelable.
 ```html
 <n-popselect
   v-model="value"

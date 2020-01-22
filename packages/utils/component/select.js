@@ -76,7 +76,7 @@ function flattenOptions (optionsToBeFlattened) {
           type: OPTION_TYPE.GROUP_HEADER,
           index: index,
           data: option,
-          key: index
+          key: '__Naive_Group_Header__' + index
         })
         index++
         traverse(option.children, {

@@ -41,10 +41,6 @@ export default {
       type: Object,
       default: null
     },
-    loading: {
-      type: Boolean,
-      default: false
-    },
     arrow: {
       type: Boolean,
       default: true
