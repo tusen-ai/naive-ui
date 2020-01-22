@@ -72,7 +72,7 @@ export default {
       props: {
         ...context.props,
         containerClass: 'n-tooltip',
-        contentClass: 'n-tooltip-content'
+        overlayClass: 'n-tooltip-content'
       },
       scopedSlots: {
         activator: () => slots.activator && slots.activator(),

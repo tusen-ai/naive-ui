@@ -14,7 +14,7 @@ export default {
       type: String,
       required: true
     },
-    value: {
+    show: {
       type: Boolean,
       default: false
     },
@@ -70,9 +70,13 @@ export default {
       type: Boolean,
       default: true
     },
-    contentClass: {
+    overlayClass: {
       type: String,
       default: null
+    },
+    overlayStyle: {
+      type: Object,
+      default: undefined
     }
   },
   mixins: [withapp, themeable, asthemecontext, placeable, zindexable],
@@ -117,6 +121,9 @@ export default {
       if (this.minWidth) {
         style.minWidth = this.minWidth + 'px'
       }
+      if (this.overlayStyle) {
+        Object.assign(style, this.overlayStyle)
+      }
       return style
     },
     triggeredByClick () {
@@ -129,7 +136,7 @@ export default {
       return this.trigger === 'manual'
     },
     active () {
-      if (this.trigger === 'manual') return this.value
+      if (this.trigger === 'manual') return this.show
       else return this.internalActive
     }
   },
@@ -229,10 +236,7 @@ export default {
     }, [
       h('div', {
         staticClass: 'n-detached-content',
-        ref: 'content',
-        attrs: {
-          'n-popover-id': this.$props.id
-        }
+        ref: 'content'
       }, [
         h('transition', {
           props: {
@@ -256,12 +260,11 @@ export default {
               'n-popover-content--without-arrow': !this.arrow,
               [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme,
               'n-popover-content--without-shadow': !this.shadow,
-              [this.contentClass]: this.contentClass,
+              [this.overlayClass]: this.overlayClass,
               'n-popover-content--fix-width': this.width !== null || this.maxWidth !== null
             },
             style: this.style,
             directives: [
-              // { name: 'show', rawName: 'v-show', value: this.active },
               {
                 name: 'clickoutside',
                 value: this.handleClickOutside

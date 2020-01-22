@@ -17,7 +17,7 @@ export default {
   name: 'NPopover',
   functional: true,
   props: {
-    value: {
+    show: {
       type: Boolean,
       default: false
     },
@@ -69,8 +69,12 @@ export default {
       type: String,
       default: 'n-popover'
     },
-    contentClass: {
+    overlayClass: {
       type: String,
+      default: null
+    },
+    overlayStyle: {
+      type: Object,
       default: null
     },
     manuallyPositioned: {

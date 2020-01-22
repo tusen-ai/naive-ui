@@ -155,6 +155,7 @@ $--header-bar-width: (
   @include b(a) {
     transition: color .3s $--n-ease-in-out-cubic-bezier;
     color: $--n-primary-color;
+    cursor: pointer;
     text-decoration: underline;
   }
   @include b(text) {
@@ -165,7 +166,6 @@ $--header-bar-width: (
       line-height: 1.4;
       font-family: $--n-mono-font-family;
       transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
-      white-space: nowrap;
       box-sizing: border-box;
       background-clip: padding-box;
       color: $--n-secondary-text-color;

@@ -10,7 +10,7 @@
     I wish they all could be California girls
   </span>
 </n-popover>
-<n-popover v-model="showPopover" placement="bottom" trigger="manual">
+<n-popover :show="showPopover" placement="bottom" trigger="manual">
   <template v-slot:activator>
     <n-button @click="showPopover = !showPopover">
       California Girls(Manual)
@@ -36,9 +36,9 @@ export default {
   data() {
     return {
       showPopover: false
-    };
+    }
   }
-};
+}
 ```
 ```css
 .n-button {
