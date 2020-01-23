@@ -28,7 +28,7 @@ function createRenderer (wrapCodeWithCard = true) {
       return `<n-p>${text}</n-p>`
     },
     link (href, title, text) {
-      return `<n-a title="${title}" href="${href}">${text}</n-a>`
+      return `<n-a to="${href}" >${text}</n-a>`
     },
     list (body, ordered, start) {
       const type = ordered ? 'n-ol' : 'n-ul'

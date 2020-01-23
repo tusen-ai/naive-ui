@@ -21,7 +21,8 @@ export default {
   name: 'Menu',
   provide () {
     return {
-      NMenu: this
+      NMenu: this,
+      NSubmenu: null
     }
   },
   mixins: [withapp, themeable],
@@ -65,6 +66,10 @@ export default {
     openNames: {
       type: Array,
       default: undefined
+    },
+    inPopover: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -83,7 +88,7 @@ export default {
       this.$emit('select', value)
       this.$emit('input', value)
     },
-    handleOpenNamesChange (name) {
+    toggleOpenName (name) {
       const currentOpenNames = Array.from(this.synthesizedOpenNames)
       const index = currentOpenNames.findIndex(openName => openName === name)
       if (~index) {
@@ -94,7 +99,13 @@ export default {
       if (this.openNames === undefined) {
         this.internalOpenNames = currentOpenNames
       }
-      this.$emit('openNamesChange', currentOpenNames)
+      this.$emit('open-names-change', currentOpenNames)
+    },
+    handleOpenNamesChange (names) {
+      if (this.openName === undefined) {
+        this.internalOpenNames = names
+      }
+      this.$emit('open-names-change', names)
     }
   }
 }

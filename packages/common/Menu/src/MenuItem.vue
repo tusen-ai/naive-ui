@@ -1,43 +1,5 @@
 <template>
   <li
-    v-if="!shouldBeRenderedAsDropdownItem && isFirstLevel"
-    :key="name"
-    class="n-menu-item-wrapper"
-  >
-    <n-tooltip trigger="hover" :disabled="!NMenu.collapsed" placement="right" :delay="300">
-      <template v-slot:activator>
-        <div
-          class="n-menu-item"
-          :style="{ paddingLeft: delayedPaddingLeft + 'px' }"
-          :class="{
-            'n-menu-item--selected': selected,
-            'n-menu-item--disabled': synthesizedDisabled
-          }"
-          @click="handleClick"
-        >
-          <div
-            v-if="$slots.icon"
-            class="n-menu-item__icon"
-            :style="{
-              width: maxIconSize && (maxIconSize + 'px'),
-              height: maxIconSize && (maxIconSize + 'px'),
-              fontSize: activeIconSize && (activeIconSize + 'px'),
-            }"
-          >
-            <slot name="icon" />
-          </div>
-          <div class="n-menu-item__header">
-            <slot>
-              <render :render="title" />
-            </slot>
-          </div>
-        </div>
-      </template>
-      <render :render="title" />
-    </n-tooltip>
-  </li>
-  <li
-    v-else-if="!shouldBeRenderedAsDropdownItem"
     :key="name"
     class="n-menu-item"
     :style="{ paddingLeft: delayedPaddingLeft + 'px' }"
@@ -47,26 +9,23 @@
     }"
     @click="handleClick"
   >
-    <!-- identical part start -->
     <div
       v-if="$slots.icon"
       class="n-menu-item__icon"
       :style="{
-        width: iconSize && (iconSize + 'px'),
-        height: iconSize && (iconSize + 'px'),
-        fontSize: iconSize && (iconSize + 'px'),
+        width: maxIconSize && (maxIconSize + 'px'),
+        height: maxIconSize && (maxIconSize + 'px'),
+        fontSize: activeIconSize && (activeIconSize + 'px'),
       }"
     >
       <slot name="icon" />
     </div>
-    <!-- identical part start end -->
     <div class="n-menu-item__header">
       <slot>
         <render :render="title" />
       </slot>
     </div>
   </li>
-  <n-dropdown-item v-else :name="name" :label="title" :value="value" :selected="selected" />
 </template>
 
 <script>
@@ -74,18 +33,16 @@ import collectable from '../../../mixins/collectable'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import render from '../../../utils/render'
-import NTooltip from '../../Tooltip'
-import NDropdownItem from '../../Dropdown/src/DropdownItem'
 
 export default {
   name: 'NMenuItem',
   components: {
-    NTooltip,
-    NDropdownItem,
     render
   },
   mixins: [
-    collectable('NSubmenu', 'menuItemNames', 'name', true),
+    collectable('NSubmenu', 'menuItemNames', 'name', true, function (injection) {
+      return this.NMenu !== injection.NMenu
+    }),
     withapp,
     themeable
   ],
@@ -97,9 +54,6 @@ export default {
       default: null
     },
     NMenuItemGroup: {
-      default: null
-    },
-    NMenuUl: {
       default: null
     }
   },
@@ -127,13 +81,6 @@ export default {
     }
   },
   computed: {
-    disabledCollectable () {
-      return !this.NMenuUl
-    },
-    shouldBeRenderedAsDropdownItem () {
-      if (this.NMenuUl) return false
-      return !this.isFirstLevel && this.NMenu.collapsed
-    },
     useCollapsedIconSize () {
       return this.NMenu.collapsed && this.isFirstLevel
     },

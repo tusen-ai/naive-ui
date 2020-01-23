@@ -1,117 +1,116 @@
 <template>
-  <n-dropdown-submenu
-    v-if="shouldBeRenderedAsDropdownSubmenu && !NMenuUl"
-    :value="value"
-    :label="title"
-    :name="name"
-    :selected="selectedInside"
-  >
-    <template v-slot:activator>
-      <render :render="title" />
-    </template>
-    <slot />
-  </n-dropdown-submenu>
   <li
-    v-else
     class="n-submenu"
     :class="{
       'n-submenu--selected-inside': selectedInside
     }"
   >
-    <n-dropdown
-      v-if="isFirstLevel"
-      size="large"
-      trigger="click"
-      :focusable="false"
-      :disabled="!NMenu.collapsed"
-      placement="right-start"
-      type="menu"
-      @select="handleDropdownSelect"
-    >
-      <template v-slot:activator>
-        <div
-          class="n-submenu-item n-dropdown"
-          :style="{ paddingLeft: delayedPaddingLeft + 'px' }"
-          :class="{
-            'n-submenu-item--collapsed': contentCollapsed,
-            'n-submenu-item--active': !contentCollapsed,
-            'n-submenu-item--disabled': disabled
-          }"
-          @click="handleClick"
-        >
+    <template v-if="isFirstLevel">
+      <n-popover trigger="click" placement="right-start" :disabled="!usePopover">
+        <template v-slot:activator>
           <div
-            v-if="$slots.icon"
-            class="n-submenu-item__icon"
-            :style="{
-              width: maxIconSize && (maxIconSize + 'px'),
-              height: maxIconSize && (maxIconSize + 'px'),
-              fontSize: activeIconSize && (activeIconSize + 'px'),
+            class="n-submenu-item"
+            :style="{ paddingLeft: delayedPaddingLeft + 'px' }"
+            :class="{
+              'n-submenu-item--collapsed': synthesizedCollapsed,
+              'n-submenu-item--active': !synthesizedCollapsed,
+              'n-submenu-item--disabled': disabled
             }"
+            @click="handleClick"
           >
-            <slot name="icon" />
+            <div
+              v-if="$slots.icon"
+              class="n-submenu-item__icon"
+              :style="{
+                width: maxIconSize && (maxIconSize + 'px'),
+                height: maxIconSize && (maxIconSize + 'px'),
+                fontSize: activeIconSize && (activeIconSize + 'px'),
+              }"
+            >
+              <slot name="icon" />
+            </div>
+            <div class="n-submenu-item__header">
+              <slot name="header">
+                <render :render="title" />
+              </slot>
+            </div>
           </div>
-          <div class="n-submenu-item__header">
-            <slot name="header">
-              <render :render="title" />
-            </slot>
-          </div>
-        </div>
-      </template>
-      <slot />
-    </n-dropdown>
-    <div
-      v-else
-      class="n-submenu-item n-submenu-item--as-dropdown"
-      :style="{ paddingLeft: delayedPaddingLeft + 'px' }"
-      :class="{
-        'n-submenu-item--collapsed': contentCollapsed,
-        'n-submenu-item--active': !contentCollapsed,
-        'n-submenu-item--disabled': disabled
-      }"
-      @click="handleClick"
-    >
+        </template>
+        <n-menu
+          :style="{
+            width: '272px'
+          }"
+          :root-indent="24"
+          in-popover
+          :value="popMenuValue"
+          :open-names="popMenuOpenNames"
+          @select="handlePopMenuSelect"
+          @open-names-change="handlePopMenuOpenNamesChange"
+        >
+          <slot />
+        </n-menu>
+      </n-popover>
+      <fade-in-height-expand-transition>
+        <ul
+          v-show="!synthesizedCollapsed"
+          class="n-submenu-content"
+        >
+          <slot />
+        </ul>
+      </fade-in-height-expand-transition>
+    </template>
+    <template v-else>
       <div
-        v-if="$slots.icon"
-        class="n-submenu-item__icon"
-        :style="{
-          width: iconSize && (iconSize + 'px'),
-          height: iconSize && (iconSize + 'px'),
-          fontSize: iconSize && (iconSize + 'px'),
+        class="n-submenu-item"
+        :style="{ paddingLeft: delayedPaddingLeft + 'px' }"
+        :class="{
+          'n-submenu-item--collapsed': synthesizedCollapsed,
+          'n-submenu-item--active': !synthesizedCollapsed,
+          'n-submenu-item--disabled': disabled
         }"
+        @click="handleClick"
       >
-        <slot name="icon" />
+        <div
+          v-if="$slots.icon"
+          class="n-submenu-item__icon"
+          :style="{
+            width: iconSize && (iconSize + 'px'),
+            height: iconSize && (iconSize + 'px'),
+            fontSize: iconSize && (iconSize + 'px'),
+          }"
+        >
+          <slot name="icon" />
+        </div>
+        <div class="n-submenu-item__header">
+          <slot name="header">
+            <render :render="title" />
+          </slot>
+        </div>
       </div>
-      <div class="n-submenu-item__header">
-        <slot name="header">
-          <render :render="title" />
-        </slot>
-      </div>
-    </div>
-    <fade-in-height-expand-transition>
-      <n-menu-ul
-        v-show="!contentCollapsed"
-        class="n-submenu-content"
-      >
-        <slot />
-      </n-menu-ul>
-    </fade-in-height-expand-transition>
+      <fade-in-height-expand-transition>
+        <ul
+          v-show="!synthesizedCollapsed"
+          class="n-submenu-content"
+        >
+          <slot />
+        </ul>
+      </fade-in-height-expand-transition>
+    </template>
   </li>
 </template>
 
 <script>
 import FadeInHeightExpandTransition from '../../../transition/FadeInHeightExpandTransition'
 import render from '../../../utils/render'
-import NDropdown from '../../Dropdown/src/Dropdown'
-import NDropdownSubmenu from '../../Dropdown/src/DropdownSubmenu'
-import NMenuUl from './MenuUl'
+import NPopover from '../../../common/Popover'
+import NMenu from './Menu'
 
 export default {
   name: 'NSubmenu',
   components: {
     FadeInHeightExpandTransition,
-    NDropdown,
-    NDropdownSubmenu,
-    NMenuUl,
+    NPopover,
+    NMenu,
     render
   },
   props: {
@@ -142,8 +141,8 @@ export default {
     selectedInside () {
       return this.menuItemNames.includes(this.NMenu.value)
     },
-    shouldBeRenderedAsDropdownSubmenu () {
-      return this.NMenu.collapsed && !this.isFirstLevel
+    usePopover () {
+      return this.useCollapsedIconSize
     },
     useCollapsedIconSize () {
       return this.NMenu.collapsed && this.isFirstLevel
@@ -182,8 +181,25 @@ export default {
         return this.NMenu.rootIndent || this.NMenu.indent
       }
     },
-    contentCollapsed () {
-      return this.NMenu.collapsed || !(this.NMenu.synthesizedOpenNames.includes(this.name))
+    rootMenuCollapsed () {
+      return this.NMenu.collapsed
+    },
+    rootMenuInPopover () {
+      return this.NMenu.inPopover
+    },
+    selfCollapsed () {
+      return !this.NMenu.synthesizedOpenNames.includes(this.name)
+    },
+    synthesizedCollapsed () {
+      if (this.rootMenuInPopover) return this.selfCollapsed
+      else if (this.rootMenuCollapsed) return true
+      return this.selfCollapsed
+    },
+    popMenuValue () {
+      return this.NMenu.value
+    },
+    popMenuOpenNames () {
+      return this.NMenu.synthesizedOpenNames
     }
   },
   watch: {
@@ -211,24 +227,23 @@ export default {
     },
     NMenuItemGroup: {
       default: null
-    },
-    NMenuUl: {
-      default: null
     }
   },
   created () {
-    // console.log('submenu created', this.name)
     this.delayedPaddingLeft = this.paddingLeft
   },
   methods: {
-    handleDropdownSelect (value) {
-      this.NMenu.handleSelect(value)
-    },
     handleClick () {
       if (!this.disabled && !this.NMenu.collapsed) {
-        this.NMenu.handleOpenNamesChange(this.name)
+        this.NMenu.toggleOpenName(this.name)
         this.$emit('click', this)
       }
+    },
+    handlePopMenuSelect (value) {
+      this.NMenu.handleSelect(value)
+    },
+    handlePopMenuOpenNamesChange (value) {
+      this.NMenu.handleOpenNamesChange(value)
     }
   }
 }

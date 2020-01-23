@@ -2,7 +2,8 @@ export default function (
   injectionName,
   collectionProperty,
   registerProperty = 'value',
-  bubble = false
+  bubble = false,
+  disabledCollectable = null
 ) {
   const registerPropertyChangeHandler = function (value, oldValue) {
     if (this.activeCollectableInjection) {
@@ -38,20 +39,20 @@ export default function (
       }
     },
     beforeDestroy () {
-      console.log('before destroy', this.name, this.$el)
+      // console.log('before destroy', this.name, this.$el)
       if (this.activeCollectableInjection) {
         this.registerValue(undefined, this[registerProperty])
       }
     },
     destroyed () {
-      console.log('destroyed', this.name)
+      // console.log('destroyed', this.name)
     },
     methods: {
       registerValue (value = undefined, oldValue = undefined) {
-        if (this.disabledCollectable) return
-        console.log('registerValue')
+        // console.log('registerValue')
         let currentInjection = this.activeCollectableInjection
         while (currentInjection) {
+          if (disabledCollectable && disabledCollectable.call(this, currentInjection)) return
           const collectedValues = currentInjection[collectionProperty]
           if (oldValue !== undefined) {
             const oldValueIndex = collectedValues.findIndex(collectedValue => collectedValue === oldValue)
