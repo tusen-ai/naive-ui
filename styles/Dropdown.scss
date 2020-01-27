@@ -8,43 +8,6 @@
         fill: $--dropdown-item-suffix-fill;
       }
     }
-    @include b(dropdown-menu) {
-      @include m(as-menu-popover) {
-        @include b(base-select-menu) {
-          @include once {
-            padding: 4px 0;
-          }
-          @include b(dropdown-item) {
-            @include once {
-              &:first-child {
-                margin-top: 0;
-              }
-              &:last-child {
-                margin-bottom: 0;
-              }
-              margin: 4px 0;
-            }
-            &:hover {
-              color: map-get($--dropdown-item-text-color, 'hover');
-              & > {
-                @include b(dropdown-submenu-activator) {
-                  @include b(icon) {
-                    fill: map-get($--dropdown-item-text-color, 'hover');
-                  }
-                }
-              }
-            }
-            @include m(selected) {
-              color: map-get($--dropdown-item-text-color, 'selected');
-              background-color: map-get($--dropdown-item-background-color, 'selected');
-            }
-            @include m(as-submenu) {
-              background-color: transparent;
-            }
-          }
-        }
-      }
-    }
     @include once {
       position: relative;
       @include b(dropdown-submenu-activator) {
@@ -63,13 +26,8 @@
           margin-top: 0;
           margin-bottom: 0;
           @include m(small-size) {
-            @include b(base-select-menu-option-wrapper) {
-              padding-top: 4px;
-              padding-bottom: 4px;
-            }
-            @include b(dropdown-item) {
-              padding: 0 20px;
-            }
+            padding-top: 4px;
+            padding-bottom: 4px;
             @include b(dropdown-divider) {
               margin: 0 0;
             }
@@ -81,13 +39,8 @@
             }
           }
           @include m(medium-size) {
-            @include b(base-select-menu-option-wrapper) {
-              padding-top: 4px;
-              padding-bottom: 4px;
-            }
-            @include b(dropdown-item) {
-              padding: 0 20px;
-            }
+            padding-top: 4px;
+            padding-bottom: 4px;
             @include b(dropdown-divider) {
               margin: 0 0;
             }
@@ -99,13 +52,8 @@
             }
           }
           @include m(large-size) {
-            @include b(base-select-menu-option-wrapper) {
-              padding-top: 6px;
-              padding-bottom: 6px;
-            }
-            @include b(dropdown-item) {
-              padding: 0 24px;
-            }
+            padding-top: 6px;
+            padding-bottom: 6px;
             @include b(dropdown-divider) {
               margin: 2px 0;
             }
@@ -117,27 +65,13 @@
             }
           }
           @include m(huge-size) {
-            @include b(base-select-menu-option-wrapper) {
-              padding-top: 8px;
-              padding-bottom: 8px;
-            }
-            @include b(dropdown-item) {
-              padding: 0 24px;
-            }
+            padding-top: 8px;
+            padding-bottom: 8px;
             @include b(dropdown-submenu-activator) {
               @include e(arrow) {
                 font-size: 16px;
                 margin-left: 20px;
               }
-            }
-          }
-        }
-        @include m(as-menu-popover) {
-          @include b(base-select-menu) {
-            min-width: 132px;
-            @include b(base-select-menu-option-wrapper) {
-              padding-top: 0 !important;
-              padding-bottom: 0 !important;
             }
           }
         }

@@ -26,7 +26,7 @@
   vertical-align: top;
   box-sizing: border-box;
   display: inline-block;
-  // position: relative;
+  position: relative;
   @for $i from 1 through 24 {
     @include col-size-mixin($i);
   }
