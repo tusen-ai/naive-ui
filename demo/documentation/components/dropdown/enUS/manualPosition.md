@@ -12,44 +12,59 @@ For some special case, you may want to manually position the dropdown. For examp
   @blur="handleBlur"
   :x="x"
   :y="y"
-  v-model="showDropdown"
->
-  <n-dropdown-item name="jay gatsby">
-    Jay Gatsby
-  </n-dropdown-item>
-  <n-dropdown-item name="daisy buchanan">
-    Daisy Buchanan
-  </n-dropdown-item>
-  <n-dropdown-divider />
-  <n-dropdown-item name="nick carraway">
-    Nick Carraway
-  </n-dropdown-item>
-  <n-dropdown-submenu>
-    <template v-slot:activator>
-      Others
-    </template>
-    <n-dropdown-item name="jordan baker">
-      Jordan Baker
-    </n-dropdown-item>
-    <n-dropdown-divider />
-    <n-dropdown-item name="tom buchanan">
-      Tom Buchanan
-    </n-dropdown-item>
-    <n-dropdown-submenu>
-      <template v-slot:activator>
-        Others
-      </template>
-      <n-dropdown-item name="chicken">
-        Chicken
-      </n-dropdown-item>
-      <n-dropdown-item name="beef">
-        Beef
-      </n-dropdown-item>
-    </n-dropdown-submenu>
-  </n-dropdown-submenu>
-</n-dropdown>
+  :options="options"
+  :show="showDropdown"
+/>
 ```
 ```js
+const options = [
+  {
+    label: 'Jay Gatsby',
+    key: 'jay gatsby'
+  },
+  {
+    label: 'Daisy Buchanan',
+    key: 'daisy buchanan'
+  },
+  {
+    type: 'divider'
+  },
+  {
+    label: 'Nick Carraway',
+    key: 'nick carraway'
+  },
+  {
+    type: 'submenu',
+    label: 'Others',
+    key: 'others',
+    children: [
+      {
+        label: 'Jordan Baker',
+        key: 'jordan baker'
+      },
+      {
+        label: 'Tom Buchanan',
+        key: 'tom buchanan'
+      },
+      {
+        type: 'submenu',
+        label: 'Others',
+        key: 'others',
+        children: [
+          {
+            label: 'Chicken',
+            key: 'chicken'
+          },
+          {
+            label: 'Beef',
+            key: 'beef'
+          }
+        ]
+      }
+    ]
+  }
+]
+
 export default {
   methods: {
     handleSelect (name) {
@@ -71,6 +86,7 @@ export default {
   },
   data () {
     return {
+      options,
       showDropdown: false,
       x: 0,
       y: 0

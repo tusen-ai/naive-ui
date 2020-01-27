@@ -1,24 +1,31 @@
 # Placement
+Use different placement.
 ```html
-<n-dropdown @select="handleSelect" placement="bottom-start" :focusable="false">
-  <template v-slot:activator>
-    <n-button>Money Force Us to Work Rather Than Sleep</n-button>
-  </template>
-  <n-dropdown-item
-    v-for="hotel in hotels"
-    :key="hotel"
-    :name="hotel.toLowerCase()"
-  >
-    {{ hotel }}
-  </n-dropdown-item>
+<n-dropdown @select="handleSelect" placement="bottom-start" :focusable="false" :options="options">
+  <n-button>Money Force Us to Work Rather Than Sleep</n-button>
 </n-dropdown>
 ```
 ```js
 export default {
   data () {
     return {
-      hotels: [
-        'Marina Bay Sands, Singapore', 'Brown’s Hotel, London', 'Atlantis Bahamas, Nassau', 'The Beverly Hills Hotel, Los Angeles'
+      options: [
+        {
+          label: 'Marina Bay Sands',
+          key: 'Marina Bay Sands'
+        },
+        {
+          label: 'Brown\'s Hotel, London',
+          key: 'Brown\'s Hotel, London'
+        },
+        {
+          label: 'Atlantis Bahamas, Nassau',
+          key: 'Atlantis Bahamas, Nassau'
+        },
+        {
+          label: 'The Beverly Hills Hotel, Los Angeles',
+          key: 'The Beverly Hills Hotel, Los Angeles'
+        }
       ]
     }
   },

@@ -1,29 +1,37 @@
 # Basic
+Basic usage of dropdown
 ```html
-<n-dropdown @select="handleSelect" :focusable="false">
-  <template v-slot:activator>
-    <n-button>Money Force Us to Work Rather Than Sleep</n-button>
-  </template>
-  <n-dropdown-item
-    v-for="hotel in hotels"
-    :key="hotel"
-    :name="hotel.toLowerCase()"
-    :label="hotel"
-  />
+<n-dropdown @select="handleSelect" :focusable="false" :options="options">
+  <n-button>Money Force Us to Work Rather Than Sleep</n-button>
 </n-dropdown>
 ```
 ```js
 export default {
   data () {
     return {
-      hotels: [
-        'Marina Bay Sands, Singapore', 'Brown’s Hotel, London', 'Atlantis Bahamas, Nassau', 'The Beverly Hills Hotel, Los Angeles'
+      options: [
+        {
+          label: 'Marina Bay Sands',
+          key: 'marina bay sands'
+        },
+        {
+          label: 'Brown\'s Hotel, London',
+          key: 'brown\'s hotel, london'
+        },
+        {
+          label: 'Atlantis Bahamas, Nassau',
+          key: 'atlantis nahamas, nassau'
+        },
+        {
+          label: 'The Beverly Hills Hotel, Los Angeles',
+          key: 'the beverly hills hotel, los angeles'
+        }
       ]
     }
   },
   methods: {
-    handleSelect (name) {
-      this.$NMessage.info(name)
+    handleSelect (key) {
+      this.$NMessage.info(key)
     }
   }
 }

@@ -62,8 +62,21 @@ function flattenOptions (optionsToBeFlattened) {
         const wrappedOption = {
           type: OPTION_TYPE.RENDER,
           index: index,
-          key: index,
+          key: '__NAIVE_SELECT_RENDER__' + index,
           render: option,
+          grouped: false
+        }
+        if (context.grouped) {
+          wrappedOption.grouped = true
+        }
+        flattenedOptions.push(wrappedOption)
+        index++
+      } else if (option.type === 'render') {
+        const wrappedOption = {
+          type: OPTION_TYPE.RENDER,
+          index: index,
+          key: '__NAIVE_SELECT_RENDER__' + index,
+          render: option.render,
           grouped: false
         }
         if (context.grouped) {
@@ -75,18 +88,19 @@ function flattenOptions (optionsToBeFlattened) {
         flattenedOptions.push({
           type: OPTION_TYPE.GROUP_HEADER,
           index: index,
-          data: option,
-          key: '__Naive_Group_Header__' + index
+          data: option.__NAIVE_OPTION_DATA__ || option,
+          key: '__NAIVE_SELECT_GROUP_HEADER__' + index
         })
         index++
         traverse(option.children, {
           grouped: true
         })
-      } else {
+      } else if (option.type === undefined) {
         const wrappedOption = {
           type: OPTION_TYPE.OPTION,
+          as: option.as,
           index: index++,
-          data: option,
+          data: option.__NAIVE_OPTION_DATA__ || option,
           key: option.value,
           grouped: false
         }
@@ -94,6 +108,8 @@ function flattenOptions (optionsToBeFlattened) {
           wrappedOption.grouped = true
         }
         flattenedOptions.push(wrappedOption)
+      } else {
+        console.error(['[naive-ui/select-menu]: type of option is unknown.'])
       }
     }
   }

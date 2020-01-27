@@ -67,7 +67,6 @@
             :size="size"
             :filterable="filterable"
             :is-option-selected="isOptionSelected"
-            :mirror="false"
             @menu-toggle-option="handleToggleOption"
             @menu-scroll="handleMenuScroll"
             @menu-visible="handleMenuVisible"
@@ -453,9 +452,9 @@ export default {
      */
     handleKeyUpEnter (e) {
       if (this.active) {
-        const pendingOption = this.$refs.contentInner && this.$refs.contentInner.getPendingOption()
-        if (pendingOption) {
-          this.handleToggleOption(pendingOption)
+        const pendingOptionData = this.$refs.contentInner && this.$refs.contentInner.getPendingOptionData()
+        if (pendingOptionData) {
+          this.handleToggleOption(pendingOptionData)
         } else {
           this.closeMenu()
           this.switchFocusToOuter()

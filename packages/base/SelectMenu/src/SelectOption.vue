@@ -7,7 +7,7 @@ export default {
     }
   },
   props: {
-    data: {
+    wrappedOption: {
       type: Object,
       required: true
     },
@@ -33,22 +33,25 @@ export default {
   methods: {
     handleClick (e) {
       if (this.disabled) return
-      this.NBaseSelectMenu.handleOptionClick(e, this.index, this.data)
+      this.NBaseSelectMenu.handleOptionClick(e, this.index, this.wrappedOption)
     },
     handleMouseEnter (e) {
       if (this.disabled) return
-      this.NBaseSelectMenu.handleOptionMouseEnter(e, this.index, this.data)
+      this.NBaseSelectMenu.handleOptionMouseEnter(e, this.index, this.wrappedOption)
     }
   },
   render (h) {
-    const children = (this.data.render && this.data.render(h, this.data, this.selected)) || [ this.data.label ]
+    const data = this.wrappedOption.data
+    const children = (data.render && data.render(h, data, this.selected)) || [ data.label ]
     return h('div', {
       staticClass: 'n-base-select-option',
       class: {
         'n-base-select-option--selected': this.selected,
-        'n-base-select-option--disabled': this.data.disabled,
+        'n-base-select-option--disabled': data.disabled,
         'n-base-select-option--grouped': this.grouped
       },
+      attrs: { 'n-index': this.index },
+      style: data.style,
       on: {
         click: this.handleClick,
         mouseenter: this.handleMouseEnter

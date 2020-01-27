@@ -41,7 +41,7 @@
               <n-select-option
                 v-if="option.type === OPTION_TYPE.OPTION"
                 :index="option.index"
-                :data="option.data"
+                :wrapped-option="option"
                 :grouped="option.grouped"
                 :selected="isOptionSelected({ value: option.data.value })"
               />
@@ -58,7 +58,7 @@
                 v-if="option.type === OPTION_TYPE.OPTION"
                 :key="option.key"
                 :index="option.index"
-                :data="option.data"
+                :wrapped-option="option"
                 :grouped="option.grouped"
                 :selected="isOptionSelected({ value: option.data.value })"
               />
@@ -66,6 +66,11 @@
                 v-else-if="option.type === OPTION_TYPE.GROUP_HEADER"
                 :key="option.key"
                 :data="option.data"
+              />
+              <render
+                v-else-if="option.type === OPTION_TYPE.RENDER"
+                :key="option.key"
+                :render="option.render"
               />
             </template>
           </template>
@@ -94,6 +99,7 @@ import NBaseLightBar from '../../LightBar'
 import NEmpty from '../../../common/Empty'
 import { RecycleScroller } from 'vue-virtual-scroller'
 import debounce from 'lodash-es/debounce'
+import render from '../../../utils/render'
 import {
   getPrevAvailableIndex,
   getNextAvailableIndex,
@@ -114,7 +120,8 @@ export default {
     NSelectOption,
     NEmpty,
     NSelectGroupHeader,
-    RecycleScroller
+    RecycleScroller,
+    render
   },
   props: {
     theme: {
@@ -211,6 +218,14 @@ export default {
         large: 40,
         huge: 46
       })[this.size]
+    },
+    pendingOptionValue () {
+      const pendingWrappedOption = this.pendingWrappedOption
+      return (
+        pendingWrappedOption &&
+        pendingWrappedOption.data &&
+        pendingWrappedOption.data.value
+      ) || null
     }
   },
   watch: {
@@ -251,19 +266,20 @@ export default {
     handleMenuScroll (e, scrollContainer, scrollContent) {
       this.$emit('menu-scroll', e, scrollContainer, scrollContent)
     },
-    getPendingOption () {
+    getPendingOptionData () {
       const pendingWrappedOption = this.pendingWrappedOption
       return pendingWrappedOption && pendingWrappedOption.data
     },
-    handleOptionMouseEnter: debounce(function (e, index, optionData) {
-      if (!optionData.disabled) {
-        this.setPendingWrappedOptionIndex(index, false)
-      }
+    handleOptionMouseEnter: debounce(function (e, index, wrappedOption) {
+      const data = wrappedOption.data
+      if (data.disabled) return
+      this.setPendingWrappedOptionIndex(index, false)
     }, 64),
-    handleOptionClick (e, index, optionData) {
-      if (!optionData.disabled) {
-        this.toggleOption(optionData)
-      }
+    handleOptionClick (e, index, wrappedOption) {
+      const data = wrappedOption.data
+      console.log('handleOptionClick', wrappedOption)
+      if (data.disabled || wrappedOption.as === 'dropdown-submenu') return
+      this.toggleOption(data)
     },
     toggleOption (option) {
       this.$emit('menu-toggle-option', option)
@@ -302,14 +318,25 @@ export default {
       }
     },
     setPendingWrappedOptionIndex (index, doScroll = true) {
-      if (index !== null) {
+      if (this.virtualScroll) {
+        if (index !== null) {
+          this.pendingWrappedOption = this.flattenedOptions[index]
+          const itemSize = this.itemSize
+          const offsetTop = itemSize * index
+          this.updateLightBarTop({
+            offsetTop
+          })
+          doScroll && this.$refs.scrollbar.scrollToElement({}, () => offsetTop, () => itemSize)
+        }
+      } else {
         this.pendingWrappedOption = this.flattenedOptions[index]
-        const itemSize = this.itemSize
-        const offsetTop = itemSize * index
+        const el = this.$el
+        const optionEl = el.querySelector(`[n-index="${index}"]`)
+        const offsetTop = optionEl.offsetTop
         this.updateLightBarTop({
           offsetTop
         })
-        doScroll && this.$refs.scrollbar.scrollToElement({}, () => offsetTop, () => itemSize)
+        doScroll && this.$refs.scrollbar.scrollToElement(optionEl)
       }
     },
     /**

@@ -1,15 +1,22 @@
 <script>
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
-import asthemecontext from '../../../mixins/asthemecontext'
-import WrapWithValue from './WrapWithValue'
+import { getRootDropdownMenu } from './utils'
+import { KEY_CODE } from '../../../utils/keyCode'
+import NDropdownSubmenu from './DropdownSubmenu'
+import NDropdownDivider from './DropdownDivider'
+import { createSelectOptionsFromDropdownOptions } from '../../../utils/component/dropdown'
 import {
   NBaseSelectMenu
 } from '../../../base/SelectMenu'
 
+const createSelectOptions = function (options) {
+  return createSelectOptionsFromDropdownOptions(options, NDropdownSubmenu, NDropdownDivider)
+}
+
 export default {
   name: 'NDropdownMenu',
-  mixins: [withapp, themeable, asthemecontext],
+  mixins: [ withapp, themeable ],
   provide () {
     return {
       NDropdownMenu: this
@@ -24,11 +31,11 @@ export default {
     }
   },
   props: {
-    type: {
-      type: String,
-      default: 'dropdown'
+    options: {
+      type: Array,
+      required: true
     },
-    autoFocus: {
+    defaultFocus: {
       type: Boolean,
       default: true
     },
@@ -65,11 +72,8 @@ export default {
     }
   },
   computed: {
-    showAsMenuPopover () {
-      if (this.NDropdownMenu) {
-        return this.NDropdownMenu.showAsMenuPopover
-      }
-      return this.type === 'menu'
+    selectOptions () {
+      return createSelectOptions(this.options)
     },
     inheritedSubmenuWidth () {
       if (this.NDropdownMenu) {
@@ -91,9 +95,6 @@ export default {
       } else {
         return this.submenuMaxWidth
       }
-    },
-    options () {
-      return []
     }
   },
   created () {
@@ -107,17 +108,18 @@ export default {
   },
   mounted () {
     console.log('dropdown menu mounted')
-    if (this.autoFocus && this.focusable) {
+    if (this.defaultFocus && this.focusable) {
       this.$el.focus()
     }
   },
   methods: {
-    handleSelectItem (name) {
-      /**
-       * Can only be called at root level menu
-       */
+    handleSelectOption (key) {
+      if (this.NDropdownMenu) {
+        this.NDropdownMenu.handleSelectOption(key)
+        return
+      }
       this.controller.hide()
-      this.$emit('select', name)
+      this.$emit('select', key)
     },
     handleKeyDownLeft () {
       if (this.activeMenuInstance.NDropdownSubmenu) {
@@ -153,24 +155,36 @@ export default {
       if (this.activeMenuInstance) {
         if (this.activeMenuInstance.$refs.selectMenu) {
           const selectMenu = this.activeMenuInstance.$refs.selectMenu
-          if (selectMenu.pendingOption) {
-            this.$emit('select', selectMenu.pendingOption.name)
+          if (selectMenu.pendingOptionValue) {
+            this.$emit('select', selectMenu.pendingOptionValue)
             this.controller.hide()
           }
         }
       }
     },
     handleKeyUp (e) {
-      if (e.keyCode === 13) {
+      if (e.keyCode === KEY_CODE.ENTER) {
         this.handleKeyUpEnter()
       }
     },
     handleKeyDown (e) {
       if (!this.NDropdownMenu) {
-        if (e.keyCode === 37) this.handleKeyDownLeft()
-        if (e.keyCode === 38) this.handleKeyDownUp()
-        if (e.keyCode === 39) this.handleKeyDownRight()
-        if (e.keyCode === 40) this.handleKeyDownDown()
+        switch (e.keyCode) {
+          case KEY_CODE.UP:
+            this.handleKeyDownUp()
+            break
+          case KEY_CODE.RIGHT:
+            this.handleKeyDownRight()
+            break
+          case KEY_CODE.DOWN:
+            this.handleKeyDownDown()
+            break
+          case KEY_CODE.LEFT:
+            this.handleKeyDownLeft()
+            break
+          default:
+            break
+        }
       }
     },
     handleBlur () {
@@ -179,10 +193,7 @@ export default {
     },
     handleMouseEnter () {
       if (this.NDropdownMenu) {
-        let rootDropdownMenu = this.NDropdownMenu
-        while (rootDropdownMenu.NDropdownMenu) {
-          rootDropdownMenu = rootDropdownMenu.NDropdownMenu
-        }
+        const rootDropdownMenu = getRootDropdownMenu(this)
         rootDropdownMenu.activeMenuInstance = this
       } else {
         this.activeMenuInstance = this
@@ -190,14 +201,8 @@ export default {
     }
   },
   render (h) {
-    const options = h(WrapWithValue, {
-      scopedSlots: { ...this.$scopedSlots }
-    })
     return h('div', {
       staticClass: 'n-dropdown-menu',
-      class: {
-        'n-dropdown-menu--as-menu-popover': this.showAsMenuPopover
-      },
       on: {
         keydown: this.handleKeyDown,
         mouseenter: this.handleMouseEnter,
@@ -208,18 +213,16 @@ export default {
       h(NBaseSelectMenu, {
         ref: 'selectMenu',
         props: {
-          withoutLightBar: this.showAsMenuPopover,
+          virtualScroll: false,
           withoutScrollbar: true,
-          useSlot: !!this.$scopedSlots.default,
-          options: this.options,
+          options: this.selectOptions,
           size: this.size,
-          isSelected: () => false,
-          theme: this.synthesizedTheme,
-          mirror: true
+          isOptionSelected: () => false,
+          theme: this.synthesizedTheme
         },
-        scopedSlots: {
-          default () {
-            return options
+        on: {
+          'menu-toggle-option': option => {
+            this.handleSelectOption(option.value)
           }
         }
       })
