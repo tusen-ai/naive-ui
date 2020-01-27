@@ -39,7 +39,7 @@ export default {
   mixins: [withapp, themeable, asthemecontext],
   model: {
     prop: 'checked',
-    event: 'input'
+    event: 'checked-change'
   },
   props: {
     type: {
@@ -55,12 +55,6 @@ export default {
     checked: {
       type: Boolean,
       default: false
-    },
-    value: {
-      validator () {
-        return true
-      },
-      default: undefined
     },
     checkable: {
       type: Boolean,
@@ -89,8 +83,7 @@ export default {
     handleClick (e) {
       if (!this.disabled) {
         if (this.checkable) {
-          this.$emit('change', !this.checked)
-          this.$emit('input', !this.checked)
+          this.$emit('checked-change', !this.checked)
         }
       }
     },

@@ -16,7 +16,7 @@ module.exports = function (content) {
   return `<template>
   <component-documentation>
     <div style="display: flex; flex-wrap: nowrap;">
-      <div style="width: calc(100% - 184px); margin-right: 24x;">
+      <div style="width: calc(100% - 196px); margin-right: 36x;">
         ${marked(content, {
     renderer
   })}

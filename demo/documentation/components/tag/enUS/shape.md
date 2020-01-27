@@ -1,14 +1,18 @@
-# Type
-It has some types.
+# Size
+Why using a round tag? Maybe when you want everything looks like a pill.
 ```html
 <n-tag
   closable
+  size="small"
+  round
   @close="handleClose"
 >
   Real Love
 </n-tag>
 <n-tag
   type="success"
+  size="large"
+  round
   closable
   @close="handleClose"
 >
@@ -17,23 +21,10 @@ It has some types.
 <n-tag
   type="warning"
   closable
+  round
   @close="handleClose"
 >
   I'm Down
-</n-tag>
-<n-tag
-  type="error"
-  closable
-  @close="handleClose"
->
-  Yesterday
-</n-tag>
-<n-tag
-  type="info"
-  closable
-  @close="handleClose"
->
-  I'm Looking Through You
 </n-tag>
 ```
 ```js

@@ -1,4 +1,5 @@
 # Checkable
+It can be checkable.
 ```html
 <n-tag
   checkable

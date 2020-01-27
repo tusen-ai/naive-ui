@@ -6,6 +6,6 @@
 
 <style>
 .n-documentation {
-  padding: 24px 24px 24px 48px;
+  padding: 24px 24px 24px 56px;
 }
 </style>
