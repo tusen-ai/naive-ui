@@ -1,4 +1,5 @@
 # Custom Gradient
+By yourself.
 ```html
 <n-gradient-text
   :gradient="{

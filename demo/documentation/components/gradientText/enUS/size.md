@@ -1,4 +1,5 @@
 # Size
+Maybe using CSS is a better way.
 ```html
 <n-gradient-text
   type="info"
