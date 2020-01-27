@@ -13,7 +13,7 @@
       'n-button--enter-pressed': enterPressed,
       'n-button--ghost': ghost,
       'n-button--text': text,
-      [`n-button--${iconPosition}-icon`]: iconPosition && !noTextContent,
+      [`n-button--${iconPlacement}-icon`]: iconPlacement && !noTextContent,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
     :tabindex="synthesizedFocusable ? 0 : -1"
@@ -177,10 +177,10 @@ export default {
       type: String,
       default: null
     },
-    iconPosition: {
+    iconPlacement: {
       default: 'left',
-      validator (iconPosition) {
-        return ['left', 'right'].includes(iconPosition)
+      validator (iconPlacement) {
+        return ['left', 'right'].includes(iconPlacement)
       }
     }
   },
@@ -220,7 +220,7 @@ export default {
       return this.icon || this.$slots.icon
     },
     iconOnRight () {
-      return this.iconPosition === 'right'
+      return this.iconPlacement === 'right'
     }
   },
   watch: {

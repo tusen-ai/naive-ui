@@ -25,7 +25,7 @@
   </n-button>
   <n-button
     type="info"
-    icon-position="right"
+    icon-placement="right"
   >
     <template v-slot:icon>
       <md-save />
@@ -88,7 +88,7 @@
   <n-button
     type="warning"
     ghost
-    icon-position="right"
+    icon-placement="right"
   >
     <template v-slot:icon>
       <md-save />
@@ -154,7 +154,7 @@
   <n-button
     type="success"
     loading
-    icon-position="right"
+    icon-placement="right"
   >
     <template v-slot:icon>
       <md-save />
@@ -226,7 +226,7 @@
     type="error"
     ghost
     loading
-    icon-position="right"
+    icon-placement="right"
   >
     <template v-slot:icon>
       <md-save />
@@ -256,7 +256,7 @@
   </n-button>
   <n-button
     type="info"
-    icon-position="right"
+    icon-placement="right"
     block
     size="large"
   >
@@ -307,7 +307,7 @@
   </n-button>
   <n-button
     type="info"
-    icon-position="right"
+    icon-placement="right"
     circle
     size="large"
   >
@@ -391,7 +391,7 @@
     </n-button>
     <n-button
       type="info"
-      icon-position="right"
+      icon-placement="right"
     >
       <template v-slot:icon>
         <md-save />
@@ -428,7 +428,7 @@
     </n-button>
     <n-button
       type="info"
-      icon-position="right"
+      icon-placement="right"
     >
       <template v-slot:icon>
         <md-save />

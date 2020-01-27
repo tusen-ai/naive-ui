@@ -22,7 +22,7 @@
   </n-button>
   <n-button
     type="info"
-    icon-position="right"
+    icon-placement="right"
   >
     <template v-slot:icon>
       <md-save />
@@ -59,7 +59,7 @@
   </n-button>
   <n-button
     type="info"
-    icon-position="right"
+    icon-placement="right"
   >
     <template v-slot:icon>
       <md-save />
