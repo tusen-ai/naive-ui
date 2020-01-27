@@ -1,4 +1,5 @@
 # Slots
+Card has many slots to help you write less code.
 ```html
 <n-card title="Card Slots Demo">
   <template v-slot:header-extra>

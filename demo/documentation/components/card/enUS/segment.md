@@ -1,5 +1,5 @@
 # Segmented
-`content`, `footer` and `action` can be `hard` or `soft` segmented. Segment border will appear at the top of segmented.
+`content`, `footer` and `action` can be `hard` or `soft` segmented. Segment border will appear at the top of segmented parts.
 ```html
 <n-card title="Card Segmented Demo" :segmented="{
   content: 'hard',

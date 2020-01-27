@@ -34,19 +34,19 @@ export default {
   props: {
     span: {
       type: [String, Number],
-      required: true
+      default: 1
     },
     push: {
       type: [String, Number],
-      default: null
+      default: 0
     },
     pull: {
       type: [String, Number],
-      default: null
+      default: 0
     },
     offset: {
       type: [String, Number],
-      default: null
+      default: 0
     }
   },
   computed: {

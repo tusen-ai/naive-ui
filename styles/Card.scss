@@ -118,84 +118,96 @@ $--card-margin-bottom: (
       border: 1px solid $--card-border-color;
     }
     @include m(action-segmented) {
-      @include e(action) {
-        &:not(:first-child) {
-          border-top: 1px solid $--card-border-color;
+      & > {
+        @include e(action) {
+          &:not(:first-child) {
+            border-top: 1px solid $--card-border-color;
+          }
         }
       }
     }
     @include m(content-segmented, content-soft-segmented) {
-      @include e(content) {
-        @include once {
-          transition: border-color .3s $--n-ease-in-out-cubic-bezier;
-        }
-        &:not(:first-child) {
-          border-top: 1px solid $--card-border-color;
+      & > {
+        @include e(content) {
+          @include once {
+            transition: border-color .3s $--n-ease-in-out-cubic-bezier;
+          }
+          &:not(:first-child) {
+            border-top: 1px solid $--card-border-color;
+          }
         }
       }
     }
     @include m(footer-segmented, footer-soft-segmented) {
-      @include e(footer) {
-        @include once {
-          transition: border-color .3s $--n-ease-in-out-cubic-bezier;
-        }
-        &:not(:first-child) {
-          border-top: 1px solid $--card-border-color;
+      & > {
+        @include e(footer) {
+          @include once {
+            transition: border-color .3s $--n-ease-in-out-cubic-bezier;
+          }
+          &:not(:first-child) {
+            border-top: 1px solid $--card-border-color;
+          }
         }
       }
     }
-    @include b(card-header) {
-      @include once {
-        box-sizing: border-box;
-        display: flex;
-        align-items: center;
-      }
-      @include e(main) {
+    & > {
+      @include b(card-header) {
         @include once {
-          font-weight: 500;
-          font-size: 18px;
-          transition: color .3s $--n-ease-in-out-cubic-bezier;
-          flex: 1;
+          box-sizing: border-box;
+          display: flex;
+          align-items: center;
         }
-        color: $--card-title-text-color;
-      }
-      @include e(extra) {
-        @include once {
-          font-weight: 400;
-          font-size: 14px;
-          transition: color .3s $--n-ease-in-out-cubic-bezier;
+        @include e(main) {
+          @include once {
+            font-weight: 500;
+            font-size: 18px;
+            transition: color .3s $--n-ease-in-out-cubic-bezier;
+            flex: 1;
+          }
+          color: $--card-title-text-color;
         }
-        color: $--card-text-color;
-      }
-      @include e(close-mark) {
-        @include once {
-          cursor: pointer;
-          transition: fill .3s $--n-ease-in-out-cubic-bezier;
+        @include e(extra) {
+          @include once {
+            font-weight: 400;
+            font-size: 14px;
+            transition: color .3s $--n-ease-in-out-cubic-bezier;
+          }
+          color: $--card-text-color;
         }
-        fill: $--card-close-fill;
+        @include e(close-mark) {
+          @include once {
+            cursor: pointer;
+            transition: fill .3s $--n-ease-in-out-cubic-bezier;
+          }
+          fill: $--card-close-fill;
+        }
       }
     }
     @include once {
-      @include e(content) {
-        box-sizing: border-box;
-        line-height: 1.5;
-        font-size: 14px;
-      }
-      @include e(footer) {
-        box-sizing: border-box;
-        line-height: 1.5;
-        font-size: 14px;
+      & > {
+        @include e(content) {
+          box-sizing: border-box;
+          line-height: 1.5;
+          font-size: 14px;
+        }
+        @include e(footer) {
+          box-sizing: border-box;
+          line-height: 1.5;
+          font-size: 14px;
+        }
       }
     }
-    @include e(action) {
-      @include once {
-        box-sizing: border-box;
-        transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
-        line-height: 1.5;
-        font-size: 14px;
-        background-clip: padding-box;
+    & > {
+      @include e(action) {
+        @include once {
+          box-sizing: border-box;
+          transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
+          line-height: 1.5;
+          font-size: 14px;
+          background-clip: padding-box;
+        }
+        background-color: $--card-action-background-color;
       }
-      background-color: $--card-action-background-color;
     }
   }
 }
