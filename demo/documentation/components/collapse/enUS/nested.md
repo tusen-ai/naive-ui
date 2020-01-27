@@ -1,4 +1,5 @@
 # Nested
+It can be nested.
 ```html
 <n-collapse v-model="activeNames">
   <n-collapse-item title="right" name="1">
