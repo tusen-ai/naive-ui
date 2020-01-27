@@ -1,4 +1,5 @@
 # Header
+Header is not just header. You know UI always likes to add a bar as the prefix of the header (which is a great idea to avoid boring text). So here it is.
 ```html
 <div style="padding-left: 24px; position: relative;">
   <div style="

@@ -54,6 +54,7 @@ $--header-bar-width: (
         width: map-get($--header-bar-width, $level);
         border-radius:  map-get($--header-bar-width, $level) / 2;
         background-color: $--n-primary-color;
+        transition: background-color .3s $--n-ease-in-out-cubic-bezier;
         left: 0;
         top: 0;
         bottom: 0;
