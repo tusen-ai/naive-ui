@@ -27,7 +27,6 @@
             ref="contentInner"
             auto-pending-first-option
             class="n-select-menu"
-            :mirror="false"
             :theme="synthesizedTheme"
             :pattern="value"
             :options="filteredOptions"
@@ -143,8 +142,8 @@ export default {
   methods: {
     handleKeyDownEnter (e) {
       if (this.$refs.contentInner) {
-        const pendingOption = this.$refs.contentInner.getPendingOption()
-        if (pendingOption) {
+        const pendingOptionData = this.$refs.contentInner.getPendingOptionData()
+        if (pendingOptionData) {
           e.preventDefault()
         }
       }
@@ -161,8 +160,8 @@ export default {
     },
     handleKeyUpEnter () {
       if (this.$refs.contentInner) {
-        const pendingOption = this.$refs.contentInner.getPendingOption()
-        this.select(pendingOption)
+        const pendingOptionData = this.$refs.contentInner.getPendingOptionData()
+        this.select(pendingOptionData)
       }
     },
     select (option) {

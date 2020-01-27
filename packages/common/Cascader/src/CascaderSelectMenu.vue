@@ -185,8 +185,8 @@ export default {
     },
     enter () {
       if (this.$refs.contentInner) {
-        const pendingOption = this.$refs.contentInner.getPendingOption()
-        this.handleSelectOptionCheck(pendingOption)
+        const pendingOptionData = this.$refs.contentInner.getPendingOptionData()
+        this.handleSelectOptionCheck(pendingOptionData)
       }
     }
   }

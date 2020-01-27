@@ -24,16 +24,16 @@ function getActivatorRect (manuallyPositioned, x, y, trackedElement) {
       left: x,
       height: 0,
       width: 0,
-      right: document.documentElement.clientWidth - x - window.pageXOffset,
-      bottom: document.documentElement.clientHeight - y - window.pageYOffset
+      right: window.innerWidth - x,
+      bottom: window.innerHeight - y
     }
   } else {
     const activatorRect = trackedElement.getBoundingClientRect()
     return {
-      left: parseInt(activatorRect.left + window.pageXOffset),
-      top: parseInt(activatorRect.top + window.pageYOffset),
-      bottom: parseInt(document.documentElement.clientHeight - activatorRect.bottom - window.pageYOffset),
-      right: parseInt(document.documentElement.clientWidth - activatorRect.right - window.pageXOffset),
+      left: parseInt(activatorRect.left),
+      top: parseInt(activatorRect.top),
+      bottom: parseInt(window.innerHeight - activatorRect.bottom),
+      right: parseInt(window.innerWidth - activatorRect.right),
       width: parseInt(activatorRect.width),
       height: parseInt(activatorRect.height)
     }
@@ -220,6 +220,7 @@ export default {
           return
         }
       }
+      // debugger
       const activatorRect = getActivatorRect(this.manuallyPositioned, this.x, this.y, this.trackedElement)
       const contentInner = getContentInner(this)
       if (this.widthMode === 'activator' && contentInner) {
@@ -229,6 +230,8 @@ export default {
         width: this.trackingElement.offsetWidth,
         height: this.trackingElement.offsetHeight
       }
+      // console.log('activatorRect', activatorRect)
+      // console.log('contentBoundingClientRect', contentBoundingClientRect)
       const adjustedPlacement = getAdjustedPlacementOfTrackingElement(this.placement, activatorRect, contentBoundingClientRect, this.flip)
       const suggestedTransformOrigin = getTransformOriginByPlacement(adjustedPlacement)
       let offset = getPosition(adjustedPlacement, activatorRect, contentBoundingClientRect)

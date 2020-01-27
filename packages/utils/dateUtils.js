@@ -47,9 +47,9 @@ function dateItem (time, displayTime, selectedTime, currentTime) {
 /**
  * Given time to display calendar, given the selected time, given current time,
  * return the date array of display time's month.
- * @param {Moment} displayTime
- * @param {Moment} selectedTime
- * @param {Moment} currentTime
+ * @param {number} displayTime
+ * @param {number} selectedTime
+ * @param {number} currentTime
  */
 function dateArray (displayTime, selectedTime, currentTime) {
   const displayMonth = getMonth(displayTime) // displayTime.month()
