@@ -6,3 +6,16 @@ basic
 theme-environment
 color
 ```
+## Props
+
+## Events
+|Name|Parameters|
+|-|-|
+|theme-change|(theme, oldTheme)|
+|namespace-change|(namespace, oldNamespace)|
+|language-change|(language, oldLanguage)|
+
+## Slots
+|Name|Parameters|
+|-|-|
+|default|({ theme, namespace, language, themeEnvironment, styleScheme })|
