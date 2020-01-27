@@ -1,4 +1,5 @@
 # Icon
+I like using icon in avatar.
 ```html
 <n-avatar>
   <n-icon>
