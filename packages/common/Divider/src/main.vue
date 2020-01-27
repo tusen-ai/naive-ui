@@ -5,7 +5,7 @@
       'n-divider--vertical': vertical,
       'n-divider--no-title': !$slots.default,
       'n-divider--dashed': dashed,
-      [`n-divider--title-position-${contentPosition || titlePlacement}`]: $slots.default && (contentPosition || titlePlacement),
+      [`n-divider--title-position-${titlePlacement}`]: $slots.default && titlePlacement,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
     :style="synthesizedStyle"
@@ -40,10 +40,6 @@ export default {
     asthemecontext
   ],
   props: {
-    contentPosition: {
-      type: String,
-      default: null
-    },
     titlePlacement: {
       type: String,
       default: 'center'
