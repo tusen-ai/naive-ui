@@ -40,10 +40,6 @@ export default {
       required: true,
       default: null
     },
-    debug: {
-      type: Boolean,
-      default: false
-    },
     actions: {
       type: Array,
       default: () => ['clear', 'confirm']
@@ -78,7 +74,6 @@ export default {
     }
   },
   computed: {
-
     selectingPhase () {
       if (this.isSelecting) return 'end'
       else return 'start'
