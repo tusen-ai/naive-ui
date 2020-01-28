@@ -172,15 +172,6 @@ export default {
     DaterangePanel,
     iosCalendar
   },
-  model: {
-    prop: 'value',
-    event: 'change'
-  },
-  provide () {
-    return {
-      NDatePicker: this
-    }
-  },
   mixins: [
     withapp,
     themeable,
@@ -190,6 +181,15 @@ export default {
     locale,
     asformitem()
   ],
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
+  provide () {
+    return {
+      NDatePicker: this
+    }
+  },
   props: {
     disabled: {
       type: Boolean,
