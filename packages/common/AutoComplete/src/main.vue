@@ -34,12 +34,8 @@
             :size="size"
             :remote="remote"
             :loading="loading"
-            :no-data-content="'Please Search'"
-            :not-found-content="'Not Found'"
-            :emit-option="false"
             :filterable="false"
             :is-option-selected="isSelected"
-            :use-slot="!!$slots.default"
             @menu-toggle-option="handleToggleOption"
           />
         </transition>
