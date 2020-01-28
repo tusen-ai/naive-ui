@@ -2,18 +2,18 @@
   <div
     class="n-radio"
     :class="{
-      'n-radio--disabled': disabled,
-      'n-radio--checked': checked,
+      'n-radio--disabled': synthesizedDisabled,
+      'n-radio--checked': synthesizedChecked,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
-    :tabindex="disabled ? -1 : 0"
+    :tabindex="synthesizedDisabled ? -1 : 0"
     @keyup.enter="handleKeyUpEnter"
     @click="handleClick"
   >
     <div
       class="n-radio__control"
       :class="{
-        'n-radio__control--checked': checked
+        'n-radio__control--checked': synthesizedChecked
       }"
     />
     <div class="n-radio__label">
@@ -31,8 +31,8 @@ export default {
   name: 'NRadio',
   mixins: [ withapp, themeable, asformitem() ],
   model: {
-    prop: 'privateValue',
-    event: 'input'
+    prop: 'checkedValue',
+    event: 'change'
   },
   inject: {
     NRadioGroup: {
@@ -44,9 +44,9 @@ export default {
       type: [Boolean, String, Number],
       default: null
     },
-    privateValue: {
+    checkedValue: {
       type: [Boolean, String, Number],
-      default: null
+      default: undefined
     },
     disabled: {
       type: Boolean,
@@ -54,17 +54,17 @@ export default {
     }
   },
   computed: {
-    checked () {
+    synthesizedChecked () {
       if (this.NRadioGroup) {
         return this.NRadioGroup.value === this.value
       } else {
-        return this.privateValue === this.value
+        return this.checkedValue === this.value
       }
-    }
-  },
-  watch: {
-    value (value, oldValue) {
-      this.$emit('change', value, oldValue)
+    },
+    synthesizedDisabled () {
+      if (this.NRadioGroup && this.NRadioGroup.disabled) return true
+      if (this.disabled) return true
+      return false
     }
   },
   methods: {
@@ -76,16 +76,16 @@ export default {
       this.toggle()
     },
     toggle () {
-      if (this.disabled) return
-      if (this.privateValue !== this.value) {
-        this.emitValue('input', this.value)
+      if (this.synthesizedDisabled) return
+      if (this.checkedValue !== this.value) {
+        this.emitChangeEvent()
       }
     },
-    emitValue () {
+    emitChangeEvent () {
       if (this.NRadioGroup) {
-        this.NRadioGroup.$emit('input', this.value)
+        this.NRadioGroup.$emit('change', this.value)
       } else {
-        this.$emit('input', this.value)
+        this.$emit('change', this.value)
       }
     }
   }

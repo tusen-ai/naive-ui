@@ -66,6 +66,10 @@ function mapSlot (h, defaultSlot, currentComponent) {
 export default {
   name: 'NRadioGroup',
   mixins: [withapp, themeable, hollowoutable, asformitem()],
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
   props: {
     value: {
       type: [Boolean, String, Number],
@@ -76,11 +80,15 @@ export default {
       validator (value) {
         return ['small', 'medium', 'large'].includes(value)
       }
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
-  watch: {
-    value (value, oldValue) {
-      this.$emit('change', value, oldValue)
+  data () {
+    return {
+      radioButtonCount: 0
     }
   },
   provide () {
@@ -94,7 +102,8 @@ export default {
       staticClass: 'n-radio-group',
       class: {
         [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme,
-        [`n-radio-group--${this.size}-size`]: this.size
+        [`n-radio-group--${this.size}-size`]: this.size,
+        [`n-radio-group--button-group`]: this.radioButtonCount > 0
       }
     }, mapSlot(h, this.$slots.default, this))
   }
