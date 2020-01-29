@@ -1,4 +1,5 @@
 # Event
+Blur & change events are exposed.
 ```html
 <n-input-number
   v-model="value"
@@ -14,10 +15,10 @@ export default {
     }
   },
   methods: {
-    handleChange (newValue) {
-      this.$NMessage.info(`value: ${newValue}`)
+    handleChange (v) {
+      this.$NMessage.info(`value: ${v}`)
     },
-    handleBlur (e, v) {
+    handleBlur (v) {
       this.$NMessage.info(`blur: ` + v)
     },
   }

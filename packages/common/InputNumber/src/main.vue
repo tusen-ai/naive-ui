@@ -4,6 +4,7 @@
     :class="{
       [`n-input-number--${size}-size`]: true,
       'n-input-number--disabled': disabled,
+      'n-input-number--invalid': invalid,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
   >
@@ -23,6 +24,7 @@
       ref="input"
       class="n-input-number__input"
       type="text"
+      :placeholder="placeholder"
       :value="value"
       :disabled="disabled ? 'disabled' : false"
       @focus="handleFocus"
@@ -78,12 +80,20 @@ export default {
     mdAdd
   },
   mixins: [withapp, themeable, asformitem()],
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
   inject: {
     NFormItem: {
       default: null
     }
   },
   props: {
+    placeholder: {
+      type: String,
+      default: null
+    },
     value: {
       type: Number,
       default: null
@@ -123,6 +133,13 @@ export default {
       if (parsedNumber !== null) return parsedNumber
       else return null
     },
+    invalid () {
+      if (this.value === null) return false
+      if (this.validator && !this.validator(this.value)) return true
+      if (this.safeMin !== null && this.value < this.safeMin) return true
+      if (this.safeMax !== null && this.value > this.safeMax) return true
+      return false
+    },
     minusable () {
       if (this.validator) {
         if (this.value !== null) return this.validator(this.value - this.step)
@@ -151,8 +168,10 @@ export default {
       const parsedNumber = parseNumber(this.max)
       if (parsedNumber !== null) return parsedNumber
       else return null
-    },
-    aValidValue () {
+    }
+  },
+  methods: {
+    createValidValue () {
       if (this.validator) return null
       if (this.safeMin !== null) {
         return Math.max(0, this.safeMin)
@@ -161,19 +180,7 @@ export default {
       } else {
         return 0
       }
-    }
-  },
-  watch: {
-    value (newValue, oldValue) {
-      const adjustedValue = this.adjustValue(newValue)
-      if (adjustedValue === newValue) {
-        this.$emit('change', newValue, oldValue)
-      } else {
-        this.$emit('input', adjustedValue)
-      }
-    }
-  },
-  methods: {
+    },
     handleMouseDown (e) {
       if (document.activeElement !== this.$refs.input) {
         this.$refs.input.focus()
@@ -186,26 +193,25 @@ export default {
     add () {
       if (!this.addable) return
       if (this.value === null) {
-        this.$emit('input', this.aValidValue)
+        this.$emit('change', this.createValidValue())
       } else {
         const valueAfterChange = this.adjustValue(this.value + this.safeStep)
-        this.$emit('input', valueAfterChange)
+        this.$emit('change', valueAfterChange)
       }
     },
     minus () {
-      console.log('minus', this.minusable)
       if (!this.minusable) return
       if (this.value === null) {
-        this.$emit('input', this.aValidValue)
+        this.$emit('change', this.createValidValue())
       } else {
         const valueAfterChange = this.adjustValue(this.value - this.safeStep)
-        this.$emit('input', valueAfterChange)
+        this.$emit('change', valueAfterChange)
       }
     },
     handleEnter (e) {
       const value = this.adjustValue(this.$refs.input.value)
       this.$refs.input.value = value
-      this.$emit('input', value)
+      this.$emit('change', value)
     },
     adjustValue (value) {
       value = String(value).trim() || ''
@@ -234,8 +240,8 @@ export default {
     handleBlur (e) {
       const value = this.adjustValue(e.target.value)
       e.target.value = value
-      this.$emit('input', value)
-      this.$emit('blur', e, value)
+      this.$emit('change', value)
+      this.$emit('blur', value)
     }
   }
 }
