@@ -22,6 +22,10 @@ import asformitem from '../../../mixins/asformitem'
 export default {
   name: 'NSwitch',
   mixins: [ withapp, themeable, asformitem() ],
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
   inject: {
     NFormItem: {
       default: null
@@ -37,15 +41,10 @@ export default {
       default: false
     }
   },
-  watch: {
-    value (value, oldValue) {
-      this.$emit('change', value, oldValue)
-    }
-  },
   methods: {
     handleClick () {
       if (!this.disabled) {
-        this.$emit('input', !this.value)
+        this.$emit('change', !this.value)
       }
     }
   }
