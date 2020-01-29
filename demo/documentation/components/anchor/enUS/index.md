@@ -1,6 +1,6 @@
 # Anchor
 <!--single-column-->
-
+The demo used to use some charactor names from *Hard-Boiled Wonderland and the End of the World* as anchor links, but if so there will be too wired in this page. So I rewrite them. What a pity.
 ## Demos
 ```demo
 basic
