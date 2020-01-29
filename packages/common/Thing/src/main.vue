@@ -74,11 +74,10 @@
 <script>
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
-import asthemecontext from '../../../mixins/asthemecontext'
 
 export default {
   name: 'NThing',
-  mixins: [ withapp, themeable, asthemecontext ],
+  mixins: [ withapp, themeable ],
   props: {
     title: {
       type: String,
