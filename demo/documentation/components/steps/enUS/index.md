@@ -24,3 +24,9 @@ vertical
 |description|`string`|`null`||
 |content|`string`|`null`||
 |status|`'process' \| 'finish' \| 'error' \| 'wait'`|`'process'`||
+
+## Slots
+### Steps Slots
+|Name|Parameters|Description|
+|-|-|-|
+|default|`()`||
