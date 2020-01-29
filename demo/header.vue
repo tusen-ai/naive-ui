@@ -39,7 +39,7 @@
         :value="lang"
         size="small"
         :options="langOptions"
-        @input="handleLangInput"
+        @change="handleLanguageChange"
       />
     </div>
   </div>
@@ -110,7 +110,7 @@ export default {
     handleThemeChange (theme) {
       this.NConfigProvider.$parent.theme = theme
     },
-    handleLangInput (lang) {
+    handleLanguageChange (lang) {
       this.$emit('lang-change', lang)
     }
   }

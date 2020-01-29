@@ -1,14 +1,13 @@
 # Basic
 ```html
-<div style="height: 200px;">
+<div>
   <n-anchor>
-    <n-anchor-link title="The Narrator" href="#the-narrator"/>
-    <n-anchor-link title="The Narrator's Shadow" href="#the-narrator-s-shadow"/>
-    <n-anchor-link title="The Gatekeeper" href="#the-gatekeeper"/>
-    <n-anchor-link title="The Librarian" href="#the-librarian">
-      <n-anchor-link title="The Colonel" href="#the-colonel"/>
-      <n-anchor-link title="The Caretaker" href="#the-caretaker"/> 
+    <n-anchor-link title="Demos" href="#Demos">
+      <n-anchor-link title="Basic" href="#basic"/>
+      <n-anchor-link title="Affix" href="#affix"/>
+      <n-anchor-link title="Scroll To" href="#scrollto"/>
     </n-anchor-link>
+    <n-anchor-link title="Props" href="#Props" />
   </n-anchor>
 </div>
 ```
