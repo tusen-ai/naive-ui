@@ -50,7 +50,9 @@
           v-if="title !== null"
           class="n-alert-body__title"
         >
-          {{ title }}
+          <slot name="header">
+            {{ title }}
+          </slot>
         </div>
         <div
           v-if="$slots.default"
@@ -67,7 +69,6 @@
 import NIcon from '../../Icon'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
-import asthemecontext from '../../../mixins/asthemecontext'
 import mdCheckmarkCircle from '../../../icons/md-checkmark-circle'
 import mdAlert from '../../../icons/md-alert'
 import mdInformationCircle from '../../../icons/md-information-circle'
@@ -86,12 +87,8 @@ export default {
     FadeInHeightExpandTransition,
     mdClose
   },
-  mixins: [ withapp, themeable, asthemecontext ],
+  mixins: [ withapp, themeable ],
   props: {
-    icon: {
-      type: String,
-      default: null
-    },
     title: {
       type: String,
       default: null
@@ -129,13 +126,13 @@ export default {
       this.visible = true
     },
     close () {
+      this.$emit('close')
       this.visible = false
     },
     handleCloseClick () {
       this.onClose(this.close)
     },
     handleAfterLeave () {
-      console.log('after-leave')
       this.$emit('after-close')
     }
   }

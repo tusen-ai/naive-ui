@@ -56,16 +56,16 @@ export default {
       return this.stickToBottom || this.stickToTop
     },
     synthesizedOffsetTop () {
-      return this.offsetTop || this.top
+      return this.offsetTop === null ? this.top : this.offsetTop
     },
     synthesizedTop () {
-      return this.top || this.offsetTop
+      return this.top === null ? this.offsetTop : this.top
     },
     synthesizedBottom () {
-      return this.bottom || this.offsetBottom
+      return this.bottom === null ? this.offsetBottom : this.bottom
     },
     synthesizedOffsetBottom () {
-      return this.offsetBottom || this.bottom
+      return this.offsetBottom === null ? this.bottom : this.offsetBottom
     },
     style () {
       const style = {}
