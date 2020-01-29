@@ -19,4 +19,4 @@ event
 ## Events
 |Name|Parameters|Description|
 |-|-|-|
-|change|(value)||
+|change|`(value)`||
