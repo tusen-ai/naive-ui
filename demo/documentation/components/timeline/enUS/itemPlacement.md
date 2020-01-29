@@ -9,24 +9,24 @@ Left. .thgiR
     type="success"
     title="Success"
     content="success content"
-    timestamp="2018-04-03 20:46"
+    time="2018-04-03 20:46"
   />
   <n-timeline-item
     type="error"
     content="Error content"
-    timestamp="2018-04-03 20:46"
+    time="2018-04-03 20:46"
   />
   <n-timeline-item
     type="warning"
     title="Warning"
     content="warning content"
-    timestamp="2018-04-03 20:46"
+    time="2018-04-03 20:46"
   />
   <n-timeline-item
     type="info"
     title="Info"
     content="info content"
-    timestamp="2018-04-03 20:46"
+    time="2018-04-03 20:46"
   />
 </n-timeline>
 ```
