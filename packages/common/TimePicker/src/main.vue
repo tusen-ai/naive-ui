@@ -56,7 +56,7 @@
                     :key="hour"
                     class="n-time-picker-selector-time-row__item"
                     :class="{
-                      'n-time-picker-selector-time-row__item--active': hour === computedHour,
+                      'n-time-picker-selector-time-row__item--active': Number(hour) === computedHour,
                       'n-time-picker-selector-time-row__item--disabled':
                         isHourDisabled(hour)
                     }"
@@ -82,7 +82,7 @@
                     :key="minute"
                     class="n-time-picker-selector-time-row__item"
                     :class="{
-                      'n-time-picker-selector-time-row__item--active': minute === computedMinute,
+                      'n-time-picker-selector-time-row__item--active': Number(minute) === computedMinute,
                       'n-time-picker-selector-time-row__item--disabled': isMinuteDisabled(minute, computedHour)
                     }"
                     @click="handleMinuteClick(minute)"
@@ -108,7 +108,7 @@
                     class="n-time-picker-selector-time-row__item"
                     :class="{
                       'n-time-picker-selector-time-row__item--active':
-                        second === computedSecond,
+                        Number(second) === computedSecond,
                       'n-time-picker-selector-time-row__item--disabled': isSecondDisabled(second, computedMinute, computedHour)
                     }"
                     @click="handleSecondClick(second)"
@@ -181,9 +181,6 @@ const TIME_CONST = {
   seconds: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59']
 }
 
-/**
- * Warning: this component shouldn't change v-model's timestamp's date
- */
 export default {
   name: 'NTimePicker',
   components: {
@@ -194,6 +191,10 @@ export default {
     clickoutside
   },
   mixins: [detachable, placeable, zindexable, withapp, themeable, asformitem()],
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
   props: {
     placeholder: {
       type: String,
@@ -296,12 +297,9 @@ export default {
       this.refreshTimeString(value)
       this.$nextTick().then(this.scrollTimer)
     },
-    value (value, oldValue) {
-      this.$emit('change', value, oldValue)
-    },
     active (value) {
       if (this.isValueInvalid) {
-        this.$emit('input', this.memorizedValue)
+        this.$emit('change', this.memorizedValue)
       }
     }
   },
@@ -330,9 +328,9 @@ export default {
             minutes: getMinutes(time),
             seconds: getSeconds(time)
           })
-          this.$emit('input', getTime(newTime))
+          this.$emit('change', getTime(newTime))
         } else {
-          this.$emit('input', getTime(time))
+          this.$emit('change', getTime(time))
         }
       }
     },
@@ -341,9 +339,9 @@ export default {
         return
       }
       if (this.value === null) {
-        this.$emit('input', getTime(setHours(startOfHour(new Date()), hour)))
+        this.$emit('change', getTime(setHours(startOfHour(new Date()), hour)))
       } else {
-        this.$emit('input', getTime(setHours(this.value, hour)))
+        this.$emit('change', getTime(setHours(this.value, hour)))
       }
       this.disableTransitionOneTick('hour')
     },
@@ -352,9 +350,9 @@ export default {
         return
       }
       if (this.value === null) {
-        this.$emit('input', getTime(setMinutes(startOfMinute(new Date()), minute)))
+        this.$emit('change', getTime(setMinutes(startOfMinute(new Date()), minute)))
       } else {
-        this.$emit('input', getTime(setMinutes(this.value, minute)))
+        this.$emit('change', getTime(setMinutes(this.value, minute)))
       }
       this.disableTransitionOneTick('minute')
     },
@@ -363,9 +361,9 @@ export default {
         return
       }
       if (this.value === null) {
-        this.$emit('input', getTime(setSeconds(startOfSecond(new Date()), second)))
+        this.$emit('change', getTime(setSeconds(startOfSecond(new Date()), second)))
       } else {
-        this.$emit('input', getTime(setSeconds(this.value, second)))
+        this.$emit('change', getTime(setSeconds(this.value, second)))
       }
       this.disableTransitionOneTick('second')
     },
@@ -434,7 +432,7 @@ export default {
       this.justifyValueAfterChangeDisplayTimeString()
     },
     handleCancelClick () {
-      this.$emit('input', this.memorizedValue)
+      this.$emit('change', this.memorizedValue)
       this.active = false
     },
     handleConfirmClick () {
