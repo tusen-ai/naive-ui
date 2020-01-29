@@ -111,9 +111,6 @@ $--header-bar-width: (
     &:first-child {
       margin-top: 0;
     }
-    &:last-child {
-      margin-bottom: 0;
-    }
     transition: color .3s $--n-ease-in-out-cubic-bezier;
     margin: 8px 0 8px 0;
     font-size: 14px;

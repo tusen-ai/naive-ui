@@ -1,9 +1,9 @@
 # Change Position
+For example: right 40px & bottom 160px.
 ```html
  <n-back-top
   :right="40"
   :bottom="160"
-  :visibility-height="200"
   :style="{
     transition: 'all .3s cubic-bezier(.4, 0, .2, 1)'
   }"

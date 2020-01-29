@@ -1,10 +1,16 @@
 export default {
   name: 'NBasePortal',
+  props: {
+    onMounted: {
+      type: Function,
+      default: null
+    }
+  },
   mounted () {
+    if (this.onMounted) this.onMounted()
     if (this.$el.parentElement && !this.elementTransferred) {
       this.$el.parentElement.removeChild(this.$el)
     }
-    // this.transferElement()
   },
   beforeDestroy () {
     if (document.body.contains(this.$el)) {
