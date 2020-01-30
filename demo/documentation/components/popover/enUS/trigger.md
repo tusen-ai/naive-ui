@@ -2,9 +2,7 @@
 ```html
 <n-popover placement="bottom" trigger="hover" style="margin-right: 12px;">
   <template v-slot:activator>
-    <n-button>
-      California Girls(Hover)
-    </n-button>
+    <n-button>Hover</n-button>
   </template>
   <span>
     I wish they all could be California girls
@@ -13,7 +11,7 @@
 <n-popover :show="showPopover" placement="bottom" trigger="manual">
   <template v-slot:activator>
     <n-button @click="showPopover = !showPopover">
-      California Girls(Manual)
+      Manual
     </n-button>
   </template>
   <span>
@@ -23,7 +21,7 @@
 <n-popover placement="bottom" trigger="click" style="margin-right: 12px;">
   <template v-slot:activator>
     <n-button>
-      California Girls(Click)
+      Click
     </n-button>
   </template>
   <span>

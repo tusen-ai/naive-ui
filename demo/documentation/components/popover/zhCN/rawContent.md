@@ -1,9 +1,9 @@
-# Raw Content
+# 不用基础样式
 ```html
 <n-popover raw :show-arrow="false">
   <template v-slot:activator>
     <n-button style="margin:0;">
-      Hover
+      悬浮
     </n-button>
   </template>
   <div

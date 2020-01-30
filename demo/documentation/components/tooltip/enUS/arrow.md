@@ -1,11 +1,11 @@
 # Arrow
 ```html
-<n-tooltip arrow>
+<n-tooltip show-arrow>
   <template v-slot:activator>
     <n-button>
-      hello tooltip
+      No, no arrow by default
     </n-button>
   </template>
-  This is the contextual help
+  Different from popover
 </n-tooltip>
 ```

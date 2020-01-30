@@ -9,7 +9,7 @@
     <n-popselect
       :value="activeFilterOptionValues"
       cancelable
-      :arrow="false"
+      :show-arrow="false"
       :multiple="column.filterMultiple === false ? false : true"
       :options="finalOptions"
       :loading="loading"

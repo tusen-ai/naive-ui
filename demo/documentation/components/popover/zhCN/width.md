@@ -1,11 +1,11 @@
-# Basic
+# 宽度
 ```html
-<n-popover>
+<n-popover :width="500">
   <template v-slot:activator>
     <n-button style="margin:0;">
-      Hover
+      宽度 500px
     </n-button>
   </template>
-  <span>Maybe I don't really want to know how your garden grows</span>
+  <span>长得像根条一样</span>
 </n-popover>
 ```

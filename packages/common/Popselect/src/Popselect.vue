@@ -41,7 +41,7 @@ export default {
       type: Object,
       default: null
     },
-    arrow: {
+    showArrow: {
       type: Boolean,
       default: true
     },

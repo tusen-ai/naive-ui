@@ -1,11 +1,11 @@
-# Placement
+# 箭头
 ```html
-<n-tooltip placement="top-start">
+<n-tooltip show-arrow>
   <template v-slot:activator>
     <n-button>
-      Top Start
+      是的，默认没有箭头
     </n-button>
   </template>
-  Woo, awesome!
+  和 Popover 不一样
 </n-tooltip>
 ```

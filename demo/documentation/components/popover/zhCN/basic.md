@@ -1,11 +1,11 @@
-# Basic
+# 基础用法
 ```html
 <n-popover>
   <template v-slot:activator>
     <n-button style="margin:0;">
-      Hover
+      悬浮
     </n-button>
   </template>
-  <span>Maybe I don't really want to know how your garden grows</span>
+  <span>或许不想知道你的花园长得咋样</span>
 </n-popover>
 ```

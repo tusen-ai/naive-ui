@@ -1,44 +1,42 @@
-# Trigger
+# 触发方式
 ```html
-<n-tooltip placement="bottom" trigger="hover">
+<n-popover placement="bottom" trigger="hover" style="margin-right: 12px;">
   <template v-slot:activator>
-    <n-button>
-      Hover
-    </n-button>
+    <n-button>悬浮</n-button>
   </template>
   <span>
     I wish they all could be California girls
   </span>
-</n-tooltip>
-<n-tooltip placement="bottom" trigger="click">
-  <template v-slot:activator>
-    <n-button>
-      Click
-    </n-button>
-  </template>
-  <span>
-    I wish they all could be California girls
-  </span>
-</n-tooltip>
-<n-tooltip :show="showPopover" placement="bottom" trigger="manual">
+</n-popover>
+<n-popover :show="showPopover" placement="bottom" trigger="manual">
   <template v-slot:activator>
     <n-button @click="showPopover = !showPopover">
-      Manual
+      手动
     </n-button>
   </template>
   <span>
     I wish they all could be California girls
   </span>
-</n-tooltip>
+</n-popover>
+<n-popover placement="bottom" trigger="click" style="margin-right: 12px;">
+  <template v-slot:activator>
+    <n-button>
+      点击
+    </n-button>
+  </template>
+  <span>
+    I wish they all could be California girls
+  </span>
+</n-popover>
 ```
 ```js
 export default {
   data() {
     return {
       showPopover: false
-    };
+    }
   }
-};
+}
 ```
 ```css
 .n-button {

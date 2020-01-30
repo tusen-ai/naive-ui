@@ -23,6 +23,10 @@ export default {
     },
     arrow: {
       type: Boolean,
+      default: undefined
+    },
+    showArrow: {
+      type: Boolean,
       default: true
     },
     trigger: {
@@ -31,11 +35,11 @@ export default {
     },
     delay: {
       type: Number,
-      default: 0
+      default: 200
     },
     duration: {
       type: Number,
-      default: 300
+      default: 200
     },
     raw: {
       type: Boolean,
@@ -120,6 +124,7 @@ export default {
         h(NPopoverContent, {
           props: {
             ...props,
+            arrow: props.arrow === undefined ? props.showArrow : props.arrow,
             controller,
             id
           },

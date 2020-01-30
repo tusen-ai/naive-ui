@@ -26,7 +26,7 @@
       <n-tooltip
         :delay="300"
         :placement="'top'"
-        :arrow="true"
+        :show-arrow="true"
         :controller="controller"
       >
         <template v-slot:activator>

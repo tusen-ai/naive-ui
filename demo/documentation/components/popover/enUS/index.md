@@ -39,5 +39,5 @@ manual-position
 ## Events
 |Name|Parameter|
 |-|-|
-|show|()|
-|hide|()|
+|show|`()`|
+|hide|`()`|

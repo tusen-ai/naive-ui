@@ -1,22 +1,21 @@
-# Max Width
-Setting max-width is sometimes more useful.
+# 最大宽度
+有时候设定最大宽度还是挺有用的。
 ```html
 <n-tooltip :max-width="400" trigger="click">
   <template v-slot:activator>
     <n-button>
-      California Girls
+      加州女孩
     </n-button>
   </template>
-  I wish they all could be California girls. I wish they all could be California
-  girls. I wish they all could be California girls.
+  我希望她们都是加州女孩，我希望她们都是加州女孩，我希望她们都是加州女孩
 </n-tooltip>
 <n-tooltip :max-width="400" trigger="click">
   <template v-slot:activator>
     <n-button>
-      California Girls
+      加州女孩
     </n-button>
   </template>
-  I wish ...
+  我希望...
 </n-tooltip>
 ```
 ```css

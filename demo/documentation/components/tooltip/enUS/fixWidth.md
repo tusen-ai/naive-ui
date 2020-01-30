@@ -1,11 +1,11 @@
-# Fix Width
+# Fixed Width
 ```html
-<n-tooltip placement="top-start">
+<n-tooltip placement="top-start" :width="240">
   <template v-slot:activator>
     <n-button>
-      hello tooltip
+       Could be short
     </n-button>
   </template>
-  This is the contextual help
+  Could be long
 </n-tooltip>
 ```

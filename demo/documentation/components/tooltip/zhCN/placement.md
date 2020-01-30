@@ -1,11 +1,11 @@
-# Placement
+# 位置
 ```html
 <n-tooltip placement="top-start">
   <template v-slot:activator>
     <n-button>
-      Top Start
+      上边一开始
     </n-button>
   </template>
-  Woo, awesome!
+  哇哦，Awesome！
 </n-tooltip>
 ```

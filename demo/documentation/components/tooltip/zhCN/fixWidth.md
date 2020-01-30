@@ -1,11 +1,11 @@
-# Placement
+# 定宽
 ```html
-<n-tooltip placement="top-start">
+<n-tooltip placement="top-start" :width="240">
   <template v-slot:activator>
     <n-button>
-      Top Start
+      可以很短
     </n-button>
   </template>
-  Woo, awesome!
+  可以很长
 </n-tooltip>
 ```
