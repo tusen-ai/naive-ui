@@ -44,7 +44,7 @@ button-group
 ### Radio, Radio Button
 |Name|Parameters|Description|
 |-|-|-|
-|change|(value)||
+|change|`(value)`||
 
 ### Radio Group
 |Name|Parameters|Description|
