@@ -89,7 +89,6 @@ export default {
   },
   methods: {
     close () {
-      console.log(this.controller)
       this.controller.hide()
     },
     handlePositiveClick () {

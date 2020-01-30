@@ -1,4 +1,5 @@
 # Event
+`positive-click` & `negative-click`
 ```html
 <n-popconfirm
   @positive-click="handlePositiveClick"
