@@ -40,6 +40,9 @@ function createRenderer (wrapCodeWithCard = true) {
     },
     codespan (code) {
       return `<n-text code>${code}</n-text>`
+    },
+    strong (text) {
+      return `<n-text strong>${text}</n-text>`
     }
   }
 

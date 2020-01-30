@@ -34,12 +34,29 @@ use-component
 |onClose|`(hide: function): any`|`hide => hide()`||
 
 ### ConfirmEnvironment API
-Property of ConfirmEnvironment can be modified or called.
+Properties of ConfirmEnvironment can be modified or called.
 
+#### ConfirmEnvironment Properties
 |Property|Type|Description|
 |-|-|-|
-|hide|`function`|Call this method can close the confirm|
-|...||See previous ConfirmOption API|
+|type|`'error \| 'success' \| 'warning'`||
+|title|`string`||
+|closable|`boolean`||
+|icon|`function`|Should be render function|
+|negative-text|`string \| function`|Can be render function|
+|positive-text|`string \| function`|Can be render function|
+|content|`string`||
+|show-icon|`boolean`||
+|loading|`boolean`||
+|bordered|`boolean`||
+|onPositiveClick|`(hide: function): any`||
+|onNegativeClick|`(hide: function): any`||
+|onClose|`(hide: function): any`||
+
+#### ConfirmEnvironment Methods
+|Method|Parameters|Description|
+|-|-|-|
+|hide|`()`|Call this method can close the confirm|
 
 ## Props
 ### Confirm Props
