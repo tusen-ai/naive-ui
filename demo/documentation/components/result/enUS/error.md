@@ -1,8 +1,8 @@
 # Error
 ```html
-<n-result status="error" title="Error" description="Alway related to a great mother.">
+<n-result status="error" title="Error" description="It's red">
   <template v-slot:footer>
-    <n-button>But I Don't Like It</n-button>
+    <n-button>I Don't Like It</n-button>
   </template>
 </n-result>
 ```

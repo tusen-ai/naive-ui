@@ -1,8 +1,8 @@
 # Success
 ```html
-<n-result status="success" title="Success" description="Son or daughter of failure, in many countries.">
+<n-result status="success" title="Success" description="child of failure">
   <template v-slot:footer>
-    <n-button>I Care Nothing About Its Gender</n-button>
+    <n-button>I like it</n-button>
   </template>
 </n-result>
 ```
