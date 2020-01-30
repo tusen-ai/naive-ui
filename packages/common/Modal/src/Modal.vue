@@ -14,6 +14,10 @@ export default {
     zindexable,
     themeable
   ],
+  model: {
+    prop: 'show',
+    event: 'hide'
+  },
   props: {
     activateEvent: {
       validator (e) {
@@ -21,7 +25,7 @@ export default {
       },
       default: null
     },
-    value: {
+    show: {
       type: Boolean,
       default: false
     },
@@ -31,15 +35,7 @@ export default {
     },
     preset: {
       type: String,
-      default: ''
-    },
-    title: {
-      type: String,
-      default: 'Title'
-    },
-    closable: {
-      type: Boolean,
-      default: true
+      default: null
     },
     /** to make zindexable work */
     detached: {
@@ -55,7 +51,7 @@ export default {
   },
   computed: {
     active () {
-      return this.value
+      return this.show
     }
   },
   watch: {
@@ -72,7 +68,7 @@ export default {
   },
   methods: {
     deactivate () {
-      this.$emit('input', false)
+      this.$emit('hide', false)
     }
   },
   render (h) {
@@ -83,13 +79,13 @@ export default {
           staticClass: 'n-modal-container',
           ref: 'contentContainer',
           class: {
-            'n-modal-container--active': this.value,
+            'n-modal-container--active': this.show,
             [this.namespace]: this.namespace
           }
         },
         [
           h(NModalOverlay, {
-            props: { active: this.value }
+            props: { active: this.show }
           }),
           h(NModalContent,
             {

@@ -1,4 +1,5 @@
 # Use Preset Card
+Modal has some presets, which means you can use props & slots of the preset after set it.
 ```html
 <n-button
   size="small"

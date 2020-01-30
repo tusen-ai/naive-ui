@@ -1,4 +1,5 @@
 # Use Preset Confirm (Slot)
+Slots are also related to preset.
 ```html
 <n-button
   size="small"

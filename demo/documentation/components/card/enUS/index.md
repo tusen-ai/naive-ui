@@ -21,7 +21,7 @@ closable
 |bordered|`boolean`|`true`||
 |closable|`boolean`|`false`||
 
-## Event
+## Events
 |Name|Parameters|Description|
 |-|-|-|
 |close|`()`||
