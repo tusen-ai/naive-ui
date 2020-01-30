@@ -37,7 +37,7 @@
       </n-icon>
     </div>
     <div class="n-confirm__content">
-      <slot name="content">
+      <slot>
         {{ content }}
       </slot>
     </div>
@@ -94,7 +94,7 @@ export default {
   props: {
     type: {
       type: String,
-      default: 'confirm'
+      default: 'warning'
     },
     title: {
       type: String,
@@ -114,7 +114,7 @@ export default {
     },
     content: {
       type: String,
-      default: 'content'
+      default: null
     },
     showIcon: {
       type: Boolean,
@@ -133,7 +133,7 @@ export default {
     iconType () {
       const colors = {
         error: 'ios-close-circle',
-        confirm: 'ios-help-circle',
+        warning: 'ios-help-circle',
         success: 'ios-checkmark-circle'
       }
       return colors[this.type]

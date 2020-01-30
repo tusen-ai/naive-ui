@@ -43,7 +43,7 @@
         }
       }
       @include b(confirm-title-icon) {
-        @include m(confirm-type) {
+        @include m(warning-type) {
           path {
             fill: $--warning-6;
           }

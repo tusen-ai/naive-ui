@@ -1,4 +1,5 @@
 # Use Component
+Sometimes you may want to use a component.
 ```html
 <n-confirm
   title="Confirm"
