@@ -12,7 +12,7 @@ no-icon
 |-|-|-|-|
 |title|`string`|`null`||
 |show-icon|`string`|`true`||
-|type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`|`default`||
+|type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'default'`||
 |closable|`boolean`|`false`||
 |on-close|`(next: function) => any`|`next => next()`|Call next to make alert close, nor it won't close|
 |on-after-close|`function`|`null`||

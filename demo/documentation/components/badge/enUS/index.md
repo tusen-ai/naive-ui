@@ -25,4 +25,4 @@ raw
 ## Slots
 |Name|Parameters|Description|
 |-|-|-|
-|default|()||
+|default|`()`||
