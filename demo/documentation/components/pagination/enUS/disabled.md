@@ -9,6 +9,7 @@
   show-quick-jumper
   :disabled="disabled"
   @page-size-change="handlePageSizeChange"
+  :style="{ marginBottom: '12px' }"
 />
 <n-switch v-model="disabled" />
 ```

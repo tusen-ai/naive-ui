@@ -11,11 +11,11 @@ vertical
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|title-placement|`'left'|'right'|'center'`|`'center'`||
+|title-placement|`'left' \| 'right' \| 'center'`|`'center'`||
 |dashed|`boolean`|`false`||
 |vertical|`boolean`|`false`||
 
 ## Slots
 |Name|Parameters|Description|
 |-|-|-|
-|default|()||
+|default|`()`||

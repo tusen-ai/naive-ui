@@ -37,7 +37,7 @@ Property of ConfirmEnvironment can be modified or called.
 |title|`string`|`'Confirm'`||
 |closable|`boolean`|`boolean`||
 |negative-text|`string`|`'Cancel'`||
-|positive-test|`string`|`null`||
+|positive-test|`string`|`'Confirm'`||
 |content|`string`|`null`||
 |show-icon|`boolean`|`true`||
 |loading|`boolean`|`false`||
