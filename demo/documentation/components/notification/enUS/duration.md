@@ -1,5 +1,5 @@
-# Duration & Update Notification
-I'm too tired to spilt it into two examples...
+# Duration
+Auto close.
 ```html
 <n-button @click="notify('info')">
   Duration: 10000

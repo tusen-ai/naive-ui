@@ -1,4 +1,4 @@
-# Closabe
+# Closable
 You can make it unclosable.
 ```html
 <n-button @click="notify('info')">

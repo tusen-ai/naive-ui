@@ -10,7 +10,7 @@ export default {
     },
     duration: {
       type: Number,
-      default: 0
+      default: null
     }
   },
   data () {
@@ -31,7 +31,7 @@ export default {
     }
   },
   mounted () {
-    if (this.duration) {
+    if (this.duration !== null) {
       window.setTimeout(this.close, this.duration)
     }
   },
