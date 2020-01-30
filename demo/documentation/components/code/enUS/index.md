@@ -24,3 +24,11 @@ NaiveUI.setHljs(hljs)
 ```demo
 basic
 ```
+
+## Props
+|Name|Type|Default|Description|
+|-|-|-|-|
+|language|`string`|`null`||
+|code|`string`|`null`||
+|trim|`boolean`|`true`||
+|hljs|`object`|`null`|If you want to set hljs locally, set it on code by the prop|

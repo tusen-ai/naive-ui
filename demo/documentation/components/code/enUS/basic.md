@@ -1,17 +1,19 @@
 # Basic
 ```html
-<n-code :code="`
+<div style="overflow: auto;">
+  <n-code :code="`
 function sleep (ms = 1000) {
   return new Promise(res => setTimeout(res, ms))
 }
 `" language="javascript" />
 
-<n-code :code="`
+  <n-code :code="`
 def say_hello():
     print('Hello Naive UI')
 `" language="python" />
 
-<n-code :code="cppCode" language="cpp" />
+  <n-code :code="cppCode" language="cpp" />
+</div>
 ```
 ```js
 export default {
