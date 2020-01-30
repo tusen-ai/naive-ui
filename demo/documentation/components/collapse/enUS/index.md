@@ -27,4 +27,4 @@ nested
 ## Event
 |Name|Parameters|Description|
 |-|-|-|
-|expand-names|(expandNames)||
+|expand-names|`(expandNames: Array<string>)`||

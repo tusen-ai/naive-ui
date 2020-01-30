@@ -36,13 +36,13 @@ debug
 ### Button
 |Name|Parameters|Description|
 |-|-|-|
-|default|()||
-|icon|()||
+|default|`()`||
+|icon|`()`||
 
 ### Button Group
 |Name|Parameters|Description|
 |-|-|-|
-|default|()||
+|default|`()`||
 
 ## Events
 ### Button

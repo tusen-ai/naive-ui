@@ -23,10 +23,10 @@ after-select
 ## Slots
 |Name|Parameters|Description|
 |-|-|-|
-|default|({ handleInput, handleFocus, handleBlur, value })||
+|default|`({ handleInput, handleFocus, handleBlur, value })`||
 
 ## Events
 |Name|Parameters|Description}
 |-|-|-|
-|input|(value)||
-|select|(value)||
+|input|`(value)`||
+|select|`(value)`||

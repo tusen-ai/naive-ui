@@ -24,13 +24,13 @@ closable
 ## Event
 |Name|Parameters|Description|
 |-|-|-|
-|close|()||
+|close|`()`||
 
 ## Slots
 |Name|Parameters|Description|
 |-|-|-|
-|header|()||
-|header-extra|()||
-|default|()||
-|footer|()||
-|action|()||
+|header|`()`||
+|header-extra|`()`||
+|default|`()`||
+|footer|`()`||
+|action|`()`||

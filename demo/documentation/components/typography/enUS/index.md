@@ -12,7 +12,7 @@ text
 ```
 
 ## Props
-### Text
+### Text Props
 |Name|Type|Default|Description|
 |-|-|-|-|
 |type|`'default' \| 'success' \| 'info' \| 'warning' \| 'error'`|`'default'`||
@@ -22,24 +22,24 @@ text
 |delete|`boolean`|`false`||
 |code|`boolean`|`false`||
 
-### H1, H2, H3, H4, H5, H6
+### H1, H2, H3, H4, H5, H6 Props
 |Name|Type|Default|Description|
 |-|-|-|-|
 |align-text|`boolean`|`false`||
 |type|`'default' \| 'success' \| 'info' \| 'warning' \| 'error'`|`'default'`||
 |prefix|`'bar'`|`null`||
 
-### A
+### A Props
 |Name|Type|Default|Description|
 |-|-|-|-|
 |to|`string`|`null`||
 
-### Ul, Ol
+### Ul, Ol Props
 |Name|Type|Default|Description|
 |-|-|-|-|
 |align-text|`boolean`|`false`||
 
-### Blockquote
+### Blockquote Props
 |Name|Type|Default|Description|
 |-|-|-|-|
 |align-text|`boolean`|`false`||

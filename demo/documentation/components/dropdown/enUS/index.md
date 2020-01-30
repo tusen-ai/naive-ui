@@ -33,7 +33,7 @@ manual-position
 ## Events
 |Name|Parameters|
 |-|-|
-|select|(selectedKey)|
+|select|`(selectedKey)`|
 
 
 

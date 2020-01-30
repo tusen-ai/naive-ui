@@ -20,4 +20,4 @@ name-size
 ## Slots
 |Name|Parameters|Description|
 |-|-|-|
-|default|()||
+|default|`()`||
