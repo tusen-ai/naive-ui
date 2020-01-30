@@ -20,10 +20,10 @@ mark
 |max|`number`|`100`||
 |step|`number`|`1`||
 |range|`boolean`|`false`||
-|value|`number \| Array<number>`|`null`|
+|value|`number \| [number, number]`|`null`|
 
 ## Events
 |Name|Parameters|Description|
 |-|-|-|
-|change|`(value)`||
+|change|`(value: number \| [number, number])`||
 

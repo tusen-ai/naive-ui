@@ -12,11 +12,11 @@ color
 |as|`string`|`'div'`||
 
 ## Slots
-|Name|Parameters|
-|-|-|
-|default|(theme, namespace, themeEnvironment, styleScheme)|
+|Name|Parameters|Description|
+|-|-|-|
+|default|`(theme: string, namespace: string, themeEnvironment: any, styleScheme: object)`||
 
 ## Events
 |Name|Parameters|
 |-|-|
-|theme-change|(theme, oldTheme)|
+|theme-change|`(theme: string)`|

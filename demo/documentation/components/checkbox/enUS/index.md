@@ -38,20 +38,20 @@ event
 ### Checkbox
 |Name|Parameters|Description|
 |-|-|-|
-|default|()||
+|default|`()`||
 
 ### Checkbox Group
 |Name|Parameters|Description|
 |-|-|-|
-|default|()||
+|default|`()`||
 
 ## Events
 ### Checkbox
 |Name|Parameters|Description|
 |-|-|-|
-|change|(checked)||
+|change|`(checked: boolean)`||
 
 ### Checkbox Group
 |Name|Paramaters|Description|
 |-|-|-|
-|change|(value)||
+|change|`(value: string \| number)`||

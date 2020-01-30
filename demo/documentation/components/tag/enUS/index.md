@@ -27,5 +27,5 @@ shape
 ## Events
 |Name|Parameter|Description|
 |-|-|-|
-|close|()|
-|checked-change|(checked)||
+|close|`()`|
+|checked-change|`(checked: boolean)`||

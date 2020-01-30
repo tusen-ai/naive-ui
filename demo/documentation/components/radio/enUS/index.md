@@ -44,9 +44,9 @@ button-group
 ### Radio, Radio Button
 |Name|Parameters|Description|
 |-|-|-|
-|change|`(value)`||
+|change|`(checkedValue: string \| number \| boolean)`||
 
 ### Radio Group
 |Name|Parameters|Description|
 |-|-|-|
-|change|(value)||
+|change|`(checkedValue: string \| number \| boolean)`||

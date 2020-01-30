@@ -48,4 +48,4 @@ debug
 ### Button
 |Name|Parameters|Description|
 |-|-|-|
-|click|(event)||
+|click|`(e: MouseEvent)`||

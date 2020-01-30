@@ -28,5 +28,5 @@ after-select
 ## Events
 |Name|Parameters|Description}
 |-|-|-|
-|input|`(value)`||
-|select|`(value)`||
+|input|`(value: string \| null)`||
+|select|`(value: string)`||

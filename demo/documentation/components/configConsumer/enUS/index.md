@@ -9,13 +9,13 @@ color
 ## Props
 
 ## Events
-|Name|Parameters|
-|-|-|
-|theme-change|(theme, oldTheme)|
-|namespace-change|(namespace, oldNamespace)|
-|language-change|(language, oldLanguage)|
+|Name|Parameters|Description|
+|-|-|-|
+|theme-change|`(theme: string)`||
+|namespace-change|`(namespace: string)`||
+|language-change|`(language: string)`||
 
 ## Slots
-|Name|Parameters|
-|-|-|
-|default|({ theme, namespace, language, themeEnvironment, styleScheme })|
+|Name|Parameters|Description|
+|-|-|-|
+|default|`({ theme: string, namespace: string, language: string, themeEnvironment: any, styleScheme: object })`||

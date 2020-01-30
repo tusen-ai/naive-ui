@@ -22,5 +22,5 @@ disabledTime
 ## Events
 |Name|Parameters|Description|
 |-|-|-|
-|change|(value)||
-|blur|(value)||
+|change|`(value: number \| null)`||
+|blur|`(value: number \| null)`||

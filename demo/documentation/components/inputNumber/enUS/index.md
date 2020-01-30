@@ -30,5 +30,5 @@ validator
 ## Events
 |Name|Parameters|Description|
 |-|-|-|
-|change|`(value)`||
-|blur|`(value)`||
+|change|`(value: number)`||
+|blur|`(value: number \| null)`||

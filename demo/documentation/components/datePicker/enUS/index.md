@@ -59,16 +59,14 @@ events
 |is-time-disabled|`(current: number) => { isHourDisabled: boolean, isMinuteDisabled: boolean, isSecondDisabled: boolean }`|`() => ({ isHourDisabled: () => false, isMinuteDisabled: () => false, isSecondDisabled: () => false }})`||
 
 ## Events
-
-
 ### Date, DateTime
 |Name|Parameters|Description|
 |-|-|-|
-|change|(currentValue: number \| null)||
-|blur|(currentValue: number \| null)||
+|change|`(currentValue: number \| null)`||
+|blur|`(currentValue: number \| null)`||
 
 ### DateRange, DateTimeRange
 |Name|Parameters|Description|
 |-|-|-|
-|change|(currentValue: [number, number] \| null)||
-|blur|(currentValue: [number, number] \| null)||
+|change|`(currentValue: [number, number] \| null)`||
+|blur|`(currentValue: [number, number] \| null)`||

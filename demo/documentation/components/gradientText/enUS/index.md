@@ -14,5 +14,5 @@ custom
 |Name|Type|Default|Description|
 |-|-|-|-|
 |type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`||required|
-|size|`number`|null||
-|gradient|`string \| object`|null||
+|size|`number`|`null`||
+|gradient|`string \| object`|`null`||

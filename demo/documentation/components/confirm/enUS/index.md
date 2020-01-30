@@ -13,7 +13,7 @@ use-component
 |-|-|-|
 |warning|`(options: ConfirmOption) : ConfirmEnvironment`||
 |success|`(options: ConfirmOption) : ConfirmEnvironment`||
-|error|`(options: ConfirmOption) => ConfirmEnvironment`||
+|error|`(options: ConfirmOption) : ConfirmEnvironment`||
 |destroyAll|`function`||
 
 ### ConfirmOption API
