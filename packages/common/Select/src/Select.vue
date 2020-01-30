@@ -41,15 +41,14 @@
     />
     <div
       ref="contentContainer"
-      v-clickoutside="handleClickOutsideMenu"
-      class="n-detached-content-container n-select-detached-content-container"
+      class="n-positioning-container"
       :class="{
         [namespace]: namespace
       }"
     >
       <div
         ref="content"
-        class="n-detached-content-content"
+        class="n-positioning-content"
       >
         <transition
           name="n-select-menu--transition"
@@ -58,6 +57,7 @@
           <n-base-select-menu
             v-if="active"
             ref="contentInner"
+            v-clickoutside="handleClickOutsideMenu"
             class="n-select-menu"
             auto-pending-first-option
             :theme="synthesizedTheme"

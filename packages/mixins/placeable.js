@@ -4,12 +4,33 @@ import getParentNode from '../utils/dom/getParentNode'
 import getScrollParent from '../utils/dom/getScrollParent'
 import { getAdjustedPlacementOfTrackingElement, getTransformOriginByPlacement, getPosition } from '../utils/dom/calcPlacementTransform'
 
+let viewMeasurerInitialized = false
+let viewMeasurer = null
+
+if (!viewMeasurerInitialized && !document.getElementById('n-view-measurer')) {
+  viewMeasurer = document.createElement('div')
+  viewMeasurer.id = 'n-view-measurer'
+  viewMeasurer.style = `
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    pointer-events: none;
+    visibility: hidden;
+  `
+  viewMeasurerInitialized = true
+  document.body.appendChild(viewMeasurer)
+}
+
 function getActivatorEl (componentInstance) {
-  return componentInstance.$refs.activator.$el || componentInstance.$refs.activator
+  const refs = componentInstance.$refs
+  return refs.activator.$el || refs.activator
 }
 
 function getContentEl (componentInstance) {
-  return componentInstance.$refs.content.$el || componentInstance.$refs.content
+  const refs = componentInstance.$refs
+  return refs.content.$el || refs.content
 }
 
 function getContentInner (instance) {
@@ -17,25 +38,37 @@ function getContentInner (instance) {
   return (contentInnerRef && contentInnerRef.$el) || contentInnerRef || null
 }
 
-function getActivatorRect (manuallyPositioned, x, y, trackedElement) {
+function getViewBoundingRect () {
+  const containerBoundingRect = viewMeasurer.getBoundingClientRect()
+  return {
+    left: containerBoundingRect.left,
+    top: containerBoundingRect.top,
+    right: containerBoundingRect.right,
+    bottom: containerBoundingRect.bottom,
+    width: containerBoundingRect.width,
+    height: containerBoundingRect.height
+  }
+}
+
+function getActivatorRect (manuallyPositioned, x, y, trackedElement, viewBoundingRect) {
   if (manuallyPositioned) {
     return {
       top: y,
       left: x,
       height: 0,
       width: 0,
-      right: window.innerWidth - x,
-      bottom: window.innerHeight - y
+      right: viewBoundingRect.width - x,
+      bottom: viewBoundingRect.height - y
     }
   } else {
     const activatorRect = trackedElement.getBoundingClientRect()
     return {
-      left: parseInt(activatorRect.left),
-      top: parseInt(activatorRect.top),
-      bottom: parseInt(window.innerHeight - activatorRect.bottom),
-      right: parseInt(window.innerWidth - activatorRect.right),
-      width: parseInt(activatorRect.width),
-      height: parseInt(activatorRect.height)
+      left: activatorRect.left - viewBoundingRect.left,
+      top: activatorRect.top - viewBoundingRect.top,
+      bottom: viewBoundingRect.height + viewBoundingRect.top - activatorRect.bottom,
+      right: viewBoundingRect.width + viewBoundingRect.left - activatorRect.right,
+      width: activatorRect.width,
+      height: activatorRect.height
     }
   }
 }
@@ -177,14 +210,16 @@ export default {
   },
   methods: {
     _getTrackingElement () {
-      if (this.$refs && this.$refs.content) {
+      const refs = this.$refs
+      if (refs && refs.content) {
         this.trackingElement = getContentEl(this)
       } else if (this.getTrackingElement) {
         this.trackingElement = this.getTrackingElement()
       }
     },
     _getTrackedElement () {
-      if (this.$refs && this.$refs.activator) {
+      const refs = this.$refs
+      if (refs && refs.activator) {
         this.trackedElement = getActivatorEl(this)
       } else if (this.getTrackedElement) {
         this.trackedElement = this.getTrackedElement()
@@ -221,7 +256,8 @@ export default {
         }
       }
       // debugger
-      const activatorRect = getActivatorRect(this.manuallyPositioned, this.x, this.y, this.trackedElement)
+      const viewBoundingRect = getViewBoundingRect()
+      const activatorRect = getActivatorRect(this.manuallyPositioned, this.x, this.y, this.trackedElement, viewBoundingRect)
       const contentInner = getContentInner(this)
       if (this.widthMode === 'activator' && contentInner) {
         contentInner.style.minWidth = activatorRect.width + 'px'

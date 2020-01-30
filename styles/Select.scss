@@ -42,9 +42,6 @@
         font-size: 15px;
       }
     }
-    @include b(select-detached-content-container) {
-      transform: translateZ(0);
-    }
     @include b(select-menu) {
       @include fade-in-scale-up-transition(select-menu, $original-transition: (background-color .3s $--n-ease-in-out-cubic-bezier));
     }

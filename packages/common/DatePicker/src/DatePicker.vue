@@ -54,19 +54,19 @@
     </n-input>
     <div
       ref="contentContainer"
-      class="n-detached-content-container n-date-picker-detached-content-container"
+      class="n-positioning-container"
       :class="{
         [namespace]: namespace
       }"
     >
       <div
         ref="content"
-        v-clickoutside="handleClickOutside"
-        class="n-dateched-content"
+        class="n-positioning-content"
       >
         <datetime-panel
           v-if="type === 'datetime'"
           ref="panel"
+          v-clickoutside="handleClickOutside"
           :value="value"
           :active="active"
           :actions="actions"
@@ -80,6 +80,7 @@
         <date-panel
           v-else-if="type === 'date'"
           ref="panel"
+          v-clickoutside="handleClickOutside"
           :value="value"
           :active="active"
           :actions="actions"
@@ -92,6 +93,7 @@
         <daterange-panel
           v-else-if="type === 'daterange'"
           ref="panel"
+          v-clickoutside="handleClickOutside"
           :value="value"
           :active="active"
           :actions="actions"
@@ -105,6 +107,7 @@
         <datetimerange-panel
           v-else-if="type === 'datetimerange'"
           ref="panel"
+          v-clickoutside="handleClickOutside"
           :value="value"
           :active="active"
           :actions="actions"

@@ -68,14 +68,14 @@
     </div>
     <div
       ref="contentContainer"
-      class="n-detached-content-container n-slider-detached-content-container"
+      class="n-positioning-container"
       :class="{
         [namespace]: namespace
       }"
     >
       <div
         ref="content"
-        class="n-detached-content"
+        class="n-positioning-content"
       >
         <transition name="n-fade-in-scale-up--transition">
           <div

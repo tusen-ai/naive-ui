@@ -227,7 +227,7 @@ export default {
   },
   render (h) {
     return h('div', {
-      staticClass: 'n-detached-content-container',
+      staticClass: 'n-positioning-container',
       class: {
         [this.containerClass]: true,
         [this.namespace]: this.namespace
@@ -235,7 +235,7 @@ export default {
       ref: 'contentContainer'
     }, [
       h('div', {
-        staticClass: 'n-detached-content',
+        staticClass: 'n-positioning-content',
         ref: 'content'
       }, [
         h('transition', {

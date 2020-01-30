@@ -6,7 +6,6 @@
       'n-base-select-menu--multiple': multiple,
       [`n-${theme}-theme`]: theme
     }"
-
     :style="{
       width: width && (width + 'px')
     }"

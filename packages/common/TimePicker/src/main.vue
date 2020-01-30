@@ -21,9 +21,9 @@
     />
     <div
       ref="contentContainer"
-      class="n-detached-content-container n-time-picker-detached-content-container"
+      class="n-positioning-container"
       :class="{
-        'n-detached-content-container--absolute-positioned': positionModeisAbsolute,
+        'n-positioning-container--absolute': positionModeisAbsolute,
         [namespace]: namespace
       }"
     >

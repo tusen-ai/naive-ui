@@ -97,17 +97,17 @@ export default {
       }
     }
   },
-  created () {
-    console.log('dropdown menu created')
-  },
-  beforeDestroy () {
-    console.log('dropdown menu beforeDestroy')
-  },
-  destroyed () {
-    console.log('dropdown menu destroyed')
-  },
+  // created () {
+  //   console.log('dropdown menu created')
+  // },
+  // beforeDestroy () {
+  //   console.log('dropdown menu beforeDestroy')
+  // },
+  // destroyed () {
+  //   console.log('dropdown menu destroyed')
+  // },
   mounted () {
-    console.log('dropdown menu mounted')
+    // console.log('dropdown menu mounted')
     if (this.defaultFocus && this.focusable) {
       this.$el.focus()
     }
@@ -219,6 +219,9 @@ export default {
           size: this.size,
           isOptionSelected: () => false,
           theme: this.synthesizedTheme
+        },
+        style: {
+          overflow: 'visible'
         },
         on: {
           'menu-toggle-option': option => {
