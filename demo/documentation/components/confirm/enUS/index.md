@@ -8,26 +8,38 @@ async
 use-component
 ```
 ## API
-### $NConfirm
-|Method|Description|
-|-|-|
-|`open(options: ConfirmOption) : ConfirmEnvironment`||
-|`success(options: ConfirmOption) : ConfirmEnvironment`||
-|`error(options: ConfirmOption) : ConfirmEnvironment`||
-|`destroyAll()`||
+### $NConfirm API
+|Property|Type|Description|
+|-|-|-|
+|warning|`(options: ConfirmOption) : ConfirmEnvironment`||
+|success|`(options: ConfirmOption) : ConfirmEnvironment`||
+|error|`(options: ConfirmOption) => ConfirmEnvironment`||
+|destroyAll|`function`||
 
-### ConfirmOption
-See following Confirm Props.
+### ConfirmOption API
+|Name|Type|Default|Description|
+|-|-|-|-|
+|type|`'error \| 'success' \| 'warning'`|`'warning'`||
+|title|`string`|`'Confirm'`||
+|closable|`boolean`|`boolean`||
+|icon|`function`|`null`|Should be render function|
+|negative-text|`string \| function`|`'Cancel'`|Can be render function|
+|positive-text|`string \| function`|`'Confirm'`|Can be render function|
+|content|`string`|`null`||
+|show-icon|`boolean`|`true`||
+|loading|`boolean`|`false`||
+|bordered|`boolean`|`false`||
+|onPositiveClick|`(hide: function): any`|`hide => hide()`||
+|onNegativeClick|`(hide: function): any`|`hide => hide()`|
+|onClose|`(hide: function): any`|`hide => hide()`||
 
-### ConfirmEnvironment
+### ConfirmEnvironment API
 Property of ConfirmEnvironment can be modified or called.
 
 |Property|Type|Description|
 |-|-|-|
-|onPositiveClick|`(hide: function): any`||
-|onNegativeClick|`(hide: function): any`||
-|onClose|`(hide: function): any`||
-|...||See following Confirm Props|
+|hide|`function`|Call this method can close the confirm|
+|...||See previous ConfirmOption API|
 
 ## Props
 ### Confirm Props
@@ -36,8 +48,9 @@ Property of ConfirmEnvironment can be modified or called.
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
 |title|`string`|`'Confirm'`||
 |closable|`boolean`|`boolean`||
-|negative-text|`string`|`'Cancel'`||
-|positive-test|`string`|`'Confirm'`||
+|icon|`function`|`null`|Should be render function|
+|negative-text|`string \| function`|`'Cancel'`|Can be render function|
+|positive-text|`string \| function`|`'Confirm'`|Can be render function|
 |content|`string`|`null`||
 |show-icon|`boolean`|`true`||
 |loading|`boolean`|`false`||
