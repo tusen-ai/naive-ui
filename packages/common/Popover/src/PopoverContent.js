@@ -66,10 +66,6 @@ export default {
       type: String,
       default: undefined
     },
-    detached: {
-      type: Boolean,
-      default: true
-    },
     overlayClass: {
       type: String,
       default: null
@@ -77,6 +73,11 @@ export default {
     overlayStyle: {
       type: Object,
       default: undefined
+    },
+    /** to make zindexable work */
+    detached: {
+      type: Boolean,
+      default: true
     }
   },
   mixins: [withapp, themeable, asthemecontext, placeable, zindexable],

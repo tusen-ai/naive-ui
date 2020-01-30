@@ -29,7 +29,7 @@
     >
       <div
         ref="content"
-        class="n-detached-content"
+        class="n-positioning-content"
       >
         <transition name="n-time-picker--transition">
           <div

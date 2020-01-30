@@ -325,7 +325,7 @@ export default {
     },
     handlePickerBlur () {
       this.$emit('blur', this.value)
-      // this.closeMenu()
+      this.closeMenu()
     },
     handleClickOutsideMenu (e) {
       if (this.active) {

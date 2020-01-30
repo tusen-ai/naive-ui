@@ -41,6 +41,7 @@ export default {
       type: Boolean,
       default: true
     },
+    /** to make zindexable work */
     detached: {
       type: Boolean,
       default: true
