@@ -37,7 +37,7 @@ export default {
     labelAlign: {
       default: 'left',
       validator (value) {
-        return ['left', 'top'].includes(value)
+        return ['left', 'right', 'center'].includes(value)
       }
     },
     size: {

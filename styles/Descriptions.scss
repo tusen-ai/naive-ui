@@ -57,6 +57,13 @@
       @include descriptions-size-mixin('small');
       @include descriptions-size-mixin('medium');
       @include descriptions-size-mixin('large');
+      @include m(left-label-placement) {
+        @include b(descriptions-table-content) {
+          & > * {
+            vertical-align: top;
+          }
+        }
+      }
       @include m(left-label-align) {
         th {
           text-align: left;
