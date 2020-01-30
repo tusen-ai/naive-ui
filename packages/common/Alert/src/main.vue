@@ -111,7 +111,7 @@ export default {
       type: Function,
       default: next => next()
     },
-    onAfterClose: {
+    onAfterHide: {
       type: Function,
       default: () => {}
     }
@@ -133,7 +133,7 @@ export default {
       this.onClose(this.close)
     },
     handleAfterLeave () {
-      this.$emit('after-close')
+      this.$emit('after-hide')
     }
   }
 }

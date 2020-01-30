@@ -13,12 +13,12 @@ export default {
         title: `Close Me if You Can`,
         duration: 2000,
         closable: false,
-        onAfterClose: () => {
+        onAfterHide: () => {
           this.$NNotification.open({
             title: `Ha Ha Ha Ha!`,
             duration: 2000,
             closable: false,
-            onAfterClose: () => {
+            onAfterHide: () => {
               this.$NNotification.open({
                 title: `No, You Can't`,
                 duration: 2000,

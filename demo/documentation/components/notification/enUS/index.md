@@ -33,12 +33,13 @@ duration
 |action|`string \| function`|`null`|Can be render function|
 |closable|`boolean`|`true`||
 |onClose|`(next: function) => any`|`next => next()`|Only if next is called notification will close|
-|onAfterClose|`function`|`null`||
-|onAfterOpen|`function`|`null`||
+|onAfterHide|`function`|`null`||
+|onAfterShow|`function`|`null`||
 |duration|`number`|`null`|If not set, it won't automatically close|
 
 ### NotificationEnvironment API
-Property of Instance of NofiticationEnvironment can be dynamically set.
+#### NotificationEnvironment Properties
+Properties of Instance of NofiticationEnvironment can be dynamically set.
 
 |Property|Type|Description|
 |-|-|-|
@@ -49,6 +50,12 @@ Property of Instance of NofiticationEnvironment can be dynamically set.
 |meta|`string \| function`|Can be render function|
 |action|`string \| function`|Can be render function|
 |closable|`boolean`||
-|onClose|`(next: function) => any`|Only if next is called notification will close|
-|onAfterClose|`function`||
-|onAfterOpen|`function`||
+|onClose|`(next: function) => any`|Close mark is clicked. Only if next is called notification will close|
+|onHide|`function`||
+|onAfterHide|`function`||
+|onAfterShow|`function`||
+
+#### NotificationEnvironment Methods
+|Method|Type|Description|
+|-|-|-|
+|hide|`()`||

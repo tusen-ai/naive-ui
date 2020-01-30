@@ -15,7 +15,7 @@ export default {
         content: `You have ${count} seconds to answer the question.`,
         duration: 10000,
         closable: false,
-        onAfterOpen: () => {
+        onAfterShow: () => {
           const minusCount = () => {
             count--
             notification.content = `You have ${count} seconds to answer the question.`
@@ -25,7 +25,7 @@ export default {
           }
           window.setTimeout(minusCount, 1000)
         },
-        onAfterClose: () => {
+        onAfterHide: () => {
           this.$NNotification.open({
             title: `The Answer is Pingshan River!`,
             content: 'Oops, that is not even an anti-humor.',

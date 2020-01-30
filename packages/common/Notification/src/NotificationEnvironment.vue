@@ -26,20 +26,21 @@ export default {
       action: null,
       closable: true,
       onClose: next => next(),
-      onAfterOpen: () => {},
-      onAfterClose: () => {}
+      onHide: () => {},
+      onAfterShow: () => {},
+      onAfterHide: () => {}
     }
   },
   mounted () {
     if (this.duration !== null) {
-      window.setTimeout(this.close, this.duration)
+      window.setTimeout(this.hide, this.duration)
     }
   },
   methods: {
     deactivate () {
-      this.close()
+      this.hide()
     },
-    close () {
+    hide () {
       this.active = false
     },
     handleEnter () {
@@ -55,7 +56,7 @@ export default {
     handleAfterEnter () {
       this.$el.style.height = null
       this.$el.style.maxHeight = null
-      this.onAfterOpen(this)
+      this.onAfterShow(this)
     },
     handleBeforeLeave () {
       this.$el.style.maxHeight = this.$el.offsetHeight + 'px'
@@ -63,15 +64,16 @@ export default {
       this.$el.getBoundingClientRect()
     },
     handleLeave () {
+      this.onHide()
       this.$el.style.maxHeight = 0
       this.$el.getBoundingClientRect()
     },
     handleAfterLeave () {
       this.onDestroy(this)
-      this.onAfterClose()
+      this.onAfterHide()
     },
     handleClose () {
-      this.onClose(this.close)
+      this.onClose(this.hide)
     }
   },
   render (h) {

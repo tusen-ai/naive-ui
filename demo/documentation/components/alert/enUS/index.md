@@ -15,7 +15,7 @@ no-icon
 |type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'default'`||
 |closable|`boolean`|`false`||
 |on-close|`(next: function) => any`|`next => next()`|Call next to make alert close, nor it won't close|
-|on-after-close|`function`|`null`||
+|on-after-hide|`function`|`null`||
 
 ## Slots
 |Name|Parameters|Description|
@@ -28,4 +28,4 @@ no-icon
 |Name|Parameters|Description|
 |-|-|-|
 |close|`()`||
-|after-close|`()`||
+|after-hide|`()`||
