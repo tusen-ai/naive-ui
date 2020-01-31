@@ -49,12 +49,15 @@ export default {
       return !this.NSubmenu && !this.NMenuItemGroup
     },
     paddingLeft () {
+      if (this.isFirstLevel) {
+        return this.NMenu.rootIndent === null ? this.NMenu.indent : this.NMenu.rootIndent
+      }
       if (this.NMenuItemGroup) {
         return this.NMenu.indent / 2 + this.NMenuItemGroup.paddingLeft
       } else if (this.NSubmenu) {
         return this.NMenu.indent / 2 + this.NSubmenu.paddingLeft
       } else {
-        return (this.NMenu.rootIndent || this.NMenu.indent) / 2
+        return this.NMenu.indent / 2
       }
     }
   },
