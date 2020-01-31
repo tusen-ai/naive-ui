@@ -4,14 +4,12 @@
 
 DataTable is used to displays rows of data.
 
-## When To Use
-
-- To display a collection of structured data.
-- To sort, search, paginate, filter data.
-
 ## Demos
 <n-alert type="warning" title="Caveat" style="margin-bottom: 16px;">
-  Every row data needs a unique key property.
+  <n-ol align-text>
+    <n-li>Every row data needs a unique key property.</n-li>
+    <n-li>In controlled manner, you'd better specify all the properies you may use in advance. Since Vue cannot detect normal property additions.</n-li>
+  </n-ol>
 </n-alert>
 
 ```demo
