@@ -187,6 +187,7 @@
           width: 36px;
           top: 0;
           bottom: 0;
+          cursor: pointer;
           @include e(icon-wrapper) {
             position: absolute;
             right: 0;

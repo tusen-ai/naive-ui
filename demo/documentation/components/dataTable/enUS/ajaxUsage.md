@@ -7,6 +7,7 @@
   :data="data"
   :loading="loading"
   :pagination="pagination"
+  :row-key="rowKey"
   @sorter-change="handleSorterChange"
   @filters-change="handleFiltersChange"
   @page-change="handlePageChange"
@@ -70,6 +71,9 @@ export default {
     })
   },
   methods: {
+    rowKey (data) {
+      return data.id.value
+    },
     getData (params = {}) {
       this.loading = true
       !params.results && (params.results = 8)

@@ -1,7 +1,7 @@
 # Custom Style
+Row: Set `row-class-name` prop to assign a class name to certain rows.
 
-> Row: Set row-class-name prop with a function to assign a class name to certain rows.
-> Column: Set className key to columns prop's object to assign a class name to a certain column.
+Column: Set `className` property on column object to assign a class name to a certain column.
 
 ```html
 <n-data-table
@@ -15,22 +15,22 @@
 ```js
 const data = [
   {
-    key: "1",
-    name: "John Brown",
+    key: 0,
+    name: 'John Brown',
     age: 32,
-    address: "New York No. 1 Lake Park"
+    address: 'New York No. 1 Lake Park'
   },
   {
-    key: "2",
-    name: "Jim Green",
+    key: 1,
+    name: 'Jim Green',
     age: 42,
-    address: "London No. 1 Lake Park"
+    address: 'London No. 1 Lake Park'
   },
   {
-    key: "3",
-    name: "Joe Black",
+    key: 2,
+    name: 'Joe Black',
     age: 32,
-    address: "Sidney No. 1 Lake Park"
+    address: 'Sidney No. 1 Lake Park'
   }
 ]
 
@@ -40,17 +40,17 @@ export default {
       data: data,
       columns: [
         {
-          title: "Name",
-          key: "name"
+          title: 'Name',
+          key: 'name'
         },
         {
-          title: "Age",
-          key: "age",
-          className: "age"
+          title: 'Age',
+          key: 'age',
+          className: 'age'
         },
         {
-          title: "Address",
-          key: "address"
+          title: 'Address',
+          key: 'address'
         }
       ]
     }
@@ -58,7 +58,7 @@ export default {
   methods: {
     rowClassName(row, index) {
       if (row.age > 32) {
-        return "too-old"
+        return 'too-old'
       }
       return null
     }
@@ -67,10 +67,13 @@ export default {
 ```
 
 ```css
-/deep/ .too-old {
-  color: red
+/deep/ .too-old td {
+  color: rgba(255, 0, 0, .75) !important;
 }
 /deep/ .age {
-  background: skyblue
+  color: rgba(0, 128, 0, .75) !important;
+}
+/deep/ .too-old .age {
+  color: rgba(0, 0, 128, .75) !important;
 }
 ```
