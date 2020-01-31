@@ -1,25 +1,17 @@
 # Custom Indicator
+You can custom the indicator.
 ```html
 <n-progress
   type="circle"
   :percentage="20"
 >
-  666
+  <span style="text-align: center;">20% is small</span>
 </n-progress>
 <n-progress
   type="line"
   status="success"
   :percentage="20"
 >
-  666
-</n-progress>
-<n-progress
-  type="multiple-circle"
-  :view-box-width="200"
-  :circle-gap="1"
-  :stroke-width="16"
-  :percentage="[50, 25]"
->
-  666
+  Don't put too much content here.
 </n-progress>
 ```

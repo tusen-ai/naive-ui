@@ -1,4 +1,5 @@
 # Line
+In fact, progress of line type don't need four different styles. However, since UI has designed it, I finally implemented them all. It also support `default`, `info`, `success`, `warning` or `error` status.
 ```html
 <n-progress
   type="line"
@@ -8,7 +9,6 @@
 <n-progress
   type="line"
   :percentage="percentage"
-  processing
 />
 <n-progress
   type="line"
@@ -141,5 +141,8 @@ export default {
 ```css
 .n-progress {
   margin-bottom: 8px;
+}
+.n-button {
+  margin: 0 8px 12px 0;
 }
 ```

@@ -22,7 +22,7 @@
               <path
                 class="n-progress-graph-circle-rail"
                 d="m 55 5 a 50 50 0 1 1 0 100 a 50 50 0 1 1 0 -100"
-                :stroke-width="strokeWidth"
+                :stroke-width="strokeWidth * 1.1"
                 stroke-linecap="round"
                 fill="none"
                 :style="{
@@ -35,7 +35,7 @@
               <path
                 class="n-progress-graph-circle-fill"
                 d="m 55 5 a 50 50 0 1 1 0 100 a 50 50 0 1 1 0 -100"
-                :stroke-width="strokeWidth"
+                :stroke-width="strokeWidth * 1.1"
                 stroke-linecap="round"
                 fill="none"
                 :style="{
@@ -135,12 +135,18 @@
         <div
           v-if="$slots.default"
           class="n-progress-custom-content"
+          :style="{
+            color: indicatorTextColor
+          }"
         >
           <slot />
         </div>
         <div
           v-else-if="status === 'default'"
           class="n-progress-icon n-progress-icon--as-text"
+          :style="{
+            color: indicatorTextColor
+          }"
         >
           {{ percentage }}{{ unit }}
         </div>
@@ -277,7 +283,7 @@ export default {
     },
     strokeWidth: {
       type: Number,
-      default: 8
+      default: 7
     },
     percentage: {
       type: [Number, Array],
