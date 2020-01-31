@@ -38,7 +38,7 @@
       @include b(icon) {
         font-size: $icon-size;
       }
-      @include b(spin) {
+      @include b(base-loading) {
         height: $icon-size;
         width: $icon-size;
         position: absolute;

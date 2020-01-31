@@ -29,10 +29,11 @@
         :class="{ 'n-button__icon--slot': $slots.icon }"
       >
         <n-icon-switch-transition>
-          <n-spin
+          <n-base-loading
             v-if="loading"
             key="loading"
             class="n-icon-slot"
+            :theme="synthesizedTheme"
             :style="{
               transition: hollowOutColorTransitionDisabled ? 'none' : null
             }"
@@ -74,13 +75,15 @@
         }"
       >
         <n-icon-switch-transition>
-          <n-spin
+          <n-base-loading
             v-if="loading"
             key="loading"
+            :theme="synthesizedTheme"
             :style="{
               transition: hollowOutColorTransitionDisabled ? 'none' : null
             }"
             :stroke="simulateHollowOut ? ascendantBackgroundColor : null"
+            :stroke-width="24"
           />
           <n-icon
             v-else
@@ -102,7 +105,7 @@
 </template>
 
 <script>
-import NSpin from '../../Spin'
+import NBaseLoading from '../../../base/Loading'
 import NFadeInHeightExpandTransition from '../../../transition/FadeInHeightExpandTransition'
 import hollowoutable from '../../../mixins/hollowoutable'
 import withapp from '../../../mixins/withapp'
@@ -113,7 +116,7 @@ import NIconSwitchTransition from '../../../transition/IconSwitchTransition'
 export default {
   name: 'NButton',
   components: {
-    NSpin,
+    NBaseLoading,
     NIcon,
     NIconSwitchTransition,
     NFadeInHeightExpandTransition

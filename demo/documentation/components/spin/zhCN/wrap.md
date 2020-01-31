@@ -1,5 +1,5 @@
-# Wrap
-You can wrap a component inside spin. To match regular components's size, spin alse provides `in-small`, `in-medium` and `in-large` sizes.
+# 填充内容
+你可以把其他内容包裹在 Spin 中。为了匹配一些常用组件的尺寸，Spin 还提供 `in-small`、`in-medium` 和 `in-large` 的尺寸。
 ```html
 <div
 >
@@ -9,7 +9,7 @@ You can wrap a component inside spin. To match regular components's size, spin a
     :spinning="spinning"
   >
     <n-button size="small">
-      in small
+      小的里面
     </n-button>
   </n-spin>
   <n-spin
@@ -18,7 +18,7 @@ You can wrap a component inside spin. To match regular components's size, spin a
     :spinning="spinning"
   >
     <n-button size="medium">
-      in medium
+      中的里面
     </n-button>
   </n-spin>
   <n-spin
@@ -27,21 +27,21 @@ You can wrap a component inside spin. To match regular components's size, spin a
     :spinning="spinning"
   >
     <n-button size="large">
-      in large
+      大的里面
     </n-button>
   </n-spin>
   <n-spin
     :spinning="spinning"
   >
     <n-alert
-      title="La La La"
+      title="啦啦啦"
       type="success"
     >
-      Leave it till tomorrow to unpack my case. Honey disconnect the phone.
+      明天再打开行李箱。宝贝，挂电话啦。
     </n-alert>
   </n-spin>
 </div>
-<n-button @click="spinning = !spinning">Click to Spin</n-button>
+<n-button @click="spinning = !spinning">点击来转圈</n-button>
 ```
 ```js
 export default {
