@@ -69,7 +69,7 @@ export default {
       props: {
         trigger: context.props.trigger,
         containerClass: 'n-popselect',
-        arrow: context.props.arrow,
+        showArrow: context.props.showArrow,
         controller
       },
       on: {

@@ -276,7 +276,6 @@ export default {
     }, 64),
     handleOptionClick (e, index, wrappedOption) {
       const data = wrappedOption.data
-      console.log('handleOptionClick', wrappedOption)
       if (data.disabled || wrappedOption.as === 'dropdown-submenu') return
       this.toggleOption(data)
     },

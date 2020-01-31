@@ -33,7 +33,9 @@ import NIcon from '../../../Icon'
 import iosFunnel from '../../../../icons/ios-funnel'
 
 function createFilterOptionValues (activeFilters, column) {
-  const activeFilterOptionValues = activeFilters.filter(filter => filter.columnKey === column.key).map(filter => filter.filterOptionValue)
+  const activeFilterOptionValues = activeFilters
+    .filter(filter => filter.columnKey === column.key)
+    .map(filter => filter.filterOptionValue)
   /** default is multiple */
   if (column.filterMultiple !== false) {
     return activeFilterOptionValues
@@ -87,7 +89,9 @@ export default {
       return createFilterOptionValues(this.activeFilters, this.column)
     },
     active () {
-      if (Array.isArray(this.activeFilterOptionValues)) return !!this.activeFilterOptionValues.length
+      if (Array.isArray(this.activeFilterOptionValues)) {
+        return !!this.activeFilterOptionValues.length
+      }
       return !!this.activeFilterOptionValues
     }
   },

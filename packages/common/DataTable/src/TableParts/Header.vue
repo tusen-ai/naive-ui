@@ -1,6 +1,5 @@
 <template>
   <div
-    ref="header"
     :class="{
       [`n-${theme}-theme`]: theme
     }"
@@ -9,6 +8,7 @@
     @scroll="handleScroll"
   >
     <table
+      ref="body"
       class="n-data-table-table"
       :style="{
         minWidth: scrollX && `${scrollX}px`
@@ -24,11 +24,12 @@
       <thead class="n-data-table-thead">
         <tr class="n-data-table-tr">
           <template v-for="(column, index) in columns">
+            <!-- th height should minus 1 compared with props.height, since border is contained -->
             <th
               :key="column.key"
               :style="{
                 textAlign: column.align || null,
-                height: height && `${height}px`
+                height: height && `${height - 1}px`
               }"
               class="n-data-table-th"
               :class="{
@@ -43,7 +44,7 @@
                 :key="currentPage"
                 :checked="checkboxChecked"
                 :indeterminate="checkboxIndererminate"
-                @input="handleCheckboxInput(column)"
+                @change="handleCheckboxInput(column)"
               />
               <render
                 :render="typeof column.title === 'function'
@@ -59,7 +60,7 @@
                 v-if="isColumnFilterable(column)"
                 :ref="`${column.key}Filter`"
                 :column="column"
-                :options="column.filterOptions || column.asyncFilterOptions"
+                :options="column.filterOptions"
               />
             </th>
           </template>
@@ -76,11 +77,11 @@ import { createCustomWidthStyle } from '../utils'
 import render from '../../../../utils/render'
 
 function isColumnSortable (column) {
-  return !!(column.sorter || column.sortOrder !== undefined)
+  return !!column.sorter
 }
 
 function isColumnFilterable (column) {
-  return !!(column.filterOptions || column.asyncFilterOptions)
+  return !!column.filter
 }
 
 function getNextOrderOf (order) {

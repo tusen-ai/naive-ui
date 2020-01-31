@@ -15,14 +15,14 @@
       <colgroup>
         <col
           v-for="(column, index) in columns"
-          :key="index"
+          :key="column.key"
           :style="createCustomWidthStyle(column, index, placement)"
         >
       </colgroup>
       <tbody ref="tbody" class="n-data-table-tbody">
         <tr
           v-for="(rowData, index) in data"
-          :key="index"
+          :key="rowKey === null ? rowData.key : rowKey(rowData)"
           class="n-data-table-tr"
           :style="{
             height: (!main || null) && (trHeights[index] && trHeights[index] + 'px')
@@ -55,8 +55,8 @@
                 v-if="column.type === 'selection'"
                 :key="currentPage"
                 :disabled="column.disabled && column.disabled(rowData)"
-                :checked="checkedRows.includes(rowData)"
-                @input="checked => handleCheckboxInput(rowData, checked)"
+                :checked="checkedRowKeys.includes(rowData.key)"
+                @change="checked => handleCheckboxInput(rowData, checked)"
               />
               <cell
                 v-else
@@ -135,6 +135,9 @@ export default {
     }
   },
   computed: {
+    rowKey () {
+      return this.NDataTable.rowKey
+    },
     currentPage () {
       const pagination = this.NDataTable.synthesizedPagination
       if (!pagination) return -1
@@ -144,8 +147,8 @@ export default {
     hoveringRowIndex () {
       return this.NDataTable.hoveringRowIndex
     },
-    checkedRows () {
-      return this.NDataTable.checkedRows
+    checkedRowKeys () {
+      return this.NDataTable.synthesizedCheckedRowKeys
     },
     style () {
       if (this.fixed && this.height) {
@@ -177,7 +180,9 @@ export default {
     },
     createClassObject,
     handleCheckboxInput (row, checked) {
-      setCheckStatusOfRow(this.NDataTable.checkedRows, row, checked)
+      const newCheckedRowKeys = this.checkedRowKeys.map(v => v)
+      setCheckStatusOfRow(newCheckedRowKeys, row, checked)
+      this.NDataTable.changeCheckedRowKeys(newCheckedRowKeys)
     },
     getScrollContainer () {
       return this.$refs.scrollbar.$refs.scrollContainer
