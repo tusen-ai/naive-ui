@@ -37,7 +37,7 @@
               transition: hollowOutColorTransitionDisabled ? 'none' : null
             }"
             :stroke="simulateHollowOut ? ascendantBackgroundColor : null"
-            :stroke-width="4"
+            :stroke-width="24"
           />
           <n-icon
             v-else
@@ -81,7 +81,6 @@
               transition: hollowOutColorTransitionDisabled ? 'none' : null
             }"
             :stroke="simulateHollowOut ? ascendantBackgroundColor : null"
-            :stroke-width="4"
           />
           <n-icon
             v-else

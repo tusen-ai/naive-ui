@@ -5,7 +5,7 @@
   >
     <svg
       class="n-base-loading-circular"
-      viewBox="25 25 50 50"
+      :viewBox="`0 0 ${radius * 2} ${radius * 2}`"
     >
       <circle
         :style="{
@@ -13,10 +13,10 @@
           stroke
         }"
         class="n-base-loading-circular-path"
-        cx="50"
-        cy="50"
+        :cx="radius"
+        :cy="radius"
         fill="none"
-        r="20"
+        :r="radius - (strokeWidth) / 2"
       />
     </svg>
   </div>
@@ -26,21 +26,22 @@
 export default {
   name: 'NBaseLoading',
   props: {
+    radius: {
+      type: Number,
+      default: 100
+    },
     theme: {
       type: String,
       default: ''
     },
     strokeWidth: {
       type: Number,
-      default: null
+      default: 28
     },
     stroke: {
       type: String,
       default: null
     }
-  },
-  mounted () {
-    // console.log(this.strokeWidth)
   }
 }
 </script>

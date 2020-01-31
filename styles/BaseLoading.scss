@@ -1,26 +1,31 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
+$--base-loading-stroke-dashoffset: 500;
+
 @keyframes n-base-loading-rotate {
-  to {
-    transform: rotate(1turn)
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(270deg);
   }
 }
 
 @keyframes n-base-loading-dash {
   0% {
-    stroke-dasharray: 1,200;
-    stroke-dashoffset: 0
+    stroke-dashoffset: $--base-loading-stroke-dashoffset;
   }
   50% {
-    stroke-dasharray: 90,150;
-    stroke-dashoffset: -40px
+    stroke-dashoffset: $--base-loading-stroke-dashoffset / 4;
+    transform: rotate(135deg);
   }
-  to {
-    stroke-dasharray: 90,150;
-    stroke-dashoffset: -120px
+  100% {
+    stroke-dashoffset: $--base-loading-stroke-dashoffset;
+    transform: rotate(450deg);
   }
 }
+
 @include themes-mixin {
   @include b(base-loading) {
     @include once {
@@ -30,16 +35,17 @@
       @include once {
         height: 100%;
         width: 100%;
-        animation: n-base-loading-rotate 2s linear infinite;
+        animation: n-base-loading-rotate 1.5s linear infinite;
+        transform-origin: center;
       }
       @include b(base-loading-circular-path) {
         stroke: $--base-loading-stroke;
         @include once {
+          transform-origin: center;
           transition: stroke .3s $--n-ease-in-out-cubic-bezier;
           animation: n-base-loading-dash 1.5s ease-in-out infinite;
-          stroke-dasharray: 90, 150;
+          stroke-dasharray: $--base-loading-stroke-dashoffset;
           stroke-dashoffset: 0;
-          stroke-width: 8;
           stroke-linecap: round;
         }
       }
