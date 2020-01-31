@@ -24,3 +24,8 @@ no-indicator
 |indicator-placement|`'inside' \| 'inside-label' \| 'outside'`|`'outside'`||
 |indicator-text-color|`string`|`null`||
 |circle-gap|`number`|`1`|The gap bewteen circles when type is `'multiple-circle'`|
+
+## Slots
+|Name|Parameters|Description|
+|-|-|-|
+|default|`()`|Conent will replace indicatior|
