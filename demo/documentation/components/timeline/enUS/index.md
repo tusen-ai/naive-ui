@@ -27,7 +27,7 @@ item-placement
 |-|-|-|
 |default|`()`||
 
-### Timeline Item Props
+### Timeline Item Slots
 |Name|Parameters|Description|
 |-|-|-|
 |default|`()`||

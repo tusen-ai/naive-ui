@@ -27,7 +27,7 @@ item-placement
 |-|-|-|
 |default|`()`||
 
-### Timeline Item Props
+### Timeline Item Slots
 |名称|参数|介绍|
 |-|-|-|
 |default|`()`||

@@ -5,18 +5,18 @@ It doesn't look like what it calls.
 basic
 ```
 ## Props
-### Breadscrumb Props
+### Breadcrumb Props
 |Name|Type|Default|Description|
 |-|-|-|-|
 |seperator|`string`|`'/'`||
 
 ## Slots
-### Breadscrumb Slots
+### Breadcrumb Slots
 |Name|Parameters|Description|
 |-|-|-|
 |default|`()`||
 
-### Breadscrumb Item Slots
+### Breadcrumb Item Slots
 |Name|Parameters|Description|
 |-|-|-|
 |default|`()`||

@@ -1,4 +1,4 @@
-# Custom Icon
+# 自定义图标
 ```html
 <n-popconfirm
   positive-text="ok"
@@ -12,9 +12,9 @@
     </n-icon>
   </template>
   <template v-slot:activator>
-    <n-button>Quit</n-button>
+    <n-button>退出游戏</n-button>
   </template>
-  Are you sure to quit this game?
+  不充钱怎么变强？
 </n-popconfirm>
 ```
 ```js

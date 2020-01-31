@@ -6,8 +6,9 @@ basic
 ```
 ## API
 ### $NLoadingBar
-|Method|Description|
-|-|-|
-|`start()`||
-|`finish()`||
-|`error()`||
+#### $NLoadingBar Methods
+|Name|Type|Description|
+|-|-|-|
+|`start`|`(): void`||
+|`finish`|`(): void`||
+|`error`|`(): void`||

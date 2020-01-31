@@ -12,7 +12,7 @@ no-icon
 |Name|Type|Default|Description|
 |-|-|-|-|
 |negative-text|`string`|`'Cancel'`||
-|positive-text|`string`|`Confirm`||
+|positive-text|`string`|`'Confirm'`||
 |show-icon|`boolean`|`true`||
 
 For more props, see [popover](n-popover#Props).

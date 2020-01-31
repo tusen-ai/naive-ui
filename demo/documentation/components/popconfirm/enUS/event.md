@@ -8,7 +8,7 @@
   <template v-slot:activator>
     <n-button>Quit</n-button>
   </template>
-  Are you sure to quit this game?
+  I heared that players will still be abused after purchasing in some games when I watch Bilibili.
 </n-popconfirm>
 ```
 ```js

@@ -1,9 +1,9 @@
-# No Icon
+# 没有图标
 ```html
 <n-popconfirm :show-icon="false">
   <template v-slot:activator>
-    <n-button>No Icon</n-button>
+    <n-button>没图标</n-button>
   </template>
-  Are you sure to quit this game?
+  就是这样
 </n-popconfirm>
 ```

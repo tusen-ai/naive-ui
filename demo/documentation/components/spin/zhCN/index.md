@@ -1,4 +1,4 @@
-# Spin 加载
+# 加载 Spin
 按理说它叫做 Loading 也可以，但是为啥叫 Spin 呢？因为还有一个属性更少的内部组件叫 Loading。
 ## 例子
 ```demo
