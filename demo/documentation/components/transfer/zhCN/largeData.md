@@ -1,15 +1,16 @@
-# Basic
-Basic example of transfer. If you have tons of data, see next section.
+# 一大堆数据
+如果你有一大堆数据，你可能像让它快一点。设定 `virtual-scroll` 来使用一个飞快的穿梭框（会关掉那个傻乎乎的动画）。
 ```html
 <n-transfer
   ref="transfer"
   v-model="value"
   :options="options"
+  virtual-scroll
 />
 ```
 ```js
 function createOptions () {
-  return Array.apply(null, { length: 100 }).map((v, i) => ({
+  return Array.apply(null, { length: 42000 }).map((v, i) => ({
     label: 'Option' + i,
     value: i,
     disabled: i % 5 === 0
@@ -17,7 +18,7 @@ function createOptions () {
 }
 
 function createValues () {
-  return Array.apply(null, { length: 50 }).map((v, i) => i)
+  return Array.apply(null, { length: 10000 }).map((v, i) => i)
 }
 
 export default {

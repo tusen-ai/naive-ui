@@ -1,5 +1,5 @@
-# Basic
-Basic example of transfer. If you have tons of data, see next section.
+# 基础用法
+穿梭框的基本用法。如果你有一大堆数据，看下一个例子。
 ```html
 <n-transfer
   ref="transfer"
