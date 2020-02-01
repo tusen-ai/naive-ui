@@ -19,14 +19,44 @@
         class="n-transfer-list-body"
         @mouseleave="handleSourceListMouseLeave"
       >
-        <n-scrollbar>
-          <ul ref="sourceList" class="n-transfer-list-content">
-            <n-transfer-light-bar ref="lightBar" />
+        <n-scrollbar
+          v-if="virtualScroll"
+          :theme="synthesizedTheme"
+          :container="sourceScrollContainer"
+          :content="sourceScrollContent"
+        >
+          <recycle-scroller
+            v-if="virtualScroll"
+            ref="sourceVirtualScroller"
+            class="n-virtual-scroller n-transfer-list-content"
+            :items="memorizedSourceOptions"
+            :item-size="ITEM_SIZE"
+            key-field="value"
+          >
+            <template v-slot:before>
+              <n-base-light-bar ref="sourceLightBar" :item-size="ITEM_SIZE" :theme="synthesizedTheme" />
+            </template>
+            <template v-slot="{ item: option, index }">
+              <n-transfer-source-list-item
+                :key="option.value"
+                :value="option.value"
+                :disabled="!!option.disabled"
+                :label="option.label"
+                :index="index"
+                @click="handleSourceCheckboxClick"
+                @mouseenter="handleSourceOptionMouseEnter"
+                @mouseleave="handleSourceOptionMouseLeave"
+              />
+            </template>
+          </recycle-scroller>
+        </n-scrollbar>
+        <n-scrollbar v-else>
+          <div ref="sourceList" class="n-transfer-list-content">
+            <n-base-light-bar ref="sourceLightBar" :item-size="ITEM_SIZE" :theme="synthesizedTheme" />
             <n-transfer-source-list-item
-              v-for="(option, index) in memorizedSourceOptions"
+              v-for="option in memorizedSourceOptions"
               ref="sourceListItems"
               :key="option.value"
-              :index="index"
               :value="option.value"
               :disabled="!!option.disabled"
               :label="option.label"
@@ -34,7 +64,7 @@
               @mouseenter="handleSourceOptionMouseEnter"
               @mouseleave="handleSourceOptionMouseLeave"
             />
-          </ul>
+          </div>
         </n-scrollbar>
       </div>
     </div>
@@ -65,9 +95,40 @@
         class="n-transfer-list-body"
         @mouseleave="handleTargetListMouseLeave"
       >
-        <n-scrollbar ref="rightScrollbar">
-          <ul ref="targetList" class="n-transfer-list-content">
-            <n-transfer-light-bar ref="secondLightBar" />
+        <n-scrollbar
+          v-if="virtualScroll"
+          :theme="synthesizedTheme"
+          :container="targetScrollContainer"
+          :content="targetScrollContent"
+        >
+          <recycle-scroller
+            v-if="virtualScroll"
+            ref="targetVirtualScroller"
+            class="n-virtual-scroller n-transfer-list-content"
+            :items="targetOptions"
+            :item-size="ITEM_SIZE"
+            key-field="value"
+          >
+            <template v-slot:before>
+              <n-base-light-bar ref="targetLightBar" :item-size="ITEM_SIZE" :theme="synthesizedTheme" />
+            </template>
+            <template v-slot="{ item: option, index }">
+              <n-transfer-target-list-item
+                :key="option.value"
+                :value="option.value"
+                :disabled="!!option.disabled"
+                :label="option.label"
+                :index="index"
+                @click="handleTargetCheckboxClick"
+                @mouseenter="handleTargetOptionMouseEnter"
+                @mouseleave="handleTargetOptionMouseLeave"
+              />
+            </template>
+          </recycle-scroller>
+        </n-scrollbar>
+        <n-scrollbar v-else>
+          <div ref="targetList" class="n-transfer-list-content">
+            <n-base-light-bar ref="targetLightBar" :item-size="ITEM_SIZE" :theme="synthesizedTheme" />
             <n-transfer-target-list-item
               v-for="(option, index) in targetOptions"
               ref="targetListItems"
@@ -80,7 +141,7 @@
               @mouseenter="handleTargetOptionMouseEnter"
               @mouseleave="handleTargetOptionMouseLeave"
             />
-          </ul>
+          </div>
         </n-scrollbar>
       </div>
     </div>
@@ -98,8 +159,11 @@ import cloneDeep from 'lodash/cloneDeep'
 import asformitem from '../../../mixins/asformitem'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
-import NTransferLightBar from './TransferLightBar'
+import { RecycleScroller } from 'vue-virtual-scroller'
 import debounce from 'lodash-es/debounce'
+import NBaseLightBar from '../../../base/LightBar'
+
+const ITEM_SIZE = 34
 
 export default {
   name: 'NTransfer',
@@ -110,7 +174,8 @@ export default {
     NTransferSourceListItem,
     NTransferTargetListItem,
     NTransferButton,
-    NTransferLightBar
+    NBaseLightBar,
+    RecycleScroller
   },
   mixins: [withapp, themeable, asformitem()],
   model: {
@@ -129,6 +194,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    virtualScroll: {
+      type: Boolean,
+      default: false
     }
   },
   provide () {
@@ -145,10 +214,47 @@ export default {
       nextTargetOptionsLength: null,
       enableSourceEnterAnimation: false,
       enableTargetEnterAnimation: false,
-      initialized: false
+      initialized: false,
+      ITEM_SIZE
     }
   },
   computed: {
+    sourceScrollContainer () {
+      if (this.virtualScroll) {
+        return () => (
+          this.$refs.sourceVirtualScroller &&
+          this.$refs.sourceVirtualScroller.$el
+        )
+      }
+      return null
+    },
+    sourceScrollContent () {
+      if (this.virtualScroll) {
+        return () => (
+          this.$refs.sourceVirtualScroller &&
+          this.$refs.sourceVirtualScroller.$refs.wrapper
+        )
+      }
+      return null
+    },
+    targetScrollContainer () {
+      if (this.virtualScroll) {
+        return () => (
+          this.$refs.targetVirtualScroller &&
+          this.$refs.targetVirtualScroller.$el
+        )
+      }
+      return null
+    },
+    targetScrollContent () {
+      if (this.virtualScroll) {
+        return () => (
+          this.$refs.targetVirtualScroller &&
+          this.$refs.targetVirtualScroller.$refs.wrapper
+        )
+      }
+      return null
+    },
     mergedDisabledStatus () {
       return {
         source: this.memorizedSourceOptions.every(option => option.disabled),
@@ -250,36 +356,55 @@ export default {
     },
     cleanValue (value) {
       if (Array.isArray(value)) {
-        return value.filter((v) => this.valueToOptionMap.has(v))
+        const valueToOptionMap = this.valueToOptionMap
+        return value.filter(v => valueToOptionMap.has(v))
       } else return null
     },
     handleSourceHeaderCheckboxChange (value) {
       if (this.sourceHeaderCheckboxIndeterminate) {
-        (this.$refs.sourceListItems || []).forEach(listItem => listItem.setChecked(false))
+        if (!this.virtualScroll) {
+          (this.$refs.sourceListItems || []).forEach(listItem => listItem.setChecked(false))
+        }
         this.sourceCheckedValues = []
         return
       }
       if (value) {
-        (this.$refs.sourceListItems || []).forEach(listItem => listItem.setChecked(true))
-        const newValues = this.memorizedSourceOptions.filter(option => !option.disabled).map(option => option.value).concat(this.sourceCheckedValues)
+        if (!this.virtualScroll) {
+          (this.$refs.sourceListItems || []).forEach(listItem => listItem.setChecked(true))
+        }
+        const newValues = this.memorizedSourceOptions
+          .filter(option => !option.disabled)
+          .map(option => option.value)
+          .concat(this.sourceCheckedValues)
         this.sourceCheckedValues = Array.from(new Set(newValues))
       } else {
-        (this.$refs.sourceListItems || []).forEach(listItem => listItem.setChecked(false))
+        if (!this.virtualScroll) {
+          (this.$refs.sourceListItems || []).forEach(listItem => listItem.setChecked(false))
+        }
         this.sourceCheckedValues = []
       }
     },
     handleTargetHeaderCheckboxChange (value) {
       if (this.targetHeaderCheckboxIndeterminate) {
-        (this.$refs.targetListItems || []).forEach(listItem => listItem.setChecked(false))
+        if (!this.virtualScroll) {
+          (this.$refs.targetListItems || []).forEach(listItem => listItem.setChecked(false))
+        }
         this.targetCheckedValues = []
         return
       }
       if (value) {
-        (this.$refs.targetListItems || []).forEach(listItem => listItem.setChecked(true))
-        const newValues = this.targetOptions.filter(option => !option.disabled).map(option => option.value).concat(this.targetCheckedValues)
+        if (!this.virtualScroll) {
+          (this.$refs.targetListItems || []).forEach(listItem => listItem.setChecked(true))
+        }
+        const newValues = this.targetOptions
+          .filter(option => !option.disabled)
+          .map(option => option.value)
+          .concat(this.targetCheckedValues)
         this.targetCheckedValues = Array.from(new Set(newValues))
       } else {
-        (this.$refs.targetListItems || []).forEach(listItem => listItem.setChecked(false))
+        if (!this.virtualScroll) {
+          (this.$refs.targetListItems || []).forEach(listItem => listItem.setChecked(false))
+        }
         this.targetCheckedValues = []
       }
     },
@@ -304,6 +429,16 @@ export default {
       }
     },
     handleToTargetClick () {
+      if (this.virtualScroll) {
+        let newValue = Array.isArray(this.value) ? this.value : []
+        newValue = this.sourceCheckedValues.concat(newValue)
+        const sourceCheckedValueSet = this.sourceCheckedValueSet
+        this.memorizedSourceOptions = this.memorizedSourceOptions
+          .filter(option => !sourceCheckedValueSet.has(option.value))
+        this.$emit('change', newValue)
+        this.sourceCheckedValues = []
+        return
+      }
       this.enableTargetEnterAnimation = true
       const enteredItemEls = Array.from(this.$el.getElementsByClassName('n-transfer-list-item--enter'))
       const length = enteredItemEls.length
@@ -336,6 +471,17 @@ export default {
       this.$emit('change', newValue)
     },
     handleToSourceClick () {
+      if (this.virtualScroll) {
+        let newValue = Array.isArray(this.value) ? this.value : []
+        const targetValueSet = this.targetCheckedValueSet
+        newValue = newValue.filter(value => !targetValueSet.has(value))
+        const valueToOptionMap = this.valueToOptionMap
+        const newSourceOptions = this.targetCheckedValues.map(value => valueToOptionMap.get(value))
+        this.memorizedSourceOptions = newSourceOptions.concat(this.memorizedSourceOptions)
+        this.$emit('change', newValue)
+        this.targetCheckedValues = []
+        return
+      }
       this.enableSourceEnterAnimation = true
       const enteredItemEls = Array.from(this.$el.getElementsByClassName('n-transfer-list-item--enter'))
       const length = enteredItemEls.length
@@ -370,24 +516,32 @@ export default {
       /** clear check */
       this.targetCheckedValues = []
     },
-    handleSourceOptionMouseEnter: debounce(function (e) {
-      this.$refs.lightBar.updateLightBarPosition(e.target)
-    }, 128),
-    handleTargetOptionMouseEnter: debounce(function (e) {
-      this.$refs.secondLightBar.updateLightBarPosition(e.target)
-    }, 128),
+    handleSourceOptionMouseEnter: debounce(function (e, index) {
+      if (this.virtualScroll) {
+        this.$refs.sourceLightBar.updateLightBarTop(true, () => index * ITEM_SIZE)
+      } else {
+        this.$refs.sourceLightBar.updateLightBarTop(e.target)
+      }
+    }, 96),
+    handleTargetOptionMouseEnter: debounce(function (e, index) {
+      if (this.virtualScroll) {
+        this.$refs.targetLightBar.updateLightBarTop(true, () => index * ITEM_SIZE)
+      } else {
+        this.$refs.targetLightBar.updateLightBarTop(e.target)
+      }
+    }, 96),
     handleSourceOptionMouseLeave: debounce(function (e) {
-      this.$refs.lightBar.hideLightBar()
-    }, 128),
+      this.$refs.sourceLightBar.hideLightBar()
+    }, 96),
     handleTargetOptionMouseLeave: debounce(function (e) {
-      this.$refs.secondLightBar.hideLightBar()
-    }, 128),
+      this.$refs.targetLightBar.hideLightBar()
+    }, 96),
     handleSourceListMouseLeave: debounce(function () {
-      this.$refs.lightBar.hideLightBar()
-    }, 128),
+      this.$refs.sourceLightBar.hideLightBar()
+    }, 96),
     handleTargetListMouseLeave: debounce(function () {
-      this.$refs.secondLightBar.hideLightBar()
-    }, 128)
+      this.$refs.targetLightBar.hideLightBar()
+    }, 96)
   }
 }
 </script>

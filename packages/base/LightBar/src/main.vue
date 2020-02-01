@@ -45,10 +45,11 @@ export default {
       if (!delay) {
         this.vanishTimerId = null
         this.show = false
+      } else {
+        this.vanishTimerId = window.setTimeout(() => {
+          this.show = false
+        }, delay)
       }
-      this.vanishTimerId = window.setTimeout(() => {
-        this.show = false
-      }, delay)
     },
     updateLightBarTop (el, getLightBarTop = el => el.offsetTop) {
       if (!el) return

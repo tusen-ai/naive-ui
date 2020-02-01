@@ -4,7 +4,7 @@
       source ?
         NTransfer.sourceCheckedValues.length :
         NTransfer.targetCheckedValues.length
-    }} / {{
+    }}/{{
       source ?
         (
           NTransfer.nextSourceOptionsLength === null ?

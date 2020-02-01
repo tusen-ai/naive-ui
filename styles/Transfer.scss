@@ -70,6 +70,7 @@
   @include b(transfer) {
     @include once {
       display: flex;
+      width: 444px;
     }
     @include b(transfer-list) {
       @include once {
@@ -78,6 +79,15 @@
         height: 311px;
         transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
         border-radius: 6px;
+        @include b(virtual-scroller) {
+          height: 100%;
+          scrollbar-width: none;
+          -moz-scrollbar-width: none;
+          &::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+          }
+        }
       }
       background-color: map-get($--transfer-list-background-color, 'default');
       border: 1px solid $--transfer-list-border-color;
@@ -158,16 +168,6 @@
                 animation: none !important;
               }
             }
-          }
-          @include b(transfer-list-light-bar) {
-            @include once {
-              @include fade-in-transition(transfer-list-light-bar);
-              height: 34px;
-              transition: top .15s $--n-ease-in-out-cubic-bezier;
-              width: 100%;
-              position: absolute;
-            }
-            background-color: map-get($--tranfer-item-lightbar-background-color, 'default');
           }
           @include b(transfer-list-item) {
             @include once {

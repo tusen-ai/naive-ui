@@ -1,5 +1,5 @@
 <template>
-  <li
+  <div
     class="n-transfer-list-item n-transfer-list-item--source"
     :class="{
       'n-transfer-list-item--disabled': disabled,
@@ -13,7 +13,7 @@
       <n-simple-checkbox
         :theme="NTransfer.synthesizedTheme"
         :disabled="disabled"
-        :checked="checked"
+        :checked="synthesizedChecked"
       />
     </div>
     <div
@@ -21,7 +21,7 @@
     >
       {{ label }}
     </div>
-  </li>
+  </div>
 </template>
 
 <script>
@@ -47,8 +47,8 @@ export default {
       default: false
     },
     index: {
-      validator: createValidator(['number']),
-      required: true
+      type: Number,
+      default: null
     }
   },
   inject: {
@@ -62,8 +62,20 @@ export default {
       enableEnterAnimation: false
     }
   },
+  computed: {
+    synthesizedChecked () {
+      if (this.NTransfer.virtualScroll) {
+        return this.NTransfer.sourceCheckedValues.includes(this.value)
+      } else {
+        return this.checked
+      }
+    }
+  },
   created () {
-    if (this.NTransfer.initialized && this.NTransfer.enableSourceEnterAnimation) {
+    if (
+      this.NTransfer.initialized &&
+      this.NTransfer.enableSourceEnterAnimation
+    ) {
       this.enableEnterAnimation = true
     }
   },
@@ -82,12 +94,12 @@ export default {
     },
     handleMouseEnter (e) {
       if (!this.disabled) {
-        this.$emit('mouseenter', e)
+        this.$emit('mouseenter', e, this.index)
       }
     },
     handleMouseLeave (e) {
       if (!this.disabled) {
-        this.$emit('mouseleave', e)
+        this.$emit('mouseleave', e, this.index)
       }
     },
     leave () {
