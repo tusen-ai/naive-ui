@@ -19,7 +19,7 @@
         class="n-transfer-list-body"
         @mouseleave="handleSourceListMouseLeave"
       >
-        <n-scrollbar @scroll="handleSourceListScroll">
+        <n-scrollbar>
           <ul ref="sourceList" class="n-transfer-list-content">
             <n-transfer-light-bar ref="lightBar" />
             <n-transfer-source-list-item
@@ -65,7 +65,7 @@
         class="n-transfer-list-body"
         @mouseleave="handleTargetListMouseLeave"
       >
-        <n-scrollbar ref="rightScrollbar" @scroll="handleTargetListScroll">
+        <n-scrollbar ref="rightScrollbar">
           <ul ref="targetList" class="n-transfer-list-content">
             <n-transfer-light-bar ref="secondLightBar" />
             <n-transfer-target-list-item
@@ -100,9 +100,6 @@ import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import NTransferLightBar from './TransferLightBar'
 import debounce from 'lodash-es/debounce'
-
-const ITEM_HEIGHT = 34
-const SCROLL_VISIBLE_BUFFER = ITEM_HEIGHT * 20
 
 export default {
   name: 'NTransfer',
@@ -144,10 +141,8 @@ export default {
       sourceCheckedValues: [],
       targetCheckedValues: [],
       memorizedSourceOptions: null,
-      sourceListVisibleMinIndex: parseInt(-SCROLL_VISIBLE_BUFFER / ITEM_HEIGHT),
-      sourceListVisibleMaxIndex: parseInt(SCROLL_VISIBLE_BUFFER / ITEM_HEIGHT),
-      targetListVisibleMinIndex: parseInt(-SCROLL_VISIBLE_BUFFER / ITEM_HEIGHT),
-      targetListVisibleMaxIndex: parseInt(SCROLL_VISIBLE_BUFFER / ITEM_HEIGHT),
+      nextSourceOptionsLength: null,
+      nextTargetOptionsLength: null,
       enableSourceEnterAnimation: false,
       enableTargetEnterAnimation: false,
       initialized: false
@@ -249,16 +244,6 @@ export default {
     this.memorizedSourceOptions = cloneDeep(this.options.filter(option => !valueSet.has(option.value)))
   },
   methods: {
-    handleSourceListScroll: debounce(function (_, container) {
-      const scrollTop = container.scrollTop
-      this.sourceListVisibleMinIndex = parseInt((scrollTop - SCROLL_VISIBLE_BUFFER) / ITEM_HEIGHT)
-      this.sourceListVisibleMaxIndex = parseInt((scrollTop + SCROLL_VISIBLE_BUFFER) / ITEM_HEIGHT)
-    }, 128),
-    handleTargetListScroll: debounce(function (_, container) {
-      const scrollTop = container.scrollTop
-      this.targetListVisibleMinIndex = parseInt((scrollTop - SCROLL_VISIBLE_BUFFER) / ITEM_HEIGHT)
-      this.targetListVisibleMaxIndex = parseInt((scrollTop + SCROLL_VISIBLE_BUFFER) / ITEM_HEIGHT)
-    }, 128),
     emitChangeEvent (value) {
       const newValue = this.cleanValue(value)
       this.$emit('change', newValue)
@@ -329,6 +314,8 @@ export default {
       /** create new value */
       let newValue = Array.isArray(this.value) ? this.value : []
       newValue = sourceCheckedValues.concat(newValue)
+      /** create new source length */
+      this.nextSourceOptionsLength = this.memorizedSourceOptions.length - sourceCheckedValues.length
       /** play source leave animation */
       const sourceCheckedValueSet = this.sourceCheckedValueSet
       this.$refs.sourceListItems.forEach(listItem => {
@@ -339,8 +326,9 @@ export default {
       window.setTimeout(() => {
         /** after animation is done change memorized source options to remove dom */
         this.memorizedSourceOptions = this.memorizedSourceOptions.filter(option => !sourceCheckedValueSet.has(option.value))
+        this.nextSourceOptionsLength = null
         this.enableTargetEnterAnimation = false
-      }, 300)
+      }, 500)
       /** clear check */
       this.sourceCheckedValues = []
       /** emit new value */
@@ -363,15 +351,18 @@ export default {
           listItem.leave()
         }
       })
+      /** create new value sync to know nextTargetOptionsLength */
+      newValue = newValue.filter(value => !targetValueSet.has(value))
+      this.nextTargetOptionsLength = newValue.length
       window.setTimeout(() => {
         /** disable animation before apply dom change */
         this.targetAnimationDisabled = true
         /** after animation is done change value to remove dom */
-        newValue = newValue.filter(value => !targetValueSet.has(value))
-        /** emit new value */
+        /** then emit new value */
         this.emitChangeEvent(newValue)
         this.enableSourceEnterAnimation = false
-      }, 300)
+        this.nextTargetOptionsLength = null
+      }, 500)
       /** change memorized source options */
       const valueToOptionMap = this.valueToOptionMap
       const newSourceOptions = this.targetCheckedValues.map(value => valueToOptionMap.get(value))

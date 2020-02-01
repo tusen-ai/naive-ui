@@ -44,6 +44,7 @@ export default {
   },
   methods: {
     handleClick () {
+      if (this.disabled) return
       this.$emit('click')
     }
   }

@@ -20,7 +20,7 @@ let prefix = null
 
 function genOptions () {
   prefix = Math.random().toString(36).slice(2, 5)
-  return Array.apply(null, { length: 1000 }).map((v, i) => ({
+  return Array.apply(null, { length: 200 }).map((v, i) => ({
     label: prefix + 'Option' + i,
     value: prefix + i,
     disabled: i % 5 === 0
@@ -28,7 +28,7 @@ function genOptions () {
 }
 
 function genValues () {
-  return Array.apply(null, { length: 500 }).map((v, i) => prefix + i)
+  return Array.apply(null, { length: 100 }).map((v, i) => prefix + i)
 }
 
 export default {

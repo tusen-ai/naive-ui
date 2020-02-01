@@ -1,14 +1,9 @@
 <template>
   <li
-    v-if="visible"
     class="n-transfer-list-item n-transfer-list-item--target"
     :class="{
       'n-transfer-list-item--disabled': disabled,
       'n-transfer-list-item--enter': enableEnterAnimation
-    }"
-    :style="{
-      height: styleHeight,
-      maxHeight: styleHeight
     }"
     @click="handleClick"
     @mouseenter="handleMouseEnter"
@@ -65,28 +60,6 @@ export default {
     return {
       checked: false,
       enableEnterAnimation: false
-    }
-  },
-  computed: {
-    styleHeight () {
-      const index = this.index
-      if (index === this.NTransfer.targetListVisibleMinIndex) {
-        return (34 * (index + 1)) + 'px'
-      }
-      if (index === this.NTransfer.targetListVisibleMaxIndex) {
-        return (34 * (this.NTransfer.memorizedSourceOptions.length - index)) + 'px'
-      }
-      return null
-    },
-    visible () {
-      return this.NTransfer.targetListVisibleMinIndex <= this.index && this.index <= this.NTransfer.targetListVisibleMaxIndex
-    }
-  },
-  watch: {
-    visible (value) {
-      if (value && !this.NTransfer.enableTargetEnterAnimation) {
-        this.enableEnterAnimation = false
-      }
     }
   },
   created () {

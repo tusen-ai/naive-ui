@@ -6,8 +6,16 @@
         NTransfer.targetCheckedValues.length
     }} / {{
       source ?
-        NTransfer.memorizedSourceOptions.length :
-        NTransfer.targetOptions.length
+        (
+          NTransfer.nextSourceOptionsLength === null ?
+            NTransfer.memorizedSourceOptions.length :
+            NTransfer.nextSourceOptionsLength
+        ) :
+        (
+          NTransfer.nextTargetOptionsLength === null ?
+            NTransfer.targetOptions.length :
+            NTransfer.nextTargetOptionsLength
+        )
     }}
   </div>
 </template>
