@@ -11,7 +11,7 @@
       transition: transitionBlocked ? 'none' : null
     }"
   >
-    <n-scrollbar v-if="!useNativeScrollbar" :content-style="scrollContentStyle" :container-style="scrollContainerStyle">
+    <n-scrollbar v-if="!useNativeScrollbar" ref="scrollbar" :content-style="scrollContentStyle" :container-style="scrollContainerStyle">
       <slot />
     </n-scrollbar>
     <slot v-else />
@@ -77,6 +77,11 @@ export default {
     }
   },
   methods: {
+    resetScrollPosition () {
+      if (this.$refs.scrollbar) {
+        this.$refs.scrollbar.scrollToTop()
+      }
+    },
     blockChildLayoutTransitionOneTick () {
       this.childLayoutTransitionBlocked = true
       this.$nextTick().then(() => {

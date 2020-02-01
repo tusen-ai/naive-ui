@@ -1,6 +1,6 @@
 <template>
   <n-config-provider class="demo" namespace="naive-ui-doc" :theme="theme" :language="lang">
-    <n-nimbus-service-layout :padding-body="false" :items="items">
+    <n-nimbus-service-layout ref="layout" :padding-body="false" :items="items">
       <template v-slot:nav>
         <doc-header
           :lang="lang"
@@ -21,8 +21,12 @@ export default {
   components: {
     DocHeader
   },
+  provide () {
+    return {
+      NDocRoot: this
+    }
+  },
   beforeRouteEnter (to, from, next) {
-    // console.log(i18n)
     i18n.locale = to.params.lang
     next()
   },
@@ -474,6 +478,9 @@ export default {
     }
   },
   methods: {
+    resetScrollPosition () {
+      this.$refs.layout.resetScrollPosition()
+    },
     handleLangChange (lang) {
       this.lang = lang
     }

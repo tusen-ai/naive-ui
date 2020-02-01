@@ -260,8 +260,9 @@ export default {
       this.showVeriticalScrollbar = true
     },
     scrollToTop (smooth = false) {
-      if (this._container()) {
-        this._container().scrollTo({
+      const container = this._container()
+      if (container) {
+        container.scrollTo({
           top: 0
         })
       }

@@ -72,6 +72,9 @@ export default {
     }
   },
   methods: {
+    resetScrollPosition () {
+      this.$refs.body.resetScrollPosition()
+    },
     syncActiveItemWithPath (path, items) {
       for (const item of items) {
         if (item.childItems) {
@@ -224,6 +227,7 @@ export default {
           )]
         ),
         h('NLayout', {
+          ref: 'body',
           props: {
             'mode': 'absolute',
             'use-native-scrollbar': false,
