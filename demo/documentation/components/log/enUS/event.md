@@ -14,7 +14,7 @@ Log has `require-more`, `reach-top` and `reach-bottom` event. Note that even if 
 ```js
 function log () {
   const l = []
-  for (let i = 0; i < 40; ++i) {
+  for (let i = 0; i < 10; ++i) {
     l.push((Math.random()).toString(16))
   }
   return l.join('\n') + '\n'
