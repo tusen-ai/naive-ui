@@ -131,9 +131,8 @@
   }
   @include b(data-table) {
     @include once {
-      @include e(loading) {
-      }
       @include e(empty) {
+        padding: 24px 0;
       }
       @include e(pagination) {
         margin-top: 24px;

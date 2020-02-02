@@ -34,7 +34,6 @@
     @include b(spin-container) {
       position: relative;
       @include b(spin) {
-        pointer-events: none;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -43,7 +42,9 @@
       @include b(spin-content) {
         opacity: 1;
         transition: opacity .2s $--n-ease-in-out-cubic-bezier;
+        pointer-events: all;
         @include m(spinning) {
+          pointer-events: none;
           opacity: .5;
         }
       }

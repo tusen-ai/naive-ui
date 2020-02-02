@@ -4,99 +4,92 @@
     :class="{
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
       'n-data-table--bordered': bordered,
-      'n-data-table--empty': paginatedData.length === 0
     }"
   >
-    <div
-      class="n-data-table-tables-wrapper"
-    >
-      <base-table
-        ref="mainTable"
-        main
-        :header-height="headerHeight"
-        :scroll-x="scrollX"
-        :body-style="bodyStyle"
-        :data="paginatedData"
-        :columns="normalizedColumns"
-        :row-class-name="rowClassName"
-        :loading="loading"
-        :body-min-height="42"
-        @header-scroll="handleMainTableHeaderScroll"
-        @scroll="handleTableMainBodyScroll"
-      >
-        <slot name="append" />
-      </base-table>
+    <n-spin :spinning="loading">
       <div
-        v-if="rightFixedColumns.length"
-        class="n-data-table-table-wrapper n-data-table-table-wrapper--right-fixed"
-        :class="{
-          'n-data-table-table-wrapper--active': mainTableScrollContainerWidth && mainTableScrollContainerWidth + horizontalScrollLeft < scrollX
-        }"
+        class="n-data-table-tables-wrapper"
       >
         <base-table
-          ref="rightFixedTable"
-          placement="right"
+          ref="mainTable"
+          main
           :header-height="headerHeight"
-          :columns="rightFixedColumns"
-          :data="paginatedData"
+          :scroll-x="scrollX"
           :body-style="bodyStyle"
-          :row-class-name="rowClassName"
-          :tr-heights="trHeights"
-          :loading="loading"
-          :fixed="true"
-          @scroll="handleTableRightBodyScroll"
-        />
-      </div>
-      <div
-        v-if="leftFixedColumns.length"
-        class="n-data-table-table-wrapper n-data-table-table-wrapper--left-fixed"
-        :class="{
-          'n-data-table-table-wrapper--active': horizontalScrollLeft > 0
-        }"
-      >
-        <base-table
-          ref="leftFixedTable"
-          :header-height="headerHeight"
-          :columns="leftFixedColumns"
           :data="paginatedData"
-          :body-style="bodyStyle"
+          :columns="normalizedColumns"
           :row-class-name="rowClassName"
-          header-ref-name="header"
-          :tr-heights="trHeights"
           :loading="loading"
-          :fixed="true"
-          @scroll="handleTableLeftBodyScroll"
-        />
-      </div>
-      <transition name="n-table-loading--transition">
-        <div v-if="loading" class="n-data-table__loading">
-          <n-spin
-            :spinning="true"
-            style="width:100%;overflow:hidden;z-index:200;position:absolute;top:50%;"
+          :body-min-height="42"
+          @header-scroll="handleMainTableHeaderScroll"
+          @scroll="handleTableMainBodyScroll"
+        >
+          <slot name="append" />
+        </base-table>
+        <div
+          v-if="rightFixedColumns.length"
+          class="n-data-table-table-wrapper n-data-table-table-wrapper--right-fixed"
+          :class="{
+            'n-data-table-table-wrapper--active': mainTableScrollContainerWidth && mainTableScrollContainerWidth + horizontalScrollLeft < scrollX
+          }"
+        >
+          <base-table
+            ref="rightFixedTable"
+            placement="right"
+            :header-height="headerHeight"
+            :columns="rightFixedColumns"
+            :data="paginatedData"
+            :body-style="bodyStyle"
+            :row-class-name="rowClassName"
+            :tr-heights="trHeights"
+            :loading="loading"
+            :fixed="true"
+            @scroll="handleTableRightBodyScroll"
           />
         </div>
-      </transition>
-      <div
-        v-if="paginatedData.length === 0 && !loading"
-        class="n-data-table__empty"
-      >
-        No data
+        <div
+          v-if="leftFixedColumns.length"
+          class="n-data-table-table-wrapper n-data-table-table-wrapper--left-fixed"
+          :class="{
+            'n-data-table-table-wrapper--active': horizontalScrollLeft > 0
+          }"
+        >
+          <base-table
+            ref="leftFixedTable"
+            :header-height="headerHeight"
+            :columns="leftFixedColumns"
+            :data="paginatedData"
+            :body-style="bodyStyle"
+            :row-class-name="rowClassName"
+            header-ref-name="header"
+            :tr-heights="trHeights"
+            :loading="loading"
+            :fixed="true"
+            @scroll="handleTableLeftBodyScroll"
+          />
+        </div>
+        <div
+          v-if="paginatedData.length === 0"
+          class="n-data-table__empty"
+        >
+          <n-empty />
+        </div>
       </div>
-    </div>
-    <div
-      v-if="pagination"
-      class="n-data-table__pagination"
-    >
-      <n-pagination
-        :page="synthesizedPagination.page"
-        :page-count="synthesizedPagination.pageCount"
-        :page-slot="pagination.pageSlot"
-        :show-quick-jumper="!!pagination.showQuickJumper"
-        :disabled="loading || !!pagination.disabled"
-        :on-change="synthesizedOnPageChange"
-        :on-page-size-change="synthesizedOnPageSizeChange"
-      />
-    </div>
+      <div
+        v-if="pagination"
+        class="n-data-table__pagination"
+      >
+        <n-pagination
+          :page="synthesizedPagination.page"
+          :page-count="synthesizedPagination.pageCount"
+          :page-slot="pagination.pageSlot"
+          :show-quick-jumper="!!pagination.showQuickJumper"
+          :disabled="!!pagination.disabled"
+          :on-change="synthesizedOnPageChange"
+          :on-page-size-change="synthesizedOnPageSizeChange"
+        />
+      </div>
+    </n-spin>
   </div>
 </template>
 
@@ -105,6 +98,7 @@ import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import { setCheckStatusOfRow } from './utils'
 import BaseTable from './BaseTable.vue'
+import NEmpty from '../../Empty'
 
 function createShallowClonedArray (array) {
   if (Array.isArray(array)) return array.map(createShallowClonedObject)
@@ -158,7 +152,8 @@ function normalizeColumn (column) {
 export default {
   name: 'NDataTable',
   components: {
-    BaseTable
+    BaseTable,
+    NEmpty
   },
   mixins: [ withapp, themeable ],
   provide () {
@@ -214,6 +209,10 @@ export default {
     checkedRowKeys: {
       type: Array,
       default: null
+    },
+    paging: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -409,13 +408,8 @@ export default {
     },
     paginatedData () {
       if (!this.pagination) return this.sortedData
-      const {
-        pageSize
-      } = this.pagination
-      /**
-       * When async, pageSize should be false
-       */
-      if (!pageSize) return this.sortedData
+      if (!this.paging) return this.sortedData
+      const pageSize = this.synthesizedPageSize
       const startIndex = (this.internalCurrentPage - 1) * pageSize
       return this.sortedData.slice(startIndex, startIndex + pageSize)
     },
