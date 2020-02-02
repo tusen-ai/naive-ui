@@ -36,14 +36,13 @@ import layoutModeMixin from './layoutModeMixin'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import ToggleButton from './ToggleButton'
-import asthemecontext from '../../../mixins/asthemecontext'
 
 export default {
   name: 'NLayoutSider',
   components: {
     ToggleButton
   },
-  mixins: [ withapp, themeable, asthemecontext, layoutModeMixin ],
+  mixins: [ withapp, themeable, layoutModeMixin ],
   props: {
     bordered: {
       type: Boolean,
@@ -58,7 +57,9 @@ export default {
       default: 272
     },
     collapseMode: {
-      type: String,
+      validator (value) {
+        return ['width', 'transform'].includes(value)
+      },
       default: 'transform'
     },
     collapsed: {

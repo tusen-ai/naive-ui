@@ -1,4 +1,6 @@
 # Menu
+<!--single-column-->
+## Demos
 ```demo
 basic
 items
