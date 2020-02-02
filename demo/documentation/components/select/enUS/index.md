@@ -16,13 +16,12 @@ many-options
 custom-option
 action
 ```
-## API
-### V-model
+## V-model
 |prop|event|
 |-|-|
 |value|change|
 
-### Props
+## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
 |loading|`boolean`|`false`||
@@ -32,16 +31,32 @@ action
 |multiple|`boolean`|`false`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |disabled|`boolean`|`false`||
-|options|`Array`|`[]`||
+|options|`Array<SelectOption \| SelectOptionGroup />`|`[]`||
 |remote|`boolearn`|`false`|If you want to async get options|
 |filter|`(pattern: string, option: Object) => boolean`|`null`||
 
-### Slots
+## API
+### SelectOption Type
+|Property|Type|Description|
+|-|-|-|
+|label|`string`||
+|value|`string \| number`|Should be unique in options.|
+|disabled|`boolean`||
+|render|`function`||
+
+### SelectOptionGroup Type
+|Property|Type|Description|
+|-|-|-|
+|type|`'group'`||
+|name|`string`||
+|children|`Array<SelectOption>`||
+
+## Slots
 |Name|Description|
 |-|-|
 |empty||
 
-### Event
+## Event
 |Name|Parameter|Description|
 |-|-|-|
 |change|`(value: Array \| string \| number \| null)`||
