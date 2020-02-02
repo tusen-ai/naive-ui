@@ -6,41 +6,42 @@
     }"
   >
     <template v-if="isFirstLevel">
-      <n-popover trigger="click" placement="right-start" :disabled="!usePopover">
+      <n-popover
+        trigger="hover"
+        placement="right-start"
+        :show-arrow="false"
+        :disabled="!renderedAsPopover"
+        :overlay-style="{
+          paddingTop: '8px',
+          paddingBottom: '8px'
+        }"
+      >
         <template v-slot:activator>
-          <div
-            class="n-submenu-item"
-            :style="{ paddingLeft: delayedPaddingLeft + 'px' }"
-            :class="{
-              'n-submenu-item--collapsed': synthesizedCollapsed,
-              'n-submenu-item--active': !synthesizedCollapsed,
-              'n-submenu-item--disabled': disabled
-            }"
+          <n-submenu-header
+            :padding-left="delayedPaddingLeft"
+            :collapsed="synthesizedCollapsed"
+            :disabled="disabled"
+            :max-icon-size="maxIconSize"
+            :active-icon-size="activeIconSize"
+            :title="title"
+            :show-arrow="showArrow"
             @click="handleClick"
           >
-            <div
-              v-if="$slots.icon"
-              class="n-submenu-item__icon"
-              :style="{
-                width: maxIconSize && (maxIconSize + 'px'),
-                height: maxIconSize && (maxIconSize + 'px'),
-                fontSize: activeIconSize && (activeIconSize + 'px'),
-              }"
-            >
+            <template v-slot:icon>
               <slot name="icon" />
-            </div>
-            <div class="n-submenu-item__header">
-              <slot name="header">
-                <render :render="title" />
-              </slot>
-            </div>
-          </div>
+            </template>
+            <template v-slot:header>
+              <slot name="header" />
+            </template>
+          </n-submenu-header>
         </template>
         <n-menu
           :style="{
             width: '272px'
           }"
+          :show-submenu-arrow="false"
           :root-indent="24"
+          :indent="24"
           in-popover
           :value="popMenuValue"
           :open-names="popMenuOpenNames"
@@ -60,33 +61,23 @@
       </fade-in-height-expand-transition>
     </template>
     <template v-else>
-      <div
-        class="n-submenu-item"
-        :style="{ paddingLeft: delayedPaddingLeft + 'px' }"
-        :class="{
-          'n-submenu-item--collapsed': synthesizedCollapsed,
-          'n-submenu-item--active': !synthesizedCollapsed,
-          'n-submenu-item--disabled': disabled
-        }"
+      <n-submenu-header
+        :padding-left="delayedPaddingLeft"
+        :collapsed="synthesizedCollapsed"
+        :disabled="disabled"
+        :max-icon-size="maxIconSize"
+        :active-icon-size="activeIconSize"
+        :title="title"
+        :show-arrow="showArrow"
         @click="handleClick"
       >
-        <div
-          v-if="$slots.icon"
-          class="n-submenu-item__icon"
-          :style="{
-            width: iconSize && (iconSize + 'px'),
-            height: iconSize && (iconSize + 'px'),
-            fontSize: iconSize && (iconSize + 'px'),
-          }"
-        >
+        <template v-slot:icon>
           <slot name="icon" />
-        </div>
-        <div class="n-submenu-item__header">
-          <slot name="header">
-            <render :render="title" />
-          </slot>
-        </div>
-      </div>
+        </template>
+        <template v-slot:header>
+          <slot name="header" />
+        </template>
+      </n-submenu-header>
       <fade-in-height-expand-transition>
         <ul
           v-show="!synthesizedCollapsed"
@@ -101,17 +92,17 @@
 
 <script>
 import FadeInHeightExpandTransition from '../../../transition/FadeInHeightExpandTransition'
-import render from '../../../utils/render'
 import NPopover from '../../../common/Popover'
+import NSubmenuHeader from './SubmenuHeader'
 import NMenu from './Menu'
 
 export default {
   name: 'NSubmenu',
   components: {
+    NSubmenuHeader,
     FadeInHeightExpandTransition,
     NPopover,
-    NMenu,
-    render
+    NMenu
   },
   props: {
     value: {
@@ -141,7 +132,7 @@ export default {
     selectedInside () {
       return this.menuItemNames.includes(this.NMenu.value)
     },
-    usePopover () {
+    renderedAsPopover () {
       return this.useCollapsedIconSize
     },
     useCollapsedIconSize () {
@@ -191,7 +182,7 @@ export default {
       return !this.NMenu.synthesizedOpenNames.includes(this.name)
     },
     synthesizedCollapsed () {
-      if (this.rootMenuInPopover) return this.selfCollapsed
+      if (this.rootMenuInPopover) return false
       else if (this.rootMenuCollapsed) return true
       return this.selfCollapsed
     },
@@ -200,6 +191,9 @@ export default {
     },
     popMenuOpenNames () {
       return this.NMenu.synthesizedOpenNames
+    },
+    showArrow () {
+      return this.NMenu.showSubmenuArrow
     }
   },
   watch: {
@@ -208,9 +202,6 @@ export default {
         this.delayedPaddingLeft = value
       })
     }
-  },
-  mounted () {
-    // console.log('submenu mounted', this.name)
   },
   provide () {
     return {

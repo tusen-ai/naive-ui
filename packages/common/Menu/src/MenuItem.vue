@@ -1,6 +1,5 @@
 <template>
   <li
-    :key="name"
     class="n-menu-item"
     :style="{ paddingLeft: delayedPaddingLeft + 'px' }"
     :class="{
@@ -9,22 +8,40 @@
     }"
     @click="handleClick"
   >
-    <div
-      v-if="$slots.icon"
-      class="n-menu-item__icon"
-      :style="{
-        width: maxIconSize && (maxIconSize + 'px'),
-        height: maxIconSize && (maxIconSize + 'px'),
-        fontSize: activeIconSize && (activeIconSize + 'px'),
-      }"
+    <template v-if="isFirstLevel">
+      <n-tooltip
+        placement="right"
+        show-arrow
+        :disabled="!rootMenuCollapsed"
+      >
+        <template v-slot:activator>
+          <n-menu-item-header
+            :max-icon-size="maxIconSize"
+            :active-icon-size="activeIconSize"
+            :title="title"
+            @click="handleClick"
+          >
+            <template v-slot:icon>
+              <slot name="icon" />
+            </template>
+            <slot />
+          </n-menu-item-header>
+        </template>
+        {{ title }}
+      </n-tooltip>
+    </template>
+    <n-menu-item-header
+      v-else
+      :max-icon-size="maxIconSize"
+      :active-icon-size="activeIconSize"
+      :title="title"
+      @click="handleClick"
     >
-      <slot name="icon" />
-    </div>
-    <div class="n-menu-item__header">
-      <slot>
-        <render :render="title" />
-      </slot>
-    </div>
+      <template v-slot:icon>
+        <slot name="icon" />
+      </template>
+      <slot />
+    </n-menu-item-header>
   </li>
 </template>
 
@@ -32,12 +49,14 @@
 import collectable from '../../../mixins/collectable'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
-import render from '../../../utils/render'
+import NMenuItemHeader from './MenuItemHeader'
+import NTooltip from '../../Tooltip'
 
 export default {
   name: 'NMenuItem',
   components: {
-    render
+    NMenuItemHeader,
+    NTooltip
   },
   mixins: [
     collectable('NSubmenu', 'menuItemNames', 'name', true, function (injection) {
@@ -81,6 +100,9 @@ export default {
     }
   },
   computed: {
+    rootMenuCollapsed () {
+      return this.NMenu.collapsed
+    },
     useCollapsedIconSize () {
       return this.NMenu.collapsed && this.isFirstLevel
     },
@@ -105,7 +127,7 @@ export default {
     },
     paddingLeft () {
       if (this.isFirstLevel && this.NMenu.collapsedWidth !== null && this.NMenu.collapsed) {
-        return this.NMenu.collapsedWidth / 2 - this.iconSize / 2
+        return this.NMenu.collapsedWidth / 2 - this.collapsedIconSize / 2
       }
       if (this.NMenuItemGroup) {
         return this.NMenu.indent / 2 + this.NMenuItemGroup.paddingLeft

@@ -33,11 +33,11 @@ export default function (
         this.registerValue(this[registerProperty])
       }
     },
-    mounted () {
-      if (this.activeCollectableInjection) {
-        this.registerValue(this[registerProperty])
-      }
-    },
+    // mounted () {
+    //   if (this.activeCollectableInjection) {
+    //     this.registerValue(this[registerProperty])
+    //   }
+    // },
     beforeDestroy () {
       // console.log('before destroy', this.name, this.$el)
       if (this.activeCollectableInjection) {

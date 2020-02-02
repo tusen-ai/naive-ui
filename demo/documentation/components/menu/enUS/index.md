@@ -8,4 +8,5 @@ disabled
 openNames
 defaultOpenNames
 icon
+collapse
 ```

@@ -4,7 +4,8 @@
     :class="{
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
       [`n-menu--${mode}`]: mode,
-      'n-menu--collapsed': collapsed
+      'n-menu--collapsed': collapsed,
+      'n-menu--transition-disabled': transitionDisabled
     }"
   >
     <ul class="n-menu-list">
@@ -67,13 +68,19 @@ export default {
       type: Array,
       default: undefined
     },
+    /** private */
     inPopover: {
       type: Boolean,
       default: false
+    },
+    showSubmenuArrow: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
     return {
+      transitionDisabled: true,
       internalOpenNames: this.openNames || this.defaultOpenNames || []
     }
   },
@@ -82,6 +89,9 @@ export default {
       if (this.openNames !== undefined) return this.openNames || []
       else return this.internalOpenNames
     }
+  },
+  mounted () {
+    this.disableTransitionOneTick()
   },
   methods: {
     handleSelect (value) {
@@ -106,6 +116,12 @@ export default {
         this.internalOpenNames = names
       }
       this.$emit('open-names-change', names)
+    },
+    disableTransitionOneTick () {
+      this.transitionDisabled = true
+      this.$nextTick().then(() => {
+        this.transitionDisabled = false
+      })
     }
   }
 }
