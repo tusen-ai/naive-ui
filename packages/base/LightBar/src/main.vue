@@ -51,7 +51,7 @@ export default {
         }, delay)
       }
     },
-    updateLightBarTop (el, getLightBarTop = el => el.offsetTop) {
+    updateLightBarTop (el, getLightBarTop = elm => elm.offsetTop) {
       if (!el) return
       this.vanishTimerId && window.clearTimeout(this.vanishTimerId)
       this.vanishTimerId = null

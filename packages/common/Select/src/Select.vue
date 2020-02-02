@@ -340,21 +340,21 @@ export default {
     mapValuesToOptions (values) {
       if (!Array.isArray(values)) return []
       const remote = this.remote
-      const valueToOptionMap = this.valueToOptionMap
+      const valueOptionMap = this.valueToOptionMap
       const options = []
       if (remote) {
         const memorizedValueToOptionMap = this.memorizedValueToOptionMap
         values.forEach(value => {
-          if (valueToOptionMap.has(value)) {
-            options.push(valueToOptionMap.get(value))
+          if (valueOptionMap.has(value)) {
+            options.push(valueOptionMap.get(value))
           } else if (memorizedValueToOptionMap.has(value)) {
             options.push(memorizedValueToOptionMap.get(value))
           }
         })
       } else {
         values.forEach(value => {
-          if (valueToOptionMap.has(value)) {
-            options.push(valueToOptionMap.get(value))
+          if (valueOptionMap.has(value)) {
+            options.push(valueOptionMap.get(value))
           }
         })
       }
@@ -378,12 +378,12 @@ export default {
     clearMultipleSelectValue (value) {
       if (!Array.isArray(value)) return []
       const remote = this.remote
-      const valueToOptionMap = this.valueToOptionMap
+      const valueOptionMap = this.valueToOptionMap
       if (remote) {
         const memorizedValueToOptionMap = this.memorizedValueToOptionMap
-        return value.filter(v => valueToOptionMap.has(v) || memorizedValueToOptionMap.has(v))
+        return value.filter(v => valueOptionMap.has(v) || memorizedValueToOptionMap.has(v))
       } else {
-        return value.filter(v => valueToOptionMap.has(v))
+        return value.filter(v => valueOptionMap.has(v))
       }
     },
     handleToggleOption (option) {

@@ -274,7 +274,7 @@ export default {
         })
       }
     },
-    scrollToElement (el, getTop = el => el.offsetTop, getHeight = el => el.offsetHeight) {
+    scrollToElement (el, getTop = elm => elm.offsetTop, getHeight = elm => elm.offsetHeight) {
       if (this.withoutScrollbar) return
       const top = getTop(el)
       const container = this._container()

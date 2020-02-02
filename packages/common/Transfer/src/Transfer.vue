@@ -428,15 +428,18 @@ export default {
         }
       }
     },
+    handleToTargetClickWhenVirtualScroll () {
+      let nextValue = Array.isArray(this.value) ? this.value : []
+      nextValue = this.sourceCheckedValues.concat(nextValue)
+      const sourceCheckedValueSet = this.sourceCheckedValueSet
+      this.memorizedSourceOptions = this.memorizedSourceOptions
+        .filter(option => !sourceCheckedValueSet.has(option.value))
+      this.$emit('change', nextValue)
+      this.sourceCheckedValues = []
+    },
     handleToTargetClick () {
       if (this.virtualScroll) {
-        let newValue = Array.isArray(this.value) ? this.value : []
-        newValue = this.sourceCheckedValues.concat(newValue)
-        const sourceCheckedValueSet = this.sourceCheckedValueSet
-        this.memorizedSourceOptions = this.memorizedSourceOptions
-          .filter(option => !sourceCheckedValueSet.has(option.value))
-        this.$emit('change', newValue)
-        this.sourceCheckedValues = []
+        this.handleToTargetClickWhenVirtualScroll()
         return
       }
       this.enableTargetEnterAnimation = true
@@ -470,16 +473,19 @@ export default {
       /** auto play target options enter animation */
       this.$emit('change', newValue)
     },
+    handleToSourceClickWhenVirtualScroll () {
+      let newValue = Array.isArray(this.value) ? this.value : []
+      const targetValueSet = this.targetCheckedValueSet
+      newValue = newValue.filter(value => !targetValueSet.has(value))
+      const valueToOptionMap = this.valueToOptionMap
+      const newSourceOptions = this.targetCheckedValues.map(value => valueToOptionMap.get(value))
+      this.memorizedSourceOptions = newSourceOptions.concat(this.memorizedSourceOptions)
+      this.$emit('change', newValue)
+      this.targetCheckedValues = []
+    },
     handleToSourceClick () {
       if (this.virtualScroll) {
-        let newValue = Array.isArray(this.value) ? this.value : []
-        const targetValueSet = this.targetCheckedValueSet
-        newValue = newValue.filter(value => !targetValueSet.has(value))
-        const valueToOptionMap = this.valueToOptionMap
-        const newSourceOptions = this.targetCheckedValues.map(value => valueToOptionMap.get(value))
-        this.memorizedSourceOptions = newSourceOptions.concat(this.memorizedSourceOptions)
-        this.$emit('change', newValue)
-        this.targetCheckedValues = []
+        this.handleToSourceClickWhenVirtualScroll()
         return
       }
       this.enableSourceEnterAnimation = true

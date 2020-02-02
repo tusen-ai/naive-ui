@@ -392,16 +392,20 @@ export default {
          */
         const order = activeSorter.order
         if (order === false) console.error(['[naive-ui/data-table/sorted-data]: The order of activeSorter shouldn\'t be `false`'])
-        const sorter = (activeSorter.sorter === 'default' && ((row1, row2) => {
-          const value1 = row1[columnKey]
-          const value2 = row2[columnKey]
-          if (typeof value1 === 'number' && typeof value2 === 'number') {
-            return value1 - value2
-          } else if (typeof value1 === 'string' && typeof value2 === 'string') {
-            return value1.localeCompare(value2)
-          }
-          return 0
-        })) || activeSorter.sorter
+        const sorter = (
+          activeSorter.sorter === 'default'
+            ? (row1, row2) => {
+              const value1 = row1[columnKey]
+              const value2 = row2[columnKey]
+              if (typeof value1 === 'number' && typeof value2 === 'number') {
+                return value1 - value2
+              } else if (typeof value1 === 'string' && typeof value2 === 'string') {
+                return value1.localeCompare(value2)
+              }
+              return 0
+            }
+            : activeSorter.sorter
+        )
         return filteredData.sort((row1, row2) => getFlagOfOrder(order) * sorter(row1, row2))
       }
       return this.filteredData
