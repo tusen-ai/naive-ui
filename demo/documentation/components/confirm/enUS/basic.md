@@ -1,4 +1,5 @@
 # Basic
+Use `$NConfirm` to create a confirm modal.
 ```html
 <n-button @click="handleConfirm">
   Confirm
@@ -19,40 +20,40 @@
 export default {
   methods: {
     handleConfirm (e) {
-      const confirmInstance = this.$NConfirm.open({
-        title: "Confirm",
-        content: "Are u sure to ...?",
+      const confirmInstance = this.$NConfirm.warning({
+        title: 'Confirm',
+        content: 'Are u sure to ...?',
         onPositiveClick: (hide) => {
-          this.$NMessage.success("sure");
+          this.$NMessage.success('sure')
           hide()
         },
         onNegativeClick: (hide) => {
-          this.$NMessage.error("cancel");
+          this.$NMessage.error('cancel')
           hide()
         }
-      });
+      })
     },
     handleSuccess (e) {
       const confirmInstance = this.$NConfirm.success({
-        title: "Success",
+        title: 'Success',
         content:
-          "Premium designed icons for use in web, iOS, Android, and desktop apps. Support for SVG and web font. Completely open source, MIT licensed and built by the Ionic Framework team.",
+          'Premium designed icons for use in web, iOS, Android, and desktop apps. Support for SVG and web font. Completely open source, MIT licensed and built by the Ionic Framework team.',
         onPositiveClick: (hide) => {
-          this.$NMessage.success("show tooltip");
+          this.$NMessage.success('show tooltip')
           hide()
         }
-      });
+      })
     },
     handleError(e) {
       const confirmInstance = this.$NConfirm.error({
-        title: "Error",
-        content: "这是一个测试？",
+        title: 'Error',
+        content: 'Is this a test?',
         onPositiveClick: (hide) => {
-          this.$NMessage.success("I know..");
+          this.$NMessage.success('I know..')
           hide()
         }
-      });
+      })
     }
   }
-};
+}
 ```

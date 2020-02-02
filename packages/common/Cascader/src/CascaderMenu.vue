@@ -1,8 +1,8 @@
 <template>
   <div
-    class="n-detached-content-container"
+    class="n-positioning-container"
   >
-    <div ref="content" class="n-detached-content">
+    <div ref="content" class="n-positioning-content">
       <transition name="n-cascader-menu--transition">
         <div
           v-if="active"

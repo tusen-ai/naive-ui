@@ -36,7 +36,7 @@ Hold each other close the whole night through`,
         onClose: (next) => {
           next()
         },
-        onAfterClose: () => {
+        onAfterHide: () => {
           this.$NMessage.success(`Wouldn't it be Nice`)
         },
       })
@@ -60,7 +60,7 @@ I cant get no, I cant get no`,
             on: {
               click: () => {
                 markAsRead = true
-                notification.close()
+                notification.hide()
               }
             }
           },

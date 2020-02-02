@@ -17,11 +17,15 @@ export default {
   name: 'NPopover',
   functional: true,
   props: {
-    value: {
+    show: {
       type: Boolean,
       default: false
     },
     arrow: {
+      type: Boolean,
+      default: undefined
+    },
+    showArrow: {
       type: Boolean,
       default: true
     },
@@ -31,11 +35,11 @@ export default {
     },
     delay: {
       type: Number,
-      default: 0
+      default: 200
     },
     duration: {
       type: Number,
-      default: 300
+      default: 200
     },
     raw: {
       type: Boolean,
@@ -69,8 +73,12 @@ export default {
       type: String,
       default: 'n-popover'
     },
-    contentClass: {
+    overlayClass: {
       type: String,
+      default: null
+    },
+    overlayStyle: {
+      type: Object,
       default: null
     },
     manuallyPositioned: {
@@ -84,6 +92,10 @@ export default {
     y: {
       type: Number,
       default: null
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   render (h, context) {
@@ -112,6 +124,7 @@ export default {
         h(NPopoverContent, {
           props: {
             ...props,
+            arrow: props.arrow === undefined ? props.showArrow : props.arrow,
             controller,
             id
           },

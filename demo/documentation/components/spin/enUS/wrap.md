@@ -1,4 +1,5 @@
 # Wrap
+You can wrap a component inside spin. To match regular components's size, spin alse provides `in-small`, `in-medium` and `in-large` sizes.
 ```html
 <div
 >
@@ -8,7 +9,7 @@
     :spinning="spinning"
   >
     <n-button size="small">
-      Small Spin
+      in small
     </n-button>
   </n-spin>
   <n-spin
@@ -17,7 +18,7 @@
     :spinning="spinning"
   >
     <n-button size="medium">
-      Medium Spin
+      in medium
     </n-button>
   </n-spin>
   <n-spin
@@ -26,22 +27,21 @@
     :spinning="spinning"
   >
     <n-button size="large">
-      Large Spin
+      in large
     </n-button>
   </n-spin>
   <n-spin
-    style="display:inline-block" 
     :spinning="spinning"
   >
     <n-alert
-      title="Success Text"
+      title="La La La"
       type="success"
     >
-      Leave it till tomorrow to unpack my case
+      Leave it till tomorrow to unpack my case. Honey disconnect the phone.
     </n-alert>
   </n-spin>
 </div>
- <pre class="n-doc-section__inspect"><n-button @click="spinning = !spinning">spin</n-button></pre>
+<n-button @click="spinning = !spinning">Click to Spin</n-button>
 ```
 ```js
 export default {
@@ -50,5 +50,14 @@ export default {
       spinning: false
     }
   }
+}
+```
+```css
+.n-button {
+  margin: 0 8px 12px 0;
+}
+
+.n-alert {
+  margin: 0 0 12px 0;
 }
 ```

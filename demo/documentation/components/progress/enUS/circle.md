@@ -1,4 +1,5 @@
 # Circle
+Progress can be a circle. It can be `default`, `info`, `success`, `warning` or `error` status.
 ```html
 <n-progress
   type="circle"
@@ -24,12 +25,14 @@
   status="error"
   :percentage="percentage"
 />
-<n-button @click="minus">
-  Minus 10%
-</n-button>
-<n-button @click="add">
-  Add 10%
-</n-button>
+<div>
+  <n-button @click="minus">
+    Minus 10%
+  </n-button>
+  <n-button @click="add">
+    Add 10%
+  </n-button>
+</div>
 ```
 ```js
 export default {
@@ -48,5 +51,13 @@ export default {
       if (this.percentage < 0) this.percentage = 100
     }
   }
+}
+```
+```css
+.n-progress {
+  margin: 0 8px 12px 0;
+}
+.n-button {
+  margin: 0 8px 12px 0;
 }
 ```

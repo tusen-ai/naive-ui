@@ -9,7 +9,7 @@
 export default {
   data () {
     return {
-      value: null,
+      value: 0,
       validator: x => x > 0
     }
   }

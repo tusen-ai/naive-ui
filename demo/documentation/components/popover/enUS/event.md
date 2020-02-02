@@ -35,7 +35,7 @@
   </span>
 </n-popover>
 <n-popover
-  v-model="showPopover"
+  :show="showPopover"
   placement="bottom"
   :width="200"
   trigger="manual"

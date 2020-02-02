@@ -1,4 +1,5 @@
 # Actions After Select
+Blur after selection or clear after selection.
 ```html
 <n-auto-complete
   :options="options"

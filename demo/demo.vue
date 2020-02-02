@@ -1,6 +1,6 @@
 <template>
   <n-config-provider class="demo" namespace="naive-ui-doc" :theme="theme" :language="lang">
-    <n-nimbus-service-layout :padding-body="false" :items="items">
+    <n-nimbus-service-layout ref="layout" :padding-body="false" :items="items">
       <template v-slot:nav>
         <doc-header
           :lang="lang"
@@ -21,8 +21,12 @@ export default {
   components: {
     DocHeader
   },
+  provide () {
+    return {
+      NDocRoot: this
+    }
+  },
   beforeRouteEnter (to, from, next) {
-    // console.log(i18n)
     i18n.locale = to.params.lang
     next()
   },
@@ -85,301 +89,296 @@ export default {
           path: `/${this.lang}/${this.theme}` + '/n-theme'
         },
         appendCounts({
-          name: 'Components',
+          name: 'Config Components',
+          group: true,
           childItems: [
             {
-              name: 'Config Components',
-              group: true,
-              childItems: [
-                {
-                  name: 'Config Provider',
-                  path: `/${this.lang}/${this.theme}` + '/n-config-provider'
-                },
-                {
-                  name: 'Config Consumer',
-                  path: `/${this.lang}/${this.theme}` + '/n-config-consumer'
-                },
-                {
-                  name: 'Element',
-                  path: `/${this.lang}/${this.theme}` + '/n-element'
-                }
-              ]
+              name: 'Config Provider',
+              path: `/${this.lang}/${this.theme}` + '/n-config-provider'
             },
             {
-              name: 'Layout Components',
-              group: true,
-              childItems: [
-                {
-                  name: 'Layout',
-                  path: `/${this.lang}/${this.theme}` + '/n-layout'
-                },
-                {
-                  name: 'Grid',
-                  path: `/${this.lang}/${this.theme}` + '/n-grid'
-                }
-              ]
+              name: 'Config Consumer',
+              path: `/${this.lang}/${this.theme}` + '/n-config-consumer'
             },
             {
-              name: 'Common Components',
-              group: true,
-              childItems: [
-                {
-                  name: 'Avatar',
-                  path: `/${this.lang}/${this.theme}` + '/n-avatar'
-                },
-                {
-                  name: 'Button',
-                  path: `/${this.lang}/${this.theme}` + '/n-button'
-                },
-                {
-                  name: 'Card',
-                  path: `/${this.lang}/${this.theme}` + '/n-card'
-                },
-                {
-                  name: 'Collapse',
-                  path: `/${this.lang}/${this.theme}` + '/n-collapse'
-                },
-                {
-                  name: 'Divider',
-                  path: `/${this.lang}/${this.theme}` + '/n-divider'
-                },
-                {
-                  name: 'Dropdown',
-                  path: `/${this.lang}/${this.theme}` + '/n-dropdown'
-                },
-                {
-                  name: 'Gradient Text',
-                  path: `/${this.lang}/${this.theme}` + '/n-gradient-text'
-                },
-                {
-                  name: 'Icon',
-                  path: `/${this.lang}/${this.theme}` + '/n-icon'
-                },
-                {
-                  name: 'Tag',
-                  path: `/${this.lang}/${this.theme}` + '/n-tag'
-                },
-                {
-                  name: 'Typography',
-                  path: `/${this.lang}/${this.theme}` + '/n-typography'
-                }
-              ]
+              name: 'Element',
+              path: `/${this.lang}/${this.theme}` + '/n-element'
+            }
+          ]
+        }),
+        appendCounts({
+          name: 'Layout Components',
+          group: true,
+          childItems: [
+            {
+              name: 'Layout',
+              path: `/${this.lang}/${this.theme}` + '/n-layout'
             },
             {
-              name: 'Data Input Components',
-              group: true,
-              childItems: [
-                {
-                  name: 'Auto Complete',
-                  path: `/${this.lang}/${this.theme}` + '/n-auto-complete'
-                },
-                {
-                  name: 'Cascader',
-                  path: `/${this.lang}/${this.theme}` + '/n-cascader'
-                },
-                {
-                  name: 'Checkbox',
-                  path: `/${this.lang}/${this.theme}` + '/n-checkbox'
-                },
-                {
-                  name: 'Custom Input (in progress)',
-                  path: `/${this.lang}/${this.theme}` + '/n-custom-input'
-                },
-                {
-                  name: 'Date Picker',
-                  path: `/${this.lang}/${this.theme}` + '/n-date-picker'
-                },
-                {
-                  name: 'Form',
-                  path: `/${this.lang}/${this.theme}` + '/n-form'
-                },
-                {
-                  name: 'Input',
-                  path: `/${this.lang}/${this.theme}` + '/n-input'
-                },
-                {
-                  name: 'Input Number',
-                  path: `/${this.lang}/${this.theme}` + '/n-input-number'
-                },
-                {
-                  name: 'Radio',
-                  path: `/${this.lang}/${this.theme}` + '/n-radio'
-                },
-                {
-                  name: 'Select',
-                  path: `/${this.lang}/${this.theme}` + '/n-select'
-                },
-                {
-                  name: 'Slider',
-                  path: `/${this.lang}/${this.theme}` + '/n-slider'
-                },
-                {
-                  name: 'Switch',
-                  path: `/${this.lang}/${this.theme}` + '/n-switch'
-                },
-                {
-                  name: 'Time Picker',
-                  path: `/${this.lang}/${this.theme}` + '/n-time-picker'
-                },
-                {
-                  name: 'Transfer',
-                  path: `/${this.lang}/${this.theme}` + '/n-transfer'
-                }
-              ]
+              name: 'Grid',
+              path: `/${this.lang}/${this.theme}` + '/n-grid'
+            }
+          ]
+        }),
+        appendCounts({
+          name: 'Common Components',
+          group: true,
+          childItems: [
+            {
+              name: 'Avatar',
+              path: `/${this.lang}/${this.theme}` + '/n-avatar'
             },
             {
-              name: 'Data Display Components',
-              group: true,
-              childItems: [
-                {
-                  name: 'Code',
-                  path: `/${this.lang}/${this.theme}` + '/n-code'
-                },
-                {
-                  name: 'DataTable',
-                  path: `/${this.lang}/${this.theme}` + '/n-data-table'
-                },
-                {
-                  name: 'Descriptions',
-                  path: `/${this.lang}/${this.theme}` + '/n-descriptions'
-                },
-                {
-                  name: 'Empty',
-                  path: `/${this.lang}/${this.theme}` + '/n-empty'
-                },
-                {
-                  name: 'List',
-                  path: `/${this.lang}/${this.theme}` + '/n-list'
-                },
-                {
-                  name: 'Log',
-                  path: `/${this.lang}/${this.theme}` + '/n-log'
-                },
-                {
-                  name: 'Statistic',
-                  path: `/${this.lang}/${this.theme}` + '/n-statistic'
-                },
-                {
-                  name: 'Thing',
-                  path: `/${this.lang}/${this.theme}` + '/n-thing'
-                },
-                {
-                  name: 'Time',
-                  path: `/${this.lang}/${this.theme}` + '/n-time'
-                },
-                {
-                  name: 'Timeline',
-                  path: `/${this.lang}/${this.theme}` + '/n-timeline'
-                },
-                {
-                  name: 'Tree (in progress)',
-                  path: `/${this.lang}/${this.theme}` + '/n-tree'
-                }
-              ]
+              name: 'Button',
+              path: `/${this.lang}/${this.theme}` + '/n-button'
             },
             {
-              name: 'Navigation Components',
-              group: true,
-              childItems: [
-                {
-                  name: 'Affix',
-                  path: `/${this.lang}/${this.theme}` + '/n-affix'
-                },
-                {
-                  name: 'Anchor',
-                  path: `/${this.lang}/${this.theme}` + '/n-anchor'
-                },
-                {
-                  name: 'BackTop',
-                  path: `/${this.lang}/${this.theme}` + '/n-back-top'
-                },
-                {
-                  name: 'Breadcrumb',
-                  path: `/${this.lang}/${this.theme}` + '/n-breadcrumb'
-                },
-                {
-                  name: 'Loading Bar',
-                  path: `/${this.lang}/${this.theme}` + '/n-loading-bar'
-                },
-                {
-                  name: 'Menu',
-                  path: `/${this.lang}/${this.theme}` + '/n-menu'
-                },
-                {
-                  name: 'Pagination',
-                  path: `/${this.lang}/${this.theme}` + '/n-pagination'
-                },
-                {
-                  name: 'Steps',
-                  path: `/${this.lang}/${this.theme}` + '/n-steps'
-                },
-                {
-                  name: 'Tabs',
-                  path: `/${this.lang}/${this.theme}` + '/n-tabs'
-                }
-              ]
+              name: 'Card',
+              path: `/${this.lang}/${this.theme}` + '/n-card'
             },
             {
-              name: 'Feedback Components',
-              group: true,
-              childItems: [
-                {
-                  name: 'Alert',
-                  path: `/${this.lang}/${this.theme}` + '/n-alert'
-                },
-                {
-                  name: 'Badge',
-                  path: `/${this.lang}/${this.theme}` + '/n-badge'
-                },
-                {
-                  name: 'Confirm',
-                  path: `/${this.lang}/${this.theme}` + '/n-confirm'
-                },
-                {
-                  name: 'Drawer',
-                  path: `/${this.lang}/${this.theme}` + '/n-drawer'
-                },
-                {
-                  name: 'Message',
-                  path: `/${this.lang}/${this.theme}` + '/n-message'
-                },
-                {
-                  name: 'Modal',
-                  path: `/${this.lang}/${this.theme}` + '/n-modal'
-                },
-                {
-                  name: 'Notification',
-                  path: `/${this.lang}/${this.theme}` + '/n-notification'
-                },
-                {
-                  name: 'Popover',
-                  path: `/${this.lang}/${this.theme}` + '/n-popover'
-                },
-                {
-                  name: 'Popconfirm',
-                  path: `/${this.lang}/${this.theme}` + '/n-popconfirm'
-                },
-                {
-                  name: 'Popselect',
-                  path: `/${this.lang}/${this.theme}` + '/n-popselect'
-                },
-                {
-                  name: 'Progress',
-                  path: `/${this.lang}/${this.theme}` + '/n-progress'
-                },
-                {
-                  name: 'Result',
-                  path: `/${this.lang}/${this.theme}` + '/n-result'
-                },
-                {
-                  name: 'Spin',
-                  path: `/${this.lang}/${this.theme}` + '/n-spin'
-                },
-                {
-                  name: 'Tooltip',
-                  path: `/${this.lang}/${this.theme}` + '/n-tooltip'
-                }
-              ]
+              name: 'Collapse',
+              path: `/${this.lang}/${this.theme}` + '/n-collapse'
+            },
+            {
+              name: 'Divider',
+              path: `/${this.lang}/${this.theme}` + '/n-divider'
+            },
+            {
+              name: 'Dropdown',
+              path: `/${this.lang}/${this.theme}` + '/n-dropdown'
+            },
+            {
+              name: 'Gradient Text',
+              path: `/${this.lang}/${this.theme}` + '/n-gradient-text'
+            },
+            {
+              name: 'Icon',
+              path: `/${this.lang}/${this.theme}` + '/n-icon'
+            },
+            {
+              name: 'Tag',
+              path: `/${this.lang}/${this.theme}` + '/n-tag'
+            },
+            {
+              name: 'Typography',
+              path: `/${this.lang}/${this.theme}` + '/n-typography'
+            }
+          ]
+        }),
+        appendCounts({
+          name: 'Data Input Components',
+          group: true,
+          childItems: [
+            {
+              name: 'Auto Complete',
+              path: `/${this.lang}/${this.theme}` + '/n-auto-complete'
+            },
+            {
+              name: 'Cascader',
+              path: `/${this.lang}/${this.theme}` + '/n-cascader'
+            },
+            {
+              name: 'Checkbox',
+              path: `/${this.lang}/${this.theme}` + '/n-checkbox'
+            },
+            {
+              name: 'Custom Input (in progress)',
+              path: `/${this.lang}/${this.theme}` + '/n-custom-input'
+            },
+            {
+              name: 'Date Picker',
+              path: `/${this.lang}/${this.theme}` + '/n-date-picker'
+            },
+            {
+              name: 'Form',
+              path: `/${this.lang}/${this.theme}` + '/n-form'
+            },
+            {
+              name: 'Input',
+              path: `/${this.lang}/${this.theme}` + '/n-input'
+            },
+            {
+              name: 'Input Number',
+              path: `/${this.lang}/${this.theme}` + '/n-input-number'
+            },
+            {
+              name: 'Radio',
+              path: `/${this.lang}/${this.theme}` + '/n-radio'
+            },
+            {
+              name: 'Select',
+              path: `/${this.lang}/${this.theme}` + '/n-select'
+            },
+            {
+              name: 'Slider',
+              path: `/${this.lang}/${this.theme}` + '/n-slider'
+            },
+            {
+              name: 'Switch',
+              path: `/${this.lang}/${this.theme}` + '/n-switch'
+            },
+            {
+              name: 'Time Picker',
+              path: `/${this.lang}/${this.theme}` + '/n-time-picker'
+            },
+            {
+              name: 'Transfer',
+              path: `/${this.lang}/${this.theme}` + '/n-transfer'
+            }
+          ]
+        }),
+        appendCounts({
+          name: 'Data Display Components',
+          group: true,
+          childItems: [
+            {
+              name: 'Code',
+              path: `/${this.lang}/${this.theme}` + '/n-code'
+            },
+            {
+              name: 'DataTable',
+              path: `/${this.lang}/${this.theme}` + '/n-data-table'
+            },
+            {
+              name: 'Descriptions',
+              path: `/${this.lang}/${this.theme}` + '/n-descriptions'
+            },
+            {
+              name: 'Empty',
+              path: `/${this.lang}/${this.theme}` + '/n-empty'
+            },
+            {
+              name: 'List',
+              path: `/${this.lang}/${this.theme}` + '/n-list'
+            },
+            {
+              name: 'Log',
+              path: `/${this.lang}/${this.theme}` + '/n-log'
+            },
+            {
+              name: 'Statistic',
+              path: `/${this.lang}/${this.theme}` + '/n-statistic'
+            },
+            {
+              name: 'Thing',
+              path: `/${this.lang}/${this.theme}` + '/n-thing'
+            },
+            {
+              name: 'Time',
+              path: `/${this.lang}/${this.theme}` + '/n-time'
+            },
+            {
+              name: 'Timeline',
+              path: `/${this.lang}/${this.theme}` + '/n-timeline'
+            },
+            {
+              name: 'Tree (in progress)',
+              path: `/${this.lang}/${this.theme}` + '/n-tree'
+            }
+          ]
+        }),
+        appendCounts({
+          name: 'Navigation Components',
+          group: true,
+          childItems: [
+            {
+              name: 'Affix',
+              path: `/${this.lang}/${this.theme}` + '/n-affix'
+            },
+            {
+              name: 'Anchor',
+              path: `/${this.lang}/${this.theme}` + '/n-anchor'
+            },
+            {
+              name: 'BackTop',
+              path: `/${this.lang}/${this.theme}` + '/n-back-top'
+            },
+            {
+              name: 'Breadcrumb',
+              path: `/${this.lang}/${this.theme}` + '/n-breadcrumb'
+            },
+            {
+              name: 'Loading Bar',
+              path: `/${this.lang}/${this.theme}` + '/n-loading-bar'
+            },
+            {
+              name: 'Menu',
+              path: `/${this.lang}/${this.theme}` + '/n-menu'
+            },
+            {
+              name: 'Pagination',
+              path: `/${this.lang}/${this.theme}` + '/n-pagination'
+            },
+            {
+              name: 'Steps',
+              path: `/${this.lang}/${this.theme}` + '/n-steps'
+            },
+            {
+              name: 'Tabs',
+              path: `/${this.lang}/${this.theme}` + '/n-tabs'
+            }
+          ]
+        }),
+        appendCounts({
+          name: 'Feedback Components',
+          group: true,
+          childItems: [
+            {
+              name: 'Alert',
+              path: `/${this.lang}/${this.theme}` + '/n-alert'
+            },
+            {
+              name: 'Badge',
+              path: `/${this.lang}/${this.theme}` + '/n-badge'
+            },
+            {
+              name: 'Confirm',
+              path: `/${this.lang}/${this.theme}` + '/n-confirm'
+            },
+            {
+              name: 'Drawer',
+              path: `/${this.lang}/${this.theme}` + '/n-drawer'
+            },
+            {
+              name: 'Message',
+              path: `/${this.lang}/${this.theme}` + '/n-message'
+            },
+            {
+              name: 'Modal',
+              path: `/${this.lang}/${this.theme}` + '/n-modal'
+            },
+            {
+              name: 'Notification',
+              path: `/${this.lang}/${this.theme}` + '/n-notification'
+            },
+            {
+              name: 'Popover',
+              path: `/${this.lang}/${this.theme}` + '/n-popover'
+            },
+            {
+              name: 'Popconfirm',
+              path: `/${this.lang}/${this.theme}` + '/n-popconfirm'
+            },
+            {
+              name: 'Popselect',
+              path: `/${this.lang}/${this.theme}` + '/n-popselect'
+            },
+            {
+              name: 'Progress',
+              path: `/${this.lang}/${this.theme}` + '/n-progress'
+            },
+            {
+              name: 'Result',
+              path: `/${this.lang}/${this.theme}` + '/n-result'
+            },
+            {
+              name: 'Spin',
+              path: `/${this.lang}/${this.theme}` + '/n-spin'
+            },
+            {
+              name: 'Tooltip',
+              path: `/${this.lang}/${this.theme}` + '/n-tooltip'
             }
           ]
         }),
@@ -479,6 +478,9 @@ export default {
     }
   },
   methods: {
+    resetScrollPosition () {
+      this.$refs.layout.resetScrollPosition()
+    },
     handleLangChange (lang) {
       this.lang = lang
     }

@@ -1,16 +1,22 @@
-# Name Size
+# Content Size
+Words' sizing would be auto adjusted in avatar.
 ```html
 <n-avatar>{{ value }}</n-avatar>
 <n-avatar circle>{{ value }}</n-avatar>
-<n-avatar circle>Liu<br>{{ value }}</n-avatar>
+<n-avatar circle>the <br>{{ value }}</n-avatar>
 <n-input v-model="value"/>
 ```
 ```js
 export default {
   data () {
     return {
-      value: 'Dehua'
+      value: 'Oasis'
     }
   }
+}
+```
+```css
+.n-avatar {
+  margin: 0 8px 12px 0;
 }
 ```

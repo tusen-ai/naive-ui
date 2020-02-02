@@ -1,6 +1,6 @@
 <template>
-  <div class="n-detached-content-container">
-    <div ref="content" class="n-detached-content">
+  <div class="n-positioning-container">
+    <div ref="content" class="n-positioning-content">
       <transition name="n-cascader-menu--transition">
         <n-base-select-menu
           v-if="active"
@@ -12,9 +12,10 @@
           :options="filteredSelectOptions"
           :multiple="multiple"
           :size="size"
-          :is-selected="isSelected"
+          :is-option-selected="isSelected"
           @mousedown.native.prevent="() => {}"
           @menu-toggle-option="handleSelectMenuToggleOption"
+          @menu-visible="handleMenuVisible"
         />
       </transition>
     </div>
@@ -185,9 +186,12 @@ export default {
     },
     enter () {
       if (this.$refs.contentInner) {
-        const pendingOption = this.$refs.contentInner.pendingOption
-        this.handleSelectOptionCheck(pendingOption)
+        const pendingOptionData = this.$refs.contentInner.getPendingOptionData()
+        this.handleSelectOptionCheck(pendingOptionData)
       }
+    },
+    handleMenuVisible () {
+      this.updatePosition()
     }
   }
 }

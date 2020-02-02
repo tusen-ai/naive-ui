@@ -1,6 +1,6 @@
 @mixin setup-light-breadcrumb {
   $--breadcrumb-link-text-color: (
-    'default': $--neutral-4,
+    'default': $--n-meta-text-color,
     'active': $--n-text-color,
     'hover': $--primary-6
   ) !global;

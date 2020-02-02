@@ -1,4 +1,5 @@
 # Closable
+You may need when use it in modal.
 ```html
 <n-card title="Card" closable @close="handleClose">
   Card Content

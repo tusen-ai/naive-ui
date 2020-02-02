@@ -24,10 +24,13 @@ export default {
     this.open.bind(this)(options)
   },
   open (options) {
+    this.warning(options)
+  },
+  warning (options) {
     const instance = this.createInstance()
     updateConfirm(
       {
-        type: 'confirm',
+        type: 'warning',
         active: true,
         theme: this.theme,
         ...options

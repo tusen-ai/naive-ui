@@ -1,7 +1,8 @@
 # Custom Input Element
+You can replace auto-complete's input element.
 ```html
 <n-auto-complete :options="options" v-model="value">
-  <template v-slot:activator="{ handleInput, handleBlur, handleFocus, value }">
+  <template v-slot="{ handleInput, handleBlur, handleFocus, value }">
     <n-input
       type="textarea"
       @input="handleInput"

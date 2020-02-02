@@ -1,47 +1,73 @@
 export default function (
-  inject,
+  injectionName,
   collectionProperty,
-  registerProperty = 'value'
+  registerProperty = 'value',
+  bubble = false,
+  disabledCollectable = null
 ) {
+  const registerPropertyChangeHandler = function (value, oldValue) {
+    if (this.activeCollectableInjection) {
+      this.registerValue(value, oldValue)
+    }
+  }
+  const watch = {
+    [registerProperty]: registerPropertyChangeHandler
+  }
   return {
     computed: {
-      activeInjection () {
-        if (Array.isArray(inject)) {
-          const activeInjectionIndex = inject.findIndex(key => this[key])
+      activeCollectableInjection () {
+        if (Array.isArray(injectionName)) {
+          const activeInjectionIndex = injectionName.findIndex(key => this[key])
           if (~activeInjectionIndex) {
-            return this[inject[activeInjectionIndex]]
+            return this[injectionName[activeInjectionIndex]]
           }
         } else {
-          return this[inject]
+          return this[injectionName]
         }
         return null
       }
     },
-    watch: {
-      [registerProperty]: function (value, oldValue) {
-        if (this.activeInjection) {
-          this.registerValue(value, oldValue)
-        }
-      }
-    },
+    watch,
     created () {
-      if (this.activeInjection) {
+      if (this.activeCollectableInjection) {
         this.registerValue(this[registerProperty])
       }
     },
+    // mounted () {
+    //   if (this.activeCollectableInjection) {
+    //     this.registerValue(this[registerProperty])
+    //   }
+    // },
     beforeDestroy () {
-      if (this.activeInjection) {
+      // console.log('before destroy', this.name, this.$el)
+      if (this.activeCollectableInjection) {
         this.registerValue(undefined, this[registerProperty])
       }
     },
+    destroyed () {
+      // console.log('destroyed', this.name)
+    },
     methods: {
       registerValue (value = undefined, oldValue = undefined) {
-        if (this.activeInjection) {
-          const values = new Set(this.activeInjection[collectionProperty])
-          if (oldValue !== undefined) values.delete(oldValue)
-          if (value !== undefined) values.add(value)
-          this.activeInjection[collectionProperty] = Array.from(values)
-          // console.log(this.activeInjection[collectionProperty])
+        // console.log('registerValue')
+        let currentInjection = this.activeCollectableInjection
+        while (currentInjection) {
+          if (disabledCollectable && disabledCollectable.call(this, currentInjection)) return
+          const collectedValues = currentInjection[collectionProperty]
+          if (oldValue !== undefined) {
+            const oldValueIndex = collectedValues.findIndex(collectedValue => collectedValue === oldValue)
+            if (~oldValueIndex) {
+              collectedValues.splice(oldValueIndex, 1)
+            }
+          }
+          if (value !== undefined) {
+            const valueIndex = collectedValues.findIndex(collectedValue => collectedValue === value)
+            if (!~valueIndex) {
+              collectedValues.push(value)
+            }
+          }
+          if (!bubble) return
+          currentInjection = currentInjection[injectionName] || null
         }
       }
     }

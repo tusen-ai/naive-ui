@@ -54,19 +54,19 @@
     </n-input>
     <div
       ref="contentContainer"
-      class="n-detached-content-container n-date-picker-detached-content-container"
+      class="n-positioning-container"
       :class="{
         [namespace]: namespace
       }"
     >
       <div
         ref="content"
-        v-clickoutside="handleClickOutside"
-        class="n-dateched-content"
+        class="n-positioning-content"
       >
         <datetime-panel
           v-if="type === 'datetime'"
           ref="panel"
+          v-clickoutside="handleClickOutside"
           :value="value"
           :active="active"
           :actions="actions"
@@ -80,6 +80,7 @@
         <date-panel
           v-else-if="type === 'date'"
           ref="panel"
+          v-clickoutside="handleClickOutside"
           :value="value"
           :active="active"
           :actions="actions"
@@ -92,6 +93,7 @@
         <daterange-panel
           v-else-if="type === 'daterange'"
           ref="panel"
+          v-clickoutside="handleClickOutside"
           :value="value"
           :active="active"
           :actions="actions"
@@ -105,6 +107,7 @@
         <datetimerange-panel
           v-else-if="type === 'datetimerange'"
           ref="panel"
+          v-clickoutside="handleClickOutside"
           :value="value"
           :active="active"
           :actions="actions"
@@ -163,11 +166,6 @@ export default {
   directives: {
     clickoutside
   },
-  provide () {
-    return {
-      NDatePicker: this
-    }
-  },
   components: {
     NInput,
     NIcon,
@@ -186,6 +184,15 @@ export default {
     locale,
     asformitem()
   ],
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
+  provide () {
+    return {
+      NDatePicker: this
+    }
+  },
   props: {
     disabled: {
       type: Boolean,
@@ -201,7 +208,7 @@ export default {
     },
     size: {
       type: String,
-      default: 'default'
+      default: 'medium'
     },
     /**
      * type can be 'date', 'datetime'
@@ -243,18 +250,6 @@ export default {
     isTimeDisabled: {
       type: Function,
       default: undefined
-    },
-    rangeTimeDisabled: {
-      type: Function,
-      default: () => {
-        return false
-      }
-    },
-    disabledTime: {
-      type: Function,
-      default: () => {
-        return false
-      }
     }
   },
   data () {
@@ -325,18 +320,6 @@ export default {
      */
     value (value, oldValue) {
       this.refresh(value)
-      if (this.isRange) {
-        if (!(
-          Array.isArray(value) &&
-          Array.isArray(oldValue) &&
-          value.length === 2 &&
-          value.length === oldValue.length &&
-          value[0] === oldValue[0] &&
-          value[1] === oldValue[1]
-        )) {
-          this.$emit('change', value, oldValue)
-        }
-      } else { this.$emit('change', value, oldValue) }
     }
   },
   created () {
@@ -358,11 +341,11 @@ export default {
      * Panel Input
      */
     handlePanelInput (value, valueString) {
-      this.$emit('input', value, 'unavailable for now')
+      this.$emit('change', value)
       this.refresh(value)
     },
     handleRangePanelInput (value, valueString) {
-      this.$emit('input', value, 'unavailable for now')
+      this.$emit('change', value)
       this.refresh(value)
     },
     /**
@@ -412,7 +395,7 @@ export default {
       if (this.disabled) return
       const newSelectedDateTime = strictParse(this.displayTime, this.computedFormat, new Date())
       if (isValid(newSelectedDateTime)) {
-        this.$emit('input', getTime(newSelectedDateTime))
+        this.$emit('change', getTime(newSelectedDateTime))
       } else {
         this.refreshDisplayTime(this.value)
       }
@@ -440,7 +423,7 @@ export default {
     handleTimeInput (v) {
       const newSelectedDateTime = strictParse(this.displayTime, this.computedFormat, new Date())
       if (isValid(newSelectedDateTime)) {
-        this.$emit('input', getTime(newSelectedDateTime))
+        this.$emit('change', getTime(newSelectedDateTime))
       }
     },
     handleRangeInput (v, isValueInvalid) {
@@ -507,12 +490,12 @@ export default {
         time = getTime(time)
       }
       if (this.value === null) {
-        this.$emit('input', [time, time])
+        this.$emit('change', [time, time])
         this.refresh([time, time])
       } else {
         const newValue = [time, Math.max(this.value[1], time)]
         if (!isEqual(newValue, this.value)) {
-          this.$emit('input', newValue)
+          this.$emit('change', newValue)
           this.refresh(newValue)
         }
       }
@@ -522,12 +505,12 @@ export default {
         time = getTime(time)
       }
       if (this.value === null) {
-        this.$emit('input', [time, time])
+        this.$emit('change', [time, time])
         this.refresh([time, time])
       } else {
         const newValue = [Math.min(this.value[0], time), time]
         if (!isEqual(newValue, this.value)) {
-          this.$emit('input', newValue)
+          this.$emit('change', newValue)
           this.refresh(newValue)
         }
       }
@@ -540,7 +523,7 @@ export default {
       if (typeof endTime !== 'number') {
         endTime = getTime(endTime)
       }
-      this.$emit('input', [startTime, endTime])
+      this.$emit('change', [startTime, endTime])
       this.refresh([startTime, endTime])
     },
     setInvalidStatus (isValueInvalid) {

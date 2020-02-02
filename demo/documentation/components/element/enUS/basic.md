@@ -1,5 +1,5 @@
 # Basic
-When Config Provider provides dark theme, it applies `n-dark-theme` class on it. When Config Provider provides light theme, it applies `n-light-theme` class on it. If Neither, it won't apply any additional class on it. Just like other themed Naive UI components.
+When Config Provider provides dark theme, it applies `n-dark-theme` class on n-element. When Config Provider provides light theme, it applies `n-light-theme` class on it. If Neither, it won't apply any additional class on it. Just like other themed Naive UI components.
 
 It is very helpful to create themed component.
 

@@ -27,8 +27,7 @@ export default {
   props: {
     current: {
       type: Number,
-      default: null,
-      required: false
+      default: null
     },
     status: {
       type: String,

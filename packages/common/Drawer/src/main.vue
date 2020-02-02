@@ -1,6 +1,6 @@
 <template>
   <n-base-portal ref="portal">
-    <div class="n-detached-content-container">
+    <div class="n-detached-content-container" style="z-index: 1000;">
       <div
         class="n-drawer-container"
         :class="{

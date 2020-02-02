@@ -29,7 +29,7 @@ List all buttons here for debug usage.
       </n-button>
       <n-button
         type="info"
-        icon-position="right"
+        icon-placement="right"
       >
         <template v-slot:icon>
           <md-save />
@@ -92,7 +92,7 @@ List all buttons here for debug usage.
       <n-button
         type="warning"
         ghost
-        icon-position="right"
+        icon-placement="right"
       >
         <template v-slot:icon>
           <md-save />
@@ -158,7 +158,7 @@ List all buttons here for debug usage.
       <n-button
         type="success"
         loading
-        icon-position="right"
+        icon-placement="right"
       >
         <template v-slot:icon>
           <md-save />
@@ -230,7 +230,7 @@ List all buttons here for debug usage.
         type="error"
         ghost
         loading
-        icon-position="right"
+        icon-placement="right"
       >
         <template v-slot:icon>
           <md-save />
@@ -260,7 +260,7 @@ List all buttons here for debug usage.
       </n-button>
       <n-button
         type="info"
-        icon-position="right"
+        icon-placement="right"
         block
         size="large"
       >
@@ -311,7 +311,7 @@ List all buttons here for debug usage.
       </n-button>
       <n-button
         type="info"
-        icon-position="right"
+        icon-placement="right"
         circle
         size="large"
       >
@@ -395,7 +395,7 @@ List all buttons here for debug usage.
         </n-button>
         <n-button
           type="info"
-          icon-position="right"
+          icon-placement="right"
         >
           <template v-slot:icon>
             <md-save />
@@ -432,7 +432,7 @@ List all buttons here for debug usage.
         </n-button>
         <n-button
           type="info"
-          icon-position="right"
+          icon-placement="right"
         >
           <template v-slot:icon>
             <md-save />

@@ -109,7 +109,9 @@
       @include radio-group-size-mixin('medium');
       @include radio-group-size-mixin('large');
       display: inline-block;
-      white-space: nowrap;
+      @include m(button-group) {
+        white-space: nowrap;
+      }
       height: 28px;
       line-height: 28px;
     }

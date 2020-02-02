@@ -4,99 +4,92 @@
     :class="{
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
       'n-data-table--bordered': bordered,
-      'n-data-table--empty': paginatedData.length === 0
     }"
   >
-    <div
-      class="n-data-table-tables-wrapper"
-    >
-      <base-table
-        ref="mainTable"
-        main
-        :header-height="headerHeight"
-        :scroll-x="scrollX"
-        :body-style="bodyStyle"
-        :data="paginatedData"
-        :columns="columns"
-        :row-class-name="rowClassName"
-        :loading="loading"
-        :body-min-height="42"
-        @header-scroll="handleMainTableHeaderScroll"
-        @scroll="e => handleTableBodyScroll(e, 'main')"
-      >
-        <slot name="append" />
-      </base-table>
+    <n-spin :spinning="loading">
       <div
-        v-if="rightFixedColumns.length"
-        class="n-data-table-table-wrapper n-data-table-table-wrapper--right-fixed"
-        :class="{
-          'n-data-table-table-wrapper--active': mainTableScrollContainerWidth && mainTableScrollContainerWidth + horizontalScrollLeft < scrollX
-        }"
+        class="n-data-table-tables-wrapper"
       >
         <base-table
-          ref="rightFixedTable"
-          placement="right"
+          ref="mainTable"
+          main
           :header-height="headerHeight"
-          :columns="rightFixedColumns"
-          :data="paginatedData"
+          :scroll-x="scrollX"
           :body-style="bodyStyle"
-          :row-class-name="rowClassName"
-          :tr-heights="trHeights"
-          :loading="loading"
-          :fixed="true"
-          @scroll="e => handleTableBodyScroll(e, 'right')"
-        />
-      </div>
-      <div
-        v-if="leftFixedColumns.length"
-        class="n-data-table-table-wrapper n-data-table-table-wrapper--left-fixed"
-        :class="{
-          'n-data-table-table-wrapper--active': horizontalScrollLeft > 0
-        }"
-      >
-        <base-table
-          ref="leftFixedTable"
-          :header-height="headerHeight"
-          :columns="leftFixedColumns"
           :data="paginatedData"
-          :body-style="bodyStyle"
+          :columns="normalizedColumns"
           :row-class-name="rowClassName"
-          header-ref-name="header"
-          :tr-heights="trHeights"
           :loading="loading"
-          :fixed="true"
-          @scroll="e => handleTableBodyScroll(e, 'left')"
-        />
-      </div>
-      <transition name="n-table-loading--transition">
-        <div v-if="loading" class="n-data-table__loading">
-          <n-spin
-            :spinning="true"
-            style="width:100%;overflow:hidden;z-index:200;position:absolute;top:50%;"
+          :body-min-height="42"
+          @header-scroll="handleMainTableHeaderScroll"
+          @scroll="handleTableMainBodyScroll"
+        >
+          <slot name="append" />
+        </base-table>
+        <div
+          v-if="rightFixedColumns.length"
+          class="n-data-table-table-wrapper n-data-table-table-wrapper--right-fixed"
+          :class="{
+            'n-data-table-table-wrapper--active': mainTableScrollContainerWidth && mainTableScrollContainerWidth + horizontalScrollLeft < scrollX
+          }"
+        >
+          <base-table
+            ref="rightFixedTable"
+            placement="right"
+            :header-height="headerHeight"
+            :columns="rightFixedColumns"
+            :data="paginatedData"
+            :body-style="bodyStyle"
+            :row-class-name="rowClassName"
+            :tr-heights="trHeights"
+            :loading="loading"
+            :fixed="true"
+            @scroll="handleTableRightBodyScroll"
           />
         </div>
-      </transition>
-      <div
-        v-if="paginatedData.length === 0 && !loading"
-        class="n-data-table__empty"
-      >
-        No data
+        <div
+          v-if="leftFixedColumns.length"
+          class="n-data-table-table-wrapper n-data-table-table-wrapper--left-fixed"
+          :class="{
+            'n-data-table-table-wrapper--active': horizontalScrollLeft > 0
+          }"
+        >
+          <base-table
+            ref="leftFixedTable"
+            :header-height="headerHeight"
+            :columns="leftFixedColumns"
+            :data="paginatedData"
+            :body-style="bodyStyle"
+            :row-class-name="rowClassName"
+            header-ref-name="header"
+            :tr-heights="trHeights"
+            :loading="loading"
+            :fixed="true"
+            @scroll="handleTableLeftBodyScroll"
+          />
+        </div>
+        <div
+          v-if="paginatedData.length === 0"
+          class="n-data-table__empty"
+        >
+          <n-empty />
+        </div>
       </div>
-    </div>
-    <div
-      v-if="pagination"
-      class="n-data-table__pagination"
-    >
-      <n-pagination
-        :page="synthesizedPagination.page"
-        :page-count="synthesizedPagination.pageCount"
-        :page-slot="pagination.pageSlot"
-        :show-quick-jumper="!!pagination.showQuickJumper"
-        :disabled="loading || !!pagination.disabled"
-        :on-change="synthesizedOnPageChange"
-        :on-page-size-change="synthesizedOnPageSizeChange"
-      />
-    </div>
+      <div
+        v-if="pagination"
+        class="n-data-table__pagination"
+      >
+        <n-pagination
+          :page="synthesizedPagination.page"
+          :page-count="synthesizedPagination.pageCount"
+          :page-slot="pagination.pageSlot"
+          :show-quick-jumper="!!pagination.showQuickJumper"
+          :disabled="!!pagination.disabled"
+          :on-change="synthesizedOnPageChange"
+          :on-page-size-change="synthesizedOnPageSizeChange"
+        />
+      </div>
+    </n-spin>
   </div>
 </template>
 
@@ -105,6 +98,7 @@ import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import { setCheckStatusOfRow } from './utils'
 import BaseTable from './BaseTable.vue'
+import NEmpty from '../../Empty'
 
 function createShallowClonedArray (array) {
   if (Array.isArray(array)) return array.map(createShallowClonedObject)
@@ -125,10 +119,41 @@ function getFlagOfOrder (order) {
   return 0
 }
 
+function normalizeColumn (column) {
+  const defaultColumn = {
+    type: 'default',
+    align: 'left',
+    ellipsis: false,
+    className: null,
+    title: null,
+    key: undefined,
+
+    sorter: false,
+    defaultSortOrder: false,
+    sortOrder: null, // controlled
+
+    filter: false,
+    filterOptions: [],
+    filterOptionValues: null, // controlled
+    filterMode: 'or',
+    defaultFilterOptionValues: [],
+    filterMultiple: true,
+    fixed: false,
+    width: null
+  }
+  Object.keys(column).forEach(key => {
+    if (column[key] !== undefined) {
+      defaultColumn[key] = column[key]
+    }
+  })
+  return defaultColumn
+}
+
 export default {
   name: 'NDataTable',
   components: {
-    BaseTable
+    BaseTable,
+    NEmpty
   },
   mixins: [ withapp, themeable ],
   provide () {
@@ -141,19 +166,11 @@ export default {
       type: [ Object, Boolean ],
       default: false
     },
-    onChange: {
-      type: Function,
-      default: () => {}
-    },
     minHeight: {
-      type: [ Number, String ],
-      default: 'unset'
-    },
-    maxHeight: {
       type: [ Number, String ],
       default: null
     },
-    maxWidth: {
+    maxHeight: {
       type: [ Number, String ],
       default: null
     },
@@ -166,8 +183,12 @@ export default {
       default: () => []
     },
     rowClassName: {
-      type: [Array, String, Object, Function],
+      type: [String, Function],
       default: ''
+    },
+    rowKey: {
+      type: Function,
+      default: null
     },
     loading: {
       type: [Boolean],
@@ -180,6 +201,18 @@ export default {
     scrollX: {
       type: Number,
       default: null
+    },
+    defaultCheckedRowKeys: {
+      type: Array,
+      default: () => []
+    },
+    checkedRowKeys: {
+      type: Array,
+      default: null
+    },
+    paging: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -194,7 +227,7 @@ export default {
       scrollingPart: null,
       scrollTimerId: null,
       /** internal checked rows */
-      checkedRows: [],
+      internalCheckedRowKeys: [],
       /** internal filters state */
       internalActiveFilters: [],
       /** internal sorter state */
@@ -205,24 +238,30 @@ export default {
     }
   },
   computed: {
-    leftFixedColumns () {
+    normalizedColumns () {
       return this.columns
+        .map(column => normalizeColumn(column))
+    },
+    leftFixedColumns () {
+      return this.normalizedColumns
         .filter(column => column.fixed === 'left')
         .map(column => Object.assign({}, column, { fixed: false }))
     },
     rightFixedColumns () {
-      return this.columns
+      return this.normalizedColumns
         .filter(column => column.fixed === 'right')
         .map(column => Object.assign({}, column, { fixed: false }))
     },
     filteredData () {
+      const synthesizedActiveFilters = this.synthesizedActiveFilters
+      const normalizedColumns = this.normalizedColumns
       return this.data ? this.data.filter(row => {
         for (const columnKey of Object.keys(row)) {
-          const activeFilterOptionValues = this.synthesizedActiveFilters
+          const activeFilterOptionValues = synthesizedActiveFilters
             .filter(filter => filter.columnKey === columnKey)
             .map(filter => filter.filterOptionValue)
           if (!activeFilterOptionValues.length) continue
-          const columnToFilter = this.columns.find(column => column.key === columnKey)
+          const columnToFilter = normalizedColumns.find(column => column.key === columnKey)
           /**
            * When async, filter won't be set, so data won't be filtered
            */
@@ -243,8 +282,12 @@ export default {
         return true
       }) : []
     },
+    synthesizedCheckedRowKeys () {
+      if (this.checkedRowKeys !== null) return this.checkedRowKeys
+      return this.internalCheckedRowKeys
+    },
     synthesizedActiveFilters () {
-      const columnsWithControlledFilter = this.columns.filter(column => {
+      const columnsWithControlledFilter = this.normalizedColumns.filter(column => {
         return Array.isArray(column.filterOptionValues)
       })
       const keyOfColumnsToFilter = columnsWithControlledFilter.map(column => column.key)
@@ -264,7 +307,7 @@ export default {
       return activeFilters
     },
     synthesizedActiveSorter () {
-      const columnsWithControlledSortOrder = this.columns.filter(
+      const columnsWithControlledSortOrder = this.normalizedColumns.filter(
         column => column.sortOrder === false ||
         column.sortOrder === 'ascend' ||
         column.sortOrder === 'descend'
@@ -305,11 +348,6 @@ export default {
         this.pagination.onChange && this.pagination.onChange(page)
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         this.internalCurrentPage = page
-        this.$emit('change', {
-          sorter: createShallowClonedObject(this.synthesizedActiveSorter),
-          pagination: createShallowClonedObject(this.synthesizedPagination),
-          filters: createShallowClonedArray(this.synthesizedActiveFilters)
-        })
         this.$emit('page-change', page)
       }
     },
@@ -354,29 +392,28 @@ export default {
          */
         const order = activeSorter.order
         if (order === false) console.error(['[naive-ui/data-table/sorted-data]: The order of activeSorter shouldn\'t be `false`'])
-        const sorter = (activeSorter.sorter === 'default' && ((row1, row2) => {
-          const value1 = row1[columnKey]
-          const value2 = row2[columnKey]
-          if (typeof value1 === 'number' && typeof value2 === 'number') {
-            return value1 - value2
-          } else if (typeof value1 === 'string' && typeof value2 === 'string') {
-            return value1.localeCompare(value2)
-          }
-          return 0
-        })) || activeSorter.sorter
+        const sorter = (
+          activeSorter.sorter === 'default'
+            ? (row1, row2) => {
+              const value1 = row1[columnKey]
+              const value2 = row2[columnKey]
+              if (typeof value1 === 'number' && typeof value2 === 'number') {
+                return value1 - value2
+              } else if (typeof value1 === 'string' && typeof value2 === 'string') {
+                return value1.localeCompare(value2)
+              }
+              return 0
+            }
+            : activeSorter.sorter
+        )
         return filteredData.sort((row1, row2) => getFlagOfOrder(order) * sorter(row1, row2))
       }
       return this.filteredData
     },
     paginatedData () {
       if (!this.pagination) return this.sortedData
-      const {
-        pageSize
-      } = this.pagination
-      /**
-       * When async, pageSize should be false
-       */
-      if (!pageSize) return this.sortedData
+      if (!this.paging) return this.sortedData
+      const pageSize = this.synthesizedPageSize
       const startIndex = (this.internalCurrentPage - 1) * pageSize
       return this.sortedData.slice(startIndex, startIndex + pageSize)
     },
@@ -395,8 +432,9 @@ export default {
       }
     },
     countOfCurrentPageCheckedRows () {
+      const checkedRowKeys = this.synthesizedCheckedRowKeys
       return this.paginatedData.reduce((total, row) => {
-        return total + (this.checkedRows.includes(row) ? 1 : 0)
+        return total + (checkedRowKeys.includes(row.key) ? 1 : 0)
       }, 0)
     },
     someRowsChecked () {
@@ -410,26 +448,25 @@ export default {
     synthesizedCurrentPage () {
       this.scrollMainTableBodyToTop()
     },
-    checkedRows (value) {
-      this.$emit('select', value)
-    },
     data () {
       /** TODO: init logic should be fulfilled */
     }
   },
   created () {
-    this.columns.forEach(column => {
+    this.normalizedColumns.forEach(column => {
       if (
-        column.defaultSortOrder === 'ascend' ||
-        column.defaultSortOrder === 'descend'
+        column.sorter && (
+          column.defaultSortOrder === 'ascend' ||
+          column.defaultSortOrder === 'descend'
+        )
       ) {
         this.internalActiveSorter = {
           columnKey: column.key,
-          sorter: column.sorter || null,
+          sorter: column.sorter,
           order: column.defaultSortOrder
         }
       }
-      if (Array.isArray(column.defaultFilterOptionValues)) {
+      if (column.filter && Array.isArray(column.defaultFilterOptionValues)) {
         column.defaultFilterOptionValues.forEach(filterOptionValue => {
           this.internalActiveFilters.push({
             columnKey: column.key,
@@ -438,43 +475,28 @@ export default {
         })
       }
     })
+    this.internalCheckedRowKeys = this.defaultCheckedRowKeys
   },
   methods: {
+    changeCheckedRowKeys (checkedRowKeys) {
+      this.internalCheckedRowKeys = checkedRowKeys
+      this.$emit('checked-row-keys-change', checkedRowKeys)
+    },
     changeSorter (sorter) {
       this.internalActiveSorter = sorter
       this.$emit('sorter-change', createShallowClonedObject(sorter))
-      this.$emit('change', {
-        pagination: createShallowClonedObject(this.synthesizedPagination),
-        sorter: createShallowClonedObject(sorter),
-        filters: createShallowClonedArray(this.synthesizedActiveFilters)
-      })
     },
     changeFilters (filters, sourceColumn) {
       if (!filters) {
         this.internalActiveFilters = []
         this.$emit('filters-change', [], createShallowClonedObject(sourceColumn))
-        this.$emit('change', {
-          pagination: this.synthesizedPagination,
-          sorter: this.synthesizedActiveSorter,
-          filters: []
-        })
       } else {
         if (Array.isArray(filters)) {
           this.internalActiveFilters = filters
           this.$emit('filters-change', createShallowClonedArray(filters), createShallowClonedObject(sourceColumn))
-          this.$emit('change', {
-            pagination: createShallowClonedObject(this.synthesizedPagination),
-            sorter: createShallowClonedObject(this.synthesizedActiveSorter),
-            filters: createShallowClonedArray(filters)
-          })
         } else {
           this.internalActiveFilters = [ filters ]
           this.$emit('filters-change', [ filters ], sourceColumn)
-          this.$emit('change', {
-            pagination: createShallowClonedObject(this.synthesizedPagination),
-            sorter: createShallowClonedObject(this.synthesizedActiveSorter),
-            filters: [ filters ]
-          })
         }
       }
     },
@@ -513,6 +535,15 @@ export default {
         bodyEl.scrollLeft = scrollLeft
         this.horizontalScrollLeft = scrollLeft
       }
+    },
+    handleTableMainBodyScroll (e) {
+      this.handleTableBodyScroll(e, 'main')
+    },
+    handleTableLeftBodyScroll (e) {
+      this.handleTableBodyScroll(e, 'left')
+    },
+    handleTableRightBodyScroll (e) {
+      this.handleTableBodyScroll(e, 'right')
     },
     handleTableBodyScroll (e, part) {
       if (!this.scrollingPart || this.scrollingPart === part) {
@@ -556,7 +587,7 @@ export default {
     sort (columnKey, order = 'ascend') {
       if (!columnKey) this.internalActiveSorter = null
       else {
-        const columnToSort = this.columns.find(column => column.key === columnKey)
+        const columnToSort = this.normalizedColumns.find(column => column.key === columnKey)
         if (!columnToSort) return
         const sorter = columnToSort.sorter || null
         this.internalActiveSorter = {
@@ -592,20 +623,24 @@ export default {
       this.trHeights = trHeights
     },
     checkAll (column) {
+      const checkedRowKeys = this.synthesizedCheckedRowKeys.map(v => v)
       this.paginatedData.forEach(row => {
         if (column.disabled && column.disabled(row)) {
           return
         }
-        setCheckStatusOfRow(this.checkedRows, row, true)
+        setCheckStatusOfRow(checkedRowKeys, row, true)
       })
+      this.changeCheckedRowKeys(checkedRowKeys)
     },
     clearCheckAll (column) {
+      const checkedRowKeys = this.synthesizedCheckedRowKeys.map(v => v)
       this.paginatedData.forEach(row => {
         if (column.disabled && column.disabled(row)) {
           return
         }
-        setCheckStatusOfRow(this.checkedRows, row, false)
+        setCheckStatusOfRow(checkedRowKeys, row, false)
       })
+      this.changeCheckedRowKeys(checkedRowKeys)
     }
   }
 }

@@ -1,4 +1,5 @@
 # Gutter
+Set horizontal gutter & vertical gutter.
 ```html
 <n-row :gutter="[12, 8]">
   <n-col :span="6">

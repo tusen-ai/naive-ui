@@ -12,11 +12,6 @@
     }
     @include b(base-picker-tags) {
       min-height: $base-picker-height;
-      @include b(base-picker-tag) {
-        padding: 0px 20px 0 7px;
-        height: $base-picker-height - 2 * $base-picker-tag-margin;
-        line-height: $base-picker-height - 2 * $base-picker-tag-margin;
-      }
       @include b(base-picker-input-tag) {
         height: $base-picker-height - 2 * $base-picker-tag-margin;
         line-height: $base-picker-height - 2 * $base-picker-tag-margin;
@@ -197,11 +192,6 @@
       @include b(base-picker-tags) {
         cursor: not-allowed;
         background-color: map-get($map: $--base-picker-background-color, $key: "disabled");
-      }
-      @include b(base-picker-tag) {
-        cursor: not-allowed;
-        border-color: rgba(255, 255, 255, 0.20);
-        color: rgba(255, 255, 255, 0.20);
       }
       @include e(placeholder) {
         cursor: not-allowed;

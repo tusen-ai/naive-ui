@@ -1,4 +1,5 @@
 # Push && Pull
+See codes to know what happens. Basically it is relative position change.
 ```html
 <n-row :gutter="12">
   <n-col :span="6" :push="6">

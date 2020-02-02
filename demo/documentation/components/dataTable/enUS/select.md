@@ -3,16 +3,15 @@
 Rows can be selectable by making first column as a selectable column.
 
 ```html
-You have selected {{ selectedRows.length }} row{{ selectedRows.length < 2 ? '': 's'}}.
+<div>You have selected {{ checkedRowKeys.length }} row{{ checkedRowKeys.length < 2 ? '': 's'}}.</div>
 
 <n-data-table
   ref="table"
   :columns="columns"
   :data="data"
   :pagination="pagination"
-  @select="handleSelect"
->
-</n-data-table>
+  @checked-row-keys-change="handleCheck"
+/>
 ```
 
 ```js
@@ -38,6 +37,7 @@ const columns = [
 ]
 
 const data = Array.apply(null, { length: 46 }).map((_, index) => ({
+  key: index,
   name: `Edward King ${index}`,
   age: 32,
   address: `London, Park Lane no. ${index}`
@@ -48,7 +48,7 @@ export default {
     return {
       data,
       columns,
-      selectedRows: [],
+      checkedRowKeys: [],
       pagination: {
         pageSize: 5
       }
@@ -58,8 +58,8 @@ export default {
     sendMail(rowData) {
       this.$NMessage.info('send mail to ' + rowData.name)
     },
-    handleSelect (rows) {
-      this.selectedRows = rows
+    handleCheck (rowKeys) {
+      this.checkedRowKeys = rowKeys
     }
   }
 }

@@ -6,7 +6,7 @@ If you don't need wrapper DOM, set it to transparent.
 <n-config-provider :theme="theme" :theme-environment="env" transparent>
   <n-config-consumer>
     <template v-slot="{ themeEnvironment }">
-      No Wrapper DOM: {{ themeEnvironment }}
+      <div>No Wrapper DOM: {{ themeEnvironment }}</div>
     </template>
   </n-config-consumer>
 </n-config-provider>
@@ -22,5 +22,10 @@ export default {
       }
     }
   }
+}
+```
+```css
+.n-button {
+  margin: 0 8px 12px 0;
 }
 ```

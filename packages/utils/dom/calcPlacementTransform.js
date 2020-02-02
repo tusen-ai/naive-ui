@@ -49,7 +49,7 @@ const oppositePosition = {
   'end': 'start'
 }
 
-export function getAdjustedPlacementOfTrackingElement (placement = 'bottom-start', trackedRect, trackingRect, flip) {
+export function getAdjustedPlacementOfTrackingElement (placement, trackedRect, trackingRect, flip) {
   if (!flip) {
     return placement
   }
@@ -157,21 +157,3 @@ export function getPosition (placement, trackedRect, trackingRect) {
   if (position.bottom !== null) position.bottom = position.bottom + 'px'
   return position
 }
-
-// function calcPlacementTransform (placement, activatorRect, contentRect, flip) {
-//   const trackedRect = {
-//     left: parseInt(activatorRect.left),
-//     top: parseInt(activatorRect.top),
-//     bottom: parseInt(window.innerHeight - activatorRect.bottom),
-//     right: parseInt(window.innerWidth - activatorRect.right),
-//     width: parseInt(activatorRect.width),
-//     height: parseInt(activatorRect.height)
-//   }
-//   const trackingRect = contentRect
-//   const adjustedPlacement = getAdjustedPlacementOfTrackingElement(placement, trackedRect, trackingRect, flip)
-//   const suggesetedTransfromOrigin = getTransformOriginByPlacement(adjustedPlacement)
-//   const position = getPosition(adjustedPlacement, trackedRect, trackingRect)
-//   return [position, suggesetedTransfromOrigin, adjustedPlacement]
-// }
-
-// export default calcPlacementTransform

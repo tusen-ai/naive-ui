@@ -1,4 +1,5 @@
 # Custom content
+Insert some custom content in it.
 ```html
 <n-badge value="new">
   <div class="block" />

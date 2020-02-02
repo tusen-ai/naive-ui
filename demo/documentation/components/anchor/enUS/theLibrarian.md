@@ -1,3 +1,0 @@
-# The Librarian
-```html
-```

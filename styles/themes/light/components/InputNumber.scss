@@ -5,6 +5,11 @@
     'focus': $--n-primary-color,
     'error': $--error-6
   )!global;
+  $--input-number-placeholder-color: (
+    "default": $--n-disabled-text-color,
+    "disabled": $--n-disabled-text-color,
+  ) !global;
+  $--input-number-text-decoration-color: $--n-secondary-text-color !global;
   $--input-number-background-color: (
     'default': rgb(255, 255, 255),
     'disabled': $--neutral-8,

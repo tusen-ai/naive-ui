@@ -1,4 +1,4 @@
-# Manually control display
+# Controlled Display
 ```html
 <div class="demo">
   <n-badge :value="value" :max="15" :show="show">

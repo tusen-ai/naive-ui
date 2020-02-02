@@ -11,8 +11,12 @@ $B: null;
 $BE: null;
 $block-depth: 0;
 
-@function block ($block) {
-  @return $namespace + "-" + $block;
+@function block ($block: null) {
+  @if $block {
+    @return $namespace + "-" + $block;
+  } @else if $B {
+    @return $B;
+  }
 }
 
 @mixin b($block) {
@@ -121,17 +125,4 @@ $theme-names: "dark", "light";
   @if not $common-css-attrs-generated {
     @content;
   }
-}
-
-@mixin detachedContentWrapper {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 0;
-  height: 0;
-  overflow: visible;
-}
-
-@mixin detachedContent {
-  position: fixed;
 }

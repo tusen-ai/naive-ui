@@ -1,4 +1,5 @@
 # Mask Closable
+You can make mask click not to close modal when using v-model on modal.
 ```html
 <n-button
   size="small"
@@ -6,7 +7,8 @@
 >
   Start Me up
 </n-button>
-<n-modal v-model="isActive" 
+<n-modal
+  v-model="isActive" 
   :mask-closable="false"
   preset="confirm" 
   title="Confirm modal"

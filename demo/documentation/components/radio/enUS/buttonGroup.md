@@ -1,16 +1,18 @@
 # Button Group
+Sometimes a radio button group looks more elegant.
 ```html
-<n-radio-group v-model="value">
-  <n-radio-button
-    v-for="song in songs"
-    :key="song.value"
-    :value="song.value"
-    :disabled="(song.label === 'Live Forever' && disabled1 || song.label === 'Shakermaker' && disabled2)"
-  >
-    {{ song.label }}
-  </n-radio-button>
-</n-radio-group>
-
+<div style="margin-bottom: 12px;">
+  <n-radio-group v-model="value">
+    <n-radio-button
+      v-for="song in songs"
+      :key="song.value"
+      :value="song.value"
+      :disabled="(song.label === 'Live Forever' && disabled1 || song.label === 'Shakermaker' && disabled2)"
+    >
+      {{ song.label }}
+    </n-radio-button>
+  </n-radio-group>
+</div>
 <n-checkbox
   v-model="disabled2"
   style="margin-right: 12px;"

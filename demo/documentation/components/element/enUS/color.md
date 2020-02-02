@@ -1,5 +1,5 @@
 # Style Scheme
-
+It can also access style scheme.
 ```html
 <n-element as="div" class="myel">
   <template v-slot="{ styleScheme }">

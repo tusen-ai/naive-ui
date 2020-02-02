@@ -1,4 +1,5 @@
 # Use Preset Confirm
+An example of preset `confirm`.
 ```html
 <n-button
   size="small"
@@ -14,8 +15,8 @@
   positive-text="submit"
   @positive-click="cancelCallback"
   @negative-click="submitCallback"
-  negative-text="cancel">
-</n-modal>
+  negative-text="cancel"
+/>
 ```
 ```js
 export default {

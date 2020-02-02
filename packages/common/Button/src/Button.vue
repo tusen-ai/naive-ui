@@ -13,7 +13,7 @@
       'n-button--enter-pressed': enterPressed,
       'n-button--ghost': ghost,
       'n-button--text': text,
-      [`n-button--${iconPosition}-icon`]: iconPosition && !noTextContent,
+      [`n-button--${iconPlacement}-icon`]: iconPlacement && !noTextContent,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
     :tabindex="synthesizedFocusable ? 0 : -1"
@@ -29,15 +29,16 @@
         :class="{ 'n-button__icon--slot': $slots.icon }"
       >
         <n-icon-switch-transition>
-          <n-spin
+          <n-base-loading
             v-if="loading"
             key="loading"
             class="n-icon-slot"
+            :theme="synthesizedTheme"
             :style="{
               transition: hollowOutColorTransitionDisabled ? 'none' : null
             }"
             :stroke="simulateHollowOut ? ascendantBackgroundColor : null"
-            :stroke-width="4"
+            :stroke-width="24"
           />
           <n-icon
             v-else
@@ -74,14 +75,15 @@
         }"
       >
         <n-icon-switch-transition>
-          <n-spin
+          <n-base-loading
             v-if="loading"
             key="loading"
+            :theme="synthesizedTheme"
             :style="{
               transition: hollowOutColorTransitionDisabled ? 'none' : null
             }"
             :stroke="simulateHollowOut ? ascendantBackgroundColor : null"
-            :stroke-width="4"
+            :stroke-width="24"
           />
           <n-icon
             v-else
@@ -103,7 +105,7 @@
 </template>
 
 <script>
-import NSpin from '../../Spin'
+import NBaseLoading from '../../../base/Loading'
 import NFadeInHeightExpandTransition from '../../../transition/FadeInHeightExpandTransition'
 import hollowoutable from '../../../mixins/hollowoutable'
 import withapp from '../../../mixins/withapp'
@@ -114,7 +116,7 @@ import NIconSwitchTransition from '../../../transition/IconSwitchTransition'
 export default {
   name: 'NButton',
   components: {
-    NSpin,
+    NBaseLoading,
     NIcon,
     NIconSwitchTransition,
     NFadeInHeightExpandTransition
@@ -177,10 +179,10 @@ export default {
       type: String,
       default: null
     },
-    iconPosition: {
+    iconPlacement: {
       default: 'left',
-      validator (iconPosition) {
-        return ['left', 'right'].includes(iconPosition)
+      validator (iconPlacement) {
+        return ['left', 'right'].includes(iconPlacement)
       }
     }
   },
@@ -220,7 +222,7 @@ export default {
       return this.icon || this.$slots.icon
     },
     iconOnRight () {
-      return this.iconPosition === 'right'
+      return this.iconPlacement === 'right'
     }
   },
   watch: {

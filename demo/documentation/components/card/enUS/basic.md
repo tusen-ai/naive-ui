@@ -1,5 +1,5 @@
 # Basic
-Basic Card
+A basic card.
 ```html
 <n-card title="Card">
   Card Content

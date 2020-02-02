@@ -30,7 +30,7 @@ export default {
       type: Number,
       default: 300
     },
-    autoFocus: {
+    defaultFocus: {
       type: Boolean,
       default: true
     },
@@ -50,7 +50,7 @@ export default {
       type: Number,
       default: null
     },
-    value: {
+    show: {
       type: Boolean,
       default: false
     },
@@ -69,45 +69,53 @@ export default {
     focusable: {
       type: Boolean,
       default: true
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    options: {
+      type: Array,
+      required: true
     }
   },
   render (h, context) {
-    const slots = context.scopedSlots
-    const activatorSlot = slots.activator && slots.activator()
+    const scopedSlots = context.scopedSlots
+    const props = context.props
     const controller = {}
     return h(NPopover, {
       props: {
-        trigger: context.props.trigger,
-        placement: context.props.placement,
-        widthMode: context.props.widthMode,
-        duration: context.props.duration,
-        width: context.props.width,
-        minWidth: context.props.minWidth,
-        maxWidth: context.props.maxWidth,
-        value: context.props.value,
-        manuallyPositioned: context.props.manuallyPositioned,
-        x: context.props.x,
-        y: context.props.y,
+        trigger: props.trigger,
+        placement: props.placement,
+        widthMode: props.widthMode,
+        duration: props.duration,
+        width: props.width,
+        minWidth: props.minWidth,
+        maxWidth: props.maxWidth,
+        show: props.show,
+        manuallyPositioned: props.manuallyPositioned,
+        x: props.x,
+        y: props.y,
         arrow: false,
         raw: true,
         shadow: false,
+        disabled: props.disabled,
         controller
       },
       scopedSlots: {
-        activator () {
-          return activatorSlot
-        },
+        activator: scopedSlots.default,
         default () {
           return h(NDropdownMenu, {
             attrs: {
-              tabindex: context.props.focusable ? '0' : '-1'
+              tabindex: props.focusable ? '0' : '-1'
             },
             props: {
-              autoFocus: context.props.autoFocus,
-              size: context.props.size,
+              defaultFocus: props.defaultFocus,
+              size: props.size,
               controller,
-              submenuWidth: context.props.submenuWidth,
-              focusable: context.props.focusable
+              submenuWidth: props.submenuWidth,
+              focusable: props.focusable,
+              options: props.options
             },
             on: {
               blur: context.listeners.blur || (() => {}),

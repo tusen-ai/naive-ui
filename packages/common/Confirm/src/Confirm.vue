@@ -18,11 +18,12 @@
           size="28"
         >
           <slot name="icon">
-            <component :is="iconType" />
+            <render v-if="icon" :render="icon" />
+            <component :is="iconType" v-else />
           </slot>
         </n-icon>
         <slot name="header">
-          {{ title }}
+          <render :render="title" />
         </slot>
       </span>
       <n-icon
@@ -37,8 +38,8 @@
       </n-icon>
     </div>
     <div class="n-confirm__content">
-      <slot name="content">
-        {{ content }}
+      <slot>
+        <render :render="content" />
       </slot>
     </div>
     <div class="n-confirm__footer">
@@ -51,7 +52,7 @@
           size="small"
           @click="handleNegativeClick"
         >
-          {{ negativeText }}
+          <render :render="negativeText" />
         </n-button>
         <n-button
           :theme="theme"
@@ -63,7 +64,7 @@
           auto-text-color
           @click="handlePositiveClick"
         >
-          {{ positiveText }}
+          <render :render="positiveText" />
         </n-button>
       </slot>
     </div>
@@ -79,6 +80,7 @@ import iosCloseCircle from '../../../icons/ios-close-circle'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import asthemecontext from '../../../mixins/asthemecontext'
+import render from '../../../utils/render'
 
 export default {
   name: 'NConfirm',
@@ -88,13 +90,18 @@ export default {
     mdClose,
     iosHelpCircle,
     iosCheckmarkCircle,
-    iosCloseCircle
+    iosCloseCircle,
+    render
   },
   mixins: [withapp, themeable, asthemecontext],
   props: {
+    icon: {
+      type: Function,
+      default: null
+    },
     type: {
       type: String,
-      default: 'confirm'
+      default: 'warning'
     },
     title: {
       type: String,
@@ -114,7 +121,7 @@ export default {
     },
     content: {
       type: String,
-      default: 'content'
+      default: null
     },
     showIcon: {
       type: Boolean,
@@ -133,7 +140,7 @@ export default {
     iconType () {
       const colors = {
         error: 'ios-close-circle',
-        confirm: 'ios-help-circle',
+        warning: 'ios-help-circle',
         success: 'ios-checkmark-circle'
       }
       return colors[this.type]

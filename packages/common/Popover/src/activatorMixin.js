@@ -33,6 +33,10 @@ export default {
     controller: {
       type: Object,
       default: null
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   created () {
@@ -87,6 +91,7 @@ export default {
   },
   methods: {
     activate () {
+      if (this.disabled) return
       const content = this.content()
       if (content && !content.active) {
         content.internalActive = true

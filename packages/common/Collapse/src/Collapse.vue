@@ -16,8 +16,12 @@ export default {
     themeable,
     asthemecontext
   ],
+  model: {
+    prop: 'expandNames',
+    event: 'expand-names-change'
+  },
   props: {
-    value: {
+    expandNames: {
       type: [Array, String],
       default: null
     },
@@ -35,22 +39,22 @@ export default {
     toggleItem (collapse, name) {
       if (this.accordion) {
         if (collapse) {
-          this.$emit('input', [name])
+          this.$emit('expand-names-change', [name])
         } else {
-          this.$emit('input', [])
+          this.$emit('expand-names-change', [])
         }
       } else {
-        if (!Array.isArray(this.value)) {
-          this.$emit('input', [name])
+        if (!Array.isArray(this.expandNames)) {
+          this.$emit('expand-names-change', [name])
         } else {
-          const activeNames = intersection(this.value, this.collectedItemNames)
+          const activeNames = intersection(this.expandNames, this.collectedItemNames)
           const index = activeNames.findIndex(activeName => name === activeName)
           if (~index) {
             activeNames.splice(index, 1)
-            this.$emit('input', activeNames)
+            this.$emit('expand-names-change', activeNames)
           } else {
             activeNames.push(name)
-            this.$emit('input', activeNames)
+            this.$emit('expand-names-change', activeNames)
           }
         }
       }

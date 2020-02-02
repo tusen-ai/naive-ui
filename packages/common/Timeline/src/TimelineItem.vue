@@ -19,13 +19,19 @@
         v-if="title"
         class="n-timeline-item-content__title"
       >
-        {{ title }}
+        <slot name="header">
+          {{ title }}
+        </slot>
       </div>
       <div class="n-timeline-item-content__content">
-        {{ content }}
+        <slot>
+          {{ content }}
+        </slot>
       </div>
       <div class="n-timeline-item-content__meta">
-        {{ timestamp }}
+        <slot name="footer">
+          {{ time }}
+        </slot>
       </div>
     </div>
   </div>
@@ -43,7 +49,7 @@ export default {
   name: 'NTimelineItem',
   mixins: [hollowoutable],
   props: {
-    timestamp: {
+    time: {
       type: [String, Number],
       default: null
     },

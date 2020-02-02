@@ -27,7 +27,7 @@ export default {
     },
     closeMessage () {
       if (this.message) {
-        this.message.close()
+        this.message.hide()
         this.message = null
       }
     }

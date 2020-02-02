@@ -1,4 +1,7 @@
 # Multiple
+
+Select multiple value in popselect.
+
 ```html
 <n-popselect
   v-model="value"

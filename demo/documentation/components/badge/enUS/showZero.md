@@ -1,4 +1,4 @@
-# Show zero
+# Show Zero
 Set `show-zero` prop to display zero.
 ```html
 <n-badge :value="value">

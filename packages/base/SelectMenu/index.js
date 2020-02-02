@@ -1,19 +1,14 @@
 /* istanbul ignore file */
 import BaseSelectMenu from './src/SelectMenu.vue'
 import BaseSelectOption from './src/SelectOption.vue'
-import BaseSelectOptionCollector from './src/SelectOptionCollector.vue'
-import BaseSelectRenderOptions from './src/SelectRenderOptions.vue'
 
 BaseSelectMenu.install = function (Vue) {
   Vue.component(BaseSelectMenu.name, BaseSelectMenu)
   Vue.component(BaseSelectOption.name, BaseSelectOption)
-  Vue.component(BaseSelectOptionCollector.name, BaseSelectOptionCollector)
 }
 
 export default BaseSelectMenu
 export {
   BaseSelectMenu as NBaseSelectMenu,
-  BaseSelectOption as NBaseSelectOption,
-  BaseSelectOptionCollector as NBaseSelectOptionCollector,
-  BaseSelectRenderOptions as NBaseSelectRenderOptions
+  BaseSelectOption as NBaseSelectOption
 }

@@ -1,35 +1,37 @@
 <template>
-  <transition name="n-back-top--transition">
-    <div
-      v-if="show"
-      :class="{
-        [`n-${synthesizedTheme}-theme`]: synthesizedTheme
-      }"
-      :style="{
-        ...synthesizedStyle,
-        right: styleRight,
-        bottom: styleBottom
-      }"
-      class="n-back-top"
-      @click="handleClick"
-    >
-      <slot>
-        <div class="n-back-top__default-button">
-          <svg
-            viewBox="0 0 40 40"
-          >
-            <title>BackTop</title>
-            <g>
-              <path
-                d="M30,8A20,20,0,1,0,50,28,20,20,0,0,0,30,8Zm8,23.8a1.65,1.65,0,0,1-2.36,0l-4-3.94V36.4a1.67,1.67,0,0,1-3.34,0V28l-4,3.76a1.65,1.65,0,0,1-2.36,0,1.48,1.48,0,0,1,0-2.25l7-6.67a1.65,1.65,0,0,1,2.36,0L38,29.45A1.59,1.59,0,0,1,38,31.8Zm2.36-10.61H19.67a1.6,1.6,0,1,1,0-3.19H40.33a1.6,1.6,0,1,1,0,3.19Z"
-                transform="translate(-10 -8)"
-              />
-            </g>
-          </svg>
-        </div>
-      </slot>
-    </div>
-  </transition>
+  <n-base-portal ref="portal" :on-mounted="init">
+    <transition name="n-back-top--transition">
+      <div
+        v-if="show"
+        :class="{
+          [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+        }"
+        :style="{
+          ...synthesizedStyle,
+          right: styleRight,
+          bottom: styleBottom
+        }"
+        class="n-back-top"
+        @click="handleClick"
+      >
+        <slot>
+          <div class="n-back-top__default-button">
+            <svg
+              viewBox="0 0 40 40"
+            >
+              <title>BackTop</title>
+              <g>
+                <path
+                  d="M30,8A20,20,0,1,0,50,28,20,20,0,0,0,30,8Zm8,23.8a1.65,1.65,0,0,1-2.36,0l-4-3.94V36.4a1.67,1.67,0,0,1-3.34,0V28l-4,3.76a1.65,1.65,0,0,1-2.36,0,1.48,1.48,0,0,1,0-2.25l7-6.67a1.65,1.65,0,0,1,2.36,0L38,29.45A1.59,1.59,0,0,1,38,31.8Zm2.36-10.61H19.67a1.6,1.6,0,1,1,0-3.19H40.33a1.6,1.6,0,1,1,0,3.19Z"
+                  transform="translate(-10 -8)"
+                />
+              </g>
+            </svg>
+          </div>
+        </slot>
+      </div>
+    </transition>
+  </n-base-portal>
 </template>
 
 <script>
@@ -37,9 +39,13 @@ import getScrollParent from '../../../utils/dom/getScrollParent'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import asthemecontext from '../../../mixins/asthemecontext'
+import NBasePortal from '../../../base/Portal'
 
 export default {
   name: 'NBackTop',
+  components: {
+    NBasePortal
+  },
   mixins: [withapp, themeable, asthemecontext],
   props: {
     right: {
@@ -74,8 +80,14 @@ export default {
       return this.bottom + 'px'
     }
   },
+  watch: {
+    show (value) {
+      if (value) this.$emit('shohw')
+      return this.$emit('hide')
+    }
+  },
   mounted () {
-    this.init()
+    this.$refs.portal.transferElement()
   },
   beforeDestroy () {
     if (this.container) {

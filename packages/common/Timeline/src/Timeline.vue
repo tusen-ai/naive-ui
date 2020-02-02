@@ -23,7 +23,7 @@ export default {
       validator (value) {
         return ['left', 'right'].includes(value)
       },
-      default: 'right'
+      default: 'left'
     },
     size: {
       validator (value) {

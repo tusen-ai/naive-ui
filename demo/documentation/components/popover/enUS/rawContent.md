@@ -1,9 +1,9 @@
 # Raw Content
 ```html
-<n-popover raw :arrow="false">
+<n-popover raw :show-arrow="false">
   <template v-slot:activator>
     <n-button style="margin:0;">
-      hover
+      Hover
     </n-button>
   </template>
   <div

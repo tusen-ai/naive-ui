@@ -6,4 +6,5 @@ custom-rule
 debug
 left
 change-debug
+required-mark-debug
 ```

@@ -3,11 +3,11 @@
     class="n-checkbox"
     :class="{
       'n-checkbox--checked': synthesizedChecked,
-      'n-checkbox--disabled': disabled,
+      'n-checkbox--disabled': synthesizedDisabled,
       'n-checkbox--indeterminate': indeterminate,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
-    :tabindex="disabled ? false : 0"
+    :tabindex="synthesizedDisabled ? false : 0"
     @keyup.enter="handleKeyUpEnter"
     @keyup.space="handleKeyUpSpace"
     @keydown.space="handleKeyDownSpace"
@@ -58,7 +58,7 @@ export default {
   ],
   model: {
     prop: 'checked',
-    event: 'input'
+    event: 'change'
   },
   props: {
     value: {
@@ -79,10 +79,15 @@ export default {
     }
   },
   computed: {
+    synthesizedDisabled () {
+      if (this.disabled || (this.NCheckboxGroup && this.NCheckboxGroup.disabled)) return true
+      return false
+    },
     synthesizedChecked () {
       if (this.NCheckboxGroup) {
-        if (Array.isArray(this.NCheckboxGroup.value)) {
-          return ~this.NCheckboxGroup.value.findIndex(value => value === this.value)
+        const checkboxGroupValueSet = this.NCheckboxGroup.valueAsSet
+        if (checkboxGroupValueSet) {
+          return checkboxGroupValueSet.has(this.value)
         }
         return false
       } else {
@@ -103,18 +108,17 @@ export default {
       if (this.NCheckboxGroup) {
         this.NCheckboxGroup.toggleCheckbox(!this.synthesizedChecked, this.value)
       } else {
-        this.$emit('input', !this.synthesizedChecked)
-        this.$emit('change', !this.synthesizedChecked, this.value)
+        this.$emit('change', !this.synthesizedChecked, this.synthesizedChecked)
       }
     },
     handleClick (e) {
       this.$emit('click', e)
-      if (!this.disabled) {
+      if (!this.synthesizedDisabled) {
         this.toggle()
       }
     },
     handleKeyUpEnter (e) {
-      if (!this.disabled) {
+      if (!this.synthesizedDisabled) {
         this.toggle()
       }
     },

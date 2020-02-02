@@ -36,6 +36,11 @@ export default {
       this.$el.getBoundingClientRect()
     },
     handleAfterLeave () {
+      if (this.width) {
+        this.$el.style.maxWidth = null
+      } else {
+        this.$el.style.maxHeight = null
+      }
       this.$emit('after-leave')
     },
     handleEnter () {

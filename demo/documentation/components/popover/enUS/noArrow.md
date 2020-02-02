@@ -1,11 +1,11 @@
 # No Arrow
 ```html
-<n-popover :arrow="false">
+<n-popover :show-arrow="false">
   <template v-slot:activator>
     <n-button style="margin:0;">
-      hover
+      Hover
     </n-button>
   </template>
-  <span>Light My Fire</span>
+  <span>Like a rect</span>
 </n-popover>
 ```

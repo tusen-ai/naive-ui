@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     plus () {
-      if (message) {
+      if (this.message) {
         this.count++
         this.message.content = '' + this.count
       }
@@ -36,7 +36,7 @@ export default {
     },
     createMessage() {
       this.message = this.$NMessage[this.type](
-        '' + this.count, { duration: 300000 }
+        '' + this.count, { duration: 10000 }
       )
     },
   }

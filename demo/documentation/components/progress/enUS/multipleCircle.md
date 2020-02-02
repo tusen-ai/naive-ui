@@ -1,27 +1,46 @@
 # Multiple Circle
-You can show multiple circle in a single progress. Note that `circle-gap` and `stroke-width` is relative to `view-box-width`.
+Maybe your PM will need this.
+
+You can show multiple circle in a single progress. Note that `circle-gap` and `stroke-width` is relative to 100(the svg's viewbox size is 100).
 ```html
-<n-progress
-  type="multiple-circle"
-  :view-box-width="80"
-  :stroke-width="4"
-  :circle-gap="2"
-  :percentage="[percentage, (percentage +10) % 100, (percentage +20) % 100, (percentage + 30) % 100]"
-  :color="['red', 'green', 'blue', null]"
-  :rail-color="['rgba(0, 255, 0, .2)', 'rgba(0, 0, 255, .2)', 'rgba(255, 0, 0, .2)', 'rgba(255, 255, 255, .2)']"
->
-  <div style="text-align: center;">
-    CPU<br>
-    Allocation<br>
-    cores
-  </div>
-</n-progress>
-<n-button @click="minus">
-  Minus 10%
-</n-button>
-<n-button @click="add">
-  Add 10%
-</n-button>
+<n-config-consumer>
+  <template v-slot="{ styleScheme }">
+    <n-progress
+      type="multiple-circle"
+      :stroke-width="6"
+      :circle-gap="0.5"
+      :percentage="[
+        percentage,
+        (percentage + 10) % 100,
+        (percentage + 20) % 100,
+        (percentage + 30) % 100]"
+      :color="[
+        styleScheme.infoColor,
+        styleScheme.successColor,
+        styleScheme.warningColor,
+        styleScheme.errorColor
+      ]"
+      :rail-color="[
+        styleScheme.infoColor + '30',
+        styleScheme.successColor + '30',
+        styleScheme.warningColor + '30',
+        styleScheme.errorColor + '30'
+      ]"
+    >
+      <div style="text-align: center;">
+        What is this?
+      </div>
+    </n-progress>
+  </template>
+</n-config-consumer>
+<div>
+  <n-button @click="minus">
+    Minus 10%
+  </n-button>
+  <n-button @click="add">
+    Add 10%
+  </n-button>
+</div>
 ```
 ```js
 export default {
@@ -40,5 +59,13 @@ export default {
       if (this.percentage < 0) this.percentage = 100
     }
   }
+}
+```
+```css
+.n-progress {
+  margin: 0 8px 12px 0;
+}
+.n-button {
+  margin: 0 8px 12px 0;
 }
 ```

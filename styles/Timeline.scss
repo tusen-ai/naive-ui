@@ -45,7 +45,7 @@ $--timeline-header-margin-top: (
       width: 100%;
       display: flex;
       flex-direction: column;
-      @include m(left-placement) {
+      @include m(right-placement) {
         @include b(timeline-item) {
           @include b(timeline-item-content) {
             text-align: right;
@@ -57,7 +57,7 @@ $--timeline-header-margin-top: (
           }
         }
       }
-      @include m(right-placement) {
+      @include m(left-placement) {
         @include b(timeline-item) {
           @include b(timeline-item-content) {
             margin-left: 26px;

@@ -1,4 +1,8 @@
 # Result
+Result is for showing result.
+
+Many thanks to [twemoji](https://github.com/twitter/twemoji) for creating those high quality icons!
+## Demos
 ```demo
 s404
 s403
@@ -9,3 +13,16 @@ success
 warning 
 error
 ```
+
+## Props
+|Name|Type|Default|Description|
+|-|-|-|-|
+|status|`'info' \| 'success' \| 'error' \| 'warning' \| 404 \| '404' \| 500 \| '500' \| 400 \| '400' \| 418 \| '418'`|`'info'`||
+|title|`string`|`null`||
+|description|`string`|`null`||
+
+## Slots
+|Name|Parameters|Description|
+|-|-|-|
+|default|`()`||
+|footer|`()`||

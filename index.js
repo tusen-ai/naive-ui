@@ -54,7 +54,7 @@ import ConfigConsumer from './packages/common/ConfigConsumer'
 import Descriptions from './packages/common/Descriptions'
 import List from './packages/common/List'
 import Menu from './packages/common/Menu'
-import Avatar from './packages/common/Avator'
+import Avatar from './packages/common/Avatar'
 import Result from './packages/common/Result'
 import Thing from './packages/common/Thing'
 import AutoComplete from './packages/common/AutoComplete'
@@ -82,6 +82,8 @@ import NimbusIcon from './packages/deprecated/NimbusIcon'
 import Loader from './packages/base/Loading'
 import CancelMark from './packages/base/CancelMark'
 import IconTransition from './packages/transition/IconSwitchTransition'
+
+import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 
 const NaiveUI = {
   install,

@@ -1,6 +1,62 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
+@keyframes transfer-height-collapse {
+  0% {
+    max-height: 34px;
+  }
+  100% {
+    max-height: 0;
+  }
+}
+
+@keyframes transfer-height-expand {
+  0% {
+    max-height: 0;
+  }
+  100% {
+    max-height: 34px;
+  }
+}
+
+@keyframes transfer-slide-in-from-left {
+  0% {
+    transform: translateX(-150%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes transfer-slide-out-to-right {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(150%);
+  }
+}
+
+@keyframes transfer-slide-in-from-right {
+  0% {
+    transform: translateX(150%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes transfer-slide-out-to-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-150%);
+  }
+}
+
+
+
 /**
  * There are some theme related hard codes in transfer.
  * Emmm, when I am writing these code I can't figure out a better solution.
@@ -14,6 +70,7 @@
   @include b(transfer) {
     @include once {
       display: flex;
+      width: 444px;
     }
     @include b(transfer-list) {
       @include once {
@@ -22,6 +79,15 @@
         height: 311px;
         transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
         border-radius: 6px;
+        @include b(virtual-scroller) {
+          height: 100%;
+          scrollbar-width: none;
+          -moz-scrollbar-width: none;
+          &::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+          }
+        }
       }
       background-color: map-get($--transfer-list-background-color, 'default');
       border: 1px solid $--transfer-list-border-color;
@@ -76,8 +142,10 @@
         @if $theme == 'dark' {
           margin-left: -1px;
           margin-right: -1px;
-        } @else {
-          padding: 0 1px;
+          margin-bottom: -1px;
+        } @else if $theme == 'light' {
+          margin-left: 0;
+          margin-right:0;
         }
         @include once {
           box-sizing: border-box;
@@ -95,21 +163,14 @@
             padding: 0;
             margin: 0;
             position: relative;
-          }
-          @include b(transfer-list-light-bar) {
-            @include once {
-              @include fade-in-transition(transfer-list-light-bar);
-              height: 34px;
-              transition: top .15s $--n-ease-in-out-cubic-bezier;
-              width: 100%;
-              position: absolute;
+            @include m(animation-disabled) {
+              @include b(transfer-list-item) {
+                animation: none !important;
+              }
             }
-            background-color: map-get($--tranfer-item-lightbar-background-color, 'default');
           }
           @include b(transfer-list-item) {
             @include once {
-              @include slide-right-transition(transfer-list-item-source);
-              @include slide-left-transition(transfer-list-item-target);
               transition: color .3s $--n-ease-in-out-cubic-bezier;
               position: relative;
               cursor: pointer;
@@ -124,6 +185,40 @@
                 white-space: nowrap;
                 padding-right: 4px;
               }
+              @include m(source) {
+                animation-fill-mode: forwards;
+                @include m(enter) {
+                  transform: translateX(150%);
+                  animation-name: transfer-height-expand, transfer-slide-in-from-right;
+                  animation-duration: .25s, .25s;
+                  animation-timing-function: $--n-ease-in-out-cubic-bezier, $fast-in-cubic-bezier;
+                  animation-delay: 0s, .25s;
+                }
+                @include m(leave) {
+                  transform: translateX(-150%);
+                  animation-name: transfer-height-collapse, transfer-slide-out-to-right;
+                  animation-duration: .25s, .25s;
+                  animation-timing-function: $--n-ease-in-out-cubic-bezier, $slow-out-cubic-bezier;
+                  animation-delay: .25s, 0s;
+                }
+              }
+              @include m(target) {
+                animation-fill-mode: forwards;
+                @include m(enter) {
+                  transform: translateX(-150%);
+                  animation-name: transfer-height-expand, transfer-slide-in-from-left;
+                  animation-duration: .25s, .25s;
+                  animation-timing-function: $--n-ease-in-out-cubic-bezier, $fast-in-cubic-bezier;
+                  animation-delay: 0s, .25s;
+                }
+                @include m(leave) {
+                  transform: translateX(150%);
+                  animation-name: transfer-height-collapse, transfer-slide-out-to-left;
+                  animation-duration: .25s, .25s;
+                  animation-timing-function: $--n-ease-in-out-cubic-bezier, $slow-out-cubic-bezier;
+                  animation-delay: .25s, 0s;
+                }
+              }
             }
             color: map-get($--transfer-item-text-color, 'default');
             @include e(checkbox) {
@@ -134,8 +229,11 @@
                   display: block;
                 }
               }
+              /** hard-code **/
               @if $theme == 'dark' {
                 padding-left: 15px;
+              } @else if $theme == 'light' {
+                padding-left: 14px;
               }
             }
             @include m(disabled) {

@@ -9,44 +9,26 @@
       @include m(in-small-size) {
         width: 14px;
         height: 14px;
-        @include b(base-loading-circular-path) {
-          stroke-width: 8!important;
-        }
       }
       @include m(in-medium-size) {
         width: 16px;
         height: 16px;
-        @include b(base-loading-circular-path) {
-          stroke-width: 7!important;
-        }
       }
       @include m(in-large-size) {
         width: 18px;
         height: 18px;
-        @include b(base-loading-circular-path) {
-          stroke-width: 6!important;
-        }
       }
       @include m(small-size) {
         width: 28px;
         height: 28px;
-        @include b(base-loading-circular-path) {
-          stroke-width: 6!important;
-        }
       }
       @include m(medium-size) {
         width: 34px;
         height: 34px;
-        @include b(base-loading-circular-path) {
-          stroke-width: 5!important;
-        }
       }
       @include m(large-size) {
         width: 40px;
         height: 40px;
-        @include b(base-loading-circular-path) {
-          stroke-width: 4.25!important;
-        }
       }
     }
     @include b(spin-container) {
@@ -60,7 +42,9 @@
       @include b(spin-content) {
         opacity: 1;
         transition: opacity .2s $--n-ease-in-out-cubic-bezier;
+        pointer-events: all;
         @include m(spinning) {
+          pointer-events: none;
           opacity: .5;
         }
       }

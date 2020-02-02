@@ -1,4 +1,5 @@
 # Clearable
+Remember you can only clear the select which has value. (Select it firstly)
 ```html
 <n-select
   v-model="selectedValue"

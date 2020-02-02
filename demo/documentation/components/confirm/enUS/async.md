@@ -1,5 +1,5 @@
 # Async
-
+Confirm can be async.
 ```html
 <n-button @click="handleClick">
   Success
@@ -17,16 +17,16 @@ export default {
   methods: {
     handleClick(e) {
       const confirmInstance = this.$NConfirm.success({
-        title: "Success",
+        title: 'Success',
         content:
-          "Premium designed icons for use in web, iOS, Android, and desktop apps. Support for SVG and web font. Completely open source, MIT licensed and built by the Ionic Framework team.",
+          'Premium designed icons for use in web, iOS, Android, and desktop apps. Support for SVG and web font. Completely open source, MIT licensed and built by the Ionic Framework team.',
         onPositiveClick: hide => {
-          confirmInstance.loading = true;
-          this.$NMessage.success("count down 1 second");
-          window.setTimeout(hide, 1000);
+          confirmInstance.loading = true
+          this.$NMessage.success('count down 1 second')
+          window.setTimeout(hide, 1000)
         }
-      });
+      })
     }
   }
-};
+}
 ```

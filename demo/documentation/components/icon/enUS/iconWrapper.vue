@@ -29,7 +29,6 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  transition: color .3s cubic-bezier(.4, 0, .2, 1);
 }
 .icon-wrapper .icon-wrapper__name {
   font-size: 14px;

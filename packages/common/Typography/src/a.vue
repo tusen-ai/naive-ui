@@ -6,10 +6,22 @@ export default {
   functional: true,
   render (h, context) {
     const on = context.listeners
-    const attrs = context.data.attrs
+    const attrs = context.data.attrs || {}
     const theme = getTheme(context.parent)
     const defaultSlot = context.slots.default || (context.scopedSlots.default && context.scopedSlots.default())
-    return h('a', {
+    const to = attrs.to
+    if (to) delete attrs.to
+    return to ? h('router-link', {
+      staticClass: 'n-a',
+      class: {
+        [`n-${theme}-theme`]: theme
+      },
+      props: {
+        to: to
+      },
+      attrs,
+      on
+    }, defaultSlot) : h('a', {
       staticClass: 'n-a',
       class: {
         [`n-${theme}-theme`]: theme

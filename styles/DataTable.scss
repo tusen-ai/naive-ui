@@ -131,9 +131,8 @@
   }
   @include b(data-table) {
     @include once {
-      @include e(loading) {
-      }
       @include e(empty) {
+        padding: 24px 0;
       }
       @include e(pagination) {
         margin-top: 24px;
@@ -187,6 +186,7 @@
           width: 36px;
           top: 0;
           bottom: 0;
+          cursor: pointer;
           @include e(icon-wrapper) {
             position: absolute;
             right: 0;

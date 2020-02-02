@@ -121,6 +121,8 @@ Notification content close
 Safari select lightbar container overflow 边角
 Chrome lightbar offset @table fitler
 cascader
+form required css
+anchor 还是有点问题 bound 不够的时候切换
 
 // pref hollowout, cache next bg color
 // issue fix, add delay prop

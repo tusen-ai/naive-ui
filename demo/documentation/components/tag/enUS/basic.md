@@ -1,4 +1,5 @@
-# Basic
+# Type
+It has some types.
 ```html
 <n-tag
   closable

@@ -10,20 +10,22 @@
     @include e(icon) {
       @include once {
         transition: fill .3s $--n-ease-in-out-cubic-bezier;
-        width: 40px;
-        height: 40px;
+        width: 28px;
+        height: 28px;
       }
       fill: $--empty-icon-fill;
     }
     @include e(description) {
       @include once {
-        margin-top: 8px;
+        font-size: 14px;
+        margin-top: 4px;
         transition: color .3s $--n-ease-in-out-cubic-bezier;
       }
       color: $--empty-text-color;
     }
     @include e(extra) {
       @include once {
+        font-size: 14px;;
         text-align: center;
         transition: color .3s $--n-ease-in-out-cubic-bezier;
         margin-top: 16px;

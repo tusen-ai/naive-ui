@@ -14,7 +14,7 @@ export default {
       type: String,
       required: true
     },
-    value: {
+    show: {
       type: Boolean,
       default: false
     },
@@ -66,13 +66,18 @@ export default {
       type: String,
       default: undefined
     },
+    overlayClass: {
+      type: String,
+      default: null
+    },
+    overlayStyle: {
+      type: Object,
+      default: undefined
+    },
+    /** to make zindexable work */
     detached: {
       type: Boolean,
       default: true
-    },
-    contentClass: {
-      type: String,
-      default: null
     }
   },
   mixins: [withapp, themeable, asthemecontext, placeable, zindexable],
@@ -84,13 +89,13 @@ export default {
     return {
       memorizedId: null,
       internalActive: false,
-      show: false
+      keepPlaceableTracingWhenInactive: false
     }
   },
   created () {
     this.memorizedId = this.id
     popoverManager.registerContent(this.memorizedId, this)
-    if (this.active) this.show = true
+    if (this.active) this.keepPlaceableTracingWhenInactive = true
     if (this.controller) {
       this.controller.updatePosition = this.updatePosition
     }
@@ -117,6 +122,9 @@ export default {
       if (this.minWidth) {
         style.minWidth = this.minWidth + 'px'
       }
+      if (this.overlayStyle) {
+        Object.assign(style, this.overlayStyle)
+      }
       return style
     },
     triggeredByClick () {
@@ -129,7 +137,7 @@ export default {
       return this.trigger === 'manual'
     },
     active () {
-      if (this.trigger === 'manual') return this.value
+      if (this.trigger === 'manual') return this.show
       else return this.internalActive
     }
   },
@@ -220,7 +228,7 @@ export default {
   },
   render (h) {
     return h('div', {
-      staticClass: 'n-detached-content-container',
+      staticClass: 'n-positioning-container',
       class: {
         [this.containerClass]: true,
         [this.namespace]: this.namespace
@@ -228,11 +236,8 @@ export default {
       ref: 'contentContainer'
     }, [
       h('div', {
-        staticClass: 'n-detached-content',
-        ref: 'content',
-        attrs: {
-          'n-popover-id': this.$props.id
-        }
+        staticClass: 'n-positioning-content',
+        ref: 'content'
       }, [
         h('transition', {
           props: {
@@ -240,50 +245,48 @@ export default {
           },
           on: {
             enter: () => {
-              this.show = true
+              this.keepPlaceableTracingWhenInactive = true
             },
             afterLeave: () => {
-              this.show = false
+              this.keepPlaceableTracingWhenInactive = false
             }
           }
         }, [
-          this.active
-            ? h('div', {
-              attrs: {
-                'n-placement': this.adjustedPlacement
+          this.active ? h('div', {
+            attrs: {
+              'n-placement': this.adjustedPlacement
+            },
+            staticClass: 'n-popover-content',
+            class: {
+              'n-popover-content--without-arrow': !this.arrow,
+              [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme,
+              'n-popover-content--without-shadow': !this.shadow,
+              [this.overlayClass]: this.overlayClass,
+              'n-popover-content--fix-width': this.width !== null || this.maxWidth !== null
+            },
+            style: this.style,
+            directives: [
+              {
+                name: 'clickoutside',
+                value: this.handleClickOutside
               },
-              staticClass: 'n-popover-content',
-              class: {
-                'n-popover-content--without-arrow': !this.arrow,
-                [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme,
-                'n-popover-content--without-shadow': !this.shadow,
-                [this.contentClass]: this.contentClass,
-                'n-popover-content--fix-width': this.width !== null || this.maxWidth !== null
-              },
-              style: this.style,
-              directives: [
-                {
-                  name: 'clickoutside',
-                  value: this.handleClickOutside
-                },
-                {
-                  name: 'mousemoveoutside',
-                  value: this.handleMouseMoveOutside
-                }
-              ],
-              on: {
-                mouseenter: this.handleMouseEnter,
-                mouseleave: this.handleMouseLeave
+              {
+                name: 'mousemoveoutside',
+                value: this.handleMouseMoveOutside
               }
-            }, [
-              ...this.$slots.default,
-              this.arrow
-                ? h('div', {
-                  staticClass: 'n-popover-arrow'
-                })
-                : null
-            ])
-            : null
+            ],
+            on: {
+              mouseenter: this.handleMouseEnter,
+              mouseleave: this.handleMouseLeave
+            }
+          }, [
+            ...(this.$slots.default || []),
+            this.arrow
+              ? h('div', {
+                staticClass: 'n-popover-arrow'
+              })
+              : null
+          ]) : null
         ])
       ])
     ])

@@ -1,4 +1,5 @@
 # Accordion
+Like an accordion.
 ```html
 <n-collapse v-model="activeNames" accordion>
   <n-collapse-item title="right" name="1">

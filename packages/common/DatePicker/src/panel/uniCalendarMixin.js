@@ -29,10 +29,6 @@ export default {
       required: false,
       default: null
     },
-    debug: {
-      type: Boolean,
-      default: false
-    },
     actions: {
       type: Array,
       default: () => ['now', 'clear', 'confirm']

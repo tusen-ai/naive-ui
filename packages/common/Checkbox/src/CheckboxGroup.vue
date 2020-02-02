@@ -18,10 +18,18 @@ export default {
       NCheckboxGroup: this
     }
   },
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
   props: {
     value: {
       type: Array,
       default: null
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -29,36 +37,34 @@ export default {
       collectedCheckboxValues: []
     }
   },
-  watch: {
-    value (value, oldValue) {
-      this.$emit('change', value, oldValue)
+  computed: {
+    valueAsSet () {
+      if (Array.isArray(this.value)) return new Set(this.value)
+      return null
     }
   },
   methods: {
     toggleCheckbox (checked, checkboxValue) {
       if (Array.isArray(this.value)) {
         let groupValue = Array.from(this.value)
-        groupValue = groupValue.filter(value => ~this.collectedCheckboxValues.findIndex(collectedCheckboxValue => collectedCheckboxValue === value))
+        const collectedCheckboxValues = new Set(this.collectedCheckboxValues)
+        groupValue = groupValue.filter(value => collectedCheckboxValues.has(value))
         const index = groupValue.findIndex(value => value === checkboxValue)
         if (checked) {
           if (!~index) {
             groupValue.push(checkboxValue)
-            this.$emit('input', groupValue)
             this.$emit('change', groupValue)
           }
         } else {
           if (~index) {
             groupValue.splice(index, 1)
-            this.$emit('input', groupValue)
             this.$emit('change', groupValue)
           }
         }
       } else {
         if (checked) {
-          this.$emit('input', [checkboxValue])
           this.$emit('change', [checkboxValue])
         } else {
-          this.$emit('input', [])
           this.$emit('change', [])
         }
       }

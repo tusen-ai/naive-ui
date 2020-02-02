@@ -37,53 +37,50 @@
       @delete-last-option="handleDeleteLastOption"
       @pattern-input="handlePatternInput"
     />
-    <div
-      ref="contentContainer"
-      class="n-detached-content-container n-cascader-detached-content-container"
-      :class="{
-        [namespace]: namespace
-      }"
-    >
-      <n-base-portal ref="portal1">
-        <cascader-menu
-          ref="menu1"
-          v-clickoutside="handleMenuClickOutside"
-          :active="active && !selectMenuActive"
-          :class="{
-            [`n-${synthesizedTheme}-theme`]: synthesizedTheme
-          }"
-          :type="type"
-          :value="value"
-          :multiple="multiple"
-          :options="menuOptions"
-          :pattern="pattern"
-          :filterable="filterable"
-          :expand-trigger="expandTrigger"
-          :active-id.sync="activeId"
-          :lazy="lazy"
-          :on-load="onLoad"
-          :patches.sync="patches"
-          :loading.sync="loading"
-          :loading-id.sync="loadingId"
-          :theme="synthesizedTheme"
-          @input="handleMenuInput"
-        />
-      </n-base-portal>
-      <n-base-portal ref="portal2">
-        <cascader-select-menu
-          ref="menu2"
-          :type="type"
-          :value="value"
-          :active="active && selectMenuActive"
-          :theme="synthesizedTheme"
-          :pattern="pattern"
-          :size="size"
-          :multiple="multiple"
-          :options="menuOptions"
-          @input="handleMenuInput"
-        />
-      </n-base-portal>
-    </div>
+
+    <n-base-portal ref="portal1">
+      <cascader-menu
+        ref="menu1"
+        v-clickoutside="handleMenuClickOutside"
+        :active="active && !selectMenuActive"
+        :class="{
+          [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
+          [namespace]: namespace
+        }"
+        :type="type"
+        :value="value"
+        :multiple="multiple"
+        :options="menuOptions"
+        :pattern="pattern"
+        :filterable="filterable"
+        :expand-trigger="expandTrigger"
+        :active-id.sync="activeId"
+        :lazy="lazy"
+        :on-load="onLoad"
+        :patches.sync="patches"
+        :loading.sync="loading"
+        :loading-id.sync="loadingId"
+        :theme="synthesizedTheme"
+        @input="handleMenuInput"
+      />
+    </n-base-portal>
+    <n-base-portal ref="portal2">
+      <cascader-select-menu
+        ref="menu2"
+        :class="{
+          [namespace]: namespace
+        }"
+        :type="type"
+        :value="value"
+        :active="active && selectMenuActive"
+        :theme="synthesizedTheme"
+        :pattern="pattern"
+        :size="size"
+        :multiple="multiple"
+        :options="menuOptions"
+        @input="handleMenuInput"
+      />
+    </n-base-portal>
   </div>
 </template>
 

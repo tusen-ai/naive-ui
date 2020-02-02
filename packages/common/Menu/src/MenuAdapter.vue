@@ -2,7 +2,7 @@
 <script>
 import Menu from './Menu.vue'
 import MenuItem from './MenuItem.vue'
-import SubMenu from './SubMenu.vue'
+import Submenu from './Submenu.vue'
 import MenuItemGroup from './MenuItemGroup.vue'
 
 export default {
@@ -29,7 +29,7 @@ export default {
                 scopedSlots
               }, createItems(item.children))
             } else {
-              return h(SubMenu, {
+              return h(Submenu, {
                 props,
                 scopedSlots
               }, createItems(item.children))

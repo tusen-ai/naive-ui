@@ -4,6 +4,8 @@
     :class="{
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
       [`n-menu--${mode}`]: mode,
+      'n-menu--collapsed': collapsed,
+      'n-menu--transition-disabled': transitionDisabled
     }"
   >
     <ul class="n-menu-list">
@@ -20,11 +22,24 @@ export default {
   name: 'Menu',
   provide () {
     return {
-      NMenu: this
+      NMenu: this,
+      NSubmenu: null
     }
   },
   mixins: [withapp, themeable],
   props: {
+    collapsed: {
+      type: Boolean,
+      default: false
+    },
+    collapsedWidth: {
+      type: Number,
+      default: null
+    },
+    collapsedIconSize: {
+      type: Number,
+      default: undefined
+    },
     value: {
       type: String,
       default: null
@@ -41,6 +56,10 @@ export default {
       type: String,
       default: 'vertical'
     },
+    iconSize: {
+      type: Number,
+      default: 20
+    },
     defaultOpenNames: {
       type: Array,
       default: undefined
@@ -48,14 +67,20 @@ export default {
     openNames: {
       type: Array,
       default: undefined
+    },
+    /** private */
+    inPopover: {
+      type: Boolean,
+      default: false
+    },
+    showSubmenuArrow: {
+      type: Boolean,
+      default: true
     }
-    // hasIcon: {
-    //   type: Boolean,
-    //   default: false
-    // }
   },
   data () {
     return {
+      transitionDisabled: true,
       internalOpenNames: this.openNames || this.defaultOpenNames || []
     }
   },
@@ -65,12 +90,15 @@ export default {
       else return this.internalOpenNames
     }
   },
+  mounted () {
+    this.disableTransitionOneTick()
+  },
   methods: {
     handleSelect (value) {
       this.$emit('select', value)
       this.$emit('input', value)
     },
-    handleOpenNamesChange (name) {
+    toggleOpenName (name) {
       const currentOpenNames = Array.from(this.synthesizedOpenNames)
       const index = currentOpenNames.findIndex(openName => openName === name)
       if (~index) {
@@ -81,7 +109,19 @@ export default {
       if (this.openNames === undefined) {
         this.internalOpenNames = currentOpenNames
       }
-      this.$emit('openNamesChange', currentOpenNames)
+      this.$emit('open-names-change', currentOpenNames)
+    },
+    handleOpenNamesChange (names) {
+      if (this.openName === undefined) {
+        this.internalOpenNames = names
+      }
+      this.$emit('open-names-change', names)
+    },
+    disableTransitionOneTick () {
+      this.transitionDisabled = true
+      this.$nextTick().then(() => {
+        this.transitionDisabled = false
+      })
     }
   }
 }

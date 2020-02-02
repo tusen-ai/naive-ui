@@ -2,11 +2,14 @@
 
 ```html
 <n-data-table
+  remote
   ref="table"
   :columns="columns"
   :data="data"
   :loading="loading"
   :pagination="pagination"
+  :paging="false"
+  :row-key="rowKey"
   @sorter-change="handleSorterChange"
   @filters-change="handleFiltersChange"
   @page-change="handlePageChange"
@@ -14,39 +17,56 @@
 ```
 
 ```js
-const nameColumn = {
-  title: 'Name',
-  key: 'name',
+const Column1 = {
+  title: 'Column1',
+  key: 'column1',
   sorter: true,
-  sortOrder: false,
-  render (h, row) {
-    return h('span', [row.name.first, ' ', row.name.last])
-  }
+  sortOrder: false
 }
 
-const genderColumn = {
-  title: 'Gender',
-  key: 'gender',
-  filterable: true,
+const Column2 = {
+  title: 'Column2',
+  key: 'column2',
+  filter: true,
   filterOptionValues: [],
   filterOptions: [
-    { label: 'Male', value: 'male' },
-    { label: 'Female', value: 'female' }
+    { label: 'Value1', value: 1 },
+    { label: 'Value2', value: 2 }
   ]
 }
 
 const columns = [
-  nameColumn,
-  genderColumn,
+  Column1,
+  Column2,
   {
-    title: 'Email',
-    key: 'email'
+    title: 'Column3',
+    key: 'column3'
   }
 ]
 
-function createQueryString (querys) {
-  const queryString = Object.keys(querys).map(key => `${key}=${querys[key]}`).join('&')
-  return queryString ? '?' + queryString : ''
+const data = Array.apply(null, { length: 987 }).map((_, index) => {
+  return {
+    column1: index,
+    column2: index % 2 + 1,
+    column3: 'a' + index
+  }
+})
+
+
+function query (page, pageSize = 10, order = 'ascend', filterValues = []) {
+  return new Promise(resolve => {
+    const copiedData = data.map(v => v)
+    const orderedData = order === 'descend' ? copiedData.reverse() : copiedData
+    const filteredData = filterValues.length ? 
+      orderedData.filter(row => filterValues.includes(row.column2)) :
+      orderedData
+    const pagedData = filteredData.slice((page - 1) * pageSize, page * pageSize)
+    const pageCount = Math.ceil(filteredData.length / pageSize)
+    setTimeout(() => resolve({
+      pageCount,
+      data: pagedData
+    }), 1500)
+  })
 }
 
 export default {
@@ -54,64 +74,86 @@ export default {
     return {
       data: [],
       columns,
-      nameColumn,
-      genderColumn,
+      Column1,
+      Column2,
       pagination: {
         page: 1,
-        pageCount: 100,
-        pageSize: false
+        pageCount: 1,
+        pageSize: 10
       },
-      loading: false,
+      loading: true,
     }
   },
   mounted () {
-    this.getData().then(data => {
-      this.data = data.results
+    query(
+      this.pagination.page,
+      this.pagination.pageSize,
+      this.Column1.sortOrder,
+      this.Column2.filterOptionValues
+    ).then(data => {
+      this.data = data.data
+      this.pagination.pageCount = data.pageCount
+      this.loading = false
     })
   },
   methods: {
-    getData (params = {}) {
-      this.loading = true
-      !params.results && (params.results = 8)
-      const URL = 'https://randomuser.me/api' + createQueryString(params)
-      return fetch(URL)
-        .then(res => res.json())
-        .finally(() => {
-          this.loading = false
-        })
+    rowKey (rowData) {
+      return rowData.column1
     },
     handleSorterChange (sorter) {
-      if (!sorter) {
-        this.nameColumn.sortOrder = false
-        this.getData().then(data => {
-          this.data = data.results
-        })
-        return
-      }
-      if (sorter.columnKey === 'name') {
-        this.getData().then(data => {
-          this.data = data.results
-          this.nameColumn.sortOrder = sorter.sortOrder
-        })
+      if (!sorter || sorter.columnKey === 'column1') {
+        if (!this.loading) {
+          this.loading = true
+          query(
+            this.pagination.page,
+            this.pagination.pageSize,
+            !sorter ? false : sorter.order,
+            this.Column2.filterOptionValues
+          ).then(data => {
+            this.Column1.sortOrder = !sorter ? false : sorter.order,
+            this.data = data.data
+            this.pagination.pageCount = data.pageCount
+            this.loading = false
+          })
+        }
       }
     },
-    handleFiltersChange (filters, initiatorColumn) {
-      this.getData().then(data => {
-        this.data = data.results
-        if (initiatorColumn.key === 'gender') {
-          this.genderColumn.filterOptionValues = filters
-            .filter(filter => filter.columnKey === 'gender')
-            .map(filter => filter.filterOptionValue)
-        }
-      })
+    handleFiltersChange (filters) {
+      if (!this.loading) {
+        this.loading = true
+        const filterValues = filters
+          .filter(filter => filter.columnKey === 'column2')
+          .map(filter => filter.filterOptionValue)
+        query(
+          this.pagination.page,
+          this.pagination.pageSize,
+          this.Column1.sortOrder,
+          filterValues
+        ).then(data => {
+          this.Column2.filterOptionValues = filterValues
+          this.data = data.data
+          this.pagination.pageCount = data.pageCount
+          this.loading = false
+        })
+      }
     },
     handlePageChange (currentPage) {
-      this.getData({
-        page: currentPage
-      }).then(data => {
-        this.data = data.results
-        this.pagination.page = currentPage
-      })
+      if (!this.loading) {
+        this.loading = true
+        console.log(currentPage)
+        query(
+          currentPage,
+          this.pagination.pageSize,
+          this.Column1.sortOrder,
+          this.Column2.filterOptionValues
+        ).then(data => {
+          this.data = data.data
+          console.log(data.data)
+          this.pagination.page = currentPage
+          this.pagination.pageCount = data.pageCount
+          this.loading = false
+        })
+      }
     }
   }
 }

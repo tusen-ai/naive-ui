@@ -1,43 +1,5 @@
-<template>
-  <n-dropdown-item
-    ref="activator"
-    :label="label"
-    name="n-dropdown-submenu-item"
-    :value="value"
-    as-submenu
-    @mouseenter="handleMouseEnter"
-    @mouseleave="handleMouseLeave"
-  >
-    <div
-      class="n-dropdown-submenu-activator"
-    >
-      <slot name="activator">
-        {{ label }}
-      </slot>
-      <n-icon v-if="arrow" class="n-dropdown-submenu-activator__arrow">
-        <ios-arrow-forward />
-      </n-icon>
-    </div>
-    <transition
-      name="n-fade-in-scale-up--transition"
-    >
-      <n-dropdown-menu
-        v-if="active"
-        ref="content"
-        :style="style"
-        :theme="synthesizedTheme"
-        class="n-dropdown-submenu"
-        :auto-focus="false"
-      >
-        <slot />
-      </n-dropdown-menu>
-    </transition>
-  </n-dropdown-item>
-</template>
-
 <script>
 import NDropdownMenu from './DropdownMenu'
-import NDropdownItem from './DropdownItem'
 import themeable from '../../../mixins/themeable'
 import NIcon from '../../Icon'
 import iosArrowForward from '../../../icons/ios-arrow-forward'
@@ -47,11 +9,10 @@ export default {
   name: 'NDropdownSubmenu',
   components: {
     NDropdownMenu,
-    NDropdownItem,
     NIcon,
     iosArrowForward
   },
-  mixins: [themeable, placeable],
+  mixins: [ themeable, placeable ],
   provide () {
     return {
       NDropdownSubmenu: this
@@ -69,17 +30,17 @@ export default {
     }
   },
   props: {
+    data: {
+      type: Object,
+      required: true
+    },
+    options: {
+      type: Array,
+      required: true
+    },
     arrow: {
       type: Boolean,
       default: true
-    },
-    label: {
-      type: String,
-      default: undefined
-    },
-    value: {
-      type: Number,
-      required: true
     },
     duration: {
       type: Number,
@@ -109,7 +70,6 @@ export default {
   data () {
     return {
       vanishTimerId: null,
-      collectedOptions: [],
       menuActivated: false
     }
   },
@@ -150,24 +110,21 @@ export default {
       }
       return style
     },
-    pendingOption () {
-      if (this.NBaseSelectMenu) {
-        return this.NBaseSelectMenu.pendingOption
+    pendingOptionValue () {
+      if (
+        this.NBaseSelectMenu &&
+        this.NBaseSelectMenu.pendingOptionValue !== null
+      ) {
+        return this.NBaseSelectMenu.pendingOptionValue
       }
       return null
     },
-    pendingOptionValue () {
-      /**
-       * Don't use id since id can't be a prop for option
-       */
-      if (this.pendingOption) {
-        return this.pendingOption.value
-      }
-      return null
+    size () {
+      return this.NDropdownMenu.size
     },
     menuPendingToBeActivated () {
-      if (this.value && this.pendingOptionValue) {
-        return this.value === this.pendingOptionValue
+      if (this.data.value && this.pendingOptionValue) {
+        return this.data.value === this.pendingOptionValue
       }
       return false
     }
@@ -180,10 +137,10 @@ export default {
       }
       if (value) {
         this.$nextTick().then(() => {
-          rootDropdownMenu.pendingSubMenuInstance = this
+          rootDropdownMenu.pendingSubmenuInstance = this
         })
       } else {
-        rootDropdownMenu.pendingSubMenuInstance = null
+        rootDropdownMenu.pendingSubmenuInstance = null
       }
     }
   },
@@ -212,6 +169,44 @@ export default {
         this.menuActivated = false
       }, this.duration)
     }
+  },
+  render (h) {
+    return h('div', {
+      ref: 'activator',
+      staticClass: 'n-dropdown-item n-dropdown-item--as-submenu',
+      on: {
+        mouseenter: this.handleMouseEnter,
+        mouseleave: this.handleMouseLeave
+      }
+    }, [
+      h('div', {
+        staticClass: 'n-dropdown-submenu-activator'
+      }, [
+        this.data.label,
+        this.arrow ? h(NIcon, {
+          staticClass: 'n-dropdown-submenu-activator__arrow'
+        }, [
+          h(iosArrowForward)
+        ]) : null
+      ]),
+      h('transition', {
+        props: {
+          name: 'n-fade-in-scale-up--transition'
+        }
+      }, [
+        this.active ? h(NDropdownMenu, {
+          ref: 'content',
+          staticClass: 'n-dropdown-submenu',
+          style: this.style,
+          props: {
+            options: this.options,
+            theme: this.synthesizedTheme,
+            defaultFocus: false,
+            size: this.size
+          }
+        }) : null
+      ])
+    ])
   }
 }
 </script>

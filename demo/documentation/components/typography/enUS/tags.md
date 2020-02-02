@@ -1,4 +1,5 @@
 # Tags
+Other naive-ui builtin tags.
 ```html
 <n-a>a tag</n-a>
 <n-h1>h1 tag</n-h1>

@@ -4,6 +4,6 @@
   <template v-slot:activator>
     <n-button>No Icon</n-button>
   </template>
-  Are you sure to quit this game?
+  As is
 </n-popconfirm>
 ```

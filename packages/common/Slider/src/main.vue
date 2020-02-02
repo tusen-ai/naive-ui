@@ -68,14 +68,14 @@
     </div>
     <div
       ref="contentContainer"
-      class="n-detached-content-container n-slider-detached-content-container"
+      class="n-positioning-container"
       :class="{
         [namespace]: namespace
       }"
     >
       <div
         ref="content"
-        class="n-detached-content"
+        class="n-positioning-content"
       >
         <transition name="n-fade-in-scale-up--transition">
           <div
@@ -125,6 +125,10 @@ function handleSecondHandleMouseMove (e) {
 export default {
   name: 'NSlider',
   mixins: [withapp, themeable, hollowoutable, detachable, placeable, asformitem()],
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
   props: {
     marks: {
       type: Object,
@@ -490,20 +494,20 @@ export default {
           } else {
             value = [this.justifyValue(value[0]), this.justifyValue(value[1])]
           }
-          this.$emit('input', value)
+          this.$emit('change', value)
         }
       } else {
         if (value > this.max) {
           if (this.value !== this.max) {
-            this.$emit('input', this.max)
+            this.$emit('change', this.max)
           }
         } else if (value < this.min) {
           if (this.value !== this.min) {
-            this.$emit('input', this.min)
+            this.$emit('change', this.min)
           }
         } else {
           if (this.value !== value) {
-            this.$emit('input', this.justifyValue(value))
+            this.$emit('change', this.justifyValue(value))
           }
         }
       }

@@ -81,6 +81,7 @@
       display: inline-block;
       @include m(line) {
         width: 100%;
+        display: block;
         @include b(progress-content) {
           display: flex;
           align-items: center;

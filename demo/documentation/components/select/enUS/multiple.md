@@ -1,4 +1,5 @@
 # Multiple Select
+Select multiple value.
 ```html
 <n-select
   v-model="value"
@@ -11,32 +12,6 @@
   disabled
   :options="options"
 />
-<n-select
-  v-model="value"
-  multiple
-  size="small"
-  :options="options"
-/>
-<n-select
-  v-model="value"
-  multiple
-  size="large"
-  :options="options"
-/>
-<n-select
-  v-model="value"
-  size="large"
-  multiple
-  :options="options"
->
-  <n-select-option 
-    v-for="option in options"
-    :key="options.value"
-    :label="option.label"
-    :value="option.value"
-    :disabled="option.disabled"
-  />
-</n-select>
 ```
 ```js
 export default {

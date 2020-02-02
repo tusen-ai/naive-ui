@@ -23,9 +23,6 @@
     'default': $--n-secondary-text-color,
     'disabled': $--n-disabled-text-color
   ) !global;
-  $--tranfer-item-lightbar-background-color: (
-    'default': change-color($--n-primary-color, $alpha: .2)
-  ) !global;
   $--transfer-list-border-color: $--n-border-color !global;
   $--transfer-header-border-color: transparent !global; 
 }

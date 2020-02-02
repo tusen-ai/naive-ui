@@ -13,7 +13,7 @@ Button has loading status.
 <br>
 <n-button
   :loading="loading"
-  icon-position="right"
+  icon-placement="right"
   @click="loading = !loading"
 >
   <template v-slot:icon>

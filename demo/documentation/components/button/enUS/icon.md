@@ -7,7 +7,7 @@ Use icon in button.
   </template>
   Save
 </n-button>
-<n-button icon-position="right">
+<n-button icon-placement="right">
   <template v-slot:icon>
     <md-save />
   </template>

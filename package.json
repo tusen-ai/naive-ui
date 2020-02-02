@@ -25,11 +25,11 @@
     "registry": "***REMOVED***"
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.7",
+    "@babel/cli": "^7.8.0",
     "@babel/core": "^7.7.7",
     "@babel/preset-env": "^7.7.7",
     "@kazupon/vue-i18n-loader": "^0.4.1",
-    "@rollup/plugin-node-resolve": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^6.1.0",
     "@rollup/plugin-strip": "^1.3.1",
     "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
     "@vue/babel-preset-app": "^3.12.1",
@@ -84,6 +84,7 @@
     "progress-bar-webpack-plugin": "^1.12.1",
     "regenerator-runtime": "^0.13.3",
     "rollup": "^1.27.14",
+    "rollup-plugin-scss": "^2.1.0",
     "rollup-plugin-terser": "^5.1.3",
     "rollup-plugin-vue": "^5.1.4",
     "schema-utils": "^1.0.0",
@@ -112,6 +113,7 @@
     "lodash-es": "^4.17.15",
     "node-sass": "^4.13.0",
     "resize-observer-polyfill": "^1.5.1",
-    "sass-loader": "^7.3.1"
+    "sass-loader": "^7.3.1",
+    "vue-virtual-scroller": "^1.0.0-rc.2"
   }
 }

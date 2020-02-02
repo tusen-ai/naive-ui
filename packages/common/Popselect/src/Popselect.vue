@@ -41,11 +41,7 @@ export default {
       type: Object,
       default: null
     },
-    loading: {
-      type: Boolean,
-      default: false
-    },
-    arrow: {
+    showArrow: {
       type: Boolean,
       default: true
     },
@@ -73,7 +69,7 @@ export default {
       props: {
         trigger: context.props.trigger,
         containerClass: 'n-popselect',
-        arrow: context.props.arrow,
+        showArrow: context.props.showArrow,
         controller
       },
       on: {

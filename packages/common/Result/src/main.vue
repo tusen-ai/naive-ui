@@ -7,10 +7,10 @@
     }"
   >
     <div class="n-result-icon">
-      <img v-if="status === 404 || status === '404'" class="n-result-icon__status-image" src="./404.svg">
-      <img v-else-if="status === 403 || status === '403'" class="n-result-icon__status-image" src="./403.svg">
-      <img v-else-if="status === 500 || status === '500'" class="n-result-icon__status-image" src="./500.svg">
-      <img v-else-if="status === 481 || status === '418'" class="n-result-icon__status-image" src="./418.svg">
+      <image-404 v-if="status === 404 || status === '404'" class="n-result-icon__status-image" />
+      <image-403 v-else-if="status === 403 || status === '403'" class="n-result-icon__status-image" />
+      <image-500 v-else-if="status === 500 || status === '500'" class="n-result-icon__status-image" />
+      <image-418 v-else-if="status === 481 || status === '418'" class="n-result-icon__status-image" />
       <n-icon v-else-if="status === 'success'" size="80">
         <ios-checkmark-circle />
       </n-icon>
@@ -49,6 +49,10 @@ import iosAlert from '../../../icons/ios-alert'
 import iosInformationCircle from '../../../icons/ios-information-circle'
 import iosCloseCircle from '../../../icons/ios-close-circle'
 import NIcon from '../../Icon'
+import image404 from './404.vue'
+import image500 from './500.vue'
+import image418 from './418.vue'
+import image403 from './403.vue'
 
 export default {
   name: 'NResult',
@@ -57,7 +61,11 @@ export default {
     iosAlert,
     iosInformationCircle,
     iosCloseCircle,
-    NIcon
+    NIcon,
+    image404,
+    image403,
+    image418,
+    image500
   },
   mixins: [ withapp, themeable ],
   props: {

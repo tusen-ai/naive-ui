@@ -64,8 +64,8 @@ export default {
   },
   computed: {
     collapse () {
-      if (this.NCollapse && Array.isArray(this.NCollapse.value)) {
-        return !~this.NCollapse.value.findIndex(name => name === this.name)
+      if (this.NCollapse && Array.isArray(this.NCollapse.expandNames)) {
+        return !~this.NCollapse.expandNames.findIndex(name => name === this.name)
       }
       return true
     }

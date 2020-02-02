@@ -1,5 +1,5 @@
 # Color
-
+Color is depend on you even in different theme. You can set it to something related to things you want to eat.
 ```html
 <n-avatar :themed-style="{
   light: {
@@ -10,5 +10,5 @@
      color: 'red',
     backgroundColor: 'yellow'
   }
-}">Liu<br>Dehua</n-avatar>
+}">M</n-avatar>
 ```

@@ -1,9 +1,10 @@
 # Max Width
+Setting max-width is sometimes more useful.
 ```html
 <n-tooltip :max-width="400" trigger="click">
   <template v-slot:activator>
     <n-button>
-      hello tooltip
+      California Girls
     </n-button>
   </template>
   I wish they all could be California girls. I wish they all could be California
@@ -12,7 +13,7 @@
 <n-tooltip :max-width="400" trigger="click">
   <template v-slot:activator>
     <n-button>
-      hello tooltip
+      California Girls
     </n-button>
   </template>
   I wish ...

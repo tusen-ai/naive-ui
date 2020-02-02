@@ -1,7 +1,7 @@
 @import './mixins/mixins.scss';
 
 @mixin result-status-mixin ($status){
-  @include e($status + '-status') {
+  @include m($status + '-status') {
     @include b(result-icon) {
       @include b(icon) {
         fill: map-get($--result-icon-fill, $status);

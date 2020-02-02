@@ -1,27 +1,30 @@
 <template>
-  <div class="n-auto-complete" @keydown.down="handleKeyDownDown" @keydown.up="handleKeyDownUp" @keyup.enter="handleKeyUpEnter" @keydown.enter="handleKeyDownEnter">
-    <n-base-select-option-collector v-if="!!$slots.default">
-      <slot />
-    </n-base-select-option-collector>
-    <slot name="activator" :handle-input="handleInput" :handle-focus="handleFocus" :handle-blur="handleBlur" :value="value">
+  <div
+    class="n-auto-complete"
+    @keydown.down="handleKeyDownDown"
+    @keydown.up="handleKeyDownUp"
+    @keyup.enter="handleKeyUpEnter"
+    @keydown.enter="handleKeyDownEnter"
+  >
+    <slot :handle-input="handleInput" :handle-focus="handleFocus" :handle-blur="handleBlur" :value="value">
       <n-input ref="activator" :value="value" :placeholder="placeholder" :size="size" @focus="canBeActivated = true" @input="handleInput" @blur="handleBlur" />
     </slot>
     <div
       ref="contentContainer"
-      v-clickoutside="handleClickOutsideMenu"
-      class="n-detached-content-container n-select-detached-content-container"
+      class="n-positioning-container"
       :class="{
         [namespace]: namespace
       }"
     >
       <div
         ref="content"
-        class="n-detached-content-content"
+        class="n-positioning-content"
       >
         <transition name="n-select-menu--transition">
           <n-base-select-menu
             v-if="active"
             ref="contentInner"
+            v-clickoutside="handleClickOutsideMenu"
             auto-pending-first-option
             class="n-select-menu"
             :theme="synthesizedTheme"
@@ -31,16 +34,10 @@
             :size="size"
             :remote="remote"
             :loading="loading"
-            :no-data-content="'Please Search'"
-            :not-found-content="'Not Found'"
-            :emit-option="false"
             :filterable="false"
-            :is-selected="isSelected"
-            :use-slot="!!$slots.default"
+            :is-option-selected="isSelected"
             @menu-toggle-option="handleToggleOption"
-          >
-            <n-base-select-render-options v-if="!!$slots.default" :options="filteredOptions" />
-          </n-base-select-menu>
+          />
         </transition>
       </div>
     </div>
@@ -59,18 +56,14 @@ import themeable from '../../../mixins/themeable'
 import asformitem from '../../../mixins/asformitem'
 
 import {
-  NBaseSelectMenu,
-  NBaseSelectOptionCollector,
-  NBaseSelectRenderOptions
+  NBaseSelectMenu
 } from '../../../base/SelectMenu'
 
 export default {
   name: 'NAutoComplete',
   components: {
     NInput,
-    NBaseSelectMenu,
-    NBaseSelectOptionCollector,
-    NBaseSelectRenderOptions
+    NBaseSelectMenu
   },
   directives: {
     clickoutside
@@ -145,8 +138,8 @@ export default {
   methods: {
     handleKeyDownEnter (e) {
       if (this.$refs.contentInner) {
-        const pendingOption = this.$refs.contentInner.pendingOption
-        if (pendingOption) {
+        const pendingOptionData = this.$refs.contentInner.getPendingOptionData()
+        if (pendingOptionData) {
           e.preventDefault()
         }
       }
@@ -163,8 +156,8 @@ export default {
     },
     handleKeyUpEnter () {
       if (this.$refs.contentInner) {
-        const pendingOption = this.$refs.contentInner.pendingOption
-        this.select(pendingOption)
+        const pendingOptionData = this.$refs.contentInner.getPendingOptionData()
+        this.select(pendingOptionData)
       }
     },
     select (option) {

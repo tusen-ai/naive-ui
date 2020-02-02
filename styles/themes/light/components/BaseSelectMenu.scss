@@ -9,5 +9,5 @@
   $--base-select-menu-option-check-mark-color: $--n-primary-color !global;
   $--base-select-menu-background-color: white !global;
   $--base-select-menu-box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.18) !global;
-  $--base-select-menu-light-bar-background-color: change-color($--primary-6, $alpha: .15) !global;
+  $--base-select-menu-light-bar-background-color: change-color($--primary-6, $alpha: .1) !global;
 }

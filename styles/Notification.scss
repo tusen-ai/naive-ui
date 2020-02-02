@@ -13,14 +13,25 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  @include b(scrollbar-container) {
-    height: -moz-fit-content !important;
-    height: fit-content !important;
-    max-height: 100vh !important;
-    @include b(scrollbar-content) {
-      padding-top: 12px;
+  & > {
+    @include b(scrollbar) {
+      height: -moz-fit-content !important;
+      height: fit-content !important;
+      max-height: 100vh !important;
+      & > {
+        @include b(scrollbar-container) {
+          height: -moz-fit-content !important;
+          height: fit-content !important;
+          max-height: 100vh !important;
+          @include b(scrollbar-content) {
+            padding-top: 12px;
+          }
+        }
+      }
     }
   }
+  
+  
   @include m(scrollable) {
     top: 0;
   }

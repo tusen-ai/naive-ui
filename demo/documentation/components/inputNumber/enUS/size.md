@@ -1,4 +1,5 @@
 # Size
+`small`, `medium`, `large`.
 ```html
 <n-input-number
   v-model="value"
@@ -20,5 +21,10 @@ export default {
       value: 0
     }
   }
+}
+```
+```css
+.n-input-number {
+  margin: 0 8px 12px 0
 }
 ```

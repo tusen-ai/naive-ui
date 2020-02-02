@@ -1,45 +1,19 @@
 # Filterable
+Go go go, Filter.
 ```html
 <n-select
   v-model="selectedValue"
   filterable
-  placeholder="Please Select Type"
-  :options="options"
-/>
-<n-select
-  v-model="selectedValue"
-  filterable
-  placeholder="Please Select Type"
->
-  <n-select-option 
-    v-for="option in options"
-    :key="options.value"
-    :label="option.label"
-    :value="option.value"
-    :disabled="option.disabled"
-  />
-</n-select>
-<n-select
-  v-model="selectedValues"
-  multiple
-  filterable
-  placeholder="Please Select Type"
+  placeholder="Please Select a Song"
   :options="options"
 />
 <n-select
   v-model="selectedValues"
   multiple
   filterable
-  placeholder="Please Select Type"
->
-  <n-select-option 
-    v-for="option in options"
-    :key="options.value"
-    :label="option.label"
-    :value="option.value"
-    :disabled="option.disabled"
-  />
-</n-select>
+  placeholder="Please Select Songs"
+  :options="options"
+/>
 ```
 ```js
 export default {

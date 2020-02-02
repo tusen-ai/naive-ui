@@ -1,4 +1,5 @@
-# Basic
+# Type
+It has different type.
 ```html
 <n-gradient-text
   type="error"

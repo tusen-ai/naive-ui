@@ -1,106 +1,62 @@
 <script>
-import {
-  createValueAttribute
-} from './utils'
-
 export default {
   name: 'NBaseSelectOption',
-  functional: true,
   inject: {
     NBaseSelectMenu: {
       default: null
     }
   },
   props: {
-    label: {
-      validator (value) {
-        return typeof value === 'string'
-      },
+    wrappedOption: {
+      type: Object,
       required: true
     },
-    value: {
-      validator (value) {
-        const type = typeof value
-        return type === 'string' || type === 'number'
-      },
-      required: true
-    },
-    disabled: {
+    selected: {
       validator (value) {
         return typeof value === 'boolean'
       },
       default: false
     },
-    isSelected: {
+    grouped: {
       validator (value) {
         return typeof value === 'boolean'
       },
       default: false
     },
-    mirror: {
+    index: {
       validator (value) {
-        return typeof value === 'boolean'
+        return typeof value === 'number'
       },
-      default: true
+      required: true
     }
   },
-  render (h, context) {
-    const option = {
-      label: context.props.label,
-      value: context.props.value,
-      disabled: context.props.disabled
+  methods: {
+    handleClick (e) {
+      if (this.disabled) return
+      this.NBaseSelectMenu.handleOptionClick(e, this.index, this.wrappedOption)
+    },
+    handleMouseEnter (e) {
+      if (this.disabled) return
+      this.NBaseSelectMenu.handleOptionMouseEnter(e, this.index, this.wrappedOption)
     }
-    const selectMenu = context.injections.NBaseSelectMenu
-    const disabled = context.props.disabled
-    let selected = context.props.isSelected
-    if (context.props.mirror) {
-      if (selectMenu && selectMenu.isSelected && option) {
-        selected = selectMenu.isSelected({ value: context.props.value })
-      }
-    }
-    const listeners = context.listeners || {}
-    function handleClick (e) {
-      if (disabled) return
-      selectMenu.handleOptionClick(e, option)
-      listeners.click && listeners.click(e)
-    }
-    function handleMouseEnter (e) {
-      if (disabled) return
-      selectMenu.handleOptionMouseEnter(e, option)
-      listeners.mouseenter && listeners.mouseenter(e)
-    }
-    function handleMouseLeave (e) {
-      if (disabled) return
-      selectMenu.handleOptionMouseLeave(e, option)
-      listeners.mouseleave && listeners.mouseleave(e)
-    }
-    let on = {}
-    if (selectMenu) {
-      on = {
-        click: handleClick,
-        mouseenter: handleMouseEnter,
-        mouseleave: handleMouseLeave
-      }
-    } else {
-      on = listeners
-    }
-    let attrs = {}
-    attrs = {
-      'n-value': createValueAttribute(context.props.value)
-    }
+  },
+  render (h) {
+    const data = this.wrappedOption.data
+    const children = (data.render && data.render(h, data, this.selected)) || [ data.label ]
     return h('div', {
       staticClass: 'n-base-select-option',
       class: {
-        'n-base-select-option--selected': selected,
-        'n-base-select-option--disabled': disabled
+        'n-base-select-option--selected': this.selected,
+        'n-base-select-option--disabled': data.disabled,
+        'n-base-select-option--grouped': this.grouped
       },
-      key: context.props.value,
-      attrs,
-      on,
-      props: {
-        ...context.props
+      attrs: { 'n-index': this.index },
+      style: data.style,
+      on: {
+        click: this.handleClick,
+        mouseenter: this.handleMouseEnter
       }
-    }, (context.scopedSlots.default && context.scopedSlots.default()) || [ context.props.label ])
+    }, Array.isArray(children) ? children : [ children ])
   }
 }
 </script>

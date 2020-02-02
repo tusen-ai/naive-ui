@@ -3,9 +3,9 @@
 <n-tooltip placement="top-start">
   <template v-slot:activator>
     <n-button>
-      hello tooltip
+      Top Start
     </n-button>
   </template>
-  This is the contextual help
+  Woo, awesome!
 </n-tooltip>
 ```

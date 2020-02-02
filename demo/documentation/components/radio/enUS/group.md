@@ -1,4 +1,5 @@
 # Group
+A radio group look elegant.
 ```html
 <n-radio-group v-model="value">
   <n-radio

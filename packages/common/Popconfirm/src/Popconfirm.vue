@@ -6,6 +6,7 @@ export default {
   name: 'NPopconfirm',
   functional: true,
   props: {
+    ...NPopover.props,
     positiveText: {
       type: String,
       default: 'Confirm'
@@ -21,10 +22,6 @@ export default {
     trigger: {
       type: String,
       default: 'click'
-    },
-    controller: {
-      type: Object,
-      default: null
     }
   },
   render (h, context) {

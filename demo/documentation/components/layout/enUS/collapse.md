@@ -6,21 +6,21 @@ Sider has two `collapse-mode`: `width`, `transform`. `width` will actually chang
 Use `collapsed-width` and `width` to set sider's width.
 ```html
 <n-switch v-model="collapsed" />
-<n-layout style="height: 240px;">
+<n-layout>
   <n-layout-header style="height: 64px;">
     Cool Header
   </n-layout-header>
   <n-layout>
     <n-layout-sider
       collapse-mode="width"
-      :collapsed-width="120"
+      :collapsed-width="48"
       :width="240"
       :collapsed="collapsed"
       show-toggle-button
       @collapse="collapsed = true"
       @expand="collapsed = false"
     >
-      <p>Sider Sider Sider Sider Sider Sider</p>
+      Cool Sider
     </n-layout-sider>
     <n-layout>
       <n-layout-content>
@@ -40,7 +40,7 @@ Use `collapsed-width` and `width` to set sider's width.
     <n-layout-sider
       mode="absolute"
       collapse-mode="transform"
-      :collapsed-width="120"
+      :collapsed-width="48"
       :width="240"
       :collapsed="collapsed"
       show-toggle-button
@@ -57,10 +57,17 @@ Use `collapsed-width` and `width` to set sider's width.
   </n-layout>
 </n-layout>
 ```
+
 ```js
+import mdContacts from 'naive-ui/lib/icons/md-contacts'
+
 export default {
+  components: {
+    mdContacts
+  },
   data () {
     return {
+      activeMenuItemName: null,
       collapsed: true
     }
   }

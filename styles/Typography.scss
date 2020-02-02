@@ -54,6 +54,7 @@ $--header-bar-width: (
         width: map-get($--header-bar-width, $level);
         border-radius:  map-get($--header-bar-width, $level) / 2;
         background-color: $--n-primary-color;
+        transition: background-color .3s $--n-ease-in-out-cubic-bezier;
         left: 0;
         top: 0;
         bottom: 0;
@@ -110,9 +111,6 @@ $--header-bar-width: (
     &:first-child {
       margin-top: 0;
     }
-    &:last-child {
-      margin-bottom: 0;
-    }
     transition: color .3s $--n-ease-in-out-cubic-bezier;
     margin: 8px 0 8px 0;
     font-size: 14px;
@@ -155,6 +153,7 @@ $--header-bar-width: (
   @include b(a) {
     transition: color .3s $--n-ease-in-out-cubic-bezier;
     color: $--n-primary-color;
+    cursor: pointer;
     text-decoration: underline;
   }
   @include b(text) {
@@ -165,7 +164,6 @@ $--header-bar-width: (
       line-height: 1.4;
       font-family: $--n-mono-font-family;
       transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
-      white-space: nowrap;
       box-sizing: border-box;
       background-clip: padding-box;
       color: $--n-secondary-text-color;

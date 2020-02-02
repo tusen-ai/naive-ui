@@ -12,9 +12,9 @@
     </n-icon>
   </template>
   <template v-slot:activator>
-    <n-button>Quit</n-button>
+    <n-button>Quit Game</n-button>
   </template>
-  Are you sure to quit this game?
+  How can you be strong without purchasing?
 </n-popconfirm>
 ```
 ```js

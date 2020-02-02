@@ -10,14 +10,6 @@ export default {
     onDestroy: {
       type: Function,
       required: true
-    },
-    onClose: {
-      type: Function,
-      default: () => {}
-    },
-    onAfterClose: {
-      type: Function,
-      default: () => {}
     }
   },
   data () {
@@ -26,25 +18,27 @@ export default {
       theme: null,
       content: null,
       type: null,
-      icon: null
+      icon: null,
+      onHide: () => {},
+      onAfterHide: () => {}
     }
   },
   mounted () {
     if (this.duration) {
-      window.setTimeout(this.close, this.duration)
+      window.setTimeout(this.hide, this.duration)
     }
   },
   methods: {
-    close () {
+    hide () {
       this.active = false
-      this.onClose()
+      this.onHide()
     },
     deactivate () {
-      this.close()
+      this.hide()
     },
     handleAfterLeave () {
       this.onDestroy(this)
-      this.onAfterClose()
+      this.onAfterHide()
     }
   },
   render (h) {

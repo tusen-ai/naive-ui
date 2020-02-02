@@ -3,18 +3,6 @@
     v-if="$slots.default"
     class="n-spin-container"
   >
-    <transition name="n-spin--transition">
-      <n-base-loading
-        v-if="spinning"
-        :class="{
-          [`n-spin--${size}-size`]: true
-        }"
-        :stroke="stroke"
-        :stroke-width="strokeWidth"
-        :theme="synthesizedTheme"
-        class="n-spin"
-      />
-    </transition>
     <div
       :class="{
         'n-spin-content--spinning': spinning
@@ -23,6 +11,18 @@
     >
       <slot />
     </div>
+    <transition name="n-spin--transition">
+      <n-base-loading
+        v-if="spinning"
+        :class="{
+          [`n-spin--${size}-size`]: true
+        }"
+        :stroke="stroke"
+        :stroke-width="synthesizedStrokeWidth"
+        :theme="synthesizedTheme"
+        class="n-spin"
+      />
+    </transition>
   </div>
   <n-base-loading
     v-else
@@ -30,9 +30,8 @@
       [`n-spin--${size}-size`]: size
     }"
     :stroke="stroke"
-    :stroke-width="strokeWidth"
+    :stroke-width="synthesizedStrokeWidth"
     :theme="synthesizedTheme"
-    :style="synthesizedStyle"
     class="n-spin"
   />
 </template>
@@ -42,6 +41,15 @@ import NBaseLoading from '../../../base/Loading'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import asthemecontext from '../../../mixins/asthemecontext'
+
+const STROKE_WIDTH = {
+  small: 22,
+  medium: 20,
+  large: 18,
+  'in-small': 30,
+  'in-medium': 28,
+  'in-large': 26
+}
 
 export default {
   name: 'NSpin',
@@ -67,6 +75,13 @@ export default {
       default: null
     }
   },
-  methods: {}
+  computed: {
+    synthesizedStrokeWidth () {
+      const strokeWidth = this.strokeWidth
+      if (strokeWidth !== null) return strokeWidth
+      const size = this.size
+      return STROKE_WIDTH[size]
+    }
+  }
 }
 </script>

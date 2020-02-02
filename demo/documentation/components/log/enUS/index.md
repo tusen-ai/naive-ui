@@ -1,5 +1,7 @@
 # Log
 <!--single-column-->
+If you have some logs to show, use log.
+
 <n-alert title="Note" type="warning">
   Due to package size, Naive UI doesn't include highlight.js. If you want highlight logs, make sure you have set highlightjs before using it.
 </n-alert>
@@ -30,3 +32,23 @@ scroll
 highlight
 loading
 ```
+
+## Props
+|Name|Type|Default|Description|
+|-|-|-|-|
+|loading|`boolean`|`false`||
+|trim|`boolean`|`false`||
+|log|`string`|`null`||
+|lines|`Array<string>`|`null`||
+|font-size|`number`|`14`||
+|line-height|`number`|`1.25`||
+|language|`string`|`null`||
+|rows|`number`|`15`||
+|hljs|`object`|`null`||
+
+## Events
+|Name|Parameters|Description|
+|-|-|-|
+|require-more|`(from: 'top' \| 'bottom')`||
+|reach-top|`()`|
+|reach-bottom|`()`|
