@@ -35,9 +35,9 @@ ajaxUsage
 |max-height|`number`|`null`|The max-height of the table. If content height is larger than it, the header will be fixed at top|
 |min-height|`number`|`null`|The min-height of the table.|
 |loading|`boolean`|`false`||
-|bordered|`boolean`|`true`||
 |scroll-x|`number`|`null`|If columns are horizontal fixed, scroll-x need to be set|
 |pagination|`false \| object`|`false`|See [Pagination props](n-pagination#Props)|
+|paging|`boolean`|If data-table do automatic paging. You may set it to `false` in async usage.|
 |row-class-name|`string \| (rowData: object, index : number) : string \| object`|`null`||
 |checked-row-keys|`Array<string \| number> \| null`|`null`||
 |default-checked-row-keys|`Array<string \| number>`|`[]`||
@@ -58,8 +58,8 @@ These methods can help you control table in an uncontrolled manner. However, it'
 ## Events
 |Name|Parameters|Description|
 |-|-|-|
-|filters-change|`(Array<{ columnKey: string \| number, filterOptionValue: string \| number }>, sourceColumn: object) : void`||
-|sorter-change|`({ columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false }) : void`||
+|filters-change|`(Array<{ columnKey: string \| number, filterOptionValue: string \| number }>, initiatorColumn: object)`||
+|sorter-change|`({ columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null)`|If there won't be a active sorter after change, sorter-change will emit `null`|
 |page-change|`(page: number)`||
 |page-size-change|`(pageSize: number)`||
 |checked-row-keys-change|`(keys: Array<string \| number>)`||
