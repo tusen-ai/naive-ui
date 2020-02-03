@@ -12,7 +12,7 @@ name-size
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|size|`'small' \| 'medium' \| 'large' \| 'huge'`| `'medium'`||
+|size|`'small' \| 'medium' \| 'large' \| number`| `'medium'`||
 |src|`string`|`null`||
 |round|`boolean`|`false`||
 |themed-style|`object`|`null`||
