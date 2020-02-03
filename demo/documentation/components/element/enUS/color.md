@@ -1,7 +1,7 @@
 # Style Scheme
 It can also access style scheme.
 ```html
-<n-element as="div" class="myel">
+<n-element as="div" class="myel" style="overflow: auto;">
   <template v-slot="{ styleScheme }">
     <pre
       :style="{
