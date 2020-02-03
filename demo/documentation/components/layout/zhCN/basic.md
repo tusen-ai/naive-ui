@@ -1,47 +1,47 @@
-# 基础
+# 基础用法
 ```html
 <n-layout>
   <n-layout-header>
-    Cool Header
+    酷的页头
   </n-layout-header>
   <n-layout-content>
-    Cool Content
+    酷的内容
   </n-layout-content>
   <n-layout-footer>
-    Cool Footer
+    酷的页脚
   </n-layout-footer>
 </n-layout>
 <br>
 <n-layout>
   <n-layout-header>
-    Cool Header
+    酷的页头
   </n-layout-header>
   <n-layout>
     <n-layout-sider>
-      Cool Sider
+      酷的边栏
     </n-layout-sider>
     <n-layout-content>
-      Cool Content
+      酷的内容
     </n-layout-content>
   </n-layout>
   <n-layout-footer>
-    Cool Footer
+    酷的页脚
   </n-layout-footer>
 </n-layout>
 <br>
 <n-layout>
   <n-layout-sider>
-    Cool Sider
+    酷的边栏
   </n-layout-sider>
   <n-layout>
     <n-layout-header>
-      Cool Header
+      酷的页头
     </n-layout-header>
     <n-layout-content>
-      Cool Content
+      酷的内容
     </n-layout-content>
     <n-layout-footer>
-      Cool Footer
+      酷的页脚
     </n-layout-footer>
   </n-layout>
 </n-layout>

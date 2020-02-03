@@ -1,9 +1,10 @@
 # 触发按钮
+免费附赠一个触发按钮。
 ```html
 <n-switch v-model="collapsed" />
 <n-layout style="height: 240px;">
   <n-layout-header style="height: 64px;">
-    Cool Header
+    酷的页头
   </n-layout-header>
   <n-layout>
     <n-layout-sider
@@ -15,21 +16,21 @@
       @collapse="collapsed = true"
       @expand="collapsed = false"
     >
-      <n-h1>Sider</n-h1>
+      <n-h1>边栏</n-h1>
     </n-layout-sider>
     <n-layout style="padding: 24px;">
       <n-layout-content>
-        <span>Content</span>
+        <span>内容</span>
       </n-layout-content>
       <n-layout-footer>
-        <n-h1>Footer</n-h1>
+        <n-h1>页脚</n-h1>
       </n-layout-footer>
     </n-layout>
   </n-layout>
 </n-layout>
 <n-layout style="height: 240px;">
   <n-layout-header mode="absolute" style="height: 64px;">
-    Cool Header
+    酷的页头
   </n-layout-header>
   <n-layout mode="absolute" style="top: 64px;">
     <n-layout-sider
@@ -42,17 +43,17 @@
       @collapse="collapsed = true"
       @expand="collapsed = false"
     >
-      <n-h1>Sider</n-h1>
+      <n-h1>边栏</n-h1>
     </n-layout-sider>
     <n-layout 
       mode="absolute"
       style="padding: 24px;"
     >
       <n-layout-content>
-        <span>Content</span>
+        <span>内容</span>
       </n-layout-content>
       <n-layout-footer>
-        <n-h1>Footer</n-h1>
+        <n-h1>页脚</n-h1>
       </n-layout-footer>
     </n-layout>
   </n-layout>

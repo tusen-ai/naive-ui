@@ -1,7 +1,7 @@
 # Absolute
-All layout components can use absolute positioning. It can be used when you want content scrolling inside a box.
+All layout components can use absolute positioning. It can be used when you want content scrolling inside fixed area.
 
-<n-alert title="Caveat" type="warning">If you have set mode=`'absolute'` on sider and want the sider and its adjacent layout display in right manner, you should apply mode=`'absolute'` on layout too.</n-alert>
+<n-alert title="Caveat" type="warning">If you have set mode=`'absolute'` on sider and want the sider and its adjacent layout or layout-content to display in right manner, you should apply mode=`'absolute'` on layout or layout-content too.</n-alert>
 ```html
 <div style="width: 100%; height: 240px; position: relative">
   <n-layout mode="absolute">
