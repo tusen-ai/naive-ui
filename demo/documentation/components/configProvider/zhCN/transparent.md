@@ -1,12 +1,14 @@
-# 透明
-如果不需要包装DOM，设置为透明。
+# 无包裹 DOM
+如果不需要包裹 DOM，设置 `transparent`。(注意，这种情况下只接受一个子节点)
 ```html
-<n-button @click="theme = 'dark'">深色主题</n-button>
-<n-button @click="theme = 'light'">浅色主题</n-button>
+<div>
+  <n-button @click="theme = 'dark'">深色主题</n-button>
+  <n-button @click="theme = 'light'">浅色主题</n-button>
+</div>
 <n-config-provider :theme="theme" :theme-environment="env" transparent>
   <n-config-consumer>
     <template v-slot="{ themeEnvironment }">
-      无包装DOM：{{ themeEnvironment }}
+      <n-tag>无包裹 DOM：{{ themeEnvironment }}</n-tag>
     </template>
   </n-config-consumer>
 </n-config-provider>
@@ -17,10 +19,15 @@ export default {
     return {
       theme: 'light',
       env: {
-        dark: '深色 666',
-        light: '浅色 666'
+        dark: '氯化钠',
+        light: '离子化合物'
       }
     }
   }
+}
+```
+```css
+.n-button {
+  margin: 0 8px 12px 0;
 }
 ```

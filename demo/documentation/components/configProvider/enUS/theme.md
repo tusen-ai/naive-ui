@@ -1,5 +1,5 @@
 # Theme
-Set theme of inner components of app.
+Set theme of inner components of config provider.
 ```html
 <n-config-provider :theme="theme">
   <n-button @click="theme = 'dark'">Dark</n-button>
