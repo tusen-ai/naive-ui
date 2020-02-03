@@ -1,4 +1,5 @@
 # 插槽
+卡片有很多插槽，希望能帮你少写点代码。
 ```html
 <n-card title="卡片插槽示例">
   <template v-slot:header-extra>

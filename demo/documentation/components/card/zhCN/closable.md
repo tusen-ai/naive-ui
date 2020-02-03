@@ -1,4 +1,5 @@
 # 可关闭
+用于 Modal 的时候，你可能需要这个属性。
 ```html
 <n-card title="卡片" closable @close="handleClose">
   卡片内容
