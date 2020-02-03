@@ -41,17 +41,17 @@
       }
       @include e(header) {
         @include once {
+          display: flex;
+          flex-wrap: nowrap;
+          align-items: center;
           transition: color .3s $--n-ease-in-out-cubic-bezier;
           position: relative;
           cursor: pointer;
-          margin-left: 18px;
           padding: 16px 0 0 0;
           @include b(icon) {
             transition: transform .15s $--n-ease-in-out-cubic-bezier, fill .3s $--n-ease-in-out-cubic-bezier;
             font-size: 16px;
-            position: absolute;
-            left: -18px;
-            bottom: 0px;
+            margin-right: 4px;
           }
         }
         color: $--collapse-header-text-color;

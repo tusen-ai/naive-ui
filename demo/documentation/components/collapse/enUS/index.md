@@ -22,7 +22,7 @@ nested
 |Name|Type|Default|Description|
 |-|-|-|-|
 |title|`string \| number`|`null`||
-|name|`string \| number`||required|
+|name|`string \| number`||**required**|
 
 ## Event
 |Name|Parameters|Description|

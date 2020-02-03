@@ -19,7 +19,6 @@
     <fade-in-height-expand-transition>
       <div
         v-if="!collapse"
-        ref="contentContainer"
         class="n-collapse-item__content-wrapper"
       >
         <div
