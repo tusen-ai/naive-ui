@@ -1,4 +1,5 @@
 # 间隔
+设定水平、垂直间隔。
 ```html
 <n-row :gutter="[12, 8]">
   <n-col :span="6">
