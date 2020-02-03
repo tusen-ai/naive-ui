@@ -1,26 +1,38 @@
-# 尺寸
+# Closable
 ```html
 <n-tag
   closable
-  size="small"
   @close="handleClose"
 >
-  爱在西元前
+  Real Love
+</n-tag>
+<n-tag
+  type="success"
+  closable
+  @close="handleClose"
+>
+  Yes It Is
 </n-tag>
 <n-tag
   type="warning"
   closable
   @close="handleClose"
 >
-  超人不会飞
+  I'm Down
+</n-tag>
+<n-tag
+  type="error"
+  closable
+  @close="handleClose"
+>
+  Yesterday
 </n-tag>
 <n-tag
   type="info"
   closable
-  size="large"
   @close="handleClose"
 >
-  哪里都是你
+  I'm Looking Through You
 </n-tag>
 ```
 ```js

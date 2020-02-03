@@ -1,26 +1,31 @@
-# 尺寸
+# 形状
+圆的 Tag 长得像个胶囊。
 ```html
 <n-tag
-  closable
+  type="success"
   size="small"
-  @close="handleClose"
->
-  爱在西元前
-</n-tag>
-<n-tag
-  type="warning"
+  round
   closable
   @close="handleClose"
 >
-  超人不会飞
+  不该
 </n-tag>
 <n-tag
-  type="info"
+  type="error"
+  closable
+  round
+  @close="handleClose"
+>
+  手写的从前
+</n-tag>
+<n-tag
+  type="error"
   closable
   size="large"
+  round
   @close="handleClose"
 >
-  哪里都是你
+  手写的从前
 </n-tag>
 ```
 ```js

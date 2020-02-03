@@ -1,11 +1,17 @@
-# 尺寸
+# 可关闭
 ```html
 <n-tag
   closable
-  size="small"
   @close="handleClose"
 >
   爱在西元前
+</n-tag>
+<n-tag
+  type="success"
+  closable
+  @close="handleClose"
+>
+  不该
 </n-tag>
 <n-tag
   type="warning"
@@ -15,9 +21,15 @@
   超人不会飞
 </n-tag>
 <n-tag
+  type="error"
+  closable
+  @close="handleClose"
+>
+  手写的从前
+</n-tag>
+<n-tag
   type="info"
   closable
-  size="large"
   @close="handleClose"
 >
   哪里都是你

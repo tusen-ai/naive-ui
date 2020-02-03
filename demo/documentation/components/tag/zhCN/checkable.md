@@ -1,4 +1,5 @@
 # 可选择
+它可以变成可选择的。
 ```html
 <n-tag
   checkable
