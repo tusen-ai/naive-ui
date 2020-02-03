@@ -2,7 +2,7 @@
 处理按钮的事件。
 ```html
 <n-button @click="handleClick">
-  Click Me
+  点它
 </n-button>
 ```
 
