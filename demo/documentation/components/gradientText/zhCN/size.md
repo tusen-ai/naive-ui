@@ -1,28 +1,29 @@
 # 尺寸
+其实用 CSS 也挺方便的。
 ```html
 <n-gradient-text
   type="info"
 >
-  永生
+  Live Forever
 </n-gradient-text>
 <n-gradient-text
   type="danger"
 >
-  永生
+  Live Forever
 </n-gradient-text>
 <br/>
 <n-gradient-text
   :size="24"
   type="warning"
 >
-  拖家带口
+  Married with Children
 </n-gradient-text>
 <br/>
 <n-gradient-text
   :size="24"
   type="success"
 >
-  回到苏联
+  Back in the USSR
 </n-gradient-text>
 ```
 ```css

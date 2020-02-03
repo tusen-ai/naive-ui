@@ -1,4 +1,4 @@
-# 折叠面板
+# 折叠面板 Collapse
 我看到它总被用在界面边栏的控制面板上。
 ## 演示
 ```demo
@@ -23,6 +23,18 @@ nested
 |-|-|-|-|
 |title|`string \| number`|`null`||
 |name|`string \| number`||**必需**|
+
+## Slots
+### Collapse Slots
+|名称|参数|介绍|
+|-|-|-|
+|default|`()`||
+
+### Collapse Item Slots
+|名称|参数|介绍|
+|-|-|-|
+|default|`()`||
+
 
 ## Event
 |名称|参数|介绍|
