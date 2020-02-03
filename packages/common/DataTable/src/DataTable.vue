@@ -583,22 +583,24 @@ export default {
     },
     page (page) {
       this.internalCurrentPage = page
+      this.$emit('page-change', page)
     },
     sort (columnKey, order = 'ascend') {
-      if (!columnKey) this.internalActiveSorter = null
-      else {
+      if (!columnKey) {
+        this.clearSorter()
+      } else {
         const columnToSort = this.normalizedColumns.find(column => column.key === columnKey)
         if (!columnToSort) return
         const sorter = columnToSort.sorter || null
-        this.internalActiveSorter = {
+        this.changeSorter({
           columnKey,
           sorter,
           order: order
-        }
+        })
       }
     },
     clearSorter () {
-      this.internalActiveSorter = null
+      this.changeSorter(null)
     },
     clearFilter () {
       this.clearFilters()
