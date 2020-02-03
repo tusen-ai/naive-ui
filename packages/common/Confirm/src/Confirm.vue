@@ -81,7 +81,6 @@ import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import asthemecontext from '../../../mixins/asthemecontext'
 import render from '../../../utils/render'
-
 export default {
   name: 'NConfirm',
   components: {

@@ -190,6 +190,7 @@ export default {
       if (Array.isArray(filterRef)) filterRef = filterRef[0]
       const filterElement = filterRef && filterRef.$el
       if (filterElement && filterElement.contains(e.target)) return
+      if (!column.sorter) return
       const activeSorter = this.NDataTable.synthesizedActiveSorter
       const nextSorter = createNextSorter(column.key, activeSorter, column.sorter)
       this.NDataTable.changeSorter(nextSorter)
