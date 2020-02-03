@@ -1,4 +1,5 @@
 # 基础
+获得当前主题和命名空间。
 ```html
 <n-config-consumer
   @theme-change="handleThemeChange"
