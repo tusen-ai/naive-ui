@@ -1,5 +1,5 @@
-# Basic
-For example, javascript, python and cpp.
+# 基础用法
+Javascript、Python、Cpp 的例子。
 ```html
 <div style="overflow: auto;">
   <n-code :code="`
