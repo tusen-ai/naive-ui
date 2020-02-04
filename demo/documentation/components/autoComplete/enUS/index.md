@@ -16,17 +16,33 @@ after-select
 |-|-|-|-|
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |value|`string`|`null`||
-|options|`Array`|`[]`||
+|options|`Array<AutoCompleteOption \| AutoCompleteOptionGroup>`|`[]`||
 |blur-after-select|`boolean`|`false`||
 |clear-after-select|`boolean`|`false`||
+
+## API
+### AutoCompleteOption Type
+|Property|Type|Description|
+|-|-|-|
+|label|`string`||
+|value|`string \| number`|Should be unique in options.|
+|disabled|`boolean`||
+|render|`function`||
+
+### AutoCompleteOptionGroup Type
+|Property|Type|Description|
+|-|-|-|
+|type|`'group'`||
+|name|`string`||
+|children|`Array<AutoCompleteOption>`||
 
 ## Slots
 |Name|Parameters|Description|
 |-|-|-|
-|default|`({ handleInput, handleFocus, handleBlur, value })`||
+|default|`({ handleInput: (value: string) : any, handleFocus: function, handleBlur: function, value: string })`||
 
 ## Events
-|Name|Parameters|Description}
+|Name|Parameters|Description|
 |-|-|-|
 |input|`(value: string \| null)`||
 |select|`(value: string)`||
