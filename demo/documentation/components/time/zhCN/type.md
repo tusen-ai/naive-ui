@@ -1,5 +1,5 @@
-# Type
-`date`, `datetime` or `relative`.
+# 类型
+`date`、`datetime` 或者 `relative`。
 ```html
 <n-time :time="0" type="date"/>
 <br>

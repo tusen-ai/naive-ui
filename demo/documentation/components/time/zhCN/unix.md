@@ -1,5 +1,5 @@
-# Unix Timestamp
-Use Unix timestamp as time.
+# Unix 时间戳
+使用 Unix 时间戳作为时间。
 ```html
 <n-time :time="4320000000" :to="8640000000"/>
 <br>
