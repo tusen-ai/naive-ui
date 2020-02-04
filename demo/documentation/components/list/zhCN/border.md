@@ -1,5 +1,5 @@
-# Border
-List can be bordered or unbordered.
+# 边框
+List 可以控制边框。
 ```html
 <n-list>
   <template v-slot:header>

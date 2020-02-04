@@ -1,7 +1,6 @@
-# Border
-List can be bordered or unbordered.
+# 基础用法
 ```html
-<n-list>
+<n-list bordered>
   <template v-slot:header>
     hhh
   </template>
@@ -22,14 +21,7 @@ List can be bordered or unbordered.
     </n-thing>
   </n-list-item>
   <n-list-item>
-    <n-thing title="Thing" title-extra="extra" description="description">
-      Biu<br>
-      Biu<br>
-      Biu<br>
-    </n-thing>
-    <template v-slot:suffix>
-      <n-button>Suffix</n-button>
-    </template>
+    <n-thing title="Thing" title-extra="extra" description="description" />
   </n-list-item>
 </n-list>
 ```
