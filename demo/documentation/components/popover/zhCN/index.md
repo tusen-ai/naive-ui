@@ -4,7 +4,7 @@ Popover 在内容周围弹出一些隐藏的信息。Popover 里面没什么内�
 
 如果你只想展示一些基本的文本内容，使用 [Tooltip](n-tooltip)。
 
-## 例子
+## 演示
 
 ```demo
 basic
