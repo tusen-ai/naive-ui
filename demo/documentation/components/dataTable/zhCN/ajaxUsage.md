@@ -1,4 +1,4 @@
-# Async
+# 异步
 
 ```html
 <n-data-table

@@ -1,19 +1,26 @@
-# Fixed Header
-
-Display large amounts of data in scrollable view by set `max-height`.
+# 选中行
+可以通过把第一列的类型设为 `selection` 来让行变成可选的。
 
 ```html
+<div>You have selected {{ checkedRowKeys.length }} row{{ checkedRowKeys.length < 2 ? '': 's'}}.</div>
+
 <n-data-table
   ref="table"
   :columns="columns"
   :data="data"
   :pagination="pagination"
-  :max-height="250"
+  @checked-row-keys-change="handleCheck"
 />
 ```
 
 ```js
 const columns = [
+  {
+    type: 'selection',
+    disabled (row, index) {
+      return row.name === 'Edward King 3'
+    }
+  },
   {
     title: 'Name',
     key: 'name'
@@ -35,20 +42,23 @@ const data = Array.apply(null, { length: 46 }).map((_, index) => ({
   address: `London, Park Lane no. ${index}`
 }))
 
-
 export default {
   data() {
     return {
       data,
       columns,
+      checkedRowKeys: [],
       pagination: {
-        pageSize: 15
+        pageSize: 5
       }
     }
   },
   methods: {
-    sendMail (rowData) {
+    sendMail(rowData) {
       this.$NMessage.info('send mail to ' + rowData.name)
+    },
+    handleCheck (rowKeys) {
+      this.checkedRowKeys = rowKeys
     }
   }
 }

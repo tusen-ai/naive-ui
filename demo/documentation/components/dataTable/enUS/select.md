@@ -1,6 +1,6 @@
 # Selection
 
-Rows can be selectable by making first column as a selectable column.
+Rows can be selectable by making first column's type as `selection`.
 
 ```html
 <div>You have selected {{ checkedRowKeys.length }} row{{ checkedRowKeys.length < 2 ? '': 's'}}.</div>

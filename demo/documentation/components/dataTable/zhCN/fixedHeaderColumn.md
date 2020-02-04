@@ -1,8 +1,8 @@
-# Fixed header and column
+# 固定头部和列
 
-A Solution for displaying large amounts of data with long columns.
+展示大量多列数据的解决方式。
 
-Note that: If you have set fixed column, you should also set `scroll-x`.
+注意：如果设定了固定的列，你需要同时设定 `scroll-x`。
 
 ```html
 <n-data-table

@@ -1,6 +1,6 @@
-# Fixed Header
+# 固定头部
 
-Display large amounts of data in scrollable view by set `max-height`.
+在展示大量数据的时候通过设定 `max-height` 来固定头部、滚动数据。
 
 ```html
 <n-data-table
