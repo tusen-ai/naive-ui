@@ -1,4 +1,4 @@
-# BackTop
+# Back Top
 <!--single-column-->
 It helps you back to where you were. However, time never goes back.
 ## Demos
