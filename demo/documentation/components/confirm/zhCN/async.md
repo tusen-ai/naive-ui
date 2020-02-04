@@ -1,8 +1,8 @@
-# Async
-Confirm can be async.
+# 异步
+确认可以异步。
 ```html
 <n-button @click="handleClick">
-  Success
+  成功
 </n-button>
 ```
 
@@ -17,12 +17,12 @@ export default {
   methods: {
     handleClick(e) {
       const confirmInstance = this.$NConfirm.success({
-        title: 'Async',
+        title: '异步',
         content:
-          'Click and count down 3 second',
+          '点击，倒计时 3 秒',
         onPositiveClick: hide => {
           confirmInstance.loading = true
-          this.$NMessage.success('Count down 3 second')
+          this.$NMessage.success('倒计时 3 秒')
           window.setTimeout(hide, 3000)
         }
       })

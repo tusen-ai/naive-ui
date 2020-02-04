@@ -9,12 +9,12 @@ use-component
 ```
 ## API
 ### $NConfirm API
-|Property|Type|Description|
+|Name|Type|Description|
 |-|-|-|
 |warning|`(options: ConfirmOption) : ConfirmEnvironment`||
 |success|`(options: ConfirmOption) : ConfirmEnvironment`||
 |error|`(options: ConfirmOption) : ConfirmEnvironment`||
-|destroyAll|`function`||
+|destroyAll|`(): void`||
 
 ### ConfirmOption API
 |Name|Type|Default|Description|
@@ -22,9 +22,9 @@ use-component
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
 |title|`string`|`'Confirm'`||
 |closable|`boolean`|`boolean`||
-|icon|`function`|`null`|Should be render function|
-|negative-text|`string \| function`|`'Cancel'`|Can be render function|
-|positive-text|`string \| function`|`'Confirm'`|Can be render function|
+|icon|`function`|`null`|Should be a render function|
+|negative-text|`string \| function`|`'Cancel'`|Can be a render function|
+|positive-text|`string \| function`|`'Confirm'`|Can be a render function|
 |content|`string`|`null`||
 |show-icon|`boolean`|`true`||
 |loading|`boolean`|`false`||
@@ -34,17 +34,17 @@ use-component
 |onClose|`(hide: function): any`|`hide => hide()`||
 
 ### ConfirmEnvironment API
-Properties of ConfirmEnvironment can be modified or called.
-
 #### ConfirmEnvironment Properties
-|Property|Type|Description|
+Properties of ConfirmEnvironment can be modified
+
+|Name|Type|Description|
 |-|-|-|
 |type|`'error \| 'success' \| 'warning'`||
 |title|`string`||
 |closable|`boolean`||
-|icon|`function`|Should be render function|
-|negative-text|`string \| function`|Can be render function|
-|positive-text|`string \| function`|Can be render function|
+|icon|`function`|Should be a render function|
+|negative-text|`string \| function`|Can be a render function|
+|positive-text|`string \| function`|Can be a render function|
 |content|`string`||
 |show-icon|`boolean`||
 |loading|`boolean`||
@@ -54,7 +54,7 @@ Properties of ConfirmEnvironment can be modified or called.
 |onClose|`(hide: function): any`||
 
 #### ConfirmEnvironment Methods
-|Method|Parameters|Description|
+|Name|Parameters|Description|
 |-|-|-|
 |hide|`()`|Call this method can close the confirm|
 
@@ -65,9 +65,9 @@ Properties of ConfirmEnvironment can be modified or called.
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
 |title|`string`|`'Confirm'`||
 |closable|`boolean`|`boolean`||
-|icon|`function`|`null`|Should be render function|
-|negative-text|`string \| function`|`'Cancel'`|Can be render function|
-|positive-text|`string \| function`|`'Confirm'`|Can be render function|
+|icon|`function`|`null`|Should be a render function|
+|negative-text|`string \| function`|`'Cancel'`|Can be a render function|
+|positive-text|`string \| function`|`'Confirm'`|Can be a render function|
 |content|`string`|`null`||
 |show-icon|`boolean`|`true`||
 |loading|`boolean`|`false`||

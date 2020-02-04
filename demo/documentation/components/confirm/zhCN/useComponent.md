@@ -1,25 +1,25 @@
-# Use as a Component
-Sometimes you may want to use a component.
+# 使用组件
+有的时候你可能想把它用作一个组件
 ```html
 <n-confirm
-  title="Confirm"
-  content="Are you sure?" 
+  title="确认"
+  content="你确定" 
   :closable="false"
-  positive-text="Submit"
+  positive-text="确认"
   @positive-click="submitCallback"
   @negative-click="cancelCallback"
-  negative-text="Cancel">
+  negative-text="不确认">
 </n-confirm>
 ```
 ```js
 export default {
   methods: {
     cancelCallback () {
-      this.$NMessage.waning('Cancel')
+      this.$NMessage.warning('取消')
       this.isActive = false
     },
     submitCallback () {
-      this.$NMessage.success('Submit')
+      this.$NMessage.success('确认')
       this.isActive = false
     }
   }

@@ -1,14 +1,14 @@
-# Basic
-Use `$NConfirm` to create a confirm modal.
+# 基础用法
+使用 `$NConfirm` 来创建一个确认弹框。
 ```html
 <n-button @click="handleConfirm">
-  Confirm
+  警告
 </n-button>
 <n-button @click="handleSuccess">
-  Success
+  成功
 </n-button>
 <n-button @click="handleError">
-  Error
+  错误
 </n-button>
 ```
 ```css
@@ -21,35 +21,35 @@ export default {
   methods: {
     handleConfirm (e) {
       const confirmInstance = this.$NConfirm.warning({
-        title: 'Confirm',
-        content: 'Are you sure?',
+        title: '警告',
+        content: '你确定？',
         onPositiveClick: (hide) => {
-          this.$NMessage.success('Sure')
+          this.$NMessage.success('确定')
           hide()
         },
         onNegativeClick: (hide) => {
-          this.$NMessage.error('Not Sure')
+          this.$NMessage.error('不确定')
           hide()
         }
       })
     },
     handleSuccess (e) {
       const confirmInstance = this.$NConfirm.success({
-        title: 'Success',
+        title: '成功',
         content:
-          'Cool',
+          '厉害',
         onPositiveClick: (hide) => {
-          this.$NMessage.success('Great!')
+          this.$NMessage.success('耶！')
           hide()
         }
       })
     },
     handleError(e) {
       const confirmInstance = this.$NConfirm.error({
-        title: 'Error',
-        content: 'A mistake.',
+        title: '错误',
+        content: '错了',
         onPositiveClick: (hide) => {
-          this.$NMessage.success('I knew it...')
+          this.$NMessage.success('我就知道')
           hide()
         }
       })
