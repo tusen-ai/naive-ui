@@ -1,5 +1,5 @@
-# Cancelable
-Make single value popselect cancelable.
+# 可取消
+单值的弹出选择可以取消选中值。
 ```html
 <n-popselect
   v-model="value"
@@ -7,7 +7,7 @@ Make single value popselect cancelable.
   @change="handleChange"
   :options="options"
 >
-  <n-tag>{{ value || 'Popselect' }}</n-tag>
+  <n-tag>{{ value || '弹出选择' }}</n-tag>
 </n-popselect>
 ```
 ```js
@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     handleChange (v) {
-      this.$NMessage.info('Value: ' + v)
+      this.$NMessage.info('值：' + v)
     }
   }
 }

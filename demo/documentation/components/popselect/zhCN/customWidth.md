@@ -1,6 +1,6 @@
-# Custom Width
+# 自定义宽度
 
-Set width of select menu.
+设个宽度吧。
 
 ```html
 <n-popselect
@@ -10,7 +10,7 @@ Set width of select menu.
   :options="options"
   @change="handleChange"
 >
-  <n-tag>{{ (Array.isArray(value) && value.length) ? value : 'Popselect' }}</n-tag>
+  <n-tag>{{ (Array.isArray(value) && value.length) ? value : '弹出选择' }}</n-tag>
 </n-popselect>
 ```
 ```js
@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     handleChange (v) {
-      this.$NMessage.info('Value: ' + v)
+      this.$NMessage.info('值：' + v)
     }
   }
 }

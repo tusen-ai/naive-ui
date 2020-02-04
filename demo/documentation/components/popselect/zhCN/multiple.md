@@ -1,16 +1,14 @@
-# Custom Width
-
-Set width of select menu.
+# 多选
+在弹出选择选中多个值。
 
 ```html
 <n-popselect
   v-model="value"
-  :width="240"
   multiple
   :options="options"
   @change="handleChange"
 >
-  <n-tag>{{ (Array.isArray(value) && value.length) ? value : 'Popselect' }}</n-tag>
+  <n-tag>{{ (Array.isArray(value) && value.length) ? value : '弹出选择' }}</n-tag>
 </n-popselect>
 ```
 ```js
@@ -35,8 +33,8 @@ export default {
     }
   },
   methods: {
-    handleChange (v) {
-      this.$NMessage.info('Value: ' + v)
+    handleChange (value) {
+      this.$NMessage.info(JSON.stringify(value))
     }
   }
 }

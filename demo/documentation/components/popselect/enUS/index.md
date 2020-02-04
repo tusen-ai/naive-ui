@@ -10,9 +10,14 @@ custom-width
 multiple
 ```
 
+## V-model
+|Prop|Event|
+|-|-|
+|value|change|
+
 ## Props
 
-|name|type|default|description|
+|Name|Type|Default|Description|
 |-|-|-|-|
 |value|`string \| number`|||
 |options|`Array`|||
@@ -22,3 +27,8 @@ multiple
 |controller|`Object`|||
 |arrow|`boolean`|||
 |trigger|`'click' \| 'hover' \| 'manual'`|||
+
+## Events
+|Name|Parameters|Description|
+|-|-|-|
+|change|`string \| number \| Array<string \| number> \| null`||
