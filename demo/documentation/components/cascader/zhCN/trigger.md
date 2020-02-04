@@ -1,4 +1,5 @@
-# 触发
+# 触发方式
+可以是 `hover` 或者 `click`。
 ```html
 <n-cascader
   v-model="value"

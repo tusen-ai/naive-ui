@@ -1,4 +1,4 @@
-# 延迟多项
+# 异步多项
 ```html
 <n-cascader
   v-model="value"
@@ -6,7 +6,7 @@
   :leaf-only="false"
   placeholder="请选些什么"
   :options="options"
-  lazy
+  remote
   :on-load="handleLoad"
 />
 ```

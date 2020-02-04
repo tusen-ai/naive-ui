@@ -1,4 +1,4 @@
-# Lazy Multiple (Leaf Only)
+# Async Multiple (Leaf Only)
 ```html
 <n-cascader
   v-model="value"
@@ -6,7 +6,7 @@
   placeholder="Please Select Something"
   :options="options"
   style="flex-grow: 1; margin-right: 12px;"
-  lazy
+  remote
   :on-load="handleLoad"
 />
 ```
