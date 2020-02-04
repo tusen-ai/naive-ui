@@ -1,13 +1,17 @@
-# 基础用法
-选择器的基本用法。
+# 可过滤
+上吧！过滤器。
 ```html
 <n-select
-  v-model="value"
+  v-model="selectedValue"
+  filterable
+  placeholder="Please Select a Song"
   :options="options"
 />
 <n-select
-  v-model="value"
-  disabled
+  v-model="selectedValues"
+  multiple
+  filterable
+  placeholder="Please Select Songs"
   :options="options"
 />
 ```
@@ -15,13 +19,9 @@
 export default {
   data () {
     return {
-      value: null,
+      selectedValue: null,
+      selectedValues: null,
       options: [
-        {
-          label: "Everybody's Got Something to Hide Except Me and My Monkey",
-          value: 'song0',
-          disabled: true
-        },
         {
           label: 'Drive My Car',
           value: 'song1'
@@ -32,8 +32,7 @@ export default {
         },
         {
           label: 'You Won\'t See',
-          value: 'song3',
-          disabled: true
+          value: 'song3'
         },
         {
           label: 'Nowhere Man',
@@ -49,8 +48,7 @@ export default {
         },
         {
           label: 'Michelle',
-          value: 'song7',
-          disabled: true
+          value: 'song7'
         },
         {
           label: 'What goes on',

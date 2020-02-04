@@ -1,12 +1,14 @@
-# 基础用法
-选择器的基本用法。
+# 多选
+多选值。
 ```html
 <n-select
   v-model="value"
+  multiple
   :options="options"
 />
 <n-select
   v-model="value"
+  multiple
   disabled
   :options="options"
 />

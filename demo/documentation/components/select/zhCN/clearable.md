@@ -1,27 +1,38 @@
-# 基础用法
-选择器的基本用法。
+# 可清空
+注意只有选了值才能清空值。
 ```html
 <n-select
-  v-model="value"
+  v-model="selectedValue"
   :options="options"
+  clearable
 />
 <n-select
-  v-model="value"
-  disabled
+  v-model="selectedArray"
+  multiple
   :options="options"
+  clearable
+/>
+<n-select
+  v-model="selectedValue"
+  :options="options"
+  filterable
+  clearable
+/>
+<n-select
+  v-model="selectedArray"
+  multiple
+  :options="options"
+  filterable
+  clearable
 />
 ```
 ```js
 export default {
   data () {
     return {
-      value: null,
+      selectedValue: null,
+      selectedArray: null,
       options: [
-        {
-          label: "Everybody's Got Something to Hide Except Me and My Monkey",
-          value: 'song0',
-          disabled: true
-        },
         {
           label: 'Drive My Car',
           value: 'song1'
@@ -32,8 +43,7 @@ export default {
         },
         {
           label: 'You Won\'t See',
-          value: 'song3',
-          disabled: true
+          value: 'song3'
         },
         {
           label: 'Nowhere Man',
@@ -49,8 +59,7 @@ export default {
         },
         {
           label: 'Michelle',
-          value: 'song7',
-          disabled: true
+          value: 'song7'
         },
         {
           label: 'What goes on',

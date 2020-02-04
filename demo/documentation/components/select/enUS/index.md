@@ -54,7 +54,7 @@ action
 ## Slots
 |Name|Description|
 |-|-|
-|empty||
+|action||
 
 ## Event
 |Name|Parameter|Description|

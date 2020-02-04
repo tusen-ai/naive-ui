@@ -1,27 +1,29 @@
-# 基础用法
-选择器的基本用法。
+# 滚动事件
+同事说要用这个来触发做异步加载。
 ```html
 <n-select
   v-model="value"
   :options="options"
+  @scroll="handleScroll"
 />
-<n-select
-  v-model="value"
-  disabled
-  :options="options"
-/>
+<pre>{{ 
+  JSON.stringify({
+    scrollContentHeight,
+    scrollContainerScrollTop,
+    scrollContainerHeight
+  }, 0, 2)
+}}</pre>
 ```
 ```js
 export default {
   data () {
     return {
       value: null,
+      array: null,
+      scrollContentHeight: null,
+      scrollContainerHeight: null,
+      scrollContainerScrollTop: null,
       options: [
-        {
-          label: "Everybody's Got Something to Hide Except Me and My Monkey",
-          value: 'song0',
-          disabled: true
-        },
         {
           label: 'Drive My Car',
           value: 'song1'
@@ -32,15 +34,14 @@ export default {
         },
         {
           label: 'You Won\'t See',
-          value: 'song3',
-          disabled: true
+          value: 'song3'
         },
         {
           label: 'Nowhere Man',
           value: 'song4'
         },
         {
-          label: 'Think For Yourself',
+          label: 'Think For Yourseld',
           value: 'song5'
         },
         {
@@ -49,8 +50,7 @@ export default {
         },
         {
           label: 'Michelle',
-          value: 'song7',
-          disabled: true
+          value: 'song7'
         },
         {
           label: 'What goes on',
@@ -73,6 +73,13 @@ export default {
           value: 'song12'
         }
       ]
+    }
+  },
+  methods: {
+    handleScroll (e, scrollContainer, scrollContent) {
+      this.scrollContentHeight = scrollContent.offsetHeight
+      this.scrollContainerScrollTop = scrollContainer.scrollTop
+      this.scrollContainerHeight = scrollContainer.offsetHeight
     }
   }
 }

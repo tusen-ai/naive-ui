@@ -1,27 +1,27 @@
-# 基础用法
-选择器的基本用法。
+# Change 事件
+为什么 change 事件还是个例子？因为一开始的时候没什么可写的。
 ```html
 <n-select
-  v-model="value"
+  v-model="selectedValue"
+  placeholder="Please Select Type"
   :options="options"
+  @change="handleChange"
 />
 <n-select
-  v-model="value"
-  disabled
+  v-model="selectedArray"
+  multiple
+  placeholder="Please Select Type"
   :options="options"
+  @change="handleChange"
 />
 ```
 ```js
 export default {
   data () {
     return {
-      value: null,
+      selectedValue: 'song1',
+      selectedArray: ['song1'],
       options: [
-        {
-          label: "Everybody's Got Something to Hide Except Me and My Monkey",
-          value: 'song0',
-          disabled: true
-        },
         {
           label: 'Drive My Car',
           value: 'song1'
@@ -32,8 +32,7 @@ export default {
         },
         {
           label: 'You Won\'t See',
-          value: 'song3',
-          disabled: true
+          value: 'song3'
         },
         {
           label: 'Nowhere Man',
@@ -49,8 +48,7 @@ export default {
         },
         {
           label: 'Michelle',
-          value: 'song7',
-          disabled: true
+          value: 'song7'
         },
         {
           label: 'What goes on',
@@ -73,6 +71,11 @@ export default {
           value: 'song12'
         }
       ]
+    }
+  },
+  methods: {
+    handleChange (item) {
+      this.$NMessage.info('value: ' + JSON.stringify(item))
     }
   }
 }

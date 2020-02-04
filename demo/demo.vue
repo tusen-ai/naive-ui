@@ -80,10 +80,10 @@ export default {
           name: 'Getting Started',
           path: `/${this.lang}/${this.theme}` + '/start'
         },
-        {
-          name: 'Develop Guidelines',
-          path: `/${this.lang}/${this.theme}` + '/dev-guildlines'
-        },
+        // {
+        //   name: 'Develop Guidelines',
+        //   path: `/${this.lang}/${this.theme}` + '/dev-guildlines'
+        // },
         {
           name: 'Create Themed Component',
           path: `/${this.lang}/${this.theme}` + '/n-theme'

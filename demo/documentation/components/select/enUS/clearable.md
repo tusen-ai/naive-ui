@@ -3,20 +3,17 @@ Remember you can only clear the select which has value. (Select it firstly)
 ```html
 <n-select
   v-model="selectedValue"
-  placeholder="Please Select Type"
   :options="options"
   clearable
 />
 <n-select
   v-model="selectedArray"
   multiple
-  placeholder="Please Select Type"
   :options="options"
   clearable
 />
 <n-select
   v-model="selectedValue"
-  placeholder="Please Select Type"
   :options="options"
   filterable
   clearable
@@ -24,7 +21,6 @@ Remember you can only clear the select which has value. (Select it firstly)
 <n-select
   v-model="selectedArray"
   multiple
-  placeholder="Please Select Type"
   :options="options"
   filterable
   clearable
