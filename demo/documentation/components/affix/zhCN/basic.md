@@ -1,15 +1,15 @@
-# Basic
-Affix has `offset-top`, `top`, `offset-bottom` and `bottom`. `offset-top` is top affixing trigger point. `top` is the style `top` value after top affixing is trigger. `offset-bottom` and `bottom` work in similar way.
+# 基础用法
+Affix 有 `offset-top`、`top`、`offset-bottom` 和 `bottom` 属性。`offset-top` 是顶部固定的触发距离，`top` 是在触发顶部固定之后 CSS 的 `top` 值。`offset-bottom` 和 `bottom` 类似。
 ```html
 <div class="container">
   <div class="padding"></div>
   <div class="content">
     <n-row>
       <n-col :span="12">
-        <n-affix :top="120" :offset-top="60"><n-tag>Affix Trigger Top 60px</n-tag></n-affix>
+        <n-affix :top="120" :offset-top="60"><n-tag>顶部触发距离 60px</n-tag></n-affix>
       </n-col>
       <n-col :span="12">
-        <n-affix :bottom="120" :offset-bottom="60"><n-tag>Affix Trigger Bottom 60px</n-tag></n-affix>
+        <n-affix :bottom="120" :offset-bottom="60"><n-tag>底部触发距离 60px</n-tag></n-affix>
       </n-col>
     </n-row>
   </div>

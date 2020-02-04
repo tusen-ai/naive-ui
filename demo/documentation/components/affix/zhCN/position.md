@@ -1,15 +1,15 @@
-# Position
-Affix can be `absolute` or `fixed` positioned. You may need some css tricks to make it works as following. By default position is set to `fixed`, because in most cases scrolled element is `#document`.
+# 位置
+Affix 可以 `absolute` 或者 `fixed` 定位。你可能还需要写一些额外的 CSS 才能让达到例子的效果。 默认情况下位置是 `fixed`，因为大多数情况下，滚动的元素是 `#document`.
 ```html
 <div class="absolute-anchor-container">
   <div class="container">
     <div class="padding"></div>
     <div class="content">
       <div style="display: inline-block; width: 50%;">
-        <n-affix :offset-top="50" position="absolute"><n-tag>Affix Trigger Top 50px</n-tag></n-affix>
+        <n-affix :offset-top="50" position="absolute"><n-tag>顶部触发距离 50px</n-tag></n-affix>
       </div>
       <div style="display: inline-block; width: 50%;">
-        <n-affix :offset-bottom="60" position="absolute"><n-tag>Affix Trigger Bottom 60px</n-tag></n-affix>
+        <n-affix :offset-bottom="60" position="absolute"><n-tag>底部触发距离 60px</n-tag></n-affix>
       </div>
     </div>
   </div>
