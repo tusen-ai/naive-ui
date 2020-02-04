@@ -1,4 +1,4 @@
-# Statistic
+# 统计数据 Statistic
 和它看起来一样简单。
 ## 演示
 ```demo

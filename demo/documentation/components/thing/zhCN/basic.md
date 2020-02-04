@@ -1,5 +1,5 @@
-# Basic
-Thing provides many slots to custom.
+# 基础用法
+Thing 提供了很多 slot 来定制。
 ```html
 <n-switch v-model="avatar"/>
 <n-switch v-model="header"/>
@@ -16,7 +16,7 @@ Thing provides many slots to custom.
     </n-avatar>
   </template>
   <template v-slot:header v-if="header">
-    Money
+    货币
   </template>
   <template v-slot:header-extra v-if="headerExtra">
     <n-button circle size="tiny">
@@ -26,30 +26,30 @@ Thing provides many slots to custom.
     </n-button>
   </template>
   <template v-slot:description v-if="description">
-    Description
+    描述
   </template>
-  Money is any item or verifiable record that is generally accepted as payment for goods and services and repayment of debts, such as taxes, in a particular country or socio-economic context.
+  货币是为了提高交易效率而用于交换的中介商品。货币有多种形式，如贝壳粮食等自然物、金属纸张等加工品、银行卡信用卡等磁条卡、移动支付加密货币等APP。
   <template v-slot:footer v-if="footer">
-    Footer
+    尾部
   </template>
   <template v-slot:action v-if="action">
     <n-button size="tiny" style="margin-right: 8px;">
       <template v-slot:icon>
         <md-cash />
       </template>
-      1$
+      1 块钱
     </n-button>
     <n-button size="tiny" style="margin-right: 8px;">
       <template v-slot:icon>
         <md-cash />
       </template>
-      10$
+      10 块钱
     </n-button>
     <n-button size="tiny">
       <template v-slot:icon>
         <md-cash />
       </template>
-      100$
+      100 块钱
     </n-button>
   </template>
 </n-thing>
