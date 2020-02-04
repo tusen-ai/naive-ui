@@ -31,6 +31,16 @@ Dropdown has different size.
 >
   <n-button>Large Some</n-button>
 </n-dropdown>
+<n-dropdown
+  placement="bottom-start"
+  trigger="click"
+  size="huge"
+  :focusable="false"
+  @select="handleSelect"
+  :options="options"
+>
+  <n-button>Huge Some</n-button>
+</n-dropdown>
 ```
 ```js
 const options = [

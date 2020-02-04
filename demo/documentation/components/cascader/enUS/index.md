@@ -26,7 +26,7 @@ filter
 |Name|Type|Default|Description|
 |-|-|-|-|
 |options|`Array<CascaderOption>`|`null`||
-|value|`string \| number`|Value should be unique in options.|
+|value|`string \| number`|`null`||
 |placeholder|`string`|`Please Select`||
 |multiple|`boolean`|`false`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||

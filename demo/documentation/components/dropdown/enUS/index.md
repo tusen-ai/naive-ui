@@ -24,16 +24,16 @@ manual-position
 |placement|`'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| `|`'bottom'`||
 |arrow|`boolean`|`false`||
 |disabled|`boolean`|`false`||
-|manuallyPositioned|`boolean`|`false`||
+|manually-positioned|`boolean`|`false`||
 |x|`number`|`null`||
 |y|`number`|`null`||
 |filp|`boolean`|`true`||
 |controller|`object`|`null`||
 
 ## Events
-|Name|Parameters|
-|-|-|
-|select|`(selectedKey)`|
+|Name|Parameters|Description|
+|-|-|-|
+|select|`(selectedKey: string \| number)`||
 
 
 
