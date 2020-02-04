@@ -34,6 +34,7 @@ size
 |Name|Parameters|Description|
 |-|-|-|
 |default|`()`||
+|header|`()`||
 
 ### Description Item Slots
 |Name|Parameters|Description|

@@ -145,11 +145,11 @@ export default {
         [`n-descriptions--bordered`]: this.bordered
       }
     }, [
-      this.header || this.$scopedSlots.header ? h('div', {
+      (this.title || this.$scopedSlots.header) ? h('div', {
         staticClass: 'n-descriptions-header'
-      }, this.header ? [
-        this.header
-      ] : this.$scopedSlots.header) : null,
+      }, this.title ? [
+        this.title
+      ] : this.$scopedSlots.header()) : null,
       h('div', {
         staticClass: 'n-descriptions-table-wrapper'
       }, [
