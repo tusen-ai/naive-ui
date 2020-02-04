@@ -88,5 +88,5 @@ Properties of ConfirmEnvironment can be modified
 |icon|`()`||
 |header|`()`||
 |default|`()`|Content|
-|footer|`()`||
+|action|`()`||
 

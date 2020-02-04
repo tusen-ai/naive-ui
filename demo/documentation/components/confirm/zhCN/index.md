@@ -88,5 +88,5 @@ use-component
 |icon|`()`||
 |header|`()`||
 |default|`()`|内容|
-|footer|`()`||
+|action|`()`||
 

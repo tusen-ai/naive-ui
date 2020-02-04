@@ -1,0 +1,51 @@
+# 模态框 Modal
+它会弹出来，然后给你看点东西。
+
+## 演示
+```demo
+basic
+controlled
+mask-closable
+preset-card
+preset-confirm
+preset-confirm-slot
+```
+## V-model
+|Prop|Event|
+|-|-|
+|show|hide|
+
+## Props
+### Modal
+|名称|类型|默认值|介绍|
+|-|-|-|-|
+|show|`boolean`|`false`||
+|mask-closable|`boolean`|`true`||
+|preset|`'card' \| 'confirm'`|`null`||
+
+### Modal（Card 预设）
+参考 [Card props](n-card#Props)
+### Modal（Confirm 预设）
+参考 [Confirm props](n-confirm#Props)
+
+## Slots
+### Modal（无预设）
+|名称|参数|介绍|
+|-|-|-|
+|default|`()`||
+
+### Modal（Card 预设）
+参考 [Card slots](n-card#Slots)
+### Modal（Confirm 预设）
+参考 [Confirm slots](n-confirm#Slots)
+
+## Events
+### Modal
+|名称|参数|介绍|
+|-|-|-|
+|hide|`()`||
+
+### Modal（Card 预设）
+参考 [Card events](n-card#Events)
+### Modal（Confirm 预设）
+参考 [Confirm events](n-confirm#Events)

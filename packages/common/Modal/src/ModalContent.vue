@@ -37,11 +37,12 @@
             <template v-slot:header>
               <slot name="header" />
             </template>
-            <template v-slot:content>
-              <slot name="content" />
+            <template v-slot:icon>
+              <slot name="icon" />
             </template>
-            <template v-slot:footer>
-              <slot name="footer" />
+            <slot />
+            <template v-slot:action>
+              <slot name="action" />
             </template>
           </n-confirm>
           <n-card

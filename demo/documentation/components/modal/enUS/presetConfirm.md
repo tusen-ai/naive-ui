@@ -9,13 +9,13 @@ An example of preset `confirm`.
 </n-button>
 <n-modal v-model="isActive" 
   preset="confirm" 
-  title="Confirm modal"
-  content="Are you sure ?" 
+  title="Confirm"
+  content="Are you sure?" 
   :closable="false"
-  positive-text="submit"
-  @positive-click="cancelCallback"
-  @negative-click="submitCallback"
-  negative-text="cancel"
+  positive-text="Submit"
+  @positive-click="submitCallback"
+  @negative-click="cancelCallback"
+  negative-text="Cancel"
 />
 ```
 ```js
@@ -27,11 +27,11 @@ export default {
   },
   methods: {
     cancelCallback () {
-      this.$NMessage.success('cancel')
+      this.$NMessage.success('Cancel')
       this.isActive = false
     },
     submitCallback () {
-      this.$NMessage.success('submit')
+      this.$NMessage.success('Submit')
       this.isActive = false
     }
   }

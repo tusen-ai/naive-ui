@@ -43,7 +43,7 @@
       </slot>
     </div>
     <div class="n-confirm__footer">
-      <slot name="footer">
+      <slot name="action">
         <n-button
           v-if="negativeText"
           :theme="theme"

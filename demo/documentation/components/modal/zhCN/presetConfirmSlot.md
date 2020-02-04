@@ -1,24 +1,22 @@
-# Use Preset Confirm (Slot)
-Slots are also related to preset.
+# 使用 Confirm 预设的 Slot
+Slots 也会随着 preset 变动。
 ```html
 <n-button
   size="small"
   @click="isActive = true"
 >
-  Start Me up
+  来
 </n-button>
 <n-modal v-model="isActive" 
   preset="confirm"
   title="Confirm"
 >
   <template v-slot:header>
-    <div>title</div>
+    <div>标题</div>
   </template>
-  <template v-slot:content>
-    <div>content</div>
-  </template>
+  <div>内容</div>
   <template v-slot:action>
-    <div>action</div>
+    <div>操作</div>
   </template>
 </n-modal>
 ```

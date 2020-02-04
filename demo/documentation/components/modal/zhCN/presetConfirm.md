@@ -1,23 +1,21 @@
-# Mask Closable
-You can make mask click not to close modal when using v-model on modal.
+# 使用 Confirm 预设
+`confirm` 预设的例子。
 ```html
 <n-button
   size="small"
   @click="isActive = true"
 >
-  Start Me up
+  来
 </n-button>
-<n-modal
-  v-model="isActive" 
-  :mask-closable="false"
+<n-modal v-model="isActive" 
   preset="confirm" 
-  title="Confirm"
-  content="Are you sure?" 
+  title="确认"
+  content="你确认?" 
   :closable="false"
-  positive-text="Confirm"
+  positive-text="确认"
   @positive-click="submitCallback"
   @negative-click="cancelCallback"
-  negative-text="Cancel"
+  negative-text="算了"
 />
 ```
 ```js
@@ -29,11 +27,11 @@ export default {
   },
   methods: {
     cancelCallback () {
-      this.$NMessage.success('Cancel')
+      this.$NMessage.success('算了')
       this.isActive = false
     },
     submitCallback () {
-      this.$NMessage.success('Submit')
+      this.$NMessage.success('确认')
       this.isActive = false
     }
   }
