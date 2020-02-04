@@ -1,16 +1,16 @@
-# Type
+# 类型
 ```html
 <n-button @click="notify('info')">
-  Info
+  信息
 </n-button>
 <n-button @click="notify('success')">
-  Success
+  成功
 </n-button>
 <n-button @click="notify('warning')">
-  Warning
+  警告
 </n-button>
 <n-button @click="notify('error')">
-  Error
+  错误
 </n-button>
 ```
 ```js
@@ -18,8 +18,8 @@ export default {
   methods: {
     notify (type) {
       this.$NNotification[type]({
-        content: `What to say?`,
-        meta: 'I don\'t know'
+        content: `说点啥呢`,
+        meta: '想不出来'
       })
     }
   }

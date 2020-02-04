@@ -1,7 +1,7 @@
 # Notification
-If something is to be telled to you.
+If something is to be telled to somebody.
 
-UI has designed it long long ago. However, you know, it is always with low piority so I can make a lot of useless animations on it.
+UI has designed it long long ago. However, you know, notification component is always with low piority so I can make a lot of useless animations on it.
 ## Demos
 ```demo
 basic
@@ -12,18 +12,22 @@ closable
 duration
 ```
 ## API
-### $NNotification API
-|Property|Type|Description|
+### $NNotification Methods
+|Name|Type|Description|
 |-|-|-|
-|open|`(option: NotificationOption, type: string): NotificationEnvironment`||
+|open|`(option: NotificationOption, type: string = 'default'): NotificationEnvironment`|`type` can be `'default'`, `'warning'`, `'info'`, `'success'` and `'error'`|
 |success|`(option: NofiticationOption): NotificationEnvironment`||
 |info|`(option: NofiticationOption): NotificationEnvironment`||
 |warning|`(option: NofiticationOption): NotificationEnvironment`||
 |error|`(option: NofiticationOption): NotificationEnvironment`||
-|scrollable|`boolean`|Default is set to `true`|
 
-### NotificationOption API
-|Property|Type|Default|Description|
+### $Notification Properties
+|Name|Type|Default|Description|
+|-|-|-|-|
+|scrollable|`boolean`|`false`||
+
+### NotificationOption Type
+|Name|Type|Default|Description|
 |-|-|-|-|
 |avatar|`string \| function`|`null`|Can be render function|
 |title|`string \| function`|`null`|Can be render function|
@@ -32,16 +36,16 @@ duration
 |meta|`string \| function`|`null`|Can be render function|
 |action|`string \| function`|`null`|Can be render function|
 |closable|`boolean`|`true`||
-|onClose|`(next: function) => any`|`next => next()`|Only if next is called notification will close|
+|onClose|`(next: function) => any`|`next => next()`|Only if next is called notification will close.|
 |onAfterHide|`function`|`null`||
 |onAfterShow|`function`|`null`||
-|duration|`number`|`null`|If not set, it won't automatically close|
+|duration|`number`|`null`|If not set, it won't automatically close. Unit is millisecond.|
 
 ### NotificationEnvironment API
 #### NotificationEnvironment Properties
 Properties of Instance of NofiticationEnvironment can be dynamically set.
 
-|Property|Type|Description|
+|Name|Type|Description|
 |-|-|-|
 |avatar|`string \| function`|Can be render function|
 |title|`string \| function`|Can be render function|
@@ -50,12 +54,12 @@ Properties of Instance of NofiticationEnvironment can be dynamically set.
 |meta|`string \| function`|Can be render function|
 |action|`string \| function`|Can be render function|
 |closable|`boolean`||
-|onClose|`(next: function) => any`|Close mark is clicked. Only if next is called notification will close|
+|onClose|`(next: function) => any`|Callback when close button is clicked. Only if next is called notification will close|
 |onHide|`function`||
 |onAfterHide|`function`||
 |onAfterShow|`function`||
 
 #### NotificationEnvironment Methods
-|Method|Type|Description|
+|Name|Type|Description|
 |-|-|-|
 |hide|`()`||

@@ -1,8 +1,8 @@
-# Unclosable
-You can make it unclosable.
+# 不可关闭
+通知可以不能被关闭
 ```html
 <n-button @click="notify('info')">
-  Unclosable
+  不能关闭
 </n-button>
 ```
 ```js
@@ -10,17 +10,17 @@ export default {
   methods: {
     notify (type) {
       this.$NNotification.open({
-        title: `Close Me if You Can`,
+        title: `你能关掉我吗？`,
         duration: 2000,
         closable: false,
         onAfterHide: () => {
           this.$NNotification.open({
-            title: `Ha Ha Ha Ha!`,
+            title: `哈哈哈哈!`,
             duration: 2000,
             closable: false,
             onAfterHide: () => {
               this.$NNotification.open({
-                title: `No, You Can't`,
+                title: `你不能`,
                 duration: 2000,
                 closable: false,
               })

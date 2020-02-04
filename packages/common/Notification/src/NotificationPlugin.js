@@ -86,7 +86,7 @@ const Notification = {
   theme: null,
   instances: new Set(),
   container: null,
-  _scrollable: true,
+  _scrollable: false,
   get scrollable () {
     return Notification._scrollable
   },
