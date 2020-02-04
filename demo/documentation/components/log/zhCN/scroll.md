@@ -1,13 +1,12 @@
-# Scroll
-
-You can easily make log scroll to top or bottom. Also you can make the scroll action silent (don't trigger events of Log of this scroll action).
+# 滚动
+你可以很简单的让 Log 滚到顶部或者底部。同时你可以控制这个滚动操作是否发出事件。
 
 ```html
 <n-button-group>
-  <n-button @click="scrollTo('bottom', false)">Scroll To Bottom</n-button>
-  <n-button @click="scrollTo('bottom', true)">Scroll To Bottom (silent)</n-button>
-  <n-button @click="scrollTo('top', false)">Scroll To Top</n-button>
-  <n-button @click="scrollTo('top', true)">Scroll To Top (silent)</n-button>
+  <n-button @click="scrollTo('bottom', false)">滚动到底部</n-button>
+  <n-button @click="scrollTo('bottom', true)">滚动到底部（无事件）</n-button>
+  <n-button @click="scrollTo('top', false)">滚动到顶部</n-button>
+  <n-button @click="scrollTo('top', true)">滚动到顶部（无事件）</n-button>
 </n-button-group>
 <n-log
   ref="log"
@@ -74,4 +73,3 @@ export default {
   margin-bottom: 12px;
 }
 ```
-

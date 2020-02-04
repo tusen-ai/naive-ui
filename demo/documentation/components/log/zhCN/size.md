@@ -1,5 +1,5 @@
-# Rows
-Use `rows` to change the size of log.
+# 行数
+使用 `rows` 来设定 Log 的尺寸。
 
 ```html
 <n-log :rows="5" :log="`1
