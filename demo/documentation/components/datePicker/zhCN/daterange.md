@@ -1,4 +1,4 @@
-# Date Range
+# 日期范围
 ```html
 <n-date-picker
   v-model="range1"

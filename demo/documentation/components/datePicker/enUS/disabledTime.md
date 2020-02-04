@@ -1,4 +1,4 @@
-# Disabled Time
+# Disabled Specific Time
 ```html
 <n-date-picker
   v-model="timestamp1"

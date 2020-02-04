@@ -1,4 +1,4 @@
-# Disabled
+# 禁用
 ```html
 <n-date-picker
   v-model="datetime"

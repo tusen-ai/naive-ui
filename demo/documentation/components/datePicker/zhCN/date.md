@@ -1,12 +1,12 @@
-# Date
+# 日期
 ```html
 <n-date-picker
   v-model="timestamp"
   type="date"
   :disabledTime="disabledTime"
 />
-{{timestamp}}
 <n-date-picker v-model="timestamp2" type="date" />
+<pre>{{ JSON.stringify(timestamp) }}, {{ JSON.stringify(timestamp2) }}</pre>
 ```
 ```js
 export default {

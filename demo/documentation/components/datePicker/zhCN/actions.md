@@ -1,4 +1,4 @@
-# Actions
+# 操作
 ```html
 <n-date-picker
   v-model="ts1"
