@@ -1,10 +1,10 @@
-# Custom Content
-Insert some custom content in it.
+# 自定义内容
+在里面插入一些自定义内容。
 ```html
-<n-badge value="new">
+<n-badge value="新">
   <div class="block" />
 </n-badge>
-<n-badge value="hot">
+<n-badge value="火">
   <div class="block" />
 </n-badge>
 ```

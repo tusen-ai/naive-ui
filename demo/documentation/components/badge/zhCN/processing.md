@@ -1,10 +1,13 @@
-# Custom Content
-Insert some custom content in it.
+# 处理中
+设定 `processing` 来表明正在处理。
 ```html
-<n-badge value="new">
+<n-badge dot processing>
   <div class="block" />
 </n-badge>
-<n-badge value="hot">
+<n-badge :value="20" processing>
+  <div class="block" />
+</n-badge>
+<n-badge dot type="info" processing>
   <div class="block" />
 </n-badge>
 ```
