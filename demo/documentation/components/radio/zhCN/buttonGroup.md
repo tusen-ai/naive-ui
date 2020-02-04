@@ -1,5 +1,5 @@
-# Button Group
-Sometimes a radio button group looks more elegant.
+# 按钮组
+有的时候用按钮显得更优雅一点。
 ```html
 <div style="margin-bottom: 12px;">
   <n-radio-group v-model="value">
@@ -17,12 +17,12 @@ Sometimes a radio button group looks more elegant.
   v-model="disabled2"
   style="margin-right: 12px;"
 >
-  Disable Shakemaker
+  禁用 Shakemaker
 </n-checkbox>
 <n-checkbox
   v-model="disabled1"
 >
-  Disable Live Forever
+  禁用 Live Forever
 </n-checkbox>
 ```
 ```js
