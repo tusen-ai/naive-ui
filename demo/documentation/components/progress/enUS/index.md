@@ -23,9 +23,9 @@ no-indicator
 |show-indicator|`boolean`|`true`||
 |indicator-placement|`'inside' \| 'inside-label' \| 'outside'`|`'outside'`||
 |indicator-text-color|`string`|`null`||
-|circle-gap|`number`|`1`|The gap bewteen circles when type is `'multiple-circle'`|
+|circle-gap|`number`|`1`|The gap bewteen circles when type is `'multiple-circle'`, suppose viewbox size is `100`|
 
 ## Slots
 |Name|Parameters|Description|
 |-|-|-|
-|default|`()`|Conent will replace indicatior|
+|default|`()`|Content will replace default indicatior content|

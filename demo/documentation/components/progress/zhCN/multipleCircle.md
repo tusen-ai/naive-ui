@@ -1,7 +1,7 @@
-# Multiple Circle
-Maybe your PM will need this.
+# 好几个圈
+你可以在单个进度里面放好几个圈。注意 `circle-gap` 和 `stroke-width` 是相对 100 而言（SVG 的 viewbox 尺寸看作 100）。
 
-You can show multiple circle in a single progress. Note that `circle-gap` and `stroke-width` is relative to 100(the svg's viewbox size is 100).
+或许你们的产品经理想要这种效果。
 ```html
 <n-config-consumer>
   <template v-slot="{ styleScheme }">
@@ -28,17 +28,17 @@ You can show multiple circle in a single progress. Note that `circle-gap` and `s
       ]"
     >
       <div style="text-align: center;">
-        Circle Racing!
+        圈圈赛跑！
       </div>
     </n-progress>
   </template>
 </n-config-consumer>
 <div>
   <n-button @click="minus">
-    Minus 10%
+    减 10%
   </n-button>
   <n-button @click="add">
-    Add 10%
+    加 10%
   </n-button>
 </div>
 ```
