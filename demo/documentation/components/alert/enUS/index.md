@@ -14,7 +14,7 @@ no-icon
 |show-icon|`string`|`true`||
 |type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'default'`||
 |closable|`boolean`|`false`||
-|on-close|`(next: function) => any`|`next => next()`|Call next to make alert close, nor it won't close|
+|on-close|`(next: function) => any`|`next => next()`|Callback when close clicked. Call next to make alert close, nor it won't close|
 |on-after-hide|`function`|`null`||
 
 ## Slots

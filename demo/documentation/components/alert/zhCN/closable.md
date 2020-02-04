@@ -1,6 +1,6 @@
-# Basic
+# 可以关掉
 ```html
-<n-alert title="Default Text" type="default">
+<n-alert title="Default 类型" type="default" closable>
   <template v-slot:icon>
     <n-icon>
       <ios-airplane />
@@ -8,16 +8,16 @@
   </template>
   Gee it's good to be back home
 </n-alert>
-<n-alert title="Info Text" type="info">
+<n-alert title="Info 类型" type="info" closable>
   Gee it's good to be back home
 </n-alert>
-<n-alert title="Success Text" type="success">
+<n-alert title="Success 类型" type="success" closable>
   Leave it till tomorrow to unpack my case
 </n-alert>
-<n-alert title="Warning Text" type="warning">
+<n-alert title="Warning 类型" type="warning" closable>
   Honey disconnect the phone
 </n-alert>
-<n-alert title="Error Text" type="error">
+<n-alert title="Error 类型" type="error" closable>
   I'm back in the U.S.S.R.
 </n-alert>
 ```
@@ -27,6 +27,11 @@ import iosAirplane from 'naive-ui/lib/icons/ios-airplane'
 export default {
   components: {
     iosAirplane
+  },
+  data () {
+    return {
+      show: true
+    }
   }
 }
 ```

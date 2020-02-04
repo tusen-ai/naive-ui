@@ -1,6 +1,6 @@
 # Closable
 ```html
-<n-alert title="Info Text" type="default" closable>
+<n-alert title="Default Text" type="default" closable>
   <template v-slot:icon>
     <n-icon>
       <ios-airplane />
