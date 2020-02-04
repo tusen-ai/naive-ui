@@ -1,4 +1,4 @@
-# 输入数字 Input Number
+# 数字输入 Input Number
 输入数字就用它。
 ## 演示
 ```demo

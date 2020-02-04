@@ -1,4 +1,4 @@
-# 数据表格 DataTable
+# 数据表格 Data Table
 
 <!--single-column-->
 
