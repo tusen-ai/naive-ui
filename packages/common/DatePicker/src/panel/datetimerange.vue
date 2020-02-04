@@ -229,7 +229,6 @@
           :disabled="isRangeInvalid"
           size="tiny"
           round
-          auto-text-color
           type="primary"
           @click="handleConfirmClick"
         >

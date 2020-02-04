@@ -61,7 +61,6 @@
           :loading="loading"
           size="small"
           type="primary"
-          auto-text-color
           @click="handlePositiveClick"
         >
           <render :render="positiveText" />
