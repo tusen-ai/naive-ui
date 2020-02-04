@@ -22,6 +22,15 @@ export default {
       default: null
     }
   },
+  computed: {
+    locale () {
+      if (this.NConfigProvider) {
+        return this.NConfigProvider.inheritedLanguage
+      } else {
+        return this.$naive.fallbackLocale
+      }
+    }
+  },
   methods: {
     t (namespace, key) {
       let language = null
