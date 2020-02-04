@@ -8,6 +8,7 @@ icons
 ```demo
 basic
 theme
+custom-icon
 ```
 ## Props
 |Name|Type|Default|Description|
@@ -15,6 +16,11 @@ theme
 |themed-style|`object`|`null`||
 |size|`number`|`null`||
 |color|`object`|`null`||
+
+## Slots
+|Name|Parameters|Description|
+|-|-|-|
+|default|`()`||
 
 ## Search Icons
 <icons />
