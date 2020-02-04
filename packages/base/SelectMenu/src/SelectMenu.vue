@@ -139,10 +139,6 @@ export default {
       type: Array,
       default: null
     },
-    filterable: {
-      type: Boolean,
-      default: false
-    },
     multiple: {
       type: Boolean,
       default: false

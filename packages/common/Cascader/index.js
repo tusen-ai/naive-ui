@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import Cascader from './src/CascaderAdapter.vue'
+import Cascader from './src/Cascader.vue'
 
 Cascader.install = function (Vue) {
   Vue.component(Cascader.name, Cascader)

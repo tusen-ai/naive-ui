@@ -23,7 +23,6 @@
       :active="active"
       :pattern="pattern"
       :placeholder="placeholder"
-      :selected="selected"
       :selected-option="selectedOption"
       :selected-options="selectedOptions"
       :multiple="multiple"
@@ -41,7 +40,7 @@
     <n-base-portal ref="portal1">
       <cascader-menu
         ref="menu1"
-        v-clickoutside="handleMenuClickOutside"
+        v-clickoutside="handleCascaderMenuClickOutside"
         :active="active && !selectMenuActive"
         :class="{
           [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
@@ -55,7 +54,7 @@
         :filterable="filterable"
         :expand-trigger="expandTrigger"
         :active-id.sync="activeId"
-        :lazy="lazy"
+        :lazy="remote"
         :on-load="onLoad"
         :patches.sync="patches"
         :loading.sync="loading"
@@ -67,6 +66,7 @@
     <n-base-portal ref="portal2">
       <cascader-select-menu
         ref="menu2"
+        v-clickoutside="handleSelectMenuClickOutside"
         :class="{
           [namespace]: namespace
         }"
@@ -86,7 +86,6 @@
 
 <script>
 import NBasePicker from '../../../base/Picker'
-import toggleable from '../../../mixins/toggleable'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import clickoutside from '../../../directives/clickoutside'
@@ -104,7 +103,7 @@ import {
 } from '../../../utils/data/menuModel'
 
 export default {
-  name: 'NBaseCascader',
+  name: 'NCascader',
   components: {
     CascaderMenu,
     CascaderSelectMenu,
@@ -119,7 +118,11 @@ export default {
   directives: {
     clickoutside
   },
-  mixins: [withapp, themeable, toggleable, asformitem()],
+  mixins: [withapp, themeable, asformitem()],
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
   props: {
     options: {
       type: Array,
@@ -155,15 +158,15 @@ export default {
       },
       default: 'click'
     },
-    enableAllOptions: {
+    leafOnly: {
       type: Boolean,
-      default: false
+      default: true
     },
     clearable: {
       type: Boolean,
       default: false
     },
-    lazy: {
+    remote: {
       type: Boolean,
       default: false
     },
@@ -178,14 +181,16 @@ export default {
     filter: {
       type: [String, Function],
       default: null
+    },
+    placement: {
+      type: String,
+      default: 'bottom-start'
     }
   },
   data () {
     return {
-      labelPlaceholder: 'Please Select',
       pattern: '',
-      selected: true,
-      inputTypeIsSearch: false,
+      active: false,
       /**
        * set here to keep state
        */
@@ -197,6 +202,9 @@ export default {
   },
   computed: {
     type: getType,
+    enableAllOptions () {
+      return !this.leafOnly
+    },
     selectMenuActive () {
       return !!(this.filterable && this.pattern && this.pattern.trim().length)
     },
@@ -276,6 +284,13 @@ export default {
     }
   },
   methods: {
+    deactivate () {
+      this.active = false
+      this.$emit('setactive', false)
+    },
+    activate () {
+      this.active = true
+    },
     openMenu () {
       if (!this.disabled) {
         this.pattern = ''
@@ -289,12 +304,17 @@ export default {
       this.deactivate()
       this.pattern = ''
     },
-    handleMenuClickOutside (e) {
+    handleCascaderMenuClickOutside (e) {
+      if (this.selectMenuActive) return
       if (this.active) {
         if (!this.$refs.activator.$el.contains(e.target)) {
           this.closeMenu()
         }
       }
+    },
+    handleSelectMenuClickOutside (e) {
+      if (!this.selectMenuActive) return
+      this.handleCascaderMenuClickOutside(e)
     },
     handleKeyUpSpace () {
       if (!this.filterable) {
@@ -340,7 +360,7 @@ export default {
       }
     },
     handleMenuInput (value) {
-      this.$emit('input', value)
+      this.$emit('change', value)
       if (this.type === 'single') {
         this.closeMenu()
       } else if (this.type === 'single-all-options') {
@@ -356,7 +376,7 @@ export default {
       }
     },
     handleClear () {
-      this.$emit('input', null)
+      this.$emit('change', null)
     },
     handleActivatorBlur () {
       this.closeMenu()
@@ -377,7 +397,7 @@ export default {
         if (Array.isArray(this.value)) {
           const newValue = this.value
           newValue.pop()
-          this.$emit('input', newValue)
+          this.$emit('change', newValue)
         }
       }
     },
@@ -390,10 +410,10 @@ export default {
         if (~index) {
           const newValue = this.value
           newValue.splice(index, 1)
-          this.$emit('input', newValue)
+          this.$emit('change', newValue)
         }
       } else {
-        this.$emit('input', null)
+        this.$emit('change', null)
       }
       this.$el.focus()
     },
