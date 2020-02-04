@@ -17,6 +17,7 @@ after-select
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |value|`string`|`null`||
 |options|`Array<AutoCompleteOption \| AutoCompleteOptionGroup>`|`[]`||
+|placeholder|`string`|`null`||
 |blur-after-select|`boolean`|`false`||
 |clear-after-select|`boolean`|`false`||
 
