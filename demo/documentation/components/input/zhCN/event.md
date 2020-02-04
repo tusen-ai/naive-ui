@@ -1,4 +1,4 @@
-# Event
+# 事件
 ```html
 <n-input
   v-model="value"
@@ -7,7 +7,7 @@
   @change="handleChange"
   @keyup="handleKeyUp"
   @input="handleInput"
-  placeholder="Operate to trigger events"
+  placeholder="触发事件"
 />
 <n-input
   v-model="value"
@@ -17,7 +17,7 @@
   @change="handleChange"
   @keyup="handleKeyUp"
   @input="handleInput"
-  placeholder="Operate to trigger events"
+  placeholder="触发事件"
 />
 ```
 ```js

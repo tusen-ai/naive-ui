@@ -12,7 +12,6 @@ disabled
 clearable
 autosize
 split
-lazy-focus
 ```
 ## V-model
 |Prop|Event|
@@ -31,9 +30,7 @@ lazy-focus
 |minlength|`number`|`null`||
 |maxlength|`number`|`null`||
 |clearable|`boolean`|`false`||
-|autosize|`boolean \| { minRows: number \| undefined, maxRows: number \| undefined }`|`false`||
-|pair|`boolean`|`false`||
-|seperator|`string`|`null`||
+|autosize|`boolean \| { minRows?: number, maxRows?: number }`|`false`||
 |readonly|`boolean`|`false`||
 
 ## Slots
