@@ -1,5 +1,5 @@
-# Page Slot
-The pagination has a property `page-slot`, try it and you will understand. It aims to solving misclicks caused by the length changing of pagination.
+# 页面槽位
+分页有一个属性 `page-slot`，试一下你就能理解它在做什么了。这个概念主要是为了解决由于分页长度变化导致的误点击问题。
 ```html
 <n-pagination
   v-model="page"
