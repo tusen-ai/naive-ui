@@ -14,7 +14,7 @@ disabledTime
 ## Props
 |名称|类型|默认值|介绍|
 |-|-|-|-|
-|placeholder|`string`|`null`||
+|placeholder|`string`|`'请选择时间'`||
 |value|`number`|`null`||
 |is-hour-disabled|`(hour: number) => boolean`|`() => false`||
 |is-minute-disabled|`(minute: number, hour: number) => boolean`|`() => false`||

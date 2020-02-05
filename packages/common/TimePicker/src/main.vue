@@ -11,7 +11,7 @@
       v-model="displayTimeString"
       class="n-time-picker-input"
       :force-focus="active"
-      :placeholder="placeholder || 'Select time'"
+      :placeholder="localizedPlaceholder"
       lazy-focus
       @focus="handleTimeInputFocus"
       @click="handleActivatorClick"
@@ -127,7 +127,7 @@
                 round
                 @click="handleCancelClick"
               >
-                Cancel
+                {{ localizedNegativeText }}
               </n-button>
               <n-button
                 size="tiny"
@@ -137,7 +137,7 @@
                 :disabled="isValueInvalid"
                 @click="handleConfirmClick"
               >
-                Confirm
+                {{ localizedPositiveText }}
               </n-button>
             </div>
           </div>
@@ -156,6 +156,7 @@ import clickoutside from '../../../directives/clickoutside'
 import zindexable from '../../../mixins/zindexable'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import locale from '../../../mixins/locale'
 import asformitem from '../../../mixins/asformitem'
 import isValid from 'date-fns/isValid'
 import startOfSecond from 'date-fns/startOfSecond'
@@ -189,7 +190,7 @@ export default {
   directives: {
     clickoutside
   },
-  mixins: [detachable, placeable, zindexable, withapp, themeable, asformitem()],
+  mixins: [withapp, themeable, detachable, placeable, zindexable, locale('TimePicker'), asformitem()],
   model: {
     prop: 'value',
     event: 'change'
@@ -242,6 +243,16 @@ export default {
     }
   },
   computed: {
+    localizedPlaceholder () {
+      if (this.placeholder !== null) return this.placeholder
+      return this.localeNamespace.placeholder
+    },
+    localizedNegativeText () {
+      return this.localeNamespace.negativeText
+    },
+    localizedPositiveText () {
+      return this.localeNamespace.positiveText
+    },
     isHourInvalid () {
       if (this.value === null) return false
       return this.isHourDisabled(this.computedHour)
