@@ -70,7 +70,7 @@ Accept all props from form-item & [Col](n-row#Col-Props)
 |validate|`(trigger?: string, validateCallback?: (errors?: Array<ValidationError>) => any, options?: AsyncValidatorOptions) => Promise<void>`|Validate the form item. The rejection value type of returned promise is `Array<ValidationError>`. If trigger is not passed, all rules of the item will be applied.|
 |clearValidationEffect|`() => void`||
 
-About AsyncValidatorOptions, see [async-validator](https://github.com/yiminghe/async-validator).
+About AsyncValidatorOptions, see <n-a href="https://github.com/yiminghe/async-validator">async-validator</n-a>.
 
 ## Slots
 ### Form, Form Item, Form Item Row, Form Item Col Methods

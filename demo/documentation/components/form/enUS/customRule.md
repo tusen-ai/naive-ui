@@ -78,14 +78,7 @@ export default {
   methods: {
     handlePasswordInput () {
       if (this.model.reenteredPassword) {
-        this.$refs.reenteredPassword.validate('password-input', (errors => {
-          if (!errors) {
-            this.$NMessage.success('Valid')
-          } else {
-            console.log(errors)
-            this.$NMessage.error('Invalid')
-          }
-        }))
+        this.$refs.reenteredPassword.validate('password-input')
       }
     },
     handleValidateButtonClick (e) {

@@ -8,17 +8,17 @@
   :rules="rules"
   ref="form"
 >
-  <n-form-item label="Name" path="user.name">
-    <n-input v-model="formValue.user.name" placeholder="Input Name" />
+  <n-form-item label="姓名" path="user.name">
+    <n-input v-model="formValue.user.name" placeholder="输入姓名" />
   </n-form-item>
-  <n-form-item label="Age" path="user.age">
-    <n-input placeholder="Input Age" v-model="formValue.user.age"/>
+  <n-form-item label="年龄" path="user.age">
+    <n-input placeholder="输入年龄" v-model="formValue.user.age"/>
   </n-form-item>
-  <n-form-item label="Phone" path="phone">
-    <n-input placeholder="Phone Number" v-model="formValue.phone"/>
+  <n-form-item label="电话号码" path="phone">
+    <n-input placeholder="电话号码" v-model="formValue.phone"/>
   </n-form-item>
   <n-form-item v-model="formValue.phone">
-    <n-button @click="handleValidateClick">Validate</n-button>
+    <n-button @click="handleValidateClick">验证</n-button>
   </n-form-item>
 </n-form>
 
@@ -41,18 +41,18 @@ export default {
         user: {
           name: {
             required: true,
-            message: 'Please input your name',
+            message: '请输入姓名',
             trigger: 'blur'
           },
           age: {
             required: true,
-            message: 'Please input your age',
+            message: '请输入年龄',
             trigger: ['input', 'blur']
           }
         },
         phone: {
           required: true,
-          message: 'Please input your number',
+          message: '请输入电话号码',
           trigger: ['input']
         }
       }

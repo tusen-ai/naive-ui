@@ -70,7 +70,7 @@ left
 |validate|`(trigger?: string, validateCallback?: (errors?: Array<ValidationError>) => any, options?: AsyncValidatorOptions) => Promise<void>`|验证表项，Promise rejection 的返回值类型是 `Array<ValidationError>`。如果不传 trigger，这一个表项全部的 Rules 都会被使用。|
 |clearValidationEffect|`() => void`||
 
-关于 AsyncValidatorOptions，参考 [async-validator](https://github.com/yiminghe/async-validator)。
+关于 AsyncValidatorOptions，参考 <n-a href="https://github.com/yiminghe/async-validator">async-validator</n-a>。
 
 ## Slots
 ### Form, Form Item, Form Item Row, Form Item Col Methods

@@ -88,7 +88,7 @@
   <n-row>
     <n-col :span="24">
       <div style="display: flex; justify-content: flex-end;">
-        <n-button @click="handleValidateButtonClick" round type="primary">Validate</n-button>
+        <n-button @click="handleValidateButtonClick" round type="primary">验证</n-button>
       </div>
     </n-col>
   </n-row>
@@ -135,76 +135,76 @@ export default {
         inputValue: {
           required: true,
           trigger: ['blur', 'input'],
-          message: 'Please input inputValue'
+          message: '请输入 inputValue'
         },
         textareaValue: {
           required: true,
           trigger: ['blur', 'input'],
-          message: 'Please input textareaValue'
+          message: '请输入 textareaValue'
         },
         selectValue: {
           required: true,
           trigger: ['blur', 'change'],
-          message: 'Please select selectValue'
+          message: '请选择 selectValue'
         },
         multipleSelectValue: {
           type: 'array',
           required: true,
           trigger: ['blur', 'change'],
-          message: 'Please select multipleSelectValue'
+          message: '请选择 multipleSelectValue'
         },
         datetimeValue: {
           type: 'number',
           required: true,
           trigger: ['blur', 'change'],
-          message: 'Please input datetimeValue'
+          message: '请输入 datetimeValue'
         },
         nestedValue: {
           path1: {
             required: true,
             trigger: ['blur', 'input'],
-            message: 'Please input nestedValue.path1'
+            message: '请输入 nestedValue.path1'
           },
           path2: {
             required: true,
             trigger: ['blur', 'change'],
-            message: 'Please input nestedValue.path2'
+            message: '请输入 nestedValue.path2'
           }
         },
         checkboxGroupValue: {
           type: 'array',
           required: true,
           trigger: 'change',
-          message: 'Please select checkboxGroupValue'
+          message: '请选择 checkboxGroupValue'
         },
         radioGroupValue: {
           required: true,
           trigger: 'change',
-          message: 'Please select radioGroupValue'
+          message: '请选择 radioGroupValue'
         },
         radioButtonGroupValue: {
           required: true,
           trigger: 'change',
-          message: 'Please select radioButtonGroupValue'
+          message: '请选择 radioButtonGroupValue'
         },
         inputNumberValue: {
           type: 'number',
           required: true,
           trigger: ['blur', 'change'],
-          message: 'Please input inputNumberValue'
+          message: '请输入 inputNumberValue'
         },
         timePickerValue: {
           type: 'number',
           required: true,
           trigger: ['blur', 'change'],
-          message: 'Please input timePickerValue'
+          message: '请输入 timePickerValue'
         },
         sliderValue: 0,
         transferValue: {
           type: 'array',
           required: true,
           trigger: 'change',
-          message: 'Please input transferValue'
+          message: '请输入 transferValue'
         }
       }
     }
@@ -214,10 +214,10 @@ export default {
       e.preventDefault()
       this.$refs.form.validate(errors => {
         if (!errors) {
-          this.$NMessage.success('Valid')
+          this.$NMessage.success('验证成功')
         } else {
           console.log(errors)
-          this.$NMessage.error('Invalid')
+          this.$NMessage.error('验证失败')
         }
       })
     }

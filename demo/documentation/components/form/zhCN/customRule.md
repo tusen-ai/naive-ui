@@ -2,16 +2,16 @@
 你可以通过设定自定的 trigger 来控制验证。
 ```html
 <n-form :model="model" ref="form" :rules="rules">
-  <n-form-item-row path="age" label="Age">
+  <n-form-item-row path="age" label="年龄">
     <n-input v-model="model.age"/>
   </n-form-item-row>
-  <n-form-item-row path="password" label="Password">
+  <n-form-item-row path="password" label="密码">
     <n-input v-model="model.password" @input="handlePasswordInput" type="password"/>
   </n-form-item-row>
   <n-form-item-row
     first
     path="reenteredPassword"
-    label="Re-enter Password"
+    label="重复密码"
     ref="reenteredPassword"
   >
     <n-input :disabled="!model.password" v-model="model.reenteredPassword" type="password"/>
@@ -19,7 +19,7 @@
   <n-row :gutter="[0, 24]">
     <n-col :span="24">
       <div style="display: flex; justify-content: flex-end;">
-        <n-button @click="handleValidateButtonClick" round type="primary">Validate</n-button>
+        <n-button @click="handleValidateButtonClick" round type="primary">验证</n-button>
       </div>
     </n-col>
   </n-row>
@@ -44,11 +44,11 @@ export default {
             required: true,
             validator (rule, value) {
               if (!value) {
-                return new Error('Age is required')
+                return new Error('需要年龄')
               } else if (!/^\d*$/.test(value)) {
-                return new Error('Age should be an integer')
+                return new Error('年龄应该是个整数')
               } else if (Number(value) < 18) {
-                return new Error('Age should be above 18')
+                return new Error('年龄应该超过十八岁')
               }
               return true
             },
@@ -58,17 +58,17 @@ export default {
         reenteredPassword: [
           {
             required: true,
-            message: 'Re-entered Password is required',
+            message: '需要重复输入密码',
             trigger: ['input', 'blur']
           },
           {
             validator: this.validatePasswordStartWith,
-            message: 'Password is not same as re-entered password!',
+            message: '两次密码输入不一致',
             trigger: 'input'
           },
           {
             validator: this.validatePasswordSame,
-            message: 'Password is not same as re-entered password!',
+            message: '两次密码输入不一致',
             trigger: ['blur', 'password-input']
           }
         ]
@@ -78,24 +78,17 @@ export default {
   methods: {
     handlePasswordInput () {
       if (this.model.reenteredPassword) {
-        this.$refs.reenteredPassword.validate('password-input', (errors => {
-          if (!errors) {
-            this.$NMessage.success('Valid')
-          } else {
-            console.log(errors)
-            this.$NMessage.error('Invalid')
-          }
-        }))
+        this.$refs.reenteredPassword.validate('password-input')
       }
     },
     handleValidateButtonClick (e) {
       e.preventDefault()
       this.$refs.form.validate(errors => {
         if (!errors) {
-          this.$NMessage.success('Valid')
+          this.$NMessage.success('验证成功')
         } else {
           console.log(errors)
-          this.$NMessage.error('Invalid')
+          this.$NMessage.error('验证失败')
         }
       })
     },
