@@ -36,7 +36,7 @@
   </n-row>
   <n-row>
     <n-col :span="12">
-      <n-checkbox value="Patriotism">爱过</n-checkbox>
+      <n-checkbox value="Patriotism">爱国</n-checkbox>
     </n-col>
     <n-col :span="12">
       <n-checkbox value="Dedication">敬业</n-checkbox>
