@@ -78,8 +78,8 @@ import iosHelpCircle from '../../../icons/ios-help-circle'
 import iosCloseCircle from '../../../icons/ios-close-circle'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
-import asthemecontext from '../../../mixins/asthemecontext'
 import render from '../../../utils/render'
+
 export default {
   name: 'NConfirm',
   components: {
@@ -91,7 +91,7 @@ export default {
     iosCloseCircle,
     render
   },
-  mixins: [withapp, themeable, asthemecontext],
+  mixins: [withapp, themeable],
   props: {
     icon: {
       type: Function,
@@ -102,8 +102,8 @@ export default {
       default: 'warning'
     },
     title: {
-      type: String,
-      default: 'Confirm'
+      type: [String, Function],
+      default: null
     },
     closable: {
       type: Boolean,
@@ -111,14 +111,14 @@ export default {
     },
     negativeText: {
       type: String,
-      default: 'Cancel'
+      default: null
     },
     positiveText: {
       type: String,
-      default: 'Confirm'
+      default: null
     },
     content: {
-      type: String,
+      type: [String, Function],
       default: null
     },
     showIcon: {

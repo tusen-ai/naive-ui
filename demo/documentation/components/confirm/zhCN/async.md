@@ -20,6 +20,7 @@ export default {
         title: '异步',
         content:
           '点击，倒计时 3 秒',
+        positiveText: '确认',
         onPositiveClick: hide => {
           confirmInstance.loading = true
           this.$NMessage.success('倒计时 3 秒')

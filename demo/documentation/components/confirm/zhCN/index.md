@@ -20,12 +20,12 @@ use-component
 |名称|类型|默认值|介绍|
 |-|-|-|-|
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
-|title|`string`|`'Confirm'`||
+|title|`string \| function`|`null`|可以是 render 函数|
 |closable|`boolean`|`boolean`||
 |icon|`function`|`null`|需要是 render 函数|
-|negative-text|`string \| function`|`'Cancel'`|可以是 render 函数|
-|positive-text|`string \| function`|`'Confirm'`|可以是 render 函数|
-|content|`string`|`null`||
+|negative-text|`string`|`null`||
+|positive-text|`string`|`null`||
+|content|`string \| function`|`null`|可以是 render 函数|
 |show-icon|`boolean`|`true`||
 |loading|`boolean`|`false`||
 |bordered|`boolean`|`false`||
@@ -40,12 +40,12 @@ use-component
 |名称|类型|介绍|
 |-|-|-|
 |type|`'error \| 'success' \| 'warning'`||
-|title|`string`||
+|title|`string \| function`|可以是 render 函数|
 |closable|`boolean`||
 |icon|`function`|需要是 render 函数|
-|negative-text|`string \| function`|可以是 render 函数|
-|positive-text|`string \| function`|可以是 render 函数|
-|content|`string`||
+|negative-text|`string`||
+|positive-text|`string`||
+|content|`string \| function`|可以是 render 函数|
 |show-icon|`boolean`||
 |loading|`boolean`||
 |bordered|`boolean`||
@@ -63,12 +63,12 @@ use-component
 |名称|类型|默认值|介绍|
 |-|-|-|-|
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
-|title|`string`|`'Confirm'`||
+|title|`string \| function`|`null`|可以是 render 函数|
 |closable|`boolean`|`boolean`||
 |icon|`function`|`null`|需要是 render 函数|
-|negative-text|`string \| function`|`'Cancel'`|可以是 render 函数|
-|positive-text|`string \| function`|`'Confirm'`|可以是 render 函数|
-|content|`string`|`null`||
+|negative-text|`string`|`null`||
+|positive-text|`string`|`null`||
+|content|`string \| function`|`null`|可以是 render 函数|
 |show-icon|`boolean`|`true`||
 |loading|`boolean`|`false`||
 |bordered|`boolean`|`false`||
