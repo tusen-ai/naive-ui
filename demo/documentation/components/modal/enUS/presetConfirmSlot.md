@@ -12,10 +12,14 @@ Slots are also related to preset.
   title="Confirm"
 >
   <template v-slot:header>
-    <div style="color:red;">title</div>
+    <div>title</div>
   </template>
-  <div slot="content">content</div>
-  <div slot="footer">footer</div>
+  <template v-slot:content>
+    <div>content</div>
+  </template>
+  <template v-slot:action>
+    <div>action</div>
+  </template>
 </n-modal>
 ```
 ```js

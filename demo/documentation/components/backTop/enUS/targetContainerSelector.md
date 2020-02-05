@@ -1,4 +1,4 @@
-# Target
+# Target to be Listened to
 You can specify target to listen scroll event of.
 ```html
 <n-back-top

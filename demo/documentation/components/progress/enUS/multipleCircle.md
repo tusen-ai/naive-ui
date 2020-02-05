@@ -28,7 +28,7 @@ You can show multiple circle in a single progress. Note that `circle-gap` and `s
       ]"
     >
       <div style="text-align: center;">
-        What is this?
+        Circle Racing!
       </div>
     </n-progress>
   </template>

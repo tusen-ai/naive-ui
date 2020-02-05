@@ -96,9 +96,6 @@
         @include once {
           cursor: not-allowed;
         }
-        &::after {
-          border-color: rgba(255, 255, 255, 0.20);
-        }
       }
     }
   }

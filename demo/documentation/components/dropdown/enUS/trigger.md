@@ -2,11 +2,11 @@
 Different trigger of dropdown.
 ```html
 <n-dropdown @select="handleSelect" trigger="hover" :options="options">
-  <n-button>Hover! On the Green Light!</n-button>
+  <n-button>Hover!</n-button>
 </n-dropdown>
 
 <n-dropdown @select="handleSelect" trigger="click" :focusable="false" :options="options">
-  <n-button>Click! On the Green Light</n-button>
+  <n-button>Click!</n-button>
 </n-dropdown>
 
 <n-dropdown @select="handleSelect" trigger="manual" :show="showDropdown" :options="options">

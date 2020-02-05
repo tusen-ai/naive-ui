@@ -1,6 +1,6 @@
-# Loading Bar 加载条
+# 加载条 Loading Bar 
 焦虑的安慰剂，疗效尚可。
-## 例子
+## 演示
 ```demo
 basic
 ```
@@ -9,6 +9,6 @@ basic
 #### $NLoadingBar Methods
 |名称|类型|介绍|
 |-|-|-|
-|`start`|`(): void`||
-|`finish`|`(): void`||
-|`error`|`(): void`||
+|`start`|`() => void`||
+|`finish`|`() => void`||
+|`error`|`() => void`||

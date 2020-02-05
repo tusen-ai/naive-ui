@@ -22,7 +22,18 @@ nested
 |Name|Type|Default|Description|
 |-|-|-|-|
 |title|`string \| number`|`null`||
-|name|`string \| number`||required|
+|name|`string \| number`||**required**|
+
+## Slots
+### Collapse Slots
+|Name|Parameters|Description|
+|-|-|-|
+|default|`()`||
+
+### Collapse Item Slots
+|Name|Parameters|Description|
+|-|-|-|
+|default|`()`||
 
 ## Event
 |Name|Parameters|Description|

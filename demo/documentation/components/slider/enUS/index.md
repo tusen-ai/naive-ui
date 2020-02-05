@@ -14,7 +14,7 @@ mark
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|marks|`object`||Looks like `{ value: label, ...}`|
+|marks|`{ [markValue: number]: string }`|||
 |disabled|`boolean`|`false`||
 |min|`number`|`0`||
 |max|`number`|`100`||

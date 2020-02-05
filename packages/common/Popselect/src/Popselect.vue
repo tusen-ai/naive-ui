@@ -14,6 +14,10 @@ export default {
     NPopover,
     NPopselectPanel
   },
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
   props: {
     options: {
       type: Array,

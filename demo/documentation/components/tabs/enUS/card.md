@@ -1,4 +1,5 @@
 # Card
+A example to use with card. (demo is the card)
 ```html
 <n-tabs
   v-model="name"

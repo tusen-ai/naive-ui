@@ -1,4 +1,5 @@
 # Type
+`date`, `datetime` or `relative`.
 ```html
 <n-time :time="0" type="date"/>
 <br>

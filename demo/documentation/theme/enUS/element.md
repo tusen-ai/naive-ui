@@ -1,5 +1,5 @@
 # Use Naive Element
-
+Naive UI has n-element component. See [Element](n-element).
 ```html
 <n-config-provider :theme="theme">
   <n-button @click="theme = 'dark'">Dark</n-button>

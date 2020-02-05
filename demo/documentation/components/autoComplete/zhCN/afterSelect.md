@@ -1,4 +1,5 @@
 # 选择后的动作
+在选中选项后清除内容或者选择后 Blur。
 ```html
 <n-auto-complete
   :options="options"
@@ -10,7 +11,7 @@
   :options="options"
   v-model="value"
   blur-after-select
-  placeholder="选择后失焦"
+  placeholder="选择后 Blur"
 />
 ```
 ```js

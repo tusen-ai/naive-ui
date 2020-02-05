@@ -1,4 +1,4 @@
-# Size
+# Rows
 Use `rows` to change the size of log.
 
 ```html

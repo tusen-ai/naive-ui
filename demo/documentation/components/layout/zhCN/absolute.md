@@ -1,7 +1,7 @@
-# 绝对
-所有布局组件可以使用绝对定位。可用于让内容在盒内滚动。
+# 绝对定位模式
+所有布局组件可以使用 Absolute 定位。如果你期望内容在固定的区域内滚动，可以使用 `absolute` 模式。
 
-<n-alert title="警告" type="warning">为保证侧边栏及其相邻布局正确显示，它们均需设置mode="absolute"。</n-alert>
+<n-alert title="警告" type="warning">如果你在 Sider 上设定了 mode=`'absolute'`，那么为了旁边的 Layout 和 Layout Content 正常显示，他们也要被设定为 mode=`'absolute'`</n-alert>
 ```html
 <div style="width: 100%; height: 240px; position: relative">
   <n-layout mode="absolute">

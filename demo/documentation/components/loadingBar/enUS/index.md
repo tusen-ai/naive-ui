@@ -9,6 +9,6 @@ basic
 #### $NLoadingBar Methods
 |Name|Type|Description|
 |-|-|-|
-|`start`|`(): void`||
-|`finish`|`(): void`||
-|`error`|`(): void`||
+|`start`|`() => void`||
+|`finish`|`() => void`||
+|`error`|`() => void`||

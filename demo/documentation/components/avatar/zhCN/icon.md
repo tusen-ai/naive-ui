@@ -1,4 +1,5 @@
 # 图标
+我喜欢用图标当头像。
 ```html
 <n-avatar>
   <n-icon>

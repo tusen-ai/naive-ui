@@ -1,5 +1,5 @@
 # Event
-Log has `require-more`, `reach-top` and `reach-bottom` event. Note that even if logs are scrolled to top or bottom, when you wheel to the same direction, `require-more` will still be triggered. If you don't want to trigger handler when logs are at top or bottom. Use `reach-top` or `reach-bottom` instead.
+Log has `require-more`, `reach-top` and `reach-bottom` event. Note that even if logs are scrolled to top or bottom, when you wheel to the same direction, `require-more` will still be triggered while `reach-xxx` will not. If you don't want to trigger handler when logs are at top or bottom. Use `reach-top` or `reach-bottom` instead.
 ```html
 <n-log
   :log="log"

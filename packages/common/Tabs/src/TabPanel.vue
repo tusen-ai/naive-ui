@@ -16,18 +16,10 @@ export default {
       default: undefined
     },
     name: {
-      type: String,
-      default: null
-    },
-    active: {
-      type: Boolean,
-      default: false
+      type: [String, Number],
+      required: true
     },
     disabled: {
-      type: Boolean,
-      default: false
-    },
-    closable: {
       type: Boolean,
       default: false
     }
@@ -40,26 +32,7 @@ export default {
     type () {
       return this.NTab.type
     }
-    // offset () {
-    //   return this.NTab.offset
-    // }
   },
-  watch: {
-    // offset: {
-    //   handler (n) {
-    //     this.setTransfer(n)
-    //     this.$forceUpdate()
-    //   },
-    //   immediate: true
-    // }
-  },
-  // created () {
-  //   this.NTab.updateLabels()
-  //   if (this._NaiveTabOrder === this.NTab.active) {
-  //     this.updateIsShow(true)
-  //   }
-  //   this.$on('display-none', this.setDisplayNone)
-  // },
   mounted () {
     if (this.NTab) {
       console.log(this.NTab.value)
@@ -71,15 +44,5 @@ export default {
       this.NTab.removePanel(this)
     }
   }
-  // methods: {
-  //   updateIsShow (flag) {
-  //     this.isShow = flag
-  //     this.$forceUpdate()
-  //   },
-  //   setTransfer (per) {
-  //     // 这里可以优化, 直接在上层div做整体移动, 不需要对子元素移动
-  //     this.style.transform = 'translateX(' + per + ')'
-  //   }
-  // }
 }
 </script>

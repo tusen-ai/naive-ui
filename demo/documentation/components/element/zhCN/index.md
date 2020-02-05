@@ -1,7 +1,23 @@
-# 元素
-元素和配置消费者类似，但当主题改变时会应用不同的class。
+# 元素 Element
+Element 可以被渲染成各种标签同事还可以获得某些 Config Provider 提供的配置。
+
 ## 演示
 ```demo
 basic
 color
 ```
+
+## Props
+|名称|类型|默认值|介绍|
+|-|-|-|-|
+|as|`string`|`'div'`||
+
+## Slots
+|名称|参数|介绍|
+|-|-|-|
+|default|`(theme: string, namespace: string, themeEnvironment: any, styleScheme: object)`||
+
+## Events
+|名称|参数|
+|-|-|
+|theme-change|`(theme: string)`|

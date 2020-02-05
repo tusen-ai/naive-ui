@@ -8,7 +8,7 @@ Display large amounts of data in scrollable view by set `max-height`.
   :columns="columns"
   :data="data"
   :pagination="pagination"
-  max-height="250px"
+  :max-height="250"
 />
 ```
 

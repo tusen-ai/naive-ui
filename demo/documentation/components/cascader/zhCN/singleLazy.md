@@ -1,11 +1,11 @@
-# 延迟单项
+# 异步单项
 ```html
 <n-cascader
   v-model="value"
   placeholder="请选些什么"
   :options="options"
   :leaf-only="false"
-  lazy
+  remote
   :on-load="handleLoad"
 />
 ```

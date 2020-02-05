@@ -32,6 +32,7 @@
   top: 0;
   bottom: 0;
   visibility: hidden;
+  pointer-events: all;
   @include m(active) {
     visibility: visible;
   }

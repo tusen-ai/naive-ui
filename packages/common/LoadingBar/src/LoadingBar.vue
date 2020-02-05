@@ -52,6 +52,7 @@ export default {
       if (this.status === null) {
         this.status = 'starting'
         this.activeAction = this.$nextTick().then(() => {
+          this.$el.getBoundingClientRect()
           this.progress = toProgress
           return this.$nextTick()
         })

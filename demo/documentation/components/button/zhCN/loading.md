@@ -8,8 +8,9 @@
   <template v-slot:icon>
     <md-save />
   </template>
-  Loading
+  加载中
 </n-button>
+<br>
 <n-button
   :loading="loading"
   icon-placement="right"
@@ -18,22 +19,25 @@
   <template v-slot:icon>
     <md-save />
   </template>
-  Loading
+  加载中
 </n-button>
+<br>
 <n-button
   :loading="loading"
   size="small"
   @click="loading = !loading"
 >
-  Loading
+  加载中
 </n-button>
+<br>
 <n-button
   :loading="loading"
   size="large"
   @click="loading = !loading"
 >
-  Loading
+  加载中
 </n-button>
+<br>
 <n-button
   :loading="loading"
   type="primary"
@@ -41,7 +45,7 @@
   round
   @click="loading = !loading"
 >
-  Loading
+  加载中
 </n-button>
 ```
 

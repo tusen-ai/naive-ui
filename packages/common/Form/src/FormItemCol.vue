@@ -13,6 +13,11 @@ export default {
       if (this.$refs.formItem) {
         return this.$refs.formItem.validate(...args)
       }
+    },
+    clearValidationEffect (...args) {
+      if (this.$refs.formItem) {
+        return this.$refs.formItem.clearValidationEffect(...args)
+      }
     }
   },
   render (h) {

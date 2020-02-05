@@ -1,4 +1,4 @@
-# 基础
+# 基础用法
 ```html
 <n-row :gutter="12">
   <n-col :span="6">

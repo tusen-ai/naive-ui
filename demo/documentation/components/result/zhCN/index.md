@@ -2,7 +2,7 @@
 结果页是展示结果的。
 
 感谢 [twemoji](https://github.com/twitter/twemoji) 创造了这么多好看的图标!
-## 例子
+## 演示
 ```demo
 s404
 s403

@@ -1,9 +1,10 @@
 # 隐藏侧边栏内容
+有时候收起边栏后，你不想看到里面有什么。
 ```html
 <n-switch v-model="collapsed" />
 <n-layout style="height: 240px;">
   <n-layout-header style="height: 64px;">
-    Cool Header
+    酷的页头
   </n-layout-header>
   <n-layout>
     <n-layout-sider
@@ -16,21 +17,21 @@
       @collapse="collapsed = true"
       @expand="collapsed = false"
     >
-      <n-h1>Sider</n-h1>
+      <n-h1>酷的边栏</n-h1>
     </n-layout-sider>
     <n-layout>
       <n-layout-content>
-        <span>Content</span>
+        <span>内容</span>
       </n-layout-content>
       <n-layout-footer>
-        <n-h1>Footer</n-h1>
+        <n-h1>页脚</n-h1>
       </n-layout-footer>
     </n-layout>
   </n-layout>
 </n-layout>
 <n-layout style="height: 240px;">
   <n-layout-header mode="absolute" style="height: 64px;">
-    Cool Header
+    酷的页头
   </n-layout-header>
   <n-layout mode="absolute" style="top: 64px;">
     <n-layout-sider
@@ -44,12 +45,12 @@
       @collapse="collapsed = true"
       @expand="collapsed = false"
     >
-      <n-h1>Sider</n-h1>
+      <n-h1>边栏</n-h1>
     </n-layout-sider>
     <n-layout 
       mode="absolute"
     >
-      <span>Content</span>
+      <span>内容</span>
     </n-layout>
   </n-layout>
 </n-layout>

@@ -52,3 +52,9 @@ loading
 |require-more|`(from: 'top' \| 'bottom')`||
 |reach-top|`()`|
 |reach-bottom|`()`|
+
+## Methods
+|Name|Parameters|Description|
+|-|-|-|
+|scrollToTop|`(dismissEvent: boolean = false)`||
+|scrollToBottom|`(dismissEvent: boolean = false)`||

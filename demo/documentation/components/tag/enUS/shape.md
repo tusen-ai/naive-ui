@@ -1,5 +1,5 @@
-# Size
-Why using a round tag? Maybe when you want everything looks like a pill.
+# Shape
+Round tag looks like a capsule.
 ```html
 <n-tag
   closable

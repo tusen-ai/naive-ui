@@ -33,7 +33,7 @@
       <n-radio
         :disabled="disabled"
         :value="true"
-        :private-value="checked"
+        :checked-value="checked"
         @click.stop="handleOptionCheck"
       />
     </div>

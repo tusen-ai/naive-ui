@@ -31,7 +31,7 @@ action
 |multiple|`boolean`|`false`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |disabled|`boolean`|`false`||
-|options|`Array<SelectOption \| SelectOptionGroup />`|`[]`||
+|options|`Array<SelectOption \| SelectOptionGroup>`|`[]`||
 |remote|`boolearn`|`false`|If you want to async get options|
 |filter|`(pattern: string, option: Object) => boolean`|`null`||
 
@@ -54,7 +54,7 @@ action
 ## Slots
 |Name|Description|
 |-|-|
-|empty||
+|action||
 
 ## Event
 |Name|Parameter|Description|

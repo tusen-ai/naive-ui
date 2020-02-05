@@ -118,7 +118,6 @@
           v-if="actions.includes('confirm')"
           size="tiny"
           round
-          auto-text-color
           type="primary"
           :disabled="isDateTimeInvalid"
           @click="handleConfirmClick"

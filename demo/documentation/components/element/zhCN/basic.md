@@ -1,5 +1,5 @@
 # 基础
-当配置提供者提供深色主题时，它应用 `n-dark-theme` class。当配置提供者提供浅色主题时，它应用 `n-light-theme` class。若非二者之一，它不会应用额外的class，正如其他特定主题的Naive UI组件。
+当配置提供者提供深色主题时，它应用 `n-dark-theme` class。当配置提供者提供浅色主题时，它应用 `n-light-theme` class。若非二者之一，它不会应用额外的 class，正如其他特定主题的 Naive UI 组件。
 
 创建特定主题的组件十分管用。
 

@@ -17,12 +17,12 @@ Sometimes a radio button group looks more elegant.
   v-model="disabled2"
   style="margin-right: 12px;"
 >
-  disable Shakemaker
+  Disable Shakemaker
 </n-checkbox>
 <n-checkbox
   v-model="disabled1"
 >
-  disable Live Forever
+  Disable Live Forever
 </n-checkbox>
 ```
 ```js

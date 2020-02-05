@@ -22,13 +22,13 @@ export default {
     handleConfirm (e) {
       const confirmInstance = this.$NConfirm.warning({
         title: 'Confirm',
-        content: 'Are u sure to ...?',
+        content: 'Are you sure?',
         onPositiveClick: (hide) => {
-          this.$NMessage.success('sure')
+          this.$NMessage.success('Sure')
           hide()
         },
         onNegativeClick: (hide) => {
-          this.$NMessage.error('cancel')
+          this.$NMessage.error('Not Sure')
           hide()
         }
       })
@@ -37,9 +37,9 @@ export default {
       const confirmInstance = this.$NConfirm.success({
         title: 'Success',
         content:
-          'Premium designed icons for use in web, iOS, Android, and desktop apps. Support for SVG and web font. Completely open source, MIT licensed and built by the Ionic Framework team.',
+          'Cool',
         onPositiveClick: (hide) => {
-          this.$NMessage.success('show tooltip')
+          this.$NMessage.success('Great!')
           hide()
         }
       })
@@ -47,9 +47,9 @@ export default {
     handleError(e) {
       const confirmInstance = this.$NConfirm.error({
         title: 'Error',
-        content: 'Is this a test?',
+        content: 'A mistake.',
         onPositiveClick: (hide) => {
-          this.$NMessage.success('I know..')
+          this.$NMessage.success('I knew it...')
           hide()
         }
       })

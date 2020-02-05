@@ -1,4 +1,4 @@
-# Horiziontal
+# Label Placement Left
 ```html
 <n-form
   :model="model"

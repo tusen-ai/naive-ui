@@ -18,7 +18,7 @@ Button can be disabled.
   round
   type="primary"
 >
-  regular size
+  Disabled
 </n-button>
 <n-button
   disabled

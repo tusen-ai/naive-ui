@@ -38,9 +38,7 @@ export default {
     },
     model: {
       type: Object,
-      default: function () {
-        return {}
-      }
+      required: true
     },
     rules: {
       type: Object,
@@ -55,7 +53,6 @@ export default {
   },
   data () {
     return {
-      initialValue: null,
       items: {}
     }
   },
@@ -63,14 +60,6 @@ export default {
     this.initialValue = cloneDeep(this.model)
   },
   methods: {
-    /**
-     * form validation, validate all prop-elements by default,
-     * can use specify the scope of validation by param part.
-     *
-     * @param {Funtion} callback callback
-     * @param {Array} scope  to specify the scope of validation
-     * @return {Boolean} validation passed or not
-     */
     validate (afterValidate, shouldFieldBeValidated = () => true) {
       return new Promise((resolve, reject) => {
         const formItemValidationPromises = []
@@ -101,14 +90,14 @@ export default {
           })
       })
     },
-    resetForm (target = this) {
-      for (const key of Object.keys(this.items)) {
-        const formItemInstances = this.items[key]
+    clearValidationEffect () {
+      const formItems = this.items
+      for (const key of Object.keys(formItems)) {
+        const formItemInstances = formItems[key]
         for (const formItemInstance of formItemInstances) {
-          formItemInstance.cleanValidationEffect()
+          formItemInstance.clearValidationEffect()
         }
       }
-      this.value = this.initialValue
     },
     handleKeyDownEnter (e) {
       if (e.target.tagName === 'INPUT' && e.target.getAttribute('type')) {

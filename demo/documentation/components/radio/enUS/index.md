@@ -8,32 +8,32 @@ group
 button-group
 ```
 ## V-model
-### Radio
+### Radio V-model
 |Prop|Event|
 |-|-|
 |checked-value|change|
 
-### Radio Group
+### Radio Group V-model
 |Prop|Event|
 |-|-|
 |value|change|
 
 ## Props
-### Radio
+### Radio Props
 |Name|Type|Default|Description|
 |-|-|-|-|
 |checked-value|`string \| number \| boolean`|`null`||
 |value|`string \| number \| boolean`|`null`||
 |disabled|`boolean`|`false`||
 
-### Radio Button
+### Radio Button Props
 |Name|Type|Default|Description|
 |-|-|-|-|
 |checked-value|`string \| number \| boolean`|`null`||
 |value|`string \| number \| boolean`|`null`||
 |disabled|`boolean`|`false`||
 
-### Radio Group
+### Radio Group Props
 |Name|Type|Default|Description|
 |-|-|-|-|
 |size|`'small' \| 'medium' \| 'large'`|`small`||
@@ -41,12 +41,12 @@ button-group
 |disabled|`boolean`|`false`||
 
 ## Events
-### Radio, Radio Button
+### Radio, Radio Button Events
 |Name|Parameters|Description|
 |-|-|-|
 |change|`(checkedValue: string \| number \| boolean)`||
 
-### Radio Group
+### Radio Group Events
 |Name|Parameters|Description|
 |-|-|-|
 |change|`(checkedValue: string \| number \| boolean)`||

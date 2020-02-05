@@ -4,7 +4,7 @@
     :class="{
       [`n-form-item--${synthesizedLabelPlacement}-labelled`]: synthesizedLabelPlacement,
       [`n-form-item--${synthesizedLabelAlign}-label-aligned`]: synthesizedLabelAlign,
-      [`n-form-item--required`]: synthesizedRequired && showRequireMark,
+      [`n-form-item--required`]: synthesizedRequired && synthesizedShowRequireMark,
       [`n-form-item--no-label`]: !(label || $slots.label),
       [`n-form-item--has-feedback`]: hasFeedback,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
@@ -71,8 +71,8 @@ export default {
       default: null
     },
     labelStyle: {
-      type: String,
-      default: null
+      type: Object,
+      default: () => {}
     },
     labelAlign: {
       type: String,
@@ -100,7 +100,7 @@ export default {
     },
     showRequireMark: {
       type: Boolean,
-      default: true
+      default: null
     },
     rule: {
       type: [Object, Array],
@@ -132,6 +132,12 @@ export default {
           width: this.synthesizedLabelWidth
         }
       }
+    },
+    synthesizedShowRequireMark () {
+      if (this.showRequireMark === null) {
+        return this.NForm.showRequireMark
+      }
+      return this.showRequireMark
     },
     synthesizedLabelStyle () {
       return {
@@ -247,18 +253,14 @@ export default {
           if (valid) {
             if (afterValidate) {
               afterValidate()
-            } else {
-              resolve()
             }
+            resolve()
           } else {
             if (afterValidate) {
               afterValidate(errors)
-            } else {
-              // eslint-disable-next-line prefer-promise-reject-errors
-              reject({
-                errors
-              })
             }
+            // eslint-disable-next-line prefer-promise-reject-errors
+            reject(errors)
           }
         })
       })
@@ -277,8 +279,8 @@ export default {
       }
       if (!options) {
         options = {}
-        options.first = this.first
-        options.supressWarning = this.supressWarning
+      } else {
+        if (!options.first) options.first = this.first
       }
       const rules = this.synthesizedRules
       const path = this.path
@@ -320,7 +322,7 @@ export default {
               errors
             })
           } else {
-            this.cleanValidationEffect()
+            this.clearValidationEffect()
             resolve({
               valid: true
             })
@@ -328,7 +330,7 @@ export default {
         })
       })
     },
-    cleanValidationEffect () {
+    clearValidationEffect () {
       this.explains = []
       this.validated = false
     },

@@ -4,24 +4,24 @@ It has different type.
 <n-gradient-text
   type="error"
 >
-  Live Forever
+  Boom!
 </n-gradient-text>
 <br/>
 <n-gradient-text
   type="info"
 >
-  Live Forever
+  Emmm
 </n-gradient-text>
 <br/>
 <n-gradient-text
   type="warning"
 >
-  Married with Children
+  Oops!
 </n-gradient-text>
 <br/>
 <n-gradient-text
   type="success"
 >
-  Back in the USSR
+  Haha!
 </n-gradient-text>
 ```

@@ -1,4 +1,5 @@
 # Basic
+For example, javascript, python and cpp.
 ```html
 <div style="overflow: auto;">
   <n-code :code="`

@@ -155,7 +155,6 @@ import NTransferHeaderExtra from './TransferHeaderExtra'
 import NTransferSourceListItem from './TransferSourceListItem'
 import NTransferTargetListItem from './TransferTargetListItem'
 import NTransferButton from './TransferButton'
-import cloneDeep from 'lodash/cloneDeep'
 import asformitem from '../../../mixins/asformitem'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
@@ -276,7 +275,7 @@ export default {
     valueToOptionMap () {
       const map = new Map()
       this.options.forEach(option => {
-        map.set(option.value, { ...option })
+        map.set(option.value, option)
       })
       return map
     },
@@ -334,7 +333,7 @@ export default {
     options (newOptions) {
       this.initialized = false
       const valueSet = this.valueSet
-      this.memorizedSourceOptions = cloneDeep(this.options.filter(option => !valueSet.has(option.value)))
+      this.memorizedSourceOptions = this.options.filter(option => !valueSet.has(option.value))
       this.sourceCheckedValues = []
       this.targetCheckedValues = []
       this.$nextTick().then(() => {
@@ -347,7 +346,7 @@ export default {
   },
   created () {
     const valueSet = this.valueSet
-    this.memorizedSourceOptions = cloneDeep(this.options.filter(option => !valueSet.has(option.value)))
+    this.memorizedSourceOptions = this.options.filter(option => !valueSet.has(option.value))
   },
   methods: {
     emitChangeEvent (value) {

@@ -1,6 +1,6 @@
 # Basic
 ```html
-<n-alert title="Info Text" type="default">
+<n-alert title="Default Text" type="default">
   <template v-slot:icon>
     <n-icon>
       <ios-airplane />

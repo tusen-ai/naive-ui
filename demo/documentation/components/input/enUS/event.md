@@ -19,13 +19,6 @@
   @input="handleInput"
   placeholder="Operate to trigger events"
 />
-<n-input
-  pair
-  seperator="to"
-  v-model="pair"
-  @blur="handleBlur"
-  @focus="handleFocus"
-/>
 ```
 ```js
 export default {

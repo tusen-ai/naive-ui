@@ -6,6 +6,7 @@ import mdInformationCircle from '../../../icons/md-information-circle'
 import mdCloseCircle from '../../../icons/md-close-circle'
 import NBaseLoading from '../../../base/Loading'
 import IconSwitchTransition from '../../../transition/IconSwitchTransition'
+import render from '../../../utils/render'
 
 export default {
   props: {
@@ -18,8 +19,8 @@ export default {
       default: 'default'
     },
     content: {
-      type: String,
-      default: ''
+      type: [String, Function],
+      default: null
     },
     theme: {
       type: String,
@@ -51,7 +52,7 @@ export default {
       icon = h(NBaseLoading, {
         props: {
           theme: this.theme,
-          strokeWidth: 6
+          strokeWidth: 24
         },
         key: 'loading'
       })
@@ -78,7 +79,13 @@ export default {
       ]),
       h('div', {
         staticClass: 'n-message__content'
-      }, this.content)
+      }, [
+        h(render, {
+          props: {
+            render: this.content
+          }
+        })
+      ])
     ])
   }
 }

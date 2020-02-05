@@ -1,5 +1,5 @@
 # Bordered
-If there are too many multiple line fields, you can set it to borderd
+If there are too many multiple line fields, you can set it to `bordered`.
 ```html
 <n-descriptions bordered>
   <n-descriptions-item>

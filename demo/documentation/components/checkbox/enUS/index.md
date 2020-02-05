@@ -10,48 +10,48 @@ controlled
 event
 ```
 ## V-model
-### Checkbox
+### Checkbox V-model
 |Prop|Event|
 |-|-|
 |change|checked|
 
-### Checkbox Group
+### Checkbox Group V-model
 |Prop|Event|
 |-|-|
 |change|value|
 
 ## Props
-### Checkbox
+### Checkbox Props
 |Name|Type|Default|Description|
 |-|-|-|-|
 |value|`string \| number`|`null`||
 |checked|`boolean`|`false`||
 |disabled|`boolean`|`false`||
 
-### Checkbox Group
+### Checkbox Group Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|value|`Array`|`null`||
+|value|`Array<string \| number>`|`null`||
 |disabled|`boolean`|`false`||
 
 ## Slots
-### Checkbox
+### Checkbox Slots
 |Name|Parameters|Description|
 |-|-|-|
 |default|`()`||
 
-### Checkbox Group
+### Checkbox Group Slots
 |Name|Parameters|Description|
 |-|-|-|
 |default|`()`||
 
 ## Events
-### Checkbox
+### Checkbox Events
 |Name|Parameters|Description|
 |-|-|-|
 |change|`(checked: boolean)`||
 
-### Checkbox Group
+### Checkbox Group Events
 |Name|Paramaters|Description|
 |-|-|-|
 |change|`(value: string \| number)`||

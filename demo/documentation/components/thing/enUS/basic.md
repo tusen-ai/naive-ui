@@ -1,4 +1,5 @@
 # Basic
+Thing provides many slots to custom.
 ```html
 <n-switch v-model="avatar"/>
 <n-switch v-model="header"/>
@@ -25,30 +26,30 @@
     </n-button>
   </template>
   <template v-slot:description v-if="description">
-    It is what I want.
+    Description
   </template>
   Money is any item or verifiable record that is generally accepted as payment for goods and services and repayment of debts, such as taxes, in a particular country or socio-economic context.
   <template v-slot:footer v-if="footer">
-    The King of Money
+    Footer
   </template>
   <template v-slot:action v-if="action">
     <n-button size="tiny" style="margin-right: 8px;">
       <template v-slot:icon>
         <md-cash />
       </template>
-      Add 1$
+      1$
     </n-button>
     <n-button size="tiny" style="margin-right: 8px;">
       <template v-slot:icon>
         <md-cash />
       </template>
-      Add 10$
+      10$
     </n-button>
     <n-button size="tiny">
       <template v-slot:icon>
         <md-cash />
       </template>
-      Add 100$
+      100$
     </n-button>
   </template>
 </n-thing>

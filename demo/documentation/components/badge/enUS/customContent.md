@@ -1,4 +1,4 @@
-# Custom content
+# Custom Content
 Insert some custom content in it.
 ```html
 <n-badge value="new">

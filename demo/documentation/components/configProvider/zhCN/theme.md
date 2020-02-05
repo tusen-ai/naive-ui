@@ -1,5 +1,5 @@
 # 主题
-设置应用内部组件的主题。
+设置 Config Provider 内部组件的主题。
 ```html
 <n-config-provider :theme="theme">
   <n-button @click="theme = 'dark'">深色</n-button>

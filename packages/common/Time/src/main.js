@@ -1,9 +1,16 @@
 import format from 'date-fns/format'
 import formatDistance from 'date-fns/formatDistance'
 import fromUnixTime from 'date-fns/fromUnixTime'
+import zhCN from 'date-fns/locale/zh-CN'
+import enUS from 'date-fns/locale/en-US'
+
+import locale from '../../../mixins/locale'
 
 export default {
   name: 'NTime',
+  mixins: [
+    locale
+  ],
   props: {
     time: {
       type: [Number, Date],
@@ -33,6 +40,17 @@ export default {
     }
   },
   computed: {
+    dateFnsLocale () {
+      return ({
+        'zh-CN': zhCN,
+        'en-US': enUS
+      })[this.locale]
+    },
+    dateFnsOptions () {
+      return {
+        locale: this.dateFnsLocale
+      }
+    },
     synthesizedTime () {
       if (this.unix) {
         return fromUnixTime(this.time)
@@ -47,14 +65,15 @@ export default {
     },
     renderedTime () {
       if (this.format) {
-        return format(this.synthesizedTime, this.format)
+        return format(this.synthesizedTime, this.format, this.dateFnsOptions)
       } else if (this.type === 'date') {
-        return format(this.synthesizedTime, 'yyyy-MM-dd')
+        return format(this.synthesizedTime, 'yyyy-MM-dd', this.dateFnsOptions)
       } else if (this.type === 'datetime') {
-        return format(this.synthesizedTime, 'yyyy-MM-dd hh:mm:ss')
+        return format(this.synthesizedTime, 'yyyy-MM-dd hh:mm:ss', this.dateFnsOptions)
       } else {
         return formatDistance(this.synthesizedTime, this.synthesizedTo, {
-          addSuffix: true
+          addSuffix: true,
+          locale: this.dateFnsLocale
         })
       }
     }

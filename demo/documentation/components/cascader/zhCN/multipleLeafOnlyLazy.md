@@ -1,4 +1,4 @@
-# 延迟多项（仅叶子节点）
+# 异步多项（仅叶子节点）
 ```html
 <n-cascader
   v-model="value"
@@ -6,7 +6,7 @@
   placeholder="请选些什么"
   :options="options"
   style="flex-grow: 1; margin-right: 12px;"
-  lazy
+  remote
   :on-load="handleLoad"
 />
 ```

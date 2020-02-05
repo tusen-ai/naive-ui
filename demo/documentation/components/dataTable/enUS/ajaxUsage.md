@@ -1,4 +1,4 @@
-# Ajax
+# Async
 
 ```html
 <n-data-table

@@ -18,8 +18,8 @@ export default {
   methods: {
     notify (type) {
       this.$NNotification[type]({
-        content: `Keep Calm And Make Epic Shit`,
-        meta: 'From Evan You'
+        content: `What to say?`,
+        meta: 'I don\'t know'
       })
     }
   }

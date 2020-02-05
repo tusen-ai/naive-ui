@@ -6,10 +6,10 @@ Affix can be `absolute` or `fixed` positioned. You may need some css tricks to m
     <div class="padding"></div>
     <div class="content">
       <div style="display: inline-block; width: 50%;">
-        <n-affix :offset-top="50" position="absolute"><n-tag>Offset Top 50px</n-tag></n-affix>
+        <n-affix :offset-top="50" position="absolute"><n-tag>Affix Trigger Top 50px</n-tag></n-affix>
       </div>
       <div style="display: inline-block; width: 50%;">
-        <n-affix :offset-bottom="60" position="absolute"><n-tag>Offset Bottom 60px</n-tag></n-affix>
+        <n-affix :offset-bottom="60" position="absolute"><n-tag>Affix Trigger Bottom 60px</n-tag></n-affix>
       </div>
     </div>
   </div>

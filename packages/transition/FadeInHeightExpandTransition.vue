@@ -36,6 +36,7 @@ export default {
       this.$el.getBoundingClientRect()
     },
     handleAfterLeave () {
+      if (!this.$el || this.$el.nodeType !== 1) return
       if (this.width) {
         this.$el.style.maxWidth = null
       } else {

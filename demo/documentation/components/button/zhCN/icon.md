@@ -5,13 +5,13 @@
   <template v-slot:icon>
     <md-save />
   </template>
-  Save
+  保存
 </n-button>
 <n-button icon-placement="right">
   <template v-slot:icon>
     <md-save />
   </template>
-  Save
+  保存
 </n-button>
 ```
 ```js

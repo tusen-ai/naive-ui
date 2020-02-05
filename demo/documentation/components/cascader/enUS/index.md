@@ -1,4 +1,6 @@
 # Cascader
+Cascader can be used to select some tree structured data.
+## Demos
 ```demo
 single-leaf-only
 trigger
@@ -15,3 +17,30 @@ single-lazy
 multiple-lazy
 filter
 ```
+## V-model
+|Prop|Event|
+|-|-|
+|value|change|
+
+## Props
+|Name|Type|Default|Description|
+|-|-|-|-|
+|options|`Array<CascaderOption>`|`null`||
+|value|`string \| number`|`null`||
+|placeholder|`string`|`Please Select`||
+|multiple|`boolean`|`false`||
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
+|filterable|`boolean`|`false`|Can't be `true` with `remote` prop at same time.|
+|disabled|`boolean`|`false`||
+|expand-trigger|`'click' \| 'hover'`|`'click'`||
+|leaf-only|`boolean`|`true`||
+|clearable|`boolean`|`false`||
+|remote|`boolean`|`false`||
+|on-load|`(option: CascaderOption, resolve: (children: Array<CascaderOption>) => void) => any`|`() => {}`|Callback when click at unloaded nodes. Pass resolved children to `resolve` function to set children of the node.|
+|splitor|`string`|`'/'`||
+|filter|`(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean`|A string based filter.||
+
+## Events
+|Name|Parameters|Description|
+|-|-|-|
+|change|`(value: string \| number \| Array<string \| number>)`

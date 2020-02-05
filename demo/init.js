@@ -238,7 +238,7 @@ const routes = [
   },
   {
     path: '/*',
-    redirect: '/en-US/dark/start'
+    redirect: '/zh-CN/light/start'
   }
 ]
 

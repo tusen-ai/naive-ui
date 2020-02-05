@@ -1,6 +1,21 @@
-# 渐变文字
+# 渐变文字 Gradient Text
+为啥要弄这么个东西呢？Rita 在一些警告信息上试了试渐变文字，我觉得看起来还挺好的。所以就有了这么个东西。
+
+## 演示
 ```demo
 basic
 size
 custom
 ```
+
+## Props
+|名称|类型|默认值|介绍|
+|-|-|-|-|
+|type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`||**必需**|
+|size|`number`|`null`||
+|gradient|`string \| object`|`null`||
+
+## Slots
+|名称|参数|介绍|
+|-|-|-|
+|default|`()`||

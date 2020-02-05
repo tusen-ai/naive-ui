@@ -127,10 +127,6 @@ export default {
       },
       default: null
     },
-    bodered: {
-      type: Boolean,
-      default: false
-    },
     size: {
       type: String,
       default: 'medium'

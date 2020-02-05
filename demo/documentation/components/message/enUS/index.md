@@ -10,17 +10,18 @@ manually-close
 about-theme
 ```
 ## API
-### $NMessage API
-|Property|Type|Description|
+### $NMessage Methods
+|Name|Type|Description|
 |-|-|-|
-|info|`(option: MessageOption) : MessageEnvironment`||
-|success|`(option: MessageOption) : MessageEnvironment`||
-|warning|`(option: MessageOption) : MessageEnvironment`||
-|error|`(option: MessageOption) : MessageEnvironment`||
-|loading|`(option: MessageOption) : MessageEnvironment`||
+|-|-|-|
+|info|`(message: string, option?: MessageOption) => MessageEnvironment`||
+|success|`(message: string, option?: MessageOption) => MessageEnvironment`||
+|warning|`(message: string, option?: MessageOption) => MessageEnvironment`||
+|error|`(message: string, option?: MessageOption) => MessageEnvironment`||
+|loading|`(message: string, option?: MessageOption) => MessageEnvironment`||
 
-### MessageOption API
-|Property|Type|Description|
+### MessageOption Type
+|Name|Type|Description|
 |-|-|-|
 |content|`string \| function`|Can be a render function|
 |icon|`string \| function`|Can be a render function|
@@ -29,7 +30,7 @@ about-theme
 
 ### MessageEnvironment API
 #### MessageEnvironment Properties
-|Property|Type|Description|
+|Name|Type|Description|
 |-|-|-|
 |content|`string \| function`|Can be a render function|
 |icon|`string \| function`|Can be a render function|
@@ -38,6 +39,6 @@ about-theme
 |onAfterHide|`function`||
 
 #### MessageEnvironment Methods
-|Method|Type|Description|
+|Name|Type|Description|
 |-|-|-|
 |hide|`()`||

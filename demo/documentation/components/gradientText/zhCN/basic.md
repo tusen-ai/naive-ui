@@ -1,26 +1,27 @@
-# 基础
+# 基础用法
+它有不同的类型。
 ```html
 <n-gradient-text
   type="error"
 >
-  永生
+  炸了
 </n-gradient-text>
 <br/>
 <n-gradient-text
   type="info"
 >
-  永生
+  噢
 </n-gradient-text>
 <br/>
 <n-gradient-text
   type="warning"
 >
-  拖家带口
+  注意
 </n-gradient-text>
 <br/>
 <n-gradient-text
   type="success"
 >
-  回到苏联
+  成了
 </n-gradient-text>
 ```

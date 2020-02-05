@@ -3,6 +3,7 @@ Always it's for showing attribute. Sometimes it's for toggle options.
 ## Demos
 ```demo
 basic
+closable
 disabled
 size
 checkable
@@ -24,8 +25,13 @@ shape
 |checked|`boolean`|`false`||
 |closable|`boolean`|`false`||
 
+## Slots
+|Name|Parameters|Description|
+|-|-|-|
+|default|`()`||
+
 ## Events
-|Name|Parameter|Description|
+|Name|Parameters|Description|
 |-|-|-|
 |close|`()`|
 |checked-change|`(checked: boolean)`||

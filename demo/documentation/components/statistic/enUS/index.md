@@ -5,7 +5,7 @@ As simple as it looks.
 basic
 ```
 ## Props
-|Property|Type|Default|Description|
+|Name|Type|Default|Description|
 |-|-|-|-|
 |label|`string`|`null`||
 |value|`string`|`null`||

@@ -7,7 +7,6 @@
           ref="contentInner"
           class="n-cascader-menu"
           :theme="theme"
-          filterable
           :pattern="pattern"
           :options="filteredSelectOptions"
           :multiple="multiple"
@@ -154,7 +153,6 @@ export default {
       }
     },
     handleSelectMenuToggleOption (option) {
-      // console.log('handleSelectMenuToggleOption', option)
       this.handleSelectOptionCheck(option)
     },
     handleSelectOptionCheck (option) {

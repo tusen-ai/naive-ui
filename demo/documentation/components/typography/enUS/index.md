@@ -12,6 +12,7 @@ text
 ```
 
 ## Props
+
 ### Text Props
 |Name|Type|Default|Description|
 |-|-|-|-|
@@ -32,7 +33,7 @@ text
 ### A Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|to|`string`|`null`||
+|to|`string`|`null`|If the prop is set, it will be rendered as a Vue Router router-link component. Make sure you don't want to use href.|
 
 ### Ul, Ol Props
 |Name|Type|Default|Description|
@@ -43,3 +44,9 @@ text
 |Name|Type|Default|Description|
 |-|-|-|-|
 |align-text|`boolean`|`false`||
+
+## Slots
+### All Typography Components
+|Name|Parameters|Description|
+|-|-|-|
+|default|`()`||

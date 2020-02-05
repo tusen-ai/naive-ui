@@ -1,5 +1,5 @@
-# Debug
-列出所有的按钮用来 debug。
+# 装作你没看见
+Debug 用的。
 ```html
 <div class="debug-zone"
   n-light-theme-background-color-hint="#ececec"

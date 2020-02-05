@@ -1,11 +1,11 @@
-# Lazy Single
+# Async Single
 ```html
 <n-cascader
   v-model="value"
   placeholder="Please Select Something"
   :options="options"
   :leaf-only="false"
-  lazy
+  remote
   :on-load="handleLoad"
 />
 ```

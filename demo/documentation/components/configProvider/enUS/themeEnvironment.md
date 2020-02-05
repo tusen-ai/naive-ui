@@ -1,11 +1,14 @@
 # Theme Environment
+Sometimes you may need some component to access some values at specific theme. You can use `theme-environment`.
 ```html
-<n-button @click="theme = 'dark'">Dark Theme</n-button>
-<n-button @click="theme = 'light'">Light Theme</n-button>
+<div>
+  <n-button @click="theme = 'dark'">Dark Theme</n-button>
+  <n-button @click="theme = 'light'">Light Theme</n-button>
+</div>
 <n-config-provider :theme="theme" :theme-environment="env">
   <n-config-consumer>
     <template v-slot="{ themeEnvironment }">
-      {{ themeEnvironment }}
+      <n-tag>{{ themeEnvironment }}</n-tag>
     </template>
   </n-config-consumer>
 </n-config-provider>
@@ -16,8 +19,8 @@ export default {
     return {
       theme: 'light',
       env: {
-        dark: 'Dark 666',
-        light: 'Light 666'
+        dark: 'NaCl',
+        light: 'Ionic Compound'
       }
     }
   }

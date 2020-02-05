@@ -1,9 +1,9 @@
-# 延迟单项（仅叶子节点）
+# 异步单项（仅叶子节点）
 ```html
 <n-cascader
   v-model="value"
   placeholder="请选些什么"
-  lazy
+  remote
   :on-load="handleLoad"
 />
 ```

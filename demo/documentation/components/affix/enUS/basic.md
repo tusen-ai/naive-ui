@@ -6,10 +6,10 @@ Affix has `offset-top`, `top`, `offset-bottom` and `bottom`. `offset-top` is top
   <div class="content">
     <n-row>
       <n-col :span="12">
-        <n-affix :top="120" :offset-top="60"><n-tag>Top 60px</n-tag></n-affix>
+        <n-affix :top="120" :offset-top="60"><n-tag>Affix Trigger Top 60px</n-tag></n-affix>
       </n-col>
       <n-col :span="12">
-        <n-affix :bottom="120" :offset-bottom="60"><n-tag>Bottom 60px</n-tag></n-affix>
+        <n-affix :bottom="120" :offset-bottom="60"><n-tag>Affix Trigger Bottom 60px</n-tag></n-affix>
       </n-col>
     </n-row>
   </div>

@@ -1,4 +1,5 @@
 # Size
+Description support `small`, `medium` and `large` size.
 ```html
 <n-descriptions label-placement="left" title="Description" size="small">
   <n-descriptions-item>

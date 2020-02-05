@@ -1,18 +1,18 @@
-# 边框
+# 使用边框
 ```html
 <n-layout>
   <n-layout-sider bordered>
-    Cool Sider
+    酷的边栏
   </n-layout-sider>
   <n-layout>
     <n-layout-header bordered>
-      Cool Header
+      酷的页头
     </n-layout-header>
     <n-layout-content>
-      Cool Content
+      酷的内容
     </n-layout-content>
     <n-layout-footer bordered>
-      Cool Footer
+      酷的页脚
     </n-layout-footer>
   </n-layout>
 </n-layout>

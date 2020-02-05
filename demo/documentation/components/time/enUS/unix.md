@@ -1,4 +1,4 @@
-# Unix
+# Unix Timestamp
 Use Unix timestamp as time.
 ```html
 <n-time :time="4320000000" :to="8640000000"/>

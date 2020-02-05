@@ -1,5 +1,5 @@
 # Border
-List can be bordered or unbordered
+List can be bordered or unbordered.
 ```html
 <n-list>
   <template v-slot:header>

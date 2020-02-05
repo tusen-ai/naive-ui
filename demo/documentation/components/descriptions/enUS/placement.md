@@ -1,5 +1,5 @@
 # Label Placement
-You can set label placement to 'top' or 'left'
+You can set label placement to `top` or `left`.
 ```html
 <n-descriptions label-placement="left" title="Description">
   <n-descriptions-item>

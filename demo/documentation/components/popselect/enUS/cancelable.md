@@ -4,35 +4,78 @@ Make single value popselect cancelable.
 <n-popselect
   v-model="value"
   cancelable
+  @change="handleChange"
   :options="options"
 >
-  <n-tag>{{ value || 'popselect' }}</n-tag>
+  <n-tag>{{ value || 'Popselect' }}</n-tag>
 </n-popselect>
 ```
 ```js
 export default {
   data () {
     return {
-      value: null,
+      value: 'song1',
       options: [{
-        label: 'Go Let It Out',
-        value: 'Go Let It Out'
-      }, {
-        label: 'Who Feels Love?',
-        value: 'Who Feels Love?'
-      }, {
-        label: 'Sunday Morning Call',
-        value: 'Sunday Morning Call',
-        disabled: true
-      }, {
-        label: 'Roll It Over',
-        value: 'Roll It Over'
-      }]
+          label: "Everybody's Got Something to Hide Except Me and My Monkey",
+          value: 'song0',
+          disabled: true
+        },
+        {
+          label: 'Drive My Car',
+          value: 'song1'
+        },
+        {
+          label: 'Norwegian Wood',
+          value: 'song2'
+        },
+        {
+          label: 'You Won\'t See',
+          value: 'song3',
+          disabled: true
+        },
+        {
+          label: 'Nowhere Man',
+          value: 'song4'
+        },
+        {
+          label: 'Think For Yourself',
+          value: 'song5'
+        },
+        {
+          label: 'The Word',
+          value: 'song6'
+        },
+        {
+          label: 'Michelle',
+          value: 'song7',
+          disabled: true
+        },
+        {
+          label: 'What goes on',
+          value: 'song8'
+        },
+        {
+          label: 'Girl',
+          value: 'song9'
+        },
+        {
+          label: 'I\'m looking through you',
+          value: 'song10'
+        },
+        {
+          label: 'In My Life',
+          value: 'song11'
+        },
+        {
+          label: 'Wait',
+          value: 'song12'
+        }
+      ]
     }
   },
   methods: {
     handleChange (v) {
-      this.$NMessage.info('value: ' + v)
+      this.$NMessage.info('Value: ' + v)
     }
   }
 }

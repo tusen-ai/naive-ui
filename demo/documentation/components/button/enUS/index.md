@@ -14,7 +14,7 @@ group
 debug
 ```
 ## Props
-### Button
+### Button Props
 |Name|Type|Default|Description|
 |-|-|-|-|
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`
@@ -27,25 +27,25 @@ debug
 |loading|`boolean`|`false`||
 |icon-placement|`'left' \| 'right'`|`'left'`||
 
-### Button Group
+### Button Group Props
 |Name|Type|Default|Description|
 |-|-|-|-|
 |vertical|`boolean`|`false`||
 
 ## Slots
-### Button
+### Button Slots
 |Name|Parameters|Description|
 |-|-|-|
 |default|`()`||
 |icon|`()`||
 
-### Button Group
+### Button Group Slots
 |Name|Parameters|Description|
 |-|-|-|
 |default|`()`||
 
 ## Events
-### Button
+### Button Events
 |Name|Parameters|Description|
 |-|-|-|
 |click|`(e: MouseEvent)`||

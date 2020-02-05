@@ -29,7 +29,7 @@ export default {
     selectTime: '选择时间',
     selectDate: '选择日期',
     datePlaceholder: '选择日期',
-    datetimePlaceholder: '选择时间时间',
+    datetimePlaceholder: '选择日期时间',
     startDatePlaceholder: '开始日期',
     endDatePlaceholder: '结束日期',
     startDatetimePlaceholder: '开始日期时间',

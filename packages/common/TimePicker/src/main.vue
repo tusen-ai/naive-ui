@@ -132,7 +132,6 @@
               <n-button
                 size="tiny"
                 round
-                auto-text-color
                 type="primary"
                 class="n-time-picker-selector-actions__confirm"
                 :disabled="isValueInvalid"

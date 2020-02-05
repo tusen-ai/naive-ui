@@ -11,13 +11,13 @@ You can make mask click not to close modal when using v-model on modal.
   v-model="isActive" 
   :mask-closable="false"
   preset="confirm" 
-  title="Confirm modal"
-  content="Are you sure ?" 
+  title="Confirm"
+  content="Are you sure?" 
   :closable="false"
-  positive-text="submit"
-  @positive-click="cancelCallback"
-  @negative-click="submitCallback"
-  negative-text="cancel"
+  positive-text="Confirm"
+  @positive-click="submitCallback"
+  @negative-click="cancelCallback"
+  negative-text="Cancel"
 />
 ```
 ```js
@@ -29,11 +29,11 @@ export default {
   },
   methods: {
     cancelCallback () {
-      this.$NMessage.success('cancel')
+      this.$NMessage.success('Cancel')
       this.isActive = false
     },
     submitCallback () {
-      this.$NMessage.success('submit')
+      this.$NMessage.success('Submit')
       this.isActive = false
     }
   }

@@ -5,29 +5,42 @@
   size="small"
   disabled
 >
-  Disabled
+  不许点
 </n-button>
 <n-button
   disabled
   type="primary"
 >
-  Disabled
+  不许点
 </n-button>
 <n-button
   disabled
   round
   type="primary"
 >
-  regular size
+  不许点
 </n-button>
 <n-button
   disabled
   circle
-  icon="md-save"
-/>
+>
+  <template v-slot:icon>
+    <md-save />
+  </template>
+</n-button>
+```
+```js
+import mdSave from 'naive-ui/lib/icons/md-save'
+
+export default {
+  components: {
+    mdSave
+  }
+}
 ```
 ```css
 .n-button {
   margin: 0 8px 8px 0;
 }
 ```
+

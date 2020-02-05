@@ -1,4 +1,5 @@
 # Trigger Button
+A trigger button, for free.
 ```html
 <n-switch v-model="collapsed" />
 <n-layout style="height: 240px;">

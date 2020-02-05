@@ -1,4 +1,4 @@
-# Debug
+# Pretend You Didn't See It
 List all buttons here for debug usage.
 ```html
 <n-config-consumer transparent>

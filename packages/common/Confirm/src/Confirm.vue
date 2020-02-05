@@ -43,7 +43,7 @@
       </slot>
     </div>
     <div class="n-confirm__footer">
-      <slot name="footer">
+      <slot name="action">
         <n-button
           v-if="negativeText"
           :theme="theme"
@@ -61,7 +61,6 @@
           :loading="loading"
           size="small"
           type="primary"
-          auto-text-color
           @click="handlePositiveClick"
         >
           <render :render="positiveText" />

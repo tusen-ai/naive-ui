@@ -1,4 +1,5 @@
 # Basic
+Get current theme and namespace.
 ```html
 <n-config-consumer
   @theme-change="handleThemeChange"

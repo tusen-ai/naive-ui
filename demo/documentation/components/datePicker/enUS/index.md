@@ -1,4 +1,4 @@
-# DatePicker
+# Date Picker
 People has too many ideas about how to set a time.
 
 ## Demos
@@ -18,6 +18,7 @@ events
 |value|change|
 
 ## Props
+### All Types Props
 |Name|Type|Default|Description|
 |-|-|-|-|
 |value|`number`|`null`||
@@ -26,20 +27,20 @@ events
 |type|`'date' \| 'datetime' \| 'daterange' \|'datetimerange'`|`'date`||
 
 
-### Date
+### Date Type Props
 |Name|Type|Default|Description|
 |-|-|-|-|
 |placeholder|`string`|`'Select Date'`||
 |is-date-disabled|`(current: number) => boolean`|`() => false`||
 
-### DateTime
+### DateTime Type Props
 |Name|Type|Default|Description|
 |-|-|-|-|
 |placeholder|`string`|`'Select Date and Time'`||
 |is-date-disabled|`(current: number) => boolean`|`() => false`||
 |is-time-disabled|`(current: number) => { isHourDisabled: boolean, isMinuteDisabled: boolean, isSecondDisabled: boolean }`|`() => ({ isHourDisabled: () => false, isMinuteDisabled: () => false, isSecondDisabled: () => false }})`||
 
-### DateRange
+### DateRange Type Props
 |Name|Type|Default|Description|
 |-|-|-|-|
 |seperator|`string`|`'to'`||
@@ -49,7 +50,7 @@ events
 |is-time-disabled|`(current: number) => { isHourDisabled: boolean, isMinuteDisabled: boolean, isSecondDisabled: boolean }`|`() => ({ isHourDisabled: () => false, isMinuteDisabled: () => false, isSecondDisabled: () => false }})`||
 
 
-### DateTimeRange
+### DateTimeRange Type Props
 |Name|Type|Default|Description|
 |-|-|-|-|
 |seperator|`string`|`'to'`||
@@ -59,13 +60,13 @@ events
 |is-time-disabled|`(current: number) => { isHourDisabled: boolean, isMinuteDisabled: boolean, isSecondDisabled: boolean }`|`() => ({ isHourDisabled: () => false, isMinuteDisabled: () => false, isSecondDisabled: () => false }})`||
 
 ## Events
-### Date, DateTime
+### Date, DateTime Type Events
 |Name|Parameters|Description|
 |-|-|-|
 |change|`(currentValue: number \| null)`||
 |blur|`(currentValue: number \| null)`||
 
-### DateRange, DateTimeRange
+### DateRange, DateTimeRange Type Events
 |Name|Parameters|Description|
 |-|-|-|
 |change|`(currentValue: [number, number] \| null)`||

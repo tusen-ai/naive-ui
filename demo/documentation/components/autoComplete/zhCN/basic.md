@@ -1,4 +1,4 @@
-# 基础
+# 基本用法
 ```html
 <n-auto-complete :options="options" v-model="value" placeholder="邮箱" />
 ```

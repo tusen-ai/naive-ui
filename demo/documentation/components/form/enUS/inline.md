@@ -1,4 +1,5 @@
 # Inline Form
+A Example of inline form.
 ```html
 <n-form
   inline
