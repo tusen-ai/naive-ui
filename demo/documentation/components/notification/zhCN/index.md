@@ -16,11 +16,11 @@ duration
 #### $NNotification Methods
 |名称|类型|介绍|
 |-|-|-|
-|open|`(option: NotificationOption, type: string = 'default'): NotificationEnvironment`|`type` 可以是 `'default'`, `'warning'`, `'info'`, `'success'` 或 `'error'`|
-|success|`(option: NofiticationOption): NotificationEnvironment`||
-|info|`(option: NofiticationOption): NotificationEnvironment`||
-|warning|`(option: NofiticationOption): NotificationEnvironment`||
-|error|`(option: NofiticationOption): NotificationEnvironment`||
+|open|`(option: NotificationOption, type: string = 'default') => NotificationEnvironment`|`type` 可以是 `'default'`, `'warning'`, `'info'`, `'success'` 或 `'error'`|
+|success|`(option: NofiticationOption) => NotificationEnvironment`||
+|info|`(option: NofiticationOption) => NotificationEnvironment`||
+|warning|`(option: NofiticationOption) => NotificationEnvironment`||
+|error|`(option: NofiticationOption) => NotificationEnvironment`||
 
 #### $Notification Properties
 

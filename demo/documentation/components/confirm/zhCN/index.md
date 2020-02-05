@@ -11,10 +11,10 @@ use-component
 ### $NConfirm API
 |名称|类型|介绍|
 |-|-|-|
-|warning|`(options: ConfirmOption) : ConfirmEnvironment`||
-|success|`(options: ConfirmOption) : ConfirmEnvironment`||
-|error|`(options: ConfirmOption) : ConfirmEnvironment`||
-|destroyAll|`(): void`||
+|warning|`(options: ConfirmOption) => ConfirmEnvironment`||
+|success|`(options: ConfirmOption) => ConfirmEnvironment`||
+|error|`(options: ConfirmOption) => ConfirmEnvironment`||
+|destroyAll|`() => void`||
 
 ### ConfirmOption API
 |名称|类型|默认值|介绍|
@@ -29,9 +29,9 @@ use-component
 |show-icon|`boolean`|`true`||
 |loading|`boolean`|`false`||
 |bordered|`boolean`|`false`||
-|onPositiveClick|`(hide: function): any`|`hide => hide()`||
-|onNegativeClick|`(hide: function): any`|`hide => hide()`|
-|onClose|`(hide: function): any`|`hide => hide()`||
+|onPositiveClick|`(hide: function) => any`|`hide => hide()`||
+|onNegativeClick|`(hide: function) => any`|`hide => hide()`|
+|onClose|`(hide: function) => any`|`hide => hide()`||
 
 ### ConfirmEnvironment API
 #### ConfirmEnvironment Properties
@@ -49,9 +49,9 @@ use-component
 |show-icon|`boolean`||
 |loading|`boolean`||
 |bordered|`boolean`||
-|onPositiveClick|`(hide: function): any`||
-|onNegativeClick|`(hide: function): any`||
-|onClose|`(hide: function): any`||
+|onPositiveClick|`(hide: function) => any`||
+|onNegativeClick|`(hide: function) => any`||
+|onClose|`(hide: function) => any`||
 
 #### ConfirmEnvironment Methods
 |名称|类型|介绍|

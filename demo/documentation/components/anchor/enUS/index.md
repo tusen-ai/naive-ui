@@ -17,4 +17,4 @@ scrollto
 ## Methods
 |Name|Type|Description|
 |-|-|-|
-|scrollTo|`(href: string): void`||
+|scrollTo|`(href: string) => void`||

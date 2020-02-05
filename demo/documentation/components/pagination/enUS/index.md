@@ -24,8 +24,8 @@ disabled
 |show-size-picker|`boolean`|`false`||
 |show-quick-jumper|`boolean`|`false`||
 |page-slot|`number`|`9`||
-|on-page-size-change|`(pageSize: number): any`|`null`||
-|on-change|`(page: number): any`|`null`||
+|on-page-size-change|`(pageSize: number) => any`|`null`||
+|on-change|`(page: number) => any`|`null`||
 
 ## Events
 |Name|Parameters|Description|

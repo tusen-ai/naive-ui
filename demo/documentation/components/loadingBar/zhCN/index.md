@@ -9,6 +9,6 @@ basic
 #### $NLoadingBar Methods
 |名称|类型|介绍|
 |-|-|-|
-|`start`|`(): void`||
-|`finish`|`(): void`||
-|`error`|`(): void`||
+|`start`|`() => void`||
+|`finish`|`() => void`||
+|`error`|`() => void`||

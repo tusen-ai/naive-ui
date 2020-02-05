@@ -38,10 +38,10 @@ ajaxUsage
 |scroll-x|`number`|`null`|表格内容的横向宽度，如果列被水平固定了，则需要设定它|
 |pagination|`false \| object`|`false`|属性参考 [Pagination props](n-pagination#Props)|
 |paging|`boolean`|表格是否自动分页数据，在异步的状况下你可呢个要把它设为 `false`|
-|row-class-name|`string \| (rowData: object, index : number) : string \| object`|`null`||
+|row-class-name|`string \| (rowData: object, index : number) => string \| object`|`null`||
 |checked-row-keys|`Array<string \| number> \| null`|`null`||
 |default-checked-row-keys|`Array<string \| number>`|`[]`||
-|row-key|`(any) : number \| string`|`null`|通过行数据创建行的 key（如果你不想给每一行加上 key）|
+|row-key|`(rowData: object) => number \| string`|`null`|通过行数据创建行的 key（如果你不想给每一行加上 key）|
 
 ## Methods
 这些方法可以帮助你在非受控的状态下改变表格，但是，并不推荐在异步的状况下使用这些方法。如果需要异步操作，最好用**受控**的方式使用表格。
@@ -50,9 +50,9 @@ ajaxUsage
 |-|-|-|
 |filters|`( columnKey: string \| number, filterOptionValue: string \| number } \| Array<{ columnKey: string \| number, filterOptionValue: string \| number }>)`||
 |sort|`(columnKey: string \| null, order: 'ascend' \| 'descend' \| false)`|如果 columnKey 设为 `null`，那它和 clearSorter 效果一致|
-|page|`(page: number) : void`||
-|clearFilters|`() : void`||
-|clearSorter|`() : void`||
+|page|`(page: number) => void`||
+|clearFilters|`() => void`||
+|clearSorter|`() => void`||
 
 
 ## Events
@@ -68,7 +68,7 @@ ajaxUsage
 ### Column Type
 |属性|类型|默认值|介绍|
 |-|-|-|-|
-|render|`(h, rowData: object): VNode \| Array<VNode>`|`null`|渲染函数，渲染这一列的每一行的单元格|
+|render|`(h, rowData: object) => VNode \| Array<VNode>`|`null`|渲染函数，渲染这一列的每一行的单元格|
 |type|`'default' \| 'selection'`|`default`||
 |disabled|`(rowData: object, index: number) => boolean`|`() => false`||
 |align|`'left' \| 'right' \| 'center'`|`'left'`|列内的文本排列|

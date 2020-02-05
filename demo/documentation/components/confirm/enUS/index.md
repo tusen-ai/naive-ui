@@ -11,10 +11,10 @@ use-component
 ### $NConfirm API
 |Name|Type|Description|
 |-|-|-|
-|warning|`(options: ConfirmOption) : ConfirmEnvironment`||
-|success|`(options: ConfirmOption) : ConfirmEnvironment`||
-|error|`(options: ConfirmOption) : ConfirmEnvironment`||
-|destroyAll|`(): void`||
+|warning|`(options: ConfirmOption) => ConfirmEnvironment`||
+|success|`(options: ConfirmOption) => ConfirmEnvironment`||
+|error|`(options: ConfirmOption) => ConfirmEnvironment`||
+|destroyAll|`() => void`||
 
 ### ConfirmOption API
 |Name|Type|Default|Description|
@@ -29,9 +29,9 @@ use-component
 |show-icon|`boolean`|`true`||
 |loading|`boolean`|`false`||
 |bordered|`boolean`|`false`||
-|onPositiveClick|`(hide: function): any`|`hide => hide()`||
-|onNegativeClick|`(hide: function): any`|`hide => hide()`|
-|onClose|`(hide: function): any`|`hide => hide()`||
+|onPositiveClick|`(hide: function) => any`|`hide => hide()`||
+|onNegativeClick|`(hide: function) => any`|`hide => hide()`|
+|onClose|`(hide: function) => any`|`hide => hide()`||
 
 ### ConfirmEnvironment API
 #### ConfirmEnvironment Properties
@@ -49,9 +49,9 @@ Properties of ConfirmEnvironment can be modified
 |show-icon|`boolean`||
 |loading|`boolean`||
 |bordered|`boolean`||
-|onPositiveClick|`(hide: function): any`||
-|onNegativeClick|`(hide: function): any`||
-|onClose|`(hide: function): any`||
+|onPositiveClick|`(hide: function) => any`||
+|onNegativeClick|`(hide: function) => any`||
+|onClose|`(hide: function) => any`||
 
 #### ConfirmEnvironment Methods
 |Name|Parameters|Description|

@@ -36,9 +36,9 @@ filter
 |leaf-only|`boolean`|`true`||
 |clearable|`boolean`|`false`||
 |remote|`boolean`|`false`||
-|on-load|`(option: CascaderOption, resolve: (children: Array<CascaderOption>): void) : {}`|`() => {}`|Callback when click at unloaded nodes. Pass resolved children to `resolve` function to set children of the node.|
+|on-load|`(option: CascaderOption, resolve: (children: Array<CascaderOption>) => void) => any`|`() => {}`|Callback when click at unloaded nodes. Pass resolved children to `resolve` function to set children of the node.|
 |splitor|`string`|`'/'`||
-|filter|`(pattern: string, option: CascaderOption, path: Array<CascaderOption>) : boolean`|A string based filter.||
+|filter|`(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean`|A string based filter.||
 
 ## Events
 |Name|Parameters|Description|

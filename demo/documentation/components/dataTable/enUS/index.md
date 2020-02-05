@@ -38,10 +38,10 @@ ajaxUsage
 |scroll-x|`number`|`null`|If columns are horizontal fixed, scroll-x need to be set|
 |pagination|`false \| object`|`false`|See [Pagination props](n-pagination#Props)|
 |paging|`boolean`|If data-table do automatic paging. You may set it to `false` in async usage.|
-|row-class-name|`string \| (rowData: object, index : number) : string \| object`|`null`||
+|row-class-name|`string \| (rowData: object, index : number) => string \| object`|`null`||
 |checked-row-keys|`Array<string \| number> \| null`|`null`||
 |default-checked-row-keys|`Array<string \| number>`|`[]`||
-|row-key|`(rowData) : number \| string`|`null`|Generate the key of the row by row data (if you don't want to set the key)|
+|row-key|`(rowData: object) => number \| string`|`null`|Generate the key of the row by row data (if you don't want to set the key)|
 
 ## Methods
 These methods can help you control table in an uncontrolled manner. However, it's not recommended to use them to implement some async operations. If async operations is needed, use table in a **controlled** manner.
@@ -50,9 +50,9 @@ These methods can help you control table in an uncontrolled manner. However, it'
 |-|-|-|
 |filters|`( columnKey: string \| number, filterOptionValue: string \| number } \| Array<{ columnKey: string \| number, filterOptionValue: string \| number }>)`||
 |sort|`(columnKey: string \| null, order: 'ascend' \| 'descend' \| false)`|If columnKey set to `null`, it is same as clearSorter|
-|page|`(page: number) : void`||
-|clearFilters|`() : void`||
-|clearSorter|`() : void`||
+|page|`(page: number) => void`||
+|clearFilters|`() => void`||
+|clearSorter|`() => void`||
 
 
 ## Events
@@ -68,7 +68,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 ### Column
 |Property|Type|Default|Description|
 |-|-|-|-|
-|render|`(h, rowData: object): VNode \| Array<VNode>`|`null`|Render function of column row cell|
+|render|`(h, rowData: object) => VNode \| Array<VNode>`|`null`|Render function of column row cell|
 |type|`'default' \| 'selection'`|`default`||
 |disabled|`(rowData: object, index: number) => boolean`|`() => false`||
 |align|`'left' \| 'right' \| 'center'`|`'left'`|Text align in column|

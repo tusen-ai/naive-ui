@@ -37,9 +37,9 @@ filter
 |leaf-only|`boolean`|`true`||
 |clearable|`boolean`|`false`||
 |remote|`boolean`|`false`||
-|on-load|`(option: CascaderOption, resolve: (children: Array<CascaderOption>): void) : {}`|`() => {}`|在点击未加载完成节点时的回调。把获得的子节点传入 `resolve` 函数来设定这个节点的子节点。|
+|on-load|`(option: CascaderOption, resolve: (children: Array<CascaderOption>) => void) => any`|`() => {}`|在点击未加载完成节点时的回调。把获得的子节点传入 `resolve` 函数来设定这个节点的子节点。|
 |splitor|`string`|`'/'`||
-|filter|`(pattern: string, option: CascaderOption, path: Array<CascaderOption>) : boolean`|一个基于字符串的过滤算法||
+|filter|`(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean`|一个基于字符串的过滤算法||
 
 ## Events
 |名称|参数|介绍|

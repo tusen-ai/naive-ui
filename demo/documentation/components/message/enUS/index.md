@@ -14,11 +14,11 @@ about-theme
 |Name|Type|Description|
 |-|-|-|
 |-|-|-|
-|info|`(message: string, option?: MessageOption) : MessageEnvironment`||
-|success|`(message: string, option?: MessageOption) : MessageEnvironment`||
-|warning|`(message: string, option?: MessageOption) : MessageEnvironment`||
-|error|`(message: string, option?: MessageOption) : MessageEnvironment`||
-|loading|`(message: string, option?: MessageOption) : MessageEnvironment`||
+|info|`(message: string, option?: MessageOption) => MessageEnvironment`||
+|success|`(message: string, option?: MessageOption) => MessageEnvironment`||
+|warning|`(message: string, option?: MessageOption) => MessageEnvironment`||
+|error|`(message: string, option?: MessageOption) => MessageEnvironment`||
+|loading|`(message: string, option?: MessageOption) => MessageEnvironment`||
 
 ### MessageOption Type
 |Name|Type|Description|

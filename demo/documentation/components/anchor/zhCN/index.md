@@ -17,4 +17,4 @@ scrollto
 ## Methods
 |名称|类型|介绍|
 |-|-|-|
-|scrollTo|`(href: string): void`||
+|scrollTo|`(href: string) => void`||

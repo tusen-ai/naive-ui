@@ -15,11 +15,11 @@ duration
 ### $NNotification Methods
 |Name|Type|Description|
 |-|-|-|
-|open|`(option: NotificationOption, type: string = 'default'): NotificationEnvironment`|`type` can be `'default'`, `'warning'`, `'info'`, `'success'` and `'error'`|
-|success|`(option: NofiticationOption): NotificationEnvironment`||
-|info|`(option: NofiticationOption): NotificationEnvironment`||
-|warning|`(option: NofiticationOption): NotificationEnvironment`||
-|error|`(option: NofiticationOption): NotificationEnvironment`||
+|open|`(option: NotificationOption, type: string = 'default') => NotificationEnvironment`|`type` can be `'default'`, `'warning'`, `'info'`, `'success'` and `'error'`|
+|success|`(option: NofiticationOption) => NotificationEnvironment`||
+|info|`(option: NofiticationOption) => NotificationEnvironment`||
+|warning|`(option: NofiticationOption) => NotificationEnvironment`||
+|error|`(option: NofiticationOption) => NotificationEnvironment`||
 
 ### $Notification Properties
 |Name|Type|Default|Description|

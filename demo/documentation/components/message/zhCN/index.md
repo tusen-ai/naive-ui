@@ -14,11 +14,11 @@ about-theme
 ### $NMessage Methods
 |名称|类型|介绍|
 |-|-|-|
-|info|`(content: string, option?: MessageOption) : MessageEnvironment`||
-|success|`(content: string, option?: MessageOption) : MessageEnvironment`||
-|warning|`(content: string, option?: MessageOption) : MessageEnvironment`||
-|error|`(content: string, option?: MessageOption) : MessageEnvironment`||
-|loading|`(content: string, option?: MessageOption) : MessageEnvironment`||
+|info|`(content: string, option?: MessageOption) => MessageEnvironment`||
+|success|`(content: string, option?: MessageOption) => MessageEnvironment`||
+|warning|`(content: string, option?: MessageOption) => MessageEnvironment`||
+|error|`(content: string, option?: MessageOption) => MessageEnvironment`||
+|loading|`(content: string, option?: MessageOption) => MessageEnvironment`||
 
 ### MessageOption Type
 |名称|类型|介绍|
