@@ -117,7 +117,7 @@
           @include once {
             flex: 1;
             line-height: 1;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 500;
             transition: color .3s $--n-ease-in-out-cubic-bezier;
           }
@@ -152,10 +152,34 @@
           overflow: hidden;
           position: relative;
           height: 272px;
+          display: flex;
+          flex-direction: column;
           border-bottom-right-radius: 6px;
           border-bottom-left-radius: 6px;
-          @include b(scrollbar-content) {
-            width: 100%;
+          @include b(transfer-list-flex-container) {
+            flex: 1;
+            position: relative;
+            @include b(scrollbar) {
+              position: absolute;
+              left: 0;
+              right: 0;
+              top: 0;
+              bottom: 0;
+              height: unset;
+              @include b(scrollbar-content) {
+                width: 100%;
+              }
+            }
+            @include b(empty) {
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              transform: translateY(-50%) translateX(-50%);
+            }
+          }
+          @include b(transfer-filter) {
+            padding: 8px 8px;
+            box-sizing: border-box;
           }
         }
         @include b(transfer-list-content) {

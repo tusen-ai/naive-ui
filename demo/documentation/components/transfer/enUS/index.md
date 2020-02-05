@@ -5,6 +5,7 @@ Left, right, left, right... As a boring guy, I can play it all day.
 ```demo
 basic
 large-data
+filterable
 ```
 ## V-model
 |Prop|Event|
@@ -18,12 +19,19 @@ large-data
 |options|`Array<TransferOption>`|`[]`||
 |disabled|`boolean`|`true`||
 |virtual-scroll|`boolean`|`false`|If use virtual scroll on transfer. If set to `true` it can handles large data (and turn transfer animation off)|
+|source-title|`string`|`'Source'`||
+|target-title|`string`|`'Target'`||
+|filterable|`boolean`|`false`||
+|source-filter-placeholder|`string`|`null`||
+|target-filter-placeholder|`string`|`null`||
+|filter|`(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean`|A basic label string match function||
 
-### TransferOption
+### TransferOption Type
 |Property|Type|Description|
 |-|-|-|
 |label|`string`||
 |value|`string \| number`|value of an option, should be unique in options|
+|disabled|`boolean`||
 
 ## Events
 |Name|Parameters|Description|

@@ -5,6 +5,7 @@
 ```demo
 basic
 large-data
+filterable
 ```
 ## V-model
 |Prop|Event|
@@ -18,12 +19,19 @@ large-data
 |options|`Array<TransferOption>`|`[]`||
 |disabled|`boolean`|`true`||
 |virtual-scroll|`boolean`|`false`|是否在 Transfer 上使用虚拟滚动，如果设成 `true` 它就可以比较快的处理大量数据。(这会关掉 Transfer 的动画)|
+|source-title|`string`|`'源项'`||
+|target-title|`string`|`'目标项'`||
+|filterable|`boolean`|`false`||
+|source-filter-placeholder|`string`|`null`||
+|target-filter-placeholder|`string`|`null`||
+|filter|`(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean`|一个简单的标签字符串匹配函数||
 
-### TransferOption
+### TransferOption Type
 |属性|类型|介绍|
 |-|-|-|
 |label|`string`||
 |value|`string \| number`|选项的 value，需要唯一|
+|disabled|`boolean`||
 
 ## Events
 |名称|参数|介绍|

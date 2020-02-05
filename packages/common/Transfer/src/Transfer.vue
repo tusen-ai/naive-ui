@@ -11,7 +11,7 @@
           <n-transfer-header-checkbox :source="true" :theme="synthesizedTheme" @change="handleSourceHeaderCheckboxChange" />
         </div>
         <div class="n-transfer-list-header__header">
-          Source
+          {{ sourceTitle || localeNamespace.sourceTitle }}
         </div>
         <n-transfer-header-extra :source="true" />
       </div>
@@ -19,67 +19,78 @@
         class="n-transfer-list-body"
         @mouseleave="handleSourceListMouseLeave"
       >
-        <n-scrollbar
-          v-if="virtualScroll"
-          :theme="synthesizedTheme"
-          :container="sourceScrollContainer"
-          :content="sourceScrollContent"
-        >
-          <recycle-scroller
-            v-if="virtualScroll"
-            ref="sourceVirtualScroller"
-            class="n-virtual-scroller n-transfer-list-content"
-            :items="memorizedSourceOptions"
-            :item-size="ITEM_SIZE"
-            key-field="value"
-          >
-            <template v-slot:before>
-              <n-base-light-bar ref="sourceLightBar" :item-size="ITEM_SIZE" :theme="synthesizedTheme" />
+        <div v-if="filterable" class="n-transfer-filter">
+          <n-input v-model="sourcePattern" clearable size="small" :placeholder="targetFilterPlaceholder">
+            <template v-slot:suffix>
+              <n-icon :size="16">
+                <ios-search />
+              </n-icon>
             </template>
-            <template v-slot="{ item: option, index }">
-              <n-transfer-source-list-item
-                :key="option.value"
-                :value="option.value"
-                :disabled="!!option.disabled"
-                :label="option.label"
-                :index="index"
-                @click="handleSourceCheckboxClick"
-                @mouseenter="handleSourceOptionMouseEnter"
-                @mouseleave="handleSourceOptionMouseLeave"
-              />
-            </template>
-          </recycle-scroller>
-        </n-scrollbar>
-        <n-scrollbar v-else>
-          <div ref="sourceList" class="n-transfer-list-content">
-            <n-base-light-bar ref="sourceLightBar" :item-size="ITEM_SIZE" :theme="synthesizedTheme" />
-            <n-transfer-source-list-item
-              v-for="option in memorizedSourceOptions"
-              ref="sourceListItems"
-              :key="option.value"
-              :value="option.value"
-              :disabled="!!option.disabled"
-              :label="option.label"
-              @click="handleSourceCheckboxClick"
-              @mouseenter="handleSourceOptionMouseEnter"
-              @mouseleave="handleSourceOptionMouseLeave"
-            />
-          </div>
-        </n-scrollbar>
+          </n-input>
+        </div>
+        <div class="n-transfer-list-flex-container">
+          <template v-if="filteredSourceOptions.length">
+            <n-scrollbar
+              v-if="virtualScroll"
+              :theme="synthesizedTheme"
+              :container="sourceScrollContainer"
+              :content="sourceScrollContent"
+            >
+              <recycle-scroller
+                v-if="virtualScroll"
+                ref="sourceVirtualScroller"
+                class="n-virtual-scroller n-transfer-list-content"
+                :items="filteredSourceOptions"
+                :item-size="ITEM_SIZE"
+                key-field="value"
+              >
+                <template v-slot:before>
+                  <n-base-light-bar ref="sourceLightBar" :item-size="ITEM_SIZE" :theme="synthesizedTheme" />
+                </template>
+                <template v-slot="{ item: option, index }">
+                  <n-transfer-source-list-item
+                    :key="option.value"
+                    :value="option.value"
+                    :disabled="!!option.disabled"
+                    :label="option.label"
+                    :index="index"
+                    @click="handleSourceCheckboxClick"
+                    @mouseenter="handleSourceOptionMouseEnter"
+                    @mouseleave="handleSourceOptionMouseLeave"
+                  />
+                </template>
+              </recycle-scroller>
+            </n-scrollbar>
+            <n-scrollbar v-else>
+              <div ref="sourceList" class="n-transfer-list-content">
+                <n-base-light-bar ref="sourceLightBar" :item-size="ITEM_SIZE" :theme="synthesizedTheme" />
+                <n-transfer-source-list-item
+                  v-for="option in filteredSourceOptions"
+                  ref="sourceListItems"
+                  :key="option.value"
+                  :value="option.value"
+                  :disabled="!!option.disabled"
+                  :label="option.label"
+                  @click="handleSourceCheckboxClick"
+                  @mouseenter="handleSourceOptionMouseEnter"
+                  @mouseleave="handleSourceOptionMouseLeave"
+                />
+              </div>
+            </n-scrollbar>
+          </template>
+          <n-empty v-else />
+        </div>
       </div>
     </div>
     <div class="n-transfer-gap">
       <n-transfer-button
         :to="true"
         @click="handleToTargetClick"
-      >
-        To Target
-      </n-transfer-button>
+      />
       <n-transfer-button
+        :to="false"
         @click="handleToSourceClick"
-      >
-        To Source
-      </n-transfer-button>
+      />
     </div>
     <div class="n-transfer-list">
       <div class="n-transfer-list-header">
@@ -87,7 +98,7 @@
           <n-transfer-header-checkbox :theme="synthesizedTheme" @change="handleTargetHeaderCheckboxChange" />
         </div>
         <div class="n-transfer-list-header__header">
-          Target
+          {{ targetTitle || localeNamespace.targetTitle }}
         </div>
         <n-transfer-header-extra />
       </div>
@@ -95,54 +106,68 @@
         class="n-transfer-list-body"
         @mouseleave="handleTargetListMouseLeave"
       >
-        <n-scrollbar
-          v-if="virtualScroll"
-          :theme="synthesizedTheme"
-          :container="targetScrollContainer"
-          :content="targetScrollContent"
-        >
-          <recycle-scroller
-            v-if="virtualScroll"
-            ref="targetVirtualScroller"
-            class="n-virtual-scroller n-transfer-list-content"
-            :items="targetOptions"
-            :item-size="ITEM_SIZE"
-            key-field="value"
-          >
-            <template v-slot:before>
-              <n-base-light-bar ref="targetLightBar" :item-size="ITEM_SIZE" :theme="synthesizedTheme" />
+        <div v-if="filterable" class="n-transfer-filter">
+          <n-input v-model="targetPattern" clearable size="small" :placeholder="targetFilterPlaceholder">
+            <template v-slot:suffix>
+              <n-icon :size="16">
+                <ios-search />
+              </n-icon>
             </template>
-            <template v-slot="{ item: option, index }">
-              <n-transfer-target-list-item
-                :key="option.value"
-                :value="option.value"
-                :disabled="!!option.disabled"
-                :label="option.label"
-                :index="index"
-                @click="handleTargetCheckboxClick"
-                @mouseenter="handleTargetOptionMouseEnter"
-                @mouseleave="handleTargetOptionMouseLeave"
-              />
-            </template>
-          </recycle-scroller>
-        </n-scrollbar>
-        <n-scrollbar v-else>
-          <div ref="targetList" class="n-transfer-list-content">
-            <n-base-light-bar ref="targetLightBar" :item-size="ITEM_SIZE" :theme="synthesizedTheme" />
-            <n-transfer-target-list-item
-              v-for="(option, index) in targetOptions"
-              ref="targetListItems"
-              :key="option.value"
-              :index="index"
-              :value="option.value"
-              :disabled="!!option.disabled"
-              :label="option.label"
-              @click="handleTargetCheckboxClick"
-              @mouseenter="handleTargetOptionMouseEnter"
-              @mouseleave="handleTargetOptionMouseLeave"
-            />
-          </div>
-        </n-scrollbar>
+          </n-input>
+        </div>
+        <div class="n-transfer-list-flex-container">
+          <template v-if="filteredTargetOptions.length">
+            <n-scrollbar
+              v-if="virtualScroll"
+              :theme="synthesizedTheme"
+              :container="targetScrollContainer"
+              :content="targetScrollContent"
+            >
+              <recycle-scroller
+                v-if="virtualScroll"
+                ref="targetVirtualScroller"
+                class="n-virtual-scroller n-transfer-list-content"
+                :items="filteredTargetOptions"
+                :item-size="ITEM_SIZE"
+                key-field="value"
+              >
+                <template v-slot:before>
+                  <n-base-light-bar ref="targetLightBar" :item-size="ITEM_SIZE" :theme="synthesizedTheme" />
+                </template>
+                <template v-slot="{ item: option, index }">
+                  <n-transfer-target-list-item
+                    :key="option.value"
+                    :value="option.value"
+                    :disabled="!!option.disabled"
+                    :label="option.label"
+                    :index="index"
+                    @click="handleTargetCheckboxClick"
+                    @mouseenter="handleTargetOptionMouseEnter"
+                    @mouseleave="handleTargetOptionMouseLeave"
+                  />
+                </template>
+              </recycle-scroller>
+            </n-scrollbar>
+            <n-scrollbar v-else>
+              <div ref="targetList" class="n-transfer-list-content">
+                <n-base-light-bar ref="targetLightBar" :item-size="ITEM_SIZE" :theme="synthesizedTheme" />
+                <n-transfer-target-list-item
+                  v-for="(option, index) in filteredTargetOptions"
+                  ref="targetListItems"
+                  :key="option.value"
+                  :index="index"
+                  :value="option.value"
+                  :disabled="!!option.disabled"
+                  :label="option.label"
+                  @click="handleTargetCheckboxClick"
+                  @mouseenter="handleTargetOptionMouseEnter"
+                  @mouseleave="handleTargetOptionMouseLeave"
+                />
+              </div>
+            </n-scrollbar>
+          </template>
+          <n-empty v-else />
+        </div>
       </div>
     </div>
   </div>
@@ -155,12 +180,17 @@ import NTransferHeaderExtra from './TransferHeaderExtra'
 import NTransferSourceListItem from './TransferSourceListItem'
 import NTransferTargetListItem from './TransferTargetListItem'
 import NTransferButton from './TransferButton'
+import NInput from '../../Input'
+import NIcon from '../../Icon'
+import NEmpty from '../../Empty'
+import NBaseLightBar from '../../../base/LightBar'
+import iosSearch from '../../../icons/ios-search'
+import locale from '../../../mixins/locale'
 import asformitem from '../../../mixins/asformitem'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import { RecycleScroller } from 'vue-virtual-scroller'
 import debounce from 'lodash-es/debounce'
-import NBaseLightBar from '../../../base/LightBar'
 
 const ITEM_SIZE = 34
 
@@ -174,9 +204,13 @@ export default {
     NTransferTargetListItem,
     NTransferButton,
     NBaseLightBar,
+    NInput,
+    NIcon,
+    NEmpty,
+    iosSearch,
     RecycleScroller
   },
-  mixins: [withapp, themeable, asformitem()],
+  mixins: [withapp, themeable, locale('Transfer'), asformitem()],
   model: {
     prop: 'value',
     event: 'change'
@@ -197,6 +231,33 @@ export default {
     virtualScroll: {
       type: Boolean,
       default: false
+    },
+    sourceTitle: {
+      type: String,
+      default: null
+    },
+    targetTitle: {
+      type: String,
+      default: null
+    },
+    filterable: {
+      type: Boolean,
+      default: false
+    },
+    sourceFilterPlaceholder: {
+      type: String,
+      default: null
+    },
+    targetFilterPlaceholder: {
+      type: String,
+      default: null
+    },
+    filter: {
+      type: Function,
+      default: (pattern, option, from) => {
+        if (!pattern) return true
+        return ~('' + option.label).indexOf('' + pattern)
+      }
     }
   },
   provide () {
@@ -214,10 +275,22 @@ export default {
       enableSourceEnterAnimation: false,
       enableTargetEnterAnimation: false,
       initialized: false,
+      sourcePattern: '',
+      targetPattern: '',
       ITEM_SIZE
     }
   },
   computed: {
+    valueToOptionMap () {
+      const map = new Map()
+      this.options.forEach(option => {
+        map.set(option.value, option)
+      })
+      return map
+    },
+    valueSet () {
+      return Array.isArray(this.value) ? new Set(this.value) : new Set()
+    },
     sourceScrollContainer () {
       if (this.virtualScroll) {
         return () => (
@@ -272,13 +345,6 @@ export default {
     targetHeaderCheckboxChecked () {
       return this.targetCheckedValues.length === this.targetOptions.length && !!this.targetOptions.length
     },
-    valueToOptionMap () {
-      const map = new Map()
-      this.options.forEach(option => {
-        map.set(option.value, option)
-      })
-      return map
-    },
     sourceHeaderCheckboxIndeterminate () {
       return this.sourceCheckedValues.length !== 0 && this.sourceCheckedValues.length < this.memorizedSourceOptions.length
     },
@@ -292,9 +358,6 @@ export default {
     targetCheckedValueSet () {
       const valueToOptionMap = this.valueToOptionMap
       return new Set(this.targetCheckedValues.filter(value => valueToOptionMap.has(value)))
-    },
-    valueSet () {
-      return Array.isArray(this.value) ? new Set(this.value) : new Set()
     },
     sourceValueSet () {
       return this.mergedValueSet.sourceValueSet
@@ -327,6 +390,22 @@ export default {
         if (option !== undefined) targetOptions.push(option)
       })
       return targetOptions
+    },
+    filteredSourceOptions () {
+      const filterable = this.filterable
+      if (!filterable) return this.memorizedSourceOptions
+      const sourcePattern = this.sourcePattern
+      if (!sourcePattern.length) return this.memorizedSourceOptions
+      const filter = this.filter
+      return this.memorizedSourceOptions.filter(option => filter(sourcePattern, option, 'source'))
+    },
+    filteredTargetOptions () {
+      const filterable = this.filterable
+      if (!filterable) return this.targetOptions
+      const targetPattern = this.targetPattern
+      if (!targetPattern.length) return this.targetOptions
+      const filter = this.filter
+      return this.targetOptions.filter(option => filter(targetPattern, option, 'target'))
     }
   },
   watch: {
@@ -359,19 +438,23 @@ export default {
         return value.filter(v => valueToOptionMap.has(v))
       } else return null
     },
+    clearSourceCheck () {
+      const sourceValueSet = new Set(this.filteredSourceOptions.map(option => option.value))
+      this.sourceCheckedValues = this.sourceCheckedValues.filter(value => !sourceValueSet.has(value))
+    },
     handleSourceHeaderCheckboxChange (value) {
       if (this.sourceHeaderCheckboxIndeterminate) {
         if (!this.virtualScroll) {
           (this.$refs.sourceListItems || []).forEach(listItem => listItem.setChecked(false))
         }
-        this.sourceCheckedValues = []
+        this.clearSourceCheck()
         return
       }
       if (value) {
         if (!this.virtualScroll) {
           (this.$refs.sourceListItems || []).forEach(listItem => listItem.setChecked(true))
         }
-        const newValues = this.memorizedSourceOptions
+        const newValues = this.filteredSourceOptions
           .filter(option => !option.disabled)
           .map(option => option.value)
           .concat(this.sourceCheckedValues)
@@ -380,22 +463,26 @@ export default {
         if (!this.virtualScroll) {
           (this.$refs.sourceListItems || []).forEach(listItem => listItem.setChecked(false))
         }
-        this.sourceCheckedValues = []
+        this.clearSourceCheck()
       }
+    },
+    clearTargetCheck () {
+      const targetValueSet = new Set(this.filteredTargetOptions.map(option => option.value))
+      this.targetCheckedValues = this.targetCheckedValues.filter(value => !targetValueSet.has(value))
     },
     handleTargetHeaderCheckboxChange (value) {
       if (this.targetHeaderCheckboxIndeterminate) {
         if (!this.virtualScroll) {
           (this.$refs.targetListItems || []).forEach(listItem => listItem.setChecked(false))
         }
-        this.targetCheckedValues = []
+        this.clearTargetCheck()
         return
       }
       if (value) {
         if (!this.virtualScroll) {
           (this.$refs.targetListItems || []).forEach(listItem => listItem.setChecked(true))
         }
-        const newValues = this.targetOptions
+        const newValues = this.filteredTargetOptions
           .filter(option => !option.disabled)
           .map(option => option.value)
           .concat(this.targetCheckedValues)
@@ -404,7 +491,7 @@ export default {
         if (!this.virtualScroll) {
           (this.$refs.targetListItems || []).forEach(listItem => listItem.setChecked(false))
         }
-        this.targetCheckedValues = []
+        this.clearTargetCheck()
       }
     },
     handleTargetCheckboxClick (checked, optionValue) {
