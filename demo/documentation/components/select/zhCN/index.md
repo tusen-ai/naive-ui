@@ -27,7 +27,7 @@ action
 |loading|`boolean`|`false`||
 |clearable|`boolean`|`false`||
 |value|`Array \| string \| number`|`false`||
-|placeholder|`string`|`null`||
+|placeholder|`string`|`'请选择'`||
 |multiple|`boolean`|`false`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |disabled|`boolean`|`false`||

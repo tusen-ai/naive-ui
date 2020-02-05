@@ -31,6 +31,7 @@ autosize
 |clearable|`boolean`|`false`||
 |autosize|`boolean \| { minRows?: number, maxRows?: number }`|`false`||
 |readonly|`boolean`|`false`||
+|placeholder|`string`|`null`||
 
 ## Slots
 |属性|类型|介绍|

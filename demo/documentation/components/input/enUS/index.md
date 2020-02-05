@@ -32,6 +32,7 @@ split
 |clearable|`boolean`|`false`||
 |autosize|`boolean \| { minRows?: number, maxRows?: number }`|`false`||
 |readonly|`boolean`|`false`||
+|placeholder|`string`|`null`||
 
 ## Slots
 |Name|Parameters|Description|

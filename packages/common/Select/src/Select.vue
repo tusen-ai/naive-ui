@@ -21,7 +21,7 @@
       class="n-select-picker"
       :active="active"
       :pattern="pattern"
-      :placeholder="placeholder"
+      :placeholder="localizedPlaceholder"
       :selected-option="selectedOption"
       :selected-options="selectedOptions"
       :multiple="multiple"
@@ -103,6 +103,7 @@ import NBasePicker from '../../../base/Picker'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import asformitem from '../../../mixins/asformitem'
+import locale from '../../../mixins/locale'
 
 function patternMatched (pattern, value) {
   try {
@@ -121,7 +122,7 @@ export default {
   directives: {
     clickoutside
   },
-  mixins: [ withapp, themeable, detachable, placeable, zindexable, asformitem() ],
+  mixins: [ withapp, themeable, detachable, placeable, zindexable, locale('Select'), asformitem() ],
   model: {
     prop: 'value',
     event: 'change'
@@ -211,6 +212,12 @@ export default {
     }
   },
   computed: {
+    localizedPlaceholder () {
+      if (this.placeholder !== null) {
+        return this.placeholder
+      }
+      return this.localeNamespace.placeholder
+    },
     adpatedOptions () {
       /**
        * If use deprecated API, make it work at first
