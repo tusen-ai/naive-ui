@@ -4,8 +4,14 @@
 ```demo
 basic
 ```
+## Props
+|名称|类型|默认值|介绍|
+|-|-|-|-|
+|description|`string`|`'No Data'`||
+|show-description|`boolean`|`true`||
+
 ## Slots
 |名称|参数|介绍|
 |-|-|-|
-|default|`()`||
+|default|`()`|代替 description|
 |extra|`()`||

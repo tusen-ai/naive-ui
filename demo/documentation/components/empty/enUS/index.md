@@ -4,8 +4,14 @@ E<span style="opacity: 0;">mpt</span>y.
 ```demo
 basic
 ```
+## Props
+|Name|Type|Default|Description|
+|-|-|-|-|
+|description|`string`|`'No Data'`||
+|show-description|`boolean`|`true`||
+
 ## Slots
 |Name|Parameters|Description|
 |-|-|-|
-|default|`()`||
+|default|`()`|In place of description prop|
 |extra|`()`||

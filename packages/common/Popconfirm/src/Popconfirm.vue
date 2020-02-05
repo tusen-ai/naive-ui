@@ -9,11 +9,11 @@ export default {
     ...NPopover.props,
     positiveText: {
       type: String,
-      default: 'Confirm'
+      default: null
     },
     negativeText: {
       type: String,
-      default: 'Cancel'
+      default: null
     },
     showIcon: {
       type: Boolean,
