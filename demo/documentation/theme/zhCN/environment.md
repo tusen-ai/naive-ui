@@ -1,9 +1,9 @@
-# Theme Environment
-Sometimes you may need some component to access some values at specific theme. You can use `theme-environment`. Config Consumer & Element have access to theme environment.
+# 主题环境
+你有的时候可能需要让一些组件在特定主题下获取一些值，这个时候你可以设定环境主题。
 ```html
 <div>
-  <n-button @click="theme = 'dark'">Dark Theme</n-button>
-  <n-button @click="theme = 'light'">Light Theme</n-button>
+  <n-button @click="theme = 'dark'">深色主题</n-button>
+  <n-button @click="theme = 'light'">浅色主题</n-button>
 </div>
 <n-config-provider :theme="theme" :theme-environment="env">
   <n-config-consumer>
@@ -19,8 +19,8 @@ export default {
     return {
       theme: 'light',
       env: {
-        dark: 'NaCl',
-        light: 'Ionic Compound'
+        dark: '氯化钠',
+        light: '离子化合物'
       }
     }
   }

@@ -75,7 +75,7 @@ export default function (locale, instance) {
       // },
       {
         name: 'Create Themed Component',
-        title: '创建支持主题的组件',
+        title: '创建适配主题的组件',
         path: `/${instance.lang}/${instance.theme}` + '/n-theme'
       },
       appendCounts({

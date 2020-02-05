@@ -1,11 +1,11 @@
-# Use Naive Element
-Naive UI has n-element component. See [Element](n-element).
+# 使用元素（Element）组件
+Naive UI 提供元素组件，参考 [Element](n-element)。
 ```html
 <n-config-provider :theme="theme">
-  <n-button @click="theme = 'dark'">Dark</n-button>
-  <n-button @click="theme = 'light'">Light</n-button>
+  <n-button @click="theme = 'dark'">深色</n-button>
+  <n-button @click="theme = 'light'">浅色</n-button>
   <n-el as="span" class="oops">
-    I am a span
+    我是个 span 标签
   </n-el>
 </n-config-provider>
 ```

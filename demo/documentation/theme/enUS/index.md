@@ -9,4 +9,5 @@ read-theme
 themed-style
 element
 environment
+style-scheme
 ```
