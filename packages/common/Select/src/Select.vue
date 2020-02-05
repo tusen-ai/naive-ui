@@ -146,7 +146,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: 'Please Select'
+      default: null
     },
     multiple: {
       type: Boolean,

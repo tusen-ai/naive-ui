@@ -44,8 +44,8 @@ events
 |名称|类型|默认值|介绍|
 |-|-|-|-|
 |seperator|`string`|`'to'`||
-|start-placeholder|`string`|`'Start Date and Time`||
-|end-placeholder|`string`|`End Date and Time`||
+|start-placeholder|`string`|`'Start Date'`||
+|end-placeholder|`string`|`End Date'`||
 |is-date-disabled|`(current: number) => boolean`|`() => false`||
 |is-time-disabled|`(current: number) => { isHourDisabled: boolean, isMinuteDisabled: boolean, isSecondDisabled: boolean }`|`() => ({ isHourDisabled: () => false, isMinuteDisabled: () => false, isSecondDisabled: () => false }})`||
 
@@ -54,8 +54,8 @@ events
 |名称|类型|默认值|介绍|
 |-|-|-|-|
 |seperator|`string`|`'to'`||
-|start-placeholder|`string`|`'Start Date and Time`||
-|end-placeholder|`string`|`End Date and Time`||
+|start-placeholder|`string`|`'Start Date and Time'`||
+|end-placeholder|`string`|`'End Date and Time'`||
 |is-date-disabled|`(current: number) => boolean`|`() => false`||
 |is-time-disabled|`(current: number) => { isHourDisabled: boolean, isMinuteDisabled: boolean, isSecondDisabled: boolean }`|`() => ({ isHourDisabled: () => false, isMinuteDisabled: () => false, isSecondDisabled: () => false }})`||
 
