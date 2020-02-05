@@ -73,7 +73,7 @@
       v-if="showQuickJumper"
       class="n-pagination-quick-jumper"
     >
-      Goto <n-input
+      {{ localeNamespace.goto }} <n-input
         v-model="quickJumperValue"
         size="small"
         :disabled="disabled"
@@ -83,7 +83,7 @@
     <n-select
       v-if="showSizePicker"
       size="small"
-      placeholder="Select Page Size"
+      placeholder=""
       :options="pageSizeOptions"
       :value="pageSize"
       :disabled="disabled"
@@ -99,6 +99,7 @@ import NSelect from '../../Select'
 import NInput from '../../Input'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import locale from '../../../mixins/locale'
 
 export default {
   name: 'NPagination',
@@ -107,7 +108,7 @@ export default {
     NInput,
     NBaseIcon
   },
-  mixins: [ withapp, themeable ],
+  mixins: [ withapp, themeable, locale('Pagination') ],
   model: {
     prop: 'page',
     event: 'change'
@@ -176,8 +177,9 @@ export default {
       return 1
     },
     pageSizeOptions () {
+      const suffix = this.localeNamespace.selectionSuffix
       return this.pageSizes.map(size => ({
-        label: `${size} / page`,
+        label: `${size} / ${suffix}`,
         value: size
       }))
     },
