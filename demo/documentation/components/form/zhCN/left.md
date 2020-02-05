@@ -1,4 +1,4 @@
-# Label Placement Left
+# 标签左置
 ```html
 <n-form
   :model="model"

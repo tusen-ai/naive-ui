@@ -1,5 +1,5 @@
-# Inline Form
-A Example of inline form.
+# 行内表单
+一个行内表单的例子。
 ```html
 <n-form
   inline

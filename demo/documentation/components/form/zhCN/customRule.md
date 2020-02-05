@@ -1,5 +1,5 @@
-# Custom Rules
-You can custom you valiation by setting custom trigger in rules.
+# 自定义规则
+你可以通过设定自定的 trigger 来控制验证。
 ```html
 <n-form :model="model" ref="form" :rules="rules">
   <n-form-item-row path="age" label="Age">

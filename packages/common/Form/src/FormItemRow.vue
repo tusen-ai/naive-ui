@@ -14,6 +14,11 @@ export default {
       if (this.$refs.formItemCol) {
         return this.$refs.formItemCol.validate(...args)
       }
+    },
+    clearValidationEffect (...args) {
+      if (this.$refs.formItem) {
+        return this.$refs.formItem.clearValidationEffect(...args)
+      }
     }
   },
   render (h) {
