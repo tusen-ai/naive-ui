@@ -23,8 +23,8 @@ use-component
 |title|`string \| function`|`null`|可以是 render 函数|
 |closable|`boolean`|`boolean`||
 |icon|`function`|`null`|需要是 render 函数|
-|negative-text|`string`|`null`||
-|positive-text|`string`|`null`||
+|negative-text|`string`|`null`|不填对应的按钮不会出现|
+|positive-text|`string`|`null`|不填对应的按钮不会出现|
 |content|`string \| function`|`null`|可以是 render 函数|
 |show-icon|`boolean`|`true`||
 |loading|`boolean`|`false`||
@@ -43,8 +43,8 @@ use-component
 |title|`string \| function`|可以是 render 函数|
 |closable|`boolean`||
 |icon|`function`|需要是 render 函数|
-|negative-text|`string`||
-|positive-text|`string`||
+|negative-text|`string`|不填对应的按钮不会出现|
+|positive-text|`string`|不填对应的按钮不会出现|
 |content|`string \| function`|可以是 render 函数|
 |show-icon|`boolean`||
 |loading|`boolean`||
@@ -66,8 +66,8 @@ use-component
 |title|`string \| function`|`null`|可以是 render 函数|
 |closable|`boolean`|`boolean`||
 |icon|`function`|`null`|需要是 render 函数|
-|negative-text|`string`|`null`||
-|positive-text|`string`|`null`||
+|negative-text|`string`|`null`|不填对应的按钮不会出现|
+|positive-text|`string`|`null`|不填对应的按钮不会出现|
 |content|`string \| function`|`null`|可以是 render 函数|
 |show-icon|`boolean`|`true`||
 |loading|`boolean`|`false`||

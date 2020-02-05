@@ -23,8 +23,8 @@ use-component
 |title|`string \| function`|`null`|Can be a render function.|
 |closable|`boolean`|`boolean`||
 |icon|`function`|`null`|Should be a render function.|
-|negative-text|`string`|`'Cancel'`||
-|positive-text|`string`|`'Confirm'`||
+|negative-text|`string`|`null`|Corresponding button won't show if not set.|
+|positive-text|`string`|`null`|Corresponding button won't show if not set.|
 |content|`string \| function`|`null`|Can be a render function.|
 |show-icon|`boolean`|`true`||
 |loading|`boolean`|`false`||
@@ -42,9 +42,9 @@ Properties of ConfirmEnvironment can be modified
 |type|`'error \| 'success' \| 'warning'`||
 |title|`string \| function`|Can be a render function.|
 |closable|`boolean`||
-|icon|`function`|Should be a render function|
-|negative-text|`string`||
-|positive-text|`string`||
+|icon|`function`|Should be a render function.|
+|negative-text|`string`|Corresponding button won't show if not set.|
+|positive-text|`string`|Corresponding button won't show if not set.|
 |content|`string \| function`|Can be a render function.|
 |show-icon|`boolean`||
 |loading|`boolean`||
@@ -66,8 +66,8 @@ Properties of ConfirmEnvironment can be modified
 |title|`string \| function`|`null`|Can be a render function.|
 |closable|`boolean`|`boolean`||
 |icon|`function`|`null`|Should be a render function|
-|negative-text|`string`|`null`||
-|positive-text|`string`|`null`||
+|negative-text|`string`|`null`|Corresponding button won't show if not set.|
+|positive-text|`string`|`null`|Corresponding button won't show if not set.|
 |content|`string \| function`|`null`|Can be a render function.|
 |show-icon|`boolean`|`true`||
 |loading|`boolean`|`false`||
