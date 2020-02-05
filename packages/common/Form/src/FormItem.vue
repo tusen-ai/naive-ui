@@ -253,18 +253,14 @@ export default {
           if (valid) {
             if (afterValidate) {
               afterValidate()
-            } else {
-              resolve()
             }
+            resolve()
           } else {
             if (afterValidate) {
               afterValidate(errors)
-            } else {
-              // eslint-disable-next-line prefer-promise-reject-errors
-              reject({
-                errors
-              })
             }
+            // eslint-disable-next-line prefer-promise-reject-errors
+            reject(errors)
           }
         })
       })
