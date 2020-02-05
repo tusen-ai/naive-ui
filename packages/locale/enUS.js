@@ -34,5 +34,12 @@ export default {
     endDatePlaceholder: 'End Date',
     startDatetimePlaceholder: 'Start Date and Time',
     endDatetimePlaceholder: 'End Date and Time'
+  },
+  Transfer: {
+    sourceTitle: 'Source',
+    targetTitle: 'Target'
+  },
+  Empty: {
+    description: 'No Data'
   }
 }

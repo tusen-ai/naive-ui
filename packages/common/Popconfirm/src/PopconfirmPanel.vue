@@ -55,7 +55,7 @@ export default {
     NIcon,
     mdAlert
   },
-  mixins: [ locale ],
+  mixins: [ locale('Popconfirm') ],
   props: {
     positiveText: {
       type: String,
@@ -81,10 +81,10 @@ export default {
   },
   computed: {
     localizedPositiveText () {
-      return this.t('Popconfirm', 'positiveText') || this.positiveText
+      return this.positiveText || this.localeNamespace.positiveText
     },
     localizedNegativeText () {
-      return this.t('Popconfirm', 'negativeText') || this.negativeText
+      return this.negativeText || this.localeNamespace.negativeText
     }
   },
   methods: {

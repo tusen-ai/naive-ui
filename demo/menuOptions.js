@@ -237,7 +237,7 @@ export default function (locale, instance) {
           },
           {
             name: 'Time Picker',
-            title: renderTitle('事件选择器', 'Time Picker'),
+            title: renderTitle('时间选择器', 'Time Picker'),
             path: `/${instance.lang}/${instance.theme}` + '/n-time-picker'
           },
           {
@@ -263,7 +263,7 @@ export default function (locale, instance) {
           },
           {
             name: 'Descriptions',
-            title: renderTitle('穿梭框描述', 'Descriptions'),
+            title: renderTitle('描述', 'Descriptions'),
             path: `/${instance.lang}/${instance.theme}` + '/n-descriptions'
           },
           {

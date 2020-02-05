@@ -181,7 +181,7 @@ export default {
     detachable,
     placeable,
     zindexable,
-    locale,
+    locale('DatePicker'),
     asformitem()
   ],
   model: {
@@ -264,9 +264,6 @@ export default {
     }
   },
   computed: {
-    localeNamespace () {
-      return this.tns('DatePicker')
-    },
     isRange () {
       return ['daterange', 'datetimerange'].includes(this.type)
     },

@@ -92,6 +92,9 @@
         line-height: $--input-icon-size;
         height: $--input-icon-size;
         width: $--input-icon-size;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         @include b(icon) {
           font-size: $--input-icon-size;
         }

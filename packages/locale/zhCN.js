@@ -34,5 +34,12 @@ export default {
     endDatePlaceholder: '结束日期',
     startDatetimePlaceholder: '开始日期时间',
     endDatetimePlaceholder: '结束日期时间'
+  },
+  Transfer: {
+    sourceTitle: '源项',
+    targetTitle: '目标项'
+  },
+  Empty: {
+    description: '无数据'
   }
 }

@@ -78,6 +78,7 @@ export default {
     ) {
       this.enableEnterAnimation = true
     }
+    if (this.NTransfer.targetCheckedValues.includes(this.value)) this.checked = true
   },
   methods: {
     setChecked (checked) {

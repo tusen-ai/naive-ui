@@ -11,10 +11,10 @@
     </div>
     <div v-if="showDescription" class="n-empty__description">
       <slot>
-        {{ description }}
+        {{ localizedDescription }}
       </slot>
     </div>
-    <div v-if="$slots.default" class="n-empty__extra">
+    <div v-if="$slots.extra" class="n-empty__extra">
       <slot name="extra" />
     </div>
   </div>
@@ -23,6 +23,7 @@
 <script>
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import locale from '../../../mixins/locale'
 import iosRemoveCircleOutline from '../../../icons/ios-remove-circle-outline'
 
 export default {
@@ -30,15 +31,20 @@ export default {
   components: {
     iosRemoveCircleOutline
   },
-  mixins: [ withapp, themeable ],
+  mixins: [ withapp, themeable, locale('Empty') ],
   props: {
     description: {
       type: String,
-      default: 'No Data'
+      default: null
     },
     showDescription: {
       type: Boolean,
       default: true
+    }
+  },
+  computed: {
+    localizedDescription () {
+      return this.description || this.localeNamespace.description
     }
   }
 }

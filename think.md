@@ -112,22 +112,22 @@ Previously, it would not work with single quotes:
 
 ## TODO
 Focus Detector on Time Selector
-Select 需要进一步重构，现在这种状况 collector 在 corner case 中不会调 updated 钩子，要把 key 换成 value
 Menu Root Indent = 0 可以造成问题
-Md Loader 对于 strong 的处理
 用 RAF 优化 scrollbar 性能
 Anchor 切换有 bug，忽然闪现第一个
 Notification content close
 Safari select lightbar container overflow 边角
 Chrome lightbar offset @table fitler
-cascader
-form required css
+cascader 数据结构维护，维持原选项！
 anchor 还是有点问题 bound 不够的时候切换
 modal transform scale
 form async validation
 table filter
 tabs 尺寸变化
+排查 render 函数是否每个地方都支持数组
 
+// form required css
+// Md Loader 对于 strong 的处理
 // pref hollowout, cache next bg color
 // issue fix, add delay prop
 // add trigger to tooltip
@@ -136,3 +136,4 @@ tabs 尺寸变化
 // Scrollbar Firefox...
 // scrollbar 在 resize 之后滚动会有问题
 // ResizeObserver Polyfill
+// Select 需要进一步重构，现在这种状况 collector 在 corner case 中不会调 updated 钩子，要把 key 换成 value
