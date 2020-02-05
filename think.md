@@ -126,6 +126,7 @@ anchor 还是有点问题 bound 不够的时候切换
 modal transform scale
 form async validation
 table filter
+tabs 尺寸变化
 
 // pref hollowout, cache next bg color
 // issue fix, add delay prop

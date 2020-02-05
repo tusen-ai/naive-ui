@@ -2,11 +2,13 @@
 {
   "zh-CN": {
     "dark": "深色",
-    "light": "浅色"
+    "light": "浅色",
+    "searchPlaceholder": "搜索组件"
   },
   "en-US": {
     "dark": "Dark",
-    "light": "Light"
+    "light": "Light",
+    "searchPlaceholder": "Search Components"
   }
 }
 </i18n>
@@ -20,7 +22,7 @@
     <div style="width: 200px; margin-left: 48px;">
       <n-auto-complete
         v-model="searchInputValue"
-        placeholder="Search in Naive UI"
+        :placeholder="$t('searchPlaceholder')"
         :options="searchOptions"
         clear-after-select
         blur-after-select
