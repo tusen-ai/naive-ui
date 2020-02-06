@@ -69,11 +69,11 @@ export default {
       default: undefined
     },
     /** private */
-    inPopover: {
+    insidePopover: {
       type: Boolean,
       default: false
     },
-    showSubmenuArrow: {
+    submenuCollapsable: {
       type: Boolean,
       default: true
     }

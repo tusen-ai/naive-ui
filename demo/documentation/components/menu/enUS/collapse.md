@@ -63,11 +63,22 @@
           </n-icon>
         </template>
         <n-submenu title="2007" name="2007">
+          <template v-slot:icon>
+            <n-icon>
+              <md-contacts />
+            </n-icon>
+          </template>
           <n-submenu title="2008" name="2008">
             <n-menu-item title="2009" name="2009"></n-menu-item>
             <n-menu-item title="2010" name="2010"></n-menu-item>
           </n-submenu>
-          <n-menu-item title="2011" name="2011"></n-menu-item>
+          <n-menu-item title="2011" name="2011">
+            <template v-slot:icon>
+              <n-icon>
+                <md-contacts />
+              </n-icon>
+            </template>
+          </n-menu-item>
         </n-submenu>
       </n-submenu>
     </n-menu>

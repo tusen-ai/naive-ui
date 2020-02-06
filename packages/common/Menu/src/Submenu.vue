@@ -5,26 +5,26 @@
       'n-submenu--selected-inside': selectedInside
     }"
   >
-    <template v-if="isFirstLevel">
+    <template v-if="renderContentAsPopover">
       <n-popover
         trigger="hover"
         placement="right-start"
         :show-arrow="false"
-        :disabled="!renderedAsPopover"
+        :disabled="!rootMenuCollapsed"
         :overlay-style="{
           paddingTop: '8px',
           paddingBottom: '8px'
         }"
       >
         <template v-slot:activator>
-          <n-submenu-header
+          <n-submenu-item
             :padding-left="delayedPaddingLeft"
             :collapsed="synthesizedCollapsed"
             :disabled="disabled"
             :max-icon-size="maxIconSize"
             :active-icon-size="activeIconSize"
             :title="title"
-            :show-arrow="showArrow"
+            :show-arrow="true"
             @click="handleClick"
           >
             <template v-slot:icon>
@@ -33,20 +33,18 @@
             <template v-slot:header>
               <slot name="header" />
             </template>
-          </n-submenu-header>
+          </n-submenu-item>
         </template>
         <n-menu
           :style="{
             width: '272px'
           }"
-          :show-submenu-arrow="false"
           :root-indent="24"
           :indent="24"
-          in-popover
-          :value="popMenuValue"
-          :open-names="popMenuOpenNames"
+          :inside-popover="true"
+          :submenu-collapsable="false"
+          :value="rootMenuValue"
           @select="handlePopMenuSelect"
-          @open-names-change="handlePopMenuOpenNamesChange"
         >
           <slot />
         </n-menu>
@@ -61,14 +59,14 @@
       </fade-in-height-expand-transition>
     </template>
     <template v-else>
-      <n-submenu-header
+      <n-submenu-item
         :padding-left="delayedPaddingLeft"
         :collapsed="synthesizedCollapsed"
         :disabled="disabled"
         :max-icon-size="maxIconSize"
         :active-icon-size="activeIconSize"
         :title="title"
-        :show-arrow="showArrow"
+        :show-arrow="!rootMenuInsidePopover"
         @click="handleClick"
       >
         <template v-slot:icon>
@@ -77,7 +75,7 @@
         <template v-slot:header>
           <slot name="header" />
         </template>
-      </n-submenu-header>
+      </n-submenu-item>
       <fade-in-height-expand-transition>
         <ul
           v-show="!synthesizedCollapsed"
@@ -93,17 +91,19 @@
 <script>
 import FadeInHeightExpandTransition from '../../../transition/FadeInHeightExpandTransition'
 import NPopover from '../../../common/Popover'
-import NSubmenuHeader from './SubmenuHeader'
+import NSubmenuItem from './SubmenuItem'
 import NMenu from './Menu'
+import menuContentMixin from './menuContentMixin'
 
 export default {
   name: 'NSubmenu',
   components: {
-    NSubmenuHeader,
+    NSubmenuItem,
     FadeInHeightExpandTransition,
     NPopover,
     NMenu
   },
+  mixins: [menuContentMixin],
   props: {
     value: {
       type: Number,
@@ -119,7 +119,7 @@ export default {
     },
     disabled: {
       type: Boolean,
-      default: false
+      default: undefined
     }
   },
   data () {
@@ -132,68 +132,20 @@ export default {
     selectedInside () {
       return this.menuItemNames.includes(this.NMenu.value)
     },
-    renderedAsPopover () {
-      return this.useCollapsedIconSize
-    },
-    useCollapsedIconSize () {
-      return this.NMenu.collapsed && this.isFirstLevel
-    },
-    maxIconSize () {
-      return Math.max(this.collapsedIconSize, this.iconSize)
-    },
-    activeIconSize () {
-      if (this.useCollapsedIconSize) {
-        return this.collapsedIconSize
-      } else {
-        return this.iconSize
-      }
-    },
-    iconSize () {
-      return this.NMenu && this.NMenu.iconSize
-    },
-    collapsedIconSize () {
-      return this.NMenu.collapsedIconSize || this.NMenu.iconSize
-    },
-    isFirstLevel () {
-      return !this.NSubmenu && !this.NMenuItemGroup
+    renderedContentAsPopover () {
+      return this.rootMenuCollapsed && this.atRoot
     },
     synthesizedDisabled () {
-      return (this.NMenu && this.NMenu.disabled) || this.disabled
+      if (this.disabled !== undefined) return this.undefined
+      return this.NMenu && this.NMenu.disabled
     },
-    paddingLeft () {
-      if (this.isFirstLevel && this.NMenu.collapsedWidth !== null && this.NMenu.collapsed) {
-        return this.NMenu.collapsedWidth / 2 - this.iconSize / 2
-      }
-      if (this.NMenuItemGroup) {
-        return this.NMenu.indent / 2 + this.NMenuItemGroup.paddingLeft
-      } else if (this.NSubmenu) {
-        return this.NMenu.indent + this.NSubmenu.paddingLeft
-      } else {
-        return this.NMenu.rootIndent || this.NMenu.indent
-      }
-    },
-    rootMenuCollapsed () {
-      return this.NMenu.collapsed
-    },
-    rootMenuInPopover () {
-      return this.NMenu.inPopover
-    },
-    selfCollapsed () {
+    collapsedAccrodingToOpenNames () {
       return !this.NMenu.synthesizedOpenNames.includes(this.name)
     },
     synthesizedCollapsed () {
-      if (this.rootMenuInPopover) return false
+      if (!this.NMenu.submenuCollapsable) return false
       else if (this.rootMenuCollapsed) return true
-      return this.selfCollapsed
-    },
-    popMenuValue () {
-      return this.NMenu.value
-    },
-    popMenuOpenNames () {
-      return this.NMenu.synthesizedOpenNames
-    },
-    showArrow () {
-      return this.NMenu.showSubmenuArrow
+      return this.collapsedAccrodingToOpenNames
     }
   },
   watch: {
@@ -209,17 +161,6 @@ export default {
       NMenuItemGroup: null
     }
   },
-  inject: {
-    NMenu: {
-      default: null
-    },
-    NSubmenu: {
-      default: null
-    },
-    NMenuItemGroup: {
-      default: null
-    }
-  },
   created () {
     this.delayedPaddingLeft = this.paddingLeft
   },
@@ -232,9 +173,6 @@ export default {
     },
     handlePopMenuSelect (value) {
       this.NMenu.handleSelect(value)
-    },
-    handlePopMenuOpenNamesChange (value) {
-      this.NMenu.handleOpenNamesChange(value)
     }
   }
 }

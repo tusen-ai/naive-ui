@@ -17,7 +17,7 @@
             @include e(icon) {
               transition: none !important;
             }
-            @include e(header){ 
+            @include b(menu-item-header) {
               transition: none !important;
             }
           }
@@ -36,20 +36,13 @@
       @include b(menu-list) {
         @include b(menu-item) {
           @include b(menu-item-wrapper) {
-            @include e(header) {
+            @include b(menu-item-header) {
               opacity: 0;
             }
           }
         }
       }
       @include b(submenu) {
-        @include m(selected-inside) {
-          @include b(submenu-item) {
-            @include e(icon) {
-              fill: $--primary-6;
-            }
-          }
-        }
         @include b(submenu-item) {
           @include e(icon) {
             fill: $--n-text-color;
@@ -69,9 +62,6 @@
         list-style: none;
         margin: 0;
         padding: 0;
-      }
-      @include b(menu-item-wrapper) {
-        list-style: none;
       }
       @include b(menu-item) {
         @include once {
@@ -95,7 +85,7 @@
               align-items: center;
               justify-content: center;
             }
-            @include e(header) {
+            @include b(menu-item-header) {
               transition: color .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier;
               opacity: 1;
               flex-grow: 1;
@@ -107,42 +97,51 @@
             cursor: not-allowed;
           }
         }
-        @include e(icon) {
-          fill: $--n-secondary-text-color;
-        }
-        @include e(header) {
-          color: $--n-secondary-text-color;
-        }
-        &:hover {
+        @include b(menu-item-wrapper) {
           @include e(icon) {
-            fill: $--primary-6;
+            fill: $--n-secondary-text-color;
           }
-          @include e(header) {
-            color: $--primary-6;
+          @include b(menu-item-header) {
+            color: $--n-secondary-text-color;
+            @include e(extra) {
+              @include once {
+                white-space: nowrap;
+                margin-left: 6px;
+                display: inline-block;
+                transition: color 0.3s $--n-ease-in-out-cubic-bezier;
+              }
+              color: $--n-meta-text-color;
+            }
+          }
+          &:hover {
+            @include e(icon) {
+              fill: $--primary-6;
+            }
+            @include b(menu-item-header) {
+              color: $--primary-6;
+              @include e(extra) {
+                color: $--primary-6;
+              }
+            }
           }
         }
         @include m(selected) {
           background-color: $--menu-item-background-color;
-          @include e(icon) {
-            fill: $--primary-6;
-          }
-          @include e(header) {
-            color: $--primary-6;
+          @include b(menu-item-wrapper) {
+            @include e(icon) {
+              fill: $--primary-6;
+            }
+            @include b(menu-item-header) {
+              color: $--primary-6;
+              @include e(extra) {
+                color: $--primary-6;
+              }
+            }
           }
         }
       }
     }
     @include b(submenu) {
-      @include m(selected-inside) {
-        @include b(submenu-item) {
-          @include e(header) {
-            color: $--primary-6
-          }
-          @include e(icon) {
-            fill: $--primary-6
-          }
-        }
-      }
       @include once {
         cursor: pointer;
         position: relative; 
@@ -150,6 +149,18 @@
           padding: 0;
           list-style: none;
           @include fade-in-height-expand-transition($duration: .2s);
+        }
+      }
+      @include m(selected-inside) {
+        & > {
+          @include b(submenu-item) {
+            @include e(header) {
+              color: $--primary-6
+            }
+            @include e(icon) {
+              fill: $--primary-6;
+            }
+          }
         }
       }
       @include b(submenu-item) {

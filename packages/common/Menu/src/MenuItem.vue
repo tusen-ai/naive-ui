@@ -8,40 +8,47 @@
     }"
     @click="handleClick"
   >
-    <template v-if="isFirstLevel">
+    <template v-if="renderContentAsPopover">
       <n-tooltip
         placement="right"
-        show-arrow
         :disabled="!rootMenuCollapsed"
       >
         <template v-slot:activator>
-          <n-menu-item-header
+          <n-menu-item-content-wrapper
             :max-icon-size="maxIconSize"
             :active-icon-size="activeIconSize"
             :title="title"
+            :title-extra="titleExtra"
             @click="handleClick"
           >
             <template v-slot:icon>
               <slot name="icon" />
             </template>
+            <template v-slot:header-extra>
+              <slot name="header-extra" />
+            </template>
             <slot />
-          </n-menu-item-header>
+          </n-menu-item-content-wrapper>
         </template>
         {{ title }}
       </n-tooltip>
     </template>
-    <n-menu-item-header
+    <n-menu-item-content-wrapper
       v-else
       :max-icon-size="maxIconSize"
       :active-icon-size="activeIconSize"
       :title="title"
+      :title-extra="titleExtra"
       @click="handleClick"
     >
       <template v-slot:icon>
         <slot name="icon" />
       </template>
+      <template v-slot:header-extra>
+        <slot name="header-extra" />
+      </template>
       <slot />
-    </n-menu-item-header>
+    </n-menu-item-content-wrapper>
   </li>
 </template>
 
@@ -49,13 +56,14 @@
 import collectable from '../../../mixins/collectable'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
-import NMenuItemHeader from './MenuItemHeader'
+import NMenuItemContentWrapper from './MenuItemContentWrapper'
 import NTooltip from '../../Tooltip'
+import menuContentMixin from './menuContentMixin'
 
 export default {
   name: 'NMenuItem',
   components: {
-    NMenuItemHeader,
+    NMenuItemContentWrapper,
     NTooltip
   },
   mixins: [
@@ -63,19 +71,9 @@ export default {
       return this.NMenu !== injection.NMenu
     }),
     withapp,
-    themeable
+    themeable,
+    menuContentMixin
   ],
-  inject: {
-    NMenu: {
-      default: null
-    },
-    NSubmenu: {
-      default: null
-    },
-    NMenuItemGroup: {
-      default: null
-    }
-  },
   props: {
     value: {
       type: Number,
@@ -85,13 +83,17 @@ export default {
       type: [ String, Function ],
       default: null
     },
+    titleExtra: {
+      type: [ String, Function ],
+      default: null
+    },
     name: {
       type: String,
       required: true
     },
     disabled: {
       type: Boolean,
-      default: false
+      default: undefined
     }
   },
   data () {
@@ -100,48 +102,12 @@ export default {
     }
   },
   computed: {
-    rootMenuCollapsed () {
-      return this.NMenu.collapsed
-    },
-    useCollapsedIconSize () {
-      return this.NMenu.collapsed && this.isFirstLevel
-    },
-    maxIconSize () {
-      return Math.max(this.collapsedIconSize, this.iconSize)
-    },
-    activeIconSize () {
-      if (this.useCollapsedIconSize) {
-        return this.collapsedIconSize
-      } else {
-        return this.iconSize
-      }
-    },
-    collapsedIconSize () {
-      return this.NMenu.collapsedIconSize || this.NMenu.iconSize
-    },
-    iconSize () {
-      return this.NMenu.iconSize
-    },
-    isFirstLevel () {
-      return !this.NSubmenu && !this.NMenuItemGroup
-    },
-    paddingLeft () {
-      if (this.isFirstLevel && this.NMenu.collapsedWidth !== null && this.NMenu.collapsed) {
-        return this.NMenu.collapsedWidth / 2 - this.collapsedIconSize / 2
-      }
-      if (this.NMenuItemGroup) {
-        return this.NMenu.indent / 2 + this.NMenuItemGroup.paddingLeft
-      } else if (this.NSubmenu) {
-        return this.NMenu.indent + this.NSubmenu.paddingLeft
-      } else {
-        return this.NMenu.rootIndent || this.NMenu.indent
-      }
-    },
     synthesizedDisabled () {
-      return ((this.NSubmenu && this.NSubmenu.synthesizedDisabled) || this.disabled)
+      if (this.disabled !== undefined) return this.disabled
+      return this.NSubmenu && this.NSubmenu.synthesizedDisabled
     },
     selected () {
-      if (this.NMenu.value === this.name) {
+      if (this.rootMenuValue === this.name) {
         return true
       } else {
         return false

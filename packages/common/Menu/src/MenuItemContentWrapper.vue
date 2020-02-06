@@ -11,9 +11,14 @@
     >
       <slot name="icon" />
     </div>
-    <div class="n-menu-item-wrapper__header">
+    <div class="n-menu-item-header">
       <slot>
         <render :render="title" />
+      </slot>
+      <slot name="header-extra">
+        <span class="n-menu-item-header__extra">
+          <render v-if="titleExtra" :render="titleExtra" />
+        </span>
       </slot>
     </div>
   </div>
@@ -23,7 +28,7 @@
 import render from '../../../utils/render'
 
 export default {
-  name: 'NMenuItemHeader',
+  name: 'NMenuItemContentWrapper',
   components: {
     render
   },
@@ -37,6 +42,10 @@ export default {
       default: null
     },
     title: {
+      type: [String, Function],
+      default: null
+    },
+    titleExtra: {
       type: [String, Function],
       default: null
     }

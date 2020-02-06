@@ -31,7 +31,7 @@
   </span>
 </n-tooltip>
 <n-tooltip
-  v-model="showPopover"
+  :show="showPopover"
   placement="bottom"
   trigger="manual"
   @show="handleShow"

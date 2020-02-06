@@ -33,7 +33,7 @@
 import render from '../../../utils/render'
 
 export default {
-  name: 'NSubmenuHeader',
+  name: 'NSubmenuItem',
   components: {
     render
   },

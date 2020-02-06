@@ -45,11 +45,11 @@ export default {
     }
   },
   computed: {
-    isFirstLevel () {
+    atRoot () {
       return !this.NSubmenu && !this.NMenuItemGroup
     },
     paddingLeft () {
-      if (this.isFirstLevel) {
+      if (this.atRoot) {
         return this.NMenu.rootIndent === null ? this.NMenu.indent : this.NMenu.rootIndent
       }
       if (this.NMenuItemGroup) {

@@ -14,6 +14,7 @@ export default {
         return items.map(item => {
           const props = {
             title: item.title,
+            titleExtra: item.titleExtra,
             name: item.name,
             disabled: !!item.disabled
           }
