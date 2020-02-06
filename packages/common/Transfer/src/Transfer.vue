@@ -256,7 +256,7 @@ export default {
       type: Function,
       default: (pattern, option, from) => {
         if (!pattern) return true
-        return ~('' + option.label).indexOf('' + pattern)
+        return ~('' + option.label).toLowerCase().indexOf(('' + pattern).toLowerCase())
       }
     }
   },
