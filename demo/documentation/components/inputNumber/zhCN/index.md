@@ -16,7 +16,7 @@ validator
 |value|change|
 
 ## Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |value|`number`|`null`||
 |step|`number`|`1`||
@@ -28,7 +28,7 @@ validator
 |placeholder|`string`|`null`||
 
 ## Events
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |change|`(value: number)`||
 |blur|`(value: number \| null)`||

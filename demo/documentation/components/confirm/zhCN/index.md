@@ -9,7 +9,7 @@ use-component
 ```
 ## API
 ### $NConfirm API
-|名称|类型|介绍|
+|名称|类型|说明|
 |-|-|-|
 |warning|`(options: ConfirmOption) => ConfirmEnvironment`||
 |success|`(options: ConfirmOption) => ConfirmEnvironment`||
@@ -17,7 +17,7 @@ use-component
 |destroyAll|`() => void`||
 
 ### ConfirmOption API
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
 |title|`string \| function`|`null`|可以是 render 函数|
@@ -37,7 +37,7 @@ use-component
 #### ConfirmEnvironment Properties
 下列属性都可以被动态修改。
 
-|名称|类型|介绍|
+|名称|类型|说明|
 |-|-|-|
 |type|`'error \| 'success' \| 'warning'`||
 |title|`string \| function`|可以是 render 函数|
@@ -54,13 +54,13 @@ use-component
 |onClose|`(hide: function) => any`||
 
 #### ConfirmEnvironment Methods
-|名称|类型|介绍|
+|名称|类型|说明|
 |-|-|-|
 |hide|`()`|关闭 Confirm|
 
 ## Props
 ### Confirm Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
 |title|`string \| function`|`null`|可以是 render 函数|
@@ -75,7 +75,7 @@ use-component
 
 ## Events
 ### Confirm Events
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |positive-click|`()`||
 |negative-click|`()`||
@@ -83,7 +83,7 @@ use-component
 
 ## Slots
 ### Confirm Slots
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |icon|`()`||
 |header|`()`||

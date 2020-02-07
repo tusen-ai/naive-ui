@@ -7,13 +7,13 @@ theme-environment
 color
 ```
 ## Events
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |theme-change|`(theme: string)`||
 |namespace-change|`(namespace: string)`||
 |language-change|`(language: string)`||
 
 ## Slots
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |default|`({ theme: string, namespace: string, language: string, themeEnvironment: any, styleScheme: object })`||

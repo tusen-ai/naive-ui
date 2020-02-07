@@ -2,7 +2,7 @@
 
 ## Prequisites
 
-<n-alert title="Note" type="warning">
+<n-alert title="Note" type="warning" style="margin-bottom: 16px;">
   Due to package size, Naive UI doesn't include highlight.js. If you want use Code, make sure you have set highlightjs before using it.
 </n-alert>
 

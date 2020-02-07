@@ -22,7 +22,7 @@ action
 |value|change|
 
 ## Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |loading|`boolean`|`false`||
 |clearable|`boolean`|`false`||
@@ -37,7 +37,7 @@ action
 
 ## API
 ### SelectOption Type
-|属性|类型|介绍|
+|属性|类型|说明|
 |-|-|-|
 |label|`string`||
 |value|`string \| number`|在选项中应该是唯一的|
@@ -45,19 +45,19 @@ action
 |render|`function`||
 
 ### SelectOptionGroup Type
-|属性|类型|介绍|
+|属性|类型|说明|
 |-|-|-|
 |type|`'group'`||
 |name|`string`||
 |children|`Array<SelectOption>`||
 
 ## Slots
-|名称|介绍|
+|名称|说明|
 |-|-|
 |action||
 
 ## Event
-|名称|类型|介绍|
+|名称|类型|说明|
 |-|-|-|
 |change|`(value: Array \| string \| number \| null)`||
 |search|`(value: string)`||

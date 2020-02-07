@@ -12,7 +12,7 @@ targetContainerSelector
 ```
 
 ## Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |target|`() => HTMLElement`|一个返回最邻近可滚动父级元素的函数||
 |right|`number`|`40`||
@@ -21,7 +21,7 @@ targetContainerSelector
 |themed-style|`object`|`null`||
 
 ## Events
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |show|`()`||
 |hide|`()`||

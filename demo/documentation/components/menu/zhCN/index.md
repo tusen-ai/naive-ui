@@ -62,7 +62,7 @@ collapse
 |名称|参数|说明|
 |-|-|-|
 |default|`()`||
-|extra|`()`|Meta info near title|
+|extra|`()`|标题旁边的额外信息|
 |icon|`()`||
 
 ### Submenu Slots

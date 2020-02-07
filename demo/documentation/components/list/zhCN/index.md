@@ -8,20 +8,20 @@ border
 ```
 ## Props
 ### List Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |bordered|`boolean`|`false`||
 
 ## Slots
 ### List Slots
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |header|`()`||
 |default|`()`||
 |footer|`()`||
 
 ### List Item Slots
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |prefix|`()`||
 |default|`()`||

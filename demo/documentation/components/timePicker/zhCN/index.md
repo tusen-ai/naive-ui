@@ -12,7 +12,7 @@ disabledTime
 |value|change|
 
 ## Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |placeholder|`string`|`'请选择时间'`||
 |value|`number`|`null`||
@@ -21,7 +21,7 @@ disabledTime
 |is-second-disabled|`(second: number, minute: number, hour: number) => boolean`|`() => false`||
 
 ## Events
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |change|`(value: number \| null)`||
 |blur|`(value: number \| null)`||

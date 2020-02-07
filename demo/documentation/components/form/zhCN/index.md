@@ -11,7 +11,7 @@ left
 ```
 ## Props
 ### Form Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |inline|`boolean`|`false`||
 |label-width|`number`|`null`|标签的宽度，在 `label-placement` 是 `'left'` 的时候可能会有用|
@@ -22,7 +22,7 @@ left
 |show-require-mark|`boolean`|`true`|在表项是必填的时候是不是展示星号|
 
 #### FormItemRule Type
-|属性|类型|介绍|
+|属性|类型|说明|
 |-|-|-|
 |required|`boolean`||
 |validator|`(rule: FormItemRule, value: any) => boolean \| Error`||
@@ -30,7 +30,7 @@ left
 |message|`string`||
 
 ### Form Item Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |label|`string`|`null`||
 |label-width|`number`|`null`|如果没有被设定，使用外层表单的 label-align|
@@ -59,13 +59,13 @@ left
   </n-ol>
 </n-alert>
 
-|名称|类型|介绍|
+|名称|类型|说明|
 |-|-|-|
 |validate|`(validateCallback?: (errors?: Array<ValidationError>) => any) => Promise<void>`|验证表单。Promise rejection 的返回值类型是 `Array<ValidationError>`。|
 |clearValidationEffect|`() => void`||
 
 ### Form Item, Form Item Row, Form Item Col Methods
-|名称|类型|介绍|
+|名称|类型|说明|
 |-|-|-|
 |validate|`(trigger?: string, validateCallback?: (errors?: Array<ValidationError>) => any, options?: AsyncValidatorOptions) => Promise<void>`|验证表项，Promise rejection 的返回值类型是 `Array<ValidationError>`。如果不传 trigger，这一个表项全部的 Rules 都会被使用。|
 |clearValidationEffect|`() => void`||
@@ -74,6 +74,6 @@ left
 
 ## Slots
 ### Form, Form Item, Form Item Row, Form Item Col Methods
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |default|`()`||

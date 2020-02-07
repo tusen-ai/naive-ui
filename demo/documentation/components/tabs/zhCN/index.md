@@ -11,14 +11,14 @@ V-model 暂时不对外暴露，名字没起好。
 
 ## Props
 ### Tabs Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |type|`'line' \| 'card'`|`'line'`||
 |closable|`boolean`|`false`||
 |justify-content|`'space-between' \| 'space-around' \| 'space-evenly'`|`null`||
 
 ### Tab Panel Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |label|`string`|`null`||
 |name|`string \| number`|`null`|**required**|
@@ -26,6 +26,6 @@ V-model 暂时不对外暴露，名字没起好。
 
 ## Slots
 ### Tabs, Tab Panel Slots
-|名称|类型|介绍|
+|名称|类型|说明|
 |-|-|-|
 |default|`()`||

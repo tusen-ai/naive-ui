@@ -12,12 +12,12 @@ push-pull
 
 ## Props
 ### Row Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |gutter|`number \| Array`| `0` | `水平间隔` or `[水平间隔, 垂直间隔]`|
 
 ### Col Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |span|`number`|1||
 |offset|`number`|0||

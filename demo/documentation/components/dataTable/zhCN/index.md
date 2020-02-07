@@ -28,7 +28,7 @@ ajaxUsage
 ```
 
 ## Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |data|`Array<object>`|`[]`|需要展示的数据|
 |columns|`Array<Column>`||需要展示的列，**必需**|
@@ -46,7 +46,7 @@ ajaxUsage
 ## Methods
 这些方法可以帮助你在非受控的状态下改变表格，但是，并不推荐在异步的状况下使用这些方法。如果需要异步操作，最好用**受控**的方式使用表格。
 
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |filters|`( columnKey: string \| number, filterOptionValue: string \| number } \| Array<{ columnKey: string \| number, filterOptionValue: string \| number }>)`||
 |sort|`(columnKey: string \| null, order: 'ascend' \| 'descend' \| false)`|如果 columnKey 设为 `null`，那它和 clearSorter 效果一致|
@@ -56,7 +56,7 @@ ajaxUsage
 
 
 ## Events
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |filters-change|`(Array<{ columnKey: string \| number, filterOptionValue: string \| number }>, initiatorColumn: object)`||
 |sorter-change|`({ columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null)`|如果在变动后没有激活的排序，那么 sorter-change 将发出 `null`|
@@ -66,7 +66,7 @@ ajaxUsage
 
 ## API
 ### Column Type
-|属性|类型|默认值|介绍|
+|属性|类型|默认值|说明|
 |-|-|-|-|
 |render|`(h, rowData: object) => VNode \| Array<VNode>`|`null`|渲染函数，渲染这一列的每一行的单元格|
 |type|`'default' \| 'selection'`|`default`||

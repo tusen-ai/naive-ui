@@ -13,7 +13,7 @@ filterable
 |value|change|
 
 ## Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |value|`Array<string \| number>`|`null`||
 |options|`Array<TransferOption>`|`[]`||
@@ -27,14 +27,14 @@ filterable
 |filter|`(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean`|一个简单的标签字符串匹配函数||
 
 ### TransferOption Type
-|属性|类型|介绍|
+|属性|类型|说明|
 |-|-|-|
 |label|`string`||
 |value|`string \| number`|选项的 value，需要唯一|
 |disabled|`boolean`||
 
 ## Events
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |change|`(Array<string \| number>)`||
 

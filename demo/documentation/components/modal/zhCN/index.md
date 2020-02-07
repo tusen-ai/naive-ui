@@ -17,7 +17,7 @@ preset-confirm-slot
 
 ## Props
 ### Modal
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |show|`boolean`|`false`||
 |mask-closable|`boolean`|`true`||
@@ -30,7 +30,7 @@ preset-confirm-slot
 
 ## Slots
 ### Modal（无预设）
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |default|`()`||
 
@@ -41,7 +41,7 @@ preset-confirm-slot
 
 ## Events
 ### Modal
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |hide|`()`||
 

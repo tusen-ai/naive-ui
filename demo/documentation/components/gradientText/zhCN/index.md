@@ -9,13 +9,13 @@ custom
 ```
 
 ## Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`||**必需**|
 |size|`number`|`null`||
 |gradient|`string \| object`|`null`||
 
 ## Slots
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |default|`()`||

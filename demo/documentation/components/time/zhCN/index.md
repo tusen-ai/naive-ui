@@ -9,7 +9,7 @@ relative
 unix
 ```
 ## Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |time|`number \| Date`|`null`||
 |type|`'relative' \| 'date' \| 'datetime'`|`'relative'`||

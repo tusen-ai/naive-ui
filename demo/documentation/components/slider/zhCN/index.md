@@ -13,7 +13,7 @@ mark
 |value|change|
 
 ## Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |marks|`{ [markValue: number]: string }`|||
 |disabled|`boolean`|`false`||
@@ -24,7 +24,7 @@ mark
 |value|`number \| [number, number]`|`null`|
 
 ## Events
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |change|`(value: number \| [number, number])`||
 

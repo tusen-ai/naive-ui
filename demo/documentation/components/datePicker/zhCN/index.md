@@ -19,7 +19,7 @@ events
 
 ## Props
 ### 通用的 Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |value|`number`|`null`||
 |actions|`Array<'clear' \| 'now' \| 'confirm'>`|`null`||
@@ -28,20 +28,20 @@ events
 
 
 ### Date 类型的 Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |placeholder|`string`|`'Select Date'`||
 |is-date-disabled|`(current: number) => boolean`|`() => false`||
 
 ### DateTime 类型的 Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |placeholder|`string`|`'Select Date and Time'`||
 |is-date-disabled|`(current: number) => boolean`|`() => false`||
 |is-time-disabled|`(current: number) => { isHourDisabled: boolean, isMinuteDisabled: boolean, isSecondDisabled: boolean }`|`() => ({ isHourDisabled: () => false, isMinuteDisabled: () => false, isSecondDisabled: () => false }})`||
 
 ### DateRange 类型的 Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |seperator|`string`|`'to'`||
 |start-placeholder|`string`|`'Start Date'`||
@@ -51,7 +51,7 @@ events
 
 
 ### DateTimeRange 类型的 Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |seperator|`string`|`'to'`||
 |start-placeholder|`string`|`'Start Date and Time'`||
@@ -61,13 +61,13 @@ events
 
 ## Events
 ### Date, DateTime 类型的 Events
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |change|`(currentValue: number \| null)`||
 |blur|`(currentValue: number \| null)`||
 
 ### DateRange, DateTimeRange 类型的 Events
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |change|`(currentValue: [number, number] \| null)`||
 |blur|`(currentValue: [number, number] \| null)`||

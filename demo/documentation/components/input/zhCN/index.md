@@ -18,7 +18,7 @@ autosize
 |value|input|
 
 ## Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |type|`'text' \| 'password' \| 'textarea'`|`'text'`||
 |value|`string \| [string \| null, string \| null]`|`null`||
@@ -34,13 +34,13 @@ autosize
 |placeholder|`string`|`null`||
 
 ## Slots
-|属性|类型|介绍|
+|属性|类型|说明|
 |-|-|-|
 |affix|`()`||
 |suffix|`()`||
 
 ## Events
-|属性|类型|介绍|
+|属性|类型|说明|
 |-|-|-|
 |input|`(value: string)`||
 |change|`(value: string)`||

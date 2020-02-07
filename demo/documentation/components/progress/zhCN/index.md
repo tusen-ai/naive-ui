@@ -10,7 +10,7 @@ color
 no-indicator
 ```
 ## Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |processing|`boolean`|`false`||
 |type|`'line' \| 'circle' \| 'multiple-circle'`|`line`||
@@ -26,6 +26,6 @@ no-indicator
 |circle-gap|`number`|`1`|当类型是 `'multiple-circle'` 的时候圈之间的距离，假设 viewbox 的尺寸是 100|
 
 ## Slots
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |default|`()`|指示标里的内容|
