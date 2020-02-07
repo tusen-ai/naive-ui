@@ -1,0 +1,1 @@
+<template><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><title>ionicons-v5-a</title><polygon points="240 80 248 320 264 320 272 80 240 80" style="fill:none;stroke-linecap:square;stroke-miterlimit:10;stroke-width:32px"/><rect x="240" y="400" width="32" height="32" style="fill:none;stroke-linecap:square;stroke-miterlimit:10;stroke-width:32px"/></svg></template>

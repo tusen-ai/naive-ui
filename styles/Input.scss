@@ -170,6 +170,7 @@
       }
       @include b(icon) {
         fill: $--input-icon-color;
+        stroke: $--input-icon-color;
       }
     }
     @include e(input, textarea) {
@@ -212,6 +213,7 @@
       @include e(suffix, affix) {
         @include b(icon) {
           fill: map-get($--input-placeholder-color, 'disabled');
+          stroke: map-get($--input-placeholder-color, 'disabled');
         }
       }
       @include e(splitor) {

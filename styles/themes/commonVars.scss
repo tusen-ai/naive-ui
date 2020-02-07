@@ -1,5 +1,7 @@
 $--n-font-family: 'FiraSans';
 
+$--n-ease-in-out-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
+
 $--n-mono-font-family: 'FiraCode', monospace;
 
 $--n-height: (
@@ -34,3 +36,5 @@ $--table-fixed-column-box-shadow: (0 0 12px 0 rgba(0, 0, 0, .18));
 $--slider-rail-height: 4px;
 $--slider-dot-size: 8px;
 $--slider-handle-size: 14px;
+
+$--icon-transition: (fill .3s $--n-ease-in-out-cubic-bezier, stroke .3s $--n-ease-in-out-cubic-bezier);

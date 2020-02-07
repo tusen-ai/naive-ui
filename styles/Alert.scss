@@ -9,6 +9,7 @@
     @include e(icon) {
       @include b(icon) {
         fill: map-get($--alert-icon-color, $type);
+        stroke: map-get($--alert-icon-color, $type);
       }
     }
     @include b(alert-body) {
@@ -106,6 +107,7 @@
     @include e(close) {
       @include b(icon) {
         fill: $--alert-color-fill;
+        stroke: $--alert-color-fill;
       }
     }
     @include alert-type-mixin('default');

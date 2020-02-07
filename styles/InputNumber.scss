@@ -26,6 +26,7 @@
         background: map-get($--input-number-button-background-color, 'disabled');
         @include b(icon) {
           fill: map-get($--input-number-button-text-color, 'disabled');
+          stroke: map-get($--input-number-button-text-color, 'disabled');
         }
         pointer-events: none;
       }
@@ -73,6 +74,7 @@
       justify-content: center;
       @include b(icon) {
         fill: map-get($--input-number-button-text-color, 'default');
+        stroke: map-get($--input-number-button-text-color, 'default');
       }
       font-size: 14px;
       transition: background-color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier;
@@ -95,6 +97,7 @@
         background-color: map-get($--input-number-button-background-color, 'disabled');
         @include b(icon) {
           fill: map-get($--input-number-button-text-color, 'disabled');
+          stroke: map-get($--input-number-button-text-color, 'disabled');
         }
       }
     }

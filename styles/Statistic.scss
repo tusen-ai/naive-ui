@@ -19,9 +19,9 @@
         @include b(icon) {
           @include once {
             vertical-align: -0.125em;
-            transition: .3s fill $--n-ease-in-out-cubic-bezier;
           }
           fill: $--statistic-value-prefix-text-color;
+          stroke: $--statistic-value-prefix-text-color;
         }
       }
       @include e(content) {
@@ -40,9 +40,9 @@
         @include b(icon) {
           @include once {
             vertical-align: -0.125em;
-            transition: .3s fill $--n-ease-in-out-cubic-bezier;
           }
           fill: $--statistic-value-prefix-text-color;
+          stroke: $--statistic-value-prefix-text-color;
         }
       }
     }

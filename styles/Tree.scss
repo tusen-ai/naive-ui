@@ -35,6 +35,7 @@
       vertical-align: bottom;
       @include b(icon) {
         fill: $--n-secondary-text-color;
+        stroke: $--n-secondary-text-color;
       }
       @include m(hide) {
         visibility: hidden

@@ -13,7 +13,10 @@
         width: 28px;
         height: 28px;
       }
-      fill: $--empty-icon-fill;
+      @include b(icon) {
+        fill: $--empty-icon-fill;
+        stroke: $--empty-icon-fill;
+      }
     }
     @include e(description) {
       @include once {

@@ -12,8 +12,8 @@
         }
       }
       @include b(icon) {
-        transition: fill .3s $--n-ease-in-out-cubic-bezier;
         fill: map-get($--breadcrumb-link-text-color, 'default');
+        stroke: map-get($--breadcrumb-link-text-color, 'default');
       }
       @include e(link) {
         @include once {
@@ -32,6 +32,7 @@
       &:hover {
         @include b(icon) {
           fill: map-get($--breadcrumb-link-text-color, 'hover');
+          stroke: map-get($--breadcrumb-link-text-color, 'hover');
         }
         @include e(link) {
           color: map-get($--breadcrumb-link-text-color, 'hover');
@@ -44,6 +45,7 @@
         }
         @include b(icon) {
           fill: map-get($--breadcrumb-link-text-color, 'active');
+          stroke: map-get($--breadcrumb-link-text-color, 'active');
         }
         @include once {
           @include e(seperator) {

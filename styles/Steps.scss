@@ -86,6 +86,7 @@ $--steps-indicator-icon-size: (
         }
         @include b(icon) {
           fill: map-get($--steps-step-indicator-color, $status);
+          stroke: map-get($--steps-step-indicator-color, $status);
         }
       }
     }

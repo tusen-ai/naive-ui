@@ -24,8 +24,8 @@
       @include avatar-size-mixin('medium');
       @include avatar-size-mixin('large');
       @include b(icon) {
-        transition: fill .3s $--n-ease-in-out-cubic-bezier;
         fill: white;
+        stroke: white;
         vertical-align: bottom;
       }
       color: white;

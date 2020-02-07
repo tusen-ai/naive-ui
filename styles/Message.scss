@@ -8,6 +8,7 @@
     @include e(icon) {
       @include b(icon) {
         fill: $--message-icon-color;
+        stroke: $--message-icon-color;
       }
     }
   }

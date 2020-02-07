@@ -5,6 +5,7 @@
     @include b(result-icon) {
       @include b(icon) {
         fill: map-get($--result-icon-fill, $status);
+        stroke: map-get($--result-icon-fill, $status);
       }
     }
   }

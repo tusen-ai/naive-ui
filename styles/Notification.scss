@@ -42,6 +42,7 @@
     @include e(avatar) {
       @include b(icon) {
         fill: map-get($--notification-avatar-fill, $type);
+        stroke: map-get($--notification-avatar-fill, $type);
       }
     }
   }
@@ -115,6 +116,7 @@
       }
       @include b(icon) {
         fill: $--notification-close-fill;
+        stroke: $--notification-close-fill;
       }
     }
     @include e(avatar) {

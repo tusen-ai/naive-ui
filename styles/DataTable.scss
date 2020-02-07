@@ -202,7 +202,7 @@
             }
             @include b(icon) {
               fill: change-color($--n-secondary-text-color, $alpha: .2);
-              transition: fill .2s $--n-ease-in-out-cubic-bezier;
+              stroke: change-color($--n-secondary-text-color, $alpha: .2);
               font-size: 14px;
             }
           }
@@ -216,6 +216,7 @@
               background-color: $--overlay-8;
               @include b(icon) {
                 fill: $--n-primary-color;
+                stroke: $--n-primary-color;
               }
             }
           }
