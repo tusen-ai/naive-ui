@@ -1,11 +1,10 @@
-# Opened Submenu
-You can set `default-open-names` to make menu work in an uncontrolled manner or use `open-names` and `@open-names-change` to make it work in a controlled manner.
+# Indent
+You can specify `indent` & `root-indent` of the menu. `root-indent` only determines the first-leveled children.
 ```html
 <n-menu
   v-model="activeName"
-  :default-open-names="defaultOpenNames"
-  @open-names-change="handleOpenNamesChange"
-  @select="handleSelect"
+  :root-indent="36"
+  :indent="12"
 >
   <n-menu-item title="Hear the Wind Sing" name="hear-the-wind-sing">
     <template v-slot:icon>
@@ -79,16 +78,7 @@ export default {
   },
   data () {
     return {
-      defaultOpenNames: ['dance-dance-dance', 'food'],
       activeName: null
-    }
-  },
-  methods: {
-    handleSelect (value) {
-      this.$NMessage.info('Select: ' + JSON.stringify(value))
-    },
-    handleOpenNamesChange (value) {
-      this.$NMessage.info('OpenNamesChange: ' + JSON.stringify(value))
     }
   }
 }

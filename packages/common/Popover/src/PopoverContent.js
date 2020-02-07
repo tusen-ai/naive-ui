@@ -78,6 +78,10 @@ export default {
     detached: {
       type: Boolean,
       default: true
+    },
+    directive: {
+      type: String,
+      default: 'if'
     }
   },
   mixins: [withapp, themeable, asthemecontext, placeable, zindexable],
@@ -102,6 +106,7 @@ export default {
   },
   watch: {
     active (value) {
+      console.log('popover content active change', value)
       if (value) {
         this.$parent.transferElement()
         this.$emit('show')
@@ -227,6 +232,23 @@ export default {
     }
   },
   render (h) {
+    const vShow = this.directive === 'show'
+    const directives = [
+      {
+        name: 'clickoutside',
+        value: this.handleClickOutside
+      },
+      {
+        name: 'mousemoveoutside',
+        value: this.handleMouseMoveOutside
+      }
+    ]
+    if (vShow) {
+      directives.push({
+        name: 'show',
+        value: this.active
+      })
+    }
     return h('div', {
       staticClass: 'n-positioning-container',
       class: {
@@ -252,7 +274,7 @@ export default {
             }
           }
         }, [
-          this.active ? h('div', {
+          (vShow || this.active) ? h('div', {
             attrs: {
               'n-placement': this.adjustedPlacement
             },
@@ -265,16 +287,7 @@ export default {
               'n-popover-content--fix-width': this.width !== null || this.maxWidth !== null
             },
             style: this.style,
-            directives: [
-              {
-                name: 'clickoutside',
-                value: this.handleClickOutside
-              },
-              {
-                name: 'mousemoveoutside',
-                value: this.handleMouseMoveOutside
-              }
-            ],
+            directives,
             on: {
               mouseenter: this.handleMouseEnter,
               mouseleave: this.handleMouseLeave

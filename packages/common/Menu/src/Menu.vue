@@ -27,6 +27,10 @@ export default {
     }
   },
   mixins: [withapp, themeable],
+  model: {
+    prop: 'value',
+    model: 'select'
+  },
   props: {
     collapsed: {
       type: Boolean,
@@ -36,13 +40,21 @@ export default {
       type: Number,
       default: null
     },
+    iconSize: {
+      type: Number,
+      default: 20
+    },
     collapsedIconSize: {
       type: Number,
-      default: undefined
-    },
-    value: {
-      type: String,
       default: null
+    },
+    overlayWidth: {
+      type: Number,
+      default: null
+    },
+    overlayMinWidth: {
+      type: Number,
+      default: 180
     },
     rootIndent: {
       type: Number,
@@ -52,21 +64,21 @@ export default {
       type: Number,
       default: 32
     },
-    mode: {
-      type: String,
-      default: 'vertical'
-    },
-    iconSize: {
-      type: Number,
-      default: 20
-    },
     defaultOpenNames: {
       type: Array,
-      default: undefined
+      default: () => []
     },
     openNames: {
       type: Array,
       default: undefined
+    },
+    value: {
+      type: String,
+      default: null
+    },
+    mode: {
+      type: String,
+      default: 'vertical'
     },
     /** private */
     insidePopover: {
@@ -81,7 +93,7 @@ export default {
   data () {
     return {
       transitionDisabled: true,
-      internalOpenNames: this.openNames || this.defaultOpenNames || []
+      internalOpenNames: this.openNames || this.defaultOpenNames
     }
   },
   computed: {

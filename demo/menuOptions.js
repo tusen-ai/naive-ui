@@ -34,28 +34,28 @@ const appendCounts = item => {
   }
 }
 
-function renderTitle (main, meta) {
-  return h => {
-    return h('n-config-consumer', {
-      props: {
-        transparent: true
-      },
-      scopedSlots: {
-        default: ({ styleScheme }) => {
-          return h('span', {
-          }, [ main, ' ', h('span', {
-            style: {
-              marginLeft: '6px',
-              color: styleScheme.tertiaryTextColor,
-              fontWeight: '400',
-              transition: `color .3s ${styleScheme.easeInOutCubicBezier}`
-            }
-          }, [ meta ])])
-        }
-      }
-    })
-  }
-}
+// function renderTitle (main, meta) {
+//   return h => {
+//     return h('n-config-consumer', {
+//       props: {
+//         transparent: true
+//       },
+//       scopedSlots: {
+//         default: ({ styleScheme }) => {
+//           return h('span', {
+//           }, [ main, ' ', h('span', {
+//             style: {
+//               marginLeft: '6px',
+//               color: styleScheme.tertiaryTextColor,
+//               fontWeight: '400',
+//               transition: `color .3s ${styleScheme.easeInOutCubicBezier}`
+//             }
+//           }, [ meta ])])
+//         }
+//       }
+//     })
+//   }
+// }
 
 export default function (locale, instance) {
   if (locale === 'zh-CN') {

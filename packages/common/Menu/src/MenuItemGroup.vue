@@ -1,6 +1,6 @@
 <template>
   <li class="n-menu-item-group">
-    <span class="n-menu-item-group-title" :style="{ paddingLeft: paddingLeft + 'px' }">
+    <span class="n-menu-item-group-title" :style="{ paddingLeft: delayedPaddingLeft && delayedPaddingLeft + 'px' }">
       <slot name="header"><render :render="title" /></slot>
     </span>
     <div>

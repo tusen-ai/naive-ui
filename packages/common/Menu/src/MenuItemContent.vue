@@ -1,17 +1,19 @@
 <template>
   <div
-    class="n-submenu-item"
-    :style="{ paddingLeft: paddingLeft + 'px' }"
+    class="n-menu-item-content"
+    :style="{ paddingLeft: paddingLeft && (paddingLeft + 'px') }"
     :class="{
-      'n-submenu-item--collapsed': collapsed,
-      'n-submenu-item--active': !collapsed,
-      'n-submenu-item--disabled': disabled
+      'n-menu-item-content--collapsed': collapsed,
+      'n-menu-item-content--child-selected': childSelected,
+      'n-menu-item-content--selected': selected,
+      'n-menu-item-content--disabled': disabled,
+      'n-menu-item-content--hover': hover
     }"
     @click="handleClick"
   >
     <div
       v-if="$slots.icon"
-      class="n-submenu-item__icon"
+      class="n-menu-item-content__icon"
       :style="{
         width: maxIconSize && (maxIconSize + 'px'),
         height: maxIconSize && (maxIconSize + 'px'),
@@ -20,12 +22,17 @@
     >
       <slot name="icon" />
     </div>
-    <div class="n-submenu-item__header">
+    <div class="n-menu-item-content-header">
       <slot name="header">
         <render :render="title" />
       </slot>
+      <slot name="header-extra">
+        <span class="n-menu-item-content-header__extra">
+          <render v-if="titleExtra" :render="titleExtra" />
+        </span>
+      </slot>
     </div>
-    <div v-if="showArrow" class="n-submenu-item__arrow" />
+    <div v-if="showArrow" class="n-menu-item-content__arrow" />
   </div>
 </template>
 
@@ -33,7 +40,7 @@
 import render from '../../../utils/render'
 
 export default {
-  name: 'NSubmenuItem',
+  name: 'NMenuItemContent',
   components: {
     render
   },
@@ -62,7 +69,23 @@ export default {
       type: [String, Function],
       default: null
     },
+    titleExtra: {
+      type: [String, Function],
+      default: null
+    },
     showArrow: {
+      type: Boolean,
+      default: false
+    },
+    selected: {
+      type: Boolean,
+      default: false
+    },
+    childSelected: {
+      type: Boolean,
+      default: false
+    },
+    hover: {
       type: Boolean,
       default: false
     }

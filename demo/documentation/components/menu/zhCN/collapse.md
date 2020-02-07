@@ -1,5 +1,5 @@
-# Collapsed Menu
-Use collapsable vertical menu with layout sider. Use `collapsed` to control collapse status of menu. You must set `collapsed-width` to make it collapse in a right manner. There are still some other collapse related props you can modify: `icon-size`, `collapsed-icon-size`, `overlay-width`, `overlay-max-width`. For details see API table at the bottom of the page.
+# 压缩菜单
+可以让垂直菜单随着边栏压缩。使用 `collapsed` 属性控制菜单状态。必需设定 `collapsed-width` 来确保菜单正常显示。除此之外还有一些其他和压缩有关的属性：`icon-size`、`collapsed-icon-size`、`overlay-width`、`overlay-max-width`。详细信息参考页面底下的 API 文档。
 ```html
 <n-switch v-model="collapsed" />
 <n-layout>
@@ -18,43 +18,43 @@ Use collapsable vertical menu with layout sider. Use `collapsed` to control coll
       :collapsed-icon-size="22"
       v-model="activeMenuItemName"
     >
-      <n-menu-item title="Hear the Wind Sing" name="hear-the-wind-sing">
+      <n-menu-item title="且听风吟" name="hear-the-wind-sing">
         <template v-slot:icon>
           <n-icon>
             <book-icon />
           </n-icon>
         </template>
       </n-menu-item>
-      <n-submenu title="Pinball, 1973" name="pinball-1973" disabled>
+      <n-submenu title="1973年的弹珠玩具" name="pinball-1973" disabled>
         <template v-slot:icon>
           <n-icon>
             <book-icon />
           </n-icon>
         </template>
-        <n-menu-item title="Rat" name="rat" />
+        <n-menu-item title="鼠" name="rat" />
       </n-submenu>
-      <n-menu-item title="A Wild Sheep Chase" name="a-wild-sheep-chase" disabled>
+      <n-menu-item title="寻羊冒险记" name="a-wild-sheep-chase" disabled>
         <template v-slot:icon>
           <n-icon>
             <book-icon />
           </n-icon>
         </template>
       </n-menu-item>
-      <n-submenu title="Dance Dance Dance" name="dance-dance-dance">
+      <n-submenu title="舞，舞，舞" name="dance-dance-dance">
         <template v-slot:icon>
           <n-icon>
             <book-icon />
           </n-icon>
         </template>
-        <n-menu-item-group title="Characters">
-          <n-menu-item title="Narrator" name="narrator">
+        <n-menu-item-group title="人物">
+          <n-menu-item title="叙事者" name="narrator">
             <template v-slot:icon>
               <n-icon>
                 <person-icon />
               </n-icon>
             </template>
           </n-menu-item>
-          <n-menu-item title="Sheep Man" name="sheep-man">
+          <n-menu-item title="羊男" name="sheep-man">
             <template v-slot:icon>
               <n-icon>
                 <person-icon />
@@ -62,18 +62,18 @@ Use collapsable vertical menu with layout sider. Use `collapsed` to control coll
             </template>
           </n-menu-item>
         </n-menu-item-group>
-        <n-submenu title="Beverage" name="beverage">
+        <n-submenu title="饮品" name="beverage">
           <template v-slot:icon>
             <n-icon>
               <wine-icon />
             </n-icon>
           </template>
-          <n-menu-item title="Whisky" name="whisky" />
+          <n-menu-item title="威士忌" name="whisky" />
         </n-submenu>
-        <n-submenu title="Food" name="food">
-          <n-menu-item title="Sandwich" name="sandwich" />
+        <n-submenu title="食物" name="food">
+          <n-menu-item title="三明治" name="sandwich" />
         </n-submenu>
-        <n-menu-item title="The past increases. The future recedes." name="the-past-increases-the-future-recedes" />
+        <n-menu-item title="过去增多，未来减少" name="the-past-increases-the-future-recedes" />
       </n-submenu>
     </n-menu>
   </n-layout-sider>

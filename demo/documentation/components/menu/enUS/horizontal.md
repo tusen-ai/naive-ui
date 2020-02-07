@@ -1,11 +1,9 @@
-# Opened Submenu
-You can set `default-open-names` to make menu work in an uncontrolled manner or use `open-names` and `@open-names-change` to make it work in a controlled manner.
+# Horizontal
+A horiziontal menu.
 ```html
 <n-menu
   v-model="activeName"
-  :default-open-names="defaultOpenNames"
-  @open-names-change="handleOpenNamesChange"
-  @select="handleSelect"
+  mode="horizontal"
 >
   <n-menu-item title="Hear the Wind Sing" name="hear-the-wind-sing">
     <template v-slot:icon>
@@ -79,16 +77,8 @@ export default {
   },
   data () {
     return {
-      defaultOpenNames: ['dance-dance-dance', 'food'],
-      activeName: null
-    }
-  },
-  methods: {
-    handleSelect (value) {
-      this.$NMessage.info('Select: ' + JSON.stringify(value))
-    },
-    handleOpenNamesChange (value) {
-      this.$NMessage.info('OpenNamesChange: ' + JSON.stringify(value))
+      activeName: null,
+      collapsed: true
     }
   }
 }

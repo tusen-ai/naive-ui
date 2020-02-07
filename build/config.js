@@ -4,7 +4,7 @@ exports.alias = {
   main: path.resolve(__dirname, '../src'),
   packages: path.resolve(__dirname, '../packages'),
   examples: path.resolve(__dirname, '../examples'),
-  'naive-ui/lib': path.resolve(__dirname, '../lib')
+  'naive-ui/lib/icons': path.resolve(__dirname, '../packages/icons')
 }
 
 exports.docLoaders = [
