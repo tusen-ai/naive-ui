@@ -7,7 +7,8 @@
       'n-menu-item-content--child-selected': childSelected,
       'n-menu-item-content--selected': selected,
       'n-menu-item-content--disabled': disabled,
-      'n-menu-item-content--hover': hover
+      'n-menu-item-content--hover': hover,
+      'n-menu-item-content--uncollapsable': uncollapsable
     }"
     @click="handleClick"
   >
@@ -86,6 +87,10 @@ export default {
       default: false
     },
     hover: {
+      type: Boolean,
+      default: false
+    },
+    uncollapsable: {
       type: Boolean,
       default: false
     }

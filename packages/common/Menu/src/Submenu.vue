@@ -74,6 +74,7 @@
         :title="title"
         :title-extra="titleExtra"
         :show-arrow="!rootMenuInsidePopover"
+        :uncollapsable="rootMenuInsidePopover"
         :child-selected="selectedInside"
         @click="handleClick"
       >
