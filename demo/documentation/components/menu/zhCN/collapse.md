@@ -79,7 +79,7 @@
   </n-layout-sider>
   <n-layout>
     <n-layout-content>
-      <span>Content</span>
+      <span>内容</span>
     </n-layout-content>
   </n-layout>
 </n-layout>
