@@ -38,7 +38,7 @@ export default {
     },
     model: {
       type: Object,
-      required: true
+      default: () => {}
     },
     rules: {
       type: Object,

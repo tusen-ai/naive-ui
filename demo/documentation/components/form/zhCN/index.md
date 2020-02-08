@@ -17,7 +17,7 @@ left
 |label-width|`number`|`null`|标签的宽度，在 `label-placement` 是 `'left'` 的时候可能会有用|
 |label-align|`'left' \| 'right'`|`'left'`|标签的文本对齐方式|
 |label-placement|`'left' \| 'top'`|`'top'`||
-|model|`object`||获取表项中收集到的值的对象|
+|model|`object`|`{}`|获取表项中收集到的值的对象|
 |rules|`type FormRules = { [itemValidatePath: string]: FormItemRule \| Array<FormItemRule> \| FormRules }`|`{}`|验证表项的规则|
 |show-require-mark|`boolean`|`true`|在表项是必填的时候是不是展示星号|
 
