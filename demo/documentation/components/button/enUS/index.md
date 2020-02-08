@@ -17,9 +17,10 @@ debug
 ### Button Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|size|`'small' \| 'medium' \| 'large'`|`'medium'`
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |type|`'default' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'`|`'default'`||
 |text|`boolean`|`false`||
+|block|`boolean`|`false`||
 |ghost|`boolean`|`false`||
 |disabled|`boolean`|`false`||
 |circle|`boolean`|`false`||
@@ -30,6 +31,7 @@ debug
 ### Button Group Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|size|`'small' \| 'medium' \| 'large'`|`null`|The buttons' size in button group. If set, the button's size prop inner group won't work.|
 |vertical|`boolean`|`false`||
 
 ## Slots
