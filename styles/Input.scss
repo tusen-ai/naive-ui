@@ -68,6 +68,9 @@
           padding-right: $height / 2;
         }
         border-radius: $height / 2;
+        @include e(border-mask) {
+          border-radius: $height / 2;
+        }
       }
     }
   }
@@ -76,6 +79,7 @@
 @include themes-mixin {
   @include b(input) {
     @include once {
+      z-index: auto;
       outline: none;
       box-sizing: border-box;
       position: relative;
@@ -86,6 +90,17 @@
       @include input-size-mixin("small");
       @include input-size-mixin("medium");
       @include input-size-mixin("large");
+      @include e(border-mask) {
+        z-index: 1;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        pointer-events: none;
+        border-radius: $--input-border-radius;
+        transition: border-color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier;
+      }
       @include e(suffix, affix) {
         transition: opacity .3s $--n-ease-in-out-cubic-bezier;
         position: absolute;
@@ -148,11 +163,19 @@
     }
     background-color: map-get($--input-background-color, 'default');
     box-shadow: map-get($--input-box-shadow, 'default');
+    @include e(border-mask) {
+      border: 1px solid map-get($--input-border-mask-border-color, 'default');
+    }
     &:hover {
-      box-shadow: map-get($--input-box-shadow, 'hover');
+      @include e(border-mask) {
+        border-color: map-get($--input-border-mask-border-color, 'hover');
+      }
     }
     @include m(focus) {
-      box-shadow: map-get($--input-box-shadow, 'focus');
+      @include e(border-mask) {
+        border-color: map-get($--input-border-mask-border-color, 'focus');
+        box-shadow: map-get($--input-border-mask-box-shadow, 'focus');
+      }
       background-color: map-get($--input-background-color, 'focus');
     }
     @include m(textarea) {
@@ -202,6 +225,9 @@
     @include m(disabled) {
       cursor: not-allowed;
       box-shadow: map-get($--input-box-shadow, 'disabled') !important;
+      @include e(border-mask) {
+        border-color: map-get($--input-border-mask-border-color, 'disabled') !important;
+      }
       background-color: map-get($--input-background-color, 'disabled');
       @include e(input, textarea) {
         cursor: not-allowed;
@@ -225,15 +251,53 @@
     @include with-status(error) {
       @include b(input) {
         box-shadow: map-get($--input-box-shadow, 'error-default');
+        @include e(border-mask) {
+          border-color: map-get($--input-border-mask-border-color, 'error-default');
+        }
         &:hover {
-          box-shadow: map-get($--input-box-shadow, 'error-hover');
+          @include e(border-mask) {
+            border-color: map-get($--input-border-mask-border-color, 'error-hover');
+          }
         }
         @include m(focus) {
-          box-shadow: map-get($--input-box-shadow, 'error-focus');
-          background-color: map-get($--input-background-color, 'error-focus');
+          @include e(border-mask) {
+            border-color: map-get($--input-border-mask-border-color, 'error-focus');
+            box-shadow: map-get($--input-border-mask-box-shadow, 'error-focus');
+          }
         }
         @include e(input, textarea) {
           caret-color: map-get($--input-caret-color, 'error');
+        }
+      }
+    }
+  }
+  @include b(input-group) {
+    & > {
+      @include b(input) {
+        &:first-child {
+          border-top-right-radius: 0!important;
+          border-bottom-right-radius: 0!important;
+          @include e(border-mask) {
+            border-top-right-radius: 0!important;
+            border-bottom-right-radius: 0!important;
+          }
+        }
+        &:last-child {
+          border-top-left-radius: 0!important;
+          border-bottom-left-radius: 0!important;
+          @include e(border-mask) {
+            border-top-left-radius: 0!important;
+            border-bottom-left-radius: 0!important;
+          }
+        }
+        &:not(:last-child) {
+          margin-right: -1px!important;
+        }
+        &:not(:first-child):not(:last-child) {
+          border-radius: 0!important;
+          @include e(border-mask) {
+            border-radius: 0!important;
+          }
         }
       }
     }

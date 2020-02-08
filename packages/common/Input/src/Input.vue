@@ -120,6 +120,7 @@
         @clear="handleClear"
       />
     </div>
+    <div class="n-input__border-mask" />
   </div>
 </template>
 
@@ -258,10 +259,12 @@ export default {
       return !this.isTextarea
     }
   },
-  mounted () {
-    this.updateTextAreaStyle()
+  watch: {
+    value () {
+      this.$nextTick().then(this.updateTextAreaStyle)
+    }
   },
-  updated () {
+  mounted () {
     this.updateTextAreaStyle()
   },
   methods: {
