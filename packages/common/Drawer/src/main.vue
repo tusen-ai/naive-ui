@@ -1,11 +1,8 @@
 <template>
   <n-base-portal ref="portal">
-    <div class="n-positioning-container" style="z-index: 1000;">
+    <div ref="contentContainer" class="n-positioning-container">
       <div
         class="n-drawer-container"
-        :class="{
-          'n-drawer-container--active': containerActive
-        }"
       >
         <transition name="n-fade-in--transition">
           <div
@@ -15,16 +12,19 @@
           />
         </transition>
         <transition
-          name="n-slide-in-from-right"
+          :name="transitionName"
           @after-leave="handleAfterLeave"
         >
           <div
             v-if="active"
             class="n-drawer"
             :style="{
-              width: styleWidth
+              ...drawerStyle,
+              width: styleWidth,
+              height: styleHeight
             }"
             :class="{
+              [`n-drawer--${placement}-placement`]: true,
               [`n-${synthesizedTheme}-theme`]: synthesizedTheme
             }"
           >
@@ -40,23 +40,22 @@
 import NBasePortal from '../../../base/Portal'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
+import zindexable from '../../../mixins/zindexable'
 
 export default {
   name: 'NDrawer',
   components: {
     NBasePortal
   },
-  mixins: [withapp, themeable],
+  mixins: [withapp, themeable, zindexable],
+  model: {
+    prop: 'show',
+    event: 'hide'
+  },
   props: {
-    value: {
+    show: {
       type: Boolean,
       default: false
-    },
-    type: {
-      validator (type) {
-        return ['drawer', 'card'].includes(type)
-      },
-      default: 'drawer'
     },
     width: {
       type: Number,
@@ -64,7 +63,7 @@ export default {
     },
     height: {
       type: Number,
-      default: null
+      default: 251
     },
     placement: {
       validator (placement) {
@@ -72,33 +71,52 @@ export default {
       },
       default: 'right'
     },
-    target: {
-      type: Function,
-      default: null
-    },
     maskClosable: {
       type: Boolean,
       default: true
+    },
+    drawerStyle: {
+      type: Object,
+      default: null
+    },
+    /** Todo */
+    target: {
+      type: Function,
+      default: null
     }
   },
   data () {
     return {
-      containerActive: false
+      detached: true
     }
   },
   computed: {
+    transitionName () {
+      return ({
+        right: 'n-slide-in-from-right',
+        left: 'n-slide-in-from-left',
+        top: 'n-slide-in-from-top',
+        bottom: 'n-slide-in-from-bottom'
+      })[this.placement]
+    },
     active () {
-      return this.value
+      return this.show
     },
     styleWidth () {
-      if (!this.width) return null
+      if (this.placement === 'top' || this.placement === 'bottom') return null
+      if (this.width === null) return null
       return this.width + 'px'
+    },
+    styleHeight () {
+      if (this.placement === 'left' || this.placement === 'right') return null
+      if (this.height === null) return null
+      return this.height + 'px'
     }
   },
   watch: {
-    active (newActive) {
-      if (newActive) {
-        this.containerActive = true
+    active (value) {
+      if (value) {
+        this.$emit('show')
         this.$refs.portal.transferElement()
       }
     }
@@ -108,16 +126,12 @@ export default {
       this.$refs.portal.transferElement()
     }
   },
-  created () {
-    this.containerActive = this.active
-  },
   methods: {
     handleAfterLeave () {
-      this.containerActive = false
     },
     handleOverlayClick () {
       if (this.maskClosable) {
-        this.$emit('input', false)
+        this.$emit('hide', false)
       }
     }
   }
