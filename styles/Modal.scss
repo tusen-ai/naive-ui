@@ -69,15 +69,16 @@
 }
 
 @include b(modal-content-slot) {
+  transform: $--n-transform-debounce-scale;
   &#{&}-transition-enter-active {
     opacity: 1;
     transition: opacity .3s cubic-bezier(.4, 0, .2, 1), transform .3s cubic-bezier(0.0, 0.0, 0.2, 1);
-    transform: scale(1);
+    transform: $--n-transform-debounce-scale;
   }
   &#{&}-transition-leave-active {
     opacity: 1;
     transition: opacity .3s cubic-bezier(.4, 0, .2, 1), transform .3s cubic-bezier(0.4, 0.0, 1, 1);
-    transform: scale(1);
+    transform: $--n-transform-debounce-scale;
   }
   &#{&}-transition-enter, &#{&}-transition-leave-to {
     opacity: 0;

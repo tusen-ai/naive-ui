@@ -1,6 +1,8 @@
 $--n-font-family: 'FiraSans';
 
 $--n-ease-in-out-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
+$--n-ease-out-cubic-bezier: cubic-bezier(0, 0, .2, 1);
+$--n-ease-in-cubic-bezier: cubic-bezier(.4, 0, 1, 1);
 
 $--n-mono-font-family: 'FiraCode', monospace;
 
