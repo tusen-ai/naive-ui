@@ -1,6 +1,16 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
+@mixin input-group-label-size-mixin ($size) {
+  $font-size: map-get($map: $--n-font-size, $key: $size);
+  $height: map-get($map: $--n-height, $key: $size);
+  @include m($size + '-size') {
+    font-size: $font-size;
+    line-height: $height;
+    height: $height;
+  }
+}
+
 @mixin input-size-mixin ($size) {
   $font-size: map-get($map: $--n-font-size, $key: $size);
   $height: map-get($map: $--n-height, $key: $size);
@@ -247,6 +257,25 @@
       }
     }
   }
+  @include b(input-group-label) {
+    @include once {
+      user-select: none;
+      box-sizing: border-box;
+      padding: 0 12px;
+      display: inline-block;
+      border-radius: $--input-border-radius;
+      transition:
+        color .3s $--n-ease-in-out-cubic-bezier,
+        background-color .3s $--n-ease-in-out-cubic-bezier,
+        box-shadow .3s $--n-ease-in-out-cubic-bezier;
+      @include input-group-label-size-mixin("small");
+      @include input-group-label-size-mixin("medium");
+      @include input-group-label-size-mixin("large");
+    }
+    background-color: $--input-group-label-background-color;
+    color: map-get($--input-color, 'default');
+    box-shadow: map-get($--input-box-shadow, 'default');
+  }
   @include as-form-item {
     @include with-status(error) {
       @include b(input) {
@@ -271,92 +300,140 @@
       }
     }
   }
-  @include b(input-group) {
-    display: inline-flex;
-    width: 100%;
-    flex-wrap: nowrap;
-    vertical-align: bottom;
-    & > {
-      @include b(input) {
-        &:first-child {
-          border-top-right-radius: 0!important;
-          border-bottom-right-radius: 0!important;
-          @include e(border-mask) {
+  @include once {
+    @include b(input-group) {
+      display: inline-flex;
+      width: 100%;
+      flex-wrap: nowrap;
+      vertical-align: bottom;
+      & > {
+        @include b(input) {
+          &:not(:last-child) {
             border-top-right-radius: 0!important;
             border-bottom-right-radius: 0!important;
+            @include e(border-mask) {
+              border-top-right-radius: 0!important;
+              border-bottom-right-radius: 0!important;
+            }
           }
-        }
-        &:last-child {
-          border-top-left-radius: 0!important;
-          border-bottom-left-radius: 0!important;
-          @include e(border-mask) {
+          &:not(:first-child) {
             border-top-left-radius: 0!important;
             border-bottom-left-radius: 0!important;
+            @include e(border-mask) {
+              border-top-left-radius: 0!important;
+              border-bottom-left-radius: 0!important;
+            }
+          }
+          &:not(:first-child) {
+            margin-left: -1px!important;
           }
         }
-        &:not(:last-child) {
-          margin-right: -1px!important;
-        }
-        &:not(:first-child):not(:last-child) {
-          border-radius: 0!important;
-          @include e(border-mask) {
-            border-radius: 0!important;
+        @include b(input-number) {
+          &:not(:last-child) {
+            border-top-right-radius: 0!important;
+            border-bottom-right-radius: 0!important;
+            @include e(input, add-button, border-mask) {
+              border-top-right-radius: 0!important;
+              border-bottom-right-radius: 0!important;
+            }
           }
-        }
-      }
-      * {
-        &:first-child {
-          & > {
-            @include b(base-picker) {
-              @include b(base-picker-label) {
-                border-top-right-radius: 0!important;
-                border-bottom-right-radius: 0!important;
-              }
-              @include b(base-picker-tags) {
-                border-top-right-radius: 0!important;
-                border-bottom-right-radius: 0!important;
-              } 
-              @include b(base-picker-border-mask)  {
-                border-top-right-radius: 0!important;
-                border-bottom-right-radius: 0!important;
-              }
+          &:not(:first-child) {
+            border-top-left-radius: 0!important;
+            border-bottom-left-radius: 0!important;
+            @include e(input, minus-button, border-mask) {
+              border-top-left-radius: 0!important;
+              border-bottom-left-radius: 0!important;
             }
           }
         }
-        &:last-child {
-          & > {
-            @include b(base-picker) {
-              @include b(base-picker-label) {
-                border-top-left-radius: 0!important;
-                border-bottom-left-radius: 0!important;
-              }
-              @include b(base-picker-tags) {
-                border-top-left-radius: 0!important;
-                border-bottom-left-radius: 0!important;
-              }
-              @include b(base-picker-border-mask)  {
-                border-top-left-radius: 0!important;
-                border-bottom-left-radius: 0!important;
-              }
+        @include b(button) {
+          &:not(:last-child) {
+            border-top-right-radius: 0!important;
+            border-bottom-right-radius: 0!important;
+            @include e(border-mask) {
+              border-top-right-radius: 0!important;
+              border-bottom-right-radius: 0!important;
+            }
+          }
+          &:not(:first-child) {
+            border-top-left-radius: 0!important;
+            border-bottom-left-radius: 0!important;
+            @include e(border-mask) {
+              border-top-left-radius: 0!important;
+              border-bottom-left-radius: 0!important;
+            }
+          }
+          &:not(:first-child) {
+            @include not-m(default-type) {
+              margin-left: 0!important;
             }
           }
         }
-        &:not(:last-child) {
-          margin-right: -1px!important;
-        }
-        &:not(:first-child):not(:last-child) {
-          & > {
-            @include b(base-picker) {
-              @include b(base-picker-label) {
-                border-radius: 0!important;
-              }
-              @include b(base-picker-tags) {
-                border-radius: 0!important;
-              }
-              @include b(base-picker-border-mask)  {
-                border-radius: 0!important;
+        * {
+          &:not(:last-child) {
+            border-top-right-radius: 0!important;
+            border-bottom-right-radius: 0!important;
+            & > {
+              @include b(input) {
+                border-top-right-radius: 0!important;
+                border-bottom-right-radius: 0!important;
+                @include e(border-mask) {
+                  border-top-right-radius: 0!important;
+                  border-bottom-right-radius: 0!important;
+                }
               }
             }
+            & > {
+              border-top-right-radius: 0!important;
+              border-bottom-right-radius: 0!important;
+              @include b(base-picker) {
+                @include b(base-picker-label) {
+                  border-top-right-radius: 0!important;
+                  border-bottom-right-radius: 0!important;
+                }
+                @include b(base-picker-tags) {
+                  border-top-right-radius: 0!important;
+                  border-bottom-right-radius: 0!important;
+                } 
+                @include b(base-picker-border-mask)  {
+                  border-top-right-radius: 0!important;
+                  border-bottom-right-radius: 0!important;
+                }
+              }
+            }
+          }
+          &:not(:first-child) {
+            border-top-left-radius: 0!important;
+            border-bottom-left-radius: 0!important;
+            & > {
+              @include b(input) {
+                border-top-left-radius: 0!important;
+                border-bottom-left-radius: 0!important;
+                @include e(border-mask) {
+                  border-top-left-radius: 0!important;
+                  border-bottom-left-radius: 0!important;
+                }
+              }
+            }
+            & > {
+              @include b(base-picker) {
+                @include b(base-picker-label) {
+                  border-top-left-radius: 0!important;
+                  border-bottom-left-radius: 0!important;
+                }
+                @include b(base-picker-tags) {
+                  border-top-left-radius: 0!important;
+                  border-bottom-left-radius: 0!important;
+                }
+                @include b(base-picker-border-mask)  {
+                  border-top-left-radius: 0!important;
+                  border-bottom-left-radius: 0!important;
+                }
+              }
+            }
+          }
+          &:not(:first-child) {
+            margin-left: -1px!important;
           }
         }
       }

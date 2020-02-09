@@ -36,4 +36,5 @@
     'disabled': inset 0 0 0 1px $--n-border-color,
     'error-default': inset 0 0 0 1px $--error-5,
   ) !global;
+  $--input-group-label-background-color: $--n-action-panel-color !global;
 }

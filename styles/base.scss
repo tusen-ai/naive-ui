@@ -14,12 +14,6 @@ html {
   // font-weight: 400;
 }
 
-@-moz-document url-prefix() {
-  body {
-    font-weight: lighter !important;
-  }
-}
-
 body {
   margin: 0;
   font-family: $--n-font-family;

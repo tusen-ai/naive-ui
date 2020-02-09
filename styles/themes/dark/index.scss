@@ -83,6 +83,8 @@
   $--n-dialog-color: $--neutral-3 !global;
   $--n-background-color: $--neutral-10 !global;
   $--n-alpha-input-color: rgba(255, 255, 255, .12) !global;
+  $--n-action-panel-color: $--neutral-8 !global;
+  $--n-alpha-action-panel-color: $--overlay-8 !global;
   @if ($in-js-env != true) {
     @include setup-dark-divider;
     @include setup-dark-scrollbar;

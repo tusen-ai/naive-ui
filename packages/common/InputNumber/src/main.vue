@@ -45,7 +45,7 @@
         <md-add />
       </n-icon>
     </button>
-    <div class="n-input-number__border-layer" />
+    <div class="n-input-number__border-mask" />
   </div>
 </template>
 
