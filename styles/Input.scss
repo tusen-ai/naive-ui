@@ -272,6 +272,10 @@
     }
   }
   @include b(input-group) {
+    display: inline-flex;
+    width: 100%;
+    flex-wrap: nowrap;
+    vertical-align: bottom;
     & > {
       @include b(input) {
         &:first-child {
@@ -297,6 +301,62 @@
           border-radius: 0!important;
           @include e(border-mask) {
             border-radius: 0!important;
+          }
+        }
+      }
+      * {
+        &:first-child {
+          & > {
+            @include b(base-picker) {
+              @include b(base-picker-label) {
+                border-top-right-radius: 0!important;
+                border-bottom-right-radius: 0!important;
+              }
+              @include b(base-picker-tags) {
+                border-top-right-radius: 0!important;
+                border-bottom-right-radius: 0!important;
+              } 
+              @include b(base-picker-border-mask)  {
+                border-top-right-radius: 0!important;
+                border-bottom-right-radius: 0!important;
+              }
+            }
+          }
+        }
+        &:last-child {
+          & > {
+            @include b(base-picker) {
+              @include b(base-picker-label) {
+                border-top-left-radius: 0!important;
+                border-bottom-left-radius: 0!important;
+              }
+              @include b(base-picker-tags) {
+                border-top-left-radius: 0!important;
+                border-bottom-left-radius: 0!important;
+              }
+              @include b(base-picker-border-mask)  {
+                border-top-left-radius: 0!important;
+                border-bottom-left-radius: 0!important;
+              }
+            }
+          }
+        }
+        &:not(:last-child) {
+          margin-right: -1px!important;
+        }
+        &:not(:first-child):not(:last-child) {
+          & > {
+            @include b(base-picker) {
+              @include b(base-picker-label) {
+                border-radius: 0!important;
+              }
+              @include b(base-picker-tags) {
+                border-radius: 0!important;
+              }
+              @include b(base-picker-border-mask)  {
+                border-radius: 0!important;
+              }
+            }
           }
         }
       }

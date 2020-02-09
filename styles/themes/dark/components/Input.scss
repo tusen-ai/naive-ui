@@ -12,10 +12,10 @@
     'disabled': rgba(255, 255, 255, .2)
   ) !global;
   $--input-background-color: (
-    "default": rgba(255, 255, 255, .1),
-    "disabled": rgba(255, 255, 255, .06),
-    "focus": change-color($--primary-6, $alpha: 0.1),
-    "error-focus": change-color($--error-6, $alpha: 0.1),
+    'default': rgba(255, 255, 255, .1),
+    'disabled': rgba(255, 255, 255, .06),
+    'focus': change-color($--primary-6, $alpha: 0.1),
+    'error-focus': change-color($--error-6, $alpha: 0.1),
   ) !global;
   $--input-icon-color: rgba(255, 255, 255, 0.2) !global;
   $--input-border-mask-border-color: (
@@ -23,17 +23,17 @@
     'hover': $--primary-6,
     'focus': $--primary-6,
     'disabled': transparent,
-    "error-default": transparent,
-    "error-hover": $--error-6,
-    "error-focus": $--error-6
+    'error-default': transparent,
+    'error-hover': $--error-6,
+    'error-focus': $--error-6
   ) !global;
   $--input-border-mask-box-shadow: (
-    "focus": (0 0 0 2px change-color($--primary-6, $alpha: .3)),
-    "error-focus": (0 0 0 2px change-color($--error-6, $alpha: .3)),
+    'focus': (0 0 8px 0 change-color($--primary-6, $alpha: .3)),
+    'error-focus': (0 0 8px 0 change-color($--error-6, $alpha: .3)),
   ) !global;
   $--input-box-shadow: (
     'default': inset 0 0 0 0 transparent,
-    "disabled": inset 0 0 0 1px transparent,
-    "error-default": inset 0 0 0 1px $--error-6
+    'disabled': inset 0 0 0 1px transparent,
+    'error-default': inset 0 0 0 1px $--error-6
   ) !global;
 }
