@@ -26,7 +26,7 @@
       <div
         class="n-form-item-blank"
         :class="
-          validated ? `n-form-item-blank--error` : `n-form-item-blank--pass`
+          validationErrored ? `n-form-item-blank--error` : `n-form-item-blank--pass`
         "
       >
         <slot />
@@ -116,7 +116,7 @@ export default {
   data () {
     return {
       explains: [],
-      validated: false,
+      validationErrored: false,
       hasFeedback: false,
       feedbackTransitionBlocked: true
     }
@@ -217,7 +217,7 @@ export default {
   methods: {
     _initData () {
       this.explains = []
-      this.validated = false
+      this.validationErrored = false
       this.hasFeedback = false
       this.blockFeedbackTransition(this.$refs.feedback)
     },
@@ -317,6 +317,7 @@ export default {
         validator.validate({ [path]: value }, options, (errors, fields) => {
           if (errors && errors.length) {
             this.explains = errors.map(error => error.message)
+            this.validationErrored = true
             resolve({
               valid: false,
               errors
@@ -332,7 +333,7 @@ export default {
     },
     clearValidationEffect () {
       this.explains = []
-      this.validated = false
+      this.validationErrored = false
     },
     addValidationEventListeners () {
       const rules = this.synthesizedRules
