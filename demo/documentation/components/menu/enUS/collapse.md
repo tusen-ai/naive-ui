@@ -1,4 +1,5 @@
-# Collapsed
+# Collapsed Menu
+Use collapsable vertical menu with layout sider. Use `collapsed` to control collapse status of menu. You must set `collapsed-width` to make it collapse in a right manner. There are still some other collapse related props you can modify: `icon-size`, `collapsed-icon-size`, `overlay-width`, `overlay-min-width`. For details see API table at the bottom of the page.
 ```html
 <n-switch v-model="collapsed" />
 <n-layout>
@@ -14,61 +15,65 @@
     <n-menu
       :collapsed="collapsed"
       :collapsed-width="64"
-      :collapsed-icon-size="24"
+      :collapsed-icon-size="22"
       v-model="activeMenuItemName"
     >
-      <n-menu-item title="1800" name="1800">
+      <n-menu-item title="Hear the Wind Sing" name="hear-the-wind-sing">
         <template v-slot:icon>
           <n-icon>
-            <md-contacts />
+            <book-icon />
           </n-icon>
         </template>
       </n-menu-item>
-      <n-menu-item title="1900" name="1900">
+      <n-submenu title="Pinball, 1973" name="pinball-1973" disabled>
         <template v-slot:icon>
           <n-icon>
-            <md-contacts />
+            <book-icon />
           </n-icon>
         </template>
-      </n-menu-item>
-      <n-menu-item title="2000" name="2000">
-        <template v-slot:icon>
-          <n-icon>
-            <md-contacts />
-          </n-icon>
-        </template>
-      </n-menu-item>
-      <n-submenu title="2001" name="2001">
-        <template v-slot:icon>
-          <n-icon>
-            <md-contacts />
-          </n-icon>
-        </template>
-        <n-menu-item title="2002" name="2002"></n-menu-item>
+        <n-menu-item title="Rat" name="rat" />
       </n-submenu>
-      <n-submenu title="2003" name="2003">
-      <template v-slot:icon>
-          <n-icon>
-            <md-contacts />
-          </n-icon>
-        </template>
-        <n-submenu title="2004" name="2004">
-          <n-menu-item title="2005" name="2005"></n-menu-item>
-        </n-submenu>
-      </n-submenu>
-      <n-submenu title="2006" name="2006">
+      <n-menu-item title="A Wild Sheep Chase" name="a-wild-sheep-chase" disabled>
         <template v-slot:icon>
           <n-icon>
-            <md-contacts />
+            <book-icon />
           </n-icon>
         </template>
-        <n-submenu title="2007" name="2007">
-          <n-submenu title="2008" name="2008">
-            <n-menu-item title="2009" name="2009"></n-menu-item>
-            <n-menu-item title="2010" name="2010"></n-menu-item>
-          </n-submenu>
-          <n-menu-item title="2011" name="2011"></n-menu-item>
+      </n-menu-item>
+      <n-submenu title="Dance Dance Dance" name="dance-dance-dance">
+        <template v-slot:icon>
+          <n-icon>
+            <book-icon />
+          </n-icon>
+        </template>
+        <n-menu-item-group title="Characters">
+          <n-menu-item title="Narrator" name="narrator">
+            <template v-slot:icon>
+              <n-icon>
+                <person-icon />
+              </n-icon>
+            </template>
+          </n-menu-item>
+          <n-menu-item title="Sheep Man" name="sheep-man">
+            <template v-slot:icon>
+              <n-icon>
+                <person-icon />
+              </n-icon>
+            </template>
+          </n-menu-item>
+        </n-menu-item-group>
+        <n-submenu title="Beverage" name="beverage">
+          <template v-slot:icon>
+            <n-icon>
+              <wine-icon />
+            </n-icon>
+          </template>
+          <n-menu-item title="Whisky" name="whisky" />
         </n-submenu>
+        <n-submenu title="Food" name="food">
+          <n-menu-item title="Sandwich" name="sandwich" />
+        </n-submenu>
+        <n-menu-item title="The past increases. The future recedes." name="the-past-increases-the-future-recedes" />
       </n-submenu>
     </n-menu>
   </n-layout-sider>
@@ -80,11 +85,15 @@
 </n-layout>
 ```
 ```js
-import mdContacts from 'naive-ui/lib/icons/md-contacts'
+import bookIcon from 'naive-ui/lib/icons/book-outline'
+import personIcon from 'naive-ui/lib/icons/person-outline'
+import wineIcon from 'naive-ui/lib/icons/wine-outline'
 
 export default {
   components: {
-    mdContacts
+    bookIcon,
+    personIcon,
+    wineIcon
   },
   data () {
     return {

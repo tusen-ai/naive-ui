@@ -1,6 +1,16 @@
 @import './mixins/mixins.scss';
 @import './themes/vars.scss';
 
+@mixin input-group-label-size-mixin ($size) {
+  $font-size: map-get($map: $--n-font-size, $key: $size);
+  $height: map-get($map: $--n-height, $key: $size);
+  @include m($size + '-size') {
+    font-size: $font-size;
+    line-height: $height;
+    height: $height;
+  }
+}
+
 @mixin input-size-mixin ($size) {
   $font-size: map-get($map: $--n-font-size, $key: $size);
   $height: map-get($map: $--n-height, $key: $size);
@@ -68,6 +78,9 @@
           padding-right: $height / 2;
         }
         border-radius: $height / 2;
+        @include e(border-mask) {
+          border-radius: $height / 2;
+        }
       }
     }
   }
@@ -76,6 +89,7 @@
 @include themes-mixin {
   @include b(input) {
     @include once {
+      z-index: auto;
       outline: none;
       box-sizing: border-box;
       position: relative;
@@ -86,6 +100,17 @@
       @include input-size-mixin("small");
       @include input-size-mixin("medium");
       @include input-size-mixin("large");
+      @include e(border-mask) {
+        z-index: 1;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        pointer-events: none;
+        border-radius: $--input-border-radius;
+        transition: border-color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier;
+      }
       @include e(suffix, affix) {
         transition: opacity .3s $--n-ease-in-out-cubic-bezier;
         position: absolute;
@@ -148,11 +173,19 @@
     }
     background-color: map-get($--input-background-color, 'default');
     box-shadow: map-get($--input-box-shadow, 'default');
+    @include e(border-mask) {
+      border: 1px solid map-get($--input-border-mask-border-color, 'default');
+    }
     &:hover {
-      box-shadow: map-get($--input-box-shadow, 'hover');
+      @include e(border-mask) {
+        border-color: map-get($--input-border-mask-border-color, 'hover');
+      }
     }
     @include m(focus) {
-      box-shadow: map-get($--input-box-shadow, 'focus');
+      @include e(border-mask) {
+        border-color: map-get($--input-border-mask-border-color, 'focus');
+        box-shadow: map-get($--input-border-mask-box-shadow, 'focus');
+      }
       background-color: map-get($--input-background-color, 'focus');
     }
     @include m(textarea) {
@@ -170,6 +203,7 @@
       }
       @include b(icon) {
         fill: $--input-icon-color;
+        stroke: $--input-icon-color;
       }
     }
     @include e(input, textarea) {
@@ -201,6 +235,9 @@
     @include m(disabled) {
       cursor: not-allowed;
       box-shadow: map-get($--input-box-shadow, 'disabled') !important;
+      @include e(border-mask) {
+        border-color: map-get($--input-border-mask-border-color, 'disabled') !important;
+      }
       background-color: map-get($--input-background-color, 'disabled');
       @include e(input, textarea) {
         cursor: not-allowed;
@@ -212,6 +249,7 @@
       @include e(suffix, affix) {
         @include b(icon) {
           fill: map-get($--input-placeholder-color, 'disabled');
+          stroke: map-get($--input-placeholder-color, 'disabled');
         }
       }
       @include e(splitor) {
@@ -219,19 +257,184 @@
       }
     }
   }
+  @include b(input-group-label) {
+    @include once {
+      user-select: none;
+      box-sizing: border-box;
+      padding: 0 12px;
+      display: inline-block;
+      border-radius: $--input-border-radius;
+      transition:
+        color .3s $--n-ease-in-out-cubic-bezier,
+        background-color .3s $--n-ease-in-out-cubic-bezier,
+        box-shadow .3s $--n-ease-in-out-cubic-bezier;
+      @include input-group-label-size-mixin("small");
+      @include input-group-label-size-mixin("medium");
+      @include input-group-label-size-mixin("large");
+    }
+    background-color: $--input-group-label-background-color;
+    color: map-get($--input-color, 'default');
+    box-shadow: map-get($--input-box-shadow, 'default');
+  }
   @include as-form-item {
     @include with-status(error) {
       @include b(input) {
         box-shadow: map-get($--input-box-shadow, 'error-default');
+        @include e(border-mask) {
+          border-color: map-get($--input-border-mask-border-color, 'error-default');
+        }
         &:hover {
-          box-shadow: map-get($--input-box-shadow, 'error-hover');
+          @include e(border-mask) {
+            border-color: map-get($--input-border-mask-border-color, 'error-hover');
+          }
         }
         @include m(focus) {
-          box-shadow: map-get($--input-box-shadow, 'error-focus');
-          background-color: map-get($--input-background-color, 'error-focus');
+          @include e(border-mask) {
+            border-color: map-get($--input-border-mask-border-color, 'error-focus');
+            box-shadow: map-get($--input-border-mask-box-shadow, 'error-focus');
+          }
         }
         @include e(input, textarea) {
           caret-color: map-get($--input-caret-color, 'error');
+        }
+      }
+    }
+  }
+  @include once {
+    @include b(input-group) {
+      display: inline-flex;
+      width: 100%;
+      flex-wrap: nowrap;
+      vertical-align: bottom;
+      & > {
+        @include b(input) {
+          &:not(:last-child) {
+            border-top-right-radius: 0!important;
+            border-bottom-right-radius: 0!important;
+            @include e(border-mask) {
+              border-top-right-radius: 0!important;
+              border-bottom-right-radius: 0!important;
+            }
+          }
+          &:not(:first-child) {
+            border-top-left-radius: 0!important;
+            border-bottom-left-radius: 0!important;
+            @include e(border-mask) {
+              border-top-left-radius: 0!important;
+              border-bottom-left-radius: 0!important;
+            }
+          }
+          &:not(:first-child) {
+            margin-left: -1px!important;
+          }
+        }
+        @include b(input-number) {
+          &:not(:last-child) {
+            border-top-right-radius: 0!important;
+            border-bottom-right-radius: 0!important;
+            @include e(input, add-button, border-mask) {
+              border-top-right-radius: 0!important;
+              border-bottom-right-radius: 0!important;
+            }
+          }
+          &:not(:first-child) {
+            border-top-left-radius: 0!important;
+            border-bottom-left-radius: 0!important;
+            @include e(input, minus-button, border-mask) {
+              border-top-left-radius: 0!important;
+              border-bottom-left-radius: 0!important;
+            }
+          }
+        }
+        @include b(button) {
+          &:not(:last-child) {
+            border-top-right-radius: 0!important;
+            border-bottom-right-radius: 0!important;
+            @include e(border-mask) {
+              border-top-right-radius: 0!important;
+              border-bottom-right-radius: 0!important;
+            }
+          }
+          &:not(:first-child) {
+            border-top-left-radius: 0!important;
+            border-bottom-left-radius: 0!important;
+            @include e(border-mask) {
+              border-top-left-radius: 0!important;
+              border-bottom-left-radius: 0!important;
+            }
+          }
+          &:not(:first-child) {
+            @include not-m(default-type) {
+              margin-left: 0!important;
+            }
+          }
+        }
+        * {
+          &:not(:last-child) {
+            border-top-right-radius: 0!important;
+            border-bottom-right-radius: 0!important;
+            & > {
+              @include b(input) {
+                border-top-right-radius: 0!important;
+                border-bottom-right-radius: 0!important;
+                @include e(border-mask) {
+                  border-top-right-radius: 0!important;
+                  border-bottom-right-radius: 0!important;
+                }
+              }
+            }
+            & > {
+              border-top-right-radius: 0!important;
+              border-bottom-right-radius: 0!important;
+              @include b(base-picker) {
+                @include b(base-picker-label) {
+                  border-top-right-radius: 0!important;
+                  border-bottom-right-radius: 0!important;
+                }
+                @include b(base-picker-tags) {
+                  border-top-right-radius: 0!important;
+                  border-bottom-right-radius: 0!important;
+                } 
+                @include b(base-picker-border-mask)  {
+                  border-top-right-radius: 0!important;
+                  border-bottom-right-radius: 0!important;
+                }
+              }
+            }
+          }
+          &:not(:first-child) {
+            border-top-left-radius: 0!important;
+            border-bottom-left-radius: 0!important;
+            & > {
+              @include b(input) {
+                border-top-left-radius: 0!important;
+                border-bottom-left-radius: 0!important;
+                @include e(border-mask) {
+                  border-top-left-radius: 0!important;
+                  border-bottom-left-radius: 0!important;
+                }
+              }
+            }
+            & > {
+              @include b(base-picker) {
+                @include b(base-picker-label) {
+                  border-top-left-radius: 0!important;
+                  border-bottom-left-radius: 0!important;
+                }
+                @include b(base-picker-tags) {
+                  border-top-left-radius: 0!important;
+                  border-bottom-left-radius: 0!important;
+                }
+                @include b(base-picker-border-mask)  {
+                  border-top-left-radius: 0!important;
+                  border-bottom-left-radius: 0!important;
+                }
+              }
+            }
+          }
+          &:not(:first-child) {
+            margin-left: -1px!important;
+          }
         }
       }
     }

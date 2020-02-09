@@ -24,11 +24,11 @@ filter
 |value|change|
 
 ## Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |options|`Array<CascaderOption>`|`null`||
 |value|`string \| number`|`null`||
-|placeholder|`string`|`Please Select`||
+|placeholder|`string`|`请选择`||
 |multiple|`boolean`|`false`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |filterable|`boolean`|`false`|不能在和 `remote` prop 同时为 `true`|
@@ -42,6 +42,6 @@ filter
 |filter|`(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean`|一个基于字符串的过滤算法||
 
 ## Events
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |change|`(value: string \| number \| Array<string \| number>)`

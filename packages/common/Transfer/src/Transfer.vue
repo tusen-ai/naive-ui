@@ -609,30 +609,37 @@ export default {
       this.targetCheckedValues = []
     },
     handleSourceOptionMouseEnter: debounce(function (e, index) {
+      const sourceLightBar = this.$refs.sourceLightBar
+      if (!sourceLightBar) return
       if (this.virtualScroll) {
-        this.$refs.sourceLightBar.updateLightBarTop(true, () => index * ITEM_SIZE)
+        sourceLightBar.updateLightBarTop(true, () => index * ITEM_SIZE)
       } else {
-        this.$refs.sourceLightBar.updateLightBarTop(e.target)
+        sourceLightBar.updateLightBarTop(e.target)
       }
     }, 96),
     handleTargetOptionMouseEnter: debounce(function (e, index) {
+      const targetLightBar = this.$refs.targetLightBar
       if (this.virtualScroll) {
-        this.$refs.targetLightBar.updateLightBarTop(true, () => index * ITEM_SIZE)
+        targetLightBar.updateLightBarTop(true, () => index * ITEM_SIZE)
       } else {
-        this.$refs.targetLightBar.updateLightBarTop(e.target)
+        targetLightBar.updateLightBarTop(e.target)
       }
     }, 96),
     handleSourceOptionMouseLeave: debounce(function (e) {
-      this.$refs.sourceLightBar.hideLightBar()
+      const sourceLightBar = this.$refs.sourceLightBar
+      sourceLightBar && sourceLightBar.hideLightBar()
     }, 96),
     handleTargetOptionMouseLeave: debounce(function (e) {
-      this.$refs.targetLightBar.hideLightBar()
+      const targetLightBar = this.$refs.targetLightBar
+      targetLightBar.hideLightBar()
     }, 96),
     handleSourceListMouseLeave: debounce(function () {
-      this.$refs.sourceLightBar.hideLightBar()
+      const sourceLightBar = this.$refs.sourceLightBar
+      sourceLightBar && sourceLightBar.hideLightBar()
     }, 96),
     handleTargetListMouseLeave: debounce(function () {
-      this.$refs.targetLightBar.hideLightBar()
+      const targetLightBar = this.$refs.targetLightBar
+      targetLightBar.hideLightBar()
     }, 96)
   }
 }

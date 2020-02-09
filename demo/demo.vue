@@ -33,7 +33,13 @@ export default {
   },
   beforeRouteUpdate (to, from, next) {
     this.$i18n.locale = to.params.lang
+    this.memorizedPath = from ? from.path : null
     next()
+  },
+  data () {
+    return {
+      memorizedPath: null
+    }
   },
   computed: {
     items () {

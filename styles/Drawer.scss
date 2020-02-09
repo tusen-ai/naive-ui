@@ -4,25 +4,47 @@
 @include themes-mixin {
   @include b(drawer) {
     @include slide-in-from-right-transition($duration: .3s);
+    @include slide-in-from-left-transition($duration: .3s);
+    @include slide-in-from-top-transition($duration: .3s);
+    @include slide-in-from-bottom-transition($duration: .3s);
+    @include m(right-placement) {
+      top: 0;
+      bottom: 0;
+      right: 0;
+    }
+    @include m(left-placement) {
+      top: 0;
+      bottom: 0;
+      left: 0;
+    }
+    @include m(top-placement) {
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+    @include m(bottom-placement) {
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
     padding: 16px 24px;
     position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    background-color: $--n-card-color;
+    pointer-events: all;
+    background-color: $--n-dialog-color;
     color: $--n-secondary-text-color;
     transition: background-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
   }
 }
 
 @include b(drawer-overlay) {
-  @include fade-in-transition(fade-in);
+  @include fade-in-transition(fade-in, $enter-duration: .3s, $leave-duration: .3s);
   background-color: rgba(0, 0, 0, .3);
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
+  pointer-events: all;
 }
 
 @include b(drawer-container) {
@@ -31,9 +53,5 @@
   right: 0;
   top: 0;
   bottom: 0;
-  visibility: hidden;
-  pointer-events: all;
-  @include m(active) {
-    visibility: visible;
-  }
+  pointer-events: none;
 }

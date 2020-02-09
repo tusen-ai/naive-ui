@@ -35,7 +35,7 @@ export default {
   },
   mounted () {
     if (this.NTab) {
-      console.log(this.NTab.value)
+      // console.log(this.NTab.value)
       this.NTab.addPanel(this)
     }
   },

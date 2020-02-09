@@ -2,7 +2,7 @@
 <!--single-column-->
 如果你有一些日志要展示，可以使用 Log。
 
-<n-alert title="注意" type="warning">
+<n-alert title="注意" type="warning" style="margin-bottom: 16px;">
   由于尺寸原因，Naive UI 并不把 hightlight.js 内置。如果你需要高亮日志，请确保你在使用之前已经设定了 highlight.js。
 </n-alert>
 
@@ -34,7 +34,7 @@ loading
 ```
 
 ## Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |loading|`boolean`|`false`||
 |trim|`boolean`|`false`||
@@ -47,14 +47,14 @@ loading
 |hljs|`object`|`null`||
 
 ## Events
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |require-more|`(from: 'top' \| 'bottom')`||
 |reach-top|`()`|
 |reach-bottom|`()`|
 
 ## Methods
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |scrollToTop|`(dismissEvent: boolean = false)`||
 |scrollToBottom|`(dismissEvent: boolean = false)`||

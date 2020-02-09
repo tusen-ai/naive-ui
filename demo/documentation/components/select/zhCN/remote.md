@@ -4,7 +4,7 @@
 <n-select
   v-model="value"
   filterable
-  placeholder="Search Songs"
+  placeholder="搜索歌曲"
   :options="options"
   :loading="loading"
   clearable

@@ -1,1 +1,1 @@
-<template><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M64 64v384h384V64H64zm214 215v72h-40v-72l-66-120h47.1l39.7 83.6 38-83.6H342l-64 120z"/></svg></template>
+<template><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><title>ionicons-v5_logos</title><path d="M32,32V480H480V32ZM281.67,282.83v84H235v-84l-77-140H213l46.32,97.54,44.33-97.54h52.73Z"/></svg></template>

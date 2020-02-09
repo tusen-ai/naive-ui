@@ -20,21 +20,21 @@ button-group
 
 ## Props
 ### Radio Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |checked-value|`string \| number \| boolean`|`null`||
 |value|`string \| number \| boolean`|`null`||
 |disabled|`boolean`|`false`||
 
 ### Radio Button Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |checked-value|`string \| number \| boolean`|`null`||
 |value|`string \| number \| boolean`|`null`||
 |disabled|`boolean`|`false`||
 
 ### Radio Group Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |size|`'small' \| 'medium' \| 'large'`|`small`||
 |value|`string \| number \| boolean`|`null`||
@@ -42,11 +42,11 @@ button-group
 
 ## Events
 ### Radio, Radio Button Events
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |change|`(checkedValue: string \| number \| boolean)`||
 
 ### Radio Group Events
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |change|`(checkedValue: string \| number \| boolean)`||

@@ -19,7 +19,7 @@ manual-position
 ```
 
 ## Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |trigger|`'hover' \| 'trigger' \| 'manual'`|`'hover'`||
 |delay|`number`|`0`||

@@ -3,6 +3,9 @@ export default {
     positiveText: '确认',
     negativeText: '取消'
   },
+  Cascader: {
+    placeholder: '请选择'
+  },
   DatePicker: {
     Jan: '一月',
     Feb: '二月',
@@ -41,5 +44,17 @@ export default {
   },
   Empty: {
     description: '无数据'
+  },
+  Select: {
+    placeholder: '请选择'
+  },
+  TimePicker: {
+    placeholder: '请选择时间',
+    positiveText: '确认',
+    negativeText: '取消'
+  },
+  Pagination: {
+    goto: '跳至',
+    selectionSuffix: '页'
   }
 }

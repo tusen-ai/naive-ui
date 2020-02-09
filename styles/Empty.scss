@@ -12,8 +12,12 @@
         transition: fill .3s $--n-ease-in-out-cubic-bezier;
         width: 28px;
         height: 28px;
+        font-size: 28px;
       }
-      fill: $--empty-icon-fill;
+      @include b(icon) {
+        fill: $--empty-icon-fill;
+        stroke: $--empty-icon-fill;
+      }
     }
     @include e(description) {
       @include once {

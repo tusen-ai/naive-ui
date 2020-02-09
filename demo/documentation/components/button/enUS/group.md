@@ -1,7 +1,7 @@
 # Button Group
 Button can be grouped.
 ```html
-<n-button-group>
+<n-button-group size="small">
   <n-button
     type="default"
     round

@@ -3,6 +3,9 @@ export default {
     positiveText: 'Confirm',
     negativeText: 'Cancel'
   },
+  Cascader: {
+    placeholder: 'Please Select'
+  },
   DatePicker: {
     Jan: 'Jan',
     Feb: 'Feb',
@@ -41,5 +44,17 @@ export default {
   },
   Empty: {
     description: 'No Data'
+  },
+  Select: {
+    placeholder: 'Please Select'
+  },
+  TimePicker: {
+    placeholder: 'Select Time',
+    positiveText: 'Confirm',
+    negativeText: 'Cancel'
+  },
+  Pagination: {
+    goto: 'Goto',
+    selectionSuffix: 'page'
   }
 }

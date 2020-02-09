@@ -13,7 +13,7 @@ disabledTime
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|placeholder|`string`|`null`||
+|placeholder|`string`|`'Please Select Time'`||
 |value|`number`|`null`||
 |is-hour-disabled|`(hour: number) => boolean`|`() => false`||
 |is-minute-disabled|`(minute: number, hour: number) => boolean`|`() => false`||

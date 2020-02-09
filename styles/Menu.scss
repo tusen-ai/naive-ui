@@ -12,54 +12,64 @@
       box-sizing: border-box;
       font-size: 14px;
       @include m(transition-disabled) {
-        @include b(menu-item) {
-          @include b(menu-item-wrapper) {
-            @include e(icon) {
+        @include b(menu-item-content) {
+          @include e(icon) {
+            @include b(icon) {
               transition: none !important;
             }
-            @include e(header){ 
+          }
+          @include b(menu-item-content-header) {
+            transition: none !important;
+            @include e(extra) {
               transition: none !important;
             }
           }
         }
-        @include b(submenu-item) {
-          @include e(icon) {
-            transition: none !important;
+      }
+    }
+    @include m(horizontal) {
+      @include b(menu-list) {
+        @include once {
+          display: flex;
+        }
+        @include b(menu-item-content) {
+          @include once {
+            padding: 0 20px;
+            border-bottom: 2px solid transparent;
           }
-          @include e(header){ 
-            transition: none !important;
+          @include m(selected, child-selected) {
+            @include once {
+              background-color: transparent;
+            }
+            border-bottom: 2px solid $--menu-horizontal-border-color;
+          }
+          @include not-m(disabled) {
+            &:hover {
+              border-bottom: 2px solid $--menu-horizontal-border-color;
+            }
+            @include m(hover) {
+              border-bottom: 2px solid $--menu-horizontal-border-color;
+            }
           }
         }
       }
     }
     @include m(collapsed) {
       @include b(menu-list) {
-        @include b(menu-item) {
-          @include b(menu-item-wrapper) {
-            @include e(header) {
+        @include b(menu-item-content) {
+          @include once {
+            @include b(menu-item-content-header) {
+              opacity: 0;
+            }
+            @include e(arrow) {
               opacity: 0;
             }
           }
-        }
-      }
-      @include b(submenu) {
-        @include m(selected-inside) {
-          @include b(submenu-item) {
-            @include e(icon) {
-              fill: $--primary-6;
-            }
-          }
-        }
-        @include b(submenu-item) {
           @include e(icon) {
-            fill: $--n-text-color;
-          }
-          @include e(header) {
-            opacity: 0;
-          }
-          @include e(arrow) {
-            transition: transform 0.2s $--n-ease-in-out-cubic-bezier, opacity 0.2s $--n-ease-in-out-cubic-bezier, border-color 0.3s $--n-ease-in-out-cubic-bezier;
-            opacity: 0;
+            @include b(icon) {
+              fill: map-get($--menu-item-content-icon-color, 'collapsed');
+              stroke: map-get($--menu-item-content-icon-color, 'collapsed');
+            }
           }
         }
       }
@@ -69,137 +79,57 @@
         list-style: none;
         margin: 0;
         padding: 0;
-      }
-      @include b(menu-item-wrapper) {
-        list-style: none;
-      }
-      @include b(menu-item) {
-        @include once {
-          cursor: pointer;
-          transition: background-color .3s $--n-ease-in-out-cubic-bezier, padding-left .3s $--n-ease-in-out-cubic-bezier;
-          position: relative;
-          height: 48px;
-          font-size: 14px;
+        @include b(menu-item) {
           list-style: none;
-          line-height: 1.5;
-          @include b(menu-item-wrapper) {
-            height: 48px;
-            display: flex;
-            align-items: center;
-            @include e(icon) {
-              transition: font-size .3s $--n-ease-in-out-cubic-bezier, padding-right .3s $--n-ease-in-out-cubic-bezier;
-              box-sizing: content-box;
-              flex-shrink: 0;
-              padding-right: 8px;
-              display: inline-flex;
-              align-items: center;
-              justify-content: center;
-            }
-            @include e(header) {
-              transition: color .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier;
-              opacity: 1;
-              flex-grow: 1;
-              flex-shrink: 1;
-            }
+        }
+        @include b(submenu) {
+          cursor: pointer;
+          position: relative; 
+          @include b(submenu-content) {
+            padding: 0;
+            list-style: none;
+            @include fade-in-height-expand-transition($duration: .2s);
           }
+        }
+      }
+      @include b(menu-item-content) {
+        @include once {
+          box-sizing: border-box;
+          line-height: 1.5;
+          height: 48px;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          transition: background-color .3s $--n-ease-in-out-cubic-bezier, padding-left .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
+          position: relative;
+          font-size: 14px;
           @include m(disabled) {
             opacity: 0.45;
             cursor: not-allowed;
           }
+          @include m(collapsed) {
+            @include e(arrow) {
+              transition: transform 0.2s $--n-ease-in-out-cubic-bezier, opacity 0.2s $--n-ease-in-out-cubic-bezier, border-color 0.3s $--n-ease-in-out-cubic-bezier;
+              transform: rotate(225deg);
+            }
+          }
+          @include m(uncollapsable) {
+            cursor: default;
+          }
         }
         @include e(icon) {
-          fill: $--n-secondary-text-color;
-        }
-        @include e(header) {
-          color: $--n-secondary-text-color;
-        }
-        &:hover {
-          @include e(icon) {
-            fill: $--primary-6;
-          }
-          @include e(header) {
-            color: $--primary-6;
-          }
-        }
-        @include m(selected) {
-          background-color: $--menu-item-background-color;
-          @include e(icon) {
-            fill: $--primary-6;
-          }
-          @include e(header) {
-            color: $--primary-6;
-          }
-        }
-      }
-    }
-    @include b(submenu) {
-      @include m(selected-inside) {
-        @include b(submenu-item) {
-          @include e(header) {
-            color: $--primary-6
-          }
-          @include e(icon) {
-            fill: $--primary-6
-          }
-        }
-      }
-      @include once {
-        cursor: pointer;
-        position: relative; 
-        @include b(submenu-content) {
-          padding: 0;
-          list-style: none;
-          @include fade-in-height-expand-transition($duration: .2s);
-        }
-      }
-      @include b(submenu-item) {
-        @include e(header) {
-          color: $--n-text-color;
-        }
-        @include e(icon) {
-          fill: $--n-text-color;
-        }
-        @include once {
-          display: flex;
-          flex-wrap: nowrap;
-          font-weight: 500;
-          font-size: 14px;
-          transition: color .3s $--n-ease-in-out-cubic-bezier, padding-left .3s $--n-ease-in-out-cubic-bezier;
-          height: 48px;
-          display: flex;
-          align-items: center;
-          position: relative;
-          @include e(icon) {
+          @include once {
             transition: font-size .3s $--n-ease-in-out-cubic-bezier, padding-right .3s $--n-ease-in-out-cubic-bezier;
-            padding-right: 8px;
             box-sizing: content-box;
             flex-shrink: 0;
+            padding-right: 8px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
           }
-          @include e(header) {
-            transition: color .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier;
-            opacity: 1;
-            flex-grow: 1;
-            opacity: 1;
-          }
-          @include m(collapsed) {
-            @include e(arrow) {
-              transform: rotate(225deg);
-            }
-          }
-          @include m(disabled) {
-            opacity: 0.45;
-            cursor: not-allowed;
-          }
-        }
-        &:hover {
-          @include e(icon) {
-            fill: $--primary-6;
-          }
-          @include e(header) {
-            color: $--primary-6;
+          @include b(icon) {
+            fill: map-get($--menu-item-content-icon-color, 'default');
+            stroke: map-get($--menu-item-content-icon-color, 'default');
           }
         }
         @include e(arrow) {
@@ -218,6 +148,88 @@
             transition: transform 0.2s $--n-ease-in-out-cubic-bezier, opacity 0.2s $--n-ease-in-out-cubic-bezier .1s, border-color 0.3s $--n-ease-in-out-cubic-bezier;
           }
         }
+        @include b(menu-item-content-header) {
+          @include once {
+            transition: color .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier;
+            opacity: 1;
+            flex-grow: 1;
+            flex-shrink: 1;
+            white-space: nowrap;
+          }
+          color: map-get($--menu-item-content-text-color, 'default');
+          @include e(extra) {
+            @include once {
+              white-space: nowrap;
+              margin-left: 6px;
+              display: inline-block;
+              transition: color 0.3s $--n-ease-in-out-cubic-bezier;
+            }
+            color: map-get($--menu-item-content-extra-text-color, 'default');
+          }
+        }
+        @include not-m(disabled) {
+          & {
+            @include not-m(uncollapsable) {
+              &:hover {
+                @include e(icon) {
+                  @include b(icon) {
+                    fill: map-get($--menu-item-content-icon-color, 'hover');
+                    stroke: map-get($--menu-item-content-icon-color, 'hover');
+                  }
+                }
+                @include b(menu-item-content-header) {
+                  color:  map-get($--menu-item-content-text-color, 'hover');
+                  @include e(extra) {
+                    color:  map-get($--menu-item-content-extra-text-color, 'selected');
+                  }
+                }
+              }
+              @include m(hover) {
+                @include e(icon) {
+                  @include b(icon) {
+                    fill: map-get($--menu-item-content-icon-color, 'hover');
+                    stroke: map-get($--menu-item-content-icon-color, 'hover');
+                  }
+                }
+                @include b(menu-item-content-header) {
+                  color:  map-get($--menu-item-content-text-color, 'hover');
+                  @include e(extra) {
+                    color:  map-get($--menu-item-content-extra-text-color, 'selected');
+                  }
+                }
+              }
+            }
+          }
+        }
+        @include m(selected) {
+          background-color: $--menu-item-background-color;
+          @include e(icon) {
+            @include b(icon) {
+              fill: map-get($--menu-item-content-icon-color, 'selected');
+              stroke: map-get($--menu-item-content-icon-color, 'selected');
+            }
+          }
+          @include b(menu-item-content-header) {
+            color: map-get($--menu-item-content-text-color, 'selected');
+            @include e(extra) {
+              color: map-get($--menu-item-content-extra-text-color, 'selected');
+            }
+          }
+        }
+        @include m(child-selected) {
+          @include b(menu-item-content-header) {
+            color: map-get($--menu-item-content-text-color, 'child-selected');
+            @include e(extra) {
+              color: map-get($--menu-item-content-extra-text-color, 'child-selected');
+            }
+          }
+          @include e(icon) {
+            @include b(icon) {
+              fill: map-get($--menu-item-content-icon-color, 'child-selected');
+              stroke: map-get($--menu-item-content-icon-color, 'child-selected');
+            }
+          }
+        }
       }
     }
     @include b(menu-item-group) {
@@ -228,7 +240,7 @@
           height: 40px;
           display: flex;
           align-items: center;
-          transition: color .3s $--n-ease-in-out-cubic-bezier;
+          transition: padding-left .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
         }        
       }
     }

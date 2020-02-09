@@ -20,7 +20,7 @@ preset-confirm-slot
 |Name|Type|Default|Description|
 |-|-|-|-|
 |show|`boolean`|`false`||
-|mask-closable|`boolean`|`true`||
+|mask-closable|`boolean`|`true`|Whether to emit `hide` event when click mask.|
 |preset|`'card' \| 'confirm'`|`null`||
 
 ### Modal with Preset Card
@@ -43,7 +43,7 @@ See [Confirm slots](n-confirm#Slots)
 ### Modal
 |Name|Parameters|Description|
 |-|-|-|
-|hide|`()`||
+|hide|`(show: false)`||
 
 ### Modal with Preset Card
 See [Card events](n-card#Events)

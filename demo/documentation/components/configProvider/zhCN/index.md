@@ -10,7 +10,7 @@ language
 transparent
 ```
 ## Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |as|`string`|`'div'`|Config Provider 被渲染成什么元素|
 |language|`string`|`en-US`|Config Provider 内部的组件语言|

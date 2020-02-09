@@ -86,6 +86,7 @@ $--steps-indicator-icon-size: (
         }
         @include b(icon) {
           fill: map-get($--steps-step-indicator-color, $status);
+          stroke: map-get($--steps-step-indicator-color, $status);
         }
       }
     }
@@ -141,7 +142,7 @@ $--steps-indicator-icon-size: (
             position: absolute;
             left: 0;
             top: 0;
-            transform: scale(0.9999);
+            transform: $--n-transform-debounce-scale;
           }
           @include b(icon) {
             @include icon-switch-transition();

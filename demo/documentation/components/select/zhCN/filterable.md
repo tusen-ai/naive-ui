@@ -4,14 +4,14 @@
 <n-select
   v-model="selectedValue"
   filterable
-  placeholder="Please Select a Song"
+  placeholder="选择歌曲"
   :options="options"
 />
 <n-select
   v-model="selectedValues"
   multiple
   filterable
-  placeholder="Please Select Songs"
+  placeholder="选择歌曲"
   :options="options"
 />
 ```

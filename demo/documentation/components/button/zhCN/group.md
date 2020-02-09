@@ -1,7 +1,7 @@
 # 按钮组
 可以把几个按钮结合成按钮组。
 ```html
-<n-button-group>
+<n-button-group size="small">
   <n-button
     type="default"
     round

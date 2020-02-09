@@ -128,7 +128,7 @@
   @include b(slider-handle-indicator) {
     @include once {
       @include fade-in-scale-up-transition();
-      transform: scale(0.99999);
+      transform: $--n-transform-debounce-scale;
       font-size: 14px;
       padding: 8px 12px;
       margin-bottom: 12px;

@@ -87,16 +87,23 @@ export default {
       this.setActiveHref(window.location)
       this.handleScroll(false)
     },
-    blockTransitionOneTick () {
+    disableTransitionOneTick () {
       const barEl = this.$refs.bar
       const slotEl = this.$refs.slot
-      barEl.style.transition = 'none'
-      slotEl.style.transition = 'none'
-      barEl.getBoundingClientRect()
-      slotEl.getBoundingClientRect()
+      if (barEl) {
+        barEl.style.transition = 'none'
+        void (barEl.offsetWidth)
+        barEl.getBoundingClientRect()
+      }
+      if (slotEl) {
+        slotEl.style.transition = 'none'
+        void (slotEl.offsetWidth)
+      }
       this.$nextTick().then(() => {
-        barEl.style.transition = null
-        slotEl.style.transition = null
+        const barEl = this.$refs.bar
+        const slotEl = this.$refs.slot
+        if (barEl) barEl.style.transition = null
+        if (slotEl) slotEl.style.transition = null
       })
     },
     updateBarPosition (linkTitleEl, transition = true) {
@@ -143,7 +150,7 @@ export default {
             top: top - this.bound
           })
           if (!transition) {
-            this.blockTransitionOneTick()
+            this.disableTransitionOneTick()
           }
           this.handleScroll()
         }
@@ -191,7 +198,7 @@ export default {
         }
         return prevLink
       }, null)
-      if (!transition) this.blockTransitionOneTick()
+      if (!transition) this.disableTransitionOneTick()
       if (activeLink) {
         this.activeHref = activeLink.href
       } else {

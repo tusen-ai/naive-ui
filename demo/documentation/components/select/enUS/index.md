@@ -27,7 +27,7 @@ action
 |loading|`boolean`|`false`||
 |clearable|`boolean`|`false`||
 |value|`Array \| string \| number`|`false`||
-|placeholder||||
+|placeholder|`string`|`'Please Select'`||
 |multiple|`boolean`|`false`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |disabled|`boolean`|`false`||

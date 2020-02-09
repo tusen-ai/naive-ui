@@ -23,6 +23,8 @@ export default {
       const confirmInstance = this.$NConfirm.warning({
         title: 'Confirm',
         content: 'Are you sure?',
+        positiveText: 'Sure',
+        negativeText: 'Not Sure',
         onPositiveClick: (hide) => {
           this.$NMessage.success('Sure')
           hide()
@@ -38,6 +40,7 @@ export default {
         title: 'Success',
         content:
           'Cool',
+        positiveText: 'Wow!',
         onPositiveClick: (hide) => {
           this.$NMessage.success('Great!')
           hide()
@@ -48,6 +51,7 @@ export default {
       const confirmInstance = this.$NConfirm.error({
         title: 'Error',
         content: 'A mistake.',
+        positiveText: 'Ahhh!',
         onPositiveClick: (hide) => {
           this.$NMessage.success('I knew it...')
           hide()

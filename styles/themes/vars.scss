@@ -2,6 +2,8 @@
 
 $body-background-color: #1a2033;
 
+$--n-transform-debounce-scale: scale(0.99999);
+
 /**
  * genaral
  */
@@ -186,6 +188,11 @@ $default-text-gradient-danger: linear-gradient(214deg, rgba(224,32,32,1) 0%, rgb
 
 $--n-ease-in-out-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
 
+$--n-ease-in-out-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
+$--n-ease-out-cubic-bezier: cubic-bezier(0, 0, .2, 1);
+$--n-ease-in-cubic-bezier: cubic-bezier(.4, 0, 1, 1);
+
+
 // $scrollbar-color: rgba(255,255,255,0.2);
 // $scrollbar-color--hover: rgba(255,255,255,0.3);
 
@@ -263,7 +270,7 @@ $--n-ease-in-out-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
   }
   &.#{$namespace}-#{$block}--transition-leave, &.#{$namespace}-#{$block}--transition-enter-to {
     opacity: 1; 
-    transform: scale(0.99999) $original-transform;
+    transform: $--n-transform-debounce-scale $original-transform;
   }
 }
 
@@ -300,12 +307,12 @@ $--n-ease-in-out-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
   }
 }
 
-@mixin slide-in-from-right-transition($duration: .3s) {
+@mixin slide-in-from-right-transition($duration: .3s, $leave-duration: .2s) {
   &.#{$namespace}-slide-in-from-right-leave-active {
-    transition: transform $duration $--n-ease-in-out-cubic-bezier;
+    transition: transform $leave-duration $--n-ease-in-cubic-bezier;
   }
   &.#{$namespace}-slide-in-from-right-enter-active {
-    transition: transform $duration $--n-ease-in-out-cubic-bezier;
+    transition: transform $duration $--n-ease-out-cubic-bezier;
   }
   &.#{$namespace}-slide-in-from-right-enter-to {
     transform: translateX(0);
@@ -320,6 +327,70 @@ $--n-ease-in-out-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
     transform: translateX(100%);
   }
 }
+
+@mixin slide-in-from-top-transition($duration: .3s, $leave-duration: .2s) {
+  &.#{$namespace}-slide-in-from-top-leave-active {
+    transition: transform $leave-duration $--n-ease-in-cubic-bezier;
+  }
+  &.#{$namespace}-slide-in-from-top-enter-active {
+    transition: transform $duration $--n-ease-out-cubic-bezier;
+  }
+  &.#{$namespace}-slide-in-from-top-enter-to {
+    transform: translateY(0);
+  }
+  &.#{$namespace}-slide-in-from-top-enter {
+    transform: translateY(-100%);
+  }
+  &.#{$namespace}-slide-in-from-top-leave {
+    transform: translateY(0);
+  }
+  &.#{$namespace}-slide-in-from-top-leave-to {
+    transform: translateY(-100%);
+  }
+}
+
+@mixin slide-in-from-bottom-transition($duration: .3s, $leave-duration: .2s) {
+  &.#{$namespace}-slide-in-from-bottom-leave-active {
+    transition: transform $leave-duration $--n-ease-in-cubic-bezier;
+  }
+  &.#{$namespace}-slide-in-from-bottom-enter-active {
+    transition: transform $duration $--n-ease-out-cubic-bezier;
+  }
+  &.#{$namespace}-slide-in-from-bottom-enter-to {
+    transform: translateY(0);
+  }
+  &.#{$namespace}-slide-in-from-bottom-enter {
+    transform: translateY(100%);
+  }
+  &.#{$namespace}-slide-in-from-bottom-leave {
+    transform: translateY(0);
+  }
+  &.#{$namespace}-slide-in-from-bottom-leave-to {
+    transform: translateY(100%);
+  }
+}
+
+@mixin slide-in-from-left-transition($duration: .3s, $leave-duration: .2s) {
+  &.#{$namespace}-slide-in-from-left-leave-active {
+    transition: transform $duration $--n-ease-in-cubic-bezier;
+  }
+  &.#{$namespace}-slide-in-from-left-enter-active {
+    transition: transform $duration $--n-ease-out-cubic-bezier;
+  }
+  &.#{$namespace}-slide-in-from-left-enter-to {
+    transform: translateX(0);
+  }
+  &.#{$namespace}-slide-in-from-left-enter {
+    transform: translateX(-100%);
+  }
+  &.#{$namespace}-slide-in-from-left-leave {
+    transform: translateX(0);
+  }
+  &.#{$namespace}-slide-in-from-left-leave-to {
+    transform: translateX(-100%);
+  }
+}
+
 
 @mixin slide-right-transition($block, $duration: .3s, $delay: .3s) {
   &.#{$namespace}-#{$block}--transition-leave-active {
@@ -458,7 +529,7 @@ $--n-ease-in-out-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
     opacity: 0;
   }
   &.n-icon-switch-enter-to, &.n-icon-switch-leave {
-    transform: scale(0.9999) $original-transform;
+    transform: $--n-transform-debounce-scale $original-transform;
     opacity: 1;
   }
   &.n-icon-switch-leave-active, &.n-icon-switch-enter-active {

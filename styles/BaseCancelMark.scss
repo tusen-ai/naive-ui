@@ -14,7 +14,7 @@
     }
     @include b(cancel-mark-spin) {
       @include icon-switch-transition();
-      transform: scale(0.9999);
+      transform: $--n-transform-debounce-scale;
       position: absolute;
       height: 12px;
       width: 12px;
@@ -22,7 +22,7 @@
     @include b(cancel-mark-cross) {
       @include once {
         @include icon-switch-transition();
-        transform: scale(0.9999);
+        transform: $--n-transform-debounce-scale;
         position: absolute;
         height: 12px;
         width: 12px;
@@ -57,7 +57,7 @@
       @include once {
         // @include fade-in-transition(cancel-mark);
         @include icon-switch-transition();
-        transform: scale(0.9999);
+        transform: $--n-transform-debounce-scale;
         position: absolute;
         top: 0;
         left: 0;

@@ -1,47 +1,54 @@
 <template>
   <li
     class="n-menu-item"
-    :style="{ paddingLeft: delayedPaddingLeft + 'px' }"
-    :class="{
-      'n-menu-item--selected': selected,
-      'n-menu-item--disabled': synthesizedDisabled
-    }"
-    @click="handleClick"
   >
-    <template v-if="isFirstLevel">
+    <template v-if="renderContentAsPopover">
       <n-tooltip
-        placement="right"
-        show-arrow
-        :disabled="!rootMenuCollapsed"
+        :placement="menuItemPopoverPlacement"
+        :disabled="rootMenuIsHorizontal || !rootMenuCollapsed"
       >
         <template v-slot:activator>
-          <n-menu-item-header
+          <n-menu-item-content
+            :selected="selected"
+            :padding-left="delayedPaddingLeft"
             :max-icon-size="maxIconSize"
             :active-icon-size="activeIconSize"
             :title="title"
+            :disabled="synthesizedDisabled"
+            :title-extra="titleExtra"
             @click="handleClick"
           >
             <template v-slot:icon>
               <slot name="icon" />
             </template>
+            <template v-slot:header-extra>
+              <slot name="extra" />
+            </template>
             <slot />
-          </n-menu-item-header>
+          </n-menu-item-content>
         </template>
         {{ title }}
       </n-tooltip>
     </template>
-    <n-menu-item-header
+    <n-menu-item-content
       v-else
       :max-icon-size="maxIconSize"
       :active-icon-size="activeIconSize"
+      :padding-left="delayedPaddingLeft"
       :title="title"
+      :title-extra="titleExtra"
+      :disabled="synthesizedDisabled"
+      :selected="selected"
       @click="handleClick"
     >
       <template v-slot:icon>
         <slot name="icon" />
       </template>
+      <template v-slot:header-extra>
+        <slot name="header" />
+      </template>
       <slot />
-    </n-menu-item-header>
+    </n-menu-item-content>
   </li>
 </template>
 
@@ -49,39 +56,34 @@
 import collectable from '../../../mixins/collectable'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
-import NMenuItemHeader from './MenuItemHeader'
+import NMenuItemContent from './MenuItemContent'
 import NTooltip from '../../Tooltip'
+import menuContentMixin from './menuContentMixin'
 
 export default {
   name: 'NMenuItem',
   components: {
-    NMenuItemHeader,
+    NMenuItemContent,
     NTooltip
   },
   mixins: [
-    collectable('NSubmenu', 'menuItemNames', 'name', true, function (injection) {
-      return this.NMenu !== injection.NMenu
+    collectable('PenetratedNSubmenu', 'menuItemNames', 'name', true, function (injectedNSubmenu) {
+      const injectedNMenu = this.NMenu
+      if (injectedNMenu !== injectedNSubmenu.NMenu) {
+        if (injectedNSubmenu.rootMenuIsHorizontal) return false
+        return true
+      }
     }),
     withapp,
-    themeable
+    themeable,
+    menuContentMixin
   ],
-  inject: {
-    NMenu: {
-      default: null
-    },
-    NSubmenu: {
-      default: null
-    },
-    NMenuItemGroup: {
-      default: null
-    }
-  },
   props: {
-    value: {
-      type: Number,
+    title: {
+      type: [ String, Function ],
       default: null
     },
-    title: {
+    titleExtra: {
       type: [ String, Function ],
       default: null
     },
@@ -91,7 +93,7 @@ export default {
     },
     disabled: {
       type: Boolean,
-      default: false
+      default: undefined
     }
   },
   data () {
@@ -100,48 +102,12 @@ export default {
     }
   },
   computed: {
-    rootMenuCollapsed () {
-      return this.NMenu.collapsed
-    },
-    useCollapsedIconSize () {
-      return this.NMenu.collapsed && this.isFirstLevel
-    },
-    maxIconSize () {
-      return Math.max(this.collapsedIconSize, this.iconSize)
-    },
-    activeIconSize () {
-      if (this.useCollapsedIconSize) {
-        return this.collapsedIconSize
-      } else {
-        return this.iconSize
-      }
-    },
-    collapsedIconSize () {
-      return this.NMenu.collapsedIconSize || this.NMenu.iconSize
-    },
-    iconSize () {
-      return this.NMenu.iconSize
-    },
-    isFirstLevel () {
-      return !this.NSubmenu && !this.NMenuItemGroup
-    },
-    paddingLeft () {
-      if (this.isFirstLevel && this.NMenu.collapsedWidth !== null && this.NMenu.collapsed) {
-        return this.NMenu.collapsedWidth / 2 - this.collapsedIconSize / 2
-      }
-      if (this.NMenuItemGroup) {
-        return this.NMenu.indent / 2 + this.NMenuItemGroup.paddingLeft
-      } else if (this.NSubmenu) {
-        return this.NMenu.indent + this.NSubmenu.paddingLeft
-      } else {
-        return this.NMenu.rootIndent || this.NMenu.indent
-      }
-    },
     synthesizedDisabled () {
-      return ((this.NSubmenu && this.NSubmenu.synthesizedDisabled) || this.disabled)
+      if (this.disabled !== undefined) return this.disabled
+      return this.PenetratedNSubmenu && this.PenetratedNSubmenu.synthesizedDisabled
     },
     selected () {
-      if (this.NMenu.value === this.name) {
+      if (this.rootMenuValue === this.name) {
         return true
       } else {
         return false

@@ -1,6 +1,6 @@
 <template>
   <li class="n-menu-item-group">
-    <span class="n-menu-item-group-title" :style="{ paddingLeft: paddingLeft + 'px' }">
+    <span class="n-menu-item-group-title" :style="{ paddingLeft: delayedPaddingLeft && delayedPaddingLeft + 'px' }">
       <slot name="header"><render :render="title" /></slot>
     </span>
     <div>
@@ -45,11 +45,11 @@ export default {
     }
   },
   computed: {
-    isFirstLevel () {
+    atRoot () {
       return !this.NSubmenu && !this.NMenuItemGroup
     },
     paddingLeft () {
-      if (this.isFirstLevel) {
+      if (this.atRoot) {
         return this.NMenu.rootIndent === null ? this.NMenu.indent : this.NMenu.rootIndent
       }
       if (this.NMenuItemGroup) {

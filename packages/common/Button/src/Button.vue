@@ -5,7 +5,7 @@
       'n-button--round': round,
       'n-button--circle': circle,
       [`n-button--${type}-type`]: true,
-      [`n-button--${size}-size`]: true,
+      [`n-button--${synthesizedSize}-size`]: true,
       'n-button--disabled': disabled,
       'n-button--loading': loading,
       'n-button--block': block,
@@ -121,6 +121,11 @@ export default {
     NIconSwitchTransition,
     NFadeInHeightExpandTransition
   },
+  inject: {
+    NButtonGroup: {
+      default: null
+    }
+  },
   mixins: [withapp, themeable, hollowoutable],
   props: {
     text: {
@@ -194,6 +199,12 @@ export default {
     }
   },
   computed: {
+    synthesizedSize () {
+      if (this.NButtonGroup && this.NButtonGroup.size) {
+        return this.NButtonGroup.size
+      }
+      return this.size
+    },
     noTextContent () {
       return this.circle || !this.$slots.default
     },

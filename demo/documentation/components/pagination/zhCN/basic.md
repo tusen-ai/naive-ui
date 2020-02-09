@@ -1,4 +1,4 @@
-# 基本用法
+# 基础用法
 ```html
 <n-pagination
   v-model="page"

@@ -22,7 +22,7 @@
       :theme="synthesizedTheme"
       :active="active"
       :pattern="pattern"
-      :placeholder="placeholder"
+      :placeholder="localizedPlaceholder"
       :selected-option="selectedOption"
       :selected-options="selectedOptions"
       :multiple="multiple"
@@ -94,6 +94,7 @@ import { getType, traverseWithCallback } from './utils'
 import asformitem from '../../../mixins/asformitem'
 import NBasePortal from '../../../base/Portal'
 import CascaderSelectMenu from './CascaderSelectMenu'
+import locale from '../../../mixins/locale'
 
 import {
   rootedOptions,
@@ -118,7 +119,7 @@ export default {
   directives: {
     clickoutside
   },
-  mixins: [withapp, themeable, asformitem()],
+  mixins: [withapp, themeable, asformitem(), locale('Cascader')],
   model: {
     prop: 'value',
     event: 'change'
@@ -128,13 +129,13 @@ export default {
       type: Array,
       default: null
     },
-    // eslint-disable-next-line vue/require-prop-types
     value: {
+      type: [String, Number],
       default: null
     },
     placeholder: {
       type: String,
-      default: 'Please Select'
+      default: undefined
     },
     multiple: {
       type: Boolean,
@@ -202,6 +203,10 @@ export default {
   },
   computed: {
     type: getType,
+    localizedPlaceholder () {
+      if (this.placeholder !== undefined) return this.placeholder
+      return this.localeNamespace.placeholder
+    },
     enableAllOptions () {
       return !this.leafOnly
     },

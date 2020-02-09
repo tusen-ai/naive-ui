@@ -20,6 +20,7 @@ export default {
         title: 'Async',
         content:
           'Click and count down 3 second',
+        positiveText: 'Confirm',
         onPositiveClick: hide => {
           confirmInstance.loading = true
           this.$NMessage.success('Count down 3 second')

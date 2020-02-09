@@ -5,20 +5,20 @@
   title="确认"
   content="你确定" 
   :closable="false"
+  negative-text="不确认"
   positive-text="确认"
-  @positive-click="submitCallback"
-  @negative-click="cancelCallback"
-  negative-text="不确认">
-</n-confirm>
+  @positive-click="handlePositiveClick"
+  @negative-click="handleNegativeClick"
+/>
 ```
 ```js
 export default {
   methods: {
-    cancelCallback () {
+    handleNegativeClick () {
       this.$NMessage.warning('取消')
       this.isActive = false
     },
-    submitCallback () {
+    handlePositiveClick () {
       this.$NMessage.success('确认')
       this.isActive = false
     }

@@ -3,14 +3,14 @@ Why change event is an example? Because at first there isn't much to write.
 ```html
 <n-select
   v-model="selectedValue"
-  placeholder="Please Select Type"
+  placeholder="Please Select a Song"
   :options="options"
   @change="handleChange"
 />
 <n-select
   v-model="selectedArray"
   multiple
-  placeholder="Please Select Type"
+  placeholder="Please Select Songs"
   :options="options"
   @change="handleChange"
 />

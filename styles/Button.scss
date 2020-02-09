@@ -139,6 +139,7 @@
       @include e(icon) {
         @include b(icon) {
           fill: map-get($map: $ghost-button-color, $key: $type) !important;
+          stroke: map-get($map: $ghost-button-color, $key: $type) !important;
         }
         circle {
           stroke: map-get($map: $ghost-button-color, $key: $type) !important;
@@ -149,6 +150,7 @@
       @include e(icon) {
         @include b(icon) {
           fill: map-get($map: $ghost-button-color, $key: $type) !important;
+          stroke: map-get($map: $ghost-button-color, $key: $type) !important;
         }
         circle {
           stroke: map-get($map: $ghost-button-color, $key: $type) !important;

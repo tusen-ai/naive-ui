@@ -171,6 +171,7 @@
         />
       </div>
     </template>
+    <div class="n-base-picker-border-mask" />
   </div>
 </template>
 

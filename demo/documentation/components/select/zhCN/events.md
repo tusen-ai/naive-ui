@@ -3,14 +3,14 @@
 ```html
 <n-select
   v-model="selectedValue"
-  placeholder="Please Select Type"
+  placeholder="选择歌曲"
   :options="options"
   @change="handleChange"
 />
 <n-select
   v-model="selectedArray"
   multiple
-  placeholder="Please Select Type"
+  placeholder="选择歌曲"
   :options="options"
   @change="handleChange"
 />

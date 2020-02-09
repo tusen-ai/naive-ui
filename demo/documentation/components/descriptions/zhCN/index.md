@@ -14,7 +14,7 @@ size
 
 ## Props
 ### Descriptions Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |title|`string`|`null`||
 |column|`number`|`3`||
@@ -24,20 +24,20 @@ size
 |bordered|`boolean`|`false`||
 
 ### Description Item Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |label|`string`|`null`||
 |span|`number`|`1`||
 
 ## Slots
 ### Descriptions Slots
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |default|`()`||
 |header|`()`||
 
 ### Description Item Slots
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |default|`()`||
 |label|`()`||

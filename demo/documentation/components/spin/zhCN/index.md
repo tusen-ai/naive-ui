@@ -6,7 +6,7 @@ basic
 wrap
 ```
 ## Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |spinning|`boolean`|`false`|Spin 在填入内容的状态是否激活|
 |size|`'small' \| 'in-small' \| 'medium' \| 'in-medium' \| 'large' \| 'in-large'`|`medium`||
@@ -14,6 +14,6 @@ wrap
 |stroke-width|`number`|`null`|Spin 边缘的相对宽度，假定 Spin 的外侧半径是 100|
 
 ## Slots
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |default|`()`|如果填入，Spin 会包裹填入的内容|

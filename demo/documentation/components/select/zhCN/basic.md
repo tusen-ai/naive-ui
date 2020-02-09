@@ -1,5 +1,5 @@
 # 基础用法
-选择器的基本用法。
+选择器的基础用法。
 ```html
 <n-select
   v-model="value"

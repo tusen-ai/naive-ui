@@ -11,7 +11,7 @@ event
 disabled
 clearable
 autosize
-split
+input-group
 ```
 ## V-model
 |Prop|Event|
@@ -19,6 +19,7 @@ split
 |value|input|
 
 ## Props
+### Input Props
 |Name|Type|Default|Description|
 |-|-|-|-|
 |type|`'text' \| 'password' \| 'textarea'`|`'text'`||
@@ -32,14 +33,27 @@ split
 |clearable|`boolean`|`false`||
 |autosize|`boolean \| { minRows?: number, maxRows?: number }`|`false`||
 |readonly|`boolean`|`false`||
+|placeholder|`string`|`null`||
 
 ## Slots
+### Input Slots
 |Name|Parameters|Description|
 |-|-|-|
 |affix|`()`||
 |suffix|`()`||
 
+### Input Group Slots
+|Name|Parameters|Description|
+|-|-|-|
+|default|`()`||
+
+### Input Group Label Slots
+|Name|Parameters|Description|
+|-|-|-|
+|default|`()`||
+
 ## Events
+### Input Events
 |Name|Parameters|Description|
 |-|-|-|
 |input|`(value: string)`||

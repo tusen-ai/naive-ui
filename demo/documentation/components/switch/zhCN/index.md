@@ -11,12 +11,12 @@ event
 |value|change|
 
 ## Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |value|`boolean`|`false`||
 |disabled|`boolean`|`false`||
 
 ## Events
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |change|`(value: boolean)`||

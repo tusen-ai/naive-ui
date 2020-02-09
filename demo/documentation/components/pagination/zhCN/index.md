@@ -15,7 +15,7 @@ disabled
 |page|change|
 
 ## Props
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |page|`number`|`null`||
 |page-count|`number`|`null`||
@@ -28,7 +28,7 @@ disabled
 |on-change|`(page: number) => any`|`null`||
 
 ## Events
-|名称|参数|介绍|
+|名称|参数|说明|
 |-|-|-|
 |change|`(page: number)`||
 |page-size-chagne|`(pageSize: number)`||

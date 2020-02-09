@@ -96,6 +96,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    directive: {
+      type: String,
+      default: 'if'
     }
   },
   render (h, context) {

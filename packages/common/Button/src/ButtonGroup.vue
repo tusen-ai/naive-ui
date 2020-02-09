@@ -13,10 +13,15 @@
 <script>
 export default {
   name: 'NButtonGroup',
+  provide () {
+    return {
+      NButtonGroup: this
+    }
+  },
   props: {
-    block: {
-      type: Boolean,
-      default: false
+    size: {
+      type: String,
+      default: null
     },
     vertical: {
       type: Boolean,

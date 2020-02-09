@@ -7,7 +7,7 @@ basic
 ## API
 ### $NLoadingBar
 #### $NLoadingBar Methods
-|名称|类型|介绍|
+|名称|类型|说明|
 |-|-|-|
 |`start`|`() => void`||
 |`finish`|`() => void`||

@@ -16,7 +16,7 @@ left
 |label-width|`number`|`null`|The width of label. Can be useful when `label-placement` is `'left'`.|
 |label-align|`'left' \| 'right'`|`'left'`|Text align in label.|
 |label-placement|`'left' \| 'top'`|`'top'`||
-|model|`object`||The object to get collected value from form items. **required**|
+|model|`object`|`{}`|The object to get collected value from form items.|
 |rules|`type FormRules = { [itemValidatePath: string]: FormItemRule \| Array<FormItemRule> \| FormRules }`|`{}`|The rules to validate form items.|
 |show-require-mark|`boolean`|`true`|Whether to show require mark when form item is required.|
 

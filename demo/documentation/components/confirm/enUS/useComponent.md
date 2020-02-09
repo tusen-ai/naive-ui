@@ -5,21 +5,21 @@ Sometimes you may want to use a component.
   title="Confirm"
   content="Are you sure?" 
   :closable="false"
+  negative-text="Cancel"
   positive-text="Submit"
-  @positive-click="submitCallback"
-  @negative-click="cancelCallback"
-  negative-text="Cancel">
-</n-confirm>
+  @positive-click="handlePositiveClick"
+  @negative-click="handleNegativeClick"
+/>
 ```
 ```js
 export default {
   methods: {
-    cancelCallback () {
+    handleNegativeClick () {
       this.$NMessage.waning('Cancel')
       this.isActive = false
     },
-    submitCallback () {
-      this.$NMessage.success('Submit')
+    handlePositiveClick () {
+      this.$NMessage.success('Confirm')
       this.isActive = false
     }
   }

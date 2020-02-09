@@ -5,7 +5,7 @@
   v-model="selectedValues"
   multiple
   filterable
-  placeholder="Search Songs"
+  placeholder="搜索歌曲"
   :options="options"
   :loading="loading"
   clearable

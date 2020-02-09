@@ -14,7 +14,7 @@ duration
 ## API
 #### $Notification API
 #### $NNotification Methods
-|名称|类型|介绍|
+|名称|类型|说明|
 |-|-|-|
 |open|`(option: NotificationOption, type: string = 'default') => NotificationEnvironment`|`type` 可以是 `'default'`, `'warning'`, `'info'`, `'success'` 或 `'error'`|
 |success|`(option: NofiticationOption) => NotificationEnvironment`||
@@ -24,14 +24,14 @@ duration
 
 #### $Notification Properties
 
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |scrollable|`boolean`|`false`||
 
 ### NotificationOption API
 #### NotificationOption Type
 
-|名称|类型|默认值|介绍|
+|名称|类型|默认值|说明|
 |-|-|-|-|
 |avatar|`string \| function`|`null`|可以是 render 函数|
 |title|`string \| function`|`null`|可以是 render 函数|
@@ -49,7 +49,7 @@ duration
 #### NotificationEnvironment Properties
 NofiticationEnvironment 实例的属性可以被动态改变。
 
-|名称|类型|介绍|
+|名称|类型|说明|
 |-|-|-|
 |avatar|`string \| function`|可以是 render 函数|
 |title|`string \| function`|可以是 render 函数|
@@ -64,6 +64,6 @@ NofiticationEnvironment 实例的属性可以被动态改变。
 |onAfterShow|`function`||
 
 #### NotificationEnvironment Methods
-|名称|类型|介绍|
+|名称|类型|说明|
 |-|-|-|
 |hide|`()`||

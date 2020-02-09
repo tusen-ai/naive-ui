@@ -1,5 +1,5 @@
 # 信息 Message
-从浏览器（一般是）顶部降下来的神谕。
+（一般是）从浏览器顶部降下来的神谕。
 ## 演示
 ```demo
 basic
@@ -12,7 +12,7 @@ about-theme
 
 ## API
 ### $NMessage Methods
-|名称|类型|介绍|
+|名称|类型|说明|
 |-|-|-|
 |info|`(content: string, option?: MessageOption) => MessageEnvironment`||
 |success|`(content: string, option?: MessageOption) => MessageEnvironment`||
@@ -21,7 +21,7 @@ about-theme
 |loading|`(content: string, option?: MessageOption) => MessageEnvironment`||
 
 ### MessageOption Type
-|名称|类型|介绍|
+|名称|类型|说明|
 |-|-|-|
 |content|`string \| function`|Can be a render function|
 |icon|`string \| function`|Can be a render function|
@@ -30,7 +30,7 @@ about-theme
 
 ### MessageEnvironment API
 #### MessageEnvironment Properties
-|名称|类型|介绍|
+|名称|类型|说明|
 |-|-|-|
 |content|`string \| function`|Can be a render function|
 |icon|`string \| function`|Can be a render function|
@@ -39,6 +39,6 @@ about-theme
 |onAfterHide|`function`||
 
 #### MessageEnvironment Methods
-|名称|类型|介绍|
+|名称|类型|说明|
 |-|-|-|
 |hide|`()`||

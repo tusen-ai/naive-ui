@@ -1,0 +1,1 @@
+<template><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><title>ionicons-v5-c</title><rect x="80" y="80" width="352" height="352"/></svg></template>
