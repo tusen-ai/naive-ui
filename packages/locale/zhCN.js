@@ -3,6 +3,9 @@ export default {
     positiveText: '确认',
     negativeText: '取消'
   },
+  Cascader: {
+    placeholder: '请选择'
+  },
   DatePicker: {
     Jan: '一月',
     Feb: '二月',

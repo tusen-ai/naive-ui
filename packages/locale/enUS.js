@@ -3,6 +3,9 @@ export default {
     positiveText: 'Confirm',
     negativeText: 'Cancel'
   },
+  Cascader: {
+    placeholder: 'Please Select'
+  },
   DatePicker: {
     Jan: 'Jan',
     Feb: 'Feb',
