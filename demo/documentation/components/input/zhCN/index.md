@@ -11,6 +11,7 @@ event
 disabled
 clearable
 autosize
+input-group
 ```
 ## V-model
 |Prop|Event|
@@ -18,6 +19,7 @@ autosize
 |value|input|
 
 ## Props
+### Input Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |type|`'text' \| 'password' \| 'textarea'`|`'text'`||
@@ -34,12 +36,25 @@ autosize
 |placeholder|`string`|`null`||
 
 ## Slots
+### Input Slots
 |属性|类型|说明|
 |-|-|-|
 |affix|`()`||
 |suffix|`()`||
 
+### Input Group Slots
+|属性|类型|说明|
+|-|-|-|
+|default|`()`||
+
+### Input Group Label Slots
+|属性|类型|说明|
+|-|-|-|
+|default|`()`||
+
+
 ## Events
+### Input Events
 |属性|类型|说明|
 |-|-|-|
 |input|`(value: string)`||

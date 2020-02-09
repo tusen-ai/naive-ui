@@ -28,7 +28,7 @@ filter
 |-|-|-|-|
 |options|`Array<CascaderOption>`|`null`||
 |value|`string \| number`|`null`||
-|placeholder|`string`|`Please Select`||
+|placeholder|`string`|`请选择`||
 |multiple|`boolean`|`false`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |filterable|`boolean`|`false`|不能在和 `remote` prop 同时为 `true`|
