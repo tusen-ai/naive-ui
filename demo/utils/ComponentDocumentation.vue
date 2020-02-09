@@ -12,7 +12,20 @@ export default {
     }
   },
   mounted () {
-    this.NDocRoot.resetScrollPosition()
+    const paramsRegex = /\/([^/]+)\/([^/]+)\/([^/]+)/
+    if (this.NDocRoot.memorizedPath) {
+      const memorizedPath = this.NDocRoot.memorizedPath
+      const currentPath = this.$route.path
+      const memorizedDemoName = (paramsRegex.exec(memorizedPath) || [])[3]
+      const currentDemoName = (paramsRegex.exec(currentPath) || [])[3]
+      if (
+        memorizedDemoName &&
+        currentDemoName &&
+        memorizedDemoName !== currentDemoName
+      ) {
+        this.NDocRoot.resetScrollPosition()
+      }
+    }
   }
 }
 </script>
