@@ -36,7 +36,6 @@
       @delete-last-option="handleDeleteLastOption"
       @pattern-input="handlePatternInput"
     />
-
     <n-base-portal ref="portal1">
       <cascader-menu
         ref="menu1"
@@ -175,7 +174,7 @@ export default {
       type: Function,
       default: () => {}
     },
-    splitor: {
+    seperator: {
       type: String,
       default: ' / '
     },
@@ -240,7 +239,7 @@ export default {
             if (values.has(option.value)) {
               options.push({
                 value: option.value,
-                label: path.slice(1, path.length).join(this.splitor)
+                label: path.slice(1, path.length).join(this.seperator)
               })
             }
           }, () => {
@@ -265,7 +264,7 @@ export default {
           if (option.value === this.value) {
             selectedOption = {
               value: option.value,
-              label: path.slice(1, path.length).join(this.splitor)
+              label: path.slice(1, path.length).join(this.seperator)
             }
           }
         }, () => {

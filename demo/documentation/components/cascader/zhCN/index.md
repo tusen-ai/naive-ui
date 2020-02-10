@@ -28,17 +28,17 @@ filter
 |-|-|-|-|
 |options|`Array<CascaderOption>`|`null`||
 |value|`string \| number`|`null`||
-|placeholder|`string`|`请选择`||
+|placeholder|`string`|`'请选择'`||
 |multiple|`boolean`|`false`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
-|filterable|`boolean`|`false`|不能在和 `remote` prop 同时为 `true`|
+|filterable|`boolean`|`false`|不能和 `remote` 同时为 `true`|
 |disabled|`boolean`|`false`||
 |expand-trigger|`'click' \| 'hover'`|`'click'`||
 |leaf-only|`boolean`|`true`||
 |clearable|`boolean`|`false`||
 |remote|`boolean`|`false`||
 |on-load|`(option: CascaderOption, resolve: (children: Array<CascaderOption>) => void) => any`|`() => {}`|在点击未加载完成节点时的回调。把获得的子节点传入 `resolve` 函数来设定这个节点的子节点。|
-|splitor|`string`|`'/'`||
+|seperator|`string`|`'/'`||
 |filter|`(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean`|一个基于字符串的过滤算法||
 
 ## Events
