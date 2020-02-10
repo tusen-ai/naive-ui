@@ -59,6 +59,7 @@ export default {
   data () {
     return {
       collectedLinkHrefs: [],
+      titleEls: [],
       activeHref: null,
       container: null
     }
@@ -90,20 +91,31 @@ export default {
     disableTransitionOneTick () {
       const barEl = this.$refs.bar
       const slotEl = this.$refs.slot
+      const titleEls = this.titleEls
       if (barEl) {
         barEl.style.transition = 'none'
-        void (barEl.offsetWidth)
-        barEl.getBoundingClientRect()
       }
       if (slotEl) {
         slotEl.style.transition = 'none'
-        void (slotEl.offsetWidth)
       }
+      titleEls.forEach(titleEl => {
+        titleEl.style.transition = 'none'
+      })
       this.$nextTick().then(() => {
         const barEl = this.$refs.bar
         const slotEl = this.$refs.slot
-        if (barEl) barEl.style.transition = null
-        if (slotEl) slotEl.style.transition = null
+        if (barEl) {
+          void (barEl.offsetWidth)
+          barEl.style.transition = null
+        }
+        if (slotEl) {
+          void (slotEl.offsetWidth)
+          slotEl.style.transition = null
+        }
+        titleEls.forEach(titleEl => {
+          void (titleEl.offsetWidth)
+          titleEl.style.transition = null
+        })
       })
     },
     updateBarPosition (linkTitleEl, transition = true) {

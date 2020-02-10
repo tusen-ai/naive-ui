@@ -48,6 +48,13 @@ export default {
       if (value) this.NAnchor.updateBarPosition(this.$refs.title)
     }
   },
+  mounted () {
+    this.NAnchor.titleEls.push(this.$refs.title)
+  },
+  beforeDestroy () {
+    const titleElIndex = this.NAnchor.titleEls.findIndex(el => el === this.$refs.title)
+    if (~titleElIndex) this.NAnchor.titleEls.splice(titleElIndex, 1)
+  },
   methods: {
     handleFontReady () {
       if (this.active) {
