@@ -272,8 +272,8 @@ export default {
       }
     ) {
       if (!this.path) {
-        console.warn(
-          '[naive-ui/form-item/validate]: validate form-item without path'
+        console.error(
+          '[naive-ui/form-item]: `n-form-item` without `path` can\'t be validated.'
         )
         return
       }

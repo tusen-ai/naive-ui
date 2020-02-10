@@ -1,3 +1,4 @@
+/** deprecated */
 const DROPDOWN_RELATED_COMPONENT = ['NDropdownItem', 'NDropdownSubmenu', 'NMenuItem', 'NSubmenu']
 const SELECT_OPTION_LIKE_COMPONENT = ['NBaseSelectOption', 'NDropdownItem', 'NDropdownSubmenu', 'NMenuItem', 'NSubmenu']
 
@@ -56,7 +57,7 @@ function getOptionPropsDataOf (vNode) {
         try {
           propsData.label = vNode.componentOptions.children[0].text.trim()
         } catch (err) {
-          console.error(['[naive-ui/select-option]: Select Option only accept pure text as children.'])
+          // console.error(['[naive-ui/select-option]: Select Option only accept pure text as children.'])
           propsData.label = null
         }
       } else if (propsData.value) {

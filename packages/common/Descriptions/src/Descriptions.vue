@@ -59,7 +59,9 @@ export default {
   render (h) {
     let children = this.$scopedSlots.default ? this.$scopedSlots.default() : []
     if (children.some(child => !isDescriptionsItem(child))) {
-      console.warn('[naive-ui/n-descriptions]: `n-descriptions` only takes `n-descriptions-item` as children.')
+      console.error(
+        '[naive-ui/descriptions]: `n-descriptions` only takes `n-descriptions-item` as children.'
+      )
     }
     children = children.filter(child => isDescriptionsItem(child))
     children = children.reduce((state, item, index) => {

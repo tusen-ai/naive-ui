@@ -5,7 +5,9 @@ export default {
     const childrenCount = defaultSlot && defaultSlot.length
     if (defaultSlot && childrenCount) {
       if (childrenCount !== 1) {
-        console.error(`NBaseContext: default slot has more than one child`)
+        console.error(
+          '[naive-ui/base-context]: `n-base-context` only takes single child node. If multiple child nodes are set, only the first one will be rendered.'
+        )
       }
       return defaultSlot[0]
     } else {

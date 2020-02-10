@@ -29,7 +29,9 @@ export default {
       styleScheme: this.synthesizedTheme ? styleScheme[this.synthesizedTheme] : null
     }) : []
     if (defaultSlot.length > 1) {
-      console.warn('[naive-ui/config-consumer]: Config consumer only takes single child node')
+      console.error(
+        '[naive-ui/config-consumer]: `n-config-consumer` only takes single child node. If multiple child nodes are set, only the first one will be rendered.'
+      )
     }
     return [defaultSlot[0]]
   }

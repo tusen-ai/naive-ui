@@ -307,6 +307,10 @@ export default {
       return activeFilters
     },
     synthesizedActiveSorter () {
+      /**
+       * If one of the columns's sort order is false or 'ascend' or 'descend',
+       * the table's controll functionality should work in controlled manner.
+       */
       const columnsWithControlledSortOrder = this.normalizedColumns.filter(
         column => column.sortOrder === false ||
         column.sortOrder === 'ascend' ||
@@ -391,7 +395,6 @@ export default {
          * -1 for desc
          */
         const order = activeSorter.order
-        if (order === false) console.error(['[naive-ui/data-table/sorted-data]: The order of activeSorter shouldn\'t be `false`'])
         const sorter = (
           activeSorter.sorter === 'default'
             ? (row1, row2) => {

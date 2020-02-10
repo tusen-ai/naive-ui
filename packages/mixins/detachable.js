@@ -50,7 +50,10 @@ export default {
   },
   beforeMount () {
     if (!this.detachTarget) {
-      console.warn(this.$options.name, ' will be mounted to', this.detachTarget, ', but it doesn\'t exist! Modal component won\'t work!')
+      console.error(
+        '[naive-ui/mixins/detachable]: %s has no `detach-target`.',
+        this.$options.name
+      )
     }
   },
   mounted () {

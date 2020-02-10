@@ -173,7 +173,9 @@ export default {
     synthesizedPageCount () {
       if (this.total !== undefined) return this.total <= 0 ? 1 : this.total
       if (this.pageCount !== undefined) return this.pageCount <= 0 ? 1 : this.pageCount
-      console.error('[naive-ui/pagination]: none of total and page-count is set')
+      console.error(
+        '[naive-ui/pagination]: None of total and page-count is set.'
+      )
       return 1
     },
     pageSizeOptions () {

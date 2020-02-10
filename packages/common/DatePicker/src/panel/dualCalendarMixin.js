@@ -31,7 +31,9 @@ export default {
             if (typeof value[0] === 'number' && typeof value[1] === 'number') {
               return value[1] >= value[0]
             } else {
-              console.error('[naive-ui/date-picker(datetimerange)]: Start time should be earlier than end time.')
+              console.error(
+                '[naive-ui/date-picker/datetimerange]: Start time should be no later than end time.'
+              )
             }
           }
         }

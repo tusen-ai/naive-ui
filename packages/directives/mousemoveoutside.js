@@ -51,7 +51,9 @@ const mousemoveoutside = {
         moveoutsideDelegate.registerHandler(el, el[ctx].handler)
       }
     } else {
-      console.error('[mousemoveoutside]: binding value is not a function')
+      console.error(
+        '[naive-ui/mousemoveoutside]: Binding value is not a function.'
+      )
     }
   },
   unbind (el) {

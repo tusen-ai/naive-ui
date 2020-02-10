@@ -59,7 +59,9 @@ function uncache () {
     cachedNextBackgroundColor = null
   }
   if (callCount < 0) {
-    console.error(['[naive-ui/hollowoutable]: Call count < 0. If you saw this line, there\'s probably a bug.'])
+    console.error(
+      '[naive-ui/mixins/hollowoutable]: Call count < 0. If you saw this message, there\'s probably a bug.'
+    )
   }
 }
 

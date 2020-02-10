@@ -109,7 +109,11 @@ function flattenOptions (optionsToBeFlattened) {
         }
         flattenedOptions.push(wrappedOption)
       } else {
-        console.error(['[naive-ui/select-menu]: type of option is unknown.'])
+        console.error(
+          '[naive-ui/select-menu]:',
+          option.type,
+          'typed option is supported.'
+        )
       }
     }
   }

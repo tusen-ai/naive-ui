@@ -57,7 +57,9 @@ const clickoutside = {
         clickoutsideDelegate.registerHandler(el, el[ctx].handler, false)
       }
     } else {
-      console.error('[mousemoveoutside]: binding value is not a function')
+      console.error(
+        '[naive-ui/clickoutside]: Binding value is not a function.'
+      )
     }
   },
   unbind (el) {

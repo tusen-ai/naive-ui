@@ -118,6 +118,9 @@ export default {
       )
       this.NDataTable.changeFilters(nextActiveFilters, this.column)
     },
+    /**
+     * @deprecated
+     */
     asyncInitializeOptions () {
       this.loading = true
       this.options().then(

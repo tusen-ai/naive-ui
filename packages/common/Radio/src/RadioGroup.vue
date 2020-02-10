@@ -9,7 +9,9 @@ function mapSlot (h, defaultSlot, currentComponent) {
   for (let i = 0; i < defaultSlot.length; ++i) {
     const wrappedInstance = defaultSlot[i]
     if (wrappedInstance === null) {
-      console.error('[naive ui]: Please don\'t use tags other than `n-radio` and `n-radio-button` in `n-radio-group`.')
+      console.error(
+        '[naive ui/radio]: `n-radio-group` only taks `n-radio` and `n-radio-button` as children.'
+      )
       continue
     }
     if (i === 0 || wrappedInstance.componentOptions.tag === 'n-radio') {

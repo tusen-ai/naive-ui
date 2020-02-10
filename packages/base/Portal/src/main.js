@@ -35,11 +35,15 @@ export default {
     const childrenCount = defaultSlot && defaultSlot.length
     if (defaultSlot && childrenCount) {
       if (childrenCount !== 1) {
-        console.error(`NBasePortal: default slot has more than one child`)
+        console.error(
+          '[naive-ui/n-base-portal]: `n-base-portal` only takes single child node. If multiple child nodes are set, only the first one will be rendered.'
+        )
       }
       return defaultSlot[0]
     } else {
-      console.error(`NBasePortal: default slot is empty`)
+      console.error(
+        '[naive-ui/n-base-portal]: `n-base-portal` has no child node.'
+      )
       return null
     }
   }

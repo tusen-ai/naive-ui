@@ -60,7 +60,9 @@ export default {
     const defaultSlot = this.$scopedSlots.default ? this.$scopedSlots.default() : []
     if (this.transparent) {
       if (defaultSlot.length > 1) {
-        console.warn('[naive-ui/config-provider]: Config provider only takes single child node in transparent mode.')
+        console.error(
+          '[naive-ui/config-provider]: `n-config-provider` only takes single child node when `transparent` prop is `true`. If multiple child nodes are set, only the first one will be rendered.'
+        )
       }
     }
     return !this.transparent ? h(this.as, {

@@ -46,7 +46,9 @@ class ZIndexManager {
       console.debug('[ZIndexManager.unregisterElement]: successfully delete $el') //, el)
       this.elementZIndex.delete(el)
     } else {
-      console.error('[ZIndexManager.unregisterElement]: element not found')
+      console.error(
+        '[naive-ui/mixins/zindexable]: Element not found when unregistering.'
+      )
     }
     this.afterManipulation()
   }

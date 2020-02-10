@@ -105,7 +105,10 @@ function getPositionInAbsoluteMode (placement) {
     position.bottom = '0'
     position.right = '100%'
   } else {
-    console.error('placement ' + placement + ' is not supported.')
+    console.error(
+      '[naive-ui/mixins/placeable]: Placement %s is not supported.',
+      placement
+    )
   }
   return position
 }
@@ -245,13 +248,13 @@ export default {
       this.trackingElement.style.position = 'absolute'
       if (this.manuallyPositioned) {
         if (!this.trackingElement) {
-          console.error('[naive-ui/placeable/updatePosition]: trackingElement not found!')
+          console.error('[naive-ui/mixins/placeable]: trackingElement not found.')
           return
         }
       } else {
         this._getTrackedElement()
         if (!this.trackedElement || !this.trackingElement) {
-          console.error('[naive-ui/placeable/updatePosition]: trakedElement or trackingElement not found!')
+          console.error('[naive-ui/mixins/placeable]: trakedElement or trackingElement not found.')
           return
         }
       }
