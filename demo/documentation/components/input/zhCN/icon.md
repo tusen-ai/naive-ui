@@ -1,18 +1,16 @@
-# 图标
-添加图标
+# 前缀 & 后缀
+在前缀后缀添加内容。
 ```html
 <n-input v-model="value" placeholder="搜索">
-  <template v-slot:affix>
+  <template v-slot:prefix>
     <n-icon>
       <md-search/>
     </n-icon>
   </template>
 </n-input>
-<n-input v-model="value" round placeholder="搜索">
-  <template v-slot:affix>
-    <n-icon>
-      <md-search/>
-    </n-icon>
+<n-input v-model="value" round placeholder="100,000,000">
+  <template v-slot:suffix>
+    元
   </template>
 </n-input>
 <n-input v-model="value" round placeholder="搜索">

@@ -4,7 +4,7 @@
 @include themes-mixin {
   @include b(cancel-mark) {
     @include once {
-      @include fade-in-transition(cancel-mark);
+      @include fade-in-scale-up-transition(cancel-mark);
       user-select: none;
       display: inline-block;
       position: relative;

@@ -5,13 +5,13 @@
     :class="{
       'n-input--disabled': disabled,
       [`n-input--${size}-size`]: true,
-      'n-input--textarea': type==='textarea',
-      'n-input--round': round && type!=='textarea',
+      'n-input--textarea': isTextarea,
+      'n-input--round': round && !isTextarea,
       'n-input--clearable': clearable,
       'n-input--split': pair,
       'n-input--focus': forceFocus || focus,
       'n-input--suffix': $slots.suffix,
-      'n-input--affix': $slots.affix,
+      'n-input--prefix': $slots.prefix || $slots.affix,
       [`n-${synthesizedTheme}-theme`]: synthesizedTheme
     }"
     :tabindex="!disabled && (pressEnterToActivateInput && !inputFocused) ? 0 : false"
@@ -22,6 +22,8 @@
     @click="handleClick"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
+    @compositionstart="handleCompositionStart"
+    @compositionend="handleCompositionEnd"
   >
     <pre
       v-if="isTextarea && autosize"
@@ -29,7 +31,7 @@
       class="n-input__textarea-mirror"
     >{{ value }}<br></pre>
     <textarea
-      v-if="type==='textarea'"
+      v-if="type === 'textarea'"
       ref="textarea"
       class="n-input__textarea"
       :class="{
@@ -48,8 +50,6 @@
       @input="handleInput"
       @change="handleChange"
       @keyup="handleKeyUp"
-      @compositionstart="handleCompositionStart"
-      @compositionend="handleCompositionEnd"
     />
     <input
       v-else
@@ -68,8 +68,6 @@
       @input="handleInput($event, 0)"
       @change="handleChange"
       @keyup="handleKeyUp"
-      @compositionstart="handleCompositionStart"
-      @compositionend="handleCompositionEnd"
     >
     <span
       v-if="pair"
@@ -94,32 +92,30 @@
       @input="handleInput($event, 1)"
       @change="handleChange"
       @keyup="handleKeyUp"
-      @compositionstart="handleCompositionStart"
-      @compositionend="handleCompositionEnd"
     >
     <div
-      v-if="$slots.affix"
-      class="n-input__affix"
+      v-if="$slots.affix || $slots.prefix"
+      class="n-input__prefix"
     >
-      <slot name="affix" />
+      <slot name="affix">
+        <slot name="prefix" />
+      </slot>
     </div>
-    <div
-      v-if="$slots.suffix"
-      class="n-input__suffix"
-      :class="{
-        'n-input__suffix--hide': !showIcon
-      }"
-    >
-      <slot name="suffix" />
-    </div>
-    <div class="n-input__cancel-mark">
-      <n-cancel-mark
-        :theme="synthesizedTheme"
-        :show="showCancelMark"
-        :clearable="clearable"
-        @clear="handleClear"
-      />
-    </div>
+    <transition name="n-button-suffix--transition">
+      <div
+        class="n-input__suffix"
+      >
+        <div class="n-input__cancel-mark">
+          <n-cancel-mark
+            :theme="synthesizedTheme"
+            :show="showCancelMark"
+            :clearable="clearable"
+            @clear="handleClear"
+          />
+        </div>
+        <slot name="suffix" />
+      </div>
+    </transition>
     <div class="n-input__border-mask" />
   </div>
 </template>
@@ -217,9 +213,9 @@ export default {
   },
   data () {
     return {
-      isComposing: false,
       focus: false,
       hover: false,
+      isComposing: false,
       inputFocused: false,
       shouldReturnFocusToWrapper: false,
       waitingBlurCallback: false
@@ -240,16 +236,12 @@ export default {
         return this.placeholder
       }
     },
-    showIcon () {
-      if (this.$slots.suffix && this.showCancelMark) return false
-      return true
-    },
     showCancelMark () {
-      if (this.disabled || !this.clearable || (!this.focus && !this.hover)) return false
+      if (this.disabled || !this.clearable) return false
       if (this.pair) {
-        return !!(Array.isArray(this.value) && (this.value[0] || this.value[1])) && (this.hover || this.focus)
+        return !!(Array.isArray(this.value) && (this.value[0] || this.value[1]))
       } else {
-        return !!this.value && (this.hover || this.focus)
+        return !!this.value
       }
     },
     isTextarea () {
@@ -294,9 +286,9 @@ export default {
     handleCompositionStart () {
       this.isComposing = true
     },
-    handleCompositionEnd (event) {
+    handleCompositionEnd (e) {
       this.isComposing = false
-      this.handleInput(event)
+      this.handleInput(e)
     },
     handleInput (e, index) {
       if (this.isComposing) return
@@ -347,7 +339,6 @@ export default {
       }
     },
     handleKeyUp (e) {
-      if (this.isComposing) return
       this.$emit('keyup', e)
     },
     handleChange (e) {
@@ -357,6 +348,7 @@ export default {
       this.$emit('click', e)
     },
     handleClear () {
+      this.$emit('clear')
       if (this.pair) {
         this.$emit('change', [])
         this.$emit('input', [])
