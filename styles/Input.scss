@@ -230,8 +230,8 @@
       transition: color .3s $--n-ease-in-out-cubic-bezier;
       color: map-get($--input-color, 'default');
       @include once {
-        padding-left: 0px;
-        padding-right: 0px;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
       }
     }
     @include m(disabled) {

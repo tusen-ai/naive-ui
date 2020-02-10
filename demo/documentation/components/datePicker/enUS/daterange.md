@@ -3,11 +3,13 @@
 <n-date-picker
   v-model="range1"
   type="daterange"
+  clearable
   :disabledTime="disabledTime"
 />
 <n-date-picker
   v-model="range2"
   type="daterange"
+  clearable
 />
 ```
 ```js

@@ -107,6 +107,7 @@ export default {
       this.mouseHovered = false
     },
     handleMouseDown (e) {
+      e.preventDefault()
       this.$emit('mousedown', e)
     }
   }

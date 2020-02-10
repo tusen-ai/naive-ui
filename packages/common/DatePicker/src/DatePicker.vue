@@ -22,7 +22,9 @@
       :readonly="disabled ? 'disabled' : false"
       :seperator="seperator"
       :force-focus="active"
+      :clearable="clearable"
       pair
+      @clear="handleClear"
       @click="handleActivatorClick"
       @focus="handleFocus"
       @wrapper-blur-to-outside="handleRangeInputWrapperBlur"
@@ -42,11 +44,13 @@
       :lazy-focus="true"
       :placeholder="localizedPlacehoder"
       :readonly="disabled ? 'disabled' : false"
+      :clearable="clearable"
       @click="handleActivatorClick"
       @focus="handleFocus"
       @wrapper-blur-to-outside="handleTimeInputWrapperBlur"
       @blur="handleTimeInputBlur"
       @input="handleTimeInput"
+      @clear="handleClear"
     >
       <template v-slot:suffix>
         <n-icon><ios-calendar /></n-icon>
@@ -194,6 +198,10 @@ export default {
     }
   },
   props: {
+    clearable: {
+      type: Boolean,
+      default: false
+    },
     disabled: {
       type: Boolean,
       default: false
@@ -323,6 +331,11 @@ export default {
     this.refresh(this.value)
   },
   methods: {
+    handleClear (e) {
+      e.stopPropagation()
+      this.$emit('change', null)
+      this.refresh(null)
+    },
     /**
      * this blur is not really blur event, its key tab out of panel
      */
@@ -424,7 +437,6 @@ export default {
       }
     },
     handleRangeInput (v, isValueInvalid) {
-      // const v = e.target.value
       if (v === null) v = [null, null]
       const [startTime, endTime] = v
       const newStartTime = strictParse(startTime, this.computedFormat, new Date())

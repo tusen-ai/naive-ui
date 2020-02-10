@@ -4,8 +4,9 @@
   v-model="timestamp"
   type="datetime"
   :disabledTime= "disabledTime"
+  clearable
 />
-<n-date-picker v-model="timestamp2" type="datetime" />
+<n-date-picker v-model="timestamp2" type="datetime" clearable />
 ```
 ```js
 export default {

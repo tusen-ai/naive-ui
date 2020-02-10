@@ -237,11 +237,11 @@ export default {
       }
     },
     showCancelMark () {
-      if (this.disabled || !this.clearable) return false
+      if (this.disabled || !this.clearable || (!this.focus && !this.hover)) return false
       if (this.pair) {
-        return !!(Array.isArray(this.value) && (this.value[0] || this.value[1]))
+        return !!(Array.isArray(this.value) && (this.value[0] || this.value[1])) && (this.hover || this.focus)
       } else {
-        return !!this.value
+        return !!this.value && (this.hover || this.focus)
       }
     },
     isTextarea () {
@@ -347,8 +347,8 @@ export default {
     handleClick (e) {
       this.$emit('click', e)
     },
-    handleClear () {
-      this.$emit('clear')
+    handleClear (e) {
+      this.$emit('clear', e)
       if (this.pair) {
         this.$emit('change', [])
         this.$emit('input', [])

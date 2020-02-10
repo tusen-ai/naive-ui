@@ -3,10 +3,12 @@
 <n-date-picker
   v-model="range1"
   type="datetimerange"
+  clearable
 />
 <n-date-picker
   v-model="range2"
   type="datetimerange"
+  clearable
 />
 ```
 ```js
@@ -21,6 +23,6 @@ export default {
 ```
 ```css
 .n-date-picker {
-  margin: 0 12px 8px 0;
+  margin: 0 0 8px 0;
 }
 ```

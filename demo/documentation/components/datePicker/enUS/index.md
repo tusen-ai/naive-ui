@@ -23,6 +23,7 @@ events
 |-|-|-|-|
 |value|`number`|`null`||
 |actions|`Array<'clear' \| 'now' \| 'confirm'>`|`null`||
+|clearable|`boolean`|`false`||
 |disabled|`boolean`|`false`||
 |type|`'date' \| 'datetime' \| 'daterange' \|'datetimerange'`|`'date`||
 
