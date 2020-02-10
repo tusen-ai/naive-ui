@@ -242,7 +242,7 @@ export default {
       }
     },
     valueToOptionMap () {
-      return valueToOptionMap(this.options)
+      return valueToOptionMap(this.adpatedOptions)
     },
     selectedOptions () {
       if (this.multiple) {
