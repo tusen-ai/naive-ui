@@ -3,8 +3,9 @@
     class="n-auto-complete"
     @keydown.down="handleKeyDownDown"
     @keydown.up="handleKeyDownUp"
-    @keyup.enter="handleKeyUpEnter"
     @keydown.enter="handleKeyDownEnter"
+    @compositionstart="handleCompositionStart"
+    @compositionend="handleCompositionEnd"
   >
     <slot :handle-input="handleInput" :handle-focus="handleFocus" :handle-blur="handleBlur" :value="value">
       <n-input ref="activator" :value="value" :placeholder="placeholder" :size="size" @focus="canBeActivated = true" @input="handleInput" @blur="handleBlur" />
@@ -121,7 +122,8 @@ export default {
   },
   data () {
     return {
-      canBeActivated: false
+      canBeActivated: false,
+      isComposing: false
     }
   },
   computed: {
@@ -136,11 +138,19 @@ export default {
     }
   },
   methods: {
+    handleCompositionStart () {
+      this.isComposing = true
+    },
+    handleCompositionEnd () {
+      window.setTimeout(() => {
+        this.isComposing = false
+      }, 0)
+    },
     handleKeyDownEnter (e) {
-      if (this.$refs.contentInner) {
+      if (this.$refs.contentInner && !this.isComposing) {
         const pendingOptionData = this.$refs.contentInner.getPendingOptionData()
         if (pendingOptionData) {
-          e.preventDefault()
+          this.select(pendingOptionData)
         }
       }
     },
@@ -152,12 +162,6 @@ export default {
     handleKeyDownUp () {
       if (this.$refs.contentInner) {
         this.$refs.contentInner.prev()
-      }
-    },
-    handleKeyUpEnter () {
-      if (this.$refs.contentInner) {
-        const pendingOptionData = this.$refs.contentInner.getPendingOptionData()
-        this.select(pendingOptionData)
       }
     },
     select (option) {
