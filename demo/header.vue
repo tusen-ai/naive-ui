@@ -19,7 +19,7 @@
       <img src="./assets/images/naivelogo.svg">
       Naive UI ({{ version }})
     </div>
-    <div style="width: 200px; margin-left: 48px;">
+    <div style="width: 216px; margin-left: 56px;">
       <n-auto-complete
         v-model="searchInputValue"
         :placeholder="$t('searchPlaceholder')"
@@ -82,12 +82,18 @@ export default {
   },
   computed: {
     searchOptions () {
+      function getLabel (item) {
+        if (item.title) return item.title + (item.titleExtra ? (' ' + item.titleExtra) : '')
+        return item.name
+      }
       if (!this.searchInputValue) return []
+      const replaceRegex = / |-/g
       return this.items.filter(item => {
-        // console.log(item.name.toLowerCase(), this.searchInputValue.toLowerCase())
-        return ~item.name.toLowerCase().indexOf(this.searchInputValue.toLowerCase())
+        const pattern = this.searchInputValue.toLowerCase().replace(replaceRegex, '').slice(0, 20)
+        const label = getLabel(item).toLowerCase().replace(replaceRegex, '')
+        return ~label.indexOf(pattern)
       }).map(item => ({
-        label: item.name,
+        label: getLabel(item),
         value: item.path
       }))
     },

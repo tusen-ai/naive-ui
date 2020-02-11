@@ -2,8 +2,7 @@
   <div
     class="n-button-group"
     :class="{
-      'n-button-group--vertical': vertical,
-      'n-button-group--block': block
+      'n-button-group--vertical': vertical
     }"
   >
     <slot />

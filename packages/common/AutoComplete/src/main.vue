@@ -21,7 +21,7 @@
         ref="content"
         class="n-positioning-content"
       >
-        <transition name="n-select-menu--transition">
+        <transition name="n-select-menu-transition">
           <n-base-select-menu
             v-if="active"
             ref="contentInner"
