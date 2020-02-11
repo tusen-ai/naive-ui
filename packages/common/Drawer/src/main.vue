@@ -93,10 +93,10 @@ export default {
   computed: {
     transitionName () {
       return ({
-        right: 'n-slide-in-from-right',
-        left: 'n-slide-in-from-left',
-        top: 'n-slide-in-from-top',
-        bottom: 'n-slide-in-from-bottom'
+        right: 'n-slide-in-from-right-transition',
+        left: 'n-slide-in-from-left-transition',
+        top: 'n-slide-in-from-top-transition',
+        bottom: 'n-slide-in-from-bottom-transition'
       })[this.placement]
     },
     active () {

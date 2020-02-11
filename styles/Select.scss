@@ -13,7 +13,7 @@
       text-align: start;
       vertical-align: baseline;
       // transform: translateZ(0); // to avoid blink of activator when animation occurs nearby
-      &:not(.n-select--multiple) {
+      @include not-m(multiple) {
         @include m(small-size) {
           height: 28px;
         }

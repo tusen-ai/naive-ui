@@ -30,7 +30,7 @@ $block-depth: 0;
       @content;
     }
   } @else {
-    .n-#{$theme}-theme.#{$B} {
+    .#{$namespace}-#{$theme}-theme.#{$B} {
       @content
     }
   }
@@ -108,15 +108,15 @@ $theme-names: "dark", "light";
 }
 
 @mixin as-form-item {
-  .n-form-item {
-    .n-form-item-blank {
+  &.#{$namespace}-form-item {
+    &.#{$namespace}-form-item-blank {
       @content;
     }
   }
 }
 
 @mixin with-status ($status) {
-  &.n-form-item-blank--#{$status} {
+  &.#{$namespace}-form-item-blank--#{$status} {
     @content;
   }
 }

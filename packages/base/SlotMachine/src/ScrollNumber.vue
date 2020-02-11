@@ -1,6 +1,6 @@
 <template>
   <transition
-    :name="isNotNumber ? 'n-fade-in-width-expand' : 'n-fade-up-width-expand'"
+    :name="isNotNumber ? 'n-fade-in-width-expand-transition' : 'n-fade-up-width-expand-transition'"
     :appear="appeared"
   >
     <span

@@ -14,7 +14,7 @@ export default {
   render (h) {
     return h('transition', {
       props: {
-        name: 'n-icon-switch',
+        name: 'n-icon-switch-transition',
         appear: this.appear
       }
     }, this.$slots.default)

@@ -78,7 +78,7 @@ export default {
   render (h) {
     return h('transition', {
       props: {
-        name: this.width ? 'n-fade-in-width-expand' : 'n-fade-in-height-expand'
+        name: this.width ? 'n-fade-in-width-expand-transition' : 'n-fade-in-height-expand-transition'
       },
       on: {
         beforeLeave: this.handleBeforeLeave,

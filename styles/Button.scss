@@ -323,8 +323,14 @@
       /**
        * Not an elegant implementation
        */
-      &.n-button--default-type + .n-button--default-type {
-        margin-left: -1px!important;
+      @include m(default-type) {
+        & + {
+          @include b(button) {
+            @include m(default-type) {
+              margin-left: -1px!important;
+            }
+          }
+        }
       }
     }
   }
