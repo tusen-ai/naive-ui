@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import '../styles/index.scss'
-import './styles/markdown.scss'
 import NaiveUI from '../index'
 import VueI18n from 'vue-i18n'
 

@@ -12,18 +12,18 @@ const webpackConfig = {
   entry: './demo/indexUsingCss.js',
   output: {
     path: path.resolve(process.cwd()),
-    publicPath: '',
+    publicPath: '/',
     filename: '[name].[hash:7].js',
     chunkFilename: '[name].[hash:7].js'
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.vue', '.json', '.entry'],
     alias: config.alias,
     modules: ['node_modules']
   },
   devServer: {
     host: '0.0.0.0',
-    port: 8086,
+    port: 8087,
     publicPath: '/',
     hot: true
   },
@@ -34,40 +34,12 @@ const webpackConfig = {
     children: false
   },
   module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          compilerOptions: {
-            preserveWhitespace: false
-          }
-        }
-      },
-      {
-        test: /\.(js|jsx)$/,
-        exclude: [/node_modules/],
-        loader: 'babel-loader'
-      },
-      {
-        test: /\.(scss|css)$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
-      },
-      {
-        test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,
-        loader: 'url-loader',
-        query: {
-          limit: 10000,
-          name: path.posix.join('static', '[name].[hash:7].[ext]')
-        }
-      }
-    ]
+    rules: config.docLoaders
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: './demo/index.tpl',
-      filename: './index.html'
+      favicon: './demo/assets/images/naivelogo.svg'
     }),
     new VueLoaderPlugin(),
     new webpack.LoaderOptionsPlugin({

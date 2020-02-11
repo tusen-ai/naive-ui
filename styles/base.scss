@@ -6,10 +6,6 @@
 
 @include themes-mixin {
   @include once {
-    html {
-      font-smoothing: antialiased;
-    }
-    
     body {
       margin: 0;
       font-family: $--n-font-family;

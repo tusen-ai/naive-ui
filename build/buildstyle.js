@@ -3,10 +3,18 @@ const fs = require('fs')
 const path = require('path')
 const postcss = require('postcss')
 const postcssConfig = require('../postcss.config')
+const ncp = require('ncp')
 
 const styleFiles = fs
   .readdirSync(path.resolve(__dirname, '../styles'))
   .filter(fileName => fileName.endsWith('.scss'))
+
+if (!fs.existsSync(path.resolve(__dirname, '../lib'))) {
+  fs.mkdirSync(path.resolve(__dirname, '../lib'))
+}
+if (!fs.existsSync(path.resolve(__dirname, '../lib', 'styles'))) {
+  fs.mkdirSync(path.resolve(__dirname, '../lib', 'styles'))
+}
 
 styleFiles.forEach(fileName => {
   sass.render({
@@ -29,3 +37,17 @@ styleFiles.forEach(fileName => {
       })
   })
 })
+
+if (!fs.existsSync(path.resolve(__dirname, '../lib', 'styles', 'resources'))) {
+  fs.mkdirSync(path.resolve(__dirname, '../lib', 'styles', 'resources'))
+}
+
+ncp(
+  path.resolve(__dirname, '../styles/resources'),
+  path.resolve(__dirname, '../lib/styles/resources')
+)
+
+ncp(
+  path.resolve(__dirname, '../packages/icons'),
+  path.resolve(__dirname, '../lib/icons')
+)
