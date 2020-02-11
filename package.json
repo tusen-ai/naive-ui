@@ -24,6 +24,13 @@
   "publishConfig": {
     "registry": "***REMOVED***"
   },
+  "files": [
+    "dist",
+    "lib",
+    "packages",
+    "styles",
+    "index.js"
+  ],
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.4",
