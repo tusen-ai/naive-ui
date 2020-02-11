@@ -1,4 +1,3 @@
-@import './fonts/Lato.scss';
 @import './fonts/FiraCode.scss';
 @import './fonts/FiraSans.scss';
 @import './themes/common.scss';
@@ -8,16 +7,12 @@
 @include themes-mixin {
   @include once {
     html {
-      -moz-osx-font-smoothing: grayscale;
-      -webkit-font-smoothing: antialiased;
-      // font-smoothing: antialiased;
-      // font-weight: 400;
+      font-smoothing: antialiased;
     }
     
     body {
       margin: 0;
       font-family: $--n-font-family;
-      min-width: 1280px;
     }
     
     a {
