@@ -150,7 +150,7 @@ import format from 'date-fns/format'
 import getTime from 'date-fns/getTime'
 import isValid from 'date-fns/isValid'
 import { strictParse } from '../../../utils/dateUtils'
-import isEqual from 'lodash/isEqual'
+import isEqual from 'lodash-es/isEqual'
 
 const DATE_FORMAT = {
   date: 'yyyy-MM-dd',

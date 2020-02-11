@@ -2,7 +2,7 @@
  * For Cascader Component to use
  */
 
-import cloneDeep from 'lodash/cloneDeep'
+import cloneDeep from 'lodash-es/cloneDeep'
 
 function isLeaf (option) {
   if (option.isLeaf === true) {

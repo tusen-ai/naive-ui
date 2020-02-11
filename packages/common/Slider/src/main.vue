@@ -94,7 +94,7 @@
 </template>
 
 <script>
-import throttle from 'lodash/throttle'
+import throttle from 'lodash-es/throttle'
 import hollowoutable from '../../../mixins/hollowoutable'
 import detachable from '../../../mixins/detachable'
 import placeable from '../../../mixins/placeable'

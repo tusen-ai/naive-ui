@@ -53,7 +53,7 @@
 </template>
 <script>
 import Schema from 'async-validator'
-import get from 'lodash/get'
+import get from 'lodash-es/get'
 import registerable from '../../../mixins/registerable'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'

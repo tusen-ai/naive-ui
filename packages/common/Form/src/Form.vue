@@ -10,7 +10,7 @@
   </form>
 </template>
 <script>
-import cloneDeep from 'lodash/cloneDeep'
+import cloneDeep from 'lodash-es/cloneDeep'
 
 export default {
   name: 'NForm',

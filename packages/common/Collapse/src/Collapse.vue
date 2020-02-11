@@ -1,5 +1,5 @@
 <script>
-import intersection from 'lodash/intersection'
+import intersection from 'lodash-es/intersection'
 import withapp from '../../../mixins/withapp'
 import themeable from '../../../mixins/themeable'
 import asthemecontext from '../../../mixins/asthemecontext'

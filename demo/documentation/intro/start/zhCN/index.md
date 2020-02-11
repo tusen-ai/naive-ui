@@ -12,7 +12,7 @@ npm install --save-dev naive-ui
 在你项目的 javascript 入口文件添加下列代码。
 ```js
 import naive from 'naive-ui'
-import 'naive-ui/dist/lib/index.css'
+import 'naive-ui/lib/styles/index.css'
 
 Vue.use(naive)
 ```
