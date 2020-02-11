@@ -4,27 +4,33 @@ import themeable from '../../../mixins/themeable'
 import hollowoutable from '../../../mixins/hollowoutable'
 import asformitem from '../../../mixins/asformitem'
 
-function mapSlot (h, defaultSlot, currentComponent) {
+function mapSlot (h, defaultSlot, groupInstance) {
   const mappedSlot = []
+  defaultSlot = defaultSlot || []
   for (let i = 0; i < defaultSlot.length; ++i) {
     const wrappedInstance = defaultSlot[i]
-    if (wrappedInstance === null) {
+    const instanceOptions = wrappedInstance.componentOptions
+    const instanceCtorOptions = instanceOptions && instanceOptions.Ctor.options
+    if (
+      !instanceOptions ||
+      !['NRadio', 'NRadioButton'].includes(instanceCtorOptions.name)
+    ) {
       console.error(
         '[naive ui/radio]: `n-radio-group` only taks `n-radio` and `n-radio-button` as children.'
       )
       continue
     }
-    if (i === 0 || wrappedInstance.componentOptions.tag === 'n-radio') {
+    if (i === 0 || instanceCtorOptions.name === 'NRadio') {
       mappedSlot.push(wrappedInstance)
     } else {
       const lastInstanceComponentOptions = mappedSlot[mappedSlot.length - 1].componentOptions
-      const lastInstanceChecked = currentComponent.$props.value === lastInstanceComponentOptions.propsData.value
+      const lastInstanceChecked = groupInstance.$props.value === lastInstanceComponentOptions.propsData.value
       const lastInstanceDisabled = lastInstanceComponentOptions.propsData.disabled
-      const currentInstanceChecked = currentComponent.$props.value === wrappedInstance.componentOptions.propsData.value
-      const currentInstanceDisabled = wrappedInstance.componentOptions.propsData.disabled
+      const currentInstanceChecked = groupInstance.$props.value === instanceOptions.propsData.value
+      const currentInstanceDisabled = instanceOptions.propsData.disabled
       let lastInstancePriority
       let currentInstancePriority
-      if (currentComponent.synthesizedTheme === 'dark') {
+      if (groupInstance.synthesizedTheme === 'dark') {
         /**
          * Priority of button splitor:
          * !disabled  checked >
