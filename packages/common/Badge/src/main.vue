@@ -11,7 +11,7 @@
   >
     <slot />
     <transition
-      name="n-badge--transition"
+      name="n-badge-transition"
       @after-enter="handleAfterEnter"
       @after-leave="handleAfterLeave"
     >

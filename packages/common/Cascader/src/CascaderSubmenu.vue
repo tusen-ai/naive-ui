@@ -4,7 +4,7 @@
     @mouseleave="handleMouseLeave"
   >
     <n-scrollbar ref="scrollbar">
-      <transition name="n-cascader-light-bar--transition">
+      <transition name="n-cascader-light-bar-transition">
         <div
           v-if="showLightBar"
           class="n-cascader-light-bar-container"

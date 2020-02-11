@@ -3,7 +3,7 @@
     class="n-positioning-container"
   >
     <div ref="content" class="n-positioning-content">
-      <transition name="n-cascader-menu--transition">
+      <transition name="n-cascader-menu-transition">
         <div
           v-if="active"
           class="n-cascader-menu"
@@ -296,7 +296,9 @@ export default {
       if (this.type === 'multiple') {
         const newValues = []
         if (!option.determined) {
-          this.$refs.mask.showOnce(`Please load all ${option.label}'s descedants before checking it.`)
+          this.$refs.mask.showOnce(
+            this.NCascader.localeNamespace.loadingRequiredMessage(option.label)
+          )
           return
         }
         const traverseMultiple = item => {

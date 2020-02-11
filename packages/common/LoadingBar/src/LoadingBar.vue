@@ -1,6 +1,6 @@
 <template>
   <transition
-    name="n-fade-in--transition"
+    name="n-loading-bar-container-transition"
     appear
     @after-enter="handleAfterEnter"
     @after-leave="handleAfterLeave"

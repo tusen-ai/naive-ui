@@ -101,7 +101,7 @@
         <slot name="prefix" />
       </slot>
     </div>
-    <transition name="n-button-suffix--transition">
+    <transition name="n-button-suffix-transition">
       <div
         class="n-input__suffix"
       >

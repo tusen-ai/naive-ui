@@ -1,6 +1,6 @@
 <template>
   <transition
-    name="n-base-menu-mask--transition"
+    name="n-base-menu-mask-transition"
   >
     <div
       v-if="active"

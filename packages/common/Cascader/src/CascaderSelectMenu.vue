@@ -1,7 +1,7 @@
 <template>
   <div class="n-positioning-container">
     <div ref="content" class="n-positioning-content">
-      <transition name="n-cascader-menu--transition">
+      <transition name="n-cascader-menu-transition">
         <n-base-select-menu
           v-if="active"
           ref="contentInner"

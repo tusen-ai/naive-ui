@@ -1,5 +1,5 @@
 <template>
-  <transition name="n-cancel-mark--transition">
+  <transition name="n-cancel-mark-transition">
     <div
       v-if="loading || (show && (clearable || arrow))"
       class="n-cancel-mark"

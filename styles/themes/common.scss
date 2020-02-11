@@ -21,6 +21,8 @@ $--n-font-size: (
   "huge": 16px
 );
 
+$--button-border-radius: 6px;
+
 $--base-picker-border-radius: 6px;
 
 $--base-select-menu-box-shadow: none;
@@ -40,3 +42,9 @@ $--slider-dot-size: 8px;
 $--slider-handle-size: 14px;
 
 $--icon-transition: (fill .3s $--n-ease-in-out-cubic-bezier, stroke .3s $--n-ease-in-out-cubic-bezier);
+
+$--n-transform-debounce-scale: scale(0.99999);
+
+$--n-ease-in-out-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
+$--n-ease-out-cubic-bezier: cubic-bezier(0, 0, .2, 1);
+$--n-ease-in-cubic-bezier: cubic-bezier(.4, 0, 1, 1);

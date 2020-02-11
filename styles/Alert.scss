@@ -1,5 +1,5 @@
 @import './mixins/mixins.scss';
-@import './themes/vars.scss';
+
 
 @mixin alert-type-mixin ($type) {
   @include m($type + '-type') {
@@ -43,14 +43,14 @@
         transition:
           transform $duration $--n-ease-in-out-cubic-bezier,
           max-height $duration $--n-ease-in-out-cubic-bezier,
-          opacity $duration $fast-in-cubic-bezier,
+          opacity $duration $--n-ease-out-cubic-bezier,
           margin-top $duration $--n-ease-in-out-cubic-bezier,
           margin-bottom $duration $--n-ease-in-out-cubic-bezier;
       }
       &.n-fade-in-height-expand-enter-active {
         overflow: hidden;
         transition: max-height $duration $--n-ease-in-out-cubic-bezier,
-          opacity $duration $slow-out-cubic-bezier,
+          opacity $duration $--n-ease-in-cubic-bezier,
           margin-top $duration $--n-ease-in-out-cubic-bezier,
           margin-bottom $duration $--n-ease-in-out-cubic-bezier;
       }

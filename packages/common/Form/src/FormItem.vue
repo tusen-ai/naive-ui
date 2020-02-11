@@ -33,7 +33,7 @@
       </div>
       <div v-if="path" class="n-form-item-feedback-wrapper">
         <transition
-          name="n-fade-down"
+          name="n-form-item-feedback-transition"
           @before-enter="handleBeforeEnter"
           @before-leave="handleBeforeLeave"
           @after-leave="handleAfterLeave"

@@ -31,7 +31,7 @@
         ref="content"
         class="n-positioning-content"
       >
-        <transition name="n-time-picker--transition">
+        <transition name="n-time-picker-transition">
           <div
             v-if="active"
             ref="panel"

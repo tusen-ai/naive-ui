@@ -77,7 +77,7 @@
         ref="content"
         class="n-positioning-content"
       >
-        <transition name="n-fade-in-scale-up--transition">
+        <transition name="n-slider-indicator-transition">
           <div
             v-if="showTooltip"
             class="n-slider-handle-indicator"

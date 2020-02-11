@@ -1,5 +1,5 @@
 @import './mixins/mixins.scss';
-@import './themes/vars.scss';
+
 
 @mixin input-group-label-size-mixin ($size) {
   $font-size: map-get($map: $--n-font-size, $key: $size);

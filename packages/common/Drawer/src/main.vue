@@ -4,7 +4,7 @@
       <div
         class="n-drawer-container"
       >
-        <transition name="n-fade-in--transition">
+        <transition name="n-drawer-overlay-transition">
           <div
             v-if="active"
             class="n-drawer-overlay"

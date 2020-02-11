@@ -1,6 +1,6 @@
 <template>
   <n-base-portal ref="portal" :on-mounted="init">
-    <transition name="n-back-top--transition">
+    <transition name="n-back-top-transition">
       <div
         v-if="show"
         :class="{

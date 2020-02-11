@@ -18,10 +18,10 @@
           opacity: 0;
         }
         &.#{block()}-transition-enter-active {
-          transition: background-color .3s $--n-ease-in-out-cubic-bezier, opacity .15s $fast-in-cubic-bezier, top .3s $--n-ease-in-out-cubic-bezier!important;
+          transition: background-color .3s $--n-ease-in-out-cubic-bezier, opacity .15s $--n-ease-out-cubic-bezier, top .3s $--n-ease-in-out-cubic-bezier!important;
         }
         &.#{block()}-transition-leave-active {
-          transition: background-color .3s $--n-ease-in-out-cubic-bezier, opacity .15s $slow-out-cubic-bezier, top .3s $--n-ease-in-out-cubic-bezier!important;
+          transition: background-color .3s $--n-ease-in-out-cubic-bezier, opacity .15s $--n-ease-in-cubic-bezier, top .3s $--n-ease-in-out-cubic-bezier!important;
         }
       }
       background-color: $--base-select-menu-light-bar-background-color;

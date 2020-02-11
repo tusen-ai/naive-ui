@@ -51,7 +51,7 @@
         class="n-positioning-content"
       >
         <transition
-          name="n-select-menu--transition"
+          name="n-select-menu-transition"
           @after-leave="handleMenuAfterLeave"
         >
           <n-base-select-menu

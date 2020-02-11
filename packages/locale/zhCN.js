@@ -4,7 +4,8 @@ export default {
     negativeText: '取消'
   },
   Cascader: {
-    placeholder: '请选择'
+    placeholder: '请选择',
+    loadingRequiredMessage: label => `加载全部 ${label} 的子节点后才可选中`
   },
   DatePicker: {
     Jan: '一月',

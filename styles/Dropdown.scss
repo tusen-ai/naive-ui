@@ -1,5 +1,5 @@
 @import "./mixins/mixins.scss";
-@import "./themes/vars.scss";
+
 
 @include themes-mixin {
   @include b(popover-content) {
@@ -80,7 +80,7 @@
         margin: 2px 0;
       }
       @include b(dropdown-submenu) {
-        @include fade-in-scale-up-transition();
+        @include fade-in-scale-up-transition(dropdown-menu);
         margin-top: 0;
         position: absolute !important;
         margin-left: 6px;

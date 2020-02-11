@@ -191,7 +191,7 @@ export default {
       ]),
       h('transition', {
         props: {
-          name: 'n-fade-in-scale-up--transition'
+          name: 'n-dropdown-menu-transition'
         }
       }, [
         this.active ? h(NDropdownMenu, {

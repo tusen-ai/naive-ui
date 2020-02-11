@@ -1,5 +1,5 @@
 <template>
-  <transition name="n-date-panel--transition">
+  <transition name="n-date-panel-transition">
     <div
       v-show="active"
       ref="self"

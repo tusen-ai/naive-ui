@@ -1,8 +1,8 @@
 @import "config.scss";
-@import "../themes/vars.scss";
 @import "../themes/dark/index.scss";
 @import "../themes/light/index.scss";
-@import "../themes/commonVars.scss";
+@import "../themes/common.scss";
+@import "../themes/transition.scss";
 
 /**
  * BEM related mixins

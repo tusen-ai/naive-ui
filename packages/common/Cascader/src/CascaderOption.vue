@@ -51,7 +51,7 @@
       class="n-cascader-option__label"
     >{{ label }}
     </span>
-    <transition name="n-fade-in--transition">
+    <transition name="n-cascader-option-loading-transition">
       <div
         v-if="loading"
         class="n-cascader-option__loading"

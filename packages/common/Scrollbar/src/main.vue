@@ -36,7 +36,7 @@
       class="n-scrollbar-rail n-scrollbar-rail--vertical"
       :style="{...horizontalRailStyle, width: scrollbarSize }"
     >
-      <transition name="n-scrollbar--transition">
+      <transition name="n-scrollbar-transition">
         <div
           v-if="needVerticalScrollbar && showVeriticalScrollbar"
           class="n-scrollbar-rail__scrollbar"
@@ -58,7 +58,7 @@
       class="n-scrollbar-rail n-scrollbar-rail--horizontal"
       :style="{ ...verticalRailStyle, height: scrollbarSize }"
     >
-      <transition name="n-scrollbar--transition">
+      <transition name="n-scrollbar-transition">
         <div
           v-if="needHorizontalScrollbar && showHorizontalScrollbar"
           class="n-scrollbar-rail__scrollbar"

@@ -4,7 +4,8 @@ export default {
     negativeText: 'Cancel'
   },
   Cascader: {
-    placeholder: 'Please Select'
+    placeholder: 'Please Select',
+    loadingRequiredMessage: label => `Please load all ${label}'s descedants before checking it.`
   },
   DatePicker: {
     Jan: 'Jan',
