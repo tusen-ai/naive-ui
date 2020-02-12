@@ -8,8 +8,8 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const glob = require('glob')
 
 const entry = {}
-glob.sync('./packages/icons/*.vue').concat('./index.js').forEach(filePath => {
-  const entryName = filePath.replace(/^\.\/packages\//, '').replace(/\.(vue|js)$/, '')
+glob.sync('./src/icons/*.vue').concat('./index.js').forEach(filePath => {
+  const entryName = filePath.replace(/^\.\/src\//, '').replace(/\.(vue|js)$/, '')
   entry[entryName] = filePath
 })
 

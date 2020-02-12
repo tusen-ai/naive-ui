@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import NaiveUI from '../index'
 import VueI18n from 'vue-i18n'
 
 import intro from './documentation/intro/intro'
@@ -111,8 +110,6 @@ hljs.registerLanguage('naive-log', () => ({
 
 Vue.use(VueI18n)
 Vue.use(VueRouter)
-Vue.use(NaiveUI)
-NaiveUI.setHljs(hljs)
 
 const i18n = new VueI18n({
   locale: 'en-US'
@@ -259,4 +256,4 @@ router.afterEach(function (to, from) {
   }
 })
 
-export { Vue, router, i18n }
+export { Vue, router, i18n, hljs }

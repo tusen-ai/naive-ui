@@ -49,7 +49,7 @@
 
 <script>
 import { version } from '../package.json'
-import withapp from '../packages/mixins/withapp'
+import withapp from '../src/_mixins/withapp'
 
 export default {
   mixins: [withapp],

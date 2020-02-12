@@ -39,7 +39,7 @@
           }
           @include m(selected, child-selected) {
             @include once {
-              background-color: transparent;
+              background-color: transparent !important;
             }
             border-bottom: 2px solid $--menu-horizontal-border-color;
           }

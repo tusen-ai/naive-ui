@@ -1,0 +1,34 @@
+/* stylelint-disable */
+:export {
+  primaryColor: #7fe7c4;
+  primaryHoverColor: #63e2b7;
+  primaryActiveColor: #5acea7;
+  infoColor: #8acbec;
+  infoHoverColor: #70C0E8;
+  infoActiveColor: #66afd3;
+  successColor: #7ee7c4;
+  successHoverColor: #64e3b8;
+  successActiveColor: #5acea7;
+  errorColor: #e98b8b;
+  errorHoverColor: #e88080;
+  errorActiveColor: #e57272;
+  warningColor: #f5d599;
+  warningHoverColor: #f2c97d;
+  warningActiveColor: #e6c260;
+  primaryTextColor: rgba(255, 255, 255, 0.9);
+  secondaryTextColor: rgba(255, 255, 255, 0.75);
+  tertiaryTextColor: rgba(255, 255, 255, 0.45);
+  disabledTextColor: rgba(255, 255, 255, 0.3);
+  popoverBackgroundColor: #595d77;
+  dialogBackgroundColor: #464b63;
+  cardBackgroundColor: #1e2437;
+  bodyBackgroundColor: #12182a;
+  closeColor: rgba(255, 255, 255, 0.45);
+  dividerColor: #33384e;
+  dividerOverlayColor: rgba(255, 255, 255, 0.14);
+  borderColor: #2e3449;
+  borderOverlayColor: rgba(255, 255, 255, 0.12);
+  easeInOutCubicBezier: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/*# sourceMappingURL=jsIndex.css.map */

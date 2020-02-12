@@ -1,25 +1,33 @@
 const vue = require('rollup-plugin-vue')
 const resolve = require('@rollup/plugin-node-resolve')
 const strip = require('@rollup/plugin-strip')
-const path = require('path')
 const { terser } = require('rollup-plugin-terser')
 const naiveSCSSVariable = require('./playground/naiveScssVarPlugin')
 
+function externalValidator (ids) {
+  return id => ids.some(identifier => id.startsWith(identifier))
+}
+
 module.exports = {
   preserveModules: true,
-  input: 'index.js',
-  output: {
-    format: 'esm',
-    dir: 'test-bundle'
-  },
+  input: 'packages/index.js',
+  output: [
+    {
+      format: 'cjs',
+      dir: 'lib'
+    },
+    {
+      format: 'esm',
+      dir: 'es'
+    }
+  ],
   plugins: [
+    resolve({
+      extensions: ['.js', '.json', '.vue']
+    }),
     vue(),
     naiveSCSSVariable(),
     strip(),
-    resolve({
-      extensions: ['.js', '.json', '.vue'],
-      jail: path.resolve(__dirname, 'packages')
-    }),
     terser({
       mangle: false,
       output: {
@@ -28,9 +36,12 @@ module.exports = {
       }
     })
   ],
-  external: [
+  external: externalValidator([
     'vue-runtime-helpers',
-    'lodash-es/cloneDeep',
+    'date-fns',
+    'async-validator',
+    'vue-virtual-scroller',
+    'lodash-es',
     'resize-observer-polyfill'
-  ]
+  ])
 }

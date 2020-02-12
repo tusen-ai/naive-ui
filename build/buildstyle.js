@@ -48,6 +48,6 @@ ncp(
 )
 
 ncp(
-  path.resolve(__dirname, '../packages/icons'),
+  path.resolve(__dirname, '../src/_icons'),
   path.resolve(__dirname, '../lib/icons')
 )
