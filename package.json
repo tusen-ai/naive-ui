@@ -1,26 +1,26 @@
 {
   "name": "naive-ui",
-  "version": "0.7.8",
+  "version": "0.7.9",
   "description": "",
   "main": "lib/index.js",
   "module": "es/index.js",
   "scripts": {
     "release": "npm run build && npm publish",
-    "build:style": "rm -rf lib && node build/buildStyle.js",
-    "build:icon": "rm -rf lib && node build/buildIcon.js",
-    "build:js": "rm -rf lib && rollup -c",
+    "clean": "rm -rf lib && rm -rf es && rm -rf dist",
+    "build:style": "npm run clean && node build/buildStyle.js",
+    "build:icon": "npm run clean && node build/buildIcon.js",
+    "build:js": "npm run clean && rollup -c",
     "build:demo": "npm run build && npm run demo",
-    "build": "rm -rf lib && node build/buildStyle.js && node build/buildIcon.js && rollup -c",
+    "build:doc": "npm run build && cross-env NODE_ENV=production && rm -rf doc/dist && webpack --config build/webpack.doc.js",
+    "build": "npm run clean && node build/buildStyle.js && node build/buildIcon.js && rollup -c",
     "demo": "cross-env NODE_ENV=development && webpack-dev-server --config build/webpack.demo.js",
     "dev": "cross-env NODE_ENV=development && webpack-dev-server --config build/webpack.dev.js",
     "lint": "eslint --quiet --no-error-on-unmatched-pattern \"packages/**/*.{js,vue}\" \"test/**/*.{js,vue}\" \"build/**/*.{js,vue}\" \"demo/**/*.{js,vue}\"",
-    "lint-style": "stylelint \"styles/**/*.scss\"  --fix",
+    "lint:style": "stylelint \"styles/**/*.scss\"  --fix",
     "test": "cross-env NODE_ENV=development BABEL_ENV=test karma start test/unit/karma.conf.js",
-    "test-cov": "cross-env NODE_ENV=development BABEL_ENV=test karma start test/unit/karma.conf.js && http-server test/unit/coverage",
-    "release-doc": "cross-env NODE_ENV=development && rm -rf doc/dist && webpack --config build/webpack.doc.js && sudo bash doc/deploy-doc.sh",
-    "build-doc": "cross-env NODE_ENV=production && rm -rf doc/dist && webpack --config build/webpack.doc.js",
-    "build-private-doc": "cross-env NODE_ENV=production && rm -rf doc/dist && webpack --config build/webpack.private-doc.js",
-    "test-size": "webpack --config build/webpack.test-size.js"
+    "test:cov": "cross-env NODE_ENV=development BABEL_ENV=test karma start test/unit/karma.conf.js && http-server test/unit/coverage",
+    "release:doc": "sudo bash doc/deploy-doc.sh",
+    "build-private-doc": "cross-env NODE_ENV=production && rm -rf doc/dist && webpack --config build/webpack.private-doc.js"
   },
   "author": "lecong.zhang",
   "license": "ISC",
@@ -29,10 +29,11 @@
   },
   "files": [
     "dist",
+    "es",
     "lib",
-    "packages",
+    "src",
     "styles",
-    "index.js"
+    "README.md"
   ],
   "devDependencies": {
     "@babel/cli": "^7.8.4",
