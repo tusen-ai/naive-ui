@@ -5,7 +5,7 @@
       'n-badge--dot': dot,
       'n-badge--processing': processing,
       [`n-badge--${type}-type`]: type,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
       [`n-badge--as-is`]: !$slots.default
     }"
   >

@@ -2,7 +2,7 @@
   <div
     class="n-data-table"
     :class="{
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
       'n-data-table--bordered': bordered,
     }"
   >
@@ -80,13 +80,13 @@
         class="n-data-table__pagination"
       >
         <n-pagination
-          :page="synthesizedPagination.page"
-          :page-count="synthesizedPagination.pageCount"
+          :page="syntheticPagination.page"
+          :page-count="syntheticPagination.pageCount"
           :page-slot="pagination.pageSlot"
           :show-quick-jumper="!!pagination.showQuickJumper"
           :disabled="!!pagination.disabled"
-          :on-change="synthesizedOnPageChange"
-          :on-page-size-change="synthesizedOnPageSizeChange"
+          :on-change="syntheticOnPageChange"
+          :on-page-size-change="syntheticOnPageSizeChange"
         />
       </div>
     </n-spin>
@@ -253,11 +253,11 @@ export default {
         .map(column => Object.assign({}, column, { fixed: false }))
     },
     filteredData () {
-      const synthesizedActiveFilters = this.synthesizedActiveFilters
+      const syntheticActiveFilters = this.syntheticActiveFilters
       const normalizedColumns = this.normalizedColumns
       return this.data ? this.data.filter(row => {
         for (const columnKey of Object.keys(row)) {
-          const activeFilterOptionValues = synthesizedActiveFilters
+          const activeFilterOptionValues = syntheticActiveFilters
             .filter(filter => filter.columnKey === columnKey)
             .map(filter => filter.filterOptionValue)
           if (!activeFilterOptionValues.length) continue
@@ -282,11 +282,11 @@ export default {
         return true
       }) : []
     },
-    synthesizedCheckedRowKeys () {
+    syntheticCheckedRowKeys () {
       if (this.checkedRowKeys !== null) return this.checkedRowKeys
       return this.internalCheckedRowKeys
     },
-    synthesizedActiveFilters () {
+    syntheticActiveFilters () {
       const columnsWithControlledFilter = this.normalizedColumns.filter(column => {
         return Array.isArray(column.filterOptionValues)
       })
@@ -306,7 +306,7 @@ export default {
       const activeFilters = controlledActiveFilters.concat(uncontrolledFilters)
       return activeFilters
     },
-    synthesizedActiveSorter () {
+    syntheticActiveSorter () {
       /**
        * If one of the columns's sort order is false or 'ascend' or 'descend',
        * the table's controll functionality should work in controlled manner.
@@ -327,27 +327,27 @@ export default {
       if (columnsWithControlledSortOrder.length) return null
       return this.internalActiveSorter
     },
-    synthesizedPageSize () {
+    syntheticPageSize () {
       return this.pagination.pageSize || this.internalPageSize
     },
-    synthesizedCurrentPage () {
+    syntheticCurrentPage () {
       return this.pagination.page || this.internalCurrentPage
     },
-    synthesizedPagination () {
+    syntheticPagination () {
       if (!this.pagination) return null
       return {
         ...this.pagination,
         /**
-         * writing synthesized props after pagination to avoid
+         * writing synthetic props after pagination to avoid
          * pagination[key] === undefined
          * key still exists but value is undefined
          */
-        page: this.synthesizedCurrentPage,
-        pageSize: this.synthesizedPageSize,
-        pageCount: this.synthesizedPageCount
+        page: this.syntheticCurrentPage,
+        pageSize: this.syntheticPageSize,
+        pageCount: this.syntheticPageCount
       }
     },
-    synthesizedOnPageChange () {
+    syntheticOnPageChange () {
       return page => {
         this.pagination.onChange && this.pagination.onChange(page)
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
@@ -355,31 +355,31 @@ export default {
         this.$emit('page-change', page)
       }
     },
-    synthesizedOnPageSizeChange () {
+    syntheticOnPageSizeChange () {
       return pageSize => {
         this.pagination.onPageSizeChange && this.pagination.onPageSizeChange(pageSize)
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         this.internalPageSize = pageSize
         this.$emit('change', {
-          sorter: createShallowClonedObject(this.synthesizedActiveSorter),
-          pagination: createShallowClonedObject(this.synthesizedPagination),
-          filters: createShallowClonedArray(this.synthesizedActiveFilters)
+          sorter: createShallowClonedObject(this.syntheticActiveSorter),
+          pagination: createShallowClonedObject(this.syntheticPagination),
+          filters: createShallowClonedArray(this.syntheticActiveFilters)
         })
         this.$emit('page-size-change')
       }
     },
-    synthesizedPageCount () {
+    syntheticPageCount () {
       if (this.pagination.pageCount) return this.pagination.pageCount
       if (this.filteredData.length === 0) return 1
       const { pageSize } = this.pagination
       return Math.ceil(this.filteredData.length / pageSize)
     },
     sortedData () {
-      const activeSorter = this.synthesizedActiveSorter
+      const activeSorter = this.syntheticActiveSorter
       if (activeSorter) {
         /**
-         * When async, synthesizedActiveSorter.sorter should be true
-         * If want use default sorter, synthesizedActiveSorter.sorter should be 'default'
+         * When async, syntheticActiveSorter.sorter should be true
+         * If want use default sorter, syntheticActiveSorter.sorter should be 'default'
          */
         if (
           activeSorter.sorter === true ||
@@ -416,7 +416,7 @@ export default {
     paginatedData () {
       if (!this.pagination) return this.sortedData
       if (!this.paging) return this.sortedData
-      const pageSize = this.synthesizedPageSize
+      const pageSize = this.syntheticPageSize
       const startIndex = (this.internalCurrentPage - 1) * pageSize
       return this.sortedData.slice(startIndex, startIndex + pageSize)
     },
@@ -435,7 +435,7 @@ export default {
       }
     },
     countOfCurrentPageCheckedRows () {
-      const checkedRowKeys = this.synthesizedCheckedRowKeys
+      const checkedRowKeys = this.syntheticCheckedRowKeys
       return this.paginatedData.reduce((total, row) => {
         return total + (checkedRowKeys.includes(row.key) ? 1 : 0)
       }, 0)
@@ -448,7 +448,7 @@ export default {
     }
   },
   watch: {
-    synthesizedCurrentPage () {
+    syntheticCurrentPage () {
       this.scrollMainTableBodyToTop()
     },
     data () {
@@ -628,7 +628,7 @@ export default {
       this.trHeights = trHeights
     },
     checkAll (column) {
-      const checkedRowKeys = this.synthesizedCheckedRowKeys.map(v => v)
+      const checkedRowKeys = this.syntheticCheckedRowKeys.map(v => v)
       this.paginatedData.forEach(row => {
         if (column.disabled && column.disabled(row)) {
           return
@@ -638,7 +638,7 @@ export default {
       this.changeCheckedRowKeys(checkedRowKeys)
     },
     clearCheckAll (column) {
-      const checkedRowKeys = this.synthesizedCheckedRowKeys.map(v => v)
+      const checkedRowKeys = this.syntheticCheckedRowKeys.map(v => v)
       this.paginatedData.forEach(row => {
         if (column.disabled && column.disabled(row)) {
           return

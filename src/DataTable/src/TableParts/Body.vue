@@ -139,7 +139,7 @@ export default {
       return this.NDataTable.rowKey
     },
     currentPage () {
-      const pagination = this.NDataTable.synthesizedPagination
+      const pagination = this.NDataTable.syntheticPagination
       if (!pagination) return -1
       if (!pagination.page) return -1
       return pagination.page
@@ -148,7 +148,7 @@ export default {
       return this.NDataTable.hoveringRowIndex
     },
     checkedRowKeys () {
-      return this.NDataTable.synthesizedCheckedRowKeys
+      return this.NDataTable.syntheticCheckedRowKeys
     },
     style () {
       if (this.fixed && this.height) {

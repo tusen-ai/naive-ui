@@ -2,9 +2,9 @@
   <div
     class="n-anchor"
     :class="{
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
-    :style="synthesizedStyle"
+    :style="syntheticStyle"
   >
     <div
       ref="slot"

@@ -6,10 +6,10 @@
       [`n-layout-sider--bordered`]: bordered,
       [`n-layout-sider--collapsed`]: collapsed,
       [`n-layout-sider--show-content`]: showContent,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
     :style="{
-      ...synthesizedStyle,
+      ...syntheticStyle,
       transform: styleTransform,
       maxWidth: styleMaxWidth,
       width: styleWidth,

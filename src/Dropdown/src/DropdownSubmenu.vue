@@ -77,19 +77,19 @@ export default {
     active () {
       return this.menuActivated && this.menuPendingToBeActivated
     },
-    synthesizedStyleWidth () {
+    syntheticStyleWidth () {
       if (this.NDropdownMenu.inheritedSubmenuWidth) {
         return this.NDropdownMenu.inheritedSubmenuWidth + 'px'
       }
       return null
     },
-    synthesizedStyleMinWidth () {
+    syntheticStyleMinWidth () {
       if (this.NDropdownMenu.inheritedSubmenuMinWidth) {
         return this.NDropdownMenu.inheritedSubmenuMinWidth + 'px'
       }
       return null
     },
-    synthesizedStyleMaxWidth () {
+    syntheticStyleMaxWidth () {
       if (this.NDropdownMenu.inheritedSubmenuMaxWidth) {
         return this.NDropdownMenu.inheritedSubmenuMaxWidth + 'px'
       }
@@ -99,8 +99,8 @@ export default {
       const style = {}
       if (this.width) {
         style.width = this.width + 'px'
-      } else if (this.synthesizedStyleWidth) {
-        style.width = this.synthesizedStyleWidth
+      } else if (this.syntheticStyleWidth) {
+        style.width = this.syntheticStyleWidth
       }
       if (this.minWidth) {
         style.minWidth = this.minWidth + 'px'
@@ -200,7 +200,7 @@ export default {
           style: this.style,
           props: {
             options: this.options,
-            theme: this.synthesizedTheme,
+            theme: this.syntheticTheme,
             defaultFocus: false,
             size: this.size
           }

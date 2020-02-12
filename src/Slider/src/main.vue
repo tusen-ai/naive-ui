@@ -5,7 +5,7 @@
       'n-slider--disabled': disabled,
       'n-slider--active': active,
       'n-slider--with-mark': marks,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
     @keydown.right="handleKeyDownRight"
     @keydown.left="handleKeyDownLeft"
@@ -82,7 +82,7 @@
             v-if="showTooltip"
             class="n-slider-handle-indicator"
             :class="{
-              [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+              [`n-${syntheticTheme}-theme`]: syntheticTheme
             }"
           >
             {{ activeHandleValue === null ? tooltipHoverDisplayValue : activeHandleValue }}

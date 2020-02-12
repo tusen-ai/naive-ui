@@ -6,7 +6,7 @@
       'n-tabs--scroll': showScrollButton,
       [`n-tabs--${size}-size`]: size,
       [`n-tabs--flex`]: justifyContent,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
   >
     <div

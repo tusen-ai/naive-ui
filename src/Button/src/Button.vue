@@ -5,7 +5,7 @@
       'n-button--round': round,
       'n-button--circle': circle,
       [`n-button--${type}-type`]: true,
-      [`n-button--${synthesizedSize}-size`]: true,
+      [`n-button--${syntheticSize}-size`]: true,
       'n-button--disabled': disabled,
       'n-button--loading': loading,
       'n-button--block': block,
@@ -14,9 +14,9 @@
       'n-button--ghost': ghost,
       'n-button--text': text,
       [`n-button--${iconPlacement}-icon`]: iconPlacement && !noTextContent,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
-    :tabindex="synthesizedFocusable ? 0 : -1"
+    :tabindex="syntheticFocusable ? 0 : -1"
     @click="handleClick"
     @blur="handleBlur"
     @keyup.enter="handleKeyUpEnter"
@@ -33,7 +33,7 @@
             v-if="loading"
             key="loading"
             class="n-icon-slot"
-            :theme="synthesizedTheme"
+            :theme="syntheticTheme"
             :style="{
               transition: hollowOutColorTransitionDisabled ? 'none' : null
             }"
@@ -78,7 +78,7 @@
           <n-base-loading
             v-if="loading"
             key="loading"
-            :theme="synthesizedTheme"
+            :theme="syntheticTheme"
             :style="{
               transition: hollowOutColorTransitionDisabled ? 'none' : null
             }"
@@ -199,7 +199,7 @@ export default {
     }
   },
   computed: {
-    synthesizedSize () {
+    syntheticSize () {
       if (this.NButtonGroup && this.NButtonGroup.size) {
         return this.NButtonGroup.size
       }
@@ -226,7 +226,7 @@ export default {
         )
       ) { return true } else return false
     },
-    synthesizedFocusable () {
+    syntheticFocusable () {
       return this.focusable && !this.disabled
     },
     hasIcon () {
@@ -269,7 +269,7 @@ export default {
             }, 600)
           })
         }
-        if (this.synthesizedFocusable) {
+        if (this.syntheticFocusable) {
           this.$el.focus()
         }
       }

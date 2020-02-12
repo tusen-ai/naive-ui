@@ -2,9 +2,9 @@
   <div
     class="n-empty"
     :class="{
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
-    :style="synthesizedStyle"
+    :style="syntheticStyle"
   >
     <div class="n-empty__icon">
       <slot name="icon">

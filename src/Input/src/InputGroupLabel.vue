@@ -2,7 +2,7 @@
   <div
     class="n-input-group-label"
     :class="{
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
       [`n-input-group-label--${size}-size`]: true
     }"
   >

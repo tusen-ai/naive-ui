@@ -11,9 +11,9 @@
   >
     <div class="n-transfer-list-item__checkbox">
       <n-simple-checkbox
-        :theme="NTransfer.synthesizedTheme"
+        :theme="NTransfer.syntheticTheme"
         :disabled="disabled"
-        :checked="synthesizedChecked"
+        :checked="syntheticChecked"
       />
     </div>
     <div
@@ -63,7 +63,7 @@ export default {
     }
   },
   computed: {
-    synthesizedChecked () {
+    syntheticChecked () {
       if (this.NTransfer.virtualScroll) {
         return this.NTransfer.sourceCheckedValues.includes(this.value)
       } else {

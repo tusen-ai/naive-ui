@@ -56,7 +56,7 @@
         v-if="loading"
         class="n-cascader-option__loading"
       >
-        <n-base-loading :theme="NCascader.synthesizedTheme" />
+        <n-base-loading :theme="NCascader.syntheticTheme" />
       </div>
     </transition>
   </div>

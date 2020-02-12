@@ -2,7 +2,7 @@
   <div
     class="n-menu"
     :class="{
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
       [`n-menu--${mode}`]: mode,
       'n-menu--collapsed': collapsed,
       'n-menu--transition-disabled': transitionDisabled
@@ -97,7 +97,7 @@ export default {
     }
   },
   computed: {
-    synthesizedOpenNames () {
+    syntheticOpenNames () {
       if (this.openNames !== undefined) return this.openNames || []
       else return this.internalOpenNames
     }
@@ -111,7 +111,7 @@ export default {
       this.$emit('input', value)
     },
     toggleOpenName (name) {
-      const currentOpenNames = Array.from(this.synthesizedOpenNames)
+      const currentOpenNames = Array.from(this.syntheticOpenNames)
       const index = currentOpenNames.findIndex(openName => openName === name)
       if (~index) {
         currentOpenNames.splice(index, 1)

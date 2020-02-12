@@ -2,7 +2,7 @@
   <div
     class="n-log n-code"
     :class="{
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
     :style="{
       lineHeight: lineHeight,
@@ -12,7 +12,7 @@
   >
     <n-scrollbar ref="scrollbar" @scroll="handleScroll">
       <n-log-line
-        v-for="(line, index) in synthesizedLines"
+        v-for="(line, index) in syntheticLines"
         :key="index"
         :line="line"
       />
@@ -107,7 +107,7 @@ export default {
       const lineHeight = Math.floor(this.fontSize * this.lineHeight)
       return `calc(${this.rows * lineHeight}px)`
     },
-    synthesizedLines () {
+    syntheticLines () {
       if (!this.log) return []
       return this.log.split('\n')
     }

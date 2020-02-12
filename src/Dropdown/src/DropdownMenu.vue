@@ -209,7 +209,7 @@ export default {
           options: this.selectOptions,
           size: this.size,
           isOptionSelected: () => false,
-          theme: this.synthesizedTheme
+          theme: this.syntheticTheme
         },
         style: {
           overflow: 'visible'

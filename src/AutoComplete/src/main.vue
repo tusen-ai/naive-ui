@@ -28,7 +28,7 @@
             v-clickoutside="handleClickOutsideMenu"
             auto-pending-first-option
             class="n-select-menu"
-            :theme="synthesizedTheme"
+            :theme="syntheticTheme"
             :pattern="value"
             :options="filteredOptions"
             :multiple="false"

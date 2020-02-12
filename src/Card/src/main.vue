@@ -7,9 +7,9 @@
       [`n-card--action-segmented`]: segmented === true || (segmented && segmented.action),
       [`n-card--${size}-size`]: true,
       'n-card--bordered': bordered,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
-    :style="synthesizedStyle"
+    :style="syntheticStyle"
   >
     <div v-if="$slots.cover" class="n-card-cover">
       <slot name="cover" />

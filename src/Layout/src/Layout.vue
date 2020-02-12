@@ -4,7 +4,7 @@
     :class="{
       [`n-layout--${mode}-positioned`]: mode,
       'n-layout--has-sider': hasSider,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
     :style="{
       marginLeft: styleMarginLeft,

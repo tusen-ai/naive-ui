@@ -4,10 +4,10 @@
       <div
         v-if="show"
         :class="{
-          [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+          [`n-${syntheticTheme}-theme`]: syntheticTheme
         }"
         :style="{
-          ...synthesizedStyle,
+          ...syntheticStyle,
           right: styleRight,
           bottom: styleBottom
         }"

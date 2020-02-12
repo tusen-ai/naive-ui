@@ -46,7 +46,7 @@ export default {
     return h('div', {
       staticClass: 'n-steps',
       class: {
-        [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme,
+        [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
         [`n-steps--${this.size}-size`]: true,
         'n-steps--vertical': this.vertical
       }

@@ -2,10 +2,10 @@
   <div
     class="n-confirm"
     :class="{
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
       'n-confirm--bordered': bordered
     }"
-    :style="synthesizedStyle"
+    :style="syntheticStyle"
   >
     <div class="n-confirm-title">
       <span class="n-confirm-title-content">

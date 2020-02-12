@@ -2,7 +2,7 @@
   <div
     class="n-statistic"
     :class="{
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
       [`n-statistic--${type}-type`]: type
     }"
   >

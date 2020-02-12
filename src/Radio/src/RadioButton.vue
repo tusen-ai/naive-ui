@@ -2,10 +2,10 @@
   <div
     class="n-radio-button"
     :class="{
-      'n-radio-button--disabled': synthesizedDisabled,
-      'n-radio-button--checked': synthesizedChecked
+      'n-radio-button--disabled': syntheticDisabled,
+      'n-radio-button--checked': syntheticChecked
     }"
-    :tabindex="synthesizedDisabled ? -1 : 0"
+    :tabindex="syntheticDisabled ? -1 : 0"
     @keyup.enter="handleKeyUpEnter"
     @click="handleClick"
   >
@@ -41,14 +41,14 @@ export default {
     }
   },
   computed: {
-    synthesizedChecked () {
+    syntheticChecked () {
       if (this.NRadioGroup) {
         return this.NRadioGroup.value === this.value
       } else {
         return this.checkedValue === this.value
       }
     },
-    synthesizedDisabled () {
+    syntheticDisabled () {
       if (this.NRadioGroup && this.NRadioGroup.disabled) return true
       if (this.disabled) return true
       return false
@@ -68,7 +68,7 @@ export default {
       this.toggle()
     },
     toggle () {
-      if (this.synthesizedDisabled) return
+      if (this.syntheticDisabled) return
       if (this.checkedValue !== this.value) {
         this.emitChangeEvent()
       }

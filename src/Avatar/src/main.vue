@@ -4,13 +4,13 @@
     :class="{
       [`n-avatar--${size}-size`]: typeof size !== 'number',
       [`n-avatar--circle-shaped`]: circle || round,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
     :style="{
       width: styleWidth,
       height: styleWidth,
       borderRadius: styleBorderRadius,
-      ...synthesizedStyle
+      ...syntheticStyle
     }"
   >
     <img v-if="!$slots.default && src" :src="src">

@@ -34,7 +34,7 @@ export default {
         staticClass: 'n-icon',
         style: {
           ...this.styles,
-          ...this.synthesizedStyle
+          ...this.syntheticStyle
         },
         on: this.$listeners
       }, this.$slots.default)

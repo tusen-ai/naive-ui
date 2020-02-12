@@ -67,7 +67,7 @@ function uncache () {
 
 export default {
   watch: {
-    synthesizedTheme (value) {
+    syntheticTheme (value) {
       if (this.avoidHollowOut) return
       cache()
       this.$nextTick().then(() => {

@@ -2,13 +2,13 @@
   <div
     class="n-transfer"
     :class="{
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
   >
     <div class="n-transfer-list">
       <div class="n-transfer-list-header">
         <div class="n-transfer-list-header__checkbox">
-          <n-transfer-header-checkbox :source="true" :theme="synthesizedTheme" @change="handleSourceHeaderCheckboxChange" />
+          <n-transfer-header-checkbox :source="true" :theme="syntheticTheme" @change="handleSourceHeaderCheckboxChange" />
         </div>
         <div class="n-transfer-list-header__header">
           {{ sourceTitle || localeNamespace.sourceTitle }}
@@ -32,7 +32,7 @@
           <template v-if="filteredSourceOptions.length">
             <n-scrollbar
               v-if="virtualScroll"
-              :theme="synthesizedTheme"
+              :theme="syntheticTheme"
               :container="sourceScrollContainer"
               :content="sourceScrollContent"
             >
@@ -45,7 +45,7 @@
                 key-field="value"
               >
                 <template v-slot:before>
-                  <n-base-light-bar ref="sourceLightBar" :item-size="ITEM_SIZE" :theme="synthesizedTheme" />
+                  <n-base-light-bar ref="sourceLightBar" :item-size="ITEM_SIZE" :theme="syntheticTheme" />
                 </template>
                 <template v-slot="{ item: option, index }">
                   <n-transfer-source-list-item
@@ -63,7 +63,7 @@
             </n-scrollbar>
             <n-scrollbar v-else>
               <div ref="sourceList" class="n-transfer-list-content">
-                <n-base-light-bar ref="sourceLightBar" :item-size="ITEM_SIZE" :theme="synthesizedTheme" />
+                <n-base-light-bar ref="sourceLightBar" :item-size="ITEM_SIZE" :theme="syntheticTheme" />
                 <n-transfer-source-list-item
                   v-for="option in filteredSourceOptions"
                   ref="sourceListItems"
@@ -95,7 +95,7 @@
     <div class="n-transfer-list">
       <div class="n-transfer-list-header">
         <div class="n-transfer-list-header__checkbox">
-          <n-transfer-header-checkbox :theme="synthesizedTheme" @change="handleTargetHeaderCheckboxChange" />
+          <n-transfer-header-checkbox :theme="syntheticTheme" @change="handleTargetHeaderCheckboxChange" />
         </div>
         <div class="n-transfer-list-header__header">
           {{ targetTitle || localeNamespace.targetTitle }}
@@ -119,7 +119,7 @@
           <template v-if="filteredTargetOptions.length">
             <n-scrollbar
               v-if="virtualScroll"
-              :theme="synthesizedTheme"
+              :theme="syntheticTheme"
               :container="targetScrollContainer"
               :content="targetScrollContent"
             >
@@ -132,7 +132,7 @@
                 key-field="value"
               >
                 <template v-slot:before>
-                  <n-base-light-bar ref="targetLightBar" :item-size="ITEM_SIZE" :theme="synthesizedTheme" />
+                  <n-base-light-bar ref="targetLightBar" :item-size="ITEM_SIZE" :theme="syntheticTheme" />
                 </template>
                 <template v-slot="{ item: option, index }">
                   <n-transfer-target-list-item
@@ -150,7 +150,7 @@
             </n-scrollbar>
             <n-scrollbar v-else>
               <div ref="targetList" class="n-transfer-list-content">
-                <n-base-light-bar ref="targetLightBar" :item-size="ITEM_SIZE" :theme="synthesizedTheme" />
+                <n-base-light-bar ref="targetLightBar" :item-size="ITEM_SIZE" :theme="syntheticTheme" />
                 <n-transfer-target-list-item
                   v-for="(option, index) in filteredTargetOptions"
                   ref="targetListItems"

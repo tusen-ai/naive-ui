@@ -12,7 +12,7 @@
       'n-input--focus': forceFocus || focus,
       'n-input--suffix': $slots.suffix,
       'n-input--prefix': $slots.prefix || $slots.affix,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
     :tabindex="!disabled && (pressEnterToActivateInput && !inputFocused) ? 0 : false"
     @focus="handleWrapperFocus"
@@ -107,7 +107,7 @@
       >
         <div class="n-input__cancel-mark">
           <n-cancel-mark
-            :theme="synthesizedTheme"
+            :theme="syntheticTheme"
             :show="showCancelMark"
             :clearable="clearable"
             @clear="handleClear"

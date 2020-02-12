@@ -52,7 +52,7 @@ export default {
     }
   },
   computed: {
-    synthesizedColumn () {
+    syntheticColumn () {
       return this.columns || this.column
     }
   },
@@ -82,14 +82,14 @@ export default {
           }, itemLabel), h('td', {
             staticClass: 'n-descriptions-table-content',
             attrs: {
-              colspan: isLastIteration ? (this.synthesizedColumn - memorizedSpan) * 2 + 1 : itemSpan * 2 - 1
+              colspan: isLastIteration ? (this.syntheticColumn - memorizedSpan) * 2 + 1 : itemSpan * 2 - 1
             }
           }, itemChildren))
         } else {
           state.row.push(h('td', {
             staticClass: 'n-descriptions-table-content',
             attrs: {
-              colspan: isLastIteration ? (this.synthesizedColumn - memorizedSpan) * 2 : itemSpan * 2
+              colspan: isLastIteration ? (this.syntheticColumn - memorizedSpan) * 2 : itemSpan * 2
             }
           }, [
             h('span', {
@@ -99,7 +99,7 @@ export default {
             }, itemChildren)]))
         }
       } else {
-        const colspan = isLastIteration ? (this.synthesizedColumn - memorizedSpan) * 2 : itemSpan * 2
+        const colspan = isLastIteration ? (this.syntheticColumn - memorizedSpan) * 2 : itemSpan * 2
         state.row.push(h('th', {
           staticClass: 'n-descriptions-table-header',
           attrs: {
@@ -113,7 +113,7 @@ export default {
           }
         }, itemChildren))
       }
-      if (state.span >= this.synthesizedColumn || isLastIteration) {
+      if (state.span >= this.syntheticColumn || isLastIteration) {
         state.span = 0
         if (state.row.length) {
           state.rows.push(state.row)
@@ -138,9 +138,9 @@ export default {
     }, row))
     return h('div', {
       staticClass: 'n-descriptions',
-      style: this.synthesizedStyle,
+      style: this.syntheticStyle,
       class: {
-        [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme,
+        [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
         [`n-descriptions--${this.labelPlacement}-label-placement`]: true,
         [`n-descriptions--${this.labelAlign}-label-align`]: true,
         [`n-descriptions--${this.size}-size`]: true,

@@ -19,7 +19,7 @@
       ref="activator"
       class="n-cascader-picker"
       :size="size"
-      :theme="synthesizedTheme"
+      :theme="syntheticTheme"
       :active="active"
       :pattern="pattern"
       :placeholder="localizedPlaceholder"
@@ -42,7 +42,7 @@
         v-clickoutside="handleCascaderMenuClickOutside"
         :active="active && !selectMenuActive"
         :class="{
-          [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
+          [`n-${syntheticTheme}-theme`]: syntheticTheme,
           [namespace]: namespace
         }"
         :type="type"
@@ -58,7 +58,7 @@
         :patches.sync="patches"
         :loading.sync="loading"
         :loading-id.sync="loadingId"
-        :theme="synthesizedTheme"
+        :theme="syntheticTheme"
         @input="handleMenuInput"
       />
     </n-base-portal>
@@ -72,7 +72,7 @@
         :type="type"
         :value="value"
         :active="active && selectMenuActive"
-        :theme="synthesizedTheme"
+        :theme="syntheticTheme"
         :pattern="pattern"
         :size="size"
         :multiple="multiple"

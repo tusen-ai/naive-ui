@@ -148,13 +148,13 @@ export default {
   },
   computed: {
     pagination () {
-      return this.NDataTable.synthesizedPagination
+      return this.NDataTable.syntheticPagination
     },
     currentPage () {
       return (this.pagination && this.pagination.page) || null
     },
     theme () {
-      return this.NDataTable.synthesizedTheme
+      return this.NDataTable.syntheticTheme
     },
     checkboxIndererminate () {
       return this.NDataTable.someRowsChecked
@@ -163,7 +163,7 @@ export default {
       return this.NDataTable.allRowsChecked
     },
     activeFilters () {
-      return this.NDataTable.synthesizedActiveFilters
+      return this.NDataTable.syntheticActiveFilters
     },
     headerStyle () {
       return {
@@ -191,7 +191,7 @@ export default {
       const filterElement = filterRef && filterRef.$el
       if (filterElement && filterElement.contains(e.target)) return
       if (!column.sorter) return
-      const activeSorter = this.NDataTable.synthesizedActiveSorter
+      const activeSorter = this.NDataTable.syntheticActiveSorter
       const nextSorter = createNextSorter(column.key, activeSorter, column.sorter)
       this.NDataTable.changeSorter(nextSorter)
     }

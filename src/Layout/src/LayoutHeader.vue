@@ -3,10 +3,10 @@
     class="n-layout-header"
     :class="{
       [`n-layout-header--${mode}-positioned`]: mode,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
       [`n-layout-header--bordered`]: bordered
     }"
-    :style="synthesizedStyle"
+    :style="syntheticStyle"
   >
     <slot />
   </div>

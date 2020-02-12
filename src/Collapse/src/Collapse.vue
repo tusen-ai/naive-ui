@@ -64,9 +64,9 @@ export default {
     return h('div', {
       staticClass: 'n-collapse',
       class: {
-        [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme
+        [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme
       },
-      style: this.synthesizedStyle
+      style: this.syntheticStyle
     }, this.$slots.default)
   }
 }

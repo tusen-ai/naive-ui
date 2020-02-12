@@ -2,18 +2,18 @@
   <div
     class="n-form-item"
     :class="{
-      [`n-form-item--${synthesizedLabelPlacement}-labelled`]: synthesizedLabelPlacement,
-      [`n-form-item--${synthesizedLabelAlign}-label-aligned`]: synthesizedLabelAlign,
-      [`n-form-item--required`]: synthesizedRequired && synthesizedShowRequireMark,
+      [`n-form-item--${syntheticLabelPlacement}-labelled`]: syntheticLabelPlacement,
+      [`n-form-item--${syntheticLabelAlign}-label-aligned`]: syntheticLabelAlign,
+      [`n-form-item--required`]: syntheticRequired && syntheticShowRequireMark,
       [`n-form-item--no-label`]: !(label || $slots.label),
       [`n-form-item--has-feedback`]: hasFeedback,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
   >
     <label
       v-if="label || $slots.label"
       :class="`n-form-item-label`"
-      :style="synthesizedLabelStyle"
+      :style="syntheticLabelStyle"
     >
       <template
         v-if="$slots.label"
@@ -123,61 +123,61 @@ export default {
   },
   computed: {
     labelWidthStyle () {
-      if (/\d$/.test(String(this.synthesizedLabelWidth))) {
+      if (/\d$/.test(String(this.syntheticLabelWidth))) {
         return {
-          width: `${this.synthesizedLabelWidth}px`
+          width: `${this.syntheticLabelWidth}px`
         }
       } else {
         return {
-          width: this.synthesizedLabelWidth
+          width: this.syntheticLabelWidth
         }
       }
     },
-    synthesizedShowRequireMark () {
+    syntheticShowRequireMark () {
       if (this.showRequireMark === null) {
         return this.NForm.showRequireMark
       }
       return this.showRequireMark
     },
-    synthesizedLabelStyle () {
+    syntheticLabelStyle () {
       return {
         ...this.labelWidthStyle,
         ...this.labelStyle
       }
     },
-    synthesizedLabelWidth () {
+    syntheticLabelWidth () {
       if (this.labelWidth) return this.labelWidth
       if (this.NForm && this.NForm.labelWidth) return this.NForm.labelWidth
       return null
     },
     styleLabelWidth () {
-      if (this.synthesizedLabelPlacement === 'top') return null
-      if (this.synthesizedLabelWidth === null) return null
-      return `${this.synthesizedLabelWidth}px`
+      if (this.syntheticLabelPlacement === 'top') return null
+      if (this.syntheticLabelWidth === null) return null
+      return `${this.syntheticLabelWidth}px`
     },
-    synthesizedRulePath () {
+    syntheticRulePath () {
       if (this.rulePath) return this.rulePath
       else if (this.path) {
         return this.path
       } else return null
     },
-    synthesizedLabelPlacement () {
+    syntheticLabelPlacement () {
       if (this.labelPlacement) return this.labelPlacement
       if (this.NForm && this.NForm.labelPlacement) { return this.NForm.labelPlacement }
       return 'top'
     },
-    synthesizedLabelAlign () {
+    syntheticLabelAlign () {
       if (this.labelAlign) return this.labelAlign
       if (this.NForm && this.NForm.labelAlign) return this.NForm.labelAlign
       return 'left'
     },
-    synthesizedRequired () {
-      if (this.synthesizedRules.some(rule => rule.required)) return true
+    syntheticRequired () {
+      if (this.syntheticRules.some(rule => rule.required)) return true
       if (this.required) return true
       if (this.NForm && this.NForm.required) return true
       return false
     },
-    synthesizedRules () {
+    syntheticRules () {
       let rules = []
       if (this.rule) {
         if (Array.isArray(this.rule)) {
@@ -189,7 +189,7 @@ export default {
       if (
         this.NForm &&
         this.NForm.rules &&
-        get(this.NForm.rules, this.synthesizedRulePath, null)
+        get(this.NForm.rules, this.syntheticRulePath, null)
       ) {
         const rule = get(this.NForm.rules, this.path)
         if (Array.isArray(rule)) {
@@ -282,7 +282,7 @@ export default {
       } else {
         if (!options.first) options.first = this.first
       }
-      const rules = this.synthesizedRules
+      const rules = this.syntheticRules
       const path = this.path
       const value = get(this.NForm.model, this.path, null)
       const activeRules = (!trigger
@@ -336,7 +336,7 @@ export default {
       this.validationErrored = false
     },
     addValidationEventListeners () {
-      const rules = this.synthesizedRules
+      const rules = this.syntheticRules
       if (rules.length > 0) {
         this.$on('blur', this.handleContentBlur)
         this.$on('input', this.handleContentInput)

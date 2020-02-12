@@ -2,9 +2,9 @@
   <div
     class="n-thing"
     :class="{
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
-    :style="synthesizedStyle"
+    :style="syntheticStyle"
   >
     <div v-if="$slots.avatar && contentIndented" class="n-thing-avatar">
       <slot name="avatar" />

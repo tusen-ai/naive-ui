@@ -4,7 +4,7 @@
     :class="{
       [`n-progress--${status}`]: status,
       [`n-progress--${type}`]: type,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
   >
     <div
@@ -84,7 +84,7 @@
           ref="line"
           class="n-progress-graph-line"
           :class="{
-            [`n-progress-graph-line--indicator-${synthesizedIndicatorPlacement}`]: true
+            [`n-progress-graph-line--indicator-${syntheticIndicatorPlacement}`]: true
           }"
         >
           <div
@@ -104,7 +104,7 @@
               }"
             >
               <div
-                v-if="synthesizedIndicatorPlacement === 'inside'"
+                v-if="syntheticIndicatorPlacement === 'inside'"
                 class="n-progress-graph-line-indicator"
               >
                 {{ percentage + unit }}
@@ -112,7 +112,7 @@
             </div>
           </div>
           <div
-            v-if="synthesizedIndicatorPlacement === 'inside-label'"
+            v-if="syntheticIndicatorPlacement === 'inside-label'"
             ref="indicator"
             class="n-progress-graph-line-indicator"
             :style="indicatorPercentageIsCaculated ? {
@@ -131,7 +131,7 @@
           </div>
         </div>
       </div>
-      <div v-if="showIndicator && synthesizedIndicatorPlacement === 'outside'">
+      <div v-if="showIndicator && syntheticIndicatorPlacement === 'outside'">
         <div
           v-if="$slots.default"
           class="n-progress-custom-content"
@@ -325,11 +325,11 @@ export default {
     }
   },
   computed: {
-    synthesizedIndicatorPlacement () {
+    syntheticIndicatorPlacement () {
       return this.indicatorPlacement || this.indicatorPosition
     },
     fillStyleMaxWidth () {
-      return Math.max(this.percentage - (this.synthesizedIndicatorPlacement === 'inside-label' ? 2 : 0), 0)
+      return Math.max(this.percentage - (this.syntheticIndicatorPlacement === 'inside-label' ? 2 : 0), 0)
     },
     strokeDasharray () {
       if (this.type === 'multiple-circle') {
@@ -383,7 +383,7 @@ export default {
   },
   watch: {
     percentage (newPercentage) {
-      if (this.synthesizedIndicatorPlacement === 'inside-label') {
+      if (this.syntheticIndicatorPlacement === 'inside-label') {
         this.$nextTick().then(() => {
           this.indicatorPercentage = this.calcIndicatorPercentage()
         })
@@ -392,7 +392,7 @@ export default {
   },
   methods: {
     handleFontReady () {
-      if (this.synthesizedIndicatorPlacement === 'inside-label') {
+      if (this.syntheticIndicatorPlacement === 'inside-label') {
         this.$nextTick().then(() => {
           this.indicatorPercentage = this.calcIndicatorPercentage()
           this.$nextTick().then(() => {

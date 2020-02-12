@@ -6,9 +6,9 @@
       'n-divider--no-title': !$slots.default,
       'n-divider--dashed': dashed,
       [`n-divider--title-position-${titlePlacement}`]: $slots.default && titlePlacement,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
-    :style="synthesizedStyle"
+    :style="syntheticStyle"
   >
     <hr
       v-if="!vertical"

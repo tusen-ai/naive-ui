@@ -83,7 +83,7 @@ export default {
   },
   computed: {
     activeFilters () {
-      return this.NDataTable.synthesizedActiveFilters
+      return this.NDataTable.syntheticActiveFilters
     },
     activeFilterOptionValues () {
       return createFilterOptionValues(this.activeFilters, this.column)
