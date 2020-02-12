@@ -8,4 +8,8 @@
   display: inline-block;
   position: relative;
   transition: $--icon-transition;
+  svg {
+    height: 1em;
+    width: 1em;
+  }
 }

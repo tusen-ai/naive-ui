@@ -1,10 +1,10 @@
 @import './mixins/mixins.scss';
-@import './themes/vars.scss';
+
 
 @include themes-mixin {
   @include b(loading-bar-container) {
     @include once {
-      @include fade-in-transition(fade-in, .3s, .8s);
+      @include fade-in-transition(loading-bar-container, .3s, .8s);
       z-index: 5800;
       position: fixed;
       top: 0;

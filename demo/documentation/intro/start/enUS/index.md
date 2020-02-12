@@ -12,7 +12,7 @@ npm install --save-dev naive-ui
 Add the following lines in you entry point js file.
 ```js
 import naive from 'naive-ui'
-import 'naive-ui/dist/lib/index.css'
+import 'naive-ui/lib/styles/index.css'
 
 Vue.use(naive)
 ```

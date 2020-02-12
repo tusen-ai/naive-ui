@@ -1,5 +1,5 @@
 @import './mixins/mixins.scss';
-@import './themes/vars.scss';
+
 
 @mixin input-group-label-size-mixin ($size) {
   $font-size: map-get($map: $--n-font-size, $key: $size);
@@ -43,7 +43,7 @@
         }
       }
     }
-    @include m(affix) {
+    @include m(prefix) {
       @include not-m(split) {
         @include e(input) {
           padding-left: 38px!important;
@@ -111,32 +111,32 @@
         border-radius: $--input-border-radius;
         transition: border-color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier;
       }
-      @include e(suffix, affix) {
-        transition: opacity .3s $--n-ease-in-out-cubic-bezier;
+      @include e(suffix, prefix) {
         position: absolute;
-        line-height: $--input-icon-size;
-        height: $--input-icon-size;
+        line-height: 1.5;
+        height: 0;
         width: $--input-icon-size;
+        white-space: nowrap;
         display: flex;
         align-items: center;
-        justify-content: center;
+        top: 50%;
         @include b(icon) {
+          justify-self: center;
           font-size: $--input-icon-size;
         }
-        top: calc(50% - 9px);
       }
       @include e(suffix) {
+        @include fade-in-scale-up-transition(button-suffix);
+        justify-content: flex-end;
         right: 12px;
       }
-      @include e(affix) {
+      @include e(prefix) {
+        justify-content: flex-start;
         left: 12px;
       }
       @include e(cancel-mark) {
-        position: absolute;
-        right: 14px;
-        top: 50%;
-        transform: translateY(-50%);
-        line-height: 12px;
+        display: flex;
+        margin-right: 4px;
       }
       @include e(textarea, textarea-mirror) {
         display: inline-block;
@@ -188,19 +188,17 @@
       }
       background-color: map-get($--input-background-color, 'focus');
     }
-    @include m(textarea) {
-      padding-left: 0;
-      padding-right: 0;
-      @include e(textarea, textarea-mirror) {
-        padding-left: 14px;
-        padding-right: 14px;
+    @include once {
+      @include m(textarea) {
+        padding-left: 0;
+        padding-right: 0;
+        @include e(textarea, textarea-mirror) {
+          padding-left: 14px;
+          padding-right: 14px;
+        }
       }
     }
-    @include e(suffix, affix) {
-      opacity: 1;
-      @include m(hide) {
-        opacity: 0;
-      }
+    @include e(suffix, prefix) {
       @include b(icon) {
         fill: $--input-icon-color;
         stroke: $--input-icon-color;
@@ -216,37 +214,45 @@
         font-family: $--n-font-family;
         width: 100%;
         transition: color .3s $--n-ease-in-out-cubic-bezier, text-decoration-color .3s $--n-ease-in-out-cubic-bezier;
+        background-color: transparent;
       }
       color: map-get($--input-color, 'default');
       caret-color: map-get($--input-caret-color, 'default');
-      background-color: transparent;
       &::placeholder {
-        transition: color .3s $--n-ease-in-out-cubic-bezier;
+        @include once {
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
+          opacity: 1;
+        }
         color: map-get($--input-placeholder-color, 'default');
-        opacity: 1;
       }
     }
     @include e(splitor) {
       transition: color .3s $--n-ease-in-out-cubic-bezier;
       color: map-get($--input-color, 'default');
-      padding-left: 0px;
-      padding-right: 0px;
+      @include once {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
     }
     @include m(disabled) {
-      cursor: not-allowed;
+      @include once {
+        cursor: not-allowed;
+      }
       box-shadow: map-get($--input-box-shadow, 'disabled') !important;
       @include e(border-mask) {
         border-color: map-get($--input-border-mask-border-color, 'disabled') !important;
       }
       background-color: map-get($--input-background-color, 'disabled');
       @include e(input, textarea) {
-        cursor: not-allowed;
+        @include once {
+          cursor: not-allowed;
+        }
         color: map-get($--input-color, 'disabled');
         &::placeholder {
           color: map-get($--input-placeholder-color, 'disabled');
         }
       }
-      @include e(suffix, affix) {
+      @include e(suffix, prefix) {
         @include b(icon) {
           fill: map-get($--input-placeholder-color, 'disabled');
           stroke: map-get($--input-placeholder-color, 'disabled');

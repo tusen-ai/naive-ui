@@ -1,5 +1,5 @@
 @import './mixins/mixins.scss';
-@import './themes/vars.scss';
+
 
 @mixin tag-size-mixin($size) {
   $height: map-get($--n-height, $size) - 6px;

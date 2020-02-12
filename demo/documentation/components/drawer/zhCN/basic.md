@@ -1,6 +1,6 @@
 # 基础用法
 ```html
-<n-button-group size="small">
+<n-button-group>
   <n-button @click="activate('top')">上</n-button>
   <n-button @click="activate('right')">右</n-button>
   <n-button @click="activate('bottom')">下</n-button>

@@ -1,4 +1,4 @@
-@import './themes/vars.scss';
+
 @import './mixins/mixins.scss';
 
 @keyframes n-badge-number-fade-up-in {
@@ -69,11 +69,11 @@
         transform: translateY(100%);
       }
       @include m(down-scroll) {
-        animation: n-badge-number-fade-down-out .2s $fast-in-cubic-bezier;
+        animation: n-badge-number-fade-down-out .2s $--n-ease-out-cubic-bezier;
         animation-iteration-count: 1
       }
       @include m(up-scroll) {
-        animation: n-badge-number-fade-up-out .2s $fast-in-cubic-bezier;
+        animation: n-badge-number-fade-up-out .2s $--n-ease-out-cubic-bezier;
         animation-iteration-count: 1
       }
     }
@@ -87,11 +87,11 @@
       opacity: 1;
       transform: translateY(0);
       @include m(down-scroll) {
-        animation: n-badge-number-fade-down-in .2s $fast-in-cubic-bezier;
+        animation: n-badge-number-fade-down-in .2s $--n-ease-out-cubic-bezier;
         animation-iteration-count: 1
       }
       @include m(up-scroll) {
-        animation: n-badge-number-fade-up-in .2s $fast-in-cubic-bezier;
+        animation: n-badge-number-fade-up-in .2s $--n-ease-out-cubic-bezier;
         animation-iteration-count: 1
       }
       @include e(inner) {

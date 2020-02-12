@@ -2,7 +2,7 @@
 
 @include themes-mixin {
   @include b(back-top) {
-    @include fade-in-transition(back-top);
+    @include fade-in-scale-up-transition(back-top);
     @include once {
       position: fixed;
       right: 40px;

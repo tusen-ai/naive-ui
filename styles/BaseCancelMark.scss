@@ -1,10 +1,10 @@
 @import './mixins/mixins.scss';
-@import './themes/vars.scss';
+
 
 @include themes-mixin {
   @include b(cancel-mark) {
     @include once {
-      @include fade-in-transition(cancel-mark);
+      @include fade-in-scale-up-transition(cancel-mark);
       user-select: none;
       display: inline-block;
       position: relative;
@@ -55,7 +55,6 @@
     }
     @include b(cancel-mark-arrow) {
       @include once {
-        // @include fade-in-transition(cancel-mark);
         @include icon-switch-transition();
         transform: $--n-transform-debounce-scale;
         position: absolute;

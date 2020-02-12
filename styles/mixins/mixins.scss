@@ -1,8 +1,8 @@
-@import "config.scss";
-@import "../themes/vars.scss";
-@import "../themes/dark/index.scss";
-@import "../themes/light/index.scss";
-@import "../themes/commonVars.scss";
+@import 'config.scss';
+@import '../themes/dark/index.scss';
+@import '../themes/light/index.scss';
+@import '../themes/common.scss';
+@import '../themes/transition.scss';
 
 /**
  * BEM related mixins
@@ -13,7 +13,7 @@ $block-depth: 0;
 
 @function block ($block: null) {
   @if $block {
-    @return $namespace + "-" + $block;
+    @return $namespace + '-' + $block;
   } @else if $B {
     @return $B;
   }
@@ -23,14 +23,14 @@ $block-depth: 0;
   $block-depth: $block-depth + 1 !global;
   $temp-block: $B;
   $temp-block-element: $BE;
-  $B: $namespace + "-" + $block !global;
+  $B: $namespace + '-' + $block !global;
   $BE: $B!global;
   @if (not $common-css-attrs-generated) or $block-depth != 1 {
     .#{$B} {
       @content;
     }
   } @else {
-    .n-#{$theme}-theme.#{$B} {
+    .#{$namespace}-#{$theme}-theme.#{$B} {
       @content
     }
   }
@@ -68,7 +68,7 @@ $block-depth: 0;
 
 @mixin not-m($modifier) {
   $BEM: '';
-  $BEM: '.' + $BE + '--' + $modifier;
+  $BEM: '.' + $BE + $modifier-separator + $modifier;
   &:not(#{$BEM}) {
     @content;
   }
@@ -80,18 +80,20 @@ $block-depth: 0;
 $common-css-attrs-generated: false;
 $theme: null;
 $in-themes-mixin: false;
-$theme-names: "dark", "light";
+$theme-names: 'dark', 'light';
+/** wait for sass to support dynamic @include mixins */
+$default-theme: 'light';
+
 
 @mixin themes-mixin() {
   $in-themes-mixin: true !global;
   $theme: 'dark' !global;
-  @include setup-dark-theme();
+  @include setup-light-theme();
   @content;
   $common-css-attrs-generated: true !global;
   @each $theme-name in $theme-names {
     @if $theme-name == 'light' {
       $theme: $theme-name !global;
-      @include setup-dark-theme();
       @include setup-light-theme();
       @content;
       $theme: null !global;
@@ -108,15 +110,15 @@ $theme-names: "dark", "light";
 }
 
 @mixin as-form-item {
-  .n-form-item {
-    .n-form-item-blank {
+  &.#{$namespace}-form-item {
+    &.#{$namespace}-form-item-blank {
       @content;
     }
   }
 }
 
 @mixin with-status ($status) {
-  &.n-form-item-blank--#{$status} {
+  &.#{$namespace}-form-item-blank#{$modifier-separator}#{$status} {
     @content;
   }
 }

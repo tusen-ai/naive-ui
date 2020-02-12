@@ -6,7 +6,7 @@
 使用 `collapsed-width` 和 `width` 设置侧边栏的宽度。
 ```html
 <n-switch v-model="collapsed" />
-<n-layout style="height: 240px;">
+<n-layout>
   <n-layout-header style="height: 64px;">
     酷的页头
   </n-layout-header>

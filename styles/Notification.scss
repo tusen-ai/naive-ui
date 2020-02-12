@@ -1,6 +1,6 @@
 @import './mixins/mixins.scss';
 
-@import './themes/vars.scss';
+
 
 @include b(notification-container) {
   z-index: 4000;

@@ -1,11 +1,10 @@
 @import './mixins/mixins.scss';
-@import './themes/vars.scss';
+
 
 @include themes-mixin {
   @include once {
     @include b(spin) {
       display: inline-block;
-      @include fade-in-transition(spin);
       @include m(in-small-size) {
         width: 14px;
         height: 14px;
@@ -34,6 +33,7 @@
     @include b(spin-container) {
       position: relative;
       @include b(spin) {
+        @include fade-in-transition(spin);
         position: absolute;
         top: 50%;
         left: 50%;

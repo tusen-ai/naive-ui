@@ -7,10 +7,10 @@ size
 round
 icon
 password
-event
 disabled
 clearable
 autosize
+pair
 input-group
 ```
 ## V-model
@@ -23,7 +23,8 @@ input-group
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |type|`'text' \| 'password' \| 'textarea'`|`'text'`||
-|value|`string \| [string \| null, string \| null]`|`null`||
+|pair|`boolean`|`false`|是否输入成对的值|
+|value|`string \| [string, string]`|`null`|文本输入的值。如果是 `pair` 是 `true`，`value` 是一个数组|
 |disabled|`boolean`|`false`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |rows|`number`|`3`||
@@ -33,13 +34,14 @@ input-group
 |clearable|`boolean`|`false`||
 |autosize|`boolean \| { minRows?: number, maxRows?: number }`|`false`||
 |readonly|`boolean`|`false`||
-|placeholder|`string`|`null`||
+|seperator|`string`|`null`|成对的值中间的分隔符|
+|placeholder|`string \| [string, string]`|`null`|文本输入的占位符。如果是 `pair` 是 `true`，`placeholder`是一个数组|
 
 ## Slots
 ### Input Slots
 |属性|类型|说明|
 |-|-|-|
-|affix|`()`||
+|prefix|`()`||
 |suffix|`()`||
 
 ### Input Group Slots
@@ -57,7 +59,8 @@ input-group
 ### Input Events
 |属性|类型|说明|
 |-|-|-|
-|input|`(value: string)`||
-|change|`(value: string)`||
+|input|`(value: string \| [string, string])`||
+|change|`(value: string \| [string, string])`||
 |blur|`()`||
 |focus|`()`||
+|clear|`()`||

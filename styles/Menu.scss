@@ -1,6 +1,6 @@
 
 @import './mixins/mixins.scss';
-@import './themes/vars.scss';
+
 
 @include themes-mixin() {
   @include b(menu) {
@@ -39,7 +39,7 @@
           }
           @include m(selected, child-selected) {
             @include once {
-              background-color: transparent;
+              background-color: transparent !important;
             }
             border-bottom: 2px solid $--menu-horizontal-border-color;
           }

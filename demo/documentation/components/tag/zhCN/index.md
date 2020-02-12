@@ -11,6 +11,11 @@ checkable
 shape
 ```
 
+## V-model
+|prop|event|
+|-|-|
+|checked|checked-change|
+
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
