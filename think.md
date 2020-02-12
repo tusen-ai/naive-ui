@@ -110,22 +110,32 @@ Previously, it would not work with single quotes:
 为了按需引入打包大小依旧可控，需要用某种方式让互相的依赖变为外部依赖。或者就维持原本的文件结构，这样的话需要的是 babel。看起来还是有点麻烦，之后再解决吧。
 
 
-## TODO
-Focus Detector on Time Selector
-Menu Root Indent = 0 可以造成问题
-用 RAF 优化 scrollbar 性能
-Anchor 切换有 bug，忽然闪现第一个
-Notification content close
-Safari select lightbar container overflow 边角
-Chrome lightbar offset @table fitler
-cascader 数据结构维护，维持原选项！
-anchor 还是有点问题 bound 不够的时候切换
-modal transform scale
-form async validation
-table filter
-tabs 尺寸变化
-排查 render 函数是否每个地方都支持数组
+## TODO 排序不分先后
+1. Focus Detector on Time Selector
+2. Menu Root Indent = 0 可能造成问题
+3. 用 RAF 优化 scrollbar 性能（不一定需要）
+4. Anchor 切换有 bug，忽然闪现第一个
+5. Safari select lightbar container overflow 边角（或许是 webkit 的问题）
+6. Chrome lightbar offset @table fitler
+7. cascader 数据结构重构，维持原选项！
+8. 排查 render 函数是否每个地方都支持数组
+9. form async validation
+10. table filter 重构支持异步
+11. tabs resize bug
+12. CSS 整理
+13. 落地页
+14. 按需引入 babel plugin
+15. form table 需要 size
+16. input number 需要一个小型的
+17. layout scroll api
+18. cascader select menu disabled 选项
+19. icon 的默认 stroke
+20. tree 组件
+21. 文件上传组件
+22. custom-input 废弃或者重构
 
+// modal transform scale
+// Notification content close
 // form required css
 // Md Loader 对于 strong 的处理
 // pref hollowout, cache next bg color
