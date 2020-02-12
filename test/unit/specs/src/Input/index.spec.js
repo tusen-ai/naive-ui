@@ -1,7 +1,7 @@
-import NInput from 'packages/common/Input'
+import NInput from 'src/Input'
 import { mount, createLocalVue } from '@vue/test-utils'
 import { expect } from 'chai'
-import { existsInClassList } from '../../utils'
+import { existsInClassList } from '../utils'
 
 describe('Input', function () {
   const localVue = createLocalVue()

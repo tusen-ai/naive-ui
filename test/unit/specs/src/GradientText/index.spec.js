@@ -1,7 +1,7 @@
-import NGradientText from 'packages/common/GradientText'
+import NGradientText from 'src/GradientText'
 import { mount, createLocalVue } from '@vue/test-utils'
 import { expect } from 'chai'
-import { existsInClassList } from '../../utils'
+import { existsInClassList } from '../utils'
 
 describe('GradientText', function () {
   const localVue = createLocalVue()

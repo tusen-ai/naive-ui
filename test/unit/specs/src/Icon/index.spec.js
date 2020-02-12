@@ -1,7 +1,7 @@
-import NIcon from 'packages/common/Icon'
+import NIcon from 'src/Icon'
 import { mount, createLocalVue } from '@vue/test-utils'
 import { expect } from 'chai'
-import { existsInClassList } from '../../utils'
+import { existsInClassList } from '../utils'
 
 describe('Icon', function () {
   const localVue = createLocalVue()

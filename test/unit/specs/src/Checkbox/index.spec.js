@@ -1,4 +1,4 @@
-import NCheckbox from 'packages/common/Checkbox'
+import NCheckbox from 'src/Checkbox'
 import { mount, createLocalVue } from '@vue/test-utils'
 import { expect } from 'chai'
 

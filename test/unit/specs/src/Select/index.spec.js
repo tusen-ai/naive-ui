@@ -1,8 +1,8 @@
-import NSelect from 'packages/common/Select'
+import NSelect from 'src/Select'
 import { mount, createLocalVue } from '@vue/test-utils'
 import { expect } from 'chai'
 import sinon from 'sinon'
-import { existsInClassList, sleep } from '../../utils'
+import { existsInClassList, sleep } from '../utils'
 import _ from 'lodash'
 
 /**

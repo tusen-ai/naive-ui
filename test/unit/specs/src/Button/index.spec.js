@@ -1,4 +1,4 @@
-import NButton from 'packages/common/Button'
+import NButton from 'src/Button'
 import { mount, createLocalVue } from '@vue/test-utils'
 import { expect } from 'chai'
 import sinon from 'sinon'

@@ -1,7 +1,8 @@
 const path = require('path')
 
 exports.alias = {
-  'naive-ui/lib/icons': path.resolve(__dirname, '../lib/icons')
+  'naive-ui/lib/icons': path.resolve(__dirname, '../lib/icons'),
+  'src': path.resolve(__dirname, '../src')
 }
 
 exports.docLoaders = [
