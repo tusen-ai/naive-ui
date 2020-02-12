@@ -2,7 +2,7 @@ const vue = require('rollup-plugin-vue')
 const resolve = require('@rollup/plugin-node-resolve')
 const strip = require('@rollup/plugin-strip')
 const { terser } = require('rollup-plugin-terser')
-const naiveSCSSVariable = require('./playground/naiveScssVarPlugin')
+const naiveSCSSVariable = require('./build/naiveScssVarPlugin')
 
 function externalValidator (ids) {
   return id => ids.some(identifier => id.startsWith(identifier))
@@ -10,7 +10,7 @@ function externalValidator (ids) {
 
 module.exports = {
   preserveModules: true,
-  input: 'packages/index.js',
+  input: 'src/index.js',
   output: [
     {
       format: 'cjs',

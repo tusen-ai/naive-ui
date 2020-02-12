@@ -1,6 +1,5 @@
 const sass = require('node-sass')
 const path = require('path')
-const fs = require('fs')
 
 function createStyleScheme (css) {
   return css

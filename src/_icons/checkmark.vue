@@ -1,1 +1,1 @@
-<template><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><title>ionicons-v5-e</title><polyline points="416 128 192 384 96 288" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/></svg></template>
+<template><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><polyline points="416 128 192 384 96 288" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/></svg></template>
