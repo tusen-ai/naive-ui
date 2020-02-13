@@ -1,11 +1,11 @@
 <template>
   <div>
     <n-input
+      v-model="pattern"
       :style="{
         marginBottom: '24px',
         marginTop: '18px'
       }"
-      v-model="pattern"
       placeholder="Search Icons"
     />
     <div class="icons">

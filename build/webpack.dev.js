@@ -9,7 +9,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 const webpackConfig = {
   mode: 'development',
-  entry: './demo/index.js',
+  entry: './demo/devIndex',
   output: {
     path: path.resolve(process.cwd()),
     publicPath: '/',

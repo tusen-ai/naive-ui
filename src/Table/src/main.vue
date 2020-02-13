@@ -3,7 +3,7 @@
     class="n-table"
     :class="{
 
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
   >
     <table cellspacing="0">

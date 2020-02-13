@@ -1,6 +1,5 @@
 @import './mixins/mixins.scss';
 
-
 @mixin button-size-mixin($size) {
   @include m($size + "-size") {
     $height: map-get($map: $--button-height, $key: $size);

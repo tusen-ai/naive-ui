@@ -1,6 +1,5 @@
 @import './mixins/mixins.scss';
 
-
 @mixin base-select-size-mixin ($size) {
   @include m($size + '-size') {
     @include b(virtual-scroller) {

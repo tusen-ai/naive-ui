@@ -2,12 +2,12 @@
   <div
     class="n-checkbox"
     :class="{
-      'n-checkbox--checked': synthesizedChecked,
-      'n-checkbox--disabled': synthesizedDisabled,
+      'n-checkbox--checked': syntheticChecked,
+      'n-checkbox--disabled': syntheticDisabled,
       'n-checkbox--indeterminate': indeterminate,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
-    :tabindex="synthesizedDisabled ? false : 0"
+    :tabindex="syntheticDisabled ? false : 0"
     @keyup.enter="handleKeyUpEnter"
     @keyup.space="handleKeyUpSpace"
     @keydown.space="handleKeyDownSpace"
@@ -79,11 +79,11 @@ export default {
     }
   },
   computed: {
-    synthesizedDisabled () {
+    syntheticDisabled () {
       if (this.disabled || (this.NCheckboxGroup && this.NCheckboxGroup.disabled)) return true
       return false
     },
-    synthesizedChecked () {
+    syntheticChecked () {
       if (this.NCheckboxGroup) {
         const checkboxGroupValueSet = this.NCheckboxGroup.valueAsSet
         if (checkboxGroupValueSet) {
@@ -106,19 +106,19 @@ export default {
     },
     toggle () {
       if (this.NCheckboxGroup) {
-        this.NCheckboxGroup.toggleCheckbox(!this.synthesizedChecked, this.value)
+        this.NCheckboxGroup.toggleCheckbox(!this.syntheticChecked, this.value)
       } else {
-        this.$emit('change', !this.synthesizedChecked, this.synthesizedChecked)
+        this.$emit('change', !this.syntheticChecked, this.syntheticChecked)
       }
     },
     handleClick (e) {
       this.$emit('click', e)
-      if (!this.synthesizedDisabled) {
+      if (!this.syntheticDisabled) {
         this.toggle()
       }
     },
     handleKeyUpEnter (e) {
-      if (!this.synthesizedDisabled) {
+      if (!this.syntheticDisabled) {
         this.toggle()
       }
     },

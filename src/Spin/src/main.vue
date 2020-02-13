@@ -18,8 +18,8 @@
           [`n-spin--${size}-size`]: true
         }"
         :stroke="stroke"
-        :stroke-width="synthesizedStrokeWidth"
-        :theme="synthesizedTheme"
+        :stroke-width="syntheticStrokeWidth"
+        :theme="syntheticTheme"
         class="n-spin"
       />
     </transition>
@@ -30,8 +30,8 @@
       [`n-spin--${size}-size`]: size
     }"
     :stroke="stroke"
-    :stroke-width="synthesizedStrokeWidth"
-    :theme="synthesizedTheme"
+    :stroke-width="syntheticStrokeWidth"
+    :theme="syntheticTheme"
     class="n-spin"
   />
 </template>
@@ -76,7 +76,7 @@ export default {
     }
   },
   computed: {
-    synthesizedStrokeWidth () {
+    syntheticStrokeWidth () {
       const strokeWidth = this.strokeWidth
       if (strokeWidth !== null) return strokeWidth
       const size = this.size

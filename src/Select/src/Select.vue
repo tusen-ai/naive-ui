@@ -5,7 +5,7 @@
     :class="{
       [`n-select--${size}-size`]: size,
       'n-select--multiple': multiple,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
     @keydown.up.prevent="() => {}"
     @keydown.down.prevent="() => {}"
@@ -30,7 +30,7 @@
       :clearable="clearable"
       :disabled="disabled"
       :size="size"
-      :theme="synthesizedTheme"
+      :theme="syntheticTheme"
       :loading="loading"
       @click="handleActivatorClick"
       @delete-last-option="handleDeleteLastOption"
@@ -60,7 +60,7 @@
             v-clickoutside="handleClickOutsideMenu"
             class="n-select-menu"
             auto-pending-first-option
-            :theme="synthesizedTheme"
+            :theme="syntheticTheme"
             :pattern="pattern"
             :options="filteredOptions"
             :multiple="multiple"

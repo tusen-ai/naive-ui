@@ -2,10 +2,10 @@
   <div
     class="n-confirm"
     :class="{
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
       'n-confirm--bordered': bordered
     }"
-    :style="synthesizedStyle"
+    :style="syntheticStyle"
   >
     <div class="n-confirm-title">
       <span class="n-confirm-title-content">
@@ -70,8 +70,8 @@
   </div>
 </template>
 <script>
-import NIcon from '../..//Icon'
-import NButton from '../..//Button'
+import NIcon from '../../Icon'
+import NButton from '../../Button'
 import iosCheckmarkCircle from '../../_icons/ios-checkmark-circle'
 import mdClose from '../../_icons/md-close'
 import iosHelpCircle from '../../_icons/ios-help-circle'

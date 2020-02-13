@@ -3,14 +3,14 @@
     class="n-pagination"
     :class="{
       'n-pagination--transition-disabled': transitionDisabled,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
       'n-pagination--disabled': disabled
     }"
   >
     <div
       class="n-pagination-item n-pagination-item--backward"
       :class="{
-        'n-pagination-item--disabled': page <= 1 || page > synthesizedPageCount || disabled
+        'n-pagination-item--disabled': page <= 1 || page > syntheticPageCount || disabled
       }"
       @click="backward"
     >
@@ -61,7 +61,7 @@
     <div
       class="n-pagination-item n-pagination-item--forward"
       :class="{
-        'n-pagination-item--disabled': page < 1 || page >= synthesizedPageCount || disabled
+        'n-pagination-item--disabled': page < 1 || page >= syntheticPageCount || disabled
       }"
       @click="forward"
     >
@@ -170,7 +170,7 @@ export default {
     }
   },
   computed: {
-    synthesizedPageCount () {
+    syntheticPageCount () {
       if (this.total !== undefined) return this.total <= 0 ? 1 : this.total
       if (this.pageCount !== undefined) return this.pageCount <= 0 ? 1 : this.pageCount
       console.error(
@@ -186,7 +186,7 @@ export default {
       }))
     },
     pageItems () {
-      return pageItems(this.page, this.synthesizedPageCount, this.pageSlot)
+      return pageItems(this.page, this.syntheticPageCount, this.pageSlot)
     }
   },
   watch: {
@@ -225,7 +225,7 @@ export default {
     },
     forward () {
       if (this.disabled) return
-      const page = Math.min(this.page + 1, this.synthesizedPageCount)
+      const page = Math.min(this.page + 1, this.syntheticPageCount)
       this.changeCurrentPage(page)
     },
     backward () {
@@ -235,7 +235,7 @@ export default {
     },
     fastForward () {
       if (this.disabled) return
-      const page = Math.min(this.page + (this.pageSlot - 4), this.synthesizedPageCount)
+      const page = Math.min(this.page + (this.pageSlot - 4), this.syntheticPageCount)
       this.changeCurrentPage(page)
     },
     fastBackward () {
@@ -249,7 +249,7 @@ export default {
     handleQuickJumperKeyUp (e) {
       if (e.code === 'Enter') {
         const page = parseInt(this.quickJumperValue)
-        if (!Number.isNaN(page) && page >= 1 && page <= this.synthesizedPageCount) {
+        if (!Number.isNaN(page) && page >= 1 && page <= this.syntheticPageCount) {
           this.changeCurrentPage(page)
           this.quickJumperValue = ''
         }

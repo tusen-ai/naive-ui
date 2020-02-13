@@ -1,6 +1,5 @@
 @import "./mixins/mixins.scss";
 
-
 @mixin popover-content-transition {
   &#{&}-transition-enter-to, &#{&}-transition-leave {
     transform:  scaleX(.999999); // scale is set to 99999 to get rid of a ridiculous render bug of chrome

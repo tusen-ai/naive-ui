@@ -25,7 +25,7 @@
             }"
             :class="{
               [`n-drawer--${placement}-placement`]: true,
-              [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+              [`n-${syntheticTheme}-theme`]: syntheticTheme
             }"
           >
             <slot />

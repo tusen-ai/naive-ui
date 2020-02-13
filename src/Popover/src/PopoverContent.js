@@ -281,7 +281,7 @@ export default {
             staticClass: 'n-popover-content',
             class: {
               'n-popover-content--without-arrow': !this.arrow,
-              [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme,
+              [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
               'n-popover-content--without-shadow': !this.shadow,
               [this.overlayClass]: this.overlayClass,
               'n-popover-content--fix-width': this.width !== null || this.maxWidth !== null

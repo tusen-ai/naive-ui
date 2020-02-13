@@ -1,7 +1,4 @@
-/* stylelint-disable */
 @import './mixins/mixins.scss';
-
-
 
 @include themes-mixin {
   @include b(cascader) {

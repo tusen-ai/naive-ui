@@ -3,10 +3,10 @@
     class="n-layout-footer"
     :class="{
       [`n-layout-footer--${mode}-positioned`]: mode,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
       [`n-layout-footer--bordered`]: bordered
     }"
-    :style="synthesizedStyle"
+    :style="syntheticStyle"
   >
     <slot />
   </div>

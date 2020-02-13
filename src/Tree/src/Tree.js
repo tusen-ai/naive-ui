@@ -21,16 +21,16 @@ function createNode (node, h, self) {
     drop: self.handleDrop,
     check: self.handleCheck
   }
-  const expanded = self.synthesizedExpandedKeys.includes(node.key)
+  const expanded = self.syntheticExpandedKeys.includes(node.key)
   const props = {
     data: node,
     expanded,
-    selected: self.synthesizedSelectedKeys.includes(node.key),
+    selected: self.syntheticSelectedKeys.includes(node.key),
     draggable: self.draggable,
     checkable: self.checkable,
     drop: self.drop,
     blockNode: self.blockNode,
-    checked: self.synthesizedCheckedKeys.includes(node.key)
+    checked: self.syntheticCheckedKeys.includes(node.key)
   }
   return h(NTreeNode, {
     props,
@@ -185,21 +185,21 @@ export default {
     hasCheckedKeys () {
       return Array.isArray(this.checkedKeys)
     },
-    synthesizedExpandedKeys () {
+    syntheticExpandedKeys () {
       if (this.hasExpandedKeys) {
         return this.expandedKeys
       } else {
         return this.internalExpandedKeys
       }
     },
-    synthesizedSelectedKeys () {
+    syntheticSelectedKeys () {
       if (this.hasSelectedKeys) {
         return this.selectedKeys
       } else {
         return this.internalSelectedKeys
       }
     },
-    synthesizedCheckedKeys () {
+    syntheticCheckedKeys () {
       if (this.hasCheckedKeys) {
         return this.checkedKeys
       } else {
@@ -209,13 +209,13 @@ export default {
   },
   methods: {
     getSelectedKeys () {
-      return this.synthesizedSelectedKeys
+      return this.syntheticSelectedKeys
     },
     getCheckedKeys () {
-      return this.synthesizedCheckedKeys
+      return this.syntheticCheckedKeys
     },
     getExpandedKeys () {
-      return this.synthesizedExpandedKeys
+      return this.syntheticExpandedKeys
     },
     disableTransition () {
       this.transitionDisabled = true
@@ -250,7 +250,7 @@ export default {
       this.draggingNode = null
     },
     toggleExpand (node) {
-      const index = this.synthesizedExpandedKeys.findIndex(expandNodeId => expandNodeId === node.key)
+      const index = this.syntheticExpandedKeys.findIndex(expandNodeId => expandNodeId === node.key)
       if (~index) {
         this.$emit('collapse', node)
         if (!this.hasExpandedKeys) {
@@ -277,10 +277,10 @@ export default {
       this.$emit('dragenter', node)
       this.droppingNodeKey = node.key
       if (node.key === this.draggingNodeKey) return
-      if (!this.synthesizedExpandedKeys.includes(node.key) && !node.isLeaf) {
+      if (!this.syntheticExpandedKeys.includes(node.key) && !node.isLeaf) {
         window.clearTimeout(this.expandTimerId)
         this.expandTimerId = window.setTimeout(() => {
-          if (this.droppingNodeKey === node.key && !this.synthesizedExpandedKeys.includes(node.key)) {
+          if (this.droppingNodeKey === node.key && !this.syntheticExpandedKeys.includes(node.key)) {
             if (!this.hasExpandedKeys) {
               this.internalExpandedKeys.push(node.key)
             }
@@ -306,7 +306,7 @@ export default {
     return h('div', {
       staticClass: 'n-tree',
       class: {
-        [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme
+        [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme
       }
     }, convertRootedOptionsToVNodeTree(mOptions, h, this))
   }

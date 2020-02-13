@@ -1,6 +1,5 @@
 @import './mixins/mixins.scss';
 
-
 @keyframes transfer-height-collapse {
   0% {
     max-height: 34px;
@@ -54,8 +53,6 @@
     transform: translateX(-150%);
   }
 }
-
-
 
 /**
  * There are some theme related hard codes in transfer.

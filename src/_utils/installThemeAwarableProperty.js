@@ -14,8 +14,8 @@ function getTheme (componentInstance, property, configProviderToWatchThemeChange
     const name = cursor.$options.name
     if (name === 'NConfigProvider') {
       while (cursor) {
-        if (cursor.synthesizedTheme) {
-          theme = cursor.synthesizedTheme
+        if (cursor.syntheticTheme) {
+          theme = cursor.syntheticTheme
           lastThemedConfigProvider = cursor
         }
         cursor = cursor.NConfigProvider
@@ -26,7 +26,7 @@ function getTheme (componentInstance, property, configProviderToWatchThemeChange
   }
   if (lastThemedConfigProvider && property && configProviderToWatchThemeChange) {
     if (!configProviderToWatchThemeChange.has(lastThemedConfigProvider)) {
-      lastThemedConfigProvider.$watch('synthesizedTheme', createThemeChangeHandler(property))
+      lastThemedConfigProvider.$watch('syntheticTheme', createThemeChangeHandler(property))
       configProviderToWatchThemeChange.add(lastThemedConfigProvider)
     }
   }

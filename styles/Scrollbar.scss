@@ -1,6 +1,4 @@
-/* stylelint-disable */
 @import './mixins/mixins.scss';
-
 
 @include themes-mixin {
   @include b(scrollbar) {
@@ -26,10 +24,6 @@
               width: fit-content;
               overflow: hidden;
               min-width: 100%;
-              /** stylelint-disable */
-              width: -moz-fit-content;    /* Firefox/Gecko */
-              width: -webkit-fit-content; /* Chrome */
-              /* stylelint-enable */
             }
           }
         }

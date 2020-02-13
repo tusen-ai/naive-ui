@@ -139,7 +139,7 @@ export default {
     return h('NLayout', {
       staticClass: 'n-nbs',
       class: {
-        [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme
+        [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme
       },
       props: {
         mode: 'absolute'

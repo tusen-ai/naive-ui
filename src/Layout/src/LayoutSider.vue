@@ -6,10 +6,10 @@
       [`n-layout-sider--bordered`]: bordered,
       [`n-layout-sider--collapsed`]: collapsed,
       [`n-layout-sider--show-content`]: showContent,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
     :style="{
-      ...synthesizedStyle,
+      ...syntheticStyle,
       transform: styleTransform,
       maxWidth: styleMaxWidth,
       width: styleWidth,
@@ -36,11 +36,13 @@ import layoutModeMixin from './layoutModeMixin'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import ToggleButton from './ToggleButton'
+import NScrollbar from '../../Scrollbar'
 
 export default {
   name: 'NLayoutSider',
   components: {
-    ToggleButton
+    ToggleButton,
+    NScrollbar
   },
   mixins: [ withapp, themeable, layoutModeMixin ],
   props: {

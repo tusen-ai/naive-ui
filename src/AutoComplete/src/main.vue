@@ -21,14 +21,14 @@
         ref="content"
         class="n-positioning-content"
       >
-        <transition name="n-select-menu-transition">
+        <transition name="n-auto-complete-menu-transition">
           <n-base-select-menu
             v-if="active"
             ref="contentInner"
             v-clickoutside="handleClickOutsideMenu"
             auto-pending-first-option
-            class="n-select-menu"
-            :theme="synthesizedTheme"
+            class="n-auto-complete-menu"
+            :theme="syntheticTheme"
             :pattern="value"
             :options="filteredOptions"
             :multiple="false"

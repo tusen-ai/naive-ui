@@ -2,8 +2,8 @@
   <span
     class="n-data-table-sort-button"
     :class="{
-      'n-data-table-sort-button--asc': currentColumnActive && synthesizedSortOrder === 'ascend',
-      'n-data-table-sort-button--desc': currentColumnActive && synthesizedSortOrder === 'descend'
+      'n-data-table-sort-button--asc': currentColumnActive && syntheticSortOrder === 'ascend',
+      'n-data-table-sort-button--desc': currentColumnActive && syntheticSortOrder === 'descend'
     }"
   >
     <n-icon
@@ -48,13 +48,13 @@ export default {
   },
   computed: {
     activeSorter () {
-      const activeSorter = this.NDataTable.synthesizedActiveSorter
+      const activeSorter = this.NDataTable.syntheticActiveSorter
       return activeSorter
     },
     currentColumnActive () {
       return this.activeSorter && this.activeSorter.columnKey === this.column.key
     },
-    synthesizedSortOrder () {
+    syntheticSortOrder () {
       if (this.activeSorter) {
         return this.activeSorter.order
       }

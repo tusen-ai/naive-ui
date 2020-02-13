@@ -92,11 +92,11 @@ export default {
               ref: 'content',
               props: {
                 ...this.$props,
-                theme: this.synthesizedTheme,
+                theme: this.syntheticTheme,
                 active: this.active
               },
               class: {
-                [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme
+                [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme
               },
               on: {
                 deactivate: () => {

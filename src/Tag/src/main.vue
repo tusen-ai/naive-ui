@@ -6,12 +6,12 @@
       [`n-tag--${type}-type`]: true,
       'n-tag--closable': !checkable && closable,
       'n-tag--disabled': disabled,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
       'n-tag--checkable': checkable,
       'n-tag--checked': checkable && checked,
       'n-tag--round': round
     }"
-    :style="synthesizedStyle"
+    :style="syntheticStyle"
     @click="handleClick"
   >
     <slot />

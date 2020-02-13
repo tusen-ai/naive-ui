@@ -3,10 +3,10 @@
     class="n-gradient-text"
     :class="{
       [`n-gradient-text--${computedType}-type`]: true,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
     :style="{
-      ...synthesizedStyle,
+      ...syntheticStyle,
       fontSize: styleFontSize,
       backgroundImage: styleBackgroundImage
     }"

@@ -3,7 +3,7 @@
     class="n-time-picker"
     :class="{
       'n-time-picker--invalid': isValueInvalid,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
   >
     <n-input
@@ -39,7 +39,7 @@
             tabindex="0"
             class="n-time-picker-selector"
             :class="{
-              [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+              [`n-${syntheticTheme}-theme`]: syntheticTheme
             }"
           >
             <div class="n-time-picker-selector-time">

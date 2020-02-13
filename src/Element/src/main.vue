@@ -14,20 +14,20 @@ export default {
     }
   },
   watch: {
-    synthesizedTheme: function (value, oldValue) {
+    syntheticTheme: function (value, oldValue) {
       this.$emit('theme-change', value, oldValue)
     }
   },
   render (h) {
     return h(this.as, {
       class: {
-        [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme
+        [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme
       }
     }, this.$slots.default || (this.$scopedSlots.default && this.$scopedSlots.default({
-      theme: this.synthesizedTheme,
+      theme: this.syntheticTheme,
       namespace: this.NConfigProvider ? this.NConfigProvider.inheritedNamespace : null,
-      themeEnvironment: this.synthesizedThemeEnvironment,
-      styleScheme: this.synthesizedTheme ? styleScheme[this.synthesizedTheme] : null
+      themeEnvironment: this.syntheticThemeEnvironment,
+      styleScheme: this.syntheticTheme ? styleScheme[this.syntheticTheme] : null
     })) || null)
   }
 }

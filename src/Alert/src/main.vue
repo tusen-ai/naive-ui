@@ -6,9 +6,9 @@
       :class="{
         [`n-alert--${type}-type`]: true,
         'n-alert--no-icon': showIcon === false,
-        [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+        [`n-${syntheticTheme}-theme`]: syntheticTheme
       }"
-      :style="synthesizedStyle"
+      :style="syntheticStyle"
     >
       <div v-if="closable" class="n-alert__close" @click="handleCloseClick">
         <n-icon>

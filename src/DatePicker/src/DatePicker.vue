@@ -3,7 +3,7 @@
     ref="activator"
     class="n-date-picker"
     :class="{
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
       [`n-date-picker--${size}-size`]: true,
       'n-date-picker--disabled': disabled,
       'n-date-picker--range': isRange,
@@ -74,7 +74,7 @@
           :value="value"
           :active="active"
           :actions="actions"
-          :theme="synthesizedTheme"
+          :theme="syntheticTheme"
           :is-date-disabled="isDateDisabled"
           :is-time-disabled="isTimeDisabled"
           @blur="handlePanelBlur"
@@ -88,7 +88,7 @@
           :value="value"
           :active="active"
           :actions="actions"
-          :theme="synthesizedTheme"
+          :theme="syntheticTheme"
           :is-date-disabled="isDateDisabled"
           @input="handlePanelInput"
           @blur="handlePanelBlur"
@@ -101,7 +101,7 @@
           :value="value"
           :active="active"
           :actions="actions"
-          :theme="synthesizedTheme"
+          :theme="syntheticTheme"
           :is-date-disabled="isDateDisabled"
           @input="handleRangePanelInput"
           @blur="handlePanelBlur"
@@ -115,7 +115,7 @@
           :value="value"
           :active="active"
           :actions="actions"
-          :theme="synthesizedTheme"
+          :theme="syntheticTheme"
           :is-date-disabled="isDateDisabled"
           :is-time-disabled="isTimeDisabled"
           @input="handleRangePanelInput"

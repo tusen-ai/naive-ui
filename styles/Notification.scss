@@ -1,7 +1,5 @@
 @import './mixins/mixins.scss';
 
-
-
 @include b(notification-container) {
   z-index: 4000;
   position: fixed;

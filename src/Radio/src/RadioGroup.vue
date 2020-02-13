@@ -30,7 +30,7 @@ function mapSlot (h, defaultSlot, groupInstance) {
       const currentInstanceDisabled = instanceOptions.propsData.disabled
       let lastInstancePriority
       let currentInstancePriority
-      if (groupInstance.synthesizedTheme === 'dark') {
+      if (groupInstance.syntheticTheme === 'dark') {
         /**
          * Priority of button splitor:
          * !disabled  checked >
@@ -109,7 +109,7 @@ export default {
     return h('div', {
       staticClass: 'n-radio-group',
       class: {
-        [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme,
+        [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
         [`n-radio-group--${this.size}-size`]: this.size,
         [`n-radio-group--button-group`]: this.radioButtonCount > 0
       }

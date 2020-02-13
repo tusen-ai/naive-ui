@@ -8,7 +8,7 @@
         :placement="submenuPopoverPlacement"
         :show-arrow="false"
         :controller="popoverController"
-        :disabled="(!rootMenuIsHorizontal && !rootMenuCollapsed) || synthesizedDisabled"
+        :disabled="(!rootMenuIsHorizontal && !rootMenuCollapsed) || syntheticDisabled"
         :directive="rootMenuIsHorizontal ? 'show' : 'if'"
         :overlay-style="{
           width: overlayWidth === null ? null : overlayMinWidth + 'px',
@@ -22,7 +22,7 @@
         <template v-slot:activator>
           <n-menu-item-content
             :padding-left="delayedPaddingLeft"
-            :collapsed="synthesizedCollapsed"
+            :collapsed="syntheticCollapsed"
             :disabled="disabled"
             :max-icon-size="maxIconSize"
             :active-icon-size="activeIconSize"
@@ -57,7 +57,7 @@
       </n-popover>
       <fade-in-height-expand-transition v-if="!rootMenuIsHorizontal">
         <ul
-          v-show="!synthesizedCollapsed"
+          v-show="!syntheticCollapsed"
           class="n-submenu-content"
         >
           <slot />
@@ -67,7 +67,7 @@
     <template v-else>
       <n-menu-item-content
         :padding-left="delayedPaddingLeft"
-        :collapsed="synthesizedCollapsed"
+        :collapsed="syntheticCollapsed"
         :disabled="disabled"
         :max-icon-size="maxIconSize"
         :active-icon-size="activeIconSize"
@@ -90,7 +90,7 @@
       </n-menu-item-content>
       <fade-in-height-expand-transition>
         <ul
-          v-show="!synthesizedCollapsed"
+          v-show="!syntheticCollapsed"
           class="n-submenu-content"
         >
           <slot />
@@ -102,7 +102,7 @@
 
 <script>
 import FadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
-import NPopover from '../..//Popover'
+import NPopover from '../../Popover'
 import NMenuItemContent from './MenuItemContent'
 import NMenu from './Menu'
 import menuContentMixin from './menuContentMixin'
@@ -155,15 +155,15 @@ export default {
     renderedContentAsPopover () {
       return this.rootMenuCollapsed && this.atRoot
     },
-    synthesizedDisabled () {
+    syntheticDisabled () {
       if (this.disabled !== undefined) return this.disabled
-      if (this.PenetratedNSubmenu) return this.PenetratedNSubmenu.synthesizedDisabled
+      if (this.PenetratedNSubmenu) return this.PenetratedNSubmenu.syntheticDisabled
       return this.NMenu && this.NMenu.disabled
     },
     collapsedAccrodingToOpenNames () {
-      return !this.NMenu.synthesizedOpenNames.includes(this.name)
+      return !this.NMenu.syntheticOpenNames.includes(this.name)
     },
-    synthesizedCollapsed () {
+    syntheticCollapsed () {
       if (!this.NMenu.submenuCollapsable) return false
       else if (this.rootMenuCollapsed) return true
       return this.collapsedAccrodingToOpenNames

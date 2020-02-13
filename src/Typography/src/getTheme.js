@@ -1,6 +1,6 @@
 function getTheme (cursor) {
   while (cursor) {
-    if (cursor.synthesizedTheme) return cursor.synthesizedTheme
+    if (cursor.syntheticTheme) return cursor.syntheticTheme
     cursor = cursor.$parent
   }
   return null

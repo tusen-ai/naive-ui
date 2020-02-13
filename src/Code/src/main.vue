@@ -67,7 +67,7 @@ export default {
     return h('pre', {
       staticClass: 'n-code',
       class: {
-        [`n-${this.synthesizedTheme}-theme`]: this.synthesizedTheme
+        [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme
       }
     }, [
       h('code', {

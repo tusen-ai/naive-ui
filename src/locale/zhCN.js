@@ -1,4 +1,5 @@
 export default {
+  _name: 'zh-CN',
   Popconfirm: {
     positiveText: '确认',
     negativeText: '取消'

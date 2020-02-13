@@ -1,6 +1,5 @@
 @import "./mixins/mixins.scss";
 
-
 @mixin progress-animation-mixin ($type) {
   @keyframes progress-#{$type}-type-ripple {
     0% {

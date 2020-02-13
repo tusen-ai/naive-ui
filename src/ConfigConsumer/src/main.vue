@@ -7,13 +7,13 @@ export default {
   name: 'NConfigConsumer',
   mixins: [ withapp, themeable ],
   watch: {
-    synthesizedTheme: function (value, oldValue) {
+    syntheticTheme: function (value, oldValue) {
       this.$emit('theme-change', value, oldValue)
     },
     'NConfigProvider.inheritedNamespace': function (value, oldValue) {
       this.$emit('namespace-change', value, oldValue)
     },
-    synthesizedThemeEnvironment: function (value, oldValue) {
+    syntheticThemeEnvironment: function (value, oldValue) {
       this.$emit('theme-environment-change', value, oldValue)
     },
     'NConfigProvider.inheritedLanguage': function (value, oldValue) {
@@ -22,11 +22,11 @@ export default {
   },
   render (h) {
     const defaultSlot = this.$scopedSlots.default ? this.$scopedSlots.default({
-      theme: this.synthesizedTheme,
+      theme: this.syntheticTheme,
       language: this.NConfigProvider ? this.NConfigProvider.inheritedLanguage : null,
       namespace: this.NConfigProvider ? this.NConfigProvider.inheritedNamespace : null,
-      themeEnvironment: this.synthesizedThemeEnvironment,
-      styleScheme: this.synthesizedTheme ? styleScheme[this.synthesizedTheme] : null
+      themeEnvironment: this.syntheticThemeEnvironment,
+      styleScheme: this.syntheticTheme ? styleScheme[this.syntheticTheme] : null
     }) : []
     if (defaultSlot.length > 1) {
       console.error(

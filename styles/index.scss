@@ -1,5 +1,15 @@
 @import "./base.scss";
 
+@import '../node_modules/vue-virtual-scroller/dist/vue-virtual-scroller';
+
+@import "./BaseLoading.scss";
+@import "./BaseSlotMachine.scss";
+@import './BaseSuffix.scss';
+@import './BaseSelection.scss';
+@import './BaseSelectMenu.scss';
+@import './BaseMenuMask.scss';
+@import './BaseTrackingRect.scss';
+
 @import "./Card.scss";
 @import "./Icon.scss";
 @import "./GradientText.scss";
@@ -35,11 +45,6 @@
 @import './Anchor.scss';
 @import './Dropdown.scss';
 @import './Popselect.scss';
-@import './BaseCancelMark.scss';
-@import './BasePicker.scss';
-@import './BaseSelectMenu.scss';
-@import './BaseMenuMask.scss';
-@import './BaseLightBar.scss';
 @import './Transfer.scss';
 @import './Spin.scss';
 @import './Drawer.scss';
@@ -48,7 +53,6 @@
 @import './Tree.scss';
 @import './Grid.scss';
 @import './Affix.scss';
-@import './BaseIcon.scss';
 @import './Statistic.scss';
 @import './Breadcrumb.scss';
 @import './Descriptions.scss';
@@ -60,8 +64,6 @@
 @import "./Popover.scss";
 @import "./DataTable.scss";
 @import "./Confirm.scss";
-@import "./BaseLoading.scss";
-@import "./BaseSlotMachine.scss";
 @import "./Modal.scss";
 @import "./Result.scss";
 @import "./Thing.scss";

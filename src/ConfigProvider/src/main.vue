@@ -70,7 +70,7 @@ export default {
       class: {
         [`n-${this.theme}-theme`]: this.theme
       },
-      style: this.synthesizedStyle
+      style: this.syntheticStyle
     },
     defaultSlot)
       : defaultSlot[0]

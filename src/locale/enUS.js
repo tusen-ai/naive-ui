@@ -1,4 +1,5 @@
 export default {
+  _name: 'en-US',
   Popconfirm: {
     positiveText: 'Confirm',
     negativeText: 'Cancel'

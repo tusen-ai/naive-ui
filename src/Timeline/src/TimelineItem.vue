@@ -69,9 +69,9 @@ export default {
     }
   },
   computed: {
-    synthesizedTheme () {
+    syntheticTheme () {
       if (this.NTimeline) {
-        return this.NTimeline.synthesizedTheme
+        return this.NTimeline.syntheticTheme
       }
       return null
     }

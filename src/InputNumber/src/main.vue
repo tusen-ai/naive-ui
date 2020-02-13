@@ -5,7 +5,7 @@
       [`n-input-number--${size}-size`]: true,
       'n-input-number--disabled': disabled,
       'n-input-number--invalid': invalid,
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
   >
     <button

@@ -84,7 +84,6 @@ $theme-names: 'dark', 'light';
 /** wait for sass to support dynamic @include mixins */
 $default-theme: 'light';
 
-
 @mixin themes-mixin() {
   $in-themes-mixin: true !global;
   $theme: 'dark' !global;
@@ -111,7 +110,7 @@ $default-theme: 'light';
 
 @mixin as-form-item {
   &.#{$namespace}-form-item {
-    &.#{$namespace}-form-item-blank {
+    .#{$namespace}-form-item-blank {
       @content;
     }
   }

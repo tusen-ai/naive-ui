@@ -29,7 +29,7 @@
     }
     @include e(extra) {
       @include once {
-        font-size: 14px;;
+        font-size: 14px;
         text-align: center;
         transition: color .3s $--n-ease-in-out-cubic-bezier;
         margin-top: 16px;

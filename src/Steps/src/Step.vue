@@ -2,7 +2,7 @@
   <div
     class="n-step"
     :class="{
-      [`n-step--${synthesizedStatus}`]: synthesizedStatus !== null
+      [`n-step--${syntheticStatus}`]: syntheticStatus !== null
     }"
   >
     <div class="n-step-indicator">
@@ -11,23 +11,23 @@
       >
         <n-icon-switch-transition>
           <div
-            v-if="!(synthesizedStatus === 'finish' || synthesizedStatus === 'error')"
+            v-if="!(syntheticStatus === 'finish' || syntheticStatus === 'error')"
             key="index"
             class="n-step-indicator-slot__index"
             :style="{
-              color: synthesizedStatus === 'process' ? ascendantBackgroundColor : null
+              color: syntheticStatus === 'process' ? ascendantBackgroundColor : null
             }"
           >
             {{ index }}
           </div>
           <n-icon
-            v-else-if="synthesizedStatus === 'finish'"
+            v-else-if="syntheticStatus === 'finish'"
             key="finish"
           >
             <md-checkmark />
           </n-icon>
           <n-icon
-            v-else-if="synthesizedStatus === 'error'"
+            v-else-if="syntheticStatus === 'error'"
             key="error"
           >
             <md-close />
@@ -110,7 +110,7 @@ export default {
     stepsStatus () {
       return this.NSteps && this.NSteps.status
     },
-    synthesizedStatus () {
+    syntheticStatus () {
       if (this.status) {
         return this.status
       } else if (this.index < this.current) {

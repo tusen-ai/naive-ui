@@ -2,7 +2,7 @@
   <div
     class="n-result"
     :class="{
-      [`n-${synthesizedTheme}-theme`]: synthesizedTheme,
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
       [`n-result--${status}-status`]: status
     }"
   >

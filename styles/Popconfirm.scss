@@ -1,6 +1,5 @@
 @import './mixins/mixins.scss';
 
-
 @include b(popconfirm-content) {
   padding: 14px 16px;
   @include m(no-icon) {

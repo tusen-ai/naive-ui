@@ -14,7 +14,7 @@
             :max-icon-size="maxIconSize"
             :active-icon-size="activeIconSize"
             :title="title"
-            :disabled="synthesizedDisabled"
+            :disabled="syntheticDisabled"
             :title-extra="titleExtra"
             @click="handleClick"
           >
@@ -37,7 +37,7 @@
       :padding-left="delayedPaddingLeft"
       :title="title"
       :title-extra="titleExtra"
-      :disabled="synthesizedDisabled"
+      :disabled="syntheticDisabled"
       :selected="selected"
       @click="handleClick"
     >
@@ -102,9 +102,9 @@ export default {
     }
   },
   computed: {
-    synthesizedDisabled () {
+    syntheticDisabled () {
       if (this.disabled !== undefined) return this.disabled
-      return this.PenetratedNSubmenu && this.PenetratedNSubmenu.synthesizedDisabled
+      return this.PenetratedNSubmenu && this.PenetratedNSubmenu.syntheticDisabled
     },
     selected () {
       if (this.rootMenuValue === this.name) {
@@ -126,7 +126,7 @@ export default {
   },
   methods: {
     handleClick () {
-      if (!this.synthesizedDisabled) {
+      if (!this.syntheticDisabled) {
         this.NMenu.handleSelect(this.name)
         this.$emit('click', this)
       }
