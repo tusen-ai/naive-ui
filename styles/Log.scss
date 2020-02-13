@@ -53,7 +53,7 @@
         padding-right: 20px;
         white-space: nowrap;
       }
-      @include b(spin) {
+      @include b(base-loading) {
         position: absolute;
         left: 12px;
         top: calc(50% - 10px);

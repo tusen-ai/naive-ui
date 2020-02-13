@@ -1,5 +1,5 @@
 @import './mixins/mixins.scss';
 
-@include b(auto-complete) {
-  position: relative;
+@include b(auto-complete-menu) {
+  @include fade-in-scale-up-transition(auto-complete-menu, $original-transition: (background-color .3s $--n-ease-in-out-cubic-bezier));
 }

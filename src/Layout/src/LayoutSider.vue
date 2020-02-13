@@ -36,11 +36,13 @@ import layoutModeMixin from './layoutModeMixin'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import ToggleButton from './ToggleButton'
+import NScrollbar from '../../Scrollbar'
 
 export default {
   name: 'NLayoutSider',
   components: {
-    ToggleButton
+    ToggleButton,
+    NScrollbar
   },
   mixins: [ withapp, themeable, layoutModeMixin ],
   props: {

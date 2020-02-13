@@ -1,15 +1,15 @@
 <template>
   <div class="n-log-loader">
-    <n-spin /><span class="n-log-loader__content">Loading</span>
+    <n-base-loading :stroke-width="24" /><span class="n-log-loader__content">Loading</span>
   </div>
 </template>
 
 <script>
-import NSpin from '../../Spin'
+import NBaseLoading from '../../_base/Loading'
 
 export default {
   components: {
-    NSpin
+    NBaseLoading
   }
 }
 </script>

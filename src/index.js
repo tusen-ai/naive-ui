@@ -75,113 +75,83 @@ import NimbusConfirmCard from './_deprecated/NimbusConfirmCard'
 import NimbusServiceLayout from './_deprecated/NimbusServiceLayout'
 import NimbusIcon from './_deprecated/NimbusIcon'
 
-/**
- * debug usage
- * to be removed
- */
-import Loader from './_base/Loading'
-import CancelMark from './_base/CancelMark'
-import IconTransition from './_transition/IconSwitchTransition'
+import create from './create'
 
-import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
-
-const NaiveUI = {
-  install,
-  setHljs,
-  setHighlightjs: setHljs,
-  locales: {
-    'zh-CN': zhCN,
-    'en-US': enUS
-  },
-  fallbackLocale: enUS,
-  addLocale
-}
-
-function addLocale () {
-
-}
-
-function setHljs (hljs) {
-  NaiveUI.hljs = hljs
-}
-
-function install (Vue) {
-  Vue.prototype.$naive = NaiveUI
-  Card.install(Vue)
-  Icon.install(Vue)
-  Loader.install(Vue)
-  Layout.install(Vue)
-  GradientText.install(Vue)
-  Table.install(Vue)
-  DataTable.install(Vue)
-  CheckBox.install(Vue)
-  RoundButton.install(Vue)
-  Switch.install(Vue)
-  Select.install(Vue)
-  Modal.install(Vue)
-  Input.install(Vue)
-  Message.install(Vue)
-  Notification.install(Vue)
-  Pagination.install(Vue)
-  Tooltip.install(Vue)
-  Popup.install(Vue)
-  Alert.install(Vue)
-  DatePicker.install(Vue)
-  InputNumber.install(Vue)
-  Radio.install(Vue)
-  Cascader.install(Vue)
-  CustomInput.install(Vue)
-  Form.install(Vue)
-  Tabs.install(Vue)
-  TimePicker.install(Vue)
-  Scrollbar.install(Vue)
-  Steps.install(Vue)
-  ConfirmPlugin.install(Vue)
-  Progress.install(Vue)
-  Badge.install(Vue)
-  Tag.install(Vue)
-  BackTop.install(Vue)
-  Divider.install(Vue)
-  Collapse.install(Vue)
-  Timeline.install(Vue)
-  Popconfirm.install(Vue)
-  Anchor.install(Vue)
-  Dropdown.install(Vue)
-  Popselect.install(Vue)
-  ConfigProvider.install(Vue)
-  CancelMark.install(Vue)
-  Transfer.install(Vue)
-  Spin.install(Vue)
-  Drawer.install(Vue)
-  LoadingBar.install(Vue)
-  Time.install(Vue)
-  Slider.install(Vue)
-  Tree.install(Vue)
-  Grid.install(Vue)
-  Affix.install(Vue)
-  Statistic.install(Vue)
-  Breadcrumb.install(Vue)
-  ConfigConsumer.install(Vue)
-  Descriptions.install(Vue)
-  List.install(Vue)
-  Menu.install(Vue)
-  Avatar.install(Vue)
-  Result.install(Vue)
-  Thing.install(Vue)
-  AutoComplete.install(Vue)
-  Empty.install(Vue)
-  Element.install(Vue)
-  IconTransition.install(Vue)
-  Log.install(Vue)
-  Code.install(Vue)
-  Typography.install(Vue)
-  /**
-   * Deprecated
-   */
-  NimbusServiceLayout.install(Vue)
-  NimbusConfirmCard.install(Vue)
-  NimbusFormCard.install(Vue)
-  NimbusIcon.install(Vue)
-}
-
-export default NaiveUI
+export default create({
+  components: [
+    Card,
+    Icon,
+    Layout,
+    GradientText,
+    Table,
+    DataTable,
+    CheckBox,
+    RoundButton,
+    Switch,
+    Select,
+    Modal,
+    Input,
+    Message,
+    Notification,
+    Pagination,
+    Tooltip,
+    Popup,
+    Alert,
+    DatePicker,
+    InputNumber,
+    Radio,
+    Cascader,
+    CustomInput,
+    Form,
+    Tabs,
+    TimePicker,
+    Scrollbar,
+    Steps,
+    ConfirmPlugin,
+    Progress,
+    Badge,
+    Tag,
+    BackTop,
+    Divider,
+    Collapse,
+    Timeline,
+    Popconfirm,
+    Anchor,
+    Dropdown,
+    Popselect,
+    ConfigProvider,
+    Transfer,
+    Spin,
+    Drawer,
+    LoadingBar,
+    Time,
+    Slider,
+    Tree,
+    Grid,
+    Affix,
+    Statistic,
+    Breadcrumb,
+    ConfigConsumer,
+    Descriptions,
+    List,
+    Menu,
+    Avatar,
+    Result,
+    Thing,
+    AutoComplete,
+    Empty,
+    Element,
+    Log,
+    Code,
+    Typography,
+    /**
+     * Deprecated
+     */
+    NimbusServiceLayout,
+    NimbusConfirmCard,
+    NimbusFormCard,
+    NimbusIcon
+  ],
+  locales: [zhCN, enUS],
+  fallbackLocale: enUS
+})

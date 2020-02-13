@@ -79,7 +79,7 @@
 <script>
 import NScrollbar from '../../Scrollbar'
 import NConfirm from '../../Confirm/src/Confirm'
-import NCard from '../..//Card'
+import NCard from '../../Card'
 import themeable from '../../_mixins/themeable'
 import presetProps from './presetProps'
 

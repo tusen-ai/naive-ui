@@ -10,9 +10,8 @@
   <svg
     v-else-if="type === 'fastForward' || type === 'fastBackward' || type === 'fast-forward' || type === 'fast-backward'"
     class="n-base-icon"
-    :class="{
-      'n-base-icon--fast-backward': type === 'fast-backward',
-      'n-base-icon--fast-forward': type === 'fast-forward'
+    :style="{
+      transform: styleTransform
     }"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 512 512"
@@ -25,9 +24,8 @@
   <svg
     v-else-if="type === 'forward' || type === 'backward'"
     class="n-base-icon"
-    :class="{
-      'n-base-icon--backward': type === 'backward',
-      'n-base-icon--forward': type === 'forward'
+    :style="{
+      transform: styleTransform
     }"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 512 512"
@@ -43,6 +41,13 @@ export default {
     type: {
       type: String,
       default: null
+    }
+  },
+  computed: {
+    styleTransform () {
+      const type = this.type
+      if (type === 'backward' || type === 'fast-backward') return `rotate(180deg)`
+      return null
     }
   }
 }

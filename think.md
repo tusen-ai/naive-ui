@@ -133,6 +133,16 @@ Previously, it would not work with single quotes:
 20. tree 组件
 21. 文件上传组件
 22. custom-input 废弃或者重构
+23. Date 键盘操作 Time 键盘操作
+24. Time 格式化
+25. Date 格式化
+26. base cancel mark rename suffix
+27. base picker => base selection
+28. base lightbar => base tracking rect
+29. loader 区分 debug 和 非 debug
+30. 逐步放宽对宽度必需传 number 的现实，尤其是对于 table
+31. BaseLoading 代替 Log 里的 Spin
+
 
 ```
 Done

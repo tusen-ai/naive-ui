@@ -49,10 +49,8 @@
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asthemecontext from '../../_mixins/asthemecontext'
-import NIcon from '../..//Icon'
+import NIcon from '../../Icon'
 import mdClose from '../../_icons/md-close'
-
-window.cardSlots = []
 
 export default {
   name: 'NCard',

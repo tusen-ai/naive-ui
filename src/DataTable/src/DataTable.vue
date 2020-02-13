@@ -99,6 +99,7 @@ import themeable from '../../_mixins/themeable'
 import { setCheckStatusOfRow } from './utils'
 import BaseTable from './BaseTable.vue'
 import NEmpty from '../../Empty'
+import NPagination from '../../Pagination'
 
 function createShallowClonedArray (array) {
   if (Array.isArray(array)) return array.map(createShallowClonedObject)
@@ -153,7 +154,8 @@ export default {
   name: 'NDataTable',
   components: {
     BaseTable,
-    NEmpty
+    NEmpty,
+    NPagination
   },
   mixins: [ withapp, themeable ],
   provide () {
