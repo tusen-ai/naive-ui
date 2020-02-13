@@ -1,5 +1,5 @@
 function getComponent (componentName) {
-  return (components[componentName] || unexposedComponents[componentName])
+  return (exportedComponents[componentName] || unexposedComponents[componentName])
 }
 
 function flattenStyles (component) {
@@ -66,7 +66,7 @@ const unexposedComponents = {
   }
 }
 
-const components = {
+const exportedComponents = {
   Affix: {
     styles: [
       'Affix'
@@ -420,8 +420,8 @@ const components = {
   }
 }
 
-Object.keys(components).forEach(component => {
-  components[component].styles = flattenStyles(components[component])
+Object.keys(exportedComponents).forEach(component => {
+  exportedComponents[component].styles = flattenStyles(exportedComponents[component])
 })
 
 const scriptPrefix = {
@@ -460,7 +460,7 @@ function createStyleImportStatements (componentNames = [], format = 'esm') {
     new Set(
       baseStyleImportFile.concat(
         componentNames
-          .map(componentName => components[componentName].styles)
+          .map(componentName => exportedComponents[componentName].styles)
           .reduce((styles, componentStyles) => styles.concat(componentStyles), [])
       ).map(
         styleFile => createStyleImportStatement(styleFile, format)

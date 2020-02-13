@@ -102,15 +102,15 @@ export default {
         titleEl.style.transition = 'none'
       })
       this.$nextTick().then(() => {
-        const barEl = this.$refs.bar
-        const slotEl = this.$refs.slot
-        if (barEl) {
-          void (barEl.offsetWidth)
-          barEl.style.transition = null
+        const nextBarEl = this.$refs.bar
+        const nextSlotEl = this.$refs.slot
+        if (nextBarEl) {
+          void (nextBarEl.offsetWidth)
+          nextBarEl.style.transition = null
         }
-        if (slotEl) {
-          void (slotEl.offsetWidth)
-          slotEl.style.transition = null
+        if (nextSlotEl) {
+          void (nextSlotEl.offsetWidth)
+          nextSlotEl.style.transition = null
         }
         titleEls.forEach(titleEl => {
           void (titleEl.offsetWidth)
