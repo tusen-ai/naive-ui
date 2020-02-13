@@ -15,7 +15,7 @@ function create ({
   fallbackLocale,
   hljs
 }) {
-  const NaiveUI = {
+  const naive = {
     locales: createLocalesObject(locales),
     fallbackLocale: fallbackLocale || locales[0],
     hljs,
@@ -24,12 +24,12 @@ function create ({
     install
   }
   function install (Vue) {
-    Vue.prototype.$naive = NaiveUI
+    Vue.prototype.$naive = naive
     for (const component of components) {
       component.install(Vue)
     }
   }
-  return NaiveUI
+  return naive
 }
 
 export default create

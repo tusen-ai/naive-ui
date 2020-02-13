@@ -64,8 +64,8 @@ import Log from './Log'
 import Code from './Code'
 import Typography from './Typography'
 
-import zhCN from './_locale/zhCN'
-import enUS from './_locale/enUS'
+import zhCN from './locale/zhCN'
+import enUS from './locale/enUS'
 
 /**
  * Deprecated Components

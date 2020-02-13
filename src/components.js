@@ -486,10 +486,15 @@ function createImportStatements (componentNames = [], format = 'esm') {
   )
 }
 
+function createLocaleImportStatements (locales = ['zhCN', 'enUS'], format = 'ems') {
+  return locales.map(locale => `import ${locale} from ${scriptPrefix[format]}locale/${locale}`).join('\n') + '\n\n'
+}
+
 function createInitializeStatements (components = [], locales = ['zhCN', 'enUS'], format = 'esm') {
   return (
     `import create from ${scriptPrefix[format]}create\n\n` +
-    `const NaiveUI = create({\n` +
+    createLocaleImportStatements(locales, format) +
+    `const naive = create({\n` +
     `  components: [\n` +
     components.map(component => `    N${component}`).sort().join(',\n') + '\n' +
     `  ],\n` +
@@ -497,7 +502,7 @@ function createInitializeStatements (components = [], locales = ['zhCN', 'enUS']
     locales.map(locale => `    ${locale}`).join(',\n') + '\n' +
     `  ]\n` +
     `})\n\n` +
-    `Vue.install(NaiveUI)`
+    `Vue.install(naive)`
   )
 }
 
@@ -505,6 +510,9 @@ function createInstallStatements (components = [], locales = ['zhCN', 'enUS'], f
   return (
     createImportStatements(components, format) + '\n' +
     createInitializeStatements(components, locales, format)
-  )
+  ).replace(/\n\n+/g, '\n\n')
 }
-console.log(createInstallStatements(['Input', 'Transfer', 'Button']))
+
+export {
+  createInstallStatements
+}
