@@ -110,7 +110,7 @@ $default-theme: 'light';
 
 @mixin as-form-item {
   &.#{$namespace}-form-item {
-    &.#{$namespace}-form-item-blank {
+    .#{$namespace}-form-item-blank {
       @content;
     }
   }

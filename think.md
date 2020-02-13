@@ -124,7 +124,7 @@ Previously, it would not work with single quotes:
 11. tabs resize bug
 12. CSS 整理
 13. 落地页
-14. 按需引入 babel plugin
+14. <del>按需引入 babel plugin</del> 这个不做了，收益不大，工作量不小
 15. form table 需要 size
 16. input number 需要一个小型的
 17. layout scroll api
@@ -142,6 +142,8 @@ Previously, it would not work with single quotes:
 29. loader 区分 debug 和 非 debug
 30. 逐步放宽对宽度必需传 number 的现实，尤其是对于 table
 31. BaseLoading 代替 Log 里的 Spin
+32. Modal 内部组件的卸载方式
+33. Anchor 的另一种模式，追踪内容按照的是中间范围而不是自身大小
 
 
 ```
