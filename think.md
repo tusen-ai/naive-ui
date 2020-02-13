@@ -144,6 +144,7 @@ Previously, it would not work with single quotes:
 31. BaseLoading 代替 Log 里的 Spin
 32. Modal 内部组件的卸载方式
 33. Anchor 的另一种模式，追踪内容按照的是中间范围而不是自身大小
+34. bug md-loader alert 内的 code 不显示
 
 
 ```
