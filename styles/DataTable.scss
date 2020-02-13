@@ -1,6 +1,5 @@
 @import "./mixins/mixins.scss";
 
-
 @include themes-mixin {
   @include b(data-table) {
     width: 100%;

@@ -1,6 +1,5 @@
 @import './mixins/mixins.scss';
 
-
 @mixin input-group-label-size-mixin ($size) {
   $font-size: map-get($map: $--n-font-size, $key: $size);
   $height: map-get($map: $--n-height, $key: $size);
@@ -329,8 +328,6 @@
               border-top-left-radius: 0!important;
               border-bottom-left-radius: 0!important;
             }
-          }
-          &:not(:first-child) {
             margin-left: -1px!important;
           }
         }
@@ -368,8 +365,6 @@
               border-top-left-radius: 0!important;
               border-bottom-left-radius: 0!important;
             }
-          }
-          &:not(:first-child) {
             @include not-m(default-type) {
               margin-left: 0!important;
             }
@@ -388,8 +383,6 @@
                   border-bottom-right-radius: 0!important;
                 }
               }
-            }
-            & > {
               border-top-right-radius: 0!important;
               border-bottom-right-radius: 0!important;
               @include b(base-picker) {
@@ -409,6 +402,7 @@
             }
           }
           &:not(:first-child) {
+            margin-left: -1px!important;
             border-top-left-radius: 0!important;
             border-bottom-left-radius: 0!important;
             & > {
@@ -420,8 +414,6 @@
                   border-bottom-left-radius: 0!important;
                 }
               }
-            }
-            & > {
               @include b(base-picker) {
                 @include b(base-picker-label) {
                   border-top-left-radius: 0!important;
@@ -437,9 +429,6 @@
                 }
               }
             }
-          }
-          &:not(:first-child) {
-            margin-left: -1px!important;
           }
         }
       }

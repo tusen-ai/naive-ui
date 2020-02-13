@@ -84,7 +84,6 @@ $theme-names: 'dark', 'light';
 /** wait for sass to support dynamic @include mixins */
 $default-theme: 'light';
 
-
 @mixin themes-mixin() {
   $in-themes-mixin: true !global;
   $theme: 'dark' !global;

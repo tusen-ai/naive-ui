@@ -1,6 +1,5 @@
 @import './mixins/mixins.scss';
 
-
 @mixin gradient-text-type-mixin ($type) {
   @include m($type + '-type') {
     background-image: map-get($--gradient-text-background-image, $type);

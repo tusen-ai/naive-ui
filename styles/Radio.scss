@@ -1,6 +1,5 @@
 @import './mixins/mixins.scss';
 
-
 @mixin radio-group-size-mixin ($size) {
   @include m($size + '-size') {
     line-height: map-get($--n-height, $size);

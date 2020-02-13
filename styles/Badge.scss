@@ -1,6 +1,5 @@
 @import './mixins/mixins.scss';
 
-
 @mixin badge-type-mixin ($type) {
   @include m($type + '-type') {
     @include b(badge-sup) {

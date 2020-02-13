@@ -1,6 +1,5 @@
 @import './mixins/mixins.scss';
 
-
 @mixin base-picker-size-mixin ($size) {
   $base-picker-tag-margin: 3px;
   $base-picker-height: map-get($--n-height, $size);

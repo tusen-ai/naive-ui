@@ -1,6 +1,5 @@
 @import './mixins/mixins.scss';
 
-
 @mixin alert-type-mixin ($type) {
   @include m($type + '-type') {
     background-color: map-get($--alert-background-color, $type);
