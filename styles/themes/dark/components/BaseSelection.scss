@@ -1,16 +1,16 @@
-@mixin setup-dark-base-picker {
-  $--base-picker-color: $--n-secondary-text-color !global;
-  $--base-picker-background-color: (
+@mixin setup-dark-base-selection {
+  $--base-selection-color: $--n-secondary-text-color !global;
+  $--base-selection-background-color: (
     'default': rgba(255, 255, 255, .1),
     'disabled': rgba(255, 255, 255, .06),
     'active': change-color($--primary-6, $alpha: 0.1),
     'error-active': change-color($--error-6, $alpha: 0.1)
   ) !global;
-  $--base-picker-placeholder-color: (
+  $--base-selection-placeholder-color: (
     'default': rgba(255, 255, 255, .4),
     'disabled': rgba(255, 255, 255, .2)
   ) !global;
-  $--base-picker-border-mask-border-color: (
+  $--base-selection-border-mask-border-color: (
     'default': transparent,
     'hover': $--primary-6,
     'active': $--primary-6,
@@ -20,16 +20,16 @@
     'error-active': $--error-6,
     'error-focus': $--error-6
   ) !global;
-  $--base-picker-border-mask-box-shadow: (
+  $--base-selection-border-mask-box-shadow: (
     'focus': 0 0 8px 0px change-color($--primary-6, $alpha: .3),
     'error-focus': 0 0 8px 0 change-color($--error-6, $alpha: .3)
   ) !global;
-  $--base-picker-box-shadow: (
+  $--base-selection-box-shadow: (
     'default': none,
     'disabled': none,
     'error-default': inset 0 0 0 1px $--error-6
   ) !global;
-  $--base-picker-caret-color: (
+  $--base-selection-caret-color: (
     'default': $--n-primary-color,
     'error': $--error-6
   ) !global; 

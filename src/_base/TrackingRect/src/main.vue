@@ -1,14 +1,14 @@
 <template>
   <div
-    class="n-base-light-bar"
+    class="n-base-tracking-rect"
     :class="{
       [`n-${theme}-theme`]: theme
     }"
   >
-    <transition name="n-base-light-bar-transition">
+    <transition name="n-base-tracking-rect-transition">
       <div
         v-show="show"
-        class="n-base-light-bar__bar"
+        class="n-base-tracking-rect__body"
         :style="{
           top: styleTop,
           height: itemSize && itemSize + 'px'
@@ -21,6 +21,7 @@
 <script>
 
 export default {
+  name: 'NBaseTrackingRect',
   props: {
     theme: {
       type: String,

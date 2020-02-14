@@ -4,7 +4,7 @@
 @import 'components/Scrollbar.scss';
 @import 'components/BaseLoading.scss';
 @import 'components/BaseSelectMenu.scss';
-@import 'components/BasePicker.scss';
+@import 'components/BaseSelection.scss';
 @import 'components/BaseSuffix.scss';
 @import 'components/Tag.scss';
 @import 'components/Table.scss';
@@ -90,7 +90,7 @@
     @include setup-light-base-loading;
     @include setup-light-button;
     @include setup-light-base-select-menu;
-    @include setup-light-base-picker;
+    @include setup-light-base-selection;
     @include setup-light-base-suffix;
     @include setup-light-tag;
     @include setup-light-table;

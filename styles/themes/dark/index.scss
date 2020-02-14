@@ -4,7 +4,7 @@
 @import 'components/Scrollbar.scss';
 @import 'components/BaseLoading.scss';
 @import 'components/BaseSelectMenu.scss';
-@import 'components/BasePicker.scss';
+@import 'components/BaseSelection.scss';
 @import 'components/BaseSuffix.scss';
 @import 'components/Tag.scss';
 @import 'components/Table.scss';
@@ -91,7 +91,7 @@
     @include setup-dark-base-loading;
     @include setup-dark-button;
     @include setup-dark-base-select-menu;
-    @include setup-dark-base-picker;
+    @include setup-dark-base-selection;
     @include setup-dark-base-suffix;
     @include setup-dark-tag;
     @include setup-dark-table;

@@ -385,16 +385,16 @@
               }
               border-top-right-radius: 0!important;
               border-bottom-right-radius: 0!important;
-              @include b(base-picker) {
-                @include b(base-picker-label) {
+              @include b(base-selection) {
+                @include b(base-selection-label) {
                   border-top-right-radius: 0!important;
                   border-bottom-right-radius: 0!important;
                 }
-                @include b(base-picker-tags) {
+                @include b(base-selection-tags) {
                   border-top-right-radius: 0!important;
                   border-bottom-right-radius: 0!important;
                 } 
-                @include b(base-picker-border-mask)  {
+                @include b(base-selection-border-mask)  {
                   border-top-right-radius: 0!important;
                   border-bottom-right-radius: 0!important;
                 }
@@ -414,16 +414,16 @@
                   border-bottom-left-radius: 0!important;
                 }
               }
-              @include b(base-picker) {
-                @include b(base-picker-label) {
+              @include b(base-selection) {
+                @include b(base-selection-label) {
                   border-top-left-radius: 0!important;
                   border-bottom-left-radius: 0!important;
                 }
-                @include b(base-picker-tags) {
+                @include b(base-selection-tags) {
                   border-top-left-radius: 0!important;
                   border-bottom-left-radius: 0!important;
                 }
-                @include b(base-picker-border-mask)  {
+                @include b(base-selection-border-mask)  {
                   border-top-left-radius: 0!important;
                   border-bottom-left-radius: 0!important;
                 }

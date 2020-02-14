@@ -1,13 +1,13 @@
 <template>
   <div
-    class="n-base-picker"
+    class="n-base-selection"
     :class="{
-      'n-base-picker--active': active,
-      'n-base-picker--selected': selected || (active && pattern),
-      'n-base-picker--disabled': disabled,
-      [`n-base-picker--${size}-size`]: true,
-      'n-base-picker--multiple': multiple,
-      'n-base-picker--focus': patternInputFocused,
+      'n-base-selection--active': active,
+      'n-base-selection--selected': selected || (active && pattern),
+      'n-base-selection--disabled': disabled,
+      [`n-base-selection--${size}-size`]: true,
+      'n-base-selection--multiple': multiple,
+      'n-base-selection--focus': patternInputFocused,
       [`n-${theme}-theme`]: theme
     }"
     @click="handleClick"
@@ -19,7 +19,7 @@
       <!-- multiple -->
       <div
         ref="focusableEl1"
-        class="n-base-picker-tags"
+        class="n-base-selection-tags"
         :tabindex="disabled ? false : '0'"
         @blur="handleBlur"
       >
@@ -35,7 +35,7 @@
           {{ option.label }}
         </n-tag>
         <n-base-suffix
-          class="n-base-picker__mark"
+          class="n-base-selection__mark"
           :loading="loading"
           :theme="theme"
           :arrow="showArrow"
@@ -46,7 +46,7 @@
         />
       </div>
       <div
-        class="n-base-picker__placeholder"
+        class="n-base-selection__placeholder"
       >
         {{ placeholder }}
       </div>
@@ -55,7 +55,7 @@
       <!-- multiple filterable -->
       <div
         ref="patternInputWrapper"
-        class="n-base-picker-tags"
+        class="n-base-selection-tags"
         :tabindex="(disabled || patternInputFocused) ? false : '0'"
       >
         <n-tag
@@ -70,14 +70,14 @@
           {{ option.label }}
         </n-tag>
         <div
-          class="n-base-picker-input-tag"
+          class="n-base-selection-input-tag"
         >
           <input
             ref="patternInput"
             tabindex="-1"
             :disabled="disabled"
             :value="pattern"
-            class="n-base-picker-input-tag__input"
+            class="n-base-selection-input-tag__input"
             @blur="handlePatternInputBlur"
             @focus="handlePatternInputFocus"
             @keydown.delete="handlePatternKeyDownDelete"
@@ -85,12 +85,12 @@
           >
           <span
             ref="patternInputMirror"
-            class="n-base-picker-input-tag__mirror"
+            class="n-base-selection-input-tag__mirror"
           >{{ pattern ? pattern : '&nbsp;' }}</span>
         </div>
         <n-base-suffix
           ref="suffix"
-          class="n-base-picker__mark"
+          class="n-base-selection__mark"
           :arrow="showArrow"
           :theme="theme"
           :disabled="disabled"
@@ -101,7 +101,7 @@
         />
       </div>
       <div
-        class="n-base-picker__placeholder"
+        class="n-base-selection__placeholder"
       >
         {{ placeholder }}
       </div>
@@ -110,12 +110,12 @@
       <!-- single filterable -->
       <div
         ref="patternInputWrapper"
-        class="n-base-picker-label"
+        class="n-base-selection-label"
         :tabindex="(!disabled && !patternInputFocused) ? '0' : false"
       >
         <input
           ref="patternInput"
-          class="n-base-picker-label__input"
+          class="n-base-selection-label__input"
           :value="(patternInputFocused && active) ? pattern : label"
           :placeholder="selectedOption ? label : placeholder"
           :readonly="!disabled && filterable && active ? false : 'readonly'"
@@ -127,7 +127,7 @@
         >
         <n-base-suffix
           ref="suffix"
-          class="n-base-picker__mark"
+          class="n-base-selection__mark"
           :loading="loading"
           :theme="theme"
           :arrow="showArrow"
@@ -142,25 +142,25 @@
       <!-- single -->
       <div
         ref="focusableEl2"
-        class="n-base-picker-label"
+        class="n-base-selection-label"
         :tabindex="disabled ? false : '0'"
         @blur="handleBlur"
       >
         <div
           v-if="label && label.length"
-          class="n-base-picker-label__input"
+          class="n-base-selection-label__input"
         >
           {{ label }}
         </div>
         <div
           v-else
           key="placeholder"
-          class="n-base-picker-label__input n-base-picker-label__input--placeholder"
+          class="n-base-selection-label__input n-base-selection-label__input--placeholder"
         >
           {{ labelPlaceholder }}
         </div>
         <n-base-suffix
-          class="n-base-picker__mark"
+          class="n-base-selection__mark"
           :theme="theme"
           :arrow="showArrow"
           :disabled="disabled"
@@ -171,7 +171,7 @@
         />
       </div>
     </template>
-    <div class="n-base-picker-border-mask" />
+    <div class="n-base-selection-border-mask" />
   </div>
 </template>
 
@@ -180,7 +180,7 @@ import NBaseSuffix from '../../Suffix'
 import NTag from '../../../Tag'
 
 export default {
-  name: 'NBasePicker',
+  name: 'NBaseSelection',
   components: {
     NBaseSuffix,
     NTag
@@ -315,7 +315,7 @@ export default {
       }
     },
     handlePatternInputInput (e) {
-      // console.log('NBasePicker, handlePatternInput', e)
+      // console.log('NBaseSelection, handlePatternInput', e)
       if (this.multiple) {
         this.$nextTick().then(() => {
           const textWidth = this.$refs.patternInputMirror.getBoundingClientRect().width
