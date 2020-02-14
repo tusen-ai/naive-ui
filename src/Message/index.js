@@ -1,5 +1,5 @@
 import MessagePlugin from './src/MessagePlugin'
-import { install } from '../_utils/installThemeAwarableProperty'
+import { install } from '../_utils/naive/installThemeAwarableProperty'
 
 MessagePlugin.install = function (Vue) {
   MessagePlugin.Vue = Vue

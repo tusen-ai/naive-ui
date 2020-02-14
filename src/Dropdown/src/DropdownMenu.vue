@@ -2,7 +2,7 @@
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import { getRootDropdownMenu, createSelectOptions } from './utils'
-import { KEY_CODE } from '../../_utils/keyCode'
+import { KEY_CODE } from '../../_utils/event/keyCode'
 import NBaseSelectMenu from '../../_base/SelectMenu'
 
 export default {

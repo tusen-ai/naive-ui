@@ -78,7 +78,7 @@ import iosHelpCircle from '../../_icons/ios-help-circle'
 import iosCloseCircle from '../../_icons/ios-close-circle'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import render from '../../_utils/render'
+import render from '../../_utils/vue/render'
 
 export default {
   name: 'NConfirm',

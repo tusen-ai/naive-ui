@@ -9,7 +9,7 @@
   </li>
 </template>
 <script>
-import render from '../../_utils/render'
+import render from '../../_utils/vue/render'
 
 export default {
   name: 'NMenuItemGroup',

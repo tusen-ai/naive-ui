@@ -2,7 +2,7 @@
 有的时候用按钮显得更优雅一点。
 ```html
 <div style="margin-bottom: 12px;">
-  <n-radio-group v-model="value">
+  <n-radio-group v-model="value" name="radiobuttongroup">
     <n-radio-button
       v-for="song in songs"
       :key="song.value"

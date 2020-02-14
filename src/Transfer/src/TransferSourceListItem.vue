@@ -26,7 +26,7 @@
 
 <script>
 import NSimpleCheckbox from '../../Checkbox/src/SimpleCheckbox'
-import createValidator from '../../_utils/validateProp'
+import createValidator from '../../_utils/vue/validateProp'
 
 export default {
   name: 'NTransferListItem',

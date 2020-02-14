@@ -1,7 +1,7 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import styleScheme from '../../_utils/colors'
+import styleScheme from '../../_utils/naive/styleScheme'
 
 export default {
   name: 'NConfigConsumer',

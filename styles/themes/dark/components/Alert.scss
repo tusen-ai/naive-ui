@@ -8,10 +8,10 @@
   ) !global;
   $--alert-background-color: (
     'default': $--overlay-8,
-    'success': change-color($--success-hs, $alpha: .15),
-    'info': change-color($--info-hs, $alpha: .15),
-    'warning': change-color($--warning-hs, $alpha: .15),
-    'error': change-color($--error-hs, $alpha: .15)
+    'success': change-color($--success-hs, $alpha: .2),
+    'info': change-color($--info-hs, $alpha: .2),
+    'warning': change-color($--warning-hs, $alpha: .2),
+    'error': change-color($--error-hs, $alpha: .2)
   ) !global;
   $--alert-title-text-color: (
     'default': $--n-text-color,

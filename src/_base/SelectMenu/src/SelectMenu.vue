@@ -98,7 +98,7 @@ import NBaseLightBar from '../../LightBar'
 import NEmpty from '../../../Empty'
 import { RecycleScroller } from 'vue-virtual-scroller'
 import debounce from 'lodash-es/debounce'
-import render from '../../../_utils/render'
+import render from '../../../_utils/vue/render'
 import {
   getPrevAvailableIndex,
   getNextAvailableIndex,

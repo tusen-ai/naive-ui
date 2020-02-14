@@ -82,7 +82,7 @@ export default {
   },
   watch: {
     show (value) {
-      if (value) this.$emit('shohw')
+      if (value) this.$emit('show')
       return this.$emit('hide')
     }
   },

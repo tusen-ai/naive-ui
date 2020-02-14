@@ -7,7 +7,7 @@
 ## 演示
 <n-alert type="warning" title="注意" style="margin-bottom: 16px;">
   <n-ol align-text>
-    <n-li>每一列数据都要有唯一的 key，否则要在 table 上声明 row-key prop。</n-li>
+    <n-li>每一列数据都要有唯一的 key，否则要在 table 上声明 <n-text code>row-key</n-text> 属性</n-li>
     <n-li>在受控状态下，你最好提前声明每一个你可能用到的属性。因为 Vue 并不能追踪使用常规方式添加的属性。</n-li>
   </n-ol>
 </n-alert>

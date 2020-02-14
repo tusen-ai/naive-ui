@@ -53,8 +53,8 @@ left
 ### Form Methods
 <n-alert type="warning" title="Validate 方法的注意事项" style="margin-bottom: 16px;">
   <n-ol align-text>
-    <n-li>验证只会在有 `path` 属性的表项上执行</n-li>
-    <n-li>验证会使用 `path` 从 `model` 获取收集到的值，使用 `path` 或者 `rule-path`（如果声明了）去获取验证规则</n-li>
+    <n-li>验证只会在有 <n-text code>path</n-text> 属性的表项上执行</n-li>
+    <n-li>验证会使用 <n-text code>path</n-text> 从 <n-text code>model</n-text> 获取收集到的值，使用 <n-text code>path</n-text> 或者 <n-text code>rule-path</n-text>（如果声明了）去获取验证规则</n-li>
     <n-li>验证将会在合法表项的所有规则上进行，不管规则的 trigger 是什么</n-li>
   </n-ol>
 </n-alert>

@@ -2,7 +2,7 @@
 Sometimes a radio button group looks more elegant.
 ```html
 <div style="margin-bottom: 12px;">
-  <n-radio-group v-model="value">
+  <n-radio-group v-model="value" name="radiobuttongroup">
     <n-radio-button
       v-for="song in songs"
       :key="song.value"

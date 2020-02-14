@@ -141,10 +141,10 @@ Previously, it would not work with single quotes:
 28. base lightbar => base tracking rect
 29. loader 区分 debug 和 非 debug
 30. 逐步放宽对宽度必需传 number 的现实，尤其是对于 table
-31. BaseLoading 代替 Log 里的 Spin
+31. <del>BaseLoading 代替 Log 里的 Spin</del>
 32. Modal 内部组件的卸载方式
 33. Anchor 的另一种模式，追踪内容按照的是中间范围而不是自身大小
-34. bug md-loader alert 内的 code 不显示
+34. <del>bug md-loader alert 内的 code 不显示</del> 不是 bug，md 就这么渲染
 
 
 ```
