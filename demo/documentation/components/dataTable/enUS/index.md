@@ -7,7 +7,7 @@ DataTable is used to displays rows of structured data.
 ## Demos
 <n-alert type="warning" title="Caveat" style="margin-bottom: 16px;">
   <n-ol align-text>
-    <n-li>Every row data needs a unique key property, otherwise you should specify row-key prop on table.</n-li>
+    <n-li>Every row data needs a unique key property, otherwise you should specify <n-text code>row-key</n-text> prop on table.</n-li>
     <n-li>In controlled manner, you'd better specify all the properies you may use in advance. Since Vue cannot detect normal property additions.</n-li>
   </n-ol>
 </n-alert>

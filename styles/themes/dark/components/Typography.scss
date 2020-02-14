@@ -1,0 +1,3 @@
+@mixin setup-dark-typography {
+  $--typography-code-background-color: $--n-alpha-input-color !global;
+}

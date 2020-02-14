@@ -54,6 +54,7 @@
 @import 'components/Collapse.scss';
 @import 'components/Result.scss';
 @import 'components/Tree.scss';
+@import 'components/Typography.scss';
 
 @mixin setup-light-theme($in-js-env: false) {
   @include setup-light-colors();
@@ -139,5 +140,6 @@
     @include setup-light-collapse;
     @include setup-light-result;
     @include setup-light-tree;
+    @include setup-light-typography;
   }
 }

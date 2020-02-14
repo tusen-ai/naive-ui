@@ -53,8 +53,8 @@ Accept all props from form-item & [Col](n-row#Col-Props)
 ### Form Methods
 <n-alert type="warning" title="Caveat on Validate Method" style="margin-bottom: 16px;">
   <n-ol align-text>
-    <n-li>Validation will only be executed on form items which have a `path`</n-li>
-    <n-li>Validation will use the path to get collected value from form `model`, then use `path` or `rule-path`(if specified) to get validation rules</n-li>
+    <n-li>Validation will only be executed on form items which have a <n-text code>path</n-text></n-li>
+    <n-li>Validation will use the path to get collected value from form <n-text code>model</n-text>, then use <n-text code>path</n-text> or <n-text code>rule-path</n-text>(if specified) to get validation rules</n-li>
     <n-li>Validation will use all rules regardless of the triggers of form items.</n-li>
   </n-ol>
 </n-alert>
