@@ -4,12 +4,22 @@
     :class="{
       'n-radio--disabled': syntheticDisabled,
       'n-radio--checked': syntheticChecked,
+      'n-radio--focus': focus,
       [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
-    :tabindex="syntheticDisabled ? -1 : 0"
     @keyup.enter="handleKeyUpEnter"
     @click="handleClick"
   >
+    <input
+      ref="input"
+      type="radio"
+      class="n-radio__radio-input"
+      :checked="syntheticChecked"
+      :disabled="syntheticDisabled"
+      @change="handleRadioInputChange"
+      @focus="handleRadioInputFocus"
+      @blur="handleRadioInputBlur"
+    >
     <div
       class="n-radio__control"
       :class="{
@@ -26,10 +36,11 @@
 import asformitem from '../../_mixins/asformitem'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import radioMixin from './radioMixin'
 
 export default {
   name: 'NRadio',
-  mixins: [ withapp, themeable, asformitem() ],
+  mixins: [ withapp, themeable, asformitem(), radioMixin ],
   model: {
     prop: 'checkedValue',
     event: 'change'
@@ -74,12 +85,6 @@ export default {
     handleClick (e) {
       this.$emit('click', e)
       this.toggle()
-    },
-    toggle () {
-      if (this.syntheticDisabled) return
-      if (this.checkedValue !== this.value) {
-        this.emitChangeEvent()
-      }
     },
     emitChangeEvent () {
       if (this.NRadioGroup) {
