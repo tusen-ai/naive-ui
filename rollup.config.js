@@ -4,8 +4,8 @@ const strip = require('@rollup/plugin-strip')
 const { terser } = require('rollup-plugin-terser')
 const naiveSCSSVariable = require('./build/naiveSCSSVarPlugin')
 
-function externalValidator (ids) {
-  return id => ids.some(identifier => id.startsWith(identifier))
+function externalValidator (patterns) {
+  return id => patterns.some(pattern => id.startsWith(pattern))
 }
 
 module.exports = {

@@ -24,13 +24,13 @@
   </div>
 </n-back-top>
 <div ref="scrollContainer" style="overflow: auto; height: 72px; line-height: 1.5;">
-  A funny joke is need to be wrote here.<br/>
-  A funny joke is need to be wrote here.<br/>
-  A funny joke is need to be wrote here.<br/>
-  A funny joke is need to be wrote here.<br/>
-  A funny joke is need to be wrote here.<br/>
-  A funny joke is need to be wrote here.<br/>
-  A funny joke is need to be wrote here.<br/>
+  这块应该写一个有意思的笑话。<br/>
+  这块应该写一个有意思的笑话。<br/>
+  这块应该写一个有意思的笑话。<br/>
+  这块应该写一个有意思的笑话。<br/>
+  这块应该写一个有意思的笑话。<br/>
+  这块应该写一个有意思的笑话。<br/>
+  这块应该写一个有意思的笑话。<br/>
 </div>
 ```
 ```js

@@ -86,4 +86,4 @@ These methods can help you control table in an uncontrolled manner. However, it'
 |defaultFilterOptionValues|`Array<string \| number>`|`[]`|The default active filter option values in uncontrolled manner|
 |filterMultiple|`boolean`|`true`||
 |fixed|`'left \| 'right' \| false`|`false`||
-|width|`number`|`null`|Width of the column, **required** when fixed|
+|width|`number \| string`|`null`|Width of the column, **required** when fixed|

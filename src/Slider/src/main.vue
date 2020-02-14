@@ -391,10 +391,10 @@ export default {
         const secondHandle = this.$refs.secondHandle
         if (firstHandle && secondHandle) {
           if (this.firstHandleActive && document.activeElement === secondHandle) {
-            this.blockTransitionOneTick()
+            this.disableTransitionOneTick()
             firstHandle.focus()
           } else if (this.secondHandleActive && document.activeElement === firstHandle) {
-            this.blockTransitionOneTick()
+            this.disableTransitionOneTick()
             secondHandle.focus()
           }
         }
@@ -546,7 +546,7 @@ export default {
         this.showTooltip = false
       }
     },
-    blockTransitionOneTick () {
+    disableTransitionOneTick () {
       const firstHandle = this.$refs.firstHandle
       if (firstHandle) {
         firstHandle.style.transition = 'none'

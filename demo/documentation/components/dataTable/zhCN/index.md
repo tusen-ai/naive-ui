@@ -86,4 +86,4 @@ ajaxUsage
 |defaultFilterOptionValues|`Array<string \| number>`|`[]`|非受控状态下默认的过滤器选项值|
 |filterMultiple|`boolean`|`true`||
 |fixed|`'left \| 'right' \| false`|`false`||
-|width|`number`|`null`|列的宽度，在列固定时是**必需**的|
+|width|`number \| string`|`null`|列的宽度，在列固定时是**必需**的|

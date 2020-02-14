@@ -1,6 +1,6 @@
 <template>
   <div>
-    <n-card>
+    <n-card title="生成按需引入代码">
       <n-form>
         <n-row :gutter="12">
           <n-form-item-col label="导入组件" :span="12">
