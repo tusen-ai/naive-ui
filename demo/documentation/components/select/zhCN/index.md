@@ -32,7 +32,7 @@ action
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |disabled|`boolean`|`false`||
 |options|`Array<SelectOption \| SelectOptionGroup>`|`[]`||
-|remote|`boolearn`|`false`|是否要异步获取选项|
+|remote|`boolean`|`false`|是否要异步获取选项|
 |filter|`(pattern: string, option: Object) => boolean`|`null`||
 
 ## API
@@ -52,12 +52,12 @@ action
 |children|`Array<SelectOption>`||
 
 ## Slots
-|名称|说明|
-|-|-|
-|action||
+|名称|参数|说明|
+|-|-|-|
+|action|`()`||
 
 ## Event
-|名称|类型|说明|
+|名称|参数|说明|
 |-|-|-|
 |change|`(value: Array \| string \| number \| null)`||
 |search|`(value: string)`||

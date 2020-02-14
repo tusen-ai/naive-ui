@@ -32,7 +32,7 @@ action
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |disabled|`boolean`|`false`||
 |options|`Array<SelectOption \| SelectOptionGroup>`|`[]`||
-|remote|`boolearn`|`false`|If you want to async get options|
+|remote|`boolean`|`false`|If you want to async get options|
 |filter|`(pattern: string, option: Object) => boolean`|`null`||
 
 ## API
@@ -52,12 +52,12 @@ action
 |children|`Array<SelectOption>`||
 
 ## Slots
-|Name|Description|
-|-|-|
-|action||
+|Name|Parameters|Description|
+|-|-|-|
+|action|`()`||
 
 ## Event
-|Name|Parameter|Description|
+|Name|Parameters|Description|
 |-|-|-|
 |change|`(value: Array \| string \| number \| null)`||
 |search|`(value: string)`||
