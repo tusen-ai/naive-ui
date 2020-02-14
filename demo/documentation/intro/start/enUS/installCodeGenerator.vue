@@ -1,6 +1,6 @@
 <template>
   <div>
-    <n-card>
+    <n-card title="Import on Demand Code Generator">
       <n-form>
         <n-row :gutter="12">
           <n-form-item-col label="Components to Use" :span="12">
