@@ -1,5 +1,4 @@
 @import './mixins/mixins.scss';
-@import './themes/vars.scss';
 
 @mixin badge-type-mixin ($type) {
   @include m($type + '-type') {
@@ -13,7 +12,7 @@
       @include b(badge-sup) {
         &::before {
           animation-duration: 2s, 2s;
-          animation-timing-function: $fast-in-cubic-bezier, $--n-ease-in-out-cubic-bezier;
+          animation-timing-function: $--n-ease-out-cubic-bezier, $--n-ease-in-out-cubic-bezier;
           animation-iteration-count: infinite, infinite;
         }
       }

@@ -15,4 +15,10 @@ module.exports = {
       }
     ]
   },
+  overrides: [
+    {
+      files: 'src/_icons/**/*',
+      rules: {}
+    }
+  ]
 }

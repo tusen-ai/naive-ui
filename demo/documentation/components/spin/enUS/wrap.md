@@ -4,7 +4,7 @@ You can wrap a component inside spin. To match regular components's size, spin a
 <div
 >
   <n-spin
-    style="display:inline-block"
+    style="display: inline-block; margin: 0 8px 12px 0;"
     size="in-small"
     :spinning="spinning"
   >
@@ -13,7 +13,7 @@ You can wrap a component inside spin. To match regular components's size, spin a
     </n-button>
   </n-spin>
   <n-spin
-    style="display:inline-block"
+    style="display: inline-block; margin: 0 8px 12px 0;"
     size="in-medium"
     :spinning="spinning"
   >
@@ -22,7 +22,7 @@ You can wrap a component inside spin. To match regular components's size, spin a
     </n-button>
   </n-spin>
   <n-spin
-    style="display:inline-block"
+    style="display: inline-block; margin: 0 8px 12px 0;"
     size="in-large"
     :spinning="spinning"
   >
@@ -53,10 +53,6 @@ export default {
 }
 ```
 ```css
-.n-button {
-  margin: 0 8px 12px 0;
-}
-
 .n-alert {
   margin: 0 0 12px 0;
 }

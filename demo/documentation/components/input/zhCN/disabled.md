@@ -17,7 +17,7 @@
   :disabled="!active"
   round
 />
-<n-input split splitor="to" v-model="value" clearable :disabled="!active">
+<n-input split seperator="to" v-model="value" clearable :disabled="!active">
   <template v-slot:affix>
     <n-icon><ios-calendar /></n-icon>
   </template>

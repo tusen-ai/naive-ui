@@ -10,7 +10,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const webpackConfig = {
   mode: 'production',
-  entry: './demo/index.js',
+  entry: './demo/deploymentIndex.js',
   output: {
     path: path.resolve(__dirname, '..', 'doc', 'dist'),
     publicPath: '/',

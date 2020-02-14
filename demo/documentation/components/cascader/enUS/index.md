@@ -27,7 +27,7 @@ filter
 |-|-|-|-|
 |options|`Array<CascaderOption>`|`null`||
 |value|`string \| number`|`null`||
-|placeholder|`string`|`Please Select`||
+|placeholder|`string`|`'Please Select'`||
 |multiple|`boolean`|`false`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |filterable|`boolean`|`false`|Can't be `true` with `remote` prop at same time.|
@@ -37,7 +37,7 @@ filter
 |clearable|`boolean`|`false`||
 |remote|`boolean`|`false`||
 |on-load|`(option: CascaderOption, resolve: (children: Array<CascaderOption>) => void) => any`|`() => {}`|Callback when click at unloaded nodes. Pass resolved children to `resolve` function to set children of the node.|
-|splitor|`string`|`'/'`||
+|seperator|`string`|`'/'`||
 |filter|`(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean`|A string based filter.||
 
 ## Events

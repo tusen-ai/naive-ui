@@ -4,8 +4,9 @@
   v-model="timestamp"
   type="date"
   :disabledTime="disabledTime"
+  clearable
 />
-<n-date-picker v-model="timestamp2" type="date" />
+<n-date-picker v-model="timestamp2" type="date" clearable />
 <pre>{{ JSON.stringify(timestamp) }}, {{ JSON.stringify(timestamp2) }}</pre>
 ```
 ```js

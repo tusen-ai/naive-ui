@@ -1,5 +1,4 @@
 @import './mixins/mixins.scss';
-@import './themes/vars.scss';
 
 @mixin radio-group-size-mixin ($size) {
   @include m($size + '-size') {
@@ -46,14 +45,14 @@
         transform: scale(.8);
         background-color: map-get($--radio-control-background-color, 'active');
         opacity: 0;
-        transition: opacity .3s $slow-out-cubic-bezier, transform .3s $slow-out-cubic-bezier;
+        transition: opacity .3s $--n-ease-in-cubic-bezier, transform .3s $--n-ease-in-cubic-bezier;
       }
       @include m(checked) {
         box-shadow: map-get($--radio-box-shadow, 'active');
         &::before {
           opacity: 1;
           transform: scale(1);
-          transition: opacity .3s $fast-in-cubic-bezier, transform .3s $fast-in-cubic-bezier;
+          transition: opacity .3s $--n-ease-out-cubic-bezier, transform .3s $--n-ease-out-cubic-bezier;
         }
       }
     }

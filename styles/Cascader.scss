@@ -1,7 +1,4 @@
-/* stylelint-disable */
 @import './mixins/mixins.scss';
-@import './themes/vars.scss';
-
 
 @include themes-mixin {
   @include b(cascader) {
@@ -102,7 +99,7 @@
           display: block;
         }
         @include e(loading) {
-          @include fade-in-transition;
+          @include fade-in-scale-up-transition(cascader-option-loading, $original-transform: translateY(-50%));
           position: absolute;
           width: 14px;
           height: 14px;

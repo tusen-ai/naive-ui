@@ -1,5 +1,4 @@
 @import './mixins/mixins.scss';
-@import './themes/vars.scss';
 
 @include themes-mixin {
   @include b(drawer) {
@@ -37,7 +36,7 @@
 }
 
 @include b(drawer-overlay) {
-  @include fade-in-transition(fade-in, $enter-duration: .3s, $leave-duration: .3s);
+  @include fade-in-transition(drawer-overlay, $enter-duration: .3s, $leave-duration: .3s);
   background-color: rgba(0, 0, 0, .3);
   position: absolute;
   left: 0;

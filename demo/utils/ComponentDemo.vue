@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import mdCode from '../../packages/icons/md-code'
+import mdCode from '../../src/_icons/md-code'
 
 export default {
   components: {

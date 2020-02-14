@@ -8,5 +8,6 @@ test/unit/coverage
 package-lock.json
 yarn.lock
 lib
+es
 .vscode
 *.swp

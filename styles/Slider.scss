@@ -1,5 +1,4 @@
 @import './mixins/mixins.scss';
-@import './themes/vars.scss';
 
 @include themes-mixin {
   @include b(slider) {
@@ -127,7 +126,7 @@
   }
   @include b(slider-handle-indicator) {
     @include once {
-      @include fade-in-scale-up-transition();
+      @include fade-in-scale-up-transition(slider-indicator);
       transform: $--n-transform-debounce-scale;
       font-size: 14px;
       padding: 8px 12px;

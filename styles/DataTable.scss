@@ -1,10 +1,9 @@
 @import "./mixins/mixins.scss";
-@import "./themes/vars.scss";
 
 @include themes-mixin {
   @include b(data-table) {
     width: 100%;
-    font-size: $table-font-size;
+    font-size: 14px;
     padding-bottom: 8px;
     @include b(data-table-tables-wrapper) {
       position: relative;

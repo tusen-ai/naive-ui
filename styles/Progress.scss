@@ -1,5 +1,4 @@
 @import "./mixins/mixins.scss";
-@import "./themes/vars.scss";
 
 @mixin progress-animation-mixin ($type) {
   @keyframes progress-#{$type}-type-ripple {
@@ -56,7 +55,7 @@
               &::after {
                 content: '';
                 background-image: $--progress-line-processing-background-image;
-                animation: progress-#{$type}-type-ripple 3s $fast-in-cubic-bezier infinite;
+                animation: progress-#{$type}-type-ripple 3s $--n-ease-out-cubic-bezier infinite;
               }
             }
           }

@@ -8,7 +8,7 @@ const config = require('./config')
 const webpackConfig = {
   mode: 'development',
   entry: {
-    app: ['./index.js']
+    app: ['./src/index.js']
   },
   output: {
     path: path.resolve(process.cwd(), './dist'),

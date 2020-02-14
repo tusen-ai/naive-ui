@@ -1,5 +1,4 @@
 @import "./mixins/mixins.scss";
-@import "./themes/vars.scss";
 
 @mixin popover-content-transition {
   &#{&}-transition-enter-to, &#{&}-transition-leave {
@@ -11,10 +10,10 @@
     transform: scale(.85);
   }
   &#{&}-transition-enter-active {
-    transition: opacity .15s $fast-in-cubic-bezier, transform .15s $fast-in-cubic-bezier;
+    transition: opacity .15s $--n-ease-out-cubic-bezier, transform .15s $--n-ease-out-cubic-bezier;
   }
   &#{&}-transition-leave-active {
-    transition: opacity .15s $slow-out-cubic-bezier, transform .15s $slow-out-cubic-bezier;
+    transition: opacity .15s $--n-ease-in-cubic-bezier, transform .15s $--n-ease-in-cubic-bezier;
   }
 }
 

@@ -1,5 +1,4 @@
 @import './mixins/mixins.scss';
-@import './themes/vars.scss';
 
 @mixin input-number-size-mixin ($size) {
   @include m($size + '-size') {

@@ -1,5 +1,4 @@
 @import './mixins/mixins.scss';
-@import './themes/vars.scss';
 
 @keyframes transfer-height-collapse {
   0% {
@@ -54,8 +53,6 @@
     transform: translateX(-150%);
   }
 }
-
-
 
 /**
  * There are some theme related hard codes in transfer.
@@ -215,14 +212,14 @@
                   transform: translateX(150%);
                   animation-name: transfer-height-expand, transfer-slide-in-from-right;
                   animation-duration: .25s, .25s;
-                  animation-timing-function: $--n-ease-in-out-cubic-bezier, $fast-in-cubic-bezier;
+                  animation-timing-function: $--n-ease-in-out-cubic-bezier, $--n-ease-out-cubic-bezier;
                   animation-delay: 0s, .25s;
                 }
                 @include m(leave) {
                   transform: translateX(-150%);
                   animation-name: transfer-height-collapse, transfer-slide-out-to-right;
                   animation-duration: .25s, .25s;
-                  animation-timing-function: $--n-ease-in-out-cubic-bezier, $slow-out-cubic-bezier;
+                  animation-timing-function: $--n-ease-in-out-cubic-bezier, $--n-ease-in-cubic-bezier;
                   animation-delay: .25s, 0s;
                 }
               }
@@ -232,14 +229,14 @@
                   transform: translateX(-150%);
                   animation-name: transfer-height-expand, transfer-slide-in-from-left;
                   animation-duration: .25s, .25s;
-                  animation-timing-function: $--n-ease-in-out-cubic-bezier, $fast-in-cubic-bezier;
+                  animation-timing-function: $--n-ease-in-out-cubic-bezier, $--n-ease-out-cubic-bezier;
                   animation-delay: 0s, .25s;
                 }
                 @include m(leave) {
                   transform: translateX(150%);
                   animation-name: transfer-height-collapse, transfer-slide-out-to-left;
                   animation-duration: .25s, .25s;
-                  animation-timing-function: $--n-ease-in-out-cubic-bezier, $slow-out-cubic-bezier;
+                  animation-timing-function: $--n-ease-in-out-cubic-bezier, $--n-ease-in-cubic-bezier;
                   animation-delay: .25s, 0s;
                 }
               }

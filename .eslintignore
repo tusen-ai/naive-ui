@@ -1,4 +1,4 @@
 node_modules
 lib
 test/unit/coverage
-packages/icons
+src/_icons

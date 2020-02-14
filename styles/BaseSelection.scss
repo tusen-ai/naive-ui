@@ -1,0 +1,328 @@
+@import './mixins/mixins.scss';
+
+@mixin base-picker-size-mixin ($size) {
+  $base-picker-tag-margin: 3px;
+  $base-picker-height: map-get($--n-height, $size);
+  @include m($size + '-size') {
+    font-size: map-get($--n-font-size, $size);
+    @include e(placeholder) {
+      height: $base-picker-height;
+      line-height: $base-picker-height;
+    }
+    @include b(base-picker-tags) {
+      min-height: $base-picker-height;
+      @include b(base-picker-input-tag) {
+        height: $base-picker-height - 2 * $base-picker-tag-margin;
+        line-height: $base-picker-height - 2 * $base-picker-tag-margin;
+      }
+    }
+    @include b(base-picker-label) {
+      height: $base-picker-height;
+      line-height: $base-picker-height;
+    }
+  }
+}
+
+@include themes-mixin {
+  @include b(base-picker) {
+    @include once {
+      @include base-picker-size-mixin('small');
+      @include base-picker-size-mixin('medium');
+      @include base-picker-size-mixin('large');
+      position: relative;
+      z-index: auto;
+      box-shadow: none;
+      border-radius: $--base-picker-border-radius;
+      width: 100%;
+      max-width: 100%;
+      display: inline-block;
+      vertical-align: bottom;
+      @include b(base-picker-border-mask) {
+        border-radius: $--base-picker-border-radius;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        border: 1px solid transparent;
+        pointer-events: none;
+        transition: .3s border-color $--n-ease-in-out-cubic-bezier, .3s box-shadow $--n-ease-in-out-cubic-bezier;
+        z-index: 1;
+      }
+      @include e(mark) {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 14px;
+      }
+      @include m(selected) {
+        @include e(placeholder) {
+          opacity: 0;
+        }
+      }
+    }
+    @include b(base-picker-border-mask) {
+      border: 1px solid map-get($--base-picker-border-mask-border-color, 'default');
+    }
+    @include e(placeholder) {
+      @include once {
+        pointer-events: none;
+        position: absolute;
+        left: 14px;
+        top: 0;
+        opacity: 1;
+        transition: color .3s $--n-ease-in-out-cubic-bezier;
+      }
+      color: map-get($--base-picker-placeholder-color, 'default');
+    }
+    @include b(base-picker-tags) {
+      @include once {
+        cursor: pointer;
+        outline: none;
+        box-sizing: border-box;
+        position: relative;
+        z-index: auto;
+        transition: color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
+        border-radius: $--base-picker-border-radius;
+      }
+      box-shadow: map-get($--base-picker-box-shadow, 'default');
+      background-color: map-get($--base-picker-background-color, 'default');
+    }
+    @include b(base-picker-label) {
+      @include once {
+        display: inline-block;
+        width: 100%;
+        vertical-align: bottom;
+        cursor: pointer;
+        outline: none;
+        z-index: auto;
+        box-sizing: border-box;
+        position: relative;
+        transition: color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
+        border-radius: $--base-picker-border-radius;
+      }
+      box-shadow: map-get($--base-picker-box-shadow, 'default');
+      background-color: map-get($--base-picker-background-color, 'default');
+      @include e(input) {
+        @include once {
+          outline: none;
+          cursor: pointer;
+          box-sizing: border-box;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          border:none;
+          width: 100%;
+          white-space: nowrap;
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
+          padding: 0 32px 0 14px;
+          background-color: transparent;
+          height: 100%;
+        }
+        color: $--base-picker-color;
+        &::placeholder {
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
+          color: map-get($--base-picker-placeholder-color, 'default');
+        }
+        @include m(placeholder) {
+          color: map-get($--base-picker-placeholder-color, 'default');
+        }
+      }
+    }
+    @include b(base-picker-tags) {
+      @include once {
+        display: flex;
+        padding: 3px 32px 0 14px;
+        flex-wrap: wrap;
+        align-items: center;
+        width: 100%;
+        vertical-align: bottom;
+      }
+      @include b(tag) {
+        @include once {
+          margin-right: 7px;
+          margin-bottom: 3px;
+          font-size: 14px;
+          max-width: 100%;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+      }
+    }
+    @include not-m(disabled) {
+      @include m(active) {
+        @include b(base-picker-border-mask) {
+          border-color: map-get($--base-picker-border-mask-border-color, 'active');
+        }
+        @include b(base-picker-label) {    
+          background-color: map-get($--base-picker-background-color, 'active');
+        }
+        @include b(base-picker-tags) {
+          background-color:  map-get($--base-picker-background-color, 'active');
+        }
+        @include once {
+          @include b(base-picker-input-tag) {
+            display: inline-block;
+          }
+        }
+      }
+      @include b(base-picker-label) {
+        &:hover ~ {
+          @include b(base-picker-border-mask) {
+            border-color: map-get($--base-picker-border-mask-border-color, 'hover');
+          }
+        }
+        &:focus ~ {
+          @include b(base-picker-border-mask) {
+            border-color: map-get($--base-picker-border-mask-border-color, 'focus');
+            box-shadow: map-get($--base-picker-border-mask-box-shadow, 'focus');
+          }
+        }
+      }
+      @include b(base-picker-tags) {
+        &:hover ~ {
+          @include b(base-picker-border-mask) {
+            border-color: map-get($--base-picker-border-mask-border-color, 'hover');
+          }
+        }
+        &:focus ~ {
+          @include b(base-picker-border-mask) {
+            border-color: map-get($--base-picker-border-mask-border-color, 'focus');
+            box-shadow: map-get($--base-picker-border-mask-box-shadow, 'focus');
+          }
+        }
+      }
+      @include m(focus) {
+        @include b(base-picker-border-mask) {
+          border-color: map-get($--base-picker-border-mask-border-color, 'focus');
+          box-shadow: map-get($--base-picker-border-mask-box-shadow, 'focus');
+        }
+      }
+    }
+    @include m(disabled) {
+      cursor: not-allowed;
+      @include b(base-picker-label) {
+        cursor: not-allowed;
+        background-color: map-get($--base-picker-background-color, 'disabled');
+        box-shadow: map-get($--base-picker-box-shadow, 'disabled');
+        @include e(input) {
+          cursor: not-allowed;
+          color: map-get($--base-picker-placeholder-color, 'disabled');
+          @include m(placeholder) {
+            color: map-get($--base-picker-placeholder-color, 'disabled');
+          }
+          &::placeholder {
+            color: map-get($--base-picker-placeholder-color, 'disabled');
+          }
+        }
+      }
+      @include b(base-picker-tags) {
+        cursor: not-allowed;
+        box-shadow: map-get($--base-picker-box-shadow, 'disabled');
+        background-color: map-get($--base-picker-background-color, "disabled");
+      }
+      @include e(placeholder) {
+        cursor: not-allowed;
+        color: map-get($--base-picker-placeholder-color, 'disabled');
+      }
+    }
+    
+    @include b(base-picker-input-tag) {
+      @include once {
+        outline: none;
+        display: none;
+        position: relative;
+        margin-bottom: 3px;
+        max-width: 100%;
+        vertical-align: bottom;
+      }
+      @include e(input) {
+        @include once {
+          padding: 0;
+          background-color: transparent;
+          outline: none;
+          border: none;
+          max-width: 100%;
+          height: 100%;
+          width: 1em;
+          line-height: inherit;
+          cursor: pointer;
+        }
+        caret-color: map-get($--base-picker-caret-color, 'default');
+        color: $--base-picker-color;
+      }
+      @include once {
+        @include e(mirror) {
+          position: absolute;
+          padding-right: 1em;
+          left: 0;
+          top: 0;
+          white-space: pre;
+          visibility: hidden;
+          user-select: none;
+          opacity: 0;
+        }
+      }
+    }
+  }
+  @include as-form-item {
+    @include with-status (error) {
+      @include b(base-picker) {
+        @include b(base-picker-border-mask) {
+          border-color: map-get($--base-picker-border-mask-border-color, 'error-default');
+        }
+        @include b(base-picker-label) {
+          box-shadow: map-get($--base-picker-box-shadow, 'error-default');
+        }
+        @include b(base-picker-tags) {
+          box-shadow: map-get($--base-picker-box-shadow, 'error-default');
+        }
+        @include not-m(disabled) {
+          @include m(active) {
+            @include b(base-picker-border-mask) {
+              border-color: map-get($--base-picker-border-mask-border-color, 'error-active');
+            }
+            @include b(base-picker-label) {
+              background-color: map-get($--base-picker-background-color, 'error-active');
+            }
+            @include b(base-picker-tags) {
+              background-color: map-get($--base-picker-background-color, 'error-active');
+            }
+          }
+          @include b(base-picker-label) {
+            &:hover ~ {
+              @include b(base-picker-border-mask) {
+                border-color: map-get($--base-picker-border-mask-border-color, 'error-hover');
+              }
+            }
+            &:focus ~ {
+              @include b(base-picker-border-mask) {
+                border-color: map-get($--base-picker-border-mask-border-color, 'error-focus');
+                box-shadow: map-get($--base-picker-border-mask-box-shadow, 'error-focus');
+              }
+            }
+          }
+          @include b(base-picker-tags) {
+            &:hover ~ {
+              @include b(base-picker-border-mask) {
+                border-color: map-get($--base-picker-border-mask-border-color, 'error-hover');
+              }
+            }
+            &:focus ~ {
+              @include b(base-picker-border-mask) {
+                border-color: map-get($--base-picker-border-mask-border-color, 'error-focus');
+                box-shadow: map-get($--base-picker-border-mask-box-shadow, 'error-focus');
+              }
+            }
+          }
+          @include m(focus) {
+            @include b(base-picker-border-mask) {
+              border-color: map-get($--base-picker-border-mask-border-color, 'error-focus');
+              box-shadow: map-get($--base-picker-border-mask-box-shadow, 'error-focus');
+            }
+          }
+        }
+      }
+    }
+  }
+}

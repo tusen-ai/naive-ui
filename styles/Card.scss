@@ -150,6 +150,20 @@ $--card-margin-bottom: (
         }
       }
     }
+    @include once {
+      & > {
+        @include e(content) {
+          box-sizing: border-box;
+          line-height: 1.5;
+          font-size: 14px;
+        }
+        @include e(footer) {
+          box-sizing: border-box;
+          line-height: 1.5;
+          font-size: 14px;
+        }
+      }
+    }
     & > {
       @include b(card-header) {
         @include once {
@@ -182,22 +196,6 @@ $--card-margin-bottom: (
           fill: $--card-close-fill;
         }
       }
-    }
-    @include once {
-      & > {
-        @include e(content) {
-          box-sizing: border-box;
-          line-height: 1.5;
-          font-size: 14px;
-        }
-        @include e(footer) {
-          box-sizing: border-box;
-          line-height: 1.5;
-          font-size: 14px;
-        }
-      }
-    }
-    & > {
       @include e(action) {
         @include once {
           box-sizing: border-box;

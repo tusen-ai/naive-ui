@@ -1,18 +1,16 @@
-# Icon
-Use icon in input.
+# Prefix & Suffix
+Fill content in prefix or suffix of the input.
 ```html
 <n-input v-model="value" placeholder="Search">
-  <template v-slot:affix>
+  <template v-slot:prefix>
     <n-icon>
       <md-search/>
     </n-icon>
   </template>
 </n-input>
-<n-input v-model="value" round placeholder="Search">
-  <template v-slot:affix>
-    <n-icon>
-      <md-search/>
-    </n-icon>
+<n-input v-model="value" round placeholder="1,400,000">
+  <template v-slot:suffix>
+    $
   </template>
 </n-input>
 <n-input v-model="value" round placeholder="Search">
