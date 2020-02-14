@@ -1,6 +1,6 @@
 import ConfirmPlugin from './src/ConfirmPlugin.js'
 import Confirm from './src/Confirm'
-import { install } from '../_utils/installThemeAwarableProperty'
+import { install } from '../_utils/naive/installThemeAwarableProperty'
 
 ConfirmPlugin.install = function (Vue) {
   ConfirmPlugin.Vue = Vue

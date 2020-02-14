@@ -257,7 +257,7 @@ import getYear from 'date-fns/getYear'
 import getMonth from 'date-fns/getMonth'
 import getDate from 'date-fns/getDate'
 import isValid from 'date-fns/isValid'
-import { strictParse } from '../../../_utils/dateUtils'
+import { strictParse } from '../../../_utils/component/datePicker'
 
 const DATETIME_FORMAT = 'yyyy-MM-dd HH:mm:ss'
 const DATE_FORMAT = 'yyyy-MM-dd'

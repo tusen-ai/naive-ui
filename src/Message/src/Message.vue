@@ -6,7 +6,7 @@ import mdInformationCircle from '../../_icons/md-information-circle'
 import mdCloseCircle from '../../_icons/md-close-circle'
 import NBaseLoading from '../../_base/Loading'
 import IconSwitchTransition from '../../_transition/IconSwitchTransition'
-import render from '../../_utils/render'
+import render from '../../_utils/vue/render'
 
 export default {
   props: {

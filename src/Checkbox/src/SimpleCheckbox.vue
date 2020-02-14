@@ -25,7 +25,7 @@
 <script>
 import CheckMark from './CheckMark'
 import LineMark from './LineMark'
-import createValidator from '../../_utils/validateProp'
+import createValidator from '../../_utils/vue/validateProp'
 
 export default {
   name: 'NSimpleCheckbox',

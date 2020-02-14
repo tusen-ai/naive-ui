@@ -64,7 +64,7 @@ import mdCheckmarkCircle from '../../_icons/md-checkmark-circle'
 import mdAlert from '../../_icons/md-alert'
 import mdInformationCircle from '../../_icons/md-information-circle'
 import mdCloseCircle from '../../_icons/md-close-circle'
-import render from '../../_utils/render'
+import render from '../../_utils/vue/render'
 
 export default {
   components: {
