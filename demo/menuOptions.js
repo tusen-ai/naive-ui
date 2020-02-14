@@ -513,7 +513,7 @@ export default function (locale, instance) {
       //   childItems: [
       //     {
       //       name: 'CancelMarkDebug',
-      //       path: `/${instance.lang}/${instance.theme}` + '/n-cancel-mark-debug'
+      //       path: `/${instance.lang}/${instance.theme}` + '/n-base-suffix-debug'
       //     },
       //     {
       //       name: 'PopoverDebug',
@@ -888,8 +888,8 @@ export default function (locale, instance) {
         name: 'Debug',
         childItems: [
           {
-            name: 'CancelMarkDebug',
-            path: `/${instance.lang}/${instance.theme}` + '/n-cancel-mark-debug'
+            name: 'SuffixDebug',
+            path: `/${instance.lang}/${instance.theme}` + '/n-base-suffix-debug'
           },
           {
             name: 'PopoverDebug',

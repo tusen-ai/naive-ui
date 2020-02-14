@@ -5,7 +5,7 @@
 @import 'components/BaseLoading.scss';
 @import 'components/BaseSelectMenu.scss';
 @import 'components/BasePicker.scss';
-@import 'components/BaseCancelMark.scss';
+@import 'components/BaseSuffix.scss';
 @import 'components/Tag.scss';
 @import 'components/Table.scss';
 @import 'components/AdvanceTable.scss';
@@ -91,7 +91,7 @@
     @include setup-light-button;
     @include setup-light-base-select-menu;
     @include setup-light-base-picker;
-    @include setup-light-base-cancel-mark;
+    @include setup-light-base-suffix;
     @include setup-light-tag;
     @include setup-light-table;
     @include setup-light-data-table;

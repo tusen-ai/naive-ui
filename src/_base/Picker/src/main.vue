@@ -34,7 +34,7 @@
         >
           {{ option.label }}
         </n-tag>
-        <n-base-cancel-mark
+        <n-base-suffix
           class="n-base-picker__mark"
           :loading="loading"
           :theme="theme"
@@ -88,8 +88,8 @@
             class="n-base-picker-input-tag__mirror"
           >{{ pattern ? pattern : '&nbsp;' }}</span>
         </div>
-        <n-base-cancel-mark
-          ref="cancelMark"
+        <n-base-suffix
+          ref="suffix"
           class="n-base-picker__mark"
           :arrow="showArrow"
           :theme="theme"
@@ -125,8 +125,8 @@
           @blur="handlePatternInputBlur"
           @input="handlePatternInputInput"
         >
-        <n-base-cancel-mark
-          ref="cancelMark"
+        <n-base-suffix
+          ref="suffix"
           class="n-base-picker__mark"
           :loading="loading"
           :theme="theme"
@@ -159,7 +159,7 @@
         >
           {{ labelPlaceholder }}
         </div>
-        <n-base-cancel-mark
+        <n-base-suffix
           class="n-base-picker__mark"
           :theme="theme"
           :arrow="showArrow"
@@ -176,13 +176,13 @@
 </template>
 
 <script>
-import NBaseCancelMark from '../../CancelMark'
+import NBaseSuffix from '../../Suffix'
 import NTag from '../../../Tag'
 
 export default {
   name: 'NBasePicker',
   components: {
-    NBaseCancelMark,
+    NBaseSuffix,
     NTag
   },
   props: {

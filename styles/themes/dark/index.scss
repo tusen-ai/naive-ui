@@ -5,7 +5,7 @@
 @import 'components/BaseLoading.scss';
 @import 'components/BaseSelectMenu.scss';
 @import 'components/BasePicker.scss';
-@import 'components/BaseCancelMark.scss';
+@import 'components/BaseSuffix.scss';
 @import 'components/Tag.scss';
 @import 'components/Table.scss';
 @import 'components/AdvanceTable.scss';
@@ -92,7 +92,7 @@
     @include setup-dark-button;
     @include setup-dark-base-select-menu;
     @include setup-dark-base-picker;
-    @include setup-dark-base-cancel-mark;
+    @include setup-dark-base-suffix;
     @include setup-dark-tag;
     @include setup-dark-table;
     @include setup-dark-data-table;

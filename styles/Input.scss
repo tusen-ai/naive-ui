@@ -133,7 +133,7 @@
         justify-content: flex-start;
         left: 12px;
       }
-      @include e(cancel-mark) {
+      @include b(input-clear) {
         display: flex;
         margin-right: 4px;
       }
