@@ -37,7 +37,7 @@
     </template>
   </n-button>
 </n-button-group>
-<n-radio-group v-model="currentStatus" size="medium">
+<n-radio-group v-model="currentStatus" size="medium" name="basic">
   <n-radio-button value="error">
     Error
   </n-radio-button>

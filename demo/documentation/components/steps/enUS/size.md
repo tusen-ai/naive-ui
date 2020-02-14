@@ -39,7 +39,7 @@ Steps has `small`, `medium` size.
     </template>
   </n-button>
 </n-button-group>
-<n-radio-group v-model="currentStatus" size="medium">
+<n-radio-group v-model="currentStatus" size="medium" name="size">
   <n-radio-button value="error">
     Error
   </n-radio-button>

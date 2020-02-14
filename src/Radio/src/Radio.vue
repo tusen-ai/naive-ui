@@ -14,6 +14,7 @@
       ref="input"
       type="radio"
       class="n-radio__radio-input"
+      :name="syntheticName"
       :checked="syntheticChecked"
       :disabled="syntheticDisabled"
       @change="handleRadioInputChange"
@@ -40,59 +41,6 @@ import radioMixin from './radioMixin'
 
 export default {
   name: 'NRadio',
-  mixins: [ withapp, themeable, asformitem(), radioMixin ],
-  model: {
-    prop: 'checkedValue',
-    event: 'change'
-  },
-  inject: {
-    NRadioGroup: {
-      default: null
-    }
-  },
-  props: {
-    value: {
-      type: [Boolean, String, Number],
-      default: null
-    },
-    checkedValue: {
-      type: [Boolean, String, Number],
-      default: undefined
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    }
-  },
-  computed: {
-    syntheticChecked () {
-      if (this.NRadioGroup) {
-        return this.NRadioGroup.value === this.value
-      } else {
-        return this.checkedValue === this.value
-      }
-    },
-    syntheticDisabled () {
-      if (this.NRadioGroup && this.NRadioGroup.disabled) return true
-      if (this.disabled) return true
-      return false
-    }
-  },
-  methods: {
-    handleKeyUpEnter () {
-      this.toggle()
-    },
-    handleClick (e) {
-      this.$emit('click', e)
-      this.toggle()
-    },
-    emitChangeEvent () {
-      if (this.NRadioGroup) {
-        this.NRadioGroup.$emit('change', this.value)
-      } else {
-        this.$emit('change', this.value)
-      }
-    }
-  }
+  mixins: [ withapp, themeable, asformitem(), radioMixin ]
 }
 </script>

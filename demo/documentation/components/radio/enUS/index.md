@@ -22,6 +22,7 @@ button-group
 ### Radio Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|name|`string`|`undefined`|The name attribute of the radio element. If not set, name of `radio-group` will be used.|
 |checked-value|`string \| number \| boolean`|`null`||
 |value|`string \| number \| boolean`|`null`||
 |disabled|`boolean`|`false`||
@@ -29,6 +30,7 @@ button-group
 ### Radio Button Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|name|`string`|`undefined`|The name attribute of the radio element. If not set, name of `radio-group` will be used.|
 |checked-value|`string \| number \| boolean`|`null`||
 |value|`string \| number \| boolean`|`null`||
 |disabled|`boolean`|`false`||
@@ -36,6 +38,7 @@ button-group
 ### Radio Group Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|name|`string`|`null`|The name attribute of the radio elements inside the group.|
 |size|`'small' \| 'medium' \| 'large'`|`small`||
 |value|`string \| number \| boolean`|`null`||
 |disabled|`boolean`|`false`||
