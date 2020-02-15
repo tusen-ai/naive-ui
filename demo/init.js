@@ -72,6 +72,7 @@ import theme from './documentation/theme'
 import element from './documentation/components/element'
 import log from './documentation/components/log'
 import code from './documentation/components/code'
+import upload from './documentation/components/upload'
 
 import demo from './demo'
 import ComponentDemo from './utils/ComponentDemo'
@@ -221,9 +222,8 @@ const routes = [
       { path: '/n-element', component: element },
       { path: '/n-log', component: log },
       { path: '/n-code', component: code },
-      {
-        path: '/n-typography', component: typography
-      },
+      { path: '/n-typography', component: typography },
+      { path: '/n-upload', component: upload },
       {
         path: '/n-icon-transition-debug',
         component: iconTransitionDebug

@@ -1,0 +1,11 @@
+@import 'mixins/mixins.scss';
+
+@include themes-mixin {
+  @include b(upload) {
+    @include e(file-input) {
+      width: 0;
+      height: 0;
+      opacity: 0;
+    }
+  }
+}

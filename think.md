@@ -146,6 +146,7 @@ Previously, it would not work with single quotes:
 33. Anchor 的另一种模式，追踪内容按照的是中间范围而不是自身大小
 34. <del>bug md-loader alert 内的 code 不显示</del> 不是 bug，md 就这么渲染
 35. backtop mounted blink
+36. Tab keep alive
 
 
 ```

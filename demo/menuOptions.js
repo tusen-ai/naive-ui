@@ -273,6 +273,12 @@ export default function (locale, instance) {
             title: '穿梭框',
             titleExtra: 'Transfer',
             path: `/${instance.lang}/${instance.theme}` + '/n-transfer'
+          },
+          {
+            name: 'Upload',
+            title: '上传',
+            titleExtra: 'Upload',
+            path: `/${instance.lang}/${instance.theme}` + '/n-upload'
           }
         ]
       }),
@@ -717,6 +723,10 @@ export default function (locale, instance) {
           {
             name: 'Transfer',
             path: `/${instance.lang}/${instance.theme}` + '/n-transfer'
+          },
+          {
+            name: 'Upload',
+            path: `/${instance.lang}/${instance.theme}` + '/n-upload'
           }
         ]
       }),
