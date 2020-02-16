@@ -1,5 +1,5 @@
 @mixin setup-light-progress {
-  $--progress-rail-color: rgba(0, 0, 0, .1) !global;
+  $--progress-rail-color: $--n-action-panel-color !global;
   $--progress-fill-color: (
     'default': $--info-6,
     'info': $--info-6,

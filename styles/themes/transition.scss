@@ -135,7 +135,7 @@
   }
 }
 
-@mixin fade-in-height-expand-transition ($name: 'fade-in-height-expand', $duration: .3s, $delay: 0s, $original-transition: ()) {
+@mixin fade-in-height-expand-transition ($name: 'fade-in-height-expand', $duration: .3s, $original-transition: (), $leave-delay: 0s) {
   &.#{$namespace}-#{$name}-transition-leave, &.#{$namespace}-#{$name}-transition-enter-to {
     opacity: 1;
   }
@@ -147,10 +147,10 @@
   &.#{$namespace}-#{$name}-transition-leave-active {
     overflow: hidden;
     transition:
-      max-height $duration $--n-ease-in-out-cubic-bezier,
-      opacity $duration $--n-ease-out-cubic-bezier,
-      margin-top $duration $--n-ease-in-out-cubic-bezier,
-      margin-bottom $duration $--n-ease-in-out-cubic-bezier,
+      max-height $duration $--n-ease-in-out-cubic-bezier $leave-delay,
+      opacity $duration $--n-ease-out-cubic-bezier $leave-delay,
+      margin-top $duration $--n-ease-in-out-cubic-bezier $leave-delay,
+      margin-bottom $duration $--n-ease-in-out-cubic-bezier $leave-delay,
       $original-transition;
   }
   &.#{$namespace}-#{$name}-transition-enter-active {
