@@ -1,8 +1,8 @@
 <template>
-  <transition name="n-cancel-mark-transition">
+  <transition name="n-base-suffix-transition">
     <div
       v-if="loading || (show && (clearable || arrow))"
-      class="n-cancel-mark"
+      class="n-base-suffix"
       :class="{
         [`n-${theme}-theme`]: theme
       }"
@@ -11,13 +11,13 @@
       @mouseleave="handleMouseLeave"
     >
       <icon-switch-transition>
-        <n-base-loading v-if="loading" :theme="theme" class="n-cancel-mark-spin" />
+        <n-base-loading v-if="loading" :theme="theme" class="n-base-suffix-spin" />
         <div
           v-else-if="!arrow || (mouseHovered && clearable)"
           key="cross"
-          class="n-cancel-mark-cross"
+          class="n-base-suffix-cross"
           :class="{
-            'n-cancel-mark-cross--arrow': arrow
+            'n-base-suffix-cross--arrow': arrow
           }"
           @click="handleClick"
         >
@@ -26,10 +26,10 @@
         <div
           v-else-if="(arrow && !clearable) || (arrow && !mouseHovered)"
           key="arrow"
-          class="n-cancel-mark-arrow"
+          class="n-base-suffix-arrow"
           :class="{
-            'n-cancel-mark-arrow--active': active,
-            'n-cancel-mark-arrow--disabled': disabled
+            'n-base-suffix-arrow--active': active,
+            'n-base-suffix-arrow--disabled': disabled
           }"
         />
       </icon-switch-transition>
@@ -43,7 +43,7 @@ import IconSwitchTransition from '../../../_transition/IconSwitchTransition'
 import NBaseLoading from '../../Loading'
 
 export default {
-  name: 'NBaseCancelMark',
+  name: 'NBaseSuffix',
   components: {
     CancelIcon,
     NBaseLoading,

@@ -16,9 +16,9 @@
     @keyup.space="handleKeyUpSpace"
     @keyup.esc="handleKeyUpEsc"
   >
-    <n-base-picker
+    <n-base-selection
       ref="activator"
-      class="n-select-picker"
+      class="n-select-selection"
       :active="active"
       :pattern="pattern"
       :placeholder="localizedPlaceholder"
@@ -97,7 +97,7 @@ import {
   filterOptions,
   valueToOptionMap
 } from '../../_utils/component/select'
-import NBasePicker from '../../_base/Picker'
+import NBaseSelection from '../../_base/Selection'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asformitem from '../../_mixins/asformitem'
@@ -115,7 +115,7 @@ export default {
   name: 'NSelect',
   components: {
     NBaseSelectMenu,
-    NBasePicker
+    NBaseSelection
   },
   directives: {
     clickoutside

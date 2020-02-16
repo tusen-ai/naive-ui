@@ -273,6 +273,12 @@ export default function (locale, instance) {
             title: '穿梭框',
             titleExtra: 'Transfer',
             path: `/${instance.lang}/${instance.theme}` + '/n-transfer'
+          },
+          {
+            name: 'Upload',
+            title: '上传',
+            titleExtra: 'Upload',
+            path: `/${instance.lang}/${instance.theme}` + '/n-upload'
           }
         ]
       }),
@@ -513,7 +519,7 @@ export default function (locale, instance) {
       //   childItems: [
       //     {
       //       name: 'CancelMarkDebug',
-      //       path: `/${instance.lang}/${instance.theme}` + '/n-cancel-mark-debug'
+      //       path: `/${instance.lang}/${instance.theme}` + '/n-base-suffix-debug'
       //     },
       //     {
       //       name: 'PopoverDebug',
@@ -717,6 +723,10 @@ export default function (locale, instance) {
           {
             name: 'Transfer',
             path: `/${instance.lang}/${instance.theme}` + '/n-transfer'
+          },
+          {
+            name: 'Upload',
+            path: `/${instance.lang}/${instance.theme}` + '/n-upload'
           }
         ]
       }),
@@ -888,8 +898,8 @@ export default function (locale, instance) {
         name: 'Debug',
         childItems: [
           {
-            name: 'CancelMarkDebug',
-            path: `/${instance.lang}/${instance.theme}` + '/n-cancel-mark-debug'
+            name: 'SuffixDebug',
+            path: `/${instance.lang}/${instance.theme}` + '/n-base-suffix-debug'
           },
           {
             name: 'PopoverDebug',

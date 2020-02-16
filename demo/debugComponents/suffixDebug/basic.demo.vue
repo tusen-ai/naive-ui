@@ -8,23 +8,23 @@
       style="flex-wrap: wrap;"
     >
       <!--EXAMPLE_START-->
-      <n-base-cancel-mark
+      <n-base-suffix
         clearable
         :show="show"
       />
-      <n-base-cancel-mark
+      <n-base-suffix
         :show="show"
         disabled
         arrow
         :active="active"
       />
-      <n-base-cancel-mark
+      <n-base-suffix
         :show="show"
         :active="active"
         arrow
         clearable
       />
-      <n-base-cancel-mark
+      <n-base-suffix
         :active="!active"
         :show="show"
         arrow

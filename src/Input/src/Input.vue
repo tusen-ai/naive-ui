@@ -105,10 +105,10 @@
       <div
         class="n-input__suffix"
       >
-        <div class="n-input__cancel-mark">
-          <n-cancel-mark
+        <div class="n-input-clear">
+          <n-base-suffix
             :theme="syntheticTheme"
-            :show="showCancelMark"
+            :show="showClearButton"
             :clearable="clearable"
             @clear="handleClear"
           />
@@ -121,7 +121,7 @@
 </template>
 
 <script>
-import NCancelMark from '../../_base/CancelMark'
+import NBaseSuffix from '../../_base/Suffix'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asformitem from '../../_mixins/asformitem'
@@ -129,7 +129,7 @@ import asformitem from '../../_mixins/asformitem'
 export default {
   name: 'NInput',
   components: {
-    NCancelMark
+    NBaseSuffix
   },
   mixins: [ withapp, themeable, asformitem({
     change: 'change',
@@ -236,7 +236,7 @@ export default {
         return this.placeholder
       }
     },
-    showCancelMark () {
+    showClearButton () {
       if (this.disabled || !this.clearable || (!this.focus && !this.hover)) return false
       if (this.pair) {
         return !!(Array.isArray(this.value) && (this.value[0] || this.value[1])) && (this.hover || this.focus)

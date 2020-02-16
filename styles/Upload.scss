@@ -1,0 +1,76 @@
+@import 'mixins/mixins.scss';
+
+@include themes-mixin {
+  @include b(upload) {
+    @include e(file-input) {
+      width: 0;
+      height: 0;
+      opacity: 0;
+    }
+    @include e(activator) {
+      display: inline-block;
+    }
+    @include b(upload-file-list) {
+      margin-top: 8px;
+      line-height: 1.5;
+      @include b(upload-file) {
+        cursor: pointer;
+        padding: 6px 12px 0 12px;
+        transition: background-color .3s $--n-ease-in-out-cubic-bezier;
+        border-radius: 6px;
+        &:hover {
+          background-color: map-get($--upload-file-item-background-color, 'hover');
+          @include b(upload-file-info) {
+            @include e(action) {
+              opacity: 1;
+            }
+          }
+        }
+        @include m(error-status) {
+          @include b(upload-file-info) {
+            @include e(name) {
+              color: $--error-6;
+            }
+          }
+        }
+        @include m(success-status) {
+          @include b(upload-file-info) {
+            @include e(name) {
+              color: $--success-6;
+            }
+          }
+        }
+        @include b(upload-file-info) {
+          position: relative;
+          padding-bottom: 6px;
+          @include e(name) {
+            font-size: 14px;
+            color: $--n-secondary-text-color;
+            transition: color .3s $--n-ease-in-out-cubic-bezier;
+          }
+          @include e(action) {
+            padding-bottom: inherit;
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 80px;
+            display: flex;
+            align-items: center;
+            transition: opacity .2s $--n-ease-in-out-cubic-bezier;
+            flex-direction: row-reverse;
+            @include b(button) {
+              &:not(:first-child) {
+                margin-right: 8px;
+              }
+            }
+          }
+        }
+        @include b(progress) {
+          @include fade-in-height-expand-transition;
+          margin-bottom: 6px;
+        }
+      }
+    }
+  }
+}

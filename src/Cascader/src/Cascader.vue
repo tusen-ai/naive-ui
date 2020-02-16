@@ -15,9 +15,9 @@
     @keyup.left="handleKeyUpLeft"
     @keyup.right="handleKeyUpRight"
   >
-    <n-base-picker
+    <n-base-selection
       ref="activator"
-      class="n-cascader-picker"
+      class="n-cascader-selection"
       :size="size"
       :theme="syntheticTheme"
       :active="active"
@@ -84,7 +84,7 @@
 </template>
 
 <script>
-import NBasePicker from '../../_base/Picker'
+import NBaseSelection from '../../_base/Selection'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import clickoutside from '../../_directives/clickoutside'
@@ -107,7 +107,7 @@ export default {
   components: {
     CascaderMenu,
     CascaderSelectMenu,
-    NBasePicker,
+    NBaseSelection,
     NBasePortal
   },
   provide () {

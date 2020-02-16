@@ -45,7 +45,7 @@
                 key-field="value"
               >
                 <template v-slot:before>
-                  <n-base-light-bar ref="sourceLightBar" :item-size="ITEM_SIZE" :theme="syntheticTheme" />
+                  <n-base-tracking-rect ref="sourceLightBar" :item-size="ITEM_SIZE" :theme="syntheticTheme" />
                 </template>
                 <template v-slot="{ item: option, index }">
                   <n-transfer-source-list-item
@@ -63,7 +63,7 @@
             </n-scrollbar>
             <n-scrollbar v-else>
               <div ref="sourceList" class="n-transfer-list-content">
-                <n-base-light-bar ref="sourceLightBar" :item-size="ITEM_SIZE" :theme="syntheticTheme" />
+                <n-base-tracking-rect ref="sourceLightBar" :item-size="ITEM_SIZE" :theme="syntheticTheme" />
                 <n-transfer-source-list-item
                   v-for="option in filteredSourceOptions"
                   ref="sourceListItems"
@@ -132,7 +132,7 @@
                 key-field="value"
               >
                 <template v-slot:before>
-                  <n-base-light-bar ref="targetLightBar" :item-size="ITEM_SIZE" :theme="syntheticTheme" />
+                  <n-base-tracking-rect ref="targetLightBar" :item-size="ITEM_SIZE" :theme="syntheticTheme" />
                 </template>
                 <template v-slot="{ item: option, index }">
                   <n-transfer-target-list-item
@@ -150,7 +150,7 @@
             </n-scrollbar>
             <n-scrollbar v-else>
               <div ref="targetList" class="n-transfer-list-content">
-                <n-base-light-bar ref="targetLightBar" :item-size="ITEM_SIZE" :theme="syntheticTheme" />
+                <n-base-tracking-rect ref="targetLightBar" :item-size="ITEM_SIZE" :theme="syntheticTheme" />
                 <n-transfer-target-list-item
                   v-for="(option, index) in filteredTargetOptions"
                   ref="targetListItems"
@@ -183,7 +183,7 @@ import NTransferButton from './TransferButton'
 import NInput from '../../Input'
 import NIcon from '../../Icon'
 import NEmpty from '../../Empty'
-import NBaseLightBar from '../../_base/LightBar'
+import NBaseTrackingRect from '../../_base/TrackingRect'
 import iosSearch from '../../_icons/ios-search'
 import locale from '../../_mixins/locale'
 import asformitem from '../../_mixins/asformitem'
@@ -203,7 +203,7 @@ export default {
     NTransferSourceListItem,
     NTransferTargetListItem,
     NTransferButton,
-    NBaseLightBar,
+    NBaseTrackingRect,
     NInput,
     NIcon,
     NEmpty,

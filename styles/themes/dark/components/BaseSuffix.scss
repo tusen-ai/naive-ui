@@ -1,12 +1,12 @@
-@mixin setup-dark-base-cancel-mark {
-  $--base-cancel-mark-cross-color: (
+@mixin setup-dark-base-suffix {
+  $--base-suffix-cross-color: (
     "default": rgba(255, 255, 255, .3),
     "hover": $--primary-6,
     "active": $--primary-5,
     "error-hover": $--error-5,
     "error-active": $--error-5
   ) !global;
-  $--base-cancel-mark-arrow-color: (
+  $--base-suffix-arrow-color: (
     "default": rgba(255, 255, 255, .3),
     "active": $--primary-6,
     "error-active": $--error-6

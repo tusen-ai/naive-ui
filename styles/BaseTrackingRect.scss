@@ -1,14 +1,14 @@
 @import './mixins/mixins.scss';
 
 @include themes-mixin {
-  @include b(base-light-bar) {
+  @include b(base-tracking-rect) {
     @include once {
       position: absolute;
       left: 0;
       right: 0;
       height: 0;
     }
-    @include e(bar) {
+    @include e(body) {
       @include once {
         position: absolute;
         right: 0;

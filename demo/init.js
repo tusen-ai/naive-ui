@@ -72,6 +72,7 @@ import theme from './documentation/theme'
 import element from './documentation/components/element'
 import log from './documentation/components/log'
 import code from './documentation/components/code'
+import upload from './documentation/components/upload'
 
 import demo from './demo'
 import ComponentDemo from './utils/ComponentDemo'
@@ -85,7 +86,7 @@ import routerDebug from './debugComponents/routerDebug'
 import modalDebug from './debugComponents/modalDebug'
 import datePickerDebug from './debugComponents/datePickerDebug'
 import backTopDebug from './debugComponents/backTopDebug'
-import cancelMarkDebug from './debugComponents/cancelMarkDebug'
+import suffixDebug from './debugComponents/suffixDebug'
 import cascaderDebug from './debugComponents/cascaderDebug'
 import verticalAlignDebug from './debugComponents/verticalAlignDebug'
 import iconTransitionDebug from './debugComponents/iconTransitionDebug'
@@ -195,7 +196,7 @@ const routes = [
       { path: '/n-dropdown', component: dropdown },
       { path: '/n-popselect', component: popselect },
       { path: '/n-config-provider', component: configProvider },
-      { path: '/n-cancel-mark-debug', component: cancelMarkDebug },
+      { path: '/n--debug', component: suffixDebug },
       { path: '/n-transfer', component: transfer },
       { path: '/n-spin', component: spin },
       { path: '/n-drawer', component: drawer },
@@ -221,9 +222,8 @@ const routes = [
       { path: '/n-element', component: element },
       { path: '/n-log', component: log },
       { path: '/n-code', component: code },
-      {
-        path: '/n-typography', component: typography
-      },
+      { path: '/n-typography', component: typography },
+      { path: '/n-upload', component: upload },
       {
         path: '/n-icon-transition-debug',
         component: iconTransitionDebug

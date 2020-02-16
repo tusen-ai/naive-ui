@@ -1,10 +1,10 @@
-@mixin setup-light-base-cancel-mark {
-  $--base-cancel-mark-cross-color: (
+@mixin setup-light-base-suffix {
+  $--base-suffix-cross-color: (
     "default": $--n-border-color,
     "hover": $--primary-5,
     "active": $--primary-7
   ) !global;
-  $--base-cancel-mark-arrow-color: (
+  $--base-suffix-arrow-color: (
     "default": $--n-border-color,
     "active": $--primary-6
   ) !global;

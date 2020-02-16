@@ -4,8 +4,8 @@
 @import 'components/Scrollbar.scss';
 @import 'components/BaseLoading.scss';
 @import 'components/BaseSelectMenu.scss';
-@import 'components/BasePicker.scss';
-@import 'components/BaseCancelMark.scss';
+@import 'components/BaseSelection.scss';
+@import 'components/BaseSuffix.scss';
 @import 'components/Tag.scss';
 @import 'components/Table.scss';
 @import 'components/AdvanceTable.scss';
@@ -55,6 +55,7 @@
 @import 'components/Result.scss';
 @import 'components/Tree.scss';
 @import 'components/Typography.scss';
+@import 'components/Upload.scss';
 
 @mixin setup-light-theme($in-js-env: false) {
   @include setup-light-colors();
@@ -90,8 +91,8 @@
     @include setup-light-base-loading;
     @include setup-light-button;
     @include setup-light-base-select-menu;
-    @include setup-light-base-picker;
-    @include setup-light-base-cancel-mark;
+    @include setup-light-base-selection;
+    @include setup-light-base-suffix;
     @include setup-light-tag;
     @include setup-light-table;
     @include setup-light-data-table;
@@ -141,5 +142,6 @@
     @include setup-light-result;
     @include setup-light-tree;
     @include setup-light-typography;
+    @include setup-light-upload;
   }
 }

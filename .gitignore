@@ -6,6 +6,7 @@ test-size
 test-bundle
 test/unit/coverage
 package-lock.json
+playground/temp
 yarn.lock
 lib
 es

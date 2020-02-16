@@ -34,7 +34,7 @@
             @visible="handleMenuVisible"
           >
             <template v-slot:before>
-              <n-base-light-bar ref="lightBar" :item-size="itemSize" :theme="theme" />
+              <n-base-tracking-rect ref="lightBar" :item-size="itemSize" :theme="theme" />
             </template>
             <template v-slot="{ item: option }">
               <n-select-option
@@ -51,7 +51,7 @@
             </template>
           </recycle-scroller>
           <template v-else>
-            <n-base-light-bar ref="lightBar" :item-size="itemSize" :theme="theme" />
+            <n-base-tracking-rect ref="lightBar" :item-size="itemSize" :theme="theme" />
             <template v-for="option in flattenedOptions">
               <n-select-option
                 v-if="option.type === OPTION_TYPE.OPTION"
@@ -94,7 +94,7 @@
 import NScrollbar from '../../../Scrollbar'
 import NSelectOption from './SelectOption.vue'
 import NSelectGroupHeader from './SelectGroupHeader.vue'
-import NBaseLightBar from '../../LightBar'
+import NBaseTrackingRect from '../../TrackingRect'
 import NEmpty from '../../../Empty'
 import { RecycleScroller } from 'vue-virtual-scroller'
 import debounce from 'lodash-es/debounce'
@@ -115,7 +115,7 @@ export default {
   },
   components: {
     NScrollbar,
-    NBaseLightBar,
+    NBaseTrackingRect,
     NSelectOption,
     NEmpty,
     NSelectGroupHeader,
@@ -334,7 +334,7 @@ export default {
       }
     },
     /**
-     * light-bar related
+     * select option background related
      */
     updateLightBarTop (el) {
       if (this.$refs.lightBar) {
