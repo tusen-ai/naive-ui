@@ -102,7 +102,7 @@ export default {
       type: Boolean,
       default: false
     },
-    directive: {
+    displayDirective: {
       type: String,
       default: 'if'
     }

@@ -136,9 +136,9 @@ Previously, it would not work with single quotes:
 23. Date 键盘操作 Time 键盘操作
 24. Time 格式化
 25. Date 格式化
-26. base cancel mark rename suffix
-27. base picker => base selection
-28. base lightbar => base tracking rect
+26. <del>base cancel mark rename suffix</del>s
+27. <del>base picker => base selection</del>
+28. <del>base lightbar => base tracking rect</del>
 29. loader 区分 debug 和 非 debug
 30. 逐步放宽对宽度必需传 number 的现实，尤其是对于 table
 31. <del>BaseLoading 代替 Log 里的 Spin</del>
@@ -146,7 +146,8 @@ Previously, it would not work with single quotes:
 33. Anchor 的另一种模式，追踪内容按照的是中间范围而不是自身大小
 34. <del>bug md-loader alert 内的 code 不显示</del> 不是 bug，md 就这么渲染
 35. backtop mounted blink
-36. Tab keep alive
+36. <del>Tab keep alive</del>
+37. Cascader submenu 的 lightbar 用 base tracking rect 代替
 
 
 ```
