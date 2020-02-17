@@ -54,6 +54,10 @@ export default {
     bound: {
       type: Number,
       default: 12
+    },
+    mode: {
+      type: [String, Boolean],
+      default: false
     }
   },
   data () {
@@ -189,7 +193,11 @@ export default {
       const currentActiveHref = this.activeHref
       const activeLink = links.reduce((prevLink, link, index) => {
         if (link.top + link.height < 0) {
-          return prevLink
+          if (this.mode === 'ignore-gap') {
+            return link
+          } else {
+            return prevLink
+          }
         }
         if (link.top <= this.bound) {
           if (prevLink === null) {
