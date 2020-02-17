@@ -7,7 +7,7 @@ DataTable is used to displays rows of structured data.
 ## Demos
 <n-alert type="warning" title="Caveat" style="margin-bottom: 16px;">
   <n-ol align-text>
-    <n-li>Every row data needs a unique key property, otherwise you should specify row-key prop on table.</n-li>
+    <n-li>Every row data needs a unique key property, otherwise you should specify <n-text code>row-key</n-text> prop on table.</n-li>
     <n-li>In controlled manner, you'd better specify all the properies you may use in advance. Since Vue cannot detect normal property additions.</n-li>
   </n-ol>
 </n-alert>
@@ -86,4 +86,4 @@ These methods can help you control table in an uncontrolled manner. However, it'
 |defaultFilterOptionValues|`Array<string \| number>`|`[]`|The default active filter option values in uncontrolled manner|
 |filterMultiple|`boolean`|`true`||
 |fixed|`'left \| 'right' \| false`|`false`||
-|width|`number`|`null`|Width of the column, **required** when fixed|
+|width|`number \| string`|`null`|Width of the column, **required** when fixed|

@@ -79,6 +79,10 @@ export default {
     event: 'change'
   },
   props: {
+    name: {
+      type: String,
+      default: null
+    },
     value: {
       type: [Boolean, String, Number],
       default: null

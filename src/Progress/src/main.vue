@@ -90,7 +90,9 @@
           <div
             class="n-progress-graph-line-rail"
             :style="{
-              backgroundColor: safeRailColor
+              backgroundColor: safeRailColor,
+              height: styleHeight,
+              borderRadius: styleBorderRadius
             }"
           >
             <div
@@ -100,7 +102,9 @@
               }"
               :style="{
                 maxWidth: fillStyleMaxWidth + '%',
-                backgroundColor: safeColor
+                backgroundColor: safeColor,
+                height: styleHeight,
+                borderRadius: styleBorderRadius
               }"
             >
               <div
@@ -234,7 +238,7 @@ import mdCloseCircle from '../../_icons/md-close-circle'
 import fontawareable from '../../_mixins/fontawarable'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import asthemecontext from '../../_mixins/asthemecontext'
+import formatLength from '../../_utils/css/formatLength'
 
 function circlePath (r, sw, vw = 100) {
   return `m ${vw / 2} ${vw / 2 - r} a ${r} ${r} 0 1 1 0 ${2 * r} a ${r} ${r} 0 1 1 0 -${2 * r}`
@@ -251,7 +255,7 @@ export default {
     mdCheckmarkCircle,
     mdCloseCircle
   },
-  mixins: [withapp, themeable, asthemecontext, fontawareable],
+  mixins: [withapp, themeable, fontawareable],
   props: {
     processing: {
       type: Boolean,
@@ -316,6 +320,10 @@ export default {
     circleGap: {
       type: Number,
       default: 1
+    },
+    height: {
+      type: Number,
+      default: null
     }
   },
   data () {
@@ -325,6 +333,13 @@ export default {
     }
   },
   computed: {
+    styleHeight () {
+      return formatLength(this.height)
+    },
+    styleBorderRadius () {
+      if (this.height) return formatLength(this.height / 2)
+      return null
+    },
     syntheticIndicatorPlacement () {
       return this.indicatorPlacement || this.indicatorPosition
     },

@@ -2,7 +2,7 @@
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asthemecontext from '../../_mixins/asthemecontext'
-import styleScheme from '../../_utils/colors'
+import styleScheme from '../../_utils/naive/styleScheme'
 
 export default {
   name: 'NElement',

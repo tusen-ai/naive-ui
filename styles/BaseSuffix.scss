@@ -1,9 +1,9 @@
 @import './mixins/mixins.scss';
 
 @include themes-mixin {
-  @include b(cancel-mark) {
+  @include b(base-suffix) {
     @include once {
-      @include fade-in-scale-up-transition(cancel-mark);
+      @include fade-in-scale-up-transition(base-suffix);
       user-select: none;
       display: inline-block;
       position: relative;
@@ -11,14 +11,14 @@
       width: 12px;
       vertical-align: bottom;
     }
-    @include b(cancel-mark-spin) {
+    @include b(base-suffix-spin) {
       @include icon-switch-transition();
       transform: $--n-transform-debounce-scale;
       position: absolute;
       height: 12px;
       width: 12px;
     }
-    @include b(cancel-mark-cross) {
+    @include b(base-suffix-cross) {
       @include once {
         @include icon-switch-transition();
         transform: $--n-transform-debounce-scale;
@@ -34,25 +34,25 @@
         @include once {
           transition: fill .3s $--n-ease-in-out-cubic-bezier;
         }
-        fill: map-get($map: $--base-cancel-mark-cross-color, $key: "default");
+        fill: map-get($--base-suffix-cross-color, "default");
       }
       @include m(arrow) {
         @include e(icon) {
-          fill: map-get($map: $--base-cancel-mark-cross-color, $key: "hover");
+          fill: map-get($--base-suffix-cross-color, "hover");
         }
       }
       &:hover {
         @include e(icon) {
-          fill: map-get($map: $--base-cancel-mark-cross-color, $key: "hover");
+          fill: map-get($--base-suffix-cross-color, "hover");
         }
       }
       &:active {
         @include e(icon) {
-          fill: map-get($--base-cancel-mark-cross-color, "active");
+          fill: map-get($--base-suffix-cross-color, "active");
         }
       }
     }
-    @include b(cancel-mark-arrow) {
+    @include b(base-suffix-arrow) {
       @include once {
         @include icon-switch-transition();
         transform: $--n-transform-debounce-scale;
@@ -78,16 +78,16 @@
           transform: rotate(-45deg);
           transform-origin: 30% 70%;
         }
-        border-left: 1px solid map-get($map: $--base-cancel-mark-arrow-color, $key: 'default');
-        border-bottom: 1px solid map-get($map: $--base-cancel-mark-arrow-color, $key: 'default');
+        border-left: 1px solid map-get($--base-suffix-arrow-color, 'default');
+        border-bottom: 1px solid map-get($--base-suffix-arrow-color, 'default');
       }
       @include m(active) {
         &::after {
           @include once {
             transform: rotate(135deg);
           }
-          border-left: 1px solid map-get($map: $--base-cancel-mark-arrow-color, $key: 'active');
-          border-bottom: 1px solid map-get($map: $--base-cancel-mark-arrow-color, $key: 'active');
+          border-left: 1px solid map-get($--base-suffix-arrow-color, 'active');
+          border-bottom: 1px solid map-get($--base-suffix-arrow-color, 'active');
         }
       }
       @include m(disabled) {
@@ -99,28 +99,28 @@
   }
   @include as-form-item {
     @include with-status(error) {
-      @include b(cancel-mark-cross) {
+      @include b(base-suffix-cross) {
         @include m(arrow) {
           @include e(icon) {
-            fill: map-get($map: $--base-cancel-mark-cross-color, $key: "error-hover");
+            fill: map-get($--base-suffix-cross-color, "error-hover");
           }
         }
         &:hover {
           @include e(icon) {
-            fill: map-get($map: $--base-cancel-mark-cross-color, $key: "error-hover");
+            fill: map-get($--base-suffix-cross-color, "error-hover");
           }
         }
         &:active {
           @include e(icon) {
-            fill: map-get($--base-cancel-mark-cross-color, "error-active");
+            fill: map-get($--base-suffix-cross-color, "error-active");
           }
         }
       }
-      @include b(cancel-mark-arrow) {
+      @include b(-arrow) {
         @include m(active) {
           &::after {
-            border-left: 1px solid map-get($map: $--base-cancel-mark-arrow-color, $key: 'error-active');
-            border-bottom: 1px solid map-get($map: $--base-cancel-mark-arrow-color, $key: 'error-active');
+            border-left: 1px solid map-get($--base-suffix-arrow-color, 'error-active');
+            border-bottom: 1px solid map-get($--base-suffix-arrow-color, 'error-active');
           }
         }
       }

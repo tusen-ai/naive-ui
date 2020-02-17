@@ -14,19 +14,23 @@ const createColumns = instance => {
   return [
     {
       title: 'Name',
-      key: 'name'
+      key: 'name',
+      width: '15%'
     },
     {
       title: 'Age',
-      key: 'age'
+      key: 'age',
+      width: '10%'
     },
     {
       title: 'Address',
-      key: 'address'
+      key: 'address',
+      width: '20%'
     },
     {
       title: 'Tags',
       key: 'tags',
+      width: '20%',
       render (h, row) {
         const tags = row.tags.map(tagKey => {
           return (
@@ -46,6 +50,7 @@ const createColumns = instance => {
     {
       title: 'Action',
       key: 'actions',
+      width: '20%',
       render (h, row) {
         return h('n-button', {
           props: {

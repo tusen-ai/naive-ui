@@ -25,6 +25,12 @@
       vertical-align: middle;
       align-items: center;
       margin-right: 18px;
+      @include e(radio-input) {
+        width: 0;
+        height: 0;
+        opacity: 0;
+        margin: 0;
+      }
     }
     @include e(control) {
       box-shadow: map-get($--radio-box-shadow, 'default');
@@ -69,9 +75,11 @@
           transition: box-shadow .3s $--n-ease-in-out-cubic-bezier;
         }
       }
-      &:focus:not(:active) {
-        @include e(control) {
-          box-shadow: map-get($--radio-box-shadow, 'focus');
+      @include m(focus) {
+        &:not(:active) {
+          @include e(control) {
+            box-shadow: map-get($--radio-box-shadow, 'focus');
+          }
         }
       }
     }
@@ -128,6 +136,12 @@
         padding-right: 14px;
         white-space: nowrap;
         transition: background-color .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
+        @include e(radio-input) {
+          width: 0;
+          height: 0;
+          opacity: 0;
+          margin: 0;
+        }
         @include e(border-mask) {
           pointer-events: none;
           position: absolute;
@@ -180,9 +194,11 @@
             color: map-get($--radio-button-label-color, 'hover');
           }
         }
-        &:focus:not(:active) {
-          @include e(border-mask) {
-            box-shadow: map-get($--radio-button-box-shadow, 'focus')
+        @include m(focus) {
+          &:not(:active) {
+            @include e(border-mask) {
+              box-shadow: map-get($--radio-button-box-shadow, 'focus')
+            }
           }
         }
       }

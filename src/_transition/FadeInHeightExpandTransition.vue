@@ -8,6 +8,10 @@ export default {
     width: {
       type: Boolean,
       default: false
+    },
+    appear: {
+      type: Boolean,
+      default: false
     }
   },
   beforeDestroy () {
@@ -78,7 +82,8 @@ export default {
   render (h) {
     return h('transition', {
       props: {
-        name: this.width ? 'n-fade-in-width-expand-transition' : 'n-fade-in-height-expand-transition'
+        name: this.width ? 'n-fade-in-width-expand-transition' : 'n-fade-in-height-expand-transition',
+        appear: this.appear
       },
       on: {
         beforeLeave: this.handleBeforeLeave,

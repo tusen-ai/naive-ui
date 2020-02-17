@@ -4,8 +4,8 @@
 @import 'components/Scrollbar.scss';
 @import 'components/BaseLoading.scss';
 @import 'components/BaseSelectMenu.scss';
-@import 'components/BasePicker.scss';
-@import 'components/BaseCancelMark.scss';
+@import 'components/BaseSelection.scss';
+@import 'components/BaseSuffix.scss';
 @import 'components/Tag.scss';
 @import 'components/Table.scss';
 @import 'components/AdvanceTable.scss';
@@ -54,6 +54,8 @@
 @import 'components/Collapse.scss';
 @import 'components/Result.scss';
 @import 'components/Tree.scss';
+@import 'components/Typography.scss';
+@import 'components/Upload.scss';
 
 @mixin setup-dark-theme($in-js-env: false) {
   @include setup-dark-colors();
@@ -90,8 +92,8 @@
     @include setup-dark-base-loading;
     @include setup-dark-button;
     @include setup-dark-base-select-menu;
-    @include setup-dark-base-picker;
-    @include setup-dark-base-cancel-mark;
+    @include setup-dark-base-selection;
+    @include setup-dark-base-suffix;
     @include setup-dark-tag;
     @include setup-dark-table;
     @include setup-dark-data-table;
@@ -140,5 +142,7 @@
     @include setup-dark-collapse;
     @include setup-dark-result;
     @include setup-dark-tree;
+    @include setup-dark-typography;
+    @include setup-dark-upload;
   }
 }

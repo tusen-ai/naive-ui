@@ -63,6 +63,7 @@ import Element from './Element'
 import Log from './Log'
 import Code from './Code'
 import Typography from './Typography'
+import Upload from './Upload'
 
 import zhCN from './locale/zhCN'
 import enUS from './locale/enUS'
@@ -144,6 +145,7 @@ export default create({
     Log,
     Code,
     Typography,
+    Upload,
     /**
      * Deprecated
      */

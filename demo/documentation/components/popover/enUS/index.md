@@ -37,7 +37,7 @@ manual-position
 |overlay-style|`object`|`null`||
 
 ## Events
-|Name|Parameter|
+|Name|Parameters|
 |-|-|
 |show|`()`|
 |hide|`()`|

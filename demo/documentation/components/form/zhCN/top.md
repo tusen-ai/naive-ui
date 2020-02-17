@@ -44,7 +44,7 @@
       </n-checkbox-group>
     </n-form-item-col>
     <n-form-item-col :span="12" label="Radio Group" path="radioGroupValue">
-      <n-radio-group v-model="model.radioGroupValue">
+      <n-radio-group v-model="model.radioGroupValue" name="radiogroup1">
         <n-radio value="Radio 1">Radio 1</n-radio>
         <n-radio value="Radio 2">Radio 2</n-radio>
         <n-radio value="Radio 3">Radio 3</n-radio>
@@ -53,7 +53,7 @@
   </n-row>
   <n-row :gutter="24">
     <n-form-item-col :span="12" label="Radio Button Group" path="radioGroupValue">
-      <n-radio-group v-model="model.radioGroupValue">
+      <n-radio-group v-model="model.radioGroupValue" name="radiogroup2">
         <n-radio-button value="Radio 1">Radio 1</n-radio-button>
         <n-radio-button value="Radio 2">Radio 2</n-radio-button>
         <n-radio-button value="Radio 3">Radio 3</n-radio-button>

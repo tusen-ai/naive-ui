@@ -1,3 +1,5 @@
+import formatLength from '../../_utils/css/formatLength'
+
 export function createClassObject (classString) {
   if (!classString) return {}
   if (typeof classString === 'string') {
@@ -13,12 +15,11 @@ export function createCustomWidthStyle (column, index, placement) {
   if (column.width) {
     const width = column.width
     return {
-      width: width + 'px'
+      width: formatLength(width)
     }
   } else if (column.type === 'selection') {
-    const width = 48
     return {
-      width: width + 'px'
+      width: '48px'
     }
   }
   return null

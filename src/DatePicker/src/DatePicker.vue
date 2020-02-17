@@ -149,7 +149,7 @@ import iosCalendar from '../../_icons/ios-calendar'
 import format from 'date-fns/format'
 import getTime from 'date-fns/getTime'
 import isValid from 'date-fns/isValid'
-import { strictParse } from '../../_utils/dateUtils'
+import { strictParse } from '../../_utils/component/datePicker'
 import isEqual from 'lodash-es/isEqual'
 
 const DATE_FORMAT = {

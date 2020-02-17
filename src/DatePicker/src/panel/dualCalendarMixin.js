@@ -9,7 +9,7 @@ import isValid from 'date-fns/isValid'
 import getHours from 'date-fns/getHours'
 import getMinutes from 'date-fns/getMinutes'
 import getSeconds from 'date-fns/getSeconds'
-import { dateArray } from '../../../_utils/dateUtils'
+import { dateArray } from '../../../_utils/component/datePicker'
 import commonCalendarMixin from './commonCalendarMixin'
 
 export default {

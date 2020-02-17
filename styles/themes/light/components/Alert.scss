@@ -1,17 +1,17 @@
 @mixin setup-light-alert {
   $--alert-border-color: (
     'default': $--n-border-color,
-    'success': change-color($--success-6, $alpha: .3),
-    'info': change-color($--info-6, $alpha: .3),
-    'warning': change-color($--warning-6, $alpha: .3),
-    'error': change-color($--error-6, $alpha: .3),
+    'success': mix($--success-6, rgb(255, 255, 255), 35%),
+    'info': mix($--info-6, rgb(255, 255, 255), 35%),
+    'warning': mix($--warning-6, rgb(255, 255, 255), 35%),
+    'error': mix($--error-6, rgb(255, 255, 255), 35%),
   ) !global;
   $--alert-background-color: (
     'default': $--overlay-8,
-    'success': change-color($--success-6, $alpha: .15),
-    'info': change-color($--info-6, $alpha: .15),
-    'warning': change-color($--warning-6, $alpha: .15),
-    'error': change-color($--error-6, $alpha: .15)
+    'success': mix($--success-6, rgb(255, 255, 255), 20%),
+    'info': mix($--info-6, rgb(255, 255, 255), 20%),
+    'warning': mix($--warning-6, rgb(255, 255, 255), 20%),
+    'error': mix($--error-6, rgb(255, 255, 255), 20%)
   ) !global;
   $--alert-title-text-color: (
     'default': $--n-text-color,

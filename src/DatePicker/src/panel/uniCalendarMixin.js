@@ -11,7 +11,7 @@ import getDate from 'date-fns/getDate'
 import isValid from 'date-fns/isValid'
 import startOfHour from 'date-fns/startOfHour'
 import setHours from 'date-fns/setHours'
-import { dateArray, strictParse } from '../../../_utils/dateUtils'
+import { dateArray, strictParse } from '../../../_utils/component/datePicker'
 
 export default {
   mixins: [commonCalendarMixin],

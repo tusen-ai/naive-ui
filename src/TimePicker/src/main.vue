@@ -171,7 +171,7 @@ import getTime from 'date-fns/getTime'
 import getMinutes from 'date-fns/getMinutes'
 import getHours from 'date-fns/getHours'
 import getSeconds from 'date-fns/getSeconds'
-import { strictParse } from '../../_utils/dateUtils'
+import { strictParse } from '../../_utils/component/datePicker'
 
 const DEFAULT_FORMAT = 'HH:mm:ss'
 const TIME_CONST = {

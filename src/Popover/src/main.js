@@ -2,7 +2,12 @@ import NBaseContext from '../../_base/Context'
 import NBasePortal from '../../_base/Portal'
 import NPopoverContent from './PopoverContent'
 import activatorMixin from './activatorMixin'
-import genId from '../../_utils/genId'
+
+function createId () {
+  return Math.random()
+    .toString(36)
+    .slice(2)
+}
 
 function mixin (component, mixins) {
   component.mixins = component.mixins || []
@@ -112,7 +117,7 @@ export default {
         staticClass: 'n-popover-text-wrapper'
       }, [activatorVNode])
     }
-    const id = genId()
+    const id = createId()
     const props = context.props
     const listeners = context.listeners
     const controller = context.props.controller
