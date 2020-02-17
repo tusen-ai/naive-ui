@@ -1,11 +1,3 @@
-<template>
-  <div
-    v-if="NTab && name === NTab.value"
-    class="n-tab-panel"
-  >
-    <slot />
-  </div>
-</template>
 <script>
 export default {
   name: 'NTabPanel',
@@ -22,6 +14,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    displayDirective: {
+      type: String,
+      default: 'if'
     }
   },
   data () {
@@ -33,15 +29,31 @@ export default {
       return this.NTab.type
     }
   },
-  mounted () {
+  created () {
     if (this.NTab) {
-      // console.log(this.NTab.value)
       this.NTab.addPanel(this)
     }
   },
   beforeDestroy () {
     if (this.NTab) {
       this.NTab.removePanel(this)
+    }
+  },
+  render (h) {
+    if (this.displayDirective === 'if') {
+      return this.NTab && this.name === this.NTab.value ? h('div', {
+        staticClass: 'n-tab-panel'
+      }, this.$slots.default) : null
+    } else {
+      return h('div', {
+        staticClass: 'n-tab-panel',
+        directives: [
+          {
+            name: 'show',
+            value: this.NTab && this.name === this.NTab.value
+          }
+        ]
+      }, this.$slots.default)
     }
   }
 }

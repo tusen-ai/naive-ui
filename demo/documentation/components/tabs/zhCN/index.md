@@ -5,6 +5,7 @@
 basic
 flex-label
 card
+display-directive
 ```
 ## V-model
 V-model 暂时不对外暴露，名字没起好。
@@ -23,6 +24,7 @@ V-model 暂时不对外暴露，名字没起好。
 |label|`string`|`null`||
 |name|`string \| number`|`null`|**必需**|
 |disabled|`boolean`|`false`||
+|display-directive|`'if' \| 'show'`|`'if'`|选择性渲染使用的指令。if 对应 v-if，show 对应 v-show，使用 show 的时候标签页状态切换后不会被重置|
 
 ## Slots
 ### Tabs, Tab Panel Slots
