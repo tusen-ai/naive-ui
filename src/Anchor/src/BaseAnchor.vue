@@ -69,11 +69,6 @@ export default {
       if (value === null) {
         const slotEl = this.$refs.slot
         slotEl.style.maxWidth = `0px`
-        const barEl = this.$refs.bar
-        window.setTimeout(() => {
-          slotEl.style.top = null
-          barEl.style.top = null
-        }, 150)
       }
     }
   },
@@ -139,7 +134,6 @@ export default {
       } = this.$el.getBoundingClientRect()
       const offsetTop = linkTitleClientTop - anchorClientTop
       const offsetLeft = linkTitleClientLeft - anchorClientLeft
-
       barEl.style.top = `${offsetTop}px`
       barEl.style.height = `${offsetHeight}px`
       slotEl.style.top = `${offsetTop}px`
@@ -147,6 +141,7 @@ export default {
       slotEl.style.maxWidth = `${offsetWidth + offsetLeft}px`
       barEl.getBoundingClientRect()
       slotEl.getBoundingClientRect()
+
       if (!transition) {
         barEl.style.transition = null
         slotEl.style.transition = null
@@ -194,7 +189,7 @@ export default {
       const currentActiveHref = this.activeHref
       const activeLink = links.reduce((prevLink, link, index) => {
         if (link.top + link.height < 0) {
-          return link
+          return prevLink
         }
         if (link.top <= this.bound) {
           if (prevLink === null) {
