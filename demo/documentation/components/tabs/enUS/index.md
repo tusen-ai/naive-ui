@@ -5,6 +5,7 @@ Switch contents in same area.
 basic
 flex-label
 card
+display-directive
 ```
 ## V-model
 V-model is not exposed now.
@@ -15,6 +16,7 @@ V-model is not exposed now.
 |type|`'line' \| 'card'`|`'line'`||
 |closable|`boolean`|`false`||
 |justify-content|`'space-between' \| 'space-around' \| 'space-evenly'`|`null`||
+|display-directive|`'if' \| 'show'`|`'if'`|The directive to use in conditionally rendering. 'if' will use 'v-if' and 'show' will use 'v-show'. When use show directive, the status of tab won't be reset after tab changes.|
 
 ### Tab Panel Props
 |Name|Type|Default|Description|
