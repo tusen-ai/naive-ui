@@ -30,7 +30,7 @@ export default level => ({
         [`n-h${level}--prefix-bar`]: props.prefix,
         [`n-h${level}--align-text`]: props.alignText
       },
-      attrs: context.data.attrs,
+      ...context.data,
       on
     }, defaultSlot)
   }

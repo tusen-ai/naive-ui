@@ -44,7 +44,6 @@ export default {
     const isDisabled = props.disabled
     const isUnderline = props.underline
     const on = context.listeners
-    const attrs = context.data.attrs
     const theme = getTheme(context.parent)
     const defaultSlot = context.slots.default || (context.scopedSlots.default && context.scopedSlots.default())
     return h(isCode ? 'code' : isDelete ? 'del' : 'span', {
@@ -59,7 +58,7 @@ export default {
         'n-text--disabled': isDisabled,
         'n-text--underline': isUnderline
       },
-      attrs,
+      ...context.data,
       on
     }, isDelete && isCode ? [
       h('del', {}, defaultSlot)
