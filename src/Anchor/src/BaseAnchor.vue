@@ -139,6 +139,7 @@ export default {
       } = this.$el.getBoundingClientRect()
       const offsetTop = linkTitleClientTop - anchorClientTop
       const offsetLeft = linkTitleClientLeft - anchorClientLeft
+
       barEl.style.top = `${offsetTop}px`
       barEl.style.height = `${offsetHeight}px`
       slotEl.style.top = `${offsetTop}px`
@@ -193,7 +194,7 @@ export default {
       const currentActiveHref = this.activeHref
       const activeLink = links.reduce((prevLink, link, index) => {
         if (link.top + link.height < 0) {
-          return prevLink
+          return link
         }
         if (link.top <= this.bound) {
           if (prevLink === null) {
