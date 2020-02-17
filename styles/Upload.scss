@@ -14,8 +14,10 @@
       margin-top: 8px;
       line-height: 1.5;
       @include b(upload-file) {
+        @include fade-in-height-expand-transition;
+        box-sizing: border-box;
         cursor: pointer;
-        padding: 6px 12px 0 12px;
+        padding: 0px 12px 0 6px;
         transition: background-color .3s $--n-ease-in-out-cubic-bezier;
         border-radius: 6px;
         &:hover {
@@ -42,13 +44,24 @@
         }
         @include b(upload-file-info) {
           position: relative;
+          padding-top: 6px;
           padding-bottom: 6px;
           @include e(name) {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            @include b(icon) {
+              font-size: 18px;
+              margin-right: 2px;
+              fill: $--n-meta-text-color;
+              stroke: $--n-meta-text-color;
+              vertical-align: middle;
+            }
             font-size: 14px;
             color: $--n-secondary-text-color;
             transition: color .3s $--n-ease-in-out-cubic-bezier;
           }
           @include e(action) {
+            padding-top: inherit;
             padding-bottom: inherit;
             position: absolute;
             right: 0;
@@ -59,15 +72,23 @@
             align-items: center;
             transition: opacity .2s $--n-ease-in-out-cubic-bezier;
             flex-direction: row-reverse;
+            // opacity: 0;
             @include b(button) {
               &:not(:first-child) {
                 margin-right: 8px;
+              }
+              @include b(icon) {
+                svg {
+                  @include icon-switch-transition;
+                }
               }
             }
           }
         }
         @include b(progress) {
-          @include fade-in-height-expand-transition;
+          @include fade-in-height-expand-transition($fold-padding: true);
+          box-sizing: border-box;
+          padding-bottom: 6px;
           margin-bottom: 6px;
         }
       }

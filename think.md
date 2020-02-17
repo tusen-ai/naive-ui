@@ -148,6 +148,9 @@ Previously, it would not work with single quotes:
 35. backtop mounted blink
 36. <del>Tab keep alive</del>
 37. Cascader submenu 的 lightbar 用 base tracking rect 代替
+38. Dropdown 样式微调
+39. Card 用 padding 代替 margin 来避免 margin 折叠的问题
+40. 检查 Icon 在 button 中切换有没有问题，直觉来说应该没问题
 
 
 ```
