@@ -69,7 +69,7 @@ export default {
     return {
       container: null,
       content: null,
-      show: false
+      scrollTop: 0
     }
   },
   computed: {
@@ -78,6 +78,15 @@ export default {
     },
     styleBottom () {
       return this.bottom + 'px'
+    },
+    show () {
+      if (this.scrollTop === 0) {
+        return true
+      } else if (this.scrollTop >= this.visibilityHeight) {
+        return true
+      } else {
+        return false
+      }
     }
   },
   watch: {
@@ -121,16 +130,9 @@ export default {
       this.$emit('click')
     },
     handleScroll () {
-      let scrollTop = this.container.scrollTop
+      this.scrollTop = this.container.scrollTop
       if (this.container.nodeName === '#document') {
-        scrollTop = this.container.documentElement.scrollTop
-      }
-      if (scrollTop === 0) {
-        this.show = false
-      } else if (scrollTop >= this.visibilityHeight) {
-        this.show = true
-      } else {
-        this.show = false
+        this.scrollTop = this.container.documentElement.scrollTop
       }
     }
   }
