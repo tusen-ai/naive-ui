@@ -1,4 +1,4 @@
-# 基础用法
+# Basic
 ```html
 <div style="overflow: hidden">
   <n-upload
@@ -11,7 +11,7 @@
     }"
     @change="handleChange"
   >
-    <n-button>上传文件</n-button>
+    <n-button>Upload File</n-button>
   </n-upload>
 </div>
 ```

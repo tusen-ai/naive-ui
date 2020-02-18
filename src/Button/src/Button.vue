@@ -45,7 +45,8 @@
             key="icon"
             :style="{
               transition: hollowOutColorTransitionDisabled ? 'none' : null,
-              fill: simulateHollowOut ? ascendantBackgroundColor : null
+              fill: simulateHollowOut ? ascendantBackgroundColor : null,
+              stroke: simulateHollowOut ? ascendantBackgroundColor : null
             }"
             class="n-icon-slot"
           >
@@ -91,7 +92,8 @@
             class="n-icon-slot"
             :style="{
               transition: hollowOutColorTransitionDisabled ? 'none' : null,
-              fill: simulateHollowOut ? ascendantBackgroundColor : null
+              fill: simulateHollowOut ? ascendantBackgroundColor : null,
+              stroke: simulateHollowOut ? ascendantBackgroundColor : null
             }"
           >
             <slot

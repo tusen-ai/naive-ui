@@ -148,6 +148,14 @@ Previously, it would not work with single quotes:
 35. backtop mounted blink
 36. <del>Tab keep alive</del>
 37. Cascader submenu 的 lightbar 用 base tracking rect 代替
+38. Dropdown 样式微调
+39. Card 用 padding 代替 margin 来避免 margin 折叠的问题
+40. 检查 Icon 在 button 中切换有没有问题，直觉来说应该没问题
+41. Radio Group 和 Steps 的镂空效果在 mounted 的时候 transition 没有关闭
+42. Typography 文档待更新
+43. Tab 文档待更新
+44. Icon 文档待更新
+45. 统一 next 回调和 Promise API 为 Promise API，应该有三四个组件用到了
 
 
 ```

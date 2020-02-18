@@ -1,15 +1,29 @@
 @import './mixins/mixins.scss';
 
-@include b(icon) {
-  height: 1em;
-  width: 1em;
-  line-height: 1em;
-  text-align: center;
-  display: inline-block;
-  position: relative;
-  transition: $--icon-transition;
-  svg {
+@include themes-mixin {
+  @include b(icon) {
     height: 1em;
     width: 1em;
+    line-height: 1em;
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    transition: $--icon-transition;
+    svg {
+      height: 1em;
+      width: 1em;
+    }
+    @include m(primary) {
+      fill: $--n-text-color;
+      stroke: $--n-text-color;
+    }
+    @include m(secondary) {
+      fill: $--n-secondary-text-color;
+      stroke: $--n-secondary-text-color;
+    }
+    @include m(tertiary) {
+      fill: $--n-meta-text-color;
+      stroke: $--n-meta-text-color;
+    }
   }
 }

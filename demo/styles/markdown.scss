@@ -16,6 +16,7 @@
         transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
         // background-color: $--n-alpha-table-body-color;
         th {
+          white-space: nowrap;
           color: $--text-1;
           transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
           background-color: $--n-table-header-color;
@@ -50,6 +51,7 @@
       table {
         border: 1px solid $--n-divider-color;
         th {
+          white-space: nowrap;
           color: $--text-1;
           background: rgb(250, 250, 250);
           border-bottom: 1px solid $--n-divider-color;

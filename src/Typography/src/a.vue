@@ -19,7 +19,7 @@ export default {
       props: {
         to: to
       },
-      attrs,
+      ...context.data,
       on
     }, defaultSlot) : h('a', {
       staticClass: 'n-a',

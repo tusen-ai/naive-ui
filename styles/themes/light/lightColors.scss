@@ -1,7 +1,7 @@
 @mixin setup-light-colors {
-  $--text-1: rgba(0, 0, 0, .9) !global;
-  $--text-2: rgba(0, 0, 0, .7) !global;
-  $--text-3: rgba(0, 0, 0, .45) !global;
+  $--text-1: rgb(26, 26, 26) !global;
+  $--text-2: rgb(76, 76, 76) !global;
+  $--text-3: rgb(140, 140, 140) !global;
   $--overlay-1: rgba(0, 0, 0, 1) !global;
   $--overlay-2: rgba(0, 0, 0, .85) !global;
   $--overlay-3: rgba(0, 0, 0, .65) !global;

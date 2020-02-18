@@ -1,0 +1,186 @@
+<template>
+  <n-fade-in-height-expand-transition :appear="!transitionDisabled">
+    <a
+      ref="noopener noreferer"
+      target="_blank"
+      class="n-upload-file"
+      :href="file.url"
+      :class="{
+        [`n-upload-file--${progressStatus}-status`]: true,
+        [`n-upload-file--with-url`]: file.url
+      }"
+    >
+      <div class="n-upload-file-info">
+        <div class="n-upload-file-info__name">
+          <n-icon>
+            <attach-outline />
+          </n-icon>{{ file.name }}
+        </div>
+        <div class="n-upload-file-info__action">
+          <n-button
+            v-if="showRemoveButton || showCancelButton"
+            key="closeOrTrash"
+            circle
+            size="tiny"
+            ghost
+            :type="buttonType"
+            @click="handleRemoveOrCancelClick"
+          >
+            <template v-slot:icon>
+              <n-icon-switch-transition>
+                <trash-outline v-if="showRemoveButton" key="trash" />
+                <close-outline v-else key="close" />
+              </n-icon-switch-transition>
+            </template>
+          </n-button>
+          <n-button
+            v-if="showDownloadButton"
+            key="download"
+            circle
+            size="tiny"
+            ghost
+            :type="buttonType"
+            @click="handleDownloadClick"
+          >
+            <template v-slot:icon>
+              <download-outline />
+            </template>
+          </n-button>
+        </div>
+      </div>
+      <n-upload-progress
+        :show="showProgress"
+        :percentage="file.percentage || 0"
+        :status="progressStatus"
+      />
+    </a>
+  </n-fade-in-height-expand-transition>
+</template>
+
+<script>
+import NButton from '../../Button'
+import closeOutline from '../../_icons/close-outline'
+import downloadOutline from '../../_icons/download-outline'
+import trashOutline from '../../_icons/trash-outline'
+import NUploadProgress from './UploadProgress'
+import NFadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
+import attachOutline from '../../_icons/attach-outline'
+import NIcon from '../../Icon'
+import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
+
+export default {
+  name: 'NUploadFile',
+  components: {
+    NButton,
+    NUploadProgress,
+    attachOutline,
+    closeOutline,
+    NIcon,
+    downloadOutline,
+    trashOutline,
+    NFadeInHeightExpandTransition,
+    NIconSwitchTransition
+  },
+  inject: {
+    NUpload: {
+      default: null
+    }
+  },
+  props: {
+    file: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    transitionDisabled () {
+      return this.NUpload.transitionDisabled
+    },
+    progressStatus () {
+      const file = this.file
+      if (file.status === 'finished') return 'success'
+      if (file.status === 'error') return 'error'
+      return 'info'
+    },
+    buttonType () {
+      if (this.file.status === 'error') return 'error'
+      return undefined
+    },
+    showProgress () {
+      const file = this.file
+      return file.status === 'uploading'
+    },
+    showCancelButton () {
+      if (!this.NUpload.showCancelButton) return false
+      const file = this.file
+      return ['uploading', 'pending', 'error'].includes(file.status)
+    },
+    showRemoveButton () {
+      if (!this.NUpload.showRemoveButton) return false
+      const file = this.file
+      return ['finished'].includes(file.status)
+    },
+    showDownloadButton () {
+      if (!this.NUpload.showDownloadButton) return false
+      const file = this.file
+      return ['finished'].includes(file.status)
+    }
+  },
+  methods: {
+    handleRemoveOrCancelClick (e) {
+      e.preventDefault()
+      const file = this.file
+      if (['finished', 'pending', 'error'].includes(file.status)) {
+        this.handleRemove(file)
+      } else if (['uploading'].includes(file.status)) {
+        this.handleAbort(file)
+      } else {
+        console.error('[naive-ui/upload]: the button clicked type is unknown.')
+      }
+    },
+    handleDownloadClick (e) {
+      e.preventDefault()
+      this.onDownload(this.file)
+    },
+    handleRemove (file) {
+      const NUpload = this.NUpload
+      const XHRMap = NUpload.XHRMap
+      const change = NUpload.change
+      Promise.resolve(
+        NUpload.onRemove(
+          Object.assign({}, file),
+          NUpload.syntheticFileList
+        )
+      ).then(
+        result => {
+          if (result === false) return
+          const fileAfterChange = Object.assign({}, file, {
+            status: 'removed'
+          })
+          XHRMap.delete(file.id)
+          change(fileAfterChange, undefined, {
+            remove: true
+          })
+        }
+      )
+    },
+    handleDownload (file) {
+      const NUpload = this.NUpload
+      Promise.resolve(
+        NUpload.onDownload(Object.assign({}, file))
+      ).then(
+        res => {
+          /** I haven't figure out its usage, so just leave it here */
+        }
+      )
+    },
+    handleAbort (file) {
+      const NUpload = this.NUpload
+      const XHRMap = NUpload.XHRMap
+      const XHR = XHRMap.get(file.id)
+      XHR.abort()
+      this.handleRemove(Object.assign({}, file))
+    }
+  }
+}
+</script>

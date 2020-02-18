@@ -10,8 +10,8 @@ $--header-font-size: (
 );
 
 $--header-margin: (
-  '1': 24px 0 12px 0,
-  '2': 24px 0 12px 0,
+  '1': 24px 0 18px 0,
+  '2': 24px 0 18px 0,
   '3': 18px 0 12px 0,
   '4': 18px 0 12px 0,
   '5': 18px 0 12px 0,
@@ -108,11 +108,20 @@ $--header-bar-width: (
   @include header-mixin('5');
   @include header-mixin('6');
   @include b(p) {
+    @include m(primary) {
+      color: $--n-text-color;
+    }
+    @include m(secondary) {
+      color: $--n-secondary-text-color;
+    }
+    @include m(tertiary) {
+      color: $--n-meta-text-color;
+    }
     &:first-child {
       margin-top: 0;
     }
     transition: color .3s $--n-ease-in-out-cubic-bezier;
-    margin: 8px 0 14px 0;
+    margin: 12px 0 16px 0;
     font-size: 14px;
     line-height: 1.75;
     color: $--n-secondary-text-color;
@@ -172,6 +181,15 @@ $--header-bar-width: (
       font-size: .9em;
       background-color: $--typography-code-background-color;
       border: 1px solid $--n-alpha-border-color;
+    }
+    @include m(primary) {
+      color: $--n-text-color;
+    }
+    @include m(secondary) {
+      color: $--n-secondary-text-color;
+    }
+    @include m(tertiary) {
+      color: $--n-meta-text-color;
     }
     @include m(strong) {
       font-weight: 500;
