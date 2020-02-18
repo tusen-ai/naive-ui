@@ -58,7 +58,7 @@ import NIcon from '../../Icon'
 import mdClose from '../../_icons/md-close'
 import mdCheckmark from '../../_icons/md-checkmark'
 import themeable from '../../_mixins/themeable'
-import hollowoutable from '../../_mixins/hollowoutable'
+
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 
 export default {
@@ -74,7 +74,7 @@ export default {
     mdClose,
     NIconSwitchTransition
   },
-  mixins: [ themeable, hollowoutable ],
+  mixins: [ themeable ],
   props: {
     status: {
       type: String,
@@ -101,6 +101,9 @@ export default {
     }
   },
   computed: {
+    ascendantBackgroundColor () {
+      return this.NSteps.ascendantBackgroundColor
+    },
     vertical () {
       return !!(this.NSteps && this.NSteps.vertical)
     },
