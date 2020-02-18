@@ -54,11 +54,12 @@ function createId () {
 function XHRHandlers (componentInstance, file, XHR) {
   const change = componentInstance.change
   const XHRMap = componentInstance.XHRMap
+  let percentage = 0
   return {
     handleXHRLoad (e) {
       let fileAfterChange = Object.assign({}, file, {
         status: 'finished',
-        percentage: 100,
+        percentage,
         file: null
       })
       XHRMap.delete(file.id)
@@ -68,7 +69,8 @@ function XHRHandlers (componentInstance, file, XHR) {
     handleXHRAbort (e) {
       const fileAfterChange = Object.assign({}, file, {
         status: 'removed',
-        file: null
+        file: null,
+        percentage
       })
       XHRMap.delete(file.id)
       change(fileAfterChange, e)
@@ -76,16 +78,20 @@ function XHRHandlers (componentInstance, file, XHR) {
     handleXHRError (e) {
       const fileAfterChange = Object.assign({}, file, {
         status: 'error',
+        percentage,
         file: null
       })
       XHRMap.delete(file.id)
       change(fileAfterChange, e)
     },
     handleXHRProgress (e) {
-      const fileAfterChange = Object.assign({}, file)
+      const fileAfterChange = Object.assign({}, file, {
+        status: 'uploading'
+      })
       if (e.lengthComputable) {
         const progress = Math.ceil((e.loaded / e.total) * 100)
         fileAfterChange.percentage = progress
+        percentage = progress
       }
       change(fileAfterChange, e)
     }
@@ -337,7 +343,7 @@ export default {
       filesToUpload.forEach(file => {
         if (file.status === 'pending') {
           const formData = new FormData()
-          formData.append(fieldName, file)
+          formData.append(fieldName, file.file)
           submit(
             this,
             file,
