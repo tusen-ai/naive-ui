@@ -22,6 +22,8 @@
             key="closeOrTrash"
             circle
             size="tiny"
+            ghost
+            :type="buttonType"
             @click="handleRemoveOrCancelClick"
           >
             <template v-slot:icon>
@@ -36,6 +38,8 @@
             key="download"
             circle
             size="tiny"
+            ghost
+            :type="buttonType"
             @click="handleDownloadClick"
           >
             <template v-slot:icon>
@@ -46,7 +50,7 @@
       </div>
       <n-upload-progress
         :show="showProgress"
-        :percentage="file.percentage"
+        :percentage="file.percentage || 0"
         :status="progressStatus"
       />
     </a>
@@ -94,9 +98,13 @@ export default {
     },
     progressStatus () {
       const file = this.file
-      if (file.status === 'done') return 'success'
+      if (file.status === 'finished') return 'success'
       if (file.status === 'error') return 'error'
       return 'info'
+    },
+    buttonType () {
+      if (this.file.status === 'error') return 'error'
+      return undefined
     },
     showProgress () {
       const file = this.file
@@ -110,18 +118,19 @@ export default {
     showRemoveButton () {
       if (!this.NUpload.showRemoveButton) return false
       const file = this.file
-      return ['done'].includes(file.status)
+      return ['finished'].includes(file.status)
     },
     showDownloadButton () {
       if (!this.NUpload.showDownloadButton) return false
       const file = this.file
-      return ['done'].includes(file.status)
+      return ['finished'].includes(file.status)
     }
   },
   methods: {
-    handleRemoveOrCancelClick () {
+    handleRemoveOrCancelClick (e) {
+      e.preventDefault()
       const file = this.file
-      if (['done', 'pending', 'error'].includes(file.status)) {
+      if (['finished', 'pending', 'error'].includes(file.status)) {
         this.handleRemove(file)
       } else if (['uploading'].includes(file.status)) {
         this.handleAbort(file)
@@ -129,7 +138,8 @@ export default {
         console.error('[naive-ui/upload]: the button clicked type is unknown.')
       }
     },
-    handleDownloadClick () {
+    handleDownloadClick (e) {
+      e.preventDefault()
       this.onDownload(this.file)
     },
     handleRemove (file) {
@@ -137,28 +147,27 @@ export default {
       const XHRMap = NUpload.XHRMap
       const change = NUpload.change
       Promise.resolve(
-        NUpload.onRemove(file)
+        NUpload.onRemove(Object.assign({}, file))
       ).then(
         res => {
-          if (res === true) {
-            const fileAfterChange = Object.assign({}, file, {
-              status: 'removed'
-            })
-            XHRMap.delete(file.id)
-            change(fileAfterChange, undefined, {
-              remove: true
-            })
-          }
+          if (res === false) return
+          const fileAfterChange = Object.assign({}, file, {
+            status: 'removed'
+          })
+          XHRMap.delete(file.id)
+          change(fileAfterChange, undefined, {
+            remove: true
+          })
         }
       )
     },
     handleDownload (file) {
       const NUpload = this.NUpload
       Promise.resolve(
-        NUpload.onDownload(file)
+        NUpload.onDownload(Object.assign({}, file))
       ).then(
         res => {
-          if (res === true) {} // do something
+          /** I haven't figure out its usage, so just leave it here */
         }
       )
     },
@@ -167,7 +176,7 @@ export default {
       const XHRMap = NUpload.XHRMap
       const XHR = XHRMap.get(file.id)
       XHR.abort()
-      this.handleRemove(file)
+      this.handleRemove(Object.assign({}, file))
     }
   }
 }

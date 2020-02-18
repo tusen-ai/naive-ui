@@ -21,7 +21,7 @@
       border-radius: 6px;
       border: 1px dashed $--n-alpha-border-color;
       padding: 24px;
-      transition: border-color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;;
+      transition: border-color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
       &:hover {
         border-color: $--primary-6;
       }
@@ -42,7 +42,7 @@
         @include fade-in-height-expand-transition;
         display: block;
         box-sizing: border-box;
-        cursor: pointer;
+        cursor: default;
         padding: 0px 12px 0 6px;
         transition: background-color .3s $--n-ease-in-out-cubic-bezier;
         border-radius: 6px;
@@ -55,6 +55,9 @@
           }
         }
         @include m(error-status) {
+          &:hover {
+            background-color: map-get($--upload-file-item-background-color, 'error-hover');
+          }
           @include b(upload-file-info) {
             @include e(name) {
               color: $--error-6;
@@ -62,11 +65,19 @@
           }
         }
         @include m(success-status) {
-        }
-        @include m(with-url) {
           @include b(upload-file-info) {
             @include e(name) {
               color: $--success-6;
+            }
+          }
+        }
+        @include m(with-url) {
+          cursor: pointer;
+          @include b(upload-file-info) {
+            @include e(name) {
+              color: $--success-6;
+              text-decoration: underline;
+              text-decoration-color: $--success-6;
             }
           }
         }
@@ -77,6 +88,8 @@
           @include e(name) {
             text-overflow: ellipsis;
             overflow: hidden;
+            text-decoration: underline;
+            text-decoration-color: transparent;
             @include b(icon) {
               font-size: 18px;
               margin-right: 2px;
@@ -86,7 +99,9 @@
             }
             font-size: 14px;
             color: $--n-secondary-text-color;
-            transition: color .3s $--n-ease-in-out-cubic-bezier;
+            transition:
+              color .3s $--n-ease-in-out-cubic-bezier,
+              text-decoration-color .3s $--n-ease-in-out-cubic-bezier;
           }
           @include e(action) {
             padding-top: inherit;

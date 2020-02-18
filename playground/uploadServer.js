@@ -24,6 +24,8 @@ app.post(
   upload.any(),
   function (req, res, next) {
     if (!fs.existsSync(dest)) fs.mkdirSync(dest)
+    console.log(req.headers)
+    console.log(req.body)
     res.send('very good')
   }
 )

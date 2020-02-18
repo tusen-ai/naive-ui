@@ -49,19 +49,20 @@ function createId () {
 }
 
 /**
- * fils status ['pending', 'uploading', 'done', 'removed', 'error']
+ * fils status ['pending', 'uploading', 'finished', 'removed', 'error']
  */
-function XHRHandlers (componentInstance, file) {
+function XHRHandlers (componentInstance, file, XHR) {
   const change = componentInstance.change
   const XHRMap = componentInstance.XHRMap
   return {
     handleXHRLoad (e) {
-      const fileAfterChange = Object.assign({}, file, {
-        status: 'done',
+      let fileAfterChange = Object.assign({}, file, {
+        status: 'finished',
         percentage: 100,
         file: null
       })
       XHRMap.delete(file.id)
+      fileAfterChange = componentInstance.onFinish(fileAfterChange, XHR.response) || fileAfterChange
       change(fileAfterChange, e)
     },
     handleXHRAbort (e) {
@@ -92,7 +93,7 @@ function XHRHandlers (componentInstance, file) {
 }
 
 function registerHandler (componentInstance, file, request) {
-  const handlers = XHRHandlers(componentInstance, file)
+  const handlers = XHRHandlers(componentInstance, file, request)
   request.onabort = handlers.handleXHRAbort
   request.onerror = handlers.handleXHRError
   request.onload = handlers.handleXHRLoad
@@ -104,7 +105,7 @@ function registerHandler (componentInstance, file, request) {
 function setHeaders (request, headers) {
   if (!headers) return
   Object.keys(headers).forEach(key => {
-    request.setRequestHeader(request, headers[key])
+    request.setRequestHeader(key, headers[key])
   })
 }
 
@@ -138,10 +139,10 @@ function submit (
   const request = new XMLHttpRequest()
   componentInstance.XHRMap.set(file.id, request)
   request.withCredentials = withCredentials
-  setHeaders(request, headers, file)
   appendData(formData, data, file)
   registerHandler(componentInstance, file, request)
-  request.open(method, action)
+  request.open(method.toUpperCase(), action)
+  setHeaders(request, headers, file)
   request.send(formData)
   const fileAfterChange = Object.assign({}, file, {
     status: 'uploading'
@@ -186,11 +187,11 @@ export default {
       default: false
     },
     data: {
-      type: [Boolean, Function],
+      type: [Object, Function],
       default: null
     },
     headers: {
-      type: Object,
+      type: [Object, Function],
       default: null
     },
     withCredentials: {
@@ -209,7 +210,12 @@ export default {
       type: Function,
       default: () => true
     },
+    onFinish: {
+      type: Function,
+      default: file => file
+    },
     onDownload: {
+      /** currently of no usage */
       type: Function,
       default: () => true
     },
@@ -231,7 +237,7 @@ export default {
     },
     showCancelButton: {
       type: Boolean,
-      default: false
+      default: true
     },
     showRemoveButton: {
       type: Boolean,
@@ -289,6 +295,7 @@ export default {
       this.dragOver = false
     },
     handleActivatorDrop (e) {
+      if (!this.draggerInside) return
       e.preventDefault()
       const dataTransfer = e.dataTransfer
       const files = dataTransfer.files || []
@@ -317,14 +324,17 @@ export default {
         this.submit()
       }
     },
-    submit () {
+    submit (fileId) {
       const method = this.method
       const action = this.action
       const withCredentials = this.withCredentials
       const headers = this.headers
       const data = this.data
       const fieldName = this.name
-      this.syntheticFileList.forEach(file => {
+      const filesToUpload = fileId ? this.syntheticFileList.filter(
+        file => file.id === fileId
+      ) : this.syntheticFileList
+      filesToUpload.forEach(file => {
         if (file.status === 'pending') {
           const formData = new FormData()
           formData.append(fieldName, file)
