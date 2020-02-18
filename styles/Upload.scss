@@ -9,6 +9,12 @@
     }
     @include m(disabled) {
       opacity: .4;
+      @include e(activator) {
+        cursor: not-allowed;
+      }
+      @include b(upload-file-list)  {
+        cursor: not-allowed;
+      }
     }
     @include m(drag-over) {
       @include b(upload-dragger) {

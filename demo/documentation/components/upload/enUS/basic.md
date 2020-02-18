@@ -1,25 +1,26 @@
-# 基础用法
+# Basic
 ```html
 <div style="overflow: hidden">
-  <n-upload action="http://localhost:3000/upload-test">
-    <n-upload-dragger>
-      <div style="margin-bottom: 12px;">
-        <n-icon size="48" tertiary>
-          <archive-outline />
-        </n-icon>
-      </div>
-      <n-text style="font-size: 16px;">Click or drag File to this area to upload</n-text>
-      <n-p tertiary style="margin-bottom: 0;">Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files</n-p>
-    </n-upload-dragger>
+  <n-upload
+    action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+    :headers="{
+      'naive-info': 'hello!'
+    }"
+    :data="{
+      'naive-data': 'cool! naive!'
+    }"
+    @change="handleChange"
+  >
+    <n-button>Upload File</n-button>
   </n-upload>
 </div>
 ```
 ```js
-import archiveOutline from 'naive-ui/lib/icons/archive-outline'
-
 export default {
-  components: {
-    archiveOutline
+  methods: {
+    handleChange (change) {
+      console.log(change.file.status)
+    }
   }
 }
 ```

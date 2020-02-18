@@ -1,5 +1,5 @@
-# 受控的文件列表
-下面的例子纯属玩笑。
+# Controlled File List
+Example is only a joke.
 ```html
 <div style="overflow: hidden">
   <n-upload
@@ -8,7 +8,7 @@
     @change="handleUploadChange"
     :on-remove="handleRemove"
   >
-    <n-button>上传文件</n-button>
+    <n-button>Upload File</n-button>
   </n-upload>
 </div>
 ```
@@ -19,23 +19,23 @@ export default {
       fileList: [
         {
           id: 'url-test',
-          name: 'URL 测试',
+          name: 'URL Test',
           url: 'http://www.mocky.io/v2/5e4bafc63100007100d8b70f',
           status: 'finished'
         },
         {
           id: 'text-message',
-          name: '你的短信',
+          name: 'Your text messages',
           status: 'error',
         },
         {
           id: 'notification',
-          name: '你的通知',
+          name: 'You notifications',
           status: 'finished'
         },
         {
           id: 'contact',
-          name: '你的联系人信息',
+          name: 'You contact info',
           status: 'finished'
         }
       ]
@@ -49,17 +49,17 @@ export default {
     },
     handleRemove (file, files) {
       if (file.id === 'text-message') {
-        this.$NMessage.info('居然没传上去，算了，删了吧')
+        this.$NMessage.info('Oops... It\'s now uploaded. Okay, delete it.')
       } else if (file.id === 'notification') {
-        this.$NMessage.error('不行，这个有用，不许删')
+        this.$NMessage.error('No, this is useful for us. Removal not allowed.')
         return false
       } else if (file.id === 'contact') {
-        const message = this.$NMessage.loading('不知道这个有没有用，等我问问服务器能不能删', {
+        const message = this.$NMessage.loading('Don\' know whether it is useful for us, let me ask the server', {
           duration: 4000
         })
         return new Promise(resolve => {
           setTimeout(() => {
-            this.$NMessage.error('不行，他们也不许删这个')
+            this.$NMessage.error('Oh no, they said you can\'t delete it too!')
             resolve(false)
           }, 4000)
         })

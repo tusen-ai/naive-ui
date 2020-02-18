@@ -14,9 +14,9 @@ default-files
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |name|`string`|`'file'`|文件在提交表单中的字段名|
-|accept|`string`|`null`|接受的文件类型|
+|accept|`string`|`null`|接受的文件类型，参考 <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept">accept</n-a>|
 |action|`string`|`null`|请求提交的地址|
-|directory|`boolean`|`false`|是否支持目录上传，需要浏览器支持|
+|directory|`boolean`|`false`|是否支持目录上传，需要浏览器支持，参考 <n-a href="https://caniuse.com/#feat=input-file-directory">input-file-directory</n-a>|
 |method|`string`|`'POST'`|HTTP 请求的方法|
 |multiple|`boolean`|`false`|是否支持多个文件|
 |headers|`object \| (file: UploadFile) => object`|`null`|HTTP 请求需要附加的 Headers|
@@ -31,13 +31,15 @@ default-files
 |default-file-list|`Array<UploadFile>`|`[]`|非受控状态下默认的文件列表|
 |show-cancel-button|`boolean`|`true`|是否显示取消按钮（在 pending、uploading、error 的时候展示），点击取消按钮会触发 onRemove 回调|
 |show-remove-button|`boolean`|`true`|是否显示删除按钮（在 finished 的时候展示），点击删除按钮会触发 onRemove 回调|
+|disabled|`boolean`|`false`||
+
 
 ### UploadFile Type
 |属性|类型|说明|
 |-|-|-|
 |id|`string \| number`|文件 id，需要唯一，受控状态下**必需**|
 |name|`string`|文件名，受控状态下**必需**|
-|status|`'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'`|上传的状态，文件名，受控状态下**必需**|
+|status|`'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'`|上传的状态，受控状态下**必需**|
 |percentage|`number`|文件上传进度百分比，在 uploading 状态下生效，受控状态下可不填|
 |file|`File`|文件对应的浏览器 File 对象，受控状态下可不填|
 
