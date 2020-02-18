@@ -1,17 +1,20 @@
 <template>
-  <n-fade-in-height-expand-transition>
-    <div
-      v-if="!isFileRemoved"
+  <n-fade-in-height-expand-transition :appear="!transitionDisabled">
+    <a
+      ref="noopener noreferer"
+      target="_blank"
       class="n-upload-file"
+      :href="file.url"
       :class="{
-        [`n-upload-file--${progressStatus}-status`]: true
+        [`n-upload-file--${progressStatus}-status`]: true,
+        [`n-upload-file--with-url`]: file.url
       }"
     >
       <div class="n-upload-file-info">
         <div class="n-upload-file-info__name">
           <n-icon>
             <attach-outline />
-          </n-icon> {{ file.name }}
+          </n-icon>{{ file.name }}
         </div>
         <div class="n-upload-file-info__action">
           <n-button
@@ -42,11 +45,11 @@
         </div>
       </div>
       <n-upload-progress
-        :show="!isFileUploaded"
+        :show="showProgress"
         :percentage="file.percentage"
         :status="progressStatus"
       />
-    </div>
+    </a>
   </n-fade-in-height-expand-transition>
 </template>
 
@@ -74,56 +77,97 @@ export default {
     NFadeInHeightExpandTransition,
     NIconSwitchTransition
   },
+  inject: {
+    NUpload: {
+      default: null
+    }
+  },
   props: {
     file: {
       type: Object,
       required: true
-    },
-    index: {
-      type: Number,
-      required: true
     }
   },
   computed: {
+    transitionDisabled () {
+      return this.NUpload.transitionDisabled
+    },
     progressStatus () {
       const file = this.file
       if (file.status === 'done') return 'success'
       if (file.status === 'error') return 'error'
       return 'info'
     },
-    isFileRemoved () {
+    showProgress () {
       const file = this.file
-      return file.status === 'removed'
-    },
-    isFileUploaded () {
-      const file = this.file
-      return file.status === 'done'
+      return file.status === 'uploading'
     },
     showCancelButton () {
+      if (!this.NUpload.showCancelButton) return false
       const file = this.file
       return ['uploading', 'pending', 'error'].includes(file.status)
     },
     showRemoveButton () {
+      if (!this.NUpload.showRemoveButton) return false
       const file = this.file
       return ['done'].includes(file.status)
     },
     showDownloadButton () {
+      if (!this.NUpload.showDownloadButton) return false
       const file = this.file
       return ['done'].includes(file.status)
     }
   },
   methods: {
     handleRemoveOrCancelClick () {
-      if (this.showRemoveButton) {
-        this.$emit('remove-click', this.file, this.index)
-      } else if (this.showCancelButton) {
-        this.$emit('cancel-click', this.file, this.index)
+      const file = this.file
+      if (['done', 'pending', 'error'].includes(file.status)) {
+        this.handleRemove(file)
+      } else if (['uploading'].includes(file.status)) {
+        this.handleAbort(file)
       } else {
         console.error('[naive-ui/upload]: the button clicked type is unknown.')
       }
     },
     handleDownloadClick () {
-      this.$emit('download-click', this.file, this.index)
+      this.onDownload(this.file)
+    },
+    handleRemove (file) {
+      const NUpload = this.NUpload
+      const XHRMap = NUpload.XHRMap
+      const change = NUpload.change
+      Promise.resolve(
+        NUpload.onRemove(file)
+      ).then(
+        res => {
+          if (res === true) {
+            const fileAfterChange = Object.assign({}, file, {
+              status: 'removed'
+            })
+            XHRMap.delete(file.id)
+            change(fileAfterChange, undefined, {
+              remove: true
+            })
+          }
+        }
+      )
+    },
+    handleDownload (file) {
+      const NUpload = this.NUpload
+      Promise.resolve(
+        NUpload.onDownload(file)
+      ).then(
+        res => {
+          if (res === true) {} // do something
+        }
+      )
+    },
+    handleAbort (file) {
+      const NUpload = this.NUpload
+      const XHRMap = NUpload.XHRMap
+      const XHR = XHRMap.get(file.id)
+      XHR.abort()
+      this.handleRemove(file)
     }
   }
 }

@@ -2,7 +2,32 @@
 
 @include themes-mixin {
   @include b(upload) {
+    @include m(dragger-inside) {
+      @include e(activator) {
+        display: block;
+      }
+    }
+    @include m(drag-over) {
+      @include b(upload-dragger) {
+        border-color: $--primary-6;
+      }
+    }
+    @include b(upload-dragger) {
+      cursor: pointer;
+      box-sizing: border-box;
+      width: 100%;
+      background-color: $--n-alpha-action-panel-color;
+      text-align: center;
+      border-radius: 6px;
+      border: 1px dashed $--n-alpha-border-color;
+      padding: 24px;
+      transition: border-color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;;
+      &:hover {
+        border-color: $--primary-6;
+      }
+    }
     @include e(file-input) {
+      display: block;
       width: 0;
       height: 0;
       opacity: 0;
@@ -15,6 +40,7 @@
       line-height: 1.5;
       @include b(upload-file) {
         @include fade-in-height-expand-transition;
+        display: block;
         box-sizing: border-box;
         cursor: pointer;
         padding: 0px 12px 0 6px;
@@ -36,6 +62,8 @@
           }
         }
         @include m(success-status) {
+        }
+        @include m(with-url) {
           @include b(upload-file-info) {
             @include e(name) {
               color: $--success-6;
@@ -72,7 +100,7 @@
             align-items: center;
             transition: opacity .2s $--n-ease-in-out-cubic-bezier;
             flex-direction: row-reverse;
-            // opacity: 0;
+            opacity: 0;
             @include b(button) {
               &:not(:first-child) {
                 margin-right: 8px;
