@@ -2,4 +2,6 @@
 ## 演示
 ```demo
 basic
+drag
+submit-manually
 ```

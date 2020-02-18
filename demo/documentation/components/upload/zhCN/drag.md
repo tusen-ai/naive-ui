@@ -1,0 +1,25 @@
+# 基础用法
+```html
+<div style="overflow: hidden">
+  <n-upload action="http://localhost:3000/upload-test">
+    <n-upload-dragger>
+      <div style="margin-bottom: 12px;">
+        <n-icon size="48" tertiary>
+          <archive-outline />
+        </n-icon>
+      </div>
+      <n-text style="font-size: 16px;">点击或者拖动文件到该区域来上传</n-text>
+      <n-p tertiary style="margin-bottom: 0;">请不要上传敏感数据，比如你的银行卡号和密码，信用卡号有效期和安全码</n-p>
+    </n-upload-dragger>
+  </n-upload>
+</div>
+```
+```js
+import archiveOutline from 'naive-ui/lib/icons/archive-outline'
+
+export default {
+  components: {
+    archiveOutline
+  }
+}
+```
