@@ -1,9 +1,17 @@
-# 手动提交
+# 非受控手动提交
+你可以使用 submit 方法来进行非受控状态下的手动提交。当然你也可以在受控模式下完全控制提交行为。
 ```html
-<n-button @click="handleClick" style="margin-bottom: 12px;">上传文件</n-button>
+<n-button
+  :disabled="!fileListLength"
+  @click="handleClick"
+  style="margin-bottom: 12px;"
+>
+  上传文件
+</n-button>
 <div style="overflow: hidden">
   <n-upload
-    action="http://localhost:3000/upload-test"
+    @change="handleChange"
+    action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
     :default-upload="false"
     multiple
     ref="upload"
@@ -19,7 +27,17 @@ export default {
   components: {
     archiveOutline
   },
+  data () {
+    return {
+      fileListLength: 0
+    }
+  },
   methods: {
+    handleChange ({
+      fileList
+    }) {
+      this.fileListLength = fileList.length
+    },
     handleClick () {
       this.$refs.upload.submit()
     }

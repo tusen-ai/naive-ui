@@ -155,6 +155,7 @@ Previously, it would not work with single quotes:
 42. Typography 文档待更新
 43. Tab 文档待更新
 44. Icon 文档待更新
+45. 统一 next 回调和 Promise API 为 Promise API，应该有三四个组件用到了
 
 
 ```

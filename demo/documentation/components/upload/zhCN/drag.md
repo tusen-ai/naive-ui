@@ -1,7 +1,7 @@
-# 基础用法
+# 拖拽上传
 ```html
 <div style="overflow: hidden">
-  <n-upload action="http://localhost:3000/upload-test">
+  <n-upload action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f">
     <n-upload-dragger>
       <div style="margin-bottom: 12px;">
         <n-icon size="48" tertiary>

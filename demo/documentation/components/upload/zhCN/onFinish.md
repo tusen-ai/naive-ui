@@ -1,15 +1,10 @@
-# 基础用法
+# 上传完成的回调
+你可以在回调中修改文件的属性。
 ```html
 <div style="overflow: hidden">
   <n-upload
+    :on-finish="handleFinish"
     action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
-    :headers="{
-      'naive-info': 'hello!'
-    }"
-    :data="{
-      'naive-data': 'cool! naive!'
-    }"
-    @change="handleChange"
   >
     <n-button>上传文件</n-button>
   </n-upload>
@@ -18,8 +13,8 @@
 ```js
 export default {
   methods: {
-    handleChange (change) {
-      console.log(change.file.status)
+    handleFinish (file, response) {
+      file.url = 'http://www.mocky.io/v2/5e4bafc63100007100d8b70f'
     }
   }
 }

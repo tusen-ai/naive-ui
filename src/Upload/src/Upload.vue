@@ -4,7 +4,8 @@
     :class="{
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
       'n-upload--dragger-inside': draggerInside,
-      'n-upload--drag-over': dragOver
+      'n-upload--drag-over': dragOver,
+      'n-upload--disabled': disabled
     }"
   >
     <input
@@ -108,22 +109,23 @@ function registerHandler (componentInstance, file, request) {
   }
 }
 
-function setHeaders (request, headers) {
-  if (!headers) return
+function unwrapData (data, file) {
+  if (typeof data === 'function') {
+    return data(file)
+  }
+  return data
+}
+
+function setHeaders (request, headers, file) {
+  const headersObject = unwrapData(headers, file)
+  if (!headersObject) return
   Object.keys(headers).forEach(key => {
     request.setRequestHeader(key, headers[key])
   })
 }
 
-function unwrapData (data) {
-  if (typeof data === 'function') {
-    return data()
-  }
-  return data
-}
-
-function appendData (formData, data) {
-  const dataObject = unwrapData(data)
+function appendData (formData, data, file) {
+  const dataObject = unwrapData(data, file)
   if (!dataObject) return
   Object.keys(dataObject).forEach(key => {
     formData.append(key, dataObject[key])
@@ -301,7 +303,7 @@ export default {
       this.dragOver = false
     },
     handleActivatorDrop (e) {
-      if (!this.draggerInside) return
+      if (!this.draggerInside || this.disabled) return
       e.preventDefault()
       const dataTransfer = e.dataTransfer
       const files = dataTransfer.files || []

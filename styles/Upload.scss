@@ -7,6 +7,9 @@
         display: block;
       }
     }
+    @include m(disabled) {
+      opacity: .4;
+    }
     @include m(drag-over) {
       @include b(upload-dragger) {
         border-color: $--primary-6;
