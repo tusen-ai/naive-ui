@@ -32,6 +32,18 @@ export default {
     underline: {
       type: Boolean,
       default: false
+    },
+    primary: {
+      type: Boolean,
+      default: false
+    },
+    secondary: {
+      type: Boolean,
+      default: false
+    },
+    tertiary: {
+      type: Boolean,
+      default: false
     }
   },
   render (h, context) {
@@ -43,6 +55,9 @@ export default {
     const isItalic = props.italic
     const isDisabled = props.disabled
     const isUnderline = props.underline
+    const isPrimary = props.primary
+    const isSecondary = props.secondary
+    const isTertiary = props.tertiary
     const on = context.listeners
     const theme = getTheme(context.parent)
     const defaultSlot = context.slots.default || (context.scopedSlots.default && context.scopedSlots.default())
@@ -56,7 +71,10 @@ export default {
         'n-text--strong': isStrong,
         'n-text--italic': isItalic,
         'n-text--disabled': isDisabled,
-        'n-text--underline': isUnderline
+        'n-text--underline': isUnderline,
+        'n-text--primary': isPrimary,
+        'n-text--secondary': isSecondary,
+        'n-text--tertiary': isTertiary
       },
       ...context.data,
       on
