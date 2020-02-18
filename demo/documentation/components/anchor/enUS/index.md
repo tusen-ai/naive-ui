@@ -4,8 +4,7 @@ These demos used to use some charactor names from *Hard-Boiled Wonderland and th
 ## Demos
 ```demo
 basic
-mode
-content
+ignoreGap
 affix
 scrollto
 
@@ -16,7 +15,7 @@ scrollto
 |affix|`boolean`|`false`|If it works like a affix. If set to `true`, it will recieve props from [affix](n-affix#Props)|
 |target|`() => HTMLElement`|A function that returns the nearest scrollable ascendant element|The element that anchor listens to scroll event. (If you want affix & anchor to listen to different target, manually warp anchor in affix instead.)|
 |bound|`number`|`12`||
-|mode|`boolean \| string`|`ignore-gap`| If set to `false`, it will be displayed on the exact href |
+|ignoreGap|`boolean`|`false`| If set to `true`, it will be displayed on the exact href |
 
 ## Methods
 |Name|Type|Description|

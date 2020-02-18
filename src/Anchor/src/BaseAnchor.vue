@@ -55,8 +55,8 @@ export default {
       type: Number,
       default: 12
     },
-    mode: {
-      type: [String, Boolean],
+    ignoreGap: {
+      type: Boolean,
       default: false
     }
   },
@@ -72,7 +72,7 @@ export default {
     activeHref (value) {
       if (value === null) {
         const slotEl = this.$refs.slot
-        slotEl.style.maxWidth = `0px`
+        slotEl.style.maxWidth = 0
       }
     }
   },
@@ -191,15 +191,17 @@ export default {
         return a.top > b.top || a.top === b.top ? a.height < b.height : false
       })
       const currentActiveHref = this.activeHref
+      let bound = this.bound
+      let ignoreGap = this.ignoreGap
       const activeLink = links.reduce((prevLink, link, index) => {
         if (link.top + link.height < 0) {
-          if (this.mode === 'ignore-gap') {
+          if (ignoreGap) {
             return link
           } else {
             return prevLink
           }
         }
-        if (link.top <= this.bound) {
+        if (link.top <= bound) {
           if (prevLink === null) {
             return link
           } else if (link.top === prevLink.top) {

@@ -4,7 +4,7 @@
     ref="anchor"
     :bound="bound"
     :target="target"
-    :mode="mode"
+    :ignore-gap="ignoreGap"
   >
     <slot />
   </n-base-anchor>
@@ -21,7 +21,7 @@
       ref="anchor"
       :bound="bound"
       :target="target"
-      :mode="mode"
+      :ignore-gap="ignoreGap"
     >
       <slot />
     </n-base-anchor>
@@ -71,8 +71,8 @@ export default {
       type: Number,
       default: 12
     },
-    mode: {
-      type: [String, Boolean],
+    ignoreGap: {
+      type: Boolean,
       default: false
     }
   },

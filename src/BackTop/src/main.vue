@@ -1,10 +1,11 @@
 <template>
   <n-base-portal ref="portal" :on-mounted="init">
-    <transition name="n-back-top-transition">
+    <transition name="n-back-top-transition" @after-enter="afterEnter">
       <div
         v-if="show"
         :class="{
-          [`n-${syntheticTheme}-theme`]: syntheticTheme
+          [`n-${syntheticTheme}-theme`]: syntheticTheme,
+          'n-back-top--no-transition': transitionDisabled
         }"
         :style="{
           ...syntheticStyle,
@@ -69,7 +70,8 @@ export default {
     return {
       container: null,
       content: null,
-      scrollTop: 0
+      scrollTop: null,
+      transitionDisabled: true
     }
   },
   computed: {
@@ -81,7 +83,7 @@ export default {
     },
     show () {
       if (this.scrollTop === 0) {
-        return true
+        return false
       } else if (this.scrollTop >= this.visibilityHeight) {
         return true
       } else {
@@ -97,10 +99,11 @@ export default {
   },
   mounted () {
     this.$refs.portal.transferElement()
+    this.transitionDisabled = !!this.show
   },
   beforeDestroy () {
     if (this.container) {
-      this.container.removeEventListener('scroll', this.handleScroll)
+      this.container.removeEventListener('scroll', this.handleScroll, true)
     }
   },
   methods: {
@@ -111,7 +114,9 @@ export default {
         this.container = getScrollParent(this.$el)
       }
       if (this.container) {
-        this.container.addEventListener('scroll', this.handleScroll)
+        this.container.addEventListener('scroll', () => {
+          this.handleScroll()
+        }, true)
         this.handleScroll()
       }
     },
@@ -134,6 +139,9 @@ export default {
       if (this.container.nodeName === '#document') {
         this.scrollTop = this.container.documentElement.scrollTop
       }
+    },
+    afterEnter () {
+      this.transitionDisabled = false
     }
   }
 }

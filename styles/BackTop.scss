@@ -32,5 +32,8 @@
         fill: $--back-top-button-fill-active;
       }
     }
+    @include m(no-transition) {
+      transition: none !important;
+    }
   }
 }
