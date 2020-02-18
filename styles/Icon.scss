@@ -25,11 +25,5 @@
       fill: $--n-meta-text-color;
       stroke: $--n-meta-text-color;
     }
-    @include m(primary-type) {
-
-    }
-    @include m(error-type) {
-
-    }
   }
 }
