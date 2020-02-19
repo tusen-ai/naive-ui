@@ -8,11 +8,11 @@
   ) !global;
   $--message-icon-color: rgba(255, 255, 255, .45) !global;
   $--message-background-color: (
-    "info": $--info-default,
-    "success": $--success-default,
-    "error": $--error-default,
-    "warning": $--warning-default,
-    "loading": $--n-popover-color
+    "info": $--n-info-color,
+    "success": $--n-success-color,
+    "error": $--n-error-color,
+    "warning": $--n-warning-color,
+    "loading": $--n-popover-background-color
   ) !global;
   $--message-box-shadow: (
     "info": 0px 2px 20px 0px rgba(0, 0, 0, .3),

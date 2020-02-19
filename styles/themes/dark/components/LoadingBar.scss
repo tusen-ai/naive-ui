@@ -1,7 +1,7 @@
 @mixin setup-dark-loading-bar {
   $--loading-bar-background-color: (
     "error": red,
-    "loading": $--success-default
+    "loading": $--n-success-color
   ) !global;
   $--loading-bar-height: 2px !global;
 }

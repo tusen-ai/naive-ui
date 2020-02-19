@@ -1,5 +1,5 @@
 @mixin setup-dark-cascader {
-  $--cascader-menu-background-color: $--n-modal-color !global;
+  $--cascader-menu-background-color: $--n-modal-background-color !global;
   $--cascader-option-text-color: (
     'default': $--n-secondary-text-color,
     'active': $--n-primary-color,
@@ -8,9 +8,9 @@
   ) !global;
   $--cascader-menu-box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.18) !global;
   $--cascader-menu-border-color: rgba(255, 255, 255, 0.1) !global;
-  $--cascader-menu-lightbar-background-color: mix($--n-primary-color, $--n-modal-color, 20%) !global;
+  $--cascader-menu-lightbar-background-color: mix($--n-primary-color, $--n-modal-background-color, 20%) !global;
   $--cascader-option-arrow-background-color: rgba(255, 255, 255, 0.3) !global;
-  $--cascader-menu-mask-background-color: change-color($--n-modal-color, $alpha: .75) !global;
+  $--cascader-menu-mask-background-color: change-color($--n-modal-background-color, $alpha: .75) !global;
   $--cascader-menu-mask-text-color: $--n-secondary-text-color !global;
   $--cascader-item-check-mark-color: $--n-primary-color !global;
 }

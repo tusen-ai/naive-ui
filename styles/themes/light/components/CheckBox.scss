@@ -1,11 +1,11 @@
 @mixin setup-light-checkbox {
   $--checkbox-font-color: $--n-secondary-text-color !global;
-  $--checkbox-border-color: $--overlay-border !global;
+  $--checkbox-border-color: $--n-border-color !global;
   $--checkbox-border-color--active: $--n-primary-color !global;
   $--checkbox-indeterminate-color: $--neutral-card !global;
   $--checkbox-background-color: (
     'default': rgba(255, 255, 255, 1),
-    'disabled': $--overlay-action
+    'disabled': $--n-action-background-color
   ) !global;
   $--checkbox-disabled: $--text-4 !global;
   $--checkbox-icon-fill: white !global;

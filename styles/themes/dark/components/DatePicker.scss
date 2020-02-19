@@ -1,16 +1,16 @@
 @mixin setup-dark-date-picker {
-  $--date-picker-background-color: $--n-popover-color !global;
+  $--date-picker-background-color: $--n-popover-background-color !global;
   $--date-picker-text-color: $--n-secondary-text-color !global;
   $--date-picker-icon-color: rgba(255, 255, 255, .3) !global;
   $--date-picker-item-text-color: (
     'inactive': $--n-disabled-text-color,
     'default': $--n-secondary-text-color,
-    'active': $--n-modal-color,
+    'active': $--n-modal-background-color,
     'current': $--n-primary-color
   ) !global;
   $--date-picker-item-sup-color: (
     'default': $--n-primary-color,
-    'active': $--n-modal-color
+    'active': $--n-modal-background-color
   ) !global;
   $--date-picker-month-text-color: $--n-primary-text-color !global;
   $--date-picker-item-background-color: (

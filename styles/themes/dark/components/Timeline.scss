@@ -1,10 +1,10 @@
 @mixin setup-dark-timeline {
   $--timeline-item-circle-border-color: (
     'default': $--n-tertiary-text-color,
-    'info': $--info-hs,
-    'error': $--error-hs,
-    'success': $--success-hs,
-    'warning': $--warning-hs
+    'info': $--n-info-hs-color,
+    'error': $--n-error-hs-color,
+    'success': $--n-success-hs-color,
+    'warning': $--n-warning-hs-color
   ) !global;
   $--timeline-item-title-color: $--n-primary-text-color !global;
   $--timeline-item-content-color: $--n-secondary-text-color !global;

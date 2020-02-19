@@ -7,18 +7,18 @@
   primaryColor: $--n-primary-hover-color;
   primaryHoverColor: $--n-primary-color;
   primaryActiveColor: $--n-primary-active-color;
-  infoColor: $--info-hover;
-  infoHoverColor: $--info-default;
-  infoActiveColor: $--info-active;
-  successColor: $--success-hover;
-  successHoverColor: $--success-default;
-  successActiveColor: $--success-active;
-  errorColor: $--error-hover;
-  errorHoverColor: $--error-default;
-  errorActiveColor: $--error-active;
-  warningColor: $--warning-hover;
-  warningHoverColor: $--warning-default;
-  warningActiveColor: $--warning-active;
+  infoColor: $--n-info-hover-color;
+  infoHoverColor: $--n-info-color;
+  infoActiveColor: $--n-info-active-color;
+  successColor: $--n-success-hover-color;
+  successHoverColor: $--n-success-color;
+  successActiveColor: $--n-success-active-color;
+  errorColor: $--n-error-hover-color;
+  errorHoverColor: $--n-error-color;
+  errorActiveColor: $--n-error-active-color;
+  warningColor: $--n-warning-hover-color;
+  warningHoverColor: $--n-warning-color;
+  warningActiveColor: $--n-warning-active-color;
   primaryTextColor: $--text-1;
   secondaryTextColor: $--text-2;
   tertiaryTextColor: $--text-3;
@@ -29,6 +29,6 @@
   bodyBackgroundColor: $--neutral-body;
   closeColor: $--text-3;
   dividerColor: $--overlay-divider;
-  borderColor: $--overlay-border;
+  borderColor: $--n-border-color;
   easeInOutCubicBezier: cubic-bezier(.4, 0, .2, 1);
 }

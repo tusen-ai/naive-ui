@@ -1,17 +1,17 @@
 @mixin setup-light-alert {
   $--alert-border-color: (
     'default': $--n-border-color,
-    'success': mix($--success-default, rgb(255, 255, 255), 35%),
-    'info': mix($--info-default, rgb(255, 255, 255), 35%),
-    'warning': mix($--warning-default, rgb(255, 255, 255), 35%),
-    'error': mix($--error-default, rgb(255, 255, 255), 35%),
+    'success': mix($--n-success-color, rgb(255, 255, 255), 35%),
+    'info': mix($--n-info-color, rgb(255, 255, 255), 35%),
+    'warning': mix($--n-warning-color, rgb(255, 255, 255), 35%),
+    'error': mix($--n-error-color, rgb(255, 255, 255), 35%),
   ) !global;
   $--alert-background-color: (
-    'default': $--overlay-action,
-    'success': mix($--success-default, rgb(255, 255, 255), 20%),
-    'info': mix($--info-default, rgb(255, 255, 255), 20%),
-    'warning': mix($--warning-default, rgb(255, 255, 255), 20%),
-    'error': mix($--error-default, rgb(255, 255, 255), 20%)
+    'default': $--n-action-background-color,
+    'success': mix($--n-success-color, rgb(255, 255, 255), 20%),
+    'info': mix($--n-info-color, rgb(255, 255, 255), 20%),
+    'warning': mix($--n-warning-color, rgb(255, 255, 255), 20%),
+    'error': mix($--n-error-color, rgb(255, 255, 255), 20%)
   ) !global;
   $--alert-title-text-color: (
     'default': $--n-primary-text-color,
@@ -22,10 +22,10 @@
   ) !global;
   $--alert-icon-color: (
     'default': $--n-secondary-text-color,
-    'success': $--success-default,
-    'info': $--info-default,
-    'warning': $--warning-default,
-    'error': $--error-default
+    'success': $--n-success-color,
+    'info': $--n-info-color,
+    'warning': $--n-warning-color,
+    'error': $--n-error-color
   ) !global;
   $--alert-content-text-color: (
     'default': $--n-secondary-text-color,

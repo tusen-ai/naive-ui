@@ -9,7 +9,7 @@
     'disabled': rgba(255, 255, 255, 0.16)
   ) !global;
   $--checkbox-disabled: $border-color !global;
-  $--checkbox-icon-fill: $--n-body-color !global;
+  $--checkbox-icon-fill: $--n-body-background-color !global;
   $--checkbox-label-text-color: (
     'default': $--n-secondary-text-color,
     'disabled': $--n-disabled-text-color

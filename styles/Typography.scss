@@ -78,22 +78,22 @@ $--header-bar-width: (
       }
       @include m(info-type) {
         &::before {
-          background-color: $--info-default;
+          background-color: $--n-info-color;
         }
       }
       @include m(success-type) {
         &::before {
-          background-color: $--success-default;
+          background-color: $--n-success-color;
         }
       }
       @include m(warning-type) {
         &::before {
-          background-color: $--warning-default;
+          background-color: $--n-warning-color;
         }
       }
       @include m(error-type) {
         &::before {
-          background-color: $--error-default;
+          background-color: $--n-error-color;
         }
       }
     }
@@ -204,16 +204,16 @@ $--header-bar-width: (
       color: $--n-primary-color;
     }
     @include m(info-type) {
-      color: $--info-default;
+      color: $--n-info-color;
     }
     @include m(success-type) {
-      color: $--success-default;
+      color: $--n-success-color;
     }
     @include m(warning-type) {
-      color: $--warning-default;
+      color: $--n-warning-color;
     }
     @include m(error-type) {
-      color: $--error-default;
+      color: $--n-error-color;
     }
   }
   @include b(hr) {

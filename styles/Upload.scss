@@ -25,7 +25,7 @@
       cursor: pointer;
       box-sizing: border-box;
       width: 100%;
-      background-color: $--n-action-panel-color;
+      background-color: $--n-action-background-color;
       text-align: center;
       border-radius: 6px;
       border: 1px dashed $--n-border-color;
@@ -69,14 +69,14 @@
           }
           @include b(upload-file-info) {
             @include e(name) {
-              color: $--error-default;
+              color: $--n-error-color;
             }
           }
         }
         @include m(success-status) {
           @include b(upload-file-info) {
             @include e(name) {
-              color: $--success-default;
+              color: $--n-success-color;
             }
           }
         }
@@ -84,9 +84,9 @@
           cursor: pointer;
           @include b(upload-file-info) {
             @include e(name) {
-              color: $--success-default;
+              color: $--n-success-color;
               text-decoration: underline;
-              text-decoration-color: $--success-default;
+              text-decoration-color: $--n-success-color;
             }
           }
         }

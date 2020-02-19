@@ -1,9 +1,9 @@
 @mixin setup-light-result {
   $--result-icon-fill: (
-    'error': $--error-default,
-    'success': $--success-default,
-    'warning': $--warning-default,
-    'info': $--info-default
+    'error': $--n-error-color,
+    'success': $--n-success-color,
+    'warning': $--n-warning-color,
+    'info': $--n-info-color
   ) !global;
   $--result-header-text-color: $--n-primary-text-color !global;
   $--result-description-text-color: $--n-secondary-text-color !global;

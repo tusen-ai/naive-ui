@@ -1,7 +1,7 @@
 @mixin setup-light-loading-bar {
   $--loading-bar-background-color: (
-    "error": $--error-default,
-    "loading": $--success-default
+    "error": $--n-error-color,
+    "loading": $--n-success-color
   ) !global;
   $--loading-bar-height: 2px !global;
 }

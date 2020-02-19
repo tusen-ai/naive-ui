@@ -3,7 +3,7 @@
     'default': transparent,
     'hover': $--n-primary-color,
     'focus': $--n-primary-color,
-    'error': $--error-default
+    'error': $--n-error-color
   )!global;
   $--input-number-text-decoration-color: $--n-secondary-text-color !global;
   $--input-number-placeholder-color: (
@@ -14,7 +14,7 @@
     "default": rgba(255, 255, 255, .1),
     "disabled": rgba(255, 255, 255, .06),
     "focus": change-color($--n-primary-color, $alpha: 0.1),
-    "error-focus": change-color($--error-default, $alpha: 0.1)
+    "error-focus": change-color($--n-error-color, $alpha: 0.1)
   ) !global;
   $--input-number-text-color: (
     'default': $--n-secondary-text-color,
@@ -35,9 +35,9 @@
     'default': inset 0 0 0 0 transparent,
     'hover': inset 0 0 0px 1px $--n-primary-color,
     'focus': (inset 0 0 0px 1px $--n-primary-color, 0 0 8px 0px change-color($--n-primary-color, $alpha: .3)),
-    'error-default': inset 0 0 0 1px $--error-default,
-    'error-hover': inset 0 0 0px 1px $--error-default,
-    'error-focus': (inset 0 0 0px 1px $--error-default, 0 0 8px 0px change-color($--n-primary-color, $alpha: .3)),
+    'error-default': inset 0 0 0 1px $--n-error-color,
+    'error-hover': inset 0 0 0px 1px $--n-error-color,
+    'error-focus': (inset 0 0 0px 1px $--n-error-color, 0 0 8px 0px change-color($--n-primary-color, $alpha: .3)),
     "disabled": inset 0 0 0 1px transparent
   ) !global;
 }

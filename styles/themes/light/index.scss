@@ -60,31 +60,52 @@
 @mixin setup-light-theme($in-js-env: false) {
   @include setup-light-colors();
   $--n-default-color: black !global;
+
   $--n-primary-color: $--primary-default !global;
   $--n-primary-hover-color: $--primary-hover !global;
   $--n-primary-active-color: $--primary-active !global;
+  $--n-primary-hs-color: $--primary-default !global;
+
   $--n-info-color: $--info-default !global;
+  $--n-info-hover-color: $--info-hover !global;
+  $--n-info-active-color: $--info-active !global;
+  $--n-info-hs-color: $--info-default !global;
+
   $--n-success-color: $--success-default !global;
-  $--n-warning-color: $--warning-default !global;
+  $--n-success-hover-color: $--success-hover !global;
+  $--n-success-active-color: $--success-active !global;
+  $--n-success-hs-color: $--success-default !global;
+
   $--n-error-color: $--error-default !global;
+  $--n-error-hover-color: $--error-hover !global;
+  $--n-error-active-color: $--error-active !global;
+  $--n-error-hs-color: $--error-default !global;
+
+  $--n-warning-color: $--warning-default !global;
+  $--n-warning-hover-color: $--warning-hover !global;
+  $--n-warning-active-color: $--warning-active !global;
+  $--n-warning-hs-color: $--warning-default !global;
 
   $--n-primary-text-color: $--text-1 !global;
   $--n-secondary-text-color: $--text-2 !global;
   $--n-tertiary-text-color: $--text-3 !global;
   $--n-disabled-text-color: $--text-4 !global;
 
-  $--n-action-panel-color: $--overlay-action !global;
-  $--n-table-header-color: $--overlay-action !global;
-  $--n-close-color: $--text-3 !global;
+  $--n-action-background-color: $--overlay-action !global;
+  $--n-table-header-background-color: $--overlay-action !global;
 
   $--n-divider-color: $--overlay-divider !global;
   $--n-border-color: $--overlay-border !global;
+  
+  $--n-close-hover-color: $--text-2 !global;
+  $--n-close-color: $--text-3 !global;
+  $--n-disabled-close-color: $--text-4 !global;
 
-  $--n-popover-color: $--neutral-popover !global;
-  $--n-table-body-color: $--neutral-card !global;
-  $--n-card-color: $--neutral-card !global;
-  $--n-modal-color: $--neutral-modal !global;
-  $--n-body-color: $--neutral-body !global;
+  $--n-popover-background-color: $--neutral-popover !global;
+  $--n-table-body-background-color: $--neutral-card !global;
+  $--n-card-background-color: $--neutral-card !global;
+  $--n-modal-background-color: $--neutral-modal !global;
+  $--n-body-background-color: $--neutral-body !global;
 
   @if ($in-js-env != true) {
     @include setup-light-divider;

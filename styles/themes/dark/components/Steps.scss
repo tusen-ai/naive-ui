@@ -3,7 +3,7 @@
     'process': $--n-primary-color,
     'wait': rgba(255, 255, 255, .3),
     'finish': $--n-primary-color,
-    'error': $--error-default
+    'error': $--n-error-color
   ) !global;
   $--steps-step-background-color: (
     'process': $--n-primary-color,
@@ -15,24 +15,24 @@
     'process': black,
     'wait': rgba(255, 255, 255, .3),
     'finish': $--n-primary-color,
-    'error': $--error-default
+    'error': $--n-error-color
   ) !global;
   $--steps-step-splitor-color: (
     'process': rgba(255, 255, 255, .3),
     'wait': rgba(255, 255, 255, .3),
     'finish': $--n-primary-color,
-    'error': $--error-default
+    'error': $--n-error-color
   ) !global;
   $--steps-step-content-color: (
     'process': $--n-secondary-text-color,
     'wait': rgba(255, 255, 255, .3),
     'finish': $--n-primary-color,
-    'error': $--error-default
+    'error': $--n-error-color
   ) !global;
   $--steps-step-title-color: (
     'process': $--n-primary-text-color,
     'wait': rgba(255, 255, 255, .3),
     'finish': $--n-primary-color,
-    'error': $--error-default
+    'error': $--n-error-color
   ) !global;
 }

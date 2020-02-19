@@ -1,10 +1,10 @@
 @mixin setup-light-timeline {
   $--timeline-item-circle-border-color: (
     'default': $--n-tertiary-text-color,
-    'info': $--info-default,
-    'error': $--error-default,
-    'success': $--success-default,
-    'warning': $--warning-default
+    'info': $--n-info-color,
+    'error': $--n-error-color,
+    'success': $--n-success-color,
+    'warning': $--n-warning-color
   ) !global;
   $--timeline-item-title-color: $--n-primary-text-color !global;
   $--timeline-item-content-color: $--n-secondary-text-color !global;

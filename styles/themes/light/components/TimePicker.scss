@@ -1,5 +1,5 @@
 @mixin setup-light-time-picker {
-  $--time-picker-background-color: $--n-modal-color !global;
+  $--time-picker-background-color: $--n-modal-background-color !global;
   $--time-picker-text-color: (
     'default': $--n-secondary-text-color,
     'active': $--n-primary-color
