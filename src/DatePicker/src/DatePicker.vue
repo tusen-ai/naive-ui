@@ -315,7 +315,7 @@ export default {
       return DATE_VALIDATE_FORMAT[this.type]
     },
     computedFormat () {
-      return DATE_FORMAT[this.type]
+      return this.format || DATE_FORMAT[this.type]
     }
   },
   watch: {
