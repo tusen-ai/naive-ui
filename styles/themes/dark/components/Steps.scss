@@ -1,12 +1,12 @@
 @mixin setup-dark-step {
   $--steps-step-border-color: (
-    'process': $--primary-6,
+    'process': $--n-primary-color,
     'wait': rgba(255, 255, 255, .3),
-    'finish': $--primary-6,
-    'error': $--error-6
+    'finish': $--n-primary-color,
+    'error': $--error-default
   ) !global;
   $--steps-step-background-color: (
-    'process': $--primary-6,
+    'process': $--n-primary-color,
     'wait': transparent,
     'finish': transparent,
     'error': transparent
@@ -14,25 +14,25 @@
   $--steps-step-indicator-color: (
     'process': black,
     'wait': rgba(255, 255, 255, .3),
-    'finish': $--primary-6,
-    'error': $--error-6
+    'finish': $--n-primary-color,
+    'error': $--error-default
   ) !global;
   $--steps-step-splitor-color: (
     'process': rgba(255, 255, 255, .3),
     'wait': rgba(255, 255, 255, .3),
-    'finish': $--primary-6,
-    'error': $--error-6
+    'finish': $--n-primary-color,
+    'error': $--error-default
   ) !global;
   $--steps-step-content-color: (
     'process': $--n-secondary-text-color,
     'wait': rgba(255, 255, 255, .3),
-    'finish': $--primary-6,
-    'error': $--error-6
+    'finish': $--n-primary-color,
+    'error': $--error-default
   ) !global;
   $--steps-step-title-color: (
     'process': $--n-primary-text-color,
     'wait': rgba(255, 255, 255, .3),
-    'finish': $--primary-6,
-    'error': $--error-6
+    'finish': $--n-primary-color,
+    'error': $--error-default
   ) !global;
 }

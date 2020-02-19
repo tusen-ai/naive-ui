@@ -40,7 +40,7 @@
           background-color: transparent;
         }
         @include m(active) {
-          background-color: $--primary-6;
+          background-color: $--n-primary-color;
         }
       }
       @include once {

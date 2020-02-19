@@ -1,9 +1,9 @@
 @mixin setup-dark-result {
   $--result-icon-fill: (
-    'error': $--error-6,
-    'success': $--success-6,
-    'warning': $--warning-6,
-    'info': $--info-6
+    'error': $--error-default,
+    'success': $--success-default,
+    'warning': $--warning-default,
+    'info': $--info-default
   ) !global;
   $--result-header-text-color: $--n-primary-text-color !global;
   $--result-description-text-color: $--n-secondary-text-color !global;

@@ -8,7 +8,7 @@
   ) !global;
   $--cascader-menu-box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.18) !global;
   $--cascader-menu-border-color: rgba(255, 255, 255, 0.1) !global;
-  $--cascader-menu-lightbar-background-color: mix($--primary-6, $--n-modal-color, 20%) !global;
+  $--cascader-menu-lightbar-background-color: mix($--n-primary-color, $--n-modal-color, 20%) !global;
   $--cascader-option-arrow-background-color: rgba(255, 255, 255, 0.3) !global;
   $--cascader-menu-mask-background-color: change-color($--n-modal-color, $alpha: .75) !global;
   $--cascader-menu-mask-text-color: $--n-secondary-text-color !global;

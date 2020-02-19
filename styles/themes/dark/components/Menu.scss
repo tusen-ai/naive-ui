@@ -1,26 +1,26 @@
 @mixin setup-dark-menu {
   $--menu-item-group-text-color: $--n-tertiary-text-color !global;
   $--menu-item-text-color: $--n-secondary-text-color !global;
-  $--menu-horizontal-border-color: $--primary-6 !global;
+  $--menu-horizontal-border-color: $--n-primary-color !global;
   $--menu-item-content-text-color: (
     'default': $--n-secondary-text-color,
-    'hover': $--primary-6,
-    'child-selected': $--primary-6,
-    'selected': $--primary-6,
+    'hover': $--n-primary-color,
+    'child-selected': $--n-primary-color,
+    'selected': $--n-primary-color,
   ) !global;
   $--menu-item-content-extra-text-color: (
     'default': $--n-tertiary-text-color,
-    'hover': $--primary-6,
-    'child-selected': $--primary-6,
-    'selected': $--primary-6,
+    'hover': $--n-primary-color,
+    'child-selected': $--n-primary-color,
+    'selected': $--n-primary-color,
   ) !global;
   $--menu-item-content-icon-color: (
     'default': $--n-primary-text-color,
-    'hover': $--primary-6,
-    'child-selected': $--primary-6,
-    'selected': $--primary-6,
+    'hover': $--n-primary-color,
+    'child-selected': $--n-primary-color,
+    'selected': $--n-primary-color,
     'collapsed': $--n-primary-text-color,
   ) !global;
   $--menu-submenu-arrow-color: $--n-primary-color !global;
-  $--menu-item-background-color: change-color($--primary-6, $alpha: .15) !global;
+  $--menu-item-background-color: change-color($--n-primary-color, $alpha: .15) !global;
 }

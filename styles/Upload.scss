@@ -18,7 +18,7 @@
     }
     @include m(drag-over) {
       @include b(upload-dragger) {
-        border-color: $--primary-6;
+        border-color: $--n-primary-color;
       }
     }
     @include b(upload-dragger) {
@@ -32,7 +32,7 @@
       padding: 24px;
       transition: border-color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
       &:hover {
-        border-color: $--primary-6;
+        border-color: $--n-primary-color;
       }
     }
     @include e(file-input) {
@@ -69,14 +69,14 @@
           }
           @include b(upload-file-info) {
             @include e(name) {
-              color: $--error-6;
+              color: $--error-default;
             }
           }
         }
         @include m(success-status) {
           @include b(upload-file-info) {
             @include e(name) {
-              color: $--success-6;
+              color: $--success-default;
             }
           }
         }
@@ -84,9 +84,9 @@
           cursor: pointer;
           @include b(upload-file-info) {
             @include e(name) {
-              color: $--success-6;
+              color: $--success-default;
               text-decoration: underline;
-              text-decoration-color: $--success-6;
+              text-decoration-color: $--success-default;
             }
           }
         }

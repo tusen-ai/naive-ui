@@ -8,7 +8,7 @@
 @import 'components/BaseSuffix.scss';
 @import 'components/Tag.scss';
 @import 'components/Table.scss';
-@import 'components/AdvanceTable.scss';
+@import 'components/DataTable.scss';
 @import 'components/Popover.scss';
 @import 'components/Tooltip.scss';
 @import 'components/Confirm.scss';
@@ -59,12 +59,14 @@
 
 @mixin setup-dark-theme($in-js-env: false) {
   @include setup-dark-colors();
-  $--n-default-color: $--primary-6 !global;
-  $--n-primary-color: $--primary-6 !global;
-  $--n-info-color: $--info-6 !global;
-  $--n-success-color: $--success-6 !global;
-  $--n-warning-color: $--warning-6 !global;
-  $--n-error-color: $--error-6 !global;
+  $--n-default-color: $--primary-default !global;
+  $--n-primary-color: $--primary-default !global;
+  $--n-primary-hover-color: $--primary-hover !global;
+  $--n-primary-active-color: $--primary-active !global;
+  $--n-info-color: $--info-default !global;
+  $--n-success-color: $--success-default !global;
+  $--n-warning-color: $--warning-default !global;
+  $--n-error-color: $--error-default !global;
 
   $--n-primary-text-color: $--text-1 !global;
   $--n-secondary-text-color: $--text-2 !global;

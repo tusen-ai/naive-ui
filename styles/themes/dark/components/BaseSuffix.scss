@@ -1,14 +1,14 @@
 @mixin setup-dark-base-suffix {
   $--base-suffix-cross-color: (
     "default": rgba(255, 255, 255, .3),
-    "hover": $--primary-6,
-    "active": $--primary-5,
-    "error-hover": $--error-5,
-    "error-active": $--error-5
+    "hover": $--n-primary-color,
+    "active": $--n-primary-hover-color,
+    "error-hover": $--error-hover,
+    "error-active": $--error-hover
   ) !global;
   $--base-suffix-arrow-color: (
     "default": rgba(255, 255, 255, .3),
-    "active": $--primary-6,
-    "error-active": $--error-6
+    "active": $--n-primary-color,
+    "error-active": $--error-default
   ) !global;
 }

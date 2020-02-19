@@ -1,11 +1,11 @@
 @mixin setup-light-base-suffix {
   $--base-suffix-cross-color: (
     "default": $--n-border-color,
-    "hover": $--primary-5,
-    "active": $--primary-7
+    "hover": $--n-primary-hover-color,
+    "active": $--n-primary-active-color
   ) !global;
   $--base-suffix-arrow-color: (
     "default": $--n-border-color,
-    "active": $--primary-6
+    "active": $--n-primary-color
   ) !global;
 }

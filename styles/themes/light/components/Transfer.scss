@@ -16,8 +16,8 @@
   $--transfer-gap-button-background-color: (
     'default': rgba(0, 0, 0, .2),
     'disabled': rgba(0, 0, 0, .1),
-    'hover': $--primary-6,
-    'active': $--primary-7
+    'hover': $--n-primary-color,
+    'active': $--n-primary-active-color
   ) !global;
   $--transfer-item-text-color: (
     'default': $--n-secondary-text-color,

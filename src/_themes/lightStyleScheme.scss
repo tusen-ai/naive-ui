@@ -4,33 +4,31 @@
 
 /* stylelint-disable */
 :export {
-  primaryColor: $--primary-5;
-  primaryHoverColor: $--primary-6;
-  primaryActiveColor: $--primary-7;
-  infoColor: $--info-5;
-  infoHoverColor: $--info-6;
-  infoActiveColor: $--info-7;
-  successColor: $--success-5;
-  successHoverColor: $--success-6;
-  successActiveColor: $--success-7;
-  errorColor: $--error-5;
-  errorHoverColor: $--error-6;
-  errorActiveColor: $--error-7;
-  warningColor: $--warning-5;
-  warningHoverColor: $--warning-6;
-  warningActiveColor: $--warning-7;
+  primaryColor: $--n-primary-hover-color;
+  primaryHoverColor: $--n-primary-color;
+  primaryActiveColor: $--n-primary-active-color;
+  infoColor: $--info-hover;
+  infoHoverColor: $--info-default;
+  infoActiveColor: $--info-active;
+  successColor: $--success-hover;
+  successHoverColor: $--success-default;
+  successActiveColor: $--success-active;
+  errorColor: $--error-hover;
+  errorHoverColor: $--error-default;
+  errorActiveColor: $--error-active;
+  warningColor: $--warning-hover;
+  warningHoverColor: $--warning-default;
+  warningActiveColor: $--warning-active;
   primaryTextColor: $--text-1;
   secondaryTextColor: $--text-2;
   tertiaryTextColor: $--text-3;
-  disabledTextColor: $--neutral-5;
-  popoverBackgroundColor: $--neutral-10;
-  dialogBackgroundColor: $--neutral-10;
-  cardBackgroundColor: $--neutral-10;
-  bodyBackgroundColor: $--neutral-9;
+  disabledTextColor: $--text-4;
+  popoverBackgroundColor: $--neutral-popover;
+  dialogBackgroundColor: $--neutral-modal;
+  cardBackgroundColor: $--neutral-card;
+  bodyBackgroundColor: $--neutral-body;
   closeColor: $--text-3;
-  dividerColor: $--neutral-7;
-  dividerOverlayColor: $--overlay-7;
-  borderColor: $--neutral-6;
-  borderOverlayColor: $--overlay-6;
+  dividerColor: $--overlay-divider;
+  borderColor: $--overlay-border;
   easeInOutCubicBezier: cubic-bezier(.4, 0, .2, 1);
 }

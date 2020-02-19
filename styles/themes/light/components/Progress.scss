@@ -1,11 +1,11 @@
 @mixin setup-light-progress {
   $--progress-rail-color: $--n-divider-color !global;
   $--progress-fill-color: (
-    'default': $--info-6,
-    'info': $--info-6,
-    'error': $--error-6,
-    'warning': $--warning-6,
-    'success': $--success-6
+    'default': $--info-default,
+    'info': $--info-default,
+    'error': $--error-default,
+    'warning': $--warning-default,
+    'success': $--success-default
   ) !global;
   $--progress-indicator-color: (
     'outside': $--n-secondary-text-color,

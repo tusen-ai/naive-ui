@@ -7,7 +7,7 @@
     'error': change-color($--error-hs, $alpha: .3)
   ) !global;
   $--alert-background-color: (
-    'default': $--overlay-8,
+    'default': $--overlay-action,
     'success': change-color($--success-hs, $alpha: .2),
     'info': change-color($--info-hs, $alpha: .2),
     'warning': change-color($--warning-hs, $alpha: .2),
@@ -34,5 +34,5 @@
     'warning': $--n-secondary-text-color,
     'error': $--n-secondary-text-color
   ) !global;
-  $--alert-color-fill: $--n-close-color !global;
+  $--alert-close-color: $--n-close-color !global;
 }

@@ -1,9 +1,9 @@
 @mixin setup-dark-checkbox {
   $border-color: rgba(255, 255, 255, 0.4);
-  $--checkbox-font-color: $--neutral-3 !global;
+  $--checkbox-font-color: $--n-secondary-text-color !global;
   $--checkbox-border-color: $border-color !global;
-  $--checkbox-border-color--active: $--primary-6 !global;
-  $--checkbox-indeterminate-color: $--neutral-10 !global;
+  $--checkbox-border-color--active: $--n-primary-color !global;
+  $--checkbox-indeterminate-color: $--neutral-body !global;
   $--checkbox-background-color: (
     'default': rgba(255, 255, 255, 0),
     'disabled': rgba(255, 255, 255, 0.16)

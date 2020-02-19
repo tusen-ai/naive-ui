@@ -5,5 +5,5 @@
     'hover': $--n-primary-color,
     'active': $--n-primary-color
   ) !global;
-  $--anchor-link-background-color: change-color($color: $--primary-6, $alpha: .15) !global;
+  $--anchor-link-background-color: change-color($color: $--n-primary-color, $alpha: .15) !global;
 }

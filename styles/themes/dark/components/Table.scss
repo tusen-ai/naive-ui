@@ -1,9 +1,9 @@
 @mixin setup-dark-table {
-  $--table-header-background-color: $--neutral-8 !global;
+  $--table-header-background-color: $--overlay-action !global;
   $--table-body-background-color: $--n-card-color !global;
   $--table-header-text-color: $--text-1 !global;
   $--table-body-text-color: $--text-2 !global;
-  $--table-row-hover: $--neutral-8 !global;
+  $--table-row-hover: $--overlay-action !global;
   $--table-border: 1px solid $--n-divider-color !global;
   $--table-td-border-right: 1px solid $--n-divider-color !global;
   $--data-table-border-color: $--n-divider-color !global;

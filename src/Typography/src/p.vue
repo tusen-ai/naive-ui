@@ -9,7 +9,7 @@ export default {
       validator (value) {
         return ['primary', 'secondary', 'tertiary'].includes(value)
       },
-      default: 'primary'
+      default: 'secondary'
     }
   },
   render (h, context) {

@@ -68,32 +68,32 @@ $--header-bar-width: (
       }
       @include m(default-type) {
         &::before {
-          background-color: $--primary-6;
+          background-color: $--n-primary-color;
         }
       }
       @include m(primary-type) {
         &::before {
-          background-color: $--primary-6;
+          background-color: $--n-primary-color;
         }
       }
       @include m(info-type) {
         &::before {
-          background-color: $--info-6;
+          background-color: $--info-default;
         }
       }
       @include m(success-type) {
         &::before {
-          background-color: $--success-6;
+          background-color: $--success-default;
         }
       }
       @include m(warning-type) {
         &::before {
-          background-color: $--warning-6;
+          background-color: $--warning-default;
         }
       }
       @include m(error-type) {
         &::before {
-          background-color: $--error-6;
+          background-color: $--error-default;
         }
       }
     }
@@ -201,19 +201,19 @@ $--header-bar-width: (
       text-decoration: underline;
     }
     @include m(primary-type) {
-      color: $--primary-6;
+      color: $--n-primary-color;
     }
     @include m(info-type) {
-      color: $--info-6;
+      color: $--info-default;
     }
     @include m(success-type) {
-      color: $--success-6;
+      color: $--success-default;
     }
     @include m(warning-type) {
-      color: $--warning-6;
+      color: $--warning-default;
     }
     @include m(error-type) {
-      color: $--error-6;
+      color: $--error-default;
     }
   }
   @include b(hr) {

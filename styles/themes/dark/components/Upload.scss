@@ -1,6 +1,6 @@
 @mixin setup-dark-upload {
   $--uploadd-file-item-background-color: (
-    'hover': change-color($--primary-6, $alpha: .15),
-    'error-hover': change-color($--error-6, $alpha: .15)
+    'hover': change-color($--n-primary-color, $alpha: .15),
+    'error-hover': change-color($--error-default, $alpha: .15)
   ) !global;
 }

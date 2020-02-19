@@ -84,8 +84,8 @@
     }
     @include e(close) {
       @include b(icon) {
-        fill: $--alert-color-fill;
-        stroke: $--alert-color-fill;
+        fill: $--alert-close-color;
+        stroke: $--alert-close-color;
       }
     }
     @include alert-type-mixin('default');

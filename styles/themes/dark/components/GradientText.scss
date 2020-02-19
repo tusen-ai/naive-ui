@@ -1,13 +1,9 @@
 @mixin setup-dark-gradient-text {
   $--gradient-text-background-image: (
-    "default": linear-gradient(252deg, $--primary-6 0%, $--primary-hs 100%),
-    "success": linear-gradient(252deg, $--success-6 0%, $--success-hs 100%),
-    "warning": linear-gradient(252deg, $--warning-6 0%, $--warning-hs 100%),
-    "error": linear-gradient(252deg, $--error-6 0%, $--error-hs 100%),
-    "info": linear-gradient(252deg, $--info-6 0%, $--info-hs 100%),
+    "default": linear-gradient(252deg, $--n-primary-color 0%, $--primary-hs 100%),
+    "success": linear-gradient(252deg, $--success-default 0%, $--success-hs 100%),
+    "warning": linear-gradient(252deg, $--warning-default 0%, $--warning-hs 100%),
+    "error": linear-gradient(252deg, $--error-default 0%, $--error-hs 100%),
+    "info": linear-gradient(252deg, $--info-default 0%, $--info-hs 100%),
   ) !global;
 }
-
-// $default-text-gradient-warning: ;
-// $default-text-gradient-success: linear-gradient(14deg, rgba(120,205,104,1) 0%, rgba(20,166,165,1) 100%);
-// $default-text-gradient-danger: linear-gradient(214deg, rgba(224,32,32,1) 0%, rgba(250,100,0,1) 100%);

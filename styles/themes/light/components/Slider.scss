@@ -4,21 +4,21 @@
     'hover': rgba(0, 0, 0, .15)
   ) !global;
   $--slider-rail-fill-background-color: (
-    'default': $--primary-6,
-    'hover': $--primary-5
+    'default': $--n-primary-color,
+    'hover': $--n-primary-hover-color
   ) !global;
   $--slider-handle-background-color: white !global;
   $--slider-handle-box-shadow: (
-    'default': inset 0 0 0 2px $--primary-6,
-    'hover': inset 0 0 0 2px $--primary-5,
-    'active': (inset 0 0 0 2px $--primary-5, 0 0 0 3px change-color($--primary-6, $alpha: .2)),
-    'focus': (inset 0 0 0 2px $--primary-6, 0 0 0 3px change-color($--primary-6, $alpha: .2))
+    'default': inset 0 0 0 2px $--n-primary-color,
+    'hover': inset 0 0 0 2px $--n-primary-hover-color,
+    'active': (inset 0 0 0 2px $--n-primary-hover-color, 0 0 0 3px change-color($--n-primary-color, $alpha: .2)),
+    'focus': (inset 0 0 0 2px $--n-primary-color, 0 0 0 3px change-color($--n-primary-color, $alpha: .2))
   ) !global;
-  $--slider-indicator-background-color: $--overlay-2 !global;
+  $--slider-indicator-background-color: $--neutral-card !global;
   $--slider-indicator-box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.18) !global;
   $--slider-indicator-color: white !global;
   $--slider-dot-box-shadow: (
-    'default': inset 0 0 0 2px $--primary-6,
-    'active': inset 0 0 0 2px $--primary-5
+    'default': inset 0 0 0 2px $--n-primary-color,
+    'active': inset 0 0 0 2px $--n-primary-hover-color
   ) !global;
 }

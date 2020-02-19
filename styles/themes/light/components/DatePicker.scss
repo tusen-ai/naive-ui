@@ -6,16 +6,16 @@
     'inactive': $--n-disabled-text-color,
     'default': $--n-secondary-text-color,
     'active': $--n-modal-color,
-    'current': $--primary-6
+    'current': $--n-primary-color
   ) !global;
   $--date-picker-item-sup-color: (
-    'default': $--primary-6,
+    'default': $--n-primary-color,
     'active': white
   ) !global;
   $--date-picker-month-text-color: $--n-primary-text-color !global;
   $--date-picker-item-background-color: (
-    'hover': change-color($--primary-6, $alpha: .15),
-    'active': $--primary-6
+    'hover': change-color($--n-primary-color, $alpha: .15),
+    'active': $--n-primary-color
   ) !global;
   $--date-picker-divider-color: $--n-divider-color !global;
   $--date-picker-box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.18) !global;

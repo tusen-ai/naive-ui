@@ -1,10 +1,10 @@
 @mixin setup-light-notification {
   $--notification-avatar-fill: (
     'default': $--n-secondary-text-color,
-    'success': $--success-6,
-    'info': $--info-6,
-    'warning': $--warning-6,
-    'error': $--error-6
+    'success': $--success-default,
+    'info': $--info-default,
+    'warning': $--warning-default,
+    'error': $--error-default
   ) !global;
   $--notification-background-color: $--n-popover-color !global;
   $--notification-text-color: $--n-secondary-text-color !global;
