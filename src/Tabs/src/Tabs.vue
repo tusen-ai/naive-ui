@@ -95,6 +95,7 @@ import themeable from '../../_mixins/themeable'
 import iosArrowBack from '../../_icons/ios-arrow-back'
 import iosArrowForward from '../../_icons/ios-arrow-forward'
 import mdClose from '../../_icons/md-close'
+import resizeObserverDelegate from '../../_utils/delegate/resizeObserverDelegate'
 
 export default {
   name: 'NTabs',
@@ -188,16 +189,15 @@ export default {
       })
       .then(() => {
         this.updateScrollStatus()
-        updateBarPosition.bind(this)()
+        updateBarPosition.call(this)
       })
-    this.resizeObserver = new ResizeObserver(() => {
+    resizeObserverDelegate.registerHandler(this.$refs.tab, () => {
       this.transitionDisabled = true
-      updateBarPosition.bind(this)()
+      updateBarPosition.call(this)
       this.$nextTick().then(() => {
         this.transitionDisabled = false
       })
     })
-    this.resizeObserver.observe(this.$refs.tab)
   },
   updated () {
     this
@@ -207,7 +207,7 @@ export default {
       })
   },
   beforeDestroy () {
-    this.resizeObserver.disconnect()
+    resizeObserverDelegate.unregisterHandler(this.$refs.tab)
   },
   methods: {
     scroll (direction) {
