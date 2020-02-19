@@ -13,15 +13,15 @@
       height: 1em;
       width: 1em;
     }
-    @include m(primary) {
+    @include m(primary-depth) {
       fill: $--n-text-color;
       stroke: $--n-text-color;
     }
-    @include m(secondary) {
+    @include m(secondary-depth) {
       fill: $--n-secondary-text-color;
       stroke: $--n-secondary-text-color;
     }
-    @include m(tertiary) {
+    @include m(tertiary-depth) {
       fill: $--n-meta-text-color;
       stroke: $--n-meta-text-color;
     }
