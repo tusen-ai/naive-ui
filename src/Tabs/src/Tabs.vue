@@ -96,6 +96,7 @@ import iosArrowBack from '../../_icons/ios-arrow-back'
 import iosArrowForward from '../../_icons/ios-arrow-forward'
 import mdClose from '../../_icons/md-close'
 import resizeObserverDelegate from '../../_utils/delegate/resizeObserverDelegate'
+import throttle from 'lodash-es/throttle'
 
 export default {
   name: 'NTabs',
@@ -191,13 +192,15 @@ export default {
         this.updateScrollStatus()
         updateBarPosition.call(this)
       })
-    resizeObserverDelegate.registerHandler(this.$refs.tab, () => {
-      this.transitionDisabled = true
-      updateBarPosition.call(this)
-      this.$nextTick().then(() => {
-        this.transitionDisabled = false
-      })
-    })
+    if (this.justifyContent === 'space-around' || this.justifyContent === 'space-evenly') {
+      resizeObserverDelegate.registerHandler(this.$refs.tab, throttle(() => {
+        this.transitionDisabled = true
+        updateBarPosition.call(this)
+        this.$nextTick().then(() => {
+          this.transitionDisabled = false
+        })
+      }, 40))
+    }
   },
   updated () {
     this
