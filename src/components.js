@@ -35,7 +35,7 @@ const unexposedComponents = {
   BaseSuffix: {
     styles: [
       'BaseSuffix',
-      ('[]BaseLoading')
+      '[]BaseLoading'
     ]
   },
   BaseMenuMask: {
@@ -46,17 +46,17 @@ const unexposedComponents = {
   BaseSelection: {
     styles: [
       'BaseSelection',
-      ('[]BaseLoading'),
-      ('[]Tag')
+      '[]BaseLoading',
+      '[]Tag'
     ]
   },
   BaseSelectMenu: {
     styles: [
       'BaseSelectMenu',
-      ('[]BaseTrackingRect'),
-      ('[]Empty'),
-      ('[]Scrollbar'),
-      ('~vue-virtual-scroller/dist/vue-virtual-scroller.css')
+      '[]BaseTrackingRect',
+      '[]Empty',
+      '[]Scrollbar',
+      '~vue-virtual-scroller/dist/vue-virtual-scroller.css'
     ]
   },
   BaseSlotMachine: {
@@ -80,15 +80,15 @@ const exportedComponents = {
   Anchor: {
     styles: [
       'Anchor',
-      ('[]Affix')
+      '[]Affix'
     ]
   },
   AutoComplete: {
     styles: [
       'AutoComplete',
-      ('[]BaseSelection'),
-      ('[]BaseSelectMenu'),
-      ('[]Input')
+      '[]BaseSelection',
+      '[]BaseSelectMenu',
+      '[]Input'
     ]
   },
   Avatar: {
@@ -104,7 +104,7 @@ const exportedComponents = {
   Badge: {
     styles: [
       'Badge',
-      ('[]BaseSlotMachine')
+      '[]BaseSlotMachine'
     ]
   },
   Breadcrumb: {
@@ -115,25 +115,25 @@ const exportedComponents = {
   Button: {
     styles: [
       'Button',
-      ('[]BaseLoading'),
-      ('[]Icon')
+      '[]BaseLoading',
+      '[]Icon'
     ]
   },
   Card: {
     styles: [
       'Card',
-      ('[]Icon')
+      '[]Icon'
     ]
   },
   Cascader: {
     styles: [
       'Cascader',
-      ('[]BaseLoading'),
-      ('[]BaseMenuMask'),
-      ('[]BaseSelection'),
-      ('[]BaseSelectMenu'),
-      ('[]Checkbox'),
-      ('[]Radio')
+      '[]BaseLoading',
+      '[]BaseMenuMask',
+      '[]BaseSelection',
+      '[]BaseSelectMenu',
+      '[]Checkbox',
+      '[]Radio'
     ]
   },
   Checkbox: {
@@ -149,7 +149,7 @@ const exportedComponents = {
   Collapse: {
     styles: [
       'Collapse',
-      ('[]Icon')
+      '[]Icon'
     ]
   },
   ConfigConsumer: {
@@ -161,26 +161,26 @@ const exportedComponents = {
   Confirm: {
     styles: [
       'Confirm',
-      ('[]Icon'),
-      ('[]Button')
+      '[]Icon',
+      '[]Button'
     ]
   },
   DataTable: {
     styles: [
       'DataTable',
-      ('[]Empty'),
-      ('[]Icon'),
-      ('[]Pagination'),
-      ('[]Scrollbar')
+      '[]Empty',
+      '[]Icon',
+      '[]Pagination',
+      '[]Scrollbar'
     ]
   },
   DatePicker: {
     styles: [
       'DatePicker',
-      ('[]Button'),
-      ('[]Icon'),
-      ('[]Input'),
-      ('[]TimePicker')
+      '[]Button',
+      '[]Icon',
+      '[]Input',
+      '[]TimePicker'
     ]
   },
   Descriptions: {
@@ -201,9 +201,9 @@ const exportedComponents = {
   Dropdown: {
     styles: [
       'Dropdown',
-      ('[]Popover'),
-      ('[]BaseSelectMenu'),
-      ('[]Icon')
+      '[]Popover',
+      '[]BaseSelectMenu',
+      '[]Icon'
     ]
   },
   Element: {
@@ -212,13 +212,13 @@ const exportedComponents = {
   Empty: {
     styles: [
       'Empty',
-      ('[]Icon')
+      '[]Icon'
     ]
   },
   Form: {
     styles: [
       'Form',
-      ('[]Grid')
+      '[]Grid'
     ]
   },
   GradientText: {
@@ -239,19 +239,19 @@ const exportedComponents = {
   Input: {
     styles: [
       'Input',
-      ('[]BaseSuffix')
+      '[]BaseSuffix'
     ]
   },
   InputNumber: {
     styles: [
       'InputNumber',
-      ('[]Icon')
+      '[]Icon'
     ]
   },
   Layout: {
     styles: [
       'Layout',
-      ('[]Scrollbar')
+      '[]Scrollbar'
     ]
   },
   List: {
@@ -267,22 +267,22 @@ const exportedComponents = {
   Log: {
     styles: [
       'Log',
-      ('[]Scrollbar'),
-      ('[]BaseLoading')
+      '[]Scrollbar',
+      '[]BaseLoading'
     ]
   },
   Menu: {
     styles: [
       'Menu',
-      ('[]Popover'),
-      ('[]Tooltip')
+      '[]Popover',
+      '[]Tooltip'
     ]
   },
   Notification: {
     styles: [
       'Notification',
-      ('[]Icon'),
-      ('[]Scrollbar')
+      '[]Icon',
+      '[]Scrollbar'
     ]
   },
   Pagination: {
@@ -293,9 +293,9 @@ const exportedComponents = {
   Popconfirm: {
     styles: [
       'Popconfirm',
-      ('[]Button'),
-      ('[]Icon'),
-      ('[]Popover')
+      '[]Button',
+      '[]Icon',
+      '[]Popover'
     ]
   },
   Popover: {
@@ -306,14 +306,14 @@ const exportedComponents = {
   Popselect: {
     styles: [
       'Popselect',
-      ('[]BaseSelectMenu'),
-      ('[]Popover')
+      '[]BaseSelectMenu',
+      '[]Popover'
     ]
   },
   Progress: {
     styles: [
       'Progress',
-      ('[]Icon')
+      '[]Icon'
     ]
   },
   Radio: {
@@ -324,14 +324,14 @@ const exportedComponents = {
   Result: {
     styles: [
       'Result',
-      ('[]Icon')
+      '[]Icon'
     ]
   },
   Select: {
     styles: [
       'Select',
-      ('[]BaseSelection'),
-      ('[]BaseSelectMenu')
+      '[]BaseSelection',
+      '[]BaseSelectMenu'
     ]
   },
   Slider: {
@@ -342,7 +342,7 @@ const exportedComponents = {
   Spin: {
     styles: [
       'Spin',
-      ('[]BaseLoading')
+      '[]BaseLoading'
     ]
   },
   Statistic: {
@@ -353,7 +353,7 @@ const exportedComponents = {
   Steps: {
     styles: [
       'Steps',
-      ('[]Icon')
+      '[]Icon'
     ]
   },
   Switch: {
@@ -390,32 +390,40 @@ const exportedComponents = {
   TimePicker: {
     styles: [
       'TimePicker',
-      ('[]Input'),
-      ('[]Button')
+      '[]Input',
+      '[]Button'
     ]
   },
   Tooltip: {
     styles: [
       'Tooltip',
-      ('[]Popover')
+      '[]Popover'
     ]
   },
   Transfer: {
     styles: [
       'Transfer',
-      ('[]Checkbox'),
-      ('[]Icon'),
-      ('[]Input'),
-      ('[]Empty'),
-      ('[]Scrollbar'),
-      ('[]BaseTrackingRect'),
-      ('[]Input'),
-      ('~vue-virtual-scroller/dist/vue-virtual-scroller.css')
+      '[]Checkbox',
+      '[]Icon',
+      '[]Input',
+      '[]Empty',
+      '[]Scrollbar',
+      '[]BaseTrackingRect',
+      '[]Input',
+      '~vue-virtual-scroller/dist/vue-virtual-scroller.css'
     ]
   },
   Typography: {
     styles: [
       'Typography'
+    ]
+  },
+  Upload: {
+    styles: [
+      'Upload',
+      '[]Progress',
+      '[]Icon',
+      '[]Button'
     ]
   }
 }

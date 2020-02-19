@@ -11,6 +11,9 @@ Use different type of text to display different kind of info.
 <n-text delete>Delete</n-text>
 <n-text code>Code</n-text>
 <n-text code delete>Code</n-text>
+<n-text depth="primary">Primary Depth</n-text>
+<n-text depth="secondary">Secondary Depth</n-text>
+<n-text depth="tertiary">Tertiary Depth</n-text>
 ```
 ```css
 .n-text {

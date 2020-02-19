@@ -108,13 +108,13 @@ $--header-bar-width: (
   @include header-mixin('5');
   @include header-mixin('6');
   @include b(p) {
-    @include m(primary) {
+    @include m(primary-depth) {
       color: $--n-text-color;
     }
-    @include m(secondary) {
+    @include m(secondary-depth) {
       color: $--n-secondary-text-color;
     }
-    @include m(tertiary) {
+    @include m(tertiary-depth) {
       color: $--n-meta-text-color;
     }
     &:first-child {
@@ -182,13 +182,13 @@ $--header-bar-width: (
       background-color: $--typography-code-background-color;
       border: 1px solid $--n-alpha-border-color;
     }
-    @include m(primary) {
+    @include m(primary-depth) {
       color: $--n-text-color;
     }
-    @include m(secondary) {
+    @include m(secondary-depth) {
       color: $--n-secondary-text-color;
     }
-    @include m(tertiary) {
+    @include m(tertiary-depth) {
       color: $--n-meta-text-color;
     }
     @include m(strong) {
