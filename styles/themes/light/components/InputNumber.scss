@@ -11,10 +11,10 @@
   ) !global;
   $--input-number-text-decoration-color: $--n-secondary-text-color !global;
   $--input-number-background-color: (
-    'default': rgb(255, 255, 255),
-    'disabled': $--neutral-body,
-    'focus': rgb(255, 255, 255),
-    'error-focus': rgb(255, 255, 255)
+    'default': $--n-card-background-color,
+    'disabled': $--n-disabled-background-color,
+    'focus': $--n-card-background-color,
+    'error-focus': $--n-card-background-color,
   ) !global;
   $--input-number-text-color: (
     'default': $--n-secondary-text-color,
@@ -29,7 +29,7 @@
     'default': $--neutral-body,
     'hover': $--neutral-body,
     'active':  $--neutral-body,
-    'disabled': $--neutral-body
+    'disabled': $--n-disabled-background-color,
   ) !global;
   $--input-number-caret-color: $--n-primary-color !global;
   $--input-number-disabled-opacity: 1 !global;

@@ -1,23 +1,26 @@
 @mixin setup-dark-input {
   $--input-color: (
     'default': $--n-secondary-text-color,
-    'disabled': rgba(255, 255, 255, .2)
+    'disabled': $--n-disabled-text-color
   ) !global;
   $--input-caret-color: (
     'default': $--n-primary-color,
     'error': $--n-error-color 
   ) !global;
   $--input-placeholder-color: (
-    'default': rgba(255, 255, 255, .3),
-    'disabled': rgba(255, 255, 255, .2)
+    'default': $--n-disabled-text-color,
+    'disabled': change-color($--n-disabled-text-color, $alpha: alpha($--n-disabled-text-color) * 0.6),
   ) !global;
   $--input-background-color: (
-    'default': rgba(255, 255, 255, .1),
-    'disabled': rgba(255, 255, 255, .06),
+    'default': $--n-input-background-color,
+    'disabled': change-color($--n-input-background-color, $alpha: alpha($--n-input-background-color) * 0.6),
     'focus': change-color($--n-primary-color, $alpha: 0.1),
     'error-focus': change-color($--n-error-color, $alpha: 0.1),
   ) !global;
-  $--input-icon-color: rgba(255, 255, 255, 0.2) !global;
+  $--input-icon-color: (
+    'default': $--n-disabled-text-color,
+    'disabled': change-color($--n-disabled-text-color, $alpha: alpha($--n-disabled-text-color) * 0.6),
+  )!global;
   $--input-border-mask-border-color: (
     'default': transparent,
     'hover': $--n-primary-color,

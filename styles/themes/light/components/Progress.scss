@@ -1,5 +1,5 @@
 @mixin setup-light-progress {
-  $--progress-rail-color: $--n-divider-color !global;
+  $--progress-rail-color: change-color($--n-rail-color, $alpha: alpha($--n-rail-color) * 0.6) !global;
   $--progress-fill-color: (
     'default': $--n-info-color,
     'info': $--n-info-color,

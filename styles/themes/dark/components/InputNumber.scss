@@ -7,14 +7,14 @@
   )!global;
   $--input-number-text-decoration-color: $--n-secondary-text-color !global;
   $--input-number-placeholder-color: (
-    'default': rgba(255, 255, 255, .3),
-    'disabled': rgba(255, 255, 255, .2)
+    'default': $--n-disabled-text-color,
+    'disabled': change-color($--n-disabled-text-color, $alpha: alpha($--n-disabled-text-color) * 0.6),
   ) !global;
   $--input-number-background-color: (
-    "default": rgba(255, 255, 255, .1),
-    "disabled": rgba(255, 255, 255, .06),
-    "focus": change-color($--n-primary-color, $alpha: 0.1),
-    "error-focus": change-color($--n-error-color, $alpha: 0.1)
+    'default': $--n-input-background-color,
+    'disabled': change-color($--n-input-background-color, $alpha: alpha($--n-input-background-color) * 0.6),
+    'focus': change-color($--n-primary-color, $alpha: 0.1),
+    'error-focus': change-color($--n-error-color, $alpha: 0.1),
   ) !global;
   $--input-number-text-color: (
     'default': $--n-secondary-text-color,
@@ -26,8 +26,10 @@
     'hover': $--n-primary-color
   ) !global;
   $--input-number-button-background-color: (
-    'default': rgba(255, 255, 255, .06),
-    'disabled': rgba(255, 255, 255, .04)
+    'default': $--n-action-background-color,
+    'hover': $--n-action-background-color,
+    'active':  $--n-action-background-color,
+    'disabled': $--n-action-background-color,
   ) !global;
   $--input-number-caret-color: $--n-primary-color !global;
   $--input-number-disabled-opacity: 1 !global;

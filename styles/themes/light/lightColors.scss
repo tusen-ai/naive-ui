@@ -10,15 +10,20 @@
   $--alpha-4: .25 !global;
 
   $--overlay-avatar: rgba(0, 0, 0, .25) !global;
-  $--overlay-border: rgba(0, 0, 0, .15) !global;
-  $--overlay-divider: rgba(0, 0, 0, .09) !global;
+  $--overlay-rail: rgba(0, 0, 0, .14) !global;
+  $--overlay-border: rgba(0, 0, 0, .14) !global;
+  $--overlay-divider: rgba(0, 0, 0, .10) !global;
   $--overlay-input: rgba(0, 0, 0, .02) !global;
   $--overlay-action: rgba(0, 0, 0, .02) !global;
+  $--overlay-scrollbar: rgba(0, 0, 0, .25) !global;
+  $--overlay-scrollbar-hover: rgba(0, 0, 0, .4) !global;
+  $--overlay-disabled: rgba(0, 0, 0, .04) !global;
 
   $--neutral-popover: rgb(255, 255, 255) !global;
   $--neutral-modal: rgb(255, 255, 255) !global;
   $--neutral-card: rgb(255, 255, 255) !global;
   $--neutral-body: rgb(250, 250, 250) !global;
+  $--neutral-disabled: rgb(245, 245, 245) !global;
 
   $--primary-hover: #36ad6a !global;
   $--primary-default:#18a058 !global;

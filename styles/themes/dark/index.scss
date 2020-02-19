@@ -94,8 +94,12 @@
   $--n-action-background-color: $--overlay-action !global;
   $--n-table-header-background-color: $--overlay-action !global;
 
+  $--n-rail-color: $--overlay-rail !global;
   $--n-divider-color: $--overlay-divider !global;
   $--n-border-color: $--overlay-border !global;
+
+  $--n-scrollbar-background-color: $--overlay-scrollbar !global;
+  $--n-scrollbar-hover-background-color: $--overlay-scrollbar-hover !global;
 
   $--n-close-hover-color: $--text-2 !global;
   $--n-close-color: $--text-3 !global;
@@ -106,6 +110,10 @@
   $--n-card-background-color: $--neutral-card !global;
   $--n-modal-background-color: $--neutral-modal !global;
   $--n-body-background-color: $--neutral-body !global;
+  $--n-input-background-color: $--overlay-input !global;
+
+  $--n-disabled-opacity: .45 !global;
+  $--n-disabled-background-color: $--overlay-disabled !global;
 
   @if ($in-js-env != true) {
     @include setup-dark-divider;

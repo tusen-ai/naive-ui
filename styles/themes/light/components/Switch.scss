@@ -1,9 +1,9 @@
 @mixin setup-light-switch {
   $--switch-rail-background-color:(
-    "inactive":  $--n-divider-color,
+    "inactive":  $--n-rail-color,
     "active": $--n-primary-color
   ) !global;
-  $--switch-switcher-color: (
+  $--switch-switcher-background-image: (
     "inactive": linear-gradient(52deg,rgba(255,255,255,1) 0%, rgba(255,255,255,1) 25%, rgba(148,151,155,1) 75%,rgba(148,151,155,1) 100%),
     "active": linear-gradient(52deg,rgba(255,255,255,1) 0%, rgba(255,255,255,1) 25%, rgba(120,205,104,1) 75%,rgba(20,166,165,1) 100%)
   ) !global;

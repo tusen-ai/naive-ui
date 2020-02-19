@@ -1,6 +1,6 @@
 @mixin setup-light-scrollbar {
   $scrollbar-color: (
-    "default": rgba(0,0,0,0.25),
-    "hover": rgba(0,0,0,0.40)
+    "default": $--n-scrollbar-background-color,
+    "hover": $--n-scrollbar-hover-background-color
   ) !global;
 }

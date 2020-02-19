@@ -274,7 +274,7 @@
       }
       @include m(disabled) {
         cursor: not-allowed;
-        opacity: .4;
+        opacity: .45;
       }
       &::-moz-focus-inner {
         border: 0;

@@ -61,11 +61,11 @@
       &::before {
         box-shadow: $--switch-switcher-box-shadow;
         background-position: $--switch-background-position;
-        background-image: map-get($map: $--switch-switcher-color, $key: 'inactive');
+        background-image: map-get($map: $--switch-switcher-background-image, $key: 'inactive');
       }
       &::after {
         background-position: $--switch-background-position;
-        background-image: map-get($map: $--switch-switcher-color, $key: 'active');
+        background-image: map-get($map: $--switch-switcher-background-image, $key: 'active');
       }
       background-color: map-get($map: $--switch-rail-background-color, $key: 'inactive');
       @include m(active) {
