@@ -95,6 +95,8 @@ import themeable from '../../_mixins/themeable'
 import iosArrowBack from '../../_icons/ios-arrow-back'
 import iosArrowForward from '../../_icons/ios-arrow-forward'
 import mdClose from '../../_icons/md-close'
+import resizeObserverDelegate from '../../_utils/delegate/resizeObserverDelegate'
+import throttle from 'lodash-es/throttle'
 
 export default {
   name: 'NTabs',
@@ -166,19 +168,16 @@ export default {
   watch: {
     showScrollButton (value) {
       this.$emit('scrollable-change', value)
+    },
+    justifyContent (value) {
+      if (this.justifyContent === 'space-around' || this.justifyContent === 'space-evenly') {
+        this.registerResizeObserver()
+      } else {
+        resizeObserverDelegate.unregisterHandler(this.$refs.tab)
+      }
     }
   },
   mounted () {
-    function updateBarPosition () {
-      let index = 0
-      for (const panel of this.panels) {
-        if (panel.name === this.value) {
-          this.updateBarPosition(this.$refs[`label(${index})`][0])
-          break
-        }
-        index++
-      }
-    }
     this.updateScrollStatus()
     this
       .$nextTick()
@@ -188,16 +187,11 @@ export default {
       })
       .then(() => {
         this.updateScrollStatus()
-        updateBarPosition.bind(this)()
+        this.updateCurrentBarPosition()
       })
-    this.resizeObserver = new ResizeObserver(() => {
-      this.transitionDisabled = true
-      updateBarPosition.bind(this)()
-      this.$nextTick().then(() => {
-        this.transitionDisabled = false
-      })
-    })
-    this.resizeObserver.observe(this.$refs.tab)
+    if (this.justifyContent === 'space-around' || this.justifyContent === 'space-evenly') {
+      this.registerResizeObserver()
+    }
   },
   updated () {
     this
@@ -207,7 +201,7 @@ export default {
       })
   },
   beforeDestroy () {
-    this.resizeObserver.disconnect()
+    resizeObserverDelegate.unregisterHandler(this.$refs.tab)
   },
   methods: {
     scroll (direction) {
@@ -265,6 +259,16 @@ export default {
         }
       }
     },
+    updateCurrentBarPosition () {
+      let index = 0
+      for (const panel of this.panels) {
+        if (panel.name === this.value) {
+          this.updateBarPosition(this.$refs[`label(${index})`][0])
+          break
+        }
+        index++
+      }
+    },
     handleTabClick (e, panelName, disabled) {
       if (!disabled) {
         this.setPanelActive(panelName)
@@ -279,6 +283,15 @@ export default {
     },
     handleCloseMarkClick (panel) {
       this.$emit('close', panel.name)
+    },
+    registerResizeObserver () {
+      resizeObserverDelegate.registerHandler(this.$refs.tab, throttle(() => {
+        this.transitionDisabled = true
+        this.updateCurrentBarPosition()
+        this.$nextTick().then(() => {
+          this.transitionDisabled = false
+        })
+      }, 40))
     }
   }
 }
