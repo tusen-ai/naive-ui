@@ -89,6 +89,9 @@ $--tabs-tab-font-size: (
           transition: left .2s $--n-ease-in-out-cubic-bezier, max-width .2s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
         }
         background-color: $--tabs-tab-bar-background-color;
+        @include m(transition-disabled) {
+          transition: none;
+        }
       }
       @include b(tabs-label) {
         @include once {

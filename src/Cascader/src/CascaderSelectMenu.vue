@@ -100,6 +100,7 @@ export default {
           (type !== 'multiple' && type !== 'single')
         ) {
           if (option.isRoot) return
+          if (option.disabled) return
           selectOptions.push({
             label: option.path.map(optionInPath => optionInPath.label).join('/'),
             value: option.value,

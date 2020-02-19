@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="tab"
     class="n-tabs"
     :class="{
       [`n-tabs--${type}-type`]: true,
@@ -64,6 +65,9 @@
             v-if="!typeIsCard"
             ref="labelBar"
             class="n-tabs-label-bar"
+            :class="{
+              'n-tabs-label-bar--transition-disabled': transitionDisabled
+            }"
           />
         </div>
       </div>
@@ -142,7 +146,9 @@ export default {
       barStyleInitialized: false,
       showScrollButton: false,
       leftScrollButtonDisabled: true,
-      rightScrollButtonDisabled: false
+      rightScrollButtonDisabled: false,
+      transitionDisabled: false,
+      resizeObserver: null
     }
   },
   computed: {
@@ -184,6 +190,14 @@ export default {
         this.updateScrollStatus()
         updateBarPosition.bind(this)()
       })
+    this.resizeObserver = new ResizeObserver(() => {
+      this.transitionDisabled = true
+      updateBarPosition.bind(this)()
+      this.$nextTick().then(() => {
+        this.transitionDisabled = false
+      })
+    })
+    this.resizeObserver.observe(this.$refs.tab)
   },
   updated () {
     this
@@ -191,6 +205,9 @@ export default {
       .then(() => {
         this.updateScrollStatus()
       })
+  },
+  beforeDestroy () {
+    this.resizeObserver.disconnect()
   },
   methods: {
     scroll (direction) {
