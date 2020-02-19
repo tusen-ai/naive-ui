@@ -28,7 +28,7 @@
       background-color: $--n-action-panel-color;
       text-align: center;
       border-radius: 6px;
-      border: 1px dashed $--n-alpha-border-color;
+      border: 1px dashed $--n-border-color;
       padding: 24px;
       transition: border-color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
       &:hover {

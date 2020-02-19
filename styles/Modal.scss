@@ -3,7 +3,7 @@
 @include themes-mixin {
   @include b(modal-content) {
     @include b(card) {
-      background-color: $--n-dialog-color;
+      background-color: $--n-modal-color;
     }
     @include once {
       @include b(confirm) {

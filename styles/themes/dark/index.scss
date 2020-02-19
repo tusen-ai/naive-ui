@@ -59,6 +59,7 @@
 
 @mixin setup-dark-theme($in-js-env: false) {
   @include setup-dark-colors();
+  $--n-default-color: $--primary-6 !global;
   $--n-primary-color: $--primary-6 !global;
   $--n-info-color: $--info-6 !global;
   $--n-success-color: $--success-6 !global;
@@ -71,20 +72,18 @@
   $--n-disabled-text-color: $--text-4 !global;
 
   $--n-action-panel-color: $--overlay-action !global;
+  $--n-table-header-color: $--overlay-action !global;
   $--n-close-color: $--text-3 !global;
 
-  $--n-popover-color: $--neutral-1 !global;
-  $--n-divider-color: $--neutral-6 !global;
-  $--n-alpha-divider-color: $--overlay-6 !global;
-  $--n-border-color: $--neutral-7 !global;
-  $--n-alpha-border-color: $--overlay-7 !global;
-  $--n-table-header-color: $--neutral-8 !global;
-  $--n-alpha-table-header-color: $--overlay-8 !global;
-  $--n-table-body-color: $--neutral-9 !global;
-  $--n-card-color: $--neutral-9 !global;
-  $--n-dialog-color: $--neutral-3 !global;
-  $--n-background-color: $--neutral-10 !global;
-  $--n-alpha-input-color: rgba(255, 255, 255, .12) !global;
+  $--n-divider-color: $--overlay-divider !global;
+  $--n-border-color: $--overlay-border !global;
+
+  $--n-popover-color: $--neutral-popover !global;
+  $--n-table-body-color: $--neutral-card !global;
+  $--n-card-color: $--neutral-card !global;
+  $--n-modal-color: $--neutral-modal !global;
+  $--n-body-color: $--neutral-body !global;
+
   @if ($in-js-env != true) {
     @include setup-dark-divider;
     @include setup-dark-scrollbar;

@@ -97,7 +97,7 @@
       }
     }
     @include e(action) {
-      border-top: 1px solid $--n-alpha-divider-color;
+      border-top: 1px solid $--n-divider-color;
       color: $--n-secondary-text-color;
     }
     @include m(multiple) {
