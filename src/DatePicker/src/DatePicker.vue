@@ -158,12 +158,6 @@ const DATE_FORMAT = {
   daterange: 'yyyy-MM-dd',
   datetimerange: 'yyyy-MM-dd HH:mm:ss'
 }
-const DATE_VALIDATE_FORMAT = {
-  date: ['yyyy-MM-dd', 'yyyy-MM-D', 'yyyy-M-D', 'yyyy-M-dd'],
-  datetime: ['yyyy-MM-dd HH:mm:ss', 'yyyy-MM-D HH:mm:ss', 'yyyy-M-D HH:mm:ss', 'yyyy-M-dd HH:mm:ss'],
-  daterange: ['yyyy-MM-dd', 'yyyy-MM-D', 'yyyy-M-D', 'yyyy-M-dd'],
-  datetimerange: ['yyyy-MM-dd HH:mm:ss', 'yyyy-MM-D HH:mm:ss', 'yyyy-M-D HH:mm:ss', 'yyyy-M-dd HH:mm:ss']
-}
 
 export default {
   name: 'NDatePicker',
@@ -310,9 +304,6 @@ export default {
       } else {
         return this.endPlaceholder
       }
-    },
-    computedValidateFormat () {
-      return DATE_VALIDATE_FORMAT[this.type]
     },
     computedFormat () {
       return this.format || DATE_FORMAT[this.type]
