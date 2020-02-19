@@ -21,6 +21,9 @@ class ResizeObserverDelegate {
     this.observer.observe(el)
   }
   unregisterHandler (el) {
+    if (!this.elHandlersMap.has(el)) {
+      return
+    }
     this.elHandlersMap.delete(el)
     this.observer.unobserve(el)
   }

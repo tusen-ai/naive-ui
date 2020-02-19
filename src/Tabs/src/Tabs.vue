@@ -168,19 +168,16 @@ export default {
   watch: {
     showScrollButton (value) {
       this.$emit('scrollable-change', value)
+    },
+    justifyContent (value) {
+      if (this.justifyContent === 'space-around' || this.justifyContent === 'space-evenly') {
+        this.registerResizeObserver()
+      } else {
+        resizeObserverDelegate.unregisterHandler(this.$refs.tab)
+      }
     }
   },
   mounted () {
-    function updateBarPosition () {
-      let index = 0
-      for (const panel of this.panels) {
-        if (panel.name === this.value) {
-          this.updateBarPosition(this.$refs[`label(${index})`][0])
-          break
-        }
-        index++
-      }
-    }
     this.updateScrollStatus()
     this
       .$nextTick()
@@ -190,16 +187,10 @@ export default {
       })
       .then(() => {
         this.updateScrollStatus()
-        updateBarPosition.call(this)
+        this.updateCurrentBarPosition()
       })
     if (this.justifyContent === 'space-around' || this.justifyContent === 'space-evenly') {
-      resizeObserverDelegate.registerHandler(this.$refs.tab, throttle(() => {
-        this.transitionDisabled = true
-        updateBarPosition.call(this)
-        this.$nextTick().then(() => {
-          this.transitionDisabled = false
-        })
-      }, 40))
+      this.registerResizeObserver()
     }
   },
   updated () {
@@ -268,6 +259,16 @@ export default {
         }
       }
     },
+    updateCurrentBarPosition () {
+      let index = 0
+      for (const panel of this.panels) {
+        if (panel.name === this.value) {
+          this.updateBarPosition(this.$refs[`label(${index})`][0])
+          break
+        }
+        index++
+      }
+    },
     handleTabClick (e, panelName, disabled) {
       if (!disabled) {
         this.setPanelActive(panelName)
@@ -282,6 +283,15 @@ export default {
     },
     handleCloseMarkClick (panel) {
       this.$emit('close', panel.name)
+    },
+    registerResizeObserver () {
+      resizeObserverDelegate.registerHandler(this.$refs.tab, throttle(() => {
+        this.transitionDisabled = true
+        this.updateCurrentBarPosition()
+        this.$nextTick().then(() => {
+          this.transitionDisabled = false
+        })
+      }, 40))
     }
   }
 }
