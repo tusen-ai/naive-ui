@@ -4,6 +4,7 @@
     ref="anchor"
     :bound="bound"
     :target="target"
+    :ignore-gap="ignoreGap"
   >
     <slot />
   </n-base-anchor>
@@ -20,6 +21,7 @@
       ref="anchor"
       :bound="bound"
       :target="target"
+      :ignore-gap="ignoreGap"
     >
       <slot />
     </n-base-anchor>
@@ -68,6 +70,10 @@ export default {
     bound: {
       type: Number,
       default: 12
+    },
+    ignoreGap: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {

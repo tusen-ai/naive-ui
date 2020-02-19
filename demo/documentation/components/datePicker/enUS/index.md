@@ -11,6 +11,7 @@ disabled
 disabledTime
 actions
 events
+format
 ```
 ## V-model
 |Prop|Event|
@@ -33,6 +34,7 @@ events
 |-|-|-|-|
 |placeholder|`string`|`'Select Date'`||
 |is-date-disabled|`(current: number) => boolean`|`() => false`||
+|format|`string`|`'yyyy-MM-dd'`||
 
 ### DateTime Type Props
 |Name|Type|Default|Description|
@@ -40,6 +42,7 @@ events
 |placeholder|`string`|`'Select Date and Time'`||
 |is-date-disabled|`(current: number) => boolean`|`() => false`||
 |is-time-disabled|`(current: number) => { isHourDisabled: boolean, isMinuteDisabled: boolean, isSecondDisabled: boolean }`|`() => ({ isHourDisabled: () => false, isMinuteDisabled: () => false, isSecondDisabled: () => false }})`||
+|format|`string`|`'yyyy-MM-dd HH:mm:ss'`||
 
 ### DateRange Type Props
 |Name|Type|Default|Description|
@@ -49,6 +52,7 @@ events
 |end-placeholder|`string`|`'End Date'`||
 |is-date-disabled|`(current: number) => boolean`|`() => false`||
 |is-time-disabled|`(current: number) => { isHourDisabled: boolean, isMinuteDisabled: boolean, isSecondDisabled: boolean }`|`() => ({ isHourDisabled: () => false, isMinuteDisabled: () => false, isSecondDisabled: () => false }})`||
+|format|`string`|`'yyyy-MM-dd'`||
 
 
 ### DateTimeRange Type Props
@@ -59,6 +63,7 @@ events
 |end-placeholder|`string`|`'End Date and Time'`||
 |is-date-disabled|`(current: number) => boolean`|`() => false`||
 |is-time-disabled|`(current: number) => { isHourDisabled: boolean, isMinuteDisabled: boolean, isSecondDisabled: boolean }`|`() => ({ isHourDisabled: () => false, isMinuteDisabled: () => false, isSecondDisabled: () => false }})`||
+|format|`string`|`'yyyy-MM-dd HH:mm:ss'`||
 
 ## Events
 ### Date, DateTime Type Events

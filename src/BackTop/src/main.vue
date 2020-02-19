@@ -1,10 +1,11 @@
 <template>
   <n-base-portal ref="portal" :on-mounted="init">
-    <transition name="n-back-top-transition">
+    <transition name="n-back-top-transition" @after-enter="afterEnter">
       <div
         v-if="show"
         :class="{
-          [`n-${syntheticTheme}-theme`]: syntheticTheme
+          [`n-${syntheticTheme}-theme`]: syntheticTheme,
+          'n-back-top--transition-disabled': transitionDisabled
         }"
         :style="{
           ...syntheticStyle,
@@ -69,7 +70,8 @@ export default {
     return {
       container: null,
       content: null,
-      show: false
+      scrollTop: null,
+      transitionDisabled: true
     }
   },
   computed: {
@@ -78,6 +80,13 @@ export default {
     },
     styleBottom () {
       return this.bottom + 'px'
+    },
+    show () {
+      if (this.scrollTop >= this.visibilityHeight) {
+        return true
+      } else {
+        return false
+      }
     }
   },
   watch: {
@@ -88,6 +97,7 @@ export default {
   },
   mounted () {
     this.$refs.portal.transferElement()
+    this.transitionDisabled = this.show
   },
   beforeDestroy () {
     if (this.container) {
@@ -121,17 +131,13 @@ export default {
       this.$emit('click')
     },
     handleScroll () {
-      let scrollTop = this.container.scrollTop
+      this.scrollTop = this.container.scrollTop
       if (this.container.nodeName === '#document') {
-        scrollTop = this.container.documentElement.scrollTop
+        this.scrollTop = this.container.documentElement.scrollTop
       }
-      if (scrollTop === 0) {
-        this.show = false
-      } else if (scrollTop >= this.visibilityHeight) {
-        this.show = true
-      } else {
-        this.show = false
-      }
+    },
+    afterEnter () {
+      this.transitionDisabled = false
     }
   }
 }

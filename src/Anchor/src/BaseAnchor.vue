@@ -54,6 +54,10 @@ export default {
     bound: {
       type: Number,
       default: 12
+    },
+    ignoreGap: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -68,12 +72,7 @@ export default {
     activeHref (value) {
       if (value === null) {
         const slotEl = this.$refs.slot
-        slotEl.style.maxWidth = `0px`
-        const barEl = this.$refs.bar
-        window.setTimeout(() => {
-          slotEl.style.top = null
-          barEl.style.top = null
-        }, 150)
+        slotEl.style.maxWidth = 0
       }
     }
   },
@@ -146,6 +145,7 @@ export default {
       slotEl.style.maxWidth = `${offsetWidth + offsetLeft}px`
       barEl.getBoundingClientRect()
       slotEl.getBoundingClientRect()
+
       if (!transition) {
         barEl.style.transition = null
         slotEl.style.transition = null
@@ -191,11 +191,17 @@ export default {
         return a.top > b.top || a.top === b.top ? a.height < b.height : false
       })
       const currentActiveHref = this.activeHref
+      let bound = this.bound
+      let ignoreGap = this.ignoreGap
       const activeLink = links.reduce((prevLink, link, index) => {
         if (link.top + link.height < 0) {
-          return prevLink
+          if (ignoreGap) {
+            return link
+          } else {
+            return prevLink
+          }
         }
-        if (link.top <= this.bound) {
+        if (link.top <= bound) {
           if (prevLink === null) {
             return link
           } else if (link.top === prevLink.top) {
