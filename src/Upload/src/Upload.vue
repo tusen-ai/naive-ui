@@ -2,7 +2,10 @@
   <div
     class="n-upload"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      'n-upload--dragger-inside': draggerInside,
+      'n-upload--drag-over': dragOver,
+      'n-upload--disabled': disabled
     }"
   >
     <input
@@ -11,86 +14,93 @@
       class="n-upload__file-input"
       :accept="accept"
       :multiple="multiple"
+      :directory="directory"
       @change="handleFileInputChange"
     >
-    <div class="n-upload__activator" @click="handleActivatorClick">
+    <div
+      class="n-upload__activator"
+      @click="handleActivatorClick"
+      @drop="handleActivatorDrop"
+      @dragover="handleActivatorDragOver"
+      @dragenter="handleActivatorDragEnter"
+      @dragleave="handleActivatorDragLeave"
+    >
       <slot />
     </div>
-    <div class="n-upload-file-list">
-      <template v-for="(file, index) in fileList">
-        <div
-          v-if="!isFileRemoved(file)"
-          :key="index"
-          class="n-upload-file"
-          :class="{
-            [`n-upload-file--${getProgressStatus(file)}-status`]: true
-          }"
-        >
-          <div class="n-upload-file-info">
-            <div class="n-upload-file-info__name">
-              {{ file.name }}
-            </div>
-            <div class="n-upload-file-info__action">
-              <n-button circle size="tiny">
-                <template v-slot:icon>
-                  <close-outline />
-                </template>
-              </n-button>
-              <n-button circle size="tiny">
-                <template v-slot:icon>
-                  <download-outline />
-                </template>
-              </n-button>
-            </div>
-          </div>
-          <n-upload-progress
-            :show="!isFileUploaded(file)"
-            :percentage="file.percentage"
-            :status="getProgressStatus(file)"
-          />
-        </div>
+    <div class="n-upload-file-list" :style="fileListStyle">
+      <template v-for="file in syntheticFileList">
+        <n-upload-file
+          :key="file.id"
+          :file="file"
+        />
       </template>
     </div>
   </div>
 </template>
 
 <script>
-import NButton from '../../Button'
-import closeOutline from '../../_icons/close-outline'
-import downloadOutline from '../../_icons/download-outline'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import NUploadProgress from './UploadProgress'
+import NUploadFile from './UploadFile'
 
-function XHRHandlers (componentInstance, index) {
+function createId () {
+  return Math.random()
+    .toString(36)
+    .slice(2)
+}
+
+/**
+ * fils status ['pending', 'uploading', 'finished', 'removed', 'error']
+ */
+function XHRHandlers (componentInstance, file, XHR) {
+  const change = componentInstance.change
+  const XHRMap = componentInstance.XHRMap
+  let percentage = 0
   return {
     handleXHRLoad (e) {
-      const file = componentInstance.fileList[index]
-      file.status = 'done'
-      file.percentage = 100
-      console.log('!!!done')
+      let fileAfterChange = Object.assign({}, file, {
+        status: 'finished',
+        percentage,
+        file: null
+      })
+      XHRMap.delete(file.id)
+      fileAfterChange = componentInstance.onFinish(fileAfterChange, XHR.response) || fileAfterChange
+      change(fileAfterChange, e)
     },
     handleXHRAbort (e) {
-      componentInstance.fileList[index].status = 'removed'
-      console.log('!!!abort')
+      const fileAfterChange = Object.assign({}, file, {
+        status: 'removed',
+        file: null,
+        percentage
+      })
+      XHRMap.delete(file.id)
+      change(fileAfterChange, e)
     },
     handleXHRError (e) {
-      componentInstance.fileList[index].status = 'error'
-      console.log('!!!error')
+      const fileAfterChange = Object.assign({}, file, {
+        status: 'error',
+        percentage,
+        file: null
+      })
+      XHRMap.delete(file.id)
+      change(fileAfterChange, e)
     },
     handleXHRProgress (e) {
-      console.log('!!!progress')
+      const fileAfterChange = Object.assign({}, file, {
+        status: 'uploading'
+      })
       if (e.lengthComputable) {
-        const file = componentInstance.fileList[index]
         const progress = Math.ceil((e.loaded / e.total) * 100)
-        file.percentage = progress
+        fileAfterChange.percentage = progress
+        percentage = progress
       }
+      change(fileAfterChange, e)
     }
   }
 }
 
-function registerHandler (request, componentInstance, index) {
-  const handlers = XHRHandlers(componentInstance, index)
+function registerHandler (componentInstance, file, request) {
+  const handlers = XHRHandlers(componentInstance, file, request)
   request.onabort = handlers.handleXHRAbort
   request.onerror = handlers.handleXHRError
   request.onload = handlers.handleXHRLoad
@@ -99,20 +109,64 @@ function registerHandler (request, componentInstance, index) {
   }
 }
 
-function submit (method = 'POST', action, formData, index, componentInstance) {
+function unwrapData (data, file) {
+  if (typeof data === 'function') {
+    return data(file)
+  }
+  return data
+}
+
+function setHeaders (request, headers, file) {
+  const headersObject = unwrapData(headers, file)
+  if (!headersObject) return
+  Object.keys(headers).forEach(key => {
+    request.setRequestHeader(key, headers[key])
+  })
+}
+
+function appendData (formData, data, file) {
+  const dataObject = unwrapData(data, file)
+  if (!dataObject) return
+  Object.keys(dataObject).forEach(key => {
+    formData.append(key, dataObject[key])
+  })
+}
+
+function submit (
+  componentInstance,
+  file,
+  formData,
+  {
+    method,
+    action,
+    withCredentials,
+    headers,
+    data
+  }
+) {
   const request = new XMLHttpRequest()
-  registerHandler(request, componentInstance, index)
-  request.open(method, action)
+  componentInstance.XHRMap.set(file.id, request)
+  request.withCredentials = withCredentials
+  appendData(formData, data, file)
+  registerHandler(componentInstance, file, request)
+  request.open(method.toUpperCase(), action)
+  setHeaders(request, headers, file)
   request.send(formData)
+  const fileAfterChange = Object.assign({}, file, {
+    status: 'uploading'
+  })
+  componentInstance.change(fileAfterChange)
 }
 
 export default {
   name: 'NUpload',
   components: {
-    NButton,
-    NUploadProgress,
-    closeOutline,
-    downloadOutline
+    NUploadFile
+  },
+  provide () {
+    return {
+      NUpload: this
+    }
   },
   mixins: [ withapp, themeable ],
   props: {
@@ -121,27 +175,31 @@ export default {
       default: 'file'
     },
     accept: {
-      type: [String, Array],
+      type: String,
       default: null
     },
     action: {
       type: String,
       default: null
     },
+    directory: {
+      type: Boolean,
+      default: false
+    },
     method: {
       type: String,
       default: 'POST'
-    },
-    onUpload: {
-      type: Function,
-      default: next => next
     },
     multiple: {
       type: Boolean,
       default: false
     },
+    data: {
+      type: [Object, Function],
+      default: null
+    },
     headers: {
-      type: Object,
+      type: [Object, Function],
       default: null
     },
     withCredentials: {
@@ -155,50 +213,186 @@ export default {
     onChange: {
       type: Function,
       default: () => {}
+    },
+    onRemove: {
+      type: Function,
+      default: () => true
+    },
+    onFinish: {
+      type: Function,
+      default: file => file
+    },
+    onDownload: {
+      /** currently of no usage */
+      type: Function,
+      default: () => true
+    },
+    defaultUpload: {
+      type: Boolean,
+      default: true
+    },
+    fileList: {
+      type: Array,
+      default: undefined
+    },
+    fileListStyle: {
+      type: Object,
+      default: null
+    },
+    defaultFileList: {
+      type: Array,
+      default: () => []
+    },
+    showCancelButton: {
+      type: Boolean,
+      default: true
+    },
+    showRemoveButton: {
+      type: Boolean,
+      default: true
+    },
+    showDownloadButton: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
-      fileList: [],
-      formDataList: []
+      internalFileList: [],
+      formDataList: [],
+      XHRs: [],
+      draggerInside: false,
+      dragOver: false,
+      transitionDisabled: true,
+      XHRMap: new Map()
     }
   },
+  computed: {
+    syntheticFileList () {
+      if (this.fileList) {
+        return this.fileList
+      } else {
+        return this.internalFileList
+      }
+    }
+  },
+  created () {
+    this.internalFileList = this.defaultFileList
+  },
+  mounted () {
+    this.transitionDisabled = false
+  },
   methods: {
-    handleActivatorClick () {
-      if (this.disabled) return
+    openFileDialog () {
       this.$refs.input.click()
     },
-    isFileRemoved (file) {
-      return file.status === 'removed'
+    handleActivatorClick () {
+      if (this.disabled) return
+      this.openFileDialog()
     },
-    isFileUploaded (file) {
-      return file.status === 'done'
+    handleActivatorDragOver (e) {
+      e.preventDefault()
+      this.dragOver = true
     },
-    getProgressStatus (file) {
-      if (file.status === 'done') return 'success'
-      if (file.status === 'error') return 'error'
-      return 'info'
+    handleActivatorDragEnter (e) {
+      e.preventDefault()
+      this.dragOver = true
+    },
+    handleActivatorDragLeave (e) {
+      e.preventDefault()
+      this.dragOver = false
+    },
+    handleActivatorDrop (e) {
+      if (!this.draggerInside || this.disabled) return
+      e.preventDefault()
+      const dataTransfer = e.dataTransfer
+      const files = dataTransfer.files || []
+      this.handleFileAddition(files)
+      this.dragOver = false
     },
     handleFileInputChange (e) {
-      const fileList = this.fileList
-      const formDataList = this.formDataList
-      const fieldName = this.name
-      const memorizedFileListLength = fileList.length
-      Array.from(e.target.files).forEach((file, index) => {
-        fileList.push({
-          name: file.name,
-          status: 'pending',
-          percentage: 0
-        })
-        const formData = new FormData()
-        formData.append(fieldName, file)
-        formDataList.push(formData)
-        this.submit(formData, memorizedFileListLength + index)
-      })
+      this.handleFileAddition(e.target.files, e)
       e.target.value = null
     },
-    submit (formData, index) {
-      submit(this.method, this.action, formData, index, this)
+    handleFileAddition (files, e) {
+      const change = this.change
+      Array.from(files).forEach(file => {
+        const fileInfo = {
+          id: createId(),
+          name: file.name,
+          status: 'pending',
+          percentage: 0,
+          file: file
+        }
+        change(fileInfo, e, {
+          append: true
+        })
+      })
+      if (this.defaultUpload) {
+        this.submit()
+      }
+    },
+    submit (fileId) {
+      const method = this.method
+      const action = this.action
+      const withCredentials = this.withCredentials
+      const headers = this.headers
+      const data = this.data
+      const fieldName = this.name
+      const filesToUpload = fileId ? this.syntheticFileList.filter(
+        file => file.id === fileId
+      ) : this.syntheticFileList
+      filesToUpload.forEach(file => {
+        if (file.status === 'pending') {
+          const formData = new FormData()
+          formData.append(fieldName, file.file)
+          submit(
+            this,
+            file,
+            formData,
+            {
+              method: method,
+              action: action,
+              withCredentials: withCredentials,
+              headers: headers,
+              data: data
+            }
+          )
+        }
+      })
+    },
+    change (fileAfterChange, event, options = {
+      append: false,
+      remove: false
+    }) {
+      const {
+        append,
+        remove
+      } = options
+      const fileListAfterChange = this.syntheticFileList
+      const fileIndex = fileListAfterChange.findIndex(file => file.id === fileAfterChange.id)
+      if (append || remove || ~fileIndex) {
+        if (append) {
+          fileListAfterChange.push(fileAfterChange)
+        } else if (remove) {
+          fileListAfterChange.splice(fileIndex, 1)
+        } else {
+          fileListAfterChange.splice(fileIndex, 1, fileAfterChange)
+        }
+        this.$emit('change', {
+          file: fileAfterChange,
+          fileList: fileListAfterChange,
+          event
+        })
+        this.onChange({
+          file: fileAfterChange,
+          fileList: fileListAfterChange,
+          event
+        })
+        this.internalFileList = fileListAfterChange
+      } else {
+        console.error('[naive-ui/upload]: file has no corresponding id in current file list.')
+      }
     }
   }
 }

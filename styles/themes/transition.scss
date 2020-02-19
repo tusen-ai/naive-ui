@@ -135,12 +135,22 @@
   }
 }
 
-@mixin fade-in-height-expand-transition ($name: 'fade-in-height-expand', $duration: .3s, $original-transition: (), $leave-delay: 0s) {
+@mixin fade-in-height-expand-transition (
+  $name: 'fade-in-height-expand',
+  $duration: .3s,
+  $original-transition: (),
+  $leave-delay: 0s,
+  $fold-padding: false
+) {
   &.#{$namespace}-#{$name}-transition-leave, &.#{$namespace}-#{$name}-transition-enter-to {
     opacity: 1;
   }
   &.#{$namespace}-#{$name}-transition-leave-to, &.#{$namespace}-#{$name}-transition-enter {
     opacity: 0;
+    @if $fold-padding {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
@@ -151,6 +161,8 @@
       opacity $duration $--n-ease-out-cubic-bezier $leave-delay,
       margin-top $duration $--n-ease-in-out-cubic-bezier $leave-delay,
       margin-bottom $duration $--n-ease-in-out-cubic-bezier $leave-delay,
+      padding-top $duration $--n-ease-in-out-cubic-bezier $leave-delay,
+      padding-bottom $duration $--n-ease-in-out-cubic-bezier $leave-delay,
       $original-transition;
   }
   &.#{$namespace}-#{$name}-transition-enter-active {
@@ -160,6 +172,8 @@
       opacity $duration $--n-ease-in-cubic-bezier,
       margin-top $duration $--n-ease-in-out-cubic-bezier,
       margin-bottom $duration $--n-ease-in-out-cubic-bezier,
+      padding-top $duration $--n-ease-in-out-cubic-bezier,
+      padding-bottom $duration $--n-ease-in-out-cubic-bezier,
       $original-transition;
   }
 }

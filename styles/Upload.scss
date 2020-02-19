@@ -2,7 +2,41 @@
 
 @include themes-mixin {
   @include b(upload) {
+    @include m(dragger-inside) {
+      @include e(activator) {
+        display: block;
+      }
+    }
+    @include m(disabled) {
+      opacity: .4;
+      @include e(activator) {
+        cursor: not-allowed;
+      }
+      @include b(upload-file-list)  {
+        cursor: not-allowed;
+      }
+    }
+    @include m(drag-over) {
+      @include b(upload-dragger) {
+        border-color: $--primary-6;
+      }
+    }
+    @include b(upload-dragger) {
+      cursor: pointer;
+      box-sizing: border-box;
+      width: 100%;
+      background-color: $--n-alpha-action-panel-color;
+      text-align: center;
+      border-radius: 6px;
+      border: 1px dashed $--n-alpha-border-color;
+      padding: 24px;
+      transition: border-color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
+      &:hover {
+        border-color: $--primary-6;
+      }
+    }
     @include e(file-input) {
+      display: block;
       width: 0;
       height: 0;
       opacity: 0;
@@ -14,8 +48,11 @@
       margin-top: 8px;
       line-height: 1.5;
       @include b(upload-file) {
-        cursor: pointer;
-        padding: 6px 12px 0 12px;
+        @include fade-in-height-expand-transition;
+        display: block;
+        box-sizing: border-box;
+        cursor: default;
+        padding: 0px 12px 0 6px;
         transition: background-color .3s $--n-ease-in-out-cubic-bezier;
         border-radius: 6px;
         &:hover {
@@ -27,6 +64,9 @@
           }
         }
         @include m(error-status) {
+          &:hover {
+            background-color: map-get($--upload-file-item-background-color, 'error-hover');
+          }
           @include b(upload-file-info) {
             @include e(name) {
               color: $--error-6;
@@ -40,15 +80,40 @@
             }
           }
         }
+        @include m(with-url) {
+          cursor: pointer;
+          @include b(upload-file-info) {
+            @include e(name) {
+              color: $--success-6;
+              text-decoration: underline;
+              text-decoration-color: $--success-6;
+            }
+          }
+        }
         @include b(upload-file-info) {
           position: relative;
+          padding-top: 6px;
           padding-bottom: 6px;
           @include e(name) {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            @include b(icon) {
+              font-size: 18px;
+              margin-right: 2px;
+              fill: $--n-meta-text-color;
+              stroke: $--n-meta-text-color;
+              vertical-align: middle;
+            }
             font-size: 14px;
             color: $--n-secondary-text-color;
-            transition: color .3s $--n-ease-in-out-cubic-bezier;
+            transition:
+              color .3s $--n-ease-in-out-cubic-bezier,
+              text-decoration-color .3s $--n-ease-in-out-cubic-bezier;
           }
           @include e(action) {
+            padding-top: inherit;
             padding-bottom: inherit;
             position: absolute;
             right: 0;
@@ -59,15 +124,23 @@
             align-items: center;
             transition: opacity .2s $--n-ease-in-out-cubic-bezier;
             flex-direction: row-reverse;
+            opacity: 0;
             @include b(button) {
               &:not(:first-child) {
                 margin-right: 8px;
+              }
+              @include b(icon) {
+                svg {
+                  @include icon-switch-transition;
+                }
               }
             }
           }
         }
         @include b(progress) {
-          @include fade-in-height-expand-transition;
+          @include fade-in-height-expand-transition($fold-padding: true);
+          box-sizing: border-box;
+          padding-bottom: 6px;
           margin-bottom: 6px;
         }
       }

@@ -76,15 +76,15 @@
   $--n-border-color: $--neutral-6 !global;
   $--n-alpha-border-color: $--overlay-6 !global;
   $--n-popover-color: $--neutral-10 !global;
-  $--n-table-header-color: $--neutral-8 !global;
+  $--n-table-header-color: $--neutral-9 !global;
   $--n-disabled-text-color: $--neutral-5 !global;
   $--n-card-color: $--neutral-10 !global;
   $--n-dialog-color: $--neutral-10 !global;
   $--n-table-body-color: $--neutral-10 !global;
   $--n-background-color: $--neutral-9 !global;
   $--n-alpha-input-color: rgba(0, 0, 0, .04) !global;
-  $--n-action-panel-color: $--neutral-8 !global;
-  $--n-alpha-action-panel-color: $--overlay-8 !global;
+  $--n-action-panel-color: $--neutral-9 !global;
+  $--n-alpha-action-panel-color: $--overlay-9 !global;
   @if ($in-js-env != true) {
     @include setup-light-divider;
     @include setup-light-scrollbar;
