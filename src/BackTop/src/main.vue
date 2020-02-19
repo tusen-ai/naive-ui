@@ -5,7 +5,7 @@
         v-if="show"
         :class="{
           [`n-${syntheticTheme}-theme`]: syntheticTheme,
-          'n-back-top--no-transition': transitionDisabled
+          'n-back-top--transition-disabled': transitionDisabled
         }"
         :style="{
           ...syntheticStyle,
@@ -82,9 +82,7 @@ export default {
       return this.bottom + 'px'
     },
     show () {
-      if (this.scrollTop === 0) {
-        return false
-      } else if (this.scrollTop >= this.visibilityHeight) {
+      if (this.scrollTop >= this.visibilityHeight) {
         return true
       } else {
         return false
@@ -99,11 +97,11 @@ export default {
   },
   mounted () {
     this.$refs.portal.transferElement()
-    this.transitionDisabled = !!this.show
+    this.transitionDisabled = this.show
   },
   beforeDestroy () {
     if (this.container) {
-      this.container.removeEventListener('scroll', this.handleScroll, true)
+      this.container.removeEventListener('scroll', this.handleScroll)
     }
   },
   methods: {
@@ -114,9 +112,7 @@ export default {
         this.container = getScrollParent(this.$el)
       }
       if (this.container) {
-        this.container.addEventListener('scroll', () => {
-          this.handleScroll()
-        }, true)
+        this.container.addEventListener('scroll', this.handleScroll)
         this.handleScroll()
       }
     },

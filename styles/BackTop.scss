@@ -32,7 +32,7 @@
         fill: $--back-top-button-fill-active;
       }
     }
-    @include m(no-transition) {
+    @include m(transition-disabled) {
       transition: none !important;
     }
   }
