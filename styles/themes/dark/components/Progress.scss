@@ -1,5 +1,5 @@
 @mixin setup-dark-progress {
-  $--progress-rail-color: $--n-alpha-action-panel-color !global;
+  $--progress-rail-color: $--n-divider-color !global;
   $--progress-fill-color: (
     'default': $--info-6,
     'info': $--info-6,

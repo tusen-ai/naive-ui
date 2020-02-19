@@ -1,7 +1,23 @@
 @mixin setup-dark-colors {
-  $--text-1: rgb(230, 230, 230) !global;
-  $--text-2: rgb(204, 204, 204) !global;
-  $--text-3: rgb(140, 140, 140) !global;
+  $--text-1: rgba(255, 255, 255, .9) !global;
+  $--text-2: rgba(255, 255, 255, .75) !global;
+  $--text-3: rgba(255, 255, 255, .45) !global;
+  $--text-4: rgba(255, 255, 255, .3) !global;
+  $--alpha-1: .9 !global;
+  $--alpha-2: .75 !global;
+  $--alpha-3: .45 !global;
+  $--alpha-4: .3 !global;
+
+  $--overlay-border: rgba(255, 255, 255, .14) !global;
+  $--overlay-divider: rgba(255, 255, 255, .12) !global;
+  $--overlay-input: rgba(255, 255, 255, .12) !global;
+  $--overlay-action: rgba(255, 255, 255, .05) !global;
+
+  $--neutral-popover: rgb(89, 93, 119) !global;
+  $--neutral-modal: rgb(70, 75, 99) !global;
+  $--neutral-card: rgb(30, 36, 55) !global;
+  $--neutral-body: rgb(18, 24, 42) !global;
+
   $--overlay-1: rgba(255, 255, 255, 0.3) !global; // popover
   $--overlay-2: rgba(255, 255, 255, 0.26) !global; //
   $--overlay-3: rgba(255, 255, 255, 0.22) !global; // dialog
@@ -12,6 +28,7 @@
   $--overlay-8: rgba(255, 255, 255, 0.09) !global; // table-header
   $--overlay-9: rgba(255, 255, 255, 0.05) !global; // card & table-body
   $--overlay-10: rgba(255, 255, 255, 0) !global; // background
+
   $--neutral-1: rgb(89, 93, 119) !global; // popover
   $--neutral-2: rgb(80, 84, 109) !global; //
   $--neutral-3: rgb(70, 75, 99) !global; // dialog

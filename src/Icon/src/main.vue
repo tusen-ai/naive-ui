@@ -15,7 +15,7 @@ export default {
       validator (value) {
         return ['primary', 'secondary', 'tertiary'].includes(value)
       },
-      default: 'secondary'
+      default: null
     },
     color: {
       type: String,

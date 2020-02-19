@@ -12,7 +12,7 @@
     'default': $--primary-6,
     'active': white
   ) !global;
-  $--date-picker-month-text-color: $--n-text-color !global;
+  $--date-picker-month-text-color: $--n-primary-text-color !global;
   $--date-picker-item-background-color: (
     'hover': change-color($--primary-6, $alpha: .15),
     'active': $--primary-6

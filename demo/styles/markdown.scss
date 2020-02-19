@@ -14,7 +14,6 @@
         border-spacing: 0;
         overflow: hidden;
         transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
-        // background-color: $--n-alpha-table-body-color;
         th {
           white-space: nowrap;
           color: $--text-1;

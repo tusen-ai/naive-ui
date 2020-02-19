@@ -1,6 +1,6 @@
 @mixin setup-light-statistic {
   $--statistic-value-label-text-color: $--n-secondary-text-color !global;
-  $--statistic-value-prefix-text-color: $--n-text-color !global;
-  $--statistic-value-suffix-text-color: $--n-text-color !global;
-  $--statistic-value-content-text-color: $--n-text-color !global;
+  $--statistic-value-prefix-text-color: $--n-primary-text-color !global;
+  $--statistic-value-suffix-text-color: $--n-primary-text-color !global;
+  $--statistic-value-content-text-color: $--n-primary-text-color !global;
 }

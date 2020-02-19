@@ -17,7 +17,7 @@ custom-icon
 |themed-style|`object`|`null`||
 |size|`number`|`null`||
 |color|`object`|`null`||
-|depth|`'primary' \| 'secondary' \| 'tertiary'`|`'secondary'`||
+|depth|`'primary' \| 'secondary' \| 'tertiary'`|`null`||
 
 
 ## Slots

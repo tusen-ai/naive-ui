@@ -40,7 +40,7 @@ $--header-bar-width: (
   @include b('h' + $level) {
     font-size: map-get($--header-font-size, $level);
     font-weight: 500;
-    color: $--n-text-color;
+    color: $--n-primary-text-color;
     &:first-child {
       margin-top: 0
     }
@@ -109,13 +109,13 @@ $--header-bar-width: (
   @include header-mixin('6');
   @include b(p) {
     @include m(primary-depth) {
-      color: $--n-text-color;
+      color: $--n-primary-text-color;
     }
     @include m(secondary-depth) {
       color: $--n-secondary-text-color;
     }
     @include m(tertiary-depth) {
-      color: $--n-meta-text-color;
+      color: $--n-tertiary-text-color;
     }
     &:first-child {
       margin-top: 0;
@@ -183,13 +183,13 @@ $--header-bar-width: (
       border: 1px solid $--n-alpha-border-color;
     }
     @include m(primary-depth) {
-      color: $--n-text-color;
+      color: $--n-primary-text-color;
     }
     @include m(secondary-depth) {
       color: $--n-secondary-text-color;
     }
     @include m(tertiary-depth) {
-      color: $--n-meta-text-color;
+      color: $--n-tertiary-text-color;
     }
     @include m(strong) {
       font-weight: 500;

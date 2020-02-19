@@ -14,11 +14,11 @@
     'error': mix($--error-6, rgb(255, 255, 255), 20%)
   ) !global;
   $--alert-title-text-color: (
-    'default': $--n-text-color,
-    'success': $--n-text-color,
-    'info': $--n-text-color,
-    'warning': $--n-text-color,
-    'error': $--n-text-color
+    'default': $--n-primary-text-color,
+    'success': $--n-primary-text-color,
+    'info': $--n-primary-text-color,
+    'warning': $--n-primary-text-color,
+    'error': $--n-primary-text-color
   ) !global;
   $--alert-icon-color: (
     'default': $--n-secondary-text-color,

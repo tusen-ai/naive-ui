@@ -1,7 +1,7 @@
 @mixin setup-dark-anchor {
   $--anchor-rail-background-color: #404555 !global;
   $--anchor-link-title-text-color: (
-    'default': $--n-text-color,
+    'default': $--n-primary-text-color,
     'hover': $--n-primary-color,
     'active': $--n-primary-color
   ) !global;

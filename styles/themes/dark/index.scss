@@ -60,16 +60,19 @@
 @mixin setup-dark-theme($in-js-env: false) {
   @include setup-dark-colors();
   $--n-primary-color: $--primary-6 !global;
-  $--n-primary-hover-color: $--primary-5 !global;
-  $--n-primary-active-color: $--primary-7 !global;
   $--n-info-color: $--info-6 !global;
   $--n-success-color: $--success-6 !global;
   $--n-warning-color: $--warning-6 !global;
   $--n-error-color: $--error-6 !global;
-  $--n-close-color: $--text-3 !global;
-  $--n-text-color: $--text-1 !global;
+
+  $--n-primary-text-color: $--text-1 !global;
   $--n-secondary-text-color: $--text-2 !global;
-  $--n-meta-text-color: $--text-3 !global;
+  $--n-tertiary-text-color: $--text-3 !global;
+  $--n-disabled-text-color: $--text-4 !global;
+
+  $--n-action-panel-color: $--overlay-action !global;
+  $--n-close-color: $--text-3 !global;
+
   $--n-popover-color: $--neutral-1 !global;
   $--n-divider-color: $--neutral-6 !global;
   $--n-alpha-divider-color: $--overlay-6 !global;
@@ -78,14 +81,10 @@
   $--n-table-header-color: $--neutral-8 !global;
   $--n-alpha-table-header-color: $--overlay-8 !global;
   $--n-table-body-color: $--neutral-9 !global;
-  $--n-alpha-table-body-color: $--overlay-9 !global;
   $--n-card-color: $--neutral-9 !global;
-  $--n-disabled-text-color: rgba(255, 255, 255, 0.3) !global;
   $--n-dialog-color: $--neutral-3 !global;
   $--n-background-color: $--neutral-10 !global;
   $--n-alpha-input-color: rgba(255, 255, 255, .12) !global;
-  $--n-action-panel-color: $--neutral-8 !global;
-  $--n-alpha-action-panel-color: $--overlay-9 !global;
   @if ($in-js-env != true) {
     @include setup-dark-divider;
     @include setup-dark-scrollbar;

@@ -1,5 +1,5 @@
 @mixin setup-light-menu {
-  $--menu-item-group-text-color: $--n-meta-text-color !global;
+  $--menu-item-group-text-color: $--n-tertiary-text-color !global;
   $--menu-item-text-color: $--n-secondary-text-color !global;
   $--menu-horizontal-border-color: $--primary-6 !global;
   $--menu-item-content-text-color: (
@@ -9,17 +9,17 @@
     'selected': $--primary-6,
   ) !global;
   $--menu-item-content-extra-text-color: (
-    'default': $--n-meta-text-color,
+    'default': $--n-tertiary-text-color,
     'hover': $--primary-6,
     'child-selected': $--primary-6,
     'selected': $--primary-6,
   ) !global;
   $--menu-item-content-icon-color: (
-    'default': $--n-text-color,
+    'default': $--n-primary-text-color,
     'hover': $--primary-6,
     'child-selected': $--primary-6,
     'selected': $--primary-6,
-    'collapsed': $--n-text-color,
+    'collapsed': $--n-primary-text-color,
   ) !global;
   $--menu-submenu-arrow-color: $--n-primary-color !global;
   $--menu-item-background-color: change-color($--primary-6, $alpha: .1) !global;

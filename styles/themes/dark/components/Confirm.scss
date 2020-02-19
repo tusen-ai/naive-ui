@@ -1,5 +1,5 @@
 @mixin setup-dark-confirm {
-  $--confirm-title-color: $--n-text-color !global;
+  $--confirm-title-color: $--n-primary-text-color !global;
   $--confirm-color: $--n-secondary-text-color !global;
   $--confirm-background-color: $--n-dialog-color !global;
   $--confirm-border-color: $--n-divider-color !global;
