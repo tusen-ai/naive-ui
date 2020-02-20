@@ -15,7 +15,12 @@
       width: styleWidth,
     }"
   >
-    <n-scrollbar v-if="!useNativeScrollbar" class="n-layout-sider__content">
+    <n-scrollbar
+      v-if="!useNativeScrollbar"
+      class="n-layout-sider__content"
+      :content-style="scrollContentStyle"
+      :container-style="scrollContainerStyle"
+    >
       <slot />
     </n-scrollbar>
     <div v-else class="n-layout-sider__content">
@@ -83,6 +88,14 @@ export default {
     duration: {
       type: Number,
       default: 300
+    },
+    scrollContentStyle: {
+      type: Object,
+      default: null
+    },
+    scrollContainerStyle: {
+      type: Object,
+      default: null
     }
   },
   data () {

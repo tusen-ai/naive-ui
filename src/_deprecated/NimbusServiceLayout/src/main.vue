@@ -92,13 +92,12 @@ export default {
       'show-toggle-button': true,
       'show-trigger': true,
       'collapsed': this.collapsed,
-      'collapse-mode': 'transform',
+      'collapse-mode': 'width',
       'bordered': true,
-      'mode': 'absolute',
       'show-content': !this.collapsed,
       'use-native-scrollbar': false,
-      'scroll-content-style': {
-        width: '100%'
+      'scroll-container-style': {
+        width: '272px'
       }
     }
     const createMenu = items => {
@@ -162,6 +161,10 @@ export default {
         }
       }, [
         h('NLayoutSider', {
+          style: {
+            'display': 'flex',
+            'justify-content': 'flex-end'
+          },
           props: siderProps,
           on: {
             collapse: () => {
@@ -230,7 +233,6 @@ export default {
         h('NLayout', {
           ref: 'body',
           props: {
-            'mode': 'absolute',
             'use-native-scrollbar': false,
             'scroll-content-style': {
               width: '100%',

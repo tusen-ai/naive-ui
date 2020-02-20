@@ -180,7 +180,7 @@ $--header-bar-width: (
       border-radius: 3px;
       font-size: .9em;
       background-color: $--typography-code-background-color;
-      border: 1px solid $--n-border-color;
+      border: 1px solid $--typography-code-border-color;
     }
     @include m(primary-depth) {
       color: $--n-primary-text-color;

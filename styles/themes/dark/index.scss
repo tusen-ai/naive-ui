@@ -60,7 +60,7 @@
 
 @mixin setup-dark-theme($in-js-env: false) {
   @include setup-dark-colors();
-  $--n-default-color: $--primary-default !global;
+  $--n-base-background-color: $--neutral-base !global;
 
   $--n-primary-color: $--primary-default !global;
   $--n-primary-hover-color: $--primary-hover !global;

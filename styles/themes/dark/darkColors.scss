@@ -14,8 +14,8 @@
 
   $--overlay-avatar: rgba(255, 255, 255, .16) !global;
   $--overlay-rail: rgba(255, 255, 255, .18) !global;
-  $--overlay-border: rgba(255, 255, 255, .14) !global;
-  $--overlay-divider: rgba(255, 255, 255, .12) !global;
+  $--overlay-border: rgba(255, 255, 255, .13) !global;
+  $--overlay-divider: rgba(255, 255, 255, .10) !global;
   $--overlay-input: rgba(255, 255, 255, .1) !global;
   $--overlay-action: rgba(255, 255, 255, .05) !global;
   $--overlay-tab: rgba(255, 255, 255, .08) !global;
@@ -23,6 +23,7 @@
   $--overlay-scrollbar-hover: rgba(255, 255, 255, .3) !global;
   $--overlay-disabled: rgba(255, 255, 255, alpha($--overlay-input) * $--alpha-disabled) !global;
 
+  $--neutral-base: black !global;
   $--neutral-popover: rgb(89, 93, 119) !global;
   $--neutral-modal: rgb(70, 75, 99) !global;
   $--neutral-card: rgb(30, 36, 55) !global;

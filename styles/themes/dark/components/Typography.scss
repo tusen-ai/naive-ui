@@ -1,3 +1,4 @@
 @mixin setup-dark-typography {
   $--typography-code-background-color:  $--n-code-background-color !global;
+  $--typography-code-border-color: transparent !global;
 }

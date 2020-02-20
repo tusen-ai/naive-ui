@@ -60,7 +60,7 @@
 
 @mixin setup-light-theme($in-js-env: false) {
   @include setup-light-colors();
-  $--n-default-color: black !global;
+  $--n-base-background-color: $--neutral-base !global;
 
   $--n-primary-color: $--primary-default !global;
   $--n-primary-hover-color: $--primary-hover !global;
