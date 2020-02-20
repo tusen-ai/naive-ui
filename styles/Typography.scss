@@ -12,10 +12,10 @@ $--header-font-size: (
 $--header-margin: (
   '1': 24px 0 18px 0,
   '2': 24px 0 18px 0,
-  '3': 18px 0 12px 0,
-  '4': 18px 0 12px 0,
-  '5': 18px 0 12px 0,
-  '6': 18px 0 12px 0
+  '3': 20px 0 16px 0,
+  '4': 20px 0 16px 0,
+  '5': 18px 0 14px 0,
+  '6': 18px 0 14px 0
 );
 
 $--header-prefix-width: (
@@ -108,6 +108,14 @@ $--header-bar-width: (
   @include header-mixin('5');
   @include header-mixin('6');
   @include b(p) {
+    &:first-child {
+      margin-top: 0;
+    }
+    transition: color .3s $--n-ease-in-out-cubic-bezier;
+    margin: 12px 0 16px 0;
+    font-size: 14px;
+    line-height: 1.75;
+    color: $--n-secondary-text-color;
     @include m(primary-depth) {
       color: $--n-primary-text-color;
     }
@@ -117,14 +125,6 @@ $--header-bar-width: (
     @include m(tertiary-depth) {
       color: $--n-tertiary-text-color;
     }
-    &:first-child {
-      margin-top: 0;
-    }
-    transition: color .3s $--n-ease-in-out-cubic-bezier;
-    margin: 12px 0 16px 0;
-    font-size: 14px;
-    line-height: 1.75;
-    color: $--n-secondary-text-color;
   }
   @include b(ul) {
     margin: 12px 0;
@@ -134,7 +134,7 @@ $--header-bar-width: (
     &:last-child {
       margin-bottom: 0;
     }
-    padding-left: 1.625em;
+    padding-left: 1.75em;
     @include m(align-text) {
       padding-left: 0;
     }
@@ -147,14 +147,14 @@ $--header-bar-width: (
     &:last-child {
       margin-bottom: 0;
     }
-    padding-left: 1.625em;
+    padding-left: 1.75em;
     @include m(align-text) {
       padding-left: 0;
     }
   }
   @include b(li) {
     transition: color .3s $--n-ease-in-out-cubic-bezier;
-    line-height: 1.625em;
+    line-height: 1.75em;
     margin-bottom: 0px;
     font-size: 14px;
     color: $--n-secondary-text-color;
@@ -182,14 +182,27 @@ $--header-bar-width: (
       background-color: $--typography-code-background-color;
       border: 1px solid $--typography-code-border-color;
     }
-    @include m(primary-depth) {
-      color: $--n-primary-text-color;
+    @include m(default-type) {
+      @include m(primary-depth) {
+        color: $--n-primary-text-color;
+      }
+      @include m(secondary-depth) {
+        color: $--n-secondary-text-color;
+      }
+      @include m(tertiary-depth) {
+        color: $--n-tertiary-text-color;
+      }
     }
-    @include m(secondary-depth) {
-      color: $--n-secondary-text-color;
-    }
-    @include m(tertiary-depth) {
-      color: $--n-tertiary-text-color;
+    @include not-m(default-type) {
+      @include m(primary-depth) {
+        opacity: $--n-primary-opacity;
+      }
+      @include m(secondary-depth) {
+        opacity: $--n-secondary-opacity;
+      }
+      @include m(tertiary-depth) {
+        opacity: $--n-tertiary-opacity;
+      }
     }
     @include m(strong) {
       font-weight: 500;
@@ -231,7 +244,7 @@ $--header-bar-width: (
     &:last-child {
       margin-bottom: 0;
     }
-    line-height: 1.625;
+    line-height: 1.75;
     margin: 0;
     margin-top: 12px;
     margin-bottom: 12px;

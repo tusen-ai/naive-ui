@@ -4,27 +4,27 @@
 
 /* stylelint-disable */
 :export {
-  primaryColor: $--n-primary-hover-color;
-  primaryHoverColor: $--n-primary-color;
+  primaryColor: $--n-primary-color;
+  primaryHoverColor: $--n-primary-hover-color;
   primaryActiveColor: $--n-primary-active-color;
-  infoColor: $--n-info-hover-color;
-  infoHoverColor: $--n-info-color;
+  infoColor: $--n-info-color;
+  infoHoverColor: $--n-info-hover-color;
   infoActiveColor: $--n-info-active-color;
-  successColor: $--n-success-hover-color;
-  successHoverColor: $--n-success-color;
+  successColor: $--n-success-color;
+  successHoverColor: $--n-success-hover-color;
   successActiveColor: $--n-success-active-color;
-  errorColor: $--n-error-hover-color;
-  errorHoverColor: $--n-error-color;
+  errorColor: $--n-error-color;
+  errorHoverColor: $--n-error-hover-color;
   errorActiveColor: $--n-error-active-color;
-  warningColor: $--n-warning-hover-color;
-  warningHoverColor: $--n-warning-color;
+  warningColor: $--n-warning-color;
+  warningHoverColor: $--n-warning-hover-color;
   warningActiveColor: $--n-warning-active-color;
   primaryTextColor: $--overlay-text-1;
   secondaryTextColor: $--overlay-text-2;
   tertiaryTextColor: $--overlay-text-3;
   disabledTextColor: $--overlay-text-4;
   popoverBackgroundColor: $--neutral-popover;
-  dialogBackgroundColor: $--neutral-modal;
+  modalBackgroundColor: $--neutral-modal;
   cardBackgroundColor: $--neutral-card;
   bodyBackgroundColor: $--neutral-body;
   closeColor: $--overlay-text-3;

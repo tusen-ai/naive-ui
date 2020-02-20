@@ -9,27 +9,23 @@
     display: inline-block;
     position: relative;
     transition: $--icon-transition;
+    fill: $--n-base-text-color;
+    stroke:  $--n-base-text-color;
     svg {
       height: 1em;
       width: 1em;
     }
     @include m(primary-depth) {
-      fill: $--n-base-text-color;
-      stroke:  $--n-base-text-color;
       svg {
         opacity: $--n-primary-opacity;
       }
     }
     @include m(secondary-depth) {
-      fill: $--n-base-text-color;
-      stroke:$--n-base-text-color;
       svg {
         opacity: $--n-secondary-opacity;
       }
     }
     @include m(tertiary-depth) {
-      fill: $--n-base-text-color;
-      stroke: $--n-base-text-color;
       svg {
         opacity: $--n-tertiary-opacity;
       }

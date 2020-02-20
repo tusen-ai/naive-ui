@@ -11,9 +11,6 @@
       @include m(transition-disabled) {
         @include b(pagination-item) {
           transition: none;
-          path {
-            transition: none;
-          }
         }
       }
     }
@@ -45,17 +42,19 @@
         padding-right: 4px;
         box-sizing: border-box;
         opacity: 1;
-        transition: color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier;
+        transition:
+          color .3s $--n-ease-in-out-cubic-bezier,
+          box-shadow .3s $--n-ease-in-out-cubic-bezier,
+          background-color .3s $--n-ease-in-out-cubic-bezier,
+          opacity .3s $--n-ease-in-out-cubic-bezier,
+          fill .3s $--n-ease-in-out-cubic-bezier;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius:6px;
         line-height: 28px;
-        path {
-          transition: fill .3s $--n-ease-in-out-cubic-bezier;
-        }
         &:not(:last-child) {
-          margin-right: 10px;
+          margin-right: 8px;
         }
         @include e(more-icon, arrow-icon) {
           position: relative;
@@ -69,27 +68,7 @@
             bottom: 0;
           }
         }
-      }
-      color: map-get($--pagination-item-text-color, 'default');
-      @include e(more-icon, arrow-icon) {
-        path {
-          fill: map-get($--pagination-item-text-color, 'default');
-        }
-      }
-      
-      @include m(active) {
-        background: map-get($--pagination-item-background-color, 'active');
-        color: map-get($--pagination-item-text-color, 'active');
-        box-shadow: inset 0 0 0 1px map-get($--pagination-item-border-color, 'active');
-      }
-      @include m(backward, forward) {
-        box-shadow: inset 0 0 0 1px  map-get($--pagination-item-border-color, 'default');
-        path {
-          fill: map-get($--pagination-item-text-color, 'default');
-        }
-      }
-      @include m(fast-backward, fast-forward) {
-        @include once {
+        @include m(fast-backward, fast-forward) {
           @include e(more-icon) {
             display: block;
           }
@@ -97,37 +76,41 @@
             display: none;
           }
         }
-        path {
-          fill: map-get($--pagination-item-text-color, 'default');
-        }
       }
-      @include m(disabled) {
-        @include once {
-          cursor: not-allowed;
-        }
-        opacity: $--pagination-disabled-opacity;
+      color: map-get($--pagination-item-text-color, 'default');
+      fill: map-get($--pagination-item-text-color, 'default');
+      @include m(active) {
+        background: map-get($--pagination-item-background-color, 'active');
+        color: map-get($--pagination-item-text-color, 'active');
+        box-shadow: inset 0 0 0 1px map-get($--pagination-item-border-color, 'active');
+      }
+      @include m(backward, forward) {
+        box-shadow: inset 0 0 0 1px  map-get($--pagination-item-border-color, 'default');
       }
       @include not-m(disabled) {
         &:hover {
           color: map-get($--pagination-item-text-color, 'hover');
-          @include m(fast-backward, fast-forward) {
-            @include once {
+          @include once {
+            @include m(fast-backward, fast-forward) {
               @include e(more-icon) {
                 display: none;
               }
-            }
-            @include e(arrow-icon) {
-              @include once {
+              @include e(arrow-icon) {
                 display: block;
               }
-              path {
-                fill: map-get($--pagination-item-text-color, 'default');
-              }
-            }
-            path {
-              fill: map-get($--pagination-item-text-color, 'default');
             }
           }
+        }
+      }
+      @include m(disabled) {
+        fill: map-get($--pagination-item-text-color, 'disabled');
+        color: map-get($--pagination-item-text-color, 'disabled');
+        @include m(active, backward, forward) {
+          background-color: map-get($--pagination-item-background-color, 'disabled');
+          box-shadow: inset 0 0 0 1px map-get($--pagination-item-border-color, 'disabled');
+        }
+        @include once {
+          cursor: not-allowed;
         }
       }
     }

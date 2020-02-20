@@ -342,7 +342,7 @@ export default function (locale, instance) {
           },
           {
             name: 'Time',
-            title: '事件',
+            title: '时间',
             titleExtra: 'Time',
             path: `/${instance.lang}/${instance.theme}` + '/n-time'
           },

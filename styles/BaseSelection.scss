@@ -119,7 +119,7 @@
           background-color: transparent;
           height: 100%;
         }
-        color: $--base-selection-color;
+        color: map-get($--base-selection-text-color, 'default');
         &::placeholder {
           transition: color .3s $--n-ease-in-out-cubic-bezier;
           color: map-get($--base-selection-placeholder-color, 'default');
@@ -207,7 +207,7 @@
         box-shadow: map-get($--base-selection-box-shadow, 'disabled');
         @include e(input) {
           cursor: not-allowed;
-          color: map-get($--base-selection-placeholder-color, 'disabled');
+          color: map-get($--base-selection-text-color, 'disabled');
           @include m(placeholder) {
             color: map-get($--base-selection-placeholder-color, 'disabled');
           }
@@ -249,7 +249,7 @@
           cursor: pointer;
         }
         caret-color: map-get($--base-selection-caret-color, 'default');
-        color: $--base-selection-color;
+        color: map-get($--base-selection-text-color, 'default');
       }
       @include once {
         @include e(mirror) {

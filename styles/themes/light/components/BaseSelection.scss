@@ -1,5 +1,8 @@
 @mixin setup-light-base-selection {
-  $--base-selection-color: $--n-secondary-text-color !global;
+  $--base-selection-text-color: (
+    'default': $--n-secondary-text-color,
+    'disabled': $--n-disabled-text-color
+  ) !global;
   $--base-selection-background-color: (
     'default': white,
     'disabled': $--n-disabled-background-color,

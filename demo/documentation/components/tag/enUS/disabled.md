@@ -3,7 +3,7 @@
 <n-tag
   closable
   @close="handleClose"
-  disabled
+  :disabled="disabled"
 >
   Real Love
 </n-tag>
@@ -18,7 +18,7 @@
 <n-tag
   type="warning"
   closable
-  disabled
+  :disabled="disabled"
   @close="handleClose"
 >
   I'm Down
@@ -26,7 +26,7 @@
 <n-tag
   type="error"
   closable
-  disabled
+  :disabled="disabled"
   @close="handleClose"
 >
   Yesterday
@@ -34,17 +34,23 @@
 <n-tag
   type="info"
   closable
-  disabled
+  :disabled="disabled"
   @close="handleClose"
 >
   I'm Looking Through You
 </n-tag>
+<n-switch v-model="disabled"/>
 ```
 ```js
 export default {
   methods: {
     handleClose () {
       this.$NMessage.info('tag close')
+    }
+  },
+  data () {
+    return {
+      disabled: true
     }
   }
 }
