@@ -25,7 +25,13 @@ module.exports = {
     resolve({
       extensions: ['.js', '.json', '.vue']
     }),
-    vue(),
+    vue({
+      template: {
+        compilerOptions: {
+          preserveWhitespace: false
+        }
+      }
+    }),
     naiveSCSSVariable(),
     strip(),
     terser({
