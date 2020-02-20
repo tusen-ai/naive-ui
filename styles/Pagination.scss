@@ -6,7 +6,7 @@
       display: flex;
       vertical-align: middle;
       @include b(select) {
-        width: 120px;
+        width: unset;
       }
       @include m(transition-disabled) {
         @include b(pagination-item) {

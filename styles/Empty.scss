@@ -15,8 +15,8 @@
         font-size: 28px;
       }
       @include b(icon) {
-        fill: $--empty-icon-fill;
-        stroke: $--empty-icon-fill;
+        fill: $--empty-icon-color;
+        stroke: $--empty-icon-color;
       }
     }
     @include e(description) {

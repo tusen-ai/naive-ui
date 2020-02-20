@@ -43,29 +43,29 @@
       }
       @include b(confirm-title-icon) {
         @include m(warning-type) {
-          path {
-            fill: $--warning-6;
-          }
+          fill: map-get($--confirm-icon-color, 'warning');
+          stroke: map-get($--confirm-icon-color, 'warning');
         }
         @include m(success-type) {
-          path {
-            fill: $--success-6;
-          }
+          fill: map-get($--confirm-icon-color, 'success');
+          stroke: map-get($--confirm-icon-color, 'success');
         }
         @include m(error-type) {
-          path {
-            fill: $--error-6;
-          }
+          fill: map-get($--confirm-icon-color, 'error');
+          stroke: map-get($--confirm-icon-color, 'error');
+        }
+        @include m(info-type) {
+          fill: map-get($--confirm-icon-color, 'info');
+          stroke: map-get($--confirm-icon-color, 'info');
         }
       }
-      @include e(close-mark) {
-        path {
-          fill: $--confirm-close-fill;
-        }
+      @include e(close) {
+        fill: $--confirm-close-color;
+        stroke: $--confirm-close-color;
       }
-      color: $--confirm-title-color;
+      color: $--confirm-title-text-color;
     }
     background: $--confirm-background-color;
-    color: $--confirm-color;
+    color: $--confirm-text-color;
   }
 }

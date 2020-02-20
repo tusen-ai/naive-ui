@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "0.7.12",
+  "version": "0.7.14",
   "description": "",
   "main": "lib/index.js",
   "module": "es/index.js",

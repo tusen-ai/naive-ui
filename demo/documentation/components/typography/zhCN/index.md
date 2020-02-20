@@ -21,6 +21,12 @@ text
 |underline|`boolean`|`false`||
 |delete|`boolean`|`false`||
 |code|`boolean`|`false`||
+|depth|`'primary' \| 'secondary' \| 'tertiary'`|`'secondary'`||
+
+### P Props
+|名称|类型|默认值|说明|
+|-|-|-|-|
+|depth|`'primary' \| 'secondary' \| 'tertiary'`|`'secondary'`||
 
 ### H1, H2, H3, H4, H5, H6 Props
 |名称|类型|默认值|说明|

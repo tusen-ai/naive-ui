@@ -8,17 +8,17 @@
   ) !global;
   $--message-icon-color: rgba(255, 255, 255, .5) !global;
   $--message-background-color: (
-    "info": $--info-hs,
-    "success": $--success-hs,
-    "error": $--error-hs,
-    "warning": $--warning-hs,
-    "loading": $--n-popover-color
+    "info": $--n-info-hs-color,
+    "success": $--n-success-hs-color,
+    "error": $--n-error-hs-color,
+    "warning": $--n-warning-hs-color,
+    "loading": $--n-popover-background-color
   ) !global;
   $--message-box-shadow: (
-    "info": 0 2px 15px 0 rgba(56, 137, 197, .5),
-    "success": 0 2px 15px 0 rgba(42, 148, 125, .5),
-    "error": 0 2px 15px 0 rgba(208, 58, 82, .5),
-    "warning": 0 2px 15px 0 rgba(240, 138, 0, .5),
-    "loading": 0 2px 15px 0 rgba(0, 0, 0, .3),
+    "info": 0 2px 16px 0 change-color($--n-info-hs-color, $alpha: .5),
+    "success": 0 2px 16px 0 change-color($--n-success-hs-color, $alpha: .5),
+    "error": 0 2px 16px 0 change-color($--n-error-hs-color, $alpha: .5),
+    "warning": 0 2px 16px 0 change-color($--n-warning-hs-color, $alpha: .5),
+    "loading": $--n-popover-box-shadow
   ) !global;
 }

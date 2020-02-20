@@ -40,7 +40,7 @@ $--header-bar-width: (
   @include b('h' + $level) {
     font-size: map-get($--header-font-size, $level);
     font-weight: 500;
-    color: $--n-text-color;
+    color: $--n-primary-text-color;
     &:first-child {
       margin-top: 0
     }
@@ -68,32 +68,32 @@ $--header-bar-width: (
       }
       @include m(default-type) {
         &::before {
-          background-color: $--primary-6;
+          background-color: $--n-primary-color;
         }
       }
       @include m(primary-type) {
         &::before {
-          background-color: $--primary-6;
+          background-color: $--n-primary-color;
         }
       }
       @include m(info-type) {
         &::before {
-          background-color: $--info-6;
+          background-color: $--n-info-color;
         }
       }
       @include m(success-type) {
         &::before {
-          background-color: $--success-6;
+          background-color: $--n-success-color;
         }
       }
       @include m(warning-type) {
         &::before {
-          background-color: $--warning-6;
+          background-color: $--n-warning-color;
         }
       }
       @include m(error-type) {
         &::before {
-          background-color: $--error-6;
+          background-color: $--n-error-color;
         }
       }
     }
@@ -108,14 +108,14 @@ $--header-bar-width: (
   @include header-mixin('5');
   @include header-mixin('6');
   @include b(p) {
-    @include m(primary) {
-      color: $--n-text-color;
+    @include m(primary-depth) {
+      color: $--n-primary-text-color;
     }
-    @include m(secondary) {
+    @include m(secondary-depth) {
       color: $--n-secondary-text-color;
     }
-    @include m(tertiary) {
-      color: $--n-meta-text-color;
+    @include m(tertiary-depth) {
+      color: $--n-tertiary-text-color;
     }
     &:first-child {
       margin-top: 0;
@@ -180,16 +180,16 @@ $--header-bar-width: (
       border-radius: 3px;
       font-size: .9em;
       background-color: $--typography-code-background-color;
-      border: 1px solid $--n-alpha-border-color;
+      border: 1px solid $--typography-code-border-color;
     }
-    @include m(primary) {
-      color: $--n-text-color;
+    @include m(primary-depth) {
+      color: $--n-primary-text-color;
     }
-    @include m(secondary) {
+    @include m(secondary-depth) {
       color: $--n-secondary-text-color;
     }
-    @include m(tertiary) {
-      color: $--n-meta-text-color;
+    @include m(tertiary-depth) {
+      color: $--n-tertiary-text-color;
     }
     @include m(strong) {
       font-weight: 500;
@@ -201,19 +201,19 @@ $--header-bar-width: (
       text-decoration: underline;
     }
     @include m(primary-type) {
-      color: $--primary-6;
+      color: $--n-primary-color;
     }
     @include m(info-type) {
-      color: $--info-6;
+      color: $--n-info-color;
     }
     @include m(success-type) {
-      color: $--success-6;
+      color: $--n-success-color;
     }
     @include m(warning-type) {
-      color: $--warning-6;
+      color: $--n-warning-color;
     }
     @include m(error-type) {
-      color: $--error-6;
+      color: $--n-error-color;
     }
   }
   @include b(hr) {

@@ -102,13 +102,13 @@ function convertMd2ComponentDocumentation (text) {
   }
   headerPart.links = {}
   footerPart.links = {}
-  const documentationHTML = `<section class="markdown header-part">${marked.parser(headerPart, {
+  const documentationHTML = `${marked.parser(headerPart, {
     gfm: true,
     renderer: mdRenderer
-  })}</section>\n` + '<!--demos-->\n' + `<section class="markdown footer-part">${marked.parser(footerPart, {
+  })}\n` + '<!--demos-->\n' + `${marked.parser(footerPart, {
     gfm: true,
     renderer: mdRenderer
-  })}</section>\n`
+  })}\n`
   // console.log(documentationHTML)
   // const classedDocumentationHTML = addClassToHTML(documentationHTML, 'markdown')
   const demosReg = /<!--demos-->/

@@ -9,12 +9,12 @@
     "active": change-color($--n-primary-color, $alpha: .2) 
   ) !global;
   $--pagination-item-border-color: (
-    "default": rgba(255, 255, 255, .3),
+    "default": $--n-border-color,
     "active": $--n-primary-color
   ) !global;
   $--pagination-text-color: (
     "default": $--n-secondary-text-color,
     "disabled": $--n-disabled-text-color
   ) !global;
-  $--pagination-disabled-opacity: .4 !global;
+  $--pagination-disabled-opacity: $--n-disabled-opacity !global;
 }

@@ -8,7 +8,7 @@
 @import 'components/BaseSuffix.scss';
 @import 'components/Tag.scss';
 @import 'components/Table.scss';
-@import 'components/AdvanceTable.scss';
+@import 'components/DataTable.scss';
 @import 'components/Popover.scss';
 @import 'components/Tooltip.scss';
 @import 'components/Confirm.scss';
@@ -56,35 +56,77 @@
 @import 'components/Tree.scss';
 @import 'components/Typography.scss';
 @import 'components/Upload.scss';
+@import 'components/BaseMenuMask.scss';
 
 @mixin setup-light-theme($in-js-env: false) {
   @include setup-light-colors();
-  $--n-primary-color: $--primary-6 !global;
-  $--n-primary-hover-color: $--primary-5 !global;
-  $--n-primary-active-color: $--primary-7 !global;
-  $--n-info-color: $--info-6 !global;
-  $--n-success-color: $--success-6 !global;
-  $--n-warning-color: $--warning-6 !global;
-  $--n-error-color: $--error-6 !global;
-  $--n-text-color: $--text-1 !global;
-  $--n-secondary-text-color: $--text-2 !global;
-  $--n-meta-text-color: $--text-3 !global;
-  $--n-close-color: $--text-3 !global;
-  $--n-selected-color: $--neutral-7 !global;
-  $--n-divider-color: $--neutral-7 !global;
-  $--n-alpha-divider-color: $--overlay-7 !global;
-  $--n-border-color: $--neutral-6 !global;
-  $--n-alpha-border-color: $--overlay-6 !global;
-  $--n-popover-color: $--neutral-10 !global;
-  $--n-table-header-color: $--neutral-9 !global;
-  $--n-disabled-text-color: $--neutral-5 !global;
-  $--n-card-color: $--neutral-10 !global;
-  $--n-dialog-color: $--neutral-10 !global;
-  $--n-table-body-color: $--neutral-10 !global;
-  $--n-background-color: $--neutral-9 !global;
-  $--n-alpha-input-color: rgba(0, 0, 0, .04) !global;
-  $--n-action-panel-color: $--neutral-9 !global;
-  $--n-alpha-action-panel-color: $--overlay-9 !global;
+  $--n-base-background-color: $--neutral-base !global;
+
+  $--n-primary-color: $--primary-default !global;
+  $--n-primary-hover-color: $--primary-hover !global;
+  $--n-primary-active-color: $--primary-active !global;
+  $--n-primary-hs-color: $--primary-default !global;
+
+  $--n-info-color: $--info-default !global;
+  $--n-info-hover-color: $--info-hover !global;
+  $--n-info-active-color: $--info-active !global;
+  $--n-info-hs-color: $--info-default !global;
+
+  $--n-success-color: $--success-default !global;
+  $--n-success-hover-color: $--success-hover !global;
+  $--n-success-active-color: $--success-active !global;
+  $--n-success-hs-color: $--success-default !global;
+
+  $--n-error-color: $--error-default !global;
+  $--n-error-hover-color: $--error-hover !global;
+  $--n-error-active-color: $--error-active !global;
+  $--n-error-hs-color: $--error-default !global;
+
+  $--n-warning-color: $--warning-default !global;
+  $--n-warning-hover-color: $--warning-hover !global;
+  $--n-warning-active-color: $--warning-active !global;
+  $--n-warning-hs-color: $--warning-default !global;
+
+  $--n-primary-text-color: $--overlay-text-1 !global;
+  $--n-secondary-text-color: $--overlay-text-2 !global;
+  $--n-tertiary-text-color: $--overlay-text-3 !global;
+  $--n-disabled-text-color: $--overlay-text-4 !global;
+  $--n-placeholder-text-color: $--overlay-text-4 !global;
+  $--n-base-text-color: $--base-text !global;
+  $--n-primary-opacity: $--alpha-1 !global;
+  $--n-secondary-opacity: $--alpha-2 !global;
+  $--n-tertiary-opacity: $--alpha-3 !global;
+  
+  $--n-icon-color: $--overlay-text-4 !global;
+
+  $--n-action-background-color: $--overlay-action !global;
+  $--n-table-header-background-color: $--overlay-action !global;
+
+  $--n-rail-color: $--overlay-rail !global;
+  $--n-divider-color: $--neutral-divider !global;
+  $--n-border-color: $--neutral-border !global;
+
+  $--n-scrollbar-background-color: $--overlay-scrollbar !global;
+  $--n-scrollbar-hover-background-color: $--overlay-scrollbar-hover !global;
+  
+  $--n-close-hover-color: $--overlay-text-2 !global;
+  $--n-close-color: $--overlay-text-3 !global;
+  $--n-disabled-close-color: $--overlay-text-4 !global;
+
+  $--n-popover-background-color: $--neutral-popover !global;
+  $--n-table-body-background-color: $--neutral-card !global;
+  $--n-card-background-color: $--neutral-card !global;
+  $--n-modal-background-color: $--neutral-modal !global;
+  $--n-body-background-color: $--neutral-body !global;
+  $--n-input-background-color: $--neutral-card !global;
+  $--n-code-background-color: $--neutral-input !global;
+  $--n-tab-background-color: $--overlay-tab !global;
+
+  $--n-disabled-opacity: $--alpha-disabled !global;
+  $--n-disabled-background-color: $--neutral-disabled !global;
+
+  $--n-popover-box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.18) !global;
+
   @if ($in-js-env != true) {
     @include setup-light-divider;
     @include setup-light-scrollbar;
@@ -143,5 +185,6 @@
     @include setup-light-tree;
     @include setup-light-typography;
     @include setup-light-upload;
+    @include setup-light-base-menu-mask;
   }
 }

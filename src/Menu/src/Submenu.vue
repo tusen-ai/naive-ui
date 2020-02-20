@@ -9,7 +9,7 @@
         :show-arrow="false"
         :controller="popoverController"
         :disabled="(!rootMenuIsHorizontal && !rootMenuCollapsed) || syntheticDisabled"
-        :directive="rootMenuIsHorizontal ? 'show' : 'if'"
+        :display-directive="rootMenuIsHorizontal ? 'show' : 'if'"
         :overlay-style="{
           width: overlayWidth === null ? null : overlayMinWidth + 'px',
           minWidth: overlayMinWidth + 'px',

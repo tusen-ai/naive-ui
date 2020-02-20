@@ -32,7 +32,7 @@
           :is-minute-disabled="isStartMinuteDisabled"
           :is-second-disabled="isStartSecondDisabled"
           stop-selector-bubble
-          @input="handleStartTimePickerInput"
+          @change="handleStartTimePickerChange"
         />
         <div class="n-date-panel-input-wrapper__arrow">
           <n-base-icon
@@ -58,7 +58,7 @@
           :is-minute-disabled="isEndMinuteDisabled"
           :is-second-disabled="isEndSecondDisabled"
           stop-selector-bubble
-          @input="handleEndTimePickerInput"
+          @change="handleEndTimePickerChange"
         />
       </div>
       <div
@@ -428,10 +428,10 @@ export default {
       this.startDateDisplayString = format(times[0], this.dateFormat)
       this.endDateDisplayString = format(times[1], this.dateFormat)
     },
-    handleStartTimePickerInput (value) {
+    handleStartTimePickerChange (value) {
       this.changeStartDateTime(value)
     },
-    handleEndTimePickerInput (value) {
+    handleEndTimePickerChange (value) {
       this.changeEndDateTime(value)
     }
   }

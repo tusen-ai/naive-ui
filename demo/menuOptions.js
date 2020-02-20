@@ -329,6 +329,12 @@ export default function (locale, instance) {
             path: `/${instance.lang}/${instance.theme}` + '/n-statistic'
           },
           {
+            name: 'Table',
+            title: '表格',
+            titleExtra: 'Table',
+            path: `/${instance.lang}/${instance.theme}` + '/n-table'
+          },
+          {
             name: 'Thing',
             title: '东西',
             titleExtra: 'Thing',
@@ -761,6 +767,10 @@ export default function (locale, instance) {
           {
             name: 'Statistic',
             path: `/${instance.lang}/${instance.theme}` + '/n-statistic'
+          },
+          {
+            name: 'Table',
+            path: `/${instance.lang}/${instance.theme}` + '/n-table'
           },
           {
             name: 'Thing',

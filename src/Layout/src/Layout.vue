@@ -11,7 +11,12 @@
       transition: transitionBlocked ? 'none' : null
     }"
   >
-    <n-scrollbar v-if="!useNativeScrollbar" ref="scrollbar" :content-style="scrollContentStyle" :container-style="scrollContainerStyle">
+    <n-scrollbar
+      v-if="!useNativeScrollbar"
+      ref="scrollbar"
+      :content-style="scrollContentStyle"
+      :container-style="scrollContainerStyle"
+    >
       <slot />
     </n-scrollbar>
     <slot v-else />

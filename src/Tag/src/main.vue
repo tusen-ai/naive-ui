@@ -17,7 +17,7 @@
     <slot />
     <div
       v-if="!checkable && closable"
-      class="n-tag__close-mark"
+      class="n-tag__close"
       @click="handleCloseClick"
     >
       <md-close />

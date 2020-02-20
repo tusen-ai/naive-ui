@@ -6,7 +6,14 @@
     'hover': inset 0 0 0 1px $--n-primary-color,
     'disabled': inset 0 0 0 1px $--n-border-color
   ) !global;
-  $--radio-label-text-color: $--n-secondary-text-color !global;
+  $--radio-background-color: (
+    'default': white,
+    'disabled': $--n-disabled-background-color
+  ) !global;
+  $--radio-label-text-color: (
+    'default': $--n-secondary-text-color,
+    'disabled': $--n-disabled-text-color
+  ) !global;
   $--radio-control-background-color: (
     'active': $--n-primary-color,
     'disabled': $--n-border-color
@@ -25,7 +32,7 @@
     'active': $--n-primary-color,
     'hover': $--n-primary-color
   ) !global;
-  $--radio-disabled-opacity: .4 !global;
+  $--radio-disabled-opacity: $--n-disabled-opacity !global;
   $--radio-border-mask-width: 0px !global;
   $--radio-button-box-shadow: (
     'focus': (inset 0 0 0 1px $--n-primary-color, 0 0 0 2px change-color($--n-primary-color, $alpha: .3)),

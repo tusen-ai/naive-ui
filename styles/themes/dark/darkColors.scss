@@ -1,80 +1,60 @@
 @mixin setup-dark-colors {
-  $--text-1: rgb(230, 230, 230) !global;
-  $--text-2: rgb(204, 204, 204) !global;
-  $--text-3: rgb(140, 140, 140) !global;
-  $--overlay-1: rgba(255, 255, 255, 0.3) !global; // popover
-  $--overlay-2: rgba(255, 255, 255, 0.26) !global; //
-  $--overlay-3: rgba(255, 255, 255, 0.22) !global; // dialog
-  $--overlay-4: rgba(255, 255, 255, 0.2) !global; //
-  $--overlay-5: rgba(255, 255, 255, 0.16) !global; //
-  $--overlay-6: rgba(255, 255, 255, 0.14) !global; // divider
-  $--overlay-7: rgba(255, 255, 255, 0.12) !global; // border
-  $--overlay-8: rgba(255, 255, 255, 0.09) !global; // table-header
-  $--overlay-9: rgba(255, 255, 255, 0.05) !global; // card & table-body
-  $--overlay-10: rgba(255, 255, 255, 0) !global; // background
-  $--neutral-1: rgb(89, 93, 119) !global; // popover
-  $--neutral-2: rgb(80, 84, 109) !global; //
-  $--neutral-3: rgb(70, 75, 99) !global; // dialog
-  $--neutral-4: rgb(65, 70, 94) !global; //
-  $--neutral-5: rgb(56, 61, 83) !global; //
-  $--neutral-6: rgb(51, 56, 78) !global; // divider
-  $--neutral-7: rgb(46, 52, 73) !global; // border
-  $--neutral-8: rgb(39, 45, 65) !global; // table-header
-  $--neutral-9: rgb(30, 36, 55) !global; // card & table-body
-  $--neutral-10: rgb(18, 24, 42) !global; // background
+  $--base-text: rgb(255, 255, 255) !global;
+  $--overlay-text-1: rgba(255, 255, 255, .92) !global;
+  $--overlay-text-2: rgba(255, 255, 255, .84) !global;
+  $--overlay-text-3: rgba(255, 255, 255, .50) !global;
+  $--overlay-text-4: rgba(255, 255, 255, .35) !global;
+
+  $--alpha-1: .92 !global;
+  $--alpha-2: .84 !global;
+  $--alpha-3: .50 !global;
+  $--alpha-4: .35 !global;
+
+  $--alpha-disabled: .5 !global;
+
+  $--overlay-avatar: rgba(255, 255, 255, .16) !global;
+  $--overlay-rail: rgba(255, 255, 255, .18) !global;
+  $--overlay-border: rgba(255, 255, 255, .13) !global;
+  $--overlay-divider: rgba(255, 255, 255, .10) !global;
+  $--overlay-input: rgba(255, 255, 255, .1) !global;
+  $--overlay-action: rgba(255, 255, 255, .05) !global;
+  $--overlay-tab: rgba(255, 255, 255, .08) !global;
+  $--overlay-scrollbar: rgba(255, 255, 255, .2) !global;
+  $--overlay-scrollbar-hover: rgba(255, 255, 255, .3) !global;
+  $--overlay-disabled: rgba(255, 255, 255, alpha($--overlay-input) * $--alpha-disabled) !global;
+
+  $--neutral-base: black !global;
+  $--neutral-popover: rgb(89, 93, 119) !global;
+  $--neutral-modal: rgb(70, 75, 99) !global;
+  $--neutral-card: rgb(30, 36, 55) !global;
+  $--neutral-body: rgb(18, 24, 42) !global;
+  $--neutral-disabled: null !global;
+  $--neutral-border: null !global;
+  $--neutral-divider: null !global;
+  $--neutral-input: null !global;
+  
+  $--primary-hover: #7fe7c4 !global;
+  $--primary-default: #63e2b7 !global;
+  $--primary-active:  #5acea7 !global;
   $--primary-hs: rgb(42, 148, 125) !global;
+
+  $--info-hover: #8acbec !global;
+  $--info-default:#70C0E8 !global;
+  $--info-active: #66afd3 !global;
   $--info-hs: rgb(56, 137, 197) !global;
-  $--success-hs: rgb(42, 148, 125) !global;
+  
+  $--error-hover: #e98b8b !global;
+  $--error-default:#e88080 !global;
+  $--error-active: #e57272 !global;
   $--error-hs: rgb(208, 58, 82) !global;
+  
+  $--warning-hover: #f5d599 !global;
+  $--warning-default:#f2c97d !global;
+  $--warning-active: #e6c260 !global;
   $--warning-hs: rgb(240, 138, 0) !global;
-  $--primary-1: #f0fcf8 !global;
-  $--primary-2: #d4f7eb !global;
-  $--primary-3: #b8f1de !global;
-  $--primary-4: #9becd1 !global;
-  $--primary-5: #7fe7c4 !global;
-  $--primary-6: #63e2b7 !global;
-  $--primary-7: #5acea7 !global;
-  $--primary-8: #52b996 !global;
-  $--primary-9: #49A586 !global;
-  $--primary-10: #409058 !global;
-  $--success-1: #f0fcf8 !global;
-  $--success-2: #d4f7eb !global;
-  $--success-3: #b8f1de !global;
-  $--success-4: #9becd1 !global;
-  $--success-5: hsl(160, 68%, 70%) !global;
-  $--success-6: hsl(160, 69%, 64%) !global;
-  $--success-7: #5acea7 !global;
-  $--success-8: #52b996 !global;
-  $--success-9: #49A586 !global;
-  $--success-10: #409058 !global;
-  $--info-5: #d8edf8 !global;
-  $--info-2: #b1dcf2 !global;
-  $--info-3: #a4d6f0 !global;
-  $--info-4: #97d1ee !global;
-  $--info-5: #8acbec !global;
-  $--info-6: #70C0E8 !global;
-  $--info-7: #66afd3 !global;
-  $--info-8: #5c9ebe !global;
-  $--info-9: #528ca9 !global;
-  $--info-10: #487b94 !global;
-  $--warning-1: #fff8f0 !global;
-  $--warning-2: #ffead4 !global;
-  $--warning-3: #e0e090 !global;
-  $--warning-4: #ffba82 !global;
-  $--warning-5: hsl(39, 82%, 78%) !global;
-  $--warning-6: hsl(39, 82%, 72%) !global;
-  $--warning-7: hsl(44, 73%, 64%) !global;
-  $--warning-8: #b34410 !global;
-  $--warning-9: #8c2c06 !global;
-  $--warning-10: #661c03 !global;
-  $--error-1: #fff0f0 !global;
-  $--error-2: #ffdee0 !global;
-  $--error-3: #e88080 !global;
-  $--error-4: #E26363 !global;
-  $--error-5: #e98b8b !global;
-  $--error-6: #e88080 !global;
-  $--error-7: #e57272 !global;
-  $--error-8: #851130 !global;
-  $--error-9: #5e0822 !global;
-  $--error-10: #380415 !global;
+  
+  $--success-hover: #7ee7c4 !global;
+  $--success-default:#64e3b8 !global;
+  $--success-active: #5acea7 !global;
+  $--success-hs: rgb(42, 148, 125) !global;
 }

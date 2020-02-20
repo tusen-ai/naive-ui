@@ -31,7 +31,7 @@
           :is-hour-disabled="isHourDisabled"
           :is-minute-disabled="isMinuteDisabled"
           :is-second-disabled="isSecondDisabled"
-          @input="handleTimePickerInput"
+          @change="handleTimePickerChange"
         />
       </div>
       <div class="n-date-panel-month">
@@ -178,7 +178,7 @@ export default {
     adjustValue (datetime) {
       return startOfSecond(datetime)
     },
-    handleTimePickerInput (value) {
+    handleTimePickerChange (value) {
       this.$emit('input', value)
     }
   }

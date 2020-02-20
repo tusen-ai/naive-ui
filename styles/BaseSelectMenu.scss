@@ -57,7 +57,7 @@
     box-shadow: $--base-select-menu-box-shadow;
     @include b(base-select-group-header) {
       cursor: default;
-      color: $--n-meta-text-color;
+      color: $--n-tertiary-text-color;
       padding: 0 14px;
     }
     @include b(base-select-option) {
@@ -97,7 +97,7 @@
       }
     }
     @include e(action) {
-      border-top: 1px solid $--n-alpha-divider-color;
+      border-top: 1px solid $--n-divider-color;
       color: $--n-secondary-text-color;
     }
     @include m(multiple) {

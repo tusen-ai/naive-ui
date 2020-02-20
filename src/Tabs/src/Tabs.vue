@@ -1,6 +1,5 @@
 <template>
   <div
-    ref="tab"
     class="n-tabs"
     :class="{
       [`n-tabs--${type}-type`]: true,
@@ -53,7 +52,7 @@
               <div
                 v-if="closable && typeIsCard"
                 class="n-tabs-label__close"
-                @click.stop="handleCloseMarkClick(panel)"
+                @click.stop="handleCloseClick(panel)"
               >
                 <n-icon>
                   <md-close />
@@ -163,6 +162,9 @@ export default {
         display: 'flex',
         justifyContent: this.justifyContent
       }
+    },
+    panelLabels () {
+      return this.panels.map(panel => panel.label)
     }
   },
   watch: {
@@ -170,11 +172,14 @@ export default {
       this.$emit('scrollable-change', value)
     },
     justifyContent (value) {
-      if (this.justifyContent === 'space-around' || this.justifyContent === 'space-evenly') {
+      if (value === 'space-around' || value === 'space-evenly') {
         this.registerResizeObserver()
       } else {
-        resizeObserverDelegate.unregisterHandler(this.$refs.tab)
+        resizeObserverDelegate.unregisterHandler(this.$el)
       }
+    },
+    panelLabels () {
+      this.$nextTick().then(this.updateScrollStatus)
     }
   },
   mounted () {
@@ -189,7 +194,8 @@ export default {
         this.updateScrollStatus()
         this.updateCurrentBarPosition()
       })
-    if (this.justifyContent === 'space-around' || this.justifyContent === 'space-evenly') {
+    const justifyContent = this.justifyContent
+    if (justifyContent === 'space-around' || justifyContent === 'space-evenly') {
       this.registerResizeObserver()
     }
   },
@@ -201,7 +207,10 @@ export default {
       })
   },
   beforeDestroy () {
-    resizeObserverDelegate.unregisterHandler(this.$refs.tab)
+    const justifyContent = this.justifyContent
+    if (justifyContent === 'space-around' || justifyContent === 'space-evenly') {
+      resizeObserverDelegate.unregisterHandler(this.$el)
+    }
   },
   methods: {
     scroll (direction) {
@@ -261,9 +270,11 @@ export default {
     },
     updateCurrentBarPosition () {
       let index = 0
+      const value = this.value
+      const refs = this.$refs
       for (const panel of this.panels) {
-        if (panel.name === this.value) {
-          this.updateBarPosition(this.$refs[`label(${index})`][0])
+        if (panel.name === value) {
+          this.updateBarPosition(refs[`label(${index})`][0])
           break
         }
         index++
@@ -278,14 +289,11 @@ export default {
     setPanelActive (tabLabel) {
       this.$emit('input', tabLabel)
     },
-    handleAddButtonClick () {
-      this.$emit('add-button-click')
-    },
-    handleCloseMarkClick (panel) {
+    handleCloseClick (panel) {
       this.$emit('close', panel.name)
     },
     registerResizeObserver () {
-      resizeObserverDelegate.registerHandler(this.$refs.tab, throttle(() => {
+      resizeObserverDelegate.registerHandler(this.$el, throttle(() => {
         this.transitionDisabled = true
         this.updateCurrentBarPosition()
         this.$nextTick().then(() => {

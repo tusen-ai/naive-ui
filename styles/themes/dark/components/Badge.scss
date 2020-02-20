@@ -1,17 +1,17 @@
 @mixin setup-dark-badge {
   $--badge-background-color: (
-    "default": $--error-hs,
-    "info": $--info-hs,
-    "success": $--success-hs,
-    "error": $--error-hs,
-    "warning": $--warning-hs
+    "default": $--n-error-hs-color,
+    "info": $--n-info-hs-color,
+    "success": $--n-success-hs-color,
+    "error": $--n-error-hs-color,
+    "warning": $--n-warning-hs-color
   ) !global;
   $--badge-rippling-color: (
-    "default": mix($--error-hs, white, 75%),
-    "info": mix($--info-hs, white, 75%),
-    "success": mix($--success-hs, white, 75%),
-    "error": mix($--error-hs, white, 75%),
-    "warning": mix($--warning-hs, white, 75%)
+    "default": mix($--n-error-hs-color, white, 75%),
+    "info": mix($--n-info-hs-color, white, 75%),
+    "success": mix($--n-success-hs-color, white, 75%),
+    "error": mix($--n-error-hs-color, white, 75%),
+    "warning": mix($--n-warning-hs-color, white, 75%)
   ) !global;
   $--badge-rippling-start-opacity: .6 !global;
 }

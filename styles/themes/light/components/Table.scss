@@ -1,9 +1,9 @@
 @mixin setup-light-table {
-  $--table-header-background-color: $--n-background-color !global;
-  $--table-body-background-color: $--n-card-color !global;
-  $--table-header-text-color: $--text-1 !global;
-  $--table-body-text-color: $--text-2 !global;
-  $--table-row-hover: $--n-background-color !global;
+  $--table-header-background-color: $--n-body-background-color !global;
+  $--table-body-background-color: $--n-card-background-color !global;
+  $--table-header-text-color: $--overlay-text-1 !global;
+  $--table-body-text-color: $--overlay-text-2 !global;
+  $--table-row-hover: $--n-body-background-color !global;
   $--table-border: 1px solid $--n-divider-color !global;
   $--table-td-border-right: 1px solid $--n-divider-color !global;
   $--data-table-border-color: $--n-divider-color !global;

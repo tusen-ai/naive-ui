@@ -28,7 +28,7 @@
       </span>
       <n-icon
         v-if="closable"
-        class="n-confirm-title__close-mark"
+        class="n-confirm-title__close"
         type="md-close"
         size="22"
         style="cursor:pointer;"

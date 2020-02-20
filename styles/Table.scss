@@ -1,1 +1,38 @@
 @import "./mixins/mixins.scss";
+
+@include themes-mixin {
+  @include b(table) {
+    font-size: 14px;
+    width: 100%;
+    border: 1px solid $--n-divider-color;
+    border-radius: 6px;
+    text-align: left;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    background: $--neutral-card;
+    transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
+    @include e(th) {
+      background-clip: padding-box;
+      white-space: nowrap;
+      color: $--overlay-text-1;
+      transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
+      background-color: $--n-action-background-color;
+      text-align: inherit;
+      padding: 14px 12px;
+      vertical-align: inherit;
+      font-style: none;
+      text-transform: none;
+      border: none;
+      font-weight: 500;
+      border-color: $--n-divider-color;
+      border-bottom: 1px solid $--n-divider-color;
+    }
+    @include e(td) {
+      color: $--overlay-text-2;
+      transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
+      background-color: $--n-table-body-background-color;
+      padding: 12px;
+    }
+  }
+}

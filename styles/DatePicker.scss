@@ -241,7 +241,7 @@
         @include m(disabled) {
           @include once {
             cursor: not-allowed;
-            opacity: 0.45 !important;
+            opacity: $--n-disabled-opacity !important;
           }
         }
       }
@@ -250,8 +250,8 @@
       @include once {
         margin: 0 24px;
         height: 1px;
-        background-color: $--date-picker-divider-color;
       }
+      background-color: $--date-picker-divider-color;
     }
     @include b(date-panel-actions) {
       @include once {

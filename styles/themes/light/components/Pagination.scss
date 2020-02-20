@@ -16,5 +16,5 @@
     "default": $--n-secondary-text-color,
     "disabled": $--n-disabled-text-color
   ) !global;
-  $--pagination-disabled-opacity: .4 !global;
+  $--pagination-disabled-opacity: $--n-disabled-opacity !global;
 }

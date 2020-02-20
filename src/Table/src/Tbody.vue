@@ -1,12 +1,13 @@
 <template>
-  <td>
+  <tbody
+    class="n-table__tbody"
+  >
     <slot />
-  </td>
+  </tbody>
 </template>
 
 <script>
 export default {
-  name: 'NTd',
-  props: {}
+  name: 'NTbody'
 }
 </script>
