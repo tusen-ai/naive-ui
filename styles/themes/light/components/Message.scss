@@ -6,7 +6,7 @@
     "warning": white,
     "loading": $--n-secondary-text-color
   ) !global;
-  $--message-icon-color: $--n-disabled-text-color !global;
+  $--message-icon-color: $--n-icon-color !global;
   $--message-background-color: (
     "info": $--n-info-color,
     "success": $--n-success-color,

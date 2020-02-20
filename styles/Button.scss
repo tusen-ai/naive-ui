@@ -274,7 +274,7 @@
       }
       @include m(disabled) {
         cursor: not-allowed;
-        opacity: .45;
+        
       }
       &::-moz-focus-inner {
         border: 0;
@@ -283,6 +283,9 @@
       @include button-size-mixin('small');
       @include button-size-mixin('medium');
       @include button-size-mixin('large');
+    }
+    @include m(disabled) {
+      opacity: $--button-disabled-opacity;
     }
     @include button-type-mixin('default');
     @include button-type-mixin('primary');

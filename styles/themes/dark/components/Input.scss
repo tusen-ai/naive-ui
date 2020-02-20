@@ -8,8 +8,8 @@
     'error': $--n-error-color 
   ) !global;
   $--input-placeholder-color: (
-    'default': $--n-disabled-text-color,
-    'disabled': change-color($--n-disabled-text-color, $alpha: alpha($--n-disabled-text-color) * $--n-disabled-opacity),
+    'default': $--n-placeholder-text-color,
+    'disabled': change-color($--n-placeholder-text-color, $alpha: alpha($--n-placeholder-text-color) * $--n-disabled-opacity),
   ) !global;
   $--input-background-color: (
     'default': $--n-input-background-color,
@@ -18,8 +18,8 @@
     'error-focus': change-color($--n-error-color, $alpha: 0.1),
   ) !global;
   $--input-icon-color: (
-    'default': $--n-disabled-text-color,
-    'disabled': change-color($--n-disabled-text-color, $alpha: alpha($--n-disabled-text-color) * $--n-disabled-opacity),
+    'default': $--n-icon-color,
+    'disabled': change-color($--n-icon-color, $alpha: alpha($--n-icon-color) * $--n-disabled-opacity),
   )!global;
   $--input-border-mask-border-color: (
     'default': transparent,

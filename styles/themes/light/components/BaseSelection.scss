@@ -7,8 +7,8 @@
     'error-active': white
   ) !global;
   $--base-selection-placeholder-color: (
-    'default': $--n-disabled-text-color,
-    'disabled': $--n-disabled-text-color,
+    'default': $--n-placeholder-text-color,
+    'disabled': change-color($--n-placeholder-text-color, $alpha: alpha($--n-placeholder-text-color) * $--n-disabled-opacity)
   ) !global;
   $--base-selection-border-mask-border-color: (
     'default': transparent,

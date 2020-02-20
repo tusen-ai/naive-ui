@@ -1,7 +1,7 @@
 @mixin setup-light-date-picker {
   $--date-picker-background-color: white !global;
   $--date-picker-text-color: $--n-secondary-text-color !global;
-  $--date-picker-icon-color: $--n-disabled-text-color !global;
+  $--date-picker-icon-color: $--n-icon-color !global;
   $--date-picker-item-text-color: (
     'inactive': $--n-disabled-text-color,
     'default': $--n-secondary-text-color,

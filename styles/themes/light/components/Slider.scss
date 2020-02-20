@@ -1,7 +1,7 @@
 @mixin setup-light-slider {
   $--slider-rail-background-color: (
-    'default': rgba(0, 0, 0, .2),
-    'hover': rgba(0, 0, 0, .15)
+    'default': $--n-rail-color,
+    'hover': change-color($--n-rail-color, $alpha: alpha($--n-rail-color) * 0.75)
   ) !global;
   $--slider-rail-fill-background-color: (
     'default': $--n-primary-color,
@@ -14,9 +14,9 @@
     'active': (inset 0 0 0 2px $--n-primary-hover-color, 0 0 0 3px change-color($--n-primary-color, $alpha: .2)),
     'focus': (inset 0 0 0 2px $--n-primary-color, 0 0 0 3px change-color($--n-primary-color, $alpha: .2))
   ) !global;
-  $--slider-indicator-background-color: $--neutral-card !global;
-  $--slider-indicator-box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.18) !global;
-  $--slider-indicator-color: white !global;
+  $--slider-indicator-background-color:  rgba(0, 0, 0, .85) !global;
+  $--slider-indicator-box-shadow: $--n-popover-box-shadow !global;
+  $--slider-indicator-text-color: white !global;
   $--slider-dot-box-shadow: (
     'default': inset 0 0 0 2px $--n-primary-color,
     'active': inset 0 0 0 2px $--n-primary-hover-color

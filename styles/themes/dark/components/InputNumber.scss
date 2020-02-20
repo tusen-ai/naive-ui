@@ -7,8 +7,8 @@
   )!global;
   $--input-number-text-decoration-color: $--n-secondary-text-color !global;
   $--input-number-placeholder-color: (
-    'default': $--n-disabled-text-color,
-    'disabled': change-color($--n-disabled-text-color, $alpha: alpha($--n-disabled-text-color) * 0.6),
+    'default': $--n-placeholder-text-color,
+    'disabled': change-color($--n-placeholder-text-color, $alpha: alpha($--n-placeholder-text-color) * 0.6),
   ) !global;
   $--input-number-background-color: (
     'default': $--n-input-background-color,

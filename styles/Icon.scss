@@ -14,16 +14,25 @@
       width: 1em;
     }
     @include m(primary-depth) {
-      fill: $--n-primary-text-color;
-      stroke: $--n-primary-text-color;
+      fill: $--n-base-text-color;
+      stroke:  $--n-base-text-color;
+      svg {
+        opacity: $--n-primary-opacity;
+      }
     }
     @include m(secondary-depth) {
-      fill: $--n-secondary-text-color;
-      stroke: $--n-secondary-text-color;
+      fill: $--n-base-text-color;
+      stroke:$--n-base-text-color;
+      svg {
+        opacity: $--n-secondary-opacity;
+      }
     }
     @include m(tertiary-depth) {
-      fill: $--n-tertiary-text-color;
-      stroke: $--n-tertiary-text-color;
+      fill: $--n-base-text-color;
+      stroke: $--n-base-text-color;
+      svg {
+        opacity: $--n-tertiary-opacity;
+      }
     }
   }
 }

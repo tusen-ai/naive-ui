@@ -1,5 +1,5 @@
 @mixin setup-light-colors {
-  $--text-base: rgb(0, 0, 0) !global;
+  $--base-text: rgb(0, 0, 0) !global;
 
   $--overlay-text-1: rgba(0, 0, 0, .9) !global;
   $--overlay-text-2: rgba(0, 0, 0, .75) !global;
@@ -11,7 +11,7 @@
   $--alpha-3: .45 !global;
   $--alpha-4: .25 !global;
 
-  $--alpha-disabled: .45 !global;
+  $--alpha-disabled: .5 !global;
 
   $--overlay-avatar: rgba(0, 0, 0, .25) !global;
   $--overlay-rail: rgba(0, 0, 0, .14) !global;

@@ -1,5 +1,5 @@
 @mixin setup-dark-colors {
-  $--text-base: rgb(255, 255, 255) !global;
+  $--base-text: rgb(255, 255, 255) !global;
   $--overlay-text-1: rgba(255, 255, 255, .92) !global;
   $--overlay-text-2: rgba(255, 255, 255, .84) !global;
   $--overlay-text-3: rgba(255, 255, 255, .50) !global;
@@ -13,7 +13,7 @@
   $--alpha-disabled: .5 !global;
 
   $--overlay-avatar: rgba(255, 255, 255, .16) !global;
-  $--overlay-rail: rgba(255, 255, 255, .14) !global;
+  $--overlay-rail: rgba(255, 255, 255, .18) !global;
   $--overlay-border: rgba(255, 255, 255, .14) !global;
   $--overlay-divider: rgba(255, 255, 255, .12) !global;
   $--overlay-input: rgba(255, 255, 255, .1) !global;
