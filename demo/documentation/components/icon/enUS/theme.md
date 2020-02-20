@@ -5,22 +5,24 @@ Naive UI provides a simple way to custom style of icon in different themes.
   size="40"
   :themed-style="{
     dark: {
-      fill: 'rgba(255, 0, 0, .5)'
+      fill: 'rgb(0, 128, 0)',
+      stroke: 'rgb(0, 128, 0)'
     },
     light: {
-      fill: 'rgba(0, 128, 0, .5)'
+      fill: 'rgb(0, 160, 0)',
+      stroke: 'rgb(0, 160, 0)'
     }
   }"
 >
-  <md-cash />
+  <cash-outline />
 </n-icon>
 ```
 ```js
-import mdCash from 'naive-ui/lib/icons/md-cash'
+import cashOutline from 'naive-ui/lib/icons/cash-outline'
 
 export default {
   components: {
-    mdCash
+    cashOutline
   }
 }
 ```

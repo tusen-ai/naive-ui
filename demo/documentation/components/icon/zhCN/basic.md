@@ -2,24 +2,30 @@
 ```html
 <n-icon
   size="40"
+  color="#e4000f"
 >
-  <ios-contacts/>
+  <game-controller-outline />
 </n-icon>
 <n-icon
   size="40"
-  color="rgba(0, 128, 0, .5)"
+  color="#0e7a0d"
 >
-  <md-contacts/>
+  <game-controller />
+</n-icon>
+<n-icon
+  size="40"
+>
+  <game-controller-outline />
 </n-icon>
 ```
 ```js
-import mdContacts from 'naive-ui/lib/icons/md-contacts'
-import iosContacts from 'naive-ui/lib/icons/ios-contacts'
+import gameControllerOutline from 'naive-ui/lib/icons/game-controller-outline'
+import gameController from 'naive-ui/lib/icons/game-controller'
 
 export default {
   components: {
-    mdContacts,
-    iosContacts
+    gameControllerOutline,
+    gameController
   }
 }
 ```
