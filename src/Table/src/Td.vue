@@ -1,15 +1,13 @@
 <template>
-  <tr>
+  <td
+    class="n-table__td"
+  >
     <slot />
-  </tr>
+  </td>
 </template>
 
 <script>
 export default {
-  name: 'NTr'
+  name: 'NTd'
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

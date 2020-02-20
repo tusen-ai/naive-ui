@@ -4,6 +4,28 @@ const marked = require('marked')
 function createRenderer (wrapCodeWithCard = true) {
   const renderer = new marked.Renderer()
   const overrides = {
+    table (header, body) {
+      if (body) body = '<tbody class="n-table__tbody">' + body + '</tbody>'
+      return '<n-table>\n' +
+        '<thead class="n-table__thead">\n' +
+        header +
+        '</thead>\n' +
+        body +
+        '</n-table>\n'
+    },
+
+    tablerow (content) {
+      return '<tr class="n-table__tr">\n' + content + '</tr>\n'
+    },
+
+    tablecell (content, flags) {
+      const type = flags.header ? 'th' : 'td'
+      const tag = flags.align
+        ? '<' + type + ` class="n-table__${type}"` + ' align="' + flags.align + '">'
+        : '<' + type + ` class="n-table__${type}"` + '>'
+      return tag + content + '</' + type + '>\n'
+    },
+
     code: (code, language) => {
       const isLanguageValid = !!(language && hljs.getLanguage(language))
       if (!isLanguageValid) {

@@ -1,15 +1,12 @@
 <template>
-  <div
+  <table
     class="n-table"
     :class="{
-
       [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
   >
-    <table cellspacing="0">
-      <slot>default table content</slot>
-    </table>
-  </div>
+    <slot />
+  </table>
 </template>
 
 <script>
@@ -21,7 +18,3 @@ export default {
   mixins: [withapp, themeable]
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>
