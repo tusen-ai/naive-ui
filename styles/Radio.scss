@@ -56,14 +56,6 @@
           width: 6px;
           border-radius: 4px;
           transform: scale(.8);
-          content: "";
-          position: absolute;
-          left: 4px;
-          top: 4px;
-          height: 6px;
-          width: 6px;
-          border-radius: 4px;
-          transform: scale(.8);
           transition: 
             opacity .3s $--n-ease-in-out-cubic-bezier,
             background-color .3s $--n-ease-in-out-cubic-bezier,

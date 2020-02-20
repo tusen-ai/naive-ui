@@ -58,7 +58,7 @@
           :is-minute-disabled="isEndMinuteDisabled"
           :is-second-disabled="isEndSecondDisabled"
           stop-selector-bubble
-          @change="handleStartTimePickerChange"
+          @change="handleEndTimePickerChange"
         />
       </div>
       <div
@@ -431,7 +431,7 @@ export default {
     handleStartTimePickerChange (value) {
       this.changeStartDateTime(value)
     },
-    handleStartTimePickerChange (value) {
+    handleEndTimePickerChange (value) {
       this.changeEndDateTime(value)
     }
   }
