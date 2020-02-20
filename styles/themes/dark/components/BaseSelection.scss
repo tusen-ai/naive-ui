@@ -1,8 +1,11 @@
 @mixin setup-dark-base-selection {
-  $--base-selection-color: $--n-secondary-text-color !global;
+  $--base-selection-text-color: (
+    'default': $--n-secondary-text-color,
+    'disabled': $--n-disabled-text-color
+  ) !global;
   $--base-selection-background-color: (
     'default': $--n-input-background-color,
-    'disabled': change-color($--n-input-background-color, $alpha: alpha($--n-input-background-color) * $--n-disabled-opacity),
+    'disabled': $--n-disabled-background-color,
     'active': change-color($--n-primary-color, $alpha: 0.1),
     'error-focus': change-color($--n-error-color, $alpha: 0.1),
   ) !global;
