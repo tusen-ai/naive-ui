@@ -36,7 +36,9 @@
     }
     $fill-color: map-get($--progress-fill-color, $type);
     @include b(progress-icon) {
-      fill: $fill-color;
+      @include b(icon) {
+        fill: $fill-color;
+      }
       @include m(as-text) {
         color: map-get($--progress-indicator-color, 'outside');
       }

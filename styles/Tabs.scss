@@ -64,12 +64,16 @@ $--tabs-tab-font-size: (
             margin-left: 8px;
           }
         }
-        fill: map-get($--tabs-tab-scroll-button-color, 'default');
+        @include b(icon) {
+          fill: map-get($--tabs-tab-scroll-button-color, 'default');
+        }
         @include m(disabled) {
           @include once {
             cursor: not-allowed;
           }
-          fill: map-get($--tabs-tab-scroll-button-color, 'disabled');
+          @include b(icon) {
+            fill: map-get($--tabs-tab-scroll-button-color, 'disabled');
+          }
         }
       }
     }
@@ -114,7 +118,9 @@ $--tabs-tab-font-size: (
             cursor: pointer;
             transition: color .3s $--n-ease-in-out-cubic-bezier;
           }
-          fill: map-get($--tabs-tab-close-button-color, 'default');
+          @include b(icon) {
+            fill: map-get($--tabs-tab-close-button-color, 'default');
+          }
         }
         @include e(label) {
           @include once {
