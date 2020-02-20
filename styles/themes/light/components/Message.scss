@@ -6,7 +6,7 @@
     "warning": white,
     "loading": $--n-secondary-text-color
   ) !global;
-  $--message-icon-color: rgba(255, 255, 255, .45) !global;
+  $--message-icon-color: $--n-disabled-text-color !global;
   $--message-background-color: (
     "info": $--n-info-color,
     "success": $--n-success-color,
@@ -15,10 +15,10 @@
     "loading": $--n-popover-background-color
   ) !global;
   $--message-box-shadow: (
-    "info": 0px 2px 20px 0px rgba(0, 0, 0, .3),
-    "success": 0px 2px 20px 0px rgba(0, 0, 0, .3),
-    "error": 0px 2px 20px 0px rgba(0, 0, 0, .3),
-    "warning": 0px 2px 20px 0px rgba(0, 0, 0, .3),
-    "loading": 0px 2px 20px 0px rgba(0, 0, 0, .3)
+    "info": $--n-popover-box-shadow,
+    "success": $--n-popover-box-shadow,
+    "error": $--n-popover-box-shadow,
+    "warning": $--n-popover-box-shadow,
+    "loading": $--n-popover-box-shadow
   ) !global;
 }

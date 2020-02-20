@@ -56,6 +56,7 @@
 @import 'components/Tree.scss';
 @import 'components/Typography.scss';
 @import 'components/Upload.scss';
+@import 'components/BaseMenuMask.scss';
 
 @mixin setup-light-theme($in-js-env: false) {
   @include setup-light-colors();
@@ -86,24 +87,24 @@
   $--n-warning-active-color: $--warning-active !global;
   $--n-warning-hs-color: $--warning-default !global;
 
-  $--n-primary-text-color: $--text-1 !global;
-  $--n-secondary-text-color: $--text-2 !global;
-  $--n-tertiary-text-color: $--text-3 !global;
-  $--n-disabled-text-color: $--text-4 !global;
+  $--n-primary-text-color: $--overlay-text-1 !global;
+  $--n-secondary-text-color: $--overlay-text-2 !global;
+  $--n-tertiary-text-color: $--overlay-text-3 !global;
+  $--n-disabled-text-color: $--overlay-text-4 !global;
 
   $--n-action-background-color: $--overlay-action !global;
   $--n-table-header-background-color: $--overlay-action !global;
 
   $--n-rail-color: $--overlay-rail !global;
-  $--n-divider-color: $--overlay-divider !global;
-  $--n-border-color: $--overlay-border !global;
+  $--n-divider-color: $--neutral-divider !global;
+  $--n-border-color: $--neutral-border !global;
 
   $--n-scrollbar-background-color: $--overlay-scrollbar !global;
   $--n-scrollbar-hover-background-color: $--overlay-scrollbar-hover !global;
   
-  $--n-close-hover-color: $--text-2 !global;
-  $--n-close-color: $--text-3 !global;
-  $--n-disabled-close-color: $--text-4 !global;
+  $--n-close-hover-color: $--overlay-text-2 !global;
+  $--n-close-color: $--overlay-text-3 !global;
+  $--n-disabled-close-color: $--overlay-text-4 !global;
 
   $--n-popover-background-color: $--neutral-popover !global;
   $--n-table-body-background-color: $--neutral-card !global;
@@ -111,9 +112,13 @@
   $--n-modal-background-color: $--neutral-modal !global;
   $--n-body-background-color: $--neutral-body !global;
   $--n-input-background-color: $--neutral-card !global;
+  $--n-code-background-color: $--neutral-input !global;
+  $--n-tab-background-color: $--overlay-tab !global;
 
-  $--n-disabled-opacity: .45 !global;
+  $--n-disabled-opacity: $--alpha-disabled !global;
   $--n-disabled-background-color: $--neutral-disabled !global;
+
+  $--n-popover-box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.18) !global;
 
   @if ($in-js-env != true) {
     @include setup-light-divider;
@@ -173,5 +178,6 @@
     @include setup-light-tree;
     @include setup-light-typography;
     @include setup-light-upload;
+    @include setup-light-base-menu-mask;
   }
 }

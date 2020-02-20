@@ -16,9 +16,9 @@
       padding-right: $height / 2;
       border-radius: $height / 2;
       @include m(closable) {
-        padding-right: 8px + $height / 2;
+        padding-right: 10px + $height / 2;
         @include e(close) { 
-          right: $height / 2 - 8px;
+          right: $height / 2 - 6px;
         }
       }
     }

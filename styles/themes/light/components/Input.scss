@@ -9,7 +9,7 @@
   ) !global;
   $--input-placeholder-color: (
     'default': $--n-disabled-text-color,
-    'disabled': change-color($--n-disabled-text-color, $alpha: alpha($--n-disabled-text-color) * 0.6)
+    'disabled': change-color($--n-disabled-text-color, $alpha: alpha($--n-disabled-text-color) * $--n-disabled-opacity)
   ) !global;
   $--input-background-color: (
     'default': $--n-card-background-color,
@@ -19,7 +19,7 @@
   ) !global;
   $--input-icon-color: (
     'default': $--n-disabled-text-color,
-    'disabled': change-color($--n-disabled-text-color, $alpha: alpha($--n-disabled-text-color) * 0.6)
+    'disabled': change-color($--n-disabled-text-color, $alpha: alpha($--n-disabled-text-color) * $--n-disabled-opacity)
   )!global;
   $--input-border-mask-border-color: (
     'default': transparent,

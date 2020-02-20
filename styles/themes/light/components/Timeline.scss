@@ -9,5 +9,5 @@
   $--timeline-item-title-color: $--n-primary-text-color !global;
   $--timeline-item-content-color: $--n-secondary-text-color !global;
   $--timeline-item-meta-color: $--n-tertiary-text-color !global;
-  $--timeline-line-background-color: rgba(0, 0, 0, .15) !global;
+  $--timeline-line-background-color: $--n-rail-color !global;
 }

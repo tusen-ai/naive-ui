@@ -33,46 +33,69 @@
       }
     }
     @include e(control) {
+      @include once {
+        transition:
+          background-color .3s $--n-ease-in-out-cubic-bezier,
+          box-shadow .3s $--n-ease-in-out-cubic-bezier;
+        height: 14px;
+        width: 14px;
+        border-radius: 7px;
+        margin-right: 9px;
+        position: relative;
+      }
+      background-color: map-get($--radio-background-color, 'default');
       box-shadow: map-get($--radio-box-shadow, 'default');
-      transition: box-shadow .3s $--n-ease-in-out-cubic-bezier;
-      height: 14px;
-      width: 14px;
-      border-radius: 7px;
-      margin-right: 9px;
-      position: relative;
       &::before {
-        content: "";
-        position: absolute;
-        left: 4px;
-        top: 4px;
-        height: 6px;
-        width: 6px;
-        border-radius: 4px;
-        transform: scale(.8);
+        @include once {
+          content: "";
+          opacity: 0;
+          position: absolute;
+          left: 4px;
+          top: 4px;
+          height: 6px;
+          width: 6px;
+          border-radius: 4px;
+          transform: scale(.8);
+          content: "";
+          position: absolute;
+          left: 4px;
+          top: 4px;
+          height: 6px;
+          width: 6px;
+          border-radius: 4px;
+          transform: scale(.8);
+          transition: 
+            opacity .3s $--n-ease-in-out-cubic-bezier,
+            background-color .3s $--n-ease-in-out-cubic-bezier,
+            transform .3s $--n-ease-in-out-cubic-bezier;
+        }
         background-color: map-get($--radio-control-background-color, 'active');
-        opacity: 0;
-        transition: opacity .3s $--n-ease-in-cubic-bezier, transform .3s $--n-ease-in-cubic-bezier;
       }
       @include m(checked) {
         box-shadow: map-get($--radio-box-shadow, 'active');
-        &::before {
-          opacity: 1;
-          transform: scale(1);
-          transition: opacity .3s $--n-ease-out-cubic-bezier, transform .3s $--n-ease-out-cubic-bezier;
+        @include once {
+          &::before {
+            opacity: 1;
+            transform: scale(1);
+          }
         }
       }
     }
     @include e(label) {
-      display: inline-block;
-      white-space: nowrap;
-      color: $--radio-label-text-color;
+      @include once {
+        display: inline-block;
+        white-space: nowrap;
+        transition: color .3s $--n-ease-in-out-cubic-bezier;
+      }
+      color: map-get($--radio-label-text-color, 'default');
     }
     @include not-m(disabled) {
-      cursor: pointer;
+      @include once {
+        cursor: pointer;
+      }
       &:hover {
         @include e(control) {
           box-shadow: map-get($--radio-box-shadow, 'hover');
-          transition: box-shadow .3s $--n-ease-in-out-cubic-bezier;
         }
       }
       @include m(focus) {
@@ -84,26 +107,24 @@
       }
     }
     @include m(disabled) {
-      opacity: $--radio-disabled-opacity;
-      cursor: not-allowed;
+      @include once {
+        cursor: not-allowed;
+      }
       @include e(control) {
         box-shadow: map-get($--radio-box-shadow, 'disabled');
-        transition: box-shadow .3s $--n-ease-in-out-cubic-bezier;
+        background-color: map-get($--radio-background-color, 'disabled');
         &::before {
-          transform: scale(.8);
-          transform-origin: center;
-          opacity: 0;
           background-color: map-get($--radio-control-background-color, 'disabled');
         }
-        @include m(checked) {
-          &::before {
+        @include once {
+          @include m(checked) {
             transform: scale(1);
             opacity: 1;
           }
         }
       }
       @include e(label) {
-        color: $--radio-label-text-color;
+        color: map-get($--radio-label-text-color, 'disabled');
       }
     }
   }

@@ -1,5 +1,5 @@
 @mixin setup-light-collapse {
-  $--collapse-border-color: $--n-border-color !global;
+  $--collapse-border-color: $--n-divider-color !global;
   $--collapse-header-text-color: $--n-primary-text-color !global;
   $--collapse-content-text-color: $--n-secondary-text-color !global;
 }

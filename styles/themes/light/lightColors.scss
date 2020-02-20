@@ -1,13 +1,17 @@
 @mixin setup-light-colors {
-  $--text-1: rgba(0, 0, 0, .9) !global;
-  $--text-2: rgba(0, 0, 0, .7) !global;
-  $--text-3: rgba(0, 0, 0, .45) !global;
-  $--text-4: rgba(0, 0, 0, .25) !global;
+  $--text-base: rgb(0, 0, 0) !global;
+
+  $--overlay-text-1: rgba(0, 0, 0, .9) !global;
+  $--overlay-text-2: rgba(0, 0, 0, .75) !global;
+  $--overlay-text-3: rgba(0, 0, 0, .45) !global;
+  $--overlay-text-4: rgba(0, 0, 0, .25) !global;
 
   $--alpha-1: .9 !global;
-  $--alpha-2: .7 !global;
+  $--alpha-2: .75 !global;
   $--alpha-3: .45 !global;
   $--alpha-4: .25 !global;
+
+  $--alpha-disabled: .45 !global;
 
   $--overlay-avatar: rgba(0, 0, 0, .25) !global;
   $--overlay-rail: rgba(0, 0, 0, .14) !global;
@@ -18,12 +22,16 @@
   $--overlay-scrollbar: rgba(0, 0, 0, .25) !global;
   $--overlay-scrollbar-hover: rgba(0, 0, 0, .4) !global;
   $--overlay-disabled: rgba(0, 0, 0, .04) !global;
+  $--overlay-tab: rgba(0, 0, 0, .04) !global;
 
   $--neutral-popover: rgb(255, 255, 255) !global;
   $--neutral-modal: rgb(255, 255, 255) !global;
   $--neutral-card: rgb(255, 255, 255) !global;
   $--neutral-body: rgb(250, 250, 250) !global;
   $--neutral-disabled: rgb(245, 245, 245) !global;
+  $--neutral-border: rgb(219, 219, 219) !global;
+  $--neutral-divider: rgb(230, 230, 230) !global;
+  $--neutral-input: rgb(250, 250, 250) !global;
 
   $--primary-hover: #36ad6a !global;
   $--primary-default:#18a058 !global;

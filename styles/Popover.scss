@@ -225,7 +225,7 @@
       }
     }
     background-color: $--popover-background-color;
-    color: $--popover-color;
+    color: $--popover-text-color;
     @include not-m(without-shadow) {
       box-shadow: $--popover-box-shadow;
     }

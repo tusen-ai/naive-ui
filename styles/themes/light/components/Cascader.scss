@@ -1,16 +1,14 @@
 @mixin setup-light-cascader {
-  $--cascader-menu-background-color: $--n-modal-background-color !global;
+  $--cascader-menu-background-color: white !global;
   $--cascader-option-text-color: (
     'default': $--n-secondary-text-color,
     'active': $--n-primary-color,
     'disabled': $--n-disabled-text-color,
-    'disabled-active': change-color($--n-primary-color, $alpha: .4)
+    'disabled-active': change-color($--n-primary-color, $alpha: $--n-disabled-opacity)
   ) !global;
-  $--cascader-menu-box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.18) !global;
+  $--cascader-menu-box-shadow: $--n-popover-box-shadow !global;
   $--cascader-menu-border-color: $--n-divider-color !global;
-  $--cascader-menu-lightbar-background-color: mix($--n-primary-color, $--n-modal-background-color, 15%) !global;
-  $--cascader-option-arrow-background-color: rgba(0, 0, 0, 0.2) !global;
-  $--cascader-menu-mask-background-color: change-color($--n-modal-background-color, $alpha: .75) !global;
-  $--cascader-menu-mask-text-color: $--n-secondary-text-color !global;
+  $--cascader-menu-lightbar-background-color: mix($--n-primary-color, white, 10%) !global;
+  $--cascader-option-arrow-background-color: $--n-disabled-text-color !global;
   $--cascader-item-check-mark-color: $--n-primary-color !global;
 }

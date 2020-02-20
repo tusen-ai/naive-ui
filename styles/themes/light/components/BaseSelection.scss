@@ -1,10 +1,10 @@
 @mixin setup-light-base-selection {
   $--base-selection-color: $--n-secondary-text-color !global;
   $--base-selection-background-color: (
-    'default': rgb(255, 255, 255),
-    'disabled': $--n-action-background-color,
-    'active': rgb(255, 255, 255),
-    'error-active': rgb(255, 255, 255)
+    'default': white,
+    'disabled': $--n-disabled-background-color,
+    'active': white,
+    'error-active': white
   ) !global;
   $--base-selection-placeholder-color: (
     'default': $--n-disabled-text-color,

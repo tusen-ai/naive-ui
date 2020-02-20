@@ -9,17 +9,17 @@
   ) !global;
   $--input-placeholder-color: (
     'default': $--n-disabled-text-color,
-    'disabled': change-color($--n-disabled-text-color, $alpha: alpha($--n-disabled-text-color) * 0.6),
+    'disabled': change-color($--n-disabled-text-color, $alpha: alpha($--n-disabled-text-color) * $--n-disabled-opacity),
   ) !global;
   $--input-background-color: (
     'default': $--n-input-background-color,
-    'disabled': change-color($--n-input-background-color, $alpha: alpha($--n-input-background-color) * 0.6),
+    'disabled': change-color($--n-input-background-color, $alpha: alpha($--n-input-background-color) * $--n-disabled-opacity),
     'focus': change-color($--n-primary-color, $alpha: 0.1),
     'error-focus': change-color($--n-error-color, $alpha: 0.1),
   ) !global;
   $--input-icon-color: (
     'default': $--n-disabled-text-color,
-    'disabled': change-color($--n-disabled-text-color, $alpha: alpha($--n-disabled-text-color) * 0.6),
+    'disabled': change-color($--n-disabled-text-color, $alpha: alpha($--n-disabled-text-color) * $--n-disabled-opacity),
   )!global;
   $--input-border-mask-border-color: (
     'default': transparent,

@@ -1,5 +1,5 @@
 @mixin setup-light-tooltip {
-  $--tooltip-background-color: $--text-1 !global;
+  $--tooltip-background-color: $--overlay-text-1 !global;
   $--tooltip-color: rgb(255, 255, 255) !global;
   $--tooltip-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.08) !global;
 }
