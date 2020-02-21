@@ -1,31 +1,31 @@
 @mixin setup-light-alert {
   $--alert-border-color: (
     'default': $--n-border-color,
-    'success': mix($--success-6, rgb(255, 255, 255), 35%),
-    'info': mix($--info-6, rgb(255, 255, 255), 35%),
-    'warning': mix($--warning-6, rgb(255, 255, 255), 35%),
-    'error': mix($--error-6, rgb(255, 255, 255), 35%),
+    'success': mix($--n-success-color, rgb(255, 255, 255), 35%),
+    'info': mix($--n-info-color, rgb(255, 255, 255), 35%),
+    'warning': mix($--n-warning-color, rgb(255, 255, 255), 35%),
+    'error': mix($--n-error-color, rgb(255, 255, 255), 35%),
   ) !global;
   $--alert-background-color: (
-    'default': $--overlay-8,
-    'success': mix($--success-6, rgb(255, 255, 255), 20%),
-    'info': mix($--info-6, rgb(255, 255, 255), 20%),
-    'warning': mix($--warning-6, rgb(255, 255, 255), 20%),
-    'error': mix($--error-6, rgb(255, 255, 255), 20%)
+    'default': $--n-action-background-color,
+    'success': mix($--n-success-color, rgb(255, 255, 255), 20%),
+    'info': mix($--n-info-color, rgb(255, 255, 255), 20%),
+    'warning': mix($--n-warning-color, rgb(255, 255, 255), 20%),
+    'error': mix($--n-error-color, rgb(255, 255, 255), 20%)
   ) !global;
   $--alert-title-text-color: (
-    'default': $--n-text-color,
-    'success': $--n-text-color,
-    'info': $--n-text-color,
-    'warning': $--n-text-color,
-    'error': $--n-text-color
+    'default': $--n-primary-text-color,
+    'success': $--n-primary-text-color,
+    'info': $--n-primary-text-color,
+    'warning': $--n-primary-text-color,
+    'error': $--n-primary-text-color
   ) !global;
   $--alert-icon-color: (
     'default': $--n-secondary-text-color,
-    'success': $--success-6,
-    'info': $--info-6,
-    'warning': $--warning-6,
-    'error': $--error-6
+    'success': $--n-success-color,
+    'info': $--n-info-color,
+    'warning': $--n-warning-color,
+    'error': $--n-error-color
   ) !global;
   $--alert-content-text-color: (
     'default': $--n-secondary-text-color,
@@ -34,5 +34,5 @@
     'warning': $--n-secondary-text-color,
     'error': $--n-secondary-text-color,
   ) !global;
-  $--alert-color-fill: $--n-close-color !global;
+  $--alert-close-color: $--n-close-color !global;
 }

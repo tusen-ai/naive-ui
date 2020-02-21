@@ -79,7 +79,7 @@ export default {
       type: Boolean,
       default: true
     },
-    directive: {
+    displayDirective: {
       type: String,
       default: 'if'
     }
@@ -232,7 +232,7 @@ export default {
     }
   },
   render (h) {
-    const vShow = this.directive === 'show'
+    const vShow = this.displayDirective === 'show'
     const directives = [
       {
         name: 'clickoutside',

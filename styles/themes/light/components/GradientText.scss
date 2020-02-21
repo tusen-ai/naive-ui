@@ -1,9 +1,9 @@
 @mixin setup-light-gradient-text {
   $--gradient-text-background-image: (
-    "default": linear-gradient(252deg, $--primary-4 0%, $--primary-6 100%),
-    "success": linear-gradient(252deg, $--success-4 0%, $--success-6 100%),
-    "warning": linear-gradient(252deg, $--warning-4 0%, $--warning-6 100%),
-    "error": linear-gradient(252deg, $--error-4 0%, $--error-6 100%),
-    "info": linear-gradient(252deg, $--info-4 0%, $--info-6 100%),
+    "default": linear-gradient(252deg, change-color($--n-primary-color, $alpha: .6) 0%, $--n-primary-color 100%),
+    "success": linear-gradient(252deg, change-color($--n-success-color, $alpha: .6) 0%, $--n-success-color 100%),
+    "warning": linear-gradient(252deg, change-color($--n-warning-color, $alpha: .6) 0%, $--n-warning-color 100%),
+    "error": linear-gradient(252deg, change-color($--n-error-color, $alpha: .6) 0%, $--n-error-color 100%),
+    "info": linear-gradient(252deg, change-color($--n-info-color, $alpha: .6) 0%, $--n-info-color 100%),
   ) !global;
 }

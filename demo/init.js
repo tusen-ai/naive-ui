@@ -73,6 +73,7 @@ import element from './documentation/components/element'
 import log from './documentation/components/log'
 import code from './documentation/components/code'
 import upload from './documentation/components/upload'
+import table from './documentation/components/table'
 
 import demo from './demo'
 import ComponentDemo from './utils/ComponentDemo'
@@ -224,6 +225,7 @@ const routes = [
       { path: '/n-code', component: code },
       { path: '/n-typography', component: typography },
       { path: '/n-upload', component: upload },
+      { path: '/n-table', component: table },
       {
         path: '/n-icon-transition-debug',
         component: iconTransitionDebug

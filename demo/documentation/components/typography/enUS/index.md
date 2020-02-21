@@ -22,6 +22,13 @@ text
 |underline|`boolean`|`false`||
 |delete|`boolean`|`false`||
 |code|`boolean`|`false`||
+|depth|`'primary' \| 'secondary' \| 'tertiary'`|`null`||
+
+### P Props
+|Name|Type|Default|Description|
+|-|-|-|-|
+|depth|`'primary' \| 'secondary' \| 'tertiary'`|`null`||
+
 
 ### H1, H2, H3, H4, H5, H6 Props
 |Name|Type|Default|Description|

@@ -199,8 +199,8 @@
     }
     @include e(suffix, prefix) {
       @include b(icon) {
-        fill: $--input-icon-color;
-        stroke: $--input-icon-color;
+        fill: map-get($--input-icon-color, 'default');
+        stroke: map-get($--input-icon-color, 'default');
       }
     }
     @include e(input, textarea) {
@@ -253,8 +253,8 @@
       }
       @include e(suffix, prefix) {
         @include b(icon) {
-          fill: map-get($--input-placeholder-color, 'disabled');
-          stroke: map-get($--input-placeholder-color, 'disabled');
+          fill: map-get($--input-icon-color, 'disabled');
+          stroke: map-get($--input-icon-color, 'disabled');
         }
       }
       @include e(splitor) {

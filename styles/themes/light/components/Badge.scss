@@ -1,17 +1,17 @@
 @mixin setup-light-badge {
   $--badge-background-color: (
-    "default": $--error-6,
-    "info": $--info-6,
-    "success": $--success-6,
-    "warning": $--warning-6,
-    "error": $--error-6 
+    "default": $--n-error-color,
+    "info": $--n-info-color,
+    "success": $--n-success-color,
+    "warning": $--n-warning-color,
+    "error": $--n-error-color 
   ) !global;
   $--badge-rippling-color: (
-    "default": $--error-6,
-    "info": $--info-6,
-    "success": $--success-6,
-    "warning": $--warning-6,
-    "error": $--error-6
+    "default": $--n-error-color,
+    "info": $--n-info-color,
+    "success": $--n-success-color,
+    "warning": $--n-warning-color,
+    "error": $--n-error-color
   ) !global; 
   $--badge-rippling-start-opacity: .4 !global;
 }

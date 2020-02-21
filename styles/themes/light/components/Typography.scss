@@ -1,3 +1,4 @@
 @mixin setup-light-typography {
-  $--typography-code-background-color: $--n-background-color !global;
+  $--typography-code-background-color: $--n-code-background-color !global;
+  $--typography-code-border-color: $--n-border-color !global;
 }

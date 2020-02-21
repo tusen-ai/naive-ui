@@ -16,9 +16,9 @@
       padding-right: $height / 2;
       border-radius: $height / 2;
       @include m(closable) {
-        padding-right: 8px + $height / 2;
-        @include e(close-mark) { 
-          right: $height / 2 - 8px;
+        padding-right: 10px + $height / 2;
+        @include e(close) { 
+          right: $height / 2 - 6px;
         }
       }
     }
@@ -32,19 +32,13 @@
         box-shadow: inset 0 0 0 1px map-get($map: $--tag-border-color, $key: $type);
         color: map-get($map: $--tag-color, $key: $type);
         background-color: map-get($map: $--tag-background-color, $key: $type);
-        @include e(close-mark) {
-          path {
-            fill: map-get($map: $--tag-close-mark-color, $key: $type);
-          }
+        @include e(close) {
+          fill: map-get($map: $--tag-close-color, $key: $type);
           &:hover {
-            path {
-              fill: map-get($map: $--tag-close-mark-color, $key: $type + '-hover');
-            }
+            fill: map-get($map: $--tag-close-color, $key: $type + '-hover');
           }
           &:active {
-            path {
-              fill: map-get($map: $--tag-close-mark-color, $key: $type + '-active');
-            }
+            fill: map-get($map: $--tag-close-color, $key: $type + '-active');
           }
         }
         &:hover {
@@ -58,14 +52,11 @@
         box-shadow: inset 0 0 0 1px map-get($map: $--tag-border-color, $key: $type + '-disabled');
         color: map-get($map: $--tag-color, $key: $type + '-disabled');
         background-color: map-get($map: $--tag-background-color, $key: $type + '-disabled');
-        @include e(close-mark) {
-          path {
-            fill: map-get($map: $--tag-close-mark-color, $key: $type + '-disabled');
-          }
+        @include e(close) {
+          fill: map-get($map: $--tag-close-color, $key: $type + '-disabled');
         }
       }
     }
-    
   }
 }
 
@@ -83,18 +74,15 @@
       cursor: default;
       display: inline-block;
       transition: background-color .2s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier;
-      @include e(close-mark) {
+      @include e(close) {
         cursor: pointer;
-        path {
-          transition: fill .2s $--n-ease-in-out-cubic-bezier;
-        }
       }
       @include m(checkable) {
         cursor: pointer;
       }
       @include m(disabled) {
         cursor: not-allowed !important;
-        @include e(close-mark) { 
+        @include e(close) { 
           cursor: not-allowed !important;
         }
         @include m(checkable) {
@@ -103,8 +91,8 @@
       }
       @include m(closable) {
         padding-right: 18px;
-        @include e(close-mark) {
-          transition: color .3s $--n-ease-in-out-cubic-bezier;
+        @include e(close) {
+          transition: fill .2s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
           right: 3px;
           top: 50%;
           transform: translateY(-50%);

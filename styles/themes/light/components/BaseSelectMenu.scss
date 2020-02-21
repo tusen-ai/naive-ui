@@ -4,10 +4,10 @@
     "selected": $--n-primary-color,
     "active": $--n-primary-color,
     "disabled": $--n-disabled-text-color,
-    "disabled-selected": change-color($--n-primary-color, $alpha: .4)
+    "disabled-selected": change-color($--n-primary-color, $alpha: $--n-disabled-opacity)
   ) !global;
   $--base-select-menu-option-check-mark-color: $--n-primary-color !global;
   $--base-select-menu-background-color: white !global;
-  $--base-select-menu-box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.18) !global;
-  $--base-select-menu-light-bar-background-color: change-color($--primary-6, $alpha: .1) !global;
+  $--base-select-menu-box-shadow: $--n-popover-box-shadow !global;
+  $--base-select-menu-light-bar-background-color: change-color($--n-primary-color, $alpha: .1) !global;
 }

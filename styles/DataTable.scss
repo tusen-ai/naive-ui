@@ -58,6 +58,16 @@
         background-color: $--table-header-background-color;
         transition: background-color .3s $--n-ease-in-out-cubic-bezier;
       }
+      @include b(data-table-tbody) {
+        @include b(data-table-tr) {
+          &:hover {
+            background-color: $--table-row-hover;
+          }
+          @include m(hover) {
+            background-color: $--table-row-hover;
+          }
+        }
+      }
       @include b(data-table-tr) {
         box-sizing: border-box;
         transition: background-color 0.3s $--n-ease-in-out-cubic-bezier;
@@ -65,12 +75,6 @@
           @include b(data-table-td) {
             border-bottom: 0px solid $--data-table-border-color;
           }
-        }
-        &:hover {
-          background-color: $--table-row-hover;
-        }
-        @include m(hover) {
-          background-color: $--table-row-hover;
         }
       }
       @include b(data-table-td) {
@@ -101,7 +105,7 @@
         @include m(sortable) {
           cursor: pointer;
           &:hover {
-            background-color: $--overlay-8;
+            background-color: $--n-action-background-color;
           }
         }
         @include m(ellipsis) {
@@ -197,7 +201,7 @@
             align-items: center;
             transition: background-color .3s $--n-ease-in-out-cubic-bezier;
             &:hover {
-              background-color: $--overlay-8;
+              background-color: $--overlay-tab;
             }
             @include b(icon) {
               fill: change-color($--n-secondary-text-color, $alpha: .2);
@@ -207,12 +211,12 @@
           }
           @include m(popover-visible) {
             @include e(icon-wrapper) {
-              background-color: $--overlay-8;
+              background-color: $--overlay-tab;
             }
           }
           @include m(active) {
             @include e(icon-wrapper) {
-              background-color: $--overlay-8;
+              background-color: $--overlay-tab;
               @include b(icon) {
                 fill: $--n-primary-color;
                 stroke: $--n-primary-color;

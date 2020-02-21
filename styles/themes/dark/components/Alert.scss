@@ -1,31 +1,31 @@
 @mixin setup-dark-alert {
   $--alert-border-color: (
-    'default': rgba(255, 255, 255, .15),
-    'success': change-color($--success-hs, $alpha: .3),
-    'info': change-color($--info-hs, $alpha: .3),
-    'warning': change-color($--warning-hs, $alpha: .3),
-    'error': change-color($--error-hs, $alpha: .3)
+    'default': $--n-divider-color,
+    'success': change-color($--n-success-hs-color, $alpha: .35),
+    'info': change-color($--n-info-hs-color, $alpha: .35),
+    'warning': change-color($--n-warning-hs-color, $alpha: .35),
+    'error': change-color($--n-error-hs-color, $alpha: .35)
   ) !global;
   $--alert-background-color: (
-    'default': $--overlay-8,
-    'success': change-color($--success-hs, $alpha: .2),
-    'info': change-color($--info-hs, $alpha: .2),
-    'warning': change-color($--warning-hs, $alpha: .2),
-    'error': change-color($--error-hs, $alpha: .2)
+    'default': $--n-input-background-color,
+    'success': change-color($--n-success-hs-color, $alpha: .25),
+    'info': change-color($--n-info-hs-color, $alpha: .25),
+    'warning': change-color($--n-warning-hs-color, $alpha: .25),
+    'error': change-color($--n-error-hs-color, $alpha: .25)
   ) !global;
   $--alert-title-text-color: (
-    'default': $--n-text-color,
-    'success': $--n-text-color,
-    'info': $--n-text-color,
-    'warning': $--n-text-color,
-    'error': $--n-text-color
+    'default': $--n-primary-text-color,
+    'success': $--n-primary-text-color,
+    'info': $--n-primary-text-color,
+    'warning': $--n-primary-text-color,
+    'error': $--n-primary-text-color
   ) !global;
   $--alert-icon-color: (
     'default': $--n-secondary-text-color,
-    'success': $--success-hs,
-    'info': $--info-hs,
-    'warning': $--warning-hs,
-    'error': $--error-hs
+    'success': $--n-success-hs-color,
+    'info': $--n-info-hs-color,
+    'warning': $--n-warning-hs-color,
+    'error': $--n-error-hs-color
   ) !global;
   $--alert-content-text-color: (
     'default': $--n-secondary-text-color,
@@ -34,5 +34,5 @@
     'warning': $--n-secondary-text-color,
     'error': $--n-secondary-text-color
   ) !global;
-  $--alert-color-fill: $--n-close-color !global;
+  $--alert-close-color: $--n-close-color !global;
 }

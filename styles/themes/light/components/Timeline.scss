@@ -1,13 +1,13 @@
 @mixin setup-light-timeline {
   $--timeline-item-circle-border-color: (
-    'default': $--n-meta-text-color,
-    'info': $--info-6,
-    'error': $--error-6,
-    'success': $--success-6,
-    'warning': $--warning-6
+    'default': $--n-tertiary-text-color,
+    'info': $--n-info-color,
+    'error': $--n-error-color,
+    'success': $--n-success-color,
+    'warning': $--n-warning-color
   ) !global;
-  $--timeline-item-title-color: $--n-text-color !global;
+  $--timeline-item-title-color: $--n-primary-text-color !global;
   $--timeline-item-content-color: $--n-secondary-text-color !global;
-  $--timeline-item-meta-color: $--n-meta-text-color !global;
-  $--timeline-line-background-color: rgba(0, 0, 0, .15) !global;
+  $--timeline-item-meta-color: $--n-tertiary-text-color !global;
+  $--timeline-line-background-color: $--n-rail-color !global;
 }

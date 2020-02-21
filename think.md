@@ -131,7 +131,7 @@ Previously, it would not work with single quotes:
 18. cascader select menu disabled 选项
 19. icon 的默认 stroke
 20. tree 组件
-21. 文件上传组件
+21. <del>文件上传组件</del>
 22. custom-input 废弃或者重构
 23. Date 键盘操作 Time 键盘操作
 24. Time 格式化
@@ -143,9 +143,9 @@ Previously, it would not work with single quotes:
 30. 逐步放宽对宽度必需传 number 的现实，尤其是对于 table
 31. <del>BaseLoading 代替 Log 里的 Spin</del>
 32. Modal 内部组件的卸载方式
-33. Anchor 的另一种模式，追踪内容按照的是中间范围而不是自身大小
+33. <del>Anchor 的另一种模式，追踪内容按照的是中间范围而不是自身大小</del>
 34. <del>bug md-loader alert 内的 code 不显示</del> 不是 bug，md 就这么渲染
-35. backtop mounted blink
+35. <del>backtop mounted blink</del>
 36. <del>Tab keep alive</del>
 37. Cascader submenu 的 lightbar 用 base tracking rect 代替
 38. Dropdown 样式微调
@@ -156,6 +156,7 @@ Previously, it would not work with single quotes:
 43. Tab 文档待更新
 44. Icon 文档待更新
 45. 统一 next 回调和 Promise API 为 Promise API，应该有三四个组件用到了
+46. Date Picker 的 format 文档内容
 
 
 ```

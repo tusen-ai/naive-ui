@@ -1,4 +1,4 @@
-# Ignore-Gap
+# Ignore Gap
 ```html
 <div style="height:200px">
   <n-row :gutter="12">

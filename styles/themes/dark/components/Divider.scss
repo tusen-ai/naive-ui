@@ -1,4 +1,4 @@
 @mixin setup-dark-divider {
-  $--divider-text-color: $--n-text-color !global;
-  $--divider-border-color: $--n-alpha-divider-color !global;
+  $--divider-text-color: $--n-primary-text-color !global;
+  $--divider-border-color: $--n-divider-color !global;
 }

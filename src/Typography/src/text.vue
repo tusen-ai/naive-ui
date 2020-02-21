@@ -33,17 +33,11 @@ export default {
       type: Boolean,
       default: false
     },
-    primary: {
-      type: Boolean,
-      default: false
-    },
-    secondary: {
-      type: Boolean,
-      default: false
-    },
-    tertiary: {
-      type: Boolean,
-      default: false
+    depth: {
+      validator (value) {
+        return ['primary', 'secondary', 'tertiary'].includes(value)
+      },
+      default: null
     }
   },
   render (h, context) {
@@ -55,9 +49,7 @@ export default {
     const isItalic = props.italic
     const isDisabled = props.disabled
     const isUnderline = props.underline
-    const isPrimary = props.primary
-    const isSecondary = props.secondary
-    const isTertiary = props.tertiary
+    const depth = props.depth
     const on = context.listeners
     const theme = getTheme(context.parent)
     const defaultSlot = context.slots.default || (context.scopedSlots.default && context.scopedSlots.default())
@@ -72,9 +64,7 @@ export default {
         'n-text--italic': isItalic,
         'n-text--disabled': isDisabled,
         'n-text--underline': isUnderline,
-        'n-text--primary': isPrimary,
-        'n-text--secondary': isSecondary,
-        'n-text--tertiary': isTertiary
+        [`n-text--${depth}-depth`]: depth
       },
       ...context.data,
       on

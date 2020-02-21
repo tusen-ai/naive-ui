@@ -1,17 +1,17 @@
-import NTable from './src/main.vue'
-import NTh from './Th/src/main.vue'
-import NTr from './Tr/src/main.vue'
-import NTd from './Td/src/main.vue'
-import NThead from './Thead/src/main.vue'
-import NTbody from './TBody/src/main.vue'
+import Table from './src/Table.vue'
+import Th from './src/Th.vue'
+import Tr from './src/Tr.vue'
+import Td from './src/Td.vue'
+import Thead from './src/Thead.vue'
+import Tbody from './src/Tbody.vue'
 
-NTable.install = function (Vue) {
-  Vue.component(NTable.name, NTable)
-  Vue.component(NTh.name, NTh)
-  Vue.component(NTr.name, NTr)
-  Vue.component(NTd.name, NTd)
-  Vue.component(NTbody.name, NTbody)
-  Vue.component(NThead.name, NThead)
+Table.install = function (Vue) {
+  Vue.component(Table.name, Table)
+  Vue.component(Th.name, Th)
+  Vue.component(Tr.name, Tr)
+  Vue.component(Td.name, Td)
+  Vue.component(Tbody.name, Tbody)
+  Vue.component(Thead.name, Thead)
 }
 
-export default NTable
+export default Table

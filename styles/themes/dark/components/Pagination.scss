@@ -1,20 +1,22 @@
 @mixin setup-dark-pagination {
   $--pagination-item-text-color: (
-    "default": $--n-secondary-text-color,
-    "hover": $--n-primary-color,
-    "active": $--n-primary-color
+    'default': $--n-secondary-text-color,
+    'hover': $--n-primary-color,
+    'active': $--n-primary-color,
+    'disabled': $--n-disabled-text-color
   ) !global;
   $--pagination-item-background-color: (
-    "default": transparent,
-    "active": change-color($--n-primary-color, $alpha: .2) 
+    'default': transparent,
+    'active': change-color($--n-primary-color, $alpha: .2),
+    'disabled': $--n-disabled-background-color
   ) !global;
   $--pagination-item-border-color: (
-    "default": rgba(255, 255, 255, .3),
-    "active": $--n-primary-color
+    'default': $--n-border-color,
+    'active': $--n-primary-color,
+    'disabled': transparent
   ) !global;
   $--pagination-text-color: (
-    "default": $--n-secondary-text-color,
-    "disabled": $--n-disabled-text-color
+    'default': $--n-secondary-text-color,
+    'disabled': $--n-disabled-text-color
   ) !global;
-  $--pagination-disabled-opacity: .4 !global;
 }

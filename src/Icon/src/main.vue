@@ -1,6 +1,7 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import formatLength from '../../_utils/css/formatLength'
 
 export default {
   name: 'NIcon',
@@ -10,17 +11,11 @@ export default {
       type: [Number, String],
       default: null
     },
-    primary: {
-      type: Boolean,
-      default: false
-    },
-    secondary: {
-      type: Boolean,
-      default: false
-    },
-    tertiary: {
-      type: Boolean,
-      default: false
+    depth: {
+      validator (value) {
+        return ['primary', 'secondary', 'tertiary'].includes(value)
+      },
+      default: null
     },
     color: {
       type: String,
@@ -31,10 +26,11 @@ export default {
     styles () {
       let style = {}
       if (this.size) {
-        style['font-size'] = `${this.size}px`
+        style['font-size'] = formatLength(this.size)
       }
       if (this.color) {
         style.fill = this.color
+        style.stroke = this.color
       }
       return style
     }
@@ -46,15 +42,13 @@ export default {
         staticClass: 'n-icon',
         class: {
           [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
-          'n-icon--primary': this.primary,
-          'n-icon--secondary': this.secondary,
-          'n-icon--tertiary': this.tertiary
+          [`n-icon--${this.depth}-depth`]: this.depth
         },
         style: {
           ...this.styles,
           ...this.syntheticStyle
         },
-        on: this.$listeners
+        on: Object.assign({}, this.$listeners)
       }, this.$slots.default)
     }
   }

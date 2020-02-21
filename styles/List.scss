@@ -9,7 +9,7 @@
       list-style-type: none;
     }
     color: $--n-secondary-text-color;
-    background-color: $--n-card-color;
+    background-color: $--n-card-background-color;
     @include m(bordered) {
       @include once {
         border-radius: 6px;

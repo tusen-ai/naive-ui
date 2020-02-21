@@ -7,18 +7,18 @@
   ) !global;
   $--tabs-tab-bar-background-color: $--n-primary-color !global;
   $--tabs-tab-scroll-button-color: (
-    'default': rgba(0, 0, 0, .3),
-    'disabled': rgba(0, 0, 0, .12)
+    'default': $--n-icon-color,
+    'disabled': change-color($--n-icon-color, $alpha: alpha($--n-icon-color) * $--n-disabled-opacity)
   ) !global;
   $--tabs-tab-close-button-color: (
     'default': $--n-close-color
   ) !global;
-  $--tabs-card-tab-background-color: $--overlay-8 !global;
+  $--tabs-card-tab-background-color: $--n-tab-background-color !global;
   $--tabs-card-tab-border-color: $--n-divider-color !global;
   $--tabs-card-tab-text-color: (
     'default': $--n-secondary-text-color,
-    'active': $--n-text-color
+    'active': $--n-primary-text-color
   ) !global;
-  $--tabs-nav-border-color: $--n-alpha-divider-color !global;
+  $--tabs-nav-border-color: $--n-divider-color !global;
   $--tabs-panel-text-color: $--n-secondary-text-color !global;
 }

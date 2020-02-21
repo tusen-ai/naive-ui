@@ -18,21 +18,21 @@
     }
     @include m(drag-over) {
       @include b(upload-dragger) {
-        border-color: $--primary-6;
+        border-color: $--n-primary-color;
       }
     }
     @include b(upload-dragger) {
       cursor: pointer;
       box-sizing: border-box;
       width: 100%;
-      background-color: $--n-alpha-action-panel-color;
+      background-color: $--n-action-background-color;
       text-align: center;
       border-radius: 6px;
-      border: 1px dashed $--n-alpha-border-color;
+      border: 1px dashed $--n-border-color;
       padding: 24px;
       transition: border-color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
       &:hover {
-        border-color: $--primary-6;
+        border-color: $--n-primary-color;
       }
     }
     @include e(file-input) {
@@ -69,14 +69,14 @@
           }
           @include b(upload-file-info) {
             @include e(name) {
-              color: $--error-6;
+              color: $--n-error-color;
             }
           }
         }
         @include m(success-status) {
           @include b(upload-file-info) {
             @include e(name) {
-              color: $--success-6;
+              color: $--n-success-color;
             }
           }
         }
@@ -84,9 +84,9 @@
           cursor: pointer;
           @include b(upload-file-info) {
             @include e(name) {
-              color: $--success-6;
+              color: $--n-success-color;
               text-decoration: underline;
-              text-decoration-color: $--success-6;
+              text-decoration-color: $--n-success-color;
             }
           }
         }
@@ -102,8 +102,8 @@
             @include b(icon) {
               font-size: 18px;
               margin-right: 2px;
-              fill: $--n-meta-text-color;
-              stroke: $--n-meta-text-color;
+              fill: $--n-tertiary-text-color;
+              stroke: $--n-tertiary-text-color;
               vertical-align: middle;
             }
             font-size: 14px;

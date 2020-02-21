@@ -54,7 +54,7 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        right: 14px;
+        right: 10px;
       }
       @include m(selected) {
         @include e(placeholder) {
@@ -115,11 +115,11 @@
           width: 100%;
           white-space: nowrap;
           transition: color .3s $--n-ease-in-out-cubic-bezier;
-          padding: 0 32px 0 14px;
+          padding: 0 26px 0 14px;
           background-color: transparent;
           height: 100%;
         }
-        color: $--base-selection-color;
+        color: map-get($--base-selection-text-color, 'default');
         &::placeholder {
           transition: color .3s $--n-ease-in-out-cubic-bezier;
           color: map-get($--base-selection-placeholder-color, 'default');
@@ -132,7 +132,7 @@
     @include b(base-selection-tags) {
       @include once {
         display: flex;
-        padding: 3px 32px 0 14px;
+        padding: 3px 26px 0 14px;
         flex-wrap: wrap;
         align-items: center;
         width: 100%;
@@ -207,7 +207,7 @@
         box-shadow: map-get($--base-selection-box-shadow, 'disabled');
         @include e(input) {
           cursor: not-allowed;
-          color: map-get($--base-selection-placeholder-color, 'disabled');
+          color: map-get($--base-selection-text-color, 'disabled');
           @include m(placeholder) {
             color: map-get($--base-selection-placeholder-color, 'disabled');
           }
@@ -249,7 +249,7 @@
           cursor: pointer;
         }
         caret-color: map-get($--base-selection-caret-color, 'default');
-        color: $--base-selection-color;
+        color: map-get($--base-selection-text-color, 'default');
       }
       @include once {
         @include e(mirror) {

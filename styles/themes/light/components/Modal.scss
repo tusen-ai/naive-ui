@@ -1,4 +1,4 @@
 @mixin setup-light-modal {
-  $--modal-background-color: $--n-dialog-color !global;
+  $--modal-background-color: $--n-modal-background-color !global;
   $--modal-text-color: $--n-secondary-text-color !global;
 }

@@ -1,16 +1,16 @@
 @mixin setup-light-notification {
   $--notification-avatar-fill: (
     'default': $--n-secondary-text-color,
-    'success': $--success-6,
-    'info': $--info-6,
-    'warning': $--warning-6,
-    'error': $--error-6
+    'success': $--n-success-color,
+    'info': $--n-info-color,
+    'warning': $--n-warning-color,
+    'error': $--n-error-color
   ) !global;
-  $--notification-background-color: $--n-popover-color !global;
+  $--notification-background-color: $--n-popover-background-color !global;
   $--notification-text-color: $--n-secondary-text-color !global;
   $--notification-close-fill: $--n-close-color !global;
-  $--notification-header-text-color: $--n-text-color !global;
+  $--notification-header-text-color: $--n-primary-text-color !global;
   $--notification-content-text-color: $--n-secondary-text-color !global;
-  $--notification-description-text-color: $--n-meta-text-color !global;
+  $--notification-description-text-color: $--n-tertiary-text-color !global;
   $--notification-action-text-color: $--n-secondary-text-color !global;
 }

@@ -15,15 +15,18 @@
 <n-radio
   v-model="value"
   value="Be Here Now"
-  disabled
+  :disabled="disabled"
 >
   Be Here Now
 </n-radio>
+<n-switch v-model="disabled"/>
+
 ```
 ```js
 export default {
   data () {
     return {
+      disabled: true,
       value: null
     }
   }
