@@ -57,6 +57,7 @@ import get from 'lodash-es/get'
 import registerable from '../../_mixins/registerable'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import cloneDeep from 'lodash-es/cloneDeep'
 
 export default {
   name: 'NFormItem',
@@ -282,7 +283,7 @@ export default {
       } else {
         if (!options.first) options.first = this.first
       }
-      const rules = this.syntheticRules
+      const rules = cloneDeep(this.syntheticRules)
       const path = this.path
       const value = get(this.NForm.model, this.path, null)
       const activeRules = (!trigger
