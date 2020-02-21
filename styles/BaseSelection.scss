@@ -46,7 +46,9 @@
         bottom: 0;
         border: 1px solid transparent;
         pointer-events: none;
-        transition: .3s border-color $--n-ease-in-out-cubic-bezier, .3s box-shadow $--n-ease-in-out-cubic-bezier;
+        transition:
+          border-color .3s $--n-ease-in-out-cubic-bezier,
+          box-shadow .3s $--n-ease-in-out-cubic-bezier;
         z-index: 1;
       }
       @include e(mark) {
@@ -83,7 +85,10 @@
         box-sizing: border-box;
         position: relative;
         z-index: auto;
-        transition: color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
+        transition:
+          color .3s $--n-ease-in-out-cubic-bezier,
+          box-shadow .3s $--n-ease-in-out-cubic-bezier,
+          background-color .3s $--n-ease-in-out-cubic-bezier;
         border-radius: $--n-base-selection-border-radius;
       }
       box-shadow: map-get($--base-selection-box-shadow, 'default');

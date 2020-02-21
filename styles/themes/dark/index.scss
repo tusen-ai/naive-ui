@@ -60,6 +60,7 @@
 @import 'components/Spin.scss';
 @import 'components/Log.scss';
 @import 'components/Code.scss';
+@import 'components/BaseTrackingRect.scss';
 
 @mixin setup-dark-theme($in-js-env: false) {
   @include setup-dark-colors();
@@ -125,6 +126,7 @@
   $--n-input-background-color: $--overlay-input !global;
   $--n-code-background-color: $--overlay-input !global;
   $--n-tab-background-color: $--overlay-tab !global;
+  $--n-avatar-background-color: $--overlay-avatar !global;
 
   $--n-disabled-opacity: $--alpha-disabled !global;
   $--n-disabled-background-color: $--overlay-disabled !global;
@@ -194,5 +196,6 @@
     @include setup-dark-spin;
     @include setup-dark-log;
     @include setup-dark-code;
+    @include setup-dark-base-tracking-rect;
   }
 }

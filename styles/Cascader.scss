@@ -52,7 +52,9 @@
         box-sizing: border-box;
         min-width: 182px;
         background-color: transparent;
-        transition: background-color .2s $--n-ease-in-out-cubic-bezier, color 0.2s $--n-ease-in-out-cubic-bezier;
+        transition:
+          background-color .2s $--n-ease-in-out-cubic-bezier,
+          color 0.2s $--n-ease-in-out-cubic-bezier;
         height: 34px;
         line-height: 34px;
         display: flex;
@@ -99,7 +101,10 @@
           display: block;
         }
         @include e(loading) {
-          @include fade-in-scale-up-transition(cascader-option-loading, $original-transform: translateY(-50%));
+          @include fade-in-scale-up-transition(
+            cascader-option-loading,
+            $original-transform: translateY(-50%)
+          );
           position: absolute;
           width: 14px;
           height: 14px;

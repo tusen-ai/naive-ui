@@ -4,7 +4,7 @@
   @include m($size + '-size') {
     @include b(virtual-scroller) {
       height: 100%;
-      max-height: map-get($map: $--n-height, $key: $size) * 7.6;
+      max-height: map-get($--n-height, $size) * 7.6;
       scrollbar-width: none;
       -moz-scrollbar-width: none;
       &::-webkit-scrollbar {
@@ -13,17 +13,17 @@
       }
     }
     @include b(scrollbar-container) {
-      max-height: map-get($map: $--n-height, $key: $size) * 7.6;
+      max-height: map-get($--n-height, $size) * 7.6;
     }
     @include b(base-select-option) {
-      height: map-get($map: $--n-height, $key: $size);
-      line-height: map-get($map: $--n-height, $key: $size);
-      font-size: map-get($map: $--n-font-size, $key: $size);
+      height: map-get($--n-height, $size);
+      line-height: map-get($--n-height, $size);
+      font-size: map-get($--n-font-size, $size);
     }
     @include b(base-select-group-header) {
-      height: map-get($map: $--n-height, $key: $size);
-      line-height: map-get($map: $--n-height, $key: $size);
-      font-size: map-get($map: $--n-font-size, $key: $size) - 2px;
+      height: map-get($--n-height, $size);
+      line-height: map-get($--n-height, $size);
+      font-size: map-get($--n-font-size, $size) - 2px;
     }
   }
 }
@@ -42,7 +42,6 @@
       position: relative;
       border-radius: 6px;
       transition: background-color .3s $--n-ease-in-out-cubic-bezier;
-      font-size: $--n-secondary-text-color;
       overflow: hidden;
       @include b(base-select-menu-option-wrapper) {
         position: relative;
@@ -57,7 +56,7 @@
     box-shadow: $--base-select-menu-box-shadow;
     @include b(base-select-group-header) {
       cursor: default;
-      color: $--n-tertiary-text-color;
+      color: map-get($--base-select-menu-group-header-text-color, 'default');
       padding: 0 14px;
     }
     @include b(base-select-option) {
@@ -66,45 +65,57 @@
       padding: 0 14px;
       white-space: nowrap;
       transition: color .3s $--n-ease-in-out-cubic-bezier;
-      color: map-get($map: $--base-select-menu-option-color, $key: "default");
+      color: map-get($--base-select-menu-option-color, "default");
       text-overflow: ellipsis;
       overflow: hidden;
       @include m(grouped) {
         padding: 0 21px;
       }
       @include m(selected) {
-        color: map-get($map: $--base-select-menu-option-color, $key: "selected");
+        color: map-get($--base-select-menu-option-color, "selected");
       }
       @include m(disabled) {
-        color: map-get($map: $--base-select-menu-option-color, $key: "disabled");
+        color: map-get($--base-select-menu-option-color, "disabled");
         &::after {
           display: none;
         }
         @include m(selected) {
-          color: map-get($map: $--base-select-menu-option-color, $key: "disabled-selected");
+          color: map-get($--base-select-menu-option-color, "disabled-selected");
           &::after {
-            border-right: 1px solid map-get($map: $--base-select-menu-option-color, $key: "disabled-selected");
-            border-bottom: 1px solid map-get($map: $--base-select-menu-option-color, $key: "disabled-selected");
+            border-right: 1px solid map-get($--base-select-menu-option-color, "disabled-selected");
+            border-bottom: 1px solid map-get($--base-select-menu-option-color, "disabled-selected");
             display: block;
           }
         }
         cursor: not-allowed;
       }
       @include m(loading) {
-        color: map-get($map: $--base-select-menu-option-color, $key: "disabled");
+        color: map-get($--base-select-menu-option-color, "disabled");
         text-align: center;
         pointer-events: none;
       }
     }
     @include e(action) {
-      border-top: 1px solid $--n-divider-color;
-      color: $--n-secondary-text-color;
+      transition:
+        color .3s $--n-ease-in-out-cubic-bezier,
+        border-color .3s $--n-ease-in-out-cubic-bezier;
+      border-top: 1px solid $--base-select-menu-action-divider-color;
+      color: $--base-select-menu-action-text-color;
     }
     @include m(multiple) {
       @include b(base-select-option) {
-        position: relative;
-        transition: color .3s $--n-ease-in-out-cubic-bezier;
-        padding-right: 28px;
+        @include once {
+          position: relative;
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
+          padding-right: 28px;
+          @include m(selected) {
+            background: none;
+            &::after {
+              opacity: 1;
+              transform: rotate(45deg) scale(1);
+            }
+          }
+        }
         &::after {
           @include once {
             content: '';
@@ -115,20 +126,15 @@
             transform: rotate(45deg) scale(.5);
             top: calc(50% - 4px);
             opacity: 0;
-            transition: transform .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier;
+            transition:
+              transform .3s $--n-ease-in-out-cubic-bezier,
+              opacity .3s $--n-ease-in-out-cubic-bezier;
           }
           border-right: 1px solid $--base-select-menu-option-check-mark-color;
           border-bottom: 1px solid $--base-select-menu-option-check-mark-color;
         }
-        @include m(selected) {
-          background: none;
-          &::after {
-            opacity: 1;
-            transform: rotate(45deg) scale(1);
-          }
-        }
         &:active {
-          color: map-get($map: $--base-select-menu-option-color, $key: "active");
+          color: map-get($--base-select-menu-option-color, "active");
         }
       }
     }

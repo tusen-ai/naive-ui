@@ -60,6 +60,7 @@
 @import 'components/Spin.scss';
 @import 'components/Log.scss';
 @import 'components/Code.scss';
+@import 'components/BaseTrackingRect.scss';
 
 @mixin setup-light-theme($in-js-env: false) {
   @include setup-light-colors();
@@ -124,6 +125,7 @@
   $--n-input-background-color: $--neutral-card !global;
   $--n-code-background-color: $--neutral-input !global;
   $--n-tab-background-color: $--overlay-tab !global;
+  $--n-avatar-background-color: $--overlay-avatar !global;
 
   $--n-disabled-opacity: $--alpha-disabled !global;
   $--n-disabled-background-color: $--neutral-disabled !global;
@@ -193,5 +195,6 @@
     @include setup-light-spin;
     @include setup-light-log;
     @include setup-light-code;
+    @include setup-light-base-tracking-rect;
   }
 }
