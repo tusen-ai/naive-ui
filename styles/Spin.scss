@@ -29,7 +29,9 @@
         height: 40px;
       }
     }
-    @include b(spin-container) {
+  }
+  @include b(spin-container) {
+    @include once {
       position: relative;
       @include b(spin) {
         @include fade-in-transition(spin);
@@ -40,13 +42,17 @@
       }
       @include b(spin-content) {
         opacity: 1;
-        transition: opacity .2s $--n-ease-in-out-cubic-bezier;
+        transition: opacity .3s $--n-ease-in-out-cubic-bezier;
         pointer-events: all;
         @include m(spinning) {
           pointer-events: none;
-          opacity: .5;
         }
       }
-    }    
+    }
+    @include b(spin-content) {
+      @include m(spinning) {
+        opacity: $--spin-spinning-opacity;
+      }
+    }
   }
 }

@@ -13,7 +13,9 @@
       & > {
         @include b(input) {
           @include e(input) {
-            text-decoration: line-through;
+            @include once {
+              text-decoration: line-through;    
+            }
             text-decoration-color: map-get($--time-picker-text-decoration-color, 'default');
           }
         }
@@ -94,15 +96,19 @@
           color: map-get($--time-picker-text-color, 'active');
         }
         @include m(disabled) {
-          opacity: 0.45;
-          cursor: not-allowed;
+          opacity: $--time-picker-item-disabled-opacity;
+          @include once {
+            cursor: not-allowed;
+          }
         }
       }
       @include m(invalid) {
         @include e(item) {
           @include m(active) {
+            @include once {
+              text-decoration: line-through;
+            }
             background-color: map-get($--time-picker-item-background-color, 'invalid');
-            text-decoration: line-through;
             text-decoration-color: map-get($--time-picker-text-decoration-color, 'active');
           }
         }

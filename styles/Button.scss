@@ -4,7 +4,7 @@
   @include m($size + "-size") {
     $height: map-get($map: $--button-height, $key: $size);
     $font-size: map-get($map: $--button-font-size, $key: $size);
-    border-radius: $--button-border-radius;
+    border-radius: $--n-button-border-radius;
     font-size: $font-size;
     @include not-m(text) {
       height: $height;

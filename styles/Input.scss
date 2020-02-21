@@ -94,7 +94,7 @@
       position: relative;
       width: 100%;
       display: inline-block;
-      border-radius: $--input-border-radius;
+      border-radius: $--n-input-border-radius;
       transition: box-shadow .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
       @include input-size-mixin("small");
       @include input-size-mixin("medium");
@@ -107,21 +107,21 @@
         top: 0;
         bottom: 0;
         pointer-events: none;
-        border-radius: $--input-border-radius;
+        border-radius: $--n-input-border-radius;
         transition: border-color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier;
       }
       @include e(suffix, prefix) {
         position: absolute;
         line-height: 1.5;
         height: 0;
-        width: $--input-icon-size;
+        width: $--n-input-icon-size;
         white-space: nowrap;
         display: flex;
         align-items: center;
         top: 50%;
         @include b(icon) {
           justify-self: center;
-          font-size: $--input-icon-size;
+          font-size: $--n-input-icon-size;
         }
       }
       @include e(suffix) {
@@ -268,7 +268,7 @@
       box-sizing: border-box;
       padding: 0 12px;
       display: inline-block;
-      border-radius: $--input-border-radius;
+      border-radius: $--n-input-border-radius;
       transition:
         color .3s $--n-ease-in-out-cubic-bezier,
         background-color .3s $--n-ease-in-out-cubic-bezier,

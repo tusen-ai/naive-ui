@@ -29,7 +29,12 @@
           top: -3px;
           left: -3px;
           background-size: 800% 800%;
-          transition: left .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier, max-width .3s $--n-ease-in-out-cubic-bezier, background-position .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier;
+          transition:
+            left .3s $--n-ease-in-out-cubic-bezier,
+            opacity .3s $--n-ease-in-out-cubic-bezier,
+            max-width .3s $--n-ease-in-out-cubic-bezier,
+            background-position .3s $--n-ease-in-out-cubic-bezier,
+            box-shadow .3s $--n-ease-in-out-cubic-bezier;
         }
         &::before {
           opacity: 1;
@@ -61,15 +66,15 @@
       &::before {
         box-shadow: $--switch-switcher-box-shadow;
         background-position: $--switch-background-position;
-        background-image: map-get($map: $--switch-switcher-background-image, $key: 'inactive');
+        background-image: map-get($--switch-switcher-background-image, 'inactive');
       }
       &::after {
         background-position: $--switch-background-position;
-        background-image: map-get($map: $--switch-switcher-background-image, $key: 'active');
+        background-image: map-get($--switch-switcher-background-image, 'active');
       }
-      background-color: map-get($map: $--switch-rail-background-color, $key: 'inactive');
+      background-color: map-get($--switch-rail-background-color, 'inactive');
       @include m(active) {
-        background-color: map-get($map: $--switch-rail-background-color, $key: 'active');
+        background-color: map-get($--switch-rail-background-color, 'active');
       }
       @include m(disabled) {
         cursor: not-allowed;

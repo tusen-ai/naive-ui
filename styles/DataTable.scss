@@ -7,7 +7,7 @@
     padding-bottom: 8px;
     @include b(data-table-tables-wrapper) {
       position: relative;
-      border: $--table-border;
+      border: 1px solid $--table-border-color;
       transition: border-color .3s $--n-ease-in-out-cubic-bezier;
       border-radius: 6px;
       overflow: hidden;
@@ -18,14 +18,14 @@
           border-right: 1px solid $--n-divider-color;
           @include m(active) {
             transition: box-shadow 0.2s;
-            box-shadow: $--table-fixed-column-box-shadow
+            box-shadow: $--n-table-fixed-column-box-shadow
           }
         }
         @include m(right-fixed) {
           right: 0;
           border-left: 1px solid $--n-divider-color;
           @include m(active) {
-            box-shadow: $--table-fixed-column-box-shadow
+            box-shadow: $--n-table-fixed-column-box-shadow
           }
         }
         @include m(left-fixed, right-fixed) {
@@ -61,10 +61,10 @@
       @include b(data-table-tbody) {
         @include b(data-table-tr) {
           &:hover {
-            background-color: $--table-row-hover;
+            background-color: map-get($--table-row-background-color, 'hover');
           }
           @include m(hover) {
-            background-color: $--table-row-hover;
+            background-color: map-get($--table-row-background-color, 'hover');
           }
         }
       }
@@ -97,7 +97,7 @@
         text-align: left;
         font-weight: 500;
         box-sizing: border-box;
-        color: $--table-header-text-color;
+        color: $--data-table-header-text-color;
         transition: border-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
         @include m(filterable) {
           padding-right: 36px;
@@ -118,15 +118,15 @@
     @include m(bordered) {
       @include b(data-table-table){
         @include b(data-table-th) {
-          border-right: $--table-td-border-right;
+          border-right: $--data-table-border-color;
           &:last-child {
-            border-right: 0px solid $--n-divider-color;
+            border-right: 0px solid $--data-table-border-color;
           }
         }
         @include b(data-table-td) {
-          border-right: $--table-td-border-right;
+          border-right: $--data-table-border-color;
           &:last-child {
-            border-right: 0px solid $--n-divider-color;
+            border-right: 0px solid $--data-table-border-color;
           }
         }
       }

@@ -1,47 +1,11 @@
 @import './mixins/mixins.scss';
 
 @mixin header-mixin($level) {
-  $--header-font-size: (
-    '1': 32px,
-    '2': 26px,
-    '3': 18px,
-    '4': 16px,
-    '5': 14px,
-    '6': 14px
-  );
-
-  $--header-margin: (
-    '1': 24px 0 18px 0,
-    '2': 24px 0 18px 0,
-    '3': 20px 0 16px 0,
-    '4': 20px 0 16px 0,
-    '5': 18px 0 14px 0,
-    '6': 18px 0 14px 0
-  );
-
-  $--header-prefix-width: (
-    '1': 16px,
-    '2': 16px,
-    '3': 12px,
-    '4': 12px,
-    '5': 12px,
-    '6': 12px
-  );
-
-  $--header-bar-width: (
-    '1': 4px,
-    '2': 4px,
-    '3': 3px,
-    '4': 3px,
-    '5': 3px,
-    '6': 3px
-  );
-
   @include b('h' + $level) {
     @include once {
-      font-size: map-get($--header-font-size, $level);
+      font-size: map-get($--n-typography-header-font-size, $level);
       font-weight: 500; 
-      margin: map-get($--header-margin, $level);
+      margin: map-get($--n-typography-header-margin, $level);
       transition: color .3s $--n-ease-in-out-cubic-bezier;
       &:first-child {
         margin-top: 0
@@ -51,19 +15,19 @@
     @include m(prefix-bar) {
       @include once {
         position: relative;
-        padding-left: map-get($--header-prefix-width, $level);
+        padding-left: map-get($--n-typography-header-prefix-width, $level);
         @include m(align-text) {
           padding-left: 0;
           &::before {
-            left: -(map-get($--header-prefix-width, $level));
+            left: -(map-get($--n-typography-header-prefix-width, $level));
           }
         }
       }
       &::before {
         @include once {
           content: '';
-          width: map-get($--header-bar-width, $level);
-          border-radius:  map-get($--header-bar-width, $level) / 2;
+          width: map-get($--n-typography-header-bar-width, $level);
+          border-radius:  map-get($--n-typography-header-bar-width, $level) / 2;
           transition: background-color .3s $--n-ease-in-out-cubic-bezier;
           left: 0;
           top: 0;

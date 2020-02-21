@@ -4,23 +4,26 @@
   @include b(list) {
     @include once {
       font-size: 14px;
-      transition: background-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
+      transition:
+        background-color .3s $--n-ease-in-out-cubic-bezier,
+        color .3s $--n-ease-in-out-cubic-bezier,
+        border-color .3s $--n-ease-in-out-cubic-bezier;
       padding: 0;
       list-style-type: none;
     }
-    color: $--n-secondary-text-color;
-    background-color: $--n-card-background-color;
+    color: $--list-text-color;
+    background-color: $--list-background-color;
     @include m(bordered) {
       @include once {
         border-radius: 6px;
       }
-      border: 1px solid $--n-border-color;
+      border: 1px solid $--list-border-color;
       @include b(list-item) {
         @include once {
           padding: 12px 20px;
         }
         &:not(:last-child) {
-          border-bottom: 1px solid $--n-border-color;
+          border-bottom: 1px solid $--list-border-color;
         }
       }
       @include e(header, footer) {
@@ -28,7 +31,7 @@
           padding: 12px 20px;
         }
         &:not(:last-child) {
-          border-bottom: 1px solid $--n-border-color;
+          border-bottom: 1px solid $--list-border-color;
         }
       }
     }
@@ -39,7 +42,7 @@
         transition: border-color .3s $--n-ease-in-out-cubic-bezier;
       }
       &:not(:last-child) {
-        border-bottom: 1px solid $--n-border-color;
+        border-bottom: 1px solid $--list-border-color;
       }
     }
     @include b(list-item) {  
@@ -63,7 +66,7 @@
         }
       }
       &:not(:last-child) {
-        border-bottom: 1px solid $--n-border-color;
+        border-bottom: 1px solid $--list-border-color;
       }
     }
   }

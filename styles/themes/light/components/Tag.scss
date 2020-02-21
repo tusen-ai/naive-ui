@@ -1,5 +1,5 @@
 @mixin setup-light-tag {
-  $--tag-color: (
+  $--tag-text-color: (
     'checkable-default': $--n-secondary-text-color,
     'checkable-hover': $--n-primary-color,
     'checkable-active': white,

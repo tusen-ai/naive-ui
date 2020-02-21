@@ -18,7 +18,7 @@
       />
     </n-scrollbar>
     <n-fade-in-height-expand-transition width>
-      <n-log-loader v-if="loading" />
+      <n-log-loader v-if="loading" :theme="syntheticTheme" />
     </n-fade-in-height-expand-transition>
   </div>
 </template>

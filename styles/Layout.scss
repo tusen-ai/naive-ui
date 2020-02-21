@@ -81,7 +81,9 @@
     @include e(toggle-button) {
       @include once {
         z-index: 1;
-        transition: transform .3s $--n-ease-in-out-cubic-bezier;
+        transition:
+          transform .3s $--n-ease-in-out-cubic-bezier,
+          fill .3s $--n-ease-in-out-cubic-bezier;
         cursor: pointer;
         width: 36px;
         height: 36px;
@@ -90,12 +92,7 @@
         right: 0;
         transform: translateX(50%) translateY(-50%);
       }
-      path {
-        @include once {
-          transition: fill .3s $--n-ease-in-out-cubic-bezier;
-        }
-        fill: $--layout-sider-toggle-button-fill;
-      }
+      fill: $--layout-sider-toggle-button-fill;
     }
     @include once {
       @include e(content) {

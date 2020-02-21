@@ -8,6 +8,6 @@
   ) !global;
   $--base-select-menu-option-check-mark-color: $--n-primary-color !global;
   $--base-select-menu-background-color: white !global;
-  $--base-select-menu-box-shadow: $--n-popover-box-shadow !global;
+  $--base-select-menu-box-shadow: $--n-popmenu-box-shadow !global;
   $--base-select-menu-light-bar-background-color: change-color($--n-primary-color, $alpha: .1) !global;
 }

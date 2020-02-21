@@ -15,10 +15,10 @@
     "loading": $--n-popover-background-color
   ) !global;
   $--message-box-shadow: (
-    "info": $--n-popover-box-shadow,
-    "success": $--n-popover-box-shadow,
-    "error": $--n-popover-box-shadow,
-    "warning": $--n-popover-box-shadow,
-    "loading": $--n-popover-box-shadow
+    "info": $--n-popmenu-box-shadow,
+    "success": $--n-popmenu-box-shadow,
+    "error": $--n-popmenu-box-shadow,
+    "warning": $--n-popmenu-box-shadow,
+    "loading": $--n-popmenu-box-shadow
   ) !global;
 }

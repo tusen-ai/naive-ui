@@ -19,6 +19,6 @@
     "success": 0 2px 16px 0 change-color($--n-success-hs-color, $alpha: .5),
     "error": 0 2px 16px 0 change-color($--n-error-hs-color, $alpha: .5),
     "warning": 0 2px 16px 0 change-color($--n-warning-hs-color, $alpha: .5),
-    "loading": $--n-popover-box-shadow
+    "loading": $--n-popmenu-box-shadow
   ) !global;
 }

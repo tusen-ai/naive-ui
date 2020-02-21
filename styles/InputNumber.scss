@@ -15,7 +15,7 @@
 @include themes-mixin {
   @include b(input-number) {
     position: relative;
-    border-radius: $--input-number-border-radius;
+    border-radius: $--n-input-number-border-radius;
     box-sizing: border-box;
     width: 152px;
     display: inline-block;
@@ -57,7 +57,7 @@
       bottom: 0;
       left: 0;
       box-shadow: inset 0 0 0px 1px transparent;
-      border-radius: $--input-number-border-radius;
+      border-radius: $--n-input-number-border-radius;
       transition: box-shadow .3s $--n-ease-in-out-cubic-bezier;
       pointer-events: none;
     }
@@ -105,18 +105,18 @@
     }
     @include e(minus-button) {
       left: 0;
-      border-top-left-radius: $--input-number-border-radius;
-      border-bottom-left-radius: $--input-number-border-radius;
+      border-top-left-radius: $--n-input-number-border-radius;
+      border-bottom-left-radius: $--n-input-number-border-radius;
     }
     @include e(add-button) {
       right: 0;
-      border-top-right-radius: $--input-number-border-radius;
-      border-bottom-right-radius: $--input-number-border-radius;
+      border-top-right-radius: $--n-input-number-border-radius;
+      border-bottom-right-radius: $--n-input-number-border-radius;
     }
     @include e(input) {
       outline: none;
       box-sizing: border-box;
-      border-radius: $--input-number-border-radius;
+      border-radius: $--n-input-number-border-radius;
       background-color: map-get($--input-number-background-color, 'default');
       box-shadow: inset 0 0 0px 1px map-get($--input-number-border-color, 'default');
       &::placeholder {

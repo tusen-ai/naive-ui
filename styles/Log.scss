@@ -2,66 +2,61 @@
 
 @include themes-mixin {
   @include b(log) {
-    position: relative;
-    font-family: $--n-mono-font-family, monospace;
-    font-size: 14px;
-    color: $--n-secondary-text-color;
-    box-sizing: border-box;
-    transition: border-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
-    @include b(scrollbar) {
-      @include b(scrollbar-content) {
-        // padding-top: 8px;
-        // padding-bottom: 8px;
-        overflow: hidden;
-      }
-      @include b(scrollbar-rail) {
-        // @include m(vertical) {
-        //   top: 8px;
-        //   bottom: 8px
-        // }
-      }
-    }
-    @include e(lines) {
-      margin: 0;
-      white-space: pre-wrap;
-    }
-    @include e(line) {
-      margin: 0;
-    }
-    @include b(log-loader) {
-      @include fade-in-width-expand-transition($duration: .3s, $delay: 0s);
-      transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
+    @include once {
+      position: relative;
+      font-family: $--n-mono-font-family;
+      font-size: 14px;
       box-sizing: border-box;
-      border: 1px solid $--n-border-color;
-      position: absolute;
-      right: 16px;
-      top: 8px;
-      height: 34px;
-      border-radius: 17px;
-      color: $--n-secondary-text-color;
-      background-color: $--n-modal-background-color;
-      line-height: 34px;
-      font-family: $--n-font-family;
-      white-space: nowrap;
-      overflow: hidden;
-      @include e(content) {
-        display: inline-block;
-        vertical-align: bottom;
-        line-height: 34px;
-        font-family: $--n-font-family;
-        padding-left: 40px;
-        padding-right: 20px;
-        white-space: nowrap;
+      transition:
+        border-color .3s $--n-ease-in-out-cubic-bezier,
+        color .3s $--n-ease-in-out-cubic-bezier;
+      @include e(lines) {
+        margin: 0;
+        white-space: pre-wrap;
       }
-      @include b(base-loading) {
+      @include e(line) {
+        margin: 0;
+      } 
+    }
+    color: $--log-text-color;
+    @include b(log-loader) {
+      @include once {
+        @include fade-in-width-expand-transition($duration: .3s, $delay: 0s);
+        transition:
+          color .3s $--n-ease-in-out-cubic-bezier,
+          background-color .3s $--n-ease-in-out-cubic-bezier;
+        box-sizing: border-box;
         position: absolute;
-        left: 12px;
-        top: calc(50% - 10px);
-        font-size: 20px;
-        width: 20px;
-        height: 20px;
-        display: inline-block;
+        right: 16px;
+        top: 8px;
+        height: 34px;
+        border-radius: 17px;
+        line-height: 34px;
+        white-space: nowrap;
+        overflow: hidden;
+        @include e(content) {
+          display: inline-block;
+          vertical-align: bottom;
+          line-height: 34px;
+          font-family: $--n-font-family;
+          padding-left: 40px;
+          padding-right: 20px;
+          white-space: nowrap;
+        }
+        @include b(base-loading) {
+          position: absolute;
+          left: 12px;
+          top: calc(50% - 10px);
+          font-size: 20px;
+          width: 20px;
+          height: 20px;
+          display: inline-block;
+        }
       }
+      border: 1px solid $--log-loader-border-color;
+      color: $--log-loader-text-color;
+      background-color: $--log-loader-background-color;
+      font-family: $--n-font-family;
     }
   }
 }

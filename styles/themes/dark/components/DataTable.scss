@@ -1,3 +1,4 @@
 @mixin setup-dark-data-table {
-  // blabla
+  $--data-table-border-color: $--n-divider-color !global;
+  $--data-table-header-text-color: $--n-primary-text-color !global;
 }

@@ -1,10 +1,11 @@
 @mixin setup-dark-table {
-  $--table-header-background-color: $--n-action-background-color !global;
+  $--table-border-color: $--n-divider-color !global;
   $--table-body-background-color: $--n-card-background-color !global;
-  $--table-header-text-color: $--overlay-text-1 !global;
-  $--table-body-text-color: $--overlay-text-2 !global;
-  $--table-row-hover: $--n-action-background-color !global;
-  $--table-border: 1px solid $--n-divider-color !global;
-  $--table-td-border-right: 1px solid $--n-divider-color !global;
-  $--data-table-border-color: $--n-divider-color !global;
+  $--table-header-background-color: $--n-table-header-background-color !global;
+  $--table-row-background-color: (
+    'default': $--n-card-background-color,
+    'hover': $--n-table-header-background-color
+  ) !global;
+  $--table-header-text-color: $--n-primary-text-color !global;
+  $--table-body-text-color: $--n-secondary-text-color !global;
 }

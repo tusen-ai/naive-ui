@@ -1,33 +1,23 @@
 @import './mixins/mixins.scss';
 
 @mixin descriptions-size-mixin ($size) {
-  $descriptions-bordered-padding: (
-    'small': (8px 12px),
-    'medium': (12px 16px),
-    'large': (16px 24px),
-  );
-  $descriptions-padding: (
-    'small': 8px,
-    'medium': 12px,
-    'large': 16px,
-  );
   @include m($size + '-size') {
     @include b(descriptions-header) {
-      margin-bottom: map-get($descriptions-padding, $size);
+      margin-bottom: map-get($--n-descriptions-padding, $size);
     }
     @include m(bordered) {
       @include b(descriptions-table-wrapper) {
         @include b(descriptions-table) {
           @include b(descriptions-table-row) {
             @include b(descriptions-table-header) {
-              padding: map-get($descriptions-bordered-padding, $size);
+              padding: map-get($--n-descriptions-bordered-padding, $size);
             }
             @include b(descriptions-table-content) {
-              padding: map-get($descriptions-bordered-padding, $size);
+              padding: map-get($--n-descriptions-bordered-padding, $size);
             }
             &:last-child {
               @include b(descriptions-table-content) {
-                padding: map-get($descriptions-bordered-padding, $size);
+                padding: map-get($--n-descriptions-bordered-padding, $size);
               }
             }
           }
@@ -38,7 +28,7 @@
       @include b(descriptions-table) {
         @include b(descriptions-table-row) {
           @include b(descriptions-table-content) {
-            padding: 0 0 map-get($descriptions-padding, $size) 0;  
+            padding: 0 0 map-get($--n-descriptions-padding, $size) 0;  
           }
           &:last-child {
             @include b(descriptions-table-content) {

@@ -1,26 +1,5 @@
 @import './mixins/mixins.scss';
 
-$--card-margin-left: (
-  'small': 16px,
-  'medium': 24px,
-  'large': 32px,
-  'huge': 40px
-);
-
-$--card-margin-top: (
-  'small': 12px,
-  'medium': 16px,
-  'large': 20px,
-  'huge': 24px
-);
-
-$--card-margin-bottom: (
-  'small': 12px,
-  'medium': 16px,
-  'large': 16px,
-  'huge': 20px
-);
-
 @mixin card-size-mixin ($size) {
   @include m($size + '-size') {
     @include m(content-segmented) {
@@ -28,7 +7,7 @@ $--card-margin-bottom: (
         @include e(content) {
           &:not(:first-child) {
             margin-top: 0;
-            padding-top: map-get($--card-margin-bottom, $size);
+            padding-top: map-get($--n-card-margin-bottom, $size);
           }
         }
       }
@@ -37,10 +16,10 @@ $--card-margin-bottom: (
       & > {
         @include e(content) {
           padding: 0;
-          margin: map-get($--card-margin-bottom, $size) map-get($--card-margin-left, $size);
+          margin: map-get($--n-card-margin-bottom, $size) map-get($--n-card-margin-left, $size);
           &:not(:first-child) {
             margin-top: 0;
-            padding-top: map-get($--card-margin-bottom, $size);
+            padding-top: map-get($--n-card-margin-bottom, $size);
           }
         }
       }
@@ -50,7 +29,7 @@ $--card-margin-bottom: (
         @include e(footer) {
           &:not(:first-child) {
             margin-top: 0;
-            padding-top: map-get($--card-margin-bottom, $size);
+            padding-top: map-get($--n-card-margin-bottom, $size);
           }
         }
       }
@@ -59,17 +38,17 @@ $--card-margin-bottom: (
       & > {
         @include e(footer) {
           padding: 0;
-          margin: map-get($--card-margin-bottom, $size) map-get($--card-margin-left, $size);
+          margin: map-get($--n-card-margin-bottom, $size) map-get($--n-card-margin-left, $size);
           &:not(:first-child) {
             margin-top: 0;
-            padding-top: map-get($--card-margin-bottom, $size);
+            padding-top: map-get($--n-card-margin-bottom, $size);
           }
         }
       }
     }
     @include b(card-header) {
-      padding: 0px map-get($--card-margin-left, $size);
-      margin: map-get($--card-margin-top, $size) 0 map-get($--card-margin-bottom, $size) 0;
+      padding: 0px map-get($--n-card-margin-left, $size);
+      margin: map-get($--n-card-margin-top, $size) 0 map-get($--n-card-margin-bottom, $size) 0;
       @include e(main) {
         font-size: 18px;
       }
@@ -78,13 +57,13 @@ $--card-margin-bottom: (
       }
     }
     @include e(content, footer) {
-      padding: 0px map-get($--card-margin-left, $size);
-      margin: map-get($--card-margin-bottom, $size) 0;
+      padding: 0px map-get($--n-card-margin-left, $size);
+      margin: map-get($--n-card-margin-bottom, $size) 0;
       font-size: 14px;
     }
     @include e(action) {
       background-color: $--card-action-background-color;
-      padding: map-get($--card-margin-bottom, $size) map-get($--card-margin-left, $size);
+      padding: map-get($--n-card-margin-bottom, $size) map-get($--n-card-margin-left, $size);
       font-size: 14px;
     }
   }

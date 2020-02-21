@@ -57,6 +57,9 @@
 @import 'components/Typography.scss';
 @import 'components/Upload.scss';
 @import 'components/BaseMenuMask.scss';
+@import 'components/Spin.scss';
+@import 'components/Log.scss';
+@import 'components/Code.scss';
 
 @mixin setup-light-theme($in-js-env: false) {
   @include setup-light-colors();
@@ -125,7 +128,8 @@
   $--n-disabled-opacity: $--alpha-disabled !global;
   $--n-disabled-background-color: $--neutral-disabled !global;
 
-  $--n-popover-box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.18) !global;
+  $--n-popmenu-box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.18) !global;
+  $--n-popover-box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.12) !global;
 
   @if ($in-js-env != true) {
     @include setup-light-divider;
@@ -186,5 +190,8 @@
     @include setup-light-typography;
     @include setup-light-upload;
     @include setup-light-base-menu-mask;
+    @include setup-light-spin;
+    @include setup-light-log;
+    @include setup-light-code;
   }
 }

@@ -32,13 +32,13 @@
       position: relative;
       z-index: auto;
       box-shadow: none;
-      border-radius: $--base-selection-border-radius;
+      border-radius: $--n-base-selection-border-radius;
       width: 100%;
       max-width: 100%;
       display: inline-block;
       vertical-align: bottom;
       @include b(base-selection-border-mask) {
-        border-radius: $--base-selection-border-radius;
+        border-radius: $--n-base-selection-border-radius;
         position: absolute;
         left: 0;
         right: 0;
@@ -84,7 +84,7 @@
         position: relative;
         z-index: auto;
         transition: color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
-        border-radius: $--base-selection-border-radius;
+        border-radius: $--n-base-selection-border-radius;
       }
       box-shadow: map-get($--base-selection-box-shadow, 'default');
       background-color: map-get($--base-selection-background-color, 'default');
@@ -100,7 +100,7 @@
         box-sizing: border-box;
         position: relative;
         transition: color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
-        border-radius: $--base-selection-border-radius;
+        border-radius: $--n-base-selection-border-radius;
       }
       box-shadow: map-get($--base-selection-box-shadow, 'default');
       background-color: map-get($--base-selection-background-color, 'default');

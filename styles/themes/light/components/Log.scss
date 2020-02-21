@@ -1,0 +1,6 @@
+@mixin setup-light-log {
+  $--log-text-color: $--n-secondary-text-color !global;
+  $--log-loader-text-color: $--n-secondary-text-color !global;
+  $--log-loader-background-color: $--n-modal-background-color !global;
+  $--log-loader-border-color: $--n-border-color !global;
+}
