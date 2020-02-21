@@ -298,11 +298,13 @@ export default {
         const originValidator = rule.validator
         if (typeof originValidator === 'function') {
           rule.validator = (...args) => {
-            const validateResult = originValidator(...args)
-            if (validateResult instanceof Error) {
-              return validateResult
+            let validateResult = null
+            try {
+              validateResult = originValidator(...args)
+            } catch (err) {
+              console.error(err)
             }
-            return !!validateResult
+            return validateResult
           }
         }
         return rule
