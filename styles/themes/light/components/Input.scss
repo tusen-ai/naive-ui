@@ -12,10 +12,10 @@
     'disabled': change-color($--n-placeholder-text-color, $alpha: alpha($--n-placeholder-text-color) * $--n-disabled-opacity)
   ) !global;
   $--input-background-color: (
-    'default': $--n-card-background-color,
+    'default': $--n-base-background-color,
     'disabled': $--n-disabled-background-color,
-    'focus': $--n-card-background-color,
-    'error-focus': $--n-card-background-color,
+    'focus': $--n-base-background-color,
+    'error-focus': $--n-base-background-color,
   ) !global;
   $--input-icon-color: (
     'default': $--n-icon-color,

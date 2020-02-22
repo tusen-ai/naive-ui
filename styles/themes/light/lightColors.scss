@@ -1,56 +1,81 @@
 @mixin setup-light-colors {
   $--base-text: rgb(0, 0, 0) !global;
 
-  $--overlay-text-1: rgba(0, 0, 0, .9) !global;
-  $--overlay-text-2: rgba(0, 0, 0, .75) !global;
-  $--overlay-text-3: rgba(0, 0, 0, .45) !global;
-  $--overlay-text-4: rgba(0, 0, 0, .25) !global;
-
-  $--alpha-1: .9 !global;
-  $--alpha-2: .75 !global;
-  $--alpha-3: .45 !global;
-  $--alpha-4: .25 !global;
+  $--alpha-1: .84 !global;
+  $--alpha-2: .72 !global;
+  $--alpha-3: .4 !global;
+  $--alpha-4: .24 !global;
 
   $--alpha-disabled: .5 !global;
-
+  
+  // overlay-text
+  $--overlay-text-1: rgba(0, 0, 0, $--alpha-1) !global;
+  $--overlay-text-2: rgba(0, 0, 0, $--alpha-2) !global;
+  $--overlay-text-3: rgba(0, 0, 0, $--alpha-3) !global;
+  $--overlay-text-4: rgba(0, 0, 0, $--alpha-4) !global;
+  
+  // overlay
   $--overlay-avatar: rgba(0, 0, 0, .25) !global;
   $--overlay-rail: rgba(0, 0, 0, .14) !global;
-  $--overlay-border: rgba(0, 0, 0, .14) !global;
-  $--overlay-divider: rgba(0, 0, 0, .10) !global;
-  $--overlay-input: rgba(0, 0, 0, .02) !global;
-  $--overlay-action: rgba(0, 0, 0, .02) !global;
+  $--overlay-border: rgba(0, 0, 0, .13) !global;
+  $--overlay-divider: rgba(0, 0, 0, .09) !global;
+  $--overlay-input: null !global;
+  $--overlay-action: rgba(0, 0, 0, .025) !global;
+  $--overlay-tab: rgba(0, 0, 0, .04) !global;
   $--overlay-scrollbar: rgba(0, 0, 0, .25) !global;
   $--overlay-scrollbar-hover: rgba(0, 0, 0, .4) !global;
   $--overlay-disabled: rgba(0, 0, 0, .04) !global;
-  $--overlay-tab: rgba(0, 0, 0, .04) !global;
+  $--overlay-pending: rgba(0, 0, 0, .04) !global;
+  $--overlay-active: rgba(0, 0, 0, .06) !global;
+  $--overlay-code: rgba(0, 0, 0, .025) !global;
+  $--overlay-tag: rgba(0, 0, 0, .025) !global;
 
+  // neutral
   $--neutral-base: white !global;
   $--neutral-popover: rgb(255, 255, 255) !global;
   $--neutral-modal: rgb(255, 255, 255) !global;
   $--neutral-card: rgb(255, 255, 255) !global;
-  $--neutral-body: rgb(250, 250, 250) !global;
-  $--neutral-disabled: rgb(245, 245, 245) !global;
-  $--neutral-border: rgb(219, 219, 219) !global;
-  $--neutral-divider: rgb(230, 230, 230) !global;
-  $--neutral-input: rgb(250, 250, 250) !global;
+  $--neutral-body: rgb(252, 252, 252) !global;
+  $--neutral-disabled: create-light-neutral-color($--overlay-disabled) !global;
+  $--neutral-border: create-light-neutral-color($--overlay-border) !global;
+  $--neutral-divider: create-light-neutral-color($--overlay-divider) !global;
+  $--neutral-input: null !global;
+  $--neutral-action: create-light-neutral-color($--overlay-action) !global;
+  $--neutral-tag: create-light-neutral-color($--overlay-tag) !global;
+  $--neutral-code: create-light-neutral-color($--overlay-code) !global;
 
+  // primary
   $--primary-hover: #36ad6a !global;
   $--primary-default:#18a058 !global;
   $--primary-active: #0c7a43 !global;
+  $--primary-hs: null !global;
 
+  // info
   $--info-hover: #4098fc !global;
   $--info-default:#2080f0 !global;
   $--info-active: #1060c9 !global;
+  $--info-hs: null !global;
   
+  // error
   $--error-hover: #de576d !global;
   $--error-default:#d03050 !global;
   $--error-active: #ab1f3f !global;
+  $--error-hs: null !global;
   
+  // warning
   $--warning-hover: #fcb040 !global;
   $--warning-default:#f0a020 !global;
   $--warning-active: #c97c10 !global;
+  $--warning-hs: null !global;
 
+  // success
   $--success-hover: #36ad6a !global;
   $--success-default:#18a058 !global;
   $--success-active: #0c7a43 !global;
+  $--success-hs: null !global;
+}
+
+@function create-light-neutral-color($overlay) {
+  $neutral-r: 255 * (1 - alpha($overlay));
+  @return rgb($neutral-r, $neutral-r, $neutral-r)
 }

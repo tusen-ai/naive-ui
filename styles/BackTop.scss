@@ -2,14 +2,17 @@
 
 @include themes-mixin {
   @include b(back-top) {
-    @include fade-in-scale-up-transition(back-top);
     @include once {
+      @include fade-in-scale-up-transition(back-top);
       position: fixed;
       right: 40px;
       bottom: 40px;
       min-width: 40px;
       height: 40px;
       cursor: pointer;
+      @include m(transition-disabled) {
+        transition: none !important;
+      }
     }
     @include e(default-button) {
       @include once {
@@ -21,19 +24,16 @@
           pointer-events: none;
         }
       }
-      fill: $--back-top-button-fill;
+      fill: map-get($--back-top-button-fill, 'default');
       box-shadow: map-get($--back-top-box-shadow, 'default');
       &:hover {
         box-shadow: map-get($--back-top-box-shadow, 'hover');
-        fill: $--back-top-button-fill-hover;
+        fill: map-get($--back-top-button-fill, 'hover');
       }
       &:active {
         box-shadow: map-get($--back-top-box-shadow, 'active');
-        fill: $--back-top-button-fill-active;
+        fill: map-get($--back-top-button-fill, 'active');
       }
-    }
-    @include m(transition-disabled) {
-      transition: none !important;
     }
   }
 }

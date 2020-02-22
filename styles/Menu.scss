@@ -94,7 +94,7 @@
       @include b(menu-item-content) {
         @include once {
           box-sizing: border-box;
-          line-height: 1.5;
+          line-height: 1.75;
           height: 48px;
           display: flex;
           align-items: center;

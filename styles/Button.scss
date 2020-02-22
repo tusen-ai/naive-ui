@@ -2,18 +2,18 @@
 
 @mixin button-size-mixin($size) {
   @include m($size + "-size") {
-    $height: map-get($map: $--button-height, $key: $size);
-    $font-size: map-get($map: $--button-font-size, $key: $size);
-    border-radius: $--button-border-radius;
+    $height: map-get($--n-height, $size);
+    $font-size: map-get($--n-button-font-size, $size);
+    border-radius: $--n-button-border-radius;
     font-size: $font-size;
     @include not-m(text) {
       height: $height;
       line-height: $height;
-      padding: map-get($map: $--button-padding, $key: $size);
+      padding: map-get($--n-button-padding, $size);
     }
     white-space: nowrap;
     @include m(round) {
-      padding: map-get($map: $--round-button-padding, $key: $size);
+      padding: map-get($--n-button-round-padding, $size);
       border-radius: $height / 2;
     }
     @include m(circle) {
@@ -28,7 +28,7 @@
     @include e(icon) {
       display: inline-block;
       position: relative;
-      $icon-size: map-get($map: $--button-icon-size, $key: $size);
+      $icon-size: map-get($--n-button-icon-size, $size);
       line-height: $height;
       height: $height;
       width: $icon-size;
@@ -77,9 +77,9 @@
 
 @mixin button-type-mixin ($type) {
   @include m($type + "-type") {
-    color: map-get($map: $--button-color, $key: $type);
-    background-color: map-get($map: $--button-background-color, $key: $type);
-    box-shadow: map-get($map: $--button-box-shadow, $key: $type);
+    color: map-get($--button-color, $type);
+    background-color: map-get($--button-background-color, $type);
+    box-shadow: map-get($--button-box-shadow, $type);
     @include m(text) {
       box-shadow: none;
       background-color: transparent;
@@ -114,51 +114,51 @@
       }
     }
     @include m(ghost) {
-      background-color: map-get($map: $--ghost-button-background-color, $key: $type);
-      color: map-get($map: $--ghost-button-color, $key: $type);
-      box-shadow: map-get($map: $--button-box-shadow, $key: $type + '-ghost');
+      background-color: map-get($--ghost-button-background-color, $type);
+      color: map-get($--ghost-button-color, $type);
+      box-shadow: map-get($--button-box-shadow, $type + '-ghost');
       @include not-m(disabled) {
         @include m(enter-pressed) {
-          background-color: map-get($map: $--ghost-button-background-color, $key: $type + '-active');
+          background-color: map-get($--ghost-button-background-color, $type + '-active');
         }
         &:not(:active):focus {
           @include not-m(enter-pressed) {
-            background-color: map-get($map: $--ghost-button-background-color, $key: $type + '-hover');
+            background-color: map-get($--ghost-button-background-color, $type + '-hover');
           } 
         }
         @include not-m(enter-pressed) {
           &:hover {
-            background-color: map-get($map: $--ghost-button-background-color, $key: $type + '-hover');
+            background-color: map-get($--ghost-button-background-color, $type + '-hover');
           }
           &:active {
-            background-color: map-get($map: $--ghost-button-background-color, $key: $type + '-active');
+            background-color: map-get($--ghost-button-background-color, $type + '-active');
           }
         }
       }
       @include e(icon) {
         @include b(icon) {
-          fill: map-get($map: $--ghost-button-color, $key: $type) !important;
-          stroke: map-get($map: $--ghost-button-color, $key: $type) !important;
+          fill: map-get($--ghost-button-color, $type) !important;
+          stroke: map-get($--ghost-button-color, $type) !important;
         }
         circle {
-          stroke: map-get($map: $--ghost-button-color, $key: $type) !important;
+          stroke: map-get($--ghost-button-color, $type) !important;
         }
       }
     }
     @if $type == 'default' {
       @include e(icon) {
         @include b(icon) {
-          fill: map-get($map: $--ghost-button-color, $key: $type) !important;
-          stroke: map-get($map: $--ghost-button-color, $key: $type) !important;
+          fill: map-get($--ghost-button-color, $type) !important;
+          stroke: map-get($--ghost-button-color, $type) !important;
         }
         circle {
-          stroke: map-get($map: $--ghost-button-color, $key: $type) !important;
+          stroke: map-get($--ghost-button-color, $type) !important;
         }
       }
     }
     @include not-m(disabled) {
       @include m(enter-pressed) {
-        background-color: map-get($map: $--button-background-color, $key: $type + '-active');
+        background-color: map-get($--button-background-color, $type + '-active');
       } 
       @include m(rippling) {
         &::after {
@@ -170,15 +170,15 @@
       }
       &:not(:active):focus {
         @include not-m(enter-pressed) {
-          background-color: map-get($map: $--button-background-color, $key: $type + '-hover');
+          background-color: map-get($--button-background-color, $type + '-hover');
         } 
       }
       @include not-m(enter-pressed) {
         &:hover {
-          background-color: map-get($map: $--button-background-color, $key: $type + '-hover');
+          background-color: map-get($--button-background-color, $type + '-hover');
         }
         &:active {
-          background-color: map-get($map: $--button-background-color, $key: $type + '-active');
+          background-color: map-get($--button-background-color, $type + '-active');
         }
       }
     }
@@ -189,10 +189,10 @@
 @mixin ripple-mixin($type) {
   @keyframes #{$theme}-#{$type}-button-ripple--spread {
     from {
-      box-shadow: map-get($map: $--button-box-shadow, $key: $type + '-focus-ripple-start');
+      box-shadow: map-get($--button-box-shadow, $type + '-focus-ripple-start');
     }
     to {
-      box-shadow: map-get($map: $--button-box-shadow, $key: $type + '-focus-ripple-end');
+      box-shadow: map-get($--button-box-shadow, $type + '-focus-ripple-end');
     }
   }
   @keyframes #{$theme}-#{$type}-button-ripple--opacity {
@@ -217,7 +217,7 @@
       outline: none;
       position: relative;
       border: none;
-      font-family: $--button-font-family;
+      font-family: inherit;
       display: inline-block;
       align-items: center;
       justify-content: center;
@@ -274,7 +274,6 @@
       }
       @include m(disabled) {
         cursor: not-allowed;
-        
       }
       &::-moz-focus-inner {
         border: 0;

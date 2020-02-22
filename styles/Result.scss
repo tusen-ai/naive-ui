@@ -4,8 +4,8 @@
   @include m($status + '-status') {
     @include b(result-icon) {
       @include b(icon) {
-        fill: map-get($--result-icon-fill, $status);
-        stroke: map-get($--result-icon-fill, $status);
+        fill: map-get($--result-icon-color, $status);
+        stroke: map-get($--result-icon-color, $status);
       }
     }
   }

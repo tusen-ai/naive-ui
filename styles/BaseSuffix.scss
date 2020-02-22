@@ -67,7 +67,9 @@
       }
       &::after {
         @include once {
-          transition: transform .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
+          transition:
+            transform .3s $--n-ease-in-out-cubic-bezier,
+            border-color .3s $--n-ease-in-out-cubic-bezier;
           position: absolute;
           content: '';
           box-sizing: border-box;
@@ -116,7 +118,7 @@
           }
         }
       }
-      @include b(-arrow) {
+      @include b(base-suffix-arrow) {
         @include m(active) {
           &::after {
             border-left: 1px solid map-get($--base-suffix-arrow-color, 'error-active');

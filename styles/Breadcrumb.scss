@@ -2,7 +2,9 @@
 
 @include themes-mixin {
   @include b(breadcrumb) {
-    white-space: nowrap;
+    @include once {
+      white-space: nowrap;
+    }
     @include b(breadcrumb-item) {
       @include once {
         transition: color .3s $--n-ease-in-out-cubic-bezier;
@@ -40,7 +42,9 @@
       }
       &:last-child {
         @include e(link) {
-          cursor: unset;
+          @include once {
+            cursor: unset;
+          }
           color: map-get($--breadcrumb-link-text-color, 'active');
         }
         @include b(icon) {

@@ -2,7 +2,7 @@
 
 @mixin popover-content-transition {
   &#{&}-transition-enter-to, &#{&}-transition-leave {
-    transform:  scaleX(.999999); // scale is set to 99999 to get rid of a ridiculous render bug of chrome
+    transform: $--n-transform-debounce-scale; // scale is set to 99999 to get rid of a ridiculous render bug of chrome
     opacity: 1;
   }
   &#{&}-transition-enter, &#{&}-transition-leave-to {
@@ -23,7 +23,7 @@
       @include popover-content-transition;
       transition: background-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
       transform-origin: inherit;
-      transform: scale(.99999);
+      transform: $--n-transform-debounce-scale;
       position: relative;
       border-radius: 6px;
       font-size: 13px;
@@ -82,7 +82,7 @@
       }
       @include b(popover-arrow) {
         @include once {
-          bottom: -2 * $--popover-arrow-width;
+          bottom: -2 * $--n-popover-arrow-width;
           left: 10px;
         }
         border-top-color: $--popover-background-color;
@@ -94,8 +94,8 @@
       }
       @include b(popover-arrow) {
         @include once {
-          bottom: -2 * $--popover-arrow-width;
-          transform: translateX(-$--popover-arrow-width);
+          bottom: -2 * $--n-popover-arrow-width;
+          transform: translateX(-$--n-popover-arrow-width);
           left: 50%;
         }
         border-top-color: $--popover-background-color;
@@ -107,7 +107,7 @@
       }
       @include b(popover-arrow) {
         @include once {
-          bottom: -2 * $--popover-arrow-width;
+          bottom: -2 * $--n-popover-arrow-width;
           right: 10px;
         } 
         border-top-color: $--popover-background-color;
@@ -119,7 +119,7 @@
       }
       @include b(popover-arrow) {
         @include once {
-          top: -2 * $--popover-arrow-width;
+          top: -2 * $--n-popover-arrow-width;
           left: 10px;
         }
         border-bottom-color: $--popover-background-color;
@@ -131,8 +131,8 @@
       }
       @include b(popover-arrow) {
         @include once {
-          top: -2 * $--popover-arrow-width;
-          transform: translateX(-$--popover-arrow-width);
+          top: -2 * $--n-popover-arrow-width;
+          transform: translateX(-$--n-popover-arrow-width);
           left: 50%;
         }
         border-bottom-color: $--popover-background-color;
@@ -144,7 +144,7 @@
       }
       @include b(popover-arrow) {
         @include once {
-          top: -2 * $--popover-arrow-width;
+          top: -2 * $--n-popover-arrow-width;
           right: 10px;
         }
         border-bottom-color: $--popover-background-color;
@@ -156,7 +156,7 @@
       }
       @include b(popover-arrow) {
         @include once {
-          right: -2 * $--popover-arrow-width;
+          right: -2 * $--n-popover-arrow-width;
           top: 10px;
         }
         border-left-color: $--popover-background-color;
@@ -168,8 +168,8 @@
       }
       @include b(popover-arrow) {
         @include once {
-          right: -2 * $--popover-arrow-width;
-          transform: translateY(-$--popover-arrow-width);
+          right: -2 * $--n-popover-arrow-width;
+          transform: translateY(-$--n-popover-arrow-width);
           top: 50%;
         }
         border-left-color: $--popover-background-color;
@@ -181,7 +181,7 @@
       }
       @include b(popover-arrow) {
         @include once {
-          right: -2 * $--popover-arrow-width;
+          right: -2 * $--n-popover-arrow-width;
           bottom: 10px;
         }
         border-left-color: $--popover-background-color;
@@ -193,7 +193,7 @@
       }
       @include b(popover-arrow) {
         @include once {
-          left: -2 * $--popover-arrow-width;
+          left: -2 * $--n-popover-arrow-width;
           top: 10px;
         }
         border-right-color: $--popover-background-color;
@@ -205,8 +205,8 @@
       }
       @include b(popover-arrow) {
         @include once {
-          left: -2 * $--popover-arrow-width;
-          transform: translateY(-$--popover-arrow-width);
+          left: -2 * $--n-popover-arrow-width;
+          transform: translateY(-$--n-popover-arrow-width);
           top: 50%;
         }
         border-right-color: $--popover-background-color;
@@ -218,7 +218,7 @@
       }
       @include b(popover-arrow) {
         @include once {
-          left: -2 * $--popover-arrow-width;
+          left: -2 * $--n-popover-arrow-width;
           bottom: 10px;
         }
         border-right-color: $--popover-background-color;

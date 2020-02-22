@@ -1,7 +1,5 @@
 @import './mixins/mixins.scss';
 
-$--base-loading-stroke-dashoffset: 500;
-
 @keyframes n-base-loading-rotate {
   0% {
     transform: rotate(0deg);
@@ -13,14 +11,14 @@ $--base-loading-stroke-dashoffset: 500;
 
 @keyframes n-base-loading-dash {
   0% {
-    stroke-dashoffset: $--base-loading-stroke-dashoffset;
+    stroke-dashoffset: $--n-base-loading-stroke-dashoffset;
   }
   50% {
-    stroke-dashoffset: $--base-loading-stroke-dashoffset / 4;
+    stroke-dashoffset: $--n-base-loading-stroke-dashoffset / 4;
     transform: rotate(135deg);
   }
   100% {
-    stroke-dashoffset: $--base-loading-stroke-dashoffset;
+    stroke-dashoffset: $--n-base-loading-stroke-dashoffset;
     transform: rotate(450deg);
   }
 }
@@ -43,7 +41,7 @@ $--base-loading-stroke-dashoffset: 500;
           transform-origin: center;
           transition: stroke .3s $--n-ease-in-out-cubic-bezier;
           animation: n-base-loading-dash 1.5s ease-in-out infinite;
-          stroke-dasharray: $--base-loading-stroke-dashoffset;
+          stroke-dasharray: $--n-base-loading-stroke-dashoffset;
           stroke-dashoffset: 0;
           stroke-linecap: round;
         }

@@ -1,17 +1,10 @@
 @import './mixins/mixins.scss';
 
-$--tabs-tab-font-size: (
-  'small': 13px,
-  'medium': 14px,
-  'large': 16px,
-  'huge': 18px
-);
-
 @mixin tabs-size-mixin ($size) {
   @include m($size + '-size') {
     @include b(tabs-label) {
       @include e(label) {
-        font-size: map-get($--tabs-tab-font-size, $size) !important;
+        font-size: map-get($--n-tabs-tab-font-size, $size) !important;
       }
     }
   }

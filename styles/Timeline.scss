@@ -1,15 +1,5 @@
 @import './mixins/mixins.scss';
 
-$--timeline-header-font-size: (
-  'medium': 14px,
-  'large': 16px
-);
-
-$--timeline-header-margin-top: (
-  'medium': 0,
-  'large': -1px
-);
-
 @mixin timeline-type-mixin ($type) {
   @include m($type + '-type') {
     @include b(timeline-item-timeline) {
@@ -25,10 +15,10 @@ $--timeline-header-margin-top: (
     @include b(timeline-item) {
       @include b(timeline-item-content) {
         @include e(title) {
-          margin-top: map-get($--timeline-header-margin-top, $size)
+          margin-top: map-get($--n-timeline-header-margin-top, $size)
         }
         @include e(title) {
-          font-size: map-get($--timeline-header-font-size, $size);
+          font-size: map-get($--n-timeline-header-font-size, $size);
         }
       }
     }

@@ -7,7 +7,7 @@
     'warning': $--n-warning-color,
     'success': $--n-success-color
   ) !global;
-  $--progress-indicator-color: (
+  $--progress-indicator-text-color: (
     'outside': $--n-secondary-text-color,
     'inside': black
   ) !global;

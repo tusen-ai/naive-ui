@@ -63,16 +63,16 @@
         width: 100%;
         position: relative;
       }
-      height: $--slider-rail-height;
+      height: $--n-slider-rail-height;
       background-color: map-get($--slider-rail-background-color, 'default');
       transition: background-color .2s $--n-ease-in-out-cubic-bezier;
-      border-radius: $--slider-rail-height / 2;
+      border-radius: $--n-slider-rail-height / 2;
       @include e(fill) {
         @include once {
           position: absolute;
           top: 0;
           bottom: 0;
-          border-radius: $--slider-rail-height / 2;
+          border-radius: $--n-slider-rail-height / 2;
           transition: background-color .3s $--n-ease-in-out-cubic-bezier;
         }
         background-color: map-get($--slider-rail-fill-background-color, 'default');  
@@ -81,9 +81,9 @@
     @include b(slider-handle) {
       @include once {
         outline: none;
-        height: $--slider-handle-size;
-        width: $--slider-handle-size;
-        border-radius: $--slider-handle-size / 2;
+        height: $--n-slider-handle-size;
+        width: $--n-slider-handle-size;
+        border-radius: $--n-slider-handle-size / 2;
         transition: box-shadow .2s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
         position: absolute;
         top: 0;
@@ -115,9 +115,9 @@
           transition: box-shadow .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
           position: absolute;
           transform: translateX(-50%) translateY(-50%);
-          height: $--slider-dot-size;
-          width: $--slider-dot-size;
-          border-radius: $--slider-dot-size / 2;
+          height: $--n-slider-dot-size;
+          width: $--n-slider-dot-size;
+          border-radius: $--n-slider-dot-size / 2;
           overflow: hidden;
         }
         box-shadow: map-get($--slider-dot-box-shadow, 'default');

@@ -3,7 +3,7 @@
 @include themes-mixin {
   @include b(code) {
     [class^=hljs] {
-      color: $--n-secondary-text-color;
+      color: $--code-text-color;
     }
   }
 }

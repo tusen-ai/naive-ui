@@ -2,131 +2,178 @@
 
 @include themes-mixin {
   @include b(data-table) {
-    width: 100%;
-    font-size: 14px;
-    padding-bottom: 8px;
+    @include once {
+      width: 100%;
+      font-size: 14px;
+      padding-bottom: 8px;
+    }
     @include b(data-table-tables-wrapper) {
-      position: relative;
-      border: $--table-border;
-      transition: border-color .3s $--n-ease-in-out-cubic-bezier;
-      border-radius: 6px;
-      overflow: hidden;
-      @include b(data-table-table-wrapper) {
+      @include once {
+        position: relative;
         transition: border-color .3s $--n-ease-in-out-cubic-bezier;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        overflow: hidden;
+        line-height: 1.75;
+      }
+      @include b(data-table-table-wrapper) {
+        @include once {
+          transition: border-color .3s $--n-ease-in-out-cubic-bezier;
+        }
+        background-color: $--data-table-body-background-color;
         @include m(left-fixed) {
-          left: 0;
-          border-right: 1px solid $--n-divider-color;
+          @include once {
+            left: 0;
+          }
+          border-right: 1px solid $--data-table-border-color;
           @include m(active) {
-            transition: box-shadow 0.2s;
-            box-shadow: $--table-fixed-column-box-shadow
+            @include once {
+              transition: box-shadow 0.2s;
+            }
+            box-shadow: $--data-table-fixed-column-box-shadow
           }
         }
         @include m(right-fixed) {
-          right: 0;
-          border-left: 1px solid $--n-divider-color;
+          @include once {
+            right: 0;
+          }
+          border-left: 1px solid $--data-table-border-color;
           @include m(active) {
-            box-shadow: $--table-fixed-column-box-shadow
+            box-shadow: $--data-table-fixed-column-box-shadow
           }
         }
-        @include m(left-fixed, right-fixed) {
-          border-radius: 0;
-          top: 0;
-          bottom: 0;
-          position: absolute;
-          display: inline-block;
-          overflow: hidden;
-          transition: box-shadow .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
-          @include b(data-table-base-table-wrapper) {
-            position: relative;
-            @include b(data-table-table) {
-              width: unset;
+        @include once {
+          @include m(left-fixed, right-fixed) {
+            border-radius: 0;
+            top: 0;
+            bottom: 0;
+            position: absolute;
+            display: inline-block;
+            overflow: hidden;
+            transition:
+              box-shadow .3s $--n-ease-in-out-cubic-bezier,
+              border-color .3s $--n-ease-in-out-cubic-bezier;
+            @include b(data-table-base-table-wrapper) {
+              position: relative;
+              @include b(data-table-table) {
+                width: unset;
+              }
             }
           }
         }
       }
     }
     @include b(data-table-table) {
-      width: 100%;
-      word-wrap: break-word;
-      word-break: break-all;
-      table-layout: fixed;
-      background-color: $--table-body-background-color;
-      transition: background-color .3s $--n-ease-in-out-cubic-bezier;
-      border-collapse: separate;
-      border-spacing: 0;
-      @include b(data-table-thead) {
-        background-color: $--table-header-background-color;
+      @include once {
+        width: 100%;
+        word-wrap: break-word;
+        word-break: break-all;
+        table-layout: fixed;
         transition: background-color .3s $--n-ease-in-out-cubic-bezier;
+        border-collapse: separate;
+        border-spacing: 0;
+      }
+      background-color: $--data-table-body-background-color;
+      @include b(data-table-thead) {
+        @include once {
+          transition: background-color .3s $--n-ease-in-out-cubic-bezier;
+        }
+        background-color: $--data-table-header-background-color;
       }
       @include b(data-table-tbody) {
         @include b(data-table-tr) {
           &:hover {
-            background-color: $--table-row-hover;
+            background-color: map-get($--data-table-row-background-color, 'hover');
           }
           @include m(hover) {
-            background-color: $--table-row-hover;
+            background-color: map-get($--data-table-row-background-color, 'hover');
           }
         }
       }
       @include b(data-table-tr) {
-        box-sizing: border-box;
-        transition: background-color 0.3s $--n-ease-in-out-cubic-bezier;
-        &:last-child {
-          @include b(data-table-td) {
-            border-bottom: 0px solid $--data-table-border-color;
-          }
+        @include once {
+          box-sizing: border-box;
+          transition: background-color 0.3s $--n-ease-in-out-cubic-bezier;
+          background-clip: padding-box;
         }
       }
       @include b(data-table-td) {
-        padding: 12px 12px 12px 18px;
-        text-align: left;
-        box-sizing: border-box;
-        border: none;
-        color: $--n-secondary-text-color;
-        border-bottom: 1px solid $--data-table-border-color;
-        transition: border-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
-        @include m(ellipsis) {
-          text-overflow: ellipsis;
-          overflow: hidden;
-          white-space: nowrap;
+        @include once {
+          padding: 10px 10px 10px 16px;
+          text-align: left;
+          box-sizing: border-box;
+          border: none;
+          transition:
+            border-color .3s $--n-ease-in-out-cubic-bezier,
+            color .3s $--n-ease-in-out-cubic-bezier;
+          @include m(ellipsis) {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+          }
         }
+        color: $--data-table-body-text-color;
+        border-bottom: 1px solid $--data-table-border-color;
       }
       @include b(data-table-th) {
-        position: relative;
-        padding: 12px 12px 12px 18px;
-        text-align: left;
-        font-weight: 500;
-        box-sizing: border-box;
-        color: $--table-header-text-color;
-        transition: border-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
-        @include m(filterable) {
-          padding-right: 36px;
+        @include once {
+          position: relative;
+          padding: 10px 10px 10px 16px;
+          text-align: left;
+          font-weight: 500;
+          box-sizing: border-box;
+          transition:
+            border-color .3s $--n-ease-in-out-cubic-bezier,
+            color .3s $--n-ease-in-out-cubic-bezier,
+            background-color .3s $--n-ease-in-out-cubic-bezier;
+          @include m(filterable) {
+            padding-right: 36px;
+          }
+          @include m(ellipsis) {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+          }
         }
+        color: $--data-table-header-text-color;
         @include m(sortable) {
           cursor: pointer;
           &:hover {
-            background-color: $--n-action-background-color;
+            background-color: map-get($--data-table-header-cell-background-color, 'hover');
           }
         }
-        @include m(ellipsis) {
-          text-overflow: ellipsis;
-          overflow: hidden;
-          white-space: nowrap;
+      }
+    }
+    @include not-m(single-line) {
+      @include b(data-table-tables-wrapper) {
+        @include b(data-table-table){
+          @include b(data-table-th) {
+            border-right: 1px solid $--data-table-border-color;
+            &:last-child {
+              border-right: 0px solid $--data-table-border-color;
+            }
+          }
+          @include b(data-table-td) {
+            border-right: 1px solid $--data-table-border-color;
+            &:last-child {
+              border-right: 0px solid $--data-table-border-color;
+            }
+          }
         }
       }
     }
     @include m(bordered) {
-      @include b(data-table-table){
-        @include b(data-table-th) {
-          border-right: $--table-td-border-right;
-          &:last-child {
-            border-right: 0px solid $--n-divider-color;
-          }
-        }
-        @include b(data-table-td) {
-          border-right: $--table-td-border-right;
-          &:last-child {
-            border-right: 0px solid $--n-divider-color;
+      @include b(data-table-tables-wrapper) {
+        border: 1px solid $--data-table-border-color;
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+        @include b(data-table-table){
+          @include b(data-table-tr) {
+            &:last-child {
+              @include b(data-table-td) {
+                border-bottom: 0px solid $--data-table-border-color;
+              }
+            }
           }
         }
       }
@@ -144,82 +191,95 @@
       }
     }
     @include b(data-table-base-table-header) {
-      overflow: scroll;
-      border-bottom: 1px solid $--data-table-border-color;
-      transition: border-color .3s $--n-ease-in-out-cubic-bezier;
-      &::-webkit-scrollbar {
-        width: 0;
-        height: 0;
+      @include once {
+        overflow: scroll;
+        transition: border-color .3s $--n-ease-in-out-cubic-bezier;
+        &::-webkit-scrollbar {
+          width: 0;
+          height: 0;
+        }
+        scrollbar-width: none;
       }
+      border-bottom: 1px solid $--data-table-border-color;
       @include b(data-table-th) {
         @include b(data-table-sort-button) {
-          height: 14px;
-          width: 14px;
-          margin-left: 4px;
-          position: relative;
-          display: inline-block;
-          vertical-align: middle;
+          @include once {
+            height: 14px;
+            width: 14px;
+            margin-left: 4px;
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+            @include e(asc-icon) {
+              bottom: calc(50% - 2px);
+              left: 0;
+            }
+            @include e(desc-icon) {
+              top: calc(50% - 2px);
+              left: 0;
+            }
+          }
           @include m(asc) {
             @include e(asc-icon) {
-              fill: $--n-primary-color;
+              fill: map-get($--data-table-button-color, 'active');
             }
           }
           @include m(desc) {
             @include e(desc-icon) {
-              fill: $--n-primary-color;
+              fill: map-get($--data-table-button-color, 'active');
             }
           }
-          @include e(asc-icon) {
-            bottom: calc(50% - 2px);
-            left: 0;
-          }
-          @include e(desc-icon) {
-            top: calc(50% - 2px);
-            left: 0;
-          }
           @include e(asc-icon, desc-icon) {
-            transition: fill .2s $--n-ease-in-out-cubic-bezier;
-            fill: change-color($--n-secondary-text-color, $alpha: .3);
-            position: absolute;
+            @include once {
+              transition: fill .3s $--n-ease-in-out-cubic-bezier;
+              position: absolute;
+            }
+            fill: map-get($--data-table-button-color, 'default');
           }
         }
         @include b(data-table-filter-button) {
-          position: absolute;
-          right: 0;
-          width: 36px;
-          top: 0;
-          bottom: 0;
-          cursor: pointer;
-          @include e(icon-wrapper) {
+          @include once {
             position: absolute;
             right: 0;
-            left: 0;
+            width: 36px;
             top: 0;
             bottom: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: background-color .3s $--n-ease-in-out-cubic-bezier;
+            cursor: pointer;
+          }
+          @include e(icon-wrapper) {
+            @include once {
+              position: absolute;
+              right: 0;
+              left: 0;
+              top: 0;
+              bottom: 0;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              transition: background-color .3s $--n-ease-in-out-cubic-bezier;
+            }
             &:hover {
-              background-color: $--overlay-tab;
+              background-color: map-get($--data-table-header-cell-background-color, 'hover');
             }
             @include b(icon) {
-              fill: change-color($--n-secondary-text-color, $alpha: .2);
-              stroke: change-color($--n-secondary-text-color, $alpha: .2);
-              font-size: 14px;
+              @include once {
+                font-size: 14px;
+              }
+              fill: map-get($--data-table-button-color, 'default');
+              stroke: map-get($--data-table-button-color, 'default');
             }
           }
           @include m(popover-visible) {
             @include e(icon-wrapper) {
-              background-color: $--overlay-tab;
+              background-color: map-get($--data-table-header-cell-background-color, 'hover');
             }
           }
           @include m(active) {
             @include e(icon-wrapper) {
-              background-color: $--overlay-tab;
+              background-color: map-get($--data-table-header-cell-background-color, 'hover');
               @include b(icon) {
-                fill: $--n-primary-color;
-                stroke: $--n-primary-color;
+                fill: map-get($--data-table-button-color, 'active');
+                stroke: map-get($--data-table-button-color, 'active');
               }
             }
           }

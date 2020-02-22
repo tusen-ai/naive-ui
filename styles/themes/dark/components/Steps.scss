@@ -11,25 +11,25 @@
     'finish': transparent,
     'error': transparent
   ) !global;
-  $--steps-step-indicator-color: (
+  $--steps-step-indicator-text-color: (
     'process': black,
     'wait': $--n-disabled-text-color,
     'finish': $--n-primary-color,
     'error': $--n-error-color
   ) !global;
-  $--steps-step-splitor-color: (
+  $--steps-step-splitor-background-color: (
     'process': $--n-disabled-text-color,
     'wait': $--n-disabled-text-color,
     'finish': $--n-primary-color,
     'error': $--n-error-color
   ) !global;
-  $--steps-step-content-color: (
+  $--steps-step-content-text-color: (
     'process': $--n-secondary-text-color,
     'wait': $--n-disabled-text-color,
     'finish': $--n-primary-color,
     'error': $--n-error-color
   ) !global;
-  $--steps-step-title-color: (
+  $--steps-step-title-text-color: (
     'process': $--n-primary-text-color,
     'wait': $--n-disabled-text-color,
     'finish': $--n-primary-color,

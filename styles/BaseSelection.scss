@@ -32,13 +32,13 @@
       position: relative;
       z-index: auto;
       box-shadow: none;
-      border-radius: $--base-selection-border-radius;
+      border-radius: $--n-base-selection-border-radius;
       width: 100%;
       max-width: 100%;
       display: inline-block;
       vertical-align: bottom;
       @include b(base-selection-border-mask) {
-        border-radius: $--base-selection-border-radius;
+        border-radius: $--n-base-selection-border-radius;
         position: absolute;
         left: 0;
         right: 0;
@@ -46,7 +46,9 @@
         bottom: 0;
         border: 1px solid transparent;
         pointer-events: none;
-        transition: .3s border-color $--n-ease-in-out-cubic-bezier, .3s box-shadow $--n-ease-in-out-cubic-bezier;
+        transition:
+          border-color .3s $--n-ease-in-out-cubic-bezier,
+          box-shadow .3s $--n-ease-in-out-cubic-bezier;
         z-index: 1;
       }
       @include e(mark) {
@@ -83,8 +85,11 @@
         box-sizing: border-box;
         position: relative;
         z-index: auto;
-        transition: color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
-        border-radius: $--base-selection-border-radius;
+        transition:
+          color .3s $--n-ease-in-out-cubic-bezier,
+          box-shadow .3s $--n-ease-in-out-cubic-bezier,
+          background-color .3s $--n-ease-in-out-cubic-bezier;
+        border-radius: $--n-base-selection-border-radius;
       }
       box-shadow: map-get($--base-selection-box-shadow, 'default');
       background-color: map-get($--base-selection-background-color, 'default');
@@ -100,7 +105,7 @@
         box-sizing: border-box;
         position: relative;
         transition: color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
-        border-radius: $--base-selection-border-radius;
+        border-radius: $--n-base-selection-border-radius;
       }
       box-shadow: map-get($--base-selection-box-shadow, 'default');
       background-color: map-get($--base-selection-background-color, 'default');

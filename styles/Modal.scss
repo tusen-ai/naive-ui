@@ -7,7 +7,7 @@
     }
     @include once {
       @include b(confirm) {
-        width: 80vw;
+        min-width: 446px;
       }
     }
   }

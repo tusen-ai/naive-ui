@@ -33,7 +33,14 @@
   @include b(message) {
     @include once {
       display: flex;
-      transition: color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier, opacity .3s $--n-ease-in-out-cubic-bezier, transform .3s $--n-ease-in-out-cubic-bezier,  max-height .3s $--n-ease-in-out-cubic-bezier, margin-bottom .3s $--n-ease-in-out-cubic-bezier;
+      transition:
+        color .3s $--n-ease-in-out-cubic-bezier,
+        box-shadow .3s $--n-ease-in-out-cubic-bezier,
+        background-color .3s $--n-ease-in-out-cubic-bezier,
+        opacity .3s $--n-ease-in-out-cubic-bezier,
+        transform .3s $--n-ease-in-out-cubic-bezier,
+        max-height .3s $--n-ease-in-out-cubic-bezier,
+        margin-bottom .3s $--n-ease-in-out-cubic-bezier;
       max-height: 40px;
       opacity: 1;
       margin-bottom: 12px;

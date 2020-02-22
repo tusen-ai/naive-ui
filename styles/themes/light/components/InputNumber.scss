@@ -26,9 +26,9 @@
     'hover': $--n-primary-color
   ) !global;
   $--input-number-button-background-color: (
-    'default': $--neutral-body,
-    'hover': $--neutral-body,
-    'active':  $--neutral-body,
+    'default': $--n-action-background-color,
+    'hover': $--n-action-background-color,
+    'active':  $--n-action-background-color,
     'disabled': $--n-disabled-background-color,
   ) !global;
   $--input-number-caret-color: $--n-primary-color !global;

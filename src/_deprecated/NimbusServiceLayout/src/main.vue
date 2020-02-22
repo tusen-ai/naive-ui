@@ -96,8 +96,9 @@ export default {
       'bordered': true,
       'show-content': !this.collapsed,
       'use-native-scrollbar': false,
+      'width': 288,
       'scroll-container-style': {
-        width: '272px'
+        width: '288px'
       }
     }
     const createMenu = items => {
@@ -223,7 +224,8 @@ export default {
                 value: this.value || this.activeItem,
                 openNames: this.openNames,
                 defaultOpenNames: this.defaultOpenNames || this.subMenuNames,
-                indent: 32
+                rootIndent: 36,
+                indent: 40
               },
               on: this.$listeners
             },

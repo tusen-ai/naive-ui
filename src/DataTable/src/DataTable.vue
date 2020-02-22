@@ -4,6 +4,7 @@
     :class="{
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
       'n-data-table--bordered': bordered,
+      'n-data-table--single-line': singleLine
     }"
   >
     <n-spin :spinning="loading">
@@ -213,6 +214,10 @@ export default {
       default: null
     },
     paging: {
+      type: Boolean,
+      default: true
+    },
+    singleLine: {
       type: Boolean,
       default: true
     }
