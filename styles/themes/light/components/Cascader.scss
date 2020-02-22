@@ -1,5 +1,5 @@
 @mixin setup-light-cascader {
-  $--cascader-menu-background-color: white !global;
+  $--cascader-menu-background-color: $--n-popover-background-color !global;
   $--cascader-option-text-color: (
     'default': $--n-secondary-text-color,
     'active': $--n-primary-color,
@@ -8,7 +8,7 @@
   ) !global;
   $--cascader-menu-box-shadow: $--n-popmenu-box-shadow !global;
   $--cascader-menu-border-color: $--n-divider-color !global;
-  $--cascader-menu-lightbar-background-color: mix($--n-primary-color, white, 10%) !global;
+  $--cascader-menu-lightbar-background-color: mix($--n-primary-color, $--n-base-background-color, 10%) !global;
   $--cascader-option-arrow-background-color: $--n-disabled-text-color !global;
   $--cascader-item-check-mark-color: $--n-primary-color !global;
 }

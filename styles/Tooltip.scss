@@ -11,7 +11,7 @@
         }
         box-shadow: $--tooltip-box-shadow;
         background-color: $--tooltip-background-color;
-        color: $--tooltip-color;
+        color: $--tooltip-text-color;
         &[n-placement$="top-start"] {
           @include b(popover-arrow) {
             border-top-color: $--tooltip-background-color;

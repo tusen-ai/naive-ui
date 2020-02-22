@@ -108,11 +108,11 @@
   )!global;
   $--button-color: (
     "default": $--n-secondary-text-color,
-    "primary": white,
-    "info": white,
-    "success": white,
-    "warning": white,
-    "error": white
+    "primary": $--n-base-background-color,
+    "info": $--n-base-background-color,
+    "success": $--n-base-background-color,
+    "warning": $--n-base-background-color,
+    "error": $--n-base-background-color
   ) !global;
   $--text-button-color: (
     "default": $--n-secondary-text-color,

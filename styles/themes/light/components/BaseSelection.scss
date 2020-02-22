@@ -4,10 +4,10 @@
     'disabled': $--n-disabled-text-color
   ) !global;
   $--base-selection-background-color: (
-    'default': white,
+    'default': $--n-base-background-color,
     'disabled': $--n-disabled-background-color,
-    'active': white,
-    'error-active': white
+    'active': $--n-base-background-color,
+    'error-active': $--n-base-background-color
   ) !global;
   $--base-selection-placeholder-color: (
     'default': $--n-placeholder-text-color,

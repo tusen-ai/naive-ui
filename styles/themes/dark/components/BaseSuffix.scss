@@ -1,13 +1,13 @@
 @mixin setup-dark-base-suffix {
   $--base-suffix-cross-color: (
-    "default": rgba(255, 255, 255, .3),
+    "default": $--n-icon-color,
     "hover": $--n-primary-color,
     "active": $--n-primary-hover-color,
     "error-hover": $--n-error-hover-color,
     "error-active": $--n-error-hover-color
   ) !global;
   $--base-suffix-arrow-color: (
-    "default": rgba(255, 255, 255, .3),
+    "default": $--n-icon-color,
     "active": $--n-primary-color,
     "error-active": $--n-error-color
   ) !global;

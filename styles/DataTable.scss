@@ -20,6 +20,7 @@
         @include once {
           transition: border-color .3s $--n-ease-in-out-cubic-bezier;
         }
+        background-color: $--data-table-body-background-color;
         @include m(left-fixed) {
           @include once {
             left: 0;
@@ -72,7 +73,7 @@
         border-collapse: separate;
         border-spacing: 0;
       }
-      background-color: $--table-body-background-color;
+      background-color: $--data-table-body-background-color;
       @include b(data-table-thead) {
         @include once {
           transition: background-color .3s $--n-ease-in-out-cubic-bezier;
@@ -98,7 +99,7 @@
       }
       @include b(data-table-td) {
         @include once {
-          padding: 12px 12px 12px 18px;
+          padding: 10px 10px 10px 16px;
           text-align: left;
           box-sizing: border-box;
           border: none;
@@ -117,7 +118,7 @@
       @include b(data-table-th) {
         @include once {
           position: relative;
-          padding: 12px 12px 12px 18px;
+          padding: 10px 10px 10px 16px;
           text-align: left;
           font-weight: 500;
           box-sizing: border-box;

@@ -7,7 +7,7 @@
     'default': $--n-primary-color,
     'hover': $--n-primary-hover-color
   ) !global;
-  $--slider-handle-background-color: white !global;
+  $--slider-handle-background-color: $--n-base-background-color !global;
   $--slider-handle-box-shadow: (
     'default': inset 0 0 0 2px $--n-primary-color,
     'hover': inset 0 0 0 2px $--n-primary-hover-color,
@@ -16,7 +16,7 @@
   ) !global;
   $--slider-indicator-background-color:  rgba(0, 0, 0, .85) !global;
   $--slider-indicator-box-shadow: $--n-popover-box-shadow !global;
-  $--slider-indicator-text-color: white !global;
+  $--slider-indicator-text-color: $--n-base-background-color !global;
   $--slider-dot-box-shadow: (
     'default': inset 0 0 0 2px $--n-primary-color,
     'active': inset 0 0 0 2px $--n-primary-hover-color

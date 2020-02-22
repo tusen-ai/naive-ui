@@ -7,7 +7,7 @@
   ) !global;
   $--pagination-item-background-color: (
     'default': $--n-card-background-color,
-    'active': mix($--n-primary-color, white, 10%),
+    'active': mix($--n-primary-color, $--n-base-background-color, 10%),
     'disabled': $--n-disabled-background-color
   ) !global;
   $--pagination-item-border-color: (

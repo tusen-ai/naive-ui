@@ -6,21 +6,21 @@
 @mixin setup-light-colors {
   $--base-text: rgb(0, 0, 0) !global;
 
-  $--overlay-text-1: rgba(0, 0, 0, .8) !global;
-  $--overlay-text-2: rgba(0, 0, 0, .68) !global;
-  $--overlay-text-3: rgba(0, 0, 0, .38) !global;
-  $--overlay-text-4: rgba(0, 0, 0, .25) !global;
-
-  $--alpha-1: .8 !global;
+  $--alpha-1: .82 !global;
   $--alpha-2: .68 !global;
   $--alpha-3: .38 !global;
-  $--alpha-4: .25 !global;
+  $--alpha-4: .22 !global;
 
   $--alpha-disabled: .5 !global;
 
+  $--overlay-text-1: rgba(0, 0, 0, $--alpha-1) !global;
+  $--overlay-text-2: rgba(0, 0, 0, $--alpha-2) !global;
+  $--overlay-text-3: rgba(0, 0, 0, $--alpha-3) !global;
+  $--overlay-text-4: rgba(0, 0, 0, $--alpha-4) !global;
+
   $--overlay-avatar: rgba(0, 0, 0, .25) !global;
   $--overlay-rail: rgba(0, 0, 0, .14) !global;
-  $--overlay-border: rgba(0, 0, 0, .12) !global;
+  $--overlay-border: rgba(0, 0, 0, .13) !global;
   $--overlay-divider: rgba(0, 0, 0, .09) !global;
   $--overlay-input: rgba(0, 0, 0, .025) !global;
   $--overlay-action: rgba(0, 0, 0, .025) !global;
@@ -35,11 +35,12 @@
   $--neutral-popover: rgb(255, 255, 255) !global;
   $--neutral-modal: rgb(255, 255, 255) !global;
   $--neutral-card: rgb(255, 255, 255) !global;
-  $--neutral-body: rgb(254, 254, 254) !global;
+  $--neutral-body: rgb(253, 253, 253) !global;
   $--neutral-disabled: create-light-neutral-color($--overlay-disabled) !global;
   $--neutral-border: create-light-neutral-color($--overlay-border) !global;
   $--neutral-divider: create-light-neutral-color($--overlay-divider) !global;
   $--neutral-input: create-light-neutral-color($--overlay-input) !global;
+  $--neutral-action: create-light-neutral-color($--overlay-input) !global;
 
   $--primary-hover: #36ad6a !global;
   $--primary-default:#18a058 !global;

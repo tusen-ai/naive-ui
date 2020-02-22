@@ -1,5 +1,5 @@
 @mixin setup-dark-tooltip {
   $--tooltip-background-color: $--n-popover-background-color !global;
-  $--tooltip-color: $--n-secondary-text-color !global;
+  $--tooltip-text-color: $--n-secondary-text-color !global;
   $--tooltip-box-shadow: $--n-popover-box-shadow !global;
 }

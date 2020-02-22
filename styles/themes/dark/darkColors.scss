@@ -1,9 +1,10 @@
+@function create-dark-neutral-color($overlay) {
+  $neutral-r: 255 * alpha($overlay);
+  @return rgb($neutral-r, $neutral-r, $neutral-r)
+};
+
 @mixin setup-dark-colors {
   $--base-text: rgb(255, 255, 255) !global;
-  $--overlay-text-1: rgba(255, 255, 255, .92) !global;
-  $--overlay-text-2: rgba(255, 255, 255, .84) !global;
-  $--overlay-text-3: rgba(255, 255, 255, .50) !global;
-  $--overlay-text-4: rgba(255, 255, 255, .35) !global;
 
   $--alpha-1: .92 !global;
   $--alpha-2: .84 !global;
@@ -11,6 +12,12 @@
   $--alpha-4: .35 !global;
 
   $--alpha-disabled: .5 !global;
+
+
+  $--overlay-text-1: rgba(255, 255, 255, $--alpha-1) !global;
+  $--overlay-text-2: rgba(255, 255, 255, $--alpha-2) !global;
+  $--overlay-text-3: rgba(255, 255, 255, $--alpha-3) !global;
+  $--overlay-text-4: rgba(255, 255, 255, $--alpha-4) !global;
 
   $--overlay-avatar: rgba(255, 255, 255, .16) !global;
   $--overlay-rail: rgba(255, 255, 255, .18) !global;
@@ -34,6 +41,7 @@
   $--neutral-border: null !global;
   $--neutral-divider: null !global;
   $--neutral-input: null !global;
+  $--neutral-tag: null !global;
   
   $--primary-hover: #7fe7c4 !global;
   $--primary-default: #63e2b7 !global;
