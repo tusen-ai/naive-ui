@@ -112,7 +112,7 @@
       }
       @include e(suffix, prefix) {
         position: absolute;
-        line-height: 1.5;
+        line-height: 1.75;
         height: 0;
         width: $--n-input-icon-size;
         white-space: nowrap;
@@ -143,7 +143,7 @@
         box-sizing: border-box;
         font-family: inherit;
         font-size: inherit;
-        line-height: 1.5;
+        line-height: 1.75;
         margin: 0;
         resize: vertical;
       }
@@ -210,7 +210,7 @@
         border: none;
         font-size: inherit;
         outline: none;
-        font-family: $--n-font-family;
+        font-family: inherit;
         width: 100%;
         transition: color .3s $--n-ease-in-out-cubic-bezier, text-decoration-color .3s $--n-ease-in-out-cubic-bezier;
         background-color: transparent;
@@ -383,8 +383,6 @@
                   border-bottom-right-radius: 0!important;
                 }
               }
-              border-top-right-radius: 0!important;
-              border-bottom-right-radius: 0!important;
               @include b(base-selection) {
                 @include b(base-selection-label) {
                   border-top-right-radius: 0!important;

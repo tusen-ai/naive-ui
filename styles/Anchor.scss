@@ -53,11 +53,12 @@
     }
     @include b(anchor-link) {
       @include once {
-        margin-top: 10px;
+        margin-top: .5em;
         padding-left: 16px;
         position: relative;
-        min-height: 21px;
-        line-height: 21px;
+        line-height: 1.5em;
+        font-size: 13px;
+        min-height: 1.5em;
         display: flex;
         flex-direction: column;
         & > {
@@ -72,12 +73,10 @@
           max-width: 100%;
           text-decoration: none;
           white-space: nowrap;
-          line-height: 21px;
           text-overflow: ellipsis;
           overflow: hidden;
           cursor: pointer;
           display: inline-block;
-          font-size: 14px;
           padding-right: 16px;
           transition: color .3s $--n-ease-in-out-cubic-bezier;
         }

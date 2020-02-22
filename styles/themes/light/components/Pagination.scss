@@ -6,8 +6,8 @@
     'disabled': $--n-disabled-text-color
   ) !global;
   $--pagination-item-background-color: (
-    'default': transparent,
-    'active': change-color($--n-primary-color, $alpha: .15),
+    'default': $--n-card-background-color,
+    'active': mix($--n-primary-color, white, 10%),
     'disabled': $--n-disabled-background-color
   ) !global;
   $--pagination-item-border-color: (

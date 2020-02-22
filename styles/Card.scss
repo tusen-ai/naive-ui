@@ -133,12 +133,12 @@
       & > {
         @include e(content) {
           box-sizing: border-box;
-          line-height: 1.5;
+          line-height: 1.75;
           font-size: 14px;
         }
         @include e(footer) {
           box-sizing: border-box;
-          line-height: 1.5;
+          line-height: 1.75;
           font-size: 14px;
         }
       }
@@ -179,7 +179,7 @@
         @include once {
           box-sizing: border-box;
           transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
-          line-height: 1.5;
+          line-height: 1.75;
           font-size: 14px;
           background-clip: padding-box;
         }

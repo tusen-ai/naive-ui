@@ -22,6 +22,8 @@
   $--overlay-scrollbar: rgba(255, 255, 255, .2) !global;
   $--overlay-scrollbar-hover: rgba(255, 255, 255, .3) !global;
   $--overlay-disabled: rgba(255, 255, 255, alpha($--overlay-input) * $--alpha-disabled) !global;
+  $--overlay-pending: rgba(255, 255, 255, .05) !global;
+  $--overlay-active: rgba(255, 255, 255, .03) !global;
 
   $--neutral-base: black !global;
   $--neutral-popover: rgb(89, 93, 119) !global;

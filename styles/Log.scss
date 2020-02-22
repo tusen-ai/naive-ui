@@ -38,7 +38,6 @@
           display: inline-block;
           vertical-align: bottom;
           line-height: 34px;
-          font-family: $--n-font-family;
           padding-left: 40px;
           padding-right: 20px;
           white-space: nowrap;
@@ -56,7 +55,6 @@
       border: 1px solid $--log-loader-border-color;
       color: $--log-loader-text-color;
       background-color: $--log-loader-background-color;
-      font-family: $--n-font-family;
     }
   }
 }

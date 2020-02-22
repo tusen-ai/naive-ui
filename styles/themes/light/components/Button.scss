@@ -1,35 +1,4 @@
 @mixin setup-light-button {
-  $--button-font-family: $--n-font-family !global;
-  $--button-font-size: (
-    "tiny": 12px,
-    "small": 14px,
-    "medium": 14px,
-    "large": 16px
-  ) !global;
-  $--button-height: (
-    "tiny": 22px,
-    "small": 28px,
-    "medium": 34px,
-    "large": 40px
-  ) !global;
-  $--button-padding: (
-    "tiny": 0 6px,
-    "small": 0 10px,
-    "medium": 0 14px,
-    "large": 0 18px
-  ) !global;
-  $--round-button-padding: (
-    "tiny": 0 10px,
-    "small": 0 14px,
-    "medium": 0 18px,
-    "large": 0 22px
-  ) !global;
-  $--button-icon-size: (
-    "tiny": 14px,
-    "small": 16px,
-    "medium": 18px,
-    "large": 20px
-  ) !global;
   $--button-border-color: (
     "default":  $--n-border-color,
     "primary": $--n-primary-color,

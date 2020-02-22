@@ -1,4 +1,21 @@
 @mixin setup-dark-data-table {
   $--data-table-border-color: $--n-divider-color !global;
   $--data-table-header-text-color: $--n-primary-text-color !global;
+  $--data-table-fixed-column-box-shadow: (0 0 12px 0 rgba(0, 0, 0, .18)) !global;
+  $--data-table-body-background-color: $--n-card-background-color !global;
+  $--data-table-header-background-color: $--n-table-header-background-color !global;
+  $--data-table-row-background-color: (
+    'default': $--n-card-background-color,
+    'hover': change-color($--n-primary-color, $alpha: 0.10)
+  ) !global;
+  $--data-table-header-cell-background-color: (
+    'default': transparent,
+    'hover': $--n-pending-overlay-color,
+    'active': $--n-active-overlay-color
+  ) !global;
+  $--data-table-body-text-color: $--n-secondary-text-color !global;
+  $--data-table-button-color: (
+    'default': $--n-icon-color,
+    'active': $--n-primary-color
+  ) !global;
 }

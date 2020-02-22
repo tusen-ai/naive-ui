@@ -14,6 +14,7 @@ DataTable is used to displays rows of structured data.
 
 ```demo
 basic
+border
 filterAndSorter
 select
 controlled-page

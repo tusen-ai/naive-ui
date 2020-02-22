@@ -31,6 +31,36 @@ $--n-ease-in-cubic-bezier: cubic-bezier(.4, 0, 1, 1);
 
 /** button */
 $--n-button-border-radius: 6px;
+$--n-button-font-size: (
+  "tiny": 12px,
+  "small": 14px,
+  "medium": 14px,
+  "large": 16px
+) !global;
+$--n-button-height: (
+  "tiny": 22px,
+  "small": 28px,
+  "medium": 34px,
+  "large": 40px
+) !global;
+$--n-button-padding: (
+  "tiny": 0 6px,
+  "small": 0 10px,
+  "medium": 0 14px,
+  "large": 0 18px
+) !global;
+$--n-button-round-padding: (
+  "tiny": 0 10px,
+  "small": 0 14px,
+  "medium": 0 18px,
+  "large": 0 22px
+) !global;
+$--n-button-icon-size: (
+  "tiny": 14px,
+  "small": 16px,
+  "medium": 18px,
+  "large": 20px
+) !global;
 
 /** base loading */
 $--n-base-loading-stroke-dashoffset: 500;
@@ -81,8 +111,6 @@ $--n-input-border-radius: 6px;
 
 $--n-popover-arrow-width: 6px;
 
-$--n-table-fixed-column-box-shadow: (0 0 12px 0 rgba(0, 0, 0, .18));
-
 /** slider */
 $--n-slider-rail-height: 4px;
 $--n-slider-dot-size: 8px;
@@ -131,8 +159,8 @@ $--n-timeline-header-margin-top: (
 
 /** typography */
 $--n-typography-header-font-size: (
-  '1': 32px,
-  '2': 26px,
+  '1': 28px,
+  '2': 24px,
   '3': 18px,
   '4': 16px,
   '5': 14px,
@@ -140,12 +168,12 @@ $--n-typography-header-font-size: (
 );
 
 $--n-typography-header-margin: (
-  '1': 24px 0 18px 0,
-  '2': 24px 0 18px 0,
-  '3': 20px 0 16px 0,
-  '4': 20px 0 16px 0,
-  '5': 18px 0 14px 0,
-  '6': 18px 0 14px 0
+  '1': 1.5em 0 18px 0,
+  '2': 1.5em 0 18px 0,
+  '3': 1.5em 0 16px 0,
+  '4': 1.5em 0 16px 0,
+  '5': 1.5em 0 14px 0,
+  '6': 1.5em 0 14px 0
 );
 
 $--n-typography-header-prefix-width: (

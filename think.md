@@ -114,14 +114,14 @@ Previously, it would not work with single quotes:
 1. Focus Detector on Time Selector
 2. Menu Root Indent = 0 可能造成问题
 3. 用 RAF 优化 scrollbar 性能（不一定需要）
-4. Anchor 切换有 bug，忽然闪现第一个
+4. <del>Anchor 切换有 bug，忽然闪现第一个</del>
 5. Safari select lightbar container overflow 边角（或许是 webkit 的问题）
 6. Chrome lightbar offset @table fitler
 7. cascader 数据结构重构，维持原选项！
 8. 排查 render 函数是否每个地方都支持数组
 9. form async validation
 10. table filter 重构支持异步
-11. tabs resize bug
+11. <del>tabs resize bug</del>
 12. CSS 整理
 13. 落地页
 14. <del>按需引入 babel plugin</del> 这个不做了，收益不大，工作量不小
@@ -129,7 +129,7 @@ Previously, it would not work with single quotes:
 16. input number 需要一个小型的
 17. layout scroll api
 18. cascader select menu disabled 选项
-19. icon 的默认 stroke
+19. <del>icon 的默认 stroke</del>
 20. tree 组件
 21. <del>文件上传组件</del>
 22. custom-input 废弃或者重构
@@ -152,10 +152,10 @@ Previously, it would not work with single quotes:
 39. Card 用 padding 代替 margin 来避免 margin 折叠的问题
 40. 检查 Icon 在 button 中切换有没有问题，直觉来说应该没问题
 41. Radio Group 和 Steps 的镂空效果在 mounted 的时候 transition 没有关闭
-42. Typography 文档待更新
+42. <del>Typography 文档待更新</del>
 43. Tab 文档待更新
-44. Icon 文档待更新
-45. 统一 next 回调和 Promise API 为 Promise API，应该有三四个组件用到了
+44. <del>Icon 文档待更新</del>
+45. 把 Upload 的回调 API 从 promise 改成 callback 格式的，文档也要对应修改
 46. Date Picker 的 format 文档内容
 
 

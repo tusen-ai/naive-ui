@@ -39,7 +39,7 @@
     @include b(upload-file-list) {
       @include once {
         margin-top: 8px;
-        line-height: 1.5;
+        line-height: 1.75;
       }
       @include b(upload-file) {
         @include once {

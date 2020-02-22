@@ -64,7 +64,7 @@
         max-height .3s $--n-ease-in-out-cubic-bezier,
         margin-bottom .3s linear,
         box-shadow .3s $--n-ease-in-out-cubic-bezier;
-      font-family: $--n-font-family;
+      font-family: inherit;
       font-size: 14px;
       font-weight: 400;
       position: relative;

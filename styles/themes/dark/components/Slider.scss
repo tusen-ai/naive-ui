@@ -8,7 +8,7 @@
     'default': $slider-default-fill-color,
     'hover': $--n-primary-color
   ) !global;
-  $--slider-handle-background-color: $--n-body-background-color !global;
+  $--slider-handle-background-color: $--n-card-background-color !global;
   $--slider-handle-box-shadow: (
     'default': inset 0 0 0 2px  $slider-default-fill-color,
     'hover': inset 0 0 0 2px $--n-primary-color,

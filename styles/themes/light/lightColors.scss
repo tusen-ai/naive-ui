@@ -1,38 +1,45 @@
+@function create-light-neutral-color($overlay) {
+  $neutral-r: 255 * (1 - alpha($overlay));
+  @return rgb($neutral-r, $neutral-r, $neutral-r)
+};
+
 @mixin setup-light-colors {
   $--base-text: rgb(0, 0, 0) !global;
 
-  $--overlay-text-1: rgba(0, 0, 0, .9) !global;
-  $--overlay-text-2: rgba(0, 0, 0, .75) !global;
-  $--overlay-text-3: rgba(0, 0, 0, .45) !global;
+  $--overlay-text-1: rgba(0, 0, 0, .8) !global;
+  $--overlay-text-2: rgba(0, 0, 0, .68) !global;
+  $--overlay-text-3: rgba(0, 0, 0, .38) !global;
   $--overlay-text-4: rgba(0, 0, 0, .25) !global;
 
-  $--alpha-1: .9 !global;
-  $--alpha-2: .75 !global;
-  $--alpha-3: .45 !global;
+  $--alpha-1: .8 !global;
+  $--alpha-2: .68 !global;
+  $--alpha-3: .38 !global;
   $--alpha-4: .25 !global;
 
   $--alpha-disabled: .5 !global;
 
   $--overlay-avatar: rgba(0, 0, 0, .25) !global;
   $--overlay-rail: rgba(0, 0, 0, .14) !global;
-  $--overlay-border: rgba(0, 0, 0, .14) !global;
-  $--overlay-divider: rgba(0, 0, 0, .10) !global;
-  $--overlay-input: rgba(0, 0, 0, .02) !global;
-  $--overlay-action: rgba(0, 0, 0, .02) !global;
+  $--overlay-border: rgba(0, 0, 0, .12) !global;
+  $--overlay-divider: rgba(0, 0, 0, .09) !global;
+  $--overlay-input: rgba(0, 0, 0, .025) !global;
+  $--overlay-action: rgba(0, 0, 0, .025) !global;
   $--overlay-scrollbar: rgba(0, 0, 0, .25) !global;
   $--overlay-scrollbar-hover: rgba(0, 0, 0, .4) !global;
   $--overlay-disabled: rgba(0, 0, 0, .04) !global;
   $--overlay-tab: rgba(0, 0, 0, .04) !global;
+  $--overlay-pending: rgba(0, 0, 0, .04) !global;
+  $--overlay-active: rgba(0, 0, 0, .06) !global;
 
   $--neutral-base: white !global;
   $--neutral-popover: rgb(255, 255, 255) !global;
   $--neutral-modal: rgb(255, 255, 255) !global;
   $--neutral-card: rgb(255, 255, 255) !global;
-  $--neutral-body: rgb(250, 250, 250) !global;
-  $--neutral-disabled: rgb(245, 245, 245) !global;
-  $--neutral-border: rgb(219, 219, 219) !global;
-  $--neutral-divider: rgb(230, 230, 230) !global;
-  $--neutral-input: rgb(250, 250, 250) !global;
+  $--neutral-body: rgb(254, 254, 254) !global;
+  $--neutral-disabled: create-light-neutral-color($--overlay-disabled) !global;
+  $--neutral-border: create-light-neutral-color($--overlay-border) !global;
+  $--neutral-divider: create-light-neutral-color($--overlay-divider) !global;
+  $--neutral-input: create-light-neutral-color($--overlay-input) !global;
 
   $--primary-hover: #36ad6a !global;
   $--primary-default:#18a058 !global;

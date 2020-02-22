@@ -14,6 +14,7 @@
 
 ```demo
 basic
+border
 filterAndSorter
 select
 controlled-page
