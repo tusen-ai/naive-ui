@@ -17,5 +17,5 @@ transparent
 |namespace|`string`|`null`|Config Provider 内部组件被卸载于其他位置的 DOM 的类名|
 |theme|`string`|`null`|Config Provider 内部组件的主题|
 |theme-environment|`object`|`null`|一个可以被 Config Consumer 或 Element 获取到的主题环境变量|
-|transparent|`boolean`|`false`|是否不存在 DOM 包裹|
+|abstract|`boolean`|`false`|是否不存在 DOM 包裹|
 

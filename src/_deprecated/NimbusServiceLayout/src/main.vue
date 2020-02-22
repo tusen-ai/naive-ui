@@ -191,7 +191,7 @@ export default {
             this.$slots['drawer-header-icon'] ? h(
               'NConfigConsumer', {
                 props: {
-                  transparent: true
+                  abstract: true
                 },
                 scopedSlots: {
                   default: ({ styleScheme }) => {

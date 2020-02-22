@@ -1,11 +1,11 @@
 # 无包裹 DOM
-如果不需要包裹 DOM，设置 `transparent`。(注意，这种情况下只接受一个子节点)
+如果不需要包裹 DOM，设置 `abstract`。(注意，这种情况下只接受一个子节点)
 ```html
 <div>
   <n-button @click="theme = 'dark'">深色主题</n-button>
   <n-button @click="theme = 'light'">浅色主题</n-button>
 </div>
-<n-config-provider :theme="theme" :theme-environment="env" transparent>
+<n-config-provider :theme="theme" :theme-environment="env" abstract>
   <n-config-consumer>
     <template v-slot="{ themeEnvironment }">
       <n-tag>无包裹 DOM：{{ themeEnvironment }}</n-tag>

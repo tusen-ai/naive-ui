@@ -32,7 +32,7 @@ function createRenderer (wrapCodeWithCard = true) {
         throw new Error(`MdRendererError: ${language} is not valid for code`)
       }
       const highlighted = hljs.highlight(language, code).value
-      return `${wrapCodeWithCard ? '<n-card size="small">' : ''}<n-config-consumer transparent>
+      return `${wrapCodeWithCard ? '<n-card size="small">' : ''}<n-config-consumer abstract>
   <template v-slot="{ theme }">
     <pre class="n-code" :class="'n-' + theme + '-theme'"><code v-pre>${highlighted}</code></pre>
   </template>

@@ -3,6 +3,7 @@ import formatDistance from 'date-fns/formatDistance'
 import fromUnixTime from 'date-fns/fromUnixTime'
 import zhCN from 'date-fns/locale/zh-CN'
 import enUS from 'date-fns/locale/en-US'
+import render from '../../_utils/vue/render'
 
 import locale from '../../_mixins/locale'
 
@@ -34,9 +35,9 @@ export default {
       type: String,
       default: null
     },
-    transparent: {
+    text: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
   computed: {
@@ -84,6 +85,10 @@ export default {
     }
   },
   render (h) {
-    return this.transparent ? this._v(this.renderedTime) : h('time', this.renderedTime)
+    return this.text ? h(render, {
+      props: {
+        render: this.renderedTime
+      }
+    }) : h('time', this.renderedTime)
   }
 }

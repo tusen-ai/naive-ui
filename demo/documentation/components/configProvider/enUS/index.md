@@ -17,4 +17,4 @@ transparent
 |namespace|`string`|`null`|Class name of detached parts of components inside n-config-provider|
 |theme|`string`|`null`|Theme name of components inside n-config-provider|
 |theme-environment|`object`|`null`|An object with some value which can be accessed by n-config-consumer or n-element inside n-config-provider|
-|transparent|`boolean`|`false`|If n-config-provider has no wrapper DOM|
+|abstract|`boolean`|`false`|If n-config-provider has no wrapper DOM|
