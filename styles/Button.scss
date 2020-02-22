@@ -2,7 +2,7 @@
 
 @mixin button-size-mixin($size) {
   @include m($size + "-size") {
-    $height: map-get($--n-button-height, $size);
+    $height: map-get($--n-height, $size);
     $font-size: map-get($--n-button-font-size, $size);
     border-radius: $--n-button-border-radius;
     font-size: $font-size;

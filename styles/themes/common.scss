@@ -6,6 +6,7 @@ $--n-ease-out-cubic-bezier: cubic-bezier(0, 0, .2, 1);
 $--n-ease-in-cubic-bezier: cubic-bezier(.4, 0, 1, 1);
 
 $--n-height: (
+  "tiny": 22px,
   "small": 28px,
   "medium": 34px,
   "large": 40px,
@@ -20,7 +21,6 @@ $--n-font-size: (
   "huge": 16px
 );
 
-
 $--n-icon-transition: (fill .3s $--n-ease-in-out-cubic-bezier, stroke .3s $--n-ease-in-out-cubic-bezier);
 
 $--n-transform-debounce-scale: scale(0.99999);
@@ -29,6 +29,8 @@ $--n-ease-in-out-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
 $--n-ease-out-cubic-bezier: cubic-bezier(0, 0, .2, 1);
 $--n-ease-in-cubic-bezier: cubic-bezier(.4, 0, 1, 1);
 
+$--n-popmenu-box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.18) !global;
+
 /** button */
 $--n-button-border-radius: 6px;
 $--n-button-font-size: (
@@ -36,12 +38,6 @@ $--n-button-font-size: (
   "small": 14px,
   "medium": 14px,
   "large": 16px
-) !global;
-$--n-button-height: (
-  "tiny": 22px,
-  "small": 28px,
-  "medium": 34px,
-  "large": 40px
 ) !global;
 $--n-button-padding: (
   "tiny": 0 6px,
@@ -78,9 +74,9 @@ $--n-card-margin-left: (
 
 $--n-card-margin-top: (
   'small': 12px,
-  'medium': 16px,
-  'large': 20px,
-  'huge': 24px
+  'medium': 20px,
+  'large': 24px,
+  'huge': 28px
 );
 
 $--n-card-margin-bottom: (
@@ -109,7 +105,9 @@ $--n-input-number-border-radius: 6px;
 $--n-input-icon-size: 20px;
 $--n-input-border-radius: 6px;
 
+/** popover */
 $--n-popover-arrow-width: 6px;
+$--n-popover-box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.12) !global;
 
 /** slider */
 $--n-slider-rail-height: 4px;
@@ -168,12 +166,12 @@ $--n-typography-header-font-size: (
 );
 
 $--n-typography-header-margin: (
-  '1': 1.6em 0 18px 0,
-  '2': 1.6em 0 18px 0,
-  '3': 1.4em 0 16px 0,
-  '4': 1.4em 0 16px 0,
-  '5': 1.4em 0 14px 0,
-  '6': 1.4em 0 14px 0
+  '1': 1.6em 0 1em 0,
+  '2': 1.6em 0 1em 0,
+  '3': 1.6em 0 1.2em 0,
+  '4': 1.4em 0 1.2em 0,
+  '5': 1.4em 0 1.2em 0,
+  '6': 1.4em 0 1.2em 0
 );
 
 $--n-typography-header-prefix-width: (

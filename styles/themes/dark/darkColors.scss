@@ -12,13 +12,14 @@
   $--alpha-4: .35 !global;
 
   $--alpha-disabled: .5 !global;
-
-
+  
+  // overlay-text
   $--overlay-text-1: rgba(255, 255, 255, $--alpha-1) !global;
   $--overlay-text-2: rgba(255, 255, 255, $--alpha-2) !global;
   $--overlay-text-3: rgba(255, 255, 255, $--alpha-3) !global;
   $--overlay-text-4: rgba(255, 255, 255, $--alpha-4) !global;
-
+  
+  // overlay
   $--overlay-avatar: rgba(255, 255, 255, .16) !global;
   $--overlay-rail: rgba(255, 255, 255, .18) !global;
   $--overlay-border: rgba(255, 255, 255, .13) !global;
@@ -31,7 +32,10 @@
   $--overlay-disabled: rgba(255, 255, 255, alpha($--overlay-input) * $--alpha-disabled) !global;
   $--overlay-pending: rgba(255, 255, 255, .05) !global;
   $--overlay-active: rgba(255, 255, 255, .03) !global;
+  $--overlay-code: rgba(255, 255, 255, .12) !global;
+  $--overlay-tag: null !global;
 
+  // neutral
   $--neutral-base: black !global;
   $--neutral-popover: rgb(89, 93, 119) !global;
   $--neutral-modal: rgb(70, 75, 99) !global;
@@ -41,28 +45,35 @@
   $--neutral-border: null !global;
   $--neutral-divider: null !global;
   $--neutral-input: null !global;
+  $--neutral-action: null !global;
   $--neutral-tag: null !global;
+  $--neutral-code: null !global;
   
+  // primary
   $--primary-hover: #7fe7c4 !global;
   $--primary-default: #63e2b7 !global;
   $--primary-active:  #5acea7 !global;
   $--primary-hs: rgb(42, 148, 125) !global;
-
+  
+  // info
   $--info-hover: #8acbec !global;
   $--info-default:#70C0E8 !global;
   $--info-active: #66afd3 !global;
   $--info-hs: rgb(56, 137, 197) !global;
   
+  // error
   $--error-hover: #e98b8b !global;
   $--error-default:#e88080 !global;
   $--error-active: #e57272 !global;
   $--error-hs: rgb(208, 58, 82) !global;
   
+  // warning
   $--warning-hover: #f5d599 !global;
   $--warning-default:#f2c97d !global;
   $--warning-active: #e6c260 !global;
   $--warning-hs: rgb(240, 138, 0) !global;
   
+  // success
   $--success-hover: #7ee7c4 !global;
   $--success-default:#64e3b8 !global;
   $--success-active: #5acea7 !global;

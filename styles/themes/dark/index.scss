@@ -89,7 +89,7 @@
   $--n-warning-color: $--warning-default !global;
   $--n-warning-hover-color: $--warning-hover !global;
   $--n-warning-active-color: $--warning-active !global;
-  $--n-warning-hs-collor: $--warning-hs !global;
+  $--n-warning-hs-color: $--warning-hs !global;
 
   $--n-primary-text-color: $--overlay-text-1 !global;
   $--n-secondary-text-color: $--overlay-text-2 !global;
@@ -124,11 +124,11 @@
   $--n-modal-background-color: $--neutral-modal !global;
   $--n-body-background-color: $--neutral-body !global;
   $--n-input-background-color: $--overlay-input !global;
-  $--n-code-background-color: $--overlay-input !global;
+  $--n-code-background-color: $--overlay-code !global;
   $--n-tab-background-color: $--overlay-tab !global;
   $--n-avatar-background-color: $--overlay-avatar !global;
   $--n-base-background-color: $--neutral-base !global;
-  $--n-tag-background-color: null !global;
+  $--n-tag-background-color: $--neutral-tag !global;
 
   $--n-pending-overlay-color: $--overlay-pending !global;
   $--n-active-overlay-color: $--overlay-active !global;
@@ -136,8 +136,7 @@
   $--n-disabled-opacity: $--alpha-disabled !global;
   $--n-disabled-background-color: $--overlay-disabled !global;
 
-  $--n-popmenu-box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.18) !global;
-  $--n-popover-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.12) !global;
+  $--n-message-colored-box-shadow: null !global;
 
   @if ($in-js-env != true) {
     @include setup-dark-divider;

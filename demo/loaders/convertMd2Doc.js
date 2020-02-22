@@ -32,7 +32,7 @@ function parseDemosAsAnchor (demosLiteral) {
     .map(demoName => demoName.trim())
     .filter(demoName => demoName.length)
   const linkTags = demoNames.map(demoName => `<n-anchor-link :title="anchorLinkMap.get('${kababCase(demoName)}') || ''" href="#${kababCase(demoName)}"/>`)
-  return `<n-anchor :top="24" :bound="16" position="absolute" affix style="width: 160px;">${linkTags.join('\n')}</n-anchor>`
+  return `<n-anchor :top="24" :bound="16" position="absolute" affix style="width: 144px;">${linkTags.join('\n')}</n-anchor>`
 }
 
 function generateScript (demosLiteral, components = []) {
@@ -119,10 +119,10 @@ function convertMd2ComponentDocumentation (text) {
 <template>
   <component-documentation>
     <div style="display: flex; flex-wrap: nowrap;">
-      <div style="width: calc(100% - 196px); margin-right: 36px;">
+      <div style="width: calc(100% - 180px); margin-right: 36px;">
         ${documentationContent}
       </div>
-      <div style="width: 160px;">
+      <div style="width: 144px;">
         ${parseDemosAsAnchor(demosLiteral)}
       </div>
     </div>

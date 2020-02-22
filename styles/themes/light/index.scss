@@ -69,27 +69,27 @@
   $--n-primary-color: $--primary-default !global;
   $--n-primary-hover-color: $--primary-hover !global;
   $--n-primary-active-color: $--primary-active !global;
-  $--n-primary-hs-color: $--primary-default !global;
+  $--n-primary-hs-color: $--primary-hs !global;
 
   $--n-info-color: $--info-default !global;
   $--n-info-hover-color: $--info-hover !global;
   $--n-info-active-color: $--info-active !global;
-  $--n-info-hs-color: $--info-default !global;
+  $--n-info-hs-color: $--info-hs !global;
 
   $--n-success-color: $--success-default !global;
   $--n-success-hover-color: $--success-hover !global;
   $--n-success-active-color: $--success-active !global;
-  $--n-success-hs-color: $--success-default !global;
+  $--n-success-hs-color: $--success-hs !global;
 
   $--n-error-color: $--error-default !global;
   $--n-error-hover-color: $--error-hover !global;
   $--n-error-active-color: $--error-active !global;
-  $--n-error-hs-color: $--error-default !global;
+  $--n-error-hs-color: $--error-hs !global;
 
   $--n-warning-color: $--warning-default !global;
   $--n-warning-hover-color: $--warning-hover !global;
   $--n-warning-active-color: $--warning-active !global;
-  $--n-warning-hs-color: $--warning-default !global;
+  $--n-warning-hs-color: $--warning-hs !global;
 
   $--n-primary-text-color: $--overlay-text-1 !global;
   $--n-secondary-text-color: $--overlay-text-2 !global;
@@ -97,6 +97,7 @@
   $--n-disabled-text-color: $--overlay-text-4 !global;
   $--n-placeholder-text-color: $--overlay-text-4 !global;
   $--n-base-text-color: $--base-text !global;
+
   $--n-primary-opacity: $--alpha-1 !global;
   $--n-secondary-opacity: $--alpha-2 !global;
   $--n-tertiary-opacity: $--alpha-3 !global;
@@ -123,11 +124,11 @@
   $--n-modal-background-color: $--neutral-modal !global;
   $--n-body-background-color: $--neutral-body !global;
   $--n-input-background-color: $--neutral-card !global;
-  $--n-code-background-color: $--neutral-input !global;
+  $--n-code-background-color: $--neutral-code !global;
   $--n-tab-background-color: $--overlay-tab !global;
   $--n-avatar-background-color: $--overlay-avatar !global;
   $--n-base-background-color: $--neutral-base !global;
-  $--n-tag-background-color: $--neutral-action !global;
+  $--n-tag-background-color: $--neutral-tag !global;
   
   $--n-pending-overlay-color: $--overlay-pending !global;
   $--n-active-overlay-color: $--overlay-active !global;
@@ -135,8 +136,7 @@
   $--n-disabled-opacity: $--alpha-disabled !global;
   $--n-disabled-background-color: $--neutral-disabled !global;
 
-  $--n-popmenu-box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.18) !global;
-  $--n-popover-box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.12) !global;
+  $--n-message-colored-box-shadow: 0px 2px 18px 0px rgba(0, 0, 0, 0.27) !global;
 
   @if ($in-js-env != true) {
     @include setup-light-divider;

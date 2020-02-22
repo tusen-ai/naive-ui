@@ -1,9 +1,9 @@
 @mixin setup-dark-message {
   $--message-text-color: (
-    "info": white,
-    "success": white,
-    "error": white,
-    "warning": white,
+    "info": $--n-base-text-color,
+    "success": $--n-base-text-color,
+    "error": $--n-base-text-color,
+    "warning": $--n-base-text-color,
     "loading": $--n-secondary-text-color
   ) !global;
   $--message-icon-color: rgba(255, 255, 255, .5) !global;
@@ -15,10 +15,10 @@
     "loading": $--n-popover-background-color
   ) !global;
   $--message-box-shadow: (
-    "info": 0 2px 16px 0 change-color($--n-info-hs-color, $alpha: .5),
-    "success": 0 2px 16px 0 change-color($--n-success-hs-color, $alpha: .5),
-    "error": 0 2px 16px 0 change-color($--n-error-hs-color, $alpha: .5),
-    "warning": 0 2px 16px 0 change-color($--n-warning-hs-color, $alpha: .5),
+    "info": 0 2px 12px 0 change-color($--n-info-hs-color, $alpha: .4),
+    "success": 0 2px 12px 0 change-color($--n-success-hs-color, $alpha: .4),
+    "error": 0 2px 12px 0 change-color($--n-error-hs-color, $alpha: .4),
+    "warning": 0 2px 12px 0 change-color($--n-warning-hs-color, $alpha: .4),
     "loading": $--n-popmenu-box-shadow
   ) !global;
 }
