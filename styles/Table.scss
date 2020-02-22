@@ -25,13 +25,13 @@
           background-color .3s $--n-ease-in-out-cubic-bezier,
           border-color .3s $--n-ease-in-out-cubic-bezier,
           color .3s $--n-ease-in-out-cubic-bezier;
-          text-align: inherit;
-          padding: 14px 12px;
-          vertical-align: inherit;
-          font-style: none;
-          text-transform: none;
-          border: none;
-          font-weight: 500;
+        text-align: inherit;
+        padding: 14px 12px;
+        vertical-align: inherit;
+        font-style: none;
+        text-transform: none;
+        border: none;
+        font-weight: 500;
       }
       color: $--table-header-text-color;
       background-color: $--table-header-background-color;

@@ -1,8 +1,3 @@
-@function create-dark-neutral-color($overlay) {
-  $neutral-r: 255 * alpha($overlay);
-  @return rgb($neutral-r, $neutral-r, $neutral-r)
-};
-
 @mixin setup-dark-colors {
   $--base-text: rgb(255, 255, 255) !global;
 
@@ -78,4 +73,9 @@
   $--success-default:#64e3b8 !global;
   $--success-active: #5acea7 !global;
   $--success-hs: rgb(42, 148, 125) !global;
+}
+
+@function create-dark-neutral-color($overlay) {
+  $neutral-r: 255 * alpha($overlay);
+  @return rgb($neutral-r, $neutral-r, $neutral-r)
 }
