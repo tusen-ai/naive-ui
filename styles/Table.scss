@@ -3,6 +3,7 @@
 @include themes-mixin {
   @include b(table) {
     @include once {
+      line-height: 1.75;
       font-size: 14px;
       width: 100%;
       border-radius: 6px 6px 0 0;
