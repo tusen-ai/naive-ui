@@ -28,12 +28,14 @@
 @mixin tag-type-mixin($type) {
   @include m($type + '-type') {
     @include not-m(checkable) {
+      box-shadow: inset 0 0 0 1px map-get($--tag-border-color, $type);
+      color: map-get($--tag-text-color, $type);
+      background-color: map-get($--tag-background-color, $type);
+      @include e(close) {
+        fill: map-get($--tag-close-color, $type);
+      }
       @include not-m(disabled) {
-        box-shadow: inset 0 0 0 1px map-get($--tag-border-color, $type);
-        color: map-get($--tag-text-color, $type);
-        background-color: map-get($--tag-background-color, $type);
         @include e(close) {
-          fill: map-get($--tag-close-color, $type);
           &:hover {
             fill: map-get($--tag-close-color, $type + '-hover');
           }
