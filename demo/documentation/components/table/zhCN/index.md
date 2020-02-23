@@ -5,6 +5,9 @@
 ## 演示
 ```demo
 basic
+bordered
+single-column
+single-line
 ```
 
 ## Components
@@ -16,4 +19,5 @@ basic
 |-|-|-|-|
 |bordered|`boolean`|`true`||
 |single-line|`boolean`|`true`||
+|single-column|`boolean`|`false`||
 

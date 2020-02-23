@@ -75,5 +75,10 @@
         border-right: none;
       }
     }
+    @include m(single-column) {
+      @include e(td) {
+        border-bottom: none;
+      }
+    }
   }
 }

@@ -4,7 +4,8 @@
     :class="{
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
       'n-table--bordered': bordered,
-      'n-table--single-line': singleLine
+      'n-table--single-line': singleLine,
+      'n-table--single-column': singleColumn
     }"
   >
     <slot />
@@ -26,6 +27,10 @@ export default {
     singleLine: {
       type: Boolean,
       default: true
+    },
+    singleColumn: {
+      type: Boolean,
+      default: false
     }
   }
 }

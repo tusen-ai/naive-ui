@@ -6,7 +6,7 @@ function createRenderer (wrapCodeWithCard = true) {
   const overrides = {
     table (header, body) {
       if (body) body = '<tbody class="n-table__tbody">' + body + '</tbody>'
-      return '<n-table>\n' +
+      return '<n-table single-column>\n' +
         '<thead class="n-table__thead">\n' +
         header +
         '</thead>\n' +
