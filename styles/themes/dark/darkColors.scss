@@ -3,10 +3,10 @@
 
   $--alpha-1: .92 !global;
   $--alpha-2: .84 !global;
-  $--alpha-3: .44 !global;
-  $--alpha-4: .32 !global;
+  $--alpha-3: .52 !global;
+  $--alpha-4: .38 !global;
 
-  $--alpha-disabled: .5 !global;
+  $--alpha-disabled: .6 !global;
   $--alpha-pending: .05 !global;
   
   // overlay-text
@@ -36,10 +36,10 @@
 
   // neutral
   $--neutral-base: black !global;
-  $--neutral-popover: rgb(89, 93, 119) !global;
-  $--neutral-modal: rgb(70, 75, 99) !global;
-  $--neutral-card: rgb(30, 36, 55) !global;
-  $--neutral-body: rgb(18, 24, 42) !global;
+  $--neutral-popover: rgb(96, 96, 104) !global;
+  $--neutral-modal: rgb(76, 76, 84) !global;
+  $--neutral-card: rgb(32, 32, 36) !global;
+  $--neutral-body: rgb(24, 24, 28) !global;
   $--neutral-disabled: null !global;
   $--neutral-border: null !global;
   $--neutral-divider: null !global;
