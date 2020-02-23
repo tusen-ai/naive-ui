@@ -9,3 +9,11 @@ basic
 
 ## Components
 You can use `n-table`, `n-thead`, `n-tbody`, `n-tr`, `n-th` and `n-td`.
+
+## Props
+### Table Props
+|Name|Type|Default|Description|
+|-|-|-|-|
+|bordered|`boolean`|`true`||
+|single-line|`boolean`|`true`||
+
