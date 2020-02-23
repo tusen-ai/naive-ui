@@ -161,7 +161,7 @@
       }
       @include e(content) {
         @include once {
-          line-height: 1.25;
+          line-height: 1.75;
           margin: 12px 0 0 0;
           font-family: inherit;
           &:first-child {

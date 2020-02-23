@@ -28,6 +28,8 @@
     @include once {
       line-height: 1;
     }
+    stroke: $--base-loading-stroke;
+    transition: stroke .3s $--n-ease-in-out-cubic-bezier;
     @include b(base-loading-circular) {
       @include once {
         height: 100%;
@@ -36,10 +38,8 @@
         transform-origin: center;
       }
       @include b(base-loading-circular-path) {
-        stroke: $--base-loading-stroke;
         @include once {
           transform-origin: center;
-          transition: stroke .3s $--n-ease-in-out-cubic-bezier;
           animation: n-base-loading-dash 1.5s ease-in-out infinite;
           stroke-dasharray: $--n-base-loading-stroke-dashoffset;
           stroke-dashoffset: 0;
