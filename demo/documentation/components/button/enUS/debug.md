@@ -1,7 +1,7 @@
 # Pretend You Didn't See It
 List all buttons here for debug usage.
 ```html
-<n-config-consumer transparent>
+<n-config-consumer abstract>
   <template v-slot="{ theme }">
     <div
       class="debug-zone"

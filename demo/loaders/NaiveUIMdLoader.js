@@ -32,12 +32,12 @@ module.exports = function (content) {
   return `<template>
   <component-documentation>
     <div style="display: flex; flex-wrap: nowrap;">
-      <div style="width: calc(100% - 196px); margin-right: 36px;">
+      <div style="width: calc(100% - 180px); margin-right: 36px;">
         ${marked.parser(tokens, {
     renderer
   })}
       </div>
-      <div style="width: 160px;">
+      <div style="width: 144px;">
         ${anchor}
       </div>
     </div>

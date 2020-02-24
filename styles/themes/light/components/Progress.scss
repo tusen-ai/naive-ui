@@ -7,9 +7,9 @@
     'warning': $--n-warning-color,
     'success': $--n-success-color
   ) !global;
-  $--progress-indicator-color: (
+  $--progress-indicator-text-color: (
     'outside': $--n-secondary-text-color,
-    'inside': white
+    'inside': $--n-base-background-color
   ) !global;
   $--progress-line-processing-background-image: linear-gradient(90deg, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, .5) 100%) !global;
 }

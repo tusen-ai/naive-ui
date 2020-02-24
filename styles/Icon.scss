@@ -2,19 +2,21 @@
 
 @include themes-mixin {
   @include b(icon) {
-    height: 1em;
-    width: 1em;
-    line-height: 1em;
-    text-align: center;
-    display: inline-block;
-    position: relative;
-    transition: $--icon-transition;
-    fill: $--n-base-text-color;
-    stroke:  $--n-base-text-color;
-    svg {
+    @include once {
       height: 1em;
       width: 1em;
+      line-height: 1em;
+      text-align: center;
+      display: inline-block;
+      position: relative;
+      transition: $--n-icon-transition;
+      svg {
+        height: 1em;
+        width: 1em;
+      }
     }
+    fill: $--n-base-text-color;
+    stroke:  $--n-base-text-color;
     @include m(primary-depth) {
       svg {
         opacity: $--n-primary-opacity;

@@ -32,7 +32,7 @@
 @mixin progress-type-mixin ($type) {
   @include m($type) {
     @include b(progress-text) {
-      color: map-get($--progress-indicator-color, 'outside');
+      color: map-get($--progress-indicator-text-color, 'outside');
     }
     $fill-color: map-get($--progress-fill-color, $type);
     @include b(progress-icon) {
@@ -40,7 +40,7 @@
         fill: $fill-color;
       }
       @include m(as-text) {
-        color: map-get($--progress-indicator-color, 'outside');
+        color: map-get($--progress-indicator-text-color, 'outside');
       }
     }
     @include b(progress-graph) {
@@ -223,7 +223,7 @@
               font-size: 14px;
               line-height: 21px;
             }
-            color: map-get($--progress-indicator-color, 'inside');
+            color: map-get($--progress-indicator-text-color, 'inside');
           }
         }
         @include m(indicator-inside-label) {
@@ -251,7 +251,7 @@
               font-weight: 500;
               font-size: 14px;
             }
-            color: map-get($--progress-indicator-color, 'inside');
+            color: map-get($--progress-indicator-text-color, 'inside');
           }
         }
         @include b(progress-graph-line-rail) {

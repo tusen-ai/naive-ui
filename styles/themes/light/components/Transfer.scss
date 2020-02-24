@@ -23,6 +23,6 @@
     'default': $--n-secondary-text-color,
     'disabled': $--n-disabled-text-color
   ) !global;
-  $--transfer-list-border-color: $--n-border-color !global;
+  $--transfer-list-border-color: $--n-divider-color !global;
   $--transfer-header-border-color: transparent !global; 
 }

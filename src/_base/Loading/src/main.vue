@@ -2,6 +2,9 @@
   <div
     :class="{[`n-${theme}-theme`]: theme}"
     class="n-base-loading"
+    :style="{
+      stroke
+    }"
   >
     <svg
       class="n-base-loading-circular"
@@ -9,8 +12,7 @@
     >
       <circle
         :style="{
-          strokeWidth,
-          stroke
+          strokeWidth
         }"
         class="n-base-loading-circular-path"
         :cx="radius"

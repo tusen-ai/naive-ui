@@ -13,7 +13,6 @@
       font-weight: 500;
       font-size: inherit;
       background-clip: text;
-      -webkit-background-clip: text;
       color: transparent;
     }
     @include gradient-text-type-mixin(default);

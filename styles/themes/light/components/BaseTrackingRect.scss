@@ -1,0 +1,3 @@
+@mixin setup-light-base-tracking-rect {
+  $--base-tracking-rect-background-color: mix($--n-primary-color, $--n-base-background-color, 10%) !global;
+}

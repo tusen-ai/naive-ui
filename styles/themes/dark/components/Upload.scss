@@ -1,6 +1,22 @@
 @mixin setup-dark-upload {
-  $--uploadd-file-item-background-color: (
+  $--upload-file-item-background-color: (
     'hover': change-color($--n-primary-color, $alpha: .15),
     'error-hover': change-color($--n-error-color, $alpha: .15)
   ) !global;
+  $--upload-dragger-border-color: (
+    'default': $--n-border-color,
+    'hover': $--n-primary-color
+  ) !global;
+  $--upload-dragger-background-color: (
+    'default': $--n-action-background-color
+  ) !global;
+  $--upload-info-text-color: (
+    'default': $--n-secondary-text-color,
+    'error': $--n-error-color,
+    'success': $--n-success-color
+  ) !global;
+  $--upload-info-icon-color: (
+    'default': $--n-icon-color
+  ) !global;
+  $--upload-disabled-opacity: $--n-disabled-opacity !global;
 }

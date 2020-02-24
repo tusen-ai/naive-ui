@@ -4,8 +4,8 @@
     'disabled': $--n-disabled-background-color
   ) !global;
   $--checkbox-icon-color: (
-    'default': $--n-body-background-color,
-    'disabled': $--n-icon-color
+    'default': $--n-card-background-color,
+    'disabled': $--n-disabled-text-color
   ) !global;
   $--checkbox-border-color: (
     'default': $--n-border-color,
@@ -14,6 +14,6 @@
   ) !global;
   $--checkbox-label-text-color: (
     'default': $--n-secondary-text-color,
-    'disabled': $--n-icon-color
+    'disabled': $--n-disabled-text-color
   ) !global;
 }

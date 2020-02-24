@@ -1,5 +1,5 @@
 @mixin setup-light-result {
-  $--result-icon-fill: (
+  $--result-icon-color: (
     'error': $--n-error-color,
     'success': $--n-success-color,
     'warning': $--n-warning-color,

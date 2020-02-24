@@ -81,7 +81,7 @@
       style="padding: 14px 0;"
     >
       <slot name="empty">
-        <n-empty description="No Data" />
+        <n-empty />
       </slot>
     </div>
     <div v-if="$slots.action" class="n-base-select-menu__action">

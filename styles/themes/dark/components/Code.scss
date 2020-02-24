@@ -1,0 +1,3 @@
+@mixin setup-dark-code {
+  $--code-text-color: $--n-secondary-text-color !global;
+}

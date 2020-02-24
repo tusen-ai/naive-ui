@@ -2,37 +2,84 @@
 
 @include themes-mixin {
   @include b(table) {
-    font-size: 14px;
-    width: 100%;
-    border: 1px solid $--n-divider-color;
-    border-radius: 6px;
-    text-align: left;
-    border-collapse: separate;
-    border-spacing: 0;
-    overflow: hidden;
-    background: $--neutral-card;
-    transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
+    @include once {
+      line-height: 1.75;
+      font-size: 14px;
+      width: 100%;
+      border-radius: 6px 6px 0 0;
+      text-align: left;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow: hidden;
+      transition:
+        background-color .3s $--n-ease-in-out-cubic-bezier,
+        border-color .3s $--n-ease-in-out-cubic-bezier,
+        color .3s $--n-ease-in-out-cubic-bezier;
+    }
+    background: $--table-body-background-color;
     @include e(th) {
-      background-clip: padding-box;
-      white-space: nowrap;
-      color: $--overlay-text-1;
-      transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
-      background-color: $--n-action-background-color;
-      text-align: inherit;
-      padding: 14px 12px;
-      vertical-align: inherit;
-      font-style: none;
-      text-transform: none;
-      border: none;
-      font-weight: 500;
-      border-color: $--n-divider-color;
-      border-bottom: 1px solid $--n-divider-color;
+      @include once {
+        background-clip: padding-box;
+        white-space: nowrap;
+        transition:
+          background-color .3s $--n-ease-in-out-cubic-bezier,
+          border-color .3s $--n-ease-in-out-cubic-bezier,
+          color .3s $--n-ease-in-out-cubic-bezier;
+        text-align: inherit;
+        padding: 14px 12px;
+        vertical-align: inherit;
+        text-transform: none;
+        border: none;
+        font-weight: 500;
+      }
+      color: $--table-header-text-color;
+      background-color: $--table-header-background-color;
+      border-color: $--table-border-color;
+      border-bottom: 1px solid $--table-border-color;
+      border-right: 1px solid $--table-border-color;
+      &:last-child {
+        border-right: none;
+      }
     }
     @include e(td) {
-      color: $--overlay-text-2;
-      transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
+      @include once {
+        transition:
+          background-color .3s $--n-ease-in-out-cubic-bezier,
+          border-color .3s $--n-ease-in-out-cubic-bezier,
+          color .3s $--n-ease-in-out-cubic-bezier;
+        padding: 12px;
+      }
+      color: $--table-body-text-color;
       background-color: $--n-table-body-background-color;
-      padding: 12px;
+      border-right: 1px solid $--table-border-color;
+      border-bottom: 1px solid $--table-border-color;
+      &:last-child {
+        border-right: none;
+      }
+    }
+    @include m(bordered) {
+      border: 1px solid $--table-border-color;
+      border-radius: 6px;
+      @include e(tr) {
+        &:last-child {
+          @include e(td) {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+    @include m(single-line) {
+      @include e(th) {
+        border-right: none;
+      }
+      @include e(td) {
+        border-right: none;
+      }
+    }
+    @include m(single-column) {
+      @include e(td) {
+        border-bottom: none;
+      }
     }
   }
 }

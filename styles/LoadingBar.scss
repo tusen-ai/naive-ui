@@ -4,7 +4,7 @@
   @include b(loading-bar-container) {
     @include once {
       @include fade-in-transition(loading-bar-container, .3s, .8s);
-      z-index: 5800;
+      z-index: 5999;
       position: fixed;
       top: 0;
       left: 0;

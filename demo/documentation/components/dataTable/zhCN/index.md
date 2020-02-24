@@ -14,6 +14,7 @@
 
 ```demo
 basic
+border
 filterAndSorter
 select
 controlled-page
@@ -42,6 +43,8 @@ ajaxUsage
 |checked-row-keys|`Array<string \| number> \| null`|`null`||
 |default-checked-row-keys|`Array<string \| number>`|`[]`||
 |row-key|`(rowData: object) => number \| string`|`null`|通过行数据创建行的 key（如果你不想给每一行加上 key）|
+|bordered|`boolean`|`true`||
+|single-line|`boolean`|`true`||
 
 ## Methods
 这些方法可以帮助你在非受控的状态下改变表格，但是，并不推荐在异步的状况下使用这些方法。如果需要异步操作，最好用**受控**的方式使用表格。

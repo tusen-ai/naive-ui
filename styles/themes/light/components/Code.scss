@@ -1,0 +1,3 @@
+@mixin setup-light-code {
+  $--code-text-color: $--n-secondary-text-color !global;
+}
