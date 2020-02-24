@@ -99,18 +99,18 @@ let popoverDebug
 let scrollbarDebug
 let scrollbarDebug2
 if (env === 'development') {
-  routerDebug = () => ('./debugComponents/routerDebug')
-  modalDebug = () => ('./debugComponents/modalDebug')
-  datePickerDebug = () => ('./debugComponents/datePickerDebug')
-  backTopDebug = () => ('./debugComponents/backTopDebug')
-  suffixDebug = () => ('./debugComponents/suffixDebug')
-  cascaderDebug = () => ('./debugComponents/cascaderDebug')
-  verticalAlignDebug = () => ('./debugComponents/verticalAlignDebug')
-  iconTransitionDebug = () => ('./debugComponents/iconTransitionDebug')
-  selectDebug = () => ('./debugComponents/selectDebug')
-  popoverDebug = () => ('./debugComponents/popoverDebug')
-  scrollbarDebug = () => ('./debugComponents/scrollbarDebug')
-  scrollbarDebug2 = () => ('./debugComponents/scrollbarDebug2')
+  routerDebug = () => import('./debugComponents/routerDebug')
+  modalDebug = () => import('./debugComponents/modalDebug')
+  datePickerDebug = () => import('./debugComponents/datePickerDebug')
+  backTopDebug = () => import('./debugComponents/backTopDebug')
+  suffixDebug = () => import('./debugComponents/suffixDebug')
+  cascaderDebug = () => import('./debugComponents/cascaderDebug')
+  verticalAlignDebug = () => import('./debugComponents/verticalAlignDebug')
+  iconTransitionDebug = () => import('./debugComponents/iconTransitionDebug')
+  selectDebug = () => import('./debugComponents/selectDebug')
+  popoverDebug = () => import('./debugComponents/popoverDebug')
+  scrollbarDebug = () => import('./debugComponents/scrollbarDebug')
+  scrollbarDebug2 = () => import('./debugComponents/scrollbarDebug2')
 }
 
 hljs.registerLanguage('javascript', javascript)
