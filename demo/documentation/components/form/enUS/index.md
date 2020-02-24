@@ -7,6 +7,7 @@ inline
 custom-rule
 top
 left
+validator
 ```
 ## Props
 ### Form Props
