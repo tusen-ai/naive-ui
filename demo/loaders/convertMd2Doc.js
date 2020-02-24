@@ -17,11 +17,16 @@ function template (demos, demosLiteral, isSingleColumn = false) {
   </component-demos>`
 }
 
-function parseDemos (demosLiteral) {
+function parseDemos (demosLiteral, env) {
   const demoNames = demosLiteral
     .split('\n')
     .map(demoName => demoName.trim())
-    .filter(demoName => demoName.length)
+    .filter((demoName) => {
+      if (env === 'production') {
+        return demoName.length && demoName.indexOf('debug') < 0 && demoName.indexOf('Debug') < 0
+      }
+      return demoName.length
+    })
   const demoTags = demoNames.map(demoName => `<${demoName}Demo id="${kababCase(demoName)}" demo-id="${kababCase(demoName)}"/>`)
   return demoTags.join('\n')
 }
@@ -69,7 +74,7 @@ export default {
   return script
 }
 
-function convertMd2ComponentDocumentation (text) {
+function convertMd2ComponentDocumentation (text, env = 'development') {
   const isNoDemo = !!~text.search('<!--no-demo-->')
   if (isNoDemo) {
     return mdLoader(text)
@@ -112,7 +117,7 @@ function convertMd2ComponentDocumentation (text) {
   // console.log(documentationHTML)
   // const classedDocumentationHTML = addClassToHTML(documentationHTML, 'markdown')
   const demosReg = /<!--demos-->/
-  const demoTags = parseDemos(demosLiteral)
+  const demoTags = parseDemos(demosLiteral, env)
   const documentationContent = documentationHTML.replace(demosReg, template(demoTags, demosLiteral, isSingleColumn))
   // console.log(documentationContent)
   const documentationTemplate = `

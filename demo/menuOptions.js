@@ -34,6 +34,12 @@ const appendCounts = item => {
   }
 }
 
+const appendDebugDemos = (item) => {
+  if (process.env.NODE_ENV === 'development') {
+    return item
+  }
+}
+
 // function renderTitle (main, meta) {
 //   return h => {
 //     return h('n-config-consumer', {
@@ -904,59 +910,60 @@ export default function (locale, instance) {
           }
         ]
       },
-      {
-        name: 'Debug',
-        childItems: [
-          {
-            name: 'SuffixDebug',
-            path: `/${instance.lang}/${instance.theme}` + '/n-base-suffix-debug'
-          },
-          {
-            name: 'PopoverDebug',
-            path: `/${instance.lang}/${instance.theme}` + '/n-popover-debug'
-          },
-          {
-            name: 'RouterDebug',
-            path: `/${instance.lang}/${instance.theme}` + '/n-router-debug'
-          },
-          {
-            name: 'ModalDebug',
-            path: `/${instance.lang}/${instance.theme}` + '/n-modal-debug'
-          },
-          {
-            name: 'ScrollbarDebug',
-            path: `/${instance.lang}/${instance.theme}` + '/n-scrollbar-debug'
-          },
-          {
-            name: 'ScrollbarDebug2',
-            path: `/${instance.lang}/${instance.theme}` + '/n-scrollbar-debug2'
-          },
-          {
-            name: 'DatePickerDebug',
-            path: `/${instance.lang}/${instance.theme}` + '/n-date-picker-debug'
-          },
-          {
-            name: 'BackTopDebug',
-            path: `/${instance.lang}/${instance.theme}` + '/n-back-top-debug'
-          },
-          {
-            name: 'CascaderDebug',
-            path: `/${instance.lang}/${instance.theme}` + '/n-cascader-debug'
-          },
-          {
-            name: 'VerticalAlignDebug',
-            path: `/${instance.lang}/${instance.theme}` + '/n-vertical-align-debug'
-          },
-          {
-            name: 'IconTransitionDebug',
-            path: `/${instance.lang}/${instance.theme}` + '/n-icon-transition-debug'
-          },
-          {
-            name: 'SelectDebug',
-            path: `/${instance.lang}/${instance.theme}` + '/n-select-debug'
-          }
-        ]
-      }
+      appendDebugDemos(
+        {
+          name: 'Debug',
+          childItems: [
+            {
+              name: 'SuffixDebug',
+              path: `/${instance.lang}/${instance.theme}` + '/n-base-suffix-debug'
+            },
+            {
+              name: 'PopoverDebug',
+              path: `/${instance.lang}/${instance.theme}` + '/n-popover-debug'
+            },
+            {
+              name: 'RouterDebug',
+              path: `/${instance.lang}/${instance.theme}` + '/n-router-debug'
+            },
+            {
+              name: 'ModalDebug',
+              path: `/${instance.lang}/${instance.theme}` + '/n-modal-debug'
+            },
+            {
+              name: 'ScrollbarDebug',
+              path: `/${instance.lang}/${instance.theme}` + '/n-scrollbar-debug'
+            },
+            {
+              name: 'ScrollbarDebug2',
+              path: `/${instance.lang}/${instance.theme}` + '/n-scrollbar-debug2'
+            },
+            {
+              name: 'DatePickerDebug',
+              path: `/${instance.lang}/${instance.theme}` + '/n-date-picker-debug'
+            },
+            {
+              name: 'BackTopDebug',
+              path: `/${instance.lang}/${instance.theme}` + '/n-back-top-debug'
+            },
+            {
+              name: 'CascaderDebug',
+              path: `/${instance.lang}/${instance.theme}` + '/n-cascader-debug'
+            },
+            {
+              name: 'VerticalAlignDebug',
+              path: `/${instance.lang}/${instance.theme}` + '/n-vertical-align-debug'
+            },
+            {
+              name: 'IconTransitionDebug',
+              path: `/${instance.lang}/${instance.theme}` + '/n-icon-transition-debug'
+            },
+            {
+              name: 'SelectDebug',
+              path: `/${instance.lang}/${instance.theme}` + '/n-select-debug'
+            }
+          ]
+        })
     ]
   }
 }
