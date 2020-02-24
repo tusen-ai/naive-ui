@@ -98,7 +98,7 @@ let selectDebug
 let popoverDebug
 let scrollbarDebug
 let scrollbarDebug2
-if (env === 'production') {
+if (env === 'development') {
   routerDebug = () => ('./debugComponents/routerDebug')
   modalDebug = () => ('./debugComponents/modalDebug')
   datePickerDebug = () => ('./debugComponents/datePickerDebug')
