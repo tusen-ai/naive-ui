@@ -1,4 +1,4 @@
-# validate Form
+# Async Validation
 Support async. Make sure your code in `return new Promise()`.
 ```html
 <n-form

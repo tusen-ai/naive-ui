@@ -17,7 +17,7 @@
   <n-form-item label="电话号码" path="phone">
     <n-input placeholder="电话号码" v-model="formValue.phone"/>
   </n-form-item>
-  <n-form-item v-model="formValue.phone">
+  <n-form-item>
     <n-button @click="handleValidateClick">验证</n-button>
   </n-form-item>
 </n-form>
