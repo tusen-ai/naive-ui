@@ -112,7 +112,7 @@ Previously, it would not work with single quotes:
 
 ## TODO 排序不分先后
 1. Focus Detector on Time Selector
-2. Menu Root Indent = 0 可能造成问题
+2. <del>Menu Root Indent = 0 可能造成问题</del>
 3. 用 RAF 优化 scrollbar 性能（不一定需要）
 4. <del>Anchor 切换有 bug，忽然闪现第一个</del>
 5. Safari select lightbar container overflow 边角（或许是 webkit 的问题）
@@ -157,6 +157,7 @@ Previously, it would not work with single quotes:
 44. <del>Icon 文档待更新</del>
 45. 把 Upload 的回调 API 从 promise 改成 callback 格式的，文档也要对应修改
 46. Date Picker 的 format 文档内容
+47. Button Group 样式
 
 
 ```

@@ -1,4 +1,5 @@
 @import '../../styles/themes/dark/index.scss';
+@import '../../styles/themes/common.scss';
 
 @include setup-dark-theme($in-js-env: true);
 
@@ -22,13 +23,12 @@
   primaryTextColor: $--overlay-text-1;
   secondaryTextColor: $--overlay-text-2;
   tertiaryTextColor: $--overlay-text-3;
-  disabledTextColor: rgba(255, 255, 255, 0.3);
+  disabledTextColor: $--overlay-text-4;
   popoverBackgroundColor: $--neutral-popover;
   modalBackgroundColor: $--neutral-modal;
   cardBackgroundColor: $--neutral-card;
   bodyBackgroundColor: $--neutral-body;
-  closeColor: $--overlay-text-3;
   dividerColor: $--overlay-divider;
   borderColor: $--n-border-color;
-  easeInOutCubicBezier: cubic-bezier(.4, 0, .2, 1);
+  easeInOutCubicBezier: $--n-ease-in-out-cubic-bezier;
 }

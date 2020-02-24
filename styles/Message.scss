@@ -72,6 +72,9 @@
         line-height: 40px;
         align-items: center;
         @include b(icon) {
+          @include b(base-loading) {
+            @include icon-switch-transition();
+          }
           svg {
             @include icon-switch-transition();
           }
