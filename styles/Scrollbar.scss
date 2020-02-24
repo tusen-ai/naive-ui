@@ -14,7 +14,6 @@
           height: 100%;
           max-height: inherit;
           scrollbar-width: none;
-          -moz-scrollbar-width: none;
           &::-webkit-scrollbar {
             width: 0;
             height: 0;
@@ -32,7 +31,6 @@
         @include once {
           position: absolute;
           user-select: none;
-          -moz-user-select: none;
           @include m(horizontal) {
             left: 0;
             right: 0;

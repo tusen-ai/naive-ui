@@ -2,6 +2,9 @@
   <div
     v-if="$slots.default"
     class="n-spin-container"
+    :class="{
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
+    }"
   >
     <div
       :class="{
@@ -15,7 +18,8 @@
       <n-base-loading
         v-if="spinning"
         :class="{
-          [`n-spin--${size}-size`]: true
+          [`n-spin--${size}-size`]: true,
+          [`n-${syntheticTheme}-theme`]: syntheticTheme
         }"
         :stroke="stroke"
         :stroke-width="syntheticStrokeWidth"
@@ -40,7 +44,6 @@
 import NBaseLoading from '../../_base/Loading'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import asthemecontext from '../../_mixins/asthemecontext'
 
 const STROKE_WIDTH = {
   small: 22,
@@ -56,7 +59,7 @@ export default {
   components: {
     NBaseLoading
   },
-  mixins: [ withapp, themeable, asthemecontext ],
+  mixins: [ withapp, themeable ],
   props: {
     stroke: {
       type: String,

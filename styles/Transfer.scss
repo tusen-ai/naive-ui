@@ -140,9 +140,17 @@
           margin-left: -1px;
           margin-right: -1px;
           margin-bottom: -1px;
-        } @else if $theme == 'light' {
+        } @else {
           margin-left: 0;
           margin-right:0;
+        }
+        @include b(transfer-filter) {
+          /** hard-code **/
+          @if $theme == 'dark' {
+            padding: 8px 9px
+          } @else {
+            padding: 8px 8px;
+          }
         }
         @include once {
           box-sizing: border-box;
@@ -175,7 +183,6 @@
             }
           }
           @include b(transfer-filter) {
-            padding: 8px 8px;
             box-sizing: border-box;
           }
         }
@@ -253,7 +260,7 @@
               /** hard-code **/
               @if $theme == 'dark' {
                 padding-left: 15px;
-              } @else if $theme == 'light' {
+              } @else {
                 padding-left: 14px;
               }
             }

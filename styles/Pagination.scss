@@ -85,6 +85,7 @@
         box-shadow: inset 0 0 0 1px map-get($--pagination-item-border-color, 'active');
       }
       @include m(backward, forward) {
+        background-color: map-get($--pagination-item-background-color, 'default');
         box-shadow: inset 0 0 0 1px  map-get($--pagination-item-border-color, 'default');
       }
       @include not-m(disabled) {

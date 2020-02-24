@@ -16,4 +16,3 @@ unix
 |to|`number \| Date`|`new Date()`||
 |unix|`boolean`|`false`||
 |format|`string`|`null`||
-|transparent|`boolean`|`false`||

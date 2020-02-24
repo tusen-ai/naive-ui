@@ -10,7 +10,7 @@ const appendCounts = item => {
       item.title = h => {
         return h('n-config-consumer', {
           props: {
-            transparent: true
+            abstract: true
           },
           scopedSlots: {
             default: ({ styleScheme }) => {

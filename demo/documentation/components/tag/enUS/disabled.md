@@ -10,7 +10,7 @@
 <n-tag
   type="success"
   closable
-  disabled
+  :disabled="disabled"
   @close="handleClose"
 >
   Yes It Is

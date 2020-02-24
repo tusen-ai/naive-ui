@@ -128,14 +128,14 @@ export default {
 <style lang="scss" scoped>
 .nav {
   display: grid;
-  grid-template-columns: 272px 1fr 96px 140px;
+  grid-template-columns: 288px 1fr 96px 140px;
   grid-template-rows: 64px;
   align-items: center;
 }
 .ui-logo {
   display: flex;
   align-items: center;
-  padding-left: 44px;
+  padding-left: 36px;
   font-size: 18px;
 }
 .ui-logo > img {

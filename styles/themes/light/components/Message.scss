@@ -1,9 +1,9 @@
 @mixin setup-light-message {
   $--message-text-color: (
-    "info": white,
-    "success": white,
-    "error": white,
-    "warning": white,
+    "info": $--n-base-background-color,
+    "success": $--n-base-background-color,
+    "error": $--n-base-background-color,
+    "warning": $--n-base-background-color,
     "loading": $--n-secondary-text-color
   ) !global;
   $--message-icon-color: rgba(255, 255, 255, .45) !global;
@@ -15,10 +15,10 @@
     "loading": $--n-popover-background-color
   ) !global;
   $--message-box-shadow: (
-    "info": $--n-popover-box-shadow,
-    "success": $--n-popover-box-shadow,
-    "error": $--n-popover-box-shadow,
-    "warning": $--n-popover-box-shadow,
-    "loading": $--n-popover-box-shadow
+    "info": $--n-message-colored-box-shadow,
+    "success": $--n-message-colored-box-shadow,
+    "error": $--n-message-colored-box-shadow,
+    "warning": $--n-message-colored-box-shadow,
+    "loading": $--n-popmenu-box-shadow
   ) !global;
 }

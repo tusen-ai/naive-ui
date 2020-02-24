@@ -24,7 +24,8 @@
         box-sizing: border-box;
         border-radius: 4px;
         position: relative;
-        transition: box-shadow 0.3s $--n-ease-in-out-cubic-bezier,
+        transition:
+          box-shadow 0.3s $--n-ease-in-out-cubic-bezier,
           background-color 0.3s $--n-ease-in-out-cubic-bezier;
         @include e(line-mark, check-mark) {
           position: absolute;
@@ -103,8 +104,10 @@
       @include b(checkbox-box) {
         background-color: map-get($--checkbox-border-color, 'active');
         box-shadow: inset 0 0 0 1px map-get($--checkbox-border-color, 'active');
-        border-left: 0;
-        border-top: 0;
+        @include once {
+          border-left: 0;
+          border-top: 0;
+        }
       }
     }
     @include m(disabled) {

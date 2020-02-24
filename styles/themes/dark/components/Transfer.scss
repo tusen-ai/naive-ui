@@ -1,9 +1,9 @@
 @mixin setup-dark-transfer {
   $--transfer-list-background-color: (
-    'default': rgba(255, 255, 255, .1)
+    'default': $--n-input-background-color
   ) !global;
   $--transfer-list-header-background-color: (
-    'default': rgba(255, 255, 255, .1)
+    'default': $--n-table-header-background-color
   ) !global;
   $--transfer-list-header-text-color: (
     'default': $--n-primary-text-color
@@ -22,6 +22,6 @@
     'default': $--n-secondary-text-color,
     'disabled': $--n-disabled-text-color
   ) !global;
-  $--transfer-list-border-color: rgba(255, 255, 255, .1) !global;
-  $--transfer-header-border-color: rgba(255, 255, 255, .1) !global;
+  $--transfer-list-border-color: $--n-input-background-color !global;
+  $--transfer-header-border-color: $--n-table-header-background-color !global;
 }

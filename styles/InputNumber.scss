@@ -14,13 +14,40 @@
 
 @include themes-mixin {
   @include b(input-number) {
-    position: relative;
-    border-radius: $--input-number-border-radius;
-    box-sizing: border-box;
-    width: 152px;
-    display: inline-block;
-    outline: none;
-    z-index: auto;
+    @include once {
+      position: relative;
+      border-radius: $--n-input-number-border-radius;
+      box-sizing: border-box;
+      width: 152px;
+      display: inline-block;
+      outline: none;
+      z-index: auto;
+      @include input-number-size-mixin('small');
+      @include input-number-size-mixin('medium');
+      @include input-number-size-mixin('large');
+      @include e(border-mask) {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        box-shadow: inset 0 0 0px 1px transparent;
+        border-radius: $--n-input-number-border-radius;
+        transition: box-shadow .3s $--n-ease-in-out-cubic-bezier;
+        pointer-events: none;
+      }
+      @include e(minus-button) {
+        left: 0;
+        border-top-left-radius: $--n-input-number-border-radius;
+        border-bottom-left-radius: $--n-input-number-border-radius;
+      }
+      @include e(add-button) {
+        right: 0;
+        border-top-right-radius: $--n-input-number-border-radius;
+        border-bottom-right-radius: $--n-input-number-border-radius;
+      }
+    }
     @include m(disabled) {
       @include e(minus-button, add-button) {
         background: map-get($--input-number-button-background-color, 'disabled');
@@ -28,7 +55,9 @@
           fill: map-get($--input-number-button-text-color, 'disabled');
           stroke: map-get($--input-number-button-text-color, 'disabled');
         }
-        pointer-events: none;
+        @include once {
+          pointer-events: none;
+        }
       }
       @include e(input) {
         &::placeholder {
@@ -36,50 +65,45 @@
         }
         background: map-get($--input-number-background-color, 'disabled');
         color: map-get($--input-number-button-text-color, 'disabled');
-        pointer-events: none;
+        @include once {
+          pointer-events: none;
+        }
       }
-      cursor: not-allowed;
+      @include once {
+        cursor: not-allowed;
+      }
     }
     @include m(invalid) {
       @include e(input) {
-        text-decoration: line-through;
-        text-decoration-color: $--input-number-text-decoration-color;
+        @include once {
+          text-decoration: line-through;
+          text-decoration-color: $--input-number-text-decoration-color;
+        }
       }
     }
-    @include input-number-size-mixin('small');
-    @include input-number-size-mixin('medium');
-    @include input-number-size-mixin('large');
-    @include e(border-mask) {
-      position: absolute;
-      z-index: 1;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      box-shadow: inset 0 0 0px 1px transparent;
-      border-radius: $--input-number-border-radius;
-      transition: box-shadow .3s $--n-ease-in-out-cubic-bezier;
-      pointer-events: none;
-    }
     @include e(minus-button, add-button) {
-      outline: none;
-      position: absolute;
-      cursor: pointer;
-      z-index: auto;
-      top: 0;
-      padding: 0;
-      width: 28px;
-      border: none;
+      @include once {
+        outline: none;
+        position: absolute;
+        cursor: pointer;
+        z-index: auto;
+        top: 0;
+        padding: 0;
+        width: 28px;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        transition:
+          background-color .3s $--n-ease-in-out-cubic-bezier,
+          box-shadow .3s $--n-ease-in-out-cubic-bezier;
+      }
       background-color: map-get($--input-number-button-background-color, 'default');
-      display: flex;
-      align-items: center;
-      justify-content: center;
       @include b(icon) {
         fill: map-get($--input-number-button-text-color, 'default');
         stroke: map-get($--input-number-button-text-color, 'default');
       }
-      font-size: 14px;
-      transition: background-color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier;
       box-shadow: inset 0 0 0px 1px map-get($--input-number-border-color, 'default');
       &:hover ~ {
         @include e(border-mask) {
@@ -91,11 +115,17 @@
         color: map-get($--input-number-button-text-color, 'hover');
       }
       &:active {
-        transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .15s $--n-ease-in-out-cubic-bezier;
+        @include once {
+          transition:
+            color .3s $--n-ease-in-out-cubic-bezier,
+            background-color .15s $--n-ease-in-out-cubic-bezier;
+        }
         background-color: map-get($--input-number-button-background-color, 'active')
       }
       @include m(disabled) {
-        cursor: not-allowed;
+        @include once {
+          cursor: not-allowed;
+        }
         background-color: map-get($--input-number-button-background-color, 'disabled');
         @include b(icon) {
           fill: map-get($--input-number-button-text-color, 'disabled');
@@ -103,25 +133,31 @@
         }
       }
     }
-    @include e(minus-button) {
-      left: 0;
-      border-top-left-radius: $--input-number-border-radius;
-      border-bottom-left-radius: $--input-number-border-radius;
-    }
-    @include e(add-button) {
-      right: 0;
-      border-top-right-radius: $--input-number-border-radius;
-      border-bottom-right-radius: $--input-number-border-radius;
-    }
     @include e(input) {
-      outline: none;
-      box-sizing: border-box;
-      border-radius: $--input-number-border-radius;
+      @include once {
+        outline: none;
+        box-sizing: border-box;
+        border-radius: $--n-input-number-border-radius;
+        transition:
+          color .3s $--n-ease-in-out-cubic-bezier,
+          caret-color .3s $--n-ease-in-out-cubic-bezier,
+          background-color .3s $--n-ease-in-out-cubic-bezier,
+          box-shadow .3s $--n-ease-in-out-cubic-bezier,
+          text-decoration-color .3s $--n-ease-in-out-cubic-bezier;
+        border: none;
+        width: 100%;
+        text-align: center;
+        padding: 0 34px;
+      }
       background-color: map-get($--input-number-background-color, 'default');
       box-shadow: inset 0 0 0px 1px map-get($--input-number-border-color, 'default');
+      color: map-get($--input-number-text-color, 'default');
+      caret-color: $--input-number-caret-color;
       &::placeholder {
+        @include once {
+          transition: color .3s $--n-ease-in-out-cubic-bezier;
+        }
         color: map-get( $--input-placeholder-color, 'default');
-        transition: color .3s $--n-ease-in-out-cubic-bezier;
       }
       &:hover ~ {
         @include e(border-mask) {
@@ -136,13 +172,6 @@
           }
         }
       }
-      transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier, text-decoration-color .3s $--n-ease-in-out-cubic-bezier;
-      border: none;
-      color: map-get($--input-number-text-color, 'default');
-      width: 100%;
-      text-align: center;
-      padding: 0 34px;
-      caret-color: $--input-number-caret-color;
     }
   }
   @include as-form-item {

@@ -171,6 +171,11 @@ export default {
     }
   },
   methods: {
+    emitChangeEvent (value) {
+      if (value !== this.value) {
+        this.$emit('change', value)
+      }
+    },
     createValidValue () {
       if (this.validator) return null
       if (this.safeMin !== null) {
@@ -193,25 +198,25 @@ export default {
     add () {
       if (!this.addable) return
       if (this.value === null) {
-        this.$emit('change', this.createValidValue())
+        this.emitChangeEvent(this.createValidValue())
       } else {
         const valueAfterChange = this.adjustValue(this.value + this.safeStep)
-        this.$emit('change', valueAfterChange)
+        this.emitChangeEvent(valueAfterChange)
       }
     },
     minus () {
       if (!this.minusable) return
       if (this.value === null) {
-        this.$emit('change', this.createValidValue())
+        this.emitChangeEvent(this.createValidValue())
       } else {
         const valueAfterChange = this.adjustValue(this.value - this.safeStep)
-        this.$emit('change', valueAfterChange)
+        this.emitChangeEvent(valueAfterChange)
       }
     },
     handleEnter (e) {
       const value = this.adjustValue(this.$refs.input.value)
       this.$refs.input.value = value
-      this.$emit('change', value)
+      this.emitChangeEvent(value)
     },
     adjustValue (value) {
       value = String(value).trim() || ''
@@ -240,7 +245,7 @@ export default {
     handleBlur (e) {
       const value = this.adjustValue(e.target.value)
       e.target.value = value
-      this.$emit('change', value)
+      this.emitChangeEvent(value)
       this.$emit('blur', value)
     }
   }

@@ -1,31 +1,11 @@
 @import './mixins/mixins.scss';
 
-$--steps-header-font-size: (
-  'small': 14px,
-  'medium': 16px
-);
-
-$--steps-indicator-index-font-size: (
-  'small': 14px,
-  'medium': 16px
-);
-
-$--steps-indicator-size: (
-  'small': 22px,
-  'medium': 28px
-);
-
-$--steps-indicator-icon-size: (
-  'small': 16px,
-  'medium': 22px
-);
-
 @mixin steps-size-mixin ($size) {
   @include m($size + '-size') {
-    $title-font-size: map-get($--steps-header-font-size, $size);
-    $indicator-size: map-get($--steps-indicator-size, $size);
-    $indicator-icon-size: map-get($--steps-indicator-icon-size, $size);
-    $indicator-index-font-size: map-get($--steps-indicator-index-font-size, $size);
+    $title-font-size: map-get($--n-steps-header-font-size, $size);
+    $indicator-size: map-get($--n-steps-indicator-size, $size);
+    $indicator-icon-size: map-get($--n-steps-indicator-icon-size, $size);
+    $indicator-index-font-size: map-get($--n-steps-indicator-index-font-size, $size);
     $indicator-title-margin-top: ($indicator-size - $title-font-size) / 2;
     @include b(step-splitor) {
       margin-top: $indicator-size / 2 - $indicator-title-margin-top;
@@ -66,14 +46,14 @@ $--steps-indicator-icon-size: (
 @mixin steps-status-mixin ($status) {
   @include m($status) {
     @include b(step-splitor) {
-      background-color: map-get($--steps-step-splitor-color, $status);
+      background-color: map-get($--steps-step-splitor-background-color, $status);
     }
     @include b(step-content) {
       @include b(step-content-header) {
-        color: map-get($--steps-step-title-color, $status);
+        color: map-get($--steps-step-title-text-color, $status);
       }
       @include e(description) {
-        color: map-get($--steps-step-content-color, $status);
+        color: map-get($--steps-step-content-text-color, $status);
       }
     }
     @include b(step-indicator) {
@@ -81,11 +61,11 @@ $--steps-indicator-icon-size: (
       box-shadow: 0 0 0 1px map-get($--steps-step-border-color, $status);
       @include b(step-indicator-slot) {
         @include e(index) {
-          color: map-get($--steps-step-indicator-color, $status);
+          color: map-get($--steps-step-indicator-text-color, $status);
         }
         @include b(icon) {
-          fill: map-get($--steps-step-indicator-color, $status);
-          stroke: map-get($--steps-step-indicator-color, $status);
+          fill: map-get($--steps-step-indicator-text-color, $status);
+          stroke: map-get($--steps-step-indicator-text-color, $status);
         }
       }
     }

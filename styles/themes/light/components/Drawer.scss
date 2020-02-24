@@ -1,3 +1,4 @@
 @mixin setup-light-drawer {
-  //
+  $--drawer-background-color: $--n-modal-background-color !global;
+  $--drawer-text-color: $--n-secondary-text-color !global;
 }

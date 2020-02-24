@@ -1,5 +1,5 @@
 @mixin setup-light-date-picker {
-  $--date-picker-background-color: white !global;
+  $--date-picker-background-color: $--n-popover-background-color !global;
   $--date-picker-text-color: $--n-secondary-text-color !global;
   $--date-picker-icon-color: $--n-icon-color !global;
   $--date-picker-item-text-color: (
@@ -10,7 +10,7 @@
   ) !global;
   $--date-picker-item-sup-color: (
     'default': $--n-primary-color,
-    'active': white
+    'active': $--n-base-background-color
   ) !global;
   $--date-picker-month-text-color: $--n-primary-text-color !global;
   $--date-picker-item-background-color: (
@@ -18,6 +18,6 @@
     'active': $--n-primary-color
   ) !global;
   $--date-picker-divider-color: $--n-divider-color !global;
-  $--date-picker-box-shadow: $--n-popover-box-shadow !global;
+  $--date-picker-box-shadow: $--n-popmenu-box-shadow !global;
   $--date-picker-text-decoration-color: $--n-secondary-text-color !global;
 }

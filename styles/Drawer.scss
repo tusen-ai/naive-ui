@@ -2,36 +2,40 @@
 
 @include themes-mixin {
   @include b(drawer) {
-    @include slide-in-from-right-transition($duration: .3s);
-    @include slide-in-from-left-transition($duration: .3s);
-    @include slide-in-from-top-transition($duration: .3s);
-    @include slide-in-from-bottom-transition($duration: .3s);
-    @include m(right-placement) {
-      top: 0;
-      bottom: 0;
-      right: 0;
+    @include once {
+      @include slide-in-from-right-transition($duration: .3s);
+      @include slide-in-from-left-transition($duration: .3s);
+      @include slide-in-from-top-transition($duration: .3s);
+      @include slide-in-from-bottom-transition($duration: .3s);
+      @include m(right-placement) {
+        top: 0;
+        bottom: 0;
+        right: 0;
+      }
+      @include m(left-placement) {
+        top: 0;
+        bottom: 0;
+        left: 0;
+      }
+      @include m(top-placement) {
+        top: 0;
+        left: 0;
+        right: 0;
+      }
+      @include m(bottom-placement) {
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+      padding: 16px 24px;
+      position: absolute;
+      pointer-events: all;
+      transition:
+        background-color .3s $--n-ease-in-out-cubic-bezier,
+        color .3s $--n-ease-in-out-cubic-bezier;
     }
-    @include m(left-placement) {
-      top: 0;
-      bottom: 0;
-      left: 0;
-    }
-    @include m(top-placement) {
-      top: 0;
-      left: 0;
-      right: 0;
-    }
-    @include m(bottom-placement) {
-      left: 0;
-      bottom: 0;
-      right: 0;
-    }
-    padding: 16px 24px;
-    position: absolute;
-    pointer-events: all;
-    background-color: $--n-modal-background-color;
-    color: $--n-secondary-text-color;
-    transition: background-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
+    background-color: $--drawer-background-color;
+    color: $--drawer-text-color;
   }
 }
 

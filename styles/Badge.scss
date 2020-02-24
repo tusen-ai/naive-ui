@@ -45,12 +45,10 @@
     25% {
       background-color: map-get($map: $--badge-rippling-color, $key: $type);
       transform: scale(1);
-      // box-shadow: 0 0 0 0px map-get($map: $--badge-rippling-color, $key: $type);
     }
     100% {
       background-color: map-get($map: $--badge-rippling-color, $key: $type);
       transform: scale(1.25);
-      // box-shadow: 0 0 0 4px map-get($map: $--badge-rippling-color, $key: $type);
     }
   }
   @keyframes #{$theme}-#{$type}-dot-badge-ripple--spread {
@@ -61,12 +59,10 @@
     25% {
       background-color: map-get($map: $--badge-rippling-color, $key: $type);
       transform: scale(1);
-      // box-shadow: 0 0 0 0px map-get($map: $--badge-rippling-color, $key: $type);
     }
     100% {
       background-color: map-get($map: $--badge-rippling-color, $key: $type);
       transform: scale(1.75);
-      // box-shadow: 0 0 0 4px map-get($map: $--badge-rippling-color, $key: $type);
     }
   }
   @keyframes #{$theme}-#{$type}-badge-ripple--opacity {
@@ -96,7 +92,11 @@
       @include m(as-is) {
         display: inline-flex;
         @include b(badge-sup) {
-          @include fade-in-scale-up-transition(badge, left bottom, $original-transform: translateX(0));
+          @include fade-in-scale-up-transition(
+            badge,
+            left bottom,
+            $original-transform: translateX(0)
+          );
           transform: translateX(0);
           position: static;
         }
@@ -126,8 +126,14 @@
   }
   @include once {
     @include b(badge-sup) {
-      @include fade-in-scale-up-transition(badge, left bottom, $original-transform: (translateX(-50%)));
-      transition: background-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
+      @include fade-in-scale-up-transition(
+        badge,
+        left bottom,
+        $original-transform: (translateX(-50%))
+      );
+      transition:
+        background-color .3s $--n-ease-in-out-cubic-bezier,
+        color .3s $--n-ease-in-out-cubic-bezier;
       color: white;
       position: absolute;
       height: 18px;

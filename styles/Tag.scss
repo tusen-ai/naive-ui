@@ -28,32 +28,34 @@
 @mixin tag-type-mixin($type) {
   @include m($type + '-type') {
     @include not-m(checkable) {
+      box-shadow: inset 0 0 0 1px map-get($--tag-border-color, $type);
+      color: map-get($--tag-text-color, $type);
+      background-color: map-get($--tag-background-color, $type);
+      @include e(close) {
+        fill: map-get($--tag-close-color, $type);
+      }
       @include not-m(disabled) {
-        box-shadow: inset 0 0 0 1px map-get($map: $--tag-border-color, $key: $type);
-        color: map-get($map: $--tag-color, $key: $type);
-        background-color: map-get($map: $--tag-background-color, $key: $type);
         @include e(close) {
-          fill: map-get($map: $--tag-close-color, $key: $type);
           &:hover {
-            fill: map-get($map: $--tag-close-color, $key: $type + '-hover');
+            fill: map-get($--tag-close-color, $type + '-hover');
           }
           &:active {
-            fill: map-get($map: $--tag-close-color, $key: $type + '-active');
+            fill: map-get($--tag-close-color, $type + '-active');
           }
         }
         &:hover {
-          background-color: map-get($map: $--tag-background-color, $key: $type + '-hover');
+          background-color: map-get($--tag-background-color, $type + '-hover');
         }
         &:active {
-          background-color: map-get($map: $--tag-background-color, $key: $type + '-active');
+          background-color: map-get($--tag-background-color, $type + '-active');
         }
       }
       @include m(disabled) {
-        box-shadow: inset 0 0 0 1px map-get($map: $--tag-border-color, $key: $type + '-disabled');
-        color: map-get($map: $--tag-color, $key: $type + '-disabled');
-        background-color: map-get($map: $--tag-background-color, $key: $type + '-disabled');
+        box-shadow: inset 0 0 0 1px map-get($--tag-border-color, $type + '-disabled');
+        color: map-get($--tag-text-color, $type + '-disabled');
+        background-color: map-get($--tag-background-color, $type + '-disabled');
         @include e(close) {
-          fill: map-get($map: $--tag-close-color, $key: $type + '-disabled');
+          fill: map-get($--tag-close-color, $type + '-disabled');
         }
       }
     }
@@ -109,32 +111,34 @@
     @include tag-type-mixin('warning');
     @include tag-type-mixin('error');
     @include m(checkable) {
-      box-shadow: none;
-      color: map-get($--tag-color, 'checkable-default');
-      background-color: map-get($map: $--tag-background-color, $key: 'checkable-default');
+      @include once {
+        box-shadow: none;
+      }
+      color: map-get($--tag-text-color, 'checkable-default');
+      background-color: map-get($--tag-background-color, 'checkable-default');
       @include not-m(disabled) {
         &:hover {
           @include not-m(checked) {
-            color: map-get($--tag-color, 'checkable-hover');
+            color: map-get($--tag-text-color, 'checkable-hover');
           }
-          background-color: map-get($map: $--tag-background-color, $key: 'checkable-hover');
+          background-color: map-get($--tag-background-color, 'checkable-hover');
         }
         &:active {
           @include not-m(checked) {
-            color: map-get($--tag-color, 'checkable-active');
+            color: map-get($--tag-text-color, 'checkable-active');
           }
-          background-color: map-get($map: $--tag-background-color, $key: 'checkable-active');
+          background-color: map-get($--tag-background-color, 'checkable-active');
         }
       }
       @include m(checked) {
-        color: map-get($--tag-color, 'checkable-active');
-        background-color: map-get($map: $--tag-background-color, $key: 'checkable-active');
+        color: map-get($--tag-text-color, 'checkable-active');
+        background-color: map-get($--tag-background-color, 'checkable-active');
         @include not-m(disabled) {
           &:hover {
-            background-color: map-get($map: $--tag-background-color, $key: 'checkable-checked-hover');
+            background-color: map-get($--tag-background-color, 'checkable-checked-hover');
           }
           &:active {
-            background-color: map-get($map: $--tag-background-color, $key: 'checkable-checked-active');
+            background-color: map-get($--tag-background-color, 'checkable-checked-active');
           }
         }
       }

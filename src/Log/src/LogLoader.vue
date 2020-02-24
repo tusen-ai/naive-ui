@@ -1,6 +1,6 @@
 <template>
   <div class="n-log-loader">
-    <n-base-loading :stroke-width="24" /><span class="n-log-loader__content">Loading</span>
+    <n-base-loading :stroke-width="24" :theme="theme" /><span class="n-log-loader__content">Loading</span>
   </div>
 </template>
 
@@ -10,6 +10,12 @@ import NBaseLoading from '../../_base/Loading'
 export default {
   components: {
     NBaseLoading
+  },
+  props: {
+    theme: {
+      type: String,
+      default: null
+    }
   }
 }
 </script>

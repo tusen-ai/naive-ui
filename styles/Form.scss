@@ -63,17 +63,11 @@
     }
     @include m(required) {
       @include b(form-item-label) {
-        &::after {
+        &::after, &::before {
           @include once {
             content: ' *';
           }
-          color: $--n-error-color;
-        }
-        &::before {
-          @include once {
-            content: '* ';
-          }
-          color: $--n-error-color;
+          color: $--form-item-required-asterisk;
         }
       }
     }
@@ -108,9 +102,8 @@
           transition: color .3s $--n-ease-in-out-cubic-bezier;
         }
       }
-      color: $--n-primary-text-color;
+      color: $--form-item-label-text-color;
     }
-    
     @include b(form-item-feedback-wrapper) {
       @include once {
         padding-left: 2px;
@@ -125,7 +118,7 @@
           @include fade-down-transition($name: form-item-feedback, $from-offset: -3px);
         }
       }
-      color: $--n-error-color;
+      color: map-get($--form-item-feedback-text-color, 'default');
     } 
   }
 }
