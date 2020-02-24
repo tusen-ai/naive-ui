@@ -616,7 +616,7 @@ export default {
       } else {
         sourceLightBar.updateLightBarTop(e.target)
       }
-    }, 96),
+    }, 64),
     handleTargetOptionMouseEnter: debounce(function (e, index) {
       const targetLightBar = this.$refs.targetLightBar
       if (this.virtualScroll) {
@@ -624,23 +624,23 @@ export default {
       } else {
         targetLightBar.updateLightBarTop(e.target)
       }
-    }, 96),
+    }, 64),
     handleSourceOptionMouseLeave: debounce(function (e) {
       const sourceLightBar = this.$refs.sourceLightBar
       sourceLightBar && sourceLightBar.hideLightBar()
-    }, 96),
+    }, 64),
     handleTargetOptionMouseLeave: debounce(function (e) {
       const targetLightBar = this.$refs.targetLightBar
-      targetLightBar.hideLightBar()
-    }, 96),
+      targetLightBar && targetLightBar.hideLightBar()
+    }, 64),
     handleSourceListMouseLeave: debounce(function () {
       const sourceLightBar = this.$refs.sourceLightBar
       sourceLightBar && sourceLightBar.hideLightBar()
-    }, 96),
+    }, 64),
     handleTargetListMouseLeave: debounce(function () {
       const targetLightBar = this.$refs.targetLightBar
-      targetLightBar.hideLightBar()
-    }, 96)
+      targetLightBar && targetLightBar.hideLightBar()
+    }, 64)
   }
 }
 </script>

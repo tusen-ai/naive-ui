@@ -134,7 +134,7 @@ function rootedOptions (options) {
   return cloneDeep([{
     isRoot: true,
     isLeaf: false,
-    key: Symbol('n-tree-root'),
+    key: '__n-tree-root__',
     children: options || null
   }])
 }
@@ -164,7 +164,7 @@ function patchedOptions (options, patches) {
   }
   traverse(options)
   // console.log('patchedOptions output', options)
-  return cloneDeep(options)
+  return [].concat(options)
 }
 
 function dropIsValid ([sourceNode, targetNode, type]) {
@@ -287,7 +287,7 @@ function linkedCascaderOptions (options, type) {
       /**
        * options.path to support ui status
        */
-      option.path = cloneDeep(path)
+      option.path = Array.from(path)
       /**
        * options.isLeaf to support ui status and lazy load
        */

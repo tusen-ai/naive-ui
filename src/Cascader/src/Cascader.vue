@@ -129,7 +129,7 @@ export default {
       default: null
     },
     value: {
-      type: [String, Number],
+      type: [String, Number, Array],
       default: null
     },
     placeholder: {
@@ -383,6 +383,7 @@ export default {
       this.$emit('change', null)
     },
     handleActivatorBlur () {
+      this.$emit('blur')
       this.closeMenu()
     },
     handleActivatorClick () {

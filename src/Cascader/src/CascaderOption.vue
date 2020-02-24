@@ -10,7 +10,7 @@
       'n-cascader-option--loading': loading,
       'n-cascader-option--single-type': type === 'single'
     }"
-    :data-n-cascader-option-id="optionId"
+    :n-option-id="optionId"
     @click="handleClick"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
