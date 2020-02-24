@@ -43,7 +43,7 @@ duration
 
 ### NotificationEnvironment API
 #### NotificationEnvironment Properties
-Properties of Instance of NofiticationEnvironment can be dynamically set.
+Properties of NofiticationEnvironment Instance can be dynamically set.
 
 |Name|Type|Description|
 |-|-|-|

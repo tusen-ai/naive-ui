@@ -1,6 +1,6 @@
 # Scroll
 
-You can easily make log scroll to top or bottom. Also you can make the scroll action silent (don't trigger events of Log of this scroll action).
+You can easily make log scroll to top or bottom. Also you can make the scroll action silent (don't trigger events of Log in this scroll action).
 
 ```html
 <n-button-group>

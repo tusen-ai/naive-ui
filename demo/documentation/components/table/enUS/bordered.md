@@ -1,6 +1,6 @@
-# Basic
+# Bordered
 ```html
-<n-table :bordered="false" :single-line="false">
+<n-table :single-line="false">
   <n-thead>
     <n-tr>
       <n-th>Abandon</n-th>

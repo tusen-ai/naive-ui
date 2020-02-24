@@ -22,6 +22,7 @@
     @include b(log-loader) {
       @include once {
         @include fade-in-width-expand-transition($duration: .3s, $delay: 0s);
+        font-family: $--n-font-family;
         transition:
           color .3s $--n-ease-in-out-cubic-bezier,
           background-color .3s $--n-ease-in-out-cubic-bezier;

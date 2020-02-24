@@ -19,7 +19,7 @@ export default {
       type: String,
       default: 'div'
     },
-    transparent: {
+    abstract: {
       type: Boolean,
       default: false
     },
@@ -58,14 +58,14 @@ export default {
   },
   render (h) {
     const defaultSlot = this.$scopedSlots.default ? this.$scopedSlots.default() : []
-    if (this.transparent) {
+    if (this.abstract) {
       if (defaultSlot.length > 1) {
         console.error(
-          '[naive-ui/config-provider]: `n-config-provider` only takes single child node when `transparent` prop is `true`. If multiple child nodes are set, only the first one will be rendered.'
+          '[naive-ui/config-provider]: `n-config-provider` only takes single child node when `abstract` prop is `true`. If multiple child nodes are set, only the first one will be rendered.'
         )
       }
     }
-    return !this.transparent ? h(this.as, {
+    return !this.abstract ? h(this.as, {
       staticClass: 'n-config-provider',
       class: {
         [`n-${this.theme}-theme`]: this.theme

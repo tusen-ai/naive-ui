@@ -13,7 +13,7 @@ function render (h, option, selected) {
   return [
     h('n-config-consumer', {
       props: {
-        transparent: true
+        abstract: true
       },
       scopedSlots: {
         default ({ styleScheme }) {

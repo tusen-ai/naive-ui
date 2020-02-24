@@ -5,7 +5,19 @@
 ## 演示
 ```demo
 basic
+bordered
+single-column
+single-line
 ```
 
 ## Components
 你可以使用 `n-table`、`n-thead`、`n-tbody`、`n-tr`、`n-th` 和 `n-td`。
+
+## Props
+### Table Props
+|名称|类型|默认值|说明|
+|-|-|-|-|
+|bordered|`boolean`|`true`||
+|single-line|`boolean`|`true`||
+|single-column|`boolean`|`false`||
+

@@ -1,5 +1,5 @@
 # Controlled Sorter
-If property `sortOrder` of one of column objects is set to `'ascend'`, `'descend'` or `false`. The sorter of table will be in controlled mode. If multiple columns' `sortOrder` are set to `'ascend'` or `'descend'`, only first column of them will be applied.
+If one of the column objects' `sortOrder` is set to `'ascend'`, `'descend'` or `false`. The sorting behavior the table will be in a controlled manner. If multiple columns' `sortOrder` are set to `'ascend'` or `'descend'`, only first column of them will be applied.
 ```html
 <n-button @click="sortName('ascend')">Sort By Name (Ascend)</n-button>
 <n-button @click="sortName('descend')">Sort By Name (Descend)</n-button>

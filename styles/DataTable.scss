@@ -14,7 +14,7 @@
         border-top-left-radius: 6px;
         border-top-right-radius: 6px;
         overflow: hidden;
-        line-height: 1.75;
+        line-height: 1.5;
       }
       @include b(data-table-table-wrapper) {
         @include once {
