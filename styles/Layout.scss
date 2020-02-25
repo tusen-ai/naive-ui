@@ -7,6 +7,7 @@
     @include once {
       box-sizing: border-box;
       position: relative;
+      z-index: auto;
       display: flex;
       flex-wrap: nowrap;
       transition: margin-left .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
@@ -52,6 +53,7 @@
   @include b(layout-content) {
     @include once {
       box-sizing: border-box;
+      z-index: auto;
       position: relative;
     }
     transition: margin-left .3s $--n-ease-in-out-cubic-bezier;
@@ -74,6 +76,7 @@
   @include b(layout-sider) {
     @include once {
       box-sizing: border-box;
+      z-index: auto;
       position: relative;
       transition: min-width .3s  $--n-ease-in-out-cubic-bezier, max-width .3s $--n-ease-in-out-cubic-bezier, transform .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
     }  

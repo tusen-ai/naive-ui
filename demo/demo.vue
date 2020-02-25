@@ -1,6 +1,11 @@
 <template>
   <n-config-provider class="demo" namespace="naive-ui-doc" :theme="theme" :language="lang">
-    <n-nimbus-service-layout ref="layout" :padding-body="false" :items="items">
+    <n-nimbus-service-layout
+      ref="layout"
+      :padding-body="false"
+      :items="items"
+      :header-z-index="3000"
+    >
       <template v-slot:nav>
         <doc-header
           :lang="lang"

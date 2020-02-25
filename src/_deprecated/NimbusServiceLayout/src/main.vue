@@ -27,17 +27,21 @@ export default {
       type: String,
       default: null
     },
-    openNames: {
+    expandedNames: {
       type: Array,
       default: () => {
         return undefined
       }
     },
-    defaultOpenNames: {
+    defaultExpandedNames: {
       type: Array,
       default: () => {
         return undefined
       }
+    },
+    headerZIndex: {
+      type: Number,
+      default: undefined
     }
   },
   data () {
@@ -147,7 +151,8 @@ export default {
     }, [
       this.$slots.nav ? h('NLayoutHeader', {
         staticStyle: {
-          height: '64px'
+          height: '64px',
+          zIndex: this.headerZIndex
         },
         props: {
           bordered: true
@@ -222,8 +227,8 @@ export default {
             {
               props: {
                 value: this.value || this.activeItem,
-                openNames: this.openNames,
-                defaultOpenNames: this.defaultOpenNames || this.subMenuNames,
+                expandedNames: this.expandedNames,
+                defaultExpandedNames: this.defaultExpandedNames || this.subMenuNames,
                 rootIndent: 36,
                 indent: 40
               },

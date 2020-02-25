@@ -22,6 +22,7 @@
     <div style="width: 216px; margin-left: 56px;">
       <n-auto-complete
         v-model="searchInputValue"
+        :z-index="3001"
         :placeholder="$t('searchPlaceholder')"
         :options="searchOptions"
         clear-after-select
@@ -32,12 +33,14 @@
     <div class="theme-picker">
       <n-select
         v-model="NConfigProvider.$parent.theme"
+        :z-index="3001"
         size="small"
         :options="options"
       />
     </div>
     <div class="lang-picker">
       <n-select
+        :z-index="3001"
         :value="lang"
         size="small"
         :options="langOptions"

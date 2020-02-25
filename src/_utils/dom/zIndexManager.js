@@ -11,7 +11,7 @@ class ZIndexManager {
   get elementCount () {
     return this.elementZIndex.size
   }
-  registerElement (el) {
+  registerElement (el, zIndex) {
     console.debug('[ZIndexManager.registerElement]: called', el)
     if (this.elementZIndex.has(el)) {
       console.debug('[ZIndexManager.registerElement]: do not register duplicate element')
@@ -19,19 +19,28 @@ class ZIndexManager {
       // console.debug('[ZIndexManager.registerElement]: successfully register', el)
       console.debug('[ZIndexManager.registerElement]: successfully register $el')
       el.style.zIndex = this.nextZIndex
+      if (zIndex !== undefined) {
+        el.style.zIndex = zIndex
+        this.elementZIndex.set(el, null)
+        return
+      }
       this.elementZIndex.set(el, this.nextZIndex)
       this.nextZIndex++
     }
     this.afterManipulation()
   }
-  setNewZIndex (el) {
+  setNewZIndex (el, zIndex) {
     console.debug('[ZIndexManager.setNewZIndex]: called')
     if (this.elementZIndex.has(el)) {
       // console.debug('[ZIndexManager.setNewZIndex]: successfully set z-index on', el, `(z-index: ${this.nextZIndex})`)
       console.debug('[ZIndexManager.setNewZIndex]: successfully set z-index on $el' + `(z-index: ${this.nextZIndex})`)
-
+      if (zIndex !== undefined) {
+        el.style.zIndex = zIndex
+        this.elementZIndex.set(el, null)
+        return
+      }
       const currentZIndex = this.elementZIndex.get(el)
-      if (currentZIndex + 1 === this.nextZIndex) return
+      if (currentZIndex !== null && currentZIndex + 1 === this.nextZIndex) return
       el.style.zIndex = this.nextZIndex
       this.elementZIndex.set(el, this.nextZIndex)
       this.nextZIndex++

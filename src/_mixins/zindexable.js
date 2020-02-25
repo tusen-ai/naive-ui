@@ -11,6 +11,12 @@ import zIndexManager from '../_utils/dom/zIndexManager'
  * $vm.detached
  */
 export default {
+  props: {
+    zIndex: {
+      type: Number,
+      default: undefined
+    }
+  },
   mounted () {
     if (!this.detached) return
     if (this.active) this._initZindexable()
@@ -21,7 +27,7 @@ export default {
       console.debug('[zindexable.watch.active]:', value)
       if (value) {
         this._initZindexable()
-        zIndexManager.setNewZIndex(this._getZindexableContent())
+        zIndexManager.setNewZIndex(this._getZindexableContent(), this.zIndex)
       }
     }
   },
@@ -39,7 +45,7 @@ export default {
   methods: {
     _initZindexable () {
       if (!this.zindexableInitialized) {
-        zIndexManager.registerElement(this._getZindexableContent())
+        zIndexManager.registerElement(this._getZindexableContent(), this.zIndex)
         this.zindexableInitialized = true
       }
     },
