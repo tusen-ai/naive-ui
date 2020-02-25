@@ -44,4 +44,5 @@ filter
 ## Events
 |名称|参数|说明|
 |-|-|-|
-|change|`(value: string \| number \| Array<string \| number>)`
+|change|`(value: string \| number \| Array<string \| number>)`||
+|blur|`()`||

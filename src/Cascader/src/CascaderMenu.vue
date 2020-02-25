@@ -44,7 +44,7 @@ import zindexable from '../../_mixins/zindexable'
 import {
   firstOptionId,
   menuModel
-} from '../../_utils/data/menuModel'
+} from '../../_utils/component/cascader'
 
 export default {
   name: 'NCascaderMenu',
@@ -214,7 +214,7 @@ export default {
         if (submenuInstance) {
           const scrollbar = submenuInstance.$refs.scrollbar
           if (scrollbar) {
-            const optionElement = this.$el.querySelector(`[data-n-cascader-option-id="${id}"]`)
+            const optionElement = this.$el.querySelector(`[n-option-id="${id}"]`)
             scrollbar.scrollToElement(optionElement)
           }
         }

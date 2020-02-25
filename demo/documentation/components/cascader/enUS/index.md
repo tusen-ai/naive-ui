@@ -43,4 +43,5 @@ filter
 ## Events
 |Name|Parameters|Description|
 |-|-|-|
-|change|`(value: string \| number \| Array<string \| number>)`
+|change|`(value: string \| number \| Array<string \| number>)`||
+|blur|`()`||

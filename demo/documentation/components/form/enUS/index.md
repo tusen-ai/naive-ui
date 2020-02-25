@@ -7,7 +7,7 @@ inline
 custom-rule
 top
 left
-validator
+async
 ```
 ## Props
 ### Form Props
@@ -26,6 +26,7 @@ validator
 |-|-|-|
 |required|`boolean`||
 |validator|`(rule: FormItemRule, value: any) => boolean \| Error`||
+|asyncValidator|`(rule: FormItemRule, value: any, callback: boolean => void) => void`||
 |trigger|`string \| Array<string>`||
 |message|`string`||
 

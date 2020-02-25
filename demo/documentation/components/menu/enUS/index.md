@@ -4,7 +4,7 @@ No Food.
 ## Demos
 ```demo
 horizontal
-defaultOpenNames
+defaultExpandedNames
 indent
 collapse
 ```
@@ -27,7 +27,7 @@ collapse
 |root-indent|`number`|`null`|The indent of menu's first level children. If not set, menu will use `indent` in place of it.|
 |indent|`number`|`32`|The indend of menu|
 |default-open-names|`Array<string>`|`[]`|The default expanded submenu names of menu in uncontrolled manner.|
-|openNames|`Array<string>`|`undefined`|The expanded submenu names. If set, menu will work in controlled manner and `default-open-names` won't work.|
+|expandedNames|`Array<string>`|`undefined`|The expanded submenu names. If set, menu will work in controlled manner and `default-open-names` won't work.|
 |value|`string`|`null`|The selected name of menu.|
 |mode|`'vertical' \| 'horizontal'`|`'vertical'`||
 
@@ -84,5 +84,5 @@ collapse
 |Name|Parameters|Description|
 |-|-|-|
 |select|`(selectedName: string)`||
-|open-names-change|`(openNames: Array<string>)`||
+|open-names-change|`(expandedNames: Array<string>)`||
 

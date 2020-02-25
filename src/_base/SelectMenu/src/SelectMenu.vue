@@ -78,7 +78,7 @@
     </n-scrollbar>
     <div
       v-if="empty"
-      style="padding: 14px 0;"
+      style="padding: 14px 0; width: 100%;"
     >
       <slot name="empty">
         <n-empty />

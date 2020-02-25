@@ -60,7 +60,7 @@ export default {
     this.initialValue = cloneDeep(this.model)
   },
   methods: {
-    validate (afterValidate, shouldFieldBeValidated = () => true) {
+    validate (afterValidation, shouldFieldBeValidated = () => true) {
       return new Promise((resolve, reject) => {
         const formItemValidationPromises = []
         for (const key of Object.keys(this.items)) {
@@ -76,13 +76,13 @@ export default {
           .then(results => {
             if (results.some(result => !result.valid)) {
               const errors = results.filter(result => result.errors).map(result => result.errors)
-              if (afterValidate) {
-                afterValidate(errors)
+              if (afterValidation) {
+                afterValidation(errors)
               } else {
                 reject(errors)
               }
             } else {
-              if (afterValidate) afterValidate()
+              if (afterValidation) afterValidation()
               else {
                 resolve()
               }

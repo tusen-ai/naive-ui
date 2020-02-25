@@ -17,7 +17,7 @@ A Example of inline form.
   <n-form-item label="Phone" path="phone">
     <n-input placeholder="Phone Number" v-model="formValue.phone"/>
   </n-form-item>
-  <n-form-item v-model="formValue.phone">
+  <n-form-item>
     <n-button @click="handleValidateClick">Validate</n-button>
   </n-form-item>
 </n-form>

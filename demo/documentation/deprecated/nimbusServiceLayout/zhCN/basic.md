@@ -6,7 +6,7 @@
     :items="items"
     :disable-menu="disableMenu"
     v-model="selected"
-    @openNamesChange="changeOpen"
+    @expandedNamesChange="changeOpen"
     @select="changeSelect"
   >
     <template v-slot:drawer-header-icon>

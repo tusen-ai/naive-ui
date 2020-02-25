@@ -1,9 +1,15 @@
 import NTreeNodeSwitcher from './TreeNodeSwitcher.vue'
 import NTreeNodeCheckbox from './TreeNodeCheckbox.vue'
 import NTreeNodeContent from './TreeNodeContent.vue'
+import { isLeaf, isLoaded } from './utils'
 
 export default {
   name: 'NTreeNode',
+  inject: {
+    NTree: {
+      default: null
+    }
+  },
   props: {
     data: {
       type: Object,
@@ -38,27 +44,58 @@ export default {
       default: null
     }
   },
+  computed: {
+    loading () {
+      return this.NTree.loadingKeys.includes(this.data.key)
+    }
+  },
   methods: {
     handleSwitcherClick () {
-      this.$emit('switcher-click', this.data)
+      const node = this.data
+      const NTree = this.NTree
+      if (NTree.remote && !isLeaf(node) && !isLoaded(node)) {
+        if (!NTree.loadingKeys.includes(node.key)) {
+          NTree.loadingKeys.push(node.key)
+        }
+        NTree.onLoad &&
+          NTree.onLoad(node)
+            .then(() => {
+              NTree.loadingKeys.splice(
+                NTree.loadingKeys.find(key => key === node.key),
+                1
+              )
+              this.$emit('switcher-click', node)
+            })
+      } else {
+        this.$emit('switcher-click', node)
+      }
     },
     handleContentClick () {
       this.$emit('select', this.data)
     },
-    handleDragOver () {
-      this.$emit('dragover', this.data)
+    handleDragOver (e) {
+      this.$emit('dragover', { event: e, node: this.data })
     },
-    handleDragEnter () {
-      this.$emit('dragenter', this.data)
+    handleDragEnter (e) {
+      this.$emit('dragenter', { event: e, node: this.data })
     },
-    handleDragStart () {
-      this.$emit('dragstart', this.data)
+    handleDragStart (e) {
+      this.$emit('dragstart', { event: e, node: this.data })
     },
-    handleDragLeave () {
-      this.$emit('dragleave', this.data)
+    handleDragLeave (e) {
+      this.$emit('dragleave', { event: e, node: this.data })
+    },
+    handleDragEnd (e) {
+      this.$emit('dragend', { event: e, node: this.data })
+      this.resetDragStatus()
     },
     handleDrop (e, dropPosition) {
-      this.$emit('drop', this.data, dropPosition)
+      this.$emit('drop', {
+        event: e,
+        node: this.data,
+        dropPosition
+      })
+      this.NTree.resetDragStatus()
     },
     handleCheck (checked) {
       this.$emit('check', this.data, checked)
@@ -71,7 +108,8 @@ export default {
       h(NTreeNodeSwitcher, {
         props: {
           expanded: this.expanded,
-          hide: this.data.isLeaf
+          loading: this.loading,
+          hide: isLeaf(this.data)
         },
         on: {
           click: this.handleSwitcherClick

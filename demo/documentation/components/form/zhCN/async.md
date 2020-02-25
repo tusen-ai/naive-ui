@@ -1,5 +1,4 @@
-# validate Form
-支持异步. 需要确保你的代码写在 `return new Promise()`里.
+# 异步验证
 ```html
 <n-form
   inline
@@ -8,19 +7,31 @@
   :rules="rules"
   ref="form"
 >
-  <n-form-item label="Name" path="user.name">
+  <n-form-item
+    label="Name"
+    path="user.name"
+  >
     <n-input v-model="formValue.user.name" placeholder="Input Name" />
   </n-form-item>
-  <n-form-item label="Age" path="user.age">
+  <n-form-item
+    label="Age"
+    path="user.age"
+  >
     <n-input placeholder="Input Age" v-model="formValue.user.age"/>
   </n-form-item>
-  <n-form-item label="Adress" path="user.address">
+  <n-form-item
+    label="Adress"
+    path="user.address"
+  >
     <n-input placeholder="Input Address" v-model="formValue.user.address"/>
   </n-form-item>
-  <n-form-item label="Phone" path="phone">
+  <n-form-item
+    label="Phone"
+    path="phone"
+  >
     <n-input placeholder="Phone Number" v-model="formValue.phone"/>
   </n-form-item>
-  <n-form-item v-model="formValue.phone">
+  <n-form-item>
     <n-button @click="handleValidateClick">Validate</n-button>
   </n-form-item>
 </n-form>

@@ -1,49 +1,49 @@
-# Opened Submenu
-You can set `default-open-names` to make menu work in an uncontrolled manner or use `open-names` and `@open-names-change` to make it work in a controlled manner.
+# 展开子菜单
+你可以设定 `default-open-names` 让菜单工作在非受控状态下或者使用 `open-names` 和 `@open-names-change` 以受控的方式控制菜单。
 ```html
 <n-menu
   v-model="activeName"
-  :default-open-names="defaultOpenNames"
-  @open-names-change="handleOpenNamesChange"
+  :default-open-names="defaultExpandedNames"
+  @open-names-change="handleExpandedNamesChange"
   @select="handleSelect"
 >
-  <n-menu-item title="Hear the Wind Sing" name="hear-the-wind-sing">
+  <n-menu-item title="且听风吟" name="hear-the-wind-sing">
     <template v-slot:icon>
       <n-icon>
         <book-icon />
       </n-icon>
     </template>
   </n-menu-item>
-  <n-submenu title="Pinball, 1973" name="pinball-1973" disabled>
+  <n-submenu title="1973年的弹珠玩具" name="pinball-1973" disabled>
     <template v-slot:icon>
       <n-icon>
         <book-icon />
       </n-icon>
     </template>
-    <n-menu-item title="Rat" name="rat" />
+    <n-menu-item title="鼠" name="rat" />
   </n-submenu>
-  <n-menu-item title="A Wild Sheep Chase" name="a-wild-sheep-chase" disabled>
+  <n-menu-item title="寻羊冒险记" name="a-wild-sheep-chase" disabled>
     <template v-slot:icon>
       <n-icon>
         <book-icon />
       </n-icon>
     </template>
   </n-menu-item>
-  <n-submenu title="Dance Dance Dance" name="dance-dance-dance">
+  <n-submenu title="舞，舞，舞" name="dance-dance-dance">
     <template v-slot:icon>
       <n-icon>
         <book-icon />
       </n-icon>
     </template>
-    <n-menu-item-group title="Characters">
-      <n-menu-item title="Narrator" name="narrator">
+    <n-menu-item-group title="人物">
+      <n-menu-item title="叙事者" name="narrator">
         <template v-slot:icon>
           <n-icon>
             <person-icon />
           </n-icon>
         </template>
       </n-menu-item>
-      <n-menu-item title="Sheep Man" name="sheep-man">
+      <n-menu-item title="羊男" name="sheep-man">
         <template v-slot:icon>
           <n-icon>
             <person-icon />
@@ -51,18 +51,18 @@ You can set `default-open-names` to make menu work in an uncontrolled manner or 
         </template>
       </n-menu-item>
     </n-menu-item-group>
-    <n-submenu title="Beverage" name="beverage">
+    <n-submenu title="饮品" name="beverage">
       <template v-slot:icon>
         <n-icon>
           <wine-icon />
         </n-icon>
       </template>
-      <n-menu-item title="Whisky" name="whisky" />
+      <n-menu-item title="威士忌" name="whisky" />
     </n-submenu>
-    <n-submenu title="Food" name="food">
-      <n-menu-item title="Sandwich" name="sandwich" />
+    <n-submenu title="食物" name="food">
+      <n-menu-item title="三明治" name="sandwich" />
     </n-submenu>
-    <n-menu-item title="The past increases. The future recedes." name="the-past-increases-the-future-recedes" />
+    <n-menu-item title="过去增多，未来减少" name="the-past-increases-the-future-recedes" />
   </n-submenu>
 </n-menu>
 ```
@@ -79,7 +79,7 @@ export default {
   },
   data () {
     return {
-      defaultOpenNames: ['dance-dance-dance', 'food'],
+      defaultExpandedNames: ['dance-dance-dance', 'food'],
       activeName: null
     }
   },
@@ -87,8 +87,8 @@ export default {
     handleSelect (value) {
       this.$NMessage.info('Select: ' + JSON.stringify(value))
     },
-    handleOpenNamesChange (value) {
-      this.$NMessage.info('OpenNamesChange: ' + JSON.stringify(value))
+    handleExpandedNamesChange (value) {
+      this.$NMessage.info('ExpandedNamesChange: ' + JSON.stringify(value))
     }
   }
 }
