@@ -1,14 +1,20 @@
-# 基础用法
-好在这颗树不是活的，也不平衡。
+# 多选节点
+设置 `multiple` 来允许多选节点。
 ```html
 <n-tree
+  multiple
   block-node
   :data="data"
-  :default-expanded-keys="defaultExpandedKeys"
+/>
+<n-divider />
+<n-tree
+  multiple
+  block-node
+  :data="data"
+  v-model="value"
 />
 ```
 ```js
-
 function createData (level = 4, baseKey = '') {
   if (!level) return undefined
   return Array
@@ -34,7 +40,7 @@ export default {
   data () {
     return {
       data: createData(),
-      defaultExpandedKeys: ['40', '41']
+      value: []
     }
   }
 }
