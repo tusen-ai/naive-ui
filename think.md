@@ -117,18 +117,18 @@ Previously, it would not work with single quotes:
 4. <del>Anchor 切换有 bug，忽然闪现第一个</del>
 5. Safari select lightbar container overflow 边角（或许是 webkit 的问题）
 6. Chrome lightbar offset @table fitler
-7. cascader 数据结构重构，维持原选项！
+7. <del>cascader 数据结构重构，维持原选项！</del> 这个不做了，对 Children 的处理过于边角，Patch 那块也会从声明式变成命令式
 8. 排查 render 函数是否每个地方都支持数组
-9. form async validation
+9. <del>form async validation</del>
 10. table filter 重构支持异步
 11. <del>tabs resize bug</del>
-12. CSS 整理
+12. <del>CSS 整理</del> 暂且算做完了
 13. 落地页
 14. <del>按需引入 babel plugin</del> 这个不做了，收益不大，工作量不小
 15. form table 需要 size
 16. input number 需要一个小型的
 17. layout scroll api
-18. cascader select menu disabled 选项
+18. <del>cascader select menu disabled 选项</del>
 19. <del>icon 的默认 stroke</del>
 20. tree 组件
 21. <del>文件上传组件</del>
@@ -139,7 +139,7 @@ Previously, it would not work with single quotes:
 26. <del>base cancel mark rename suffix</del>s
 27. <del>base picker => base selection</del>
 28. <del>base lightbar => base tracking rect</del>
-29. loader 区分 debug 和 非 debug
+29. <del>loader 区分 debug 和 非 debug</del>
 30. 逐步放宽对宽度必需传 number 的现实，尤其是对于 table
 31. <del>BaseLoading 代替 Log 里的 Spin</del>
 32. Modal 内部组件的卸载方式
@@ -147,10 +147,10 @@ Previously, it would not work with single quotes:
 34. <del>bug md-loader alert 内的 code 不显示</del> 不是 bug，md 就这么渲染
 35. <del>backtop mounted blink</del>
 36. <del>Tab keep alive</del>
-37. Cascader submenu 的 lightbar 用 base tracking rect 代替
+37. <del>Cascader submenu 的 lightbar 用 base tracking rect 代替</del>
 38. Dropdown 样式微调
 39. Card 用 padding 代替 margin 来避免 margin 折叠的问题
-40. 检查 Icon 在 button 中切换有没有问题，直觉来说应该没问题
+40. <del>检查 Icon 在 button 中切换有没有问题，直觉来说应该没问题</del>
 41. Radio Group 和 Steps 的镂空效果在 mounted 的时候 transition 没有关闭
 42. <del>Typography 文档待更新</del>
 43. Tab 文档待更新
@@ -158,6 +158,10 @@ Previously, it would not work with single quotes:
 45. 把 Upload 的回调 API 从 promise 改成 callback 格式的，文档也要对应修改
 46. Date Picker 的 format 文档内容
 47. Button Group 样式
+48. text button icon
+49. tab scroll 计算有潜在 bug
+50. data-table 的 header height 为啥要固定？我忘了
+51. scrollbar 在平时不显示用不到的 rail
 
 
 ```
