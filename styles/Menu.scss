@@ -57,6 +57,11 @@
       @include b(menu-list) {
         @include b(menu-item-content) {
           @include once {
+            @include m(selected) {
+              @include once {
+                background-color: transparent !important;
+              }
+            }
             @include b(menu-item-content-header) {
               opacity: 0;
             }

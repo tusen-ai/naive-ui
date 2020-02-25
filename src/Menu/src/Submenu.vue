@@ -160,13 +160,13 @@ export default {
       if (this.PenetratedNSubmenu) return this.PenetratedNSubmenu.syntheticDisabled
       return this.NMenu && this.NMenu.disabled
     },
-    collapsedAccrodingToOpenNames () {
-      return !this.NMenu.syntheticOpenNames.includes(this.name)
+    collapsedAccrodingToExpandedNames () {
+      return !this.NMenu.syntheticExpandedNames.includes(this.name)
     },
     syntheticCollapsed () {
       if (!this.NMenu.submenuCollapsable) return false
       else if (this.rootMenuCollapsed) return true
-      return this.collapsedAccrodingToOpenNames
+      return this.collapsedAccrodingToExpandedNames
     }
   },
   watch: {
