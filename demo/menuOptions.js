@@ -359,7 +359,7 @@ export default function (locale, instance) {
             path: `/${instance.lang}/${instance.theme}` + '/n-timeline'
           },
           {
-            name: 'Tree (in progress)',
+            name: 'Tree',
             title: '树',
             titleExtra: 'Tree',
             path: `/${instance.lang}/${instance.theme}` + '/n-tree'
@@ -791,7 +791,7 @@ export default function (locale, instance) {
             path: `/${instance.lang}/${instance.theme}` + '/n-timeline'
           },
           {
-            name: 'Tree (in progress)',
+            name: 'Tree',
             path: `/${instance.lang}/${instance.theme}` + '/n-tree'
           }
         ]
