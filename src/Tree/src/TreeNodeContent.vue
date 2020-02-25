@@ -88,12 +88,12 @@ export default {
     handleContentDrop (e) {
       e.preventDefault()
       this.pending = false
-      const actionType = ({
-        top: 'insertBefore',
-        bottom: 'insertAfter',
-        body: 'append'
+      const dropPosition = ({
+        top: 'top',
+        bottom: 'bottom',
+        body: 'center'
       })[this.pendingPosition]
-      this.$emit('drop', e, actionType)
+      this.$emit('drop', e, dropPosition)
     }
   }
 }

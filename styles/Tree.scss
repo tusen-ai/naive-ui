@@ -32,9 +32,25 @@
       justify-content: center;
       transition: transform .15s $--n-ease-in-out-cubic-bezier;
       vertical-align: bottom;
-      @include b(icon) {
-        fill: $--n-secondary-text-color;
-        stroke: $--n-secondary-text-color;
+      @include e(icon) {
+        position: relative;
+        height: 14px;
+        width: 14px;
+        display: flex;
+        @include b(icon) {
+          height: 14px;
+          width: 14px;
+          font-size: 14px;
+          fill: $--tree-node-switcher-color;
+          stroke: $--tree-node-switcher-color;
+          @include icon-switch-transition;
+        }
+        @include b(base-loading) {
+          font-size: 14px;
+          height: 14px;
+          width: 14px;
+          @include icon-switch-transition;
+        }
       }
       @include m(hide) {
         visibility: hidden

@@ -2,7 +2,7 @@
   <span class="n-tree-node-checkbox">
     <n-checkbox
       :checked="value"
-      @input="handleInput"
+      @change="handleChange"
     />
   </span>
 </template>
@@ -22,7 +22,7 @@ export default {
     }
   },
   methods: {
-    handleInput (value) {
+    handleChange (value) {
       this.$emit('check', value)
     }
   }
