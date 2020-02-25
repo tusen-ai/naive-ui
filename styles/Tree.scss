@@ -46,10 +46,12 @@
           @include icon-switch-transition;
         }
         @include b(base-loading) {
-          font-size: 14px;
-          height: 14px;
-          width: 14px;
-          @include icon-switch-transition;
+          position: absolute;
+          left: 1px;
+          top: 1px;
+          height: 12px;
+          width: 12px;
+          @include icon-switch-transition($left: 1px, $top: 1px);
         }
       }
       @include m(hide) {
@@ -81,7 +83,12 @@
       padding: 0 6px;
       cursor: pointer;
       border-radius: 3px;
-      transition: .2s background-color $--n-ease-in-out-cubic-bezier, .2s border-color $--n-ease-in-out-cubic-bezier;
+      text-decoration-color: transparent;
+      text-decoration-line: underline;
+      transition:
+        text-decoration-color .3s $--n-ease-in-out-cubic-bezier,
+        background-color .3s $--n-ease-in-out-cubic-bezier,
+        border-color .3s $--n-ease-in-out-cubic-bezier;
       &:hover {
         background-color: map-get($--tree-node-background-color, 'hover');
       }
@@ -99,10 +106,20 @@
         right: 0;
         background-color: transparent;
       }
+      @include e(text) {
+        line-height: 1.25em;
+        border-bottom: 1px solid transparent;
+        transition: border-color .3s $--n-ease-in-out-cubic-bezier;
+      }
       @include m(block) {
         width: calc(100% - 24px);
         @include m(checkable) {
           width: calc(100% - 48px);
+        }
+      }
+      @include m(hightlight) {
+        @include e(text) {
+          border-bottom-color: $--n-secondary-text-color;
         }
       }
       @include m(pending) {

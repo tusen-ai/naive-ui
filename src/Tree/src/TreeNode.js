@@ -47,6 +47,9 @@ export default {
   computed: {
     loading () {
       return this.NTree.loadingKeys.includes(this.data.key)
+    },
+    highlight () {
+      return this.NTree.highlightKeys.includes(this.data.key)
     }
   },
   methods: {
@@ -87,7 +90,6 @@ export default {
     },
     handleDragEnd (e) {
       this.$emit('dragend', { event: e, node: this.data })
-      this.resetDragStatus()
     },
     handleDrop (e, dropPosition) {
       this.$emit('drop', {
@@ -95,7 +97,6 @@ export default {
         node: this.data,
         dropPosition
       })
-      this.NTree.resetDragStatus()
     },
     handleCheck (checked) {
       this.$emit('check', this.data, checked)
@@ -127,7 +128,8 @@ export default {
         props: {
           selected: this.selected,
           blockNode: this.blockNode,
-          checkable: this.checkable
+          checkable: this.checkable,
+          highlight: this.highlight
         },
         domProps: {
           draggable: this.draggable
