@@ -44,7 +44,7 @@ import zindexable from '../../_mixins/zindexable'
 import {
   firstOptionId,
   menuModel
-} from '../../_utils/data/menuModel'
+} from '../../_utils/component/cascader'
 
 export default {
   name: 'NCascaderMenu',

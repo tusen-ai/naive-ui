@@ -100,7 +100,7 @@ import {
   patchedOptions,
   linkedCascaderOptions,
   menuOptions
-} from '../../_utils/data/menuModel'
+} from '../../_utils/component/cascader'
 
 export default {
   name: 'NCascader',
