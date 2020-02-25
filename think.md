@@ -115,7 +115,7 @@ Previously, it would not work with single quotes:
 2. <del>Menu Root Indent = 0 可能造成问题</del>
 3. 用 RAF 优化 scrollbar 性能（不一定需要）
 4. <del>Anchor 切换有 bug，忽然闪现第一个</del>
-5. Safari select lightbar container overflow 边角（或许是 webkit 的问题）
+5. <del>Safari select lightbar container overflow 边角（或许是 webkit 的问题）</del>默认选中第一个可以装作这个问题不存在
 6. Chrome lightbar offset @table fitler
 7. <del>cascader 数据结构重构，维持原选项！</del> 这个不做了，对 Children 的处理过于边角，Patch 那块也会从声明式变成命令式
 8. 排查 render 函数是否每个地方都支持数组
@@ -162,6 +162,7 @@ Previously, it would not work with single quotes:
 49. tab scroll 计算有潜在 bug
 50. data-table 的 header height 为啥要固定？我忘了
 51. scrollbar 在平时不显示用不到的 rail
+52. placeholder transition 对 firefox 做兼容
 
 
 ```

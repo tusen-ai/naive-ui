@@ -1,42 +1,38 @@
-# 异步加载
-设定 `remote` 后，使用 `on-load` 回调来加载数据。异步加载时，所有 `isLeaf` 为 `false` 并且 `children` 不为数组的节点会被视为未加载的节点。
+# Drag & Drag
+Set `draggable` and write bunch of codes to make drag & drop work.
 ```html
 <n-tree
   block-node
   checkable
-  remote
   draggable
   :data="data"
   :checked-keys="checkedKeys"
-  :on-load="handleLoad"
+  :expanded-keys="expandedKeys"
   @drop="handleDrop"
   @checked-keys-change="handleCheckedKeysChange"
-  :expanded-keys="expandedKeys"
   @expanded-keys-change="handleExpandedKeysChange"
 />
 ```
 ```js
-function createData () {
-  return [
-    {
-      label: nextLabel(),
-      key: 1,
-      isLeaf: false
-    },
-    {
-      label: nextLabel(),
-      key: 2,
-      isLeaf: false
-    }
-  ]
+function createData (level = 4, baseKey = '') {
+  if (!level) return undefined
+  return Array
+    .apply(null, { length: 6 - level })
+    .map((_, index) => {
+      const key = '' + baseKey + level + index
+      return {
+        label: createLabel(level),
+        key,
+        children: createData(level - 1, key)
+      }
+    })
 }
 
-function nextLabel (currentLabel) {
-  if (!currentLabel) return '道生一'
-  if (currentLabel === '道生一') return '一生二'
-  if (currentLabel === '一生二') return '二生三'
-  if (currentLabel === '二生三') return '三生万物'
-  if (currentLabel === '三生万物') return '道生一'
+function createLabel (level) {
+  if (level === 4) return 'Out of Tao, One is born'
+  if (level === 3) return 'Out of One, Two'
+  if (level === 2) return 'Out of Two, Three'
+  if (level === 1) return 'Out of Three, the created universe'
 }
 
 function dropIsValid ({
@@ -45,8 +41,6 @@ function dropIsValid ({
 }) {
   /** drop on itselft */
   if (dragNode.key === node.key) return false
-  /** node is not loaded */
-  if (node.isLeaf === false && !node.children) return false
   /** shouldn't drop parent to its child */
   const childKeys = []
   const dropNodeInside = children => {
@@ -55,7 +49,6 @@ function dropIsValid ({
       return result || child.key === node.key || dropNodeInside(child.children)
     }, false)
   }
-  console.log('dropIsValid', !dropNodeInside(dragNode.children))
   return !dropNodeInside(dragNode.children)
 }
 
@@ -114,6 +107,13 @@ function applyDrop ({
   }
 }
 
+/**
+ * 你可能好奇为什么要把这个东西搞这么复杂
+ * 我确实思考过 Element 和 Antd 他们不同的提供接口的方法
+ * 为了给用户提供更强的控制能力 我选择了 Antd 的范式
+ * 诚然这样使用门槛更高一点
+ * 然后这个例子的时间复杂度确实可以优化 我实在是懒得改了
+ */
 export default {
   data () {
     return {
@@ -153,21 +153,6 @@ export default {
         nodeSiblings.splice(nodeIndex + 1, 0, dragNode)
       }
       this.data = Array.from(data)
-    },
-    handleLoad (node) {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          node.children = [
-            {
-              label: nextLabel(node.label),
-              key: node.key + nextLabel(node.label),
-              isLeaf: false
-            }
-          ]
-          this.data = Array.from(this.data)
-          resolve()
-        }, 1000)
-      })
     }
   }
 }

@@ -1,14 +1,20 @@
-# 基础用法
-好在这颗树不是活的，也不平衡。
+# Select Multiple Nodes
+Set `multiple` to select multiple nodes.
 ```html
 <n-tree
+  multiple
   block-node
   :data="data"
-  :default-expanded-keys="defaultExpandedKeys"
+/>
+<n-divider />
+<n-tree
+  multiple
+  block-node
+  :data="data"
+  v-model="value"
 />
 ```
 ```js
-
 function createData (level = 4, baseKey = '') {
   if (!level) return undefined
   return Array
@@ -24,17 +30,17 @@ function createData (level = 4, baseKey = '') {
 }
 
 function createLabel (level) {
-  if (level === 4) return '道生一'
-  if (level === 3) return '一生二'
-  if (level === 2) return '二生三'
-  if (level === 1) return '三生万物'
+  if (level === 4) return 'Out of Tao, One is born'
+  if (level === 3) return 'Out of One, Two'
+  if (level === 2) return 'Out of Two, Three'
+  if (level === 1) return 'Out of Three, the created universe'
 }
 
 export default {
   data () {
     return {
       data: createData(),
-      defaultExpandedKeys: ['40', '41']
+      value: []
     }
   }
 }

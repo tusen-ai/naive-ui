@@ -1,5 +1,5 @@
-# 异步加载
-设定 `remote` 后，使用 `on-load` 回调来加载数据。异步加载时，所有 `isLeaf` 为 `false` 并且 `children` 不为数组的节点会被视为未加载的节点。
+# Async Loading
+After set `remote`, use `on-load` callback to load data. When loading async, all nodes with `isLeaf` set to `false` and `chilren`'s type is not `Array` will be reckon as unloaded nodes.
 ```html
 <n-tree
   block-node
@@ -32,11 +32,11 @@ function createData () {
 }
 
 function nextLabel (currentLabel) {
-  if (!currentLabel) return '道生一'
-  if (currentLabel === '道生一') return '一生二'
-  if (currentLabel === '一生二') return '二生三'
-  if (currentLabel === '二生三') return '三生万物'
-  if (currentLabel === '三生万物') return '道生一'
+  if (!currentLabel) return 'Out of Tao, One is born'
+  if (currentLabel === 'Out of Tao, One is born') return 'Out of One, Two'
+  if (currentLabel === 'Out of One, Two') return 'Out of Two, Three'
+  if (currentLabel === 'Out of Two, Three') return 'Out of Three, the created universe'
+  if (currentLabel === 'Out of Three, the created universe') return 'Out of Tao, One is born'
 }
 
 function dropIsValid ({

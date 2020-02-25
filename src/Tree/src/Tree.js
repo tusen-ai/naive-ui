@@ -2,7 +2,7 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import NTreeNode from './TreeNode'
 import NFadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
-import { isLeaf, isLoaded } from './utils'
+import { isLeaf, isLoaded, getAllKeys, keysWithFilter } from './utils'
 
 function createNode (node, h, treeInstance) {
   const listeners = {
@@ -11,6 +11,7 @@ function createNode (node, h, treeInstance) {
     dragenter: treeInstance.handleDragEnter,
     dragstart: treeInstance.handleDragStart,
     dragleave: treeInstance.handleDragLeave,
+    dragend: treeInstance.handleDragEnd,
     drop: treeInstance.handleDrop,
     check: treeInstance.handleCheck
   }
@@ -67,7 +68,15 @@ export default {
       type: Array,
       default: null
     },
-    autoExpandParent: {
+    defaultExpandAll: {
+      type: Boolean,
+      default: false
+    },
+    expandOnDragenter: {
+      type: Boolean,
+      default: true
+    },
+    cancelable: {
       type: Boolean,
       default: true
     },
@@ -119,15 +128,32 @@ export default {
       type: String,
       default: ''
     },
+    filter: {
+      type: Function,
+      default: (pattern, node) => {
+        if (!pattern) return true
+        return ~node.label.toLowerCase().indexOf(
+          pattern.toLowerCase()
+        )
+      }
+    },
     onLoad: {
       type: Function,
       default: null
+    },
+    selectable: {
+      type: Boolean,
+      default: true
     }
   },
   created () {
     this.internalCheckedKeys = this.defaultCheckedKeys || []
     this.internalExpandedKeys = this.defaultExpandedKeys || []
     this.internalSelectedKeys = this.defaultSelectedKeys || []
+    if (this.defaultExpandAll) {
+      this.internalExpandedKeys = getAllKeys(this.data)
+      console.log('getAllKeys(this.data)', getAllKeys(this.data))
+    }
   },
   data () {
     return {
@@ -140,6 +166,7 @@ export default {
       droppingNodeKey: null,
       expandTimerId: null,
       transitionDisabled: false,
+      highlightKeys: [],
       loadingKeys: []
     }
   },
@@ -150,6 +177,26 @@ export default {
       this.internalSelectedKeys = []
       this.loadingKeys = []
       this.expandTimerId = null
+    },
+    pattern (value) {
+      if (value) {
+        const [
+          expandedKeysAfterChange,
+          highlightKeys
+        ] = keysWithFilter(
+          this.data,
+          this.pattern,
+          this.filter
+        )
+        this.highlightKeys = highlightKeys
+        console.log(highlightKeys)
+        if (!this.hasExpandedKeys) {
+          this.internalExpandedKeys = expandedKeysAfterChange
+        }
+        this.$emit('expanded-keys-change', expandedKeysAfterChange)
+      } else {
+        this.highlightKeys = []
+      }
     }
   },
   computed: {
@@ -238,7 +285,6 @@ export default {
         }
       } else {
         if (!isLeaf(node)) {
-          this.$emit('expand', node)
           if (!this.hasExpandedKeys) {
             this.internalExpandedKeys.push(node.key)
             this.$emit('expanded-keys-change', this.internalExpandedKeys)
@@ -256,15 +302,61 @@ export default {
       this.toggleExpand(node)
     },
     handleSelect (node) {
-      if (this.disabled || node.disabled) return
-      this.$emit('select', node)
-      if (this.internalSelectedKeys.includes(node.key)) this.internalSelectedKeys = []
-      else this.internalSelectedKeys = [node.key]
+      if (this.disabled || node.disabled || !this.selectable) return
+      if (this.multiple) {
+        if (this.hasSelectedKeys) {
+          const selectedKeys = this.syntheticSelectedKeys
+          const index = selectedKeys.findIndex(key => key === node.key)
+          if (~index) {
+            if (this.cancelable) {
+              selectedKeys.splice(
+                index,
+                1
+              )
+            }
+          } else if (!~index) {
+            selectedKeys.push(node.key)
+          }
+          this.$emit('selected-keys-change', selectedKeys)
+        } else {
+          const selectedKeys = this.internalSelectedKeys
+          const index = selectedKeys.findIndex(key => key === node.key)
+          if (~index) {
+            if (this.cancelable) {
+              selectedKeys.splice(
+                index,
+                1
+              )
+            }
+          } else {
+            selectedKeys.push(node.key)
+          }
+          this.$emit('selected-keys-change', selectedKeys)
+        }
+      } else {
+        if (this.hasSelectedKeys) {
+          const selectedKeys = this.syntheticSelectedKeys
+          if (selectedKeys.includes(node.key)) {
+            if (this.cancelable) {
+              this.$emit('selected-keys-change', [])
+            }
+          } else {
+            this.$emit('selected-keys-change', [node.key])
+          }
+        } else {
+          if (this.internalSelectedKeys.includes(node.key)) {
+            if (this.cancelable) {
+              this.internalSelectedKeys = []
+            }
+          } else this.internalSelectedKeys = [node.key]
+          this.$emit('selected-keys-change', [node.key])
+        }
+      }
     },
     handleDragEnter ({ event, node }) {
       if (!this.draggable || this.disabled || node.disabled) return
       this.$emit('dragenter', { event, node })
-      if (!this.autoExpandParent) return
+      if (!this.expandOnDragenter) return
       this.droppingNodeKey = node.key
       if (node.key === this.draggingNodeKey) return
       if (
@@ -310,6 +402,11 @@ export default {
       if (!this.draggable || this.disabled || node.disabled) return
       this.droppingNodeKey = null
       this.$emit('dragleave', { event, node })
+    },
+    handleDragEnd ({ event, node }) {
+      if (!this.draggable || this.disabled || node.disabled) return
+      this.$emit('dragend', { event, node })
+      this.resetDragStatus()
     },
     handleDragStart ({ event, node }) {
       if (!this.draggable || this.disabled || node.disabled) return

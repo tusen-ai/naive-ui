@@ -8,7 +8,8 @@
       'n-tree-node-content--pending-top': pendingPosition === 'top',
       'n-tree-node-content--selected': selected,
       'n-tree-node-content--block': blockNode,
-      'n-tree-node-content--checkable': checkable
+      'n-tree-node-content--checkable': checkable,
+      'n-tree-node-content--hightlight': highlight
     }"
     @dragleave="handleContentDragLeave"
     @dragstart="handleContentDragStart"
@@ -19,7 +20,9 @@
     @click="handleClick"
   >
     <div class="n-tree-node-content__padding-box" />
-    <slot />
+    <div class="n-tree-node-content__text">
+      <slot />
+    </div>
   </span>
 </template>
 
@@ -40,6 +43,10 @@ export default {
       default: false
     },
     checkable: {
+      type: Boolean,
+      default: false
+    },
+    highlight: {
       type: Boolean,
       default: false
     }
