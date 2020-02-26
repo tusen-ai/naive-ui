@@ -52,8 +52,9 @@ export default {
   },
   TimePicker: {
     placeholder: 'Select Time',
-    positiveText: 'Confirm',
-    negativeText: 'Cancel'
+    positiveText: 'OK',
+    negativeText: 'Cancel',
+    now: 'Now'
   },
   Pagination: {
     goto: 'Goto',

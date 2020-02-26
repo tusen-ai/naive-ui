@@ -4,6 +4,7 @@ Like a digital clock.
 ```demo
 basic
 disabledTime
+format
 ```
 ## V-model
 |prop|event|
@@ -13,8 +14,9 @@ disabledTime
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|placeholder|`string`|`'Please Select Time'`||
+|placeholder|`string`|`'Select Time'`||
 |value|`number`|`null`||
+|format|`string`|`'HH:mm:ss'`||
 |is-hour-disabled|`(hour: number) => boolean`|`() => false`||
 |is-minute-disabled|`(minute: number, hour: number) => boolean`|`() => false`||
 |is-second-disabled|`(second: number, minute: number, hour: number) => boolean`|`() => false`||

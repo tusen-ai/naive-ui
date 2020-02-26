@@ -53,7 +53,8 @@ export default {
   TimePicker: {
     placeholder: '请选择时间',
     positiveText: '确认',
-    negativeText: '取消'
+    negativeText: '取消',
+    now: '此刻'
   },
   Pagination: {
     goto: '跳至',

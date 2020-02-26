@@ -44,6 +44,7 @@
           >
             <div class="n-time-picker-selector-time">
               <div
+                v-if="formatWithHour"
                 class="n-time-picker-selector-time-row"
                 :class="{
                   'n-time-picker-selector-time-row--invalid': isHourInvalid,
@@ -70,6 +71,7 @@
                 </n-scrollbar>
               </div>
               <div
+                v-if="formatWithMinute"
                 class="n-time-picker-selector-time-row"
                 :class="{
                   'n-time-picker-selector-time-row--transition-disabled': minuteTransitionDisabled,
@@ -95,6 +97,7 @@
                 </n-scrollbar>
               </div>
               <div
+                v-if="formatWithSecond"
                 class="n-time-picker-selector-time-row"
                 :class="{
                   'n-time-picker-selector-time-row--invalid': isSecondInvalid,
@@ -125,9 +128,9 @@
               <n-button
                 size="tiny"
                 round
-                @click="handleCancelClick"
+                @click="handleNowClick"
               >
-                {{ localizedNegativeText }}
+                {{ localizedNow }}
               </n-button>
               <n-button
                 size="tiny"
@@ -174,6 +177,7 @@ import getSeconds from 'date-fns/getSeconds'
 import { strictParse } from '../../_utils/component/datePicker'
 
 const DEFAULT_FORMAT = 'HH:mm:ss'
+
 const TIME_CONST = {
   weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
   hours: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'],
@@ -243,6 +247,9 @@ export default {
     }
   },
   computed: {
+    localizedNow () {
+      return this.localeNamespace.now
+    },
     localizedPlaceholder () {
       if (this.placeholder !== null) return this.placeholder
       return this.localeNamespace.placeholder
@@ -252,6 +259,15 @@ export default {
     },
     localizedPositiveText () {
       return this.localeNamespace.positiveText
+    },
+    formatWithHour () {
+      return /H|h|K|k/.test(this.format)
+    },
+    formatWithMinute () {
+      return /m/.test(this.format)
+    },
+    formatWithSecond () {
+      return /s/.test(this.format)
     },
     isHourInvalid () {
       if (this.value === null) return false
@@ -444,6 +460,23 @@ export default {
     handleCancelClick () {
       this.$emit('change', this.memorizedValue)
       this.active = false
+    },
+    handleNowClick () {
+      const now = new Date()
+      if (!this.value) this.$emit('change', now.valueOf())
+      else {
+        const newValue = setSeconds(
+          setMinutes(
+            setHours(
+              this.value,
+              getHours(now)
+            ),
+            getMinutes(now)
+          ),
+          getSeconds(now)
+        )
+        this.$emit('change', newValue)
+      }
     },
     handleConfirmClick () {
       if (this.isValueInvalid) {
