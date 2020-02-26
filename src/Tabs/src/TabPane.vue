@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'NTabPanel',
+  name: 'NTabPane',
   inject: [ 'NTab' ],
   props: {
     label: {
@@ -41,7 +41,7 @@ export default {
   },
   render (h) {
     if (this.displayDirective === 'if') {
-      return this.NTab && this.name === this.NTab.value ? h('div', {
+      return this.NTab && this.name === this.NTab.activeName ? h('div', {
         staticClass: 'n-tab-panel'
       }, this.$slots.default) : null
     } else {
@@ -50,7 +50,7 @@ export default {
         directives: [
           {
             name: 'show',
-            value: this.NTab && this.name === this.NTab.value
+            value: this.NTab && this.name === this.NTab.activeName
           }
         ]
       }, this.$slots.default)

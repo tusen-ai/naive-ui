@@ -2,12 +2,12 @@
 可以制定标签页展示的指令为 `if` 或者 `show`。使用 `show` 的时候标签页内容不会随着切换重置。
 ```html
 <n-tabs v-model="tab">
-  <n-tab-panel name="show" display-directive="show" label="show">
+  <n-tab-pane name="show" display-directive="show" label="show">
     <show-input />
-  </n-tab-panel>
-  <n-tab-panel name="if" display-directive="if" label="if">
+  </n-tab-pane>
+  <n-tab-pane name="if" display-directive="if" label="if">
     <if-input />
-  </n-tab-panel>
+  </n-tab-pane>
 </n-tabs>
 ```
 ```js

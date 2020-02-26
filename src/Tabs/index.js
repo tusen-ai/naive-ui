@@ -1,9 +1,10 @@
 import Tab from './src/Tabs.vue'
-import NTabPanel from './src/TabPanel.vue'
+import NTabPane from './src/TabPane.vue'
 
 Tab.install = function (Vue) {
   Vue.component(Tab.name, Tab)
-  Vue.component(NTabPanel.name, NTabPanel)
+  Vue.component(NTabPane.name, NTabPane)
+  Vue.component('NTabPanel', NTabPane)
 }
 
 export default Tab
