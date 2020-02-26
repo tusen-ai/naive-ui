@@ -1,7 +1,7 @@
 <template>
   <transition name="n-date-panel-transition">
     <div
-      v-show="active"
+      v-if="active"
       ref="self"
       tabindex="0"
       class="n-date-panel n-date-panel--datetimerange"

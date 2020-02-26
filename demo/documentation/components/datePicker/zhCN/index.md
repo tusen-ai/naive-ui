@@ -47,7 +47,7 @@ format
 ### DateRange 类型的 Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|seperator|`string`|`'to'`||
+|seperator|`string`|`'至'`||
 |start-placeholder|`string`|`'Start Date'`||
 |end-placeholder|`string`|`End Date'`||
 |is-date-disabled|`(current: number) => boolean`|`() => false`||
