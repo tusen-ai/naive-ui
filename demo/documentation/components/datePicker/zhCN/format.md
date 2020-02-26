@@ -15,7 +15,7 @@ export default {
     return {
       timestamp: null,
       timestamp2: 1000000,
-      format: 'yyyy/MM/dd - HH:mm:ss'
+      format: 'yyyy/MM/dd - HH:mm'
     }
   },
   methods: {

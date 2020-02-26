@@ -27,6 +27,7 @@
           :detached="false"
           :placeholder="localeNamespace.selectTime"
           position-mode="absolute"
+          :format="timeFormat"
           :value="startTimeValue"
           :is-hour-disabled="isStartHourDisabled"
           :is-minute-disabled="isStartMinuteDisabled"
@@ -51,6 +52,7 @@
         />
         <n-time-picker
           :detached="false"
+          :format="timeFormat"
           :placeholder="localeNamespace.selectTime"
           position-mode="absolute"
           :value="endTimeValue"
@@ -283,6 +285,11 @@ export default {
     dateValidateFormat: {
       type: Array,
       default: () => DATE_VALIDATE_FORMAT
+    }
+  },
+  computed: {
+    timeFormat () {
+      return /(H|h|K|k|m|s).*(H|h|K|k|m|s)/.exec(this.format)[0]
     }
   },
   watch: {

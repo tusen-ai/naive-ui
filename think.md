@@ -130,7 +130,7 @@ Previously, it would not work with single quotes:
 17. layout scroll api
 18. <del>cascader select menu disabled 选项</del>
 19. <del>icon 的默认 stroke</del>
-20. tree 组件
+20. <del>tree 组件</del>
 21. <del>文件上传组件</del>
 22. custom-input 废弃或者重构
 23. Date 键盘操作 Time 键盘操作
@@ -149,21 +149,21 @@ Previously, it would not work with single quotes:
 36. <del>Tab keep alive</del>
 37. <del>Cascader submenu 的 lightbar 用 base tracking rect 代替</del>
 38. Dropdown 样式微调
-39. Card 用 padding 代替 margin 来避免 margin 折叠的问题
+39. <del>Card 用 padding 代替 margin 来避免 margin 折叠的问题</del> 不做了，要是想避免折叠让用户自己写 bfc 吧
 40. <del>检查 Icon 在 button 中切换有没有问题，直觉来说应该没问题</del>
 41. Radio Group 和 Steps 的镂空效果在 mounted 的时候 transition 没有关闭
 42. <del>Typography 文档待更新</del>
-43. Tab 文档待更新
+43. <del>Tab 文档待更新</del>
 44. <del>Icon 文档待更新</del>
 45. 把 Upload 的回调 API 从 promise 改成 callback 格式的，文档也要对应修改
 46. Date Picker 的 format 文档内容
 47. Button Group 样式
 48. text button icon
-49. tab scroll 计算有潜在 bug
-50. data-table 的 header height 为啥要固定？我忘了
-51. scrollbar 在平时不显示用不到的 rail
+49. <del>tab scroll 计算有潜在 bug</del>
+50. data-table 的 header height 为啥要固定？因为固定列的问题，sticky 解决了就没事
+51. <del>scrollbar 在平时不显示用不到的 rail</del>
 52. placeholder transition 对 firefox 做兼容
-
+53. 调整 date picker 的尺寸
 
 ```
 Done

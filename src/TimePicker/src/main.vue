@@ -175,6 +175,8 @@ import getMinutes from 'date-fns/getMinutes'
 import getHours from 'date-fns/getHours'
 import getSeconds from 'date-fns/getSeconds'
 import { strictParse } from '../../_utils/component/datePicker'
+import zhCN from 'date-fns/locale/zh-CN'
+import enUS from 'date-fns/locale/en-US'
 
 const DEFAULT_FORMAT = 'HH:mm:ss'
 
@@ -182,7 +184,8 @@ const TIME_CONST = {
   weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
   hours: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'],
   minutes: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59'],
-  seconds: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59']
+  seconds: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59'],
+  period: ['AM', 'PM']
 }
 
 export default {
@@ -194,7 +197,15 @@ export default {
   directives: {
     clickoutside
   },
-  mixins: [withapp, themeable, detachable, placeable, zindexable, locale('TimePicker'), asformitem()],
+  mixins: [
+    withapp,
+    themeable,
+    detachable,
+    placeable,
+    zindexable,
+    locale('TimePicker'),
+    asformitem()
+  ],
   model: {
     prop: 'value',
     event: 'change'
@@ -238,7 +249,7 @@ export default {
   data () {
     return {
       active: false,
-      displayTimeString: this.value === null ? null : format(this.value, this.format),
+      displayTimeString: this.value === null ? null : format(this.value, this.format, this.dateFnsOptions),
       ...TIME_CONST,
       memorizedValue: this.value,
       hourTransitionDisabled: false,
@@ -259,6 +270,17 @@ export default {
     },
     localizedPositiveText () {
       return this.localeNamespace.positiveText
+    },
+    dateFnsLocale () {
+      return ({
+        'zh-CN': zhCN,
+        'en-US': enUS
+      })[this.locale]
+    },
+    dateFnsOptions () {
+      return {
+        locale: this.dateFnsLocale
+      }
     },
     formatWithHour () {
       return /H|h|K|k/.test(this.format)
@@ -306,15 +328,15 @@ export default {
       else return new Date(this.value)
     },
     computedHour () {
-      if (this.computedTime) return Number(format(this.computedTime, 'HH'))
+      if (this.computedTime) return Number(format(this.computedTime, 'HH', this.dateFnsOptions))
       else return null
     },
     computedMinute () {
-      if (this.computedTime) return Number(format(this.computedTime, 'mm'))
+      if (this.computedTime) return Number(format(this.computedTime, 'mm', this.dateFnsOptions))
       else return null
     },
     computedSecond () {
-      if (this.computedTime) return Number(format(this.computedTime, 'ss'))
+      if (this.computedTime) return Number(format(this.computedTime, 'ss', this.dateFnsOptions))
       else return null
     }
   },
@@ -346,7 +368,7 @@ export default {
       }
     },
     justifyValueAfterChangeDisplayTimeString () {
-      const time = strictParse(this.displayTimeString, this.format, new Date())
+      const time = strictParse(this.displayTimeString, this.format, new Date(), this.dateFnsOptions)
       if (isValid(time)) {
         if (this.computedTime !== null) {
           const newTime = set(this.computedTime, {
@@ -396,7 +418,7 @@ export default {
     refreshTimeString (time) {
       if (time === undefined) time = this.computedTime
       if (time === null) this.displayTimeString = ''
-      else this.displayTimeString = format(time, this.format)
+      else this.displayTimeString = format(time, this.format, this.dateFnsOptions)
     },
     handleTimeInputWrapperBlur () {
       if (!this.active) {

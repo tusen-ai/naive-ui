@@ -81,10 +81,10 @@ function dateArray (displayTime, selectedTime, currentTime) {
   return calendarDays
 }
 
-function strictParse (string, pattern, backup) {
-  const result = parse(string, pattern, backup)
+function strictParse (string, pattern, backup, option) {
+  const result = parse(string, pattern, backup, option)
   if (!isValid(result)) return result
-  else if (format(result, pattern) === string) return result
+  else if (format(result, pattern, option) === string) return result
   else return new Date(NaN)
 }
 

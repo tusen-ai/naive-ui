@@ -29,7 +29,7 @@ export default {
     Fri: '五',
     Sat: '六',
     clear: '清除',
-    now: '现在',
+    now: '此刻',
     confirm: '确认',
     selectTime: '选择时间',
     selectDate: '选择日期',
