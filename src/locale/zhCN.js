@@ -1,5 +1,8 @@
+import zhCN from 'date-fns/locale/zh-CN'
+
 export default {
   _name: 'zh-CN',
+  _dateFns: zhCN,
   Popconfirm: {
     positiveText: '确认',
     negativeText: '取消'
@@ -28,6 +31,7 @@ export default {
     Thu: '四',
     Fri: '五',
     Sat: '六',
+    seperator: '至',
     clear: '清除',
     now: '此刻',
     confirm: '确认',
