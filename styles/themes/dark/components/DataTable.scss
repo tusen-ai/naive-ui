@@ -6,7 +6,7 @@
   $--data-table-header-background-color: $--n-table-header-background-color !global;
   $--data-table-row-background-color: (
     'default': $--n-card-background-color,
-    'hover': change-color($--n-primary-color, $alpha: 0.10)
+    'hover': $--n-pending-overlay-color
   ) !global;
   $--data-table-header-cell-background-color: (
     'default': transparent,
