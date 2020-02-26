@@ -9,16 +9,16 @@
       'n-input--round': round && !isTextarea,
       'n-input--clearable': clearable,
       'n-input--split': pair,
-      'n-input--focus': forceFocus || focus,
+      'n-input--focus': syntheticFocus,
       'n-input--suffix': $slots.suffix,
       'n-input--prefix': $slots.prefix || $slots.affix,
       [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
-    :tabindex="!disabled && (pressEnterToActivateInput && !inputFocused) ? 0 : false"
+    :tabindex="!disabled && (passivelyActivated && !inputFocused) ? 0 : false"
     @focus="handleWrapperFocus"
     @blur="handleWrapperBlur"
-    @keyup.enter="handleWrapperKeyUpEnter"
-    @keyup.esc="handleWrapperKeyUpEsc"
+    @keydown.enter="handleWrapperKeyDownEnter"
+    @keydown.esc="handleWrapperKeyDownEsc"
     @click="handleClick"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
@@ -44,7 +44,7 @@
       :maxlength="maxlength"
       :minlength="minlength"
       :readonly="readonly"
-      :tabindex="pressEnterToActivateInput && !inputFocused ? -1 : false"
+      :tabindex="passivelyActivated && !inputFocused ? -1 : false"
       @blur="handleInputBlur"
       @focus="handleInputFocus"
       @input="handleInput"
@@ -56,8 +56,8 @@
       ref="input"
       :type="type"
       class="n-input__input"
-      :tabindex="pressEnterToActivateInput && !inputFocused ? -1 : false"
-      :placeholder="pair ? computedPlaceholder[0] : placeholder"
+      :tabindex="passivelyActivated && !inputFocused ? -1 : false"
+      :placeholder="pair ? syntheticPlaceholder[0] : placeholder"
       :disabled="disabled"
       :maxlength="maxlength"
       :minlength="minlength"
@@ -80,8 +80,8 @@
       ref="secondInput"
       :type="type"
       class="n-input__input"
-      :tabindex="pressEnterToActivateInput && !inputFocused ? -1 : false"
-      :placeholder="pair ? computedPlaceholder[1] : placeholder"
+      :tabindex="passivelyActivated && !inputFocused ? -1 : false"
+      :placeholder="pair ? syntheticPlaceholder[1] : placeholder"
       :disabled="disabled"
       :maxlength="maxlength"
       :minlength="minlength"
@@ -198,34 +198,26 @@ export default {
       type: [String, Boolean],
       default: false
     },
-    lazyFocus: {
-      type: Boolean,
-      default: false
-    },
-    lazyActive: {
-      type: Boolean,
-      default: false
-    },
     forceFocus: {
+      type: Boolean,
+      default: false
+    },
+    passivelyActivated: {
       type: Boolean,
       default: false
     }
   },
   data () {
     return {
-      focus: false,
+      focused: false,
       hover: false,
       isComposing: false,
       inputFocused: false,
-      shouldReturnFocusToWrapper: false,
       waitingBlurCallback: false
     }
   },
   computed: {
-    pressEnterToActivateInput () {
-      return this.lazyFocus || this.lazyActive
-    },
-    computedPlaceholder () {
+    syntheticPlaceholder () {
       if (this.pair) {
         if (Array.isArray(this.placeholder)) {
           return this.placeholder
@@ -236,12 +228,19 @@ export default {
         return this.placeholder
       }
     },
+    syntheticFocus () {
+      return this.forceFocus || this.focused
+    },
     showClearButton () {
-      if (this.disabled || !this.clearable || (!this.focus && !this.hover)) return false
+      if (this.disabled || !this.clearable || (!this.syntheticFocus && !this.hover)) return false
       if (this.pair) {
-        return !!(Array.isArray(this.value) && (this.value[0] || this.value[1])) && (this.hover || this.focus)
+        return !!(
+          Array.isArray(this.value) &&
+          (this.value[0] || this.value[1])
+        ) &&
+        (this.hover || this.syntheticFocus)
       } else {
-        return !!this.value && (this.hover || this.focus)
+        return !!this.value && (this.hover || this.syntheticFocus)
       }
     },
     isTextarea () {
@@ -253,34 +252,36 @@ export default {
   },
   watch: {
     value () {
-      this.$nextTick().then(this.updateTextAreaStyle)
+      if (this.isTextarea && this.autosize) {
+        this.$nextTick().then(this.updateTextAreaStyle)
+      }
     }
   },
   mounted () {
-    this.updateTextAreaStyle()
+    if (this.isTextarea && this.autosize) {
+      this.$nextTick().then(this.updateTextAreaStyle)
+    }
   },
   methods: {
     updateTextAreaStyle () {
-      if (this.isTextarea && this.autosize) {
-        const textarea = this.$refs.textarea
-        const {
-          paddingTop: stylePaddingTop,
-          paddingBottom: stylePaddingBottom,
-          lineHeight: styleLineHeight
-        } = window.getComputedStyle(textarea)
-        const paddingTop = Number(stylePaddingTop.slice(0, -2))
-        const paddingBottom = Number(stylePaddingBottom.slice(0, -2))
-        const lineHeight = Number(styleLineHeight.slice(0, -2))
-        if (this.autosize.minRows) {
-          const minRows = Math.max(this.autosize.minRows, 1)
-          const styleMinHeight = (paddingTop + paddingBottom + lineHeight * minRows) + 'px'
-          this.$refs.textareaMirrow.style.minHeight = styleMinHeight
-        }
-        if (this.autosize.maxRows) {
-          const maxRows = Math.max(this.autosize.maxRows, this.autosize.minRows, 1)
-          const styleMaxHeight = (paddingTop + paddingBottom + lineHeight * maxRows) + 'px'
-          this.$refs.textareaMirrow.style.maxHeight = styleMaxHeight
-        }
+      const textarea = this.$refs.textarea
+      const {
+        paddingTop: stylePaddingTop,
+        paddingBottom: stylePaddingBottom,
+        lineHeight: styleLineHeight
+      } = window.getComputedStyle(textarea)
+      const paddingTop = Number(stylePaddingTop.slice(0, -2))
+      const paddingBottom = Number(stylePaddingBottom.slice(0, -2))
+      const lineHeight = Number(styleLineHeight.slice(0, -2))
+      if (this.autosize.minRows) {
+        const minRows = Math.max(this.autosize.minRows, 1)
+        const styleMinHeight = (paddingTop + paddingBottom + lineHeight * minRows) + 'px'
+        this.$refs.textareaMirrow.style.minHeight = styleMinHeight
+      }
+      if (this.autosize.maxRows) {
+        const maxRows = Math.max(this.autosize.maxRows, this.autosize.minRows, 1)
+        const styleMaxHeight = (paddingTop + paddingBottom + lineHeight * maxRows) + 'px'
+        this.$refs.textareaMirrow.style.maxHeight = styleMaxHeight
       }
     },
     handleCompositionStart () {
@@ -304,38 +305,75 @@ export default {
       }
     },
     handleInputBlur (e) {
-      this.$emit('input-blur')
-      if (this.pressEnterToActivateInput || this.pair) {
-        this.inputFocused = false
-        if (this.shouldReturnFocusToWrapper) {
-          this.$nextTick().then(() => {
-            this.$emit('blur', e, this.value)
-            this.$refs.wrapper.focus()
-            this.shouldReturnFocusToWrapper = false
-          })
-        } else {
-          this.focus = false
-          this.triggerBlurAsync(e)
-        }
-      } else {
-        this.focus = false
-        this.triggerBlur(e)
+      this.$emit('input-blur', e)
+      const {
+        input,
+        secondInput,
+        textarea,
+        wrapper
+      } = this.$refs
+      if (e.relatedTarget === wrapper) {
+        this.$emit('deactivate')
       }
+      if (!(
+        e.relatedTarget === input ||
+        e.relatedTarget === secondInput ||
+        e.relatedTarget === textarea
+      )) {
+        this.inputFocused = false
+      }
+      this.dealWithEvent(e, 'blur')
     },
     handleInputFocus (e) {
-      this.$emit('input-focus')
-      if (this.pressEnterToActivateInput || this.pair) {
-        this.focus = true
-        if (!this.waitingBlurCallback) {
-          /**
-           * in case of pair
-           */
-          this.$emit('focus', e, this.value)
-        }
-        this.inputFocused = true
+      this.$emit('input-focus', e)
+      this.focused = true
+      this.inputFocused = true
+      const {
+        wrapper
+      } = this.$refs
+      if (e.relatedTarget === wrapper) {
+        this.$emit('activate')
+      }
+      this.dealWithEvent(e, 'focus')
+    },
+    handleWrapperBlur (e) {
+      if (this.passivelyActivated) {
+        this.$emit('wrapper-blur', e)
+        this.dealWithEvent(e, 'blur')
+      }
+    },
+    handleWrapperFocus (e) {
+      if (this.passivelyActivated) {
+        this.focused = true
+        this.$emit('wrapper-focus', e)
+        this.dealWithEvent(e, 'focus')
+      }
+    },
+    dealWithEvent (e, type) {
+      const {
+        input,
+        secondInput,
+        textarea,
+        wrapper
+      } = this.$refs
+      if (
+        e.relatedTarget === input ||
+        e.relatedTarget === secondInput ||
+        e.relatedTarget === textarea ||
+        e.relatedTarget === wrapper
+      ) {
+        /**
+         * activeElement transfer inside the input, do nothing
+         */
       } else {
-        this.focus = true
-        this.$emit('focus', e, this.value)
+        if (type === 'focus') {
+          this.$emit('focus', e)
+          window.test = this
+          this.focused = true
+        } else if (type === 'blur') {
+          this.$emit('blur', e)
+          this.focused = false
+        }
       }
     },
     handleKeyUp (e) {
@@ -363,52 +401,10 @@ export default {
     handleMouseLeave () {
       this.hover = false
     },
-    handleWrapperFocus (e) {
-      if (this.pressEnterToActivateInput) {
-        this.focus = true
-        if (!this.shouldReturnFocusToWrapper) {
-          this.$emit('wrapper-focus', e, this.value)
-        }
-      }
-    },
-    triggerBlur (e, blurTargetIsWrapper = false) {
-      /**
-       * In Chrome, Firefox, Safari, this only happens when devtool opened
-       * However only Chrome and Firefox will refocus at input element
-       */
-      const devtoolIsOpened = e.target === document.activeElement
-      if (!(
-        document.activeElement === this.$refs.textarea ||
-        document.activeElement === this.$refs.input ||
-        document.activeElement === this.$refs.secondInput
-      ) || devtoolIsOpened) {
-        if (!blurTargetIsWrapper) {
-          if (devtoolIsOpened && this.pressEnterToActivateInput) {
-            this.$refs.wrapper.focus()
-          }
-          this.$emit('blur', e, this.value)
-        } else {
-          this.$emit('wrapper-blur-to-outside', this.value)
-        }
-      }
-    },
-    triggerBlurAsync (e, blurTargetIsWrapper = false) {
-      if (!blurTargetIsWrapper) this.waitingBlurCallback = true
-      window.setTimeout(() => {
-        this.triggerBlur(e, blurTargetIsWrapper)
-        if (!blurTargetIsWrapper) this.waitingBlurCallback = false
-      }, 0)
-    },
-    handleWrapperBlur (e) {
-      if (this.pressEnterToActivateInput) {
-        this.focus = false
-        this.$emit('wrapper-blur')
-        this.triggerBlurAsync(e, true)
-      }
-    },
-    handleWrapperKeyUpEnter () {
-      if (this.pressEnterToActivateInput) {
+    handleWrapperKeyDownEnter (e) {
+      if (this.passivelyActivated) {
         if (this.inputFocused) return
+        e.preventDefault()
         if (this.type === 'textarea') {
           this.$refs.textarea.focus()
         } else {
@@ -416,18 +412,21 @@ export default {
         }
       }
     },
-    handleWrapperKeyUpEsc () {
-      if (this.pressEnterToActivateInput) {
-        this.shouldReturnFocusToWrapper = true
-        if (this.$refs.textarea) {
-          this.$refs.textarea.blur()
-        }
-        if (this.$refs.input) {
-          this.$refs.input.blur()
-        }
-        if (this.$refs.secondInput) {
-          this.$refs.secondInput.blur()
-        }
+    handleWrapperKeyDownEsc () {
+      if (this.passivelyActivated) {
+        this.inputFocused = false
+        this.$nextTick().then(() => {
+          this.$refs.wrapper.focus()
+        })
+      }
+    },
+    focus () {
+      const refs = this.$refs
+      if (this.passivelyActivated) {
+        refs.wrapper.focus()
+      } else {
+        if (refs.textarea) refs.textarea.focus()
+        else if (refs.input) refs.input.focus()
       }
     }
   }

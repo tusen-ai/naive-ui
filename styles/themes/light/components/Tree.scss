@@ -5,4 +5,8 @@
     'selected': change-color($--n-primary-color, $alpha: .1)
   ) !global;
   $--tree-node-switcher-color: $--n-tertiary-text-color !global;
+  $--tree-node-content-text-color: (
+    'default': $--n-secondary-text-color,
+    'disabled': $--n-disabled-text-color
+  )!global;
 }

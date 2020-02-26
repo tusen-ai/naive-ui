@@ -4,32 +4,32 @@
   <n-tabs
     v-model="name"
   >
-    <n-tab-panel
+    <n-tab-pane
       name="oasis"
       label="Oasis"
     >
       Wonderwall
-    </n-tab-panel>
-    <n-tab-panel
+    </n-tab-pane>
+    <n-tab-pane
       name="the beatles"
       label="the Beatles"
     >
       Hey Jude
-    </n-tab-panel>
-    <n-tab-panel
+    </n-tab-pane>
+    <n-tab-pane
       name="jay chou"
       label="Jay Chou"
     >
       Qilixiang
-    </n-tab-panel>
+    </n-tab-pane>
   </n-tabs>
 </n-card>
 <n-card>
   <n-tabs
     v-model="func"
-    size="large"
+    label-size="large"
   >
-    <n-tab-panel
+    <n-tab-pane
       name="signin"
       label="Sign in"
     >
@@ -42,8 +42,8 @@
         </n-form-item-row>
       </n-form>
       <n-button type="primary" block>Sign In</n-button>
-    </n-tab-panel>
-    <n-tab-panel
+    </n-tab-pane>
+    <n-tab-pane
       name="signup"
       label="Sign Up"
     >
@@ -59,7 +59,7 @@
         </n-form-item-row>
       </n-form>
       <n-button type="primary" block>Sign Up</n-button>
-    </n-tab-panel>
+    </n-tab-pane>
   </n-tabs>
 </n-card>
 ```

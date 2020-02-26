@@ -13,14 +13,14 @@ A example to use with card. (demo is the card)
     padding: `4px ${tabNavScrollable ? 0 : 24}px`
   }"
 >
-  <n-tab-panel
+  <n-tab-pane
     v-for="panel in panels"
     :key="panel"
     :label="panel.toString()"
     :name="panel.toString()"
   >
     {{ panel }}
-  </n-tab-panel>
+  </n-tab-pane>
 </n-tabs>
 ```
 ```js

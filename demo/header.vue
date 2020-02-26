@@ -54,6 +54,13 @@
 import { version } from '../package.json'
 import withapp from '../src/_mixins/withapp'
 
+function match (pattern, string) {
+  if (!pattern.length) return true
+  if (!string.length) return false
+  if (pattern[0] === string[0]) return match(pattern.slice(1), string.slice(1))
+  return match(pattern, string.slice(1))
+}
+
 export default {
   mixins: [withapp],
   props: {
@@ -94,7 +101,7 @@ export default {
       return this.items.filter(item => {
         const pattern = this.searchInputValue.toLowerCase().replace(replaceRegex, '').slice(0, 20)
         const label = getLabel(item).toLowerCase().replace(replaceRegex, '')
-        return ~label.indexOf(pattern)
+        return match(pattern, label)
       }).map(item => ({
         label: getLabel(item),
         value: item.path

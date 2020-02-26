@@ -1,5 +1,8 @@
+import zhCN from 'date-fns/locale/zh-CN'
+
 export default {
   _name: 'zh-CN',
+  _dateFns: zhCN,
   Popconfirm: {
     positiveText: '确认',
     negativeText: '取消'
@@ -28,8 +31,9 @@ export default {
     Thu: '四',
     Fri: '五',
     Sat: '六',
+    seperator: '至',
     clear: '清除',
-    now: '现在',
+    now: '此刻',
     confirm: '确认',
     selectTime: '选择时间',
     selectDate: '选择日期',
@@ -53,7 +57,8 @@ export default {
   TimePicker: {
     placeholder: '请选择时间',
     positiveText: '确认',
-    negativeText: '取消'
+    negativeText: '取消',
+    now: '此刻'
   },
   Pagination: {
     goto: '跳至',

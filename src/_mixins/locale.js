@@ -16,6 +16,15 @@ function getTranslationNamespace (locales, fallbackLocale, language, namespace) 
   }
 }
 
+function getDateFns (locales, fallbackLocale, language) {
+  const locale = locales[language]
+  if (locale) {
+    return locale._dateFns
+  } else {
+    return fallbackLocale._dateFns
+  }
+}
+
 export default function createLocaleMixin (componentLocaleNamespace) {
   return {
     inject: {
@@ -30,6 +39,17 @@ export default function createLocaleMixin (componentLocaleNamespace) {
         } else {
           return this.$naive.fallbackLocale
         }
+      },
+      dateFnsLocale () {
+        let language = null
+        if (this.NConfigProvider) {
+          language = this.NConfigProvider.inheritedLanguage
+        }
+        return getDateFns(
+          this.$naive.locales,
+          this.$naive.fallbackLocale,
+          language
+        )
       },
       localeNamespace () {
         return this.tns(componentLocaleNamespace)
