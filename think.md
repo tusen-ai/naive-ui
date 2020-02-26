@@ -109,6 +109,16 @@ Previously, it would not work with single quotes:
 ## 2019.12.30
 为了按需引入打包大小依旧可控，需要用某种方式让互相的依赖变为外部依赖。或者就维持原本的文件结构，这样的话需要的是 babel。看起来还是有点麻烦，之后再解决吧。
 
+## 2019.2.26
+虽然没啥用了，还是留着吧
+```
+/**
+* In Chrome, Firefox, Safari, this only happens when devtool opened
+* However only Chrome and Firefox will refocus at input element
+*/
+const devtoolIsOpened = e.target === document.activeElement
+```
+
 
 ## TODO 排序不分先后
 1. Focus Detector on Time Selector
@@ -134,8 +144,8 @@ Previously, it would not work with single quotes:
 21. <del>文件上传组件</del>
 22. custom-input 废弃或者重构
 23. Date 键盘操作 Time 键盘操作
-24. Time 格式化
-25. Date 格式化
+24. <del>Time 格式化</del>
+25. <del>Date 格式化</del>
 26. <del>base cancel mark rename suffix</del>s
 27. <del>base picker => base selection</del>
 28. <del>base lightbar => base tracking rect</del>
@@ -156,7 +166,7 @@ Previously, it would not work with single quotes:
 43. <del>Tab 文档待更新</del>
 44. <del>Icon 文档待更新</del>
 45. 把 Upload 的回调 API 从 promise 改成 callback 格式的，文档也要对应修改
-46. Date Picker 的 format 文档内容
+46. <del>Date Picker 的 format 文档内容</del>s
 47. Button Group 样式
 48. text button icon
 49. <del>tab scroll 计算有潜在 bug</del>
