@@ -1,7 +1,14 @@
 <template>
   <n-layout-footer mode="absolute" class="footer">
     <div style="max-width: 1200px; margin: auto;">
-      <n-divider />
+      <n-divider style="margin: 0 0 16px 0;" />
+      <n-text depth="tertiary">
+        A <a ref="noopener noreferer" href="https://www.tusimple.com" target="_blank">
+          <n-text>
+            Tusimple
+          </n-text>
+        </a> Project ·&nbsp;
+      </n-text>
       <n-text depth="tertiary">
         Designed with
       </n-text>&nbsp;❤️<n-text depth="tertiary">
@@ -11,6 +18,9 @@
           Rita Lei
         </n-text>
       </a>
+      <n-text depth="tertiary">
+        &nbsp;· Refined by Haiyang Yu &amp; 07akioni
+      </n-text>
     </div>
   </n-layout-footer>
 </template>
@@ -19,6 +29,6 @@
 .footer {
   font-size: 15px;
   text-align: center;
-  padding: 24px;
+  padding: 20px;
 }
 </style>

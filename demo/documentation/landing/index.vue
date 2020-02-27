@@ -9,7 +9,7 @@
   "en-US": {
     "start": "Getting Start",
     "intro1": "An experimental Vue UI Framework.",
-    "intro2": "Caring Style, Battery Builtin, Fast",
+    "intro2": "Caring About Style, Batteries Included, Fast",
     "intro3": "Intresting Somehow"
   }
 }
@@ -37,7 +37,7 @@
           <n-p style="font-size: 16px; margin-top: 0;">
             {{ $t("intro3") }}
           </n-p>
-          <n-button type="primary" :ghost="theme === 'dark'" @click="handleStartClick">
+          <n-button type="primary" :ghost="theme === 'dark'" size="large" @click="handleStartClick">
             {{ $t("start") }}
           </n-button>
         </div>
