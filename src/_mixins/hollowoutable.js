@@ -32,6 +32,9 @@ function getNextBackgroundColorOf (el) {
   for (const key of Object.keys(diffedStyle)) {
     if (~key.indexOf('ransition')) continue
     memorizedInlineStyle[key] = el.style[key]
+  }
+  for (const key of Object.keys(diffedStyle)) {
+    if (~key.indexOf('ransition')) continue
     el.style[key] = diffedStyle[key]
   }
   void (el.offsetHeight)

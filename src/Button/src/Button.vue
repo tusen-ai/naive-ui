@@ -211,13 +211,14 @@ export default {
       return this.circle || !this.$slots.default
     },
     avoidHollowOut () {
-      return (
-        this.text ||
-        this.ghost ||
-        !['primary', 'link', 'info', 'success', 'warning', 'error'].includes(
-          this.type
-        )
-      )
+      return true
+      // return (
+      //   this.text ||
+      //   this.ghost ||
+      //   !['primary', 'link', 'info', 'success', 'warning', 'error'].includes(
+      //     this.type
+      //   )
+      // )
     },
     simulateHollowOut () {
       if (this.ghost) return false
