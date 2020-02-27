@@ -1,20 +1,17 @@
 <template>
   <n-config-provider class="demo" namespace="naive-ui-doc" :theme="theme" :language="lang">
-    <n-nimbus-service-layout
-      ref="layout"
-      :padding-body="false"
-      :items="items"
-      :header-z-index="3000"
-    >
-      <template v-slot:nav>
+    <n-layout mode="absolute" class="root-layout">
+      <n-layout-header bordered>
         <doc-header
           :lang="lang"
           :items="flattenedItems"
           @lang-change="handleLangChange"
         />
-      </template>
-      <router-view />
-    </n-nimbus-service-layout>
+      </n-layout-header>
+      <n-layout class="home-layout" style="top: 64px; overflow: hidden;" mode="absolute">
+        <router-view />
+      </n-layout>
+    </n-layout>
   </n-config-provider>
 </template>
 
@@ -29,7 +26,7 @@ export default {
   },
   provide () {
     return {
-      NDocRoot: this
+      NEntry: this
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -38,13 +35,7 @@ export default {
   },
   beforeRouteUpdate (to, from, next) {
     this.$i18n.locale = to.params.lang
-    this.memorizedPath = from ? from.path : null
     next()
-  },
-  data () {
-    return {
-      memorizedPath: null
-    }
   },
   computed: {
     items () {
@@ -81,9 +72,6 @@ export default {
     }
   },
   methods: {
-    resetScrollPosition () {
-      this.$refs.layout.resetScrollPosition()
-    },
     handleLangChange (lang) {
       this.lang = lang
     }
@@ -117,45 +105,10 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
-.n-doc {
-  width: 720px;
-  margin: 0 auto;
-  .n-doc-header {
-    display: flex;
-    // height: 60px;
-    // border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    margin-bottom: 16px;
-    // align-items: center;
-  }
-  .n-doc-section {
-    .n-doc-section__header {
-      font-size: 16px;
-      font-weight: 500;
-      margin-bottom: 12px;
-    }
-    .n-doc-section__view {
-      background: #5c657eff;
-      padding: 18px;
-      border-radius: 8px;
-      justify-content: center;
-      display: flex;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-    }
-    .n-doc-section__inspect {
-      background: #5c657eff;
-      padding: 18px;
-      border-radius: 8px;
-      display: flex;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-    }
-    .n-doc-section__text-content {
-      font-size: 16px;
-    }
-    .n-doc-section__source {
-      position: relative;
-    }
-  }
+.root-layout.n-light-theme {
+  background-color: white !important;
+}
+.home-layout.n-light-theme {
+  background-color: white !important;
 }
 </style>
