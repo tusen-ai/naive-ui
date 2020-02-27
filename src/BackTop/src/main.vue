@@ -106,10 +106,14 @@ export default {
   },
   methods: {
     init () {
+      this.container = getScrollParent(this.$el)
       if (this.target) {
-        this.container = this.target()
-      } else {
-        this.container = getScrollParent(this.$el)
+        const target = this.target()
+        if (target instanceof Element) {
+          this.container = target
+        } else {
+          console.error('[naive-ui/Anchor]: target is not a element')
+        }
       }
       if (this.container) {
         this.container.addEventListener('scroll', this.handleScroll)
