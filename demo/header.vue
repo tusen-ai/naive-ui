@@ -19,7 +19,7 @@
 
 <template>
   <div class="nav">
-    <div class="ui-logo">
+    <div class="ui-logo" @click="handleLogoClick">
       <img src="./assets/images/naivelogo.svg">
       Naive UI ({{ version }})
     </div>
@@ -137,6 +137,11 @@ export default {
     }
   },
   methods: {
+    handleLogoClick () {
+      this.$router.push(
+        /^(\/[^/]+){2}/.exec(this.$route.path)[0]
+      )
+    },
     handleSelect (value) {
       this.$router.push(value)
     },
@@ -173,6 +178,7 @@ export default {
   align-items: center;
 }
 .ui-logo {
+  cursor: pointer;
   display: flex;
   align-items: center;
   padding-left: 36px;

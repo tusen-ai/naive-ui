@@ -2,14 +2,14 @@
 {
   "zh-CN": {
     "start": "开始使用",
-    "intro1": "一个实验性的 Vue UI 框架。",
-    "intro2": "在意样式，完整，快。",
-    "intro3": "多少还有点意思。"
+    "intro1": "一个实验性的 Vue UI 框架",
+    "intro2": "在意样式，带主题，完整，快",
+    "intro3": "有点意思"
   },
   "en-US": {
     "start": "Getting Start",
-    "intro1": "An experimental Vue UI Framework.",
-    "intro2": "Caring About Style, Batteries Included, Fast",
+    "intro1": "An experimental Vue UI Framework",
+    "intro2": "Caring About Styles, Themed, Batteries Included, Fast",
     "intro3": "Intresting Somehow"
   }
 }
@@ -19,6 +19,7 @@
   <n-config-consumer>
     <template v-slot="{ styleScheme, theme }">
       <div>
+        <landing-footer />
         <div class="banner">
           <left-image class="left-image" />
           <right-image class="right-image" />
@@ -31,7 +32,7 @@
           <n-p style="font-size: 16px; margin-bottom: 0;">
             {{ $t("intro1") }}
           </n-p>
-          <n-p style="font-size: 16px; margin-bottom: 4px; margin-top: 4px; font-weight: 500;">
+          <n-p style="font-size: 16px; margin-bottom: 4px; margin-top: 4px; font-weight: 600;">
             {{ $t("intro2") }}
           </n-p>
           <n-p style="font-size: 16px; margin-top: 0;">
@@ -41,7 +42,6 @@
             {{ $t("start") }}
           </n-button>
         </div>
-        <landing-footer />
       </div>
     </template>
   </n-config-consumer>
@@ -72,10 +72,10 @@ export default {
 .banner {
   text-align: center;
   position: absolute;
-  top: calc(50% - 80px);
+  top: calc(50% - 36px);
   left: 0;
   right: 0;
-  transform: translateY(-42%);
+  transform: translateY(-50%);
 }
 
 .naive-title {
@@ -86,12 +86,14 @@ export default {
 
 @media only screen and (max-width: 1920px) {
   .left-image {
-    right: calc(50vw + 270px);
-    width: calc(50vw - 270px);
+    right: calc(50% + 270px);
+    width: calc(50% - 270px);
+    min-width: 440px;
   }
   .right-image {
-    left: calc(50vw + 270px);
-    width: calc(50vw - 270px);
+    left: calc(50% + 270px);
+    width: calc(50% - 270px);
+    min-width: 440px;
   }
 }
 
