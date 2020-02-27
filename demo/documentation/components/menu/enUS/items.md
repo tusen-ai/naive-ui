@@ -4,7 +4,7 @@
   v-model="selected" 
   :items="items"
   @select="changeSelect"
-  @openNamesChange="changeOpen"
+  @expandedNamesChange="changeOpen"
   >
 </n-menu>
 ```

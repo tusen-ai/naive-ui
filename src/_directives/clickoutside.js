@@ -64,7 +64,7 @@ const clickoutside = {
   },
   unbind (el) {
     console.debug('[clickoutside]: unbind')
-    clickoutsideDelegate.unregisterHandler(el[ctx].handler)
+    el[ctx] && clickoutsideDelegate.unregisterHandler(el[ctx].handler)
   }
 }
 

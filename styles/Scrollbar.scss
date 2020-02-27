@@ -52,6 +52,9 @@
             }
           }
         }
+        @include m(disabled) {
+          pointer-events: none;
+        }
         & > {
           @include e(scrollbar) {
             @include once {

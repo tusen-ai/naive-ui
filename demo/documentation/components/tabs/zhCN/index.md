@@ -8,17 +8,21 @@ card
 display-directive
 ```
 ## V-model
-V-model 暂时不对外暴露，名字没起好。
+|Prop|Event|
+|-|-|
+|active-name|active-name-change|
 
 ## Props
 ### Tabs Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|active-name|`string \| number`|`null`||
 |type|`'line' \| 'card'`|`'line'`||
 |closable|`boolean`|`false`||
 |justify-content|`'space-between' \| 'space-around' \| 'space-evenly'`|`null`||
+|label-size|`'small' \| 'medium' \| 'large' \| 'huge'`|`'medium'`|标签的尺寸，只对线型的 Tabs 生效|
 
-### Tab Panel Props
+### Tab Pane Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |label|`string`|`null`||
@@ -27,7 +31,12 @@ V-model 暂时不对外暴露，名字没起好。
 |display-directive|`'if' \| 'show'`|`'if'`|选择性渲染使用的指令。if 对应 v-if，show 对应 v-show，使用 show 的时候标签页状态切换后不会被重置|
 
 ## Slots
-### Tabs, Tab Panel Slots
-|名称|类型|说明|
+### Tabs, Tab Pane Slots
+|名称|参数|说明|
 |-|-|-|
 |default|`()`||
+
+## Events
+|名称|参数|说明|
+|-|-|-|
+|active-name-change|`(activeName: string \| number)`||

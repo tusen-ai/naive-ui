@@ -2,9 +2,11 @@
 
 @mixin tabs-size-mixin ($size) {
   @include m($size + '-size') {
-    @include b(tabs-label) {
-      @include e(label) {
-        font-size: map-get($--n-tabs-tab-font-size, $size) !important;
+    @include m(line-type) {
+      @include b(tabs-label) {
+        @include e(label) {
+          font-size: map-get($--n-tabs-tab-font-size, $size);
+        }
       }
     }
   }
@@ -35,6 +37,7 @@
     }
     @include b(tabs-nav) {
       @include once {
+        line-height: 1.75;
         display: flex;
         background-clip: padding-box;
         transition: border-color .3s $--n-ease-in-out-cubic-bezier;
@@ -142,7 +145,7 @@
       @include b(tabs-label) {
         @include once {
           box-sizing: border-box;
-          padding-bottom: 6px;
+          padding-bottom: 2px;
           vertical-align: bottom;
           @include e(label) {
             font-size: 14px;

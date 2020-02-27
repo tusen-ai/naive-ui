@@ -9,6 +9,7 @@
   @include b(cascader-menu) {
     @include once {
       @include fade-in-scale-up-transition(cascader-menu, inherit, .2s);
+      transform: $--n-transform-debounce-scale;
       position: relative;
       margin: 4px 0;
       display: flex;
@@ -133,7 +134,7 @@
         }
       }
       @include m(tracked) {
-        background-color: $--cascader-menu-lightbar-background-color;
+        background-color: $--cascader-menu-tracking-rect-background-color;
       }
       @include m(not-leaf) {
         &::after {
@@ -162,25 +163,9 @@
         }
       }
     }
-    @include b(cascader-light-bar-container) {
-      @include once {
-        @include fade-in-transition(cascader-light-bar);
-        overflow: hidden;
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-      }
-      @include b(cascader-light-bar) {
-        @include once {
-          position: absolute;
-          width: 100%;
-          left: 0;
-          height: 34px;
-          transition: top .15s $--n-ease-in-out-cubic-bezier;
-        }
-        background-color: $--cascader-menu-lightbar-background-color;
+    @include b(base-tracking-rect) {
+      @include e(body) {
+        background-color: $--cascader-menu-tracking-rect-background-color !important;
       }
     }
   }

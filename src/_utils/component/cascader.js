@@ -134,7 +134,7 @@ function rootedOptions (options) {
   return cloneDeep([{
     isRoot: true,
     isLeaf: false,
-    key: Symbol('n-tree-root'),
+    key: '__n-tree-root__',
     children: options || null
   }])
 }
@@ -164,94 +164,7 @@ function patchedOptions (options, patches) {
   }
   traverse(options)
   // console.log('patchedOptions output', options)
-  return cloneDeep(options)
-}
-
-function dropIsValid ([sourceNode, targetNode, type]) {
-  if (sourceNode.key === targetNode.key) return false
-  if (type === 'append') {
-    if (targetNode.key === sourceNode.parent.key) return false
-    let parent = targetNode.parent
-    while (!parent.isRoot) {
-      if (parent.key === sourceNode.key) {
-        return false
-      }
-      parent = parent.parent
-    }
-  } else if (type === 'insertBefore' || type === 'insertAfter') {
-    let parent = targetNode.parent
-    while (!parent.isRoot) {
-      if (parent.key === sourceNode.key) {
-        return false
-      }
-      parent = parent.parent
-    }
-  } else return false
-  return true
-}
-
-function treedOptions (options) {
-  const decoratedOptions = rootedOptions(options)
-  function traverse (root, parent = null) {
-    root.parent = parent
-    if (Array.isArray(root.children)) {
-      root.children.forEach(child => traverse(child, root))
-    }
-  }
-  traverse(decoratedOptions[0])
-  return decoratedOptions
-}
-
-function applyDrop ([sourceNode, targetNode, type]) {
-  if (type === 'append') {
-    const parent = sourceNode.parent
-    const index = parent.children.findIndex(child => child.key === sourceNode.key)
-    if (~index) {
-      parent.children.splice(index, 1)
-      if (!parent.children.length) {
-        parent.children = null
-        parent.isLeaf = true
-      }
-    } else {
-      throw new Error('[naive-ui/n-tree]: switch error')
-    }
-    if (Array.isArray(targetNode.children)) {
-      if (type === 'append') {
-        targetNode.children.push(sourceNode)
-      } else {
-        targetNode.children.unshift(sourceNode)
-      }
-    } else {
-      targetNode.isLeaf = false
-      targetNode.children = [sourceNode]
-    }
-    sourceNode.parent = targetNode
-  } else if (type === 'insertBefore' || type === 'insertAfter') {
-    let parent = sourceNode.parent
-    const sourceIndex = parent.children.findIndex(child => child.key === sourceNode.key)
-    if (~sourceIndex) {
-      parent.children.splice(sourceIndex, 1)
-      if (!parent.children.length) {
-        parent.children = null
-        parent.isLeaf = true
-      }
-    } else {
-      throw new Error('[naive-ui/n-tree]: switch error')
-    }
-    parent = targetNode.parent
-    let targetIndex = parent.children.findIndex(child => child.key === targetNode.key)
-    if (type === 'insertAfter') targetIndex += 1
-    if (~targetIndex) {
-      parent.children.splice(targetIndex, 0, sourceNode)
-      if (!parent.children.length) {
-        parent.children = null
-        parent.isLeaf = true
-      }
-    } else {
-      throw new Error('[naive-ui/n-tree]: switch error')
-    }
-    sourceNode.parent = targetNode.parent
-  }
+  return [].concat(options)
 }
 
 function linkedCascaderOptions (options, type) {
@@ -287,7 +200,7 @@ function linkedCascaderOptions (options, type) {
       /**
        * options.path to support ui status
        */
-      option.path = cloneDeep(path)
+      option.path = Array.from(path)
       /**
        * options.isLeaf to support ui status and lazy load
        */
@@ -451,9 +364,6 @@ export {
   firstOptionId,
   rootedOptions,
   patchedOptions,
-  dropIsValid,
-  applyDrop,
-  treedOptions,
   linkedCascaderOptions,
   menuOptions,
   menuModel

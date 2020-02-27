@@ -1,7 +1,7 @@
 <template>
   <transition name="n-date-panel-transition">
     <div
-      v-show="active"
+      v-if="active"
       ref="self"
       tabindex="0"
       class="n-date-panel"
@@ -23,6 +23,7 @@
           @input="handleDateInput"
         />
         <n-time-picker
+          :format="timeFormat"
           position-mode="absolute"
           :detached="false"
           :value="value"
@@ -161,6 +162,11 @@ export default {
     return {
       dateFormat: DATE_FORMAT,
       detaValidateFormat: DATE_VALIDATE_FORMAT
+    }
+  },
+  computed: {
+    timeFormat () {
+      return /(H|h|K|k|m|s).*(H|h|K|k|m|s)/.exec(this.format)[0]
     }
   },
   watch: {

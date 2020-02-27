@@ -106,7 +106,6 @@ export default {
   },
   watch: {
     active (value) {
-      console.log('popover content active change', value)
       if (value) {
         this.$parent.transferElement()
         this.$emit('show')

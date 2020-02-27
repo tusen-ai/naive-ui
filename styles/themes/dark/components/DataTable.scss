@@ -7,7 +7,7 @@
   $--data-table-header-fixed-background-color: (mix-color-with-alpha-color($--data-table-body-background-color,$--data-table-header-background-color)) !global;
   $--data-table-row-background-color: (
     'default': $--n-card-background-color,
-    'hover': mix-color-with-alpha-color($--data-table-body-background-color,change-color($--n-primary-color, $alpha: 0.10))
+    'hover': mix-color-with-alpha-color($--data-table-body-background-color,$--n-pending-overlay-color)
   ) !global;
   $--data-table-header-cell-background-color: (
     'default': transparent,

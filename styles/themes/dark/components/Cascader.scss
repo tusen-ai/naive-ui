@@ -1,5 +1,5 @@
 @mixin setup-dark-cascader {
-  $--cascader-menu-background-color: $--n-modal-background-color !global;
+  $--cascader-menu-background-color: $--n-popover-background-color !global;
   $--cascader-option-text-color: (
     'default': $--n-secondary-text-color,
     'active': $--n-primary-color,
@@ -8,7 +8,7 @@
   ) !global;
   $--cascader-menu-box-shadow: $--n-popmenu-box-shadow !global;
   $--cascader-menu-border-color: $--n-divider-color !global;
-  $--cascader-menu-lightbar-background-color: mix($--n-primary-color, $--n-modal-background-color, 15%) !global;
+  $--cascader-menu-tracking-rect-background-color: mix($--n-primary-color, $--n-popover-background-color, 15%) !global;
   $--cascader-option-arrow-background-color: $--n-icon-color !global;
   $--cascader-item-check-mark-color: $--n-primary-color !global;
 }

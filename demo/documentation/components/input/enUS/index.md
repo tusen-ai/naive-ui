@@ -12,6 +12,7 @@ clearable
 autosize
 pair
 input-group
+lazy-focus-debug
 ```
 ## V-model
 |Prop|Event|

@@ -5,6 +5,7 @@
 ```demo
 basic
 disabledTime
+format
 ```
 ## V-model
 |prop|event|
@@ -16,6 +17,7 @@ disabledTime
 |-|-|-|-|
 |placeholder|`string`|`'请选择时间'`||
 |value|`number`|`null`||
+|format|`string`|`'HH:mm:ss'`||
 |is-hour-disabled|`(hour: number) => boolean`|`() => false`||
 |is-minute-disabled|`(minute: number, hour: number) => boolean`|`() => false`||
 |is-second-disabled|`(second: number, minute: number, hour: number) => boolean`|`() => false`||

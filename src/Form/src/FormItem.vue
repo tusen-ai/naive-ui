@@ -57,14 +57,28 @@ import get from 'lodash-es/get'
 import registerable from '../../_mixins/registerable'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import cloneDeep from 'lodash-es/cloneDeep'
+import formatLength from '../../_utils/css/formatLength'
+
+function wrapValidator (validator) {
+  if (typeof validator === 'function') {
+    return (...args) => {
+      try {
+        return validator(...args)
+      } catch (err) {
+        console.error(err)
+        return void 0
+      }
+    }
+  }
+  return validator
+}
 
 export default {
   name: 'NFormItem',
   mixins: [registerable('NForm', 'items', 'path'), withapp, themeable],
   props: {
     label: {
-      type: String,
+      type: [Number, String],
       default: null
     },
     labelWidth: {
@@ -119,19 +133,13 @@ export default {
       explains: [],
       validationErrored: false,
       hasFeedback: false,
-      feedbackTransitionBlocked: true
+      feedbackTransitionDisabled: true
     }
   },
   computed: {
     labelWidthStyle () {
-      if (/\d$/.test(String(this.syntheticLabelWidth))) {
-        return {
-          width: `${this.syntheticLabelWidth}px`
-        }
-      } else {
-        return {
-          width: this.syntheticLabelWidth
-        }
+      return {
+        width: formatLength(this.syntheticLabelWidth)
       }
     },
     syntheticShowRequireMark () {
@@ -150,11 +158,6 @@ export default {
       if (this.labelWidth) return this.labelWidth
       if (this.NForm && this.NForm.labelWidth) return this.NForm.labelWidth
       return null
-    },
-    styleLabelWidth () {
-      if (this.syntheticLabelPlacement === 'top') return null
-      if (this.syntheticLabelWidth === null) return null
-      return `${this.syntheticLabelWidth}px`
     },
     syntheticRulePath () {
       if (this.rulePath) return this.rulePath
@@ -187,12 +190,13 @@ export default {
           rules.push(this.rule)
         }
       }
+      const NForm = this.NForm
       if (
-        this.NForm &&
-        this.NForm.rules &&
-        get(this.NForm.rules, this.syntheticRulePath, null)
+        NForm &&
+        NForm.rules &&
+        get(NForm.rules, this.syntheticRulePath, null)
       ) {
-        const rule = get(this.NForm.rules, this.path)
+        const rule = get(NForm.rules, this.path)
         if (Array.isArray(rule)) {
           rules = rules.concat(rule)
         } else {
@@ -220,10 +224,10 @@ export default {
       this.explains = []
       this.validationErrored = false
       this.hasFeedback = false
-      this.blockFeedbackTransition(this.$refs.feedback)
+      this.disableFeedbackTransition()
     },
     handleBeforeLeave (feedback) {
-      if (this.feedbackTransitionBlocked) {
+      if (this.feedbackTransitionDisabled) {
         if (feedback) {
           feedback.style.transition = 'none'
         }
@@ -233,8 +237,8 @@ export default {
         }
       }
     },
-    blockFeedbackTransition () {
-      this.feedbackTransitionBlocked = true
+    disableFeedbackTransition () {
+      this.feedbackTransitionDisabled = true
     },
     handleContentBlur () {
       this._validate('blur')
@@ -283,7 +287,7 @@ export default {
       } else {
         if (!options.first) options.first = this.first
       }
-      const rules = cloneDeep(this.syntheticRules)
+      const rules = this.syntheticRules
       const path = this.path
       const value = get(this.NForm.model, this.path, null)
       const activeRules = (!trigger
@@ -296,19 +300,14 @@ export default {
           }
         })
       ).map(rule => {
-        const originValidator = rule.validator
-        if (typeof originValidator === 'function') {
-          rule.validator = (...args) => {
-            let validateResult = null
-            try {
-              validateResult = originValidator(...args)
-            } catch (err) {
-              console.error(err)
-            }
-            return validateResult
-          }
+        const shallowClonedRule = Object.assign({}, rule)
+        if (shallowClonedRule.validator) {
+          shallowClonedRule.validator = wrapValidator(shallowClonedRule.validator)
         }
-        return rule
+        if (shallowClonedRule.asyncValidator) {
+          shallowClonedRule.asyncValidator = wrapValidator(shallowClonedRule.asyncValidator)
+        }
+        return shallowClonedRule
       })
       if (!activeRules.length) {
         return Promise.resolve({
@@ -348,12 +347,12 @@ export default {
       }
     },
     handleBeforeEnter () {
-      this.feedbackTransitionBlocked = false
+      this.feedbackTransitionDisabled = false
       this.hasFeedback = true
     },
     handleAfterLeave () {
       this.hasFeedback = false
-      this.feedbackTransitionBlocked = false
+      this.feedbackTransitionDisabled = false
     }
   }
 }

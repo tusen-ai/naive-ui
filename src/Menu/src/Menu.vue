@@ -64,11 +64,11 @@ export default {
       type: Number,
       default: 32
     },
-    defaultOpenNames: {
+    defaultExpandedNames: {
       type: Array,
       default: () => []
     },
-    openNames: {
+    expandedNames: {
       type: Array,
       default: undefined
     },
@@ -93,13 +93,13 @@ export default {
   data () {
     return {
       transitionDisabled: true,
-      internalOpenNames: this.openNames || this.defaultOpenNames
+      internalExpandedNames: this.expandedNames || this.defaultExpandedNames
     }
   },
   computed: {
-    syntheticOpenNames () {
-      if (this.openNames !== undefined) return this.openNames || []
-      else return this.internalOpenNames
+    syntheticExpandedNames () {
+      if (this.expandedNames !== undefined) return this.expandedNames || []
+      else return this.internalExpandedNames
     }
   },
   mounted () {
@@ -111,21 +111,21 @@ export default {
       this.$emit('input', value)
     },
     toggleOpenName (name) {
-      const currentOpenNames = Array.from(this.syntheticOpenNames)
-      const index = currentOpenNames.findIndex(openName => openName === name)
+      const currentExpandedNames = Array.from(this.syntheticExpandedNames)
+      const index = currentExpandedNames.findIndex(openName => openName === name)
       if (~index) {
-        currentOpenNames.splice(index, 1)
+        currentExpandedNames.splice(index, 1)
       } else {
-        currentOpenNames.push(name)
+        currentExpandedNames.push(name)
       }
-      if (this.openNames === undefined) {
-        this.internalOpenNames = currentOpenNames
+      if (this.expandedNames === undefined) {
+        this.internalExpandedNames = currentExpandedNames
       }
-      this.$emit('open-names-change', currentOpenNames)
+      this.$emit('open-names-change', currentExpandedNames)
     },
-    handleOpenNamesChange (names) {
+    handleExpandedNamesChange (names) {
       if (this.openName === undefined) {
-        this.internalOpenNames = names
+        this.internalExpandedNames = names
       }
       this.$emit('open-names-change', names)
     },

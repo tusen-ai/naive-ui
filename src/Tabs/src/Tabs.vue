@@ -4,7 +4,7 @@
     :class="{
       [`n-tabs--${type}-type`]: true,
       'n-tabs--scroll': showScrollButton,
-      [`n-tabs--${size}-size`]: size,
+      [`n-tabs--${labelSize}-size`]: labelSize,
       [`n-tabs--flex`]: justifyContent,
       [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
@@ -41,13 +41,11 @@
               :ref="`label(${i})`"
               class="n-tabs-label"
               :class="{
-                'n-tabs-label--active': value === panel.name,
+                'n-tabs-label--active': activeName === panel.name,
                 'n-tabs-label--disabled': panel.disabled
               }"
               @click="handleTabClick($event, panel.name, panel.disabled)"
             >
-              <!-- <n-tab-label-corner v-if="typeIsCard" class="n-tabs-label__corner n-tabs-label__corner--left" direction="left" />
-              <n-tab-label-corner v-if="typeIsCard" class="n-tabs-label__corner n-tabs-label__corner--right" direction="right" /> -->
               <span class="n-tabs-label__label">{{ panel.label }}</span>
               <div
                 v-if="closable && typeIsCard"
@@ -111,8 +109,12 @@ export default {
     mdClose
   },
   mixins: [ withapp, themeable ],
+  model: {
+    prop: 'active-name',
+    event: 'active-name-change'
+  },
   props: {
-    value: {
+    activeName: {
       type: String || Number,
       default: undefined
     },
@@ -132,8 +134,10 @@ export default {
       },
       default: null
     },
-    size: {
-      type: String,
+    labelSize: {
+      validator (value) {
+        return ['small', 'medium', 'large', 'huge'].includes(value)
+      },
       default: 'medium'
     },
     navStyle: {
@@ -175,7 +179,7 @@ export default {
       if (value === 'space-around' || value === 'space-evenly') {
         this.registerResizeObserver()
       } else {
-        resizeObserverDelegate.unregisterHandler(this.$el)
+        this.unregisterResizeObserver()
       }
     },
     panelLabels () {
@@ -184,6 +188,7 @@ export default {
   },
   mounted () {
     this.updateScrollStatus()
+    this.registerScrollContentResizeObserver()
     this
       .$nextTick()
       .then(() => {
@@ -199,18 +204,12 @@ export default {
       this.registerResizeObserver()
     }
   },
-  updated () {
-    this
-      .$nextTick()
-      .then(() => {
-        this.updateScrollStatus()
-      })
-  },
   beforeDestroy () {
     const justifyContent = this.justifyContent
     if (justifyContent === 'space-around' || justifyContent === 'space-evenly') {
-      resizeObserverDelegate.unregisterHandler(this.$el)
+      this.unregisterResizeObserver()
     }
+    this.unregisterScrollContentResizeObserver()
   },
   methods: {
     scroll (direction) {
@@ -270,7 +269,7 @@ export default {
     },
     updateCurrentBarPosition () {
       let index = 0
-      const value = this.value
+      const value = this.activeName
       const refs = this.$refs
       for (const panel of this.panels) {
         if (panel.name === value) {
@@ -286,8 +285,8 @@ export default {
         this.updateBarPosition(e.currentTarget)
       }
     },
-    setPanelActive (tabLabel) {
-      this.$emit('input', tabLabel)
+    setPanelActive (panelName) {
+      this.$emit('active-name-change', panelName)
     },
     handleCloseClick (panel) {
       this.$emit('close', panel.name)
@@ -299,7 +298,18 @@ export default {
         this.$nextTick().then(() => {
           this.transitionDisabled = false
         })
-      }, 40))
+      }, 64))
+    },
+    unregisterResizeObserver () {
+      resizeObserverDelegate.unregisterHandler(this.$el)
+    },
+    registerScrollContentResizeObserver () {
+      resizeObserverDelegate.registerHandler(this.$refs.labelWrapper, throttle(() => {
+        this.updateScrollStatus()
+      }, 64))
+    },
+    unregisterScrollContentResizeObserver () {
+      resizeObserverDelegate.unregisterHandler(this.$refs.labelWrapper)
     }
   }
 }

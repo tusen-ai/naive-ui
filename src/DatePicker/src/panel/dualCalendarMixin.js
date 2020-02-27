@@ -247,6 +247,11 @@ export default {
     },
     isEndValueInvalid (value) {
       this.NDatePicker.setEndInvalidStatus(value)
+    },
+    active (value) {
+      if (!value) {
+        this.isSelecting = false
+      }
     }
   },
   mounted () {

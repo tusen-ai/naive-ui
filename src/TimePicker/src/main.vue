@@ -10,14 +10,17 @@
       ref="activator"
       v-model="displayTimeString"
       class="n-time-picker-input"
+      passively-activated
       :force-focus="active"
       :placeholder="localizedPlaceholder"
-      lazy-focus
+      :clearable="clearable"
       @focus="handleTimeInputFocus"
+      @blur="handleTimeInputBlur"
+      @activate="handleTimeInputActivate"
+      @deactivate="handleTimeInputDeactivate"
       @click="handleActivatorClick"
       @input="handleTimeInput"
-      @wrapper-blur-to-outside="handleTimeInputWrapperBlur"
-      @blur="handleTimeInputBlur"
+      @clear="handleTimeInputClear"
     />
     <div
       ref="contentContainer"
@@ -41,9 +44,11 @@
             :class="{
               [`n-${syntheticTheme}-theme`]: syntheticTheme
             }"
+            @keydown="handleMenuKeyDown"
           >
             <div class="n-time-picker-selector-time">
               <div
+                v-if="formatWithHour"
                 class="n-time-picker-selector-time-row"
                 :class="{
                   'n-time-picker-selector-time-row--invalid': isHourInvalid,
@@ -70,6 +75,7 @@
                 </n-scrollbar>
               </div>
               <div
+                v-if="formatWithMinute"
                 class="n-time-picker-selector-time-row"
                 :class="{
                   'n-time-picker-selector-time-row--transition-disabled': minuteTransitionDisabled,
@@ -95,6 +101,7 @@
                 </n-scrollbar>
               </div>
               <div
+                v-if="formatWithSecond"
                 class="n-time-picker-selector-time-row"
                 :class="{
                   'n-time-picker-selector-time-row--invalid': isSecondInvalid,
@@ -125,9 +132,9 @@
               <n-button
                 size="tiny"
                 round
-                @click="handleCancelClick"
+                @click="handleNowClick"
               >
-                {{ localizedNegativeText }}
+                {{ localizedNow }}
               </n-button>
               <n-button
                 size="tiny"
@@ -140,6 +147,9 @@
                 {{ localizedPositiveText }}
               </n-button>
             </div>
+            <n-base-focus-detector
+              @focus="handleFocusDectorFocus"
+            />
           </div>
         </transition>
       </div>
@@ -172,25 +182,39 @@ import getMinutes from 'date-fns/getMinutes'
 import getHours from 'date-fns/getHours'
 import getSeconds from 'date-fns/getSeconds'
 import { strictParse } from '../../_utils/component/datePicker'
+import keyboardDelegate from '../../_utils/delegate/keyboardDelegate'
+import { KEY_CODE } from '../../_utils/event/keyCode'
+import NBaseFocusDetector from '../../_base/FocusDetector'
 
 const DEFAULT_FORMAT = 'HH:mm:ss'
+
 const TIME_CONST = {
   weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
   hours: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'],
   minutes: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59'],
-  seconds: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59']
+  seconds: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59'],
+  period: ['AM', 'PM']
 }
 
 export default {
   name: 'NTimePicker',
   components: {
     NInput,
-    NScrollbar
+    NScrollbar,
+    NBaseFocusDetector
   },
   directives: {
     clickoutside
   },
-  mixins: [withapp, themeable, detachable, placeable, zindexable, locale('TimePicker'), asformitem()],
+  mixins: [
+    withapp,
+    themeable,
+    detachable,
+    placeable,
+    zindexable,
+    locale('TimePicker'),
+    asformitem()
+  ],
   model: {
     prop: 'value',
     event: 'change'
@@ -229,12 +253,16 @@ export default {
       default: () => {
         return false
       }
+    },
+    clearable: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
       active: false,
-      displayTimeString: this.value === null ? null : format(this.value, this.format),
+      displayTimeString: this.value === null ? null : format(this.value, this.format, this.dateFnsOptions),
       ...TIME_CONST,
       memorizedValue: this.value,
       hourTransitionDisabled: false,
@@ -243,6 +271,9 @@ export default {
     }
   },
   computed: {
+    localizedNow () {
+      return this.localeNamespace.now
+    },
     localizedPlaceholder () {
       if (this.placeholder !== null) return this.placeholder
       return this.localeNamespace.placeholder
@@ -252,6 +283,20 @@ export default {
     },
     localizedPositiveText () {
       return this.localeNamespace.positiveText
+    },
+    dateFnsOptions () {
+      return {
+        locale: this.dateFnsLocale
+      }
+    },
+    formatWithHour () {
+      return /H|h|K|k/.test(this.format)
+    },
+    formatWithMinute () {
+      return /m/.test(this.format)
+    },
+    formatWithSecond () {
+      return /s/.test(this.format)
     },
     isHourInvalid () {
       if (this.value === null) return false
@@ -290,15 +335,15 @@ export default {
       else return new Date(this.value)
     },
     computedHour () {
-      if (this.computedTime) return Number(format(this.computedTime, 'HH'))
+      if (this.computedTime) return Number(format(this.computedTime, 'HH', this.dateFnsOptions))
       else return null
     },
     computedMinute () {
-      if (this.computedTime) return Number(format(this.computedTime, 'mm'))
+      if (this.computedTime) return Number(format(this.computedTime, 'mm', this.dateFnsOptions))
       else return null
     },
     computedSecond () {
-      if (this.computedTime) return Number(format(this.computedTime, 'ss'))
+      if (this.computedTime) return Number(format(this.computedTime, 'ss', this.dateFnsOptions))
       else return null
     }
   },
@@ -314,23 +359,45 @@ export default {
     }
   },
   methods: {
+    handleTimeInputClear (e) {
+      e.stopPropagation()
+      this.$emit('change', null)
+      this.refreshTimeString(null)
+    },
+    handleFocusDectorFocus () {
+      this.closeTimeSelector({
+        returnFocus: true,
+        emitBlur: false
+      })
+    },
+    handleMenuKeyDown (e) {
+      switch (e.keyCode) {
+        case KEY_CODE.ESC:
+          this.closeTimeSelector({
+            returnFocus: true,
+            emitBlur: false
+          })
+          break
+        case KEY_CODE.TAB:
+          const shiftPressed = keyboardDelegate.getKeyboardStatus().shiftPressed
+          if (shiftPressed && e.target === this.$refs.panel) {
+            e.preventDefault()
+            this.closeTimeSelector({
+              returnFocus: true,
+              emitBlur: false
+            })
+          }
+          break
+      }
+    },
     disableTransitionOneTick (unit) {
       this[unit + 'TransitionDisabled'] = true
       this.$nextTick().then(() => {
         this[unit + 'TransitionDisabled'] = false
       })
     },
-    afterBlur (e) {
-      if (this.active) {
-        this.$nextTick().then(() => {
-          if (!(this.$refs.panel && this.$refs.panel.contains(document.activeElement))) {
-            this.closeTimeSelector()
-          }
-        })
-      }
-    },
     justifyValueAfterChangeDisplayTimeString () {
-      const time = strictParse(this.displayTimeString, this.format, new Date())
+      const time = strictParse(this.displayTimeString, this.format, new Date(), this.dateFnsOptions)
       if (isValid(time)) {
         if (this.computedTime !== null) {
           const newTime = set(this.computedTime, {
@@ -380,7 +447,7 @@ export default {
     refreshTimeString (time) {
       if (time === undefined) time = this.computedTime
       if (time === null) this.displayTimeString = ''
-      else this.displayTimeString = format(time, this.format)
+      else this.displayTimeString = format(time, this.format, this.dateFnsOptions)
     },
     handleTimeInputWrapperBlur () {
       if (!this.active) {
@@ -388,14 +455,36 @@ export default {
       }
     },
     handleTimeInputFocus () {
+      this.$emit('focus')
+    },
+    handleTimeInputBlur (e) {
+      if (this.active) {
+        const panel = this.$refs.panel
+        if (!(
+          panel &&
+          panel.contains(e.relatedTarget)
+        )) {
+          this.$emit('blur')
+          this.closeTimeSelector({
+            returnFocus: false,
+            emitBlur: false
+          })
+        }
+      }
+    },
+    handleTimeInputActivate () {
       if (this.disabled) return
       if (!this.active) {
         this.openTimeSelector()
       }
     },
-    handleTimeInputBlur () {
+    handleTimeInputDeactivate (e) {
+      if (this.disabled) return
       this.refreshTimeString()
-      this.afterBlur()
+      this.closeTimeSelector({
+        returnFocus: false,
+        emitBlur: false
+      })
     },
     scrollTimer () {
       if (this.$refs.hours && this.$refs.hours.$el) {
@@ -428,14 +517,25 @@ export default {
       }
     },
     handleClickOutside (e) {
-      if (!this.$refs.activator.$el.contains(e.target)) {
-        this.closeTimeSelector()
+      if (this.active && !this.$refs.activator.$el.contains(e.target)) {
+        this.closeTimeSelector({
+          returnFocus: false,
+          emitBlur: true
+        })
       }
     },
-    closeTimeSelector (returnFocus = false) {
-      this.active = false
-      if (!returnFocus) {
-        this.$emit('blur', this.value)
+    closeTimeSelector ({
+      returnFocus,
+      emitBlur
+    }) {
+      if (this.active) {
+        this.active = false
+        if (returnFocus) {
+          this.$refs.activator.focus()
+        }
+        if (emitBlur) {
+          this.$emit('blur')
+        }
       }
     },
     handleTimeInput () {
@@ -445,12 +545,32 @@ export default {
       this.$emit('change', this.memorizedValue)
       this.active = false
     },
+    handleNowClick () {
+      const now = new Date()
+      if (!this.value) this.$emit('change', getTime(now))
+      else {
+        const newValue = setSeconds(
+          setMinutes(
+            setHours(
+              this.value,
+              getHours(now)
+            ),
+            getMinutes(now)
+          ),
+          getSeconds(now)
+        )
+        this.$emit('change', getTime(newValue))
+      }
+    },
     handleConfirmClick () {
       if (this.isValueInvalid) {
         return
       }
       this.refreshTimeString()
-      this.closeTimeSelector()
+      this.closeTimeSelector({
+        returnFocus: true,
+        emitBlur: false
+      })
     }
   }
 }

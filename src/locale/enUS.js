@@ -1,5 +1,8 @@
+import enUS from 'date-fns/locale/en-US'
+
 export default {
   _name: 'en-US',
+  _dateFns: enUS,
   Popconfirm: {
     positiveText: 'Confirm',
     negativeText: 'Cancel'
@@ -28,6 +31,7 @@ export default {
     Thu: 'Thu',
     Fri: 'Fri',
     Sat: 'Sat',
+    seperator: 'to',
     clear: 'Clear',
     now: 'Now',
     confirm: 'Confirm',
@@ -52,8 +56,9 @@ export default {
   },
   TimePicker: {
     placeholder: 'Select Time',
-    positiveText: 'Confirm',
-    negativeText: 'Cancel'
+    positiveText: 'OK',
+    negativeText: 'Cancel',
+    now: 'Now'
   },
   Pagination: {
     goto: 'Goto',

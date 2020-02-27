@@ -5,7 +5,6 @@
     @include b(time-picker) {
       position: relative;
       display: inline-block;
-      width: 180px;
     }
   }
   @include b(time-picker) {
@@ -37,13 +36,13 @@
       font-size: 12px;
       border-radius: 6px;
       margin: 4px 0;
-      width: 180px;
+      min-width: 140px;
       overflow: hidden;
       @include fade-in-scale-up-transition(time-picker);
       @include b(time-picker-selector-actions) {
-        padding: 10px 15px;
+        padding: 10px 0;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-evenly;
         @include e(confirm) {
           @include m(disabled) {
             cursor: not-allowed;
@@ -64,7 +63,8 @@
     }
     @include b(time-picker-selector-time-row) {
       @include once {
-        width: 60px;
+        flex-grow: 1;
+        min-width: 60px;
         height: 245px;
         flex-direction: column;
         transition: box-shadow .3s $--n-ease-in-out-cubic-bezier;

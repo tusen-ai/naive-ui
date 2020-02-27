@@ -1,5 +1,5 @@
 import clickoutside from '../../../_directives/clickoutside'
-import focusDetector from './focusDetector'
+import focusDetector from '../../../_base/FocusDetector'
 import locale from '../../../_mixins/locale'
 
 const TIME_CONST = {

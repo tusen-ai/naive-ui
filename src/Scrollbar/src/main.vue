@@ -34,6 +34,9 @@
       v-if="showRail"
       ref="verticalRail"
       class="n-scrollbar-rail n-scrollbar-rail--vertical"
+      :class="{
+        'n-scrollbar-rail--disabled': !needVerticalScrollbar
+      }"
       :style="{...horizontalRailStyle, width: scrollbarSize }"
     >
       <transition name="n-scrollbar-transition">
@@ -56,6 +59,9 @@
       v-if="showRail"
       ref="horizontalRail"
       class="n-scrollbar-rail n-scrollbar-rail--horizontal"
+      :class="{
+        'n-scrollbar-rail--disabled': !needHorizontalScrollbar
+      }"
       :style="{ ...verticalRailStyle, height: scrollbarSize }"
     >
       <transition name="n-scrollbar-transition">

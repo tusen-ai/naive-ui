@@ -3,7 +3,7 @@
 <div>
   <n-menu 
     v-model="selected" 
-    @openNamesChange="changeOpen"
+    @expandedNamesChange="changeOpen"
     @select="changeSelect"
   >
     <n-menu-item title="num1" name="num1"></n-menu-item>

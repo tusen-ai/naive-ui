@@ -109,37 +109,47 @@ Previously, it would not work with single quotes:
 ## 2019.12.30
 为了按需引入打包大小依旧可控，需要用某种方式让互相的依赖变为外部依赖。或者就维持原本的文件结构，这样的话需要的是 babel。看起来还是有点麻烦，之后再解决吧。
 
+## 2019.2.26
+虽然没啥用了，还是留着吧
+```
+/**
+* In Chrome, Firefox, Safari, this only happens when devtool opened
+* However only Chrome and Firefox will refocus at input element
+*/
+const devtoolIsOpened = e.target === document.activeElement
+```
+
 
 ## TODO 排序不分先后
 1. Focus Detector on Time Selector
-2. Menu Root Indent = 0 可能造成问题
+2. <del>Menu Root Indent = 0 可能造成问题</del>
 3. 用 RAF 优化 scrollbar 性能（不一定需要）
 4. <del>Anchor 切换有 bug，忽然闪现第一个</del>
-5. Safari select lightbar container overflow 边角（或许是 webkit 的问题）
+5. <del>Safari select lightbar container overflow 边角（或许是 webkit 的问题）</del>默认选中第一个可以装作这个问题不存在
 6. Chrome lightbar offset @table fitler
-7. cascader 数据结构重构，维持原选项！
+7. <del>cascader 数据结构重构，维持原选项！</del> 这个不做了，对 Children 的处理过于边角，Patch 那块也会从声明式变成命令式
 8. 排查 render 函数是否每个地方都支持数组
-9. form async validation
+9. <del>form async validation</del>
 10. table filter 重构支持异步
 11. <del>tabs resize bug</del>
-12. CSS 整理
+12. <del>CSS 整理</del> 暂且算做完了
 13. 落地页
 14. <del>按需引入 babel plugin</del> 这个不做了，收益不大，工作量不小
 15. form table 需要 size
 16. input number 需要一个小型的
 17. layout scroll api
-18. cascader select menu disabled 选项
+18. <del>cascader select menu disabled 选项</del>
 19. <del>icon 的默认 stroke</del>
-20. tree 组件
+20. <del>tree 组件</del>
 21. <del>文件上传组件</del>
 22. custom-input 废弃或者重构
 23. Date 键盘操作 Time 键盘操作
-24. Time 格式化
-25. Date 格式化
+24. <del>Time 格式化</del>
+25. <del>Date 格式化</del>
 26. <del>base cancel mark rename suffix</del>s
 27. <del>base picker => base selection</del>
 28. <del>base lightbar => base tracking rect</del>
-29. loader 区分 debug 和 非 debug
+29. <del>loader 区分 debug 和 非 debug</del>
 30. 逐步放宽对宽度必需传 number 的现实，尤其是对于 table
 31. <del>BaseLoading 代替 Log 里的 Spin</del>
 32. Modal 内部组件的卸载方式
@@ -147,17 +157,23 @@ Previously, it would not work with single quotes:
 34. <del>bug md-loader alert 内的 code 不显示</del> 不是 bug，md 就这么渲染
 35. <del>backtop mounted blink</del>
 36. <del>Tab keep alive</del>
-37. Cascader submenu 的 lightbar 用 base tracking rect 代替
+37. <del>Cascader submenu 的 lightbar 用 base tracking rect 代替</del>
 38. Dropdown 样式微调
-39. Card 用 padding 代替 margin 来避免 margin 折叠的问题
-40. 检查 Icon 在 button 中切换有没有问题，直觉来说应该没问题
+39. <del>Card 用 padding 代替 margin 来避免 margin 折叠的问题</del> 不做了，要是想避免折叠让用户自己写 bfc 吧
+40. <del>检查 Icon 在 button 中切换有没有问题，直觉来说应该没问题</del>
 41. Radio Group 和 Steps 的镂空效果在 mounted 的时候 transition 没有关闭
 42. <del>Typography 文档待更新</del>
-43. Tab 文档待更新
+43. <del>Tab 文档待更新</del>
 44. <del>Icon 文档待更新</del>
 45. 把 Upload 的回调 API 从 promise 改成 callback 格式的，文档也要对应修改
-46. Date Picker 的 format 文档内容
-
+46. <del>Date Picker 的 format 文档内容</del>s
+47. Button Group 样式
+48. text button icon
+49. <del>tab scroll 计算有潜在 bug</del>
+50. data-table 的 header height 为啥要固定？因为固定列的问题，sticky 解决了就没事
+51. <del>scrollbar 在平时不显示用不到的 rail</del>
+52. placeholder transition 对 firefox 做兼容
+53. 调整 date picker 的尺寸
 
 ```
 Done

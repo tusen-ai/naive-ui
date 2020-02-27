@@ -271,9 +271,6 @@ export default {
             }, 600)
           })
         }
-        if (this.syntheticFocusable) {
-          this.$el.focus()
-        }
       }
     },
     handleKeyUpEnter (e) {

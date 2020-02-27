@@ -4,17 +4,11 @@
     @mouseleave="handleMouseLeave"
   >
     <n-scrollbar ref="scrollbar">
-      <transition name="n-cascader-light-bar-transition">
-        <div
-          v-if="showLightBar"
-          class="n-cascader-light-bar-container"
-        >
-          <div
-            class="n-cascader-light-bar"
-            :style="{ top: `${lightBarTop}px` }"
-          />
-        </div>
-      </transition>
+      <n-base-tracking-rect
+        ref="trackingRect"
+        :theme="theme"
+        :item-size="34"
+      />
       <n-cascader-option
         v-for="(option, index) in options"
         ref="options"
@@ -54,15 +48,21 @@
 <script>
 import NCascaderOption from './CascaderOption.vue'
 import NScrollbar from '../../Scrollbar'
-import withlightbar from '../../_mixins/withlightbar'
+import NBaseTrackingRect from '../../_base/TrackingRect'
+import debounce from 'lodash-es/debounce'
 
 export default {
   name: 'NCascaderSubmenu',
+  inject: {
+    NCascader: {
+      default: null
+    }
+  },
   components: {
     NCascaderOption,
-    NScrollbar
+    NScrollbar,
+    NBaseTrackingRect
   },
-  mixins: [withlightbar],
   props: {
     depth: {
       type: Number,
@@ -82,13 +82,22 @@ export default {
       active: true
     }
   },
+  computed: {
+    theme () {
+      return this.NCascader.syntheticTheme
+    }
+  },
   methods: {
     handleOptionMouseEnter (e, option) {
       if (!option.disabled) {
-        this.updateLightBarPosition(e.target)
+        this.updateTrackingRectPosition(e)
       }
       this.$emit('option-mouseenter', e, option)
     },
+    updateTrackingRectPosition: debounce(function (e) {
+      const trackingRect = this.$refs.trackingRect
+      trackingRect && trackingRect.updateLightBarTop(e.target)
+    }, 64),
     handleOptionMouseLeave (e, option) {
       this.$emit('option-mouseleave', e, option)
     },
@@ -96,7 +105,8 @@ export default {
       this.$emit('option-click', e, option)
     },
     handleMouseLeave (e) {
-      this.hideLightBar()
+      const trackingRect = this.$refs.trackingRect
+      trackingRect && trackingRect.hideLightBar()
     },
     handleOptionCheck (option) {
       this.$emit('option-check', option.id)

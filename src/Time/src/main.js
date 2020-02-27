@@ -1,8 +1,6 @@
 import format from 'date-fns/format'
 import formatDistance from 'date-fns/formatDistance'
 import fromUnixTime from 'date-fns/fromUnixTime'
-import zhCN from 'date-fns/locale/zh-CN'
-import enUS from 'date-fns/locale/en-US'
 import render from '../../_utils/vue/render'
 
 import locale from '../../_mixins/locale'
@@ -41,12 +39,6 @@ export default {
     }
   },
   computed: {
-    dateFnsLocale () {
-      return ({
-        'zh-CN': zhCN,
-        'en-US': enUS
-      })[this.locale]
-    },
     dateFnsOptions () {
       return {
         locale: this.dateFnsLocale

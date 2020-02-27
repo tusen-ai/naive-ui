@@ -36,32 +36,9 @@ const appendCounts = item => {
 
 const appendDebugDemos = (item) => {
   if (process.env.NODE_ENV === 'development') {
-    return item
-  }
+    return [item]
+  } else return []
 }
-
-// function renderTitle (main, meta) {
-//   return h => {
-//     return h('n-config-consumer', {
-//       props: {
-//         transparent: true
-//       },
-//       scopedSlots: {
-//         default: ({ styleScheme }) => {
-//           return h('span', {
-//           }, [ main, ' ', h('span', {
-//             style: {
-//               marginLeft: '6px',
-//               color: styleScheme.tertiaryTextColor,
-//               fontWeight: '400',
-//               transition: `color .3s ${styleScheme.easeInOutCubicBezier}`
-//             }
-//           }, [ meta ])])
-//         }
-//       }
-//     })
-//   }
-// }
 
 export default function (locale, instance) {
   if (locale === 'zh-CN') {
@@ -359,7 +336,7 @@ export default function (locale, instance) {
             path: `/${instance.lang}/${instance.theme}` + '/n-timeline'
           },
           {
-            name: 'Tree (in progress)',
+            name: 'Tree',
             title: '树',
             titleExtra: 'Tree',
             path: `/${instance.lang}/${instance.theme}` + '/n-tree'
@@ -791,7 +768,7 @@ export default function (locale, instance) {
             path: `/${instance.lang}/${instance.theme}` + '/n-timeline'
           },
           {
-            name: 'Tree (in progress)',
+            name: 'Tree',
             path: `/${instance.lang}/${instance.theme}` + '/n-tree'
           }
         ]
@@ -910,7 +887,7 @@ export default function (locale, instance) {
           }
         ]
       },
-      appendDebugDemos(
+      ...appendDebugDemos(
         {
           name: 'Debug',
           childItems: [
