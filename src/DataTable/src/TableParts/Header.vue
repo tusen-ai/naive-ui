@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="table"
     :class="{
       [`n-${theme}-theme`]: theme
     }"
@@ -27,15 +28,21 @@
             <!-- th height should minus 1 compared with props.height, since border is contained -->
             <th
               :key="column.key"
+              :ref="column.key"
               :style="{
                 textAlign: column.align || null,
-                height: height && `${height - 1}px`
+                height: height && `${height - 1}px`,
+                left: NDataTable.currentFixedColumnLeft(column),
+                right: NDataTable.currentFixedColumnRight(column)
               }"
               class="n-data-table-th"
               :class="{
                 'n-data-table-th--filterable': isColumnFilterable(column),
                 'n-data-table-th--sortable': isColumnSortable(column),
-                'n-data-table-th--ellipsis': column.ellipsis
+                'n-data-table-th--ellipsis': column.ellipsis,
+                [`n-data-table-th--fixed-${column.fixed}`]: column.fixed,
+                'n-data-table-th--shadow-after': activeLeft[column.key],
+                'n-data-table-th--shadow-before': activeRight[column.key]
               }"
               @click="handleHeaderClick($event, column)"
             >
@@ -146,6 +153,12 @@ export default {
       default: false
     }
   },
+  data: function () {
+    return {
+      activeLeft: [],
+      activeRight: []
+    }
+  },
   computed: {
     pagination () {
       return this.NDataTable.syntheticPagination
@@ -169,13 +182,45 @@ export default {
       return {
         overflow: !this.fixed ? 'scroll' : 'hidden'
       }
+    },
+    fixedColumnsLeft () {
+      let columnsLeft = {}
+      let left = 0
+      let columns = this.columns
+      columns.map((column) => {
+        if (this.NDataTable.leftFixedColumns.indexOf(column) > -1) {
+          columnsLeft[column.key] = left
+        }
+        left = left + this.$refs[column.key][0].offsetWidth
+      })
+      return columnsLeft
+    },
+    fixedColumnsRight () {
+      let columnsRight = {}
+      let right = 0
+      let columns = this.columns
+      for (let i = columns.length - 1; i >= 0; i--) {
+        if (this.NDataTable.rightFixedColumns.indexOf(this.columns[i]) > -1) {
+          columnsRight[columns[i].key] = right
+        }
+        right = right + this.$refs[columns[i].key][0].offsetWidth
+      }
+      return columnsRight
     }
+  },
+  mounted () {
+    this.setActiveRight(this.$refs.body)
+    this.setActiveLeft(this.$refs.body)
+    this.$emit('set-active', this.activeLeft, this.activeRight)
   },
   methods: {
     isColumnSortable,
     isColumnFilterable,
     createCustomWidthStyle,
     handleScroll (e) {
+      this.setActiveRight(e.target)
+      this.setActiveLeft(e.target)
+      this.$emit('set-active', this.activeLeft, this.activeRight)
       this.$emit('scroll', e)
     },
     handleCheckboxInput (column) {
@@ -194,6 +239,36 @@ export default {
       const activeSorter = this.NDataTable.syntheticActiveSorter
       const nextSorter = createNextSorter(column.key, activeSorter, column.sorter)
       this.NDataTable.changeSorter(nextSorter)
+    },
+    setActiveRight (target) {
+      const rightFixedColumns = this.NDataTable.rightFixedColumns
+      const scrollLeft = target.scrollLeft
+      const tableWidth = this.$refs.table.offsetWidth
+      const scrollWidth = target.scrollWidth
+      for (let i = 0; i < rightFixedColumns.length; i++) {
+        this.activeRight = {}
+        if (scrollLeft + this.fixedColumnsRight[rightFixedColumns[i].key] + tableWidth < scrollWidth) {
+          this.activeRight[rightFixedColumns[i].key] = true
+          break
+        }
+      }
+    },
+    setActiveLeft (target) {
+      const leftFixedColumns = this.NDataTable.leftFixedColumns
+      const scrollLeft = target.scrollLeft
+      let leftWidth = 0
+      for (let i = 0; i < leftFixedColumns.length; i++) {
+        if (scrollLeft > this.fixedColumnsLeft[leftFixedColumns[i].key] - leftWidth) {
+          this.activeLeft = {}
+          this.activeLeft[leftFixedColumns[i].key] = true
+          leftWidth = leftWidth + leftFixedColumns[i].width
+          continue
+        } else if (i === 0) {
+          this.activeLeft = {}
+        } else {
+          break
+        }
+      }
     }
   }
 }

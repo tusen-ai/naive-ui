@@ -1,12 +1,13 @@
 @mixin setup-light-data-table {
   $--data-table-border-color: $--n-divider-color !global;
   $--data-table-header-text-color: $--n-primary-text-color !global;
-  $--data-table-fixed-column-box-shadow: (0 0 12px 0 rgba(0, 0, 0, .18)) !global;
+  $--data-table-fixed-column-box-shadow-color:  rgba(0, 0, 0, .18) !global;
   $--data-table-body-background-color: $--n-card-background-color !global;
   $--data-table-header-background-color: $--n-table-header-background-color !global;
+  $--data-table-header-fixed-background-color: mix-color-with-alpha-color($--data-table-body-background-color, $--data-table-header-background-color) !global;
   $--data-table-row-background-color: (
     'default': $--n-card-background-color,
-    'hover': $--n-pending-overlay-color
+    'hover': mix-color-with-alpha-color($--data-table-body-background-color,$--n-pending-overlay-color)
   ) !global;
   $--data-table-header-cell-background-color: (
     'default': transparent,
@@ -18,4 +19,15 @@
     'default': $--n-icon-color,
     'active': $--n-primary-color
   ) !global;
+}
+
+@function mix-color-with-alpha-color ($color, $alpha-color) {
+  $alpha-color-weight: percentage(alpha($alpha-color));
+  $temp-color-1: scale-color($color, $lightness: -$alpha-color-weight);
+  $temp-color-2: scale-color($alpha-color, $lightness: -(100% - $alpha-color-weight));
+  @return rgb(
+    red($temp-color-1) + red($temp-color-2),
+    green($temp-color-1) + green($temp-color-2),
+    blue($temp-color-1) + blue($temp-color-2)
+  );
 }

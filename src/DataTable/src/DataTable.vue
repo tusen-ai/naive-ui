@@ -28,48 +28,6 @@
           <slot name="append" />
         </base-table>
         <div
-          v-if="rightFixedColumns.length"
-          class="n-data-table-table-wrapper n-data-table-table-wrapper--right-fixed"
-          :class="{
-            'n-data-table-table-wrapper--active': mainTableScrollContainerWidth && mainTableScrollContainerWidth + horizontalScrollLeft < scrollX
-          }"
-        >
-          <base-table
-            ref="rightFixedTable"
-            placement="right"
-            :header-height="headerHeight"
-            :columns="rightFixedColumns"
-            :data="paginatedData"
-            :body-style="bodyStyle"
-            :row-class-name="rowClassName"
-            :tr-heights="trHeights"
-            :loading="loading"
-            :fixed="true"
-            @scroll="handleTableRightBodyScroll"
-          />
-        </div>
-        <div
-          v-if="leftFixedColumns.length"
-          class="n-data-table-table-wrapper n-data-table-table-wrapper--left-fixed"
-          :class="{
-            'n-data-table-table-wrapper--active': horizontalScrollLeft > 0
-          }"
-        >
-          <base-table
-            ref="leftFixedTable"
-            :header-height="headerHeight"
-            :columns="leftFixedColumns"
-            :data="paginatedData"
-            :body-style="bodyStyle"
-            :row-class-name="rowClassName"
-            header-ref-name="header"
-            :tr-heights="trHeights"
-            :loading="loading"
-            :fixed="true"
-            @scroll="handleTableLeftBodyScroll"
-          />
-        </div>
-        <div
           v-if="paginatedData.length === 0"
           class="n-data-table__empty"
         >
@@ -148,6 +106,9 @@ function normalizeColumn (column) {
       defaultColumn[key] = column[key]
     }
   })
+  if (!column.key && column.type === 'selection') {
+    defaultColumn.key = 'selection'
+  }
   return defaultColumn
 }
 
@@ -245,6 +206,32 @@ export default {
     }
   },
   computed: {
+    currentFixedColumnLeft () {
+      return (column) => {
+        const index = this.leftFixedColumns.indexOf(column)
+        if (index < 0) {
+          return
+        }
+        let left = 0
+        for (let i = 0; i < index; i++) {
+          left = left + this.leftFixedColumns[i].width
+        }
+        return left + 'px'
+      }
+    },
+    currentFixedColumnRight () {
+      return (column) => {
+        const index = this.rightFixedColumns.indexOf(column)
+        if (index < 0) {
+          return
+        }
+        let right = 0
+        for (let i = this.rightFixedColumns.length - 1; i > index; i--) {
+          right = right + this.rightFixedColumns[i].width
+        }
+        return right + 'px'
+      }
+    },
     normalizedColumns () {
       return this.columns
         .map(column => normalizeColumn(column))
@@ -252,12 +239,10 @@ export default {
     leftFixedColumns () {
       return this.normalizedColumns
         .filter(column => column.fixed === 'left')
-        .map(column => Object.assign({}, column, { fixed: false }))
     },
     rightFixedColumns () {
       return this.normalizedColumns
         .filter(column => column.fixed === 'right')
-        .map(column => Object.assign({}, column, { fixed: false }))
     },
     filteredData () {
       const syntheticActiveFilters = this.syntheticActiveFilters
@@ -453,6 +438,9 @@ export default {
     allRowsChecked () {
       return this.countOfCurrentPageCheckedRows === this.paginatedData.length
     }
+    // handleScroll () {
+
+    // }
   },
   watch: {
     syntheticCurrentPage () {
@@ -519,16 +507,12 @@ export default {
     getScrollElements () {
       const header = this.$refs.mainTable.getHeaderElement()
       const body = this.$refs.mainTable ? this.$refs.mainTable.getBodyElement() : null
-      const fixedLeftBody = this.$refs.leftFixedTable ? this.$refs.leftFixedTable.getBodyElement() : null
-      const fixedRightBody = this.$refs.rightFixedTable ? this.$refs.rightFixedTable.getBodyElement() : null
       return {
         header,
-        body,
-        fixedLeftBody,
-        fixedRightBody
+        body
       }
     },
-    handleMainTableHeaderScroll (e) {
+    handleMainTableHeaderScroll (e, active) {
       if (!this.scrollingPart || this.scrollingPart === 'head') {
         if (this.scrollingPart !== 'head') this.scrollingPart = 'head'
         if (this.scrollTimerId) window.clearTimeout(this.scrollTimerId)
@@ -569,9 +553,7 @@ export default {
         } = e.target
         const {
           header: headerEl,
-          body: bodyEl,
-          fixedLeftBody: leftBodyEl,
-          fixedRightBody: rightBodyEl
+          body: bodyEl
         } = this.getScrollElements()
         if (part === 'main') {
           if (headerEl) {
@@ -581,12 +563,6 @@ export default {
         }
         if (bodyEl && bodyEl.scrollTop !== scrollTop) {
           bodyEl.scrollTop = scrollTop
-        }
-        if (leftBodyEl && leftBodyEl.scrollTop !== scrollTop) {
-          leftBodyEl.scrollTop = scrollTop
-        }
-        if (rightBodyEl && rightBodyEl.scrollTop !== scrollTop) {
-          rightBodyEl.scrollTop = scrollTop
         }
         this.mainTableScrollContainerWidth = bodyEl.offsetWidth
       }

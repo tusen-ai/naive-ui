@@ -13,7 +13,7 @@
         transition: border-color .3s $--n-ease-in-out-cubic-bezier;
         border-top-left-radius: 6px;
         border-top-right-radius: 6px;
-        overflow: hidden;
+        // overflow: hidden;
         line-height: 1.5;
       }
       @include b(data-table-table-wrapper) {
@@ -21,46 +21,6 @@
           transition: border-color .3s $--n-ease-in-out-cubic-bezier;
         }
         background-color: $--data-table-body-background-color;
-        @include m(left-fixed) {
-          @include once {
-            left: 0;
-          }
-          border-right: 1px solid $--data-table-border-color;
-          @include m(active) {
-            @include once {
-              transition: box-shadow 0.2s;
-            }
-            box-shadow: $--data-table-fixed-column-box-shadow
-          }
-        }
-        @include m(right-fixed) {
-          @include once {
-            right: 0;
-          }
-          border-left: 1px solid $--data-table-border-color;
-          @include m(active) {
-            box-shadow: $--data-table-fixed-column-box-shadow
-          }
-        }
-        @include once {
-          @include m(left-fixed, right-fixed) {
-            border-radius: 0;
-            top: 0;
-            bottom: 0;
-            position: absolute;
-            display: inline-block;
-            overflow: hidden;
-            transition:
-              box-shadow .3s $--n-ease-in-out-cubic-bezier,
-              border-color .3s $--n-ease-in-out-cubic-bezier;
-            @include b(data-table-base-table-wrapper) {
-              position: relative;
-              @include b(data-table-table) {
-                width: unset;
-              }
-            }
-          }
-        }
       }
     }
     @include b(data-table-table) {
@@ -82,8 +42,12 @@
       }
       @include b(data-table-tbody) {
         @include b(data-table-tr) {
+          color: red;
           &:hover {
             background-color: map-get($--data-table-row-background-color, 'hover');
+            @include b(data-table-td) {
+              background-color: map-get($--data-table-row-background-color, 'hover');
+            }
           }
           @include m(hover) {
             background-color: map-get($--data-table-row-background-color, 'hover');
@@ -105,13 +69,52 @@
           border: none;
           transition:
             border-color .3s $--n-ease-in-out-cubic-bezier,
+            background-color .3s $--n-ease-in-out-cubic-bezier,
             color .3s $--n-ease-in-out-cubic-bezier;
           @include m(ellipsis) {
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
           }
+          @include m(fixed-left) {
+            left: 0;
+            position: sticky;
+          }
+          @include m(fixed-right) {
+            right: 0;
+            position: sticky;
+          }
         }
+        @include m(shadow-before) {
+          border-left: 1px solid $--data-table-border-color;
+          background-color: $--data-table-body-background-color;
+          &::before {
+            content: "";
+            width: 16px;
+            display: inline-block;
+            box-shadow: inset -16px 0 12px -16px $--data-table-fixed-column-box-shadow-color;
+            position: absolute;
+            left: -16px;
+            top: 0;
+            bottom: 0;
+            transition: box-shadow 0.2s;
+          }
+        }
+        @include m(shadow-after) {
+          border-right: 1px solid $--data-table-border-color;
+          background-color: $--data-table-body-background-color;
+          &::before {
+            content: "";
+            width: 16px;
+            display: inline-block;
+            box-shadow: inset 16px 0 12px -16px $--data-table-fixed-column-box-shadow-color;
+            position: absolute;
+            right: -16px;
+            top: 0;bottom: 0;
+            transition: box-shadow 0.2s;
+          }
+        }
+        border-color: $--data-table-border-color;
         color: $--data-table-body-text-color;
         border-bottom: 1px solid $--data-table-border-color;
       }
@@ -133,13 +136,54 @@
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
-          }
+          }          
         }
+        border-color: $--data-table-border-color;
         color: $--data-table-header-text-color;
         @include m(sortable) {
           cursor: pointer;
           &:hover {
             background-color: map-get($--data-table-header-cell-background-color, 'hover');
+          }
+        }
+        @include m(fixed-left) {
+          left: 0;
+          position: sticky;
+          z-index: 1;
+          background-color: $--data-table-header-fixed-background-color;
+        }
+        @include m(fixed-right) {
+          right: 0;
+          position: sticky;
+          z-index: 1;
+          background-color: $--data-table-header-fixed-background-color;
+        }
+        @include m(shadow-before) {
+          border-left: 1px solid $--data-table-border-color;
+          &::before {
+            content: "";
+            width: 16px;
+            display: inline-block;
+            box-shadow: inset -16px 0 12px -16px $--data-table-fixed-column-box-shadow-color;
+            position: absolute;
+            left:-16px;
+            top: 0;
+            bottom: 0;
+            transition: box-shadow 0.2s;
+          }
+        }
+        @include m(shadow-after) {
+          border-right: 1px solid $--data-table-border-color;
+          &::before {
+            content: "";
+            width: 16px;
+            display: inline-block;
+            box-shadow: inset 16px 0 12px -16px $--data-table-fixed-column-box-shadow-color;
+            position: absolute;
+            right: -16px;
+            top: 0;
+            bottom: 0;
+            transition: box-shadow 0.2s;
           }
         }
       }
@@ -178,6 +222,9 @@
         }
       }
     }
+    @include b(scrollbar-content) {
+      overflow: unset;
+    }
   }
   @include b(data-table) {
     @include once {
@@ -192,7 +239,6 @@
     }
     @include b(data-table-base-table-header) {
       @include once {
-        overflow: scroll;
         transition: border-color .3s $--n-ease-in-out-cubic-bezier;
         &::-webkit-scrollbar {
           width: 0;
@@ -287,4 +333,14 @@
       }
     }
   }
+}
+@function mix-color-with-alpha-color ($color, $alpha-color) {
+  $alpha-color-weight: percentage(alpha($alpha-color));
+  $temp-color-1: scale-color($color, $lightness: -$alpha-color-weight);
+  $temp-color-2: scale-color($alpha-color, $lightness: -(100% - $alpha-color-weight));
+  @return rgb(
+    red($temp-color-1) + red($temp-color-2),
+    green($temp-color-1) + green($temp-color-2),
+    blue($temp-color-1) + blue($temp-color-2)
+  );
 }
