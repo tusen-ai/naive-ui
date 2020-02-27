@@ -152,7 +152,7 @@
         }
         @include e(main) {
           @include once {
-            font-weight: 500;
+            font-weight: $--n-strong-weight;
             font-size: 18px;
             transition: color .3s $--n-ease-in-out-cubic-bezier;
             flex: 1;

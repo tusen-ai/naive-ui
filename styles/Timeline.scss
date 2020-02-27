@@ -78,7 +78,7 @@
           @include once {
             transition: color .3s $--n-ease-in-out-cubic-bezier;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: $--n-strong-weight;
             margin-bottom: 6px;
           }
           color: $--timeline-item-title-color;

@@ -24,7 +24,7 @@
         margin-left: 12px;
         margin-right: 12px;
         white-space: nowrap;
-        font-weight: 500;
+        font-weight: $--n-strong-weight;
       }
       @include m(title-position-left) {
         @include e(line) {

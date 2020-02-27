@@ -90,6 +90,9 @@
         @include b(submenu) {
           cursor: pointer;
           position: relative; 
+          @include b(menu-item-content) {
+            height: 48px;
+          }
           @include b(submenu-content) {
             padding: 0;
             list-style: none;
