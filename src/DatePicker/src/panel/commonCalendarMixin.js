@@ -69,6 +69,14 @@ export default {
         e.preventDefault()
         this.$emit('tab-out')
       }
+    },
+    handlePanelFocus (e) {
+      if (
+        e.target === this.$el &&
+        this.$el.contains(e.relatedTarget)
+      ) {
+        this.$emit('tab-out')
+      }
     }
   }
 }

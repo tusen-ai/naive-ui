@@ -9,6 +9,7 @@
         [`n-${theme}-theme`]: theme
       }"
       @click.prevent="() => {}"
+      @focus="handlePanelFocus"
       @keydown="handlePanelKeyDown"
     >
       <div style="width: 100%; height: 12px" />

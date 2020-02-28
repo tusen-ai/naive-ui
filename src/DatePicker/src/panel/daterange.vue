@@ -10,6 +10,7 @@
       }"
       @click.capture="resetSelectingStatus"
       @keydown="handlePanelKeyDown"
+      @focus="handlePanelFocus"
     >
       <div
         ref="startDates"

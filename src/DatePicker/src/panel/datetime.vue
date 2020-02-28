@@ -9,6 +9,7 @@
         [`n-${theme}-theme`]: theme
       }"
       @keydown="handlePanelKeyDown"
+      @focus="handlePanelFocus"
     >
       <div
         class="n-date-panel-input-wrapper"
