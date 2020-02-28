@@ -208,7 +208,6 @@ export default {
   },
   computed: {
     styleScrollX () {
-      console.log('formatLength(this.scrollX)', formatLength(this.scrollX))
       return formatLength(this.scrollX)
     },
     currentFixedColumnLeft () {

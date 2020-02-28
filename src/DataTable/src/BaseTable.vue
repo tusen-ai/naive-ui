@@ -9,7 +9,7 @@
       :fixed="fixed"
       :scroll-x="scrollX"
       @scroll="handleHeaderScroll"
-      @set-active="setActive"
+      @set-active-fixed-column="setActiveFixedColumn"
     />
     <table-body
       ref="body"
@@ -106,9 +106,9 @@ export default {
     handleHeaderScroll (...args) {
       this.$emit('header-scroll', ...args)
     },
-    setActive (activeLeft, activeRight) {
-      this.$refs.body.activeLeft = activeLeft
-      this.$refs.body.activeRight = activeRight
+    setActiveFixedColumn (leftActiveFixedColumn, rightActiveFixedColumn) {
+      this.$refs.body.activeLeft = leftActiveFixedColumn
+      this.$refs.body.activeRight = rightActiveFixedColumn
     }
   }
 }

@@ -1,0 +1,10 @@
+@function mix-color-with-alpha-color ($color, $alpha-color) {
+  $alpha-color-weight: percentage(alpha($alpha-color));
+  $temp-color-1: scale-color($color, $lightness: -$alpha-color-weight);
+  $temp-color-2: scale-color($alpha-color, $lightness: -(100% - $alpha-color-weight));
+  @return rgb(
+    red($temp-color-1) + red($temp-color-2),
+    green($temp-color-1) + green($temp-color-2),
+    blue($temp-color-1) + blue($temp-color-2)
+  );
+}

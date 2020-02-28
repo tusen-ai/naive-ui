@@ -41,8 +41,8 @@
                 'n-data-table-th--sortable': isColumnSortable(column),
                 'n-data-table-th--ellipsis': column.ellipsis,
                 [`n-data-table-th--fixed-${column.fixed}`]: column.fixed,
-                'n-data-table-th--shadow-after': activeLeft[column.key],
-                'n-data-table-th--shadow-before': activeRight[column.key]
+                'n-data-table-th--shadow-after': leftActiveFixedColumn[column.key],
+                'n-data-table-th--shadow-before': rightActiveFixedColumn[column.key]
               }"
               @click="handleHeaderClick($event, column)"
             >
@@ -155,8 +155,8 @@ export default {
   },
   data: function () {
     return {
-      activeLeft: [],
-      activeRight: []
+      leftActiveFixedColumn: [],
+      rightActiveFixedColumn: []
     }
   },
   computed: {
@@ -211,7 +211,7 @@ export default {
   mounted () {
     this.setActiveRight(this.$refs.body)
     this.setActiveLeft(this.$refs.body)
-    this.$emit('set-active', this.activeLeft, this.activeRight)
+    this.$emit('set-active-fixed-column', this.leftActiveFixedColumn, this.rightActiveFixedColumn)
   },
   methods: {
     isColumnSortable,
@@ -220,7 +220,7 @@ export default {
     handleScroll (e) {
       this.setActiveRight(e.target)
       this.setActiveLeft(e.target)
-      this.$emit('set-active', this.activeLeft, this.activeRight)
+      this.$emit('set-active-fixed-column', this.leftActiveFixedColumn, this.rightActiveFixedColumn)
       this.$emit('scroll', e)
     },
     handleCheckboxInput (column) {
@@ -246,9 +246,9 @@ export default {
       const tableWidth = this.$refs.table.offsetWidth
       const scrollWidth = target.scrollWidth
       for (let i = 0; i < rightFixedColumns.length; i++) {
-        this.activeRight = {}
+        this.rightActiveFixedColumn = {}
         if (scrollLeft + this.fixedColumnsRight[rightFixedColumns[i].key] + tableWidth < scrollWidth) {
-          this.activeRight[rightFixedColumns[i].key] = true
+          this.rightActiveFixedColumn[rightFixedColumns[i].key] = true
           break
         }
       }
@@ -259,12 +259,12 @@ export default {
       let leftWidth = 0
       for (let i = 0; i < leftFixedColumns.length; i++) {
         if (scrollLeft > this.fixedColumnsLeft[leftFixedColumns[i].key] - leftWidth) {
-          this.activeLeft = {}
-          this.activeLeft[leftFixedColumns[i].key] = true
+          this.leftActiveFixedColumn = {}
+          this.leftActiveFixedColumn[leftFixedColumns[i].key] = true
           leftWidth = leftWidth + leftFixedColumns[i].width
           continue
         } else if (i === 0) {
-          this.activeLeft = {}
+          this.leftActiveFixedColumn = {}
         } else {
           break
         }
