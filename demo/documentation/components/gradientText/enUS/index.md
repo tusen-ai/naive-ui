@@ -13,7 +13,7 @@ custom
 |Name|Type|Default|Description|
 |-|-|-|-|
 |type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`||**required**|
-|size|`number`|`null`||
+|size|`number \| string`|`null`||
 |gradient|`string \| object`|`null`||
 
 ## Slots

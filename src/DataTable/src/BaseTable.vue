@@ -9,6 +9,7 @@
       :fixed="fixed"
       :scroll-x="scrollX"
       @scroll="handleHeaderScroll"
+      @set-active-fixed-column="setActiveFixedColumn"
     />
     <table-body
       ref="body"
@@ -48,7 +49,7 @@ export default {
       default: null
     },
     scrollX: {
-      type: Number,
+      type: [Number, String],
       default: null
     },
     bodyMinHeight: {
@@ -104,6 +105,10 @@ export default {
     },
     handleHeaderScroll (...args) {
       this.$emit('header-scroll', ...args)
+    },
+    setActiveFixedColumn (leftActiveFixedColumn, rightActiveFixedColumn) {
+      this.$refs.body.activeLeft = leftActiveFixedColumn
+      this.$refs.body.activeRight = rightActiveFixedColumn
     }
   }
 }

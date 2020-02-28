@@ -7,7 +7,7 @@
       [`n-${theme}-theme`]: theme
     }"
     :style="{
-      width: width && (width + 'px')
+      width: styleWidth
     }"
     @keyup.up.stop="handleKeyUpUp"
     @keyup.down.stop="handleKeyUpDown"
@@ -105,6 +105,7 @@ import {
   flattenOptions,
   OPTION_TYPE
 } from '../../../_utils/component/select'
+import formatLength from '../../../_utils/css/formatLength'
 
 export default {
   name: 'NBaseSelectMenu',
@@ -156,7 +157,7 @@ export default {
       required: true
     },
     width: {
-      type: Number,
+      type: [Number, String],
       default: null
     },
     autoPendingFirstOption: {
@@ -221,6 +222,9 @@ export default {
         pendingWrappedOption.data &&
         pendingWrappedOption.data.value
       ) || null
+    },
+    styleWidth () {
+      return formatLength(this.width)
     }
   },
   watch: {

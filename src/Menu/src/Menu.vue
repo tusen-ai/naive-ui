@@ -49,11 +49,11 @@ export default {
       default: null
     },
     overlayWidth: {
-      type: Number,
+      type: [Number, String],
       default: null
     },
     overlayMinWidth: {
-      type: Number,
+      type: [Number, String],
       default: 180
     },
     rootIndent: {

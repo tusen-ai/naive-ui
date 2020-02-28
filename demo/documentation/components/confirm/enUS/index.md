@@ -20,12 +20,12 @@ use-component
 |Name|Type|Default|Description|
 |-|-|-|-|
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
-|title|`string \| function`|`null`|Can be a render function.|
+|title|`string \| (function:() => VNode\|Array<VNode>)`|`null`|Can be a render function.|
 |closable|`boolean`|`boolean`||
-|icon|`function`|`null`|Should be a render function.|
+|icon|`(function:() => VNode\|Array<VNode>)`|`null`|Should be a render function.|
 |negative-text|`string`|`null`|Corresponding button won't show if not set.|
 |positive-text|`string`|`null`|Corresponding button won't show if not set.|
-|content|`string \| function`|`null`|Can be a render function.|
+|content|`string \| (function:() => VNode\|Array<VNode>)`|`null`|Can be a render function.|
 |show-icon|`boolean`|`true`||
 |loading|`boolean`|`false`||
 |bordered|`boolean`|`false`||
@@ -40,12 +40,12 @@ Properties of ConfirmEnvironment can be modified
 |Name|Type|Description|
 |-|-|-|
 |type|`'error \| 'success' \| 'warning'`||
-|title|`string \| function`|Can be a render function.|
+|title|`string \| (function:() => VNode\|Array<VNode>)`|Can be a render function.|
 |closable|`boolean`||
-|icon|`function`|Should be a render function.|
+|icon|`(function:() => VNode\|Array<VNode>)`|Should be a render function.|
 |negative-text|`string`|Corresponding button won't show if not set.|
 |positive-text|`string`|Corresponding button won't show if not set.|
-|content|`string \| function`|Can be a render function.|
+|content|`string \| (function:() => VNode\|Array<VNode>)`|Can be a render function.|
 |show-icon|`boolean`||
 |loading|`boolean`||
 |bordered|`boolean`||
@@ -63,12 +63,12 @@ Properties of ConfirmEnvironment can be modified
 |Name|Type|Default|Description|
 |-|-|-|-|
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
-|title|`string \| function`|`null`|Can be a render function.|
+|title|`string \| (function:() => VNode\|Array<VNode>)`|`null`|Can be a render function.|
 |closable|`boolean`|`boolean`||
-|icon|`function`|`null`|Should be a render function|
+|icon|`(function:() => VNode\|Array<VNode>)`|`null`|Should be a render function|
 |negative-text|`string`|`null`|Corresponding button won't show if not set.|
 |positive-text|`string`|`null`|Corresponding button won't show if not set.|
-|content|`string \| function`|`null`|Can be a render function.|
+|content|`string \| (function:() => VNode\|Array<VNode>)`|`null`|Can be a render function.|
 |show-icon|`boolean`|`true`||
 |loading|`boolean`|`false`||
 |bordered|`boolean`|`false`||

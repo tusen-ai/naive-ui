@@ -15,8 +15,8 @@ multiple
 |-|-|-|-|
 |show|`boolean`|`false`||
 |placement|`'top' \| 'right' \| 'bottom' \| 'left'`|`'right'`||
-|width|`number`|`251`||
-|height|`number`|`251`|在位置是 `top` 和 `bottom` 时生效|
+|width|`number \| string`|`251`||
+|height|`number \| string`|`251`|在位置是 `top` 和 `bottom` 时生效|
 |mask-closable|`boolean`|`true`|点击遮罩时是否发出 `hide` 事件|
 |drawer-style|`object`|`null`||
 
