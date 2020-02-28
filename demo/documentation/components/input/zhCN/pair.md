@@ -17,7 +17,7 @@ export default {
   data () {
     return {
       placeholder: ['从', '到'],
-      value: [0, 100]
+      value: ['0', '100']
     }
   },
   methods: {

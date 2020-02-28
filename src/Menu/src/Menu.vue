@@ -26,7 +26,7 @@ export default {
       NSubmenu: null
     }
   },
-  mixins: [withapp, themeable],
+  mixins: [ withapp, themeable ],
   model: {
     prop: 'value',
     model: 'select'
