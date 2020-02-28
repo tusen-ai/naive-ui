@@ -464,7 +464,7 @@ export default function (locale, instance) {
           {
             name: 'Popselect',
             title: '弹出选择',
-            titleExtra: 'Popconfirm',
+            titleExtra: 'Popselect',
             path: `/${instance.lang}/${instance.theme}/doc` + '/n-popselect'
           },
           {

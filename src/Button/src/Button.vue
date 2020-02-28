@@ -192,10 +192,6 @@ export default {
       validator (iconPlacement) {
         return ['left', 'right'].includes(iconPlacement)
       }
-    },
-    hollowText: {
-      type: Boolean,
-      default: false
     }
   },
   data () {
@@ -215,8 +211,15 @@ export default {
     noTextContent () {
       return this.circle || !this.$slots.default
     },
-    avoidHollowout () {
-      return !this.hollowText
+    avoidHollowOut () {
+      return (
+        this.text ||
+        this.ghost ||
+        this.type === 'default'
+      )
+    },
+    hollowText () {
+      return !this.avoidHollowOut
     },
     syntheticFocusable () {
       return this.focusable && !this.disabled

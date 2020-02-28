@@ -105,10 +105,10 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
-.root-layout.n-light-theme {
-  background-color: white !important;
+.root-layout.n-layout.n-light-theme {
+  background-color: white;
 }
-.home-layout.n-light-theme {
-  background-color: white !important;
+.home-layout.n-layout.n-light-theme {
+  background-color: white;
 }
 </style>
