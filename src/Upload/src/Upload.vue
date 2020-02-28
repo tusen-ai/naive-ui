@@ -64,7 +64,7 @@ function XHRHandlers (componentInstance, file, XHR) {
         file: null
       })
       XHRMap.delete(file.id)
-      fileAfterChange = componentInstance.onFinish(fileAfterChange, XHR.response) || fileAfterChange
+      componentInstance.onFinish(fileAfterChange, XHR.response)
       change(fileAfterChange, e)
     },
     handleXHRAbort (e) {
@@ -216,11 +216,11 @@ export default {
     },
     onRemove: {
       type: Function,
-      default: () => true
+      default: () => {}
     },
     onFinish: {
       type: Function,
-      default: file => file
+      default: () => {}
     },
     onDownload: {
       /** currently of no usage */

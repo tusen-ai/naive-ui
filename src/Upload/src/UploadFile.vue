@@ -146,23 +146,18 @@ export default {
       const NUpload = this.NUpload
       const XHRMap = NUpload.XHRMap
       const change = NUpload.change
-      Promise.resolve(
-        NUpload.onRemove(
-          Object.assign({}, file),
-          NUpload.syntheticFileList
-        )
-      ).then(
-        result => {
-          if (result === false) return
-          const fileAfterChange = Object.assign({}, file, {
-            status: 'removed'
-          })
-          XHRMap.delete(file.id)
-          change(fileAfterChange, undefined, {
-            remove: true
-          })
-        }
+      // Promise.resolve(
+      NUpload.onRemove(
+        Object.assign({}, file),
+        NUpload.syntheticFileList
       )
+      const fileAfterChange = Object.assign({}, file, {
+        status: 'removed'
+      })
+      XHRMap.delete(file.id)
+      change(fileAfterChange, undefined, {
+        remove: true
+      })
     },
     handleDownload (file) {
       const NUpload = this.NUpload

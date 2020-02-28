@@ -33,12 +33,12 @@ duration
 
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|avatar|`string \| function`|`null`|可以是 render 函数|
-|title|`string \| function`|`null`|可以是 render 函数|
-|description|`string \| function`|`null`|可以是 render 函数|
-|content|`string \| function`|`null`|可以是 render 函数|
-|meta|`string \| function`|`null`|可以是 render 函数|
-|action|`string \| function`|`null`|可以是 render 函数|
+|avatar|`string \| (function:() => VNode\|Array<VNode>)`|`null`|可以是 render 函数|
+|title|`string \| (function:() => VNode\|Array<VNode>)`|`null`|可以是 render 函数|
+|description|`string \| (function:() => VNode\|Array<VNode>)`|`null`|可以是 render 函数|
+|content|`string \| (function:() => VNode\|Array<VNode>)`|`null`|可以是 render 函数|
+|meta|`string \| (function:() => VNode\|Array<VNode>)`|`null`|可以是 render 函数|
+|action|`string \| (function:() => VNode\|Array<VNode>)`|`null`|可以是 render 函数|
 |closable|`boolean`|`true`||
 |onClose|`(next: function) => any`|`next => next()`|只有调用了 next 通知才会被关闭|
 |onAfterHide|`function`|`null`||
@@ -51,12 +51,12 @@ NofiticationEnvironment 实例的属性可以被动态改变。
 
 |名称|类型|说明|
 |-|-|-|
-|avatar|`string \| function`|可以是 render 函数|
-|title|`string \| function`|可以是 render 函数|
-|description|`string \| function`|可以是 render 函数|
-|content|`string \| function`|可以是 render 函数|
-|meta|`string \| function`|可以是 render 函数|
-|action|`string \| function`|可以是 render 函数|
+|avatar|`string \| (function:() => VNode\|Array<VNode>)`|可以是 render 函数|
+|title|`string \| (function:() => VNode\|Array<VNode>)`|可以是 render 函数|
+|description|`string \| (function:() => VNode\|Array<VNode>)`|可以是 render 函数|
+|content|`string \| (function:() => VNode\|Array<VNode>)`|可以是 render 函数|
+|meta|`string \| (function:() => VNode\|Array<VNode>)`|可以是 render 函数|
+|action|`string \| (function:() => VNode\|Array<VNode>)`|可以是 render 函数|
 |closable|`boolean`||
 |onClose|`(next: function) => any`|点击了关闭按钮的回调。只有调用了 next 通知才会被关闭|
 |onHide|`function`||
