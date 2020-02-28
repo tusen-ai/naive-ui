@@ -33,10 +33,10 @@ ajaxUsage
 |-|-|-|-|
 |data|`Array<object>`|`[]`|Data to display|
 |columns|`Array<Column>`||Columns to display, **required**|
-|max-height|`number`|`null`|The max-height of the table. If content height is larger than it, the header will be fixed at top|
-|min-height|`number`|`null`|The min-height of the table.|
+|max-height|`number \| string`|`null`|The max-height of the table. If content height is larger than it, the header will be fixed at top|
+|min-height|`number \| string`|`null`|The min-height of the table.|
 |loading|`boolean`|`false`||
-|scroll-x|`number`|`null`|If columns are horizontal fixed, scroll-x need to be set|
+|scroll-x|`number \| string`|`null`|If columns are horizontal fixed, scroll-x need to be set|
 |pagination|`false \| object`|`false`|See [Pagination props](n-pagination#Props)|
 |paging|`boolean`|If data-table do automatic paging. You may set it to `false` in async usage.|
 |row-class-name|`string \| (rowData: object, index : number) => string \| object`|`null`||
@@ -77,7 +77,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 |align|`'left' \| 'right' \| 'center'`|`'left'`|Text align in column|
 |ellipsis|`boolean`|`false`||
 |className|`string`|`null`||
-|title|`string \| function`|`null`|Can be a render function|
+|title|`string \| (function:() => VNode\|Array<VNode>)`|`null`|Can be a render function|
 |key|`string`||Unique key of this column, **required** when table's row-key is not set.|
 |sorter|`boolean \| function \| 'default'`|`false`|The sorter of the column. If set `'default'`, it will use a basic builtin compare function. If set to `true`, it will only display sort icon on the column, which can be used in async status. Otherwise it works like `Array.sort`'s compare function.|
 |defaultSortOrder|`'descend' \| 'ascend' \| false`|`false`|The default sort order of the table in uncontrolled manner|

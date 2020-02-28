@@ -41,6 +41,7 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asthemecontext from '../../_mixins/asthemecontext'
 import NBasePortal from '../../_base/Portal'
+import formatLength from '../../_utils/css/formatLength'
 
 export default {
   name: 'NBackTop',
@@ -50,11 +51,11 @@ export default {
   mixins: [withapp, themeable, asthemecontext],
   props: {
     right: {
-      type: Number,
+      type: [Number, String],
       default: 40
     },
     bottom: {
-      type: Number,
+      type: [Number, String],
       default: 40
     },
     target: {
@@ -76,10 +77,10 @@ export default {
   },
   computed: {
     styleRight () {
-      return this.right + 'px'
+      return formatLength(this.right)
     },
     styleBottom () {
-      return this.bottom + 'px'
+      return formatLength(this.bottom)
     },
     show () {
       if (this.scrollTop >= this.visibilityHeight) {
@@ -106,10 +107,14 @@ export default {
   },
   methods: {
     init () {
+      this.container = getScrollParent(this.$el)
       if (this.target) {
-        this.container = this.target()
-      } else {
-        this.container = getScrollParent(this.$el)
+        const target = this.target()
+        if (target instanceof Element) {
+          this.container = target
+        } else {
+          console.error('[naive-ui/Anchor]: target is not a element')
+        }
       }
       if (this.container) {
         this.container.addEventListener('scroll', this.handleScroll)

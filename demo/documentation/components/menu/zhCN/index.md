@@ -22,8 +22,8 @@ collapse
 |collapsed-width|`number`|`null`|折叠后菜单的宽度|
 |icon-size|`number`|`20`|菜单未折叠时图标的大小|
 |collapsed-icon-size|`number`|`null`|菜单折叠时图标的大小，如果为设定则使用 `icon-size` 代替|
-|overlay-width|`number`|`null`|弹出子菜单的宽度，只在菜单为水平或者折叠时生效|
-|overlay-min-width|`number`|`180`|弹出子菜单的最小宽度，只在菜单为水平或者折叠时生效|
+|overlay-width|`number \| string`|`null`|弹出子菜单的宽度，只在菜单为水平或者折叠时生效|
+|overlay-min-width|`number \| string`|`180`|弹出子菜单的最小宽度，只在菜单为水平或者折叠时生效|
 |root-indent|`number`|`null`|菜单第一级的缩进，如果没有设定，使用 `indent` 代替|
 |indent|`number`|`32`|菜单每级的缩进|
 |default-open-names|`Array<string>`|`[]`|在非受控状态下默认展开的子菜单标识符数组|

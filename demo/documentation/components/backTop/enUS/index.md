@@ -15,8 +15,8 @@ targetContainerSelector
 |Name|Type|Default|Description|
 |-|-|-|-|
 |target|`() => HTMLElement`|a function that returns the nearest scrollable ascendant element||
-|right|`number`|`40`||
-|bottom|`number`|`40`||
+|right|`number \| string`|`40`||
+|bottom|`number \| string`|`40`||
 |visibility-height|`number`|`180`||
 |themed-style|`object`|`null`||
 

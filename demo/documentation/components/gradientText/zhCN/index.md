@@ -12,7 +12,7 @@ custom
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`||**必需**|
-|size|`number`|`null`||
+|size|`number \| string`|`null`||
 |gradient|`string \| object`|`null`||
 
 ## Slots

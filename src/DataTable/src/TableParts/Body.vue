@@ -4,14 +4,14 @@
     class="n-data-table-base-table-body"
     :style="style"
     :content-style="{
-      minWidth: scrollX && `${scrollX}px`
+      minWidth: scrollX
     }"
     :horizontal-rail-style="{ zIndex: 1 }"
     :vertical-rail-style="{ zIndex: 1 }"
     :show-rail="!fixed"
     @scroll="handleScroll"
   >
-    <table class="n-data-table-table">
+    <table ref="body" class="n-data-table-table">
       <colgroup>
         <col
           v-for="(column, index) in columns"
@@ -29,7 +29,7 @@
           }"
           :class="Object.assign(
             {
-              'n-data-table-tr--hover': hoveringRowIndex === index
+              'n-data-table-tr--hover': hoveringRowIndex === index,
             },
             createClassObject(typeof rowClassName === 'function'
               ? createClassObject(rowClassName(rowData, index))
@@ -42,13 +42,18 @@
             <td
               :key="column.key"
               :style="{
-                textAlign: column.align || null
+                textAlign: column.align || null,
+                left: NDataTable.currentFixedColumnLeft(column),
+                right: NDataTable.currentFixedColumnRight(column)
               }"
               class="n-data-table-td"
               :class="{
                 'n-data-table-td--ellipsis': column.ellipsis,
                 [`n-data-table-td--${column.align}-align`]: column.align,
-                ...(column.className && createClassObject(column.className))
+                ...(column.className && createClassObject(column.className)),
+                [`n-data-table-td--fixed-${column.fixed}`]: column.width && column.fixed,
+                'n-data-table-td--shadow-after': activeLeft[column.key],
+                'n-data-table-td--shadow-before': activeRight[column.key]
               }"
             >
               <n-checkbox
@@ -98,7 +103,7 @@ export default {
       default: null
     },
     scrollX: {
-      type: Number,
+      type: [Number, String],
       default: null
     },
     fixed: {
@@ -132,6 +137,13 @@ export default {
     loading: {
       type: Boolean,
       default: false
+    }
+
+  },
+  data () {
+    return {
+      activeLeft: {},
+      activeRight: {}
     }
   },
   computed: {

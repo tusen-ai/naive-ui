@@ -23,8 +23,8 @@ about-theme
 ### MessageOption Type
 |名称|类型|说明|
 |-|-|-|
-|content|`string \| function`|Can be a render function|
-|icon|`string \| function`|Can be a render function|
+|content|`string \| (function:() => VNode\|Array<VNode>)`|可以是 render 函数|
+|icon|`string \| (function:() => VNode)`|可以是 render 函数|
 |onHide|`function`||
 |onAfterHide|`function`||
 
@@ -32,8 +32,8 @@ about-theme
 #### MessageEnvironment Properties
 |名称|类型|说明|
 |-|-|-|
-|content|`string \| function`|Can be a render function|
-|icon|`string \| function`|Can be a render function|
+|content|`string \| (function:() => VNode\|Array<VNode>)`|可以是 render 函数n|
+|icon|`string \| (function:() => VNode)`|可以是 render 函数|
 |type|`'info' \| 'success' \| 'warning' \| 'error' \| 'loading'`||
 |onHide|`function`||
 |onAfterHide|`function`||

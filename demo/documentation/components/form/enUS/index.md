@@ -14,7 +14,7 @@ async
 |Name|Type|Default|Description|
 |-|-|-|-|
 |inline|`boolean`|`false`||
-|label-width|`number`|`null`|The width of label. Can be useful when `label-placement` is `'left'`.|
+|label-width|`number \| string`|`null`|The width of label. Can be useful when `label-placement` is `'left'`.|
 |label-align|`'left' \| 'right'`|`'left'`|Text align in label.|
 |label-placement|`'left' \| 'top'`|`'top'`||
 |model|`object`|`{}`|The object to get collected value from form items.|
@@ -35,7 +35,7 @@ async
 |Name|Type|Default|Description|
 |-|-|-|-|
 |label|`string`|`null`||
-|label-width|`number`|`null`|If not set, use label-align from wrapper form.|
+|label-width|`number \| string`|`null`|If not set, use label-align from wrapper form.|
 |label-style|`object`|`{}`||
 |label-align|`'left' \| 'right'`|`null`|Text align in label. If not set, use label-align from wrapper form.|
 |label-placement|`'left' \| 'top'`|`null`|If not set, use label-placement from wrapper form.|

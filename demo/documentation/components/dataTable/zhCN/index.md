@@ -33,10 +33,10 @@ ajaxUsage
 |-|-|-|-|
 |data|`Array<object>`|`[]`|需要展示的数据|
 |columns|`Array<Column>`||需要展示的列，**必需**|
-|max-height|`number`|`null`|表格的最大高度，如果内容高度高于它，那么表头将固定|
-|min-height|`number`|`null`|表格的最低高度|
+|max-height|`number \| string`|`null`|表格的最大高度，如果内容高度高于它，那么表头将固定|
+|min-height|`number \| string`|`null`|表格的最低高度|
 |loading|`boolean`|`false`||
-|scroll-x|`number`|`null`|表格内容的横向宽度，如果列被水平固定了，则需要设定它|
+|scroll-x|`number \| string`|`null`|表格内容的横向宽度，如果列被水平固定了，则需要设定它|
 |pagination|`false \| object`|`false`|属性参考 [Pagination props](n-pagination#Props)|
 |paging|`boolean`|表格是否自动分页数据，在异步的状况下你可呢个要把它设为 `false`|
 |row-class-name|`string \| (rowData: object, index : number) => string \| object`|`null`||
@@ -77,7 +77,7 @@ ajaxUsage
 |align|`'left' \| 'right' \| 'center'`|`'left'`|列内的文本排列|
 |ellipsis|`boolean`|`false`||
 |className|`string`|`null`||
-|title|`string \| function`|`null`|可以是渲染函数|
+|title|`string \| (function:() => VNode\|Array<VNode>)`|`null`|可以是渲染函数|
 |key|`string`||这一列的 key，在表格未设定 row-key 的时候是**必须**的。|
 |sorter|`boolean \| function \| 'default'`|`false`|这一列的排序方法。如果设为 `'default'` 表格将会使用一个内置的排序函数；如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。其他情况下它工作的方式类似   `Array.sort` 的对比函数|
 |defaultSortOrder|`'descend' \| 'ascend' \| false`|`false`|非受控状态下表格默认的排序方式|

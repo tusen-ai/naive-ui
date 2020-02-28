@@ -21,7 +21,7 @@ multiple
 |-|-|-|-|
 |value|`string \| number`|||
 |options|`Array`|||
-|width|`number`|||
+|width|`number \| string`|||
 |multiple|`boolean`|||
 |cancelable|`boolean`|||
 |controller|`Object`|||

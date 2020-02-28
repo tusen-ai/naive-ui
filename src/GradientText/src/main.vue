@@ -18,6 +18,7 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import formatLength from '../../_utils/css/formatLength'
 
 export default {
   name: 'NGradientText',
@@ -51,7 +52,7 @@ export default {
     },
     styleFontSize () {
       let fontSize = this.size || this.fontSize
-      if (fontSize) fontSize = fontSize + 'px'
+      if (fontSize) fontSize = formatLength(fontSize)
       return fontSize || null
     },
     styleBackgroundImage () {

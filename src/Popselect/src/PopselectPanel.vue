@@ -38,7 +38,7 @@ export default {
       default: false
     },
     width: {
-      type: Number,
+      type: [Number, String],
       default: null
     },
     options: {
