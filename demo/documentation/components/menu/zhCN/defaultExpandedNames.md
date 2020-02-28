@@ -1,10 +1,10 @@
 # 展开子菜单
-你可以设定 `default-open-names` 让菜单工作在非受控状态下或者使用 `open-names` 和 `@open-names-change` 以受控的方式控制菜单。
+你可以设定 `default-expanded-names` 让菜单工作在非受控状态下或者使用 `expanded-names` 和 `@expanded-names-change` 以受控的方式控制菜单。
 ```html
 <n-menu
   v-model="activeName"
-  :default-open-names="defaultExpandedNames"
-  @open-names-change="handleExpandedNamesChange"
+  :default-expanded-names="defaultExpandedNames"
+  @expanded-names-change="handleExpandedNamesChange"
   @select="handleSelect"
 >
   <n-menu-item title="且听风吟" name="hear-the-wind-sing">

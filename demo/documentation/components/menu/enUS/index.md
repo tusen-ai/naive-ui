@@ -26,8 +26,8 @@ collapse
 |overlay-min-width|`number`|`180`|The min width of submenu popover. Works when menu is horizontal or collapsed.|
 |root-indent|`number`|`null`|The indent of menu's first level children. If not set, menu will use `indent` in place of it.|
 |indent|`number`|`32`|The indend of menu|
-|default-open-names|`Array<string>`|`[]`|The default expanded submenu names of menu in uncontrolled manner.|
-|expandedNames|`Array<string>`|`undefined`|The expanded submenu names. If set, menu will work in controlled manner and `default-open-names` won't work.|
+|default-expanded-names|`Array<string>`|`[]`|The default expanded submenu names of menu in uncontrolled manner.|
+|expandedNames|`Array<string>`|`undefined`|The expanded submenu names. If set, menu will work in controlled manner and `default-expanded-names` won't work.|
 |value|`string`|`null`|The selected name of menu.|
 |mode|`'vertical' \| 'horizontal'`|`'vertical'`||
 
@@ -84,5 +84,5 @@ collapse
 |Name|Parameters|Description|
 |-|-|-|
 |select|`(selectedName: string)`||
-|open-names-change|`(expandedNames: Array<string>)`||
+|expanded-names-change|`(expandedNames: Array<string>)`||
 
