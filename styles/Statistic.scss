@@ -5,7 +5,7 @@
     @include b(statistic-value) {
       @include once {
         margin-top: 4px;
-        font-weight: 500;
+        font-weight: $--n-strong-weight;
       }
       @include e(prefix) {
         @include once {
@@ -45,7 +45,7 @@
     }
     @include e(label) {
       @include once {
-        font-weight: 500;
+        font-weight: $--n-strong-weight;
         transition: .3s color $--n-ease-in-out-cubic-bezier;
         font-size: 14px;
       }

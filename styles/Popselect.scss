@@ -1,7 +1,7 @@
 @import './mixins/mixins.scss';
 
 @include b(popselect) {
-  @include b(popover-content) {
+  @include b(base-select-menu) {
     box-shadow: none !important;
   }
 }

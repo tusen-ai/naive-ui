@@ -14,7 +14,7 @@ function createDiffedStyleObject (style, computedStyle) {
   for (const key of Object.keys(style)) {
     if (~key.indexOf('ransition')) continue
     if (computedStyle[key] !== style[key]) {
-      diffedStyle[key] = style[key]
+      diffedStyle[key] = computedStyle[key]
     }
   }
   return diffedStyle
@@ -25,18 +25,27 @@ function getNextBackgroundColorOf (el) {
   const prevStyle = createStyleObject(computedStyle)
   const memorizedTransition = el.style.transition
   const memorizedBackgroundColor = el.style.backgroundColor
+  /** Switch to target background */
   el.style.transition = 'none'
   const nextBackgroundColor = computedStyle.backgroundColor
   const diffedStyle = createDiffedStyleObject(prevStyle, computedStyle)
   const memorizedInlineStyle = {}
-  for (const key of Object.keys(diffedStyle)) {
-    if (~key.indexOf('ransition')) continue
+  const diffedKeys = Object.keys(diffedStyle)
+  for (const key of diffedKeys) {
     memorizedInlineStyle[key] = el.style[key]
+  }
+  for (const key of diffedKeys) {
     el.style[key] = diffedStyle[key]
   }
+  /** Restore previous styles */
+  for (const key of diffedKeys) {
+    el.style[key] = prevStyle[key]
+  }
   void (el.offsetHeight)
-  for (const key of Object.keys(diffedStyle)) {
-    if (~key.indexOf('ransition')) continue
+  for (const key of diffedKeys) {
+    el.style[key] = ''
+  }
+  for (const key of Object.keys(memorizedInlineStyle)) {
     el.style[key] = memorizedInlineStyle[key]
   }
   el.style.transition = memorizedTransition

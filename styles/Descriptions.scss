@@ -109,7 +109,7 @@
     }
     @include b(descriptions-header) {
       @include once {
-        font-weight: 500;
+        font-weight: $--n-strong-weight;
         font-size: 18px;
         transition: color .3s $--n-ease-in-out-cubic-bezier;
       }
@@ -133,7 +133,7 @@
           }
           @include b(descriptions-table-header) {
             @include once {
-              font-weight: 500;
+              font-weight: $--n-strong-weight;
               line-height: 1.75;
               display: table-cell;
               box-sizing: border-box;
@@ -152,7 +152,7 @@
             @include e(label) {
               color: $--descriptions-header-text-color;
               @include once {
-                font-weight: 500;
+                font-weight: $--n-strong-weight;
                 transition: color .3s $--n-ease-in-out-cubic-bezier;
                 display: inline-block;
                 margin-right: 14px;
