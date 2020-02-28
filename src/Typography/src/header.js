@@ -23,8 +23,8 @@ export default level => ({
     const theme = getTheme(context.parent)
     const defaultSlot = context.slots.default || (context.scopedSlots.default && context.scopedSlots.default())
     return h(`h${level}`, {
-      staticClass: `n-h${level}`,
       class: {
+        [`n-h${level}`]: true,
         [`n-${theme}-theme`]: theme,
         [`n-h${level}--${props.type}-type`]: props.type,
         [`n-h${level}--prefix-bar`]: props.prefix,

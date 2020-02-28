@@ -10,7 +10,7 @@
   @include b(gradient-text) {
     @include once {
       display: inline-block;
-      font-weight: 500;
+      font-weight: $--n-strong-weight;
       font-size: inherit;
       background-clip: text;
       color: transparent;

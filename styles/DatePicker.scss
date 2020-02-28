@@ -135,7 +135,7 @@
       @include e(month-year) {
         @include once {
           font-size: 14px;
-          font-weight: 500;
+          font-weight: $--n-strong-weight;
           line-height: 17px;
           flex-grow: 1;
           text-align: center;

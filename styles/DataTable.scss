@@ -120,7 +120,7 @@
           position: relative;
           padding: 10px 10px 10px 16px;
           text-align: left;
-          font-weight: 500;
+          font-weight: $--n-strong-weight;
           box-sizing: border-box;
           transition:
             border-color .3s $--n-ease-in-out-cubic-bezier,

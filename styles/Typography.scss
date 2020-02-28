@@ -4,7 +4,7 @@
   @include b('h' + $level) {
     @include once {
       font-size: map-get($--n-typography-header-font-size, $level);
-      font-weight: 500; 
+      font-weight: $--n-strong-weight; 
       margin: map-get($--n-typography-header-margin, $level);
       transition: color .3s $--n-ease-in-out-cubic-bezier;
       &:first-child {
@@ -148,7 +148,7 @@
       display: inline-block;
       transition: color .3s $--n-ease-in-out-cubic-bezier;
       @include m(strong) {
-        font-weight: 500;
+        font-weight: $--n-strong-weight;
       }
       @include m(italic) {
         font-style: italic;

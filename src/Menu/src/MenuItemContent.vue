@@ -28,7 +28,7 @@
         <render :render="title" />
       </slot>
       <slot name="header-extra">
-        <span class="n-menu-item-content-header__extra">
+        <span v-if="titleExtra" class="n-menu-item-content-header__extra">
           <render v-if="titleExtra" :render="titleExtra" />
         </span>
       </slot>

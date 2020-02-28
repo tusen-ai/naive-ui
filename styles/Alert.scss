@@ -64,7 +64,7 @@
           transition: color .3s $--n-ease-in-out-cubic-bezier;
           font-size: 16px;
           line-height: 19px;
-          font-weight: 500;
+          font-weight: $--n-strong-weight;
           & + {
             @include e(content) {
               margin-top: 9px;

@@ -19,6 +19,7 @@
     :tabindex="syntheticFocusable ? 0 : -1"
     @click="handleClick"
     @blur="handleBlur"
+    @mousedown="handleMouseDown"
     @keyup.enter="handleKeyUpEnter"
     @keydown.enter="handleKeyDownEnter"
   >
@@ -37,7 +38,7 @@
             :style="{
               transition: hollowOutColorTransitionDisabled ? 'none' : null
             }"
-            :stroke="simulateHollowOut ? ascendantBackgroundColor : null"
+            :stroke="hollowText ? ascendantBackgroundColor : null"
             :stroke-width="24"
           />
           <n-icon
@@ -45,8 +46,8 @@
             key="icon"
             :style="{
               transition: hollowOutColorTransitionDisabled ? 'none' : null,
-              fill: simulateHollowOut ? ascendantBackgroundColor : null,
-              stroke: simulateHollowOut ? ascendantBackgroundColor : null
+              fill: hollowText ? ascendantBackgroundColor : null,
+              stroke: hollowText ? ascendantBackgroundColor : null
             }"
             class="n-icon-slot"
           >
@@ -62,7 +63,7 @@
       class="n-button__content"
       :style="{
         transition: hollowOutColorTransitionDisabled ? 'none' : null,
-        color: simulateHollowOut ? ascendantBackgroundColor : null
+        color: hollowText ? ascendantBackgroundColor : null
       }"
     >
       <slot />
@@ -83,7 +84,7 @@
             :style="{
               transition: hollowOutColorTransitionDisabled ? 'none' : null
             }"
-            :stroke="simulateHollowOut ? ascendantBackgroundColor : null"
+            :stroke="hollowText ? ascendantBackgroundColor : null"
             :stroke-width="24"
           />
           <n-icon
@@ -92,8 +93,8 @@
             class="n-icon-slot"
             :style="{
               transition: hollowOutColorTransitionDisabled ? 'none' : null,
-              fill: simulateHollowOut ? ascendantBackgroundColor : null,
-              stroke: simulateHollowOut ? ascendantBackgroundColor : null
+              fill: hollowText ? ascendantBackgroundColor : null,
+              stroke: hollowText ? ascendantBackgroundColor : null
             }"
           >
             <slot
@@ -214,19 +215,11 @@ export default {
       return (
         this.text ||
         this.ghost ||
-        !['primary', 'link', 'info', 'success', 'warning', 'error'].includes(
-          this.type
-        )
+        this.type === 'default'
       )
     },
-    simulateHollowOut () {
-      if (this.ghost) return false
-      if (this.text) return false
-      if (
-        ['primary', 'link', 'info', 'success', 'warning', 'error'].includes(
-          this.type
-        )
-      ) { return true } else return false
+    hollowText () {
+      return !this.avoidHollowOut
     },
     syntheticFocusable () {
       return this.focusable && !this.disabled
@@ -238,23 +231,17 @@ export default {
       return this.iconPlacement === 'right'
     }
   },
-  watch: {
-    type (value) {
-      if (
-        ['primary', 'link', 'info', 'success', 'warning', 'error'].includes(
-          value
-        )
-      ) {
-        if (!this.cssNode) {
-          // TODO: something
-        }
-      }
-    }
-  },
   beforeDestroy () {
     window.clearTimeout(this.rippleTimer)
   },
   methods: {
+    handleMouseDown (e) {
+      if (this.disabled) return
+      if (this.syntheticFocusable) {
+        e.preventDefault()
+        this.$el.focus()
+      }
+    },
     handleClick (e) {
       if (!this.disabled) {
         this.$emit('click', e)

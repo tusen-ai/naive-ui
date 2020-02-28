@@ -32,7 +32,7 @@
         justify-content: space-between;
         align-items: center;
         font-size: 18px;
-        font-weight: 500;
+        font-weight: $--n-strong-weight;
         @include b(confirm-title-icon) {
           vertical-align: middle;
           margin-right: 8px;

@@ -145,7 +145,7 @@
       transform: translateX(-50%);
       left: 100%;
       bottom: calc(100% - 9px);
-      font-weight: 500;
+      font-weight: $--n-strong-weight;
       @include e(ripple-mask) {
         position: absolute;
         top: 0;

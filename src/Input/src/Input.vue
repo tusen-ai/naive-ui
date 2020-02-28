@@ -212,8 +212,7 @@ export default {
       focused: false,
       hover: false,
       isComposing: false,
-      inputFocused: false,
-      waitingBlurCallback: false
+      inputFocused: false
     }
   },
   computed: {

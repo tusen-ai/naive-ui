@@ -1,6 +1,8 @@
 import clickoutside from '../../../_directives/clickoutside'
 import focusDetector from '../../../_base/FocusDetector'
 import locale from '../../../_mixins/locale'
+import keyboardDelegate from '../../../_utils/delegate/keyboardDelegate'
+import { KEY_CODE } from '../../../_utils/event/keyCode'
 
 const TIME_CONST = {
   hours: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'],
@@ -42,8 +44,8 @@ export default {
     clearValue () {
       this.$emit('input', null)
     },
-    handleBlur (e) {
-      this.$emit('blur', e)
+    handleFocusDetectorFocus (e) {
+      this.$emit('tab-out', e)
     },
     disableTransitionOneTick () {
       if (this.active) {
@@ -56,6 +58,24 @@ export default {
         })
       } else {
         this.noTransition = false
+      }
+    },
+    handlePanelKeyDown (e) {
+      if (
+        e.keyCode === KEY_CODE.TAB &&
+        e.target === this.$el &&
+        keyboardDelegate.shiftPressed
+      ) {
+        e.preventDefault()
+        this.$emit('tab-out')
+      }
+    },
+    handlePanelFocus (e) {
+      if (
+        e.target === this.$el &&
+        this.$el.contains(e.relatedTarget)
+      ) {
+        this.$emit('tab-out')
       }
     }
   }
