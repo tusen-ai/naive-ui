@@ -9,6 +9,7 @@
         [`n-${theme}-theme`]: theme
       }"
       @click.capture="resetSelectingStatus"
+      @keydown="handlePanelKeyDown"
     >
       <div
         class="n-date-panel-input-wrapper"
@@ -241,7 +242,7 @@
         v-else
         style="height: 12px"
       />
-      <focus-detector @focus="handleBlur" />
+      <focus-detector @focus="handleFocusDetectorFocus" />
     </div>
   </transition>
 </template>

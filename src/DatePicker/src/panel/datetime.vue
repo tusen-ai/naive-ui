@@ -8,6 +8,7 @@
       :class="{
         [`n-${theme}-theme`]: theme
       }"
+      @keydown="handlePanelKeyDown"
     >
       <div
         class="n-date-panel-input-wrapper"
@@ -126,7 +127,7 @@
           {{ localeNamespace.confirm }}
         </n-button>
       </div>
-      <focus-detector @focus="handleBlur" />
+      <focus-detector @focus="handleFocusDetectorFocus" />
     </div>
   </transition>
 </template>

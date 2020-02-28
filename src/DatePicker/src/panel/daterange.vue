@@ -9,6 +9,7 @@
         [`n-${theme}-theme`]: theme
       }"
       @click.capture="resetSelectingStatus"
+      @keydown="handlePanelKeyDown"
     >
       <div
         ref="startDates"
@@ -168,7 +169,7 @@
           {{ localeNamespace.confirm }}
         </n-button>
       </div>
-      <focus-detector @focus="handleBlur" />
+      <focus-detector @focus="handleFocusDetectorFocus" />
     </div>
   </transition>
 </template>

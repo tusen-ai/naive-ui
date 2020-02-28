@@ -81,7 +81,7 @@
           :is-date-disabled="isDateDisabled"
           :is-time-disabled="isTimeDisabled"
           :format="computedFormat"
-          @blur="handlePanelTabOut"
+          @tab-out="handlePanelTabOut"
           @input="handlePanelInput"
           @close="handlePanelClose"
         />
@@ -95,7 +95,7 @@
           :theme="syntheticTheme"
           :is-date-disabled="isDateDisabled"
           @input="handlePanelInput"
-          @blur="handlePanelTabOut"
+          @tab-out="handlePanelTabOut"
           @close="handlePanelClose"
         />
         <daterange-panel
@@ -108,7 +108,7 @@
           :theme="syntheticTheme"
           :is-date-disabled="isDateDisabled"
           @input="handleRangePanelInput"
-          @blur="handlePanelTabOut"
+          @tab-out="handlePanelTabOut"
           @close="handlePanelClose"
           @check-value="setInvalidStatus"
         />
@@ -125,7 +125,7 @@
           :is-time-disabled="isTimeDisabled"
           @input="handleRangePanelInput"
           @close="handlePanelClose"
-          @blur="handlePanelTabOut"
+          @tab-out="handlePanelTabOut"
           @check-value="setInvalidStatus"
         />
       </div>
@@ -336,9 +336,6 @@ export default {
       this.$emit('change', null)
       this.refresh(null)
     },
-    /**
-     * this blur is not really blur event, its key tab out of panel
-     */
     handlePanelTabOut () {
       this.closeCalendar({
         returnFocus: true,
@@ -510,13 +507,8 @@ export default {
       emitBlur
     }) {
       if (this.active) {
-        console.log('closeCalendar', {
-          returnFocus,
-          emitBlur
-        })
         this.active = false
         if (returnFocus) {
-          console.log('returnFocus', this.$refs.input)
           if (this.$refs.input) {
             this.$refs.input.focus()
           }

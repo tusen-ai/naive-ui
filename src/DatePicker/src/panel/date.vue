@@ -9,6 +9,7 @@
         [`n-${theme}-theme`]: theme
       }"
       @click.prevent="() => {}"
+      @keydown="handlePanelKeyDown"
     >
       <div style="width: 100%; height: 12px" />
       <div class="n-date-panel-month">
@@ -102,7 +103,7 @@
           {{ localeNamespace.confirm }}
         </n-button>
       </div>
-      <focus-detector @focus="handleBlur" />
+      <focus-detector @focus="handleFocusDetectorFocus" />
     </div>
   </transition>
 </template>
