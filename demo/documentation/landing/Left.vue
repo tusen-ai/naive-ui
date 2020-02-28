@@ -100,7 +100,7 @@
                   cy="66.09"
                   r="22.5"
                   :style="{ transition: `fill .3s ${styleScheme.easeInOutCubicBezier}`,
-                            fill: styleScheme.errorColor
+                            fill: styleScheme.infoColor
                   }"
                 />
               </g>

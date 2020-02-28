@@ -104,10 +104,10 @@ export default {
     handleOptionClick (e, option) {
       this.$emit('option-click', e, option)
     },
-    handleMouseLeave (e) {
+    handleMouseLeave: debounce(function (e) {
       const trackingRect = this.$refs.trackingRect
       trackingRect && trackingRect.hideLightBar()
-    },
+    }, 64),
     handleOptionCheck (option) {
       this.$emit('option-check', option.id)
     }

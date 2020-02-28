@@ -121,19 +121,19 @@ const devtoolIsOpened = e.target === document.activeElement
 
 
 ## TODO 排序不分先后
-1. Focus Detector on Time Selector
+1. <del>Focus Detector on Time Selector</del>
 2. <del>Menu Root Indent = 0 可能造成问题</del>
 3. 用 RAF 优化 scrollbar 性能（不一定需要）
 4. <del>Anchor 切换有 bug，忽然闪现第一个</del>
 5. <del>Safari select lightbar container overflow 边角（或许是 webkit 的问题）</del>默认选中第一个可以装作这个问题不存在
-6. Chrome lightbar offset @table fitler
+6. <del>Chrome lightbar offset @table fitler</del> 重构之后问题不存在
 7. <del>cascader 数据结构重构，维持原选项！</del> 这个不做了，对 Children 的处理过于边角，Patch 那块也会从声明式变成命令式
 8. 排查 render 函数是否每个地方都支持数组
 9. <del>form async validation</del>
 10. table filter 重构支持异步
 11. <del>tabs resize bug</del>
 12. <del>CSS 整理</del> 暂且算做完了
-13. 落地页
+13. <del>落地页</del>
 14. <del>按需引入 babel plugin</del> 这个不做了，收益不大，工作量不小
 15. form table 需要 size
 16. input number 需要一个小型的
@@ -172,8 +172,10 @@ const devtoolIsOpened = e.target === document.activeElement
 49. <del>tab scroll 计算有潜在 bug</del>
 50. data-table 的 header height 为啥要固定？因为固定列的问题，sticky 解决了就没事
 51. <del>scrollbar 在平时不显示用不到的 rail</del>
-52. placeholder transition 对 firefox 做兼容
+52. <del>placeholder transition 对 firefox 做兼容</del>
 53. 调整 date picker 的尺寸
+54. Select option 右侧 padding 调整
+55. Popover arrow shadow 调整
 
 ```
 Done
