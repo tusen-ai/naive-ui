@@ -78,7 +78,7 @@
       box-sizing: border-box;
       position: relative;
       transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
-      border-radius: 6px;
+      border-radius: $--n-card-border-radius;
       @include card-size-mixin('small');
       @include card-size-mixin('medium');
       @include card-size-mixin('large');

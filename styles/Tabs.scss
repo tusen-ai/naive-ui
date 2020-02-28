@@ -204,7 +204,7 @@
           padding: 0 16px;
           position: relative;
           vertical-align: bottom;
-          border-radius: 6px;
+          border-radius: $--n-tabs-border-radius;
           border: 1px solid transparent;
         }
         @include e(label) {

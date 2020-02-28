@@ -25,7 +25,7 @@
       transform-origin: inherit;
       transform: $--n-transform-debounce-scale;
       position: relative;
-      border-radius: 6px;
+      border-radius: $--n-popover-border-radius;
       font-size: 13px;
       @include b(popover-arrow) {
         transition: border-color .3s $--n-ease-in-out-cubic-bezier;

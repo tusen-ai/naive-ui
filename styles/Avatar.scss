@@ -33,7 +33,7 @@
       font-size: 14px;
       display: inline-block;
       position: relative;
-      border-radius: 6px;
+      border-radius: $--n-avatar-border-radius;
       overflow: hidden;
       text-align: center;
       img {

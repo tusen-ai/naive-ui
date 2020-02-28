@@ -172,22 +172,22 @@
       
       &:first-child {
         @include once {
-          border-top-left-radius: 6px;
-          border-bottom-left-radius: 6px;
+          border-top-left-radius: $--n-radio-button-border-radius;
+          border-bottom-left-radius: $--n-radio-button-border-radius;
           @include e(border-mask) {
-            border-top-left-radius: 6px;
-            border-bottom-left-radius: 6px;
+            border-top-left-radius: $--n-radio-button-border-radius;
+            border-bottom-left-radius: $--n-radio-button-border-radius;
           }
         }
         border-left: 1px solid map-get($--radio-button-border-color, 'default');
       }
       &:last-child {
         @include once {
-          border-top-right-radius: 6px;
-          border-bottom-right-radius: 6px;
+          border-top-right-radius: $--n-radio-button-border-radius;
+          border-bottom-right-radius: $--n-radio-button-border-radius;
           @include e(border-mask) {
-            border-top-right-radius: 6px;
-            border-bottom-right-radius: 6px;
+            border-top-right-radius: $--n-radio-button-border-radius;
+            border-bottom-right-radius: $--n-radio-button-border-radius;
           }
         }
         border-right: 1px solid map-get($--radio-button-border-color, 'default');        

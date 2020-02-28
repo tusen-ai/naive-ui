@@ -40,7 +40,7 @@
       margin-bottom: 4px;
       z-index: 0;
       position: relative;
-      border-radius: 6px;
+      border-radius: $--n-base-select-menu-border-radius;
       transition: background-color .3s $--n-ease-in-out-cubic-bezier;
       overflow: hidden;
       @include b(base-select-menu-option-wrapper) {

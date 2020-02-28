@@ -34,7 +34,7 @@
     @include once {
       outline: none;
       font-size: 12px;
-      border-radius: 6px;
+      border-radius: $--n-time-picker-border-radius;
       margin: 4px 0;
       min-width: 140px;
       overflow: hidden;

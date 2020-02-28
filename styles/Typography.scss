@@ -169,7 +169,7 @@
           border-color .3s $--n-ease-in-out-cubic-bezier;
         box-sizing: border-box;
         padding: .15em .45em 0 .45em;
-        border-radius: 3px;
+        border-radius: $--n-typography-code-border-radius;
         font-size: .9em;
       }
       color: map-get($--typography-code-text-color, 'default');

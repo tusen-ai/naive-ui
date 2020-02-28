@@ -6,7 +6,7 @@
       line-height: 1.75;
       font-size: 14px;
       width: 100%;
-      border-radius: 6px 6px 0 0;
+      border-radius: $--n-popover-border-radius $--n-popover-border-radius 0 0;
       text-align: left;
       border-collapse: separate;
       border-spacing: 0;
@@ -59,7 +59,7 @@
     }
     @include m(bordered) {
       border: 1px solid $--table-border-color;
-      border-radius: 6px;
+      border-radius: $--n-popover-border-radius;
       @include e(tr) {
         &:last-child {
           @include e(td) {

@@ -11,8 +11,8 @@
       @include once {
         position: relative;
         transition: border-color .3s $--n-ease-in-out-cubic-bezier;
-        border-top-left-radius: 6px;
-        border-top-right-radius: 6px;
+        border-top-left-radius: $--n-data-table-border-radius;
+        border-top-right-radius: $--n-data-table-border-radius;
         overflow: hidden;
         line-height: 1.75;
       }
@@ -213,8 +213,8 @@
       @include b(data-table-tables-wrapper) {
         overflow: hidden;
         border: 1px solid $--data-table-border-color;
-        border-bottom-left-radius: 6px;
-        border-bottom-right-radius: 6px;
+        border-bottom-left-radius: $--n-data-table-border-radius;
+        border-bottom-right-radius: $--n-data-table-border-radius;
         @include b(data-table-table){
           @include b(data-table-tr) {
             &:last-child {

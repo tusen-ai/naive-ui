@@ -24,7 +24,7 @@
         box-sizing: border-box;
         width: 100%;
         text-align: center;
-        border-radius: 6px;
+        border-radius: $--n-upload-border-radius;
         padding: 24px;
         transition:
           border-color .3s $--n-ease-in-out-cubic-bezier,
@@ -49,7 +49,7 @@
           cursor: default;
           padding: 0px 12px 0 6px;
           transition: background-color .3s $--n-ease-in-out-cubic-bezier;
-          border-radius: 6px;
+          border-radius: $--n-upload-border-radius;
           @include b(progress) {
             @include fade-in-height-expand-transition($fold-padding: true);
             box-sizing: border-box;
