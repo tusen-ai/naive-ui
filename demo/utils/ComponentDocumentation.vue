@@ -12,12 +12,12 @@ export default {
     }
   },
   mounted () {
-    const paramsRegex = /\/([^/]+)\/([^/]+)\/([^/]+)/
+    const paramsRegex = /\/([^/]+)\/([^/]+)\/([^/]+)\/([^/]+)/
     if (this.NDocRoot.memorizedPath) {
       const memorizedPath = this.NDocRoot.memorizedPath
       const currentPath = this.$route.path
-      const memorizedDemoName = (paramsRegex.exec(memorizedPath) || [])[3]
-      const currentDemoName = (paramsRegex.exec(currentPath) || [])[3]
+      const memorizedDemoName = (paramsRegex.exec(memorizedPath) || [])[4]
+      const currentDemoName = (paramsRegex.exec(currentPath) || [])[4]
       if (
         memorizedDemoName &&
         currentDemoName &&

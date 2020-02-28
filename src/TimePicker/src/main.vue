@@ -44,6 +44,7 @@
             :class="{
               [`n-${syntheticTheme}-theme`]: syntheticTheme
             }"
+            @focus="handleMenuFocus"
             @keydown="handleMenuKeyDown"
           >
             <div class="n-time-picker-selector-time">
@@ -571,6 +572,18 @@ export default {
         returnFocus: true,
         emitBlur: false
       })
+    },
+    handleMenuFocus (e) {
+      const panel = this.$refs.panel
+      if (
+        e.target === panel &&
+        panel.contains(e.relatedTarget)
+      ) {
+        this.closeTimeSelector({
+          returnFocus: true,
+          emitBlur: false
+        })
+      }
     }
   }
 }

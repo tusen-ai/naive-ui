@@ -88,7 +88,7 @@
     }
   
     .hljs-strong {
-      font-weight: 500;
+      font-weight: $--n-strong-weight;
     }
   
     .hljs-link {
@@ -168,7 +168,7 @@
       font-style: italic;
     }
     .hljs-strong {
-      font-weight: 500;
+      font-weight: $--n-strong-weight;
     }
     .hljs-link {
       text-decoration: underline;

@@ -10,7 +10,10 @@
       z-index: auto;
       display: flex;
       flex-wrap: nowrap;
-      transition: margin-left .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
+      transition:
+        margin-left .3s $--n-ease-in-out-cubic-bezier,
+        background-color .3s $--n-ease-in-out-cubic-bezier,
+        color .3s $--n-ease-in-out-cubic-bezier;
       flex-direction: column;
       overflow: auto;
       @include m(has-sider) {
@@ -35,7 +38,9 @@
   }
   @include b(layout-header) {
     @include once {
-      transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
+      transition:
+        background-color .3s $--n-ease-in-out-cubic-bezier,
+        border-color .3s $--n-ease-in-out-cubic-bezier;
       box-sizing: border-box;
       width: 100%;
       @include m(absolute-positioned) {
@@ -56,11 +61,16 @@
       z-index: auto;
       position: relative;
     }
-    transition: margin-left .3s $--n-ease-in-out-cubic-bezier;
+    transition:
+      margin-left .3s $--n-ease-in-out-cubic-bezier,
+      background-color .3s $--n-ease-in-out-cubic-bezier,
+      color .3s $--n-ease-in-out-cubic-bezier;
   }
   @include b(layout-footer) {
     @include once {
-      transition: border-color .3s $--n-ease-in-out-cubic-bezier;
+      transition:
+        background-color .3s $--n-ease-in-out-cubic-bezier,
+        border-color .3s $--n-ease-in-out-cubic-bezier;
       box-sizing: border-box;
       @include m(absolute-positioned) {
         position: absolute;
@@ -78,7 +88,12 @@
       box-sizing: border-box;
       z-index: auto;
       position: relative;
-      transition: min-width .3s  $--n-ease-in-out-cubic-bezier, max-width .3s $--n-ease-in-out-cubic-bezier, transform .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
+      transition:
+        min-width .3s  $--n-ease-in-out-cubic-bezier,
+        max-width .3s $--n-ease-in-out-cubic-bezier,
+        transform .3s $--n-ease-in-out-cubic-bezier,
+        background-color .3s $--n-ease-in-out-cubic-bezier,
+        border-color .3s $--n-ease-in-out-cubic-bezier;
     }  
     background-color: $--layout-sider-background-color;
     @include e(toggle-button) {

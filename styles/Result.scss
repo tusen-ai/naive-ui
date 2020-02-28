@@ -42,7 +42,7 @@
         @include once {
           margin-top: 16px;
           font-size: 32px;
-          font-weight: 500;
+          font-weight: $--n-strong-weight;
           transition: color .3s $--n-ease-in-out-cubic-bezier;
           text-align: center;
         }

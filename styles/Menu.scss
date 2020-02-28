@@ -85,10 +85,14 @@
         padding: 0;
         @include b(menu-item) {
           list-style: none;
+          height: 48px;
         }
         @include b(submenu) {
           cursor: pointer;
           position: relative; 
+          @include b(menu-item-content) {
+            height: 48px;
+          }
           @include b(submenu-content) {
             padding: 0;
             list-style: none;
@@ -100,7 +104,7 @@
         @include once {
           box-sizing: border-box;
           line-height: 1.75;
-          height: 48px;
+          height: 100%;
           display: flex;
           align-items: center;
           cursor: pointer;
