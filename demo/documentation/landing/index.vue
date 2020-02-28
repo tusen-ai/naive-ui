@@ -8,7 +8,7 @@
   },
   "en-US": {
     "start": "Getting Start",
-    "intro1": "An experimental Vue UI Framework",
+    "intro1": "An Experimental Vue UI Framework",
     "intro2": "Caring About Styles, Themed, Batteries Included, Fast",
     "intro3": "Intresting Somehow"
   }
