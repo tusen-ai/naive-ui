@@ -14,7 +14,6 @@
         <base-table
           ref="mainTable"
           main
-          :header-height="headerHeight"
           :scroll-x="styleScrollX"
           :body-style="bodyStyle"
           :data="paginatedData"
@@ -186,7 +185,6 @@ export default {
   },
   data () {
     return {
-      headerHeight: null,
       /** collected tr heights of main table */
       trHeights: [],
       hoveringRowIndex: null,
@@ -601,7 +599,6 @@ export default {
         header: headerEl,
         body: mainTableScrollContainer
       } = this.getScrollElements()
-      this.headerHeight = headerEl.offsetHeight
       this.mainTableScrollContainerWidth = mainTableScrollContainer.offsetWidth
       const trHeights = Array.from(mainTableScrollContainer.querySelectorAll('tr')).map(el => el.offsetHeight)
       this.trHeights = trHeights
