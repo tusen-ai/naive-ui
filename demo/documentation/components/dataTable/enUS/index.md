@@ -33,10 +33,10 @@ ajaxUsage
 |-|-|-|-|
 |data|`Array<object>`|`[]`|Data to display|
 |columns|`Array<Column>`||Columns to display, **required**|
-|max-height|`number`|`null`|The max-height of the table. If content height is larger than it, the header will be fixed at top|
-|min-height|`number`|`null`|The min-height of the table.|
+|max-height|`number \| string`|`null`|The max-height of the table. If content height is larger than it, the header will be fixed at top|
+|min-height|`number \| string`|`null`|The min-height of the table.|
 |loading|`boolean`|`false`||
-|scroll-x|`number`|`null`|If columns are horizontal fixed, scroll-x need to be set|
+|scroll-x|`number \| string`|`null`|If columns are horizontal fixed, scroll-x need to be set|
 |pagination|`false \| object`|`false`|See [Pagination props](n-pagination#Props)|
 |paging|`boolean`|If data-table do automatic paging. You may set it to `false` in async usage.|
 |row-class-name|`string \| (rowData: object, index : number) => string \| object`|`null`||

@@ -15,8 +15,8 @@ multiple
 |-|-|-|-|
 |show|`boolean`|`false`||
 |placement|`'top' \| 'right' \| 'bottom' \| 'left'`|`'right'`||
-|width|`number`|`251`||
-|height|`number`|`251`|Works when placement is `top` and `bottom`.|
+|width|`number \| string`|`251`||
+|height|`number \| string`|`251`|Works when placement is `top` and `bottom`.|
 |mask-closable|`boolean`|`true`|Whether to emit `hide` event when click mask.|
 |drawer-style|`object`|`null`||
 

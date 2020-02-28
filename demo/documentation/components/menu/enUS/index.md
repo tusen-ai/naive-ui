@@ -22,8 +22,8 @@ collapse
 |collapsed-width|`number`|`null`|The menu width after collapsed.|
 |icon-size|`number`|`20`|The icon size when menu is not collapsed.|
 |collapsed-icon-size|`number`|`null`|The icon size when menu is collapsed. If not set, menu will use `icon-size` in place of it.|
-|overlay-width|`number`|`null`|The width of submenu popover. Works when menu is horizontal or collapsed.|
-|overlay-min-width|`number`|`180`|The min width of submenu popover. Works when menu is horizontal or collapsed.|
+|overlay-width|`number \| string`|`null`|The width of submenu popover. Works when menu is horizontal or collapsed.|
+|overlay-min-width|`number \| string`|`180`|The min width of submenu popover. Works when menu is horizontal or collapsed.|
 |root-indent|`number`|`null`|The indent of menu's first level children. If not set, menu will use `indent` in place of it.|
 |indent|`number`|`32`|The indend of menu|
 |default-open-names|`Array<string>`|`[]`|The default expanded submenu names of menu in uncontrolled manner.|

@@ -33,10 +33,10 @@ ajaxUsage
 |-|-|-|-|
 |data|`Array<object>`|`[]`|需要展示的数据|
 |columns|`Array<Column>`||需要展示的列，**必需**|
-|max-height|`number`|`null`|表格的最大高度，如果内容高度高于它，那么表头将固定|
-|min-height|`number`|`null`|表格的最低高度|
+|max-height|`number \| string`|`null`|表格的最大高度，如果内容高度高于它，那么表头将固定|
+|min-height|`number \| string`|`null`|表格的最低高度|
 |loading|`boolean`|`false`||
-|scroll-x|`number`|`null`|表格内容的横向宽度，如果列被水平固定了，则需要设定它|
+|scroll-x|`number \| string`|`null`|表格内容的横向宽度，如果列被水平固定了，则需要设定它|
 |pagination|`false \| object`|`false`|属性参考 [Pagination props](n-pagination#Props)|
 |paging|`boolean`|表格是否自动分页数据，在异步的状况下你可呢个要把它设为 `false`|
 |row-class-name|`string \| (rowData: object, index : number) => string \| object`|`null`||

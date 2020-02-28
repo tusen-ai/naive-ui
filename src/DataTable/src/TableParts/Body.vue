@@ -4,7 +4,7 @@
     class="n-data-table-base-table-body"
     :style="style"
     :content-style="{
-      minWidth: scrollX && `${scrollX}px`
+      minWidth: scrollX
     }"
     :horizontal-rail-style="{ zIndex: 1 }"
     :vertical-rail-style="{ zIndex: 1 }"
@@ -103,7 +103,7 @@ export default {
       default: null
     },
     scrollX: {
-      type: Number,
+      type: [Number, String],
       default: null
     },
     fixed: {

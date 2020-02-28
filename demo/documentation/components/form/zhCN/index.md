@@ -16,7 +16,7 @@ validator-debug
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |inline|`boolean`|`false`||
-|label-width|`number`|`null`|标签的宽度，在 `label-placement` 是 `'left'` 的时候可能会有用|
+|label-width|`number \| string`|`null`|标签的宽度，在 `label-placement` 是 `'left'` 的时候可能会有用|
 |label-align|`'left' \| 'right'`|`'left'`|标签的文本对齐方式|
 |label-placement|`'left' \| 'top'`|`'top'`||
 |model|`object`|`{}`|获取表项中收集到的值的对象|
@@ -36,7 +36,7 @@ validator-debug
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |label|`string`|`null`||
-|label-width|`number`|`null`|如果没有被设定，使用外层表单的 label-align|
+|label-width|`number \| string`|`null`|如果没有被设定，使用外层表单的 label-align|
 |label-style|`object`|`{}`||
 |label-align|`'left' \| 'right'`|`null`|标签的文本对齐方式。如果没有被设定，使用外层表单的 label-align|
 |label-placement|`'left' \| 'top'`|`null`|如果没有被设定，使用外层表单的 label-placement|

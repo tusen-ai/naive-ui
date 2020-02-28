@@ -49,7 +49,7 @@ export default {
       default: null
     },
     scrollX: {
-      type: Number,
+      type: [Number, String],
       default: null
     },
     bodyMinHeight: {

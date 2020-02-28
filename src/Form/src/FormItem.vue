@@ -82,7 +82,7 @@ export default {
       default: null
     },
     labelWidth: {
-      type: Number,
+      type: [Number, String],
       default: null
     },
     labelStyle: {

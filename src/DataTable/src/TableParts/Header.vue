@@ -12,7 +12,7 @@
       ref="body"
       class="n-data-table-table"
       :style="{
-        minWidth: scrollX && `${scrollX}px`
+        minWidth: scrollX
       }"
     >
       <colgroup>
@@ -133,7 +133,7 @@ export default {
       default: null
     },
     scrollX: {
-      type: Number,
+      type: [Number, String],
       default: null
     },
     height: {

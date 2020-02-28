@@ -41,6 +41,7 @@ import NBasePortal from '../../_base/Portal'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import zindexable from '../../_mixins/zindexable'
+import formatLength from '../../_utils/css/formatLength'
 
 export default {
   name: 'NDrawer',
@@ -58,11 +59,11 @@ export default {
       default: false
     },
     width: {
-      type: Number,
+      type: [Number, String],
       default: 251
     },
     height: {
-      type: Number,
+      type: [Number, String],
       default: 251
     },
     placement: {
@@ -105,12 +106,12 @@ export default {
     styleWidth () {
       if (this.placement === 'top' || this.placement === 'bottom') return null
       if (this.width === null) return null
-      return this.width + 'px'
+      return formatLength(this.width)
     },
     styleHeight () {
       if (this.placement === 'left' || this.placement === 'right') return null
       if (this.height === null) return null
-      return this.height + 'px'
+      return formatLength(this.height)
     }
   },
   watch: {

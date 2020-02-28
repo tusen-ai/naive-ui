@@ -15,7 +15,7 @@
           ref="mainTable"
           main
           :header-height="headerHeight"
-          :scroll-x="scrollX"
+          :scroll-x="styleScrollX"
           :body-style="bodyStyle"
           :data="paginatedData"
           :columns="normalizedColumns"
@@ -59,6 +59,7 @@ import { setCheckStatusOfRow } from './utils'
 import BaseTable from './BaseTable.vue'
 import NEmpty from '../../Empty'
 import NPagination from '../../Pagination'
+import formatLength from '../../_utils/css/formatLength'
 
 function createShallowClonedArray (array) {
   if (Array.isArray(array)) return array.map(createShallowClonedObject)
@@ -163,7 +164,7 @@ export default {
       default: true
     },
     scrollX: {
-      type: Number,
+      type: [Number, String],
       default: null
     },
     defaultCheckedRowKeys: {
@@ -206,6 +207,10 @@ export default {
     }
   },
   computed: {
+    styleScrollX () {
+      console.log('formatLength(this.scrollX)', formatLength(this.scrollX))
+      return formatLength(this.scrollX)
+    },
     currentFixedColumnLeft () {
       return (column) => {
         const index = this.leftFixedColumns.indexOf(column)
@@ -412,18 +417,10 @@ export default {
       const startIndex = (this.internalCurrentPage - 1) * pageSize
       return this.sortedData.slice(startIndex, startIndex + pageSize)
     },
-    styleMaxHeight () {
-      if (typeof this.maxHeight === 'number') return this.maxHeight + 'px'
-      return this.maxHeight
-    },
-    styleMinHeight () {
-      if (typeof this.minHeight === 'number') return this.minHeight + 'px'
-      return this.minHeight
-    },
     bodyStyle () {
       return {
-        maxHeight: this.styleMaxHeight,
-        minHeight: this.styleMinHeight
+        maxHeight: formatLength(this.maxHeight),
+        minHeight: formatLength(this.minHeight)
       }
     },
     countOfCurrentPageCheckedRows () {

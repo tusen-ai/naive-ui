@@ -11,8 +11,8 @@
         :disabled="(!rootMenuIsHorizontal && !rootMenuCollapsed) || syntheticDisabled"
         :display-directive="rootMenuIsHorizontal ? 'show' : 'if'"
         :overlay-style="{
-          width: overlayWidth === null ? null : overlayMinWidth + 'px',
-          minWidth: overlayMinWidth + 'px',
+          width: overlayWidth === null ? null : overlayMinWidth,
+          minWidth: overlayMinWidth,
           paddingTop: '8px',
           paddingBottom: '8px'
         }"
@@ -106,6 +106,7 @@ import NPopover from '../../Popover'
 import NMenuItemContent from './MenuItemContent'
 import NMenu from './Menu'
 import menuContentMixin from './menuContentMixin'
+import formatLength from '../../_utils/css/formatLength'
 
 export default {
   name: 'NSubmenu',
@@ -144,10 +145,10 @@ export default {
   },
   computed: {
     overlayWidth () {
-      return this.NMenu.overlayWidth
+      return formatLength(this.NMenu.overlayWidth)
     },
     overlayMinWidth () {
-      return this.NMenu.overlayMinWidth
+      return formatLength(this.NMenu.overlayMinWidth)
     },
     selectedInside () {
       return this.menuItemNames.includes(this.NMenu.value)
