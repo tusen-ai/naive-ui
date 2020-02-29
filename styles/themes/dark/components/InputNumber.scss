@@ -23,7 +23,8 @@
   $--input-number-button-text-color: (
     'default': $--n-secondary-text-color,
     'disabled': $--n-disabled-text-color,
-    'hover': $--n-primary-color
+    'hover': $--n-primary-color,
+    'active': $--n-primary-active-color
   ) !global;
   $--input-number-button-background-color: (
     'default': $--n-action-background-color,

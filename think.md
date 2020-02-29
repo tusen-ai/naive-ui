@@ -176,7 +176,7 @@ const devtoolIsOpened = e.target === document.activeElement
 53. 调整 date picker 的尺寸
 54. <del>Select option 右侧 padding 调整</del>
 55. <del>Popover arrow shadow 调整</del>
-56. Input number 按钮样式调整
+56. <del>Input number 按钮样式调整</del>
 57. 一部分组件在 Modal 内部的样式
 58. 更新 Progress 文档
 59. 为所有的数据录入组件的尺寸
