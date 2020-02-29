@@ -139,8 +139,9 @@ $--n-notification-border-radius: $--n-border-radius;
 
 /** popover */
 $--n-popover-border-radius: $--n-border-radius;
-$--n-popover-arrow-width: 6px;
-$--n-popover-box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.12) !global;
+$--n-popover-arrow-width: 4px;
+$--n-popover-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.12);
+$--n-popover-arrow-box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.12);
 
 /** radio */
 $--n-radio-button-border-radius: $--n-border-radius;

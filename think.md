@@ -126,7 +126,7 @@ const devtoolIsOpened = e.target === document.activeElement
 3. 用 RAF 优化 scrollbar 性能（不一定需要）
 4. <del>Anchor 切换有 bug，忽然闪现第一个</del>
 5. <del>Safari select lightbar container overflow 边角（或许是 webkit 的问题）</del>默认选中第一个可以装作这个问题不存在
-6. <del>Chrome lightbar offset @table fitler</del> 重构之后问题不存在
+6. <del>Chrome lightbar offset @table fitler</del> select menu 始终存在这个问题，不知道原因是什么
 7. <del>cascader 数据结构重构，维持原选项！</del> 这个不做了，对 Children 的处理过于边角，Patch 那块也会从声明式变成命令式
 8. <del>排查 render 函数是否每个地方都支持数组</del>
 9. <del>form async validation</del>
@@ -168,18 +168,19 @@ const devtoolIsOpened = e.target === document.activeElement
 45. 把 Upload 的回调 API 从 promise 改成 callback 格式的，文档也要对应修改
 46. <del>Date Picker 的 format 文档内容</del>s
 47. <del>Button Group 样式</del>
-48. text button icon
+48. <del>text button icon</del>
 49. <del>tab scroll 计算有潜在 bug</del>
 50. <del>data-table 的 header height 为啥要固定？因为固定列的问题，sticky 解决了就没事</del>
 51. <del>scrollbar 在平时不显示用不到的 rail</del>
 52. <del>placeholder transition 对 firefox 做兼容</del>
 53. 调整 date picker 的尺寸
-54. Select option 右侧 padding 调整
-55. Popover arrow shadow 调整
+54. <del>Select option 右侧 padding 调整</del>
+55. <del>Popover arrow shadow 调整</del>
 56. Input number 按钮样式调整
 57. 一部分组件在 Modal 内部的样式
 58. 更新 Progress 文档
-59. 审核文档
+59. 为所有的数据录入组件的尺寸
+60. 审核文档
 
 ```
 Done
