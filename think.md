@@ -128,7 +128,7 @@ const devtoolIsOpened = e.target === document.activeElement
 5. <del>Safari select lightbar container overflow 边角（或许是 webkit 的问题）</del>默认选中第一个可以装作这个问题不存在
 6. <del>Chrome lightbar offset @table fitler</del> 重构之后问题不存在
 7. <del>cascader 数据结构重构，维持原选项！</del> 这个不做了，对 Children 的处理过于边角，Patch 那块也会从声明式变成命令式
-8. 排查 render 函数是否每个地方都支持数组
+8. <del>排查 render 函数是否每个地方都支持数组</del>
 9. <del>form async validation</del>
 10. table filter 重构支持异步
 11. <del>tabs resize bug</del>
@@ -150,7 +150,7 @@ const devtoolIsOpened = e.target === document.activeElement
 27. <del>base picker => base selection</del>
 28. <del>base lightbar => base tracking rect</del>
 29. <del>loader 区分 debug 和 非 debug</del>
-30. 逐步放宽对宽度必需传 number 的现实，尤其是对于 table
+30. <del>逐步放宽对宽度必需传 number 的现实，尤其是对于 table</del>
 31. <del>BaseLoading 代替 Log 里的 Spin</del>
 32. Modal 内部组件的卸载方式
 33. <del>Anchor 的另一种模式，追踪内容按照的是中间范围而不是自身大小</del>
@@ -158,7 +158,7 @@ const devtoolIsOpened = e.target === document.activeElement
 35. <del>backtop mounted blink</del>
 36. <del>Tab keep alive</del>
 37. <del>Cascader submenu 的 lightbar 用 base tracking rect 代替</del>
-38. Dropdown 样式微调
+38. <del>Dropdown 样式微调</del>
 39. <del>Card 用 padding 代替 margin 来避免 margin 折叠的问题</del> 不做了，要是想避免折叠让用户自己写 bfc 吧
 40. <del>检查 Icon 在 button 中切换有没有问题，直觉来说应该没问题</del>
 41. Radio Group 和 Steps 的镂空效果在 mounted 的时候 transition 没有关闭
@@ -167,15 +167,19 @@ const devtoolIsOpened = e.target === document.activeElement
 44. <del>Icon 文档待更新</del>
 45. 把 Upload 的回调 API 从 promise 改成 callback 格式的，文档也要对应修改
 46. <del>Date Picker 的 format 文档内容</del>s
-47. Button Group 样式
+47. <del>Button Group 样式</del>
 48. text button icon
 49. <del>tab scroll 计算有潜在 bug</del>
-50. data-table 的 header height 为啥要固定？因为固定列的问题，sticky 解决了就没事
+50. <del>data-table 的 header height 为啥要固定？因为固定列的问题，sticky 解决了就没事</del>
 51. <del>scrollbar 在平时不显示用不到的 rail</del>
 52. <del>placeholder transition 对 firefox 做兼容</del>
 53. 调整 date picker 的尺寸
 54. Select option 右侧 padding 调整
 55. Popover arrow shadow 调整
+56. Input number 按钮样式调整
+57. 一部分组件在 Modal 内部的样式
+58. 更新 Progress 文档
+59. 审核文档
 
 ```
 Done
