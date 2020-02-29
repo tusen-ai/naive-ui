@@ -8,7 +8,7 @@
     font-size: $font-size;
     @include not-m(text) {
       height: $height;
-      line-height: $height;
+      line-height: $height - 2px;
       padding: map-get($--n-button-padding, $size);
     }
     white-space: nowrap;
@@ -29,8 +29,8 @@
       display: inline-block;
       position: relative;
       $icon-size: map-get($--n-button-icon-size, $size);
-      line-height: $height;
-      height: $height;
+      line-height: $height - 2px;
+      height: $height - 2px;
       width: $icon-size;
       max-width: $icon-size;
       vertical-align: bottom;
@@ -69,7 +69,6 @@
     }
     @include m(text) {
       padding: 0;
-      font-weight: $--n-strong-weight;
       border-radius: 0;
     }
   }
@@ -79,9 +78,12 @@
   @include m($type + '-type') {
     color: map-get($--button-text-color, $type);
     background-color: map-get($--button-background-color, $type);
-    box-shadow: map-get($--button-box-shadow, $type);
+    border: 1px solid map-get($--button-border-color, $type);
     @include m(text) {
-      box-shadow: none !important;
+      @include e(border-mask) {
+        box-shadow: none !important;
+      }
+      border: none;
       background-color: transparent;
       color: map-get($--button-text-typed-text-color, $type);
       @include not-m(disabled) {
@@ -115,12 +117,14 @@
     @include m(ghost) {
       background-color: map-get($--button-ghost-typed-background-color, $type);
       color: map-get($--button-ghost-typed-text-color, $type);
-      box-shadow: map-get($--button-ghost-typed-box-shadow, $type);
+      border: 1px solid map-get($--button-ghost-typed-border-color, $type);
       @include not-m(disabled) {
         @include m(enter-pressed) {
           background-color: map-get($--button-ghost-typed-background-color, $type + '-active');
           color: map-get($--button-ghost-typed-text-color, $type + '-active');
-          box-shadow: map-get($--button-ghost-typed-box-shadow, $type + '-active');
+          @include e(border-mask) {
+            box-shadow: map-get($--button-ghost-typed-border-mask-box-shadow, $type + '-active');
+          }
           @include e(icon) {
             @include b(icon) {
               fill: map-get($--button-ghost-typed-text-color, $type + '-active') !important;
@@ -136,7 +140,9 @@
           @include not-m(enter-pressed) {
             color: map-get($--button-ghost-typed-text-color, $type + '-focus');
             background-color: map-get($--button-ghost-typed-background-color, $type + '-focus');
-            box-shadow: map-get($--button-ghost-typed-box-shadow, $type + '-focus');
+            @include e(border-mask) {
+              box-shadow: map-get($--button-ghost-typed-border-mask-box-shadow, $type + '-focus');
+            }
             @include e(icon) {
               @include b(icon) {
                 fill: map-get($--button-ghost-typed-text-color, $type + '-focus') !important;
@@ -153,7 +159,9 @@
           &:hover {
             background-color: map-get($--button-ghost-typed-background-color, $type + '-hover');
             color: map-get($--button-ghost-typed-text-color, $type + '-hover');
-            box-shadow: map-get($--button-ghost-typed-box-shadow, $type + '-hover');
+            @include e(border-mask) {
+              box-shadow: map-get($--button-ghost-typed-border-mask-box-shadow, $type + '-hover');
+            }
             @include e(icon) {
               @include b(icon) {
                 fill: map-get($--button-ghost-typed-text-color, $type + '-hover') !important;
@@ -168,7 +176,9 @@
           &:active {
             background-color: map-get($--button-ghost-typed-background-color, $type + '-active');
             color: map-get($--button-ghost-typed-text-color, $type + '-active');
-            box-shadow: map-get($--button-ghost-typed-box-shadow, $type + '-active');
+            @include e(border-mask) {
+              box-shadow: map-get($--button-ghost-typed-border-mask-box-shadow, $type + '-active');
+            }
             @include e(icon) {
               @include b(icon) {
                 fill: map-get($--button-ghost-typed-text-color, $type + '-active') !important;
@@ -207,7 +217,9 @@
       @include m(enter-pressed) {
         background-color: map-get($--button-background-color, $type + '-active');
         color: map-get($--button-text-color, $type + '-active');
-        box-shadow: map-get($--button-box-shadow, $type + '-active');
+        @include e(border-mask) {
+          box-shadow: map-get($--button-border-mask-box-shadow, $type + '-active');
+        }
         @include e(icon) {
           @include b(icon) {
             fill: map-get($--button-text-color, $type + '-active') !important;
@@ -231,7 +243,9 @@
         @include not-m(enter-pressed) {
           background-color: map-get($--button-background-color, $type + '-focus');
           color: map-get($--button-text-color, $type + '-focus');
-          box-shadow: map-get($--button-box-shadow, $type + '-focus');
+          @include e(border-mask) {
+            box-shadow: map-get($--button-border-mask-box-shadow, $type + '-focus');
+          }
           @include e(icon) {
             @include b(icon) {
               fill: map-get($--button-text-color, $type + '-focus') !important;
@@ -248,7 +262,9 @@
         &:hover {
           background-color: map-get($--button-background-color, $type + '-hover');
           color: map-get($--button-text-color, $type + '-hover');
-          box-shadow: map-get($--button-box-shadow, $type + '-hover');
+          @include e(border-mask) {
+            box-shadow: map-get($--button-border-mask-box-shadow, $type + '-hover');
+          }
           @include e(icon) {
             @include b(icon) {
               fill: map-get($--button-text-color, $type + '-hover') !important;
@@ -263,7 +279,9 @@
         &:active {
           background-color: map-get($--button-background-color, $type + '-active');
           color: map-get($--button-text-color, $type + '-active');
-          box-shadow: map-get($--button-box-shadow, $type + '-active');
+          @include e(border-mask) {
+            box-shadow: map-get($--button-border-mask-box-shadow, $type + '-active');
+          }
           @include e(icon) {
             @include b(icon) {
               fill: map-get($--button-text-color, $type + '-active') !important;
@@ -308,8 +326,10 @@
   @include button-ripple-mixin('info');
   @include b(button) {
     @include once {
+      box-sizing: border-box;
       outline: none;
       position: relative;
+      z-index: auto;
       border: none;
       font-family: inherit;
       display: inline-block;
@@ -320,29 +340,30 @@
       transition:
         background-color .3s $--n-ease-in-out-cubic-bezier,
         opacity .3s $--n-ease-in-out-cubic-bezier,
-        box-shadow .3s $--n-ease-in-out-cubic-bezier;
+        border-color .3s $--n-ease-in-out-cubic-bezier;
       cursor: pointer;
       &::after {
         content: "";
         border-radius: inherit;
         position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
+        left: -1px;
+        top: -1px;
+        right: -1px;
+        bottom: -1px;
+      }
+      @include e(border-mask) {
+        position: absolute;
+        left: -1px;
+        top: -1px;
+        right: -1px;
+        bottom: -1px;
+        border-radius: inherit;
+        box-shadow: inset 0 0 0 1px transparent;
+        transition: box-shadow .3s $--n-ease-in-out-cubic-bezier;
       }
       @include e(icon) {
         @include fade-in-width-expand-transition();
         transition: color .3s $--n-ease-in-out-cubic-bezier;
-      }
-      @include e(content-aligner) {
-        display: inline-block;
-        line-height: inherit;
-        height: 100%;
-        font-size: inherit;
-        white-space: nowrap;
-        visibility: hidden;
-        width: 0;
       }
       @include e(content) {
         white-space: nowrap;
@@ -418,13 +439,52 @@
         border-radius: 0!important;
       }
       /**
-       * Not an elegant implementation
+       * Not an perfect implementation,
+       * since their border is not really "shared"
        */
       @include m(default-type) {
         & + {
           @include b(button) {
             @include m(default-type) {
-              margin-left: -1px!important;
+              border-left-width: 0px;
+            }
+          }
+        }
+      }
+      @include m(ghost) {
+        @include m(primary-type) {
+          & + {
+            @include b(button) {
+              @include m(primary-type) {
+                border-left-width: 0px;
+              }
+            }
+          }
+        }
+        @include m(success-type) {
+          & + {
+            @include b(button) {
+              @include m(success-type) {
+                border-left-width: 0px;
+              }
+            }
+          }
+        }
+        @include m(error-type) {
+          & + {
+            @include b(button) {
+              @include m(error-type) {
+                border-left-width: 0px;
+              }
+            }
+          }
+        }
+        @include m(info-type) {
+          & + {
+            @include b(button) {
+              @include m(info-type) {
+                border-left-width: 0px;
+              }
             }
           }
         }
@@ -452,6 +512,62 @@
       &:not(:first-child):not(:last-child) {
         margin: 0!important;
         border-radius: 0!important;
+      }
+      @include m(default-type) {
+        & + {
+          @include b(button) {
+            @include m(default-type) {
+              border-top-width: 0px;
+            }
+          }
+        }
+      }
+      @include m(ghost) {
+        @include m(info-type) {
+          & + {
+            @include b(button) {
+              @include m(info-type) {
+                border-top-width: 0px;
+              }
+            }
+          }
+        }
+        @include m(success-type) {
+          & + {
+            @include b(button) {
+              @include m(success-type) {
+                border-top-width: 0px;
+              }
+            }
+          }
+        }
+        @include m(warning-type) {
+          & + {
+            @include b(button) {
+              @include m(warning-type) {
+                border-top-width: 0px;
+              }
+            }
+          }
+        }
+        @include m(error-type) {
+          & + {
+            @include b(button) {
+              @include m(error-type) {
+                border-top-width: 0px;
+              }
+            }
+          }
+        }
+        @include m(primary-type) {
+          & + {
+            @include b(button) {
+              @include m(primary-type) {
+                border-top-width: 0px;
+              }
+            }
+          }
+        }
       }
     }
   }

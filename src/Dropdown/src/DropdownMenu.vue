@@ -88,17 +88,7 @@ export default {
       }
     }
   },
-  // created () {
-  //   console.log('dropdown menu created')
-  // },
-  // beforeDestroy () {
-  //   console.log('dropdown menu beforeDestroy')
-  // },
-  // destroyed () {
-  //   console.log('dropdown menu destroyed')
-  // },
   mounted () {
-    // console.log('dropdown menu mounted')
     if (this.defaultFocus && this.focusable) {
       this.$el.focus()
     }
@@ -194,6 +184,9 @@ export default {
   render (h) {
     return h('div', {
       staticClass: 'n-dropdown-menu',
+      class: {
+        [`n-dropdown-menu--${this.size}-size`]: true
+      },
       on: {
         keydown: this.handleKeyDown,
         mouseenter: this.handleMouseEnter,
