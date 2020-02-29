@@ -134,7 +134,7 @@
       }
       @include m(transition-disabled) {
         @include b(radio-button) {
-          transition: none;
+          transition: none !important;
         }
       }
       height: 28px;
