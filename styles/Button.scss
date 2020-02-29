@@ -4,6 +4,7 @@
   @include m($size + '-size') {
     $height: map-get($--n-height, $size);
     $font-size: map-get($--n-button-font-size, $size);
+    $icon-size: map-get($--n-button-icon-size, $size);
     border-radius: $--n-button-border-radius;
     font-size: $font-size;
     @include not-m(text) {
@@ -28,7 +29,6 @@
     @include e(icon) {
       display: inline-block;
       position: relative;
-      $icon-size: map-get($--n-button-icon-size, $size);
       line-height: $height - 2px;
       height: $height - 2px;
       width: $icon-size;
@@ -38,8 +38,8 @@
         font-size: $icon-size;
       }
       @include b(base-loading) {
-        height: $icon-size;
-        width: $icon-size;
+        height: $icon-size - 2px;
+        width: $icon-size - 2px;
         position: absolute;
         left: 0;
         top: 50%;
@@ -70,6 +70,10 @@
     @include m(text) {
       padding: 0;
       border-radius: 0;
+      @include e(icon) {
+        height: $icon-size;
+        line-height: $icon-size;
+      }
     }
   }
 }
@@ -79,42 +83,7 @@
     color: map-get($--button-text-color, $type);
     background-color: map-get($--button-background-color, $type);
     border: 1px solid map-get($--button-border-color, $type);
-    @include m(text) {
-      @include e(border-mask) {
-        box-shadow: none !important;
-      }
-      border: none;
-      background-color: transparent;
-      color: map-get($--button-text-typed-text-color, $type);
-      @include not-m(disabled) {
-        @include m(rippling) {
-          &::after {
-            display: none;
-          }
-        }
-        @include m(enter-pressed) {
-          background-color: transparent;
-          color: map-get($--button-text-typed-text-color, $type + '-active');
-        }
-        &:not(:active):focus {
-          @include not-m(enter-pressed) {
-            background-color: transparent;
-            color: map-get($--button-text-typed-text-color, $type + '-focus');
-          } 
-        }
-        @include not-m(enter-pressed) {
-          &:hover {
-            background-color: transparent;
-            color: map-get($--button-text-typed-text-color, $type + '-hover');
-          }
-          &:active {
-            background-color: transparent;
-            color: map-get($--button-text-typed-text-color, $type + '-active');
-          }
-        }
-      }
-    }
-    @include m(ghost) {
+    @include m(ghost, text) {
       background-color: map-get($--button-ghost-typed-background-color, $type);
       color: map-get($--button-ghost-typed-text-color, $type);
       border: 1px solid map-get($--button-ghost-typed-border-color, $type);
@@ -200,6 +169,41 @@
         @include b(base-loading) {
           fill: map-get($--button-ghost-typed-text-color, $type) !important;
           stroke: map-get($--button-ghost-typed-text-color, $type) !important;
+        }
+      }
+    }
+    @include m(text) {
+      @include e(border-mask) {
+        box-shadow: none !important;
+      }
+      border: none;
+      background-color: transparent;
+      color: map-get($--button-text-typed-text-color, $type);
+      @include not-m(disabled) {
+        @include m(rippling) {
+          &::after {
+            display: none;
+          }
+        }
+        @include m(enter-pressed) {
+          background-color: transparent;
+          color: map-get($--button-text-typed-text-color, $type + '-active');
+        }
+        &:not(:active):focus {
+          @include not-m(enter-pressed) {
+            background-color: transparent;
+            color: map-get($--button-text-typed-text-color, $type + '-focus');
+          } 
+        }
+        @include not-m(enter-pressed) {
+          &:hover {
+            background-color: transparent;
+            color: map-get($--button-text-typed-text-color, $type + '-hover');
+          }
+          &:active {
+            background-color: transparent;
+            color: map-get($--button-text-typed-text-color, $type + '-active');
+          }
         }
       }
     }
