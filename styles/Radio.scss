@@ -132,6 +132,11 @@
       @include m(button-group) {
         white-space: nowrap;
       }
+      @include m(transition-disabled) {
+        @include b(radio-button) {
+          transition: none;
+        }
+      }
       height: 28px;
       line-height: 28px;
     }

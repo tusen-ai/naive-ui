@@ -100,7 +100,15 @@ export default {
   },
   data () {
     return {
-      radioButtonCount: 0
+      radioButtonCount: 0,
+      transitionDisabled: true
+    }
+  },
+  mounted () {
+    if (this.radioButtonCount > 0) {
+      this.$nextTick().then(() => {
+        this.transitionDisabled = false
+      })
     }
   },
   provide () {
@@ -110,12 +118,14 @@ export default {
     }
   },
   render (h) {
+    const isButtonGroup = this.radioButtonCount > 0
     return h('div', {
       staticClass: 'n-radio-group',
       class: {
         [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
         [`n-radio-group--${this.size}-size`]: this.size,
-        [`n-radio-group--button-group`]: this.radioButtonCount > 0
+        [`n-radio-group--button-group`]: isButtonGroup,
+        [`n-radio-group--transition-disabled`]: isButtonGroup && this.transitionDisabled
       }
     }, mapSlot(h, this.$slots.default, this))
   }
