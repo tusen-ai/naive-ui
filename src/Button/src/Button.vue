@@ -104,6 +104,7 @@
         </n-icon-switch-transition>
       </div>
     </n-fade-in-height-expand-transition>
+    <div class="n-button__border-mask" />
   </button>
 </template>
 
