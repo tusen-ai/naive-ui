@@ -51,11 +51,11 @@
       @change="handleChange"
       @keyup="handleKeyUp"
     />
-    <div v-else style="position: relative;">
+    <div v-else style="position: relative;" class="n-input-first-input">
       <input
         ref="input"
         :type="type"
-        class="n-input__input"
+        class="n-input__input n-input__input--first"
         :tabindex="passivelyActivated && !inputFocused ? -1 : false"
         :placeholder="pair ? syntheticPlaceholder[0] : placeholder"
         :disabled="disabled"
@@ -91,7 +91,7 @@
       <input
         ref="secondInput"
         :type="type"
-        class="n-input__input"
+        class="n-input__input n-input__input--second"
         :tabindex="passivelyActivated && !inputFocused ? -1 : false"
         :placeholder="syntheticPlaceholder[1]"
         :disabled="disabled"

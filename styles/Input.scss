@@ -32,62 +32,40 @@
       left: 14px;
       right: 14px;
     }
-    @include m(suffix) {
+    @include m(suffix, clearable) {
       @include not-m(split) {
         @include e(input) {
-          padding-right: 38px!important;
-        }
-        @include e(placeholder) {
-          right: 38px!important;
+          @include m(first) {
+            padding-right: 38px!important;
+            & + {
+              @include e(placeholder) {
+                right: 38px!important;
+              }
+            }
+          }
         }
       }
       @include m(split) {
-        *:not(:first-child) {
-          @include e(input) {
+        @include e(input) {
+          @include m(second) {
             padding-right: 38px!important;
-          }
-          @include e(placeholder) {
-            right: 38px!important;
+            & + {
+              @include e(placeholder) {
+                right: 38px!important;
+              }
+            }
           }
         }
       }
     }
     @include m(prefix) {
-      @include not-m(split) {
-        @include e(input) {
+      @include e(input) {
+        @include m(first) {
           padding-left: 38px!important;
-        }
-        @include e(placeholder) {
-          left: 38px!important;
-        }
-      }
-      @include m(split) {
-        *:not(:first-child) {
-          @include e(input) {
-            padding-left: 38px!important;
-          }
-          @include e(placeholder) {
-            left: 38px!important;
-          }
-        }
-      }
-    }
-    @include m(clearable) {
-      @include not-m(split) {
-        @include e(input) {
-          padding-right: 38px!important;
-        }
-        @include e(placeholder) {
-          right: 38px!important;
-        }
-      }
-      @include m(split) {
-        *:not(:first-child) {
-          @include e(input) {
-            padding-right: 38px!important;
-          }
-          @include e(placeholder) {
-            right: 38px!important;
+          & + {
+            @include e(placeholder) {
+              left: 38px!important;
+            }
           }
         }
       }
