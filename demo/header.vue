@@ -5,14 +5,16 @@
     "light": "浅色",
     "searchPlaceholder": "搜索组件",
     "home": "首页",
-    "doc": "文档"
+    "doc": "文档",
+    "alreadyHome": "别点了，你已经在首页了"
   },
   "en-US": {
     "dark": "Dark",
     "light": "Light",
     "searchPlaceholder": "Search Components",
     "home": "Home",
-    "doc": "Documentation"
+    "doc": "Documentation",
+    "alreadyHome": "You've already been in home page. No clicking."
   }
 }
 </i18n>
@@ -138,6 +140,10 @@ export default {
   },
   methods: {
     handleLogoClick () {
+      if (/^(\/[^/]+){2}$/.test(this.$route.path)) {
+        this.$NMessage.info(this.$t('alreadyHome'))
+        return
+      }
       this.$router.push(
         /^(\/[^/]+){2}/.exec(this.$route.path)[0]
       )

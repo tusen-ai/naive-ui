@@ -20,12 +20,12 @@ use-component
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
-|title|`string \| (function:() => VNode\|Array<VNode>)`|`null`|可以是 render 函数|
+|title|`string \| (() => VNode \| Array<VNode>)`|`null`|可以是 render 函数|
 |closable|`boolean`|`boolean`||
-|icon|`(function:() => VNode\|Array<VNode>)`|`null`|需要是 render 函数|
+|icon|`() => VNode \| Array<VNode>`|`null`|需要是 render 函数|
 |negative-text|`string`|`null`|不填对应的按钮不会出现|
 |positive-text|`string`|`null`|不填对应的按钮不会出现|
-|content|`string \| (function:() => VNode\|Array<VNode>)`|`null`|可以是 render 函数|
+|content|`string \| (() => VNode \| Array<VNode>)`|`null`|可以是 render 函数|
 |show-icon|`boolean`|`true`||
 |loading|`boolean`|`false`||
 |bordered|`boolean`|`false`||
@@ -40,12 +40,12 @@ use-component
 |名称|类型|说明|
 |-|-|-|
 |type|`'error \| 'success' \| 'warning'`||
-|title|`string \| (function:() => VNode\|Array<VNode>)`|可以是 render 函数|
+|title|`string \| (() => VNode \| Array<VNode>)`|可以是 render 函数|
 |closable|`boolean`||
-|icon|`(function:() => VNode\|Array<VNode>)`|需要是 render 函数|
+|icon|`() => VNode \| Array<VNode>`|需要是 render 函数|
 |negative-text|`string`|不填对应的按钮不会出现|
 |positive-text|`string`|不填对应的按钮不会出现|
-|content|`string \| (function:() => VNode\|Array<VNode>)`|可以是 render 函数|
+|content|`string \| (() => VNode \| Array<VNode>)`|可以是 render 函数|
 |show-icon|`boolean`||
 |loading|`boolean`||
 |bordered|`boolean`||
@@ -63,12 +63,12 @@ use-component
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
-|title|`string \| (function:() => VNode\|Array<VNode>)`|`null`|可以是 render 函数|
+|title|`string \| (() => VNode \| Array<VNode>)`|`null`|可以是 render 函数|
 |closable|`boolean`|`boolean`||
-|icon|`(function:() => VNode\|Array<VNode>)`|`null`|需要是 render 函数|
+|icon|`() => VNode \| Array<VNode>`|`null`|需要是 render 函数|
 |negative-text|`string`|`null`|不填对应的按钮不会出现|
 |positive-text|`string`|`null`|不填对应的按钮不会出现|
-|content|`string \| (function:() => VNode\|Array<VNode>)`|`null`|可以是 render 函数|
+|content|`string \| (() => VNode \| Array<VNode>)`|`null`|可以是 render 函数|
 |show-icon|`boolean`|`true`||
 |loading|`boolean`|`false`||
 |bordered|`boolean`|`false`||

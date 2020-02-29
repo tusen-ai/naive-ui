@@ -527,12 +527,6 @@ export default {
     handleTableMainBodyScroll (e) {
       this.handleTableBodyScroll(e, 'main')
     },
-    handleTableLeftBodyScroll (e) {
-      this.handleTableBodyScroll(e, 'left')
-    },
-    handleTableRightBodyScroll (e) {
-      this.handleTableBodyScroll(e, 'right')
-    },
     handleTableBodyScroll (e, part) {
       if (!this.scrollingPart || this.scrollingPart === part) {
         if (this.scrollingPart !== part) this.scrollingPart = part
@@ -596,7 +590,6 @@ export default {
     },
     collectDOMSizes () {
       const {
-        header: headerEl,
         body: mainTableScrollContainer
       } = this.getScrollElements()
       this.mainTableScrollContainerWidth = mainTableScrollContainer.offsetWidth
