@@ -2,8 +2,10 @@
 
 @mixin radio-group-size-mixin ($size) {
   @include m($size + '-size') {
-    line-height: map-get($--n-height, $size);
-    height: map-get($--n-height, $size);
+    @include m(button-group) {
+      line-height: map-get($--n-height, $size);
+      height: map-get($--n-height, $size);
+    }
     @include b(radio-button) {
       line-height: map-get($--n-height, $size);
       height: map-get($--n-height, $size);
@@ -24,7 +26,6 @@
       display: inline-flex;
       vertical-align: middle;
       align-items: center;
-      margin-right: 18px;
       @include e(radio-input) {
         width: 0;
         height: 0;
@@ -131,14 +132,14 @@
       display: inline-block;
       @include m(button-group) {
         white-space: nowrap;
+        height: 28px;
+        line-height: 28px;
       }
       @include m(transition-disabled) {
         @include b(radio-button) {
           transition: none !important;
         }
       }
-      height: 28px;
-      line-height: 28px;
     }
     @include b(radio-button) {
       @include once {

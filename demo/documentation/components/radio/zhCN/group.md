@@ -45,3 +45,8 @@ export default {
   }
 }
 ```
+```css
+.n-radio {
+  margin: 0 8px 12px 0;
+}
+```
