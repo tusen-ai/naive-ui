@@ -137,7 +137,7 @@ const devtoolIsOpened = e.target === document.activeElement
 14. <del>按需引入 babel plugin</del> 这个不做了，收益不大，工作量不小
 15. form table 需要 size
 16. <del>input number 需要一个小型的</del> 目前看来也不是很必要，input number 其实可以很小
-17. layout scroll api
+17. <del>layout scroll api</del>
 18. <del>cascader select menu disabled 选项</del>
 19. <del>icon 的默认 stroke</del>
 20. <del>tree 组件</del>
@@ -165,7 +165,7 @@ const devtoolIsOpened = e.target === document.activeElement
 42. <del>Typography 文档待更新</del>
 43. <del>Tab 文档待更新</del>
 44. <del>Icon 文档待更新</del>
-45. 把 Upload 的回调 API 从 promise 改成 callback 格式的，文档也要对应修改
+45. <del>把 Upload 的回调 API 从 promise 改成 callback 格式的，文档也要对应修改</del> 我决定全面提供 Promise API 而不是 callback 风格的
 46. <del>Date Picker 的 format 文档内容</del>s
 47. <del>Button Group 样式</del>
 48. <del>text button icon</del>
@@ -184,6 +184,7 @@ const devtoolIsOpened = e.target === document.activeElement
 61. 调整 transfer 的样式
 62. <del>Table cascader 差一点国际化</del>
 63. Anchor 初次滚动的逻辑是不是要手动调整一下，现在位置实际上不一致
+64. 将所有的 Typography 组件改为非 Functional 的，因为获取不到 context 本身的主题
 
 ```
 Done

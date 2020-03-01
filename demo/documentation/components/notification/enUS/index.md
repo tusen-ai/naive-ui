@@ -36,7 +36,7 @@ duration
 |meta|`string \| (() => VNode \| Array<VNode>)`|`null`|Can be render function|
 |action|`string \| (() => VNode \| Array<VNode>)`|`null`|Can be render function|
 |closable|`boolean`|`true`||
-|onClose|`(next: function) => any`|`next => next()`|Only if next is called notification will close.|
+|onClose|`() => boolean \| Promise<boolean>`|`() => {}`|The callback of notification closing. Returning `false`, promise resolve `false` or promise reject will cancel this closing.|
 |onAfterHide|`function`|`null`||
 |onAfterShow|`function`|`null`||
 |duration|`number`|`null`|If not set, it won't automatically close. Unit is millisecond.|

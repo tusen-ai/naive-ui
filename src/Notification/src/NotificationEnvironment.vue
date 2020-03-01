@@ -25,7 +25,7 @@ export default {
       meta: null,
       action: null,
       closable: true,
-      onClose: next => next(),
+      onClose: () => {},
       onHide: () => {},
       onAfterShow: () => {},
       onAfterHide: () => {}
@@ -73,7 +73,17 @@ export default {
       this.onAfterHide()
     },
     handleClose () {
-      this.onClose(this.hide)
+      Promise
+        .resolve(
+          this.onClose()
+        )
+        .then(feedback => {
+          if (feedback === false) return
+          this.hide()
+        })
+        .catch(() => {
+          this.hide()
+        })
     }
   },
   render (h) {
