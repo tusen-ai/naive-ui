@@ -86,9 +86,11 @@ export default {
     }
   },
   methods: {
-    resetScrollPosition () {
+    scrollTo (...args) {
       if (this.$refs.scrollbar) {
-        this.$refs.scrollbar.scrollToTop()
+        this.$refs.scrollbar.scrollTo(...args)
+      } else {
+        this.$el.scrollTo(...args)
       }
     },
     blockChildLayoutTransitionOneTick () {

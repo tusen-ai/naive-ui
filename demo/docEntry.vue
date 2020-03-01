@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     resetScrollPosition () {
-      this.$refs.layout.resetScrollPosition()
+      this.$refs.layout.scrollTo(0, 0)
     }
   }
 }
