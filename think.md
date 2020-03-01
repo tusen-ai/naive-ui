@@ -130,13 +130,13 @@ const devtoolIsOpened = e.target === document.activeElement
 7. <del>cascader 数据结构重构，维持原选项！</del> 这个不做了，对 Children 的处理过于边角，Patch 那块也会从声明式变成命令式
 8. <del>排查 render 函数是否每个地方都支持数组</del>
 9. <del>form async validation</del>
-10. table filter 重构支持异步
+10. <del>table filter 重构支持异步</del>
 11. <del>tabs resize bug</del>
 12. <del>CSS 整理</del> 暂且算做完了
 13. <del>落地页</del>
 14. <del>按需引入 babel plugin</del> 这个不做了，收益不大，工作量不小
 15. form table 需要 size
-16. input number 需要一个小型的
+16. <del>input number 需要一个小型的</del> 目前看来也不是很必要，input number 其实可以很小
 17. layout scroll api
 18. <del>cascader select menu disabled 选项</del>
 19. <del>icon 的默认 stroke</del>
@@ -161,7 +161,7 @@ const devtoolIsOpened = e.target === document.activeElement
 38. <del>Dropdown 样式微调</del>
 39. <del>Card 用 padding 代替 margin 来避免 margin 折叠的问题</del> 不做了，要是想避免折叠让用户自己写 bfc 吧
 40. <del>检查 Icon 在 button 中切换有没有问题，直觉来说应该没问题</del>
-41. Radio Group 和 Steps 的镂空效果在 mounted 的时候 transition 没有关闭
+41. <del>Radio Group 和 Steps 的镂空效果在 mounted 的时候 transition 没有关闭</del>
 42. <del>Typography 文档待更新</del>
 43. <del>Tab 文档待更新</del>
 44. <del>Icon 文档待更新</del>
@@ -181,6 +181,9 @@ const devtoolIsOpened = e.target === document.activeElement
 58. 更新 Progress 文档
 59. 为所有的数据录入组件的尺寸
 60. 审核文档
+61. 调整 transfer 的样式
+62. <del>Table cascader 差一点国际化</del>
+63. Anchor 初次滚动的逻辑是不是要手动调整一下，现在位置实际上不一致
 
 ```
 Done

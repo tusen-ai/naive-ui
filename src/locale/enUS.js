@@ -9,6 +9,7 @@ export default {
   },
   Cascader: {
     placeholder: 'Please Select',
+    loading: 'Loading',
     loadingRequiredMessage: label => `Please load all ${label}'s descedants before checking it.`
   },
   DatePicker: {

@@ -371,8 +371,8 @@ export default {
         this.closeMenu()
       } else {
         const activator = this.$refs.activator
-        this.pattern = ''
-        if (activator) {
+        if (activator && this.filterable) {
+          this.pattern = ''
           this.$nextTick().then(() => {
             activator.focusPatternInput()
           })
