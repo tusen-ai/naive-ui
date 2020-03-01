@@ -59,7 +59,6 @@ export default {
   methods: {
     toggle () {
       if (this.syntheticDisabled) return
-      this.$refs.input.focus()
       if (this.checkedValue !== this.value) {
         this.emitChangeEvent()
       }
@@ -75,6 +74,10 @@ export default {
     },
     handleKeyUpEnter () {
       this.toggle()
+    },
+    handleMouseDown () {
+      if (this.syntheticDisabled) return
+      this.$refs.input.focus()
     },
     handleClick (e) {
       this.$emit('click', e)
