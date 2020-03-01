@@ -103,8 +103,8 @@
     @include e(action) {
       @include once {
         transition:
-        color .3s $--n-ease-in-out-cubic-bezier,
-        border-color .3s $--n-ease-in-out-cubic-bezier;
+          color .3s $--n-ease-in-out-cubic-bezier,
+          border-color .3s $--n-ease-in-out-cubic-bezier;
       }
       border-top: 1px solid $--base-select-menu-action-divider-color;
       color: $--base-select-menu-action-text-color;

@@ -184,7 +184,7 @@ const devtoolIsOpened = e.target === document.activeElement
 61. 调整 transfer 的样式
 62. <del>Table cascader 差一点国际化</del>
 63. Anchor 初次滚动的逻辑是不是要手动调整一下，现在位置实际上不一致
-64. 将所有的 Typography 组件改为非 Functional 的，因为获取不到 context 本身的主题
+64. <del>将所有的 Typography 组件改为非 Functional 的，因为获取不到 context 本身的主题</del>
 
 ```
 Done
