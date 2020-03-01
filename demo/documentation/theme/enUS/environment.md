@@ -5,13 +5,15 @@ Sometimes you may need some component to access some values at specific theme. Y
   <n-button @click="theme = 'dark'">Dark Theme</n-button>
   <n-button @click="theme = 'light'">Light Theme</n-button>
 </div>
-<n-config-provider :theme="theme" :theme-environment="env">
-  <n-config-consumer>
-    <template v-slot="{ themeEnvironment }">
-      <n-tag>{{ themeEnvironment }}</n-tag>
-    </template>
-  </n-config-consumer>
-</n-config-provider>
+<div style="background-color: rgba(128, 128, 128); padding: 8px;">
+  <n-config-provider :theme="theme" :theme-environment="env">
+    <n-config-consumer>
+      <template v-slot="{ themeEnvironment }">
+        <n-tag>{{ themeEnvironment }}</n-tag>
+      </template>
+    </n-config-consumer>
+  </n-config-provider>
+</div>
 ```
 ```js
 export default {
