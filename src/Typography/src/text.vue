@@ -1,9 +1,60 @@
+<template>
+  <code
+    v-if="code"
+    class="n-text"
+    :class="{
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      'n-text--code': code,
+      [`n-text--${type}-type`]: type,
+      'n-text--delete': $props.delete,
+      'n-text--strong': strong,
+      'n-text--italic': italic,
+      'n-text--disabled': disabled,
+      'n-text--underline': underline,
+      [`n-text--${depth}-depth`]: depth
+    }"
+    v-on="$listeners"
+  ><template v-if="!$props.delete"><slot /></template><del v-else><slot /></del></code>
+  <del
+    v-else-if="$props.delete"
+    class="n-text"
+    :class="{
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      'n-text--code': code,
+      [`n-text--${type}-type`]: type,
+      'n-text--delete': $props.delete,
+      'n-text--strong': strong,
+      'n-text--italic': italic,
+      'n-text--disabled': disabled,
+      'n-text--underline': underline,
+      [`n-text--${depth}-depth`]: depth
+    }"
+    v-on="$listeners"
+  ><slot /></del>
+  <span
+    v-else
+    class="n-text"
+    :class="{
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      'n-text--code': code,
+      [`n-text--${type}-type`]: type,
+      'n-text--delete': $props.delete,
+      'n-text--strong': strong,
+      'n-text--italic': italic,
+      'n-text--disabled': disabled,
+      'n-text--underline': underline,
+      [`n-text--${depth}-depth`]: depth
+    }"
+  ><slot /></span>
+</template>
+
 <script>
-import getTheme from './getTheme'
+import withapp from '../../_mixins/withapp'
+import themeable from '../../_mixins/themeable'
 
 export default {
   name: 'NText',
-  functional: true,
+  mixins: [withapp, themeable],
   props: {
     code: {
       type: Boolean,
@@ -39,38 +90,6 @@ export default {
       },
       default: null
     }
-  },
-  render (h, context) {
-    const props = context.props
-    const type = props.type
-    const isCode = props.code
-    const isDelete = props.delete
-    const isStrong = props.strong
-    const isItalic = props.italic
-    const isDisabled = props.disabled
-    const isUnderline = props.underline
-    const depth = props.depth
-    const on = context.listeners
-    const theme = getTheme(context.parent)
-    const defaultSlot = context.slots.default || (context.scopedSlots.default && context.scopedSlots.default())
-    return h(isCode ? 'code' : isDelete ? 'del' : 'span', {
-      staticClass: 'n-text',
-      class: {
-        [`n-${theme}-theme`]: theme,
-        'n-text--code': isCode,
-        [`n-text--${type}-type`]: type,
-        'n-text--delete': isDelete,
-        'n-text--strong': isStrong,
-        'n-text--italic': isItalic,
-        'n-text--disabled': isDisabled,
-        'n-text--underline': isUnderline,
-        [`n-text--${depth}-depth`]: depth
-      },
-      ...context.data,
-      on
-    }, isDelete && isCode ? [
-      h('del', {}, defaultSlot)
-    ] : defaultSlot)
   }
 }
 </script>
