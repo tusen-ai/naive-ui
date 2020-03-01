@@ -44,6 +44,10 @@ export default {
     startDatetimePlaceholder: '开始日期时间',
     endDatetimePlaceholder: '结束日期时间'
   },
+  DataTable: {
+    confirm: '确认',
+    clear: '重置'
+  },
   Transfer: {
     sourceTitle: '源项',
     targetTitle: '目标项'

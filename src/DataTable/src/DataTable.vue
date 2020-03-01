@@ -29,6 +29,9 @@
         <div
           v-if="paginatedData.length === 0"
           class="n-data-table__empty"
+          :class="{
+            'n-data-table__empty--hide': loading
+          }"
         >
           <n-empty />
         </div>
@@ -54,6 +57,7 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import locale from '../../_mixins/locale'
 import { setCheckStatusOfRow } from './utils'
 import BaseTable from './BaseTable.vue'
 import NEmpty from '../../Empty'
@@ -119,7 +123,7 @@ export default {
     NEmpty,
     NPagination
   },
-  mixins: [ withapp, themeable ],
+  mixins: [ withapp, themeable, locale('DataTable') ],
   provide () {
     return {
       NDataTable: this

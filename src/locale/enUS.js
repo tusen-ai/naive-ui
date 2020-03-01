@@ -44,6 +44,10 @@ export default {
     startDatetimePlaceholder: 'Start Date and Time',
     endDatetimePlaceholder: 'End Date and Time'
   },
+  DataTable: {
+    confirm: 'Confirm',
+    clear: 'Clear'
+  },
   Transfer: {
     sourceTitle: 'Source',
     targetTitle: 'Target'

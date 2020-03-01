@@ -16,6 +16,7 @@
 const addressColumn = {
   title: 'Address',
   key: 'address',
+  filterMultiple: false,
   filterOptionValues: [],
   sorter: 'default',
   filterOptions: [

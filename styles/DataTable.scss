@@ -6,6 +6,19 @@
       width: 100%;
       font-size: 14px;
       padding-bottom: 8px;
+      @include e(empty) {
+        padding: 24px 0;
+        opacity: 1;
+        transition: opacity .3s $--n-ease-in-out-cubic-bezier;
+        @include m(hide) {
+          opacity: 0;
+        }
+      }
+      @include e(pagination) {
+        margin-top: 24px;
+        display: flex;
+        justify-content: flex-end;
+      }
     }
     @include b(data-table-tables-wrapper) {
       @include once {
@@ -229,18 +242,6 @@
     @include b(scrollbar-content) {
       overflow: visible;
     }
-  }
-  @include b(data-table) {
-    @include once {
-      @include e(empty) {
-        padding: 24px 0;
-      }
-      @include e(pagination) {
-        margin-top: 24px;
-        display: flex;
-        justify-content: flex-end;
-      }
-    }
     @include b(data-table-base-table-header) {
       @include once {
         transition: border-color .3s $--n-ease-in-out-cubic-bezier;
@@ -313,7 +314,7 @@
             }
             @include b(icon) {
               @include once {
-                font-size: 14px;
+                font-size: 12px;
               }
               fill: map-get($--data-table-button-color, 'default');
               stroke: map-get($--data-table-button-color, 'default');
@@ -334,6 +335,34 @@
             }
           }
         }
+      }
+    }
+  }
+}
+
+@include b(data-table-filter-menu) {
+  @include e(group) {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 12px 0 12px;
+    @include b(checkbox) {
+      margin-bottom: 12px;
+    }
+    @include b(radio) {
+      margin-bottom: 12px;
+    }
+  }
+  @include b(divider) {
+    margin: 0;
+  }
+  @include e(action) {
+    padding: 8px 12px;
+    display: flex;
+    flex-wrap: no-wrap;
+    justify-content: space-evenly;
+    @include b(button) {
+      &:not(:last-child) {
+        margin-right: 8px;
       }
     }
   }
