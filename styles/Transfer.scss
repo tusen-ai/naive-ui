@@ -1,23 +1,5 @@
 @import './mixins/mixins.scss';
 
-@keyframes transfer-height-collapse {
-  0% {
-    max-height: 34px;
-  }
-  100% {
-    max-height: 0;
-  }
-}
-
-@keyframes transfer-height-expand {
-  0% {
-    max-height: 0;
-  }
-  100% {
-    max-height: 34px;
-  }
-}
-
 @keyframes transfer-slide-in-from-left {
   0% {
     transform: translateX(-150%);
@@ -54,27 +36,80 @@
   }
 }
 
-/**
- * There are some theme related hard codes in transfer.
- * Emmm, when I am writing these code I can't figure out a better solution.
- * So just let it be.
- * ...
- * When I find myself in times of trouble
- * blablabla
- * ...
- */
+@mixin transfer-animation-mixin($size) {
+  @keyframes transfer-height-collapse--#{$size} {
+    0% {
+      max-height: map-get($--n-height, $size);
+    }
+    100% {
+      max-height: 0;
+    }
+  }
+  
+  @keyframes transfer-height-expand--#{$size} {
+    0% {
+      max-height: 0;
+    }
+    100% {
+      max-height: map-get($--n-height, $size);
+    }
+  }
+}
+
+@mixin transfer-size-mixin($size) {
+  @include m($size + '-size') {
+    @include b(transfer-list) {
+      @include b(transfer-list-header) {
+        font-size: map-get($--n-font-size, $size);
+        height: map-get($--n-height, $size) + 6px;
+      }
+      @include b(transfer-list-body) {
+        height: map-get($--n-height, $size) * 5.6;
+        @include b(transfer-list-item) {
+          font-size: map-get($--n-font-size, $size);
+          height: map-get($--n-height, $size);
+          max-height: map-get($--n-height, $size);
+          @include m(source) {
+            @include m(enter) {
+              animation-name: transfer-height-expand--#{$size}, transfer-slide-in-from-right;
+            }
+            @include m(leave) {
+              animation-name: transfer-height-collapse--#{$size}, transfer-slide-out-to-right;
+            }
+          }
+          @include m(target) {
+            @include m(enter) {
+              animation-name: transfer-height-expand--#{$size}, transfer-slide-in-from-left;
+            }
+            @include m(leave) {
+              animation-name: transfer-height-collapse--#{$size}, transfer-slide-out-to-left;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include transfer-animation-mixin('small');
+@include transfer-animation-mixin('medium');
+@include transfer-animation-mixin('large');
+
 @include themes-mixin {
   @include b(transfer) {
     @include once {
       display: flex;
       width: 444px;
+      @include transfer-size-mixin('small');
+      @include transfer-size-mixin('medium');
+      @include transfer-size-mixin('large');
     }
     @include b(transfer-list) {
       @include once {
         background-clip: padding-box;
         width: 182px;
-        height: 311px;
-        transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
+        position: relative;
+        transition: background-color .3s $--n-ease-in-out-cubic-bezier;
         border-radius: $--n-transfer-border-radius;
         @include b(virtual-scroller) {
           height: 100%;
@@ -85,18 +120,28 @@
             height: 0;
           }
         }
+        @include e(border-mask) {
+          transition: border-color .3s $--n-ease-in-out-cubic-bezier;
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          border-radius: $--n-transfer-border-radius;
+        }
+      }
+      @include e(border-mask) {
+        border: 1px solid $--transfer-border-color;
+        pointer-events: $--transfer-list-border-mask-pointer-events;
       }
       background-color: map-get($--transfer-list-background-color, 'default');
-      border: 1px solid $--transfer-list-border-color;
       @include b(transfer-list-header) {
         @include once {
           box-sizing: border-box;
-          margin: -1px -1px 0 -1px;
           transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
           display: flex;
           border-radius: $--n-transfer-border-radius $--n-transfer-border-radius 0 0;
           align-items: center;
-          height: 40px;
           background-clip: padding-box;
           @include e(checkbox) {
             position: relative;
@@ -107,14 +152,10 @@
           }
         }
         background-color: map-get($--transfer-list-header-background-color, 'default');
-        border-top: 1px solid $--transfer-header-border-color;
-        border-left: 1px solid $--transfer-header-border-color;
-        border-right: 1px solid $--transfer-header-border-color; 
         @include e(header) {
           @include once {
             flex: 1;
             line-height: 1;
-            font-size: 14px;
             font-weight: $--n-strong-weight;
             transition: color .3s $--n-ease-in-out-cubic-bezier;
           }
@@ -135,22 +176,8 @@
         }
       }
       @include b(transfer-list-body) {
-        /** hard-code **/
-        @if $theme == 'dark' {
-          margin-left: -1px;
-          margin-right: -1px;
-          margin-bottom: -1px;
-        } @else {
-          margin-left: 0;
-          margin-right:0;
-        }
         @include b(transfer-filter) {
-          /** hard-code **/
-          @if $theme == 'dark' {
-            padding: 8px 9px
-          } @else {
-            padding: 8px 8px;
-          }
+          border-bottom: 1px solid $--transfer-filter-border-color;
         }
         @include once {
           box-sizing: border-box;
@@ -183,7 +210,9 @@
             }
           }
           @include b(transfer-filter) {
+            padding: 8px 8px;
             box-sizing: border-box;
+            transition: border-color .3s $--n-ease-in-out-cubic-bezier;
           }
         }
         @include b(transfer-list-content) {
@@ -202,11 +231,8 @@
               transition: color .3s $--n-ease-in-out-cubic-bezier;
               position: relative;
               cursor: pointer;
-              max-height: 34px;
               display: flex;
               align-items: center;
-              font-size: 14px;
-              height: 34px;
               @include e(extra) {
                 text-overflow: ellipsis;
                 overflow: hidden;
@@ -217,14 +243,12 @@
                 animation-fill-mode: forwards;
                 @include m(enter) {
                   transform: translateX(150%);
-                  animation-name: transfer-height-expand, transfer-slide-in-from-right;
                   animation-duration: .25s, .25s;
                   animation-timing-function: $--n-ease-in-out-cubic-bezier, $--n-ease-out-cubic-bezier;
                   animation-delay: 0s, .25s;
                 }
                 @include m(leave) {
                   transform: translateX(-150%);
-                  animation-name: transfer-height-collapse, transfer-slide-out-to-right;
                   animation-duration: .25s, .25s;
                   animation-timing-function: $--n-ease-in-out-cubic-bezier, $--n-ease-in-cubic-bezier;
                   animation-delay: .25s, 0s;
@@ -234,14 +258,12 @@
                 animation-fill-mode: forwards;
                 @include m(enter) {
                   transform: translateX(-150%);
-                  animation-name: transfer-height-expand, transfer-slide-in-from-left;
                   animation-duration: .25s, .25s;
                   animation-timing-function: $--n-ease-in-out-cubic-bezier, $--n-ease-out-cubic-bezier;
                   animation-delay: 0s, .25s;
                 }
                 @include m(leave) {
                   transform: translateX(150%);
-                  animation-name: transfer-height-collapse, transfer-slide-out-to-left;
                   animation-duration: .25s, .25s;
                   animation-timing-function: $--n-ease-in-out-cubic-bezier, $--n-ease-in-cubic-bezier;
                   animation-delay: .25s, 0s;
@@ -257,12 +279,7 @@
                   display: block;
                 }
               }
-              /** hard-code **/
-              @if $theme == 'dark' {
-                padding-left: 15px;
-              } @else {
-                padding-left: 14px;
-              }
+              padding-left: 14px;
             }
             @include m(disabled) {
               @include once {
