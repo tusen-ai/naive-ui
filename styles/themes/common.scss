@@ -80,6 +80,13 @@ $--n-base-select-menu-border-radius: $--n-border-radius;
 
 /** card */
 $--n-card-border-radius: $--n-border-radius;
+$--n-card-font-size: (
+  'small': 16px,
+  'medium': 18px,
+  'large': 18px,
+  'huge': 18px
+);
+
 $--n-card-margin-left: (
   'small': 16px,
   'medium': 24px,
@@ -97,8 +104,8 @@ $--n-card-margin-top: (
 $--n-card-margin-bottom: (
   'small': 12px,
   'medium': 16px,
-  'large': 16px,
-  'huge': 20px
+  'large': 20px,
+  'huge': 24px
 );
 
 /** cascader */
