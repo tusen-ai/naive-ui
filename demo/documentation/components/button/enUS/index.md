@@ -3,6 +3,7 @@ Button is used to trigger some actions.
 ## Demos
 ```demo
 basic
+size
 text
 disabled
 icon

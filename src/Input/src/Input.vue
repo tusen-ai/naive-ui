@@ -4,7 +4,7 @@
     class="n-input"
     :class="{
       'n-input--disabled': disabled,
-      [`n-input--${size}-size`]: true,
+      [`n-input--${syntheticSize}-size`]: true,
       'n-input--textarea': isTextarea,
       'n-input--round': round && !isTextarea,
       'n-input--clearable': clearable,
@@ -188,8 +188,10 @@ export default {
       default: false
     },
     size: {
-      type: String,
-      default: 'medium'
+      validator (value) {
+        return ['small', 'medium', 'large'].includes(value)
+      },
+      default: null
     },
     rows: {
       type: [Number, String],

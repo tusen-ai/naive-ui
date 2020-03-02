@@ -48,7 +48,7 @@ $--n-button-font-size: (
   "tiny": 12px,
   "small": 14px,
   "medium": 14px,
-  "large": 16px
+  "large": 15px
 ) !global;
 $--n-button-padding: (
   "tiny": 0 6px,
@@ -80,6 +80,13 @@ $--n-base-select-menu-border-radius: $--n-border-radius;
 
 /** card */
 $--n-card-border-radius: $--n-border-radius;
+$--n-card-font-size: (
+  'small': 16px,
+  'medium': 18px,
+  'large': 18px,
+  'huge': 18px
+);
+
 $--n-card-margin-left: (
   'small': 16px,
   'medium': 24px,
@@ -97,8 +104,8 @@ $--n-card-margin-top: (
 $--n-card-margin-bottom: (
   'small': 12px,
   'medium': 16px,
-  'large': 16px,
-  'huge': 20px
+  'large': 20px,
+  'huge': 24px
 );
 
 /** cascader */
@@ -125,6 +132,11 @@ $--n-descriptions-padding: (
 
 /** input number */
 $--n-input-number-border-radius: $--n-border-radius;
+$--n-input-number-button-width: (
+  'small': 24px,
+  'medium': 28px,
+  'large': 28px
+);
 
 /** input */
 $--n-input-icon-size: 20px;

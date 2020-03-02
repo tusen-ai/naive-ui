@@ -7,7 +7,14 @@
     line-height: $height;
     @include e(minus-button, add-button, input) {
       height: $height;
-      line-height: $height;
+      line-height: $height
+    }
+    @include e(minus-button, add-button) {
+      width: map-get($--n-input-number-button-width, $size);
+    }
+    @include e(input) {
+      font-size: map-get($--n-font-size, $size);
+      padding: 0 map-get($--n-input-number-button-width, $size);
     }
   }
 }
@@ -89,7 +96,6 @@
         z-index: auto;
         top: 0;
         padding: 0;
-        width: 28px;
         border: none;
         display: flex;
         align-items: center;
@@ -154,7 +160,6 @@
         border: none;
         width: 100%;
         text-align: center;
-        padding: 0 28px;
       }
       background-color: map-get($--input-number-background-color, 'default');
       box-shadow: inset 0 0 0px 1px map-get($--input-number-border-color, 'default');

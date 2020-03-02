@@ -75,8 +75,9 @@ export default {
     handleKeyUpEnter () {
       this.toggle()
     },
-    handleMouseDown () {
+    handleMouseDown (e) {
       if (this.syntheticDisabled) return
+      e.preventDefault()
       this.$refs.input.focus()
     },
     handleClick (e) {

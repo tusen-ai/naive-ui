@@ -49,6 +49,12 @@ export default {
     showRequireMark: {
       type: Boolean,
       default: true
+    },
+    size: {
+      validator (value) {
+        return ['small', 'medium', 'large'].includes(value)
+      },
+      default: null
     }
   },
   data () {

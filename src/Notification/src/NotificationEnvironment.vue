@@ -81,9 +81,6 @@ export default {
           if (feedback === false) return
           this.hide()
         })
-        .catch(() => {
-          this.hide()
-        })
     }
   },
   render (h) {

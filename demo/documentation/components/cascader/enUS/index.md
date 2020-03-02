@@ -3,6 +3,7 @@ Cascader can be used to select some tree structured data.
 ## Demos
 ```demo
 single-leaf-only
+size
 trigger
 multiple-leaf-only
 single

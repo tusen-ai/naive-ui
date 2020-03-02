@@ -3,6 +3,7 @@ Like a digital clock.
 ## Demos
 ```demo
 basic
+size
 disabledTime
 format
 ```

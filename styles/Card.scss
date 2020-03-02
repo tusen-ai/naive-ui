@@ -46,25 +46,27 @@
         }
       }
     }
-    @include b(card-header) {
-      padding: 0px map-get($--n-card-margin-left, $size);
-      margin: map-get($--n-card-margin-top, $size) 0 map-get($--n-card-margin-bottom, $size) 0;
-      @include e(main) {
-        font-size: 18px;
+    & > {
+      @include b(card-header) {
+        padding: 0px map-get($--n-card-margin-left, $size);
+        margin: map-get($--n-card-margin-top, $size) 0 map-get($--n-card-margin-bottom, $size) 0;
+        @include e(main) {
+          font-size: map-get($--n-card-font-size, $size);
+        }
+        @include e(extra) {
+          font-size: 14px;
+        }
       }
-      @include e(extra) {
+      @include e(content, footer) {
+        padding: 0px map-get($--n-card-margin-left, $size);
+        margin: map-get($--n-card-margin-bottom, $size) 0;
         font-size: 14px;
       }
-    }
-    @include e(content, footer) {
-      padding: 0px map-get($--n-card-margin-left, $size);
-      margin: map-get($--n-card-margin-bottom, $size) 0;
-      font-size: 14px;
-    }
-    @include e(action) {
-      background-color: $--card-action-background-color;
-      padding: map-get($--n-card-margin-bottom, $size) map-get($--n-card-margin-left, $size);
-      font-size: 14px;
+      @include e(action) {
+        background-color: $--card-action-background-color;
+        padding: map-get($--n-card-margin-bottom, $size) map-get($--n-card-margin-left, $size);
+        font-size: 14px;
+      }
     }
   }
 }

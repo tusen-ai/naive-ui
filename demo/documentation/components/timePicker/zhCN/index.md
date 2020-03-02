@@ -4,6 +4,7 @@
 ## 演示
 ```demo
 basic
+size
 disabledTime
 format
 ```

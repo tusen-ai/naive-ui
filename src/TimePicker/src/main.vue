@@ -11,6 +11,7 @@
       v-model="displayTimeString"
       class="n-time-picker-input"
       passively-activated
+      :size="syntheticSize"
       :force-focus="active"
       :placeholder="localizedPlaceholder"
       :clearable="clearable"
@@ -242,6 +243,12 @@ export default {
       default: () => {
         return false
       }
+    },
+    size: {
+      validator (value) {
+        return ['small', 'medium', 'large'].includes(value)
+      },
+      default: null
     },
     isMinuteDisabled: {
       type: Function,

@@ -106,6 +106,7 @@ import {
   OPTION_TYPE
 } from '../../../_utils/component/select'
 import formatLength from '../../../_utils/css/formatLength'
+import { itemSize } from '../../../_interoperation/common.js'
 
 export default {
   name: 'NBaseSelectMenu',
@@ -207,13 +208,7 @@ export default {
       return flattenedOptions && flattenedOptions.length === 0
     },
     itemSize () {
-      return ({
-        tiny: 22,
-        small: 28,
-        medium: 34,
-        large: 40,
-        huge: 46
-      })[this.size]
+      return itemSize[this.size]
     },
     pendingOptionValue () {
       const pendingWrappedOption = this.pendingWrappedOption

@@ -18,7 +18,7 @@
     <n-base-selection
       ref="activator"
       class="n-cascader-selection"
-      :size="size"
+      :size="syntheticSize"
       :theme="syntheticTheme"
       :active="active"
       :pattern="pattern"
@@ -59,6 +59,7 @@
         :loading.sync="loading"
         :loading-id.sync="loadingId"
         :theme="syntheticTheme"
+        :size="syntheticSize"
         @input="handleMenuInput"
       />
     </n-base-portal>
@@ -74,7 +75,7 @@
         :active="active && selectMenuActive"
         :theme="syntheticTheme"
         :pattern="pattern"
-        :size="size"
+        :size="syntheticSize"
         :multiple="multiple"
         :options="menuOptions"
         @input="handleMenuInput"
@@ -141,8 +142,10 @@ export default {
       default: false
     },
     size: {
-      type: String,
-      default: 'medium'
+      validator (value) {
+        return ['small', 'medium', 'large'].includes(value)
+      },
+      default: null
     },
     filterable: {
       type: Boolean,

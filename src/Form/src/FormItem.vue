@@ -120,9 +120,22 @@ export default {
     rule: {
       type: [Object, Array],
       default: null
+    },
+    size: {
+      validator (value) {
+        return ['small', 'medium', 'large'].includes(value)
+      },
+      default: null
     }
   },
-  inject: ['NForm'],
+  inject: {
+    NForm: {
+      default: null
+    },
+    NFormItem: {
+      default: null
+    }
+  },
   provide () {
     return {
       NFormItem: this
@@ -137,6 +150,16 @@ export default {
     }
   },
   computed: {
+    syntheticSize () {
+      if (this.size) return this.size
+      const NFormItem = this.NFormItem
+      if (NFormItem && NFormItem.syntheticSize) return NFormItem.syntheticSize
+      const NForm = this.NForm
+      if (NForm && NForm.size) {
+        return NForm.size
+      }
+      return null
+    },
     labelWidthStyle () {
       return {
         width: formatLength(this.syntheticLabelWidth)
