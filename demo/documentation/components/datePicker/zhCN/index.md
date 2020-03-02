@@ -7,6 +7,7 @@ date
 datetime
 daterange
 datetimerange
+size
 disabled
 disabledTime
 actions

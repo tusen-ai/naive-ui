@@ -9,6 +9,7 @@
     }"
     @keyup.enter="handleKeyUpEnter"
     @click="handleClick"
+    @mousedown="handleMouseDown"
   >
     <input
       ref="input"

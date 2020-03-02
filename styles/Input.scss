@@ -37,12 +37,10 @@
         @include e(input) {
           @include m(first) {
             padding-right: 38px!important;
-            & + {
-              @include e(placeholder) {
-                right: 38px!important;
-              }
-            }
           }
+        }
+        @include e(placeholder) {
+          right: 38px!important;
         }
       }
       @include m(split) {
@@ -62,9 +60,20 @@
       @include e(input) {
         @include m(first) {
           padding-left: 38px!important;
-          & + {
-            @include e(placeholder) {
-              left: 38px!important;
+        }
+      }
+      @include not-m(split) {
+        @include e(placeholder) {
+          left: 38px!important;
+        }
+      }
+      @include m(split) {
+        @include e(input) {
+          @include m(first) {
+            & + {
+              @include e(placeholder) {
+                left: 38px!important;
+              }
             }
           }
         }

@@ -132,6 +132,11 @@ $--n-descriptions-padding: (
 
 /** input number */
 $--n-input-number-border-radius: $--n-border-radius;
+$--n-input-number-button-width: (
+  'small': 24px,
+  'medium': 28px,
+  'large': 28px
+);
 
 /** input */
 $--n-input-icon-size: 20px;

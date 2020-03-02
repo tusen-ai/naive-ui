@@ -8,9 +8,10 @@
           v-if="active"
           class="n-cascader-menu"
           :class="{
-            [`n-${theme}-theme`]: theme
+            [`n-${theme}-theme`]: theme,
+            [`n-cascader-menu--${size}-size`]: size
           }"
-          @mousedown="handleMenuMouseDown"
+          @mousedown.capture="handleMenuMouseDown"
         >
           <n-cascader-submenu
             v-for="(submenuOptions, index) in menuModel"
@@ -223,6 +224,7 @@ export default {
   methods: {
     handleMenuMouseDown (e) {
       e.preventDefault()
+      e.stopPropagation()
     },
     getZindexableContent () {
       return this.$el

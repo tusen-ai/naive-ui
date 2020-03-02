@@ -59,6 +59,7 @@
         :loading.sync="loading"
         :loading-id.sync="loadingId"
         :theme="syntheticTheme"
+        :size="size"
         @input="handleMenuInput"
       />
     </n-base-portal>

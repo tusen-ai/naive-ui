@@ -3,6 +3,7 @@
 ## 演示
 ```demo
 basic
+size
 custom-input
 after-select
 ```
