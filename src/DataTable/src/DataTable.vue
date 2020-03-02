@@ -4,7 +4,8 @@
     :class="{
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
       'n-data-table--bordered': bordered,
-      'n-data-table--single-line': singleLine
+      'n-data-table--single-line': singleLine,
+      [`n-data-table--${size}-size`]: true
     }"
   >
     <n-spin :spinning="loading">
@@ -185,6 +186,12 @@ export default {
     singleLine: {
       type: Boolean,
       default: true
+    },
+    size: {
+      validator (value) {
+        return ['small', 'medium', 'large'].includes(value)
+      },
+      default: 'medium'
     }
   },
   data () {

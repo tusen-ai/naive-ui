@@ -1,8 +1,39 @@
 @import "./mixins/mixins.scss";
 
+@mixin data-table-size-mixin () {
+  @include m(small-size) {
+    font-size: map-get($--n-font-size, 'medium');
+    @include b(data-table-th) {
+      padding: 5px 5px 5px 11px;
+    }
+    @include b(data-table-td) {
+      padding: 5px 5px 5px 11px;
+    }
+  }
+  @include m(medium-size) {
+    font-size: map-get($--n-font-size, 'medium');
+    @include b(data-table-th) {
+      padding: 10px 10px 10px 16px;
+    }
+    @include b(data-table-td) {
+      padding: 10px 10px 10px 16px;
+    }
+  }
+  @include m(large-size) {
+    font-size: map-get($--n-font-size, 'large');
+    @include b(data-table-th) {
+      padding: 15px 15px 15px 20px;
+    }
+    @include b(data-table-td) {
+      padding: 15px 15px 15px 20px;
+    }
+  }
+}
+
 @include themes-mixin {
   @include b(data-table) {
     @include once {
+      @include data-table-size-mixin();
       width: 100%;
       font-size: 14px;
       padding-bottom: 8px;
@@ -75,13 +106,13 @@
       }
       @include b(data-table-td) {
         @include once {
-          padding: 10px 10px 10px 16px;
           text-align: left;
           box-sizing: border-box;
           border: none;
           transition:
             box-shadow .3s $--n-ease-in-out-cubic-bezier,
             background-color .3s $--n-ease-in-out-cubic-bezier,
+            border-color .3s $--n-ease-in-out-cubic-bezier,
             color .3s $--n-ease-in-out-cubic-bezier;
           @include m(ellipsis) {
             text-overflow: ellipsis;
@@ -135,7 +166,6 @@
       @include b(data-table-th) {
         @include once {
           position: relative;
-          padding: 10px 10px 10px 16px;
           text-align: left;
           font-weight: $--n-strong-weight;
           box-sizing: border-box;
