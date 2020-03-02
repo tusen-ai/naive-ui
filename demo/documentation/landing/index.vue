@@ -2,15 +2,17 @@
 {
   "zh-CN": {
     "start": "开始使用",
-    "intro1": "一个实验性的 Vue UI 框架",
-    "intro2": "在意样式，带主题，完整，快",
-    "intro3": "有点意思"
+    "intro1": "一个 Vue UI 框架",
+    "intro2": "很在意样式，带主题，比较完整",
+    "intro3": "有点意思",
+    "intro4": "换个主题"
   },
   "en-US": {
     "start": "Getting Start",
-    "intro1": "An Experimental Vue UI Framework",
-    "intro2": "Caring About Styles, Themed, Batteries Included, Fast",
-    "intro3": "Interesting Somehow"
+    "intro1": "A Vue UI Framework",
+    "intro2": "Very Caring About Styles, Themed, Batteries Included",
+    "intro3": "Interesting Somehow",
+    "intro4": "Change Theme"
   }
 }
 </i18n>
@@ -41,9 +43,14 @@
           <n-p style="font-size: 16px; margin-top: 0;">
             {{ $t("intro3") }}
           </n-p>
-          <n-button type="primary" :ghost="theme === 'dark'" size="large" @click="handleStartClick">
-            {{ $t("start") }}
-          </n-button>
+          <div>
+            <n-button type="default" size="large" style="margin-right: 12px;" @click="handleThemeChangeClick">
+              {{ $t("intro4") }}
+            </n-button>
+            <n-button type="primary" :ghost="theme === 'dark'" size="large" @click="handleStartClick">
+              {{ $t("start") }}
+            </n-button>
+          </div>
         </div>
       </div>
     </template>
@@ -56,6 +63,11 @@ import leftImage from './Left'
 import rightImage from './Right'
 
 export default {
+  inject: {
+    NConfigProvider: {
+      default: null
+    }
+  },
   components: {
     LandingFooter,
     leftImage,
@@ -63,7 +75,20 @@ export default {
   },
   data () {
     return {
-      hover: false
+      hover: false,
+      themeOptions: {
+        dark: {
+          next: 'light'
+        },
+        light: {
+          next: 'dark'
+        }
+      }
+    }
+  },
+  computed: {
+    theme () {
+      return this.NConfigProvider.$parent.theme
     }
   },
   methods: {
@@ -77,6 +102,9 @@ export default {
     },
     handleTitleMouseLeave () {
       this.hover = false
+    },
+    handleThemeChangeClick () {
+      this.NConfigProvider.$parent.theme = this.themeOptions[this.theme].next
     }
   }
 }
