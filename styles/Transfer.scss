@@ -75,7 +75,7 @@
         width: 182px;
         height: 311px;
         transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
-        border-radius: 6px;
+        border-radius: $--n-transfer-border-radius;
         @include b(virtual-scroller) {
           height: 100%;
           scrollbar-width: none;
@@ -94,7 +94,7 @@
           margin: -1px -1px 0 -1px;
           transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
           display: flex;
-          border-radius: 6px 6px 0 0;
+          border-radius: $--n-transfer-border-radius $--n-transfer-border-radius 0 0;
           align-items: center;
           height: 40px;
           background-clip: padding-box;
@@ -159,8 +159,8 @@
           height: 272px;
           display: flex;
           flex-direction: column;
-          border-bottom-right-radius: 6px;
-          border-bottom-left-radius: 6px;
+          border-bottom-right-radius: $--n-transfer-border-radius;
+          border-bottom-left-radius: $--n-transfer-border-radius;
           @include b(transfer-list-flex-container) {
             flex: 1;
             position: relative;

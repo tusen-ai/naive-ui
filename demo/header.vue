@@ -5,14 +5,16 @@
     "light": "浅色",
     "searchPlaceholder": "搜索组件",
     "home": "首页",
-    "doc": "文档"
+    "doc": "文档",
+    "alreadyHome": "别点了，你已经在首页了"
   },
   "en-US": {
     "dark": "Dark",
     "light": "Light",
     "searchPlaceholder": "Search Components",
     "home": "Home",
-    "doc": "Documentation"
+    "doc": "Documentation",
+    "alreadyHome": "You've already been in home page. No clicking."
   }
 }
 </i18n>
@@ -41,22 +43,13 @@
         </n-menu>
       </div>
     </div>
-    <div class="theme-picker">
-      <n-select
-        v-model="NConfigProvider.$parent.theme"
-        :z-index="3001"
-        size="small"
-        :options="options"
-      />
-    </div>
-    <div class="lang-picker">
-      <n-select
-        :z-index="3001"
-        :value="lang"
-        size="small"
-        :options="langOptions"
-        @change="handleLanguageChange"
-      />
+    <div style="display: flex;">
+      <n-tag style="cursor: pointer; margin-right: 12px;" @click.native="handleThemeChange">
+        {{ themeOptions[theme].label }}
+      </n-tag>
+      <n-tag style="cursor: pointer;" @click.native="handleLanguageChange">
+        {{ langOptions[lang].label }}
+      </n-tag>
     </div>
   </div>
 </template>
@@ -88,20 +81,32 @@ export default {
     return {
       searchInputValue: '',
       version,
-      theme: 'dark',
-      langOptions: [
-        {
-          label: '中文',
-          value: 'zh-CN'
+      themeOptions: {
+        dark: {
+          label: 'Light',
+          next: 'light'
         },
-        {
-          label: 'English',
-          value: 'en-US'
+        light: {
+          label: 'Dark',
+          next: 'dark'
         }
-      ]
+      },
+      langOptions: {
+        'zh-CN': {
+          label: 'English',
+          next: 'en-US'
+        },
+        'en-US': {
+          label: '中文',
+          next: 'zh-CN'
+        }
+      }
     }
   },
   computed: {
+    theme () {
+      return this.NConfigProvider.$parent.theme
+    },
     menuValue () {
       if (/^(\/[^/]+){2}\/doc/.test(this.$route.path)) return 'doc'
       else if (this.$route.name === 'home') return 'home'
@@ -138,6 +143,10 @@ export default {
   },
   methods: {
     handleLogoClick () {
+      if (/^(\/[^/]+){2}$/.test(this.$route.path)) {
+        this.$NMessage.info(this.$t('alreadyHome'))
+        return
+      }
       this.$router.push(
         /^(\/[^/]+){2}/.exec(this.$route.path)[0]
       )
@@ -160,11 +169,11 @@ export default {
         }
       }
     },
-    handleThemeChange (theme) {
-      this.NConfigProvider.$parent.theme = theme
+    handleThemeChange () {
+      this.NConfigProvider.$parent.theme = this.themeOptions[this.theme].next
     },
-    handleLanguageChange (lang) {
-      this.$emit('lang-change', lang)
+    handleLanguageChange () {
+      this.$emit('lang-change', this.langOptions[this.lang].next)
     }
   }
 }
@@ -173,7 +182,7 @@ export default {
 <style lang="scss" scoped>
 .nav {
   display: grid;
-  grid-template-columns: 288px 1fr auto 140px;
+  grid-template-columns: 288px 1fr auto 32px;
   grid-template-rows: 63px;
   align-items: center;
 }
@@ -194,11 +203,5 @@ export default {
 }
 .nav-menu .n-menu-item {
   height: 63px !important;
-}
-.theme-picker {
-  padding-right: 16px;
-}
-.lang-picker {
-  padding-right: 48px;
 }
 </style>

@@ -3,15 +3,17 @@
 
 ```html
 <n-config-provider :theme="theme">
-  <n-button @click="theme = 'dark'">深色</n-button>
-  <n-button @click="theme = 'light'">浅色</n-button>
-  <n-config-consumer
-    @theme-change="handleThemeChange"
-  >
-    <template v-slot="{ theme }">
-      <div>主题：{{ theme }}</div>
-    </template>
-  </n-config-consumer>
+  <div style="background-color: rgba(128, 128, 128); padding: 8px;">
+    <n-button @click="theme = 'dark'">深色</n-button>
+    <n-button @click="theme = 'light'">浅色</n-button>
+    <n-config-consumer
+      @theme-change="handleThemeChange"
+    >
+      <template v-slot="{ theme }">
+        <div>主题：{{ theme }}</div>
+      </template>
+    </n-config-consumer>
+  </div>
 </n-config-provider>
 ```
 ```js

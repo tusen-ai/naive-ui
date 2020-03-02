@@ -43,9 +43,9 @@ filter
 ## Events
 |Name|Parameters|Description|
 |-|-|-|
-|selected-keys-change|`(Array<string \| number>`)||
-|expanded-keys-change|`(Array<string \| number>`)||
-|checked-keys-change|`(Array<string \| number>`)||
+|selected-keys-change|`(Array<string \| number>)`||
+|expanded-keys-change|`(Array<string \| number>)`||
+|checked-keys-change|`(Array<string \| number>)`||
 |dragstart|`({ node: TreeNode, event: DragEvent })`||
 |dragend|`({ node: TreeNode, event: DragEvent })`||
 |dragenter|`({ node: TreeNode, event: DragEvent })`||

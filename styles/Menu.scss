@@ -31,15 +31,23 @@
         @include once {
           display: flex;
         }
+        
+        @include b(menu-item) {
+          @include m(selected) {
+            @include once {
+              background-color: transparent !important;
+            }
+            @include b(menu-item-content) {
+              border-bottom: 2px solid $--menu-horizontal-border-color;
+            }
+          }
+        }
         @include b(menu-item-content) {
           @include once {
             padding: 0 20px;
             border-bottom: 2px solid transparent;
           }
-          @include m(selected, child-selected) {
-            @include once {
-              background-color: transparent !important;
-            }
+          @include m(child-selected) {
             border-bottom: 2px solid $--menu-horizontal-border-color;
           }
           @include not-m(disabled) {
@@ -55,13 +63,16 @@
     }
     @include m(collapsed) {
       @include b(menu-list) {
+        @include b(menu-item) {
+          @include m(selected) {
+            @include once {
+              background-color: transparent !important;
+            }
+          }
+        }
         @include b(menu-item-content) {
           @include once {
-            @include m(selected) {
-              @include once {
-                background-color: transparent !important;
-              }
-            }
+            
             @include b(menu-item-content-header) {
               opacity: 0;
             }
@@ -84,6 +95,7 @@
         margin: 0;
         padding: 0;
         @include b(menu-item) {
+          transition: background-color .3s $--n-ease-in-out-cubic-bezier;
           list-style: none;
           height: 48px;
         }
@@ -100,6 +112,25 @@
           }
         }
       }
+      @include b(menu-item) {
+        @include m(selected) {
+          background-color: $--menu-item-background-color;
+          @include b(menu-item-content) {
+            @include e(icon) {
+              @include b(icon) {
+                fill: map-get($--menu-item-content-icon-color, 'selected');
+                stroke: map-get($--menu-item-content-icon-color, 'selected');
+              }
+            }
+            @include b(menu-item-content-header) {
+              color: map-get($--menu-item-content-text-color, 'selected');
+              @include e(extra) {
+                color: map-get($--menu-item-content-extra-text-color, 'selected');
+              }
+            }
+          }
+        }
+      }
       @include b(menu-item-content) {
         @include once {
           box-sizing: border-box;
@@ -110,7 +141,6 @@
           cursor: pointer;
           transition: background-color .3s $--n-ease-in-out-cubic-bezier, padding-left .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
           position: relative;
-          font-size: 14px;
           @include m(disabled) {
             opacity: 0.45;
             cursor: not-allowed;
@@ -209,21 +239,7 @@
             }
           }
         }
-        @include m(selected) {
-          background-color: $--menu-item-background-color;
-          @include e(icon) {
-            @include b(icon) {
-              fill: map-get($--menu-item-content-icon-color, 'selected');
-              stroke: map-get($--menu-item-content-icon-color, 'selected');
-            }
-          }
-          @include b(menu-item-content-header) {
-            color: map-get($--menu-item-content-text-color, 'selected');
-            @include e(extra) {
-              color: map-get($--menu-item-content-extra-text-color, 'selected');
-            }
-          }
-        }
+        
         @include m(child-selected) {
           @include b(menu-item-content-header) {
             color: map-get($--menu-item-content-text-color, 'child-selected');

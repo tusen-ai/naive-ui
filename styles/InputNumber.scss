@@ -64,7 +64,7 @@
           color: map-get( $--input-placeholder-color, 'disabled');
         }
         background: map-get($--input-number-background-color, 'disabled');
-        color: map-get($--input-number-button-text-color, 'disabled');
+        color: map-get($--input-number-text-color, 'disabled');
         @include once {
           pointer-events: none;
         }
@@ -77,8 +77,8 @@
       @include e(input) {
         @include once {
           text-decoration: line-through;
-          text-decoration-color: $--input-number-text-decoration-color;
         }
+        text-decoration-color: $--input-number-text-decoration-color;
       }
     }
     @include e(minus-button, add-button) {
@@ -112,7 +112,10 @@
       }
       &:hover {
         background-color: map-get($--input-number-button-background-color, 'hover');
-        color: map-get($--input-number-button-text-color, 'hover');
+        @include b(icon) {
+          fill:map-get($--input-number-button-text-color, 'hover');
+          stroke: map-get($--input-number-button-text-color, 'hover');
+        }
       }
       &:active {
         @include once {
@@ -120,7 +123,11 @@
             color .3s $--n-ease-in-out-cubic-bezier,
             background-color .15s $--n-ease-in-out-cubic-bezier;
         }
-        background-color: map-get($--input-number-button-background-color, 'active')
+        background-color: map-get($--input-number-button-background-color, 'active');
+        @include b(icon) {
+          fill:map-get($--input-number-button-text-color, 'active');
+          stroke: map-get($--input-number-button-text-color, 'active');
+        }
       }
       @include m(disabled) {
         @include once {
@@ -147,7 +154,7 @@
         border: none;
         width: 100%;
         text-align: center;
-        padding: 0 34px;
+        padding: 0 28px;
       }
       background-color: map-get($--input-number-background-color, 'default');
       box-shadow: inset 0 0 0px 1px map-get($--input-number-border-color, 'default');

@@ -27,7 +27,10 @@
             style="margin-top: 0;"
             class="naive-title"
           >
-            Naive UI
+            <span
+              @mouseenter="handleTitleMouseEnter"
+              @mouseleave="handleTitleMouseLeave"
+            >Na{{ hover ? 'ï' : 'i' }}ve UI</span>
           </n-h1>
           <n-p style="font-size: 16px; margin-bottom: 0;">
             {{ $t("intro1") }}
@@ -58,11 +61,22 @@ export default {
     leftImage,
     rightImage
   },
+  data () {
+    return {
+      hover: false
+    }
+  },
   methods: {
     handleStartClick () {
       this.$router.push(
         /^(\/[^/]+){2}/.exec(this.$route.path)[0] + '/doc/start'
       )
+    },
+    handleTitleMouseEnter () {
+      this.hover = true
+    },
+    handleTitleMouseLeave () {
+      this.hover = false
     }
   }
 }

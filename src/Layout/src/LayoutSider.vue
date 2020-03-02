@@ -17,6 +17,7 @@
   >
     <n-scrollbar
       v-if="!useNativeScrollbar"
+      ref="scrollbar"
       class="n-layout-sider__content"
       :content-style="scrollContentStyle"
       :container-style="scrollContainerStyle"
@@ -192,6 +193,13 @@ export default {
     }
   },
   methods: {
+    scrollTo (...args) {
+      if (this.$refs.scrollbar) {
+        this.$refs.scrollbar.scrollTo(...args)
+      } else {
+        this.$el.scrollTo(...args)
+      }
+    },
     handleToggleButtonClick () {
       if (this.collapsed) {
         this.$emit('expand')

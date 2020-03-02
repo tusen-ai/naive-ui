@@ -10,7 +10,6 @@
     }"
     @mouseenter="handleMouseEnterWrapper"
     @mouseleave="handleMouseLeaveWrapper"
-    @dragstart.capture="handleDragStart"
   >
     <div
       v-if="!container"
@@ -207,18 +206,12 @@ export default {
     }
   },
   watch: {
-    '$refs.scrollContent': function () {
-      throw Error('n-scrollbar\'s content ref changed, which is not expected')
-    },
     containerScrollTop () {
       this.handleVerticalScroll()
     },
     containerScrollLeft () {
       this.handleHorizontalScroll()
     }
-  },
-  updated () {
-    // console.log('[NScrollbar.updated]')
   },
   beforeDestroy () {
     resizeObserverDelagate.unregisterHandler(this._content())
@@ -265,18 +258,23 @@ export default {
       this.showHorizontalScrollbar = true
       this.showVeriticalScrollbar = true
     },
-    scrollToTop (smooth = false) {
+    scrollTo (...args) {
       const container = this._container()
       if (container) {
-        container.scrollTo({
-          top: 0
-        })
+        container.scrollTo(...args)
       }
     },
+    scrollToTop (smooth = false) {
+      this.scrollTo({
+        top: 0,
+        smooth
+      })
+    },
     scrollToBottom (smooth = false) {
-      if (this._container()) {
-        this._container().scrollTo({
-          top: this._content().offsetHeight
+      const content = this._content()
+      if (content) {
+        this.scrollTo({
+          top: content.offsetHeight
         })
       }
     },
@@ -358,31 +356,37 @@ export default {
       this.updateScrollParameters()
     },
     updateScrollParameters () {
-      if (this._container()) {
-        this.containerScrollTop = this._container().scrollTop
-        this.containerScrollLeft = this._container().scrollLeft
+      const container = this._container()
+      if (container) {
+        this.containerScrollTop = container.scrollTop
+        this.containerScrollLeft = container.scrollLeft
       }
     },
     updatePositionParameters () {
       /**
        * Don't use getClientBoundingRect because element may be scale transformed
        */
-      if (this._content()) {
-        this.contentHeight = this._content().offsetHeight
-        this.contentWidth = this._content().offsetWidth
+      const content = this._content()
+      if (content) {
+        this.contentHeight = content.offsetHeight
+        this.contentWidth = content.offsetWidth
       }
-      if (this._container()) {
-        this.containerHeight = this._container().offsetHeight
-        this.containerWidth = this._container().offsetWidth
+      const container = this._container()
+      if (container) {
+        this.containerHeight = container.offsetHeight
+        this.containerWidth = container.offsetWidth
       }
-      if (this.$refs.horizontalRail) {
-        this.horizontalRailWidth = this.$refs.horizontalRail.offsetWidth
+      const horizontalRail = this.$refs.horizontalRail
+      if (horizontalRail) {
+        this.horizontalRailWidth = horizontalRail.offsetWidth
       }
-      if (this.$refs.verticalRail) {
-        this.verticalRailHeight = this.$refs.verticalRail.offsetHeight
+      const verticalRail = this.$refs.verticalRail
+      if (verticalRail) {
+        this.verticalRailHeight = verticalRail.offsetHeight
       }
     },
     updateParameters () {
+      if (this.withoutScrollbar) return
       this.updatePositionParameters()
       this.updateScrollParameters()
     },
@@ -447,10 +451,6 @@ export default {
       if (!this.$el.contains(e.target)) {
         this.hideScrollbar()
       }
-    },
-    handleDragStart (e) {
-      // e.preventDefault()
-      // for n-tree component to work...
     }
   }
 }

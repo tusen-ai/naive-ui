@@ -25,13 +25,11 @@
       <thead class="n-data-table-thead">
         <tr class="n-data-table-tr">
           <template v-for="(column, index) in columns">
-            <!-- th height should minus 1 compared with props.height, since border is contained -->
             <th
               :key="column.key"
               :ref="column.key"
               :style="{
                 textAlign: column.align || null,
-                height: height && `${height - 1}px`,
                 left: NDataTable.currentFixedColumnLeft(column),
                 right: NDataTable.currentFixedColumnRight(column)
               }"
@@ -134,10 +132,6 @@ export default {
     },
     scrollX: {
       type: [Number, String],
-      default: null
-    },
-    height: {
-      type: Number,
       default: null
     },
     columns: {

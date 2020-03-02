@@ -2,7 +2,7 @@
 你可以替换 AutoComplete 的输入元素。
 ```html
 <n-auto-complete :options="options" v-model="value">
-  <template v-slot:activator="{ handleInput, handleBlur, handleFocus, value }">
+  <template v-slot="{ handleInput, handleBlur, handleFocus, value }">
     <n-input
       type="textarea"
       @input="handleInput"

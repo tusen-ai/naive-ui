@@ -105,6 +105,10 @@ export default {
     displayDirective: {
       type: String,
       default: 'if'
+    },
+    zIndex: {
+      type: String,
+      default: undefined
     }
   },
   render (h, context) {

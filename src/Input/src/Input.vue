@@ -51,48 +51,70 @@
       @change="handleChange"
       @keyup="handleKeyUp"
     />
-    <input
-      v-else
-      ref="input"
-      :type="type"
-      class="n-input__input"
-      :tabindex="passivelyActivated && !inputFocused ? -1 : false"
-      :placeholder="pair ? syntheticPlaceholder[0] : placeholder"
-      :disabled="disabled"
-      :maxlength="maxlength"
-      :minlength="minlength"
-      :value="pair ? (value && value[0]) : value"
-      :readonly="readonly"
-      @blur="handleInputBlur"
-      @focus="handleInputFocus"
-      @input="handleInput($event, 0)"
-      @change="handleChange"
-      @keyup="handleKeyUp"
-    >
+    <div v-else style="position: relative;" class="n-input-first-input">
+      <input
+        ref="input"
+        :type="type"
+        class="n-input__input n-input__input--first"
+        :tabindex="passivelyActivated && !inputFocused ? -1 : false"
+        :placeholder="pair ? syntheticPlaceholder[0] : placeholder"
+        :disabled="disabled"
+        :maxlength="maxlength"
+        :minlength="minlength"
+        :value="pair ? (value && value[0]) : value"
+        :readonly="readonly"
+        @blur="handleInputBlur"
+        @focus="handleInputFocus"
+        @input="handleInput($event, 0)"
+        @change="handleChange"
+        @keyup="handleKeyUp"
+      >
+      <div
+        v-if="
+          pair &&
+            !isComposing &&
+            (!value || (Array.isArray(value) && !value[0])) &&
+            syntheticPlaceholder[0]
+        "
+        class="n-input__placeholder"
+      >
+        {{ syntheticPlaceholder[0] }}
+      </div>
+    </div>
     <span
       v-if="pair"
       class="n-input__splitor"
     >
       {{ seperator }}
     </span>
-    <input
-      v-if="pair"
-      ref="secondInput"
-      :type="type"
-      class="n-input__input"
-      :tabindex="passivelyActivated && !inputFocused ? -1 : false"
-      :placeholder="pair ? syntheticPlaceholder[1] : placeholder"
-      :disabled="disabled"
-      :maxlength="maxlength"
-      :minlength="minlength"
-      :value="value && value[1]"
-      :readonly="readonly"
-      @blur="handleInputBlur"
-      @focus="handleInputFocus"
-      @input="handleInput($event, 1)"
-      @change="handleChange"
-      @keyup="handleKeyUp"
-    >
+    <div v-if="pair" style="position: relative;">
+      <input
+        ref="secondInput"
+        :type="type"
+        class="n-input__input n-input__input--second"
+        :tabindex="passivelyActivated && !inputFocused ? -1 : false"
+        :placeholder="syntheticPlaceholder[1]"
+        :disabled="disabled"
+        :maxlength="maxlength"
+        :minlength="minlength"
+        :value="value && value[1]"
+        :readonly="readonly"
+        @blur="handleInputBlur"
+        @focus="handleInputFocus"
+        @input="handleInput($event, 1)"
+        @change="handleChange"
+        @keyup="handleKeyUp"
+      >
+      <div
+        v-if="
+          !isComposing &&
+            (!value || (Array.isArray(value) && !value[1])) &&
+            syntheticPlaceholder[1]"
+        class="n-input__placeholder"
+      >
+        {{ syntheticPlaceholder[1] }}
+      </div>
+    </div>
     <div
       v-if="$slots.affix || $slots.prefix"
       class="n-input__prefix"
@@ -116,6 +138,17 @@
         <slot name="suffix" />
       </div>
     </transition>
+    <div
+      v-if="
+        !isComposing &&
+          placeholder &&
+          !pair &&
+          !value
+      "
+      class="n-input__placeholder"
+    >
+      {{ placeholder }}
+    </div>
     <div class="n-input__border-mask" />
   </div>
 </template>

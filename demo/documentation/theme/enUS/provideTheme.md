@@ -3,8 +3,10 @@ Use Config Provider to set the theme of all its descedant components.
 
 ```html
 <n-config-provider :theme="theme">
-  <n-button @click="theme = 'dark'">Dark</n-button>
-  <n-button @click="theme = 'light'">Light</n-button>
+  <div style="background-color: rgba(128, 128, 128); padding: 8px;">
+    <n-button @click="theme = 'dark'">Dark</n-button>
+    <n-button @click="theme = 'light'">Light</n-button>
+  </div>
 </n-config-provider>
 ```
 ```js

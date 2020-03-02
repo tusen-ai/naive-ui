@@ -2,7 +2,7 @@
 
 @mixin popover-content-transition {
   &#{&}-transition-enter-to, &#{&}-transition-leave {
-    transform: $--n-transform-debounce-scale; // scale is set to 99999 to get rid of a ridiculous render bug of chrome
+    transform: $--n-transform-debounce-scale;
     opacity: 1;
   }
   &#{&}-transition-enter, &#{&}-transition-leave-to {
@@ -21,22 +21,27 @@
   @include b(popover-content) {
     @include once {
       @include popover-content-transition;
-      transition: background-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
+      transition:
+        background-color .3s $--n-ease-in-out-cubic-bezier,
+        color .3s $--n-ease-in-out-cubic-bezier;
       transform-origin: inherit;
       transform: $--n-transform-debounce-scale;
       position: relative;
-      border-radius: 6px;
+      border-radius: $--n-popover-border-radius;
       font-size: 13px;
-      @include b(popover-arrow) {
-        transition: border-color .3s $--n-ease-in-out-cubic-bezier;
-        border-width: 6px;
-        pointer-events: none;
+      @include b(popover-arrow-wrapper) {
         position: absolute;
-        display: block;
-        width: 0;
-        height: 0;
-        border-color: transparent;
-        border-style: solid;
+        overflow: hidden;
+        pointer-events: none;
+        @include b(popover-arrow) {
+          transition: background-color .3s $--n-ease-in-out-cubic-bezier;
+          position: absolute;
+          display: block;
+          width: $--n-popover-arrow-width * 2;
+          height: $--n-popover-arrow-width * 2;
+          box-shadow: $--n-popover-arrow-box-shadow;
+          transform: rotate(45deg);
+        }
       }
       @include m(without-arrow) {
         &[n-placement$="top-start"] {
@@ -75,157 +80,174 @@
           margin-left: 6px;
         }
       } 
-    }
-    &[n-placement$="top-start"] {
-      @include once {
+      &[n-placement$="top-start"] {
         margin-bottom: 10px;
-      }
-      @include b(popover-arrow) {
-        @include once {
-          bottom: -2 * $--n-popover-arrow-width;
-          left: 10px;
+        @include b(popover-arrow-wrapper) {
+          right: 0;
+          left: 0;
+          top: 100%;
+          height: $--n-popover-arrow-width * 2;
+          @include b(popover-arrow) {
+            top: -$--n-popover-arrow-width;
+            left: 10px;
+          }
         }
-        border-top-color: $--popover-background-color;
       }
-    }
-    &[n-placement$="top"] {
-      @include once {
+      &[n-placement$="top"] {
         margin-bottom: 10px;
-      }
-      @include b(popover-arrow) {
-        @include once {
-          bottom: -2 * $--n-popover-arrow-width;
-          transform: translateX(-$--n-popover-arrow-width);
-          left: 50%;
+        @include b(popover-arrow-wrapper) {
+          right: 0;
+          left: 0;
+          top: 100%;
+          height: $--n-popover-arrow-width * 2;
+          @include b(popover-arrow) {
+            top: -$--n-popover-arrow-width;
+            transform: translateX(-$--n-popover-arrow-width) rotate(45deg) ;
+            left: 50%;
+          }
         }
-        border-top-color: $--popover-background-color;
       }
-    }
-    &[n-placement$="top-end"] {
-      @include once {
+      &[n-placement$="top-end"] {
         margin-bottom: 10px;
+        @include b(popover-arrow-wrapper) {
+          right: 0;
+          left: 0;
+          top: 100%;
+          height: $--n-popover-arrow-width * 2;
+          @include b(popover-arrow) {
+            top: -$--n-popover-arrow-width;
+            right: 10px;
+          }
+        }
       }
-      @include b(popover-arrow) {
-        @include once {
-          bottom: -2 * $--n-popover-arrow-width;
-          right: 10px;
-        } 
-        border-top-color: $--popover-background-color;
-      }
-    }
-    &[n-placement$="bottom-start"] {
-      @include once {
+      &[n-placement$="bottom-start"] {
         margin-top: 10px;
-      }
-      @include b(popover-arrow) {
-        @include once {
-          top: -2 * $--n-popover-arrow-width;
-          left: 10px;
+        @include b(popover-arrow-wrapper) {
+          right: 0;
+          left: 0;
+          bottom: 100%;
+          height: $--n-popover-arrow-width * 2;
+          @include b(popover-arrow) {
+            bottom: -$--n-popover-arrow-width;
+            left: 10px;
+          }
         }
-        border-bottom-color: $--popover-background-color;
       }
-    }
-    &[n-placement$="bottom"] {
-      @include once {
+      &[n-placement$="bottom"] {
         margin-top: 10px;
-      }
-      @include b(popover-arrow) {
-        @include once {
-          top: -2 * $--n-popover-arrow-width;
-          transform: translateX(-$--n-popover-arrow-width);
-          left: 50%;
+        @include b(popover-arrow-wrapper) {
+          right: 0;
+          left: 0;
+          bottom: 100%;
+          height: $--n-popover-arrow-width * 2;
+          @include b(popover-arrow) {
+            bottom: -$--n-popover-arrow-width;
+            transform: translateX(-$--n-popover-arrow-width) rotate(45deg) ;
+            left: 50%;
+          }
         }
-        border-bottom-color: $--popover-background-color;
       }
-    }
-    &[n-placement$="bottom-end"] {
-      @include once {
+      &[n-placement$="bottom-end"] {
         margin-top: 10px;
-      }
-      @include b(popover-arrow) {
-        @include once {
-          top: -2 * $--n-popover-arrow-width;
-          right: 10px;
+        @include b(popover-arrow-wrapper) {
+          right: 0;
+          left: 0;
+          bottom: 100%;
+          height: $--n-popover-arrow-width * 2;
+          @include b(popover-arrow) {
+            bottom: -$--n-popover-arrow-width;
+            right: 10px;
+          }
         }
-        border-bottom-color: $--popover-background-color;
       }
-    }
-    &[n-placement$="left-start"] {
-      @include once {
+      &[n-placement$="left-start"] {
         margin-right: 10px;
-      }
-      @include b(popover-arrow) {
-        @include once {
-          right: -2 * $--n-popover-arrow-width;
-          top: 10px;
+        @include b(popover-arrow-wrapper) {
+          top: 0;
+          bottom: 0;
+          left: 100%;
+          width: $--n-popover-arrow-width * 2;
+          @include b(popover-arrow) {
+            left: -$--n-popover-arrow-width;
+            top: 10px;
+          }
         }
-        border-left-color: $--popover-background-color;
       }
-    }
-    &[n-placement$="left"] {
-      @include once {
+      &[n-placement$="left"] {
         margin-right: 10px;
-      }
-      @include b(popover-arrow) {
-        @include once {
-          right: -2 * $--n-popover-arrow-width;
-          transform: translateY(-$--n-popover-arrow-width);
-          top: 50%;
+        @include b(popover-arrow-wrapper) {
+          top: 0;
+          bottom: 0;
+          left: 100%;
+          width: $--n-popover-arrow-width * 2;
+          @include b(popover-arrow) {
+            left: -$--n-popover-arrow-width;
+            transform: translateY(-$--n-popover-arrow-width) rotate(45deg) ;
+            top: 50%;
+          }
         }
-        border-left-color: $--popover-background-color;
       }
-    }
-    &[n-placement$="left-end"] {
-      @include once {
+      &[n-placement$="left-end"] {
         margin-right: 10px;
-      }
-      @include b(popover-arrow) {
-        @include once {
-          right: -2 * $--n-popover-arrow-width;
-          bottom: 10px;
+        @include b(popover-arrow-wrapper) {
+          top: 0;
+          bottom: 0;
+          left: 100%;
+          width: $--n-popover-arrow-width * 2;
+          @include b(popover-arrow) {
+            left: -$--n-popover-arrow-width;
+            bottom: 10px;
+          }
         }
-        border-left-color: $--popover-background-color;
       }
-    }
-    &[n-placement$="right-start"] {
-      @include once {
+      &[n-placement$="right-start"] {
         margin-left: 10px;
-      }
-      @include b(popover-arrow) {
-        @include once {
-          left: -2 * $--n-popover-arrow-width;
-          top: 10px;
+        @include b(popover-arrow-wrapper) {
+          top: 0;
+          bottom: 0;
+          right: 100%;
+          width: $--n-popover-arrow-width * 2;
+          @include b(popover-arrow) {
+            right: -$--n-popover-arrow-width;
+            top: 10px;
+          }
         }
-        border-right-color: $--popover-background-color;
       }
-    }
-    &[n-placement$="right"] {
-      @include once {
+      &[n-placement$="right"] {
         margin-left: 10px;
-      }
-      @include b(popover-arrow) {
-        @include once {
-          left: -2 * $--n-popover-arrow-width;
-          transform: translateY(-$--n-popover-arrow-width);
-          top: 50%;
+        @include b(popover-arrow-wrapper) {
+          top: 0;
+          bottom: 0;
+          right: 100%;
+          width: $--n-popover-arrow-width * 2;
+          @include b(popover-arrow) {
+            right: -$--n-popover-arrow-width;
+            transform: translateY(-$--n-popover-arrow-width) rotate(45deg) ;
+            top: 50%;
+          }
         }
-        border-right-color: $--popover-background-color;
       }
-    }
-    &[n-placement$="right-end"] {
-      @include once {
+      &[n-placement$="right-end"] {
         margin-left: 10px;
-      }
-      @include b(popover-arrow) {
-        @include once {
-          left: -2 * $--n-popover-arrow-width;
-          bottom: 10px;
+        @include b(popover-arrow-wrapper) {
+          top: 0;
+          bottom: 0;
+          right: 100%;
+          width: $--n-popover-arrow-width * 2;
+          @include b(popover-arrow) {
+            right: -$--n-popover-arrow-width;
+            bottom: 10px;
+          }
         }
-        border-right-color: $--popover-background-color;
       }
     }
     background-color: $--popover-background-color;
     color: $--popover-text-color;
+    @include b(popover-arrow-wrapper) {
+      @include b(popover-arrow) {
+        background-color: $--popover-background-color;
+      }
+    }
     @include not-m(without-shadow) {
       box-shadow: $--popover-box-shadow;
     }

@@ -3,15 +3,17 @@ Use Config Consumer to get theme at current position.
 
 ```html
 <n-config-provider :theme="theme">
-  <n-button @click="theme = 'dark'">Dark</n-button>
-  <n-button @click="theme = 'light'">Light</n-button>
-  <n-config-consumer
-    @theme-change="handleThemeChange"
-  >
-    <template v-slot="{ theme }">
-      <div>theme: {{ theme }}</div>
-    </template>
-  </n-config-consumer>
+  <div style="background-color: rgba(128, 128, 128); padding: 8px;">
+    <n-button @click="theme = 'dark'">Dark</n-button>
+    <n-button @click="theme = 'light'">Light</n-button>
+    <n-config-consumer
+      @theme-change="handleThemeChange"
+    >
+      <template v-slot="{ theme }">
+        <div>theme: {{ theme }}</div>
+      </template>
+    </n-config-consumer>
+  </div>
 </n-config-provider>
 ```
 ```js

@@ -1,8 +1,8 @@
-import getTheme from './getTheme'
+import withapp from '../../_mixins/withapp'
+import themeable from '../../_mixins/themeable'
 
 export default level => ({
   name: 'NH' + level,
-  functional: true,
   props: {
     type: {
       type: String,
@@ -17,21 +17,18 @@ export default level => ({
       default: false
     }
   },
-  render (h, context) {
-    const props = context.props
-    const on = context.listeners
-    const theme = getTheme(context.parent)
-    const defaultSlot = context.slots.default || (context.scopedSlots.default && context.scopedSlots.default())
+  mixins: [withapp, themeable],
+  render (h) {
+    const props = this.$props
+    const defaultSlot = this.$slots.default
     return h(`h${level}`, {
       class: {
         [`n-h${level}`]: true,
-        [`n-${theme}-theme`]: theme,
+        [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
         [`n-h${level}--${props.type}-type`]: props.type,
         [`n-h${level}--prefix-bar`]: props.prefix,
         [`n-h${level}--align-text`]: props.alignText
-      },
-      ...context.data,
-      on
+      }
     }, defaultSlot)
   }
 })

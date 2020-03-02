@@ -5,7 +5,6 @@
     :class="{
       'n-menu-item-content--collapsed': collapsed,
       'n-menu-item-content--child-selected': childSelected,
-      'n-menu-item-content--selected': selected,
       'n-menu-item-content--disabled': disabled,
       'n-menu-item-content--hover': hover,
       'n-menu-item-content--uncollapsable': uncollapsable
@@ -75,10 +74,6 @@ export default {
       default: null
     },
     showArrow: {
-      type: Boolean,
-      default: false
-    },
-    selected: {
       type: Boolean,
       default: false
     },

@@ -8,7 +8,9 @@
 <n-config-provider :theme="theme" :theme-environment="env" abstract>
   <n-config-consumer>
     <template v-slot="{ themeEnvironment }">
-      <n-tag>无包裹 DOM：{{ themeEnvironment }}</n-tag>
+      <div style="background-color: rgba(128, 128, 128); padding: 8px;">
+        <n-tag>无包裹 DOM：{{ themeEnvironment }}</n-tag>
+      </div>
     </template>
   </n-config-consumer>
 </n-config-provider>

@@ -5,13 +5,15 @@
   <n-button @click="theme = 'dark'">深色主题</n-button>
   <n-button @click="theme = 'light'">浅色主题</n-button>
 </div>
-<n-config-provider :theme="theme" :theme-environment="env">
-  <n-config-consumer>
-    <template v-slot="{ themeEnvironment }">
-      <n-tag>{{ themeEnvironment }}</n-tag>
-    </template>
-  </n-config-consumer>
-</n-config-provider>
+<div style="background-color: rgba(128, 128, 128); padding: 8px;">
+  <n-config-provider :theme="theme" :theme-environment="env">
+    <n-config-consumer>
+      <template v-slot="{ themeEnvironment }">
+        <n-tag>{{ themeEnvironment }}</n-tag>
+      </template>
+    </n-config-consumer>
+  </n-config-provider>
+</div>
 ```
 ```js
 export default {

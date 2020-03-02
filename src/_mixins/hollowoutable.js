@@ -31,6 +31,10 @@ function getNextBackgroundColorOf (el) {
   const diffedStyle = createDiffedStyleObject(prevStyle, computedStyle)
   const memorizedInlineStyle = {}
   const diffedKeys = Object.keys(diffedStyle)
+  if (!diffedKeys.length) {
+    el.style.transition = memorizedTransition
+    return
+  }
   for (const key of diffedKeys) {
     memorizedInlineStyle[key] = el.style[key]
   }
@@ -74,6 +78,19 @@ function uncache () {
   }
 }
 
+const alphaColorRegex = /rgba\((\d|\s|\.)+,(\d|\s|\.)+,(\d|\s|\.)+,((\d|\s|\.)+)\)/
+
+function isTranslucentColor (color) {
+  const colors = alphaColorRegex.exec(color)
+  if (colors) {
+    const alpha = colors[4].trim()
+    if (alpha !== '0' || alpha !== '1') {
+      return true
+    }
+  }
+  return false
+}
+
 export default {
   watch: {
     syntheticTheme (value) {
@@ -105,21 +122,32 @@ export default {
           cachedCSSStyleDeclaration.set(cursor, CSSStyleDeclaration)
           backgroundColor = CSSStyleDeclaration.backgroundColor
         }
-        if (backgroundColor && backgroundColor !== 'rgba(0, 0, 0, 0)') {
+        if (backgroundColor) {
+          if (isTranslucentColor(backgroundColor)) {
+            /**
+             * If it's facing a translucent color,
+             * continue to find a opaque color.
+             **/
+            continue
+          }
           if (cachedNextBackgroundColor) {
             const nextBackgroundColor = cachedNextBackgroundColor.get(cursor)
             if (nextBackgroundColor) {
               this.ascendantBackgroundColor = nextBackgroundColor
-              break
+              return
             }
           }
           this.ascendantBackgroundColor = getNextBackgroundColorOf(cursor)
           if (cachedNextBackgroundColor) {
             cachedNextBackgroundColor.set(cursor, this.ascendantBackgroundColor)
           }
-          break
+          return
         }
       }
+      /**
+       * If no color is found, fallback to it's default color
+       */
+      this.ascendantBackgroundColor = null
     }
   },
   created () {

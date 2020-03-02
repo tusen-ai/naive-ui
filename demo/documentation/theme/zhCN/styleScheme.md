@@ -9,7 +9,7 @@ Naive UI 有一组内置的样式方案。在创建一个 Naive UI 相同风格�
         padding: '8px',
         borderColor: styleScheme.primaryColor,
         backgroundColor: 'transparent',
-        color: styleScheme.primaryColor,
+        color: styleScheme.warningColor,
         transition: `all .3s ${styleScheme.easeInOutCubicBezier}`
       }"
     >Cool!</button>

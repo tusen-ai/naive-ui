@@ -1,10 +1,10 @@
 # Opened Submenu
-You can set `default-open-names` to make menu work in an uncontrolled manner or use `open-names` and `@open-names-change` to make it work in a controlled manner.
+You can set `default-expanded-names` to make menu work in an uncontrolled manner or use `expanded-names` and `@expanded-names-change` to make it work in a controlled manner.
 ```html
 <n-menu
   v-model="activeName"
-  :default-open-names="defaultExpandedNames"
-  @open-names-change="handleExpandedNamesChange"
+  :default-expanded-names="defaultExpandedNames"
+  @expanded-names-change="handleExpandedNamesChange"
   @select="handleSelect"
 >
   <n-menu-item title="Hear the Wind Sing" name="hear-the-wind-sing">

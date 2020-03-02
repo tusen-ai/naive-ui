@@ -2,8 +2,10 @@
 
 @mixin radio-group-size-mixin ($size) {
   @include m($size + '-size') {
-    line-height: map-get($--n-height, $size);
-    height: map-get($--n-height, $size);
+    @include m(button-group) {
+      line-height: map-get($--n-height, $size);
+      height: map-get($--n-height, $size);
+    }
     @include b(radio-button) {
       line-height: map-get($--n-height, $size);
       height: map-get($--n-height, $size);
@@ -24,7 +26,6 @@
       display: inline-flex;
       vertical-align: middle;
       align-items: center;
-      margin-right: 18px;
       @include e(radio-input) {
         width: 0;
         height: 0;
@@ -131,9 +132,14 @@
       display: inline-block;
       @include m(button-group) {
         white-space: nowrap;
+        height: 28px;
+        line-height: 28px;
       }
-      height: 28px;
-      line-height: 28px;
+      @include m(transition-disabled) {
+        @include b(radio-button) {
+          transition: none !important;
+        }
+      }
     }
     @include b(radio-button) {
       @include once {
@@ -172,22 +178,22 @@
       
       &:first-child {
         @include once {
-          border-top-left-radius: 6px;
-          border-bottom-left-radius: 6px;
+          border-top-left-radius: $--n-radio-button-border-radius;
+          border-bottom-left-radius: $--n-radio-button-border-radius;
           @include e(border-mask) {
-            border-top-left-radius: 6px;
-            border-bottom-left-radius: 6px;
+            border-top-left-radius: $--n-radio-button-border-radius;
+            border-bottom-left-radius: $--n-radio-button-border-radius;
           }
         }
         border-left: 1px solid map-get($--radio-button-border-color, 'default');
       }
       &:last-child {
         @include once {
-          border-top-right-radius: 6px;
-          border-bottom-right-radius: 6px;
+          border-top-right-radius: $--n-radio-button-border-radius;
+          border-bottom-right-radius: $--n-radio-button-border-radius;
           @include e(border-mask) {
-            border-top-right-radius: 6px;
-            border-bottom-right-radius: 6px;
+            border-top-right-radius: $--n-radio-button-border-radius;
+            border-bottom-right-radius: $--n-radio-button-border-radius;
           }
         }
         border-right: 1px solid map-get($--radio-button-border-color, 'default');        

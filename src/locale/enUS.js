@@ -9,6 +9,7 @@ export default {
   },
   Cascader: {
     placeholder: 'Please Select',
+    loading: 'Loading',
     loadingRequiredMessage: label => `Please load all ${label}'s descedants before checking it.`
   },
   DatePicker: {
@@ -43,6 +44,10 @@ export default {
     endDatePlaceholder: 'End Date',
     startDatetimePlaceholder: 'Start Date and Time',
     endDatetimePlaceholder: 'End Date and Time'
+  },
+  DataTable: {
+    confirm: 'Confirm',
+    clear: 'Clear'
   },
   Transfer: {
     sourceTitle: 'Source',

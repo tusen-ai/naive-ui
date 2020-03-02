@@ -14,7 +14,7 @@
       margin: 4px 0;
       display: flex;
       flex-wrap: nowrap;
-      border-radius: 6px;
+      border-radius: $--n-cascader-border-radius;
       overflow: hidden;
       /** 
        * if width not set, cascader select menu's inner scroll area's width is 
@@ -35,12 +35,12 @@
           position: relative;
         }
         &:first-child {
-          border-top-left-radius: 6px;
-          border-bottom-left-radius: 6px;
+          border-top-left-radius: $--n-cascader-border-radius;
+          border-bottom-left-radius: $--n-cascader-border-radius;
         }
         &:last-child {
-          border-top-right-radius: 6px;
-          border-bottom-right-radius: 6px;
+          border-top-right-radius: $--n-cascader-border-radius;
+          border-bottom-right-radius: $--n-cascader-border-radius;
         }
       }
       &:not(:first-child) {

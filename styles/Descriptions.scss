@@ -73,7 +73,7 @@
     @include m(bordered) {
       @include b(descriptions-table-wrapper) {
         @include once {
-          border-radius: 6px;
+          border-radius: $--n-descriptions-border-radius;
           overflow: hidden;
         }
         border: 1px solid $--descriptions-border-color;

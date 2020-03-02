@@ -294,9 +294,15 @@ export default {
           }, [
             ...(this.$slots.default || []),
             this.arrow
-              ? h('div', {
-                staticClass: 'n-popover-arrow'
-              })
+              ? h(
+                'div',
+                {
+                  staticClass: 'n-popover-arrow-wrapper'
+                }, [
+                  h('div', {
+                    staticClass: 'n-popover-arrow'
+                  })
+                ])
               : null
           ]) : null
         ])

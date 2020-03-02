@@ -47,7 +47,7 @@ export default {
     },
     showArrow: {
       type: Boolean,
-      default: true
+      default: false
     },
     show: {
       type: Boolean,
@@ -56,6 +56,10 @@ export default {
     trigger: {
       type: String,
       default: 'click'
+    },
+    zIndex: {
+      type: Number,
+      default: undefined
     }
   },
   methods: {
@@ -74,6 +78,7 @@ export default {
         trigger: context.props.trigger,
         containerClass: 'n-popselect',
         showArrow: context.props.showArrow,
+        zIndex: context.props.zIndex,
         controller
       },
       on: {

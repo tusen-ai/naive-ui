@@ -80,7 +80,9 @@
       width: 100%;
       display: flex;
       @include b(step-splitor) {
-        transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
+        transition:
+          color .3s $--n-ease-in-out-cubic-bezier,
+          background-color .3s $--n-ease-in-out-cubic-bezier;
         height: 1px;
         flex: 1;
         align-self: flex-start;
@@ -107,7 +109,9 @@
         }
       }
       @include b(step-indicator) {
-        transition: background-color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier;
+        transition:
+          background-color .3s $--n-ease-in-out-cubic-bezier,
+          box-shadow .3s $--n-ease-in-out-cubic-bezier;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -125,6 +129,15 @@
           }
           @include b(icon) {
             @include icon-switch-transition();
+          }
+        }
+      }
+      @include m(transition-disabled) {
+        @include b(step-indicator) {
+          @include b(step-indicator-slot) {
+            @include e(index) {
+              transition: none !important;
+            }
           }
         }
       }

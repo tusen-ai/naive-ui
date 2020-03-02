@@ -27,6 +27,9 @@
           @include m(small-size) {
             padding-top: 4px;
             padding-bottom: 4px;
+            @include b(base-select-option) {
+              padding: 0 16px;
+            }
             @include b(dropdown-divider) {
               margin: 0 0;
             }
@@ -38,8 +41,11 @@
             }
           }
           @include m(medium-size) {
-            padding-top: 4px;
-            padding-bottom: 4px;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            @include b(base-select-option) {
+              padding: 0 20px;
+            }
             @include b(dropdown-divider) {
               margin: 0 0;
             }
@@ -53,6 +59,9 @@
           @include m(large-size) {
             padding-top: 6px;
             padding-bottom: 6px;
+            @include b(base-select-option) {
+              padding: 0 24px;
+            }
             @include b(dropdown-divider) {
               margin: 2px 0;
             }
@@ -66,6 +75,9 @@
           @include m(huge-size) {
             padding-top: 8px;
             padding-bottom: 8px;
+            @include b(base-select-option) {
+              padding: 0 24px;
+            }
             @include b(dropdown-submenu-activator) {
               @include e(arrow) {
                 font-size: 16px;

@@ -9,6 +9,7 @@ export default {
   },
   Cascader: {
     placeholder: '请选择',
+    loading: '加载中',
     loadingRequiredMessage: label => `加载全部 ${label} 的子节点后才可选中`
   },
   DatePicker: {
@@ -43,6 +44,10 @@ export default {
     endDatePlaceholder: '结束日期',
     startDatetimePlaceholder: '开始日期时间',
     endDatetimePlaceholder: '结束日期时间'
+  },
+  DataTable: {
+    confirm: '确认',
+    clear: '重置'
   },
   Transfer: {
     sourceTitle: '源项',

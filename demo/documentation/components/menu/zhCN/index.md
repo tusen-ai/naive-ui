@@ -26,8 +26,8 @@ collapse
 |overlay-min-width|`number \| string`|`180`|弹出子菜单的最小宽度，只在菜单为水平或者折叠时生效|
 |root-indent|`number`|`null`|菜单第一级的缩进，如果没有设定，使用 `indent` 代替|
 |indent|`number`|`32`|菜单每级的缩进|
-|default-open-names|`Array<string>`|`[]`|在非受控状态下默认展开的子菜单标识符数组|
-|expandedNames|`Array<string>`|`undefined`|展开的子菜单标识符数组，如果设定了，菜单的展开将会进入受控状态，`default-open-names` 不会生效|
+|default-expanded-names|`Array<string>`|`[]`|在非受控状态下默认展开的子菜单标识符数组|
+|expandedNames|`Array<string>`|`undefined`|展开的子菜单标识符数组，如果设定了，菜单的展开将会进入受控状态，`default-expanded-names` 不会生效|
 |value|`string`|`null`|菜单当前的选中值|
 |mode|`'vertical' \| 'horizontal'`|`'vertical'`||
 
@@ -84,5 +84,5 @@ collapse
 |名称|参数|说明|
 |-|-|-|
 |select|`(selectedName: string)`||
-|open-names-change|`(expandedNames: Array<string>)`||
+|expanded-names-change|`(expandedNames: Array<string>)`||
 

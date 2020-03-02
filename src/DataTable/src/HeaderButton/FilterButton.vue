@@ -6,41 +6,43 @@
       'n-data-table-filter-button--popover-visible': popoverVisible
     }"
   >
-    <n-popselect
-      :value="activeFilterOptionValues"
-      cancelable
-      :show-arrow="false"
-      :multiple="column.filterMultiple === false ? false : true"
-      :options="finalOptions"
-      :loading="loading"
-      @input="handleFilterChange"
+    <n-popover
+      trigger="click"
+      :controller="controller"
       @show="popoverVisible = true"
       @hide="popoverVisible = false"
     >
       <template v-slot:activator>
         <div class="n-data-table-filter-button__icon-wrapper">
           <n-icon>
-            <ios-funnel />
+            <funnel />
           </n-icon>
         </div>
       </template>
-    </n-popselect>
+      <n-data-table-filter-menu
+        :radio-group-name="column.key"
+        :multiple="filterMultiple"
+        :value="activeFilterOptionValues"
+        :options="options"
+        @change="handleFilterChange"
+        @cancel="handleFilterMenuCancel"
+        @confirm="handleFilterMenuConfirm"
+      />
+    </n-popover>
   </div>
 </template>
 
 <script>
 import NIcon from '../../../Icon'
-import iosFunnel from '../../../_icons/ios-funnel'
+import NDataTableFilterMenu from './FilterMenu'
+import NPopover from '../../../Popover'
+import funnel from '../../../_icons/funnel'
 
 function createFilterOptionValues (activeFilters, column) {
   const activeFilterOptionValues = activeFilters
     .filter(filter => filter.columnKey === column.key)
     .map(filter => filter.filterOptionValue)
-  /** default is multiple */
-  if (column.filterMultiple !== false) {
-    return activeFilterOptionValues
-  }
-  return activeFilterOptionValues[0]
+  return activeFilterOptionValues
 }
 
 function createActiveFilters (allFilters, columnKey, filters) {
@@ -62,7 +64,9 @@ export default {
   },
   components: {
     NIcon,
-    iosFunnel
+    NDataTableFilterMenu,
+    NPopover,
+    funnel
   },
   props: {
     column: {
@@ -76,9 +80,8 @@ export default {
   },
   data () {
     return {
-      finalOptions: typeof this.options === 'function' ? [] : this.options,
-      loading: false,
-      popoverVisible: false
+      popoverVisible: false,
+      controller: {}
     }
   },
   computed: {
@@ -93,20 +96,9 @@ export default {
         return !!this.activeFilterOptionValues.length
       }
       return !!this.activeFilterOptionValues
-    }
-  },
-  watch: {
-    options (value) {
-      if (typeof this.options === 'function') {
-        this.asyncInitializeOptions()
-      } else {
-        this.finalOptions = value
-      }
-    }
-  },
-  mounted () {
-    if (typeof this.options === 'function') {
-      this.asyncInitializeOptions()
+    },
+    filterMultiple () {
+      return this.column.filterMultiple !== false
     }
   },
   methods: {
@@ -118,21 +110,11 @@ export default {
       )
       this.NDataTable.changeFilters(nextActiveFilters, this.column)
     },
-    /**
-     * @deprecated
-     */
-    asyncInitializeOptions () {
-      this.loading = true
-      this.options().then(
-        options => {
-          this.finalOptions = options
-          this.loading = false
-        },
-        err => {
-          this.loading = false
-          console.error(err)
-        }
-      )
+    handleFilterMenuCancel () {
+      this.controller.hide()
+    },
+    handleFilterMenuConfirm () {
+      this.controller.hide()
     }
   }
 }

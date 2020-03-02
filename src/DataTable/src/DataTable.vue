@@ -14,7 +14,6 @@
         <base-table
           ref="mainTable"
           main
-          :header-height="headerHeight"
           :scroll-x="styleScrollX"
           :body-style="bodyStyle"
           :data="paginatedData"
@@ -30,6 +29,9 @@
         <div
           v-if="paginatedData.length === 0"
           class="n-data-table__empty"
+          :class="{
+            'n-data-table__empty--hide': loading
+          }"
         >
           <n-empty />
         </div>
@@ -55,6 +57,7 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import locale from '../../_mixins/locale'
 import { setCheckStatusOfRow } from './utils'
 import BaseTable from './BaseTable.vue'
 import NEmpty from '../../Empty'
@@ -120,7 +123,7 @@ export default {
     NEmpty,
     NPagination
   },
-  mixins: [ withapp, themeable ],
+  mixins: [ withapp, themeable, locale('DataTable') ],
   provide () {
     return {
       NDataTable: this
@@ -186,7 +189,6 @@ export default {
   },
   data () {
     return {
-      headerHeight: null,
       /** collected tr heights of main table */
       trHeights: [],
       hoveringRowIndex: null,
@@ -529,12 +531,6 @@ export default {
     handleTableMainBodyScroll (e) {
       this.handleTableBodyScroll(e, 'main')
     },
-    handleTableLeftBodyScroll (e) {
-      this.handleTableBodyScroll(e, 'left')
-    },
-    handleTableRightBodyScroll (e) {
-      this.handleTableBodyScroll(e, 'right')
-    },
     handleTableBodyScroll (e, part) {
       if (!this.scrollingPart || this.scrollingPart === part) {
         if (this.scrollingPart !== part) this.scrollingPart = part
@@ -598,10 +594,8 @@ export default {
     },
     collectDOMSizes () {
       const {
-        header: headerEl,
         body: mainTableScrollContainer
       } = this.getScrollElements()
-      this.headerHeight = headerEl.offsetHeight
       this.mainTableScrollContainerWidth = mainTableScrollContainer.offsetWidth
       const trHeights = Array.from(mainTableScrollContainer.querySelectorAll('tr')).map(el => el.offsetHeight)
       this.trHeights = trHeights

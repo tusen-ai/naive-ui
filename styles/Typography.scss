@@ -79,6 +79,7 @@
   @include header-mixin('6');
   @include b(p) {
     @include once {
+      box-sizing: border-box;
       transition: color .3s $--n-ease-in-out-cubic-bezier;
       margin: 12px 0 16px 0;
       font-size: 14px;
@@ -168,7 +169,7 @@
           border-color .3s $--n-ease-in-out-cubic-bezier;
         box-sizing: border-box;
         padding: .15em .45em 0 .45em;
-        border-radius: 3px;
+        border-radius: $--n-typography-code-border-radius;
         font-size: .9em;
       }
       color: map-get($--typography-code-text-color, 'default');
@@ -229,6 +230,7 @@
       margin: 0;
       margin-top: 12px;
       margin-bottom: 12px;
+      box-sizing: border-box;
       transition:
         color .3s $--n-ease-in-out-cubic-bezier,
         border-color .3s $--n-ease-in-out-cubic-bezier;

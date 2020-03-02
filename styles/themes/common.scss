@@ -7,6 +7,9 @@ $--n-ease-in-out-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
 $--n-ease-out-cubic-bezier: cubic-bezier(0, 0, .2, 1);
 $--n-ease-in-cubic-bezier: cubic-bezier(.4, 0, 1, 1);
 
+$--n-border-radius: 3px;
+$--n-light-border-radius: 2px;
+
 $--n-height: (
   "tiny": 22px,
   "small": 28px,
@@ -33,8 +36,14 @@ $--n-ease-in-cubic-bezier: cubic-bezier(.4, 0, 1, 1);
 
 $--n-popmenu-box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.18) !global;
 
+/** alert */
+$--n-alert-border-radius: $--n-border-radius;
+
+/** avatar */
+$--n-avatar-border-radius: $--n-border-radius;
+
 /** button */
-$--n-button-border-radius: 6px;
+$--n-button-border-radius: $--n-border-radius;
 $--n-button-font-size: (
   "tiny": 12px,
   "small": 14px,
@@ -54,8 +63,8 @@ $--n-button-round-padding: (
   "large": 0 22px
 ) !global;
 $--n-button-icon-size: (
-  "tiny": 14px,
-  "small": 16px,
+  "tiny": 15px,
+  "small": 18px,
   "medium": 18px,
   "large": 20px
 ) !global;
@@ -64,9 +73,13 @@ $--n-button-icon-size: (
 $--n-base-loading-stroke-dashoffset: 500;
 
 /** base selection */
-$--n-base-selection-border-radius: 6px;
+$--n-base-selection-border-radius: $--n-border-radius;
+
+/** base select menu */
+$--n-base-select-menu-border-radius: $--n-border-radius;
 
 /** card */
+$--n-card-border-radius: $--n-border-radius;
 $--n-card-margin-left: (
   'small': 16px,
   'medium': 24px,
@@ -88,7 +101,17 @@ $--n-card-margin-bottom: (
   'huge': 20px
 );
 
+/** cascader */
+$--n-cascader-border-radius: $--n-border-radius;
+
+/** data table */
+$--n-data-table-border-radius: $--n-border-radius;
+
+/** date pcicker */
+$--n-date-picker-border-radius: $--n-border-radius;
+
 /** descriptions */
+$--n-descriptions-border-radius: $--n-border-radius;
 $--n-descriptions-bordered-padding: (
   'small': (8px 12px),
   'medium': (12px 16px),
@@ -101,15 +124,26 @@ $--n-descriptions-padding: (
 );
 
 /** input number */
-$--n-input-number-border-radius: 6px;
+$--n-input-number-border-radius: $--n-border-radius;
 
 /** input */
 $--n-input-icon-size: 20px;
-$--n-input-border-radius: 6px;
+$--n-input-border-radius: $--n-border-radius;
+
+/** list */
+$--n-list-border-radius: $--n-border-radius;
+
+/** notification */
+$--n-notification-border-radius: $--n-border-radius;
 
 /** popover */
-$--n-popover-arrow-width: 6px;
-$--n-popover-box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.12) !global;
+$--n-popover-border-radius: $--n-border-radius;
+$--n-popover-arrow-width: 4px;
+$--n-popover-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.12);
+$--n-popover-arrow-box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.12);
+
+/** radio */
+$--n-radio-button-border-radius: $--n-border-radius;
 
 /** slider */
 $--n-slider-rail-height: 4px;
@@ -138,12 +172,16 @@ $--n-steps-indicator-icon-size: (
 );
 
 /** tab */
+$--n-tabs-border-radius: $--n-border-radius;
 $--n-tabs-tab-font-size: (
   'small': 13px,
   'medium': 14px,
   'large': 16px,
   'huge': 18px
 );
+
+/** tag */
+$--n-tag-border-radius: $--n-light-border-radius;
 
 /** timeline */
 $--n-timeline-header-font-size: (
@@ -156,7 +194,20 @@ $--n-timeline-header-margin-top: (
   'large': -1px
 );
 
+/** time picker */
+$--n-time-picker-border-radius: $--n-border-radius;
+
+/** tooltip */
+$--n-tooltip-border-radius: $--n-border-radius;
+
+/** transfer */
+$--n-transfer-border-radius: $--n-border-radius;
+
+/** tree */
+$--n-tree-node-border-radius: $--n-light-border-radius;
+
 /** typography */
+$--n-typography-code-border-radius: $--n-light-border-radius;
 $--n-typography-header-font-size: (
   '1': 28px,
   '2': 24px,
@@ -192,3 +243,6 @@ $--n-typography-header-bar-width: (
   '5': 3px,
   '6': 3px
 );
+
+/** upload */
+$--n-upload-border-radius: $--n-border-radius;
