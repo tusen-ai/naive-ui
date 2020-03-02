@@ -3,7 +3,7 @@
 @mixin tag-size-mixin($size) {
   $height: map-get($--n-height, $size) - 6px;
   $font-size: (
-    "small": 12px,
+    "small": 13px,
     "medium": 14px,
     "large": 14px
   );

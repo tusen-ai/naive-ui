@@ -10,7 +10,7 @@
     "start": "Getting Start",
     "intro1": "An Experimental Vue UI Framework",
     "intro2": "Caring About Styles, Themed, Batteries Included, Fast",
-    "intro3": "Intresting Somehow"
+    "intro3": "Interesting Somehow"
   }
 }
 </i18n>
