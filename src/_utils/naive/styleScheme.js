@@ -1,5 +1,5 @@
-import darkstyleScheme from '../../_themes/darkStyleScheme.scss'
-import lightstyleScheme from '../../_themes/lightStyleScheme.scss'
+import darkstyleScheme from '../../_interoperation/darkStyleScheme.scss'
+import lightstyleScheme from '../../_interoperation/lightStyleScheme.scss'
 
 const styleScheme = {
   dark: darkstyleScheme,

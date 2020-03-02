@@ -7,7 +7,7 @@
       <n-base-tracking-rect
         ref="trackingRect"
         :theme="theme"
-        :item-size="34"
+        :item-size="itemSize"
       />
       <n-cascader-option
         v-for="(option, index) in options"
@@ -50,6 +50,7 @@ import NCascaderOption from './CascaderOption.vue'
 import NScrollbar from '../../Scrollbar'
 import NBaseTrackingRect from '../../_base/TrackingRect'
 import debounce from 'lodash-es/debounce'
+import { itemSize } from '../../_interoperation/common'
 
 export default {
   name: 'NCascaderSubmenu',
@@ -75,6 +76,10 @@ export default {
     menuIsLoading: {
       type: Boolean,
       default: false
+    },
+    size: {
+      type: String,
+      default: 'medium'
     }
   },
   data () {
@@ -85,6 +90,9 @@ export default {
   computed: {
     theme () {
       return this.NCascader.syntheticTheme
+    },
+    itemSize () {
+      return itemSize[this.size] || itemSize.medium
     }
   },
   methods: {
