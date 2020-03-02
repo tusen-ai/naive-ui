@@ -3,7 +3,7 @@
     class="n-transfer"
     :class="{
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
-      [`n-transfer--${size}-size`]: size
+      [`n-transfer--${syntheticSize}-size`]: true
     }"
   >
     <div class="n-transfer-list">
@@ -265,7 +265,7 @@ export default {
       validator (value) {
         return ['small', 'medium', 'large'].includes(value)
       },
-      default: 'medium'
+      default: null
     }
   },
   provide () {
@@ -289,7 +289,7 @@ export default {
   },
   computed: {
     itemSize () {
-      return itemSize[this.size] || itemSize.medium
+      return itemSize[this.syntheticSize] || itemSize.medium
     },
     valueToOptionMap () {
       const map = new Map()

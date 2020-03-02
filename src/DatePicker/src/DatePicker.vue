@@ -14,7 +14,7 @@
     <n-input
       v-if="isRange"
       ref="input"
-      :size="size"
+      :size="syntheticSize"
       passively-activated
       :disabled="disabled"
       :value="[displayStartTime, displayEndTime]"
@@ -41,7 +41,7 @@
       ref="input"
       v-model="displayTime"
       passively-activated
-      :size="size"
+      :size="syntheticSize"
       :force-focus="active"
       :disabled="disabled"
       :placeholder="localizedPlacehoder"
@@ -215,8 +215,10 @@ export default {
       default: null
     },
     size: {
-      type: String,
-      default: 'medium'
+      validator (value) {
+        return ['small', 'medium', 'large'].includes(value)
+      },
+      default: null
     },
     type: {
       validator (type) {
