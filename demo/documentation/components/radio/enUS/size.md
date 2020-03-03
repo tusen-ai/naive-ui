@@ -1,8 +1,20 @@
-# Button Group
-Sometimes a radio button group looks more elegant.
+# Size
+Choose whatever you want.
 ```html
 <div style="margin-bottom: 12px;">
-  <n-radio-group v-model="value" name="radiobuttongroup1">
+  <n-radio-group v-model="value" name="radiobuttongroup2" size="medium">
+    <n-radio-button
+      v-for="song in songs"
+      :key="song.value"
+      :value="song.value"
+      :disabled="(song.label === 'Live Forever' && disabled1 || song.label === 'Shakermaker' && disabled2)"
+    >
+      {{ song.label }}
+    </n-radio-button>
+  </n-radio-group>
+</div>
+<div style="margin-bottom: 12px;">
+  <n-radio-group v-model="value" name="radiobuttongroup3" size="large">
     <n-radio-button
       v-for="song in songs"
       :key="song.value"
@@ -17,12 +29,12 @@ Sometimes a radio button group looks more elegant.
   v-model="disabled2"
   style="margin-right: 12px;"
 >
-  Disable Shakemaker
+  禁用 Shakemaker
 </n-checkbox>
 <n-checkbox
   v-model="disabled1"
 >
-  Disable Live Forever
+  禁用 Live Forever
 </n-checkbox>
 ```
 ```js

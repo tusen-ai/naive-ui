@@ -1,5 +1,5 @@
 # 尺寸
-Date Picker 有 `small`、`medium` 和 `large` 尺寸。
+有 `small`、`medium` 和 `large` 尺寸。
 ```html
 <n-date-picker
   v-model="timestamp"

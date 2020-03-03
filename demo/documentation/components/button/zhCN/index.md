@@ -18,7 +18,7 @@ debug
 ### Button Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
+|size|`'tiny' \| 'small' \| 'medium' \| 'large'`|`'medium'`||
 |type|`'default' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'`|`'default'`||
 |text|`boolean`|`false`||
 |block|`boolean`|`false`||

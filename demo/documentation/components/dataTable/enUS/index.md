@@ -45,6 +45,7 @@ ajaxUsage
 |row-key|`(rowData: object) => number \| string`|`null`|Generate the key of the row by row data (if you don't want to set the key)|
 |bordered|`boolean`|`true`||
 |single-line|`boolean`|`true`||
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 
 ## Methods
 These methods can help you control table in an uncontrolled manner. However, it's not recommended to use them to implement some async operations. If async operations is needed, use table in a **controlled** manner.

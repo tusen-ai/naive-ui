@@ -5,6 +5,7 @@
 ```demo
 basic
 large-data
+size
 filterable
 ```
 ## V-model
@@ -25,6 +26,8 @@ filterable
 |source-filter-placeholder|`string`|`null`||
 |target-filter-placeholder|`string`|`null`||
 |filter|`(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean`|一个简单的标签字符串匹配函数||
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
+
 
 ### TransferOption Type
 |属性|类型|说明|
