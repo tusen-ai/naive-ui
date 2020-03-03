@@ -24,7 +24,7 @@
     "test:cov": "cross-env NODE_ENV=development BABEL_ENV=test karma start test/unit/karma.conf.js && http-server test/unit/coverage"
   },
   "author": "lecong.zhang",
-  "license": "ISC",
+  "license": "MIT",
   "publishConfig": {
     "registry": "***REMOVED***"
   },

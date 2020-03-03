@@ -1,5 +1,5 @@
 # 尺寸
-Time Picker 可以是 `small`、`medium` 或 `large` 尺寸。
+可以是 `small`、`medium` 或 `large` 尺寸。
 ```html
 <n-time-picker
   v-model="timestamp"

@@ -3,6 +3,7 @@
     class="n-transfer"
     :class="{
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-transfer--filterable`]: filterable,
       [`n-transfer--${syntheticSize}-size`]: true
     }"
   >
@@ -419,7 +420,7 @@ export default {
     }
   },
   watch: {
-    options (newOptions) {
+    options () {
       this.initialized = false
       const valueSet = this.valueSet
       this.memorizedSourceOptions = this.options.filter(option => !valueSet.has(option.value))
@@ -622,7 +623,7 @@ export default {
       const sourceLightBar = this.$refs.sourceLightBar
       if (!sourceLightBar) return
       if (this.virtualScroll) {
-        sourceLightBar.updateLightBarTop(true, () => index * itemSize)
+        sourceLightBar.updateLightBarTop(true, () => index * this.itemSize)
       } else {
         sourceLightBar.updateLightBarTop(e.target)
       }
@@ -630,7 +631,7 @@ export default {
     handleTargetOptionMouseEnter: debounce(function (e, index) {
       const targetLightBar = this.$refs.targetLightBar
       if (this.virtualScroll) {
-        targetLightBar.updateLightBarTop(true, () => index * itemSize)
+        targetLightBar.updateLightBarTop(true, () => index * this.itemSize)
       } else {
         targetLightBar.updateLightBarTop(e.target)
       }

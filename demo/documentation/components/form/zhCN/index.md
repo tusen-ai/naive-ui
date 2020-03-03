@@ -22,6 +22,7 @@ validator-debug
 |model|`object`|`{}`|获取表项中收集到的值的对象|
 |rules|`type FormRules = { [itemValidatePath: string]: FormItemRule \| Array<FormItemRule> \| FormRules }`|`{}`|验证表项的规则|
 |show-require-mark|`boolean`|`true`|在表项是必填的时候是不是展示星号|
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 
 #### FormItemRule Type
 |属性|类型|说明|
@@ -46,6 +47,7 @@ validator-debug
 |show-require-mark|`boolean`|`true`|在表项是必填的时候是不是展示星号。如果没有被设定，使用外层表单的 show-require-mark|
 |rule|`FormItemRule \| Array<FormItemRule>`|`null`|验证表项的规则，它会被通过 `rule-path` 从外层表单获取的规则合并来作为表项的验证规则。推荐还是在外层表单设置所有规则。|
 |first|`boolean`|`false`|是否只展示首个出错信息。|
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 
 ### Form Item Row Props
 接受 Form Item & [Row](n-row#Row-Props) 所有的 Props。

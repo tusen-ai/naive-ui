@@ -28,7 +28,7 @@ format
 |clearable|`boolean`|`false`||
 |disabled|`boolean`|`false`||
 |type|`'date' \| 'datetime' \| 'daterange' \|'datetimerange'`|`'date`||
-
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 
 ### Date Type Props
 |Name|Type|Default|Description|

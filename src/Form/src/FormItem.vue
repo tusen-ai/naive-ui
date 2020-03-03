@@ -2,12 +2,13 @@
   <div
     class="n-form-item"
     :class="{
+      [`n-form-item--${syntheticSize}-size`]: true,
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
       [`n-form-item--${syntheticLabelPlacement}-labelled`]: syntheticLabelPlacement,
       [`n-form-item--${syntheticLabelAlign}-label-aligned`]: syntheticLabelAlign,
       [`n-form-item--required`]: syntheticRequired && syntheticShowRequireMark,
       [`n-form-item--no-label`]: !(label || $slots.label),
-      [`n-form-item--has-feedback`]: hasFeedback,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-form-item--has-feedback`]: hasFeedback
     }"
   >
     <label

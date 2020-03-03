@@ -29,9 +29,9 @@
       'n-text--underline': underline,
       [`n-text--${depth}-depth`]: depth
     }"
-    v-on="$listeners"
   ><slot /></del>
-  <span
+  <component
+    :is="as || 'span'"
     v-else
     class="n-text"
     :class="{
@@ -45,7 +45,9 @@
       'n-text--underline': underline,
       [`n-text--${depth}-depth`]: depth
     }"
-  ><slot /></span>
+  >
+    <slot />
+  </component>
 </template>
 
 <script>
@@ -88,6 +90,10 @@ export default {
       validator (value) {
         return ['primary', 'secondary', 'tertiary'].includes(value)
       },
+      default: null
+    },
+    as: {
+      type: String,
       default: null
     }
   }

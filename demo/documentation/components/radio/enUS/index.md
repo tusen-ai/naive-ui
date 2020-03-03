@@ -6,6 +6,7 @@ When I was young, I was fond of listening to the radio, such as FM 106.8 or FM 9
 basic
 group
 button-group
+size
 ```
 ## V-model
 ### Radio V-model
@@ -42,6 +43,7 @@ button-group
 |size|`'small' \| 'medium' \| 'large'`|`small`||
 |value|`string \| number \| boolean`|`null`||
 |disabled|`boolean`|`false`||
+|size|`'small' \| 'medium' \| 'large'`|`'small'`||
 
 ## Events
 ### Radio, Radio Button Events

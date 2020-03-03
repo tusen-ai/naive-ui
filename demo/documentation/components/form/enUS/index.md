@@ -20,6 +20,7 @@ async
 |model|`object`|`{}`|The object to get collected value from form items.|
 |rules|`type FormRules = { [itemValidatePath: string]: FormItemRule \| Array<FormItemRule> \| FormRules }`|`{}`|The rules to validate form items.|
 |show-require-mark|`boolean`|`true`|Whether to show require mark when form item is required.|
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 
 #### FormItemRule Type
 |Property|Type|Description|
@@ -45,6 +46,8 @@ async
 |show-require-mark|`boolean`|`true`|Whether to show require mark when form item is required. If not set, use show-require-mark from wrapper form.|
 |rule|`FormItemRule \| Array<FormItemRule>`|`null`|The rule to validate the form item. It will be merged with the rules acquired by rule-path from wrapper form's rules. It's recommend to set all rules on wrapper form.|
 |first|`boolean`|`false`|Whether only to show the first validation error message.|
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
+
 
 ### Form Item Row Props
 Accept all props from form-item & [Row](n-row#Row-Props)
