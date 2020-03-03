@@ -1,10 +1,16 @@
 # 标签上置
 ```html
+<n-radio-group v-model="size" name="top-size" style="margin-bottom: 12px;">
+  <n-radio-button value="small">小</n-radio-button>
+  <n-radio-button value="medium" >中</n-radio-button>
+  <n-radio-button value="large">大</n-radio-button>
+</n-radio-group>
 <n-form
   :model="model"
   :rules="rules"
   ref="form"
   label-placement="top"
+  :size="size"
 >
   <n-row :gutter="24">
     <n-form-item-col :span="12" label="Input" path="inputValue">
@@ -103,6 +109,7 @@
 export default {
   data () {
     return {
+      size: 'medium',
       model: {
         inputValue: null,
         textareaValue: null,

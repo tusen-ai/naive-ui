@@ -43,7 +43,7 @@
           transform: rotate(45deg);
         }
       }
-      @include m(without-arrow) {
+      @include m(no-arrow) {
         &[n-placement$="top-start"] {
           margin-bottom: 6px;
         }
@@ -248,7 +248,7 @@
         background-color: $--popover-background-color;
       }
     }
-    @include not-m(without-shadow) {
+    @include not-m(no-shadow) {
       box-shadow: $--popover-box-shadow;
     }
     @include m(fix-width) {

@@ -130,6 +130,9 @@
       @include radio-group-size-mixin('medium');
       @include radio-group-size-mixin('large');
       display: inline-block;
+      @include b(radio) {
+        margin-right: 18px;
+      }
       @include m(button-group) {
         white-space: nowrap;
         height: 28px;

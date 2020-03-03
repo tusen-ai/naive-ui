@@ -289,6 +289,11 @@ export default {
       if (this.isTextarea && this.autosize) {
         this.$nextTick().then(this.updateTextAreaStyle)
       }
+    },
+    syntheticSize () {
+      if (this.isTextarea && this.autosize) {
+        this.$nextTick().then(this.updateTextAreaStyle)
+      }
     }
   },
   mounted () {

@@ -1,11 +1,17 @@
 # 行内表单
 一个行内表单的例子。
 ```html
+<n-radio-group v-model="size" name="left-size" style="margin-bottom: 12px;">
+  <n-radio-button value="small">小</n-radio-button>
+  <n-radio-button value="medium" >中</n-radio-button>
+  <n-radio-button value="large">大</n-radio-button>
+</n-radio-group>
 <n-form
   inline
   :label-width="80"
   :model="formValue"
   :rules="rules"
+  :size="size"
   ref="form"
 >
   <n-form-item label="姓名" path="user.name">
@@ -30,6 +36,7 @@
 export default {
   data () {
     return {
+      size: 'medium',
       formValue: {
         user: {
           name: '',

@@ -128,6 +128,9 @@ export default {
   inject: {
     NButtonGroup: {
       default: null
+    },
+    NFormItem: {
+      default: null
     }
   },
   mixins: [withapp, themeable, hollowoutable],
@@ -204,8 +207,13 @@ export default {
   },
   computed: {
     syntheticSize () {
-      if (this.NButtonGroup && this.NButtonGroup.size) {
-        return this.NButtonGroup.size
+      const NButtonGroup = this.NButtonGroup
+      if (NButtonGroup && NButtonGroup.size) {
+        return NButtonGroup.size
+      }
+      const NFormItem = this.NFormItem
+      if (NFormItem && NFormItem.syntheticSize) {
+        return NFormItem.syntheticSize
       }
       return this.size
     },
