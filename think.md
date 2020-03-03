@@ -179,9 +179,9 @@ const devtoolIsOpened = e.target === document.activeElement
 56. <del>Input number 按钮样式调整</del>
 57. 一部分组件在 Modal 内部的样式
 58. 更新 Progress 文档
-59. 为所有的数据录入组件的尺寸
+59. <del>为所有的数据录入组件的尺寸</del>
 60. 审核文档
-61. 调整 transfer 的样式
+61. <del>调整 transfer 的样式</del>
 62. <del>Table cascader 差一点国际化</del>
 63. Anchor 初次滚动的逻辑是不是要手动调整一下，现在位置实际上不一致
 64. <del>将所有的 Typography 组件改为非 Functional 的，因为获取不到 context 本身的主题</del>
