@@ -61,7 +61,7 @@ export default {
   methods: {
     handleStartClick () {
       this.$router.push(
-        /^(\/[^/]+){2}/.exec(this.$route.path)[0] + '/doc/start'
+        /^(\/[^/]+){3}/.exec(this.$route.path)[0] + '/doc/start'
       )
     }
   }

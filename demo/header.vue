@@ -5,14 +5,18 @@
     "light": "浅色",
     "searchPlaceholder": "搜索组件",
     "home": "首页",
-    "doc": "文档"
+    "doc": "文档",
+    "common": "常规",
+    "debug": "调试"
   },
   "en-US": {
     "dark": "Dark",
     "light": "Light",
     "searchPlaceholder": "Search Components",
     "home": "Home",
-    "doc": "Documentation"
+    "doc": "Documentation",
+    "common": "Common",
+    "debug": "Debug"
   }
 }
 </i18n>
@@ -58,6 +62,15 @@
         @change="handleLanguageChange"
       />
     </div>
+    <div v-if="env==='development'" class="mode-picker">
+      <n-select
+        :z-index="3001"
+        :value="mode"
+        size="small"
+        :options="modeOptions"
+        @change="handleModeChange"
+      />
+    </div>
   </div>
 </template>
 
@@ -82,6 +95,10 @@ export default {
     items: {
       type: Array,
       default: () => []
+    },
+    env: {
+      type: String,
+      default: null
     }
   },
   data () {
@@ -89,6 +106,7 @@ export default {
       searchInputValue: '',
       version,
       theme: 'dark',
+      mode: 'debug',
       langOptions: [
         {
           label: '中文',
@@ -102,6 +120,9 @@ export default {
     }
   },
   computed: {
+    showDebug () {
+      return this.mode === 'development'
+    },
     menuValue () {
       if (/^(\/[^/]+){2}\/doc/.test(this.$route.path)) return 'doc'
       else if (this.$route.name === 'home') return 'home'
@@ -134,12 +155,24 @@ export default {
           value: 'light'
         }
       ]
+    },
+    modeOptions: function () {
+      return [
+        {
+          label: this.$t('common'),
+          value: 'common'
+        },
+        {
+          label: this.$t('debug'),
+          value: 'debug'
+        }
+      ]
     }
   },
   methods: {
     handleLogoClick () {
       this.$router.push(
-        /^(\/[^/]+){2}/.exec(this.$route.path)[0]
+        /^(\/[^/]+){3}/.exec(this.$route.path)[0]
       )
     },
     handleSelect (value) {
@@ -148,14 +181,14 @@ export default {
     handleMenuSelect (value) {
       if (value === 'home') {
         this.$router.push(
-          /^(\/[^/]+){2}/.exec(this.$route.path)[0]
+          /^(\/[^/]+){3}/.exec(this.$route.path)[0]
         )
       } if (value === 'doc') {
-        if (/^(\/[^/]+){2}\/doc/.test(this.$route.path)) {
+        if (/^(\/[^/]+){3}\/doc/.test(this.$route.path)) {
 
         } else {
           this.$router.push(
-            /^(\/[^/]+){2}/.exec(this.$route.path)[0] + '/doc/start'
+            /^(\/[^/]+){3}/.exec(this.$route.path)[0] + '/doc/start'
           )
         }
       }
@@ -165,6 +198,10 @@ export default {
     },
     handleLanguageChange (lang) {
       this.$emit('lang-change', lang)
+    },
+    handleModeChange (mode) {
+      this.mode = mode
+      this.$emit('mode-change', mode)
     }
   }
 }
@@ -173,7 +210,7 @@ export default {
 <style lang="scss" scoped>
 .nav {
   display: grid;
-  grid-template-columns: 288px 1fr auto 140px;
+  grid-template-columns: 288px 1fr auto 140px 200px;
   grid-template-rows: 63px;
   align-items: center;
 }
@@ -199,6 +236,9 @@ export default {
   padding-right: 16px;
 }
 .lang-picker {
+  padding-right: 16px;
+}
+.mode-picker {
   padding-right: 48px;
 }
 </style>

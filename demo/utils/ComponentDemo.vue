@@ -13,6 +13,7 @@
 
 <template>
   <n-card
+    v-if="isShow"
     class="demo-card"
     :segmented="{
       footer: true
@@ -70,7 +71,15 @@ export default {
     return {
       showCode: false,
       contentStyle: null,
-      controller: {}
+      controller: {},
+      isShow: true,
+      name: '',
+      isDebug: false
+    }
+  },
+  computed: {
+    mode () {
+      return this.$route.params.mode
     }
   },
   watch: {
@@ -82,16 +91,35 @@ export default {
         this.controller.updatePosition()
         this.contentStyle = null
       })
+    },
+    mode () {
+      this.init()
     }
   },
   mounted () {
-    const map = this.NDocumentation.anchorLinkMap
-    map.set(this.$el.id, String(this.$scopedSlots.title()[0].text).trim())
-    this.NDocumentation.anchorLinkMap = new Map(map, this.$scopedSlots.title()[0].text.trim())
+    this.name = this.$el.id
+    this.init()
   },
   methods: {
     toggleCodeDisplay () {
       this.showCode = !this.showCode
+    },
+    init () {
+      const map = this.NDocumentation.anchorLinkMap
+      this.isDebug = this.name && (this.name.indexOf('debug') > -1 || this.name.indexOf('Debug') > -1)
+      if (this.isDebug) {
+        if (this.mode === 'debug') {
+          this.isShow = true
+          map.set(this.name, String(this.$scopedSlots.title()[0].text).trim())
+        } else {
+          this.isShow = false
+          map.delete(this.name)
+        }
+      } else {
+        map.set(this.name, String(this.$scopedSlots.title()[0].text).trim())
+      }
+
+      this.NDocumentation.anchorLinkMap = new Map(map, this.$scopedSlots.title()[0].text.trim())
     }
   }
 }

@@ -146,127 +146,166 @@ const withPrefix = (prefix, routes) =>
     return route
   })
 
-const routes = [
+const children = [
+  { path: '/intro', component: intro },
+  { path: '/start', component: start },
+  { path: '/dev-guildlines', component: devGuildlines },
+  { path: '/n-nimbus-service-layout', component: nimbusServiceLayoutDemo },
+  { path: '/n-layout', component: layout },
+  { path: '/n-gradient-text', component: gradientText },
   {
-    path: '/:lang/:theme/n-popover-debug',
-    component: popoverDebug
+    path: '/n-icon',
+    component: () => import('./documentation/components/icon')
   },
+  { path: '/n-checkbox', component: checkbox },
+  { path: '/n-button', component: button },
+  { path: '/n-switch', component: nswitch },
+  // { path: '/n-table', component: tableDemo },
+  { path: '/n-data-table', component: dataTable },
+  { path: '/n-input', component: input },
+  { path: '/n-select', component: select },
+  { path: '/n-cascader', component: cascader },
+  { path: '/n-custom-input', component: customInput },
+  { path: '/n-modal', component: modal },
+  { path: '/n-message', component: message },
+  { path: '/n-tooltip', component: tooltip },
+  { path: '/n-popover', component: popover },
+  { path: '/n-notification', component: notification },
+  { path: '/n-pagination', component: pagination },
+  { path: '/n-alert', component: alert },
+  { path: '/n-date-picker', component: datePicker },
+  { path: '/n-input-number', component: inputNumber },
+  { path: '/n-radio', component: radio },
+  { path: '/n-form', component: form },
+  { path: '/n-tabs', component: tabs },
+  { path: '/n-time-picker', component: timePicker },
+  { path: '/n-confirm', component: confirm },
+  { path: '/n-router-debug', component: routerDebug },
+  { path: '/n-modal-debug', component: modalDebug },
+  { path: '/n-scrollbar-debug', component: scrollbarDebug },
+  { path: '/n-badge', component: badge },
+  { path: '/n-steps', component: steps },
+  { path: '/n-collapse', component: collapse },
+  { path: '/n-progress', component: progress },
+  { path: '/n-tag', component: tag },
+  { path: '/n-menu', component: menu },
+  { path: '/n-timeline', component: timeline },
+  { path: '/n-scrollbar-debug2', component: scrollbarDebug2 },
+  { path: '/n-back-top', component: backTop },
+  { path: '/n-date-picker-debug', component: datePickerDebug },
+  { path: '/n-divider', component: divider },
+  { path: '/n-popconfirm', component: popconfirm },
+  { path: '/n-anchor', component: anchor },
+  { path: '/n-dropdown', component: dropdown },
+  { path: '/n-popselect', component: popselect },
+  { path: '/n-config-provider', component: configProvider },
+  { path: '/n--debug', component: suffixDebug },
+  { path: '/n-transfer', component: transfer },
+  { path: '/n-spin', component: spin },
+  { path: '/n-drawer', component: drawer },
+  { path: '/n-loading-bar', component: loadingBar },
+  { path: '/n-time', component: time },
+  { path: '/n-slider', component: slider },
+  { path: '/n-tree', component: tree },
+  { path: '/n-vertical-align-debug', component: verticalAlignDebug },
+  { path: '/n-affix', component: affix },
+  { path: '/n-statistic', component: statistic },
+  { path: '/n-grid', component: grid },
+  { path: '/n-breadcrumb', component: breadcrumb },
+  { path: '/n-config-consumer', component: configConsumer },
+  { path: '/n-descriptions', component: descriptions },
+  { path: '/n-list', component: list },
+  { path: '/n-card', component: card },
+  { path: '/n-avatar', component: avatar },
+  { path: '/n-result', component: result },
+  { path: '/n-thing', component: thing },
+  { path: '/n-auto-complete', component: autoComplete },
+  { path: '/n-empty', component: empty },
+  { path: '/n-theme', component: theme },
+  { path: '/n-element', component: element },
+  { path: '/n-log', component: log },
+  { path: '/n-code', component: code },
+  { path: '/n-typography', component: typography },
+  { path: '/n-upload', component: upload },
+  { path: '/n-table', component: table },
   {
-    path: '/n-back-top-debug',
-    component: backTopDebug
+    path: '/n-icon-transition-debug',
+    component: iconTransitionDebug
   },
-  {
-    path: '/n-cascader-debug',
-    component: cascaderDebug
-  },
-  {
-    path: '/:lang/:theme',
-    component: Entry,
-    children: [
-      {
-        path: '/:lang/:theme',
-        component: LandingPage,
-        name: 'home'
-      },
-      {
-        path: '/:lang/:theme/doc',
-        component: DocEntry,
-        children: withPrefix('/:lang/:theme/doc', [
-          { path: '/intro', component: intro },
-          { path: '/start', component: start },
-          { path: '/dev-guildlines', component: devGuildlines },
-          { path: '/n-nimbus-service-layout', component: nimbusServiceLayoutDemo },
-          { path: '/n-layout', component: layout },
-          { path: '/n-gradient-text', component: gradientText },
-          {
-            path: '/n-icon',
-            component: () => import('./documentation/components/icon')
-          },
-          { path: '/n-checkbox', component: checkbox },
-          { path: '/n-button', component: button },
-          { path: '/n-switch', component: nswitch },
-          // { path: '/n-table', component: tableDemo },
-          { path: '/n-data-table', component: dataTable },
-          { path: '/n-input', component: input },
-          { path: '/n-select', component: select },
-          { path: '/n-cascader', component: cascader },
-          { path: '/n-custom-input', component: customInput },
-          { path: '/n-modal', component: modal },
-          { path: '/n-message', component: message },
-          { path: '/n-tooltip', component: tooltip },
-          { path: '/n-popover', component: popover },
-          { path: '/n-notification', component: notification },
-          { path: '/n-pagination', component: pagination },
-          { path: '/n-alert', component: alert },
-          { path: '/n-date-picker', component: datePicker },
-          { path: '/n-input-number', component: inputNumber },
-          { path: '/n-radio', component: radio },
-          { path: '/n-form', component: form },
-          { path: '/n-tabs', component: tabs },
-          { path: '/n-time-picker', component: timePicker },
-          { path: '/n-confirm', component: confirm },
-          { path: '/n-router-debug', component: routerDebug },
-          { path: '/n-modal-debug', component: modalDebug },
-          { path: '/n-scrollbar-debug', component: scrollbarDebug },
-          { path: '/n-badge', component: badge },
-          { path: '/n-steps', component: steps },
-          { path: '/n-collapse', component: collapse },
-          { path: '/n-progress', component: progress },
-          { path: '/n-tag', component: tag },
-          { path: '/n-menu', component: menu },
-          { path: '/n-timeline', component: timeline },
-          { path: '/n-scrollbar-debug2', component: scrollbarDebug2 },
-          { path: '/n-back-top', component: backTop },
-          { path: '/n-date-picker-debug', component: datePickerDebug },
-          { path: '/n-divider', component: divider },
-          { path: '/n-popconfirm', component: popconfirm },
-          { path: '/n-anchor', component: anchor },
-          { path: '/n-dropdown', component: dropdown },
-          { path: '/n-popselect', component: popselect },
-          { path: '/n-config-provider', component: configProvider },
-          { path: '/n--debug', component: suffixDebug },
-          { path: '/n-transfer', component: transfer },
-          { path: '/n-spin', component: spin },
-          { path: '/n-drawer', component: drawer },
-          { path: '/n-loading-bar', component: loadingBar },
-          { path: '/n-time', component: time },
-          { path: '/n-slider', component: slider },
-          { path: '/n-tree', component: tree },
-          { path: '/n-vertical-align-debug', component: verticalAlignDebug },
-          { path: '/n-affix', component: affix },
-          { path: '/n-statistic', component: statistic },
-          { path: '/n-grid', component: grid },
-          { path: '/n-breadcrumb', component: breadcrumb },
-          { path: '/n-config-consumer', component: configConsumer },
-          { path: '/n-descriptions', component: descriptions },
-          { path: '/n-list', component: list },
-          { path: '/n-card', component: card },
-          { path: '/n-avatar', component: avatar },
-          { path: '/n-result', component: result },
-          { path: '/n-thing', component: thing },
-          { path: '/n-auto-complete', component: autoComplete },
-          { path: '/n-empty', component: empty },
-          { path: '/n-theme', component: theme },
-          { path: '/n-element', component: element },
-          { path: '/n-log', component: log },
-          { path: '/n-code', component: code },
-          { path: '/n-typography', component: typography },
-          { path: '/n-upload', component: upload },
-          { path: '/n-table', component: table },
-          {
-            path: '/n-icon-transition-debug',
-            component: iconTransitionDebug
-          },
-          { path: '/n-select-debug', component: selectDebug }
-        ])
-      }
-    ]
-  },
-  {
-    path: '/*',
-    redirect: '/zh-CN/light'
-  }
+  { path: '/n-select-debug', component: selectDebug }
 ]
+let routes = []
+if (env === 'development') {
+  routes = [
+    {
+      path: '/:lang/:theme/:mode/n-popover-debug',
+      component: popoverDebug
+    },
+    {
+      path: '/:lang/:theme/:mode/n-back-top-debug',
+      component: backTopDebug
+    },
+    {
+      path: '/:lang/:theme/:mode/n-cascader-debug',
+      component: cascaderDebug
+    },
+    {
+      path: '/:lang/:theme/:mode',
+      component: Entry,
+      children: [
+        {
+          path: '/:lang/:theme/:mode',
+          component: LandingPage,
+          name: 'home'
+        },
+        {
+          path: '/:lang/:theme/:mode/doc',
+          component: DocEntry,
+          children: withPrefix('/:lang/:theme/:mode/doc', children)
+        }
+      ]
+    },
+    {
+      path: '/*',
+      redirect: '/zh-CN/light/debug'
+    }
+  ]
+} else {
+  routes = [
+    {
+      path: '/:lang/:theme/n-popover-debug',
+      component: popoverDebug
+    },
+    {
+      path: '/n-back-top-debug',
+      component: backTopDebug
+    },
+    {
+      path: '/n-cascader-debug',
+      component: cascaderDebug
+    },
+    {
+      path: '/:lang/:theme',
+      component: Entry,
+      children: [
+        {
+          path: '/:lang/:theme',
+          component: LandingPage,
+          name: 'home'
+        },
+        {
+          path: '/:lang/:theme/doc',
+          component: DocEntry,
+          children: withPrefix('/:lang/:theme/doc', children)
+        }
+      ]
+    },
+    {
+      path: '/*',
+      redirect: '/zh-CN/light'
+    }
+  ]
+}
 
 const router = new VueRouter({
   mode: 'history',

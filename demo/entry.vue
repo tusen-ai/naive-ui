@@ -5,7 +5,9 @@
         <doc-header
           :lang="lang"
           :items="flattenedItems"
+          :env="env"
           @lang-change="handleLangChange"
+          @mode-change="handleModeChange"
         />
       </n-layout-header>
       <n-layout class="home-layout" style="top: 64px; overflow: hidden;" mode="absolute">
@@ -38,8 +40,11 @@ export default {
     next()
   },
   computed: {
+    env () {
+      return process.env.NODE_ENV
+    },
     items () {
-      return menuOptions(this.lang, this)
+      return menuOptions(this.lang, this, this.mode)
     },
     flattenedItems () {
       const flattenedItems = []
@@ -69,11 +74,22 @@ export default {
       set (theme) {
         this.$router.push(changeThemeInPath(this.$route.fullPath, theme))
       }
+    },
+    mode: {
+      get () {
+        return this.$route.params.mode === 'debug' ? 'debug' : 'common'
+      },
+      set (mode) {
+        this.$router.push(changeModeInPath(this.$route.fullPath, mode))
+      }
     }
   },
   methods: {
     handleLangChange (lang) {
       this.lang = lang
+    },
+    handleModeChange (mode) {
+      this.mode = mode
     }
   }
 }
@@ -86,6 +102,11 @@ function changeLangInPath (path, lang) {
 function changeThemeInPath (path, theme) {
   const themeReg = /(^\/[^/]+\/)([^/]+)/
   return path.replace(themeReg, '$1' + theme)
+}
+
+function changeModeInPath (path, mode) {
+  const modeReg = /(^\/[^/]+\/[^/]+\/)([^/]+)/
+  return path.replace(modeReg, '$1' + mode)
 }
 </script>
 
