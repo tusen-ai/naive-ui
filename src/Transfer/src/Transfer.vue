@@ -3,6 +3,7 @@
     class="n-transfer"
     :class="{
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-transfer--filterable`]: filterable,
       [`n-transfer--${syntheticSize}-size`]: true
     }"
   >

@@ -58,6 +58,13 @@
 
 @mixin transfer-size-mixin($size) {
   @include m($size + '-size') {
+    @include m(filterable) {
+      @include b(transfer-list) {
+        @include b(transfer-list-body) {
+          height: map-get($--n-height, $size) * 5.6 + 45px;
+        }
+      }
+    }
     @include b(transfer-list) {
       @include b(transfer-list-header) {
         font-size: map-get($--n-font-size, $size);

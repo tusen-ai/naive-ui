@@ -8,9 +8,9 @@
 <n-form
   :model="model"
   :rules="rules"
+  :size="size"
   ref="form"
   label-placement="top"
-  :size="size"
 >
   <n-row :gutter="24">
     <n-form-item-col :span="12" label="Input" path="inputValue">

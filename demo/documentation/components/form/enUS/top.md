@@ -8,6 +8,7 @@
 <n-form
   :model="model"
   :rules="rules"
+  :size="size"
   ref="form"
   label-placement="top"
 >
