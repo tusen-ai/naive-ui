@@ -1,23 +1,18 @@
 # 文本
 用不同类型的文本展示各种信息。
 ```html
-<n-text type="info">Info</n-text>
-<n-text type="success">Success</n-text>
-<n-text type="warning">Warning</n-text>
-<n-text type="error">Error</n-text>
-<n-text strong>Strong</n-text>
-<n-text italic>Italic</n-text>
-<n-text underline>Underline</n-text>
-<n-text delete>Delete</n-text>
-<n-text code>Code</n-text>
-<n-text code delete>Code</n-text>
-<n-text depth="primary">Primary Depth</n-text>
-<n-text depth="secondary">Secondary Depth</n-text>
-<n-text depth="tertiary">Tertiary Depth</n-text>
-```
-```css
-.n-text {
-  display: inline-block;
-  margin: 0 8px 12px 0;
-}
+<n-text type="info">Info</n-text>&nbsp;
+<n-text type="success">Success</n-text>&nbsp;
+<n-text type="warning">Warning</n-text>&nbsp;
+<n-text type="error">Error</n-text>&nbsp;
+<n-text strong>Strong</n-text>&nbsp;
+<n-text italic>Italic</n-text>&nbsp;
+<n-text underline>Underline</n-text>&nbsp;
+<n-text delete>Delete</n-text>&nbsp;
+<n-text code>Code</n-text>&nbsp;
+<n-text code delete>Code</n-text>&nbsp;
+<n-text depth="primary">Primary Depth</n-text>&nbsp;
+<n-text depth="secondary">Secondary Depth</n-text>&nbsp;
+<n-text depth="tertiary">Tertiary Depth</n-text>&nbsp;
+<n-text as="div">作为 Div</n-text> 
 ```

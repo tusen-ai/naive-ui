@@ -146,7 +146,6 @@
   }
   @include b(text) {
     @include once {
-      display: inline-block;
       transition: color .3s $--n-ease-in-out-cubic-bezier;
       @include m(strong) {
         font-weight: $--n-strong-weight;
