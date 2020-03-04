@@ -16,6 +16,7 @@
       >
         <n-input
           v-model="displayDateString"
+          size="small"
           class="n-date-panel-date-input"
           :class="{
             'n-date-panel-date-input--invalid': isDateInvalid
@@ -26,6 +27,7 @@
         />
         <n-time-picker
           :format="timeFormat"
+          size="small"
           position-mode="absolute"
           :detached="false"
           :value="value"

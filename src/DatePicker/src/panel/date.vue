@@ -12,7 +12,7 @@
       @focus="handlePanelFocus"
       @keydown="handlePanelKeyDown"
     >
-      <div style="width: 100%; height: 12px" />
+      <div style="width: 100%; height: 3px" />
       <div class="n-date-panel-month">
         <div
           class="n-date-panel-month__fast-prev"

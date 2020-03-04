@@ -33,7 +33,7 @@
       @input="handleRangeInput"
     >
       <template v-slot:suffix>
-        <n-icon><ios-calendar /></n-icon>
+        <n-icon><time-outline /></n-icon>
       </template>
     </n-input>
     <n-input
@@ -56,7 +56,7 @@
       @clear="handleClear"
     >
       <template v-slot:suffix>
-        <n-icon><ios-calendar /></n-icon>
+        <n-icon><time-outline /></n-icon>
       </template>
     </n-input>
     <div
@@ -150,7 +150,7 @@ import DaterangePanel from './panel/daterange'
 
 import NInput from '../../Input'
 import NIcon from '../../Icon'
-import iosCalendar from '../../_icons/ios-calendar'
+import timeOutline from '../../_icons/time-outline'
 
 import format from 'date-fns/format'
 import getTime from 'date-fns/getTime'
@@ -177,7 +177,7 @@ export default {
     DatePanel,
     DatetimerangePanel,
     DaterangePanel,
-    iosCalendar
+    timeOutline
   },
   mixins: [
     withapp,

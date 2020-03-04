@@ -17,6 +17,7 @@
       >
         <n-input
           v-model="startDateDisplayString"
+          size="small"
           class="n-date-panel-date-input"
           :class="{
             'n-date-panel-date-input--invalid': isStartValueInvalid
@@ -26,6 +27,7 @@
           @input="handleStartDateInput"
         />
         <n-time-picker
+          size="small"
           :detached="false"
           :placeholder="localeNamespace.selectTime"
           position-mode="absolute"
@@ -44,6 +46,7 @@
         </div>
         <n-input
           v-model="endDateDisplayString"
+          size="small"
           class="n-date-panel-date-input"
           :class="{
             'n-date-panel-date-input--invalid': isEndValueInvalid
@@ -53,6 +56,7 @@
           @input="handleEndDateInput"
         />
         <n-time-picker
+          size="small"
           :detached="false"
           :format="timeFormat"
           :placeholder="localeNamespace.selectTime"
