@@ -1,92 +1,130 @@
 # Button Group
 Button can be grouped.
 ```html
+<n-button-group vertical>
+  <n-button
+    type="primary"
+    round
+  >
+    <template v-slot:icon>
+      <log-in-outline />
+    </template>
+    Live a
+  </n-button>
+  <n-button
+    type="warning"
+    ghost
+  >
+    <template v-slot:icon>
+      <log-in-outline />
+    </template>
+    Sufficient
+  </n-button>
+  <n-button
+    type="error"
+  >
+    <template v-slot:icon>
+      <log-in-outline />
+    </template>
+    Life
+  </n-button>
+</n-button-group>
+<n-button-group vertical size="large">
+  <n-button
+    type="success"
+  >
+    <template v-slot:icon>
+      <log-in-outline />
+    </template>
+    With
+  </n-button>
+  <n-button
+    type="info"
+  >
+    <template v-slot:icon>
+      <log-in-outline />
+    </template>
+    Enough
+  </n-button>
+  <n-button
+    type="error"
+    ghost
+    round
+  >
+    <template v-slot:icon>
+      <log-in-outline />
+    </template>
+    Happiness
+  </n-button>
+</n-button-group>
 <n-button-group size="small">
   <n-button
     type="default"
     round
   >
     <template v-slot:icon>
-      <md-save />
+      <log-in-outline />
     </template>
-    Default
+    Life
   </n-button>
   <n-button
-    type="primary"
-    disabled
+    type="default"
   >
     <template v-slot:icon>
-      <md-save />
+      <log-in-outline />
     </template>
-    Primary
+    Is
+  </n-button>
+  <n-button
+    type="default"
+  >
+    <template v-slot:icon>
+      <log-in-outline />
+    </template>
+    Good
+  </n-button>
+</n-button-group>
+<n-button-group>
+  <n-button
+    type="primary"
+    ghost
+  >
+    <template v-slot:icon>
+      <log-in-outline />
+    </template>
+    Eat
+  </n-button>
+  <n-button
+    ghost
+    type="primary"
+  >
+    <template v-slot:icon>
+      <log-in-outline />
+    </template>
+    One More
   </n-button>
   <n-button
     type="info"
-    icon-placement="right"
-  >
-    <template v-slot:icon>
-      <md-save />
-    </template>
-    Info
-  </n-button>
-  <n-button
-    type="warning"
-  >
-    <template v-slot:icon>
-      <md-save />
-    </template>
-    Warning
-  </n-button>
-</n-button-group>
-<n-button-group vertical>
-  <n-button
-    type="default"
     round
   >
     <template v-slot:icon>
-      <md-save />
+      <log-in-outline />
     </template>
-    Default
-  </n-button>
-  <n-button
-    type="primary"
-    disabled
-  >
-    <template v-slot:icon>
-      <md-save />
-    </template>
-    Primary
-  </n-button>
-  <n-button
-    type="info"
-    icon-placement="right"
-  >
-    <template v-slot:icon>
-      <md-save />
-    </template>
-    Info
-  </n-button>
-  <n-button
-    type="warning"
-  >
-    <template v-slot:icon>
-      <md-save />
-    </template>
-    Warning
+    Apple
   </n-button>
 </n-button-group>
 ```
 ```js
-import mdSave from 'naive-ui/lib/icons/md-save'
+import logInOutline from 'naive-ui/lib/icons/log-in-outline'
 
 export default {
   components: {
-    mdSave
+    logInOutline
   }
 }
 ```
 ```css
-.n-button {
-  margin: 0 8px 8px 0;
+.n-button-group {
+  margin: 0 12px 12px 0;
 }
 ```

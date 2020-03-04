@@ -14,54 +14,58 @@
     'error-start': (0 0 0 0 $--n-error-color),  
     'error-end': (0 0 0 $--button-box-shadow-ripple-spread $--n-error-color)
   ) !global;
-  $--button-box-shadow: (
-    'default': inset 0 0 0 1px $--n-border-color,
+  $--button-border-color: (
+    'default': $--n-border-color,
+    'primary': transparent,
+    'success': transparent,
+    'info': transparent,
+    'warning': transparent,
+    'error': transparent
+  ) !global;
+  $--button-border-mask-box-shadow: (
     'default-hover': inset 0 0 0 1px $--n-primary-hover-color,
     'default-active': inset 0 0 0 1px $--n-primary-active-color,
     'default-focus': (inset 0 0 0 1px $--n-primary-color),
-    'primary': none,
     'primary-hover': none,
     'primary-active': none,
     'primary-focus': none,
-    'success': none,
     'success-hover': none,
     'success-active': none,
     'success-focus': none,
-    'info': none,
     'info-hover': none,
     'info-active': none,
     'info-focus': none,
-    'warning': none,
     'warning-hover': none,
     'warning-active': none,
     'warning-focus': none,
-    'error': none,
     'error-hover': none,
     'error-active': none,
     'error-focus': none
   ) !global;
-  $--button-ghost-typed-box-shadow: (
-    'default': inset 0 0 0 1px $--n-border-color,
+  $--button-ghost-typed-border-color: (
+    'default': $--n-border-color,
+    'primary': change-color($--n-primary-color, $alpha: $--n-tertiary-opacity),
+    'success': change-color($--n-success-color, $alpha: $--n-tertiary-opacity),
+    'info': change-color($--n-info-color, $alpha: $--n-tertiary-opacity),
+    'warning': change-color($--n-warning-color, $alpha: $--n-tertiary-opacity),
+    'error': change-color($--n-error-color, $alpha: $--n-tertiary-opacity),
+  ) !global;
+  $--button-ghost-typed-border-mask-box-shadow: (
     'default-hover': inset 0 0 0 1px $--n-primary-hover-color,
     'default-active': inset 0 0 0 1px $--n-primary-active-color,
     'default-focus': inset 0 0 0 1px $--n-primary-hover-color,
-    'primary': inset 0 0 0 1px change-color($--n-primary-color, $alpha: $--n-tertiary-opacity),
     'primary-hover': inset 0 0 0 1px $--n-primary-hover-color,
     'primary-active': inset 0 0 0 1px $--n-primary-active-color,
     'primary-focus': inset 0 0 0 1px $--n-primary-hover-color,
-    'success': inset 0 0 0 1px change-color($--n-success-color, $alpha: $--n-tertiary-opacity),
     'success-hover': inset 0 0 0 1px $--n-success-hover-color,
     'success-active': inset 0 0 0 1px $--n-success-active-color,
     'success-focus': inset 0 0 0 1px $--n-success-hover-color,
-    'info': inset 0 0 0 1px change-color($--n-info-color, $alpha: $--n-tertiary-opacity),
     'info-hover': inset 0 0 0 1px $--n-info-hover-color,
     'info-active': inset 0 0 0 1px $--n-info-active-color,
     'info-focus': inset 0 0 0 1px $--n-info-hover-color,
-    'warning': inset 0 0 0 1px change-color($--n-warning-color, $alpha: $--n-tertiary-opacity),
     'warning-hover': inset 0 0 0 1px $--n-warning-hover-color,
     'warning-active': inset 0 0 0 1px $--n-warning-active-color,
     'warning-focus': inset 0 0 0 1px $--n-warning-hover-color,
-    'error': inset 0 0 0 1px change-color($--n-error-color, $alpha: $--n-tertiary-opacity),
     'error-hover': inset 0 0 0 1px $--n-error-hover-color,
     'error-active': inset 0 0 0 1px $--n-error-active-color,
     'error-focus': inset 0 0 0 1px $--n-error-hover-color

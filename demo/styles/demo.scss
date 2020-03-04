@@ -1,5 +1,5 @@
-.n-nimbus-service-layout__body > .n-scrollbar  > .n-scrollbar-container > .n-scrollbar-content {
-  width: 100% !important;
+.demo {
+  min-height: 600px;
 }
 
 .demo-card {
@@ -16,4 +16,8 @@
 
 .demo-card .demo-card__view code {
   font-family: "FiraCode";
+}
+
+.n-documentation .n-p, .n-blockquote {
+  max-width: 680px;
 }

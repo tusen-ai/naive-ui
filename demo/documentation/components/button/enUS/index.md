@@ -3,6 +3,7 @@ Button is used to trigger some actions.
 ## Demos
 ```demo
 basic
+size
 text
 disabled
 icon
@@ -17,7 +18,7 @@ debug
 ### Button Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
+|size|`'tiny' \| 'small' \| 'medium' \| 'large'`|`'medium'`||
 |type|`'default' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'`|`'default'`||
 |text|`boolean`|`false`||
 |block|`boolean`|`false`||

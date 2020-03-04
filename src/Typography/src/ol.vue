@@ -1,28 +1,28 @@
+<template>
+  <ol
+    class="n-ol"
+    :class="{
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      'n-ol--align-text': alignText
+    }"
+    v-on="$listeners"
+  >
+    <slot />
+  </ol>
+</template>
+
 <script>
-import getTheme from './getTheme'
+import withapp from '../../_mixins/withapp'
+import themeable from '../../_mixins/themeable'
 
 export default {
   name: 'NOl',
-  functional: true,
+  mixins: [withapp, themeable],
   props: {
     alignText: {
       type: Boolean,
       default: false
     }
-  },
-  render (h, context) {
-    const on = context.listeners
-    const theme = getTheme(context.parent)
-    const defaultSlot = context.slots.default || (context.scopedSlots.default && context.scopedSlots.default())
-    return h('ol', {
-      staticClass: 'n-ol',
-      class: {
-        [`n-${theme}-theme`]: theme,
-        [`n-ol--align-text`]: context.props.alignText
-      },
-      ...context.data,
-      on
-    }, defaultSlot)
   }
 }
 </script>

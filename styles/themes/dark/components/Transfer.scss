@@ -22,6 +22,7 @@
     'default': $--n-secondary-text-color,
     'disabled': $--n-disabled-text-color
   ) !global;
-  $--transfer-list-border-color: $--n-input-background-color !global;
-  $--transfer-header-border-color: $--n-table-header-background-color !global;
+  $--transfer-filter-border-color: $--n-divider-color !global;
+  $--transfer-border-color: transparent !global;
+  $--transfer-list-border-mask-pointer-events: none !global;
 }

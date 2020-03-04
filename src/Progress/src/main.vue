@@ -104,7 +104,7 @@
                 maxWidth: fillStyleMaxWidth + '%',
                 backgroundColor: safeColor,
                 height: styleHeight,
-                borderRadius: styleBorderRadius
+                borderRadius: styleFillBorderRadius
               }"
             >
               <div
@@ -324,6 +324,14 @@ export default {
     height: {
       type: Number,
       default: null
+    },
+    borderRadius: {
+      type: [String, Number],
+      default: null
+    },
+    fillBorderRadius: {
+      type: [String, Number],
+      default: null
     }
   },
   data () {
@@ -337,7 +345,20 @@ export default {
       return formatLength(this.height)
     },
     styleBorderRadius () {
-      if (this.height) return formatLength(this.height / 2)
+      if (this.borderRadius !== null) {
+        return formatLength(this.borderRadius)
+      }
+      if (this.height !== null) return formatLength(this.height / 2)
+      return null
+    },
+    styleFillBorderRadius () {
+      if (this.fillBorderRadius !== null) {
+        return formatLength(this.fillBorderRadius)
+      }
+      if (this.borderRadius !== null) {
+        return formatLength(this.borderRadius)
+      }
+      if (this.height !== null) return formatLength(this.height / 2)
       return null
     },
     syntheticIndicatorPlacement () {

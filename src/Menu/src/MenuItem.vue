@@ -1,6 +1,9 @@
 <template>
   <li
     class="n-menu-item"
+    :class="{
+      'n-menu-item--selected': selected
+    }"
   >
     <template v-if="renderContentAsPopover">
       <n-tooltip
@@ -9,7 +12,6 @@
       >
         <template v-slot:activator>
           <n-menu-item-content
-            :selected="selected"
             :padding-left="delayedPaddingLeft"
             :max-icon-size="maxIconSize"
             :active-icon-size="activeIconSize"
@@ -38,7 +40,6 @@
       :title="title"
       :title-extra="titleExtra"
       :disabled="syntheticDisabled"
-      :selected="selected"
       @click="handleClick"
     >
       <template v-slot:icon>

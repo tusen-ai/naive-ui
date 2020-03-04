@@ -3,7 +3,6 @@
     <table-header
       ref="header"
       :placement="placement"
-      :height="headerHeight"
       :columns="columns"
       :data="data"
       :fixed="fixed"
@@ -53,10 +52,6 @@ export default {
       default: null
     },
     bodyMinHeight: {
-      type: Number,
-      default: null
-    },
-    headerHeight: {
       type: Number,
       default: null
     },

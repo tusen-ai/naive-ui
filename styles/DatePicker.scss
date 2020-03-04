@@ -30,10 +30,11 @@
     @include once {
       outline: none;
       @include fade-in-scale-up-transition(date-panel);
+      transform: $--n-transform-debounce-scale;
       margin-top: 4px;
       margin-bottom: 4px;
       width: 350px;
-      border-radius: 6px;
+      border-radius: $--n-date-picker-border-radius;
       @include b(time-picker) {
         z-index: 1;
       }

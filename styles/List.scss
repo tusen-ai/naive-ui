@@ -15,7 +15,7 @@
     background-color: $--list-background-color;
     @include m(bordered) {
       @include once {
-        border-radius: 6px;
+        border-radius: $--n-list-border-radius;
       }
       border: 1px solid $--list-border-color;
       @include b(list-item) {

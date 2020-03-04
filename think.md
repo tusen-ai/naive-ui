@@ -121,23 +121,23 @@ const devtoolIsOpened = e.target === document.activeElement
 
 
 ## TODO 排序不分先后
-1. Focus Detector on Time Selector
+1. <del>Focus Detector on Time Selector</del>
 2. <del>Menu Root Indent = 0 可能造成问题</del>
 3. 用 RAF 优化 scrollbar 性能（不一定需要）
 4. <del>Anchor 切换有 bug，忽然闪现第一个</del>
 5. <del>Safari select lightbar container overflow 边角（或许是 webkit 的问题）</del>默认选中第一个可以装作这个问题不存在
-6. Chrome lightbar offset @table fitler
+6. <del>Chrome lightbar offset @table fitler</del> select menu 始终存在这个问题，不知道原因是什么
 7. <del>cascader 数据结构重构，维持原选项！</del> 这个不做了，对 Children 的处理过于边角，Patch 那块也会从声明式变成命令式
-8. 排查 render 函数是否每个地方都支持数组
+8. <del>排查 render 函数是否每个地方都支持数组</del>
 9. <del>form async validation</del>
-10. table filter 重构支持异步
+10. <del>table filter 重构支持异步</del>
 11. <del>tabs resize bug</del>
 12. <del>CSS 整理</del> 暂且算做完了
-13. 落地页
+13. <del>落地页</del>
 14. <del>按需引入 babel plugin</del> 这个不做了，收益不大，工作量不小
 15. form table 需要 size
-16. input number 需要一个小型的
-17. layout scroll api
+16. <del>input number 需要一个小型的</del> 目前看来也不是很必要，input number 其实可以很小
+17. <del>layout scroll api</del>
 18. <del>cascader select menu disabled 选项</del>
 19. <del>icon 的默认 stroke</del>
 20. <del>tree 组件</del>
@@ -150,7 +150,7 @@ const devtoolIsOpened = e.target === document.activeElement
 27. <del>base picker => base selection</del>
 28. <del>base lightbar => base tracking rect</del>
 29. <del>loader 区分 debug 和 非 debug</del>
-30. 逐步放宽对宽度必需传 number 的现实，尤其是对于 table
+30. <del>逐步放宽对宽度必需传 number 的现实，尤其是对于 table</del>
 31. <del>BaseLoading 代替 Log 里的 Spin</del>
 32. Modal 内部组件的卸载方式
 33. <del>Anchor 的另一种模式，追踪内容按照的是中间范围而不是自身大小</del>
@@ -158,22 +158,34 @@ const devtoolIsOpened = e.target === document.activeElement
 35. <del>backtop mounted blink</del>
 36. <del>Tab keep alive</del>
 37. <del>Cascader submenu 的 lightbar 用 base tracking rect 代替</del>
-38. Dropdown 样式微调
+38. <del>Dropdown 样式微调</del>
 39. <del>Card 用 padding 代替 margin 来避免 margin 折叠的问题</del> 不做了，要是想避免折叠让用户自己写 bfc 吧
 40. <del>检查 Icon 在 button 中切换有没有问题，直觉来说应该没问题</del>
-41. Radio Group 和 Steps 的镂空效果在 mounted 的时候 transition 没有关闭
+41. <del>Radio Group 和 Steps 的镂空效果在 mounted 的时候 transition 没有关闭</del>
 42. <del>Typography 文档待更新</del>
 43. <del>Tab 文档待更新</del>
 44. <del>Icon 文档待更新</del>
-45. 把 Upload 的回调 API 从 promise 改成 callback 格式的，文档也要对应修改
+45. <del>把 Upload 的回调 API 从 promise 改成 callback 格式的，文档也要对应修改</del> 我决定全面提供 Promise API 而不是 callback 风格的
 46. <del>Date Picker 的 format 文档内容</del>s
-47. Button Group 样式
-48. text button icon
+47. <del>Button Group 样式</del>
+48. <del>text button icon</del>
 49. <del>tab scroll 计算有潜在 bug</del>
-50. data-table 的 header height 为啥要固定？因为固定列的问题，sticky 解决了就没事
+50. <del>data-table 的 header height 为啥要固定？因为固定列的问题，sticky 解决了就没事</del>
 51. <del>scrollbar 在平时不显示用不到的 rail</del>
-52. placeholder transition 对 firefox 做兼容
+52. <del>placeholder transition 对 firefox 做兼容</del>
 53. 调整 date picker 的尺寸
+54. <del>Select option 右侧 padding 调整</del>
+55. <del>Popover arrow shadow 调整</del>
+56. <del>Input number 按钮样式调整</del>
+57. 一部分组件在 Modal 内部的样式
+58. 更新 Progress 文档
+59. <del>为所有的数据录入组件的尺寸</del>
+60. 审核文档
+61. <del>调整 transfer 的样式</del>
+62. <del>Table cascader 差一点国际化</del>
+63. Anchor 初次滚动的逻辑是不是要手动调整一下，现在位置实际上不一致
+64. <del>将所有的 Typography 组件改为非 Functional 的，因为获取不到 context 本身的主题</del>
+65. 搞明白 table layout 这个 css 属性是在干什么
 
 ```
 Done

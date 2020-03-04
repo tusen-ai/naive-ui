@@ -3,7 +3,7 @@
     ref="select"
     class="n-select"
     :class="{
-      [`n-select--${size}-size`]: size,
+      [`n-select--${syntheticSize}-size`]: true,
       'n-select--multiple': multiple,
       [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
@@ -29,7 +29,7 @@
       :remote="remote"
       :clearable="clearable"
       :disabled="disabled"
-      :size="size"
+      :size="syntheticSize"
       :theme="syntheticTheme"
       :loading="loading"
       @click="handleActivatorClick"
@@ -64,7 +64,7 @@
             :pattern="pattern"
             :options="filteredOptions"
             :multiple="multiple"
-            :size="size"
+            :size="syntheticSize"
             :filterable="filterable"
             :is-option-selected="isOptionSelected"
             @menu-toggle-option="handleToggleOption"
@@ -152,8 +152,10 @@ export default {
       default: false
     },
     size: {
-      type: String,
-      default: 'medium'
+      validator (value) {
+        return ['small', 'medium', 'large'].includes(value)
+      },
+      default: null
     },
     filterable: {
       type: Boolean,

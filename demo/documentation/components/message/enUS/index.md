@@ -23,8 +23,8 @@ about-theme
 ### MessageOption Type
 |Name|Type|Description|
 |-|-|-|
-|content|`string \|(function:() => VNode\|Array<VNode>)`|Can be a render function|
-|icon|`string \| (function:() => VNode)`|Can be a render function|
+|content|`string \|(() => VNode \| Array<VNode>)`|Can be a render function|
+|icon|`string \| (() => VNode)`|Can be a render function|
 |onHide|`function`||
 |onAfterHide|`function`||
 
@@ -32,8 +32,8 @@ about-theme
 #### MessageEnvironment Properties
 |Name|Type|Description|
 |-|-|-|
-|content|`string \| (function:() => VNode\|Array<VNode>)`|Can be a render function|
-|icon|`string \| (function:() => VNode)`|Can be a render function|
+|content|`string \| (() => VNode \| Array<VNode>)`|Can be a render function|
+|icon|`string \| (() => VNode)`|Can be a render function|
 |type|`'info' \| 'success' \| 'warning' \| 'error' \| 'loading'`||
 |onHide|`function`||
 |onAfterHide|`function`||

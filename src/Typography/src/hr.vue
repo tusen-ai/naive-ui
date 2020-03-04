@@ -1,21 +1,20 @@
+<template>
+  <ul
+    class="n-hr"
+    :class="{
+      [`n-${syntheticTheme}-theme`]: syntheticTheme
+    }"
+  >
+    <slot />
+  </ul>
+</template>
+
 <script>
-import getTheme from './getTheme'
+import withapp from '../../_mixins/withapp'
+import themeable from '../../_mixins/themeable'
 
 export default {
   name: 'NHr',
-  functional: true,
-  render (h, context) {
-    const on = context.listeners
-    const theme = getTheme(context.parent)
-    const defaultSlot = context.slots.default || (context.scopedSlots.default && context.scopedSlots.default())
-    return h('hr', {
-      staticClass: 'n-hr',
-      class: {
-        [`n-${theme}-theme`]: theme
-      },
-      ...context.data,
-      on
-    }, defaultSlot)
-  }
+  mixins: [withapp, themeable]
 }
 </script>

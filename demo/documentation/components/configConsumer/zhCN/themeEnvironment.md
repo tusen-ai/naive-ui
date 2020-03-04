@@ -6,7 +6,9 @@
 <n-config-provider :theme="theme" :theme-environment="env">
   <n-config-consumer>
     <template v-slot="{ themeEnvironment }">
-      <n-tag>{{ themeEnvironment }}</n-tag>
+      <div style="background-color: rgba(128, 128, 128); padding: 8px;">
+        <n-tag>{{ themeEnvironment }}</n-tag>
+      </div>
     </template>
   </n-config-consumer>
 </n-config-provider>

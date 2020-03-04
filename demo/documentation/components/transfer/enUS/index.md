@@ -5,6 +5,7 @@ Left, right, left, right... As a boring guy, I can play it all day.
 ```demo
 basic
 large-data
+size
 filterable
 ```
 ## V-model
@@ -25,6 +26,8 @@ filterable
 |source-filter-placeholder|`string`|`null`||
 |target-filter-placeholder|`string`|`null`||
 |filter|`(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean`|A basic label string match function||
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
+
 
 ### TransferOption Type
 |Property|Type|Description|

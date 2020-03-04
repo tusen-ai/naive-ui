@@ -1,9 +1,22 @@
+<template>
+  <p
+    class="n-p"
+    :class="{
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-p--${depth}-depth`]: depth
+    }"
+  >
+    <slot />
+  </p>
+</template>
+
 <script>
-import getTheme from './getTheme'
+import withapp from '../../_mixins/withapp'
+import themeable from '../../_mixins/themeable'
 
 export default {
   name: 'NP',
-  functional: true,
+  mixins: [withapp, themeable],
   props: {
     depth: {
       validator (value) {
@@ -11,22 +24,6 @@ export default {
       },
       default: null
     }
-  },
-  render (h, context) {
-    const on = context.listeners
-    const theme = getTheme(context.parent)
-    const props = context.props
-    const defaultSlot = context.slots.default || (context.scopedSlots.default && context.scopedSlots.default())
-    const depth = props.depth
-    return h('p', {
-      staticClass: 'n-p',
-      class: {
-        [`n-${theme}-theme`]: theme,
-        [`n-p--${depth}-depth`]: depth
-      },
-      ...context.data,
-      on
-    }, defaultSlot)
   }
 }
 </script>

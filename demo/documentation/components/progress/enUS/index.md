@@ -8,6 +8,8 @@ multiple-circle
 custom-indicator
 color
 no-indicator
+height
+processing
 ```
 ## Props
 |Name|Type|Default|Description|
@@ -24,6 +26,11 @@ no-indicator
 |indicator-placement|`'inside' \| 'inside-label' \| 'outside'`|`'outside'`||
 |indicator-text-color|`string`|`null`||
 |circle-gap|`number`|`1`|The gap bewteen circles when type is `'multiple-circle'`, suppose viewbox size is `100`|
+|height|`number`|`null`|`'line'` typed progress's height. Keep default height if not passed.|
+|border-radius|`number \| string`|`null`|`'line'` typed progress's border-radius. Keep half of default height if not passed.|
+|fill-border-radius|`number \| string`|`null`|`'line'` typed progress's fill's border-radius. Keep `border-radius` if not passed.|
+|processing|`boolean`|`false`||
+
 
 ## Slots
 |Name|Parameters|Description|

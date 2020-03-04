@@ -33,14 +33,14 @@ duration
 
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|avatar|`string \| (function:() => VNode\|Array<VNode>)`|`null`|可以是 render 函数|
-|title|`string \| (function:() => VNode\|Array<VNode>)`|`null`|可以是 render 函数|
-|description|`string \| (function:() => VNode\|Array<VNode>)`|`null`|可以是 render 函数|
-|content|`string \| (function:() => VNode\|Array<VNode>)`|`null`|可以是 render 函数|
-|meta|`string \| (function:() => VNode\|Array<VNode>)`|`null`|可以是 render 函数|
-|action|`string \| (function:() => VNode\|Array<VNode>)`|`null`|可以是 render 函数|
+|avatar|`string \| (() => VNode \| Array<VNode>)`|`null`|可以是 render 函数|
+|title|`string \| (() => VNode \| Array<VNode>)`|`null`|可以是 render 函数|
+|description|`string \| (() => VNode \| Array<VNode>)`|`null`|可以是 render 函数|
+|content|`string \| (() => VNode \| Array<VNode>)`|`null`|可以是 render 函数|
+|meta|`string \| (() => VNode \| Array<VNode>)`|`null`|可以是 render 函数|
+|action|`string \| (() => VNode \| Array<VNode>)`|`null`|可以是 render 函数|
 |closable|`boolean`|`true`||
-|onClose|`(next: function) => any`|`next => next()`|只有调用了 next 通知才会被关闭|
+|onClose|`() => boolean \| Promise<boolean>`|`() => {}`|关闭通知的回调。返回 `false`、Promise resolve `false` 或者 reject 会取消这次关闭|
 |onAfterHide|`function`|`null`||
 |onAfterShow|`function`|`null`||
 |duration|`number`|`null`|如果没有设定则不会自动关闭，单位毫秒|
@@ -51,12 +51,12 @@ NofiticationEnvironment 实例的属性可以被动态改变。
 
 |名称|类型|说明|
 |-|-|-|
-|avatar|`string \| (function:() => VNode\|Array<VNode>)`|可以是 render 函数|
-|title|`string \| (function:() => VNode\|Array<VNode>)`|可以是 render 函数|
-|description|`string \| (function:() => VNode\|Array<VNode>)`|可以是 render 函数|
-|content|`string \| (function:() => VNode\|Array<VNode>)`|可以是 render 函数|
-|meta|`string \| (function:() => VNode\|Array<VNode>)`|可以是 render 函数|
-|action|`string \| (function:() => VNode\|Array<VNode>)`|可以是 render 函数|
+|avatar|`string \| (() => VNode \| Array<VNode>)`|可以是 render 函数|
+|title|`string \| (() => VNode \| Array<VNode>)`|可以是 render 函数|
+|description|`string \| (() => VNode \| Array<VNode>)`|可以是 render 函数|
+|content|`string \| (() => VNode \| Array<VNode>)`|可以是 render 函数|
+|meta|`string \| (() => VNode \| Array<VNode>)`|可以是 render 函数|
+|action|`string \| (() => VNode \| Array<VNode>)`|可以是 render 函数|
 |closable|`boolean`||
 |onClose|`(next: function) => any`|点击了关闭按钮的回调。只有调用了 next 通知才会被关闭|
 |onHide|`function`||

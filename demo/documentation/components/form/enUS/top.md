@@ -1,8 +1,14 @@
 # Label Placement Top
 ```html
+<n-radio-group v-model="size" name="left-size" style="margin-bottom: 12px;">
+  <n-radio-button value="small">Small</n-radio-button>
+  <n-radio-button value="medium" >Medium</n-radio-button>
+  <n-radio-button value="large">Large</n-radio-button>
+</n-radio-group>
 <n-form
   :model="model"
   :rules="rules"
+  :size="size"
   ref="form"
   label-placement="top"
 >
@@ -103,6 +109,7 @@
 export default {
   data () {
     return {
+      size: 'medium',
       model: {
         inputValue: null,
         textareaValue: null,

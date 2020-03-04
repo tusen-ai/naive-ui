@@ -3,6 +3,7 @@
     class="n-table"
     :class="{
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-table--${size}-size`]: true,
       'n-table--bordered': bordered,
       'n-table--single-line': singleLine,
       'n-table--single-column': singleColumn
@@ -31,6 +32,12 @@ export default {
     singleColumn: {
       type: Boolean,
       default: false
+    },
+    size: {
+      validator (value) {
+        return ['small', 'medium', 'large'].includes(value)
+      },
+      default: 'medium'
     }
   }
 }

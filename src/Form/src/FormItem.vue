@@ -2,12 +2,13 @@
   <div
     class="n-form-item"
     :class="{
+      [`n-form-item--${syntheticSize}-size`]: true,
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
       [`n-form-item--${syntheticLabelPlacement}-labelled`]: syntheticLabelPlacement,
       [`n-form-item--${syntheticLabelAlign}-label-aligned`]: syntheticLabelAlign,
       [`n-form-item--required`]: syntheticRequired && syntheticShowRequireMark,
       [`n-form-item--no-label`]: !(label || $slots.label),
-      [`n-form-item--has-feedback`]: hasFeedback,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-form-item--has-feedback`]: hasFeedback
     }"
   >
     <label
@@ -120,9 +121,22 @@ export default {
     rule: {
       type: [Object, Array],
       default: null
+    },
+    size: {
+      validator (value) {
+        return ['small', 'medium', 'large'].includes(value)
+      },
+      default: null
     }
   },
-  inject: ['NForm'],
+  inject: {
+    NForm: {
+      default: null
+    },
+    NFormItem: {
+      default: null
+    }
+  },
   provide () {
     return {
       NFormItem: this
@@ -137,6 +151,16 @@ export default {
     }
   },
   computed: {
+    syntheticSize () {
+      if (this.size) return this.size
+      const NFormItem = this.NFormItem
+      if (NFormItem && NFormItem.syntheticSize) return NFormItem.syntheticSize
+      const NForm = this.NForm
+      if (NForm && NForm.size) {
+        return NForm.size
+      }
+      return null
+    },
     labelWidthStyle () {
       return {
         width: formatLength(this.syntheticLabelWidth)

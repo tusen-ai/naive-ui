@@ -32,3 +32,8 @@ export default {
   }
 }
 ```
+```css
+.n-radio {
+  margin-right: 8px;
+}
+```

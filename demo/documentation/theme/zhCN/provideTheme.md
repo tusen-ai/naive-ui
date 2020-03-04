@@ -3,8 +3,10 @@
 
 ```html
 <n-config-provider :theme="theme">
-  <n-button @click="theme = 'dark'">深色</n-button>
-  <n-button @click="theme = 'light'">浅色</n-button>
+  <div style="background-color: rgba(128, 128, 128); padding: 8px;">
+    <n-button @click="theme = 'dark'">深色</n-button>
+    <n-button @click="theme = 'light'">浅色</n-button>
+  </div>
 </n-config-provider>
 ```
 ```js

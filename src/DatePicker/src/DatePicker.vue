@@ -4,7 +4,6 @@
     class="n-date-picker"
     :class="{
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
-      [`n-date-picker--${size}-size`]: true,
       'n-date-picker--disabled': disabled,
       'n-date-picker--range': isRange,
       'n-date-picker--invalid': isValueInvalid && !isRange,
@@ -15,6 +14,7 @@
     <n-input
       v-if="isRange"
       ref="input"
+      :size="syntheticSize"
       passively-activated
       :disabled="disabled"
       :value="[displayStartTime, displayEndTime]"
@@ -41,6 +41,7 @@
       ref="input"
       v-model="displayTime"
       passively-activated
+      :size="syntheticSize"
       :force-focus="active"
       :disabled="disabled"
       :placeholder="localizedPlacehoder"
@@ -214,12 +215,11 @@ export default {
       default: null
     },
     size: {
-      type: String,
-      default: 'medium'
+      validator (value) {
+        return ['small', 'medium', 'large'].includes(value)
+      },
+      default: null
     },
-    /**
-     * type can be 'date', 'datetime'
-     */
     type: {
       validator (type) {
         return ['date', 'datetime', 'daterange', 'datetimerange'].includes(type)

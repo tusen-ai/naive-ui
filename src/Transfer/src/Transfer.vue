@@ -2,7 +2,9 @@
   <div
     class="n-transfer"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-transfer--filterable`]: filterable,
+      [`n-transfer--${syntheticSize}-size`]: true
     }"
   >
     <div class="n-transfer-list">
@@ -41,11 +43,11 @@
                 ref="sourceVirtualScroller"
                 class="n-virtual-scroller n-transfer-list-content"
                 :items="filteredSourceOptions"
-                :item-size="ITEM_SIZE"
+                :item-size="itemSize"
                 key-field="value"
               >
                 <template v-slot:before>
-                  <n-base-tracking-rect ref="sourceLightBar" :item-size="ITEM_SIZE" :theme="syntheticTheme" />
+                  <n-base-tracking-rect ref="sourceLightBar" :item-size="itemSize" :theme="syntheticTheme" />
                 </template>
                 <template v-slot="{ item: option, index }">
                   <n-transfer-source-list-item
@@ -63,7 +65,7 @@
             </n-scrollbar>
             <n-scrollbar v-else>
               <div ref="sourceList" class="n-transfer-list-content">
-                <n-base-tracking-rect ref="sourceLightBar" :item-size="ITEM_SIZE" :theme="syntheticTheme" />
+                <n-base-tracking-rect ref="sourceLightBar" :item-size="itemSize" :theme="syntheticTheme" />
                 <n-transfer-source-list-item
                   v-for="option in filteredSourceOptions"
                   ref="sourceListItems"
@@ -81,6 +83,7 @@
           <n-empty v-else />
         </div>
       </div>
+      <div class="n-transfer-list__border-mask" />
     </div>
     <div class="n-transfer-gap">
       <n-transfer-button
@@ -128,11 +131,11 @@
                 ref="targetVirtualScroller"
                 class="n-virtual-scroller n-transfer-list-content"
                 :items="filteredTargetOptions"
-                :item-size="ITEM_SIZE"
+                :item-size="itemSize"
                 key-field="value"
               >
                 <template v-slot:before>
-                  <n-base-tracking-rect ref="targetLightBar" :item-size="ITEM_SIZE" :theme="syntheticTheme" />
+                  <n-base-tracking-rect ref="targetLightBar" :item-size="itemSize" :theme="syntheticTheme" />
                 </template>
                 <template v-slot="{ item: option, index }">
                   <n-transfer-target-list-item
@@ -150,7 +153,7 @@
             </n-scrollbar>
             <n-scrollbar v-else>
               <div ref="targetList" class="n-transfer-list-content">
-                <n-base-tracking-rect ref="targetLightBar" :item-size="ITEM_SIZE" :theme="syntheticTheme" />
+                <n-base-tracking-rect ref="targetLightBar" :item-size="itemSize" :theme="syntheticTheme" />
                 <n-transfer-target-list-item
                   v-for="(option, index) in filteredTargetOptions"
                   ref="targetListItems"
@@ -169,6 +172,7 @@
           <n-empty v-else />
         </div>
       </div>
+      <div class="n-transfer-list__border-mask" />
     </div>
   </div>
 </template>
@@ -191,8 +195,7 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import { RecycleScroller } from 'vue-virtual-scroller'
 import debounce from 'lodash-es/debounce'
-
-const ITEM_SIZE = 34
+import { itemSize } from '../../_interoperation/common'
 
 export default {
   name: 'NTransfer',
@@ -258,6 +261,12 @@ export default {
         if (!pattern) return true
         return ~('' + option.label).toLowerCase().indexOf(('' + pattern).toLowerCase())
       }
+    },
+    size: {
+      validator (value) {
+        return ['small', 'medium', 'large'].includes(value)
+      },
+      default: null
     }
   },
   provide () {
@@ -276,11 +285,13 @@ export default {
       enableTargetEnterAnimation: false,
       initialized: false,
       sourcePattern: '',
-      targetPattern: '',
-      ITEM_SIZE
+      targetPattern: ''
     }
   },
   computed: {
+    itemSize () {
+      return itemSize[this.syntheticSize] || itemSize.medium
+    },
     valueToOptionMap () {
       const map = new Map()
       this.options.forEach(option => {
@@ -409,7 +420,7 @@ export default {
     }
   },
   watch: {
-    options (newOptions) {
+    options () {
       this.initialized = false
       const valueSet = this.valueSet
       this.memorizedSourceOptions = this.options.filter(option => !valueSet.has(option.value))
@@ -612,7 +623,7 @@ export default {
       const sourceLightBar = this.$refs.sourceLightBar
       if (!sourceLightBar) return
       if (this.virtualScroll) {
-        sourceLightBar.updateLightBarTop(true, () => index * ITEM_SIZE)
+        sourceLightBar.updateLightBarTop(true, () => index * this.itemSize)
       } else {
         sourceLightBar.updateLightBarTop(e.target)
       }
@@ -620,7 +631,7 @@ export default {
     handleTargetOptionMouseEnter: debounce(function (e, index) {
       const targetLightBar = this.$refs.targetLightBar
       if (this.virtualScroll) {
-        targetLightBar.updateLightBarTop(true, () => index * ITEM_SIZE)
+        targetLightBar.updateLightBarTop(true, () => index * this.itemSize)
       } else {
         targetLightBar.updateLightBarTop(e.target)
       }

@@ -9,7 +9,7 @@ Naive UI has a built-in style scheme. It's powerful for you to create naive-ui s
         padding: '8px',
         borderColor: styleScheme.primaryColor,
         backgroundColor: 'transparent',
-        color: styleScheme.primaryColor,
+        color: styleScheme.warningColor,
         transition: `all .3s ${styleScheme.easeInOutCubicBezier}`
       }"
     >Cool!</button>

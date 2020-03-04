@@ -6,8 +6,12 @@
       'n-radio-button--checked': syntheticChecked,
       'n-radio-button--focus': focus
     }"
+    :style="{
+      color: syntheticChecked ? syntheticAscendantBackgroundColor : null
+    }"
     @keyup.enter="handleKeyUpEnter"
     @click="handleClick"
+    @mousedown="handleMouseDown"
   >
     <input
       ref="input"

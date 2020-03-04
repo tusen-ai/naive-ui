@@ -20,7 +20,7 @@
     @include e(input) {
       height: $height;
     }
-    @include e(input, textarea, textarea-mirror, splitor) {
+    @include e(input, textarea, textarea-mirror, splitor, placeholder) {
       padding-left: 14px;
       padding-right: 14px;
       line-height: $line-height;
@@ -28,44 +28,53 @@
       padding-top: ($height - $line-height) / 2;
       padding-bottom: ($height - $line-height) / 2;
     }
-    @include m(suffix) {
+    @include e(placeholder) {
+      left: 14px;
+      right: 14px;
+    }
+    @include m(suffix, clearable) {
       @include not-m(split) {
         @include e(input) {
-          padding-right: 38px!important;
+          @include m(first) {
+            padding-right: 38px!important;
+          }
+        }
+        @include e(placeholder) {
+          right: 38px!important;
         }
       }
       @include m(split) {
         @include e(input) {
-          &:not(:first-child) {
+          @include m(second) {
             padding-right: 38px!important;
+            & + {
+              @include e(placeholder) {
+                right: 38px!important;
+              }
+            }
           }
         }
       }
     }
     @include m(prefix) {
-      @include not-m(split) {
-        @include e(input) {
+      @include e(input) {
+        @include m(first) {
           padding-left: 38px!important;
         }
       }
-      @include m(split) {
-        @include e(input) {
-          &:first-child {
-            padding-left: 38px!important;
-          }
-        }
-      }
-    }
-    @include m(clearable) {
       @include not-m(split) {
-        @include e(input) {
-          padding-right: 38px!important;
+        @include e(placeholder) {
+          left: 38px!important;
         }
       }
       @include m(split) {
         @include e(input) {
-          &:not(:first-child) {
-            padding-right: 38px!important;
+          @include m(first) {
+            & + {
+              @include e(placeholder) {
+                left: 38px!important;
+              }
+            }
           }
         }
       }
@@ -75,6 +84,10 @@
         @include e(input) {
           padding-left: $height / 2;
           padding-right: $height / 2;
+        }
+        @include e(placeholder) {
+          left: $height / 2;
+          right: $height / 2;
         }
         border-radius: $height / 2;
         @include e(border-mask) {
@@ -109,6 +122,19 @@
         pointer-events: none;
         border-radius: $--n-input-border-radius;
         transition: border-color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier;
+      }
+      @include e(placeholder) {
+        white-space: nowrap;
+        pointer-events: none;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        transition: color .3s $--n-ease-in-out-cubic-bezier;
+        overflow: hidden;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
       }
       @include e(suffix, prefix) {
         position: absolute;
@@ -165,10 +191,13 @@
       }
       @include m(split) {
         display: inline-flex;
-        @include e(input) {
+        @include e(input, placeholder) {
           text-align: center;
         }
       }
+    }
+    @include e(placeholder) {
+      color: map-get($--input-placeholder-color, 'default');
     }
     background-color: map-get($--input-background-color, 'default');
     box-shadow: map-get($--input-box-shadow, 'default');
@@ -195,6 +224,9 @@
           padding-left: 14px;
           padding-right: 14px;
         }
+        @include e(placeholder) {
+          white-space: unset;
+        }
       }
     }
     @include e(suffix, prefix) {
@@ -214,15 +246,12 @@
         width: 100%;
         transition: color .3s $--n-ease-in-out-cubic-bezier, text-decoration-color .3s $--n-ease-in-out-cubic-bezier;
         background-color: transparent;
+        min-width: 0;
       }
       color: map-get($--input-color, 'default');
       caret-color: map-get($--input-caret-color, 'default');
       &::placeholder {
-        @include once {
-          transition: color .3s $--n-ease-in-out-cubic-bezier;
-          opacity: 1;
-        }
-        color: map-get($--input-placeholder-color, 'default');
+        color: transparent;
       }
     }
     @include e(splitor) {
@@ -247,9 +276,9 @@
           cursor: not-allowed;
         }
         color: map-get($--input-color, 'disabled');
-        &::placeholder {
-          color: map-get($--input-placeholder-color, 'disabled');
-        }
+      }
+      @include e(placeholder) {
+        color: map-get($--input-placeholder-color, 'disabled');
       }
       @include e(suffix, prefix) {
         @include b(icon) {

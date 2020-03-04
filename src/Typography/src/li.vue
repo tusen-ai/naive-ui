@@ -1,21 +1,27 @@
+<template>
+  <li
+    class="n-li"
+    :class="{
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      'n-li--align-text': alignText
+    }"
+  >
+    <slot />
+  </li>
+</template>
+
 <script>
-import getTheme from './getTheme'
+import withapp from '../../_mixins/withapp'
+import themeable from '../../_mixins/themeable'
 
 export default {
   name: 'NLi',
-  functional: true,
-  render (h, context) {
-    const on = context.listeners
-    const theme = getTheme(context.parent)
-    const defaultSlot = context.slots.default || (context.scopedSlots.default && context.scopedSlots.default())
-    return h('li', {
-      staticClass: 'n-li',
-      class: {
-        [`n-${theme}-theme`]: theme
-      },
-      ...context.data,
-      on
-    }, defaultSlot)
+  mixins: [withapp, themeable],
+  props: {
+    alignText: {
+      type: Boolean,
+      default: false
+    }
   }
 }
 </script>

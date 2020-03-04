@@ -1,7 +1,7 @@
 <template>
   <n-config-provider class="demo" namespace="naive-ui-doc" :theme="theme" :language="lang">
     <n-layout mode="absolute" class="root-layout">
-      <n-layout-header bordered>
+      <n-layout-header bordered style="z-index: 3000;">
         <doc-header
           :lang="lang"
           :items="flattenedItems"

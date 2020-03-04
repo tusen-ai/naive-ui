@@ -8,7 +8,7 @@
     @compositionend="handleCompositionEnd"
   >
     <slot :handle-input="handleInput" :handle-focus="handleFocus" :handle-blur="handleBlur" :value="value">
-      <n-input ref="activator" :value="value" :placeholder="placeholder" :size="size" @focus="canBeActivated = true" @input="handleInput" @blur="handleBlur" />
+      <n-input ref="activator" :value="value" :placeholder="placeholder" :size="syntheticSize" @focus="canBeActivated = true" @input="handleInput" @blur="handleBlur" />
     </slot>
     <div
       ref="contentContainer"
@@ -32,7 +32,7 @@
             :pattern="value"
             :options="filteredOptions"
             :multiple="false"
-            :size="size"
+            :size="syntheticSize"
             :remote="remote"
             :loading="loading"
             :filterable="false"
@@ -94,8 +94,10 @@ export default {
       default: false
     },
     size: {
-      type: String,
-      default: 'medium'
+      validator (value) {
+        return ['small', 'medium', 'large'].includes(value)
+      },
+      default: null
     },
     options: {
       type: Array,

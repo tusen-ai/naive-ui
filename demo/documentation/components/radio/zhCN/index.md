@@ -6,6 +6,7 @@
 basic
 group
 button-group
+size
 ```
 ## V-model
 ### Radio V-model
@@ -34,6 +35,7 @@ button-group
 |checked-value|`string \| number \| boolean`|`null`||
 |value|`string \| number \| boolean`|`null`||
 |disabled|`boolean`|`false`||
+|size|`'small' \| 'medium' \| 'large'`|`'small'`||
 
 ### Radio Group Props
 |名称|类型|默认值|说明|

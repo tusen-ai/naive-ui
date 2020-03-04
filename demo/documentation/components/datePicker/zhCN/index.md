@@ -7,6 +7,7 @@ date
 datetime
 daterange
 datetimerange
+size
 disabled
 disabledTime
 actions
@@ -27,6 +28,7 @@ format
 |clearable|`boolean`|`false`||
 |disabled|`boolean`|`false`||
 |type|`'date' \| 'datetime' \| 'daterange' \|'datetimerange'`|`'date`||
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 
 
 ### Date 类型的 Props

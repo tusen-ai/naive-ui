@@ -3,6 +3,7 @@ Like a digital clock.
 ## Demos
 ```demo
 basic
+size
 disabledTime
 format
 ```
@@ -20,6 +21,7 @@ format
 |is-hour-disabled|`(hour: number) => boolean`|`() => false`||
 |is-minute-disabled|`(minute: number, hour: number) => boolean`|`() => false`||
 |is-second-disabled|`(second: number, minute: number, hour: number) => boolean`|`() => false`||
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 
 ## Events
 |Name|Parameters|Description|

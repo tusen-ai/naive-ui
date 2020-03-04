@@ -2,8 +2,10 @@
 Set theme of inner components of config provider.
 ```html
 <n-config-provider :theme="theme">
-  <n-button @click="theme = 'dark'">Dark</n-button>
-  <n-button @click="theme = 'light'">Light</n-button>
+  <div style="background-color: rgba(128, 128, 128); padding: 8px;">
+    <n-button @click="theme = 'dark'">Dark</n-button>
+    <n-button @click="theme = 'light'">Light</n-button>
+  </div>
 </n-config-provider>
 ```
 ```js

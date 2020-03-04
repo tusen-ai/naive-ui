@@ -1,28 +1,27 @@
+<template>
+  <ul
+    class="n-ul"
+    :class="{
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      'n-ul--align-text': alignText
+    }"
+  >
+    <slot />
+  </ul>
+</template>
+
 <script>
-import getTheme from './getTheme'
+import withapp from '../../_mixins/withapp'
+import themeable from '../../_mixins/themeable'
 
 export default {
   name: 'NUl',
-  functional: true,
+  mixins: [withapp, themeable],
   props: {
     alignText: {
       type: Boolean,
       default: false
     }
-  },
-  render (h, context) {
-    const on = context.listeners
-    const theme = getTheme(context.parent)
-    const defaultSlot = context.slots.default || (context.scopedSlots.default && context.scopedSlots.default())
-    return h('ul', {
-      staticClass: 'n-ul',
-      class: {
-        [`n-${theme}-theme`]: theme,
-        [`n-ul--align-text`]: context.props.alignText
-      },
-      ...context.data,
-      on
-    }, defaultSlot)
   }
 }
 </script>

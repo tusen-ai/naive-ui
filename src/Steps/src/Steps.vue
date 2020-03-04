@@ -43,13 +43,24 @@ export default {
       default: false
     }
   },
+  data () {
+    return {
+      transitionDisabled: true
+    }
+  },
+  mounted () {
+    this.$nextTick().then(() => {
+      this.transitionDisabled = false
+    })
+  },
   render (h) {
     return h('div', {
       staticClass: 'n-steps',
       class: {
         [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
         [`n-steps--${this.size}-size`]: true,
-        'n-steps--vertical': this.vertical
+        'n-steps--vertical': this.vertical,
+        'n-steps--transition-disabled': this.transitionDisabled
       }
     }, stepsWithIndex({ ...this.$props }, this.$slots.default))
   }

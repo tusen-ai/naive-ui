@@ -1,11 +1,28 @@
 @import './mixins/mixins.scss';
 
-@include themes-mixin {
-  @include b(cascader) {
-    @include once {
-      width: 100%;
+@mixin cascader-size-mixin ($size) {
+  @include b(cascader-menu) {
+    @include m($size + '-size') {
+      @include b(cascader-submenu) {
+        height: map-get($--n-height, $size) * 6.6;
+        @include b(cascader-option) {
+          height: map-get($--n-height, $size);
+          line-height: map-get($--n-height, $size);
+          font-size: map-get($--n-font-size, $size);
+        }
+      }
     }
   }
+}
+
+@include cascader-size-mixin('small');
+@include cascader-size-mixin('medium');
+@include cascader-size-mixin('large');
+@include b(cascader) {
+  width: 100%;    
+}
+
+@include themes-mixin {
   @include b(cascader-menu) {
     @include once {
       @include fade-in-scale-up-transition(cascader-menu, inherit, .2s);
@@ -14,7 +31,7 @@
       margin: 4px 0;
       display: flex;
       flex-wrap: nowrap;
-      border-radius: 6px;
+      border-radius: $--n-cascader-border-radius;
       overflow: hidden;
       /** 
        * if width not set, cascader select menu's inner scroll area's width is 
@@ -30,17 +47,16 @@
         position: relative;
         overflow: hidden;
         min-width: 182px;
-        height: 204px;
         @include b(scrollbar-content) {
           position: relative;
         }
         &:first-child {
-          border-top-left-radius: 6px;
-          border-bottom-left-radius: 6px;
+          border-top-left-radius: $--n-cascader-border-radius;
+          border-bottom-left-radius: $--n-cascader-border-radius;
         }
         &:last-child {
-          border-top-right-radius: 6px;
-          border-bottom-right-radius: 6px;
+          border-top-right-radius: $--n-cascader-border-radius;
+          border-bottom-right-radius: $--n-cascader-border-radius;
         }
       }
       &:not(:first-child) {
@@ -56,13 +72,10 @@
         transition:
           background-color .2s $--n-ease-in-out-cubic-bezier,
           color 0.2s $--n-ease-in-out-cubic-bezier;
-        height: 34px;
-        line-height: 34px;
         display: flex;
         padding: 0px 24px 0 33px;
         white-space: nowrap;
         position: relative;
-        font-size: 14px;
         cursor: pointer;
       }
       color: map-get($--cascader-option-text-color, 'default');

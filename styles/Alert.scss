@@ -32,7 +32,7 @@
       &.#{block(fade-in-height-expand-transition)}-leave-to, &.#{block(fade-in-height-expand-transition)}-enter {
         transform: scale(.9);
       }
-      border-radius: 6px;
+      border-radius: $--n-alert-border-radius;
       position: relative;
       transition: background-color .3s $--n-ease-in-out-cubic-bezier, box-shadow .3s $--n-ease-in-out-cubic-bezier;
       @include e(icon) {

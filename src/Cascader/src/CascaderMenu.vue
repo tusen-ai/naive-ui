@@ -8,9 +8,10 @@
           v-if="active"
           class="n-cascader-menu"
           :class="{
-            [`n-${theme}-theme`]: theme
+            [`n-${theme}-theme`]: theme,
+            [`n-cascader-menu--${size}-size`]: size
           }"
-          @mousedown.prevent="() => {}"
+          @mousedown.capture="handleMenuMouseDown"
         >
           <n-cascader-submenu
             v-for="(submenuOptions, index) in menuModel"
@@ -175,7 +176,7 @@ export default {
             const option = this.options[0]
             if (!this.loading) {
               this.updateLoadingStatus(true)
-              this.$refs.mask.show(`Loading`)
+              this.$refs.mask.show(this.NCascader.localeNamespace.loading)
               this.onLoad(option, (children) => this.NCascader.resolveLoad(option, children, () => {
                 this.hideMask()
               }), () => this.rejectLoad(() => {
@@ -188,7 +189,6 @@ export default {
     },
     menuModel () {
       this.$nextTick().then(() => {
-        // console.log('menu model')
         this.updatePosition()
       })
     },
@@ -222,6 +222,10 @@ export default {
     }
   },
   methods: {
+    handleMenuMouseDown (e) {
+      e.preventDefault()
+      e.stopPropagation()
+    },
     getZindexableContent () {
       return this.$el
     },
@@ -264,7 +268,6 @@ export default {
     handleOptionMouseLeave (e, option) {
     },
     updateLoadingId (id) {
-      // console.log('updateLoadingId', id)
       this.$emit('update:loadingId', id)
     },
     updateLoadingStatus (loading) {
@@ -343,7 +346,6 @@ export default {
     deep () {
       if (this.trackId) {
         const option = this.idOptionMap.get(this.trackId)
-        // console.log('currentOption', option)
         if (option && option.firstAvailableChildId) {
           this.updateTrackId(option.firstAvailableChildId)
           this.updateActiveId(option.firstAvailableChildId)
@@ -351,7 +353,6 @@ export default {
       }
     },
     shallow () {
-      // console.log('shallow: cascader menu')
       if (this.trackId) {
         const option = this.idOptionMap.get(this.trackId)
         if (option && option.availableParentId) {

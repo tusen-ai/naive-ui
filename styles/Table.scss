@@ -1,12 +1,43 @@
 @import "./mixins/mixins.scss";
 
+@mixin table-size-mixin () {
+  @include m(small-size) {
+    font-size: map-get($--n-font-size, 'medium');
+    @include e(th) {
+      padding: 5px 5px 5px 11px;
+    }
+    @include e(td) {
+      padding: 5px 5px 5px 11px;
+    }
+  }
+  @include m(medium-size) {
+    font-size: map-get($--n-font-size, 'medium');
+    @include e(th) {
+      padding: 10px 10px 10px 16px;
+    }
+    @include e(td) {
+      padding: 10px 10px 10px 16px;
+    }
+  }
+  @include m(large-size) {
+    font-size: map-get($--n-font-size, 'large');
+    @include e(th) {
+      padding: 15px 15px 15px 20px;
+    }
+    @include e(td) {
+      padding: 15px 15px 15px 20px;
+    }
+  }
+}
+
 @include themes-mixin {
   @include b(table) {
     @include once {
+      @include table-size-mixin;
       line-height: 1.75;
       font-size: 14px;
       width: 100%;
-      border-radius: 6px 6px 0 0;
+      border-radius: $--n-popover-border-radius $--n-popover-border-radius 0 0;
       text-align: left;
       border-collapse: separate;
       border-spacing: 0;
@@ -59,7 +90,7 @@
     }
     @include m(bordered) {
       border: 1px solid $--table-border-color;
-      border-radius: 6px;
+      border-radius: $--n-popover-border-radius;
       @include e(tr) {
         &:last-child {
           @include e(td) {

@@ -57,7 +57,7 @@
               &::after {
                 content: '';
                 background-image: $--progress-line-processing-background-image;
-                animation: progress-#{$type}-type-ripple 3s $--n-ease-out-cubic-bezier infinite;
+                animation: progress-#{$type}-type-ripple 2s $--n-ease-out-cubic-bezier infinite;
               }
             }
           }
@@ -99,7 +99,9 @@
           height: 18px;
           line-height: 18px;
           font-size: 18px;
-          transition: fill .3s $--n-ease-in-out-cubic-bezier;
+          transition:
+            fill .3s $--n-ease-in-out-cubic-bezier,
+            color .3s $--n-ease-in-out-cubic-bezier;
           @include m(as-text) {
             text-align: center;
             width: 40px;
@@ -194,6 +196,7 @@
         @include b(progress-graph-circle-rail) {
           @include once {
             transition: stroke .3s $--n-ease-in-out-cubic-bezier;
+            overflow: hidden;
           }
           stroke: $--progress-rail-color;
         }

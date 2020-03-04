@@ -1,11 +1,17 @@
 # Inline Form
 A Example of inline form.
 ```html
+<n-radio-group v-model="size" name="left-size" style="margin-bottom: 12px;">
+  <n-radio-button value="small">小</n-radio-button>
+  <n-radio-button value="medium" >中</n-radio-button>
+  <n-radio-button value="large">大</n-radio-button>
+</n-radio-group>
 <n-form
   inline
   :label-width="80"
   :model="formValue"
   :rules="rules"
+  :size="size"
   ref="form"
 >
   <n-form-item label="Name" path="user.name">
@@ -30,6 +36,7 @@ A Example of inline form.
 export default {
   data () {
     return {
+      size: 'medium',
       formValue: {
         user: {
           name: '',

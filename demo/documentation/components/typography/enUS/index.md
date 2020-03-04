@@ -23,6 +23,7 @@ text
 |delete|`boolean`|`false`||
 |code|`boolean`|`false`||
 |depth|`'primary' \| 'secondary' \| 'tertiary'`|`null`||
+|as|`string`|`null`|What tag should be this component be rendered as. Won't work when `code` or `del` is set.|
 
 ### P Props
 |Name|Type|Default|Description|

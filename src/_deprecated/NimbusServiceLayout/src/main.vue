@@ -76,8 +76,8 @@ export default {
     }
   },
   methods: {
-    resetScrollPosition () {
-      this.$refs.body.resetScrollPosition()
+    scrollTo (...args) {
+      this.$refs.body.scrollTo(...args)
     },
     syncActiveItemWithPath (path, items) {
       for (const item of items) {

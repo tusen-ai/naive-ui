@@ -279,9 +279,9 @@ export default {
             },
             staticClass: 'n-popover-content',
             class: {
-              'n-popover-content--without-arrow': !this.arrow,
+              'n-popover-content--no-arrow': !this.arrow,
               [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
-              'n-popover-content--without-shadow': !this.shadow,
+              'n-popover-content--no-shadow': !this.shadow,
               [this.overlayClass]: this.overlayClass,
               'n-popover-content--fix-width': this.width !== null || this.maxWidth !== null
             },
@@ -294,9 +294,15 @@ export default {
           }, [
             ...(this.$slots.default || []),
             this.arrow
-              ? h('div', {
-                staticClass: 'n-popover-arrow'
-              })
+              ? h(
+                'div',
+                {
+                  staticClass: 'n-popover-arrow-wrapper'
+                }, [
+                  h('div', {
+                    staticClass: 'n-popover-arrow'
+                  })
+                ])
               : null
           ]) : null
         ])

@@ -8,7 +8,7 @@ function parseMdAsAnchor (tokens) {
     const href = title.replace(/ /g, '-')
     return `<n-anchor-link title="${title}" href="#${href}"/>`
   })
-  return `<n-anchor :top="24" position="absolute" affix style="width: 132px;">${linkTags.join('\n')}</n-anchor>`
+  return `<n-anchor ignore-gap :top="24" position="absolute" affix style="width: 144px;">${linkTags.join('\n')}</n-anchor>`
 }
 
 function parseComponents (tokens) {

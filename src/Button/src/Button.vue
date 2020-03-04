@@ -104,6 +104,7 @@
         </n-icon-switch-transition>
       </div>
     </n-fade-in-height-expand-transition>
+    <div class="n-button__border-mask" />
   </button>
 </template>
 
@@ -126,6 +127,9 @@ export default {
   },
   inject: {
     NButtonGroup: {
+      default: null
+    },
+    NFormItem: {
       default: null
     }
   },
@@ -203,8 +207,13 @@ export default {
   },
   computed: {
     syntheticSize () {
-      if (this.NButtonGroup && this.NButtonGroup.size) {
-        return this.NButtonGroup.size
+      const NButtonGroup = this.NButtonGroup
+      if (NButtonGroup && NButtonGroup.size) {
+        return NButtonGroup.size
+      }
+      const NFormItem = this.NFormItem
+      if (NFormItem && NFormItem.syntheticSize) {
+        return NFormItem.syntheticSize
       }
       return this.size
     },

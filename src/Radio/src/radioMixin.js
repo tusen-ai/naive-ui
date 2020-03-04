@@ -47,12 +47,18 @@ export default {
       if (this.NRadioGroup && this.NRadioGroup.disabled) return true
       if (this.disabled) return true
       return false
+    },
+    syntheticAscendantBackgroundColor () {
+      const NRadioGroup = this.NRadioGroup
+      if (NRadioGroup && NRadioGroup.syntheticTheme === 'dark') {
+        return NRadioGroup.ascendantBackgroundColor
+      }
+      return null
     }
   },
   methods: {
     toggle () {
       if (this.syntheticDisabled) return
-      this.$refs.input.focus()
       if (this.checkedValue !== this.value) {
         this.emitChangeEvent()
       }
@@ -68,6 +74,11 @@ export default {
     },
     handleKeyUpEnter () {
       this.toggle()
+    },
+    handleMouseDown (e) {
+      if (this.syntheticDisabled) return
+      e.preventDefault()
+      this.$refs.input.focus()
     },
     handleClick (e) {
       this.$emit('click', e)

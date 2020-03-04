@@ -3,7 +3,7 @@
 @mixin tag-size-mixin($size) {
   $height: map-get($--n-height, $size) - 6px;
   $font-size: (
-    "small": 12px,
+    "small": 13px,
     "medium": 14px,
     "large": 14px
   );
@@ -71,7 +71,7 @@
       white-space: nowrap;
       position: relative;
       padding: 0 7px;
-      border-radius: 4px;
+      border-radius: $--n-tag-border-radius;
       box-sizing: border-box;
       cursor: default;
       display: inline-block;

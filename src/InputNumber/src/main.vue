@@ -2,7 +2,7 @@
   <div
     class="n-input-number"
     :class="{
-      [`n-input-number--${size}-size`]: true,
+      [`n-input-number--${syntheticSize}-size`]: true,
       'n-input-number--disabled': disabled,
       'n-input-number--invalid': invalid,
       [`n-${syntheticTheme}-theme`]: syntheticTheme
@@ -111,8 +111,10 @@ export default {
       default: null
     },
     size: {
-      type: String,
-      default: 'medium'
+      validator (value) {
+        return ['small', 'medium', 'large'].includes(value)
+      },
+      default: null
     },
     disabled: {
       type: Boolean,

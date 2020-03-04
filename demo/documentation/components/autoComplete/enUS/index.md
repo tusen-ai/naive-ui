@@ -3,6 +3,7 @@ Use as search hint or something similar.
 ## Demos
 ```demo
 basic
+size
 custom-input
 after-select
 ```

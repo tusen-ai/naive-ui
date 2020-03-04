@@ -171,7 +171,11 @@ const exportedComponents = {
       '[]Empty',
       '[]Icon',
       '[]Pagination',
-      '[]Scrollbar'
+      '[]Scrollbar',
+      '[]Checkbox',
+      '[]Radio',
+      '[]Divider',
+      '[]Button'
     ]
   },
   DatePicker: {

@@ -7,7 +7,7 @@
         @include once {
           padding: 8px 14px;
           white-space: nowrap;
-          border-radius: 6px;
+          border-radius: $--n-tooltip-border-radius;
         }
         box-shadow: $--tooltip-box-shadow;
         background-color: $--tooltip-background-color;
