@@ -58,6 +58,7 @@
         }
         @include e(more-icon, arrow-icon) {
           position: relative;
+          z-index: auto;
           width: 16px;
           height: 16px;
           @include b(base-icon) {

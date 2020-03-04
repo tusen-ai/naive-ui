@@ -11,6 +11,7 @@
       v-model="displayTimeString"
       class="n-time-picker-input"
       passively-activated
+      :stateful="stateful"
       :size="syntheticSize"
       :force-focus="active"
       :placeholder="localizedPlaceholder"
@@ -265,6 +266,10 @@ export default {
     clearable: {
       type: Boolean,
       default: false
+    },
+    stateful: {
+      type: Boolean,
+      default: true
     }
   },
   data () {

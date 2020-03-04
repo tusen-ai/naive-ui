@@ -80,12 +80,13 @@
   <n-row :gutter="24">
     <n-form-item-col :span="14" label="Transfer" path="transferValue">
       <n-transfer
+        style="width: 100%;"
         v-model="model.transferValue"
         :options="generalOptions"
       />
     </n-form-item-col>
     <n-form-item-col :span="5" label="Nested Path" path="nestedValue.path1">
-      <n-input placeholder="Nested Path 1" v-model="model.nestedValue.path1"/>
+      <n-cascader placeholder="Nested Path 1" v-model="model.nestedValue.path1" :options="cascaderOptions"/>
     </n-form-item-col>
     <n-form-item-col :span="5" path="nestedValue.path2">
       <n-select placeholder="Nested Path 2" :options="generalOptions" v-model="model.nestedValue.path2"/>
@@ -138,6 +139,18 @@ export default {
         label: v,
         value: v
       })),
+      cascaderOptions: [
+        {
+          label: 'groode',
+          value: 'groode',
+          children: [
+            {
+              label: 'veli good',
+              value: 'veli good'
+            }
+          ]
+        }
+      ],
       rules: {
         inputValue: {
           required: true,

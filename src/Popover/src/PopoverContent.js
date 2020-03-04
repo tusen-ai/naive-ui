@@ -5,7 +5,6 @@ import placeable from '../../_mixins/placeable'
 import zindexable from '../../_mixins/zindexable'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import asthemecontext from '../../_mixins/asthemecontext'
 
 export default {
   name: 'NPopoverContent',
@@ -75,16 +74,12 @@ export default {
       default: undefined
     },
     /** to make zindexable work */
-    detached: {
-      type: Boolean,
-      default: true
-    },
     displayDirective: {
       type: String,
       default: 'if'
     }
   },
-  mixins: [withapp, themeable, asthemecontext, placeable, zindexable],
+  mixins: [withapp, themeable, placeable, zindexable],
   directives: {
     clickoutside,
     mousemoveoutside
@@ -93,7 +88,8 @@ export default {
     return {
       memorizedId: null,
       internalActive: false,
-      keepPlaceableTracingWhenInactive: false
+      keepPlaceableTracingWhenInactive: false,
+      zindexable: true
     }
   },
   created () {

@@ -114,7 +114,7 @@
     @include b(transfer-list) {
       @include once {
         background-clip: padding-box;
-        width: 182px;
+        width: calc(50% - 48px);
         position: relative;
         transition: background-color .3s $--n-ease-in-out-cubic-bezier;
         border-radius: $--n-transfer-border-radius;
