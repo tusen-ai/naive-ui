@@ -1,6 +1,7 @@
 @import './mixins/mixins.scss';
 
 @include themes-mixin {
+  $calendar-width: 288px;
   @include once {
     @include b(date-picker) {
       position: relative;
@@ -33,16 +34,13 @@
       transform: $--n-transform-debounce-scale;
       margin-top: 4px;
       margin-bottom: 4px;
-      width: 350px;
+      width: 288px;
       border-radius: $--n-date-picker-border-radius;
       @include b(time-picker) {
         z-index: 1;
       }
       @include b(date-panel-calendar) {
-        width: 350px;
-        @include b(date-panel-month) {
-          margin-top: 12px;
-        }
+        width: $calendar-width;
       }
     }
     background: $--date-picker-background-color;
@@ -50,7 +48,7 @@
     color: $--date-picker-text-color;
     @include m(datetimerange, daterange) {
       @include once {
-        width: 701px;
+        width: $calendar-width * 2 + 1;
         display: flex;
         flex-wrap: wrap;
         @include m(daterange) {
@@ -62,13 +60,14 @@
       }
       @include b(date-panel-input-wrapper) {
         @include once {
-          flex: 1;
+          width: 100%;
           align-items: center;
         }
         @include e(arrow) {
           @include once {
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
+            margin: 0 8px;
             position: relative;
           }
           @include b(base-icon) {
@@ -86,22 +85,23 @@
       @include e(vertical-divider) {
         @include once {
           width: 1px;
-          height: calc(100% - 62px);
-          margin-top: 62px;
+          height: calc(100% - 64px);
+          margin-top: 64px;
         }
         background: $--date-picker-divider-color;
       }
     }
     @include b(date-panel-input-wrapper) {
       @include once {
-        padding: 14px 24px;
+        padding: 8px 14px;
         display: flex;
         justify-content: space-between;
         @include b(input) {
-          width: 145px;
+          margin-right: 10px;
+          flex: 1;
         }
         @include b(time-picker) {
-          width: 145px;
+          flex: 1;
         }
       }
       @include b(date-panel-date-input) {
@@ -117,10 +117,12 @@
     @include b(date-panel-month) {
       @include once {
         display: flex;
-        height: 41px;
+        box-sizing: border-box;
+        height: 30px;
         align-items: center;
-        padding-left: 24px;
-        padding-right: 24px;
+        padding-top: 8px;
+        padding-left: 14px;
+        padding-right: 14px;
         @include e(prev, next, fast-prev, fast-next) {
           cursor: pointer;
           width: 14px;
@@ -146,14 +148,14 @@
     }
     @include b(date-panel-weekdays) {
       @include once {
-        padding: 8px 24px 14px 24px;
+        padding: 9px 18px 10px 18px;
         display: flex;
         justify-content: space-between;
       }
       @include e(day) {
         @include once {
           line-height: 15px;
-          width: 30px;
+          width: 24px;
           text-align: center;
           font-size: 12px;
         }
@@ -162,7 +164,7 @@
     }
     @include b(date-panel-dates) {
       @include once {
-        padding: 8px 14px 8px 14px;
+        padding: 2px 11px 3px 11px;
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
@@ -174,8 +176,8 @@
           height: 24px;
           line-height: 24px;
           text-align: center;
-          font-size: 12px;
-          margin: 8px 11px;
+          font-size: 13px;
+          margin: 4px 7px;
           border-radius: 3px;
           z-index: 0;
           cursor: pointer;
@@ -213,8 +215,8 @@
                 content: "";
                 z-index: -1;
                 position: absolute;
-                left: -11px;
-                right: -11px;
+                left: -7px;
+                right: -7px;
                 top: 0;
                 bottom: 0;
               }
@@ -226,7 +228,7 @@
           @include once {
             border-radius: 3px;
             width: 24px;
-            margin: 8px 11px;
+            margin: 4px 7px;
           }
           color: map-get($--date-picker-item-text-color, 'active');
           background-color: map-get($--date-picker-item-background-color, 'active');
@@ -249,7 +251,7 @@
     }
     @include e(divider) {
       @include once {
-        margin: 0 24px;
+        margin: 0 14px;
         height: 1px;
       }
       background-color: $--date-picker-divider-color;
@@ -257,7 +259,7 @@
     @include b(date-panel-actions) {
       @include once {
         flex: 1;
-        height: 47px;
+        height: 38px;
         display: flex;
         align-items: center;
         justify-content: flex-end;

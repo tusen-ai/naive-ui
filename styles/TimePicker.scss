@@ -36,11 +36,12 @@
       font-size: 12px;
       border-radius: $--n-time-picker-border-radius;
       margin: 4px 0;
-      min-width: 140px;
+      min-width: 104px;
       overflow: hidden;
       @include fade-in-scale-up-transition(time-picker);
       @include b(time-picker-selector-actions) {
-        padding: 10px 0;
+        height: 38px;
+        align-items: center;
         display: flex;
         justify-content: space-evenly;
         @include e(confirm) {
@@ -55,7 +56,7 @@
     box-shadow: $--time-picker-box-shadow;
     @include b(time-picker-selector-time) {
       @include once {
-        height: 245px;
+        height: 224px;
         display: flex;
         position: relative;
       }
@@ -64,8 +65,8 @@
     @include b(time-picker-selector-time-row) {
       @include once {
         flex-grow: 1;
-        min-width: 60px;
-        height: 245px;
+        min-width: 52px;
+        height: 224px;
         flex-direction: column;
         transition: box-shadow .3s $--n-ease-in-out-cubic-bezier;
         @include m(transition-disabled) {
@@ -77,7 +78,7 @@
       @include e(item) {
         @include once {
           cursor: pointer;
-          height: 35px;
+          height: 32px;
           display: flex;
           align-items: center;
           justify-content: center;

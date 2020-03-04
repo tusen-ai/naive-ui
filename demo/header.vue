@@ -20,38 +20,45 @@
 </i18n>
 
 <template>
-  <div class="nav">
-    <div class="ui-logo" @click="handleLogoClick">
-      <img src="./assets/images/naivelogo.svg">
-      Naive UI ({{ version }})
-    </div>
-    <div style=" margin-left: 56px; display: flex; align-items: center;">
-      <n-auto-complete
-        v-model="searchInputValue"
-        style="width: 216px;"
-        :z-index="3001"
-        :placeholder="$t('searchPlaceholder')"
-        :options="searchOptions"
-        clear-after-select
-        blur-after-select
-        @select="handleSelect"
-      />
-      <div class="nav-menu">
-        <n-menu mode="horizontal" :value="menuValue" @select="handleMenuSelect">
-          <n-menu-item :title="$t('home')" name="home" />
-          <n-menu-item :title="$t('doc')" name="doc" />
-        </n-menu>
+  <n-layout-header
+    bordered
+    :style="{
+      zIndex: zIndex
+    }"
+  >
+    <div class="nav">
+      <div class="ui-logo" @click="handleLogoClick">
+        <img src="./assets/images/naivelogo.svg">
+        Naive UI ({{ version }})
+      </div>
+      <div style=" margin-left: 56px; display: flex; align-items: center;">
+        <n-auto-complete
+          v-model="searchInputValue"
+          style="width: 216px;"
+          :z-index="zIndex && zIndex + 1"
+          :placeholder="$t('searchPlaceholder')"
+          :options="searchOptions"
+          clear-after-select
+          blur-after-select
+          @select="handleSelect"
+        />
+        <div class="nav-menu">
+          <n-menu mode="horizontal" :value="menuValue" @select="handleMenuSelect">
+            <n-menu-item :title="$t('home')" name="home" />
+            <n-menu-item :title="$t('doc')" name="doc" />
+          </n-menu>
+        </div>
+      </div>
+      <div style="display: flex;">
+        <n-tag style="cursor: pointer; margin-right: 12px;" @click.native="handleThemeChange">
+          {{ themeOptions[theme].label }}
+        </n-tag>
+        <n-tag style="cursor: pointer;" @click.native="handleLanguageChange">
+          {{ langOptions[lang].label }}
+        </n-tag>
       </div>
     </div>
-    <div style="display: flex;">
-      <n-tag style="cursor: pointer; margin-right: 12px;" @click.native="handleThemeChange">
-        {{ themeOptions[theme].label }}
-      </n-tag>
-      <n-tag style="cursor: pointer;" @click.native="handleLanguageChange">
-        {{ langOptions[lang].label }}
-      </n-tag>
-    </div>
-  </div>
+  </n-layout-header>
 </template>
 
 <script>
@@ -104,6 +111,10 @@ export default {
     }
   },
   computed: {
+    zIndex () {
+      const path = this.$route.path
+      return (path.endsWith('n-modal') || path.endsWith('n-drawer')) ? null : 3000
+    },
     theme () {
       return this.NConfigProvider.$parent.theme
     },

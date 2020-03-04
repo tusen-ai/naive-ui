@@ -72,7 +72,7 @@
                     {{ hour }}
                   </div>
                   <div
-                    style="height: 210px;"
+                    style="height: 192px;"
                   />
                 </n-scrollbar>
               </div>
@@ -98,7 +98,7 @@
                     {{ minute }}
                   </div>
                   <div
-                    style="height: 210px;"
+                    style="height: 192px;"
                   />
                 </n-scrollbar>
               </div>
@@ -125,7 +125,7 @@
                     {{ second }}
                   </div>
                   <div
-                    style="height: 210px;"
+                    style="height: 192px;"
                   />
                 </n-scrollbar>
               </div>
@@ -583,6 +583,7 @@ export default {
     handleMenuFocus (e) {
       const panel = this.$refs.panel
       if (
+        keyboardDelegate.tabPressed &&
         e.target === panel &&
         panel.contains(e.relatedTarget)
       ) {

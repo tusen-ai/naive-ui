@@ -3,7 +3,6 @@
     ref="layout"
     :padding-body="false"
     :items="items"
-    :header-z-index="3000"
   >
     <router-view />
   </n-nimbus-service-layout>

@@ -4,7 +4,7 @@ For example, javascript, python and cpp.
 <div style="overflow: auto;">
   <n-code :code="`
 function sleep (ms = 1000) {
-  return new Promise(res => setTimeout(res, ms))
+  return new Promise(resolve => setTimeout(resolve, ms))
 }
 `" language="javascript" />
 

@@ -186,6 +186,7 @@ const devtoolIsOpened = e.target === document.activeElement
 63. Anchor 初次滚动的逻辑是不是要手动调整一下，现在位置实际上不一致
 64. <del>将所有的 Typography 组件改为非 Functional 的，因为获取不到 context 本身的主题</del>
 65. 搞明白 table layout 这个 css 属性是在干什么
+66. Icon 颜色
 
 ```
 Done

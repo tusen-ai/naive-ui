@@ -12,6 +12,7 @@ clearable
 autosize
 pair
 input-group
+passively-activated
 ```
 ## V-model
 |Prop|Event|

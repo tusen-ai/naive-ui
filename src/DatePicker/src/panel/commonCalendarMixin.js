@@ -72,6 +72,7 @@ export default {
     },
     handlePanelFocus (e) {
       if (
+        keyboardDelegate.tabPressed &&
         e.target === this.$el &&
         this.$el.contains(e.relatedTarget)
       ) {

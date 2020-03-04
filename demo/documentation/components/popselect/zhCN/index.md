@@ -5,7 +5,8 @@
 ## 演示
 ```demo
 basic
-cancelable
+size
+scrollable
 custom-width
 multiple
 ```
@@ -18,14 +19,15 @@ multiple
 
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|value|`string \| number`|||
-|options|`Array`|||
-|width|`number \| string`|||
-|multiple|`boolean`|||
-|cancelable|`boolean`|||
-|controller|`Object`|||
-|arrow|`boolean`|||
-|trigger|`'click' \| 'hover' \| 'manual'`|||
+|value|`string \| number`|`null`||
+|options|`Array<SelectOption \| SelectOptionGroup>`|`[]`||
+|scrollable|`boolean`|`true`||
+|multiple|`boolean`|`false`||
+|size|`'small' \| 'medium' \| 'large'`|`'small'`||
+
+对于 SelectOption & SelectOptionGroup，参考 [Select](n-select#SelectOption-Type)
+
+对于其他 props，参考 [Popover](n-popover#Props)
 
 ## Events
 |名称|参数|说明|

@@ -1,15 +1,14 @@
-# 无边框 & 单行
+# Size
 
 ```html
 <n-data-table
-  :bordered="false"
+  size="small"
   :columns="columns"
   :data="data"
   :pagination="pagination"
 />
 <n-data-table
-  :bordered="false"
-  :single-line="false"
+  size="large"
   :columns="columns"
   :data="data"
   :pagination="pagination"
@@ -113,5 +112,11 @@ export default {
       this.$NMessage.info('send mail to ' + rowData.name)
     }
   }
+}
+```
+
+```css
+.n-data-table {
+  margin-bottom: 12px;
 }
 ```

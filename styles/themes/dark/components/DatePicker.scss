@@ -5,12 +5,12 @@
   $--date-picker-item-text-color: (
     'inactive': $--n-disabled-text-color,
     'default': $--n-secondary-text-color,
-    'active': $--n-modal-background-color,
+    'active': $--n-popover-background-color,
     'current': $--n-primary-color
   ) !global;
   $--date-picker-item-sup-color: (
     'default': $--n-primary-color,
-    'active': $--n-modal-background-color
+    'active': $--n-popover-background-color
   ) !global;
   $--date-picker-month-text-color: $--n-primary-text-color !global;
   $--date-picker-item-background-color: (

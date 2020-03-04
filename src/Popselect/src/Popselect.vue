@@ -19,6 +19,7 @@ export default {
     event: 'change'
   },
   props: {
+    ...NPopover.props,
     options: {
       type: Array,
       default: null
@@ -29,10 +30,6 @@ export default {
       },
       default: null
     },
-    width: {
-      type: Number,
-      default: null
-    },
     multiple: {
       type: Boolean,
       default: false
@@ -41,38 +38,24 @@ export default {
       type: Boolean,
       default: false
     },
-    controller: {
-      type: Object,
-      default: null
+    size: {
+      validator (value) {
+        return ['small', 'medium', 'large'].includes(value)
+      },
+      default: 'small'
     },
-    showArrow: {
+    scrollable: {
       type: Boolean,
       default: false
-    },
-    show: {
-      type: Boolean,
-      default: false
-    },
-    trigger: {
-      type: String,
-      default: 'click'
-    },
-    zIndex: {
-      type: Number,
-      default: undefined
-    }
-  },
-  methods: {
-    handleInput (v) {
-      this.$emit('input', v)
     }
   },
   render (h, context) {
     const slots = context.scopedSlots
     const activator = slots.activator || slots.default
     const controller = context.props.controller || {}
-    const onHide = context.listeners.hide || (() => {})
-    const onShow = context.listeners.show || (() => {})
+    const handleHide = context.listeners.hide || (() => {})
+    const handleShow = context.listeners.show || (() => {})
+    const handleChange = context.listeners.change || (() => {})
     return h(NPopover, {
       props: {
         trigger: context.props.trigger,
@@ -82,8 +65,8 @@ export default {
         controller
       },
       on: {
-        show: onShow,
-        hide: onHide
+        show: handleShow,
+        hide: handleHide
       },
       scopedSlots: {
         activator: () => activator(),
@@ -93,7 +76,9 @@ export default {
               ...context.props,
               controller
             },
-            on: context.listeners
+            on: {
+              change: handleChange
+            }
           })
       }
     })

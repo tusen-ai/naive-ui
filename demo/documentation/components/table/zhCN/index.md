@@ -6,6 +6,7 @@
 ```demo
 basic
 bordered
+size
 single-column
 single-line
 ```
@@ -20,4 +21,5 @@ single-line
 |bordered|`boolean`|`true`||
 |single-line|`boolean`|`true`||
 |single-column|`boolean`|`false`||
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 

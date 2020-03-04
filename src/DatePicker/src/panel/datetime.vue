@@ -2,7 +2,6 @@
   <transition name="n-date-panel-transition">
     <div
       v-if="active"
-      ref="self"
       tabindex="0"
       class="n-date-panel"
       :class="{
@@ -16,6 +15,7 @@
       >
         <n-input
           v-model="displayDateString"
+          size="small"
           class="n-date-panel-date-input"
           :class="{
             'n-date-panel-date-input--invalid': isDateInvalid
@@ -26,6 +26,7 @@
         />
         <n-time-picker
           :format="timeFormat"
+          size="small"
           position-mode="absolute"
           :detached="false"
           :value="value"
