@@ -25,7 +25,7 @@ manual-position
 |delay|`number`|`0`||
 |duration|`number`|`300`||
 |placement|`'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| `|`'bottom'`||
-|arrow|`boolean`|`false`||
+|show-arrow|`boolean`|`false`||
 |raw|`boolean`|`false`||
 |disabled|`boolean`|`false`||
 |manuallyPositioned|`boolean`|`false`||

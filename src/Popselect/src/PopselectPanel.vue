@@ -3,11 +3,12 @@
     :theme="syntheticTheme"
     :multiple="multiple"
     :options="options"
-    :loading="loading"
+    :size="size"
     :is-option-selected="isSelected"
     :width="width"
     :virtual-scroll="false"
-    size="small"
+    :show-tracking-rect="false"
+    :scrollable="scrollable"
     @menu-toggle-option="handleMenuToggleOption"
   />
 </template>
@@ -49,18 +50,17 @@ export default {
       type: Object,
       default: null
     },
-    loading: {
+    size: {
+      type: String,
+      default: null
+    },
+    scrollable: {
       type: Boolean,
-      default: false
+      default: true
     }
   },
   watch: {
     options () {
-      this.$nextTick().then(() => {
-        this.controller && this.controller.updatePosition()
-      })
-    },
-    loading () {
       this.$nextTick().then(() => {
         this.controller && this.controller.updatePosition()
       })

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="withoutScrollbar" ref="scrollContent">
+  <div v-if="!scrollable" ref="scrollContent">
     <slot />
   </div>
   <div
@@ -99,9 +99,9 @@ export default {
       type: Number,
       default: 0
     },
-    withoutScrollbar: {
+    scrollable: {
       type: Boolean,
-      default: false
+      default: true
     },
     container: {
       type: Function,
@@ -279,7 +279,7 @@ export default {
       }
     },
     scrollToElement (el, getTop = elm => elm.offsetTop, getHeight = elm => elm.offsetHeight) {
-      if (this.withoutScrollbar) return
+      if (!this.scrollable) return
       const top = getTop(el)
       const container = this._container()
       if (top < container.scrollTop) {
@@ -386,7 +386,7 @@ export default {
       }
     },
     updateParameters () {
-      if (this.withoutScrollbar) return
+      if (!this.scrollable) return
       this.updatePositionParameters()
       this.updateScrollParameters()
     },
