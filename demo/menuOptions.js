@@ -42,7 +42,7 @@ const appendDebugDemos = (item, mode) => {
   } else return []
 }
 
-export default function (locale, instance, mode) {
+export default function (locale, instance) {
   if (locale === 'zh-CN') {
     if (env === 'development') {
       return [
@@ -1461,7 +1461,7 @@ export default function (locale, instance, mode) {
                 path: `/${instance.lang}/${instance.theme}/${instance.mode}/doc` + '/n-select-debug'
               }
             ]
-          }, mode)
+          }, instance.mode)
       ]
     } else {
       return [
@@ -1846,7 +1846,7 @@ export default function (locale, instance, mode) {
                 path: `/${instance.lang}/${instance.theme}/doc` + '/n-select-debug'
               }
             ]
-          }, mode)
+          }, instance.mode)
       ]
     }
   }

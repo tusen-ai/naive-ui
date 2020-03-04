@@ -44,7 +44,7 @@ export default {
       return process.env.NODE_ENV
     },
     items () {
-      return menuOptions(this.lang, this, this.mode)
+      return menuOptions(this.lang, this)
     },
     flattenedItems () {
       const flattenedItems = []
