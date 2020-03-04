@@ -234,78 +234,40 @@ const children = [
   },
   { path: '/n-select-debug', component: selectDebug }
 ]
-let routes = []
-if (env === 'development') {
-  routes = [
-    {
-      path: '/:lang/:theme/:mode/n-popover-debug',
-      component: popoverDebug
-    },
-    {
-      path: '/:lang/:theme/:mode/n-back-top-debug',
-      component: backTopDebug
-    },
-    {
-      path: '/:lang/:theme/:mode/n-cascader-debug',
-      component: cascaderDebug
-    },
-    {
-      path: '/:lang/:theme/:mode',
-      component: Entry,
-      children: [
-        {
-          path: '/:lang/:theme/:mode',
-          component: LandingPage,
-          name: 'home'
-        },
-        {
-          path: '/:lang/:theme/:mode/doc',
-          component: DocEntry,
-          children: withPrefix('/:lang/:theme/:mode/doc', children)
-        }
-      ]
-    },
-    {
-      path: '/*',
-      redirect: '/zh-CN/light/debug'
-    }
-  ]
-} else {
-  routes = [
-    {
-      path: '/:lang/:theme/n-popover-debug',
-      component: popoverDebug
-    },
-    {
-      path: '/n-back-top-debug',
-      component: backTopDebug
-    },
-    {
-      path: '/n-cascader-debug',
-      component: cascaderDebug
-    },
-    {
-      path: '/:lang/:theme',
-      component: Entry,
-      children: [
-        {
-          path: '/:lang/:theme',
-          component: LandingPage,
-          name: 'home'
-        },
-        {
-          path: '/:lang/:theme/doc',
-          component: DocEntry,
-          children: withPrefix('/:lang/:theme/doc', children)
-        }
-      ]
-    },
-    {
-      path: '/*',
-      redirect: '/zh-CN/light'
-    }
-  ]
-}
+const routes = [
+  {
+    path: '/:lang/:theme/n-popover-debug',
+    component: popoverDebug
+  },
+  {
+    path: '/n-back-top-debug',
+    component: backTopDebug
+  },
+  {
+    path: '/n-cascader-debug',
+    component: cascaderDebug
+  },
+  {
+    path: '/:lang/:theme',
+    component: Entry,
+    children: [
+      {
+        path: '/:lang/:theme',
+        component: LandingPage,
+        name: 'home'
+      },
+      {
+        path: '/:lang/:theme/doc',
+        component: DocEntry,
+        children: withPrefix('/:lang/:theme/doc', children)
+      }
+    ]
+  },
+  {
+    path: '/*',
+    redirect: '/zh-CN/light'
+  }
+]
 
 const router = new VueRouter({
   mode: 'history',

@@ -57,6 +57,7 @@
 
 <script>
 import mdCode from '../../src/_icons/md-code'
+import { state } from '../store'
 
 export default {
   components: {
@@ -74,12 +75,13 @@ export default {
       controller: {},
       isShow: true,
       name: '',
-      isDebug: false
+      isDebug: false,
+      state: state
     }
   },
   computed: {
     mode () {
-      return this.$route.params.mode
+      return this.state.mode
     }
   },
   watch: {

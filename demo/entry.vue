@@ -6,6 +6,7 @@
           :lang="lang"
           :items="flattenedItems"
           :env="env"
+          :mode="mode"
           @lang-change="handleLangChange"
           @mode-change="handleModeChange"
         />
@@ -21,6 +22,7 @@
 import DocHeader from './header.vue'
 import menuOptions from './menuOptions'
 import { i18n } from './init'
+import { setState } from './store'
 
 export default {
   components: {
@@ -38,6 +40,12 @@ export default {
   beforeRouteUpdate (to, from, next) {
     this.$i18n.locale = to.params.lang
     next()
+    this.mode = localStorage.getItem('mode')
+  },
+  data () {
+    return {
+      mode: localStorage.getItem('mode') ? localStorage.getItem('mode') : 'debug'
+    }
   },
   computed: {
     env () {
@@ -74,14 +82,6 @@ export default {
       set (theme) {
         this.$router.push(changeThemeInPath(this.$route.fullPath, theme))
       }
-    },
-    mode: {
-      get () {
-        return this.$route.params.mode === 'debug' ? 'debug' : 'common'
-      },
-      set (mode) {
-        this.$router.push(changeModeInPath(this.$route.fullPath, mode))
-      }
     }
   },
   methods: {
@@ -90,6 +90,8 @@ export default {
     },
     handleModeChange (mode) {
       this.mode = mode
+      localStorage.setItem('mode', mode)
+      setState(mode)
     }
   }
 }
@@ -102,11 +104,6 @@ function changeLangInPath (path, lang) {
 function changeThemeInPath (path, theme) {
   const themeReg = /(^\/[^/]+\/)([^/]+)/
   return path.replace(themeReg, '$1' + theme)
-}
-
-function changeModeInPath (path, mode) {
-  const modeReg = /(^\/[^/]+\/[^/]+\/)([^/]+)/
-  return path.replace(modeReg, '$1' + mode)
 }
 </script>
 

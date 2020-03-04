@@ -99,13 +99,16 @@ export default {
     env: {
       type: String,
       default: null
+    },
+    mode: {
+      type: String,
+      default: null
     }
   },
   data () {
     return {
       searchInputValue: '',
       version,
-      mode: 'debug',
       themeOptions: {
         dark: {
           label: 'Light',
@@ -175,18 +178,6 @@ export default {
         }
       ]
     }
-    // modeOptions () {
-    //   return [
-    //     {
-    //       label: this.$t('common'),
-    //       next: 'common'
-    //     },
-    //     {
-    //       label: this.$t('debug'),
-    //       next: 'debug'
-    //     }
-    //   ]
-    // }
   },
   methods: {
     handleLogoClick () {
@@ -195,7 +186,7 @@ export default {
         return
       }
       this.$router.push(
-        /^(\/[^/]+){3}/.exec(this.$route.path)[0]
+        /^(\/[^/]+){2}/.exec(this.$route.path)[0]
       )
     },
     handleSelect (value) {
@@ -204,14 +195,14 @@ export default {
     handleMenuSelect (value) {
       if (value === 'home') {
         this.$router.push(
-          /^(\/[^/]+){3}/.exec(this.$route.path)[0]
+          /^(\/[^/]+){2}/.exec(this.$route.path)[0]
         )
       } if (value === 'doc') {
-        if (/^(\/[^/]+){3}\/doc/.test(this.$route.path)) {
+        if (/^(\/[^/]+){2}\/doc/.test(this.$route.path)) {
 
         } else {
           this.$router.push(
-            /^(\/[^/]+){3}/.exec(this.$route.path)[0] + '/doc/start'
+            /^(\/[^/]+){2}/.exec(this.$route.path)[0] + '/doc/start'
           )
         }
       }
@@ -221,8 +212,7 @@ export default {
     },
 
     handleModeChange () {
-      this.mode = this.modeOptions[this.mode].next
-      this.$emit('mode-change', this.mode)
+      this.$emit('mode-change', this.modeOptions[this.mode].next)
     },
     handleLanguageChange () {
       this.$emit('lang-change', this.langOptions[this.lang].next)
