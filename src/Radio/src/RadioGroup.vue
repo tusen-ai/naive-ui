@@ -73,7 +73,9 @@ function mapSlot (h, defaultSlot, groupInstance) {
 
 export default {
   name: 'NRadioGroup',
-  mixins: [withapp, themeable, hollowoutable, asformitem()],
+  mixins: [withapp, themeable, hollowoutable, asformitem({
+    change: 'change'
+  }, 'small')],
   model: {
     prop: 'value',
     event: 'change'
@@ -88,7 +90,7 @@ export default {
       default: null
     },
     size: {
-      default: 'small',
+      default: undefined,
       validator (value) {
         return ['small', 'medium', 'large'].includes(value)
       }
@@ -123,7 +125,7 @@ export default {
       staticClass: 'n-radio-group',
       class: {
         [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
-        [`n-radio-group--${this.size}-size`]: this.size,
+        [`n-radio-group--${this.syntheticSize}-size`]: this.syntheticSize,
         [`n-radio-group--button-group`]: isButtonGroup,
         [`n-radio-group--transition-disabled`]: isButtonGroup && this.transitionDisabled
       }

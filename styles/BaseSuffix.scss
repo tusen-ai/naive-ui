@@ -10,13 +10,13 @@
       height: 12px;
       width: 12px;
       vertical-align: bottom;
-    }
-    @include b(base-suffix-spin) {
-      @include icon-switch-transition();
-      transform: $--n-transform-debounce-scale;
-      position: absolute;
-      height: 12px;
-      width: 12px;
+      @include b(base-suffix-spin) {
+        @include icon-switch-transition();
+        transform: $--n-transform-debounce-scale;
+        position: absolute;
+        height: 12px;
+        width: 12px;
+      }
     }
     @include b(base-suffix-cross) {
       @include once {
@@ -101,28 +101,30 @@
   }
   @include as-form-item {
     @include with-status(error) {
-      @include b(base-suffix-cross) {
-        @include m(arrow) {
-          @include e(icon) {
-            fill: map-get($--base-suffix-cross-color, "error-hover");
+      @include b(base-suffix) {
+        @include b(base-suffix-cross) {
+          @include m(arrow) {
+            @include e(icon) {
+              fill: map-get($--base-suffix-cross-color, "error-hover");
+            }
+          }
+          &:hover {
+            @include e(icon) {
+              fill: map-get($--base-suffix-cross-color, "error-hover");
+            }
+          }
+          &:active {
+            @include e(icon) {
+              fill: map-get($--base-suffix-cross-color, "error-active");
+            }
           }
         }
-        &:hover {
-          @include e(icon) {
-            fill: map-get($--base-suffix-cross-color, "error-hover");
-          }
-        }
-        &:active {
-          @include e(icon) {
-            fill: map-get($--base-suffix-cross-color, "error-active");
-          }
-        }
-      }
-      @include b(base-suffix-arrow) {
-        @include m(active) {
-          &::after {
-            border-left: 1px solid map-get($--base-suffix-arrow-color, 'error-active');
-            border-bottom: 1px solid map-get($--base-suffix-arrow-color, 'error-active');
+        @include b(base-suffix-arrow) {
+          @include m(active) {
+            &::after {
+              border-left: 1px solid map-get($--base-suffix-arrow-color, 'error-active');
+              border-bottom: 1px solid map-get($--base-suffix-arrow-color, 'error-active');
+            }
           }
         }
       }
