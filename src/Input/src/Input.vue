@@ -12,6 +12,7 @@
       'n-input--focus': syntheticFocus,
       'n-input--suffix': $slots.suffix,
       'n-input--prefix': $slots.prefix || $slots.affix,
+      'n-input--stateful': stateful,
       [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
     :tabindex="!disabled && (passivelyActivated && !inputFocused) ? 0 : false"
@@ -240,6 +241,10 @@ export default {
     passivelyActivated: {
       type: Boolean,
       default: false
+    },
+    stateful: {
+      type: Boolean,
+      default: true
     }
   },
   data () {

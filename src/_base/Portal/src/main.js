@@ -1,20 +1,32 @@
 export default {
   name: 'NBasePortal',
+  inject: {
+    NModal: {
+      default: null
+    }
+  },
   props: {
     onMounted: {
       type: Function,
       default: null
+    },
+    target: {
+      type: Function,
+      default: () => document.body
     }
   },
   mounted () {
     if (this.onMounted) this.onMounted()
+    if (!this.transferable) return
     if (this.$el.parentElement && !this.elementTransferred) {
       this.$el.parentElement.removeChild(this.$el)
     }
   },
   beforeDestroy () {
-    if (document.body.contains(this.$el)) {
-      document.body.removeChild(this.$el)
+    if (!this.transferable) return
+    const target = this.target()
+    if (target.contains(this.$el)) {
+      target.removeChild(this.$el)
     }
   },
   data () {
@@ -22,10 +34,16 @@ export default {
       elementTransferred: false
     }
   },
+  computed: {
+    transferable () {
+      return !this.NModal
+    }
+  },
   methods: {
     transferElement () {
+      if (!this.transferable) return
       if (!this.elementTransferred) {
-        document.body.appendChild(this.$el)
+        this.target.appendChild(this.$el)
         this.elementTransferred = true
       }
     }

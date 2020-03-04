@@ -325,12 +325,12 @@ export default {
       if (this.virtualScroll) {
         if (index !== null) {
           this.pendingWrappedOption = this.flattenedOptions[index]
-          const itemSize = this.itemSize
-          const offsetTop = itemSize * index
+          const size = this.itemSize
+          const offsetTop = size * index
           this.updateTrackingRectTop({
             offsetTop
           })
-          doScroll && this.$refs.scrollbar.scrollToElement({}, () => offsetTop, () => itemSize)
+          doScroll && this.$refs.scrollbar.scrollToElement({}, () => offsetTop, () => size)
         }
       } else {
         this.pendingWrappedOption = this.flattenedOptions[index]

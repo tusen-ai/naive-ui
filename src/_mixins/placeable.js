@@ -130,10 +130,14 @@ function getPositionInAbsoluteMode (placement) {
  * @prop {string} widthMode determine how width is $refs.contentInner
  */
 export default {
+  inject: {
+    NModal: {
+      default: null
+    }
+  },
   props: {
     positionMode: {
-      type: String,
-      default: 'fixed',
+      default: null,
       validator (value) {
         return ['fixed', 'absolute'].includes(value)
       }
@@ -181,8 +185,18 @@ export default {
     }
   },
   computed: {
+    syntheticPositionMode () {
+      const positionMode = this.positionMode
+      if (positionMode !== null) {
+        return positionMode
+      }
+      if (this.NModal) {
+        return 'absolute'
+      }
+      return 'fixed'
+    },
     positionModeisAbsolute () {
-      return this.positionMode === 'absolute'
+      return this.syntheticPositionMode === 'absolute'
     }
   },
   watch: {

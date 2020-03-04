@@ -122,6 +122,12 @@ $default-theme: 'light';
   }
 }
 
+@mixin as-modal-content {
+  &.#{$namespace}-modal-content {
+    @content;
+  }
+}
+
 @mixin once() {
   @if not $common-css-attrs-generated {
     @content;

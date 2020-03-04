@@ -9,7 +9,12 @@ import withapp from './withapp'
  * @prop {HTMLElement} detachTarget determine where should $refs.contentContainer to be detached
  */
 export default {
-  mixins: [withapp],
+  mixins: [ withapp ],
+  inject: {
+    NModal: {
+      default: null
+    }
+  },
   props: {
     detachTarget: {
       validator () {
@@ -17,20 +22,27 @@ export default {
       },
       default: () => document.body
     },
-    detached: {
+    detachable: {
       type: Boolean,
-      default: true
+      default: null
     }
   },
   watch: {
     active (value) {
-      // console.log('activeChange')
-      if (this.detached) {
+      if (this.syntheticDetachable) {
         if (value && !this.contentContainerMounted) {
           this.contentContainerMounted = true
           this.appendContent()
         }
       }
+    }
+  },
+  computed: {
+    syntheticDetachable () {
+      const detachable = this.detachable
+      if (detachable !== null) return detachable
+      if (this.NModal) return false
+      return true
     }
   },
   data () {
@@ -57,17 +69,16 @@ export default {
     }
   },
   mounted () {
-    if (this.detached) {
+    if (this.syntheticDetachable) {
       this.detachContent()
       if (this.active && !this.contentContainerMounted) {
         this.contentContainerMounted = true
         this.appendContent()
       }
     }
-    // this.appendContent()
   },
   beforeDestroy () {
-    if (this.detached) {
+    if (this.syntheticDetachable) {
       if (this.detachTarget.contains(this.$refs.contentContainer)) {
         this.detachTarget.removeChild(this.$refs.contentContainer)
       }

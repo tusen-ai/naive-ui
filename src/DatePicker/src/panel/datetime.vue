@@ -15,6 +15,7 @@
       >
         <n-input
           v-model="displayDateString"
+          :stateful="false"
           size="small"
           class="n-date-panel-date-input"
           :class="{
@@ -26,9 +27,10 @@
         />
         <n-time-picker
           :format="timeFormat"
+          :stateful="false"
           size="small"
           position-mode="absolute"
-          :detached="false"
+          :detachable="false"
           :value="value"
           :placeholder="localeNamespace.selectTime"
           stop-selector-bubble

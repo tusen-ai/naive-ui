@@ -4,6 +4,7 @@
   @include b(scrollbar) {
     @include once {
       position: relative;
+      z-index: auto;
       height: 100%;
     }
     & > {

@@ -161,6 +161,19 @@ export default {
     placement: {
       type: String,
       default: 'top'
+    },
+    /** temporal fix, not final solution */
+    detachable: {
+      type: Boolean,
+      default: true
+    },
+    positionMode: {
+      type: String,
+      default: 'fixed'
+    },
+    zindexable: {
+      type: Boolean,
+      default: true
     }
   },
   data () {

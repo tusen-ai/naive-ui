@@ -87,7 +87,7 @@ export default {
   data () {
     return {
       /** for zindexable, shouldn't be changed */
-      detached: true
+      zindexable: true
     }
   },
   computed: {

@@ -5,33 +5,37 @@
 @import './themes/light/index.scss';
 @import './mixins/mixins.scss';
 
-@include themes-mixin {
-  @include once {
-    body {
-      margin: 0;
-      font-size: 14px;
-      font-family: $--n-font-family;
-    }
-    
-    input {
-      font-family: $--n-font-family;
-      font-size: inherit;
-    }
-    
-    @include b(positioning-container) {
-      position: fixed;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      pointer-events: none;
-      transform: translateZ(0);
-      @include m(absolute) {
-        position: absolute;
-      }
-      @include b(positioning-content) {
-        pointer-events: all;
-      }
-    }
+body {
+  margin: 0;
+  font-size: 14px;
+  font-family: $--n-font-family;
+}
+
+input {
+  font-family: $--n-font-family;
+  font-size: inherit;
+}
+
+@include b(positioning-container) {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+  transform: translateZ(0);
+  @include b(positioning-content) {
+    pointer-events: all;
+  }
+}
+
+@include b(modal-content) {
+  @include b(positioning-container) {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
   }
 }
