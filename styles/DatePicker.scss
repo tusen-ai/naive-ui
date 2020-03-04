@@ -93,7 +93,7 @@
     }
     @include b(date-panel-input-wrapper) {
       @include once {
-        padding: 6px 14px;
+        padding: 8px 14px;
         display: flex;
         justify-content: space-between;
         @include b(input) {
@@ -259,7 +259,7 @@
     @include b(date-panel-actions) {
       @include once {
         flex: 1;
-        height: 40px;
+        height: 38px;
         display: flex;
         align-items: center;
         justify-content: flex-end;
