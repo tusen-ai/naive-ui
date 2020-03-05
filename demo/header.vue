@@ -129,7 +129,7 @@ export default {
       },
       modeOptions: {
         'debug': {
-          label: 'Common',
+          label: 'Production',
           next: 'common'
         },
         'common': {
@@ -212,7 +212,6 @@ export default {
     handleThemeChange () {
       this.NConfigProvider.$parent.theme = this.themeOptions[this.theme].next
     },
-
     handleModeChange () {
       this.$emit('mode-change', this.modeOptions[this.mode].next)
     },

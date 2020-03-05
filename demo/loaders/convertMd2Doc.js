@@ -36,7 +36,13 @@ function parseDemosAsAnchor (demosLiteral) {
     .split('\n')
     .map(demoName => demoName.trim())
     .filter(demoName => demoName.length)
-  const linkTags = demoNames.map(demoName => `<n-anchor-link :title="anchorLinkMap.get('${kababCase(demoName)}') || ''" href="#${kababCase(demoName)}"/>`)
+  const linkTags = demoNames.map(demoName => (
+    `
+<n-anchor-link
+  v-if="anchorLinkMap.has('${kababCase(demoName)}')"
+  :title="anchorLinkMap.get('${kababCase(demoName)}')"
+  href="#${kababCase(demoName)}"
+/>`))
   return `<n-anchor :top="24" :bound="16" position="absolute" affix style="width: 144px;">${linkTags.join('\n')}</n-anchor>`
 }
 

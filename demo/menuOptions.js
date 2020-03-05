@@ -50,7 +50,7 @@ export default function (locale, instance) {
         path: `/${instance.lang}/${instance.theme}/doc` + '/intro'
       },
       {
-        name: 'Getting Started',
+        name: 'Get Started',
         title: '起步',
         path: `/${instance.lang}/${instance.theme}/doc` + '/start'
       },
@@ -566,7 +566,7 @@ export default function (locale, instance) {
         path: `/${instance.lang}/${instance.theme}/doc` + '/intro'
       },
       {
-        name: 'Getting Started',
+        name: 'Get Started',
         path: `/${instance.lang}/${instance.theme}/doc` + '/start'
       },
       // {

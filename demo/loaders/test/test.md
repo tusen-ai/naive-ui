@@ -1,4 +1,4 @@
-# Getting Started
+# Get Started
 
 ## Installation
 First install it.

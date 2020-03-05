@@ -288,4 +288,8 @@ router.afterEach(function (to, from) {
   }
 })
 
+if (!localStorage.mode) {
+  localStorage.mode = 'debug'
+}
+
 export { Vue, router, i18n, hljs }
