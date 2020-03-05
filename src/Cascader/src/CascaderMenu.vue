@@ -135,7 +135,7 @@ export default {
     return {
       trackId: null,
       /** for zindexable, shouldn't be changed */
-      detached: true
+      zindexable: true
     }
   },
   computed: {

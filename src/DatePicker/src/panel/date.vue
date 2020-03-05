@@ -2,7 +2,6 @@
   <transition name="n-date-panel-transition">
     <div
       v-if="active"
-      ref="self"
       tabindex="0"
       class="n-date-panel"
       :class="{
@@ -12,7 +11,7 @@
       @focus="handlePanelFocus"
       @keydown="handlePanelKeyDown"
     >
-      <div style="width: 100%; height: 12px" />
+      <div style="width: 100%; height: 3px" />
       <div class="n-date-panel-month">
         <div
           class="n-date-panel-month__fast-prev"

@@ -6,6 +6,7 @@ If you only want to render some basic table, use it. If you want to render struc
 ```demo
 basic
 bordered
+size
 single-column
 single-line
 ```
@@ -20,4 +21,4 @@ You can use `n-table`, `n-thead`, `n-tbody`, `n-tr`, `n-th` and `n-td`.
 |bordered|`boolean`|`true`||
 |single-line|`boolean`|`true`||
 |single-column|`boolean`|`false`||
-
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||

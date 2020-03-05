@@ -50,7 +50,7 @@ export default {
         'n-base-select-option--disabled': data.disabled,
         'n-base-select-option--grouped': this.grouped
       },
-      attrs: { 'n-index': this.index },
+      attrs: { 'n-option-index': this.index },
       style: data.style,
       on: {
         click: this.handleClick,

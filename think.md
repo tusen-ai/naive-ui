@@ -135,7 +135,7 @@ const devtoolIsOpened = e.target === document.activeElement
 12. <del>CSS 整理</del> 暂且算做完了
 13. <del>落地页</del>
 14. <del>按需引入 babel plugin</del> 这个不做了，收益不大，工作量不小
-15. form table 需要 size
+15. <del>form table 需要 size</del>
 16. <del>input number 需要一个小型的</del> 目前看来也不是很必要，input number 其实可以很小
 17. <del>layout scroll api</del>
 18. <del>cascader select menu disabled 选项</del>
@@ -173,12 +173,12 @@ const devtoolIsOpened = e.target === document.activeElement
 50. <del>data-table 的 header height 为啥要固定？因为固定列的问题，sticky 解决了就没事</del>
 51. <del>scrollbar 在平时不显示用不到的 rail</del>
 52. <del>placeholder transition 对 firefox 做兼容</del>
-53. 调整 date picker 的尺寸
+53. <del>调整 date picker 的尺寸</del>s
 54. <del>Select option 右侧 padding 调整</del>
 55. <del>Popover arrow shadow 调整</del>
 56. <del>Input number 按钮样式调整</del>
 57. 一部分组件在 Modal 内部的样式
-58. 更新 Progress 文档
+58. <del>更新 Progress 文档</del>
 59. <del>为所有的数据录入组件的尺寸</del>
 60. 审核文档
 61. <del>调整 transfer 的样式</del>
@@ -186,6 +186,9 @@ const devtoolIsOpened = e.target === document.activeElement
 63. Anchor 初次滚动的逻辑是不是要手动调整一下，现在位置实际上不一致
 64. <del>将所有的 Typography 组件改为非 Functional 的，因为获取不到 context 本身的主题</del>
 65. 搞明白 table layout 这个 css 属性是在干什么
+66. Icon 颜色
+67. Modal 滚动之后的 transform origin
+68. Slider 对于 modal 适配
 
 ```
 Done

@@ -23,7 +23,7 @@
           <n-confirm
             v-if="preset === 'confirm'"
             ref="confirm"
-            :style="bodyStyle"
+            :style="overlayStyle"
             :theme="theme"
             :title="title"
             :closable="closable"
@@ -47,7 +47,7 @@
           </n-confirm>
           <n-card
             v-else-if="preset === 'card'"
-            :style="bodyStyle"
+            :style="overlayStyle"
             :title="title"
             :closable="closable"
             :size="size"

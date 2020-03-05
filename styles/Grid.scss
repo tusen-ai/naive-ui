@@ -27,11 +27,13 @@
   box-sizing: border-box;
   display: inline-block;
   position: relative;
+  z-index: auto;
   @for $i from 1 through 24 {
     @include col-size-mixin($i);
   }
   @include e(box) {
     position: relative;
+    z-index: auto;
     width: 100%;
     height: 100%;
   }

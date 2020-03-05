@@ -8,7 +8,7 @@ import zIndexManager from '../_utils/dom/zIndexManager'
  * dependency:
  * $refs.contentContainer
  * $vm.active
- * $vm.detached
+ * $vm.syntheticDetachable
  */
 export default {
   props: {
@@ -18,12 +18,12 @@ export default {
     }
   },
   mounted () {
-    if (!this.detached) return
+    if (!this.syntheticDetachable && !this.zindexable) return
     if (this.active) this._initZindexable()
   },
   watch: {
     active (value) {
-      if (!this.detached) return
+      if (!this.syntheticDetachable && !this.zindexable) return
       console.debug('[zindexable.watch.active]:', value)
       if (value) {
         this._initZindexable()
@@ -37,7 +37,7 @@ export default {
     }
   },
   beforeDestroy () {
-    if (!this.detached) return
+    if (!this.syntheticDetachable && !this.zindexable) return
     if (this.zindexableInitialized) {
       zIndexManager.unregisterElement(this._getZindexableContent())
     }

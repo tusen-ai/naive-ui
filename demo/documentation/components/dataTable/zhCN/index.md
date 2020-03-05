@@ -15,6 +15,7 @@
 ```demo
 basic
 border
+size
 filterAndSorter
 select
 controlled-page

@@ -10,7 +10,7 @@ Modal 有一些预设，让你在设定之后可以使用对应的 Slots 还有 
 <n-modal
   v-model="isActive"
   preset="card"
-  body-style="width: 600px;"
+  overlay-style="width: 600px;"
   title="卡片预设"
   :bordered="false"
   size="huge"

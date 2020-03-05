@@ -1,11 +1,10 @@
 @mixin setup-dark-table {
   $--table-border-color: $--n-divider-color !global;
-  $--table-body-background-color: $--n-card-background-color !global;
-  $--table-header-background-color: $--n-table-header-background-color !global;
-  $--table-row-background-color: (
+  $--table-body-background-color: (
     'default': $--n-card-background-color,
-    'hover': $--n-table-header-background-color
+    'modal': $--n-modal-background-color
   ) !global;
+  $--table-header-background-color: $--n-table-header-background-color !global;
   $--table-header-text-color: $--n-primary-text-color !global;
   $--table-body-text-color: $--n-secondary-text-color !global;
 }

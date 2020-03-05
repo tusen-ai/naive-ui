@@ -3,7 +3,6 @@
 ```html
 <n-data-table
   :bordered="false"
-  ref="table"
   :columns="columns"
   :data="data"
   :pagination="pagination"
@@ -11,7 +10,6 @@
 <n-data-table
   :bordered="false"
   :single-line="false"
-  ref="table"
   :columns="columns"
   :data="data"
   :pagination="pagination"

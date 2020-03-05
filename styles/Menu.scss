@@ -101,7 +101,7 @@
         }
         @include b(submenu) {
           cursor: pointer;
-          position: relative; 
+          position: relative;
           @include b(menu-item-content) {
             height: 48px;
           }
@@ -141,6 +141,7 @@
           cursor: pointer;
           transition: background-color .3s $--n-ease-in-out-cubic-bezier, padding-left .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
           position: relative;
+          z-index: auto;
           @include m(disabled) {
             opacity: 0.45;
             cursor: not-allowed;

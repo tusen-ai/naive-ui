@@ -7,7 +7,7 @@
     'default': $--n-input-background-color,
     'disabled': $--n-disabled-background-color,
     'active': change-color($--n-primary-color, $alpha: 0.1),
-    'error-focus': change-color($--n-error-color, $alpha: 0.1),
+    'error-active': change-color($--n-error-color, $alpha: 0.1),
   ) !global;
   $--base-selection-placeholder-color: (
     'default': $--n-disabled-text-color,

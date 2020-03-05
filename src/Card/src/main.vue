@@ -14,7 +14,7 @@
     <div v-if="$slots.cover" class="n-card-cover">
       <slot name="cover" />
     </div>
-    <div v-if="$slots.header || $scopedSlots.header || title" class="n-card-header">
+    <div v-if="$slots.header || $scopedSlots.header || title || closable" class="n-card-header">
       <div class="n-card-header__main" :style="headerStyle">
         <slot name="header">
           {{ title }}

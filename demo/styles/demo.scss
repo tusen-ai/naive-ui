@@ -6,7 +6,7 @@
   margin-bottom: 16px;
 }
 
-.demo-card .demo-card__view {
+.demo-card .demo-card__view:not(:first-child) {
   margin-top: 16px;
 }
 

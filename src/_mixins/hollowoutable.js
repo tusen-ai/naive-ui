@@ -33,7 +33,7 @@ function getNextBackgroundColorOf (el) {
   const diffedKeys = Object.keys(diffedStyle)
   if (!diffedKeys.length) {
     el.style.transition = memorizedTransition
-    return
+    return nextBackgroundColor
   }
   for (const key of diffedKeys) {
     memorizedInlineStyle[key] = el.style[key]

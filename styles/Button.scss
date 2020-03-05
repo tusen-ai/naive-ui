@@ -347,6 +347,7 @@
         border-color .3s $--n-ease-in-out-cubic-bezier;
       cursor: pointer;
       &::after {
+        pointer-events: none;
         content: "";
         border-radius: inherit;
         position: absolute;
@@ -364,6 +365,7 @@
         border-radius: inherit;
         box-shadow: inset 0 0 0 1px transparent;
         transition: box-shadow .3s $--n-ease-in-out-cubic-bezier;
+        pointer-events: none;
       }
       @include e(icon) {
         @include fade-in-width-expand-transition();

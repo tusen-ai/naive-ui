@@ -41,7 +41,7 @@ export default {
     }
   },
   methods: {
-    hideLightBar (delay = 300) {
+    hideTrackingRect (delay = 300) {
       this.vanishTimerId && window.clearTimeout(this.vanishTimerId)
       if (!delay) {
         this.vanishTimerId = null
@@ -52,7 +52,7 @@ export default {
         }, delay)
       }
     },
-    updateLightBarTop (el, getLightBarTop = elm => elm.offsetTop) {
+    updateTrackingRectTop (el, getLightBarTop = elm => elm.offsetTop) {
       if (!el) return
       this.vanishTimerId && window.clearTimeout(this.vanishTimerId)
       this.vanishTimerId = null

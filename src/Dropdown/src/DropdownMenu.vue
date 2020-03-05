@@ -198,7 +198,7 @@ export default {
         ref: 'selectMenu',
         props: {
           virtualScroll: false,
-          withoutScrollbar: true,
+          scrollable: false,
           options: this.selectOptions,
           size: this.size,
           isOptionSelected: () => false,

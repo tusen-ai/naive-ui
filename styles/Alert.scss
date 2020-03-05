@@ -25,6 +25,7 @@
 @include themes-mixin {
   @include b(alert) {
     @include once {
+      line-height: 1.75;
       @include fade-in-height-expand-transition($original-transition: (transform .3s $--n-ease-in-out-cubic-bezier));
       &.#{block(fade-in-height-expand-transition)}-leave, &.#{block(fade-in-height-expand-transition)}-enter-to {
         transform: scale(1);

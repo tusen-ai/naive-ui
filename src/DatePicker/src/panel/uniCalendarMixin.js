@@ -126,21 +126,19 @@ export default {
     },
     valueAsDateTime (newValue) {
       if (newValue !== null) {
-        this.displayDateString = format(newValue, this.dateFormat) // newValue.format(this.dateFormat)
+        this.displayDateString = format(newValue, this.dateFormat)
         this.calendarDateTime = newValue
       } else {
         this.displayDateString = ''
       }
     },
     isDateTimeInvalid (value) {
-      // debugger
       this.NDatePicker.setInvalidStatus(value)
-      // this.$emit('check-value', this.isDateTimeInvalid)
     }
   },
   created () {
     if (this.valueAsDateTime !== null) {
-      this.displayDateString = format(this.valueAsDateTime, this.dateFormat) // this.valueAsDateTime.format(this.dateFormat)
+      this.displayDateString = format(this.valueAsDateTime, this.dateFormat)
       this.calendarDateTime = this.valueAsDateTime
     } else {
       this.displayDateString = ''
@@ -151,19 +149,8 @@ export default {
     handleClickOutside () {
       this.closeCalendar()
     },
-    // setValue (newSelectedDateTime) {
-    //   if (newSelectedDateTime === null || newSelectedDateTime === undefined) {
-    //     this.$emit('input', null)
-    //   } else {
-    //     const adjustedDateTime = this.adjustValue(newSelectedDateTime)
-    //     if (this.valueAsDateTime === null || adjustedDateTime.valueOf() !== this.valueAsDateTime.valueOf()) {
-    //       this.refreshDisplayDateString(adjustedDateTime)
-    //       this.$emit('input', adjustedDateTime.valueOf())
-    //     }
-    //   }
-    // },
     handleDateInput (value) {
-      const date = strictParse(value, this.dateFormat, new Date())// moment(value, this.dateFormat, true)
+      const date = strictParse(value, this.dateFormat, new Date())
       if (isValid(date)) {
         if (!this.valueAsDateTime) {
           this.$emit('input', getTime(this.adjustValue(new Date())))
@@ -176,28 +163,9 @@ export default {
           this.$emit('input', getTime(this.adjustValue(newDateTime)))
         }
       }
-      // if (date.isValid()) {
-      //   if (!this.valueAsDateTime) {
-      //     const newValue = moment()
-      //     newValue.year(date.year())
-      //     newValue.month(date.month())
-      //     newValue.date(date.date())
-      //     this.$emit('input', this.adjustValue(newValue).valueOf())
-      //   } else {
-      //     const newValue = this.valueAsDateTime
-      //     newValue.year(date.year())
-      //     newValue.month(date.month())
-      //     newValue.date(date.date())
-      //     this.$emit('input', this.adjustValue(newValue).valueOf())
-      //   }
-      // } else {
-      //   // do nothing
-      // }
     },
     handleDateInputBlur () {
       const date = strictParse(this.displayDateString, this.dateFormat, new Date())
-      // console.log('blur', this.displayDateString, date)
-      // const date = moment(this.displayDateString, this.dateValidateFormat, true)
       if (isValid(date)) {
         if (!this.valueAsDateTime) {
           this.$emit('input', getTime(this.adjustValue(new Date())))
@@ -209,19 +177,6 @@ export default {
           })
           this.$emit('input', getTime(this.adjustValue(newDateTime)))
         }
-        // if (!this.valueAsDateTime) {
-        //   const newValue = moment()
-        //   newValue.year(date.year())
-        //   newValue.month(date.month())
-        //   newValue.date(date.date())
-        //   this.$emit('input', this.adjustValue(newValue).valueOf())
-        // } else {
-        //   const newValue = this.valueAsDateTime
-        //   newValue.year(date.year())
-        //   newValue.month(date.month())
-        //   newValue.date(date.date())
-        //   this.$emit('input', this.adjustValue(newValue).valueOf())
-        // }
       } else {
         this.refreshDisplayDateString()
       }
