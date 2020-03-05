@@ -1,5 +1,5 @@
 <template>
-  <div class="n-data-table-base-table-wrapper">
+  <div class="n-data-table-base-table">
     <table-header
       ref="header"
       :placement="placement"

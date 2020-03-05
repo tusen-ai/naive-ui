@@ -1,5 +1,8 @@
 @mixin setup-light-list {
   $--list-text-color: $--n-secondary-text-color !global;
-  $--list-background-color: $--n-card-background-color !global;
+  $--list-background-color: (
+    'default': $--n-card-background-color,
+    'modal': $--n-modal-background-color
+  ) !global;
   $--list-border-color: $--n-divider-color !global;
 }

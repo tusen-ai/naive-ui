@@ -54,10 +54,6 @@ export default function (locale, instance) {
         title: '起步',
         path: `/${instance.lang}/${instance.theme}/doc` + '/start'
       },
-      // {
-      //   name: 'Develop Guidelines',
-      //   path: `/${instance.lang}/${instance.theme}/doc` + '/dev-guildlines'
-      // },
       {
         name: 'Create Themed Component',
         title: '创建适配主题的组件',

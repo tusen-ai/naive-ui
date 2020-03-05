@@ -10,7 +10,7 @@
   >
     <n-spin :spinning="loading">
       <div
-        class="n-data-table-tables-wrapper"
+        class="n-data-table-wrapper"
       >
         <base-table
           ref="mainTable"
