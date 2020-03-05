@@ -148,9 +148,8 @@
             box-shadow: inset 16px 0 12px -16px $--data-table-fixed-column-box-shadow-color;
           }
         }
-        border-color: $--data-table-border-color;
         color: $--data-table-body-text-color;
-        border-bottom: 1px solid $--data-table-border-color;
+        border-bottom: 1px solid map-get($--data-table-border-color, 'default');
       }
       @include b(data-table-th) {
         @include once {
@@ -172,7 +171,7 @@
           }          
         }
         background-color: map-get($--data-table-header-background-color, 'default');
-        border-color: $--data-table-border-color;
+        border-color: map-get($--data-table-border-color, 'default');
         color: $--data-table-header-text-color;
         @include m(sortable) {
           cursor: pointer;
@@ -226,15 +225,15 @@
       @include b(data-table-wrapper) {
         @include b(data-table-table){
           @include b(data-table-th) {
-            border-right: 1px solid $--data-table-border-color;
+            border-right: 1px solid map-get($--data-table-border-color, 'default');
             &:last-child {
-              border-right: 0px solid $--data-table-border-color;
+              border-right: 0px solid map-get($--data-table-border-color, 'default');
             }
           }
           @include b(data-table-td) {
-            border-right: 1px solid $--data-table-border-color;
+            border-right: 1px solid map-get($--data-table-border-color, 'default');
             &:last-child {
-              border-right: 0px solid $--data-table-border-color;
+              border-right: 0px solid map-get($--data-table-border-color, 'default');
             }
           }
         }
@@ -243,14 +242,14 @@
     @include m(bordered) {
       @include b(data-table-wrapper) {
         overflow: hidden;
-        border: 1px solid $--data-table-border-color;
+        border: 1px solid map-get($--data-table-border-color, 'default');
         border-bottom-left-radius: $--n-data-table-border-radius;
         border-bottom-right-radius: $--n-data-table-border-radius;
         @include b(data-table-table){
           @include b(data-table-tr) {
             &:last-child {
               @include b(data-table-td) {
-                border-bottom: 0px solid $--data-table-border-color;
+                border-bottom: 0px solid map-get($--data-table-border-color, 'default');
               }
             }
           }
@@ -269,7 +268,7 @@
         }
         scrollbar-width: none;
       }
-      border-bottom: 1px solid $--data-table-border-color;
+      border-bottom: 1px solid map-get($--data-table-border-color, 'default');
       @include b(data-table-th) {
         @include b(data-table-sort-button) {
           @include once {
@@ -364,6 +363,7 @@
           background-color: map-get($--data-table-header-background-color, 'modal');
         }
         @include b(data-table-th) {
+          border-color: map-get($--data-table-border-color, 'modal');
           background-color: map-get($--data-table-header-background-color, 'modal');
           @include m(sortable) {
             &:hover {
@@ -380,8 +380,44 @@
           }
         }
         @include b(data-table-td) {
+          border-color: map-get($--data-table-border-color, 'modal');
           background-color: map-get($--data-table-body-background-color, 'modal')
         }
+      }
+      @include not-m(single-line) {
+        @include b(data-table-wrapper) {
+          @include b(data-table-table){
+            @include b(data-table-th) {
+              border-right: 1px solid map-get($--data-table-border-color, 'modal');
+              &:last-child {
+                border-right: 0px solid map-get($--data-table-border-color, 'modal');
+              }
+            }
+            @include b(data-table-td) {
+              border-right: 1px solid map-get($--data-table-border-color, 'modal');
+              &:last-child {
+                border-right: 0px solid map-get($--data-table-border-color, 'modal');
+              }
+            }
+          }
+        }
+      }
+      @include m(bordered) {
+        @include b(data-table-wrapper) {
+          border: 1px solid map-get($--data-table-border-color, 'modal');
+          @include b(data-table-table){
+            @include b(data-table-tr) {
+              &:last-child {
+                @include b(data-table-td) {
+                  border-bottom: 0px solid map-get($--data-table-border-color, 'modal');
+                }
+              }
+            }
+          }
+        }
+      }
+      @include b(data-table-base-table-header) {
+        border-bottom: 1px solid map-get($--data-table-border-color, 'modal');
       }
     }
   }

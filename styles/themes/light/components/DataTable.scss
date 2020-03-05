@@ -1,7 +1,10 @@
 @import '../../../utils/color.scss';
 
 @mixin setup-light-data-table {
-  $--data-table-border-color: $--n-divider-color !global;
+  $--data-table-border-color: (
+    'default': mix-color-with-alpha-color($--n-card-background-color, $--n-table-header-overlay-background-color),
+    'modal': mix-color-with-alpha-color($--n-modal-background-color, $--n-table-header-overlay-background-color),
+  ) !global;
   $--data-table-header-text-color: $--n-primary-text-color !global;
   $--data-table-fixed-column-box-shadow-color:  rgba(0, 0, 0, .18) !global;
   $--data-table-body-background-color: (

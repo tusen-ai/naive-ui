@@ -5,7 +5,7 @@
     :items="items"
   >
     <router-view />
-    <landing-footer style="padding: 32px 204px 24px 56px; text-align: left;" />
+    <landing-footer style="padding: 32px 204px 16px 56px; text-align: left; font-size: 14px;" />
   </n-nimbus-service-layout>
 </template>
 

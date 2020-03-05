@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <n-divider style="margin: 0 0 16px 0;" />
+    <n-divider v-if="showDivider" style="margin: 0 0 16px 0;" />
     <n-text depth="tertiary">
       A <a ref="noopener noreferer" href="https://www.tusimple.com" target="_blank" class="link">
         <n-text>
@@ -20,6 +20,17 @@
     </n-text>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    showDivider: {
+      type: Boolean,
+      default: true
+    }
+  }
+}
+</script>
 
 <style scoped>
 .footer {
