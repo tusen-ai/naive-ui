@@ -142,7 +142,7 @@ export default {
   computed: {
     zIndex () {
       const path = this.$route.path
-      return (path.endsWith('n-modal') || path.endsWith('n-drawer')) ? null : 3000
+      return (path.endsWith('n-modal') || path.endsWith('n-drawer') || path.endsWith('n-confirm')) ? null : 3000
     },
     theme () {
       return this.NConfigProvider.$parent.theme

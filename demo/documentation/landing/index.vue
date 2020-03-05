@@ -21,7 +21,9 @@
   <n-config-consumer>
     <template v-slot="{ styleScheme, theme }">
       <div>
-        <landing-footer />
+        <n-layout-footer mode="absolute" style="z-index: auto;">
+          <landing-footer style="max-width: 1200px; margin: auto;" />
+        </n-layout-footer>
         <div class="banner">
           <left-image class="left-image" />
           <right-image class="right-image" />

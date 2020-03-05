@@ -5,11 +5,17 @@
     :items="items"
   >
     <router-view />
+    <landing-footer style="padding: 32px 204px 24px 56px; text-align: left;" />
   </n-nimbus-service-layout>
 </template>
 
 <script>
+import LandingFooter from './documentation/landing/footer'
+
 export default {
+  components: {
+    LandingFooter
+  },
   provide () {
     return {
       NDocRoot: this

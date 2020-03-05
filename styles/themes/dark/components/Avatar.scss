@@ -1,3 +1,3 @@
 @mixin setup-dark-avatar {
-  $--avatar-background-color: $--n-avatar-background-color !global;
+  $--avatar-background-color: $--n-avatar-overlay-background-color !global;
 }

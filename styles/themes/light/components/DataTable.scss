@@ -9,14 +9,14 @@
     'modal': $--n-modal-background-color
   ) !global;
   $--data-table-header-background-color: (
-    'default': mix-color-with-alpha-color($--n-card-background-color, $--n-table-header-background-color),
+    'default': mix-color-with-alpha-color($--n-card-background-color, $--n-table-header-overlay-background-color),
     'hover': mix-color-with-alpha-color(
-      mix-color-with-alpha-color($--n-card-background-color, $--n-table-header-background-color),
+      mix-color-with-alpha-color($--n-card-background-color, $--n-table-header-overlay-background-color),
       $--n-pending-overlay-color
     ),
-    'modal': mix-color-with-alpha-color($--n-modal-background-color, $--n-table-header-background-color),
+    'modal': mix-color-with-alpha-color($--n-modal-background-color, $--n-table-header-overlay-background-color),
     'modal-hover': mix-color-with-alpha-color(
-      mix-color-with-alpha-color($--n-modal-background-color, $--n-table-header-background-color),
+      mix-color-with-alpha-color($--n-modal-background-color, $--n-table-header-overlay-background-color),
       $--n-pending-overlay-color
     )
   ) !global;

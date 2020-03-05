@@ -14,7 +14,7 @@ no-icon
 |show-icon|`string`|`true`||
 |type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'default'`||
 |closable|`boolean`|`false`||
-|on-close|`(next: function) => any`|`next => next()`|点击关闭的回调，调用 next 才能让 Alert 关闭|
+|on-close|`() => Promise<boolean> \| boolean`|`() => true`||
 |on-after-hide|`function`|`null`||
 
 ## Slots

@@ -7,7 +7,7 @@
     'error': mix($--n-error-color, $--n-base-background-color, 35%)
   ) !global;
   $--alert-background-color: (
-    'default': $--n-action-background-color,
+    'default': $--n-action-overlay-background-color,
     'success': mix($--n-success-color, $--n-base-background-color, 12%),
     'info': mix($--n-info-color, $--n-base-background-color, 12%),
     'warning': mix($--n-warning-color, $--n-base-background-color, 12%),
@@ -34,5 +34,9 @@
     'warning': $--n-secondary-text-color,
     'error': $--n-secondary-text-color,
   ) !global;
-  $--alert-close-color: $--n-close-color !global;
+  $--alert-close-color: (
+    'default': $--n-close-color,
+    'hover': $--n-close-hover-color,
+    'active': $--n-close-color
+  ) !global;
 }

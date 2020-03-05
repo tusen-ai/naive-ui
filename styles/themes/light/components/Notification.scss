@@ -8,7 +8,11 @@
   ) !global;
   $--notification-background-color: $--n-popover-background-color !global;
   $--notification-text-color: $--n-secondary-text-color !global;
-  $--notification-close-fill: $--n-close-color !global;
+  $--notification-close-color: (
+    'default': $--n-close-color,
+    'hover': $--n-close-hover-color,
+    'active': $--n-close-color
+  ) !global;
   $--notification-header-text-color: $--n-primary-text-color !global;
   $--notification-content-text-color: $--n-secondary-text-color !global;
   $--notification-description-text-color: $--n-tertiary-text-color !global;

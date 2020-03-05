@@ -117,7 +117,7 @@
               display: inline-block;
               position: absolute;
               top: 0;
-              bottom: 0;
+              bottom: -1px;
               transition: box-shadow .2s $--n-ease-in-out-cubic-bezier;
               right: -16px;
             }
@@ -131,7 +131,7 @@
               display: inline-block;
               position: absolute;
               top: 0;
-              bottom: 0;
+              bottom: -1px;
               transition: box-shadow .2s $--n-ease-in-out-cubic-bezier;
               left: -16px;
             }

@@ -40,6 +40,7 @@
     @include once {
       transition:
         background-color .3s $--n-ease-in-out-cubic-bezier,
+        box-shadow .3s $--n-ease-in-out-cubic-bezier,
         border-color .3s $--n-ease-in-out-cubic-bezier;
       box-sizing: border-box;
       width: 100%;

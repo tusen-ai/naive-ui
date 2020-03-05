@@ -106,9 +106,6 @@
   
   $--n-icon-color: $--overlay-text-4 !global;
 
-  $--n-action-background-color: $--overlay-action !global;
-  $--n-table-header-background-color: $--overlay-action !global;
-
   $--n-rail-color: $--overlay-rail !global;
   $--n-divider-color: $--neutral-divider !global;
   $--n-border-color: $--neutral-border !global;
@@ -125,12 +122,15 @@
   $--n-card-background-color: $--neutral-card !global;
   $--n-modal-background-color: $--neutral-modal !global;
   $--n-body-background-color: $--neutral-body !global;
-  $--n-input-background-color: $--neutral-card !global;
-  $--n-code-background-color: $--neutral-code !global;
-  $--n-tab-background-color: $--overlay-tab !global;
-  $--n-avatar-background-color: $--overlay-avatar !global;
   $--n-base-background-color: $--neutral-base !global;
   $--n-tag-background-color: $--neutral-tag !global;
+
+  $--n-input-overlay-background-color: null !global;
+  $--n-code-overlay-background-color: $--overlay-code !global;
+  $--n-tab-overlay-background-color: $--overlay-tab !global;
+  $--n-avatar-overlay-background-color: $--overlay-avatar !global;
+  $--n-action-overlay-background-color: $--overlay-action !global;
+  $--n-table-header-overlay-background-color: $--overlay-action !global;
   
   $--n-pending-overlay-color: $--overlay-pending !global;
   $--n-active-overlay-color: $--overlay-active !global;

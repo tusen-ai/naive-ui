@@ -169,7 +169,13 @@
             cursor: pointer;
             transition: fill .3s $--n-ease-in-out-cubic-bezier;
           }
-          fill: $--card-close-fill;
+          fill: map-get($--card-close-color, 'default');
+          &:hover {
+            fill: map-get($--card-close-color, 'hover');
+          }
+          &:active {
+            fill: map-get($--card-close-color, 'active');
+          }
         }
       }
       @include e(action) {

@@ -12,7 +12,7 @@ function parseMdAsAnchor (content) {
     const href = title.replace(/ /g, '-')
     return `<n-anchor-link title="${title}" href="#${href}"/>`
   })
-  return `<n-anchor :top="24" position="absolute" affix style="width: 132px;">${linkTags.join('\n')}</n-anchor>`
+  return `<n-anchor :top="32" position="absolute" affix style="width: 132px;">${linkTags.join('\n')}</n-anchor>`
 }
 
 console.log(parseMdAsAnchor(content))

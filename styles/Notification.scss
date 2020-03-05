@@ -113,8 +113,20 @@
         cursor: pointer;
       }
       @include b(icon) {
-        fill: $--notification-close-fill;
-        stroke: $--notification-close-fill;
+        fill: map-get($--notification-close-color, 'default');
+        stroke: map-get($--notification-close-color, 'default');
+      }
+      &:hover {
+        @include b(icon) {
+          fill: map-get($--notification-close-color, 'hover');
+          stroke: map-get($--notification-close-color, 'hover');
+        }
+      }
+      &:active {
+        @include b(icon) {
+          fill: map-get($--notification-close-color, 'active');
+          stroke: map-get($--notification-close-color, 'active');
+        }
       }
     }
     @include e(avatar) {

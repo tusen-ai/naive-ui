@@ -50,6 +50,6 @@
   $--typography-code-text-color: (
     'default': $--n-secondary-text-color
   ) !global;
-  $--typography-code-background-color: $--n-code-background-color !global;
+  $--typography-code-background-color: $--n-code-overlay-background-color !global;
   $--typography-code-border-color: transparent !global;
 }

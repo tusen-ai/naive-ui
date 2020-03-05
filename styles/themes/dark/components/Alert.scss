@@ -7,7 +7,7 @@
     'error': change-color($--n-error-hs-color, $alpha: .35)
   ) !global;
   $--alert-background-color: (
-    'default': $--n-input-background-color,
+    'default': $--n-input-overlay-background-color,
     'success': change-color($--n-success-hs-color, $alpha: .25),
     'info': change-color($--n-info-hs-color, $alpha: .25),
     'warning': change-color($--n-warning-hs-color, $alpha: .25),
@@ -34,5 +34,9 @@
     'warning': $--n-secondary-text-color,
     'error': $--n-secondary-text-color
   ) !global;
-  $--alert-close-color: $--n-close-color !global;
+  $--alert-close-color: (
+    'default': $--n-close-color,
+    'hover': $--n-close-hover-color,
+    'active': $--n-close-color
+  ) !global;
 }

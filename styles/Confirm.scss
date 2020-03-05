@@ -61,8 +61,16 @@
         }
       }
       @include e(close) {
-        fill: $--confirm-close-color;
-        stroke: $--confirm-close-color;
+        fill: map-get($--confirm-close-color, 'default');
+        stroke: map-get($--confirm-close-color, 'default');
+        &:hover {
+          fill: map-get($--confirm-close-color, 'hover');
+          stroke: map-get($--confirm-close-color, 'hover');
+        }
+        &:active {
+          fill: map-get($--confirm-close-color, 'active');
+          stroke: map-get($--confirm-close-color, 'active');
+        }
       }
       color: $--confirm-title-text-color;
     }

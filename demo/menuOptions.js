@@ -408,7 +408,7 @@ export default function (locale, instance) {
           {
             name: 'Alert',
             title: '警告信息',
-            titleExtra: 'Alerts',
+            titleExtra: 'Alert',
             path: `/${instance.lang}/${instance.theme}/doc` + '/n-alert'
           },
           {

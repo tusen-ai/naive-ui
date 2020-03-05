@@ -1,5 +1,5 @@
 @mixin setup-dark-descriptions {
-  $--descriptions-header-background-color: $--n-table-header-background-color !global;
+  $--descriptions-header-background-color: $--n-table-header-overlay-background-color !global;
   $--descriptions-header-text-color: $--n-primary-text-color !global;
   $--descriptions-content-text-color: $--n-secondary-text-color !global;
   $--descriptions-content-background-color: (

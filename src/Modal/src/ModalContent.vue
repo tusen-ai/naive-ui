@@ -196,6 +196,9 @@ export default {
     },
     handleAfterLeave () {
       this.styleActive = false
+      this.scrollTop = 0
+      this.transformOriginX = null
+      this.transformOriginY = null
       this.$emit('after-leave')
     },
     handleCloseClick () {

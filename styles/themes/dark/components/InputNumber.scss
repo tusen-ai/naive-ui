@@ -11,8 +11,8 @@
     'disabled': change-color($--n-placeholder-text-color, $alpha: alpha($--n-placeholder-text-color) * 0.6),
   ) !global;
   $--input-number-background-color: (
-    'default': $--n-input-background-color,
-    'disabled': change-color($--n-input-background-color, $alpha: alpha($--n-input-background-color) * 0.6),
+    'default': $--n-input-overlay-background-color,
+    'disabled': change-color($--n-input-overlay-background-color, $alpha: alpha($--n-input-overlay-background-color) * 0.6),
     'focus': change-color($--n-primary-color, $alpha: 0.1),
     'error-focus': change-color($--n-error-color, $alpha: 0.1),
   ) !global;
@@ -27,10 +27,10 @@
     'active': $--n-primary-active-color
   ) !global;
   $--input-number-button-background-color: (
-    'default': $--n-action-background-color,
-    'hover': $--n-action-background-color,
-    'active':  $--n-action-background-color,
-    'disabled': $--n-action-background-color,
+    'default': $--n-action-overlay-background-color,
+    'hover': $--n-action-overlay-background-color,
+    'active':  $--n-action-overlay-background-color,
+    'disabled': $--n-action-overlay-background-color,
   ) !global;
   $--input-number-caret-color: $--n-primary-color !global;
   $--input-number-disabled-opacity: 1 !global;
