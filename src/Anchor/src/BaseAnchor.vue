@@ -159,7 +159,7 @@ export default {
           this.activeHref = href
           const top = getOffset(linkEl, this.container).top + (this.container.scrollTop || 0)
           this.container.scrollTo({
-            top: top - this.bound
+            top: top
           })
           if (!transition) {
             this.disableTransitionOneTick()

@@ -6,6 +6,8 @@
     "searchPlaceholder": "搜索组件",
     "home": "首页",
     "doc": "文档",
+    "common": "常规",
+    "debug": "调试",
     "alreadyHome": "别点了，你已经在首页了"
   },
   "en-US": {
@@ -14,6 +16,8 @@
     "searchPlaceholder": "Search Components",
     "home": "Home",
     "doc": "Documentation",
+    "common": "Common",
+    "debug": "Debug",
     "alreadyHome": "You've already been in home page. No clicking."
   }
 }
@@ -50,11 +54,18 @@
         </div>
       </div>
       <div style="display: flex;">
-        <n-tag style="cursor: pointer; margin-right: 12px;" @click.native="handleThemeChange">
+        <n-tag class="nav-picker" @click.native="handleThemeChange">
           {{ themeOptions[theme].label }}
         </n-tag>
-        <n-tag style="cursor: pointer;" @click.native="handleLanguageChange">
+        <n-tag class="nav-picker" @click.native="handleLanguageChange">
           {{ langOptions[lang].label }}
+        </n-tag>
+        <n-tag
+          v-if="env==='development'"
+          class="nav-picker"
+          @click.native="handleModeChange"
+        >
+          {{ modeOptions[mode].label }}
         </n-tag>
       </div>
     </div>
@@ -82,6 +93,14 @@ export default {
     items: {
       type: Array,
       default: () => []
+    },
+    env: {
+      type: String,
+      default: null
+    },
+    mode: {
+      type: String,
+      default: null
     }
   },
   data () {
@@ -106,6 +125,16 @@ export default {
         'en-US': {
           label: '中文',
           next: 'zh-CN'
+        }
+      },
+      modeOptions: {
+        'debug': {
+          label: 'Common',
+          next: 'common'
+        },
+        'common': {
+          label: 'Debug',
+          next: 'debug'
         }
       }
     }
@@ -183,6 +212,10 @@ export default {
     handleThemeChange () {
       this.NConfigProvider.$parent.theme = this.themeOptions[this.theme].next
     },
+
+    handleModeChange () {
+      this.$emit('mode-change', this.modeOptions[this.mode].next)
+    },
     handleLanguageChange () {
       this.$emit('lang-change', this.langOptions[this.lang].next)
     }
@@ -214,5 +247,12 @@ export default {
 }
 .nav-menu .n-menu-item {
   height: 63px !important;
+}
+.nav-picker {
+  cursor: pointer;
+  margin-right: 12px;
+  &:last-child {
+    margin-right: 0;
+  }
 }
 </style>

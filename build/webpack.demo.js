@@ -6,9 +6,10 @@ const webpack = require('webpack')
 const config = require('./config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const env = process.env.NODE_ENV
 
 const webpackConfig = {
-  mode: 'development',
+  mode: env === 'production' ? 'production' : 'development',
   entry: './demo/deploymentIndex.js',
   output: {
     path: path.resolve(process.cwd()),

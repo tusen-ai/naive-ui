@@ -4,9 +4,10 @@
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const config = require('./config')
+const env = process.env.NODE_ENV
 
 const webpackConfig = {
-  mode: 'development',
+  mode: env === 'production' ? 'production' : 'development',
   entry: {
     app: ['./src/index.js']
   },

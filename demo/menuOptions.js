@@ -1,3 +1,5 @@
+const env = process.env.NODE_ENV
+
 const appendCounts = item => {
   if (!item.childItems) {
     item.count = 1
@@ -34,8 +36,8 @@ const appendCounts = item => {
   }
 }
 
-const appendDebugDemos = (item) => {
-  if (process.env.NODE_ENV === 'development') {
+const appendDebugDemos = (item, mode) => {
+  if (env === 'development' && mode === 'debug') {
     return [item]
   } else return []
 }
@@ -940,7 +942,7 @@ export default function (locale, instance) {
               path: `/${instance.lang}/${instance.theme}/doc` + '/n-select-debug'
             }
           ]
-        })
+        }, instance.mode)
     ]
   }
 }
