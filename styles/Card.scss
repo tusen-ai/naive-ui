@@ -49,6 +49,9 @@
         }
       }
       @include e(content, footer) {
+        &:first-child {
+          padding-top: map-get($--n-card-margin-bottom, $size);
+        }
         padding: 0 map-get($--n-card-margin-left, $size) map-get($--n-card-margin-bottom, $size) map-get($--n-card-margin-left, $size) ;
         font-size: 14px;
       }
