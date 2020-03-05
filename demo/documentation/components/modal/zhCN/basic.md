@@ -2,10 +2,9 @@
 Modal 的基础用法，你可以把任何东西放进去，比如一个卡片。
 ```html
 <n-button
-  size="small"
   @click="isActive = true"
 >
-  来
+  来吧
 </n-button>
 <n-modal v-model="isActive">
   <n-card

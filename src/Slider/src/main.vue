@@ -94,7 +94,6 @@
 </template>
 
 <script>
-import throttle from 'lodash-es/throttle'
 import hollowoutable from '../../_mixins/hollowoutable'
 import detachable from '../../_mixins/detachable'
 import placeable from '../../_mixins/placeable'
@@ -161,19 +160,6 @@ export default {
     placement: {
       type: String,
       default: 'top'
-    },
-    /** temporal fix, not final solution */
-    detachable: {
-      type: Boolean,
-      default: true
-    },
-    positionMode: {
-      type: String,
-      default: 'fixed'
-    },
-    zindexable: {
-      type: Boolean,
-      default: true
     }
   },
   data () {
@@ -315,8 +301,10 @@ export default {
     }
   },
   beforeDestroy () {
-    window.removeEventListener('mousemove', this.throttledHandleFirstHandleMouseMove)
+    window.removeEventListener('mousemove', this.handleFirstHandleMouseMove)
     window.removeEventListener('mouseup', this.handleFirstHandleMouseUp)
+    window.removeEventListener('mousemove', this.handleSecondHandleMouseMove)
+    window.removeEventListener('mouseup', this.handleSecondHandleMouseUp)
   },
   methods: {
     handleRailClick (e) {
@@ -462,7 +450,7 @@ export default {
       this.firstHandleActive = true
       this.firstHandleClicked = true
       window.addEventListener('mouseup', this.handleFirstHandleMouseUp)
-      window.addEventListener('mousemove', this.throttledHandleFirstHandleMouseMove)
+      window.addEventListener('mousemove', this.handleFirstHandleMouseMove)
     },
     handleSecondHandleMouseDown () {
       if (this.range) {
@@ -471,7 +459,7 @@ export default {
       this.secondHandleActive = true
       this.secondHandleClicked = true
       window.addEventListener('mouseup', this.handleSecondHandleMouseUp)
-      window.addEventListener('mousemove', this.throttledHandleSecondHandleMouseMove)
+      window.addEventListener('mousemove', this.handleSecondHandleMouseMove)
     },
     handleFirstHandleMouseUp (e) {
       this.secondHandleActive = false
@@ -484,7 +472,7 @@ export default {
         this.tooltipHoverDisplayValue = this.firstHandleValue
       }
       window.removeEventListener('mouseup', this.handleFirstHandleMouseUp)
-      window.removeEventListener('mousemove', this.throttledHandleFirstHandleMouseMove)
+      window.removeEventListener('mousemove', this.handleFirstHandleMouseMove)
     },
     handleSecondHandleMouseUp (e) {
       this.secondHandleActive = false
@@ -497,7 +485,7 @@ export default {
         this.tooltipHoverDisplayValue = this.secondHandleValue
       }
       window.removeEventListener('mouseup', this.handleSecondHandleMouseUp)
-      window.removeEventListener('mousemove', this.throttledHandleSecondHandleMouseMove)
+      window.removeEventListener('mousemove', this.handleSecondHandleMouseMove)
     },
     emitInputEvent (value) {
       if (this.range) {
@@ -525,8 +513,9 @@ export default {
         }
       }
     },
-    throttledHandleFirstHandleMouseMove: throttle(function (e) { handleFirstHandleMouseMove.call(this, e) }, 60),
-    throttledHandleSecondHandleMouseMove: throttle(function (e) { handleSecondHandleMouseMove.call(this, e) }, 60),
+    /** do not throttle to make ui sync with action after final move */
+    handleFirstHandleMouseMove,
+    handleSecondHandleMouseMove,
     handleFirstHandleMouseEnter () {
       if (!this.active) {
         this.showTooltip = true
@@ -577,6 +566,23 @@ export default {
             this.$refs.secondHandle.style.transition = null
           }
         })
+      }
+    },
+    getPositionInAbsoluteMode (placement) {
+      let value = null
+      if (this.firstHandleActive) {
+        value = this.firstHandleValue
+      } else if (this.secondHandleValue) {
+        value = this.secondHandleActive
+      }
+      if (!(typeof value === 'number')) {
+        console.error('[naive-ui/slider]: try showing tooltip with no number value')
+        value = 0
+      }
+      return {
+        left: ((value - this.min) / (this.max - this.min) * 100) + '%',
+        bottom: 'calc(100% - 4px)',
+        transform: 'translateX(-50%)'
       }
     }
   }

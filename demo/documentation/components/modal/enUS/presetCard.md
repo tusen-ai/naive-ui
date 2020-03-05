@@ -2,7 +2,6 @@
 Modal has some presets, which means you can use props & slots of the preset after set it.
 ```html
 <n-button
-  size="small"
   @click="isActive = true"
 >
   Start Me up

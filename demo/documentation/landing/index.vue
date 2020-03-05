@@ -8,7 +8,7 @@
     "intro4": "换个主题"
   },
   "en-US": {
-    "start": "Getting Start",
+    "start": "Get Started",
     "intro1": "A Vue UI Framework",
     "intro2": "Very Caring About Styles, Themed, Batteries Included",
     "intro3": "Interesting Somehow",

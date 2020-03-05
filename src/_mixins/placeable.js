@@ -77,12 +77,13 @@ function getActivatorRect (manuallyPositioned, x, y, trackedElement, viewBoundin
   }
 }
 
-function getPositionInAbsoluteMode (placement) {
+function _getPositionInAbsoluteMode (placement) {
   const position = {
     top: null,
     bottom: null,
     left: null,
-    right: null
+    right: null,
+    transform: null
   }
   if (placement === 'bottom-start') {
     position.top = '100%'
@@ -108,6 +109,22 @@ function getPositionInAbsoluteMode (placement) {
   } else if (placement === 'left-end') {
     position.bottom = '0'
     position.right = '100%'
+  } else if (placement === 'top') {
+    position.bottom = '100%'
+    position.left = '50%'
+    position.transform = 'translateX(-50%)'
+  } else if (placement === 'right') {
+    position.left = '100%'
+    position.top = '50%'
+    position.transform = 'translateY(-50%)'
+  } else if (placement === 'bottom') {
+    position.top = '100%'
+    position.left = '50%'
+    position.transform = 'translateX(-50%)'
+  } else if (placement === 'left') {
+    position.right = '100%'
+    position.top = '50%'
+    position.transform = 'translateY(-50%)'
   } else {
     console.error(
       '[naive-ui/mixins/placeable]: Placement %s is not supported.',
@@ -252,6 +269,7 @@ export default {
       this.trackingElement.style.left = position.left
       this.trackingElement.style.right = position.right
       this.trackingElement.style.bottom = position.bottom
+      this.trackingElement.style.transform = position.transform
       this.trackingElement.style.transformOrigin = transformOrigin
       this.trackingElement.setAttribute('n-suggested-transform-origin', transformOrigin)
     },
@@ -287,14 +305,17 @@ export default {
         width: this.trackingElement.offsetWidth,
         height: this.trackingElement.offsetHeight
       }
-      // console.log('activatorRect', activatorRect)
-      // console.log('contentBoundingClientRect', contentBoundingClientRect)
       const adjustedPlacement = getAdjustedPlacementOfTrackingElement(this.placement, activatorRect, contentBoundingClientRect, this.flip)
       const suggestedTransformOrigin = getTransformOriginByPlacement(adjustedPlacement)
       let offset = getPosition(adjustedPlacement, activatorRect, contentBoundingClientRect)
       this.adjustedPlacement = adjustedPlacement
       if (this.positionModeisAbsolute) {
-        offset = getPositionInAbsoluteMode(adjustedPlacement)
+        const getPositionInAbsoluteMode = this.getPositionInAbsoluteMode
+        if (getPositionInAbsoluteMode) {
+          offset = getPositionInAbsoluteMode(adjustedPlacement)
+        } else {
+          offset = _getPositionInAbsoluteMode(adjustedPlacement)
+        }
       }
       this.setOffsetOfTrackingElement(offset, suggestedTransformOrigin)
       if (el && cb) {

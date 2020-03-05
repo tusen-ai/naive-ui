@@ -2,7 +2,6 @@
 Basic usage of modal. You can put anything in modal, a card for example.
 ```html
 <n-button
-  size="small"
   @click="isActive = true"
 >
   Start Me up

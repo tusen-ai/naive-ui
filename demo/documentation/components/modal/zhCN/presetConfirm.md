@@ -2,10 +2,9 @@
 `confirm` 预设的例子。
 ```html
 <n-button
-  size="small"
   @click="isActive = true"
 >
-  来
+  来吧
 </n-button>
 <n-modal v-model="isActive" 
   preset="confirm" 

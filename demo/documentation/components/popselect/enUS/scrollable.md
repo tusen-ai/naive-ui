@@ -1,11 +1,11 @@
-# Unscrollable
+# Scrollable
 
 ```html
 <n-popselect
   v-model="value"
   :options="options"
   size="medium"
-  :scrollable="false"
+  scrollable
   @change="handleChange"
 >
   <n-tag style="margin-right: 8px;">{{ value || 'Popselect' }}</n-tag>

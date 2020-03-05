@@ -1,5 +1,5 @@
 <!--no-demo-->
-# Getting Started
+# Get Started
 ```component
 installCodeGenerator
 ```

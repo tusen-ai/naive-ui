@@ -2,10 +2,9 @@
 Modal 有一些预设，让你在设定之后可以使用对应的 Slots 还有 Props。
 ```html
 <n-button
-  size="small"
   @click="isActive = true"
 >
-  卡
+  来吧
 </n-button>
 <n-modal
   v-model="isActive"

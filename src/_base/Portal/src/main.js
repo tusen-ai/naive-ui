@@ -43,7 +43,7 @@ export default {
     transferElement () {
       if (!this.transferable) return
       if (!this.elementTransferred) {
-        this.target.appendChild(this.$el)
+        this.target().appendChild(this.$el)
         this.elementTransferred = true
       }
     }

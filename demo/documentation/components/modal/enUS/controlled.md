@@ -2,7 +2,6 @@
 Modal can be controlled.
 ```html
 <n-button
-  size="small"
   @click="handleClick"
 >
   Start Me up
