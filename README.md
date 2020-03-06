@@ -4,14 +4,14 @@
 
 <h1 align="center">Naive UI</h1>
 <p align="center">A Vue UI Framework</p>
-<p align="center"><b>Very Caring About Styles, Themed, Batteries Included</b></p>
+<p align="center"><b>Caring About Styles, Themed, Batteries Included</b></p>
 <p align="center">Interesting Somehow</p>
 
 ## Documentation
 [www.naiveui.com](https://www.naiveui.com)
 
 ## Features
-### Very Caring About Styles
+### Caring About Styles
 As is.
 > The reason I started to build the library is I'm not satisfied the UI framework my company used. Maybe it's possible to caring about nearily all the details of an UI framework, except compatibility of IE.
 ### Themed

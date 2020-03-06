@@ -84,7 +84,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 |sorter|`boolean \| function \| 'default'`|`false`|The sorter of the column. If set `'default'`, it will use a basic builtin compare function. If set to `true`, it will only display sort icon on the column, which can be used in async status. Otherwise it works like `Array.sort`'s compare function.|
 |defaultSortOrder|`'descend' \| 'ascend' \| false`|`false`|The default sort order of the table in uncontrolled manner|
 |sortOrder|`'descend' \| 'ascend' \| false \| null`|`null`|The controlled sort order of the column. If it is not `null`, the table's sort status will be in controlled mode. If multiple columns' sortOrder is set, the first one will affect.|
-|filter|`boolean \| (optionValue: string \| number, rowData: object) => boolean`|`false`|The filter of the column. If set to `true`, it will only display filter button on the column, which can be used in async status.|
+|filter|`boolean \| (optionValue: string \| number, rowData: object) => boolean \| 'default'`|`false`|The filter of the column. If set to `true`, it will only display filter button on the column, which can be used in async status.|
 |filterMode|`'and' \| 'or'`|`'or'`||
 |filterOptions|`Array<{ label: string, value: string \| number}>`|`[]`||
 |filterOptionValues|`Array<string \| number> \| null`|`null`|The active filter option values in controlled manner. If set to `null`, the filter of the column works in an uncontrolled manner|

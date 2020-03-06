@@ -84,7 +84,7 @@ ajaxUsage
 |sorter|`boolean \| function \| 'default'`|`false`|这一列的排序方法。如果设为 `'default'` 表格将会使用一个内置的排序函数；如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。其他情况下它工作的方式类似   `Array.sort` 的对比函数|
 |defaultSortOrder|`'descend' \| 'ascend' \| false`|`false`|非受控状态下表格默认的排序方式|
 |sortOrder|`'descend' \| 'ascend' \| false \| null`|`null`|受控状态下表格的排序方式。如果不是 `null`，表格整体的排序将会是受控的。如果多列都设定了有效值，那么只有第一个会生效|
-|filter|`boolean \| (optionValue: string \| number, rowData: object) => boolean`|`false`|这一列的过滤方法。如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。|
+|filter|`boolean \| (optionValue: string \| number, rowData: object) => boolean \| 'default'`|`false`|这一列的过滤方法。如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。|
 |filterMode|`'and' \| 'or'`|`'or'`||
 |filterOptions|`Array<{ label: string, value: string \| number}>`|`[]`||
 |filterOptionValues|`Array<string \| number> \| null`|`null`|受控状态下，当前激活的过滤器选项值。如果设为 `null`，这一列的过滤行为将是非受控的|

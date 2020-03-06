@@ -256,18 +256,21 @@ export default {
     filteredData () {
       const syntheticActiveFilters = this.syntheticActiveFilters
       const normalizedColumns = this.normalizedColumns
+      function createDefaultFilter (columnKey) {
+        return (filterOptionValue, row) => ~String(row[columnKey]).indexOf(String(filterOptionValue))
+      }
       return this.data ? this.data.filter(row => {
         for (const columnKey of Object.keys(row)) {
           const activeFilterOptionValues = syntheticActiveFilters
-            .filter(filter => filter.columnKey === columnKey)
-            .map(filter => filter.filterOptionValue)
+            .filter(filterInfo => filterInfo.columnKey === columnKey)
+            .map(filterInfo => filterInfo.filterOptionValue)
           if (!activeFilterOptionValues.length) continue
           const columnToFilter = normalizedColumns.find(column => column.key === columnKey)
           /**
            * When async, filter won't be set, so data won't be filtered
            */
           const filter = columnToFilter.filter === 'default'
-            ? (filterOptionValue, row) => ~String(row[columnKey]).indexOf(String(filterOptionValue))
+            ? createDefaultFilter(columnKey)
             : columnToFilter.filter
           if (columnToFilter && typeof filter === 'function') {
             if (columnToFilter.filterMode === 'and') {
