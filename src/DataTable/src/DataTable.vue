@@ -22,8 +22,6 @@
           :row-class-name="rowClassName"
           :loading="loading"
           :body-min-height="42"
-          @header-scroll="handleMainTableHeaderScroll"
-          @scroll="handleTableBodyScroll"
         >
           <slot name="append" />
         </base-table>
@@ -515,7 +513,7 @@ export default {
         body
       }
     },
-    handleMainTableHeaderScroll (e, active) {
+    handleTableHeaderScroll (e, active) {
       if (this.scrollingPart === null) {
         this.scrollingPart = 'header'
       }

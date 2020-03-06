@@ -125,7 +125,6 @@ export default {
       type: Boolean,
       default: false
     }
-
   },
   data () {
     return {
@@ -169,7 +168,7 @@ export default {
     },
     createCustomWidthStyle: createCustomWidthStyle,
     handleScroll (event) {
-      this.$emit('scroll', event)
+      this.NDataTable.handleTableBodyScroll(event)
     }
   }
 }

@@ -7,7 +7,6 @@
       :data="data"
       :fixed="fixed"
       :scroll-x="scrollX"
-      @scroll="handleHeaderScroll"
       @set-active-fixed-column="setActiveFixedColumn"
     />
     <table-body
@@ -22,7 +21,6 @@
       :min-height="bodyMinHeight"
       :loading="loading"
       :fixed="fixed"
-      @scroll="handleBodyScroll"
     />
     <slot />
   </div>
@@ -36,6 +34,11 @@ export default {
   components: {
     TableHeader,
     TableBody
+  },
+  inject: {
+    NDataTable: {
+      default: null
+    }
   },
   props: {
     main: {
@@ -89,12 +92,6 @@ export default {
     },
     getBodyElement () {
       return this.$refs.body.getScrollContainer()
-    },
-    handleBodyScroll (...args) {
-      this.$emit('scroll', ...args)
-    },
-    handleHeaderScroll (...args) {
-      this.$emit('header-scroll', ...args)
     },
     setActiveFixedColumn (leftActiveFixedColumn, rightActiveFixedColumn) {
       this.$refs.body.activeLeft = leftActiveFixedColumn
