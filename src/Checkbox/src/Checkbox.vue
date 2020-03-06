@@ -5,6 +5,7 @@
       'n-checkbox--checked': syntheticChecked,
       'n-checkbox--disabled': syntheticDisabled,
       'n-checkbox--indeterminate': indeterminate,
+      'n-checkbox--table-header': tableHeader,
       [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
     :tabindex="syntheticDisabled ? false : 0"
@@ -74,6 +75,10 @@ export default {
       default: false
     },
     indeterminate: {
+      type: Boolean,
+      default: false
+    },
+    tableHeader: {
       type: Boolean,
       default: false
     }

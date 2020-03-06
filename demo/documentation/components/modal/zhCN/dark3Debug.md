@@ -20,6 +20,13 @@
 ```js
 const columns = [
   {
+    type: 'selection',
+    disabled (row, index) {
+      return row.name === 'Edward King 3'
+    },
+    fixed: 'left',
+  },
+  {
     title: 'Name',
     key: 'name',
     width: 200,
@@ -45,6 +52,7 @@ const columns = [
     ]
   },
   {
+    fixed: 'left',
     title: 'Age',
     key: 'age',
     width: 100

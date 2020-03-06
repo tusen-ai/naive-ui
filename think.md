@@ -189,6 +189,7 @@ const devtoolIsOpened = e.target === document.activeElement
 66. Icon 颜色
 67. <del>Modal 滚动之后的 transform origin</del>
 68. <del>Slider 对于 modal 适配</del>
+69. table fixed scroll checkbox, not sync
 
 ```
 Done

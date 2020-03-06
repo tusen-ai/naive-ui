@@ -20,7 +20,6 @@
       :columns="columns"
       :row-class-name="rowClassName"
       :min-height="bodyMinHeight"
-      :tr-heights="trHeights"
       :loading="loading"
       :fixed="fixed"
       @scroll="handleBodyScroll"
@@ -66,10 +65,6 @@ export default {
     fixed: {
       type: Boolean,
       default: false
-    },
-    trHeights: {
-      type: Array,
-      default: null
     },
     height: {
       type: Number,

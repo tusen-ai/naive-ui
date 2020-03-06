@@ -24,19 +24,11 @@
           v-for="(rowData, index) in data"
           :key="rowKey === null ? rowData.key : rowKey(rowData)"
           class="n-data-table-tr"
-          :style="{
-            height: (!main || null) && (trHeights[index] && trHeights[index] + 'px')
-          }"
-          :class="Object.assign(
-            {
-              'n-data-table-tr--hover': hoveringRowIndex === index,
-            },
+          :class="
             createClassObject(typeof rowClassName === 'function'
               ? createClassObject(rowClassName(rowData, index))
               : rowClassName)
-          )"
-          @mouseenter="handleTrMouseEnter(index)"
-          @mouseleave="handleTrMouseLeave"
+          "
         >
           <template v-for="column in columns">
             <td
@@ -81,7 +73,6 @@
 import cell from './Cell.vue'
 import { createCustomWidthStyle, setCheckStatusOfRow, createClassObject } from '../utils'
 import NScrollbar from '../../../Scrollbar'
-import resizeObserverDelegate from '../../../_utils/delegate/resizeObserverDelegate'
 
 export default {
   components: {
@@ -109,10 +100,6 @@ export default {
     fixed: {
       type: Boolean,
       default: false
-    },
-    trHeights: {
-      type: Array,
-      default: null
     },
     minHeight: {
       type: Number,
@@ -156,9 +143,6 @@ export default {
       if (!pagination.page) return -1
       return pagination.page
     },
-    hoveringRowIndex () {
-      return this.NDataTable.hoveringRowIndex
-    },
     checkedRowKeys () {
       return this.NDataTable.syntheticCheckedRowKeys
     },
@@ -173,23 +157,7 @@ export default {
       }
     }
   },
-  mounted () {
-    if (this.main) {
-      resizeObserverDelegate.registerHandler(this.$refs.tbody, this.handleTbodyResize)
-      this.handleTbodyResize()
-    }
-  },
-  beforeDestroy () {
-    if (this.main) {
-      resizeObserverDelegate.unregisterHandler(this.$refs.tbody)
-    }
-  },
   methods: {
-    handleTbodyResize () {
-      if (this.main) {
-        this.NDataTable.collectDOMSizes()
-      }
-    },
     createClassObject,
     handleCheckboxInput (row, checked) {
       const newCheckedRowKeys = this.checkedRowKeys.map(v => v)
@@ -198,12 +166,6 @@ export default {
     },
     getScrollContainer () {
       return this.$refs.scrollbar.$refs.scrollContainer
-    },
-    handleTrMouseEnter (index) {
-      this.NDataTable.hoveringRowIndex = index
-    },
-    handleTrMouseLeave () {
-      this.NDataTable.hoveringRowIndex = null
     },
     createCustomWidthStyle: createCustomWidthStyle,
     handleScroll (event) {

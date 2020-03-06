@@ -37,7 +37,7 @@
               :class="{
                 'n-data-table-th--filterable': isColumnFilterable(column),
                 'n-data-table-th--sortable': isColumnSortable(column),
-                [`n-data-table-th--fixed-${column.fixed}`]: column.fixed,
+                [`n-data-table-th--fixed-${column.fixed}`]: column.fixed && column.width,
                 'n-data-table-th--shadow-after': leftActiveFixedColumn[column.key],
                 'n-data-table-th--shadow-before': rightActiveFixedColumn[column.key]
               }"
@@ -46,6 +46,7 @@
               <n-checkbox
                 v-if="column.type === 'selection'"
                 :key="currentPage"
+                table-header
                 :checked="checkboxChecked"
                 :indeterminate="checkboxIndererminate"
                 @change="handleCheckboxInput(column)"

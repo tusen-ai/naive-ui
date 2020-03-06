@@ -23,7 +23,7 @@
           :loading="loading"
           :body-min-height="42"
           @header-scroll="handleMainTableHeaderScroll"
-          @scroll="handleTableMainBodyScroll"
+          @scroll="handleTableBodyScroll"
         >
           <slot name="append" />
         </base-table>
@@ -113,6 +113,7 @@ function normalizeColumn (column) {
   })
   if (!column.key && column.type === 'selection') {
     defaultColumn.key = 'selection'
+    defaultColumn.width = 48
   }
   return defaultColumn
 }
@@ -197,9 +198,6 @@ export default {
   data () {
     return {
       /** collected tr heights of main table */
-      trHeights: [],
-      hoveringRowIndex: null,
-      mainTableScrollContainerWidth: null,
       horizontalScrollLeft: 0,
       /* which part is being scrolling: main left right header */
       scrollingPart: null,
@@ -446,9 +444,6 @@ export default {
     allRowsChecked () {
       return this.countOfCurrentPageCheckedRows === this.paginatedData.length
     }
-    // handleScroll () {
-
-    // }
   },
   watch: {
     syntheticCurrentPage () {
@@ -521,52 +516,49 @@ export default {
       }
     },
     handleMainTableHeaderScroll (e, active) {
-      if (!this.scrollingPart || this.scrollingPart === 'head') {
-        if (this.scrollingPart !== 'head') this.scrollingPart = 'head'
-        if (this.scrollTimerId) window.clearTimeout(this.scrollTimerId)
-        this.scrollTimerId = window.setTimeout(() => {
-          this.scrollingPart = null
-          this.scrollTimerId = null
-        }, 200)
-        const {
-          scrollLeft
-        } = e.target
-        const {
-          body: bodyEl
-        } = this.getScrollElements()
-        bodyEl.scrollLeft = scrollLeft
-        this.horizontalScrollLeft = scrollLeft
+      if (this.scrollingPart === null) {
+        this.scrollingPart = 'header'
       }
-    },
-    handleTableMainBodyScroll (e) {
-      this.handleTableBodyScroll(e, 'main')
-    },
-    handleTableBodyScroll (e, part) {
-      if (!this.scrollingPart || this.scrollingPart === part) {
-        if (this.scrollingPart !== part) this.scrollingPart = part
-        if (this.scrollTimerId) window.clearTimeout(this.scrollTimerId)
+      if (this.scrollingPart === 'header') {
+        window.clearTimeout(this.scrollTimerId)
         this.scrollTimerId = window.setTimeout(() => {
           this.scrollingPart = null
-          this.scrollTimerId = null
         }, 200)
-        const {
-          scrollTop,
-          scrollLeft
-        } = e.target
-        const {
-          header: headerEl,
-          body: bodyEl
-        } = this.getScrollElements()
-        if (part === 'main') {
-          if (headerEl) {
-            headerEl.scrollLeft = scrollLeft
-            this.horizontalScrollLeft = scrollLeft
-          }
-        }
-        if (bodyEl && bodyEl.scrollTop !== scrollTop) {
-          bodyEl.scrollTop = scrollTop
-        }
-        this.mainTableScrollContainerWidth = bodyEl.offsetWidth
+      }
+      if (this.scrollingPart === 'body') {
+        return
+      }
+      const {
+        scrollLeft
+      } = e.target
+      const {
+        body: bodyEl
+      } = this.getScrollElements()
+      bodyEl.scrollLeft = scrollLeft
+      this.horizontalScrollLeft = scrollLeft
+    },
+    handleTableBodyScroll (e) {
+      if (this.scrollingPart === null) {
+        this.scrollingPart = 'body'
+      }
+      if (this.scrollingPart === 'body') {
+        window.clearTimeout(this.scrollTimerId)
+        this.scrollTimerId = window.setTimeout(() => {
+          this.scrollingPart = null
+        }, 200)
+      }
+      if (this.scrollingPart === 'header') {
+        return
+      }
+      const {
+        scrollLeft
+      } = e.target
+      const {
+        header: headerEl
+      } = this.getScrollElements()
+      if (headerEl) {
+        headerEl.scrollLeft = scrollLeft
+        this.horizontalScrollLeft = scrollLeft
       }
     },
     page (page) {
@@ -601,14 +593,6 @@ export default {
     },
     filter (filters) {
       this.changeFilters(filters)
-    },
-    collectDOMSizes () {
-      const {
-        body: mainTableScrollContainer
-      } = this.getScrollElements()
-      this.mainTableScrollContainerWidth = mainTableScrollContainer.offsetWidth
-      const trHeights = Array.from(mainTableScrollContainer.querySelectorAll('tr')).map(el => el.offsetHeight)
-      this.trHeights = trHeights
     },
     checkAll (column) {
       const checkedRowKeys = this.syntheticCheckedRowKeys.map(v => v)
