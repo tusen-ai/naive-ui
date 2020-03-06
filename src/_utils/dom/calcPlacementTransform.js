@@ -73,7 +73,7 @@ export function getTransformOriginByPlacement (placement) {
   return placementToTransformOrigin[placement] || null
 }
 
-export function getPosition (placement, offsetContainerRect, activatorRect) {
+export function getPosition (placement, offsetContainerRect, trackedRect) {
   const offset = {
     top: null,
     bottom: null,
@@ -82,50 +82,50 @@ export function getPosition (placement, offsetContainerRect, activatorRect) {
     transform: null
   }
   if (placement === 'bottom-start') {
-    offset.top = (activatorRect.top - offsetContainerRect.top + activatorRect.height) + 'px'
-    offset.left = (activatorRect.left - offsetContainerRect.left) + 'px'
+    offset.top = (trackedRect.top - offsetContainerRect.top + trackedRect.height) + 'px'
+    offset.left = (trackedRect.left - offsetContainerRect.left) + 'px'
   } else if (placement === 'bottom-end') {
-    offset.top = (activatorRect.top - offsetContainerRect.top + activatorRect.height) + 'px'
-    offset.left = (activatorRect.left - offsetContainerRect.left + activatorRect.width) + 'px'
+    offset.top = (trackedRect.top - offsetContainerRect.top + trackedRect.height) + 'px'
+    offset.left = (trackedRect.left - offsetContainerRect.left + trackedRect.width) + 'px'
     offset.transform = 'translateX(-100%)'
   } else if (placement === 'top-start') {
-    offset.top = (activatorRect.top - offsetContainerRect.top) + 'px'
-    offset.left = (activatorRect.left - offsetContainerRect.left) + 'px'
+    offset.top = (trackedRect.top - offsetContainerRect.top) + 'px'
+    offset.left = (trackedRect.left - offsetContainerRect.left) + 'px'
     offset.transform = 'translateY(-100%)'
   } else if (placement === 'top-end') {
-    offset.top = (activatorRect.top - offsetContainerRect.top) + 'px'
-    offset.left = (activatorRect.left - offsetContainerRect.left + activatorRect.width) + 'px'
+    offset.top = (trackedRect.top - offsetContainerRect.top) + 'px'
+    offset.left = (trackedRect.left - offsetContainerRect.left + trackedRect.width) + 'px'
     offset.transform = 'translateY(-100%) translateX(-100%)'
   } else if (placement === 'right-start') {
-    offset.top = (activatorRect.top - offsetContainerRect.top) + 'px'
-    offset.left = (activatorRect.left - offsetContainerRect.left + activatorRect.width) + 'px'
+    offset.top = (trackedRect.top - offsetContainerRect.top) + 'px'
+    offset.left = (trackedRect.left - offsetContainerRect.left + trackedRect.width) + 'px'
   } else if (placement === 'right-end') {
-    offset.top = (activatorRect.top - offsetContainerRect.top + activatorRect.height) + 'px'
-    offset.left = (activatorRect.left - offsetContainerRect.left + activatorRect.width) + 'px'
+    offset.top = (trackedRect.top - offsetContainerRect.top + trackedRect.height) + 'px'
+    offset.left = (trackedRect.left - offsetContainerRect.left + trackedRect.width) + 'px'
     offset.transform = 'translateY(-100%)'
   } else if (placement === 'left-start') {
-    offset.top = (activatorRect.top - offsetContainerRect.top) + 'px'
-    offset.left = (activatorRect.left - offsetContainerRect.left) + 'px'
+    offset.top = (trackedRect.top - offsetContainerRect.top) + 'px'
+    offset.left = (trackedRect.left - offsetContainerRect.left) + 'px'
     offset.transform = 'translateX(-100%)'
   } else if (placement === 'left-end') {
-    offset.top = (activatorRect.top - offsetContainerRect.top + activatorRect.height) + 'px'
-    offset.left = (activatorRect.left - offsetContainerRect.left) + 'px'
+    offset.top = (trackedRect.top - offsetContainerRect.top + trackedRect.height) + 'px'
+    offset.left = (trackedRect.left - offsetContainerRect.left) + 'px'
     offset.transform = 'translateX(-100%) translateY(-100%)'
   } else if (placement === 'top') {
-    offset.top = (activatorRect.top - offsetContainerRect.top) + 'px'
-    offset.left = (activatorRect.left - offsetContainerRect.left + activatorRect.width / 2) + 'px'
+    offset.top = (trackedRect.top - offsetContainerRect.top) + 'px'
+    offset.left = (trackedRect.left - offsetContainerRect.left + trackedRect.width / 2) + 'px'
     offset.transform = 'translateX(-50%) translateY(-100%)'
   } else if (placement === 'right') {
-    offset.top = (activatorRect.top - offsetContainerRect.top + activatorRect.height / 2) + 'px'
-    offset.left = (activatorRect.left - offsetContainerRect.left + activatorRect.width) + 'px'
+    offset.top = (trackedRect.top - offsetContainerRect.top + trackedRect.height / 2) + 'px'
+    offset.left = (trackedRect.left - offsetContainerRect.left + trackedRect.width) + 'px'
     offset.transform = 'translateY(-50%)'
   } else if (placement === 'bottom') {
-    offset.top = (activatorRect.top - offsetContainerRect.top + activatorRect.height) + 'px'
-    offset.left = (activatorRect.left - offsetContainerRect.left + activatorRect.width / 2) + 'px'
+    offset.top = (trackedRect.top - offsetContainerRect.top + trackedRect.height) + 'px'
+    offset.left = (trackedRect.left - offsetContainerRect.left + trackedRect.width / 2) + 'px'
     offset.transform = 'translateX(-50%)'
   } else if (placement === 'left') {
-    offset.top = (activatorRect.top - offsetContainerRect.top + activatorRect.height / 2) + 'px'
-    offset.left = (activatorRect.left - offsetContainerRect.left) + 'px'
+    offset.top = (trackedRect.top - offsetContainerRect.top + trackedRect.height / 2) + 'px'
+    offset.left = (trackedRect.left - offsetContainerRect.left) + 'px'
     offset.transform = 'translateX(-100%) translateY(-50%)'
   } else {
     console.error(

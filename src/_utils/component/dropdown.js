@@ -46,7 +46,6 @@ function createSelectOptionsFromDropdownOptions (dropdownOptions, DropdownSubmen
       selectOptions.push(createSelectOptionForDropdownDivider(option, DropdownDivider))
     }
   })
-  console.log('createSelectOptionsFromDropdownOptions', selectOptions)
   return selectOptions
 }
 
