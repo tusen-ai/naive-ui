@@ -1,5 +1,5 @@
 # Card
-Some amatuer designer like to apply shadow on every one of it.
+Some amatuer UI designers like to apply shadow on every cards.
 ## Demos
 ```demo
 basic

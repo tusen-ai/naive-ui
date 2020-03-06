@@ -21,7 +21,7 @@ use-component
 |-|-|-|-|
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
 |title|`string \| (() => VNode \| Array<VNode>)`|`null`|可以是 render 函数|
-|closable|`boolean`|`boolean`||
+|closable|`boolean`|`true`||
 |icon|`() => VNode \| Array<VNode>`|`null`|需要是 render 函数|
 |negative-text|`string`|`null`|不填对应的按钮不会出现|
 |positive-text|`string`|`null`|不填对应的按钮不会出现|

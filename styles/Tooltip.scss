@@ -12,64 +12,9 @@
         box-shadow: $--tooltip-box-shadow;
         background-color: $--tooltip-background-color;
         color: $--tooltip-text-color;
-        &[n-placement$="top-start"] {
+        @include b(popover-arrow-wrapper) {
           @include b(popover-arrow) {
-            border-top-color: $--tooltip-background-color;
-          }
-        }
-        &[n-placement$="top"] {
-          @include b(popover-arrow) {
-            border-top-color: $--tooltip-background-color;
-          }
-        }
-        &[n-placement$="top-end"] {
-          @include b(popover-arrow) {
-            border-top-color: $--tooltip-background-color;
-          }
-        }
-        &[n-placement$="bottom-start"] {
-          @include b(popover-arrow) {
-            border-bottom-color: $--tooltip-background-color;
-          }
-        }
-        &[n-placement$="bottom"] {
-          @include b(popover-arrow) {
-            border-bottom-color: $--tooltip-background-color;
-          }
-        }
-        &[n-placement$="bottom-end"] {
-          @include b(popover-arrow) {
-            border-bottom-color: $--tooltip-background-color;
-          }
-        }
-        &[n-placement$="left-start"] {
-          @include b(popover-arrow) {
-            border-left-color: $--tooltip-background-color;
-          }
-        }
-        &[n-placement$="left"] {
-          @include b(popover-arrow) {
-            border-left-color: $--tooltip-background-color;
-          }
-        }
-        &[n-placement$="left-end"] {
-          @include b(popover-arrow) {
-            border-left-color: $--tooltip-background-color;
-          }
-        }
-        &[n-placement$="right-start"] {
-          @include b(popover-arrow) {
-            border-right-color: $--tooltip-background-color;
-          }
-        }
-        &[n-placement$="right"] {
-          @include b(popover-arrow) {
-            border-right-color: $--tooltip-background-color;
-          }
-        }
-        &[n-placement$="right-end"] {
-          @include b(popover-arrow) {
-            border-right-color: $--tooltip-background-color;
+            background-color: $--tooltip-background-color;
           }
         }
       }

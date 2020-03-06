@@ -1,7 +1,9 @@
 @mixin setup-light-checkbox {
   $--checkbox-background-color: (
     'default': $--n-base-background-color,
-    'disabled': $--n-disabled-background-color
+    'disabled': $--n-disabled-background-color,
+    'table': $--n-card-background-color,
+    'modal-table': $--n-modal-background-color
   ) !global;
   $--checkbox-icon-color: (
     'default': $--n-base-background-color,

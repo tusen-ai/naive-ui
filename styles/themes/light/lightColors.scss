@@ -1,7 +1,7 @@
 @mixin setup-light-colors {
   $--base-text: rgb(0, 0, 0) !global;
 
-  $--alpha-1: .84 !global;
+  $--alpha-1: .82 !global;
   $--alpha-2: .72 !global;
   $--alpha-3: .4 !global;
   $--alpha-4: .24 !global;
@@ -18,10 +18,10 @@
   // overlay
   $--overlay-avatar: rgba(0, 0, 0, .25) !global;
   $--overlay-rail: rgba(0, 0, 0, .14) !global;
-  $--overlay-border: rgba(0, 0, 0, .13) !global;
-  $--overlay-divider: rgba(0, 0, 0, .09) !global;
+  $--overlay-border: rgba(0, 0, 0, .15) !global;
+  $--overlay-divider: rgba(0, 0, 0, .10) !global;
   $--overlay-input: null !global;
-  $--overlay-action: rgba(0, 0, 0, .025) !global;
+  $--overlay-action: rgba(0, 0, 0, .02) !global;
   $--overlay-tab: rgba(0, 0, 0, .04) !global;
   $--overlay-scrollbar: rgba(0, 0, 0, .25) !global;
   $--overlay-scrollbar-hover: rgba(0, 0, 0, .4) !global;
@@ -31,15 +31,15 @@
   $--overlay-disabled: rgba(0, 0, 0, $--alpha-disabled-fill) !global;
   $--overlay-pending: rgba(0, 0, 0, $--alpha-pending) !global;
   $--overlay-active: rgba(0, 0, 0, .06) !global;
-  $--overlay-code: rgba(0, 0, 0, .025) !global;
-  $--overlay-tag: rgba(0, 0, 0, .025) !global;
+  $--overlay-code: rgba(0, 0, 0, .02) !global;
+  $--overlay-tag: rgba(0, 0, 0, .02) !global;
 
   // neutral
   $--neutral-base: white !global;
   $--neutral-popover: rgb(255, 255, 255) !global;
   $--neutral-modal: rgb(255, 255, 255) !global;
   $--neutral-card: rgb(255, 255, 255) !global;
-  $--neutral-body: rgb(252, 252, 252) !global;
+  $--neutral-body: rgb(248, 248, 248) !global;
   $--neutral-disabled: create-light-neutral-color($--overlay-disabled) !global;
   $--neutral-border: create-light-neutral-color($--overlay-border) !global;
   $--neutral-divider: create-light-neutral-color($--overlay-divider) !global;

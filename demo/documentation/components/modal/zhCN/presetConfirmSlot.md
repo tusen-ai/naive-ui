@@ -1,11 +1,10 @@
-# 使用 Confirm 预设的 Slot
-Slots 也会随着 preset 变动。
+# 使用 Confirm 预设的插槽
+插槽也会随着预设变动。
 ```html
 <n-button
-  size="small"
   @click="isActive = true"
 >
-  来
+  来吧
 </n-button>
 <n-modal v-model="isActive" 
   preset="confirm"

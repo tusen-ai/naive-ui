@@ -222,6 +222,9 @@ export default {
     getTrackedElement () {
       return this.activator().$el
     },
+    getAbsoluteOffsetContainer () {
+      return this.$refs.contentContainer
+    },
     getZindexableContent () {
       return this.$el
     }

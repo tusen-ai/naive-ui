@@ -4,7 +4,7 @@
     :class="{
       'n-form--inline': inline
     }"
-    @keydown.enter="handleKeyDownEnter"
+    @submit="onSubmit"
   >
     <slot />
   </form>
@@ -55,6 +55,10 @@ export default {
         return ['small', 'medium', 'large'].includes(value)
       },
       default: null
+    },
+    onSubmit: {
+      type: Function,
+      default: e => e.preventDefault()
     }
   },
   data () {
@@ -103,11 +107,6 @@ export default {
         for (const formItemInstance of formItemInstances) {
           formItemInstance.clearValidationEffect()
         }
-      }
-    },
-    handleKeyDownEnter (e) {
-      if (e.target.tagName === 'INPUT' && e.target.getAttribute('type')) {
-        e.preventDefault()
       }
     }
   }

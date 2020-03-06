@@ -50,14 +50,10 @@ export default function (locale, instance) {
         path: `/${instance.lang}/${instance.theme}/doc` + '/intro'
       },
       {
-        name: 'Getting Started',
+        name: 'Get Started',
         title: '起步',
         path: `/${instance.lang}/${instance.theme}/doc` + '/start'
       },
-      // {
-      //   name: 'Develop Guidelines',
-      //   path: `/${instance.lang}/${instance.theme}/doc` + '/dev-guildlines'
-      // },
       {
         name: 'Create Themed Component',
         title: '创建适配主题的组件',
@@ -412,7 +408,7 @@ export default function (locale, instance) {
           {
             name: 'Alert',
             title: '警告信息',
-            titleExtra: 'Alerts',
+            titleExtra: 'Alert',
             path: `/${instance.lang}/${instance.theme}/doc` + '/n-alert'
           },
           {
@@ -566,7 +562,7 @@ export default function (locale, instance) {
         path: `/${instance.lang}/${instance.theme}/doc` + '/intro'
       },
       {
-        name: 'Getting Started',
+        name: 'Get Started',
         path: `/${instance.lang}/${instance.theme}/doc` + '/start'
       },
       // {

@@ -2,7 +2,6 @@
 An example of preset `confirm`.
 ```html
 <n-button
-  size="small"
   @click="isActive = true"
 >
   Start Me up

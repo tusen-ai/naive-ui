@@ -3,7 +3,7 @@
   "zh-CN": {
     "dark": "深色",
     "light": "浅色",
-    "searchPlaceholder": "搜索组件",
+    "searchPlaceholder": "搜索",
     "home": "首页",
     "doc": "文档",
     "common": "常规",
@@ -13,7 +13,7 @@
   "en-US": {
     "dark": "Dark",
     "light": "Light",
-    "searchPlaceholder": "Search Components",
+    "searchPlaceholder": "Search",
     "home": "Home",
     "doc": "Documentation",
     "common": "Common",
@@ -129,7 +129,7 @@ export default {
       },
       modeOptions: {
         'debug': {
-          label: 'Common',
+          label: 'Production',
           next: 'common'
         },
         'common': {
@@ -142,7 +142,7 @@ export default {
   computed: {
     zIndex () {
       const path = this.$route.path
-      return (path.endsWith('n-modal') || path.endsWith('n-drawer')) ? null : 3000
+      return (path.endsWith('n-modal') || path.endsWith('n-drawer') || path.endsWith('n-confirm')) ? null : 3000
     },
     theme () {
       return this.NConfigProvider.$parent.theme
@@ -212,7 +212,6 @@ export default {
     handleThemeChange () {
       this.NConfigProvider.$parent.theme = this.themeOptions[this.theme].next
     },
-
     handleModeChange () {
       this.$emit('mode-change', this.modeOptions[this.mode].next)
     },

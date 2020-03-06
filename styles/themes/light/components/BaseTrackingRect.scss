@@ -1,3 +1,6 @@
 @mixin setup-light-base-tracking-rect {
-  $--base-tracking-rect-background-color: mix($--n-primary-color, $--n-base-background-color, 10%) !global;
+  $--base-tracking-rect-background-color: mix-color-with-alpha-color(
+    $--n-base-background-color,
+    $--n-pending-overlay-color
+  ) !global;
 }

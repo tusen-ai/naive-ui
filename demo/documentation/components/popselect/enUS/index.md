@@ -22,7 +22,7 @@ multiple
 |-|-|-|-|
 |value|`string \| number`|`null`||
 |options|`Array<SelectOption \| SelectOptionGroup>`|`[]`||
-|scrollable|`boolean`|`true`||
+|scrollable|`boolean`|`false`||
 |multiple|`boolean`|`false`||
 |size|`'small' \| 'medium' \| 'large'`|`'small'`||
 

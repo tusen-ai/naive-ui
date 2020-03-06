@@ -202,6 +202,7 @@
               margin-left: 6px;
               display: inline-block;
               transition: color 0.3s $--n-ease-in-out-cubic-bezier;
+              font-size: 13px;
             }
             color: map-get($--menu-item-content-extra-text-color, 'default');
           }
@@ -262,6 +263,7 @@
         color: $--menu-item-group-text-color;
         @include once {
           cursor: default;
+          font-size: 13px;
           height: 40px;
           display: flex;
           align-items: center;

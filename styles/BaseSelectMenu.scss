@@ -70,6 +70,7 @@
         transition: color .3s $--n-ease-in-out-cubic-bezier;
         text-overflow: ellipsis;
         overflow: hidden;
+        box-sizing: border-box;
         @include m(grouped) {
           padding: 0 21px;
         }

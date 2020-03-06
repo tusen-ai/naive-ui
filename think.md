@@ -152,7 +152,7 @@ const devtoolIsOpened = e.target === document.activeElement
 29. <del>loader 区分 debug 和 非 debug</del>
 30. <del>逐步放宽对宽度必需传 number 的现实，尤其是对于 table</del>
 31. <del>BaseLoading 代替 Log 里的 Spin</del>
-32. Modal 内部组件的卸载方式
+32. <del>Modal 内部组件的卸载方式</del>
 33. <del>Anchor 的另一种模式，追踪内容按照的是中间范围而不是自身大小</del>
 34. <del>bug md-loader alert 内的 code 不显示</del> 不是 bug，md 就这么渲染
 35. <del>backtop mounted blink</del>
@@ -177,18 +177,19 @@ const devtoolIsOpened = e.target === document.activeElement
 54. <del>Select option 右侧 padding 调整</del>
 55. <del>Popover arrow shadow 调整</del>
 56. <del>Input number 按钮样式调整</del>
-57. 一部分组件在 Modal 内部的样式
+57. <del>一部分组件在 Modal 内部的样式</del> 还差 data table 的选项们
 58. <del>更新 Progress 文档</del>
 59. <del>为所有的数据录入组件的尺寸</del>
 60. 审核文档
 61. <del>调整 transfer 的样式</del>
 62. <del>Table cascader 差一点国际化</del>
-63. Anchor 初次滚动的逻辑是不是要手动调整一下，现在位置实际上不一致
+63. <del>Anchor 初次滚动的逻辑是不是要手动调整一下，现在位置实际上不一致</del>
 64. <del>将所有的 Typography 组件改为非 Functional 的，因为获取不到 context 本身的主题</del>
-65. 搞明白 table layout 这个 css 属性是在干什么
+65. <del>搞明白 table layout 这个 css 属性是在干什么</del>
 66. Icon 颜色
-67. Modal 滚动之后的 transform origin
-68. Slider 对于 modal 适配
+67. <del>Modal 滚动之后的 transform origin</del>
+68. <del>Slider 对于 modal 适配</del>
+69. table fixed scroll checkbox, not sync
 
 ```
 Done

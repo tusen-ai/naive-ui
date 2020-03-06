@@ -7,7 +7,7 @@
     @mousedown="handleMouseDown"
     @mouseup="handleMouseUp"
   >
-    <n-scrollbar ref="scrollbar">
+    <n-scrollbar ref="scrollbar" @scroll="handleScroll">
       <transition
         name="n-modal-content-slot-transition"
         @enter="handleEnter"
@@ -101,6 +101,11 @@ export default {
     NConfirm,
     NCard
   },
+  provide () {
+    return {
+      NModal: this
+    }
+  },
   mixins: [themeable],
   props: {
     active: {
@@ -121,7 +126,10 @@ export default {
   },
   data () {
     return {
-      styleActive: false
+      styleActive: false,
+      transformOriginX: null,
+      transformOriginY: null,
+      scrollTop: 0
     }
   },
   created () {
@@ -129,14 +137,16 @@ export default {
       this.styleActive = true
     }
   },
-  updated () {
-    // this.$nextTick().then(() => {
-    //   console.log('modal rerender')
-    //   console.log(this.$slots.default[1].text)
-    //   console.log(this.$scopedSlots.default()[1].text)
-    // })
-  },
   methods: {
+    styleTransformOrigin () {
+      const transformOriginX = this.transformOriginX
+      const transformOriginY = this.transformOriginY
+      if (transformOriginX === null || transformOriginY === null) {
+        return null
+      } else {
+        return `${transformOriginX}px ${transformOriginY + this.scrollTop}px`
+      }
+    },
     slotDOM () {
       const els = (this.$refs.contentInner && this.$refs.contentInner.childNodes) || []
       return els
@@ -156,8 +166,6 @@ export default {
     },
     updateTransformOrigin () {
       if (
-        (!this.$parent.$refs.activator ||
-        !this.$parent.$refs.activator.childElementCount) &&
         !this.activateEvent &&
         !mousePosition
       ) {
@@ -169,48 +177,30 @@ export default {
         offsetTop
       } = this.$refs.contentInner
       if (
-        this.$parent.$refs.activator &&
-        this.$parent.$refs.activator.childElementCount
-      ) {
-        const {
-          left: activatorLeft,
-          top: activatorTop,
-          width: activatorWidth,
-          height: activatorHeight
-        } = this.$parent.$refs.activator.getBoundingClientRect()
-        const transformOriginX = -(offsetLeft - activatorLeft - activatorWidth / 2)
-        const transformOriginY = -(offsetTop - activatorTop - scrollTop - activatorHeight / 2)
-        this.$refs.contentInner.style.transformOrigin = `${transformOriginX}px ${transformOriginY}px`
-      } else if (
         this.activateEvent
       ) {
-        const activatorTop = this.activateEvent.clientY
-        const activatorLeft = this.activateEvent.clientX
-        const activatorWidth = 0
-        const activatorHeight = 0
-        const transformOriginX = -(offsetLeft - activatorLeft - activatorWidth / 2)
-        const transformOriginY = -(offsetTop - activatorTop - scrollTop - activatorHeight / 2)
-        this.$refs.contentInner.style.transformOrigin = `${transformOriginX}px ${transformOriginY}px`
+        const top = this.activateEvent.clientY
+        const left = this.activateEvent.clientX
+        this.transformOriginX = -(offsetLeft - left)
+        this.transformOriginY = -(offsetTop - top - scrollTop)
       } else if (mousePosition) {
-        const activatorTop = mousePosition.y
-        const activatorLeft = mousePosition.x
-        const activatorWidth = 0
-        const activatorHeight = 0
-        const transformOriginX = -(offsetLeft - activatorLeft - activatorWidth / 2)
-        const transformOriginY = -(offsetTop - activatorTop - scrollTop - activatorHeight / 2)
-        this.$refs.contentInner.style.transformOrigin = `${transformOriginX}px ${transformOriginY}px`
+        const top = mousePosition.y
+        const left = mousePosition.x
+        this.transformOriginX = -(offsetLeft - left)
+        this.transformOriginY = -(offsetTop - top - scrollTop)
       }
+      this.$refs.contentInner.style.transformOrigin = this.styleTransformOrigin()
     },
     handleBeforeLeave () {
-      if (this.$parent.$refs.activator &&
-        this.$parent.$refs.activator.childElementCount) {
-        this.updateTransformOrigin()
-      }
+      this.$refs.contentInner.style.transformOrigin = this.styleTransformOrigin()
       this.$refs.scrollbar.disableScrollbar()
       this.$emit('before-leave')
     },
     handleAfterLeave () {
       this.styleActive = false
+      this.scrollTop = 0
+      this.transformOriginX = null
+      this.transformOriginY = null
       this.$emit('after-leave')
     },
     handleCloseClick () {
@@ -221,6 +211,12 @@ export default {
     },
     handlePositiveClick () {
       this.$emit('positive-click')
+    },
+    handleScroll (e) {
+      this.scrollTop = e.target.scrollTop
+    },
+    getDetachTarget () {
+      return this.$refs.contentInner
     }
   }
 }

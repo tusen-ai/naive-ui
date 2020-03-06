@@ -32,10 +32,11 @@ input {
 @include b(modal-content) {
   @include b(positioning-container) {
     position: absolute;
-    z-index: 2;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+  }
+}
+
+@include b(drawer) {
+  @include b(positioning-container) {
+    position: absolute;
   }
 }

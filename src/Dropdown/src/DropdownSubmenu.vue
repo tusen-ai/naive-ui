@@ -168,11 +168,16 @@ export default {
       this.vanishTimerId = window.setTimeout(() => {
         this.menuActivated = false
       }, this.duration)
+    },
+    getAbsoluteOffsetContainer () {
+      return this.$el.parentElement
+    },
+    getTrackedElement () {
+      return this.$el.parentElement
     }
   },
   render (h) {
     return h('div', {
-      ref: 'activator',
       staticClass: 'n-dropdown-item n-dropdown-item--as-submenu',
       on: {
         mouseenter: this.handleMouseEnter,
@@ -189,22 +194,26 @@ export default {
           h(iosArrowForward)
         ]) : null
       ]),
-      h('transition', {
-        props: {
-          name: 'n-dropdown-menu-transition'
-        }
+      h('div', {
+        ref: 'content',
+        staticClass: 'n-dropdown-menu-wrapper'
       }, [
-        this.active ? h(NDropdownMenu, {
-          ref: 'content',
-          staticClass: 'n-dropdown-submenu',
-          style: this.style,
+        h('transition', {
           props: {
-            options: this.options,
-            theme: this.syntheticTheme,
-            defaultFocus: false,
-            size: this.size
+            name: 'n-dropdown-menu-transition'
           }
-        }) : null
+        }, [
+          this.active ? h(NDropdownMenu, {
+            staticClass: 'n-dropdown-submenu',
+            style: this.style,
+            props: {
+              options: this.options,
+              theme: this.syntheticTheme,
+              defaultFocus: false,
+              size: this.size
+            }
+          }) : null
+        ])
       ])
     ])
   }

@@ -14,9 +14,6 @@ export default {
     zindexable,
     themeable
   ],
-  provide: {
-    NModal: true
-  },
   model: {
     prop: 'show',
     event: 'hide'

@@ -2,7 +2,6 @@
 Slots are also related to preset.
 ```html
 <n-button
-  size="small"
   @click="isActive = true"
 >
   Start Me up

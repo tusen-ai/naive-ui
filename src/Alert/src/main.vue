@@ -109,7 +109,7 @@ export default {
     },
     onClose: {
       type: Function,
-      default: next => next()
+      default: () => true
     },
     onAfterHide: {
       type: Function,
@@ -130,7 +130,12 @@ export default {
       this.visible = false
     },
     handleCloseClick () {
-      this.onClose(this.close)
+      Promise
+        .resolve(this.onClose())
+        .then(result => {
+          if (result === false) return
+          this.close()
+        })
     },
     handleAfterLeave () {
       this.$emit('after-hide')

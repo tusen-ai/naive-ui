@@ -4,7 +4,7 @@
     'default': $--n-card-background-color,
     'modal': $--n-modal-background-color
   ) !global;
-  $--table-header-background-color: $--n-table-header-background-color !global;
+  $--table-header-background-color: $--n-table-header-overlay-background-color !global;
   $--table-header-text-color: $--n-primary-text-color !global;
   $--table-body-text-color: $--n-secondary-text-color !global;
 }

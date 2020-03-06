@@ -3,14 +3,14 @@
   "zh-CN": {
     "start": "开始使用",
     "intro1": "一个 Vue UI 框架",
-    "intro2": "很在意样式，带主题，比较完整",
+    "intro2": "在意样式，带主题，比较完整",
     "intro3": "有点意思",
     "intro4": "换个主题"
   },
   "en-US": {
-    "start": "Getting Start",
+    "start": "Get Started",
     "intro1": "A Vue UI Framework",
-    "intro2": "Very Caring About Styles, Themed, Batteries Included",
+    "intro2": "Caring About Styles, Themed, Batteries Included",
     "intro3": "Interesting Somehow",
     "intro4": "Change Theme"
   }
@@ -21,7 +21,9 @@
   <n-config-consumer>
     <template v-slot="{ styleScheme, theme }">
       <div>
-        <landing-footer />
+        <n-layout-footer mode="absolute" style="z-index: auto;">
+          <landing-footer style="max-width: 1200px; margin: auto;" />
+        </n-layout-footer>
         <div class="banner">
           <left-image class="left-image" />
           <right-image class="right-image" />

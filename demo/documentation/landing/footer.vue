@@ -1,27 +1,36 @@
 <template>
-  <n-layout-footer mode="absolute" class="footer" style="z-index: auto;">
-    <div style="max-width: 1200px; margin: auto;">
-      <n-divider style="margin: 0 0 16px 0;" />
-      <n-text depth="tertiary">
-        A <a ref="noopener noreferer" href="https://www.tusimple.com" target="_blank" class="link">
-          <n-text>
-            Tusimple
-          </n-text>
-        </a> Project ·&nbsp;
-      </n-text>
-      <n-text depth="tertiary">
-        Designed by <n-a ref="noopener noreferer" class="link" href="https://www.ritalei.com" target="_blank">
-          <n-text>
-            Rita Lei
-          </n-text>
-        </n-a>
-        <n-text depth="tertiary">
-          &nbsp;· Refined by Haiyang Yu &amp; 07akioni
+  <div class="footer">
+    <n-divider v-if="showDivider" style="margin: 0 0 16px 0;" />
+    <n-text depth="tertiary">
+      A <a ref="noopener noreferer" href="https://www.tusimple.com" target="_blank" class="link">
+        <n-text>
+          Tusimple
         </n-text>
+      </a> Project ·&nbsp;
+    </n-text>
+    <n-text depth="tertiary">
+      Designed by <n-a ref="noopener noreferer" class="link" href="https://www.ritalei.com" target="_blank">
+        <n-text>
+          Rita Lei
+        </n-text>
+      </n-a>
+      <n-text depth="tertiary">
+        &nbsp;· Refined by Haiyang Yu &amp; 07akioni
       </n-text>
-    </div>
-  </n-layout-footer>
+    </n-text>
+  </div>
 </template>
+
+<script>
+export default {
+  props: {
+    showDivider: {
+      type: Boolean,
+      default: true
+    }
+  }
+}
+</script>
 
 <style scoped>
 .footer {

@@ -11,6 +11,8 @@ preset-confirm
 preset-confirm-slot
 dark1-debug
 dark2-debug
+dark3-debug
+dark4-debug
 ```
 ## V-model
 |Prop|Event|

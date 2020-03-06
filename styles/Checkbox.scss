@@ -75,6 +75,21 @@
       }
     }
   }
+  @include as-modal-content {
+    @include b(checkbox) {
+      @include m(table-header) {
+        @include not-m(checked) {
+          @include not-m(indeterminate) {
+            @include not-m(disabled) {
+              @include b(checkbox-box) {
+                background-color: map-get($--checkbox-background-color, 'modal-table');
+              }
+            }
+          }
+        }
+      }
+    }
+  }
   @include b(checkbox) {
     &:hover {
       @include b(checkbox-box) {
@@ -95,6 +110,11 @@
     }
     @include e(label) {
       color: map-get($--checkbox-label-text-color, 'default');
+    }
+    @include m(table-header) {
+      @include b(checkbox-box) {
+        background-color: map-get($--checkbox-background-color, 'table');
+      }
     }
     @include m(checked, indeterminate) {
       &:focus {

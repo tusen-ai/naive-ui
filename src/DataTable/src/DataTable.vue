@@ -10,7 +10,7 @@
   >
     <n-spin :spinning="loading">
       <div
-        class="n-data-table-tables-wrapper"
+        class="n-data-table-wrapper"
       >
         <base-table
           ref="mainTable"
@@ -22,8 +22,6 @@
           :row-class-name="rowClassName"
           :loading="loading"
           :body-min-height="42"
-          @header-scroll="handleMainTableHeaderScroll"
-          @scroll="handleTableMainBodyScroll"
         >
           <slot name="append" />
         </base-table>
@@ -113,6 +111,7 @@ function normalizeColumn (column) {
   })
   if (!column.key && column.type === 'selection') {
     defaultColumn.key = 'selection'
+    defaultColumn.width = 48
   }
   return defaultColumn
 }
@@ -197,9 +196,6 @@ export default {
   data () {
     return {
       /** collected tr heights of main table */
-      trHeights: [],
-      hoveringRowIndex: null,
-      mainTableScrollContainerWidth: null,
       horizontalScrollLeft: 0,
       /* which part is being scrolling: main left right header */
       scrollingPart: null,
@@ -260,23 +256,29 @@ export default {
     filteredData () {
       const syntheticActiveFilters = this.syntheticActiveFilters
       const normalizedColumns = this.normalizedColumns
+      function createDefaultFilter (columnKey) {
+        return (filterOptionValue, row) => ~String(row[columnKey]).indexOf(String(filterOptionValue))
+      }
       return this.data ? this.data.filter(row => {
         for (const columnKey of Object.keys(row)) {
           const activeFilterOptionValues = syntheticActiveFilters
-            .filter(filter => filter.columnKey === columnKey)
-            .map(filter => filter.filterOptionValue)
+            .filter(filterInfo => filterInfo.columnKey === columnKey)
+            .map(filterInfo => filterInfo.filterOptionValue)
           if (!activeFilterOptionValues.length) continue
           const columnToFilter = normalizedColumns.find(column => column.key === columnKey)
           /**
            * When async, filter won't be set, so data won't be filtered
            */
-          if (columnToFilter && typeof columnToFilter.filter === 'function') {
+          const filter = columnToFilter.filter === 'default'
+            ? createDefaultFilter(columnKey)
+            : columnToFilter.filter
+          if (columnToFilter && typeof filter === 'function') {
             if (columnToFilter.filterMode === 'and') {
-              if (activeFilterOptionValues.some(filterOptionValue => !columnToFilter.filter(filterOptionValue, row))) {
+              if (activeFilterOptionValues.some(filterOptionValue => !filter(filterOptionValue, row))) {
                 return false
               }
             } else {
-              if (activeFilterOptionValues.some(filterOptionValue => columnToFilter.filter(filterOptionValue, row))) {
+              if (activeFilterOptionValues.some(filterOptionValue => filter(filterOptionValue, row))) {
                 return true
               } else {
                 return false
@@ -443,9 +445,6 @@ export default {
     allRowsChecked () {
       return this.countOfCurrentPageCheckedRows === this.paginatedData.length
     }
-    // handleScroll () {
-
-    // }
   },
   watch: {
     syntheticCurrentPage () {
@@ -517,53 +516,50 @@ export default {
         body
       }
     },
-    handleMainTableHeaderScroll (e, active) {
-      if (!this.scrollingPart || this.scrollingPart === 'head') {
-        if (this.scrollingPart !== 'head') this.scrollingPart = 'head'
-        if (this.scrollTimerId) window.clearTimeout(this.scrollTimerId)
-        this.scrollTimerId = window.setTimeout(() => {
-          this.scrollingPart = null
-          this.scrollTimerId = null
-        }, 200)
-        const {
-          scrollLeft
-        } = e.target
-        const {
-          body: bodyEl
-        } = this.getScrollElements()
-        bodyEl.scrollLeft = scrollLeft
-        this.horizontalScrollLeft = scrollLeft
+    handleTableHeaderScroll (e, active) {
+      if (this.scrollingPart === null) {
+        this.scrollingPart = 'header'
       }
-    },
-    handleTableMainBodyScroll (e) {
-      this.handleTableBodyScroll(e, 'main')
-    },
-    handleTableBodyScroll (e, part) {
-      if (!this.scrollingPart || this.scrollingPart === part) {
-        if (this.scrollingPart !== part) this.scrollingPart = part
-        if (this.scrollTimerId) window.clearTimeout(this.scrollTimerId)
+      if (this.scrollingPart === 'header') {
+        window.clearTimeout(this.scrollTimerId)
         this.scrollTimerId = window.setTimeout(() => {
           this.scrollingPart = null
-          this.scrollTimerId = null
         }, 200)
-        const {
-          scrollTop,
-          scrollLeft
-        } = e.target
-        const {
-          header: headerEl,
-          body: bodyEl
-        } = this.getScrollElements()
-        if (part === 'main') {
-          if (headerEl) {
-            headerEl.scrollLeft = scrollLeft
-            this.horizontalScrollLeft = scrollLeft
-          }
-        }
-        if (bodyEl && bodyEl.scrollTop !== scrollTop) {
-          bodyEl.scrollTop = scrollTop
-        }
-        this.mainTableScrollContainerWidth = bodyEl.offsetWidth
+      }
+      if (this.scrollingPart === 'body') {
+        return
+      }
+      const {
+        scrollLeft
+      } = e.target
+      const {
+        body: bodyEl
+      } = this.getScrollElements()
+      bodyEl.scrollLeft = scrollLeft
+      this.horizontalScrollLeft = scrollLeft
+    },
+    handleTableBodyScroll (e) {
+      if (this.scrollingPart === null) {
+        this.scrollingPart = 'body'
+      }
+      if (this.scrollingPart === 'body') {
+        window.clearTimeout(this.scrollTimerId)
+        this.scrollTimerId = window.setTimeout(() => {
+          this.scrollingPart = null
+        }, 200)
+      }
+      if (this.scrollingPart === 'header') {
+        return
+      }
+      const {
+        scrollLeft
+      } = e.target
+      const {
+        header: headerEl
+      } = this.getScrollElements()
+      if (headerEl) {
+        headerEl.scrollLeft = scrollLeft
+        this.horizontalScrollLeft = scrollLeft
       }
     },
     page (page) {
@@ -598,14 +594,6 @@ export default {
     },
     filter (filters) {
       this.changeFilters(filters)
-    },
-    collectDOMSizes () {
-      const {
-        body: mainTableScrollContainer
-      } = this.getScrollElements()
-      this.mainTableScrollContainerWidth = mainTableScrollContainer.offsetWidth
-      const trHeights = Array.from(mainTableScrollContainer.querySelectorAll('tr')).map(el => el.offsetHeight)
-      this.trHeights = trHeights
     },
     checkAll (column) {
       const checkedRowKeys = this.syntheticCheckedRowKeys.map(v => v)

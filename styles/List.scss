@@ -12,8 +12,11 @@
       list-style-type: none;
     }
     color: $--list-text-color;
-    background-color: $--list-background-color;
     @include m(bordered) {
+      background-color: map-get(
+        $--list-background-color,
+        'default'
+      );
       @include once {
         border-radius: $--n-list-border-radius;
       }
@@ -67,6 +70,15 @@
       }
       &:not(:last-child) {
         border-bottom: 1px solid $--list-border-color;
+      }
+    }
+  }
+  @include as-modal-content {
+    @include b(list) {
+      @include m(bordered) {
+        background-color: map-get(
+          $--list-background-color, 'modal'
+        );
       }
     }
   }

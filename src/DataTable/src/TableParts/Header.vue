@@ -1,6 +1,5 @@
 <template>
   <div
-    ref="table"
     :class="{
       [`n-${theme}-theme`]: theme
     }"
@@ -37,8 +36,7 @@
               :class="{
                 'n-data-table-th--filterable': isColumnFilterable(column),
                 'n-data-table-th--sortable': isColumnSortable(column),
-                'n-data-table-th--ellipsis': column.ellipsis,
-                [`n-data-table-th--fixed-${column.fixed}`]: column.fixed,
+                [`n-data-table-th--fixed-${column.fixed}`]: column.fixed && column.width,
                 'n-data-table-th--shadow-after': leftActiveFixedColumn[column.key],
                 'n-data-table-th--shadow-before': rightActiveFixedColumn[column.key]
               }"
@@ -47,16 +45,27 @@
               <n-checkbox
                 v-if="column.type === 'selection'"
                 :key="currentPage"
+                table-header
                 :checked="checkboxChecked"
                 :indeterminate="checkboxIndererminate"
                 @change="handleCheckboxInput(column)"
               />
-              <render
-                :render="typeof column.title === 'function'
-                  ? h => (column.title)(h, column, index)
-                  : column.title
-                "
-              />
+              <div v-if="column.ellipsis" class="n-data-table-th__ellipsis">
+                <render
+                  :render="typeof column.title === 'function'
+                    ? h => (column.title)(h, column, index)
+                    : column.title
+                  "
+                />
+              </div>
+              <template v-else>
+                <render
+                  :render="typeof column.title === 'function'
+                    ? h => (column.title)(h, column, index)
+                    : column.title
+                  "
+                />
+              </template>
               <sort-button
                 v-if="isColumnSortable(column)"
                 :column="column"
@@ -80,6 +89,7 @@ import SortButton from '../HeaderButton/SortButton'
 import FilterButton from '../HeaderButton/FilterButton'
 import { createCustomWidthStyle } from '../utils'
 import render from '../../../_utils/vue/render'
+import resizeObserverDelegate from '../../../_utils/delegate/resizeObserverDelegate'
 
 function isColumnSortable (column) {
   return !!column.sorter
@@ -203,19 +213,27 @@ export default {
     }
   },
   mounted () {
-    this.setActiveRight(this.$refs.body)
-    this.setActiveLeft(this.$refs.body)
+    resizeObserverDelegate.registerHandler(this.$el, this.handleResize)
+    this.handleResize()
+    this.setActiveLeft(this.$el)
+    this.setActiveRight(this.$el)
     this.$emit('set-active-fixed-column', this.leftActiveFixedColumn, this.rightActiveFixedColumn)
+  },
+  beforeDestroy () {
+    resizeObserverDelegate.unregisterHandler(this.$el)
   },
   methods: {
     isColumnSortable,
     isColumnFilterable,
     createCustomWidthStyle,
+    handleResize () {
+      this.tableWidth = this.$el.offsetWidth
+    },
     handleScroll (e) {
       this.setActiveRight(e.target)
       this.setActiveLeft(e.target)
       this.$emit('set-active-fixed-column', this.leftActiveFixedColumn, this.rightActiveFixedColumn)
-      this.$emit('scroll', e)
+      this.NDataTable.handleTableHeaderScroll(e)
     },
     handleCheckboxInput (column) {
       if (this.checkboxIndererminate || this.checkboxChecked) {
@@ -237,12 +255,14 @@ export default {
     setActiveRight (target) {
       const rightFixedColumns = this.NDataTable.rightFixedColumns
       const scrollLeft = target.scrollLeft
-      const tableWidth = this.$refs.table.offsetWidth
+      const tableWidth = this.tableWidth
       const scrollWidth = target.scrollWidth
+      const fixedColumnsRight = this.fixedColumnsRight
+      const rightActiveFixedColumn = {}
+      this.rightActiveFixedColumn = rightActiveFixedColumn
       for (let i = 0; i < rightFixedColumns.length; i++) {
-        this.rightActiveFixedColumn = {}
-        if (scrollLeft + this.fixedColumnsRight[rightFixedColumns[i].key] + tableWidth < scrollWidth) {
-          this.rightActiveFixedColumn[rightFixedColumns[i].key] = true
+        if (scrollLeft + fixedColumnsRight[rightFixedColumns[i].key] + tableWidth < scrollWidth) {
+          rightActiveFixedColumn[rightFixedColumns[i].key] = true
           break
         }
       }
@@ -251,14 +271,12 @@ export default {
       const leftFixedColumns = this.NDataTable.leftFixedColumns
       const scrollLeft = target.scrollLeft
       let leftWidth = 0
+      const fixedColumnsLeft = this.fixedColumnsLeft
+      this.leftActiveFixedColumn = {}
       for (let i = 0; i < leftFixedColumns.length; i++) {
-        if (scrollLeft > this.fixedColumnsLeft[leftFixedColumns[i].key] - leftWidth) {
-          this.leftActiveFixedColumn = {}
-          this.leftActiveFixedColumn[leftFixedColumns[i].key] = true
-          leftWidth = leftWidth + leftFixedColumns[i].width
-          continue
-        } else if (i === 0) {
-          this.leftActiveFixedColumn = {}
+        if (scrollLeft > fixedColumnsLeft[leftFixedColumns[i].key] - leftWidth) {
+          this.leftActiveFixedColumn = { [leftFixedColumns[i].key]: true }
+          leftWidth += leftFixedColumns[i].width
         } else {
           break
         }
