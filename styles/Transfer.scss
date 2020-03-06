@@ -70,6 +70,9 @@
         font-size: map-get($--n-font-size, $size);
         height: map-get($--n-height, $size) + 6px;
       }
+      @include b(empty) {
+        font-size: map-get($--n-font-size, $size);
+      }
       @include b(transfer-list-body) {
         height: map-get($--n-height, $size) * 5.6;
         @include b(transfer-list-item) {
@@ -152,7 +155,7 @@
           background-clip: padding-box;
           @include e(checkbox) {
             position: relative;
-            padding: 0 8px 0 14px;
+            padding: 0 9px 0 14px;
             @include b(checkbox) {
               display: block;
             }
@@ -210,6 +213,7 @@
               }
             }
             @include b(empty) {
+              @include fade-in-transition;
               position: absolute;
               left: 50%;
               top: 50%;
@@ -281,7 +285,7 @@
             @include e(checkbox) {
               @include once {
                 position: relative;
-                padding: 0 8px 0 14px;
+                padding: 0 9px 0 14px;
                 @include b(checkbox) {
                   display: block;
                 }

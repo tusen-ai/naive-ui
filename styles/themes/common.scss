@@ -111,6 +111,13 @@ $--n-card-margin-bottom: (
 /** cascader */
 $--n-cascader-border-radius: $--n-border-radius;
 
+/** checkbox */
+$--n-checkbox-size: (
+  'small': 14px,
+  'medium': 14px,
+  'large': 16px
+);
+
 /** data table */
 $--n-data-table-border-radius: $--n-border-radius;
 
@@ -156,6 +163,11 @@ $--n-popover-arrow-box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.12);
 
 /** radio */
 $--n-radio-button-border-radius: $--n-border-radius;
+$--n-radio-size: (
+  'small': 14px,
+  'medium': 14px,
+  'large': 16px
+);
 
 /** slider */
 $--n-slider-rail-height: 4px;

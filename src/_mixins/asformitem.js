@@ -2,10 +2,10 @@ export default function (events = {
   change: 'change',
   blur: 'blur',
   focus: 'focus'
-}, defaultSize = 'medium') {
+}, defaultSize = 'medium', syntheticSize = null) {
   return {
     computed: {
-      syntheticSize () {
+      syntheticSize: syntheticSize || function () {
         const size = this.size
         if (size) return size
         const NFormItem = this.NFormItem

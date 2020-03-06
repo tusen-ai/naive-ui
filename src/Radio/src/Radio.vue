@@ -5,6 +5,7 @@
       'n-radio--disabled': syntheticDisabled,
       'n-radio--checked': syntheticChecked,
       'n-radio--focus': focus,
+      [`n-radio--${syntheticSize}-size`]: true,
       [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
     @keyup.enter="handleKeyUpEnter"
@@ -42,6 +43,34 @@ import radioMixin from './radioMixin'
 
 export default {
   name: 'NRadio',
-  mixins: [ withapp, themeable, asformitem(), radioMixin ]
+  mixins: [ withapp, themeable, asformitem(
+    {
+      change: 'change',
+      blur: 'blur',
+      focus: 'focus'
+    },
+    'medium',
+    function () {
+      const size = this.size
+      if (size) return size
+      const NRadioGroup = this.NRadioGroup
+      if (NRadioGroup && NRadioGroup.syntheticSize) {
+        return NRadioGroup.syntheticSize
+      }
+      const NFormItem = this.NFormItem
+      if (NFormItem && NFormItem.syntheticSize) {
+        return NFormItem.syntheticSize
+      }
+      return 'medium'
+    }
+  ), radioMixin ],
+  props: {
+    size: {
+      validator (value) {
+        return ['small', 'medium', 'large'].includes(value)
+      },
+      default: null
+    }
+  }
 }
 </script>
