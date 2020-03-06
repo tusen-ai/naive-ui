@@ -3,7 +3,7 @@
   "zh-CN": {
     "dark": "深色",
     "light": "浅色",
-    "searchPlaceholder": "搜索组件",
+    "searchPlaceholder": "搜索",
     "home": "首页",
     "doc": "文档",
     "common": "常规",
@@ -13,7 +13,7 @@
   "en-US": {
     "dark": "Dark",
     "light": "Light",
-    "searchPlaceholder": "Search Components",
+    "searchPlaceholder": "Search",
     "home": "Home",
     "doc": "Documentation",
     "common": "Common",

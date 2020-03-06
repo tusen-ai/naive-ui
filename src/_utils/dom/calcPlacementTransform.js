@@ -5,13 +5,6 @@ const oppositeDirection = {
   right: 'left'
 }
 
-// const adjacentDirections = {
-//   top: ['left', 'right'],
-//   right: ['top', 'bottom'],
-//   bottom: ['left', 'right'],
-//   left: ['top', 'bottom']
-// }
-
 const lengthToCompare = {
   top: 'height',
   bottom: 'height',
@@ -74,86 +67,71 @@ export function getAdjustedPlacementOfTrackingElement (placement, trackedRect, t
   } else {
     return adjustedPosition ? (direction + '-' + adjustedPosition) : direction
   }
-  // else {
-  //   const [direction1, direction2] = adjacentDirections[direction]
-  //   let adjacentDirectionWithMoreSpace = direction1
-  //   if (trackedRect[direction1] < trackedRect[direction2]) {
-  //     adjacentDirectionWithMoreSpace = direction2
-  //   }
-  //   if (trackedRect[adjacentDirectionWithMoreSpace] < trackingRect[lengthToCompare[adjacentDirections]]) {
-  //     /**
-  //      * If no direction has required space, simply not flip tracking element to any side.
-  //      */
-  //     return placement
-  //   }
-  //   return adjacentDirectionWithMoreSpace
-  // }
 }
 
 export function getTransformOriginByPlacement (placement) {
   return placementToTransformOrigin[placement] || null
 }
 
-export function getPosition (placement, trackedRect, trackingRect) {
-  const position = {
+export function getPosition (placement, offsetContainerRect, activatorRect) {
+  const offset = {
+    top: null,
+    bottom: null,
     left: null,
     right: null,
-    top: null,
-    bottom: null
+    transform: null
   }
-  switch (placement) {
-    case 'bottom-start':
-      position.top = trackedRect.top + trackedRect.height
-      position.left = trackedRect.left
-      break
-    case 'bottom':
-      position.top = trackedRect.top + trackedRect.height
-      position.left = trackedRect.left + trackedRect.width / 2 - trackingRect.width / 2
-      break
-    case 'bottom-end':
-      position.top = trackedRect.top + trackedRect.height
-      position.left = trackedRect.left + trackedRect.width - trackingRect.width
-      break
-    case 'top-start':
-      position.top = trackedRect.top - trackingRect.height
-      position.left = trackedRect.left
-      break
-    case 'top':
-      position.top = trackedRect.top - trackingRect.height
-      position.left = trackedRect.left + trackedRect.width / 2 - trackingRect.width / 2
-      break
-    case 'top-end':
-      position.top = trackedRect.top - trackingRect.height
-      position.left = trackedRect.left + trackedRect.width - trackingRect.width
-      break
-    case 'left-start':
-      position.top = trackedRect.top
-      position.left = trackedRect.left - trackingRect.width
-      break
-    case 'left':
-      position.top = trackedRect.top + trackedRect.height / 2 - trackingRect.height / 2
-      position.left = trackedRect.left - trackingRect.width
-      break
-    case 'left-end':
-      position.top = trackedRect.top + trackedRect.height - trackingRect.height
-      position.left = trackedRect.left - trackingRect.width
-      break
-    case 'right-start':
-      position.top = trackedRect.top
-      position.left = trackedRect.left + trackedRect.width
-      break
-    case 'right':
-      position.top = trackedRect.top + trackedRect.height / 2 - trackingRect.height / 2
-      position.left = trackedRect.left + trackedRect.width
-      break
-    case 'right-end':
-      position.top = trackedRect.top + trackedRect.height - trackingRect.height
-      position.left = trackedRect.left + trackedRect.width
-      break
+  if (placement === 'bottom-start') {
+    offset.top = (activatorRect.top - offsetContainerRect.top + activatorRect.height) + 'px'
+    offset.left = (activatorRect.left - offsetContainerRect.left) + 'px'
+  } else if (placement === 'bottom-end') {
+    offset.top = (activatorRect.top - offsetContainerRect.top + activatorRect.height) + 'px'
+    offset.left = (activatorRect.left - offsetContainerRect.left + activatorRect.width) + 'px'
+    offset.transform = 'translateX(-100%)'
+  } else if (placement === 'top-start') {
+    offset.top = (activatorRect.top - offsetContainerRect.top) + 'px'
+    offset.left = (activatorRect.left - offsetContainerRect.left) + 'px'
+    offset.transform = 'translateY(-100%)'
+  } else if (placement === 'top-end') {
+    offset.top = (activatorRect.top - offsetContainerRect.top) + 'px'
+    offset.left = (activatorRect.left - offsetContainerRect.left + activatorRect.width) + 'px'
+    offset.transform = 'translateY(-100%) translateX(-100%)'
+  } else if (placement === 'right-start') {
+    offset.top = (activatorRect.top - offsetContainerRect.top) + 'px'
+    offset.left = (activatorRect.left - offsetContainerRect.left + activatorRect.width) + 'px'
+  } else if (placement === 'right-end') {
+    offset.top = (activatorRect.top - offsetContainerRect.top + activatorRect.height) + 'px'
+    offset.left = (activatorRect.left - offsetContainerRect.left + activatorRect.width) + 'px'
+    offset.transform = 'translateY(-100%)'
+  } else if (placement === 'left-start') {
+    offset.top = (activatorRect.top - offsetContainerRect.top) + 'px'
+    offset.left = (activatorRect.left - offsetContainerRect.left) + 'px'
+    offset.transform = 'translateX(-100%)'
+  } else if (placement === 'left-end') {
+    offset.top = (activatorRect.top - offsetContainerRect.top + activatorRect.height) + 'px'
+    offset.left = (activatorRect.left - offsetContainerRect.left) + 'px'
+    offset.transform = 'translateX(-100%) translateY(-100%)'
+  } else if (placement === 'top') {
+    offset.top = (activatorRect.top - offsetContainerRect.top) + 'px'
+    offset.left = (activatorRect.left - offsetContainerRect.left + activatorRect.width / 2) + 'px'
+    offset.transform = 'translateX(-50%) translateY(-100%)'
+  } else if (placement === 'right') {
+    offset.top = (activatorRect.top - offsetContainerRect.top + activatorRect.height / 2) + 'px'
+    offset.left = (activatorRect.left - offsetContainerRect.left + activatorRect.width) + 'px'
+    offset.transform = 'translateY(-50%)'
+  } else if (placement === 'bottom') {
+    offset.top = (activatorRect.top - offsetContainerRect.top + activatorRect.height) + 'px'
+    offset.left = (activatorRect.left - offsetContainerRect.left + activatorRect.width / 2) + 'px'
+    offset.transform = 'translateX(-50%)'
+  } else if (placement === 'left') {
+    offset.top = (activatorRect.top - offsetContainerRect.top + activatorRect.height / 2) + 'px'
+    offset.left = (activatorRect.left - offsetContainerRect.left) + 'px'
+    offset.transform = 'translateX(-100%) translateY(-50%)'
+  } else {
+    console.error(
+      '[naive-ui/mixins/placeable]: Placement %s is not supported.',
+      placement
+    )
   }
-  if (position.left !== null) position.left = position.left + 'px'
-  if (position.right !== null) position.right = position.right + 'px'
-  if (position.top !== null) position.top = position.top + 'px'
-  if (position.bottom !== null) position.bottom = position.bottom + 'px'
-  return position
+  return offset
 }

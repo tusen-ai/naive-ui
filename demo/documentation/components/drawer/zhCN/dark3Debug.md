@@ -1,11 +1,9 @@
 # Dark Debug 3
 ```html
 <n-button @click="modalActive = !modalActive">Toggle</n-button>
-<n-modal
-  title="Dark Modal Debug"
-  preset="card"
+<n-drawer
   v-model="modalActive"
-  :overlay-style="{ marginTop: '24px', marginBottom: '24px', width: '800px' }"
+  width="800"
 >
   <n-data-table
     ref="table"
@@ -15,7 +13,7 @@
     :max-height="250"
     :scroll-x="1800"
   />
-</n-modal>
+</n-drawer>
 ```
 ```js
 const columns = [

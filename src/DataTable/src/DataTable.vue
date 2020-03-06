@@ -270,13 +270,16 @@ export default {
           /**
            * When async, filter won't be set, so data won't be filtered
            */
-          if (columnToFilter && typeof columnToFilter.filter === 'function') {
+          const filter = columnToFilter.filter === 'default'
+            ? (filterOptionValue, row) => ~String(row[columnKey]).indexOf(String(filterOptionValue))
+            : columnToFilter.filter
+          if (columnToFilter && typeof filter === 'function') {
             if (columnToFilter.filterMode === 'and') {
-              if (activeFilterOptionValues.some(filterOptionValue => !columnToFilter.filter(filterOptionValue, row))) {
+              if (activeFilterOptionValues.some(filterOptionValue => !filter(filterOptionValue, row))) {
                 return false
               }
             } else {
-              if (activeFilterOptionValues.some(filterOptionValue => columnToFilter.filter(filterOptionValue, row))) {
+              if (activeFilterOptionValues.some(filterOptionValue => filter(filterOptionValue, row))) {
                 return true
               } else {
                 return false

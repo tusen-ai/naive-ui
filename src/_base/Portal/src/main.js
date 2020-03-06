@@ -3,6 +3,9 @@ export default {
   inject: {
     NModal: {
       default: null
+    },
+    NDrawer: {
+      default: null
     }
   },
   props: {
@@ -10,22 +13,30 @@ export default {
       type: Function,
       default: null
     },
-    target: {
+    transferTarget: {
       type: Function,
-      default: () => document.body
+      default: function () {
+        const NModal = this.NModal
+        if (NModal) {
+          return NModal.getDetachTarget()
+        }
+        const NDrawer = this.NDrawer
+        if (NDrawer) {
+          return NDrawer.getDetachTarget()
+        }
+        return document.body
+      }
     }
   },
   mounted () {
     if (this.onMounted) this.onMounted()
-    if (!this.transferable) return
     if (this.$el.parentElement && !this.elementTransferred) {
       this.$el.parentElement.removeChild(this.$el)
     }
   },
   beforeDestroy () {
-    if (!this.transferable) return
-    const target = this.target()
-    if (target.contains(this.$el)) {
+    const target = this.transferTarget()
+    if (target && target.contains(this.$el)) {
       target.removeChild(this.$el)
     }
   },
@@ -34,16 +45,10 @@ export default {
       elementTransferred: false
     }
   },
-  computed: {
-    transferable () {
-      return !this.NModal
-    }
-  },
   methods: {
     transferElement () {
-      if (!this.transferable) return
       if (!this.elementTransferred) {
-        this.target().appendChild(this.$el)
+        this.transferTarget().appendChild(this.$el)
         this.elementTransferred = true
       }
     }

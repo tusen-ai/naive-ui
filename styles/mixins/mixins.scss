@@ -123,7 +123,7 @@ $default-theme: 'light';
 }
 
 @mixin as-modal-content {
-  &.#{$namespace}-modal-content {
+  &.#{$namespace}-modal-content, &.#{$namespace}-drawer {
     @content;
   }
 }

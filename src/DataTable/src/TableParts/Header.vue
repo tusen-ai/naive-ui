@@ -37,7 +37,6 @@
               :class="{
                 'n-data-table-th--filterable': isColumnFilterable(column),
                 'n-data-table-th--sortable': isColumnSortable(column),
-                'n-data-table-th--ellipsis': column.ellipsis,
                 [`n-data-table-th--fixed-${column.fixed}`]: column.fixed,
                 'n-data-table-th--shadow-after': leftActiveFixedColumn[column.key],
                 'n-data-table-th--shadow-before': rightActiveFixedColumn[column.key]
@@ -51,12 +50,22 @@
                 :indeterminate="checkboxIndererminate"
                 @change="handleCheckboxInput(column)"
               />
-              <render
-                :render="typeof column.title === 'function'
-                  ? h => (column.title)(h, column, index)
-                  : column.title
-                "
-              />
+              <div v-if="column.ellipsis" class="n-data-table-th__ellipsis">
+                <render
+                  :render="typeof column.title === 'function'
+                    ? h => (column.title)(h, column, index)
+                    : column.title
+                  "
+                />
+              </div>
+              <template v-else>
+                <render
+                  :render="typeof column.title === 'function'
+                    ? h => (column.title)(h, column, index)
+                    : column.title
+                  "
+                />
+              </template>
               <sort-button
                 v-if="isColumnSortable(column)"
                 :column="column"

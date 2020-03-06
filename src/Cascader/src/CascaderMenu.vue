@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="contentContainer"
     class="n-positioning-container"
   >
     <div ref="content" class="n-positioning-content">

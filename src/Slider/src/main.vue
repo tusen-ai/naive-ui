@@ -567,23 +567,6 @@ export default {
           }
         })
       }
-    },
-    getPositionInAbsoluteMode (placement) {
-      let value = null
-      if (this.firstHandleActive) {
-        value = this.firstHandleValue
-      } else if (this.secondHandleValue) {
-        value = this.secondHandleActive
-      }
-      if (!(typeof value === 'number')) {
-        console.error('[naive-ui/slider]: try showing tooltip with no number value')
-        value = 0
-      }
-      return {
-        left: ((value - this.min) / (this.max - this.min) * 100) + '%',
-        bottom: 'calc(100% - 4px)',
-        transform: 'translateX(-50%)'
-      }
     }
   }
 }

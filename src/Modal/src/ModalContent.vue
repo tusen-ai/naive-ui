@@ -101,8 +101,10 @@ export default {
     NConfirm,
     NCard
   },
-  provide: {
-    NModal: true
+  provide () {
+    return {
+      NModal: this
+    }
   },
   mixins: [themeable],
   props: {
@@ -212,6 +214,9 @@ export default {
     },
     handleScroll (e) {
       this.scrollTop = e.target.scrollTop
+    },
+    getDetachTarget () {
+      return this.$refs.contentInner
     }
   }
 }
