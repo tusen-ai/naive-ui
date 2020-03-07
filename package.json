@@ -9,7 +9,7 @@
     "build:icon": "npm run clean && node build/buildIcon.js",
     "build:js": "npm run clean && rollup -c",
     "build:demo": "npm run build && npm run demo",
-    "build:doc": "npm run build  && rm -rf doc/dist && cross-env NODE_ENV=development webpack --config build/webpack.doc.js --mode=production",
+    "build:doc": "npm run build  && rm -rf doc/dist && cross-env NODE_ENV=production webpack --config build/webpack.doc.js",
     "build": "npm run clean && node build/buildStyle.js && node build/buildIcon.js && rollup -c",
     "clean": "rm -rf lib && rm -rf es && rm -rf dist",
     "demo": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.demo.js",

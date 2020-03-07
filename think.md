@@ -119,11 +119,14 @@ Previously, it would not work with single quotes:
 const devtoolIsOpened = e.target === document.activeElement
 ```
 
+## 2020.3.7
+主体差不多做完了，好累
+
 
 ## TODO 排序不分先后
 1. <del>Focus Detector on Time Selector</del>
 2. <del>Menu Root Indent = 0 可能造成问题</del>
-3. 用 RAF 优化 scrollbar 性能（不一定需要）
+3. <del>用 RAF 优化 scrollbar 性能（不一定需要）</del>为了有时候滚动同步的一致性，决定不做了
 4. <del>Anchor 切换有 bug，忽然闪现第一个</del>
 5. <del>Safari select lightbar container overflow 边角（或许是 webkit 的问题）</del>默认选中第一个可以装作这个问题不存在
 6. <del>Chrome lightbar offset @table fitler</del> select menu 始终存在这个问题，不知道原因是什么
@@ -190,7 +193,9 @@ const devtoolIsOpened = e.target === document.activeElement
 67. <del>Modal 滚动之后的 transform origin</del>
 68. <del>Slider 对于 modal 适配</del>
 69. <del>table fixed scroll checkbox, not sync</del>
-70. Transfer no data
+70. <del>Transfer no data</del>
+71. Metropolis 从自带字体去掉
+72. Input Group
 
 ```
 Done

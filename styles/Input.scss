@@ -397,9 +397,6 @@
               border-top-left-radius: 0!important;
               border-bottom-left-radius: 0!important;
             }
-            @include not-m(default-type) {
-              margin-left: 0!important;
-            }
           }
         }
         * {

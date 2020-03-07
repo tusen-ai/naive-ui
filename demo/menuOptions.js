@@ -36,6 +36,12 @@ const appendCounts = item => {
   }
 }
 
+const appendDeprecatedDemos = (item, mode) => {
+  if ((env === 'development' && mode === 'debug') || localStorage.getItem('nimbus')) {
+    return [item]
+  } else return []
+}
+
 const appendDebugDemos = (item, mode) => {
   if (env === 'development' && mode === 'debug') {
     return [item]
@@ -875,7 +881,7 @@ export default function (locale, instance) {
           }
         ]
       }),
-      {
+      ...appendDeprecatedDemos({
         name: 'Deprecated',
         path: `/${instance.lang}/${instance.theme}/doc` + '/',
         childItems: [
@@ -884,7 +890,7 @@ export default function (locale, instance) {
             path: `/${instance.lang}/${instance.theme}/doc` + '/n-nimbus-service-layout'
           }
         ]
-      },
+      }, instance.mode),
       ...appendDebugDemos(
         {
           name: 'Debug',

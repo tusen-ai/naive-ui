@@ -18,7 +18,7 @@
 <n-input-group>
   <n-button type="primary">搜索</n-button>
   <n-input :style="{ width: '50%' }" v-model="value8" />
-  <n-button>搜索</n-button>
+  <n-button type="primary" ghost>搜索</n-button>
 </n-input-group>
 <n-input-group>
   <n-date-picker v-model="value9"/>

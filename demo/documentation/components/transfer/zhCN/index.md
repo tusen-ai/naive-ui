@@ -1,7 +1,7 @@
 # 穿梭框 Transfer
 <!--single-column-->
 左、右、左、右...像我这么无聊的人能玩一整天。
-## 例子
+## 演示
 ```demo
 basic
 large-data

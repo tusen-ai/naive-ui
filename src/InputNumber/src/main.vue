@@ -18,7 +18,31 @@
       @mousedown="handleMouseDown"
       @click="minus"
     >
-      <n-icon><md-remove /></n-icon>
+      <div class="n-input-number-button-boundary" />
+      <div class="n-input-number-button-body">
+        <n-icon>
+          <md-remove />
+        </n-icon>
+      </div>
+      <div class="n-input-number-button-border-mask" />
+    </button>
+    <button
+      tabindex="-1"
+      type="button"
+      class="n-input-number__add-button"
+      :class="{
+        [`n-input-number__add-button--disabled`]: !addable
+      }"
+      @mousedown="handleMouseDown"
+      @click="add"
+    >
+      <div class="n-input-number-button-body">
+        <n-icon>
+          <md-add />
+        </n-icon>
+      </div>
+      <div class="n-input-number-button-boundary" />
+      <div class="n-input-number-button-border-mask" />
     </button>
     <input
       ref="input"
@@ -31,20 +55,6 @@
       @blur="handleBlur"
       @keyup.enter="handleEnter"
     >
-    <button
-      tabindex="-1"
-      type="button"
-      class="n-input-number__add-button"
-      :class="{
-        [`n-input-number__add-button--disabled`]: !addable
-      }"
-      @mousedown="handleMouseDown"
-      @click="add"
-    >
-      <n-icon>
-        <md-add />
-      </n-icon>
-    </button>
     <div class="n-input-number__border-mask" />
   </div>
 </template>

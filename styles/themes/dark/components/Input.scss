@@ -39,5 +39,5 @@
     'disabled': inset 0 0 0 1px transparent,
     'error-default': inset 0 0 0 1px $--n-error-color
   ) !global;
-  $--input-group-label-background-color: $--n-action-overlay-background-color !global;
+  $--input-group-label-background-color: $--n-input-overlay-background-color !global;
 }
