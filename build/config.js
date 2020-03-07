@@ -25,10 +25,6 @@ exports.docLoaders = [
     },
     loader: ['vue-loader', path.resolve(__dirname, '../demo/loaders/NaiveUIDemoLoader.js')]
   },
-  // {
-  //   test: /\.demo\.vue$/,
-  //   loader: ['vue-loader', path.resolve(__dirname, '../doc/NaiveUIDemoLoader.js')]
-  // },
   {
     test: {
       test: /\.vue$/
