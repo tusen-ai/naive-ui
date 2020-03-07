@@ -1,18 +1,27 @@
-# 使用内置滚动条
-有时原生滚动条与 naive-ui 的样式不协调。可以（在 `n-layout-sider`、`n-layout` 或 `n-layout-content`）使用 naive-ui 内置的滚动条。
+# 滚动到
 ```html
+<n-button
+  @click="$refs.sider.scrollTo({ top: 120, behavior: 'smooth' })"
+>
+  边栏滚到 120px
+</n-button>
+<n-button
+  @click="$refs.content.scrollTo({ top: 120, behavior: 'smooth' })"
+>
+  内容滚到 120px
+</n-button>
 <n-layout style="height: 480px;">
     <n-layout-header style="height: 64px;">
       酷的页头
     </n-layout-header>
     <n-layout position="absolute" style="top: 64px; bottom: 64px;">
-      <n-layout-sider position="absolute" :use-native-scrollbar="false">
+      <n-layout-sider position="absolute" ref="sider" style="overflow: auto;">
         <n-h1>长</n-h1><n-h1>长</n-h1><n-h1>长</n-h1>
         <n-h1>长</n-h1><n-h1>长</n-h1><n-h1>长</n-h1>
         <n-h1>长</n-h1><n-h1>长</n-h1><n-h1>长</n-h1>
         <n-h1>长</n-h1><n-h1>长</n-h1><n-h1>长</n-h1>
       </n-layout-sider>
-      <n-layout position="absolute" :use-native-scrollbar="false">
+      <n-layout position="absolute" :use-native-scrollbar="false" ref="content">
         <n-h1>长</n-h1><n-h1>长</n-h1><n-h1>长</n-h1>
         <n-h1>长</n-h1><n-h1>长</n-h1><n-h1>长</n-h1>
         <n-h1>长</n-h1><n-h1>长</n-h1><n-h1>长</n-h1>
@@ -23,4 +32,9 @@
       酷的页脚
     </n-layout-footer>
   </n-layout>
+```
+```css
+.n-button {
+  margin: 0 8px 12px 0;
+}
 ```

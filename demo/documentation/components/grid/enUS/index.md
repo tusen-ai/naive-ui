@@ -18,10 +18,10 @@ push-pull
 ### Col Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|span|`number`|1||
-|offset|`number`|0||
-|push|`number`|0||
-|pull|`number`|0||
+|span|`number`|`1`||
+|offset|`number`|`0`||
+|push|`number`|`0`||
+|pull|`number`|`0`||
 
 ## Notes
 The grid is not responsive, for I have not enough time, ha...

@@ -1,5 +1,5 @@
 # Use Style Scheme
-Naive UI has a built-in style scheme. It's powerful for you to create naive-ui styled component. Config Consumer & Element have access to style scheme.
+Naive UI has a built-in style scheme. It's powerful for you to create Naive UI styled component. `n-config-consumer` & `n-element` have access to style scheme.
 ```html
 <n-config-consumer>
   <template v-slot="{ styleScheme }">

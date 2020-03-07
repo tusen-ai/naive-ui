@@ -2,7 +2,7 @@
   <aside
     class="n-layout-sider"
     :class="{
-      [`n-layout-sider--${mode}-positioned`]: mode,
+      [`n-layout-sider--${position}-positioned`]: position,
       [`n-layout-sider--bordered`]: bordered,
       [`n-layout-sider--collapsed`]: collapsed,
       [`n-layout-sider--show-content`]: showContent,
@@ -126,9 +126,9 @@ export default {
         this.NLayout.collapsedWidth = value
       }
     },
-    mode (value) {
+    position (value) {
       if (this.NLayout) {
-        this.NLayout.siderMode = value
+        this.NLayout.siderPosition = value
       }
     },
     collapsed (value) {
@@ -178,7 +178,7 @@ export default {
       NLayout.hasSider = true
       NLayout.siderWidth = this.width
       NLayout.collapsedSiderWidth = this.collapsedWidth
-      NLayout.siderMode = this.mode
+      NLayout.siderPosition = this.position
       NLayout.siderCollapsed = this.collapsed
     }
   },
@@ -188,7 +188,7 @@ export default {
       NLayout.hasSider = false
       NLayout.siderWidth = null
       NLayout.collapsedSiderWidth = null
-      NLayout.siderMode = null
+      NLayout.siderPosition = null
       NLayout.siderCollapsed = null
     }
   },

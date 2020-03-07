@@ -1,5 +1,5 @@
 # Get Theme
-Use Config Consumer to get theme at current position.
+Use  `n-config-consumer`  to get the theme at current position.
 
 ```html
 <n-config-provider :theme="theme">

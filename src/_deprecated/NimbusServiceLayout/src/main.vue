@@ -146,7 +146,7 @@ export default {
         [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme
       },
       props: {
-        mode: 'absolute'
+        position: 'absolute'
       }
     }, [
       this.$slots.nav ? h('NLayoutHeader', {
@@ -163,7 +163,7 @@ export default {
           top: this.$slots.nav ? '64px' : null
         },
         props: {
-          mode: 'absolute'
+          position: 'absolute'
         }
       }, [
         h('NLayoutSider', {

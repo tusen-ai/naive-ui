@@ -20,6 +20,10 @@
   font-family: "FiraCode";
 }
 
+.demo-card code {
+  white-space: nowrap;
+}
+
 .n-documentation .n-p, .n-blockquote {
   max-width: 680px;
 }

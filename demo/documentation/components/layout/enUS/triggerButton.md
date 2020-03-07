@@ -28,13 +28,13 @@ A trigger button, for free.
     </n-layout>
   </n-layout>
 </n-layout>
-<n-layout style="height: 240px;">
-  <n-layout-header mode="absolute" style="height: 64px;">
+<n-layout style="height: 240px; overflow: hidden;">
+  <n-layout-header position="absolute" style="height: 64px;">
     Cool Header
   </n-layout-header>
-  <n-layout mode="absolute" style="top: 64px;">
+  <n-layout position="absolute" style="top: 64px;">
     <n-layout-sider
-      mode="absolute"
+      position="absolute"
       show-trigger
       collapse-mode="transform"
       :collapsed-width="120"
@@ -46,7 +46,7 @@ A trigger button, for free.
       <n-h1>Sider</n-h1>
     </n-layout-sider>
     <n-layout 
-      mode="absolute"
+      position="absolute"
       style="padding: 24px;"
     >
       <n-layout-content>

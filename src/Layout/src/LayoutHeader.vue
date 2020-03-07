@@ -2,7 +2,7 @@
   <div
     class="n-layout-header"
     :class="{
-      [`n-layout-header--${mode}-positioned`]: mode,
+      [`n-layout-header--${position}-positioned`]: position,
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
       [`n-layout-header--bordered`]: bordered
     }"

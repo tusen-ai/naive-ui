@@ -5,10 +5,10 @@ export default {
     }
   },
   props: {
-    mode: {
-      default: 'default',
+    position: {
+      default: 'static',
       validator (value) {
-        return ['default', 'absolute'].includes(value)
+        return ['static', 'absolute'].includes(value)
       }
     }
   }

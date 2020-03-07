@@ -15,7 +15,6 @@
         background-color .3s $--n-ease-in-out-cubic-bezier,
         color .3s $--n-ease-in-out-cubic-bezier;
       flex-direction: column;
-      overflow: auto;
       @include m(has-sider) {
         flex-direction: row;
         & > {
@@ -141,7 +140,6 @@
           right: 0;
           top: 0;
           bottom: 0;
-          overflow: auto;
         }
       }
     }

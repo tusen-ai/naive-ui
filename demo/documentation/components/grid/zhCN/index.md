@@ -19,10 +19,10 @@ push-pull
 ### Col Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|span|`number`|1||
-|offset|`number`|0||
-|push|`number`|0||
-|pull|`number`|0||
+|span|`number`|`1`||
+|offset|`number`|`0`||
+|push|`number`|`0`||
+|pull|`number`|`0`||
 
 ## 备注
 栅格不是响应式的，因为不太有时间写，额...

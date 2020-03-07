@@ -2,7 +2,7 @@
   <div
     class="n-layout"
     :class="{
-      [`n-layout--${mode}-positioned`]: mode,
+      [`n-layout--${position}-positioned`]: true,
       'n-layout--has-sider': hasSider,
       [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
@@ -59,7 +59,7 @@ export default {
       hasSider: false,
       siderWidth: null,
       collapsedSiderWidth: null,
-      siderMode: null,
+      siderPosition: null,
       siderCollapsed: null,
       childLayoutTransitionBlocked: false
     }
@@ -67,7 +67,7 @@ export default {
   computed: {
     styleMarginLeft () {
       if (this.NLayout && this.NLayout.hasSider) {
-        if (this.NLayout.siderMode === 'absolute' && this.mode === 'absolute') {
+        if (this.NLayout.siderPosition === 'absolute' && this.position === 'absolute') {
           if (this.NLayout.siderCollapsed) {
             return `${this.NLayout.collapsedSiderWidth}px`
           } else {
