@@ -19,8 +19,9 @@ shape
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|type|`'default' \| 'info' \| 'succcess' \| 'warning' \| 'error'`|`'default`||
-|size|`'small' \| 'medium' \| 'large'`|`'medium`||
+|theme|`'light' \| 'dark'`|`null`||
+|type|`'default' \| 'info' \| 'succcess' \| 'warning' \| 'error'`|`'default'`||
+|size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |disabled|`boolean`|`false`||
 |round|`boolean`|`false`||
 |checkable|`boolean`|`false`||

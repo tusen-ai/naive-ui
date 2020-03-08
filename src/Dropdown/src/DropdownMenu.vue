@@ -63,6 +63,13 @@ export default {
     selectOptions () {
       return createSelectOptions(this.options)
     },
+    inheritedTheme () {
+      if (this.NDropdownMenu) {
+        return this.NDropdownMenu.inheritedTheme
+      } else {
+        return this.syntheticTheme
+      }
+    },
     inheritedSubmenuWidth () {
       if (this.NDropdownMenu) {
         return this.NDropdownMenu.inheritedSubmenuWidth
@@ -199,7 +206,7 @@ export default {
           options: this.selectOptions,
           size: this.size,
           isOptionSelected: () => false,
-          theme: this.syntheticTheme
+          theme: this.inheritedTheme
         },
         style: {
           overflow: 'visible'

@@ -22,7 +22,9 @@ manual-position
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |trigger|`'hover' \| 'trigger' \| 'manual'`|`'hover'`||
+|show|`boolean`|`false`|Whether to show popover when trigger is `manual`|
 |delay|`number`|`0`|Popover showing delay when trigger is `hover`|
 |duration|`number`|`300`|Popover vanish delay when trigger is `hover`|
 |placement|`'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| `|`'bottom'`||

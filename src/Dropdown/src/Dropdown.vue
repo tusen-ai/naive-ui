@@ -32,6 +32,12 @@ export default {
     controller: {
       type: Object,
       default: () => ({})
+    },
+    theme: {
+      validator (value) {
+        return ['light', 'dark'].includes(value)
+      },
+      default: null
     }
   },
   render (h, context) {
@@ -54,7 +60,8 @@ export default {
               submenuWidth: props.submenuWidth,
               submenuMinWidth: props.submenuMinWidth,
               options: props.options,
-              keyboard: props.keyboard
+              keyboard: props.keyboard,
+              theme: props.theme
             },
             on: {
               select: context.listeners.select || (() => {})

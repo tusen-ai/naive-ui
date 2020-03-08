@@ -167,7 +167,7 @@ export default function (locale, instance) {
           },
           {
             name: 'Typography',
-            title: '排版',
+            title: '排印',
             titleExtra: 'Typography',
             path: `/${instance.lang}/${instance.theme}/doc` + '/n-typography'
           }

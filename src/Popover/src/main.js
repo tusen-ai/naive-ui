@@ -113,6 +113,12 @@ export default {
     zIndex: {
       type: String,
       default: undefined
+    },
+    theme: {
+      validator (value) {
+        return ['light', 'dark'].includes(value)
+      },
+      default: null
     }
   },
   render (h, context) {

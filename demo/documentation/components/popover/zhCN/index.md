@@ -22,7 +22,9 @@ manual-position
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |trigger|`'hover' \| 'trigger' \| 'manual'`|`'hover'`||
+|show|`boolean`|`false`|在 `manual` 触发时控制弹出信息是否显示|
 |delay|`number`|`0`|悬浮触发弹出信息的延迟|
 |duration|`number`|`300`|悬浮关闭弹出信息的延迟|
 |placement|`'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| `|`'bottom'`||

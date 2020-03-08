@@ -11,9 +11,10 @@ custom
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`||**必需**|
+|theme|`'light' \| 'dark'`|`null`||
+|type|`'primary' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'primary'`||
 |size|`number \| string`|`null`||
-|gradient|`string \| object`|`null`||
+|gradient|`string \| { from: string, to: string, deg: number \| string }`|`null`||
 
 ## Slots
 |名称|参数|说明|
