@@ -2,7 +2,7 @@
 ```html
 <n-popover>
   <template v-slot:activator>
-    <n-button style="margin:0;">
+    <n-button>
       悬浮
     </n-button>
   </template>

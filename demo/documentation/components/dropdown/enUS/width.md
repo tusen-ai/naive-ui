@@ -1,5 +1,5 @@
 # Width
-`width`, `max-width`, `min-width`, `submenu-width`, `submenu-max-width`, `submenu-min-width` can be set.
+`width`, `max-width`, `min-width`, `submenu-width`, `submenu-min-width` can be set.
 ```html
 <n-dropdown
   placement="bottom-start"
@@ -9,51 +9,49 @@
   :options="options"
   @select="handleSelect"
 >
-  <n-button>People and Some Food to Eat</n-button>
+  <n-button :keyboard="false">People and Some Food to Eat</n-button>
 </n-dropdown>
 ```
 ```js
 const options = [
   {
     label: 'Jay Gatsby',
-    key: 'jay gatsby'
+    value: 'jay gatsby'
   },
   {
     label: 'Daisy Buchanan',
-    key: 'daisy buchanan'
+    value: 'daisy buchanan'
   },
   {
     type: 'divider'
   },
   {
     label: 'Nick Carraway',
-    key: 'nick carraway'
+    value: 'nick carraway'
   },
   {
-    type: 'submenu',
     label: 'Others',
-    key: 'others',
+    value: 'others',
     children: [
       {
         label: 'Jordan Baker',
-        key: 'jordan baker'
+        value: 'jordan baker'
       },
       {
         label: 'Tom Buchanan',
-        key: 'tom buchanan'
+        value: 'tom buchanan'
       },
       {
-        type: 'submenu',
         label: 'Others',
-        key: 'others',
+        value: 'others',
         children: [
           {
             label: 'Chicken',
-            key: 'chicken'
+            value: 'chicken'
           },
           {
             label: 'Beef',
-            key: 'beef'
+            value: 'beef'
           }
         ]
       }

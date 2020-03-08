@@ -106,6 +106,10 @@ export default {
       type: String,
       default: 'if'
     },
+    arrowStyle: {
+      type: Object,
+      default: null
+    },
     zIndex: {
       type: String,
       default: undefined

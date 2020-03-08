@@ -12,8 +12,9 @@ vertical
 |title-placement|`'left' \| 'right' \| 'center'`|`'center'`||
 |dashed|`boolean`|`false`||
 |vertical|`boolean`|`false`||
+|theme|`'light' \| 'dark'`|`null`||
 
 ## Slots
 |名称|参数|说明|
 |-|-|-|
-|default|`()`||
+|default|`()`|分割线的标题|

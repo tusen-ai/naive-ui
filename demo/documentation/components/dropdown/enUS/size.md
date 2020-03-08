@@ -7,83 +7,77 @@ Dropdown has different size.
   size="small"
   @select="handleSelect"
   :options="options"
-  :focusable="false"
 >
-  <n-button>Small Some</n-button>
+  <n-button :keyboard="false">Small Some</n-button>
 </n-dropdown>
 <n-dropdown
   placement="bottom-start"
   trigger="click"
   size="medium"
   @select="handleSelect"
-  :focusable="false"
   :options="options"
 >
-  <n-button>Medium Some</n-button>
+  <n-button :keyboard="false">Medium Some</n-button>
 </n-dropdown>
 <n-dropdown
   placement="bottom-start"
   trigger="click"
   size="large"
-  :focusable="false"
   @select="handleSelect"
   :options="options"
 >
-  <n-button>Large Some</n-button>
+  <n-button :keyboard="false">Large Some</n-button>
 </n-dropdown>
 <n-dropdown
   placement="bottom-start"
   trigger="click"
   size="huge"
-  :focusable="false"
   @select="handleSelect"
   :options="options"
 >
-  <n-button>Huge Some</n-button>
+  <n-button :keyboard="false">Huge Some</n-button>
 </n-dropdown>
 ```
 ```js
 const options = [
   {
     label: 'Jay Gatsby',
-    key: 'jay gatsby'
+    value: 'jay gatsby'
   },
   {
     label: 'Daisy Buchanan',
-    key: 'daisy buchanan'
+    value: 'daisy buchanan'
   },
   {
     type: 'divider'
   },
   {
     label: 'Nick Carraway',
-    key: 'nick carraway'
+    value: 'nick carraway'
   },
   {
-    type: 'submenu',
     label: 'Others',
-    key: 'others',
+    value: 'others',
     children: [
       {
         label: 'Jordan Baker',
-        key: 'jordan baker'
+        value: 'jordan baker'
       },
       {
         label: 'Tom Buchanan',
-        key: 'tom buchanan'
+        value: 'tom buchanan'
       },
       {
-        type: 'submenu',
         label: 'Others',
-        key: 'others',
+        value: 'others',
         children: [
           {
             label: 'Chicken',
-            key: 'chicken'
+            value: 'chicken'
           },
           {
             label: 'Beef',
-            key: 'beef'
+            value: 'beef'
           }
         ]
       }

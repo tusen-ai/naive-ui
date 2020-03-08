@@ -5,6 +5,7 @@ class KeyboardDelegate {
     this.shiftPressed = false
     this.ctrlPressed = false
     this.commandPressed = false
+    this.handlerInfoList = []
     window.addEventListener('keydown', e => {
       switch (e.keyCode) {
         case KEY_CODE.SHIFT:
@@ -20,6 +21,16 @@ class KeyboardDelegate {
           this.tabPressed = true
           break
       }
+      this.handlerInfoList.forEach(handlerInfo => {
+        if (
+          handlerInfo.keyCode === e.keyCode &&
+          handlerInfo.type === 'keydown'
+        ) {
+          if (handlerInfo.preventDefault) e.preventDefault()
+          if (handlerInfo.stopPropagation) e.stopPropagation()
+          handlerInfo.handler()
+        }
+      })
     })
     window.addEventListener('keyup', e => {
       switch (e.keyCode) {
@@ -36,6 +47,16 @@ class KeyboardDelegate {
           this.tabPressed = false
           break
       }
+      this.handlerInfoList.forEach(handlerInfo => {
+        if (
+          handlerInfo.keyCode === e.keyCode &&
+          handlerInfo.type === 'keyup'
+        ) {
+          if (handlerInfo.preventDefault) e.preventDefault()
+          if (handlerInfo.stopPropagation) e.stopPropagation()
+          handlerInfo.handler()
+        }
+      })
     })
   }
   getKeyboardStatus () {
@@ -45,6 +66,21 @@ class KeyboardDelegate {
       commandPressed: this.commandPressed,
       tabPressed: this.c
     }
+  }
+  registerHandler (keyCode, type, handler, options = {}) {
+    this.handlerInfoList.push({
+      keyCode,
+      handler,
+      type,
+      preventDefault: options.preventDefault,
+      stopPropagation: options.stopPropagation,
+      capture: options.capture
+    })
+  }
+  unregisterHandler (handler) {
+    this.handlerInfoList = this.handlerInfoList.filter(handlerInfo => {
+      return handler !== handlerInfo.handler
+    })
   }
 }
 

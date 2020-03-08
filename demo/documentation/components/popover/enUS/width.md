@@ -2,7 +2,7 @@
 ```html
 <n-popover :width="500">
   <template v-slot:activator>
-    <n-button style="margin:0;">
+    <n-button>
       Width 500px
     </n-button>
   </template>

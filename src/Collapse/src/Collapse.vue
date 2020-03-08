@@ -2,7 +2,6 @@
 import intersection from 'lodash-es/intersection'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import asthemecontext from '../../_mixins/asthemecontext'
 
 export default {
   name: 'NCollapse',
@@ -13,15 +12,14 @@ export default {
   },
   mixins: [
     withapp,
-    themeable,
-    asthemecontext
+    themeable
   ],
   model: {
-    prop: 'expandNames',
-    event: 'expand-names-change'
+    prop: 'expandedNames',
+    event: 'expanded-names-change'
   },
   props: {
-    expandNames: {
+    expandedNames: {
       type: [Array, String],
       default: null
     },
@@ -39,22 +37,22 @@ export default {
     toggleItem (collapse, name) {
       if (this.accordion) {
         if (collapse) {
-          this.$emit('expand-names-change', [name])
+          this.$emit('expanded-names-change', [name])
         } else {
-          this.$emit('expand-names-change', [])
+          this.$emit('expanded-names-change', [])
         }
       } else {
-        if (!Array.isArray(this.expandNames)) {
-          this.$emit('expand-names-change', [name])
+        if (!Array.isArray(this.expandedNames)) {
+          this.$emit('expanded-names-change', [name])
         } else {
-          const activeNames = intersection(this.expandNames, this.collectedItemNames)
+          const activeNames = intersection(this.expandedNames, this.collectedItemNames)
           const index = activeNames.findIndex(activeName => name === activeName)
           if (~index) {
             activeNames.splice(index, 1)
-            this.$emit('expand-names-change', activeNames)
+            this.$emit('expanded-names-change', activeNames)
           } else {
             activeNames.push(name)
-            this.$emit('expand-names-change', activeNames)
+            this.$emit('expanded-names-change', activeNames)
           }
         }
       }
@@ -65,8 +63,7 @@ export default {
       staticClass: 'n-collapse',
       class: {
         [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme
-      },
-      style: this.syntheticStyle
+      }
     }, this.$slots.default)
   }
 }

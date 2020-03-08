@@ -122,6 +122,9 @@ const devtoolIsOpened = e.target === document.activeElement
 ## 2020.3.7
 主体差不多做完了，好累
 
+## 2020.3.8
+zindex 有点问题
+
 
 ## TODO 排序不分先后
 1. <del>Focus Detector on Time Selector</del>
@@ -194,8 +197,9 @@ const devtoolIsOpened = e.target === document.activeElement
 68. <del>Slider 对于 modal 适配</del>
 69. <del>table fixed scroll checkbox, not sync</del>
 70. <del>Transfer no data</del>
-71. Metropolis 从自带字体去掉
-72. Input Group
+71. <del>Metropolis 从自带字体去掉<del>
+72. <del>Input Group</del>
+73. <del>Dropdown API 修改为 label + value，目前为止 UI 并没有出现过 key，不能只为了它搞特殊，value 可以，key 甚至会另有作用，现在占用实际是个危险的事情</del>
 
 ```
 Done

@@ -7,11 +7,7 @@ export default {
   name: 'NTooltip',
   functional: true,
   props: {
-    ...NPopover.props,
-    showArrow: {
-      type: Boolean,
-      default: false
-    }
+    ...NPopover.props
   },
   render (h, context) {
     const slots = context.scopedSlots
@@ -20,7 +16,7 @@ export default {
       props: {
         ...context.props,
         containerClass: 'n-tooltip',
-        overlayClass: 'n-tooltip-content'
+        overlayClass: 'n-tooltip-content ' + (context.props.overlayClass || '')
       },
       scopedSlots: {
         activator: () => slots.activator && slots.activator(),

@@ -2,7 +2,7 @@
 ```html
 <n-popover raw :show-arrow="false">
   <template v-slot:activator>
-    <n-button style="margin:0;">
+    <n-button>
       Hover
     </n-button>
   </template>

@@ -8,7 +8,6 @@
       [`n-divider--title-position-${titlePlacement}`]: $slots.default && titlePlacement,
       [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
-    :style="syntheticStyle"
   >
     <hr
       v-if="!vertical"
@@ -30,14 +29,12 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import asthemecontext from '../../_mixins/asthemecontext'
 
 export default {
   name: 'NDivider',
   mixins: [
     withapp,
-    themeable,
-    asthemecontext
+    themeable
   ],
   props: {
     titlePlacement: {

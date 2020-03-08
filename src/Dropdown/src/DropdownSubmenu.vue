@@ -205,11 +205,11 @@ export default {
         }, [
           this.active ? h(NDropdownMenu, {
             staticClass: 'n-dropdown-submenu',
+            ref: 'menu',
             style: this.style,
             props: {
               options: this.options,
               theme: this.syntheticTheme,
-              defaultFocus: false,
               size: this.size
             }
           }) : null

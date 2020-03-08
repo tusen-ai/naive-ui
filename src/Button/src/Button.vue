@@ -173,6 +173,10 @@ export default {
       type: Boolean,
       default: true
     },
+    keyboard: {
+      type: Boolean,
+      default: true
+    },
     type: {
       validator (value) {
         return [
@@ -245,9 +249,11 @@ export default {
   },
   methods: {
     handleMouseDown (e) {
-      if (this.disabled) return
+      e.preventDefault()
+      if (this.disabled) {
+        return
+      }
       if (this.syntheticFocusable) {
-        e.preventDefault()
         this.$el.focus()
       }
     },
@@ -270,6 +276,10 @@ export default {
       }
     },
     handleKeyUpEnter (e) {
+      if (!this.keyboard) {
+        e.preventDefault()
+        return
+      }
       this.enterPressed = false
       this.$nextTick().then(() => {
         if (!this.disabled) {
@@ -279,6 +289,7 @@ export default {
     },
     handleKeyDownEnter (e) {
       e.preventDefault()
+      if (!this.keyboard) return
       this.enterPressed = true
     },
     handleBlur (e) {
