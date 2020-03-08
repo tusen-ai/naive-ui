@@ -4,16 +4,18 @@
     :class="{
       [`n-layout--${position}-positioned`]: true,
       'n-layout--has-sider': hasSider,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
+      [`n-layout--${siderCollapseMode}-collapse-mode`]: siderCollapseMode
     }"
     :style="{
       marginLeft: styleMarginLeft,
-      transition: transitionBlocked ? 'none' : null
+      transition: transitionDisabled ? 'none' : null
     }"
   >
     <n-scrollbar
       v-if="!useNativeScrollbar"
       ref="scrollbar"
+      :theme="syntheticTheme"
       :content-style="scrollContentStyle"
       :container-style="scrollContainerStyle"
     >
@@ -59,9 +61,10 @@ export default {
       hasSider: false,
       siderWidth: null,
       collapsedSiderWidth: null,
+      siderCollapseMode: null,
       siderPosition: null,
       siderCollapsed: null,
-      childLayoutTransitionBlocked: false
+      childLayoutTransitionDisabled: false
     }
   },
   computed: {
@@ -77,8 +80,8 @@ export default {
       }
       return null
     },
-    transitionBlocked () {
-      if (this.NLayout && this.NLayout.childLayoutTransitionBlocked) {
+    transitionDisabled () {
+      if (this.NLayout && this.NLayout.childLayoutTransitionDisabled) {
         return true
       } else {
         return false
@@ -94,9 +97,9 @@ export default {
       }
     },
     blockChildLayoutTransitionOneTick () {
-      this.childLayoutTransitionBlocked = true
+      this.childLayoutTransitionDisabled = true
       this.$nextTick().then(() => {
-        this.childLayoutTransitionBlocked = false
+        this.childLayoutTransitionDisabled = false
       })
     }
   }

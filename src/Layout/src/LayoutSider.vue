@@ -19,6 +19,7 @@
       v-if="!useNativeScrollbar"
       ref="scrollbar"
       class="n-layout-sider__content"
+      :theme="syntheticTheme"
       :content-style="scrollContentStyle"
       :container-style="scrollContainerStyle"
     >
@@ -126,6 +127,11 @@ export default {
         this.NLayout.collapsedWidth = value
       }
     },
+    collapseMode (value) {
+      if (this.NLayout) {
+        this.NLayout.siderCollapseMode = value
+      }
+    },
     position (value) {
       if (this.NLayout) {
         this.NLayout.siderPosition = value
@@ -178,6 +184,7 @@ export default {
       NLayout.hasSider = true
       NLayout.siderWidth = this.width
       NLayout.collapsedSiderWidth = this.collapsedWidth
+      NLayout.siderCollapseMode = this.collapseMode
       NLayout.siderPosition = this.position
       NLayout.siderCollapsed = this.collapsed
     }
@@ -188,6 +195,7 @@ export default {
       NLayout.hasSider = false
       NLayout.siderWidth = null
       NLayout.collapsedSiderWidth = null
+      NLayout.siderCollapseMode = null
       NLayout.siderPosition = null
       NLayout.siderCollapsed = null
     }

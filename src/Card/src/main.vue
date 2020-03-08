@@ -48,7 +48,6 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import asthemecontext from '../../_mixins/asthemecontext'
 import NIcon from '../../Icon'
 import mdClose from '../../_icons/md-close'
 
@@ -58,7 +57,7 @@ export default {
     mdClose,
     NIcon
   },
-  mixins: [withapp, themeable, asthemecontext],
+  mixins: [withapp, themeable],
   props: {
     title: {
       type: String,
@@ -87,16 +86,6 @@ export default {
     closable: {
       type: Boolean,
       default: false
-    }
-  },
-  data () {
-    return {
-      style: {}
-    }
-  },
-  beforeMount () {
-    if (this.width !== undefined) {
-      this.style.width = `${this.width}px`
     }
   },
   methods: {

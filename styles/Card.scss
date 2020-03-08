@@ -12,9 +12,8 @@
     @include m(content-soft-segmented) {
       & > {
         @include e(content) {
-          padding-bottom: map-get($--n-card-margin-bottom, $size);
           margin: 0 map-get($--n-card-margin-left, $size);
-          padding-top: map-get($--n-card-margin-bottom, $size);
+          padding: map-get($--n-card-margin-bottom, $size) 0;
         }
       }
     }
@@ -28,9 +27,8 @@
     @include m(footer-soft-segmented) {
       & > {
         @include e(footer) {
-          padding-bottom: map-get($--n-card-margin-bottom, $size);
+          padding: map-get($--n-card-margin-bottom, $size) 0;
           margin: 0 map-get($--n-card-margin-left, $size);
-          padding-top: map-get($--n-card-margin-bottom, $size);
         }
       }
     }

@@ -16,11 +16,10 @@
 import layoutModeMixin from './layoutModeMixin'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import asthemecontext from '../../_mixins/asthemecontext'
 
 export default {
   name: 'NLayoutFooter',
-  mixins: [ withapp, themeable, asthemecontext, layoutModeMixin ],
+  mixins: [ withapp, themeable, layoutModeMixin ],
   props: {
     bordered: {
       type: Boolean,
