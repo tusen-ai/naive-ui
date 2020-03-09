@@ -63,16 +63,19 @@ export default {
   },
   computed: {
     collapse () {
-      if (this.NCollapse && Array.isArray(this.NCollapse.expandNames)) {
-        return !~this.NCollapse.expandNames.findIndex(name => name === this.name)
+      const NCollapse = this.NCollapse
+      if (NCollapse && Array.isArray(NCollapse.expandedNames)) {
+        const itemName = this.name
+        return !~NCollapse.expandedNames.findIndex(name => name === itemName)
       }
       return true
     }
   },
   methods: {
     handleClick () {
-      if (this.NCollapse) {
-        this.NCollapse.toggleItem(this.collapse, this.name)
+      const NCollapse = this.NCollapse
+      if (NCollapse) {
+        NCollapse.toggleItem(this.collapse, this.name)
       }
     }
   }

@@ -3,6 +3,7 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import { getRootDropdownMenu, createSelectOptions } from './utils'
 import { KEY_CODE } from '../../_utils/event/keyCode'
+import keyboardDelegate from '../../_utils/delegate/keyboardDelegate'
 import NBaseSelectMenu from '../../_base/SelectMenu'
 
 export default {
@@ -26,10 +27,6 @@ export default {
       type: Array,
       required: true
     },
-    defaultFocus: {
-      type: Boolean,
-      default: true
-    },
     size: {
       type: String,
       default: undefined
@@ -50,7 +47,7 @@ export default {
       type: Number,
       default: null
     },
-    focusable: {
+    keyboard: {
       type: Boolean,
       default: true
     }
@@ -65,6 +62,13 @@ export default {
   computed: {
     selectOptions () {
       return createSelectOptions(this.options)
+    },
+    inheritedTheme () {
+      if (this.NDropdownMenu) {
+        return this.NDropdownMenu.inheritedTheme
+      } else {
+        return this.syntheticTheme
+      }
     },
     inheritedSubmenuWidth () {
       if (this.NDropdownMenu) {
@@ -89,11 +93,35 @@ export default {
     }
   },
   mounted () {
-    if (this.defaultFocus && this.focusable) {
-      this.$el.focus()
-    }
+    if (this.keyboard) this.registerKeyboardOperations()
+  },
+  beforeDestroy () {
+    if (this.keyboard) this.unregisterKeyboardOperations()
   },
   methods: {
+    registerKeyboardOperations () {
+      keyboardDelegate.registerHandler(KEY_CODE.UP, 'keydown', this.handleKeyDownUp, {
+        preventDefault: true
+      })
+      keyboardDelegate.registerHandler(KEY_CODE.RIGHT, 'keydown', this.handleKeyDownRight, {
+        preventDefault: true
+      })
+      keyboardDelegate.registerHandler(KEY_CODE.DOWN, 'keydown', this.handleKeyDownDown, {
+        preventDefault: true
+      })
+      keyboardDelegate.registerHandler(KEY_CODE.LEFT, 'keydown', this.handleKeyDownLeft, {
+        preventDefault: true
+      })
+      keyboardDelegate.registerHandler(KEY_CODE.ENTER, 'keyup', this.handleKeyUpEnter)
+    },
+    unregisterKeyboardOperations () {
+      keyboardDelegate.unregisterHandler(this.handleKeyDownUp)
+      keyboardDelegate.unregisterHandler(this.handleKeyDownDown)
+      keyboardDelegate.unregisterHandler(this.handleKeyDownLeft)
+      keyboardDelegate.unregisterHandler(this.handleKeyDownRight)
+      keyboardDelegate.unregisterHandler(this.handleKeyUpEnter)
+    },
+    handleKeyDownEnter () {},
     handleSelectOption (key) {
       if (this.NDropdownMenu) {
         this.NDropdownMenu.handleSelectOption(key)
@@ -103,33 +131,41 @@ export default {
       this.$emit('select', key)
     },
     handleKeyDownLeft () {
-      if (this.activeMenuInstance.NDropdownSubmenu) {
-        this.activeMenuInstance.NDropdownSubmenu.menuActivated = false
-        this.pendingSubmenuInstance = this.activeMenuInstance.NDropdownSubmenu
-      }
-      if (this.activeMenuInstance.NDropdownMenu) {
-        this.activeMenuInstance = this.activeMenuInstance.NDropdownMenu
+      if (!this.NDropdownMenu) {
+        if (this.activeMenuInstance.NDropdownSubmenu) {
+          this.activeMenuInstance.NDropdownSubmenu.menuActivated = false
+          this.pendingSubmenuInstance = this.activeMenuInstance.NDropdownSubmenu
+        }
+        if (this.activeMenuInstance.NDropdownMenu) {
+          this.activeMenuInstance = this.activeMenuInstance.NDropdownMenu
+        }
       }
     },
     handleKeyDownUp () {
-      this.activeMenuInstance.$refs.selectMenu.prev()
+      if (!this.NDropdownMenu) {
+        this.activeMenuInstance.$refs.selectMenu.prev()
+      }
     },
     handleKeyDownDown () {
-      this.activeMenuInstance.$refs.selectMenu.next()
+      if (!this.NDropdownMenu) {
+        this.activeMenuInstance.$refs.selectMenu.next()
+      }
     },
     handleKeyDownRight () {
-      if (
-        this.pendingSubmenuInstance &&
-        this.activeMenuInstance &&
-        this.pendingSubmenuInstance !== this.activeMenuInstance.NDropdownSubmenu
-      ) {
-        this.pendingSubmenuInstance.menuActivated = true
-        this.$nextTick().then(() => {
-          this.activeMenuInstance = this.pendingSubmenuInstance.$refs.content
+      if (!this.NDropdownMenu) {
+        if (
+          this.pendingSubmenuInstance &&
+          this.activeMenuInstance &&
+          this.pendingSubmenuInstance !== this.activeMenuInstance.NDropdownSubmenu
+        ) {
+          this.pendingSubmenuInstance.menuActivated = true
           this.$nextTick().then(() => {
-            this.activeMenuInstance.$refs.selectMenu.next()
+            this.activeMenuInstance = this.pendingSubmenuInstance.$refs.menu
+            this.$nextTick().then(() => {
+              this.activeMenuInstance.$refs.selectMenu.next()
+            })
           })
-        })
+        }
       }
     },
     handleKeyUpEnter () {
@@ -142,35 +178,6 @@ export default {
           }
         }
       }
-    },
-    handleKeyUp (e) {
-      if (e.keyCode === KEY_CODE.ENTER) {
-        this.handleKeyUpEnter()
-      }
-    },
-    handleKeyDown (e) {
-      if (!this.NDropdownMenu) {
-        switch (e.keyCode) {
-          case KEY_CODE.UP:
-            this.handleKeyDownUp()
-            break
-          case KEY_CODE.RIGHT:
-            this.handleKeyDownRight()
-            break
-          case KEY_CODE.DOWN:
-            this.handleKeyDownDown()
-            break
-          case KEY_CODE.LEFT:
-            this.handleKeyDownLeft()
-            break
-          default:
-            break
-        }
-      }
-    },
-    handleBlur () {
-      this.controller.hide()
-      this.$emit('blur')
     },
     handleMouseEnter () {
       if (this.NDropdownMenu) {
@@ -188,10 +195,7 @@ export default {
         [`n-dropdown-menu--${this.size}-size`]: true
       },
       on: {
-        keydown: this.handleKeyDown,
-        mouseenter: this.handleMouseEnter,
-        blur: this.handleBlur,
-        keyup: this.handleKeyUp
+        mouseenter: this.handleMouseEnter
       }
     }, [
       h(NBaseSelectMenu, {
@@ -202,7 +206,7 @@ export default {
           options: this.selectOptions,
           size: this.size,
           isOptionSelected: () => false,
-          theme: this.syntheticTheme
+          theme: this.inheritedTheme
         },
         style: {
           overflow: 'visible'

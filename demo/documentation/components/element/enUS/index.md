@@ -1,5 +1,5 @@
 # Element
-Element can be render as a custom tag with the ability of accessing some configurations provided by n-config-provider.
+Element can be render as a custom tag with the ability of accessing some configurations provided by `n-config-provider`.
 
 ## Demos
 ```demo
@@ -9,7 +9,7 @@ color
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|as|`string`|`'div'`||
+|as|`string`|`'div'`|The tag `n-element` should be rendered as.|
 
 ## Slots
 |Name|Parameters|Description|

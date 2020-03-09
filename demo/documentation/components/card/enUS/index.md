@@ -16,10 +16,12 @@ closable
 |title|`string`|`null`||
 |content-style|`object \| string`|`null`||
 |header-style|`object \| string`|`null`||
-|segmented|`boolean \| object`|`false`||
+|segmented|`boolean \| { [part in 'content' \| 'footer' \| 'action']?: boolean \| 'soft' \| 'hard' }`|`false`||
 |size|`'small' \| 'medium' \| 'large' \| 'huge'`|`'medium'`||
 |bordered|`boolean`|`true`||
 |closable|`boolean`|`false`||
+|theme|`'light' \| 'dark'`|`null`||
+|themed-style|`{ [themeName: string]: object }`|`null`||
 
 ## Events
 |Name|Parameters|Description|

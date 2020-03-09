@@ -27,8 +27,16 @@
       transform-origin: inherit;
       transform: $--n-transform-debounce-scale;
       position: relative;
-      border-radius: $--n-popover-border-radius;
       font-size: 13px;
+      @include m(styled) {
+        border-radius: $--n-popover-border-radius;
+        padding: 8px 14px;
+      }
+      @include m(fix-width) {
+        white-space: normal;
+        width: max-content;
+        box-sizing: border-box;
+      }
       @include b(popover-arrow-wrapper) {
         position: absolute;
         overflow: hidden;
@@ -241,21 +249,17 @@
         }
       }
     }
-    background-color: $--popover-background-color;
+    @include m(styled) {
+      background-color: $--popover-background-color;
+    }
     color: $--popover-text-color;
     @include b(popover-arrow-wrapper) {
       @include b(popover-arrow) {
         background-color: $--popover-background-color;
       }
     }
-    @include not-m(no-shadow) {
+    @include m(shadow) {
       box-shadow: $--popover-box-shadow;
-    }
-    @include m(fix-width) {
-      white-space: normal;
-      width: max-content;
-      box-sizing: border-box;
-      word-break: break-all;
     }
   }
 }

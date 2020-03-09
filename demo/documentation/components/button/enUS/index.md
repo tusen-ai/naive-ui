@@ -27,12 +27,14 @@ debug
 |circle|`boolean`|`false`||
 |round|`boolean`|`false`||
 |loading|`boolean`|`false`||
+|keyboard|`boolean`|`true`|Whether is supports keyboard operation.｜
 |icon-placement|`'left' \| 'right'`|`'left'`||
+|theme|`'light' \| 'dark'`|`null`||
 
 ### Button Group Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|size|`'small' \| 'medium' \| 'large'`|`null`|The buttons' size in button group. If set, the button's size prop inner group won't work.|
+|size|`'tiny' \| 'small' \| 'medium' \| 'large'`|`null`|The buttons' size in button group. If set, the button's size prop inner group won't work.|
 |vertical|`boolean`|`false`||
 
 ## Slots

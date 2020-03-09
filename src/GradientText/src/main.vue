@@ -6,7 +6,6 @@
       [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
     :style="{
-      ...syntheticStyle,
       fontSize: styleFontSize,
       backgroundImage: styleBackgroundImage
     }"
@@ -34,7 +33,7 @@ export default {
     },
     type: {
       type: String,
-      default: 'default'
+      default: 'primary'
     },
     color: {
       type: [Object, String],

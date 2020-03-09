@@ -11,7 +11,10 @@ max-width
 arrow
 ```
 ## Props
-参考 [Popover](n-popover#Props)
+参考 [Popover Props](n-popover#Props)
+
+## Slots
+参考 [Popover Slots](n-popover#Slots)
 
 ## Events
-参考 [Popover](n-popover#Props)
+参考 [Popover Events](n-popover#Events)

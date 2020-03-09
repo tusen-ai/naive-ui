@@ -1,7 +1,7 @@
 function createSelectOptionForDropdownOption (dropdownOption) {
   const selectOption = Object.assign({}, dropdownOption)
   selectOption.type = undefined
-  selectOption.value = dropdownOption.key
+  selectOption.value = dropdownOption.value
   return selectOption
 }
 
@@ -10,7 +10,7 @@ function createSelectOptionForDropdownSubmenu (dropdownSubmenu, DropdownSubmenu)
   const selectOption = Object.assign({}, dropdownSubmenu)
   selectOption.as = 'dropdown-submenu'
   selectOption.type = undefined
-  selectOption.value = dropdownSubmenu.key
+  selectOption.value = dropdownSubmenu.value
   selectOption.style = {
     ...dropdownSubmenu.style,
     overflow: 'visible'
@@ -38,9 +38,9 @@ function createSelectOptionForDropdownDivider (option, DropdownDivider) {
 function createSelectOptionsFromDropdownOptions (dropdownOptions, DropdownSubmenu, DropdownDivider) {
   const selectOptions = []
   dropdownOptions.forEach((option, index) => {
-    if (option.type === undefined) {
+    if (option.type === undefined && !option.children) {
       selectOptions.push(createSelectOptionForDropdownOption(option))
-    } else if (option.type === 'submenu') {
+    } else if (option.children) {
       selectOptions.push(createSelectOptionForDropdownSubmenu(option, DropdownSubmenu))
     } else if (option.type === 'divider') {
       selectOptions.push(createSelectOptionForDropdownDivider(option, DropdownDivider))

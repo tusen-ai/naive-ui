@@ -16,23 +16,29 @@ export default {
   },
   computed: {
     syntheticTheme () {
-      if (this.theme !== null) {
-        return this.theme
+      const theme = this.theme
+      if (theme !== null) {
+        return theme
       } else if (this.NThemedComponent && this.NThemedComponent.theme) {
         return this.NThemedComponent.theme
       } else {
-        return (this.NConfigProvider && this.NConfigProvider.syntheticTheme) || null
+        const NConfigProvider = this.NConfigProvider
+        return (NConfigProvider && NConfigProvider.syntheticTheme) || null
       }
     },
     syntheticStyle () {
-      if (this.themedStyle && this.syntheticTheme && this.themedStyle[this.syntheticTheme]) {
-        return this.themedStyle[this.syntheticTheme]
+      const themedStyle = this.themedStyle
+      const syntheticTheme = this.syntheticTheme
+      if (themedStyle && syntheticTheme && themedStyle[syntheticTheme]) {
+        return themedStyle[syntheticTheme]
       }
       return null
     },
     syntheticThemeEnvironment () {
-      if (this.syntheticTheme && this.NConfigProvider && this.NConfigProvider.inheritedThemeEnvironment) {
-        return this.NConfigProvider.inheritedThemeEnvironment[this.syntheticTheme] || null
+      const NConfigProvider = this.NConfigProvider
+      const syntheticTheme = this.syntheticTheme
+      if (syntheticTheme && NConfigProvider && NConfigProvider.inheritedThemeEnvironment) {
+        return NConfigProvider.inheritedThemeEnvironment[syntheticTheme] || null
       }
     }
   }

@@ -16,24 +16,35 @@ manual-position
 |Name|Type|Default|Description|
 |-|-|-|-|
 |size|`'small'\|'medium'\|'large'\|'huge'`|`large`||
-|default-focus|`boolean`|`false`||
 |options|`Array`|`[]`||
-|trigger|`'hover' \| 'trigger' \| 'manual'`|`'hover'`||
-|delay|`number`|`0`||
-|duration|`number`|`300`||
-|placement|`'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| `|`'bottom'`||
-|arrow|`boolean`|`false`||
-|disabled|`boolean`|`false`||
-|manually-positioned|`boolean`|`false`||
-|x|`number`|`null`||
-|y|`number`|`null`||
-|filp|`boolean`|`true`||
-|controller|`object`|`null`||
+|keyboard|`boolean`|`true`|Whether is supports keyboard operation. (Be careful about the potential conflicts with other components keyboard operations)|
+|submenu-width|`number`|`null`||
+|submenu-min-width|`number`|`null`||
+
+For other props, see [Popover Props](n-popover#Props). Note that `arrow`, `raw` is not available.
+
+### DropdownOption Type
+|Property|Type|Description|
+|-|-|-|
+|label|`string`||
+|value|`string \| number`|Should be unique|
+
+### DropdownDivider Type
+|Property|Type|Description|
+|-|-|-|
+|type|`'divider'`||
+
+### DropdownSubmenu Type
+|Property|Type|Description|
+|-|-|-|
+|label|`string`||
+|value|`string \| number`|Should be unique|
+|children|`Array<DropdownOption \| DropdownDivider \| DropdownSubmenu>`||
 
 ## Events
 |Name|Parameters|Description|
 |-|-|-|
-|select|`(selectedKey: string \| number)`||
+|select|`(selectedValue: string \| number)`||
 
 
 

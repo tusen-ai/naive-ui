@@ -1,4 +1,5 @@
 # Manually Positioned
+Click it.
 ```html
 <div style="width: 200px; height: 200px; background-color: rgba(0, 128, 0, .5);" @click="handleClick"></div>
 <n-popover trigger="manual" :show="showPopover" :x="x" :y="y" manually-positioned>

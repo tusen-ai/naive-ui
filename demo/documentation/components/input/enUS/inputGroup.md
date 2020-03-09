@@ -18,7 +18,7 @@
 <n-input-group>
   <n-button type="primary">Search</n-button>
   <n-input :style="{ width: '50%' }" v-model="value8" />
-  <n-button>Search</n-button>
+  <n-button type="primary" ghost>Search</n-button>
 </n-input-group>
 <n-input-group>
   <n-date-picker v-model="value9"/>

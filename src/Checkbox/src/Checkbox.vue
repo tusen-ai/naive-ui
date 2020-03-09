@@ -6,7 +6,8 @@
       'n-checkbox--disabled': syntheticDisabled,
       'n-checkbox--indeterminate': indeterminate,
       'n-checkbox--table-header': tableHeader,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-checkbox--${syntheticSize}-size`]: true,
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
     }"
     :tabindex="syntheticDisabled ? false : 0"
     @keyup.enter="handleKeyUpEnter"
@@ -54,7 +55,27 @@ export default {
     withapp,
     themeable,
     asthemecontext,
-    asformitem(),
+    asformitem(
+      {
+        change: 'change',
+        blur: 'blur',
+        focus: 'focus'
+      },
+      'medium',
+      function () {
+        const size = this.size
+        if (size) return size
+        const NCheckboxGroup = this.NCheckboxGroup
+        if (NCheckboxGroup && NCheckboxGroup.syntheticSize) {
+          return NCheckboxGroup.syntheticSize
+        }
+        const NFormItem = this.NFormItem
+        if (NFormItem && NFormItem.syntheticSize) {
+          return NFormItem.syntheticSize
+        }
+        return 'medium'
+      }
+    ),
     collectable('NCheckboxGroup', 'collectedCheckboxValues')
   ],
   model: {
@@ -62,6 +83,12 @@ export default {
     event: 'change'
   },
   props: {
+    size: {
+      validator (value) {
+        return ['small', 'medium', 'large'].includes(value)
+      },
+      default: null
+    },
     value: {
       type: [Number, Boolean, String],
       default: null

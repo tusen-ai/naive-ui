@@ -27,12 +27,14 @@ debug
 |circle|`boolean`|`false`||
 |round|`boolean`|`false`||
 |loading|`boolean`|`false`||
+|keyboard|`boolean`|`true`|是否支持键盘操作|
 |icon-placement|`'left' \| 'right'`|`'left'`||
+|theme|`'light' \| 'dark'`|`null`||
 
 ### Button Group Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|size|`'small' \| 'medium' \| 'large'`|`'medium'`|在组内的按钮的尺寸。如果设定，内部的按钮尺寸将不生效|
+|size|`'tiny' \| 'small' \| 'medium' \| 'large'`|`null`|在组内的按钮的尺寸。如果设定，内部的按钮尺寸将不生效|
 |vertical|`boolean`|`false`||
 
 ## Slots

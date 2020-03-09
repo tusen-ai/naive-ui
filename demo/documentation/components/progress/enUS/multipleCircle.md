@@ -1,7 +1,7 @@
 # Multiple Circle
-Maybe your PM will need this.
-
 You can show multiple circle in a single progress. Note that `circle-gap` and `stroke-width` is relative to 100(the svg's viewbox size is 100).
+
+Maybe your product manager will need it.
 ```html
 <n-config-consumer>
   <template v-slot="{ styleScheme }">

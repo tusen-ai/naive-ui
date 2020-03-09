@@ -5,6 +5,7 @@
       'n-checkbox--checked': checked,
       'n-checkbox--disabled': disabled,
       'n-checkbox--indeterminate': indeterminate,
+      [`n-checkbox--${size}-size`]: size,
       [`n-${theme}-theme`]: theme
     }"
     :tabindex="disabled ? false : 0"
@@ -41,6 +42,10 @@ export default {
     value: {
       validator: createValidator(['number', 'boolean', 'string']),
       default: null
+    },
+    size: {
+      validator: createValidator(['string']),
+      required: true
     },
     checked: {
       validator: createValidator(['boolean']),

@@ -20,44 +20,42 @@ For some special case, you may want to manually position the dropdown. For examp
 const options = [
   {
     label: 'Jay Gatsby',
-    key: 'jay gatsby'
+    value: 'jay gatsby'
   },
   {
     label: 'Daisy Buchanan',
-    key: 'daisy buchanan'
+    value: 'daisy buchanan'
   },
   {
     type: 'divider'
   },
   {
     label: 'Nick Carraway',
-    key: 'nick carraway'
+    value: 'nick carraway'
   },
   {
-    type: 'submenu',
     label: 'Others',
-    key: 'others',
+    value: 'others',
     children: [
       {
         label: 'Jordan Baker',
-        key: 'jordan baker'
+        value: 'jordan baker'
       },
       {
         label: 'Tom Buchanan',
-        key: 'tom buchanan'
+        value: 'tom buchanan'
       },
       {
-        type: 'submenu',
         label: 'Others',
-        key: 'others',
+        value: 'others',
         children: [
           {
             label: 'Chicken',
-            key: 'chicken'
+            value: 'chicken'
           },
           {
             label: 'Beef',
-            key: 'beef'
+            value: 'beef'
           }
         ]
       }

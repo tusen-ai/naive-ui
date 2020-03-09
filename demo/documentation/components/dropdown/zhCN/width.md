@@ -1,5 +1,5 @@
 # 宽度
-可以设置 `width`、`max-width`、`min-width`、`submenu-width`、`submenu-max-width`、`sub-min-width`。
+可以设置 `width`、`max-width`、`min-width`、`submenu-width`、`sub-min-width`。
 ```html
 <n-dropdown
   :options="options"
@@ -7,10 +7,9 @@
   trigger="click"
   :width="180"
   :submenu-width="180"
-  :default-focus="false"
   @select="handleSelect"
 >
-  <n-button>人物和食物</n-button>
+  <n-button :keyboard="false">人物和食物</n-button>
 </n-dropdown>
 ```
 
@@ -18,44 +17,42 @@
 const options = [
   {
     label: '杰·盖茨比',
-    key: 'jay gatsby'
+    value: 'jay gatsby'
   },
   {
     label: '黛西·布坎南',
-    key: 'daisy buchanan'
+    value: 'daisy buchanan'
   },
   {
     type: 'divider'
   },
   {
     label: '尼克·卡拉威',
-    key: 'nick carraway'
+    value: 'nick carraway'
   },
   {
-    type: 'submenu',
     label: '其他',
-    key: 'others',
+    value: 'others',
     children: [
       {
         label: '乔丹·贝克',
-        key: 'jordan baker'
+        value: 'jordan baker'
       },
       {
         label: '汤姆·布坎南',
-        key: 'tom buchanan'
+        value: 'tom buchanan'
       },
       {
-        type: 'submenu',
         label: '其他',
-        key: 'others',
+        value: 'others',
         children: [
           {
             label: '鸡肉',
-            key: 'chicken'
+            value: 'chicken'
           },
           {
             label: '牛肉',
-            key: 'beef'
+            value: 'beef'
           }
         ]
       }

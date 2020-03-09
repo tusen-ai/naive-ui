@@ -6,6 +6,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      font-size: 14px;
     }
     @include e(icon) {
       @include once {
@@ -21,7 +22,6 @@
     }
     @include e(description) {
       @include once {
-        font-size: 14px;
         margin-top: 4px;
         transition: color .3s $--n-ease-in-out-cubic-bezier;
       }
@@ -29,7 +29,6 @@
     }
     @include e(extra) {
       @include once {
-        font-size: 14px;
         text-align: center;
         transition: color .3s $--n-ease-in-out-cubic-bezier;
         margin-top: 16px;

@@ -1,5 +1,5 @@
 # 提供主题
-使用配置提供者（Config Provider）来设定它全部的后代组件主题。
+使用配置提供者 `n-config-provider` 来设定它全部的后代组件主题。
 
 ```html
 <n-config-provider :theme="theme">

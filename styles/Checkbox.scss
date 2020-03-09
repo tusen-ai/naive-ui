@@ -1,5 +1,17 @@
 @import "./mixins/mixins.scss";
 
+@mixin checkbox-size-mixin ($size) {
+  @include m($size + '-size') {
+    height: map-get($--n-font-size, $size);
+    line-height: map-get($--n-font-size, $size);
+    font-size: map-get($--n-font-size, $size);
+    @include b(checkbox-box) {
+      height: map-get($--n-checkbox-size, $size);
+      width: map-get($--n-checkbox-size, $size);
+    }
+  }
+}
+
 @include themes-mixin {
   @include once {
     @include b(checkbox-group) {
@@ -10,17 +22,15 @@
       }
     }
     @include b(checkbox) {
-      line-height: 14px;
-      height: 14px;
+      @include checkbox-size-mixin('small');
+      @include checkbox-size-mixin('medium');
+      @include checkbox-size-mixin('large');
       outline: none;
-      font-size: 14px;
       cursor: pointer;
       display: inline-block;
       white-space: nowrap;
       @include b(checkbox-box) {
         display: inline-block;
-        height: 14px;
-        width: 14px;
         box-sizing: border-box;
         vertical-align: bottom;
         border-radius: 4px;

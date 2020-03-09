@@ -5,6 +5,7 @@ import placeable from '../../_mixins/placeable'
 import zindexable from '../../_mixins/zindexable'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import formatLength from '../../_utils/css/formatLength'
 
 export default {
   name: 'NPopoverContent',
@@ -73,7 +74,10 @@ export default {
       type: Object,
       default: undefined
     },
-    /** to make zindexable work */
+    arrowStyle: {
+      type: Object,
+      default: undefined
+    },
     displayDirective: {
       type: String,
       default: 'if'
@@ -113,14 +117,17 @@ export default {
   computed: {
     style () {
       const style = {}
-      if (this.width) {
-        style.width = this.width + 'px'
+      const width = this.width
+      if (width) {
+        style.width = formatLength(width)
       }
-      if (this.maxWidth) {
-        style.maxWidth = this.maxWidth + 'px'
+      const maxWidth = this.maxWidth
+      if (maxWidth) {
+        style.maxWidth = formatLength(maxWidth)
       }
-      if (this.minWidth) {
-        style.minWidth = this.minWidth + 'px'
+      const minWidth = this.minWidth
+      if (minWidth) {
+        style.minWidth = formatLength(minWidth)
       }
       if (this.overlayStyle) {
         Object.assign(style, this.overlayStyle)
@@ -280,8 +287,9 @@ export default {
             class: {
               'n-popover-content--no-arrow': !this.arrow,
               [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
-              'n-popover-content--no-shadow': !this.shadow,
+              'n-popover-content--shadow': this.shadow,
               [this.overlayClass]: this.overlayClass,
+              'n-popover-content--styled': !this.raw,
               'n-popover-content--fix-width': this.width !== null || this.maxWidth !== null
             },
             style: this.style,
@@ -299,7 +307,8 @@ export default {
                   staticClass: 'n-popover-arrow-wrapper'
                 }, [
                   h('div', {
-                    staticClass: 'n-popover-arrow'
+                    staticClass: 'n-popover-arrow',
+                    style: this.arrowStyle
                   })
                 ])
               : null

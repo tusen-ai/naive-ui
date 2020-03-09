@@ -5,8 +5,8 @@
       'n-row--flex': flex
     }"
     :style="{
-      margin: `0px ${-horizontalGutter / 2}px`,
-      width: `calc(100% + ${horizontalGutter}px)`,
+      margin: styleMargin,
+      width: styleWidth,
       alignItems: alignItems,
       justifyContent: justifyContent
     }"
@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import formatLength from '../../_utils/css/formatLength'
+
 export default {
   provide () {
     return {
@@ -25,7 +27,7 @@ export default {
   name: 'NRow',
   props: {
     gutter: {
-      type: [Array, Number],
+      type: [Array, Number, String],
       default: 0
     },
     flex: {
@@ -43,19 +45,24 @@ export default {
   },
   computed: {
     verticalGutter () {
-      if (Array.isArray(this.gutter)) {
-        return this.gutter[1] || 0
+      const gutter = this.gutter
+      if (Array.isArray(gutter)) {
+        return gutter[1] || 0
       }
       return 0
     },
     horizontalGutter () {
-      if (Array.isArray(this.gutter)) {
-        return this.gutter[0]
+      const gutter = this.gutter
+      if (Array.isArray(gutter)) {
+        return gutter[0]
       }
-      if (this.gutter) {
-        return this.gutter
-      }
-      return 0
+      return gutter
+    },
+    styleMargin () {
+      return `0px -${formatLength(this.horizontalGutter, 0.5)}`
+    },
+    styleWidth () {
+      return `calc(100% + ${formatLength(this.horizontalGutter)})`
     }
   }
 }

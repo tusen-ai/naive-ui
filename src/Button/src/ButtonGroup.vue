@@ -19,7 +19,9 @@ export default {
   },
   props: {
     size: {
-      type: String,
+      validator (value) {
+        return ['tiny', 'small', 'medium', 'large'].includes(value)
+      },
       default: null
     },
     vertical: {

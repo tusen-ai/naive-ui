@@ -108,7 +108,6 @@ import NSelectGroupHeader from './SelectGroupHeader.vue'
 import NBaseTrackingRect from '../../TrackingRect'
 import NEmpty from '../../../Empty'
 import { RecycleScroller } from 'vue-virtual-scroller'
-import debounce from 'lodash-es/debounce'
 import render from '../../../_utils/vue/render'
 import {
   getPrevAvailableIndex,
@@ -275,11 +274,11 @@ export default {
       const pendingWrappedOption = this.pendingWrappedOption
       return pendingWrappedOption && pendingWrappedOption.data
     },
-    handleOptionMouseEnter: debounce(function (e, index, wrappedOption) {
+    handleOptionMouseEnter (e, index, wrappedOption) {
       const data = wrappedOption.data
       if (data.disabled) return
       this.setPendingWrappedOptionIndex(index, false)
-    }, 64),
+    },
     handleOptionClick (e, index, wrappedOption) {
       const data = wrappedOption.data
       if (data.disabled || wrappedOption.as === 'dropdown-submenu') return

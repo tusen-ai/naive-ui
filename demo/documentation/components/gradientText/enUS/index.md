@@ -12,9 +12,10 @@ custom
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`||**required**|
+|theme|`'light' \| 'dark'`|`null`||
+|type|`'primary' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'primary'`||
 |size|`number \| string`|`null`||
-|gradient|`string \| object`|`null`||
+|gradient|`string \| { from: string, to: string, deg: number \| string }`|`null`||
 
 ## Slots
 |Name|Parameters|Description|

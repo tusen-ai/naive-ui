@@ -1,5 +1,5 @@
 # Use Naive Element
-Naive UI has n-element component. See [Element](n-element).
+Naive UI has `n-element` component. See [Element](n-element).
 ```html
 <n-config-provider :theme="theme">
   <div style="background-color: rgba(128, 128, 128); padding: 8px;">

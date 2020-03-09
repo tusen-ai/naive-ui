@@ -1,6 +1,5 @@
 <script>
 import NDropdownMenu from './DropdownMenu'
-import themeable from '../../_mixins/themeable'
 import NIcon from '../../Icon'
 import iosArrowForward from '../../_icons/ios-arrow-forward'
 import placeable from '../../_mixins/placeable'
@@ -12,7 +11,7 @@ export default {
     NIcon,
     iosArrowForward
   },
-  mixins: [ themeable, placeable ],
+  mixins: [ placeable ],
   provide () {
     return {
       NDropdownSubmenu: this
@@ -76,6 +75,9 @@ export default {
   computed: {
     active () {
       return this.menuActivated && this.menuPendingToBeActivated
+    },
+    inheritedTheme () {
+      return this.NDropdownMenu.inheritedTheme
     },
     syntheticStyleWidth () {
       if (this.NDropdownMenu.inheritedSubmenuWidth) {
@@ -205,11 +207,11 @@ export default {
         }, [
           this.active ? h(NDropdownMenu, {
             staticClass: 'n-dropdown-submenu',
+            ref: 'menu',
             style: this.style,
             props: {
               options: this.options,
-              theme: this.syntheticTheme,
-              defaultFocus: false,
+              theme: this.inheritedTheme,
               size: this.size
             }
           }) : null

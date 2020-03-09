@@ -2,7 +2,7 @@
 
 Naive UI provides some basic styling for common HTML tags. It also provides some components to render text better.
 
-Layout is a kind of art.
+Typography is a kind of art.
 
 ## Demos
 ```demo
@@ -12,6 +12,13 @@ text
 ```
 
 ## Props
+
+## Props
+### All Typography Components Props
+|Name|Type|Default|Description|
+|-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
+
 
 ### Text Props
 |Name|Type|Default|Description|
@@ -41,7 +48,7 @@ text
 ### A Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|to|`string`|`null`|If the prop is set, it will be rendered as a Vue Router router-link component. Make sure you don't want to use href.|
+|to|`string`|`null`|If the prop is set, it will be rendered as a Vue Router `router-link`s component. Make sure you don't want to use `href` attr.|
 
 ### Ul, Ol Props
 |Name|Type|Default|Description|

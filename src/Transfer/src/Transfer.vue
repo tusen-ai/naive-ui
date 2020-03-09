@@ -80,7 +80,9 @@
               </div>
             </n-scrollbar>
           </template>
-          <n-empty v-else />
+          <transition v-else name="n-fade-in-transition" :appear="appear">
+            <n-empty />
+          </transition>
         </div>
       </div>
       <div class="n-transfer-list__border-mask" />
@@ -169,7 +171,9 @@
               </div>
             </n-scrollbar>
           </template>
-          <n-empty v-else />
+          <transition v-else name="n-fade-in-transition" :appear="appear">
+            <n-empty />
+          </transition>
         </div>
       </div>
       <div class="n-transfer-list__border-mask" />
@@ -285,7 +289,8 @@ export default {
       enableTargetEnterAnimation: false,
       initialized: false,
       sourcePattern: '',
-      targetPattern: ''
+      targetPattern: '',
+      appear: false
     }
   },
   computed: {
@@ -432,6 +437,7 @@ export default {
     }
   },
   mounted () {
+    this.appear = true
     this.initialized = true
   },
   created () {

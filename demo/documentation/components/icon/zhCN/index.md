@@ -15,7 +15,8 @@ depth
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|themed-style|`object`|`null`||
+|theme|`'light' \| 'dark'`|`null`||
+|themed-style|`{ [themeName: string]: object }`|`null`||
 |size|`number \| string`|`null`||
 |color|`string`|`null`||
 |depth|`'primary' \| 'secondary' \| 'tertiary'`|`null`||

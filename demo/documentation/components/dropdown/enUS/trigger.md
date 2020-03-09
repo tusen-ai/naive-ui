@@ -2,15 +2,15 @@
 Different trigger of dropdown.
 ```html
 <n-dropdown @select="handleSelect" trigger="hover" :options="options">
-  <n-button>Hover!</n-button>
+  <n-button :keyboard="false">Hover!</n-button>
 </n-dropdown>
 
-<n-dropdown @select="handleSelect" trigger="click" :focusable="false" :options="options">
-  <n-button>Click!</n-button>
+<n-dropdown @select="handleSelect" trigger="click" :options="options">
+  <n-button :keyboard="false">Click!</n-button>
 </n-dropdown>
 
 <n-dropdown @select="handleSelect" trigger="manual" :show="showDropdown" :options="options">
-  <n-button @click="handleClick">Oh! Manually By Myself!</n-button>
+  <n-button :keyboard="false" @click="handleClick">Oh! Manually By Myself!</n-button>
 </n-dropdown>
 ```
 ```js
@@ -20,19 +20,19 @@ export default {
       options: [
         {
           label: 'Marina Bay Sands',
-          key: 'Marina Bay Sands'
+          value: 'Marina Bay Sands'
         },
         {
           label: 'Brown\'s Hotel, London',
-          key: 'Brown\'s Hotel, London'
+          value: 'Brown\'s Hotel, London'
         },
         {
           label: 'Atlantis Bahamas, Nassau',
-          key: 'Atlantis Bahamas, Nassau'
+          value: 'Atlantis Bahamas, Nassau'
         },
         {
           label: 'The Beverly Hills Hotel, Los Angeles',
-          key: 'The Beverly Hills Hotel, Los Angeles'
+          value: 'The Beverly Hills Hotel, Los Angeles'
         }
       ],
       showDropdown: false

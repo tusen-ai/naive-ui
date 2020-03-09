@@ -1,5 +1,5 @@
 # Namespace (Class on Detached DOM)
-Some parts of component are detached to `document.body`. If you want to add a class to those detached elements, use `namespace` prop of config provider. Open devtools to see detached part.
+Some parts of component are detached to `document.body`. If you want to add a class to those detached elements, use `namespace` prop of `n-config-provider`. Open devtools to see detached part.
 ```html
 <n-config-provider :namespace="ns">
   <n-tooltip

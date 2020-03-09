@@ -1,8 +1,8 @@
-# 排版 Typography
+# 排印 Typography
 
 Naive UI 提供了常用 HTML 标签的一些基本样式，以及对文本渲染提供帮助的组件。
 
-排版是一门艺术。
+排印是一门艺术。
 
 ## 演示
 ```demo
@@ -12,6 +12,12 @@ text
 ```
 
 ## Props
+### 全部排版组件
+|名称|类型|默认值|说明|
+|-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
+
+
 ### Text Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
@@ -39,7 +45,7 @@ text
 ### A Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|to|`string`|`null`|如果设定了 to prop，a 会被渲染为一个 Vue Router 的 router-link 标签。确保你想用的不是 href|
+|to|`string`|`null`|如果设定了 to prop，a 会被渲染为一个 Vue Router 的 `router-link` 标签。确保你想用的不是 href 属性|
 
 ### Ul, Ol Props
 |名称|类型|默认值|说明|

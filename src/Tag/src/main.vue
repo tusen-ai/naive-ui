@@ -28,7 +28,6 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import asthemecontext from '../../_mixins/asthemecontext'
 import mdClose from '../../_icons/md-close.vue'
 
 export default {
@@ -36,7 +35,7 @@ export default {
   components: {
     mdClose
   },
-  mixins: [withapp, themeable, asthemecontext],
+  mixins: [withapp, themeable],
   model: {
     prop: 'checked',
     event: 'checked-change'

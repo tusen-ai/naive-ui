@@ -4,6 +4,7 @@
     :checked="checked"
     :indeterminate="indeterminate"
     :disabled="disabled"
+    :size="NTransfer.syntheticSize"
     @change="handleChange"
   />
 </template>
