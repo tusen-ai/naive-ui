@@ -50,7 +50,7 @@
         border-bottom-left-radius: $--n-input-number-border-radius;
         @include b(input-number-button-border-mask) {
           border-top-left-radius: $--n-input-number-border-radius;
-        border-bottom-left-radius: $--n-input-number-border-radius;
+          border-bottom-left-radius: $--n-input-number-border-radius;
         }
         @include b(input-number-button-body) {
           left: 1px;
@@ -124,7 +124,6 @@
     @include e(minus-button, add-button) {
       @include once {
         background-color: transparent;
-        position: relative;
         overflow: hidden;
         outline: none;
         position: absolute;
