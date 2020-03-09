@@ -220,7 +220,7 @@ export default {
         NForm.rules &&
         get(NForm.rules, this.syntheticRulePath, null)
       ) {
-        const rule = get(NForm.rules, this.path)
+        const rule = get(NForm.rules, this.syntheticRulePath)
         if (Array.isArray(rule)) {
           rules = rules.concat(rule)
         } else {
@@ -313,7 +313,7 @@ export default {
       }
       const rules = this.syntheticRules
       const path = this.path
-      const value = get(this.NForm.model, this.path, null)
+      const value = get(this.NForm.model, this.path.split('.'), null)
       const activeRules = (!trigger
         ? rules
         : rules.filter(rule => {

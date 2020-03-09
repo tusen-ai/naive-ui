@@ -1,6 +1,6 @@
 # Custom
 ```html
-<n-custom-input
+<n-custom-add
   v-model="test1"
   title="Add CheckBox"
 >
@@ -20,7 +20,7 @@
       />
     </div>
   </template>
-</n-custom-input>
+</n-custom-add>
 ```
 ```js
 export default {

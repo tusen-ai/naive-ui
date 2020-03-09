@@ -1,6 +1,6 @@
 # Basic
 ```html
-<n-custom-input
+<n-custom-add
   v-model="test1"
   placeholder-key="placeholder1"
   placeholder-value="placeholder2"
