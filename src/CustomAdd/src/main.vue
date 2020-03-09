@@ -4,6 +4,7 @@
       v-for="(item, index) in value"
       :key="index"
       class="n-custom-add-item"
+      :class="{[`n-${syntheticTheme}-theme`]: syntheticTheme}"
     >
       <div v-if="NFormItem" class="n-custom-add-item__content">
         <slot :item="item" :index="index">
@@ -56,6 +57,7 @@ import mdAdd from '../../_icons/md-add'
 import mdRemove from '../../_icons/md-remove'
 import asformitem from '../../_mixins/asformitem'
 import NCustomAddItem from './item'
+import themeable from '../../_mixins/themeable'
 
 export default {
   name: 'NCustomAdd',
@@ -71,7 +73,7 @@ export default {
       NCustomAdd: this
     }
   },
-  mixins: [asformitem({
+  mixins: [themeable, asformitem({
     change: 'change',
     blur: 'blur',
     focus: 'focus',
