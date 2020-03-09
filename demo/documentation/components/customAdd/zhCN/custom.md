@@ -21,6 +21,9 @@
     </div>
   </template>
 </n-custom-add>
+<pre>
+{{  JSON.stringify(test,0,2) }}
+</pre>
 ```
 ```js
 export default {

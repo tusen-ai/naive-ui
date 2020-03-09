@@ -98,26 +98,6 @@ export default {
       default: 'Value'
     }
   },
-  data () {
-    return {
-      labels: [
-        {
-          key: 'key1',
-          value: 'value1'
-        },
-        {
-          key: 'key2',
-          value: 'value2'
-        }
-      ]
-    }
-  },
-  computed: {
-    parentPath () {
-      return this.NFormItem.path
-    }
-
-  },
   methods: {
     changeValue (value) {
       this.value = value

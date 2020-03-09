@@ -40,7 +40,9 @@
         }
       }
       @include b(custom-add-pair-input){
-        margin-right: 13px;
+        &:first-child {
+          margin-right: 13px;
+        }
       }
     }
   }

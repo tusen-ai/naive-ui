@@ -1,7 +1,7 @@
 # Custom
 ```html
 <n-custom-add
-  v-model="test1"
+  v-model="test"
   title="Add CheckBox"
 >
   <template v-slot="slotProps">
@@ -21,12 +21,15 @@
     </div>
   </template>
 </n-custom-add>
+<pre>
+{{  JSON.stringify(test,0,2) }}
+</pre>
 ```
 ```js
 export default {
   data () {
     return {
-      test1: [
+      test: [
         {
           isCheck: true
         }

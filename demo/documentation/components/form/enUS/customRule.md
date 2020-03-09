@@ -34,10 +34,10 @@ You can custom you valiation by setting custom trigger in rules.
           <n-input-number v-model="slotProps.item.inputNumberValue"/>
         </n-form-item>
         <n-form-item 
-          :path="'group.' + slotProps.index + '.test'"
-          rule-path="group.test"
+          :path="'group.' + slotProps.index + '.input'"
+          rule-path="group.input"
           >
-          <n-input v-model="slotProps.item.test"/>
+          <n-input v-model="slotProps.item.input"/>
         </n-form-item>
       </div>
   </template>
@@ -72,9 +72,8 @@ export default {
         ],
         group: [
           {
-            isCheck: true,
-            // num: null,
-            // string: null
+            inputNumberValue: null,
+            input: null
           }
         ]
       },
@@ -130,7 +129,7 @@ export default {
             trigger: ['blur', 'change'],
             message: 'Please input a number which is not zero'
           },
-          test: {
+          input: {
             required: true,
             message: 'Please input your key',
             trigger: ['input', 'blur']
@@ -163,7 +162,6 @@ export default {
       return value === this.model.password
     },
     validateGroupNumber (rule, value) {
-      console.log('value',value)
       return value !== 0
     }
   }
