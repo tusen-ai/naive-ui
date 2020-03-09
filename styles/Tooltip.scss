@@ -3,10 +3,12 @@
 @include themes-mixin {
   .#{block(tooltip)} {
     @include b(tooltip-content) {
+      @include once {
+        white-space: nowrap;
+      }
       &.#{block(popover-content)} {
         @include once {
           padding: 8px 14px;
-          white-space: nowrap;
           border-radius: $--n-tooltip-border-radius;
         }
         box-shadow: $--tooltip-box-shadow;
