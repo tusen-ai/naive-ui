@@ -2,7 +2,6 @@
 Modal has some presets, which means you can use props & slots of the preset after set it.
 ```html
 <n-button
-  size="small"
   @click="isActive = true"
 >
   Start Me up
@@ -10,7 +9,7 @@ Modal has some presets, which means you can use props & slots of the preset afte
 <n-modal
   v-model="isActive"
   preset="card"
-  body-style="width: 600px;"
+  overlay-style="width: 600px;"
   title="Modal"
   :bordered="false"
   size="huge"

@@ -6,6 +6,9 @@
     "disabled": $--n-disabled-text-color,
     "disabled-selected": change-color($--n-primary-color, $alpha: $--n-disabled-opacity)
   ) !global;
+  $--base-select-menu-option-background-color: (
+    'selected': $--n-pending-overlay-color
+  ) !global;
   $--base-select-menu-group-header-text-color: (
     'default': $--n-tertiary-text-color
   ) !global;

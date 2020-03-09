@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="contentContainer"
     class="n-positioning-container"
   >
     <div ref="content" class="n-positioning-content">
@@ -135,7 +136,7 @@ export default {
     return {
       trackId: null,
       /** for zindexable, shouldn't be changed */
-      detached: true
+      zindexable: true
     }
   },
   computed: {

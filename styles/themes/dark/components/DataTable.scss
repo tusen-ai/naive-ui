@@ -1,20 +1,34 @@
 @import '../../../utils/color.scss';
 
 @mixin setup-dark-data-table {
-  $--data-table-border-color: $--n-divider-color !global;
-  $--data-table-header-text-color: $--n-primary-text-color !global;
-  $--data-table-fixed-column-box-shadow-color: rgba(0, 0, 0, .18) !global;
-  $--data-table-body-background-color: $--n-card-background-color !global;
-  $--data-table-header-background-color: $--n-table-header-background-color !global;
-  $--data-table-header-fixed-background-color: (mix-color-with-alpha-color($--data-table-body-background-color,$--data-table-header-background-color)) !global;
-  $--data-table-row-background-color: (
-    'default': $--n-card-background-color,
-    'hover': mix-color-with-alpha-color($--data-table-body-background-color,$--n-pending-overlay-color)
+  $--data-table-border-color: (
+    'default': mix-color-with-alpha-color($--n-card-background-color, $--n-divider-color),
+    'modal': mix-color-with-alpha-color($--n-modal-background-color, $--n-divider-color),
   ) !global;
-  $--data-table-header-cell-background-color: (
-    'default': transparent,
-    'hover': $--n-pending-overlay-color,
-    'active': $--n-active-overlay-color
+  $--data-table-header-text-color: $--n-primary-text-color !global;
+  $--data-table-fixed-column-box-shadow-color: rgba(0, 0, 0, .36) !global;
+  $--data-table-body-background-color: (
+    'default': $--n-card-background-color,
+    'modal': $--n-modal-background-color
+  ) !global;
+  $--data-table-header-background-color: (
+    'default': mix-color-with-alpha-color($--n-card-background-color, $--n-table-header-overlay-background-color),
+    'hover': mix-color-with-alpha-color(
+      mix-color-with-alpha-color($--n-card-background-color, $--n-table-header-overlay-background-color),
+      $--n-pending-overlay-color
+    ),
+    'modal': mix-color-with-alpha-color($--n-modal-background-color, $--n-table-header-overlay-background-color),
+    'modal-hover': mix-color-with-alpha-color(
+      mix-color-with-alpha-color($--n-modal-background-color, $--n-table-header-overlay-background-color),
+      $--n-pending-overlay-color
+    )
+  ) !global;
+  $--data-table-icon-button-background-color: (
+    'hover': $--n-pending-overlay-color
+  ) !global;
+  $--data-table-row-background-color: (
+    'hover': mix-color-with-alpha-color($--n-card-background-color, $--n-pending-overlay-color),
+    'modal-hover': mix-color-with-alpha-color($--n-modal-background-color, $--n-pending-overlay-color),
   ) !global;
   $--data-table-body-text-color: $--n-secondary-text-color !global;
   $--data-table-button-color: (

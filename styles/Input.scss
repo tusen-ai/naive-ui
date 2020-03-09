@@ -313,23 +313,26 @@
   @include as-form-item {
     @include with-status(error) {
       @include b(input) {
-        box-shadow: map-get($--input-box-shadow, 'error-default');
-        @include e(border-mask) {
-          border-color: map-get($--input-border-mask-border-color, 'error-default');
-        }
-        &:hover {
+        @include m(stateful) {
+          box-shadow: map-get($--input-box-shadow, 'error-default');
           @include e(border-mask) {
-            border-color: map-get($--input-border-mask-border-color, 'error-hover');
+            border-color: map-get($--input-border-mask-border-color, 'error-default');
           }
-        }
-        @include m(focus) {
-          @include e(border-mask) {
-            border-color: map-get($--input-border-mask-border-color, 'error-focus');
-            box-shadow: map-get($--input-border-mask-box-shadow, 'error-focus');
+          &:hover {
+            @include e(border-mask) {
+              border-color: map-get($--input-border-mask-border-color, 'error-hover');
+            }
           }
-        }
-        @include e(input, textarea) {
-          caret-color: map-get($--input-caret-color, 'error');
+          @include m(focus) {
+            @include e(border-mask) {
+              border-color: map-get($--input-border-mask-border-color, 'error-focus');
+              box-shadow: map-get($--input-border-mask-box-shadow, 'error-focus');
+            }
+            background-color: map-get($--input-background-color, 'error-focus');
+          }
+          @include e(input, textarea) {
+            caret-color: map-get($--input-caret-color, 'error');
+          }
         }
       }
     }

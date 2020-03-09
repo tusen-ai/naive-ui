@@ -2,9 +2,9 @@
   $--base-suffix-cross-color: (
     "default": $--n-icon-color,
     "hover": $--n-primary-color,
-    "active": $--n-primary-hover-color,
+    "active": $--n-primary-active-color,
     "error-hover": $--n-error-hover-color,
-    "error-active": $--n-error-hover-color
+    "error-active": $--n-error-active-color
   ) !global;
   $--base-suffix-arrow-color: (
     "default": $--n-icon-color,

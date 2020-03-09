@@ -623,34 +623,34 @@ export default {
       const sourceLightBar = this.$refs.sourceLightBar
       if (!sourceLightBar) return
       if (this.virtualScroll) {
-        sourceLightBar.updateLightBarTop(true, () => index * this.itemSize)
+        sourceLightBar.updateTrackingRectTop(true, () => index * this.itemSize)
       } else {
-        sourceLightBar.updateLightBarTop(e.target)
+        sourceLightBar.updateTrackingRectTop(e.target)
       }
     }, 64),
     handleTargetOptionMouseEnter: debounce(function (e, index) {
       const targetLightBar = this.$refs.targetLightBar
       if (this.virtualScroll) {
-        targetLightBar.updateLightBarTop(true, () => index * this.itemSize)
+        targetLightBar.updateTrackingRectTop(true, () => index * this.itemSize)
       } else {
-        targetLightBar.updateLightBarTop(e.target)
+        targetLightBar.updateTrackingRectTop(e.target)
       }
     }, 64),
     handleSourceOptionMouseLeave: debounce(function (e) {
       const sourceLightBar = this.$refs.sourceLightBar
-      sourceLightBar && sourceLightBar.hideLightBar()
+      sourceLightBar && sourceLightBar.hideTrackingRect()
     }, 64),
     handleTargetOptionMouseLeave: debounce(function (e) {
       const targetLightBar = this.$refs.targetLightBar
-      targetLightBar && targetLightBar.hideLightBar()
+      targetLightBar && targetLightBar.hideTrackingRect()
     }, 64),
     handleSourceListMouseLeave: debounce(function () {
       const sourceLightBar = this.$refs.sourceLightBar
-      sourceLightBar && sourceLightBar.hideLightBar()
+      sourceLightBar && sourceLightBar.hideTrackingRect()
     }, 64),
     handleTargetListMouseLeave: debounce(function () {
       const targetLightBar = this.$refs.targetLightBar
-      targetLightBar && targetLightBar.hideLightBar()
+      targetLightBar && targetLightBar.hideTrackingRect()
     }, 64)
   }
 }

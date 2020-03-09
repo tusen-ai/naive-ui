@@ -27,9 +27,9 @@
     'active': $--n-primary-active-color
   ) !global;
   $--input-number-button-background-color: (
-    'default': $--n-action-background-color,
-    'hover': $--n-action-background-color,
-    'active':  $--n-action-background-color,
+    'default': $--n-action-overlay-background-color,
+    'hover': $--n-action-overlay-background-color,
+    'active':  $--n-action-overlay-background-color,
     'disabled': $--n-disabled-background-color,
   ) !global;
   $--input-number-caret-color: $--n-primary-color !global;

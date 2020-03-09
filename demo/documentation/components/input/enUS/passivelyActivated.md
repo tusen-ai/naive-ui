@@ -1,6 +1,5 @@
-# Lazy Focus
-
-If you want to focus input element after focus at input wrapper and press enter.
+# Passively Activateds
+If you want to activate input by pressing enter after focused, use `passively-activated`. (Use tab key to focus on the inputs)
 
 ```html
 <n-input

@@ -17,10 +17,6 @@ export function createCustomWidthStyle (column, index, placement) {
     return {
       width: formatLength(width)
     }
-  } else if (column.type === 'selection') {
-    return {
-      width: '48px'
-    }
   }
   return null
 }

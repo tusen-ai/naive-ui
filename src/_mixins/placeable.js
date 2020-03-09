@@ -27,13 +27,11 @@ if (!viewMeasurerInitialized && !document.getElementById('n-view-measurer')) {
   document.body.appendChild(viewMeasurer)
 }
 
-function getActivatorEl (componentInstance) {
-  const refs = componentInstance.$refs
+function getActivatorEl (refs) {
   return refs.activator.$el || refs.activator
 }
 
-function getContentEl (componentInstance) {
-  const refs = componentInstance.$refs
+function getContentEl (refs) {
   return refs.content.$el || refs.content
 }
 
@@ -77,46 +75,6 @@ function getActivatorRect (manuallyPositioned, x, y, trackedElement, viewBoundin
   }
 }
 
-function getPositionInAbsoluteMode (placement) {
-  const position = {
-    top: null,
-    bottom: null,
-    left: null,
-    right: null
-  }
-  if (placement === 'bottom-start') {
-    position.top = '100%'
-    position.left = '0'
-  } else if (placement === 'bottom-end') {
-    position.top = '100%'
-    position.right = '0'
-  } else if (placement === 'top-start') {
-    position.bottom = '100%'
-    position.left = '0'
-  } else if (placement === 'top-end') {
-    position.bottom = '100%'
-    position.right = '0'
-  } else if (placement === 'right-start') {
-    position.top = '0'
-    position.left = '100%'
-  } else if (placement === 'right-end') {
-    position.bottom = '0'
-    position.left = '100%'
-  } else if (placement === 'left-start') {
-    position.top = '0'
-    position.right = '100%'
-  } else if (placement === 'left-end') {
-    position.bottom = '0'
-    position.right = '100%'
-  } else {
-    console.error(
-      '[naive-ui/mixins/placeable]: Placement %s is not supported.',
-      placement
-    )
-  }
-  return position
-}
-
 /**
  * Make $refs.content trace $refs.activator, set $refs.contentInner width by the way
  *
@@ -130,10 +88,17 @@ function getPositionInAbsoluteMode (placement) {
  * @prop {string} widthMode determine how width is $refs.contentInner
  */
 export default {
+  inject: {
+    NModal: {
+      default: null
+    },
+    NDrawer: {
+      default: null
+    }
+  },
   props: {
     positionMode: {
-      type: String,
-      default: 'fixed',
+      default: null,
       validator (value) {
         return ['fixed', 'absolute'].includes(value)
       }
@@ -181,8 +146,21 @@ export default {
     }
   },
   computed: {
+    syntheticPositionMode () {
+      const positionMode = this.positionMode
+      if (positionMode !== null) {
+        return positionMode
+      }
+      if (this.NModal) {
+        return 'absolute'
+      }
+      if (this.NDrawer) {
+        return 'absolute'
+      }
+      return 'fixed'
+    },
     positionModeisAbsolute () {
-      return this.positionMode === 'absolute'
+      return this.syntheticPositionMode === 'absolute'
     }
   },
   watch: {
@@ -219,80 +197,103 @@ export default {
     _getTrackingElement () {
       const refs = this.$refs
       if (refs && refs.content) {
-        this.trackingElement = getContentEl(this)
-      } else if (this.getTrackingElement) {
-        this.trackingElement = this.getTrackingElement()
+        return getContentEl(refs)
+      }
+      const getTrackingElement = this.getTrackingElement
+      if (getTrackingElement) {
+        return getTrackingElement()
       }
     },
     _getTrackedElement () {
       const refs = this.$refs
       if (refs && refs.activator) {
-        this.trackedElement = getActivatorEl(this)
-      } else if (this.getTrackedElement) {
-        this.trackedElement = this.getTrackedElement()
+        return getActivatorEl(refs)
+      }
+      const getTrackedElement = this.getTrackedElement
+      if (getTrackedElement) {
+        return getTrackedElement()
+      }
+    },
+    _getAbsoluteOffsetContainer () {
+      const getAbsoluteOffsetContainer = this.getAbsoluteOffsetContainer
+      if (getAbsoluteOffsetContainer) {
+        return getAbsoluteOffsetContainer()
+      } else {
+        const container = this.$refs.contentContainer
+        if (container) {
+          return container
+        } else {
+          console.error('[naive-ui/placeable]: absolute offset container not found')
+        }
       }
     },
     setOffsetOfTrackingElement (position, transformOrigin) {
-      this.trackingElement.style.position = 'absolute'
-      this.trackingElement.style.top = position.top
-      this.trackingElement.style.left = position.left
-      this.trackingElement.style.right = position.right
-      this.trackingElement.style.bottom = position.bottom
-      this.trackingElement.style.transformOrigin = transformOrigin
-      this.trackingElement.setAttribute('n-suggested-transform-origin', transformOrigin)
+      const trackingElement = this._getTrackingElement()
+      trackingElement.style.position = 'absolute'
+      trackingElement.style.top = position.top
+      trackingElement.style.left = position.left
+      trackingElement.style.right = position.right
+      trackingElement.style.bottom = position.bottom
+      trackingElement.style.transform = position.transform
+      trackingElement.style.transformOrigin = transformOrigin
+      trackingElement.setAttribute('n-suggested-transform-origin', transformOrigin)
     },
-    updatePosition (el, cb) {
+    updatePosition () {
       if (!this.active) {
         if (!this.keepPlaceableTracingWhenInactive) return
       }
-      if (this.active) {
-        if (this.disablePlaceableTracingWhenActive) return
-      }
-      this._getTrackingElement()
-      this.trackingElement.style.position = 'absolute'
+      const trackingElement = this._getTrackingElement()
+      let trackedElement = null
+      trackingElement.style.position = 'absolute'
       if (this.manuallyPositioned) {
-        if (!this.trackingElement) {
+        if (!trackingElement) {
           console.error('[naive-ui/mixins/placeable]: trackingElement not found.')
           return
         }
       } else {
-        this._getTrackedElement()
-        if (!this.trackedElement || !this.trackingElement) {
+        trackedElement = this._getTrackedElement()
+        if (!trackedElement || !trackingElement) {
           console.error('[naive-ui/mixins/placeable]: trakedElement or trackingElement not found.')
           return
         }
       }
-      // debugger
       const viewBoundingRect = getViewBoundingRect()
-      const activatorRect = getActivatorRect(this.manuallyPositioned, this.x, this.y, this.trackedElement, viewBoundingRect)
+      const activatorRect = getActivatorRect(this.manuallyPositioned, this.x, this.y, trackedElement, viewBoundingRect)
       const contentInner = getContentInner(this)
       if (this.widthMode === 'activator' && contentInner) {
         contentInner.style.minWidth = activatorRect.width + 'px'
       }
-      const contentBoundingClientRect = {
-        width: this.trackingElement.offsetWidth,
-        height: this.trackingElement.offsetHeight
+      let adjustedPlacement = this.placement
+      let contentBoundingClientRect = null
+      if (this.flip) {
+        contentBoundingClientRect = {
+          width: trackingElement.offsetWidth,
+          height: trackingElement.offsetHeight
+        }
+        adjustedPlacement = getAdjustedPlacementOfTrackingElement(this.placement, activatorRect, contentBoundingClientRect, true)
       }
-      // console.log('activatorRect', activatorRect)
-      // console.log('contentBoundingClientRect', contentBoundingClientRect)
-      const adjustedPlacement = getAdjustedPlacementOfTrackingElement(this.placement, activatorRect, contentBoundingClientRect, this.flip)
       const suggestedTransformOrigin = getTransformOriginByPlacement(adjustedPlacement)
-      let offset = getPosition(adjustedPlacement, activatorRect, contentBoundingClientRect)
+      let offset = null
       this.adjustedPlacement = adjustedPlacement
       if (this.positionModeisAbsolute) {
-        offset = getPositionInAbsoluteMode(adjustedPlacement)
+        const absoluteOffsetContainer = this._getAbsoluteOffsetContainer()
+        if (absoluteOffsetContainer) {
+          offset = getPosition(
+            adjustedPlacement,
+            absoluteOffsetContainer.getBoundingClientRect(),
+            activatorRect
+          )
+        }
+      } else {
+        offset = getPosition(adjustedPlacement, viewBoundingRect, activatorRect)
       }
       this.setOffsetOfTrackingElement(offset, suggestedTransformOrigin)
-      if (el && cb) {
-        cb(el, activatorRect, contentBoundingClientRect)
-      }
     },
     registerResizeListener () {
       resizeDelegate.registerHandler(this.updatePosition)
     },
     registerScrollListeners () {
-      this._getTrackedElement()
-      let currentElement = getParentNode(this.trackedElement)
+      let currentElement = getParentNode(this._getTrackedElement())
       while (true) {
         currentElement = getScrollParent(currentElement)
         if (currentElement === null) break

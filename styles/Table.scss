@@ -47,7 +47,7 @@
         border-color .3s $--n-ease-in-out-cubic-bezier,
         color .3s $--n-ease-in-out-cubic-bezier;
     }
-    background: $--table-body-background-color;
+    background-color: map-get($--table-body-background-color, 'default');
     @include e(th) {
       @include once {
         background-clip: padding-box;
@@ -81,7 +81,7 @@
         padding: 12px;
       }
       color: $--table-body-text-color;
-      background-color: $--n-table-body-background-color;
+      background-color: map-get($--table-body-background-color, 'default');
       border-right: 1px solid $--table-border-color;
       border-bottom: 1px solid $--table-border-color;
       &:last-child {
@@ -110,6 +110,14 @@
     @include m(single-column) {
       @include e(td) {
         border-bottom: none;
+      }
+    }
+  }
+  @include as-modal-content {
+    @include b(table) {
+      background-color: map-get($--table-body-background-color, 'modal');
+      @include e(td) {
+        background-color: map-get($--table-body-background-color, 'modal');
       }
     }
   }

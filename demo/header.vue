@@ -3,7 +3,7 @@
   "zh-CN": {
     "dark": "深色",
     "light": "浅色",
-    "searchPlaceholder": "搜索组件",
+    "searchPlaceholder": "搜索",
     "home": "首页",
     "doc": "文档",
     "common": "常规",
@@ -13,7 +13,7 @@
   "en-US": {
     "dark": "Dark",
     "light": "Light",
-    "searchPlaceholder": "Search Components",
+    "searchPlaceholder": "Search",
     "home": "Home",
     "doc": "Documentation",
     "common": "Common",
@@ -24,54 +24,52 @@
 </i18n>
 
 <template>
-  <div class="nav">
-    <div class="ui-logo" @click="handleLogoClick">
-      <img src="./assets/images/naivelogo.svg">
-      Naive UI ({{ version }})
-    </div>
-    <div style=" margin-left: 56px; display: flex; align-items: center;">
-      <n-auto-complete
-        v-model="searchInputValue"
-        style="width: 216px;"
-        :z-index="3001"
-        :placeholder="$t('searchPlaceholder')"
-        :options="searchOptions"
-        clear-after-select
-        blur-after-select
-        @select="handleSelect"
-      />
-      <div class="nav-menu">
-        <n-menu mode="horizontal" :value="menuValue" @select="handleMenuSelect">
-          <n-menu-item :title="$t('home')" name="home" />
-          <n-menu-item :title="$t('doc')" name="doc" />
-        </n-menu>
+  <n-layout-header
+    bordered
+    :style="{
+      zIndex: zIndex
+    }"
+  >
+    <div class="nav">
+      <div class="ui-logo" @click="handleLogoClick">
+        <img src="./assets/images/naivelogo.svg">
+        Naive UI ({{ version }})
+      </div>
+      <div style=" margin-left: 56px; display: flex; align-items: center;">
+        <n-auto-complete
+          v-model="searchInputValue"
+          style="width: 216px;"
+          :z-index="zIndex && zIndex + 1"
+          :placeholder="$t('searchPlaceholder')"
+          :options="searchOptions"
+          clear-after-select
+          blur-after-select
+          @select="handleSelect"
+        />
+        <div class="nav-menu">
+          <n-menu mode="horizontal" :value="menuValue" @select="handleMenuSelect">
+            <n-menu-item :title="$t('home')" name="home" />
+            <n-menu-item :title="$t('doc')" name="doc" />
+          </n-menu>
+        </div>
+      </div>
+      <div style="display: flex;">
+        <n-tag class="nav-picker" @click.native="handleThemeChange">
+          {{ themeOptions[theme].label }}
+        </n-tag>
+        <n-tag class="nav-picker" @click.native="handleLanguageChange">
+          {{ langOptions[lang].label }}
+        </n-tag>
+        <n-tag
+          v-if="env==='development'"
+          class="nav-picker"
+          @click.native="handleModeChange"
+        >
+          {{ modeOptions[mode].label }}
+        </n-tag>
       </div>
     </div>
-    <div style="display: flex;">
-      <n-tag class="nav-picker" @click.native="handleThemeChange">
-        {{ themeOptions[theme].label }}
-      </n-tag>
-      <n-tag class="nav-picker" @click.native="handleLanguageChange">
-        {{ langOptions[lang].label }}
-      </n-tag>
-      <n-tag
-        v-if="env==='development'"
-        class="nav-picker"
-        @click.native="handleModeChange"
-      >
-        {{ modeOptions[mode].label }}
-      </n-tag>
-    </div>
-    <!-- <div v-if="env==='development'" class="mode-picker">
-      <n-select
-        :z-index="3001"
-        :value="mode"
-        size="small"
-        :options="modeOptions"
-        @change="handleModeChange"
-      />
-    </div> -->
-  </div>
+  </n-layout-header>
 </template>
 
 <script>
@@ -131,7 +129,7 @@ export default {
       },
       modeOptions: {
         'debug': {
-          label: 'Common',
+          label: 'Production',
           next: 'common'
         },
         'common': {
@@ -142,6 +140,10 @@ export default {
     }
   },
   computed: {
+    zIndex () {
+      const path = this.$route.path
+      return (path.endsWith('n-modal') || path.endsWith('n-drawer') || path.endsWith('n-confirm')) ? null : 3000
+    },
     theme () {
       return this.NConfigProvider.$parent.theme
     },
@@ -210,7 +212,6 @@ export default {
     handleThemeChange () {
       this.NConfigProvider.$parent.theme = this.themeOptions[this.theme].next
     },
-
     handleModeChange () {
       this.$emit('mode-change', this.modeOptions[this.mode].next)
     },

@@ -7,10 +7,9 @@ const config = require('./config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const env = process.env.NODE_ENV
 
 const webpackConfig = {
-  mode: env === 'development' ? 'development' : 'production',
+  mode: 'production',
   entry: './demo/deploymentIndex.js',
   output: {
     path: path.resolve(__dirname, '..', 'doc', 'dist'),

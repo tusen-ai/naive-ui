@@ -70,6 +70,7 @@
         transition: color .3s $--n-ease-in-out-cubic-bezier;
         text-overflow: ellipsis;
         overflow: hidden;
+        box-sizing: border-box;
         @include m(grouped) {
           padding: 0 21px;
         }
@@ -108,6 +109,15 @@
       }
       border-top: 1px solid $--base-select-menu-action-divider-color;
       color: $--base-select-menu-action-text-color;
+    }
+    @include m(no-tracking-rect) {
+      @include b(base-select-option) {
+        @include not-m(disabled) {
+          &:hover {
+            color: map-get($--base-select-menu-option-color, "selected");
+          }
+        }
+      }
     }
     @include m(multiple) {
       @include b(base-select-option) {

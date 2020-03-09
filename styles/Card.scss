@@ -5,51 +5,42 @@
     @include m(content-segmented) {
       & > {
         @include e(content) {
-          &:not(:first-child) {
-            margin-top: 0;
-            padding-top: map-get($--n-card-margin-bottom, $size);
-          }
+          padding-top: map-get($--n-card-margin-bottom, $size);
         }
       }
     }
     @include m(content-soft-segmented) {
       & > {
         @include e(content) {
-          padding: 0;
-          margin: map-get($--n-card-margin-bottom, $size) map-get($--n-card-margin-left, $size);
-          &:not(:first-child) {
-            margin-top: 0;
-            padding-top: map-get($--n-card-margin-bottom, $size);
-          }
+          padding-bottom: map-get($--n-card-margin-bottom, $size);
+          margin: 0 map-get($--n-card-margin-left, $size);
+          padding-top: map-get($--n-card-margin-bottom, $size);
         }
       }
     }
     @include m(footer-segmented) {
       & > {
         @include e(footer) {
-          &:not(:first-child) {
-            margin-top: 0;
-            padding-top: map-get($--n-card-margin-bottom, $size);
-          }
+          padding-top: map-get($--n-card-margin-bottom, $size);
         }
       }
     }
     @include m(footer-soft-segmented) {
       & > {
         @include e(footer) {
-          padding: 0;
-          margin: map-get($--n-card-margin-bottom, $size) map-get($--n-card-margin-left, $size);
-          &:not(:first-child) {
-            margin-top: 0;
-            padding-top: map-get($--n-card-margin-bottom, $size);
-          }
+          padding-bottom: map-get($--n-card-margin-bottom, $size);
+          margin: 0 map-get($--n-card-margin-left, $size);
+          padding-top: map-get($--n-card-margin-bottom, $size);
         }
       }
     }
     & > {
       @include b(card-header) {
-        padding: 0px map-get($--n-card-margin-left, $size);
-        margin: map-get($--n-card-margin-top, $size) 0 map-get($--n-card-margin-bottom, $size) 0;
+        padding:
+          map-get($--n-card-margin-top, $size)
+          map-get($--n-card-margin-left, $size)
+          map-get($--n-card-margin-bottom, $size)
+          map-get($--n-card-margin-left, $size);
         @include e(main) {
           font-size: map-get($--n-card-font-size, $size);
         }
@@ -58,8 +49,10 @@
         }
       }
       @include e(content, footer) {
-        padding: 0px map-get($--n-card-margin-left, $size);
-        margin: map-get($--n-card-margin-bottom, $size) 0;
+        &:first-child {
+          padding-top: map-get($--n-card-margin-bottom, $size);
+        }
+        padding: 0 map-get($--n-card-margin-left, $size) map-get($--n-card-margin-bottom, $size) map-get($--n-card-margin-left, $size) ;
         font-size: 14px;
       }
       @include e(action) {
@@ -75,7 +68,6 @@
   @include b(card) {
     @include once {
       display: block;
-      overflow: hidden;
       width: 100%;
       box-sizing: border-box;
       position: relative;
@@ -86,6 +78,9 @@
       @include card-size-mixin('large');
       @include card-size-mixin('huge');
       @include b(card-cover) {
+        $border-radius: $--n-card-border-radius - 1px;
+        overflow: hidden;
+        border-radius: $border-radius $border-radius 0 0;
         width: 100%;
         img {
           display: block;
@@ -174,7 +169,13 @@
             cursor: pointer;
             transition: fill .3s $--n-ease-in-out-cubic-bezier;
           }
-          fill: $--card-close-fill;
+          fill: map-get($--card-close-color, 'default');
+          &:hover {
+            fill: map-get($--card-close-color, 'hover');
+          }
+          &:active {
+            fill: map-get($--card-close-color, 'active');
+          }
         }
       }
       @include e(action) {

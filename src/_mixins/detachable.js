@@ -6,31 +6,53 @@ import withapp from './withapp'
  * Dependency:
  * $refs.contentContainer
  *
- * @prop {HTMLElement} detachTarget determine where should $refs.contentContainer to be detached
+ * @prop {() => HTMLElement} detachTarget determine where should $refs.contentContainer to be detached
  */
 export default {
-  mixins: [withapp],
+  mixins: [ withapp ],
+  inject: {
+    NModal: {
+      default: null
+    },
+    NDrawer: {
+      default: null
+    }
+  },
   props: {
     detachTarget: {
-      validator () {
-        return true
-      },
-      default: () => document.body
+      type: Function,
+      default: function () {
+        const NModal = this.NModal
+        if (NModal) {
+          return NModal.getDetachTarget()
+        }
+        const NDrawer = this.NDrawer
+        if (NDrawer) {
+          return NDrawer.getDetachTarget()
+        }
+        return document.body
+      }
     },
-    detached: {
+    detachable: {
       type: Boolean,
-      default: true
+      default: null
     }
   },
   watch: {
     active (value) {
-      // console.log('activeChange')
-      if (this.detached) {
+      if (this.syntheticDetachable) {
         if (value && !this.contentContainerMounted) {
           this.contentContainerMounted = true
           this.appendContent()
         }
       }
+    }
+  },
+  computed: {
+    syntheticDetachable () {
+      const detachable = this.detachable
+      if (detachable !== null) return detachable
+      return true
     }
   },
   data () {
@@ -40,36 +62,39 @@ export default {
     }
   },
   methods: {
+    getDetachTarget () {
+      return this.detachTarget()
+    },
+    getDetachContent () {
+      return this.$refs.contentContainer
+    },
     detachContent () {
-      this.contentContainer = this.$refs.contentContainer
-      this.$refs.contentContainer.parentNode.removeChild(this.$refs.contentContainer)
+      const content = this.getDetachContent()
+      if (content) {
+        content.parentNode.removeChild(content)
+      } else {
+        console.error('[naive-ui/detachable]: fail to detach content')
+      }
     },
     appendContent () {
-      this.detachTarget.append(this.$refs.contentContainer)
-    }
-  },
-  beforeMount () {
-    if (!this.detachTarget) {
-      console.error(
-        '[naive-ui/mixins/detachable]: %s has no `detach-target`.',
-        this.$options.name
-      )
+      this.getDetachTarget().append(this.$refs.contentContainer)
     }
   },
   mounted () {
-    if (this.detached) {
+    if (this.syntheticDetachable) {
       this.detachContent()
       if (this.active && !this.contentContainerMounted) {
         this.contentContainerMounted = true
         this.appendContent()
       }
     }
-    // this.appendContent()
   },
   beforeDestroy () {
-    if (this.detached) {
-      if (this.detachTarget.contains(this.$refs.contentContainer)) {
-        this.detachTarget.removeChild(this.$refs.contentContainer)
+    if (this.syntheticDetachable) {
+      const content = this.getDetachContent()
+      const target = this.getDetachTarget()
+      if (content && target && target.contains(content)) {
+        this.getDetachTarget().removeChild(content)
       }
     }
   }

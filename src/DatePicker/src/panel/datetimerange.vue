@@ -2,7 +2,6 @@
   <transition name="n-date-panel-transition">
     <div
       v-if="active"
-      ref="self"
       tabindex="0"
       class="n-date-panel n-date-panel--datetimerange"
       :class="{
@@ -17,6 +16,8 @@
       >
         <n-input
           v-model="startDateDisplayString"
+          size="small"
+          :stateful="false"
           class="n-date-panel-date-input"
           :class="{
             'n-date-panel-date-input--invalid': isStartValueInvalid
@@ -26,7 +27,9 @@
           @input="handleStartDateInput"
         />
         <n-time-picker
-          :detached="false"
+          size="small"
+          :stateful="false"
+          :detachable="false"
           :placeholder="localeNamespace.selectTime"
           position-mode="absolute"
           :format="timeFormat"
@@ -44,6 +47,8 @@
         </div>
         <n-input
           v-model="endDateDisplayString"
+          :stateful="false"
+          size="small"
           class="n-date-panel-date-input"
           :class="{
             'n-date-panel-date-input--invalid': isEndValueInvalid
@@ -53,7 +58,9 @@
           @input="handleEndDateInput"
         />
         <n-time-picker
-          :detached="false"
+          size="small"
+          :stateful="false"
+          :detachable="false"
           :format="timeFormat"
           :placeholder="localeNamespace.selectTime"
           position-mode="absolute"

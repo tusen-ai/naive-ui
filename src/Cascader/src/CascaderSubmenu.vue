@@ -104,7 +104,7 @@ export default {
     },
     updateTrackingRectPosition: debounce(function (e) {
       const trackingRect = this.$refs.trackingRect
-      trackingRect && trackingRect.updateLightBarTop(e.target)
+      trackingRect && trackingRect.updateTrackingRectTop(e.target)
     }, 64),
     handleOptionMouseLeave (e, option) {
       this.$emit('option-mouseleave', e, option)
@@ -114,7 +114,7 @@ export default {
     },
     handleMouseLeave: debounce(function (e) {
       const trackingRect = this.$refs.trackingRect
-      trackingRect && trackingRect.hideLightBar()
+      trackingRect && trackingRect.hideTrackingRect()
     }, 64),
     handleOptionCheck (option) {
       this.$emit('option-check', option.id)

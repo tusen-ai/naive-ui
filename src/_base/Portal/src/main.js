@@ -1,9 +1,31 @@
 export default {
   name: 'NBasePortal',
+  inject: {
+    NModal: {
+      default: null
+    },
+    NDrawer: {
+      default: null
+    }
+  },
   props: {
     onMounted: {
       type: Function,
       default: null
+    },
+    transferTarget: {
+      type: Function,
+      default: function () {
+        const NModal = this.NModal
+        if (NModal) {
+          return NModal.getDetachTarget()
+        }
+        const NDrawer = this.NDrawer
+        if (NDrawer) {
+          return NDrawer.getDetachTarget()
+        }
+        return document.body
+      }
     }
   },
   mounted () {
@@ -13,8 +35,9 @@ export default {
     }
   },
   beforeDestroy () {
-    if (document.body.contains(this.$el)) {
-      document.body.removeChild(this.$el)
+    const target = this.transferTarget()
+    if (target && target.contains(this.$el)) {
+      target.removeChild(this.$el)
     }
   },
   data () {
@@ -25,7 +48,7 @@ export default {
   methods: {
     transferElement () {
       if (!this.elementTransferred) {
-        document.body.appendChild(this.$el)
+        this.transferTarget().appendChild(this.$el)
         this.elementTransferred = true
       }
     }

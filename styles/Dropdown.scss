@@ -90,10 +90,12 @@
       @include b(dropdown-divider) {
         margin: 2px 0;
       }
+      @include b(dropdown-menu-wrapper) {
+        position: absolute !important;
+      }
       @include b(dropdown-submenu) {
         @include fade-in-scale-up-transition(dropdown-menu);
         margin-top: 0;
-        position: absolute !important;
         margin-left: 6px;
         margin-right: 6px;
       }

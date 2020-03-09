@@ -15,7 +15,7 @@
           :name="transitionName"
           @after-leave="handleAfterLeave"
         >
-          <div
+          <n-drawer-content
             v-if="active"
             class="n-drawer"
             :style="{
@@ -29,7 +29,7 @@
             }"
           >
             <slot />
-          </div>
+          </n-drawer-content>
         </transition>
       </div>
     </div>
@@ -42,11 +42,13 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import zindexable from '../../_mixins/zindexable'
 import formatLength from '../../_utils/css/formatLength'
+import NDrawerContent from './DrawerContent'
 
 export default {
   name: 'NDrawer',
   components: {
-    NBasePortal
+    NBasePortal,
+    NDrawerContent
   },
   mixins: [withapp, themeable, zindexable],
   model: {
@@ -88,7 +90,7 @@ export default {
   },
   data () {
     return {
-      detached: true
+      zindexable: true
     }
   },
   computed: {

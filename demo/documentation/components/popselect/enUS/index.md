@@ -5,7 +5,8 @@ If you want select some options but don't want a picker, you can use popselect i
 ## Demos
 ```demo
 basic
-cancelable
+size
+scrollable
 custom-width
 multiple
 ```
@@ -19,14 +20,15 @@ multiple
 
 |Name|Type|Default|Description|
 |-|-|-|-|
-|value|`string \| number`|||
-|options|`Array`|||
-|width|`number \| string`|||
-|multiple|`boolean`|||
-|cancelable|`boolean`|||
-|controller|`Object`|||
-|arrow|`boolean`|||
-|trigger|`'click' \| 'hover' \| 'manual'`|||
+|value|`string \| number`|`null`||
+|options|`Array<SelectOption \| SelectOptionGroup>`|`[]`||
+|scrollable|`boolean`|`false`||
+|multiple|`boolean`|`false`||
+|size|`'small' \| 'medium' \| 'large'`|`'small'`||
+
+For SelectOption & SelectOptionGroup, see [Select](n-select#SelectOption-Type)
+
+For other props, see [Popover](n-popover#Props)
 
 ## Events
 |Name|Parameters|Description|

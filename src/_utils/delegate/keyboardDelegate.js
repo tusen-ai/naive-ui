@@ -16,6 +16,9 @@ class KeyboardDelegate {
         case KEY_CODE.COMMAND:
           this.commandPressed = true
           break
+        case KEY_CODE.TAB:
+          this.tabPressed = true
+          break
       }
     })
     window.addEventListener('keyup', e => {
@@ -29,6 +32,9 @@ class KeyboardDelegate {
         case KEY_CODE.ALT:
           this.commandPressed = false
           break
+        case KEY_CODE.TAB:
+          this.tabPressed = false
+          break
       }
     })
   }
@@ -36,7 +42,8 @@ class KeyboardDelegate {
     return {
       shiftPressed: this.shiftPressed,
       ctrlPressed: this.ctrlPressed,
-      commandPressed: this.commandPressed
+      commandPressed: this.commandPressed,
+      tabPressed: this.c
     }
   }
 }

@@ -69,7 +69,7 @@
 }
 
 @include b(modal-content-slot) {
-  transform: $--n-transform-debounce-scale;
+  position: relative;
   &#{&}-transition-enter-active {
     opacity: 1;
     transition: opacity .3s cubic-bezier(.4, 0, .2, 1), transform .3s cubic-bezier(0.0, 0.0, 0.2, 1);

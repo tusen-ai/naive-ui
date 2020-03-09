@@ -37,16 +37,12 @@ export default {
       type: String,
       default: null
     },
-    /** to make zindexable work */
-    detached: {
-      type: Boolean,
-      default: true
-    },
     ...presetProps
   },
   data () {
     return {
-      mousedownTarget: null
+      mousedownTarget: null,
+      zindexable: true
     }
   },
   computed: {

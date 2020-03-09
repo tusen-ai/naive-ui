@@ -108,7 +108,7 @@ export default {
     },
     init () {
       const map = this.NDocumentation.anchorLinkMap
-      this.isDebug = this.name && (this.name.indexOf('debug') > -1 || this.name.indexOf('Debug') > -1)
+      this.isDebug = this.name && (~this.name.indexOf('debug') || ~this.name.indexOf('Debug'))
       if (this.isDebug) {
         if (this.mode === 'debug') {
           this.isShow = true
@@ -120,7 +120,6 @@ export default {
       } else {
         map.set(this.name, String(this.$scopedSlots.title()[0].text).trim())
       }
-
       this.NDocumentation.anchorLinkMap = new Map(map, this.$scopedSlots.title()[0].text.trim())
     }
   }

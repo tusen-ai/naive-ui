@@ -2,7 +2,6 @@
 You can make mask click not to close modal when using v-model on modal.
 ```html
 <n-button
-  size="small"
   @click="isActive = true"
 >
   Start Me up

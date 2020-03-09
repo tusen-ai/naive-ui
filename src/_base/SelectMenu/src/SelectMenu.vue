@@ -4,6 +4,7 @@
     :class="{
       [`n-base-select-menu--${size}-size`]: true,
       'n-base-select-menu--multiple': multiple,
+      [`n-base-select-menu--no-tracking-rect`]: !showTrackingRect,
       [`n-${theme}-theme`]: theme
     }"
     :style="{
@@ -17,7 +18,7 @@
       v-show="!empty"
       ref="scrollbar"
       :theme="theme"
-      :without-scrollbar="withoutScrollbar"
+      :scrollable="scrollable"
       :container="getScrollContainer"
       :content="getScrollContent"
       @scroll="handleMenuScroll"
@@ -34,7 +35,12 @@
             @visible="handleMenuVisible"
           >
             <template v-slot:before>
-              <n-base-tracking-rect ref="lightBar" :item-size="itemSize" :theme="theme" />
+              <n-base-tracking-rect
+                v-if="showTrackingRect"
+                ref="trackingRect"
+                :item-size="itemSize"
+                :theme="theme"
+              />
             </template>
             <template v-slot="{ item: option }">
               <n-select-option
@@ -51,7 +57,12 @@
             </template>
           </recycle-scroller>
           <template v-else>
-            <n-base-tracking-rect ref="lightBar" :item-size="itemSize" :theme="theme" />
+            <n-base-tracking-rect
+              v-if="showTrackingRect"
+              ref="trackingRect"
+              :item-size="itemSize"
+              :theme="theme"
+            />
             <template v-for="option in flattenedOptions">
               <n-select-option
                 v-if="option.type === OPTION_TYPE.OPTION"
@@ -129,13 +140,13 @@ export default {
       type: String,
       default: null
     },
-    withoutLightBar: {
+    showTrackingRect: {
       type: Boolean,
-      default: false
+      default: true
     },
-    withoutScrollbar: {
+    scrollable: {
       type: Boolean,
-      default: false
+      default: true
     },
     options: {
       type: Array,
@@ -225,7 +236,7 @@ export default {
   watch: {
     empty (value) {
       if (value) {
-        this.hideLightBar(0)
+        this.hideTrackingRect(0)
       }
     },
     flattenedOptions () {
@@ -234,7 +245,7 @@ export default {
           const firstAvailableOptionIndex = getNextAvailableIndex(this.flattenedOptions, null)
           this.setPendingWrappedOptionIndex(firstAvailableOptionIndex)
         } else {
-          this.hideLightBar()
+          this.hideTrackingRect()
           this.pendingWrappedOption = null
         }
       })
@@ -242,7 +253,7 @@ export default {
     pendingWrappedOption (value) {
       if (value === null) {
         this.$nextTick().then(() => {
-          this.hideLightBar()
+          this.hideTrackingRect()
         })
       }
     }
@@ -278,7 +289,7 @@ export default {
       this.$emit('menu-toggle-option', option)
     },
     handleMenuMouseLeave () {
-      this.hideLightBar()
+      this.hideTrackingRect()
       this.pendingWrappedOption = null
     },
     /**
@@ -314,19 +325,19 @@ export default {
       if (this.virtualScroll) {
         if (index !== null) {
           this.pendingWrappedOption = this.flattenedOptions[index]
-          const itemSize = this.itemSize
-          const offsetTop = itemSize * index
-          this.updateLightBarTop({
+          const size = this.itemSize
+          const offsetTop = size * index
+          this.updateTrackingRectTop({
             offsetTop
           })
-          doScroll && this.$refs.scrollbar.scrollToElement({}, () => offsetTop, () => itemSize)
+          doScroll && this.$refs.scrollbar.scrollToElement({}, () => offsetTop, () => size)
         }
       } else {
         this.pendingWrappedOption = this.flattenedOptions[index]
         const el = this.$el
-        const optionEl = el.querySelector(`[n-index="${index}"]`)
+        const optionEl = el.querySelector(`[n-option-index="${index}"]`)
         const offsetTop = optionEl.offsetTop
-        this.updateLightBarTop({
+        this.updateTrackingRectTop({
           offsetTop
         })
         doScroll && this.$refs.scrollbar.scrollToElement(optionEl)
@@ -335,19 +346,19 @@ export default {
     /**
      * select option background related
      */
-    updateLightBarTop (el) {
-      if (this.$refs.lightBar) {
-        this.$refs.lightBar.updateLightBarTop(el)
+    updateTrackingRectTop (el) {
+      if (this.$refs.trackingRect) {
+        this.$refs.trackingRect.updateTrackingRectTop(el)
       }
     },
-    hideLightBar () {
-      if (this.$refs.lightBar) {
-        this.$refs.lightBar.hideLightBar()
+    hideTrackingRect () {
+      if (this.$refs.trackingRect) {
+        this.$refs.trackingRect.hideTrackingRect()
       }
     },
-    hideLightBarSync () {
-      if (this.$refs.lightBar) {
-        this.$refs.lightBar.hideLightBar(0)
+    hideTrackingRectSync () {
+      if (this.$refs.trackingRect) {
+        this.$refs.trackingRect.hideTrackingRect(0)
       }
     }
   }

@@ -21,7 +21,7 @@ use-component
 |-|-|-|-|
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
 |title|`string \| (() => VNode \| Array<VNode>)`|`null`|Can be a render function.|
-|closable|`boolean`|`boolean`||
+|closable|`boolean`|`true`||
 |icon|`() => VNode \| Array<VNode>`|`null`|Should be a render function.|
 |negative-text|`string`|`null`|Corresponding button won't show if not set.|
 |positive-text|`string`|`null`|Corresponding button won't show if not set.|

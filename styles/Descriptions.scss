@@ -76,6 +76,7 @@
           border-radius: $--n-descriptions-border-radius;
           overflow: hidden;
         }
+        background: map-get($--descriptions-content-background-color, 'default');
         border: 1px solid $--descriptions-border-color;
         @include b(descriptions-table) {
           @include b(descriptions-table-row) {
@@ -98,7 +99,6 @@
               }
             }
             @include b(descriptions-table-content) {
-              background: $--descriptions-content-background-color;
               &:not(:last-child) {
                 border-right: 1px solid $--descriptions-border-color;
               }
@@ -175,6 +175,15 @@
               }
             }
           } 
+        }
+      }
+    }
+  }
+  @include as-modal-content {
+    @include b(descriptions) {
+      @include m(bordered) {
+        @include b(descriptions-table-wrapper) {
+          background: map-get($--descriptions-content-background-color, 'modal');
         }
       }
     }

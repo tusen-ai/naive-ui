@@ -4,6 +4,10 @@
 ```demo
 basic
 multiple
+dark-1-debug
+dark-2-debug
+dark-3-debug
+dark-4-debug
 ```
 ## V-model
 |prop|event|

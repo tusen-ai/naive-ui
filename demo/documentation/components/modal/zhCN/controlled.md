@@ -2,10 +2,9 @@
 Modal 的显示可以是受控的。
 ```html
 <n-button
-  size="small"
   @click="handleClick"
 >
-  来
+  来吧
 </n-button>
 <n-modal :show="isActive">
   <n-card

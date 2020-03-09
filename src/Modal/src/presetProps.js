@@ -1,12 +1,12 @@
 export default {
-  bodyStyle: {
+  overlayStyle: {
     type: [Object, String],
     default: null
   },
   // For preset: confirm, card
   title: {
     type: String,
-    default: 'title'
+    default: undefined
   },
   closable: {
     type: Boolean,
@@ -36,6 +36,6 @@ export default {
   },
   bordered: {
     type: Boolean,
-    default: undefined
+    default: false
   }
 }

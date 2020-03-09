@@ -12,8 +12,8 @@
     'disabled': change-color($--n-placeholder-text-color, $alpha: alpha($--n-placeholder-text-color) * $--n-disabled-opacity),
   ) !global;
   $--input-background-color: (
-    'default': $--n-input-background-color,
-    'disabled': change-color($--n-input-background-color, $alpha: alpha($--n-input-background-color) * $--n-disabled-opacity),
+    'default': $--n-input-overlay-background-color,
+    'disabled': change-color($--n-input-overlay-background-color, $alpha: alpha($--n-input-overlay-background-color) * $--n-disabled-opacity),
     'focus': change-color($--n-primary-color, $alpha: 0.1),
     'error-focus': change-color($--n-error-color, $alpha: 0.1),
   ) !global;
@@ -39,5 +39,5 @@
     'disabled': inset 0 0 0 1px transparent,
     'error-default': inset 0 0 0 1px $--n-error-color
   ) !global;
-  $--input-group-label-background-color: $--n-action-background-color !global;
+  $--input-group-label-background-color: $--n-action-overlay-background-color !global;
 }

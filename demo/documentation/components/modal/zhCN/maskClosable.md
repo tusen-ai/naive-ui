@@ -2,10 +2,9 @@
 你可以在使用 v-model 的时候让点击遮罩不关闭
 ```html
 <n-button
-  size="small"
   @click="isActive = true"
 >
-  来
+  来吧
 </n-button>
 <n-modal
   v-model="isActive" 

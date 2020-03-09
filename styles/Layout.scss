@@ -40,6 +40,7 @@
     @include once {
       transition:
         background-color .3s $--n-ease-in-out-cubic-bezier,
+        box-shadow .3s $--n-ease-in-out-cubic-bezier,
         border-color .3s $--n-ease-in-out-cubic-bezier;
       box-sizing: border-box;
       width: 100%;
@@ -58,8 +59,8 @@
   @include b(layout-content) {
     @include once {
       box-sizing: border-box;
-      z-index: auto;
       position: relative;
+      z-index: auto;
     }
     transition:
       margin-left .3s $--n-ease-in-out-cubic-bezier,
@@ -86,8 +87,8 @@
   @include b(layout-sider) {
     @include once {
       box-sizing: border-box;
-      z-index: auto;
       position: relative;
+      z-index: auto;
       transition:
         min-width .3s  $--n-ease-in-out-cubic-bezier,
         max-width .3s $--n-ease-in-out-cubic-bezier,

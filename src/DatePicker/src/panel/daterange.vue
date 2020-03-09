@@ -2,7 +2,6 @@
   <transition name="n-date-panel-transition">
     <div
       v-if="active"
-      ref="self"
       tabindex="0"
       class="n-date-panel n-date-panel--daterange"
       :class="{
@@ -12,6 +11,7 @@
       @keydown="handlePanelKeyDown"
       @focus="handlePanelFocus"
     >
+      <div style="width: 100%; height: 3px" />
       <div
         ref="startDates"
         class="n-date-panel-calendar"
