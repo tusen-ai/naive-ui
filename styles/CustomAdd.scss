@@ -1,0 +1,49 @@
+@import './mixins/mixins.scss';
+
+@include themes-mixin {
+  @include once {
+    @include b(custom-add) {
+      width: 100%;
+      @include m(title) {
+        display: block;
+        margin: 0 0 8px;
+      }
+      @include b(custom-add-item) {
+        margin-bottom: 10px;
+        display: flex;
+        @include e(content) {
+          flex: 1;
+          display: inline-block;
+          display: flex;
+        }
+        @include e(action) {
+          width: 80px;
+          display: flex;
+          margin-left: 13px;
+          @include m(icon) {
+            cursor: pointer;
+          }
+        }
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+      @include b(custom-add-pair) {
+        width: 100%;
+        display: flex;
+        @include b(custom-add-item-input-container-input) {
+          display: inline-block;
+          flex: 1;
+        }
+        @include b(form-item) {
+          padding-top: 0!important;
+        }
+      }
+      @include b(custom-add-pair-input){
+        &:first-child {
+          margin-right: 13px;
+        }
+      }
+    }
+  }
+}

@@ -23,7 +23,28 @@
     <template v-slot:header>
       <slot name="title" />
     </template>
+
     <template v-slot:header-extra>
+      <n-tooltip
+        :delay="300"
+        :placement="'top'"
+        :show-arrow="true"
+        :controller="controller"
+      >
+        <template v-slot:activator>
+          <a target="_blank" :href="gheUrl" style="margin-right:10px;">
+            <n-button
+              size="tiny"
+              ghost
+            >
+              <template v-slot:icon>
+                <open-outline />
+              </template>
+            </n-button>
+          </a>
+        </template>
+        {{ $t('ghe url') }}
+      </n-tooltip>
       <n-tooltip
         :delay="300"
         :placement="'top'"
@@ -57,11 +78,13 @@
 
 <script>
 import mdCode from '../../src/_icons/md-code'
+import openOutline from '../../src/_icons/open-outline'
 import { state } from '../store'
 
 export default {
   components: {
-    mdCode
+    mdCode,
+    openOutline
   },
   inject: {
     NDocumentation: {
@@ -82,6 +105,12 @@ export default {
   computed: {
     mode () {
       return this.state.mode
+    },
+    gheUrl () {
+      const resourcePath = this.NDocumentation.url
+      const reg = /demo.*/
+      const path = resourcePath.match(reg)
+      return 'https://***REMOVED***/tree/develop/' + path
     }
   },
   watch: {
@@ -107,6 +136,7 @@ export default {
       this.showCode = !this.showCode
     },
     init () {
+      console.log('this', this.NDocumentation.url)
       const map = this.NDocumentation.anchorLinkMap
       this.isDebug = this.name && (~this.name.indexOf('debug') || ~this.name.indexOf('Debug'))
       if (this.isDebug) {

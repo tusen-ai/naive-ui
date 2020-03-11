@@ -17,7 +17,7 @@ import nswitch from './documentation/components/switch'
 import input from './documentation/components/input'
 import select from './documentation/components/select'
 import cascader from './documentation/components/cascader'
-import customInput from './documentation/components/customInput'
+import customAdd from './documentation/components/customAdd'
 import modal from './documentation/components/modal'
 import message from './documentation/components/message'
 import tooltip from './documentation/components/tooltip'
@@ -165,7 +165,7 @@ const children = [
   { path: '/n-input', component: input },
   { path: '/n-select', component: select },
   { path: '/n-cascader', component: cascader },
-  { path: '/n-custom-input', component: customInput },
+  { path: '/n-custom-add', component: customAdd },
   { path: '/n-modal', component: modal },
   { path: '/n-message', component: message },
   { path: '/n-tooltip', component: tooltip },

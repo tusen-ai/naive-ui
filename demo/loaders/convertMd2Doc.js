@@ -46,7 +46,7 @@ function parseDemosAsAnchor (demosLiteral) {
   return `<n-anchor :top="32" :bound="16" position="absolute" affix style="width: 144px;">${linkTags.join('\n')}</n-anchor>`
 }
 
-function generateScript (demosLiteral, components = []) {
+function generateScript (demosLiteral, components = [], url) {
   const demoNames = demosLiteral
     .split('\n')
     .map(demoName => demoName.trim())
@@ -72,7 +72,8 @@ export default {
   },
   data () {
     return {
-      anchorLinkMap: new Map()
+      anchorLinkMap: new Map(),
+      url: ${JSON.stringify(url)}
     }
   }
 }
@@ -80,7 +81,7 @@ export default {
   return script
 }
 
-function convertMd2ComponentDocumentation (text, env = 'development') {
+function convertMd2ComponentDocumentation (text, env = 'development', url) {
   const isNoDemo = !!~text.search('<!--no-demo-->')
   if (isNoDemo) {
     return mdLoader(text)
@@ -139,7 +140,7 @@ function convertMd2ComponentDocumentation (text, env = 'development') {
     </div>
   </component-documentation>
 </template>`
-  const documentationScript = generateScript(demosLiteral, components)
+  const documentationScript = generateScript(demosLiteral, components, url)
   // if (components.length) console.log(`${documentationTemplate}\n\n${documentationScript}`)
   return `${documentationTemplate}\n\n${documentationScript}`
   // console.log(vueComponent)

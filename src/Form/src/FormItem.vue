@@ -220,7 +220,7 @@ export default {
         NForm.rules &&
         get(NForm.rules, this.syntheticRulePath, null)
       ) {
-        const rule = get(NForm.rules, this.path)
+        const rule = get(NForm.rules, this.syntheticRulePath)
         if (Array.isArray(rule)) {
           rules = rules.concat(rule)
         } else {
