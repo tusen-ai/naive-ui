@@ -1,4 +1,4 @@
-# Custom Add
+# Dynamic Input
 
 ## Demos
 ```demo

@@ -1,6 +1,6 @@
 # Pair
 ```html
-<n-custom-add
+<n-dynamic-input
   preset="pair"
   v-model="test"
   placeholder-key="placeholder1"
