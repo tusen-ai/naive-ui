@@ -16,6 +16,33 @@
   >
     <n-input :disabled="!model.password" v-model="model.reenteredPassword" type="password"/>
   </n-form-item-row>
+   <n-form-item-row label="Env" path="env" rule-path="null">
+    <n-custom-add
+      v-model="model.env"
+    />
+  </n-form-item-row>
+  <n-form-item-row label="group" path="group" rule-path="null">
+    <n-custom-add
+      v-model="model.group"
+    >
+      <template v-slot="slotProps">
+        <div style="width:100%">
+          <n-form-item 
+            :path="'group[' + slotProps.index + '].inputNumberValue'"
+            rule-path="group.inputNumberValue"
+            >
+            <n-input-number v-model="slotProps.item.inputNumberValue"/>
+          </n-form-item>
+          <n-form-item 
+            :path="'group[' + slotProps.index + '].input'"
+            rule-path="group.input"
+            >
+            <n-input v-model="slotProps.item.input"/>
+          </n-form-item>
+        </div>
+      </template>
+    </n-custom-add>
+  </n-form-item-row>
   <n-row :gutter="[0, 24]">
     <n-col :span="24">
       <div style="display: flex; justify-content: flex-end;">
@@ -36,7 +63,19 @@ export default {
       model: {
         age: null,
         password: null,
-        reenteredPassword: null
+        reenteredPassword: null,
+        env: [
+          {
+            key:'',
+            value:''
+          }
+        ],
+        group: [
+          {
+            inputNumberValue: 1,
+            input: null
+          }
+        ]
       },
       rules: {
         age: [
@@ -71,7 +110,19 @@ export default {
             message: '两次密码输入不一致',
             trigger: ['blur', 'password-input']
           }
-        ]
+        ],
+        group: {
+          inputNumberValue: {
+           validator: this.validateGroupNumber,
+            trigger: ['blur', 'change'],
+            message: '请输入不为0的数字'
+          },
+          input: {
+            required: true,
+            message: '请输入你的key',
+            trigger: ['input', 'blur']
+          },
+        }
       }
     }
   },
@@ -97,6 +148,9 @@ export default {
     },
     validatePasswordSame (rule, value) {
       return value === this.model.password
+    },
+    validateGroupNumber (rule, value) {
+      return value !== 0
     }
   }
 }

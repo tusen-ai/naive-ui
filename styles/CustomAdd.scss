@@ -17,7 +17,7 @@
           display: flex;
         }
         @include e(action) {
-          width: 70px;
+          width: 80px;
           display: flex;
           margin-left: 13px;
           @include m(icon) {

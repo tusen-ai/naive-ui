@@ -1,10 +1,10 @@
-# Basic
+# Pair
 ```html
 <n-custom-add
+  preset="pair"
   v-model="test"
   placeholder-key="placeholder1"
   placeholder-value="placeholder2"
-  :on-add="add"
 />
 <pre>
 {{  JSON.stringify(test,0,2) }}
@@ -15,13 +15,11 @@ export default {
   data () {
     return {
       test: [
-        ''
+        {
+          key: 'key1',
+          value: 'value1'
+        }
       ]
-    }
-  },
-  methods: {
-    add (resolve) {
-      resolve('')
     }
   }
 }

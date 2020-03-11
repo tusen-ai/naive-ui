@@ -4,27 +4,22 @@
       v-for="(item, index) in value"
       :key="index"
       class="n-custom-add-item"
-      :class="{[`n-${syntheticTheme}-theme`]: syntheticTheme}"
     >
-      <div v-if="NFormItem" class="n-custom-add-item__content">
-        <slot :item="item" :index="index">
-          <n-custom-add-item
-            :item="item"
-            :index="index"
-            :parent-path="NFormItem.path"
-            :path="NFormItem.path + '.' + index"
-          />
-        </slot>
-      </div>
-      <div v-else class="n-custom-add-item__content">
-        <slot :item="item" :index="index">
-          <n-custom-add-item
-            :item="item"
-            :index="index"
-            @change-value="changeValue"
-          />
-        </slot>
-      </div>
+      <n-custom-add-input
+        v-if="preset==='input'"
+        :item="item"
+        :index="index"
+        :parent-path="NFormItem && NFormItem.path"
+        :path="NFormItem && NFormItem.path + '[' + index + ']'"
+      />
+      <n-custom-add-pair
+        v-else-if="preset==='pair'"
+        :item="item"
+        :index="index"
+        :parent-path="NFormItem && NFormItem.path"
+        :path="NFormItem && NFormItem.path + '[' + index + ']'"
+      />
+      <slot v-else :item="item" :index="index" />
       <div class="n-custom-add-item__action">
         <n-button-group>
           <n-button
@@ -36,7 +31,7 @@
             </template>
           </n-button>
           <n-button
-            v-if="index===value.length-1"
+            v-if="index === value.length-1"
             circle
             @click="add"
           >
@@ -56,13 +51,14 @@ import NButtonGroup from '../../Button/src/ButtonGroup'
 import mdAdd from '../../_icons/md-add'
 import mdRemove from '../../_icons/md-remove'
 import asformitem from '../../_mixins/asformitem'
-import NCustomAddItem from './item'
-import themeable from '../../_mixins/themeable'
+import NCustomAddPair from './pair'
+import NCustomAddInput from './input'
 
 export default {
   name: 'NCustomAdd',
   components: {
-    NCustomAddItem,
+    NCustomAddPair,
+    NCustomAddInput,
     NButtonGroup,
     NButton,
     mdAdd,
@@ -73,7 +69,7 @@ export default {
       NCustomAdd: this
     }
   },
-  mixins: [themeable, asformitem({
+  mixins: [asformitem({
     change: 'change',
     blur: 'blur',
     focus: 'focus',
@@ -82,12 +78,7 @@ export default {
   props: {
     value: {
       type: Array,
-      default: () => {
-        return [{
-          key: '',
-          value: ''
-        }]
-      }
+      required: true
     },
     placeholderKey: {
       type: String,
@@ -96,6 +87,18 @@ export default {
     placeholderValue: {
       type: String,
       default: 'Value'
+    },
+    onAdd: {
+      type: Function,
+      default: null
+    },
+    preset: {
+      type: String,
+      default: 'input'
+    },
+    placeholder: {
+      type: String,
+      default: ''
     }
   },
   methods: {
@@ -103,26 +106,32 @@ export default {
       this.value = value
     },
     add () {
-      this.$emit('on-add')
-      this.value.push({})
-    },
-    remove (index) {
-      this.$emit('on-remove', index)
-      if (index === 0 && this.value.length <= 1) {
-        Object.keys(this.value[0]).forEach((key) => {
-          let type = typeof (this.value[0][key])
-          switch (type) {
-            case 'boolean':
-              this.$set(this.value[0], key, false)
-              break
-            default:
-              this.$set(this.value[0], key, null)
-              break
-          }
+      if (this.onAdd) {
+        this.onAdd((item) => {
+          this.value.push(item)
         })
         return
       }
-      this.value.splice(index, 1)
+      switch (this.preset) {
+        case 'input':
+          this.value.push('')
+          break
+        case 'pair':
+          this.value.push({ key: '', value: '' })
+          break
+        case 'custom':
+          this.value.push({})
+          break
+        default:
+          this.value.push({})
+      }
+    },
+    remove (index) {
+      if (index === 0 && this.value.length <= 1) {
+      } else {
+        this.value.splice(index, 1)
+      }
+      this.$emit('remove', index)
     }
   }
 }

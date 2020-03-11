@@ -3,6 +3,8 @@
 <n-custom-add
   v-model="test"
   title="Add CheckBox"
+  preset="custom"
+  :on-add="add"
 >
   <template v-slot="slotProps">
     <div style="width:100%">
@@ -30,10 +32,21 @@ export default {
   data () {
     return {
       test: [
-        {
-          isCheck: true
-        }
+       {
+         isCheck: true,
+         num: 1,
+         string: 'Test string'
+       }
       ]
+    }
+  },
+  methods: {
+    add (resolve) {
+      resolve({
+        isCheck: false,
+        num: 1,
+        string: 'Test string'
+      })
     }
   }
 }

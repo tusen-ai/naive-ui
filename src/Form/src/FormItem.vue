@@ -313,7 +313,7 @@ export default {
       }
       const rules = this.syntheticRules
       const path = this.path
-      const value = get(this.NForm.model, this.path.split('.'), null)
+      const value = get(this.NForm.model, this.path, null)
       const activeRules = (!trigger
         ? rules
         : rules.filter(rule => {

@@ -19,28 +19,30 @@ You can custom you valiation by setting custom trigger in rules.
   <n-form-item-row label="Env" path="env" rule-path="null">
     <n-custom-add
       v-model="model.env"
+      preset="pair"
     />
   </n-form-item-row>
   <n-form-item-row label="group" path="group" rule-path="null">
     <n-custom-add
       v-model="model.group"
+      preset='custom'
     >
-     <template v-slot="slotProps">
-      <div style="width:100%">
-        <n-form-item 
-          :path="'group.' + slotProps.index + '.inputNumberValue'"
-          rule-path="group.inputNumberValue"
-          >
-          <n-input-number v-model="slotProps.item.inputNumberValue"/>
-        </n-form-item>
-        <n-form-item 
-          :path="'group.' + slotProps.index + '.input'"
-          rule-path="group.input"
-          >
-          <n-input v-model="slotProps.item.input"/>
-        </n-form-item>
-      </div>
-  </template>
+      <template v-slot="slotProps">
+        <div style="width:100%">
+          <n-form-item 
+            :path="'group[' + slotProps.index + '].inputNumberValue'"
+            rule-path="group.inputNumberValue"
+            >
+            <n-input-number v-model="slotProps.item.inputNumberValue"/>
+          </n-form-item>
+          <n-form-item 
+            :path="'group[' + slotProps.index + '].input'"
+            rule-path="group.input"
+            >
+            <n-input v-model="slotProps.item.input"/>
+          </n-form-item>
+        </div>
+      </template>
     </n-custom-add>
   </n-form-item-row>
   <n-row :gutter="[0, 24]">
@@ -72,7 +74,7 @@ export default {
         ],
         group: [
           {
-            inputNumberValue: null,
+            inputNumberValue: 1,
             input: null
           }
         ]

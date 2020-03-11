@@ -1,8 +1,10 @@
 # 自定义
 ```html
 <n-custom-add
-  v-model="test1"
+  v-model="test"
   title="Add CheckBox"
+  preset="custom"
+  :onAdd="add"
 >
   <template v-slot="slotProps">
     <div style="width:100%">
@@ -29,11 +31,22 @@
 export default {
   data () {
     return {
-      test1: [
+      test: [
         {
-          isCheck: true
+          isCheck: true,
+          num: 1,
+          string: 'Test string'
         }
       ]
+    }
+  },
+  methods: {
+    add (resolve) {
+      resolve({
+        isCheck: false,
+        num: 1,
+        string: 'Test string'
+      })
     }
   }
 }

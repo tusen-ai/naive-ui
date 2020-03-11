@@ -34,7 +34,7 @@
 import asformitem from '../../_mixins/asformitem'
 
 export default {
-  name: 'NCustomAddItem',
+  name: 'NCustomAddPair',
   inject: {
     NCustomAdd: {
       default: []
@@ -45,7 +45,7 @@ export default {
     blur: 'blur',
     focus: 'focus',
     input: 'input'
-  }, 'medium', 'isGroup')],
+  }, 'medium')],
   props: {
     item: {
       type: Object,
