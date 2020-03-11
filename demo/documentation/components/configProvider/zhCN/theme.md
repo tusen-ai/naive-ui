@@ -1,5 +1,5 @@
 # 主题
-设置 Config Provider 内部组件的主题。
+设置 `n-config-provider` 内部组件的主题。
 ```html
 <n-config-provider :theme="theme">
   <div style="background-color: rgba(128, 128, 128); padding: 8px;">

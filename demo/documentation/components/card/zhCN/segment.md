@@ -1,5 +1,5 @@
 # 分段
-`content`、`footer` 和 `action` 可以被 `hard` 或 `soft` 分段，分段分割线会在区域的上方出现。
+`content` 和 `footer` 可以被 `hard` 或 `soft` 分段，`action` 可以被分段。分段分割线会在区域的上方出现。
 ```html
 <n-card title="卡片分段示例" :segmented="{
   content: 'hard',

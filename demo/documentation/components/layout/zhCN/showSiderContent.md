@@ -29,13 +29,13 @@
     </n-layout>
   </n-layout>
 </n-layout>
-<n-layout style="height: 240px;">
-  <n-layout-header mode="absolute" style="height: 64px;">
+<n-layout style="height: 240px; overflow: hidden;">
+  <n-layout-header position="absolute" style="height: 64px;">
     酷的页头
   </n-layout-header>
-  <n-layout mode="absolute" style="top: 64px;">
+  <n-layout position="absolute" style="top: 64px;">
     <n-layout-sider
-      mode="absolute"
+      position="absolute"
       collapse-mode="transform"
       :show-content="!collapsed"
       :collapsed-width="120"
@@ -45,10 +45,10 @@
       @collapse="collapsed = true"
       @expand="collapsed = false"
     >
-      <n-h1>边栏</n-h1>
+      <n-h1>边栏 边栏 边栏</n-h1>
     </n-layout-sider>
     <n-layout 
-      mode="absolute"
+      position="absolute"
     >
       <span>内容</span>
     </n-layout>

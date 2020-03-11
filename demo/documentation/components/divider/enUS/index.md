@@ -14,8 +14,9 @@ vertical
 |title-placement|`'left' \| 'right' \| 'center'`|`'center'`||
 |dashed|`boolean`|`false`||
 |vertical|`boolean`|`false`||
+|theme|`'light' \| 'dark'`|`null`||
 
 ## Slots
 |Name|Parameters|Description|
 |-|-|-|
-|default|`()`||
+|default|`()`|The title of divider.|

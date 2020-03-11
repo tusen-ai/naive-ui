@@ -42,6 +42,14 @@ export default {
     headerZIndex: {
       type: Number,
       default: undefined
+    },
+    siderStyle: {
+      type: Object,
+      default: null
+    },
+    contentStyle: {
+      type: Object,
+      default: null
     }
   },
   data () {
@@ -146,7 +154,7 @@ export default {
         [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme
       },
       props: {
-        mode: 'absolute'
+        position: 'absolute'
       }
     }, [
       this.$slots.nav ? h('NLayoutHeader', {
@@ -163,13 +171,14 @@ export default {
           top: this.$slots.nav ? '64px' : null
         },
         props: {
-          mode: 'absolute'
+          position: 'absolute'
         }
       }, [
         h('NLayoutSider', {
           style: {
             'display': 'flex',
-            'justify-content': 'flex-end'
+            'justify-content': 'flex-end',
+            ...this.siderStyle
           },
           props: siderProps,
           on: {
@@ -239,6 +248,7 @@ export default {
         ),
         h('NLayout', {
           ref: 'body',
+          style: { ...this.contentStyle },
           props: {
             'use-native-scrollbar': false,
             'scroll-content-style': {

@@ -8,7 +8,7 @@
       [`n-col--${offset}-offset`]: offset
     }"
     :style="{
-      padding: `${ verticalGutter / 2 }px ${ horizontalGutter / 2 }px`
+      padding: stylePadding
     }"
   >
     <div
@@ -24,10 +24,12 @@
 </template>
 
 <script>
+import formatLength from '../../_utils/css/formatLength'
+
 export default {
   inject: {
     NRow: {
-      gutter: 0
+      default: null
     }
   },
   name: 'NCol',
@@ -53,11 +55,8 @@ export default {
     gutter () {
       return this.NRow.gutter
     },
-    verticalGutter () {
-      return this.NRow.verticalGutter
-    },
-    horizontalGutter () {
-      return this.NRow.horizontalGutter
+    stylePadding () {
+      return `${formatLength(this.NRow.verticalGutter, 0.5)} ${formatLength(this.NRow.horizontalGutter, 0.5)}`
     },
     computedPush () {
       return this.push - this.pull

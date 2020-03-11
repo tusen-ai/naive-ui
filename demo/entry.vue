@@ -1,6 +1,6 @@
 <template>
   <n-config-provider class="demo" namespace="naive-ui-doc" :theme="theme" :language="lang">
-    <n-layout mode="absolute" class="root-layout">
+    <n-layout position="absolute" class="root-layout">
       <doc-header
         :lang="lang"
         :items="flattenedItems"
@@ -9,7 +9,7 @@
         @lang-change="handleLangChange"
         @mode-change="handleModeChange"
       />
-      <n-layout class="home-layout" style="top: 64px; overflow: hidden;" mode="absolute">
+      <n-layout class="home-layout" style="top: 64px; overflow: hidden;" position="absolute">
         <router-view />
       </n-layout>
     </n-layout>

@@ -23,6 +23,12 @@ export default {
     event: 'change'
   },
   props: {
+    size: {
+      validator (value) {
+        return ['small', 'medium', 'large'].includes(value)
+      },
+      default: null
+    },
     value: {
       type: Array,
       default: null

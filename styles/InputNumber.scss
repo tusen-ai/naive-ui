@@ -48,16 +48,49 @@
         left: 0;
         border-top-left-radius: $--n-input-number-border-radius;
         border-bottom-left-radius: $--n-input-number-border-radius;
+        @include b(input-number-button-border-mask) {
+          border-top-left-radius: $--n-input-number-border-radius;
+          border-bottom-left-radius: $--n-input-number-border-radius;
+        }
+        @include b(input-number-button-body) {
+          left: 1px;
+          right: 0;
+          @include b(icon) {
+            transform: translateX(-1px);
+          }
+        }
+        @include b(input-number-button-boundary) {
+          left: 0;
+        }
       }
       @include e(add-button) {
         right: 0;
         border-top-right-radius: $--n-input-number-border-radius;
         border-bottom-right-radius: $--n-input-number-border-radius;
+        @include b(input-number-button-border-mask) {
+          border-top-right-radius: $--n-input-number-border-radius;
+          border-bottom-right-radius: $--n-input-number-border-radius;
+        }
+        @include b(input-number-button-body) {
+          right: 1px;
+          left: 0;
+          @include b(icon) {
+            transform: translateX(1px);
+          }
+        }
+        @include b(input-number-button-boundary) {
+          right: 0;
+        }
       }
     }
     @include m(disabled) {
       @include e(minus-button, add-button) {
-        background: map-get($--input-number-button-background-color, 'disabled');
+        @include b(input-number-button-body) {
+          background-color: map-get($--input-number-button-background-color, 'disabled');
+        }
+        @include b(input-number-button-boundary) {
+          background-color: map-get($--input-number-button-background-color, 'disabled');
+        }
         @include b(icon) {
           fill: map-get($--input-number-button-text-color, 'disabled');
           stroke: map-get($--input-number-button-text-color, 'disabled');
@@ -90,6 +123,8 @@
     }
     @include e(minus-button, add-button) {
       @include once {
+        background-color: transparent;
+        overflow: hidden;
         outline: none;
         position: absolute;
         cursor: pointer;
@@ -97,27 +132,58 @@
         top: 0;
         padding: 0;
         border: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         font-size: 14px;
-        transition:
-          background-color .3s $--n-ease-in-out-cubic-bezier,
-          box-shadow .3s $--n-ease-in-out-cubic-bezier;
       }
-      background-color: map-get($--input-number-button-background-color, 'default');
+      @include b(input-number-button-border-mask) {
+        @include once {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          transition:
+            box-shadow .3s $--n-ease-in-out-cubic-bezier;
+        }
+        box-shadow: inset 0 0 0px 1px map-get($--input-number-border-color, 'default');
+      }
+      @include b(input-number-button-body) {
+        @include once {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background-color .3s $--n-ease-in-out-cubic-bezier;
+        }
+        background-color: map-get($--input-number-button-background-color, 'default');
+      }
+      @include b(input-number-button-boundary) {
+        @include once {
+          width: 1px;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          transition: background-color .3s $--n-ease-in-out-cubic-bezier;
+        }
+        background-color: map-get($--input-number-button-background-color, 'default');
+      }
       @include b(icon) {
         fill: map-get($--input-number-button-text-color, 'default');
         stroke: map-get($--input-number-button-text-color, 'default');
       }
-      box-shadow: inset 0 0 0px 1px map-get($--input-number-border-color, 'default');
       &:hover ~ {
         @include e(border-mask) {
           box-shadow: inset 0 0 0px 1px map-get($--input-number-border-color, 'hover');
         }
       }
       &:hover {
-        background-color: map-get($--input-number-button-background-color, 'hover');
+        @include b(input-number-button-body) {
+          background-color: map-get($--input-number-button-background-color, 'hover');
+        }
+        @include b(input-number-button-boundary) {
+          background-color: map-get($--input-number-button-background-color, 'hover');
+        }
         @include b(icon) {
           fill:map-get($--input-number-button-text-color, 'hover');
           stroke: map-get($--input-number-button-text-color, 'hover');
@@ -129,7 +195,12 @@
             color .3s $--n-ease-in-out-cubic-bezier,
             background-color .15s $--n-ease-in-out-cubic-bezier;
         }
-        background-color: map-get($--input-number-button-background-color, 'active');
+        @include b(input-number-button-body) {
+          background-color: map-get($--input-number-button-background-color, 'active');
+        }
+        @include b(input-number-button-boundary) {
+          background-color: map-get($--input-number-button-background-color, 'active');
+        }
         @include b(icon) {
           fill:map-get($--input-number-button-text-color, 'active');
           stroke: map-get($--input-number-button-text-color, 'active');
@@ -139,7 +210,12 @@
         @include once {
           cursor: not-allowed;
         }
-        background-color: map-get($--input-number-button-background-color, 'disabled');
+        @include b(input-number-button-body) {
+          background-color: map-get($--input-number-button-background-color, 'disabled');
+        }
+        @include b(input-number-button-boundary) {
+          background-color: map-get($--input-number-button-background-color, 'disabled');
+        }
         @include b(icon) {
           fill: map-get($--input-number-button-text-color, 'disabled');
           stroke: map-get($--input-number-button-text-color, 'disabled');

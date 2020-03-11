@@ -1,6 +1,6 @@
 # 基础用法
 ```html
-<n-row :gutter="12">
+<n-row gutter="12">
   <n-col :span="6">
     <div class="red"></div>
   </n-col>

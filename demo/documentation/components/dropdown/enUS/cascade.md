@@ -5,10 +5,9 @@ Dropdown can be cascade.
   :options="options"
   placement="bottom-start"
   trigger="click"
-  :default-focus="false"
   @select="handleSelect"
 >
-  <n-button>People and Some Food to Eat</n-button>
+  <n-button :keyboard="false">People and Some Food to Eat</n-button>
 </n-dropdown>
 ```
 
@@ -16,44 +15,42 @@ Dropdown can be cascade.
 const options = [
   {
     label: 'Jay Gatsby',
-    key: 'jay gatsby'
+    value: 'jay gatsby'
   },
   {
     label: 'Daisy Buchanan',
-    key: 'daisy buchanan'
+    value: 'daisy buchanan'
   },
   {
     type: 'divider'
   },
   {
     label: 'Nick Carraway',
-    key: 'nick carraway'
+    value: 'nick carraway'
   },
   {
-    type: 'submenu',
     label: 'Others',
-    key: 'others',
+    value: 'others',
     children: [
       {
         label: 'Jordan Baker',
-        key: 'jordan baker'
+        value: 'jordan baker'
       },
       {
         label: 'Tom Buchanan',
-        key: 'tom buchanan'
+        value: 'tom buchanan'
       },
       {
-        type: 'submenu',
         label: 'Others',
-        key: 'others',
+        value: 'others',
         children: [
           {
             label: 'Chicken',
-            key: 'chicken'
+            value: 'chicken'
           },
           {
             label: 'Beef',
-            key: 'beef'
+            value: 'beef'
           }
         ]
       }

@@ -16,7 +16,8 @@ depth
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|themed-style|`object`|`null`||
+|theme|`'light' \| 'dark'`|`null`||
+|themed-style|`{ [themeName: string]: object }`|`null`||
 |size|`number \| string`|`null`||
 |color|`string`|`null`||
 |depth|`'primary' \| 'secondary' \| 'tertiary'`|`null`||

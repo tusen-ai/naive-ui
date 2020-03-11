@@ -9,13 +9,13 @@ nested
 ## V-model
 |Prop|Event|
 |-|-|
-|expand-names|expand-names-change|
+|expanded-names|expanded-names-change|
 
 ## Props
 ### Collapse
 |Name|Type|Default|Description|
 |-|-|-|-|
-|expand-names|`Array`|`null`||
+|expanded-names|`Array`|`null`||
 |accordion|`boolean`|`false`||
 
 ### Collapse Item
@@ -38,4 +38,4 @@ nested
 ## Event
 |Name|Parameters|Description|
 |-|-|-|
-|expand-names|`(expandNames: Array<string>)`||
+|expanded-names|`(expandedNames: Array<string>)`||

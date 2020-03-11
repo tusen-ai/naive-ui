@@ -14,6 +14,7 @@
         :theme="NTransfer.syntheticTheme"
         :disabled="disabled"
         :checked="syntheticChecked"
+        :size="NTransfer.syntheticSize"
       />
     </div>
     <div

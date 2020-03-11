@@ -1,7 +1,7 @@
 # 折叠侧边栏
 使用 `collapsed` 属性控制侧边栏状态。
 
-侧边栏有两种 `collapse-mode`：`width`、`transform`。`width` 会改变侧边栏的宽度，而 `transform` 只是将侧边栏移除布局。
+侧边栏有两种 `collapse-mode`：`width` 和 `transform`。`width` 会改变侧边栏的宽度，而 `transform` 只是将侧边栏挪出布局。
 
 使用 `collapsed-width` 和 `width` 设置侧边栏的宽度。
 ```html
@@ -32,13 +32,13 @@
     </n-layout>
   </n-layout>
 </n-layout>
-<n-layout style="height: 240px;">
-  <n-layout-header mode="absolute" style="height: 64px;">
+<n-layout style="height: 240px; overflow: hidden;">
+  <n-layout-header position="absolute" style="height: 64px;">
     酷的页头
   </n-layout-header>
-  <n-layout mode="absolute" style="top: 64px;">
+  <n-layout position="absolute" style="top: 64px;">
     <n-layout-sider
-      mode="absolute"
+      position="absolute"
       collapse-mode="transform"
       :collapsed-width="120"
       :width="240"
@@ -50,7 +50,7 @@
       <n-h1>边栏</n-h1>
     </n-layout-sider>
     <n-layout 
-      mode="absolute"
+      position="absolute"
     >
       <span>内容</span>
     </n-layout>

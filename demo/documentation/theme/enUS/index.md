@@ -1,6 +1,8 @@
 # Create Themed Component
 
-Naive UI provide some tools for developer to create themed components easier.
+You may not want to use only the provided components and want to write themed components.
+
+Naive UI provide some tools for developers to create themed components easier.
 
 ## Demos
 ```demo

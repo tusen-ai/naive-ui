@@ -3,6 +3,12 @@
     ref="layout"
     :padding-body="false"
     :items="items"
+    :sider-style="{
+      height: 'calc(100vh - 64px)',
+    }"
+    :content-style="{
+      height: 'calc(100vh - 64px)',
+    }"
   >
     <router-view />
     <landing-footer style="padding: 32px 204px 16px 56px; text-align: left; font-size: 14px;" />

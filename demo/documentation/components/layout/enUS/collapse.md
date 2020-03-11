@@ -13,14 +13,14 @@ Use `collapsed-width` and `width` to set sider's width.
   <n-layout>
     <n-layout-sider
       collapse-mode="width"
-      :collapsed-width="48"
+      :collapsed-width="120"
       :width="240"
       :collapsed="collapsed"
       show-toggle-button
       @collapse="collapsed = true"
       @expand="collapsed = false"
     >
-      Cool Sider
+      Cool Sider Cool Sider Cool Sider
     </n-layout-sider>
     <n-layout>
       <n-layout-content>
@@ -32,15 +32,15 @@ Use `collapsed-width` and `width` to set sider's width.
     </n-layout>
   </n-layout>
 </n-layout>
-<n-layout style="height: 240px;">
-  <n-layout-header mode="absolute" style="height: 64px;">
+<n-layout style="height: 240px; overflow: hidden;">
+  <n-layout-header position="absolute" style="height: 64px;">
     Cool Header
   </n-layout-header>
-  <n-layout mode="absolute" style="top: 64px;">
+  <n-layout position="absolute" style="top: 64px;">
     <n-layout-sider
-      mode="absolute"
+      position="absolute"
       collapse-mode="transform"
-      :collapsed-width="48"
+      :collapsed-width="120"
       :width="240"
       :collapsed="collapsed"
       show-toggle-button
@@ -50,7 +50,7 @@ Use `collapsed-width` and `width` to set sider's width.
       <n-h1>Sider</n-h1>
     </n-layout-sider>
     <n-layout 
-      mode="absolute"
+      position="absolute"
     >
       <span>Content</span>
     </n-layout>

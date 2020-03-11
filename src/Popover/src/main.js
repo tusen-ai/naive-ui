@@ -106,9 +106,19 @@ export default {
       type: String,
       default: 'if'
     },
+    arrowStyle: {
+      type: Object,
+      default: null
+    },
     zIndex: {
       type: String,
       default: undefined
+    },
+    theme: {
+      validator (value) {
+        return ['light', 'dark'].includes(value)
+      },
+      default: null
     }
   },
   render (h, context) {

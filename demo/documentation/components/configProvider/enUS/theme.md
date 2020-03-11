@@ -1,5 +1,5 @@
 # Theme
-Set theme of inner components of config provider.
+Set theme of inner components of `n-config-provider`.
 ```html
 <n-config-provider :theme="theme">
   <div style="background-color: rgba(128, 128, 128); padding: 8px;">

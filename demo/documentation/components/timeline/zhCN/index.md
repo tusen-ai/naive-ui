@@ -1,6 +1,6 @@
 # Timeline 时间线
 这个世界有两个纬度：时间、事件。
-## 例子
+## 演示
 ```demo
 basic
 size

@@ -1,18 +1,27 @@
-# Use Built-in Scrollbar
-Sometimes you will find native scrollbar doesn't meet the style of naive-ui. You can use built-in scrollbar of naive-ui (on `n-layout-sider`, `n-layout` or `n-content`).
+# Scroll To
 ```html
+<n-button
+  @click="$refs.sider.scrollTo({ top: 120, behavior: 'smooth' })"
+>
+  Sider Scroll to 120px
+</n-button>
+<n-button
+  @click="$refs.content.scrollTo({ top: 120, behavior: 'smooth' })"
+>
+  Content Scroll to 120px
+</n-button>
 <n-layout style="height: 480px;">
     <n-layout-header style="height: 64px;">
       Cool Header
     </n-layout-header>
     <n-layout position="absolute" style="top: 64px; bottom: 64px;">
-      <n-layout-sider position="absolute" :use-native-scrollbar="false">
+      <n-layout-sider position="absolute" ref="sider" style="overflow: auto;">
         <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>
         <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>
         <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>
         <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>
       </n-layout-sider>
-      <n-layout position="absolute" :use-native-scrollbar="false">
+      <n-layout position="absolute" :use-native-scrollbar="false" ref="content">
         <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>
         <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>
         <n-h1>Long</n-h1><n-h1>Long</n-h1><n-h1>Long</n-h1>
@@ -23,4 +32,9 @@ Sometimes you will find native scrollbar doesn't meet the style of naive-ui. You
       Cool Footer
     </n-layout-footer>
   </n-layout>
+```
+```css
+.n-button {
+  margin: 0 8px 12px 0;
+}
 ```

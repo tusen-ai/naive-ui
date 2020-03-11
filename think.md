@@ -119,11 +119,17 @@ Previously, it would not work with single quotes:
 const devtoolIsOpened = e.target === document.activeElement
 ```
 
+## 2020.3.7
+主体差不多做完了，好累
+
+## 2020.3.8
+zindex 有点问题
+
 
 ## TODO 排序不分先后
 1. <del>Focus Detector on Time Selector</del>
 2. <del>Menu Root Indent = 0 可能造成问题</del>
-3. 用 RAF 优化 scrollbar 性能（不一定需要）
+3. <del>用 RAF 优化 scrollbar 性能（不一定需要）</del>为了有时候滚动同步的一致性，决定不做了
 4. <del>Anchor 切换有 bug，忽然闪现第一个</del>
 5. <del>Safari select lightbar container overflow 边角（或许是 webkit 的问题）</del>默认选中第一个可以装作这个问题不存在
 6. <del>Chrome lightbar offset @table fitler</del> select menu 始终存在这个问题，不知道原因是什么
@@ -189,7 +195,11 @@ const devtoolIsOpened = e.target === document.activeElement
 66. Icon 颜色
 67. <del>Modal 滚动之后的 transform origin</del>
 68. <del>Slider 对于 modal 适配</del>
-69. table fixed scroll checkbox, not sync
+69. <del>table fixed scroll checkbox, not sync</del>
+70. <del>Transfer no data</del>
+71. <del>Metropolis 从自带字体去掉<del>
+72. <del>Input Group</del>
+73. <del>Dropdown API 修改为 label + value，目前为止 UI 并没有出现过 key，不能只为了它搞特殊，value 可以，key 甚至会另有作用，现在占用实际是个危险的事情</del>
 
 ```
 Done

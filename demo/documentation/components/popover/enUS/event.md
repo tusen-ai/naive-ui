@@ -10,7 +10,7 @@
 >
   <template v-slot:activator>
     <n-button>
-      California Girls(Hover)
+      Hover
     </n-button>
   </template>
   <span>
@@ -27,7 +27,7 @@
 >
   <template v-slot:activator>
     <n-button>
-      California Girls(Click)
+      Click
     </n-button>
   </template>
   <span>
@@ -44,7 +44,7 @@
 >
   <template v-slot:activator>
     <n-button @click="showPopover = !showPopover">
-      California Girls(Manual)
+      Manual
     </n-button>
   </template>
   <span>

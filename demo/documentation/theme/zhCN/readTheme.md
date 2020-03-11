@@ -1,5 +1,5 @@
 # 获取主题
-使用配置消费者（Config Consumer）来获取当前位置上的主题。
+使用配置消费者 `n-config-consumer` 来获取当前位置上的主题。
 
 ```html
 <n-config-provider :theme="theme">

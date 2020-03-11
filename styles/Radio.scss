@@ -17,9 +17,22 @@
   }
 }
 
+@mixin radio-size-mixin ($size) {
+  @include m($size + '-size') {
+    font-size: map-get($--n-font-size, $size);
+    @include e(control) {
+      height: map-get($--n-radio-size, $size);
+      width: map-get($--n-radio-size, $size);
+    }
+  }
+}
+
 @include themes-mixin {
   @include b(radio) {
     @include once {
+      @include radio-size-mixin('small');
+      @include radio-size-mixin('medium');
+      @include radio-size-mixin('large');
       outline: none;
       position: relative;
       user-select: none;
@@ -38,11 +51,9 @@
         transition:
           background-color .3s $--n-ease-in-out-cubic-bezier,
           box-shadow .3s $--n-ease-in-out-cubic-bezier;
-        height: 14px;
-        width: 14px;
-        border-radius: 7px;
         margin-right: 9px;
         position: relative;
+        border-radius: 50%;
       }
       background-color: map-get($--radio-background-color, 'default');
       box-shadow: map-get($--radio-box-shadow, 'default');
@@ -53,9 +64,9 @@
           position: absolute;
           left: 4px;
           top: 4px;
-          height: 6px;
-          width: 6px;
-          border-radius: 4px;
+          height: calc(100% - 8px);
+          width: calc(100% - 8px);
+          border-radius: 50%;
           transform: scale(.8);
           transition: 
             opacity .3s $--n-ease-in-out-cubic-bezier,

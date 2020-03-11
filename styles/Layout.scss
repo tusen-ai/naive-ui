@@ -8,21 +8,17 @@
       box-sizing: border-box;
       position: relative;
       z-index: auto;
-      display: flex;
-      flex-wrap: nowrap;
       transition:
         margin-left .3s $--n-ease-in-out-cubic-bezier,
         background-color .3s $--n-ease-in-out-cubic-bezier,
         color .3s $--n-ease-in-out-cubic-bezier;
-      flex-direction: column;
-      overflow: auto;
+      flex: auto;
+      overflow-x: hidden;
       @include m(has-sider) {
+        display: flex;
+        flex-wrap: nowrap;
+        width: 100%;
         flex-direction: row;
-        & > {
-          @include b(layout) {
-            flex: 1;
-          }
-        }
       }
       @include m(absolute-positioned) {
         position: absolute;
@@ -141,7 +137,6 @@
           right: 0;
           top: 0;
           bottom: 0;
-          overflow: auto;
         }
       }
     }

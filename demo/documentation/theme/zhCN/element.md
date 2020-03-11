@@ -1,5 +1,5 @@
-# 使用元素（Element）组件
-Naive UI 提供元素组件，参考 [Element](n-element)。
+# 使用元素组件
+Naive UI 提供 `n-element` 组件，参考 [Element](n-element)。
 ```html
 <n-config-provider :theme="theme">
   <div style="background-color: rgba(128, 128, 128); padding: 8px;">

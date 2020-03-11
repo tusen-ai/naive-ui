@@ -19,7 +19,7 @@ Vue.use(NaiveUI)
 NaiveUI.setHljs(hljs)
 ```
 
-## 例子
+## 演示
 
 ```demo
 basic
