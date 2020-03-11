@@ -1,8 +1,10 @@
 # Custom
 ```html
-<n-custom-input
-  v-model="test1"
+<n-custom-add
+  v-model="test"
   title="Add CheckBox"
+  preset="custom"
+  :on-add="add"
 >
   <template v-slot="slotProps">
     <div style="width:100%">
@@ -20,17 +22,31 @@
       />
     </div>
   </template>
-</n-custom-input>
+</n-custom-add>
+<pre>
+{{  JSON.stringify(test,0,2) }}
+</pre>
 ```
 ```js
 export default {
   data () {
     return {
-      test1: [
-        {
-          isCheck: true
-        }
+      test: [
+       {
+         isCheck: true,
+         num: 1,
+         string: 'Test string'
+       }
       ]
+    }
+  },
+  methods: {
+    add (resolve) {
+      resolve({
+        isCheck: false,
+        num: 1,
+        string: 'Test string'
+      })
     }
   }
 }

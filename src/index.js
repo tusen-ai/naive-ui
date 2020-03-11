@@ -8,7 +8,7 @@ import RoundButton from './Button'
 import Switch from './Switch'
 import Select from './Select'
 import Cascader from './Cascader'
-import CustomInput from './CustomInput'
+import CustomAdd from './CustomAdd'
 import Modal from './Modal'
 import Input from './Input'
 import Message from './Message'
@@ -102,7 +102,7 @@ export default create({
     InputNumber,
     Radio,
     Cascader,
-    CustomInput,
+    CustomAdd,
     Form,
     Tabs,
     TimePicker,
