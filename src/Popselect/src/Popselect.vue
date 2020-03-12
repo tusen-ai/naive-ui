@@ -62,6 +62,9 @@ export default {
         containerClass: 'n-popselect',
         showArrow: context.props.showArrow,
         zIndex: context.props.zIndex,
+        overlayStyle: {
+          padding: 0
+        },
         controller
       },
       on: {

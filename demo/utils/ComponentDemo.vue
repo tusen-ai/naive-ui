@@ -2,11 +2,13 @@
 {
   "zh-CN": {
     "show": "显示代码",
-    "hide": "收起代码"
+    "hide": "收起代码",
+    "editOnGithub": "在 Github 上编辑"
   },
   "en-US": {
     "show": "Show Code",
-    "hide": "Hide Code"
+    "hide": "Hide Code",
+    "editOnGithub": "Edit on Github"
   }
 }
 </i18n>
@@ -25,46 +27,47 @@
     </template>
 
     <template v-slot:header-extra>
-      <n-tooltip
-        :delay="300"
-        :placement="'top'"
-        :show-arrow="true"
-        :controller="controller"
-      >
-        <template v-slot:activator>
-          <a target="_blank" :href="gheUrl" style="margin-right:10px;">
+      <n-button-group size="tiny">
+        <n-tooltip
+          :delay="300"
+          :placement="'top'"
+          :show-arrow="true"
+        >
+          <template v-slot:activator>
             <n-button
-              size="tiny"
+              style="padding: 0 2px 0 8px"
               ghost
+              round
+              @click="handleEditOnGithubClick"
             >
               <template v-slot:icon>
-                <open-outline />
+                <create-outline />
               </template>
             </n-button>
-          </a>
-        </template>
-        {{ $t('ghe url') }}
-      </n-tooltip>
-      <n-tooltip
-        :delay="300"
-        :placement="'top'"
-        :show-arrow="true"
-        :controller="controller"
-      >
-        <template v-slot:activator>
-          <n-button
-            size="tiny"
-            ghost
-            circle
-            @click="toggleCodeDisplay"
-          >
-            <template v-slot:icon>
-              <md-code />
-            </template>
-          </n-button>
-        </template>
-        {{ !showCode ? $t('show') : $t('hide') }}
-      </n-tooltip>
+          </template>
+          {{ $t('editOnGithub') }}
+        </n-tooltip>
+        <n-tooltip
+          :delay="300"
+          :placement="'top'"
+          :show-arrow="true"
+          :controller="controller"
+        >
+          <template v-slot:activator>
+            <n-button
+              style="padding: 0 6px 0 4px"
+              ghost
+              round
+              @click="toggleCodeDisplay"
+            >
+              <template v-slot:icon>
+                <code-outline />
+              </template>
+            </n-button>
+          </template>
+          {{ !showCode ? $t('show') : $t('hide') }}
+        </n-tooltip>
+      </n-button-group>
     </template>
     <slot name="content" />
     <slot name="demo" />
@@ -77,14 +80,14 @@
 </template>
 
 <script>
-import mdCode from '../../src/_icons/md-code'
-import openOutline from '../../src/_icons/open-outline'
+import codeOutline from '../../src/_icons/code-outline'
+import createOutline from '../../src/_icons/create-outline'
 import { state } from '../store'
 
 export default {
   components: {
-    mdCode,
-    openOutline
+    codeOutline,
+    createOutline
   },
   inject: {
     NDocumentation: {
@@ -106,11 +109,9 @@ export default {
     mode () {
       return this.state.mode
     },
-    gheUrl () {
-      const resourcePath = this.NDocumentation.url
-      const reg = /demo.*/
-      const path = resourcePath.match(reg)
-      return 'https://***REMOVED***/tree/develop/' + path
+    url () {
+      const relativePath = this.NDocumentation.url
+      return 'https://***REMOVED***/tree/develop/' + relativePath
     }
   },
   watch: {
@@ -132,6 +133,9 @@ export default {
     this.init()
   },
   methods: {
+    handleEditOnGithubClick () {
+      window.open(this.url, '_blank')
+    },
     toggleCodeDisplay () {
       this.showCode = !this.showCode
     },

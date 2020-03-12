@@ -1,6 +1,6 @@
-# 基础用法
+# Basic
 ```html
-<n-custom-add
+<n-dynamic-input
   v-model="test"
   placeholder-key="placeholder1"
   placeholder-value="placeholder2"

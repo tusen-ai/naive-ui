@@ -1,18 +1,18 @@
 <template>
-  <div class="n-custom-add">
+  <div class="n-dynamic-input">
     <div
       v-for="(item, index) in value"
       :key="index"
-      class="n-custom-add-item"
+      class="n-dynamic-input-item"
     >
-      <n-custom-add-input
+      <n-dynamic-input-input
         v-if="preset==='input'"
         :item="item"
         :index="index"
         :parent-path="NFormItem && NFormItem.path"
         :path="NFormItem && NFormItem.path + '[' + index + ']'"
       />
-      <n-custom-add-pair
+      <n-dynamic-input-pair
         v-else-if="preset==='pair'"
         :item="item"
         :index="index"
@@ -20,7 +20,7 @@
         :path="NFormItem && NFormItem.path + '[' + index + ']'"
       />
       <slot v-else :item="item" :index="index" />
-      <div class="n-custom-add-item__action">
+      <div class="n-dynamic-input-item__action">
         <n-button-group>
           <n-button
             circle
@@ -51,14 +51,14 @@ import NButtonGroup from '../../Button/src/ButtonGroup'
 import mdAdd from '../../_icons/md-add'
 import mdRemove from '../../_icons/md-remove'
 import asformitem from '../../_mixins/asformitem'
-import NCustomAddPair from './pair'
-import NCustomAddInput from './input'
+import NDynamicInputPair from './pair'
+import NDynamicInputInput from './input'
 
 export default {
-  name: 'NCustomAdd',
+  name: 'NDynamicInput',
   components: {
-    NCustomAddPair,
-    NCustomAddInput,
+    NDynamicInputPair,
+    NDynamicInputInput,
     NButtonGroup,
     NButton,
     mdAdd,
@@ -66,7 +66,7 @@ export default {
   },
   provide () {
     return {
-      NCustomAdd: this
+      NDynamicInput: this
     }
   },
   mixins: [asformitem({

@@ -17,12 +17,12 @@
     <n-input :disabled="!model.password" v-model="model.reenteredPassword" type="password"/>
   </n-form-item-row>
    <n-form-item-row label="Env" path="env" rule-path="null">
-    <n-custom-add
+    <n-dynamic-input
       v-model="model.env"
     />
   </n-form-item-row>
   <n-form-item-row label="group" path="group" rule-path="null">
-    <n-custom-add
+    <n-dynamic-input
       v-model="model.group"
     >
       <template v-slot="slotProps">
@@ -41,7 +41,7 @@
           </n-form-item>
         </div>
       </template>
-    </n-custom-add>
+    </n-dynamic-input>
   </n-form-item-row>
   <n-row :gutter="[0, 24]">
     <n-col :span="24">

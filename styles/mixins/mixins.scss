@@ -86,7 +86,7 @@ $default-theme: 'light';
 
 @mixin themes-mixin() {
   $in-themes-mixin: true !global;
-  $theme: 'dark' !global;
+  $theme: 'light' !global;
   @include setup-light-theme();
   @content;
   $common-css-attrs-generated: true !global;
