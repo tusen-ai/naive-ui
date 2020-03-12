@@ -43,7 +43,7 @@
             </n-button>
           </a>
         </template>
-        {{ $t('ghe url') }}
+        {{ $t('ghe url') }} {{ name }}
       </n-tooltip>
       <n-tooltip
         :delay="300"
@@ -109,7 +109,7 @@ export default {
     gheUrl () {
       const resourcePath = this.NDocumentation.url
       const reg = /demo.*/
-      const path = resourcePath.match(reg)
+      const path = resourcePath.match(reg)[0].replace('index.md', this.name + '.md')
       return 'https://***REMOVED***/tree/develop/' + path
     }
   },
@@ -136,7 +136,7 @@ export default {
       this.showCode = !this.showCode
     },
     init () {
-      console.log('this', this.NDocumentation.url)
+      console.log('this111111', this.NDocumentation.url)
       const map = this.NDocumentation.anchorLinkMap
       this.isDebug = this.name && (~this.name.indexOf('debug') || ~this.name.indexOf('Debug'))
       if (this.isDebug) {

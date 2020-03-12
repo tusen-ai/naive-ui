@@ -19,7 +19,7 @@
 <script>
 import DocHeader from './header.vue'
 import menuOptions from './menuOptions'
-import { i18n } from './init'
+import { i18n } from './deploymentInit'
 import { setState } from './store'
 
 export default {
