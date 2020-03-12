@@ -79,4 +79,25 @@ createDirIfNotExists(__dirname, '../es', 'icons')
       }
     )
   })
+  let iconNamesCode = `export default { 
+    iconNames: ${JSON.stringify(iconNames)}
+    }; `
+  fs.writeFile(
+    path.resolve(cjsPath, 'iconNames.js'),
+    iconNamesCode,
+    (err) => {
+      if (err) {
+        console.log(err)
+      }
+    }
+  )
+  fs.writeFile(
+    path.resolve(esmPath, 'iconNames.js'),
+    iconNamesCode,
+    (err) => {
+      if (err) {
+        console.log(err)
+      }
+    }
+  )
 })()
