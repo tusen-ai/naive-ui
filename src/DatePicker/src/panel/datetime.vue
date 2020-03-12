@@ -15,6 +15,7 @@
       >
         <n-input
           v-model="displayDateString"
+          :theme="theme"
           :stateful="false"
           size="small"
           class="n-date-panel-date-input"
@@ -28,6 +29,7 @@
         <n-time-picker
           :format="timeFormat"
           :stateful="false"
+          :theme="theme"
           size="small"
           position-mode="absolute"
           :detachable="false"
@@ -106,6 +108,7 @@
       >
         <n-button
           v-if="actions.includes('clear')"
+          :theme="theme"
           size="tiny"
           round
           @click="clearValue"
@@ -114,6 +117,7 @@
         </n-button>
         <n-button
           v-if="actions.includes('now')"
+          :theme="theme"
           size="tiny"
           round
           @click="setSelectedDateTimeToNow"
@@ -122,6 +126,7 @@
         </n-button>
         <n-button
           v-if="actions.includes('confirm')"
+          :theme="theme"
           size="tiny"
           round
           type="primary"

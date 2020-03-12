@@ -29,9 +29,9 @@ use-component
 |show-icon|`boolean`|`true`||
 |loading|`boolean`|`false`||
 |bordered|`boolean`|`false`||
-|onPositiveClick|`(hide: function) => any`|`hide => hide()`||
-|onNegativeClick|`(hide: function) => any`|`hide => hide()`|
-|onClose|`(hide: function) => any`|`hide => hide()`||
+|onPositiveClick|`() => Promise<boolean> \| boolean`|`() => true`|默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为|
+|onNegativeClick|`() => Promise<boolean> \| boolean`|`() => true`|默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为|
+|onClose|`() => Promise<boolean> \| boolean`|`() => true`|默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为|
 
 ### ConfirmEnvironment API
 #### ConfirmEnvironment Properties

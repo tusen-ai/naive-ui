@@ -21,10 +21,10 @@ export default {
         content:
           'Click and count down 3 second',
         positiveText: 'Confirm',
-        onPositiveClick: hide => {
+        onPositiveClick: () => {
           confirmInstance.loading = true
           this.$NMessage.success('Count down 3 second')
-          window.setTimeout(hide, 3000)
+          return new Promise(resolve => window.setTimeout(() => resolve(true), 3000))
         }
       })
     }

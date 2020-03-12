@@ -24,6 +24,7 @@ event
 ### Checkbox Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |value|`string \| number`|`null`||
 |checked|`boolean`|`false`||
 |disabled|`boolean`|`false`||
@@ -31,6 +32,7 @@ event
 ### Checkbox Group Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |value|`Array<string \| number>`|`null`||
 |disabled|`boolean`|`false`||
 

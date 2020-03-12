@@ -78,6 +78,7 @@
       >
         <n-button
           v-if="actions.includes('clear')"
+          :theme="theme"
           size="tiny"
           round
           @click="clearValue"
@@ -86,6 +87,7 @@
         </n-button>
         <n-button
           v-if="actions.includes('now')"
+          :theme="theme"
           size="tiny"
           round
           @click="setSelectedDateTimeToNow"
@@ -94,6 +96,7 @@
         </n-button>
         <n-button
           v-if="actions.includes('confirm')"
+          :theme="theme"
           size="tiny"
           round
           type="primary"

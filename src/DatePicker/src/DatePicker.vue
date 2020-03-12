@@ -15,6 +15,7 @@
       v-if="isRange"
       ref="input"
       :size="syntheticSize"
+      :theme="syntheticTheme"
       passively-activated
       :disabled="disabled"
       :value="[displayStartTime, displayEndTime]"
@@ -40,6 +41,7 @@
       v-else
       ref="input"
       v-model="displayTime"
+      :theme="syntheticTheme"
       passively-activated
       :size="syntheticSize"
       :force-focus="active"

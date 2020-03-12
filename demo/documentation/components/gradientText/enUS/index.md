@@ -13,6 +13,7 @@ custom
 |Name|Type|Default|Description|
 |-|-|-|-|
 |theme|`'light' \| 'dark'`|`null`||
+|themed-style|`{ [themeName: string]: object }`|`null`||
 |type|`'primary' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'primary'`||
 |size|`number \| string`|`null`||
 |gradient|`string \| { from: string, to: string, deg: number \| string }`|`null`||

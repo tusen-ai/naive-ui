@@ -205,6 +205,8 @@ zindex 的问题解决了，虽然很简单，在 static 元素上设定 zindex 
 73. <del>Dropdown API 修改为 label + value，目前为止 UI 并没有出现过 key，不能只为了它搞特殊，value 可以，key 甚至会另有作用，现在占用实际是个危险的事情</del>
 74. card slot
 75. table fixed computed left right
+76. gradient text 的切换能解决？
+77. Auto Complete Group
 
 ```
 Done

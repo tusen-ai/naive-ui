@@ -86,11 +86,10 @@
   @include badge-ripple-mixin('error');
   @include b(badge) {
     @include once {
-      display: inline-block;
+      display: inline-flex;
       position: relative;
       vertical-align: middle;
       @include m(as-is) {
-        display: inline-flex;
         @include b(badge-sup) {
           @include fade-in-scale-up-transition(
             badge,

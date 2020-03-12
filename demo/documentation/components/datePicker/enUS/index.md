@@ -23,6 +23,7 @@ format
 ### All Types Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |value|`number`|`null`||
 |actions|`Array<'clear' \| 'now' \| 'confirm'>`|`null`||
 |clearable|`boolean`|`false`||

@@ -14,6 +14,7 @@ processing
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |processing|`boolean`|`false`||
 |type|`'line' \| 'circle' \| 'multiple-circle'`|`line`||
 |status|`'default' \| 'success' \| 'error' \| 'warning' \| 'info'`|`'default'`||

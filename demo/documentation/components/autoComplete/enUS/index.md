@@ -15,6 +15,7 @@ after-select
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |value|`string`|`null`||
 |options|`Array<AutoCompleteOption \| AutoCompleteOptionGroup>`|`[]`||
@@ -41,7 +42,7 @@ after-select
 ## Slots
 |Name|Parameters|Description|
 |-|-|-|
-|default|`({ handleInput: (value: string) => any, handleFocus: function, handleBlur: function, value: string })`||
+|default|`({ handleInput: (value: string) => any, handleFocus: function, handleBlur: function, value: string, theme: string \| null })`||
 
 ## Events
 |Name|Parameters|Description|

@@ -20,7 +20,7 @@
             class="n-drawer"
             :style="{
               ...drawerStyle,
-              ...themedStyle,
+              ...syntheticStyle,
               width: styleWidth,
               height: styleHeight
             }"

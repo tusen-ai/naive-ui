@@ -14,6 +14,7 @@
       font-size: inherit;
       background-clip: text;
       color: transparent;
+      white-space: nowrap;
     }
     @include gradient-text-type-mixin(default);
     @include gradient-text-type-mixin(success);
