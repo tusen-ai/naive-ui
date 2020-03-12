@@ -125,6 +125,9 @@ const devtoolIsOpened = e.target === document.activeElement
 ## 2020.3.8
 zindex 有点问题
 
+## 2020.3.11
+zindex 的问题解决了，虽然很简单，在 static 元素上设定 zindex 没用，😅
+
 
 ## TODO 排序不分先后
 1. <del>Focus Detector on Time Selector</del>

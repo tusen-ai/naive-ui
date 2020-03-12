@@ -20,12 +20,15 @@
             class="n-drawer"
             :style="{
               ...drawerStyle,
+              ...themedStyle,
               width: styleWidth,
               height: styleHeight
             }"
             :class="{
               [`n-drawer--${placement}-placement`]: true,
-              [`n-${syntheticTheme}-theme`]: syntheticTheme
+              [`n-${syntheticTheme}-theme`]: syntheticTheme,
+              [drawerClass]: drawerClass,
+              [namespace]: namespace
             }"
           >
             <slot />
@@ -80,6 +83,10 @@ export default {
     },
     drawerStyle: {
       type: Object,
+      default: null
+    },
+    drawerClass: {
+      type: String,
       default: null
     },
     /** Todo */
