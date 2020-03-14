@@ -1,0 +1,190 @@
+<template>
+  <div class="n-dynamic-input">
+    <div
+      v-for="(_, index) in value"
+      :key="keyField ? _[keyField] : index"
+      :data-key="keyField ? _[keyField] : index"
+      class="n-dynamic-input-item"
+    >
+      <slot v-if="$scopedSlots.default" :value="value[index]" :index="index" />
+      <n-dynamic-input-input-preset
+        v-else-if="preset === 'input'"
+        v-model="value[index]"
+        :parent-path="NFormItem && NFormItem.path"
+        :path="NFormItem && NFormItem.path + '[' + index + ']'"
+      />
+      <n-dynamic-input-pair-preset
+        v-else-if="preset === 'pair'"
+        v-model="value[index]"
+        :parent-path="NFormItem && NFormItem.path"
+        :path="NFormItem && NFormItem.path + '[' + index + ']'"
+      />
+      <div class="n-dynamic-input-item__action">
+        <n-button-group>
+          <n-button
+            v-if="!removalDisabled"
+            circle
+            @click="remove($event, index)"
+          >
+            <template v-slot:icon>
+              <md-remove />
+            </template>
+          </n-button>
+          <n-button
+            v-if="!insertionDisabled"
+            circle
+            @click="createItem($event, index)"
+          >
+            <template v-slot:icon>
+              <md-add />
+            </template>
+          </n-button>
+        </n-button-group>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import NButton from '../../Button'
+import NButtonGroup from '../../Button/src/ButtonGroup'
+import mdAdd from '../../_icons/md-add'
+import mdRemove from '../../_icons/md-remove'
+import NDynamicInputInputPreset from './InputPreset'
+import NDynamicInputPairPreset from './PairPreset'
+
+export default {
+  name: 'NDynamicInput',
+  components: {
+    NDynamicInputInputPreset,
+    NDynamicInputPairPreset,
+    NButtonGroup,
+    NButton,
+    mdAdd,
+    mdRemove
+  },
+  provide () {
+    return {
+      NDynamicInput: this
+    }
+  },
+  props: {
+    max: {
+      type: Number,
+      default: null
+    },
+    min: {
+      type: Number,
+      default: null
+    },
+    value: {
+      validator (value) {
+        return Array.isArray(value) && value.length
+      },
+      required: true
+    },
+    onCreate: {
+      type: Function,
+      default: null
+    },
+    preset: {
+      validator (value) {
+        console.log('check preset', value)
+        return ['input', 'pair'].includes(value)
+      },
+      default: 'input'
+    },
+    keyField: {
+      type: String,
+      default: null
+    },
+    /** for preset pair */
+    keyPlaceholder: {
+      type: String,
+      default: ''
+    },
+    valuePlaceholder: {
+      type: String,
+      default: ''
+    },
+    /** for preset input */
+    placeholder: {
+      type: String,
+      default: ''
+    }
+  },
+  data () {
+    return {
+      NFormItem: null // useless code, for debug
+    }
+  },
+  computed: {
+    insertionDisabled () {
+      return this.max !== null && this.value.length >= this.max
+    },
+    removalDisabled () {
+      return this.min !== null && this.value.length <= this.min
+    }
+  },
+  methods: {
+    handleValueChange (value) {
+      this.value = value
+    },
+    createItem (e, index) {
+      const onCreate = this.onCreate
+      this.$emit('add')
+      if (onCreate) {
+        this.value.splice(index + 1, 0, onCreate(index + 1))
+        return
+      }
+      if (this.$slots.default) {
+        this.value.splice(index + 1, 0, null)
+        return
+      }
+      switch (this.preset) {
+        case 'input':
+          this.value.splice(index + 1, 0, null)
+          break
+        case 'pair':
+          this.value.splice(index + 1, 0, { key: null, value: null })
+          break
+      }
+    },
+    remove (e, index) {
+      if (this.value.length === 1) {
+        const onCreate = this.onCreate
+        this.$emit('clear')
+        if (onCreate) {
+          const keyField = this.keyField
+          if (keyField) {
+            const memorizedKeyField = this.value[0][keyField]
+            this.$emit('input', [ Object.assign(onCreate(0), {
+              [keyField]: memorizedKeyField
+            })])
+          } else {
+            this.$emit('input', [ onCreate(0) ])
+          }
+          return
+        }
+        if (this.$slots.default) {
+          this.$emit('input', [ null ])
+          return
+        }
+        switch (this.preset) {
+          case 'input':
+            this.$emit('input', [ null ])
+            break
+          case 'pair':
+            this.$emit('input', [ { key: null, value: null } ])
+            break
+        }
+      } else {
+        const changedValue = Array.from(this.value)
+        changedValue.splice(index, 1)
+        this.$emit('input', changedValue)
+        this.$emit('remove', index)
+      }
+    }
+  }
+}
+</script>

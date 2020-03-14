@@ -11,15 +11,26 @@
       @include b(dynamic-input-item) {
         margin-bottom: 10px;
         display: flex;
-        @include e(content) {
+        flex-wrap: nowrap;
+        @include b(dynamic-input-preset-input) {
           flex: 1;
-          display: inline-block;
+        }
+        @include b(dynamic-input-preset-pair) {
+          flex: 1;
           display: flex;
+          @include b(dynamic-input-pair-input){
+            &:first-child {
+              margin-right: 12px;
+            }
+          }
         }
         @include e(action) {
           width: 80px;
           display: flex;
-          margin-left: 13px;
+          justify-content: flex-end;
+          align-items: flex-start;
+          flex-shrink: 0;
+          flex-grow: 0;
           @include m(icon) {
             cursor: pointer;
           }
@@ -28,20 +39,11 @@
           margin-bottom: 0;
         }
       }
-      @include b(dynamic-input-pair) {
-        width: 100%;
-        display: flex;
-        @include b(dynamic-input-item-input-container-input) {
-          display: inline-block;
-          flex: 1;
-        }
-        @include b(form-item) {
-          padding-top: 0!important;
-        }
-      }
-      @include b(dynamic-input-pair-input){
-        &:first-child {
-          margin-right: 13px;
+      @include b(form-item) {
+        padding-top: 0 !important;
+        margin-right: 0 !important;
+        @include b(form-item-blank) {
+          padding: 0 !important;
         }
       }
     }

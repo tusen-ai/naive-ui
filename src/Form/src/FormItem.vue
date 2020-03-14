@@ -127,6 +127,10 @@ export default {
         return ['small', 'medium', 'large'].includes(value)
       },
       default: null
+    },
+    ignorePathChange: {
+      type: Boolean,
+      default: false
     }
   },
   inject: {
@@ -232,6 +236,7 @@ export default {
   },
   watch: {
     path () {
+      if (this.ignorePathChange) return
       this._initData()
     }
   },

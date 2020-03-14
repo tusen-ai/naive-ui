@@ -210,6 +210,8 @@ zindex 的问题解决了，虽然很简单，在 static 元素上设定 zindex 
 78. select add tag
 79. dynamic input
 80. input 严格受控
+81. 搞明白 vue 的 scoped 和 普通的关系
+82. Form Item 不返回 true 的时候... 错误信息不会消失，这似乎不太合理
 
 ```
 Done

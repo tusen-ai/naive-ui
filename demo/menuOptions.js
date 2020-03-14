@@ -203,7 +203,7 @@ export default function (locale, instance) {
           },
           {
             name: 'Dynamic Input',
-            title: '动态输入',
+            title: '动态录入',
             titleExtra: 'Dynamic Input',
             path: `/${instance.lang}/${instance.theme}/doc` + '/n-dynamic-input'
           },

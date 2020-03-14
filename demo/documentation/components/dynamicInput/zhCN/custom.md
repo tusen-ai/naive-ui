@@ -1,52 +1,52 @@
-# 自定义
+# 自定义内容
 ```html
 <n-dynamic-input
-  v-model="test"
-  title="Add CheckBox"
-  preset="custom"
-  :onAdd="add"
+  v-model="customValue"
+  :on-add="onAdd"
 >
-  <template v-slot="slotProps">
-    <div style="width:100%">
-      <n-checkbox
-        v-model="slotProps.item.isCheck"
-        style="width: 120px;"
-      />
-      <n-input-number
-        v-model="slotProps.item.num"
-      />
-      <n-input
-        v-model="slotProps.item.string"
-        type="input"
-        size="small"
-      />
+  <template v-slot="{ value }">
+    <div style="width: 100%;">
+      <div style="display: flex; align-items: center;">
+        <n-checkbox
+          v-model="value.isCheck"
+          style="margin-right: 12px;"
+        />
+        <n-input-number
+          v-model="value.num"
+          style="margin-right: 12px; width: 160px;"
+        />
+        <n-input
+          v-model="value.string"
+          type="input"
+        />
+      </div>
     </div>
   </template>
 </n-dynamic-input>
 <pre>
-{{  JSON.stringify(test,0,2) }}
+{{  JSON.stringify(customValue, 0, 2) }}
 </pre>
 ```
 ```js
 export default {
   data () {
     return {
-      test: [
+      customValue: [
         {
           isCheck: true,
           num: 1,
-          string: 'Test string'
+          string: 'A String'
         }
       ]
     }
   },
   methods: {
-    add (resolve) {
-      resolve({
+    onAdd () {
+      return {
         isCheck: false,
         num: 1,
-        string: 'Test string'
-      })
+        string: 'A String'
+      }
     }
   }
 }
