@@ -18,6 +18,7 @@ validator
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |value|`number`|`null`||
 |step|`number`|`1`||
 |min|`number`|`null`||

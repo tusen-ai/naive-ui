@@ -13,6 +13,7 @@ event
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |value|`boolean`|`false`||
 |disabled|`boolean`|`false`||
 
