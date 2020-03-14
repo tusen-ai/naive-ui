@@ -137,7 +137,7 @@ zindex 的问题解决了，虽然很简单，在 static 元素上设定 zindex 
 5. <del>Safari select lightbar container overflow 边角（或许是 webkit 的问题）</del>默认选中第一个可以装作这个问题不存在
 6. <del>Chrome lightbar offset @table fitler</del> select menu 始终存在这个问题，不知道原因是什么
 7. <del>cascader 数据结构重构，维持原选项！</del> 这个不做了，对 Children 的处理过于边角，Patch 那块也会从声明式变成命令式
-8. <del>排查 render 函数是否每个地方都支持数组</del>
+8. <del>排查 render 函数是否每个地方都支持数组</del> 我现在明白了，只要套上数组，vue 就能完美的渲染
 9. <del>form async validation</del>
 10. <del>table filter 重构支持异步</del>
 11. <del>tabs resize bug</del>
@@ -151,7 +151,7 @@ zindex 的问题解决了，虽然很简单，在 static 元素上设定 zindex 
 19. <del>icon 的默认 stroke</del>
 20. <del>tree 组件</del>
 21. <del>文件上传组件</del>
-22. custom-input 废弃或者重构
+22. <del>custom-input 废弃或者重构</del>
 23. Date 键盘操作 Time 键盘操作
 24. <del>Time 格式化</del>
 25. <del>Date 格式化</del>
@@ -207,6 +207,9 @@ zindex 的问题解决了，虽然很简单，在 static 元素上设定 zindex 
 75. table fixed computed left right
 76. gradient text 的切换能解决？
 77. Auto Complete Group
+78. select add tag
+79. dynamic input
+80. input 严格受控
 
 ```
 Done

@@ -1,7 +1,7 @@
 # Result
 Result is for showing result.
 
-Many thanks to [twemoji](https://github.com/twitter/twemoji) for creating those high quality icons!
+Many thanks to [twemoji](https://github.com/twitter/twemoji) for creating those high quality icons.
 ## Demos
 ```demo
 s404

@@ -15,7 +15,7 @@
     @mousedown.prevent="() => {}"
   >
     <n-scrollbar
-      v-show="!empty"
+      v-if="!empty"
       ref="scrollbar"
       :theme="theme"
       :scrollable="scrollable"
@@ -38,6 +38,7 @@
               <n-base-tracking-rect
                 v-if="showTrackingRect"
                 ref="trackingRect"
+                key="__select-tracking-rect__"
                 :item-size="itemSize"
                 :theme="theme"
               />
@@ -45,6 +46,7 @@
             <template v-slot="{ item: option }">
               <n-select-option
                 v-if="option.type === OPTION_TYPE.OPTION"
+                :key="option.key"
                 :index="option.index"
                 :wrapped-option="option"
                 :grouped="option.grouped"
@@ -52,6 +54,7 @@
               />
               <n-select-group-header
                 v-else-if="option.type === OPTION_TYPE.GROUP_HEADER"
+                :key="option.key"
                 :data="option.data"
               />
             </template>
@@ -60,6 +63,7 @@
             <n-base-tracking-rect
               v-if="showTrackingRect"
               ref="trackingRect"
+              key="__select-tracking-rect__"
               :item-size="itemSize"
               :theme="theme"
             />
@@ -88,7 +92,7 @@
       </div>
     </n-scrollbar>
     <div
-      v-if="empty"
+      v-else
       style="padding: 14px 0; width: 100%;"
     >
       <slot name="empty">
@@ -305,32 +309,38 @@ export default {
         this.pendingWrappedOption === null
       ) {
         this.setPendingWrappedOptionIndex(
-          getNextAvailableIndex(this.flattenedOptions, null)
+          getNextAvailableIndex(this.flattenedOptions, null),
+          true
         )
       } else {
         this.setPendingWrappedOptionIndex(
-          getNextAvailableIndex(this.flattenedOptions, this.pendingWrappedOptionIndex)
+          getNextAvailableIndex(this.flattenedOptions, this.pendingWrappedOptionIndex),
+          true
         )
       }
     },
     prev () {
       if (this.pendingWrappedOption) {
         this.setPendingWrappedOptionIndex(
-          getPrevAvailableIndex(this.flattenedOptions, this.pendingWrappedOptionIndex)
+          getPrevAvailableIndex(this.flattenedOptions, this.pendingWrappedOptionIndex),
+          true
         )
       }
     },
-    setPendingWrappedOptionIndex (index, doScroll = true) {
+    setPendingWrappedOptionIndex (index, doScroll = false) {
+      if (index === null) {
+        this.pendingWrappedOption = null
+        return
+      }
+      const scrollbar = this.$refs.scrollbar
       if (this.virtualScroll) {
-        if (index !== null) {
-          this.pendingWrappedOption = this.flattenedOptions[index]
-          const size = this.itemSize
-          const offsetTop = size * index
-          this.updateTrackingRectTop({
-            offsetTop
-          })
-          doScroll && this.$refs.scrollbar.scrollToElement({}, () => offsetTop, () => size)
-        }
+        this.pendingWrappedOption = this.flattenedOptions[index]
+        const size = this.itemSize
+        const offsetTop = size * index
+        this.updateTrackingRectTop({
+          offsetTop
+        })
+        doScroll && scrollbar && scrollbar.scrollToElement({}, () => offsetTop, () => size)
       } else {
         this.pendingWrappedOption = this.flattenedOptions[index]
         const el = this.$el
@@ -339,7 +349,7 @@ export default {
         this.updateTrackingRectTop({
           offsetTop
         })
-        doScroll && this.$refs.scrollbar.scrollToElement(optionEl)
+        doScroll && scrollbar && scrollbar.scrollToElement(optionEl)
       }
     },
     /**

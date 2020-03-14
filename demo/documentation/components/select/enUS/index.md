@@ -7,6 +7,7 @@ size
 multiple
 events
 filterable
+tag
 remote
 remote-multiple
 clearable
@@ -24,6 +25,7 @@ action
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |loading|`boolean`|`false`||
 |clearable|`boolean`|`false`||
 |value|`Array \| string \| number`|`false`||
@@ -32,8 +34,11 @@ action
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |disabled|`boolean`|`false`||
 |options|`Array<SelectOption \| SelectOptionGroup>`|`[]`||
-|remote|`boolean`|`false`|If you want to async get options|
-|filter|`(pattern: string, option: Object) => boolean`|`null`||
+|remote|`boolean`|`false`|If you want to async get options. Note that if remote is set, `filter` & `tag` won't work on `options`. At that time, you are taking all control of `options`.|
+|filterable|`boolean`|`false`|Whether it can filter options.|
+|filter|`(pattern: string, option: Object) => boolean`|A basic string based search method.||
+|tag|`boolean`|`false`|Whether it can create new option, should be used with `filterable`.|
+|create-option|`(label: string) => SelectOption`|`label => ({ label, value: label })`|How to create a option when you input a string to create a option. Note that `filter` will be applied to the option too. And make sure the value of the created option is not the same as any other option.|
 
 ## API
 ### SelectOption Type

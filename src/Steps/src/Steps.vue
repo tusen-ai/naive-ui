@@ -1,7 +1,6 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import asthemecontext from '../../_mixins/asthemecontext'
 import hollowoutable from '../../_mixins/hollowoutable'
 
 function stepWithIndex (step, i) {
@@ -24,7 +23,7 @@ export default {
       NSteps: this
     }
   },
-  mixins: [withapp, themeable, asthemecontext, hollowoutable],
+  mixins: [withapp, themeable, hollowoutable],
   props: {
     current: {
       type: Number,
