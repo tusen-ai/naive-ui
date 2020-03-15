@@ -1,5 +1,8 @@
-# 动态录入
+# 动态录入 Dynamic Input
 <!--single-column-->
+这个组件的名字改过很多次。
+
+一开始它被造出来是为了输入环境变量。
 ## 演示
 ```demo
 basic
@@ -13,7 +16,6 @@ form
 |-|-|-|-|
 |preset|`'input' \| 'preset'`|`'input'`|动态录入使用的预设，在不设定 `$scopedSlots.default` 的时候生效|
 |value|`Array`|-|**必需**|
-|min|`number`|`null`|最少有几项内容|
 |max|`number`|`null`|最多有几项内容|
 |key-field|`string`|`null`||
 |on-create|`(index: number) => any`|`null`|点击添加按钮时的回调，如果设定则返回值会被用作新添加的初始值以及清空内容时的初始值。其中 `index` 是创建内容将要被放置到的位置，从 0 开始计算|

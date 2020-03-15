@@ -22,7 +22,6 @@
       <div class="n-dynamic-input-item__action">
         <n-button-group>
           <n-button
-            v-if="!removalDisabled"
             circle
             @click="remove($event, index)"
           >
@@ -31,7 +30,7 @@
             </template>
           </n-button>
           <n-button
-            v-if="!insertionDisabled"
+            :disabled="insertionDisabled"
             circle
             @click="createItem($event, index)"
           >
@@ -70,10 +69,6 @@ export default {
   },
   props: {
     max: {
-      type: Number,
-      default: null
-    },
-    min: {
       type: Number,
       default: null
     },
@@ -121,9 +116,6 @@ export default {
   computed: {
     insertionDisabled () {
       return this.max !== null && this.value.length >= this.max
-    },
-    removalDisabled () {
-      return this.min !== null && this.value.length <= this.min
     }
   },
   methods: {
