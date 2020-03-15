@@ -4,6 +4,7 @@
 ```demo
 basic
 size
+group
 custom-input
 after-select
 ```
@@ -19,10 +20,25 @@ after-select
 |theme|`'light' \| 'dark'`|`null`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |value|`string`|`null`||
-|options|`Array<AutoCompleteOption \| AutoCompleteOptionGroup>`|`[]`||
+|options|`Array<string \| AutoCompleteOption \| AutoCompleteOptionGroup>`|`[]`||
 |placeholder|`string`|`null`||
 |blur-after-select|`boolean`|`false`||
 |clear-after-select|`boolean`|`false`||
+
+### AutoCompleteOption Type
+|属性|类型|介绍|
+|-|-|-|
+|label|`string`||
+|value|`string \| number`|Should be unique in options.|
+|disabled|`boolean`||
+|render|`function`||
+
+### AutoCompleteOptionGroup Type
+|属性|类型|介绍|
+|-|-|-|
+|type|`'group'`||
+|name|`string`||
+|children|`Array<string | AutoCompleteOption>`||
 
 ## Slots
 |名称|参数|说明|

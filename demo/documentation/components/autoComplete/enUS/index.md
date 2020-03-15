@@ -4,6 +4,7 @@ Use as search hint or something similar.
 ```demo
 basic
 size
+group
 custom-input
 after-select
 ```
@@ -18,12 +19,11 @@ after-select
 |theme|`'light' \| 'dark'`|`null`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |value|`string`|`null`||
-|options|`Array<AutoCompleteOption \| AutoCompleteOptionGroup>`|`[]`||
+|options|`Array<string \| AutoCompleteOption \| AutoCompleteOptionGroup>`|`[]`||
 |placeholder|`string`|`null`||
 |blur-after-select|`boolean`|`false`||
 |clear-after-select|`boolean`|`false`||
 
-## API
 ### AutoCompleteOption Type
 |Property|Type|Description|
 |-|-|-|
@@ -37,7 +37,7 @@ after-select
 |-|-|-|
 |type|`'group'`||
 |name|`string`||
-|children|`Array<AutoCompleteOption>`||
+|children|`Array<string | AutoCompleteOption>`||
 
 ## Slots
 |Name|Parameters|Description|

@@ -45,7 +45,7 @@
             class="n-auto-complete-menu"
             :theme="syntheticTheme"
             :pattern="value"
-            :options="filteredOptions"
+            :options="selectOptions"
             :multiple="false"
             :size="syntheticSize"
             :remote="remote"
@@ -69,8 +69,8 @@ import clickoutside from '../../_directives/clickoutside'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asformitem from '../../_mixins/asformitem'
-
 import NBaseSelectMenu from '../../_base/SelectMenu'
+import { mapAutoCompleteOptionsToSelectOptions } from './utils'
 
 export default {
   name: 'NAutoComplete',
@@ -141,13 +141,10 @@ export default {
   },
   computed: {
     active () {
-      return !!this.value && this.canBeActivated && !!this.filteredOptions.length
+      return !!this.value && this.canBeActivated && !!this.selectOptions.length
     },
-    filteredOptions () {
-      return this.options.map(literal => typeof literal === 'string' ? ({
-        label: literal,
-        value: literal
-      }) : literal)
+    selectOptions () {
+      return mapAutoCompleteOptionsToSelectOptions(this.options)
     }
   },
   methods: {
