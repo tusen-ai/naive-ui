@@ -136,7 +136,7 @@ function getAvailableIndex (options, currentIndex, direction) {
   if (direction === 'next') {
     if (currentIndex !== null) {
       iterationStartsAt = currentIndex + 1
-      iterationEndsAt = currentIndex + length
+      iterationEndsAt = currentIndex + length + 1
     } else {
       iterationStartsAt = 0
       iterationEndsAt = length
@@ -144,7 +144,7 @@ function getAvailableIndex (options, currentIndex, direction) {
   } else {
     if (currentIndex !== null) {
       iterationStartsAt = currentIndex + length - 1
-      iterationEndsAt = currentIndex
+      iterationEndsAt = currentIndex - 1
     } else {
       iterationStartsAt = length
       iterationEndsAt = 0
@@ -154,7 +154,7 @@ function getAvailableIndex (options, currentIndex, direction) {
     const option = options[i % length]
     if (option.type === OPTION_TYPE.OPTION) {
       const data = option.data
-      if (!data.disabled) return [i % length]
+      if (!data.disabled) return i % length
     }
     if (direction === 'prev') {
       --i

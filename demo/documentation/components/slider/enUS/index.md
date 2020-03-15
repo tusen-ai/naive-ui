@@ -14,6 +14,7 @@ mark
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |marks|`{ [markValue: number]: string }`|||
 |disabled|`boolean`|`false`||
 |min|`number`|`0`||

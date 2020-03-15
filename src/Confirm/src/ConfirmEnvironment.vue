@@ -44,15 +44,9 @@ export default {
       title: null,
       loading: false,
       event: null,
-      onPositiveClick: () => {
-        this.active = false
-      },
-      onNegativeClick: () => {
-        this.active = false
-      },
-      onClose: () => {
-        this.active = false
-      },
+      onPositiveClick: () => true,
+      onNegativeClick: () => true,
+      onClose: () => true,
       instances: null
     }
   },
@@ -62,13 +56,34 @@ export default {
       this.$destroy()
     },
     handlePositiveClick () {
-      this.onPositiveClick(this.hide)
+      Promise.resolve(
+        this.onPositiveClick()
+      )
+        .then(result => {
+          if (result === false) return
+          this.hide()
+        })
+        .catch(err => console.error(err))
     },
     handleNegativeClick () {
-      this.onNegativeClick(this.hide)
+      Promise.resolve(
+        this.onNegativeClick()
+      )
+        .then(result => {
+          if (result === false) return
+          this.hide()
+        })
+        .catch(err => console.error(err))
     },
     handleCloseClick () {
-      this.onClose(this.hide)
+      Promise.resolve(
+        this.onClose()
+      )
+        .then(result => {
+          if (result === false) return
+          this.hide()
+        })
+        .catch(err => console.error(err))
     },
     hide () {
       this.active = false

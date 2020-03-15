@@ -15,6 +15,7 @@
       v-if="isRange"
       ref="input"
       :size="syntheticSize"
+      :theme="syntheticTheme"
       passively-activated
       :disabled="disabled"
       :value="[displayStartTime, displayEndTime]"
@@ -33,13 +34,14 @@
       @input="handleRangeInput"
     >
       <template v-slot:suffix>
-        <n-icon><time-outline /></n-icon>
+        <n-icon><ios-calendar /></n-icon>
       </template>
     </n-input>
     <n-input
       v-else
       ref="input"
       v-model="displayTime"
+      :theme="syntheticTheme"
       passively-activated
       :size="syntheticSize"
       :force-focus="active"
@@ -56,7 +58,7 @@
       @clear="handleClear"
     >
       <template v-slot:suffix>
-        <n-icon><time-outline /></n-icon>
+        <n-icon><ios-calendar /></n-icon>
       </template>
     </n-input>
     <div
@@ -150,7 +152,7 @@ import DaterangePanel from './panel/daterange'
 
 import NInput from '../../Input'
 import NIcon from '../../Icon'
-import timeOutline from '../../_icons/time-outline'
+import iosCalendar from '../../_icons/ios-calendar'
 
 import format from 'date-fns/format'
 import getTime from 'date-fns/getTime'
@@ -177,7 +179,7 @@ export default {
     DatePanel,
     DatetimerangePanel,
     DaterangePanel,
-    timeOutline
+    iosCalendar
   },
   mixins: [
     withapp,

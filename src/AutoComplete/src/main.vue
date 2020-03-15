@@ -7,8 +7,23 @@
     @compositionstart="handleCompositionStart"
     @compositionend="handleCompositionEnd"
   >
-    <slot :handle-input="handleInput" :handle-focus="handleFocus" :handle-blur="handleBlur" :value="value">
-      <n-input ref="activator" :value="value" :placeholder="placeholder" :size="syntheticSize" @focus="canBeActivated = true" @input="handleInput" @blur="handleBlur" />
+    <slot
+      :handle-input="handleInput"
+      :handle-focus="handleFocus"
+      :handle-blur="handleBlur"
+      :value="value"
+      :theme="syntheticTheme"
+    >
+      <n-input
+        ref="activator"
+        :theme="syntheticTheme"
+        :value="value"
+        :placeholder="placeholder"
+        :size="syntheticSize"
+        @focus="canBeActivated = true"
+        @input="handleInput"
+        @blur="handleBlur"
+      />
     </slot>
     <div
       ref="contentContainer"
@@ -30,7 +45,7 @@
             class="n-auto-complete-menu"
             :theme="syntheticTheme"
             :pattern="value"
-            :options="filteredOptions"
+            :options="selectOptions"
             :multiple="false"
             :size="syntheticSize"
             :remote="remote"
@@ -50,13 +65,12 @@ import NInput from '../../Input'
 import detachable from '../../_mixins/detachable'
 import placeable from '../../_mixins/placeable'
 import zindexable from '../../_mixins/zindexable'
-import asthemecontext from '../../_mixins/asthemecontext'
 import clickoutside from '../../_directives/clickoutside'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asformitem from '../../_mixins/asformitem'
-
 import NBaseSelectMenu from '../../_base/SelectMenu'
+import { mapAutoCompleteOptionsToSelectOptions } from './utils'
 
 export default {
   name: 'NAutoComplete',
@@ -70,7 +84,6 @@ export default {
   mixins: [
     withapp,
     themeable,
-    asthemecontext,
     detachable,
     zindexable,
     placeable,
@@ -128,13 +141,10 @@ export default {
   },
   computed: {
     active () {
-      return !!this.value && this.canBeActivated && !!this.filteredOptions.length
+      return !!this.value && this.canBeActivated && !!this.selectOptions.length
     },
-    filteredOptions () {
-      return this.options.map(literal => typeof literal === 'string' ? ({
-        label: literal,
-        value: literal
-      }) : literal)
+    selectOptions () {
+      return mapAutoCompleteOptionsToSelectOptions(this.options)
     }
   },
   methods: {

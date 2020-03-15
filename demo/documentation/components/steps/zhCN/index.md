@@ -12,6 +12,7 @@ vertical
 ### Steps Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |current|`number`|`null`||
 |status|`'process' \| 'finish' \| 'error' \| 'wait'`|`'process'`||
 |size|`'small' \| 'medium'`|`'medium'`||

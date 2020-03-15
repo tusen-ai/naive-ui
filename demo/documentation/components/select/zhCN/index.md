@@ -7,6 +7,7 @@ size
 multiple
 events
 filterable
+tag
 remote
 remote-multiple
 clearable
@@ -32,8 +33,12 @@ action
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |disabled|`boolean`|`false`||
 |options|`Array<SelectOption \| SelectOptionGroup>`|`[]`||
-|remote|`boolean`|`false`|是否要异步获取选项|
-|filter|`(pattern: string, option: Object) => boolean`|`null`||
+|remote|`boolean`|`false`|是否要异步获取选项。注意如果设定了，那么 `fitler` 和 `tag` 都不会对 `options` 生效。这个时候你在全权控制 `options`|
+|filterable|`boolean`|`false`|是否可以过滤|
+|filter|`(pattern: string, option: Object) => boolean`|一个简单的字符串搜索算法||
+|tag|`boolean`|`false`|是否可以创建新的选项，需要和 `filterable` 一起使用|
+|create-option|`(label: string) => SelectOption`|`label => ({ label, value: label })`|在输入内容时如何创建一个选项。注意 `filter` 对这个选项同样会生效。同时确保这个选项和其他选项的 `value` 不要有重复|
+
 
 ## API
 ### SelectOption Type

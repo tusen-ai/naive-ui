@@ -1,12 +1,30 @@
 # Custom Rules
-You can custom you valiation by setting custom trigger in rules.
+Sometimes builtin triggers don't meet you demand. You can custom you valiation by setting custom trigger in rules and manually trigger the validation.
 ```html
-<n-form :model="model" ref="form" :rules="rules">
-  <n-form-item-row path="age" label="Age">
-    <n-input v-model="model.age"/>
+<n-form
+  :model="model"
+  ref="form"
+  :rules="rules"
+>
+  <n-form-item-row
+    path="age"
+    label="Age"
+  >
+    <n-input
+      v-model="model.age"
+      @keydown.enter.native.prevent
+    />
   </n-form-item-row>
-  <n-form-item-row path="password" label="Password">
-    <n-input v-model="model.password" @input="handlePasswordInput" type="password"/>
+  <n-form-item-row
+    path="password"
+    label="Password"
+  >
+    <n-input
+      v-model="model.password"
+      @input="handlePasswordInput"
+      type="password"
+      @keydown.enter.native.prevent
+    />
   </n-form-item-row>
   <n-form-item-row
     first
@@ -14,41 +32,24 @@ You can custom you valiation by setting custom trigger in rules.
     label="Re-enter Password"
     ref="reenteredPassword"
   >
-    <n-input :disabled="!model.password" v-model="model.reenteredPassword" type="password"/>
-  </n-form-item-row>
-  <n-form-item-row label="Env" path="env" rule-path="null">
-    <n-dynamic-input
-      v-model="model.env"
-      preset="pair"
+    <n-input
+      :disabled="!model.password"
+      v-model="model.reenteredPassword"
+      type="password"
+      @keydown.enter.native.prevent
     />
-  </n-form-item-row>
-  <n-form-item-row label="group" path="group" rule-path="null">
-    <n-dynamic-input
-      v-model="model.group"
-      preset='custom'
-    >
-      <template v-slot="slotProps">
-        <div style="width:100%">
-          <n-form-item 
-            :path="'group[' + slotProps.index + '].inputNumberValue'"
-            rule-path="group.inputNumberValue"
-            >
-            <n-input-number v-model="slotProps.item.inputNumberValue"/>
-          </n-form-item>
-          <n-form-item 
-            :path="'group[' + slotProps.index + '].input'"
-            rule-path="group.input"
-            >
-            <n-input v-model="slotProps.item.input"/>
-          </n-form-item>
-        </div>
-      </template>
-    </n-dynamic-input>
   </n-form-item-row>
   <n-row :gutter="[0, 24]">
     <n-col :span="24">
       <div style="display: flex; justify-content: flex-end;">
-        <n-button @click="handleValidateButtonClick" round type="primary">Validate</n-button>
+        <n-button
+          :disabled="model.age === null"
+          @click="handleValidateButtonClick"
+          round
+          type="primary"
+        >
+          Validate
+        </n-button>
       </div>
     </n-col>
   </n-row>
@@ -65,19 +66,7 @@ export default {
       model: {
         age: null,
         password: null,
-        reenteredPassword: null,
-        env: [
-          {
-            key:'',
-            value:''
-          }
-        ],
-        group: [
-          {
-            inputNumberValue: 1,
-            input: null
-          }
-        ]
+        reenteredPassword: null
       },
       rules: {
         age: [
@@ -96,6 +85,12 @@ export default {
             trigger: ['input', 'blur']
           }
         ],
+        password: [
+          {
+            required: true,
+            message: 'Password is required'
+          }
+        ],
         reenteredPassword: [
           {
             required: true,
@@ -112,38 +107,14 @@ export default {
             message: 'Password is not same as re-entered password!',
             trigger: ['blur', 'password-input']
           }
-        ],
-        env: {
-          key: {
-            required: true,
-            message: 'Please input your key',
-            trigger: ['input', 'blur']
-          },
-          value: {
-            required: true,
-            message: 'Please input your value',
-            trigger: ['input', 'blur']
-          }
-        },
-        group: {
-          inputNumberValue: {
-           validator: this.validateGroupNumber,
-            trigger: ['blur', 'change'],
-            message: 'Please input a number which is not zero'
-          },
-          input: {
-            required: true,
-            message: 'Please input your key',
-            trigger: ['input', 'blur']
-          },
-        }
+        ]
       }
     }
   },
   methods: {
     handlePasswordInput () {
       if (this.model.reenteredPassword) {
-        this.$refs.reenteredPassword.validate('password-input')
+        this.$refs.reenteredPassword.validate({ trigger: 'password-input' })
       }
     },
     handleValidateButtonClick (e) {
@@ -162,9 +133,6 @@ export default {
     },
     validatePasswordSame (rule, value) {
       return value === this.model.password
-    },
-    validateGroupNumber (rule, value) {
-      return value !== 0
     }
   }
 }

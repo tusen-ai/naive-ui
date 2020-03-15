@@ -110,8 +110,9 @@ export default {
       return this.state.mode
     },
     url () {
-      const relativePath = this.NDocumentation.url
-      return 'https://***REMOVED***/tree/develop/' + relativePath
+      // const relativePath = this.NDocumentation.url
+      // return 'https://***REMOVED***/tree/develop/' + relativePath
+      return ''
     }
   },
   watch: {
@@ -134,13 +135,13 @@ export default {
   },
   methods: {
     handleEditOnGithubClick () {
-      window.open(this.url, '_blank')
+      this.$NMessage.info('Preview Only')
+      // window.open(this.url, '_blank')
     },
     toggleCodeDisplay () {
       this.showCode = !this.showCode
     },
     init () {
-      console.log('this', this.NDocumentation.url)
       const map = this.NDocumentation.anchorLinkMap
       this.isDebug = this.name && (~this.name.indexOf('debug') || ~this.name.indexOf('Debug'))
       if (this.isDebug) {

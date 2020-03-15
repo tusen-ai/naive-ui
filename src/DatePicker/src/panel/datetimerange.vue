@@ -16,6 +16,7 @@
       >
         <n-input
           v-model="startDateDisplayString"
+          :theme="theme"
           size="small"
           :stateful="false"
           class="n-date-panel-date-input"
@@ -28,6 +29,7 @@
         />
         <n-time-picker
           size="small"
+          :theme="theme"
           :stateful="false"
           :detachable="false"
           :placeholder="localeNamespace.selectTime"
@@ -47,6 +49,7 @@
         </div>
         <n-input
           v-model="endDateDisplayString"
+          :theme="theme"
           :stateful="false"
           size="small"
           class="n-date-panel-date-input"
@@ -58,6 +61,7 @@
           @input="handleEndDateInput"
         />
         <n-time-picker
+          :theme="theme"
           size="small"
           :stateful="false"
           :detachable="false"
@@ -229,6 +233,7 @@
       >
         <n-button
           v-if="actions.includes('clear')"
+          :theme="theme"
           size="tiny"
           round
           @click="clearValue"
@@ -237,6 +242,7 @@
         </n-button>
         <n-button
           v-if="actions.includes('confirm')"
+          :theme="theme"
           :disabled="isRangeInvalid"
           size="tiny"
           round

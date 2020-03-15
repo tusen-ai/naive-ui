@@ -111,7 +111,7 @@ $form-item-label-height: (
       @include b(form-item-blank) {
         padding-top: 3px;
         padding-bottom: 3px;
-        min-height: map-get($form-item-label-height, 'medium');
+        min-height: map-get($--n-height, 'medium');
         display: flex;
         align-items: center;
         position: relative;

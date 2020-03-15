@@ -14,6 +14,7 @@ default-files
 ### Upload Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |name|`string`|`'file'`|The field name of file in form data.|
 |accept|`string`|`null`|The accept type of upload. See <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept">accept</n-a>.|
 |action|`string`|`null`|The URL to submit data to.|
@@ -30,8 +31,8 @@ default-files
 |file-list|`Array<UploadFile>`|`undefined`|The file list of component. If set, the component will work in controlled manner.|
 |file-list-style|`Object`|`null`|The style of file list area|
 |default-file-list|`Array<UploadFile>`|`[]`|The default file list in uncontrolled manner.|
-|show-cancel-button|`boolean`|`true`|Whether to show remove button (at file pending, uploadin, error status). Click on cancel button will fire onRemove callback.|
-|show-remove-button|`boolean`|`true`|Whether to show remove button (at file finished status). Click on remove button will fire onRemove callback.|
+|show-cancel-button|`boolean`|`true`|Whether to show remove button (at file pending, uploadin, error status). Click on cancel button will fire `on-remove` callback.|
+|show-remove-button|`boolean`|`true`|Whether to show remove button (at file finished status). Click on remove button will fire `on-remove` callback.|
 |disabled|`boolean`|`false`||
 
 ### UploadFile Type

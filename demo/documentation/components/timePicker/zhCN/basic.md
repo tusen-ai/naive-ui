@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     disabledHours (hour) {
-      return hour>13 && hour<16
+      return hour > 13 && hour < 16
     },
     disabledMinutes (minute, selectedHour) {
       if(Number(selectedHour) === 17) {

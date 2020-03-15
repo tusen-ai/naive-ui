@@ -11,6 +11,7 @@
       v-model="displayTimeString"
       class="n-time-picker-input"
       passively-activated
+      :theme="syntheticTheme"
       :stateful="stateful"
       :size="syntheticSize"
       :force-focus="active"
@@ -58,7 +59,7 @@
                   'n-time-picker-selector-time-row--transition-disabled': hourTransitionDisabled
                 }"
               >
-                <n-scrollbar ref="hours">
+                <n-scrollbar ref="hours" :theme="syntheticTheme">
                   <div
                     v-for="hour in hours"
                     :key="hour"
@@ -85,7 +86,7 @@
                   'n-time-picker-selector-time-row--invalid': isMinuteInvalid
                 }"
               >
-                <n-scrollbar ref="minutes">
+                <n-scrollbar ref="minutes" :theme="syntheticTheme">
                   <div
                     v-for="minute in minutes"
                     :key="minute"
@@ -111,7 +112,7 @@
                   'n-time-picker-selector-time-row--transition-disabled': secondTransitionDisabled,
                 }"
               >
-                <n-scrollbar ref="seconds">
+                <n-scrollbar ref="seconds" :theme="syntheticTheme">
                   <div
                     v-for="second in seconds"
                     :key="second"
@@ -135,6 +136,7 @@
               <n-button
                 size="tiny"
                 round
+                :theme="syntheticTheme"
                 @click="handleNowClick"
               >
                 {{ localizedNow }}
@@ -144,6 +146,7 @@
                 round
                 type="primary"
                 class="n-time-picker-selector-actions__confirm"
+                :theme="syntheticTheme"
                 :disabled="isValueInvalid"
                 @click="handleConfirmClick"
               >

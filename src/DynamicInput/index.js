@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import DynamicInput from './src/main.vue'
+import DynamicInput from './src/DynamicInput.vue'
 
 DynamicInput.install = function (Vue) {
   Vue.component(DynamicInput.name, DynamicInput)

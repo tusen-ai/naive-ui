@@ -15,6 +15,7 @@ format
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |placeholder|`string`|`'Select Time'`||
 |value|`number`|`null`||
 |format|`string`|`'HH:mm:ss'`||

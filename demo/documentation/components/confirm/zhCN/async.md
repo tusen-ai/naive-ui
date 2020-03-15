@@ -21,10 +21,10 @@ export default {
         content:
           '点击，倒计时 3 秒',
         positiveText: '确认',
-        onPositiveClick: hide => {
+        onPositiveClick: () => {
           confirmInstance.loading = true
           this.$NMessage.success('倒计时 3 秒')
-          window.setTimeout(hide, 3000)
+          return new Promise(resolve => window.setTimeout(() => resolve(true), 3000))
         }
       })
     }

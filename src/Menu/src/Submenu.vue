@@ -5,6 +5,7 @@
     <template v-if="renderContentAsPopover">
       <n-popover
         trigger="hover"
+        :theme="NMenu.syntheticTheme"
         :placement="submenuPopoverPlacement"
         :show-arrow="false"
         :controller="popoverController"
@@ -13,8 +14,7 @@
         :overlay-style="{
           width: overlayWidth === null ? null : overlayMinWidth,
           minWidth: overlayMinWidth,
-          paddingTop: '8px',
-          paddingBottom: '8px'
+          padding: '8px 0'
         }"
         @show="handlePopMenuShow"
         @hide="handlePopMenuHide"
@@ -45,6 +45,7 @@
           </n-menu-item-content>
         </template>
         <n-menu
+          :theme="NMenu.syntheticTheme"
           :root-indent="24"
           :indent="24"
           :inside-popover="true"

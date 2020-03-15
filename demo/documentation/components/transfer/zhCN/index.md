@@ -16,6 +16,7 @@ filterable
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |value|`Array<string \| number>`|`null`||
 |options|`Array<TransferOption>`|`[]`||
 |disabled|`boolean`|`true`||
