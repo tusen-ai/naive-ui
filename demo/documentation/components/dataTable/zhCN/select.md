@@ -9,6 +9,7 @@
   :columns="columns"
   :data="data"
   :pagination="pagination"
+  :row-key="row => row.address"
   @checked-row-keys-change="handleCheck"
 />
 ```
@@ -36,7 +37,6 @@ const columns = [
 ]
 
 const data = Array.apply(null, { length: 46 }).map((_, index) => ({
-  key: index,
   name: `Edward King ${index}`,
   age: 32,
   address: `London, Park Lane no. ${index}`

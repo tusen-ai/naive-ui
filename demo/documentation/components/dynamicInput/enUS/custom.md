@@ -1,10 +1,10 @@
-# 自定义
+# Custom
 ```html
-<n-custom-add
+<n-dynamic-input
   v-model="test"
   title="Add CheckBox"
   preset="custom"
-  :onAdd="add"
+  :on-add="add"
 >
   <template v-slot="slotProps">
     <div style="width:100%">
@@ -22,7 +22,7 @@
       />
     </div>
   </template>
-</n-custom-add>
+</n-dynamic-input>
 <pre>
 {{  JSON.stringify(test,0,2) }}
 </pre>
@@ -32,11 +32,11 @@ export default {
   data () {
     return {
       test: [
-        {
-          isCheck: true,
-          num: 1,
-          string: 'Test string'
-        }
+       {
+         isCheck: true,
+         num: 1,
+         string: 'Test string'
+       }
       ]
     }
   },

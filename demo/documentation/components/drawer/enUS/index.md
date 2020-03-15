@@ -4,6 +4,7 @@ I think it is similar with modal, with a bit difference on placement.
 ```demo
 basic
 multiple
+target
 ```
 ## V-model
 |prop|event|
@@ -19,6 +20,7 @@ multiple
 |height|`number \| string`|`251`|Works when placement is `top` and `bottom`.|
 |mask-closable|`boolean`|`true`|Whether to emit `hide` event when click mask.|
 |drawer-style|`object`|`null`||
+|target|`() => HTMLElement`|`null`|
 
 ## Slots
 |Name|Parameters|Description|

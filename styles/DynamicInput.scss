@@ -2,13 +2,13 @@
 
 @include themes-mixin {
   @include once {
-    @include b(custom-add) {
+    @include b(dynamic-input) {
       width: 100%;
       @include m(title) {
         display: block;
         margin: 0 0 8px;
       }
-      @include b(custom-add-item) {
+      @include b(dynamic-input-item) {
         margin-bottom: 10px;
         display: flex;
         @include e(content) {
@@ -28,10 +28,10 @@
           margin-bottom: 0;
         }
       }
-      @include b(custom-add-pair) {
+      @include b(dynamic-input-pair) {
         width: 100%;
         display: flex;
-        @include b(custom-add-item-input-container-input) {
+        @include b(dynamic-input-item-input-container-input) {
           display: inline-block;
           flex: 1;
         }
@@ -39,7 +39,7 @@
           padding-top: 0!important;
         }
       }
-      @include b(custom-add-pair-input){
+      @include b(dynamic-input-pair-input){
         &:first-child {
           margin-right: 13px;
         }

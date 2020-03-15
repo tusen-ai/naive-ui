@@ -1,32 +1,32 @@
 <template>
   <div
-    class="n-custom-add-pair"
+    class="n-dynamic-input-pair"
   >
-    <n-form-item v-if="NCustomAdd.NFormItem" :path="path + '.key'" :rule-path="parentPath + '.key'">
+    <n-form-item v-if="NDynamicInput.NFormItem" :path="path + '.key'" :rule-path="parentPath + '.key'">
       <n-input
         v-model="item.key"
-        class="n-custom-add-pair-input"
-        :placeholder="NCustomAdd.placeholderKey"
+        class="n-dynamic-input-pair-input"
+        :placeholder="NDynamicInput.placeholderKey"
       />
     </n-form-item>
     <n-input
       v-else
       v-model="item.key"
-      class="n-custom-add-pair-input"
-      :placeholder="NCustomAdd.placeholderKey"
+      class="n-dynamic-input-pair-input"
+      :placeholder="NDynamicInput.placeholderKey"
     />
-    <n-form-item v-if="NCustomAdd.NFormItem" :path="path +'.value'" :rule-path="parentPath + '.key'">
+    <n-form-item v-if="NDynamicInput.NFormItem" :path="path +'.value'" :rule-path="parentPath + '.key'">
       <n-input
         v-model="item.value"
-        class="n-custom-add-pair-input"
-        :placeholder="NCustomAdd.placeholderValue"
+        class="n-dynamic-input-pair-input"
+        :placeholder="NDynamicInput.placeholderValue"
       />
     </n-form-item>
     <n-input
       v-else
       v-model="item.value"
-      class="n-custom-add-pair-input"
-      :placeholder="NCustomAdd.placeholderValue"
+      class="n-dynamic-input-pair-input"
+      :placeholder="NDynamicInput.placeholderValue"
     />
   </div>
 </template>
@@ -34,9 +34,9 @@
 import asformitem from '../../_mixins/asformitem'
 
 export default {
-  name: 'NCustomAddPair',
+  name: 'NDynamicInputPair',
   inject: {
-    NCustomAdd: {
+    NDynamicInput: {
       default: []
     }
   },

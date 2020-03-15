@@ -52,7 +52,7 @@
                 v-if="column.type === 'selection'"
                 :key="currentPage"
                 :disabled="column.disabled && column.disabled(rowData)"
-                :checked="checkedRowKeys.includes(rowData.key)"
+                :checked="checkedRowKeys.includes(createRowKey(rowData, rowKey))"
                 @change="checked => handleCheckboxInput(rowData, checked)"
               />
               <cell
@@ -71,7 +71,7 @@
 
 <script>
 import cell from './Cell.vue'
-import { createCustomWidthStyle, setCheckStatusOfRow, createClassObject } from '../utils'
+import { createCustomWidthStyle, setCheckStatusOfRow, createClassObject, createRowKey } from '../utils'
 import NScrollbar from '../../../Scrollbar'
 
 export default {
@@ -158,9 +158,10 @@ export default {
   },
   methods: {
     createClassObject,
+    createRowKey,
     handleCheckboxInput (row, checked) {
       const newCheckedRowKeys = this.checkedRowKeys.map(v => v)
-      setCheckStatusOfRow(newCheckedRowKeys, row, checked)
+      setCheckStatusOfRow(newCheckedRowKeys, row, checked, this.rowKey)
       this.NDataTable.changeCheckedRowKeys(newCheckedRowKeys)
     },
     getScrollContainer () {

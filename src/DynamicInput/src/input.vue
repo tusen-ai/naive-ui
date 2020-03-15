@@ -1,19 +1,19 @@
 <template>
   <div
-    class="n-custom-add-pair"
+    class="n-dynamic-input-pair"
   >
-    <n-form-item v-if="NCustomAdd.NFormItem" :path="path" :rule-path="parentPath">
+    <n-form-item v-if="NDynamicInput.NFormItem" :path="path" :rule-path="parentPath">
       <n-input
         v-model="item"
-        class="n-custom-add-pair-input"
-        :placeholder="NCustomAdd.placeholder"
+        class="n-dynamic-input-pair-input"
+        :placeholder="NDynamicInput.placeholder"
       />
     </n-form-item>
     <n-input
       v-else
       v-model="item"
-      class="n-custom-add-pair-input"
-      :placeholder="NCustomAdd.placeholder"
+      class="n-dynamic-input-pair-input"
+      :placeholder="NDynamicInput.placeholder"
     />
   </div>
 </template>
@@ -21,9 +21,9 @@
 import asformitem from '../../_mixins/asformitem'
 
 export default {
-  name: 'NCustomAddInput',
+  name: 'NDynamicInputInput',
   inject: {
-    NCustomAdd: {
+    NDynamicInput: {
       default: []
     }
   },

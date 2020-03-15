@@ -196,10 +196,10 @@ export default function (locale, instance) {
             path: `/${instance.lang}/${instance.theme}/doc` + '/n-checkbox'
           },
           {
-            name: 'Custom Add',
-            title: '自定义增加',
-            titleExtra: 'Custom Add',
-            path: `/${instance.lang}/${instance.theme}/doc` + '/n-custom-add'
+            name: 'Dynamic Input',
+            title: '动态输入',
+            titleExtra: 'Dynamic Input',
+            path: `/${instance.lang}/${instance.theme}/doc` + '/n-dynamic-input'
           },
           {
             name: 'Date Picker',
@@ -674,8 +674,8 @@ export default function (locale, instance) {
             path: `/${instance.lang}/${instance.theme}/doc` + '/n-checkbox'
           },
           {
-            name: 'Custom Add',
-            path: `/${instance.lang}/${instance.theme}/doc` + '/n-custom-add'
+            name: 'Dynamic Input',
+            path: `/${instance.lang}/${instance.theme}/doc` + '/n-dynamic-input'
           },
           {
             name: 'Date Picker',

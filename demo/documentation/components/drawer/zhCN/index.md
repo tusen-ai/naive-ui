@@ -4,6 +4,7 @@
 ```demo
 basic
 multiple
+target
 dark-1-debug
 dark-2-debug
 dark-3-debug
@@ -23,6 +24,7 @@ dark-4-debug
 |height|`number \| string`|`251`|在位置是 `top` 和 `bottom` 时生效|
 |mask-closable|`boolean`|`true`|点击遮罩时是否发出 `hide` 事件|
 |drawer-style|`object`|`null`||
+|target|`() => HTMLElement`|`null`|
 
 ## Slots
 |名称|参数|说明|

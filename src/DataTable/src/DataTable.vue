@@ -57,7 +57,7 @@
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import locale from '../../_mixins/locale'
-import { setCheckStatusOfRow } from './utils'
+import { setCheckStatusOfRow, createRowKey } from './utils'
 import BaseTable from './BaseTable.vue'
 import NEmpty from '../../Empty'
 import NPagination from '../../Pagination'
@@ -435,8 +435,10 @@ export default {
     },
     countOfCurrentPageCheckedRows () {
       const checkedRowKeys = this.syntheticCheckedRowKeys
+      const rowKey = this.rowKey
       return this.paginatedData.reduce((total, row) => {
-        return total + (checkedRowKeys.includes(row.key) ? 1 : 0)
+        const key = createRowKey(row, rowKey)
+        return total + (checkedRowKeys.includes(key) ? 1 : 0)
       }, 0)
     },
     someRowsChecked () {
@@ -597,21 +599,23 @@ export default {
     },
     checkAll (column) {
       const checkedRowKeys = this.syntheticCheckedRowKeys.map(v => v)
+      const rowKey = this.rowKey
       this.paginatedData.forEach(row => {
         if (column.disabled && column.disabled(row)) {
           return
         }
-        setCheckStatusOfRow(checkedRowKeys, row, true)
+        setCheckStatusOfRow(checkedRowKeys, row, true, rowKey)
       })
       this.changeCheckedRowKeys(checkedRowKeys)
     },
     clearCheckAll (column) {
       const checkedRowKeys = this.syntheticCheckedRowKeys.map(v => v)
+      const rowKey = this.rowKey
       this.paginatedData.forEach(row => {
         if (column.disabled && column.disabled(row)) {
           return
         }
-        setCheckStatusOfRow(checkedRowKeys, row, false)
+        setCheckStatusOfRow(checkedRowKeys, row, false, rowKey)
       })
       this.changeCheckedRowKeys(checkedRowKeys)
     }

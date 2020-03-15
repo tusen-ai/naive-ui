@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import icons from '/home/swl/wksp/infra-naive-ui/lib/iconNames'
+import icons from '../../../../../lib/iconNames'
 import iconWrapper from './iconWrapper'
 import getScrollParent from '../../../../../lib/_utils/dom/getScrollParent'
 

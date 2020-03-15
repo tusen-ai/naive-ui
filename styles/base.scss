@@ -26,6 +26,9 @@ input {
   @include b(positioning-content) {
     pointer-events: all;
   }
+  @include m(absolute) {
+    position: absolute;
+  }
 }
 
 @include b(modal-content) {

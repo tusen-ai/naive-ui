@@ -21,11 +21,17 @@ export function createCustomWidthStyle (column, index, placement) {
   return null
 }
 
-export function setCheckStatusOfRow (checkedRowKeys, row, checked) {
+export function setCheckStatusOfRow (checkedRowKeys, row, checked, rowKey) {
+  const key = createRowKey(row, rowKey)
   while (true) {
-    const checkedRowIndex = checkedRowKeys.findIndex(checkedRowKey => checkedRowKey === row.key)
+    const checkedRowIndex = checkedRowKeys.findIndex(checkedRowKey => checkedRowKey === key)
     if (~checkedRowIndex) checkedRowKeys.splice(checkedRowIndex, 1)
     else break
   }
-  if (checked) checkedRowKeys.push(row.key)
+  if (checked) checkedRowKeys.push(key)
+}
+
+export function createRowKey (row, rowKey) {
+  if (rowKey) return rowKey(row)
+  return row.key
 }

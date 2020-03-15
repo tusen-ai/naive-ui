@@ -22,6 +22,8 @@ fs.writeFileSync(
 
 const cjsIconPath = path.resolve(__dirname, '..', 'lib', 'icons')
 const esmIconPath = path.resolve(__dirname, '..', 'es', 'icons')
+const cjsPath = path.resolve(__dirname, '..', 'lib')
+const esmPath = path.resolve(__dirname, '..', 'es')
 
 function createDirIfNotExists (...args) {
   if (!fs.existsSync(path.resolve(...args))) {

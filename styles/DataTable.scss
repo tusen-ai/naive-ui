@@ -165,16 +165,24 @@
             padding-right: 36px;
           }
           @include e(ellipsis) {
+            display: inline-block;
+            vertical-align: middle;
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
-          }          
+            max-width: 100%;
+          }
         }
         background-color: map-get($--data-table-header-background-color, 'default');
         border-color: map-get($--data-table-border-color, 'default');
         color: $--data-table-header-text-color;
         @include m(sortable) {
-          cursor: pointer;
+          @include once {
+            cursor: pointer;
+            @include e(ellipsis) {
+              max-width: calc(100% - 18px);
+            }
+          }
           &:hover {
             background-color: map-get($--data-table-header-background-color, 'hover');
           }
