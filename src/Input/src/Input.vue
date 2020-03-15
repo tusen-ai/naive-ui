@@ -333,19 +333,28 @@ export default {
     },
     handleCompositionEnd (e) {
       this.isComposing = false
-      this.handleInput(e)
+      if (e.target === this.$refs.secondInput) {
+        this.handleInput(e, 1)
+      } else {
+        this.handleInput(e, 0)
+      }
     },
     handleInput (e, index) {
       if (this.isComposing) return
+      const changedValue = e.target.value
       if (!this.pair) {
-        this.$emit('input', e.target.value)
+        e.target.value = this.value
+        this.$emit('input', changedValue)
       } else {
         let value = this.value
         if (!Array.isArray(value)) {
           value = [null, null]
+        } else {
+          value = [...value]
         }
-        value[index] = e.target.value
-        this.$emit('input', Array.from(value))
+        e.target.value = value[index]
+        value[index] = changedValue
+        this.$emit('input', value)
       }
     },
     handleInputBlur (e) {

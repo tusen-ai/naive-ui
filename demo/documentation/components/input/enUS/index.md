@@ -1,5 +1,7 @@
 # Input
 Many years ago, people used punched card to input.
+
+<n-alert title="Caveat" type="warning">`n-input` is a controlled component. If you don't handle with its `input` event, its value will never be changed. (v-model doesn't matter, since it is an abbreviation for controlled data-bindings)</n-alert>
 ## Demos
 ```demo
 basic
