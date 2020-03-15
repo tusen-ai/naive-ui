@@ -21,13 +21,13 @@ form
 ### Dynamic Input Props(Input Preset)
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|value|`Array<string>`||**必需**|
+|value|`Array<string>`|-|**必需**|
 |placeholder|`string`|`''`||
 
 ### Dynamic Input Props(Pair Preset)
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|value|`Array<{ key: string, value: string}>`||**必需**|
+|value|`Array<{ key: string, value: string }>`|-|**必需**|
 |key-placeholder|`string`|`''`||
 |value-placeholder|`string`|`''`||
 

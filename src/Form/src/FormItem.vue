@@ -281,17 +281,31 @@ export default {
     handleContentInput () {
       this._validate('input')
     },
-    validate (trigger, afterValidate, options) {
+    validate (options, callback) {
+      /** following code is for compatibility */
+      let trigger
+      let validateCallback
+      let shouldRuleBeApplied
+      let asyncValidatorOptions
+      if (typeof options === 'string') {
+        trigger = options
+        validateCallback = callback
+      } else if (options !== null && typeof options === 'object') {
+        trigger = options.trigger
+        validateCallback = options.callback
+        shouldRuleBeApplied = options.shouldRuleBeApplied
+        asyncValidatorOptions = options.options
+      }
       return new Promise((resolve, reject) => {
-        this._validate(trigger, options).then(({ valid, errors }) => {
+        this._validate(trigger, shouldRuleBeApplied, asyncValidatorOptions).then(({ valid, errors }) => {
           if (valid) {
-            if (afterValidate) {
-              afterValidate()
+            if (validateCallback) {
+              validateCallback()
             }
             resolve()
           } else {
-            if (afterValidate) {
-              afterValidate(errors)
+            if (validateCallback) {
+              validateCallback(errors)
             }
             // eslint-disable-next-line prefer-promise-reject-errors
             reject(errors)
@@ -301,6 +315,7 @@ export default {
     },
     _validate (
       trigger = null,
+      shouldRuleBeApplied = () => true,
       options = {
         suppressWarning: true
       }
@@ -328,16 +343,18 @@ export default {
             return rule.trigger === trigger
           }
         })
-      ).map(rule => {
-        const shallowClonedRule = Object.assign({}, rule)
-        if (shallowClonedRule.validator) {
-          shallowClonedRule.validator = wrapValidator(shallowClonedRule.validator)
-        }
-        if (shallowClonedRule.asyncValidator) {
-          shallowClonedRule.asyncValidator = wrapValidator(shallowClonedRule.asyncValidator)
-        }
-        return shallowClonedRule
-      })
+      )
+        .filter(shouldRuleBeApplied)
+        .map(rule => {
+          const shallowClonedRule = Object.assign({}, rule)
+          if (shallowClonedRule.validator) {
+            shallowClonedRule.validator = wrapValidator(shallowClonedRule.validator)
+          }
+          if (shallowClonedRule.asyncValidator) {
+            shallowClonedRule.asyncValidator = wrapValidator(shallowClonedRule.asyncValidator)
+          }
+          return shallowClonedRule
+        })
       if (!activeRules.length) {
         return Promise.resolve({
           valid: true

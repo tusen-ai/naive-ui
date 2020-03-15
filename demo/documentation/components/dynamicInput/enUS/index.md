@@ -17,7 +17,7 @@ custom
 ### Pair Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|value|`Array`||**required**|
+|value|`Array`|-|**required**|
 |placeholderKey|`string`|`key`||
 |placeholderValue|`string`|`value`||
 |onAdd|`(resolve: (item) => void) => any`|`null`| Callback when click at '+'. Pass resolved item to resolve function to set a new node.|
@@ -26,7 +26,7 @@ custom
 ### Custom Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|value|`Array`||**required**|
+|value|`Array`|-|**required**|
 |onAdd|`(resolve: (item) => void) => any`|`null`| Callback when click at '+'. Pass resolved item to resolve function to set a new node.|
 
 
