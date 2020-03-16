@@ -128,6 +128,9 @@ zindex 有点问题
 ## 2020.3.11
 zindex 的问题解决了，虽然很简单，在 static 元素上设定 zindex 没用，😅
 
+## 2020.3.15
+在搞响应式页面的时候，我意识到存粹依赖 css 是一种不可靠的方式。虽然从布局层面 grid layout 已经给出了一种近乎完美的解决方案，但是涉及到一切内联样式的... 都需要从 js 的层面来解决。目前想来最 trival 的方式就是让每个 config consumer 都能拿到这个值。
+
 
 ## TODO 排序不分先后
 1. <del>Focus Detector on Time Selector</del>
@@ -206,7 +209,7 @@ zindex 的问题解决了，虽然很简单，在 static 元素上设定 zindex 
 74. card slot
 75. table fixed computed left right
 76. gradient text 的切换能解决？
-77. Auto Complete Group
+77. <del>Auto Complete Group</del>
 78. <del>select add tag</del>
 79. <del>dynamic input</del> 还差英文文档
 80. <del>input 严格受控</del>
