@@ -33,5 +33,6 @@ icons
 |-|-|-|
 |default|`()`||
 
-## Icons
-<icons />
+<!-- ## Icons -->
+<icons/>
+

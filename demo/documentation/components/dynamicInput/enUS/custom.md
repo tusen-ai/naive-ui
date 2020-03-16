@@ -2,7 +2,7 @@
 ```html
 <n-dynamic-input
   v-model="customValue"
-  :on-add="onAdd"
+  :on-create="onCreate"
 >
   <template v-slot="{ value }">
     <div style="width: 100%;">
@@ -41,11 +41,11 @@ export default {
     }
   },
   methods: {
-    onAdd () {
+    onCreate (index) {
       return {
         isCheck: false,
-        num: 1,
-        string: 'A String'
+        num: null,
+        string: null
       }
     }
   }
