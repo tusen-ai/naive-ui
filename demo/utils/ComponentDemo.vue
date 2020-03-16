@@ -83,7 +83,7 @@
 import codeOutline from '../../src/_icons/code-outline'
 import createOutline from '../../src/_icons/create-outline'
 import { state } from '../store'
-import { hyphenToHump } from '../utils'
+import camelCase from 'lodash/camelCase'
 
 export default {
   components: {
@@ -111,7 +111,7 @@ export default {
       return this.state.mode
     },
     url () {
-      const relativePath = this.NDocumentation.gheUrl.replace('index.md', hyphenToHump(this.name) + '.md')
+      const relativePath = this.NDocumentation.gheUrl.replace('index.md', camelCase(this.name) + '.md')
       return relativePath
     }
   },
@@ -135,8 +135,7 @@ export default {
   },
   methods: {
     handleEditOnGithubClick () {
-      this.$NMessage.info('Preview Only')
-      // window.open(this.url, '_blank')
+      window.open(this.url, '_blank')
     },
     toggleCodeDisplay () {
       this.showCode = !this.showCode

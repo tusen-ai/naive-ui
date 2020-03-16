@@ -132,9 +132,3 @@ export const replaceEmojiWithImages = function (root) {
   // Call everything we've defined
   emojiReplace(getLegitTextNodes(root));
 }
-
-export const hyphenToHump = (name) => {
-  return name.replace(/-([a-z])/g, function (all, letter) {
-    return letter.toUpperCase()
-  })
-}
