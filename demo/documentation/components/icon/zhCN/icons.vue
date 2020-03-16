@@ -10,7 +10,7 @@
     />
     <div class="icons">
       <icon-wrapper
-        v-for="name in filteredNames.slice(0, loadNumber)"
+        v-for="name in displayNames"
         :key="name"
         :name="name"
       >
@@ -46,7 +46,7 @@ export default {
       return this.state.mode
     },
     names () {
-      let iconNames = []
+      const iconNames = []
       for (const key in icons) {
         iconNames.push(key)
       }
@@ -61,6 +61,9 @@ export default {
           return name
         })
       }
+    },
+    displayNames () {
+      return this.filteredNames.slice(0, loadNumber)
     }
   },
   mounted () {
