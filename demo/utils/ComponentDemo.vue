@@ -111,14 +111,8 @@ export default {
       return this.state.mode
     },
     url () {
-<<<<<<< HEAD
       const relativePath = this.NDocumentation.gheUrl.replace('index.md', hyphenToHump(this.name) + '.md')
       return relativePath
-=======
-      // const relativePath = this.NDocumentation.url
-      // return 'https://***REMOVED***/tree/develop/' + relativePath
-      return ''
->>>>>>> upstream/develop
     }
   },
   watch: {
@@ -148,10 +142,6 @@ export default {
       this.showCode = !this.showCode
     },
     init () {
-<<<<<<< HEAD
-      console.log('this111111', this.NDocumentation.url)
-=======
->>>>>>> upstream/develop
       const map = this.NDocumentation.anchorLinkMap
       this.isDebug = this.name && (~this.name.indexOf('debug') || ~this.name.indexOf('Debug'))
       if (this.isDebug) {

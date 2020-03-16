@@ -22,11 +22,8 @@ target
 |height|`number \| string`|`251`|Works when placement is `top` and `bottom`.|
 |mask-closable|`boolean`|`true`|Whether to emit `hide` event when click mask.|
 |drawer-style|`object`|`null`||
-<<<<<<< HEAD
 |target|`() => HTMLElement`|`null`|
-=======
 |drawer-class|`string`|`null`||
->>>>>>> upstream/develop
 
 ## Slots
 |Name|Parameters|Description|
