@@ -343,7 +343,6 @@ export default {
       if (this.isComposing) return
       const changedValue = e.target.value
       if (!this.pair) {
-        e.target.value = this.value
         this.$emit('input', changedValue)
       } else {
         let value = this.value
@@ -354,7 +353,7 @@ export default {
         }
         e.target.value = value[index]
         value[index] = changedValue
-        this.$emit('input', value)
+        this.$emit('input', `value`)
       }
     },
     handleInputBlur (e) {
