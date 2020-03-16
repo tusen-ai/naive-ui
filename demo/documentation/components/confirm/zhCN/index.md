@@ -49,9 +49,9 @@ use-component
 |show-icon|`boolean`||
 |loading|`boolean`||
 |bordered|`boolean`||
-|onPositiveClick|`(hide: function) => any`||
-|onNegativeClick|`(hide: function) => any`||
-|onClose|`(hide: function) => any`||
+|onPositiveClick|`() => Promise<boolean> \| boolean`||
+|onNegativeClick|`() => Promise<boolean> \| boolean`||
+|onClose|`() => Promise<boolean> \| boolean`||
 
 #### ConfirmEnvironment Methods
 |名称|类型|说明|

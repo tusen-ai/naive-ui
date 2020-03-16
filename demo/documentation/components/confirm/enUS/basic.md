@@ -25,13 +25,11 @@ export default {
         content: 'Are you sure?',
         positiveText: 'Sure',
         negativeText: 'Not Sure',
-        onPositiveClick: (hide) => {
+        onPositiveClick: () => {
           this.$NMessage.success('Sure')
-          hide()
         },
-        onNegativeClick: (hide) => {
+        onNegativeClick: () => {
           this.$NMessage.error('Not Sure')
-          hide()
         }
       })
     },
@@ -41,9 +39,8 @@ export default {
         content:
           'Cool',
         positiveText: 'Wow!',
-        onPositiveClick: (hide) => {
+        onPositiveClick: () => {
           this.$NMessage.success('Great!')
-          hide()
         }
       })
     },
@@ -52,9 +49,8 @@ export default {
         title: 'Error',
         content: 'A mistake.',
         positiveText: 'Ahhh!',
-        onPositiveClick: (hide) => {
+        onPositiveClick: () => {
           this.$NMessage.success('I knew it...')
-          hide()
         }
       })
     }
