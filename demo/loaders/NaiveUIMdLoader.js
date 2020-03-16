@@ -22,20 +22,30 @@ function parseComponents (tokens) {
   return components
 }
 
-module.exports = function (content) {
+module.exports = function (content, titleReg, gheUrl, gheButton) {
   const tokens = marked.lexer(content)
   const anchor = parseMdAsAnchor(tokens)
   const components = parseComponents(tokens)
   const importStatements = components
     .map(component => `import ${component} from './${component}'`)
     .join('\n')
-  return `<template>
+  const mdContent = marked.parser(tokens, { renderer })
+  const documentationContent = mdContent.replace(titleReg, `$1$2${gheButton}$3`)
+  return `<i18n>
+  {
+    "zh-CN": {
+      "editOnGithub": "在 Github 上编辑"
+    },
+    "en-US": {
+      "editOnGithub": "Edit on Github"
+    }
+  }
+</i18n>
+<template>
   <component-documentation>
     <div style="display: flex; flex-wrap: nowrap;">
       <div style="width: calc(100% - 180px); margin-right: 36px;">
-        ${marked.parser(tokens, {
-    renderer
-  })}
+        ${documentationContent}
       </div>
       <div style="width: 144px;">
         ${anchor}
@@ -45,10 +55,22 @@ module.exports = function (content) {
 </template>
 <script>
 ${importStatements}
+import createOutline from 'naive-ui/lib/icons/create-outline'
 
 export default {
   components: {
+    createOutline,
     ${components.join(',\n')}
+  },
+  data () {
+    return {
+      gheUrl: ${JSON.stringify(gheUrl)}
+    }
+  },
+  methods: {
+    handleEditOnGithubClick () {
+      window.open(this.gheUrl, '_blank')
+    },
   }
 }
 </script>`

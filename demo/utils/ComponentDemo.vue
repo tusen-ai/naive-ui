@@ -111,8 +111,8 @@ export default {
       return this.state.mode
     },
     url () {
-      const relativePath = this.NDocumentation.url.replace('index.md', this.name + '.md')
-      return 'https://***REMOVED***/tree/develop/' + hyphenToHump(relativePath)
+      const relativePath = this.NDocumentation.gheUrl.replace('index.md', hyphenToHump(this.name) + '.md')
+      return relativePath
     }
   },
   watch: {

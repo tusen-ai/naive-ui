@@ -46,7 +46,7 @@ function parseDemosAsAnchor (demosLiteral) {
   return `<n-anchor :top="32" :bound="16" position="absolute" affix style="width: 144px;">${linkTags.join('\n')}</n-anchor>`
 }
 
-function generateScript (demosLiteral, components = [], url) {
+function generateScript (demosLiteral, components = [], gheUrl) {
   const demoNames = demosLiteral
     .split('\n')
     .map(demoName => demoName.trim())
@@ -60,9 +60,11 @@ function generateScript (demosLiteral, components = [], url) {
   const componentStatements = demoNames.map(demoName => demoName + 'Demo').concat(components).join(', ')
   const script = `<script>
 ${importStatements}
+import createOutline from 'naive-ui/lib/icons/create-outline'
 
 export default {
   components: {
+    createOutline,
     ${componentStatements}
   },
   provide () {
@@ -73,8 +75,13 @@ export default {
   data () {
     return {
       anchorLinkMap: new Map(),
-      url: ${JSON.stringify(url)}
+      gheUrl: ${JSON.stringify(gheUrl)}
     }
+  },
+  methods: {
+    handleEditOnGithubClick () {
+      window.open(this.gheUrl, '_blank')
+    },
   }
 }
 </script>`
@@ -83,8 +90,32 @@ export default {
 
 function convertMd2ComponentDocumentation (text, env = 'development', url) {
   const isNoDemo = !!~text.search('<!--no-demo-->')
+  const titleReg = /(<n-h1[^>]*\>)(.*?)(<\/n-h1>)/
+  const gheUrl = 'https://***REMOVED***/tree/develop/' + url
+  const gheButton = `<n-tooltip
+          :delay="300"
+          :placement="'top'"
+          :show-arrow="true"
+        >
+          <template v-slot:activator>
+            <a href="">
+              <n-button
+                style="marginLeft:10px;verticalAlign:middle;"
+                ghost
+                round
+                @click="handleEditOnGithubClick"
+                size="small"
+              >
+                <template v-slot:icon>
+                  <create-outline />
+                </template>
+              </n-button>
+            </a>
+          </template>
+          {{ $t('editOnGithub') }}
+        </n-tooltip>`
   if (isNoDemo) {
-    return mdLoader(text)
+    return mdLoader(text, titleReg, gheUrl, gheButton)
   }
   const isSingleColumn = !!~text.search('<!--single-column-->')
   const tokens = marked.lexer(text)
@@ -125,9 +156,20 @@ function convertMd2ComponentDocumentation (text, env = 'development', url) {
   // const classedDocumentationHTML = addClassToHTML(documentationHTML, 'markdown')
   const demosReg = /<!--demos-->/
   const demoTags = parseDemos(demosLiteral, env)
-  const documentationContent = documentationHTML.replace(demosReg, template(demoTags, demosLiteral, isSingleColumn))
-  // console.log(documentationContent)
+  const documentationContent = documentationHTML
+    .replace(demosReg, template(demoTags, demosLiteral, isSingleColumn))
+    .replace(titleReg, `$1$2${gheButton}$3`)
   const documentationTemplate = `
+<i18n>
+  {
+    "zh-CN": {
+      "editOnGithub": "在 Github 上编辑"
+    },
+    "en-US": {
+      "editOnGithub": "Edit on Github"
+    }
+  }
+</i18n>
 <template>
   <component-documentation>
     <div style="display: flex; flex-wrap: nowrap;">
@@ -140,7 +182,7 @@ function convertMd2ComponentDocumentation (text, env = 'development', url) {
     </div>
   </component-documentation>
 </template>`
-  const documentationScript = generateScript(demosLiteral, components, url)
+  const documentationScript = generateScript(demosLiteral, components, gheUrl)
   // if (components.length) console.log(`${documentationTemplate}\n\n${documentationScript}`)
   return `${documentationTemplate}\n\n${documentationScript}`
   // console.log(vueComponent)

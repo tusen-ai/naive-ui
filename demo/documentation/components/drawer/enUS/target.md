@@ -1,4 +1,4 @@
-# Basic
+# Target
 ```html
 <n-button-group>
   <n-button @click="activate('top')">Top</n-button>

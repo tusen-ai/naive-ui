@@ -36,7 +36,7 @@ const components = {}
 components.iconWrapper = iconWrapper
 let names = []
 icons.iconNames.forEach(name => {
-  const fileName = name.match(/.*(?=.vue)/g)[0]
+  const fileName = name.match(/.*(?=.vue)/)[0]
   const moduleName = toHump(fileName)
   names.push(fileName)
   components[moduleName] = () => import('naive-ui/lib/icons/' + fileName)
