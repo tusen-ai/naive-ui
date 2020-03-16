@@ -353,7 +353,7 @@ export default {
         }
         e.target.value = value[index]
         value[index] = changedValue
-        this.$emit('input', `value`)
+        this.$emit('input', value)
       }
     },
     handleInputBlur (e) {
