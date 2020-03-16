@@ -20,7 +20,7 @@
 import DocHeader from './header.vue'
 import menuOptions from './menuOptions'
 import { i18n } from './deploymentInit'
-import { setState } from './store'
+import { state, setState } from './store'
 
 export default {
   components: {
@@ -38,14 +38,16 @@ export default {
   beforeRouteUpdate (to, from, next) {
     this.$i18n.locale = to.params.lang
     next()
-    this.mode = localStorage.getItem('mode')
   },
   data () {
     return {
-      mode: localStorage.getItem('mode') ? localStorage.getItem('mode') : 'debug'
+      state: state
     }
   },
   computed: {
+    mode () {
+      return state.mode
+    },
     env () {
       return process.env.NODE_ENV
     },
@@ -87,8 +89,8 @@ export default {
       this.lang = lang
     },
     handleModeChange (mode) {
-      this.mode = mode
-      localStorage.setItem('mode', mode)
+      // this.mode = mode
+      // localStorage.setItem('mode', mode)
       setState(mode)
     }
   }

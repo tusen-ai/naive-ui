@@ -88,33 +88,18 @@ import javascript from 'highlight.js/lib/languages/javascript'
 import python from 'highlight.js/lib/languages/python'
 import cpp from 'highlight.js/lib/languages/cpp'
 
-const env = process.env.NODE_ENV
-let routerDebug
-let modalDebug
-let datePickerDebug
-let backTopDebug
-let suffixDebug
-let cascaderDebug
-let verticalAlignDebug
-let iconTransitionDebug
-let selectDebug
-let popoverDebug
-let scrollbarDebug
-let scrollbarDebug2
-if (env === 'development') {
-  routerDebug = () => import('./debugComponents/routerDebug')
-  modalDebug = () => import('./debugComponents/modalDebug')
-  datePickerDebug = () => import('./debugComponents/datePickerDebug')
-  backTopDebug = () => import('./debugComponents/backTopDebug')
-  suffixDebug = () => import('./debugComponents/suffixDebug')
-  cascaderDebug = () => import('./debugComponents/cascaderDebug')
-  verticalAlignDebug = () => import('./debugComponents/verticalAlignDebug')
-  iconTransitionDebug = () => import('./debugComponents/iconTransitionDebug')
-  selectDebug = () => import('./debugComponents/selectDebug')
-  popoverDebug = () => import('./debugComponents/popoverDebug')
-  scrollbarDebug = () => import('./debugComponents/scrollbarDebug')
-  scrollbarDebug2 = () => import('./debugComponents/scrollbarDebug2')
-}
+import routerDebug from './debugComponents/routerDebug'
+import modalDebug from './debugComponents/modalDebug'
+import datePickerDebug from './debugComponents/datePickerDebug'
+import backTopDebug from './debugComponents/backTopDebug'
+import suffixDebug from './debugComponents/suffixDebug'
+import cascaderDebug from './debugComponents/cascaderDebug'
+import verticalAlignDebug from './debugComponents/verticalAlignDebug'
+import iconTransitionDebug from './debugComponents/iconTransitionDebug'
+import selectDebug from './debugComponents/selectDebug'
+import popoverDebug from './debugComponents/popoverDebug'
+import scrollbarDebug from './debugComponents/scrollbarDebug'
+import scrollbarDebug2 from './debugComponents/scrollbarDebug2'
 
 hljs.registerLanguage('javascript', javascript)
 hljs.registerLanguage('python', python)
@@ -287,9 +272,4 @@ router.afterEach(function (to, from) {
     Vue.prototype.$NLoadingBar.finish()
   }
 })
-
-if (!localStorage.mode) {
-  localStorage.mode = 'debug'
-}
-
 export { Vue, router, i18n, hljs }

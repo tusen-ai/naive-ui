@@ -75,18 +75,6 @@ import log from './documentation/components/log'
 import code from './documentation/components/code'
 import upload from './documentation/components/upload'
 import table from './documentation/components/table'
-import routerDebug from './debugComponents/routerDebug'
-import modalDebug from './debugComponents/modalDebug'
-import datePickerDebug from './debugComponents/datePickerDebug'
-import backTopDebug from './debugComponents/backTopDebug'
-import suffixDebug from './debugComponents/suffixDebug'
-import cascaderDebug from './debugComponents/cascaderDebug'
-import verticalAlignDebug from './debugComponents/verticalAlignDebug'
-import iconTransitionDebug from './debugComponents/iconTransitionDebug'
-import selectDebug from './debugComponents/selectDebug'
-import popoverDebug from './debugComponents/popoverDebug'
-import scrollbarDebug from './debugComponents/scrollbarDebug'
-import scrollbarDebug2 from './debugComponents/scrollbarDebug2'
 
 import DocEntry from './docEntry'
 import ComponentDemo from './utils/ComponentDemo'
@@ -164,9 +152,6 @@ const children = [
   { path: '/n-tabs', component: tabs },
   { path: '/n-time-picker', component: timePicker },
   { path: '/n-confirm', component: confirm },
-  { path: '/n-router-debug', component: routerDebug },
-  { path: '/n-modal-debug', component: modalDebug },
-  { path: '/n-scrollbar-debug', component: scrollbarDebug },
   { path: '/n-badge', component: badge },
   { path: '/n-steps', component: steps },
   { path: '/n-collapse', component: collapse },
@@ -174,16 +159,13 @@ const children = [
   { path: '/n-tag', component: tag },
   { path: '/n-menu', component: menu },
   { path: '/n-timeline', component: timeline },
-  { path: '/n-scrollbar-debug2', component: scrollbarDebug2 },
   { path: '/n-back-top', component: backTop },
-  { path: '/n-date-picker-debug', component: datePickerDebug },
   { path: '/n-divider', component: divider },
   { path: '/n-popconfirm', component: popconfirm },
   { path: '/n-anchor', component: anchor },
   { path: '/n-dropdown', component: dropdown },
   { path: '/n-popselect', component: popselect },
   { path: '/n-config-provider', component: configProvider },
-  { path: '/n--debug', component: suffixDebug },
   { path: '/n-transfer', component: transfer },
   { path: '/n-spin', component: spin },
   { path: '/n-drawer', component: drawer },
@@ -191,7 +173,6 @@ const children = [
   { path: '/n-time', component: time },
   { path: '/n-slider', component: slider },
   { path: '/n-tree', component: tree },
-  { path: '/n-vertical-align-debug', component: verticalAlignDebug },
   { path: '/n-affix', component: affix },
   { path: '/n-statistic', component: statistic },
   { path: '/n-grid', component: grid },
@@ -211,26 +192,9 @@ const children = [
   { path: '/n-code', component: code },
   { path: '/n-typography', component: typography },
   { path: '/n-upload', component: upload },
-  { path: '/n-table', component: table },
-  {
-    path: '/n-icon-transition-debug',
-    component: iconTransitionDebug
-  },
-  { path: '/n-select-debug', component: selectDebug }
+  { path: '/n-table', component: table }
 ]
 const routes = [
-  {
-    path: '/:lang/:theme/n-popover-debug',
-    component: popoverDebug
-  },
-  {
-    path: '/n-back-top-debug',
-    component: backTopDebug
-  },
-  {
-    path: '/n-cascader-debug',
-    component: cascaderDebug
-  },
   {
     path: '/:lang/:theme',
     component: Entry,
@@ -271,9 +235,5 @@ router.afterEach(function (to, from) {
     Vue.prototype.$NLoadingBar.finish()
   }
 })
-
-if (!localStorage.mode) {
-  localStorage.mode = 'debug'
-}
 
 export { Vue, router, i18n, hljs }
