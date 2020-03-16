@@ -351,10 +351,11 @@ export default {
         } else {
           value = [...value]
         }
-        e.target.value = value[index]
         value[index] = changedValue
         this.$emit('input', value)
       }
+      /** force update to sync input's view with value */
+      this.$forceUpdate()
     },
     handleInputBlur (e) {
       this.$emit('input-blur', e)
