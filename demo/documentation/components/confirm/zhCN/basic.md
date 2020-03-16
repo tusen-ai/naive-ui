@@ -25,13 +25,11 @@ export default {
         content: '你确定？',
         positiveText: '确定',
         negativeText: '不确定',
-        onPositiveClick: (hide) => {
+        onPositiveClick: () => {
           this.$NMessage.success('确定')
-          hide()
         },
-        onNegativeClick: (hide) => {
+        onNegativeClick: () => {
           this.$NMessage.error('不确定')
-          hide()
         }
       })
     },
@@ -41,9 +39,8 @@ export default {
         content:
           '厉害',
         positiveText: '哇',
-        onPositiveClick: (hide) => {
+        onPositiveClick: () => {
           this.$NMessage.success('耶！')
-          hide()
         }
       })
     },
@@ -52,9 +49,8 @@ export default {
         title: '错误',
         content: '错了',
         positiveText: '啊',
-        onPositiveClick: (hide) => {
+        onPositiveClick: () => {
           this.$NMessage.success('我就知道')
-          hide()
         }
       })
     }
