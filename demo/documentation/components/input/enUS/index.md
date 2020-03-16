@@ -1,5 +1,7 @@
 # Input
 Many years ago, people used punched card to input.
+
+<n-alert title="Caveat" type="warning">`n-input` is a controlled component. If you don't handle with its `input` event, its value will never be changed. (v-model doesn't matter, since it is an abbreviation for controlled data-bindings)</n-alert>
 ## Demos
 ```demo
 basic
@@ -23,6 +25,7 @@ passively-activated
 ### Input Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |type|`'text' \| 'password' \| 'textarea'`|`'text'`||
 |pair|`boolean`|`false`|Whether to input pairwise value.|
 |value|`string \| [string, string]`|`null`|Value of input. When `pair` is `true`, `value` is an array.|

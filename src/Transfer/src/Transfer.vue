@@ -63,7 +63,7 @@
                 </template>
               </recycle-scroller>
             </n-scrollbar>
-            <n-scrollbar v-else>
+            <n-scrollbar v-else :theme="syntheticTheme">
               <div ref="sourceList" class="n-transfer-list-content">
                 <n-base-tracking-rect ref="sourceLightBar" :item-size="itemSize" :theme="syntheticTheme" />
                 <n-transfer-source-list-item
@@ -153,7 +153,7 @@
                 </template>
               </recycle-scroller>
             </n-scrollbar>
-            <n-scrollbar v-else>
+            <n-scrollbar v-else :theme="syntheticTheme">
               <div ref="targetList" class="n-transfer-list-content">
                 <n-base-tracking-rect ref="targetLightBar" :item-size="itemSize" :theme="syntheticTheme" />
                 <n-transfer-target-list-item

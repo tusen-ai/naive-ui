@@ -12,6 +12,7 @@ custom
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |theme|`'light' \| 'dark'`|`null`||
+|themed-style|`{ [themeName: string]: object }`|`null`||
 |type|`'primary' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'primary'`||
 |size|`number \| string`|`null`||
 |gradient|`string \| { from: string, to: string, deg: number \| string }`|`null`||

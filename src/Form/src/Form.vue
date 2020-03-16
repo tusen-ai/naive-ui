@@ -70,14 +70,14 @@ export default {
     this.initialValue = cloneDeep(this.model)
   },
   methods: {
-    validate (afterValidation, shouldFieldBeValidated = () => true) {
+    validate (callback, shouldRuleBeApplied = () => true) {
       return new Promise((resolve, reject) => {
         const formItemValidationPromises = []
         for (const key of Object.keys(this.items)) {
           const formItemInstances = this.items[key]
           for (const formItemInstance of formItemInstances) {
             if (formItemInstance.path) {
-              formItemValidationPromises.push(formItemInstance._validate())
+              formItemValidationPromises.push(formItemInstance._validate(null, shouldRuleBeApplied))
             }
           }
         }
@@ -86,13 +86,13 @@ export default {
           .then(results => {
             if (results.some(result => !result.valid)) {
               const errors = results.filter(result => result.errors).map(result => result.errors)
-              if (afterValidation) {
-                afterValidation(errors)
+              if (callback) {
+                callback(errors)
               } else {
                 reject(errors)
               }
             } else {
-              if (afterValidation) afterValidation()
+              if (callback) callback()
               else {
                 resolve()
               }

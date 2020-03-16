@@ -26,6 +26,7 @@
         <n-tag
           v-for="option in selectedOptions"
           :key="option.value"
+          :theme="theme"
           :size="size"
           closable
           :disabled="disabled"
@@ -61,6 +62,7 @@
         <n-tag
           v-for="option in selectedOptions"
           :key="option.value"
+          :theme="theme"
           :size="size"
           :disabled="disabled"
           closable

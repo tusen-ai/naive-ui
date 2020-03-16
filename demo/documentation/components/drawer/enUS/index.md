@@ -14,13 +14,19 @@ target
 ## Props
 |Name|Parameters|Default|Description|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
+|themed-style|`{ [themeName: string]: object }`|`null`||
 |show|`boolean`|`false`||
 |placement|`'top' \| 'right' \| 'bottom' \| 'left'`|`'right'`||
 |width|`number \| string`|`251`||
 |height|`number \| string`|`251`|Works when placement is `top` and `bottom`.|
 |mask-closable|`boolean`|`true`|Whether to emit `hide` event when click mask.|
 |drawer-style|`object`|`null`||
+<<<<<<< HEAD
 |target|`() => HTMLElement`|`null`|
+=======
+|drawer-class|`string`|`null`||
+>>>>>>> upstream/develop
 
 ## Slots
 |Name|Parameters|Description|

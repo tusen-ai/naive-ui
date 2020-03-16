@@ -15,6 +15,7 @@ nested
 ### Collapse
 |Name|Type|Default|Description|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |expanded-names|`Array`|`null`||
 |accordion|`boolean`|`false`||
 

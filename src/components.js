@@ -464,7 +464,7 @@ function createScriptImportStatements (componentNames = [], format = 'esm') {
 }
 
 function createScriptImportStatement (componentName, format = 'esm') {
-  return `import N${componentName} from ${scriptPrefix[format]}${componentName}`
+  return `import N${componentName} from '${scriptPrefix[format]}${componentName}'`
 }
 
 function createStyleImportStatements (componentNames = [], format = 'esm') {
@@ -484,11 +484,12 @@ function createStyleImportStatements (componentNames = [], format = 'esm') {
 function createStyleImportStatement (styleFile, format) {
   if (styleFile.startsWith('~')) {
     return (
-      'import ' +
-      styleFile.slice(1, styleFile.length)
+      'import \'' +
+      styleFile.slice(1, styleFile.length) +
+      '\''
     )
   }
-  return `import ${stylePrefix[format]}${styleFile}${styleExtension[format]}`
+  return `import '${stylePrefix[format]}${styleFile}${styleExtension[format]}'`
 }
 
 function createImportStatements (componentNames = [], format = 'esm') {
@@ -499,12 +500,12 @@ function createImportStatements (componentNames = [], format = 'esm') {
 }
 
 function createLocaleImportStatements (locales = ['zhCN', 'enUS'], format = 'ems') {
-  return locales.map(locale => `import ${locale} from ${scriptPrefix[format]}locale/${locale}`).join('\n') + '\n\n'
+  return locales.map(locale => `import ${locale} from '${scriptPrefix[format]}locale/${locale}'`).join('\n') + '\n\n'
 }
 
 function createInitializeStatements (components = [], locales = ['zhCN', 'enUS'], format = 'esm') {
   return (
-    `import create from ${scriptPrefix[format]}create\n\n` +
+    `import create from '${scriptPrefix[format]}create'\n\n` +
     createLocaleImportStatements(locales, format) +
     `const naive = create({\n` +
     `  components: [\n` +

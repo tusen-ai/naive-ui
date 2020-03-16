@@ -107,6 +107,7 @@ function changeThemeInPath (path, theme) {
 
 <style lang="scss" scoped>
 .demo {
+  z-index: auto;
   position: absolute;
   left: 0;
   right: 0;

@@ -197,6 +197,17 @@ export default {
       type: String,
       default: 'activator'
     },
+    tag: {
+      type: Boolean,
+      default: false
+    },
+    createOption: {
+      type: Function,
+      default: label => ({
+        label: label,
+        value: label
+      })
+    },
     /** deprecated */
     items: {
       type: Array,
@@ -208,7 +219,9 @@ export default {
       active: false,
       scrolling: false,
       pattern: '',
-      memorizedValueToOptionMap: new Map()
+      memorizedValueToOptionMap: new Map(),
+      createdOptions: [],
+      beingCreatedOptions: []
     }
   },
   computed: {
@@ -220,17 +233,22 @@ export default {
     },
     adpatedOptions () {
       /**
-       * If use deprecated API, make it work at first
+       * If using deprecated API, make it work at first
        */
-      if (this.items) return this.items
-      else if (this.options) return this.options
+      const options = this.items || this.options
+      if (options) return options
       return []
     },
+    localOptions () {
+      return this.adpatedOptions
+        .concat(this.createdOptions)
+        .concat(this.beingCreatedOptions)
+    },
     filteredOptions () {
-      const options = this.adpatedOptions
       if (this.remote) {
-        return options
+        return this.adpatedOptions
       } else {
+        const options = this.localOptions
         const trimmedPattern = this.pattern.trim()
         if (!trimmedPattern.length || !this.filterable) {
           return options
@@ -242,7 +260,7 @@ export default {
       }
     },
     valueToOptionMap () {
-      return valueToOptionMap(this.adpatedOptions)
+      return valueToOptionMap(this.localOptions)
     },
     selectedOptions () {
       if (this.multiple) {
@@ -395,23 +413,48 @@ export default {
     },
     handleToggleOption (option) {
       if (this.disabled) return
+      const tag = this.tag
+      const remote = this.remote
+      if (tag && !remote) {
+        const beingCreatedOptions = this.beingCreatedOptions
+        const beingCreatedOption = beingCreatedOptions[0] || null
+        if (beingCreatedOption) {
+          this.createdOptions.push(beingCreatedOption)
+          this.beingCreatedOptions = []
+        }
+      }
       if (this.multiple) {
         const memorizedValueToOptionMap = this.memorizedValueToOptionMap
         if (this.remote) {
           memorizedValueToOptionMap.set(option.value, option)
         }
-        const newValue = this.clearMultipleSelectValue(this.value)
-        const index = newValue.findIndex(value => value === option.value)
+        const changedValue = this.clearMultipleSelectValue(this.value)
+        const index = changedValue.findIndex(value => value === option.value)
         if (~index) {
-          newValue.splice(index, 1)
+          changedValue.splice(index, 1)
+          if (tag && !remote) {
+            const createdOptionIndex = this.getCreatedOptionIndex(option.value)
+            if (~createdOptionIndex) {
+              this.createdOptions.splice(createdOptionIndex, 1)
+              this.pattern = ''
+            }
+          }
         } else {
-          newValue.push(option.value)
+          changedValue.push(option.value)
           this.pattern = ''
         }
-        this.$emit('change', newValue)
+        this.$emit('change', changedValue)
       } else {
+        if (tag && !remote) {
+          const createdOptionIndex = this.getCreatedOptionIndex(option.value)
+          if (~createdOptionIndex) {
+            this.createdOptions = [this.createdOptions[createdOptionIndex]]
+          } else {
+            this.createdOptions = []
+          }
+        }
         if (this.filterable && !this.multiple) {
-          this.switchFocusToOuter()
+          this.returnFocusToWrapper()
         }
         this.closeMenu()
         this.$emit('change', option.value)
@@ -419,19 +462,47 @@ export default {
     },
     handleDeleteLastOption (e) {
       if (!this.pattern.length) {
-        const newValue = this.clearMultipleSelectValue(this.value)
-        if (Array.isArray(newValue)) {
-          newValue.pop()
-          this.$emit('change', newValue)
+        const changedValue = this.clearMultipleSelectValue(this.value)
+        if (Array.isArray(changedValue)) {
+          const popedValue = changedValue.pop()
+          const createdOptionIndex = this.getCreatedOptionIndex(popedValue)
+          ~createdOptionIndex && this.createdOptions.splice(createdOptionIndex, 1)
+          this.$emit('change', changedValue)
         }
       }
+    },
+    getCreatedOptionIndex (optionValue) {
+      const createdOptions = this.createdOptions
+      return createdOptions.findIndex(
+        createdOption => createdOption.value === optionValue
+      )
     },
     handlePatternInput (e) {
       const value = e.target.value
       this.pattern = value
-      if (this.onSearch) {
-        this.onSearch(value)
+      const onSearch = this.onSearch
+      if (onSearch) {
+        onSearch(value)
         this.$emit('search', value)
+      }
+      if (this.tag && !this.remote) {
+        if (!value) {
+          this.beingCreatedOptions = []
+          return
+        }
+        const optionBeingCreated = this.createOption(value)
+        if (
+          this.adpatedOptions.some(
+            option => option.value === optionBeingCreated.value
+          ) ||
+          this.createdOptions.some(
+            option => option.value === optionBeingCreated.value
+          )
+        ) {
+          this.beingCreatedOptions = []
+        } else {
+          this.beingCreatedOptions = [optionBeingCreated]
+        }
       }
     },
     handleClear (e) {
@@ -459,12 +530,13 @@ export default {
      */
     handleKeyUpEnter (e) {
       if (this.active) {
-        const pendingOptionData = this.$refs.contentInner && this.$refs.contentInner.getPendingOptionData()
+        const contentInner = this.$refs.contentInner
+        const pendingOptionData = contentInner && contentInner.getPendingOptionData()
         if (pendingOptionData) {
           this.handleToggleOption(pendingOptionData)
         } else {
           this.closeMenu()
-          this.switchFocusToOuter()
+          this.returnFocusToWrapper()
         }
       } else {
         this.openMenu()
@@ -502,7 +574,7 @@ export default {
         })
       })
     },
-    switchFocusToOuter () {
+    returnFocusToWrapper () {
       this.$refs.activator.blurPatternInput()
       this.$nextTick().then(() => {
         this.$refs.activator.focusPatternInputWrapper()

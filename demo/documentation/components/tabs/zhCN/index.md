@@ -16,6 +16,7 @@ display-directive
 ### Tabs Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |active-name|`string \| number`|`null`||
 |type|`'line' \| 'card'`|`'line'`||
 |closable|`boolean`|`false`||

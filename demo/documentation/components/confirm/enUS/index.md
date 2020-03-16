@@ -29,9 +29,9 @@ use-component
 |show-icon|`boolean`|`true`||
 |loading|`boolean`|`false`||
 |bordered|`boolean`|`false`||
-|onPositiveClick|`(hide: function) => any`|`hide => hide()`||
-|onNegativeClick|`(hide: function) => any`|`hide => hide()`|
-|onClose|`(hide: function) => any`|`hide => hide()`||
+|onPositiveClick|`() => Promise<boolean> \| boolean`|`() => true`|The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior.|
+|onNegativeClick|`() => Promise<boolean> \| boolean`|`() => true`|The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior.|
+|onClose|`() => Promise<boolean> \| boolean`|`() => true`|The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior.|
 
 ### ConfirmEnvironment API
 #### ConfirmEnvironment Properties

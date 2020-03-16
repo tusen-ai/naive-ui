@@ -10,6 +10,8 @@ no-icon
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
+|themed-style|`{ [themeName: string]: object }`|`null`||
 |title|`string`|`null`||
 |show-icon|`string`|`true`||
 |type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'default'`||

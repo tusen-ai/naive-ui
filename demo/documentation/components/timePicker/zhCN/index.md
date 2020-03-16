@@ -16,6 +16,7 @@ format
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |placeholder|`string`|`'请选择时间'`||
 |value|`number`|`null`||
 |format|`string`|`'HH:mm:ss'`||

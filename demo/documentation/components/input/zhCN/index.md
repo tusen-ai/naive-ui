@@ -1,5 +1,7 @@
 # 文本输入 Input
 很多年前，人们还在用打孔纸卡输入。
+
+<n-alert title="注意" type="warning">`n-input` 是严格受控的组件，如果你不对 `input` 事件做任何响应，那么它的值永远不会改变。（v-model 并不会出问题，因为 v-model 只是受控用法的简写）</n-alert>
 ## 演示
 ```demo
 basic
@@ -23,6 +25,7 @@ passively-activated
 ### Input Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |type|`'text' \| 'password' \| 'textarea'`|`'text'`||
 |pair|`boolean`|`false`|是否输入成对的值|
 |value|`string \| [string, string]`|`null`|文本输入的值。如果是 `pair` 是 `true`，`value` 是一个数组|

@@ -28,6 +28,7 @@ basic
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |language|`string`|`null`||
 |code|`string`|`null`||
 |trim|`boolean`|`true`||

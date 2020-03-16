@@ -13,6 +13,7 @@ default-files
 ### Upload Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |name|`string`|`'file'`|文件在提交表单中的字段名|
 |accept|`string`|`null`|接受的文件类型，参考 <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept">accept</n-a>|
 |action|`string`|`null`|请求提交的地址|
@@ -29,10 +30,9 @@ default-files
 |file-list|`Array<UploadFile>`|`undefined`|文件列表，如果传入组件会处于受控状态|
 |file-list-style|`Object`|`null`|文件列表区域的样式|
 |default-file-list|`Array<UploadFile>`|`[]`|非受控状态下默认的文件列表|
-|show-cancel-button|`boolean`|`true`|是否显示取消按钮（在 pending、uploading、error 的时候展示），点击取消按钮会触发 onRemove 回调|
-|show-remove-button|`boolean`|`true`|是否显示删除按钮（在 finished 的时候展示），点击删除按钮会触发 onRemove 回调|
+|show-cancel-button|`boolean`|`true`|是否显示取消按钮（在 pending、uploading、error 的时候展示），点击取消按钮会触发 `on-remove` 回调|
+|show-remove-button|`boolean`|`true`|是否显示删除按钮（在 finished 的时候展示），点击删除按钮会触发 `on-remove` 回调|
 |disabled|`boolean`|`false`||
-
 
 ### UploadFile Type
 |属性|类型|说明|

@@ -8,7 +8,9 @@
         'n-alert--no-icon': showIcon === false,
         [`n-${syntheticTheme}-theme`]: syntheticTheme
       }"
-      :style="syntheticStyle"
+      :style="{
+        ...syntheticStyle
+      }"
     >
       <div v-if="closable" class="n-alert__close" @click="handleCloseClick">
         <n-icon>

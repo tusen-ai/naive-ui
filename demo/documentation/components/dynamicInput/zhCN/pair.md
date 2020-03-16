@@ -1,23 +1,23 @@
-# 键值对
+# 使用键值对预设
 ```html
 <n-dynamic-input
   preset="pair"
-  v-model="test"
-  placeholder-key="placeholder1"
-  placeholder-value="placeholder2"
+  v-model="value"
+  key-placeholder="优化内容"
+  value-placeholder="优化成本"
 />
 <pre>
-{{  JSON.stringify(test,0,2) }}
+{{  JSON.stringify(value, 0, 2) }}
 </pre>
 ```
 ```js
 export default {
   data () {
     return {
-      test: [
+      value: [
         {
-          key: 'key1',
-          value: 'value1'
+          key: '',
+          value: ''
         }
       ]
     }

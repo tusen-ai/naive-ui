@@ -1,11 +1,11 @@
 # 受控显示
 ```html
-<div class="demo">
+<div class="badge-demo">
   <n-badge :value="value" :max="15" :show="show">
-    <div class="block" />
+    <n-avatar />
   </n-badge>
   <n-badge :value="value" dot :show="show">
-    <div class="block" />
+    <n-avatar />
   </n-badge>
   <n-button-group>
     <n-button @click="value = Math.min(16, value + 1)">
@@ -43,21 +43,8 @@ export default {
 .n-badge {
   margin: 0 32px 0px 0;
 }
-.demo {
+.badge-demo {
   display: flex;
   align-items: center;
-}
-.n-button-group {
-  margin: 0 12px 0 0;
-}
-.block {
-  width: 32px;
-  height: 32px;
-  background-color: #dddddd;
-  border-radius: 4px;
-  transition: background-color .3s cubic-bezier(.4, 0, .2, 1);
-}
-.n-dark-theme .block {
-  background-color: rgba(255, 255, 255, .15);
 }
 ```

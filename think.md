@@ -125,6 +125,9 @@ const devtoolIsOpened = e.target === document.activeElement
 ## 2020.3.8
 zindex 有点问题
 
+## 2020.3.11
+zindex 的问题解决了，虽然很简单，在 static 元素上设定 zindex 没用，😅
+
 
 ## TODO 排序不分先后
 1. <del>Focus Detector on Time Selector</del>
@@ -134,7 +137,7 @@ zindex 有点问题
 5. <del>Safari select lightbar container overflow 边角（或许是 webkit 的问题）</del>默认选中第一个可以装作这个问题不存在
 6. <del>Chrome lightbar offset @table fitler</del> select menu 始终存在这个问题，不知道原因是什么
 7. <del>cascader 数据结构重构，维持原选项！</del> 这个不做了，对 Children 的处理过于边角，Patch 那块也会从声明式变成命令式
-8. <del>排查 render 函数是否每个地方都支持数组</del>
+8. <del>排查 render 函数是否每个地方都支持数组</del> 我现在明白了，只要套上数组，vue 就能完美的渲染
 9. <del>form async validation</del>
 10. <del>table filter 重构支持异步</del>
 11. <del>tabs resize bug</del>
@@ -148,7 +151,7 @@ zindex 有点问题
 19. <del>icon 的默认 stroke</del>
 20. <del>tree 组件</del>
 21. <del>文件上传组件</del>
-22. custom-input 废弃或者重构
+22. <del>custom-input 废弃或者重构</del>
 23. Date 键盘操作 Time 键盘操作
 24. <del>Time 格式化</del>
 25. <del>Date 格式化</del>
@@ -202,6 +205,14 @@ zindex 有点问题
 73. <del>Dropdown API 修改为 label + value，目前为止 UI 并没有出现过 key，不能只为了它搞特殊，value 可以，key 甚至会另有作用，现在占用实际是个危险的事情</del>
 74. card slot
 75. table fixed computed left right
+76. gradient text 的切换能解决？
+77. Auto Complete Group
+78. <del>select add tag</del>
+79. <del>dynamic input</del> 还差英文文档
+80. <del>input 严格受控</del>
+81. 搞明白 vue 的 scoped 和 普通的关系
+82. Form Item 不返回 true 的时候... 错误信息不会消失，这似乎不太合理?
+83. Form Item 应该和 Input Group 也契合良好
 
 ```
 Done

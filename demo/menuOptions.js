@@ -196,16 +196,16 @@ export default function (locale, instance) {
             path: `/${instance.lang}/${instance.theme}/doc` + '/n-checkbox'
           },
           {
-            name: 'Dynamic Input',
-            title: '动态输入',
-            titleExtra: 'Dynamic Input',
-            path: `/${instance.lang}/${instance.theme}/doc` + '/n-dynamic-input'
-          },
-          {
             name: 'Date Picker',
             title: '日期选择器',
             titleExtra: 'Date Picker',
             path: `/${instance.lang}/${instance.theme}/doc` + '/n-date-picker'
+          },
+          {
+            name: 'Dynamic Input',
+            title: '动态录入',
+            titleExtra: 'Dynamic Input',
+            path: `/${instance.lang}/${instance.theme}/doc` + '/n-dynamic-input'
           },
           {
             name: 'Form',
@@ -674,12 +674,12 @@ export default function (locale, instance) {
             path: `/${instance.lang}/${instance.theme}/doc` + '/n-checkbox'
           },
           {
-            name: 'Dynamic Input',
-            path: `/${instance.lang}/${instance.theme}/doc` + '/n-dynamic-input'
-          },
-          {
             name: 'Date Picker',
             path: `/${instance.lang}/${instance.theme}/doc` + '/n-date-picker'
+          },
+          {
+            name: 'Dynamic Input',
+            path: `/${instance.lang}/${instance.theme}/doc` + '/n-dynamic-input'
           },
           {
             name: 'Form',

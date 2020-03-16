@@ -27,6 +27,7 @@
   <n-layout-header
     bordered
     :style="{
+      position: 'relative',
       zIndex: zIndex
     }"
   >

@@ -1,7 +1,7 @@
 # Result
 Result is for showing result.
 
-Many thanks to [twemoji](https://github.com/twitter/twemoji) for creating those high quality icons!
+Many thanks to [twemoji](https://github.com/twitter/twemoji) for creating those high quality icons.
 ## Demos
 ```demo
 s404
@@ -17,6 +17,7 @@ error
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |status|`'info' \| 'success' \| 'error' \| 'warning' \| 404 \| '404' \| 500 \| '500' \| 400 \| '400' \| 418 \| '418'`|`'info'`||
 |title|`string`|`null`||
 |description|`string`|`null`||

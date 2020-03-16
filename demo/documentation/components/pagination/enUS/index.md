@@ -17,6 +17,7 @@ disabled
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |page|`number`|`null`||
 |page-count|`number`|`null`||
 |page-size|`number`|`null`||
