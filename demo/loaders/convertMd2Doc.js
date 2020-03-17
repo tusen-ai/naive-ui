@@ -90,7 +90,7 @@ export default {
 
 function convertMd2ComponentDocumentation (text, env = 'development', url) {
   const isNoDemo = !!~text.search('<!--no-demo-->')
-  const titleReg = /(<n-h1[^>]*\>)(.*?)(<\/n-h1>)/
+  const titleReg = /(<n-h1[^>]*>)(.*?)(<\/n-h1>)/
   const gheUrl = 'https://***REMOVED***/tree/develop/' + url
   const gheButton = `<n-tooltip
           :delay="300"
