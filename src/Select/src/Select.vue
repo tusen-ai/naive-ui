@@ -37,7 +37,8 @@
       @delete-option="handleToggleOption"
       @pattern-input="handlePatternInput"
       @clear="handleClear"
-      @blur="handlePickerBlur"
+      @blur="handleActivatorBlur"
+      @focus="handleActivatorFocus"
     />
     <div
       ref="contentContainer"
@@ -348,9 +349,12 @@ export default {
         }
       }
     },
-    handlePickerBlur () {
-      this.$emit('blur', this.value)
+    handleActivatorBlur () {
+      this.$emit('blur')
       this.closeMenu()
+    },
+    handleActivatorFocus () {
+      this.$emit('focus')
     },
     handleClickOutsideMenu (e) {
       if (this.active) {
@@ -567,18 +571,10 @@ export default {
     },
     handleKeyUpEsc (e) {
       this.closeMenu()
-      this.$nextTick().then(() => {
-        this.$refs.activator.blurPatternInput()
-        this.$nextTick().then(() => {
-          this.$refs.activator.focusPatternInputWrapper()
-        })
-      })
+      this.$refs.activator.focusPatternInputWrapper()
     },
     returnFocusToWrapper () {
-      this.$refs.activator.blurPatternInput()
-      this.$nextTick().then(() => {
-        this.$refs.activator.focusPatternInputWrapper()
-      })
+      this.$refs.activator.focusPatternInputWrapper()
     }
   }
 }

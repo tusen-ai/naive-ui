@@ -29,6 +29,7 @@
       :filterable="filterable"
       :clearable="clearable"
       :disabled="disabled"
+      @focus="handleActivatorFocus"
       @blur="handleActivatorBlur"
       @click="handleActivatorClick"
       @clear="handleClear"
@@ -385,6 +386,9 @@ export default {
     handleClear () {
       this.$emit('change', null)
     },
+    handleActivatorFocus () {
+      this.$emit('focus')
+    },
     handleActivatorBlur () {
       this.$emit('blur')
       this.closeMenu()
@@ -430,9 +434,7 @@ export default {
      */
     handleKeyUpEsc () {
       this.closeMenu()
-      this.$nextTick().then(() => {
-        this.$refs.activator.focusPatternInputWrapper()
-      })
+      this.$refs.activator.focusPatternInputWrapper()
     },
     handleKeyDownSpace (e) {
       if (!this.filterable) {

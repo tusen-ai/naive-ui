@@ -14,6 +14,7 @@
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
     @mousedown.capture="handleMouseDown"
+    @focusin="handleFocusin"
   >
     <template v-if="multiple && !filterable">
       <!-- multiple -->
@@ -58,6 +59,7 @@
         ref="patternInputWrapper"
         class="n-base-selection-tags"
         :tabindex="(disabled || patternInputFocused) ? false : '0'"
+        @blur="handleBlur"
       >
         <n-tag
           v-for="option in selectedOptions"
@@ -114,6 +116,7 @@
         ref="patternInputWrapper"
         class="n-base-selection-label"
         :tabindex="(!disabled && !patternInputFocused) ? '0' : false"
+        @blur="handleBlur"
       >
         <input
           ref="patternInput"
@@ -282,7 +285,17 @@ export default {
     }
   },
   methods: {
-    handleBlur () {
+    handleFocusin (e) {
+      if (!e.relatedTarget || !this.$el.contains(e.relatedTarget)) {
+        this.$emit('focus')
+      }
+    },
+    handleBlur (e) {
+      if (!e.relatedTarget) {
+        console.log(e.relatedTarget)
+        console.warn('[naive-ui/base-selection]: blur events has no related target, this may be a bug of naive-ui.')
+      }
+      if (e.relatedTarget && this.$el.contains(e.relatedTarget)) return
       this.$emit('blur')
     },
     handleClear (e) {
@@ -317,7 +330,6 @@ export default {
       }
     },
     handlePatternInputInput (e) {
-      // console.log('NBaseSelection, handlePatternInput', e)
       if (this.multiple) {
         this.$nextTick().then(() => {
           const textWidth = this.$refs.patternInputMirror.getBoundingClientRect().width
@@ -333,18 +345,20 @@ export default {
     },
     handlePatternInputBlur (e) {
       this.patternInputFocused = false
-      this.handleBlur()
+      this.handleBlur(e)
     },
     focusPatternInputWrapper () {
-      if (this.$refs.patternInputWrapper) {
-        this.$refs.patternInputWrapper.focus()
-      }
+      this.patternInputFocused = false
+      this.$nextTick().then(() => {
+        const patternInputWrapper = this.$refs.patternInputWrapper
+        if (patternInputWrapper) patternInputWrapper.focus()
+      })
     },
     focusPatternInput () {
-      // if set to sync it won't work when mode is multiple filterable
       this.$nextTick().then(() => {
-        if (this.$refs.patternInput) {
-          this.$refs.patternInput.focus()
+        const patternInput = this.$refs.patternInput
+        if (patternInput) {
+          patternInput.focus()
         }
       })
     },
