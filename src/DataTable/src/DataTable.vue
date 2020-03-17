@@ -5,6 +5,7 @@
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
       'n-data-table--bordered': bordered,
       'n-data-table--single-line': singleLine,
+      'n-data-table--single-column': singleColumn,
       [`n-data-table--${size}-size`]: true
     }"
   >
@@ -31,6 +32,7 @@
           :class="{
             'n-data-table__empty--hide': loading
           }"
+          :style="bodyStyle"
         >
           <n-empty />
         </div>
@@ -185,6 +187,10 @@ export default {
     singleLine: {
       type: Boolean,
       default: true
+    },
+    singleColumn: {
+      type: Boolean,
+      default: false
     },
     size: {
       validator (value) {

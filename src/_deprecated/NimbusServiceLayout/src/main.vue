@@ -50,6 +50,10 @@ export default {
     contentStyle: {
       type: Object,
       default: null
+    },
+    siderBordered: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -105,9 +109,10 @@ export default {
       'show-trigger': true,
       'collapsed': this.collapsed,
       'collapse-mode': 'width',
-      'bordered': true,
+      'bordered': this.siderBordered,
       'show-content': !this.collapsed,
       'use-native-scrollbar': false,
+      'collapsed-width': 28,
       'width': 288,
       'scroll-container-style': {
         width: '288px'
