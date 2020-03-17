@@ -5,7 +5,6 @@
         :lang="lang"
         :items="flattenedItems"
         :env="env"
-        :mode="mode"
         @lang-change="handleLangChange"
         @mode-change="handleModeChange"
       />
@@ -20,7 +19,7 @@
 import DocHeader from './header.vue'
 import menuOptions from './menuOptions'
 import { i18n } from './deploymentInit'
-import { state, setState } from './store'
+import { state } from './store'
 
 export default {
   components: {
@@ -87,9 +86,6 @@ export default {
   methods: {
     handleLangChange (lang) {
       this.lang = lang
-    },
-    handleModeChange (mode) {
-      setState(mode)
     }
   }
 }

@@ -103,8 +103,7 @@ export default {
   },
   data () {
     return {
-      zindexable: true,
-      parent: null
+      zindexable: true
     }
   },
   computed: {

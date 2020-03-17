@@ -57,9 +57,7 @@ export default {
         const pattern = this.pattern.trim()
         return this.names.filter(name => ~(name.search(pattern)))
       } else {
-        return this.names.filter(name => {
-          return name
-        })
+        return this.names
       }
     },
     displayNames () {

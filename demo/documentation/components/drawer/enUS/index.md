@@ -22,7 +22,7 @@ target
 |height|`number \| string`|`251`|Works when placement is `top` and `bottom`.|
 |mask-closable|`boolean`|`true`|Whether to emit `hide` event when click mask.|
 |drawer-style|`object`|`null`||
-|target|`() => HTMLElement`|`null`|
+|target|`() => HTMLElement`|`undefined`|The area where the drawer appears|
 |drawer-class|`string`|`null`||
 
 ## Slots

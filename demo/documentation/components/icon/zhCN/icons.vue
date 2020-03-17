@@ -6,7 +6,7 @@
         marginBottom: '24px',
         marginTop: '18px'
       }"
-      placeholder="Search Icons"
+      placeholder="查询图标"
     />
     <div class="icons">
       <icon-wrapper
@@ -57,9 +57,7 @@ export default {
         const pattern = this.pattern.trim()
         return this.names.filter(name => ~(name.search(pattern)))
       } else {
-        return this.names.filter(name => {
-          return name
-        })
+        return this.names
       }
     },
     displayNames () {

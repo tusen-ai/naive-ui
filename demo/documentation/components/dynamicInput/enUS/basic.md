@@ -3,7 +3,7 @@ By default, the preset of `n-dynamic-input` is `input`.
 ```html
 <n-dynamic-input
   v-model="value"
-  placeholder="please input"
+  placeholder="Please input"
   :min="3"
   :max="6"
 />
