@@ -6,8 +6,8 @@
     :content-style="{
       minWidth: scrollX
     }"
-    :horizontal-rail-style="{ zIndex: 1 }"
-    :vertical-rail-style="{ zIndex: 1 }"
+    :horizontal-rail-style="{ zIndex: 3 }"
+    :vertical-rail-style="{ zIndex: 3 }"
     :show-rail="!fixed"
     @scroll="handleScroll"
   >

@@ -38,8 +38,11 @@
       font-size: 14px;
       padding-bottom: 8px;
       @include e(empty) {
-        padding: 24px 0;
+        height: 108px;
         opacity: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         transition: opacity .3s $--n-ease-in-out-cubic-bezier;
         @include m(hide) {
           opacity: 0;
@@ -111,6 +114,7 @@
           @include m(fixed-left) {
             left: 0;
             position: sticky;
+            z-index: 2;
             &::after {
               content: "";
               width: 16px;
@@ -144,6 +148,7 @@
           }
         }
         @include m(shadow-after) {
+          border-right-color: transparent !important;
           &::after {
             box-shadow: inset 16px 0 12px -16px $--data-table-fixed-column-box-shadow-color;
           }
@@ -190,7 +195,7 @@
         @include m(fixed-left) {
           left: 0;
           position: sticky;
-          z-index: 1;
+          z-index: 2;
           &::after {
             content: "";
             width: 16px;
@@ -223,8 +228,18 @@
           }
         }
         @include m(shadow-after) {
+          border-right-color: transparent !important;
           &::after {
             box-shadow: inset 16px 0 12px -16px $--data-table-fixed-column-box-shadow-color;
+          }
+        }
+      }
+    }
+    @include m(single-column) {
+      @include b(data-table-wrapper) {
+        @include b(data-table-table){
+          @include b(data-table-td) {
+            border-bottom: 0px solid map-get($--data-table-border-color, 'default') !important;
           }
         }
       }

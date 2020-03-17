@@ -46,6 +46,7 @@ ajaxUsage
 |row-key|`(rowData: object) => number \| string`|`null`|Generate the key of the row by row data (if you don't want to set the key)|
 |bordered|`boolean`|`true`||
 |single-line|`boolean`|`true`||
+|single-column|`boolean`|`false`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 
 ## Methods
