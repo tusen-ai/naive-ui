@@ -215,8 +215,8 @@ export default {
   mounted () {
     resizeObserverDelegate.registerHandler(this.$el, this.handleResize)
     this.handleResize()
-    this.setActiveLeft(this.$el)
-    this.setActiveRight(this.$el)
+    this.setActiveLeftFixedColumn(this.$el)
+    this.setActiveRightFixedColumn(this.$el)
     this.$emit('set-active-fixed-column', this.leftActiveFixedColumn, this.rightActiveFixedColumn)
   },
   beforeDestroy () {
@@ -230,8 +230,8 @@ export default {
       this.tableWidth = this.$el.offsetWidth
     },
     handleScroll (e) {
-      this.setActiveRight(e.target)
-      this.setActiveLeft(e.target)
+      this.setActiveRightFixedColumn(e.target)
+      this.setActiveLeftFixedColumn(e.target)
       this.$emit('set-active-fixed-column', this.leftActiveFixedColumn, this.rightActiveFixedColumn)
       this.NDataTable.handleTableHeaderScroll(e)
     },
@@ -252,30 +252,35 @@ export default {
       const nextSorter = createNextSorter(column.key, activeSorter, column.sorter)
       this.NDataTable.changeSorter(nextSorter)
     },
-    setActiveRight (target) {
+    setActiveRightFixedColumn (target) {
       const rightFixedColumns = this.NDataTable.rightFixedColumns
       const scrollLeft = target.scrollLeft
       const tableWidth = this.tableWidth
       const scrollWidth = target.scrollWidth
+      let rightWidth = 0
       const fixedColumnsRight = this.fixedColumnsRight
       const rightActiveFixedColumn = {}
       this.rightActiveFixedColumn = rightActiveFixedColumn
-      for (let i = 0; i < rightFixedColumns.length; i++) {
-        if (scrollLeft + fixedColumnsRight[rightFixedColumns[i].key] + tableWidth < scrollWidth) {
-          rightActiveFixedColumn[rightFixedColumns[i].key] = true
+      for (let i = rightFixedColumns.length - 1; i >= 0; --i) {
+        const key = rightFixedColumns[i].key
+        if (scrollLeft + fixedColumnsRight[key] + tableWidth - rightWidth < scrollWidth) {
+          this.rightActiveFixedColumn = { [key]: true }
+          rightWidth += rightFixedColumns[i].width
+        } else {
           break
         }
       }
     },
-    setActiveLeft (target) {
+    setActiveLeftFixedColumn (target) {
       const leftFixedColumns = this.NDataTable.leftFixedColumns
       const scrollLeft = target.scrollLeft
       let leftWidth = 0
       const fixedColumnsLeft = this.fixedColumnsLeft
       this.leftActiveFixedColumn = {}
-      for (let i = 0; i < leftFixedColumns.length; i++) {
-        if (scrollLeft > fixedColumnsLeft[leftFixedColumns[i].key] - leftWidth) {
-          this.leftActiveFixedColumn = { [leftFixedColumns[i].key]: true }
+      for (let i = 0; i < leftFixedColumns.length; ++i) {
+        const key = leftFixedColumns[i].key
+        if (scrollLeft > fixedColumnsLeft[key] - leftWidth) {
+          this.leftActiveFixedColumn = { [key]: true }
           leftWidth += leftFixedColumns[i].width
         } else {
           break
