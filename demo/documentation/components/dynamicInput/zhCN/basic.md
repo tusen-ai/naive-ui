@@ -3,7 +3,7 @@
 ```html
 <n-dynamic-input
   v-model="value"
-  placeholder="优化内容"
+  placeholder="请输入"
   :min="3"
   :max="6"
 />

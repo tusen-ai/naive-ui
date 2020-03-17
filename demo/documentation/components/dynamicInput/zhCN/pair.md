@@ -3,8 +3,8 @@
 <n-dynamic-input
   preset="pair"
   v-model="value"
-  key-placeholder="优化内容"
-  value-placeholder="优化成本"
+  key-placeholder="环境变量名"
+  value-placeholder="环境变量值"
 />
 <pre>
 {{  JSON.stringify(value, 0, 2) }}

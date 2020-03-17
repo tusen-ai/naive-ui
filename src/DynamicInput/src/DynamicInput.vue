@@ -22,6 +22,7 @@
       <div class="n-dynamic-input-item__action">
         <n-button-group>
           <n-button
+            :disabled="removeDisabled"
             circle
             @click="remove($event, index)"
           >
@@ -82,9 +83,12 @@ export default {
       type: Function,
       default: null
     },
+    onClear: {
+      type: Function,
+      default: null
+    },
     preset: {
       validator (value) {
-        console.log('check preset', value)
         return ['input', 'pair'].includes(value)
       },
       default: 'input'
@@ -116,6 +120,9 @@ export default {
   computed: {
     insertionDisabled () {
       return this.max !== null && this.value.length >= this.max
+    },
+    removeDisabled (index) {
+      return this.value.length === 1 && !this.onClear
     }
   },
   methods: {
@@ -124,52 +131,48 @@ export default {
     },
     createItem (e, index) {
       const onCreate = this.onCreate
-      this.$emit('add')
       if (onCreate) {
         this.value.splice(index + 1, 0, onCreate(index + 1))
-        return
-      }
-      if (this.$slots.default) {
+      } else if (this.$slots.default) {
         this.value.splice(index + 1, 0, null)
-        return
+      } else {
+        switch (this.preset) {
+          case 'input':
+            this.value.splice(index + 1, 0, null)
+            break
+          case 'pair':
+            this.value.splice(index + 1, 0, { key: null, value: null })
+            break
+        }
       }
-      switch (this.preset) {
-        case 'input':
-          this.value.splice(index + 1, 0, null)
-          break
-        case 'pair':
-          this.value.splice(index + 1, 0, { key: null, value: null })
-          break
-      }
+      this.$emit('create', index + 1)
     },
     remove (e, index) {
       if (this.value.length === 1) {
-        const onCreate = this.onCreate
-        this.$emit('clear')
-        if (onCreate) {
+        const onClear = this.onClear
+        if (onClear) {
           const keyField = this.keyField
           if (keyField) {
             const memorizedKeyField = this.value[0][keyField]
-            this.$emit('input', [ Object.assign(onCreate(0), {
+            this.$emit('input', [ Object.assign(onClear, {
               [keyField]: memorizedKeyField
             })])
           } else {
-            this.$emit('input', [ onCreate(0) ])
+            this.$emit('input', [ onClear(0) ])
           }
+        } else if (this.$slots.default) {
           return
+        } else {
+          switch (this.preset) {
+            case 'input':
+              this.$emit('input', [ null ])
+              break
+            case 'pair':
+              this.$emit('input', [ { key: null, value: null } ])
+              break
+          }
         }
-        if (this.$slots.default) {
-          this.$emit('input', [ null ])
-          return
-        }
-        switch (this.preset) {
-          case 'input':
-            this.$emit('input', [ null ])
-            break
-          case 'pair':
-            this.$emit('input', [ { key: null, value: null } ])
-            break
-        }
+        this.$emit('clear')
       } else {
         const changedValue = Array.from(this.value)
         changedValue.splice(index, 1)

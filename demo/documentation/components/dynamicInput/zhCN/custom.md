@@ -2,7 +2,8 @@
 ```html
 <n-dynamic-input
   v-model="customValue"
-  :on-add="onAdd"
+  :on-create="onCreate"
+  :on-clear="onClear"
 >
   <template v-slot="{ value }">
     <div style="width: 100%;">
@@ -35,17 +36,24 @@ export default {
         {
           isCheck: true,
           num: 1,
-          string: 'A String'
+          string: '一个字符串'
         }
       ]
     }
   },
   methods: {
-    onAdd () {
+    onCreate () {
       return {
         isCheck: false,
         num: 1,
-        string: 'A String'
+        string: '一个字符串'
+      }
+    },
+    onClear () {
+      return {
+        isCheck: false,
+        num: 0,
+        string: ''
       }
     }
   }
