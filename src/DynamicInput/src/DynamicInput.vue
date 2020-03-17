@@ -154,11 +154,11 @@ export default {
           const keyField = this.keyField
           if (keyField) {
             const memorizedKeyField = this.value[0][keyField]
-            this.$emit('input', [ Object.assign(onClear, {
+            this.$emit('input', [ Object.assign(onClear(), {
               [keyField]: memorizedKeyField
             })])
           } else {
-            this.$emit('input', [ onClear(0) ])
+            this.$emit('input', [ onClear() ])
           }
         } else if (this.$slots.default) {
           return
