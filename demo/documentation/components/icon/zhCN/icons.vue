@@ -63,7 +63,7 @@ export default {
       }
     },
     displayNames () {
-      return this.filteredNames.slice(0, loadNumber)
+      return this.filteredNames.slice(0, this.loadNumber)
     }
   },
   mounted () {

@@ -89,8 +89,6 @@ export default {
       this.lang = lang
     },
     handleModeChange (mode) {
-      // this.mode = mode
-      // localStorage.setItem('mode', mode)
       setState(mode)
     }
   }
