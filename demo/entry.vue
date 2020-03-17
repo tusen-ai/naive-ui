@@ -45,7 +45,7 @@ export default {
   },
   computed: {
     mode () {
-      return state.mode
+      return this.state.mode
     },
     env () {
       return process.env.NODE_ENV

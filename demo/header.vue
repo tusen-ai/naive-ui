@@ -140,7 +140,7 @@ export default {
   },
   computed: {
     mode () {
-      return state.mode
+      return this.state.mode
     },
     zIndex () {
       const path = this.$route.path

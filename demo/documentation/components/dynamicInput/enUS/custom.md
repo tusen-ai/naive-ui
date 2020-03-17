@@ -1,4 +1,4 @@
-# Custom content
+# Custom Input Content
 ```html
 <n-dynamic-input
   v-model="customValue"

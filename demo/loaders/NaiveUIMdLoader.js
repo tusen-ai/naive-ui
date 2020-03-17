@@ -70,6 +70,7 @@ export default {
   methods: {
     handleEditOnGithubClick () {
       window.open(this.gheUrl, '_blank')
+      return false
     },
   }
 }

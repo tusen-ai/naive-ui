@@ -136,6 +136,7 @@ export default {
   methods: {
     handleEditOnGithubClick () {
       window.open(this.url, '_blank')
+      return false
     },
     toggleCodeDisplay () {
       this.showCode = !this.showCode

@@ -11,6 +11,7 @@ theme
 custom-icon
 depth
 ```
+
 ```component
 icons
 ```

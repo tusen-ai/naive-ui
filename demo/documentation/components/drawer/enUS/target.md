@@ -7,7 +7,7 @@
   <n-button @click="activate('left')">Left</n-button>
 </n-button-group>
 <div 
-  ref="test" 
+  ref="target" 
   style="position:relative;
     width:500px;
     height:500px;
@@ -34,7 +34,7 @@ export default {
       this.placement = placement
     },
     target () {
-      return this.$refs.test
+      return this.$refs.target
     }
   }
 }
