@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import VueI18n from 'vue-i18n'
 
 import LandingPage from './documentation/landing'
 import Entry from './entry'
@@ -83,29 +82,7 @@ import ComponentDocumentation from './utils/ComponentDocumentation'
 import DocumentationWrapper from './utils/DocumentationWrapper'
 import './styles/demo.scss'
 
-import hljs from 'highlight.js/lib/highlight'
-import javascript from 'highlight.js/lib/languages/javascript'
-import python from 'highlight.js/lib/languages/python'
-import cpp from 'highlight.js/lib/languages/cpp'
-
-hljs.registerLanguage('javascript', javascript)
-hljs.registerLanguage('python', python)
-hljs.registerLanguage('cpp', cpp)
-hljs.registerLanguage('naive-log', () => ({
-  contains: [
-    {
-      className: 'number',
-      begin: /\d+/
-    }
-  ]
-}))
-
-Vue.use(VueI18n)
 Vue.use(VueRouter)
-
-const i18n = new VueI18n({
-  locale: 'en-US'
-})
 
 Vue.component('ComponentDemo', ComponentDemo)
 Vue.component('ComponentDemos', ComponentDemos)
@@ -236,4 +213,4 @@ router.afterEach(function (to, from) {
   }
 })
 
-export { Vue, router, i18n, hljs }
+export { Vue, router }
