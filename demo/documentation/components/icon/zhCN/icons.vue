@@ -46,11 +46,7 @@ export default {
       return this.state.mode
     },
     names () {
-      const iconNames = []
-      for (const key in icons) {
-        iconNames.push(key)
-      }
-      return iconNames
+      return Object.keys(icons)
     },
     filteredNames () {
       if (this.pattern.trim()) {
