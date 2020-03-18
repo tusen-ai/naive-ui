@@ -14,7 +14,9 @@
     >
       <n-icon type="ios-arrow-forward">
         <ios-arrow-forward />
-      </n-icon>{{ title }}
+      </n-icon><slot name="header">
+        {{ title }}
+      </slot>
     </div>
     <fade-in-height-expand-transition>
       <div
@@ -72,10 +74,10 @@ export default {
     }
   },
   methods: {
-    handleClick () {
+    handleClick (e) {
       const NCollapse = this.NCollapse
       if (NCollapse) {
-        NCollapse.toggleItem(this.collapse, this.name)
+        NCollapse.toggleItem(this.collapse, this.name, e)
       }
     }
   }

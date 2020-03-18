@@ -38,7 +38,7 @@ action
 |filterable|`boolean`|`false`|Whether it can filter options.|
 |filter|`(pattern: string, option: Object) => boolean`|A basic string based search method.||
 |tag|`boolean`|`false`|Whether it can create new option, should be used with `filterable`.|
-|create-option|`(label: string) => SelectOption`|`label => ({ label, value: label })`|How to create a option when you input a string to create a option. Note that `filter` will be applied to the option too. And make sure the value of the created option is not the same as any other option.|
+|on-create|`(label: string) => SelectOption`|`label => ({ label, value: label })`|How to create a option when you input a string to create a option. Note that `filter` will be applied to the created option too. And make sure the value of the created option is not the same as any other option.|
 
 ## API
 ### SelectOption Type

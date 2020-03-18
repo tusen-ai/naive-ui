@@ -34,25 +34,30 @@ export default {
     }
   },
   methods: {
-    toggleItem (collapse, name) {
+    toggleItem (collapse, name, event) {
       if (this.accordion) {
         if (collapse) {
           this.$emit('expanded-names-change', [name])
+          this.$emit('item-header-click', { name, expanded: true, event })
         } else {
           this.$emit('expanded-names-change', [])
+          this.$emit('item-header-click', { name, expanded: false, event })
         }
       } else {
         if (!Array.isArray(this.expandedNames)) {
           this.$emit('expanded-names-change', [name])
+          this.$emit('item-header-click', { name, expanded: true, event })
         } else {
           const activeNames = intersection(this.expandedNames, this.collectedItemNames)
           const index = activeNames.findIndex(activeName => name === activeName)
           if (~index) {
             activeNames.splice(index, 1)
             this.$emit('expanded-names-change', activeNames)
+            this.$emit('item-header-click', { name, expanded: false, event })
           } else {
             activeNames.push(name)
             this.$emit('expanded-names-change', activeNames)
+            this.$emit('item-header-click', { name, expanded: true, event })
           }
         }
       }

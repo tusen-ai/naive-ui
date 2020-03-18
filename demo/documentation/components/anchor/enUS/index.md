@@ -12,6 +12,7 @@ scrollto
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |affix|`boolean`|`false`|If it works like a affix. If set to `true`, it will recieve props from [affix](n-affix#Props)|
 |target|`() => HTMLElement`|A function that returns the nearest scrollable ascendant element|The element that anchor listens to scroll event. (If you want affix & anchor to listen to different target, manually warp anchor in affix instead.)|
 |bound|`number`|`12`||
