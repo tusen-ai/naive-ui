@@ -40,6 +40,7 @@ passively-activated
 |readonly|`boolean`|`false`||
 |seperator|`string`|`null`|The seperator bewteen pairwise inputs.|
 |placeholder|`string \| [string, string]`|`null`|Placeholder of input. When `pair` is `true`, placeholder is an array.|
+|passively-activated|`boolean`|`false`||
 
 ## Slots
 ### Input Slots

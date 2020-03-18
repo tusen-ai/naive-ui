@@ -46,6 +46,7 @@ ajaxUsage
 |row-key|`(rowData: object) => number \| string`|`null`|通过行数据创建行的 key（如果你不想给每一行加上 key）|
 |bordered|`boolean`|`true`||
 |single-line|`boolean`|`true`||
+|single-column|`boolean`|`false`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 
 ## Methods
