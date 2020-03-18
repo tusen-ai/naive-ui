@@ -5,10 +5,10 @@
     <div>good</div>
   </n-collapse-item>
   <n-collapse-item title="right" name="2">
-    <div>good</div>
+    <div>nice</div>
   </n-collapse-item>
   <n-collapse-item title="right" name="3">
-    <div>test</div>
+    <div>very good</div>
   </n-collapse-item>
 </n-collapse>
 ```
