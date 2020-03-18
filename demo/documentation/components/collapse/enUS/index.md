@@ -39,6 +39,7 @@ item-header-click
 |header|`()`||
 
 ## Event
+### Collapse Event
 |Name|Parameters|Description|
 |-|-|-|
 |expanded-names-change|`(expandedNames: Array<string>)`||

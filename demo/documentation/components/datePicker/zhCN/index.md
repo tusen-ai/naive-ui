@@ -72,11 +72,11 @@ format
 ### Date, DateTime 类型的 Events
 |名称|参数|说明|
 |-|-|-|
-|change|`(currentValue: number \| null)`||
-|blur|`(currentValue: number \| null)`||
+|change|`(value: number \| null)`||
+|blur|`()`||
 
 ### DateRange, DateTimeRange 类型的 Events
 |名称|参数|说明|
 |-|-|-|
-|change|`(currentValue: [number, number] \| null)`||
-|blur|`(currentValue: [number, number] \| null)`||
+|change|`(value: [number, number] \| null)`||
+|blur|`()`||
