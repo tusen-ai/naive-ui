@@ -6,7 +6,6 @@
         :items="flattenedItems"
         :env="env"
         @lang-change="handleLangChange"
-        @mode-change="handleModeChange"
       />
       <n-layout class="home-layout" style="top: 64px; overflow: hidden;" position="absolute">
         <router-view />
