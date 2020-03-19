@@ -24,7 +24,8 @@ about-theme
 |Name|Type|Description|
 |-|-|-|
 |content|`string \|(() => VNode \| Array<VNode>)`|Can be a render function|
-|icon|`string \| (() => VNode)`|Can be a render function|
+|icon|`() => VNode`|Can be a render function|
+|theme|`'light' \| 'dark'`||
 |onHide|`function`||
 |onAfterHide|`function`||
 

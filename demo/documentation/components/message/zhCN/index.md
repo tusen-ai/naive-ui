@@ -24,7 +24,8 @@ about-theme
 |名称|类型|说明|
 |-|-|-|
 |content|`string \| (() => VNode \| Array<VNode>)`|可以是 render 函数|
-|icon|`string \| (() => VNode)`|可以是 render 函数|
+|icon|`() => VNode`|可以是 render 函数|
+|theme|`'light' \| 'dark'`||
 |onHide|`function`||
 |onAfterHide|`function`||
 
