@@ -3,6 +3,8 @@
     class="edit-button"
     ghost
     round
+    :size="size"
+    :text="text"
     @click="handleEditOnGithubClick"
   >
     <template v-slot:icon>
@@ -10,8 +12,10 @@
     </template>
   </n-button>
 </template>
+
 <script>
 import createOutline from '../../src/_icons/create-outline'
+
 export default {
   name: 'EditOnGithubButton',
   components: {
@@ -21,6 +25,14 @@ export default {
     url: {
       type: String,
       required: true
+    },
+    text: {
+      type: Boolean,
+      default: false
+    },
+    size: {
+      type: String,
+      default: undefined
     }
   },
   data () {
@@ -40,8 +52,3 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-  .edit-button {
-    vertical-align: middle;
-  }
-</style>
