@@ -9,7 +9,10 @@
       [`n-data-table--${size}-size`]: true
     }"
   >
-    <n-spin :spinning="loading">
+    <n-spin
+      :spinning="loading"
+      :theme="syntheticTheme"
+    >
       <div
         class="n-data-table-wrapper"
       >
@@ -34,7 +37,7 @@
           }"
           :style="bodyStyle"
         >
-          <n-empty />
+          <n-empty :theme="syntheticTheme" />
         </div>
       </div>
       <div
@@ -42,6 +45,7 @@
         class="n-data-table__pagination"
       >
         <n-pagination
+          :theme="syntheticTheme"
           :page="syntheticPagination.page"
           :page-count="syntheticPagination.pageCount"
           :page-slot="pagination.pageSlot"

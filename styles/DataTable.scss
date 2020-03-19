@@ -94,6 +94,16 @@
           box-sizing: border-box;
           transition: background-color 0.3s $--n-ease-in-out-cubic-bezier;
           background-clip: padding-box;
+          &:last-child {
+            @include b(data-table-td) {
+              &::after {
+                bottom: 0 !important;
+              }
+              &::before {
+                bottom: 0 !important;
+              }
+            }
+          }
         }
       }
       @include b(data-table-td) {
@@ -238,8 +248,16 @@
     @include m(single-column) {
       @include b(data-table-wrapper) {
         @include b(data-table-table){
-          @include b(data-table-td) {
-            border-bottom: 0px solid map-get($--data-table-border-color, 'default') !important;
+          @include b(data-table-tr) {
+            @include b(data-table-td) {
+              border-bottom: 0px solid map-get($--data-table-border-color, 'default') !important;
+              &::after {
+                bottom: 0 !important;
+              }
+              &::before {
+                bottom: 0 !important;
+              }
+            }
           }
         }
       }

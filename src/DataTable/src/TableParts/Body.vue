@@ -2,6 +2,7 @@
   <n-scrollbar
     ref="scrollbar"
     class="n-data-table-base-table-body"
+    :theme="NDataTable.syntheticTheme"
     :style="style"
     :content-style="{
       minWidth: scrollX

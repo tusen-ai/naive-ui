@@ -60,10 +60,11 @@ export default {
   display: inline-flex;
   align-items: center;
   opacity: 0;
-  transition: opacity .3s cubic-bezier(.4, 0, .2, 1);
+  transition: opacity .3s .15s ease-in;
 }
 
 .naive-doc-title:hover .edit-button {
   opacity: 1;
+  transition: opacity .3s ease-out;
 }
 </style>
