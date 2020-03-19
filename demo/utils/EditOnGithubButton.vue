@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     handleEditOnGithubClick () {
-      return window.open(this.gheDocUrl, '_blank')
+      window.open(this.gheDocUrl, '_blank')
     }
   }
 }
