@@ -102,7 +102,7 @@ const Notification = {
       container.theme = theme
     }
     Notification.instances.forEach(instance => {
-      instance.theme = theme
+      instance.inheritedTheme = theme
     })
   },
   open (options, type = 'default') {
@@ -110,7 +110,7 @@ const Notification = {
     if (Notification.container && Notification.theme) {
       Notification.container.theme = Notification.theme
     }
-    const notificationOptions = { theme: Notification.theme, type, ...options }
+    const notificationOptions = { type, ...options, theme: options.theme || Notification.theme }
     const instance = createNotification(notificationOptions)
     mountNotification(instance)
     return instance

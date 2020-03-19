@@ -33,7 +33,8 @@ duration
 
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|avatar|`string \| (() => VNode \| Array<VNode>)`|`null`|可以是 render 函数|
+|theme|`'light' \| 'dark'`|`null`||
+|avatar|`() => VNode \| Array<VNode>`|`null`|可以是 render 函数|
 |title|`string \| (() => VNode \| Array<VNode>)`|`null`|可以是 render 函数|
 |description|`string \| (() => VNode \| Array<VNode>)`|`null`|可以是 render 函数|
 |content|`string \| (() => VNode \| Array<VNode>)`|`null`|可以是 render 函数|
