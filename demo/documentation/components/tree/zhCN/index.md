@@ -19,6 +19,7 @@ filter
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |expand-on-dragenter|`boolean`|`true`|是否在拖入后展开节点|
 |block-node|`boolean`|`false`||
 |data|`Array<TreeNode>`|`[]`|树的节点数据。重新设置 data 会将一些非受控状态清空，如果你需要在使用中改动 data，最好以受控的方式控制树|

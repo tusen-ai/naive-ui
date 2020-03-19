@@ -36,6 +36,7 @@ loading
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |loading|`boolean`|`false`||
 |trim|`boolean`|`false`||
 |log|`string`|`null`||

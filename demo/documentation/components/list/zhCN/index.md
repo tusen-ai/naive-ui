@@ -10,6 +10,7 @@ border
 ### List Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |bordered|`boolean`|`false`||
 
 ## Slots

@@ -10,7 +10,11 @@
     }"
     @wheel="handleWheel"
   >
-    <n-scrollbar ref="scrollbar" @scroll="handleScroll">
+    <n-scrollbar
+      ref="scrollbar"
+      :theme="syntheticTheme"
+      @scroll="handleScroll"
+    >
       <n-log-line
         v-for="(line, index) in syntheticLines"
         :key="index"

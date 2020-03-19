@@ -13,7 +13,7 @@ import scrollbarDebug2 from '../debugComponents/scrollbarDebug2'
 
 import { withPrefix } from './utils'
 
-const RootDebugRoutes = [
+const rootDebugRoutes = [
   {
     path: '/n-popover-debug',
     component: popoverDebug
@@ -28,7 +28,7 @@ const RootDebugRoutes = [
   }
 ]
 
-const ChildDebugRoutes = [
+const childDebugRoutes = [
   { path: '/n-scrollbar-debug2', component: scrollbarDebug2 },
   { path: '/n-date-picker-debug', component: datePickerDebug },
   { path: '/n--debug', component: suffixDebug },
@@ -41,6 +41,6 @@ const ChildDebugRoutes = [
 ]
 
 export default function debugRouteMixin (routes, childRoutes) {
-  routes.unshift(RootDebugRoutes)
-  childRoutes.unshift(withPrefix('/:lang/:theme/doc', ChildDebugRoutes))
+  routes.unshift(rootDebugRoutes)
+  childRoutes.unshift(withPrefix('/:lang/:theme/doc', childDebugRoutes))
 }

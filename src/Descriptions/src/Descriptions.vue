@@ -1,7 +1,6 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import asthemecontext from '../../_mixins/asthemecontext'
 
 function isDescriptionsItem (vNode) {
   return (
@@ -14,7 +13,7 @@ function isDescriptionsItem (vNode) {
 
 export default {
   name: 'NDescriptions',
-  mixins: [withapp, themeable, asthemecontext],
+  mixins: [withapp, themeable],
   props: {
     title: {
       type: String,

@@ -10,6 +10,7 @@ item-placement
 ### Timeline Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |item-placement|`'left' \| 'right'`|`'left'`||
 |size|`'medium' \| 'large'`|`'medium'`||
 

@@ -1,6 +1,7 @@
 <template>
   <span class="n-tree-node-checkbox">
     <n-checkbox
+      :theme="NTree.syntheticTheme"
       :checked="value"
       @change="handleChange"
     />
@@ -12,6 +13,11 @@ import NCheckbox from '../../Checkbox'
 
 export default {
   name: 'NTreeNodeCheckbox',
+  inject: {
+    NTree: {
+      default: null
+    }
+  },
   components: {
     NCheckbox
   },
