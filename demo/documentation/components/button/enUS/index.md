@@ -27,7 +27,7 @@ debug
 |circle|`boolean`|`false`||
 |round|`boolean`|`false`||
 |loading|`boolean`|`false`||
-|keyboard|`boolean`|`true`|Whether is supports keyboard operation.｜
+|keyboard|`boolean`|`true`|Whether is supports keyboard operation.|
 |icon-placement|`'left' \| 'right'`|`'left'`||
 |theme|`'light' \| 'dark'`|`null`||
 

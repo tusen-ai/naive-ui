@@ -9,6 +9,11 @@ basic
 #### $NLoadingBar Methods
 |名称|类型|说明|
 |-|-|-|
-|`start`|`() => void`||
-|`finish`|`() => void`||
-|`error`|`() => void`||
+|`start`|`(option: LoadingBarOption) => void`||
+|`finish`|`(option: LoadingBarOption) => void`||
+|`error`|`(option: LoadingBarOption) => void`||
+
+#### LoadingBarOption Type
+|属性|类型|说明|
+|-|-|-|
+|theme|`'light' \| 'dark'`||

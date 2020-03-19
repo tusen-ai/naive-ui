@@ -22,6 +22,7 @@ import popover from '../documentation/components/popover'
 import alert from '../documentation/components/alert'
 import datePicker from '../documentation/components/datePicker'
 import inputNumber from '../documentation/components/inputNumber'
+import icon from '../documentation/components/icon'
 import radio from '../documentation/components/radio'
 import form from '../documentation/components/form'
 import tabs from '../documentation/components/tabs'
@@ -84,10 +85,7 @@ export const childRoutes = [
   { path: '/n-nimbus-service-layout', component: nimbusServiceLayoutDemo },
   { path: '/n-layout', component: layout },
   { path: '/n-gradient-text', component: gradientText },
-  {
-    path: '/n-icon',
-    component: () => import('../documentation/components/icon')
-  },
+  { path: '/n-icon', component: icon },
   { path: '/n-checkbox', component: checkbox },
   { path: '/n-button', component: button },
   { path: '/n-switch', component: nswitch },

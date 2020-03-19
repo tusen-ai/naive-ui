@@ -1,7 +1,7 @@
 # Controlled File List
 Example is only a joke.
 ```html
-<div style="overflow: hidden">
+<div>
   <n-upload
     action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
     :file-list="fileList"

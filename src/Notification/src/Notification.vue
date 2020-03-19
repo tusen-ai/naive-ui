@@ -57,7 +57,6 @@
 
 <script>
 import themeable from '../../_mixins/themeable'
-import asthemecontext from '../../_mixins/asthemecontext'
 import NIcon from '../../Icon'
 import mdClose from '../../_icons/md-close'
 import mdCheckmarkCircle from '../../_icons/md-checkmark-circle'
@@ -76,7 +75,7 @@ export default {
     mdInformationCircle,
     mdCloseCircle
   },
-  mixins: [ themeable, asthemecontext ],
+  mixins: [ themeable ],
   props: {
     closable: {
       type: Boolean,

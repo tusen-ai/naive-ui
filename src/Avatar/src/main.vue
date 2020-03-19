@@ -32,11 +32,10 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import asthemecontext from '../../_mixins/asthemecontext'
 
 export default {
   name: 'NAvatar',
-  mixins: [withapp, themeable, asthemecontext],
+  mixins: [withapp, themeable],
   props: {
     size: {
       type: [String, Number],
