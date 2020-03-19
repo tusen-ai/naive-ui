@@ -5,6 +5,7 @@ I saw it appears in many side control panels.
 basic
 accordion
 nested
+item-header-click
 ```
 ## V-model
 |Prop|Event|
@@ -35,8 +36,11 @@ nested
 |Name|Parameters|Description|
 |-|-|-|
 |default|`()`||
+|header|`()`||
 
 ## Event
+### Collapse Event
 |Name|Parameters|Description|
 |-|-|-|
-|expanded-names|`(expandedNames: Array<string>)`||
+|expanded-names-change|`(expandedNames: Array<string>)`||
+|item-header-click|`({ name: string, expanded: boolean, event: MouseEvent })`||

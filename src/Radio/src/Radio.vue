@@ -71,6 +71,20 @@ export default {
       },
       default: null
     }
+  },
+  computed: {
+    syntheticTheme () {
+      const theme = this.theme
+      const NRadioGroup = this.NRadioGroup
+      if (theme !== null) {
+        return theme
+      } else if (NRadioGroup && NRadioGroup.syntheticTheme) {
+        return NRadioGroup.syntheticTheme
+      } else {
+        const NConfigProvider = this.NConfigProvider
+        return (NConfigProvider && NConfigProvider.syntheticTheme) || null
+      }
+    }
   }
 }
 </script>

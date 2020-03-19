@@ -25,6 +25,7 @@ action
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |loading|`boolean`|`false`||
 |clearable|`boolean`|`false`||
 |value|`Array \| string \| number`|`false`||
@@ -37,7 +38,7 @@ action
 |filterable|`boolean`|`false`|是否可以过滤|
 |filter|`(pattern: string, option: Object) => boolean`|一个简单的字符串搜索算法||
 |tag|`boolean`|`false`|是否可以创建新的选项，需要和 `filterable` 一起使用|
-|create-option|`(label: string) => SelectOption`|`label => ({ label, value: label })`|在输入内容时如何创建一个选项。注意 `filter` 对这个选项同样会生效。同时确保这个选项和其他选项的 `value` 不要有重复|
+|on-create|`(label: string) => SelectOption`|`label => ({ label, value: label })`|在输入内容时如何创建一个选项。注意 `filter` 对这个生成的选项同样会生效。同时确保这个选项和其他选项的 `value` 不要有重复|
 
 
 ## API

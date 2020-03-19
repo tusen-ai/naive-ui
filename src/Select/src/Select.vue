@@ -202,7 +202,7 @@ export default {
       type: Boolean,
       default: false
     },
-    createOption: {
+    onCreate: {
       type: Function,
       default: label => ({
         label: label,
@@ -494,7 +494,7 @@ export default {
           this.beingCreatedOptions = []
           return
         }
-        const optionBeingCreated = this.createOption(value)
+        const optionBeingCreated = this.onCreate(value)
         if (
           this.adpatedOptions.some(
             option => option.value === optionBeingCreated.value

@@ -71,11 +71,11 @@ format
 ### Date, DateTime Type Events
 |Name|Parameters|Description|
 |-|-|-|
-|change|`(currentValue: number \| null)`||
-|blur|`(currentValue: number \| null)`||
+|change|`(value: number \| null)`||
+|blur|`()`||
 
 ### DateRange, DateTimeRange Type Events
 |Name|Parameters|Description|
 |-|-|-|
-|change|`(currentValue: [number, number] \| null)`||
-|blur|`(currentValue: [number, number] \| null)`||
+|change|`(value: [number, number] \| null)`||
+|blur|`()`||

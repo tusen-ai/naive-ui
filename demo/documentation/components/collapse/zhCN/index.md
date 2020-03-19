@@ -5,6 +5,7 @@
 basic
 accordion
 nested
+item-header-click
 ```
 ## V-model
 |Prop|Event|
@@ -35,9 +36,11 @@ nested
 |名称|参数|说明|
 |-|-|-|
 |default|`()`||
-
+|header|`()`||
 
 ## Event
+### Collapse Event
 |名称|参数|说明|
 |-|-|-|
-|expanded-names|`(expandedNames: Array<string>)`||
+|expanded-names-change|`(expandedNames: Array<string>)`||
+|item-header-click|`({ name: string, expanded: boolean, event: MouseEvent })`||

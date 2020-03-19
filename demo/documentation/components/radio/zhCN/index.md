@@ -23,6 +23,7 @@ size
 ### Radio Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |name|`string`|`undefined`|单选 radio 元素的 name 属性。如果没有设定会使用 `radio-group` 的 `name`|
 |checked-value|`string \| number \| boolean`|`null`||
 |value|`string \| number \| boolean`|`null`||
@@ -40,6 +41,7 @@ size
 ### Radio Group Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |name|`string`|`null`|选项组内部 radio 元素的 name 属性|
 |size|`'small' \| 'medium' \| 'large'`|`small`||
 |value|`string \| number \| boolean`|`null`||
