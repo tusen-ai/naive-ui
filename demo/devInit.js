@@ -81,6 +81,8 @@ import ComponentDemos from './utils/ComponentDemos'
 import ComponentDocumentation from './utils/ComponentDocumentation'
 import DocumentationWrapper from './utils/DocumentationWrapper'
 import './styles/demo.scss'
+import EditOnGithubButton from './utils/EditOnGithubButton'
+import EditOnGithubHeader from './utils/EditOnGithubHeader'
 
 import routerDebug from './debugComponents/routerDebug'
 import modalDebug from './debugComponents/modalDebug'
@@ -101,6 +103,8 @@ Vue.component('ComponentDemo', ComponentDemo)
 Vue.component('ComponentDemos', ComponentDemos)
 Vue.component('DocumentationWrapper', DocumentationWrapper)
 Vue.component('ComponentDocumentation', ComponentDocumentation)
+Vue.component('EditOnGithubButton', EditOnGithubButton)
+Vue.component('EditOnGithubHeader', EditOnGithubHeader)
 
 const withPrefix = (prefix, routes) =>
   routes.map(route => {

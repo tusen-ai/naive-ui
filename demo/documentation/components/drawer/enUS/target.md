@@ -13,7 +13,13 @@
     height:500px;
     border:1px solid rgba(0, 0, 0, .1);
     margin-top: 10px;">
-  <p style="position:absolute;top:50%;left:50%;transform: translate(-50%, -50%);">Appear area</p>
+  <p style="
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);">
+    Appear area
+  </p>
 </div>
 <n-drawer v-model="active" :width="200" :placement="placement" :target="target">
   <n-h1>Stoner</n-h1>
