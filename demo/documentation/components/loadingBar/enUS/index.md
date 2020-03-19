@@ -9,6 +9,11 @@ basic
 #### $NLoadingBar Methods
 |Name|Type|Description|
 |-|-|-|
-|`start`|`() => void`||
-|`finish`|`() => void`||
-|`error`|`() => void`||
+|`start`|`(option: LoadingBarOption) => void`||
+|`finish`|`(option: LoadingBarOption) => void`||
+|`error`|`(option: LoadingBarOption) => void`||
+
+#### LoadingBarOption Type
+|Property|Type|Description|
+|-|-|-|
+|theme|`'light' \| 'dark'`||

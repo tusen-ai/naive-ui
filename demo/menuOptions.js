@@ -16,9 +16,7 @@ const appendCounts = item => {
           },
           scopedSlots: {
             default: ({ styleScheme }) => {
-              return h('span', {
-
-              }, [ item.name, h('span', {
+              return h('span', [ item.name, h('span', {
                 style: {
                   color: styleScheme.tertiaryTextColor,
                   fontWeight: '400',
@@ -497,69 +495,6 @@ export default function (locale, instance) {
           }
         ]
       })
-      // {
-      //   name: '废弃的',
-      //   path: `/${instance.lang}/${instance.theme}/doc` + '/',
-      //   childItems: [
-      //     {
-      //       name: '服务布局',
-      //       path: `/${instance.lang}/${instance.theme}/doc` + '/n-nimbus-service-layout'
-      //     }
-      //   ]
-      // },
-      // {
-      //   name: 'Debug',
-      //   childItems: [
-      //     {
-      //       name: 'CancelMarkDebug',
-      //       path: `/${instance.lang}/${instance.theme}/doc` + '/n-base-suffix-debug'
-      //     },
-      //     {
-      //       name: 'PopoverDebug',
-      //       path: `/${instance.lang}/${instance.theme}/doc` + '/n-popover-debug'
-      //     },
-      //     {
-      //       name: 'RouterDebug',
-      //       path: `/${instance.lang}/${instance.theme}/doc` + '/n-router-debug'
-      //     },
-      //     {
-      //       name: 'ModalDebug',
-      //       path: `/${instance.lang}/${instance.theme}/doc` + '/n-modal-debug'
-      //     },
-      //     {
-      //       name: 'ScrollbarDebug',
-      //       path: `/${instance.lang}/${instance.theme}/doc` + '/n-scrollbar-debug'
-      //     },
-      //     {
-      //       name: 'ScrollbarDebug2',
-      //       path: `/${instance.lang}/${instance.theme}/doc` + '/n-scrollbar-debug2'
-      //     },
-      //     {
-      //       name: 'DatePickerDebug',
-      //       path: `/${instance.lang}/${instance.theme}/doc` + '/n-date-picker-debug'
-      //     },
-      //     {
-      //       name: 'BackTopDebug',
-      //       path: `/${instance.lang}/${instance.theme}/doc` + '/n-back-top-debug'
-      //     },
-      //     {
-      //       name: 'CascaderDebug',
-      //       path: `/${instance.lang}/${instance.theme}/doc` + '/n-cascader-debug'
-      //     },
-      //     {
-      //       name: 'VerticalAlignDebug',
-      //       path: `/${instance.lang}/${instance.theme}/doc` + '/n-vertical-align-debug'
-      //     },
-      //     {
-      //       name: 'IconTransitionDebug',
-      //       path: `/${instance.lang}/${instance.theme}/doc` + '/n-icon-transition-debug'
-      //     },
-      //     {
-      //       name: 'SelectDebug',
-      //       path: `/${instance.lang}/${instance.theme}/doc` + '/n-select-debug'
-      //     }
-      //   ]
-      // }
     ]
   } else {
     return [
@@ -571,10 +506,6 @@ export default function (locale, instance) {
         name: 'Get Started',
         path: `/${instance.lang}/${instance.theme}/doc` + '/start'
       },
-      // {
-      //   name: 'Develop Guidelines',
-      //   path: `/${instance.lang}/${instance.theme}/doc` + '/dev-guildlines'
-      // },
       {
         name: 'Create Themed Component',
         path: `/${instance.lang}/${instance.theme}/doc` + '/n-theme'

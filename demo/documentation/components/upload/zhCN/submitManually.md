@@ -8,7 +8,7 @@
 >
   上传文件
 </n-button>
-<div style="overflow: hidden">
+<div>
   <n-upload
     @change="handleChange"
     action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"

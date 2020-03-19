@@ -39,7 +39,6 @@
 import getScrollParent from '../../_utils/dom/getScrollParent'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import asthemecontext from '../../_mixins/asthemecontext'
 import NBasePortal from '../../_base/Portal'
 import formatLength from '../../_utils/css/formatLength'
 
@@ -48,7 +47,7 @@ export default {
   components: {
     NBasePortal
   },
-  mixins: [withapp, themeable, asthemecontext],
+  mixins: [withapp, themeable],
   props: {
     right: {
       type: [Number, String],

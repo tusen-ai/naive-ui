@@ -108,11 +108,13 @@ function applyDrop ({
 }
 
 /**
- * 你可能好奇为什么要把这个东西搞这么复杂
- * 我确实思考过 Element 和 Antd 他们不同的提供接口的方法
- * 为了给用户提供更强的控制能力 我选择了 Antd 的范式
- * 诚然这样使用门槛更高一点
- * 然后这个例子的时间复杂度确实可以优化 我实在是懒得改了
+ * You may wonder why the demo is so complicated.
+ * I did take both Element UI like & Antd like's API paradigms into consideration.
+ * For providing more ability to control the component,
+ * Antd's paradigm is better.
+ * Although it is harder to get started with.
+ * What's more, the time complexity of the demo can be optimized,
+ * but I'm too lazy to optimize it.
  */
 export default {
   data () {

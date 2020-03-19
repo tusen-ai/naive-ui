@@ -1,5 +1,4 @@
-import { Vue, router } from './deploymentInit'
-import i18n from './i18n'
+import { Vue, router, i18n } from './init'
 import hljs from './hljs'
 import demoRouterView from './demoRouterView'
 import NaiveUI from '../lib/index'
@@ -10,6 +9,6 @@ NaiveUI.setHljs(hljs)
 
 new Vue({
   ...demoRouterView,
-  i18n,
-  router
+  router,
+  i18n
 }).$mount('#app')

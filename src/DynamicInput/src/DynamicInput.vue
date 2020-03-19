@@ -22,7 +22,7 @@
       <div class="n-dynamic-input-item__action">
         <n-button-group>
           <n-button
-            :disabled="removeDisabled"
+            v-if="!removeDisabled"
             circle
             @click="remove($event, index)"
           >

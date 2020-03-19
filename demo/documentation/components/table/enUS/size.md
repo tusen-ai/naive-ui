@@ -1,6 +1,6 @@
-# 尺寸
+# Size
 ```html
-<<n-table :bordered="false" :single-line="false" size="small">
+<n-table :bordered="false" :single-line="false" size="small">
   <n-thead>
     <n-tr>
       <n-th>Abandon</n-th>

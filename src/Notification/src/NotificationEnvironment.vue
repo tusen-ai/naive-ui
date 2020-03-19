@@ -18,6 +18,7 @@ export default {
       type: 'default',
       active: true,
       theme: null,
+      inheritedTheme: null,
       avatar: null,
       title: null,
       description: null,
@@ -29,6 +30,11 @@ export default {
       onHide: () => {},
       onAfterShow: () => {},
       onAfterHide: () => {}
+    }
+  },
+  computed: {
+    syntheticTheme () {
+      return this.theme || this.inheritedTheme
     }
   },
   mounted () {
@@ -100,7 +106,7 @@ export default {
       this.active ? h(NNotification, {
         props: {
           type: this.type,
-          theme: this.theme,
+          theme: this.syntheticTheme,
           avatar: this.avatar,
           title: this.title,
           description: this.description,

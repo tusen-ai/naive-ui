@@ -1,21 +1,26 @@
 # Use it in Form
-`n-dynamic-input` itself cannot be verified. If you need to verify the input of` n-dynamic-input`, you can pass `n-form-item` in the custom content to complete the verification. Here is a complete example.
+`n-dynamic-input` itself cannot be verified. If you need to verify the input of `n-dynamic-input`, you can pass `n-form-item` in the custom content to complete the verification. Here is a complete example.
 ```html
 <n-form :model="model" ref="form">
   <!--
-    The key-field is set to make sure that each item can stay in the correct place. If not set, it may cause the
-    item verification information disappears or is misplaced
+    The key-field is set to make sure that each item can stay in the correct
+    place. If not set, it may cause the item verification information disappearance
+    or misplacement.
   -->
   <n-dynamic-input
     v-model="model.dynamicInputValue"
     key-field="key"
     :on-create="onCreate"
-    @clear="handleClear"
+    :on-clear="onClear"
   >
     <template v-slot="{ index, value }">
       <div style="display: flex;">
         <!--
-          Usually, the path change will cause the form-item verification content or rules to change, so naive-ui will clear the existing verification information. But this example is a special case. We know the changes in path will not cause changes in form-item verification content and rules, so set ignore-path-change
+          Usually, the path change will cause the form-item verification content
+          or rules to be changed, so naive-ui will clear the existing
+          verification effect. But this example is a special case, as we know
+          the changes in path will not change form-item verification result and
+          rules, so set ignore-path-change on form-item
         -->
         <n-form-item
           ignore-path-change
@@ -58,13 +63,13 @@ export default {
       dynamicInputRule: {
         trigger: 'input',
         validator (rule, value) {
-          if (value.length >= 5) return new Error('Input up to four characters')
+          if (value.length >= 5) return new Error('Input up to 4 characters')
           return true
         }
       },
       model: {
         dynamicInputValue: [
-          { key: 0, value: '' }
+          { key: 0, value: '', name: '' }
         ]
       }
     }
@@ -79,12 +84,21 @@ export default {
       }
     },
     /**
-     Since clearing the content of input is an external action, input does not emit events, so form-item cannot get events emitted from input. Therefore, in order to verify the results are synchronized with the displayed values, manual verification is required. `$NextTick` is used to accept this event, the input value has just been placed in the event and has not yet been implemented into the actual value. You need to wait for the next tick to verify the new result.
+     * Since clearing the content of input is an external action, input does not
+     * emit events, form-item cannot get events emitted from input.
+     * Therefore, in order to verify the results are synchronized with the
+     * displayed values, manual verification is required. `$nextTick` is used
+     * since the empty value will be set after the function is returned.
      */
-    handleClear () {
+    onClear () {
       this.$nextTick().then(
         () => this.$refs.form.validate()
       )
+      return  {
+        name: '',
+        value: '',
+        key: 0
+      }
     }
   }
 }

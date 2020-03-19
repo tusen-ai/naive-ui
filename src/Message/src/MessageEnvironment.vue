@@ -15,12 +15,18 @@ export default {
   data () {
     return {
       active: true,
+      inheritedTheme: null,
       theme: null,
       content: null,
       type: null,
       icon: null,
       onHide: () => {},
       onAfterHide: () => {}
+    }
+  },
+  computed: {
+    syntheticTheme () {
+      return this.theme || this.inheritedTheme
     }
   },
   mounted () {
@@ -56,7 +62,7 @@ export default {
         this.active
           ? h(NMessage, {
             props: {
-              theme: this.theme,
+              theme: this.syntheticTheme,
               content: this.content,
               type: this.type,
               icon: this.icon

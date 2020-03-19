@@ -1,32 +1,39 @@
 
- <i18n>
-    {
-    "zh-CN": {
+<i18n>
+{
+  "zh-CN": {
     "editOnGithub": "在 Github 上编辑"
     },
-    "en-US": {
+  "en-US": {
     "editOnGithub": "Edit on Github"
-    }
-    }
-  </i18n>
+  }
+}
+</i18n>
+
 <template>
-  <n-h1 :id="id">
+  <n-h1 :id="id" class="naive-doc-title">
     {{ text }}
-    <n-tooltip
-      :delay="300"
-      :placement="'top'"
-      :show-arrow="true"
-    >
-      <template v-slot:activator>
-        <edit-on-github-button
-          class="edit-button"
-          :url="url"
-        />
-      </template>
-      {{ $t('editOnGithub') }}
-    </n-tooltip>
+    <span class="edit-button">
+      <n-tooltip
+        :delay="300"
+        placement="right"
+        :show-arrow="true"
+      >
+        <template v-slot:activator>
+          <edit-on-github-button
+            style="vertical-align: middle;"
+            text
+            size="large"
+            class="edit-button"
+            :url="url"
+          />
+        </template>
+        {{ $t('editOnGithub') }}
+      </n-tooltip>
+    </span>
   </n-h1>
 </template>
+
 <script>
 export default {
   name: 'EditOnGithubHeader',
@@ -47,8 +54,17 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-  .edit-button {
-    margin-left: 10px;
-  }
+
+<style scoped>
+.naive-doc-title .edit-button {
+  display: inline-flex;
+  align-items: center;
+  opacity: 0;
+  transition: opacity .3s .15s ease-in;
+}
+
+.naive-doc-title:hover .edit-button {
+  opacity: 1;
+  transition: opacity .3s ease-out;
+}
 </style>

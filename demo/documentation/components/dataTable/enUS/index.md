@@ -32,6 +32,7 @@ ajaxUsage
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |data|`Array<object>`|`[]`|Data to display|
 |columns|`Array<Column>`||Columns to display, **required**|
 |max-height|`number \| string`|`null`|The max-height of the table. If content height is larger than it, the header will be fixed at top|

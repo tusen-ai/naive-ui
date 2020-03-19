@@ -10,6 +10,7 @@ item-placement
 ### Timeline Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |item-placement|`'left' \| 'right'`|`'left'`||
 |size|`'medium' \| 'large'`|`'medium'`||
 

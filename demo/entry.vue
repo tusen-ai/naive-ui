@@ -1,5 +1,10 @@
 <template>
-  <n-config-provider class="demo" namespace="naive-ui-doc" :theme="theme" :language="lang">
+  <n-config-provider
+    class="demo"
+    namespace="naive-ui-doc"
+    :theme="theme"
+    :language="lang"
+  >
     <n-layout position="absolute" class="root-layout">
       <doc-header
         :lang="lang"
@@ -17,7 +22,7 @@
 <script>
 import DocHeader from './header.vue'
 import menuOptions from './menuOptions'
-import i18n from './i18n'
+import { i18n } from './init'
 import { state } from './store'
 
 export default {

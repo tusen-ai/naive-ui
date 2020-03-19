@@ -1,8 +1,8 @@
 # Dynamic Input
 <!--single-column-->
-This component name has been changed many times.
+This component's name has been changed many times.
 
-Innitially, it was created for input environment variables.
+In the beginning, it was created for inputing environment variables.
 ## 演示
 ```demo
 basic
@@ -10,24 +10,30 @@ pair
 custom
 form
 ```
+
+## V-model
+|Prop|Event|
+|-|-|
+|value|input|
+
 ## Props
 ### Dynamic Input Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|preset|`'input' \| 'preset'`|`'input'`|The preset for dynamicInput, it work when `$scopedSlots.default` is not set.|
+|preset|`'input' \| 'preset'`|`'input'`|The preset of `n-dynamic-input`, it work when `$scopedSlots.default` is not set.|
 |value|`Array`|-|**required**|
 |max|`number`|`null`|Max number of items.|
 |key-field|`string`|`null`||
-|on-create|`(index: number) => any`|`null`|The callback when click the add button. If set, the return value will be used as the initial value for the new item. `index` is the number of the new item, counting from 0 (the second item) .|
-|on-clear|`() => any`|`null`|The callback when clear the last item. If set, the return value will be used as the value after the last item is cleared. If it is a custom content and no return value is set, the last item is not allowed to be cleared. Delete button is not clickable|
+|on-create|`(index: number) => any`|`null`|The callback when click at the add button. If set, the return value will be used as the initial value of the new item. `index` is the the new item's corresponding index in the value array, which starts from 1 (the second item).|
+|on-clear|`() => any`|`null`|The callback when clear the last one item. If set, the return value will be used as the value after the last item is cleared. If item content item is custom and `on-clear` is not set, the last item will not be allowed to be cleared.|
 
-### Dynamic Input Props(Input Preset)
+### Dynamic Input Props (Input Preset)
 |Name|Type|Default|Description|
 |-|-|-|-|
 |value|`Array<string>`|-|**required**|
 |placeholder|`string`|`''`||
 
-### Dynamic Input Props(Pair Preset)
+### Dynamic Input Props (Pair Preset)
 |Name|Type|Default|Description|
 |-|-|-|-|
 |value|`Array<{ key: string, value: string }>`|-|**required**|
@@ -42,6 +48,6 @@ form
 ## Events
 |Name|Parameters|Description|
 |-|-|-|
-|create|`(index: Number)`|`index` is the index of the new item.|
+|create|`(index: number)`|`index` is the index of the new item.|
 |clear|`()`||
-|remove|`(index: Number)`|`index` is the index of the removed item.| 
+|remove|`(index: number)`|`index` is the index of the removed item.| 

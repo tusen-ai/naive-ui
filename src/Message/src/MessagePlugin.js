@@ -49,7 +49,8 @@ function updateMessage (instance, content, option) {
   instance.icon = option.icon
   instance.type = option.type
   instance.content = content
-  instance.theme = Message.theme
+  instance.theme = option.theme
+  instance.inheritedTheme = Message.theme
 }
 
 function unmountMessage (instance) {
@@ -75,7 +76,7 @@ const Message = {
   instances: new Set(),
   handleThemeChange (theme) {
     for (const instance of this.instances) {
-      instance.theme = theme
+      instance.inheritedTheme = theme
     }
   },
   notice (content, option) {

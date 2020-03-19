@@ -1,4 +1,4 @@
-# 点击标题
+# Click on Item Header
 ```html
 <n-collapse
   v-model="activeNames"

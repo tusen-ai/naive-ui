@@ -10,7 +10,7 @@
       v-show="!enter || status === 'starting'"
       class="n-loading-bar-container"
       :class="{
-        [`n-${theme}-theme`]: theme
+        [`n-${syntheticTheme}-theme`]: syntheticTheme
       }"
     >
       <div
@@ -37,8 +37,14 @@ export default {
       status: null,
       finishCallback: null,
       enter: false,
+      inheritedTheme: null,
       theme: null,
       activeAction: null
+    }
+  },
+  computed: {
+    syntheticTheme () {
+      return this.theme || this.inheritedTheme
     }
   },
   methods: {

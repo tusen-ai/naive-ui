@@ -2,6 +2,7 @@
   <div class="n-data-table-filter-menu">
     <n-checkbox-group
       v-if="multiple"
+      :theme="theme"
       :value="cachedValue"
       class="n-data-table-filter-menu__group"
       @change="handleChange"
@@ -16,6 +17,7 @@
     </n-checkbox-group>
     <n-radio-group
       v-else
+      :theme="theme"
       :name="radioGroupName"
       class="n-data-table-filter-menu__group"
       :value="cachedValue && cachedValue[0]"
@@ -29,12 +31,23 @@
         {{ option.label }}
       </n-radio>
     </n-radio-group>
-    <n-divider />
+    <n-divider :theme="theme" />
     <div class="n-data-table-filter-menu__action">
-      <n-button size="tiny" round @click="handleCancelClick">
+      <n-button
+        size="tiny"
+        round
+        :theme="theme"
+        @click="handleCancelClick"
+      >
         {{ NDataTable.localeNamespace.clear }}
       </n-button>
-      <n-button type="primary" size="tiny" round @click="handleConfirmClick">
+      <n-button
+        :theme="theme"
+        type="primary"
+        size="tiny"
+        round
+        @click="handleConfirmClick"
+      >
         {{ NDataTable.localeNamespace.confirm }}
       </n-button>
     </div>
@@ -95,6 +108,11 @@ export default {
     return {
       initialValue: this.value,
       cachedValue: this.value
+    }
+  },
+  computed: {
+    theme () {
+      return this.NDataTable.syntheticTheme
     }
   },
   methods: {

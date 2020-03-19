@@ -8,7 +8,9 @@
   >
     <n-popover
       trigger="click"
+      :theme="NDataTable.syntheticTheme"
       :controller="controller"
+      :overlay-style="{ padding: 0 }"
       @show="popoverVisible = true"
       @hide="popoverVisible = false"
     >

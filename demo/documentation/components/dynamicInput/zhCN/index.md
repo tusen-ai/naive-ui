@@ -10,6 +10,13 @@ pair
 custom
 form
 ```
+
+## V-model
+|Prop|Event|
+|-|-|
+|value|input|
+
+
 ## Props
 ### Dynamic Input Props
 |名称|类型|默认值|说明|
@@ -18,8 +25,8 @@ form
 |value|`Array`|-|**必需**|
 |max|`number`|`null`|最多有几项内容|
 |key-field|`string`|`null`||
-|on-create|`(index: number) => any`|`null`|点击添加按钮时的回调，如果设定则返回值会被用作新添加的初始值。其中 `index` 是创建内容将要被放置到的位置，从 1 (第二项)开始计算。|
-|on-clear|`() => any`|`null`|点击清空最后一项时的回调，如果设定则返回值会被用作为最后一项清空后的值, 如果是自定义地内容并且没有设定返回值，最后一项不允许被清空，删除按钮不可点击。|
+|on-create|`(index: number) => any`|`null`|点击添加按钮时的回调，如果设定则返回值会被用作新添加的初始值。其中 `index` 是创建内容将要被放置到的位置对应的数组索引，从 1 (第二项)开始计算。|
+|on-clear|`() => any`|`null`|点击清空最后一项时的回调，如果设定则返回值会被用作为最后一项清空后的值, 如果是自定义内容并且没有设定该属性，则最后一项不会被清空。|
 
 ### Dynamic Input Props(Input Preset)
 |名称|类型|默认值|说明|
@@ -42,6 +49,6 @@ form
 ## Events
 |名称|参数|说明|
 |-|-|-|
-|create|`(index: Number)`|`index` 是新增的数据的索引|
+|create|`(index: number)`|`index` 是新增的数据的索引|
 |clear|`()`||
-|remove|`(index: Number)`|`index` 是被移除的数据的索引| 
+|remove|`(index: number)`|`index` 是被移除的数据的索引| 

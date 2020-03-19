@@ -35,7 +35,7 @@
         >
           <template v-slot:activator>
             <edit-on-github-button
-              class="edit-button"
+              style="padding: 0 3px 0 7px"
               :url="url"
             />
           </template>
