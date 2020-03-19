@@ -10,6 +10,13 @@ pair
 custom
 form
 ```
+
+## V-model
+|Prop|Event|
+|-|-|
+|value|input|
+
+
 ## Props
 ### Dynamic Input Props
 |名称|类型|默认值|说明|

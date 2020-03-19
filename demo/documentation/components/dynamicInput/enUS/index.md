@@ -10,6 +10,12 @@ pair
 custom
 form
 ```
+
+## V-model
+|Prop|Event|
+|-|-|
+|value|input|
+
 ## Props
 ### Dynamic Input Props
 |Name|Type|Default|Description|
