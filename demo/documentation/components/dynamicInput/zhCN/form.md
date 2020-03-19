@@ -10,7 +10,7 @@
     v-model="model.dynamicInputValue"
     key-field="key"
     :on-create="onCreate"
-    @clear="handleClear"
+    :on-clear="onClear"
   >
     <template v-slot="{ index, value }">
       <div style="display: flex;">
@@ -66,7 +66,7 @@ export default {
       },
       model: {
         dynamicInputValue: [
-          { key: 0, value: '' }
+          { key: 0, value: '', name: '' }
         ]
       }
     }
@@ -83,13 +83,17 @@ export default {
     /**
      * 由于清除 input 的内容是个外部行为，input 不会发出事件，所以 form-item 无法得到从
      * input 发出的事件。于是为了验证结果和显示的值同步，需要手动验证。使用 $nextTick 是因
-     * 为在接受这个事件时，input 的值刚放在事件中发出，还没有落实到实际的值上，需要等下个
-     * tick 才能验证新的结果
+     * 为这个函数结束后，新的值才会被设定，需要等下个tick 才能验证新的结果
      */
-    handleClear () {
+    onClear () {
       this.$nextTick().then(
         () => this.$refs.form.validate()
       )
+      return  {
+        name: '',
+        value: '',
+        key: 0
+      }
     }
   }
 }
