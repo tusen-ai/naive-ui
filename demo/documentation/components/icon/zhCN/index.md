@@ -12,6 +12,10 @@ custom-icon
 depth
 ```
 
+```component
+icons
+```
+
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
@@ -27,3 +31,4 @@ depth
 |-|-|-|
 |default|`()`||
 
+<icons />

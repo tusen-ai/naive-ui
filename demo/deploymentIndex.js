@@ -1,4 +1,6 @@
-import { Vue, router, i18n, hljs } from './init'
+import { Vue, router } from './deploymentInit'
+import i18n from './i18n'
+import hljs from './hljs'
 import demoRouterView from './demoRouterView'
 import NaiveUI from '../lib/index'
 import '../lib/styles/index.css'

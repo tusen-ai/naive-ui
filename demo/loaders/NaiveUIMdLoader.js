@@ -22,20 +22,27 @@ function parseComponents (tokens) {
   return components
 }
 
-module.exports = function (content) {
+module.exports = function (content, url) {
   const tokens = marked.lexer(content)
+  const titleIndex = tokens.findIndex(token => token.type === 'heading' && token.depth === 1)
+  let titleText = titleIndex > -1 ? JSON.stringify(tokens[titleIndex].text) : null
   const anchor = parseMdAsAnchor(tokens)
   const components = parseComponents(tokens)
   const importStatements = components
     .map(component => `import ${component} from './${component}'`)
     .join('\n')
-  return `<template>
+  let mdContent = marked.parser(tokens, { renderer })
+  if (titleText) {
+    const gheButton = `<edit-on-github-header url=${url} text=${titleText}></edit-on-github-header>`
+    const titleReg = /(<n-h1[^>]*>)(.*?)(<\/n-h1>)/
+    mdContent = mdContent.replace(titleReg, `${gheButton}`)
+  }
+  return `
+<template>
   <component-documentation>
     <div style="display: flex; flex-wrap: nowrap;">
       <div style="width: calc(100% - 180px); margin-right: 36px;">
-        ${marked.parser(tokens, {
-    renderer
-  })}
+        ${mdContent}
       </div>
       <div style="width: 144px;">
         ${anchor}

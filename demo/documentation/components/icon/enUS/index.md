@@ -13,6 +13,11 @@ theme
 custom-icon
 depth
 ```
+
+```component
+icons
+```
+
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
@@ -27,4 +32,6 @@ depth
 |-|-|-|
 |default|`()`||
 
+<!-- ## Icons -->
+<icons/>
 

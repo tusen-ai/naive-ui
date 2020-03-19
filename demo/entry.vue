@@ -5,9 +5,7 @@
         :lang="lang"
         :items="flattenedItems"
         :env="env"
-        :mode="mode"
         @lang-change="handleLangChange"
-        @mode-change="handleModeChange"
       />
       <n-layout class="home-layout" style="top: 64px; overflow: hidden;" position="absolute">
         <router-view />
@@ -19,8 +17,8 @@
 <script>
 import DocHeader from './header.vue'
 import menuOptions from './menuOptions'
-import { i18n } from './init'
-import { setState } from './store'
+import i18n from './i18n'
+import { state } from './store'
 
 export default {
   components: {
@@ -38,14 +36,16 @@ export default {
   beforeRouteUpdate (to, from, next) {
     this.$i18n.locale = to.params.lang
     next()
-    this.mode = localStorage.getItem('mode')
   },
   data () {
     return {
-      mode: localStorage.getItem('mode') ? localStorage.getItem('mode') : 'debug'
+      state: state
     }
   },
   computed: {
+    mode () {
+      return this.state.mode
+    },
     env () {
       return process.env.NODE_ENV
     },
@@ -85,11 +85,6 @@ export default {
   methods: {
     handleLangChange (lang) {
       this.lang = lang
-    },
-    handleModeChange (mode) {
-      this.mode = mode
-      localStorage.setItem('mode', mode)
-      setState(mode)
     }
   }
 }

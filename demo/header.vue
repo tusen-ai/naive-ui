@@ -76,6 +76,7 @@
 <script>
 import { version } from '../package.json'
 import withapp from '../src/_mixins/withapp'
+import { state, setMode } from './store'
 
 function match (pattern, string) {
   if (!pattern.length) return true
@@ -98,16 +99,13 @@ export default {
     env: {
       type: String,
       default: null
-    },
-    mode: {
-      type: String,
-      default: null
     }
   },
   data () {
     return {
       searchInputValue: '',
       version,
+      state: state,
       themeOptions: {
         dark: {
           label: 'Light',
@@ -141,6 +139,9 @@ export default {
     }
   },
   computed: {
+    mode () {
+      return this.state.mode
+    },
     zIndex () {
       const path = this.$route.path
       return (path.endsWith('n-modal') || path.endsWith('n-drawer') || path.endsWith('n-confirm')) ? null : 3000
@@ -214,7 +215,7 @@ export default {
       this.NConfigProvider.$parent.theme = this.themeOptions[this.theme].next
     },
     handleModeChange () {
-      this.$emit('mode-change', this.modeOptions[this.mode].next)
+      setMode(this.modeOptions[this.mode].next)
     },
     handleLanguageChange () {
       this.$emit('lang-change', this.langOptions[this.lang].next)

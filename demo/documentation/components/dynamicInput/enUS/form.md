@@ -1,10 +1,10 @@
 # Use it in Form
-`n-dynamic-input` 并不能作为一个单独的表项检验，如果你需要检验 `n-dynamic-input` 里面的内容，可以在自定义内容中传入 `n-form-item` 来完成数据的检验。下面是一个完整的例子。
+`n-dynamic-input` itself cannot be verified. If you need to verify the input of` n-dynamic-input`, you can pass `n-form-item` in the custom content to complete the verification. Here is a complete example.
 ```html
 <n-form :model="model" ref="form">
   <!--
-    设定 key-field 是为了每一项都能稳定的待在原地。如果不做设定可能会导致在增加删除项目时，表
-    项的验证信息消失或错位
+    The key-field is set to make sure that each item can stay in the correct place. If not set, it may cause the
+    item verification information disappears or is misplaced
   -->
   <n-dynamic-input
     v-model="model.dynamicInputValue"
@@ -15,9 +15,7 @@
     <template v-slot="{ index, value }">
       <div style="display: flex;">
         <!--
-          通常，path 的变化会导致 form-item 验证内容或规则的改变，所以 naive-ui 会清理掉
-          表项已有的验证信息。但是这个例子是个特殊情况，我们明确的知道，path 的改变不会导致
-          form-item 验证内容和规则的变化，所以就 ignore-path-change
+          Usually, the path change will cause the form-item verification content or rules to change, so naive-ui will clear the existing verification information. But this example is a special case. We know the changes in path will not cause changes in form-item verification content and rules, so set ignore-path-change
         -->
         <n-form-item
           ignore-path-change
@@ -30,7 +28,7 @@
             v-model="model.dynamicInputValue[index].name"
           />
           <!--
-            由于在 input 元素里按回车会导致 form 里面的 button 被点击，所以阻止了默认行为
+           Since pressing enter on the input element will cause the button in the form to be clicked, the default behavior is prevented
           -->
         </n-form-item>
         <div style="height: 34px; line-height: 34px; margin: 0 8px;">=</div>
@@ -60,7 +58,7 @@ export default {
       dynamicInputRule: {
         trigger: 'input',
         validator (rule, value) {
-          if (value.length >= 5) return new Error('最多输入四个字符')
+          if (value.length >= 5) return new Error('Input up to four characters')
           return true
         }
       },
@@ -76,15 +74,12 @@ export default {
       return {
         name: '',
         value: '',
-        /** 生成 key ，目的是让这个值对应的表项的验证信息不错位 */
+        /** Generate a key to make the verification information will not be misplaced */
         key: Math.random().toString(16).slice(2, 10)
       }
     },
     /**
-     * 由于清除 input 的内容是个外部行为，input 不会发出事件，所以 form-item 无法得到从
-     * input 发出的事件。于是为了验证结果和显示的值同步，需要手动验证。使用 $nextTick 是因
-     * 为在接受这个事件时，input 的值刚放在事件中发出，还没有落实到实际的值上，需要等下个
-     * tick 才能验证新的结果
+     Since clearing the content of input is an external action, input does not emit events, so form-item cannot get events emitted from input. Therefore, in order to verify the results are synchronized with the displayed values, manual verification is required. `$NextTick` is used to accept this event, the input value has just been placed in the event and has not yet been implemented into the actual value. You need to wait for the next tick to verify the new result.
      */
     handleClear () {
       this.$nextTick().then(

@@ -1,6 +1,12 @@
 <template>
-  <n-base-portal ref="portal">
-    <div ref="contentContainer" class="n-positioning-container">
+  <n-base-portal ref="portal" :transfer-target="target">
+    <div
+      ref="contentContainer"
+      class="n-positioning-container"
+      :class="{
+        'n-positioning-container--absolute': target
+      }"
+    >
       <div
         class="n-drawer-container"
       >
@@ -92,7 +98,7 @@ export default {
     /** Todo */
     target: {
       type: Function,
-      default: null
+      default: undefined
     }
   },
   data () {

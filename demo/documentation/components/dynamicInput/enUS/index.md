@@ -1,8 +1,8 @@
 # Dynamic Input
 <!--single-column-->
-这个组件的名字改过很多次。
+This component name has been changed many times.
 
-一开始它被造出来是为了输入环境变量。
+Innitially, it was created for input environment variables.
 ## 演示
 ```demo
 basic
@@ -12,34 +12,36 @@ form
 ```
 ## Props
 ### Dynamic Input Props
-|名称|类型|默认值|说明|
+|Name|Type|Default|Description|
 |-|-|-|-|
-|preset|`'input' \| 'preset'`|`'input'`|动态录入使用的预设，在不设定 `$scopedSlots.default` 的时候生效|
-|value|`Array`|-|**必需**|
-|max|`number`|`null`|最多有几项内容|
+|preset|`'input' \| 'preset'`|`'input'`|The preset for dynamicInput, it work when `$scopedSlots.default` is not set.|
+|value|`Array`|-|**required**|
+|max|`number`|`null`|Max number of items.|
 |key-field|`string`|`null`||
-|on-create|`(index: number) => any`|`null`|点击添加按钮时的回调，如果设定则返回值会被用作新添加的初始值以及清空内容时的初始值。其中 `index` 是创建内容将要被放置到的位置，从 0 开始计算|
+|on-create|`(index: number) => any`|`null`|The callback when click the add button. If set, the return value will be used as the initial value for the new item. `index` is the number of the new item, counting from 0 (the second item) .|
+|on-clear|`() => any`|`null`|The callback when clear the last item. If set, the return value will be used as the value after the last item is cleared. If it is a custom content and no return value is set, the last item is not allowed to be cleared. Delete button is not clickable|
 
 ### Dynamic Input Props(Input Preset)
-|名称|类型|默认值|说明|
+|Name|Type|Default|Description|
 |-|-|-|-|
-|value|`Array<string>`|-|**必需**|
+|value|`Array<string>`|-|**required**|
 |placeholder|`string`|`''`||
 
 ### Dynamic Input Props(Pair Preset)
-|名称|类型|默认值|说明|
+|Name|Type|Default|Description|
 |-|-|-|-|
-|value|`Array<{ key: string, value: string }>`|-|**必需**|
+|value|`Array<{ key: string, value: string }>`|-|**required**|
 |key-placeholder|`string`|`''`||
 |value-placeholder|`string`|`''`||
 
 ## Slots
-|名称|参数|说明|
+|Name|Parameters|Description|
 |-|-|-|
-|default|`({ value: any, index: number })`|每一项的渲染方式，其中 `value` 为该项对应的数组值，`index` 为该项对应的数组索引|
+|default|`({ value: any, index: number })`|The content of each item, `value` is the value of current item, `index` is the index of the current item.|
 
 ## Events
-|名称|参数|说明|
+|Name|Parameters|Description|
 |-|-|-|
+|create|`(index: Number)`|`index` is the index of the new item.|
 |clear|`()`||
-|remove|`(index: Number)`|`index` 是要移除的数据的索引| 
+|remove|`(index: Number)`|`index` is the index of the removed item.| 

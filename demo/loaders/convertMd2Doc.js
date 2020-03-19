@@ -84,7 +84,7 @@ export default {
 function convertMd2ComponentDocumentation (text, env = 'development', url) {
   const isNoDemo = !!~text.search('<!--no-demo-->')
   if (isNoDemo) {
-    return mdLoader(text)
+    return mdLoader(text, url)
   }
   const isSingleColumn = !!~text.search('<!--single-column-->')
   const tokens = marked.lexer(text)
@@ -125,9 +125,16 @@ function convertMd2ComponentDocumentation (text, env = 'development', url) {
   // const classedDocumentationHTML = addClassToHTML(documentationHTML, 'markdown')
   const demosReg = /<!--demos-->/
   const demoTags = parseDemos(demosLiteral, env)
-  const documentationContent = documentationHTML.replace(demosReg, template(demoTags, demosLiteral, isSingleColumn))
-  // console.log(documentationContent)
-  const documentationTemplate = `
+  let documentationContent = documentationHTML
+    .replace(demosReg, template(demoTags, demosLiteral, isSingleColumn))
+  const titleIndex = tokens.findIndex(token => token.type === 'heading' && token.depth === 1)
+  if (titleIndex > -1) {
+    const titleText = JSON.stringify(tokens[titleIndex].text)
+    const gheButton = `<edit-on-github-header url=${url} text=${titleText}></edit-on-github-header>`
+    const titleReg = /(<n-h1[^>]*>)(.*?)(<\/n-h1>)/
+    documentationContent = documentationContent.replace(titleReg, `${gheButton}`)
+  }
+  const documentationTemplate = `s
 <template>
   <component-documentation>
     <div style="display: flex; flex-wrap: nowrap;">

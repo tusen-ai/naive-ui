@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import VueI18n from 'vue-i18n'
 
 import LandingPage from './documentation/landing'
 import Entry from './entry'
@@ -81,64 +80,18 @@ import ComponentDemo from './utils/ComponentDemo'
 import ComponentDemos from './utils/ComponentDemos'
 import ComponentDocumentation from './utils/ComponentDocumentation'
 import DocumentationWrapper from './utils/DocumentationWrapper'
+import EditOnGithubButton from './utils/EditOnGithubButton'
+import EditOnGithubHeader from './utils/EditOnGithubHeader'
 import './styles/demo.scss'
 
-import hljs from 'highlight.js/lib/highlight'
-import javascript from 'highlight.js/lib/languages/javascript'
-import python from 'highlight.js/lib/languages/python'
-import cpp from 'highlight.js/lib/languages/cpp'
-
-const env = process.env.NODE_ENV
-let routerDebug
-let modalDebug
-let datePickerDebug
-let backTopDebug
-let suffixDebug
-let cascaderDebug
-let verticalAlignDebug
-let iconTransitionDebug
-let selectDebug
-let popoverDebug
-let scrollbarDebug
-let scrollbarDebug2
-if (env === 'development') {
-  routerDebug = () => import('./debugComponents/routerDebug')
-  modalDebug = () => import('./debugComponents/modalDebug')
-  datePickerDebug = () => import('./debugComponents/datePickerDebug')
-  backTopDebug = () => import('./debugComponents/backTopDebug')
-  suffixDebug = () => import('./debugComponents/suffixDebug')
-  cascaderDebug = () => import('./debugComponents/cascaderDebug')
-  verticalAlignDebug = () => import('./debugComponents/verticalAlignDebug')
-  iconTransitionDebug = () => import('./debugComponents/iconTransitionDebug')
-  selectDebug = () => import('./debugComponents/selectDebug')
-  popoverDebug = () => import('./debugComponents/popoverDebug')
-  scrollbarDebug = () => import('./debugComponents/scrollbarDebug')
-  scrollbarDebug2 = () => import('./debugComponents/scrollbarDebug2')
-}
-
-hljs.registerLanguage('javascript', javascript)
-hljs.registerLanguage('python', python)
-hljs.registerLanguage('cpp', cpp)
-hljs.registerLanguage('naive-log', () => ({
-  contains: [
-    {
-      className: 'number',
-      begin: /\d+/
-    }
-  ]
-}))
-
-Vue.use(VueI18n)
 Vue.use(VueRouter)
-
-const i18n = new VueI18n({
-  locale: 'en-US'
-})
 
 Vue.component('ComponentDemo', ComponentDemo)
 Vue.component('ComponentDemos', ComponentDemos)
 Vue.component('DocumentationWrapper', DocumentationWrapper)
 Vue.component('ComponentDocumentation', ComponentDocumentation)
+Vue.component('EditOnGithubButton', EditOnGithubButton)
+Vue.component('EditOnGithubHeader', EditOnGithubHeader)
 
 const withPrefix = (prefix, routes) =>
   routes.map(route => {
@@ -165,7 +118,7 @@ const children = [
   { path: '/n-input', component: input },
   { path: '/n-select', component: select },
   { path: '/n-cascader', component: cascader },
-  { path: '/n-dynamic-input', component: dynamicInput },
+  { path: '/n-custom-dynamic-input', component: dynamicInput },
   { path: '/n-modal', component: modal },
   { path: '/n-message', component: message },
   { path: '/n-tooltip', component: tooltip },
@@ -180,9 +133,6 @@ const children = [
   { path: '/n-tabs', component: tabs },
   { path: '/n-time-picker', component: timePicker },
   { path: '/n-confirm', component: confirm },
-  { path: '/n-router-debug', component: routerDebug },
-  { path: '/n-modal-debug', component: modalDebug },
-  { path: '/n-scrollbar-debug', component: scrollbarDebug },
   { path: '/n-badge', component: badge },
   { path: '/n-steps', component: steps },
   { path: '/n-collapse', component: collapse },
@@ -190,16 +140,13 @@ const children = [
   { path: '/n-tag', component: tag },
   { path: '/n-menu', component: menu },
   { path: '/n-timeline', component: timeline },
-  { path: '/n-scrollbar-debug2', component: scrollbarDebug2 },
   { path: '/n-back-top', component: backTop },
-  { path: '/n-date-picker-debug', component: datePickerDebug },
   { path: '/n-divider', component: divider },
   { path: '/n-popconfirm', component: popconfirm },
   { path: '/n-anchor', component: anchor },
   { path: '/n-dropdown', component: dropdown },
   { path: '/n-popselect', component: popselect },
   { path: '/n-config-provider', component: configProvider },
-  { path: '/n--debug', component: suffixDebug },
   { path: '/n-transfer', component: transfer },
   { path: '/n-spin', component: spin },
   { path: '/n-drawer', component: drawer },
@@ -207,7 +154,6 @@ const children = [
   { path: '/n-time', component: time },
   { path: '/n-slider', component: slider },
   { path: '/n-tree', component: tree },
-  { path: '/n-vertical-align-debug', component: verticalAlignDebug },
   { path: '/n-affix', component: affix },
   { path: '/n-statistic', component: statistic },
   { path: '/n-grid', component: grid },
@@ -227,26 +173,9 @@ const children = [
   { path: '/n-code', component: code },
   { path: '/n-typography', component: typography },
   { path: '/n-upload', component: upload },
-  { path: '/n-table', component: table },
-  {
-    path: '/n-icon-transition-debug',
-    component: iconTransitionDebug
-  },
-  { path: '/n-select-debug', component: selectDebug }
+  { path: '/n-table', component: table }
 ]
 const routes = [
-  {
-    path: '/:lang/:theme/n-popover-debug',
-    component: popoverDebug
-  },
-  {
-    path: '/n-back-top-debug',
-    component: backTopDebug
-  },
-  {
-    path: '/n-cascader-debug',
-    component: cascaderDebug
-  },
   {
     path: '/:lang/:theme',
     component: Entry,
@@ -288,8 +217,4 @@ router.afterEach(function (to, from) {
   }
 })
 
-if (!localStorage.mode) {
-  localStorage.mode = 'debug'
-}
-
-export { Vue, router, i18n, hljs }
+export { Vue, router }

@@ -34,16 +34,10 @@
           :show-arrow="true"
         >
           <template v-slot:activator>
-            <n-button
-              style="padding: 0 2px 0 8px"
-              ghost
-              round
-              @click="handleEditOnGithubClick"
-            >
-              <template v-slot:icon>
-                <create-outline />
-              </template>
-            </n-button>
+            <edit-on-github-button
+              class="edit-button"
+              :url="url"
+            />
           </template>
           {{ $t('editOnGithub') }}
         </n-tooltip>
@@ -81,13 +75,12 @@
 
 <script>
 import codeOutline from '../../src/_icons/code-outline'
-import createOutline from '../../src/_icons/create-outline'
 import { state } from '../store'
+import camelCase from 'lodash/camelCase'
 
 export default {
   components: {
-    codeOutline,
-    createOutline
+    codeOutline
   },
   inject: {
     NDocumentation: {
@@ -110,9 +103,8 @@ export default {
       return this.state.mode
     },
     url () {
-      // const relativePath = this.NDocumentation.url
-      // return 'https://***REMOVED***/tree/develop/' + relativePath
-      return ''
+      const relativePath = this.NDocumentation.url.replace('index.md', camelCase(this.name) + '.md')
+      return relativePath
     }
   },
   watch: {
@@ -134,10 +126,6 @@ export default {
     this.init()
   },
   methods: {
-    handleEditOnGithubClick () {
-      this.$NMessage.info('Preview Only')
-      // window.open(this.url, '_blank')
-    },
     toggleCodeDisplay () {
       this.showCode = !this.showCode
     },

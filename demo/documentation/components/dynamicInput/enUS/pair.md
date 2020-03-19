@@ -3,8 +3,8 @@
 <n-dynamic-input
   preset="pair"
   v-model="value"
-  key-placeholder="优化内容"
-  value-placeholder="优化成本"
+  key-placeholder="Please input the key"
+  value-placeholder="Please input the value"
 />
 <pre>
 {{  JSON.stringify(value, 0, 2) }}
