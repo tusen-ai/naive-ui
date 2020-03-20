@@ -14,18 +14,9 @@ import scrollbarDebug2 from '../debugComponents/scrollbarDebug2'
 import { withPrefix } from './utils'
 
 const childDebugRoutes = [
-  {
-    path: '/n-popover-debug',
-    component: popoverDebug
-  },
-  {
-    path: '/n-back-top-debug',
-    component: backTopDebug
-  },
-  {
-    path: '/n-cascader-debug',
-    component: cascaderDebug
-  },
+  { path: '/n-popover-debug', component: popoverDebug },
+  { path: '/n-back-top-debug', component: backTopDebug },
+  { path: '/n-cascader-debug', component: cascaderDebug },
   { path: '/n-scrollbar-debug2', component: scrollbarDebug2 },
   { path: '/n-date-picker-debug', component: datePickerDebug },
   { path: '/n--debug', component: suffixDebug },
