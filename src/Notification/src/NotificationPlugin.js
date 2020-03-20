@@ -84,6 +84,7 @@ function updateNotification (instance, option) {
 
 const Notification = {
   theme: null,
+  inheritedTheme: null,
   instances: new Set(),
   container: null,
   _scrollable: false,
@@ -98,19 +99,22 @@ const Notification = {
   },
   handleThemeChange (theme) {
     const container = Notification.container
+    Notification.inheritedTheme = theme
+    const syntheticTheme = Notification.theme || Notification.inheritedTheme
     if (container) {
-      container.theme = theme
+      container.theme = syntheticTheme
     }
     Notification.instances.forEach(instance => {
-      instance.inheritedTheme = theme
+      instance.inheritedTheme = syntheticTheme
     })
   },
   open (options, type = 'default') {
     mountNotificationContainer()
-    if (Notification.container && Notification.theme) {
-      Notification.container.theme = Notification.theme
+    const syntheticTheme = Notification.theme || Notification.inheritedTheme
+    if (Notification.container && syntheticTheme) {
+      Notification.container.theme = syntheticTheme
     }
-    const notificationOptions = { type, ...options, theme: options.theme || Notification.theme }
+    const notificationOptions = { type, ...options, inheritedTheme: syntheticTheme }
     const instance = createNotification(notificationOptions)
     mountNotification(instance)
     return instance

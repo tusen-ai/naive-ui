@@ -40,18 +40,16 @@ action
 |tag|`boolean`|`false`|是否可以创建新的选项，需要和 `filterable` 一起使用|
 |on-create|`(label: string) => SelectOption`|`label => ({ label, value: label })`|在输入内容时如何创建一个选项。注意 `filter` 对这个生成的选项同样会生效。同时确保这个选项和其他选项的 `value` 不要有重复|
 
-
-## API
-### SelectOption Type
-|属性|类型|说明|
+### SelectOption Properties
+|名称|类型|说明|
 |-|-|-|
 |label|`string`||
 |value|`string \| number`|在选项中应该是唯一的|
 |disabled|`boolean`||
 |render|`function`||
 
-### SelectOptionGroup Type
-|属性|类型|说明|
+### SelectOptionGroup Properties
+|名称|类型|说明|
 |-|-|-|
 |type|`'group'`||
 |name|`string`||

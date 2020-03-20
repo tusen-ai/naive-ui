@@ -47,7 +47,7 @@ export default {
     }) {
       this.fileList = fileList
     },
-    handleRemove (file, files) {
+    handleRemove ({ file, fileList }) {
       if (file.id === 'text-message') {
         this.$NMessage.info('Oops... It\'s now uploaded. Okay, delete it.')
       } else if (file.id === 'notification') {

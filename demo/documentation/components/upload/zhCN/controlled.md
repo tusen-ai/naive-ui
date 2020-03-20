@@ -47,7 +47,7 @@ export default {
     }) {
       this.fileList = fileList
     },
-    handleRemove (file, files) {
+    handleRemove ({ file, fileList }) {
       if (file.id === 'text-message') {
         this.$NMessage.info('居然没传上去，算了，删了吧')
       } else if (file.id === 'notification') {

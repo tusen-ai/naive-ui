@@ -19,6 +19,7 @@ use-component
 ### ConfirmOption API
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
 |title|`string \| (() => VNode \| Array<VNode>)`|`null`|可以是 render 函数|
 |closable|`boolean`|`true`||
@@ -29,9 +30,9 @@ use-component
 |show-icon|`boolean`|`true`||
 |loading|`boolean`|`false`||
 |bordered|`boolean`|`false`||
-|onPositiveClick|`() => Promise<boolean> \| boolean`|`() => true`|默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为|
-|onNegativeClick|`() => Promise<boolean> \| boolean`|`() => true`|默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为|
-|onClose|`() => Promise<boolean> \| boolean`|`() => true`|默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为|
+|onPositiveClick|`() => boolean \| Promise<boolean> \| any`|`() => true`|默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为|
+|onNegativeClick|`() => boolean \| Promise<boolean> \| any`|`() => true`|默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为|
+|onClose|`() => boolean \| Promise<boolean> \| any`|`() => true`|默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为|
 
 ### ConfirmEnvironment API
 #### ConfirmEnvironment Properties
@@ -39,6 +40,7 @@ use-component
 
 |名称|类型|说明|
 |-|-|-|
+|theme|`'light' \| 'dark'`||
 |type|`'error \| 'success' \| 'warning'`||
 |title|`string \| (() => VNode \| Array<VNode>)`|可以是 render 函数|
 |closable|`boolean`||
@@ -49,9 +51,9 @@ use-component
 |show-icon|`boolean`||
 |loading|`boolean`||
 |bordered|`boolean`||
-|onPositiveClick|`() => Promise<boolean> \| boolean`||
-|onNegativeClick|`() => Promise<boolean> \| boolean`||
-|onClose|`() => Promise<boolean> \| boolean`||
+|onPositiveClick|`() => boolean \| Promise<boolean> \| any`||
+|onNegativeClick|`() => boolean \| Promise<boolean> \| any`||
+|onClose|`() => boolean \| Promise<boolean> \| any`||
 
 #### ConfirmEnvironment Methods
 |名称|类型|说明|

@@ -20,7 +20,7 @@ about-theme
 |error|`(message: string, option?: MessageOption) => MessageEnvironment`||
 |loading|`(message: string, option?: MessageOption) => MessageEnvironment`||
 
-### MessageOption Type
+### MessageOption Properties
 |Name|Type|Description|
 |-|-|-|
 |content|`string \|(() => VNode \| Array<VNode>)`|Can be a render function|

@@ -9,18 +9,8 @@
     :data="{
       'naive-data': 'cool! naive!'
     }"
-    @change="handleChange"
   >
     <n-button>Upload File</n-button>
   </n-upload>
 </div>
-```
-```js
-export default {
-  methods: {
-    handleChange (change) {
-      console.log(change.file.status)
-    }
-  }
-}
 ```

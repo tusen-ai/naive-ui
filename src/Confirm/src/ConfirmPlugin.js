@@ -32,8 +32,8 @@ export default {
       {
         type: 'warning',
         active: true,
-        theme: this.theme,
-        ...options
+        ...options,
+        theme: options.theme || this.theme
       },
       instance
     )
@@ -45,8 +45,8 @@ export default {
       {
         type: 'error',
         active: true,
-        theme: this.theme,
-        ...options
+        ...options,
+        theme: options.theme || this.theme
       },
       instance
     )
@@ -58,8 +58,8 @@ export default {
       {
         type: 'success',
         active: true,
-        theme: this.theme,
-        ...options
+        ...options,
+        theme: options.theme || this.theme
       },
       instance
     )

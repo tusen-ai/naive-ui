@@ -16,7 +16,7 @@ no-icon
 |show-icon|`string`|`true`||
 |type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'default'`||
 |closable|`boolean`|`false`||
-|on-close|`() => Promise<boolean> \| boolean`|`() => true`||
+|on-close|`() => boolean \| Promise<boolean> \| any`|`() => true`||
 |on-after-hide|`function`|`null`||
 
 ## Slots

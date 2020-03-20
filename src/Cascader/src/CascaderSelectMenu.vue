@@ -15,7 +15,6 @@
           :multiple="multiple"
           :size="size"
           :is-option-selected="isSelected"
-          @mousedown.native.prevent="() => {}"
           @menu-toggle-option="handleSelectMenuToggleOption"
           @menu-visible="handleMenuVisible"
         />

@@ -2,11 +2,11 @@
 Modal 的基础用法，你可以把任何东西放进去，比如一个卡片。
 ```html
 <n-button
-  @click="isActive = true"
+  @click="modalActive = true"
 >
   来吧
 </n-button>
-<n-modal v-model="isActive">
+<n-modal v-model="modalActive">
   <n-card
     style="width: 600px;"
     title="模态框"
@@ -31,7 +31,7 @@ Modal 的基础用法，你可以把任何东西放进去，比如一个卡片�
 export default {
   data () {
     return {
-      isActive: false
+      modalActive: false
     }
   }
 }

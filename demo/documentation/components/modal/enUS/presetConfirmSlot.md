@@ -2,11 +2,11 @@
 Slots are also related to preset.
 ```html
 <n-button
-  @click="isActive = true"
+  @click="modalActive = true"
 >
   Start Me up
 </n-button>
-<n-modal v-model="isActive" 
+<n-modal v-model="modalActive" 
   preset="confirm"
   title="Confirm"
 >
@@ -25,7 +25,7 @@ Slots are also related to preset.
 export default {
   data () {
     return {
-      isActive: false,
+      modalActive: false,
     }
   }
 }

@@ -6,7 +6,7 @@ Modal 的显示可以是受控的。
 >
   来吧
 </n-button>
-<n-modal :show="isActive">
+<n-modal :show="modalActive">
   <n-card
     style="width: 600px;"
     title="模态框"
@@ -21,17 +21,17 @@ Modal 的显示可以是受控的。
 export default {
   data () {
     return {
-      isActive: false,
+      modalActive: false,
       timeout: 6000
     }
   },
   methods: {
     handleClick () {
-      this.isActive = true
+      this.modalActive = true
       this.timeout = 6000
       let countdown = () => {
         if (this.timeout <= 0) {
-          this.isActive = false
+          this.modalActive = false
         } else {
           this.timeout -= 1000
           setTimeout(countdown, 1000)

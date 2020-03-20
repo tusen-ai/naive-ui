@@ -19,6 +19,7 @@ preset-confirm-slot
 ### Modal
 |Name|Type|Default|Description|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |show|`boolean`|`false`||
 |mask-closable|`boolean`|`true`|Whether to emit `hide` event when click mask.|
 |preset|`'card' \| 'confirm'`|`null`||
