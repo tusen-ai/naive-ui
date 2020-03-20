@@ -78,7 +78,7 @@ import DocEntry from '../docEntry'
 
 import { withPrefix } from './utils'
 
-export const childRoutes = [
+export const childRoutes = withPrefix('/:lang/:theme/doc', [
   { path: '/intro', component: intro },
   { path: '/start', component: start },
   { path: '/dev-guildlines', component: devGuildlines },
@@ -149,7 +149,7 @@ export const childRoutes = [
   { path: '/n-typography', component: typography },
   { path: '/n-upload', component: upload },
   { path: '/n-table', component: table }
-]
+])
 
 export const routes = [
   {
@@ -164,7 +164,7 @@ export const routes = [
       {
         path: '/:lang/:theme/doc',
         component: DocEntry,
-        children: withPrefix('/:lang/:theme/doc', childRoutes)
+        children: childRoutes
       }
     ]
   },

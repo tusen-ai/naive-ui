@@ -33,6 +33,6 @@ const childDebugRoutes = [
 
 export default function debugRouteMixin (routes, childRoutes) {
   childRoutes.unshift(...withPrefix('/:lang/:theme/doc', childDebugRoutes))
-  routes[0].children[1].children = childRoutes
+  // routes[0].children[1].children = childRoutes
   routes.unshift(...rootDebugRoutes)
 }
