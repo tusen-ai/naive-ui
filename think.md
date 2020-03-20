@@ -131,6 +131,8 @@ zindex 的问题解决了，虽然很简单，在 static 元素上设定 zindex 
 ## 2020.3.15
 在搞响应式页面的时候，我意识到存粹依赖 css 是一种不可靠的方式。虽然从布局层面 grid layout 已经给出了一种近乎完美的解决方案，但是涉及到一切内联样式的... 都需要从 js 的层面来解决。目前想来最 trival 的方式就是让每个 config consumer 都能拿到这个值。
 
+## 2020.3.20
+一想到到了 1.0 就要写 changelog，就感觉🥚在隐隐作痛
 
 ## TODO 排序不分先后
 1. <del>Focus Detector on Time Selector</del>
@@ -155,7 +157,7 @@ zindex 的问题解决了，虽然很简单，在 static 元素上设定 zindex 
 20. <del>tree 组件</del>
 21. <del>文件上传组件</del>
 22. <del>custom-input 废弃或者重构</del>
-23. Date 键盘操作 Time 键盘操作
+23. <del>Date 键盘操作 Time 键盘操作</del> 先把能做的做了
 24. <del>Time 格式化</del>
 25. <del>Date 格式化</del>
 26. <del>base cancel mark rename suffix</del>s
@@ -192,7 +194,7 @@ zindex 的问题解决了，虽然很简单，在 static 元素上设定 zindex 
 57. <del>一部分组件在 Modal 内部的样式</del> 还差 data table 的选项们
 58. <del>更新 Progress 文档</del>
 59. <del>为所有的数据录入组件的尺寸</del>
-60. 审核文档
+60. <del>审核文档</del> 就这样吧，凑活
 61. <del>调整 transfer 的样式</del>
 62. <del>Table cascader 差一点国际化</del>
 63. <del>Anchor 初次滚动的逻辑是不是要手动调整一下，现在位置实际上不一致</del>
@@ -206,9 +208,9 @@ zindex 的问题解决了，虽然很简单，在 static 元素上设定 zindex 
 71. <del>Metropolis 从自带字体去掉<del>
 72. <del>Input Group</del>
 73. <del>Dropdown API 修改为 label + value，目前为止 UI 并没有出现过 key，不能只为了它搞特殊，value 可以，key 甚至会另有作用，现在占用实际是个危险的事情</del>
-74. card slot
+74. <del>card slot</del>
 75. <del>table fixed computed left right</del>
-76. gradient text 的切换能解决？
+76. <del>gradient text 的切换能解决？</del>目前我想不出解决办法，希望未来 CSS 能增加 gradient 的渐变
 77. <del>Auto Complete Group</del>
 78. <del>select add tag</del>
 79. <del>dynamic input</del> 还差英文文档

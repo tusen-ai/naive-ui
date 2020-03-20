@@ -11,6 +11,7 @@
       v-model="displayTimeString"
       class="n-time-picker-input"
       passively-activated
+      deactivate-on-enter
       :theme="syntheticTheme"
       :stateful="stateful"
       :size="syntheticSize"
