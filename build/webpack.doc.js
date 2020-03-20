@@ -6,7 +6,7 @@ const webpack = require('webpack')
 const config = require('./config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const webpackConfig = {
   mode: 'production',
@@ -29,7 +29,7 @@ const webpackConfig = {
     children: false
   },
   module: {
-    rules: config.docLoaders
+    rules: config.docLoaders('production')
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -44,7 +44,11 @@ const webpackConfig = {
         }
       }
     }),
-    new ExtractTextPlugin('[name].[hash:7].css')
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+      ignoreOrder: false
+    })
   ]
 }
 
