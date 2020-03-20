@@ -139,6 +139,21 @@ $--n-descriptions-padding: (
   'large': 16px,
 );
 
+/** empty */
+$--n-empty-icon-size: (
+  'small': 28px,
+  'medium': 34px,
+  'large': 40px,
+  'huge': 46px
+);
+
+$--n-empty-font-size: (
+  'small': 14px,
+  'medium': 14px,
+  'large': 15px,
+  'huge': 16px
+);
+
 /** input number */
 $--n-input-number-border-radius: $--n-border-radius;
 $--n-input-number-button-width: (
@@ -189,7 +204,7 @@ $--n-result-header-font-size: (
 $--n-result-description-font-size: (
   'small':  14px,
   'medium': 14px,
-  'large': 16px,
+  'large': 15px,
   'huge': 16px
 );
 
