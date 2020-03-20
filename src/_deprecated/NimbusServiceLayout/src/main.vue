@@ -145,7 +145,7 @@ export default {
             on: {
               click: () => {
                 if (this.$router && item.path) {
-                  this.$router.push(item.path)
+                  this.$router.push(item.path).catch(() => {})
                 }
               }
             }

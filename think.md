@@ -200,7 +200,7 @@ zindex 的问题解决了，虽然很简单，在 static 元素上设定 zindex 
 63. <del>Anchor 初次滚动的逻辑是不是要手动调整一下，现在位置实际上不一致</del>
 64. <del>将所有的 Typography 组件改为非 Functional 的，因为获取不到 context 本身的主题</del>
 65. <del>搞明白 table layout 这个 css 属性是在干什么</del>
-66. Icon 颜色
+66. <del>Icon 颜色</del> 原来我早就解决了，都忘了...
 67. <del>Modal 滚动之后的 transform origin</del>
 68. <del>Slider 对于 modal 适配</del>
 69. <del>table fixed scroll checkbox, not sync</del>
@@ -221,8 +221,8 @@ zindex 的问题解决了，虽然很简单，在 static 元素上设定 zindex 
 84. <del>Notification 主题切换需要工作良好</del>
 85. <del>Notification 这个东西很特殊...</del>感觉也没那么特殊
 86. <del>文件上传的回调方式改成传对象</del>
-87. 抵御外界 CSS 变化
-88. CSS Font 选择
+87. 抵御外界 CSS 变化，比如 line-height 之类的
+88. <del>CSS Font 选择</del> 对英文应该没有那么麻烦，走系统字体就好了，然而对中文又没什么好的解决方案，so 先这个样子，之后再琢磨琢磨
 
 ```
 Done

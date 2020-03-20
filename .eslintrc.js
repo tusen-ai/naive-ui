@@ -1,7 +1,7 @@
 module.exports = {
   extends: ['plugin:vue/recommended', '@vue/standard'],
   parserOptions: {
-    parser: "babel-eslint"
+    parser: 'babel-eslint'
   },
   rules: {
     'vue/max-attributes-per-line': [
