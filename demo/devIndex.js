@@ -9,7 +9,6 @@ import { routes, childRoutes } from './routes/routes'
 import createRouter from './routes/router'
 
 debugRouteMixin(routes, childRoutes)
-
 const router = createRouter(Vue, routes)
 
 Vue.use(NaiveUI)

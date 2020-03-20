@@ -8,7 +8,9 @@ import { routes } from './routes/routes'
 
 Vue.use(NaiveUI)
 NaiveUI.setHljs(hljs)
+
 const router = createRouter(Vue, routes)
+
 new Vue({
   ...demoRouterView,
   router,
