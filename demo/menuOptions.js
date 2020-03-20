@@ -832,7 +832,7 @@ export default function (locale, instance) {
             },
             {
               name: 'PopoverDebug',
-              path: `/${instance.lang}/${instance.theme}/doc` + '/n-popover-debug'
+              path: '/n-popover-debug'
             },
             {
               name: 'RouterDebug',
@@ -856,11 +856,11 @@ export default function (locale, instance) {
             },
             {
               name: 'BackTopDebug',
-              path: `/${instance.lang}/${instance.theme}/doc` + '/n-back-top-debug'
+              path: '/n-back-top-debug'
             },
             {
               name: 'CascaderDebug',
-              path: `/${instance.lang}/${instance.theme}/doc` + '/n-cascader-debug'
+              path: '/n-cascader-debug'
             },
             {
               name: 'VerticalAlignDebug',

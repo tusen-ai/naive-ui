@@ -1,7 +1,6 @@
 import VueRouter from 'vue-router'
 
 export default function createRouter (Vue, routes) {
-  Vue.use(VueRouter)
   const router = new VueRouter({
     mode: 'history',
     routes
