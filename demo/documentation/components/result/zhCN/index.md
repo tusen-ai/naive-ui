@@ -12,11 +12,13 @@ info
 success
 warning 
 error
+size
 ```
 
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|size|`'small' \| 'medium' \| 'large' \| 'huge'`|`'medium'`||
 |theme|`'light' \| 'dark'`|`null`||
 |status|`'info' \| 'success' \| 'error' \| 'warning' \| 404 \| '404' \| 500 \| '500' \| 400 \| '400' \| 418 \| '418'`|`'info'`||
 |title|`string`|`null`||

@@ -14,7 +14,7 @@
         :key="name"
         :name="name"
       >
-        <n-icon>
+        <n-icon depth="tertiary">
           <component :is="name" />
         </n-icon>
       </icon-wrapper>
@@ -25,19 +25,21 @@
 <script>
 import icons from '../../../../../src/_icons/index'
 import iconWrapper from './iconWrapper'
-// import getScrollParent from '../../../../../src/_utils/dom/getScrollParent'
 import { state } from '../../../../store'
+
+const prefixedIcons = Object.entries(icons).reduce((prevValue, [key, value]) => {
+  prevValue['icon-' + key] = value
+  return prevValue
+}, {})
 
 export default {
   components: {
     iconWrapper,
-    ...icons
+    ...prefixedIcons
   },
   data () {
     return {
       pattern: '',
-      // loadNumber: 20,
-      // container: null,
       state: state
     }
   },
@@ -46,7 +48,7 @@ export default {
       return this.state.mode
     },
     names () {
-      return Object.keys(icons)
+      return Object.keys(prefixedIcons)
     },
     filteredNames () {
       if (this.pattern.trim()) {
@@ -56,24 +58,7 @@ export default {
         return this.names
       }
     }
-    // displayNames () {
-    //   return this.filteredNames.slice(0, this.loadNumber)
-    // }
   }
-  // mounted () {
-  //   this.container = getScrollParent(this.$el)
-  //   this.container.addEventListener('scroll', this.handleScroll)
-  // },
-  // methods: {
-  //   handleScroll () {
-  //     const scrollTop = this.container.scrollTop
-  //     const clientHeight = this.container.clientHeight
-  //     const scrollHeight = this.container.scrollHeight
-  //     if (scrollTop + clientHeight === scrollHeight) {
-  //       this.loadNumber += 20
-  //     }
-  //   }
-  // }
 }
 </script>
 

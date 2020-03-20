@@ -3,7 +3,8 @@
     class="n-result"
     :class="{
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
-      [`n-result--${status}-status`]: status
+      [`n-result--${status}-status`]: status,
+      [`n-result--${size}-size`]: size
     }"
   >
     <div class="n-result-icon">
@@ -69,6 +70,12 @@ export default {
   },
   mixins: [ withapp, themeable ],
   props: {
+    size: {
+      validator (value) {
+        return ['small', 'medium', 'large', 'huge'].includes(value)
+      },
+      default: 'medium'
+    },
     status: {
       type: String,
       default: 'info'

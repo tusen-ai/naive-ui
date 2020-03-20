@@ -218,7 +218,9 @@ zindex 的问题解决了，虽然很简单，在 static 元素上设定 zindex 
 83. Form Item 应该和 Input Group 也契合良好
 84. <del>Notification 主题切换需要工作良好</del>
 85. <del>Notification 这个东西很特殊...</del>感觉也没那么特殊
-86. 文件上传的回调方式改成传对象
+86. <del>文件上传的回调方式改成传对象</del>
+87. 抵御外界 CSS 变化
+88. CSS Font 选择
 
 ```
 Done

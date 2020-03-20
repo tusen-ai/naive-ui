@@ -22,7 +22,6 @@ export default {
 
 <style scoped>
 .icon-wrapper {
-  fill: rgb(128, 128, 128);
   font-size: 36px;
   height: 128px;
   display: flex;

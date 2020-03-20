@@ -11,6 +11,26 @@
   }
 }
 
+@mixin result-size-mixin ($size) {
+  @include m($size + '-size') {
+    @include b(result-icon) {
+      display: flex;
+      justify-content: center;
+      @include e(status-image) {
+        width: map-get($--n-result-icon-size, $size);
+      }
+    }
+    @include b(result-header) {
+      @include e(title) {
+        font-size: map-get($--n-result-header-font-size, $size);
+      }
+      @include e(description) {
+        font-size: map-get($--n-result-description-font-size, $size);
+      }
+    }
+  }
+}
+
 @include themes-mixin {
   @include b(result) {
     color: $--result-description-text-color;
@@ -19,15 +39,16 @@
     @include result-status-mixin('warning');
     @include result-status-mixin('error');
     @include once {
+      @include result-size-mixin('small');
+      @include result-size-mixin('medium');
+      @include result-size-mixin('large');
+      @include result-size-mixin('huge');
+      line-height: $--n-line-height;
       font-size: 14px;
       transition: color .3s $--n-ease-in-out-cubic-bezier;
       @include b(result-icon) {
         display: flex;
         justify-content: center;
-        @include e(status-image) {
-          width: 80px;
-          height: 80px;
-        }
       }
       @include b(result-content) {
         margin-top: 24px;
@@ -41,7 +62,6 @@
       @include e(title) {
         @include once {
           margin-top: 16px;
-          font-size: 32px;
           font-weight: $--n-strong-weight;
           transition: color .3s $--n-ease-in-out-cubic-bezier;
           text-align: center;
@@ -52,7 +72,6 @@
         @include e(description) {
           margin-top: 4px;
           text-align: center;
-          font-size: 14px;
         }
       }
     }

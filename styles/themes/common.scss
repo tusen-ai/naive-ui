@@ -10,6 +10,8 @@ $--n-ease-in-cubic-bezier: cubic-bezier(.4, 0, 1, 1);
 $--n-border-radius: 3px;
 $--n-light-border-radius: 2px;
 
+$--n-line-height: 1.75;
+
 $--n-height: (
   "tiny": 22px,
   "small": 28px,
@@ -168,6 +170,29 @@ $--n-radio-size: (
   'medium': 14px,
   'large': 16px
 );
+
+/** result */
+$--n-result-icon-size: (
+  'small':  64px,
+  'medium': 80px,
+  'large': 100px,
+  'huge': 125px
+);
+
+$--n-result-header-font-size: (
+  'small': 26px,
+  'medium': 32px,
+  'large': 40px,
+  'huge': 48px
+);
+
+$--n-result-description-font-size: (
+  'small':  14px,
+  'medium': 14px,
+  'large': 16px,
+  'huge': 16px
+);
+
 
 /** slider */
 $--n-slider-rail-height: 4px;

@@ -31,6 +31,7 @@ closable
 ## Slots
 |Name|Parameters|Description|
 |-|-|-|
+|cover|`()`||
 |header|`()`||
 |header-extra|`()`||
 |default|`()`||
