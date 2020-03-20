@@ -24,16 +24,16 @@ after-select
 |blur-after-select|`boolean`|`false`||
 |clear-after-select|`boolean`|`false`||
 
-### AutoCompleteOption Type
-|Property|Type|Description|
+### AutoCompleteOption Properties
+|Name|Type|Description|
 |-|-|-|
 |label|`string`||
 |value|`string \| number`|Should be unique in options.|
 |disabled|`boolean`||
 |render|`function`||
 
-### AutoCompleteOptionGroup Type
-|Property|Type|Description|
+### AutoCompleteOptionGroup Properties
+|Name|Type|Description|
 |-|-|-|
 |type|`'group'`||
 |name|`string`||

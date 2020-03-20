@@ -29,11 +29,11 @@ duration
 |scrollable|`boolean`|`false`||
 
 ### NotificationOption API
-#### NotificationOption Type
+#### NotificationOption Properties
 
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark'`|`null`|如果设定会将该通知的主题设为该主题，如果没有设定则全局主题则取决于调用位置（它工作起来和 <n-a to="n-message#about-theme">$NMessage 的主题</n-a>比较像，在大多数情况下你不用为此而操心）|
 |avatar|`() => VNode \| Array<VNode>`|`null`|可以是 render 函数|
 |title|`string \| (() => VNode \| Array<VNode>)`|`null`|可以是 render 函数|
 |description|`string \| (() => VNode \| Array<VNode>)`|`null`|可以是 render 函数|
@@ -52,6 +52,7 @@ NofiticationEnvironment 实例的属性可以被动态改变。
 
 |名称|类型|说明|
 |-|-|-|
+|theme|`'light' \| 'dark'`|如果设定会将该通知的主题设为该主题，如果没有设定则全局主题则取决于调用位置（它工作起来和 <n-a to="n-message#about-theme">$NMessage 的主题</n-a>比较像，在大多数情况下你不用为此而操心）|
 |avatar|`() => VNode \| Array<VNode>`|可以是 render 函数|
 |title|`string \| (() => VNode \| Array<VNode>)`|可以是 render 函数|
 |description|`string \| (() => VNode \| Array<VNode>)`|可以是 render 函数|

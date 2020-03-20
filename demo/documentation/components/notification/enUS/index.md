@@ -27,10 +27,10 @@ duration
 |-|-|-|-|
 |scrollable|`boolean`|`false`||
 
-### NotificationOption Type
+### NotificationOption Properties
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark'`|`null`|If set it will be used as the theme of notification. (It works nearly the same as <n-a to="n-message#about-theme">$NMessage's theme</n-a>, and in most cases you don't need to set the property.)|
 |avatar|`() => VNode \| Array<VNode>`|`null`|Can be a render function|
 |title|`string \| (() => VNode \| Array<VNode>)`|`null`|Can be a render function|
 |description|`string \| (() => VNode \| Array<VNode>)`|`null`|Can be a render function|
@@ -49,6 +49,7 @@ Properties of NofiticationEnvironment Instance can be dynamically set.
 
 |Name|Type|Description|
 |-|-|-|
+|theme|`'light' \| 'dark'`|If set it will be used as the theme of notification. (It works nearly the same as <n-a to="n-message#about-theme">$NMessage's theme</n-a>, and in most cases you don't need to set the property.)|
 |avatar|`() => VNode \| Array<VNode>`|Can be a render function|
 |title|`string \| (() => VNode \| Array<VNode>)`|Can be a render function|
 |description|`string \| (() => VNode \| Array<VNode>)`|Can be a render function|
