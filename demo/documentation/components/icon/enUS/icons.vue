@@ -10,7 +10,7 @@
     />
     <div class="icons">
       <icon-wrapper
-        v-for="name in displayNames"
+        v-for="name in filteredNames"
         :key="name"
         :name="name"
       >
@@ -25,7 +25,7 @@
 <script>
 import icons from '../../../../../src/_icons/index'
 import iconWrapper from './iconWrapper'
-import getScrollParent from '../../../../../src/_utils/dom/getScrollParent'
+// import getScrollParent from '../../../../../src/_utils/dom/getScrollParent'
 import { state } from '../../../../store'
 
 export default {
@@ -36,8 +36,8 @@ export default {
   data () {
     return {
       pattern: '',
-      loadNumber: 20,
-      container: null,
+      // loadNumber: 20,
+      // container: null,
       state: state
     }
   },
@@ -55,25 +55,25 @@ export default {
       } else {
         return this.names
       }
-    },
-    displayNames () {
-      return this.filteredNames.slice(0, this.loadNumber)
     }
-  },
-  mounted () {
-    this.container = getScrollParent(this.$el)
-    this.container.addEventListener('scroll', this.handleScroll)
-  },
-  methods: {
-    handleScroll () {
-      const scrollTop = this.container.scrollTop
-      const clientHeight = this.container.clientHeight
-      const scrollHeight = this.container.scrollHeight
-      if (scrollTop + clientHeight === scrollHeight) {
-        this.loadNumber += 20
-      }
-    }
+    // displayNames () {
+    //   return this.filteredNames.slice(0, this.loadNumber)
+    // }
   }
+  // mounted () {
+  //   this.container = getScrollParent(this.$el)
+  //   this.container.addEventListener('scroll', this.handleScroll)
+  // },
+  // methods: {
+  //   handleScroll () {
+  //     const scrollTop = this.container.scrollTop
+  //     const clientHeight = this.container.clientHeight
+  //     const scrollHeight = this.container.scrollHeight
+  //     if (scrollTop + clientHeight === scrollHeight) {
+  //       this.loadNumber += 20
+  //     }
+  //   }
+  // }
 }
 </script>
 

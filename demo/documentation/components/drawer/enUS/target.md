@@ -9,14 +9,14 @@
 <div 
   ref="target" 
   style="position:relative;
-    width:500px;
-    height:500px;
-    border:1px solid rgba(0, 0, 0, .1);
+    width: 100%;
+    height: 500px;
+    border: 1px solid rgba(0, 0, 0, .1);
     margin-top: 10px;">
   <p style="
-    position:absolute;
-    top:50%;
-    left:50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);">
     Appear area
   </p>
