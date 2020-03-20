@@ -216,8 +216,8 @@ zindex 的问题解决了，虽然很简单，在 static 元素上设定 zindex 
 81. 搞明白 vue 的 scoped 和 普通的关系
 82. Form Item 不返回 true 的时候... 错误信息不会消失，这似乎不太合理?
 83. Form Item 应该和 Input Group 也契合良好
-84. Notification 主题切换需要工作良好
-85. Notification 这个东西很特殊...
+84. <del>Notification 主题切换需要工作良好</del>
+85. <del>Notification 这个东西很特殊...</del>感觉也没那么特殊
 86. 文件上传的回调方式改成传对象
 
 ```

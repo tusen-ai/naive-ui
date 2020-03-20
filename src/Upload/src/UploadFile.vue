@@ -147,10 +147,10 @@ export default {
       const XHRMap = NUpload.XHRMap
       const change = NUpload.change
       Promise.resolve(
-        NUpload.onRemove(
-          Object.assign({}, file),
-          NUpload.syntheticFileList
-        )
+        NUpload.onRemove({
+          file: Object.assign({}, file),
+          fileList: NUpload.syntheticFileList
+        })
       ).then(
         result => {
           if (result === false) return
