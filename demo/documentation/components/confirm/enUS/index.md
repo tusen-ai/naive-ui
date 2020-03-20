@@ -19,6 +19,7 @@ use-component
 ### ConfirmOption API
 |Name|Type|Default|Description|
 |-|-|-|-|
+|theme|`'light' \| 'dark'`|`null`||
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
 |title|`string \| (() => VNode \| Array<VNode>)`|`null`|Can be a render function.|
 |closable|`boolean`|`true`||
@@ -29,9 +30,9 @@ use-component
 |show-icon|`boolean`|`true`||
 |loading|`boolean`|`false`||
 |bordered|`boolean`|`false`||
-|onPositiveClick|`() => Promise<boolean> \| boolean`|`() => true`|The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior.|
-|onNegativeClick|`() => Promise<boolean> \| boolean`|`() => true`|The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior.|
-|onClose|`() => Promise<boolean> \| boolean`|`() => true`|The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior.|
+|onPositiveClick|`() => boolean \| Promise<boolean> \| any`|`() => true`|The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior.|
+|onNegativeClick|`() => boolean \| Promise<boolean> \| any`|`() => true`|The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior.|
+|onClose|`() => boolean \| Promise<boolean> \| any`|`() => true`|The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior.|
 
 ### ConfirmEnvironment API
 #### ConfirmEnvironment Properties
@@ -39,6 +40,7 @@ Properties of ConfirmEnvironment can be modified
 
 |Name|Type|Description|
 |-|-|-|
+|theme|`'light' \| 'dark'`||
 |type|`'error \| 'success' \| 'warning'`||
 |title|`string \| (() => VNode \| Array<VNode>)`|Can be a render function.|
 |closable|`boolean`||
@@ -49,9 +51,9 @@ Properties of ConfirmEnvironment can be modified
 |show-icon|`boolean`||
 |loading|`boolean`||
 |bordered|`boolean`||
-|onPositiveClick|`() => Promise<boolean> \| boolean`||
-|onNegativeClick|`() => Promise<boolean> \| boolean`||
-|onClose|`() => Promise<boolean> \| boolean`||
+|onPositiveClick|`() => boolean \| Promise<boolean> \| any`||
+|onNegativeClick|`() => boolean \| Promise<boolean> \| any`||
+|onClose|`() => boolean \| Promise<boolean> \| any`||
 
 #### ConfirmEnvironment Methods
 |Name|Parameters|Description|

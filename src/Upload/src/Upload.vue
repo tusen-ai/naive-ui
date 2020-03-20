@@ -64,7 +64,7 @@ function XHRHandlers (componentInstance, file, XHR) {
         file: null
       })
       XHRMap.delete(file.id)
-      fileAfterChange = componentInstance.onFinish(fileAfterChange, XHR.response) || fileAfterChange
+      fileAfterChange = componentInstance.onFinish({ file: fileAfterChange, response: XHR.response }) || fileAfterChange
       change(fileAfterChange, e)
     },
     handleXHRAbort (e) {
@@ -109,15 +109,15 @@ function registerHandler (componentInstance, file, request) {
   }
 }
 
-function unwrapData (data, file) {
+function unwrapFunctionValue (data, file) {
   if (typeof data === 'function') {
-    return data(file)
+    return data({ file })
   }
   return data
 }
 
 function setHeaders (request, headers, file) {
-  const headersObject = unwrapData(headers, file)
+  const headersObject = unwrapFunctionValue(headers, file)
   if (!headersObject) return
   Object.keys(headers).forEach(key => {
     request.setRequestHeader(key, headers[key])
@@ -125,7 +125,7 @@ function setHeaders (request, headers, file) {
 }
 
 function appendData (formData, data, file) {
-  const dataObject = unwrapData(data, file)
+  const dataObject = unwrapFunctionValue(data, file)
   if (!dataObject) return
   Object.keys(dataObject).forEach(key => {
     formData.append(key, dataObject[key])

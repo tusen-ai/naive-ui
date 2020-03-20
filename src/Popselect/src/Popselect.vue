@@ -1,6 +1,7 @@
 <script>
 import NPopover from '../../Popover'
 import NPopselectPanel from './PopselectPanel'
+import emptyFunction from '../../_utils/function/empty'
 
 export default {
   name: 'NPopselect',
@@ -53,9 +54,9 @@ export default {
     const slots = context.scopedSlots
     const activator = slots.activator || slots.default
     const controller = context.props.controller || {}
-    const handleHide = context.listeners.hide || (() => {})
-    const handleShow = context.listeners.show || (() => {})
-    const handleChange = context.listeners.change || (() => {})
+    const handleHide = context.listeners.hide || emptyFunction
+    const handleShow = context.listeners.show || emptyFunction
+    const handleChange = context.listeners.change || emptyFunction
     return h(NPopover, {
       props: {
         trigger: context.props.trigger,

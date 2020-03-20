@@ -25,16 +25,16 @@ after-select
 |blur-after-select|`boolean`|`false`||
 |clear-after-select|`boolean`|`false`||
 
-### AutoCompleteOption Type
-|属性|类型|介绍|
+### AutoCompleteOption Properties
+|名称|类型|介绍|
 |-|-|-|
 |label|`string`||
 |value|`string \| number`|Should be unique in options.|
 |disabled|`boolean`||
 |render|`function`||
 
-### AutoCompleteOptionGroup Type
-|属性|类型|介绍|
+### AutoCompleteOptionGroup Properties
+|名称|类型|介绍|
 |-|-|-|
 |type|`'group'`||
 |name|`string`||

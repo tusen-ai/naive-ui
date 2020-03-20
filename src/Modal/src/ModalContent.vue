@@ -47,6 +47,7 @@
           </n-confirm>
           <n-card
             v-else-if="preset === 'card'"
+            :theme="theme"
             :style="overlayStyle"
             :title="title"
             :closable="closable"
@@ -147,7 +148,7 @@ export default {
         return `${transformOriginX}px ${transformOriginY + this.scrollTop}px`
       }
     },
-    slotDOM () {
+    getSlotDOM () {
       const els = (this.$refs.contentInner && this.$refs.contentInner.childNodes) || []
       return els
     },

@@ -40,17 +40,16 @@ action
 |tag|`boolean`|`false`|Whether it can create new option, should be used with `filterable`.|
 |on-create|`(label: string) => SelectOption`|`label => ({ label, value: label })`|How to create a option when you input a string to create a option. Note that `filter` will be applied to the created option too. And make sure the value of the created option is not the same as any other option.|
 
-## API
-### SelectOption Type
-|Property|Type|Description|
+### SelectOption Properties
+|Name|Type|Description|
 |-|-|-|
 |label|`string`||
 |value|`string \| number`|Should be unique in options.|
 |disabled|`boolean`||
 |render|`function`||
 
-### SelectOptionGroup Type
-|Property|Type|Description|
+### SelectOptionGroup Properties
+|Name|Type|Description|
 |-|-|-|
 |type|`'group'`||
 |name|`string`||

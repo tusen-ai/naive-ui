@@ -20,12 +20,12 @@ default-files
 |directory|`boolean`|`false`|是否支持目录上传，需要浏览器支持，参考 <n-a href="https://caniuse.com/#feat=input-file-directory">input-file-directory</n-a>|
 |method|`string`|`'POST'`|HTTP 请求的方法|
 |multiple|`boolean`|`false`|是否支持多个文件|
-|headers|`object \| (file: UploadFile) => object`|`null`|HTTP 请求需要附加的 Headers|
-|data|`object \| (file: UploadFile) => object`|`null`|提交表单需要附加的数据|
+|headers|`object \| ({ file: UploadFile }) => object`|`null`|HTTP 请求需要附加的 Headers|
+|data|`object \| ({ file: UploadFile }) => object`|`null`|提交表单需要附加的数据|
 |with-credentials|`boolean`|`false`|是否携带 Cookie|
-|on-change|`(file: UploadFile, fileList: Array<UploadFile>, event?: Event) => any`|`() => {}`|组件状态变化的回调，组件的任何文件状态变化都会触发回调|
-|on-remove|`(file: UploadFile, fileList: Array<UploadFile>) => boolean \| Promise<boolean>`|`() => true`|文件移除的回调，返回 false 或者 promise resolve false 或者 promise reject 会不执行这次删除|
-|on-finish|`(file: UploadFile, fileList: Array<UploadFile>) => UploadFile \| void`|`file => file`|文件上传结束的回调，可以修改传入的 UploadFile 或者返回一个新的 UploadFile|
+|on-change|`({ file: UploadFile, fileList: Array<UploadFile>, event?: Event }) => any`|`() => {}`|组件状态变化的回调，组件的任何文件状态变化都会触发回调|
+|on-remove|`({ file: UploadFile, fileList: Array<UploadFile> }) => boolean \| Promise<boolean> \| any`|`() => true`|文件移除的回调，返回 false 或者 promise resolve false 或者 promise reject 会不执行这次删除|
+|on-finish|`({ file: UploadFile }) => UploadFile \| void`|`file => file`|文件上传结束的回调，可以修改传入的 UploadFile 或者返回一个新的 UploadFile|
 |default-upload|`boolean`|`false`|选择文件时候是否默认上传|
 |file-list|`Array<UploadFile>`|`undefined`|文件列表，如果传入组件会处于受控状态|
 |file-list-style|`Object`|`null`|文件列表区域的样式|

@@ -50,7 +50,7 @@ function updateMessage (instance, content, option) {
   instance.type = option.type
   instance.content = content
   instance.theme = option.theme
-  instance.inheritedTheme = Message.theme
+  instance.inheritedTheme = option.inheritedTheme
 }
 
 function unmountMessage (instance) {
@@ -73,37 +73,43 @@ const Message = {
     top: 20
   },
   theme: null,
+  inheritedTheme: null,
   instances: new Set(),
   handleThemeChange (theme) {
-    for (const instance of this.instances) {
-      instance.inheritedTheme = theme
+    Message.inheritedTheme = theme
+    const syntheticTheme = Message.theme || Message.inheritedTheme
+    for (const instance of Message.instances) {
+      instance.inheritedTheme = syntheticTheme
     }
   },
   notice (content, option) {
     mountMessageContainer()
-    const instance = createMessage(content, option)
+    const syntheticTheme = Message.theme || Message.inheritedTheme
+    const instance = createMessage(content, Object.assign(option, {
+      inheritedTheme: syntheticTheme
+    }))
     mountMessage(instance)
     return instance
   },
   info (content, option = {}) {
     option.type = 'info'
-    return this.notice(content, option)
+    return Message.notice(content, option)
   },
   success (content, option = {}) {
     option.type = 'success'
-    return this.notice(content, option)
+    return Message.notice(content, option)
   },
   warning (content, option = {}) {
     option.type = 'warning'
-    return this.notice(content, option)
+    return Message.notice(content, option)
   },
   error (content, option = {}) {
     option.type = 'error'
-    return this.notice(content, option)
+    return Message.notice(content, option)
   },
   loading (content, option = {}) {
     option.type = 'loading'
-    return this.notice(content, option)
+    return Message.notice(content, option)
   }
 }
 

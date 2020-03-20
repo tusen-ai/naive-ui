@@ -1,6 +1,7 @@
 <script>
 import NPopover from '../../Popover'
 import NDropdownMenu from './DropdownMenu'
+import emptyFunction from '../../_utils/function/empty'
 
 export default {
   name: 'NDropdown',
@@ -64,7 +65,7 @@ export default {
               theme: props.theme
             },
             on: {
-              select: context.listeners.select || (() => {})
+              select: context.listeners.select || emptyFunction
             },
             scopedSlots: { ...context.scopedSlots }
           })

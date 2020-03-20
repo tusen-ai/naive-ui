@@ -2,11 +2,11 @@
 Basic usage of modal. You can put anything in modal, a card for example.
 ```html
 <n-button
-  @click="isActive = true"
+  @click="modalActive = true"
 >
   Start Me up
 </n-button>
-<n-modal v-model="isActive">
+<n-modal v-model="modalActive">
   <n-card
     style="width: 600px;"
     title="Modal"
@@ -31,7 +31,7 @@ Basic usage of modal. You can put anything in modal, a card for example.
 export default {
   data () {
     return {
-      isActive: false
+      modalActive: false
     }
   }
 }

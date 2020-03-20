@@ -2,12 +2,12 @@
 Modal 有一些预设，让你在设定之后可以使用对应的 Slots 还有 Props。
 ```html
 <n-button
-  @click="isActive = true"
+  @click="modalActive = true"
 >
   来吧
 </n-button>
 <n-modal
-  v-model="isActive"
+  v-model="modalActive"
   preset="card"
   overlay-style="width: 600px;"
   title="卡片预设"
@@ -31,7 +31,7 @@ Modal 有一些预设，让你在设定之后可以使用对应的 Slots 还有 
 export default {
   data () {
     return {
-      isActive: false,
+      modalActive: false,
     }
   }
 }

@@ -8,7 +8,7 @@ function createThemeChangeHandler (property) {
 
 function getTheme (componentInstance, property, configProviderToWatchThemeChange) {
   let cursor = componentInstance
-  let lastThemedConfigProvider = null
+  let outermostThemedConfigProvider = null
   let theme = null
   while (cursor) {
     const name = cursor.$options.name
@@ -16,7 +16,7 @@ function getTheme (componentInstance, property, configProviderToWatchThemeChange
       while (cursor) {
         if (cursor.syntheticTheme) {
           theme = cursor.syntheticTheme
-          lastThemedConfigProvider = cursor
+          outermostThemedConfigProvider = cursor
         }
         cursor = cursor.NConfigProvider
       }
@@ -24,13 +24,13 @@ function getTheme (componentInstance, property, configProviderToWatchThemeChange
       cursor = cursor.$parent
     }
   }
-  if (lastThemedConfigProvider && property && configProviderToWatchThemeChange) {
-    if (!configProviderToWatchThemeChange.has(lastThemedConfigProvider)) {
-      lastThemedConfigProvider.$watch('syntheticTheme', createThemeChangeHandler(property))
-      configProviderToWatchThemeChange.add(lastThemedConfigProvider)
+  if (outermostThemedConfigProvider && property && configProviderToWatchThemeChange) {
+    if (!configProviderToWatchThemeChange.has(outermostThemedConfigProvider)) {
+      outermostThemedConfigProvider.$watch('syntheticTheme', createThemeChangeHandler(property))
+      configProviderToWatchThemeChange.add(outermostThemedConfigProvider)
     }
   }
-  return { theme, configProvider: lastThemedConfigProvider }
+  return { theme, configProvider: outermostThemedConfigProvider }
 }
 
 function install (Vue, property, name) {
@@ -44,7 +44,7 @@ function install (Vue, property, name) {
       apply (target, thisArg, argumentsList) {
         if (thisArg instanceof Vue) {
           const { theme } = getTheme(thisArg, property, configProviderToWatchThemeChange)
-          property.theme = theme
+          property.inheritedTheme = theme
         }
         return target.bind(thisArg)(...argumentsList)
       }

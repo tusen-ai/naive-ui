@@ -1,13 +1,13 @@
 <template>
   <n-modal
     v-model="active"
-    :theme="theme"
+    :theme="syntheticTheme"
     :activate-event="event"
     :mask-closable="maskClosable"
     @after-hide="handleAfterHide"
   >
     <n-confirm
-      :theme="theme"
+      :theme="syntheticTheme"
       :type="type"
       :content="content"
       :positive-text="positiveText"
@@ -34,6 +34,7 @@ export default {
   data () {
     return {
       theme: null,
+      inheritedTheme: null,
       maskClosable: true,
       active: false,
       content: null,
@@ -48,6 +49,11 @@ export default {
       onNegativeClick: () => true,
       onClose: () => true,
       instances: null
+    }
+  },
+  computed: {
+    syntheticTheme () {
+      return this.theme || this.inheritedTheme
     }
   },
   methods: {
