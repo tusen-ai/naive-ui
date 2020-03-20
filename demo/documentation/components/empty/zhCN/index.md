@@ -8,7 +8,8 @@ basic
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |theme|`'light' \| 'dark'`|`null`||
-|description|`string`|`'No Data'`||
+|size|`'small' \| 'medium' \| 'large' \| 'huge'`|`'medium'`||
+|description|`string`|`'无数据'`||
 |show-description|`boolean`|`true`||
 
 ## Slots

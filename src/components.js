@@ -417,6 +417,13 @@ const exportedComponents = {
       '~vue-virtual-scroller/dist/vue-virtual-scroller.css'
     ]
   },
+  Tree: {
+    styles: [
+      'Tree',
+      'BaseLoading',
+      '[]Checkbox'
+    ]
+  },
   Typography: {
     styles: [
       'Typography'
@@ -527,5 +534,6 @@ function createInstallStatements (components = [], locales = ['zhCN', 'enUS'], f
 }
 
 export {
-  createInstallStatements
+  createInstallStatements,
+  exportedComponents
 }
