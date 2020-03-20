@@ -9,7 +9,7 @@
 <div 
   ref="target" 
   style="position:relative;
-    width:500px;
+    width:100%;
     height:500px;
     border:1px solid rgba(0, 0, 0, .1);
     margin-top: 10px;">
