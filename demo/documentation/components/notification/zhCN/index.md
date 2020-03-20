@@ -41,7 +41,7 @@ duration
 |meta|`string \| (() => VNode \| Array<VNode>)`|`null`|可以是 render 函数|
 |action|`string \| (() => VNode \| Array<VNode>)`|`null`|可以是 render 函数|
 |closable|`boolean`|`true`||
-|onClose|`() => boolean \| Promise<boolean>`|`() => {}`|关闭通知的回调。返回 `false`、Promise resolve `false` 或者 reject 会取消这次关闭|
+|onClose|`() => boolean \| Promise<boolean> \| any`|`() => {}`|关闭通知的回调。返回 `false`、Promise resolve `false` 或者 reject 会取消这次关闭|
 |onAfterHide|`function`|`null`||
 |onAfterShow|`function`|`null`||
 |duration|`number`|`null`|如果没有设定则不会自动关闭，单位毫秒|
@@ -52,7 +52,7 @@ NofiticationEnvironment 实例的属性可以被动态改变。
 
 |名称|类型|说明|
 |-|-|-|
-|avatar|`string \| (() => VNode \| Array<VNode>)`|可以是 render 函数|
+|avatar|`() => VNode \| Array<VNode>`|可以是 render 函数|
 |title|`string \| (() => VNode \| Array<VNode>)`|可以是 render 函数|
 |description|`string \| (() => VNode \| Array<VNode>)`|可以是 render 函数|
 |content|`string \| (() => VNode \| Array<VNode>)`|可以是 render 函数|

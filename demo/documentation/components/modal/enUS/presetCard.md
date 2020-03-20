@@ -2,12 +2,12 @@
 Modal has some presets, which means you can use props & slots of the preset after set it.
 ```html
 <n-button
-  @click="isActive = true"
+  @click="modalActive = true"
 >
   Start Me up
 </n-button>
 <n-modal
-  v-model="isActive"
+  v-model="modalActive"
   preset="card"
   overlay-style="width: 600px;"
   title="Modal"
@@ -31,7 +31,7 @@ Modal has some presets, which means you can use props & slots of the preset afte
 export default {
   data () {
     return {
-      isActive: false,
+      modalActive: false,
     }
   }
 }

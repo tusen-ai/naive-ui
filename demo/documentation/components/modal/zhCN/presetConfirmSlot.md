@@ -2,11 +2,11 @@
 插槽也会随着预设变动。
 ```html
 <n-button
-  @click="isActive = true"
+  @click="modalActive = true"
 >
   来吧
 </n-button>
-<n-modal v-model="isActive" 
+<n-modal v-model="modalActive" 
   preset="confirm"
   title="Confirm"
 >
@@ -23,7 +23,7 @@
 export default {
   data () {
     return {
-      isActive: false,
+      modalActive: false,
     }
   }
 }

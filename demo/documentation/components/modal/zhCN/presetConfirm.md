@@ -2,11 +2,12 @@
 `confirm` 预设的例子。
 ```html
 <n-button
-  @click="isActive = true"
+  @click="modalActive = true"
 >
   来吧
 </n-button>
-<n-modal v-model="isActive" 
+<n-modal
+  v-model="modalActive"
   preset="confirm" 
   title="确认"
   content="你确认?" 
@@ -21,17 +22,17 @@
 export default {
   data () {
     return {
-      isActive: false,
+      modalActive: false,
     }
   },
   methods: {
     cancelCallback () {
       this.$NMessage.success('算了')
-      this.isActive = false
+      this.modalActive = false
     },
     submitCallback () {
       this.$NMessage.success('确认')
-      this.isActive = false
+      this.modalActive = false
     }
   }
 }

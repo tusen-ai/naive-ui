@@ -12,7 +12,7 @@
     }"
     @keyup.up.stop="handleKeyUpUp"
     @keyup.down.stop="handleKeyUpDown"
-    @mousedown.prevent="() => {}"
+    @mousedown.prevent
   >
     <n-scrollbar
       v-if="!empty"

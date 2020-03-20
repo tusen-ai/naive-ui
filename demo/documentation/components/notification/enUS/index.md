@@ -38,7 +38,7 @@ duration
 |meta|`string \| (() => VNode \| Array<VNode>)`|`null`|Can be a render function|
 |action|`string \| (() => VNode \| Array<VNode>)`|`null`|Can be a render function|
 |closable|`boolean`|`true`||
-|onClose|`() => boolean \| Promise<boolean>`|`() => {}`|The callback of notification closing. Returning `false`, promise resolve `false` or promise reject will cancel this closing.|
+|onClose|`() => boolean \| Promise<boolean> \| any`|`() => {}`|The callback of notification closing. Returning `false`, promise resolve `false` or promise reject will cancel this closing.|
 |onAfterHide|`function`|`null`||
 |onAfterShow|`function`|`null`||
 |duration|`number`|`null`|If not set, it won't automatically close. Unit is millisecond.|
@@ -49,7 +49,7 @@ Properties of NofiticationEnvironment Instance can be dynamically set.
 
 |Name|Type|Description|
 |-|-|-|
-|avatar|`string \| (() => VNode \| Array<VNode>)`|Can be a render function|
+|avatar|`() => VNode \| Array<VNode>`|Can be a render function|
 |title|`string \| (() => VNode \| Array<VNode>)`|Can be a render function|
 |description|`string \| (() => VNode \| Array<VNode>)`|Can be a render function|
 |content|`string \| (() => VNode \| Array<VNode>)`|Can be a render function|

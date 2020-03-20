@@ -2,10 +2,10 @@
   <div
     ref="self"
     class="n-cascader"
-    @keydown.up.prevent="() => {}"
-    @keydown.down.prevent="() => {}"
-    @keydown.left.prevent="() => {}"
-    @keydown.right.prevent="() => {}"
+    @keydown.up.prevent
+    @keydown.down.prevent
+    @keydown.left.prevent
+    @keydown.right.prevent
     @keydown.space="handleKeyDownSpace"
     @keyup.esc="handleKeyUpEsc"
     @keyup.space="handleKeyUpSpace"

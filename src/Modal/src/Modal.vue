@@ -126,9 +126,9 @@ export default {
                   this.mousedownTarget = e.target
                 },
                 mouseup: (e) => {
-                  const slotDOM = this.$refs.content.slotDOM()
+                  const getSlotDOM = this.$refs.content.getSlotDOM()
                   const scollbars = this.$refs.content.$el.querySelectorAll('.n-scrollbar-rail__scrollbar')
-                  const elsToAvoid = [...slotDOM, ...scollbars]
+                  const elsToAvoid = [...getSlotDOM, ...scollbars]
                   if (this.maskClosable) {
                     if (
                       !elsToAvoid.some(el => el.contains(e.target)) &&

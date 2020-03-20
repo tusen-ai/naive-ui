@@ -2,11 +2,11 @@
 An example of preset `confirm`.
 ```html
 <n-button
-  @click="isActive = true"
+  @click="modalActive = true"
 >
   Start Me up
 </n-button>
-<n-modal v-model="isActive" 
+<n-modal v-model="modalActive" 
   preset="confirm" 
   title="Confirm"
   content="Are you sure?" 
@@ -21,17 +21,17 @@ An example of preset `confirm`.
 export default {
   data () {
     return {
-      isActive: false,
+      modalActive: false,
     }
   },
   methods: {
     cancelCallback () {
       this.$NMessage.success('Cancel')
-      this.isActive = false
+      this.modalActive = false
     },
     submitCallback () {
       this.$NMessage.success('Submit')
-      this.isActive = false
+      this.modalActive = false
     }
   }
 }

@@ -7,8 +7,8 @@
       'n-select--multiple': multiple,
       [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
-    @keydown.up.prevent="() => {}"
-    @keydown.down.prevent="() => {}"
+    @keydown.up.prevent
+    @keydown.down.prevent
     @keydown.space="handleKeyDownSpace"
     @keyup.up="handleKeyUpUp"
     @keyup.down="handleKeyUpDown"
