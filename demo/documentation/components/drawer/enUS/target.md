@@ -8,20 +8,26 @@
 </n-button-group>
 <div 
   ref="target" 
-  style="position:relative;
+  style="
+    position:relative;
     width: 100%;
-    height: 500px;
-    border: 1px solid rgba(0, 0, 0, .1);
-    margin-top: 10px;">
-  <p style="
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);">
-    Appear area
-  </p>
+    height: 300px;
+    border: 1px solid rgba(128, 128, 128, .2);
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  "
+>
+  Target Area
 </div>
-<n-drawer v-model="active" :width="200" :placement="placement" :target="target">
+<n-drawer
+  v-model="active"
+  :width="200"
+  :height="200"
+  :placement="placement" 
+  :target="target"
+>
   <n-h1>Stoner</n-h1>
   <n-p>Stoner is a 1965 novel by the American writer John Williams.</n-p>
 </n-drawer>

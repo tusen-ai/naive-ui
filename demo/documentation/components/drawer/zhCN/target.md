@@ -8,20 +8,26 @@
 </n-button-group>
 <div 
   ref="target"
-  style="position:relative;
+  style="
+    position:relative;
     width: 100%;
-    height: 500px;
-    border: 1px solid rgba(0, 0, 0, .1);
-    margin-top: 10px;"
+    height: 300px;
+    border: 1px solid rgba(128, 128, 128, .2);
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  "
 >
-  <p style="position:absolute;
-      top:50%;
-      left:50%;
-      transform: translate(-50%, -50%);">
-    显示区域
-  </p>
+  显示区域
 </div>
-<n-drawer v-model="active" :width="200" :placement="placement" :target="target">
+<n-drawer
+  v-model="active"
+  :width="200"
+  :height="200"
+  :placement="placement" 
+  :target="target"
+>
   <n-h1>斯通纳</n-h1>
   <n-p>《斯通纳》是美国作家约翰·威廉姆斯在 1965 年出版的小说。</n-p>
 </n-drawer>
