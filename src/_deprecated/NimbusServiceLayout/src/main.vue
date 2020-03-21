@@ -112,8 +112,11 @@ export default {
       'bordered': this.siderBordered,
       'show-content': !this.collapsed,
       'use-native-scrollbar': false,
-      'collapsed-width': 28,
+      'collapsed-width': 0,
       'width': 288,
+      'trigger-style': {
+        top: 'calc(50% - 78px)'
+      },
       'scroll-container-style': {
         width: '288px'
       }

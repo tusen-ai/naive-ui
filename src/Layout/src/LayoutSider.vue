@@ -28,13 +28,20 @@
     <div v-else class="n-layout-sider__content">
       <slot />
     </div>
-    <div
-      v-if="showTrigger"
-      class="n-layout-sider__toggle-button"
-      @click="handleToggleButtonClick"
-    >
-      <toggle-button />
-    </div>
+    <div v-if="bordered" class="n-layout-sider__border" />
+    <template v-if="showTrigger">
+      <toggle-button
+        v-if="showTrigger === 'arrow-circle'"
+        :style="triggerStyle"
+        @click.native="handleToggleButtonClick"
+      />
+      <toggle-bar
+        v-else
+        :collapsed="collapsed"
+        :style="triggerStyle"
+        @click.native="handleToggleButtonClick"
+      />
+    </template>
   </aside>
 </template>
 
@@ -43,12 +50,14 @@ import layoutModeMixin from './layoutModeMixin'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import ToggleButton from './ToggleButton'
+import ToggleBar from './ToggleBar'
 import NScrollbar from '../../Scrollbar'
 
 export default {
   name: 'NLayoutSider',
   components: {
     ToggleButton,
+    ToggleBar,
     NScrollbar
   },
   mixins: [ withapp, themeable, layoutModeMixin ],
@@ -80,7 +89,7 @@ export default {
       default: true
     },
     showTrigger: {
-      type: Boolean,
+      type: [Boolean, String],
       default: false
     },
     useNativeScrollbar: {
@@ -96,6 +105,10 @@ export default {
       default: null
     },
     scrollContainerStyle: {
+      type: Object,
+      default: null
+    },
+    triggerStyle: {
       type: Object,
       default: null
     }

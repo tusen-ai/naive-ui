@@ -35,7 +35,7 @@
   <n-layout position="absolute" style="top: 64px;">
     <n-layout-sider
       position="absolute"
-      show-trigger
+      show-trigger="arrow-circle"
       collapse-mode="transform"
       :collapsed-width="120"
       :width="240"
