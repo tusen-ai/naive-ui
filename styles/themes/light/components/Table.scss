@@ -4,7 +4,7 @@
     'default': $--n-card-background-color,
     'modal': $--n-modal-background-color
   ) !global;
-  $--table-header-background-color: mix-color-with-alpha-color(
+  $--table-header-background-color: composite-color(
     $--n-card-background-color,
     $--n-table-header-overlay-background-color
   ) !global;

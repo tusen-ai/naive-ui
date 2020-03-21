@@ -1,7 +1,11 @@
-@function mix-color-with-alpha-color ($color, $alpha-color) {
-  $alpha-color-weight: percentage(alpha($alpha-color));
-  $temp-color-1: scale-color($color, $lightness: -$alpha-color-weight);
-  $temp-color-2: scale-color($alpha-color, $lightness: -(100% - $alpha-color-weight));
+@function composite-color ($background-color, $color) {
+  $background-color-alpha: alpha($background-color);
+  @if $background-color-alpha != 1 {
+    @error "[naive-ui/styles/composite-color]: background-color isn't opaque.";
+  }
+  $color-weight: percentage(alpha($color));
+  $temp-color-1: scale-color($background-color, $lightness: -$color-weight);
+  $temp-color-2: scale-color($color, $lightness: -(100% - $color-weight));
   @return rgb(
     red($temp-color-1) + red($temp-color-2),
     green($temp-color-1) + green($temp-color-2),
