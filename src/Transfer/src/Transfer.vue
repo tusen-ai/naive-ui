@@ -427,13 +427,15 @@ export default {
   watch: {
     options () {
       this.initialized = false
-      const valueSet = this.valueSet
-      this.memorizedSourceOptions = this.options.filter(option => !valueSet.has(option.value))
+      this.initMemorizedSourceOptions()
       this.sourceCheckedValues = []
       this.targetCheckedValues = []
       this.$nextTick().then(() => {
         this.initialized = true
       })
+    },
+    value () {
+      this.initMemorizedSourceOptions()
     }
   },
   mounted () {
@@ -445,6 +447,12 @@ export default {
     this.memorizedSourceOptions = this.options.filter(option => !valueSet.has(option.value))
   },
   methods: {
+    initMemorizedSourceOptions () {
+      const valueSet = this.valueSet
+      this.memorizedSourceOptions = this.options.filter(
+        option => !valueSet.has(option.value)
+      )
+    },
     emitChangeEvent (value) {
       const newValue = this.cleanValue(value)
       this.$emit('change', newValue)
@@ -661,3 +669,4 @@ export default {
   }
 }
 </script>
+
