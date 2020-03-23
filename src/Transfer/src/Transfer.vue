@@ -10,7 +10,11 @@
     <div class="n-transfer-list">
       <div class="n-transfer-list-header">
         <div class="n-transfer-list-header__checkbox">
-          <n-transfer-header-checkbox :source="true" :theme="syntheticTheme" @change="handleSourceHeaderCheckboxChange" />
+          <n-transfer-header-checkbox
+            :source="true"
+            :theme="syntheticTheme"
+            @change="handleSourceHeaderCheckboxChange"
+          />
         </div>
         <div class="n-transfer-list-header__header">
           {{ sourceTitle || localeNamespace.sourceTitle }}
@@ -22,7 +26,12 @@
         @mouseleave="handleSourceListMouseLeave"
       >
         <div v-if="filterable" class="n-transfer-filter">
-          <n-input v-model="sourcePattern" clearable size="small" :placeholder="targetFilterPlaceholder">
+          <n-input
+            v-model="sourcePattern"
+            clearable
+            size="small"
+            :placeholder="targetFilterPlaceholder"
+          >
             <template v-slot:suffix>
               <n-icon :size="16">
                 <ios-search />
@@ -47,7 +56,11 @@
                 key-field="value"
               >
                 <template v-slot:before>
-                  <n-base-tracking-rect ref="sourceLightBar" :item-size="itemSize" :theme="syntheticTheme" />
+                  <n-base-tracking-rect
+                    ref="sourceLightBar"
+                    :item-size="itemSize"
+                    :theme="syntheticTheme"
+                  />
                 </template>
                 <template v-slot="{ item: option, index }">
                   <n-transfer-source-list-item
@@ -65,7 +78,11 @@
             </n-scrollbar>
             <n-scrollbar v-else :theme="syntheticTheme">
               <div ref="sourceList" class="n-transfer-list-content">
-                <n-base-tracking-rect ref="sourceLightBar" :item-size="itemSize" :theme="syntheticTheme" />
+                <n-base-tracking-rect
+                  ref="sourceLightBar"
+                  :item-size="itemSize"
+                  :theme="syntheticTheme"
+                />
                 <n-transfer-source-list-item
                   v-for="option in filteredSourceOptions"
                   ref="sourceListItems"
@@ -88,19 +105,16 @@
       <div class="n-transfer-list__border-mask" />
     </div>
     <div class="n-transfer-gap">
-      <n-transfer-button
-        :to="true"
-        @click="handleToTargetClick"
-      />
-      <n-transfer-button
-        :to="false"
-        @click="handleToSourceClick"
-      />
+      <n-transfer-button :to="true" @click="handleToTargetClick" />
+      <n-transfer-button :to="false" @click="handleToSourceClick" />
     </div>
     <div class="n-transfer-list">
       <div class="n-transfer-list-header">
         <div class="n-transfer-list-header__checkbox">
-          <n-transfer-header-checkbox :theme="syntheticTheme" @change="handleTargetHeaderCheckboxChange" />
+          <n-transfer-header-checkbox
+            :theme="syntheticTheme"
+            @change="handleTargetHeaderCheckboxChange"
+          />
         </div>
         <div class="n-transfer-list-header__header">
           {{ targetTitle || localeNamespace.targetTitle }}
@@ -112,7 +126,12 @@
         @mouseleave="handleTargetListMouseLeave"
       >
         <div v-if="filterable" class="n-transfer-filter">
-          <n-input v-model="targetPattern" clearable size="small" :placeholder="targetFilterPlaceholder">
+          <n-input
+            v-model="targetPattern"
+            clearable
+            size="small"
+            :placeholder="targetFilterPlaceholder"
+          >
             <template v-slot:suffix>
               <n-icon :size="16">
                 <ios-search />
@@ -137,7 +156,11 @@
                 key-field="value"
               >
                 <template v-slot:before>
-                  <n-base-tracking-rect ref="targetLightBar" :item-size="itemSize" :theme="syntheticTheme" />
+                  <n-base-tracking-rect
+                    ref="targetLightBar"
+                    :item-size="itemSize"
+                    :theme="syntheticTheme"
+                  />
                 </template>
                 <template v-slot="{ item: option, index }">
                   <n-transfer-target-list-item
@@ -155,7 +178,11 @@
             </n-scrollbar>
             <n-scrollbar v-else :theme="syntheticTheme">
               <div ref="targetList" class="n-transfer-list-content">
-                <n-base-tracking-rect ref="targetLightBar" :item-size="itemSize" :theme="syntheticTheme" />
+                <n-base-tracking-rect
+                  ref="targetLightBar"
+                  :item-size="itemSize"
+                  :theme="syntheticTheme"
+                />
                 <n-transfer-target-list-item
                   v-for="(option, index) in filteredTargetOptions"
                   ref="targetListItems"
@@ -263,7 +290,9 @@ export default {
       type: Function,
       default: (pattern, option, from) => {
         if (!pattern) return true
-        return ~('' + option.label).toLowerCase().indexOf(('' + pattern).toLowerCase())
+        return ~('' + option.label)
+          .toLowerCase()
+          .indexOf(('' + pattern).toLowerCase())
       }
     },
     size: {
@@ -309,37 +338,33 @@ export default {
     },
     sourceScrollContainer () {
       if (this.virtualScroll) {
-        return () => (
+        return () =>
           this.$refs.sourceVirtualScroller &&
           this.$refs.sourceVirtualScroller.$el
-        )
       }
       return null
     },
     sourceScrollContent () {
       if (this.virtualScroll) {
-        return () => (
+        return () =>
           this.$refs.sourceVirtualScroller &&
           this.$refs.sourceVirtualScroller.$refs.wrapper
-        )
       }
       return null
     },
     targetScrollContainer () {
       if (this.virtualScroll) {
-        return () => (
+        return () =>
           this.$refs.targetVirtualScroller &&
           this.$refs.targetVirtualScroller.$el
-        )
       }
       return null
     },
     targetScrollContent () {
       if (this.virtualScroll) {
-        return () => (
+        return () =>
           this.$refs.targetVirtualScroller &&
           this.$refs.targetVirtualScroller.$refs.wrapper
-        )
       }
       return null
     },
@@ -356,24 +381,41 @@ export default {
       return this.disabled || this.mergedDisabledStatus.target
     },
     sourceHeaderCheckboxChecked () {
-      return this.sourceCheckedValues.length === this.memorizedSourceOptions.length && !!this.memorizedSourceOptions.length
+      return (
+        this.sourceCheckedValues.length ===
+          this.memorizedSourceOptions.length &&
+        !!this.memorizedSourceOptions.length
+      )
     },
     targetHeaderCheckboxChecked () {
-      return this.targetCheckedValues.length === this.targetOptions.length && !!this.targetOptions.length
+      return (
+        this.targetCheckedValues.length === this.targetOptions.length &&
+        !!this.targetOptions.length
+      )
     },
     sourceHeaderCheckboxIndeterminate () {
-      return this.sourceCheckedValues.length !== 0 && this.sourceCheckedValues.length < this.memorizedSourceOptions.length
+      return (
+        this.sourceCheckedValues.length !== 0 &&
+        this.sourceCheckedValues.length < this.memorizedSourceOptions.length
+      )
     },
     targetHeaderCheckboxIndeterminate () {
-      return this.targetCheckedValues.length !== 0 && this.targetCheckedValues.length < this.targetOptions.length
+      return (
+        this.targetCheckedValues.length !== 0 &&
+        this.targetCheckedValues.length < this.targetOptions.length
+      )
     },
     sourceCheckedValueSet () {
       const valueToOptionMap = this.valueToOptionMap
-      return new Set(this.sourceCheckedValues.filter(value => valueToOptionMap.has(value)))
+      return new Set(
+        this.sourceCheckedValues.filter(value => valueToOptionMap.has(value))
+      )
     },
     targetCheckedValueSet () {
       const valueToOptionMap = this.valueToOptionMap
-      return new Set(this.targetCheckedValues.filter(value => valueToOptionMap.has(value)))
+      return new Set(
+        this.targetCheckedValues.filter(value => valueToOptionMap.has(value))
+      )
     },
     sourceValueSet () {
       return this.mergedValueSet.sourceValueSet
@@ -413,7 +455,9 @@ export default {
       const sourcePattern = this.sourcePattern
       if (!sourcePattern.length) return this.memorizedSourceOptions
       const filter = this.filter
-      return this.memorizedSourceOptions.filter(option => filter(sourcePattern, option, 'source'))
+      return this.memorizedSourceOptions.filter(option =>
+        filter(sourcePattern, option, 'source')
+      )
     },
     filteredTargetOptions () {
       const filterable = this.filterable
@@ -421,19 +465,23 @@ export default {
       const targetPattern = this.targetPattern
       if (!targetPattern.length) return this.targetOptions
       const filter = this.filter
-      return this.targetOptions.filter(option => filter(targetPattern, option, 'target'))
+      return this.targetOptions.filter(option =>
+        filter(targetPattern, option, 'target')
+      )
     }
   },
   watch: {
     options () {
       this.initialized = false
-      const valueSet = this.valueSet
-      this.memorizedSourceOptions = this.options.filter(option => !valueSet.has(option.value))
+      this.initMemorizedSourceOptions()
       this.sourceCheckedValues = []
       this.targetCheckedValues = []
       this.$nextTick().then(() => {
         this.initialized = true
       })
+    },
+    value () {
+      this.initMemorizedSourceOptions()
     }
   },
   mounted () {
@@ -442,9 +490,17 @@ export default {
   },
   created () {
     const valueSet = this.valueSet
-    this.memorizedSourceOptions = this.options.filter(option => !valueSet.has(option.value))
+    this.memorizedSourceOptions = this.options.filter(
+      option => !valueSet.has(option.value)
+    )
   },
   methods: {
+    initMemorizedSourceOptions () {
+      const valueSet = this.valueSet
+      this.memorizedSourceOptions = this.options.filter(
+        option => !valueSet.has(option.value)
+      )
+    },
     emitChangeEvent (value) {
       const newValue = this.cleanValue(value)
       this.$emit('change', newValue)
@@ -456,20 +512,28 @@ export default {
       } else return null
     },
     clearSourceCheck () {
-      const sourceValueSet = new Set(this.filteredSourceOptions.map(option => option.value))
-      this.sourceCheckedValues = this.sourceCheckedValues.filter(value => !sourceValueSet.has(value))
+      const sourceValueSet = new Set(
+        this.filteredSourceOptions.map(option => option.value)
+      )
+      this.sourceCheckedValues = this.sourceCheckedValues.filter(
+        value => !sourceValueSet.has(value)
+      )
     },
     handleSourceHeaderCheckboxChange (value) {
       if (this.sourceHeaderCheckboxIndeterminate) {
         if (!this.virtualScroll) {
-          (this.$refs.sourceListItems || []).forEach(listItem => listItem.setChecked(false))
+          ;(this.$refs.sourceListItems || []).forEach(listItem =>
+            listItem.setChecked(false)
+          )
         }
         this.clearSourceCheck()
         return
       }
       if (value) {
         if (!this.virtualScroll) {
-          (this.$refs.sourceListItems || []).forEach(listItem => listItem.setChecked(true))
+          ;(this.$refs.sourceListItems || []).forEach(listItem =>
+            listItem.setChecked(true)
+          )
         }
         const newValues = this.filteredSourceOptions
           .filter(option => !option.disabled)
@@ -478,26 +542,36 @@ export default {
         this.sourceCheckedValues = Array.from(new Set(newValues))
       } else {
         if (!this.virtualScroll) {
-          (this.$refs.sourceListItems || []).forEach(listItem => listItem.setChecked(false))
+          ;(this.$refs.sourceListItems || []).forEach(listItem =>
+            listItem.setChecked(false)
+          )
         }
         this.clearSourceCheck()
       }
     },
     clearTargetCheck () {
-      const targetValueSet = new Set(this.filteredTargetOptions.map(option => option.value))
-      this.targetCheckedValues = this.targetCheckedValues.filter(value => !targetValueSet.has(value))
+      const targetValueSet = new Set(
+        this.filteredTargetOptions.map(option => option.value)
+      )
+      this.targetCheckedValues = this.targetCheckedValues.filter(
+        value => !targetValueSet.has(value)
+      )
     },
     handleTargetHeaderCheckboxChange (value) {
       if (this.targetHeaderCheckboxIndeterminate) {
         if (!this.virtualScroll) {
-          (this.$refs.targetListItems || []).forEach(listItem => listItem.setChecked(false))
+          ;(this.$refs.targetListItems || []).forEach(listItem =>
+            listItem.setChecked(false)
+          )
         }
         this.clearTargetCheck()
         return
       }
       if (value) {
         if (!this.virtualScroll) {
-          (this.$refs.targetListItems || []).forEach(listItem => listItem.setChecked(true))
+          ;(this.$refs.targetListItems || []).forEach(listItem =>
+            listItem.setChecked(true)
+          )
         }
         const newValues = this.filteredTargetOptions
           .filter(option => !option.disabled)
@@ -506,7 +580,9 @@ export default {
         this.targetCheckedValues = Array.from(new Set(newValues))
       } else {
         if (!this.virtualScroll) {
-          (this.$refs.targetListItems || []).forEach(listItem => listItem.setChecked(false))
+          ;(this.$refs.targetListItems || []).forEach(listItem =>
+            listItem.setChecked(false)
+          )
         }
         this.clearTargetCheck()
       }
@@ -535,8 +611,9 @@ export default {
       let nextValue = Array.isArray(this.value) ? this.value : []
       nextValue = this.sourceCheckedValues.concat(nextValue)
       const sourceCheckedValueSet = this.sourceCheckedValueSet
-      this.memorizedSourceOptions = this.memorizedSourceOptions
-        .filter(option => !sourceCheckedValueSet.has(option.value))
+      this.memorizedSourceOptions = this.memorizedSourceOptions.filter(
+        option => !sourceCheckedValueSet.has(option.value)
+      )
       this.$emit('change', nextValue)
       this.sourceCheckedValues = []
     },
@@ -546,7 +623,9 @@ export default {
         return
       }
       this.enableTargetEnterAnimation = true
-      const enteredItemEls = Array.from(this.$el.getElementsByClassName('n-transfer-list-item--enter'))
+      const enteredItemEls = Array.from(
+        this.$el.getElementsByClassName('n-transfer-list-item--enter')
+      )
       const length = enteredItemEls.length
       for (let i = 0; i < length; ++i) {
         enteredItemEls[i].classList.remove('n-transfer-list-item--enter')
@@ -556,7 +635,8 @@ export default {
       let newValue = Array.isArray(this.value) ? this.value : []
       newValue = sourceCheckedValues.concat(newValue)
       /** create new source length */
-      this.nextSourceOptionsLength = this.memorizedSourceOptions.length - sourceCheckedValues.length
+      this.nextSourceOptionsLength =
+        this.memorizedSourceOptions.length - sourceCheckedValues.length
       /** play source leave animation */
       const sourceCheckedValueSet = this.sourceCheckedValueSet
       this.$refs.sourceListItems.forEach(listItem => {
@@ -566,7 +646,9 @@ export default {
       })
       window.setTimeout(() => {
         /** after animation is done change memorized source options to remove dom */
-        this.memorizedSourceOptions = this.memorizedSourceOptions.filter(option => !sourceCheckedValueSet.has(option.value))
+        this.memorizedSourceOptions = this.memorizedSourceOptions.filter(
+          option => !sourceCheckedValueSet.has(option.value)
+        )
         this.nextSourceOptionsLength = null
         this.enableTargetEnterAnimation = false
       }, 500)
@@ -581,8 +663,12 @@ export default {
       const targetValueSet = this.targetCheckedValueSet
       newValue = newValue.filter(value => !targetValueSet.has(value))
       const valueToOptionMap = this.valueToOptionMap
-      const newSourceOptions = this.targetCheckedValues.map(value => valueToOptionMap.get(value))
-      this.memorizedSourceOptions = newSourceOptions.concat(this.memorizedSourceOptions)
+      const newSourceOptions = this.targetCheckedValues.map(value =>
+        valueToOptionMap.get(value)
+      )
+      this.memorizedSourceOptions = newSourceOptions.concat(
+        this.memorizedSourceOptions
+      )
       this.$emit('change', newValue)
       this.targetCheckedValues = []
     },
@@ -592,7 +678,9 @@ export default {
         return
       }
       this.enableSourceEnterAnimation = true
-      const enteredItemEls = Array.from(this.$el.getElementsByClassName('n-transfer-list-item--enter'))
+      const enteredItemEls = Array.from(
+        this.$el.getElementsByClassName('n-transfer-list-item--enter')
+      )
       const length = enteredItemEls.length
       for (let i = 0; i < length; ++i) {
         enteredItemEls[i].classList.remove('n-transfer-list-item--enter')
@@ -620,8 +708,12 @@ export default {
       }, 500)
       /** change memorized source options */
       const valueToOptionMap = this.valueToOptionMap
-      const newSourceOptions = this.targetCheckedValues.map(value => valueToOptionMap.get(value))
-      this.memorizedSourceOptions = newSourceOptions.concat(this.memorizedSourceOptions)
+      const newSourceOptions = this.targetCheckedValues.map(value =>
+        valueToOptionMap.get(value)
+      )
+      this.memorizedSourceOptions = newSourceOptions.concat(
+        this.memorizedSourceOptions
+      )
       /** clear check */
       this.targetCheckedValues = []
     },
