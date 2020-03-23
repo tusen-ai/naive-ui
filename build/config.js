@@ -1,11 +1,12 @@
 const path = require('path')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 exports.alias = {
   'naive-ui/lib/icons': path.resolve(__dirname, '../src/_icons'),
   'src': path.resolve(__dirname, '../src')
 }
 
-exports.docLoaders = [
+exports.docLoaders = (env) => [
   {
     test: /index.entry$/,
     loader: ['vue-loader', path.resolve(__dirname, '../demo/loaders/NaiveUIDocEntryLoader.js')]
@@ -46,7 +47,7 @@ exports.docLoaders = [
   },
   {
     test: /\.(scss|css)$/,
-    use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+    use: [...(env === 'production' ? [MiniCssExtractPlugin.loader] : []), ...(env === 'production' ? [] : ['style-loader']), 'css-loader', 'postcss-loader', 'sass-loader']
   },
   {
     test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,

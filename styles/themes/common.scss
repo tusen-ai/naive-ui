@@ -1,5 +1,5 @@
-$--n-font-family: 'FiraSans', '-apple-system';
-$--n-mono-font-family: 'FiraCode', monospace;
+$--n-font-family: FiraSans, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+$--n-mono-font-family: FiraCode, monospace;
 
 $--n-strong-weight: 600;
 
@@ -9,6 +9,8 @@ $--n-ease-in-cubic-bezier: cubic-bezier(.4, 0, 1, 1);
 
 $--n-border-radius: 3px;
 $--n-light-border-radius: 2px;
+
+$--n-line-height: 1.75;
 
 $--n-height: (
   "tiny": 22px,
@@ -137,6 +139,21 @@ $--n-descriptions-padding: (
   'large': 16px,
 );
 
+/** empty */
+$--n-empty-icon-size: (
+  'small': 28px,
+  'medium': 34px,
+  'large': 40px,
+  'huge': 46px
+);
+
+$--n-empty-font-size: (
+  'small': 14px,
+  'medium': 14px,
+  'large': 15px,
+  'huge': 16px
+);
+
 /** input number */
 $--n-input-number-border-radius: $--n-border-radius;
 $--n-input-number-button-width: (
@@ -167,6 +184,28 @@ $--n-radio-size: (
   'small': 14px,
   'medium': 14px,
   'large': 16px
+);
+
+/** result */
+$--n-result-icon-size: (
+  'small':  64px,
+  'medium': 80px,
+  'large': 100px,
+  'huge': 125px
+);
+
+$--n-result-header-font-size: (
+  'small': 26px,
+  'medium': 32px,
+  'large': 40px,
+  'huge': 48px
+);
+
+$--n-result-description-font-size: (
+  'small':  14px,
+  'medium': 14px,
+  'large': 15px,
+  'huge': 16px
 );
 
 /** slider */

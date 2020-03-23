@@ -14,10 +14,6 @@ custom-icon
 depth
 ```
 
-```component
-icons
-```
-
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
@@ -31,7 +27,3 @@ icons
 |Name|Parameters|Description|
 |-|-|-|
 |default|`()`||
-
-<!-- ## Icons -->
-<icons/>
-

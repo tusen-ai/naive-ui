@@ -3,7 +3,7 @@
     'default': $--n-card-background-color
   ) !global;
   $--transfer-list-header-background-color: (
-    'default': mix-color-with-alpha-color(
+    'default': composite-color(
       $--n-card-background-color,
       $--n-table-header-overlay-background-color
     )

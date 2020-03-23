@@ -31,6 +31,7 @@
       @include b(scrollbar-rail) {
         @include once {
           position: absolute;
+          pointer-events: none;
           user-select: none;
           @include m(horizontal) {
             left: 0;
@@ -52,9 +53,13 @@
               }
             }
           }
-        }
-        @include m(disabled) {
-          pointer-events: none;
+          @include m(disabled) {
+            & > {
+              @include e(scrollbar) {
+                pointer-events: none;
+              }
+            }
+          }
         }
         & > {
           @include e(scrollbar) {
@@ -62,6 +67,7 @@
               @include fade-in-transition(scrollbar);
               position: absolute;
               cursor: pointer;
+              pointer-events: all;
             }
             background-color: map-get($--scrollbar-background-color, 'default');
             transition: background-color .2s $--n-ease-in-out-cubic-bezier;

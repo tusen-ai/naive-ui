@@ -31,6 +31,7 @@ closable
 ## Slots
 |名称|参数|说明|
 |-|-|-|
+|cover|`()`||
 |header|`()`||
 |header-extra|`()`||
 |default|`()`||

@@ -89,11 +89,18 @@
         min-width .3s  $--n-ease-in-out-cubic-bezier,
         max-width .3s $--n-ease-in-out-cubic-bezier,
         transform .3s $--n-ease-in-out-cubic-bezier,
-        background-color .3s $--n-ease-in-out-cubic-bezier,
-        border-color .3s $--n-ease-in-out-cubic-bezier;
+        background-color .3s $--n-ease-in-out-cubic-bezier;
+      @include e(border) {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 1px;
+        transition: background-color .3s $--n-ease-in-out-cubic-bezier;
+      }
     }  
     background-color: $--layout-sider-background-color;
-    @include e(toggle-button) {
+    @include b(layout-toggle-button) {
       @include once {
         z-index: 1;
         transition:
@@ -108,6 +115,62 @@
         transform: translateX(50%) translateY(-50%);
       }
       fill: $--layout-sider-toggle-button-fill;
+    }
+    @include b(layout-toggle-bar) {
+      @include once {
+        cursor: pointer;
+        height: 72px;
+        width: 32px;
+        position: absolute;
+        top: calc(50% - 36px);
+        right: -28px;
+        @include e(top, bottom) {
+          position: absolute;
+          width: 4px;
+          border-radius: 2px;
+          height: 38px;
+          left: 14px;
+          transition: 
+            background-color .3s $--n-ease-in-out-cubic-bezier,
+            transform .3s $--n-ease-in-out-cubic-bezier;
+        }
+        @include e(bottom) {
+          position: absolute;
+          top: 34px;
+        }
+        &:hover {
+          @include e(top) {
+            transform: rotate(12deg) scale(1.15) translateY(-2px);
+          }
+          @include e(bottom) {
+            transform: rotate(-12deg) scale(1.15) translateY(2px);
+          }
+        }
+        @include m(collapsed) {
+          &:hover {
+            @include e(top) {
+              transform: rotate(-12deg) scale(1.15) translateY(-2px);
+            }
+            @include e(bottom) {
+              transform: rotate(12deg) scale(1.15) translateY(2px);
+            }
+          }
+        }
+      }
+      @include e(top, bottom) {
+        background-color: map-get(
+          $--layout-sider-toggle-bar-background-color,
+          'default'
+        );
+      }
+      &:hover {
+        @include e(top, bottom) {
+          background-color: map-get(
+            $--layout-sider-toggle-bar-background-color,
+            'hover'
+          );
+        }
+      }
     }
     @include once {
       @include e(content) {
@@ -141,7 +204,9 @@
       }
     }
     @include m(bordered) {
-      border-right: solid 1px $--layout-sider-border-color;
+      @include e(border) {
+        background-color: $--layout-sider-border-color;
+      }
     }
   }
 }

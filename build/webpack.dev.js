@@ -35,7 +35,7 @@ const webpackConfig = {
     children: false
   },
   module: {
-    rules: config.docLoaders
+    rules: config.docLoaders()
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

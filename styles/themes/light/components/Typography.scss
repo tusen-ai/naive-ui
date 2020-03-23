@@ -49,7 +49,7 @@
   $--typography-code-text-color: (
     'default': $--n-secondary-text-color,
   ) !global;
-  $--typography-code-background-color: mix-color-with-alpha-color(
+  $--typography-code-background-color: composite-color(
     $--n-base-background-color,
     $--n-code-overlay-background-color
   ) !global;

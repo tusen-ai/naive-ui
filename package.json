@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "0.7.29",
+  "version": "1.0.1",
   "description": "",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -85,6 +85,7 @@
     "loader-utils": "^1.2.3",
     "marked": "^0.7.0",
     "memory-fs": "^0.4.1",
+    "mini-css-extract-plugin": "^0.9.0",
     "mocha": "^6.2.2",
     "multer": "^1.4.2",
     "ncp": "^2.0.0",

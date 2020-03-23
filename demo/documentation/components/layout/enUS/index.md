@@ -12,7 +12,7 @@ scrollbar
 collapse
 trigger-button
 show-sider-content
-scrollTo
+scroll-to
 ```
 ## Props
 ### Layout, Layout Content Props
@@ -44,7 +44,7 @@ scrollTo
 |collapsed|`boolean`|`false`||
 |use-native-scrollbar|`boolean`|`true`|Whether to use native scrollbar on itself. If set to `false`, sider will use a naive-ui style scrollbar for content|
 |show-content|`boolean`|`true`|If set to `false`, sider content will be invisible.|
-|show-trigger|`boolean`|`false`|Whether to show the built-in trigger button on sider.|
+|show-trigger|`boolean \| 'bar' \| 'arrow-circle'`|`false`|Whether to show the built-in trigger button on sider.|
 
 ## Slots
 ### Layout, Layout Content, Layout Sider, Layout Header, Layout Footer Slots

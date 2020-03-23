@@ -39,13 +39,14 @@
 
 <script>
 import {
-  createInstallStatements
+  createInstallStatements,
+  exportedComponents
 } from 'src/components'
 
 export default {
   data () {
     return {
-      components: ['Affix', 'Alert', 'Anchor', 'AutoComplete', 'Avatar', 'BackTop', 'Badge', 'Breadcrumb', 'Button', 'Card', 'Cascader', 'Checkbox', 'Code', 'Collapse', 'ConfigConsumer', 'ConfigProvider', 'Confirm', 'DataTable', 'DatePicker', 'Descriptions', 'Divider', 'Drawer', 'Dropdown', 'Element', 'Empty', 'Form', 'GradientText', 'Grid', 'Icon', 'Input', 'InputNumber', 'Layout', 'List', 'LoadingBar', 'Log', 'Menu', 'Notification', 'Pagination', 'Popconfirm', 'Popover', 'Popselect', 'Progress', 'Radio', 'Result', 'Select', 'Slider', 'Spin', 'Statistic', 'Steps', 'Switch', 'Tabs', 'Tag', 'Thing', 'Time', 'Timeline', 'TimePicker', 'Tooltip', 'Transfer', 'Typography'],
+      components: Object.keys(exportedComponents),
       localeOptions: [
         {
           label: '中文', value: 'zhCN'

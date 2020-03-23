@@ -1,5 +1,11 @@
 import withapp from './withapp'
 
+function cleanUp (content, target) {
+  if (content && target && target.contains(content)) {
+    target.removeChild(content)
+  }
+}
+
 /**
  * Detach $refs.contentContainer to detachTarget
  *
@@ -93,8 +99,16 @@ export default {
     if (this.syntheticDetachable) {
       const content = this.getDetachContent()
       const target = this.getDetachTarget()
-      if (content && target && target.contains(content)) {
-        this.getDetachTarget().removeChild(content)
+      /**
+       * Since content may be detached in modal, waiting animation done is
+       * important. A more elegant solution is needed.
+       */
+      if (this.NModal || this.NDrawer) {
+        setTimeout(() => {
+          cleanUp(content, target)
+        }, 300)
+      } else {
+        cleanUp(content, target)
       }
     }
   }

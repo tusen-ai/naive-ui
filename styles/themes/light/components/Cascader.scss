@@ -8,7 +8,7 @@
   ) !global;
   $--cascader-menu-box-shadow: $--n-popmenu-box-shadow !global;
   $--cascader-menu-border-color: $--n-divider-color !global;
-  $--cascader-menu-tracking-rect-background-color: mix-color-with-alpha-color(
+  $--cascader-menu-tracking-rect-background-color: composite-color(
     $--n-base-background-color,
     $--n-pending-overlay-color
   ) !global;

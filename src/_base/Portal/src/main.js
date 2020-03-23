@@ -1,3 +1,9 @@
+function cleanUp (content, target) {
+  if (content && target && target.contains(content)) {
+    target.removeChild(content)
+  }
+}
+
 export default {
   name: 'NBasePortal',
   inject: {
@@ -36,8 +42,17 @@ export default {
   },
   beforeDestroy () {
     const target = this.transferTarget()
-    if (target && target.contains(this.$el)) {
-      target.removeChild(this.$el)
+    const content = this.$el
+    /**
+     * Since content may be detached in modal, waiting animation done is
+     * important. A more elegant solution is needed.
+     */
+    if (this.NModal || this.NDrawer) {
+      setTimeout(() => {
+        cleanUp(content, target)
+      }, 300)
+    } else {
+      cleanUp(content, target)
     }
   },
   data () {

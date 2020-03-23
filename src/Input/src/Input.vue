@@ -245,6 +245,10 @@ export default {
     stateful: {
       type: Boolean,
       default: true
+    },
+    deactivateOnEnter: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -456,7 +460,10 @@ export default {
     },
     handleWrapperKeyDownEnter (e) {
       if (this.passivelyActivated) {
-        if (this.inputFocused) return
+        if (this.inputFocused && this.deactivateOnEnter) {
+          this.handleWrapperKeyDownEsc()
+          return
+        }
         e.preventDefault()
         if (this.type === 'textarea') {
           this.$refs.textarea.focus()

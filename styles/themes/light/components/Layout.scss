@@ -7,4 +7,14 @@
   $--layout-sider-border-color: $--n-divider-color !global;
   $--layout-sider-background-color: $--n-card-background-color !global;
   $--layout-sider-toggle-button-fill:  rgba(0, 0, 0, .15) !global;
+  $--layout-sider-toggle-bar-background-color: (
+    'default': composite-color(
+      $--n-body-background-color,
+      $--n-scrollbar-background-color
+    ),
+    'hover': composite-color(
+      $--n-body-background-color,
+      $--n-scrollbar-hover-background-color
+    ),
+  ) !global;
 }

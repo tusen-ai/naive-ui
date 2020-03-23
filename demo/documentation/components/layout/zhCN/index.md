@@ -12,7 +12,7 @@ scrollbar
 collapse
 trigger-button
 show-sider-content
-scrollTo
+scroll-to
 ```
 ## Props
 ### Layout, Layout Content Props
@@ -47,8 +47,8 @@ scrollTo
 |collapse-mode|`'transform' \| 'width'`|`'transform'`|如果设定为 `'width'`，Sider 的内容宽度将会被实际改变；如果设定为 `'transform'`，边栏将只会移动它的位置而不会改变宽度。`'transform'` 的 collapse-mode 只适用于 `'absolute'` position 的 Sider|
 |collapsed|`boolean`|`false`||
 |use-native-scrollbar|`boolean`|`true`|是否在自身使用原生滚动条。如果设定为 `false`, Sider 将会对内容使用 naive-ui 风格的滚动条|
-|show-content|`boolean`|`true`|如果设为 `false`，Sider 的内容将会变透明。|
-|show-trigger|`boolean`|`false`|内置的触发按钮是否展示|
+|show-content|`boolean`|`true`|如果设为 `false`，Sider 的内容将会变透明|
+|show-trigger|`boolean \| 'bar' \| 'arrow-circle'`|`false`|内置的触发按钮是否展示|
 
 ## Slots
 ### Layout, Layout Content, Layout Sider, Layout Header, Layout Footer Slots

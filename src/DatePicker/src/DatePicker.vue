@@ -10,6 +10,7 @@
       'n-date-picker--start-invalid': isStartValueInvalid,
       'n-date-picker--end-invalid': isEndValueInvalid
     }"
+    @keydown="handleKeyDown"
   >
     <n-input
       v-if="isRange"
@@ -25,6 +26,7 @@
       :force-focus="active"
       :clearable="clearable"
       pair
+      deactivate-on-enter
       @clear="handleClear"
       @click="handleActivatorClick"
       @activate="handleInputActivate"
@@ -49,6 +51,7 @@
       :placeholder="localizedPlacehoder"
       :readonly="disabled ? 'disabled' : false"
       :clearable="clearable"
+      deactivate-on-enter
       @click="handleActivatorClick"
       @focus="handleInputFocus"
       @blur="handleInputBlur"
@@ -71,7 +74,8 @@
       <div
         ref="content"
         class="n-positioning-content"
-        @keydown.esc="handlePanelKeyDownEsc"
+        @keydown.esc.enter="handlePanelKeyDownEsc"
+        @keydown="handleKeyDown"
       >
         <datetime-panel
           v-if="type === 'datetime'"
@@ -157,7 +161,7 @@ import iosCalendar from '../../_icons/ios-calendar'
 import format from 'date-fns/format'
 import getTime from 'date-fns/getTime'
 import isValid from 'date-fns/isValid'
-import { strictParse } from '../../_utils/component/datePicker'
+import { strictParse, getDerivedTimeFromKeyboardEvent } from '../../_utils/component/datePicker'
 import isEqual from 'lodash-es/isEqual'
 
 const DATE_FORMAT = {
@@ -333,6 +337,15 @@ export default {
     this.refresh(this.value)
   },
   methods: {
+    handleKeyDown (e) {
+      const value = this.value
+      if (this.type === 'date') {
+        const nextValue = getDerivedTimeFromKeyboardEvent(value, e)
+        if (value !== nextValue) {
+          this.$emit('change', nextValue)
+        }
+      }
+    },
     handleClear (e) {
       e.stopPropagation()
       this.$emit('change', null)

@@ -1,8 +1,24 @@
 @import "./mixins/mixins.scss";
 
+@mixin empty-size-mixin($size) {
+  @include m($size + '-size') {
+    font-size: map-get($--n-empty-font-size, $size);
+    @include e(icon) {
+      width: map-get($--n-empty-icon-size, $size);
+      height: map-get($--n-empty-icon-size, $size);
+      font-size: map-get($--n-empty-icon-size, $size);
+      line-height: map-get($--n-empty-icon-size, $size);
+    }
+  }
+}
+
 @include themes-mixin {
   @include b(empty) {
     @include once {
+      @include empty-size-mixin('small');
+      @include empty-size-mixin('medium');
+      @include empty-size-mixin('large');
+      @include empty-size-mixin('huge');
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -11,10 +27,6 @@
     @include e(icon) {
       @include once {
         transition: fill .3s $--n-ease-in-out-cubic-bezier;
-        width: 28px;
-        height: 28px;
-        font-size: 28px;
-        line-height: 28px;
       }
       @include b(icon) {
         fill: $--empty-icon-color;

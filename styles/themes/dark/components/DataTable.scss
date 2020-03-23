@@ -2,8 +2,8 @@
 
 @mixin setup-dark-data-table {
   $--data-table-border-color: (
-    'default': mix-color-with-alpha-color($--n-card-background-color, $--n-divider-color),
-    'modal': mix-color-with-alpha-color($--n-modal-background-color, $--n-divider-color),
+    'default': composite-color($--n-card-background-color, $--n-divider-color),
+    'modal': composite-color($--n-modal-background-color, $--n-divider-color),
   ) !global;
   $--data-table-header-text-color: $--n-primary-text-color !global;
   $--data-table-fixed-column-box-shadow-color: rgba(0, 0, 0, .36) !global;
@@ -12,14 +12,14 @@
     'modal': $--n-modal-background-color
   ) !global;
   $--data-table-header-background-color: (
-    'default': mix-color-with-alpha-color($--n-card-background-color, $--n-table-header-overlay-background-color),
-    'hover': mix-color-with-alpha-color(
-      mix-color-with-alpha-color($--n-card-background-color, $--n-table-header-overlay-background-color),
+    'default': composite-color($--n-card-background-color, $--n-table-header-overlay-background-color),
+    'hover': composite-color(
+      composite-color($--n-card-background-color, $--n-table-header-overlay-background-color),
       $--n-pending-overlay-color
     ),
-    'modal': mix-color-with-alpha-color($--n-modal-background-color, $--n-table-header-overlay-background-color),
-    'modal-hover': mix-color-with-alpha-color(
-      mix-color-with-alpha-color($--n-modal-background-color, $--n-table-header-overlay-background-color),
+    'modal': composite-color($--n-modal-background-color, $--n-table-header-overlay-background-color),
+    'modal-hover': composite-color(
+      composite-color($--n-modal-background-color, $--n-table-header-overlay-background-color),
       $--n-pending-overlay-color
     )
   ) !global;
@@ -27,8 +27,8 @@
     'hover': $--n-pending-overlay-color
   ) !global;
   $--data-table-row-background-color: (
-    'hover': mix-color-with-alpha-color($--n-card-background-color, $--n-pending-overlay-color),
-    'modal-hover': mix-color-with-alpha-color($--n-modal-background-color, $--n-pending-overlay-color),
+    'hover': composite-color($--n-card-background-color, $--n-pending-overlay-color),
+    'modal-hover': composite-color($--n-modal-background-color, $--n-pending-overlay-color),
   ) !global;
   $--data-table-body-text-color: $--n-secondary-text-color !global;
   $--data-table-button-color: (
