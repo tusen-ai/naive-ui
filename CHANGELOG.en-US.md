@@ -1,6 +1,7 @@
 # CHANGELOG
 ## 1.0.2 (2020-03-23)
 ### Fixes
+- `n-transfer`'s options are not reinitialized after value changes.
 - `n-nimbus-service-layout` (deprecated) doesn't deal with the compatibility of Vue Router(under 3.1)'s `push` method.
 
 ## 1.0.1 (2020-03-21)
