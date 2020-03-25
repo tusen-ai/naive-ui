@@ -64,6 +64,7 @@ import mdAlert from '../../_icons/md-alert'
 import mdInformationCircle from '../../_icons/md-information-circle'
 import mdCloseCircle from '../../_icons/md-close-circle'
 import render from '../../_utils/vue/render'
+import asthemecontext from '../../_mixins/asthemecontext'
 
 export default {
   components: {
@@ -75,7 +76,7 @@ export default {
     mdInformationCircle,
     mdCloseCircle
   },
-  mixins: [ themeable ],
+  mixins: [ themeable, asthemecontext ],
   props: {
     closable: {
       type: Boolean,
