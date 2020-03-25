@@ -11,20 +11,23 @@ import {
 let viewMeasurerInitialized = false
 let viewMeasurer = null
 
-if (!viewMeasurerInitialized && !document.getElementById('n-view-measurer')) {
-  viewMeasurer = document.createElement('div')
-  viewMeasurer.id = 'n-view-measurer'
-  viewMeasurer.style = `
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    pointer-events: none;
-    visibility: hidden;
-  `
+if (!viewMeasurerInitialized) {
+  viewMeasurer = document.getElementById('n-view-measurer')
+  if (!viewMeasurer) {
+    viewMeasurer = document.createElement('div')
+    viewMeasurer.id = 'n-view-measurer'
+    viewMeasurer.style = `
+      position: fixed !important;
+      left: 0 !important;
+      right: 0 !important;
+      top: 0 !important;
+      bottom: 0 !important;
+      pointer-events: none !important;
+      visibility: hidden !important;
+    `
+    document.body.appendChild(viewMeasurer)
+  }
   viewMeasurerInitialized = true
-  document.body.appendChild(viewMeasurer)
 }
 
 function getActivatorEl (refs) {
