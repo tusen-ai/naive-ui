@@ -7,8 +7,11 @@ import mdCloseCircle from '../../_icons/md-close-circle'
 import NBaseLoading from '../../_base/Loading'
 import IconSwitchTransition from '../../_transition/IconSwitchTransition'
 import render from '../../_utils/vue/render'
+import themeable from '../../_mixins/themeable'
+import asthemecontext from '../../_mixins/asthemecontext'
 
 export default {
+  mixins: [ themeable, asthemecontext ],
   props: {
     icon: {
       type: [String, Function],

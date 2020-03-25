@@ -73,11 +73,14 @@ export default {
     validate (callback, shouldRuleBeApplied = () => true) {
       return new Promise((resolve, reject) => {
         const formItemValidationPromises = []
-        for (const key of Object.keys(this.items)) {
-          const formItemInstances = this.items[key]
+        const formItems = this.items
+        for (const key of Object.keys(formItems)) {
+          const formItemInstances = formItems[key]
           for (const formItemInstance of formItemInstances) {
             if (formItemInstance.path) {
-              formItemValidationPromises.push(formItemInstance._validate(null, shouldRuleBeApplied))
+              formItemValidationPromises.push(
+                formItemInstance._validate(null, shouldRuleBeApplied)
+              )
             }
           }
         }
@@ -85,7 +88,9 @@ export default {
           .all(formItemValidationPromises)
           .then(results => {
             if (results.some(result => !result.valid)) {
-              const errors = results.filter(result => result.errors).map(result => result.errors)
+              const errors = results
+                .filter(result => result.errors)
+                .map(result => result.errors)
               if (callback) {
                 callback(errors)
               } else {

@@ -1,7 +1,5 @@
 import ConfirmEnvironment from './ConfirmEnvironment.vue'
 
-const instances = new Set()
-
 function updateConfirm (data, instance) {
   for (const key of Object.keys(data)) {
     if (key in instance.$data) {
@@ -13,11 +11,20 @@ function updateConfirm (data, instance) {
 export default {
   name: 'NConfirm',
   theme: null,
+  inheritedTheme: null,
+  instances: new Set(),
+  handleThemeChange (theme) {
+    this.inheritedTheme = theme
+    const syntheticTheme = this.theme || this.inheritedTheme
+    for (const instance of this.instances) {
+      instance.inheritedTheme = syntheticTheme
+    }
+  },
   createInstance () {
     const instance = new this.Vue(ConfirmEnvironment)
     instance.$mount()
-    instances.add(instance)
-    instance.instances = instances
+    this.instances.add(instance)
+    instance.instances = this.instances
     return instance
   },
   confirm (options) {
@@ -28,12 +35,13 @@ export default {
   },
   warning (options) {
     const instance = this.createInstance()
+    const syntheticTheme = this.theme || this.inheritedTheme
     updateConfirm(
       {
         type: 'warning',
         active: true,
         ...options,
-        theme: options.theme || this.theme
+        inheritedTheme: syntheticTheme
       },
       instance
     )
@@ -41,12 +49,13 @@ export default {
   },
   error (options) {
     const instance = this.createInstance()
+    const syntheticTheme = this.theme || this.inheritedTheme
     updateConfirm(
       {
         type: 'error',
         active: true,
         ...options,
-        theme: options.theme || this.theme
+        inheritedTheme: syntheticTheme
       },
       instance
     )
@@ -54,19 +63,20 @@ export default {
   },
   success (options) {
     const instance = this.createInstance()
+    const syntheticTheme = this.theme || this.inheritedTheme
     updateConfirm(
       {
         type: 'success',
         active: true,
         ...options,
-        theme: options.theme || this.theme
+        inheritedTheme: syntheticTheme
       },
       instance
     )
     return instance
   },
   destroyAll () {
-    instances.forEach(instance => {
+    this.instances.forEach(instance => {
       instance.active = false
     })
   }

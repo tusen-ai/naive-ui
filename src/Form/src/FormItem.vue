@@ -64,8 +64,29 @@ function wrapValidator (validator) {
   if (typeof validator === 'function') {
     return (...args) => {
       try {
-        return validator(...args)
+        const validateResult = validator(...args)
+        if (
+          typeof validateResult === 'boolean' ||
+          validateResult instanceof Error ||
+          (validateResult && validateResult.then)
+        ) {
+          return validateResult
+        } else if (validateResult === void 0) {
+          return true
+        } else {
+          console.warn(
+            `[naive-ui/form-item/validate]: You return a ${typeof validateResult} ` +
+            'typed value in the validator method, which is not recommended. Please ' +
+            'use `boolean`, `Error` or `Promise` typed value instead.'
+          )
+          return true
+        }
       } catch (err) {
+        console.error(
+          '[naive-ui/form-item/validate]: An error is catched in the validation, ' +
+          'so the validation won\'t be done. Your callback in `validate` method of ' +
+          '`n-form` or `n-form-item` won\'t be called in this validation.'
+        )
         console.error(err)
         return void 0
       }
@@ -320,11 +341,18 @@ export default {
         suppressWarning: true
       }
     ) {
-      if (!this.path) {
+      const path = this.path
+      /**
+       * If not path is specified, not data will be validated, so any value will
+       * be valid.
+       */
+      if (!path) {
         console.error(
           '[naive-ui/form-item]: `n-form-item` without `path` can\'t be validated.'
         )
-        return
+        return Promise.resolve({
+          valid: true
+        })
       }
       if (!options) {
         options = {}
@@ -332,8 +360,7 @@ export default {
         if (!options.first) options.first = this.first
       }
       const rules = this.syntheticRules
-      const path = this.path
-      const value = get(this.NForm.model, this.path, null)
+      const value = get(this.NForm.model, path, null)
       const activeRules = (!trigger
         ? rules
         : rules.filter(rule => {
