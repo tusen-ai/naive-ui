@@ -134,6 +134,9 @@ zindex 的问题解决了，虽然很简单，在 static 元素上设定 zindex 
 ## 2020.3.20
 一想到到了 1.0 就要写 changelog，就感觉🥚在隐隐作痛
 
+## 2020.3.25
+一个有趣的事情是，blur 到 document.body 之后，document.activeElement 是 body，但是 blurEvent.relatedTarget 会被设为 null
+
 ## TODO 排序不分先后
 1. <del>Focus Detector on Time Selector</del>
 2. <del>Menu Root Indent = 0 可能造成问题</del>
