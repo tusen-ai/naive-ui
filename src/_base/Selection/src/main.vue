@@ -291,9 +291,9 @@ export default {
       }
     },
     handleBlur (e) {
-      if (!e.relatedTarget) {
+      if (!e.relatedTarget && document.activeElement !== document.body) {
         console.log(e.relatedTarget)
-        console.warn('[naive-ui/base-selection]: blur events has no related target, this may be a bug of naive-ui.')
+        console.warn('[naive-ui/base-selection]: blur event has no related target, this may be a bug of naive-ui.')
       }
       if (e.relatedTarget && this.$el.contains(e.relatedTarget)) return
       this.$emit('blur')
