@@ -113,7 +113,7 @@
           background-color: transparent;
         }
         @include e(text) {
-          line-height: 1.25em;
+          line-height: 1.25;
           border-bottom: 1px solid transparent;
           transition: border-color .3s $--n-ease-in-out-cubic-bezier;
         }
