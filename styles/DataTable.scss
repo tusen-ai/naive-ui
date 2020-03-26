@@ -467,15 +467,20 @@
 }
 
 @include b(data-table-filter-menu) {
+  @include b(scrollbar) {
+    max-height: 240px;
+  }
   @include e(group) {
     display: flex;
     flex-direction: column;
     padding: 12px 12px 0 12px;
     @include b(checkbox) {
       margin-bottom: 12px;
+      margin-right: 0;
     }
     @include b(radio) {
       margin-bottom: 12px;
+      margin-right: 0;
     }
   }
   @include b(divider) {

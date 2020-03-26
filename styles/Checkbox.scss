@@ -2,8 +2,6 @@
 
 @mixin checkbox-size-mixin ($size) {
   @include m($size + '-size') {
-    height: map-get($--n-font-size, $size);
-    line-height: map-get($--n-font-size, $size);
     font-size: map-get($--n-font-size, $size);
     @include b(checkbox-box) {
       height: map-get($--n-checkbox-size, $size);
@@ -16,7 +14,7 @@
   @include once {
     @include b(checkbox-group) {
       font-size: 14px;
-      line-height: 14px;
+      line-height: 1.25;
       @include b(checkbox) {
         margin-right: 18px;
       }
@@ -25,14 +23,15 @@
       @include checkbox-size-mixin('small');
       @include checkbox-size-mixin('medium');
       @include checkbox-size-mixin('large');
+      line-height: 1.25;
       outline: none;
       cursor: pointer;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
       white-space: nowrap;
       @include b(checkbox-box) {
         display: inline-block;
         box-sizing: border-box;
-        vertical-align: bottom;
         border-radius: 4px;
         position: relative;
         transition:

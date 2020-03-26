@@ -1,36 +1,42 @@
 <template>
   <div class="n-data-table-filter-menu">
-    <n-checkbox-group
-      v-if="multiple"
-      :theme="theme"
-      :value="cachedValue"
-      class="n-data-table-filter-menu__group"
-      @change="handleChange"
+    <n-scrollbar
+      :content-style="{
+        transform: 'translateZ(0)'
+      }"
     >
-      <n-checkbox
-        v-for="option in options"
-        :key="option.value"
-        :value="option.value"
+      <n-checkbox-group
+        v-if="multiple"
+        :theme="theme"
+        :value="cachedValue"
+        class="n-data-table-filter-menu__group"
+        @change="handleChange"
       >
-        {{ option.label }}
-      </n-checkbox>
-    </n-checkbox-group>
-    <n-radio-group
-      v-else
-      :theme="theme"
-      :name="radioGroupName"
-      class="n-data-table-filter-menu__group"
-      :value="cachedValue && cachedValue[0]"
-      @change="handleChange"
-    >
-      <n-radio
-        v-for="option in options"
-        :key="option.value"
-        :value="option.value"
+        <n-checkbox
+          v-for="option in options"
+          :key="option.value"
+          :value="option.value"
+        >
+          {{ option.label }}
+        </n-checkbox>
+      </n-checkbox-group>
+      <n-radio-group
+        v-else
+        :theme="theme"
+        :name="radioGroupName"
+        class="n-data-table-filter-menu__group"
+        :value="cachedValue && cachedValue[0]"
+        @change="handleChange"
       >
-        {{ option.label }}
-      </n-radio>
-    </n-radio-group>
+        <n-radio
+          v-for="option in options"
+          :key="option.value"
+          :value="option.value"
+        >
+          {{ option.label }}
+        </n-radio>
+      </n-radio-group>
+    </n-scrollbar>
     <n-divider :theme="theme" />
     <div class="n-data-table-filter-menu__action">
       <n-button
@@ -61,6 +67,7 @@ import NRadioGroup from '../../../Radio/src/RadioGroup'
 import NRadio from '../../../Radio/src/Radio'
 import NDivider from '../../../Divider'
 import NButton from '../../../Button'
+import NScrollbar from '../../../Scrollbar'
 
 function isEqual (value, oldValue) {
   if (Array.isArray(value) && Array.isArray(oldValue)) {
@@ -84,7 +91,8 @@ export default {
     NDivider,
     NRadioGroup,
     NRadio,
-    NButton
+    NButton,
+    NScrollbar
   },
   props: {
     radioGroupName: {
