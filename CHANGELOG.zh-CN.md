@@ -1,4 +1,8 @@
 # CHANGELOG
+## 1.0.4 (2020-03-26)
+### Features
+- 当选项过多时，`n-data-table` 过滤菜单的内容可以滚动
+
 ## 1.0.3 (2020-03-25)
 ### Features
 - `$NMessage`, `$NNotification`, `$NConfirm` 的获取到的主题会应用到他们的内部组件

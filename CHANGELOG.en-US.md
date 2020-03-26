@@ -1,4 +1,8 @@
 # CHANGELOG
+## 1.0.4 (2020-03-26)
+### Features
+- Filter menu in `n-data-table` is scrollable when there are too many items.
+
 ## 1.0.3 (2020-03-25)
 ### Features
 - `$NMessage`, `$NNotification`, `$NConfirm`'s theme will be applied on their children components.
