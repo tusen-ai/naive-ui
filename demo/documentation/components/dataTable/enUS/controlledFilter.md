@@ -96,9 +96,8 @@ export default {
       this.addressColumn.filterOptionValues = []
     },
     handleFiltersChange (filters, sourceColumn) {
-      this.addressColumn.filterOptionValues = filters.filter(
-        filter => filter.columnKey === sourceColumn.key
-      ).map(filter => filter.filterOptionValue)
+      console.log(filters, sourceColumn)
+      this.addressColumn.filterOptionValues = filters[sourceColumn.key]
     }
   }
 }
