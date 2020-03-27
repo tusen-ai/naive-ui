@@ -55,7 +55,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 
 |Name|Type|Description|
 |-|-|-|
-|filters|`(filters: object)`|Key is the key of the column, value is the filterOptionValues.|
+|filters|`(filters: { (string \| number): Array<string \| number> })`|Key is the key of the column, value is the filterOptionValues.|
 |sort|`(columnKey: string \| null, order: 'ascend' \| 'descend' \| false)`|If columnKey set to `null`, it is same as clearSorter|
 |page|`(page: number) => void`||
 |clearFilters|`() => void`||
@@ -65,7 +65,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 ## Events
 |Name|Parameters|Description|
 |-|-|-|
-|filters-change|`(filters:object, initiatorColumn: object)`||
+|filters-change|`(filters: { (string \| number): Array<string \| number> }, initiatorColumn: object)`||
 |sorter-change|`({ columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null)`|If there won't be a active sorter after change, sorter-change will emit `null`|
 |page-change|`(page: number)`||
 |page-size-change|`(pageSize: number)`||

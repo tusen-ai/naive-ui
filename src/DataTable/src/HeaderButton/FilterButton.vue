@@ -44,8 +44,9 @@ function createActiveFilters (allFilters, columnKey, filterOptionValues) {
   if (!Array.isArray(filterOptionValues)) {
     filterOptionValues = [filterOptionValues]
   }
-  allFilters[columnKey] = filterOptionValues
-  return allFilters
+  const activeFilters = Object.assign({}, allFilters)
+  activeFilters[columnKey] = filterOptionValues
+  return activeFilters
 }
 
 export default {

@@ -1,4 +1,10 @@
 # CHANGELOG
+## 1.0.4 (2020-03-27)
+### Features
+- Change the data type of `n-data-table`'s filters from Array to Object.
+### Fixes
+- `n-data-table` cannot be filtered correctly when there are multiple filtered columns.
+
 ## 1.0.3 (2020-03-25)
 ### Features
 - `$NMessage`, `$NNotification`, `$NConfirm`'s theme will be applied on their children components.

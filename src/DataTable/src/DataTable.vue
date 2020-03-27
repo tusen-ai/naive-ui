@@ -68,6 +68,7 @@ import BaseTable from './BaseTable.vue'
 import NEmpty from '../../Empty'
 import NPagination from '../../Pagination'
 import formatLength from '../../_utils/css/formatLength'
+import isPlainObject from 'lodash-es/isPlainObject'
 
 // function createShallowClonedArray (array) {
 //   if (Array.isArray(array)) return array.map(createShallowClonedObject)
@@ -309,8 +310,9 @@ export default {
       columnsWithControlledFilter.forEach(column => {
         controlledActiveFilters[column.key] = column.filterOptionValues
       })
-      const internalActiveFilters = createShallowClonedObject(this.internalActiveFilters)
-      const activeFilters = Object.assign(internalActiveFilters, controlledActiveFilters)
+      const activeFilters = Object.assign(
+        createShallowClonedObject(this.internalActiveFilters),
+        controlledActiveFilters)
       return activeFilters
     },
     syntheticActiveSorter () {
@@ -489,11 +491,11 @@ export default {
       if (!filters) {
         this.internalActiveFilters = {}
         this.$emit('filters-change', {}, createShallowClonedObject(sourceColumn))
-      } else if (Object.prototype.toString.call(filters) === '[object Object]') {
+      } else if (isPlainObject(filters)) {
         this.internalActiveFilters = filters
         this.$emit('filters-change', createShallowClonedObject(filters), createShallowClonedObject(sourceColumn))
       } else {
-        console.error('[naive-ui/dataTable]: filters is not a Object')
+        console.error('[naive-ui/dataTable]: filters is not an Object')
       }
     },
     scrollMainTableBodyToTop () {

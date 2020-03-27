@@ -1,4 +1,10 @@
 # CHANGELOG
+## 1.0.4 (2020-03-27)
+### Features
+- 改变 `n-data-table` 的 filters 的数据类型, 从数组改变成对象.
+### Fixes
+- `n-data-table`在有多列筛选的情况下数据不能被正确筛选.
+
 ## 1.0.3 (2020-03-25)
 ### Features
 - `$NMessage`, `$NNotification`, `$NConfirm` 的获取到的主题会应用到他们的内部组件
