@@ -33,6 +33,7 @@
       @include radio-size-mixin('small');
       @include radio-size-mixin('medium');
       @include radio-size-mixin('large');
+      line-height: 1.25;
       outline: none;
       position: relative;
       user-select: none;

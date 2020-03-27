@@ -148,7 +148,9 @@ export default {
             on: {
               click: () => {
                 if (this.$router && item.path) {
-                  this.$router.push(item.path).catch(() => {})
+                  Promise.resolve(
+                    this.$router.push(item.path)
+                  ).catch(() => {})
                 }
               }
             }

@@ -19,12 +19,17 @@ export default {
       const theme = this.theme
       if (theme !== null) {
         return theme
-      } else if (this.NThemedComponent && this.NThemedComponent.theme) {
-        return this.NThemedComponent.theme
-      } else {
-        const NConfigProvider = this.NConfigProvider
-        return (NConfigProvider && NConfigProvider.syntheticTheme) || null
       }
+      const NThemedComponent = this.NThemedComponent
+      if (
+        NThemedComponent &&
+        NThemedComponent.theme &&
+        NThemedComponent.themeContextActivated
+      ) {
+        return NThemedComponent.theme
+      }
+      const NConfigProvider = this.NConfigProvider
+      return (NConfigProvider && NConfigProvider.syntheticTheme) || null
     },
     syntheticStyle () {
       const themedStyle = this.themedStyle

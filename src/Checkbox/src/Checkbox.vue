@@ -13,10 +13,10 @@
     @keyup.enter="handleKeyUpEnter"
     @keyup.space="handleKeyUpSpace"
     @keydown.space="handleKeyDownSpace"
+    @click="handleClick"
   >
     <div
       class="n-checkbox-box"
-      @click="handleClick"
     >
       <check-mark class="n-checkbox-box__check-mark" />
       <line-mark class="n-checkbox-box__line-mark" />
@@ -24,7 +24,6 @@
     <span
       v-if="$slots.default"
       class="n-checkbox__label"
-      @click="handleClick"
     >
       <slot />
     </span>

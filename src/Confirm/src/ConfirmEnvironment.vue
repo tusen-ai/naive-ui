@@ -14,6 +14,7 @@
       :negative-text="negativeText"
       :title="title"
       :loading="loading"
+      theme-context-activated
       @close="handleCloseClick"
       @negative-click="handleNegativeClick"
       @positive-click="handlePositiveClick"

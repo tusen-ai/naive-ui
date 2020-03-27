@@ -79,6 +79,7 @@ import iosCloseCircle from '../../_icons/ios-close-circle'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import render from '../../_utils/vue/render'
+import asthemecontext from '../../_mixins/asthemecontext'
 
 export default {
   name: 'NConfirm',
@@ -91,7 +92,7 @@ export default {
     iosCloseCircle,
     render
   },
-  mixins: [withapp, themeable],
+  mixins: [withapp, themeable, asthemecontext],
   props: {
     icon: {
       type: Function,
@@ -130,6 +131,10 @@ export default {
       default: false
     },
     bordered: {
+      type: Boolean,
+      default: false
+    },
+    themeContextActivated: {
       type: Boolean,
       default: false
     }
