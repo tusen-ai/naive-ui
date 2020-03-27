@@ -55,7 +55,7 @@ ajaxUsage
 
 |名称|参数|说明|
 |-|-|-|
-|filters|`({(string \| number): Array<string \| number> })`| Key 是列的 key, value 是 filterOptionValues.|
+|filters|`(filters: object)`| Key 是列的 key, value 是 filterOptionValues.|
 |sort|`(columnKey: string \| null, order: 'ascend' \| 'descend' \| false)`|如果 columnKey 设为 `null`，那它和 clearSorter 效果一致|
 |page|`(page: number) => void`||
 |clearFilters|`() => void`||
