@@ -70,11 +70,6 @@ import NPagination from '../../Pagination'
 import formatLength from '../../_utils/css/formatLength'
 import isPlainObject from 'lodash-es/isPlainObject'
 
-// function createShallowClonedArray (array) {
-//   if (Array.isArray(array)) return array.map(createShallowClonedObject)
-//   return array
-// }
-
 function createShallowClonedObject (object) {
   if (!object) return object
   if (typeof object === 'object') {
@@ -495,7 +490,7 @@ export default {
         this.internalActiveFilters = filters
         this.$emit('filters-change', createShallowClonedObject(filters), createShallowClonedObject(sourceColumn))
       } else {
-        console.error('[naive-ui/dataTable]: filters is not an Object')
+        console.error('[naive-ui/n-data-table]: filters is not an object')
       }
     },
     scrollMainTableBodyToTop () {
