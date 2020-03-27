@@ -213,7 +213,7 @@ export default {
       /** internal checked rows */
       internalCheckedRowKeys: [],
       /** internal filters state */
-      internalActiveFilters: [],
+      internalActiveFilters: {},
       /** internal sorter state */
       internalActiveSorter: null,
       /** internal pagination state */
@@ -271,9 +271,7 @@ export default {
       }
       return this.data ? this.data.filter(row => {
         for (const columnKey of Object.keys(row)) {
-          const activeFilterOptionValues = syntheticActiveFilters
-            .filter(filterInfo => filterInfo.columnKey === columnKey)
-            .map(filterInfo => filterInfo.filterOptionValue)
+          const activeFilterOptionValues = syntheticActiveFilters[columnKey] || []
           if (!activeFilterOptionValues.length) continue
           const columnToFilter = normalizedColumns.find(column => column.key === columnKey)
           /**
@@ -289,7 +287,7 @@ export default {
               }
             } else {
               if (activeFilterOptionValues.some(filterOptionValue => filter(filterOptionValue, row))) {
-                return true
+                continue
               } else {
                 return false
               }
@@ -307,20 +305,12 @@ export default {
       const columnsWithControlledFilter = this.normalizedColumns.filter(column => {
         return Array.isArray(column.filterOptionValues)
       })
-      const keyOfColumnsToFilter = columnsWithControlledFilter.map(column => column.key)
-      const controlledActiveFilters = []
+      const controlledActiveFilters = {}
       columnsWithControlledFilter.forEach(column => {
-        column.filterOptionValues.forEach(filterOptionValue => {
-          controlledActiveFilters.push({
-            columnKey: column.key,
-            filterOptionValue
-          })
-        })
+        controlledActiveFilters[column.key] = column.filterOptionValues
       })
-      const uncontrolledFilters = this.internalActiveFilters.filter(({
-        columnKey
-      }) => !keyOfColumnsToFilter.includes(columnKey))
-      const activeFilters = controlledActiveFilters.concat(uncontrolledFilters)
+      const internalActiveFilters = createShallowClonedObject(this.internalActiveFilters)
+      const activeFilters = Object.assign(internalActiveFilters, controlledActiveFilters)
       return activeFilters
     },
     syntheticActiveSorter () {
@@ -380,7 +370,7 @@ export default {
         this.$emit('change', {
           sorter: createShallowClonedObject(this.syntheticActiveSorter),
           pagination: createShallowClonedObject(this.syntheticPagination),
-          filters: createShallowClonedArray(this.syntheticActiveFilters)
+          filters: createShallowClonedObject(this.syntheticActiveFilters)
         })
         this.$emit('page-size-change')
       }
@@ -481,12 +471,7 @@ export default {
         }
       }
       if (column.filter && Array.isArray(column.defaultFilterOptionValues)) {
-        column.defaultFilterOptionValues.forEach(filterOptionValue => {
-          this.internalActiveFilters.push({
-            columnKey: column.key,
-            filterOptionValue
-          })
-        })
+        this.internalActiveFilters[column.key] = column.defaultFilterOptionValues
       }
     })
     this.internalCheckedRowKeys = this.defaultCheckedRowKeys
@@ -501,18 +486,8 @@ export default {
       this.$emit('sorter-change', createShallowClonedObject(sorter))
     },
     changeFilters (filters, sourceColumn) {
-      if (!filters) {
-        this.internalActiveFilters = []
-        this.$emit('filters-change', [], createShallowClonedObject(sourceColumn))
-      } else {
-        if (Array.isArray(filters)) {
-          this.internalActiveFilters = filters
-          this.$emit('filters-change', createShallowClonedArray(filters), createShallowClonedObject(sourceColumn))
-        } else {
-          this.internalActiveFilters = [ filters ]
-          this.$emit('filters-change', [ filters ], sourceColumn)
-        }
-      }
+      this.internalActiveFilters = !filters ? {} : filters
+      this.$emit('filters-change', createShallowClonedObject(this.internalActiveFilters), createShallowClonedObject(sourceColumn))
     },
     scrollMainTableBodyToTop () {
       const {
@@ -599,7 +574,7 @@ export default {
       this.clearFilters()
     },
     clearFilters () {
-      this.filters([])
+      this.filters({})
     },
     filters (filters) {
       this.filter(filters)

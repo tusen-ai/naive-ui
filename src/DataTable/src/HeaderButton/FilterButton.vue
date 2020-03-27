@@ -40,22 +40,20 @@ import NDataTableFilterMenu from './FilterMenu'
 import NPopover from '../../../Popover'
 import funnel from '../../../_icons/funnel'
 
-function createFilterOptionValues (activeFilters, column) {
-  const activeFilterOptionValues = activeFilters
-    .filter(filter => filter.columnKey === column.key)
-    .map(filter => filter.filterOptionValue)
-  return activeFilterOptionValues
-}
+// function createFilterOptionValues (activeFilters, column) {
+//   // const activeFilterOptionValues = activeFilters
+//   //   .filter(filter => filter.columnKey === column.key)
+//   //   .map(filter => filter.filterOptionValue)
+//   const activeFilterOptionValues = activeFilters[column.key]
+//   return activeFilterOptionValues
+// }
 
-function createActiveFilters (allFilters, columnKey, filters) {
-  allFilters = allFilters.filter(filter => filter.columnKey !== columnKey)
-  if (!Array.isArray(filters)) {
-    filters = [filters]
+function createActiveFilters (allFilters, columnKey, filterOptionValues) {
+  if (!Array.isArray(filterOptionValues)) {
+    filterOptionValues = [filterOptionValues]
   }
-  return allFilters.concat(filters.map(filter => ({
-    columnKey,
-    filterOptionValue: filter
-  })))
+  allFilters[columnKey] = filterOptionValues
+  return allFilters
 }
 
 export default {
@@ -91,7 +89,7 @@ export default {
       return this.NDataTable.syntheticActiveFilters
     },
     activeFilterOptionValues () {
-      return createFilterOptionValues(this.activeFilters, this.column)
+      return this.activeFilters[this.column.key]
     },
     active () {
       if (Array.isArray(this.activeFilterOptionValues)) {
