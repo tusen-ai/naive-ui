@@ -55,8 +55,8 @@ These methods can help you control table in an uncontrolled manner. However, it'
 
 |Name|Type|Description|
 |-|-|-|
-|filters|`(filters: { [string \| number]: Array<string \| number> }) => void`|Key is the key of the column, value is the filterOptionValues.|
-|sort|`(columnKey: string \| null, order: 'ascend' \| 'descend' \| false) => void`|If columnKey set to `null`, it is same as clearSorter|
+|filters|`(filters: { [string \| number]: Array<string \| number> }) => void`|Set the active filters of the table.|
+|sort|`(columnKey: string \| null, order: 'ascend' \| 'descend' \| false) => void`|If columnKey set to `null`, it is the same as clearSorter.|
 |page|`(page: number) => void`||
 |clearFilters|`() => void`||
 |clearSorter|`() => void`||
@@ -65,15 +65,15 @@ These methods can help you control table in an uncontrolled manner. However, it'
 ## Events
 |Name|Parameters|Description|
 |-|-|-|
-|filters-change|`(filters: { [string \| number]: Array<string \| number> }, initiatorColumn: object)`||
+|filters-change|`(filters: { [string \| number]: Array<string \| number> }, initiatorColumn: Column)`||
 |sorter-change|`({ columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null)`|If there won't be a active sorter after change, sorter-change will emit `null`|
 |page-change|`(page: number)`||
 |page-size-change|`(pageSize: number)`||
 |checked-row-keys-change|`(keys: Array<string \| number>)`||
 
 ## API
-### Column
-|Property|Type|Default|Description|
+### Column Properties
+|Name|Type|Default|Description|
 |-|-|-|-|
 |render|`(h, rowData: object) => VNode \| Array<VNode>`|`null`|Render function of column row cell|
 |type|`'default' \| 'selection'`|`default`||
