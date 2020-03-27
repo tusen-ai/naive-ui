@@ -55,8 +55,8 @@ ajaxUsage
 
 |名称|参数|说明|
 |-|-|-|
-|filters|`( columnKey: string \| number, filterOptionValue: string \| number } \| Array<{ columnKey: string \| number, filterOptionValue: string \| number }>)`||
-|sort|`(columnKey: string \| null, order: 'ascend' \| 'descend' \| false)`|如果 columnKey 设为 `null`，那它和 clearSorter 效果一致|
+|filters|`(filters: { [string \| number]: Array<string \| number> }) => void`| Key 是列的 key, value 是 filterOptionValues.|
+|sort|`(columnKey: string \| null, order: 'ascend' \| 'descend' \| false) => void`|如果 columnKey 设为 `null`，那它和 clearSorter 效果一致|
 |page|`(page: number) => void`||
 |clearFilters|`() => void`||
 |clearSorter|`() => void`||
@@ -65,7 +65,7 @@ ajaxUsage
 ## Events
 |名称|参数|说明|
 |-|-|-|
-|filters-change|`(Array<{ columnKey: string \| number, filterOptionValue: string \| number }>, initiatorColumn: object)`||
+|filters-change|`(filters: { [string \| number]: Array<string \| number> }, initiatorColumn: object)`||
 |sorter-change|`({ columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null)`|如果在变动后没有激活的排序，那么 sorter-change 将发出 `null`|
 |page-change|`(page: number)`||
 |page-size-change|`(pageSize: number)`||

@@ -1,4 +1,10 @@
 # CHANGELOG
+## 1.0.5 (2020-03-27)
+### Features
+- Change the data type of `n-data-table`'s filters from Array to Object.
+### Fixes
+- `n-data-table` cannot be filtered correctly when there are multiple filtered columns.
+
 ## 1.0.4 (2020-03-26)
 ### Features
 - Filter menu in `n-data-table` is scrollable when there are too many items.
