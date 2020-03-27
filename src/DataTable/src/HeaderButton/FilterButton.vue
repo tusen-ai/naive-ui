@@ -40,14 +40,6 @@ import NDataTableFilterMenu from './FilterMenu'
 import NPopover from '../../../Popover'
 import funnel from '../../../_icons/funnel'
 
-// function createFilterOptionValues (activeFilters, column) {
-//   // const activeFilterOptionValues = activeFilters
-//   //   .filter(filter => filter.columnKey === column.key)
-//   //   .map(filter => filter.filterOptionValue)
-//   const activeFilterOptionValues = activeFilters[column.key]
-//   return activeFilterOptionValues
-// }
-
 function createActiveFilters (allFilters, columnKey, filterOptionValues) {
   if (!Array.isArray(filterOptionValues)) {
     filterOptionValues = [filterOptionValues]

@@ -69,10 +69,10 @@ import NEmpty from '../../Empty'
 import NPagination from '../../Pagination'
 import formatLength from '../../_utils/css/formatLength'
 
-function createShallowClonedArray (array) {
-  if (Array.isArray(array)) return array.map(createShallowClonedObject)
-  return array
-}
+// function createShallowClonedArray (array) {
+//   if (Array.isArray(array)) return array.map(createShallowClonedObject)
+//   return array
+// }
 
 function createShallowClonedObject (object) {
   if (!object) return object
@@ -486,8 +486,15 @@ export default {
       this.$emit('sorter-change', createShallowClonedObject(sorter))
     },
     changeFilters (filters, sourceColumn) {
-      this.internalActiveFilters = !filters ? {} : filters
-      this.$emit('filters-change', createShallowClonedObject(this.internalActiveFilters), createShallowClonedObject(sourceColumn))
+      if (!filters) {
+        this.internalActiveFilters = {}
+        this.$emit('filters-change', {}, createShallowClonedObject(sourceColumn))
+      } else if (Object.prototype.toString.call(filters) === '[object Object]') {
+        this.internalActiveFilters = filters
+        this.$emit('filters-change', createShallowClonedObject(filters), createShallowClonedObject(sourceColumn))
+      } else {
+        console.error('[naive-ui/dataTable]: filters is not a Object')
+      }
     },
     scrollMainTableBodyToTop () {
       const {
