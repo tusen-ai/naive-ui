@@ -1,6 +1,5 @@
 const vue = require('rollup-plugin-vue')
 const resolve = require('@rollup/plugin-node-resolve')
-const strip = require('@rollup/plugin-strip')
 const { terser } = require('rollup-plugin-terser')
 const naiveSCSSVariable = require('./build/naiveSCSSVarPlugin')
 
@@ -33,7 +32,6 @@ module.exports = {
       }
     }),
     naiveSCSSVariable(),
-    strip(),
     terser({
       mangle: false,
       output: {

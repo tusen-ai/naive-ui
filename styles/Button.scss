@@ -495,6 +495,15 @@
             }
           }
         }
+        @include m(warning-type) {
+          & + {
+            @include b(button) {
+              @include m(info-type) {
+                border-left-width: 0px;
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -502,14 +511,14 @@
     display: inline-flex;
     flex-direction: column;
     @include b(button) {
-      &:first-child {
+      &:first-child:not(:last-child) {
         margin-bottom: 0!important;
         margin-left: 0!important;
         margin-right: 0!important;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
       }
-      &:last-child {
+      &:last-child:not(:first-child) {
         margin-top: 0!important;
         margin-left: 0!important;
         margin-right: 0!important;

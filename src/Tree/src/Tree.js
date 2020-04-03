@@ -152,7 +152,7 @@ export default {
     this.internalSelectedKeys = this.defaultSelectedKeys || []
     if (this.defaultExpandAll) {
       this.internalExpandedKeys = getAllKeys(this.data)
-      console.log('getAllKeys(this.data)', getAllKeys(this.data))
+      // console.log('getAllKeys(this.data)', getAllKeys(this.data))
     }
   },
   data () {
@@ -189,7 +189,7 @@ export default {
           this.filter
         )
         this.highlightKeys = highlightKeys
-        console.log(highlightKeys)
+        // console.log(highlightKeys)
         if (!this.hasExpandedKeys) {
           this.internalExpandedKeys = expandedKeysAfterChange
         }

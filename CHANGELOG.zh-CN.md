@@ -1,4 +1,8 @@
 # CHANGELOG
+## 1.0.6 （2020-04-03）
+### Fixes
+- 解决了所有的 `console` 语句都在打包中被删除了的问题
+
 ## 1.0.5 (2020-03-27)
 ### Features
 - 改变 `n-data-table` 的 filters 的数据类型从数组改变成对象
