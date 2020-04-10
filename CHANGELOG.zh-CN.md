@@ -1,5 +1,11 @@
 # CHANGELOG
-## 1.0.6 （2020-04-03）
+## 1.0.7 (2020-04-10)
+### Features
+- 为 `n-data-table` 的 `column` 增加了 `filter-option-value` 的属性来应对单选的情况
+### Fixes
+- 解决了 `n-collpase-item` 不支持 `number` 的问题
+
+## 1.0.6 (2020-04-03)
 ### Fixes
 - 解决了所有的 `console` 语句都在打包中被删除了的问题
 
