@@ -42,7 +42,7 @@ ajaxUsage
 |pagination|`false \| object`|`false`|See [Pagination props](n-pagination#Props)|
 |paging|`boolean`|If data-table do automatic paging. You may set it to `false` in async usage.|
 |row-class-name|`string \| (rowData: object, index : number) => string \| object`|`null`||
-|checked-row-keys|`Array<string \| number> \| null`|`null`||
+|checked-row-keys|`Array<string \| number> \| null`|`null`|The keys of checked rows.|
 |default-checked-row-keys|`Array<string \| number>`|`[]`||
 |row-key|`(rowData: object) => number \| string`|`null`|Generate the key of the row by row data (if you don't want to set the key)|
 |bordered|`boolean`|`true`||
@@ -55,7 +55,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 
 |Name|Type|Description|
 |-|-|-|
-|filters|`(filters: { [string \| number]: Array<string \| number> }) => void`|Set the active filters of the table.|
+|filters|`(filters: { [string \| number]: Array<string \| number> \| string \| number }) => void`|Set the active filters of the table.|
 |sort|`(columnKey: string \| null, order: 'ascend' \| 'descend' \| false) => void`|If columnKey set to `null`, it is the same as clearSorter.|
 |page|`(page: number) => void`||
 |clearFilters|`() => void`||
@@ -89,8 +89,10 @@ These methods can help you control table in an uncontrolled manner. However, it'
 |filter|`boolean \| (optionValue: string \| number, rowData: object) => boolean \| 'default'`|`false`|The filter of the column. If set to `true`, it will only display filter button on the column, which can be used in async status.|
 |filterMode|`'and' \| 'or'`|`'or'`||
 |filterOptions|`Array<{ label: string, value: string \| number}>`|`[]`||
-|filterOptionValues|`Array<string \| number> \| null`|`null`|The active filter option values in controlled manner. If set to `null`, the filter of the column works in an uncontrolled manner|
-|defaultFilterOptionValues|`Array<string \| number>`|`[]`|The default active filter option values in uncontrolled manner|
+|filterOptionValues|`Array<string \| number> \| null`|`undefined`|The active filter option values in controlled manner. If not set, the filter of the column works in an uncontrolled manner. (works when there are multiple filters)|
+|filterOptionValue|`string \| number \| null`|`undefined`|The active filter option value in controlled manner. If not set, the filter of the column works in an uncontrolled manner. (works when not using multiple filters)|
+|defaultFilterOptionValues|`Array<string \| number>`|`[]`|The default active filter option values in uncontrolled manner. (works when there are multiple filters)|
+|defaultFilterOptionValue|`string \| number`|`null`|The default active filter option value in uncontrolled manner. (works when not using multiple filters)|
 |filterMultiple|`boolean`|`true`||
 |fixed|`'left \| 'right' \| false`|`false`||
 |width|`number \| string`|`null`|Width of the column, **required** when fixed|

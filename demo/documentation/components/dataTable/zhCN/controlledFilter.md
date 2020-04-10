@@ -17,7 +17,7 @@ const addressColumn = {
   title: 'Address',
   key: 'address',
   filterMultiple: false,
-  filterOptionValues: [],
+  filterOptionValue: null,
   sorter: 'default',
   filterOptions: [
     {
@@ -90,14 +90,14 @@ export default {
   },
   methods: {
     filterAddress () {
-      this.addressColumn.filterOptionValues = ['London']
+      this.addressColumn.filterOptionValue = 'London'
     },
     unfilterAddress () {
-      this.addressColumn.filterOptionValues = []
+      this.addressColumn.filterOptionValue = null
     },
     handleFiltersChange (filters, sourceColumn) {
       console.log(filters, sourceColumn)
-      this.addressColumn.filterOptionValues = filters[sourceColumn.key]
+      this.addressColumn.filterOptionValue = filters[sourceColumn.key]
     }
   }
 }

@@ -99,9 +99,12 @@ function normalizeColumn (column) {
 
     filter: false,
     filterOptions: [],
-    filterOptionValues: null, // controlled
+    filterOptionValues: undefined, // controlled
+    filterOptionValue: undefined, // controlled
     filterMode: 'or',
-    defaultFilterOptionValues: [],
+    /** it is undefined due to compatibility */
+    defaultFilterOptionValues: undefined,
+    defaultFilterOptionValue: null,
     filterMultiple: true,
     fixed: false,
     width: null
@@ -153,7 +156,7 @@ export default {
       default: () => []
     },
     rowClassName: {
-      type: [String, Function],
+      type: [ String, Function ],
       default: ''
     },
     rowKey: {
@@ -169,7 +172,7 @@ export default {
       default: true
     },
     scrollX: {
-      type: [Number, String],
+      type: [ Number, String ],
       default: null
     },
     defaultCheckedRowKeys: {
@@ -265,10 +268,13 @@ export default {
       function createDefaultFilter (columnKey) {
         return (filterOptionValue, row) => ~String(row[columnKey]).indexOf(String(filterOptionValue))
       }
-      return this.data ? this.data.filter(row => {
+      const data = this.data
+      return data ? data.filter(row => {
         for (const columnKey of Object.keys(row)) {
-          const activeFilterOptionValues = syntheticActiveFilters[columnKey] || []
+          let activeFilterOptionValues = syntheticActiveFilters[columnKey]
+          if (activeFilterOptionValues == null) continue
           if (!activeFilterOptionValues.length) continue
+          if (!Array.isArray(activeFilterOptionValues)) activeFilterOptionValues = [activeFilterOptionValues]
           const columnToFilter = normalizedColumns.find(column => column.key === columnKey)
           /**
            * When async, filter won't be set, so data won't be filtered
@@ -299,15 +305,16 @@ export default {
     },
     syntheticActiveFilters () {
       const columnsWithControlledFilter = this.normalizedColumns.filter(column => {
-        return Array.isArray(column.filterOptionValues)
+        return column.filterOptionValues !== undefined || column.filterOptionValue !== undefined
       })
       const controlledActiveFilters = {}
       columnsWithControlledFilter.forEach(column => {
-        controlledActiveFilters[column.key] = column.filterOptionValues
+        controlledActiveFilters[column.key] = column.filterOptionValues || column.filterOptionValue || null
       })
       const activeFilters = Object.assign(
         createShallowClonedObject(this.internalActiveFilters),
-        controlledActiveFilters)
+        controlledActiveFilters
+      )
       return activeFilters
     },
     syntheticActiveSorter () {
@@ -467,8 +474,20 @@ export default {
           order: column.defaultSortOrder
         }
       }
-      if (column.filter && Array.isArray(column.defaultFilterOptionValues)) {
-        this.internalActiveFilters[column.key] = column.defaultFilterOptionValues
+      if (
+        column.filter
+      ) {
+        const defaultFilterOptionValues = column.defaultFilterOptionValues
+        if (column.filterMultiple) {
+          this.internalActiveFilters[column.key] = defaultFilterOptionValues || []
+        } else if (
+          defaultFilterOptionValues !== undefined
+        ) {
+          /** this branch is for compatibility, someone may use `values` in single filter mode */
+          this.internalActiveFilters[column.key] = defaultFilterOptionValues === null ? [] : defaultFilterOptionValues
+        } else {
+          this.internalActiveFilters[column.key] = column.defaultFilterOptionValue
+        }
       }
     })
     this.internalCheckedRowKeys = this.defaultCheckedRowKeys
