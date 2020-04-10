@@ -35,3 +35,13 @@ export function createRowKey (row, rowKey) {
   if (rowKey) return rowKey(row)
   return row.key
 }
+
+export function shouldUseArrayInSingleMode (column) {
+  return (
+    column.filterOptionValues !== undefined ||
+    (
+      column.filterOptionValue === undefined &&
+      column.defaultFilterOptionValues !== undefined
+    )
+  )
+}

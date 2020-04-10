@@ -29,7 +29,7 @@ const columns = [
   {
     title: 'Address',
     key: 'address',
-    defaultFilterOptionValues: ['London', 'New York'],
+    defaultFilterOptionValues: [ 'London', 'New York' ],
     filterOptions: [
       {
         label: 'London',
@@ -84,8 +84,7 @@ export default {
   methods: {
     filterAddress () {
       this.$refs.table.filter({
-        columnKey: 'address',
-        filterOptionValue: 'London'
+        address: [ 'London' ]
       })
     },
     sortName () {

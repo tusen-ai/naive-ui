@@ -1,5 +1,11 @@
 # CHANGELOG
-## 1.0.6 （2020-04-03）
+## 1.0.7 (2020-04-10)
+### Features
+- Add `filter-option-value` prop for `n-data-table`'s `column` to better deal with single filter mode.
+### Fixes
+- Fix the problem that `n-collpase-item` don't support `number` typed `name`.
+
+## 1.0.6 (2020-04-03)
 ### Fixes
 - Fix the problem that all the `console` statements are stripped in the bundle.
 

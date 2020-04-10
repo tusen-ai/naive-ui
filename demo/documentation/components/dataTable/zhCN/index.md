@@ -42,7 +42,7 @@ ajaxUsage
 |pagination|`false \| object`|`false`|属性参考 [Pagination props](n-pagination#Props)|
 |paging|`boolean`|表格是否自动分页数据，在异步的状况下你可能需要把它设为 `false`|
 |row-class-name|`string \| (rowData: object, index : number) => string \| object`|`null`||
-|checked-row-keys|`Array<string \| number> \| null`|`null`||
+|checked-row-keys|`Array<string \| number> \| null`|`null`|被选中的列的 key|
 |default-checked-row-keys|`Array<string \| number>`|`[]`||
 |row-key|`(rowData: object) => number \| string`|`null`|通过行数据创建行的 key（如果你不想给每一行加上 key）|
 |bordered|`boolean`|`true`||
@@ -65,7 +65,7 @@ ajaxUsage
 ## Events
 |名称|参数|说明|
 |-|-|-|
-|filters-change|`(filters: { [string \| number]: Array<string \| number> }, initiatorColumn: Column)`||
+|filters-change|`(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: Column)`||
 |sorter-change|`({ columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null)`|如果在变动后没有激活的排序，那么 sorter-change 将发出 `null`|
 |page-change|`(page: number)`||
 |page-size-change|`(pageSize: number)`||
@@ -89,8 +89,10 @@ ajaxUsage
 |filter|`boolean \| (optionValue: string \| number, rowData: object) => boolean \| 'default'`|`false`|这一列的过滤方法。如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。|
 |filterMode|`'and' \| 'or'`|`'or'`||
 |filterOptions|`Array<{ label: string, value: string \| number}>`|`[]`||
-|filterOptionValues|`Array<string \| number> \| null`|`null`|受控状态下，当前激活的过滤器选项值。如果设为 `null`，这一列的过滤行为将是非受控的|
-|defaultFilterOptionValues|`Array<string \| number>`|`[]`|非受控状态下默认的过滤器选项值|
+|filterOptionValues|`Array<string \| number> \| null`|`undefined`|受控状态下，当前激活的过滤器选项值数组。如果不做设定，这一列的过滤行为将是非受控的（过滤器多选时生效）|
+|filterOptionValue|`string \| number \| null`|`undefined`|受控状态下，当前激活的过滤器选项值。如果不做设定，这一列的过滤行为将是非受控的（过滤器单选时生效）|
+|defaultFilterOptionValues|`Array<string \| number>`|`[]`|非受控状态下默认的过滤器选项值（过滤器多选时生效）|
+|defaultFilterOptionValue|`string \| number`|`null`|非受控状态下默认的过滤器选项值（过滤器单选时生效）|
 |filterMultiple|`boolean`|`true`||
 |fixed|`'left \| 'right' \| false`|`false`||
 |width|`number \| string`|`null`|列的宽度，在列固定时是**必需**的|
