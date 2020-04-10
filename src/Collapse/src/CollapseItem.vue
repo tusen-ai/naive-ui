@@ -59,7 +59,7 @@ export default {
       default: null
     },
     name: {
-      type: String,
+      type: [ String, Number ],
       default: null
     }
   },
