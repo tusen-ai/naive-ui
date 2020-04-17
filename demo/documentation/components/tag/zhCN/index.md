@@ -40,6 +40,7 @@ dynamicTags
 |disabled|`boolean`|`false`||
 |round|`boolean`|`false`||
 |closable|`boolean`|`false`||
+|spacing|`number`|`5`|`标签间距, 默认是 5px`|
 
 ## Slots
 |名称|参数|说明|

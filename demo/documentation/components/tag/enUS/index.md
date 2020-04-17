@@ -38,6 +38,7 @@ dynamicTags
 |disabled|`boolean`|`false`||
 |round|`boolean`|`false`||
 |closable|`boolean`|`false`||
+|spacing|`number`|`5`|`Label spacing, default is 5px`|
 
 
 ## Slots
