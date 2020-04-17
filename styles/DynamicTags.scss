@@ -1,0 +1,12 @@
+@import './mixins/mixins.scss';
+
+@include themes-mixin {
+  @include once {
+    @include b(dynamic-tags) {
+      width: 100%;
+      @include b(tag) {
+        margin-bottom: 5px;
+      }
+    }
+  }
+}
