@@ -24,8 +24,9 @@
       <n-data-table-filter-menu
         :radio-group-name="column.key"
         :multiple="filterMultiple"
-        :value="activeFilterOptionValues"
+        :value="syntheticFilterValue"
         :options="options"
+        :column="column"
         @change="handleFilterChange"
         @cancel="handleFilterMenuCancel"
         @confirm="handleFilterMenuConfirm"
@@ -40,12 +41,9 @@ import NDataTableFilterMenu from './FilterMenu'
 import NPopover from '../../../Popover'
 import funnel from '../../../_icons/funnel'
 
-function createActiveFilters (allFilters, columnKey, filterOptionValues) {
-  if (!Array.isArray(filterOptionValues)) {
-    filterOptionValues = [filterOptionValues]
-  }
+function createActiveFilters (allFilters, columnKey, syntheticFilterValue) {
   const activeFilters = Object.assign({}, allFilters)
-  activeFilters[columnKey] = filterOptionValues
+  activeFilters[columnKey] = syntheticFilterValue
   return activeFilters
 }
 
@@ -81,25 +79,25 @@ export default {
     activeFilters () {
       return this.NDataTable.syntheticActiveFilters
     },
-    activeFilterOptionValues () {
+    syntheticFilterValue () {
       return this.activeFilters[this.column.key]
     },
     active () {
-      if (Array.isArray(this.activeFilterOptionValues)) {
-        return !!this.activeFilterOptionValues.length
+      if (Array.isArray(this.syntheticFilterValue)) {
+        return !!this.syntheticFilterValue.length
       }
-      return !!this.activeFilterOptionValues
+      return !!this.syntheticFilterValue
     },
     filterMultiple () {
       return this.column.filterMultiple !== false
     }
   },
   methods: {
-    handleFilterChange (filterOptionValues) {
+    handleFilterChange (syntheticFilterValue) {
       const nextActiveFilters = createActiveFilters(
         this.activeFilters,
         this.column.key,
-        filterOptionValues
+        syntheticFilterValue
       )
       this.NDataTable.changeFilters(nextActiveFilters, this.column)
     },

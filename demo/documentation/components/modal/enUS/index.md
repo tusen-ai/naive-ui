@@ -23,6 +23,7 @@ preset-confirm-slot
 |show|`boolean`|`false`||
 |mask-closable|`boolean`|`true`|Whether to emit `hide` event when click mask.|
 |preset|`'card' \| 'confirm'`|`null`||
+|overlay-style|`object`|`null`|The content style when use `preset`.|
 
 ### Modal with Preset Card
 See [Card props](n-card#Props)

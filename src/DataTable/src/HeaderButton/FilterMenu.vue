@@ -25,7 +25,7 @@
         :theme="theme"
         :name="radioGroupName"
         class="n-data-table-filter-menu__group"
-        :value="cachedValue && cachedValue[0]"
+        :value="radioGroupValue"
         @change="handleChange"
       >
         <n-radio
@@ -68,6 +68,7 @@ import NRadio from '../../../Radio/src/Radio'
 import NDivider from '../../../Divider'
 import NButton from '../../../Button'
 import NScrollbar from '../../../Scrollbar'
+import { shouldUseArrayInSingleMode } from '../utils'
 
 function isEqual (value, oldValue) {
   if (Array.isArray(value) && Array.isArray(oldValue)) {
@@ -95,6 +96,10 @@ export default {
     NScrollbar
   },
   props: {
+    column: {
+      type: Object,
+      required: true
+    },
     radioGroupName: {
       type: String,
       required: true
@@ -104,7 +109,7 @@ export default {
       required: true
     },
     value: {
-      type: Array,
+      type: [ Array, String, Number ],
       default: null
     },
     options: {
@@ -121,14 +126,29 @@ export default {
   computed: {
     theme () {
       return this.NDataTable.syntheticTheme
+    },
+    radioGroupValue () {
+      const cachedValue = this.cachedValue
+      if (
+        this.multiple ||
+        shouldUseArrayInSingleMode(this.column)
+      ) {
+        return (Array.isArray(cachedValue) && cachedValue.length && cachedValue[0]) || null
+      }
+      return cachedValue
     }
   },
   methods: {
     handleChange (value) {
       if (this.multiple) {
         this.cachedValue = value
+      } else if (
+        shouldUseArrayInSingleMode(this.column)
+      ) {
+        /** this branch is for compatibility */
+        this.cachedValue = [ value ]
       } else {
-        this.cachedValue = [value]
+        this.cachedValue = value
       }
     },
     handleConfirmClick (value) {
@@ -136,7 +156,14 @@ export default {
       this.$emit('confirm')
     },
     handleCancelClick () {
-      this.emitChangeEvent([])
+      if (
+        this.multiple ||
+        shouldUseArrayInSingleMode(this.column)
+      ) {
+        this.emitChangeEvent([])
+      } else {
+        this.emitChangeEvent(null)
+      }
       this.$emit('cancel')
     },
     emitChangeEvent (value) {
