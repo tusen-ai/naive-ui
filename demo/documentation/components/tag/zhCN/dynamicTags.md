@@ -1,6 +1,6 @@
 # 动态编辑标签
 ```html
-<n-dynamic-tags v-model="model.tags" @change="hanleChange" />
+<n-dynamic-tags v-model="model.tags" @change="handleChange" />
 
 在表单中使用
 <n-form :model="model" :rules="rules">
@@ -23,7 +23,7 @@ export default {
         tags: {
           trigger: ['change'],
           validator (rule, value) {
-            if (value.length >= 5) return new Error('最多四个')
+            if (value.length >= 5) return new Error('最多允许四个标签')
             return true
           }
         }
@@ -31,7 +31,7 @@ export default {
     }
   },
   methods: {
-    hanleChange (tags) {
+    handleChange (tags) {
       console.log('所有标签值', tags)
     }
   }

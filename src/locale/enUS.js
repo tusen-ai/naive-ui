@@ -68,5 +68,8 @@ export default {
   Pagination: {
     goto: 'Goto',
     selectionSuffix: 'page'
+  },
+  Tag: {
+    add: 'Add'
   }
 }

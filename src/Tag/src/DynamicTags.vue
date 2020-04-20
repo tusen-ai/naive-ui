@@ -2,8 +2,9 @@
   <div class="n-dynamic-tags">
     <n-tag
       v-for="(tag, index) in value"
-      :key="tag + index"
-      :style="{marginRight: spacing + 'px' }"
+      :key="index"
+      :theme="theme"
+      :style="tagStyle"
       :type="type"
       :round="round"
       :size="size"
@@ -17,17 +18,19 @@
       v-if="inputVisible"
       ref="tagInput"
       v-model="inputValue"
-      style="width:50px;"
-      size="small"
+      :theme="theme"
+      :style="inputStyle"
+      :size="inputSize"
       @keyup.enter.native="handleInputConfirm"
       @blur="handleInputConfirm"
     />
     <n-button
       v-else
-      size="small"
-      @click="handleClickAdd"
+      :theme="theme"
+      :size="inputSize"
+      @click="handleAddClick"
     >
-      + Add
+      + {{ localizedAdd }}
     </n-button>
   </div>
 </template>
@@ -35,52 +38,48 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import NTag from './main'
 import asformitem from '../../_mixins/asformitem'
+import locale from '../../_mixins/locale'
+import NTag from './main'
+import commonProps from './commonProps'
 
 export default {
   name: 'NDynamicTags',
   components: {
     NTag
   },
-  mixins: [withapp, themeable, asformitem({
+  mixins: [withapp, themeable, locale('Tag'), asformitem({
     change: 'change',
     input: 'input'
   })],
+  model: {
+    name: ' value',
+    event: 'change'
+  },
   props: {
+    ...commonProps,
     value: {
       type: Array,
       default: () => {
         return []
       }
     },
-    type: {
-      validator (value) {
-        return ['default', 'success', 'info', 'warning', 'error'].includes(value)
-      },
-      default: 'default'
+    tagStyle: {
+      type: Object,
+      default: () => {
+        return {
+          marginRight: '5px',
+          marginBottom: '5px'
+        }
+      }
     },
-    round: {
-      type: Boolean,
-      default: false
-    },
-    size: {
-      validator (value) {
-        return ['small', 'medium', 'large'].includes(value)
-      },
-      default: 'medium'
-    },
-    closable: {
-      type: Boolean,
-      default: true
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    spacing: {
-      type: Number,
-      default: 5
+    inputStyle: {
+      type: Object,
+      default: () => {
+        return {
+          width: '50px'
+        }
+      }
     }
   },
   data () {
@@ -89,30 +88,36 @@ export default {
       inputVisible: false
     }
   },
-  watch: {
-    value (tags) {
-      this.$emit('change', tags)
+  computed: {
+    localizedAdd () {
+      return this.localeNamespace.add
+    },
+    inputSize () {
+      const sizes = ['small', 'medium', 'large']
+      const tagSizeIndex = sizes.findIndex(size => size === this.size)
+      const inputSizeIndex = (tagSizeIndex - 1) > 0 ? tagSizeIndex - 1 : 0
+      return sizes[inputSizeIndex]
     }
   },
   methods: {
     handleCloseClick (index) {
       const tags = this.value.slice(0)
       tags.splice(index, 1)
-      this.$emit('input', tags)
+      this.$emit('change', tags)
     },
     handleInputConfirm () {
       if (this.inputValue) {
         const tags = this.value.slice(0)
         tags.push(this.inputValue)
-        this.$emit('input', tags)
+        this.$emit('change', tags)
       }
       this.inputVisible = false
       this.inputValue = ''
     },
-    handleClickAdd () {
+    handleAddClick () {
       this.inputVisible = true
-      this.$nextTick(_ => {
-        this.$refs.tagInput.$refs.input.focus()
+      this.$nextTick(() => {
+        this.$refs.tagInput.focus()
       })
     }
   }

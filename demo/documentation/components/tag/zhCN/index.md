@@ -13,9 +13,15 @@ dynamicTags
 ```
 
 ## V-model
+### Tag
 |prop|event|
 |-|-|
 |checked|checked-change|
+
+### DynamicTags
+|prop|event|
+|-|-|
+|value|change|
 
 ## Props
 ### Tag
@@ -33,14 +39,15 @@ dynamicTags
 ### DynamicTags
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|value|`array`|`[]`||
+|value|`Array`|`[]`||
 |theme|`'light' \| 'dark'`|`null`||
 |type|`'default' \| 'info' \| 'succcess' \| 'warning' \| 'error'`|`'default'`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |disabled|`boolean`|`false`||
 |round|`boolean`|`false`||
 |closable|`boolean`|`false`||
-|spacing|`number`|`5`|`标签间距, 默认是 5px`|
+|inputStyle|`object`|`{ width: '50px' }`||
+|tagStyle|`object`|`{ marginRight: '5px', marginBottom: '5px' }`||
 
 ## Slots
 |名称|参数|说明|
@@ -57,4 +64,4 @@ dynamicTags
 ### DynamicTags
 |名称|参数|说明|
 |-|-|-|
-|change|`(tags: array)`||
+|change|`(tags: Array)`||

@@ -11,9 +11,15 @@ shape
 dynamicTags
 ```
 ## V-model
+### Tag
 |Prop|Event|
 |-|-|
 |checked|checked-change|
+
+### DynamicTags
+|Prop|Event|
+|-|-|
+|value|change|
 
 ## Props
 ### Tag
@@ -31,15 +37,15 @@ dynamicTags
 ### DynamicTags
 |Name|Type|Default|Description|
 |-|-|-|-|
-|value|`array`|`[]`||
+|value|`Array`|`[]`||
 |theme|`'light' \| 'dark'`|`null`||
 |type|`'default' \| 'info' \| 'succcess' \| 'warning' \| 'error'`|`'default'`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |disabled|`boolean`|`false`||
 |round|`boolean`|`false`||
 |closable|`boolean`|`false`||
-|spacing|`number`|`5`|`Label spacing, default is 5px`|
-
+|inputStyle|`object`|`{ width: '50px' }`||
+|tagStyle|`object`|`{ marginRight: '5px', marginBottom: '5px' }`||
 
 ## Slots
 |Name|Parameters|Description|
@@ -56,4 +62,4 @@ dynamicTags
 ### DynamicTags
 |Name|Parameters|Description|
 |-|-|-|
-|change|`(tags: array)`||
+|change|`(tags: Array)`||

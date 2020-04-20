@@ -68,5 +68,8 @@ export default {
   Pagination: {
     goto: '跳至',
     selectionSuffix: '页'
+  },
+  Tag: {
+    add: '添加'
   }
 }

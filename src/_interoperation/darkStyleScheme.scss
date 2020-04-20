@@ -31,6 +31,6 @@
   dividerColor: $--overlay-divider;
   borderColor: $--n-border-color;
   easeInOutCubicBezier: $--n-ease-in-out-cubic-bezier;
-  tableHeaderColor: composite-color($--neutral-card, $--overlay-action);
-  inputBackgroundColor:  $--overlay-input;
+  tableHeaderBackgroundColor: $--n-table-header-overlay-background-color;
+  inputBackgroundColor: $--n-input-overlay-background-color;
 }

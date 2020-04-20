@@ -1,6 +1,6 @@
 # Edit Dynamically
 ```html
-<n-dynamic-tags v-model="model.tags" @change="hanleChange" />
+<n-dynamic-tags v-model="model.tags" @change="handleChange" />
 
 Use in form.
 <n-form :model="model" :rules="rules">
@@ -31,7 +31,7 @@ export default {
     }
   },
   methods: {
-    hanleChange (tags) {
+    handleChange (tags) {
       console.log('tags', tags)
     }
   }

@@ -29,6 +29,7 @@
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import mdClose from '../../_icons/md-close.vue'
+import commonProps from './commonProps'
 
 export default {
   name: 'NTag',
@@ -41,35 +42,12 @@ export default {
     event: 'checked-change'
   },
   props: {
-    type: {
-      validator (value) {
-        return ['default', 'success', 'info', 'warning', 'error'].includes(value)
-      },
-      default: 'default'
-    },
-    round: {
-      type: Boolean,
-      default: false
-    },
+    ...commonProps,
     checked: {
       type: Boolean,
       default: false
     },
     checkable: {
-      type: Boolean,
-      default: false
-    },
-    size: {
-      validator (value) {
-        return ['small', 'medium', 'large'].includes(value)
-      },
-      default: 'medium'
-    },
-    closable: {
-      type: Boolean,
-      default: false
-    },
-    disabled: {
       type: Boolean,
       default: false
     },
