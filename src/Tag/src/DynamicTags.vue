@@ -49,8 +49,7 @@ export default {
     NTag
   },
   mixins: [withapp, themeable, locale('Tag'), asformitem({
-    change: 'change',
-    input: 'input'
+    change: 'change'
   })],
   model: {
     name: ' value',
@@ -121,6 +120,5 @@ export default {
       })
     }
   }
-
 }
 </script>

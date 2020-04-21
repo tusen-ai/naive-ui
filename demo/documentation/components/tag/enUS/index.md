@@ -26,7 +26,7 @@ dynamicTags
 |Name|Type|Default|Description|
 |-|-|-|-|
 |theme|`'light' \| 'dark'`|`null`||
-|type|`'default' \| 'info' \| 'succcess' \| 'warning' \| 'error'`|`'default'`||
+|type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'default'`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |disabled|`boolean`|`false`||
 |round|`boolean`|`false`||
@@ -37,9 +37,9 @@ dynamicTags
 ### DynamicTags
 |Name|Type|Default|Description|
 |-|-|-|-|
-|value|`Array`|`[]`||
+|value|`Array<string>`|`[]`||
 |theme|`'light' \| 'dark'`|`null`||
-|type|`'default' \| 'info' \| 'succcess' \| 'warning' \| 'error'`|`'default'`||
+|type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'default'`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |disabled|`boolean`|`false`||
 |round|`boolean`|`false`||
@@ -62,4 +62,4 @@ dynamicTags
 ### DynamicTags
 |Name|Parameters|Description|
 |-|-|-|
-|change|`(tags: Array)`||
+|change|`(tags: Array<string>)`||

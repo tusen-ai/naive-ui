@@ -28,7 +28,7 @@ dynamicTags
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |theme|`'light' \| 'dark'`|`null`||
-|type|`'default' \| 'info' \| 'succcess' \| 'warning' \| 'error'`|`'default'`||
+|type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'default'`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |disabled|`boolean`|`false`||
 |round|`boolean`|`false`||
@@ -39,9 +39,9 @@ dynamicTags
 ### DynamicTags
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|value|`Array`|`[]`||
+|value|`Array<string>`|`[]`||
 |theme|`'light' \| 'dark'`|`null`||
-|type|`'default' \| 'info' \| 'succcess' \| 'warning' \| 'error'`|`'default'`||
+|type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'default'`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |disabled|`boolean`|`false`||
 |round|`boolean`|`false`||
@@ -64,4 +64,4 @@ dynamicTags
 ### DynamicTags
 |名称|参数|说明|
 |-|-|-|
-|change|`(tags: Array)`||
+|change|`(tags: Array<string>)`||
