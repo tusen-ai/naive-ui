@@ -52,7 +52,7 @@ export default {
     change: 'change'
   })],
   model: {
-    name: ' value',
+    name: 'value',
     event: 'change'
   },
   props: {
