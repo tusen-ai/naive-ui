@@ -87,7 +87,7 @@
       :options="pageSizeOptions"
       :value="pageSize"
       :disabled="disabled"
-      @input="handleSizePickerInput"
+      @change="handleSizePickerChange"
     />
   </div>
 </template>
@@ -243,7 +243,7 @@ export default {
       const page = Math.max(this.page - (this.pageSlot - 4), 1)
       this.changeCurrentPage(page)
     },
-    handleSizePickerInput (value) {
+    handleSizePickerChange (value) {
       this.changePageSize(value)
     },
     handleQuickJumperKeyUp (e) {
