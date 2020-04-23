@@ -4,6 +4,7 @@ import mdCheckmarkCircle from '../../_icons/md-checkmark-circle'
 import mdAlert from '../../_icons/md-alert'
 import mdInformationCircle from '../../_icons/md-information-circle'
 import mdCloseCircle from '../../_icons/md-close-circle'
+import mdClose from '../../_icons/md-close'
 import NBaseLoading from '../../_base/Loading'
 import IconSwitchTransition from '../../_transition/IconSwitchTransition'
 import render from '../../_utils/vue/render'
@@ -25,9 +26,18 @@ export default {
       type: [String, Function],
       default: null
     },
+    closable: {
+      type: Boolean,
+      default: false
+    },
     theme: {
       type: String,
       default: null
+    }
+  },
+  methods: {
+    handleCloseClick () {
+      this.$emit('close')
     }
   },
   render (h) {
@@ -63,6 +73,7 @@ export default {
     return h('div', {
       staticClass: 'n-message',
       class: {
+        'n-message--closable': this.closable,
         [`n-message--${this.type}-type`]: true,
         [`n-${this.theme}-theme`]: this.theme
       }
@@ -88,7 +99,20 @@ export default {
             render: this.content
           }
         })
-      ])
+      ]),
+      this.closable
+        ? h('div', {
+          staticClass: 'n-message__close'
+        }, [
+          h(NIcon, {
+            nativeOn: {
+              click: this.handleCloseClick
+            }
+          }, [
+            h(mdClose)
+          ])
+        ])
+        : null
     ])
   }
 }

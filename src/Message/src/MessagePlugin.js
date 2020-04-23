@@ -50,6 +50,7 @@ function updateMessage (instance, content, option) {
   instance.type = option.type
   instance.content = content
   instance.theme = option.theme
+  instance.closable = option.closable
   instance.inheritedTheme = option.inheritedTheme
 }
 

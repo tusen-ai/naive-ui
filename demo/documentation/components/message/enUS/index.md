@@ -5,6 +5,7 @@ Oracle from the top(always) of the browser.
 basic
 icon
 timing
+closable
 modify-content
 manually-close
 about-theme
@@ -26,6 +27,7 @@ about-theme
 |content|`string \|(() => VNode \| Array<VNode>)`|Can be a render function|
 |icon|`() => VNode`|Can be a render function|
 |theme|`'light' \| 'dark'`||
+|closable|`boolean`||
 |onHide|`function`||
 |onAfterHide|`function`||
 
@@ -36,6 +38,7 @@ about-theme
 |content|`string \| (() => VNode \| Array<VNode>)`|Can be a render function|
 |icon|`string \| (() => VNode)`|Can be a render function|
 |type|`'info' \| 'success' \| 'warning' \| 'error' \| 'loading'`||
+|closable|`boolean`||
 |onHide|`function`||
 |onAfterHide|`function`||
 
