@@ -18,11 +18,12 @@
       v-if="inputVisible"
       ref="tagInput"
       v-model="inputValue"
+      :force-focus="inputForceFocused"
       :theme="theme"
       :style="inputStyle"
       :size="inputSize"
       @keyup.enter.native="handleInputConfirm"
-      @blur="handleInputConfirm"
+      @blur="handleInputBlur"
     />
     <n-button
       v-else
@@ -30,7 +31,11 @@
       :size="inputSize"
       @click="handleAddClick"
     >
-      + {{ localizedAdd }}
+      <template v-slot:icon>
+        <n-icon>
+          <add-outline />
+        </n-icon>
+      </template>
     </n-button>
   </div>
 </template>
@@ -42,21 +47,34 @@ import asformitem from '../../_mixins/asformitem'
 import locale from '../../_mixins/locale'
 import NTag from './main'
 import commonProps from './commonProps'
+import NIcon from '../../Icon'
+import addOutline from '../../_icons/add-outline'
 
 export default {
   name: 'NDynamicTags',
   components: {
-    NTag
+    NTag,
+    NIcon,
+    addOutline
   },
-  mixins: [withapp, themeable, locale('Tag'), asformitem({
-    change: 'change'
-  })],
+  mixins: [
+    withapp,
+    themeable,
+    locale('Tag'),
+    asformitem({
+      change: 'change'
+    })
+  ],
   model: {
     name: 'value',
     event: 'change'
   },
   props: {
     ...commonProps,
+    closable: {
+      type: Boolean,
+      default: true
+    },
     value: {
       type: Array,
       default: () => {
@@ -67,8 +85,7 @@ export default {
       type: Object,
       default: () => {
         return {
-          marginRight: '5px',
-          marginBottom: '5px'
+          marginRight: '6px'
         }
       }
     },
@@ -76,7 +93,7 @@ export default {
       type: Object,
       default: () => {
         return {
-          width: '50px'
+          width: '64px'
         }
       }
     }
@@ -84,7 +101,8 @@ export default {
   data () {
     return {
       inputValue: '',
-      inputVisible: false
+      inputVisible: false,
+      inputForceFocused: true
     }
   },
   computed: {
@@ -111,12 +129,17 @@ export default {
         this.$emit('change', tags)
       }
       this.inputVisible = false
+      this.inputForceFocused = true
       this.inputValue = ''
+    },
+    handleInputBlur () {
+      this.handleInputConfirm()
     },
     handleAddClick () {
       this.inputVisible = true
       this.$nextTick(() => {
         this.$refs.tagInput.focus()
+        this.inputForceFocused = false
       })
     }
   }
