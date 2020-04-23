@@ -5,6 +5,7 @@
 basic
 icon
 timing
+closable
 modify-content
 manually-close
 about-theme
@@ -26,6 +27,7 @@ about-theme
 |content|`string \| (() => VNode \| Array<VNode>)`|可以是 render 函数|
 |icon|`() => VNode`|可以是 render 函数|
 |theme|`'light' \| 'dark'`||
+|closable|`boolean`||
 |onHide|`function`||
 |onAfterHide|`function`||
 
@@ -36,6 +38,7 @@ about-theme
 |content|`string \| (() => VNode \| Array<VNode>)`|可以是 render 函数|
 |icon|`string \| (() => VNode)`|可以是 render 函数|
 |type|`'info' \| 'success' \| 'warning' \| 'error' \| 'loading'`||
+|closable|`boolean`||
 |onHide|`function`||
 |onAfterHide|`function`||
 

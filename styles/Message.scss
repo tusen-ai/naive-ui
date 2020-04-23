@@ -11,6 +11,23 @@
         stroke: $--message-icon-color;
       }
     }
+    @if $type == 'loading' {
+      @include e(close) {
+        @include b(icon) {
+          cursor: pointer;
+          fill: map-get($--message-loading-close-color, 'default');
+          stroke: map-get($--message-loading-close-color, 'default');
+          &:hover {
+            fill: map-get($--message-loading-close-color, 'hover');
+            stroke: map-get($--message-loading-close-color, 'hover');
+          }
+          &:active {
+            fill: map-get($--message-loading-close-color, 'active');
+            stroke: map-get($--message-loading-close-color, 'active');
+          }
+        }
+      }
+    }
   }
 }
 
@@ -81,6 +98,31 @@
           font-size: 20px;
         }
       }
+      @include e(close) {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        font-size: 19px;
+        margin-left: 12px;
+      }
+    }
+    @include e(close) {
+      @include b(icon) {
+        cursor: pointer;
+        fill: map-get($--message-close-color, 'default');
+        stroke: map-get($--message-close-color, 'default');
+        &:hover {
+          fill: map-get($--message-close-color, 'hover');
+          stroke: map-get($--message-close-color, 'hover');
+        }
+        &:active {
+          fill: map-get($--message-close-color, 'active');
+          stroke: map-get($--message-close-color, 'active');
+        }
+      }
+    }
+    @include m(closable) {
+      padding-right: 24px;
     }
     @include message-type-mixin('info');
     @include message-type-mixin('success');

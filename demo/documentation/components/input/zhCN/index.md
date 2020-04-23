@@ -41,6 +41,8 @@ passively-activated
 |seperator|`string`|`null`|成对的值中间的分隔符|
 |placeholder|`string \| [string, string]`|`null`|文本输入的占位符。如果是 `pair` 是 `true`，`placeholder`是一个数组|
 |passively-activated|`boolean`|`false`||
+|autofocus|`boolean`|`false`||
+
 
 ## Slots
 ### Input Slots
