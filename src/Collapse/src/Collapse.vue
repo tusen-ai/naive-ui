@@ -23,6 +23,12 @@ export default {
       type: [Array, String],
       default: null
     },
+    arrowPlacement: {
+      validator (value) {
+        return ['left', 'right'].includes(value)
+      },
+      default: 'left'
+    },
     accordion: {
       type: Boolean,
       default: false

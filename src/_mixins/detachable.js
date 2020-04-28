@@ -1,4 +1,5 @@
 import withapp from './withapp'
+import { getPortalTarget } from '../_utils/component/portal'
 
 function cleanUp (content, target) {
   if (content && target && target.contains(content)) {
@@ -16,27 +17,11 @@ function cleanUp (content, target) {
  */
 export default {
   mixins: [ withapp ],
-  inject: {
-    NModal: {
-      default: null
-    },
-    NDrawer: {
-      default: null
-    }
-  },
   props: {
     detachTarget: {
       type: Function,
       default: function () {
-        const NModal = this.NModal
-        if (NModal) {
-          return NModal.getDetachTarget()
-        }
-        const NDrawer = this.NDrawer
-        if (NDrawer) {
-          return NDrawer.getDetachTarget()
-        }
-        return document.body
+        return getPortalTarget(this)
       }
     },
     detachable: {
@@ -103,7 +88,7 @@ export default {
        * Since content may be detached in modal, waiting animation done is
        * important. A more elegant solution is needed.
        */
-      if (this.NModal || this.NDrawer) {
+      if (getPortalTarget(this, true)) {
         setTimeout(() => {
           cleanUp(content, target)
         }, 300)

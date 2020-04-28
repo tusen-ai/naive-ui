@@ -1,4 +1,11 @@
 # CHANGELOG
+## 1.0.10 (2020-04-28)
+### Features
+- 为 `n-collapse` 增加了 `arrow-placement` 属性
+- 为 `n-collapsed-item` 增加了`arrow` slot
+### Fixes
+- 解决了可卸载组件在嵌套成 `modal > drawer > component` 样子的时候会被卸载到错误位置的问题
+
 ## 1.0.9 (2020-04-23)
 ### Features
 - 为 `n-input` 增加了 `autofocus` 选项
