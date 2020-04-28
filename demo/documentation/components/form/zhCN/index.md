@@ -78,7 +78,12 @@ validator-debug
 关于 AsyncValidatorOptions，参考 <n-a href="https://github.com/yiminghe/async-validator">async-validator</n-a>。
 
 ## Slots
-### Form, Form Item, Form Item Row, Form Item Col Methods
+### Form, Form Item, Form Item Row, Form Item Col Slots
 |名称|参数|说明|
 |-|-|-|
 |default|`()`||
+
+### Form Item, Form Item Row, Form Item Col Slots
+|名称|参数|说明|
+|-|-|-|
+|label|`()`||
