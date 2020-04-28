@@ -2,25 +2,34 @@
   <div
     class="n-collapse-item"
     :class="{
-      'n-collapse-item--active': !collapse,
+      'n-collapse-item--active': !collapsed,
+      [`n-collapse-item--${arrowPlacement}-arrow-placement`]: true
     }"
   >
     <div
       class="n-collapse-item__header"
       :class="{
-        'n-collapse-item__header--active': !collapse
+        'n-collapse-item__header--active': !collapsed
       }"
       @click="handleClick"
     >
-      <n-icon type="ios-arrow-forward">
-        <ios-arrow-forward />
-      </n-icon><slot name="header">
+      <slot v-if="arrowPlacement === 'right'" name="header">
+        {{ title }}
+      </slot>
+      <div class="n-collapse-item-arrow">
+        <slot name="arrow" :collapsed="collapsed">
+          <n-icon type="ios-arrow-forward">
+            <ios-arrow-forward />
+          </n-icon>
+        </slot>
+      </div>
+      <slot v-if="arrowPlacement === 'left'" name="header">
         {{ title }}
       </slot>
     </div>
     <fade-in-height-expand-transition>
       <div
-        v-if="!collapse"
+        v-if="!collapsed"
         class="n-collapse-item__content-wrapper"
       >
         <div
@@ -64,7 +73,10 @@ export default {
     }
   },
   computed: {
-    collapse () {
+    arrowPlacement () {
+      return this.NCollapse.arrowPlacement
+    },
+    collapsed () {
       const NCollapse = this.NCollapse
       if (NCollapse && Array.isArray(NCollapse.expandedNames)) {
         const itemName = this.name
@@ -77,7 +89,7 @@ export default {
     handleClick (e) {
       const NCollapse = this.NCollapse
       if (NCollapse) {
-        NCollapse.toggleItem(this.collapse, this.name, e)
+        NCollapse.toggleItem(this.collapsed, this.name, e)
       }
     }
   }

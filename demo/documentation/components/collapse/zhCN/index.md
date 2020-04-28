@@ -3,6 +3,7 @@
 ## 演示
 ```demo
 basic
+arrow-placement
 accordion
 nested
 item-header-click
@@ -16,15 +17,17 @@ item-header-click
 ### Collapse Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
-|expanded-names|`Array`|`null`||
 |accordion|`boolean`|`false`||
+|arrow-placement|`'left' \| 'right'`|`'left'`||
+|expanded-names|`Array<string \| number>`|`null`||
+|theme|`'light' \| 'dark'`|`null`||
+
 
 ### Collapse Item Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|title|`string \| number`|`null`||
 |name|`string \| number`||**必需**|
+|title|`string`|`null`||
 
 ## Slots
 ### Collapse Slots
@@ -37,6 +40,7 @@ item-header-click
 |-|-|-|
 |default|`()`||
 |header|`()`||
+|arrow|`({ collapsed: boolean })`||
 
 ## Event
 ### Collapse Event
