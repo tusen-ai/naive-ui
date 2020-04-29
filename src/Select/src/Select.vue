@@ -303,7 +303,7 @@ export default {
       return value => {
         const type = typeof value
         if (type === 'string' || type === 'number') {
-          Object.assign(fallbackOption(value), { value })
+          return Object.assign(fallbackOption(value), { value })
         } return null
       }
     }
