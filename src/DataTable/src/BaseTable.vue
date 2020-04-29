@@ -1,5 +1,5 @@
 <template>
-  <div class="n-data-table-base-table">
+  <div class="n-data-table-base-table" :style="bodyStyle">
     <table-header
       ref="header"
       :placement="placement"
@@ -13,12 +13,10 @@
       ref="body"
       :main="main"
       :placement="placement"
-      :body-style="bodyStyle"
       :scroll-x="scrollX"
       :data="data"
       :columns="columns"
       :row-class-name="rowClassName"
-      :min-height="bodyMinHeight"
       :loading="loading"
       :fixed="fixed"
     />
@@ -51,10 +49,6 @@ export default {
     },
     scrollX: {
       type: [Number, String],
-      default: null
-    },
-    bodyMinHeight: {
-      type: Number,
       default: null
     },
     columns: {

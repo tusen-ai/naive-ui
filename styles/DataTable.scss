@@ -37,8 +37,10 @@
       width: 100%;
       font-size: 14px;
       padding-bottom: 8px;
-      @include e(empty) {
-        height: 108px;
+      @include b(data-table-empty) {
+        margin: 16px 0 14px 0;
+        flex-grow: 1;
+        flex-shrink: 0;
         opacity: 1;
         display: flex;
         align-items: center;
@@ -297,11 +299,20 @@
         }
       }
     }
-    @include b(scrollbar-content) {
-      overflow: visible;
+    @include b(data-table-base-table) {
+      display: flex;
+      flex-direction: column;
+      @include b(scrollbar) {
+        overflow: hidden;
+        max-height: -webkit-fill-available;
+        @include b(scrollbar-content) {
+          overflow: visible;
+        }
+      }
     }
     @include b(data-table-base-table-header) {
       @include once {
+        flex-shrink: 0;
         transition: border-color .3s $--n-ease-in-out-cubic-bezier;
         &::-webkit-scrollbar {
           width: 0;

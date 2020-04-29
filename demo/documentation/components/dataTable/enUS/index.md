@@ -40,7 +40,7 @@ ajaxUsage
 |loading|`boolean`|`false`||
 |scroll-x|`number \| string`|`null`|If columns are horizontal fixed, scroll-x need to be set|
 |pagination|`false \| object`|`false`|See [Pagination props](n-pagination#Props)|
-|paging|`boolean`|If data-table do automatic paging. You may set it to `false` in async usage.|
+|paging|`boolean`|`true`|If data-table do automatic paging. You may set it to `false` in async usage.|
 |row-class-name|`string \| (rowData: object, index : number) => string \| object`|`null`||
 |checked-row-keys|`Array<string \| number> \| null`|`null`|The keys of checked rows.|
 |default-checked-row-keys|`Array<string \| number>`|`[]`||

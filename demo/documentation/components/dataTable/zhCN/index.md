@@ -40,7 +40,7 @@ ajaxUsage
 |loading|`boolean`|`false`||
 |scroll-x|`number \| string`|`null`|表格内容的横向宽度，如果列被水平固定了，则需要设定它|
 |pagination|`false \| object`|`false`|属性参考 [Pagination props](n-pagination#Props)|
-|paging|`boolean`|表格是否自动分页数据，在异步的状况下你可能需要把它设为 `false`|
+|paging|`boolean`|`true`|表格是否自动分页数据，在异步的状况下你可能需要把它设为 `false`|
 |row-class-name|`string \| (rowData: object, index : number) => string \| object`|`null`||
 |checked-row-keys|`Array<string \| number> \| null`|`null`|被选中的列的 key|
 |default-checked-row-keys|`Array<string \| number>`|`[]`||

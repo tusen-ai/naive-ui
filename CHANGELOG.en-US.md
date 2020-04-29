@@ -1,8 +1,17 @@
 # CHANGELOG
+## PENDING
+### Features
+- Add `fallback-option` prop for `n-select` to deal with the value with no corresponding option.
+### Fixes
+- Fix the problem that `max-height` and `min-height` are ill displayed on `n-data-table`.
+### Breaking Changes
+- `n-data-table`'s `max-height` and `min-height` will be applied to the entire table part, not only body.
+- `n-select` will display value with no corrensponding option.
+
 ## 1.0.10 (2020-04-28)
 ### Features
 - Add `arrow-placement` prop on `n-collapse`.
-- Add `arrow` slot on `n-collapsed-item`.
+- Add `arrow` slot on `n-collapse-item`.
 ### Fixes
 - Fix the problem that detachable components detached in wrong place when nested like `modal > drawer > component`.
 
@@ -19,7 +28,6 @@
 ### Features
 - Add `n-dynamic-tags`.
 - Add `tableHeaderOverlayBackgroundColor` & `inputOverlayBackgroundColor` to `styleScheme`
-
 
 ## 1.0.7 (2020-04-10)
 ### Features

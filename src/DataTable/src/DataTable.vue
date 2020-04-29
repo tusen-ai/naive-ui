@@ -25,20 +25,17 @@
           :columns="normalizedColumns"
           :row-class-name="rowClassName"
           :loading="loading"
-          :body-min-height="42"
         >
-          <slot name="append" />
+          <div
+            v-if="paginatedData.length === 0"
+            class="n-data-table-empty"
+            :class="{
+              'n-data-table-empty--hide': loading
+            }"
+          >
+            <n-empty :theme="syntheticTheme" />
+          </div>
         </base-table>
-        <div
-          v-if="paginatedData.length === 0"
-          class="n-data-table__empty"
-          :class="{
-            'n-data-table__empty--hide': loading
-          }"
-          :style="bodyStyle"
-        >
-          <n-empty :theme="syntheticTheme" />
-        </div>
       </div>
       <div
         v-if="pagination"
@@ -105,6 +102,7 @@ function normalizeColumn (column) {
     filterOptionValues: undefined, // controlled
     filterOptionValue: undefined, // controlled
     filterMode: 'or',
+
     /** it is undefined due to compatibility */
     defaultFilterOptionValues: undefined,
     defaultFilterOptionValue: null,
@@ -435,9 +433,11 @@ export default {
       return this.sortedData.slice(startIndex, startIndex + pageSize)
     },
     bodyStyle () {
+      /** if bordered, minus border width of table */
+      const offset = this.bordered ? -2 : 0
       return {
-        maxHeight: formatLength(this.maxHeight),
-        minHeight: formatLength(this.minHeight)
+        maxHeight: formatLength(this.maxHeight, 1, offset),
+        minHeight: formatLength(this.minHeight, 1, offset)
       }
     },
     countOfCurrentPageCheckedRows () {
