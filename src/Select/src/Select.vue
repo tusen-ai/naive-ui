@@ -220,7 +220,7 @@ export default {
     fallbackOption: {
       type: [ Function, Boolean ],
       default: value => ({
-        label: value,
+        label: '' + value,
         value
       })
     },

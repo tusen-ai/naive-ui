@@ -40,7 +40,7 @@ fallback-option
 |filter|`(pattern: string, option: Object) => boolean`|一个简单的字符串搜索算法||
 |tag|`boolean`|`false`|是否可以创建新的选项，需要和 `filterable` 一起使用|
 |on-create|`(label: string) => SelectOption`|`label => ({ label, value: label })`|在输入内容时如何创建一个选项。注意 `filter` 对这个生成的选项同样会生效。同时确保这个选项和其他选项的 `value` 不要有重复|
-|fallback-option|`false \| (value: string \| number) => SelectOption`|`value => ({ label: value, value })`|在传入的选项中没有对应当前值的选项时，这个值应该对应的选项。如果设为 `false`，不会为找不到对应选项的值生成回退选项也不会显示它，未在选项中的值会被视为不合法，操作过程中会被组件清除掉|
+|fallback-option|`false \| (value: string \| number) => SelectOption`|`value => ({ label: '' + value, value })`|在传入的选项中没有对应当前值的选项时，这个值应该对应的选项。如果设为 `false`，不会为找不到对应选项的值生成回退选项也不会显示它，未在选项中的值会被视为不合法，操作过程中会被组件清除掉|
 
 ### SelectOption Properties
 |名称|类型|说明|
