@@ -38,6 +38,7 @@
       :class="{
         'n-input__textarea--autosize': autosize
       }"
+      :autofocus="autofocus"
       :rows="rows"
       :placeholder="placeholder"
       :value="value"
@@ -64,6 +65,7 @@
         :minlength="minlength"
         :value="pair ? (value && value[0]) : value"
         :readonly="readonly"
+        :autofocus="autofocus"
         @blur="handleInputBlur"
         @focus="handleInputFocus"
         @input="handleInput($event, 0)"
@@ -247,6 +249,10 @@ export default {
       default: true
     },
     deactivateOnEnter: {
+      type: Boolean,
+      default: false
+    },
+    autofocus: {
       type: Boolean,
       default: false
     }

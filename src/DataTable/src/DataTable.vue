@@ -48,7 +48,10 @@
           :theme="syntheticTheme"
           :page="syntheticPagination.page"
           :page-count="syntheticPagination.pageCount"
+          :page-size="syntheticPagination.pageSize"
           :page-slot="pagination.pageSlot"
+          :page-sizes="pagination.pageSizes"
+          :show-size-picker="pagination.showSizePicker"
           :show-quick-jumper="!!pagination.showQuickJumper"
           :disabled="!!pagination.disabled"
           :on-change="syntheticOnPageChange"
@@ -371,11 +374,11 @@ export default {
         this.pagination.onPageSizeChange && this.pagination.onPageSizeChange(pageSize)
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         this.internalPageSize = pageSize
-        this.$emit('change', {
-          sorter: createShallowClonedObject(this.syntheticActiveSorter),
-          pagination: createShallowClonedObject(this.syntheticPagination),
-          filters: createShallowClonedObject(this.syntheticActiveFilters)
-        })
+        // this.$emit('change', {
+        //   sorter: createShallowClonedObject(this.syntheticActiveSorter),
+        //   pagination: createShallowClonedObject(this.syntheticPagination),
+        //   filters: createShallowClonedObject(this.syntheticActiveFilters)
+        // })
         this.$emit('page-size-change')
       }
     },

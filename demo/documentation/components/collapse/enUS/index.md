@@ -3,6 +3,7 @@ I saw it appears in many side control panels.
 ## Demos
 ```demo
 basic
+arrow-placement
 accordion
 nested
 item-header-click
@@ -16,14 +17,16 @@ item-header-click
 ### Collapse
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
-|expanded-names|`Array`|`null`||
 |accordion|`boolean`|`false`||
+|arrow-placement|`'left' \| 'right'`|`'left'`||
+|expanded-names|`Array<string \| number>`|`null`||
+|theme|`'light' \| 'dark'`|`null`||
+
 
 ### Collapse Item
 |Name|Type|Default|Description|
 |-|-|-|-|
-|title|`string \| number`|`null`||
+|title|`string`|`null`||
 |name|`string \| number`||**required**|
 
 ## Slots
@@ -37,6 +40,7 @@ item-header-click
 |-|-|-|
 |default|`()`||
 |header|`()`||
+|arrow|`({ collapsed: boolean })`||
 
 ## Event
 ### Collapse Event

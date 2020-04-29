@@ -1,4 +1,20 @@
 # CHANGELOG
+## 1.0.10 (2020-04-28)
+### Features
+- 为 `n-collapse` 增加了 `arrow-placement` 属性
+- 为 `n-collapsed-item` 增加了`arrow` slot
+### Fixes
+- 解决了可卸载组件在嵌套成 `modal > drawer > component` 样子的时候会被卸载到错误位置的问题
+
+## 1.0.9 (2020-04-23)
+### Features
+- 为 `n-input` 增加了 `autofocus` 选项
+- 为 `NMessage` 增加了 `closable` 选项
+### Fixes
+- 解决了 `n-tag` `closable` 默认值被设为 `true` 的问题
+- 解决了 `n-data-table` 不能使用全部 `pagination` prop 的问题
+- 解决了 `n-pagination` `on-page-size-change` 不生效的问题
+
 ## 1.0.8 (2020-04-22)
 ### Features
 - 增加 `n-dynamic-tags` 组件.

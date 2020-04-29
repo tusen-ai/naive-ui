@@ -97,6 +97,7 @@ document.documentElement.addEventListener('click', (e) => {
 }, true)
 
 export default {
+  name: 'NModalContent',
   components: {
     NScrollbar,
     NConfirm,

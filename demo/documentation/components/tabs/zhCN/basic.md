@@ -31,7 +31,7 @@
   >
     <n-tab-pane
       name="signin"
-      label="登陆"
+      label="登录"
     >
       <n-form>
         <n-form-item-row label="用户名">
@@ -41,7 +41,7 @@
           <n-input />
         </n-form-item-row>
       </n-form>
-      <n-button type="primary" block>登陆</n-button>
+      <n-button type="primary" block>登录</n-button>
     </n-tab-pane>
     <n-tab-pane
       name="signup"

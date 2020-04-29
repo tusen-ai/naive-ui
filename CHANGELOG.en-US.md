@@ -1,8 +1,25 @@
 # CHANGELOG
+## 1.0.10 (2020-04-28)
+### Features
+- Add `arrow-placement` prop on `n-collapse`.
+- Add `arrow` slot on `n-collapsed-item`.
+### Fixes
+- Fix the problem that detachable components detached in wrong place when nested like `modal > drawer > component`.
+
+## 1.0.9 (2020-04-23)
+### Features
+- Add `autofocus` prop on `n-input`.
+- Add `closable` option on `NMessage`.
+### Fixes
+- Fix the problem that the default value of `n-tag` `closable` is set to `true`.
+- Fix the problem that `n-data-table` can't use all `pagination`'s props.
+- Fix the problem that `n-pagination`'s `on-page-size-change` prop doesn't work.
+
 ## 1.0.8 (2020-04-22)
 ### Features
 - Add `n-dynamic-tags`.
 - Add `tableHeaderOverlayBackgroundColor` & `inputOverlayBackgroundColor` to `styleScheme`
+
 
 ## 1.0.7 (2020-04-10)
 ### Features

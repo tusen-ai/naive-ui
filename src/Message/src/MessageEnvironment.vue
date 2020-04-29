@@ -14,12 +14,14 @@ export default {
   },
   data () {
     return {
+      timerId: null,
       active: true,
       inheritedTheme: null,
       theme: null,
       content: null,
       type: null,
       icon: null,
+      closable: false,
       onHide: () => {},
       onAfterHide: () => {}
     }
@@ -31,13 +33,19 @@ export default {
   },
   mounted () {
     if (this.duration) {
-      window.setTimeout(this.hide, this.duration)
+      this.timerId = window.setTimeout(this.hide, this.duration)
     }
   },
   methods: {
     hide () {
       this.active = false
+      if (this.timerId) {
+        window.clearTimeout(this.timerId)
+      }
       this.onHide()
+    },
+    handleClose () {
+      this.hide()
     },
     deactivate () {
       this.hide()
@@ -61,11 +69,15 @@ export default {
       [
         this.active
           ? h(NMessage, {
+            on: {
+              close: this.handleClose
+            },
             props: {
               theme: this.syntheticTheme,
               content: this.content,
               type: this.type,
-              icon: this.icon
+              icon: this.icon,
+              closable: this.closable
             }
           }) : null
       ]

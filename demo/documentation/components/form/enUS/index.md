@@ -78,7 +78,12 @@ Accept all props from form-item & [Col](n-row#Col-Props)
 About AsyncValidatorOptions, see <n-a href="https://github.com/yiminghe/async-validator">async-validator</n-a>.
 
 ## Slots
-### Form, Form Item, Form Item Row, Form Item Col Methods
+### Form, Form Item, Form Item Row, Form Item Col Slots
 |Name|Parameters|Description|
 |-|-|-|
 |default|`()`||
+
+### Form Item, Form Item Row, Form Item Col Slots
+|Name|Parameters|Description|
+|-|-|-|
+|label|`()`||
