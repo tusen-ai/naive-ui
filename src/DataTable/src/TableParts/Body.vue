@@ -3,9 +3,8 @@
     ref="scrollbar"
     class="n-data-table-base-table-body"
     :theme="NDataTable.syntheticTheme"
-    :style="style"
     :content-style="{
-      minWidth: scrollX
+      minWidth: formatedScrollX
     }"
     :horizontal-rail-style="{ zIndex: 3 }"
     :vertical-rail-style="{ zIndex: 3 }"
@@ -74,6 +73,7 @@
 import cell from './Cell.vue'
 import { createCustomWidthStyle, setCheckStatusOfRow, createClassObject, createRowKey } from '../utils'
 import NScrollbar from '../../../Scrollbar'
+import formatLength from '../../../_utils/css/formatLength'
 
 export default {
   components: {
@@ -106,10 +106,6 @@ export default {
       type: Number,
       default: null
     },
-    bodyStyle: {
-      type: Object,
-      default: () => ({})
-    },
     data: {
       type: Array,
       default: () => []
@@ -134,6 +130,9 @@ export default {
     }
   },
   computed: {
+    formatedScrollX () {
+      return formatLength(this.scrollX)
+    },
     rowKey () {
       return this.NDataTable.rowKey
     },
@@ -145,16 +144,6 @@ export default {
     },
     checkedRowKeys () {
       return this.NDataTable.syntheticCheckedRowKeys
-    },
-    style () {
-      if (this.fixed && this.height) {
-        return Object.assign({}, this.bodyStyle, {
-          height: this.height + 'px',
-          minHeight: this.minHeight + 'px'
-        })
-      } else {
-        return this.bodyStyle
-      }
     }
   },
   methods: {
