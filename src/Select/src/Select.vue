@@ -121,7 +121,15 @@ export default {
   directives: {
     clickoutside
   },
-  mixins: [ withapp, themeable, detachable, placeable, zindexable, locale('Select'), asformitem() ],
+  mixins: [
+    withapp,
+    themeable,
+    detachable,
+    placeable,
+    zindexable,
+    locale('Select'),
+    asformitem()
+  ],
   model: {
     prop: 'value',
     event: 'change'
@@ -209,6 +217,13 @@ export default {
         value: label
       })
     },
+    fallbackOption: {
+      type: [ Function, Boolean ],
+      default: value => ({
+        label: value,
+        value
+      })
+    },
     /** deprecated */
     items: {
       type: Array,
@@ -271,9 +286,26 @@ export default {
     },
     selectedOption () {
       if (!this.multiple) {
-        return this.getOption(this.value)
+        const value = this.value
+        const selectedOption = this.getOption(value)
+        const fallbackOption = this.wrappedFallbackOption
+        return (
+          selectedOption ||
+          (fallbackOption && fallbackOption(value)) ||
+          null
+        )
       }
       return null
+    },
+    wrappedFallbackOption () {
+      const fallbackOption = this.fallbackOption
+      if (!fallbackOption) return false
+      return value => {
+        const type = typeof value
+        if (type === 'string' || type === 'number') {
+          Object.assign(fallbackOption(value), { value })
+        } return null
+      }
     }
   },
   watch: {
@@ -370,23 +402,21 @@ export default {
       if (!Array.isArray(values)) return []
       const remote = this.remote
       const valueOptionMap = this.valueToOptionMap
+      const memorizedValueToOptionMap = this.memorizedValueToOptionMap
       const options = []
-      if (remote) {
-        const memorizedValueToOptionMap = this.memorizedValueToOptionMap
-        values.forEach(value => {
-          if (valueOptionMap.has(value)) {
-            options.push(valueOptionMap.get(value))
-          } else if (memorizedValueToOptionMap.has(value)) {
-            options.push(memorizedValueToOptionMap.get(value))
+      const fallbackOption = this.wrappedFallbackOption
+      values.forEach(value => {
+        if (valueOptionMap.has(value)) {
+          options.push(valueOptionMap.get(value))
+        } else if (remote && memorizedValueToOptionMap.has(value)) {
+          options.push(memorizedValueToOptionMap.get(value))
+        } else if (fallbackOption) {
+          const option = fallbackOption(value)
+          if (option) {
+            options.push(option)
           }
-        })
-      } else {
-        values.forEach(value => {
-          if (valueOptionMap.has(value)) {
-            options.push(valueOptionMap.get(value))
-          }
-        })
-      }
+        }
+      })
       return options
     },
     getOption (value) {
@@ -406,13 +436,19 @@ export default {
     },
     clearMultipleSelectValue (value) {
       if (!Array.isArray(value)) return []
-      const remote = this.remote
-      const valueOptionMap = this.valueToOptionMap
-      if (remote) {
-        const memorizedValueToOptionMap = this.memorizedValueToOptionMap
-        return value.filter(v => valueOptionMap.has(v) || memorizedValueToOptionMap.has(v))
+      if (this.wrappedFallbackOption) {
+        /** if option has a fallback, I can't help user to clear some unknown value */
+        return value
       } else {
-        return value.filter(v => valueOptionMap.has(v))
+        /** if there's no option fallback, unappeared options are treated as invalid */
+        const remote = this.remote
+        const valueOptionMap = this.valueToOptionMap
+        if (remote) {
+          const memorizedValueToOptionMap = this.memorizedValueToOptionMap
+          return value.filter(v => valueOptionMap.has(v) || memorizedValueToOptionMap.has(v))
+        } else {
+          return value.filter(v => valueOptionMap.has(v))
+        }
       }
     },
     handleToggleOption (option) {
@@ -428,9 +464,8 @@ export default {
         }
       }
       if (this.multiple) {
-        const memorizedValueToOptionMap = this.memorizedValueToOptionMap
-        if (this.remote) {
-          memorizedValueToOptionMap.set(option.value, option)
+        if (remote) {
+          this.memorizedValueToOptionMap.set(option.value, option)
         }
         const changedValue = this.clearMultipleSelectValue(this.value)
         const index = changedValue.findIndex(value => value === option.value)

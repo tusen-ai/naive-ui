@@ -29,7 +29,6 @@
 - Add `n-dynamic-tags`.
 - Add `tableHeaderOverlayBackgroundColor` & `inputOverlayBackgroundColor` to `styleScheme`
 
-
 ## 1.0.7 (2020-04-10)
 ### Features
 - Add `filter-option-value` prop for `n-data-table`'s `column` to better deal with single filter mode.
