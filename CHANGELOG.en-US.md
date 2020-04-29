@@ -15,6 +15,12 @@
 - Fix the problem that `n-data-table` can't use all `pagination`'s props.
 - Fix the problem that `n-pagination`'s `on-page-size-change` prop doesn't work.
 
+## 1.0.8 (2020-04-22)
+### Features
+- Add `n-dynamic-tags`.
+- Add `tableHeaderOverlayBackgroundColor` & `inputOverlayBackgroundColor` to `styleScheme`
+
+
 ## 1.0.7 (2020-04-10)
 ### Features
 - Add `filter-option-value` prop for `n-data-table`'s `column` to better deal with single filter mode.

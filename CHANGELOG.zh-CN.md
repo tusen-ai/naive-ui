@@ -15,6 +15,11 @@
 - 解决了 `n-data-table` 不能使用全部 `pagination` prop 的问题
 - 解决了 `n-pagination` `on-page-size-change` 不生效的问题
 
+## 1.0.8 (2020-04-22)
+### Features
+- 增加 `n-dynamic-tags` 组件.
+- `styleScheme` 新增暴露颜色 `tableHeaderOverlayBackgroundColor` & `inputOverlayBackgroundColor`
+
 ## 1.0.7 (2020-04-10)
 ### Features
 - 为 `n-data-table` 的 `column` 增加了 `filter-option-value` 的属性来应对单选的情况
