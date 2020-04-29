@@ -1,8 +1,17 @@
 # CHANGELOG
+## PENDING
+### Features
+- 为 `n-select` 增加了 `fallback-option` 属性用于控制无对应选项时的回退选项
+### Fixes
+- 解决了 `n-data-table` 在没有数据时 `max-height` 和 `min-height` 错误显示的问题
+### Breaking Changes
+- `n-data-table` 的 `max-height` 和 `min-height` 会对表格部分的整体生效，不只是表格的内容部分
+- `n-select` 在默认情况下会显示选项中不存在的值
+
 ## 1.0.10 (2020-04-28)
 ### Features
 - 为 `n-collapse` 增加了 `arrow-placement` 属性
-- 为 `n-collapsed-item` 增加了`arrow` slot
+- 为 `n-collapse-item` 增加了`arrow` slot
 ### Fixes
 - 解决了可卸载组件在嵌套成 `modal > drawer > component` 样子的时候会被卸载到错误位置的问题
 
