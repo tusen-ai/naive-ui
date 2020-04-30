@@ -1,5 +1,5 @@
 # CHANGELOG
-## PENDING
+## 1.0.11 (2020-04-30)
 ### Features
 - Add `fallback-option` prop for `n-select` to deal with the value with no corresponding option.
 ### Fixes
