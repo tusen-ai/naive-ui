@@ -1,4 +1,8 @@
 # CHANGELOG
+## 1.0.12 (2020-04-30)
+### Fixes
+- Fix the problem that some CSS length props are badly formated.
+
 ## 1.0.11 (2020-04-30)
 ### Features
 - Add `fallback-option` prop for `n-select` to deal with the value with no corresponding option.
