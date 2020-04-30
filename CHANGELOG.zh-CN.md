@@ -1,5 +1,5 @@
 # CHANGELOG
-## PENDING
+## 1.0.11 (2020-04-30)
 ### Features
 - 为 `n-select` 增加了 `fallback-option` 属性用于控制无对应选项时的回退选项
 ### Fixes
