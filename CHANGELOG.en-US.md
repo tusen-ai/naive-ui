@@ -1,4 +1,8 @@
 # CHANGELOG
+## 1.0.13 (2020-05-14)
+### Fixes
+- Fix the label slot of the `n-form-item-col` & `n-form-item-row` cannot display.
+
 ## 1.0.12 (2020-04-30)
 ### Fixes
 - Fix the problem that some CSS length props are badly formated.

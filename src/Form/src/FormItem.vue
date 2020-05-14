@@ -12,12 +12,12 @@
     }"
   >
     <label
-      v-if="label || $slots.label"
+      v-if="label || $scopedSlots.label"
       :class="`n-form-item-label`"
       :style="syntheticLabelStyle"
     >
       <template
-        v-if="$slots.label"
+        v-if="$scopedSlots.label"
       ><slot
         name="label"
       /></template>

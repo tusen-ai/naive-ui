@@ -1,4 +1,8 @@
 # CHANGELOG
+## 1.0.13 (2020-05-14)
+### Fixes
+- 修正 `n-form-item-col` & `n-form-item-row`的 label slot 不能显示的问题.
+
 ## 1.0.12 (2020-04-30)
 ### Fixes
 - 修正了一些 CSS 长度属性格式化错误的问题
