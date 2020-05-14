@@ -1,17 +1,13 @@
 # CHANGELOG
-## PENDING (2020-05-15)
+## 1.0.14 (2020-05-15)
 ### Fixes
 - 修正了 `line` 型 `n-tabs` 线不随 `activeName` 属性改变的问题
 - 修正了 `n-tabs` 滚动按钮没有随着宽度改变触发的问题
 - 修正了 `n-tabs` 高度变化会导致一些不期望的调用的问题
 
-## 1.0.14 (2020-05-14)
-### Fixes
-- 修正 `n-form-item-col` & `n-form-item-row` 插入label slot 时会以 `no-label` 的状态展示.
-
 ## 1.0.13 (2020-05-14)
 ### Fixes
-- 修正 `n-form-item-col` & `n-form-item-row`的 label slot 不能显示的问题.
+- 修正 `n-form-item-col` & `n-form-item-row` 的 label slot 不显示的问题
 
 ## 1.0.12 (2020-04-30)
 ### Fixes

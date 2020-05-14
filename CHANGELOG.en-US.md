@@ -1,17 +1,13 @@
 # CHANGELOG
-## PENDING (2020-05-15)
+## 1.0.14 (2020-05-15)
 ### Fixes
 - Fix the problem that `line` typed `n-tabs`'s line position stays still when `activeName` changes.
 - Fix the problem that `n-tabs` scroll button is not triggered when tabs' width changes.
 - Fix the problem that height change of `n-tabs` will unexpectly trigger some re-render callbacks.
 
-## 1.0.14 (2020-05-14)
-### Fixes
-- Fix `n-form-item-col` & `n-form-item-row` will be displayed in the state of no-label when use label slot.
-
 ## 1.0.13 (2020-05-14)
 ### Fixes
-- Fix the label slot of the `n-form-item-col` & `n-form-item-row` cannot display.
+- Fix the problem that label slot of the `n-form-item-col` & `n-form-item-row` cannot display.
 
 ## 1.0.12 (2020-04-30)
 ### Fixes
