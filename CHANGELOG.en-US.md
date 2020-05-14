@@ -1,4 +1,10 @@
 # CHANGELOG
+## PENDING (2020-05-15)
+### Fixes
+- Fix the problem that `line` typed `n-tabs`'s line position stays still when `activeName` changes.
+- Fix the problem that `n-tabs` scroll button is not triggered when tabs' width changes.
+- Fix the problem that height change of `n-tabs` will unexpectly trigger some re-render callbacks.
+
 ## 1.0.12 (2020-04-30)
 ### Fixes
 - Fix the problem that some CSS length props are badly formated.

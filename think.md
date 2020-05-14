@@ -243,3 +243,8 @@ Done
 // ResizeObserver Polyfill
 // Select 需要进一步重构，现在这种状况 collector 在 corner case 中不会调 updated 钩子，要把 key 换成 value
 ```
+```
+release template
+
+历史变更见：https://***REMOVED***/blob/develop/CHANGELOG.zh-CN.md
+```
