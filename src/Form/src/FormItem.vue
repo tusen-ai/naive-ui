@@ -7,7 +7,7 @@
       [`n-form-item--${syntheticLabelPlacement}-labelled`]: syntheticLabelPlacement,
       [`n-form-item--${syntheticLabelAlign}-label-aligned`]: syntheticLabelAlign,
       [`n-form-item--required`]: syntheticRequired && syntheticShowRequireMark,
-      [`n-form-item--no-label`]: !(label || $slots.label),
+      [`n-form-item--no-label`]: !(label || $scopedSlots.label),
       [`n-form-item--has-feedback`]: hasFeedback
     }"
   >

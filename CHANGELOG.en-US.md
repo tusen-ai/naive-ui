@@ -1,4 +1,8 @@
 # CHANGELOG
+## 1.0.14 (2020-05-14)
+### Fixes
+- Fix `n-form-item-col` & `n-form-item-row` will be displayed in the state of no-label when use label slot.
+
 ## 1.0.13 (2020-05-14)
 ### Fixes
 - Fix the label slot of the `n-form-item-col` & `n-form-item-row` cannot display.

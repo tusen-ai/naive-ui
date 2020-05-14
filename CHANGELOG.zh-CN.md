@@ -1,4 +1,8 @@
 # CHANGELOG
+## 1.0.14 (2020-05-14)
+### Fixes
+- 修正 `n-form-item-col` & `n-form-item-row` 插入label slot 时会以 `no-label` 的状态展示.
+
 ## 1.0.13 (2020-05-14)
 ### Fixes
 - 修正 `n-form-item-col` & `n-form-item-row`的 label slot 不能显示的问题.
