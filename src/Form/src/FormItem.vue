@@ -7,17 +7,17 @@
       [`n-form-item--${syntheticLabelPlacement}-labelled`]: syntheticLabelPlacement,
       [`n-form-item--${syntheticLabelAlign}-label-aligned`]: syntheticLabelAlign,
       [`n-form-item--required`]: syntheticRequired && syntheticShowRequireMark,
-      [`n-form-item--no-label`]: !(label || $slots.label),
+      [`n-form-item--no-label`]: !(label || $scopedSlots.label),
       [`n-form-item--has-feedback`]: hasFeedback
     }"
   >
     <label
-      v-if="label || $slots.label"
+      v-if="label || $scopedSlots.label"
       :class="`n-form-item-label`"
       :style="syntheticLabelStyle"
     >
       <template
-        v-if="$slots.label"
+        v-if="$scopedSlots.label"
       ><slot
         name="label"
       /></template>
