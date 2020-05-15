@@ -18,6 +18,7 @@ debug
 ### Button Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|color|`string`|`null`|Only support `#FFF`, `#FFFFFF`, `rgb(0, 0, 0)` formatted colors.|
 |size|`'tiny' \| 'small' \| 'medium' \| 'large'`|`'medium'`||
 |type|`'default' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'`|`'default'`||
 |text|`boolean`|`false`||
