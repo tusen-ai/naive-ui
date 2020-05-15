@@ -160,6 +160,9 @@ export default {
     typeIsCard () {
       return this.type === 'card'
     },
+    typeIsLine () {
+      return this.type === 'line'
+    },
     labelWrapperStyle () {
       if (!this.justifyContent) return null
       return {
@@ -172,15 +175,13 @@ export default {
     }
   },
   watch: {
+    activeName () {
+      if (this.typeIsLine) {
+        this.updateCurrentBarPosition()
+      }
+    },
     showScrollButton (value) {
       this.$emit('scrollable-change', value)
-    },
-    justifyContent (value) {
-      if (value === 'space-around' || value === 'space-evenly') {
-        this.registerResizeObserver()
-      } else {
-        this.unregisterResizeObserver()
-      }
     },
     panelLabels () {
       this.$nextTick().then(this.updateScrollStatus)
@@ -197,18 +198,14 @@ export default {
       })
       .then(() => {
         this.updateScrollStatus()
-        this.updateCurrentBarPosition()
+        if (this.typeIsLine) {
+          this.updateCurrentBarPosition()
+        }
       })
-    const justifyContent = this.justifyContent
-    if (justifyContent === 'space-around' || justifyContent === 'space-evenly') {
-      this.registerResizeObserver()
-    }
+    this.registerResizeObserver()
   },
   beforeDestroy () {
-    const justifyContent = this.justifyContent
-    if (justifyContent === 'space-around' || justifyContent === 'space-evenly') {
-      this.unregisterResizeObserver()
-    }
+    this.unregisterResizeObserver()
     this.unregisterScrollContentResizeObserver()
   },
   methods: {
@@ -282,7 +279,6 @@ export default {
     handleTabClick (e, panelName, disabled) {
       if (!disabled) {
         this.setPanelActive(panelName)
-        this.updateBarPosition(e.currentTarget)
       }
     },
     setPanelActive (panelName) {
@@ -292,16 +288,24 @@ export default {
       this.$emit('close', panel.name)
     },
     registerResizeObserver () {
-      resizeObserverDelegate.registerHandler(this.$el, throttle(() => {
-        this.transitionDisabled = true
-        this.updateCurrentBarPosition()
-        this.$nextTick().then(() => {
-          this.transitionDisabled = false
-        })
+      resizeObserverDelegate.registerHandler(this.$refs.nav, throttle(() => {
+        if (
+          this.typeIsCard ||
+          (this.typeIsLine && !this.justifyContent)
+        ) {
+          this.updateScrollStatus()
+        }
+        if (this.typeIsLine) {
+          this.transitionDisabled = true
+          this.$nextTick().then(() => {
+            this.updateCurrentBarPosition()
+            this.transitionDisabled = false
+          })
+        }
       }, 64))
     },
     unregisterResizeObserver () {
-      resizeObserverDelegate.unregisterHandler(this.$el)
+      resizeObserverDelegate.unregisterHandler(this.$refs.nav)
     },
     registerScrollContentResizeObserver () {
       resizeObserverDelegate.registerHandler(this.$refs.labelWrapper, throttle(() => {

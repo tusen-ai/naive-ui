@@ -226,6 +226,7 @@ zindex 的问题解决了，虽然很简单，在 static 元素上设定 zindex 
 86. <del>文件上传的回调方式改成传对象</del>
 87. 抵御外界 CSS 变化，比如 line-height 之类的
 88. <del>CSS Font 选择</del> 对英文应该没有那么麻烦，走系统字体就好了，然而对中文又没什么好的解决方案，so 先这个样子，之后再琢磨琢磨
+89. 把所有用 $slots 判断的地方都改成 $scopedSlots，[原因](https://vuejs.org/v2/api/#vm-scopedSlots)
 
 ```
 Done
@@ -242,4 +243,9 @@ Done
 // scrollbar 在 resize 之后滚动会有问题
 // ResizeObserver Polyfill
 // Select 需要进一步重构，现在这种状况 collector 在 corner case 中不会调 updated 钩子，要把 key 换成 value
+```
+```
+release template
+
+历史变更见：https://***REMOVED***/blob/develop/CHANGELOG.zh-CN.md
 ```
