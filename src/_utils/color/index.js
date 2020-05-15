@@ -38,7 +38,7 @@ export function read (color) {
  * @param {[number, number, number, number]} overlay
  */
 export function composite (base, overlay) {
-  return 'rgb(' + base.map((v, i) => floor(v * (1 - overlay[3]) + overlay[i] * overlay[3], 10)).join(', ') + ')'
+  return 'rgb(' + base.map((v, i) => floor(v * (1 - overlay[3]) + overlay[i] * overlay[3])).join(', ') + ')'
 }
 
 export function hash (rgb) {
