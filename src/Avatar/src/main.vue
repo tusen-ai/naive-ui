@@ -13,8 +13,8 @@
       ...syntheticStyle
     }"
   >
-    <img v-if="!$slots.default && src" :src="src">
-    <slot v-else-if="$slots.icon" name="icon" />
+    <img v-if="!$scopedSlots.default && src" :src="src">
+    <slot v-else-if="$scopedSlots.icon" name="icon" />
     <span
       v-else
       ref="text"

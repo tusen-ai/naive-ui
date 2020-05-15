@@ -6,6 +6,7 @@ import zindexable from '../../_mixins/zindexable'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import formatLength from '../../_utils/css/formatLength'
+import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
 
 export default {
   name: 'NPopoverContent',
@@ -299,7 +300,7 @@ export default {
               mouseleave: this.handleMouseLeave
             }
           }, [
-            ...(this.$slots.default || []),
+            ...getDefaultSlot(this),
             this.arrow
               ? h(
                 'div',

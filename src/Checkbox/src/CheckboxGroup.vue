@@ -2,6 +2,7 @@
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asformitem from '../../_mixins/asformitem'
+import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
 
 export default {
   name: 'NCheckboxGroup',
@@ -77,7 +78,7 @@ export default {
   render (h) {
     return h('div', {
       staticClass: 'n-checkbox-group'
-    }, this.$slots.default)
+    }, getDefaultSlot(this))
   }
 }
 </script>

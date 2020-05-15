@@ -1,4 +1,6 @@
 <script>
+import getDefaultSlot from '../../../_utils/vue/getDefaultSlot'
+
 export default {
   name: 'NBaseIconTransition',
   data () {
@@ -17,7 +19,7 @@ export default {
         name: 'n-icon-switch-transition',
         appear: this.appear
       }
-    }, this.$slots.default)
+    }, getDefaultSlot(this))
   }
 }
 </script>

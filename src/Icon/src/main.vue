@@ -2,6 +2,7 @@
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import formatLength from '../../_utils/css/formatLength'
+import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
 
 export default {
   name: 'NIcon',
@@ -36,20 +37,23 @@ export default {
     }
   },
   render (h) {
-    if (this.$parent && this.$parent.$options.name === 'NIcon') return this.$slots.default
+    const parent = this.$parent
+    if (parent && parent.$options.name === 'NIcon') return getDefaultSlot(this)
     else {
+      const syntheticTheme = this.syntheticTheme
+      const depth = this.depth
       return h('i', {
         staticClass: 'n-icon',
         class: {
-          [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
-          [`n-icon--${this.depth}-depth`]: this.depth
+          [`n-${syntheticTheme}-theme`]: syntheticTheme,
+          [`n-icon--${depth}-depth`]: depth
         },
         style: {
           ...this.styles,
           ...this.syntheticStyle
         },
         on: Object.assign({}, this.$listeners)
-      }, this.$slots.default)
+      }, getDefaultSlot(this))
     }
   }
 }

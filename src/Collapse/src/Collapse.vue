@@ -2,6 +2,7 @@
 import intersection from 'lodash-es/intersection'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
 
 export default {
   name: 'NCollapse',
@@ -75,7 +76,7 @@ export default {
       class: {
         [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme
       }
-    }, this.$slots.default)
+    }, getDefaultSlot(this))
   }
 }
 </script>

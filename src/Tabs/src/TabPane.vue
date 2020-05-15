@@ -1,4 +1,6 @@
 <script>
+import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
+
 export default {
   name: 'NTabPane',
   inject: [ 'NTab' ],
@@ -43,7 +45,7 @@ export default {
     if (this.displayDirective === 'if') {
       return this.NTab && this.name === this.NTab.activeName ? h('div', {
         staticClass: 'n-tab-panel'
-      }, this.$slots.default) : null
+      }, getDefaultSlot(this)) : null
     } else {
       return h('div', {
         staticClass: 'n-tab-panel',
@@ -53,7 +55,7 @@ export default {
             value: this.NTab && this.name === this.NTab.activeName
           }
         ]
-      }, this.$slots.default)
+      }, getDefaultSlot(this))
     }
   }
 }

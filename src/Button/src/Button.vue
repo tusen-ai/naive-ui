@@ -32,7 +32,7 @@
       <div
         v-if="(hasIcon || loading) && !iconOnRight"
         class="n-button__icon"
-        :class="{ 'n-button__icon--slot': $slots.icon }"
+        :class="{ 'n-button__icon--slot': $scopedSlots.icon }"
       >
         <n-icon-switch-transition>
           <n-base-loading
@@ -64,7 +64,7 @@
       </div>
     </n-fade-in-height-expand-transition>
     <div
-      v-if="!circle && $slots.default"
+      v-if="!circle && $scopedSlots.default"
       class="n-button__content"
       :style="{
         transition: hollowOutColorTransitionDisabled ? 'none' : null,
@@ -78,7 +78,7 @@
         v-if="(loading || hasIcon) && iconOnRight"
         class="n-button__icon"
         :class="{
-          'n-button__icon--slot': $slots.icon
+          'n-button__icon--slot': $scopedSlots.icon
         }"
       >
         <n-icon-switch-transition>
@@ -269,7 +269,7 @@ export default {
       return this.size
     },
     noTextContent () {
-      return this.circle || !this.$slots.default
+      return this.circle || !this.$scopedSlots.default
     },
     avoidHollowOut () {
       return (
@@ -285,7 +285,7 @@ export default {
       return this.focusable && !this.disabled
     },
     hasIcon () {
-      return this.icon || this.$slots.icon
+      return this.icon || this.$scopedSlots.icon
     },
     iconOnRight () {
       return this.iconPlacement === 'right'

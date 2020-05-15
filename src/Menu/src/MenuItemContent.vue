@@ -12,7 +12,7 @@
     @click="handleClick"
   >
     <div
-      v-if="$slots.icon"
+      v-if="$scopedSlots.icon"
       class="n-menu-item-content__icon"
       :style="{
         width: maxIconSize && (maxIconSize + 'px'),

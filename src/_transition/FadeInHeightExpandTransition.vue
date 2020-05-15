@@ -1,4 +1,6 @@
 <script>
+import getDefaultSlot from '../_utils/vue/getDefaultSlot'
+
 export default {
   props: {
     transitionDisabled: {
@@ -92,7 +94,7 @@ export default {
         afterEnter: this.handleAfterEnter,
         afterLeave: this.handleAfterLeave
       }
-    }, this.$slots.default)
+    }, getDefaultSlot(this))
   }
 }
 

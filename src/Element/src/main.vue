@@ -18,11 +18,12 @@ export default {
     }
   },
   render (h) {
+    const scopedSlots = this.$scopedSlots
     return h(this.as, {
       class: {
         [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme
       }
-    }, this.$slots.default || (this.$scopedSlots.default && this.$scopedSlots.default({
+    }, (scopedSlots.default && scopedSlots.default({
       theme: this.syntheticTheme,
       namespace: this.NConfigProvider ? this.NConfigProvider.inheritedNamespace : null,
       themeEnvironment: this.syntheticThemeEnvironment,

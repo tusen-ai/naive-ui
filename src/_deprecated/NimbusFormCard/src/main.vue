@@ -30,7 +30,7 @@
         <slot name="content" />
       </div>
       <div
-        v-if="$slots.footer"
+        v-if="$scopedSlots.footer"
         ref="footer"
         class="n-nimbus-form-card__footer"
         :class="{

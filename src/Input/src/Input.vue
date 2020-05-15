@@ -10,8 +10,8 @@
       'n-input--clearable': clearable,
       'n-input--split': pair,
       'n-input--focus': syntheticFocus,
-      'n-input--suffix': $slots.suffix,
-      'n-input--prefix': $slots.prefix || $slots.affix,
+      'n-input--suffix': $scopedSlots.suffix,
+      'n-input--prefix': $scopedSlots.prefix || $scopedSlots.affix,
       'n-input--stateful': stateful,
       [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
@@ -119,7 +119,7 @@
       </div>
     </div>
     <div
-      v-if="$slots.affix || $slots.prefix"
+      v-if="$scopedSlots.affix || $scopedSlots.prefix"
       class="n-input__prefix"
     >
       <slot name="affix">

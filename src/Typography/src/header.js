@@ -1,5 +1,6 @@
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
 
 export default level => ({
   name: 'NH' + level,
@@ -20,7 +21,6 @@ export default level => ({
   mixins: [withapp, themeable],
   render (h) {
     const props = this.$props
-    const defaultSlot = this.$slots.default
     return h(`h${level}`, {
       class: {
         [`n-h${level}`]: true,
@@ -29,6 +29,6 @@ export default level => ({
         [`n-h${level}--prefix-bar`]: props.prefix,
         [`n-h${level}--align-text`]: props.alignText
       }
-    }, defaultSlot)
+    }, getDefaultSlot(this))
   }
 })

@@ -22,7 +22,7 @@
       <line-mark class="n-checkbox-box__line-mark" />
     </div>
     <span
-      v-if="$slots.default"
+      v-if="$scopedSlots.default"
       class="n-checkbox__label"
     >
       <slot />

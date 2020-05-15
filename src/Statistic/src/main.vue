@@ -20,7 +20,7 @@
         {{ value }}
       </span>
       <span
-        v-else-if="$slots.default"
+        v-else-if="$scopedSlots.default"
         class="n-statistic-value__content"
       >
         <slot />

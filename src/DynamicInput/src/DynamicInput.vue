@@ -133,7 +133,7 @@ export default {
       const onCreate = this.onCreate
       if (onCreate) {
         this.value.splice(index + 1, 0, onCreate(index + 1))
-      } else if (this.$slots.default) {
+      } else if (this.$scopedSlots.default) {
         this.value.splice(index + 1, 0, null)
       } else {
         switch (this.preset) {
@@ -160,7 +160,7 @@ export default {
           } else {
             this.$emit('input', [ onClear() ])
           }
-        } else if (this.$slots.default) {
+        } else if (this.$scopedSlots.default) {
           return
         } else {
           switch (this.preset) {

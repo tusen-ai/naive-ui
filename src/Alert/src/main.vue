@@ -21,7 +21,7 @@
         v-if="showIcon"
         class="n-alert__icon"
       >
-        <n-icon v-if="$slots.icon">
+        <n-icon v-if="$scopedSlots.icon">
           <slot
             name="icon"
           />
@@ -57,7 +57,7 @@
           </slot>
         </div>
         <div
-          v-if="$slots.default"
+          v-if="$scopedSlots.default"
           class="n-alert-body__content"
         >
           <slot />
