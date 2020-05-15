@@ -81,12 +81,12 @@
 @mixin button-icon-mixin($color) {
   @include e(icon) {
     @include b(icon) {
-      fill: $color !important;
-      stroke: $color !important;
+      fill: $color;
+      stroke: $color;
     }
     @include b(base-loading) {
-      fill: $color !important;
-      stroke: $color !important;
+      fill: $color;
+      stroke: $color;
     }
   }
 }
@@ -184,29 +184,25 @@
     }
   }
   @include m(text) {
-    @include button-icon-mixin(map-get($--button-ghost-typed-text-color, $type));
     color: map-get($--button-text-typed-text-color, $type);
+    @include button-icon-mixin(map-get($--button-ghost-typed-text-color, $type));
     @include not-m(disabled) {
       @include m(enter-pressed) {
-        background-color: transparent;
         color: map-get($--button-text-typed-text-color, $type + '-active');
         @include button-icon-mixin(map-get($--button-ghost-typed-text-color, $type + '-active'));
       }
       &:not(:active):focus {
         @include not-m(enter-pressed) {
-          background-color: transparent;
           color: map-get($--button-text-typed-text-color, $type + '-focus');
           @include button-icon-mixin(map-get($--button-ghost-typed-text-color, $type + '-focus'));
         } 
       }
       @include not-m(enter-pressed) {
         &:hover {
-          background-color: transparent;
           color: map-get($--button-text-typed-text-color, $type + '-hover');
           @include button-icon-mixin(map-get($--button-ghost-typed-text-color, $type + '-hover'));
         }
         &:active {
-          background-color: transparent;
           color: map-get($--button-text-typed-text-color, $type + '-active');
           @include button-icon-mixin(map-get($--button-ghost-typed-text-color, $type + '-active'));
         }
