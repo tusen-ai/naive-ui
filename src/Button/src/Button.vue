@@ -1,10 +1,15 @@
 <template>
+  <!--
+    color related class need to be refined, especially for it conflict with type
+    related class. Although it works for now, refinement is still in need. Maybe
+    rename type class to sth like **-info-colored is a solution in semantics.
+  -->
   <button
     class="n-button"
     :class="{
       'n-button--round': round,
       'n-button--circle': circle,
-      [`n-button--${type}-type`]: true,
+      [`n-button--${colorHash || type}-type`]: true,
       [`n-button--${syntheticSize}-size`]: true,
       'n-button--disabled': disabled,
       'n-button--loading': loading,
@@ -116,6 +121,38 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import NIcon from '../../Icon'
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
+import { read, composite, hash } from '../../_utils/color'
+import { createColorStyle } from './Button.cssr.js'
+
+let colorStyle = null
+
+function mountColorStyle (color, colorHash) {
+  if (!colorStyle) colorStyle = createColorStyle()
+  const textColor = null
+  const rgb = read(color)
+  const digest = hash(rgb)
+  const hoverColor = composite(rgb, [255, 255, 255, 0.14])
+  const activeColor = composite(rgb, [0, 0, 0, 0.1])
+  const focusColor = hoverColor
+  colorStyle.mount({
+    target: 'n-button-' + digest,
+    props: {
+      color,
+      hoverColor,
+      activeColor,
+      focusColor,
+      textColor,
+      digest
+    }
+  })
+}
+
+function unmountColorStyle (colorHash) {
+  colorStyle.unmount({
+    target: 'n-button-' + colorHash,
+    delay: 1000
+  })
+}
 
 export default {
   name: 'NButton',
@@ -135,6 +172,10 @@ export default {
   },
   mixins: [withapp, themeable, hollowoutable],
   props: {
+    color: {
+      type: String,
+      default: null
+    },
     text: {
       type: Boolean,
       default: false
@@ -210,6 +251,12 @@ export default {
     }
   },
   computed: {
+    colorRgb () {
+      return read(this.color)
+    },
+    colorHash () {
+      return hash(this.colorRgb)
+    },
     syntheticSize () {
       const NButtonGroup = this.NButtonGroup
       if (NButtonGroup && NButtonGroup.size) {
@@ -228,7 +275,7 @@ export default {
       return (
         this.text ||
         this.ghost ||
-        this.type === 'default'
+        (this.type === 'default' && !this.color)
       )
     },
     hollowText () {
@@ -244,7 +291,25 @@ export default {
       return this.iconPlacement === 'right'
     }
   },
+  watch: {
+    colorHash (value, oldValue) {
+      unmountColorStyle(oldValue)
+    },
+    color (value) {
+      mountColorStyle(value)
+    }
+  },
+  created () {
+    const color = this.color
+    if (color) {
+      mountColorStyle(color)
+    }
+  },
   beforeDestroy () {
+    const colorHash = this.colorHash
+    if (colorHash) {
+      unmountColorStyle(colorHash)
+    }
     window.clearTimeout(this.rippleTimer)
   },
   methods: {

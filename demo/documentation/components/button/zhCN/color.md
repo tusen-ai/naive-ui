@@ -1,4 +1,5 @@
 # 自定义颜色
+这两个颜色看起来像毒蘑菇。
 ```html
 <n-button color="#8a2be2">
   <template v-slot:icon>

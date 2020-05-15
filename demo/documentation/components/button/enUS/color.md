@@ -1,4 +1,5 @@
 # Custom Color
+The two colors look like toadstool. 
 ```html
 <n-button color="#8a2be2">
   <template v-slot:icon>
