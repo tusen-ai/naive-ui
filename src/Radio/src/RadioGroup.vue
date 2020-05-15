@@ -3,6 +3,7 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import hollowoutable from '../../_mixins/hollowoutable'
 import asformitem from '../../_mixins/asformitem'
+import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
 
 function mapSlot (h, defaultSlot, groupInstance) {
   const mappedSlot = []
@@ -129,7 +130,7 @@ export default {
         [`n-radio-group--button-group`]: isButtonGroup,
         [`n-radio-group--transition-disabled`]: isButtonGroup && this.transitionDisabled
       }
-    }, mapSlot(h, this.$slots.default, this))
+    }, mapSlot(h, getDefaultSlot(this), this))
   }
 }
 </script>

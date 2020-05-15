@@ -6,6 +6,7 @@ basic
 size
 text
 disabled
+color
 icon
 events
 shape
@@ -18,6 +19,7 @@ debug
 ### Button Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|color|`string`|`null`|只支持形如 `#FFF`, `#FFFFFF`, `rgb(0, 0, 0)` 的颜色|
 |size|`'tiny' \| 'small' \| 'medium' \| 'large'`|`'medium'`||
 |type|`'default' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'`|`'default'`||
 |text|`boolean`|`false`||

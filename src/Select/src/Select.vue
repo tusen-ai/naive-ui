@@ -72,13 +72,13 @@
             @menu-scroll="handleMenuScroll"
             @menu-visible="handleMenuVisible"
           >
-            <template v-if="$slots.empty" v-slot:empty>
+            <template v-if="$scopedSlots.empty" v-slot:empty>
               <slot name="empty" />
             </template>
-            <template v-if="$slots.unmatch" v-slot:unmatch>
+            <template v-if="$scopedSlots.unmatch" v-slot:unmatch>
               <slot name="unmatch" />
             </template>
-            <template v-if="$slots.action" v-slot:action>
+            <template v-if="$scopedSlots.action" v-slot:action>
               <slot name="action" />
             </template>
           </n-base-select-menu>

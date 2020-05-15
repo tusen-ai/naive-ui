@@ -1,6 +1,8 @@
 import NTreeNodeSwitcher from './TreeNodeSwitcher.vue'
 import NTreeNodeCheckbox from './TreeNodeCheckbox.vue'
 import NTreeNodeContent from './TreeNodeContent.vue'
+import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
+
 import { isLeaf, isLoaded } from './utils'
 
 export default {
@@ -147,7 +149,7 @@ export default {
       ]),
       (
         this.icon && typeof this.icon === 'function' ? [this.icon()] : []
-      ).concat(this.$slots.default)
+      ).concat(getDefaultSlot(this))
     ])
   }
 }

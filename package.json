@@ -120,7 +120,9 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
+    "@css-render/plugin-bem": "^0.7.3",
     "async-validator": "^1.11.5",
+    "css-render": "^0.7.3",
     "date-fns": "^2.9.0",
     "highlight.js": "^9.18.1",
     "lodash-es": "^4.17.15",

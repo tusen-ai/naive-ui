@@ -20,10 +20,10 @@
             :title-extra="titleExtra"
             @click="handleClick"
           >
-            <template v-slot:icon>
+            <template v-if="$scopedSlots.icon" v-slot:icon>
               <slot name="icon" />
             </template>
-            <template v-slot:header-extra>
+            <template v-if="$scopedSlots['header-extra']" v-slot:header-extra>
               <slot name="extra" />
             </template>
             <slot />
@@ -42,10 +42,10 @@
       :disabled="syntheticDisabled"
       @click="handleClick"
     >
-      <template v-slot:icon>
+      <template v-if="$scopedSlots.icon" v-slot:icon>
         <slot name="icon" />
       </template>
-      <template v-slot:header-extra>
+      <template v-if="$scopedSlots['header-extra']" v-slot:header-extra>
         <slot name="header" />
       </template>
       <slot />

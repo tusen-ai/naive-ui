@@ -34,14 +34,14 @@
             @negative-click="handleNegativeClick"
             @positive-click="handlePositiveClick"
           >
-            <template v-slot:header>
+            <template v-if="$scopedSlots.header" v-slot:header>
               <slot name="header" />
             </template>
-            <template v-slot:icon>
+            <template v-if="$scopedSlots.icon" v-slot:icon>
               <slot name="icon" />
             </template>
             <slot />
-            <template v-slot:action>
+            <template v-if="$scopedSlots.action" v-slot:action>
               <slot name="action" />
             </template>
           </n-confirm>
@@ -56,16 +56,16 @@
             :segmented="segmented"
             @close="handleCloseClick"
           >
-            <template v-slot:header>
+            <template v-if="$scopedSlots.header" v-slot:header>
               <slot name="header" />
             </template>
-            <template v-slot:header-extra>
+            <template v-if="$scopedSlots['header-extra']" v-slot:header-extra>
               <slot name="header-extra" />
             </template>
-            <template v-slot:footer>
+            <template v-if="$scopedSlots.footer" v-slot:footer>
               <slot name="footer" />
             </template>
-            <template v-slot:action>
+            <template v-if="$scopedSlots.action" v-slot:action>
               <slot name="action" />
             </template>
             <slot />

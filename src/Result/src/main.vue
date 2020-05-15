@@ -33,7 +33,7 @@
         {{ description }}
       </div>
     </div>
-    <div v-if="$slots.default" class="n-result-content">
+    <div v-if="$scopedSlots.default" class="n-result-content">
       <slot />
     </div>
     <div class="n-result-footer">

@@ -3,6 +3,7 @@
 import Scrollbar from '../../../Scrollbar'
 import withapp from '../../../_mixins/withapp'
 import themeable from '../../../_mixins/themeable'
+import getDefaultSlot from '../../../_utils/vue/getDefaultSlot'
 
 export default {
   name: 'NNimbusServiceLayout',
@@ -158,6 +159,7 @@ export default {
         }
       })
     }
+    const scopedSlots = this.$scopedSlots
     return h('NLayout', {
       staticClass: 'n-nbs',
       class: {
@@ -167,7 +169,7 @@ export default {
         position: 'absolute'
       }
     }, [
-      this.$slots.nav ? h('NLayoutHeader', {
+      scopedSlots.nav ? h('NLayoutHeader', {
         staticStyle: {
           height: '64px',
           zIndex: this.headerZIndex
@@ -175,10 +177,10 @@ export default {
         props: {
           bordered: true
         }
-      }, this.$slots.nav) : null,
+      }, scopedSlots.nav()) : null,
       h('NLayout', {
         style: {
-          top: this.$slots.nav ? '64px' : null
+          top: scopedSlots.nav ? '64px' : null
         },
         props: {
           position: 'absolute'
@@ -267,7 +269,7 @@ export default {
               padding: this.paddingBody ? '21px 48px' : null
             }
           }
-        }, this.$slots.default)
+        }, getDefaultSlot(this))
       ])
     ])
   }

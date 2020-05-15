@@ -2,6 +2,7 @@
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import hollowoutable from '../../_mixins/hollowoutable'
+import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
 
 function stepWithIndex (step, i) {
   if (step.componentOptions) {
@@ -61,7 +62,7 @@ export default {
         'n-steps--vertical': this.vertical,
         'n-steps--transition-disabled': this.transitionDisabled
       }
-    }, stepsWithIndex({ ...this.$props }, this.$slots.default))
+    }, stepsWithIndex({ ...this.$props }, getDefaultSlot(this)))
   }
 }
 </script>
