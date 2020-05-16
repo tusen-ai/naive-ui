@@ -1,7 +1,13 @@
+import commonStyle from './common.scss'
+
+function extractLength (length) {
+  return Number(length.match(/^\d+/)[0])
+}
+
 export const itemSize = {
-  tiny: 22,
-  small: 28,
-  medium: 34,
-  large: 40,
-  huge: 46
+  tiny: extractLength(commonStyle.tinySize),
+  small: extractLength(commonStyle.smallSize),
+  medium: extractLength(commonStyle.mediumSize),
+  large: extractLength(commonStyle.largeSize),
+  huge: extractLength(commonStyle.hugeSize)
 }

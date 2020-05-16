@@ -5,6 +5,7 @@
 
 /* stylelint-disable */
 :export {
+  baseBackgroundColor: $--n-base-background-color;
   primaryColor: $--n-primary-color;
   primaryHoverColor: $--n-primary-hover-color;
   primaryActiveColor: $--n-primary-active-color;
@@ -31,6 +32,7 @@
   dividerColor: $--overlay-divider;
   borderColor: $--n-border-color;
   easeInOutCubicBezier: $--n-ease-in-out-cubic-bezier;
+  // unstable
   tableHeaderOverlayBackgroundColor: $--n-table-header-overlay-background-color;
   inputOverlayBackgroundColor: $--n-input-overlay-background-color;
 }

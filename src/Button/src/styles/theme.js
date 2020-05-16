@@ -1,132 +1,135 @@
+import lightScheme from '../../../_interoperation/lightStyleScheme.scss'
+import darkScheme from '../../../_interoperation/darkStyleScheme.scss'
+
 const light = {
   default: {
-    color: '#fff',
-    hoverColor: '#fff',
-    activeColor: '#fff',
-    focusColor: '#fff',
+    color: lightScheme.baseBackgroundColor,
+    hoverColor: lightScheme.baseBackgroundColor,
+    activeColor: lightScheme.baseBackgroundColor,
+    focusColor: lightScheme.baseBackgroundColor,
 
-    textColor: 'rgba(0, 0, 0, .72)',
-    hoverTextColor: '#36ad6a',
-    activeTextColor: '#0c7a43',
-    focusTextColor: '#36ad6a',
+    textColor: lightScheme.secondaryTextColor,
+    hoverTextColor: lightScheme.primaryHoverColor,
+    activeTextColor: lightScheme.primaryActiveColor,
+    focusTextColor: lightScheme.primaryHoverColor,
 
-    textTypedTextColor: 'rgba(0, 0, 0, .72)',
-    textTypedHoverTextColor: '#36ad6a',
-    textTypedActiveTextColor: '#0c7a43',
-    textTypedFocusTextColor: '#36ad6a',
+    textTypedTextColor: lightScheme.secondaryTextColor,
+    textTypedHoverTextColor: lightScheme.primaryHoverColor,
+    textTypedActiveTextColor: lightScheme.primaryActiveColor,
+    textTypedFocusTextColor: lightScheme.primaryHoverColor,
 
-    ghostTypedTextColor: 'rgba(0, 0, 0, .72)',
-    ghostTypedHoverTextColor: '#36ad6a',
-    ghostTypedActiveTextColor: '#0c7a43',
-    ghostTypedFocusTextColor: '#36ad6a',
+    ghostTypedTextColor: lightScheme.secondaryTextColor,
+    ghostTypedHoverTextColor: lightScheme.primaryHoverColor,
+    ghostTypedActiveTextColor: lightScheme.primaryActiveColor,
+    ghostTypedFocusTextColor: lightScheme.primaryHoverColor,
 
-    borderColor: '#d9d9d9',
-    hoverBorderColor: '#36ad6a',
-    activeBorderColor: '#0c7a43',
-    focusBorderColor: '#36ad6a',
+    borderColor: lightScheme.borderColor,
+    hoverBorderColor: lightScheme.primaryHoverColor,
+    activeBorderColor: lightScheme.primaryActiveColor,
+    focusBorderColor: lightScheme.primaryHoverColor,
 
-    rippleColor: '#18a058'
+    rippleColor: lightScheme.primaryColor
   },
   primary: {
-    color: '#18a058',
-    hoverColor: '#36ad6a',
-    activeColor: '#0c7a43',
-    focusColor: '#36ad6a',
-    textColor: '#fff'
+    color: lightScheme.primaryColor,
+    hoverColor: lightScheme.primaryHoverColor,
+    activeColor: lightScheme.primaryActiveColor,
+    focusColor: lightScheme.primaryHoverColor,
+    textColor: lightScheme.baseBackgroundColor
   },
   info: {
-    color: '#2080f0',
-    hoverColor: '#4098fc',
-    activeColor: '#1060c9',
-    focusColor: '#4098fc',
-    textColor: '#fff'
+    color: lightScheme.infoColor,
+    hoverColor: lightScheme.infoHoverColor,
+    activeColor: lightScheme.infoActiveColor,
+    focusColor: lightScheme.infoHoverColor,
+    textColor: lightScheme.baseBackgroundColor
   },
   success: {
-    color: '#18a058',
-    hoverColor: '#36ad6a',
-    activeColor: '#0c7a43',
-    focusColor: '#36ad6a',
-    textColor: '#fff'
+    color: lightScheme.successColor,
+    hoverColor: lightScheme.successHoverColor,
+    activeColor: lightScheme.successActiveColor,
+    focusColor: lightScheme.successHoverColor,
+    textColor: lightScheme.baseBackgroundColor
   },
   warning: {
-    color: '#f0a020',
-    hoverColor: '#fcb040',
-    activeColor: '#c97c10',
-    focusColor: '#fcb040',
-    textColor: '#fff'
+    color: lightScheme.warningColor,
+    hoverColor: lightScheme.warningHoverColor,
+    activeColor: lightScheme.warningActiveColor,
+    focusColor: lightScheme.warningHoverColor,
+    textColor: lightScheme.baseBackgroundColor
   },
   error: {
-    color: '#d03050',
-    hoverColor: '#de576d',
-    activeColor: '#ab1f3f',
-    focusColor: '#de576d',
-    textColor: '#fff'
+    color: lightScheme.errorColor,
+    hoverColor: lightScheme.errorHoverColor,
+    activeColor: lightScheme.errorActiveColor,
+    focusColor: lightScheme.errorHoverColor,
+    textColor: lightScheme.baseBackgroundColor
   }
 }
 
 const dark = {
   default: {
-    color: 'transparent',
-    hoverColor: 'transparent',
-    activeColor: 'transparent',
-    focusColor: 'transparent',
+    color: darkScheme.baseBackgroundColor,
+    hoverColor: darkScheme.baseBackgroundColor,
+    activeColor: darkScheme.baseBackgroundColor,
+    focusColor: darkScheme.baseBackgroundColor,
 
-    textColor: 'rgba(255, 255, 255, .84)',
-    hoverTextColor: '#7fe7c4',
-    activeTextColor: '#5acea7',
-    focusTextColor: '#7fe7c4',
+    textColor: darkScheme.secondaryTextColor,
+    hoverTextColor: darkScheme.primaryHoverColor,
+    activeTextColor: darkScheme.primaryActiveColor,
+    focusTextColor: darkScheme.primaryHoverColor,
 
-    textTypedTextColor: 'rgba(255, 255, 255, .84)',
-    textTypedHoverTextColor: '#7fe7c4',
-    textTypedActiveTextColor: '#5acea7',
-    textTypedFocusTextColor: '#7fe7c4',
+    textTypedTextColor: darkScheme.secondaryTextColor,
+    textTypedHoverTextColor: darkScheme.primaryHoverColor,
+    textTypedActiveTextColor: darkScheme.primaryActiveColor,
+    textTypedFocusTextColor: darkScheme.primaryHoverColor,
 
-    ghostTypedTextColor: 'rgba(255, 255, 255, .84)',
-    ghostTypedHoverTextColor: '#7fe7c4',
-    ghostTypedActiveTextColor: '#5acea7',
-    ghostTypedFocusTextColor: '#7fe7c4',
+    ghostTypedTextColor: darkScheme.secondaryTextColor,
+    ghostTypedHoverTextColor: darkScheme.primaryHoverColor,
+    ghostTypedActiveTextColor: darkScheme.primaryActiveColor,
+    ghostTypedFocusTextColor: darkScheme.primaryHoverColor,
 
-    borderColor: 'rgba(255, 255, 255, .24)',
-    hoverBorderColor: '#7fe7c4',
-    activeBorderColor: '#5acea7',
-    focusBorderColor: '#7fe7c4',
+    borderColor: darkScheme.borderColor,
+    hoverBorderColor: darkScheme.primaryHoverColor,
+    activeBorderColor: darkScheme.primaryActiveColor,
+    focusBorderColor: darkScheme.primaryHoverColor,
 
-    rippleColor: '#63e2b7'
+    rippleColor: darkScheme.primaryColor
   },
   primary: {
-    color: '#63e2b7',
-    hoverColor: '#7fe7c4',
-    activeColor: '#5acea7',
-    focusColor: '#7fe7c4',
-    textColor: '#000'
+    color: darkScheme.primaryColor,
+    hoverColor: darkScheme.primaryHoverColor,
+    activeColor: darkScheme.primaryActiveColor,
+    focusColor: darkScheme.primaryHoverColor,
+    textColor: darkScheme.baseBackgroundColor
   },
   info: {
-    color: '#70C0E8',
-    hoverColor: '#8acbec',
-    activeColor: '#66afd3',
-    focusColor: '#8acbec',
-    textColor: '#000'
+    color: darkScheme.infoColor,
+    hoverColor: darkScheme.infoHoverColor,
+    activeColor: darkScheme.infoActiveColor,
+    focusColor: darkScheme.infoHoverColor,
+    textColor: darkScheme.baseBackgroundColor
   },
   success: {
-    color: '#64e3b8',
-    hoverColor: '#7ee7c4',
-    activeColor: '#5acea7',
-    focusColor: '#7ee7c4',
-    textColor: '#000'
+    color: darkScheme.successColor,
+    hoverColor: darkScheme.successHoverColor,
+    activeColor: darkScheme.successActiveColor,
+    focusColor: darkScheme.successHoverColor,
+    textColor: darkScheme.baseBackgroundColor
   },
   warning: {
-    color: '#f2c97d',
-    hoverColor: '#f5d599',
-    activeColor: '#e6c260',
-    focusColor: '#f5d599',
-    textColor: '#000'
+    color: darkScheme.warningColor,
+    hoverColor: darkScheme.warningHoverColor,
+    activeColor: darkScheme.warningActiveColor,
+    focusColor: darkScheme.warningHoverColor,
+    textColor: darkScheme.baseBackgroundColor
   },
   error: {
-    color: '#e88080',
-    hoverColor: '#e98b8b',
-    activeColor: '#e57272',
-    focusColor: '#e98b8b',
-    textColor: '#000'
+    color: darkScheme.errorColor,
+    hoverColor: darkScheme.errorHoverColor,
+    activeColor: darkScheme.errorActiveColor,
+    focusColor: darkScheme.errorHoverColor,
+    textColor: darkScheme.baseBackgroundColor
   }
 }
 
