@@ -6,7 +6,7 @@ const postcssConfig = require('../postcss.config')
 const ncp = require('ncp')
 
 const styleFiles = fs
-  .readdirSync(path.resolve(__dirname, '../styles'))
+  .readdirSync(path.resolve(__dirname, '../src/_styles'))
   .filter(fileName => fileName.endsWith('.scss'))
 
 function createDirIfNotExists (...args) {
@@ -24,7 +24,7 @@ createDirIfNotExists(__dirname, '../es', 'styles', 'resources')
 
 styleFiles.forEach(fileName => {
   sass.render({
-    file: path.resolve(__dirname, '../styles', fileName),
+    file: path.resolve(__dirname, '../src/_styles', fileName),
     outputStyle: 'expanded'
   }, function (err, sassResult) {
     if (err) console.error(err)
@@ -52,6 +52,11 @@ styleFiles.forEach(fileName => {
 })
 
 ncp(
-  path.resolve(__dirname, '../styles/resources'),
+  path.resolve(__dirname, '../src/_styles/resources'),
   path.resolve(__dirname, '../lib/styles/resources')
+)
+
+ncp(
+  path.resolve(__dirname, '../src/_styles/resources'),
+  path.resolve(__dirname, '../es/styles/resources')
 )

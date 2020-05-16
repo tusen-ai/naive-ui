@@ -4,7 +4,7 @@ import debugRouteMixin from './routes/debugRouteMixin'
 import hljs from './hljs'
 import demoRouterView from './demoRouterView'
 import NaiveUI from '../src/index'
-import '../styles/index.scss'
+import '../src/_styles/index.scss'
 import { routes, childRoutes } from './routes/routes'
 import createRouter from './routes/router'
 

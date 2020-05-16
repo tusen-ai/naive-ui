@@ -1,5 +1,5 @@
-@import '../../styles/themes/light/index.scss';
-@import '../../styles/themes/common.scss';
+@import '../_styles/themes/light/index.scss';
+@import '../_styles/themes/common.scss';
 
 @include setup-light-theme($in-js-env: true);
 

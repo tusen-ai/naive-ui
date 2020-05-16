@@ -1,5 +1,5 @@
-import lightScheme from '../../../_interoperation/lightStyleScheme.scss'
-import darkScheme from '../../../_interoperation/darkStyleScheme.scss'
+import lightScheme from '../../../_styles-in-js/lightStyleScheme.scss'
+import darkScheme from '../../../_styles-in-js/darkStyleScheme.scss'
 
 const light = {
   default: {
@@ -69,10 +69,10 @@ const light = {
 
 const dark = {
   default: {
-    color: darkScheme.baseBackgroundColor,
-    hoverColor: darkScheme.baseBackgroundColor,
-    activeColor: darkScheme.baseBackgroundColor,
-    focusColor: darkScheme.baseBackgroundColor,
+    color: 'transparent',
+    hoverColor: 'transparent',
+    activeColor: 'transparent',
+    focusColor: 'transparent',
 
     textColor: darkScheme.secondaryTextColor,
     hoverTextColor: darkScheme.primaryHoverColor,
