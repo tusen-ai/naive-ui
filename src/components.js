@@ -210,6 +210,12 @@ const exportedComponents = {
       '[]Icon'
     ]
   },
+  DynamicInput: {
+    styles: [
+      '[]Button',
+      '[]Input'
+    ]
+  },
   Element: {
     styles: []
   },

@@ -18,8 +18,13 @@
 </template>
 
 <script>
+import NInput from '../../Input'
+
 export default {
   name: 'NDynamicInputPairPreset',
+  components: {
+    NInput
+  },
   inject: {
     NDynamicInput: {
       default: null
