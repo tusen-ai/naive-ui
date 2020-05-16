@@ -9,7 +9,8 @@
     :class="{
       'n-button--round': round,
       'n-button--circle': circle,
-      [`n-button--${colorHash || type}-type`]: true,
+      [`n-button--${colorHash || type}-colored`]: true,
+      [`n-button--${type}-type`]: true,
       [`n-button--${syntheticSize}-size`]: true,
       'n-button--disabled': disabled,
       'n-button--loading': loading,
@@ -122,12 +123,23 @@ import themeable from '../../_mixins/themeable'
 import NIcon from '../../Icon'
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 import { read, composite, hash } from '../../_utils/color'
-import { createColorStyle } from './Button.cssr.js'
+import { createColorStyle } from './styles/Button.cssr.js'
+import { createThemedStyle } from '../../_utils/cssr'
+import theme from './styles/theme'
 
-let colorStyle = null
+const colorStyle = createColorStyle()
+const typeStyle = createThemedStyle(colorStyle, theme)
+
+function mountTypeStyle (type) {
+  typeStyle.mount({
+    target: 'n-button-' + type + '-style',
+    props: {
+      type
+    }
+  })
+}
 
 function mountColorStyle (color, colorHash) {
-  if (!colorStyle) colorStyle = createColorStyle()
   const textColor = null
   const rgb = read(color)
   const digest = hash(rgb)
@@ -137,12 +149,14 @@ function mountColorStyle (color, colorHash) {
   colorStyle.mount({
     target: 'n-button-' + digest,
     props: {
-      color,
-      hoverColor,
-      activeColor,
-      focusColor,
-      textColor,
-      digest
+      digest,
+      pallete: {
+        color,
+        hoverColor,
+        activeColor,
+        focusColor,
+        textColor
+      }
     }
   })
 }
@@ -297,6 +311,9 @@ export default {
     },
     color (value) {
       mountColorStyle(value)
+    },
+    type (value) {
+      mountTypeStyle(value)
     }
   },
   created () {
@@ -304,6 +321,7 @@ export default {
     if (color) {
       mountColorStyle(color)
     }
+    mountTypeStyle(this.type)
   },
   beforeDestroy () {
     const colorHash = this.colorHash
