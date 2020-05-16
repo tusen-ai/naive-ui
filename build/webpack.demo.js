@@ -6,10 +6,10 @@ const webpack = require('webpack')
 const config = require('./config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const env = process.env.NODE_ENV
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const webpackConfig = {
-  mode: env === 'production' ? 'production' : 'development',
+  mode: 'production',
   entry: './demo/deploymentIndex.js',
   output: {
     path: path.resolve(process.cwd()),
@@ -26,7 +26,8 @@ const webpackConfig = {
     host: '0.0.0.0',
     port: 8087,
     publicPath: '/',
-    hot: true
+    hot: false,
+    historyApiFallback: true
   },
   performance: {
     hints: false
@@ -49,6 +50,11 @@ const webpackConfig = {
           preserveWhitespace: false
         }
       }
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+      ignoreOrder: false
     })
   ]
 }
