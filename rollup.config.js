@@ -41,13 +41,13 @@ module.exports = {
     })
   ],
   external: externalValidator([
-    'vue-runtime-helpers',
-    'date-fns',
     'async-validator',
-    'vue-virtual-scroller',
+    'css-render',
+    'date-fns',
     'lodash-es',
     'resize-observer-polyfill',
-    'css-render',
+    'vue-runtime-helpers',
+    'vue-virtual-scroller',
     '@css-render/plugin-bem'
   ])
 }
