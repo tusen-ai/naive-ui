@@ -1,4 +1,11 @@
 # CHANGELOG
+## 1.1.0 (2020-05-16)
+### Features
+- `n-button` 接受自定义颜色
+### Refactor
+- 将内部所有使用 $slots 的地方换为 $scopedSlots 来获得更好的鲁棒性
+- 将部分按钮样式生成转移到组件内动态进行
+
 ## 1.0.14 (2020-05-15)
 ### Fixes
 - 修正了 `line` 型 `n-tabs` 线不随 `activeName` 属性改变的问题

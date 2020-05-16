@@ -1,4 +1,11 @@
 # CHANGELOG
+## 1.1.0 (2020-05-16)
+### Features
+- `n-button` now accepts custom color.
+### Refactor
+- Replace all $slots by $scopedSlots for better robustness.
+- Move some static button styles inside button component to create dynamically.
+
 ## 1.0.14 (2020-05-15)
 ### Fixes
 - Fix the problem that `line` typed `n-tabs`'s line position stays still when `activeName` changes.
