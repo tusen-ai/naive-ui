@@ -56,7 +56,7 @@
       </div>
       <div style="display: flex;">
         <n-tag class="nav-picker" @click.native="handleThemeChange">
-          {{ themeOptions[theme].label }}
+          {{ $t(themeOptions[theme].label) }}
         </n-tag>
         <n-tag class="nav-picker" @click.native="handleLanguageChange">
           {{ langOptions[lang].label }}
@@ -108,11 +108,11 @@ export default {
       state: state,
       themeOptions: {
         dark: {
-          label: 'Light',
+          label: 'light',
           next: 'light'
         },
         light: {
-          label: 'Dark',
+          label: 'dark',
           next: 'dark'
         }
       },
