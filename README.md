@@ -4,7 +4,7 @@
 
 <h1 align="center">Naive UI</h1>
 <p align="center">A Vue UI Framework</p>
-<p align="center"><b>Caring About Styles, Themed, Batteries Included</b></p>
+<p align="center"><b>Caring About Styles, Themed, Batteries Included, Not Rather Slow</b></p>
 <p align="center">Interesting Somehow</p>
 
 ## Documentation

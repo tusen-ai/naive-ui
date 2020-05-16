@@ -50,7 +50,7 @@ import NCascaderOption from './CascaderOption.vue'
 import NScrollbar from '../../Scrollbar'
 import NBaseTrackingRect from '../../_base/TrackingRect'
 import debounce from 'lodash-es/debounce'
-import { itemSize } from '../../_interoperation/common'
+import { itemSize } from '../../_styles-in-js/common'
 
 export default {
   name: 'NCascaderSubmenu',

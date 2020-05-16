@@ -199,7 +199,7 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import { RecycleScroller } from 'vue-virtual-scroller'
 import debounce from 'lodash-es/debounce'
-import { itemSize } from '../../_interoperation/common'
+import { itemSize } from '../../_styles-in-js/common'
 
 export default {
   name: 'NTransfer',

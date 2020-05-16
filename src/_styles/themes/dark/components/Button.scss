@@ -1,0 +1,3 @@
+@mixin setup-dark-button {
+  $--button-disabled-opacity: $--n-disabled-opacity !global;
+}

@@ -46,6 +46,8 @@ module.exports = {
     'async-validator',
     'vue-virtual-scroller',
     'lodash-es',
-    'resize-observer-polyfill'
+    'resize-observer-polyfill',
+    'css-render',
+    '@css-render/plugin-bem'
   ])
 }

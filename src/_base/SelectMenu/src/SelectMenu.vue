@@ -120,7 +120,7 @@ import {
   OPTION_TYPE
 } from '../../../_utils/component/select'
 import formatLength from '../../../_utils/css/formatLength'
-import { itemSize } from '../../../_interoperation/common.js'
+import { itemSize } from '../../../_styles-in-js/common.js'
 
 export default {
   name: 'NBaseSelectMenu',

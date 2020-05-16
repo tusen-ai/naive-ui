@@ -3,7 +3,7 @@
 This component's name has been changed many times.
 
 In the beginning, it was created for inputing environment variables.
-## 演示
+## Demos
 ```demo
 basic
 pair

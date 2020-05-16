@@ -78,171 +78,7 @@
   }
 }
 
-@mixin button-icon-mixin($color) {
-  @include e(icon) {
-    @include b(icon) {
-      fill: $color;
-      stroke: $color;
-    }
-    @include b(base-loading) {
-      fill: $color;
-      stroke: $color;
-    }
-  }
-}
-
-@mixin button-type-mixin-content ($type) {
-  color: map-get($--button-text-color, $type);
-  background-color: map-get($--button-background-color, $type);
-  border: 1px solid map-get($--button-border-color, $type);
-  @include button-icon-mixin(map-get($--button-text-color, $type));
-  @include not-m(disabled) {
-    @include m(enter-pressed) {
-      background-color: map-get($--button-background-color, $type + '-active');
-      color: map-get($--button-text-color, $type + '-active');
-      @include e(border-mask) {
-        box-shadow: map-get($--button-border-mask-box-shadow, $type + '-active');
-      }
-      @include button-icon-mixin(map-get($--button-text-color, $type + '-active'));
-    }
-    @include not-m(enter-pressed) {
-      &:hover {
-        background-color: map-get($--button-background-color, $type + '-hover');
-        color: map-get($--button-text-color, $type + '-hover');
-        @include e(border-mask) {
-          box-shadow: map-get($--button-border-mask-box-shadow, $type + '-hover');
-        }
-        @include button-icon-mixin(map-get($--button-text-color, $type + '-hover'));
-      }
-      &:active {
-        background-color: map-get($--button-background-color, $type + '-active');
-        color: map-get($--button-text-color, $type + '-active');
-        @include e(border-mask) {
-          box-shadow: map-get($--button-border-mask-box-shadow, $type + '-active');
-        }
-        @include button-icon-mixin(map-get($--button-text-color, $type + '-active'));
-      }
-    }
-    &:not(:active):focus {
-      @include not-m(enter-pressed) {
-        background-color: map-get($--button-background-color, $type + '-focus');
-        color: map-get($--button-text-color, $type + '-focus');
-        @include e(border-mask) {
-          box-shadow: map-get($--button-border-mask-box-shadow, $type + '-focus');
-        }
-        @include button-icon-mixin(map-get($--button-text-color, $type + '-focus'));
-      } 
-    }
-    @include m(rippling) {
-      &::after {
-        animation-name: #{$theme}-#{$type}-button-ripple--spread, #{$theme}-#{$type}-button-ripple--opacity;
-      }
-    }
-  }
-  @include m(ghost) {
-    background-color: map-get($--button-ghost-typed-background-color, $type);
-    color: map-get($--button-ghost-typed-text-color, $type);
-    border: 1px solid map-get($--button-ghost-typed-border-color, $type);
-    @include button-icon-mixin(map-get($--button-ghost-typed-text-color, $type));
-    @include not-m(disabled) {
-      @include m(enter-pressed) {
-        background-color: map-get($--button-ghost-typed-background-color, $type + '-active');
-        color: map-get($--button-ghost-typed-text-color, $type + '-active');
-        @include e(border-mask) {
-          box-shadow: map-get($--button-ghost-typed-border-mask-box-shadow, $type + '-active');
-        }
-        @include button-icon-mixin(map-get($--button-ghost-typed-text-color, $type + '-active'));
-      }
-      &:not(:active):focus {
-        @include not-m(enter-pressed) {
-          color: map-get($--button-ghost-typed-text-color, $type + '-focus');
-          background-color: map-get($--button-ghost-typed-background-color, $type + '-focus');
-          @include e(border-mask) {
-            box-shadow: map-get($--button-ghost-typed-border-mask-box-shadow, $type + '-focus');
-          }
-          @include button-icon-mixin(map-get($--button-ghost-typed-text-color, $type + '-focus'));
-        } 
-      }
-      @include not-m(enter-pressed) {
-        &:hover {
-          background-color: map-get($--button-ghost-typed-background-color, $type + '-hover');
-          color: map-get($--button-ghost-typed-text-color, $type + '-hover');
-          @include e(border-mask) {
-            box-shadow: map-get($--button-ghost-typed-border-mask-box-shadow, $type + '-hover');
-          }
-          @include button-icon-mixin(map-get($--button-ghost-typed-text-color, $type + '-hover'));
-        }
-        &:active {
-          background-color: map-get($--button-ghost-typed-background-color, $type + '-active');
-          color: map-get($--button-ghost-typed-text-color, $type + '-active');
-          @include e(border-mask) {
-            box-shadow: map-get($--button-ghost-typed-border-mask-box-shadow, $type + '-active');
-          }
-          @include button-icon-mixin(map-get($--button-ghost-typed-text-color, $type + '-active'));
-        }
-      }
-    }
-  }
-  @include m(text) {
-    color: map-get($--button-text-typed-text-color, $type);
-    @include button-icon-mixin(map-get($--button-ghost-typed-text-color, $type));
-    @include not-m(disabled) {
-      @include m(enter-pressed) {
-        color: map-get($--button-text-typed-text-color, $type + '-active');
-        @include button-icon-mixin(map-get($--button-ghost-typed-text-color, $type + '-active'));
-      }
-      &:not(:active):focus {
-        @include not-m(enter-pressed) {
-          color: map-get($--button-text-typed-text-color, $type + '-focus');
-          @include button-icon-mixin(map-get($--button-ghost-typed-text-color, $type + '-focus'));
-        } 
-      }
-      @include not-m(enter-pressed) {
-        &:hover {
-          color: map-get($--button-text-typed-text-color, $type + '-hover');
-          @include button-icon-mixin(map-get($--button-ghost-typed-text-color, $type + '-hover'));
-        }
-        &:active {
-          color: map-get($--button-text-typed-text-color, $type + '-active');
-          @include button-icon-mixin(map-get($--button-ghost-typed-text-color, $type + '-active'));
-        }
-      }
-    }
-  }
-}
-
-@mixin button-type-mixin ($type) {
-  @include m($type + '-type') {
-    @include button-type-mixin-content($type);
-  }
-}
-
-@mixin button-ripple-mixin($type) {
-  @keyframes #{$theme}-#{$type}-button-ripple--spread {
-    from {
-      box-shadow: map-get($--button-ripple-box-shadow, $type + '-start');
-    }
-    to {
-      box-shadow: map-get($--button-ripple-box-shadow, $type + '-end');
-    }
-  }
-  @keyframes #{$theme}-#{$type}-button-ripple--opacity {
-    from {
-      opacity: .4;
-    }
-    to {
-      opacity: 0;
-    }
-  }
-}
-
 @include themes-mixin {
-  @include button-ripple-mixin('default');
-  @include button-ripple-mixin('primary');
-  @include button-ripple-mixin('error');
-  @include button-ripple-mixin('success');
-  @include button-ripple-mixin('warning');
-  @include button-ripple-mixin('info');
   @include b(button) {
     @include once {
       box-sizing: border-box;
@@ -339,12 +175,6 @@
     @include m(disabled) {
       opacity: $--button-disabled-opacity;
     }
-    @include button-type-mixin-content('default');
-    @include button-type-mixin('primary');
-    @include button-type-mixin('info');
-    @include button-type-mixin('success');
-    @include button-type-mixin('warning');
-    @include button-type-mixin('error');
   }
 }
 
@@ -368,8 +198,8 @@
       }
       &:last-child:not(:first-child) {
         margin-left: 0!important;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
+        border-top-left-radius: 0!important;
+        border-bottom-left-radius: 0!important;
       }
       &:not(:first-child):not(:last-child) {
         margin-left: 0!important;
@@ -384,7 +214,7 @@
         & + {
           @include b(button) {
             @include m(default-type) {
-              border-left-width: 0px;
+              border-left-width: 0px!important;
             }
           }
         }
@@ -394,7 +224,7 @@
           & + {
             @include b(button) {
               @include m(primary-type) {
-                border-left-width: 0px;
+                border-left-width: 0px!important;
               }
             }
           }
@@ -403,7 +233,7 @@
           & + {
             @include b(button) {
               @include m(success-type) {
-                border-left-width: 0px;
+                border-left-width: 0px!important;
               }
             }
           }
@@ -412,7 +242,7 @@
           & + {
             @include b(button) {
               @include m(error-type) {
-                border-left-width: 0px;
+                border-left-width: 0px!important;
               }
             }
           }
@@ -421,7 +251,7 @@
           & + {
             @include b(button) {
               @include m(info-type) {
-                border-left-width: 0px;
+                border-left-width: 0px!important;
               }
             }
           }
@@ -430,7 +260,7 @@
           & + {
             @include b(button) {
               @include m(info-type) {
-                border-left-width: 0px;
+                border-left-width: 0px!important;
               }
             }
           }
@@ -446,15 +276,15 @@
         margin-bottom: 0!important;
         margin-left: 0!important;
         margin-right: 0!important;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0!important;
+        border-bottom-right-radius: 0!important;
       }
       &:last-child:not(:first-child) {
         margin-top: 0!important;
         margin-left: 0!important;
         margin-right: 0!important;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
+        border-top-left-radius: 0!important;
+        border-top-right-radius: 0!important;
       }
       &:not(:first-child):not(:last-child) {
         margin: 0!important;
@@ -464,7 +294,7 @@
         & + {
           @include b(button) {
             @include m(default-type) {
-              border-top-width: 0px;
+              border-top-width: 0px!important;
             }
           }
         }
@@ -474,7 +304,7 @@
           & + {
             @include b(button) {
               @include m(info-type) {
-                border-top-width: 0px;
+                border-top-width: 0px!important;
               }
             }
           }
@@ -483,7 +313,7 @@
           & + {
             @include b(button) {
               @include m(success-type) {
-                border-top-width: 0px;
+                border-top-width: 0px!important;
               }
             }
           }
@@ -492,7 +322,7 @@
           & + {
             @include b(button) {
               @include m(warning-type) {
-                border-top-width: 0px;
+                border-top-width: 0px!important;
               }
             }
           }
@@ -501,7 +331,7 @@
           & + {
             @include b(button) {
               @include m(error-type) {
-                border-top-width: 0px;
+                border-top-width: 0px!important;
               }
             }
           }
@@ -510,7 +340,7 @@
           & + {
             @include b(button) {
               @include m(primary-type) {
-                border-top-width: 0px;
+                border-top-width: 0px!important;
               }
             }
           }
