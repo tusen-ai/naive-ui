@@ -3,14 +3,14 @@
   "zh-CN": {
     "start": "开始使用",
     "intro1": "一个 Vue UI 框架",
-    "intro2": "在意样式，带主题，比较完整",
+    "intro2": "在意样式，带主题，比较完整，不算太慢",
     "intro3": "有点意思",
     "intro4": "换个主题"
   },
   "en-US": {
     "start": "Get Started",
     "intro1": "A Vue UI Framework",
-    "intro2": "Caring About Styles, Themed, Batteries Included",
+    "intro2": "Caring About Styles, Themed, Batteries Included, Not Rather Slow",
     "intro3": "Interesting Somehow",
     "intro4": "Change Theme"
   }
