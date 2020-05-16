@@ -40,6 +40,7 @@
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.4",
     "@babel/preset-env": "^7.8.4",
+    "@css-render/plugin-bem": "^0.7.5",
     "@kazupon/vue-i18n-loader": "^0.4.1",
     "@rollup/plugin-node-resolve": "^6.1.0",
     "@rollup/plugin-strip": "^1.3.2",
@@ -62,6 +63,7 @@
     "cors": "^2.8.5",
     "cross-env": "^5.2.1",
     "css-loader": "^2.1.1",
+    "css-render": "^0.7.5",
     "cssnano": "^4.1.10",
     "emoji-regex": "^8.0.0",
     "emoji-unicode": "^1.1.0",
@@ -120,9 +122,7 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
-    "@css-render/plugin-bem": "^0.7.3",
     "async-validator": "^1.11.5",
-    "css-render": "^0.7.3",
     "date-fns": "^2.9.0",
     "highlight.js": "^9.18.1",
     "lodash-es": "^4.17.15",

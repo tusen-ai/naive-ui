@@ -1,6 +1,5 @@
 # 形状
 按钮拥有不同的形状。
-Button has different shapes.
 ```html
 <n-button circle>
   <template v-slot:icon>
