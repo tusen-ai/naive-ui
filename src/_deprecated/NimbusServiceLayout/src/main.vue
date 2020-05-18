@@ -213,7 +213,7 @@ export default {
             staticStyle: {
               alignItems: 'center',
               height: '64px',
-              paddingLeft: '32px',
+              paddingLeft: '36px',
               fontSize: '16px',
               fontWeight: '500',
               display: 'flex',
@@ -231,7 +231,7 @@ export default {
                       props: { size: 20 },
                       staticStyle: {
                         position: 'absolute',
-                        left: '6px',
+                        left: '10px',
                         top: '50%',
                         transform: 'translateY(-50%)'
                       },
@@ -247,7 +247,7 @@ export default {
           this.name ? h('n-divider', {
             staticStyle: {
               margin: '0',
-              padding: '0 24px 0 6px'
+              padding: '0 20px 0 4px'
             }
           }) : null,
           h(SiderMenu)]
