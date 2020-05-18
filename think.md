@@ -137,6 +137,24 @@ zindex 的问题解决了，虽然很简单，在 static 元素上设定 zindex 
 ## 2020.3.25
 一个有趣的事情是，blur 到 document.body 之后，document.activeElement 是 body，但是 blurEvent.relatedTarget 会被设为 null
 
+## 2020.5.18
+rerender 报警了
+```
+h('NLayout', {
+  ref: 'body',
+  style: { ...this.contentStyle },
+  props: {
+    'use-native-scrollbar': false,
+    'scroll-content-style': {
+      width: '100%',
+      boxSizing: 'border-box',
+      padding: this.paddingBody ? '21px 48px' : null
+    }
+  }
+}, null)
+```
+一个是computed导致重复渲染，还有一个是 getScrollParent 缓存的问题
+
 ## TODO 排序不分先后
 1. <del>Focus Detector on Time Selector</del>
 2. <del>Menu Root Indent = 0 可能造成问题</del>

@@ -1,8 +1,18 @@
 # CHANGELOG
+## 1.1.1 (2020-05-18)
+### Fixes
+- Update css-render dependencies.
+- Color of default typed button icon.
+### Performance Imporvements
+- Reduce useless re-renders of `n-menu-item`.
+- Reduce useless re-renders of doc page.
+### Refactors
+- Refactor the codes of `n-nimbus-service-layout` for performance reason, may be there will be some bugs.
+
 ## 1.1.0 (2020-05-16)
 ### Features
 - `n-button` now accepts custom color.
-### Refactor
+### Refactors
 - Replace all $slots by $scopedSlots for better robustness.
 - Move some static button styles inside button component to create dynamically.
 

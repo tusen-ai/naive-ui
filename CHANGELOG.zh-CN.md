@@ -1,8 +1,18 @@
 # CHANGELOG
+## 1.1.1 (2020-05-18)
+### Fixes
+- 更新 css-render 的依赖
+- 默认类型的按钮的 icon 的颜色
+### Performance Imporvements
+- 减少了 `n-menu-item` 没用的重复渲染
+- 减少了文档页面没用的重复渲染
+### Refactors
+- 为了性能重构了 `n-nimbus-service-layout` 的部分代码
+
 ## 1.1.0 (2020-05-16)
 ### Features
 - `n-button` 接受自定义颜色
-### Refactor
+### Refactors
 - 将内部所有使用 $slots 的地方换为 $scopedSlots 来获得更好的鲁棒性
 - 将部分按钮样式生成转移到组件内动态进行
 
