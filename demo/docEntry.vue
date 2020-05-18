@@ -3,12 +3,8 @@
     ref="layout"
     :padding-body="false"
     :items="items"
-    :sider-style="{
-      height: 'calc(100vh - 64px)',
-    }"
-    :content-style="{
-      height: 'calc(100vh - 64px)',
-    }"
+    :sider-style="siderStyle"
+    :content-style="contentStyle"
   >
     <router-view />
     <landing-footer style="padding: 32px 204px 16px 56px; text-align: left; font-size: 14px;" />
@@ -38,7 +34,13 @@ export default {
   },
   data () {
     return {
-      memorizedPath: null
+      memorizedPath: null,
+      siderStyle: {
+        height: 'calc(100vh - 64px)'
+      },
+      contentStyle: {
+        height: 'calc(100vh - 64px)'
+      }
     }
   },
   computed: {

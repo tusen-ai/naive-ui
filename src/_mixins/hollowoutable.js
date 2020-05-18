@@ -158,6 +158,7 @@ export default {
     cache()
     this.updateHollowOutAffect()
     this.$nextTick().then(() => {
+      void this.$el.offsetHeight
       this.hollowOutColorTransitionDisabled = false
       uncache()
     })

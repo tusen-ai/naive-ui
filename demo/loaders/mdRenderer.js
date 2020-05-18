@@ -5,6 +5,7 @@ function createRenderer (wrapCodeWithCard = true) {
   const renderer = new marked.Renderer()
   const overrides = {
     table (header, body) {
+      // console.log('renderer', header, body)
       if (body) body = '<tbody class="n-table__tbody">' + body + '</tbody>'
       return '<n-table single-column>\n' +
         '<thead class="n-table__thead">\n' +
@@ -15,10 +16,12 @@ function createRenderer (wrapCodeWithCard = true) {
     },
 
     tablerow (content) {
+      // console.log('tablerow', content)
       return '<tr class="n-table__tr">\n' + content + '</tr>\n'
     },
 
     tablecell (content, flags) {
+      // console.log('tablecell', content, flags)
       const type = flags.header ? 'th' : 'td'
       const tag = flags.align
         ? '<' + type + ` class="n-table__${type}"` + ' align="' + flags.align + '">'
@@ -27,6 +30,7 @@ function createRenderer (wrapCodeWithCard = true) {
     },
 
     code: (code, language) => {
+      // console.log('code', code, language)
       const isLanguageValid = !!(language && hljs.getLanguage(language))
       if (!isLanguageValid) {
         throw new Error(`MdRendererError: ${language} is not valid for code`)

@@ -18,6 +18,7 @@ function template (demos, demosLiteral, isSingleColumn = false) {
 }
 
 function parseDemos (demosLiteral, env) {
+  // console.log('parseDemos', demosLiteral, env)
   const demoNames = demosLiteral
     .split('\n')
     .map(demoName => demoName.trim())

@@ -6,6 +6,7 @@
 basic
 size
 vertical
+content
 ```
 
 ## Props
@@ -23,7 +24,7 @@ vertical
 |-|-|-|-|
 |title|`string`|`null`||
 |description|`string`|`null`||
-|content|`string`|`null`||
+|content|`function`|`null`|`当content和description 同时存在时, 优先使用content, 并会省略descriptions`||
 |status|`'process' \| 'finish' \| 'error' \| 'wait'`|`'process'`||
 
 ## Slots
