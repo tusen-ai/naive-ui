@@ -296,12 +296,11 @@ export default {
       resizeDelegate.registerHandler(this.updatePosition)
     },
     registerScrollListeners () {
-      let currentElement = getParentNode(this._getTrackedElement())
+      let currentElement = this._getTrackedElement()
       while (true) {
         currentElement = getScrollParent(currentElement)
         if (currentElement === null) break
         this.scrollListeners.push([currentElement, this.updatePosition])
-        currentElement = getParentNode(currentElement)
       }
       for (const [el, handler] of this.scrollListeners) {
         scrollDelegate.registerHandler(el, handler)
