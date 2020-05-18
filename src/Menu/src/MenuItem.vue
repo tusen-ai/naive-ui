@@ -57,6 +57,7 @@
 import collectable from '../../_mixins/collectable'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import staputed from '../../_mixins/staputed'
 import NMenuItemContent from './MenuItemContent'
 import NTooltip from '../../Tooltip'
 import menuContentMixin from './menuContentMixin'
@@ -73,6 +74,19 @@ export default {
       if (injectedNMenu !== injectedNSubmenu.NMenu) {
         if (injectedNSubmenu.rootMenuIsHorizontal) return false
         return true
+      }
+    }),
+    staputed({
+      selected: {
+        get () {
+          if (this.rootMenuValue === this.name) {
+            return true
+          } else {
+            return false
+          }
+        },
+        deps: ['rootMenuValue'],
+        default: false
       }
     }),
     withapp,
@@ -106,13 +120,6 @@ export default {
     syntheticDisabled () {
       if (this.disabled !== undefined) return this.disabled
       return this.PenetratedNSubmenu && this.PenetratedNSubmenu.syntheticDisabled
-    },
-    selected () {
-      if (this.rootMenuValue === this.name) {
-        return true
-      } else {
-        return false
-      }
     }
   },
   watch: {
@@ -121,6 +128,9 @@ export default {
         this.delayedPaddingLeft = value
       })
     }
+  },
+  beforeUpdate () {
+    console.log('menu item before update')
   },
   created () {
     this.delayedPaddingLeft = this.paddingLeft
