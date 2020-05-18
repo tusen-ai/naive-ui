@@ -301,7 +301,10 @@ export default {
     if (colorHash) {
       unmountColorStyle(colorHash)
     }
-    window.clearTimeout(this.rippleTimer)
+    const rippleTimer = this.rippleTimer
+    if (rippleTimer !== null) {
+      window.clearTimeout(rippleTimer)
+    }
   },
   methods: {
     handleMouseDown (e) {
