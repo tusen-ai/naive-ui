@@ -24,11 +24,27 @@ import DocHeader from './header.vue'
 import menuOptions from './menuOptions'
 import { i18n } from './init'
 import { state } from './store'
+import staputed from '../src/_mixins/staputed'
 
 export default {
   components: {
     DocHeader
   },
+  mixins: [
+    staputed({
+      menuGenerationOptions: {
+        get () {
+          return {
+            theme: this.theme,
+            lang: this.lang,
+            mode: this.mode
+          }
+        },
+        deps: ['theme', 'lang', 'mode'],
+        default: null
+      }
+    })
+  ],
   provide () {
     return {
       NEntry: this
@@ -55,7 +71,7 @@ export default {
       return process.env.NODE_ENV
     },
     items () {
-      return menuOptions(this.lang, this)
+      return menuOptions(this.menuGenerationOptions)
     },
     flattenedItems () {
       const flattenedItems = []

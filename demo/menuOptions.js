@@ -46,8 +46,8 @@ const appendDebugDemos = (item, mode) => {
   } else return []
 }
 
-export default function (locale, instance) {
-  if (locale === 'zh-CN') {
+export default function (instance) {
+  if (instance.lang === 'zh-CN') {
     return [
       {
         name: 'Naive UI',

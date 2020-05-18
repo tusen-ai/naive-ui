@@ -62,6 +62,7 @@ export function createColorStyle () {
           cM(`${digest}-colored`, createBasicColorProps(
             pallete.textColor, pallete.color, pallete.borderColor || pallete.color
           ), [
+            createIconColorStyle(pallete.textColor),
             cNotM('disabled', [
               cM(
                 'enter-pressed',

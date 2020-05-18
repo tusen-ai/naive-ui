@@ -29,9 +29,19 @@
     @keyup.enter="handleKeyUpEnter"
     @keydown.enter="handleKeyDownEnter"
   >
+    <div
+      v-if="!circle && $scopedSlots.default && iconOnRight"
+      class="n-button__content"
+      :style="{
+        transition: hollowOutColorTransitionDisabled ? 'none' : null,
+        color: hollowText ? ascendantBackgroundColor : null
+      }"
+    >
+      <slot />
+    </div>
     <n-fade-in-height-expand-transition width>
       <div
-        v-if="(hasIcon || loading) && !iconOnRight"
+        v-if="(hasIcon || loading)"
         class="n-button__icon"
         :class="{ 'n-button__icon--slot': $scopedSlots.icon }"
       >
@@ -65,7 +75,7 @@
       </div>
     </n-fade-in-height-expand-transition>
     <div
-      v-if="!circle && $scopedSlots.default"
+      v-if="!circle && $scopedSlots.default && !iconOnRight"
       class="n-button__content"
       :style="{
         transition: hollowOutColorTransitionDisabled ? 'none' : null,
@@ -74,42 +84,6 @@
     >
       <slot />
     </div>
-    <n-fade-in-height-expand-transition width>
-      <div
-        v-if="(loading || hasIcon) && iconOnRight"
-        class="n-button__icon"
-        :class="{
-          'n-button__icon--slot': $scopedSlots.icon
-        }"
-      >
-        <n-icon-switch-transition>
-          <n-base-loading
-            v-if="loading"
-            key="loading"
-            :theme="syntheticTheme"
-            :style="{
-              transition: hollowOutColorTransitionDisabled ? 'none' : null
-            }"
-            :stroke="hollowText ? ascendantBackgroundColor : null"
-            :stroke-width="24"
-          />
-          <n-icon
-            v-else
-            key="icon"
-            class="n-icon-slot"
-            :style="{
-              transition: hollowOutColorTransitionDisabled ? 'none' : null,
-              fill: hollowText ? ascendantBackgroundColor : null,
-              stroke: hollowText ? ascendantBackgroundColor : null
-            }"
-          >
-            <slot
-              name="icon"
-            />
-          </n-icon>
-        </n-icon-switch-transition>
-      </div>
-    </n-fade-in-height-expand-transition>
     <div class="n-button__border-mask" />
   </button>
 </template>
@@ -164,7 +138,7 @@ function mountColorStyle (color, colorHash) {
 function unmountColorStyle (colorHash) {
   colorStyle.unmount({
     target: 'n-button-' + colorHash,
-    delay: 1000
+    delay: 3000
   })
 }
 
@@ -237,7 +211,6 @@ export default {
         return [
           'default',
           'primary',
-          'link',
           'info',
           'success',
           'warning',
@@ -252,8 +225,8 @@ export default {
     },
     iconPlacement: {
       default: 'left',
-      validator (iconPlacement) {
-        return ['left', 'right'].includes(iconPlacement)
+      validator (value) {
+        return ['left', 'right'].includes(value)
       }
     }
   },
@@ -348,7 +321,7 @@ export default {
           this.rippleTimer = null
           this.rippling = false
           this.$nextTick().then(() => {
-            this.$el.getBoundingClientRect()
+            void this.$el.offsetHeight
             this.rippling = true
             this.rippleTimer = window.setTimeout(() => {
               this.rippling = false
