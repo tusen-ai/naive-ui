@@ -1,6 +1,5 @@
 import scrollDelegate from '../_utils/delegate/scrollDelegate'
 import resizeDelegate from '../_utils/delegate/resizeDelegate'
-import getParentNode from '../_utils/dom/getParentNode'
 import getScrollParent from '../_utils/dom/getScrollParent'
 import {
   getAdjustedPlacementOfTrackingElement,
@@ -169,6 +168,11 @@ export default {
   watch: {
     active (value) {
       if (value) {
+        if (this.listenersRegistered) {
+          this.registerScrollListeners()
+          this.registerResizeListener()
+          this.listenersRegistered = true
+        }
         this.$nextTick().then(this.updatePosition)
       }
     },
@@ -184,17 +188,23 @@ export default {
       trackingElement: null,
       trackedElement: null,
       scrollListeners: [],
-      adjustedPlacement: this.placement
+      adjustedPlacement: this.placement,
+      listenersRegistered: false
     }
   },
   mounted () {
-    this.registerScrollListeners()
-    this.registerResizeListener()
+    if (this.active) {
+      this.registerScrollListeners()
+      this.registerResizeListener()
+      this.listenersRegistered = true
+    }
     this.updatePosition()
   },
   beforeDestroy () {
-    this.unregisterScrollListeners()
-    this.unregisterResizeListener()
+    if (this.listenersRegistered) {
+      this.unregisterScrollListeners()
+      this.unregisterResizeListener()
+    }
   },
   methods: {
     _getTrackingElement () {
