@@ -4,11 +4,17 @@ import Scrollbar from '../../../Scrollbar'
 import withapp from '../../../_mixins/withapp'
 import themeable from '../../../_mixins/themeable'
 import getDefaultSlot from '../../../_utils/vue/getDefaultSlot'
+import SiderMenu from './SiderMenu'
 
 export default {
   name: 'NNimbusServiceLayout',
   components: {
     Scrollbar
+  },
+  provide () {
+    return {
+      NNimbusServiceLayout: this
+    }
   },
   mixins: [withapp, themeable],
   props: {
@@ -89,6 +95,43 @@ export default {
     }
   },
   methods: {
+    createMenu (h, items) {
+      return items.map(item => {
+        const props = {
+          title: item.title || item.name,
+          titleExtra: item.titleExtra,
+          name: item.name,
+          disabled: !!item.disabled
+        }
+        if (item.group) {
+          return h('NMenuItemGroup', {
+            props
+          },
+          this.createMenu(h, item.childItems)
+          )
+        }
+        if (item.childItems) {
+          return h('NSubmenu', {
+            props
+          },
+          this.createMenu(h, item.childItems)
+          )
+        } else {
+          return h('NMenuItem', {
+            props: props,
+            on: {
+              click: () => {
+                if (this.$router && item.path) {
+                  Promise.resolve(
+                    this.$router.push(item.path)
+                  ).catch(() => {})
+                }
+              }
+            }
+          })
+        }
+      })
+    },
     scrollTo (...args) {
       this.$refs.body.scrollTo(...args)
     },
@@ -121,43 +164,6 @@ export default {
       'scroll-container-style': {
         width: '288px'
       }
-    }
-    const createMenu = items => {
-      return items.map(item => {
-        const props = {
-          title: item.title || item.name,
-          titleExtra: item.titleExtra,
-          name: item.name,
-          disabled: !!item.disabled
-        }
-        if (item.group) {
-          return h('NMenuItemGroup', {
-            props
-          },
-          createMenu(item.childItems)
-          )
-        }
-        if (item.childItems) {
-          return h('NSubmenu', {
-            props
-          },
-          createMenu(item.childItems)
-          )
-        } else {
-          return h('NMenuItem', {
-            props: props,
-            on: {
-              click: () => {
-                if (this.$router && item.path) {
-                  Promise.resolve(
-                    this.$router.push(item.path)
-                  ).catch(() => {})
-                }
-              }
-            }
-          })
-        }
-      })
     }
     const scopedSlots = this.$scopedSlots
     return h('NLayout', {
@@ -244,19 +250,7 @@ export default {
               padding: '0 24px 0 6px'
             }
           }) : null,
-          h('NMenu',
-            {
-              props: {
-                value: this.value || this.activeItem,
-                expandedNames: this.expandedNames,
-                defaultExpandedNames: this.defaultExpandedNames || this.subMenuNames,
-                rootIndent: 36,
-                indent: 40
-              },
-              on: this.$listeners
-            },
-            createMenu(this.items)
-          )]
+          h(SiderMenu)]
         ),
         h('NLayout', {
           ref: 'body',

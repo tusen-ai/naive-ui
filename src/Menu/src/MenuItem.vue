@@ -129,9 +129,6 @@ export default {
       })
     }
   },
-  beforeUpdate () {
-    console.log('menu item before update')
-  },
   created () {
     this.delayedPaddingLeft = this.paddingLeft
   },
