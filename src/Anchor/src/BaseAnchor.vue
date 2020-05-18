@@ -143,8 +143,8 @@ export default {
       slotEl.style.top = `${offsetTop}px`
       slotEl.style.height = `${offsetHeight}px`
       slotEl.style.maxWidth = `${offsetWidth + offsetLeft}px`
-      barEl.getBoundingClientRect()
-      slotEl.getBoundingClientRect()
+      void barEl.offsetHeight
+      void slotEl.offsetHeight
 
       if (!transition) {
         barEl.style.transition = null

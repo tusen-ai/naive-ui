@@ -168,7 +168,7 @@ export default {
   watch: {
     active (value) {
       if (value) {
-        if (this.listenersRegistered) {
+        if (!this.listenersRegistered) {
           this.registerScrollListeners()
           this.registerResizeListener()
           this.listenersRegistered = true
