@@ -4,50 +4,50 @@ Use checkbox with grid.
 <n-checkbox-group v-model="value">
   <n-row>
     <n-col :span="12">
-      <n-checkbox value="Prosperity">Prosperity</n-checkbox>
+      <n-checkbox value="Prosperity" label="Prosperity" />
     </n-col>
     <n-col :span="12">
-      <n-checkbox value="Democracy">Democracy</n-checkbox>
-    </n-col>
-  </n-row>
-  <n-row>
-    <n-col :span="12">
-      <n-checkbox value="Civility">Civility</n-checkbox>
-    </n-col>
-    <n-col :span="12">
-      <n-checkbox value="Harmony">Harmony</n-checkbox>
+      <n-checkbox value="Democracy" label="Democracy" />
     </n-col>
   </n-row>
   <n-row>
     <n-col :span="12">
-      <n-checkbox value="Freedom">Freedom</n-checkbox>
+      <n-checkbox value="Civility" label="Civility" />
     </n-col>
     <n-col :span="12">
-      <n-checkbox value="Equality">Equality</n-checkbox>
-    </n-col>
-  </n-row>
-  <n-row>
-    <n-col :span="12">
-      <n-checkbox value="Justice">Justice</n-checkbox>
-    </n-col>
-    <n-col :span="12">
-      <n-checkbox value="Rule of Law">Rule of Law</n-checkbox>
+      <n-checkbox value="Harmony" label="Harmony" />
     </n-col>
   </n-row>
   <n-row>
     <n-col :span="12">
-      <n-checkbox value="Patriotism">Patriotism</n-checkbox>
+      <n-checkbox value="Freedom" label="Freedom" />
     </n-col>
     <n-col :span="12">
-      <n-checkbox value="Dedication">Dedication</n-checkbox>
+      <n-checkbox value="Equality" label="Equality" />
     </n-col>
   </n-row>
   <n-row>
     <n-col :span="12">
-      <n-checkbox value="Integrity">Integrity</n-checkbox>
+      <n-checkbox value="Justice" label="Justice" />
     </n-col>
     <n-col :span="12">
-      <n-checkbox value="Friendship">Friendship</n-checkbox>
+      <n-checkbox value="Rule of Law" label="Rule of Law" />
+    </n-col>
+  </n-row>
+  <n-row>
+    <n-col :span="12">
+      <n-checkbox value="Patriotism" label="Patriotism" />
+    </n-col>
+    <n-col :span="12">
+      <n-checkbox value="Dedication" label="Dedication" />
+    </n-col>
+  </n-row>
+  <n-row>
+    <n-col :span="12">
+      <n-checkbox value="Integrity" label="Integrity" />
+    </n-col>
+    <n-col :span="12">
+      <n-checkbox value="Friendship" label="Friendship" />
     </n-col>
   </n-row>
 </n-checkbox-group>

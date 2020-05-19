@@ -60,7 +60,8 @@ export default {
   },
   data () {
     return {
-      ratio: 1
+      ratio: 1,
+      memorizedTextHTML: null
     }
   },
   computed: {
@@ -90,14 +91,20 @@ export default {
   },
   methods: {
     adjustText () {
-      if (this.$refs.text) {
-        const elWidth = this.$el.offsetWidth
-        const textWidth = this.$refs.text.offsetWidth
-        const elHeight = this.$el.offsetHeight
-        const textHeight = this.$refs.text.offsetHeight
-        const radix = (this.circle || this.round) ? 0.75 : 0.85
-        const ratio = Math.min(elWidth / textWidth * radix, elHeight / textHeight * radix)
-        this.ratio = Math.min(1, ratio)
+      const textEl = this.$refs.text
+      if (textEl) {
+        const memorizedTextHTML = this.memorizedTextHTML
+        if (memorizedTextHTML === null || memorizedTextHTML !== textEl.innerHTML) {
+          this.memorizedTextHTML = textEl.innerHTML
+          const selfEl = this.$el
+          const elWidth = selfEl.offsetWidth
+          const textWidth = textEl.offsetWidth
+          const elHeight = selfEl.offsetHeight
+          const textHeight = textEl.offsetHeight
+          const radix = (this.circle || this.round) ? 0.75 : 0.85
+          const ratio = Math.min(elWidth / textWidth * radix, elHeight / textHeight * radix)
+          this.ratio = Math.min(1, ratio)
+        }
       }
     }
   }

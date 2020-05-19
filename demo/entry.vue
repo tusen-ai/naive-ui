@@ -24,14 +24,14 @@ import DocHeader from './header.vue'
 import menuOptions from './menuOptions'
 import { i18n } from './init'
 import { state } from './store'
-import staputed from '../src/_mixins/staputed'
+import simulatedComputed from '../src/_mixins/simulatedComputed'
 
 export default {
   components: {
     DocHeader
   },
   mixins: [
-    staputed({
+    simulatedComputed({
       menuGenerationOptions: {
         get () {
           return {

@@ -1,6 +1,6 @@
 /**
- * staputed means static computed, it behaves like a data property. If it's
- * same after calculation, it won't cause re-render.
+ * simulatedComputed means it behaves like a computed property except the if it's
+ * same after re-calculation, it won't cause re-rendering.
  */
 export default function (options) {
   const keys = Object.keys(options)
@@ -14,17 +14,20 @@ export default function (options) {
       })
     },
     data () {
-      return data
+      return Object.assign({}, data)
     }
   }
   keys.forEach(key => {
     const computedData = options[key]
     data[key] = computedData.default
-    for (const dep of computedData.deps) {
+    computedData.deps.forEach(dep => {
       watch[dep] = function () {
-        this[key] = computedData.get.call(this)
+        const result = computedData.get.call(this)
+        if (result !== this[key]) {
+          this[key] = result
+        }
       }
-    }
+    })
   })
   return mixin
 }

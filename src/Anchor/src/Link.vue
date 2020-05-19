@@ -19,6 +19,7 @@
 
 <script>
 import collectable from '../../_mixins/collectable'
+import simlulatedComputed from '../../_mixins/simulatedComputed'
 
 export default {
   name: 'NAnchorLink',
@@ -27,7 +28,19 @@ export default {
       default: null
     }
   },
-  mixins: [collectable('NAnchor', 'collectedLinkHrefs', 'href')],
+  mixins: [
+    simlulatedComputed({
+      active: {
+        get () {
+          const href = this.href
+          return href && (this.activeHref === href)
+        },
+        deps: ['activeHref', 'href'],
+        default: false
+      }
+    }),
+    collectable('NAnchor', 'collectedLinkHrefs', 'href')
+  ],
   props: {
     title: {
       type: String,
@@ -39,12 +52,12 @@ export default {
     }
   },
   computed: {
-    active () {
-      return this.href && this.NAnchor.activeHref === this.href
+    activeHref () {
+      return this.NAnchor.activeHref
     }
   },
   watch: {
-    active: function (value) {
+    active (value) {
       if (value) this.NAnchor.updateBarPosition(this.$refs.title)
     }
   },

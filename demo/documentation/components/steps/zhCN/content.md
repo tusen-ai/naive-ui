@@ -1,4 +1,4 @@
-# 自定义内容
+# 使用 Step 的 Slot
 ```html
 <n-steps
   :current="current"
@@ -7,25 +7,49 @@
   <n-step title="I Me Mine">
     <div class="n-step-description">
       <p>Al through the day, I me mine I me mine, I me mine</p>
-      <n-button :type="current === 1 ? currentStatus : null" size="small" @click="handleButton1Click">click me</n-button>
+      <n-button
+        v-if="current === 1"
+        :type="buttonType"
+        size="small"
+        @click="handleButtonClick">
+        Next
+      </n-button>
     </div>
   </n-step>
   <n-step title="Let It Be">
     <div class="n-step-description">
       <p>When I find myself in times of trouble Mother Mary comes to me</p>
-      <n-button :type="current === 2 ? currentStatus : null" size="small" @click="handleButton2Click">click me</n-button>
+      <n-button
+        v-if="current === 2"
+        :type="buttonType"
+        size="small"
+        @click="handleButtonClick">
+        Next
+      </n-button>
     </div>
   </n-step>
   <n-step title="Come Together">
     <div class="n-step-description">
       <p>Here come old flat top He come grooving up slowly</p>
-      <n-button :type="current === 3 ? currentStatus : null" size="small" @click="handleButton3Click">click me</n-button>
+      <n-button
+        v-if="current === 3"
+        :type="buttonType"
+        size="small"
+        @click="handleButtonClick">
+        Next
+      </n-button>
     </div>
   </n-step>
   <n-step title="Something">
     <div class="n-step-description">
       <p>Something in the way she moves Attracts me like no other lover</p>
-      <n-button :type="current === 4 ? currentStatus : null" size="small" @click="handleButton4Click">click me</n-button>
+      <n-button
+        v-if="current === 4"
+        :type="buttonType"
+        size="small"
+        @click="handleButtonClick">
+        Next
+      </n-button>
     </div>
   </n-step>
 </n-steps>
@@ -34,13 +58,13 @@
   <n-radio-button value="error">
     Error
   </n-radio-button>
-  <n-radio-button value="success">
+  <n-radio-button value="process">
     Process
   </n-radio-button>
-  <n-radio-button value="warning">
+  <n-radio-button value="wait">
     Wait
   </n-radio-button>
-  <n-radio-button  value="primary">
+  <n-radio-button  value="finish">
     Finish
   </n-radio-button>
 </n-radio-group>
@@ -61,30 +85,21 @@ export default {
       currentStatus: 'error'
     }
   },
+  computed: {
+    buttonType () {
+      switch (this.currentStatus) {
+        case 'error':
+          return 'error'
+        case 'finish':
+          return 'success'
+        default:
+          return 'default'
+      }
+    }
+  },
   methods: {
-    handleButton1Click() {
-      if(this.current === 1) {
-        console.log('click 1, do something')
-        this.current++
-      }
-    },
-    handleButton2Click() {
-      if(this.current === 2) {
-        console.log('click 2, do something')
-        this.current++
-      }
-    },
-    handleButton3Click() {
-      if(this.current === 3) {
-        console.log('click 3, do something')
-        this.current++
-      }
-    },
-    handleButton4Click() {
-      if(this.current === 4) {
-        console.log('click 4, do something')
-        this.current = 1
-      }
+    handleButtonClick() {
+      this.current = (this.current % 4) + 1
     }
   }
 }

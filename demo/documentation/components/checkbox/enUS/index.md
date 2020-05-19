@@ -28,6 +28,7 @@ event
 |value|`string \| number`|`null`||
 |checked|`boolean`|`false`||
 |disabled|`boolean`|`false`||
+|label|`string \| function`|`null`|Could be a render function.|
 
 ### Checkbox Group Props
 |Name|Type|Default|Description|
@@ -38,6 +39,11 @@ event
 
 ## Slots
 ### Checkbox Slots
+
+<n-alert title="Caveat" type="warning" style="margin-bottom: 16px">
+  Don't use the slot in a massive checkbox group. Since it will cause re-rendering of all the checkboxes everytime when the group value changes. In that case you may use <n-text code>label</n-text> prop instead.
+</n-alert>
+
 |Name|Parameters|Description|
 |-|-|-|
 |default|`()`||

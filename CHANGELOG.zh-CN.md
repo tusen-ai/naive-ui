@@ -1,9 +1,20 @@
 # CHANGELOG
+## 1.1.2 (2020-05-19)
+### Features
+- 为 `n-step` 增加内容的 slot
+- 为 `n-checkbox` 增加了 `label` prop
+### Performance Improvements
+- 所有定位组件按需注册监听器
+- 在寻找可滚动节点的过程中使用缓存
+- 提升了 `n-button` beforeDestroy 的性能
+- 减少了 `n-checkbox` 在值未改变时的重复渲染
+- 提升了文字内容的 `n-avatar` 的性能
+
 ## 1.1.1 (2020-05-18)
 ### Fixes
 - 更新 css-render 的依赖
 - 默认类型的按钮的 icon 的颜色
-### Performance Imporvements
+### Performance Improvements
 - 减少了 `n-menu-item` 没用的重复渲染
 - 减少了文档页面没用的重复渲染
 ### Refactors

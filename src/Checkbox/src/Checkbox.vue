@@ -2,7 +2,7 @@
   <div
     class="n-checkbox"
     :class="{
-      'n-checkbox--checked': syntheticChecked,
+      'n-checkbox--checked': renderSafeChecked,
       'n-checkbox--disabled': syntheticDisabled,
       'n-checkbox--indeterminate': indeterminate,
       'n-checkbox--table-header': tableHeader,
@@ -22,10 +22,12 @@
       <line-mark class="n-checkbox-box__line-mark" />
     </div>
     <span
-      v-if="$scopedSlots.default"
+      v-if="label !== null || $scopedSlots.default"
       class="n-checkbox__label"
     >
-      <slot />
+      <slot>
+        <render :render="label" />
+      </slot>
     </span>
   </div>
 </template>
@@ -34,9 +36,11 @@
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asformitem from '../../_mixins/asformitem'
+import collectable from '../../_mixins/collectable'
+import simulatedComputed from '../../_mixins/simulatedComputed'
+import render from '../../_utils/vue/render'
 import CheckMark from './CheckMark'
 import LineMark from './LineMark'
-import collectable from '../../_mixins/collectable'
 
 export default {
   name: 'NCheckbox',
@@ -47,7 +51,8 @@ export default {
   },
   components: {
     CheckMark,
-    LineMark
+    LineMark,
+    render
   },
   mixins: [
     withapp,
@@ -73,7 +78,18 @@ export default {
         return 'medium'
       }
     ),
-    collectable('NCheckboxGroup', 'collectedCheckboxValues')
+    collectable('NCheckboxGroup', 'collectedCheckboxValues'),
+    simulatedComputed({
+      renderSafeChecked: {
+        default: false,
+        get () {
+          return this.syntheticChecked
+        },
+        deps: [
+          'syntheticChecked'
+        ]
+      }
+    })
   ],
   model: {
     prop: 'checked',
@@ -105,6 +121,10 @@ export default {
     tableHeader: {
       type: Boolean,
       default: false
+    },
+    label: {
+      type: [String, Function],
+      default: null
     }
   },
   computed: {
