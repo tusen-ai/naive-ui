@@ -44,11 +44,10 @@
         <div v-if="!vertical" class="n-step-splitor" />
       </div>
       <div
-        v-if="description !== null || content !== null"
+        v-if="description !== null || $scopedSlots.default"
         class="n-step-content__description"
       >
-        <render :render="syntheticContent" />
-        <!-- {{description}} -->
+        <slot>{{ description }}</slot>
       </div>
     </div>
   </div>
@@ -61,7 +60,6 @@ import mdCheckmark from '../../_icons/md-checkmark'
 import themeable from '../../_mixins/themeable'
 
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
-import render from '../../_utils/vue/render'
 export default {
   name: 'NStep',
   inject: {
@@ -73,8 +71,7 @@ export default {
     NIcon,
     mdCheckmark,
     mdClose,
-    NIconSwitchTransition,
-    render
+    NIconSwitchTransition
   },
   mixins: [ themeable ],
   props: {
@@ -91,10 +88,6 @@ export default {
     },
     description: {
       type: String,
-      default: null
-    },
-    content: {
-      type: Function,
       default: null
     },
     index: {
@@ -126,14 +119,6 @@ export default {
         return 'wait'
       }
       return null
-    },
-    syntheticContent () {
-      if (this.content === null) {
-        return this.description
-      } else {
-        // debugger
-        return this.content
-      }
     }
   }
 }

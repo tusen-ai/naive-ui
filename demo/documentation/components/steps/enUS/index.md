@@ -6,6 +6,7 @@
 basic
 size
 vertical
+content
 ```
 
 ## Props
