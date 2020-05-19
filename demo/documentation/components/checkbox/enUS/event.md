@@ -1,11 +1,11 @@
 # Event
 ```html
-<n-checkbox v-model="value" @change="handleChange">Event</n-checkbox>
+<n-checkbox v-model="value" @change="handleChange" label="Event" />
 <n-checkbox-group v-model="cities"  @change="handleChange">
-  <n-checkbox value="Beijing">Beijing</n-checkbox>
-  <n-checkbox value="Shanghai">Shanghai</n-checkbox>
-  <n-checkbox value="Guangzhou">Guangzhou</n-checkbox>
-  <n-checkbox value="Shenzen">Shenzhen</n-checkbox>
+  <n-checkbox value="Beijing" label="Beijing" />
+  <n-checkbox value="Shanghai" label="Shanghai" />
+  <n-checkbox value="Guangzhou" label="Guangzhou" />
+  <n-checkbox value="Shenzen" label="Shenzhen" />
 </n-checkbox-group>
 ```
 ```js
