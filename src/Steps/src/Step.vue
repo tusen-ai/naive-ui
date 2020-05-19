@@ -44,10 +44,10 @@
         <div v-if="!vertical" class="n-step-splitor" />
       </div>
       <div
-        v-if="description !== null"
+        v-if="description !== null || $scopedSlots.default"
         class="n-step-content__description"
       >
-        {{ description }}
+        <slot>{{ description }}</slot>
       </div>
     </div>
   </div>
@@ -60,7 +60,6 @@ import mdCheckmark from '../../_icons/md-checkmark'
 import themeable from '../../_mixins/themeable'
 
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
-
 export default {
   name: 'NStep',
   inject: {
@@ -88,10 +87,6 @@ export default {
       default: null
     },
     description: {
-      type: String,
-      default: null
-    },
-    content: {
       type: String,
       default: null
     },
