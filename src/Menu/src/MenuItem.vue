@@ -57,7 +57,7 @@
 import collectable from '../../_mixins/collectable'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import staputed from '../../_mixins/staputed'
+import simulatedComputed from '../../_mixins/simulatedComputed'
 import NMenuItemContent from './MenuItemContent'
 import NTooltip from '../../Tooltip'
 import menuContentMixin from './menuContentMixin'
@@ -76,7 +76,7 @@ export default {
         return true
       }
     }),
-    staputed({
+    simulatedComputed({
       selected: {
         get () {
           if (this.rootMenuValue === this.name) {

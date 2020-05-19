@@ -2,7 +2,7 @@ import getStyleComputedProperty from './getStyleComputedProperty'
 import getParentNode from './getParentNode'
 
 const NOT_FOUND = 'NOT_FOUND'
-const CACHE_DURATION = 3000
+const CACHE_DURATION = 60000
 
 const scrollNodeCache = {
   cache: new Map(),
