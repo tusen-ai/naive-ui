@@ -6,6 +6,7 @@
 basic
 size
 vertical
+content
 ```
 
 ## Props
@@ -23,11 +24,15 @@ vertical
 |-|-|-|-|
 |title|`string`|`null`||
 |description|`string`|`null`||
-|content|`string`|`null`||
 |status|`'process' \| 'finish' \| 'error' \| 'wait'`|`'process'`||
 
 ## Slots
 ### Steps Slots
+|Name|Parameters|Description|
+|-|-|-|
+|default|`()`||
+
+### Step Slots
 |Name|Parameters|Description|
 |-|-|-|
 |default|`()`||
