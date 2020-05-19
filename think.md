@@ -155,6 +155,12 @@ h('NLayout', {
 ```
 一个是computed导致重复渲染，还有一个是 getScrollParent 缓存的问题
 
+## 2020.5.19
+我在想要不要帮用户检查值，比如说一些不存在的值...现在这个问题就出现在 checkbox 里面，这是个哲学问题
+
+## 2020.5.19
+得看懂 vue 究竟是怎么更新组件的...
+
 ## TODO 排序不分先后
 1. <del>Focus Detector on Time Selector</del>
 2. <del>Menu Root Indent = 0 可能造成问题</del>
@@ -246,7 +252,13 @@ h('NLayout', {
 88. <del>CSS Font 选择</del> 对英文应该没有那么麻烦，走系统字体就好了，然而对中文又没什么好的解决方案，so 先这个样子，之后再琢磨琢磨
 89. <del>把所有用 $slots 判断的地方都改成 $scopedSlots，[原因](https://vuejs.org/v2/api/#vm-scopedSlots)<del> done
 90. 调整默认状态下 button 的 icon 的颜色
-91. 优化 button 的样式，现在太冗余了，关键是怎么同步按钮的主题变量呢...
+91. <del>优化 button 的样式，现在太冗余了，关键是怎么同步按钮的主题变量呢...</del>
+92. <del>placeable 按需注册</del>
+93. steps 列表优化
+94. tabs 列表优化
+95. tree 列表优化
+96. cascader 列表优化
+
 
 ```
 Done

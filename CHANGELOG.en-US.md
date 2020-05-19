@@ -1,9 +1,20 @@
 # CHANGELOG
+## 1.1.2 (2020-05-19)
+### Features
+- Add content slot for `n-step`.
+- Add `label` prop for `n-checkbox`.
+### Performance Improvements
+- All placeable components register listeners on demand.
+- Use cache when finding scrollable parent node.
+- Imporve performance of `n-button`'s beforeDestroy.
+- Reduce the useless re-rendering of `n-checkbox` when checked status isn't changed.
+- Imporve performance of text typed `n-avatar`.
+
 ## 1.1.1 (2020-05-18)
 ### Fixes
 - Update css-render dependencies.
 - Color of default typed button icon.
-### Performance Imporvements
+### Performance Improvements
 - Reduce useless re-renders of `n-menu-item`.
 - Reduce useless re-renders of doc page.
 ### Refactors
