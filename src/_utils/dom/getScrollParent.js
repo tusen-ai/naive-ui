@@ -40,7 +40,6 @@ export default function getScrollParent (element) {
 function getScrollElementFrom (element) {
   const cachedNode = scrollNodeCache.read(element)
   if (cachedNode !== NOT_FOUND) {
-    console.log('read from cache')
     return cachedNode
   }
 
