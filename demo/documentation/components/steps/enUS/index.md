@@ -24,11 +24,15 @@ content
 |-|-|-|-|
 |title|`string`|`null`||
 |description|`string`|`null`||
-|content|`string`|`null`|`when both description and content exist, content has priority, means that the descriptions will be omitted`||
 |status|`'process' \| 'finish' \| 'error' \| 'wait'`|`'process'`||
 
 ## Slots
 ### Steps Slots
+|Name|Parameters|Description|
+|-|-|-|
+|default|`()`||
+
+### Step Slots
 |Name|Parameters|Description|
 |-|-|-|
 |default|`()`||

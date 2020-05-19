@@ -24,11 +24,15 @@ content
 |-|-|-|-|
 |title|`string`|`null`||
 |description|`string`|`null`||
-|content|`function`|`null`|`当content和description 同时存在时, 优先使用content, 并会省略descriptions`||
 |status|`'process' \| 'finish' \| 'error' \| 'wait'`|`'process'`||
 
 ## Slots
 ### Steps Slots
+|名称|参数|说明|
+|-|-|-|
+|default|`()`||
+
+### Step Slots
 |名称|参数|说明|
 |-|-|-|
 |default|`()`||
