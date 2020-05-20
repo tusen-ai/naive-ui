@@ -1,4 +1,10 @@
 # CHANGELOG
+## 1.1.3 (2020-05-20)
+### Chores
+- Update css-render dependencies.
+### Fixes
+- Fix the problem that `n-transfer`'s animation disorder when value changes.
+
 ## 1.1.2 (2020-05-19)
 ### Features
 - Add content slot for `n-step`.
