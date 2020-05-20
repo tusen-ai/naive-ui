@@ -17,8 +17,26 @@
       class="n-checkbox-box"
       @click="handleClick"
     >
-      <check-mark class="n-checkbox-box__check-mark" />
-      <line-mark class="n-checkbox-box__line-mark" />
+      <n-icon-switch-transition>
+        <div
+          v-if="indeterminate"
+          key="indeterminate"
+          class="n-checkbox-icon"
+        >
+          <line-mark
+            class="n-checkbox-icon__line"
+          />
+        </div>
+        <div
+          v-else
+          key="check"
+          class="n-checkbox-icon"
+        >
+          <check-mark
+            class="n-checkbox-icon__check"
+          />
+        </div>
+      </n-icon-switch-transition>
     </div>
   </div>
 </template>
@@ -26,13 +44,15 @@
 <script>
 import CheckMark from './CheckMark'
 import LineMark from './LineMark'
+import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 import createValidator from '../../_utils/vue/validateProp'
 
 export default {
   name: 'NSimpleCheckbox',
   components: {
     CheckMark,
-    LineMark
+    LineMark,
+    NIconSwitchTransition
   },
   model: {
     prop: 'checked',

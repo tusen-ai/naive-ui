@@ -433,9 +433,6 @@ export default {
       this.$nextTick().then(() => {
         this.initialized = true
       })
-    },
-    value () {
-      this.initMemorizedSourceOptions()
     }
   },
   mounted () {

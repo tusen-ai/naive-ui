@@ -18,8 +18,26 @@
     <div
       class="n-checkbox-box"
     >
-      <check-mark class="n-checkbox-box__check-mark" />
-      <line-mark class="n-checkbox-box__line-mark" />
+      <n-icon-switch-transition>
+        <div
+          v-if="indeterminate"
+          key="indeterminate"
+          class="n-checkbox-icon"
+        >
+          <line-mark
+            class="n-checkbox-icon__line"
+          />
+        </div>
+        <div
+          v-else
+          key="check"
+          class="n-checkbox-icon"
+        >
+          <check-mark
+            class="n-checkbox-icon__check"
+          />
+        </div>
+      </n-icon-switch-transition>
     </div>
     <span
       v-if="label !== null || $scopedSlots.default"
@@ -41,6 +59,7 @@ import simulatedComputed from '../../_mixins/simulatedComputed'
 import render from '../../_utils/vue/render'
 import CheckMark from './CheckMark'
 import LineMark from './LineMark'
+import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 
 export default {
   name: 'NCheckbox',
@@ -50,6 +69,7 @@ export default {
     }
   },
   components: {
+    NIconSwitchTransition,
     CheckMark,
     LineMark,
     render

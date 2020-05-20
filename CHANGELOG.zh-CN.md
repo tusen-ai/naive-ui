@@ -1,4 +1,10 @@
 # CHANGELOG
+## 1.1.3 (2020-05-20)
+### Chores
+- 更新 css-render 的依赖
+### Fixes
+- 修正了 `n-transfer` 在值改变时动画出错的问题。
+
 ## 1.1.2 (2020-05-19)
 ### Features
 - 为 `n-step` 增加内容的 slot
