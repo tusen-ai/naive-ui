@@ -1,5 +1,6 @@
 <script>
 export default {
+  name: 'NNimbusServiceLayoutSiderMenu',
   inject: {
     NNimbusServiceLayout: {
       default: false
@@ -25,6 +26,9 @@ export default {
       traverse(ServiceLayout.items)
       return subMenuNames
     }
+  },
+  mounted () {
+    console.log(this)
   },
   methods: {
     createMenu (h, items) {
