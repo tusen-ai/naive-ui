@@ -1,4 +1,10 @@
 # CHANGELOG
+## 1.1.4 (2020-05-28)
+### Fixes
+- Fix the problem that the input value of `n-select` may be modified directly.
+### Refactors
+- An UI instance can be install to a Vue instance for no more than once.
+
 ## 1.1.3 (2020-05-20)
 ### Chores
 - Update css-render dependencies.

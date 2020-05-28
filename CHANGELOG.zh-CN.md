@@ -1,9 +1,15 @@
 # CHANGELOG
+## 1.1.4 (2020-05-28)
+### Fixes
+- 修正了 `n-select` 在多选情况下传入值被直接修改的问题
+### Refactors
+- 一个 UI 实例最多在一个 Vue 上安装一次
+
 ## 1.1.3 (2020-05-20)
 ### Chores
 - 更新 css-render 的依赖
 ### Fixes
-- 修正了 `n-transfer` 在值改变时动画出错的问题。
+- 修正了 `n-transfer` 在值改变时动画出错的问题
 
 ## 1.1.2 (2020-05-19)
 ### Features
