@@ -26,20 +26,23 @@
     <div class="n-form-item-control">
       <div
         class="n-form-item-blank"
-        :class="
-          validationErrored ? `n-form-item-blank--error` : `n-form-item-blank--pass`
-        "
+        :class="{
+          [`n-form-item-blank--${syntheticValidationStatus}`]: syntheticValidationStatus
+        }"
       >
         <slot />
       </div>
-      <div v-if="path" class="n-form-item-feedback-wrapper">
+      <div v-if="syntheticValidationStatus !== null || path" class="n-form-item-feedback-wrapper">
         <transition
           name="n-form-item-feedback-transition"
           @before-enter="handleBeforeEnter"
           @before-leave="handleBeforeLeave"
           @after-leave="handleAfterLeave"
         >
-          <div v-if="explains.length" class="n-form-item-feedback">
+          <div v-if="feedback !== null" class="n-form-item-feedback">
+            {{ feedback }}
+          </div>
+          <div v-else-if="explains.length" class="n-form-item-feedback">
             <span
               v-for="(explain, i) in explains"
               :key="i"
@@ -152,6 +155,16 @@ export default {
     ignorePathChange: {
       type: Boolean,
       default: false
+    },
+    validationStatus: {
+      validator (value) {
+        return ['error', 'warning', 'success'].includes(value)
+      },
+      default: null
+    },
+    feedback: {
+      type: String,
+      default: null
     }
   },
   inject: {
@@ -184,6 +197,11 @@ export default {
       if (NForm && NForm.size) {
         return NForm.size
       }
+      return null
+    },
+    syntheticValidationStatus () {
+      if (this.validationStatus !== null) return this.validationStatus
+      if (this.validationErrored) return 'error'
       return null
     },
     labelWidthStyle () {
@@ -303,7 +321,7 @@ export default {
       this._validate('input')
     },
     validate (options, callback) {
-      /** following code is for compatibility */
+      /** the following code is for compatibility */
       let trigger
       let validateCallback
       let shouldRuleBeApplied
