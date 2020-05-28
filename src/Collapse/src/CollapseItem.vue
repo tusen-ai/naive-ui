@@ -27,19 +27,12 @@
         {{ title }}
       </slot>
     </div>
-    <fade-in-height-expand-transition>
-      <div
-        v-if="!collapsed"
-        class="n-collapse-item__content-wrapper"
-      >
-        <div
-          ref="content"
-          class="n-collapse-item__content-inner"
-        >
-          <slot />
-        </div>
-      </div>
-    </fade-in-height-expand-transition>
+    <n-collapse-item-content
+      :display-directive="syntheticDisplayDirective"
+      :show="!collapsed"
+    >
+      <slot />
+    </n-collapse-item-content>
   </div>
 </template>
 
@@ -47,13 +40,13 @@
 import NIcon from '../../Icon'
 import iosArrowForward from '../../_icons/ios-arrow-forward'
 import collectable from '../../_mixins/collectable'
-import FadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
+import NCollapseItemContent from './CollapseItemContent'
 
 export default {
   name: 'NCollapseItem',
   components: {
     NIcon,
-    FadeInHeightExpandTransition,
+    NCollapseItemContent,
     iosArrowForward
   },
   mixins: [collectable('NCollapse', 'collectedItemNames', 'name')],
@@ -70,9 +63,23 @@ export default {
     name: {
       type: [ String, Number ],
       default: null
+    },
+    displayDirective: {
+      validator (value) {
+        return ['if', 'show'].includes(value)
+      },
+      default: null
     }
   },
   computed: {
+    syntheticDisplayDirective () {
+      const displayDirective = this.displayDirective
+      if (displayDirective !== null) {
+        return this.NCollapse.displayDirective
+      } else {
+        return displayDirective
+      }
+    },
     arrowPlacement () {
       return this.NCollapse.arrowPlacement
     },
