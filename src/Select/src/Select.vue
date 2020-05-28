@@ -58,7 +58,7 @@
           <n-base-select-menu
             v-if="active"
             ref="contentInner"
-            v-clickoutside="handleClickOutsideMenu"
+            v-clickoutside="handleMenuClickOutside"
             class="n-select-menu"
             auto-pending-first-option
             :theme="syntheticTheme"
@@ -313,14 +313,10 @@ export default {
       this.updateMemorizedOptions()
     },
     filteredOptions () {
-      this.$nextTick().then(() => {
-        this.updatePosition()
-      })
+      this.$nextTick().then(this.updatePosition)
     },
     value () {
-      this.$nextTick().then(() => {
-        this.updatePosition()
-      })
+      this.$nextTick().then(this.updatePosition)
     }
   },
   created () {
@@ -365,11 +361,11 @@ export default {
         }
       }
     },
-    handleMenuAfterLeave () {
-      this.pattern = ''
-    },
     closeMenu () {
       this.deactivate()
+    },
+    handleMenuAfterLeave () {
+      this.pattern = ''
     },
     handleActivatorClick () {
       if (this.disabled) return
@@ -388,7 +384,7 @@ export default {
     handleActivatorFocus () {
       this.$emit('focus')
     },
-    handleClickOutsideMenu (e) {
+    handleMenuClickOutside (e) {
       if (this.active) {
         if (!this.$refs.activator.$el.contains(e.target) && !this.scrolling) {
           this.closeMenu()
@@ -434,11 +430,11 @@ export default {
         return option.value === this.value
       }
     },
-    clearMultipleSelectValue (value) {
+    createClearedMultipleSelectValue (value) {
       if (!Array.isArray(value)) return []
       if (this.wrappedFallbackOption) {
         /** if option has a fallback, I can't help user to clear some unknown value */
-        return value
+        return Array.from(value)
       } else {
         /** if there's no option fallback, unappeared options are treated as invalid */
         const remote = this.remote
@@ -467,7 +463,7 @@ export default {
         if (remote) {
           this.memorizedValueToOptionMap.set(option.value, option)
         }
-        const changedValue = this.clearMultipleSelectValue(this.value)
+        const changedValue = this.createClearedMultipleSelectValue(this.value)
         const index = changedValue.findIndex(value => value === option.value)
         if (~index) {
           changedValue.splice(index, 1)
@@ -501,7 +497,7 @@ export default {
     },
     handleDeleteLastOption (e) {
       if (!this.pattern.length) {
-        const changedValue = this.clearMultipleSelectValue(this.value)
+        const changedValue = this.createClearedMultipleSelectValue(this.value)
         if (Array.isArray(changedValue)) {
           const popedValue = changedValue.pop()
           const createdOptionIndex = this.getCreatedOptionIndex(popedValue)
