@@ -1,4 +1,12 @@
 # CHANGELOG
+## 1.1.5 (2020-05-28)
+### Features
+- Add `display-directive` prop for `n-collapse` and `n-collapse-item`.
+- Add `class` and `style` prop for `n-select`'s `option`.
+- Add `debug` prop for `n-select`.
+### Fixes
+- Fix the problem that `n-select` can still be cleared when disabled.
+
 ## 1.1.4 (2020-05-28)
 ### Fixes
 - Fix the problem that the input value of `n-select` may be modified directly.
