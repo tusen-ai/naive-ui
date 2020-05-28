@@ -1,4 +1,12 @@
 # CHANGELOG
+## 1.1.5 (2020-05-28)
+### Features
+- 为 `n-collapse` 和 `n-collapse-item` 增加了 `display-directive` 属性
+- 为 `n-select` 的 `option` 增加了 `class` 和 `style` 属性
+- 为 `n-select` 增加 `debug` 模式
+### Fixes
+- 修正了 `n-select` 在 disabled 状态下能被清除的问题
+
 ## 1.1.4 (2020-05-28)
 ### Fixes
 - 修正了 `n-select` 在多选情况下传入值被直接修改的问题
