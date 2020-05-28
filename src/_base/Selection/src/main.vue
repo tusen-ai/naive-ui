@@ -294,16 +294,17 @@ export default {
       }
     },
     handleBlur (e) {
-      if (
-        !e.relatedTarget &&
-        document.activeElement !== document.body
-      ) {
-        console.warn(
-          '[naive-ui/base-selection]: blur event has no related target,',
-          e.relatedTarget,
-          ', this may be a bug of naive-ui.'
-        )
-      }
+      // Blur to devtools to may trigger the branch, comment it for now
+      // if (
+      //   !e.relatedTarget &&
+      //   document.activeElement !== document.body
+      // ) {
+      //   console.warn(
+      //     '[naive-ui/base-selection]: blur event has no related target,',
+      //     e.relatedTarget,
+      //     ', this may be a bug of naive-ui.'
+      //   )
+      // }
       if (e.relatedTarget && this.$el.contains(e.relatedTarget)) return
       this.$emit('blur')
     },
