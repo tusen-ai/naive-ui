@@ -43,7 +43,7 @@
           :arrow="showArrow"
           :disabled="disabled"
           :active="active"
-          :clearable="clearable && selected"
+          :clearable="syntheticClearable && selected"
           @clear="handleClear"
         />
       </div>
@@ -99,7 +99,7 @@
           :theme="theme"
           :disabled="disabled"
           :active="active"
-          :clearable="clearable && selected"
+          :clearable="syntheticClearable && selected"
           :loading="loading"
           @clear="handleClear"
         />
@@ -138,7 +138,7 @@
           :arrow="showArrow"
           :disabled="disabled"
           :active="active"
-          :clearable="clearable && selected"
+          :clearable="syntheticClearable && selected"
           @clear="handleClear"
         />
       </div>
@@ -170,7 +170,7 @@
           :arrow="showArrow"
           :disabled="disabled"
           :active="active"
-          :clearable="clearable && selected"
+          :clearable="syntheticClearable && selected"
           :loading="loading"
           @clear="handleClear"
         />
@@ -255,8 +255,11 @@ export default {
     }
   },
   computed: {
+    syntheticClearable () {
+      return this.clearable && !this.disabled
+    },
     showArrow () {
-      if (!this.clearable) return true
+      if (!this.syntheticClearable) return true
       else return !(this.hover && this.selected)
     },
     labelPlaceholder () {
