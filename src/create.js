@@ -15,6 +15,7 @@ function create ({
   fallbackLocale,
   hljs
 }) {
+  const installTargets = []
   const naive = {
     locales: createLocalesObject(locales),
     fallbackLocale: fallbackLocale || locales[0],
@@ -24,6 +25,8 @@ function create ({
     install
   }
   function install (Vue) {
+    if (installTargets.includes(Vue)) return
+    installTargets.push(Vue)
     Vue.prototype.$naive = naive
     for (const component of components) {
       component.install(Vue)
