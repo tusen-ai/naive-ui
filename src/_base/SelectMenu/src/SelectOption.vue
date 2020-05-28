@@ -1,4 +1,6 @@
 <script>
+import { createClassObject } from '../../../DataTable/src/utils'
+
 export default {
   name: 'NBaseSelectOption',
   inject: {
@@ -43,12 +45,14 @@ export default {
   render (h) {
     const data = this.wrappedOption.data
     const children = (data.render && data.render(h, data, this.selected)) || [ data.label ]
+    const classObject = createClassObject(data.class)
     return h('div', {
       staticClass: 'n-base-select-option',
       class: {
         'n-base-select-option--selected': this.selected,
         'n-base-select-option--disabled': data.disabled,
-        'n-base-select-option--grouped': this.grouped
+        'n-base-select-option--grouped': this.grouped,
+        ...classObject
       },
       attrs: { 'n-option-index': this.index },
       style: data.style,

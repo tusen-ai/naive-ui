@@ -46,17 +46,19 @@ change-debug
 ### SelectOption Properties
 |名称|类型|说明|
 |-|-|-|
-|label|`string`||
-|value|`string \| number`|在选项中应该是唯一的|
+|class|`string`||
 |disabled|`boolean`||
+|label|`string`||
 |render|`function`||
+|style|`string`||
+|value|`string \| number`|在选项中应该是唯一的|
 
 ### SelectOptionGroup Properties
 |名称|类型|说明|
 |-|-|-|
-|type|`'group'`||
-|name|`string`||
 |children|`Array<SelectOption>`||
+|name|`string`||
+|type|`'group'`||
 
 ## Slots
 |名称|参数|说明|
@@ -66,8 +68,8 @@ change-debug
 ## Event
 |名称|参数|说明|
 |-|-|-|
-|change|`(value: Array \| string \| number \| null)`||
-|search|`(value: string)`||
 |blur|`()`|选择器 Blur 时发出|
+|change|`(value: Array \| string \| number \| null)`||
 |scroll|`(e: Event)`|选择菜单在滚动|
+|search|`(value: string)`||
 

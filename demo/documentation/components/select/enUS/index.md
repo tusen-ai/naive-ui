@@ -45,17 +45,19 @@ fallback-option
 ### SelectOption Properties
 |Name|Type|Description|
 |-|-|-|
-|label|`string`||
-|value|`string \| number`|Should be unique in options.|
+|class|`string`||
 |disabled|`boolean`||
+|label|`string`||
 |render|`function`||
+|style|`string`||
+|value|`string \| number`|Should be unique in options.|
 
 ### SelectOptionGroup Properties
 |Name|Type|Description|
 |-|-|-|
-|type|`'group'`||
-|name|`string`||
 |children|`Array<SelectOption>`||
+|name|`string`||
+|type|`'group'`||
 
 ## Slots
 |Name|Parameters|Description|
@@ -65,8 +67,9 @@ fallback-option
 ## Event
 |Name|Parameters|Description|
 |-|-|-|
-|change|`(value: Array \| string \| number \| null)`||
-|search|`(value: string)`||
 |blur|`()`|When picker of select blur|
+|change|`(value: Array \| string \| number \| null)`||
 |scroll|`(e: Event)`|When select menu scrolls|
+|search|`(value: string)`||
+
 

@@ -76,6 +76,7 @@ function flattenOptions (optionsToBeFlattened) {
           type: OPTION_TYPE.RENDER,
           index: index,
           key: '__NAIVE_SELECT_RENDER__' + index,
+          data: option.__NAIVE_OPTION_DATA__ || option,
           render: option.render,
           grouped: false
         }
