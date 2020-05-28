@@ -162,6 +162,8 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asformitem from '../../_mixins/asformitem'
 
+import { mountStyleAsFormItem } from './styles/Input.cssr.js'
+
 export default {
   name: 'NInput',
   components: {
@@ -309,6 +311,11 @@ export default {
       if (this.isTextarea && this.autosize) {
         this.$nextTick().then(this.updateTextAreaStyle)
       }
+    }
+  },
+  created () {
+    if (this.NFormItem) {
+      mountStyleAsFormItem()
     }
   },
   mounted () {
