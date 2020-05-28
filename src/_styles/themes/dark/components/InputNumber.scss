@@ -37,10 +37,10 @@
   $--input-number-box-shadow: (
     'default': inset 0 0 0 0 transparent,
     'hover': inset 0 0 0px 1px $--n-primary-color,
-    'focus': (inset 0 0 0px 1px $--n-primary-color, 0 0 8px 0px change-color($--n-primary-color, $alpha: .3)),
+    'focus': (inset 0 0 0px 1px $--n-primary-color, 0 0 8px 0 change-color($--n-primary-color, $alpha: .3)),
     'error-default': inset 0 0 0 1px $--n-error-color,
     'error-hover': inset 0 0 0px 1px $--n-error-color,
-    'error-focus': (inset 0 0 0px 1px $--n-error-color, 0 0 8px 0px change-color($--n-primary-color, $alpha: .3)),
+    'error-focus': (inset 0 0 0px 1px $--n-error-color, 0 0 8px 0 change-color($--n-primary-color, $alpha: .3)),
     "disabled": inset 0 0 0 1px transparent
   ) !global;
 }

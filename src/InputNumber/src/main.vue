@@ -66,6 +66,7 @@ import withapp from '../../_mixins/withapp'
 import asformitem from '../../_mixins/asformitem'
 import mdRemove from '../../_icons/md-remove'
 import mdAdd from '../../_icons/md-add'
+import { mountStyleAsFormItem } from './styles/InputNumber.cssr.js'
 
 const DEFAULT_STEP = 1
 
@@ -180,6 +181,11 @@ export default {
       const parsedNumber = parseNumber(this.max)
       if (parsedNumber !== null) return parsedNumber
       else return null
+    }
+  },
+  created () {
+    if (this.NFormItem) {
+      mountStyleAsFormItem()
     }
   },
   methods: {
