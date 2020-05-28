@@ -33,6 +33,12 @@ export default {
     accordion: {
       type: Boolean,
       default: false
+    },
+    displayDirective: {
+      validator (value) {
+        return ['if', 'show'].includes(value)
+      },
+      default: 'if'
     }
   },
   data () {

@@ -224,6 +224,10 @@ export default {
         value
       })
     },
+    debug: {
+      type: Boolean,
+      default: false
+    },
     /** deprecated */
     items: {
       type: Array,
@@ -379,6 +383,9 @@ export default {
     },
     handleActivatorBlur () {
       this.$emit('blur')
+      if (process.env.NODE_ENV === 'development') {
+        if (this.debug) return
+      }
       this.closeMenu()
     },
     handleActivatorFocus () {
