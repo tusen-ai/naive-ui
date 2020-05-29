@@ -7,7 +7,7 @@ const light = {
     borderMaskBoxShadow: {
       default: `inset 0 0 0 1px ${lightScheme.errorColor}`,
       hover: `inset 0 0 0 1px ${lightScheme.errorHoverColor}`,
-      focus: `inset 0 0 0 1px ${lightScheme.errorHoverColor}, 0 0 0 2px ${lightScheme.errorHoverColor}`
+      focus: `inset 0 0 0 1px ${lightScheme.errorHoverColor}, 0 0 0 2px ${changeColor(lightScheme.errorHoverColor, { alpha: 0.3 })}`
     },
     backgroundColor: {
       focus: lightScheme.baseBackgroundColor
@@ -17,7 +17,7 @@ const light = {
     borderMaskBoxShadow: {
       default: `inset 0 0 0 1px ${lightScheme.warningColor}`,
       hover: `inset 0 0 0 1px ${lightScheme.warningHoverColor}`,
-      focus: `inset 0 0 0 1px ${lightScheme.warningHoverColor}, 0 0 0 2px ${lightScheme.warningHoverColor}`
+      focus: `inset 0 0 0 1px ${lightScheme.warningHoverColor}, 0 0 0 2px ${changeColor(lightScheme.warningHoverColor, { alpha: 0.3 })}`
     },
     backgroundColor: {
       focus: lightScheme.baseBackgroundColor
