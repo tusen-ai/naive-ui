@@ -161,6 +161,10 @@ h('NLayout', {
 ## 2020.5.19
 得看懂 vue 究竟是怎么更新组件的...
 
+## 2020.5.28
+目前看来，对于动态样式，有两种情况，一种是像直接通过 prop 生效，另一种是通过组合才生效，比如 error 的 formitem 与 input，判断是否要生成样式是个比较麻烦的事，目前看来比较凑巧的是这个样式的体积不是很大，其实放在哪边都差不多= =
+
+
 ## TODO 排序不分先后
 1. <del>Focus Detector on Time Selector</del>
 2. <del>Menu Root Indent = 0 可能造成问题</del>

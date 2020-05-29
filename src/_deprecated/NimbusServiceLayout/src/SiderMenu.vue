@@ -27,9 +27,6 @@ export default {
       return subMenuNames
     }
   },
-  mounted () {
-    console.log(this)
-  },
   methods: {
     createMenu (h, items) {
       return items.map(item => {

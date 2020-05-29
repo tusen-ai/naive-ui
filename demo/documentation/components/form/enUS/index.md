@@ -5,10 +5,10 @@ Collect & validate data.
 ```demo
 inline
 custom-rule
+custom-validation
 top
 left
 async
-custom-validation
 ```
 ## Props
 ### Form Props

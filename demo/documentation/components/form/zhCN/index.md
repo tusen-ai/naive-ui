@@ -6,10 +6,10 @@
 ```demo
 inline
 custom-rule
+custom-validation
 top
 left
 async
-custom-validation
 validator-debug
 ```
 ## Props
