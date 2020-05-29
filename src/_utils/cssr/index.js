@@ -64,4 +64,4 @@ function createStyleAsFormItem (style) {
   ])
 }
 
-export { c, cTB, cB, cE, cM, cNotM, createThemedStyle, createStyleAsFormItem }
+export { c, cTB, cB, cE, cM, cNotM, createThemedStyle, createStyleAsFormItem, namespace }

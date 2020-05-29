@@ -1,8 +1,10 @@
-import { c, cB, cTB, cE, cM, cNotM } from '../../../_utils/cssr'
+import { c, cB, cTB, cE, cM, cNotM, namespace } from '../../../_utils/cssr'
+
+const ns = namespace
 
 function createRippleAnimation (digest, color, theme) {
   return [
-    c(`@keyframes n-${theme ? theme + '-' : ''}button-${digest}-colored-ripple-spread`, {
+    c(`@keyframes ${ns}-${theme ? theme + '-' : ''}button-${digest}-colored-ripple-spread`, {
       from: {
         boxShadow: `0 0 0 0 ${color}`
       },
@@ -10,7 +12,7 @@ function createRippleAnimation (digest, color, theme) {
         boxShadow: `0 0 0 4px ${color}`
       }
     }),
-    c(`@keyframes n-${theme ? theme + '-' : ''}button-${digest}-colored-ripple-opacity`, {
+    c(`@keyframes ${ns}-${theme ? theme + '-' : ''}button-${digest}-colored-ripple-opacity`, {
       from: {
         opacity: 0.4
       },
@@ -106,7 +108,7 @@ export function createColorStyle () {
               ]),
               cM('rippling', [
                 c('&::after', {
-                  animationName: `n-${theme ? theme + '-' : ''}button-${digest}-colored-ripple-spread, n-${theme ? theme + '-' : ''}button-${digest}-colored-ripple-opacity`
+                  animationName: `${ns}-${theme ? theme + '-' : ''}button-${digest}-colored-ripple-spread, ${ns}-${theme ? theme + '-' : ''}button-${digest}-colored-ripple-opacity`
                 })
               ])
             ]),

@@ -9,50 +9,51 @@ function styleAsFormItem () {
         ({ context, props }) => {
           const pallete = context.pallete
           const status = props.status
+          const subPallete = pallete[status]
           return [
             cB('base-selection-border-mask', {
-              boxShadow: pallete[status].borderMaskBoxShadow.default
+              boxShadow: subPallete.borderMaskBoxShadow.default
             }),
             cNotM('disabled', [
               cM('active', [
                 cB('base-selection-border-mask', {
-                  boxShadow: pallete[status].borderMaskBoxShadow.active
+                  boxShadow: subPallete.borderMaskBoxShadow.active
                 }),
                 cB('base-selection-label', {
-                  backgroundColor: pallete[status].backgroundColor.active
+                  backgroundColor: subPallete.backgroundColor.active
                 }),
                 cB('base-selection-tags', {
-                  backgroundColor: pallete[status].backgroundColor.active
+                  backgroundColor: subPallete.backgroundColor.active
                 })
               ]),
               cNotM('active', [
                 cB('base-selection-label', [
                   c('&:hover ~', [
                     cB('base-selection-border-mask', {
-                      boxShadow: pallete[status].borderMaskBoxShadow.hover
+                      boxShadow: subPallete.borderMaskBoxShadow.hover
                     })
                   ]),
                   c('&:focus ~', [
                     cB('base-selection-border-mask', {
-                      boxShadow: pallete[status].borderMaskBoxShadow.focus
+                      boxShadow: subPallete.borderMaskBoxShadow.focus
                     })
                   ])
                 ]),
                 cB('base-selection-tags', [
                   c('&:hover ~', [
                     cB('base-selection-border-mask', {
-                      boxShadow: pallete[status].borderMaskBoxShadow.hover
+                      boxShadow: subPallete.borderMaskBoxShadow.hover
                     })
                   ]),
                   c('&:focus ~', [
                     cB('base-selection-border-mask', {
-                      boxShadow: pallete[status].borderMaskBoxShadow.focus
+                      boxShadow: subPallete.borderMaskBoxShadow.focus
                     })
                   ])
                 ]),
                 cM('focus', [
                   cB('base-selection-border-mask', {
-                    boxShadow: pallete[status].borderMaskBoxShadow.focus
+                    boxShadow: subPallete.borderMaskBoxShadow.focus
                   })
                 ])
               ])

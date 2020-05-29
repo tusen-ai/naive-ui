@@ -7,24 +7,25 @@ function styleAsFormItem () {
       ({ props, context }) => {
         const pallete = context.pallete
         const status = props.status
+        const subPallete = pallete[status]
         return cTB('input-number', [
           cE('border-mask', {
-            boxShadow: pallete[status].borderMaskBoxShadow.default
+            boxShadow: subPallete.borderMaskBoxShadow.default
           }),
           cE('input', {
-            caretColor: pallete[status].caretColor
+            caretColor: subPallete.caretColor
           }, [
             c('&:hover ~', [
               cE('border-mask', {
-                boxShadow: pallete[status].borderMaskBoxShadow.hover
+                boxShadow: subPallete.borderMaskBoxShadow.hover
               })
             ]),
             c('&:focus', {
-              backgroundColor: pallete[status].backgroundColor.focus
+              backgroundColor: subPallete.backgroundColor.focus
             }, [
               c('& ~', [
                 cE('border-mask', {
-                  boxShadow: pallete[status].borderMaskBoxShadow.focus
+                  boxShadow: subPallete.borderMaskBoxShadow.focus
                 })
               ])
             ])
@@ -32,12 +33,12 @@ function styleAsFormItem () {
           cE('add-button, minus-button', [
             c('&:hover', [
               cB('icon', {
-                fill: pallete[status].buttonTextColor.hover
+                fill: subPallete.buttonTextColor.hover
               })
             ]),
             c('&:active', [
               cB('icon', {
-                fill: pallete[status].buttonTextColor.active
+                fill: subPallete.buttonTextColor.active
               })
             ])
           ])

@@ -10,26 +10,27 @@ function createInputStyleAsFormItem () {
       }) => {
         const pallete = context.pallete
         const status = props.status
+        const subPallete = pallete[status]
         return [
           cM('stateful', [
             cE('border-mask', {
-              borderColor: pallete[status].borderMaskBorderColor.default
+              borderColor: subPallete.borderMaskBorderColor.default
             }),
             c('&:hover', [
               cE('border-mask', {
-                borderColor: pallete[status].borderMaskBorderColor.hover
+                borderColor: subPallete.borderMaskBorderColor.hover
               })
             ]),
             cM('focus', {
-              backgroundColor: pallete[status].backgroundColor.focus
+              backgroundColor: subPallete.backgroundColor.focus
             }, [
               cE('border-mask', {
-                borderColor: pallete[status].borderMaskBorderColor.focus,
-                boxShadow: pallete[status].borderMaskBoxShadow.focus
+                borderColor: subPallete.borderMaskBorderColor.focus,
+                boxShadow: subPallete.borderMaskBoxShadow.focus
               })
             ]),
             cE('input, textarea', {
-              caretColor: pallete[status].caretColor.default
+              caretColor: subPallete.caretColor.default
             })
           ])
         ]
