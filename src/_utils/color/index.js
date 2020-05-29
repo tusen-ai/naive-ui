@@ -41,6 +41,14 @@ export function composite (base, overlay) {
   return 'rgb(' + base.map((v, i) => floor(v * (1 - overlay[3]) + overlay[i] * overlay[3])).join(', ') + ')'
 }
 
+export function changeColor (base, options) {
+  const [r, g, b] = read(base)
+  if (options.alpha) {
+    return `rgb(${r}, ${g}, ${b}, ${options.alpha})`
+  }
+  return `rgb(${r}, ${g}, ${b})`
+}
+
 export function hash (rgb) {
   if (!rgb) return null
   return rgb.join('-')

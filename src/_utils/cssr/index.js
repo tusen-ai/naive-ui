@@ -1,11 +1,16 @@
 import { CSSRender } from 'css-render'
 import BEMPlugin from '@css-render/plugin-bem'
 
-const prefix = '.n-'
+const namespace = 'n'
+const prefix = `.${namespace}-`
+const elementPrefix = '__'
+const modifierPrefix = '--'
 
 const cssr = CSSRender()
 const plugin = BEMPlugin({
-  blockPrefix: prefix
+  blockPrefix: prefix,
+  elementPrefix,
+  modifierPrefix
 })
 cssr.use(plugin)
 const { c, context } = cssr
@@ -49,4 +54,14 @@ function createThemedStyle (style, themes) {
   ])
 }
 
-export { c, cTB, cB, cE, cM, cNotM, createThemedStyle }
+function createStyleAsFormItem (style) {
+  return c(`${prefix}form-item`, [
+    c(`${prefix}form-item-blank`, [
+      c(({ props }) => `&${prefix}form-item-blank${modifierPrefix}${props.status}`, [
+        style
+      ])
+    ])
+  ])
+}
+
+export { c, cTB, cB, cE, cM, cNotM, createThemedStyle, createStyleAsFormItem }
