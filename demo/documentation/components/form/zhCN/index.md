@@ -9,6 +9,7 @@ custom-rule
 top
 left
 async
+custom-validation
 validator-debug
 ```
 ## Props
@@ -36,19 +37,21 @@ validator-debug
 ### Form Item Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|feedback|`string`|`null`|表项的反馈信息。不设为 `null` 时，会覆盖规则验证的结果|
+|first|`boolean`|`false`|是否只展示首个出错信息|
+|ingore-path-change|`boolean`|`false`|通常 `path` 的改变会导致数据来源的变化，所以 naive-ui 会清空验证信息。如果不期望这个行为，可以将其置为 `true`|
 |label|`string`|`null`||
-|label-width|`number \| string`|`null`|如果没有被设定，使用外层表单的 `label-width`|
-|label-style|`object`|`{}`||
 |label-align|`'left' \| 'right'`|`null`|标签的文本对齐方式。如果没有被设定，使用外层表单的 `label-align`|
 |label-placement|`'left' \| 'top'`|`null`|如果没有被设定，使用外层表单的 `label-placement`|
+|label-style|`object`|`{}`||
+|label-width|`number \| string`|`null`|如果没有被设定，使用外层表单的 `label-width`|
 |path|`string`|`null`|将值收集到外层表单 `model` 对象的路径|
-|rule-path|`string`|`null`|从外层表单的 `rules` 对象获取规则的路径。如果没有设定，使用表项的 `path` 代替|
 |required|`boolean`|`false`|是否展示必填的星号。注意：一个 `required: true` 的规则比这个属性有更高的优先级 & 这个属性不会影响表单的验证。验证完全依赖于规则|
+|rule|`FormItemRule \| Array<FormItemRule>`|`null`|验证表项的规则，它会被通过 `rule-path` 从外层表单获取的规则合并来作为表项的验证规则。推荐还是在外层表单设置所有规则|
+|rule-path|`string`|`null`|从外层表单的 `rules` 对象获取规则的路径。如果没有设定，使用表项的 `path` 代替|
 |show-require-mark|`boolean`|`true`|在表项是必填的时候是不是展示星号。如果没有被设定，使用外层 `n-form` 的 `show-require-mark`|
-|rule|`FormItemRule \| Array<FormItemRule>`|`null`|验证表项的规则，它会被通过 `rule-path` 从外层表单获取的规则合并来作为表项的验证规则。推荐还是在外层表单设置所有规则。|
-|first|`boolean`|`false`|是否只展示首个出错信息。|
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
-|ingore-path-change|`boolean`|`false`|通常 `path` 的改变会导致数据来源的变化，所以 naive-ui 会清空验证信息。如果不期望这个行为，可以将其置为 `true`|
+|validation-status|`'error' \| 'success' \| 'warning' \| null`|`null`|表单的验证状态。不设为 `null`时，会覆盖规则验证的结果|
 
 ### Form Item Row Props
 接受 Form Item & [Row](n-row#Row-Props) 所有的 Props。
