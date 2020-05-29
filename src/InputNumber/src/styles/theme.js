@@ -11,7 +11,12 @@ const light = {
     },
     backgroundColor: {
       focus: lightScheme.baseBackgroundColor
-    }
+    },
+    buttonTextColor: {
+      hover: lightScheme.errorHoverColor,
+      active: lightScheme.errorActiveColor
+    },
+    caretColor: lightScheme.errorColor
   },
   warning: {
     borderMaskBoxShadow: {
@@ -21,7 +26,12 @@ const light = {
     },
     backgroundColor: {
       focus: lightScheme.baseBackgroundColor
-    }
+    },
+    buttonTextColor: {
+      hover: lightScheme.warningHoverColor,
+      active: lightScheme.warningActiveColor
+    },
+    caretColor: lightScheme.warningColor
   }
 }
 
@@ -34,7 +44,12 @@ const dark = {
     },
     backgroundColor: {
       focus: changeColor(darkScheme.errorColor, { alpha: 0.1 })
-    }
+    },
+    buttonTextColor: {
+      hover: darkScheme.errorHoverColor,
+      active: darkScheme.errorActiveColor
+    },
+    caretColor: darkScheme.errorColor
   },
   warning: {
     borderMaskBoxShadow: {
@@ -44,7 +59,12 @@ const dark = {
     },
     backgroundColor: {
       focus: changeColor(darkScheme.warningColor, { alpha: 0.1 })
-    }
+    },
+    buttonTextColor: {
+      hover: darkScheme.warningHoverColor,
+      active: darkScheme.warningActiveColor
+    },
+    caretColor: darkScheme.warningColor
   }
 }
 

@@ -1,4 +1,4 @@
-import { createStyleAsFormItem, createThemedStyle, c, cTB, cE } from '../../../_utils/cssr'
+import { createStyleAsFormItem, createThemedStyle, c, cTB, cB, cE } from '../../../_utils/cssr'
 import theme from './theme'
 
 function styleAsFormItem () {
@@ -11,18 +11,34 @@ function styleAsFormItem () {
           cE('border-mask', {
             boxShadow: pallete[status].borderMaskBoxShadow.default
           }),
-          cE('input', [
+          cE('input', {
+            caretColor: pallete[status].caretColor
+          }, [
             c('&:hover ~', [
               cE('border-mask', {
                 boxShadow: pallete[status].borderMaskBoxShadow.hover
               })
             ]),
-            c('&:focus', [
+            c('&:focus', {
+              backgroundColor: pallete[status].backgroundColor.focus
+            }, [
               c('& ~', [
                 cE('border-mask', {
                   boxShadow: pallete[status].borderMaskBoxShadow.focus
                 })
               ])
+            ])
+          ]),
+          cE('add-button, minus-button', [
+            c('&:hover', [
+              cB('icon', {
+                fill: pallete[status].buttonTextColor.hover
+              })
+            ]),
+            c('&:active', [
+              cB('icon', {
+                fill: pallete[status].buttonTextColor.active
+              })
             ])
           ])
         ])
