@@ -164,6 +164,26 @@ h('NLayout', {
 ## 2020.5.28
 目前看来，对于动态样式，有两种情况，一种是像直接通过 prop 生效，另一种是通过组合才生效，比如 error 的 formitem 与 input，判断是否要生成样式是个比较麻烦的事，目前看来比较凑巧的是这个样式的体积不是很大，其实放在哪边都差不多= =
 
+## 2020.5.29
+主题变量有两种组织方式：
+```
+light {
+  error: {
+    backgroundColor: {
+      hover
+    }
+  }
+}
+或者
+light {
+  backgroundColor: {
+    error: {
+      default
+    }
+  }
+}
+```
+我目前觉得第一种好点，因为扩展一般是按照种类扩展，每次插入一个同样结构的块。而第二种是每次扩展的时候在每个块里同样的位置插入一行，这样扩展的时候写起来很别扭。
 
 ## TODO 排序不分先后
 1. <del>Focus Detector on Time Selector</del>
