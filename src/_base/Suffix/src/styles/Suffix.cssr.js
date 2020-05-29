@@ -7,24 +7,25 @@ function styleAsFormItem () {
       ({ context, props }) => {
         const pallete = context.pallete
         const status = props.status
+        const subPallete = pallete[status]
         return [
           cB('base-suffix-cross', [
             c('&:hover', [
               cE('icon', {
-                fill: pallete.crossColor[status].hover
+                fill: subPallete.crossColor.hover
               })
             ]),
             c('&:active', [
               cE('icon', {
-                fill: pallete.crossColor[status].active
+                fill: subPallete.crossColor.active
               })
             ])
           ]),
           cB('base-suffix-arrow', [
             cM('active', [
               c('&::after', {
-                borderLeftColor: pallete.arrowColor[status].active,
-                borderBottomColor: pallete.arrowColor[status].active
+                borderLeftColor: subPallete.arrowColor.active,
+                borderBottomColor: subPallete.arrowColor.active
               })
             ])
           ])

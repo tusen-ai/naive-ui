@@ -2,42 +2,43 @@ import lightScheme from '../../../../_styles-in-js/lightStyleScheme.scss'
 import darkScheme from '../../../../_styles-in-js/darkStyleScheme.scss'
 
 const light = {
-  crossColor: {
-    error: {
+  error: {
+    crossColor: {
       hover: lightScheme.errorHoverColor,
       active: lightScheme.errorActiveColor
     },
-    warning: {
-      hover: lightScheme.warningHoverColor,
-      active: lightScheme.warningActiveColor
+    arrowColor: {
+      active: lightScheme.errorHoverColor
     }
   },
-  arrowColor: {
-    error: {
-      active: lightScheme.errorHoverColor
+  warning: {
+    crossColor: {
+      hover: lightScheme.warningHoverColor,
+      active: lightScheme.warningActiveColor
     },
-    warning: {
+    arrowColor: {
       active: lightScheme.warningHoverColor
     }
   }
 }
 
 const dark = {
-  crossColor: {
-    error: {
+  error: {
+    crossColor: {
       hover: darkScheme.errorHoverColor,
       active: darkScheme.errorActiveColor
     },
-    warning: {
-      hover: darkScheme.warningHoverColor,
-      active: darkScheme.warningActiveColor
+    arrowColor: {
+      active: darkScheme.errorHoverColor
+
     }
   },
-  arrowColor: {
-    error: {
-      active: darkScheme.errorHoverColor
+  warning: {
+    crossColor: {
+      hover: darkScheme.warningHoverColor,
+      active: darkScheme.warningActiveColor
     },
-    warning: {
+    arrowColor: {
       active: darkScheme.warningHoverColor
     }
   }
