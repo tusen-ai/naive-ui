@@ -44,19 +44,19 @@ let inputStyleAsFormItem = null
 export function mountStyleAsFormItem () {
   if (!inputStyleAsFormItem) {
     inputStyleAsFormItem = createInputStyleAsFormItem()
+    inputStyleAsFormItem.mount({
+      target: 'n-input-error',
+      count: false,
+      props: {
+        status: 'error'
+      }
+    })
+    inputStyleAsFormItem.mount({
+      target: 'n-input-warning',
+      count: false,
+      props: {
+        status: 'warning'
+      }
+    })
   }
-  inputStyleAsFormItem.mount({
-    target: 'n-input-error',
-    count: false,
-    props: {
-      status: 'error'
-    }
-  })
-  inputStyleAsFormItem.mount({
-    target: 'n-input-warning',
-    count: false,
-    props: {
-      status: 'warning'
-    }
-  })
 }

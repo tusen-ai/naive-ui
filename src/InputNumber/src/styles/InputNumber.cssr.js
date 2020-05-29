@@ -36,22 +36,19 @@ let style = null
 export function mountStyleAsFormItem () {
   if (style === null) {
     style = styleAsFormItem()
+    style.mount({
+      target: 'input-number-error',
+      count: false,
+      props: {
+        status: 'error'
+      }
+    })
+    style.mount({
+      target: 'input-number-warning',
+      count: false,
+      props: {
+        status: 'warning'
+      }
+    })
   }
-  style.mount({
-    target: 'input-number-error',
-    count: false,
-    props: {
-      status: 'error'
-    }
-  })
-  console.log(style.render({
-    status: 'warning'
-  }))
-  style.mount({
-    target: 'input-number-warning',
-    count: false,
-    props: {
-      status: 'warning'
-    }
-  })
 }
