@@ -207,6 +207,7 @@ export default {
       default: true
     },
     type: {
+      // TODO: warning message
       validator (value) {
         return [
           'default',

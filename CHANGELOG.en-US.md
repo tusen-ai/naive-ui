@@ -1,4 +1,12 @@
 # CHANGELOG
+## 1.2.1 (2020-05-29)
+### Fixes
+- Fix the problem that `n-slider` tooltip has no z-index.
+
+## 1.2.0 (2020-05-29)
+### Features
+- Add `feedback` and `validation-status` props for `n-form-item`.
+
 ## 1.1.5 (2020-05-28)
 ### Features
 - Add `display-directive` prop for `n-collapse` and `n-collapse-item`.

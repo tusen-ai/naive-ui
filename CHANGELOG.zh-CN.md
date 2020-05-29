@@ -1,4 +1,12 @@
 # CHANGELOG
+## 1.2.1 (2020-05-29)
+### Fixes
+- 修正了 `n-slider` 弹框没有 z-index 的问题
+
+## 1.2.0 (2020-05-29)
+### Features
+- 为 `n-form-item` 增加了 `feedback` 和 `validation-status` 属性
+
 ## 1.1.5 (2020-05-28)
 ### Features
 - 为 `n-collapse` 和 `n-collapse-item` 增加了 `display-directive` 属性
