@@ -44,11 +44,8 @@
         right: 0;
         top: 0;
         bottom: 0;
-        border: 1px solid transparent;
         pointer-events: none;
-        transition:
-          border-color .3s $--n-ease-in-out-cubic-bezier,
-          box-shadow .3s $--n-ease-in-out-cubic-bezier;
+        transition: box-shadow .3s $--n-ease-in-out-cubic-bezier;
         z-index: 1;
       }
       @include e(mark) {
@@ -65,7 +62,7 @@
       }
     }
     @include b(base-selection-border-mask) {
-      border: 1px solid map-get($--base-selection-border-mask-border-color, 'default');
+      box-shadow: map-get($--base-selection-border-mask-box-shadow, 'default');
     }
     @include e(placeholder) {
       @include once {
@@ -155,9 +152,14 @@
       }
     }
     @include not-m(disabled) {
+      @include m(focus) {
+        @include b(base-selection-border-mask) {
+          box-shadow: map-get($--base-selection-border-mask-box-shadow, 'focus');
+        }
+      }
       @include m(active) {
         @include b(base-selection-border-mask) {
-          border-color: map-get($--base-selection-border-mask-border-color, 'active');
+          box-shadow: map-get($--base-selection-border-mask-box-shadow, 'active');
         }
         @include b(base-selection-label) {    
           background-color: map-get($--base-selection-background-color, 'active');
@@ -171,36 +173,30 @@
           }
         }
       }
-      @include b(base-selection-label) {
-        &:hover ~ {
-          @include b(base-selection-border-mask) {
-            border-color: map-get($--base-selection-border-mask-border-color, 'hover');
+      @include not-m(active) {
+        @include b(base-selection-label) {
+          &:focus ~ {
+            @include b(base-selection-border-mask) {
+              box-shadow: map-get($--base-selection-border-mask-box-shadow, 'focus');
+            }
+          }
+          &:hover ~ {
+            @include b(base-selection-border-mask) {
+              box-shadow: map-get($--base-selection-border-mask-box-shadow, 'hover');
+            }
           }
         }
-        &:focus ~ {
-          @include b(base-selection-border-mask) {
-            border-color: map-get($--base-selection-border-mask-border-color, 'focus');
-            box-shadow: map-get($--base-selection-border-mask-box-shadow, 'focus');
+        @include b(base-selection-tags) {
+          &:focus ~ {
+            @include b(base-selection-border-mask) {
+              box-shadow: map-get($--base-selection-border-mask-box-shadow, 'focus');
+            }
           }
-        }
-      }
-      @include b(base-selection-tags) {
-        &:hover ~ {
-          @include b(base-selection-border-mask) {
-            border-color: map-get($--base-selection-border-mask-border-color, 'hover');
+          &:hover ~ {
+            @include b(base-selection-border-mask) {
+              box-shadow: map-get($--base-selection-border-mask-box-shadow, 'hover');
+            }
           }
-        }
-        &:focus ~ {
-          @include b(base-selection-border-mask) {
-            border-color: map-get($--base-selection-border-mask-border-color, 'focus');
-            box-shadow: map-get($--base-selection-border-mask-box-shadow, 'focus');
-          }
-        }
-      }
-      @include m(focus) {
-        @include b(base-selection-border-mask) {
-          border-color: map-get($--base-selection-border-mask-border-color, 'focus');
-          box-shadow: map-get($--base-selection-border-mask-box-shadow, 'focus');
         }
       }
     }
@@ -266,66 +262,6 @@
           visibility: hidden;
           user-select: none;
           opacity: 0;
-        }
-      }
-    }
-  }
-  @include as-form-item {
-    @include with-status (error) {
-      @include b(base-selection) {
-        @include b(base-selection-border-mask) {
-          border-color: map-get($--base-selection-border-mask-border-color, 'error-default');
-        }
-        @include b(base-selection-label) {
-          box-shadow: map-get($--base-selection-box-shadow, 'error-default');
-        }
-        @include b(base-selection-tags) {
-          box-shadow: map-get($--base-selection-box-shadow, 'error-default');
-        }
-        @include not-m(disabled) {
-          @include m(active) {
-            @include b(base-selection-border-mask) {
-              border-color: map-get($--base-selection-border-mask-border-color, 'error-active');
-            }
-            @include b(base-selection-label) {
-              background-color: map-get($--base-selection-background-color, 'error-active');
-            }
-            @include b(base-selection-tags) {
-              background-color: map-get($--base-selection-background-color, 'error-active');
-            }
-          }
-          @include b(base-selection-label) {
-            &:hover ~ {
-              @include b(base-selection-border-mask) {
-                border-color: map-get($--base-selection-border-mask-border-color, 'error-hover');
-              }
-            }
-            &:focus ~ {
-              @include b(base-selection-border-mask) {
-                border-color: map-get($--base-selection-border-mask-border-color, 'error-focus');
-                box-shadow: map-get($--base-selection-border-mask-box-shadow, 'error-focus');
-              }
-            }
-          }
-          @include b(base-selection-tags) {
-            &:hover ~ {
-              @include b(base-selection-border-mask) {
-                border-color: map-get($--base-selection-border-mask-border-color, 'error-hover');
-              }
-            }
-            &:focus ~ {
-              @include b(base-selection-border-mask) {
-                border-color: map-get($--base-selection-border-mask-border-color, 'error-focus');
-                box-shadow: map-get($--base-selection-border-mask-box-shadow, 'error-focus');
-              }
-            }
-          }
-          @include m(focus) {
-            @include b(base-selection-border-mask) {
-              border-color: map-get($--base-selection-border-mask-border-color, 'error-focus');
-              box-shadow: map-get($--base-selection-border-mask-box-shadow, 'error-focus');
-            }
-          }
         }
       }
     }

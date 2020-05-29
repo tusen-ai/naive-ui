@@ -6,34 +6,24 @@
   $--base-selection-background-color: (
     'default': $--n-input-overlay-background-color,
     'disabled': $--n-disabled-background-color,
-    'active': change-color($--n-primary-color, $alpha: 0.1),
-    'error-active': change-color($--n-error-color, $alpha: 0.1),
+    'active': change-color($--n-primary-color, $alpha: 0.1)
   ) !global;
   $--base-selection-placeholder-color: (
     'default': $--n-disabled-text-color,
     'disabled': change-color($--n-disabled-text-color, $alpha: alpha($--n-disabled-text-color) * $--n-disabled-opacity)
   ) !global;
-  $--base-selection-border-mask-border-color: (
-    'default': transparent,
-    'hover': $--n-primary-color,
-    'active': $--n-primary-color,
-    'focus': $--n-primary-color,
-    'disabled': transparent,
-    'error-hover': $--n-error-color,
-    'error-active': $--n-error-color,
-    'error-focus': $--n-error-color
-  ) !global;
   $--base-selection-border-mask-box-shadow: (
-    'focus': 0 0 8px 0px change-color($--n-primary-color, $alpha: .3),
-    'error-focus': 0 0 8px 0 change-color($--n-error-color, $alpha: .3)
+    'default': inset 0 0 0 1px transparent,
+    'hover': inset 0 0 0 1px $--n-primary-hover-color,
+    'active': (inset 0 0 0 1px $--n-primary-hover-color, 0 0 8px 0px change-color($--n-primary-color, $alpha: .3)),
+    'focus': inset 0 0 0 1px $--n-primary-hover-color,
+    'disabled': inset 0 0 0 1px transparent
   ) !global;
   $--base-selection-box-shadow: (
     'default': none,
-    'disabled': none,
-    'error-default': inset 0 0 0 1px $--n-error-color
+    'disabled': none
   ) !global;
   $--base-selection-caret-color: (
-    'default': $--n-primary-color,
-    'error': $--n-error-color
+    'default': $--n-primary-color
   ) !global; 
 }
