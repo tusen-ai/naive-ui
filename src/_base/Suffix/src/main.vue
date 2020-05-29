@@ -47,7 +47,7 @@ export default {
   name: 'NBaseSuffix',
   inject: {
     NFormItem: {
-      default: 'default'
+      default: null
     }
   },
   components: {
@@ -103,7 +103,7 @@ export default {
     }
   },
   created () {
-    if (this.NFormItem !== 'default') {
+    if (this.NFormItem) {
       mountStyleAsFormItem()
     }
   },

@@ -9,7 +9,11 @@ export default function (events = {
         const size = this.size
         if (size) return size
         const NFormItem = this.NFormItem
-        if (NFormItem && NFormItem.syntheticSize) {
+        if (
+          NFormItem &&
+          NFormItem !== '__FORM_ITEM_INNER__' &&
+          NFormItem.syntheticSize
+        ) {
           return NFormItem.syntheticSize
         }
         return defaultSize
@@ -17,7 +21,7 @@ export default function (events = {
     },
     provide () {
       return {
-        NFormItem: null
+        NFormItem: '__FORM_ITEM_INNER__'
       }
     },
     inject: {
@@ -29,15 +33,17 @@ export default function (events = {
       Object.keys(events).forEach(event => {
         const asEvent = events[event]
         this.$on(event, function (value) {
-          if (this.NFormItem) {
-            this.NFormItem.$emit(asEvent, value)
+          const NFormItem = this.NFormItem
+          if (NFormItem && NFormItem !== '__FORM_ITEM_INNER__') {
+            NFormItem.$emit(asEvent, value)
           }
         })
       })
     },
     beforeDestroy () {
-      if (this.NFormItem) {
-        this.NFormItem._initData()
+      const NFormItem = this.NFormItem
+      if (NFormItem && NFormItem !== '__FORM_ITEM_INNER__') {
+        NFormItem._initData()
       }
     }
   }

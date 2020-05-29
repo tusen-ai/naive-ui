@@ -193,7 +193,7 @@ export default {
   },
   inject: {
     NFormItem: {
-      default: 'default'
+      default: null
     }
   },
   props: {
@@ -294,7 +294,7 @@ export default {
     }
   },
   created () {
-    if (this.NFormItem !== 'default') {
+    if (this.NFormItem) {
       mountStyleAsFormItem()
     }
   },

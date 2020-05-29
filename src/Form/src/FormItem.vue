@@ -192,7 +192,11 @@ export default {
     syntheticSize () {
       if (this.size) return this.size
       const NFormItem = this.NFormItem
-      if (NFormItem && NFormItem.syntheticSize) return NFormItem.syntheticSize
+      if (
+        NFormItem &&
+        NFormItem !== '__FORM_ITEM_INNER__' &&
+        NFormItem.syntheticSize
+      ) return NFormItem.syntheticSize
       const NForm = this.NForm
       if (NForm && NForm.size) {
         return NForm.size

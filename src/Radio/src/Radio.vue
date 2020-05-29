@@ -58,7 +58,11 @@ export default {
         return NRadioGroup.syntheticSize
       }
       const NFormItem = this.NFormItem
-      if (NFormItem && NFormItem.syntheticSize) {
+      if (
+        NFormItem &&
+        NFormItem !== '__FORM_ITEM_INNER__' &&
+        NFormItem.syntheticSize
+      ) {
         return NFormItem.syntheticSize
       }
       return 'medium'
