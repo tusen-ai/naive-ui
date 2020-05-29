@@ -80,13 +80,14 @@ $block-depth: 0;
 $common-css-attrs-generated: false;
 $theme: null;
 $in-themes-mixin: false;
-$theme-names: 'dark', 'light';
-/** wait for sass to support dynamic @include mixins */
-$default-theme: 'light';
+$theme-names: 'dark';
+/** wait for sass to support dynamic @include mixins, although it may be impossible */
+$fallback-theme: 'light';
 
 @mixin themes-mixin() {
   $in-themes-mixin: true !global;
   $theme: 'light' !global;
+  // fallback theme is light
   @include setup-light-theme();
   @content;
   $common-css-attrs-generated: true !global;
