@@ -19,19 +19,19 @@ debug
 ### Button Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|color|`string`|`null`|只支持形如 `#FFF`, `#FFFFFF`, `rgb(0, 0, 0)` 的颜色|
-|size|`'tiny' \| 'small' \| 'medium' \| 'large'`|`'medium'`||
-|type|`'default' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'`|`'default'`||
-|text|`boolean`|`false`||
 |block|`boolean`|`false`||
-|ghost|`boolean`|`false`||
-|disabled|`boolean`|`false`||
 |circle|`boolean`|`false`||
-|round|`boolean`|`false`||
-|loading|`boolean`|`false`||
-|keyboard|`boolean`|`true`|是否支持键盘操作|
+|color|`string`|`null`|只支持形如 `#FFF`, `#FFFFFF`, `rgb(0, 0, 0)` 的颜色|
+|disabled|`boolean`|`false`||
+|ghost|`boolean`|`false`||
 |icon-placement|`'left' \| 'right'`|`'left'`||
+|keyboard|`boolean`|`true`|是否支持键盘操作|
+|loading|`boolean`|`false`||
+|round|`boolean`|`false`||
+|size|`'tiny' \| 'small' \| 'medium' \| 'large'`|`'medium'`||
+|text|`boolean`|`false`||
 |theme|`'light' \| 'dark'`|`null`||
+|type|`'default' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'`|`'default'`||
 
 ### Button Group Props
 |名称|类型|默认值|说明|

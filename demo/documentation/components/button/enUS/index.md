@@ -6,6 +6,7 @@ basic
 size
 text
 disabled
+color
 icon
 events
 shape
@@ -18,19 +19,19 @@ debug
 ### Button Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|color|`string`|`null`|Only support `#FFF`, `#FFFFFF`, `rgb(0, 0, 0)` formatted colors.|
-|size|`'tiny' \| 'small' \| 'medium' \| 'large'`|`'medium'`||
-|type|`'default' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'`|`'default'`||
-|text|`boolean`|`false`||
 |block|`boolean`|`false`||
-|ghost|`boolean`|`false`||
-|disabled|`boolean`|`false`||
 |circle|`boolean`|`false`||
-|round|`boolean`|`false`||
-|loading|`boolean`|`false`||
-|keyboard|`boolean`|`true`|Whether is supports keyboard operation.|
+|color|`string`|`null`|Only support `#FFF`, `#FFFFFF`, `rgb(0, 0, 0)` formatted colors.|
+|disabled|`boolean`|`false`||
+|ghost|`boolean`|`false`||
 |icon-placement|`'left' \| 'right'`|`'left'`||
+|keyboard|`boolean`|`true`|Whether is supports keyboard operation.|
+|loading|`boolean`|`false`||
+|round|`boolean`|`false`||
+|size|`'tiny' \| 'small' \| 'medium' \| 'large'`|`'medium'`||
+|text|`boolean`|`false`||
 |theme|`'light' \| 'dark'`|`null`||
+|type|`'default' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'`|`'default'`||
 
 ### Button Group Props
 |Name|Type|Default|Description|
