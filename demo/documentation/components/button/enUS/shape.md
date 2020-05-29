@@ -3,18 +3,18 @@ Button has different shapes.
 ```html
 <n-button circle>
   <template v-slot:icon>
-    <md-save />
+    <cash-outline />
   </template>
 </n-button>
-<n-button type="primary" round>Primary</n-button>
-<n-button type="info">Info</n-button>
+<n-button round>Round</n-button>
+<n-button>Rect</n-button>
 ```
 ```js
-import mdSave from 'naive-ui/lib/icons/md-save'
+import cashOutline from 'naive-ui/lib/icons/cash-outline'
 
 export default {
   components: {
-    mdSave
+    cashOutline
   }
 }
 ```

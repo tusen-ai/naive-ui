@@ -3,18 +3,18 @@
 ```html
 <n-button circle>
   <template v-slot:icon>
-    <md-save />
+    <cash-outline />
   </template>
 </n-button>
-<n-button type="primary" round>Primary</n-button>
-<n-button type="info">Info</n-button>
+<n-button round>圆角</n-button>
+<n-button>方</n-button>
 ```
 ```js
-import mdSave from 'naive-ui/lib/icons/md-save'
+import cashOutline from 'naive-ui/lib/icons/cash-outline'
 
 export default {
   components: {
-    mdSave
+    cashOutline
   }
 }
 ```

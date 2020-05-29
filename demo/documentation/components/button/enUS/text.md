@@ -1,38 +1,24 @@
 # Text Button
+Somebody also calls it `link` button.
 ```html
-<n-button text size="large">
+<n-button
+  text
+  size="large"
+>
   <template v-slot:icon>
     <n-icon>
-      <cash-outline />
+      <train-outline />
     </n-icon>
   </template>
-  Default
-</n-button>
-<n-button text type="primary" ghost size="large">
-  <template v-slot:icon>
-    <n-icon>
-      <cash-outline />
-    </n-icon>
-  </template>
-</n-button>
-<n-button text type="info" loading size="small">Info</n-button>
-<n-button text type="success">Success</n-button>
-<n-button text type="warning">Warning</n-button>
-<n-button text type="error" icon-placement="right">
-  <template v-slot:icon>
-    <n-icon>
-      <cash-outline />
-    </n-icon>
-  </template>
-  Error
+  The Engine is Still Spiting Smoke
 </n-button>
 ```
 ```js
-import cashOutline from 'naive-ui/lib/icons/cash-outline'
+import trainOutline from 'naive-ui/lib/icons/train-outline'
 
 export default {
   components: {
-    cashOutline
+    trainOutline
   }
 }
 ```

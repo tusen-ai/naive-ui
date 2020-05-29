@@ -3,58 +3,19 @@ Button has loading status.
 ```html
 <n-button
   :loading="loading"
-  @click="loading = !loading"
->
-  <template v-slot:icon>
-    <md-save />
-  </template>
-  Loading
-</n-button>
-<br>
-<n-button
-  :loading="loading"
   icon-placement="right"
   @click="loading = !loading"
 >
-  <template v-slot:icon>
-    <md-save />
-  </template>
-  Loading
-</n-button>
-<br>
-<n-button
-  :loading="loading"
-  size="small"
-  @click="loading = !loading"
->
-  Loading
-</n-button>
-<br>
-<n-button
-  :loading="loading"
-  size="large"
-  @click="loading = !loading"
->
-  Loading
-</n-button>
-<br>
-<n-button
-  :loading="loading"
-  type="primary"
-  size="large"
-  round
-  @click="loading = !loading"
->
-  Loading
+  Click Me
 </n-button>
 ```
 
 ```js
-import mdSave from 'naive-ui/lib/icons/md-save'
+import cashOutline from 'naive-ui/lib/icons/cash-outline'
 
 export default {
   components: {
-    mdSave
+    cashOutline
   },
   data () {
     return {

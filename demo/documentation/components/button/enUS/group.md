@@ -3,7 +3,6 @@ Button can be grouped.
 ```html
 <n-button-group vertical>
   <n-button
-    type="primary"
     round
   >
     <template v-slot:icon>
@@ -12,7 +11,6 @@ Button can be grouped.
     Live a
   </n-button>
   <n-button
-    type="warning"
     ghost
   >
     <template v-slot:icon>
@@ -20,9 +18,7 @@ Button can be grouped.
     </template>
     Sufficient
   </n-button>
-  <n-button
-    type="error"
-  >
+  <n-button>
     <template v-slot:icon>
       <log-in-outline />
     </template>
@@ -30,24 +26,19 @@ Button can be grouped.
   </n-button>
 </n-button-group>
 <n-button-group vertical size="large">
-  <n-button
-    type="success"
-  >
+  <n-button>
     <template v-slot:icon>
       <log-in-outline />
     </template>
     With
   </n-button>
-  <n-button
-    type="info"
-  >
+  <n-button>
     <template v-slot:icon>
       <log-in-outline />
     </template>
     Enough
   </n-button>
   <n-button
-    type="error"
     ghost
     round
   >
@@ -59,7 +50,6 @@ Button can be grouped.
 </n-button-group>
 <n-button-group size="small">
   <n-button
-    type="default"
     round
   >
     <template v-slot:icon>
@@ -67,17 +57,13 @@ Button can be grouped.
     </template>
     Life
   </n-button>
-  <n-button
-    type="default"
-  >
+  <n-button>
     <template v-slot:icon>
       <log-in-outline />
     </template>
     Is
   </n-button>
-  <n-button
-    type="default"
-  >
+  <n-button>
     <template v-slot:icon>
       <log-in-outline />
     </template>
@@ -86,7 +72,6 @@ Button can be grouped.
 </n-button-group>
 <n-button-group>
   <n-button
-    type="primary"
     ghost
   >
     <template v-slot:icon>
@@ -96,7 +81,6 @@ Button can be grouped.
   </n-button>
   <n-button
     ghost
-    type="primary"
   >
     <template v-slot:icon>
       <log-in-outline />
@@ -104,7 +88,6 @@ Button can be grouped.
     One More
   </n-button>
   <n-button
-    type="info"
     round
   >
     <template v-slot:icon>

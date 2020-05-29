@@ -6,14 +6,13 @@ basic
 size
 text
 disabled
-color
 icon
 events
 shape
 ghost
 loading
+color
 group
-debug
 ```
 ## Props
 ### Button Props

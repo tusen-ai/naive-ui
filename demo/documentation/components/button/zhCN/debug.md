@@ -10,7 +10,7 @@ Debug 用的。
     round
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Default
   </n-button>
@@ -19,7 +19,7 @@ Debug 用的。
     disabled
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Primary
   </n-button>
@@ -28,7 +28,7 @@ Debug 用的。
     icon-placement="right"
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Info
   </n-button>
@@ -36,7 +36,7 @@ Debug 用的。
     type="warning"
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Warning
   </n-button>
@@ -44,7 +44,7 @@ Debug 用的。
     type="success"
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Success
   </n-button>
@@ -52,7 +52,7 @@ Debug 用的。
     type="error"
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Error
   </n-button>
@@ -61,7 +61,7 @@ Debug 用的。
     ghost
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Default
   </n-button>
@@ -71,7 +71,7 @@ Debug 用的。
     round
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Primary
   </n-button>
@@ -81,7 +81,7 @@ Debug 用的。
     disabled
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Info
   </n-button>
@@ -91,7 +91,7 @@ Debug 用的。
     icon-placement="right"
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Warning
   </n-button>
@@ -100,7 +100,7 @@ Debug 用的。
     ghost
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Success
   </n-button>
@@ -109,7 +109,7 @@ Debug 用的。
     ghost
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Error
   </n-button>
@@ -118,7 +118,7 @@ Debug 用的。
     loading
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Default
   </n-button>
@@ -127,7 +127,7 @@ Debug 用的。
     loading
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Primary
   </n-button>
@@ -137,7 +137,7 @@ Debug 用的。
     round
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Info
   </n-button>
@@ -147,7 +147,7 @@ Debug 用的。
     disabled
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Warning
   </n-button>
@@ -157,7 +157,7 @@ Debug 用的。
     icon-placement="right"
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Success
   </n-button>
@@ -166,7 +166,7 @@ Debug 用的。
     loading
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Error
   </n-button>
@@ -176,7 +176,7 @@ Debug 用的。
     loading
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Default
   </n-button>
@@ -186,7 +186,7 @@ Debug 用的。
     loading
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Primary
   </n-button>
@@ -196,7 +196,7 @@ Debug 用的。
     loading
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Info
   </n-button>
@@ -207,7 +207,7 @@ Debug 用的。
     round
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Warning
   </n-button>
@@ -218,7 +218,7 @@ Debug 用的。
     disabled
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Success
   </n-button>
@@ -229,7 +229,7 @@ Debug 用的。
     icon-placement="right"
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Error
   </n-button>
@@ -239,7 +239,7 @@ Debug 用的。
     block
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Default
   </n-button>
@@ -250,7 +250,7 @@ Debug 用的。
     size="small"
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Primary
   </n-button>
@@ -261,7 +261,7 @@ Debug 用的。
     size="large"
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Info
   </n-button>
@@ -271,7 +271,7 @@ Debug 用的。
     ghost
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Warning
   </n-button>
@@ -281,7 +281,7 @@ Debug 用的。
     loading
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Success
   </n-button>
@@ -290,7 +290,7 @@ Debug 用的。
     block
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Error
   </n-button>
@@ -301,7 +301,7 @@ Debug 用的。
     size="small"
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Primary
   </n-button>
@@ -312,7 +312,7 @@ Debug 用的。
     size="large"
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Info
   </n-button>
@@ -322,7 +322,7 @@ Debug 用的。
     ghost
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Warning
   </n-button>
@@ -332,7 +332,7 @@ Debug 用的。
     loading
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Success
   </n-button>
@@ -341,7 +341,7 @@ Debug 用的。
     circle
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Error
   </n-button>
@@ -349,7 +349,7 @@ Debug 用的。
     type="error"
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
     Error
   </n-button>
@@ -358,7 +358,7 @@ Debug 用的。
     size="large"
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
   </n-button>
   <n-button
@@ -367,7 +367,7 @@ Debug 用的。
     size="large"
   >
     <template v-slot:icon>
-      <md-save />
+      <cash-outline />
     </template>
   </n-button>
   <n-button-group>
@@ -376,7 +376,7 @@ Debug 用的。
       round
     >
       <template v-slot:icon>
-        <md-save />
+        <cash-outline />
       </template>
       Default
     </n-button>
@@ -385,7 +385,7 @@ Debug 用的。
       disabled
     >
       <template v-slot:icon>
-        <md-save />
+        <cash-outline />
       </template>
       Primary
     </n-button>
@@ -394,7 +394,7 @@ Debug 用的。
       icon-placement="right"
     >
       <template v-slot:icon>
-        <md-save />
+        <cash-outline />
       </template>
       Info
     </n-button>
@@ -402,7 +402,7 @@ Debug 用的。
       type="warning"
     >
       <template v-slot:icon>
-        <md-save />
+        <cash-outline />
       </template>
       Warning
     </n-button>
@@ -413,7 +413,7 @@ Debug 用的。
       round
     >
       <template v-slot:icon>
-        <md-save />
+        <cash-outline />
       </template>
       Default
     </n-button>
@@ -422,7 +422,7 @@ Debug 用的。
       disabled
     >
       <template v-slot:icon>
-        <md-save />
+        <cash-outline />
       </template>
       Primary
     </n-button>
@@ -431,7 +431,7 @@ Debug 用的。
       icon-placement="right"
     >
       <template v-slot:icon>
-        <md-save />
+        <cash-outline />
       </template>
       Info
     </n-button>
@@ -439,22 +439,145 @@ Debug 用的。
       type="warning"
     >
       <template v-slot:icon>
-        <md-save />
+        <cash-outline />
       </template>
       Warning
     </n-button>
   </n-button-group>
+  <n-button text type="info" loading size="small">Info</n-button>
+  <n-button text type="success">Success</n-button>
+  <n-button text type="warning">Warning</n-button>
+  <n-button text type="error" icon-placement="right">
+    <template v-slot:icon>
+      <n-icon>
+        <cash-outline />
+      </n-icon>
+    </template>
+    Error
+  </n-button>
+  <n-button-group vertical>
+    <n-button
+      type="primary"
+      round
+    >
+      <template v-slot:icon>
+        <log-in-outline />
+      </template>
+      活着
+    </n-button>
+    <n-button
+      type="warning"
+      ghost
+    >
+      <template v-slot:icon>
+        <log-in-outline />
+      </template>
+      不多
+    </n-button>
+    <n-button
+      type="error"
+    >
+      <template v-slot:icon>
+        <log-in-outline />
+      </template>
+      不少
+    </n-button>
+  </n-button-group>
+  <n-button-group vertical size="large">
+    <n-button
+      type="success"
+    >
+      <template v-slot:icon>
+        <log-in-outline />
+      </template>
+      幸福
+    </n-button>
+    <n-button
+      type="info"
+    >
+      <template v-slot:icon>
+        <log-in-outline />
+      </template>
+      刚好
+    </n-button>
+    <n-button
+      type="error"
+      ghost
+      round
+    >
+      <template v-slot:icon>
+        <log-in-outline />
+      </template>
+      够用
+    </n-button>
+  </n-button-group>
+  <n-button-group size="small">
+    <n-button
+      type="default"
+      round
+    >
+      <template v-slot:icon>
+        <log-in-outline />
+      </template>
+      活着
+    </n-button>
+    <n-button
+      type="default"
+    >
+      <template v-slot:icon>
+        <log-in-outline />
+      </template>
+      其实
+    </n-button>
+    <n-button
+      type="default"
+    >
+      <template v-slot:icon>
+        <log-in-outline />
+      </template>
+      很好
+    </n-button>
+  </n-button-group>
+  <n-button-group>
+    <n-button
+      type="primary"
+      ghost
+    >
+      <template v-slot:icon>
+        <log-in-outline />
+      </template>
+      再吃
+    </n-button>
+    <n-button
+      ghost
+      type="primary"
+    >
+      <template v-slot:icon>
+        <log-in-outline />
+      </template>
+      一颗
+    </n-button>
+    <n-button
+      type="info"
+      round
+    >
+      <template v-slot:icon>
+        <log-in-outline />
+      </template>
+      苹果
+    </n-button>
+  </n-button-group>
 </div>
+
 ```
 ```js
-import mdSave from 'naive-ui/lib/icons/md-save'
+import cashOutline from 'naive-ui/lib/icons/cash-outline'
+import logInOutline from 'naive-ui/lib/icons/log-in-outline'
 
 export default {
   components: {
-    mdSave
-  },
-  mounted () {
-    console.log(this)
+    cashOutline,
+    logInOutline
   }
 }
 ```

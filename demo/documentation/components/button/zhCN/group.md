@@ -3,7 +3,6 @@
 ```html
 <n-button-group vertical>
   <n-button
-    type="primary"
     round
   >
     <template v-slot:icon>
@@ -12,7 +11,6 @@
     活着
   </n-button>
   <n-button
-    type="warning"
     ghost
   >
     <template v-slot:icon>
@@ -20,9 +18,7 @@
     </template>
     不多
   </n-button>
-  <n-button
-    type="error"
-  >
+  <n-button>
     <template v-slot:icon>
       <log-in-outline />
     </template>
@@ -30,24 +26,19 @@
   </n-button>
 </n-button-group>
 <n-button-group vertical size="large">
-  <n-button
-    type="success"
-  >
+  <n-button>
     <template v-slot:icon>
       <log-in-outline />
     </template>
     幸福
   </n-button>
-  <n-button
-    type="info"
-  >
+  <n-button>
     <template v-slot:icon>
       <log-in-outline />
     </template>
     刚好
   </n-button>
   <n-button
-    type="error"
     ghost
     round
   >
@@ -86,7 +77,6 @@
 </n-button-group>
 <n-button-group>
   <n-button
-    type="primary"
     ghost
   >
     <template v-slot:icon>
@@ -96,7 +86,6 @@
   </n-button>
   <n-button
     ghost
-    type="primary"
   >
     <template v-slot:icon>
       <log-in-outline />
@@ -104,7 +93,6 @@
     一颗
   </n-button>
   <n-button
-    type="info"
     round
   >
     <template v-slot:icon>
