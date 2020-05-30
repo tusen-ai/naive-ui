@@ -32,7 +32,7 @@
       <div style="width: 400px; height: 300px;">
         <n-scrollbar>
           <div style="background: linear-gradient(red, blue); height: 300px;">
-            <div style="background: yellow; width: 100%; color: black;">
+            <div style="background: yellow; width: 100%; color: #000;">
               <n-button block>
                 666
               </n-button>

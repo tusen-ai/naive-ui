@@ -139,9 +139,9 @@ body {
 }
 
 .root-layout.n-layout.n-light-theme {
-  background-color: white;
+  background-color: #FFF;
 }
 .home-layout.n-layout.n-light-theme {
-  background-color: white;
+  background-color: #FFF;
 }
 </style>

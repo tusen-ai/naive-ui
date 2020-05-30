@@ -22,7 +22,7 @@ export default {
 ```
 ```css
 .oops {
-  color: black;
+  color: #000;
   transition: color .3s cubic-bezier(.4, 0, .2, 1);
 }
 .oops.n-light-theme {

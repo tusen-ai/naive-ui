@@ -1,5 +1,5 @@
 @mixin setup-light-colors {
-  $--base-text: rgb(0, 0, 0) !global;
+  $--base-text: #000 !global;
 
   $--alpha-1: .82 !global;
   $--alpha-2: .72 !global;
@@ -37,10 +37,10 @@
   $--overlay-tag: rgba(0, 0, 0, .02) !global;
 
   // neutral
-  $--neutral-base: white !global;
-  $--neutral-popover: rgb(255, 255, 255) !global;
-  $--neutral-modal: rgb(255, 255, 255) !global;
-  $--neutral-card: rgb(255, 255, 255) !global;
+  $--neutral-base: #FFF !global;
+  $--neutral-popover: #FFF !global;
+  $--neutral-modal: #FFF !global;
+  $--neutral-card: #FFF !global;
   $--neutral-body: rgb(248, 248, 248) !global;
   $--neutral-disabled: create-light-neutral-color($--overlay-disabled) !global;
   $--neutral-border: create-light-neutral-color($--overlay-border) !global;
