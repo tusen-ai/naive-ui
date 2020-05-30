@@ -12,11 +12,11 @@
 
 <template>
   <n-h1 :id="id" class="naive-doc-title">
-    {{ text }}
+    <span>{{ text }}</span>
     <span class="edit-button">
       <n-tooltip
         :delay="300"
-        placement="right"
+        placement="left"
         :show-arrow="true"
       >
         <template v-slot:activator>
@@ -55,6 +55,11 @@ export default {
 </script>
 
 <style scoped>
+.naive-doc-title {
+  display: flex;
+  justify-content: space-between;
+}
+
 .naive-doc-title .edit-button {
   display: inline-flex;
   align-items: center;
