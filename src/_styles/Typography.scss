@@ -149,6 +149,7 @@
       transition: color .3s $--n-ease-in-out-cubic-bezier;
       @include m(strong) {
         font-weight: $--n-strong-weight;
+        color: map-get($--typography-text-text-color, 'strong');
       }
       @include m(italic) {
         font-style: italic;
