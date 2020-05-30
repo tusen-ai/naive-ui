@@ -97,13 +97,14 @@
         @include b(menu-item) {
           transition: background-color .3s $--n-ease-in-out-cubic-bezier;
           list-style: none;
-          height: 48px;
+          height: 42px;
+          margin: 6px 0;
         }
         @include b(submenu) {
           cursor: pointer;
           position: relative;
           @include b(menu-item-content) {
-            height: 48px;
+            height: 42px;
           }
           @include b(submenu-content) {
             padding: 0;
@@ -264,7 +265,7 @@
         @include once {
           cursor: default;
           font-size: 13px;
-          height: 40px;
+          height: 36px;
           display: flex;
           align-items: center;
           transition: padding-left .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
