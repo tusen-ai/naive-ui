@@ -20,7 +20,7 @@ Affix 有 `offset-top`、`top`、`offset-bottom` 和 `bottom` 属性。`offset-t
   width: 100%;
   height: 200px;
   background-color: rgba(128, 128, 128, .3);
-  border-radius: 6px;
+  border-radius: 3px;
   overflow: auto;
 }
 
