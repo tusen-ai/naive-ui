@@ -1,9 +1,9 @@
 @mixin setup-light-colors {
   $--base-text: #000 !global;
 
-  $--alpha-1: .82 !global;
-  $--alpha-2: .72 !global;
-  $--alpha-3: .4 !global;
+  $--alpha-1: .86 !global;
+  $--alpha-2: .74 !global;
+  $--alpha-3: .38 !global;
   $--alpha-4: .24 !global;
 
   $--alpha-disabled: .5 !global;
@@ -27,7 +27,7 @@
   $--overlay-scrollbar: rgba(0, 0, 0, .25) !global;
   $--overlay-scrollbar-hover: rgba(0, 0, 0, .4) !global;
 
-  $--alpha-disabled-fill: .04 !global;
+  $--alpha-disabled-fill: .02 !global;
 
   $--overlay-disabled: rgba(0, 0, 0, $--alpha-disabled-fill) !global;
   $--overlay-pending: rgba(0, 0, 0, $--alpha-pending) !global;
