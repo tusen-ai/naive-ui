@@ -1,7 +1,7 @@
-$--n-font-family: FiraSans, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+$--n-font-family: Lato, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 $--n-mono-font-family: FiraCode, monospace;
 
-$--n-strong-weight: 600;
+$--n-strong-weight: 500;
 
 $--n-ease-in-out-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
 $--n-ease-out-cubic-bezier: cubic-bezier(0, 0, .2, 1);
@@ -163,7 +163,7 @@ $--n-input-number-button-width: (
 );
 
 /** input */
-$--n-input-icon-size: 20px;
+$--n-input-icon-size: 16px;
 $--n-input-border-radius: $--n-border-radius;
 
 /** list */
