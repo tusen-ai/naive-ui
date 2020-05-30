@@ -3,13 +3,13 @@
 ```html
 <n-row :gutter="[12, 8]">
   <n-col :span="6">
-    <div class="red"></div>
+    <div class="light-green"></div>
   </n-col>
   <n-col :span="6">
     <div class="green"></div>
   </n-col>
   <n-col :span="6">
-    <div class="red"></div>
+    <div class="light-green"></div>
   </n-col>
   <n-col :span="6">
     <div class="green"></div>
@@ -17,13 +17,13 @@
 </n-row>
 <n-row :gutter="[12, 8]">
   <n-col :span="6">
-    <div class="red"></div>
+    <div class="light-green"></div>
   </n-col>
   <n-col :span="6">
     <div class="green"></div>
   </n-col>
   <n-col :span="6">
-    <div class="red"></div>
+    <div class="light-green"></div>
   </n-col>
   <n-col :span="6">
     <div class="green"></div>
@@ -31,12 +31,12 @@
 </n-row>
 ```
 ```css
-.red {
+.light-green {
   height: 108px;
-  background-color: rgba(128, 0, 0, .5);
+  background-color: rgba(0, 128, 0, .12);
 }
 .green {
   height: 108px;
-  background-color: rgba(0, 128, 0, .5);
+  background-color: rgba(0, 128, 0, .24);
 }
 ```
