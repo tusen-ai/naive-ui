@@ -5,7 +5,8 @@ module.exports = {
       preset: [
         'default',
         {
-          normalizeWhitespace: false
+          normalizeWhitespace: false,
+          colormin: false
         }
       ]
     })
