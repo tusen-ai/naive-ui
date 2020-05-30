@@ -4,7 +4,7 @@
 <n-input v-model="value" placeholder="搜索">
   <template v-slot:prefix>
     <n-icon>
-      <md-search/>
+      <search-outline/>
     </n-icon>
   </template>
 </n-input>
@@ -16,17 +16,17 @@
 <n-input v-model="value" round placeholder="搜索">
   <template v-slot:suffix>
     <n-icon>
-      <md-search/>
+      <search-outline/>
     </n-icon>
   </template>
 </n-input>
 ```
 ```js
-import mdSearch from 'naive-ui/lib/icons/md-search'
+import searchOutline from 'naive-ui/lib/icons/search-outline'
 
 export default {
   components: {
-    mdSearch
+    searchOutline
   },
   data() {
     return {
