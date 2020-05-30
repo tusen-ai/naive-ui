@@ -10,24 +10,24 @@ no-icon
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null`|`null`||
-|themed-style|`{ [themeName: string]: Object } \| null`|`null`||
-|title|`string`|`null`||
-|show-icon|`boolean`|`true`||
-|type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'default'`||
 |closable|`boolean`|`false`||
 |on-close|`() => boolean \| Promise<boolean> \| any`|`() => true`||
 |on-after-hide|`function`|`null`||
+|show-icon|`boolean`|`true`||
+|theme|`'light' \| 'dark' \| null`|`null`||
+|themed-style|`{ [themeName: string]: Object } \| null`|`null`||
+|title|`string`|`null`||
+|type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'default'`||
 
 ## Slots
 |Name|Parameters|Description|
 |-|-|-|
-|header|`()`||
 |default|`()`||
+|header|`()`||
 |icon|`()`||
 
 ## Events
 |Name|Parameters|Description|
 |-|-|-|
-|close|`()`||
 |after-hide|`()`||
+|close|`()`||
