@@ -1,17 +1,17 @@
 @mixin setup-light-alert {
   $--alert-border-color: (
-    'default': $--n-border-color,
-    'success': mix($--n-success-color, $--n-base-background-color, 35%),
-    'info': mix($--n-info-color, $--n-base-background-color, 35%),
-    'warning': mix($--n-warning-color, $--n-base-background-color, 45%),
-    'error': mix($--n-error-color, $--n-base-background-color, 35%)
+    'default': $--n-divider-color,
+    'success': mix($--n-success-color, $--n-base-background-color, 25%),
+    'info': mix($--n-info-color, $--n-base-background-color, 25%),
+    'warning': mix($--n-warning-color, $--n-base-background-color, 33%),
+    'error': mix($--n-error-color, $--n-base-background-color, 25%)
   ) !global;
   $--alert-background-color: (
     'default': $--n-action-overlay-background-color,
-    'success': mix($--n-success-color, $--n-base-background-color, 12%),
-    'info': mix($--n-info-color, $--n-base-background-color, 12%),
-    'warning': mix($--n-warning-color, $--n-base-background-color, 12%),
-    'error': mix($--n-error-color, $--n-base-background-color, 12%)
+    'success': mix($--n-success-color, $--n-base-background-color, 8%),
+    'info': mix($--n-info-color, $--n-base-background-color, 8%),
+    'warning': mix($--n-warning-color, $--n-base-background-color, 8%),
+    'error': mix($--n-error-color, $--n-base-background-color, 8%)
   ) !global;
   $--alert-title-text-color: (
     'default': $--n-primary-text-color,
