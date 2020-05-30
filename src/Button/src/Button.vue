@@ -240,9 +240,11 @@ export default {
   },
   computed: {
     colorRgb () {
+      if (!this.color) return null
       return read(this.color)
     },
     colorHash () {
+      if (!this.colorRgb) return null
       return hash(this.colorRgb)
     },
     syntheticSize () {

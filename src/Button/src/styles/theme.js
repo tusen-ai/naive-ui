@@ -2,6 +2,7 @@ import lightScheme from '../../../_styles-in-js/lightStyleScheme.scss'
 import darkScheme from '../../../_styles-in-js/darkStyleScheme.scss'
 
 const light = {
+  baseBackgroundColor: lightScheme.baseBackgroundColor,
   default: {
     color: lightScheme.baseBackgroundColor,
     hoverColor: lightScheme.baseBackgroundColor,
@@ -68,6 +69,7 @@ const light = {
 }
 
 const dark = {
+  baseBackgroundColor: darkScheme.baseBackgroundColor,
   default: {
     color: 'transparent',
     hoverColor: 'transparent',
