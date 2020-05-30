@@ -5,6 +5,7 @@
     :items="items"
     :sider-style="siderStyle"
     :content-style="contentStyle"
+    :body-themed-style="bodyThemedStyle"
   >
     <router-view />
     <landing-footer style="padding: 32px 204px 16px 56px; text-align: left; font-size: 14px;" />
@@ -40,6 +41,11 @@ export default {
       },
       contentStyle: {
         height: 'calc(100vh - 64px)'
+      },
+      bodyThemedStyle: {
+        light: {
+          backgroundColor: '#FFF'
+        }
       }
     }
   },

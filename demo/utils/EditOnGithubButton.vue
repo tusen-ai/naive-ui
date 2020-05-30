@@ -8,18 +8,18 @@
     @click="handleEditOnGithubClick"
   >
     <template v-slot:icon>
-      <create-outline />
+      <edit-icon />
     </template>
   </n-button>
 </template>
 
 <script>
-import createOutline from '../../src/_icons/create-outline'
+import editIcon from '../../src/_icons/git-commit-outline'
 
 export default {
   name: 'EditOnGithubButton',
   components: {
-    createOutline
+    editIcon
   },
   props: {
     url: {
