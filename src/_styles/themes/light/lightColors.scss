@@ -8,6 +8,7 @@
 
   $--alpha-disabled: .5 !global;
   $--alpha-pending: .04 !global;
+  $--alpha-table-pending: .02 !global;
   
   // overlay-text
   $--overlay-text-1: rgba(0, 0, 0, $--alpha-1) !global;
@@ -18,8 +19,8 @@
   // overlay
   $--overlay-avatar: rgba(0, 0, 0, .20) !global;
   $--overlay-rail: rgba(0, 0, 0, .14) !global;
-  $--overlay-border: rgba(0, 0, 0, .15) !global;
-  $--overlay-divider: rgba(0, 0, 0, .10) !global;
+  $--overlay-border: rgba(0, 0, 0, .14) !global;
+  $--overlay-divider: rgba(0, 0, 0, .08) !global;
   $--overlay-input: null !global;
   $--overlay-action: rgba(0, 0, 0, .02) !global;
   $--overlay-tab: rgba(0, 0, 0, .04) !global;
@@ -30,8 +31,9 @@
 
   $--overlay-disabled: rgba(0, 0, 0, $--alpha-disabled-fill) !global;
   $--overlay-pending: rgba(0, 0, 0, $--alpha-pending) !global;
+  $--overlay-table-pending: rgba(0, 0, 0, $--alpha-table-pending) !global;
   $--overlay-active: rgba(0, 0, 0, .06) !global;
-  $--overlay-code: rgba(0, 0, 0, .02) !global;
+  $--overlay-code: rgba(0, 0, 0, .05) !global;
   $--overlay-tag: rgba(0, 0, 0, .02) !global;
 
   // neutral

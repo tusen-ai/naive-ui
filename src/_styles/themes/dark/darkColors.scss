@@ -8,6 +8,7 @@
 
   $--alpha-disabled: .6 !global;
   $--alpha-pending: .09 !global;
+  $--alpha-table-pending: .06 !global;
   
   // overlay-text
   $--overlay-text-1: rgba(255, 255, 255, $--alpha-1) !global;
@@ -30,6 +31,7 @@
 
   $--overlay-disabled: rgba(255, 255, 255, $--alpha-disabled-fill) !global;
   $--overlay-pending: rgba(255, 255, 255, $--alpha-pending) !global;
+  $--overlay-table-pending: rgba(255, 255, 255, $--alpha-table-pending) !global;
   $--overlay-active: rgba(255, 255, 255, .03) !global;
   $--overlay-code: rgba(255, 255, 255, .12) !global;
   $--overlay-tag: null !global;

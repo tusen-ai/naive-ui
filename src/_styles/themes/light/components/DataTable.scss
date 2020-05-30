@@ -15,20 +15,20 @@
     'default': composite-color($--n-card-background-color, $--n-table-header-overlay-background-color),
     'hover': composite-color(
       composite-color($--n-card-background-color, $--n-table-header-overlay-background-color),
-      $--n-pending-overlay-color
+      $--n-table-pending-overlay-color
     ),
     'modal': composite-color($--n-modal-background-color, $--n-table-header-overlay-background-color),
     'modal-hover': composite-color(
       composite-color($--n-modal-background-color, $--n-table-header-overlay-background-color),
-      $--n-pending-overlay-color
+      $--n-table-pending-overlay-color
     )
   ) !global;
   $--data-table-icon-button-background-color: (
-    'hover': $--n-pending-overlay-color
+    'hover': $--n-table-pending-overlay-color
   ) !global;
   $--data-table-row-background-color: (
-    'hover': composite-color($--n-card-background-color, $--n-pending-overlay-color),
-    'modal-hover': composite-color($--n-modal-background-color, $--n-pending-overlay-color),
+    'hover': composite-color($--n-card-background-color, $--n-table-pending-overlay-color),
+    'modal-hover': composite-color($--n-modal-background-color, $--n-table-pending-overlay-color),
   ) !global;
   $--data-table-body-text-color: $--n-secondary-text-color !global;
   $--data-table-button-color: (
