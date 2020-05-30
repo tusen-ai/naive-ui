@@ -6,7 +6,8 @@
       'n-data-table--bordered': bordered,
       'n-data-table--single-line': singleLine,
       'n-data-table--single-column': singleColumn,
-      [`n-data-table--${size}-size`]: true
+      [`n-data-table--${size}-size`]: true,
+      'n-data-table--has-max-height': maxHeight !== null
     }"
   >
     <n-spin
