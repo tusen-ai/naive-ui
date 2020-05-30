@@ -1,9 +1,9 @@
-import darkstyleScheme from '../../_styles-in-js/darkStyleScheme.scss'
-import lightstyleScheme from '../../_styles-in-js/lightStyleScheme.scss'
+import darkStyleScheme from '../../_styles-in-js/darkStyleScheme.scss'
+import lightStyleScheme from '../../_styles-in-js/lightStyleScheme.scss'
 
 const styleScheme = {
-  dark: darkstyleScheme,
-  light: lightstyleScheme
+  dark: darkStyleScheme,
+  light: lightStyleScheme
 }
 
 export default styleScheme
