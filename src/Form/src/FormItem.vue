@@ -7,8 +7,7 @@
       [`n-form-item--${syntheticLabelPlacement}-labelled`]: syntheticLabelPlacement,
       [`n-form-item--${syntheticLabelAlign}-label-aligned`]: syntheticLabelAlign,
       [`n-form-item--required`]: syntheticRequired && syntheticShowRequireMark,
-      [`n-form-item--no-label`]: !(label || $scopedSlots.label),
-      [`n-form-item--has-feedback`]: hasFeedback
+      [`n-form-item--no-label`]: !(label || $scopedSlots.label)
     }"
   >
     <label
@@ -184,7 +183,6 @@ export default {
     return {
       explains: [],
       validationErrored: false,
-      hasFeedback: false,
       feedbackTransitionDisabled: true
     }
   },
@@ -283,6 +281,9 @@ export default {
       this._initData()
     }
   },
+  mounted () {
+    this.feedbackTransitionDisabled = false
+  },
   created () {
     /**
      * This is buggy!
@@ -295,7 +296,6 @@ export default {
     _initData () {
       this.explains = []
       this.validationErrored = false
-      this.hasFeedback = false
       this.disableFeedbackTransition()
     },
     handleBeforeLeave (feedback) {
@@ -443,10 +443,8 @@ export default {
     },
     handleBeforeEnter () {
       this.feedbackTransitionDisabled = false
-      this.hasFeedback = true
     },
     handleAfterLeave () {
-      this.hasFeedback = false
       this.feedbackTransitionDisabled = false
     }
   }

@@ -105,9 +105,6 @@ $form-item-label-height: (
           }
         }
       }
-      @include m(has-feedback) {
-        padding-bottom: 0px;
-      }
       @include b(form-item-blank) {
         padding-top: 3px;
         padding-bottom: 3px;
