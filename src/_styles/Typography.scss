@@ -138,7 +138,9 @@
   }
   @include b(a) {
     @include once {
-      transition: color .3s $--n-ease-in-out-cubic-bezier;
+      transition:
+        color .3s $--n-ease-in-out-cubic-bezier,
+        text-decoration-color .3s $--n-ease-in-out-cubic-bezier;
       cursor: pointer;
     }
     text-decoration-color: map-get($--typography-a-text-color, 'default');
