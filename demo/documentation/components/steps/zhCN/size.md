@@ -67,7 +67,7 @@ export default {
   data () {
     return {
       current: 1,
-      currentStatus: 'error'
+      currentStatus: 'process'
     }
   },
   methods: {
