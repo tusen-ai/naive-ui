@@ -23,7 +23,7 @@ format
 ### 通用的 Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |value|`number`|`null`||
 |actions|`Array<'clear' \| 'now' \| 'confirm'>`|`null`||
 |clearable|`boolean`|`false`||

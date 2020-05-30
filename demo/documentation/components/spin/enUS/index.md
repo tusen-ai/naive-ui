@@ -8,7 +8,7 @@ wrap
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |spinning|`boolean`|`false`|It spin is active|
 |size|`'small' \| 'in-small' \| 'medium' \| 'in-medium' \| 'large' \| 'in-large'`|`medium`||
 |stroke|`string`|`null`|Color of spin|

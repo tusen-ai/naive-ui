@@ -16,7 +16,7 @@ after-select
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |value|`string`|`null`||
 |options|`Array<string \| AutoCompleteOption \| AutoCompleteOptionGroup>`|`[]`||

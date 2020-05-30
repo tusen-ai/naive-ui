@@ -14,8 +14,8 @@ raw
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
-|themed-style|`{ [themeName: string]: object }`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
+|themed-style|`{ [themeName: string]: Object } \| null`|`null`||
 |value|`string \| number`|`null`||
 |max|`number`|`null`||
 |dot|`boolean`|`false`||

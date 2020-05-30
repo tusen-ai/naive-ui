@@ -13,7 +13,7 @@ content
 ### Steps Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |current|`number`|`null`||
 |status|`'process' \| 'finish' \| 'error' \| 'wait'`|`'process'`||
 |size|`'small' \| 'medium'`|`'medium'`||

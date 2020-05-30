@@ -15,8 +15,8 @@ name-size
 |size|`'small' \| 'medium' \| 'large' \| number`| `'medium'`||
 |src|`string`|`null`||
 |round|`boolean`|`false`||
-|theme|`'light' \| 'dark'`|`null`||
-|themed-style|`{ [themeName: string]: object }`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
+|themed-style|`{ [themeName: string]: Object } \| null`|`null`||
 
 ## Slots
 |名称|参数|说明|

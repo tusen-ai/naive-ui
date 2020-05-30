@@ -25,7 +25,7 @@ passively-activated
 ### Input Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |type|`'text' \| 'password' \| 'textarea'`|`'text'`||
 |pair|`boolean`|`false`|是否输入成对的值|
 |value|`string \| [string, string]`|`null`|文本输入的值。如果是 `pair` 是 `true`，`value` 是一个数组|

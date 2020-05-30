@@ -27,7 +27,7 @@ dynamicTags
 ### Tag
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'default'`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |disabled|`boolean`|`false`||
@@ -40,7 +40,7 @@ dynamicTags
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |value|`Array<string>`|`[]`||
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'default'`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |disabled|`boolean`|`false`||

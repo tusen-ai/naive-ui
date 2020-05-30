@@ -275,13 +275,15 @@ light {
 87. 抵御外界 CSS 变化，比如 line-height 之类的
 88. <del>CSS Font 选择</del> 对英文应该没有那么麻烦，走系统字体就好了，然而对中文又没什么好的解决方案，so 先这个样子，之后再琢磨琢磨
 89. <del>把所有用 $slots 判断的地方都改成 $scopedSlots，[原因](https://vuejs.org/v2/api/#vm-scopedSlots)<del> done
-90. 调整默认状态下 button 的 icon 的颜色
+90. <del>调整默认状态下 button, input 的 icon 的颜色</del>
 91. <del>优化 button 的样式，现在太冗余了，关键是怎么同步按钮的主题变量呢...</del>
 92. <del>placeable 按需注册</del>
 93. steps 列表优化
 94. tabs 列表优化
 95. tree 列表优化
 96. cascader 列表优化
+97. 更多的 tabs 选择
+98. 下拉菜单应该给 icon 留空间
 
 
 ```

@@ -25,7 +25,7 @@ dynamicTags
 ### Tag
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'default'`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |disabled|`boolean`|`false`||
@@ -38,7 +38,7 @@ dynamicTags
 |Name|Type|Default|Description|
 |-|-|-|-|
 |value|`Array<string>`|`[]`||
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'default'`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |disabled|`boolean`|`false`||

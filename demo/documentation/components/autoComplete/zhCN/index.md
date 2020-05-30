@@ -17,7 +17,7 @@ after-select
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |value|`string`|`null`||
 |options|`Array<string \| AutoCompleteOption \| AutoCompleteOptionGroup>`|`[]`||

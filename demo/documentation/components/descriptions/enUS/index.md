@@ -16,7 +16,7 @@ size
 ### Descriptions Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |title|`string`|`null`||
 |column|`number`|`3`||
 |label-placement|`'top' \| 'left'`|`'top`||

@@ -29,7 +29,7 @@ group
 |round|`boolean`|`false`||
 |size|`'tiny' \| 'small' \| 'medium' \| 'large'`|`'medium'`||
 |text|`boolean`|`false`||
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |type|`'default' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'`|`'default'`||
 
 ### Button Group Props

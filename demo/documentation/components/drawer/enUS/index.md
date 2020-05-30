@@ -14,8 +14,8 @@ target
 ## Props
 |Name|Parameters|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
-|themed-style|`{ [themeName: string]: object }`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
+|themed-style|`{ [themeName: string]: Object } \| null`|`null`||
 |show|`boolean`|`false`||
 |placement|`'top' \| 'right' \| 'bottom' \| 'left'`|`'right'`||
 |width|`number \| string`|`251`||

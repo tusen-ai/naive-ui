@@ -20,8 +20,8 @@ closable
 |size|`'small' \| 'medium' \| 'large' \| 'huge'`|`'medium'`||
 |bordered|`boolean`|`true`||
 |closable|`boolean`|`false`||
-|theme|`'light' \| 'dark'`|`null`||
-|themed-style|`{ [themeName: string]: object }`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
+|themed-style|`{ [themeName: string]: Object } \| null`|`null`||
 
 ## Events
 |名称|参数|说明|

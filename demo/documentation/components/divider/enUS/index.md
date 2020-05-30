@@ -14,7 +14,7 @@ vertical
 |title-placement|`'left' \| 'right' \| 'center'`|`'center'`||
 |dashed|`boolean`|`false`||
 |vertical|`boolean`|`false`||
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 
 ## Slots
 |Name|Parameters|Description|

@@ -15,7 +15,7 @@ mark
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |marks|`{ [markValue: number]: string }`|||
 |disabled|`boolean`|`false`||
 |min|`number`|`0`||

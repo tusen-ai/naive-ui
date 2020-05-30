@@ -10,10 +10,10 @@ no-icon
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
-|themed-style|`{ [themeName: string]: object }`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
+|themed-style|`{ [themeName: string]: Object } \| null`|`null`||
 |title|`string`|`null`||
-|show-icon|`string`|`true`||
+|show-icon|`boolean`|`true`||
 |type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'default'`||
 |closable|`boolean`|`false`||
 |on-close|`() => boolean \| Promise<boolean> \| any`|`() => true`||

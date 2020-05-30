@@ -18,7 +18,7 @@ validator
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |value|`number`|`null`||
 |step|`number`|`1`||
 |min|`number`|`null`||

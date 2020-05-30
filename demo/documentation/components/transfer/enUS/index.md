@@ -16,7 +16,7 @@ filterable
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |value|`Array<string \| number>`|`null`||
 |options|`Array<TransferOption>`|`[]`||
 |disabled|`boolean`|`true`||
