@@ -27,3 +27,7 @@
 .n-documentation .n-p, .n-blockquote {
   max-width: 680px;
 }
+
+.n-table__td:first-child {
+  white-space: nowrap;
+}

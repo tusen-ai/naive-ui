@@ -21,7 +21,6 @@
       >
         <template v-slot:activator>
           <edit-on-github-button
-            style="vertical-align: middle;"
             text
             size="large"
             class="edit-button"
@@ -59,12 +58,10 @@ export default {
 .naive-doc-title .edit-button {
   display: inline-flex;
   align-items: center;
-  opacity: 0;
-  transition: opacity .3s .15s ease-in;
 }
-
+/*
 .naive-doc-title:hover .edit-button {
   opacity: 1;
   transition: opacity .3s ease-out;
-}
+} */
 </style>

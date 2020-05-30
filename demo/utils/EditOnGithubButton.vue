@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import editIcon from '../../src/_icons/git-commit-outline'
+import editIcon from '../../src/_icons/create-outline'
 
 export default {
   name: 'EditOnGithubButton',
