@@ -15,6 +15,7 @@ const plugin = BEMPlugin({
 cssr.use(plugin)
 const { c, context } = cssr
 context.theme = null
+context.pallete = null
 const { cB, cE, cM, cNotM } = plugin
 
 const cTB = (selector, ...rest) => {
@@ -37,7 +38,10 @@ function createThemedStyle (style, themes) {
         ctx.theme = null
         ctx.pallete = fallbackPallete
       },
-      after: ctx => { ctx.theme = null }
+      after: ctx => {
+        ctx.theme = null
+        ctx.pallete = null
+      }
     }, [
       style
     ]),
@@ -47,7 +51,10 @@ function createThemedStyle (style, themes) {
         ctx.theme = 'dark'
         ctx.pallete = themes['dark'] || fallbackPallete
       },
-      after: ctx => { ctx.theme = null }
+      after: ctx => {
+        ctx.theme = null
+        ctx.pallete = null
+      }
     }, [
       style
     ])
