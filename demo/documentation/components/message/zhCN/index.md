@@ -28,8 +28,8 @@ about-theme
 |icon|`() => VNode`|可以是 render 函数|
 |theme|`'light' \| 'dark'`||
 |closable|`boolean`||
-|onHide|`function`||
-|onAfterHide|`function`||
+|onHide|`Function`||
+|onAfterHide|`Function`||
 
 ### MessageEnvironment API
 #### MessageEnvironment Properties
@@ -39,8 +39,8 @@ about-theme
 |icon|`string \| (() => VNode)`|可以是 render 函数|
 |type|`'info' \| 'success' \| 'warning' \| 'error' \| 'loading'`||
 |closable|`boolean`||
-|onHide|`function`||
-|onAfterHide|`function`||
+|onHide|`Function`||
+|onAfterHide|`Function`||
 
 #### MessageEnvironment Methods
 |名称|类型|说明|

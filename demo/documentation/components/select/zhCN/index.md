@@ -50,7 +50,7 @@ change-debug
 |class|`string`||
 |disabled|`boolean`||
 |label|`string`||
-|render|`function`||
+|render|`Function`||
 |style|`string`||
 |value|`string \| number`|在选项中应该是唯一的|
 

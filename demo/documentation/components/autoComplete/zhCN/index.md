@@ -31,7 +31,7 @@ after-select
 |label|`string`||
 |value|`string \| number`|Should be unique in options.|
 |disabled|`boolean`||
-|render|`function`||
+|render|`Function`||
 
 ### AutoCompleteOptionGroup Properties
 |名称|类型|介绍|

@@ -49,7 +49,7 @@ fallback-option
 |class|`string`||
 |disabled|`boolean`||
 |label|`string`||
-|render|`function`||
+|render|`Function`||
 |style|`string`||
 |value|`string \| number`|Should be unique in options.|
 

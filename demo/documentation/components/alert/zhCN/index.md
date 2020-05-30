@@ -12,7 +12,7 @@ no-icon
 |-|-|-|-|
 |closable|`boolean`|`false`||
 |on-close|`() => boolean \| Promise<boolean> \| any`|`() => true`||
-|on-after-hide|`function`|`null`||
+|on-after-hide|`Function`|`null`||
 |show-icon|`boolean`|`true`||
 |theme|`'light' \| 'dark' \| null`|`null`||
 |themed-style|`{ [themeName: string]: Object } \| null`|`null`||
