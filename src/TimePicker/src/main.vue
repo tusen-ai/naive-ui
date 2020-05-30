@@ -136,7 +136,6 @@
             <div class="n-time-picker-selector-actions">
               <n-button
                 size="tiny"
-                round
                 :theme="syntheticTheme"
                 @click="handleNowClick"
               >
@@ -144,7 +143,6 @@
               </n-button>
               <n-button
                 size="tiny"
-                round
                 type="primary"
                 class="n-time-picker-selector-actions__confirm"
                 :theme="syntheticTheme"

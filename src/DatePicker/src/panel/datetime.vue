@@ -110,7 +110,6 @@
           v-if="actions.includes('clear')"
           :theme="theme"
           size="tiny"
-          round
           @click="clearValue"
         >
           {{ localeNamespace.clear }}
@@ -119,7 +118,6 @@
           v-if="actions.includes('now')"
           :theme="theme"
           size="tiny"
-          round
           @click="setSelectedDateTimeToNow"
         >
           {{ localeNamespace.now }}
@@ -128,7 +126,6 @@
           v-if="actions.includes('confirm')"
           :theme="theme"
           size="tiny"
-          round
           type="primary"
           :disabled="isDateTimeInvalid"
           @click="handleConfirmClick"

@@ -41,7 +41,6 @@
     <div class="n-data-table-filter-menu__action">
       <n-button
         size="tiny"
-        round
         :theme="theme"
         @click="handleCancelClick"
       >
@@ -51,7 +50,6 @@
         :theme="theme"
         type="primary"
         size="tiny"
-        round
         @click="handleConfirmClick"
       >
         {{ NDataTable.localeNamespace.confirm }}

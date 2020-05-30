@@ -235,7 +235,6 @@
           v-if="actions.includes('clear')"
           :theme="theme"
           size="tiny"
-          round
           @click="clearValue"
         >
           {{ localeNamespace.clear }}
@@ -245,7 +244,6 @@
           :theme="theme"
           :disabled="isRangeInvalid"
           size="tiny"
-          round
           type="primary"
           @click="handleConfirmClick"
         >
