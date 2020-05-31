@@ -43,7 +43,7 @@ after-select
 ## Slots
 |名称|参数|说明|
 |-|-|-|
-|default|`({ handleInput: (value: string) => any, handleFocus: function, handleBlur: function, value: string, theme: string \| null })`||
+|default|`(options: { handleInput: (value: string) => any, handleFocus: function, handleBlur: function, value: string, theme: string \| null })`||
 
 ## Events
 |名称|参数|说明|

@@ -66,7 +66,7 @@ ajaxUsage
 |名称|参数|说明|
 |-|-|-|
 |filters-change|`(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: Column)`||
-|sorter-change|`({ columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null)`|如果在变动后没有激活的排序，那么 sorter-change 将发出 `null`|
+|sorter-change|`(options: { columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null)`|如果在变动后没有激活的排序，那么 sorter-change 将发出 `null`|
 |page-change|`(page: number)`||
 |page-size-change|`(pageSize: number)`||
 |checked-row-keys-change|`(keys: Array<string \| number>)`||

@@ -66,7 +66,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 |Name|Parameters|Description|
 |-|-|-|
 |filters-change|`(filters: { [string \| number]: Array<string \| number> }, initiatorColumn: Column)`||
-|sorter-change|`({ columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null)`|If there won't be a active sorter after change, sorter-change will emit `null`|
+|sorter-change|`(data: { columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null)`|If there won't be a active sorter after change, sorter-change will emit `null`|
 |page-change|`(page: number)`||
 |page-size-change|`(pageSize: number)`||
 |checked-row-keys-change|`(keys: Array<string \| number>)`||

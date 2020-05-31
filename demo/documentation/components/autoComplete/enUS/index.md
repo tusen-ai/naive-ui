@@ -42,7 +42,7 @@ after-select
 ## Slots
 |Name|Parameters|Description|
 |-|-|-|
-|default|`({ handleInput: (value: string) => any, handleFocus: function, handleBlur: function, value: string, theme: string \| null })`||
+|default|`(options: { handleInput: (value: string) => any, handleFocus: function, handleBlur: function, value: string, theme: string \| null })`||
 
 ## Events
 |Name|Parameters|Description|

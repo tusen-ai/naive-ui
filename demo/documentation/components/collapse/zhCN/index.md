@@ -43,11 +43,11 @@ item-header-click
 |-|-|-|
 |default|`()`||
 |header|`()`||
-|arrow|`({ collapsed: boolean })`||
+|arrow|`(options: { collapsed: boolean })`||
 
 ## Event
 ### Collapse Event
 |名称|参数|说明|
 |-|-|-|
 |expanded-names-change|`(expandedNames: Array<string>)`||
-|item-header-click|`({ name: string, expanded: boolean, event: MouseEvent })`||
+|item-header-click|`(data: { name: string, expanded: boolean, event: MouseEvent })`||

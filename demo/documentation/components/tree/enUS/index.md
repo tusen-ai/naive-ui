@@ -44,11 +44,11 @@ filter
 ## Events
 |Name|Parameters|Description|
 |-|-|-|
-|selected-keys-change|`(Array<string \| number>)`||
-|expanded-keys-change|`(Array<string \| number>)`||
-|checked-keys-change|`(Array<string \| number>)`||
-|dragstart|`({ node: TreeNode, event: DragEvent })`||
-|dragend|`({ node: TreeNode, event: DragEvent })`||
-|dragenter|`({ node: TreeNode, event: DragEvent })`||
-|dragleave|`({ node: TreeNode, event: DragEvent })`||
-|drop|`({ node: TreeNode, dragNode: TreeNode, dropPosition: 'top' \| 'center' \| 'bottom', event: DragEvent })`||
+|selected-keys-change|`(keys: Array<string \| number>)`||
+|expanded-keys-change|`(keys: Array<string \| number>)`||
+|checked-keys-change|`(keys: Array<string \| number>)`||
+|dragstart|`(data: { node: TreeNode, event: DragEvent })`||
+|dragend|`(data: { node: TreeNode, event: DragEvent })`||
+|dragenter|`(data: { node: TreeNode, event: DragEvent })`||
+|dragleave|`(data: { node: TreeNode, event: DragEvent })`||
+|drop|`(data: { node: TreeNode, dragNode: TreeNode, dropPosition: 'top' \| 'center' \| 'bottom', event: DragEvent })`||
