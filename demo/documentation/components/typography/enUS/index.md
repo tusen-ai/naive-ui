@@ -12,8 +12,6 @@ text
 ```
 
 ## Props
-
-## Props
 ### All Typography Components Props
 |Name|Type|Default|Description|
 |-|-|-|-|
