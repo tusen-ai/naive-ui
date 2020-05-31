@@ -27,6 +27,7 @@
           @input="handleDateInput"
         />
         <n-time-picker
+          :show-icon="false"
           :format="timeFormat"
           :stateful="false"
           :theme="theme"

@@ -61,6 +61,7 @@
           @input="handleEndDateInput"
         />
         <n-time-picker
+          :show-icon="false"
           :theme="theme"
           size="small"
           :stateful="false"
