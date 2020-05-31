@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import editIcon from '../../src/_icons/git-pull-request-outline'
+import editIcon from '../../src/_icons/git-commit-outline'
 
 export default {
   name: 'EditOnGithubButton',
