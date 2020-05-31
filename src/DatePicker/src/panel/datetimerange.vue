@@ -29,6 +29,7 @@
         />
         <n-time-picker
           size="small"
+          :show-icon="false"
           :theme="theme"
           :stateful="false"
           :detachable="false"
