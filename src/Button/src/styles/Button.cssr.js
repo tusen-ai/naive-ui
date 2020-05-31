@@ -81,6 +81,11 @@ export function createColorStyle () {
             subpallete.textColor, subpallete.color, subpallete.borderColor || subpallete.color
           ), [
             createIconColorStyle(baseBgColor, subpallete.textColor),
+            digest === 'default' ? [
+              cM('tertiary-icon-depth', [
+                createIconColorStyle(baseBgColor, subpallete.tertiaryDepthIconColor)
+              ])
+            ] : [],
             cNotM('disabled', [
               cM(
                 'enter-pressed',
@@ -132,6 +137,11 @@ export function createColorStyle () {
               subpallete.ghostTypedTextColor || subpallete.color, 'transparent', subpallete.borderColor || subpallete.color
             ), [
               createIconColorStyle(baseBgColor, subpallete.ghostTypedTextColor || subpallete.color),
+              digest === 'default' ? [
+                cM('tertiary-icon-depth', [
+                  createIconColorStyle(baseBgColor, subpallete.tertiaryDepthIconColor)
+                ])
+              ] : [],
               cNotM('disabled', [
                 cM(
                   'enter-pressed',
@@ -163,6 +173,11 @@ export function createColorStyle () {
               color: subpallete.textTypedTextColor || subpallete.color
             }), [
               createIconColorStyle(baseBgColor, subpallete.textTypedTextColor || subpallete.color),
+              digest === 'default' ? [
+                cM('tertiary-icon-depth', [
+                  createIconColorStyle(baseBgColor, subpallete.tertiaryDepthIconColor)
+                ])
+              ] : [],
               cNotM('disabled', [
                 cM(
                   'enter-pressed',

@@ -2,7 +2,6 @@ import lightScheme from '../../../_styles-in-js/lightStyleScheme.scss'
 import darkScheme from '../../../_styles-in-js/darkStyleScheme.scss'
 
 const light = {
-  baseBackgroundColor: lightScheme.baseBackgroundColor,
   default: {
     color: lightScheme.baseBackgroundColor,
     hoverColor: lightScheme.baseBackgroundColor,
@@ -29,7 +28,10 @@ const light = {
     activeBorderColor: lightScheme.primaryActiveColor,
     focusBorderColor: lightScheme.primaryHoverColor,
 
-    rippleColor: lightScheme.primaryColor
+    rippleColor: lightScheme.primaryColor,
+
+    tertiaryDepthIconColor: lightScheme.tertiaryTextColor,
+    baseBackgroundColor: lightScheme.baseBackgroundColor
   },
   primary: {
     color: lightScheme.primaryColor,
@@ -69,7 +71,6 @@ const light = {
 }
 
 const dark = {
-  baseBackgroundColor: darkScheme.baseBackgroundColor,
   default: {
     color: 'transparent',
     hoverColor: 'transparent',
@@ -96,7 +97,10 @@ const dark = {
     activeBorderColor: darkScheme.primaryActiveColor,
     focusBorderColor: darkScheme.primaryHoverColor,
 
-    rippleColor: darkScheme.primaryColor
+    rippleColor: darkScheme.primaryColor,
+
+    tertiaryDepthIconColor: darkScheme.tertiaryTextColor,
+    baseBackgroundColor: darkScheme.baseBackgroundColor
   },
   primary: {
     color: darkScheme.primaryColor,

@@ -9,9 +9,6 @@
     :class="{
       'n-button--round': round,
       'n-button--circle': circle,
-      [`n-button--${colorHash || type}-colored`]: true,
-      [`n-button--${type}-type`]: true,
-      [`n-button--${syntheticSize}-size`]: true,
       'n-button--disabled': disabled,
       'n-button--loading': loading,
       'n-button--block': block,
@@ -19,8 +16,12 @@
       'n-button--enter-pressed': enterPressed,
       'n-button--ghost': ghost,
       'n-button--text': text,
-      [`n-button--${iconPlacement}-icon`]: iconPlacement && !noTextContent,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-button--${type}-type`]: true,
+      [`n-button--${colorHash || type}-colored`]: true,
+      [`n-button--${syntheticSize}-size`]: true,
+      [`n-button--${iconPlacement}-icon`]: hasIcon && iconPlacement && !noTextContent,
+      [`n-button--${iconDepth}-icon-depth`]: hasIcon && type === 'default',
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
     }"
     :tabindex="syntheticFocusable ? 0 : -1"
     @click="handleClick"
@@ -228,6 +229,12 @@ export default {
       default: 'left',
       validator (value) {
         return ['left', 'right'].includes(value)
+      }
+    },
+    iconDepth: {
+      default: 'secondary',
+      validator (value) {
+        return ['secondary', 'tertiary'].includes(value)
       }
     }
   },
