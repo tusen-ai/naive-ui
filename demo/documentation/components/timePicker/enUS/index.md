@@ -15,17 +15,19 @@ format
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null`|`null`||
-|placeholder|`string`|`'Select Time'`||
-|value|`number`|`null`||
+|clearable|`boolean`|`false`||
 |format|`string`|`'HH:mm:ss'`||
 |is-hour-disabled|`(hour: number) => boolean`|`() => false`||
 |is-minute-disabled|`(minute: number, hour: number) => boolean`|`() => false`||
 |is-second-disabled|`(second: number, minute: number, hour: number) => boolean`|`() => false`||
+|placeholder|`string`|`'Select Time'`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
+|theme|`'light' \| 'dark' \| null`|`null`||
+|value|`number`|`null`||
+
 
 ## Events
 |Name|Parameters|Description|
 |-|-|-|
-|change|`(value: number \| null)`||
 |blur|`(value: number \| null)`||
+|change|`(value: number \| null)`||
