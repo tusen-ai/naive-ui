@@ -32,4 +32,4 @@ basic
 |language|`string`|`null`||
 |code|`string`|`null`||
 |trim|`boolean`|`true`||
-|hljs|`object`|`null`|If you want to set hljs locally, set it on code by the prop|
+|hljs|`Object`|`null`|If you want to set hljs locally, set it on code by the prop|

@@ -21,8 +21,8 @@ default-files
 |directory|`boolean`|`false`|If directory upload supported. Browser support needed. See <n-a href="https://caniuse.com/#feat=input-file-directory">input-file-directory</n-a>.|
 |method|`string`|`'POST'`|The method of HTTP request.|
 |multiple|`boolean`|`false`|If multiple files selection supported.|
-|headers|`object \| ({ file: UploadFile }) => object`|`null`|The additional HTTP Headers of request.|
-|data|`object \| ({ file: UploadFile }) => object`|`null`|The additional fileds data of HTTP request's form data.|
+|headers|`Object \| ({ file: UploadFile }) => Object`|`null`|The additional HTTP Headers of request.|
+|data|`Object \| ({ file: UploadFile }) => Object`|`null`|The additional fileds data of HTTP request's form data.|
 |with-credentials|`boolean`|`false`|If cookie attached.|
 |on-change|`(options: { file: UploadFile, fileList: Array<UploadFile>, event?: Event }) => any`|`() => {}`|The callback of status change of the component. Any file status change would fire the callback.|
 |on-remove|`(options: { file: UploadFile, fileList: Array<UploadFile> }) => boolean \| Promise<boolean> \| any`|`() => true`|The callback of file removal. Return false, promise resolve false or promise reject will cancel this removal.|

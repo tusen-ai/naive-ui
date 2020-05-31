@@ -32,10 +32,10 @@ manual-position
 |raw|`boolean`|`false`|Whether to use no default styles.|
 |disabled|`boolean`|`false`|Whether the popover can't be activated.|
 |filp|`boolean`|`true`|Whether to filp the popover when there is no space for current placement.|
-|controller|`object`|`null`|The controller object of `n-popover`. If a object is passed in, `show` and `hide` methods will be added to the object. The methods can controlled the display status of the popover when not `manual` triggered.|
+|controller|`Object`|`null`|The controller object of `n-popover`. If a object is passed in, `show` and `hide` methods will be added to the object. The methods can controlled the display status of the popover when not `manual` triggered.|
 |overlay-class|`string`|`null`||
-|overlay-style|`object`|`null`||
-|arrow-style|`object`|`null`||
+|overlay-style|`Object`|`null`||
+|arrow-style|`Object`|`null`||
 |display-directive|`'if' \| 'show'`|`'if'`|The conditionally render directive to show popover content. `if` means using `v-if` to render content, `show` means using `v-show` to render content.|
 |manually-positioned|`boolean`|`false`|Whether to manually position the popover.|
 |x|`number`|`null`|The CSS `left` pixel value when popover manually positioned.|

@@ -14,8 +14,8 @@ closable
 |名称|类型|默认值|说明|
 |-|-|-|-|
 |title|`string`|`null`||
-|content-style|`object \| string`|`null`||
-|header-style|`object \| string`|`null`||
+|content-style|`Object \| string`|`null`||
+|header-style|`Object \| string`|`null`||
 |segmented|`boolean \| { [part in 'content' \| 'footer' \| 'action']?: boolean \| 'soft' \| 'hard' }`|`false`||
 |size|`'small' \| 'medium' \| 'large' \| 'huge'`|`'medium'`||
 |bordered|`boolean`|`true`||

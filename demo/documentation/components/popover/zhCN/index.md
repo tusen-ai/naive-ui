@@ -32,10 +32,10 @@ manual-position
 |raw|`boolean`|`false`|是否不添加默认样式|
 |disabled|`boolean`|`false`|是否不能激活弹出信息|
 |filp|`boolean`|`true`|是否在当前放置方式不能提供足够空间的时候调整弹出信息的位置|
-|controller|`object`|`null`|`n-popover` 的控制器对象。如果对象被传入了，那么它会被添加 `show`（展示弹出内容） 和 `hide`（隐藏弹出内容） 方法。这两个方法可以在非 `manual` 控制的时候来控制弹出信息的显示状态|
+|controller|`Object`|`null`|`n-popover` 的控制器对象。如果对象被传入了，那么它会被添加 `show`（展示弹出内容） 和 `hide`（隐藏弹出内容） 方法。这两个方法可以在非 `manual` 控制的时候来控制弹出信息的显示状态|
 |overlay-class|`string`|`null`||
-|overlay-style|`object`|`null`||
-|arrow-style|`object`|`null`||
+|overlay-style|`Object`|`null`||
+|arrow-style|`Object`|`null`||
 |display-directive|`'if' \| 'show'`|`'if'`|条件渲染使用的指令，`if` 会让内容被使用 `v-if` 渲染，`show` 会让内容被使用 `v-show` 渲染|
 |manually-positioned|`boolean`|`false`|是否要手动控制位置|
 |x|`number`|`null`|手动控制位置时填出内容的 CSS `left` 的像素值|

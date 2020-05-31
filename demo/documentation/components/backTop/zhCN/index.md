@@ -19,7 +19,7 @@ targetContainerSelector
 |right|`number`|`40`||
 |bottom|`number`|`40`||
 |visibility-height|`number`|`180`||
-|themed-style|`object`|`null`||
+|themed-style|`{ [themeName: string]: Object } \| null`|`null`||
 
 ## Events
 |名称|参数|说明|

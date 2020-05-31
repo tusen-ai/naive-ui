@@ -25,7 +25,7 @@ dark-4-debug
 |width|`number \| string`|`251`||
 |height|`number \| string`|`251`|在位置是 `top` 和 `bottom` 时生效|
 |mask-closable|`boolean`|`true`|点击遮罩时是否发出 `hide` 事件|
-|drawer-style|`object`|`null`||
+|drawer-style|`Object`|`null`||
 |target|`() => HTMLElement`|`() => document.body`|抽屉出现的区域|
 |drawer-class|`string`|`null`||
 

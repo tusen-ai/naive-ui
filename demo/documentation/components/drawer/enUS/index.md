@@ -21,7 +21,7 @@ target
 |width|`number \| string`|`251`||
 |height|`number \| string`|`251`|Works when placement is `top` and `bottom`.|
 |mask-closable|`boolean`|`true`|Whether to emit `hide` event when click mask.|
-|drawer-style|`object`|`null`||
+|drawer-style|`Object`|`null`||
 |target|`() => HTMLElement`|`() => document.body`|The area where the drawer appears.|
 |drawer-class|`string`|`null`||
 

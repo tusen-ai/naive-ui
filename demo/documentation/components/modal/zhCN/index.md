@@ -28,7 +28,7 @@ drawer-debug
 |show|`boolean`|`false`||
 |mask-closable|`boolean`|`true`|点击遮罩时是否发出 `hide` 事件|
 |preset|`'card' \| 'confirm'`|`null`||
-|overlay-style|`object`|`null`|当使用 `preset` 时候内部内容的样式|
+|overlay-style|`Object`|`null`|当使用 `preset` 时候内部内容的样式|
 
 ### Modal（Card 预设）
 参考 [Card props](n-card#Props)

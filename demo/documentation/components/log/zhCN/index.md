@@ -45,7 +45,7 @@ loading
 |line-height|`number`|`1.25`||
 |language|`string`|`null`||
 |rows|`number`|`15`||
-|hljs|`object`|`null`||
+|hljs|`Object`|`null`||
 
 ## Events
 |名称|参数|说明|

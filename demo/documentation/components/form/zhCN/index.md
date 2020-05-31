@@ -20,7 +20,7 @@ validator-debug
 |label-width|`number \| string`|`null`|标签的宽度，在 `label-placement` 是 `'left'` 的时候可能会有用|
 |label-align|`'left' \| 'right'`|`'left'`|标签的文本对齐方式|
 |label-placement|`'left' \| 'top'`|`'top'`||
-|model|`object`|`{}`|获取表项中收集到的值的对象|
+|model|`Object`|`{}`|获取表项中收集到的值的对象|
 |rules|`type FormRules = { [itemValidatePath: string]: FormItemRule \| Array<FormItemRule> \| FormRules }`|`{}`|验证表项的规则|
 |show-require-mark|`boolean`|`true`|在表项是必填的时候是不是展示星号|
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
@@ -43,7 +43,7 @@ validator-debug
 |label|`string`|`null`||
 |label-align|`'left' \| 'right'`|`null`|标签的文本对齐方式。如果没有被设定，使用外层表单的 `label-align`|
 |label-placement|`'left' \| 'top'`|`null`|如果没有被设定，使用外层表单的 `label-placement`|
-|label-style|`object`|`{}`||
+|label-style|`Object`|`{}`||
 |label-width|`number \| string`|`null`|如果没有被设定，使用外层表单的 `label-width`|
 |path|`string`|`null`|将值收集到外层表单 `model` 对象的路径|
 |required|`boolean`|`false`|是否展示必填的星号。注意：一个 `required: true` 的规则比这个属性有更高的优先级 & 这个属性不会影响表单的验证。验证完全依赖于规则|
