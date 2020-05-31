@@ -1,10 +1,9 @@
 <template>
   <n-button
     class="edit-button"
-    ghost
-    round
+    text
+    icon-depth="tertiary"
     :size="size"
-    :text="text"
     @click="handleEditOnGithubClick"
   >
     <template v-slot:icon>
@@ -14,7 +13,7 @@
 </template>
 
 <script>
-import editIcon from '../../src/_icons/git-commit-outline'
+import editIcon from '../../src/_icons/git-pull-request-outline'
 
 export default {
   name: 'EditOnGithubButton',

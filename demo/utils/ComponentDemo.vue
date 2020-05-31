@@ -27,41 +27,41 @@
     </template>
 
     <template v-slot:header-extra>
-      <n-button-group size="tiny">
-        <n-tooltip
-          :delay="300"
-          :placement="'top'"
-          :show-arrow="true"
-        >
-          <template v-slot:activator>
-            <edit-on-github-button
-              style="padding: 0 3px 0 7px"
-              :url="url"
-            />
-          </template>
-          {{ $t('editOnGithub') }}
-        </n-tooltip>
-        <n-tooltip
-          :delay="300"
-          :placement="'top'"
-          :show-arrow="true"
-          :controller="controller"
-        >
-          <template v-slot:activator>
-            <n-button
-              style="padding: 0 6px 0 4px"
-              ghost
-              round
-              @click="toggleCodeDisplay"
-            >
-              <template v-slot:icon>
-                <code-outline />
-              </template>
-            </n-button>
-          </template>
-          {{ !showCode ? $t('show') : $t('hide') }}
-        </n-tooltip>
-      </n-button-group>
+      <n-tooltip
+        :delay="300"
+        :placement="'top'"
+        :show-arrow="true"
+      >
+        <template v-slot:activator>
+          <edit-on-github-button
+            style="padding: 0; margin-right: 6px;"
+            size="tiny"
+            :url="url"
+          />
+        </template>
+        {{ $t('editOnGithub') }}
+      </n-tooltip>
+      <n-tooltip
+        :delay="300"
+        :placement="'top'"
+        :show-arrow="true"
+        :controller="controller"
+      >
+        <template v-slot:activator>
+          <n-button
+            style="padding: 0;"
+            size="tiny"
+            text
+            icon-depth="tertiary"
+            @click="toggleCodeDisplay"
+          >
+            <template v-slot:icon>
+              <code-outline />
+            </template>
+          </n-button>
+        </template>
+        {{ !showCode ? $t('show') : $t('hide') }}
+      </n-tooltip>
     </template>
     <slot name="content" />
     <slot name="demo" />
