@@ -31,11 +31,13 @@
         @include once {
           display: flex;
         }
-        
         @include b(menu-item) {
+          margin: 0;
           @include m(selected) {
             @include once {
-              background-color: transparent !important;
+              &::after {
+                background-color: transparent !important;
+              }
             }
             @include b(menu-item-content) {
               border-bottom: 2px solid $--menu-horizontal-border-color;
@@ -66,7 +68,9 @@
         @include b(menu-item) {
           @include m(selected) {
             @include once {
-              background-color: transparent !important;
+              &::after {
+                background-color: transparent !important;
+              }
             }
           }
         }
@@ -114,8 +118,30 @@
         }
       }
       @include b(menu-item) {
+        @include once {
+          position: relative;
+          &::after {
+            content: "";
+            background-color: transparent;
+            position: absolute;
+            left: 8px;
+            right: 8px;
+            top: 0;
+            bottom: 0;
+            border-radius: $--n-border-radius;
+            transition: background-color .3s $--n-ease-in-out-cubic-bezier;
+            pointer-events: none;
+          }
+        }
+        &:active {
+          &::after {
+            background-color: $--menu-item-background-color;
+          }
+        }
         @include m(selected) {
-          background-color: $--menu-item-background-color;
+          &::after {
+            background-color: $--menu-item-background-color;
+          }
           @include b(menu-item-content) {
             @include e(icon) {
               @include b(icon) {
