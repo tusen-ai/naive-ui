@@ -23,7 +23,7 @@
 <n-gradient-text
   gradient="linear-gradient(90deg, red 0%, green 50%, blue 100%)"
 >
-  定制颜色
+  瞎写的颜色
 </n-gradient-text>
 ```
 ```css

@@ -8,8 +8,8 @@ Naive UI provide some tools for developers to create themed components easier.
 ```demo
 provide-theme
 read-theme
-themed-style
-element
 environment
+element
+themed-style
 style-scheme
 ```

@@ -18,6 +18,6 @@
 }
 
 .myel.n-dark-theme {
-  color: yellow;
+  color: aquamarine;
 }
 ```

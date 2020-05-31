@@ -2,18 +2,19 @@
 Use  `n-config-consumer`  to get the theme at current position.
 
 ```html
+<div>
+  <n-button @click="theme = 'dark'">Dark</n-button>
+  <n-button @click="theme = 'light'">Light</n-button>
+</div>
 <n-config-provider :theme="theme">
-  <div style="background-color: rgba(128, 128, 128); padding: 8px;">
-    <n-button @click="theme = 'dark'">Dark</n-button>
-    <n-button @click="theme = 'light'">Light</n-button>
+  <n-card>
     <n-config-consumer
       @theme-change="handleThemeChange"
+      v-slot="{ theme }"
     >
-      <template v-slot="{ theme }">
-        <div>theme: {{ theme }}</div>
-      </template>
+      <div>theme: {{ theme }}</div>
     </n-config-consumer>
-  </div>
+  </n-card>
 </n-config-provider>
 ```
 ```js

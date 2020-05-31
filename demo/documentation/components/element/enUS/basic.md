@@ -18,6 +18,6 @@ It is very useful to create themed component.
 }
 
 .myel.n-dark-theme {
-  color: yellow;
+  color: aquamarine;
 }
 ```

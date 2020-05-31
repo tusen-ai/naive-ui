@@ -23,7 +23,7 @@ By yourself.
 <n-gradient-text
   gradient="linear-gradient(90deg, red 0%, green 50%, blue 100%)"
 >
-  Custom Color
+  A Scribbled Color
 </n-gradient-text>
 ```
 ```css

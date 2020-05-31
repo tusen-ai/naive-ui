@@ -3,23 +3,19 @@ Get current theme environment.
 ```html
 <n-button @click="theme = 'dark'">Dark Theme</n-button>
 <n-button @click="theme = 'light'">Light Theme</n-button>
-<div>
-  <n-config-provider :theme="theme" :theme-environment="env">
-    <n-config-consumer>
-      <template v-slot="{ themeEnvironment }">
-        <div style="background-color: rgba(128, 128, 128); padding: 8px;">
-          <n-tag>{{ themeEnvironment }}</n-tag>
-        </div>
-      </template>
-    </n-config-consumer>
-  </n-config-provider>
-</div>
+<n-config-provider :theme="theme" :theme-environment="env">
+  <n-config-consumer v-slot="{ themeEnvironment }">
+    <n-card>
+      <n-tag>{{ themeEnvironment }}</n-tag>
+    </n-card>
+  </n-config-consumer>
+</n-config-provider>
 ```
 ```js
 export default {
   data () {
     return {
-      theme: 'light',
+      theme: 'dark',
       env: {
         dark: 'NaCl',
         light: 'Ionic Compound'

@@ -6,12 +6,10 @@ Sometimes you may need some component to access some values at specific theme. Y
   <n-button @click="theme = 'light'">Light Theme</n-button>
 </div>
 <n-config-provider :theme="theme" :theme-environment="env">
-  <n-config-consumer>
-    <template v-slot="{ themeEnvironment }">
-      <div style="background-color: rgba(128, 128, 128); padding: 8px;">
-        <n-tag>{{ themeEnvironment }}</n-tag>
-      </div>
-    </template>
+  <n-config-consumer v-slot="{ themeEnvironment }">
+    <n-card>
+      <n-tag>{{ themeEnvironment }}</n-tag>
+    </n-card>
   </n-config-consumer>
 </n-config-provider>
 ```
@@ -19,7 +17,7 @@ Sometimes you may need some component to access some values at specific theme. Y
 export default {
   data () {
     return {
-      theme: 'light',
+      theme: 'dark',
       env: {
         dark: 'NaCl',
         light: 'Ionic Compound'

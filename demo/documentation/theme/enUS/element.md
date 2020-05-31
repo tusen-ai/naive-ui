@@ -1,14 +1,16 @@
 # Use Naive Element
 Naive UI has `n-element` component. See [Element](n-element).
 ```html
+<div>
+  <n-button @click="theme = 'dark'">Dark</n-button>
+  <n-button @click="theme = 'light'">Light</n-button>
+</div>
 <n-config-provider :theme="theme">
-  <div style="background-color: rgba(128, 128, 128); padding: 8px;">
-    <n-button @click="theme = 'dark'">Dark</n-button>
-    <n-button @click="theme = 'light'">Light</n-button>
+  <n-card>
     <n-el as="span" class="oops">
       I am a span
     </n-el>
-  </div>
+  </n-card>
 </n-config-provider>
 ```
 ```js
@@ -29,7 +31,7 @@ export default {
   color: green
 }
 .oops.n-dark-theme {
-  color: yellow
+  color: aquamarine
 }
 .n-button {
   margin: 0 12px 8px 0;

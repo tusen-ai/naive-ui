@@ -8,7 +8,7 @@
   :options="options"
   @change="handleChange"
 >
-  <n-tag>{{ (Array.isArray(value) && value.length) ? value : '弹出选择' }}</n-tag>
+  <n-tag>{{ (Array.isArray(value) && value.length) ? value : '没了' }}</n-tag>
 </n-popselect>
 ```
 ```js

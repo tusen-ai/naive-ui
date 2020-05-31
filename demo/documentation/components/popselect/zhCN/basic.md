@@ -13,61 +13,57 @@
 export default {
   data () {
     return {
-      value: 'song1',
-      options: [{
-          label: "Everybody's Got Something to Hide Except Me and My Monkey",
-          value: 'song0',
-          disabled: true
-        },
+      value: 'Drive My Car',
+      options: [
         {
           label: 'Drive My Car',
-          value: 'song1'
+          value: 'Drive My Car'
         },
         {
           label: 'Norwegian Wood',
-          value: 'song2'
+          value: 'Norwegian Wood'
         },
         {
           label: 'You Won\'t See',
-          value: 'song3',
+          value: 'You Won\'t See',
           disabled: true
         },
         {
           label: 'Nowhere Man',
-          value: 'song4'
+          value: 'Nowhere Man'
         },
         {
           label: 'Think For Yourself',
-          value: 'song5'
+          value: 'Think For Yourself'
         },
         {
           label: 'The Word',
-          value: 'song6'
+          value: 'The Word'
         },
         {
           label: 'Michelle',
-          value: 'song7',
+          value: 'Michelle',
           disabled: true
         },
         {
           label: 'What goes on',
-          value: 'song8'
+          value: 'What goes on'
         },
         {
           label: 'Girl',
-          value: 'song9'
+          value: 'Girl'
         },
         {
           label: 'I\'m looking through you',
-          value: 'song10'
+          value: 'I\'m looking through you'
         },
         {
           label: 'In My Life',
-          value: 'song11'
+          value: 'In My Life'
         },
         {
           label: 'Wait',
-          value: 'song12'
+          value: 'Wait'
         }
       ]
     }
