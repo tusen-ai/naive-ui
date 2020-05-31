@@ -36,7 +36,8 @@
         <div
           class="ui-logo"
           :style="{
-            color: styleScheme.primaryTextColor
+            color: styleScheme.primaryTextColor,
+            transition: `color .3s ${styleScheme.easeInOutCubicBezier}`
           }"
           @click="handleLogoClick"
         >

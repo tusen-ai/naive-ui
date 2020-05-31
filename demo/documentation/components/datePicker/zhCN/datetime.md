@@ -3,22 +3,15 @@
 <n-date-picker
   v-model="timestamp"
   type="datetime"
-  :disabledTime= "disabledTime"
   clearable
 />
-<n-date-picker v-model="timestamp2" type="datetime" clearable />
+<pre>{{ JSON.stringify(timestamp) }}</pre>
 ```
 ```js
 export default {
   data () {
     return {
-      timestamp: null,
-      timestamp2: 1000000
-    }
-  },
-  methods: {
-    disabledTime (current) {
-      return current > 1573552182000 && current < 1573811382000
+      timestamp: 1183135260000
     }
   }
 }

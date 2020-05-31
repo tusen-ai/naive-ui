@@ -452,16 +452,16 @@ export default function (instance) {
             path: `/${instance.lang}/${instance.theme}/doc` + '/n-notification'
           },
           {
-            name: 'Popover',
-            title: '弹出信息',
-            titleExtra: 'Popover',
-            path: `/${instance.lang}/${instance.theme}/doc` + '/n-popover'
-          },
-          {
             name: 'Popconfirm',
             title: '弹出确认',
             titleExtra: 'Popconfirm',
             path: `/${instance.lang}/${instance.theme}/doc` + '/n-popconfirm'
+          },
+          {
+            name: 'Popover',
+            title: '弹出信息',
+            titleExtra: 'Popover',
+            path: `/${instance.lang}/${instance.theme}/doc` + '/n-popover'
           },
           {
             name: 'Popselect',
@@ -783,12 +783,12 @@ export default function (instance) {
             path: `/${instance.lang}/${instance.theme}/doc` + '/n-notification'
           },
           {
-            name: 'Popover',
-            path: `/${instance.lang}/${instance.theme}/doc` + '/n-popover'
-          },
-          {
             name: 'Popconfirm',
             path: `/${instance.lang}/${instance.theme}/doc` + '/n-popconfirm'
+          },
+          {
+            name: 'Popover',
+            path: `/${instance.lang}/${instance.theme}/doc` + '/n-popover'
           },
           {
             name: 'Popselect',

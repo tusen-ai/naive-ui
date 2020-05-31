@@ -34,10 +34,10 @@
 export default {
   data() {
     return {
-      datetime: 891360258000,
+      datetime: 1183135260000,
       date: null,
-      datetimerange: [324910284, 910391323],
-      daterange: [324910284, 910391323],
+      datetimerange: null,
+      daterange: null,
       disabled: false
     };
   },
