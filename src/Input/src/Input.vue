@@ -66,6 +66,7 @@
         :value="pair ? (value && value[0]) : value"
         :readonly="readonly"
         :autofocus="autofocus"
+        :size="attrSize"
         @blur="handleInputBlur"
         @focus="handleInputFocus"
         @input="handleInput($event, 0)"
@@ -257,6 +258,11 @@ export default {
     autofocus: {
       type: Boolean,
       default: false
+    },
+    /** private */
+    attrSize: {
+      type: Number,
+      default: null
     }
   },
   data () {
