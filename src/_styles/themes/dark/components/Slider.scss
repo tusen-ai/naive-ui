@@ -1,8 +1,8 @@
 @mixin setup-dark-slider {
   $slider-default-fill-color: mix($--n-primary-color, $--n-card-background-color, 70%);
   $--slider-rail-background-color: (
-    'default': $--n-rail-color,
-    'hover': change-color($--n-rail-color, $alpha: alpha($--n-rail-color) * 1.5)
+    'default': $--n-rail-overlay-color,
+    'hover': change-color($--n-rail-overlay-color, $alpha: alpha($--n-rail-overlay-color) * 1.5)
   ) !global;
   $--slider-rail-fill-background-color: (
     'default': $slider-default-fill-color,
@@ -17,7 +17,7 @@
   ) !global;
   $--slider-indicator-background-color: $--n-popover-background-color !global;
   $--slider-indicator-box-shadow: $--n-popover-box-shadow !global;
-  $--slider-indicator-text-color: $--n-secondary-text-color !global;
+  $--slider-indicator-text-color: $--n-secondary-text-overlay-color !global;
   $--slider-dot-box-shadow: (
     'default': inset 0 0 0 2px $slider-default-fill-color,
     'active': inset 0 0 0 2px $--n-primary-color

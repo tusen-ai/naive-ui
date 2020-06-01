@@ -22,7 +22,7 @@
     'default': $--n-primary-color
   ) !global;
   $--typography-hr-border-color: (
-    'default': $--n-divider-color
+    'default': $--n-divider-overlay-color
   ) !global;
   $--typography-blockquote-text-color: (
     'default': $--n-secondary-text-color
@@ -32,6 +32,7 @@
   ) !global;
   $--typography-text-text-color: (
     'default': $--n-secondary-text-color,
+    'strong':  $--n-primary-text-color,
     'primary-depth': $--n-primary-text-color,
     'secondary-depth': $--n-secondary-text-color,
     'tertiary-depth': $--n-tertiary-text-color,
@@ -53,5 +54,5 @@
     $--n-base-background-color,
     $--n-code-overlay-background-color
   ) !global;
-  $--typography-code-border-color: $--n-border-color !global;
+  $--typography-code-border-color: transparent !global;
 }

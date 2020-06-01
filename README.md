@@ -13,12 +13,15 @@
 ## Features
 ### Caring About Styles
 As is.
-> The reason I started to build the library is I'm not satisfied the UI framework my company used. Maybe it's possible to caring about nearily all the details of an UI framework, except compatibility of IE.
+> The reason I started to build the library is I'm not satisfied with the UI framework I used. I think maybe it's possible to caring about nearily all the details of an UI framework, except the compatibility of IE.
 ### Themed
-Dark theme included. Theme can be changed seamlessly.
-> When you find that the UI drafts are already in dark mode, you can't start with light theme. But if you start to build a dark mode UI, sooner or later you have to build a light themed UI. As a result, Naive UI has both of them.
+Dark theme included. Theme switching is seamlessly.
+> At first there's only dark mode UI design drafts. It's wired but true. After you starting to build a dark mode UI, sooner or later you will have to create a light theme for it. As a result, naive-ui has both of them.
 ### Batteries Included
 There are more than 60 components. Utils for building themed component are provided.
+### Not Rather Slow
+I try to make it not rather slow.
+> You can never know how much data will the backends send to you. Maybe thousands of options in single select.
 
 ## License
 Naive UI is licensed under the [MIT license](https://opensource.org/licenses/MIT).

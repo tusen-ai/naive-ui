@@ -3,7 +3,6 @@
 <n-date-picker
   v-model="timestamp"
   type="datetime"
-  :disabledTime= "disabledTime"
   clearable
   :format="format"
 />
@@ -14,13 +13,8 @@ export default {
   data () {
     return {
       timestamp: null,
-      timestamp2: 1000000,
+      timestamp2: 1183135260000,
       format: 'yyyy/MM/dd - HH:mm'
-    }
-  },
-  methods: {
-    disabledTime (current) {
-      return current > 1573552182000 && current < 1573811382000
     }
   }
 }

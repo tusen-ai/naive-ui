@@ -9,9 +9,6 @@
     :class="{
       'n-button--round': round,
       'n-button--circle': circle,
-      [`n-button--${colorHash || type}-colored`]: true,
-      [`n-button--${type}-type`]: true,
-      [`n-button--${syntheticSize}-size`]: true,
       'n-button--disabled': disabled,
       'n-button--loading': loading,
       'n-button--block': block,
@@ -19,8 +16,12 @@
       'n-button--enter-pressed': enterPressed,
       'n-button--ghost': ghost,
       'n-button--text': text,
-      [`n-button--${iconPlacement}-icon`]: iconPlacement && !noTextContent,
-      [`n-${syntheticTheme}-theme`]: syntheticTheme
+      [`n-button--${type}-type`]: true,
+      [`n-button--${colorHash || type}-colored`]: true,
+      [`n-button--${syntheticSize}-size`]: true,
+      [`n-button--${iconPlacement}-icon`]: hasIcon && iconPlacement && !noTextContent,
+      [`n-button--${iconDepth}-icon-depth`]: hasIcon && type === 'default',
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
     }"
     :tabindex="syntheticFocusable ? 0 : -1"
     @click="handleClick"
@@ -207,6 +208,7 @@ export default {
       default: true
     },
     type: {
+      // TODO: warning message
       validator (value) {
         return [
           'default',
@@ -228,6 +230,12 @@ export default {
       validator (value) {
         return ['left', 'right'].includes(value)
       }
+    },
+    iconDepth: {
+      default: 'secondary',
+      validator (value) {
+        return ['secondary', 'tertiary'].includes(value)
+      }
     }
   },
   data () {
@@ -239,9 +247,11 @@ export default {
   },
   computed: {
     colorRgb () {
+      if (!this.color) return null
       return read(this.color)
     },
     colorHash () {
+      if (!this.colorRgb) return null
       return hash(this.colorRgb)
     },
     syntheticSize () {
@@ -250,7 +260,11 @@ export default {
         return NButtonGroup.size
       }
       const NFormItem = this.NFormItem
-      if (NFormItem && NFormItem.syntheticSize) {
+      if (
+        NFormItem &&
+        NFormItem !== '__FORM_ITEM_INNER__' &&
+        NFormItem.syntheticSize
+      ) {
         return NFormItem.syntheticSize
       }
       return this.size

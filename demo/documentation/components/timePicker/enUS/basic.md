@@ -13,7 +13,7 @@ export default {
   data () {
     return {
       time0: null,
-      time1: 1563937380000
+      time1: 1183135260000
     }
   },
   methods: {

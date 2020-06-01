@@ -10,7 +10,7 @@ Set width of select menu.
   :options="options"
   @change="handleChange"
 >
-  <n-tag>{{ (Array.isArray(value) && value.length) ? value : 'Popselect' }}</n-tag>
+  <n-tag>{{ (Array.isArray(value) && value.length) ? value : 'Nothing' }}</n-tag>
 </n-popselect>
 ```
 ```js

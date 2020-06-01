@@ -29,6 +29,7 @@
         />
         <n-time-picker
           size="small"
+          :show-icon="false"
           :theme="theme"
           :stateful="false"
           :detachable="false"
@@ -61,6 +62,7 @@
           @input="handleEndDateInput"
         />
         <n-time-picker
+          :show-icon="false"
           :theme="theme"
           size="small"
           :stateful="false"
@@ -235,7 +237,6 @@
           v-if="actions.includes('clear')"
           :theme="theme"
           size="tiny"
-          round
           @click="clearValue"
         >
           {{ localeNamespace.clear }}
@@ -245,7 +246,6 @@
           :theme="theme"
           :disabled="isRangeInvalid"
           size="tiny"
-          round
           type="primary"
           @click="handleConfirmClick"
         >

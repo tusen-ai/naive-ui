@@ -3,23 +3,23 @@
 ```html
 <n-button>
   <template v-slot:icon>
-    <md-save />
+    <cash-outline />
   </template>
-  保存
+  +100 元
 </n-button>
 <n-button icon-placement="right">
   <template v-slot:icon>
-    <md-save />
+    <cash-outline />
   </template>
-  保存
+  +100 元
 </n-button>
 ```
 ```js
-import mdSave from 'naive-ui/lib/icons/md-save'
+import cashOutline from 'naive-ui/lib/icons/cash-outline'
 
 export default {
   components: {
-    mdSave
+    cashOutline
   }
 }
 ```

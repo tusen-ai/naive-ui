@@ -19,17 +19,17 @@ Input can be disabled.
 />
 <n-input pair seperator="to" v-model="value" clearable :disabled="!active">
   <template v-slot:affix>
-    <n-icon><ios-calendar /></n-icon>
+    <n-icon><cash-outline /></n-icon>
   </template>
 </n-input>
 <n-switch v-model="active" />
 ```
 ```js
-import iosCalendar from 'naive-ui/lib/icons/ios-calendar'
+import cashOutline from 'naive-ui/lib/icons/cash-outline'
 
 export default {
   components: {
-    iosCalendar
+    cashOutline
   },
   data() {
     return {

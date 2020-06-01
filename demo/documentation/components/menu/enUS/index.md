@@ -18,7 +18,7 @@ collapse
 ### Menu Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |collapsed|`boolean`|`false`|The collapsed status of menu, only works when menu is vertical.|
 |collapsed-width|`number`|`null`|The menu width after collapsed.|
 |icon-size|`number`|`20`|The icon size when menu is not collapsed.|

@@ -50,8 +50,9 @@ export default {
       }
     },
     _getZindexableContent () {
-      if (this.$refs.contentContainer) {
-        return this.$refs.contentContainer
+      const refs = this.$refs
+      if (refs.contentContainer) {
+        return refs.contentContainer
       } else {
         return this.getZindexableContent()
       }

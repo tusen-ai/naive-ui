@@ -28,8 +28,8 @@ basic
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |language|`string`|`null`||
 |code|`string`|`null`||
 |trim|`boolean`|`true`||
-|hljs|`object`|`null`|如果你想局部设定 hljs，可以通过这个属性传给组件|
+|hljs|`Object`|`null`|如果你想局部设定 hljs，可以通过这个属性传给组件|

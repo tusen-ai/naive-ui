@@ -1,5 +1,5 @@
 # 遮罩关闭
-你可以在使用 v-model 的时候让点击遮罩不关闭
+你可以在使用 v-model 的时候让点击遮罩不关闭。
 ```html
 <n-button
   @click="modalActive = true"

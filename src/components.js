@@ -401,7 +401,8 @@ const exportedComponents = {
     styles: [
       'TimePicker',
       '[]Input',
-      '[]Button'
+      '[]Button',
+      '[]Icon'
     ]
   },
   Tooltip: {

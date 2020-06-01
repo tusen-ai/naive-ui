@@ -6,12 +6,10 @@
   <n-button @click="theme = 'light'">浅色主题</n-button>
 </div>
 <n-config-provider :theme="theme" :theme-environment="env">
-  <n-config-consumer>
-    <template v-slot="{ themeEnvironment }">
-      <div style="background-color: rgba(128, 128, 128); padding: 8px;">
-        <n-tag>{{ themeEnvironment }}</n-tag>
-      </div>
-    </template>
+  <n-config-consumer v-slot="{ themeEnvironment }">
+    <n-card>
+      <n-tag>{{ themeEnvironment }}</n-tag>
+    </n-card>
   </n-config-consumer>
 </n-config-provider>
 ```
@@ -19,7 +17,7 @@
 export default {
   data () {
     return {
-      theme: 'light',
+      theme: 'dark',
       env: {
         dark: '氯化钠',
         light: '离子化合物'

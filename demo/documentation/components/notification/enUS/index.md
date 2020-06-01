@@ -39,8 +39,8 @@ duration
 |action|`string \| (() => VNode \| Array<VNode>)`|`null`|Can be a render function|
 |closable|`boolean`|`true`||
 |onClose|`() => boolean \| Promise<boolean> \| any`|`() => {}`|The callback of notification closing. Returning `false`, promise resolve `false` or promise reject will cancel this closing.|
-|onAfterHide|`function`|`null`||
-|onAfterShow|`function`|`null`||
+|onAfterHide|`Function`|`null`||
+|onAfterShow|`Function`|`null`||
 |duration|`number`|`null`|If not set, it won't automatically close. Unit is millisecond.|
 
 ### NotificationEnvironment API
@@ -58,9 +58,9 @@ Properties of NofiticationEnvironment Instance can be dynamically set.
 |action|`string \| (() => VNode \| Array<VNode>)`|Can be a render function|
 |closable|`boolean`||
 |onClose|`(next: function) => any`|Callback when close button is clicked. Only if next is called notification will close|
-|onHide|`function`||
-|onAfterHide|`function`||
-|onAfterShow|`function`||
+|onHide|`Function`||
+|onAfterHide|`Function`||
+|onAfterShow|`Function`||
 
 #### NotificationEnvironment Methods
 |Name|Type|Description|

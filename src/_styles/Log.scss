@@ -4,7 +4,6 @@
   @include b(log) {
     @include once {
       position: relative;
-      font-family: $--n-mono-font-family;
       font-size: 14px;
       box-sizing: border-box;
       transition:
@@ -15,6 +14,7 @@
         white-space: pre-wrap;
       }
       @include e(line) {
+        font-family: $--n-mono-font-family;
         margin: 0;
       } 
     }
@@ -22,7 +22,6 @@
     @include b(log-loader) {
       @include once {
         @include fade-in-width-expand-transition($duration: .3s, $delay: 0s);
-        font-family: $--n-font-family;
         transition:
           color .3s $--n-ease-in-out-cubic-bezier,
           background-color .3s $--n-ease-in-out-cubic-bezier;

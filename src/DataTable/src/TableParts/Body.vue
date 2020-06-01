@@ -45,7 +45,8 @@
                 ...(column.className && createClassObject(column.className)),
                 [`n-data-table-td--fixed-${column.fixed}`]: column.width && column.fixed,
                 'n-data-table-td--shadow-after': activeLeft[column.key],
-                'n-data-table-td--shadow-before': activeRight[column.key]
+                'n-data-table-td--shadow-before': activeRight[column.key],
+                'n-data-table-td--selection': column.type === 'selection'
               }"
             >
               <n-checkbox

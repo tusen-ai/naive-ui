@@ -12,6 +12,7 @@
       class="n-time-picker-input"
       passively-activated
       deactivate-on-enter
+      :attr-size="syntheticAttrSize"
       :theme="syntheticTheme"
       :stateful="stateful"
       :size="syntheticSize"
@@ -25,7 +26,13 @@
       @click="handleActivatorClick"
       @input="handleTimeInput"
       @clear="handleTimeInputClear"
-    />
+    >
+      <template v-if="showIcon" v-slot:suffix>
+        <n-icon>
+          <time-outline />
+        </n-icon>
+      </template>
+    </n-input>
     <div
       ref="contentContainer"
       class="n-positioning-container"
@@ -136,7 +143,6 @@
             <div class="n-time-picker-selector-actions">
               <n-button
                 size="tiny"
-                round
                 :theme="syntheticTheme"
                 @click="handleNowClick"
               >
@@ -144,7 +150,6 @@
               </n-button>
               <n-button
                 size="tiny"
-                round
                 type="primary"
                 class="n-time-picker-selector-actions__confirm"
                 :theme="syntheticTheme"
@@ -167,6 +172,7 @@
 <script>
 import NScrollbar from '../../Scrollbar'
 import NInput from '../../Input'
+import NIcon from '../../Icon'
 import detachable from '../../_mixins/detachable'
 import placeable from '../../_mixins/placeable'
 import clickoutside from '../../_directives/clickoutside'
@@ -192,6 +198,7 @@ import { strictParse } from '../../_utils/component/datePicker'
 import keyboardDelegate from '../../_utils/delegate/keyboardDelegate'
 import { KEY_CODE } from '../../_utils/event/keyCode'
 import NBaseFocusDetector from '../../_base/FocusDetector'
+import timeOutline from '../../_icons/time-outline'
 
 const DEFAULT_FORMAT = 'HH:mm:ss'
 
@@ -207,8 +214,10 @@ export default {
   name: 'NTimePicker',
   components: {
     NInput,
+    NIcon,
     NScrollbar,
-    NBaseFocusDetector
+    NBaseFocusDetector,
+    timeOutline
   },
   directives: {
     clickoutside
@@ -271,7 +280,12 @@ export default {
       type: Boolean,
       default: false
     },
+    /** private */
     stateful: {
+      type: Boolean,
+      default: true
+    },
+    showIcon: {
       type: Boolean,
       default: true
     }
@@ -330,22 +344,8 @@ export default {
     isValueInvalid () {
       return this.isHourInvalid || this.isMinuteInvalid || this.isSecondInvalid
     },
-    message () {
-      const invalidUnits = []
-      if (this.isHourInvalid) {
-        invalidUnits.push('hour')
-      }
-      if (this.isMinuteInvalid) {
-        invalidUnits.push('minute')
-      }
-      if (this.isSecondInvalid) {
-        invalidUnits.push('second')
-      }
-      if (invalidUnits.length) {
-        return invalidUnits.join(', ') + 'is invalid'
-      } else {
-        return null
-      }
+    syntheticAttrSize () {
+      return this.format.length + 4
     },
     computedTime () {
       if (this.value === null) return null

@@ -183,12 +183,18 @@
 <script>
 import NBaseSuffix from '../../Suffix'
 import NTag from '../../../Tag'
+import { mountStyleAsFormItem } from './styles/Selection.cssr.js'
 
 export default {
   name: 'NBaseSelection',
   components: {
     NBaseSuffix,
     NTag
+  },
+  inject: {
+    NFormItem: {
+      default: null
+    }
   },
   props: {
     theme: {
@@ -285,6 +291,11 @@ export default {
           }
         })
       }
+    }
+  },
+  created () {
+    if (this.NFormItem) {
+      mountStyleAsFormItem()
     }
   },
   methods: {

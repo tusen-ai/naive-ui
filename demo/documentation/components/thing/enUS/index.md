@@ -10,7 +10,7 @@ indent
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |title|`string`|`null`||
 |title-extra|`string`|`null`||
 |description|`string`|`null`||

@@ -23,13 +23,11 @@
         <slot name="action">
           <n-button
             size="tiny"
-            round
             @click="handleNegativeClick"
           >
             {{ localizedNegativeText }}
           </n-button>
           <n-button
-            round
             size="tiny"
             type="primary"
             @click="handlePositiveClick"

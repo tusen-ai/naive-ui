@@ -18,14 +18,14 @@ dark-4-debug
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
-|themed-style|`{ [themeName: string]: object }`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
+|themed-style|`{ [themeName: string]: Object } \| null`|`null`||
 |show|`boolean`|`false`||
 |placement|`'top' \| 'right' \| 'bottom' \| 'left'`|`'right'`||
 |width|`number \| string`|`251`||
 |height|`number \| string`|`251`|在位置是 `top` 和 `bottom` 时生效|
 |mask-closable|`boolean`|`true`|点击遮罩时是否发出 `hide` 事件|
-|drawer-style|`object`|`null`||
+|drawer-style|`Object`|`null`||
 |target|`() => HTMLElement`|`() => document.body`|抽屉出现的区域|
 |drawer-class|`string`|`null`||
 

@@ -1,19 +1,30 @@
+// Caveat: not all the colors will be used in the current theme! Be Careful to
+// choose the color you need.
+
+// Neutral colors are derived from base background color and overlay colors.
+// They have different usage.
+
 @mixin setup-dark-colors {
   $--base-text: rgb(255, 255, 255) !global;
 
-  $--alpha-1: .92 !global;
-  $--alpha-2: .84 !global;
+  $--alpha-1: .9 !global;
+  $--alpha-2: .82 !global;
   $--alpha-3: .52 !global;
   $--alpha-4: .38 !global;
 
   $--alpha-disabled: .6 !global;
   $--alpha-pending: .09 !global;
+  $--alpha-table-pending: .06 !global;
   
   // overlay-text
   $--overlay-text-1: rgba(255, 255, 255, $--alpha-1) !global;
   $--overlay-text-2: rgba(255, 255, 255, $--alpha-2) !global;
   $--overlay-text-3: rgba(255, 255, 255, $--alpha-3) !global;
   $--overlay-text-4: rgba(255, 255, 255, $--alpha-4) !global;
+  $--neutral-text-1: create-dark-neutral-color($--overlay-text-1) !global;
+  $--neutral-text-2: create-dark-neutral-color($--overlay-text-2) !global;
+  $--neutral-text-3: create-dark-neutral-color($--overlay-text-3) !global;
+  $--neutral-text-4: create-dark-neutral-color($--overlay-text-4) !global;
   
   // overlay
   $--overlay-avatar: rgba(255, 255, 255, .18) !global;
@@ -30,23 +41,25 @@
 
   $--overlay-disabled: rgba(255, 255, 255, $--alpha-disabled-fill) !global;
   $--overlay-pending: rgba(255, 255, 255, $--alpha-pending) !global;
+  $--overlay-table-pending: rgba(255, 255, 255, $--alpha-table-pending) !global;
   $--overlay-active: rgba(255, 255, 255, .03) !global;
   $--overlay-code: rgba(255, 255, 255, .12) !global;
-  $--overlay-tag: null !global;
+  $--overlay-tag: rgba(255, 255, 255, 0) !global;
 
   // neutral
-  $--neutral-base: black !global;
+  $--neutral-base: #000 !global;
   $--neutral-popover: rgb(72, 72, 78) !global;
   $--neutral-modal: rgb(44, 44, 50) !global;
   $--neutral-card: rgb(24, 24, 28) !global;
   $--neutral-body: rgb(16, 16, 20) !global;
-  $--neutral-disabled: null !global;
-  $--neutral-border: null !global;
-  $--neutral-divider: null !global;
-  $--neutral-input: null !global;
-  $--neutral-action: null !global;
-  $--neutral-tag: null !global;
-  $--neutral-code: null !global;
+  $--neutral-disabled: create-dark-neutral-color($--overlay-disabled) !global;
+  $--neutral-border: create-dark-neutral-color($--overlay-border) !global;
+  $--neutral-divider: create-dark-neutral-color($--overlay-divider) !global;
+  $--neutral-input: create-dark-neutral-color($--overlay-input) !global;
+  $--neutral-action: create-dark-neutral-color($--overlay-action) !global;
+  $--neutral-tag: create-dark-neutral-color($--overlay-tag) !global;
+  $--neutral-code: create-dark-neutral-color($--overlay-code) !global;
+  $--neutral-rail: create-dark-neutral-color($--overlay-rail) !global;
   
   // primary
   $--primary-hover: #7fe7c4 !global;

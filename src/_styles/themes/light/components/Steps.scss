@@ -21,18 +21,18 @@
     'process': $--n-disabled-text-color,
     'wait': $--n-disabled-text-color,
     'finish': $--n-primary-color,
-    'error': $--n-error-color
+    'error': $--n-disabled-text-color
   ) !global;
   $--steps-step-content-text-color: (
     'process': $--n-secondary-text-color,
     'wait': $--n-disabled-text-color,
-    'finish': $--n-primary-color,
+    'finish': $--n-disabled-text-color,
     'error': $--n-error-color
   ) !global;
   $--steps-step-title-text-color: (
     'process': $--n-primary-text-color,
     'wait': $--n-disabled-text-color,
-    'finish': $--n-primary-color,
+    'finish': $--n-tertiary-text-color,
     'error': $--n-error-color
   ) !global;
 }

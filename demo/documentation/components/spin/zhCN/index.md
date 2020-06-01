@@ -8,7 +8,7 @@ wrap
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |spinning|`boolean`|`false`|Spin 在填入内容的状态是否激活|
 |size|`'small' \| 'in-small' \| 'medium' \| 'in-medium' \| 'large' \| 'in-large'`|`medium`||
 |stroke|`string`|`null`|Spin 的颜色|

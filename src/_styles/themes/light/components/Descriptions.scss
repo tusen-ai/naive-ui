@@ -9,5 +9,5 @@
     'default': $--n-card-background-color,
     'modal': $--n-modal-background-color
   ) !global;
-  $--descriptions-border-color: $--n-divider-color !global;
+  $--descriptions-border-color: $--n-divider-overlay-color !global;
 }

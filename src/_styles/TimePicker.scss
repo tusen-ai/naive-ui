@@ -38,6 +38,7 @@
       margin: 4px 0;
       min-width: 104px;
       overflow: hidden;
+      transform: $--n-transform-debounce-scale;
       @include fade-in-scale-up-transition(time-picker);
       @include b(time-picker-selector-actions) {
         height: 38px;

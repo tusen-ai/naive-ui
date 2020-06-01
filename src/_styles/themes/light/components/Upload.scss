@@ -16,7 +16,7 @@
     'success': $--n-success-color
   ) !global;
   $--upload-info-icon-color: (
-    'default': $--n-icon-color
+    'default': $--n-icon-overlay-color
   ) !global;
   $--upload-disabled-opacity: $--n-disabled-opacity !global;
 }

@@ -1,10 +1,10 @@
 @mixin setup-dark-tag {
   $--tag-text-color: (
-    'checkable-default': $--n-secondary-text-color,
+    'checkable-default': $--n-secondary-text-overlay-color,
     'checkable-hover': $--n-primary-color,
     'checkable-active': $--n-base-background-color,
-    'default': $--n-secondary-text-color,
-    'default-disabled': $--n-disabled-text-color,
+    'default': $--n-secondary-text-overlay-color,
+    'default-disabled': $--n-disabled-text-overlay-color,
     'success': $--n-success-color,
     'success-disabled': change-color($--n-success-color, $alpha: .3),
     'warning': $--n-warning-color,
@@ -42,10 +42,10 @@
     'error-disabled': change-color($--n-error-color, $alpha: $--n-disabled-fill-opacity)
   ) !global;
   $--tag-border-color: (
-    'default': $--n-border-color,
-    'default-hover': $--n-border-color,
-    'default-active': $--n-border-color,
-    'default-disabled': $--n-border-color,
+    'default': $--n-border-overlay-color,
+    'default-hover': $--n-border-overlay-color,
+    'default-active': $--n-border-overlay-color,
+    'default-disabled': $--n-border-overlay-color,
     'success': change-color($--n-success-color, $alpha: $--n-tertiary-opacity),
     'success-hover': change-color($--n-success-color, $alpha: $--n-tertiary-opacity),
     'success-active': change-color($--n-success-color, $alpha: $--n-tertiary-opacity),
@@ -64,10 +64,10 @@
     'error-disabled': change-color($--n-error-color, $alpha: $--n-disabled-opacity * $--n-tertiary-opacity)
   ) !global;
   $--tag-close-color: (
-    'default': $--n-close-color,
-    'default-hover': $--n-close-color,
-    'default-active': $--n-close-color,
-    'default-disabled': change-color($--n-close-color, $alpha: $--n-tertiary-opacity * $--n-tertiary-opacity),
+    'default': $--n-close-overlay-color,
+    'default-hover': $--n-close-overlay-color,
+    'default-active': $--n-close-overlay-color,
+    'default-disabled': change-color($--n-close-overlay-color, $alpha: $--n-tertiary-opacity * $--n-tertiary-opacity),
     'success': change-color($--n-success-color, $alpha: $--n-tertiary-opacity),
     'success-hover': change-color($--n-success-color, $alpha: .8),
     'success-active': change-color($--n-success-color, $alpha: .6),

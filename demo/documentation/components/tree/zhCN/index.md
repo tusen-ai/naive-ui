@@ -19,7 +19,7 @@ filter
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |expand-on-dragenter|`boolean`|`true`|是否在拖入后展开节点|
 |block-node|`boolean`|`false`||
 |data|`Array<TreeNode>`|`[]`|树的节点数据。重新设置 data 会将一些非受控状态清空，如果你需要在使用中改动 data，最好以受控的方式控制树|
@@ -43,11 +43,11 @@ filter
 ## Events
 |名称|参数|说明|
 |-|-|-|
-|selected-keys-change|`(Array<string \| number>)`||
-|expanded-keys-change|`(Array<string \| number>)`||
-|checked-keys-change|`(Array<string \| number>)`||
-|dragstart|`({ node: TreeNode, event: DragEvent })`||
-|dragend|`({ node: TreeNode, event: DragEvent })`||
-|dragenter|`({ node: TreeNode, event: DragEvent })`||
-|dragleave|`({ node: TreeNode, event: DragEvent })`||
-|drop|`({ node: TreeNode, dragNode: TreeNode, dropPosition: 'top' \| 'center' \| 'bottom', event: DragEvent })`||
+|selected-keys-change|`(keys: Array<string \| number>)`||
+|expanded-keys-change|`(keys: Array<string \| number>)`||
+|checked-keys-change|`(keys: Array<string \| number>)`||
+|dragstart|`(data: { node: TreeNode, event: DragEvent })`||
+|dragend|`(data: { node: TreeNode, event: DragEvent })`||
+|dragenter|`(data: { node: TreeNode, event: DragEvent })`||
+|dragleave|`(data: { node: TreeNode, event: DragEvent })`||
+|drop|`(data: { node: TreeNode, dragNode: TreeNode, dropPosition: 'top' \| 'center' \| 'bottom', event: DragEvent })`||

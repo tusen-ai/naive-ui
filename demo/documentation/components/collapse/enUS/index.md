@@ -22,7 +22,7 @@ item-header-click
 |arrow-placement|`'left' \| 'right'`|`'left'`||
 |display-directive|`'if' \| 'show'`|`'if'`|The display directive to use when its inner `n-collapse-item` render content. `'if'` corresponds to `v-if` and `'show'` corresponds to `v-show`.|
 |expanded-names|`Array<string \| number>`|`null`||
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 
 
 ### Collapse Item
@@ -43,11 +43,11 @@ item-header-click
 |-|-|-|
 |default|`()`||
 |header|`()`||
-|arrow|`({ collapsed: boolean })`||
+|arrow|`(options: { collapsed: boolean })`||
 
 ## Event
 ### Collapse Event
 |Name|Parameters|Description|
 |-|-|-|
 |expanded-names-change|`(expandedNames: Array<string>)`||
-|item-header-click|`({ name: string, expanded: boolean, event: MouseEvent })`||
+|item-header-click|`(data: { name: string, expanded: boolean, event: MouseEvent })`||

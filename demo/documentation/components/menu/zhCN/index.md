@@ -18,7 +18,7 @@ collapse
 ### Menu Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |collapsed|`boolean`|`false`|菜单是否折叠，值在菜单为垂直时有用|
 |collapsed-width|`number`|`null`|折叠后菜单的宽度|
 |icon-size|`number`|`20`|菜单未折叠时图标的大小|

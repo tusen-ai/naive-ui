@@ -48,7 +48,6 @@
           v-if="negativeText"
           :theme="theme"
           style="margin-right:12px;"
-          round
           size="small"
           @click="handleNegativeClick"
         >
@@ -56,7 +55,6 @@
         </n-button>
         <n-button
           :theme="theme"
-          round
           :disabled="loading === true"
           :loading="loading"
           size="small"

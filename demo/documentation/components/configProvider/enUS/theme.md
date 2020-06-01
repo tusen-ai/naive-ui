@@ -2,10 +2,10 @@
 Set theme of inner components of `n-config-provider`.
 ```html
 <n-config-provider :theme="theme">
-  <div style="background-color: rgba(128, 128, 128); padding: 8px;">
+  <n-card>
     <n-button @click="theme = 'dark'">Dark</n-button>
     <n-button @click="theme = 'light'">Light</n-button>
-  </div>
+  </n-card>
 </n-config-provider>
 ```
 ```js
@@ -19,6 +19,6 @@ export default {
 ```
 ```css
 .n-button {
-  margin: 0 12px 8px 0;
+  margin: 0 12px 0 0;
 }
 ```

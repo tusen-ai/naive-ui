@@ -1,7 +1,7 @@
 @mixin setup-dark-step {
   $--steps-step-border-color: (
     'process': $--n-primary-color,
-    'wait': $--n-disabled-text-color,
+    'wait': $--n-disabled-text-overlay-color,
     'finish': $--n-primary-color,
     'error': $--n-error-color
   ) !global;
@@ -13,26 +13,26 @@
   ) !global;
   $--steps-step-indicator-text-color: (
     'process': black,
-    'wait': $--n-disabled-text-color,
+    'wait': $--n-disabled-text-overlay-color,
     'finish': $--n-primary-color,
     'error': $--n-error-color
   ) !global;
   $--steps-step-splitor-background-color: (
-    'process': $--n-disabled-text-color,
-    'wait': $--n-disabled-text-color,
+    'process': $--n-disabled-text-overlay-color,
+    'wait': $--n-disabled-text-overlay-color,
     'finish': $--n-primary-color,
-    'error': $--n-error-color
+    'error': $--n-disabled-text-overlay-color
   ) !global;
   $--steps-step-content-text-color: (
-    'process': $--n-secondary-text-color,
-    'wait': $--n-disabled-text-color,
-    'finish': $--n-primary-color,
+    'process': $--n-secondary-text-overlay-color,
+    'wait': $--n-disabled-text-overlay-color,
+    'finish': $--n-disabled-text-overlay-color,
     'error': $--n-error-color
   ) !global;
   $--steps-step-title-text-color: (
-    'process': $--n-primary-text-color,
-    'wait': $--n-disabled-text-color,
-    'finish': $--n-primary-color,
+    'process': $--n-primary-text-overlay-color,
+    'wait': $--n-disabled-text-overlay-color,
+    'finish': $--n-tertiary-text-overlay-color,
     'error': $--n-error-color
   ) !global;
 }

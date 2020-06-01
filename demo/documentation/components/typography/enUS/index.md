@@ -12,12 +12,10 @@ text
 ```
 
 ## Props
-
-## Props
 ### All Typography Components Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 
 
 ### Text Props

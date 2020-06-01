@@ -61,6 +61,10 @@ export default {
     siderBordered: {
       type: Boolean,
       default: true
+    },
+    bodyThemedStyle: {
+      type: Object,
+      default: null
     }
   },
   data () {
@@ -189,6 +193,7 @@ export default {
           top: scopedSlots.nav ? '64px' : null
         },
         props: {
+          themedStyle: this.bodyThemedStyle,
           position: 'absolute'
         }
       }, [
@@ -257,6 +262,7 @@ export default {
           style: { ...this.contentStyle },
           props: {
             'use-native-scrollbar': false,
+            themedStyle: this.bodyThemedStyle,
             'scroll-content-style': {
               width: '100%',
               boxSizing: 'border-box',

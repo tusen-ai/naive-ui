@@ -26,7 +26,7 @@
     'default': $--n-secondary-text-color,
     'disabled': $--n-disabled-text-color
   ) !global;
-  $--transfer-filter-border-color: $--n-divider-color !global;
-  $--transfer-border-color: $--n-divider-color !global; 
+  $--transfer-filter-border-color: $--n-divider-overlay-color !global;
+  $--transfer-border-color: $--n-divider-overlay-color !global; 
   $--transfer-list-border-mask-pointer-events: none !global;
 }

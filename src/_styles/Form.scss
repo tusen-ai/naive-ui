@@ -105,9 +105,6 @@ $form-item-label-height: (
           }
         }
       }
-      @include m(has-feedback) {
-        padding-bottom: 0px;
-      }
       @include b(form-item-blank) {
         padding-top: 3px;
         padding-bottom: 3px;
@@ -115,6 +112,22 @@ $form-item-label-height: (
         display: flex;
         align-items: center;
         position: relative;
+      }
+    }
+    @include b(form-item-blank) {
+      @include m(error) {
+        & + {
+          @include b(form-item-feedback-wrapper) {
+            color: map-get($--form-item-feedback-text-color, 'error');
+          }
+        }
+      }
+      @include m(warning) {
+        & + {
+          @include b(form-item-feedback-wrapper) {
+            color: map-get($--form-item-feedback-text-color, 'warning');
+          }
+        }
       }
     }
     @include m(required) {
@@ -154,7 +167,6 @@ $form-item-label-height: (
           @include fade-down-transition($name: form-item-feedback, $from-offset: -3px);
         }
       }
-      color: map-get($--form-item-feedback-text-color, 'default');
     } 
   }
 }

@@ -11,6 +11,7 @@
       position: relative;
       transition: $--n-icon-transition;
       svg {
+        transition: opacity .3s $--n-ease-in-out-cubic-bezier;
         height: 1em;
         width: 1em;
       }

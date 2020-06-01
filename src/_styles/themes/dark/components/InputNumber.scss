@@ -5,10 +5,10 @@
     'focus': $--n-primary-color,
     'error': $--n-error-color
   )!global;
-  $--input-number-text-decoration-color: $--n-secondary-text-color !global;
+  $--input-number-text-decoration-color: $--n-secondary-text-overlay-color !global;
   $--input-number-placeholder-color: (
-    'default': $--n-placeholder-text-color,
-    'disabled': change-color($--n-placeholder-text-color, $alpha: alpha($--n-placeholder-text-color) * 0.6),
+    'default': $--n-placeholder-text-overlay-color,
+    'disabled': change-color($--n-placeholder-text-overlay-color, $alpha: alpha($--n-placeholder-text-overlay-color) * 0.6),
   ) !global;
   $--input-number-background-color: (
     'default': $--n-input-overlay-background-color,
@@ -17,12 +17,12 @@
     'error-focus': change-color($--n-error-color, $alpha: 0.1),
   ) !global;
   $--input-number-text-color: (
-    'default': $--n-secondary-text-color,
-    'disabled': $--n-disabled-text-color
+    'default': $--n-secondary-text-overlay-color,
+    'disabled': $--n-disabled-text-overlay-color
   ) !global;
   $--input-number-button-text-color: (
-    'default': $--n-secondary-text-color,
-    'disabled': $--n-disabled-text-color,
+    'default': $--n-secondary-text-overlay-color,
+    'disabled': $--n-disabled-text-overlay-color,
     'hover': $--n-primary-color,
     'active': $--n-primary-active-color
   ) !global;
@@ -37,10 +37,10 @@
   $--input-number-box-shadow: (
     'default': inset 0 0 0 0 transparent,
     'hover': inset 0 0 0px 1px $--n-primary-color,
-    'focus': (inset 0 0 0px 1px $--n-primary-color, 0 0 8px 0px change-color($--n-primary-color, $alpha: .3)),
+    'focus': (inset 0 0 0px 1px $--n-primary-color, 0 0 8px 0 change-color($--n-primary-color, $alpha: .3)),
     'error-default': inset 0 0 0 1px $--n-error-color,
     'error-hover': inset 0 0 0px 1px $--n-error-color,
-    'error-focus': (inset 0 0 0px 1px $--n-error-color, 0 0 8px 0px change-color($--n-primary-color, $alpha: .3)),
+    'error-focus': (inset 0 0 0px 1px $--n-error-color, 0 0 8px 0 change-color($--n-primary-color, $alpha: .3)),
     "disabled": inset 0 0 0 1px transparent
   ) !global;
 }

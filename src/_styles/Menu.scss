@@ -31,12 +31,14 @@
         @include once {
           display: flex;
         }
-        
         @include b(menu-item) {
-          @include m(selected) {
-            @include once {
+          margin: 0;
+          @include once {
+            &::after {
               background-color: transparent !important;
             }
+          }
+          @include m(selected) {
             @include b(menu-item-content) {
               border-bottom: 2px solid $--menu-horizontal-border-color;
             }
@@ -64,8 +66,8 @@
     @include m(collapsed) {
       @include b(menu-list) {
         @include b(menu-item) {
-          @include m(selected) {
-            @include once {
+          @include once {
+            &::after {
               background-color: transparent !important;
             }
           }
@@ -97,13 +99,14 @@
         @include b(menu-item) {
           transition: background-color .3s $--n-ease-in-out-cubic-bezier;
           list-style: none;
-          height: 48px;
+          height: 42px;
+          margin: 6px 0;
         }
         @include b(submenu) {
           cursor: pointer;
           position: relative;
           @include b(menu-item-content) {
-            height: 48px;
+            height: 42px;
           }
           @include b(submenu-content) {
             padding: 0;
@@ -113,8 +116,30 @@
         }
       }
       @include b(menu-item) {
+        @include once {
+          position: relative;
+          &::after {
+            content: "";
+            background-color: transparent;
+            position: absolute;
+            left: 8px;
+            right: 8px;
+            top: 0;
+            bottom: 0;
+            border-radius: $--n-border-radius;
+            transition: background-color .3s $--n-ease-in-out-cubic-bezier;
+            pointer-events: none;
+          }
+        }
+        &:active {
+          &::after {
+            background-color: $--menu-item-background-color;
+          }
+        }
         @include m(selected) {
-          background-color: $--menu-item-background-color;
+          &::after {
+            background-color: $--menu-item-background-color;
+          }
           @include b(menu-item-content) {
             @include e(icon) {
               @include b(icon) {
@@ -264,7 +289,7 @@
         @include once {
           cursor: default;
           font-size: 13px;
-          height: 40px;
+          height: 36px;
           display: flex;
           align-items: center;
           transition: padding-left .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;

@@ -2,18 +2,19 @@
 使用配置消费者 `n-config-consumer` 来获取当前位置上的主题。
 
 ```html
+<div>
+  <n-button @click="theme = 'dark'">深色</n-button>
+  <n-button @click="theme = 'light'">浅色</n-button>
+</div>
 <n-config-provider :theme="theme">
-  <div style="background-color: rgba(128, 128, 128); padding: 8px;">
-    <n-button @click="theme = 'dark'">深色</n-button>
-    <n-button @click="theme = 'light'">浅色</n-button>
+  <n-card>
     <n-config-consumer
       @theme-change="handleThemeChange"
+      v-slot="{ theme }"
     >
-      <template v-slot="{ theme }">
-        <div>主题：{{ theme }}</div>
-      </template>
+      <div>主题：{{ theme }}</div>
     </n-config-consumer>
-  </div>
+  </n-card>
 </n-config-provider>
 ```
 ```js

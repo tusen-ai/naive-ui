@@ -6,7 +6,7 @@
   @negative-click="handleNegativeClick"
 >
   <template v-slot:activator>
-    <n-button>Quit</n-button>
+    <n-button>Quit Game</n-button>
   </template>
   I heared that players will still be abused after purchasing in some games when I watch Bilibili.
 </n-popconfirm>

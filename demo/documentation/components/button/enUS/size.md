@@ -1,10 +1,10 @@
 # Size
 Button can be `tiny`, `small`, `medium` and `large` size.
 ```html
-<n-button size="tiny">small small</n-button>
-<n-button type="primary" size="small">small</n-button>
-<n-button type="info" size="medium">not small</n-button>
-<n-button type="success" size="large">not not small</n-button>
+<n-button size="tiny">Small Small</n-button>
+<n-button size="small">Small</n-button>
+<n-button size="medium">Not Small</n-button>
+<n-button size="large">Not Not Small</n-button>
 ```
 ```css
 .n-button {

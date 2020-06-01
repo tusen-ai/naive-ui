@@ -44,7 +44,7 @@ form
 ## Slots
 |名称|参数|说明|
 |-|-|-|
-|default|`({ value: any, index: number })`|每一项的渲染方式，其中 `value` 为该项对应的数组值，`index` 为该项对应的数组索引|
+|default|`(options: { value: any, index: number })`|每一项的渲染方式，其中 `value` 为该项对应的数组值，`index` 为该项对应的数组索引|
 
 ## Events
 |名称|参数|说明|

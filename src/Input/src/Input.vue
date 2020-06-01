@@ -66,6 +66,7 @@
         :value="pair ? (value && value[0]) : value"
         :readonly="readonly"
         :autofocus="autofocus"
+        :size="attrSize"
         @blur="handleInputBlur"
         @focus="handleInputFocus"
         @input="handleInput($event, 0)"
@@ -162,6 +163,8 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asformitem from '../../_mixins/asformitem'
 
+import { mountStyleAsFormItem } from './styles/Input.cssr.js'
+
 export default {
   name: 'NInput',
   components: {
@@ -255,6 +258,11 @@ export default {
     autofocus: {
       type: Boolean,
       default: false
+    },
+    /** private */
+    attrSize: {
+      type: Number,
+      default: null
     }
   },
   data () {
@@ -309,6 +317,11 @@ export default {
       if (this.isTextarea && this.autosize) {
         this.$nextTick().then(this.updateTextAreaStyle)
       }
+    }
+  },
+  created () {
+    if (this.NFormItem) {
+      mountStyleAsFormItem()
     }
   },
   mounted () {

@@ -1,14 +1,14 @@
 @mixin setup-dark-radio {
   $--radio-box-shadow: (
-    'default': inset 0 0 0 1px $--n-border-color,
+    'default': inset 0 0 0 1px $--n-border-overlay-color,
     'active': inset 0 0 0 1px $--n-primary-color,
     'focus': (inset 0 0 0 1px $--n-primary-color, 0 0 0 2px change-color($--n-primary-color, $alpha: .3)),
     'hover': inset 0 0 0 1px $--n-primary-color,
-    'disabled': inset 0 0 0 1px $--n-border-color
+    'disabled': inset 0 0 0 1px $--n-border-overlay-color
   ) !global;
   $--radio-label-text-color: (
-    'default': $--n-secondary-text-color,
-    'disabled': $--n-disabled-text-color
+    'default': $--n-secondary-text-overlay-color,
+    'disabled': $--n-disabled-text-overlay-color
   ) !global;
   $--radio-background-color: (
     'default': transparent,
@@ -16,10 +16,10 @@
   ) !global;
   $--radio-control-background-color: (
     'active': $--n-primary-color,
-    'disabled': $--n-border-color
+    'disabled': $--n-border-overlay-color
   ) !global;
   $--radio-button-border-color: (
-    'default': $--n-border-color,
+    'default': $--n-border-overlay-color,
     'active': $--n-primary-color,
     'hover': $--n-primary-color
   ) !global;
@@ -28,7 +28,7 @@
     'active': $--n-primary-color,
   ) !global;
   $--radio-button-label-color: (
-    'default': $--n-secondary-text-color,
+    'default': $--n-secondary-text-overlay-color,
     'active':$--n-base-background-color,
     'hover': $--n-primary-color
   ) !global;

@@ -5,7 +5,6 @@
 
 /* stylelint-disable */
 :export {
-  baseBackgroundColor: $--n-base-background-color;
   primaryColor: $--n-primary-color;
   primaryHoverColor: $--n-primary-hover-color;
   primaryActiveColor: $--n-primary-active-color;
@@ -21,18 +20,26 @@
   warningColor: $--n-warning-color;
   warningHoverColor: $--n-warning-hover-color;
   warningActiveColor: $--n-warning-active-color;
-  primaryTextColor: $--overlay-text-1;
-  secondaryTextColor: $--overlay-text-2;
-  tertiaryTextColor: $--overlay-text-3;
-  quaternaryTextColor: $--overlay-text-4;
+  primaryTextColor: $--neutral-text-1;
+  secondaryTextColor: $--neutral-text-2;
+  tertiaryTextColor: $--neutral-text-3;
+  quaternaryTextColor: $--neutral-text-4;
+  primaryTextOverlayColor: $--overlay-text-1;
+  secondaryTextOverlayColor: $--overlay-text-2;
+  tertiaryTextOverlayColor: $--overlay-text-3;
+  quaternaryTextOverlayColor: $--overlay-text-4;
+  baseBackgroundColor: $--n-base-background-color;
   popoverBackgroundColor: $--neutral-popover;
   modalBackgroundColor: $--neutral-modal;
   cardBackgroundColor: $--neutral-card;
   bodyBackgroundColor: $--neutral-body;
-  dividerColor: $--overlay-divider;
-  borderColor: $--n-border-color;
+  closeColor: $--neutral-text-3;
+  closeOverlayColor: $--overlay-text-3;
+  dividerColor: $--neutral-divider;
+  dividerOverlayColor: $--overlay-divider;
+  borderColor: $--neutral-border;
+  borderOverlayColor: $--overlay-border;
   easeInOutCubicBezier: $--n-ease-in-out-cubic-bezier;
-  // unstable
   tableHeaderOverlayBackgroundColor: $--n-table-header-overlay-background-color;
   inputOverlayBackgroundColor: $--n-input-overlay-background-color;
 }

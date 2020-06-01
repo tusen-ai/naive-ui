@@ -18,8 +18,11 @@
     'error-focus': $--n-base-background-color,
   ) !global;
   $--input-icon-color: (
-    'default': $--n-icon-color,
-    'disabled': change-color($--n-icon-color, $alpha: alpha($--n-icon-color) * $--n-disabled-opacity)
+    'default': composite-color($--n-base-background-color, $--n-icon-overlay-color),
+    'disabled': composite-color(
+      $--n-base-background-color,
+      change-color($--n-icon-overlay-color, $alpha: alpha($--n-icon-overlay-color) * $--n-disabled-opacity)
+    )
   )!global;
   $--input-border-mask-border-color: (
     'default': transparent,

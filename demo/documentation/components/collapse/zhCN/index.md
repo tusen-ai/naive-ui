@@ -22,7 +22,7 @@ item-header-click
 |arrow-placement|`'left' \| 'right'`|`'left'`||
 |display-directive|`'if' \| 'show'`|`'if'`|内部 `n-collapse-item` 在控制内容是否渲染时使用的指令，`'if'` 对应 `v-if`，`'show'` 对应 `v-show`|
 |expanded-names|`Array<string \| number>`|`null`||
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 
 
 ### Collapse Item Props
@@ -43,11 +43,11 @@ item-header-click
 |-|-|-|
 |default|`()`||
 |header|`()`||
-|arrow|`({ collapsed: boolean })`||
+|arrow|`(options: { collapsed: boolean })`||
 
 ## Event
 ### Collapse Event
 |名称|参数|说明|
 |-|-|-|
 |expanded-names-change|`(expandedNames: Array<string>)`||
-|item-header-click|`({ name: string, expanded: boolean, event: MouseEvent })`||
+|item-header-click|`(data: { name: string, expanded: boolean, event: MouseEvent })`||

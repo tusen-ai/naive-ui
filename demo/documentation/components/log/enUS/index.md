@@ -36,7 +36,7 @@ loading
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |loading|`boolean`|`false`||
 |trim|`boolean`|`false`||
 |log|`string`|`null`||
@@ -45,7 +45,7 @@ loading
 |line-height|`number`|`1.25`||
 |language|`string`|`null`||
 |rows|`number`|`15`||
-|hljs|`object`|`null`||
+|hljs|`Object`|`null`||
 
 ## Events
 |Name|Parameters|Description|

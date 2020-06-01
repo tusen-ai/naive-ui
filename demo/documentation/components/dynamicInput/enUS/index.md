@@ -43,7 +43,7 @@ form
 ## Slots
 |Name|Parameters|Description|
 |-|-|-|
-|default|`({ value: any, index: number })`|The content of each item, `value` is the value of current item, `index` is the index of the current item.|
+|default|`(options: { value: any, index: number })`|The content of each item, `value` is the value of current item, `index` is the index of the current item.|
 
 ## Events
 |Name|Parameters|Description|

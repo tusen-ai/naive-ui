@@ -6,11 +6,11 @@
     'default': $--n-table-header-overlay-background-color
   ) !global;
   $--transfer-list-header-text-color: (
-    'default': $--n-primary-text-color
+    'default': $--n-primary-text-overlay-color
   ) !global;
   $--transfer-list-header-extra-text-color: (
-    'default': $--n-secondary-text-color,
-    'disabled': $--n-disabled-text-color
+    'default': $--n-secondary-text-overlay-color,
+    'disabled': $--n-disabled-text-overlay-color
   ) !global;
   $--transfer-gap-button-background-color: (
     'default': rgba(255, 255, 255, 0.3),
@@ -19,10 +19,10 @@
     'active': $--n-primary-active-color
   ) !global;
   $--transfer-item-text-color: (
-    'default': $--n-secondary-text-color,
-    'disabled': $--n-disabled-text-color
+    'default': $--n-secondary-text-overlay-color,
+    'disabled': $--n-disabled-text-overlay-color
   ) !global;
-  $--transfer-filter-border-color: $--n-divider-color !global;
+  $--transfer-filter-border-color: $--n-divider-overlay-color !global;
   $--transfer-border-color: transparent !global;
   $--transfer-list-border-mask-pointer-events: none !global;
 }

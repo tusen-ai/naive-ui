@@ -19,7 +19,7 @@ use-component
 ### ConfirmOption API
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
 |title|`string \| (() => VNode \| Array<VNode>)`|`null`|可以是 render 函数|
 |closable|`boolean`|`true`||

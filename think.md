@@ -161,6 +161,30 @@ h('NLayout', {
 ## 2020.5.19
 得看懂 vue 究竟是怎么更新组件的...
 
+## 2020.5.28
+目前看来，对于动态样式，有两种情况，一种是像直接通过 prop 生效，另一种是通过组合才生效，比如 error 的 formitem 与 input，判断是否要生成样式是个比较麻烦的事，目前看来比较凑巧的是这个样式的体积不是很大，其实放在哪边都差不多= =
+
+## 2020.5.29
+主题变量有两种组织方式：
+```
+light {
+  error: {
+    backgroundColor: {
+      hover
+    }
+  }
+}
+或者
+light {
+  backgroundColor: {
+    error: {
+      default
+    }
+  }
+}
+```
+我目前觉得第一种好点，因为扩展一般是按照种类扩展，每次插入一个同样结构的块。而第二种是每次扩展的时候在每个块里同样的位置插入一行，这样扩展的时候写起来很别扭。
+
 ## TODO 排序不分先后
 1. <del>Focus Detector on Time Selector</del>
 2. <del>Menu Root Indent = 0 可能造成问题</del>
@@ -251,14 +275,18 @@ h('NLayout', {
 87. 抵御外界 CSS 变化，比如 line-height 之类的
 88. <del>CSS Font 选择</del> 对英文应该没有那么麻烦，走系统字体就好了，然而对中文又没什么好的解决方案，so 先这个样子，之后再琢磨琢磨
 89. <del>把所有用 $slots 判断的地方都改成 $scopedSlots，[原因](https://vuejs.org/v2/api/#vm-scopedSlots)<del> done
-90. 调整默认状态下 button 的 icon 的颜色
+90. <del>调整默认状态下 button, input 的 icon 的颜色</del>
 91. <del>优化 button 的样式，现在太冗余了，关键是怎么同步按钮的主题变量呢...</del>
 92. <del>placeable 按需注册</del>
 93. steps 列表优化
 94. tabs 列表优化
 95. tree 列表优化
 96. cascader 列表优化
-
+97. 更多的 tabs 选择
+98. 下拉菜单应该给 icon 留空间
+99. <del>Form item feedback 好像有点问题，消失的时候，自定义时候</del>
+100. <del>Confim 重命名 Dialog</del> 算了不换了，牵扯的地方太多不好改了，confirm 也就凑活吧
+101. Dark Debug 3，Safari 你可太秀了......
 
 ```
 Done
@@ -280,4 +308,9 @@ Done
 release template
 
 历史变更见：https://***REMOVED***/blob/develop/CHANGELOG.zh-CN.md
+```
+```cache
+需要注意的是，以 Base 开头的 CSS 文件并不会确保随着版本的更新保持稳定（我会尽力的保持）。因为它是内部实现的一部分。如果你维持按需引入时升级后样式出现了错误，可以来这里检查一下。虽然把这些公共样式各自打包进每个用到他们的组件是可行的，但是相比于升级的繁琐，我更不喜欢重复的代码。（这不意味着这种解决方案是“更好的”，它只是种选择而已）
+
+What should be noted is the CSS files start with 'Base' are not guaranteed to be stable (I'll try not to change them). Because they are parts of internal implementation of the library. If you find import mistakes after upgrade the package, you may have a look at here. It is possible to pack these common styles inside every component using it. However, compared to add routines when upgrading package, I perfer not to import duplicate codes. (It doesn't mean this is a better solution. It is only a choice.)
 ```

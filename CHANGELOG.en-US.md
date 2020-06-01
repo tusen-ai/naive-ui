@@ -1,4 +1,33 @@
 # CHANGELOG
+## 1.3.1 (2020-06-01)
+### Fixes
+- Fix the problem that checkbox in the selection column of `n-data-table` is not center aligned.
+- Fix the problem that header of `n-data-table` has no border-color transition.
+- Fix the problem that `show-icon` & `closable` & `bordered` props of `$NConfirm` don't work.
+### Features
+- Add and adjust some colors in the style scheme of `n-config-consumer`.
+
+## 1.3.0 (2020-06-01)
+### Breaking Changes
+- Default UI CSS bundle won't include external font files. If you need using it you should import it explicitly.
+### Features
+- Add `themed-style` prop on `n-layout`.
+### Fixes
+- Fix the problem that round toggle button won't rotate `n-layout-sider` when collapsed status is changed.
+- Fix the problem that `n-form-item`'s feedback has no leave animation if it is set at first.
+- Fix the problem that max-height related styles of `n-data-table` are applied all the time.
+- Fix some style glitches.
+### Refactors
+- Refactor some components' styles in the light theme.
+
+## 1.2.1 (2020-05-29)
+### Fixes
+- Fix the problem that `n-slider` tooltip has no z-index.
+
+## 1.2.0 (2020-05-29)
+### Features
+- Add `feedback` and `validation-status` props for `n-form-item`.
+
 ## 1.1.5 (2020-05-28)
 ### Features
 - Add `display-directive` prop for `n-collapse` and `n-collapse-item`.

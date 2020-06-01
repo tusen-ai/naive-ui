@@ -20,7 +20,7 @@ Affix has `offset-top`, `top`, `offset-bottom` and `bottom`. `offset-top` is top
   width: 100%;
   height: 200px;
   background-color: rgba(128, 128, 128, .3);
-  border-radius: 6px;
+  border-radius: 3px;
   overflow: auto;
 }
 

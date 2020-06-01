@@ -16,4 +16,4 @@ color
 ## Slots
 |名称|参数|说明|
 |-|-|-|
-|default|`({ theme: string, namespace: string, language: string, themeEnvironment: any, styleScheme: object })`||
+|default|`(options: { theme: string, namespace: string, language: string, themeEnvironment: any, styleScheme: Object })`||

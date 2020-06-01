@@ -1,7 +1,32 @@
 # CHANGELOG
-## 1.1.6 (2020-06-01)
+## 1.3.1 (2020-06-01)
 ### Fixes
-- 修正 `$NConfirm`　的　`show-icon` & `closable` & `bordered` 属性设置无效.
+- 修正了 `n-data-table` 选框列的选框没有垂直居中的问题
+- 修正了 `n-data-table` 表头没 border-color transition 的问题
+- 修正 `$NConfirm` 的 `show-icon` & `closable` & `bordered` 属性设置无效的问题
+### Features
+- 增加并调整了一些 `n-config-consumer` 样式方案中的颜色
+
+## 1.3.0 (2020-06-01)
+### Breaking Changes
+- UI 默认样式不再包含外部字体文件，如果需要使用 UI 提供的字体需要明确引入
+### Features
+- 为 `n-layout` 增加了 `themed-style` 属性
+### Fixes
+- 修正了 `n-layout-sider` 圆形按钮没有随着折叠状态滚动的问题
+- 修正了 `n-form-item` feedback 如果在一开始被设定则消失没有动画的问题
+- 修正了 `n-data-table` max-height 相关属性在所有情况下都会被应用的问题
+- 修正了一些组件的样式瑕疵
+### Refactors
+- 调整了一些组件亮色主题下的样式
+
+## 1.2.1 (2020-05-29)
+### Fixes
+- 修正了 `n-slider` 弹框没有 z-index 的问题
+
+## 1.2.0 (2020-05-29)
+### Features
+- 为 `n-form-item` 增加了 `feedback` 和 `validation-status` 属性
 
 ## 1.1.5 (2020-05-28)
 ### Features

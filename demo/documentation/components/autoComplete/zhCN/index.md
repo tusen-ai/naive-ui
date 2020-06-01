@@ -17,7 +17,7 @@ after-select
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |value|`string`|`null`||
 |options|`Array<string \| AutoCompleteOption \| AutoCompleteOptionGroup>`|`[]`||
@@ -31,7 +31,7 @@ after-select
 |label|`string`||
 |value|`string \| number`|Should be unique in options.|
 |disabled|`boolean`||
-|render|`function`||
+|render|`Function`||
 
 ### AutoCompleteOptionGroup Properties
 |名称|类型|介绍|
@@ -43,7 +43,7 @@ after-select
 ## Slots
 |名称|参数|说明|
 |-|-|-|
-|default|`({ handleInput: (value: string) => any, handleFocus: function, handleBlur: function, value: string, theme: string \| null })`||
+|default|`(options: { handleInput: (value: string) => any, handleFocus: function, handleBlur: function, value: string, theme: string \| null })`||
 
 ## Events
 |名称|参数|说明|

@@ -10,7 +10,7 @@ indent
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |title|`string`|`null`||
 |title-extra|`string`|`null`||
 |description|`string`|`null`||

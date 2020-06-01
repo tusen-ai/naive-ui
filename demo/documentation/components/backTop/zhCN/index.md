@@ -14,12 +14,12 @@ targetContainerSelector
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |target|`() => HTMLElement`|一个返回最邻近可滚动父级元素的函数||
 |right|`number`|`40`||
 |bottom|`number`|`40`||
 |visibility-height|`number`|`180`||
-|themed-style|`object`|`null`||
+|themed-style|`{ [themeName: string]: Object } \| null`|`null`||
 
 ## Events
 |名称|参数|说明|

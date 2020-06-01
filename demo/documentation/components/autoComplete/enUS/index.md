@@ -16,7 +16,7 @@ after-select
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |value|`string`|`null`||
 |options|`Array<string \| AutoCompleteOption \| AutoCompleteOptionGroup>`|`[]`||
@@ -30,7 +30,7 @@ after-select
 |label|`string`||
 |value|`string \| number`|Should be unique in options.|
 |disabled|`boolean`||
-|render|`function`||
+|render|`Function`||
 
 ### AutoCompleteOptionGroup Properties
 |Name|Type|Description|
@@ -42,7 +42,7 @@ after-select
 ## Slots
 |Name|Parameters|Description|
 |-|-|-|
-|default|`({ handleInput: (value: string) => any, handleFocus: function, handleBlur: function, value: string, theme: string \| null })`||
+|default|`(options: { handleInput: (value: string) => any, handleFocus: function, handleBlur: function, value: string, theme: string \| null })`||
 
 ## Events
 |Name|Parameters|Description|

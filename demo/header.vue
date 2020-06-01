@@ -32,10 +32,19 @@
     }"
   >
     <div class="nav">
-      <div class="ui-logo" @click="handleLogoClick">
-        <img src="./assets/images/naivelogo.svg">
-        Naive UI ({{ version }})
-      </div>
+      <n-config-consumer v-slot="{ styleScheme }" abstract>
+        <div
+          class="ui-logo"
+          :style="{
+            color: styleScheme.primaryTextColor,
+            transition: `color .3s ${styleScheme.easeInOutCubicBezier}`
+          }"
+          @click="handleLogoClick"
+        >
+          <img src="./assets/images/naivelogo.svg">
+          Naive UI ({{ version }})
+        </div>
+      </n-config-consumer>
       <div style=" margin-left: 56px; display: flex; align-items: center;">
         <n-auto-complete
           v-model="searchInputValue"

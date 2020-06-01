@@ -25,7 +25,7 @@ Affix 可以 `absolute` 或者 `fixed` 定位。你可能还需要写一些额�
 .container {
   height: 200px;
   background-color: rgba(128, 128, 128, .3);
-  border-radius: 6px;
+  border-radius: 3px;
   overflow: auto;
 }
 

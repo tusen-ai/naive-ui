@@ -13,11 +13,11 @@
 }
 
 .demo-card .demo-card__view pre {
-  font-family: "FiraCode";
+  font-family: "naive-ui-mono";
 }
 
 .demo-card .demo-card__view code {
-  font-family: "FiraCode";
+  font-family: "naive-ui-mono";
 }
 
 .demo-card code.n-text {
@@ -26,4 +26,8 @@
 
 .n-documentation .n-p, .n-blockquote {
   max-width: 680px;
+}
+
+.n-table__td:first-child {
+  white-space: nowrap;
 }

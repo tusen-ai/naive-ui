@@ -14,19 +14,19 @@ default-files
 ### Upload Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |name|`string`|`'file'`|The field name of file in form data.|
 |accept|`string`|`null`|The accept type of upload. See <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept">accept</n-a>.|
 |action|`string`|`null`|The URL to submit data to.|
 |directory|`boolean`|`false`|If directory upload supported. Browser support needed. See <n-a href="https://caniuse.com/#feat=input-file-directory">input-file-directory</n-a>.|
 |method|`string`|`'POST'`|The method of HTTP request.|
 |multiple|`boolean`|`false`|If multiple files selection supported.|
-|headers|`object \| ({ file: UploadFile }) => object`|`null`|The additional HTTP Headers of request.|
-|data|`object \| ({ file: UploadFile }) => object`|`null`|The additional fileds data of HTTP request's form data.|
+|headers|`Object \| ({ file: UploadFile }) => Object`|`null`|The additional HTTP Headers of request.|
+|data|`Object \| ({ file: UploadFile }) => Object`|`null`|The additional fileds data of HTTP request's form data.|
 |with-credentials|`boolean`|`false`|If cookie attached.|
-|on-change|`({ file: UploadFile, fileList: Array<UploadFile>, event?: Event }) => any`|`() => {}`|The callback of status change of the component. Any file status change would fire the callback.|
-|on-remove|`({ file: UploadFile, fileList: Array<UploadFile> }) => boolean \| Promise<boolean> \| any`|`() => true`|The callback of file removal. Return false, promise resolve false or promise reject will cancel this removal.|
-|on-finish|`({ file: UploadFile }) => UploadFile \| void`|`file => file`|The callback of file upload finish. You can modify the UploadFile or retun a new UploadFile.|
+|on-change|`(options: { file: UploadFile, fileList: Array<UploadFile>, event?: Event }) => any`|`() => {}`|The callback of status change of the component. Any file status change would fire the callback.|
+|on-remove|`(options: { file: UploadFile, fileList: Array<UploadFile> }) => boolean \| Promise<boolean> \| any`|`() => true`|The callback of file removal. Return false, promise resolve false or promise reject will cancel this removal.|
+|on-finish|`(options: { file: UploadFile }) => UploadFile \| void`|`file => file`|The callback of file upload finish. You can modify the UploadFile or retun a new UploadFile.|
 |default-upload|`boolean`|`false`|If file uploaded immediatelly after file is selected.|
 |file-list|`Array<UploadFile>`|`undefined`|The file list of component. If set, the component will work in controlled manner.|
 |file-list-style|`Object`|`null`|The style of file list area|

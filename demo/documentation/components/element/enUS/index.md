@@ -14,7 +14,7 @@ color
 ## Slots
 |Name|Parameters|Description|
 |-|-|-|
-|default|`(theme: string, namespace: string, themeEnvironment: any, styleScheme: object)`||
+|default|`(theme: string, namespace: string, themeEnvironment: any, styleScheme: Object)`||
 
 ## Events
 |Name|Parameters|

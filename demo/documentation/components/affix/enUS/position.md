@@ -25,7 +25,7 @@ Affix can be `absolute` or `fixed` positioned. You may need some css tricks to m
 .container {
   height: 200px;
   background-color: rgba(128, 128, 128, .3);
-  border-radius: 6px;
+  border-radius: 3px;
   overflow: auto;
 }
 

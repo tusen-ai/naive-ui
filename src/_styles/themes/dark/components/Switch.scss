@@ -1,6 +1,6 @@
 @mixin setup-dark-switch {
   $--switch-rail-background-color: (
-    "inactive": $--n-rail-color,
+    "inactive": $--n-rail-overlay-color,
     "active": change-color($--n-primary-color, $alpha: .25)
   )!global;
   $--switch-switcher-background-image: (

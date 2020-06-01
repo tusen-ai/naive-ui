@@ -8,8 +8,8 @@ Naive UI 提供一些工具帮助开发者简单的创建支持主题的组件�
 ```demo
 provide-theme
 read-theme
-themed-style
-element
 environment
+element
+themed-style
 style-scheme
 ```

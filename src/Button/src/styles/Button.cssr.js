@@ -1,8 +1,11 @@
-import { c, cB, cTB, cE, cM, cNotM } from '../../../_utils/cssr'
+import { c, cB, cTB, cE, cM, cNotM, namespace } from '../../../_utils/cssr'
+import { composite, read } from '../../../_utils/color/index'
+
+const ns = namespace
 
 function createRippleAnimation (digest, color, theme) {
   return [
-    c(`@keyframes n-${theme ? theme + '-' : ''}button-${digest}-colored-ripple-spread`, {
+    c(`@keyframes ${ns}-${theme ? theme + '-' : ''}button-${digest}-colored-ripple-spread`, {
       from: {
         boxShadow: `0 0 0 0 ${color}`
       },
@@ -10,7 +13,7 @@ function createRippleAnimation (digest, color, theme) {
         boxShadow: `0 0 0 4px ${color}`
       }
     }),
-    c(`@keyframes n-${theme ? theme + '-' : ''}button-${digest}-colored-ripple-opacity`, {
+    c(`@keyframes ${ns}-${theme ? theme + '-' : ''}button-${digest}-colored-ripple-opacity`, {
       from: {
         opacity: 0.4
       },
@@ -31,15 +34,28 @@ function createBasicColorProps (
   return props
 }
 
-function createIconColorStyle (color) {
+function createIconColorStyle (base, color) {
+  if (!color) return []
+  let neuralizedColor
+  if (!base && color) neuralizedColor = color
+  else {
+    const colorRgba = read(color)
+    if (colorRgba[3] === 1) neuralizedColor = color
+    else {
+      neuralizedColor = composite(
+        read(base),
+        read(color)
+      )
+    }
+  }
   return cE('icon', [
     cB('icon', {
-      fill: color,
-      stroke: color
+      fill: neuralizedColor,
+      stroke: neuralizedColor
     }),
     cB('base-loading', {
-      fill: color,
-      stroke: color
+      fill: neuralizedColor,
+      stroke: neuralizedColor
     })
   ])
 }
@@ -54,116 +70,133 @@ export function createColorStyle () {
   return c([
     ({ props, context }) => {
       const digest = props.digest || props.type
-      const pallete = (props && props.pallete) || context.pallete[digest]
+      const subpallete = (props && props.pallete) || context.pallete[digest]
+      if (!subpallete) throw new Error('[naive-ui/button]: can\'t find the color of the button.')
       const theme = context.theme
+      const baseBgColor = subpallete.baseBackgroundColor
       return [
-        createRippleAnimation(digest, pallete.rippleColor || pallete.borderColor || pallete.color, theme),
+        createRippleAnimation(digest, subpallete.rippleColor || subpallete.borderColor || subpallete.color, theme),
         cTB('button', [
           cM(`${digest}-colored`, createBasicColorProps(
-            pallete.textColor, pallete.color, pallete.borderColor || pallete.color
+            subpallete.textColor, subpallete.color, subpallete.borderColor || subpallete.color
           ), [
-            createIconColorStyle(pallete.textColor),
+            createIconColorStyle(baseBgColor, subpallete.textColor),
+            digest === 'default' ? [
+              cM('tertiary-icon-depth', [
+                createIconColorStyle(baseBgColor, subpallete.tertiaryDepthIconColor)
+              ])
+            ] : [],
             cNotM('disabled', [
               cM(
                 'enter-pressed',
                 createBasicColorProps(
-                  pallete.activeTextColor || pallete.textColor,
-                  pallete.activeColor,
-                  pallete.activeBorderColor || pallete.activeColor
+                  subpallete.activeTextColor || subpallete.textColor,
+                  subpallete.activeColor,
+                  subpallete.activeBorderColor || subpallete.activeColor
                 ),
                 [
-                  createBorderMaskStyle(pallete.activeBorderColor || pallete.activeColor),
-                  createIconColorStyle(pallete.activeTextColor || pallete.textColor)
+                  createBorderMaskStyle(subpallete.activeBorderColor || subpallete.activeColor),
+                  createIconColorStyle(baseBgColor, subpallete.activeTextColor || subpallete.textColor)
                 ]
               ),
               cNotM('enter-pressed', [
                 c('&:hover', createBasicColorProps(
-                  pallete.hoverTextColor || pallete.textColor,
-                  pallete.hoverColor,
-                  pallete.hoverBorderColor || pallete.hoverColor
+                  subpallete.hoverTextColor || subpallete.textColor,
+                  subpallete.hoverColor,
+                  subpallete.hoverBorderColor || subpallete.hoverColor
                 ), [
-                  createBorderMaskStyle(pallete.hoverBorderColor || pallete.hoverColor),
-                  createIconColorStyle(pallete.hoverTextColor || pallete.textColor)
+                  createBorderMaskStyle(subpallete.hoverBorderColor || subpallete.hoverColor),
+                  createIconColorStyle(baseBgColor, subpallete.hoverTextColor || subpallete.textColor)
                 ]),
                 c('&:active', createBasicColorProps(
-                  pallete.activeTextColor || pallete.textColor,
-                  pallete.activeColor,
-                  pallete.activeBorderColor || pallete.activeColor
+                  subpallete.activeTextColor || subpallete.textColor,
+                  subpallete.activeColor,
+                  subpallete.activeBorderColor || subpallete.activeColor
                 ), [
-                  createBorderMaskStyle(pallete.activeBorderColor || pallete.activeColor),
-                  createIconColorStyle(pallete.activeTextColor || pallete.textColor)
+                  createBorderMaskStyle(subpallete.activeBorderColor || subpallete.activeColor),
+                  createIconColorStyle(baseBgColor, subpallete.activeTextColor || subpallete.textColor)
                 ])
               ]),
               c('&:not(:active):focus', [
                 cNotM('enter-pressed', createBasicColorProps(
-                  pallete.focusTextColor || pallete.textColor,
-                  pallete.focusColor,
-                  pallete.focusBorderColor || pallete.focusColor
+                  subpallete.focusTextColor || subpallete.textColor,
+                  subpallete.focusColor,
+                  subpallete.focusBorderColor || subpallete.focusColor
                 ), [
-                  createBorderMaskStyle(pallete.focusBorderColor || pallete.focusColor),
-                  createIconColorStyle(pallete.focusTextColor || pallete.textColor)
+                  createBorderMaskStyle(subpallete.focusBorderColor || subpallete.focusColor),
+                  createIconColorStyle(baseBgColor, subpallete.focusTextColor || subpallete.textColor)
                 ])
               ]),
               cM('rippling', [
                 c('&::after', {
-                  animationName: `n-${theme ? theme + '-' : ''}button-${digest}-colored-ripple-spread, n-${theme ? theme + '-' : ''}button-${digest}-colored-ripple-opacity`
+                  animationName: `${ns}-${theme ? theme + '-' : ''}button-${digest}-colored-ripple-spread, ${ns}-${theme ? theme + '-' : ''}button-${digest}-colored-ripple-opacity`
                 })
               ])
             ]),
             cM(`ghost`, createBasicColorProps(
-              pallete.ghostTypedTextColor || pallete.color, 'transparent', pallete.borderColor || pallete.color
+              subpallete.ghostTypedTextColor || subpallete.color, 'transparent', subpallete.borderColor || subpallete.color
             ), [
-              createIconColorStyle(pallete.ghostTypedTextColor || pallete.color),
+              createIconColorStyle(baseBgColor, subpallete.ghostTypedTextColor || subpallete.color),
+              digest === 'default' ? [
+                cM('tertiary-icon-depth', [
+                  createIconColorStyle(baseBgColor, subpallete.tertiaryDepthIconColor)
+                ])
+              ] : [],
               cNotM('disabled', [
                 cM(
                   'enter-pressed',
-                  createBasicColorProps(pallete.ghostTypedActiveTextColor || pallete.activeColor, 'transparent', pallete.activeBorderColor || pallete.activeColor),
+                  createBasicColorProps(subpallete.ghostTypedActiveTextColor || subpallete.activeColor, 'transparent', subpallete.activeBorderColor || subpallete.activeColor),
                   [
-                    createBorderMaskStyle(pallete.activeBorderColor || pallete.activeColor),
-                    createIconColorStyle(pallete.ghostTypedActiveTextColor || pallete.activeColor)
+                    createBorderMaskStyle(subpallete.activeBorderColor || subpallete.activeColor),
+                    createIconColorStyle(baseBgColor, subpallete.ghostTypedActiveTextColor || subpallete.activeColor)
                   ]
                 ),
                 cNotM('enter-pressed', [
-                  c('&:hover', createBasicColorProps(pallete.ghostTypedHoverTextColor || pallete.hoverColor, 'transparent', pallete.hoverBorderColor || pallete.hoverColor), [
-                    createBorderMaskStyle(pallete.hoverBorderColor || pallete.hoverColor),
-                    createIconColorStyle(pallete.ghostTypedHoverTextColor || pallete.hoverColor)
+                  c('&:hover', createBasicColorProps(subpallete.ghostTypedHoverTextColor || subpallete.hoverColor, 'transparent', subpallete.hoverBorderColor || subpallete.hoverColor), [
+                    createBorderMaskStyle(subpallete.hoverBorderColor || subpallete.hoverColor),
+                    createIconColorStyle(baseBgColor, subpallete.ghostTypedHoverTextColor || subpallete.hoverColor)
                   ]),
-                  c('&:active', createBasicColorProps(pallete.ghostTypedActiveTextColor || pallete.activeColor, 'transparent', pallete.activeBorderColor || pallete.activeColor), [
-                    createBorderMaskStyle(pallete.activeBorderColor || pallete.activeColor),
-                    createIconColorStyle(pallete.ghostTypedActiveTextColor || pallete.activeColor)
+                  c('&:active', createBasicColorProps(subpallete.ghostTypedActiveTextColor || subpallete.activeColor, 'transparent', subpallete.activeBorderColor || subpallete.activeColor), [
+                    createBorderMaskStyle(subpallete.activeBorderColor || subpallete.activeColor),
+                    createIconColorStyle(baseBgColor, subpallete.ghostTypedActiveTextColor || subpallete.activeColor)
                   ])
                 ]),
                 c('&:not(:active):focus', [
-                  cNotM('enter-pressed', createBasicColorProps(pallete.ghostTypedHoverTextColor || pallete.hoverColor, 'transparent', pallete.focusBorderColor || pallete.focusColor), [
-                    createBorderMaskStyle(pallete.focusBorderColor || pallete.focusColor),
-                    createIconColorStyle(pallete.ghostTypedHoverTextColor || pallete.hoverColor)
+                  cNotM('enter-pressed', createBasicColorProps(subpallete.ghostTypedHoverTextColor || subpallete.hoverColor, 'transparent', subpallete.focusBorderColor || subpallete.focusColor), [
+                    createBorderMaskStyle(subpallete.focusBorderColor || subpallete.focusColor),
+                    createIconColorStyle(baseBgColor, subpallete.ghostTypedHoverTextColor || subpallete.hoverColor)
                   ])
                 ])
               ])
             ]),
             cM('text', ({
-              color: pallete.textTypedTextColor || pallete.color
+              color: subpallete.textTypedTextColor || subpallete.color
             }), [
-              createIconColorStyle(pallete.textTypedTextColor || pallete.color),
+              createIconColorStyle(baseBgColor, subpallete.textTypedTextColor || subpallete.color),
+              digest === 'default' ? [
+                cM('tertiary-icon-depth', [
+                  createIconColorStyle(baseBgColor, subpallete.tertiaryDepthIconColor)
+                ])
+              ] : [],
               cNotM('disabled', [
                 cM(
                   'enter-pressed',
-                  createBasicColorProps(pallete.textTypedActiveTextColor || pallete.activeColor, null, null),
+                  createBasicColorProps(subpallete.textTypedActiveTextColor || subpallete.activeColor, null, null),
                   [
-                    createIconColorStyle(pallete.textTypedActiveTextColor || pallete.activeColor)
+                    createIconColorStyle(baseBgColor, subpallete.textTypedActiveTextColor || subpallete.activeColor)
                   ]
                 ),
                 cNotM('enter-pressed', [
-                  c('&:hover', createBasicColorProps(pallete.textTypedHoverTextColor || pallete.hoverColor, null, null), [
-                    createIconColorStyle(pallete.textTypedHoverTextColor || pallete.hoverColor)
+                  c('&:hover', createBasicColorProps(subpallete.textTypedHoverTextColor || subpallete.hoverColor, null, null), [
+                    createIconColorStyle(baseBgColor, subpallete.textTypedHoverTextColor || subpallete.hoverColor)
                   ]),
-                  c('&:active', createBasicColorProps(pallete.textTypedActiveTextColor || pallete.activeColor, null, null), [
-                    createIconColorStyle(pallete.textTypedActiveTextColor || pallete.activeColor)
+                  c('&:active', createBasicColorProps(subpallete.textTypedActiveTextColor || subpallete.activeColor, null, null), [
+                    createIconColorStyle(baseBgColor, subpallete.textTypedActiveTextColor || subpallete.activeColor)
                   ])
                 ]),
                 c('&:not(:active):focus', [
-                  cNotM('enter-pressed', createBasicColorProps(pallete.textTypedFocusTextColor || pallete.focusColor, null, null), [
-                    createIconColorStyle(pallete.textTypedFocusTextColor || pallete.focusColor)
+                  cNotM('enter-pressed', createBasicColorProps(subpallete.textTypedFocusTextColor || subpallete.focusColor, null, null), [
+                    createIconColorStyle(baseBgColor, subpallete.textTypedFocusTextColor || subpallete.focusColor)
                   ])
                 ])
               ])

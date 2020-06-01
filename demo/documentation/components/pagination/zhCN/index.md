@@ -17,7 +17,7 @@ disabled
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |page|`number`|`null`||
 |page-count|`number`|`null`||
 |page-size|`number`|`null`||

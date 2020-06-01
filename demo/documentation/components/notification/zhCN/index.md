@@ -42,8 +42,8 @@ duration
 |action|`string \| (() => VNode \| Array<VNode>)`|`null`|可以是 render 函数|
 |closable|`boolean`|`true`||
 |onClose|`() => boolean \| Promise<boolean> \| any`|`() => {}`|关闭通知的回调。返回 `false`、Promise resolve `false` 或者 reject 会取消这次关闭|
-|onAfterHide|`function`|`null`||
-|onAfterShow|`function`|`null`||
+|onAfterHide|`Function`|`null`||
+|onAfterShow|`Function`|`null`||
 |duration|`number`|`null`|如果没有设定则不会自动关闭，单位毫秒|
 
 ### NotificationEnvironment API
@@ -61,9 +61,9 @@ NofiticationEnvironment 实例的属性可以被动态改变。
 |action|`string \| (() => VNode \| Array<VNode>)`|可以是 render 函数|
 |closable|`boolean`||
 |onClose|`(next: function) => any`|点击了关闭按钮的回调。只有调用了 next 通知才会被关闭|
-|onHide|`function`||
-|onAfterHide|`function`||
-|onAfterShow|`function`||
+|onHide|`Function`||
+|onAfterHide|`Function`||
+|onAfterShow|`Function`||
 
 #### NotificationEnvironment Methods
 |名称|类型|说明|

@@ -1,10 +1,10 @@
 @mixin setup-dark-date-picker {
   $--date-picker-background-color: $--n-popover-background-color !global;
-  $--date-picker-text-color: $--n-secondary-text-color !global;
-  $--date-picker-icon-color: $--n-icon-color !global;
+  $--date-picker-text-color: $--n-secondary-text-overlay-color !global;
+  $--date-picker-icon-color: $--n-icon-overlay-color !global;
   $--date-picker-item-text-color: (
-    'inactive': $--n-disabled-text-color,
-    'default': $--n-secondary-text-color,
+    'inactive': $--n-disabled-text-overlay-color,
+    'default': $--n-secondary-text-overlay-color,
     'active': $--n-popover-background-color,
     'current': $--n-primary-color
   ) !global;
@@ -12,12 +12,12 @@
     'default': $--n-primary-color,
     'active': $--n-popover-background-color
   ) !global;
-  $--date-picker-month-text-color: $--n-primary-text-color !global;
+  $--date-picker-month-text-color: $--n-primary-text-overlay-color !global;
   $--date-picker-item-background-color: (
     'hover': change-color($--n-primary-color, $alpha: .15),
     'active': $--n-primary-color
   ) !global;
-  $--date-picker-divider-color:  $--n-divider-color !global;
+  $--date-picker-divider-color:  $--n-divider-overlay-color !global;
   $--date-picker-box-shadow: $--n-popmenu-box-shadow !global;
-  $--date-picker-text-decoration-color: $--n-secondary-text-color !global;
+  $--date-picker-text-decoration-color: $--n-secondary-text-overlay-color !global;
 }

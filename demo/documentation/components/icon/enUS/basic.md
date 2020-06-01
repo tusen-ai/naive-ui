@@ -2,7 +2,6 @@
 ```html
 <n-icon
   size="40"
-  color="#e4000f"
 >
   <game-controller-outline />
 </n-icon>
@@ -12,11 +11,7 @@
 >
   <game-controller />
 </n-icon>
-<n-icon
-  size="40"
->
-  <game-controller-outline />
-</n-icon>
+
 ```
 ```js
 import gameControllerOutline from 'naive-ui/lib/icons/game-controller-outline'

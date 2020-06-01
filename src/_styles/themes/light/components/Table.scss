@@ -1,5 +1,5 @@
 @mixin setup-light-table {
-  $--table-border-color: $--n-divider-color !global;
+  $--table-border-color: $--n-divider-overlay-color !global;
   $--table-body-background-color: (
     'default': $--n-card-background-color,
     'modal': $--n-modal-background-color

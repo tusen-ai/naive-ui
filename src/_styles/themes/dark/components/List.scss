@@ -1,8 +1,8 @@
 @mixin setup-dark-list {
-  $--list-text-color: $--n-secondary-text-color !global;
+  $--list-text-color: $--n-secondary-text-overlay-color !global;
   $--list-background-color: (
     'default': $--n-card-background-color,
     'modal': $--n-modal-background-color
   ) !global;
-  $--list-border-color: $--n-divider-color !global;
+  $--list-border-color: $--n-divider-overlay-color !global;
 }

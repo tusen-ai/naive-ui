@@ -185,7 +185,7 @@
         }
       }
       @include m(collapsed) {
-        @include e(toggle-button) {
+        @include b(layout-toggle-button) {
           transform: translateX(50%) translateY(-50%) rotate(180deg);
         }
       }

@@ -28,7 +28,10 @@ const light = {
     activeBorderColor: lightScheme.primaryActiveColor,
     focusBorderColor: lightScheme.primaryHoverColor,
 
-    rippleColor: lightScheme.primaryColor
+    rippleColor: lightScheme.primaryColor,
+
+    tertiaryDepthIconColor: lightScheme.tertiaryTextColor,
+    baseBackgroundColor: lightScheme.baseBackgroundColor
   },
   primary: {
     color: lightScheme.primaryColor,
@@ -94,7 +97,10 @@ const dark = {
     activeBorderColor: darkScheme.primaryActiveColor,
     focusBorderColor: darkScheme.primaryHoverColor,
 
-    rippleColor: darkScheme.primaryColor
+    rippleColor: darkScheme.primaryColor,
+
+    tertiaryDepthIconColor: darkScheme.tertiaryTextColor,
+    baseBackgroundColor: darkScheme.baseBackgroundColor
   },
   primary: {
     color: darkScheme.primaryColor,

@@ -1,7 +1,7 @@
-$--n-font-family: FiraSans, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-$--n-mono-font-family: FiraCode, monospace;
+$--n-font-family: naive-ui, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$--n-mono-font-family: naive-ui-mono, SFMono-Regular, Menlo, Consolas, Courier, monospace;
 
-$--n-strong-weight: 600;
+$--n-strong-weight: 500;
 
 $--n-ease-in-out-cubic-bezier: cubic-bezier(.4, 0, .2, 1);
 $--n-ease-out-cubic-bezier: cubic-bezier(0, 0, .2, 1);
@@ -98,16 +98,16 @@ $--n-card-margin-left: (
 
 $--n-card-margin-top: (
   'small': 12px,
-  'medium': 20px,
-  'large': 24px,
-  'huge': 28px
+  'medium': 19px,
+  'large': 23px,
+  'huge': 27px
 );
 
 $--n-card-margin-bottom: (
   'small': 12px,
-  'medium': 16px,
-  'large': 20px,
-  'huge': 24px
+  'medium': 20px,
+  'large': 24px,
+  'huge': 28px
 );
 
 /** cascader */
@@ -163,7 +163,7 @@ $--n-input-number-button-width: (
 );
 
 /** input */
-$--n-input-icon-size: 20px;
+$--n-input-icon-size: 16px;
 $--n-input-border-radius: $--n-border-radius;
 
 /** list */
@@ -281,8 +281,8 @@ $--n-typography-header-font-size: (
 );
 
 $--n-typography-header-margin: (
-  '1': 1.6em 0 1em 0,
-  '2': 1.6em 0 1em 0,
+  '1': 1.6em 0 .8em 0,
+  '2': 1.6em 0 .8em 0,
   '3': 1.6em 0 1.2em 0,
   '4': 1.4em 0 1.2em 0,
   '5': 1.4em 0 1.2em 0,

@@ -19,7 +19,7 @@ use-component
 ### ConfirmOption API
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark'`|`null`||
+|theme|`'light' \| 'dark' \| null`|`null`||
 |type|`'error \| 'success' \| 'warning'`|`'warning'`||
 |title|`string \| (() => VNode \| Array<VNode>)`|`null`|Can be a render function.|
 |closable|`boolean`|`true`||

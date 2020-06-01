@@ -1,6 +1,6 @@
 @mixin setup-dark-log {
-  $--log-text-color: $--n-secondary-text-color !global;
-  $--log-loader-text-color: $--n-secondary-text-color !global;
+  $--log-text-color: $--n-secondary-text-overlay-color !global;
+  $--log-loader-text-color: $--n-secondary-text-overlay-color !global;
   $--log-loader-background-color: $--n-input-overlay-background-color !global;
   $--log-loader-border-color: transparent !global;
 }

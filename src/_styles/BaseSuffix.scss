@@ -36,11 +36,6 @@
         }
         fill: map-get($--base-suffix-cross-color, "default");
       }
-      @include m(arrow) {
-        @include e(icon) {
-          fill: map-get($--base-suffix-cross-color, "hover");
-        }
-      }
       &:hover {
         @include e(icon) {
           fill: map-get($--base-suffix-cross-color, "hover");
@@ -95,37 +90,6 @@
       @include m(disabled) {
         @include once {
           cursor: not-allowed;
-        }
-      }
-    }
-  }
-  @include as-form-item {
-    @include with-status(error) {
-      @include b(base-suffix) {
-        @include b(base-suffix-cross) {
-          @include m(arrow) {
-            @include e(icon) {
-              fill: map-get($--base-suffix-cross-color, "error-hover");
-            }
-          }
-          &:hover {
-            @include e(icon) {
-              fill: map-get($--base-suffix-cross-color, "error-hover");
-            }
-          }
-          &:active {
-            @include e(icon) {
-              fill: map-get($--base-suffix-cross-color, "error-active");
-            }
-          }
-        }
-        @include b(base-suffix-arrow) {
-          @include m(active) {
-            &::after {
-              border-left: 1px solid map-get($--base-suffix-arrow-color, 'error-active');
-              border-bottom: 1px solid map-get($--base-suffix-arrow-color, 'error-active');
-            }
-          }
         }
       }
     }

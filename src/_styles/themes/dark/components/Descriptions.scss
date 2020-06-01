@@ -1,10 +1,10 @@
 @mixin setup-dark-descriptions {
   $--descriptions-header-background-color: $--n-table-header-overlay-background-color !global;
-  $--descriptions-header-text-color: $--n-primary-text-color !global;
-  $--descriptions-content-text-color: $--n-secondary-text-color !global;
+  $--descriptions-header-text-color: $--n-primary-text-overlay-color !global;
+  $--descriptions-content-text-color: $--n-secondary-text-overlay-color !global;
   $--descriptions-content-background-color: (
     'default': $--n-card-background-color,
     'modal': $--n-modal-background-color
   ) !global;
-  $--descriptions-border-color: $--n-divider-color !global;
+  $--descriptions-border-color: $--n-divider-overlay-color !global;
 }
