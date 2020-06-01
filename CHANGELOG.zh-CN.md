@@ -1,5 +1,12 @@
 # CHANGELOG
-## 1.3.0 (2020-05-30)
+## 1.3.1 (2020-06-01)
+### Fixes
+- 修正了 `n-data-table` 选框列的选框没有垂直居中的问题
+- 修正了 `n-data-table` 表头没 border-color transition 的问题
+### Features
+- 增加并调整了一些 `n-config-consumer` 样式方案中的颜色
+
+## 1.3.0 (2020-06-01)
 ### Breaking Changes
 - UI 默认样式不再包含外部字体文件，如果需要使用 UI 提供的字体需要明确引入
 ### Features

@@ -1,5 +1,12 @@
 # CHANGELOG
-## 1.3.0 (2020-05-30)
+## 1.3.1 (2020-06-01)
+### Fixes
+- Fix the problem that checkbox in the selection column of `n-data-table` is not center aligned.
+- Fix the problem that header of `n-data-table` has no border-color transition.
+### Features
+- Add and adjust some colors in the style scheme of `n-config-consumer`.
+
+## 1.3.0 (2020-06-01)
 ### Breaking Changes
 - Default UI CSS bundle won't include external font files. If you need using it you should import it explicitly.
 ### Features
