@@ -16,6 +16,15 @@ npm install --save-dev naive-ui
 import naive from 'naive-ui'
 import 'naive-ui/lib/styles/index.css'
 
+// 默认的 CSS 打包不包含字体文件
+// 如果需要使用 UI 内置的字体，可以按需添加下面的代码
+
+// 通用字体，多选一
+import 'naive-ui/lib/styles/fonts/Lato.css'
+import 'naive-ui/lib/styles/fonts/FiraSans.css'
+// 等宽字体
+import 'naive-ui/lib/styles/fonts/FiraCode.css'
+
 Vue.use(naive)
 ```
 

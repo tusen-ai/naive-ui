@@ -16,6 +16,16 @@ Add the following lines in you entry point js file.
 import naive from 'naive-ui'
 import 'naive-ui/lib/styles/index.css'
 
+// Default CSS bundle doesn't includes external font files.
+// If you want to use the built-in fonts of UI. Add the 
+// following lines on demand.
+
+// Generic Fonts, choose one at most
+import 'naive-ui/lib/styles/fonts/Lato.css'
+import 'naive-ui/lib/styles/fonts/FiraSans.css'
+// Monospace Fonts
+import 'naive-ui/lib/styles/fonts/FiraCode.css'
+
 Vue.use(naive)
 ```
 
