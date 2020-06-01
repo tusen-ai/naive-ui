@@ -1,4 +1,8 @@
 # CHANGELOG
+## 1.1.6 (2020-06-01)
+### Fixes
+- 修正 `$NConfirm`　的　`show-icon` & `closable` & `bordered` 属性设置无效.
+
 ## 1.1.5 (2020-05-28)
 ### Features
 - 为 `n-collapse` 和 `n-collapse-item` 增加了 `display-directive` 属性
