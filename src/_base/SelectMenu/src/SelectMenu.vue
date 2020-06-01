@@ -356,18 +356,21 @@ export default {
      * select option background related
      */
     updateTrackingRectTop (el) {
-      if (this.$refs.trackingRect) {
-        this.$refs.trackingRect.updateTrackingRectTop(el)
+      const refs = this.$refs
+      if (refs.trackingRect) {
+        refs.trackingRect.updateTrackingRectTop(el)
       }
     },
     hideTrackingRect () {
-      if (this.$refs.trackingRect) {
-        this.$refs.trackingRect.hideTrackingRect()
+      const refs = this.$refs
+      if (refs.trackingRect) {
+        refs.trackingRect.hideTrackingRect()
       }
     },
     hideTrackingRectSync () {
-      if (this.$refs.trackingRect) {
-        this.$refs.trackingRect.hideTrackingRect(0)
+      const refs = this.$refs
+      if (refs.trackingRect) {
+        refs.trackingRect.hideTrackingRect(0)
       }
     }
   }

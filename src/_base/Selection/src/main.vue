@@ -286,8 +286,9 @@ export default {
     active (active) {
       if (active) {
         this.$nextTick().then(() => {
-          if (this.$refs.singleInput) {
-            this.$refs.singleInput.focus()
+          const refs = this.$refs
+          if (refs.singleInput) {
+            refs.singleInput.focus()
           }
         })
       }
@@ -331,8 +332,9 @@ export default {
     handleMouseDown (e) {
       if (!this.active) return
       const filterableElKeys = ['focusableEl1', 'patternInputWrapper', 'patternInput', 'focusableEl2']
+      const refs = this.$refs
       for (const key of filterableElKeys) {
-        const el = this.$refs[key]
+        const el = refs[key]
         if (el && document.hasFocus(el)) {
           e.preventDefault()
           break
