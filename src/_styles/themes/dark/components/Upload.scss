@@ -4,7 +4,7 @@
     'error-hover': change-color($--n-error-color, $alpha: .15)
   ) !global;
   $--upload-dragger-border-color: (
-    'default': $--n-border-color,
+    'default': $--n-border-overlay-color,
     'hover': $--n-primary-color
   ) !global;
   $--upload-dragger-background-color: (

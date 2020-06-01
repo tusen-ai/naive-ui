@@ -1,6 +1,6 @@
 @mixin setup-dark-alert {
   $--alert-border-color: (
-    'default': $--n-divider-color,
+    'default': $--n-divider-overlay-color,
     'success': change-color($--n-success-hs-color, $alpha: .35),
     'info': change-color($--n-info-hs-color, $alpha: .35),
     'warning': change-color($--n-warning-hs-color, $alpha: .35),
@@ -35,8 +35,8 @@
     'error': $--n-secondary-text-color
   ) !global;
   $--alert-close-color: (
-    'default': $--n-close-color,
-    'hover': $--n-close-hover-color,
-    'active': $--n-close-color
+    'default': $--n-close-overlay-color,
+    'hover': $--n-close-hover-overlay-color,
+    'active': $--n-close-overlay-color
   ) !global;
 }

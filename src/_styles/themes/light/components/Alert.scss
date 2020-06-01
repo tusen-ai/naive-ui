@@ -1,6 +1,6 @@
 @mixin setup-light-alert {
   $--alert-border-color: (
-    'default': $--n-divider-color,
+    'default': $--n-divider-overlay-color,
     'success': mix($--n-success-color, $--n-base-background-color, 25%),
     'info': mix($--n-info-color, $--n-base-background-color, 25%),
     'warning': mix($--n-warning-color, $--n-base-background-color, 33%),

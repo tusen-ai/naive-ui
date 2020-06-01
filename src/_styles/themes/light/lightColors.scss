@@ -15,13 +15,17 @@
   $--overlay-text-2: rgba(0, 0, 0, $--alpha-2) !global;
   $--overlay-text-3: rgba(0, 0, 0, $--alpha-3) !global;
   $--overlay-text-4: rgba(0, 0, 0, $--alpha-4) !global;
+  $--neutral-text-1: create-light-neutral-color($--overlay-text-1) !global;
+  $--neutral-text-2: create-light-neutral-color($--overlay-text-2) !global;
+  $--neutral-text-3: create-light-neutral-color($--overlay-text-3) !global;
+  $--neutral-text-4: create-light-neutral-color($--overlay-text-4) !global;
   
   // overlay
   $--overlay-avatar: rgba(0, 0, 0, .20) !global;
   $--overlay-rail: rgba(0, 0, 0, .14) !global;
   $--overlay-border: rgba(0, 0, 0, .14) !global;
   $--overlay-divider: rgba(0, 0, 0, .08) !global;
-  $--overlay-input: null !global;
+  $--overlay-input: null !global; // TODO
   $--overlay-action: rgba(0, 0, 0, .02) !global;
   $--overlay-tab: rgba(0, 0, 0, .04) !global;
   $--overlay-scrollbar: rgba(0, 0, 0, .25) !global;
@@ -45,7 +49,7 @@
   $--neutral-disabled: create-light-neutral-color($--overlay-disabled) !global;
   $--neutral-border: create-light-neutral-color($--overlay-border) !global;
   $--neutral-divider: create-light-neutral-color($--overlay-divider) !global;
-  $--neutral-input: null !global;
+  $--neutral-input: null !global; // TODO
   $--neutral-action: create-light-neutral-color($--overlay-action) !global;
   $--neutral-tag: create-light-neutral-color($--overlay-tag) !global;
   $--neutral-code: create-light-neutral-color($--overlay-code) !global;

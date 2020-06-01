@@ -4,5 +4,5 @@
     'default': $--n-card-background-color,
     'modal': $--n-modal-background-color
   ) !global;
-  $--list-border-color: $--n-divider-color !global;
+  $--list-border-color: $--n-divider-overlay-color !global;
 }

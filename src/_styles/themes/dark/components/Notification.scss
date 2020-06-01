@@ -9,9 +9,9 @@
   $--notification-background-color: $--n-popover-background-color !global;
   $--notification-text-color: $--n-secondary-text-color !global;
   $--notification-close-color: (
-    'default': $--n-close-color,
-    'hover': $--n-close-hover-color,
-    'active': $--n-close-color
+    'default': $--n-close-overlay-color,
+    'hover': $--n-close-hover-overlay-color,
+    'active': $--n-close-overlay-color
   ) !global;
   $--notification-header-text-color: $--n-primary-text-color !global;
   $--notification-content-text-color: $--n-secondary-text-color !global;

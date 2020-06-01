@@ -91,11 +91,11 @@
   $--n-warning-active-color: $--warning-active !global;
   $--n-warning-hs-color: $--warning-hs !global;
 
-  $--n-primary-text-color: $--overlay-text-1 !global;
-  $--n-secondary-text-color: $--overlay-text-2 !global;
-  $--n-tertiary-text-color: $--overlay-text-3 !global;
-  $--n-disabled-text-color: $--overlay-text-4 !global;
-  $--n-placeholder-text-color: $--overlay-text-4 !global;
+  $--n-primary-text-color: $--neutral-text-1 !global;
+  $--n-secondary-text-color: $--neutral-text-2 !global;
+  $--n-tertiary-text-color: $--neutral-text-3 !global;
+  $--n-disabled-text-color: $--neutral-text-4 !global;
+  $--n-placeholder-text-color: $--neutral-text-4 !global;
   $--n-base-text-color: $--base-text !global;
 
   $--n-primary-opacity: $--alpha-1 !global;
@@ -107,14 +107,18 @@
   $--n-icon-color: $--overlay-text-4 !global;
 
   $--n-rail-color: $--overlay-rail !global;
-  $--n-divider-color: $--overlay-divider !global;
+  $--n-divider-color: $--neutral-divider !global;
+  $--n-divider-overlay-color: $--overlay-divider !global;
   $--n-border-color: $--neutral-border !global;
+  $--n-border-overlay-color: $--overlay-border !global;
 
   $--n-scrollbar-background-color: $--overlay-scrollbar !global;
   $--n-scrollbar-hover-background-color: $--overlay-scrollbar-hover !global;
   
-  $--n-close-hover-color: $--overlay-text-2 !global;
-  $--n-close-color: $--overlay-text-3 !global;
+  $--n-close-hover-color: $--neutral-text-2 !global;
+  $--n-close-hover-overlay-color: $--overlay-text-2 !global;
+  $--n-close-color: $--neutral-text-3 !global;
+  $--n-close-overlay-color: $--overlay-text-3 !global;
   $--n-disabled-close-color: $--overlay-text-4 !global;
 
   $--n-popover-background-color: $--neutral-popover !global;

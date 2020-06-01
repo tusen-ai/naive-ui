@@ -11,7 +11,7 @@
     'disabled': $--n-disabled-background-color
   ) !global;
   $--pagination-item-border-color: (
-    'default': $--n-border-color,
+    'default': $--n-border-overlay-color,
     'active': change-color($--n-primary-color, $alpha: $--n-tertiary-opacity),
     'disabled': transparent
   ) !global;

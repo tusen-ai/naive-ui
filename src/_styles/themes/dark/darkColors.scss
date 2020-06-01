@@ -15,6 +15,10 @@
   $--overlay-text-2: rgba(255, 255, 255, $--alpha-2) !global;
   $--overlay-text-3: rgba(255, 255, 255, $--alpha-3) !global;
   $--overlay-text-4: rgba(255, 255, 255, $--alpha-4) !global;
+  $--neutral-text-1: create-dark-neutral-color($--overlay-text-1) !global;
+  $--neutral-text-2: create-dark-neutral-color($--overlay-text-2) !global;
+  $--neutral-text-3: create-dark-neutral-color($--overlay-text-3) !global;
+  $--neutral-text-4: create-dark-neutral-color($--overlay-text-4) !global;
   
   // overlay
   $--overlay-avatar: rgba(255, 255, 255, .18) !global;
@@ -42,13 +46,13 @@
   $--neutral-modal: rgb(44, 44, 50) !global;
   $--neutral-card: rgb(24, 24, 28) !global;
   $--neutral-body: rgb(16, 16, 20) !global;
-  $--neutral-disabled: null !global;
-  $--neutral-border: null !global;
-  $--neutral-divider: null !global;
-  $--neutral-input: null !global;
-  $--neutral-action: null !global;
-  $--neutral-tag: null !global;
-  $--neutral-code: null !global;
+  $--neutral-disabled: null !global; // TODO
+  $--neutral-border: create-dark-neutral-color($--overlay-border) !global;
+  $--neutral-divider: create-dark-neutral-color($--overlay-divider) !global;
+  $--neutral-input: null !global; // TODO
+  $--neutral-action: null !global; // TODO
+  $--neutral-tag: null !global; // TODO
+  $--neutral-code: null !global; // TODO
   
   // primary
   $--primary-hover: #7fe7c4 !global;

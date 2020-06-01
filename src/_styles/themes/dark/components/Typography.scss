@@ -22,13 +22,13 @@
     'default': $--n-primary-color
   ) !global;
   $--typography-hr-border-color: (
-    'default': $--n-divider-color
+    'default': $--n-divider-overlay-color
   ) !global;
   $--typography-blockquote-text-color: (
     'default': $--n-secondary-text-color
   ) !global;
   $--typography-blockquote-prefix-color: (
-    'default': $--n-border-color
+    'default': $--n-border-overlay-color
   ) !global;
   $--typography-text-text-color: (
     'default': $--n-secondary-text-color,

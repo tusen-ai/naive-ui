@@ -3,9 +3,9 @@
   $--confirm-text-color: $--n-secondary-text-color !global;
   $--confirm-background-color: $--n-modal-background-color !global;
   $--confirm-close-color: (
-    'default': $--n-close-color,
-    'hover': $--n-close-hover-color,
-    'active': $--n-close-color
+    'default': $--n-close-overlay-color,
+    'hover': $--n-close-hover-overlay-color,
+    'active': $--n-close-overlay-color
   ) !global;
   $--confirm-icon-color: (
     'info': $--n-info-color,

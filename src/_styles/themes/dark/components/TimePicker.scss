@@ -11,7 +11,7 @@
   $--time-picker-item-background-color: (
     'hover': $--n-pending-overlay-color
   ) !global;
-  $--time-picker-divider-color: $--n-divider-color !global;
+  $--time-picker-divider-color: $--n-divider-overlay-color !global;
   $--time-picker-box-shadow: $--n-popmenu-box-shadow !global;
   $--time-picker-item-disabled-opacity: $--n-disabled-opacity !global;
 }
