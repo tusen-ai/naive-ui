@@ -19,8 +19,8 @@
       [`n-button--${type}-type`]: true,
       [`n-button--${colorHash || type}-colored`]: true,
       [`n-button--${syntheticSize}-size`]: true,
-      [`n-button--${iconPlacement}-icon`]: hasIcon && iconPlacement && !noTextContent,
-      [`n-button--${iconDepth}-icon-depth`]: hasIcon && type === 'default',
+      [`n-button--${iconPlacement}-icon`]: iconPlacement && !noTextContent,
+      [`n-button--${iconDepth}-icon-depth`]: type === 'default',
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
     }"
     :tabindex="syntheticFocusable ? 0 : -1"
