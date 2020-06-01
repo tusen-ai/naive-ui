@@ -330,6 +330,9 @@
           height: 0;
         }
         scrollbar-width: none;
+        @include b(data-table-table) {
+          transition: border-color .3s $--n-ease-in-out-cubic-bezier;
+        }
       }
       @include b(data-table-table) {
         border-bottom: 1px solid map-get($--data-table-border-color, 'default');
