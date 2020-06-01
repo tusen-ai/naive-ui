@@ -1,6 +1,6 @@
 <template>
   <div
-    class="n-log n-code"
+    class="n-log"
     :class="{
       [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
@@ -12,6 +12,7 @@
   >
     <n-scrollbar
       ref="scrollbar"
+      class="n-code"
       :theme="syntheticTheme"
       @scroll="handleScroll"
     >
