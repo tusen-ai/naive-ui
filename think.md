@@ -309,3 +309,8 @@ release template
 
 历史变更见：https://***REMOVED***/blob/develop/CHANGELOG.zh-CN.md
 ```
+```cache
+需要注意的是，以 Base 开头的 CSS 文件并不会确保随着版本的更新保持稳定（我会尽力的保持）。因为它是内部实现的一部分。如果你维持按需引入时升级后样式出现了错误，可以来这里检查一下。虽然把这些公共样式各自打包进每个用到他们的组件是可行的，但是相比于升级的繁琐，我更不喜欢重复的代码。（这不意味着这种解决方案是“更好的”，它只是种选择而已）
+
+What should be noted is the CSS files start with 'Base' are not guaranteed to be stable (I'll try not to change them). Because they are parts of internal implementation of the library. If you find import mistakes after upgrade the package, you may have a look at here. It is possible to pack these common styles inside every component using it. However, compared to add routines when upgrading package, I perfer not to import duplicate codes. (It doesn't mean this is a better solution. It is only a choice.)
+```

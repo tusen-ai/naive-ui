@@ -1,4 +1,17 @@
 # CHANGELOG
+## 1.3.0 (2020-05-30)
+### Breaking Changes
+- UI 默认样式不再包含外部字体文件，如果需要使用 UI 提供的字体需要明确引入
+### Features
+- 为 `n-layout` 增加了 `themed-style` 属性
+### Fixes
+- 修正了 `n-layout-sider` 圆形按钮没有随着折叠状态滚动的问题
+- 修正了 `n-form-item` feedback 如果在一开始被设定则消失没有动画的问题
+- 修正了 `n-data-table` max-height 相关属性在所有情况下都会被应用的问题
+- 修正了一些组件的样式瑕疵
+### Refactors
+- 调整了一些组件亮色主题下的样式
+
 ## 1.2.1 (2020-05-29)
 ### Fixes
 - 修正了 `n-slider` 弹框没有 z-index 的问题

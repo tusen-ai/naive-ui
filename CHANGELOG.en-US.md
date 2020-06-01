@@ -1,4 +1,17 @@
 # CHANGELOG
+## 1.3.0 (2020-05-30)
+### Breaking Changes
+- Default UI CSS bundle won't include external font files. If you need using it you should import it explicitly.
+### Features
+- Add `themed-style` prop on `n-layout`.
+### Fixes
+- Fix the problem that round toggle button won't rotate `n-layout-sider` when collapsed status is changed.
+- Fix the problem that `n-form-item`'s feedback has no leave animation if it is set at first.
+- Fix the problem that max-height related styles of `n-data-table` are applied all the time.
+- Fix some style glitches.
+### Refactors
+- Refactor some components' styles in the light theme.
+
 ## 1.2.1 (2020-05-29)
 ### Fixes
 - Fix the problem that `n-slider` tooltip has no z-index.
