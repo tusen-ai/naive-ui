@@ -1,4 +1,9 @@
 # CHANGELOG
+## 1.3.2 (2020-06-02)
+### Fixes
+- Fix the problem that `n-log`'s loading indicator uses monospace font.
+- Fix the problem that icon-related class name isn't applied properly.
+
 ## 1.3.1 (2020-06-01)
 ### Fixes
 - Fix the problem that checkbox in the selection column of `n-data-table` is not center aligned.
