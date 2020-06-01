@@ -1,9 +1,14 @@
 # CHANGELOG
+## 1.3.2 (2020-06-02)
+### Fixes
+- 修正了 `n-log` 的加载器显示等宽字体的问题
+- 修正了 `n-button` icon 有关的类名没有被正确应用的问题
+
 ## 1.3.1 (2020-06-01)
 ### Fixes
 - 修正了 `n-data-table` 选框列的选框没有垂直居中的问题
 - 修正了 `n-data-table` 表头没 border-color transition 的问题
-- 修正 `$NConfirm` 的 `show-icon` & `closable` & `bordered` 属性设置无效的问题
+- 修正了 `$NConfirm` 的 `show-icon` & `closable` & `bordered` 属性设置无效的问题
 ### Features
 - 增加并调整了一些 `n-config-consumer` 样式方案中的颜色
 

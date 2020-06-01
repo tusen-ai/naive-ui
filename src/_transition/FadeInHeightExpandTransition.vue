@@ -24,60 +24,65 @@ export default {
   },
   methods: {
     handleBeforeLeave () {
+      const el = this.$el
       if (this.width) {
-        this.$el.style.maxWidth = this.$el.offsetWidth + 'px'
-        this.$el.style.width = this.$el.offsetWidth + 'px'
+        el.style.maxWidth = el.offsetWidth + 'px'
+        el.style.width = el.offsetWidth + 'px'
       } else {
-        this.$el.style.maxHeight = this.$el.offsetHeight + 'px'
-        this.$el.style.height = this.$el.offsetHeight + 'px'
+        el.style.maxHeight = el.offsetHeight + 'px'
+        el.style.height = el.offsetHeight + 'px'
       }
-      this.$el.getBoundingClientRect()
+      void el.offsetWidth
     },
     handleLeave () {
+      const el = this.$el
       if (this.width) {
-        this.$el.style.maxWidth = 0
+        el.style.maxWidth = 0
       } else {
-        this.$el.style.maxHeight = 0
+        el.style.maxHeight = 0
       }
-      this.$el.getBoundingClientRect()
+      void el.offsetWidth
     },
     handleAfterLeave () {
-      if (!this.$el || this.$el.nodeType !== 1) return
+      const el = this.$el
+      if (!el || this.$el.nodeType !== 1) return
       if (this.width) {
-        this.$el.style.maxWidth = null
+        el.style.maxWidth = null
       } else {
-        this.$el.style.maxHeight = null
+        el.style.maxHeight = null
       }
       this.$emit('after-leave')
     },
     handleEnter () {
       this.$nextTick().then(() => {
+        const el = this.$el
         if (this.width) {
-          this.$el.style.maxWidth = 'unset'
-          this.$el.style.width = this.$el.offsetWidth + 'px'
-          this.$el.style.maxWidth = 0
+          el.style.maxWidth = 'unset'
+          el.style.width = el.offsetWidth + 'px'
+          el.style.maxWidth = 0
         } else {
-          this.$el.style.height = this.$el.offsetHeight + 'px'
-          this.$el.style.maxHeight = 0
+          el.style.height = el.offsetHeight + 'px'
+          el.style.maxHeight = 0
         }
-        this.$el.style.transition = 'none'
-        this.$el.getBoundingClientRect()
-        this.$el.style.transition = null
-        this.$el.getBoundingClientRect()
+        el.style.transition = 'none'
+        void el.offsetWidth
+        el.style.transition = null
+        void el.offsetWidth
         if (this.width) {
-          this.$el.style.maxWidth = this.$el.style.width
+          el.style.maxWidth = el.style.width
         } else {
-          this.$el.style.maxHeight = this.$el.style.height
+          el.style.maxHeight = el.style.height
         }
       })
     },
     handleAfterEnter () {
+      const el = this.$el
       if (this.width) {
-        this.$el.style.width = null
-        this.$el.style.maxWidth = null
+        el.style.width = null
+        el.style.maxWidth = null
       } else {
-        this.$el.style.height = null
-        this.$el.style.maxHeight = null
+        el.style.height = null
+        el.style.maxHeight = null
       }
     }
   },

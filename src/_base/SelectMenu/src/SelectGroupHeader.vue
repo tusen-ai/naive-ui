@@ -8,7 +8,8 @@ export default {
     }
   },
   render (h) {
-    const children = (this.data.render && this.data.render(h, this.data)) || [ this.data.name ]
+    const data = this.data
+    const children = (data.render && data.render(h, data)) || [ data.name ]
     return h('div', {
       staticClass: 'n-base-select-group-header'
     }, Array.isArray(children) ? children : [ children ])

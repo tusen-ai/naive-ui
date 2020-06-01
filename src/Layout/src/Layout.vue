@@ -7,7 +7,7 @@
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
       [`n-layout--${siderCollapseMode}-collapse-mode`]: siderCollapseMode
     }"
-    :style="syntheticStyle"
+    :style="syntheticLayoutStyle"
   >
     <n-scrollbar
       v-if="!useNativeScrollbar"
@@ -51,10 +51,6 @@ export default {
     scrollContainerStyle: {
       type: Object,
       default: null
-    },
-    themedStyle: {
-      type: Object,
-      default: null
     }
   },
   data () {
@@ -81,12 +77,11 @@ export default {
       }
       return null
     },
-    syntheticStyle () {
-      const themedStyle = this.themedStyle
+    syntheticLayoutStyle () {
       return Object.assign({
         marginLeft: this.styleMarginLeft,
         transition: this.transitionDisabled ? 'none' : null
-      }, themedStyle ? themedStyle[this.syntheticTheme] : null)
+      }, this.syntheticStyle)
     },
     transitionDisabled () {
       if (this.NLayout && this.NLayout.childLayoutTransitionDisabled) {
