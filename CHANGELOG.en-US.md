@@ -3,6 +3,7 @@
 ### Fixes
 - Fix the problem that checkbox in the selection column of `n-data-table` is not center aligned.
 - Fix the problem that header of `n-data-table` has no border-color transition.
+- Fix the problem that `show-icon` & `closable` & `bordered` props of `$NConfirm` don't work.
 ### Features
 - Add and adjust some colors in the style scheme of `n-config-consumer`.
 
