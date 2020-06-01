@@ -69,4 +69,4 @@ scroll-to
 ### Layout, Layout Content, Layout Sider Methods
 |名称|类型|说明|
 |-|-|-|
-|scrollTo|`((xCoord: number, yCoord: number) => void) \| ({ left?: number, top?: number, behavior: 'smooth' \| 'auto' }) => void`|滚动到某处|
+|scrollTo|`((xCoord: number, yCoord: number) => void) \| (options: { left?: number, top?: number, behavior: 'smooth' \| 'auto' }) => void`|滚动到某处|

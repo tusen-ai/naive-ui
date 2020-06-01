@@ -3,7 +3,7 @@
 ### Fixes
 - 修正了 `n-data-table` 选框列的选框没有垂直居中的问题
 - 修正了 `n-data-table` 表头没 border-color transition 的问题
-- 修正 `$NConfirm` 的 `show-icon` & `closable` & `bordered` 属性设置无效的问题
+- 修正了 `$NConfirm` 的 `show-icon` & `closable` & `bordered` 属性设置无效的问题
 ### Features
 - 增加并调整了一些 `n-config-consumer` 样式方案中的颜色
 
