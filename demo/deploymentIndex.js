@@ -4,7 +4,7 @@ import demoRouterView from './demoRouterView'
 import NaiveUI from '../lib/index'
 import '../lib/styles/index.css'
 import '../lib/styles/fonts/Lato.css'
-import '../lib/styles/fonts/FiraSans.css'
+import '../lib/styles/fonts/FiraCode.css'
 import createRouter from './routes/router'
 import { routes } from './routes/routes'
 
