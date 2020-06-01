@@ -1,3 +1,9 @@
+// Caveat: not all the colors will be used in the current theme! Be Careful to
+// choose the color you need.
+
+// Neutral colors are derived from base background color and overlay colors.
+// They have different usage.
+
 @mixin setup-dark-colors {
   $--base-text: rgb(255, 255, 255) !global;
 
@@ -38,7 +44,7 @@
   $--overlay-table-pending: rgba(255, 255, 255, $--alpha-table-pending) !global;
   $--overlay-active: rgba(255, 255, 255, .03) !global;
   $--overlay-code: rgba(255, 255, 255, .12) !global;
-  $--overlay-tag: null !global;
+  $--overlay-tag: rgba(255, 255, 255, 0) !global;
 
   // neutral
   $--neutral-base: #000 !global;
@@ -46,13 +52,14 @@
   $--neutral-modal: rgb(44, 44, 50) !global;
   $--neutral-card: rgb(24, 24, 28) !global;
   $--neutral-body: rgb(16, 16, 20) !global;
-  $--neutral-disabled: null !global; // TODO
+  $--neutral-disabled: create-dark-neutral-color($--overlay-disabled) !global;
   $--neutral-border: create-dark-neutral-color($--overlay-border) !global;
   $--neutral-divider: create-dark-neutral-color($--overlay-divider) !global;
-  $--neutral-input: null !global; // TODO
-  $--neutral-action: null !global; // TODO
-  $--neutral-tag: null !global; // TODO
-  $--neutral-code: null !global; // TODO
+  $--neutral-input: create-dark-neutral-color($--overlay-input) !global;
+  $--neutral-action: create-dark-neutral-color($--overlay-action) !global;
+  $--neutral-tag: create-dark-neutral-color($--overlay-tag) !global;
+  $--neutral-code: create-dark-neutral-color($--overlay-code) !global;
+  $--neutral-rail: create-dark-neutral-color($--overlay-rail) !global;
   
   // primary
   $--primary-hover: #7fe7c4 !global;

@@ -1,5 +1,5 @@
 @mixin setup-dark-dropdown {
-  $--dropdown-item-suffix-fill: $--n-secondary-text-color !global;
+  $--dropdown-item-suffix-fill: $--n-secondary-text-overlay-color !global;
   $--dropdown-item-text-color: (
     'hover': $--n-primary-color,
     'selected': $--n-primary-color

@@ -96,6 +96,11 @@
   $--n-tertiary-text-color: $--neutral-text-3 !global;
   $--n-disabled-text-color: $--neutral-text-4 !global;
   $--n-placeholder-text-color: $--neutral-text-4 !global;
+  $--n-primary-text-overlay-color: $--overlay-text-1 !global;
+  $--n-secondary-text-overlay-color: $--overlay-text-2 !global;
+  $--n-tertiary-text-overlay-color: $--overlay-text-3 !global;
+  $--n-disabled-text-overlay-color: $--overlay-text-4 !global;
+  $--n-placeholder-text-overlay-color: $--overlay-text-4 !global;
   $--n-base-text-color: $--base-text !global;
 
   $--n-primary-opacity: $--alpha-1 !global;
@@ -104,22 +109,25 @@
   $--n-pending-opacity: $--alpha-pending !global;
   $--n-disabled-fill-opacity: $--alpha-disabled-fill !global;
   
-  $--n-icon-color: $--overlay-text-4 !global;
+  $--n-icon-color: $--neutral-text-4 !global;
+  $--n-icon-overlay-color: $--overlay-text-4 !global;
 
-  $--n-rail-color: $--overlay-rail !global;
+  $--n-rail-color: $--neutral-rail !global;
+  $--n-rail-overlay-color: $--overlay-rail !global;
   $--n-divider-color: $--neutral-divider !global;
   $--n-divider-overlay-color: $--overlay-divider !global;
   $--n-border-color: $--neutral-border !global;
   $--n-border-overlay-color: $--overlay-border !global;
 
-  $--n-scrollbar-background-color: $--overlay-scrollbar !global;
-  $--n-scrollbar-hover-background-color: $--overlay-scrollbar-hover !global;
+  $--n-scrollbar-overlay-background-color: $--overlay-scrollbar !global;
+  $--n-scrollbar-hover-overlay-background-color: $--overlay-scrollbar-hover !global;
   
   $--n-close-hover-color: $--neutral-text-2 !global;
   $--n-close-hover-overlay-color: $--overlay-text-2 !global;
   $--n-close-color: $--neutral-text-3 !global;
   $--n-close-overlay-color: $--overlay-text-3 !global;
-  $--n-disabled-close-color: $--overlay-text-4 !global;
+  $--n-disabled-close-color: $--neutral-text-4 !global;
+  $--n-disabled-close-overlay-color: $--overlay-text-4 !global;
 
   $--n-popover-background-color: $--neutral-popover !global;
   $--n-table-body-background-color: $--neutral-card !global;

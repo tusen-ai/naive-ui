@@ -1,9 +1,9 @@
 @mixin setup-dark-pagination {
   $--pagination-item-text-color: (
-    'default': $--n-secondary-text-color,
+    'default': $--n-secondary-text-overlay-color,
     'hover': $--n-primary-color,
     'active': $--n-primary-color,
-    'disabled': $--n-disabled-text-color
+    'disabled': $--n-disabled-text-overlay-color
   ) !global;
   $--pagination-item-background-color: (
     'default': transparent,
@@ -16,7 +16,7 @@
     'disabled': transparent
   ) !global;
   $--pagination-text-color: (
-    'default': $--n-secondary-text-color,
-    'disabled': $--n-disabled-text-color
+    'default': $--n-secondary-text-overlay-color,
+    'disabled': $--n-disabled-text-overlay-color
   ) !global;
 }

@@ -32,7 +32,7 @@
   ) !global;
   $--data-table-body-text-color: $--n-secondary-text-color !global;
   $--data-table-button-color: (
-    'default': $--n-icon-color,
+    'default': $--n-icon-overlay-color,
     'active': $--n-primary-color
   ) !global;
 }

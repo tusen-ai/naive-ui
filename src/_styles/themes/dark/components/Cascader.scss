@@ -1,9 +1,9 @@
 @mixin setup-dark-cascader {
   $--cascader-menu-background-color: $--n-popover-background-color !global;
   $--cascader-option-text-color: (
-    'default': $--n-secondary-text-color,
+    'default': $--n-secondary-text-overlay-color,
     'active': $--n-primary-color,
-    'disabled': $--n-disabled-text-color,
+    'disabled': $--n-disabled-text-overlay-color,
     'disabled-active': change-color($--n-primary-color, $alpha: $--n-disabled-opacity)
   ) !global;
   $--cascader-menu-box-shadow: $--n-popmenu-box-shadow !global;
@@ -12,6 +12,6 @@
     $--n-popover-background-color,
     $--n-pending-overlay-color
   ) !global;
-  $--cascader-option-arrow-background-color: $--n-icon-color !global;
+  $--cascader-option-arrow-background-color: $--n-icon-overlay-color !global;
   $--cascader-item-check-mark-color: $--n-primary-color !global;
 }

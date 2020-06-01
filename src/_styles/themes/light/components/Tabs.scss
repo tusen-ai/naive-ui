@@ -7,8 +7,8 @@
   ) !global;
   $--tabs-tab-bar-background-color: $--n-primary-color !global;
   $--tabs-tab-scroll-button-color: (
-    'default': $--n-icon-color,
-    'disabled': change-color($--n-icon-color, $alpha: alpha($--n-icon-color) * $--n-disabled-opacity)
+    'default': $--n-icon-overlay-color,
+    'disabled': change-color($--n-icon-overlay-color, $alpha: alpha($--n-icon-overlay-color) * $--n-disabled-opacity)
   ) !global;
   $--tabs-tab-close-button-color: (
     'default': $--n-close-color

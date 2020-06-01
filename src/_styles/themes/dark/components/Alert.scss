@@ -14,25 +14,25 @@
     'error': change-color($--n-error-hs-color, $alpha: .25)
   ) !global;
   $--alert-title-text-color: (
-    'default': $--n-primary-text-color,
-    'success': $--n-primary-text-color,
-    'info': $--n-primary-text-color,
-    'warning': $--n-primary-text-color,
-    'error': $--n-primary-text-color
+    'default': $--n-primary-text-overlay-color,
+    'success': $--n-primary-text-overlay-color,
+    'info': $--n-primary-text-overlay-color,
+    'warning': $--n-primary-text-overlay-color,
+    'error': $--n-primary-text-overlay-color
   ) !global;
   $--alert-icon-color: (
-    'default': $--n-secondary-text-color,
+    'default': $--n-secondary-text-overlay-color,
     'success': $--n-success-hs-color,
     'info': $--n-info-hs-color,
     'warning': $--n-warning-hs-color,
     'error': $--n-error-hs-color
   ) !global;
   $--alert-content-text-color: (
-    'default': $--n-secondary-text-color,
-    'success': $--n-secondary-text-color,
-    'info': $--n-secondary-text-color,
-    'warning': $--n-secondary-text-color,
-    'error': $--n-secondary-text-color
+    'default': $--n-secondary-text-overlay-color,
+    'success': $--n-secondary-text-overlay-color,
+    'info': $--n-secondary-text-overlay-color,
+    'warning': $--n-secondary-text-overlay-color,
+    'error': $--n-secondary-text-overlay-color
   ) !global;
   $--alert-close-color: (
     'default': $--n-close-overlay-color,

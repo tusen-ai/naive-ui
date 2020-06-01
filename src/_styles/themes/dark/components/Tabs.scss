@@ -1,14 +1,14 @@
 @mixin setup-dark-tabs {
   $--tabs-tab-text-color: (
-    'default': $--n-secondary-text-color,
+    'default': $--n-secondary-text-overlay-color,
     'active': $--n-primary-color,
     'hover': $--n-primary-color,
-    'disabled': $--n-disabled-text-color,
+    'disabled': $--n-disabled-text-overlay-color,
   ) !global;
   $--tabs-tab-bar-background-color: $--n-primary-color !global;
   $--tabs-tab-scroll-button-color: (
-    'default': $--n-icon-color,
-    'disabled': change-color($--n-icon-color, $alpha: alpha($--n-icon-color) * $--n-disabled-opacity)
+    'default': $--n-icon-overlay-color,
+    'disabled': change-color($--n-icon-overlay-color, $alpha: alpha($--n-icon-overlay-color) * $--n-disabled-opacity)
   ) !global;
   $--tabs-tab-close-button-color: (
     'default': $--n-close-overlay-color
@@ -17,9 +17,9 @@
   $--tabs-card-tab-background-color: $--n-tab-overlay-background-color !global;
   $--tabs-card-tab-border-color: transparent !global;
   $--tabs-card-tab-text-color: (
-    'default': $--n-secondary-text-color,
-    'active': $--n-primary-text-color
+    'default': $--n-secondary-text-overlay-color,
+    'active': $--n-primary-text-overlay-color
   ) !global;
   $--tabs-nav-border-color: $--n-divider-overlay-color !global;
-  $--tabs-panel-text-color: $--n-secondary-text-color !global;
+  $--tabs-panel-text-color: $--n-secondary-text-overlay-color !global;
 }

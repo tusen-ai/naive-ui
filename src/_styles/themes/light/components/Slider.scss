@@ -1,7 +1,7 @@
 @mixin setup-light-slider {
   $--slider-rail-background-color: (
-    'default': $--n-rail-color,
-    'hover': change-color($--n-rail-color, $alpha: alpha($--n-rail-color) * 0.75)
+    'default': $--n-rail-overlay-color,
+    'hover': change-color($--n-rail-overlay-color, $alpha: alpha($--n-rail-overlay-color) * 0.75)
   ) !global;
   $--slider-rail-fill-background-color: (
     'default': $--n-primary-color,

@@ -1,7 +1,7 @@
 @mixin setup-dark-base-selection {
   $--base-selection-text-color: (
-    'default': $--n-secondary-text-color,
-    'disabled': $--n-disabled-text-color
+    'default': $--n-secondary-text-overlay-color,
+    'disabled': $--n-disabled-text-overlay-color
   ) !global;
   $--base-selection-background-color: (
     'default': $--n-input-overlay-background-color,
@@ -9,8 +9,8 @@
     'active': change-color($--n-primary-color, $alpha: 0.1)
   ) !global;
   $--base-selection-placeholder-color: (
-    'default': $--n-disabled-text-color,
-    'disabled': change-color($--n-disabled-text-color, $alpha: alpha($--n-disabled-text-color) * $--n-disabled-opacity)
+    'default': $--n-disabled-text-overlay-color,
+    'disabled': change-color($--n-disabled-text-overlay-color, $alpha: alpha($--n-disabled-text-overlay-color) * $--n-disabled-opacity)
   ) !global;
   $--base-selection-border-mask-box-shadow: (
     'default': inset 0 0 0 1px transparent,

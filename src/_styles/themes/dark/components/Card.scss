@@ -1,7 +1,7 @@
 @mixin setup-dark-card {
   $--card-background-color: $--n-card-background-color !global;
-  $--card-text-color: $--n-secondary-text-color !global;
-  $--card-title-text-color: $--n-primary-text-color !global;
+  $--card-text-color: $--n-secondary-text-overlay-color !global;
+  $--card-title-text-color: $--n-primary-text-overlay-color !global;
   $--card-border-color: $--n-divider-overlay-color !global;
   $--card-action-background-color: $--n-action-overlay-background-color !global;
   $--card-close-color: (

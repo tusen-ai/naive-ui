@@ -1,10 +1,10 @@
 @mixin setup-dark-tag {
   $--tag-text-color: (
-    'checkable-default': $--n-secondary-text-color,
+    'checkable-default': $--n-secondary-text-overlay-color,
     'checkable-hover': $--n-primary-color,
     'checkable-active': $--n-base-background-color,
-    'default': $--n-secondary-text-color,
-    'default-disabled': $--n-disabled-text-color,
+    'default': $--n-secondary-text-overlay-color,
+    'default-disabled': $--n-disabled-text-overlay-color,
     'success': $--n-success-color,
     'success-disabled': change-color($--n-success-color, $alpha: .3),
     'warning': $--n-warning-color,

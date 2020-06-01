@@ -1,11 +1,11 @@
 @mixin setup-dark-time-picker {
   $--time-picker-background-color: $--n-popover-background-color !global;
   $--time-picker-text-color: (
-    'default': $--n-secondary-text-color,
+    'default': $--n-secondary-text-overlay-color,
     'active': $--n-primary-color
   ) !global;
   $--time-picker-text-decoration-color: (
-    'default': $--n-secondary-text-color,
+    'default': $--n-secondary-text-overlay-color,
     'active': $--n-primary-color
   ) !global;
   $--time-picker-item-background-color: (

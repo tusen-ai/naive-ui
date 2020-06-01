@@ -5,6 +5,6 @@
     'warning': $--n-warning-color,
     'info': $--n-info-color
   ) !global;
-  $--result-header-text-color: $--n-primary-text-color !global;
-  $--result-description-text-color: $--n-secondary-text-color !global;
+  $--result-header-text-color: $--n-primary-text-overlay-color !global;
+  $--result-description-text-color: $--n-secondary-text-overlay-color !global;
 }

@@ -1,5 +1,5 @@
 @mixin setup-dark-form {
-  $--form-item-label-text-color: $--n-primary-text-color !global;
+  $--form-item-label-text-color: $--n-primary-text-overlay-color !global;
   $--form-item-required-asterisk: $--n-error-color !global;
   $--form-item-feedback-text-color: (
     'error': $--n-error-color,

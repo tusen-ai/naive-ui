@@ -7,7 +7,7 @@
   ) !global;
   $--checkbox-icon-color: (
     'default': $--n-card-background-color,
-    'disabled': $--n-disabled-text-color
+    'disabled': $--n-disabled-text-overlay-color
   ) !global;
   $--checkbox-border-color: (
     'default': $--n-border-overlay-color,
@@ -15,7 +15,7 @@
     'active': $--n-primary-color
   ) !global;
   $--checkbox-label-text-color: (
-    'default': $--n-secondary-text-color,
-    'disabled': $--n-disabled-text-color
+    'default': $--n-secondary-text-overlay-color,
+    'disabled': $--n-disabled-text-overlay-color
   ) !global;
 }

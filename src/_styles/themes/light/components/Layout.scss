@@ -10,11 +10,11 @@
   $--layout-sider-toggle-bar-background-color: (
     'default': composite-color(
       $--n-body-background-color,
-      $--n-scrollbar-background-color
+      $--n-scrollbar-overlay-background-color
     ),
     'hover': composite-color(
       $--n-body-background-color,
-      $--n-scrollbar-hover-background-color
+      $--n-scrollbar-hover-overlay-background-color
     ),
   ) !global;
 }

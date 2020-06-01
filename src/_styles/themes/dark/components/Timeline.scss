@@ -1,13 +1,13 @@
 @mixin setup-dark-timeline {
   $--timeline-item-circle-border-color: (
-    'default': $--n-tertiary-text-color,
+    'default': $--n-tertiary-text-overlay-color,
     'info': $--n-info-hs-color,
     'error': $--n-error-hs-color,
     'success': $--n-success-hs-color,
     'warning': $--n-warning-hs-color
   ) !global;
-  $--timeline-item-title-color: $--n-primary-text-color !global;
-  $--timeline-item-content-color: $--n-secondary-text-color !global;
-  $--timeline-item-meta-color: $--n-tertiary-text-color !global;
-  $--timeline-line-background-color: $--n-rail-color !global;
+  $--timeline-item-title-color: $--n-primary-text-overlay-color !global;
+  $--timeline-item-content-color: $--n-secondary-text-overlay-color !global;
+  $--timeline-item-meta-color: $--n-tertiary-text-overlay-color !global;
+  $--timeline-line-background-color: $--n-rail-overlay-color !global;
 }

@@ -1,15 +1,15 @@
 @mixin setup-dark-input {
   $--input-color: (
-    'default': $--n-secondary-text-color,
-    'disabled': $--n-disabled-text-color
+    'default': $--n-secondary-text-overlay-color,
+    'disabled': $--n-disabled-text-overlay-color
   ) !global;
   $--input-caret-color: (
     'default': $--n-primary-color,
     'error': $--n-error-color 
   ) !global;
   $--input-placeholder-color: (
-    'default': $--n-placeholder-text-color,
-    'disabled': change-color($--n-placeholder-text-color, $alpha: alpha($--n-placeholder-text-color) * $--n-disabled-opacity),
+    'default': $--n-placeholder-text-overlay-color,
+    'disabled': change-color($--n-placeholder-text-overlay-color, $alpha: alpha($--n-placeholder-text-overlay-color) * $--n-disabled-opacity),
   ) !global;
   $--input-background-color: (
     'default': $--n-input-overlay-background-color,
@@ -18,10 +18,10 @@
     'error-focus': change-color($--n-error-color, $alpha: 0.1),
   ) !global;
   $--input-icon-color: (
-    'default': composite-color($--n-base-background-color, $--n-icon-color),
+    'default': composite-color($--n-base-background-color, $--n-icon-overlay-color),
     'disabled': composite-color(
       $--n-base-background-color,
-      change-color($--n-icon-color, $alpha: alpha($--n-icon-color) * $--n-disabled-opacity)
+      change-color($--n-icon-overlay-color, $alpha: alpha($--n-icon-overlay-color) * $--n-disabled-opacity)
     )
   )!global;
   $--input-border-mask-border-color: (

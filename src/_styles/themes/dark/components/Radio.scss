@@ -7,8 +7,8 @@
     'disabled': inset 0 0 0 1px $--n-border-overlay-color
   ) !global;
   $--radio-label-text-color: (
-    'default': $--n-secondary-text-color,
-    'disabled': $--n-disabled-text-color
+    'default': $--n-secondary-text-overlay-color,
+    'disabled': $--n-disabled-text-overlay-color
   ) !global;
   $--radio-background-color: (
     'default': transparent,
@@ -28,7 +28,7 @@
     'active': $--n-primary-color,
   ) !global;
   $--radio-button-label-color: (
-    'default': $--n-secondary-text-color,
+    'default': $--n-secondary-text-overlay-color,
     'active':$--n-base-background-color,
     'hover': $--n-primary-color
   ) !global;
