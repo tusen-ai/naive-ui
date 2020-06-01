@@ -67,6 +67,7 @@
     }
     @include b(data-table-table) {
       @include once {
+        font-variant-numeric: tabular-nums;
         width: 100%;
         word-wrap: break-word;
         word-break: break-all;
