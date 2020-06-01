@@ -14,6 +14,9 @@
       :negative-text="negativeText"
       :title="title"
       :loading="loading"
+      :closable="closable"
+      :show-icon="showIcon"
+      :bordered="bordered"
       theme-context-activated
       @close="handleCloseClick"
       @negative-click="handleNegativeClick"
@@ -49,7 +52,10 @@ export default {
       onPositiveClick: () => true,
       onNegativeClick: () => true,
       onClose: () => true,
-      instances: null
+      instances: null,
+      closable: true,
+      showIcon: true,
+      bordered: false
     }
   },
   computed: {
