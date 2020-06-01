@@ -38,7 +38,8 @@
                 'n-data-table-th--sortable': isColumnSortable(column),
                 [`n-data-table-th--fixed-${column.fixed}`]: column.fixed && column.width,
                 'n-data-table-th--shadow-after': leftActiveFixedColumn[column.key],
-                'n-data-table-th--shadow-before': rightActiveFixedColumn[column.key]
+                'n-data-table-th--shadow-before': rightActiveFixedColumn[column.key],
+                'n-data-table-th--selection': column.type === 'selection'
               }"
               @click="handleHeaderClick($event, column)"
             >

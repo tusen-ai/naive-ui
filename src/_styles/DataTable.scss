@@ -84,14 +84,6 @@
         background-color: map-get($--data-table-header-background-color, 'default');
       }
       @include b(data-table-tr) {
-        &:hover {
-          background-color: map-get($--data-table-row-background-color, 'hover');
-          @include b(data-table-td) {
-            background-color: map-get($--data-table-row-background-color, 'hover');
-          }
-        }
-      }
-      @include b(data-table-tr) {
         @include once {
           box-sizing: border-box;
           transition: background-color 0.3s $--n-ease-in-out-cubic-bezier;
@@ -105,6 +97,12 @@
                 bottom: 0 !important;
               }
             }
+          }
+        }
+        &:hover {
+          background-color: map-get($--data-table-row-background-color, 'hover');
+          @include b(data-table-td) {
+            background-color: map-get($--data-table-row-background-color, 'hover');
           }
         }
       }
@@ -122,6 +120,9 @@
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
+          }
+          @include m(selection) {
+            line-height: 0;
           }
           @include m(fixed-left) {
             left: 0;
@@ -182,6 +183,9 @@
             background-color .3s $--n-ease-in-out-cubic-bezier;
           @include m(filterable) {
             padding-right: 36px;
+          }
+          @include m(selection) {
+            line-height: 0;
           }
           @include e(ellipsis) {
             display: inline-block;
