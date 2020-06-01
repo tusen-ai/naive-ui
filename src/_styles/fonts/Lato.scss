@@ -1,21 +1,13 @@
 @import '../themes/common.scss';
 
 @font-face {
-  font-family: 'Lato';
+  font-family: 'naive-ui';
   font-weight: 400;
   src: url('../resources/fonts/LatoLatin-Regular.woff2');
 }
 
 @font-face {
-  font-family: 'Lato';
+  font-family: 'naive-ui';
   font-weight: 500;
   src: url('../resources/fonts/LatoLatin-Semibold.woff2');
-}
-
-body {
-  font-family: 'Lato', $--n-font-family;
-}
-
-input {
-  font-family: 'Lato', $--n-font-family;
 }

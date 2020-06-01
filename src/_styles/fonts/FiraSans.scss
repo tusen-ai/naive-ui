@@ -1,21 +1,13 @@
 @import '../themes/common.scss';
 
 @font-face {
-  font-family: 'FiraSans';
+  font-family: 'naive-ui';
   font-weight: 400;
   src: url('../resources/fonts/FiraSans-Regular.woff2');
 }
 
 @font-face {
-  font-family: 'FiraSans';
+  font-family: 'naive-ui';
   font-weight: 500;
   src: url('../resources/fonts/FiraSans-Medium.woff2');
-}
-
-body {
-  font-family: 'FiraSans', $--n-font-family;
-}
-
-input {
-  font-family: 'FiraSans', $--n-font-family;
 }
