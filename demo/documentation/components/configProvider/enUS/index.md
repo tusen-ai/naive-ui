@@ -6,6 +6,7 @@ theme
 namespace
 inherit-theme
 theme-environment
+os-theme
 language
 transparent
 ```
