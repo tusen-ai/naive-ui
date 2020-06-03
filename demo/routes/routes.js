@@ -170,6 +170,6 @@ export const routes = [
   },
   {
     path: '/*',
-    redirect: '/zh-CN/light'
+    redirect: '/zh-CN/os-theme'
   }
 ]

@@ -1,4 +1,8 @@
 # CHANGELOG
+## 1.3.3 (2020-06-03)
+### Features
+- Add `$NOs.theme` to get the current theme of the OS.
+
 ## 1.3.2 (2020-06-02)
 ### Fixes
 - Fix the problem that `n-log`'s loading indicator uses monospace font.
