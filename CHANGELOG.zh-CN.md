@@ -1,4 +1,9 @@
 # CHANGELOG
+## Pending
+### Fixes
+- 修正了 `n-input` 如果太宽里面的 input 元素宽度不会展开的问题
+- 修正了 `n-input-group` 中 `n-input-number` 边框的样式瑕疵
+
 ## 1.3.3 (2020-06-03)
 ### Features
 - 增加了 `$NOs.theme` 来获取当前操作系统的主题

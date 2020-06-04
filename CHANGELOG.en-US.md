@@ -1,4 +1,9 @@
 # CHANGELOG
+## Pending
+### Fixes
+- Fix the problem that if `n-input` is too width, its inner input elements' width won't expand.
+- Fix style glitches of border of a `n-input-number` inside a `n-input-group`.
+
 ## 1.3.3 (2020-06-03)
 ### Features
 - Add `$NOs.theme` to get the current theme of the OS.
