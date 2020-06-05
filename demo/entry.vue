@@ -96,7 +96,11 @@ export default {
     },
     theme: {
       get () {
-        return this.$route.params.theme === 'light' ? 'light' : 'dark'
+        switch (this.$route.params.theme) {
+          case 'os-theme': return this.$NOs.theme
+          case 'dark': return 'dark'
+          default: return 'light'
+        }
       },
       set (theme) {
         this.$router.push(changeThemeInPath(this.$route.fullPath, theme))
