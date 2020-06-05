@@ -195,6 +195,14 @@
           text-align: center;
         }
       }
+      @include b(input-first-input) {
+        flex-grow: 1;
+        position: relative;
+      }
+      @include b(input-second-input) {
+        flex-grow: 1;
+        position: relative;
+      }
     }
     @include e(placeholder) {
       color: map-get($--input-placeholder-color, 'default');
@@ -343,6 +351,10 @@
             @include e(input, add-button, border-mask) {
               border-top-right-radius: 0!important;
               border-bottom-right-radius: 0!important;
+              @include b(input-number-button-border-mask) {
+                border-top-right-radius: 0!important;
+                border-bottom-right-radius: 0!important;
+              }
               @include b(input-number-button-boundary) {
                 background-color: transparent !important;
               }
@@ -354,6 +366,10 @@
             @include e(input, minus-button, border-mask) {
               border-top-left-radius: 0!important;
               border-bottom-left-radius: 0!important;
+              @include b(input-number-button-border-mask) {
+                border-top-left-radius: 0!important;
+                border-bottom-left-radius: 0!important;
+              }
               @include b(input-number-button-boundary) {
                 background-color: transparent !important;
               }

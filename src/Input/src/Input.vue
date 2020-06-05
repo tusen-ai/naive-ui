@@ -53,7 +53,7 @@
       @change="handleChange"
       @keyup="handleKeyUp"
     />
-    <div v-else style="position: relative;" class="n-input-first-input">
+    <div v-else class="n-input-first-input">
       <input
         ref="input"
         :type="type"
@@ -91,7 +91,7 @@
     >
       {{ seperator }}
     </span>
-    <div v-if="pair" style="position: relative;">
+    <div v-if="pair" class="n-input-second-input">
       <input
         ref="secondInput"
         :type="type"
