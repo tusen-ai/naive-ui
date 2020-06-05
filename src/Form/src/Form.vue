@@ -4,7 +4,8 @@
     :class="{
       'n-form--inline': inline
     }"
-    @submit="onSubmit"
+    @submit.prevent="onSubmit"
+    @keydown.enter.prevent="handleEnterKeyDown"
   >
     <slot />
   </form>
@@ -112,6 +113,11 @@ export default {
         for (const formItemInstance of formItemInstances) {
           formItemInstance.clearValidationEffect()
         }
+      }
+    },
+    handleEnterKeyDown (e) {
+      if (e.target.tagName === 'INPUT') {
+        this.onSubmit(e)
       }
     }
   }
