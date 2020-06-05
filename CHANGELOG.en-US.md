@@ -1,8 +1,8 @@
 # CHANGELOG
 
-## 1.3.5 (2020-06-05)
-### Fixes
-- Fix the problem that the default behavior of enter keyboard operation when the `input` is under the `n-form` will cause the adjacent `button` to be triggered.
+## 1.3.5 (2020-06-06)
+### Features
+- Add `attr-type` for `n-button`
 
 ## 1.3.4 (2020-06-05)
 ### Fixes
