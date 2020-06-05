@@ -19,6 +19,7 @@ debug
 ### Button Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
+|attr-type|`'button' \| 'submit' \| 'reset'`|`'button'`|按钮的 DOM `type` 属性|
 |block|`boolean`|`false`||
 |circle|`boolean`|`false`||
 |color|`string`|`null`|只支持形如 `#FFF`, `#FFFFFF`, `rgb(0, 0, 0)` 的颜色|

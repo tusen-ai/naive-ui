@@ -24,6 +24,7 @@
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
     }"
     :tabindex="syntheticFocusable ? 0 : -1"
+    :type="attrType"
     @click="handleClick"
     @blur="handleBlur"
     @mousedown="handleMouseDown"
@@ -235,6 +236,12 @@ export default {
       default: 'secondary',
       validator (value) {
         return ['secondary', 'tertiary'].includes(value)
+      }
+    },
+    attrType: {
+      default: 'button',
+      validator (value) {
+        return ['button', 'submit', 'reset'].includes(value)
       }
     }
   },
