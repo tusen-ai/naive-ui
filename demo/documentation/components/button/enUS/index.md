@@ -18,6 +18,7 @@ group
 ### Button Props
 |Name|Type|Default|Description|
 |-|-|-|-|
+|attr-type|`'button' \| 'submit' \| 'reset'`|`'button'`|The DOM `type` attribute of the button.|
 |block|`boolean`|`false`||
 |circle|`boolean`|`false`||
 |color|`string`|`null`|Only support `#FFF`, `#FFFFFF`, `rgb(0, 0, 0)` formatted colors.|

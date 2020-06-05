@@ -27,7 +27,7 @@ export default {
   mixins: [ withapp, themeable ],
   props: {
     to: {
-      type: String,
+      type: [String, Object],
       default: null
     }
   }

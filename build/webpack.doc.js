@@ -12,7 +12,7 @@ const webpackConfig = {
   mode: 'production',
   entry: './demo/deploymentIndex.js',
   output: {
-    path: path.resolve(__dirname, '..', 'doc', 'dist'),
+    path: path.resolve(__dirname, '..', 'build-doc', 'dist'),
     publicPath: '/',
     filename: '[name].[hash:7].js',
     chunkFilename: '[name].[hash:7].js'

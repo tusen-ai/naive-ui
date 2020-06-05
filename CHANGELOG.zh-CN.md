@@ -1,7 +1,15 @@
 # CHANGELOG
+
+## 1.3.5 (2020-06-06)
+### Features
+- 为 `n-button` 增加了 `attr-type` 属性
+### Fixes
+- 修正了 `n-input` 如果太宽里面的 input 元素宽度不会展开的问题
+- 修正了 `n-input-group` 中 `n-input-number` 边框的样式瑕疵
+
 ## 1.3.4 (2020-06-05)
 ### Fixes
-- 修正了 `input` 在`n-form` 下时回车键盘操作的默认行为会导致临近的 `button` 被触发的问题
+- 修正了 `n-a` 的 `to` 属性不能为对象的问题
 
 ## 1.3.3 (2020-06-03)
 ### Features
