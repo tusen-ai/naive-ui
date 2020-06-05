@@ -45,7 +45,7 @@ text
 ### A Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|to|`string`|`null`|如果设定了 to prop，a 会被渲染为一个 Vue Router 的 `router-link` 标签。确保你想用的不是 href 属性|
+|to|`string \| Object`|`null`|如果设定了 to prop，a 会被渲染为一个 Vue Router 的 `router-link` 标签。确保你想用的不是 href 属性|
 
 ### Ul, Ol Props
 |名称|类型|默认值|说明|

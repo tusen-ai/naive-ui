@@ -46,7 +46,7 @@ text
 ### A Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|to|`string`|`null`|If the prop is set, it will be rendered as a Vue Router `router-link`s component. Make sure you don't want to use `href` attr.|
+|to|`string \| Object`|`null`|If the prop is set, it will be rendered as a Vue Router `router-link`s component. Make sure you don't want to use `href` attr.|
 
 ### Ul, Ol Props
 |Name|Type|Default|Description|
