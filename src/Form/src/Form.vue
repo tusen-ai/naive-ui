@@ -4,7 +4,7 @@
     :class="{
       'n-form--inline': inline
     }"
-    @submit.prevent="onSubmit"
+    @submit="onSubmit"
     @keydown.enter.prevent="handleEnterKeyDown"
   >
     <slot />
