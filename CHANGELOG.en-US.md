@@ -1,4 +1,8 @@
 # CHANGELOG
+## PENDING (2020-06-05)
+### Fixes
+- Fix the problem that `n-a`'s `to` prop can't be a object.
+
 ## 1.3.3 (2020-06-03)
 ### Features
 - Add `$NOs.theme` to get the current theme of the OS.
