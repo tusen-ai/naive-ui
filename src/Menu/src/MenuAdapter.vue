@@ -5,6 +5,8 @@ import MenuItem from './MenuItem.vue'
 import Submenu from './Submenu.vue'
 import MenuItemGroup from './MenuItemGroup.vue'
 
+// Todo remove unnecessary attrs
+// Todo refactor to remove slot
 export default {
   name: 'NMenu',
   functional: true,
@@ -24,7 +26,10 @@ export default {
               delete props.title
               scopedSlots.header = item.title
             }
-            if (item.group) {
+            if (typeof item.icon === 'function') {
+              scopedSlots.icon = () => item.icon(h)
+            }
+            if (item.group || item.type === 'group') {
               return h(MenuItemGroup, {
                 props,
                 scopedSlots
@@ -40,6 +45,9 @@ export default {
             if (typeof item.title === 'function') {
               delete props.title
               scopedSlots.default = item.title
+            }
+            if (typeof item.icon === 'function') {
+              scopedSlots.icon = () => item.icon(h)
             }
             return h(MenuItem, {
               props,
