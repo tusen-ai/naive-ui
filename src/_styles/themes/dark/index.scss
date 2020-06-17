@@ -153,6 +153,8 @@
 
   $--n-message-colored-box-shadow: null !global;
 
+  @include setup-dark-custom-variables();
+
   @if ($in-js-env != true) {
     @include setup-dark-divider;
     @include setup-dark-scrollbar;
@@ -216,5 +218,18 @@
     @include setup-dark-log;
     @include setup-dark-code;
     @include setup-dark-base-tracking-rect;
+  }
+}
+
+@mixin setup-dark-custom-variables {
+  @if function-exists('get-primary-color') {
+    $primary-color: get-primary-color('dark');
+    @if $primary-color != null {
+      $primary-hover-color: composite-color($primary-color, rgba(255, 255, 255, .14));
+      $primary-active-color: composite-color($primary-color, rgba(0, 0, 0, .1));
+      $--n-primary-color: $primary-color !global;
+      $--n-primary-hover-color: $primary-hover-color !global;
+      $--n-primary-active-color: $primary-active-color !global;
+    }
   }
 }

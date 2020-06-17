@@ -1,0 +1,8 @@
+@function get-primary-color ($theme) {
+  @if $theme == 'light' {
+    @return rgb(255, 0, 0);
+  }
+  @return null;
+}
+
+@import '../../src/_styles/index.scss';

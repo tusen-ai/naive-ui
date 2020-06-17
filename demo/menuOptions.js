@@ -63,6 +63,11 @@ export default function (instance) {
         title: '创建适配主题的组件',
         path: `/${instance.lang}/${instance.theme}/doc` + '/n-theme'
       },
+      {
+        name: 'Experimental Features',
+        title: '试验性特性',
+        path: `/${instance.lang}/${instance.theme}/doc` + '/experimental-features'
+      },
       appendCounts({
         name: '配置组件',
         group: true,
@@ -509,6 +514,10 @@ export default function (instance) {
       {
         name: 'Create Themed Component',
         path: `/${instance.lang}/${instance.theme}/doc` + '/n-theme'
+      },
+      {
+        name: 'Experimental Features',
+        path: `/${instance.lang}/${instance.theme}/doc` + '/experimental-features'
       },
       appendCounts({
         name: 'Config Components',

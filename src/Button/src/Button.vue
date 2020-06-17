@@ -98,13 +98,13 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import NIcon from '../../Icon'
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
-import { read, composite, hash } from '../../_utils/color'
+import { read, hash, createHoverColor, createActiveColor } from '../../_utils/color'
 import { createColorStyle } from './styles/Button.cssr.js'
 import { createThemedStyle } from '../../_utils/cssr'
-import theme from './styles/theme'
+import createTheme from './styles/theme'
 
 const colorStyle = createColorStyle()
-const typeStyle = createThemedStyle(colorStyle, theme)
+let typeStyle
 
 function mountTypeStyle (type) {
   typeStyle.mount({
@@ -119,8 +119,8 @@ function mountColorStyle (color, colorHash) {
   const textColor = null
   const rgb = read(color)
   const digest = hash(rgb)
-  const hoverColor = composite(rgb, [255, 255, 255, 0.14])
-  const activeColor = composite(rgb, [0, 0, 0, 0.1])
+  const hoverColor = createHoverColor(rgb)
+  const activeColor = createActiveColor(rgb)
   const focusColor = hoverColor
   colorStyle.mount({
     target: 'n-button-' + digest,
@@ -314,6 +314,12 @@ export default {
     const color = this.color
     if (color) {
       mountColorStyle(color)
+    }
+    if (!typeStyle) {
+      typeStyle = createThemedStyle(colorStyle, createTheme(
+        this.$naive.styleSchemes,
+        this.$naive.fallbackTheme
+      ))
     }
     mountTypeStyle(this.type)
   },
