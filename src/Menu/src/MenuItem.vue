@@ -2,7 +2,8 @@
   <li
     class="n-menu-item"
     :class="{
-      'n-menu-item--selected': selected
+      'n-menu-item--selected': selected,
+      'n-menu-item--disabled': disabled
     }"
   >
     <template v-if="renderContentAsPopover">
@@ -46,7 +47,7 @@
         <slot name="icon" />
       </template>
       <template v-if="$scopedSlots['header-extra']" v-slot:header-extra>
-        <slot name="header" />
+        <slot name="header-extra" />
       </template>
       <slot />
     </n-menu-item-content>

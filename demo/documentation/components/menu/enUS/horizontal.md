@@ -4,70 +4,87 @@ A horiziontal menu.
 <n-menu
   v-model="activeName"
   mode="horizontal"
->
-  <n-menu-item title="Hear the Wind Sing" name="hear-the-wind-sing">
-    <template v-slot:icon>
-      <n-icon>
-        <book-icon />
-      </n-icon>
-    </template>
-  </n-menu-item>
-  <n-submenu title="Pinball, 1973" name="pinball-1973" disabled>
-    <template v-slot:icon>
-      <n-icon>
-        <book-icon />
-      </n-icon>
-    </template>
-    <n-menu-item title="Rat" name="rat" />
-  </n-submenu>
-  <n-menu-item title="A Wild Sheep Chase" name="a-wild-sheep-chase" disabled>
-    <template v-slot:icon>
-      <n-icon>
-        <book-icon />
-      </n-icon>
-    </template>
-  </n-menu-item>
-  <n-submenu title="Dance Dance Dance" name="dance-dance-dance">
-    <template v-slot:icon>
-      <n-icon>
-        <book-icon />
-      </n-icon>
-    </template>
-    <n-menu-item-group title="Characters">
-      <n-menu-item title="Narrator" name="narrator">
-        <template v-slot:icon>
-          <n-icon>
-            <person-icon />
-          </n-icon>
-        </template>
-      </n-menu-item>
-      <n-menu-item title="Sheep Man" name="sheep-man">
-        <template v-slot:icon>
-          <n-icon>
-            <person-icon />
-          </n-icon>
-        </template>
-      </n-menu-item>
-    </n-menu-item-group>
-    <n-submenu title="Beverage" name="beverage">
-      <template v-slot:icon>
-        <n-icon>
-          <wine-icon />
-        </n-icon>
-      </template>
-      <n-menu-item title="Whisky" name="whisky" />
-    </n-submenu>
-    <n-submenu title="Food" name="food">
-      <n-menu-item title="Sandwich" name="sandwich" />
-    </n-submenu>
-    <n-menu-item title="The past increases. The future recedes." name="the-past-increases-the-future-recedes" />
-  </n-submenu>
-</n-menu>
+  :items="menuItems"
+/>
 ```
 ```js
 import bookIcon from 'naive-ui/lib/icons/book-outline'
 import personIcon from 'naive-ui/lib/icons/person-outline'
 import wineIcon from 'naive-ui/lib/icons/wine-outline'
+
+const menuItems = [
+  {
+    title: 'Hear the Wind Sing',
+    name: 'hear-the-wind-sing',
+    icon: h => h('n-icon', [h(bookIcon)])
+  },
+  {
+    title: 'Pinball, 1973',
+    name: 'pinball-1973',
+    icon: h => h('n-icon', [h(bookIcon)]),
+    disabled: true,
+    children: [
+      {
+        title: 'Rat',
+        name: 'rat'
+      }
+    ]
+  },
+  {
+    title: 'A Wild Sheep Chase',
+    name: 'a-wild-sheep-chase',
+    icon: h => h('n-icon', [h(bookIcon)]),
+    disabled: true
+  },
+  {
+    title: 'Dance Dance Dance',
+    name: 'dance-dance-dance',
+    icon: h => h('n-icon', [h(bookIcon)]),
+    children: [
+      {
+        type: 'group',
+        title: 'Characters',
+        children: [
+          {
+            title: 'Narrator',
+            name: 'narrator',
+            icon: h =>  h('n-icon', [h(personIcon)])
+          },
+          {
+            title: 'Sheep Man',
+            name: 'sheep-man',
+            icon: h => h('n-icon', [h(personIcon)])
+          }
+        ]
+      },
+      {
+        title: 'Beverage',
+        name: 'beverage',
+        icon: h => h('n-icon', [h(wineIcon)]),
+        children: [
+          {
+            title: 'Whisky',
+            name: 'whisky'
+          }
+        ]
+      },
+      {
+        title: 'Food',
+        name: 'food',
+        children: [
+          {
+            title: 'Sandwich',
+            name: 'sandwich'
+          }
+        ]
+      },
+      {
+        title: 'The past increases. The future recedes.',
+        name: 'the-past-increases-the-future-recedes'
+      }
+    ]
+  }
+]
 
 export default {
   components: {
@@ -78,7 +95,8 @@ export default {
   data () {
     return {
       activeName: null,
-      collapsed: true
+      collapsed: true,
+      menuItems
     }
   }
 }
