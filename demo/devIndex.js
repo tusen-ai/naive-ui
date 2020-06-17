@@ -3,7 +3,7 @@ import { Vue, i18n } from './init'
 import debugRouteMixin from './routes/debugRouteMixin'
 import hljs from './hljs'
 import demoRouterView from './demoRouterView'
-// import './styles/theme.scss' // test customize style scheme
+// import './styles/test-customize-style-scheme.scss' // test customize style scheme
 import naive from '../src/index'
 import '../src/_styles/index.scss'
 import '../src/_styles/fonts/Lato.scss'

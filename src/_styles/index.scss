@@ -1,6 +1,7 @@
 @import "./base.scss";
 
-@import '~vue-virtual-scroller/dist/vue-virtual-scroller';
+// don't use ~vue-virtual-scroller, if so rollup not working
+@import '../../node_modules/vue-virtual-scroller/dist/vue-virtual-scroller';
 
 @import "./BaseLoading.scss";
 @import "./BaseSlotMachine.scss";
