@@ -14,7 +14,7 @@ export default {
       this.$emit('namespace-change', value, oldValue)
     },
     syntheticThemeEnvironment: function (value, oldValue) {
-      this.$emit('theme-environment-change', value, oldValue)
+      this.$emit('theme-environments-change', value, oldValue)
     },
     'NConfigProvider.inheritedLanguage': function (value, oldValue) {
       this.$emit('language-change', value, oldValue)

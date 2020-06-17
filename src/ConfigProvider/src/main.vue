@@ -31,6 +31,10 @@ export default {
       type: Object,
       default: null
     },
+    themeEnvironments: {
+      type: Object,
+      default: null
+    },
     language: {
       validator (value) {
         return ['zh-CN', 'en-US'].includes(value)
@@ -45,8 +49,12 @@ export default {
     }
   },
   computed: {
-    inheritedThemeEnvironment () {
-      return this.themeEnvironment || (this.NConfigProvider ? this.NConfigProvider.inheritedThemeEnvironment : null)
+    adpatedThemeEnvironments () {
+      return this.themeEnvironments || this.themeEnvironment
+    },
+    inheritedThemeEnvironments () {
+      const NConfigProvider = this.NConfigProvider
+      return this.adpatedThemeEnvironments || (NConfigProvider ? NConfigProvider.inheritedThemeEnvironments : null)
     },
     inheritedNamespace () {
       return this.namespace || (this.NConfigProvider ? this.NConfigProvider.inheritedNamespace : null)

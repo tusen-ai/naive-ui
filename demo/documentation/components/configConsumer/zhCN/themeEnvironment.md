@@ -3,7 +3,7 @@
 ```html
 <n-button @click="theme = 'dark'">深色主题</n-button>
 <n-button @click="theme = 'light'">浅色主题</n-button>
-<n-config-provider :theme="theme" :theme-environment="env">
+<n-config-provider :theme="theme" :theme-environments="env">
   <n-config-consumer v-slot="{ themeEnvironment }">
     <n-card>
       <n-tag>{{ themeEnvironment }}</n-tag>

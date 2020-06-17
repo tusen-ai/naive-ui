@@ -5,7 +5,7 @@ If you don't need wrapper DOM, set `abstract` on it. (Note, in this case it can 
   <n-button @click="theme = 'dark'">Dark Theme</n-button>
   <n-button @click="theme = 'light'">Light Theme</n-button>
 </div>
-<n-config-provider :theme="theme" :theme-environment="env" abstract>
+<n-config-provider :theme="theme" :theme-environments="env" abstract>
   <n-config-consumer v-slot="{ themeEnvironment }">
     <n-card>
       <n-tag>No Wrapper DOM: {{ themeEnvironment }}</n-tag>
