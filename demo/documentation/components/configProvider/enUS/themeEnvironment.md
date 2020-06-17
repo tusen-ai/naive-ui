@@ -1,11 +1,11 @@
-# Theme Environment
-Sometimes you may need some component to access some values at specific theme. You can use `theme-environment`.
+# Theme Environments
+Sometimes you may need some component to access some values at specific theme. You can use `theme-environments`.
 ```html
 <div>
   <n-button @click="theme = 'dark'">Dark Theme</n-button>
   <n-button @click="theme = 'light'">Light Theme</n-button>
 </div>
-<n-config-provider :theme="theme" :theme-environment="env">
+<n-config-provider :theme="theme" :theme-environments="env">
   <n-config-consumer v-slot="{ themeEnvironment }">
     <n-card>
       <n-tag>{{ themeEnvironment }}</n-tag>

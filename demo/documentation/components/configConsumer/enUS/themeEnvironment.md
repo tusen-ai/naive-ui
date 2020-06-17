@@ -1,9 +1,9 @@
-# Theme Environment
+# Theme Environments
 Get current theme environment.
 ```html
 <n-button @click="theme = 'dark'">Dark Theme</n-button>
 <n-button @click="theme = 'light'">Light Theme</n-button>
-<n-config-provider :theme="theme" :theme-environment="env">
+<n-config-provider :theme="theme" :theme-environments="env">
   <n-config-consumer v-slot="{ themeEnvironment }">
     <n-card>
       <n-tag>{{ themeEnvironment }}</n-tag>
