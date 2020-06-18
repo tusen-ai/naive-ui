@@ -19,6 +19,13 @@ module.exports = {
     {
       files: 'src/_icons/**/*',
       rules: {}
+    },
+    {
+      files: '*.spec.js',
+      globals: {
+        describe: 'readonly',
+        it: 'readonly'
+      }
     }
   ]
 }

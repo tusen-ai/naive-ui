@@ -12,3 +12,4 @@ lib
 es
 .vscode
 *.swp
+coverage
