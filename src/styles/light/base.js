@@ -1,9 +1,10 @@
 import create from '../utils/create-theme-base.js'
 import { read, composite } from '../../_utils/color/index.js'
+import commonVariables from '../common-style/index.js'
 
 export default create({
   getBaseVariables () {
-    return {
+    return Object.assign({
       neutralBase: '#FFF',
       neutralInvertBase: '#000',
       neutralTextBase: '#000',
@@ -27,7 +28,7 @@ export default create({
       alphaRail: '0.14',
       alphaBorder: '0.14',
       alphaDivider: '0.08',
-      alphaInput: null,
+      alphaInput: '0',
       alphaAction: '0.02',
       alphaTab: '0.04',
       alphaScrollbar: '0.25',
@@ -64,7 +65,7 @@ export default create({
       successDefault: '#18a058',
       successActive: '#0c7a43',
       successHs: '#36ad6a'
-    }
+    }, commonVariables)
   },
   getDerivedVariables (base) {
     const baseBackgroundRgb = read(base.neutralBase)
@@ -151,7 +152,7 @@ export default create({
       bodyBackgroundColor: base.neutralBody,
       tagBackgroundColor: neutral(base.alphaTag),
 
-      inputOverlayBackgroundColor: null,
+      inputOverlayBackgroundColor: overlay(base.alphaInput),
       codeOverlayBackgroundColor: overlay(base.alphaCode),
       tabOverlayBackgroundColor: overlay(base.alphaTab),
       avatarOverlayBackgroundColor: overlay(base.alphaAvatar),
