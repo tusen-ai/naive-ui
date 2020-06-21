@@ -15,9 +15,15 @@ export default function createThemeBase (theme) {
       derived: syntheticDerived
     }
   }
+  let cachedBased = null
   let cachedDerived = null
   return {
-    base: theme.base,
+    get base () {
+      if (!cachedBased) {
+        return this.getBaseVariables()
+      }
+    },
+    getBaseVariables: theme.getBaseVariables,
     getDerivedVariables: theme.getDerivedVariables,
     get derived () {
       if (!cachedDerived) {

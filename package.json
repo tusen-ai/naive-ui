@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "naive-ui",
   "version": "1.4.0",
   "description": "A Vue UI Framework. Caring About Styles, Themed, Batteries Included, Not Rather Slow.",
