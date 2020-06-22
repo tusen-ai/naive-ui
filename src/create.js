@@ -25,7 +25,8 @@ function create ({
   fallbackLocale,
   hljs,
   styleSchemes,
-  fallbackTheme
+  fallbackTheme,
+  _themes
 }) {
   const installTargets = []
   const naive = {
@@ -33,10 +34,11 @@ function create ({
     fallbackLocale: fallbackLocale || locales[0],
     hljs,
     styleSchemes: styleSchemes || null,
+    _themes: _themes || null,
     fallbackTheme: fallbackTheme || 'light',
     setHljs,
     setHighlightjs: setHljs,
-    setStyleSchemes: (schemes) => {
+    setStyleSchemes: schemes => {
       naive.styleSchemes = mergeStyleSchemes(
         naive.styleSchemes, schemes
       )

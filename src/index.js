@@ -71,6 +71,11 @@ import enUS from './locale/enUS'
 import lightScheme from './_styles-in-js/lightStyleScheme.scss'
 import darkScheme from './_styles-in-js/darkStyleScheme.scss'
 
+import lightBaseStyle from './styles/light/base'
+import darkBaseStyle from './styles/dark/base'
+import lightButtonStyle from './styles/light/Button'
+import darkButtonStyle from './styles/dark/Button'
+
 // Deprecated Components
 import NimbusFormCard from './_deprecated/NimbusFormCard'
 import NimbusConfirmCard from './_deprecated/NimbusConfirmCard'
@@ -159,5 +164,15 @@ export default create({
     light: lightScheme,
     dark: darkScheme
   },
-  fallbackTheme: 'light'
+  fallbackTheme: 'light',
+  _themes: {
+    light: {
+      base: lightBaseStyle,
+      NButton: lightButtonStyle
+    },
+    dark: {
+      base: darkBaseStyle,
+      NButton: darkButtonStyle
+    }
+  }
 })
