@@ -1,20 +1,11 @@
-const styleMountStatus = {}
+const mountedStyleMap = new Map()
 
-function isStyleMounted (componentName, renderedTheme) {
-  const componentStyleMountStatus = styleMountStatus[componentName]
-  if (!componentStyleMountStatus) return false
-  if (!componentStyleMountStatus[renderedTheme]) return false
-  return true
+function isStyleMounted (id) {
+  return mountedStyleMap.has(id)
 }
 
-function markStyleMounted (componentName, renderedTheme) {
-  if (!styleMountStatus[componentName]) {
-    styleMountStatus[componentName] = {
-      [renderedTheme]: true
-    }
-  } else if (!styleMountStatus[componentName][renderedTheme]) {
-    styleMountStatus[componentName][renderedTheme] = true
-  }
+function markStyleMounted (id) {
+  return mountedStyleMap.set(id, 1)
 }
 
 function getThemeVariables (naive, themeName) {
@@ -23,7 +14,14 @@ function getThemeVariables (naive, themeName) {
   return theme.base
 }
 
-function prepareTheme (instance, theme, CNode) {
+function prepareTheme (
+  instance,
+  theme,
+  dependencyKey,
+  CNode,
+  mountOnFalsyValue = false
+) {
+  if (!mountOnFalsyValue && !instance[dependencyKey]) return
   const naive = instance.$naive
   const options = instance.$options
   const {
@@ -31,33 +29,52 @@ function prepareTheme (instance, theme, CNode) {
     _themes
   } = naive
   const renderedTheme = theme || fallbackTheme
-  if (isStyleMounted(options.name, renderedTheme)) return
+  const mountId = options.name + '-' + renderedTheme + '-' + dependencyKey + (instance[dependencyKey] ? '-' + instance[dependencyKey] : '')
+  if (isStyleMounted(mountId)) return
   const cssrPropsGetter = _themes[renderedTheme][options.name]
   if (process.env.NODE_ENV !== 'production' && !cssrPropsGetter) {
     console.error(`[naive-ui/mixins/usecssr]: ${options.name}'s style not found`)
   }
   const themeVariables = getThemeVariables(naive, renderedTheme)
   const componentCssrProps = Object.assign(
-    {},
-    cssrPropsGetter.cssrProps(themeVariables),
-    { theme: renderedTheme, fallbackTheme }
+    { $instance: instance },
+    { $renderedTheme: renderedTheme, $fallbackTheme: fallbackTheme },
+    cssrPropsGetter.cssrProps(themeVariables)
   )
   CNode.mount({
-    target: options.name,
+    target: mountId,
     props: componentCssrProps
   })
-  markStyleMounted(options.name, renderedTheme)
+  markStyleMounted(mountId)
 }
 
-export default function (CNode) {
+export default function (styles) {
+  const watch = {}
+  styles.forEach(style => {
+    style.watch.forEach(watchKey => {
+      watch[watchKey] = function () {
+        prepareTheme(
+          this,
+          this.syntheticTheme || null,
+          style.key,
+          style.CNode,
+          style.mountOnFalsyValue
+        )
+      }
+    })
+  })
   return {
     beforeMount () {
-      prepareTheme(this, this.syntheticTheme || null, CNode)
+      styles.forEach(style => {
+        prepareTheme(
+          this,
+          this.syntheticTheme || null,
+          style.key,
+          style.CNode,
+          style.mountOnFalsyValue
+        )
+      })
     },
-    watch: {
-      syntheticTheme (value) {
-        prepareTheme(this, value, CNode)
-      }
-    }
+    watch
   }
 }
