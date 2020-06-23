@@ -5,6 +5,7 @@ import Entry from '../entry'
 import intro from '../documentation/intro/intro'
 import start from '../documentation/intro/start'
 import devGuildlines from '../documentation/intro/devGuidelines'
+import experimentalFeatures from '../documentation/intro/experimental-features'
 
 import nimbusServiceLayoutDemo from '../documentation/deprecated/nimbusServiceLayout'
 import gradientText from '../documentation/components/gradientText'
@@ -79,10 +80,12 @@ import DocEntry from '../docEntry'
 import { withPrefix } from './utils'
 
 export const childRoutes = withPrefix('/:lang/:theme/doc', [
+  // basic docs
   { path: '/intro', component: intro },
   { path: '/start', component: start },
+  { path: '/experimental-features', component: experimentalFeatures },
   { path: '/dev-guildlines', component: devGuildlines },
-  { path: '/n-nimbus-service-layout', component: nimbusServiceLayoutDemo },
+  // components
   { path: '/n-layout', component: layout },
   { path: '/n-gradient-text', component: gradientText },
   { path: '/n-icon', component: icon },
@@ -148,7 +151,9 @@ export const childRoutes = withPrefix('/:lang/:theme/doc', [
   { path: '/n-code', component: code },
   { path: '/n-typography', component: typography },
   { path: '/n-upload', component: upload },
-  { path: '/n-table', component: table }
+  { path: '/n-table', component: table },
+  // deprecated
+  { path: '/n-nimbus-service-layout', component: nimbusServiceLayoutDemo }
 ])
 
 export const routes = [

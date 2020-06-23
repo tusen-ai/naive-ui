@@ -102,3 +102,11 @@ export function hash (rgb) {
   if (!rgb) return null
   return rgb.join('-')
 }
+
+export function createHoverColor (rgb) {
+  return composite(rgb, [255, 255, 255, 0.14])
+}
+
+export function createActiveColor (rgb) {
+  return composite(rgb, [0, 0, 0, 0.1])
+}

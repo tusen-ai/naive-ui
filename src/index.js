@@ -68,9 +68,10 @@ import Upload from './Upload'
 import zhCN from './locale/zhCN'
 import enUS from './locale/enUS'
 
-/**
- * Deprecated Components
- */
+import lightScheme from './_styles-in-js/lightStyleScheme.scss'
+import darkScheme from './_styles-in-js/darkStyleScheme.scss'
+
+// Deprecated Components
 import NimbusFormCard from './_deprecated/NimbusFormCard'
 import NimbusConfirmCard from './_deprecated/NimbusConfirmCard'
 import NimbusServiceLayout from './_deprecated/NimbusServiceLayout'
@@ -146,14 +147,17 @@ export default create({
     Code,
     Typography,
     Upload,
-    /**
-     * Deprecated
-     */
+    // Deprecated
     NimbusServiceLayout,
     NimbusConfirmCard,
     NimbusFormCard,
     NimbusIcon
   ],
   locales: [zhCN, enUS],
-  fallbackLocale: enUS
+  fallbackLocale: enUS,
+  styleSchemes: {
+    light: lightScheme,
+    dark: darkScheme
+  },
+  fallbackTheme: 'light'
 })

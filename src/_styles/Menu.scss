@@ -30,10 +30,13 @@
       @include b(menu-list) {
         @include once {
           display: flex;
+          @include b(submenu) {
+            margin: 0;
+          }
         }
         @include b(menu-item) {
-          margin: 0;
           @include once {
+            margin: 0;
             &::after {
               background-color: transparent !important;
             }
@@ -74,7 +77,6 @@
         }
         @include b(menu-item-content) {
           @include once {
-            
             @include b(menu-item-content-header) {
               opacity: 0;
             }
@@ -100,15 +102,17 @@
           transition: background-color .3s $--n-ease-in-out-cubic-bezier;
           list-style: none;
           height: 42px;
-          margin: 6px 0;
+          margin-top: 6px;
         }
         @include b(submenu) {
           cursor: pointer;
           position: relative;
+          margin-top: 6px;
           @include b(menu-item-content) {
             height: 42px;
           }
           @include b(submenu-content) {
+            overflow: hidden; // margin overlay work around, Todo, refactor
             padding: 0;
             list-style: none;
             @include fade-in-height-expand-transition($duration: .2s);
@@ -131,9 +135,11 @@
             pointer-events: none;
           }
         }
-        &:active {
-          &::after {
-            background-color: $--menu-item-background-color;
+        @include not-m(disabled) {
+          &:active {
+            &::after {
+              background-color: $--menu-item-background-color;
+            }
           }
         }
         @include m(selected) {
@@ -167,6 +173,7 @@
           transition: background-color .3s $--n-ease-in-out-cubic-bezier, padding-left .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
           position: relative;
           z-index: auto;
+          padding-right: 12px;
           @include m(disabled) {
             opacity: 0.45;
             cursor: not-allowed;
@@ -205,7 +212,7 @@
             width: 6px;
             position: absolute;
             right: 24px;
-            top: calc(50% - 3px);
+            top: calc(50% - 2px);
             transform: rotate(45deg) ;
             transform-origin: 25% 25%;
             opacity: 1;
@@ -219,6 +226,8 @@
             flex-grow: 1;
             flex-shrink: 1;
             white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
           color: map-get($--menu-item-content-text-color, 'default');
           @include e(extra) {
@@ -285,6 +294,7 @@
     }
     @include b(menu-item-group) {
       @include b(menu-item-group-title) {
+        margin-top: 6px;
         color: $--menu-item-group-text-color;
         @include once {
           cursor: default;

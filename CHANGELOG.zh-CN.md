@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.4.0 (2020-06-19)
+### Breaking Changes
+- `n-menu` 不再支持 slot API
+### Features
+- 增加了试验性的设定主色功能
+
 ## 1.3.5 (2020-06-06)
 ### Features
 - 为 `n-button` 增加了 `attr-type` 属性

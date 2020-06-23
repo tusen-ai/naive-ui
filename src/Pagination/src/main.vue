@@ -93,13 +93,13 @@
 </template>
 
 <script>
-import { pageItems } from './utils'
-import NBaseIcon from '../../_base/Icon'
 import NSelect from '../../Select'
 import NInput from '../../Input'
+import NBaseIcon from '../../_base/Icon'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import locale from '../../_mixins/locale'
+import { pageItems } from './utils'
 
 export default {
   name: 'NPagination',

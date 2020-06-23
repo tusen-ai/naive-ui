@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.4.0 (2020-06-19)
+### Breaking Changes
+- `n-menu` not support slot API anymore.
+### Features
+- Add experimental setting primary color feature.
+
 ## 1.3.5 (2020-06-06)
 ### Features
 - Add `attr-type` for `n-button`

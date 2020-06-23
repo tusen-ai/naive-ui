@@ -42,8 +42,8 @@ export default {
     syntheticThemeEnvironment () {
       const NConfigProvider = this.NConfigProvider
       const syntheticTheme = this.syntheticTheme
-      if (syntheticTheme && NConfigProvider && NConfigProvider.inheritedThemeEnvironment) {
-        return NConfigProvider.inheritedThemeEnvironment[syntheticTheme] || null
+      if (syntheticTheme && NConfigProvider && NConfigProvider.inheritedThemeEnvironments) {
+        return NConfigProvider.inheritedThemeEnvironments[syntheticTheme] || null
       }
     }
   }
