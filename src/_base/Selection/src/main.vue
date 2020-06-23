@@ -124,7 +124,7 @@
           class="n-base-selection-label__input"
           :value="(patternInputFocused && active) ? pattern : label"
           :placeholder="selectedOption ? label : placeholder"
-          :readonly="(!disabled && filterable && active) || autofocus ? false : 'readonly'"
+          :readonly="!disabled && filterable && (active || autofocus) ? false : 'readonly'"
           :disabled="disabled"
           tabindex="-1"
           :autofocus="autofocus"
