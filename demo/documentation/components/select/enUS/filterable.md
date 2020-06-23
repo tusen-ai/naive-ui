@@ -6,8 +6,6 @@ Go go go, Filter.
   filterable
   placeholder="Please Select a Song"
   :options="options"
-  ref="select"
-  autofocus
 />
 <n-select
   v-model="selectedValues"
@@ -74,24 +72,6 @@ export default {
         }
       ]
     }
-  },
-  mounted () {
-    console.log('select', this.$refs.select.$children[0])
-    // this.$refs.select.$children[0].focusPatternInput()
-    // this.$refs.select.$children[0].blurPatternInput()
-    // this.$refs.select.$children[0].focusPatternInputWrapper()
-    // // console
-    // this.$nextTick(()=> {
-    //   debugger
-    //   this.$refs.input.focus()
-    // })
-    // setTimeout(()=> {
-    //      debugger
-    //    this.$refs.select.$children[0].focusPatternInput()
-    // this.$refs.select.$children[0].blurPatternInput()
-    // this.$refs.select.$children[0].focusPatternInputWrapper()
-    // // console
-    // }, 1000)
   }
 }
 ```
