@@ -387,7 +387,6 @@ export default {
       this.$nextTick().then(() => {
         const patternInput = this.$refs.patternInput
         if (patternInput) {
-          debugger
           patternInput.focus()
         }
       })
