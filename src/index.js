@@ -4,7 +4,8 @@ import GradientText from './GradientText'
 import Table from './Table'
 import DataTable from './DataTable'
 import CheckBox from './Checkbox'
-import RoundButton from './Button'
+import Button from './Button'
+import ButtonGroup from './button-group'
 import Switch from './Switch'
 import Select from './Select'
 import Cascader from './Cascader'
@@ -71,10 +72,10 @@ import enUS from './locale/enUS'
 import lightScheme from './_styles-in-js/lightStyleScheme.scss'
 import darkScheme from './_styles-in-js/darkStyleScheme.scss'
 
-import lightBaseStyle from './styles/light/base'
-import darkBaseStyle from './styles/dark/base'
-import lightButtonStyle from './styles/light/Button'
-import darkButtonStyle from './styles/dark/Button'
+import lightBaseStyle from './styles/base/light'
+import darkBaseStyle from './styles/base/dark'
+import lightButtonStyle from './styles/button/light'
+import darkButtonStyle from './styles/button/dark'
 
 // Deprecated Components
 import NimbusFormCard from './_deprecated/NimbusFormCard'
@@ -93,7 +94,8 @@ export default create({
     Table,
     DataTable,
     CheckBox,
-    RoundButton,
+    Button,
+    ButtonGroup,
     Switch,
     Select,
     Modal,

@@ -13,18 +13,6 @@ export default {
 
   lineHeight: '1.75',
 
-  tinyHeight: '22px',
-  smallHeight: '28px',
-  mediumHeight: '34px',
-  largeHeight: '40px',
-  hugeHeight: '46px',
-
-  tinyFontSize: '13px',
-  smallFontSize: '14px',
-  mediumFontSize: '14px',
-  largeFontSize: '15px',
-  hugeFontSize: '16px',
-
   iconTransition: 'fill .3s $--n-ease-in-out-cubic-bezier, stroke .3s $--n-ease-in-out-cubic-bezier',
 
   transformDebounceScale: 'scale(0.99999)',

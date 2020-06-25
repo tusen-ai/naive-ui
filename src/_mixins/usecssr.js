@@ -14,14 +14,16 @@ function getThemeVariables (naive, themeName) {
   return theme.base
 }
 
+function createMountId (componentName, renderedTheme, dependencyKey, dependencyValue) {
+  return componentName + '-' + renderedTheme + '-' + dependencyKey + (dependencyValue ? ('-' + dependencyValue) : '')
+}
+
 function prepareTheme (
   instance,
   theme,
   dependencyKey,
-  CNode,
-  mountOnFalsyValue = false
+  CNode
 ) {
-  if (!mountOnFalsyValue && !instance[dependencyKey]) return
   const naive = instance.$naive
   const options = instance.$options
   const {
@@ -29,7 +31,19 @@ function prepareTheme (
     _themes
   } = naive
   const renderedTheme = theme || fallbackTheme
-  const mountId = options.name + '-' + renderedTheme + '-' + dependencyKey + (instance[dependencyKey] ? '-' + instance[dependencyKey] : '')
+  const dependencyValue = dependencyKey === 'syntheticTheme' ? renderedTheme : instance[dependencyKey]
+  if (
+    process.env.NODE_ENV !== 'production' &&
+    (dependencyValue === null || dependencyValue === undefined)
+  ) {
+    console.error(`[naive-ui/mixins/usecssr]: ${options.name}.${dependencyKey} is ${dependencyValue}`)
+  }
+  const mountId = createMountId(
+    options.name,
+    renderedTheme,
+    dependencyKey,
+    dependencyValue
+  )
   if (isStyleMounted(mountId)) return
   const cssrPropsGetter = _themes[renderedTheme][options.name]
   if (process.env.NODE_ENV !== 'production' && !cssrPropsGetter) {

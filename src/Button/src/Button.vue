@@ -17,7 +17,7 @@
       'n-button--ghost': ghost,
       'n-button--text': text,
       [`n-button--${type}-type`]: true,
-      [`n-button--${colorHash || type}-colored`]: true,
+      [`n-button--${type}-colored`]: true,
       [`n-button--${syntheticSize}-size`]: true,
       [`n-button--${iconPlacement}-icon`]: iconPlacement && !noTextContent,
       [`n-button--${iconDepth}-icon-depth`]: type === 'default',
@@ -96,53 +96,55 @@ import NFadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandT
 import hollowoutable from '../../_mixins/hollowoutable'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import usecssr from '../../_mixins/usecssr'
 import NIcon from '../../Icon'
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
-import { read, hash, createHoverColor, createActiveColor } from '../../_utils/color'
-import { createColorStyle } from './styles/Button.cssr.js'
-import { createThemedStyle } from '../../_utils/cssr'
-import createTheme from './styles/theme'
+import styles from './styles/index.js'
+// import { read, hash, createHoverColor, createActiveColor } from '../../_utils/color'
+// import { createColorStyle } from './styles/Button.cssr.js'
+// import { createThemedStyle } from '../../_utils/cssr'
+// import createTheme from './styles/theme'
 
-const colorStyle = createColorStyle()
-let typeStyle
+// const colorStyle = createColorStyle()
+// let typeStyle
 
-function mountTypeStyle (type) {
-  typeStyle.mount({
-    target: 'n-button-' + type + '-style',
-    props: {
-      type
-    }
-  })
-}
+// function mountTypeStyle (type) {
+//   typeStyle.mount({
+//     target: 'n-button-' + type + '-style',
+//     props: {
+//       type
+//     }
+//   })
+// }
 
-function mountColorStyle (color, colorHash) {
-  const textColor = null
-  const rgb = read(color)
-  const digest = hash(rgb)
-  const hoverColor = createHoverColor(rgb)
-  const activeColor = createActiveColor(rgb)
-  const focusColor = hoverColor
-  colorStyle.mount({
-    target: 'n-button-' + digest,
-    props: {
-      digest,
-      pallete: {
-        color,
-        hoverColor,
-        activeColor,
-        focusColor,
-        textColor
-      }
-    }
-  })
-}
+// function mountColorStyle (color, colorHash) {
+//   const textColor = null
+//   const rgb = read(color)
+//   const digest = hash(rgb)
+//   const hoverColor = createHoverColor(rgb)
+//   const activeColor = createActiveColor(rgb)
+//   const focusColor = hoverColor
+//   colorStyle.mount({
+//     target: 'n-button-' + digest,
+//     props: {
+//       digest,
+//       pallete: {
+//         color,
+//         hoverColor,
+//         activeColor,
+//         focusColor,
+//         textColor
+//       }
+//     }
+//   })
+// }
 
-function unmountColorStyle (colorHash) {
-  colorStyle.unmount({
-    target: 'n-button-' + colorHash,
-    delay: 3000
-  })
-}
+// function unmountColorStyle (colorHash) {
+//   colorStyle.unmount({
+//     target: 'n-button-' + colorHash,
+//     delay: 3000
+//   })
+// }
 
 export default {
   name: 'NButton',
@@ -160,7 +162,12 @@ export default {
       default: null
     }
   },
-  mixins: [withapp, themeable, hollowoutable],
+  mixins: [
+    withapp,
+    themeable,
+    hollowoutable,
+    usecssr(styles)
+  ],
   props: {
     color: {
       type: String,
@@ -253,14 +260,14 @@ export default {
     }
   },
   computed: {
-    colorRgb () {
-      if (!this.color) return null
-      return read(this.color)
-    },
-    colorHash () {
-      if (!this.colorRgb) return null
-      return hash(this.colorRgb)
-    },
+    // colorRgb () {
+    //   if (!this.color) return null
+    //   return read(this.color)
+    // },
+    // colorHash () {
+    //   if (!this.colorRgb) return null
+    //   return hash(this.colorRgb)
+    // },
     syntheticSize () {
       const NButtonGroup = this.NButtonGroup
       if (NButtonGroup && NButtonGroup.size) {
@@ -299,35 +306,35 @@ export default {
       return this.iconPlacement === 'right'
     }
   },
-  watch: {
-    colorHash (value, oldValue) {
-      unmountColorStyle(oldValue)
-    },
-    color (value) {
-      mountColorStyle(value)
-    },
-    type (value) {
-      mountTypeStyle(value)
-    }
-  },
+  // watch: {
+  //   colorHash (value, oldValue) {
+  //     unmountColorStyle(oldValue)
+  //   },
+  //   color (value) {
+  //     mountColorStyle(value)
+  //   },
+  //   type (value) {
+  //     mountTypeStyle(value)
+  //   }
+  // },
   created () {
-    const color = this.color
-    if (color) {
-      mountColorStyle(color)
-    }
-    if (!typeStyle) {
-      typeStyle = createThemedStyle(colorStyle, createTheme(
-        this.$naive.styleSchemes,
-        this.$naive.fallbackTheme
-      ))
-    }
-    mountTypeStyle(this.type)
+    // const color = this.color
+    // if (color) {
+    //   mountColorStyle(color)
+    // }
+    // if (!typeStyle) {
+    //   typeStyle = createThemedStyle(colorStyle, createTheme(
+    //     this.$naive.styleSchemes,
+    //     this.$naive.fallbackTheme
+    //   ))
+    // }
+    // mountTypeStyle(this.type)
   },
   beforeDestroy () {
-    const colorHash = this.colorHash
-    if (colorHash) {
-      unmountColorStyle(colorHash)
-    }
+    // const colorHash = this.colorHash
+    // if (colorHash) {
+    //   unmountColorStyle(colorHash)
+    // }
     const rippleTimer = this.rippleTimer
     if (rippleTimer !== null) {
       window.clearTimeout(rippleTimer)

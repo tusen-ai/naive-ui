@@ -47,7 +47,7 @@
 
 <script>
 import NButton from '../../Button'
-import NButtonGroup from '../../Button/src/ButtonGroup'
+import NButtonGroup from '../../button-group'
 import mdAdd from '../../_icons/md-add'
 import mdRemove from '../../_icons/md-remove'
 import NDynamicInputInputPreset from './InputPreset'

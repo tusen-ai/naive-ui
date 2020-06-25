@@ -9,7 +9,7 @@ export default function createBaseComponent (component) {
       return cachedCssrProps
     },
     customize (options = {}) {
-      return Object.assign({}, this.styleScheme, options)
+      // TODO
     }
   }
 }

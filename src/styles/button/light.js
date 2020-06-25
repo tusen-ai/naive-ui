@@ -1,8 +1,11 @@
-import create from '../utils/create-component-base'
+import create from '../_utils/create-component-base'
+import commonVariables from '../_common-style/button'
 
 export default create({
-  getDerivedVariables ({ derived }) {
+  getDerivedVariables ({ base, derived }) {
     return {
+      ...commonVariables,
+      borderRadius: base.borderRadius,
       default: {
         color: 'transparent',
         hoverColor: 'transparent',

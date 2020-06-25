@@ -1,83 +1,5 @@
 @import './mixins/mixins.scss';
 
-@mixin button-size-mixin($size) {
-  @include m($size + '-size') {
-    $height: map-get($--n-height, $size);
-    $font-size: map-get($--n-button-font-size, $size);
-    $icon-size: map-get($--n-button-icon-size, $size);
-    border-radius: $--n-button-border-radius;
-    font-size: $font-size;
-    @include not-m(text) {
-      height: $height;
-      line-height: $height - 2px;
-      padding: map-get($--n-button-padding, $size);
-    }
-    white-space: nowrap;
-    @include m(round) {
-      padding: map-get($--n-button-round-padding, $size);
-      border-radius: $height / 2;
-    }
-    @include m(circle) {
-      border-radius: $height / 2;
-      width: $height;
-      padding: 0!important;
-    }
-    @include e(content) {
-      display: inline-block;
-      line-height: inherit;
-    }
-    @include e(icon) {
-      display: inline-block;
-      position: relative;
-      line-height: $height - 2px;
-      height: $height - 2px;
-      width: $icon-size;
-      max-width: $icon-size;
-      vertical-align: bottom;
-      @include b(icon) {
-        font-size: $icon-size;
-      }
-      @include b(base-loading) {
-        height: $icon-size - 2px;
-        width: $icon-size - 2px;
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        display: block;
-        @include icon-switch-transition($top: 50%, $original-transform: translateY(-50%));
-      }
-      @include m(slot) {
-        width: $icon-size;
-        font-size: $icon-size;
-        display: inline-flex;
-        align-items: center;
-        vertical-align: bottom;
-        @include b(icon-slot) {
-          @include icon-switch-transition($top: 50%, $original-transform: translateY(-50%));
-          position: absolute;
-          left: 0;
-          top: 50%;
-          transform: translateY(-50%);
-          display: block;
-          line-height: $icon-size;
-          height: $icon-size;
-          width: $icon-size;
-          font-size: $icon-size;
-        }
-      }
-    }
-    @include m(text) {
-      padding: 0;
-      border-radius: 0;
-      @include e(icon) {
-        height: $icon-size;
-        line-height: $icon-size;
-      }
-    }
-  }
-}
-
 @include themes-mixin {
   @include b(button) {
     @include once {
@@ -167,10 +89,6 @@
       &::-moz-focus-inner {
         border: 0;
       }
-      @include button-size-mixin('tiny');
-      @include button-size-mixin('small');
-      @include button-size-mixin('medium');
-      @include button-size-mixin('large');
     }
     @include m(disabled) {
       opacity: $--button-disabled-opacity;
