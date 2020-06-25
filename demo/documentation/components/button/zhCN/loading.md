@@ -18,8 +18,3 @@ export default {
   }
 }
 ```
-```css
-.n-button {
-  margin: 0 8px 8px 0;
-}
-```

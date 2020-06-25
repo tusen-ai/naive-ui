@@ -91,14 +91,14 @@
 </template>
 
 <script>
-import NBaseLoading from '../../_base/Loading'
-import NFadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
 import hollowoutable from '../../_mixins/hollowoutable'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import usecssr from '../../_mixins/usecssr'
-import NIcon from '../../Icon'
+import NFadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
+import NBaseLoading from '../../_base/Loading'
+import NIcon from '../../Icon'
 import styles from './styles/index.js'
 // import { read, hash, createHoverColor, createActiveColor } from '../../_utils/color'
 // import { createColorStyle } from './styles/Button.cssr.js'

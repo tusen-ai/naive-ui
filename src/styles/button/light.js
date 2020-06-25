@@ -6,6 +6,7 @@ export default create({
     return {
       ...commonVariables,
       borderRadius: base.borderRadius,
+      disabledOpacity: derived.disabledOpacity,
       default: {
         color: 'transparent',
         hoverColor: 'transparent',

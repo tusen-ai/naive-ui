@@ -1,34 +1,29 @@
 import colorStyle from './color.cssr.js'
 import sizeStyle from './size.cssr.js'
-// import typeStyle from './type.cssr.js'
-// import syntheticThemeStyle from './syntheticTheme.cssr.js'
+import baseStyle from './base.cssr.js'
 
 export default [
   {
     key: 'type',
-    CNode: colorStyle,
     watch: [
       'type',
       'syntheticTheme'
-    ]
+    ],
+    CNode: colorStyle
   },
   {
     key: 'size',
-    CNode: sizeStyle,
     watch: [
-      'size'
-    ]
+      'size',
+      'syntheticTheme'
+    ],
+    CNode: sizeStyle
+  },
+  {
+    key: 'syntheticTheme',
+    watch: [
+      'syntheticTheme'
+    ],
+    CNode: baseStyle
   }
-  // {
-  //   key: 'color',
-  //   CNode: colorStyle,
-  //   watch: [
-  //     'color'
-  //   ]
-  // }
-  // syntheticTheme: [
-  //   {
-  //     CNode: colorStyle
-  //   }
-  // ]
 ]

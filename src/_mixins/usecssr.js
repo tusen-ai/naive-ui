@@ -1,5 +1,10 @@
 const mountedStyleMap = new Map()
 
+if (process.env.NODE_ENV !== 'production') {
+  if (!window.naive) window.naive = {}
+  window.naive.styleRenderingDuration = 0
+}
+
 function isStyleMounted (id) {
   return mountedStyleMap.has(id)
 }
@@ -14,8 +19,17 @@ function getThemeVariables (naive, themeName) {
   return theme.base
 }
 
-function createMountId (componentName, renderedTheme, dependencyKey, dependencyValue) {
-  return componentName + '-' + renderedTheme + '-' + dependencyKey + (dependencyValue ? ('-' + dependencyValue) : '')
+function createMountId (
+  componentName,
+  renderedTheme,
+  dependencyKey,
+  dependencyValue
+) {
+  return (
+    componentName + '-' +
+    renderedTheme + '-' +
+    dependencyKey + (dependencyValue ? ('-' + dependencyValue) : '')
+  )
 }
 
 function prepareTheme (
@@ -49,12 +63,16 @@ function prepareTheme (
   if (process.env.NODE_ENV !== 'production' && !cssrPropsGetter) {
     console.error(`[naive-ui/mixins/usecssr]: ${options.name}'s style not found`)
   }
+  // themeVariables: { base, derived }
   const themeVariables = getThemeVariables(naive, renderedTheme)
-  const componentCssrProps = Object.assign(
-    { $instance: instance },
-    { $renderedTheme: renderedTheme, $fallbackTheme: fallbackTheme },
-    cssrPropsGetter.cssrProps(themeVariables)
-  )
+  const componentCssrProps = {
+    $instance: instance,
+    $base: themeVariables.base,
+    $derived: themeVariables.derived,
+    $local: cssrPropsGetter.cssrProps(themeVariables),
+    $renderedTheme: renderedTheme,
+    $fallbackTheme: fallbackTheme
+  }
   CNode.mount({
     target: mountId,
     props: componentCssrProps
@@ -63,30 +81,56 @@ function prepareTheme (
 }
 
 export default function (styles) {
-  const watch = {}
+  // collect watchers
+  const watchers = {}
   styles.forEach(style => {
     style.watch.forEach(watchKey => {
-      watch[watchKey] = function () {
+      if (!watchers[watchKey]) watchers[watchKey] = []
+      watchers[watchKey].push(function (instance, syntheticTheme) {
+        if (process.env.NODE_ENV !== 'production') {
+          window.naive.styleRenderingDuration -= performance.now()
+        }
         prepareTheme(
-          this,
-          this.syntheticTheme || null,
+          instance,
+          syntheticTheme || null,
           style.key,
-          style.CNode,
-          style.mountOnFalsyValue
+          style.CNode
         )
-      }
+        if (process.env.NODE_ENV !== 'production') {
+          window.naive.styleRenderingDuration += performance.now()
+        }
+      })
     })
   })
+  // create component watch options
+  const watch = {}
+  Object
+    .keys(watchers)
+    .forEach(
+      watchKey => {
+        watch[watchKey] = function () {
+          const syntheticTheme = this.syntheticTheme
+          watchers[watchKey].forEach(watcher => {
+            watcher(this, syntheticTheme)
+          })
+        }
+      }
+    )
   return {
     beforeMount () {
       styles.forEach(style => {
+        if (process.env.NODE_ENV !== 'production') {
+          window.naive.styleRenderingDuration -= performance.now()
+        }
         prepareTheme(
           this,
           this.syntheticTheme || null,
           style.key,
-          style.CNode,
-          style.mountOnFalsyValue
+          style.CNode
         )
+        if (process.env.NODE_ENV !== 'production') {
+          window.naive.styleRenderingDuration += performance.now()
+        }
       })
     },
     watch
