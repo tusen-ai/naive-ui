@@ -262,7 +262,7 @@
 </template>
 
 <script>
-import NButton from '../../../Button'
+import NButton from '../../../button'
 import NTimePicker from '../../../TimePicker'
 import NInput from '../../../Input'
 import dualCalendarMixin from './dualCalendarMixin'

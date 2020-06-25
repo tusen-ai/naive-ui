@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import NButton from '../../Button'
+import NButton from '../../button'
 import closeOutline from '../../_icons/close-outline'
 import downloadOutline from '../../_icons/download-outline'
 import trashOutline from '../../_icons/trash-outline'

@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import NButton from '../../Button'
+import NButton from '../../button'
 import NButtonGroup from '../../button-group'
 import mdAdd from '../../_icons/md-add'
 import mdRemove from '../../_icons/md-remove'

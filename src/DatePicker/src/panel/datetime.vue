@@ -144,7 +144,7 @@ import NBaseIcon from '../../../_base/Icon'
 import uniCalendarMixin from './uniCalendarMixin'
 import startOfSecond from 'date-fns/startOfSecond'
 
-import NButton from '../../../Button'
+import NButton from '../../../button'
 import NTimePicker from '../../../TimePicker'
 import NInput from '../../../Input'
 

@@ -176,7 +176,7 @@
 </template>
 
 <script>
-import NButton from '../../../Button'
+import NButton from '../../../button'
 import NBaseIcon from '../../../_base/Icon'
 import dualCalendarMixin from './dualCalendarMixin'
 import startOfDay from 'date-fns/startOfDay'

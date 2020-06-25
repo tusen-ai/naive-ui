@@ -69,7 +69,7 @@
 </template>
 <script>
 import NIcon from '../../Icon'
-import NButton from '../../Button'
+import NButton from '../../button'
 import iosCheckmarkCircle from '../../_icons/ios-checkmark-circle'
 import mdClose from '../../_icons/md-close'
 import iosHelpCircle from '../../_icons/ios-help-circle'
