@@ -6,10 +6,14 @@ function lazyHandler (handler) {
   let called = false
   return function (e) {
     if (called) {
-      console.debug('[clickoutside] called')
+      if (process.env.NODE_ENV !== 'production') {
+        console.debug('[clickoutside] called')
+      }
       handler(e)
     } else {
-      console.debug('[clickoutside] lazy called')
+      if (process.env.NODE_ENV !== 'production') {
+        console.debug('[clickoutside] lazy called')
+      }
       called = true
     }
   }
@@ -18,7 +22,9 @@ function lazyHandler (handler) {
 const clickoutside = {
   bind (el, bindings) {
     // console.debug('[clickoutside]: bind', el)
-    console.debug('[clickoutside]: bind $el')
+    if (process.env.NODE_ENV !== 'production') {
+      console.debug('[clickoutside]: bind $el')
+    }
     if (typeof bindings.value === 'function') {
       el[ctx] = {
         handler: bindings.modifiers.lazy ? lazyHandler(bindings.value) : bindings.value
@@ -27,7 +33,9 @@ const clickoutside = {
     }
   },
   inserted (el, bindings) {
-    console.debug('[clickoutside]: inserted')
+    if (process.env.NODE_ENV !== 'production') {
+      console.debug('[clickoutside]: inserted')
+    }
     // if (typeof bindings.value === 'function') {
     //   el[ctx] = {
     //     handler: bindings.modifiers.lazy ? lazyHandler(bindings.value) : bindings.value
@@ -44,7 +52,9 @@ const clickoutside = {
   //   }
   // },
   componentUpdated (el, bindings) {
-    console.debug('[clickoutside]: componentUpdated')
+    if (process.env.NODE_ENV !== 'production') {
+      console.debug('[clickoutside]: componentUpdated')
+    }
     if (typeof bindings.value === 'function') {
       if (el[ctx] && el[ctx].handler) {
         if (el[ctx].handler !== bindings.value) {
@@ -63,7 +73,9 @@ const clickoutside = {
     }
   },
   unbind (el) {
-    console.debug('[clickoutside]: unbind')
+    if (process.env.NODE_ENV !== 'production') {
+      console.debug('[clickoutside]: unbind')
+    }
     el[ctx] && clickoutsideDelegate.unregisterHandler(el[ctx].handler)
   }
 }

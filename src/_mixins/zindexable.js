@@ -24,7 +24,9 @@ export default {
   watch: {
     active (value) {
       if (!this.syntheticDetachable && !this.zindexable) return
-      console.debug('[zindexable.watch.active]:', value)
+      if (process.env.NODE_ENV !== 'production') {
+        console.debug('[zindexable.watch.active]:', value)
+      }
       if (value) {
         this._initZindexable()
         zIndexManager.setNewZIndex(this._getZindexableContent(), this.zIndex)

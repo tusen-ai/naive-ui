@@ -1,6 +1,8 @@
 class MoveOutsideDelegate {
   constructor () {
-    console.debug('[MoveOutsideDelegate]: Ctor called')
+    if (process.env.NODE_ENV !== 'production') {
+      console.debug('[MoveOutsideDelegate]: Ctor called')
+    }
     this.handlers = new Map()
     this.handlerCount = 0
     this.handleMoveOutside = this.handleMoveOutside.bind(this)
@@ -33,14 +35,18 @@ class MoveOutsideDelegate {
     }
   }
   unregisterHandler (handler) {
-    console.debug('[MoveOutsideDelegate]: unregisterHandler')
+    if (process.env.NODE_ENV !== 'production') {
+      console.debug('[MoveOutsideDelegate]: unregisterHandler')
+    }
     const h = this.handlers.get(handler)
     if (h) {
       this.handlers.delete(handler)
       --this.handlerCount
     }
     if (!this.handlerCount) {
-      console.debug('[MoveOutsideDelegate]: remove handler from window')
+      if (process.env.NODE_ENV !== 'production') {
+        console.debug('[MoveOutsideDelegate]: remove handler from window')
+      }
       window.removeEventListener('mousemove', this.handleMoveOutside, true)
       this.handlers = new Map()
     }
@@ -57,7 +63,9 @@ class MoveOutsideDelegate {
       return
     }
     if (!this.handlerCount) {
-      console.debug('[MoveOutsideDelegate]: add handler to window')
+      if (process.env.NODE_ENV !== 'production') {
+        console.debug('[MoveOutsideDelegate]: add handler to window')
+      }
       window.addEventListener('mousemove', this.handleMoveOutside, true)
     }
     ++this.handlerCount
