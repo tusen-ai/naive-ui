@@ -25,6 +25,9 @@ function createMutableStyleId (
   dependencyKey,
   dependencyValue
 ) {
+  if (dependencyKey === 'syntheticTheme') {
+    return componentName + '-' + renderedTheme
+  }
   return (
     componentName + '-' +
     renderedTheme + '-' +
@@ -91,7 +94,7 @@ function setupImmutableStyle (
   CNode
 ) {
   const mountId = createImmutableStyleId(
-    instance.$options.name + '-immutable'
+    instance.$options.name
   )
   if (isStyleMounted(mountId)) return
   CNode.mount({
