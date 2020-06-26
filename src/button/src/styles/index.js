@@ -1,6 +1,6 @@
-import colorStyle from './color.cssr.js'
-import sizeStyle from './size.cssr.js'
-import baseStyle from './base.cssr.js'
+import colorStyle from './themed-color.cssr.js'
+import sizeStyle from './themed-size.cssr.js'
+import baseStyle from './themed-base.cssr.js'
 
 export default [
   {

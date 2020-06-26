@@ -3,15 +3,15 @@
     class="n-badge"
     :class="{
       'n-badge--dot': dot,
-      'n-badge--processing': processing,
-      [`n-badge--${type}-type`]: type,
+      [`n-badge--${type}-type`]: true,
+      [`n-badge--${color || type}-colored`]: true,
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
       [`n-badge--as-is`]: !$scopedSlots.default
     }"
   >
     <slot />
     <transition
-      name="n-badge-transition"
+      name="n-fade-in-scale-up-transition"
       @after-enter="handleAfterEnter"
       @after-leave="handleAfterLeave"
     >
@@ -19,15 +19,14 @@
         v-if="showBadge"
         class="n-badge-sup"
       >
-        <div
-          v-if="processing"
-          class="n-badge-sup__ripple-mask"
-        />
         <n-base-slot-machine
           v-if="!dot"
           :appeared="appeared"
           :max="max"
           :value="value"
+        />
+        <n-base-wave
+          v-if="processing"
         />
       </sup>
     </transition>
@@ -37,14 +36,22 @@
 <script>
 import themeable from '../../_mixins/themeable'
 import withapp from '../../_mixins/withapp'
-import NBaseSlotMachine from '../../_base/SlotMachine'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/index.js'
+import NBaseSlotMachine from '../../_base/slot-machine'
+import NBaseWave from '../../_base/wave'
 
 export default {
   name: 'NBadge',
   components: {
-    NBaseSlotMachine
+    NBaseSlotMachine,
+    NBaseWave
   },
-  mixins: [withapp, themeable],
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   props: {
     value: {
       type: [String, Number],
@@ -75,6 +82,10 @@ export default {
     processing: {
       type: Boolean,
       default: false
+    },
+    color: {
+      type: String,
+      default: null
     }
   },
   data () {

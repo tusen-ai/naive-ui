@@ -3,16 +3,16 @@ import { read, createHoverColor, createActiveColor } from '../../../_utils/color
 
 function createRippleAnimation (digest, color, theme) {
   return [
-    c(`@keyframes ${theme}-${digest}-button-wave-spread`, {
+    c(`@keyframes ${theme && theme + '-'}${digest}-button-wave-spread`, {
       from: {
-        boxShadow: `0 0 0 ${color}`
+        boxShadow: `0 0 0.5px 0 ${color}`
       },
       to: {
         // don't use exact 5px since chrome will display the animation with glitches
         boxShadow: `0 0 0.5px 4.5px ${color}`
       }
     }),
-    c(`@keyframes ${theme}-${digest}-button-wave-opacity`, {
+    c(`@keyframes ${theme && theme + '-'}${digest}-button-wave-opacity`, {
       from: {
         opacity: 0.6
       },
@@ -97,7 +97,7 @@ export default c([
             cB('base-wave', [
               cM('active', {
                 zIndex: 1,
-                animationName: `${theme}-${digest}-button-wave-spread, ${theme}-${digest}-button-wave-opacity`
+                animationName: `${theme && theme + '-'}${digest}-button-wave-spread, ${theme && theme + '-'}${digest}-button-wave-opacity`
               })
             ]),
             // button styles

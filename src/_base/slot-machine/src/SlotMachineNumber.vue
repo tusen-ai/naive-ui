@@ -85,7 +85,7 @@ export default {
     value (value, oldValue) {
       this.oldNumber = oldValue
       this.newNumber = value
-      this.$nextTick().then(this.scroll)
+      this.$nextTick(this.scroll)
     }
   },
   mounted () {
@@ -111,7 +111,7 @@ export default {
     scrollUp () {
       this.scrollAnimationDirection = 'up'
       this.active = false
-      this.$nextTick().then(() => {
+      this.$nextTick(() => {
         this.$el.getBoundingClientRect()
         this.active = true
       })
@@ -119,7 +119,7 @@ export default {
     scrollDown () {
       this.scrollAnimationDirection = 'down'
       this.active = false
-      this.$nextTick().then(() => {
+      this.$nextTick(() => {
         this.$el.getBoundingClientRect()
         this.active = true
       })

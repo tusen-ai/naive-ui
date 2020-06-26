@@ -29,7 +29,7 @@ import Layout from './Layout'
 import Scrollbar from './Scrollbar'
 import Steps from './Steps'
 import ConfirmPlugin from './Confirm'
-import Badge from './Badge'
+import Badge from './badge'
 import Tag from './Tag'
 import BackTop from './BackTop'
 import Divider from './Divider'
@@ -76,6 +76,8 @@ import lightBaseStyle from './styles/base/light'
 import darkBaseStyle from './styles/base/dark'
 import lightButtonStyle from './styles/button/light'
 import darkButtonStyle from './styles/button/dark'
+import lightBadgeStyle from './styles/badge/light'
+import darkBadgeStyle from './styles/badge/dark'
 
 // Deprecated Components
 import NimbusFormCard from './_deprecated/NimbusFormCard'
@@ -170,11 +172,13 @@ export default create({
   _themes: {
     light: {
       base: lightBaseStyle,
-      NButton: lightButtonStyle
+      NButton: lightButtonStyle,
+      NBadge: lightBadgeStyle
     },
     dark: {
       base: darkBaseStyle,
-      NButton: darkButtonStyle
+      NButton: darkButtonStyle,
+      NBadge: darkBadgeStyle
     }
   }
 })

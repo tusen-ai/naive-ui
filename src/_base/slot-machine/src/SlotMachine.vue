@@ -3,7 +3,7 @@
     v-if="valueIsNumber"
     class="n-scroll-numbers"
   >
-    <scroll-number
+    <slot-machine-number
       v-for="(number, i) in numbers"
       :key="numbers.length - i - 1"
       :appeared="appeared"
@@ -11,7 +11,7 @@
       :new-original-number="newValue"
       :value="number"
     />
-    <scroll-number
+    <slot-machine-number
       v-if="max && max < value"
       :appeared="appeared"
       :value="'+'"
@@ -26,12 +26,12 @@
 </template>
 
 <script>
-import ScrollNumber from './ScrollNumber'
+import SlotMachineNumber from './SlotMachineNumber.vue'
 
 export default {
   name: 'NBaseSlotMachine',
   components: {
-    ScrollNumber
+    SlotMachineNumber
   },
   props: {
     value: {

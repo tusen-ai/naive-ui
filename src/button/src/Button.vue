@@ -102,7 +102,7 @@ import NBaseWave from '../../_base/wave/index.js'
 import NIcon from '../../Icon/index.js'
 import styles from './styles/index.js'
 import { read, hash } from '../../_utils/color/index.js'
-import colorStyle from './styles/color.cssr.js'
+import colorStyle from './styles/themed-color.cssr.js'
 
 export default {
   name: 'NButton',
