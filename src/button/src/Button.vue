@@ -12,7 +12,6 @@
       'n-button--disabled': disabled,
       'n-button--loading': loading,
       'n-button--block': block,
-      'n-button--rippling': rippling,
       'n-button--enter-pressed': enterPressed,
       'n-button--ghost': ghost,
       'n-button--text': text,
@@ -86,6 +85,7 @@
     >
       <slot />
     </div>
+    <n-base-wave v-if="!text" ref="wave" />
     <div class="n-button__border-mask" />
   </button>
 </template>
@@ -98,6 +98,7 @@ import usecssr from '../../_mixins/usecssr'
 import NFadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 import NBaseLoading from '../../_base/Loading'
+import NBaseWave from '../../_base/wave'
 import NIcon from '../../Icon'
 import styles from './styles/index.js'
 // import { read, hash, createHoverColor, createActiveColor } from '../../_utils/color'
@@ -150,6 +151,7 @@ export default {
   name: 'NButton',
   components: {
     NBaseLoading,
+    NBaseWave,
     NIcon,
     NIconSwitchTransition,
     NFadeInHeightExpandTransition
@@ -254,9 +256,7 @@ export default {
   },
   data () {
     return {
-      enterPressed: false,
-      rippling: false,
-      rippleTimer: null
+      enterPressed: false
     }
   },
   computed: {
@@ -335,10 +335,6 @@ export default {
     // if (colorHash) {
     //   unmountColorStyle(colorHash)
     // }
-    const rippleTimer = this.rippleTimer
-    if (rippleTimer !== null) {
-      window.clearTimeout(rippleTimer)
-    }
   },
   methods: {
     handleMouseDown (e) {
@@ -354,17 +350,10 @@ export default {
       if (!this.disabled) {
         this.$emit('click', e)
         if (!this.text) {
-          window.clearTimeout(this.rippleTimer)
-          this.rippleTimer = null
-          this.rippling = false
-          this.$nextTick().then(() => {
-            void this.$el.offsetHeight
-            this.rippling = true
-            this.rippleTimer = window.setTimeout(() => {
-              this.rippling = false
-              this.rippleTimer = null
-            }, 600)
-          })
+          const waveRef = this.$refs.wave
+          if (waveRef) {
+            waveRef.play()
+          }
         }
       }
     },
@@ -374,7 +363,7 @@ export default {
         return
       }
       this.enterPressed = false
-      this.$nextTick().then(() => {
+      this.$nextTick(() => {
         if (!this.disabled) {
           this.$el.click()
         }

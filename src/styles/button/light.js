@@ -35,7 +35,7 @@ export default create({
 
         rippleColor: derived.primaryColor,
 
-        iconColor: derived.tertiaryTextColor
+        iconColor: derived.secondaryTextColor
       },
       primary: {
         color: derived.primaryColor,

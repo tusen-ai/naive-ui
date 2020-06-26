@@ -28,5 +28,6 @@ export default {
     small: '18px',
     medium: '18px',
     large: '20px'
-  }
+  },
+  waveDuration: '.6s'
 }
