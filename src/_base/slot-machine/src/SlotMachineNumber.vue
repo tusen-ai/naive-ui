@@ -2,10 +2,11 @@
   <transition
     :name="isNotNumber ? 'n-fade-in-width-expand-transition' : 'n-fade-up-width-expand-transition'"
     :appear="appeared"
+    @leave="handleLeave"
   >
     <span
       ref="numbers"
-      class="n-scroll-number"
+      class="n-base-slot-machine-number"
       :style="{
         maxWidth: styleMaxWidth,
         width: styleMaxWidth
@@ -13,25 +14,25 @@
     >
       <span
         v-if="oldNumber !== null"
-        class="n-scroll-number-old-number n-scroll-number-old-number--top"
+        class="n-base-slot-machine-old-number n-base-slot-machine-old-number--top"
         :class="oldNumberScrollAnimationClass"
       >{{ oldNumber }}</span>
       <span
-        class="n-scroll-number-current-number"
+        class="n-base-slot-machine-current-number"
         :class="newNumberScrollAnimationClass"
       >
         <span
           ref="numberWrapper"
-          class="n-scroll-number-current-number__inner"
+          class="n-base-slot-machine-current-number__inner"
           :class="{
-            'n-scroll-number-current-number__inner--not-number':
+            'n-base-slot-machine-current-number__inner--not-number':
               isNotNumber
           }"
         >{{ newNumber }}</span>
       </span>
       <span
         v-if="oldNumber !== null"
-        class="n-scroll-number-old-number n-scroll-number-old-number--bottom"
+        class="n-base-slot-machine-old-number n-base-slot-machine-old-number--bottom"
         :class="oldNumberScrollAnimationClass"
       >{{ oldNumber }}</span>
     </span>
@@ -69,13 +70,13 @@ export default {
   },
   computed: {
     newNumberScrollAnimationClass () {
-      return this.active ? `n-scroll-number-current-number--${this.scrollAnimationDirection}-scroll` : null
+      return this.active ? `n-base-slot-machine-current-number--${this.scrollAnimationDirection}-scroll` : null
     },
     oldNumberScrollAnimationClass () {
-      return this.active ? `n-scroll-number-old-number--${this.scrollAnimationDirection}-scroll` : null
+      return this.active ? `n-base-slot-machine-old-number--${this.scrollAnimationDirection}-scroll` : null
     },
     styleMaxWidth () {
-      return this.maxWidth ? `${this.maxWidth}px` : null
+      return this.maxWidth !== null ? `${this.maxWidth}px` : null
     },
     isNotNumber () {
       return !(typeof this.value === 'number')
@@ -89,15 +90,25 @@ export default {
     }
   },
   mounted () {
-    this.maxWidth = this.$refs.numberWrapper.offsetWidth
-  },
-  updated () {
-    this.maxWidth = this.$refs.numberWrapper.offsetWidth
+    if (this.appeared) {
+      this.maxWidth = 0
+      this.$nextTick(() => {
+        void this.$el.offsetWidth
+        this.maxWidth = this.$refs.numberWrapper.offsetWidth
+      })
+    } else {
+      this.maxWidth = this.$refs.numberWrapper.offsetWidth
+    }
   },
   created () {
     this.newNumber = this.value
   },
   methods: {
+    handleLeave () {
+      if (this.isNotNumber) {
+        this.$el.style.maxWidth = 0
+      }
+    },
     scroll () {
       const newOriginalNumber = this.newOriginalNumber
       const oldOriginalNumber = this.oldOriginalNumber
@@ -112,7 +123,7 @@ export default {
       this.scrollAnimationDirection = 'up'
       this.active = false
       this.$nextTick(() => {
-        this.$el.getBoundingClientRect()
+        void this.$el.offsetWidth
         this.active = true
       })
     },
@@ -120,7 +131,7 @@ export default {
       this.scrollAnimationDirection = 'down'
       this.active = false
       this.$nextTick(() => {
-        this.$el.getBoundingClientRect()
+        void this.$el.offsetWidth
         this.active = true
       })
     }

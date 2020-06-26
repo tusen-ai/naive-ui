@@ -1,7 +1,7 @@
 <template>
   <span
     v-if="valueIsNumber"
-    class="n-scroll-numbers"
+    class="n-base-slot-machine"
   >
     <slot-machine-number
       v-for="(number, i) in numbers"
@@ -13,13 +13,14 @@
     />
     <slot-machine-number
       v-if="max && max < value"
+      key="+"
       :appeared="appeared"
       :value="'+'"
     />
   </span>
   <span
     v-else
-    class="n-scroll-numbers"
+    class="n-base-slot-machine"
   >
     {{ value }}
   </span>
@@ -27,12 +28,17 @@
 
 <script>
 import SlotMachineNumber from './SlotMachineNumber.vue'
+import usecssr from '../../../_mixins/usecssr.js'
+import styles from './styles/index.js'
 
 export default {
   name: 'NBaseSlotMachine',
   components: {
     SlotMachineNumber
   },
+  mixins: [
+    usecssr(styles)
+  ],
   props: {
     value: {
       type: [Number, String],
