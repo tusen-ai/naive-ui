@@ -10,8 +10,14 @@
 </template>
 
 <script>
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/index.js'
+
 export default {
   name: 'NButtonGroup',
+  mixins: [
+    usecssr(styles)
+  ],
   provide () {
     return {
       NButtonGroup: this
