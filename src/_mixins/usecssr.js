@@ -19,7 +19,7 @@ function getThemeVariables (naive, themeName) {
   return theme.base
 }
 
-function createMountId (
+function createMutableStyleId (
   componentName,
   renderedTheme,
   dependencyKey,
@@ -32,7 +32,13 @@ function createMountId (
   )
 }
 
-function prepareTheme (
+function createImmutableStyleId (
+  componentName
+) {
+  return componentName
+}
+
+function setupMutableStyle (
   instance,
   theme,
   dependencyKey,
@@ -52,7 +58,7 @@ function prepareTheme (
   ) {
     console.error(`[naive-ui/mixins/usecssr]: ${options.name}.${dependencyKey} is ${dependencyValue}`)
   }
-  const mountId = createMountId(
+  const mountId = createMutableStyleId(
     options.name,
     renderedTheme,
     dependencyKey,
@@ -80,26 +86,46 @@ function prepareTheme (
   markStyleMounted(mountId)
 }
 
+function setupImmutableStyle (
+  instance,
+  CNode
+) {
+  const mountId = createImmutableStyleId(
+    instance.$options.name + '-immutable'
+  )
+  if (isStyleMounted(mountId)) return
+  CNode.mount({
+    target: mountId,
+    props: {
+      $instance: instance
+    }
+  })
+  markStyleMounted(mountId)
+}
+
 export default function (styles) {
   // collect watchers
   const watchers = {}
   styles.forEach(style => {
+    if (!style.watch) return
     style.watch.forEach(watchKey => {
       if (!watchers[watchKey]) watchers[watchKey] = []
-      watchers[watchKey].push(function (instance, syntheticTheme) {
-        if (process.env.NODE_ENV !== 'production') {
-          window.naive.styleRenderingDuration -= performance.now()
+      watchers[watchKey].push(
+        function (instance, syntheticTheme) {
+          if (process.env.NODE_ENV !== 'production') {
+            window.naive.styleRenderingDuration -= performance.now()
+          }
+          setupMutableStyle(
+            instance,
+            syntheticTheme || null,
+            style.key,
+            style.CNode
+          )
+          if (process.env.NODE_ENV !== 'production') {
+            window.naive.styleRenderingDuration += performance.now()
+          }
         }
-        prepareTheme(
-          instance,
-          syntheticTheme || null,
-          style.key,
-          style.CNode
-        )
-        if (process.env.NODE_ENV !== 'production') {
-          window.naive.styleRenderingDuration += performance.now()
-        }
-      })
+      )
     })
   })
   // create component watch options
@@ -122,12 +148,19 @@ export default function (styles) {
         if (process.env.NODE_ENV !== 'production') {
           window.naive.styleRenderingDuration -= performance.now()
         }
-        prepareTheme(
-          this,
-          this.syntheticTheme || null,
-          style.key,
-          style.CNode
-        )
+        if (style.key) {
+          setupMutableStyle(
+            this,
+            this.syntheticTheme || null,
+            style.key,
+            style.CNode
+          )
+        } else {
+          setupImmutableStyle(
+            this,
+            style.CNode
+          )
+        }
         if (process.env.NODE_ENV !== 'production') {
           window.naive.styleRenderingDuration += performance.now()
         }
