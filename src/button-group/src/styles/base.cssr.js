@@ -28,11 +28,13 @@ function createTopBorderStyle (type) {
 
 export default c([
   () => cB('button-group', {
-    whiteSpace: 'nowrap',
-    display: 'inline-block',
+    flexWrap: 'nowrap',
+    display: 'inline-flex',
     position: 'relative'
   }, [
-    cNotM('vertical', [
+    cNotM('vertical', {
+      flexDirection: 'row'
+    }, [
       cB('button', [
         c('&:first-child:not(:last-child)', {
           marginRight: zero,
@@ -60,7 +62,6 @@ export default c([
       ])
     ]),
     cM('vertical', {
-      display: 'inline-flex',
       flexDirection: 'column'
     }, [
       cB('button', [
