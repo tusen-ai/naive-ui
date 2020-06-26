@@ -1,4 +1,4 @@
-import { c, cTB2, cE, cM, cNotM } from '../../../_utils/cssr'
+import { c, cTB2, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 import fadeInWidthExpandTransition from '../../../styles/_transitions/fade-in-width-expand'
 
 export default c([
@@ -29,6 +29,15 @@ export default c([
         `
       },
       [
+        cB('base-wave', {
+          top: '-1px',
+          right: '-1px',
+          bottom: '-1px',
+          left: '-1px',
+          animationIterationCount: 1,
+          animationDuration: props.$local.waveDuration,
+          animationTimingFunction: `${base.easeOutCubicBezier}, ${base.easeOutCubicBezier}`
+        }),
         c('&::after', {
           raw: `
             pointer-events: none;

@@ -16,7 +16,7 @@
       'n-button--ghost': ghost,
       'n-button--text': text,
       [`n-button--${type}-type`]: true,
-      [`n-button--${type}-colored`]: true,
+      [`n-button--${colorDigest || type}-colored`]: true,
       [`n-button--${syntheticSize}-size`]: true,
       [`n-button--${iconPlacement}-icon`]: iconPlacement && !noTextContent,
       [`n-button--${iconDepth}-icon-depth`]: type === 'default',
@@ -98,54 +98,11 @@ import usecssr from '../../_mixins/usecssr'
 import NFadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 import NBaseLoading from '../../_base/Loading'
-import NBaseWave from '../../_base/wave'
-import NIcon from '../../Icon'
+import NBaseWave from '../../_base/wave/index.js'
+import NIcon from '../../Icon/index.js'
 import styles from './styles/index.js'
-// import { read, hash, createHoverColor, createActiveColor } from '../../_utils/color'
-// import { createColorStyle } from './styles/Button.cssr.js'
-// import { createThemedStyle } from '../../_utils/cssr'
-// import createTheme from './styles/theme'
-
-// const colorStyle = createColorStyle()
-// let typeStyle
-
-// function mountTypeStyle (type) {
-//   typeStyle.mount({
-//     target: 'n-button-' + type + '-style',
-//     props: {
-//       type
-//     }
-//   })
-// }
-
-// function mountColorStyle (color, colorHash) {
-//   const textColor = null
-//   const rgb = read(color)
-//   const digest = hash(rgb)
-//   const hoverColor = createHoverColor(rgb)
-//   const activeColor = createActiveColor(rgb)
-//   const focusColor = hoverColor
-//   colorStyle.mount({
-//     target: 'n-button-' + digest,
-//     props: {
-//       digest,
-//       pallete: {
-//         color,
-//         hoverColor,
-//         activeColor,
-//         focusColor,
-//         textColor
-//       }
-//     }
-//   })
-// }
-
-// function unmountColorStyle (colorHash) {
-//   colorStyle.unmount({
-//     target: 'n-button-' + colorHash,
-//     delay: 3000
-//   })
-// }
+import { read, hash } from '../../_utils/color/index.js'
+import colorStyle from './styles/color.cssr.js'
 
 export default {
   name: 'NButton',
@@ -260,14 +217,10 @@ export default {
     }
   },
   computed: {
-    // colorRgb () {
-    //   if (!this.color) return null
-    //   return read(this.color)
-    // },
-    // colorHash () {
-    //   if (!this.colorRgb) return null
-    //   return hash(this.colorRgb)
-    // },
+    colorDigest () {
+      if (!this.color) return null
+      return hash(read(this.color))
+    },
     syntheticSize () {
       const NButtonGroup = this.NButtonGroup
       if (NButtonGroup && NButtonGroup.size) {
@@ -306,35 +259,46 @@ export default {
       return this.iconPlacement === 'right'
     }
   },
-  // watch: {
-  //   colorHash (value, oldValue) {
-  //     unmountColorStyle(oldValue)
-  //   },
-  //   color (value) {
-  //     mountColorStyle(value)
-  //   },
-  //   type (value) {
-  //     mountTypeStyle(value)
-  //   }
-  // },
-  created () {
-    // const color = this.color
-    // if (color) {
-    //   mountColorStyle(color)
-    // }
-    // if (!typeStyle) {
-    //   typeStyle = createThemedStyle(colorStyle, createTheme(
-    //     this.$naive.styleSchemes,
-    //     this.$naive.fallbackTheme
-    //   ))
-    // }
-    // mountTypeStyle(this.type)
+  watch: {
+    colorDigest (value, oldValue) {
+      if (oldValue) {
+        colorStyle.unmount({
+          target: 'NButton-color-' + oldValue,
+          delay: 3000
+        })
+      }
+      if (value) {
+        colorStyle.mount({
+          target: 'NButton-color-' + value,
+          props: {
+            colorDigest: value,
+            color: this.color
+          }
+        })
+      }
+    }
+  },
+  beforeMount () {
+    const color = this.color
+    const colorDigest = this.colorDigest
+    if (color) {
+      colorStyle.mount({
+        target: 'NButton-color-' + colorDigest,
+        props: {
+          colorDigest,
+          color
+        }
+      })
+    }
   },
   beforeDestroy () {
-    // const colorHash = this.colorHash
-    // if (colorHash) {
-    //   unmountColorStyle(colorHash)
-    // }
+    const colorDigest = this.colorDigest
+    if (colorDigest) {
+      colorStyle.unmount({
+        target: 'NButton-color-' + colorDigest,
+        delay: 3000
+      })
+    }
   },
   methods: {
     handleMouseDown (e) {

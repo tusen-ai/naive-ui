@@ -1,4 +1,5 @@
 import { c, cB, cTB2, cE, cM, cNotM } from '../../../_utils/cssr'
+import { read, createHoverColor, createActiveColor } from '../../../_utils/color'
 
 function createRippleAnimation (digest, color, theme) {
   return [
@@ -32,6 +33,21 @@ function createColorProps (
   return properties
 }
 
+function createPallete (color) {
+  const textColor = null
+  const rgb = read(color)
+  const hoverColor = createHoverColor(rgb)
+  const activeColor = createActiveColor(rgb)
+  const focusColor = hoverColor
+  return {
+    color,
+    hoverColor,
+    activeColor,
+    focusColor,
+    textColor
+  }
+}
+
 function createIconColorStyle (iconColor) {
   return cE('icon', [
     cB('icon', {
@@ -53,12 +69,16 @@ function createBorderMaskStyle (color) {
 
 export default c([
   ({ props }) => {
-    const instanceColor = props.$instance.color
-    const instanceType = props.$instance.type
-    const digest = instanceColor || instanceType
-    const pallete = props.$local[digest]
+    let digest
+    let pallete
+    if (props.colorDigest) {
+      digest = props.colorDigest
+      pallete = createPallete(props.color)
+    } else {
+      digest = props.$instance.type
+      pallete = props.$local[digest]
+    }
     const theme = props.$renderedTheme
-    const base = props.$base
     return [
       createRippleAnimation(
         digest,
@@ -68,15 +88,6 @@ export default c([
       cTB2(
         'button',
         [
-          cB('base-wave', {
-            top: '-1px',
-            right: '-1px',
-            bottom: '-1px',
-            left: '-1px',
-            animationIterationCount: 1,
-            animationDuration: props.$local.waveDuration,
-            animationTimingFunction: `${base.easeOutCubicBezier} ${base.easeOutCubicBezier}`
-          }),
           cM(`${digest}-colored`, createColorProps(
             pallete.textColor,
             pallete.color,

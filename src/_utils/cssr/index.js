@@ -78,6 +78,7 @@ function cTB2 (selector, ...rest) {
     c(
       ({ props }) => {
         const renderedTheme = props.$renderedTheme
+        if (!renderedTheme) return ''
         const fallbackTheme = props.$fallbackTheme
         return (
           renderedTheme === fallbackTheme
