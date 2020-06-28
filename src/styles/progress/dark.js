@@ -3,7 +3,7 @@ import create from '../_utils/create-component-base'
 export default create({
   getDerivedVariables ({ derived }) {
     return {
-      railColor: derived.railBackgroundOverlayColor,
+      railColor: derived.progressRailBackgroundOverlayColor,
       default: {
         fillColor: derived.infoColor
       },
@@ -19,7 +19,7 @@ export default create({
       error: {
         fillColor: derived.errorColor
       },
-      insideIndicatorTextColor: derived.secondaryTextOverlayColor,
+      innerIndicatorTextColor: 'rgb(0, 0, 0)',
       outsideIndicatorTextColor: 'rgb(0, 0, 0)',
       processingLineBackgroundImage: 'linear-gradient(90deg, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, .5) 100%)'
     }

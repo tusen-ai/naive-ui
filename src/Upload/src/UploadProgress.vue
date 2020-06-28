@@ -13,7 +13,7 @@
 
 <script>
 import NFadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
-import NProgress from '../../Progress'
+import NProgress from '../../progress/index.js'
 
 export default {
   name: 'NUploadProgress',

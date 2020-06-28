@@ -26,6 +26,7 @@ export default create({
 
       alphaAvatar: '0.2',
       alphaRail: '0.14',
+      alphaProgressRail: '.08',
       alphaBorder: '0.14',
       alphaDivider: '0.08',
       alphaInput: '0',
@@ -142,6 +143,8 @@ export default create({
       scrollbarBackgroundOverlayColor: overlay(base.alphaScrollbar),
       scrollbarHoverBackgroundOverlayColor: overlay(base.alphaScrollbarHover),
 
+      progressRailBackgroundColor: neutral(base.alphaProgressRail),
+      progressRailBackgroundOverlayColor: overlay(base.alphaProgressRail),
       railBackgroundColor: neutral(base.alphaRail),
       railBackgroundOverlayColor: overlay(base.alphaRail),
 

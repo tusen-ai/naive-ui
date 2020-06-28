@@ -15,7 +15,7 @@ import Input from './Input'
 import Message from './Message'
 import Notification from './Notification'
 import Pagination from './Pagination'
-import Progress from './Progress'
+import Progress from './progress'
 import Tooltip from './Tooltip'
 import Popup from './Popover'
 import Alert from './Alert'
@@ -78,6 +78,8 @@ import lightButtonStyle from './styles/button/light'
 import darkButtonStyle from './styles/button/dark'
 import lightBadgeStyle from './styles/badge/light'
 import darkBadgeStyle from './styles/badge/dark'
+import lightProgressStyle from './styles/progress/light'
+import darkProgressStyle from './styles/progress/dark'
 
 // Deprecated Components
 import NimbusFormCard from './_deprecated/NimbusFormCard'
@@ -173,12 +175,14 @@ export default create({
     light: {
       base: lightBaseStyle,
       NButton: lightButtonStyle,
-      NBadge: lightBadgeStyle
+      NBadge: lightBadgeStyle,
+      NProgress: lightProgressStyle
     },
     dark: {
       base: darkBaseStyle,
       NButton: darkButtonStyle,
-      NBadge: darkBadgeStyle
+      NBadge: darkBadgeStyle,
+      NProgress: darkProgressStyle
     }
   }
 })

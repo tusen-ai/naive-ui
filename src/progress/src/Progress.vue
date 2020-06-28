@@ -238,6 +238,8 @@ import mdCloseCircle from '../../_icons/md-close-circle'
 import fontawareable from '../../_mixins/fontawarable'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/index.js'
 import formatLength from '../../_utils/css/formatLength'
 
 function circlePath (r, sw, vw = 100) {
@@ -255,7 +257,12 @@ export default {
     mdCheckmarkCircle,
     mdCloseCircle
   },
-  mixins: [withapp, themeable, fontawareable],
+  mixins: [
+    withapp,
+    themeable,
+    fontawareable,
+    usecssr(styles)
+  ],
   props: {
     processing: {
       type: Boolean,
