@@ -139,11 +139,11 @@ export default create({
       disabledCloseColor: neutral(base.alpha4),
       disabledCloseHoverColor: overlay(base.alpha4),
 
-      scrollbarOverlayBackgroundColor: overlay(base.alphaScrollbar),
-      scrollbarHoverOverlayBackgroundColor: overlay(base.alphaScrollbarHover),
+      scrollbarBackgroundOverlayColor: overlay(base.alphaScrollbar),
+      scrollbarHoverBackgroundOverlayColor: overlay(base.alphaScrollbarHover),
 
       railBackgroundColor: neutral(base.alphaRail),
-      railOverlayBackgroundColor: overlay(base.alphaRail),
+      railBackgroundOverlayColor: overlay(base.alphaRail),
 
       popoverBackgroundColor: base.neutralPopover,
       tableBodyBackgroundColor: base.neutralCard,
@@ -152,16 +152,16 @@ export default create({
       bodyBackgroundColor: base.neutralBody,
       tagBackgroundColor: neutral(base.alphaTag),
 
-      inputOverlayBackgroundColor: overlay(base.alphaInput),
-      codeOverlayBackgroundColor: overlay(base.alphaCode),
-      tabOverlayBackgroundColor: overlay(base.alphaTab),
-      avatarOverlayBackgroundColor: overlay(base.alphaAvatar),
-      actionOverlayBackgroundColor: overlay(base.alphaAction),
-      tableHeaderOverlayBackgroundColor: overlay(base.alphaAction),
+      inputBackgroundOverlayColor: overlay(base.alphaInput),
+      codeBackgroundOverlayColor: overlay(base.alphaCode),
+      tabBackgroundOverlayColor: overlay(base.alphaTab),
+      avatarBackgroundOverlayColor: overlay(base.alphaAvatar),
+      actionBackgroundOverlayColor: overlay(base.alphaAction),
+      tableHeaderBackgroundOverlayColor: overlay(base.alphaAction),
 
-      pendingOverlayBackgroundColor: overlay(base.alphaPending),
-      tablePendingOverlayBackgroundColor: overlay(base.alphaTablePending),
-      activeOverlayBackgroundColor: overlay(base.alphaActive),
+      pendingBackgroundOverlayColor: overlay(base.alphaPending),
+      tablePendingBackgroundOverlayColor: overlay(base.alphaTablePending),
+      activeBackgroundOverlayColor: overlay(base.alphaActive),
 
       disabledOpacity: base.alphaDisabled,
       disabledFillBackgroundColor: neutral(base.alphaDisabledFill),

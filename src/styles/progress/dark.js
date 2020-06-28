@@ -3,7 +3,7 @@ import create from '../_utils/create-component-base'
 export default create({
   getDerivedVariables ({ derived }) {
     return {
-      railColor: derived.railOverlayBackgroundColor,
+      railColor: derived.railBackgroundOverlayColor,
       default: {
         fillColor: derived.infoColor
       },
