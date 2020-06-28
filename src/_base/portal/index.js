@@ -1,8 +1,4 @@
 /* istanbul ignore file */
-import BasePortal from './src/main.js'
-
-BasePortal.install = function (Vue) {
-  Vue.component(BasePortal.name, BasePortal)
-}
+import BasePortal from './src/Portal.js'
 
 export default BasePortal

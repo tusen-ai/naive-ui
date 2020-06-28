@@ -1,7 +1,3 @@
-import Loader from './src/main.vue'
-
-Loader.install = function (Vue) {
-  Vue.component(Loader.name, Loader)
-}
+import Loader from './src/Loading.vue'
 
 export default Loader

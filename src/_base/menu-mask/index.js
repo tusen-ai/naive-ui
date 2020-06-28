@@ -1,7 +1,3 @@
-import MenuMask from './src/main.vue'
-
-MenuMask.install = function (Vue) {
-  Vue.component(MenuMask.name, MenuMask)
-}
+import MenuMask from './src/MenuMask.vue'
 
 export default MenuMask

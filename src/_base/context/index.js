@@ -1,8 +1,4 @@
 /* istanbul ignore file */
-import BaseContext from './src/main.js'
-
-BaseContext.install = function (Vue) {
-  Vue.component(BaseContext.name, BaseContext)
-}
+import BaseContext from './src/Context.js'
 
 export default BaseContext

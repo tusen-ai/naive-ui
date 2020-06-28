@@ -1,7 +1,3 @@
-import TrackingRect from './src/main.vue'
-
-TrackingRect.install = function (Vue) {
-  Vue.component(TrackingRect.name, TrackingRect)
-}
+import TrackingRect from './src/TrackingRect.vue'
 
 export default TrackingRect
