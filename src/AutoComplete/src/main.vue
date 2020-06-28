@@ -69,7 +69,7 @@ import clickoutside from '../../_directives/clickoutside'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asformitem from '../../_mixins/asformitem'
-import NBaseSelectMenu from '../../_base/SelectMenu'
+import NBaseSelectMenu from '../../_base/select-menu'
 import { mapAutoCompleteOptionsToSelectOptions } from './utils'
 
 export default {

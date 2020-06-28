@@ -1,5 +1,5 @@
 import clickoutside from '../../../_directives/clickoutside'
-import focusDetector from '../../../_base/FocusDetector'
+import focusDetector from '../../../_base/focus-detector'
 import locale from '../../../_mixins/locale'
 import keyboardDelegate from '../../../_utils/delegate/keyboardDelegate'
 import { KEY_CODE } from '../../../_utils/event/keyCode'

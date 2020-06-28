@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import NBaseLoading from '../../_base/Loading'
+import NBaseLoading from '../../_base/loading'
 
 export default {
   components: {

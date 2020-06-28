@@ -181,7 +181,7 @@
 </template>
 
 <script>
-import NBaseSuffix from '../../Suffix'
+import NBaseSuffix from '../../suffix'
 import NTag from '../../../Tag'
 import { mountStyleAsFormItem } from './styles/Selection.cssr.js'
 

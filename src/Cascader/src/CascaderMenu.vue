@@ -37,7 +37,7 @@
   </div>
 </template>
 <script>
-import NBaseMenuMask from '../../_base/MenuMask'
+import NBaseMenuMask from '../../_base/menu-mask'
 import NCascaderSubmenu from './CascaderSubmenu'
 import placeable from '../../_mixins/placeable'
 import { minus, merge, getPickerElement } from './utils'

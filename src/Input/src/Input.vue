@@ -158,7 +158,7 @@
 </template>
 
 <script>
-import NBaseSuffix from '../../_base/Suffix'
+import NBaseSuffix from '../../_base/suffix'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asformitem from '../../_mixins/asformitem'

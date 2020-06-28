@@ -95,7 +95,7 @@
 <script>
 import NSelect from '../../Select'
 import NInput from '../../Input'
-import NBaseIcon from '../../_base/Icon'
+import NBaseIcon from '../../_base/icon'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import locale from '../../_mixins/locale'

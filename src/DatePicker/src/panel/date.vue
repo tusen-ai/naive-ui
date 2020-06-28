@@ -108,7 +108,7 @@
 </template>
 
 <script>
-import NBaseIcon from '../../../_base/Icon'
+import NBaseIcon from '../../../_base/icon'
 import uniCalendarMixin from './uniCalendarMixin'
 import startOfDay from 'date-fns/startOfDay'
 

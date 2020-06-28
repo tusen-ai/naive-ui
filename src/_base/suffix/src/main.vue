@@ -40,7 +40,7 @@
 <script>
 import CancelIcon from './CancelIcon.vue'
 import IconSwitchTransition from '../../../_transition/IconSwitchTransition'
-import NBaseLoading from '../../Loading'
+import NBaseLoading from '../../loading'
 import { mountStyleAsFormItem } from './styles/Suffix.cssr.js'
 
 export default {

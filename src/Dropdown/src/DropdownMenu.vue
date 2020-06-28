@@ -4,7 +4,7 @@ import themeable from '../../_mixins/themeable'
 import { getRootDropdownMenu, createSelectOptions } from './utils'
 import { KEY_CODE } from '../../_utils/event/keyCode'
 import keyboardDelegate from '../../_utils/delegate/keyboardDelegate'
-import NBaseSelectMenu from '../../_base/SelectMenu'
+import NBaseSelectMenu from '../../_base/select-menu'
 
 export default {
   name: 'NDropdownMenu',

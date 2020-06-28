@@ -86,14 +86,14 @@
 </template>
 
 <script>
-import NBaseSelection from '../../_base/Selection'
+import NBaseSelection from '../../_base/selection'
+import NBasePortal from '../../_base/portal'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import clickoutside from '../../_directives/clickoutside'
 import CascaderMenu from './CascaderMenu'
 import { getType, traverseWithCallback } from './utils'
 import asformitem from '../../_mixins/asformitem'
-import NBasePortal from '../../_base/Portal'
 import CascaderSelectMenu from './CascaderSelectMenu'
 import locale from '../../_mixins/locale'
 

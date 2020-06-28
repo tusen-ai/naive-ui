@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import NBasePortal from '../../_base/Portal'
+import NBasePortal from '../../_base/portal'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import zindexable from '../../_mixins/zindexable'

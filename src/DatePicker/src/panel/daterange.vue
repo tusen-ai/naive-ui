@@ -177,7 +177,7 @@
 
 <script>
 import NButton from '../../../button'
-import NBaseIcon from '../../../_base/Icon'
+import NBaseIcon from '../../../_base/icon'
 import dualCalendarMixin from './dualCalendarMixin'
 import startOfDay from 'date-fns/startOfDay'
 

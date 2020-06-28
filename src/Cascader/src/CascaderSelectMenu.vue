@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import NBaseSelectMenu from '../../_base/SelectMenu'
+import NBaseSelectMenu from '../../_base/select-menu'
 import { traverseWithCallback, getPickerElement } from './utils'
 import placeable from '../../_mixins/placeable'
 import zindexable from '../../_mixins/zindexable'

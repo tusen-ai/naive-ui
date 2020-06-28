@@ -20,7 +20,7 @@
 
 <script>
 import mdArrowDropright from '../../_icons/md-arrow-dropright'
-import NBaseLoading from '../../_base/Loading'
+import NBaseLoading from '../../_base/loading'
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 
 export default {

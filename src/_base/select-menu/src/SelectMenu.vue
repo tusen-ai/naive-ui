@@ -109,7 +109,7 @@
 import NScrollbar from '../../../Scrollbar'
 import NSelectOption from './SelectOption.vue'
 import NSelectGroupHeader from './SelectGroupHeader.vue'
-import NBaseTrackingRect from '../../TrackingRect'
+import NBaseTrackingRect from '../../tracking-rect'
 import NEmpty from '../../../Empty'
 import { RecycleScroller } from 'vue-virtual-scroller'
 import render from '../../../_utils/vue/render'
