@@ -20,7 +20,7 @@ export default create({
         fillColor: derived.errorColor
       },
       innerIndicatorTextColor: 'rgb(255, 255, 255)',
-      outsideIndicatorTextColor: 'rgb(255, 255, 255)',
+      outerIndicatorTextColor: 'rgb(255, 255, 255)',
       processingLineBackgroundImage: 'linear-gradient(90deg, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, .5) 100%)'
     }
   }
