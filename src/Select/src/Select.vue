@@ -32,6 +32,7 @@
       :size="syntheticSize"
       :theme="syntheticTheme"
       :loading="loading"
+      :autofocus="autofocus"
       @click="handleActivatorClick"
       @delete-last-option="handleDeleteLastOption"
       @delete-option="handleToggleOption"
@@ -232,6 +233,10 @@ export default {
     items: {
       type: Array,
       default: undefined
+    },
+    autofocus: {
+      type: Boolean,
+      default: false
     }
   },
   data () {

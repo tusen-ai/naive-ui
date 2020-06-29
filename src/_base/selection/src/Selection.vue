@@ -81,6 +81,7 @@
             tabindex="-1"
             :disabled="disabled"
             :value="pattern"
+            :autofocus="autofocus"
             class="n-base-selection-input-tag__input"
             @blur="handlePatternInputBlur"
             @focus="handlePatternInputFocus"
@@ -123,9 +124,10 @@
           class="n-base-selection-label__input"
           :value="(patternInputFocused && active) ? pattern : label"
           :placeholder="selectedOption ? label : placeholder"
-          :readonly="!disabled && filterable && active ? false : 'readonly'"
+          :readonly="!disabled && filterable && (active || autofocus) ? false : 'readonly'"
           :disabled="disabled"
           tabindex="-1"
+          :autofocus="autofocus"
           @focus="handlePatternInputFocus"
           @blur="handlePatternInputBlur"
           @input="handlePatternInputInput"
@@ -250,6 +252,10 @@ export default {
       default: 'medium'
     },
     loading: {
+      type: Boolean,
+      default: false
+    },
+    autofocus: {
       type: Boolean,
       default: false
     }

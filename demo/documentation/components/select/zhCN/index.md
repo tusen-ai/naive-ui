@@ -43,6 +43,7 @@ change-debug
 |tag|`boolean`|`false`|是否可以创建新的选项，需要和 `filterable` 一起使用|
 |theme|`'light' \| 'dark' \| null`|`null`||
 |value|`Array<string \| number> \| string \| number`|`false`||
+|autofocus|`boolean`|`false`||
 
 ### SelectOption Properties
 |名称|类型|说明|
