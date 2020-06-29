@@ -42,6 +42,7 @@ fallback-option
 |tag|`boolean`|`false`|Whether it can create new option, should be used with `filterable`.|
 |theme|`'light' \| 'dark' \| null`|`null`||
 |value|`Array<string \| number> \| string \| number`|`false`||
+|autofocus|`boolean`|`false`||
 
 ### SelectOption Properties
 |Name|Type|Description|

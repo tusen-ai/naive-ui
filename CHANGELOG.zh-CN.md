@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.4.1 (2020-06-23)
+### Features
+- 为 `n-select`　增加了　`autofocus`　属性.
+
 ## 1.4.0 (2020-06-19)
 ### Breaking Changes
 - `n-menu` 不再支持 slot API
