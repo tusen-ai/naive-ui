@@ -80,6 +80,8 @@ import lightBadgeStyle from './styles/badge/light'
 import darkBadgeStyle from './styles/badge/dark'
 import lightProgressStyle from './styles/progress/light'
 import darkProgressStyle from './styles/progress/dark'
+import lightBaseSelection from './styles/_base/selection/light'
+import darkBaseSelection from './styles/_base/selection/dark'
 
 // Deprecated Components
 import NimbusFormCard from './_deprecated/NimbusFormCard'
@@ -171,18 +173,21 @@ export default create({
     dark: darkScheme
   },
   fallbackTheme: 'light',
+  // API to be refined
   _themes: {
     light: {
       base: lightBaseStyle,
       NButton: lightButtonStyle,
       NBadge: lightBadgeStyle,
-      NProgress: lightProgressStyle
+      NProgress: lightProgressStyle,
+      NBaseSelection: lightBaseSelection
     },
     dark: {
       base: darkBaseStyle,
       NButton: darkButtonStyle,
       NBadge: darkBadgeStyle,
-      NProgress: darkProgressStyle
+      NProgress: darkProgressStyle,
+      NBaseSelection: darkBaseSelection
     }
   }
 })
