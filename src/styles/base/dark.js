@@ -17,9 +17,10 @@ export default create({
       alpha2: '0.82',
       alpha3: '0.52',
       alpha4: '0.38',
+      alpha5: '0.2',
 
       alphaDisabled: '0.6',
-      alphaDisabledFill: '0.06',
+      alphaDisabledInput: '0.06',
       alphaPending: '0.09',
       alphaTablePending: '0.06',
       alphaActive: '0.03',
@@ -118,12 +119,14 @@ export default create({
       tertiaryTextOverlayColor: overlay(base.alpha3),
       quaternaryTextColor: neutral(base.alpha4), // disabled, placeholder, icon
       quaternaryTextOverlayColor: overlay(base.alpha4),
+      quinaryTextColor: neutral(base.alpha5),
+      quinaryTextOverlayColor: overlay(base.alpha5),
 
       primaryOpacity: base.alpha1,
       secondaryOpacity: base.alpha2,
       tertiaryOpacity: base.alpha3,
       pendingOpacity: base.alphaPending,
-      disabledFillOpacity: base.alphaDisabledFill,
+      disabledInputOpacity: base.alphaDisabledInput,
 
       iconColor: neutral(base.alpha4),
       iconOverlayColor: overlay(base.alpha4),
@@ -155,6 +158,7 @@ export default create({
       bodyBackgroundColor: base.neutralBody,
       tagBackgroundColor: neutral(base.alphaTag),
 
+      inputBackgroundColor: neutral(base.alphaInput),
       inputBackgroundOverlayColor: overlay(base.alphaInput),
       codeBackgroundOverlayColor: overlay(base.alphaCode),
       tabBackgroundOverlayColor: overlay(base.alphaTab),
@@ -167,8 +171,8 @@ export default create({
       activeBackgroundOverlayColor: overlay(base.alphaActive),
 
       disabledOpacity: base.alphaDisabled,
-      disabledFillBackgroundColor: neutral(base.alphaDisabledFill),
-
+      disabledInputBackgroundColor: neutral(base.alphaDisabledInput),
+      disabledInputBackgroundOverlayColor: overlay(base.alphaDisabledInput),
       messageColoredBoxShadow: null
     }
     return derived

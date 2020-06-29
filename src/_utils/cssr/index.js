@@ -29,7 +29,7 @@ const cTB = (selector, ...rest) => {
   ])
 }
 
-// @deprecated
+/** @deprecated */
 function createThemedStyle (style, themes) {
   const fallbackPallete = themes.fallback
   return c([
@@ -62,10 +62,21 @@ function createThemedStyle (style, themes) {
   ])
 }
 
+/** @deprecated */
 function createStyleAsFormItem (style) {
   return c(`${prefix}form-item`, [
     c(`${prefix}form-item-blank`, [
       c(({ props }) => `&${prefix}form-item-blank${modifierPrefix}${props.status}`, [
+        style
+      ])
+    ])
+  ])
+}
+
+function insideFormItem (status, style) {
+  return c(`${prefix}form-item`, [
+    c(`${prefix}form-item-blank`, [
+      c(({ props }) => `&${prefix}form-item-blank${modifierPrefix}${status}`, [
         style
       ])
     ])
@@ -91,4 +102,4 @@ function cTB2 (selector, ...rest) {
   ])
 }
 
-export { c, cTB, cTB2, cB, cE, cM, cNotM, createThemedStyle, createStyleAsFormItem, namespace }
+export { c, cTB, cTB2, cB, cE, cM, cNotM, createThemedStyle, createStyleAsFormItem, namespace, insideFormItem }

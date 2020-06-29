@@ -98,7 +98,7 @@ export function composite (base, overlay) {
 export function changeColor (base, options) {
   const [r, g, b] = read(base)
   if (options.alpha) {
-    return `rgb(${r}, ${g}, ${b}, ${options.alpha})`
+    return `rgba(${r}, ${g}, ${b}, ${options.alpha})`
   }
   return `rgb(${r}, ${g}, ${b})`
 }

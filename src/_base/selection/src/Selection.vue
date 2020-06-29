@@ -183,9 +183,10 @@
 </template>
 
 <script>
-import NBaseSuffix from '../../suffix'
-import NTag from '../../../Tag'
-import { mountStyleAsFormItem } from './styles/Selection.cssr.js'
+import NBaseSuffix from '../../suffix/index.js'
+import NTag from '../../../Tag/index.js'
+import usecssr from '../../../_mixins/usecssr.js'
+import styles from './styles/index.js'
 
 export default {
   name: 'NBaseSelection',
@@ -193,6 +194,9 @@ export default {
     NBaseSuffix,
     NTag
   },
+  mixins: [
+    usecssr(styles)
+  ],
   inject: {
     NFormItem: {
       default: null
@@ -298,11 +302,6 @@ export default {
           }
         })
       }
-    }
-  },
-  created () {
-    if (this.NFormItem) {
-      mountStyleAsFormItem()
     }
   },
   methods: {
