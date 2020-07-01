@@ -185,6 +185,9 @@ light {
 ```
 我目前觉得第一种好点，因为扩展一般是按照种类扩展，每次插入一个同样结构的块。而第二种是每次扩展的时候在每个块里同样的位置插入一行，这样扩展的时候写起来很别扭。
 
+## 2020.7.1
+shouldMount 可以加到 usecssr
+
 ## TODO 排序不分先后
 1. <del>Focus Detector on Time Selector</del>
 2. <del>Menu Root Indent = 0 可能造成问题</del>

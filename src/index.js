@@ -82,6 +82,8 @@ import lightProgressStyle from './styles/progress/light'
 import darkProgressStyle from './styles/progress/dark'
 import lightBaseSelection from './styles/_base/selection/light'
 import darkBaseSelection from './styles/_base/selection/dark'
+import lightBaseSuffix from './styles/_base/suffix/light'
+import darkBaseSuffix from './styles/_base/suffix/dark'
 
 // Deprecated Components
 import NimbusFormCard from './_deprecated/NimbusFormCard'
@@ -180,14 +182,16 @@ export default create({
       NButton: lightButtonStyle,
       NBadge: lightBadgeStyle,
       NProgress: lightProgressStyle,
-      NBaseSelection: lightBaseSelection
+      NBaseSelection: lightBaseSelection,
+      NBaseSuffix: lightBaseSuffix
     },
     dark: {
       base: darkBaseStyle,
       NButton: darkButtonStyle,
       NBadge: darkBadgeStyle,
       NProgress: darkProgressStyle,
-      NBaseSelection: darkBaseSelection
+      NBaseSelection: darkBaseSelection,
+      NBaseSuffix: darkBaseSuffix
     }
   }
 })

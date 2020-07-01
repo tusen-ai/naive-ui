@@ -8,7 +8,6 @@ export default c([
     const base = props.$base
     const easeInOutCubicBezier = base.easeInOutCubicBezier
     const borderRadius = local.borderRadius
-    console.log(local)
     return cTB2('base-selection', {
       raw: `
         position: relative;

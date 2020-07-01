@@ -41,7 +41,8 @@
 import CancelIcon from './CancelIcon.vue'
 import IconSwitchTransition from '../../../_transition/IconSwitchTransition'
 import NBaseLoading from '../../loading'
-import { mountStyleAsFormItem } from './styles/Suffix.cssr.js'
+import usecssr from '../../../_mixins/usecssr'
+import styles from './styles'
 
 export default {
   name: 'NBaseSuffix',
@@ -55,6 +56,9 @@ export default {
     NBaseLoading,
     IconSwitchTransition
   },
+  mixins: [
+    usecssr(styles)
+  ],
   props: {
     theme: {
       type: String,
@@ -100,11 +104,6 @@ export default {
       if (!newValue) {
         this.mouseHovered = false
       }
-    }
-  },
-  created () {
-    if (this.NFormItem) {
-      mountStyleAsFormItem()
     }
   },
   methods: {
