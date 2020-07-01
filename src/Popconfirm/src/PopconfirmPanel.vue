@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import NButton from '../../Button'
+import NButton from '../../button'
 import NIcon from '../../Icon'
 import mdAlert from '../../_icons/md-alert'
 import locale from '../../_mixins/locale'

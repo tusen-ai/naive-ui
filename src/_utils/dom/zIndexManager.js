@@ -4,7 +4,9 @@
 
 class ZIndexManager {
   constructor () {
-    console.debug('[ZIndexManager]: Ctor called')
+    if (process.env.NODE_ENV !== 'production') {
+      console.debug('[ZIndexManager]: Ctor called')
+    }
     this.elementZIndex = new Map()
     this.nextZIndex = 2000
   }
@@ -12,12 +14,18 @@ class ZIndexManager {
     return this.elementZIndex.size
   }
   registerElement (el, zIndex) {
-    console.debug('[ZIndexManager.registerElement]: called', el)
+    if (process.env.NODE_ENV !== 'production') {
+      console.debug('[ZIndexManager.registerElement]: called', el)
+    }
     if (this.elementZIndex.has(el)) {
-      console.debug('[ZIndexManager.registerElement]: do not register duplicate element')
+      if (process.env.NODE_ENV !== 'production') {
+        console.debug('[ZIndexManager.registerElement]: do not register duplicate element')
+      }
     } else {
-      // console.debug('[ZIndexManager.registerElement]: successfully register', el)
-      console.debug('[ZIndexManager.registerElement]: successfully register $el')
+      if (process.env.NODE_ENV !== 'production') {
+        // console.debug('[ZIndexManager.registerElement]: successfully register', el)
+        console.debug('[ZIndexManager.registerElement]: successfully register $el')
+      }
       el.style.zIndex = this.nextZIndex
       if (zIndex !== undefined) {
         el.style.zIndex = zIndex
@@ -30,10 +38,14 @@ class ZIndexManager {
     this.afterManipulation()
   }
   setNewZIndex (el, zIndex) {
-    console.debug('[ZIndexManager.setNewZIndex]: called')
+    if (process.env.NODE_ENV !== 'production') {
+      console.debug('[ZIndexManager.setNewZIndex]: called')
+    }
     if (this.elementZIndex.has(el)) {
-      // console.debug('[ZIndexManager.setNewZIndex]: successfully set z-index on', el, `(z-index: ${this.nextZIndex})`)
-      console.debug('[ZIndexManager.setNewZIndex]: successfully set z-index on $el' + `(z-index: ${this.nextZIndex})`)
+      if (process.env.NODE_ENV !== 'production') {
+        // console.debug('[ZIndexManager.setNewZIndex]: successfully set z-index on', el, `(z-index: ${this.nextZIndex})`)
+        console.debug('[ZIndexManager.setNewZIndex]: successfully set z-index on $el' + `(z-index: ${this.nextZIndex})`)
+      }
       if (zIndex !== undefined) {
         el.style.zIndex = zIndex
         this.elementZIndex.set(el, null)
@@ -45,14 +57,20 @@ class ZIndexManager {
       this.elementZIndex.set(el, this.nextZIndex)
       this.nextZIndex++
     } else {
-      console.debug('[ZIndexManager.setNewZIndex]: element not found, please register it first')
+      if (process.env.NODE_ENV !== 'production') {
+        console.debug('[ZIndexManager.setNewZIndex]: element not found, please register it first')
+      }
     }
     this.afterManipulation()
   }
   unregisterElement (el) {
-    console.debug('[ZIndexManager.unregisterElement]: called')
+    if (process.env.NODE_ENV !== 'production') {
+      console.debug('[ZIndexManager.unregisterElement]: called')
+    }
     if (this.elementZIndex.has(el)) {
-      console.debug('[ZIndexManager.unregisterElement]: successfully delete $el') //, el)
+      if (process.env.NODE_ENV !== 'production') {
+        console.debug('[ZIndexManager.unregisterElement]: successfully delete $el') //, el)
+      }
       this.elementZIndex.delete(el)
     } else {
       console.error(

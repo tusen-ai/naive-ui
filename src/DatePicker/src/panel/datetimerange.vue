@@ -262,11 +262,11 @@
 </template>
 
 <script>
-import NButton from '../../../Button'
+import NButton from '../../../button'
 import NTimePicker from '../../../TimePicker'
 import NInput from '../../../Input'
 import dualCalendarMixin from './dualCalendarMixin'
-import NBaseIcon from '../../../_base/Icon'
+import NBaseIcon from '../../../_base/icon'
 import startOfSecond from 'date-fns/startOfSecond'
 import format from 'date-fns/format'
 import set from 'date-fns/set'

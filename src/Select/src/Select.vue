@@ -94,12 +94,12 @@ import detachable from '../../_mixins/detachable'
 import placeable from '../../_mixins/placeable'
 import zindexable from '../../_mixins/zindexable'
 import clickoutside from '../../_directives/clickoutside'
-import NBaseSelectMenu from '../../_base/SelectMenu'
+import NBaseSelectMenu from '../../_base/select-menu'
 import {
   filterOptions,
   valueToOptionMap
 } from '../../_utils/component/select'
-import NBaseSelection from '../../_base/Selection'
+import NBaseSelection from '../../_base/selection'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asformitem from '../../_mixins/asformitem'

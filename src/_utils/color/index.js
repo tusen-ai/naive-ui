@@ -87,6 +87,11 @@ export function read (color) {
  * @param {[number, number, number, number]} overlay
  */
 export function composite (base, overlay) {
+  if (process.env.NODE_ENV !== 'production') {
+    if (base.length === 3 && base[3] !== 1) {
+      console.error('[naive-ui/utils/color/composite]: base color has alpha')
+    }
+  }
   return 'rgb(' + base.slice(0, 3).map((v, i) => floor(v * (1 - overlay[3]) + overlay[i] * overlay[3])).join(', ') + ')'
 }
 

@@ -29,6 +29,7 @@ const cTB = (selector, ...rest) => {
   ])
 }
 
+// @deprecated
 function createThemedStyle (style, themes) {
   const fallbackPallete = themes.fallback
   return c([
@@ -71,4 +72,23 @@ function createStyleAsFormItem (style) {
   ])
 }
 
-export { c, cTB, cB, cE, cM, cNotM, createThemedStyle, createStyleAsFormItem, namespace }
+// TODO rename
+function cTB2 (selector, ...rest) {
+  return cB(selector, [
+    c(
+      ({ props }) => {
+        const renderedTheme = props.$renderedTheme
+        if (!renderedTheme) return ''
+        const fallbackTheme = props.$fallbackTheme
+        return (
+          renderedTheme === fallbackTheme
+            ? ''
+            : `&.${namespace}-${renderedTheme}-theme`
+        )
+      },
+      ...rest
+    )
+  ])
+}
+
+export { c, cTB, cTB2, cB, cE, cM, cNotM, createThemedStyle, createStyleAsFormItem, namespace }

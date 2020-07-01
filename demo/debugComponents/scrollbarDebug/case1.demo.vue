@@ -109,20 +109,21 @@ export default {
             // }
           },
           render: (h, params) => {
-            return <b>{params.age}</b>
+            return '<b>{params.age}</b>'
           }
         },
         {
           title: '#',
           render: (h, params) => {
             return (
-              <n-button
-                style="margin:0;"
-                size="small"
-                onClick={() => this.handleClick(params)}
-              >
-                delete
-              </n-button>
+              ''
+              // <n-button
+              //   style="margin:0;"
+              //   size="small"
+              //   onClick={() => this.handleClick(params)}
+              // >
+              //   delete
+              // </n-button>
             )
           }
         }

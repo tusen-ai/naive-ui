@@ -48,7 +48,7 @@
 <script>
 import NCascaderOption from './CascaderOption.vue'
 import NScrollbar from '../../Scrollbar'
-import NBaseTrackingRect from '../../_base/TrackingRect'
+import NBaseTrackingRect from '../../_base/tracking-rect'
 import debounce from 'lodash-es/debounce'
 import { itemSize } from '../../_styles-in-js/common'
 

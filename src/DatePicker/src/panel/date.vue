@@ -108,11 +108,11 @@
 </template>
 
 <script>
-import NBaseIcon from '../../../_base/Icon'
+import NBaseIcon from '../../../_base/icon'
 import uniCalendarMixin from './uniCalendarMixin'
 import startOfDay from 'date-fns/startOfDay'
 
-import NButton from '../../../Button'
+import NButton from '../../../button'
 
 const DATETIME_FORMAT = 'yyyy-MM-dd HH:mm:ss'
 const DATE_FORMAT = 'yyyy-MM-dd'

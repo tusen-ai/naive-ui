@@ -1,5 +1,5 @@
-import NBaseContext from '../../_base/Context'
-import NBasePortal from '../../_base/Portal'
+import NBaseContext from '../../_base/context'
+import NBasePortal from '../../_base/portal'
 import NPopoverContent from './PopoverContent'
 import activatorMixin from './activatorMixin'
 

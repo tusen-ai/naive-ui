@@ -1,25 +1,9 @@
-import { read, createHoverColor, createActiveColor } from './_utils/color'
-
-function extendScheme (scheme) {
-  const extendedScheme = Object.assign({}, scheme)
-  if (extendedScheme.primaryColor) {
-    const primaryColorRgb = read(extendedScheme.primaryColor)
-    if (!extendedScheme.primaryHoverColor) {
-      extendedScheme.primaryHoverColor = createHoverColor(primaryColorRgb)
-    }
-    if (!extendedScheme.primaryActiveColor) {
-      extendedScheme.primaryActiveColor = createActiveColor(primaryColorRgb)
-    }
-  }
-  return extendedScheme
-}
-
-function mergeStyleSchemes (baseSchemes, schemes, extend) {
+function mergeStyleSchemes (baseSchemes, schemes) {
   const mergedSchemes = {}
   Object.keys(baseSchemes).forEach(theme => {
+    const baseScheme = baseSchemes[theme]
     const scheme = (schemes || {})[theme]
-    const extendedScheme = extend ? extendScheme(scheme) : scheme
-    mergedSchemes[theme] = Object.assign({}, baseSchemes[theme], extendedScheme)
+    mergedSchemes[theme] = baseScheme.customize(scheme)
   })
   return mergedSchemes
 }
@@ -41,7 +25,8 @@ function create ({
   fallbackLocale,
   hljs,
   styleSchemes,
-  fallbackTheme
+  fallbackTheme,
+  _themes
 }) {
   const installTargets = []
   const naive = {
@@ -49,12 +34,13 @@ function create ({
     fallbackLocale: fallbackLocale || locales[0],
     hljs,
     styleSchemes: styleSchemes || null,
+    _themes: _themes || null,
     fallbackTheme: fallbackTheme || 'light',
     setHljs,
     setHighlightjs: setHljs,
-    setStyleSchemes: (schemes, extend = true) => {
+    setStyleSchemes: schemes => {
       naive.styleSchemes = mergeStyleSchemes(
-        naive.styleSchemes, schemes, extend
+        naive.styleSchemes, schemes
       )
     },
     install

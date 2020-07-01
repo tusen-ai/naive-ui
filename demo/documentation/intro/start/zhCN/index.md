@@ -28,11 +28,11 @@ import 'naive-ui/lib/styles/fonts/FiraCode.css'
 Vue.use(naive)
 ```
 
-## 按需引入
-<n-alert type="warning" title="注意" style="margin-bottom: 16px;">
+## 按需引入（正在开发）
+<!--n-alert type="warning" title="注意" style="margin-bottom: 16px;">
   <n-ol align-text>
     <n-li>按需引入的功能仍是试验性的，遇到任何错误都可以反馈给项目。</n-li>
     <n-li>以 Base 开头的 CSS 目前不确保随更新保持稳定，如果升级后出现错误，可以来这里检查一下。</n-li>
   </n-ol>
 </n-alert >
-<install-code-generator />
+<install-code-generator /-->

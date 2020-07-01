@@ -6,6 +6,7 @@ const webpack = require('webpack')
 const config = require('./config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 
 const webpackConfig = {
   mode: 'development',
@@ -38,6 +39,7 @@ const webpackConfig = {
     rules: config.docLoaders()
   },
   plugins: [
+    new CaseSensitivePathsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: './demo/index.tpl',

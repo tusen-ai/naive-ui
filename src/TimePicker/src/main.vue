@@ -197,7 +197,7 @@ import getSeconds from 'date-fns/getSeconds'
 import { strictParse } from '../../_utils/component/datePicker'
 import keyboardDelegate from '../../_utils/delegate/keyboardDelegate'
 import { KEY_CODE } from '../../_utils/event/keyCode'
-import NBaseFocusDetector from '../../_base/FocusDetector'
+import NBaseFocusDetector from '../../_base/focus-detector'
 import timeOutline from '../../_icons/time-outline'
 
 const DEFAULT_FORMAT = 'HH:mm:ss'

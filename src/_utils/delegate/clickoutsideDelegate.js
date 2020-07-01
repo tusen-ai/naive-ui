@@ -1,6 +1,8 @@
 class ClickOutsideDelegate {
   constructor () {
-    console.debug('[ClickOutsideDelegate]: Ctor called')
+    if (process.env.NODE_ENV !== 'production') {
+      console.debug('[ClickOutsideDelegate]: Ctor called')
+    }
     this.handlers = new Map()
     this.handlerCount = 0
     this.mouseDownTarget = null
@@ -38,18 +40,28 @@ class ClickOutsideDelegate {
     }
   }
   unregisterHandler (handler) {
-    console.debug('[ClickOutsideDelegate]: unregisterHandler')
+    if (process.env.NODE_ENV !== 'production') {
+      console.debug('[ClickOutsideDelegate]: unregisterHandler')
+    }
     const h = this.handlers.get(handler)
     if (h) {
-      console.debug('[ClickOutsideDelegate.unregisterHandler]: handler found')
+      if (process.env.NODE_ENV !== 'production') {
+        console.debug('[ClickOutsideDelegate.unregisterHandler]: handler found')
+      }
       this.handlers.delete(handler)
       --this.handlerCount
-      console.debug('[ClickOutsideDelegate.unregisterHandler]: handler unregistered')
+      if (process.env.NODE_ENV !== 'production') {
+        console.debug('[ClickOutsideDelegate.unregisterHandler]: handler unregistered')
+      }
     } else {
-      console.debug('[ClickOutsideDelegate.unregisterHandler]: handler not found')
+      if (process.env.NODE_ENV !== 'production') {
+        console.debug('[ClickOutsideDelegate.unregisterHandler]: handler not found')
+      }
     }
     if (!this.handlerCount) {
-      console.debug('[ClickOutsideDelegate]: remove handler from window')
+      if (process.env.NODE_ENV !== 'production') {
+        console.debug('[ClickOutsideDelegate]: remove handler from window')
+      }
       window.removeEventListener('mouseup', this.handleMouseUpOutside)
       window.removeEventListener('mousedown', this.handleMouseDown)
       this.mouseDownTarget = null
@@ -67,7 +79,9 @@ class ClickOutsideDelegate {
       throw new Error('[ClickOutsideDelegate.registerHandler]: don\'t register duplicate event handler, if you want to do it, unregister this handler and reregister it.')
     }
     if (!this.handlerCount) {
-      console.debug('[ClickOutsideDelegate]: add handler to window')
+      if (process.env.NODE_ENV !== 'production') {
+        console.debug('[ClickOutsideDelegate]: add handler to window')
+      }
       window.addEventListener('mouseup', this.handleMouseUpOutside)
       window.addEventListener('mousedown', this.handleMouseDown)
     }

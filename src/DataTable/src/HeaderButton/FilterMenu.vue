@@ -64,7 +64,7 @@ import NCheckbox from '../../../Checkbox/src/Checkbox'
 import NRadioGroup from '../../../Radio/src/RadioGroup'
 import NRadio from '../../../Radio/src/Radio'
 import NDivider from '../../../Divider'
-import NButton from '../../../Button'
+import NButton from '../../../button'
 import NScrollbar from '../../../Scrollbar'
 import { shouldUseArrayInSingleMode } from '../utils'
 

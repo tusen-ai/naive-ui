@@ -1,7 +1,7 @@
 <script>
 import NModalOverlay from './Overlay'
 import NModalContent from './ModalContent'
-import NBasePortal from '../../_base/Portal'
+import NBasePortal from '../../_base/portal'
 import zindexable from '../../_mixins/zindexable'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'

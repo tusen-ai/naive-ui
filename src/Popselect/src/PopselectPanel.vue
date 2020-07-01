@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import NBaseSelectMenu from '../../_base/SelectMenu'
+import NBaseSelectMenu from '../../_base/select-menu'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 

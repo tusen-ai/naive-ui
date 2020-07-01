@@ -65,7 +65,7 @@
 <script>
 import NCheckbox from '../../Checkbox'
 import NRadio from '../../Radio'
-import NBaseLoading from '../../_base/Loading'
+import NBaseLoading from '../../_base/loading'
 
 export default {
   name: 'NCascaderOption',

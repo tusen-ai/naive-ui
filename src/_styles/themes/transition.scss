@@ -180,28 +180,23 @@
 
 @mixin fade-in-width-expand-transition ($name: 'fade-in-width-expand', $duration: .2s, $delay: .1s) {
   &.#{$namespace}-#{$name}-transition-leave-active {
-    transition: opacity $duration $--n-ease-in-out-cubic-bezier, max-width $duration $--n-ease-in-out-cubic-bezier $delay,
+    transition:
+      opacity $duration $--n-ease-in-out-cubic-bezier,
+      max-width $duration $--n-ease-in-out-cubic-bezier $delay,
       margin-left $duration $--n-ease-in-out-cubic-bezier $delay,
       margin-right $duration $--n-ease-in-out-cubic-bezier $delay;
   }
   &.#{$namespace}-#{$name}-transition-enter-active {
-    transition: opacity $duration $--n-ease-in-out-cubic-bezier $delay, max-width $duration $--n-ease-in-out-cubic-bezier,
+    transition:
+      opacity $duration $--n-ease-in-out-cubic-bezier $delay,
+      max-width $duration $--n-ease-in-out-cubic-bezier,
       margin-left $duration $--n-ease-in-out-cubic-bezier,
       margin-right $duration $--n-ease-in-out-cubic-bezier;
   }
-  &.#{$namespace}-#{$name}-transition-enter-to {
+  &.#{$namespace}-#{$name}-transition-enter-to, &.#{$namespace}-#{$name}-transition-leave {
     opacity: 1;
   }
-  &.#{$namespace}-#{$name}-transition-enter {
-    max-width: 0;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    opacity: 0!important;
-  }
-  &.#{$namespace}-#{$name}-transition-leave {
-    opacity: 1;
-  }
-  &.#{$namespace}-#{$name}-transition-leave-to {
+  &.#{$namespace}-#{$name}-transition-enter, &.#{$namespace}-#{$name}-transition-leave-to {
     max-width: 0 !important;
     opacity: 0 !important;
     margin-left: 0 !important;

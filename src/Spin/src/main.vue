@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import NBaseLoading from '../../_base/Loading'
+import NBaseLoading from '../../_base/loading'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 

@@ -3,7 +3,7 @@ Button has loading status.
 ```html
 <n-button
   :loading="loading"
-  icon-placement="right"
+  icon-placement="left"
   @click="loading = !loading"
 >
   Click Me
@@ -11,21 +11,11 @@ Button has loading status.
 ```
 
 ```js
-import cashOutline from 'naive-ui/lib/icons/cash-outline'
-
 export default {
-  components: {
-    cashOutline
-  },
   data () {
     return {
       loading: false
     }
   }
-}
-```
-```css
-.n-button {
-  margin: 0 8px 8px 0;
 }
 ```

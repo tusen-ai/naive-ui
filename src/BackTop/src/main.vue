@@ -36,10 +36,10 @@
 </template>
 
 <script>
+import NBasePortal from '../../_base/portal'
 import getScrollParent from '../../_utils/dom/getScrollParent'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import NBasePortal from '../../_base/Portal'
 import formatLength from '../../_utils/css/formatLength'
 
 export default {

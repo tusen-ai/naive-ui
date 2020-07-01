@@ -23,7 +23,7 @@
   @return null;
 }
 
-// naive-ui 会坚持 getter 函数的存在性然后在合适的时候设定相关变量
+// naive-ui 会检查 getter 函数的存在性然后在合适的时候设定相关变量
 @import '~naive-ui/src/_styles/index.scss';
 ```
 
@@ -37,7 +37,7 @@ import 'path/to/customized-style.scss'
 // ... use naive-ui normally
 ```
 
-还没有完事，你还需要在 JS 的环境中设定主色。因为 naive-ui 使用了 CSS-in-IS...
+还没有完事，你还需要在 JS 的环境中设定主色。因为 naive-ui 使用了 CSS-in-JS...
 
 
 所以继续，在 naive-ui 的实例上设定 `style-schemes`。

@@ -4,7 +4,8 @@ import GradientText from './GradientText'
 import Table from './Table'
 import DataTable from './DataTable'
 import CheckBox from './Checkbox'
-import RoundButton from './Button'
+import Button from './button'
+import ButtonGroup from './button-group'
 import Switch from './Switch'
 import Select from './Select'
 import Cascader from './Cascader'
@@ -14,7 +15,7 @@ import Input from './Input'
 import Message from './Message'
 import Notification from './Notification'
 import Pagination from './Pagination'
-import Progress from './Progress'
+import Progress from './progress'
 import Tooltip from './Tooltip'
 import Popup from './Popover'
 import Alert from './Alert'
@@ -28,7 +29,7 @@ import Layout from './Layout'
 import Scrollbar from './Scrollbar'
 import Steps from './Steps'
 import ConfirmPlugin from './Confirm'
-import Badge from './Badge'
+import Badge from './badge'
 import Tag from './Tag'
 import BackTop from './BackTop'
 import Divider from './Divider'
@@ -71,6 +72,15 @@ import enUS from './locale/enUS'
 import lightScheme from './_styles-in-js/lightStyleScheme.scss'
 import darkScheme from './_styles-in-js/darkStyleScheme.scss'
 
+import lightBaseStyle from './styles/base/light'
+import darkBaseStyle from './styles/base/dark'
+import lightButtonStyle from './styles/button/light'
+import darkButtonStyle from './styles/button/dark'
+import lightBadgeStyle from './styles/badge/light'
+import darkBadgeStyle from './styles/badge/dark'
+import lightProgressStyle from './styles/progress/light'
+import darkProgressStyle from './styles/progress/dark'
+
 // Deprecated Components
 import NimbusFormCard from './_deprecated/NimbusFormCard'
 import NimbusConfirmCard from './_deprecated/NimbusConfirmCard'
@@ -88,7 +98,8 @@ export default create({
     Table,
     DataTable,
     CheckBox,
-    RoundButton,
+    Button,
+    ButtonGroup,
     Switch,
     Select,
     Modal,
@@ -159,5 +170,19 @@ export default create({
     light: lightScheme,
     dark: darkScheme
   },
-  fallbackTheme: 'light'
+  fallbackTheme: 'light',
+  _themes: {
+    light: {
+      base: lightBaseStyle,
+      NButton: lightButtonStyle,
+      NBadge: lightBadgeStyle,
+      NProgress: lightProgressStyle
+    },
+    dark: {
+      base: darkBaseStyle,
+      NButton: darkButtonStyle,
+      NBadge: darkBadgeStyle,
+      NProgress: darkProgressStyle
+    }
+  }
 })
