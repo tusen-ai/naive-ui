@@ -11,7 +11,7 @@ import Select from './Select'
 import Cascader from './Cascader'
 import DynamicInput from './DynamicInput'
 import Modal from './Modal'
-import Input from './Input'
+import Input from './input'
 import Message from './Message'
 import Notification from './Notification'
 import Pagination from './Pagination'
@@ -20,7 +20,7 @@ import Tooltip from './Tooltip'
 import Popup from './Popover'
 import Alert from './Alert'
 import DatePicker from './DatePicker'
-import InputNumber from './InputNumber'
+import InputNumber from './input-number'
 import Radio from './Radio'
 import Form from './Form'
 import Tabs from './Tabs'
@@ -65,6 +65,7 @@ import Log from './Log'
 import Code from './Code'
 import Typography from './Typography'
 import Upload from './Upload'
+import InputGroup from './input-group'
 
 import zhCN from './locale/zhCN'
 import enUS from './locale/enUS'
@@ -162,6 +163,7 @@ export default create({
     Code,
     Typography,
     Upload,
+    InputGroup,
     // Deprecated
     NimbusServiceLayout,
     NimbusConfirmCard,
