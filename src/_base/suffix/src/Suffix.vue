@@ -1,5 +1,5 @@
 <template>
-  <transition name="n-base-suffix-transition">
+  <transition name="n-fade-in-scale-up-transition">
     <div
       v-if="loading || (show && (clearable || arrow))"
       class="n-base-suffix"
