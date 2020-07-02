@@ -184,7 +184,7 @@
 
 <script>
 import NBaseSuffix from '../../suffix/index.js'
-import NTag from '../../../Tag/index.js'
+import NTag from '../../../tag/index.js'
 import usecssr from '../../../_mixins/usecssr.js'
 import styles from './styles/index.js'
 

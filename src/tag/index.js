@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import Tag from './src/main.vue'
+import Tag from './src/Tag.vue'
 import DynamicTags from './src/DynamicTags.vue'
 
 Tag.install = function (Vue) {
