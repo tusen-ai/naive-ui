@@ -295,7 +295,7 @@ export default {
   watch: {
     active (active) {
       if (active) {
-        this.$nextTick().then(() => {
+        this.$nextTick(() => {
           const refs = this.$refs
           if (refs.singleInput) {
             refs.singleInput.focus()
@@ -359,9 +359,10 @@ export default {
     },
     handlePatternInputInput (e) {
       if (this.multiple) {
-        this.$nextTick().then(() => {
-          const textWidth = this.$refs.patternInputMirror.getBoundingClientRect().width
-          this.$refs.patternInput.style.width = textWidth + 'px'
+        this.$nextTick(() => {
+          const refs = this.$refs
+          const textWidth = refs.patternInputMirror.offsetWidth
+          refs.patternInput.style.width = textWidth + 'px'
           this.$emit('pattern-input', e)
         })
       } else {
@@ -377,13 +378,13 @@ export default {
     },
     focusPatternInputWrapper () {
       this.patternInputFocused = false
-      this.$nextTick().then(() => {
+      this.$nextTick(() => {
         const patternInputWrapper = this.$refs.patternInputWrapper
         if (patternInputWrapper) patternInputWrapper.focus()
       })
     },
     focusPatternInput () {
-      this.$nextTick().then(() => {
+      this.$nextTick(() => {
         const patternInput = this.$refs.patternInput
         if (patternInput) {
           patternInput.focus()
@@ -391,8 +392,9 @@ export default {
       })
     },
     blurPatternInput () {
-      if (this.$refs.patternInput) {
-        this.$refs.patternInput.blur()
+      const patternInput = this.$refs.patternInput
+      if (patternInput) {
+        patternInput.blur()
       }
     }
   }
