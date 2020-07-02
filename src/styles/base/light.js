@@ -132,9 +132,9 @@ export default create({
       iconOverlayColor: overlay(base.alpha4),
 
       dividerColor: neutral(base.alphaDivider),
-      dividerOverlayColor: neutral(base.alphaDivider),
+      dividerOverlayColor: overlay(base.alphaDivider),
       borderColor: neutral(base.alphaBorder),
-      borderOverlayColor: neutral(base.alphaBorder),
+      borderOverlayColor: overlay(base.alphaBorder),
 
       closeHoverColor: neutral(base.alpha2),
       closeHoverOverlayColor: overlay(base.alpha2),

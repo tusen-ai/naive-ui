@@ -81,10 +81,12 @@ import lightBadgeStyle from './styles/badge/light'
 import darkBadgeStyle from './styles/badge/dark'
 import lightProgressStyle from './styles/progress/light'
 import darkProgressStyle from './styles/progress/dark'
-import lightBaseSelection from './styles/_base/selection/light'
-import darkBaseSelection from './styles/_base/selection/dark'
-import lightBaseSuffix from './styles/_base/suffix/light'
-import darkBaseSuffix from './styles/_base/suffix/dark'
+import lightBaseSelectionStyle from './styles/_base/selection/light'
+import darkBaseSelectionStyle from './styles/_base/selection/dark'
+import lightBaseSuffixStyle from './styles/_base/suffix/light'
+import darkBaseSuffixStyle from './styles/_base/suffix/dark'
+import lightInputStyle from './styles/input/light'
+import darkInputStyle from './styles/input/dark'
 
 // Deprecated Components
 import NimbusFormCard from './_deprecated/NimbusFormCard'
@@ -184,16 +186,18 @@ export default create({
       NButton: lightButtonStyle,
       NBadge: lightBadgeStyle,
       NProgress: lightProgressStyle,
-      NBaseSelection: lightBaseSelection,
-      NBaseSuffix: lightBaseSuffix
+      NBaseSelection: lightBaseSelectionStyle,
+      NBaseSuffix: lightBaseSuffixStyle,
+      NInput: lightInputStyle
     },
     dark: {
       base: darkBaseStyle,
       NButton: darkButtonStyle,
       NBadge: darkBadgeStyle,
       NProgress: darkProgressStyle,
-      NBaseSelection: darkBaseSelection,
-      NBaseSuffix: darkBaseSuffix
+      NBaseSelection: darkBaseSelectionStyle,
+      NBaseSuffix: darkBaseSuffixStyle,
+      NInput: darkInputStyle
     }
   }
 })

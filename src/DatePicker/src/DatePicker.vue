@@ -154,7 +154,7 @@ import DatetimerangePanel from './panel/datetimerange'
 import DatePanel from './panel/date'
 import DaterangePanel from './panel/daterange'
 
-import NInput from '../../Input'
+import NInput from '../../input'
 import NIcon from '../../Icon'
 import CalendarIcon from './CalendarIcon'
 

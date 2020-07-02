@@ -12,8 +12,7 @@ export default [
   {
     key: 'size',
     watch: [
-      'theme',
-      'size'
+      'size', 'theme'
     ],
     CNode: sizeStyle
   }

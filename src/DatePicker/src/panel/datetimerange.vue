@@ -264,7 +264,7 @@
 <script>
 import NButton from '../../../button'
 import NTimePicker from '../../../TimePicker'
-import NInput from '../../../Input'
+import NInput from '../../../input'
 import dualCalendarMixin from './dualCalendarMixin'
 import NBaseIcon from '../../../_base/icon'
 import startOfSecond from 'date-fns/startOfSecond'

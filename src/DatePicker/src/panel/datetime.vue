@@ -146,7 +146,7 @@ import startOfSecond from 'date-fns/startOfSecond'
 
 import NButton from '../../../button'
 import NTimePicker from '../../../TimePicker'
-import NInput from '../../../Input'
+import NInput from '../../../input'
 
 const DATETIME_FORMAT = 'yyyy-MM-dd HH:mm:ss'
 const DATE_FORMAT = 'yyyy-MM-dd'

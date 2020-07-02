@@ -162,20 +162,25 @@ import NBaseSuffix from '../../_base/suffix'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asformitem from '../../_mixins/asformitem'
-
-import { mountStyleAsFormItem } from './styles/Input.cssr.js'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 export default {
   name: 'NInput',
   components: {
     NBaseSuffix
   },
-  mixins: [ withapp, themeable, asformitem({
-    change: 'change',
-    blur: 'blur',
-    focus: 'focus',
-    input: 'input'
-  })],
+  mixins: [
+    withapp,
+    themeable,
+    asformitem({
+      change: 'change',
+      blur: 'blur',
+      focus: 'focus',
+      input: 'input'
+    }),
+    usecssr(styles)
+  ],
   props: {
     type: {
       type: String,
@@ -317,11 +322,6 @@ export default {
       if (this.isTextarea && this.autosize) {
         this.$nextTick().then(this.updateTextAreaStyle)
       }
-    }
-  },
-  created () {
-    if (this.NFormItem) {
-      mountStyleAsFormItem()
     }
   },
   mounted () {
