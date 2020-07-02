@@ -28,7 +28,7 @@ export default create({
         ghostTypedActiveTextColor: derived.primaryActiveColor,
         ghostTypedFocusTextColor: derived.primaryHoverColor,
 
-        borderColor: derived.borderColor,
+        borderColor: derived.borderOverlayColor,
         hoverBorderColor: derived.primaryHoverColor,
         activeBorderColor: derived.primaryActiveColor,
         focusBorderColor: derived.primaryHoverColor,
