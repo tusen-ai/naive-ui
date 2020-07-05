@@ -66,6 +66,7 @@ import Code from './Code'
 import Typography from './Typography'
 import Upload from './Upload'
 import InputGroup from './input-group'
+import InputGroupLabel from './input-group-label'
 
 import zhCN from './locale/zhCN'
 import enUS from './locale/enUS'
@@ -87,6 +88,8 @@ import lightBaseSuffixStyle from './styles/_base/suffix/light'
 import darkBaseSuffixStyle from './styles/_base/suffix/dark'
 import lightInputStyle from './styles/input/light'
 import darkInputStyle from './styles/input/dark'
+import lightInputGroupLabel from './styles/input-group-label/light'
+import darkInputGroupLabel from './styles/input-group-label/dark'
 
 // Deprecated Components
 import NimbusFormCard from './_deprecated/NimbusFormCard'
@@ -166,6 +169,7 @@ export default create({
     Typography,
     Upload,
     InputGroup,
+    InputGroupLabel,
     // Deprecated
     NimbusServiceLayout,
     NimbusConfirmCard,
@@ -188,7 +192,8 @@ export default create({
       NProgress: lightProgressStyle,
       NBaseSelection: lightBaseSelectionStyle,
       NBaseSuffix: lightBaseSuffixStyle,
-      NInput: lightInputStyle
+      NInput: lightInputStyle,
+      NInputGroupLabel: lightInputGroupLabel
     },
     dark: {
       base: darkBaseStyle,
@@ -197,7 +202,8 @@ export default create({
       NProgress: darkProgressStyle,
       NBaseSelection: darkBaseSelectionStyle,
       NBaseSuffix: darkBaseSuffixStyle,
-      NInput: darkInputStyle
+      NInput: darkInputStyle,
+      NInputGroupLabel: darkInputGroupLabel
     }
   }
 })

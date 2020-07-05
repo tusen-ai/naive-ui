@@ -163,6 +163,7 @@ export default create({
       codeBackgroundOverlayColor: overlay(base.alphaCode),
       tabBackgroundOverlayColor: overlay(base.alphaTab),
       avatarBackgroundOverlayColor: overlay(base.alphaAvatar),
+      actionBackgroundColor: neutral(base.alphaAction),
       actionBackgroundOverlayColor: overlay(base.alphaAction),
       tableHeaderBackgroundOverlayColor: overlay(base.alphaAction),
 
