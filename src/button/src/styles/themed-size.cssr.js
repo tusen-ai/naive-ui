@@ -4,7 +4,7 @@ import iconSwitchTransition from '../../../styles/_transitions/icon-switch'
 
 export default c([
   ({ props }) => {
-    const size = props.$instance.size
+    const size = props.$instance.syntheticSize
     const height = props.$local.height[size]
     const fontSize = props.$local.fontSize[size]
     const borderRadius = props.$local.borderRadius
