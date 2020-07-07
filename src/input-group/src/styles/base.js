@@ -58,13 +58,12 @@ export default c([
                   border-top-right-radius: 0!important;
                   border-bottom-right-radius: 0!important;
                 `
-              }, [
-                cB('input-number-button-boundary', {
-                  raw: `  
-                    background-color: transparent !important;
-                  `
-                })
-              ])
+              }),
+              cB('input-number-button-boundary', {
+                raw: `  
+                  background-color: transparent !important;
+                `
+              })
             ])
           ]),
           c('&:not(:first-child)', {
@@ -148,20 +147,19 @@ export default c([
                     border-top-right-radius: 0!important;
                     border-bottom-right-radius: 0!important;
                   `
-                }, [
-                  cB('base-selection-tags', {
-                    raw: `
+                }),
+                cB('base-selection-tags', {
+                  raw: `
+                  border-top-right-radius: 0!important;
+                  border-bottom-right-radius: 0!important;
+                  `
+                }),
+                cB('base-selection-border-mask', {
+                  raw: `
                     border-top-right-radius: 0!important;
                     border-bottom-right-radius: 0!important;
-                    `
-                  }),
-                  cB('base-selection-border-mask', {
-                    raw: `
-                      border-top-right-radius: 0!important;
-                      border-bottom-right-radius: 0!important;
-                    `
-                  })
-                ])
+                  `
+                })
               ])
             ])
           ]),

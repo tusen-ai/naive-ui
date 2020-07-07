@@ -90,6 +90,8 @@ import lightInputStyle from './styles/input/light'
 import darkInputStyle from './styles/input/dark'
 import lightInputGroupLabel from './styles/input-group-label/light'
 import darkInputGroupLabel from './styles/input-group-label/dark'
+import lightInputNumber from './styles/input-number/light'
+import darkInputNumber from './styles/input-number/dark'
 
 // Deprecated Components
 import NimbusFormCard from './_deprecated/NimbusFormCard'
@@ -193,7 +195,8 @@ export default create({
       NBaseSelection: lightBaseSelectionStyle,
       NBaseSuffix: lightBaseSuffixStyle,
       NInput: lightInputStyle,
-      NInputGroupLabel: lightInputGroupLabel
+      NInputGroupLabel: lightInputGroupLabel,
+      NInputNumber: lightInputNumber
     },
     dark: {
       base: darkBaseStyle,
@@ -203,7 +206,8 @@ export default create({
       NBaseSelection: darkBaseSelectionStyle,
       NBaseSuffix: darkBaseSuffixStyle,
       NInput: darkInputStyle,
-      NInputGroupLabel: darkInputGroupLabel
+      NInputGroupLabel: darkInputGroupLabel,
+      NInputNumber: darkInputNumber
     }
   }
 })

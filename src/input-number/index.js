@@ -1,8 +1,8 @@
 /* istanbul ignore file */
-import NInputNumber from './src/InputNumber.vue'
+import InputNumber from './src/InputNumber.vue'
 
-NInputNumber.install = function (Vue) {
-  Vue.component(NInputNumber.name, NInputNumber)
+InputNumber.install = function (Vue) {
+  Vue.component(InputNumber.name, InputNumber)
 }
 
-export default NInputNumber
+export default InputNumber

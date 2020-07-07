@@ -3,8 +3,8 @@ import sizeStyle from './themed-size.cssr.js'
 
 export default [
   {
-    key: 'syntheticSize',
-    watch: ['syntheticSize'],
+    key: 'syntheticTheme',
+    watch: ['syntheticTheme'],
     CNode: baseStyle
   },
   {

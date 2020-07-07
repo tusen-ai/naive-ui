@@ -17,6 +17,7 @@ export default c([
       focusBorderMaskColor,
       focusBorderMaskBoxShadow,
       iconColor,
+      iconOpacity,
       textColor,
       caretColor,
       disabledBoxShadow,
@@ -24,7 +25,8 @@ export default c([
       disabledBackgroundColor,
       disabledTextColor,
       disabledPlaceholderColor,
-      disabledIconColor
+      disabledIconColor,
+      disabledIconOpacity
     } = props.$local.default
     const {
       easeInOutCubicBezier
@@ -82,7 +84,11 @@ export default c([
           cB('icon', {
             fill: disabledIconColor,
             stroke: disabledIconColor
-          })
+          }, [
+            c('svg', {
+              opacity: disabledIconOpacity
+            })
+          ])
         ]),
         cE('splitor', {
           color: disabledTextColor
@@ -151,7 +157,11 @@ export default c([
           fontSize: iconSize,
           fill: iconColor,
           stroke: iconColor
-        })
+        }, [
+          c('svg', {
+            opacity: iconOpacity
+          })
+        ])
       ]),
       cE('suffix', {
         justifyContent: 'flex-end',

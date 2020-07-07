@@ -17,7 +17,7 @@ export default create({
       alpha2: '0.82',
       alpha3: '0.52',
       alpha4: '0.38',
-      alpha5: '0.2',
+      alpha5: '0.28',
 
       alphaDisabled: '0.6',
       alphaDisabledInput: '0.06',
@@ -122,14 +122,24 @@ export default create({
       quinaryTextColor: neutral(base.alpha5),
       quinaryTextOverlayColor: overlay(base.alpha5),
 
+      disabledTextColor: neutral(base.alpha4),
+      disabledTextOverlayColor: overlay(base.alpha4),
+      placeholderColor: neutral(base.alpha4),
+      placeholderOverlayColor: overlay(base.alpha4),
+      disabledPlaceholderColor: neutral(base.alpha5),
+      disabledPlaceholderOverlayColor: overlay(base.alpha5),
+      iconColor: neutral(base.alpha4),
+      iconOverlayColor: overlay(base.alpha4),
+      disabledIconColor: neutral(base.alpha5),
+      disabledIconOverlayColor: neutral(base.alpha5),
+
       primaryOpacity: base.alpha1,
       secondaryOpacity: base.alpha2,
       tertiaryOpacity: base.alpha3,
+      quaternaryOpacity: base.alpha4,
+      quinaryOpacity: base.alpha5,
       pendingOpacity: base.alphaPending,
       disabledInputOpacity: base.alphaDisabledInput,
-
-      iconColor: neutral(base.alpha4),
-      iconOverlayColor: overlay(base.alpha4),
 
       dividerColor: neutral(base.alphaDivider),
       dividerOverlayColor: overlay(base.alphaDivider),

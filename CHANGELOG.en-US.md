@@ -6,7 +6,7 @@
 
 ## 1.4.0 (2020-06-19)
 ### Breaking Changes
-- `n-menu` not support slot API anymore.
+- `n-menu` doesn't support slot API anymore.
 ### Features
 - Add experimental setting primary color feature.
 

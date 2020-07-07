@@ -7,8 +7,9 @@ export default create({
     const {
       secondaryTextOverlayColor,
       quaternaryTextOverlayColor,
-      quinaryTextColor,
-      quaternaryTextColor,
+      quinaryTextOverlayColor,
+      quinaryOpacity,
+      quaternaryOpacity,
       primaryColor,
       primaryHoverColor,
       inputBackgroundOverlayColor,
@@ -16,7 +17,8 @@ export default create({
       warningColor,
       warningHoverColor,
       errorColor,
-      errorHoverColor
+      errorHoverColor,
+      baseTextColor
     } = derived
     const {
       borderRadius
@@ -30,19 +32,21 @@ export default create({
         disabledTextColor: quaternaryTextOverlayColor,
         caretColor: primaryColor,
         placeholderColor: quaternaryTextOverlayColor,
-        disabledPlaceholderColor: quinaryTextColor,
+        disabledPlaceholderColor: quinaryTextOverlayColor,
         backgroundColor: inputBackgroundOverlayColor,
         disabledBackgroundColor: disabledInputBackgroundOverlayColor,
         focusBackgroundColor: changeColor(primaryColor, { alpha: 0.1 }),
-        iconColor: quaternaryTextColor,
-        disabledIconColor: quinaryTextColor,
+        iconColor: baseTextColor,
+        disabledIconColor: baseTextColor,
+        iconOpacity: quaternaryOpacity,
+        disabledIconOpacity: quinaryOpacity,
         borderMaskColor: 'transparent',
         hoverBorderMaskColor: primaryHoverColor,
         disabledBorderMaskColor: 'transparent !important',
         focusBorderMaskColor: primaryHoverColor,
-        focusBorderMaskBoxShadow: `0 0 8px 0 ${changeColor(primaryColor, { alpha: 0.4 })}`,
+        focusBorderMaskBoxShadow: `0 0 8px 0 ${changeColor(primaryColor, { alpha: 0.3 })}`,
         boxShadow: 'inset 0 0 0 1px transparent',
-        focusBoxShadow: `0 0 0 2px ${changeColor(primaryColor, { alpha: 0.4 })}`,
+        focusBoxShadow: `0 0 0 2px ${changeColor(primaryColor, { alpha: 0.3 })}`,
         disabledBoxShadow: 'inset 0 0 0 1px transparent'
       },
       warning: {
@@ -50,7 +54,7 @@ export default create({
         hoverBorderMaskColor: warningHoverColor,
         focusBackgroundColor: changeColor(warningColor, { alpha: 0.1 }),
         focusBorderMaskColor: warningHoverColor,
-        focusBorderMaskBoxShadow: `0 0 8px 0 ${changeColor(warningColor, { alpha: 0.4 })}`,
+        focusBorderMaskBoxShadow: `0 0 8px 0 ${changeColor(warningColor, { alpha: 0.3 })}`,
         caretColor: warningColor
       },
       error: {
@@ -58,7 +62,7 @@ export default create({
         hoverBorderMaskColor: errorHoverColor,
         focusBackgroundColor: changeColor(errorColor, { alpha: 0.1 }),
         focusBorderMaskColor: errorHoverColor,
-        focusBorderMaskBoxShadow: `0 0 8px 0 ${changeColor(errorColor, { alpha: 0.4 })}`,
+        focusBorderMaskBoxShadow: `0 0 8px 0 ${changeColor(errorColor, { alpha: 0.3 })}`,
         caretColor: errorColor
       }
     }

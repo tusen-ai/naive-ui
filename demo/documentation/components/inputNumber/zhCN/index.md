@@ -32,4 +32,4 @@ validator
 |名称|参数|说明|
 |-|-|-|
 |change|`(value: number)`||
-|blur|`(value: number \| null)`||
+|blur|`()`||

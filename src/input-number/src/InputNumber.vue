@@ -11,9 +11,9 @@
     <button
       tabindex="-1"
       type="button"
-      class="n-input-number__minus-button"
+      class="n-input-number__minus-button n-input-number__button"
       :class="{
-        [`n-input-number__minus-button--disabled`]: !minusable
+        [`n-input-number__button--disabled`]: !minusable
       }"
       @mousedown="handleMouseDown"
       @click="minus"
@@ -21,7 +21,7 @@
       <div class="n-input-number-button-boundary" />
       <div class="n-input-number-button-body">
         <n-icon>
-          <md-remove />
+          <remove-icon />
         </n-icon>
       </div>
       <div class="n-input-number-button-border-mask" />
@@ -29,16 +29,16 @@
     <button
       tabindex="-1"
       type="button"
-      class="n-input-number__add-button"
+      class="n-input-number__add-button n-input-number__button"
       :class="{
-        [`n-input-number__add-button--disabled`]: !addable
+        [`n-input-number__button--disabled`]: !addable
       }"
       @mousedown="handleMouseDown"
       @click="add"
     >
       <div class="n-input-number-button-body">
         <n-icon>
-          <md-add />
+          <add-icon />
         </n-icon>
       </div>
       <div class="n-input-number-button-boundary" />
@@ -61,12 +61,13 @@
 
 <script>
 import NIcon from '../../Icon/index'
+import RemoveIcon from '../../_icons/remove-outline'
+import AddIcon from '../../_icons/add-outline'
 import themeable from '../../_mixins/themeable'
 import withapp from '../../_mixins/withapp'
 import asformitem from '../../_mixins/asformitem'
-import mdRemove from '../../_icons/md-remove'
-import mdAdd from '../../_icons/md-add'
-import { mountStyleAsFormItem } from './styles/InputNumber.cssr.js'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 const DEFAULT_STEP = 1
 
@@ -87,10 +88,15 @@ export default {
   name: 'NInputNumber',
   components: {
     NIcon,
-    mdRemove,
-    mdAdd
+    RemoveIcon,
+    AddIcon
   },
-  mixins: [withapp, themeable, asformitem()],
+  mixins: [
+    withapp,
+    themeable,
+    asformitem(),
+    usecssr(styles)
+  ],
   model: {
     prop: 'value',
     event: 'change'
@@ -183,11 +189,6 @@ export default {
       else return null
     }
   },
-  created () {
-    if (this.NFormItem) {
-      mountStyleAsFormItem()
-    }
-  },
   methods: {
     emitChangeEvent (value) {
       if (value !== this.value) {
@@ -264,7 +265,7 @@ export default {
       const value = this.adjustValue(e.target.value)
       e.target.value = value
       this.emitChangeEvent(value)
-      this.$emit('blur', value)
+      this.$emit('blur')
     }
   }
 }

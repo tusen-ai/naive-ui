@@ -1,4 +1,4 @@
-import { cTB2, c, cB, cE, cM } from '../../../_utils/cssr'
+import { cTB2, c, cB, cE, cM, insideFormItem } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
@@ -6,7 +6,9 @@ export default c([
       easeInOutCubicBezier
     } = props.$base
     const {
-      borderRadius,
+      borderRadius
+    } = props.$local
+    const {
       disabledButtonBackgroundColor,
       disabledButtonTextColor,
       disabledPlaceholderColor,
@@ -27,7 +29,7 @@ export default c([
       focusBorderMaskBoxShadow,
       hoverBorderMaskBoxShadow,
       placeholdeColor
-    } = props.$local
+    } = props.$local.default
     return cTB2('input-number', {
       raw: `
         position: relative;
@@ -95,8 +97,10 @@ export default c([
           right: 0
         })
       ]),
-      cM('disabled', [
-        cE('minus-button, add-button', {
+      cM('disabled', {
+        cursor: 'not-allowed'
+      }, [
+        cE('button', {
           pointerEvents: 'none'
         }, [
           cB('input-number-button-body', {
@@ -110,7 +114,7 @@ export default c([
             stroke: disabledButtonTextColor
           })
         ]),
-        cE('inupt', {
+        cE('input', {
           backgroundColor: disabledBackgroundColor,
           color: disabledTextColor,
           pointerEvents: 'none'
@@ -126,7 +130,7 @@ export default c([
           textDecorationColor: textColor
         })
       ]),
-      cE('minus-button, add-button', {
+      cE('button', {
         raw: `
           background-color: transparent;
           overflow: hidden;
@@ -149,7 +153,7 @@ export default c([
             right: 0;
           `,
           transition: `
-            box-shadow: .3s ${easeInOutCubicBezier}
+            box-shadow .3s ${easeInOutCubicBezier}
           `,
           boxShadow: `inset 0 0 0 1px ${borderColor}`
         }),
@@ -251,17 +255,73 @@ export default c([
           transition: `color .3s ${easeInOutCubicBezier}`,
           color: placeholdeColor
         }),
-        c('&:hover ~', {
-          boxShadow: hoverBorderMaskBoxShadow
-        }),
+        c('&:hover ~', [
+          cE('border-mask', {
+            boxShadow: hoverBorderMaskBoxShadow
+          })
+        ]),
         c('&:focus', {
           backgroundColor: focusBackgroundColor
         }, [
-          cE('border-mask', {
-            boxShadow: focusBorderMaskBoxShadow
-          })
+          c('& ~', [
+            cE('border-mask', {
+              boxShadow: focusBorderMaskBoxShadow
+            })
+          ])
         ])
       ])
     ])
-  }
+  },
+  ({ props }) => ['warning', 'error'].map(status => {
+    const pallete = props.$local[status]
+    const {
+      borderMaskBoxShadow,
+      hoverBorderMaskBoxShadow,
+      focusBorderMaskBoxShadow,
+      focusBackgroundColor,
+      caretColor,
+      hoverButtonTextColor,
+      activeButtonTextColor
+    } = pallete
+    return insideFormItem(
+      status,
+      cTB2('input-number', [
+        cE('border-mask', {
+          boxShadow: borderMaskBoxShadow
+        }),
+        cE('input', {
+          caretColor: caretColor
+        }, [
+          c('&:hover ~', [
+            cE('border-mask', {
+              boxShadow: hoverBorderMaskBoxShadow
+            })
+          ]),
+          c('&:focus', {
+            backgroundColor: focusBackgroundColor
+          }, [
+            c('& ~', [
+              cE('border-mask', {
+                boxShadow: focusBorderMaskBoxShadow
+              })
+            ])
+          ])
+        ]),
+        cE('button', [
+          c('&:hover', [
+            cB('icon', {
+              fill: hoverButtonTextColor,
+              stroke: hoverButtonTextColor
+            })
+          ]),
+          c('&:active', [
+            cB('icon', {
+              fill: activeButtonTextColor,
+              stroke: activeButtonTextColor
+            })
+          ])
+        ])
+      ])
+    )
+  })
 ])
