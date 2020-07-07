@@ -25,7 +25,10 @@ function createMutableStyleId (
   dependencyKey,
   dependencyValue
 ) {
-  if (dependencyKey === 'syntheticTheme') {
+  if (
+    dependencyKey === 'syntheticTheme' ||
+    dependencyKey === 'theme'
+  ) {
     return componentName + '-' + renderedTheme
   }
   return (
@@ -138,7 +141,7 @@ export default function (styles) {
     .forEach(
       watchKey => {
         watch[watchKey] = function () {
-          const syntheticTheme = this.syntheticTheme
+          const syntheticTheme = this.syntheticTheme || this.theme
           watchers[watchKey].forEach(watcher => {
             watcher(this, syntheticTheme)
           })
@@ -146,7 +149,7 @@ export default function (styles) {
       }
     )
   return {
-    beforeMount () {
+    created () {
       styles.forEach(style => {
         if (process.env.NODE_ENV !== 'production') {
           window.naive.styleRenderingDuration -= performance.now()
@@ -154,7 +157,7 @@ export default function (styles) {
         if (style.key) {
           setupMutableStyle(
             this,
-            this.syntheticTheme || null,
+            this.syntheticTheme || this.theme || null,
             style.key,
             style.CNode
           )

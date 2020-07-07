@@ -32,4 +32,4 @@ validator
 |Name|Parameters|Description|
 |-|-|-|
 |change|`(value: number)`||
-|blur|`(value: number \| null)`||
+|blur|`()`||

@@ -171,7 +171,7 @@
 
 <script>
 import NScrollbar from '../../Scrollbar'
-import NInput from '../../Input'
+import NInput from '../../input'
 import NIcon from '../../Icon'
 import detachable from '../../_mixins/detachable'
 import placeable from '../../_mixins/placeable'

@@ -11,7 +11,7 @@ import Select from './Select'
 import Cascader from './Cascader'
 import DynamicInput from './DynamicInput'
 import Modal from './Modal'
-import Input from './Input'
+import Input from './input'
 import Message from './Message'
 import Notification from './Notification'
 import Pagination from './Pagination'
@@ -20,7 +20,7 @@ import Tooltip from './Tooltip'
 import Popup from './Popover'
 import Alert from './Alert'
 import DatePicker from './DatePicker'
-import InputNumber from './InputNumber'
+import InputNumber from './input-number'
 import Radio from './Radio'
 import Form from './Form'
 import Tabs from './Tabs'
@@ -30,7 +30,7 @@ import Scrollbar from './Scrollbar'
 import Steps from './Steps'
 import ConfirmPlugin from './Confirm'
 import Badge from './badge'
-import Tag from './Tag'
+import Tag from './tag'
 import BackTop from './BackTop'
 import Divider from './Divider'
 import Collapse from './Collapse'
@@ -65,6 +65,8 @@ import Log from './Log'
 import Code from './Code'
 import Typography from './Typography'
 import Upload from './Upload'
+import InputGroup from './input-group'
+import InputGroupLabel from './input-group-label'
 
 import zhCN from './locale/zhCN'
 import enUS from './locale/enUS'
@@ -80,6 +82,16 @@ import lightBadgeStyle from './styles/badge/light'
 import darkBadgeStyle from './styles/badge/dark'
 import lightProgressStyle from './styles/progress/light'
 import darkProgressStyle from './styles/progress/dark'
+import lightBaseSelectionStyle from './styles/_base/selection/light'
+import darkBaseSelectionStyle from './styles/_base/selection/dark'
+import lightBaseSuffixStyle from './styles/_base/suffix/light'
+import darkBaseSuffixStyle from './styles/_base/suffix/dark'
+import lightInputStyle from './styles/input/light'
+import darkInputStyle from './styles/input/dark'
+import lightInputGroupLabel from './styles/input-group-label/light'
+import darkInputGroupLabel from './styles/input-group-label/dark'
+import lightInputNumber from './styles/input-number/light'
+import darkInputNumber from './styles/input-number/dark'
 
 // Deprecated Components
 import NimbusFormCard from './_deprecated/NimbusFormCard'
@@ -158,6 +170,8 @@ export default create({
     Code,
     Typography,
     Upload,
+    InputGroup,
+    InputGroupLabel,
     // Deprecated
     NimbusServiceLayout,
     NimbusConfirmCard,
@@ -171,18 +185,29 @@ export default create({
     dark: darkScheme
   },
   fallbackTheme: 'light',
+  // API to be refined
   _themes: {
     light: {
       base: lightBaseStyle,
       NButton: lightButtonStyle,
       NBadge: lightBadgeStyle,
-      NProgress: lightProgressStyle
+      NProgress: lightProgressStyle,
+      NBaseSelection: lightBaseSelectionStyle,
+      NBaseSuffix: lightBaseSuffixStyle,
+      NInput: lightInputStyle,
+      NInputGroupLabel: lightInputGroupLabel,
+      NInputNumber: lightInputNumber
     },
     dark: {
       base: darkBaseStyle,
       NButton: darkButtonStyle,
       NBadge: darkBadgeStyle,
-      NProgress: darkProgressStyle
+      NProgress: darkProgressStyle,
+      NBaseSelection: darkBaseSelectionStyle,
+      NBaseSuffix: darkBaseSuffixStyle,
+      NInput: darkInputStyle,
+      NInputGroupLabel: darkInputGroupLabel,
+      NInputNumber: darkInputNumber
     }
   }
 })

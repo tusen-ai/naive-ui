@@ -1,4 +1,4 @@
-import { cTB2, c, cB, cM } from '../../../_utils/cssr'
+import { cTB, c, cB, cM } from '../../../_utils/cssr'
 
 export default c([
   c('@keyframes progress-processing-animation', {
@@ -38,7 +38,7 @@ export default c([
     const fillColor = local[status].fillColor
     const outerIndicatorTextColor = local.outerIndicatorTextColor
     const processingLineBackgroundImage = local.processingLineBackgroundImage
-    return cTB2('progress', [
+    return cTB('progress', [
       cM(status, [
         cB('progress-text', {
           color: derived.secondaryTextColor

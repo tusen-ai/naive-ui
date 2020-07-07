@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import NInput from '../../Input'
+import NInput from '../../input'
 import detachable from '../../_mixins/detachable'
 import placeable from '../../_mixins/placeable'
 import zindexable from '../../_mixins/zindexable'

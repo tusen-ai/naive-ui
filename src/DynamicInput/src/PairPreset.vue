@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import NInput from '../../Input'
+import NInput from '../../input'
 
 export default {
   name: 'NDynamicInputPairPreset',

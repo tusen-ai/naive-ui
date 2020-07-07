@@ -1,4 +1,4 @@
-import { c, cB, cTB2, cE, cM, cNotM } from '../../../_utils/cssr'
+import { c, cB, cTB, cE, cM, cNotM } from '../../../_utils/cssr'
 import { read, createHoverColor, createActiveColor } from '../../../_utils/color'
 
 function createRippleAnimation (digest, color, theme) {
@@ -85,7 +85,7 @@ export default c([
         pallete.rippleColor || pallete.borderColor || pallete.color,
         theme
       ),
-      cTB2(
+      cTB(
         'button',
         [
           cM(`${digest}-colored`, createColorProps(
@@ -107,7 +107,7 @@ export default c([
             ] : [],
             cNotM('disabled', [
               cM(
-                'enter-pressed',
+                'active',
                 createColorProps(
                   pallete.activeTextColor || pallete.textColor,
                   pallete.activeColor,
@@ -118,7 +118,7 @@ export default c([
                   createIconColorStyle(pallete.activeTextColor || pallete.textColor)
                 ]
               ),
-              cNotM('enter-pressed', [
+              cNotM('active', [
                 c('&:hover', createColorProps(
                   pallete.hoverTextColor || pallete.textColor,
                   pallete.hoverColor,
@@ -137,7 +137,7 @@ export default c([
                 ])
               ]),
               c('&:not(:active):focus', [
-                cNotM('enter-pressed', createColorProps(
+                cNotM('active', createColorProps(
                   pallete.focusTextColor || pallete.textColor,
                   pallete.focusColor,
                   pallete.focusBorderColor || pallete.focusColor
@@ -156,7 +156,7 @@ export default c([
               ] : [],
               cNotM('disabled', [
                 cM(
-                  'enter-pressed',
+                  'active',
                   createColorProps(
                     pallete.ghostTypedActiveTextColor || pallete.activeColor,
                     'transparent',
@@ -167,7 +167,7 @@ export default c([
                     createIconColorStyle(pallete.ghostTypedActiveTextColor || pallete.activeColor)
                   ]
                 ),
-                cNotM('enter-pressed', [
+                cNotM('active', [
                   c('&:hover', createColorProps(
                     pallete.ghostTypedHoverTextColor || pallete.hoverColor,
                     'transparent',
@@ -186,7 +186,7 @@ export default c([
                   ])
                 ]),
                 c('&:not(:active):focus', [
-                  cNotM('enter-pressed', createColorProps(
+                  cNotM('active', createColorProps(
                     pallete.ghostTypedHoverTextColor || pallete.hoverColor,
                     'transparent',
                     pallete.focusBorderColor || pallete.focusColor
@@ -206,7 +206,7 @@ export default c([
               ] : [],
               cNotM('disabled', [
                 cM(
-                  'enter-pressed',
+                  'active',
                   createColorProps(
                     pallete.textTypedActiveTextColor || pallete.activeColor,
                     null,
@@ -216,7 +216,7 @@ export default c([
                     createIconColorStyle(pallete.textTypedActiveTextColor || pallete.activeColor)
                   ]
                 ),
-                cNotM('enter-pressed', [
+                cNotM('active', [
                   c('&:hover', createColorProps(
                     pallete.textTypedHoverTextColor || pallete.hoverColor,
                     null,
@@ -233,7 +233,7 @@ export default c([
                   ])
                 ]),
                 c('&:not(:active):focus', [
-                  cNotM('enter-pressed', createColorProps(
+                  cNotM('active', createColorProps(
                     pallete.textTypedFocusTextColor || pallete.focusColor,
                     null,
                     null

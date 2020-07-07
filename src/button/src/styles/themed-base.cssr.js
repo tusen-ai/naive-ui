@@ -1,4 +1,4 @@
-import { c, cTB2, cB, cE, cM, cNotM } from '../../../_utils/cssr'
+import { c, cTB, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 import fadeInWidthExpandTransition from '../../../styles/_transitions/fade-in-width-expand'
 
 export default c([
@@ -6,7 +6,7 @@ export default c([
     const local = props.$local
     const base = props.$base
     const easeInOutCubicBezier = base.easeInOutCubicBezier
-    return cTB2(
+    return cTB(
       'button',
       {
         raw: `
@@ -77,15 +77,17 @@ export default c([
             white-space: nowrap;
             transition: color .3s ${easeInOutCubicBezier};
           `
-        }),
-        cM('left-icon', [
+        }, [
+          c('~', [
+            cE('icon', {
+              marginLeft: '6px',
+              marginRight: 0
+            })
+          ])
+        ]),
+        cNotM('no-text', [
           cE('icon', {
             marginRight: '6px'
-          })
-        ]),
-        cM('right-icon', [
-          cE('icon', {
-            marginLeft: '6px'
           })
         ]),
         cM('block', {

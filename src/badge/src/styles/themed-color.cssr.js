@@ -1,4 +1,4 @@
-import { c, cTB2, cB, cM } from '../../../_utils/cssr'
+import { c, cTB, cB, cM } from '../../../_utils/cssr'
 
 function createRippleAnimation (digest, color, theme) {
   return [
@@ -37,7 +37,7 @@ export default c([
     const theme = props.$renderedTheme
     return [
       createRippleAnimation(digest, color, theme),
-      cTB2('badge', [
+      cTB('badge', [
         cM(digest + '-colored', [
           cB('badge-sup', {
             background: color

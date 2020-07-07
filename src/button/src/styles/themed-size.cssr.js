@@ -1,10 +1,10 @@
-import { c, cB, cTB2, cE, cM, cNotM } from '../../../_utils/cssr'
+import { c, cB, cTB, cE, cM, cNotM } from '../../../_utils/cssr'
 import formatLength from '../../../_utils/css/formatLength'
 import iconSwitchTransition from '../../../styles/_transitions/icon-switch'
 
 export default c([
   ({ props }) => {
-    const size = props.$instance.size
+    const size = props.$instance.syntheticSize
     const height = props.$local.height[size]
     const fontSize = props.$local.fontSize[size]
     const borderRadius = props.$local.borderRadius
@@ -13,7 +13,7 @@ export default c([
     const roundBorderRadius = formatLength(height, 0.5)
     const lineHeight = formatLength(height, 1, -2)
     const iconSize = props.$local.iconSize[size]
-    return cTB2(
+    return cTB(
       'button',
       [
         cM(`${size}-size`, {

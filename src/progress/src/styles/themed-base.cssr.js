@@ -1,10 +1,10 @@
-import { cTB2, c, cB, cE, cM } from '../../../_utils/cssr'
+import { cTB, c, cB, cE, cM } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
     const base = props.$base
     const local = props.$local
-    return cTB2('progress', {
+    return cTB('progress', {
       display: 'inline-block'
     }, [
       cM('line', {
