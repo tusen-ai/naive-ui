@@ -1,4 +1,4 @@
-import { cTB2, c, cB, cE, cM, cNotM, insideFormItem } from '../../../../_utils/cssr'
+import { cTB, c, cB, cE, cM, cNotM, insideFormItem } from '../../../../_utils/cssr'
 
 // TODO split form-item styles out
 export default c([
@@ -8,7 +8,7 @@ export default c([
     const base = props.$base
     const easeInOutCubicBezier = base.easeInOutCubicBezier
     const borderRadius = local.borderRadius
-    return cTB2('base-selection', {
+    return cTB('base-selection', {
       raw: `
         position: relative;
         z-index: auto;
@@ -262,7 +262,7 @@ export default c([
       'error'
     ].map(status => {
       const pallete = props.$local[status]
-      return insideFormItem(status, cTB2('base-selection', [
+      return insideFormItem(status, cTB('base-selection', [
         [
           cB('base-selection-border-mask', {
             boxShadow: pallete.borderMaskBoxShadow

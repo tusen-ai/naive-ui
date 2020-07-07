@@ -18,61 +18,6 @@ context.theme = null
 context.pallete = null
 const { cB, cE, cM, cNotM } = plugin
 
-const cTB = (selector, ...rest) => {
-  return cB(selector, [
-    ({ context: ctx }) => {
-      if (ctx.theme) {
-        return c('&' + prefix + ctx.theme + '-theme', ...rest)
-      }
-      return c('&', ...rest)
-    }
-  ])
-}
-
-/** @deprecated */
-function createThemedStyle (style, themes) {
-  const fallbackPallete = themes.fallback
-  return c([
-    /** render a fallback style */
-    c({
-      before: ctx => {
-        ctx.theme = null
-        ctx.pallete = fallbackPallete
-      },
-      after: ctx => {
-        ctx.theme = null
-        ctx.pallete = null
-      }
-    }, [
-      style
-    ]),
-    /** render themed styles */
-    c({
-      before: ctx => {
-        ctx.theme = 'dark'
-        ctx.pallete = themes['dark'] || fallbackPallete
-      },
-      after: ctx => {
-        ctx.theme = null
-        ctx.pallete = null
-      }
-    }, [
-      style
-    ])
-  ])
-}
-
-/** @deprecated */
-function createStyleAsFormItem (style) {
-  return c(`${prefix}form-item`, [
-    c(`${prefix}form-item-blank`, [
-      c(({ props }) => `&${prefix}form-item-blank${modifierPrefix}${props.status}`, [
-        style
-      ])
-    ])
-  ])
-}
-
 function insideFormItem (status, style) {
   if (status === null) return style
   return c(`${prefix}form-item`, [
@@ -84,8 +29,7 @@ function insideFormItem (status, style) {
   ])
 }
 
-// TODO rename
-function cTB2 (selector, ...rest) {
+function cTB (selector, ...rest) {
   return cB(selector, [
     c(
       ({ props }) => {
@@ -103,4 +47,4 @@ function cTB2 (selector, ...rest) {
   ])
 }
 
-export { c, cTB, cTB2, cB, cE, cM, cNotM, createThemedStyle, createStyleAsFormItem, namespace, insideFormItem }
+export { c, cTB, cB, cE, cM, cNotM, insideFormItem, namespace }

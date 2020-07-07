@@ -1,10 +1,10 @@
-import { c, cTB2, cB, cM } from '../../../_utils/cssr'
+import { c, cTB, cB, cM } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../styles/_transitions/fade-in-scale-up'
 
 export default c([
   ({ props }) => {
     const base = props.$base
-    return cTB2('badge', {
+    return cTB('badge', {
       display: 'inline-flex',
       position: 'relative',
       verticalAlign: 'middle'

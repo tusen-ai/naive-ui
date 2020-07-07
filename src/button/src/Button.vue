@@ -278,7 +278,7 @@ export default {
       }
     }
   },
-  beforeMount () {
+  created () {
     const color = this.color
     const colorDigest = this.colorDigest
     if (color) {

@@ -1,4 +1,4 @@
-import { cTB2, c, cE, cM, cNotM } from '../../../_utils/cssr'
+import { cTB, c, cE, cM, cNotM } from '../../../_utils/cssr'
 import depx from '../../../_utils/css/depx'
 import pxfy from '../../../_utils/css/pxfy'
 
@@ -10,7 +10,7 @@ export default c([
     const lineHeight = pxfy(Math.round(depx(fontSize) * 1.5))
     const paddingTop = pxfy((depx(height) - depx(lineHeight)) / 2)
     const roundBorderRadius = pxfy(depx(height) / 2)
-    return cTB2('input', [
+    return cTB('input', [
       cM(size + '-size', {
         lineHeight: lineHeight,
         fontSize

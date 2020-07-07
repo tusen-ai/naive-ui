@@ -1,4 +1,4 @@
-import { cTB2, c, cB, cE, cM } from '../../../../_utils/cssr'
+import { cTB, c, cB, cE, cM } from '../../../../_utils/cssr'
 import formatLength from '../../../../_utils/css/formatLength'
 
 // TODO split form-item styles out
@@ -7,7 +7,7 @@ export default c([
     const size = props.$instance.size
     const height = props.$local.height[size]
     const fontSize = props.$local.fontSize[size]
-    return cTB2('base-selection', [
+    return cTB('base-selection', [
       cM(size + '-size', {
         height,
         lineHeight: height,

@@ -149,7 +149,7 @@ export default function (styles) {
       }
     )
   return {
-    beforeMount () {
+    created () {
       styles.forEach(style => {
         if (process.env.NODE_ENV !== 'production') {
           window.naive.styleRenderingDuration -= performance.now()

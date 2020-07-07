@@ -1,4 +1,4 @@
-import { cTB2, c, cB, cE, cM, insideFormItem } from '../../../_utils/cssr'
+import { cTB, c, cB, cE, cM, insideFormItem } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
@@ -30,7 +30,7 @@ export default c([
       hoverBorderMaskBoxShadow,
       placeholdeColor
     } = props.$local.default
-    return cTB2('input-number', {
+    return cTB('input-number', {
       raw: `
         position: relative;
         box-sizing: border-box;
@@ -285,7 +285,7 @@ export default c([
     } = pallete
     return insideFormItem(
       status,
-      cTB2('input-number', [
+      cTB('input-number', [
         cE('border-mask', {
           boxShadow: borderMaskBoxShadow
         }),

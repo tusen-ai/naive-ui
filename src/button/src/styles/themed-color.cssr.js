@@ -1,4 +1,4 @@
-import { c, cB, cTB2, cE, cM, cNotM } from '../../../_utils/cssr'
+import { c, cB, cTB, cE, cM, cNotM } from '../../../_utils/cssr'
 import { read, createHoverColor, createActiveColor } from '../../../_utils/color'
 
 function createRippleAnimation (digest, color, theme) {
@@ -85,7 +85,7 @@ export default c([
         pallete.rippleColor || pallete.borderColor || pallete.color,
         theme
       ),
-      cTB2(
+      cTB(
         'button',
         [
           cM(`${digest}-colored`, createColorProps(

@@ -1,4 +1,4 @@
-import { cTB2, c, cB, cE, cM, insideFormItem } from '../../../_utils/cssr'
+import { cTB, c, cB, cE, cM, insideFormItem } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../styles/_transitions/fade-in-scale-up'
 
 export default c([
@@ -31,7 +31,7 @@ export default c([
     const {
       easeInOutCubicBezier
     } = props.$base
-    return cTB2('input', {
+    return cTB('input', {
       raw: `
         z-index: auto;
         outline: none;

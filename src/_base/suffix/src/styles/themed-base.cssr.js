@@ -1,9 +1,9 @@
-import { cTB2, c, cB, cE, cM, insideFormItem } from '../../../../_utils/cssr'
+import { cTB, c, cB, cE, cM, insideFormItem } from '../../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../../styles/_transitions/fade-in-scale-up'
 import createIconSwitchTransition from '../../../../styles/_transitions/icon-switch'
 
 function styleInsideFormItem (status, pallete) {
-  return insideFormItem(status, cTB2('base-suffix', [
+  return insideFormItem(status, cTB('base-suffix', [
     cB('base-suffix-cross', [
       c('&:hover', [
         cE('icon', {
@@ -35,7 +35,7 @@ export default c([
     const easeInOutCubicBezier = base.easeInOutCubicBezier
     const pallete = props.$local.default
     return [
-      cTB2('base-suffix', {
+      cTB('base-suffix', {
         raw: `
       user-select: none;
       display: inline-block;

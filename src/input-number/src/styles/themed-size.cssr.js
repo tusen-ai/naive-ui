@@ -1,4 +1,4 @@
-import { cTB2, c, cE, cM } from '../../../_utils/cssr'
+import { cTB, c, cE, cM } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
@@ -7,7 +7,7 @@ export default c([
     const height = local.height[size]
     const fontSize = local.fontSize[size]
     const width = local.buttonWidth[size]
-    return cTB2('input-number', [
+    return cTB('input-number', [
       cM(size + '-size', {
         height,
         lineHeight: height

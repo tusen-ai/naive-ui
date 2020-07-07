@@ -1,4 +1,4 @@
-import { cTB2, c } from '../../../_utils/cssr'
+import { cTB, c } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
@@ -11,7 +11,7 @@ export default c([
       textColor,
       boxShadow
     } = props.$local
-    return cTB2('input-group-label', {
+    return cTB('input-group-label', {
       userSelect: 'none',
       boxSizing: 'border-box',
       padding: '0 12px',
