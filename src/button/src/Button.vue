@@ -1,9 +1,4 @@
 <template>
-  <!--
-    color related class need to be refined, especially for it conflict with type
-    related class. Although it works for now, refinement is still in need. Maybe
-    rename type class to sth like **-info-colored is a solution in semantics.
-  -->
   <button
     class="n-button"
     :class="{
@@ -12,14 +7,13 @@
       'n-button--disabled': disabled,
       'n-button--loading': loading,
       'n-button--block': block,
-      'n-button--enter-pressed': enterPressed,
+      'n-button--active': enterPressed,
       'n-button--ghost': ghost,
       'n-button--text': text,
+      'n-button--no-text': noTextContent,
       [`n-button--${type}-type`]: true,
       [`n-button--${colorDigest || type}-colored`]: true,
       [`n-button--${syntheticSize}-size`]: true,
-      [`n-button--${iconPlacement}-icon`]: iconPlacement && !noTextContent,
-      [`n-button--${iconDepth}-icon-depth`]: type === 'default',
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
     }"
     :tabindex="syntheticFocusable ? 0 : -1"

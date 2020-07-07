@@ -77,15 +77,17 @@ export default c([
             white-space: nowrap;
             transition: color .3s ${easeInOutCubicBezier};
           `
-        }),
-        cM('left-icon', [
+        }, [
+          c('~', [
+            cE('icon', {
+              marginLeft: '6px',
+              marginRight: 0
+            })
+          ])
+        ]),
+        cNotM('no-text', [
           cE('icon', {
             marginRight: '6px'
-          })
-        ]),
-        cM('right-icon', [
-          cE('icon', {
-            marginLeft: '6px'
           })
         ]),
         cM('block', {
