@@ -3,7 +3,7 @@ import hljs from './hljs'
 import demoRouterView from './demoRouterView'
 import naive from '../lib/index'
 import '../lib/styles/index.css'
-import './styles/test-customize-style-scheme.scss' // test
+// import './styles/test-customize-style-scheme.scss' // test
 import '../lib/styles/fonts/Lato.css'
 import '../lib/styles/fonts/FiraCode.css'
 import createRouter from './routes/router'
