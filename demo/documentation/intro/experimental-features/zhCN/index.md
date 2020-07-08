@@ -23,6 +23,20 @@
   @return null;
 }
 
+@function get-primary-hover-color ($theme) {
+  @if $theme == 'light' {
+    @return rgb(0, 255, 0);
+  }
+  @return null;
+}
+
+@function get-primary-active-color ($theme) {
+  @if $theme == 'light' {
+    @return rgb(0, 0, 255);
+  }
+  @return null;
+}
+
 // naive-ui 会检查 getter 函数的存在性然后在合适的时候设定相关变量
 @import '~naive-ui/src/_styles/index.scss';
 ```
@@ -47,9 +61,11 @@ import 'path/to/customized-style.scss'
 
 import naive from 'naive-ui'
 
-naive.setStyleSchemes({
-  light: {
-    primaryColor: 'rgb(255, 0, 0)'
+naive.styles.light.base.override({
+  derived: {
+    primaryColor: 'rgb(255, 0, 0)',
+    primaryHoverColor: 'rgb(0, 255, 0)',
+    primaryActiveColor: 'rgb(0, 0, 255)'
   }
 })
 

@@ -1,20 +1,10 @@
 export default function createThemeBase (theme) {
-  function customize (options = {}) {
-    const {
-      base = {},
-      derived = {}
-    } = options
-    const syntheticBase = Object.assign({}, this.base, base)
-    const syntheticDerived = Object.assign(
-      {},
-      this.createDerivedVariables(syntheticBase),
-      derived
-    )
-    return {
-      base: syntheticBase,
-      derived: syntheticDerived
-    }
+  function override (options = {}) {
+    baseOverrided = options.base
+    derivedOverrided = options.derived
   }
+  let baseOverrided = null
+  let derivedOverrided = null
   let cachedBased = null
   let cachedDerived = null
   return {
@@ -22,17 +12,18 @@ export default function createThemeBase (theme) {
     theme: theme.theme,
     get base () {
       if (!cachedBased) {
-        return this.getBaseVariables()
+        cachedBased = Object.assign(this.getBaseVariables(), baseOverrided)
       }
+      return cachedBased
     },
     getBaseVariables: theme.getBaseVariables,
     getDerivedVariables: theme.getDerivedVariables,
     get derived () {
       if (!cachedDerived) {
-        cachedDerived = this.getDerivedVariables(this.base)
+        cachedDerived = Object.assign(this.getDerivedVariables(this.base), derivedOverrided)
       }
       return cachedDerived
     },
-    customize
+    override
   }
 }

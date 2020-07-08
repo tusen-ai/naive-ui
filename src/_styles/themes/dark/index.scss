@@ -221,15 +221,23 @@
   }
 }
 
-@mixin setup-dark-custom-variables {
+@mixin setup-light-custom-variables {
   @if function-exists('get-primary-color') {
-    $primary-color: get-primary-color('dark');
-    @if $primary-color != null {
-      $primary-hover-color: composite-color($primary-color, rgba(255, 255, 255, .14));
-      $primary-active-color: composite-color($primary-color, rgba(0, 0, 0, .1));
-      $--n-primary-color: $primary-color !global;
-      $--n-primary-hover-color: $primary-hover-color !global;
-      $--n-primary-active-color: $primary-active-color !global;
+    $color: get-primary-color('dark');
+    @if $color != null {
+      $--n-primary-color: $color !global;
+    }
+  }
+  @if function-exists('get-primary-hover-color') {
+    $color: get-primary-hover-color('dark');
+    @if $color != null {
+      $--n-primary-hover-color: $color !global;
+    }
+  }
+  @if function-exists('get-primary-active-color') {
+    $color: get-primary-active-color('dark');
+    @if $color != null {
+      $--n-primary-active-color: $color !global;
     }
   }
 }
