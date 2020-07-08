@@ -1,7 +1,9 @@
-import create from '../_utils/create-component-base'
-import commonVariables from '../_common-style/button'
+import create from '../../styles/_utils/create-component-base'
+import commonVariables from '../../styles/_common-style/button'
 
 export default create({
+  theme: 'dark',
+  name: 'Button',
   getDerivedVariables ({ base, derived }) {
     return {
       ...commonVariables,
@@ -28,7 +30,7 @@ export default create({
         ghostTypedActiveTextColor: derived.primaryActiveColor,
         ghostTypedFocusTextColor: derived.primaryHoverColor,
 
-        borderColor: derived.borderColor,
+        borderColor: derived.borderOverlayColor,
         hoverBorderColor: derived.primaryHoverColor,
         activeBorderColor: derived.primaryActiveColor,
         focusBorderColor: derived.primaryHoverColor,

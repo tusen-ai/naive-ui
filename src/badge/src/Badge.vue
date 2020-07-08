@@ -42,7 +42,7 @@ import NBaseSlotMachine from '../../_base/slot-machine'
 import NBaseWave from '../../_base/wave'
 
 export default {
-  name: 'NBadge',
+  name: 'Badge',
   components: {
     NBaseSlotMachine,
     NBaseWave

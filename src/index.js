@@ -74,12 +74,14 @@ import enUS from './locale/enUS'
 import lightScheme from './_styles-in-js/lightStyleScheme.scss'
 import darkScheme from './_styles-in-js/darkStyleScheme.scss'
 
-import lightBaseStyle from './styles/base/light'
-import darkBaseStyle from './styles/base/dark'
-import lightButtonStyle from './styles/button/light'
-import darkButtonStyle from './styles/button/dark'
-import lightBadgeStyle from './styles/badge/light'
-import darkBadgeStyle from './styles/badge/dark'
+import lightBaseStyle from './styles/base/light' // Done
+import darkBaseStyle from './styles/base/dark' // Done
+import lightButtonStyle from './button/styles/light' // Done
+import darkButtonStyle from './button/styles/dark' // Done
+
+import lightBadgeStyle from './badge/styles/light'
+import darkBadgeStyle from './badge/styles/dark'
+
 import lightProgressStyle from './styles/progress/light'
 import darkProgressStyle from './styles/progress/dark'
 import lightBaseSelectionStyle from './styles/_base/selection/light'
@@ -102,6 +104,9 @@ import NimbusIcon from './_deprecated/NimbusIcon'
 import create from './create'
 
 export default create({
+  locales: [zhCN, enUS],
+  fallbackLocale: enUS,
+  fallbackTheme: 'light',
   components: [
     Card,
     Icon,
@@ -178,13 +183,10 @@ export default create({
     NimbusFormCard,
     NimbusIcon
   ],
-  locales: [zhCN, enUS],
-  fallbackLocale: enUS,
-  styleSchemes: {
-    light: lightScheme,
-    dark: darkScheme
-  },
-  fallbackTheme: 'light',
+  styles: [
+    lightButtonStyle,
+    darkButtonStyle
+  ],
   // API to be refined
   _themes: {
     light: {
@@ -209,5 +211,10 @@ export default create({
       NInputGroupLabel: darkInputGroupLabel,
       NInputNumber: darkInputNumber
     }
+  },
+  // deprecated
+  styleSchemes: {
+    light: lightScheme,
+    dark: darkScheme
   }
 })

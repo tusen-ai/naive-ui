@@ -99,7 +99,7 @@ import { read, hash } from '../../_utils/color/index.js'
 import colorStyle from './styles/themed-color.cssr.js'
 
 export default {
-  name: 'NButton',
+  name: 'Button',
   components: {
     NBaseLoading,
     NBaseWave,
