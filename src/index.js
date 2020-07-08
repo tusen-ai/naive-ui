@@ -74,24 +74,24 @@ import enUS from './locale/enUS'
 import lightScheme from './_styles-in-js/lightStyleScheme.scss'
 import darkScheme from './_styles-in-js/darkStyleScheme.scss'
 
-import lightBaseStyle from './styles/base/light' // Done
-import darkBaseStyle from './styles/base/dark' // Done
-import lightButtonStyle from './button/styles/light' // Done
-import darkButtonStyle from './button/styles/dark' // Done
-import lightBadgeStyle from './badge/styles/light' // Done
-import darkBadgeStyle from './badge/styles/dark' // Done
-import lightProgressStyle from './progress/styles/light' // Done
-import darkProgressStyle from './progress/styles/dark' // Done
-import lightInputStyle from './input/styles/light' // Done
-import darkInputStyle from './input/styles/dark' // Done
-import lightInputGroupLabelStyle from './input-group-label/styles/light' // Done
-import darkInputGroupLabelStyle from './input-group-label/styles/dark' // Done
-import lightInputNumberStyle from './input-number/styles/light'// Done
-import darkInputNumberStyle from './input-number/styles/dark'// Done
+import baseLightStyle from './styles/base/light'
+import baseDarkStyle from './styles/base/dark'
+import buttonLightStyle from './button/styles/light'
+import buttonDarkStyle from './button/styles/dark'
+import badgeLightStyle from './badge/styles/light'
+import badgeDarkStyle from './badge/styles/dark'
+import progressLightStyle from './progress/styles/light'
+import progressDarkStyle from './progress/styles/dark'
+import inputLightStyle from './input/styles/light'
+import inputDarkStyle from './input/styles/dark'
+import inputGroupLabelLightStyle from './input-group-label/styles/light'
+import inputGroupLabelDarkStyle from './input-group-label/styles/dark'
+import inputNumberLightStyle from './input-number/styles/light'
+import inputNumberDarkStyle from './input-number/styles/dark'
 
 // Can be remove after refactoring
-import lightBaseSelectionStyle from './_base/selection/styles/light'
-import darkBaseSelectionStyle from './_base/selection/styles/dark'
+import baseSelectionLightStyle from './_base/selection/styles/light'
+import baseSelectionDarkStyle from './_base/selection/styles/dark'
 
 // Deprecated Components
 import NimbusFormCard from './_deprecated/NimbusFormCard'
@@ -182,23 +182,25 @@ export default create({
     NimbusIcon
   ],
   styles: [
-    lightBaseStyle,
-    darkBaseStyle,
-    lightButtonStyle,
-    darkButtonStyle,
-    lightBadgeStyle,
-    darkBadgeStyle,
-    lightProgressStyle,
-    darkProgressStyle,
-    lightInputStyle,
-    darkInputStyle,
-    lightInputGroupLabelStyle,
-    darkInputGroupLabelStyle,
-    lightInputNumberStyle,
-    darkInputNumberStyle,
+    // base style, essential
+    baseLightStyle,
+    baseDarkStyle,
+    // components style
+    buttonLightStyle,
+    buttonDarkStyle,
+    badgeLightStyle,
+    badgeDarkStyle,
+    progressLightStyle,
+    progressDarkStyle,
+    inputLightStyle,
+    inputDarkStyle,
+    inputGroupLabelLightStyle,
+    inputGroupLabelDarkStyle,
+    inputNumberLightStyle,
+    inputNumberDarkStyle,
     // Can be remove after refactoring
-    lightBaseSelectionStyle,
-    darkBaseSelectionStyle
+    baseSelectionLightStyle,
+    baseSelectionDarkStyle
   ],
   // deprecated
   styleSchemes: {
