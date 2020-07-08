@@ -62,7 +62,7 @@ So let's continue. Set `style-schemes` on the naive-ui instance.
 
 import naive from 'naive-ui'
 
-naive.styles.light.base.override({
+naive.styles.light.override({
   derived: {
     primaryColor: 'rgb(255, 0, 0)',
     primaryHoverColor: 'rgb(0, 255, 0)',

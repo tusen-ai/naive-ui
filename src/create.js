@@ -15,6 +15,9 @@ function createStylesObject (styles) {
     rootStyles.forEach(style => {
       if (!stylesObject[style.theme]) {
         stylesObject[style.theme] = {}
+        stylesObject[style.theme].override = (...args) => {
+          stylesObject[style.theme].base.override(...args)
+        }
       }
       if (!stylesObject[style.theme][style.name]) {
         stylesObject[style.theme][style.name] = style
