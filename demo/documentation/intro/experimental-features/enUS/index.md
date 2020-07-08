@@ -55,7 +55,7 @@ import 'path/to/customized-style.scss'
 
 Not done yet. You still need to set the primary color in the js environment. Since naive-ui use CSS-in-JS...
 
-So let's continue. Set `style-schemes` on the naive-ui instance.
+So let's continue, override the light theme on naive-ui instance.
 
 ```js
 // ...

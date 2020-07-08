@@ -54,7 +54,7 @@ import 'path/to/customized-style.scss'
 还没有完事，你还需要在 JS 的环境中设定主色。因为 naive-ui 使用了 CSS-in-JS...
 
 
-所以继续，在 naive-ui 的实例上设定 `style-schemes`。
+所以继续，在 naive-ui 的实例上设定亮色主题。
 
 ```js
 // ...
