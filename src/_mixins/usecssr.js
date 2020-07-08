@@ -14,8 +14,8 @@ function markStyleMounted (id) {
 }
 
 function getThemeVariables (naive, themeName) {
-  const themes = naive._themes
-  const theme = themes[themeName]
+  const styles = naive.styles
+  const theme = styles[themeName]
   return theme.base
 }
 

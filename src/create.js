@@ -43,12 +43,13 @@ function create ({
     locales: createLocalesObject(locales),
     fallbackLocale: fallbackLocale || locales[0],
     hljs,
-    setHljs,
-    setHighlightjs: setHljs,
-    install,
     components: {},
     styles: createStylesObject(styles),
-    fallbackTheme: fallbackTheme || 'light'
+    fallbackTheme: fallbackTheme || 'light',
+    // external
+    setHljs,
+    setHighlightjs: setHljs,
+    install
   }
   function install (Vue) {
     if (installTargets.includes(Vue)) return
