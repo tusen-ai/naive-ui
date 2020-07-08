@@ -20,7 +20,7 @@ import Tooltip from './Tooltip'
 import Popup from './Popover'
 import Alert from './Alert'
 import DatePicker from './DatePicker'
-import InputNumber from './input-number'
+import InputNumberStyle from './input-number'
 import Radio from './Radio'
 import Form from './Form'
 import Tabs from './Tabs'
@@ -66,7 +66,7 @@ import Code from './Code'
 import Typography from './Typography'
 import Upload from './Upload'
 import InputGroup from './input-group'
-import InputGroupLabel from './input-group-label'
+import InputGroupLabelStyle from './input-group-label'
 
 import zhCN from './locale/zhCN'
 import enUS from './locale/enUS'
@@ -84,16 +84,15 @@ import lightProgressStyle from './progress/styles/light' // Done
 import darkProgressStyle from './progress/styles/dark' // Done
 import lightInputStyle from './input/styles/light' // Done
 import darkInputStyle from './input/styles/dark' // Done
+import lightInputGroupLabelStyle from './input-group-label/styles/light' // Done
+import darkInputGroupLabelStyle from './input-group-label/styles/dark' // Done
+import lightInputNumberStyle from './input-number/styles/light'// Done
+import darkInputNumberStyle from './input-number/styles/dark'// Done
 
 // import lightBaseSelectionStyle from './styles/_base/selection/light'
 // import darkBaseSelectionStyle from './styles/_base/selection/dark'
 // import lightBaseSuffixStyle from './styles/_base/suffix/light'
 // import darkBaseSuffixStyle from './styles/_base/suffix/dark'
-
-import lightInputGroupLabel from './styles/input-group-label/light'
-import darkInputGroupLabel from './styles/input-group-label/dark'
-import lightInputNumber from './styles/input-number/light'
-import darkInputNumber from './styles/input-number/dark'
 
 // Deprecated Components
 import NimbusFormCard from './_deprecated/NimbusFormCard'
@@ -128,7 +127,7 @@ export default create({
     Popup,
     Alert,
     DatePicker,
-    InputNumber,
+    InputNumberStyle,
     Radio,
     Cascader,
     DynamicInput,
@@ -176,7 +175,7 @@ export default create({
     Typography,
     Upload,
     InputGroup,
-    InputGroupLabel,
+    InputGroupLabelStyle,
     // Deprecated
     NimbusServiceLayout,
     NimbusConfirmCard,
@@ -184,34 +183,21 @@ export default create({
     NimbusIcon
   ],
   styles: [
+    lightBaseStyle,
+    darkBaseStyle,
     lightButtonStyle,
-    darkButtonStyle
+    darkButtonStyle,
+    lightBadgeStyle,
+    darkBadgeStyle,
+    lightProgressStyle,
+    darkProgressStyle,
+    lightInputStyle,
+    darkInputStyle,
+    lightInputGroupLabelStyle,
+    darkInputGroupLabelStyle,
+    lightInputNumberStyle,
+    darkInputNumberStyle
   ],
-  // API to be refined
-  _themes: {
-    light: {
-      base: lightBaseStyle,
-      NButton: lightButtonStyle,
-      NBadge: lightBadgeStyle,
-      NProgress: lightProgressStyle,
-      NBaseSelection: lightBaseSelectionStyle,
-      NBaseSuffix: lightBaseSuffixStyle,
-      NInput: lightInputStyle,
-      NInputGroupLabel: lightInputGroupLabel,
-      NInputNumber: lightInputNumber
-    },
-    dark: {
-      base: darkBaseStyle,
-      NButton: darkButtonStyle,
-      NBadge: darkBadgeStyle,
-      NProgress: darkProgressStyle,
-      NBaseSelection: darkBaseSelectionStyle,
-      NBaseSuffix: darkBaseSuffixStyle,
-      NInput: darkInputStyle,
-      NInputGroupLabel: darkInputGroupLabel,
-      NInputNumber: darkInputNumber
-    }
-  },
   // deprecated
   styleSchemes: {
     light: lightScheme,

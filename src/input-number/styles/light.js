@@ -1,9 +1,11 @@
-import create from '../_utils/create-component-base'
+import create from '../../styles/_utils/create-component-base'
 import { changeColor } from '../../_utils/color'
-import inputCommonVariables from '../_common-style/input'
-import inputNumberCommonVariables from '../_common-style/input-number'
+import inputCommonVariables from '../../styles/_common-style/input'
+import inputNumberCommonVariables from '../../styles/_common-style/input-number'
 
 export default create({
+  name: 'InputGroup',
+  theme: 'light',
   getDerivedVariables ({ base, derived }) {
     const {
       borderRadius

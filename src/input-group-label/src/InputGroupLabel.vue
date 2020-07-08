@@ -17,7 +17,7 @@ import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
 
 export default {
-  name: 'NInputGroupLabel',
+  name: 'InputGroupLabel',
   mixins: [
     withapp,
     themeable,

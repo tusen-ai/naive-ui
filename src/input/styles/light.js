@@ -1,5 +1,5 @@
-import create from '../_utils/create-component-base'
-import commonVariables from '../_common-style/input'
+import create from '../../styles/_utils/create-component-base'
+import commonVariables from '../../styles/_common-style/input'
 import { changeColor } from '../../_utils/color/index'
 import suffixStyle from '../../_base/suffix/styles/light'
 

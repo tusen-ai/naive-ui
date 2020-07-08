@@ -1,4 +1,4 @@
-import create from '../_utils/create-component-base'
+import create from '../../styles/_utils/create-component-base'
 import commonVariables from '../../styles/_common-style/button'
 
 export default create({
