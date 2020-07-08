@@ -1,8 +1,12 @@
 import create from '../../_utils/create-component-base'
 import commonVariables from '../../_common-style/base-selection'
 import { changeColor } from '../../../_utils/color'
+import suffixStyle from '../../suffix/styles/dark'
 
 export default create({
+  name: 'BaseSelection',
+  theme: 'light',
+  peer: [ suffixStyle ],
   getDerivedVariables ({ base, derived }) {
     return {
       ...commonVariables,

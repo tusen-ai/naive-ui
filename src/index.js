@@ -78,18 +78,18 @@ import lightBaseStyle from './styles/base/light' // Done
 import darkBaseStyle from './styles/base/dark' // Done
 import lightButtonStyle from './button/styles/light' // Done
 import darkButtonStyle from './button/styles/dark' // Done
+import lightBadgeStyle from './badge/styles/light' // Done
+import darkBadgeStyle from './badge/styles/dark' // Done
+import lightProgressStyle from './progress/styles/light' // Done
+import darkProgressStyle from './progress/styles/dark' // Done
+import lightInputStyle from './input/styles/light' // Done
+import darkInputStyle from './input/styles/dark' // Done
 
-import lightBadgeStyle from './badge/styles/light'
-import darkBadgeStyle from './badge/styles/dark'
+// import lightBaseSelectionStyle from './styles/_base/selection/light'
+// import darkBaseSelectionStyle from './styles/_base/selection/dark'
+// import lightBaseSuffixStyle from './styles/_base/suffix/light'
+// import darkBaseSuffixStyle from './styles/_base/suffix/dark'
 
-import lightProgressStyle from './styles/progress/light'
-import darkProgressStyle from './styles/progress/dark'
-import lightBaseSelectionStyle from './styles/_base/selection/light'
-import darkBaseSelectionStyle from './styles/_base/selection/dark'
-import lightBaseSuffixStyle from './styles/_base/suffix/light'
-import darkBaseSuffixStyle from './styles/_base/suffix/dark'
-import lightInputStyle from './styles/input/light'
-import darkInputStyle from './styles/input/dark'
 import lightInputGroupLabel from './styles/input-group-label/light'
 import darkInputGroupLabel from './styles/input-group-label/dark'
 import lightInputNumber from './styles/input-number/light'

@@ -1,9 +1,11 @@
 import create from '../_utils/create-component-base'
 
 export default create({
+  name: 'Progress',
+  theme: 'dark',
   getDerivedVariables ({ derived }) {
     return {
-      railColor: derived.progressRailBackgroundColor,
+      railColor: derived.progressRailBackgroundOverlayColor,
       default: {
         fillColor: derived.infoColor
       },
@@ -19,8 +21,8 @@ export default create({
       error: {
         fillColor: derived.errorColor
       },
-      innerIndicatorTextColor: 'rgb(255, 255, 255)',
-      outerIndicatorTextColor: 'rgb(255, 255, 255)',
+      innerIndicatorTextColor: 'rgb(0, 0, 0)',
+      outerIndicatorTextColor: 'rgb(0, 0, 0)',
       processingLineBackgroundImage: 'linear-gradient(90deg, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, .5) 100%)'
     }
   }

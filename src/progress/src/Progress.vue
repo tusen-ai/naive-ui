@@ -247,7 +247,7 @@ function circlePath (r, sw, vw = 100) {
 }
 
 export default {
-  name: 'NProgress',
+  name: 'Progress',
   components: {
     NIcon,
     mdCheckmark,

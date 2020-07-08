@@ -1,8 +1,12 @@
 import create from '../_utils/create-component-base'
 import commonVariables from '../_common-style/input'
 import { changeColor } from '../../_utils/color/index'
+import suffixStyle from '../../_base/suffix/styles/light'
 
 export default create({
+  name: 'Input',
+  theme: 'light',
+  peer: [ suffixStyle ],
   getDerivedVariables ({ base, derived }) {
     const {
       secondaryTextColor,
