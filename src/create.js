@@ -19,10 +19,10 @@ function createStylesObject (styles) {
       if (!stylesObject[style.theme][style.name]) {
         stylesObject[style.theme][style.name] = style
       }
+      if (style.peer) {
+        traverse(style.peer)
+      }
     })
-    if (rootStyles.peer) {
-      traverse(rootStyles.peer)
-    }
   }
   traverse(styles)
   return stylesObject

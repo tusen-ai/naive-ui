@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "scripts": {
+    "start": "npm run dev",
     "build:style": "npm run clean && node build/buildStyle.js",
     "build:icon": "npm run clean && node build/buildIcon.js",
     "build:js": "npm run clean && rollup -c",

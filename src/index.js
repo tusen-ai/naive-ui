@@ -89,10 +89,9 @@ import darkInputGroupLabelStyle from './input-group-label/styles/dark' // Done
 import lightInputNumberStyle from './input-number/styles/light'// Done
 import darkInputNumberStyle from './input-number/styles/dark'// Done
 
-// import lightBaseSelectionStyle from './styles/_base/selection/light'
-// import darkBaseSelectionStyle from './styles/_base/selection/dark'
-// import lightBaseSuffixStyle from './styles/_base/suffix/light'
-// import darkBaseSuffixStyle from './styles/_base/suffix/dark'
+// Can be remove after refactoring
+import lightBaseSelectionStyle from './_base/selection/styles/light'
+import darkBaseSelectionStyle from './_base/selection/styles/dark'
 
 // Deprecated Components
 import NimbusFormCard from './_deprecated/NimbusFormCard'
@@ -196,7 +195,10 @@ export default create({
     lightInputGroupLabelStyle,
     darkInputGroupLabelStyle,
     lightInputNumberStyle,
-    darkInputNumberStyle
+    darkInputNumberStyle,
+    // Can be remove after refactoring
+    lightBaseSelectionStyle,
+    darkBaseSelectionStyle
   ],
   // deprecated
   styleSchemes: {

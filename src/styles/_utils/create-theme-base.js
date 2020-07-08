@@ -18,6 +18,8 @@ export default function createThemeBase (theme) {
   let cachedBased = null
   let cachedDerived = null
   return {
+    name: theme.name,
+    theme: theme.theme,
     get base () {
       if (!cachedBased) {
         return this.getBaseVariables()

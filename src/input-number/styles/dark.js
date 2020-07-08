@@ -4,7 +4,7 @@ import inputCommonVariables from '../../styles/_common-style/input'
 import inputNumberCommonVariables from '../../styles/_common-style/input-number'
 
 export default create({
-  name: 'InputGroup',
+  name: 'InputNumber',
   theme: 'dark',
   getDerivedVariables ({ base, derived }) {
     const {
