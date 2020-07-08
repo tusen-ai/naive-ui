@@ -221,7 +221,7 @@
   }
 }
 
-@mixin setup-light-custom-variables {
+@mixin setup-dark-custom-variables {
   @if function-exists('get-primary-color') {
     $color: get-primary-color('dark');
     @if $color != null {
