@@ -20,7 +20,7 @@ import Tooltip from './Tooltip'
 import Popup from './Popover'
 import Alert from './Alert'
 import DatePicker from './DatePicker'
-import InputNumber from './input-number'
+import InputNumberStyle from './input-number'
 import Radio from './Radio'
 import Form from './Form'
 import Tabs from './Tabs'
@@ -66,7 +66,7 @@ import Code from './Code'
 import Typography from './Typography'
 import Upload from './Upload'
 import InputGroup from './input-group'
-import InputGroupLabel from './input-group-label'
+import InputGroupLabelStyle from './input-group-label'
 
 import zhCN from './locale/zhCN'
 import enUS from './locale/enUS'
@@ -74,24 +74,24 @@ import enUS from './locale/enUS'
 import lightScheme from './_styles-in-js/lightStyleScheme.scss'
 import darkScheme from './_styles-in-js/darkStyleScheme.scss'
 
-import lightBaseStyle from './styles/base/light'
-import darkBaseStyle from './styles/base/dark'
-import lightButtonStyle from './styles/button/light'
-import darkButtonStyle from './styles/button/dark'
-import lightBadgeStyle from './styles/badge/light'
-import darkBadgeStyle from './styles/badge/dark'
-import lightProgressStyle from './styles/progress/light'
-import darkProgressStyle from './styles/progress/dark'
-import lightBaseSelectionStyle from './styles/_base/selection/light'
-import darkBaseSelectionStyle from './styles/_base/selection/dark'
-import lightBaseSuffixStyle from './styles/_base/suffix/light'
-import darkBaseSuffixStyle from './styles/_base/suffix/dark'
-import lightInputStyle from './styles/input/light'
-import darkInputStyle from './styles/input/dark'
-import lightInputGroupLabel from './styles/input-group-label/light'
-import darkInputGroupLabel from './styles/input-group-label/dark'
-import lightInputNumber from './styles/input-number/light'
-import darkInputNumber from './styles/input-number/dark'
+import baseLightStyle from './styles/base/light'
+import baseDarkStyle from './styles/base/dark'
+import buttonLightStyle from './button/styles/light'
+import buttonDarkStyle from './button/styles/dark'
+import badgeLightStyle from './badge/styles/light'
+import badgeDarkStyle from './badge/styles/dark'
+import progressLightStyle from './progress/styles/light'
+import progressDarkStyle from './progress/styles/dark'
+import inputLightStyle from './input/styles/light'
+import inputDarkStyle from './input/styles/dark'
+import inputGroupLabelLightStyle from './input-group-label/styles/light'
+import inputGroupLabelDarkStyle from './input-group-label/styles/dark'
+import inputNumberLightStyle from './input-number/styles/light'
+import inputNumberDarkStyle from './input-number/styles/dark'
+
+// Can be remove after refactoring
+import baseSelectionLightStyle from './_base/selection/styles/light'
+import baseSelectionDarkStyle from './_base/selection/styles/dark'
 
 // Deprecated Components
 import NimbusFormCard from './_deprecated/NimbusFormCard'
@@ -102,6 +102,9 @@ import NimbusIcon from './_deprecated/NimbusIcon'
 import create from './create'
 
 export default create({
+  locales: [zhCN, enUS],
+  fallbackLocale: enUS,
+  fallbackTheme: 'light',
   components: [
     Card,
     Icon,
@@ -123,7 +126,7 @@ export default create({
     Popup,
     Alert,
     DatePicker,
-    InputNumber,
+    InputNumberStyle,
     Radio,
     Cascader,
     DynamicInput,
@@ -171,43 +174,37 @@ export default create({
     Typography,
     Upload,
     InputGroup,
-    InputGroupLabel,
+    InputGroupLabelStyle,
     // Deprecated
     NimbusServiceLayout,
     NimbusConfirmCard,
     NimbusFormCard,
     NimbusIcon
   ],
-  locales: [zhCN, enUS],
-  fallbackLocale: enUS,
+  styles: [
+    // base style, essential
+    baseLightStyle,
+    baseDarkStyle,
+    // components style
+    buttonLightStyle,
+    buttonDarkStyle,
+    badgeLightStyle,
+    badgeDarkStyle,
+    progressLightStyle,
+    progressDarkStyle,
+    inputLightStyle,
+    inputDarkStyle,
+    inputGroupLabelLightStyle,
+    inputGroupLabelDarkStyle,
+    inputNumberLightStyle,
+    inputNumberDarkStyle,
+    // Can be remove after refactoring
+    baseSelectionLightStyle,
+    baseSelectionDarkStyle
+  ],
+  // deprecated
   styleSchemes: {
     light: lightScheme,
     dark: darkScheme
-  },
-  fallbackTheme: 'light',
-  // API to be refined
-  _themes: {
-    light: {
-      base: lightBaseStyle,
-      NButton: lightButtonStyle,
-      NBadge: lightBadgeStyle,
-      NProgress: lightProgressStyle,
-      NBaseSelection: lightBaseSelectionStyle,
-      NBaseSuffix: lightBaseSuffixStyle,
-      NInput: lightInputStyle,
-      NInputGroupLabel: lightInputGroupLabel,
-      NInputNumber: lightInputNumber
-    },
-    dark: {
-      base: darkBaseStyle,
-      NButton: darkButtonStyle,
-      NBadge: darkBadgeStyle,
-      NProgress: darkProgressStyle,
-      NBaseSelection: darkBaseSelectionStyle,
-      NBaseSuffix: darkBaseSuffixStyle,
-      NInput: darkInputStyle,
-      NInputGroupLabel: darkInputGroupLabel,
-      NInputNumber: darkInputNumber
-    }
   }
 })

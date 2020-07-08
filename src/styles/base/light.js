@@ -3,6 +3,8 @@ import { read, composite } from '../../_utils/color/index.js'
 import commonVariables from '../_common-style/base.js'
 
 export default create({
+  theme: 'light',
+  name: 'base',
   getBaseVariables () {
     return Object.assign({
       neutralBase: '#FFF',

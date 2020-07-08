@@ -1,9 +1,11 @@
-import create from '../_utils/create-component-base'
+import create from '../../styles/_utils/create-component-base'
 import { changeColor } from '../../_utils/color'
-import inputCommonVariables from '../_common-style/input'
-import inputNumberCommonVariables from '../_common-style/input-number'
+import inputCommonVariables from '../../styles/_common-style/input'
+import inputNumberCommonVariables from '../../styles/_common-style/input-number'
 
 export default create({
+  name: 'InputNumber',
+  theme: 'light',
   getDerivedVariables ({ base, derived }) {
     const {
       borderRadius
@@ -18,25 +20,25 @@ export default create({
       warningColor,
       warningHoverColor,
       warningActiveColor,
+      borderColor,
       secondaryTextColor: textColor,
-      inputBackgroundOverlayColor,
-      disabledInputBackgroundOverlayColor: disabledBackgroundColor,
+      actionBackgroundColor: buttonBackgroundColor,
+      disabledInputBackgroundColor: disabledBackgroundColor,
       disabledTextColor,
       placeholdeColor,
-      disabledPlaceholderColor,
-      actionBackgroundOverlayColor
+      quinaryTextColor: disabledPlaceholderColor,
+      inputBackgroundColor: backgroundColor
     } = derived
-    const backgroundColor = inputBackgroundOverlayColor
     const borderHoverColor = primaryHoverColor
     const buttonTextColor = textColor
     const disabledButtonBackgroundColor = disabledBackgroundColor
     const disabledButtonTextColor = disabledTextColor
-    const buttonBackgroundColor = actionBackgroundOverlayColor
     const hoverButtonBackgroundColor = buttonBackgroundColor
     const activeButtonBackgroundColor = buttonBackgroundColor
     const caretColor = null
     const hoverButtonTextColor = primaryHoverColor
     const activeButtonTextColor = primaryActiveColor
+    const focusBackgroundColor = backgroundColor
     return {
       ...inputCommonVariables,
       ...inputNumberCommonVariables,
@@ -48,7 +50,7 @@ export default create({
         disabledBackgroundColor,
         disabledTextColor,
         textColor,
-        borderColor: 'transparent',
+        borderColor,
         borderHoverColor,
         buttonBackgroundColor,
         hoverButtonBackgroundColor,
@@ -58,25 +60,25 @@ export default create({
         activeButtonTextColor,
         caretColor,
         backgroundColor,
-        focusBackgroundColor: changeColor(primaryColor, { alpha: 0.1 }),
-        focusBorderMaskBoxShadow: `inset 0 0 0 1px ${primaryHoverColor}, 0 0 8px 0 ${changeColor(primaryColor, { alpha: 0.3 })}`,
+        focusBackgroundColor,
+        focusBorderMaskBoxShadow: `inset 0 0 0 1px ${primaryHoverColor}, 0 0 0 2px ${changeColor(primaryColor, { alpha: 0.2 })}`,
         hoverBorderMaskBoxShadow: `inset 0 0 0 1px ${primaryHoverColor}`,
         placeholdeColor
       },
       warning: {
         borderMaskBoxShadow: `inset 0 0 0 1px ${warningColor}`,
-        focusBorderMaskBoxShadow: `inset 0 0 0 1px ${warningHoverColor}, 0 0 8px 0 ${changeColor(warningColor, { alpha: 0.2 })}`,
+        focusBorderMaskBoxShadow: `inset 0 0 0 1px ${warningHoverColor}, 0 0 0 2px ${changeColor(warningColor, { alpha: 0.2 })}`,
         hoverBorderMaskBoxShadow: `inset 0 0 0 1px ${warningHoverColor}`,
-        focusBackgroundColor: changeColor(warningColor, { alpha: 0.1 }),
+        focusBackgroundColor,
         caretColor: warningHoverColor,
         hoverButtonTextColor: warningHoverColor,
         activeButtonTextColor: warningActiveColor
       },
       error: {
         borderMaskBoxShadow: `inset 0 0 0 1px ${errorColor}`,
-        focusBorderMaskBoxShadow: `inset 0 0 0 1px ${errorHoverColor}, 0 0 8px 0 ${changeColor(errorColor, { alpha: 0.2 })}`,
+        focusBorderMaskBoxShadow: `inset 0 0 0 1px ${errorHoverColor}, 0 0 0 2px ${changeColor(errorColor, { alpha: 0.2 })}`,
         hoverBorderMaskBoxShadow: `inset 0 0 0 1px ${errorHoverColor}`,
-        focusBackgroundColor: changeColor(errorColor, { alpha: 0.1 }),
+        focusBackgroundColor,
         caretColor: errorHoverColor,
         hoverButtonTextColor: errorHoverColor,
         activeButtonTextColor: errorActiveColor

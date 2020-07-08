@@ -188,6 +188,69 @@ light {
 ## 2020.7.1
 shouldMount 可以加到 usecssr
 
+## 2020.7.8
+style overrides RFC
+
+```js
+// no import on demand
+import naive from 'naive-ui'
+
+naive.Button.overrideStyles({
+  light: {
+    borderRadius: 8
+  },
+  dark: {
+    borderRadius: 8
+  }
+})
+
+naive.InputNumber.overrideStyles({
+  light: {
+    borderRadius: 8
+  },
+  dark: {
+    borderRadius: 8
+  }
+})
+
+naive.themes.light.overrideStyles({
+  primaryColor: '1234'
+})
+
+Vue.use(naive)
+```
+
+```js
+// import on demand
+
+// essential
+import create from 'naive-ui/create'
+import lightStyle from 'naive-ui/styles/light'
+import darkStyle from 'naive-ui/styles/dark'
+
+// components
+import Button from 'naive-ui/button'
+
+// styles
+import buttonLightStyle from 'naive-ui/button/styles/light'
+import buttonDarkStyle from 'naive-ui/button/styles/dark'
+
+const naive = create({
+  components: [
+    Button
+  ],
+  styles: [
+    // base styles, required for each theme
+    lightStyle,
+    darkStyle,
+    // component styles
+    buttonLightStyle,
+    buttonDarkStyle
+  ],
+  fallbackTheme: 'light',
+})
+```
+
 ## TODO 排序不分先后
 1. <del>Focus Detector on Time Selector</del>
 2. <del>Menu Root Indent = 0 可能造成问题</del>

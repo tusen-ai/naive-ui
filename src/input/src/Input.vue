@@ -166,7 +166,7 @@ import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
 
 export default {
-  name: 'NInput',
+  name: 'Input',
   components: {
     NBaseSuffix
   },
@@ -315,18 +315,18 @@ export default {
   watch: {
     value () {
       if (this.isTextarea && this.autosize) {
-        this.$nextTick().then(this.updateTextAreaStyle)
+        this.$nextTick(this.updateTextAreaStyle)
       }
     },
     syntheticSize () {
       if (this.isTextarea && this.autosize) {
-        this.$nextTick().then(this.updateTextAreaStyle)
+        this.$nextTick(this.updateTextAreaStyle)
       }
     }
   },
   mounted () {
     if (this.isTextarea && this.autosize) {
-      this.$nextTick().then(this.updateTextAreaStyle)
+      this.$nextTick(this.updateTextAreaStyle)
     }
   },
   methods: {
@@ -494,7 +494,7 @@ export default {
     handleWrapperKeyDownEsc () {
       if (this.passivelyActivated) {
         this.inputFocused = false
-        this.$nextTick().then(() => {
+        this.$nextTick(() => {
           this.$refs.wrapper.focus()
         })
       }

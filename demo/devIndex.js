@@ -14,13 +14,18 @@ import createRouter from './routes/router'
 debugRouteMixin(routes, childRoutes)
 const router = createRouter(Vue, routes)
 
-Vue.use(naive)
 naive.setHljs(hljs)
-// naive.setStyleSchemes({
-//   light: {
-//     primaryColor: 'rgb(255, 0, 0)'
+
+// testing customize style
+// naive.styles.light.override({
+//   derived: {
+//     primaryColor: 'rgb(255, 0, 0)',
+//     primaryHoverColor: 'rgb(0, 255, 0)',
+//     primaryActiveColor: 'rgb(0, 0, 255)'
 //   }
 // })
+
+Vue.use(naive)
 
 new Vue({
   ...demoRouterView,

@@ -85,7 +85,7 @@ function parseNumber (number) {
 }
 
 export default {
-  name: 'NInputNumber',
+  name: 'InputNumber',
   components: {
     NIcon,
     RemoveIcon,

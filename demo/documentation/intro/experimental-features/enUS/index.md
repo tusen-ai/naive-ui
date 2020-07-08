@@ -24,6 +24,20 @@ Firstly, you should create a `.scss` file. Insert getter functions first and the
   @return null;
 }
 
+@function get-primary-hover-color ($theme) {
+  @if $theme == 'light' {
+    @return rgb(0, 255, 0);
+  }
+  @return null;
+}
+
+@function get-primary-active-color ($theme) {
+  @if $theme == 'light' {
+    @return rgb(0, 0, 255);
+  }
+  @return null;
+}
+
 // naive-ui will check the existence of getter functions and set the related
 // variables properly
 @import '~naive-ui/src/_styles/index.scss';
@@ -41,16 +55,18 @@ import 'path/to/customized-style.scss'
 
 Not done yet. You still need to set the primary color in the js environment. Since naive-ui use CSS-in-JS...
 
-So let's continue. Set `style-schemes` on the naive-ui instance.
+So let's continue, override the light theme on naive-ui instance.
 
 ```js
 // ...
 
 import naive from 'naive-ui'
 
-naive.setStyleSchemes({
-  light: {
-    primaryColor: 'rgb(255, 0, 0)'
+naive.styles.light.override({
+  derived: {
+    primaryColor: 'rgb(255, 0, 0)',
+    primaryHoverColor: 'rgb(0, 255, 0)',
+    primaryActiveColor: 'rgb(0, 0, 255)'
   }
 })
 

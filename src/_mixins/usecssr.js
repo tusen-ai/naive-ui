@@ -14,8 +14,8 @@ function markStyleMounted (id) {
 }
 
 function getThemeVariables (naive, themeName) {
-  const themes = naive._themes
-  const theme = themes[themeName]
+  const styles = naive.styles
+  const theme = styles[themeName]
   return theme.base
 }
 
@@ -54,7 +54,7 @@ function setupMutableStyle (
   const options = instance.$options
   const {
     fallbackTheme,
-    _themes
+    styles
   } = naive
   const renderedTheme = theme || fallbackTheme
   const dependencyValue = dependencyKey === 'syntheticTheme' ? renderedTheme : instance[dependencyKey]
@@ -71,7 +71,7 @@ function setupMutableStyle (
     dependencyValue
   )
   if (isStyleMounted(mountId)) return
-  const cssrPropsGetter = _themes[renderedTheme][options.name]
+  const cssrPropsGetter = styles[renderedTheme][options.name]
   if (process.env.NODE_ENV !== 'production' && !cssrPropsGetter) {
     console.error(`[naive-ui/mixins/usecssr]: ${options.name}'s style not found`)
   }

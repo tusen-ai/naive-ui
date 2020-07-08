@@ -189,7 +189,7 @@ import usecssr from '../../../_mixins/usecssr.js'
 import styles from './styles/index.js'
 
 export default {
-  name: 'NBaseSelection',
+  name: 'BaseSelection',
   components: {
     NBaseSuffix,
     NTag
