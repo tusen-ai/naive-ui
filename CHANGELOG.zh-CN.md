@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.5.0 (2020-07-09)
+### Breaking Changes
+- 重构了试验性的设定主色功能
+### Fixes
+- 修正了一些零碎的样式错误
+
 ## 1.4.1 (2020-06-23)
 ### Features
 - 为 `n-select`　增加了　`autofocus`　属性.

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.5.0 (2020-07-09)
+### Breaking Changes
+- Refactor experimental setting primary color feature.
+### Fixes
+- Fix some style glitches.
+
 ## 1.4.1 (2020-06-23)
 ### Features
 - Add `autofocus` for `n-select`.
