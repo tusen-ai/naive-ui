@@ -1,7 +1,7 @@
 node_modules
 dist
 docDist
-doc/dist
+build-doc/dist
 test-size
 test-bundle
 test/unit/coverage
