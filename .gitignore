@@ -1,8 +1,8 @@
 node_modules
 dist
 docDist
-doc/dist
 build-doc/deploy-doc.sh
+build-doc/dist
 test-size
 test-bundle
 test/unit/coverage
