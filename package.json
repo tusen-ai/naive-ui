@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "A Vue UI Framework. Caring About Styles, Themed, Batteries Included, Not Rather Slow.",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -18,8 +18,8 @@
     "lint": "eslint --no-error-on-unmatched-pattern --fix \"src/**/*.{js,vue}\" \"test/**/*.{js,vue}\" \"build/**/*.{js,vue}\" \"demo/**/*.{js,vue}\" && stylelint \"src/_styles/**/*.scss\"",
     "lint:js": "eslint --no-error-on-unmatched-pattern --fix \"src/**/*.{js,vue}\" \"test/**/*.{js,vue}\" \"build/**/*.{js,vue}\" \"demo/**/*.{js,vue}\"",
     "lint:style": "stylelint \"src/_styles/**/*.scss\"",
-    "release:doc": "npm run build:doc && sudo bash build-doc/deploy-doc.sh",
-    "release:doc:no-build": "sudo bash build-doc/deploy-doc.sh",
+    "release:doc": "npm run build:doc && node build-doc/generate-deploy-sh.js &&sudo bash build-doc/deploy-doc.sh",
+    "release:doc:no-build": "node build-doc/generate-deploy-sh.js && sudo bash build-doc/deploy-doc.sh",
     "release:package": "npm run build && npm publish",
     "test": "cross-env NODE_ENV=test jest"
   },
