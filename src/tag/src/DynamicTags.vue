@@ -51,7 +51,7 @@ import NIcon from '../../Icon'
 import addOutline from '../../_icons/add-outline'
 
 export default {
-  name: 'NDynamicTags',
+  name: 'DynamicTags',
   components: {
     NTag,
     NIcon,

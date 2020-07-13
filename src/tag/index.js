@@ -2,9 +2,9 @@
 import Tag from './src/Tag.vue'
 import DynamicTags from './src/DynamicTags.vue'
 
-Tag.install = function (Vue) {
-  Vue.component(Tag.name, Tag)
-  Vue.component(DynamicTags.name, DynamicTags)
+Tag.install = function (Vue, naive) {
+  Vue.component(naive.componentPrefix + Tag.name, Tag)
+  Vue.component(naive.componentPrefix + DynamicTags.name, DynamicTags)
 }
 
 export default Tag

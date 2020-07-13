@@ -34,7 +34,7 @@ import commonProps from './common-props'
 import styles from './styles'
 
 export default {
-  name: 'NTag',
+  name: 'Tag',
   components: {
     CloseIcon
   },
