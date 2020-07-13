@@ -88,6 +88,8 @@ import inputGroupLabelLightStyle from './input-group-label/styles/light'
 import inputGroupLabelDarkStyle from './input-group-label/styles/dark'
 import inputNumberLightStyle from './input-number/styles/light'
 import inputNumberDarkStyle from './input-number/styles/dark'
+import tagLightStyle from './tag/styles/light'
+import tagDarkStyle from './tag/styles/dark'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -198,6 +200,8 @@ export default create({
     inputGroupLabelDarkStyle,
     inputNumberLightStyle,
     inputNumberDarkStyle,
+    tagLightStyle,
+    tagDarkStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle
