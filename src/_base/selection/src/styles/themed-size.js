@@ -9,7 +9,7 @@ export default c([
     const fontSize = props.$local.fontSize[size]
     return cTB('base-selection', [
       cM(size + '-size', {
-        height,
+        minHeight: height,
         lineHeight: height,
         fontSize
       }, [
