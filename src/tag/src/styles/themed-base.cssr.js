@@ -4,15 +4,21 @@ export default c([
   ({ props }) => {
     const {
       borderRadius,
-      checkableTextColor,
-      checkableBackgroundColor,
-      checkableHoverTextColor,
-      checkableHoverBackgroundColor,
-      checkableActiveTextColor,
-      checkableActiveBackgroundColor,
-      checkableCheckedHoverBackgroundColor,
-      checkableCheckedActiveBackgroundColor
+      checkable,
+      disabledOpacity
     } = props.$local
+    const {
+      textColor: checkableTextColor,
+      hoverTextColor: checkableHoverTextColor,
+      activeTextColor: checkableActiveTextColor,
+      backgroundColor: checkableBackgroundColor,
+      hoverBackgroundColor: checkableHoverBackgroundColor,
+      activeBackgroundColor: checkableActiveBackgroundColor,
+      checkedTextColor,
+      checkedBackgroundColor,
+      checkedHoverBackgroundColor,
+      checkedActiveBackgroundColor
+    } = checkable
     const {
       easeInOutCubicBezier
     } = props.$base
@@ -27,7 +33,7 @@ export default c([
       `,
       borderRadius,
       transition: `
-        background-color .2s ${easeInOutCubicBezier},
+        background-color .3s ${easeInOutCubicBezier},
         color .3s ${easeInOutCubicBezier},
         box-shadow .3s ${easeInOutCubicBezier},
         opacity .3s ${easeInOutCubicBezier}
@@ -40,13 +46,11 @@ export default c([
         cursor: 'pointer'
       }),
       cM('disabled', {
-        cursor: 'not-allowed !important'
+        cursor: 'not-allowed !important',
+        opacity: disabledOpacity
       }, [
         cE('close', {
           cursor: 'not-allowed !important'
-        }),
-        cM('checkable', {
-          opacity: '0.4'
         })
       ]),
       cM('closable', {
@@ -90,15 +94,15 @@ export default c([
           ])
         ]),
         cM('checked', {
-          color: checkableActiveTextColor,
-          backgroundColor: checkableActiveBackgroundColor
+          color: checkedTextColor,
+          backgroundColor: checkedBackgroundColor
         }, [
           cNotM('disabled', [
             c('&:hover', {
-              backgroundColor: checkableCheckedHoverBackgroundColor
+              backgroundColor: checkedHoverBackgroundColor
             }),
             c('&:active', {
-              backgroundColor: checkableCheckedActiveBackgroundColor
+              backgroundColor: checkedActiveBackgroundColor
             })
           ])
         ])

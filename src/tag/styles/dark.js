@@ -1,9 +1,6 @@
 import create from '../../styles/_utils/create-component-base'
 import commonVariables from '../../styles/_common-style/tag'
-import changeColor from '../../_utils/color'
-
-// xxxPaneColor
-// xxxBorderColor
+import { changeColor } from '../../_utils/color'
 
 export default create({
   theme: 'dark',
@@ -11,7 +8,6 @@ export default create({
   getDerivedVariables ({ base, derived }) {
     const {
       secondaryTextOverlayColor,
-      disabledTextOverlayColor,
       primaryHoverColor,
       primaryActiveColor,
       primaryColor,
@@ -20,110 +16,78 @@ export default create({
       warningColor,
       errorColor,
       baseBackgroundColor,
-      disabledBackgroundOverlayColor,
-      pendingBackgroundOverlayColor,
       borderOverlayColor,
+      disabledOpacity,
       closeOverlayColor,
-      disabledOpacity
+      closeHoverOverlayColor,
+      closeActiveOverlayColor
     } = derived
     const {
-      borderRadius
+      smallBorderRadius: borderRadius
     } = base
     return {
       ...commonVariables,
       borderRadius,
-      checkableTextColor: secondaryTextOverlayColor,
-      checkableBackgroundColor: 'transparent',
-      checkableHoverTextColor: primaryHoverColor,
-      checkableHoverBackgroundColor: 'transparent',
-      checkableActiveTextColor: baseBackgroundColor,
-      checkableActiveBackgroundColor: primaryColor,
-      checkableCheckedHoverBackgroundColor: primaryHoverColor,
-      checkableCheckedActiveBackgroundColor: primaryActiveColor,
       disabledOpacity,
+      checkable: {
+        textColor: secondaryTextOverlayColor,
+        hoverTextColor: primaryHoverColor,
+        activeTextColor: primaryActiveColor,
+        backgroundColor: 'transparent',
+        hoverBackgroundColor: 'transparent',
+        activeBackgroundColor: 'transparent',
+        checkedTextColor: baseBackgroundColor,
+        checkedBackgroundColor: primaryColor,
+        checkedHoverBackgroundColor: primaryHoverColor,
+        checkedActiveBackgroundColor: primaryActiveColor
+      },
       default: {
         borderColor: borderOverlayColor,
-        disabledBorderColor: borderOverlayColor,
         textColor: secondaryTextOverlayColor,
-        disabledTextColor: disabledTextOverlayColor,
         backgroundColor: 'transparent',
-        hoverBackgroundColor: pendingBackgroundOverlayColor,
-        activeBackgroudColor: pendingBackgroundOverlayColor,
-        disabledBackgroundColor: disabledBackgroundOverlayColor,
         closeColor: closeOverlayColor,
-        closeHoverColor: closeOverlayColor,
-        closeActiveColor: closeOverlayColor,
-        disabledCloseColor: borderOverlayColor
+        closeHoverColor: closeHoverOverlayColor,
+        closeActiveColor: closeActiveOverlayColor
       },
       primary: {
-        borderColor: changeColor(primaryColor, { alpha: 0.3 }), // tertiary
-        disabledBorderColor: changeColor(primaryColor, { alpha: 0.3 }),
+        borderColor: changeColor(primaryColor, { alpha: 0.3 }),
         textColor: primaryColor,
-        disabledTextColor: primaryColor,
         backgroundColor: 'transparent',
-        hoverBackgroundColor: changeColor(primaryColor, { alpha: 0.4 }),
-        activeBackgroudColor: changeColor(primaryColor, { alpha: 0.4 }),
-        disabledBackgroundColor: 'transparent',
-        closeColor: closeOverlayColor,
-        closeHoverColor: closeOverlayColor,
-        closeActiveColor: closeOverlayColor,
-        disabledCloseColor: borderOverlayColor
+        closeColor: changeColor(primaryColor, { alpha: 0.7 }),
+        closeHoverColor: changeColor(primaryColor, { alpha: 0.85 }),
+        closeActiveColor: changeColor(primaryColor, { alpha: 0.57 })
       },
       info: {
-        borderColor: changeColor(infoColor, { alpha: 0.3 }), // tertiary
-        disabledBorderColor: changeColor(infoColor, { alpha: 0.3 }),
+        borderColor: changeColor(infoColor, { alpha: 0.3 }),
         textColor: infoColor,
-        disabledTextColor: infoColor,
         backgroundColor: 'transparent',
-        hoverBackgroundColor: changeColor(infoColor, { alpha: 0.4 }),
-        activeBackgroudColor: changeColor(infoColor, { alpha: 0.4 }),
-        disabledBackgroundColor: 'transparent',
-        closeColor: closeOverlayColor,
-        closeHoverColor: closeOverlayColor,
-        closeActiveColor: closeOverlayColor,
-        disabledCloseColor: borderOverlayColor
+        closeColor: changeColor(infoColor, { alpha: 0.7 }),
+        closeHoverColor: changeColor(infoColor, { alpha: 0.85 }),
+        closeActiveColor: changeColor(infoColor, { alpha: 0.57 })
       },
       success: {
-        borderColor: changeColor(successColor, { alpha: 0.3 }), // tertiary
-        disabledBorderColor: changeColor(successColor, { alpha: 0.3 }),
+        borderColor: changeColor(successColor, { alpha: 0.3 }),
         textColor: successColor,
-        disabledTextColor: successColor,
         backgroundColor: 'transparent',
-        hoverBackgroundColor: changeColor(successColor, { alpha: 0.4 }),
-        activeBackgroudColor: changeColor(successColor, { alpha: 0.4 }),
-        disabledBackgroundColor: 'transparent',
-        closeColor: closeOverlayColor,
-        closeHoverColor: closeOverlayColor,
-        closeActiveColor: closeOverlayColor,
-        disabledCloseColor: borderOverlayColor
+        closeColor: changeColor(successColor, { alpha: 0.7 }),
+        closeHoverColor: changeColor(successColor, { alpha: 0.85 }),
+        closeActiveColor: changeColor(successColor, { alpha: 0.57 })
       },
       warning: {
-        borderColor: changeColor(warningColor, { alpha: 0.3 }), // tertiary
-        disabledBorderColor: changeColor(warningColor, { alpha: 0.3 }),
+        borderColor: changeColor(warningColor, { alpha: 0.3 }),
         textColor: warningColor,
-        disabledTextColor: warningColor,
         backgroundColor: 'transparent',
-        hoverBackgroundColor: changeColor(warningColor, { alpha: 0.4 }),
-        activeBackgroudColor: changeColor(warningColor, { alpha: 0.4 }),
-        disabledBackgroundColor: 'transparent',
-        closeColor: closeOverlayColor,
-        closeHoverColor: closeOverlayColor,
-        closeActiveColor: closeOverlayColor,
-        disabledCloseColor: borderOverlayColor
+        closeColor: changeColor(warningColor, { alpha: 0.7 }),
+        closeHoverColor: changeColor(warningColor, { alpha: 0.85 }),
+        closeActiveColor: changeColor(warningColor, { alpha: 0.57 })
       },
       error: {
-        borderColor: changeColor(errorColor, { alpha: 0.3 }), // tertiary
-        disabledBorderColor: changeColor(errorColor, { alpha: 0.3 }),
+        borderColor: changeColor(errorColor, { alpha: 0.3 }),
         textColor: errorColor,
-        disabledTextColor: errorColor,
         backgroundColor: 'transparent',
-        hoverBackgroundColor: changeColor(errorColor, { alpha: 0.4 }),
-        activeBackgroudColor: changeColor(errorColor, { alpha: 0.4 }),
-        disabledBackgroundColor: 'transparent',
-        closeColor: closeOverlayColor,
-        closeHoverColor: closeOverlayColor,
-        closeActiveColor: closeOverlayColor,
-        disabledCloseColor: borderOverlayColor
+        closeColor: changeColor(errorColor, { alpha: 0.7 }),
+        closeHoverColor: changeColor(errorColor, { alpha: 0.85 }),
+        closeActiveColor: changeColor(errorColor, { alpha: 0.57 })
       }
     }
   }

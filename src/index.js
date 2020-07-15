@@ -67,6 +67,7 @@ import Typography from './Typography'
 import Upload from './Upload'
 import InputGroup from './input-group'
 import InputGroupLabelStyle from './input-group-label'
+import DynamicTags from './dynamic-tags'
 
 import zhCN from './locale/zhCN'
 import enUS from './locale/enUS'
@@ -90,6 +91,8 @@ import inputNumberLightStyle from './input-number/styles/light'
 import inputNumberDarkStyle from './input-number/styles/dark'
 import tagLightStyle from './tag/styles/light'
 import tagDarkStyle from './tag/styles/dark'
+import dynamicTagsLightStyle from './dynamic-tags/styles/light'
+import dynamicTagsDarkStyle from './dynamic-tags/styles/dark'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -177,6 +180,7 @@ export default create({
     Upload,
     InputGroup,
     InputGroupLabelStyle,
+    DynamicTags,
     // Deprecated
     NimbusServiceLayout,
     NimbusConfirmCard,
@@ -202,6 +206,8 @@ export default create({
     inputNumberDarkStyle,
     tagLightStyle,
     tagDarkStyle,
+    dynamicTagsLightStyle,
+    dynamicTagsDarkStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle
