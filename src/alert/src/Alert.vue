@@ -79,7 +79,7 @@ import mdClose from '../../_icons/md-close'
 import FadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
 
 export default {
-  name: 'NAlert',
+  name: 'Alert',
   components: {
     NIcon,
     mdCheckmarkCircle,

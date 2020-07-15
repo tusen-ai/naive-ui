@@ -33,7 +33,7 @@
     >
       <template v-slot:icon>
         <n-icon>
-          <add-outline />
+          <add-icon />
         </n-icon>
       </template>
     </n-button>
@@ -41,21 +41,23 @@
 </template>
 
 <script>
+import NTag from '../../tag'
+import NIcon from '../../Icon'
+import AddIcon from '../../_icons/add-outline'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asformitem from '../../_mixins/asformitem'
 import locale from '../../_mixins/locale'
-import NTag from './Tag'
-import commonProps from './commonProps'
-import NIcon from '../../Icon'
-import addOutline from '../../_icons/add-outline'
+import usecssr from '../../_mixins/usecssr'
+import commonProps from '../../tag/src/common-props'
+import styles from './styles'
 
 export default {
-  name: 'NDynamicTags',
+  name: 'DynamicTags',
   components: {
     NTag,
     NIcon,
-    addOutline
+    AddIcon
   },
   mixins: [
     withapp,
@@ -63,7 +65,8 @@ export default {
     locale('Tag'),
     asformitem({
       change: 'change'
-    })
+    }),
+    usecssr(styles)
   ],
   model: {
     name: 'value',

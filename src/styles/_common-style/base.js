@@ -9,7 +9,7 @@ export default {
   easeInCubicBezier: 'cubic-bezier(.4, 0, 1, 1)',
 
   borderRadius: '3px',
-  lightBorderRadius: '2px',
+  smallBorderRadius: '2px',
 
   lineHeight: '1.75',
 

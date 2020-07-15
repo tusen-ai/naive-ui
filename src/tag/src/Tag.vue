@@ -20,23 +20,29 @@
       class="n-tag__close"
       @click="handleCloseClick"
     >
-      <md-close />
+      <close-icon />
     </div>
   </div>
 </template>
 
 <script>
+import CloseIcon from '../../_icons/md-close.vue'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import mdClose from '../../_icons/md-close.vue'
-import commonProps from './commonProps'
+import usecssr from '../../_mixins/usecssr'
+import commonProps from './common-props'
+import styles from './styles'
 
 export default {
-  name: 'NTag',
+  name: 'Tag',
   components: {
-    mdClose
+    CloseIcon
   },
-  mixins: [withapp, themeable],
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   model: {
     prop: 'checked',
     event: 'checked-change'

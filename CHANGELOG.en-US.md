@@ -1,4 +1,7 @@
 # CHANGELOG
+## PENDING
+### Refactors
+- Refactor `n-tag` styles
 
 ## 1.5.0 (2020-07-09)
 ### Breaking Changes
