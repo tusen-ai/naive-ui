@@ -1,4 +1,7 @@
 # CHANGELOG
+## PENDING
+### Refactors
+- 重构了 `n-tag` 的样式
 
 ## 1.5.0 (2020-07-09)
 ### Breaking Changes

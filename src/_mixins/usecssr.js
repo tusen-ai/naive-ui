@@ -87,7 +87,8 @@ function setupMutableStyle (
   }
   CNode.mount({
     target: mountId,
-    props: componentCssrProps
+    props: componentCssrProps,
+    count: false
   })
   markStyleMounted(mountId)
 }
@@ -104,7 +105,8 @@ function setupImmutableStyle (
     target: mountId,
     props: {
       $instance: instance
-    }
+    },
+    count: false
   })
   markStyleMounted(mountId)
 }
