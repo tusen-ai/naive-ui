@@ -307,15 +307,6 @@
         }
       }
     }
-    @include m(has-max-height) {
-      @include b(data-table-base-table) {
-        @include b(scrollbar) {
-          overflow: hidden;
-          max-height: stretch;
-          max-height: -webkit-fill-available;
-        }
-      }
-    }
     @include b(data-table-base-table) {
       display: flex;
       flex-direction: column;

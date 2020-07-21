@@ -1,5 +1,5 @@
 <template>
-  <div class="n-data-table-base-table" :style="bodyStyle">
+  <div class="n-data-table-base-table">
     <table-header
       ref="header"
       :placement="placement"
@@ -11,6 +11,7 @@
     />
     <table-body
       ref="body"
+      :style="bodyStyle"
       :main="main"
       :placement="placement"
       :scroll-x="scrollX"
@@ -27,6 +28,8 @@
 <script>
 import TableHeader from './TableParts/Header'
 import TableBody from './TableParts/Body'
+import resizeObserverDelegate from '../../_utils/delegate/resizeObserverDelegate'
+import formatLength from '../../_utils/css/formatLength'
 
 export default {
   components: {
@@ -67,9 +70,13 @@ export default {
       type: Number,
       default: 0
     },
-    bodyStyle: {
-      type: Object,
-      default: () => ({})
+    maxHeight: {
+      type: Number,
+      default: null
+    },
+    minHeight: {
+      type: Number,
+      default: null
     },
     rowClassName: {
       type: [Function, String],
@@ -78,7 +85,38 @@ export default {
     loading: {
       type: Boolean,
       default: false
+    },
+    bordered: {
+      type: Boolean,
+      required: true
     }
+  },
+  data () {
+    return {
+      bodyMaxHeight: null,
+      bodyMinHeight: null
+    }
+  },
+  computed: {
+    bodyStyle () {
+      return {
+        maxHeight: formatLength(this.bodyMaxHeight),
+        minHeight: formatLength(this.bodyMinHeight)
+      }
+    }
+  },
+  mounted () {
+    resizeObserverDelegate.registerHandler(
+      this.getHeaderElement(),
+      this.setBodyMinMaxHeight
+    )
+    this.setBodyMinMaxHeight()
+  },
+  beforeDestroy () {
+    resizeObserverDelegate.unregisterHandler(
+      this.getHeaderElement(),
+      this.setBodyMinMaxHeight
+    )
   },
   methods: {
     getHeaderElement () {
@@ -90,6 +128,18 @@ export default {
     setActiveFixedColumn (leftActiveFixedColumn, rightActiveFixedColumn) {
       this.$refs.body.activeLeft = leftActiveFixedColumn
       this.$refs.body.activeRight = rightActiveFixedColumn
+    },
+    setBodyMinMaxHeight () {
+      const bordered = this.bordered
+      const headerHeight = this.getHeaderElement().offsetHeight
+      const maxHeight = this.maxHeight + (bordered ? -2 : 0)
+      const minHeight = this.minHeight + (bordered ? -2 : 0)
+      if (maxHeight !== null) {
+        this.bodyMaxHeight = maxHeight - headerHeight
+      }
+      if (minHeight !== null) {
+        this.bodyMinHeight = minHeight - headerHeight
+      }
     }
   }
 }

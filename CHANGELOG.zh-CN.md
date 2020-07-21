@@ -2,6 +2,7 @@
 ## PENDING
 ### Refactors
 - 重构了 `n-tag` 的样式
+- 修正了 `n-data-table` 的 `max-height` 样式失效的问题 https://bugs.chromium.org/p/chromium/issues/detail?id=1107223
 
 ## 1.5.0 (2020-07-09)
 ### Breaking Changes
@@ -11,7 +12,7 @@
 
 ## 1.4.1 (2020-06-23)
 ### Features
-- 为 `n-select`　增加了　`autofocus`　属性.
+- 为 `n-select` 增加了 `autofocus` 属性
 
 ## 1.4.0 (2020-06-19)
 ### Breaking Changes

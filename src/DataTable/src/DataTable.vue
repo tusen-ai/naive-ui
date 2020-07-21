@@ -7,7 +7,6 @@
       'n-data-table--single-line': singleLine,
       'n-data-table--single-column': singleColumn,
       [`n-data-table--${size}-size`]: true,
-      'n-data-table--has-max-height': maxHeight !== null
     }"
   >
     <n-spin
@@ -21,11 +20,13 @@
           ref="mainTable"
           main
           :scroll-x="styleScrollX"
-          :body-style="bodyStyle"
+          :max-height="maxHeight"
+          :min-height="minHeight"
           :data="paginatedData"
           :columns="normalizedColumns"
           :row-class-name="rowClassName"
           :loading="loading"
+          :bordered="bordered"
         >
           <div
             v-if="paginatedData.length === 0"
@@ -432,14 +433,6 @@ export default {
       const pageSize = this.syntheticPageSize
       const startIndex = (this.internalCurrentPage - 1) * pageSize
       return this.sortedData.slice(startIndex, startIndex + pageSize)
-    },
-    bodyStyle () {
-      /** if bordered, minus border width of table */
-      const offset = this.bordered ? -2 : 0
-      return {
-        maxHeight: formatLength(this.maxHeight, 1, offset),
-        minHeight: formatLength(this.minHeight, 1, offset)
-      }
     },
     countOfCurrentPageCheckedRows () {
       const checkedRowKeys = this.syntheticCheckedRowKeys

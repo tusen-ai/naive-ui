@@ -2,6 +2,7 @@
 ## PENDING
 ### Refactors
 - Refactor `n-tag` styles
+- Fix the problem that `n-data-table`'s `max-height` style is broken. https://bugs.chromium.org/p/chromium/issues/detail?id=1107223
 
 ## 1.5.0 (2020-07-09)
 ### Breaking Changes
