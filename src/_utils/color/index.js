@@ -3,9 +3,6 @@
  * The color utils are for internal usage, it needs to work first. API design
  * need to be refined later.
  */
-
-import { over } from 'lodash-es'
-
 function floor (number) {
   return Math.floor(Number(number))
 }
