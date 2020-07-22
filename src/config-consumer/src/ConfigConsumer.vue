@@ -4,8 +4,11 @@ import themeable from '../../_mixins/themeable'
 import styleScheme from '../../_utils/naive/styleScheme'
 
 export default {
-  name: 'NConfigConsumer',
-  mixins: [ withapp, themeable ],
+  name: 'ConfigConsumer',
+  mixins: [
+    withapp,
+    themeable
+  ],
   watch: {
     syntheticTheme: function (value, oldValue) {
       this.$emit('theme-change', value, oldValue)

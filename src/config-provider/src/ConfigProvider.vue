@@ -2,8 +2,10 @@
 import themeable from '../../_mixins/themeable'
 
 export default {
-  name: 'NConfigProvider',
-  mixins: [themeable],
+  name: 'ConfigProvider',
+  mixins: [
+    themeable
+  ],
   provide () {
     return {
       NConfigProvider: this
