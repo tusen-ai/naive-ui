@@ -19,6 +19,7 @@
       :force-focus="active"
       :placeholder="localizedPlaceholder"
       :clearable="clearable"
+      :disabled="disabled"
       @focus="handleTimeInputFocus"
       @blur="handleTimeInputBlur"
       @activate="handleTimeInputActivate"
@@ -288,6 +289,10 @@ export default {
     showIcon: {
       type: Boolean,
       default: true
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   data () {

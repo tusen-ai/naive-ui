@@ -77,7 +77,7 @@ export default {
     },
     handleMouseDown (e) {
       if (this.syntheticDisabled) return
-      e.preventDefault()
+      // e.preventDefault()
       this.$refs.input.focus()
     },
     handleClick (e) {
