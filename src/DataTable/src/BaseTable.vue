@@ -132,13 +132,13 @@ export default {
     setBodyMinMaxHeight () {
       const bordered = this.bordered
       const headerHeight = this.getHeaderElement().offsetHeight
-      const maxHeight = this.maxHeight + (bordered ? -2 : 0)
-      const minHeight = this.minHeight + (bordered ? -2 : 0)
+      const maxHeight = this.maxHeight
+      const minHeight = this.minHeight
       if (maxHeight !== null) {
-        this.bodyMaxHeight = maxHeight - headerHeight
+        this.bodyMaxHeight = maxHeight + (bordered ? -2 : 0) - headerHeight
       }
       if (minHeight !== null) {
-        this.bodyMinHeight = minHeight - headerHeight
+        this.bodyMinHeight = minHeight + (bordered ? -2 : 0) - headerHeight
       }
     }
   }
