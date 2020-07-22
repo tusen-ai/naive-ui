@@ -21,7 +21,8 @@
     "release:doc": "npm run build:doc && node build-doc/generate-deploy-sh.js &&sudo bash build-doc/deploy-doc.sh",
     "release:doc:no-build": "node build-doc/generate-deploy-sh.js && sudo bash build-doc/deploy-doc.sh",
     "release:package": "npm run build && npm publish",
-    "test": "cross-env NODE_ENV=test jest"
+    "test": "cross-env NODE_ENV=test jest",
+    "init-cssr": "node scripts/create-cssr-scaffold.js"
   },
   "author": "lecong.zhang",
   "license": "MIT",
