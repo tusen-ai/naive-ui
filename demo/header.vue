@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import { version } from '../package.json'
+import version from '../src/version'
 import withapp from '../src/_mixins/withapp'
 import { state, setMode } from './store'
 
