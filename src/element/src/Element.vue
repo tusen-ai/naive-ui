@@ -4,8 +4,11 @@ import themeable from '../../_mixins/themeable'
 import styleScheme from '../../_utils/naive/styleScheme'
 
 export default {
-  name: 'NElement',
-  mixins: [withapp, themeable],
+  name: 'Element',
+  mixins: [
+    withapp,
+    themeable
+  ],
   props: {
     as: {
       type: String,
