@@ -9,13 +9,17 @@ export default function ({
   duration = '.3s',
   originalTransition = '',
   leavingDelay = '0s',
-  foldPadding = false
+  foldPadding = false,
+  enterToProps = null,
+  leaveToProps = null
 } = {}) {
   return [
     c(`&.${namespace}-fade-in-height-expand-transition-leave, &.${namespace}-fade-in-height-expand-transition-enter-to`, {
+      ...enterToProps,
       opacity: 1
     }),
     c(`&.${namespace}-fade-in-height-expand-transition-leave-to, &.${namespace}-fade-in-height-expand-transition-enter`, {
+      ...leaveToProps,
       opacity: 0,
       marginTop: '0 !important',
       marginBottom: '0 !important',

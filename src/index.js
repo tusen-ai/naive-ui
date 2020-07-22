@@ -93,6 +93,8 @@ import tagLightStyle from './tag/styles/light'
 import tagDarkStyle from './tag/styles/dark'
 import dynamicTagsLightStyle from './dynamic-tags/styles/light'
 import dynamicTagsDarkStyle from './dynamic-tags/styles/dark'
+import alertLightStyle from './alert/styles/light'
+import alertDarkStyle from './alert/styles/dark'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -208,6 +210,8 @@ export default create({
     tagDarkStyle,
     dynamicTagsLightStyle,
     dynamicTagsDarkStyle,
+    alertLightStyle,
+    alertDarkStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle

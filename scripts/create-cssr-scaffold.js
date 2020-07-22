@@ -48,7 +48,7 @@ export default c([
 ])
 `)
 
-fs.writeFileSync(path.resolve(cssrPath, 'index.js'), `import baseStyle from './themed-base.cssr.js'
+fs.writeFileSync(path.resolve(cssrPath, 'index.js'), `import themedBaseStyle from './themed-base.cssr.js'
 
 export default [
   {
@@ -56,7 +56,7 @@ export default [
     watch: [
       'syntheticTheme'
     ],
-    CNode: baseStyle
+    CNode: themedBaseStyle
   }
 ]
 `)

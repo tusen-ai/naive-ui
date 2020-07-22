@@ -1,4 +1,5 @@
-import baseStyle from './themed-base.cssr.js'
+import themedBaseStyle from './themed-base.cssr.js'
+import themedTypeStyle from './themed-type.cssr.js'
 
 export default [
   {
@@ -6,6 +7,14 @@ export default [
     watch: [
       'syntheticTheme'
     ],
-    CNode: baseStyle
+    CNode: themedBaseStyle
+  },
+  {
+    key: 'type',
+    watch: [
+      'type',
+      'syntheticTheme'
+    ],
+    CNode: themedTypeStyle
   }
 ]

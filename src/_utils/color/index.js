@@ -4,6 +4,8 @@
  * need to be refined later.
  */
 
+import { over } from 'lodash-es'
+
 function floor (number) {
   return Math.floor(Number(number))
 }
@@ -87,6 +89,8 @@ export function read (color) {
  * @param {[number, number, number, number]} overlay
  */
 export function composite (base, overlay) {
+  if (!Array.isArray(base)) base = read(base)
+  if (!Array.isArray(overlay)) overlay = read(overlay)
   if (process.env.NODE_ENV !== 'production') {
     if (base.length === 3 && base[3] !== 1) {
       console.error('[naive-ui/utils/color/composite]: base color has alpha')

@@ -21,6 +21,8 @@ export default create({
       alpha4: '0.24', // disabled text, placeholder, icon
       alpha5: '0.18', // disabled placeholder
 
+      alphaClose: '0.6',
+
       alphaDisabled: '0.5',
       alphaDisabledInput: '0.02',
       alphaPending: '0.04',
@@ -149,18 +151,17 @@ export default create({
       borderOverlayColor: overlay(base.alphaBorder),
 
       // close
-      closeHoverColor: neutral(base.alpha3 * 0.8),
-      closeHoverOverlayColor: overlay(base.alpha3 * 0.8),
-      closeColor: neutral(base.alpha3),
-      closeOverlayColor: overlay(base.alpha3),
-      closeActiveColor: neutral(base.alpha3 * 1.2),
-      closeActiveOverlayColor: overlay(base.alpha3 * 1.2),
+      closeHoverColor: neutral(base.alphaClose * 0.8),
+      closeHoverOverlayColor: overlay(base.alphaClose * 0.8),
+      closeColor: neutral(base.alphaClose),
+      closeOverlayColor: overlay(base.alphaClose),
+      closeActiveColor: neutral(base.alphaClose * 1.25),
+      closeActiveOverlayColor: overlay(base.alphaClose * 1.25),
       disabledCloseColor: neutral(base.alpha4),
       disabledCloseOverlayColor: overlay(base.alpha4),
-      closeOpacity: base.alpha3,
-      closeHoverOpacity: base.alpha3 * 0.8,
-      closeActiveOpacity: base.alpha3 * 1.25,
-      closeDisabledOpacity: base.alpha4,
+      closeOpacity: base.alphaClose,
+      closeHoverOpacity: base.alphaClose * 0.8,
+      closeActiveOpacity: base.alphaClose * 1.25,
 
       scrollbarBackgroundOverlayColor: overlay(base.alphaScrollbar),
       scrollbarHoverBackgroundOverlayColor: overlay(base.alphaScrollbarHover),

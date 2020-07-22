@@ -73,7 +73,7 @@ function setupMutableStyle (
   if (isStyleMounted(mountId)) return
   const cssrPropsGetter = styles[renderedTheme][options.name]
   if (process.env.NODE_ENV !== 'production' && !cssrPropsGetter) {
-    console.error(`[naive-ui/mixins/usecssr]: ${options.name}'s style not found`)
+    console.error(`[naive-ui/mixins/usecssr]: ${options.name}'s style not found`, styles)
   }
   // themeVariables: { base, derived }
   const themeVariables = getThemeVariables(naive, renderedTheme)

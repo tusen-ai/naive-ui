@@ -69,14 +69,16 @@
 
 <script>
 import NIcon from '../../Icon'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
 import mdCheckmarkCircle from '../../_icons/md-checkmark-circle'
 import mdAlert from '../../_icons/md-alert'
 import mdInformationCircle from '../../_icons/md-information-circle'
 import mdCloseCircle from '../../_icons/md-close-circle'
 import mdClose from '../../_icons/md-close'
 import FadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
+import withapp from '../../_mixins/withapp'
+import themeable from '../../_mixins/themeable'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 export default {
   name: 'Alert',
@@ -89,7 +91,11 @@ export default {
     FadeInHeightExpandTransition,
     mdClose
   },
-  mixins: [ withapp, themeable ],
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   props: {
     title: {
       type: String,
