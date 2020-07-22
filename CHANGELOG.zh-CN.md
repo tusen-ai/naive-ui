@@ -4,6 +4,12 @@
 - 重构了 `n-tag` 的样式
 - 修正了 `n-data-table` 的 `max-height` 样式失效的问题 https://bugs.chromium.org/p/chromium/issues/detail?id=1107223
 
+## 1.5.1 (2020-07-20)
+### Features
+- 为 `n-time-picker`　增加了　`disabled`　属性.
+### Fixes
+- 修正了 `n-radio`下的子元素无法获取焦点的问题
+
 ## 1.5.0 (2020-07-09)
 ### Breaking Changes
 - 重构了试验性的设定主色功能

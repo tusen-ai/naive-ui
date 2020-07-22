@@ -24,6 +24,7 @@ format
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |theme|`'light' \| 'dark' \| null`|`null`||
 |value|`number`|`null`||
+|disabled|`boolean`|`false`||
 
 
 ## Events
