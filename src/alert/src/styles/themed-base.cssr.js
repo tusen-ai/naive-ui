@@ -6,13 +6,11 @@ export default c([
     const { easeInOutCubicBezier } = props.$base
     const { borderRadius, titleFontWeight } = props.$local
     return cTB('alert', {
-      boxSizing: 'border-box',
       lineHeight: 1.75,
       borderRadius,
       position: 'relative',
       transition: `
         background-color .3s ${easeInOutCubicBezier},
-        border-color .3s ${easeInOutCubicBezier}
       `
     }, [
       fadeInHeightExpandTranstion({
@@ -31,8 +29,8 @@ export default c([
           top: 14px;
           align-items: center;
           justify-content: center;
-          width: 19px;
-          height: 19px;
+          width: 26px;
+          height: 26px;
         `
       }, [
         cB('icon', {
@@ -56,7 +54,8 @@ export default c([
         })
       ]),
       cB('alert-body', {
-        padding: '16px 16px 16px 48px'
+        padding: '15px 15px 15px 47px',
+        transition: `border-color .3s ${easeInOutCubicBezier}`
       }, [
         cE('title', {
           transition: `color .3s ${easeInOutCubicBezier}`,

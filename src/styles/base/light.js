@@ -21,7 +21,7 @@ export default create({
       alpha4: '0.24', // disabled text, placeholder, icon
       alpha5: '0.18', // disabled placeholder
 
-      alphaClose: '0.6',
+      alphaClose: '0.52',
 
       alphaDisabled: '0.5',
       alphaDisabledInput: '0.02',

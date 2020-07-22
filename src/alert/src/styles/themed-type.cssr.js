@@ -17,7 +17,6 @@ export default c([
     return cTB('alert', [
       cM(type + '-type', {
         backgroundColor,
-        border: `1px solid ${borderColor}`,
         textAlign: 'start'
       }, [
         cE('close', [
@@ -44,7 +43,9 @@ export default c([
             stroke: iconColor
           })
         ]),
-        cB('alert-body', [
+        cB('alert-body', {
+          border: `1px solid ${borderColor}`
+        }, [
           cE('title', {
             color: titleTextColor
           }),
