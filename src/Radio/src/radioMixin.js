@@ -75,10 +75,13 @@ export default {
     handleKeyUpEnter () {
       this.toggle()
     },
-    handleMouseDown (e) {
+    handleMouseDown () {
       if (this.syntheticDisabled) return
-      // e.preventDefault()
-      this.$refs.input.focus()
+      setTimeout(() => {
+        if (!this.$el.contains(document.activeElement)) {
+          this.$refs.input.focus()
+        }
+      }, 0)
     },
     handleClick (e) {
       this.$emit('click', e)

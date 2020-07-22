@@ -6,7 +6,7 @@
 
 ## 1.5.1 (2020-07-20)
 ### Features
-- 为 `n-time-picker`　增加了　`disabled`　属性.
+- 为 `n-time-picker`　增加了　`disabled`　属性
 ### Fixes
 - 修正了 `n-radio`下的子元素无法获取焦点的问题
 
