@@ -7,6 +7,7 @@ basic
 group
 button-group
 size
+radio-focus-debug
 ```
 ## V-model
 ### Radio V-model
