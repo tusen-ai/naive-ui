@@ -1,7 +1,6 @@
 import { cTB, c, cB, cE, cM } from '../../../../_utils/cssr'
 import formatLength from '../../../../_utils/css/formatLength'
 
-// TODO split form-item styles out
 export default c([
   ({ props }) => {
     const size = props.$instance.size
@@ -17,7 +16,7 @@ export default c([
           height,
           lineHeight: height
         }),
-        cB('base-selection-babel', {
+        cB('base-selection-label', {
           height,
           lineHeight: height
         }),

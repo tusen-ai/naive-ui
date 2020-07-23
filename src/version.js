@@ -1,1 +1,1 @@
-export default '1.5.2'
+export default '1.5.3'
