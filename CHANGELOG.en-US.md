@@ -1,4 +1,8 @@
 # CHANGELOG
+## 1.5.3 (2020-07-23)
+### Fixes
+- Fix the problem that `n-select` display with mistakes when `placeholder` is empty.
+
 ## 1.5.2 (2020-07-22)
 ### Fixes
 - Fix the problem that `n-radio` can be focused.

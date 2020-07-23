@@ -18,6 +18,7 @@ custom-option
 action
 fallback-option
 change-debug
+placeholder-debug
 ```
 ## V-model
 |prop|event|
