@@ -32,10 +32,12 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 export default {
-  name: 'NAvatar',
-  mixins: [withapp, themeable],
+  name: 'Avatar',
+  mixins: [withapp, themeable, usecssr(styles)],
   props: {
     size: {
       type: [String, Number],

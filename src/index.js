@@ -55,7 +55,7 @@ import ConfigConsumer from './config-consumer'
 import Descriptions from './Descriptions'
 import List from './List'
 import Menu from './Menu'
-import Avatar from './Avatar'
+import Avatar from './avatar'
 import Result from './Result'
 import Thing from './Thing'
 import AutoComplete from './AutoComplete'
@@ -95,6 +95,8 @@ import dynamicTagsLightStyle from './dynamic-tags/styles/light'
 import dynamicTagsDarkStyle from './dynamic-tags/styles/dark'
 import alertLightStyle from './alert/styles/light'
 import alertDarkStyle from './alert/styles/dark'
+import avatarDarkStyle from './avatar/styles/dark'
+import avatarLightStyle from './avatar/styles/light'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -212,6 +214,8 @@ export default create({
     dynamicTagsDarkStyle,
     alertLightStyle,
     alertDarkStyle,
+    avatarLightStyle,
+    avatarDarkStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle

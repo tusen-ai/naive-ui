@@ -1,6 +1,6 @@
 module.exports = {
   extends: [
-    "@vue/standard"
+    '@vue/standard'
   ],
   globals: {
     describe: 'readonly',

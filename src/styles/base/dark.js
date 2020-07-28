@@ -177,6 +177,7 @@ export default create({
       modalBackgroundColor: base.neutralModal,
       bodyBackgroundColor: base.neutralBody,
       tagBackgroundColor: neutral(base.alphaTag),
+      avatarBackgroundColor: overlay(base.alphaAvatar),
 
       inputBackgroundColor: neutral(base.alphaInput),
       inputBackgroundOverlayColor: overlay(base.alphaInput),

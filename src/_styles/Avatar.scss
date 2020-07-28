@@ -1,53 +1,53 @@
-@import './mixins/mixins.scss';
+// @import './mixins/mixins.scss';
 
-@mixin avatar-size-mixin($size) {
-  @include m($size + '-size') {
-    $width: map-get($--n-height, $size);
-    width: $width;
-    height: $width;
-    @include m(circle-shaped, round-shaped) {
-      border-radius: $width / 2;
-    }
-    @include e(text) {
-      line-height: 1.25;
-    }
-    @include b(icon) {
-      font-size: $width;
-    }
-  }
-}
+// @mixin avatar-size-mixin($size) {
+//   @include m($size + '-size') {
+//     $width: map-get($--n-height, $size);
+//     width: $width;
+//     height: $width;
+//     @include m(circle-shaped, round-shaped) {
+//       border-radius: $width / 2;
+//     }
+//     @include e(text) {
+//       line-height: 1.25;
+//     }
+//     @include b(icon) {
+//       font-size: $width;
+//     }
+//   }
+// }
 
-@include themes-mixin {
-  @include b(avatar) {
-    @include once {
-      @include avatar-size-mixin('small');
-      @include avatar-size-mixin('medium');
-      @include avatar-size-mixin('large');
-      @include b(icon) {
-        fill: #FFF;
-        stroke: #FFF;
-        vertical-align: bottom;
-      }
-      color: #FFF;
-      transition: background-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
-      font-size: 14px;
-      display: inline-block;
-      position: relative;
-      border-radius: $--n-avatar-border-radius;
-      overflow: hidden;
-      text-align: center;
-      img {
-        width: 100%;
-        height: 100%;
-      }
-      @include e(text) {
-        white-space: nowrap;
-        display: inline-block;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-      }
-    }
-    background-color: $--avatar-background-color;
-  }
-}
+// @include themes-mixin {
+//   @include b(avatar) {
+//     @include once {
+//       @include avatar-size-mixin('small');
+//       @include avatar-size-mixin('medium');
+//       @include avatar-size-mixin('large');
+//       @include b(icon) {
+//         fill: #FFF;
+//         stroke: #FFF;
+//         vertical-align: bottom;
+//       }
+//       color: #FFF;
+//       transition: background-color .3s $--n-ease-in-out-cubic-bezier, color .3s $--n-ease-in-out-cubic-bezier;
+//       font-size: 14px;
+//       display: inline-block;
+//       position: relative;
+//       border-radius: $--n-avatar-border-radius;
+//       overflow: hidden;
+//       text-align: center;
+//       img {
+//         width: 100%;
+//         height: 100%;
+//       }
+//       @include e(text) {
+//         white-space: nowrap;
+//         display: inline-block;
+//         position: absolute;
+//         left: 50%;
+//         top: 50%;
+//       }
+//     }
+//     background-color: $--avatar-background-color;
+//   }
+// }
