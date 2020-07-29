@@ -52,14 +52,21 @@ import themeable from '../../_mixins/themeable'
 import zindexable from '../../_mixins/zindexable'
 import formatLength from '../../_utils/css/formatLength'
 import NDrawerContent from './DrawerContent'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/index'
 
 export default {
-  name: 'NDrawer',
+  name: 'Drawer',
   components: {
     NBasePortal,
     NDrawerContent
   },
-  mixins: [withapp, themeable, zindexable],
+  mixins: [
+    withapp,
+    themeable,
+    zindexable,
+    usecssr(styles)
+  ],
   model: {
     prop: 'show',
     event: 'hide'

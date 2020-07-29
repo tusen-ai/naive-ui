@@ -37,7 +37,11 @@ import styles from './styles'
 
 export default {
   name: 'Avatar',
-  mixins: [withapp, themeable, usecssr(styles)],
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   props: {
     size: {
       type: [String, Number],
