@@ -1,5 +1,5 @@
 <script>
-import { createClassObject } from '../../../DataTable/src/utils'
+import { createClassObject } from '../../../data-table/src/utils'
 
 export default {
   name: 'NBaseSelectOption',
