@@ -22,7 +22,7 @@ export default c([
       borderRadius,
       transition: `
         background-color .3s ${easeInOutCubicBezier},
-        color .3s ${easeInOutCubicBezier},
+        color .3s ${easeInOutCubicBezier}
       `,
       backgroundColor
     }, [
