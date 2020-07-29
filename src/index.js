@@ -42,7 +42,7 @@ import Popselect from './Popselect'
 import ConfigProvider from './config-provider'
 import Transfer from './Transfer'
 import Spin from './Spin'
-import Drawer from './Drawer'
+import Drawer from './drawer'
 import Time from './Time'
 import LoadingBar from './LoadingBar'
 import Slider from './Slider'
@@ -97,6 +97,8 @@ import alertLightStyle from './alert/styles/light'
 import alertDarkStyle from './alert/styles/dark'
 import avatarDarkStyle from './avatar/styles/dark'
 import avatarLightStyle from './avatar/styles/light'
+import drawerDarkStyle from './drawer/styles/dark'
+import drawerLightStyle from './drawer/styles/light'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -216,6 +218,8 @@ export default create({
     alertDarkStyle,
     avatarLightStyle,
     avatarDarkStyle,
+    drawerDarkStyle,
+    drawerLightStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle

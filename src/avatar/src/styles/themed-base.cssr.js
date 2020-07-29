@@ -38,6 +38,13 @@ export default c([
           left: 50%;
           top: 50%;
         `
+      }),
+      cTB('icon', {
+        raw: `
+          fill: #FFF;
+          stroke: #FFF;
+          vertical-align: bottom;
+        `
       })
     ])
   }])
