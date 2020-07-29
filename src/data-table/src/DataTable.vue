@@ -125,7 +125,7 @@ function normalizeColumn (column) {
 }
 
 export default {
-  name: 'NDataTable',
+  name: 'DataTable',
   components: {
     BaseTable,
     NEmpty,
