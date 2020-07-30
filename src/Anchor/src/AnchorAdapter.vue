@@ -30,7 +30,7 @@
 
 <script>
 import NBaseAnchor from './BaseAnchor'
-import NAffix from '../../Affix'
+import NAffix from '../../affix'
 
 export default {
   name: 'NAnchor',

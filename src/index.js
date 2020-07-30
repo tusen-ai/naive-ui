@@ -48,7 +48,7 @@ import LoadingBar from './LoadingBar'
 import Slider from './Slider'
 import Tree from './Tree'
 import Grid from './Grid'
-import Affix from './Affix'
+import Affix from './affix'
 import Statistic from './Statistic'
 import Breadcrumb from './Breadcrumb'
 import ConfigConsumer from './config-consumer'
@@ -97,6 +97,8 @@ import alertLightStyle from './alert/styles/light'
 import alertDarkStyle from './alert/styles/dark'
 import avatarDarkStyle from './avatar/styles/dark'
 import avatarLightStyle from './avatar/styles/light'
+import affixLightStyle from './affix/styles/light'
+import affixDarkStyle from './affix/styles/dark'
 import drawerDarkStyle from './drawer/styles/dark'
 import drawerLightStyle from './drawer/styles/light'
 
@@ -218,6 +220,8 @@ export default create({
     alertDarkStyle,
     avatarLightStyle,
     avatarDarkStyle,
+    affixLightStyle,
+    affixDarkStyle,
     drawerDarkStyle,
     drawerLightStyle,
     // Can be remove after refactoring

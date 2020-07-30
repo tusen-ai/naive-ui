@@ -13,9 +13,12 @@
 
 <script>
 import getScrollParent from '../../_utils/dom/getScrollParent'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/index.js'
 
 export default {
-  name: 'NAffix',
+  name: 'Affix',
+  mixins: [usecssr(styles)],
   props: {
     target: {
       type: Function,
