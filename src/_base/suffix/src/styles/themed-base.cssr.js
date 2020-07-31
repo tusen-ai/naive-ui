@@ -37,13 +37,13 @@ export default c([
     return [
       cTB('base-suffix', {
         raw: `
-      user-select: none;
-      display: inline-block;
-      position: relative;
-      height: 12px;
-      width: 12px;
-      vertical-align: bottom;
-    `
+          user-select: none;
+          display: inline-block;
+          position: relative;
+          height: 12px;
+          width: 12px;
+          vertical-align: bottom;
+        `
       }, [
         fadeInScaleUpTransition(),
         cB('base-suffix-spin', {
@@ -123,7 +123,12 @@ export default c([
           ]),
           cM('disabled', {
             cursor: 'not-allowed'
-          })
+          }, [
+            c('&::after', {
+              borderLeft: `1px solid ${pallete.disabledArrowColor}`,
+              borderBottom: `1px solid ${pallete.disabledArrowColor}`
+            })
+          ])
         ])
       ]),
       styleInsideFormItem('warning', props.$local.warning),
