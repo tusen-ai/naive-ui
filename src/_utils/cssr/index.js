@@ -29,6 +29,12 @@ function insideFormItem (status, style) {
   ])
 }
 
+function insideModal (style) {
+  return c(`${prefix}modal-content, ${prefix}drawer`, [
+    style
+  ])
+}
+
 function cTB (selector, ...rest) {
   return cB(selector, [
     c(
@@ -47,4 +53,4 @@ function cTB (selector, ...rest) {
   ])
 }
 
-export { c, cTB, cB, cE, cM, cNotM, insideFormItem, namespace }
+export { c, cTB, cB, cE, cM, cNotM, insideFormItem, insideModal, namespace }
