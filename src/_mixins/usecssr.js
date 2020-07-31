@@ -56,24 +56,25 @@ function setupMutableStyle (
     fallbackTheme,
     styles
   } = naive
+  const name = options.cssrName || options.name
   const renderedTheme = theme || fallbackTheme
   const dependencyValue = dependencyKey === 'syntheticTheme' ? renderedTheme : instance[dependencyKey]
   if (
     process.env.NODE_ENV !== 'production' &&
     (dependencyValue === null || dependencyValue === undefined)
   ) {
-    console.error(`[naive-ui/mixins/usecssr]: ${options.name}.${dependencyKey} is ${dependencyValue}`)
+    console.error(`[naive-ui/mixins/usecssr]: ${name}.${dependencyKey} is ${dependencyValue}`)
   }
   const mountId = createMutableStyleId(
-    options.name,
+    name,
     renderedTheme,
     dependencyKey,
     dependencyValue
   )
   if (isStyleMounted(mountId)) return
-  const cssrPropsGetter = styles[renderedTheme][options.name]
+  const cssrPropsGetter = styles[renderedTheme][name]
   if (process.env.NODE_ENV !== 'production' && !cssrPropsGetter) {
-    console.error(`[naive-ui/mixins/usecssr]: ${options.name}'s style not found`, styles)
+    console.error(`[naive-ui/mixins/usecssr]: ${name}'s style not found`, styles)
   }
   // themeVariables: { base, derived }
   const themeVariables = getThemeVariables(naive, renderedTheme)
@@ -97,8 +98,9 @@ function setupImmutableStyle (
   instance,
   CNode
 ) {
+  const options = instance.$options
   const mountId = createImmutableStyleId(
-    instance.$options.name
+    options.cssrName || options.name
   )
   if (isStyleMounted(mountId)) return
   CNode.mount({
