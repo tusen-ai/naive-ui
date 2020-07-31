@@ -116,9 +116,9 @@
         box-shadow: inset 0 0 0 1px map-get($--checkbox-border-color, 'active');
       }
     }
-    &:focus {
+    &:focus:not(:active) {
       @include b(checkbox-box) {
-        box-shadow: inset 0 0 0 1px map-get($--checkbox-border-color, 'active');
+        box-shadow: inset 0 0 0 1px map-get($--checkbox-border-color, 'active'), 0 0 0 2px change-color(map-get($--checkbox-border-color, 'active'), $alpha: .3);
       }
     }
     @include b(checkbox-box) {
@@ -139,7 +139,7 @@
       }
     }
     @include m(checked, indeterminate) {
-      &:focus {
+      &:focus:not(:active) {
         @include b(checkbox-box) {
           box-shadow: inset 0 0 0 1px map-get($--checkbox-border-color, 'active'), 0 0 0 2px change-color(map-get($--checkbox-border-color, 'active'), $alpha: .3);
         }

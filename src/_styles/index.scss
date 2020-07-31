@@ -1,6 +1,6 @@
 @import "./base.scss";
 
-// don't use ~vue-virtual-scroller, if so rollup not working
+// don't use ~vue-virtual-scroller, if so rollup won't work
 @import '../../node_modules/vue-virtual-scroller/dist/vue-virtual-scroller';
 
 @import "./BaseLoading.scss";
@@ -50,7 +50,6 @@
 @import './List.scss';
 @import './Layout.scss';
 @import "./Popover.scss";
-@import "./DataTable.scss";
 @import "./Confirm.scss";
 @import "./Modal.scss";
 @import "./Result.scss";

@@ -82,8 +82,8 @@ export function read (color) {
 
 /**
  *
- * @param {[number, number, number]} base
- * @param {[number, number, number, number]} overlay
+ * @param {string | [number, number, number]} base
+ * @param {string | [number, number, number, number]} overlay
  */
 export function composite (base, overlay) {
   if (!Array.isArray(base)) base = read(base)

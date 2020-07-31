@@ -1,4 +1,4 @@
-import { c, cTB, cM } from '../../../_utils/cssr'
+import { c, cTB, cB, cM } from '../../../_utils/cssr'
 import slideInFromRightTransition from '../../../styles/_transitions/slide-in-from-right'
 import slideInFromLeftTransition from '../../../styles/_transitions/slide-in-from-left'
 import slideInFromTopTransition from '../../../styles/_transitions/slide-in-from-top'
@@ -60,7 +60,7 @@ export default c([
           `
         })
       ]),
-      cTB('drawer-overlay', {
+      cB('drawer-overlay', {
         raw: `
           background-color: rgba(0, 0, 0, .3);
           position: absolute;
@@ -71,7 +71,7 @@ export default c([
           pointer-events: all;
         `
       }),
-      c('drawer-overlay', {
+      cB('drawer-overlay', {
         raw: `
           background-color: rgba(0, 0, 0, .3);
           position: absolute;
@@ -83,12 +83,11 @@ export default c([
         `
       }, [
         fadeInTransition({
-          name: 'drawer-overlay',
           enterDuration: '0.3s',
           leaveDuration: '0.3s'
         })
       ]),
-      c('darwer-container', {
+      cB('darwer-container', {
         raw: `
           position: absolute;
           left: 0;

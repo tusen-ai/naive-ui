@@ -64,6 +64,7 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import usecssr from '../../_mixins/usecssr'
 import locale from '../../_mixins/locale'
 import { setCheckStatusOfRow, createRowKey } from './utils'
 import BaseTable from './BaseTable.vue'
@@ -71,6 +72,7 @@ import NEmpty from '../../Empty'
 import NPagination from '../../Pagination'
 import formatLength from '../../_utils/css/formatLength'
 import isPlainObject from 'lodash-es/isPlainObject'
+import styles from './styles'
 
 function createShallowClonedObject (object) {
   if (!object) return object
@@ -131,7 +133,12 @@ export default {
     NEmpty,
     NPagination
   },
-  mixins: [ withapp, themeable, locale('DataTable') ],
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles),
+    locale('DataTable')
+  ],
   provide () {
     return {
       NDataTable: this

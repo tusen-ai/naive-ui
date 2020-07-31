@@ -8,7 +8,7 @@
   :overlay-style="{ marginTop: '24px', marginBottom: '24px', width: '800px' }"
 >
   <n-button @click="drawerActive = !drawerActive">Open Drawer</n-button>
-  <n-drawer v-model="drawerActive">
+  <n-drawer v-model="drawerActive" width="600">
     <n-radio-group v-model="size" name="top-size" style="margin-bottom: 12px;">
       <n-radio-button value="small">小</n-radio-button>
       <n-radio-button value="medium" >中</n-radio-button>

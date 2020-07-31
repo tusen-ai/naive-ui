@@ -95,12 +95,14 @@ import dynamicTagsLightStyle from './dynamic-tags/styles/light'
 import dynamicTagsDarkStyle from './dynamic-tags/styles/dark'
 import alertLightStyle from './alert/styles/light'
 import alertDarkStyle from './alert/styles/dark'
-import avatarDarkStyle from './avatar/styles/dark'
 import avatarLightStyle from './avatar/styles/light'
+import avatarDarkStyle from './avatar/styles/dark'
 import affixLightStyle from './affix/styles/light'
 import affixDarkStyle from './affix/styles/dark'
-import drawerDarkStyle from './drawer/styles/dark'
 import drawerLightStyle from './drawer/styles/light'
+import drawerDarkStyle from './drawer/styles/dark'
+import dataTableLightStyle from './data-table/styles/light'
+import dataTableDarkStyle from './data-table/styles/dark'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -224,6 +226,8 @@ export default create({
     affixDarkStyle,
     drawerDarkStyle,
     drawerLightStyle,
+    dataTableLightStyle,
+    dataTableDarkStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle
