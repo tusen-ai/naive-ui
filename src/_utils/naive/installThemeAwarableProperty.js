@@ -12,7 +12,7 @@ function getTheme (componentInstance, property, configProviderToWatchThemeChange
   let theme = null
   while (cursor) {
     const name = cursor.$options.name
-    if (name === 'NConfigProvider') {
+    if (name === 'ConfigProvider') {
       while (cursor) {
         if (cursor.syntheticTheme) {
           theme = cursor.syntheticTheme
