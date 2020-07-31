@@ -11,7 +11,8 @@ export default create({
         activeCrossColor: derived.primaryActiveColor,
         arrowColor: derived.quaternaryTextOverlayColor,
         hoverArrowColor: derived.primaryHoverColor,
-        activeArrowColor: derived.primaryHoverColor
+        activeArrowColor: derived.primaryHoverColor,
+        disabledArrowColor: derived.quinaryTextOverlayColor
       },
       warning: {
         crossColor: derived.warningColor,
@@ -19,7 +20,8 @@ export default create({
         activeCrossColor: derived.warningActiveColor,
         arrowColor: derived.warningColor,
         hoverArrowColor: derived.warningHoverColor,
-        activeArrowColor: derived.warningHoverColor
+        activeArrowColor: derived.warningHoverColor,
+        disabledArrowColor: derived.quinaryTextOverlayColor
       },
       error: {
         crossColor: derived.errorColor,
@@ -27,7 +29,8 @@ export default create({
         activeCrossColor: derived.errorActiveColor,
         arrowColor: derived.errorColor,
         hoverArrowColor: derived.errorHoverColor,
-        activeArrowColor: derived.errorHoverColor
+        activeArrowColor: derived.errorHoverColor,
+        disabledArrowColor: derived.quinaryTextOverlayColor
       }
     }
   }

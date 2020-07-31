@@ -96,7 +96,7 @@ export default {
     syntheticTheme (value) {
       if (this.avoidHollowOut) return
       cache()
-      this.$nextTick().then(() => {
+      this.$nextTick(() => {
         this.updateHollowOutAffect(value)
         uncache()
       })
@@ -157,7 +157,7 @@ export default {
     if (this.avoidHollowOut) return
     cache()
     this.updateHollowOutAffect()
-    this.$nextTick().then(() => {
+    this.$nextTick(() => {
       void this.$el.offsetHeight
       this.hollowOutColorTransitionDisabled = false
       uncache()
