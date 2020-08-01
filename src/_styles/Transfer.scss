@@ -1,118 +1,118 @@
 @import './mixins/mixins.scss';
 
-@keyframes transfer-slide-in-from-left {
-  0% {
-    transform: translateX(-150%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
+// @keyframes transfer-slide-in-from-left {
+//   0% {
+//     transform: translateX(-150%);
+//   }
+//   100% {
+//     transform: translateX(0);
+//   }
+// }
 
-@keyframes transfer-slide-out-to-right {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(150%);
-  }
-}
+// @keyframes transfer-slide-out-to-right {
+//   0% {
+//     transform: translateX(0);
+//   }
+//   100% {
+//     transform: translateX(150%);
+//   }
+// }
 
-@keyframes transfer-slide-in-from-right {
-  0% {
-    transform: translateX(150%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
+// @keyframes transfer-slide-in-from-right {
+//   0% {
+//     transform: translateX(150%);
+//   }
+//   100% {
+//     transform: translateX(0);
+//   }
+// }
 
-@keyframes transfer-slide-out-to-left {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-150%);
-  }
-}
+// @keyframes transfer-slide-out-to-left {
+//   0% {
+//     transform: translateX(0);
+//   }
+//   100% {
+//     transform: translateX(-150%);
+//   }
+// }
 
-@mixin transfer-animation-mixin($size) {
-  @keyframes transfer-height-collapse--#{$size} {
-    0% {
-      max-height: map-get($--n-height, $size);
-    }
-    100% {
-      max-height: 0;
-    }
-  }
+// @mixin transfer-animation-mixin($size) {
+//   @keyframes transfer-height-collapse--#{$size} {
+//     0% {
+//       max-height: map-get($--n-height, $size);
+//     }
+//     100% {
+//       max-height: 0;
+//     }
+//   }
   
-  @keyframes transfer-height-expand--#{$size} {
-    0% {
-      max-height: 0;
-    }
-    100% {
-      max-height: map-get($--n-height, $size);
-    }
-  }
-}
+//   @keyframes transfer-height-expand--#{$size} {
+//     0% {
+//       max-height: 0;
+//     }
+//     100% {
+//       max-height: map-get($--n-height, $size);
+//     }
+//   }
+// }
 
-@mixin transfer-size-mixin($size) {
-  @include m($size + '-size') {
-    @include m(filterable) {
-      @include b(transfer-list) {
-        @include b(transfer-list-body) {
-          height: map-get($--n-height, $size) * 5.6 + 45px;
-        }
-      }
-    }
-    @include b(transfer-list) {
-      @include b(transfer-list-header) {
-        font-size: map-get($--n-font-size, $size);
-        height: map-get($--n-height, $size) + 6px;
-      }
-      @include b(empty) {
-        font-size: map-get($--n-font-size, $size);
-      }
-      @include b(transfer-list-body) {
-        height: map-get($--n-height, $size) * 5.6;
-        @include b(transfer-list-item) {
-          font-size: map-get($--n-font-size, $size);
-          height: map-get($--n-height, $size);
-          max-height: map-get($--n-height, $size);
-          @include m(source) {
-            @include m(enter) {
-              animation-name: transfer-height-expand--#{$size}, transfer-slide-in-from-right;
-            }
-            @include m(leave) {
-              animation-name: transfer-height-collapse--#{$size}, transfer-slide-out-to-right;
-            }
-          }
-          @include m(target) {
-            @include m(enter) {
-              animation-name: transfer-height-expand--#{$size}, transfer-slide-in-from-left;
-            }
-            @include m(leave) {
-              animation-name: transfer-height-collapse--#{$size}, transfer-slide-out-to-left;
-            }
-          }
-        }
-      }
-    }
-  }
-}
+// @mixin transfer-size-mixin($size) {
+//   @include m($size + '-size') {
+//     @include m(filterable) {
+//       @include b(transfer-list) {
+//         @include b(transfer-list-body) {
+//           height: map-get($--n-height, $size) * 5.6 + 45px;
+//         }
+//       }
+//     }
+//     @include b(transfer-list) {
+//       @include b(transfer-list-header) {
+//         font-size: map-get($--n-font-size, $size);
+//         height: map-get($--n-height, $size) + 6px;
+//       }
+//       @include b(empty) {
+//         font-size: map-get($--n-font-size, $size);
+//       }
+//       @include b(transfer-list-body) {
+//         height: map-get($--n-height, $size) * 5.6;
+//         @include b(transfer-list-item) {
+//           font-size: map-get($--n-font-size, $size);
+//           height: map-get($--n-height, $size);
+//           max-height: map-get($--n-height, $size);
+//           @include m(source) {
+//             @include m(enter) {
+//               animation-name: transfer-height-expand--#{$size}, transfer-slide-in-from-right;
+//             }
+//             @include m(leave) {
+//               animation-name: transfer-height-collapse--#{$size}, transfer-slide-out-to-right;
+//             }
+//           }
+//           @include m(target) {
+//             @include m(enter) {
+//               animation-name: transfer-height-expand--#{$size}, transfer-slide-in-from-left;
+//             }
+//             @include m(leave) {
+//               animation-name: transfer-height-collapse--#{$size}, transfer-slide-out-to-left;
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 
-@include transfer-animation-mixin('small');
-@include transfer-animation-mixin('medium');
-@include transfer-animation-mixin('large');
+// @include transfer-animation-mixin('small');
+// @include transfer-animation-mixin('medium');
+// @include transfer-animation-mixin('large');
 
 @include themes-mixin {
   @include b(transfer) {
     @include once {
       display: flex;
       width: 444px;
-      @include transfer-size-mixin('small');
-      @include transfer-size-mixin('medium');
-      @include transfer-size-mixin('large');
+      // @include transfer-size-mixin('small');
+      // @include transfer-size-mixin('medium');
+      // @include transfer-size-mixin('large');
     }
     @include b(transfer-list) {
       @include once {

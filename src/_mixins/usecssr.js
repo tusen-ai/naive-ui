@@ -63,7 +63,7 @@ function setupMutableStyle (
     process.env.NODE_ENV !== 'production' &&
     (dependencyValue === null || dependencyValue === undefined)
   ) {
-    console.error(`[naive-ui/mixins/usecssr]: ${name}.${dependencyKey} is ${dependencyValue}`)
+    console.error(`[naive-ui/mixins/usecssr]: dependency key ${name}.${dependencyKey} should be nullable`)
   }
   const mountId = createMutableStyleId(
     name,
@@ -113,9 +113,46 @@ function setupImmutableStyle (
   markStyleMounted(mountId)
 }
 
-export default function (styles) {
+function setupCssrProps (
+  instance,
+  theme
+) {
+  const naive = instance.$naive
+  const options = instance.$options
+  const {
+    fallbackTheme,
+    styles
+  } = naive
+  const name = options.cssrName || options.name
+  const renderedTheme = theme || fallbackTheme
+  const cssrPropsGetter = styles[renderedTheme][name]
+  const themeVariables = getThemeVariables(naive, renderedTheme)
+  const componentCssrProps = {
+    $instance: instance,
+    $base: themeVariables.base,
+    $derived: themeVariables.derived,
+    $local: cssrPropsGetter.cssrProps(themeVariables),
+    $renderedTheme: renderedTheme,
+    $fallbackTheme: fallbackTheme
+  }
+  instance.cssrProps = componentCssrProps
+}
+
+export default function (styles, cssrPropsOption) {
   // collect watchers
   const watchers = {}
+  if (
+    cssrPropsOption &&
+    cssrPropsOption.themeKey &&
+    cssrPropsOption.injectCssrProps
+  ) {
+    const themeKey = cssrPropsOption.themeKey
+    watchers[themeKey] = [
+      instance => {
+        setupCssrProps(instance, instance[themeKey])
+      }
+    ]
+  }
   styles.forEach(style => {
     if (!style.watch) return
     style.watch.forEach(watchKey => {
@@ -145,6 +182,7 @@ export default function (styles) {
     .forEach(
       watchKey => {
         watch[watchKey] = function () {
+          // TODO use `themeKey`
           const syntheticTheme = this.syntheticTheme || this.theme
           watchers[watchKey].forEach(watcher => {
             watcher(this, syntheticTheme)
@@ -153,6 +191,11 @@ export default function (styles) {
       }
     )
   return {
+    data () {
+      return {
+        cssrProps: null
+      }
+    },
     created () {
       styles.forEach(style => {
         if (process.env.NODE_ENV !== 'production') {
@@ -161,6 +204,7 @@ export default function (styles) {
         if (style.key) {
           setupMutableStyle(
             this,
+            // TODO use `themeKey`
             this.syntheticTheme || this.theme || null,
             style.key,
             style.CNode
@@ -170,6 +214,9 @@ export default function (styles) {
             this,
             style.CNode
           )
+        }
+        if (cssrPropsOption && cssrPropsOption.themeKey) {
+          setupCssrProps(this, this[cssrPropsOption.themeKey])
         }
         if (process.env.NODE_ENV !== 'production') {
           window.naive.styleRenderingDuration += performance.now()
