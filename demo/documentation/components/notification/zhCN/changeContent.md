@@ -36,7 +36,7 @@ Hold each other close the whole night through`,
             props: {
               size: 'small',
               round: true,
-              src:'https://naiveui.oss-cn-hongkong.aliyuncs.com/07akioni.jpeg'
+              src:'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
             }
           }),
         onClose: () => {
@@ -48,7 +48,7 @@ Hold each other close the whole night through`,
       if (this.notification) {
         this.notification.content = h => h('img', {
           attrs: {
-            src: 'https://naiveui.oss-cn-hongkong.aliyuncs.com/07akioni.jpeg'
+            src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
           },
           style: {
             width: '100%'
