@@ -5,14 +5,14 @@ export default c([
     const type = props.$instance.type
     const pallete = props.$local[type]
     const {
-      backgroundColor,
+      color: backgroundColor,
       borderColor,
       iconColor,
       titleTextColor,
       contentTextColor,
       closeColor,
-      closeHoverColor,
-      closeActiveColor
+      closeColorHover,
+      closeColorActive
     } = pallete
     return cTB('alert', [
       cM(type + '-type', {
@@ -26,14 +26,14 @@ export default c([
           }),
           c('&:hover', [
             cB('icon', {
-              fill: closeHoverColor,
-              stroke: closeHoverColor
+              fill: closeColorHover,
+              stroke: closeColorHover
             })
           ]),
           c('&:active', [
             cB('icon', {
-              fill: closeActiveColor,
-              stroke: closeActiveColor
+              fill: closeColorActive,
+              stroke: closeColorActive
             })
           ])
         ]),

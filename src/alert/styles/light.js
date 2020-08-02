@@ -17,7 +17,7 @@ export default create({
       secondaryTextOverlayColor,
       closeColor,
       closeHoverColor,
-      closeActiveColor,
+      closeColorActive,
       infoColor,
       successColor,
       warningColor,
@@ -28,53 +28,53 @@ export default create({
       borderRadius,
       default: {
         borderColor: dividerOverlayColor,
-        backgroundColor: actionBackgroundColor,
+        color: actionBackgroundColor,
         titleTextColor: primaryTextOverlayColor,
         iconColor: secondaryTextOverlayColor,
         contentTextColor: secondaryTextOverlayColor,
         closeColor: closeColor,
-        closeHoverColor: closeHoverColor,
-        closeActiveColor: closeActiveColor
+        closeColorHover: closeHoverColor,
+        closeColorActive: closeColorActive
       },
       info: {
         borderColor: composite(baseBackgroundColor, changeColor(infoColor, { alpha: 0.25 })),
-        backgroundColor: composite(baseBackgroundColor, changeColor(infoColor, { alpha: 0.08 })),
+        color: composite(baseBackgroundColor, changeColor(infoColor, { alpha: 0.08 })),
         titleTextColor: primaryTextOverlayColor,
         iconColor: infoColor,
         contentTextColor: secondaryTextOverlayColor,
         closeColor: closeColor,
-        closeHoverColor: closeHoverColor,
-        closeActiveColor: closeActiveColor
+        closeColorHover: closeHoverColor,
+        closeColorActive: closeColorActive
       },
       success: {
         borderColor: composite(baseBackgroundColor, changeColor(successColor, { alpha: 0.25 })),
-        backgroundColor: composite(baseBackgroundColor, changeColor(successColor, { alpha: 0.08 })),
+        color: composite(baseBackgroundColor, changeColor(successColor, { alpha: 0.08 })),
         titleTextColor: primaryTextOverlayColor,
         iconColor: successColor,
         contentTextColor: secondaryTextOverlayColor,
         closeColor: closeColor,
-        closeHoverColor: closeHoverColor,
-        closeActiveColor: closeActiveColor
+        closeColorHover: closeHoverColor,
+        closeColorActive: closeColorActive
       },
       warning: {
         borderColor: composite(baseBackgroundColor, changeColor(warningColor, { alpha: 0.33 })),
-        backgroundColor: composite(baseBackgroundColor, changeColor(warningColor, { alpha: 0.08 })),
+        color: composite(baseBackgroundColor, changeColor(warningColor, { alpha: 0.08 })),
         titleTextColor: primaryTextOverlayColor,
         iconColor: warningColor,
         contentTextColor: secondaryTextOverlayColor,
         closeColor: closeColor,
-        closeHoverColor: closeHoverColor,
-        closeActiveColor: closeActiveColor
+        closeColorHover: closeHoverColor,
+        closeColorActive: closeColorActive
       },
       error: {
         borderColor: composite(baseBackgroundColor, changeColor(errorColor, { alpha: 0.25 })),
-        backgroundColor: composite(baseBackgroundColor, changeColor(errorColor, { alpha: 0.08 })),
+        color: composite(baseBackgroundColor, changeColor(errorColor, { alpha: 0.08 })),
         titleTextColor: primaryTextOverlayColor,
         iconColor: errorColor,
         contentTextColor: secondaryTextOverlayColor,
         closeColor: closeColor,
-        closeHoverColor: closeHoverColor,
-        closeActiveColor: closeActiveColor
+        closeColorHover: closeHoverColor,
+        closeColorActive: closeColorActive
       }
     }
   }

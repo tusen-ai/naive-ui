@@ -27,53 +27,53 @@ export default create({
       borderRadius,
       default: {
         borderColor: dividerOverlayColor,
-        backgroundColor: inputBackgroundOverlayColor,
+        color: inputBackgroundOverlayColor,
         titleTextColor: primaryTextOverlayColor,
         iconColor: secondaryTextOverlayColor,
         contentTextColor: secondaryTextOverlayColor,
         closeColor: closeOverlayColor,
-        closeHoverColor: closeHoverOverlayColor,
-        closeActiveColor: closeActiveOverlayColor
+        closeColorHover: closeHoverOverlayColor,
+        closeColorActive: closeActiveOverlayColor
       },
       info: {
         borderColor: changeColor(infoHsColor, { alpha: 0.35 }),
-        backgroundColor: changeColor(infoHsColor, { alpha: 0.25 }),
+        color: changeColor(infoHsColor, { alpha: 0.25 }),
         titleTextColor: primaryTextOverlayColor,
         iconColor: infoHsColor,
         contentTextColor: secondaryTextOverlayColor,
         closeColor: closeOverlayColor,
-        closeHoverColor: closeHoverOverlayColor,
-        closeActiveColor: closeActiveOverlayColor
+        closeColorHover: closeHoverOverlayColor,
+        closeColorActive: closeActiveOverlayColor
       },
       success: {
         borderColor: changeColor(successHsColor, { alpha: 0.35 }),
-        backgroundColor: changeColor(successHsColor, { alpha: 0.25 }),
+        color: changeColor(successHsColor, { alpha: 0.25 }),
         titleTextColor: primaryTextOverlayColor,
         iconColor: successHsColor,
         contentTextColor: secondaryTextOverlayColor,
         closeColor: closeOverlayColor,
-        closeHoverColor: closeHoverOverlayColor,
-        closeActiveColor: closeActiveOverlayColor
+        closeColorHover: closeHoverOverlayColor,
+        closeColorActive: closeActiveOverlayColor
       },
       warning: {
         borderColor: changeColor(warningHsColor, { alpha: 0.35 }),
-        backgroundColor: changeColor(warningHsColor, { alpha: 0.25 }),
+        color: changeColor(warningHsColor, { alpha: 0.25 }),
         titleTextColor: primaryTextOverlayColor,
         iconColor: warningHsColor,
         contentTextColor: secondaryTextOverlayColor,
         closeColor: closeOverlayColor,
-        closeHoverColor: closeHoverOverlayColor,
-        closeActiveColor: closeActiveOverlayColor
+        closeColorHover: closeHoverOverlayColor,
+        closeColorActive: closeActiveOverlayColor
       },
       error: {
         borderColor: changeColor(errorHsColor, { alpha: 0.35 }),
-        backgroundColor: changeColor(errorHsColor, { alpha: 0.25 }),
+        color: changeColor(errorHsColor, { alpha: 0.25 }),
         titleTextColor: primaryTextOverlayColor,
         iconColor: errorHsColor,
         contentTextColor: secondaryTextOverlayColor,
         closeColor: closeOverlayColor,
-        closeHoverColor: closeHoverOverlayColor,
-        closeActiveColor: closeActiveOverlayColor
+        closeColorHover: closeHoverOverlayColor,
+        closeColorActive: closeActiveOverlayColor
       }
     }
   }

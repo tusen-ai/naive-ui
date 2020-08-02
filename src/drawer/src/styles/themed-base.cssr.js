@@ -8,7 +8,7 @@ import fadeInTransition from '../../../styles/_transitions/fade-in'
 export default c([
   ({ props }) => {
     const {
-      backgroundColor,
+      color: backgroundColor,
       textColor
     } = props.$local
     const base = props.$base

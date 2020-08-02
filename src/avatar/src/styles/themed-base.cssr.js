@@ -4,7 +4,7 @@ export default c([
   ({ props }) => {
     const {
       borderRadius,
-      backgroundColor
+      color: backgroundColor
     } = props.$local
     const {
       easeInOutCubicBezier

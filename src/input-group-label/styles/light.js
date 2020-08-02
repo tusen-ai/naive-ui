@@ -8,7 +8,7 @@ export default create({
     return {
       ...commonVariables,
       borderRadius: base.borderRadius,
-      backgroundColor: derived.actionBackgroundColor,
+      color: derived.actionBackgroundColor,
       textColor: derived.secondaryTextColor,
       boxShadow: `inset 0 0 0 1px ${derived.borderColor}`
     }
