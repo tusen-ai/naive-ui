@@ -22,66 +22,66 @@ export default create({
       warningActiveColor,
       borderColor,
       secondaryTextColor: textColor,
-      actionBackgroundColor: buttonBackgroundColor,
-      disabledInputBackgroundColor: disabledBackgroundColor,
-      disabledTextColor,
+      actionBackgroundColor: buttonColor,
+      disabledInputBackgroundColor: colorDisabled,
+      textColorDisabled,
       placeholdeColor,
-      quinaryTextColor: disabledPlaceholderColor,
-      inputBackgroundColor: backgroundColor
+      quinaryTextColor: placeholderColorDisabled,
+      inputBackgroundColor: color
     } = derived
-    const borderHoverColor = primaryHoverColor
+    const borderColorHover = primaryHoverColor
     const buttonTextColor = textColor
-    const disabledButtonBackgroundColor = disabledBackgroundColor
-    const disabledButtonTextColor = disabledTextColor
-    const hoverButtonBackgroundColor = buttonBackgroundColor
-    const activeButtonBackgroundColor = buttonBackgroundColor
+    const buttonColorDisabled = colorDisabled
+    const buttonTextColorDisabled = textColorDisabled
+    const buttonColorHover = buttonColor
+    const buttonColorActive = buttonColor
     const caretColor = null
-    const hoverButtonTextColor = primaryHoverColor
-    const activeButtonTextColor = primaryActiveColor
-    const focusBackgroundColor = backgroundColor
+    const buttonTextColorHover = primaryHoverColor
+    const buttonTextColorActive = primaryActiveColor
+    const colorFocus = color
     return {
       ...inputCommonVariables,
       ...inputNumberCommonVariables,
       borderRadius,
       default: {
-        disabledButtonBackgroundColor,
-        disabledButtonTextColor,
-        disabledPlaceholderColor,
-        disabledBackgroundColor,
-        disabledTextColor,
+        buttonColorDisabled,
+        buttonTextColorDisabled,
+        placeholderColorDisabled,
+        colorDisabled,
+        textColorDisabled,
         textColor,
         borderColor,
-        borderHoverColor,
-        buttonBackgroundColor,
-        hoverButtonBackgroundColor,
-        activeButtonBackgroundColor,
+        borderColorHover,
+        buttonColor,
+        buttonColorHover,
+        buttonColorActive,
         buttonTextColor,
-        hoverButtonTextColor,
-        activeButtonTextColor,
+        buttonTextColorHover,
+        buttonTextColorActive,
         caretColor,
-        backgroundColor,
-        focusBackgroundColor,
-        focusBorderMaskBoxShadow: `inset 0 0 0 1px ${primaryHoverColor}, 0 0 0 2px ${changeColor(primaryColor, { alpha: 0.2 })}`,
-        hoverBorderMaskBoxShadow: `inset 0 0 0 1px ${primaryHoverColor}`,
+        color,
+        colorFocus,
+        borderMaskBoxShadowFocus: `inset 0 0 0 1px ${primaryHoverColor}, 0 0 0 2px ${changeColor(primaryColor, { alpha: 0.2 })}`,
+        borderMaskBoxShadowHover: `inset 0 0 0 1px ${primaryHoverColor}`,
         placeholdeColor
       },
       warning: {
         borderMaskBoxShadow: `inset 0 0 0 1px ${warningColor}`,
-        focusBorderMaskBoxShadow: `inset 0 0 0 1px ${warningHoverColor}, 0 0 0 2px ${changeColor(warningColor, { alpha: 0.2 })}`,
-        hoverBorderMaskBoxShadow: `inset 0 0 0 1px ${warningHoverColor}`,
-        focusBackgroundColor,
+        borderMaskBoxShadowFocus: `inset 0 0 0 1px ${warningHoverColor}, 0 0 0 2px ${changeColor(warningColor, { alpha: 0.2 })}`,
+        borderMaskBoxShadowHover: `inset 0 0 0 1px ${warningHoverColor}`,
+        colorFocus,
         caretColor: warningHoverColor,
-        hoverButtonTextColor: warningHoverColor,
-        activeButtonTextColor: warningActiveColor
+        buttonTextColorHover: warningHoverColor,
+        buttonTextColorActive: warningActiveColor
       },
       error: {
         borderMaskBoxShadow: `inset 0 0 0 1px ${errorColor}`,
-        focusBorderMaskBoxShadow: `inset 0 0 0 1px ${errorHoverColor}, 0 0 0 2px ${changeColor(errorColor, { alpha: 0.2 })}`,
-        hoverBorderMaskBoxShadow: `inset 0 0 0 1px ${errorHoverColor}`,
-        focusBackgroundColor,
+        borderMaskBoxShadowFocus: `inset 0 0 0 1px ${errorHoverColor}, 0 0 0 2px ${changeColor(errorColor, { alpha: 0.2 })}`,
+        borderMaskBoxShadowHover: `inset 0 0 0 1px ${errorHoverColor}`,
+        colorFocus,
         caretColor: errorHoverColor,
-        hoverButtonTextColor: errorHoverColor,
-        activeButtonTextColor: errorActiveColor
+        buttonTextColorHover: errorHoverColor,
+        buttonTextColorActive: errorActiveColor
       }
     }
   }
