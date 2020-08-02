@@ -52,7 +52,14 @@ export default c([
           ]),
           cE('border-mask', {
             border: `1px solid ${borderColor}`,
-            pointerEvents: 'none'
+            transition: `transition: border-color .3s ${easeInOutCubicBezier}`,
+            pointerEvents: 'none',
+            borderRadius,
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0
           }),
           cB('transfer-list-header', {
             boxSizing: 'border-box',
@@ -63,7 +70,7 @@ export default c([
             backgroundColor: headerBackgroundColor,
             transition: `
               border-color .3s ${easeInOutCubicBezier},
-              background-color .3s ${easeInOutCubicBezier},
+              background-color .3s ${easeInOutCubicBezier}
             `
           }, [
             cE('checkbox', {
@@ -192,27 +199,27 @@ export default c([
                         animation-timing-function: ${easeInOutCubicBezier}, ${easeInCubicBezier};
                         animation-delay: .25s, 0s;
                       `
+                    })
+                  ]),
+                  cM('target', {
+                    animationFillMode: 'forwards'
+                  }, [
+                    cM('enter', {
+                      raw: `
+                        transform: translateX(-150%);
+                        animation-duration: .25s, .25s;
+                        animation-timing-function: ${easeInOutCubicBezier}, ${easeOutCubicBezier};
+                        animation-delay: 0s, .25s;
+                      `
                     }),
-                    cM('target', {
-                      animationFillMode: 'forwards'
-                    }, [
-                      cM('enter', {
-                        raw: `
-                          transform: translateX(-150%);
-                          animation-duration: .25s, .25s;
-                          animation-timing-function: ${easeInOutCubicBezier}, ${easeOutCubicBezier};
-                          animation-delay: 0s, .25s;
-                        `
-                      }),
-                      cM('leave', {
-                        raw: `
-                          transform: translateX(150%);
-                          animation-duration: .25s, .25s;
-                          animation-timing-function: ${easeInOutCubicBezier}, ${easeInCubicBezier};
-                          animation-delay: .25s, 0s;
-                        `
-                      })
-                    ])
+                    cM('leave', {
+                      raw: `
+                        transform: translateX(150%);
+                        animation-duration: .25s, .25s;
+                        animation-timing-function: ${easeInOutCubicBezier}, ${easeInCubicBezier};
+                        animation-delay: .25s, 0s;
+                      `
+                    })
                   ])
                 ])
               ])
@@ -237,29 +244,29 @@ export default c([
           }),
           cM('to', {
             transform: 'rotate(180deg)'
-          })
-        ]),
-        cE('icon', {
-          pointerEvents: 'none',
-          transition: `fill .3s ${easeInOutCubicBezier}`,
-          fill: buttonBackgroundColor
-        }),
-        c('&:hover', [
+          }),
           cE('icon', {
-            fill: buttonHoverBackgroundColor
-          })
-        ]),
-        c('&:active', [
-          cE('icon', {
-            fill: buttonActiveBackgroundColor
-          })
-        ]),
-        cM('disabled', {
-          cursor: 'not-allowed'
-        }, [
-          cE('icon', {
-            fill: buttonDisabledBackgroundColor
-          })
+            pointerEvents: 'none',
+            transition: `fill .3s ${easeInOutCubicBezier}`,
+            fill: buttonBackgroundColor
+          }),
+          c('&:hover', [
+            cE('icon', {
+              fill: buttonHoverBackgroundColor
+            })
+          ]),
+          c('&:active', [
+            cE('icon', {
+              fill: buttonActiveBackgroundColor
+            })
+          ]),
+          cM('disabled', {
+            cursor: 'not-allowed'
+          }, [
+            cE('icon', {
+              fill: buttonDisabledBackgroundColor
+            })
+          ])
         ])
       ])
     ]
