@@ -36,14 +36,14 @@ function createColorProps (
 function createPallete (color) {
   const textColor = null
   const rgb = read(color)
-  const hoverColor = createHoverColor(rgb)
-  const activeColor = createActiveColor(rgb)
-  const focusColor = hoverColor
+  const colorHover = createHoverColor(rgb)
+  const colorActive = createActiveColor(rgb)
+  const colorFocus = colorHover
   return {
     color,
-    hoverColor,
-    activeColor,
-    focusColor,
+    colorHover,
+    colorActive,
+    colorFocus,
     textColor
   }
 }
@@ -109,41 +109,41 @@ export default c([
               cM(
                 'active',
                 createColorProps(
-                  pallete.activeTextColor || pallete.textColor,
-                  pallete.activeColor,
-                  pallete.activeBorderColor || pallete.activeColor
+                  pallete.textColorActive || pallete.textColor,
+                  pallete.colorActive,
+                  pallete.borderColorActive || pallete.colorActive
                 ),
                 [
-                  createBorderMaskStyle(pallete.activeBorderColor || pallete.activeColor),
-                  createIconColorStyle(pallete.activeTextColor || pallete.textColor)
+                  createBorderMaskStyle(pallete.borderColorActive || pallete.colorActive),
+                  createIconColorStyle(pallete.textColorActive || pallete.textColor)
                 ]
               ),
               cNotM('active', [
                 c('&:hover', createColorProps(
-                  pallete.hoverTextColor || pallete.textColor,
-                  pallete.hoverColor,
-                  pallete.hoverBorderColor || pallete.hoverColor
+                  pallete.textColorHover || pallete.textColor,
+                  pallete.colorHover,
+                  pallete.borderColorHover || pallete.colorHover
                 ), [
-                  createBorderMaskStyle(pallete.hoverBorderColor || pallete.hoverColor),
-                  createIconColorStyle(pallete.hoverTextColor || pallete.textColor)
+                  createBorderMaskStyle(pallete.borderColorHover || pallete.colorHover),
+                  createIconColorStyle(pallete.textColorHover || pallete.textColor)
                 ]),
                 c('&:active', createColorProps(
-                  pallete.activeTextColor || pallete.textColor,
-                  pallete.activeColor,
-                  pallete.activeBorderColor || pallete.activeColor
+                  pallete.textColorActive || pallete.textColor,
+                  pallete.colorActive,
+                  pallete.borderColorActive || pallete.colorActive
                 ), [
-                  createBorderMaskStyle(pallete.activeBorderColor || pallete.activeColor),
-                  createIconColorStyle(pallete.activeTextColor || pallete.textColor)
+                  createBorderMaskStyle(pallete.borderColorActive || pallete.colorActive),
+                  createIconColorStyle(pallete.textColorActive || pallete.textColor)
                 ])
               ]),
               c('&:not(:active):focus', [
                 cNotM('active', createColorProps(
-                  pallete.focusTextColor || pallete.textColor,
-                  pallete.focusColor,
-                  pallete.focusBorderColor || pallete.focusColor
+                  pallete.textColorFocus || pallete.textColor,
+                  pallete.colorFocus,
+                  pallete.borderColorFocus || pallete.colorFocus
                 ), [
-                  createBorderMaskStyle(pallete.focusBorderColor || pallete.focusColor),
-                  createIconColorStyle(pallete.focusTextColor || pallete.textColor)
+                  createBorderMaskStyle(pallete.borderColorFocus || pallete.colorFocus),
+                  createIconColorStyle(pallete.textColorFocus || pallete.textColor)
                 ])
               ])
             ]),
@@ -158,41 +158,41 @@ export default c([
                 cM(
                   'active',
                   createColorProps(
-                    pallete.ghostTypedActiveTextColor || pallete.activeColor,
+                    pallete.ghostTypedTextColorActive || pallete.colorActive,
                     'transparent',
-                    pallete.activeBorderColor || pallete.activeColor
+                    pallete.borderColorActive || pallete.colorActive
                   ),
                   [
-                    createBorderMaskStyle(pallete.activeBorderColor || pallete.activeColor),
-                    createIconColorStyle(pallete.ghostTypedActiveTextColor || pallete.activeColor)
+                    createBorderMaskStyle(pallete.borderColorActive || pallete.colorActive),
+                    createIconColorStyle(pallete.ghostTypedTextColorActive || pallete.colorActive)
                   ]
                 ),
                 cNotM('active', [
                   c('&:hover', createColorProps(
-                    pallete.ghostTypedHoverTextColor || pallete.hoverColor,
+                    pallete.ghostTypedTextColorHover || pallete.colorHover,
                     'transparent',
-                    pallete.hoverBorderColor || pallete.hoverColor
+                    pallete.borderColorHover || pallete.colorHover
                   ), [
-                    createBorderMaskStyle(pallete.hoverBorderColor || pallete.hoverColor),
-                    createIconColorStyle(pallete.ghostTypedHoverTextColor || pallete.hoverColor)
+                    createBorderMaskStyle(pallete.borderColorHover || pallete.colorHover),
+                    createIconColorStyle(pallete.ghostTypedTextColorHover || pallete.colorHover)
                   ]),
                   c('&:active', createColorProps(
-                    pallete.ghostTypedActiveTextColor || pallete.activeColor,
+                    pallete.ghostTypedTextColorActive || pallete.colorActive,
                     'transparent',
-                    pallete.activeBorderColor || pallete.activeColor
+                    pallete.borderColorActive || pallete.colorActive
                   ), [
-                    createBorderMaskStyle(pallete.activeBorderColor || pallete.activeColor),
-                    createIconColorStyle(pallete.ghostTypedActiveTextColor || pallete.activeColor)
+                    createBorderMaskStyle(pallete.borderColorActive || pallete.colorActive),
+                    createIconColorStyle(pallete.ghostTypedTextColorActive || pallete.colorActive)
                   ])
                 ]),
                 c('&:not(:active):focus', [
                   cNotM('active', createColorProps(
-                    pallete.ghostTypedHoverTextColor || pallete.hoverColor,
+                    pallete.ghostTypedTextColorHover || pallete.colorHover,
                     'transparent',
-                    pallete.focusBorderColor || pallete.focusColor
+                    pallete.borderColorFocus || pallete.colorFocus
                   ), [
-                    createBorderMaskStyle(pallete.focusBorderColor || pallete.focusColor),
-                    createIconColorStyle(pallete.ghostTypedHoverTextColor || pallete.hoverColor)
+                    createBorderMaskStyle(pallete.borderColorFocus || pallete.colorFocus),
+                    createIconColorStyle(pallete.ghostTypedTextColorHover || pallete.colorHover)
                   ])
                 ])
               ])
@@ -208,37 +208,37 @@ export default c([
                 cM(
                   'active',
                   createColorProps(
-                    pallete.textTypedActiveTextColor || pallete.activeColor,
+                    pallete.textTypedTextColorActive || pallete.colorActive,
                     null,
                     null
                   ),
                   [
-                    createIconColorStyle(pallete.textTypedActiveTextColor || pallete.activeColor)
+                    createIconColorStyle(pallete.textTypedTextColorActive || pallete.colorActive)
                   ]
                 ),
                 cNotM('active', [
                   c('&:hover', createColorProps(
-                    pallete.textTypedHoverTextColor || pallete.hoverColor,
+                    pallete.textTypedTextColorHover || pallete.colorHover,
                     null,
                     null
                   ), [
-                    createIconColorStyle(pallete.textTypedHoverTextColor || pallete.hoverColor)
+                    createIconColorStyle(pallete.textTypedTextColorHover || pallete.colorHover)
                   ]),
                   c('&:active', createColorProps(
-                    pallete.textTypedActiveTextColor || pallete.activeColor,
+                    pallete.textTypedTextColorActive || pallete.colorActive,
                     null,
                     null
                   ), [
-                    createIconColorStyle(pallete.textTypedActiveTextColor || pallete.activeColor)
+                    createIconColorStyle(pallete.textTypedTextColorActive || pallete.colorActive)
                   ])
                 ]),
                 c('&:not(:active):focus', [
                   cNotM('active', createColorProps(
-                    pallete.textTypedFocusTextColor || pallete.focusColor,
+                    pallete.textTypedTextColorFocus || pallete.colorFocus,
                     null,
                     null
                   ), [
-                    createIconColorStyle(pallete.textTypedFocusTextColor || pallete.focusColor)
+                    createIconColorStyle(pallete.textTypedTextColorFocus || pallete.colorFocus)
                   ])
                 ])
               ])

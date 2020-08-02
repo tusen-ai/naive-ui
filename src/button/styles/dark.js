@@ -8,32 +8,32 @@ export default create({
     return {
       ...commonVariables,
       borderRadius: base.borderRadius,
-      disabledOpacity: derived.disabledOpacity,
+      opacityDisabled: derived.disabledOpacity,
       default: {
         color: 'transparent',
-        hoverColor: 'transparent',
-        activeColor: 'transparent',
-        focusColor: 'transparent',
+        colorHover: 'transparent',
+        colorActive: 'transparent',
+        colorFocus: 'transparent',
 
         textColor: derived.secondaryTextColor,
-        hoverTextColor: derived.primaryHoverColor,
-        activeTextColor: derived.primaryActiveColor,
-        focusTextColor: derived.primaryHoverColor,
+        textColorHover: derived.primaryHoverColor,
+        textColorActive: derived.primaryActiveColor,
+        textColorFocus: derived.primaryHoverColor,
 
         textTypedTextColor: derived.secondaryTextColor,
-        textTypedHoverTextColor: derived.primaryHoverColor,
-        textTypedActiveTextColor: derived.primaryActiveColor,
-        textTypedFocusTextColor: derived.primaryHoverColor,
+        textTypedTextColorHover: derived.primaryHoverColor,
+        textTypedTextColorActive: derived.primaryActiveColor,
+        textTypedTextColorFocus: derived.primaryHoverColor,
 
         ghostTypedTextColor: derived.secondaryTextColor,
-        ghostTypedHoverTextColor: derived.primaryHoverColor,
-        ghostTypedActiveTextColor: derived.primaryActiveColor,
-        ghostTypedFocusTextColor: derived.primaryHoverColor,
+        ghostTypedTextColorHover: derived.primaryHoverColor,
+        ghostTypedTextColorActive: derived.primaryActiveColor,
+        ghostTypedTextColorFocus: derived.primaryHoverColor,
 
         borderColor: derived.borderOverlayColor,
-        hoverBorderColor: derived.primaryHoverColor,
-        activeBorderColor: derived.primaryActiveColor,
-        focusBorderColor: derived.primaryHoverColor,
+        borderColorHover: derived.primaryHoverColor,
+        borderColorActive: derived.primaryActiveColor,
+        borderColorFocus: derived.primaryHoverColor,
 
         rippleColor: derived.primaryColor,
 
@@ -41,37 +41,37 @@ export default create({
       },
       primary: {
         color: derived.primaryColor,
-        hoverColor: derived.primaryHoverColor,
-        activeColor: derived.primaryActiveColor,
-        focusColor: derived.primaryHoverColor,
+        colorHover: derived.primaryHoverColor,
+        colorActive: derived.primaryActiveColor,
+        colorFocus: derived.primaryHoverColor,
         textColor: derived.baseBackgroundColor
       },
       info: {
         color: derived.infoColor,
-        hoverColor: derived.infoHoverColor,
-        activeColor: derived.infoActiveColor,
-        focusColor: derived.infoHoverColor,
+        colorHover: derived.infoHoverColor,
+        colorActive: derived.infoActiveColor,
+        colorFocus: derived.infoHoverColor,
         textColor: derived.baseBackgroundColor
       },
       success: {
         color: derived.successColor,
-        hoverColor: derived.successHoverColor,
-        activeColor: derived.successActiveColor,
-        focusColor: derived.successHoverColor,
+        colorHover: derived.successHoverColor,
+        colorActive: derived.successActiveColor,
+        colorFocus: derived.successHoverColor,
         textColor: derived.baseBackgroundColor
       },
       warning: {
         color: derived.warningColor,
-        hoverColor: derived.warningHoverColor,
-        activeColor: derived.warningActiveColor,
-        focusColor: derived.warningHoverColor,
+        colorHover: derived.warningHoverColor,
+        colorActive: derived.warningActiveColor,
+        colorFocus: derived.warningHoverColor,
         textColor: derived.baseBackgroundColor
       },
       error: {
         color: derived.errorColor,
-        hoverColor: derived.errorHoverColor,
-        activeColor: derived.errorActiveColor,
-        focusColor: derived.errorHoverColor,
+        colorHover: derived.errorHoverColor,
+        colorActive: derived.errorActiveColor,
+        colorFocus: derived.errorHoverColor,
         textColor: derived.baseBackgroundColor
       }
     }
