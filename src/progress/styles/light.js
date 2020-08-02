@@ -23,7 +23,7 @@ export default create({
       },
       innerIndicatorTextColor: 'rgb(255, 255, 255)',
       outerIndicatorTextColor: 'rgb(255, 255, 255)',
-      processingLineBackgroundImage: 'linear-gradient(90deg, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, .5) 100%)'
+      lineBackgroundImageProcessing: 'linear-gradient(90deg, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, .5) 100%)'
     }
   }
 })
