@@ -13,18 +13,18 @@ export default c([
     const {
       borderRadius,
       borderColor,
-      listBackgroundColor,
-      headerBackgroundColor,
+      listColor,
+      headerColor,
       headerTextColor,
-      disabledHeaderTextColor,
+      headerTextColorDisabled,
       headerExtraTextColor,
-      buttonBackgroundColor,
-      buttonHoverBackgroundColor,
-      buttonActiveBackgroundColor,
-      buttonDisabledBackgroundColor,
+      buttonColor,
+      buttonColorHover,
+      buttonColorActive,
+      buttonColorDisabled,
       filterBorderColor,
       itemTextColor,
-      itemDisabledTextColor
+      itemTextColorDisabled
     } = props.$local
     return [
       animationStyle,
@@ -38,7 +38,7 @@ export default c([
           position: 'relative',
           transition: `background-color .3s ${easeInOutCubicBezier}`,
           borderRadius,
-          backgroundColor: listBackgroundColor
+          backgroundColor: listColor
         }, [
           cB('virtual-scroller', {
             height: '100%',
@@ -52,7 +52,7 @@ export default c([
           ]),
           cE('border-mask', {
             border: `1px solid ${borderColor}`,
-            transition: `transition: border-color .3s ${easeInOutCubicBezier}`,
+            transition: `border-color .3s ${easeInOutCubicBezier}`,
             pointerEvents: 'none',
             borderRadius,
             position: 'absolute',
@@ -67,7 +67,7 @@ export default c([
             alignItems: 'center',
             backgroundClip: 'padding-box',
             borderRadius,
-            backgroundColor: headerBackgroundColor,
+            backgroundColor: headerColor,
             transition: `
               border-color .3s ${easeInOutCubicBezier},
               background-color .3s ${easeInOutCubicBezier}
@@ -89,7 +89,7 @@ export default c([
               color: headerTextColor
             }, [
               cM('disabled', {
-                color: disabledHeaderTextColor
+                color: headerTextColorDisabled
               })
             ]),
             cE('extra', {
@@ -179,7 +179,7 @@ export default c([
                   ]),
                   cM('disabled', {
                     cursor: 'not-allowed',
-                    color: itemDisabledTextColor
+                    color: itemTextColorDisabled
                   }),
                   cM('source', {
                     animationFillMode: 'forwards'
@@ -248,23 +248,23 @@ export default c([
           cE('icon', {
             pointerEvents: 'none',
             transition: `fill .3s ${easeInOutCubicBezier}`,
-            fill: buttonBackgroundColor
+            fill: buttonColor
           }),
           c('&:hover', [
             cE('icon', {
-              fill: buttonHoverBackgroundColor
+              fill: buttonColorHover
             })
           ]),
           c('&:active', [
             cE('icon', {
-              fill: buttonActiveBackgroundColor
+              fill: buttonColorActive
             })
           ]),
           cM('disabled', {
             cursor: 'not-allowed'
           }, [
             cE('icon', {
-              fill: buttonDisabledBackgroundColor
+              fill: buttonColorDisabled
             })
           ])
         ])

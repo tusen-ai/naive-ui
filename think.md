@@ -191,6 +191,40 @@ shouldMount 可以加到 usecssr
 ## 2020.7.8
 style overrides RFC
 
+## 2020.8.2
+颜色命名的方式
+```
+1.
+{
+  xColor,
+  xActiveColor,
+  xDisabledColor,
+  secondaryTextColor,
+  tertiaryTextColor
+},
+{ // 这种拒绝，因为只有一个状态也需要 default
+  xColor: {
+    default,
+    active,
+    disabled
+  }
+}
+// 现在感觉第三种比较好
+{
+  xColor,
+  xColorActive,
+  xColorDisabled,
+  textColor2, // 暂时可以先不改
+  textColor3, // 
+  textColorDisabled,
+  textColorPrimary,
+  textColorSecondary,
+  textColorTertiary,
+  textColorQ...
+}
+// 还有一点是去掉 backgroundColor 中的 background，因为 color & textColor 区分度已经够了
+```
+
 ```js
 // no import on demand
 import naive from 'naive-ui'

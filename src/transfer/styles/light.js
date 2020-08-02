@@ -10,22 +10,21 @@ export default create({
       ...commonVariables,
       borderRadius: base.borderRadius,
       borderColor: derived.dividerOverlayColor,
-      listBackgroundColor: derived.cardBackgroundColor,
-      headerBackgroundColor: composite(
+      listColor: derived.cardBackgroundColor,
+      headerColor: composite(
         derived.cardBackgroundColor,
         derived.tableHeaderBackgroundOverlayColor
       ),
       headerTextColor: derived.primaryTextColor,
-      disabledHeaderTextColor: derived.disabledTextColor,
+      headerTextColorDisabled: derived.disabledTextColor,
       headerExtraTextColor: derived.secondaryTextColor,
-      // TODO refactor
-      buttonBackgroundColor: 'rgba(0, 0, 0, 0.2)',
-      buttonHoverBackgroundColor: derived.primaryHoverColor,
-      buttonActiveBackgroundColor: derived.primaryActiveColor,
-      buttonDisabledBackgroundColor: 'rgba(0, 0, 0, 0.1)',
+      buttonColor: 'rgba(0, 0, 0, 0.2)',
+      buttonColorHover: derived.primaryHoverColor,
+      buttonColorActive: derived.primaryActiveColor,
+      buttonColorDisabled: 'rgba(0, 0, 0, 0.1)',
       filterBorderColor: derived.dividerOverlayColor,
       itemTextColor: derived.secondaryTextColor,
-      itemDisabledTextColor: derived.disabledTextColor
+      itemTextColorDisabled: derived.disabledTextColor
     }
   }
 })
