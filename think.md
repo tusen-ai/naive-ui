@@ -388,6 +388,7 @@ const naive = create({
 100. <del>Confim 重命名 Dialog</del> 算了不换了，牵扯的地方太多不好改了，confirm 也就凑活吧
 101. Dark Debug 3，Safari 你可太秀了......
 102. close-outline icon
+103. input + icon 主题切换 transition 有问题!!!
 
 ```
 Done
