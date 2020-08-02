@@ -9,15 +9,15 @@ export default c([
     } = props.$local
     const {
       textColor: checkableTextColor,
-      hoverTextColor: checkableHoverTextColor,
-      activeTextColor: checkableActiveTextColor,
-      backgroundColor: checkableBackgroundColor,
-      hoverBackgroundColor: checkableHoverBackgroundColor,
-      activeBackgroundColor: checkableActiveBackgroundColor,
-      checkedTextColor,
-      checkedBackgroundColor,
-      checkedHoverBackgroundColor,
-      checkedActiveBackgroundColor
+      textColorHover: checkableHoverTextColor,
+      textColorActive: checkableActiveTextColor,
+      color: checkableBackgroundColor,
+      colorHover: checkableHoverBackgroundColor,
+      colorActive: checkableActiveBackgroundColor,
+      textColorChecked,
+      colorChecked,
+      colorCheckedHover,
+      colorCheckedActive
     } = checkable
     const {
       easeInOutCubicBezier
@@ -94,15 +94,15 @@ export default c([
           ])
         ]),
         cM('checked', {
-          color: checkedTextColor,
-          backgroundColor: checkedBackgroundColor
+          color: textColorChecked,
+          backgroundColor: colorChecked
         }, [
           cNotM('disabled', [
             c('&:hover', {
-              backgroundColor: checkedHoverBackgroundColor
+              backgroundColor: colorCheckedHover
             }),
             c('&:active', {
-              backgroundColor: checkedActiveBackgroundColor
+              backgroundColor: colorCheckedActive
             })
           ])
         ])

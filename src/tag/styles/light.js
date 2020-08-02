@@ -32,63 +32,63 @@ export default create({
       disabledOpacity,
       checkable: {
         textColor: secondaryTextOverlayColor,
-        hoverTextColor: primaryHoverColor,
-        activeTextColor: primaryActiveColor,
-        backgroundColor: 'transparent',
-        hoverBackgroundColor: 'transparent',
-        activeBackgroundColor: 'transparent',
-        checkedTextColor: baseBackgroundColor,
-        checkedBackgroundColor: primaryColor,
-        checkedHoverBackgroundColor: primaryHoverColor,
-        checkedActiveBackgroundColor: primaryActiveColor
+        textColorHover: primaryHoverColor,
+        textColorActive: primaryActiveColor,
+        textColorChecked: baseBackgroundColor,
+        color: 'transparent',
+        colorHover: 'transparent',
+        colorActive: 'transparent',
+        colorChecked: primaryColor,
+        colorCheckedHover: primaryHoverColor,
+        colorCheckedActive: primaryActiveColor
       },
       default: {
         borderColor: borderOverlayColor,
         textColor: secondaryTextOverlayColor,
-        backgroundColor: tagBackgroundColor,
+        color: tagBackgroundColor,
         closeColor: closeOverlayColor,
-        closeHoverColor: closeHoverOverlayColor,
-        closeActiveColor: closeActiveOverlayColor
+        closeColorHover: closeHoverOverlayColor,
+        closeColorActive: closeActiveOverlayColor
       },
       primary: {
         borderColor: changeColor(primaryColor, { alpha: 0.3 }),
         textColor: primaryColor,
-        backgroundColor: changeColor(primaryColor, { alpha: 0.1 }),
+        color: changeColor(primaryColor, { alpha: 0.1 }),
         closeColor: changeColor(primaryColor, { alpha: 0.75 }),
-        closeHoverColor: changeColor(primaryColor, { alpha: 0.6 }),
-        closeActiveColor: changeColor(primaryColor, { alpha: 0.9 })
+        closeColorHover: changeColor(primaryColor, { alpha: 0.6 }),
+        closeColorActive: changeColor(primaryColor, { alpha: 0.9 })
       },
       info: {
         borderColor: changeColor(infoColor, { alpha: 0.3 }),
         textColor: infoColor,
-        backgroundColor: changeColor(infoColor, { alpha: 0.1 }),
+        color: changeColor(infoColor, { alpha: 0.1 }),
         closeColor: changeColor(infoColor, { alpha: 0.75 }),
-        closeHoverColor: changeColor(infoColor, { alpha: 0.6 }),
-        closeActiveColor: changeColor(infoColor, { alpha: 0.9 })
+        closeColorHover: changeColor(infoColor, { alpha: 0.6 }),
+        closeColorActive: changeColor(infoColor, { alpha: 0.9 })
       },
       success: {
         borderColor: changeColor(successColor, { alpha: 0.3 }),
         textColor: successColor,
-        backgroundColor: changeColor(successColor, { alpha: 0.1 }),
+        color: changeColor(successColor, { alpha: 0.1 }),
         closeColor: changeColor(successColor, { alpha: 0.75 }),
-        closeHoverColor: changeColor(successColor, { alpha: 0.6 }),
-        closeActiveColor: changeColor(successColor, { alpha: 0.9 })
+        closeColorHover: changeColor(successColor, { alpha: 0.6 }),
+        closeColorActive: changeColor(successColor, { alpha: 0.9 })
       },
       warning: {
         borderColor: changeColor(warningColor, { alpha: 0.35 }),
         textColor: warningColor,
-        backgroundColor: changeColor(warningColor, { alpha: 0.12 }),
+        color: changeColor(warningColor, { alpha: 0.12 }),
         closeColor: changeColor(warningColor, { alpha: 0.75 }),
-        closeHoverColor: changeColor(warningColor, { alpha: 0.6 }),
-        closeActiveColor: changeColor(warningColor, { alpha: 0.9 })
+        closeColorHover: changeColor(warningColor, { alpha: 0.6 }),
+        closeColorActive: changeColor(warningColor, { alpha: 0.9 })
       },
       error: {
         borderColor: changeColor(errorColor, { alpha: 0.23 }),
         textColor: errorColor,
-        backgroundColor: changeColor(errorColor, { alpha: 0.08 }),
+        color: changeColor(errorColor, { alpha: 0.08 }),
         closeColor: changeColor(errorColor, { alpha: 0.65 }),
-        closeHoverColor: changeColor(errorColor, { alpha: 0.5 }),
-        closeActiveColor: changeColor(errorColor, { alpha: 0.8 })
+        closeColorHover: changeColor(errorColor, { alpha: 0.5 }),
+        closeColorActive: changeColor(errorColor, { alpha: 0.8 })
       }
     }
   }
