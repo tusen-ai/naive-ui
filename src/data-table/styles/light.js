@@ -26,30 +26,30 @@ export default create({
       borderRadius,
       default: {
         borderColor: composite(cardBackgroundColor, dividerOverlayColor),
-        bodyHoverBackgroundColor: composite(cardBackgroundColor, tablePendingBackgroundOverlayColor),
-        headerBackgroundColor: composite(cardBackgroundColor, tableHeaderBackgroundOverlayColor),
-        headerHoverBackgroundColor: composite(
+        bodyColorHover: composite(cardBackgroundColor, tablePendingBackgroundOverlayColor),
+        headerColor: composite(cardBackgroundColor, tableHeaderBackgroundOverlayColor),
+        headerColorHover: composite(
           composite(cardBackgroundColor, tableHeaderBackgroundOverlayColor),
           tableHeaderBackgroundOverlayColor
         ),
-        bodyBackgroundColor: cardBackgroundColor,
+        bodyColor: cardBackgroundColor,
         bodyTextColor: secondaryTextColor,
         headerTextColor: primaryTextColor,
         headerFontWeight: strongFontWeight,
-        headerButtonHoverBackgroundColor: tablePendingBackgroundOverlayColor,
+        headerButtonColorHover: tablePendingBackgroundOverlayColor,
         headerButtonIconColor: iconOverlayColor,
-        headerButtonIconActiveColor: primaryColor,
+        headerButtonIconColorActive: primaryColor,
         fixedColumnBoxShadowColor: 'rgba(0, 0, 0, .18)'
       },
       modal: {
         borderColor: composite(modalBackgroundColor, dividerOverlayColor),
-        bodyHoverBackgroundColor: composite(modalBackgroundColor, tablePendingBackgroundOverlayColor),
-        headerBackgroundColor: composite(modalBackgroundColor, tableHeaderBackgroundOverlayColor),
-        headerHoverBackgroundColor: composite(
+        bodyColorHover: composite(modalBackgroundColor, tablePendingBackgroundOverlayColor),
+        headerColor: composite(modalBackgroundColor, tableHeaderBackgroundOverlayColor),
+        headerColorHover: composite(
           composite(modalBackgroundColor, tableHeaderBackgroundOverlayColor),
           tableHeaderBackgroundOverlayColor
         ),
-        bodyBackgroundColor: modalBackgroundColor
+        bodyColor: modalBackgroundColor
       }
     }
   }
