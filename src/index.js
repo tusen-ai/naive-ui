@@ -40,7 +40,7 @@ import Anchor from './Anchor'
 import Dropdown from './Dropdown'
 import Popselect from './Popselect'
 import ConfigProvider from './config-provider'
-import Transfer from './Transfer'
+import Transfer from './transfer'
 import Spin from './Spin'
 import Drawer from './drawer'
 import Time from './Time'
@@ -103,6 +103,8 @@ import drawerLightStyle from './drawer/styles/light'
 import drawerDarkStyle from './drawer/styles/dark'
 import dataTableLightStyle from './data-table/styles/light'
 import dataTableDarkStyle from './data-table/styles/dark'
+import transferLightStyle from './transfer/styles/light'
+import transferDarkStyle from './transfer/styles/dark'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -228,6 +230,8 @@ export default create({
     drawerLightStyle,
     dataTableLightStyle,
     dataTableDarkStyle,
+    transferLightStyle,
+    transferDarkStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle

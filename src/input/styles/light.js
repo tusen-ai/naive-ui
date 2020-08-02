@@ -20,7 +20,10 @@ export default create({
       warningColor,
       warningHoverColor,
       errorColor,
-      errorHoverColor
+      errorHoverColor,
+      quaternaryOpacity,
+      quinaryOpacity,
+      baseTextColor
     } = derived
     const {
       borderRadius
@@ -31,39 +34,39 @@ export default create({
       iconSize: '16px',
       default: {
         textColor: secondaryTextColor,
-        disabledTextColor: quaternaryTextColor,
+        textColorDisabled: quaternaryTextColor,
         caretColor: primaryColor,
         placeholderColor: quaternaryTextColor,
-        disabledPlaceholderColor: quinaryTextColor,
+        placeholderColorDisabled: quinaryTextColor,
         backgroundColor: inputBackgroundColor,
-        disabledBackgroundColor: disabledInputBackgroundColor,
-        focusBackgroundColor: inputBackgroundColor,
-        iconColor: quaternaryTextColor,
-        iconOpacity: 1,
-        disabledIconColor: quinaryTextColor,
-        disabledIconOpacity: 1,
+        colorDisabled: disabledInputBackgroundColor,
+        colorFocus: inputBackgroundColor,
+        iconColor: baseTextColor,
+        iconOpacity: quaternaryOpacity,
+        iconColorDisabled: baseTextColor,
+        iconOpacityDisabled: quinaryOpacity,
         borderMaskColor: 'transparent',
-        hoverBorderMaskColor: primaryHoverColor,
-        disabledBorderMaskColor: 'transparent !important',
-        focusBorderMaskColor: primaryHoverColor,
-        focusBorderMaskBoxShadow: `0 0 0 2px ${changeColor(primaryColor, { alpha: 0.2 })}`,
+        borderMaskColorHover: primaryHoverColor,
+        borderMaskColorDisabled: 'transparent !important',
+        borderMaskColorFocus: primaryHoverColor,
+        borderMaskBoxShadowFocus: `0 0 0 2px ${changeColor(primaryColor, { alpha: 0.2 })}`,
         boxShadow: `inset 0 0 0 1px ${borderColor}`,
-        disabledBoxShadow: `inset 0 0 0 1px ${borderColor}`
+        boxShadowDisabled: `inset 0 0 0 1px ${borderColor}`
       },
       warning: {
         borderMaskColor: warningColor,
-        hoverBorderMaskColor: warningHoverColor,
-        focusBackgroundColor: inputBackgroundColor,
-        focusBorderMaskColor: warningHoverColor,
-        focusBorderMaskBoxShadow: `0 0 0 2px ${changeColor(warningColor, { alpha: 0.2 })}`,
+        borderMaskColorHover: warningHoverColor,
+        colorFocus: inputBackgroundColor,
+        borderMaskColorFocus: warningHoverColor,
+        borderMaskBoxShadowFocus: `0 0 0 2px ${changeColor(warningColor, { alpha: 0.2 })}`,
         caretColor: warningColor
       },
       error: {
         borderMaskColor: errorColor,
-        hoverBorderMaskColor: errorHoverColor,
-        focusBackgroundColor: inputBackgroundColor,
-        focusBorderMaskColor: errorHoverColor,
-        focusBorderMaskBoxShadow: `0 0 0 2px ${changeColor(errorColor, { alpha: 0.2 })}`,
+        borderMaskColorHover: errorHoverColor,
+        colorFocus: inputBackgroundColor,
+        borderMaskColorFocus: errorHoverColor,
+        borderMaskBoxShadowFocus: `0 0 0 2px ${changeColor(errorColor, { alpha: 0.2 })}`,
         caretColor: errorColor
       }
     }

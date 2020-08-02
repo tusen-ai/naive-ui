@@ -6,16 +6,16 @@ export default c([
     const { borderRadius } = props.$local
     const {
       borderColor,
-      bodyHoverBackgroundColor,
-      headerBackgroundColor,
-      headerHoverBackgroundColor,
-      bodyBackgroundColor,
+      bodyColorHover,
+      headerColor,
+      headerColorHover,
+      bodyColor,
       bodyTextColor,
       headerTextColor,
       headerFontWeight,
-      headerButtonHoverBackgroundColor,
+      headerButtonColorHover,
       headerButtonIconColor,
-      headerButtonIconActiveColor,
+      headerButtonIconColorActive,
       fixedColumnBoxShadowColor
     } = props.$local.default
     const fixedColumnStyle = createFixedColumnStyle({ easeInOutCubicBezier, fixedColumnBoxShadowColor })
@@ -127,12 +127,12 @@ export default c([
             transition: background-color .3s ${easeInOutCubicBezier};
             border-collapse: separate;
             border-spacing: 0;
-            background-color: ${bodyBackgroundColor}
+            background-color: ${bodyColor}
           `
         }, [
           cB('data-table-thead', {
             transition: `background-color .3s ${easeInOutCubicBezier}`,
-            backgroundColor: headerBackgroundColor
+            backgroundColor: headerColor
           }),
           cB('data-table-tr', {
             boxSizing: 'border-box',
@@ -150,10 +150,10 @@ export default c([
               ])
             ]),
             c('&:hover', {
-              backgroundColor: bodyHoverBackgroundColor
+              backgroundColor: bodyColorHover
             }, [
               cB('data-table-td', {
-                backgroundColor: bodyHoverBackgroundColor
+                backgroundColor: bodyColorHover
               })
             ])
           ]),
@@ -162,7 +162,7 @@ export default c([
             textAlign: 'start',
             fontWeight: headerFontWeight,
             boxSizing: 'border-box',
-            backgroundColor: headerBackgroundColor,
+            backgroundColor: headerColor,
             borderColor: borderColor,
             color: headerTextColor,
             transition: `
@@ -194,7 +194,7 @@ export default c([
                 maxWidth: 'calc(100% - 18px)'
               }),
               c('&:hover', {
-                backgroundColor: headerHoverBackgroundColor
+                backgroundColor: headerColorHover
               })
             ]),
             fixedColumnStyle
@@ -204,7 +204,7 @@ export default c([
               text-align: start;
               box-sizing: border-box;
               border: none;
-              background-color: ${bodyBackgroundColor};
+              background-color: ${bodyColor};
               color: ${bodyTextColor};
               border-bottom: 1px solid ${borderColor};
               transition:
@@ -259,12 +259,12 @@ export default c([
               }),
               cM('asc', [
                 cE('asc-icon', {
-                  fill: headerButtonIconActiveColor
+                  fill: headerButtonIconColorActive
                 })
               ]),
               cM('desc', [
                 cE('desc-icon', {
-                  fill: headerButtonIconActiveColor
+                  fill: headerButtonIconColorActive
                 })
               ]),
               cE('asc-icon, desc-icon', {
@@ -299,7 +299,7 @@ export default c([
                 transition: `background-color .3s ${easeInOutCubicBezier}`
               }, [
                 c('&:hover', {
-                  backgroundColor: headerButtonHoverBackgroundColor
+                  backgroundColor: headerButtonColorHover
                 }),
                 cB('icon', {
                   fontSize: '12px',
@@ -309,16 +309,16 @@ export default c([
               ]),
               cM('popover-visible', [
                 cE('icon-wrapper', {
-                  backgroundColor: headerButtonHoverBackgroundColor
+                  backgroundColor: headerButtonColorHover
                 })
               ]),
               cM('active', [
                 cE('icon-wrapper', {
-                  backgroundColor: headerButtonHoverBackgroundColor
+                  backgroundColor: headerButtonColorHover
                 }, [
                   cB('icon', {
-                    fill: headerButtonIconActiveColor,
-                    stroke: headerButtonIconActiveColor
+                    fill: headerButtonIconColorActive,
+                    stroke: headerButtonIconColorActive
                   })
                 ])
               ])
@@ -367,41 +367,41 @@ export default c([
 
 function createStyleInsideModal (props) {
   const {
-    bodyBackgroundColor,
-    headerBackgroundColor,
+    bodyColor,
+    headerColor,
     borderColor,
-    headerHoverBackgroundColor,
-    bodyHoverBackgroundColor
+    headerColorHover,
+    bodyColorHover
   } = props.$local.modal
   return insideModal(cTB('data-table', [
     cB('data-table-table', {
-      backgroundColor: bodyBackgroundColor
+      backgroundColor: bodyColor
     }, [
       cB('data-table-thead', {
-        backgroundColor: headerBackgroundColor
+        backgroundColor: headerColor
       }),
       cB('data-table-th', {
         borderColor: borderColor,
-        backgroundColor: headerBackgroundColor
+        backgroundColor: headerColor
       }, [
         cM('sortable', [
           c('&:hover', {
-            backgroundColor: headerHoverBackgroundColor
+            backgroundColor: headerColorHover
           })
         ])
       ]),
       cB('data-table-tr', [
         c('&:hover', {
-          backgroundColor: bodyHoverBackgroundColor
+          backgroundColor: bodyColorHover
         }, [
           cB('data-table-td', {
-            backgroundColor: bodyHoverBackgroundColor
+            backgroundColor: bodyColorHover
           })
         ])
       ]),
       cB('data-table-td', {
         borderColor: borderColor,
-        backgroundColor: bodyBackgroundColor
+        backgroundColor: bodyColor
       })
     ]),
     cNotM('single-line', [

@@ -7,7 +7,7 @@ export default c([
     } = props.$base
     const {
       borderRadius,
-      backgroundColor,
+      color: backgroundColor,
       textColor,
       boxShadow
     } = props.$local

@@ -10,7 +10,7 @@ export default c([
       borderRadius,
       position: 'relative',
       transition: `
-        background-color .3s ${easeInOutCubicBezier},
+        background-color .3s ${easeInOutCubicBezier}
       `
     }, [
       fadeInHeightExpandTranstion({
@@ -54,6 +54,7 @@ export default c([
         })
       ]),
       cB('alert-body', {
+        borderRadius,
         padding: '15px 15px 15px 47px',
         transition: `border-color .3s ${easeInOutCubicBezier}`
       }, [

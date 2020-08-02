@@ -12,21 +12,21 @@ export default c([
       backgroundColor,
       boxShadow,
       borderMaskColor,
-      hoverBorderMaskColor,
-      focusBackgroundColor,
-      focusBorderMaskColor,
-      focusBorderMaskBoxShadow,
+      borderMaskColorHover,
+      colorFocus,
+      borderMaskColorFocus,
+      borderMaskBoxShadowFocus,
       iconColor,
       iconOpacity,
       textColor,
       caretColor,
-      disabledBoxShadow,
-      disabledBorderMaskColor,
-      disabledBackgroundColor,
-      disabledTextColor,
-      disabledPlaceholderColor,
-      disabledIconColor,
-      disabledIconOpacity
+      boxShadowDisabled,
+      borderMaskColorDisabled,
+      colorDisabled,
+      textColorDisabled,
+      placeholderColorDisabled,
+      iconColorDisabled,
+      iconOpacityDisabled
     } = props.$local.default
     const {
       easeInOutCubicBezier
@@ -67,44 +67,44 @@ export default c([
       ]),
       cM('disabled', {
         cursor: 'not-allowed',
-        boxShadow: disabledBoxShadow,
-        backgroundColor: disabledBackgroundColor
+        boxShadow: boxShadowDisabled,
+        backgroundColor: colorDisabled
       }, [
         cE('border-mask', {
-          borderColor: disabledBorderMaskColor
+          borderColor: borderMaskColorDisabled
         }),
         cE('input, textarea', {
           cursor: 'not-allowed',
-          color: disabledTextColor
+          color: textColorDisabled
         }),
         cE('placeholder', {
-          color: disabledPlaceholderColor
+          color: placeholderColorDisabled
         }),
         cE('suffix, prefix', [
           cB('icon', {
-            fill: disabledIconColor,
-            stroke: disabledIconColor
+            fill: iconColorDisabled,
+            stroke: iconColorDisabled
           }, [
             c('svg', {
-              opacity: disabledIconOpacity
+              opacity: iconOpacityDisabled
             })
           ])
         ]),
         cE('splitor', {
-          color: disabledTextColor
+          color: textColorDisabled
         })
       ]),
       cM('focus', {
-        backgroundColor: focusBackgroundColor
+        backgroundColor: colorFocus
       }, [
         cE('border-mask', {
-          borderColor: focusBorderMaskColor,
-          boxShadow: focusBorderMaskBoxShadow
+          borderColor: borderMaskColorFocus,
+          boxShadow: borderMaskBoxShadowFocus
         })
       ]),
       c('&:hover', [
         cE('border-mask', {
-          borderColor: hoverBorderMaskColor
+          borderColor: borderMaskColorHover
         })
       ]),
       cE('border-mask', {
@@ -264,15 +264,15 @@ export default c([
             }),
             c('&:hover', [
               cE('border-mask', {
-                borderColor: pallete.hoverBorderMaskColor
+                borderColor: pallete.borderMaskColorHover
               })
             ]),
             cM('focus', {
-              backgroundColor: pallete.focusBackgroundColor
+              backgroundColor: pallete.colorFocus
             }, [
               cE('border-mask', {
-                borderColor: pallete.focusBorderMaskColor,
-                boxShadow: pallete.focusBorderMaskBoxShadow
+                borderColor: pallete.borderMaskColorFocus,
+                boxShadow: pallete.borderMaskBoxShadowFocus
               })
             ]),
             cE('input, textarea', {

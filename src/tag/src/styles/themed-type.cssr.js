@@ -7,17 +7,17 @@ export default c([
     const {
       borderColor,
       textColor,
-      backgroundColor,
+      color,
       closeColor,
-      closeHoverColor,
-      closeActiveColor
+      closeColorHover,
+      closeColorActive
     } = pallete
     return cTB('tag', [
       cNotM('checkable', [
         cM(`${type}-type`, {
           boxShadow: `inset 0 0 0 1px ${borderColor}`,
           color: textColor,
-          backgroundColor: backgroundColor
+          backgroundColor: color
         }, [
           cE('close', {
             fill: closeColor
@@ -25,10 +25,10 @@ export default c([
           cNotM('disabled', [
             cE('close', [
               c('&:hover', {
-                fill: closeHoverColor
+                fill: closeColorHover
               }),
               c('&:active', {
-                fill: closeActiveColor
+                fill: closeColorActive
               })
             ])
           ])

@@ -37,7 +37,7 @@ export default c([
     const local = props.$local
     const fillColor = local[status].fillColor
     const outerIndicatorTextColor = local.outerIndicatorTextColor
-    const processingLineBackgroundImage = local.processingLineBackgroundImage
+    const lineBackgroundImageProcessing = local.lineBackgroundImageProcessing
     return cTB('progress', [
       cM(status, [
         cB('progress-text', {
@@ -65,7 +65,7 @@ export default c([
                 cM('processing', [
                   c('&::after', {
                     content: '',
-                    backgroundImage: processingLineBackgroundImage,
+                    backgroundImage: lineBackgroundImageProcessing,
                     animation: `progress-processing-animation 2s ${base.easeInOutCubicBezier} infinite`
                   })
                 ])

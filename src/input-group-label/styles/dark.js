@@ -8,7 +8,7 @@ export default create({
     return {
       ...commonVariables,
       borderRadius: base.borderRadius,
-      backgroundColor: derived.inputBackgroundOverlayColor,
+      color: derived.inputBackgroundOverlayColor,
       textColor: derived.secondaryTextColor,
       boxShadow: `inset 0 0 0 1px transparent`
     }

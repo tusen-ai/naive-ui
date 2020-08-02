@@ -121,7 +121,7 @@ export default c([
           })
         ]),
         cM('disabled', {
-          opacity: local.disabledOpacity
+          opacity: local.opacityDisabled
         })
       ]
     )

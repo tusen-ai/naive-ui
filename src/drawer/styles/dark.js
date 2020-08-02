@@ -5,7 +5,7 @@ export default create({
   name: 'Drawer',
   getDerivedVariables ({ derived }) {
     return {
-      backgroundColor: derived.modalBackgroundColor,
+      color: derived.modalBackgroundColor,
       textColor: derived.secondaryTextOverlayColor
     }
   }

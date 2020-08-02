@@ -197,12 +197,14 @@ import locale from '../../_mixins/locale'
 import asformitem from '../../_mixins/asformitem'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 import { RecycleScroller } from 'vue-virtual-scroller'
 import debounce from 'lodash-es/debounce'
 import { itemSize } from '../../_styles-in-js/common'
 
 export default {
-  name: 'NTransfer',
+  name: 'Transfer',
   components: {
     NTransferHeaderCheckbox,
     NTransferHeaderExtra,
@@ -217,7 +219,18 @@ export default {
     iosSearch,
     RecycleScroller
   },
-  mixins: [withapp, themeable, locale('Transfer'), asformitem()],
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(
+      styles, {
+        themeKey: 'syntheticTheme',
+        injectCssrProps: true
+      }
+    ),
+    locale('Transfer'),
+    asformitem()
+  ],
   model: {
     prop: 'value',
     event: 'change'

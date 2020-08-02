@@ -14,7 +14,7 @@ export default create({
     return {
       ...commonVariables,
       borderRadius,
-      backgroundColor: avatarBackgroundOverlayColor
+      color: avatarBackgroundOverlayColor
     }
   }
 })
