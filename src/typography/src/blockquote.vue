@@ -1,13 +1,13 @@
 <template>
-  <p
-    class="n-p"
+  <blockquote
+    class="n-blockquote"
     :class="{
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
-      [`n-p--${depth}-depth`]: depth
+      'n-blockquote--align-text': alignText
     }"
   >
     <slot />
-  </p>
+  </blockquote>
 </template>
 
 <script>
@@ -15,14 +15,12 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 
 export default {
-  name: 'NP',
+  name: 'Blockquote',
   mixins: [withapp, themeable],
   props: {
-    depth: {
-      validator (value) {
-        return ['primary', 'secondary', 'tertiary'].includes(value)
-      },
-      default: null
+    alignText: {
+      type: Boolean,
+      default: false
     }
   }
 }

@@ -3,7 +3,7 @@ import themeable from '../../_mixins/themeable'
 import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
 
 export default level => ({
-  name: 'NH' + level,
+  name: 'H' + level,
   props: {
     type: {
       type: String,

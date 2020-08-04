@@ -1,13 +1,13 @@
 <template>
-  <li
-    class="n-li"
+  <ul
+    class="n-ul"
     :class="{
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
-      'n-li--align-text': alignText
+      'n-ul--align-text': alignText
     }"
   >
     <slot />
-  </li>
+  </ul>
 </template>
 
 <script>
@@ -15,7 +15,7 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 
 export default {
-  name: 'NLi',
+  name: 'Ul',
   mixins: [withapp, themeable],
   props: {
     alignText: {

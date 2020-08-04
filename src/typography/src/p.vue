@@ -1,14 +1,13 @@
 <template>
-  <ol
-    class="n-ol"
+  <p
+    class="n-p"
     :class="{
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
-      'n-ol--align-text': alignText
+      [`n-p--${depth}-depth`]: depth
     }"
-    v-on="$listeners"
   >
     <slot />
-  </ol>
+  </p>
 </template>
 
 <script>
@@ -16,12 +15,14 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 
 export default {
-  name: 'NOl',
+  name: 'P',
   mixins: [withapp, themeable],
   props: {
-    alignText: {
-      type: Boolean,
-      default: false
+    depth: {
+      validator (value) {
+        return ['primary', 'secondary', 'tertiary'].includes(value)
+      },
+      default: null
     }
   }
 }

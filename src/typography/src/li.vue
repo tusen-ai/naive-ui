@@ -1,13 +1,13 @@
 <template>
-  <blockquote
-    class="n-blockquote"
+  <li
+    class="n-li"
     :class="{
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
-      'n-blockquote--align-text': alignText
+      'n-li--align-text': alignText
     }"
   >
     <slot />
-  </blockquote>
+  </li>
 </template>
 
 <script>
@@ -15,7 +15,7 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 
 export default {
-  name: 'NBlockquote',
+  name: 'Li',
   mixins: [withapp, themeable],
   props: {
     alignText: {

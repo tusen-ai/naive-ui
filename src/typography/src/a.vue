@@ -23,7 +23,7 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 
 export default {
-  name: 'NA',
+  name: 'A',
   mixins: [ withapp, themeable ],
   props: {
     to: {

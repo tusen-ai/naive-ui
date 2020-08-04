@@ -14,7 +14,7 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 
 export default {
-  name: 'NHr',
+  name: 'Hr',
   mixins: [withapp, themeable]
 }
 </script>
