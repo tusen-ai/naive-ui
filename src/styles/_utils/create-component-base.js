@@ -1,7 +1,6 @@
 function mergedObject (base, override) {
   if (!base) return override
   if (!override) return base
-  console.log('base, override', base, override)
   const clonedBase = { ...base }
   Object.keys(override).forEach(key => {
     if (typeof override[key] !== 'object') {

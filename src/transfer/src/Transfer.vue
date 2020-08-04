@@ -201,7 +201,7 @@ import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
 import { RecycleScroller } from 'vue-virtual-scroller'
 import debounce from 'lodash-es/debounce'
-import { itemSize } from '../../_styles-in-js/common'
+import depx from '../../_utils/css/depx'
 
 export default {
   name: 'Transfer',
@@ -308,7 +308,8 @@ export default {
   },
   computed: {
     itemSize () {
-      return itemSize[this.syntheticSize] || itemSize.medium
+      const height = this.cssrProps.$local.height
+      return depx(height[this.syntheticSize] || height.medium)
     },
     valueToOptionMap () {
       const map = new Map()
