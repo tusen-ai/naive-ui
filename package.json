@@ -15,6 +15,7 @@
     "clean": "rm -rf lib && rm -rf es && rm -rf dist",
     "demo": "npm run generate-version && cross-env NODE_ENV=production webpack-dev-server --config build/webpack.demo.js",
     "dev": "npm run generate-version && cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.js",
+    "dev:design": "npm run generate-version && cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev-design.js",
     "lint": "eslint --no-error-on-unmatched-pattern --fix \"src/**/*.{js,vue}\" \"test/**/*.{js,vue}\" \"build/**/*.{js,vue}\" \"demo/**/*.{js,vue}\" && stylelint \"src/_styles/**/*.scss\"",
     "lint:js": "eslint --no-error-on-unmatched-pattern --fix \"src/**/*.{js,vue}\" \"test/**/*.{js,vue}\" \"build/**/*.{js,vue}\" \"demo/**/*.{js,vue}\"",
     "lint:style": "stylelint \"src/_styles/**/*.scss\"",
@@ -35,7 +36,7 @@
     "es",
     "lib",
     "src",
-    "styles",
+    "themes",
     "README.md"
   ],
   "devDependencies": {

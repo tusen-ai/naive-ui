@@ -11,15 +11,6 @@ import { routes } from './routes/routes'
 
 naive.setHljs(hljs)
 
-// testing customize style
-// naive.styles.light.override({
-//   derived: {
-//     primaryColor: 'rgb(255, 0, 0)',
-//     primaryHoverColor: 'rgb(0, 255, 0)',
-//     primaryActiveColor: 'rgb(0, 0, 255)'
-//   }
-// })
-
 Vue.use(naive)
 
 const router = createRouter(Vue, routes)

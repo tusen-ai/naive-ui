@@ -10,7 +10,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const webpackConfig = {
   mode: 'production',
-  entry: './demo/deploymentIndex.js',
+  entry: './demo/deployment-index.js',
   output: {
     path: path.resolve(process.cwd()),
     publicPath: '/',
