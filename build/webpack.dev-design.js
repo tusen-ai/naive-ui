@@ -1,18 +1,18 @@
 /**
- * Webpack config to pack documentation page
+ * Webpack config under development
  */
 const path = require('path')
 const webpack = require('webpack')
 const config = require('./config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 
 const webpackConfig = {
-  mode: 'production',
-  entry: './demo/deployment-index.js',
+  mode: 'development',
+  entry: './demo/dev-design-index',
   output: {
-    path: path.resolve(__dirname, '..', 'build-doc', 'dist'),
+    path: path.resolve(process.cwd()),
     publicPath: '/',
     filename: '[name].[hash:7].js',
     chunkFilename: '[name].[hash:7].js'
@@ -22,6 +22,13 @@ const webpackConfig = {
     alias: config.alias,
     modules: ['node_modules']
   },
+  devServer: {
+    host: '0.0.0.0',
+    port: 8086,
+    publicPath: '/',
+    hot: true,
+    historyApiFallback: true
+  },
   performance: {
     hints: false
   },
@@ -29,9 +36,11 @@ const webpackConfig = {
     children: false
   },
   module: {
-    rules: config.docLoaders('production')
+    rules: config.docLoaders()
   },
   plugins: [
+    new CaseSensitivePathsPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: './demo/index.tpl',
       favicon: './demo/assets/images/naivelogo.svg'
@@ -43,11 +52,6 @@ const webpackConfig = {
           preserveWhitespace: false
         }
       }
-    }),
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
-      ignoreOrder: false
     })
   ]
 }

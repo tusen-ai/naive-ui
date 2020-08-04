@@ -52,6 +52,9 @@ function create ({
     // external
     setHljs,
     setHighlightjs: setHljs,
+    use (plugin) {
+      plugin.install(naive)
+    },
     install
   }
   function install (Vue) {

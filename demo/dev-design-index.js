@@ -10,20 +10,13 @@ import '../src/_styles/fonts/Lato.scss'
 import '../src/_styles/fonts/FiraCode.scss'
 import { routes, childRoutes } from './routes/routes'
 import createRouter from './routes/router'
+import tusimpleTheme from '../themes/tusimple'
 
 debugRouteMixin(routes, childRoutes)
 const router = createRouter(Vue, routes)
 
 naive.setHljs(hljs)
-
-// testing customize style
-// naive.styles.light.override({
-//   derived: {
-//     primaryColor: 'rgb(255, 0, 0)',
-//     primaryHoverColor: 'rgb(0, 255, 0)',
-//     primaryActiveColor: 'rgb(0, 0, 255)'
-//   }
-// })
+naive.use(tusimpleTheme)
 
 Vue.use(naive)
 

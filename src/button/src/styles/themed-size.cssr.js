@@ -7,7 +7,7 @@ export default c([
     const size = props.$instance.syntheticSize
     const height = props.$local.height[size]
     const fontSize = props.$local.fontSize[size]
-    const borderRadius = props.$local.borderRadius
+    const borderRadius = props.$local.borderRadius[size]
     const padding = props.$local.padding[size]
     const roundPadding = props.$local.roundPadding[size]
     const roundBorderRadius = formatLength(height, 0.5)

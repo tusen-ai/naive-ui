@@ -1,13 +1,12 @@
 import create from '../../styles/_utils/create-component-base'
-import commonVariables from '../../styles/_common-style/button'
+import commonVariables from './_common'
 
 export default create({
   theme: 'light',
   name: 'Button',
   getDerivedVariables ({ base, derived }) {
     return {
-      ...commonVariables,
-      borderRadius: base.borderRadius,
+      ...commonVariables(base, derived),
       opacityDisabled: derived.disabledOpacity,
       default: {
         color: 'transparent',
