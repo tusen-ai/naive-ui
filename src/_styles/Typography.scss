@@ -71,12 +71,12 @@
 }
 
 @include themes-mixin {
-  @include header-mixin('1');
-  @include header-mixin('2');
-  @include header-mixin('3');
-  @include header-mixin('4');
-  @include header-mixin('5');
-  @include header-mixin('6');
+  // @include header-mixin('1');
+  // @include header-mixin('2');
+  // @include header-mixin('3');
+  // @include header-mixin('4');
+  // @include header-mixin('5');
+  // @include header-mixin('6');
   @include b(p) {
     @include once {
       box-sizing: border-box;
@@ -99,53 +99,53 @@
       color: map-get($--typography-p-text-color, 'tertiary-depth');
     }
   }
-  @include once {
-    @include b(ul) {
-      margin: 12px 0;
-      &:first-child {
-        margin-top: 0;
-      }
-      &:last-child {
-        margin-bottom: 0;
-      }
-      padding-left: 1.75em;
-      @include m(align-text) {
-        padding-left: 0;
-      }
-    }
-    @include b(ol) {
-      margin: 12px 0;
-      &:first-child {
-        margin-top: 0;
-      }
-      &:last-child {
-        margin-bottom: 0;
-      }
-      padding-left: 1.75em;
-      @include m(align-text) {
-        padding-left: 0;
-      }
-    }
-  }
-  @include b(li) {
-    @include once {
-      transition: color .3s $--n-ease-in-out-cubic-bezier;
-      line-height: 1.75em;
-      margin-bottom: 0px;
-      font-size: 14px;
-    }
-    color: map-get($--typography-li-text-color, 'default');
-  }
-  @include b(a) {
-    @include once {
-      transition:
-        color .3s $--n-ease-in-out-cubic-bezier,
-        text-decoration-color .3s $--n-ease-in-out-cubic-bezier;
-      cursor: pointer;
-    }
-    text-decoration-color: map-get($--typography-a-text-color, 'default');
-    color: map-get($--typography-a-text-color, 'default');
-  }
+  // @include once {
+  //   @include b(ul) {
+  //     margin: 12px 0;
+  //     &:first-child {
+  //       margin-top: 0;
+  //     }
+  //     &:last-child {
+  //       margin-bottom: 0;
+  //     }
+  //     padding-left: 1.75em;
+  //     @include m(align-text) {
+  //       padding-left: 0;
+  //     }
+  //   }
+  //   @include b(ol) {
+  //     margin: 12px 0;
+  //     &:first-child {
+  //       margin-top: 0;
+  //     }
+  //     &:last-child {
+  //       margin-bottom: 0;
+  //     }
+  //     padding-left: 1.75em;
+  //     @include m(align-text) {
+  //       padding-left: 0;
+  //     }
+  //   }
+  // }
+  // @include b(li) {
+  //   @include once {
+  //     transition: color .3s $--n-ease-in-out-cubic-bezier;
+  //     line-height: 1.75em;
+  //     margin-bottom: 0px;
+  //     font-size: 14px;
+  //   }
+  //   color: map-get($--typography-li-text-color, 'default');
+  // }
+  // @include b(a) {
+  //   @include once {
+  //     transition:
+  //       color .3s $--n-ease-in-out-cubic-bezier,
+  //       text-decoration-color .3s $--n-ease-in-out-cubic-bezier;
+  //     cursor: pointer;
+  //   }
+  //   text-decoration-color: map-get($--typography-a-text-color, 'default');
+  //   color: map-get($--typography-a-text-color, 'default');
+  // }
   @include b(text) {
     @include once {
       transition: color .3s $--n-ease-in-out-cubic-bezier;
@@ -216,38 +216,38 @@
       color: map-get($--typography-text-text-color, 'error');
     }
   }
-  @include b(hr) {
-    @include once {
-      margin: 12px 0;
-      transition: border-color .3s $--n-ease-in-out-cubic-bezier;
-      border-left: none;
-      border-right: none;
-      border-bottom: none;
-    }
-    border-top: 1px solid map-get($--typography-hr-border-color, 'default');
-  }
-  @include b(blockquote) {
-    @include once {
-      line-height: 1.75;
-      margin: 0;
-      margin-top: 12px;
-      margin-bottom: 12px;
-      box-sizing: border-box;
-      transition:
-        color .3s $--n-ease-in-out-cubic-bezier,
-        border-color .3s $--n-ease-in-out-cubic-bezier;
-      &:first-child {
-        margin-top: 0;
-      }
-      &:last-child {
-        margin-bottom: 0;
-      }
-      padding-left: 12px;
-      @include m(align-text) {
-        margin-left: -16px;
-      }
-    }
-    border-left: 4px solid map-get($--typography-blockquote-prefix-color, 'default');
-    color: map-get($--typography-blockquote-text-color, 'default');
-  }
+  // @include b(hr) {
+  //   @include once {
+  //     margin: 12px 0;
+  //     transition: border-color .3s $--n-ease-in-out-cubic-bezier;
+  //     border-left: none;
+  //     border-right: none;
+  //     border-bottom: none;
+  //   }
+  //   border-top: 1px solid map-get($--typography-hr-border-color, 'default');
+  // }
+  // @include b(blockquote) {
+  //   @include once {
+  //     line-height: 1.75;
+  //     margin: 0;
+  //     margin-top: 12px;
+  //     margin-bottom: 12px;
+  //     box-sizing: border-box;
+  //     transition:
+  //       color .3s $--n-ease-in-out-cubic-bezier,
+  //       border-color .3s $--n-ease-in-out-cubic-bezier;
+  //     &:first-child {
+  //       margin-top: 0;
+  //     }
+  //     &:last-child {
+  //       margin-bottom: 0;
+  //     }
+  //     padding-left: 12px;
+  //     @include m(align-text) {
+  //       margin-left: -16px;
+  //     }
+  //   }
+  //   border-left: 4px solid map-get($--typography-blockquote-prefix-color, 'default');
+  //   color: map-get($--typography-blockquote-text-color, 'default');
+  // }
 }

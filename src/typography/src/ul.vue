@@ -13,10 +13,18 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/list'
 
 export default {
-  name: 'Ul',
-  mixins: [withapp, themeable],
+  name: 'NUl',
+  cssrName: 'Typography',
+  cssrId: 'TypographyList',
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   props: {
     alignText: {
       type: Boolean,

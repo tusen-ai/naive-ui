@@ -124,8 +124,8 @@ export default {
 
 .naive-title {
   font-family: 'Metropolis';
-  font-size: 80px;
-  margin-bottom: 18px;
+  font-size: 80px !important;
+  margin-bottom: 18px !important;
 }
 
 @media only screen and (max-width: 1920px) {

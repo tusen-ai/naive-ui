@@ -12,9 +12,16 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/hr'
 
 export default {
-  name: 'Hr',
-  mixins: [withapp, themeable]
+  name: 'NHr',
+  cssrName: 'Typography',
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ]
 }
 </script>
