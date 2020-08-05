@@ -8,28 +8,35 @@ import Ol from './src/ol'
 import Li from './src/li'
 import Text from './src/text'
 
+// use this way to create name since builtin html tags
+// can't be used as component name
+function generateName (prefix, originalName) {
+  return originalName.replace(/^N/, prefix)
+}
+
 const Typography = {
   install (Vue, naive) {
+    const prefix = naive.componentPrefix
     const H1 = header(1)
     const H2 = header(2)
     const H3 = header(3)
     const H4 = header(4)
     const H5 = header(5)
     const H6 = header(6)
-    Vue.component(naive.componentPrefix + H1.name, H1)
-    Vue.component(naive.componentPrefix + H2.name, H2)
-    Vue.component(naive.componentPrefix + H3.name, H3)
-    Vue.component(naive.componentPrefix + H4.name, H4)
-    Vue.component(naive.componentPrefix + H5.name, H5)
-    Vue.component(naive.componentPrefix + H6.name, H6)
-    Vue.component(naive.componentPrefix + A.name, A)
-    Vue.component(naive.componentPrefix + P.name, P)
-    Vue.component(naive.componentPrefix + Blockquote.name, Blockquote)
-    Vue.component(naive.componentPrefix + Hr.name, Hr)
-    Vue.component(naive.componentPrefix + Ul.name, Ul)
-    Vue.component(naive.componentPrefix + Ol.name, Ol)
-    Vue.component(naive.componentPrefix + Li.name, Li)
-    Vue.component(naive.componentPrefix + Text.name, Text)
+    Vue.component(generateName(prefix, H1.name), H1)
+    Vue.component(generateName(prefix, H2.name), H2)
+    Vue.component(generateName(prefix, H3.name), H3)
+    Vue.component(generateName(prefix, H4.name), H4)
+    Vue.component(generateName(prefix, H5.name), H5)
+    Vue.component(generateName(prefix, H6.name), H6)
+    Vue.component(generateName(prefix, A.name), A)
+    Vue.component(generateName(prefix, P.name), P)
+    Vue.component(generateName(prefix, Blockquote.name), Blockquote)
+    Vue.component(generateName(prefix, Hr.name), Hr)
+    Vue.component(generateName(prefix, Ul.name), Ul)
+    Vue.component(generateName(prefix, Ol.name), Ol)
+    Vue.component(generateName(prefix, Li.name), Li)
+    Vue.component(generateName(prefix, Text.name), Text)
   }
 }
 

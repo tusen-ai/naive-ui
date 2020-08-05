@@ -105,6 +105,8 @@ import dataTableLightStyle from './data-table/styles/light'
 import dataTableDarkStyle from './data-table/styles/dark'
 import transferLightStyle from './transfer/styles/light'
 import transferDarkStyle from './transfer/styles/dark'
+import typographyDarkStyle from './typography/styles/light'
+import typographyLightStyle from './typography/styles/dark'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -232,6 +234,8 @@ export default create({
     dataTableDarkStyle,
     transferLightStyle,
     transferDarkStyle,
+    typographyLightStyle,
+    typographyDarkStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle

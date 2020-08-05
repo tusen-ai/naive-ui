@@ -20,7 +20,7 @@ function getThemeVariables (naive, themeName) {
 }
 
 function createMutableStyleId (
-  componentName,
+  componentCssrId,
   renderedTheme,
   dependencyKey,
   dependencyValue
@@ -29,10 +29,10 @@ function createMutableStyleId (
     dependencyKey === 'syntheticTheme' ||
     dependencyKey === 'theme'
   ) {
-    return componentName + '-' + renderedTheme
+    return componentCssrId + '-' + renderedTheme
   }
   return (
-    componentName + '-' +
+    componentCssrId + '-' +
     renderedTheme + '-' +
     dependencyKey + (dependencyValue ? ('-' + dependencyValue) : '')
   )
@@ -57,6 +57,7 @@ function setupMutableStyle (
     styles
   } = naive
   const name = options.cssrName || options.name
+  const id = options.cssrId || name
   const renderedTheme = theme || fallbackTheme
   const dependencyValue = dependencyKey === 'syntheticTheme' ? renderedTheme : instance[dependencyKey]
   if (
@@ -66,7 +67,7 @@ function setupMutableStyle (
     console.error(`[naive-ui/mixins/usecssr]: dependency key ${name}.${dependencyKey} should be nullable`)
   }
   const mountId = createMutableStyleId(
-    name,
+    id,
     renderedTheme,
     dependencyKey,
     dependencyValue
@@ -100,7 +101,7 @@ function setupImmutableStyle (
 ) {
   const options = instance.$options
   const mountId = createImmutableStyleId(
-    options.cssrName || options.name
+    options.cssrId || options.cssrName || options.name
   )
   if (isStyleMounted(mountId)) return
   CNode.mount({

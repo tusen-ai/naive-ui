@@ -55,7 +55,8 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 
 export default {
-  name: 'Text',
+  name: 'NText',
+  cssrName: 'Typography',
   mixins: [withapp, themeable],
   props: {
     code: {

@@ -8,8 +8,9 @@ function tusimpleTheme (naive) {
       primaryColor: '#4fb233',
       primaryHoverColor: '#62cc45',
       primaryActiveColor: '#388025',
-      infoColor: '#335fff',
       successColor: '#4fb233',
+      successHoverColor: '#62cc45',
+      successActiveColor: '#388025',
       errorColor: '#f22451',
       warningColor: '#fac70d'
     }

@@ -21,10 +21,18 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/a'
 
 export default {
-  name: 'A',
-  mixins: [ withapp, themeable ],
+  name: 'NA',
+  cssrName: 'Typography',
+  cssrId: 'TypographyA',
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   props: {
     to: {
       type: [String, Object],

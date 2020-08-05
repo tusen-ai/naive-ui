@@ -2,7 +2,6 @@
   <li
     class="n-li"
     :class="{
-      [`n-${syntheticTheme}-theme`]: syntheticTheme,
       'n-li--align-text': alignText
     }"
   >
@@ -11,12 +10,10 @@
 </template>
 
 <script>
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-
 export default {
-  name: 'Li',
-  mixins: [withapp, themeable],
+  name: 'NLi',
+  cssrName: 'Typography',
+  cssrId: 'TypographyList',
   props: {
     alignText: {
       type: Boolean,

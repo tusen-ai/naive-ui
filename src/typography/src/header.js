@@ -1,9 +1,13 @@
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import usecssr from '../../_mixins/usecssr'
 import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
+import styles from './styles/header'
 
 export default level => ({
-  name: 'H' + level,
+  name: 'NH' + level,
+  cssrName: 'Typography',
+  cssrId: 'TypographyHeader',
   props: {
     type: {
       type: String,
@@ -18,7 +22,11 @@ export default level => ({
       default: false
     }
   },
-  mixins: [withapp, themeable],
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   render (h) {
     const props = this.$props
     return h(`h${level}`, {
