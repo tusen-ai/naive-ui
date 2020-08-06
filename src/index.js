@@ -58,7 +58,7 @@ import Menu from './Menu'
 import Avatar from './avatar'
 import Result from './Result'
 import Thing from './Thing'
-import AutoComplete from './AutoComplete'
+import AutoComplete from './autoComplete'
 import Empty from './Empty'
 import Element from './element'
 import Log from './Log'
@@ -107,6 +107,8 @@ import transferLightStyle from './transfer/styles/light'
 import transferDarkStyle from './transfer/styles/dark'
 import typographyDarkStyle from './typography/styles/light'
 import typographyLightStyle from './typography/styles/dark'
+import autoComplateLightStyle from './autoComplete/styles/light'
+import autoComplateDarkStyle from './autoComplete/styles/dark'
 import backTopLightStyle from './backTop/styles/light'
 import backTopDarkStyle from './backTop/styles/dark'
 
@@ -238,6 +240,8 @@ export default create({
     transferDarkStyle,
     typographyLightStyle,
     typographyDarkStyle,
+    autoComplateLightStyle,
+    autoComplateDarkStyle,
     backTopLightStyle,
     backTopDarkStyle,
     // Can be remove after refactoring
