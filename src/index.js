@@ -31,7 +31,7 @@ import Steps from './Steps'
 import ConfirmPlugin from './Confirm'
 import Badge from './badge'
 import Tag from './tag'
-import BackTop from './BackTop'
+import BackTop from './backTop'
 import Divider from './Divider'
 import Collapse from './Collapse'
 import Timeline from './Timeline'
@@ -107,6 +107,8 @@ import transferLightStyle from './transfer/styles/light'
 import transferDarkStyle from './transfer/styles/dark'
 import typographyDarkStyle from './typography/styles/light'
 import typographyLightStyle from './typography/styles/dark'
+import backTopLightStyle from './backTop/styles/light'
+import backTopDarkStyle from './backTop/styles/dark'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -236,6 +238,8 @@ export default create({
     transferDarkStyle,
     typographyLightStyle,
     typographyDarkStyle,
+    backTopLightStyle,
+    backTopDarkStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle
