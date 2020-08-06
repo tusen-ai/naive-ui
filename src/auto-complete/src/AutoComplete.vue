@@ -70,9 +70,9 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asformitem from '../../_mixins/asformitem'
 import NBaseSelectMenu from '../../_base/select-menu'
-import { mapAutoCompleteOptionsToSelectOptions } from './utils'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
+import { mapAutoCompleteOptionsToSelectOptions } from './utils'
 
 export default {
   name: 'AutoComplete',
