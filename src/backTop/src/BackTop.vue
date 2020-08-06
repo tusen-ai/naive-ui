@@ -1,6 +1,6 @@
 <template>
   <n-base-portal ref="portal" :on-mounted="init">
-    <transition name="n-back-top-transition" @after-enter="afterEnter">
+    <transition name="n-fade-in-scale-up-transition" @after-enter="afterEnter">
       <div
         v-if="show"
         :class="{
@@ -41,13 +41,15 @@ import getScrollParent from '../../_utils/dom/getScrollParent'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import formatLength from '../../_utils/css/formatLength'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 export default {
-  name: 'NBackTop',
+  name: 'BackTop',
   components: {
     NBasePortal
   },
-  mixins: [withapp, themeable],
+  mixins: [withapp, themeable, usecssr(styles)],
   props: {
     right: {
       type: [Number, String],
