@@ -36,7 +36,7 @@
         ref="content"
         class="n-positioning-content"
       >
-        <transition name="n-auto-complete-menu-transition">
+        <transition name="n-fade-in-scale-up-transition">
           <n-base-select-menu
             v-if="active"
             ref="contentInner"
@@ -71,9 +71,11 @@ import themeable from '../../_mixins/themeable'
 import asformitem from '../../_mixins/asformitem'
 import NBaseSelectMenu from '../../_base/select-menu'
 import { mapAutoCompleteOptionsToSelectOptions } from './utils'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 export default {
-  name: 'NAutoComplete',
+  name: 'AutoComplete',
   components: {
     NInput,
     NBaseSelectMenu
@@ -87,7 +89,8 @@ export default {
     detachable,
     zindexable,
     placeable,
-    asformitem()
+    asformitem(),
+    usecssr(styles)
   ],
   props: {
     placeholder: {
