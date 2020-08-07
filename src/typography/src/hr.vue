@@ -18,6 +18,7 @@ import styles from './styles/hr'
 export default {
   name: 'NHr',
   cssrName: 'Typography',
+  cssrId: 'TypographyHr',
   mixins: [
     withapp,
     themeable,

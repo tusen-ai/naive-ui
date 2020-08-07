@@ -77,28 +77,28 @@
   // @include header-mixin('4');
   // @include header-mixin('5');
   // @include header-mixin('6');
-  @include b(p) {
-    @include once {
-      box-sizing: border-box;
-      transition: color .3s $--n-ease-in-out-cubic-bezier;
-      margin: 12px 0 16px 0;
-      font-size: 14px;
-      line-height: 1.75;
-      &:first-child {
-        margin-top: 0;
-      }
-    }
-    color: map-get($--typography-p-text-color, 'default');
-    @include m(primary-depth) {
-      color: map-get($--typography-p-text-color, 'primary-depth');
-    }
-    @include m(secondary-depth) {
-      color: map-get($--typography-p-text-color, 'secondary-depth');
-    }
-    @include m(tertiary-depth) {
-      color: map-get($--typography-p-text-color, 'tertiary-depth');
-    }
-  }
+  // @include b(p) {
+  //   @include once {
+  //     box-sizing: border-box;
+  //     transition: color .3s $--n-ease-in-out-cubic-bezier;
+  //     margin: 12px 0 16px 0;
+  //     font-size: 14px;
+  //     line-height: 1.75;
+  //     &:first-child {
+  //       margin-top: 0;
+  //     }
+  //   }
+  //   color: map-get($--typography-p-text-color, 'default');
+  //   @include m(primary-depth) {
+  //     color: map-get($--typography-p-text-color, 'primary-depth');
+  //   }
+  //   @include m(secondary-depth) {
+  //     color: map-get($--typography-p-text-color, 'secondary-depth');
+  //   }
+  //   @include m(tertiary-depth) {
+  //     color: map-get($--typography-p-text-color, 'tertiary-depth');
+  //   }
+  // }
   // @include once {
   //   @include b(ul) {
   //     margin: 12px 0;

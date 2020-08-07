@@ -13,6 +13,10 @@ export default create({
       hrColor: derived.dividerColor,
       headerFontWeight: base.strongFontWeight,
       headerTextColor: derived.primaryTextColor,
+      pTextColor: derived.secondaryTextColor,
+      pTextColorPrimaryDepth: derived.primaryTextColor,
+      pTextColorSecondaryDepth: derived.secondaryTextColor,
+      pTextColorTertiaryDepth: derived.tertiaryTextColor,
       headerFontSize: {
         1: '30px',
         2: '26px',
