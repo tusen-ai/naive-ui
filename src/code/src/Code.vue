@@ -6,7 +6,11 @@ import styles from './styles/index.js'
 
 export default {
   name: 'Code',
-  mixins: [withapp, themeable, usecssr(styles)],
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   props: {
     language: {
       type: String,
