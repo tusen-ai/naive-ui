@@ -70,184 +70,184 @@
 //   }
 // }
 
-@include themes-mixin {
-  // @include header-mixin('1');
-  // @include header-mixin('2');
-  // @include header-mixin('3');
-  // @include header-mixin('4');
-  // @include header-mixin('5');
-  // @include header-mixin('6');
-  // @include b(p) {
-  //   @include once {
-  //     box-sizing: border-box;
-  //     transition: color .3s $--n-ease-in-out-cubic-bezier;
-  //     margin: 12px 0 16px 0;
-  //     font-size: 14px;
-  //     line-height: 1.75;
-  //     &:first-child {
-  //       margin-top: 0;
-  //     }
-  //   }
-  //   color: map-get($--typography-p-text-color, 'default');
-  //   @include m(primary-depth) {
-  //     color: map-get($--typography-p-text-color, 'primary-depth');
-  //   }
-  //   @include m(secondary-depth) {
-  //     color: map-get($--typography-p-text-color, 'secondary-depth');
-  //   }
-  //   @include m(tertiary-depth) {
-  //     color: map-get($--typography-p-text-color, 'tertiary-depth');
-  //   }
-  // }
-  // @include once {
-  //   @include b(ul) {
-  //     margin: 12px 0;
-  //     &:first-child {
-  //       margin-top: 0;
-  //     }
-  //     &:last-child {
-  //       margin-bottom: 0;
-  //     }
-  //     padding-left: 1.75em;
-  //     @include m(align-text) {
-  //       padding-left: 0;
-  //     }
-  //   }
-  //   @include b(ol) {
-  //     margin: 12px 0;
-  //     &:first-child {
-  //       margin-top: 0;
-  //     }
-  //     &:last-child {
-  //       margin-bottom: 0;
-  //     }
-  //     padding-left: 1.75em;
-  //     @include m(align-text) {
-  //       padding-left: 0;
-  //     }
-  //   }
-  // }
-  // @include b(li) {
-  //   @include once {
-  //     transition: color .3s $--n-ease-in-out-cubic-bezier;
-  //     line-height: 1.75em;
-  //     margin-bottom: 0px;
-  //     font-size: 14px;
-  //   }
-  //   color: map-get($--typography-li-text-color, 'default');
-  // }
-  // @include b(a) {
-  //   @include once {
-  //     transition:
-  //       color .3s $--n-ease-in-out-cubic-bezier,
-  //       text-decoration-color .3s $--n-ease-in-out-cubic-bezier;
-  //     cursor: pointer;
-  //   }
-  //   text-decoration-color: map-get($--typography-a-text-color, 'default');
-  //   color: map-get($--typography-a-text-color, 'default');
-  // }
-  // @include b(text) {
-  //   @include once {
-  //     transition: color .3s $--n-ease-in-out-cubic-bezier;
-  //     @include m(strong) {
-  //       font-weight: $--n-strong-weight;
-  //       color: map-get($--typography-text-text-color, 'strong');
-  //     }
-  //     @include m(italic) {
-  //       font-style: italic;
-  //     }
-  //     @include m(underline) {
-  //       text-decoration: underline;
-  //     }
-  //   }
-  //   color: map-get($--typography-text-text-color, 'default');
-  //   @include m(code) {
-  //     @include once {
-  //       line-height: 1.4;
-  //       font-family: $--n-mono-font-family;
-  //       transition:
-  //         color .3s $--n-ease-in-out-cubic-bezier,
-  //         background-color .3s $--n-ease-in-out-cubic-bezier,
-  //         border-color .3s $--n-ease-in-out-cubic-bezier;
-  //       box-sizing: border-box;
-  //       padding: .15em .45em 0 .45em;
-  //       border-radius: $--n-typography-code-border-radius;
-  //       font-size: .9em;
-  //     }
-  //     color: map-get($--typography-code-text-color, 'default');
-  //     background-color: $--typography-code-background-color;
-  //     border: 1px solid $--typography-code-border-color;
-  //   }
-  //   @include m(default-type) {
-  //     @include m(primary-depth) {
-  //       color: map-get($--typography-text-text-color, 'primary-depth');
-  //     }
-  //     @include m(secondary-depth) {
-  //       color: map-get($--typography-text-text-color, 'secondary-depth');
-  //     }
-  //     @include m(tertiary-depth) {
-  //       color: map-get($--typography-text-text-color, 'tertiary-depth');
-  //     }
-  //   }
-  //   @include not-m(default-type) {
-  //     @include m(primary-depth) {
-  //       opacity: map-get($--typography-text-opacity, 'primary-depth');
-  //     }
-  //     @include m(secondary-depth) {
-  //       opacity: map-get($--typography-text-opacity, 'secondary-depth');
-  //     }
-  //     @include m(tertiary-depth) {
-  //       opacity: map-get($--typography-text-opacity, 'tertiary-depth');
-  //     }
-  //   }
-  //   @include m(primary-type) {
-  //     color: map-get($--typography-text-text-color, 'primary');
-  //   }
-  //   @include m(info-type) {
-  //     color: map-get($--typography-text-text-color, 'info');
-  //   }
-  //   @include m(success-type) {
-  //     color: map-get($--typography-text-text-color, 'success');
-  //   }
-  //   @include m(warning-type) {
-  //     color: map-get($--typography-text-text-color, 'warning');
-  //   }
-  //   @include m(error-type) {
-  //     color: map-get($--typography-text-text-color, 'error');
-  //   }
-  // }
-  // @include b(hr) {
-  //   @include once {
-  //     margin: 12px 0;
-  //     transition: border-color .3s $--n-ease-in-out-cubic-bezier;
-  //     border-left: none;
-  //     border-right: none;
-  //     border-bottom: none;
-  //   }
-  //   border-top: 1px solid map-get($--typography-hr-border-color, 'default');
-  // }
-  // @include b(blockquote) {
-  //   @include once {
-  //     line-height: 1.75;
-  //     margin: 0;
-  //     margin-top: 12px;
-  //     margin-bottom: 12px;
-  //     box-sizing: border-box;
-  //     transition:
-  //       color .3s $--n-ease-in-out-cubic-bezier,
-  //       border-color .3s $--n-ease-in-out-cubic-bezier;
-  //     &:first-child {
-  //       margin-top: 0;
-  //     }
-  //     &:last-child {
-  //       margin-bottom: 0;
-  //     }
-  //     padding-left: 12px;
-  //     @include m(align-text) {
-  //       margin-left: -16px;
-  //     }
-  //   }
-  //   border-left: 4px solid map-get($--typography-blockquote-prefix-color, 'default');
-  //   color: map-get($--typography-blockquote-text-color, 'default');
-  // }
-}
+// @include themes-mixin {
+// @include header-mixin('1');
+// @include header-mixin('2');
+// @include header-mixin('3');
+// @include header-mixin('4');
+// @include header-mixin('5');
+// @include header-mixin('6');
+// @include b(p) {
+//   @include once {
+//     box-sizing: border-box;
+//     transition: color .3s $--n-ease-in-out-cubic-bezier;
+//     margin: 12px 0 16px 0;
+//     font-size: 14px;
+//     line-height: 1.75;
+//     &:first-child {
+//       margin-top: 0;
+//     }
+//   }
+//   color: map-get($--typography-p-text-color, 'default');
+//   @include m(primary-depth) {
+//     color: map-get($--typography-p-text-color, 'primary-depth');
+//   }
+//   @include m(secondary-depth) {
+//     color: map-get($--typography-p-text-color, 'secondary-depth');
+//   }
+//   @include m(tertiary-depth) {
+//     color: map-get($--typography-p-text-color, 'tertiary-depth');
+//   }
+// }
+// @include once {
+//   @include b(ul) {
+//     margin: 12px 0;
+//     &:first-child {
+//       margin-top: 0;
+//     }
+//     &:last-child {
+//       margin-bottom: 0;
+//     }
+//     padding-left: 1.75em;
+//     @include m(align-text) {
+//       padding-left: 0;
+//     }
+//   }
+//   @include b(ol) {
+//     margin: 12px 0;
+//     &:first-child {
+//       margin-top: 0;
+//     }
+//     &:last-child {
+//       margin-bottom: 0;
+//     }
+//     padding-left: 1.75em;
+//     @include m(align-text) {
+//       padding-left: 0;
+//     }
+//   }
+// }
+// @include b(li) {
+//   @include once {
+//     transition: color .3s $--n-ease-in-out-cubic-bezier;
+//     line-height: 1.75em;
+//     margin-bottom: 0px;
+//     font-size: 14px;
+//   }
+//   color: map-get($--typography-li-text-color, 'default');
+// }
+// @include b(a) {
+//   @include once {
+//     transition:
+//       color .3s $--n-ease-in-out-cubic-bezier,
+//       text-decoration-color .3s $--n-ease-in-out-cubic-bezier;
+//     cursor: pointer;
+//   }
+//   text-decoration-color: map-get($--typography-a-text-color, 'default');
+//   color: map-get($--typography-a-text-color, 'default');
+// }
+// @include b(text) {
+//   @include once {
+//     transition: color .3s $--n-ease-in-out-cubic-bezier;
+//     @include m(strong) {
+//       font-weight: $--n-strong-weight;
+//       color: map-get($--typography-text-text-color, 'strong');
+//     }
+//     @include m(italic) {
+//       font-style: italic;
+//     }
+//     @include m(underline) {
+//       text-decoration: underline;
+//     }
+//   }
+//   color: map-get($--typography-text-text-color, 'default');
+//   @include m(code) {
+//     @include once {
+//       line-height: 1.4;
+//       font-family: $--n-mono-font-family;
+//       transition:
+//         color .3s $--n-ease-in-out-cubic-bezier,
+//         background-color .3s $--n-ease-in-out-cubic-bezier,
+//         border-color .3s $--n-ease-in-out-cubic-bezier;
+//       box-sizing: border-box;
+//       padding: .15em .45em 0 .45em;
+//       border-radius: $--n-typography-code-border-radius;
+//       font-size: .9em;
+//     }
+//     color: map-get($--typography-code-text-color, 'default');
+//     background-color: $--typography-code-background-color;
+//     border: 1px solid $--typography-code-border-color;
+//   }
+//   @include m(default-type) {
+//     @include m(primary-depth) {
+//       color: map-get($--typography-text-text-color, 'primary-depth');
+//     }
+//     @include m(secondary-depth) {
+//       color: map-get($--typography-text-text-color, 'secondary-depth');
+//     }
+//     @include m(tertiary-depth) {
+//       color: map-get($--typography-text-text-color, 'tertiary-depth');
+//     }
+//   }
+//   @include not-m(default-type) {
+//     @include m(primary-depth) {
+//       opacity: map-get($--typography-text-opacity, 'primary-depth');
+//     }
+//     @include m(secondary-depth) {
+//       opacity: map-get($--typography-text-opacity, 'secondary-depth');
+//     }
+//     @include m(tertiary-depth) {
+//       opacity: map-get($--typography-text-opacity, 'tertiary-depth');
+//     }
+//   }
+//   @include m(primary-type) {
+//     color: map-get($--typography-text-text-color, 'primary');
+//   }
+//   @include m(info-type) {
+//     color: map-get($--typography-text-text-color, 'info');
+//   }
+//   @include m(success-type) {
+//     color: map-get($--typography-text-text-color, 'success');
+//   }
+//   @include m(warning-type) {
+//     color: map-get($--typography-text-text-color, 'warning');
+//   }
+//   @include m(error-type) {
+//     color: map-get($--typography-text-text-color, 'error');
+//   }
+// }
+// @include b(hr) {
+//   @include once {
+//     margin: 12px 0;
+//     transition: border-color .3s $--n-ease-in-out-cubic-bezier;
+//     border-left: none;
+//     border-right: none;
+//     border-bottom: none;
+//   }
+//   border-top: 1px solid map-get($--typography-hr-border-color, 'default');
+// }
+// @include b(blockquote) {
+//   @include once {
+//     line-height: 1.75;
+//     margin: 0;
+//     margin-top: 12px;
+//     margin-bottom: 12px;
+//     box-sizing: border-box;
+//     transition:
+//       color .3s $--n-ease-in-out-cubic-bezier,
+//       border-color .3s $--n-ease-in-out-cubic-bezier;
+//     &:first-child {
+//       margin-top: 0;
+//     }
+//     &:last-child {
+//       margin-bottom: 0;
+//     }
+//     padding-left: 12px;
+//     @include m(align-text) {
+//       margin-left: -16px;
+//     }
+//   }
+//   border-left: 4px solid map-get($--typography-blockquote-prefix-color, 'default');
+//   color: map-get($--typography-blockquote-text-color, 'default');
+// }
+// }
