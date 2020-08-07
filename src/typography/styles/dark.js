@@ -8,7 +8,7 @@ export default create({
       aTextColor: derived.primaryColor,
       blockquoteTextColor: derived.secondaryTextOverlayColor,
       blockquotePrefixColor: derived.borderOverlayColor,
-      codeBorderRadius: base.lightBorderRadius,
+      codeBorderRadius: base.smallBorderRadius,
       liTextColor: derived.secondaryTextOverlayColor,
       hrColor: derived.dividerOverlayColor,
       headerFontWeight: base.strongFontWeight,
@@ -56,7 +56,23 @@ export default create({
         error: derived.errorColor,
         warning: derived.warningColor,
         success: derived.successColor
-      }
+      },
+      textColor: derived.secondaryTextOverlayColor,
+      textColorStrong: derived.primaryTextOverlayColor,
+      textColorPrimaryDepth: derived.primaryTextOverlayColor,
+      textColorSecondaryDepth: derived.secondaryTextOverlayColor,
+      textColorTertiaryDepth: derived.tertiaryTextOverlayColor,
+      textColorPrimary: derived.primaryColor,
+      textColorInfo: derived.infoColor,
+      textColorSuccess: derived.successColor,
+      textColorWarning: derived.warningColor,
+      textColorError: derived.errorColor,
+      textOpacityPrimaryDepth: derived.primaryOpacity,
+      textOpacitySecondaryDepth: derived.secondaryOpacity,
+      textOpacityTertiaryDepth: derived.tertiaryOpacity,
+      codeTextColor: derived.secondaryTextOverlayColor,
+      codeColor: derived.codeBackgroundOverlayColor,
+      codeBorderColor: 'transparent'
     }
   }
 })

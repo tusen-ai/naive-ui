@@ -181,6 +181,7 @@ export default create({
 
       inputBackgroundColor: neutral(base.alphaInput),
       inputBackgroundOverlayColor: overlay(base.alphaInput),
+      codeBackgroundColor: neutral(base.alphaCode),
       codeBackgroundOverlayColor: overlay(base.alphaCode),
       tabBackgroundOverlayColor: overlay(base.alphaTab),
       avatarBackgroundOverlayColor: overlay(base.alphaAvatar),
