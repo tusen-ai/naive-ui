@@ -62,7 +62,7 @@ import AutoComplete from './auto-complete'
 import Empty from './Empty'
 import Element from './element'
 import Log from './Log'
-import Code from './Code'
+import Code from './code'
 import Typography from './typography'
 import Upload from './Upload'
 import InputGroup from './input-group'
@@ -111,6 +111,8 @@ import backTopLightStyle from './back-top/styles/light'
 import backTopDarkStyle from './back-top/styles/dark'
 import autoComplateLightStyle from './auto-complete/styles/light'
 import autoComplateDarkStyle from './auto-complete/styles/dark'
+import codeLightStyle from './code/styles/light'
+import codeDarkStyle from './code/styles/dark'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -244,6 +246,8 @@ export default create({
     autoComplateDarkStyle,
     backTopLightStyle,
     backTopDarkStyle,
+    codeLightStyle,
+    codeDarkStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle

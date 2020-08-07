@@ -1,10 +1,12 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/index.js'
 
 export default {
-  name: 'NCode',
-  mixins: [ withapp, themeable ],
+  name: 'Code',
+  mixins: [withapp, themeable, usecssr(styles)],
   props: {
     language: {
       type: String,
