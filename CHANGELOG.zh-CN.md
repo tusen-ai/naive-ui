@@ -1,4 +1,8 @@
 # CHANGELOG
+## 1.5.4 (2020-08-08)
+### Fixes
+- 修正了 Message、Notification、Confirm 不随主题切换的问题
+
 ## 1.5.3 (2020-07-23)
 ### Fixes
 - 修正了 `n-select` 在 `placeholder` 为空的时候显示出错的问题

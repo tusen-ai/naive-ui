@@ -1,4 +1,8 @@
 # CHANGELOG
+## 1.5.4 (2020-08-08)
+### Fixes
+- Fix the problem that Message, Notification, Confirm doesn't follow theme change.
+
 ## 1.5.3 (2020-07-23)
 ### Fixes
 - Fix the problem that `n-select` display with mistakes when `placeholder` is empty.

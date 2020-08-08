@@ -14,7 +14,7 @@ export default {
   props: {
     language: {
       type: String,
-      required: true
+      default: null
     },
     code: {
       type: String,
@@ -58,15 +58,17 @@ export default {
       }
     },
     setCode () {
-      const {
-        valid,
-        content
-      } = this.generateCodeHTML(this.language, this.code, this.trim)
-      if (valid) {
-        this.$refs.code.innerHTML = content
-      } else {
-        this.$refs.code.textContent = content
+      if (this.language) {
+        const {
+          valid,
+          content
+        } = this.generateCodeHTML(this.language, this.code, this.trim)
+        if (valid) {
+          this.$refs.code.innerHTML = content
+          return
+        }
       }
+      this.$refs.code.textContent = this.code
     }
   },
   render (h) {
