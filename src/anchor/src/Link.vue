@@ -22,7 +22,7 @@ import collectable from '../../_mixins/collectable'
 import simlulatedComputed from '../../_mixins/simulatedComputed'
 
 export default {
-  name: 'NAnchorLink',
+  name: 'AnchorLink',
   inject: {
     NAnchor: {
       default: null

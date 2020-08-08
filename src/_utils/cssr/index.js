@@ -53,4 +53,4 @@ function cTB (selector, ...rest) {
   ])
 }
 
-export { c, cTB, cB, cE, cM, cNotM, insideFormItem, insideModal, namespace, prefix }
+export { c, cTB, cB, cE, cM, cNotM, insideFormItem, insideModal, prefix, namespace }

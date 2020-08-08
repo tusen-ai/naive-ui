@@ -36,7 +36,7 @@ import Divider from './Divider'
 import Collapse from './Collapse'
 import Timeline from './Timeline'
 import Popconfirm from './Popconfirm'
-import Anchor from './Anchor'
+import Anchor from './anchor'
 import Dropdown from './Dropdown'
 import Popselect from './Popselect'
 import ConfigProvider from './config-provider'
@@ -113,6 +113,8 @@ import autoComplateLightStyle from './auto-complete/styles/light'
 import autoComplateDarkStyle from './auto-complete/styles/dark'
 import codeLightStyle from './code/styles/light'
 import codeDarkStyle from './code/styles/dark'
+import anchorDarkStyle from './anchor/styles/dark'
+import anchorLightStyle from './anchor/styles/light'
 import breadcrumbDarkStyle from './breadcrumb/styles/dark'
 import breadcrumbLightStyle from './breadcrumb/styles/light'
 
@@ -250,6 +252,8 @@ export default create({
     backTopDarkStyle,
     codeLightStyle,
     codeDarkStyle,
+    anchorDarkStyle,
+    anchorLightStyle,
     breadcrumbDarkStyle,
     breadcrumbLightStyle,
     // Can be remove after refactoring
