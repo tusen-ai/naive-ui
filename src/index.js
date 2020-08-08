@@ -1,4 +1,4 @@
-import Card from './Card'
+import Card from './card'
 import Icon from './Icon'
 import GradientText from './GradientText'
 import Table from './Table'
@@ -113,6 +113,8 @@ import autoComplateLightStyle from './auto-complete/styles/light'
 import autoComplateDarkStyle from './auto-complete/styles/dark'
 import codeLightStyle from './code/styles/light'
 import codeDarkStyle from './code/styles/dark'
+import cardDarkStyle from './card/styles/dark'
+import cardLightStyle from './card/styles/light'
 import anchorDarkStyle from './anchor/styles/dark'
 import anchorLightStyle from './anchor/styles/light'
 import breadcrumbDarkStyle from './breadcrumb/styles/dark'
@@ -252,6 +254,8 @@ export default create({
     backTopDarkStyle,
     codeLightStyle,
     codeDarkStyle,
+    cardDarkStyle,
+    cardLightStyle,
     anchorDarkStyle,
     anchorLightStyle,
     breadcrumbDarkStyle,

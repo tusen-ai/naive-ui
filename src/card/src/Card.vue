@@ -50,14 +50,16 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import NIcon from '../../Icon'
 import mdClose from '../../_icons/md-close'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 export default {
-  name: 'NCard',
+  name: 'Card',
   components: {
     mdClose,
     NIcon
   },
-  mixins: [withapp, themeable],
+  mixins: [withapp, themeable, usecssr(styles)],
   props: {
     title: {
       type: String,
