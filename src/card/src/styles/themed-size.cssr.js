@@ -8,7 +8,7 @@ export default c([
       marginTop,
       marginBottom
     } = props.$local
-    const { cardActionBackgroundColor } = props.$local
+    const { actionColor } = props.$local
     const { size } = props.$instance
     const marginBottomSize = marginBottom[size]
     const marginLeftSize = marginLeft[size]
@@ -19,14 +19,14 @@ export default c([
         cM(`${size}-size`, {
         }, [
           cM('content-segmented', [
-            c('& >', [
+            c('>', [
               cE('content', {
                 paddingTop: marginBottomSize
               })
             ])
           ]),
           cM('content-soft-segmented', [
-            c('& >', [
+            c('>', [
               cE('content', {
                 raw: `
                   margin: 0 ${marginLeftSize};
@@ -36,14 +36,14 @@ export default c([
             ])
           ]),
           cM('footer-segmented', [
-            c('& >', [
+            c('>', [
               cE('footer', {
                 paddingTop: marginBottomSize
               })
             ])
           ]),
           cM('footer-soft-segmented', [
-            c('& >', [
+            c('>', [
               cE('footer', {
                 raw: `
                   padding: ${marginBottomSize} 0;
@@ -52,7 +52,7 @@ export default c([
               })
             ])
           ]),
-          c('& >', [
+          c('>', [
             cB('card-header', {
               raw: `
                 padding: ${marginTopSize} ${marginLeftSize} ${marginBottomSize} ${marginLeftSize};
@@ -75,7 +75,7 @@ export default c([
             ]),
             cE('action', {
               raw: `
-                background-color: ${cardActionBackgroundColor};
+                background-color: ${actionColor};
                 padding: ${marginBottomSize} ${marginLeftSize};
                 font-size: 14px;
               `

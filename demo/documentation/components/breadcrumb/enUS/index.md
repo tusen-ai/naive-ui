@@ -9,7 +9,7 @@ basic
 |Name|Type|Default|Description|
 |-|-|-|-|
 |theme|`'light' \| 'dark' \| null`|`null`||
-|seperator|`string`|`'/'`||
+|separator|`string`|`'/'`||
 
 ## Slots
 ### Breadcrumb Slots

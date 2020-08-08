@@ -1,6 +1,7 @@
 import create from '../_utils/create-theme-base.js'
 import { read, composite } from '../../_utils/color/index.js'
 import commonVariables from '../_common-style/base.js'
+
 export default create({
   theme: 'light',
   name: 'base',
@@ -180,6 +181,7 @@ export default create({
 
       inputBackgroundColor: neutral(base.alphaInput),
       inputBackgroundOverlayColor: overlay(base.alphaInput),
+      codeBackgroundColor: neutral(base.alphaCode),
       codeBackgroundOverlayColor: overlay(base.alphaCode),
       tabBackgroundOverlayColor: overlay(base.alphaTab),
       avatarBackgroundOverlayColor: overlay(base.alphaAvatar),

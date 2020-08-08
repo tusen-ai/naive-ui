@@ -4,7 +4,7 @@ export default c([
   ({ props }) => {
     const { easeInOutCubicBezier } = props.$base
     const {
-      blockqoutePrefixColor,
+      blockquotePrefixColor,
       blockquoteTextColor
     } = props.$local
     return cTB('blockquote', {
@@ -14,12 +14,12 @@ export default c([
         margin-top: 12px;
         margin-bottom: 12px;
         box-sizing: border-box;
-        paddingLeft: 12px;
+        padding-left: 12px;
         transition:
           color .3s ${easeInOutCubicBezier},
           border-color .3s ${easeInOutCubicBezier};
       `,
-      borderLeft: `4px solid ${blockqoutePrefixColor}`,
+      borderLeft: `4px solid ${blockquotePrefixColor}`,
       color: blockquoteTextColor
     }, [
       c('&:first-child', {

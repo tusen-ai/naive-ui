@@ -17,7 +17,7 @@ Input can be disabled.
   :disabled="!active"
   round
 />
-<n-input pair seperator="to" v-model="value" clearable :disabled="!active">
+<n-input pair separator="to" v-model="value" clearable :disabled="!active">
   <template v-slot:affix>
     <n-icon><cash-outline /></n-icon>
   </template>

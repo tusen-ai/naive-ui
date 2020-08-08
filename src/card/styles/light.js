@@ -1,29 +1,25 @@
 import create from '../../styles/_utils/create-component-base'
-import sizeVariable from './card'
+import commonVariables from './_common'
 
 export default create({
   theme: 'light',
   name: 'Card',
   getDerivedVariables ({ base, derived }) {
     const {
-      borderRadius,
-      smallBorderRadius
+      borderRadius
     } = base
     return {
-      ...sizeVariable,
-      cardBackgroundColor: derived.cardBackgroundColor,
-      cardTextColor: derived.secondaryTextColor,
-      cardTitleTextColor: derived.primaryTextColor,
-      cardBorderColor: derived.dividerOverlayColor,
-      cardActionBackgroundColor: derived.actionBackgroundOverlayColor,
-      strongFontWeight: base.strongFontWeight,
-      cardCloseColor: {
-        default: derived.closeColor,
-        hover: derived.closeHoverColor,
-        active: derived.closeColor
-      },
-      borderRadius,
-      smallBorderRadius
+      ...commonVariables,
+      color: derived.cardBackgroundColor,
+      textColor: derived.secondaryTextColor,
+      titleTextColor: derived.primaryTextColor,
+      borderColor: derived.dividerOverlayColor,
+      actionColor: derived.actionBackgroundOverlayColor,
+      titleFontWeight: base.strongFontWeight,
+      closeColor: derived.closeColor,
+      closeColorHover: derived.closeHoverColor,
+      closeColorActive: derived.closeActiveColor,
+      borderRadius
     }
   }
 })

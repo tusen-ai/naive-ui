@@ -38,7 +38,7 @@ passively-activated
 |clearable|`boolean`|`false`||
 |autosize|`boolean \| { minRows?: number, maxRows?: number }`|`false`||
 |readonly|`boolean`|`false`||
-|seperator|`string`|`null`|成对的值中间的分隔符|
+|separator|`string`|`null`|成对的值中间的分隔符|
 |placeholder|`string \| [string, string]`|`null`|文本输入的占位符。如果是 `pair` 是 `true`，`placeholder`是一个数组|
 |passively-activated|`boolean`|`false`||
 |autofocus|`boolean`|`false`||

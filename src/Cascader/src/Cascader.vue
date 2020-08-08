@@ -178,7 +178,7 @@ export default {
       type: Function,
       default: () => {}
     },
-    seperator: {
+    separator: {
       type: String,
       default: ' / '
     },
@@ -243,7 +243,7 @@ export default {
             if (values.has(option.value)) {
               options.push({
                 value: option.value,
-                label: path.slice(1, path.length).join(this.seperator)
+                label: path.slice(1, path.length).join(this.separator)
               })
             }
           }, () => {
@@ -268,7 +268,7 @@ export default {
           if (option.value === this.value) {
             selectedOption = {
               value: option.value,
-              label: path.slice(1, path.length).join(this.seperator)
+              label: path.slice(1, path.length).join(this.separator)
             }
           }
         }, () => {

@@ -275,7 +275,6 @@
             }
           }
         }
-        
         @include m(child-selected) {
           @include b(menu-item-content-header) {
             color: map-get($--menu-item-content-text-color, 'child-selected');

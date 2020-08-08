@@ -3,16 +3,14 @@ import { c, cE, cB, cM, cTB } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      action,
-      railBackgroundColor,
-      linkBackgroundColor,
-      railActiveBackgroundColor
+      railColor,
+      linkColor,
+      railColorActive,
+      linkTextColor,
+      linkTextColorHover,
+      linkTextColorActive,
+      linkTextColorMatch
     } = props.$local
-    const {
-      default: defaultColor,
-      hover: hoverColor,
-      active: activeColor
-    } = action
     const {
       easeInOutCubicBezier
     } = props.$base
@@ -31,7 +29,7 @@ export default c([
           border-top-right-radius: 10.5px;
           border-bottom-right-radius: 10.5px;
         `,
-        backgroundColor: linkBackgroundColor,
+        backgroundColor: linkColor,
         transition: `
           top .15s ${easeInOutCubicBezier},
           max-width .15s ${easeInOutCubicBezier},
@@ -49,7 +47,7 @@ export default c([
           overflow: hidden;
         `,
         transition: `background-color .3s ${easeInOutCubicBezier}`,
-        backgroundColor: railBackgroundColor
+        backgroundColor: railColor
       }, [
         cE('bar', {
           raw: `
@@ -65,10 +63,10 @@ export default c([
           `
         }, [
           cM('active', {
-            backgroundColor: railActiveBackgroundColor
+            backgroundColor: railColorActive
           })
         ]),
-        c('& +', [
+        c('+', [
           cB('anchor-link', {
             marginTop: 0
           })
@@ -86,7 +84,7 @@ export default c([
           flex-direction: column;
         `
       }, [
-        c('& +', [
+        c('+', [
           cB('anchor-link', {
             paddingLeft: '16px'
           })
@@ -104,13 +102,16 @@ export default c([
             padding-right: 16px;
           `,
           transition: `color .3s ${easeInOutCubicBezier}`,
-          color: defaultColor
+          color: linkTextColor
         }, [
           c('&:hover, &:focus', {
-            color: hoverColor
+            color: linkTextColorHover
+          }),
+          c('&:active', {
+            color: linkTextColorActive
           }),
           cM('active', {
-            color: activeColor
+            color: linkTextColorMatch
           })
         ])
       ])

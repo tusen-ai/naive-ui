@@ -8,11 +8,15 @@ export default create({
       aTextColor: derived.primaryColor,
       blockquoteTextColor: derived.secondaryTextColor,
       blockquotePrefixColor: derived.borderColor,
-      codeBorderRadius: base.lightBorderRadius,
+      codeBorderRadius: base.smallBorderRadius,
       liTextColor: derived.secondaryTextColor,
       hrColor: derived.dividerColor,
       headerFontWeight: base.strongFontWeight,
       headerTextColor: derived.primaryTextColor,
+      pTextColor: derived.secondaryTextColor,
+      pTextColorPrimaryDepth: derived.primaryTextColor,
+      pTextColorSecondaryDepth: derived.secondaryTextColor,
+      pTextColorTertiaryDepth: derived.tertiaryTextColor,
       headerFontSize: {
         1: '30px',
         2: '26px',
@@ -52,7 +56,23 @@ export default create({
         error: derived.errorColor,
         warning: derived.warningColor,
         success: derived.successColor
-      }
+      },
+      textColor: derived.secondaryTextColor,
+      textColorStrong: derived.primaryTextColor,
+      textColorPrimaryDepth: derived.primaryTextColor,
+      textColorSecondaryDepth: derived.secondaryTextColor,
+      textColorTertiaryDepth: derived.tertiaryTextColor,
+      textColorPrimary: derived.primaryColor,
+      textColorInfo: derived.infoColor,
+      textColorSuccess: derived.successColor,
+      textColorWarning: derived.warningColor,
+      textColorError: derived.errorColor,
+      textOpacityPrimaryDepth: derived.primaryOpacity,
+      textOpacitySecondaryDepth: derived.secondaryOpacity,
+      textOpacityTertiaryDepth: derived.tertiaryOpacity,
+      codeTextColor: derived.secondaryTextColor,
+      codeColor: derived.codeBackgroundColor,
+      codeBorderColor: 'transparent'
     }
   }
 })

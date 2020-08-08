@@ -19,6 +19,7 @@ import styles from './styles/blockquote'
 export default {
   name: 'NBlockquote',
   cssrName: 'Typography',
+  cssrId: 'TypographyBlockquote',
   mixins: [
     withapp,
     themeable,

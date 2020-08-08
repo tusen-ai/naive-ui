@@ -5,13 +5,12 @@ export default c([
     const base = props.$base
     const easeInOutCubicBezier = base.easeInOutCubicBezier
     const {
-      default: linkDefaultColor,
-      hover: linkHoverColor,
-      active: linkActiveColor
-    } = props.$local.linkTextColor
-    const {
-      default: seperateTextColor
-    } = props.$local.seperatorTextColor
+      separatorColor,
+      itemTextColor,
+      itemTextColorHover,
+      itemTextColorActive,
+      itemTextColorMatch
+    } = props.$local
     return cTB(
       'breadcrumb', {
         whiteSpace: 'nowrap'
@@ -26,40 +25,49 @@ export default c([
               font-size: 16px;
               vertical-align: -.2em;
             `,
-            fill: linkDefaultColor,
-            stroke: linkDefaultColor
+            fill: itemTextColor,
+            stroke: itemTextColor
           }),
           cE('link', {
             raw: `
               cursor: pointer;
             `,
             transition: `color .3s ${easeInOutCubicBezier}`,
-            color: linkDefaultColor
+            color: itemTextColor
           }),
-          cE('seperator', {
+          cE('separator', {
             margin: '0 4px',
-            color: seperateTextColor,
+            color: separatorColor,
             transition: `color .3s ${easeInOutCubicBezier}`
           }),
           c('&:hover', [
             cB('icon', {
-              fill: linkHoverColor,
-              stroke: linkHoverColor
+              fill: itemTextColorHover,
+              stroke: itemTextColorHover
             }),
             cE('link', {
-              color: linkHoverColor
+              color: itemTextColorHover
+            })
+          ]),
+          c('&:active', [
+            cB('icon', {
+              fill: itemTextColorActive,
+              stroke: itemTextColorActive
+            }),
+            cE('link', {
+              color: itemTextColorActive
             })
           ]),
           c('&:last-child', [
             cE('link', {
               cursor: 'unset',
-              color: linkActiveColor
+              color: itemTextColorMatch
             }),
             cB('icon', {
-              fill: linkActiveColor,
-              stroke: linkActiveColor
+              fill: itemTextColorMatch,
+              stroke: itemTextColorMatch
             }),
-            cE('seperator', {
+            cE('separator', {
               display: 'none'
             })
           ])

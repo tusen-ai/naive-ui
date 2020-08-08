@@ -1,3 +1,5 @@
+import version from './version'
+
 function setHljs (hljs) {
   this.hljs = hljs
 }
@@ -50,6 +52,7 @@ function create ({
     styles: createStylesObject(styles),
     fallbackTheme: fallbackTheme || 'light',
     // external
+    version,
     setHljs,
     setHighlightjs: setHljs,
     use (plugin) {

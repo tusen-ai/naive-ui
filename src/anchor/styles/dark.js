@@ -6,25 +6,24 @@ export default create({
   name: 'Anchor',
   getDerivedVariables ({ base, derived }) {
     const {
-      borderRadius,
-      primaryDefault
+      borderRadius
     } = base
-    const alphaAnchor = '0.15'
     const {
       primaryColor,
+      primaryHoverColor,
+      primaryActiveColor,
       railBackgroundOverlayColor,
       secondaryTextOverlayColor
     } = derived
     return {
       borderRadius,
-      railActiveBackgroundColor: primaryColor,
-      linkBackgroundColor: changeColor(primaryDefault, { alpha: alphaAnchor }),
-      railBackgroundColor: railBackgroundOverlayColor,
-      action: {
-        default: secondaryTextOverlayColor,
-        hover: primaryColor,
-        active: primaryColor
-      }
+      railColor: railBackgroundOverlayColor,
+      railColorActive: primaryColor,
+      linkColor: changeColor(primaryColor, { alpha: 0.15 }),
+      linkTextColor: secondaryTextOverlayColor,
+      linkTextColorHover: primaryHoverColor,
+      linkTextColorActive: primaryActiveColor,
+      linkTextColorMatch: primaryColor
     }
   }
 })

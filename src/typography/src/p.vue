@@ -13,11 +13,18 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/p'
 
 export default {
   name: 'NP',
   cssrName: 'Typography',
-  mixins: [withapp, themeable],
+  cssrId: 'TypographyP',
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   props: {
     depth: {
       validator (value) {

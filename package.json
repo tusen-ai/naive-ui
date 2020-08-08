@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "description": "A Vue UI Framework. Caring About Styles, Themed, Batteries Included, Not Rather Slow.",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -8,7 +8,7 @@
     "start": "npm run dev",
     "build:style": "npm run clean && node build/buildStyle.js",
     "build:icon": "npm run clean && node build/buildIcon.js",
-    "build:js": "npm run clean && rollup -c",
+    "build:js": "npm run generate-version && npm run clean && rollup -c",
     "build:demo": "npm run build && npm run demo",
     "build:doc": "npm run generate-version && npm run build && rm -rf build-doc/dist && cross-env NODE_ENV=production webpack --config build/webpack.doc.js",
     "build": "npm run clean && node build/buildStyle.js && node build/buildIcon.js && rollup -c",
