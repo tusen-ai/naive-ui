@@ -31,13 +31,22 @@
 <script>
 import NBaseAnchor from './BaseAnchor'
 import NAffix from '../../affix'
+import usecssr from '../../_mixins/usecssr'
+import themeable from '../../_mixins/themeable'
+import withapp from '../../_mixins/withapp'
+import styles from './styles'
 
 export default {
-  name: 'NAnchor',
+  name: 'Anchor',
   components: {
     NBaseAnchor,
     NAffix
   },
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   props: {
     top: {
       type: Number,

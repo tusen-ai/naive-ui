@@ -30,7 +30,7 @@ export default create({
       alphaActive: '0.03',
 
       alphaAvatar: '0.18',
-      alphaRail: '0.20',
+      alphaRail: '0.2',
       alphaProgressRail: '0.12',
       alphaBorder: '0.24',
       alphaDivider: '0.09',
