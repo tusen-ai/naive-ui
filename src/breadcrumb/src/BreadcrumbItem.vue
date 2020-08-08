@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'NBreadcrumbItem',
+  name: 'BreadcrumbItem',
   inject: {
     NBreadcrumb: {
       default: null
