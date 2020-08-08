@@ -1,4 +1,8 @@
 # CHANGELOG
+## PENDING
+### Breaking Change
+- Fix all typos of `separator`. (Originally it was `seperator`.)
+
 ## 1.5.4 (2020-08-08)
 ### Fixes
 - Fix the problem that Message, Notification, Confirm doesn't follow theme change.
