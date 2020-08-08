@@ -25,7 +25,7 @@ export default c([
           box-sizing: border-box;
           position: relative;
           border-radius: ${borderRadius};
-          backgroundColor: ${color};
+          background-color: ${color};
           color: ${textColor};
         `,
         transition: `

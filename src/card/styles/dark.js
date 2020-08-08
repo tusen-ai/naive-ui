@@ -10,7 +10,7 @@ export default create({
     } = base
     return {
       ...commonVariables,
-      color: derived.color,
+      color: derived.cardBackgroundColor,
       textColor: derived.secondaryTextOverlayColor,
       titleTextColor: derived.primaryTextOverlayColor,
       borderColor: derived.dividerOverlayColor,
