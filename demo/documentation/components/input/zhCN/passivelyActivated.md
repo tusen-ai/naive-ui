@@ -25,7 +25,7 @@
 />
 <n-input
   pair
-  seperator="to"
+  separator="to"
   v-model="pair"
   @blur="handleBlur"
   @focus="handleFocus"

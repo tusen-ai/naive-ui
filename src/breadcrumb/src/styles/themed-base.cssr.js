@@ -5,7 +5,7 @@ export default c([
     const base = props.$base
     const easeInOutCubicBezier = base.easeInOutCubicBezier
     const {
-      seperatorColor,
+      separatorColor,
       itemTextColor,
       itemTextColorHover,
       itemTextColorActive,
@@ -35,9 +35,9 @@ export default c([
             transition: `color .3s ${easeInOutCubicBezier}`,
             color: itemTextColor
           }),
-          cE('seperator', {
+          cE('separator', {
             margin: '0 4px',
-            color: seperatorColor,
+            color: separatorColor,
             transition: `color .3s ${easeInOutCubicBezier}`
           }),
           c('&:hover', [
@@ -67,7 +67,7 @@ export default c([
               fill: itemTextColorMatch,
               stroke: itemTextColorMatch
             }),
-            cE('seperator', {
+            cE('separator', {
               display: 'none'
             })
           ])

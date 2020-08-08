@@ -24,12 +24,12 @@
 //         }
 //         color: map-get($--breadcrumb-link-text-color, 'default');
 //       }
-//       @include e(seperator) {
+//       @include e(separator) {
 //         @include once {
 //           transition: color .3s $--n-ease-in-out-cubic-bezier;
 //           margin: 0 4px;
 //         }
-//         color: map-get($--breadcrumb-seperator-text-color, 'default');
+//         color: map-get($--breadcrumb-separator-text-color, 'default');
 //       }
 //       &:hover {
 //         @include b(icon) {
@@ -52,7 +52,7 @@
 //           stroke: map-get($--breadcrumb-link-text-color, 'active');
 //         }
 //         @include once {
-//           @include e(seperator) {
+//           @include e(separator) {
 //             display: none;
 //           }
 //         }

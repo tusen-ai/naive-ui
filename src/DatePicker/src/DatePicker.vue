@@ -22,7 +22,7 @@
       :value="[displayStartTime, displayEndTime]"
       :placeholder="[localizedStartPlaceholder, localizedEndPlaceholder]"
       :readonly="disabled ? 'disabled' : false"
-      :seperator="localizedSeperator"
+      :separator="localizedSeperator"
       :force-focus="active"
       :clearable="clearable"
       pair
@@ -232,7 +232,7 @@ export default {
       },
       default: 'date'
     },
-    seperator: {
+    separator: {
       type: String,
       default: undefined
     },
@@ -281,8 +281,8 @@ export default {
       return ['daterange', 'datetimerange'].includes(this.type)
     },
     localizedSeperator () {
-      if (this.sepearator !== undefined) return this.seperator
-      return this.localeNamespace.seperator
+      if (this.sepearator !== undefined) return this.separator
+      return this.localeNamespace.separator
     },
     localizedPlacehoder () {
       if (this.placeholder === null) {

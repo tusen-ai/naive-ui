@@ -38,7 +38,7 @@ passively-activated
 |clearable|`boolean`|`false`||
 |autosize|`boolean \| { minRows?: number, maxRows?: number }`|`false`||
 |readonly|`boolean`|`false`||
-|seperator|`string`|`null`|The seperator bewteen pairwise inputs.|
+|separator|`string`|`null`|The separator bewteen pairwise inputs.|
 |placeholder|`string \| [string, string]`|`null`|Placeholder of input. When `pair` is `true`, placeholder is an array.|
 |passively-activated|`boolean`|`false`||
 |autofocus|`boolean`|`false`||

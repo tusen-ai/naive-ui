@@ -49,7 +49,7 @@
     </n-icon>
   </template>
 </n-input>
-<n-input v-model="value" placeholder="搜索" pair size="large" seperator="-" clearable>
+<n-input v-model="value" placeholder="搜索" pair size="large" separator="-" clearable>
   <template v-slot:suffix>
     <n-icon>
       <md-search/>
@@ -61,7 +61,7 @@
     </n-icon>
   </template>
 </n-input>
-<n-input v-model="value" placeholder="搜索" pair size="small" seperator="-" clearable>
+<n-input v-model="value" placeholder="搜索" pair size="small" separator="-" clearable>
   <template v-slot:suffix>
     <n-icon>
       <md-search/>

@@ -3,8 +3,8 @@
     <span class="n-breadcrumb-item__link" @click="handleClick">
       <slot />
     </span>
-    <span class="n-breadcrumb-item__seperator">
-      {{ seperator }}
+    <span class="n-breadcrumb-item__separator">
+      {{ separator }}
     </span>
   </span>
 </template>
@@ -18,8 +18,8 @@ export default {
     }
   },
   computed: {
-    seperator () {
-      return this.NBreadcrumb.seperator
+    separator () {
+      return this.NBreadcrumb.separator
     }
   },
   methods: {

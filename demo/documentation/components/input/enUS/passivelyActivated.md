@@ -25,7 +25,7 @@ If you want to activate input by pressing enter after focused, use `passively-ac
 />
 <n-input
   pair
-  seperator="to"
+  separator="to"
   v-model="pair"
   @blur="handleBlur"
   @focus="handleFocus"

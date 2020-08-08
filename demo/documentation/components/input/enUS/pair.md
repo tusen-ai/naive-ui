@@ -2,7 +2,7 @@
 ```html
 <n-input
   pair
-  seperator="-"
+  separator="-"
   v-model="value"
   :placeholder="placeholder"
   clearable

@@ -89,7 +89,7 @@
       v-if="pair"
       class="n-input__splitor"
     >
-      {{ seperator }}
+      {{ separator }}
     </span>
     <div v-if="pair" class="n-input-second-input">
       <input
@@ -236,7 +236,7 @@ export default {
       type: Boolean,
       default: false
     },
-    seperator: {
+    separator: {
       type: String,
       default: null
     },

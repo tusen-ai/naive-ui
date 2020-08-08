@@ -32,7 +32,7 @@ export default {
     Thu: 'Thu',
     Fri: 'Fri',
     Sat: 'Sat',
-    seperator: 'to',
+    separator: 'to',
     clear: 'Clear',
     now: 'Now',
     confirm: 'Confirm',

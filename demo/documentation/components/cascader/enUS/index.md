@@ -39,7 +39,7 @@ filter
 |clearable|`boolean`|`false`||
 |remote|`boolean`|`false`||
 |on-load|`(option: CascaderOption, resolve: (children: Array<CascaderOption>) => void) => any`|`() => {}`|Callback when click at unloaded nodes. Pass resolved children to `resolve` function to set children of the node.|
-|seperator|`string`|`'/'`||
+|separator|`string`|`'/'`||
 |filter|`(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean`|A string based filter.||
 
 ## Events

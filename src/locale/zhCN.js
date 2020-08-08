@@ -32,7 +32,7 @@ export default {
     Thu: '四',
     Fri: '五',
     Sat: '六',
-    seperator: '至',
+    separator: '至',
     clear: '清除',
     now: '此刻',
     confirm: '确认',

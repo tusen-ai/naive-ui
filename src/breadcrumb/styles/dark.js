@@ -9,7 +9,7 @@ export default create({
       itemTextColorHover: derived.primaryHoverColor,
       itemTextColorActive: derived.primaryActiveColor,
       itemTextColorMatch: derived.secondaryTextOverlayColor,
-      seperatorColor: derived.tertiaryTextOverlayColor
+      separatorColor: derived.tertiaryTextOverlayColor
     }
   }
 })

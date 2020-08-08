@@ -24,7 +24,7 @@ export default {
     }
   },
   props: {
-    seperator: {
+    separator: {
       type: String,
       default: '/'
     }

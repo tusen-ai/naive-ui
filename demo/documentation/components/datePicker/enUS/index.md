@@ -55,7 +55,7 @@ format
 |format|`string`|`'yyyy-MM-dd'`||
 |is-date-disabled|`(current: number) => boolean`|`() => false`||
 |is-time-disabled|`(current: number) => { isHourDisabled: boolean, isMinuteDisabled: boolean, isSecondDisabled: boolean }`|`() => ({ isHourDisabled: () => false, isMinuteDisabled: () => false, isSecondDisabled: () => false }})`||
-|seperator|`string`|`'to'`||
+|separator|`string`|`'to'`||
 |start-placeholder|`string`|`'Start Date'`||
 
 
@@ -67,7 +67,7 @@ format
 |format|`string`|`'yyyy-MM-dd HH:mm:ss'`||
 |is-date-disabled|`(current: number) => boolean`|`() => false`||
 |is-time-disabled|`(current: number) => { isHourDisabled: boolean, isMinuteDisabled: boolean, isSecondDisabled: boolean }`|`() => ({ isHourDisabled: () => false, isMinuteDisabled: () => false, isSecondDisabled: () => false }})`||
-|seperator|`string`|`'to'`||
+|separator|`string`|`'to'`||
 |start-placeholder|`string`|`'Start Date and Time'`||
 
 ## Events

@@ -40,7 +40,7 @@ filter
 |clearable|`boolean`|`false`||
 |remote|`boolean`|`false`||
 |on-load|`(option: CascaderOption, resolve: (children: Array<CascaderOption>) => void) => any`|`() => {}`|在点击未加载完成节点时的回调。把获得的子节点传入 `resolve` 函数来设定这个节点的子节点。|
-|seperator|`string`|`'/'`||
+|separator|`string`|`'/'`||
 |filter|`(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean`|一个基于字符串的过滤算法||
 
 ## Events
