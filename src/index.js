@@ -20,7 +20,7 @@ import Tooltip from './Tooltip'
 import Popup from './Popover'
 import Alert from './alert'
 import DatePicker from './DatePicker'
-import InputNumberStyle from './input-number'
+import InputNumber from './input-number'
 import Radio from './Radio'
 import Form from './Form'
 import Tabs from './Tabs'
@@ -113,12 +113,12 @@ import autoComplateLightStyle from './auto-complete/styles/light'
 import autoComplateDarkStyle from './auto-complete/styles/dark'
 import codeLightStyle from './code/styles/light'
 import codeDarkStyle from './code/styles/dark'
-import cardDarkStyle from './card/styles/dark'
 import cardLightStyle from './card/styles/light'
-import anchorDarkStyle from './anchor/styles/dark'
+import cardDarkStyle from './card/styles/dark'
 import anchorLightStyle from './anchor/styles/light'
-import breadcrumbDarkStyle from './breadcrumb/styles/dark'
+import anchorDarkStyle from './anchor/styles/dark'
 import breadcrumbLightStyle from './breadcrumb/styles/light'
+import breadcrumbDarkStyle from './breadcrumb/styles/dark'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -157,7 +157,7 @@ export default create({
     Popup,
     Alert,
     DatePicker,
-    InputNumberStyle,
+    InputNumber,
     Radio,
     Cascader,
     DynamicInput,
@@ -240,8 +240,8 @@ export default create({
     avatarDarkStyle,
     affixLightStyle,
     affixDarkStyle,
-    drawerDarkStyle,
     drawerLightStyle,
+    drawerDarkStyle,
     dataTableLightStyle,
     dataTableDarkStyle,
     transferLightStyle,
@@ -254,12 +254,12 @@ export default create({
     backTopDarkStyle,
     codeLightStyle,
     codeDarkStyle,
-    cardDarkStyle,
     cardLightStyle,
-    anchorDarkStyle,
+    cardDarkStyle,
     anchorLightStyle,
-    breadcrumbDarkStyle,
+    anchorDarkStyle,
     breadcrumbLightStyle,
+    breadcrumbDarkStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle
