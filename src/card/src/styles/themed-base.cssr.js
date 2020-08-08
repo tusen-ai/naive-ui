@@ -5,21 +5,17 @@ export default c([
     const base = props.$base
     const easeInOutCubicBezier = base.easeInOutCubicBezier
     const {
-      cardBackgroundColor,
-      cardTextColor,
-      cardTitleTextColor,
-      cardBorderColor,
-      cardActionBackgroundColor,
-      cardCloseColor,
-      strongFontWeight,
+      color,
+      textColor,
+      titleTextColor,
+      titleFontWeight,
+      borderColor,
+      actionColor,
       borderRadius,
-      smallBorderRadius
+      closeColor,
+      closeColorHover,
+      closeColorActive
     } = props.$local
-    const {
-      default: defaultCardCloseColor,
-      hover: hoverCardCloseColor,
-      active: activeCardCloseColor
-    } = cardCloseColor
     return cTB(
       'card',
       {
@@ -29,8 +25,8 @@ export default c([
           box-sizing: border-box;
           position: relative;
           border-radius: ${borderRadius};
-          backgroundColor: ${cardBackgroundColor};
-          color: ${cardTextColor};
+          backgroundColor: ${color};
+          color: ${textColor};
         `,
         transition: `
           color .3s ${easeInOutCubicBezier},
@@ -44,7 +40,7 @@ export default c([
             overflow: hidden;
             width: 100%;
           `,
-          borderRadius: `${smallBorderRadius} ${smallBorderRadius} 0 0;`
+          borderRadius: `${borderRadius} ${borderRadius} 0 0`
         },
         [
           c('img', {
@@ -55,40 +51,40 @@ export default c([
           })
         ]),
         cM('bordered', {
-          border: `1px solid ${cardBorderColor}`
+          border: `1px solid ${borderColor}`
         }),
         cM('action-segmented', [
-          c('& >', [
+          c('>', [
             cE('action', [
               c('&:not(:first-child)', {
-                borderTop: `1px solid ${cardBorderColor}`
+                borderTop: `1px solid ${borderColor}`
               })
             ])
           ])
         ]),
         cM('content-segmented, content-soft-segmented', [
-          c('& >', [
+          c('>', [
             cE('content', {
               transition: `border-color 0.3s ${easeInOutCubicBezier}`
             }, [
               c('&:not(:first-child)', {
-                borderTop: `1px solid ${cardBorderColor}`
+                borderTop: `1px solid ${borderColor}`
               })
             ])
           ])
         ]),
         cM('footer-segmented, footer-soft-segmented', [
-          c('& >', [
+          c('>', [
             cE('footer', {
               transition: `border-color 0.3s ${easeInOutCubicBezier}`
             }, [
               c('&:not(:first-child)', {
-                borderTop: `1px solid ${cardBorderColor}`
+                borderTop: `1px solid ${borderColor}`
               })
             ])
           ])
         ]),
-        c('& >', [
+        c('>', [
           cE('content', {
             raw: `
               box-sizing: border-box;
@@ -104,7 +100,7 @@ export default c([
             `
           })
         ]),
-        c('& >', [
+        c('>', [
           cB('card-header', {
             raw: `
               box-sizing: border-box;
@@ -114,11 +110,11 @@ export default c([
           }, [
             cE('main', {
               raw: `
-                font-weight: ${strongFontWeight};
+                font-weight: ${titleFontWeight};
                 font-size: 18px;
                 transition: color .3s ${easeInOutCubicBezier};
                 flex: 1;
-                color: ${cardTitleTextColor};
+                color: ${titleTextColor};
               `
             }),
             cE('extra', {
@@ -126,32 +122,34 @@ export default c([
                 font-weight: 400;
                 font-size: 14px;
                 transition: color .3s ${easeInOutCubicBezier};
-                color: ${cardTextColor};
+                color: ${textColor};
               `
             }),
             cE('close-mark', {
               raw: `
                 cursor: pointer;
                 transition: fill .3s ${easeInOutCubicBezier};
-                fill: ${defaultCardCloseColor};
+                fill: ${closeColor};
               `
             }, [
               c('&:hover', {
-                fill: hoverCardCloseColor
+                fill: closeColorHover
               }),
               c('&:active', {
-                fill: activeCardCloseColor
+                fill: closeColorActive
               })
             ])
           ]),
           cE('action', {
             raw: `
               box-sizing: border-box;
-              transition: background-color .3s ${easeInOutCubicBezier}, border-color .3s ${easeInOutCubicBezier};
+              transition:
+                background-color .3s ${easeInOutCubicBezier},
+                border-color .3s ${easeInOutCubicBezier};
               line-height: 1.75;
               font-size: 14px;
               background-clip: padding-box;
-              background-color: ${cardActionBackgroundColor};
+              background-color: ${actionColor};
             `
           })
         ])
