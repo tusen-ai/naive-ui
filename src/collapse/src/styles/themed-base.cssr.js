@@ -3,11 +3,12 @@ import fadeInHeightExpandTransition from '../../../styles/_transitions/fade-in-h
 
 export default c([
   ({ props }) => {
-    const { easeInOutCubicBezier, iconTransition } = props.$base
+    const { easeInOutCubicBezier } = props.$base
     const {
-      borderColor,
-      headerTextColor,
-      contentTextColor
+      dividerColor,
+      titleTextColor,
+      textColor,
+      arrowColor
     } = props.$local
     return [
       cTB(
@@ -29,13 +30,13 @@ export default c([
           [
             c('&:first-child', {
               raw: `
-                margin-top: 0px;
+                margin-top: 0;
               `
             }),
             c('&:first-child >', [
               cE('header', {
                 raw: `
-                  padding-top: 0px;
+                  padding-top: 0;
                 `
               })
             ]),
@@ -85,7 +86,7 @@ export default c([
             ]),
             c('&:not(:first-child)', {
               raw: `
-                border-top: 1px solid ${borderColor};
+                border-top: 1px solid ${dividerColor};
               `
             }),
             cE('header', {
@@ -97,7 +98,7 @@ export default c([
                 position: relative;
                 cursor: pointer;
                 padding: 16px 0 0 0;
-                color: ${headerTextColor};
+                color: ${titleTextColor};
               `
             }, [
               cB('collapse-item-arrow', {
@@ -107,9 +108,13 @@ export default c([
               }, [
                 cB('icon', {
                   raw: `
-                    transition: transform .15s ${easeInOutCubicBezier}, ${iconTransition};
+                    transition:
+                      transform .15s ${easeInOutCubicBezier},
+                      fill .3s ${easeInOutCubicBezier},
+                      stroke .3s ${easeInOutCubicBezier};
                     font-size: 16px;
-                    fill: ${headerTextColor};
+                    fill: ${arrowColor};
+                    stroke: ${arrowColor};
                   `
                 })
               ])
@@ -118,7 +123,7 @@ export default c([
               raw: `
                 transition: color .3s ${easeInOutCubicBezier};
                 padding-top: 16px;
-                color: ${contentTextColor};
+                color: ${textColor};
               `
             })
           ])

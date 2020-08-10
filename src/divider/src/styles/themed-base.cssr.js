@@ -2,10 +2,11 @@ import { c, cTB, cNotM, cE, cM } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
-    const { easeInOutCubicBezier, strongFontWeight } = props.$base
+    const { easeInOutCubicBezier } = props.$base
     const {
-      dividerTextColor,
-      dividerBorderColor
+      textColor,
+      color,
+      fontWeight
     } = props.$local
     return [
       cTB(
@@ -17,8 +18,10 @@ export default c([
             width: 100%;
             box-sizing: border-box;
             font-size: 16px;
-            color: ${dividerTextColor}
-            transition: background-color .3s ${easeInOutCubicBezier};
+            color: ${textColor};
+            transition:
+              color .3s ${easeInOutCubicBezier},
+              background-color .3s ${easeInOutCubicBezier};
           `
         },
         [
@@ -38,13 +41,12 @@ export default c([
           ]),
           cE('title', {
             raw: `
-              transition: color .3s ${easeInOutCubicBezier};
               display: flex;
               align-items: center;
               margin-left: 12px;
               margin-right: 12px;
               white-space: nowrap;
-              font-weight: ${strongFontWeight};
+              font-weight: ${fontWeight};
             `
           }),
           cM('title-position-left', [
@@ -97,20 +99,20 @@ export default c([
           cNotM('dashed', [
             cE('line', {
               raw: `
-                background-color: ${dividerBorderColor};
+                background-color: ${color};
               `
             })
           ]),
           cM('dashed', [
             cE('line', {
               raw: `
-                border-color:: ${dividerBorderColor};
+                border-color: ${color};
               `
             })
           ]),
           cM('vertical', {
             raw: `
-              background-color: ${dividerBorderColor};
+              background-color: ${color};
             `
           })
         ]

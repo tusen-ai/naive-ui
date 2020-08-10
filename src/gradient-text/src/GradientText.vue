@@ -24,7 +24,11 @@ import styles from './styles/index'
 
 export default {
   name: 'GradientText',
-  mixins: [withapp, themeable, usecssr(styles)],
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   props: {
     size: {
       type: [String, Number],

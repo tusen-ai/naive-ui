@@ -5,14 +5,15 @@ export default create({
   name: 'Collapse',
   getDerivedVariables ({ base, derived }) {
     const {
-      primayTextColor,
+      primaryTextColor,
       secondaryTextColor,
       dividerOverlayColor
     } = derived
     return {
-      borderColor: dividerOverlayColor,
-      headerTextColor: primayTextColor,
-      contentTextColor: secondaryTextColor
+      dividerColor: dividerOverlayColor,
+      titleTextColor: primaryTextColor,
+      textColor: secondaryTextColor,
+      arrowColor: secondaryTextColor
     }
   }
 })

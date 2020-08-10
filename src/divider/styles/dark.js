@@ -9,8 +9,9 @@ export default create({
       dividerOverlayColor
     } = derived
     return {
-      dividerTextColor: primaryTextOverlayColor,
-      dividerBorderColor: dividerOverlayColor
+      textColor: primaryTextOverlayColor,
+      color: dividerOverlayColor,
+      fontWeight: base.strongFontWeight
     }
   }
 })

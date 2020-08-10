@@ -10,27 +10,25 @@ export default create({
       modalBackgroundColor,
       closeOverylayColor,
       closeHoverOverlayColor,
+      closeActiveOverylayColor,
       infoColor,
       successColor,
       warningColor,
       errorColor
     } = derived
     return {
-      confirmTitleTextColor: primaryTextOverlayColor,
-      confirmTextColor: secondaryTextOverlayColor,
-      confirmBackgroundColor: modalBackgroundColor,
-      confirmCloseColor: {
-        default: closeOverylayColor,
-        hover: closeHoverOverlayColor,
-        avtive: closeOverylayColor
-      },
-      confirmIconColor: {
-        info: infoColor,
-        success: successColor,
-        warning: warningColor,
-        error: errorColor
-      },
-      borderRadius: base.borderRadius
+      titleTextColor: primaryTextOverlayColor,
+      textColor: secondaryTextOverlayColor,
+      color: modalBackgroundColor,
+      closeColor: closeOverylayColor,
+      closeColorHover: closeHoverOverlayColor,
+      closeColorActive: closeActiveOverylayColor,
+      iconColorInfo: infoColor,
+      iconColorSuccess: successColor,
+      iconColorWarning: warningColor,
+      iconColorError: errorColor,
+      borderRadius: base.borderRadius,
+      titleFontWeight: base.strongFontWeight
     }
   }
 })

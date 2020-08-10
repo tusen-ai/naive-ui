@@ -1,14 +1,21 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import usecssr from '../../_mixins/usecssr'
 import { getRootDropdownMenu, createSelectOptions } from './utils'
 import { KEY_CODE } from '../../_utils/event/keyCode'
 import keyboardDelegate from '../../_utils/delegate/keyboardDelegate'
 import NBaseSelectMenu from '../../_base/select-menu'
+import styles from './styles'
 
 export default {
   name: 'NDropdownMenu',
-  mixins: [ withapp, themeable ],
+  cssrName: 'Dropdown',
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   provide () {
     return {
       NDropdownMenu: this
