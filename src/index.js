@@ -32,7 +32,7 @@ import ConfirmPlugin from './confirm'
 import Badge from './badge'
 import Tag from './tag'
 import BackTop from './back-top'
-import Divider from './Divider'
+import Divider from './divider'
 import Collapse from './Collapse'
 import Timeline from './Timeline'
 import Popconfirm from './Popconfirm'
@@ -119,6 +119,8 @@ import anchorLightStyle from './anchor/styles/light'
 import anchorDarkStyle from './anchor/styles/dark'
 import breadcrumbLightStyle from './breadcrumb/styles/light'
 import breadcrumbDarkStyle from './breadcrumb/styles/dark'
+import dividerLightStyle from './divider/styles/light'
+import dividerDarkStyle from './divider/styles/dark'
 import dynamicInputLightStyle from './dynamicInput/styles/light'
 import dynamicInputDarkStyle from './dynamicInput/styles/dark'
 import confirmLightStyle from './confirm/styles/light'
@@ -264,6 +266,8 @@ export default create({
     anchorDarkStyle,
     breadcrumbLightStyle,
     breadcrumbDarkStyle,
+    dividerLightStyle,
+    dividerDarkStyle,
     dynamicInputLightStyle,
     dynamicInputDarkStyle,
     confirmLightStyle,
