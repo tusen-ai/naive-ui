@@ -1,5 +1,5 @@
 # Gradient Text
-Why using gradient text? Rita applied it on some alert information. It looks quite good, so it's here.
+It doesn't seem very useful. In fact it isn't.
 
 ## Demos
 
