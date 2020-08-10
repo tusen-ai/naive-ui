@@ -1,25 +1,25 @@
-@import './mixins/mixins.scss';
+// @import './mixins/mixins.scss';
 
-@mixin gradient-text-type-mixin ($type) {
-  @include m($type + '-type') {
-    background-image: map-get($--gradient-text-background-image, $type);
-  }
-}
+// @mixin gradient-text-type-mixin ($type) {
+//   @include m($type + '-type') {
+//     background-image: map-get($--gradient-text-background-image, $type);
+//   }
+// }
 
-@include themes-mixin {
-  @include b(gradient-text) {
-    @include once {
-      display: inline-block;
-      font-weight: $--n-strong-weight;
-      font-size: inherit;
-      background-clip: text;
-      color: transparent;
-      white-space: nowrap;
-    }
-    @include gradient-text-type-mixin(default);
-    @include gradient-text-type-mixin(success);
-    @include gradient-text-type-mixin(warning);
-    @include gradient-text-type-mixin(error);
-    @include gradient-text-type-mixin(info);
-  }
-}
+// @include themes-mixin {
+//   @include b(gradient-text) {
+//     @include once {
+//       display: inline-block;
+//       font-weight: $--n-strong-weight;
+//       font-size: inherit;
+//       background-clip: text;
+//       color: transparent;
+//       white-space: nowrap;
+//     }
+//     @include gradient-text-type-mixin(default);
+//     @include gradient-text-type-mixin(success);
+//     @include gradient-text-type-mixin(warning);
+//     @include gradient-text-type-mixin(error);
+//     @include gradient-text-type-mixin(info);
+//   }
+// }

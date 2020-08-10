@@ -114,6 +114,8 @@ import dynamicTagsDarkStyle from './dynamic-tags/styles/dark'
 import dynamicTagsLightStyle from './dynamic-tags/styles/light'
 import emptyDarkStyle from './empty/styles/dark'
 import emptyLightStyle from './empty/styles/light'
+import gradientTextDarkStyle from './gradientText/styles/dark'
+import gradientTextLightStyle from './gradientText/styles/light'
 import inputDarkStyle from './input/styles/dark'
 import inputGroupLabelDarkStyle from './input-group-label/styles/dark'
 import inputGroupLabelLightStyle from './input-group-label/styles/light'
@@ -285,6 +287,8 @@ export default create({
     dynamicInputDarkStyle,
     confirmLightStyle,
     confirmDarkStyle,
+    gradientTextLightStyle,
+    gradientTextDarkStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle
