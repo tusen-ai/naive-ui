@@ -78,9 +78,11 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import render from '../../_utils/vue/render'
 import asthemecontext from '../../_mixins/asthemecontext'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/index.js'
 
 export default {
-  name: 'NConfirm',
+  name: 'Confirm',
   components: {
     NIcon,
     NButton,
@@ -90,7 +92,7 @@ export default {
     iosCloseCircle,
     render
   },
-  mixins: [withapp, themeable, asthemecontext],
+  mixins: [withapp, themeable, asthemecontext, usecssr(styles)],
   props: {
     icon: {
       type: Function,

@@ -1,80 +1,80 @@
-@import './mixins/mixins.scss';
+// @import './mixins/mixins.scss';
 
-@include themes-mixin {
-  @include b(confirm) {
-    @include once {
-      transition:
-        background-color .3s $--n-ease-in-out-cubic-bezier,
-        color .3s $--n-ease-in-out-cubic-bezier;
-      box-sizing: border-box;
-      width: 100%;
-      margin: auto;
-      border-radius: $--n-border-radius;
-      padding: 28px;
-      padding-bottom: 20px;
-      padding-top: 16px;
-      @include e(content) {
-        font-size: 15px;
-        padding-right: 9px;
-        margin-top: 10px;
-        margin-bottom: 19px;
-        position: relative;
-      }
-      @include e(footer) {
-        display: flex;
-        justify-content: flex-end;
-      }
-    }
-    @include b(confirm-title) {
-      @include once {
-        transition: color .3s $--n-ease-in-out-cubic-bezier;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 18px;
-        font-weight: $--n-strong-weight;
-        @include b(confirm-title-icon) {
-          vertical-align: middle;
-          margin-right: 8px;
-        }
-        @include b(confirm-title-content) {
-          display: flex;
-          align-items: center;
-        }
-      }
-      @include b(confirm-title-icon) {
-        @include m(warning-type) {
-          fill: map-get($--confirm-icon-color, 'warning');
-          stroke: map-get($--confirm-icon-color, 'warning');
-        }
-        @include m(success-type) {
-          fill: map-get($--confirm-icon-color, 'success');
-          stroke: map-get($--confirm-icon-color, 'success');
-        }
-        @include m(error-type) {
-          fill: map-get($--confirm-icon-color, 'error');
-          stroke: map-get($--confirm-icon-color, 'error');
-        }
-        @include m(info-type) {
-          fill: map-get($--confirm-icon-color, 'info');
-          stroke: map-get($--confirm-icon-color, 'info');
-        }
-      }
-      @include e(close) {
-        fill: map-get($--confirm-close-color, 'default');
-        stroke: map-get($--confirm-close-color, 'default');
-        &:hover {
-          fill: map-get($--confirm-close-color, 'hover');
-          stroke: map-get($--confirm-close-color, 'hover');
-        }
-        &:active {
-          fill: map-get($--confirm-close-color, 'active');
-          stroke: map-get($--confirm-close-color, 'active');
-        }
-      }
-      color: $--confirm-title-text-color;
-    }
-    background: $--confirm-background-color;
-    color: $--confirm-text-color;
-  }
-}
+// @include themes-mixin {
+//   @include b(confirm) {
+//     @include once {
+//       transition:
+//         background-color .3s $--n-ease-in-out-cubic-bezier,
+//         color .3s $--n-ease-in-out-cubic-bezier;
+//       box-sizing: border-box;
+//       width: 100%;
+//       margin: auto;
+//       border-radius: $--n-border-radius;
+//       padding: 28px;
+//       padding-bottom: 20px;
+//       padding-top: 16px;
+//       @include e(content) {
+//         font-size: 15px;
+//         padding-right: 9px;
+//         margin-top: 10px;
+//         margin-bottom: 19px;
+//         position: relative;
+//       }
+//       @include e(footer) {
+//         display: flex;
+//         justify-content: flex-end;
+//       }
+//     }
+//     @include b(confirm-title) {
+//       @include once {
+//         transition: color .3s $--n-ease-in-out-cubic-bezier;
+//         display: flex;
+//         justify-content: space-between;
+//         align-items: center;
+//         font-size: 18px;
+//         font-weight: $--n-strong-weight;
+//         @include b(confirm-title-icon) {
+//           vertical-align: middle;
+//           margin-right: 8px;
+//         }
+//         @include b(confirm-title-content) {
+//           display: flex;
+//           align-items: center;
+//         }
+//       }
+//       @include b(confirm-title-icon) {
+//         @include m(warning-type) {
+//           fill: map-get($--confirm-icon-color, 'warning');
+//           stroke: map-get($--confirm-icon-color, 'warning');
+//         }
+//         @include m(success-type) {
+//           fill: map-get($--confirm-icon-color, 'success');
+//           stroke: map-get($--confirm-icon-color, 'success');
+//         }
+//         @include m(error-type) {
+//           fill: map-get($--confirm-icon-color, 'error');
+//           stroke: map-get($--confirm-icon-color, 'error');
+//         }
+//         @include m(info-type) {
+//           fill: map-get($--confirm-icon-color, 'info');
+//           stroke: map-get($--confirm-icon-color, 'info');
+//         }
+//       }
+//       @include e(close) {
+//         fill: map-get($--confirm-close-color, 'default');
+//         stroke: map-get($--confirm-close-color, 'default');
+//         &:hover {
+//           fill: map-get($--confirm-close-color, 'hover');
+//           stroke: map-get($--confirm-close-color, 'hover');
+//         }
+//         &:active {
+//           fill: map-get($--confirm-close-color, 'active');
+//           stroke: map-get($--confirm-close-color, 'active');
+//         }
+//       }
+//       color: $--confirm-title-text-color;
+//     }
+//     background: $--confirm-background-color;
+//     color: $--confirm-text-color;
+//   }
+// }

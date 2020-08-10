@@ -28,7 +28,7 @@ import TimePicker from './TimePicker'
 import Layout from './Layout'
 import Scrollbar from './Scrollbar'
 import Steps from './Steps'
-import ConfirmPlugin from './Confirm'
+import ConfirmPlugin from './confirm'
 import Badge from './badge'
 import Tag from './tag'
 import BackTop from './back-top'
@@ -119,6 +119,8 @@ import anchorLightStyle from './anchor/styles/light'
 import anchorDarkStyle from './anchor/styles/dark'
 import breadcrumbLightStyle from './breadcrumb/styles/light'
 import breadcrumbDarkStyle from './breadcrumb/styles/dark'
+import confirmLightStyle from './confirm/styles/light'
+import confirmDarkStyle from './confirm/styles/dark'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -260,6 +262,8 @@ export default create({
     anchorDarkStyle,
     breadcrumbLightStyle,
     breadcrumbDarkStyle,
+    confirmLightStyle,
+    confirmDarkStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle
