@@ -1,51 +1,51 @@
-@import './mixins/mixins.scss';
+// @import './mixins/mixins.scss';
 
-@include themes-mixin {
-  @include once {
-    @include b(dynamic-input) {
-      width: 100%;
-      @include m(title) {
-        display: block;
-        margin: 0 0 8px;
-      }
-      @include b(dynamic-input-item) {
-        margin-bottom: 10px;
-        display: flex;
-        flex-wrap: nowrap;
-        @include b(dynamic-input-preset-input) {
-          flex: 1;
-        }
-        @include b(dynamic-input-preset-pair) {
-          flex: 1;
-          display: flex;
-          @include b(dynamic-input-pair-input){
-            &:first-child {
-              margin-right: 12px;
-            }
-          }
-        }
-        @include e(action) {
-          width: 80px;
-          display: flex;
-          justify-content: flex-end;
-          align-items: flex-start;
-          flex-shrink: 0;
-          flex-grow: 0;
-          @include m(icon) {
-            cursor: pointer;
-          }
-        }
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-      @include b(form-item) {
-        padding-top: 0 !important;
-        margin-right: 0 !important;
-        @include b(form-item-blank) {
-          padding: 0 !important;
-        }
-      }
-    }
-  }
-}
+// @include themes-mixin {
+//   @include once {
+//     @include b(dynamic-input) {
+//       width: 100%;
+//       @include m(title) {
+//         display: block;
+//         margin: 0 0 8px;
+//       }
+//       @include b(dynamic-input-item) {
+//         margin-bottom: 10px;
+//         display: flex;
+//         flex-wrap: nowrap;
+//         @include b(dynamic-input-preset-input) {
+//           flex: 1;
+//         }
+//         @include b(dynamic-input-preset-pair) {
+//           flex: 1;
+//           display: flex;
+//           @include b(dynamic-input-pair-input){
+//             &:first-child {
+//               margin-right: 12px;
+//             }
+//           }
+//         }
+//         @include e(action) {
+//           width: 80px;
+//           display: flex;
+//           justify-content: flex-end;
+//           align-items: flex-start;
+//           flex-shrink: 0;
+//           flex-grow: 0;
+//           @include m(icon) {
+//             cursor: pointer;
+//           }
+//         }
+//         &:last-child {
+//           margin-bottom: 0;
+//         }
+//       }
+//       @include b(form-item) {
+//         padding-top: 0 !important;
+//         margin-right: 0 !important;
+//         @include b(form-item-blank) {
+//           padding: 0 !important;
+//         }
+//       }
+//     }
+//   }
+// }

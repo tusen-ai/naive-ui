@@ -52,9 +52,13 @@ import mdAdd from '../../_icons/md-add'
 import mdRemove from '../../_icons/md-remove'
 import NDynamicInputInputPreset from './InputPreset'
 import NDynamicInputPairPreset from './PairPreset'
+import withapp from '../../_mixins/withapp'
+import themeable from '../../_mixins/themeable'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/index'
 
 export default {
-  name: 'NDynamicInput',
+  name: 'DynamicInput',
   components: {
     NDynamicInputInputPreset,
     NDynamicInputPairPreset,
@@ -63,6 +67,11 @@ export default {
     mdAdd,
     mdRemove
   },
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   provide () {
     return {
       NDynamicInput: this

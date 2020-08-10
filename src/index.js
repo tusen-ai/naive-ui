@@ -9,7 +9,7 @@ import ButtonGroup from './button-group'
 import Switch from './Switch'
 import Select from './Select'
 import Cascader from './Cascader'
-import DynamicInput from './DynamicInput'
+import DynamicInput from './dynamicInput'
 import Modal from './Modal'
 import Input from './input'
 import Message from './Message'
@@ -119,6 +119,8 @@ import anchorLightStyle from './anchor/styles/light'
 import anchorDarkStyle from './anchor/styles/dark'
 import breadcrumbLightStyle from './breadcrumb/styles/light'
 import breadcrumbDarkStyle from './breadcrumb/styles/dark'
+import dynamicInputLightStyle from './dynamicInput/styles/light'
+import dynamicInputDarkStyle from './dynamicInput/styles/dark'
 import confirmLightStyle from './confirm/styles/light'
 import confirmDarkStyle from './confirm/styles/dark'
 
@@ -262,6 +264,8 @@ export default create({
     anchorDarkStyle,
     breadcrumbLightStyle,
     breadcrumbDarkStyle,
+    dynamicInputLightStyle,
+    dynamicInputDarkStyle,
     confirmLightStyle,
     confirmDarkStyle,
     // Can be remove after refactoring
