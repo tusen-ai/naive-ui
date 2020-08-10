@@ -1,6 +1,6 @@
 import Card from './card'
 import Icon from './Icon'
-import GradientText from './GradientText'
+import GradientText from './gradientText'
 import Table from './Table'
 import DataTable from './data-table'
 import CheckBox from './Checkbox'
@@ -131,6 +131,8 @@ import dynamicInputLightStyle from './dynamicInput/styles/light'
 import dynamicInputDarkStyle from './dynamicInput/styles/dark'
 import confirmLightStyle from './confirm/styles/light'
 import confirmDarkStyle from './confirm/styles/dark'
+import gradientTextLightStyle from './gradientText/styles/light'
+import gradientTextDarkStyle from './gradientText/styles/dark'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -284,6 +286,8 @@ export default create({
     dynamicInputDarkStyle,
     confirmLightStyle,
     confirmDarkStyle,
+    gradientTextLightStyle,
+    gradientTextDarkStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle

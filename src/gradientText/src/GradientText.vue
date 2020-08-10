@@ -19,10 +19,12 @@
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import formatLength from '../../_utils/css/formatLength'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/index'
 
 export default {
-  name: 'NGradientText',
-  mixins: [withapp, themeable],
+  name: 'GradientText',
+  mixins: [withapp, themeable, usecssr(styles)],
   props: {
     size: {
       type: [String, Number],
