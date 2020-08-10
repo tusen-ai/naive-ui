@@ -1,21 +1,14 @@
 import create from '../../styles/_utils/create-component-base'
-import { changeColor } from '../../_utils/color'
 
 export default create({
   theme: 'light',
-  name: 'Drawer',
+  name: 'Dropdown',
   getDerivedVariables ({ derived }) {
     const {
-      secondaryTextColor,
-      primaryColor
+      secondaryTextColor
     } = derived
     return {
-      suffixFill: secondaryTextColor,
-      textColor: {
-        hover: primaryColor,
-        selected: primaryColor
-      },
-      selectedBackgroundColor: changeColor(primaryColor, { alpha: 0.1 })
+      suffixColor: secondaryTextColor
     }
   }
 })

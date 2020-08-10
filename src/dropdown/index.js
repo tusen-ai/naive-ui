@@ -5,8 +5,10 @@ import DropdownDivider from './src/DropdownDivider'
 
 Dropdown.install = function (Vue, naive) {
   Vue.component(naive.componentPrefix + Dropdown.name, Dropdown)
-  Vue.component(naive.componentPrefix + DropdownSubmenu.name, DropdownSubmenu)
-  Vue.component(naive.componentPrefix + DropdownDivider.name, DropdownDivider)
+  // keep the following install statements
+  // dropdown will use their name (string) to render component
+  Vue.component(DropdownSubmenu.name, DropdownSubmenu)
+  Vue.component(DropdownDivider.name, DropdownDivider)
 }
 
 export default Dropdown

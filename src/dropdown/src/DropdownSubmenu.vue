@@ -5,7 +5,7 @@ import iosArrowForward from '../../_icons/ios-arrow-forward'
 import placeable from '../../_mixins/placeable'
 
 export default {
-  name: 'DropdownSubmenu',
+  name: 'NDropdownSubmenu',
   components: {
     NDropdownMenu,
     NIcon,

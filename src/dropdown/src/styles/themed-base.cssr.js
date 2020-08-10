@@ -4,7 +4,7 @@ import fadeInScaleUpTransition from '../../../styles/_transitions/fade-in-scale-
 export default c([
   ({ props }) => {
     const {
-      suffixFill
+      suffixColor
     } = props.$local
     return [
       cTB('popover-content', {
@@ -25,7 +25,7 @@ export default c([
             raw: `
               position: relative;
               right: -8px;
-              fill: ${suffixFill};
+              fill: ${suffixColor};
             `
           })
         ]),
