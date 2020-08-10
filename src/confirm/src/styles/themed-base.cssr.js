@@ -4,30 +4,26 @@ export default c([
   ({ props }) => {
     const base = props.$base
     const easeInOutCubicBezier = base.easeInOutCubicBezier
-    const strongFontWeight = base.strongFontWeight
     const {
-      confirmTitleTextColor,
-      confirmTextColor,
-      confirmBackgroundColor,
-      borderRadius
+      titleTextColor,
+      textColor,
+      color,
+      borderRadius,
+      strongFontWeight,
+      closeColor,
+      closeColorHover,
+      closeColorActive,
+      iconColorInfo,
+      iconColorSuccess,
+      iconColorWarning,
+      iconColorError
     } = props.$local
-    const {
-      default: defaultConfirmCloseColor,
-      hover: hoverConfirmCloseColor,
-      active: activeConfirmCloseColor
-    } = props.$local.confirmCloseColor
-    const {
-      info: infoConfirmIconColor,
-      success: successConfirmIconColor,
-      warning: warningConfirmIconColor,
-      error: errorConfirmIconColor
-    } = props.$local.confirmIconColor
     return cTB(
       'confirm',
       {
         raw: `
-          background: ${confirmBackgroundColor};
-          color: ${confirmTextColor};
+          background: ${color};
+          color: ${textColor};
           box-sizing: border-box;
           margin: auto;
           border-radius: ${borderRadius};
@@ -37,7 +33,7 @@ export default c([
         `,
         transition: `
           background-color .3s ${easeInOutCubicBezier},
-          color .3s ${easeInOutCubicBezier};
+          color .3s ${easeInOutCubicBezier}
         `
       },
       [
@@ -64,7 +60,7 @@ export default c([
             align-items: center;
             font-size: 18px;
             font-weight: ${strongFontWeight};
-            color: ${confirmTitleTextColor}
+            color: ${titleTextColor}
           `
         },
         [
@@ -77,26 +73,26 @@ export default c([
           [
             cM('warning-type', {
               raw: `
-                fill: ${warningConfirmIconColor};
-                stroke: ${warningConfirmIconColor};
+                fill: ${iconColorWarning};
+                stroke: ${iconColorWarning};
               `
             }),
             cM('success-type', {
               raw: `
-                fill: ${successConfirmIconColor};
-                stroke: ${successConfirmIconColor};
+                fill: ${iconColorSuccess};
+                stroke: ${iconColorSuccess};
               `
             }),
             cM('error-type', {
               raw: `
-                fill: ${errorConfirmIconColor};
-                stroke: ${errorConfirmIconColor};
+                fill: ${iconColorError};
+                stroke: ${iconColorError};
               `
             }),
             cM('info-type', {
               raw: `
-                fill: ${infoConfirmIconColor};
-                stroke: ${infoConfirmIconColor};
+                fill: ${iconColorInfo};
+                stroke: ${iconColorInfo};
               `
             })
           ]),
@@ -108,21 +104,21 @@ export default c([
           }),
           cE('close', {
             raw: `
-              fill: ${defaultConfirmCloseColor},
-              stroke: ${defaultConfirmCloseColor}
+              fill: ${closeColor},
+              stroke: ${closeColor}
             `
           },
           [
             c('&:hover', {
               raw: `
-                fill: ${hoverConfirmCloseColor},
-                stroke: ${hoverConfirmCloseColor}
+                fill: ${closeColorHover},
+                stroke: ${closeColorHover}
               `
             }),
             c('&:active', {
               raw: `
-                fill: ${activeConfirmCloseColor},
-                stroke: ${activeConfirmCloseColor}
+                fill: ${closeColorActive},
+                stroke: ${closeColorActive}
               `
             })
           ])

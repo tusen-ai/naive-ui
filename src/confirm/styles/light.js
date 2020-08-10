@@ -5,32 +5,30 @@ export default create({
   name: 'Confirm',
   getDerivedVariables ({ base, derived }) {
     const {
-      parimaryTextColor,
+      primaryTextColor,
       secondaryTextColor,
       cardBackgroundColor,
       closeColor,
       closeHoverColor,
+      closeActiveColor,
       infoColor,
       successColor,
       warningColor,
       errorColor
     } = derived
     return {
-      confirmTitleTextColor: parimaryTextColor,
-      confirmTextColor: secondaryTextColor,
-      confirmBackgroundColor: cardBackgroundColor,
-      confirmCloseColor: {
-        default: closeColor,
-        hover: closeHoverColor,
-        active: closeColor
-      },
-      confirmIconColor: {
-        info: infoColor,
-        success: successColor,
-        warning: warningColor,
-        error: errorColor
-      },
-      borderRadius: base.borderRadius
+      titleTextColor: primaryTextColor,
+      textColor: secondaryTextColor,
+      color: cardBackgroundColor,
+      closeColor: closeColor,
+      closeColorHover: closeHoverColor,
+      closeColorActive: closeActiveColor,
+      iconColorInfo: infoColor,
+      iconColorSuccess: successColor,
+      iconColorWarning: warningColor,
+      iconColorError: errorColor,
+      borderRadius: base.borderRadius,
+      strongFontWeight: base.strongFontWeight
     }
   }
 })
