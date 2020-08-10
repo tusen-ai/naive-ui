@@ -28,7 +28,7 @@ export default create({
       iconColorWarning: warningColor,
       iconColorError: errorColor,
       borderRadius: base.borderRadius,
-      strongFontWeight: base.strongFontWeight
+      titleFontWeight: base.strongFontWeight
     }
   }
 })

@@ -9,7 +9,7 @@ export default c([
       textColor,
       color,
       borderRadius,
-      strongFontWeight,
+      titleFontWeight,
       closeColor,
       closeColorHover,
       closeColorActive,
@@ -59,7 +59,7 @@ export default c([
             justify-content: space-between;
             align-items: center;
             font-size: 18px;
-            font-weight: ${strongFontWeight};
+            font-weight: ${titleFontWeight};
             color: ${titleTextColor}
           `
         },
@@ -104,21 +104,21 @@ export default c([
           }),
           cE('close', {
             raw: `
-              fill: ${closeColor},
-              stroke: ${closeColor}
+              fill: ${closeColor};
+              stroke: ${closeColor};
             `
           },
           [
             c('&:hover', {
               raw: `
-                fill: ${closeColorHover},
-                stroke: ${closeColorHover}
+                fill: ${closeColorHover};
+                stroke: ${closeColorHover};
               `
             }),
             c('&:active', {
               raw: `
-                fill: ${closeColorActive},
-                stroke: ${closeColorActive}
+                fill: ${closeColorActive};
+                stroke: ${closeColorActive};
               `
             })
           ])
