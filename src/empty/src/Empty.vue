@@ -31,14 +31,21 @@ import themeable from '../../_mixins/themeable'
 import locale from '../../_mixins/locale'
 import removeCircleOutline from '../../_icons/remove-circle-outline'
 import NIcon from '../../Icon'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/index'
 
 export default {
-  name: 'NEmpty',
+  name: 'Empty',
   components: {
     removeCircleOutline,
     NIcon
   },
-  mixins: [ withapp, themeable, locale('Empty') ],
+  mixins: [
+    withapp,
+    themeable,
+    locale('Empty'),
+    usecssr(styles)
+  ],
   props: {
     description: {
       type: String,

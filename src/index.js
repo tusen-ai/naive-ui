@@ -59,7 +59,7 @@ import Avatar from './avatar'
 import Result from './Result'
 import Thing from './Thing'
 import AutoComplete from './auto-complete'
-import Empty from './Empty'
+import Empty from './empty'
 import Element from './element'
 import Log from './Log'
 import Code from './code'
@@ -119,6 +119,8 @@ import anchorLightStyle from './anchor/styles/light'
 import anchorDarkStyle from './anchor/styles/dark'
 import breadcrumbLightStyle from './breadcrumb/styles/light'
 import breadcrumbDarkStyle from './breadcrumb/styles/dark'
+import emptyLightStyle from './empty/styles/light'
+import emptyDarkStyle from './empty/styles/dark'
 import dropdownLightStyle from './dropdown/styles/light'
 import dropdownDarkStyle from './dropdown/styles/dark'
 import collapseLightStyle from './collapse/styles/light'
@@ -270,6 +272,8 @@ export default create({
     anchorDarkStyle,
     breadcrumbLightStyle,
     breadcrumbDarkStyle,
+    emptyLightStyle,
+    emptyDarkStyle,
     dropdownLightStyle,
     dropdownDarkStyle,
     collapseLightStyle,
