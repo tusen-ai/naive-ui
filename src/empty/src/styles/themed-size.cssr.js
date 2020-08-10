@@ -4,10 +4,10 @@ export default c([
   ({ props }) => {
     const {
       fontSize,
-      iconSize
+      iconSize: iconSizeMap
     } = props.$local
     const size = props.$instance.size
-    const theIconSize = iconSize[size]
+    const iconSize = iconSizeMap[size]
     return cTB('empty', [
       cM(
         `${size}-size`,
@@ -17,10 +17,10 @@ export default c([
         [
           cE('icon', {
             raw: `
-            width: ${theIconSize};
-            height: ${theIconSize};
-            font-size: ${theIconSize};
-            line-height: ${theIconSize};
+              width: ${iconSize};
+              height: ${iconSize};
+              font-size: ${iconSize};
+              line-height: ${iconSize};
             `
           })
         ]
