@@ -37,7 +37,7 @@ import Collapse from './collapse'
 import Timeline from './Timeline'
 import Popconfirm from './Popconfirm'
 import Anchor from './anchor'
-import Dropdown from './Dropdown'
+import Dropdown from './dropdown'
 import Popselect from './Popselect'
 import ConfigProvider from './config-provider'
 import Transfer from './transfer'
@@ -119,6 +119,8 @@ import anchorLightStyle from './anchor/styles/light'
 import anchorDarkStyle from './anchor/styles/dark'
 import breadcrumbLightStyle from './breadcrumb/styles/light'
 import breadcrumbDarkStyle from './breadcrumb/styles/dark'
+import dropdownLightStyle from './dropdown/styles/light'
+import dropdownDarkStyle from './dropdown/styles/dark'
 import collapseLightStyle from './collapse/styles/light'
 import collapseDarkStyle from './collapse/styles/dark'
 import dividerLightStyle from './divider/styles/light'
@@ -268,6 +270,8 @@ export default create({
     anchorDarkStyle,
     breadcrumbLightStyle,
     breadcrumbDarkStyle,
+    dropdownLightStyle,
+    dropdownDarkStyle,
     collapseLightStyle,
     collapseDarkStyle,
     dividerLightStyle,

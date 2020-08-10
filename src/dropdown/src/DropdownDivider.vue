@@ -4,6 +4,6 @@
 
 <script>
 export default {
-  name: 'NDropdownDivider'
+  name: 'DropdownDivider'
 }
 </script>

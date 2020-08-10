@@ -4,7 +4,7 @@ import NDropdownMenu from './DropdownMenu'
 import emptyFunction from '../../_utils/function/empty'
 
 export default {
-  name: 'NDropdown',
+  name: 'Dropdown',
   functional: true,
   props: {
     ...NPopover.props,

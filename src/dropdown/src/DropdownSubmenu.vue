@@ -5,7 +5,7 @@ import iosArrowForward from '../../_icons/ios-arrow-forward'
 import placeable from '../../_mixins/placeable'
 
 export default {
-  name: 'NDropdownSubmenu',
+  name: 'DropdownSubmenu',
   components: {
     NDropdownMenu,
     NIcon,
@@ -202,7 +202,7 @@ export default {
       }, [
         h('transition', {
           props: {
-            name: 'n-dropdown-menu-transition'
+            name: 'n-fade-in-scale-up-transition'
           }
         }, [
           this.active ? h(NDropdownMenu, {
