@@ -33,7 +33,7 @@ import Badge from './badge'
 import Tag from './tag'
 import BackTop from './back-top'
 import Divider from './divider'
-import Collapse from './Collapse'
+import Collapse from './collapse'
 import Timeline from './Timeline'
 import Popconfirm from './Popconfirm'
 import Anchor from './anchor'
@@ -119,6 +119,8 @@ import anchorLightStyle from './anchor/styles/light'
 import anchorDarkStyle from './anchor/styles/dark'
 import breadcrumbLightStyle from './breadcrumb/styles/light'
 import breadcrumbDarkStyle from './breadcrumb/styles/dark'
+import collapseLightStyle from './collapse/styles/light'
+import collapseDarkStyle from './collapse/styles/dark'
 import dividerLightStyle from './divider/styles/light'
 import dividerDarkStyle from './divider/styles/dark'
 import dynamicInputLightStyle from './dynamicInput/styles/light'
@@ -266,6 +268,8 @@ export default create({
     anchorDarkStyle,
     breadcrumbLightStyle,
     breadcrumbDarkStyle,
+    collapseLightStyle,
+    collapseDarkStyle,
     dividerLightStyle,
     dividerDarkStyle,
     dynamicInputLightStyle,

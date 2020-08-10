@@ -1,91 +1,91 @@
-@import './mixins/mixins.scss';
+// @import './mixins/mixins.scss';
 
-@include themes-mixin {
-  @include b(collapse) {
-    @include once {
-      width: 100%;
-    }
-    @include b(collapse-item) {
-      @include once {
-        overflow: hidden;
-        font-size: 14px;
-        transition: border-color .3s $--n-ease-in-out-cubic-bezier;
-        margin-top: 16px;
-        &:first-child {
-          margin-top: 0px;
-        }
-        &:first-child > {
-          @include e(header) {
-            padding-top: 0px;
-          }
-        }
-        @include m(left-arrow-placement) {
-          @include e(header) {
-            @include b(collapse-item-arrow) {
-              margin-right: 4px;
-            }
-          }
-        }
-        @include m(right-arrow-placement) {
-          @include e(header) {
-            @include b(collapse-item-arrow) {
-              margin-left: 4px;
-            }
-          }
-        }
-        @include b(collapse-item) {
-          margin-left: 32px;
-        }
-        @include e(content-wrapper) {
-          @include fade-in-height-expand-transition($duration: .15s);
-          overflow: hidden;
-        }
-        @include m(active) {
-          @include e(header) {
-            @include m(active) {
-              @include b(collapse-item-arrow) {
-                @include b(icon) {
-                  transform: rotate(90deg);
-                }
-              }
-            }
-          }
-        }
-      }
-      &:not(:first-child) {
-        border-top: 1px solid $--collapse-border-color;
-      }
-      @include e(header) {
-        @include once {
-          display: flex;
-          flex-wrap: nowrap;
-          align-items: center;
-          transition: color .3s $--n-ease-in-out-cubic-bezier;
-          position: relative;
-          cursor: pointer;
-          padding: 16px 0 0 0;
-          @include b(collapse-item-arrow) {
-            display: flex;
-            @include b(icon) {
-              transition: transform .15s $--n-ease-in-out-cubic-bezier, $--n-icon-transition;
-              font-size: 16px;
-            }
-          }
-        }
-        color: $--collapse-header-text-color;
-        @include b(collapse-item-arrow) {
-          @include b(icon) {
-            fill: $--collapse-header-text-color;
-          }
-        }
-      }
-      @include e(content-inner) {
-        @include once {
-          transition: color .3s $--n-ease-in-out-cubic-bezier;
-          padding-top: 16px;
-        }
-        color: $--collapse-content-text-color;
-      }
-    }
-  }
-}
+// @include themes-mixin {
+//   @include b(collapse) {
+//     @include once {
+//       width: 100%;
+//     }
+//     @include b(collapse-item) {
+//       @include once {
+//         overflow: hidden;
+//         font-size: 14px;
+//         transition: border-color .3s $--n-ease-in-out-cubic-bezier;
+//         margin-top: 16px;
+//         &:first-child {
+//           margin-top: 0px;
+//         }
+//         &:first-child > {
+//           @include e(header) {
+//             padding-top: 0px;
+//           }
+//         }
+//         @include m(left-arrow-placement) {
+//           @include e(header) {
+//             @include b(collapse-item-arrow) {
+//               margin-right: 4px;
+//             }
+//           }
+//         }
+//         @include m(right-arrow-placement) {
+//           @include e(header) {
+//             @include b(collapse-item-arrow) {
+//               margin-left: 4px;
+//             }
+//           }
+//         }
+//         @include b(collapse-item) {
+//           margin-left: 32px;
+//         }
+//         @include e(content-wrapper) {
+//           @include fade-in-height-expand-transition($duration: .15s);
+//           overflow: hidden;
+//         }
+//         @include m(active) {
+//           @include e(header) {
+//             @include m(active) {
+//               @include b(collapse-item-arrow) {
+//                 @include b(icon) {
+//                   transform: rotate(90deg);
+//                 }
+//               }
+//             }
+//           }
+//         }
+//       }
+//       &:not(:first-child) {
+//         border-top: 1px solid $--collapse-border-color;
+//       }
+//       @include e(header) {
+//         @include once {
+//           display: flex;
+//           flex-wrap: nowrap;
+//           align-items: center;
+//           transition: color .3s $--n-ease-in-out-cubic-bezier;
+//           position: relative;
+//           cursor: pointer;
+//           padding: 16px 0 0 0;
+//           @include b(collapse-item-arrow) {
+//             display: flex;
+//             @include b(icon) {
+//               transition: transform .15s $--n-ease-in-out-cubic-bezier, $--n-icon-transition;
+//               font-size: 16px;
+//             }
+//           }
+//         }
+//         color: $--collapse-header-text-color;
+//         @include b(collapse-item-arrow) {
+//           @include b(icon) {
+//             fill: $--collapse-header-text-color;
+//           }
+//         }
+//       }
+//       @include e(content-inner) {
+//         @include once {
+//           transition: color .3s $--n-ease-in-out-cubic-bezier;
+//           padding-top: 16px;
+//         }
+//         color: $--collapse-content-text-color;
+//       }
+//     }
+//   }
+// }

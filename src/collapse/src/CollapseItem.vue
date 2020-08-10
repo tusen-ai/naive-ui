@@ -43,7 +43,7 @@ import collectable from '../../_mixins/collectable'
 import NCollapseItemContent from './CollapseItemContent'
 
 export default {
-  name: 'NCollapseItem',
+  name: 'CollapseItem',
   components: {
     NIcon,
     NCollapseItemContent,

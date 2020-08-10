@@ -3,9 +3,11 @@ import intersection from 'lodash-es/intersection'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/index.js'
 
 export default {
-  name: 'NCollapse',
+  name: 'Collapse',
   provide () {
     return {
       NCollapse: this
@@ -13,7 +15,8 @@ export default {
   },
   mixins: [
     withapp,
-    themeable
+    themeable,
+    usecssr(styles)
   ],
   model: {
     prop: 'expandedNames',

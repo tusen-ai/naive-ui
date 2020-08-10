@@ -35,8 +35,8 @@ export default function ({
           margin-top ${duration} ${easeInOutCubicBezier} ${leavingDelay},
           margin-bottom ${duration} ${easeInOutCubicBezier} ${leavingDelay},
           padding-top ${duration} ${easeInOutCubicBezier} ${leavingDelay},
-          padding-bottom ${duration} ${easeInOutCubicBezier} ${leavingDelay},
-          ${originalTransition};
+          padding-bottom ${duration} ${easeInOutCubicBezier} ${leavingDelay}
+          ${originalTransition ? ',' + originalTransition : ''}
       `
     }),
     c(`&.${namespace}-fade-in-height-expand-transition-enter-active`, {
@@ -48,8 +48,8 @@ export default function ({
           margin-top ${duration} ${easeInOutCubicBezier},
           margin-bottom ${duration} ${easeInOutCubicBezier},
           padding-top ${duration} ${easeInOutCubicBezier},
-          padding-bottom ${duration} ${easeInOutCubicBezier},
-          ${originalTransition};
+          padding-bottom ${duration} ${easeInOutCubicBezier}
+          ${originalTransition ? ',' + originalTransition : ''}
       `
     })
   ]
