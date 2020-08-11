@@ -3,13 +3,12 @@ import { c, cTB, cM } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      baseTextColor,
-      primaryOpacity,
-      secondaryOpacity,
-      tertiaryOpacity
+      color,
+      opacityPrimaryDepth,
+      opacitySecondaryDepth,
+      opacityTertiaryDepth
     } = props.$local
-    const base = props.$base
-    const { easeInOutCubicBezier, iconTransition } = base
+    const { easeInOutCubicBezier, iconTransition } = props.$base
     return [
       cTB('icon', {
         raw: `
@@ -20,8 +19,8 @@ export default c([
           display: inline-block;
           position: relative;
           transition: ${iconTransition};
-          fill: ${baseTextColor};
-          stroke:  ${baseTextColor};
+          fill: ${color};
+          stroke:  ${color};
         `
       },
       [
@@ -35,21 +34,21 @@ export default c([
         cM('primary-depth', [
           c('svg', {
             raw: `
-              opacity: ${primaryOpacity}
+              opacity: ${opacityPrimaryDepth};
             `
           })
         ]),
         cM('secondary-depth', [
           c('svg', {
             raw: `
-              opacity: ${secondaryOpacity}
+              opacity: ${opacitySecondaryDepth};
             `
           })
         ]),
         cM('tertiary-depth', [
           c('svg', {
             raw: `
-              opacity: ${tertiaryOpacity}
+              opacity: ${opacityTertiaryDepth};
             `
           })
         ])

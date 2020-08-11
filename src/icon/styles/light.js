@@ -11,10 +11,10 @@ export default create({
       tertiaryOpacity
     } = derived
     return {
-      baseTextColor,
-      primaryOpacity,
-      secondaryOpacity,
-      tertiaryOpacity
+      color: baseTextColor,
+      opacityPrimaryDepth: primaryOpacity,
+      opacitySecondaryDepth: secondaryOpacity,
+      opacityTertiaryDepth: tertiaryOpacity
     }
   }
 })

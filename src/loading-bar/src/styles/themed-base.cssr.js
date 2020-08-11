@@ -4,8 +4,9 @@ import fadeInTransition from '../../../styles/_transitions/fade-in'
 export default c([
   ({ props }) => {
     const {
-      barHeight,
-      backgroundColor
+      height,
+      colorError,
+      colorLoading
     } = props.$local
     return cTB('loading-bar-container', {
       raw: `
@@ -24,27 +25,35 @@ export default c([
       cB('loading-bar', {
         raw: `
           width: 100%;
-          transition: max-width 4s linear, background-color .2s linear;
+          transition:
+            max-width 4s linear,
+            background-color .2s linear;
           max-width: 0;
-          height: ${barHeight};
+          height: ${height};
         `
       }, [
         cM('starting', {
           raw: `
-            background-color: ${backgroundColor['loading']};
-            transition: max-width 4s linear, background-color .2s linear;
+            background-color: ${colorLoading};
+            transition:
+              max-width 4s linear,
+              background-color .2s linear;
           `
         }),
         cM('finishing', {
           raw: `
-            background-color: ${backgroundColor['loading']};
-            transition: max-width .2s linear, background-color .2s linear;
+            background-color: ${colorLoading};
+            transition:
+              max-width .2s linear,
+              background-color .2s linear;
           `
         }),
         cM('error', {
           raw: `
-            background-color: ${backgroundColor['error']};
-            transition: max-width .2s linear, background-color .2s linear;
+            background-color: ${colorError};
+            transition:
+              max-width .2s linear,
+              background-color .2s linear;
           `
         })
       ])
