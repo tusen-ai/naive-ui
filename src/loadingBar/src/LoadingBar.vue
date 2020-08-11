@@ -1,6 +1,6 @@
 <template>
   <transition
-    name="n-loading-bar-container-transition"
+    name="n-fade-in-transition"
     appear
     @after-enter="handleAfterEnter"
     @after-leave="handleAfterLeave"
@@ -30,7 +30,11 @@
 </template>
 
 <script>
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
+
 export default {
+  name: 'LoadingBar',
   data () {
     return {
       progress: 0,
@@ -42,6 +46,9 @@ export default {
       activeAction: null
     }
   },
+  mixins: [
+    usecssr(styles)
+  ],
   computed: {
     syntheticTheme () {
       return this.theme || this.inheritedTheme

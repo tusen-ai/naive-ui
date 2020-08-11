@@ -136,6 +136,8 @@ import logDarkStyle from './log/styles/dark'
 import logLightStyle from './log/styles/light'
 import iconDarkStyle from './icon/styles/dark'
 import iconLightStyle from './icon/styles/light'
+import loadingBarLightStyle from './loadingBar/styles/light'
+import loadingBarDarkStyle from './loadingBar/styles/dark'
 import modalDarkStyle from './modal/styles/dark'
 import modalLightStyle from './modal/styles/light'
 
@@ -303,6 +305,8 @@ export default create({
     logLightStyle,
     iconDarkStyle,
     iconLightStyle,
+    loadingBarDarkStyle,
+    loadingBarLightStyle,
     modalDarkStyle,
     modalLightStyle,
     // Can be remove after refactoring
