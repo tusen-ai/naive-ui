@@ -12,7 +12,7 @@ export default create({
     return {
       textColor: secondaryTextColor,
       loaderTextColor: secondaryTextColor,
-      loaderBackgroundColor: modalBackgroundColor,
+      loaderColor: modalBackgroundColor,
       loaderBorderColor: borderColor
     }
   }

@@ -52,7 +52,11 @@ export default {
       NLog: this
     }
   },
-  mixins: [withapp, themeable, usecssr(styles)],
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   props: {
     loading: {
       type: Boolean,

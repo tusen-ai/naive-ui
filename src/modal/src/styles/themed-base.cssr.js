@@ -3,12 +3,12 @@ import { cTB, c, cB, cNotM } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      backgroundColor
+      color
     } = props.$local
     return cTB('modal-content', [
       cB('card', {
         raw: `
-          background-color: ${backgroundColor};
+          background-color: ${color};
         `
       }),
       cB('confirm', {
@@ -70,11 +70,11 @@ export default c([
           overflow: visible;
         `
       }, [
-        c('& >', [
+        c('>', [
           cB('scrollbar', [
-            c('& >', [
+            c('>', [
               cB('scrollbar-container', [
-                c('& >', [
+                c('>', [
                   cB('scrollbar-content', {
                     raw: `
                       min-height: 100%;

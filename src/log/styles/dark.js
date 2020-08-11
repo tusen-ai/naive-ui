@@ -11,7 +11,7 @@ export default create({
     return {
       textColor: secondaryTextOverlayColor,
       loaderTextColor: secondaryTextOverlayColor,
-      loaderBackgroundColor: inputOverlayBackgroundColor,
+      loaderColor: inputOverlayBackgroundColor,
       loaderBorderColor: 'transparent'
     }
   }
