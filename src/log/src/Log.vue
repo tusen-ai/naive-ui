@@ -36,9 +36,11 @@ import NLogLoader from './LogLoader'
 import NLogLine from './LogLine'
 import NFadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
 import throttle from 'lodash-es/throttle'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 export default {
-  name: 'NLog',
+  name: 'Log',
   components: {
     NScrollbar,
     NLogLoader,
@@ -50,7 +52,7 @@ export default {
       NLog: this
     }
   },
-  mixins: [withapp, themeable],
+  mixins: [withapp, themeable, usecssr(styles)],
   props: {
     loading: {
       type: Boolean,

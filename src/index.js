@@ -37,7 +37,7 @@ import InputNumber from './input-number'
 import Layout from './Layout'
 import List from './List'
 import LoadingBar from './LoadingBar'
-import Log from './Log'
+import Log from './log'
 import Menu from './Menu'
 import Message from './Message'
 import Modal from './Modal'
@@ -128,8 +128,10 @@ import tagDarkStyle from './tag/styles/dark'
 import tagLightStyle from './tag/styles/light'
 import transferDarkStyle from './transfer/styles/dark'
 import transferLightStyle from './transfer/styles/light'
-import typographyDarkStyle from './typography/styles/dark'
-import typographyLightStyle from './typography/styles/light'
+import typographyDarkStyle from './typography/styles/light'
+import typographyLightStyle from './typography/styles/dark'
+import logDarkStyle from './log/styles/dark'
+import logLightStyle from './log/styles/light'
 import iconDarkStyle from './icon/styles/dark'
 import iconLightStyle from './icon/styles/light'
 
@@ -291,6 +293,8 @@ export default create({
     confirmDarkStyle,
     gradientTextLightStyle,
     gradientTextDarkStyle,
+    logDarkStyle,
+    logLightStyle,
     iconDarkStyle,
     iconLightStyle,
     // Can be remove after refactoring
