@@ -42,7 +42,7 @@
 
 <script>
 import NTag from '../../tag'
-import NIcon from '../../Icon'
+import NIcon from '../../icon'
 import AddIcon from '../../_icons/add-outline'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'

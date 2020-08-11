@@ -1,6 +1,6 @@
 <script>
 import NDropdownMenu from './DropdownMenu'
-import NIcon from '../../Icon'
+import NIcon from '../../icon'
 import iosArrowForward from '../../_icons/ios-arrow-forward'
 import placeable from '../../_mixins/placeable'
 

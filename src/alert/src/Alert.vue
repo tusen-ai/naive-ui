@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import NIcon from '../../Icon'
+import NIcon from '../../icon'
 import mdCheckmarkCircle from '../../_icons/md-checkmark-circle'
 import mdAlert from '../../_icons/md-alert'
 import mdInformationCircle from '../../_icons/md-information-circle'

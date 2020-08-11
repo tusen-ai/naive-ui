@@ -57,7 +57,7 @@
 
 <script>
 import themeable from '../../_mixins/themeable'
-import NIcon from '../../Icon'
+import NIcon from '../../icon'
 import mdClose from '../../_icons/md-close'
 import mdCheckmarkCircle from '../../_icons/md-checkmark-circle'
 import mdAlert from '../../_icons/md-alert'

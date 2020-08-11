@@ -22,7 +22,7 @@
 <script>
 import iosArrowUp from '../../../_icons/ios-arrow-up'
 import iosArrowDown from '../../../_icons/ios-arrow-down'
-import NIcon from '../../../Icon'
+import NIcon from '../../../icon'
 
 export default {
   name: 'SortIcon',

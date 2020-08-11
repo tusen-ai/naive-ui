@@ -65,7 +65,7 @@ import trashOutline from '../../_icons/trash-outline'
 import NUploadProgress from './UploadProgress'
 import NFadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
 import attachOutline from '../../_icons/attach-outline'
-import NIcon from '../../Icon'
+import NIcon from '../../icon'
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 
 export default {

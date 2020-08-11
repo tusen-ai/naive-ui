@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import NIcon from '../../Icon'
+import NIcon from '../../icon'
 import iosArrowForward from '../../_icons/ios-arrow-forward'
 import collectable from '../../_mixins/collectable'
 import NCollapseItemContent from './CollapseItemContent'

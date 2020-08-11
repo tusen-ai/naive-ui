@@ -48,7 +48,7 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import NIcon from '../../Icon'
+import NIcon from '../../icon'
 import mdClose from '../../_icons/md-close'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles'

@@ -29,7 +29,7 @@ import Empty from './empty'
 import Form from './Form'
 import GradientText from './gradient-text'
 import Grid from './Grid'
-import Icon from './Icon'
+import Icon from './icon'
 import Input from './input'
 import InputGroup from './input-group'
 import InputGroupLabelStyle from './input-group-label'
@@ -128,8 +128,10 @@ import tagDarkStyle from './tag/styles/dark'
 import tagLightStyle from './tag/styles/light'
 import transferDarkStyle from './transfer/styles/dark'
 import transferLightStyle from './transfer/styles/light'
-import typographyDarkStyle from './typography/styles/light'
-import typographyLightStyle from './typography/styles/dark'
+import typographyDarkStyle from './typography/styles/dark'
+import typographyLightStyle from './typography/styles/light'
+import iconDarkStyle from './icon/styles/dark'
+import iconLightStyle from './icon/styles/light'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -289,6 +291,8 @@ export default create({
     confirmDarkStyle,
     gradientTextLightStyle,
     gradientTextDarkStyle,
+    iconDarkStyle,
+    iconLightStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle

@@ -228,7 +228,7 @@
 </template>
 
 <script>
-import NIcon from '../../Icon'
+import NIcon from '../../icon'
 import mdCheckmark from '../../_icons/md-checkmark'
 import mdClose from '../../_icons/md-close'
 import mdAlert from '../../_icons/md-alert'

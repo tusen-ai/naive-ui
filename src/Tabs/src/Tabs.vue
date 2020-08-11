@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import NIcon from '../../Icon'
+import NIcon from '../../icon'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import iosArrowBack from '../../_icons/ios-arrow-back'

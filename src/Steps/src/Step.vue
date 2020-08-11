@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import NIcon from '../../Icon'
+import NIcon from '../../icon'
 import mdClose from '../../_icons/md-close'
 import mdCheckmark from '../../_icons/md-checkmark'
 import themeable from '../../_mixins/themeable'

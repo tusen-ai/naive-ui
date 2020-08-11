@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import NIcon from '../../Icon/index'
+import NIcon from '../../icon/index'
 import RemoveIcon from '../../_icons/remove-outline'
 import AddIcon from '../../_icons/add-outline'
 import themeable from '../../_mixins/themeable'

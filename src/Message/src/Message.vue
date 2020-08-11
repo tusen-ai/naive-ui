@@ -1,5 +1,5 @@
 <script>
-import NIcon from '../../Icon/index'
+import NIcon from '../../icon/index'
 import mdCheckmarkCircle from '../../_icons/md-checkmark-circle'
 import mdAlert from '../../_icons/md-alert'
 import mdInformationCircle from '../../_icons/md-information-circle'

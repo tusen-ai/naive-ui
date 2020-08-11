@@ -93,7 +93,7 @@ import NFadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandT
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 import NBaseLoading from '../../_base/loading'
 import NBaseWave from '../../_base/wave/index.js'
-import NIcon from '../../Icon/index.js'
+import NIcon from '../../icon/index.js'
 import styles from './styles/index.js'
 import { read, hash } from '../../_utils/color/index.js'
 import colorStyle from './styles/themed-color.cssr.js'

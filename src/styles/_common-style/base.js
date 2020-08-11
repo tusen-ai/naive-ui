@@ -13,7 +13,7 @@ export default {
 
   lineHeight: '1.75',
 
-  iconTransition: 'fill .3s $--n-ease-in-out-cubic-bezier, stroke .3s $--n-ease-in-out-cubic-bezier',
+  iconTransition: 'fill .3s cubic-bezier(.4, 0, .2, 1), stroke .3s cubic-bezier(.4, 0, .2, 1)',
 
   transformDebounceScale: 'scale(0.99999)',
 

@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import NIcon from '../../../Icon'
+import NIcon from '../../../icon'
 import NDataTableFilterMenu from './FilterMenu'
 import NPopover from '../../../Popover'
 import funnel from '../../../_icons/funnel'

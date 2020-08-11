@@ -42,7 +42,7 @@
 
 <script>
 import NButton from '../../button'
-import NIcon from '../../Icon'
+import NIcon from '../../icon'
 import mdAlert from '../../_icons/md-alert'
 import locale from '../../_mixins/locale'
 
