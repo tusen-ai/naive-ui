@@ -35,7 +35,7 @@ import InputGroup from './input-group'
 import InputGroupLabelStyle from './input-group-label'
 import InputNumber from './input-number'
 import Layout from './Layout'
-import List from './List'
+import List from './list'
 import LoadingBar from './LoadingBar'
 import Log from './log'
 import Menu from './Menu'
@@ -130,6 +130,8 @@ import transferDarkStyle from './transfer/styles/dark'
 import transferLightStyle from './transfer/styles/light'
 import typographyDarkStyle from './typography/styles/light'
 import typographyLightStyle from './typography/styles/dark'
+import listDarkStyle from './list/styles/dark'
+import listLightStyle from './list/styles/light'
 import logDarkStyle from './log/styles/dark'
 import logLightStyle from './log/styles/light'
 import iconDarkStyle from './icon/styles/dark'
@@ -293,6 +295,8 @@ export default create({
     confirmDarkStyle,
     gradientTextLightStyle,
     gradientTextDarkStyle,
+    listDarkStyle,
+    listLightStyle,
     logDarkStyle,
     logLightStyle,
     iconDarkStyle,

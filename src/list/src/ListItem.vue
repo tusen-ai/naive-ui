@@ -14,6 +14,6 @@
 
 <script>
 export default {
-  name: 'NListItem'
+  name: 'ListItem'
 }
 </script>
