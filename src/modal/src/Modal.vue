@@ -6,13 +6,16 @@ import zindexable from '../../_mixins/zindexable'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import presetProps from './presetProps'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 export default {
-  name: 'NModal',
+  name: 'Modal',
   mixins: [
     withapp,
     zindexable,
-    themeable
+    themeable,
+    usecssr(styles)
   ],
   model: {
     prop: 'show',

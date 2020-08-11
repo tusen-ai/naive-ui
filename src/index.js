@@ -40,7 +40,7 @@ import LoadingBar from './LoadingBar'
 import Log from './log'
 import Menu from './Menu'
 import Message from './Message'
-import Modal from './Modal'
+import Modal from './modal'
 import Notification from './Notification'
 import Pagination from './Pagination'
 import Popconfirm from './Popconfirm'
@@ -136,6 +136,8 @@ import logDarkStyle from './log/styles/dark'
 import logLightStyle from './log/styles/light'
 import iconDarkStyle from './icon/styles/dark'
 import iconLightStyle from './icon/styles/light'
+import modalDarkStyle from './modal/styles/dark'
+import modalLightStyle from './modal/styles/light'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -301,6 +303,8 @@ export default create({
     logLightStyle,
     iconDarkStyle,
     iconLightStyle,
+    modalDarkStyle,
+    modalLightStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle

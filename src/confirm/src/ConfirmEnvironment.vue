@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import NModal from '../../Modal'
+import NModal from '../../modal'
 import NConfirm from './Confirm'
 
 export default {
