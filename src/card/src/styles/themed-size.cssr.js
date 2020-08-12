@@ -69,7 +69,7 @@ export default c([
               padding: `0 ${marginLeftSize} ${marginBottomSize} ${marginLeftSize}`,
               fontSize: '14px'
             }, [
-              c('$:first-child', {
+              c('&:first-child', {
                 paddingTop: marginBottomSize
               })
             ]),
