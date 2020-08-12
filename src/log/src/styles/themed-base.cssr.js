@@ -40,7 +40,8 @@ export default c([
         raw: `
           transition:
             color .3s ${easeInOutCubicBezier},
-            background-color .3s ${easeInOutCubicBezier};
+            background-color .3s ${easeInOutCubicBezier},
+            border-color .3s ${easeInOutCubicBezier};
           box-sizing: border-box;
           position: absolute;
           right: 16px;
