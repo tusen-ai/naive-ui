@@ -15,10 +15,8 @@ export default create({
     } = base
     return {
       textColor: secondaryTextOverlayColor,
-      backgroundColor: {
-        default: cardBackgroundColor,
-        modal: modalBackgroundColor
-      },
+      color: cardBackgroundColor,
+      colorModal: modalBackgroundColor,
       borderColor: dividerOverlayColor,
       borderRadius
     }

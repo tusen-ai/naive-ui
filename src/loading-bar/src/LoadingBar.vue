@@ -35,6 +35,9 @@ import styles from './styles'
 
 export default {
   name: 'LoadingBar',
+  mixins: [
+    usecssr(styles)
+  ],
   data () {
     return {
       progress: 0,
@@ -46,9 +49,6 @@ export default {
       activeAction: null
     }
   },
-  mixins: [
-    usecssr(styles)
-  ],
   computed: {
     syntheticTheme () {
       return this.theme || this.inheritedTheme

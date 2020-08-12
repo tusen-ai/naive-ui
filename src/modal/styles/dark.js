@@ -9,7 +9,7 @@ export default create({
       secondaryTextOverlayColor
     } = derived
     return {
-      backgroundColor: modalBackgroundColor,
+      color: modalBackgroundColor,
       textColor: secondaryTextOverlayColor
     }
   }

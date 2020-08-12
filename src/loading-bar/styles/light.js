@@ -9,11 +9,9 @@ export default create({
       errorColor
     } = derived
     return {
-      backgroundColor: {
-        error: errorColor,
-        loading: successColor
-      },
-      barHeight: '2px'
+      colorError: errorColor,
+      colorLoading: successColor,
+      height: '2px'
     }
   }
 })

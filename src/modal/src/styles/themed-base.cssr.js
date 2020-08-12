@@ -1,29 +1,29 @@
 import { cTB, c, cB, cNotM } from '../../../_utils/cssr'
+import fadeInTransition from '../../../styles/_transitions/fade-in'
+import fadeInScaleUpTransition from '../../../styles/_transitions/fade-in-scale-up'
 
 export default c([
   ({ props }) => {
     const {
-      backgroundColor
-    } = props.$local
-    return cTB('modal-content', [
-      cB('card', {
-        raw: `
-          background-color: ${backgroundColor};
-        `
-      }),
-      cB('confirm', {
-        raw: `
-          width: 446px;
-          max-width: calc(100vw - 32px);
-        `
-      })
-    ])
-  },
-  ({ props }) => {
-    const {
-      transformDebounceScale
+      easeOutCubicBezier
     } = props.$base
+    const {
+      color
+    } = props.$local
     return [
+      cTB('modal-content', [
+        cB('card', {
+          raw: `
+            background-color: ${color};
+          `
+        }),
+        cB('confirm', {
+          raw: `
+            width: 446px;
+            max-width: calc(100vw - 32px);
+          `
+        })
+      ]),
       cB('modal-container', {
         raw: `
           position: fixed;
@@ -44,20 +44,11 @@ export default c([
           background-color: rgba(0, 0, 0, .4);
         `
       }, [
-        c(`&&-transition-enter-active`, {
-          raw: `
-            transition: background-color .3s cubic-bezier(0.0, 0.0, 0.2, 1);
-          `
-        }),
-        c(`&&-transition-leave-active`, {
-          raw: `
-            transition: background-color .3s cubic-bezier(0.0, 0.0, 0.2, 1);
-          `
-        }),
-        c(`&&-transition-enter, &&-transition-leave-to`, {
-          raw: `
-            background-color: rgba(0, 0, 0, 0);
-          `
+        fadeInTransition({
+          enterDuration: '.25s',
+          leaveDuration: '.25s',
+          enterCubicBezier: easeOutCubicBezier,
+          leaveCubicBezier: easeOutCubicBezier
         })
       ]),
       cB('modal-content', {
@@ -70,11 +61,11 @@ export default c([
           overflow: visible;
         `
       }, [
-        c('& >', [
+        c('>', [
           cB('scrollbar', [
-            c('& >', [
+            c('>', [
               cB('scrollbar-container', [
-                c('& >', [
+                c('>', [
                   cB('scrollbar-content', {
                     raw: `
                       min-height: 100%;
@@ -97,25 +88,9 @@ export default c([
           position: relative;
         `
       }, [
-        c(`&&-transition-enter-active`, {
-          raw: `
-            opacity: 1;
-            transition: opacity .3s cubic-bezier(.4, 0, .2, 1), transform .3s cubic-bezier(0.0, 0.0, 0.2, 1);
-            transform: ${transformDebounceScale};
-          `
-        }),
-        c(`&&-transition-leave-active`, {
-          raw: `
-            opacity: 1;
-            transition: opacity .3s cubic-bezier(.4, 0, .2, 1), transform .3s cubic-bezier(0.4, 0.0, 1, 1);
-            transform:  ${transformDebounceScale};
-          `
-        }),
-        c(`&&-transition-enter, &&-transition-leave-to`, {
-          raw: `
-            opacity: 0;
-            transform: scale(.5);
-          `
+        fadeInScaleUpTransition({
+          duration: '.25s',
+          enterScale: '.5'
         })
       ])
     ]
