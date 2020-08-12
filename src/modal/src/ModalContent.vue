@@ -9,7 +9,7 @@
   >
     <n-scrollbar ref="scrollbar" @scroll="handleScroll">
       <transition
-        name="n-modal-content-slot-transition"
+        name="n-fade-in-scale-up-transition"
         @enter="handleEnter"
         @after-leave="handleAfterLeave"
         @before-leave="handleBeforeLeave"
