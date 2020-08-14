@@ -2,6 +2,8 @@
 ## PENDING
 ### Breaking Change
 - 修正了所有 `separator` 的拼写（原来错拼为 `seperator`）
+### Fixes
+- 修正了未设定主题时样式报错的问题
 
 ## 1.5.4 (2020-08-08)
 ### Fixes

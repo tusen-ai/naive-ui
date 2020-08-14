@@ -2,6 +2,8 @@
 ## PENDING
 ### Breaking Change
 - Fix all typos of `separator`. (Originally it was `seperator`.)
+### Fixes
+- Fix the problem that when theme is not set, style errors will be logged.
 
 ## 1.5.4 (2020-08-08)
 ### Fixes

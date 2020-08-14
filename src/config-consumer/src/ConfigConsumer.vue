@@ -29,7 +29,7 @@ export default {
       language: this.NConfigProvider ? this.NConfigProvider.inheritedLanguage : null,
       namespace: this.NConfigProvider ? this.NConfigProvider.inheritedNamespace : null,
       themeEnvironment: this.syntheticThemeEnvironment,
-      styleScheme: this.syntheticTheme ? styleScheme[this.syntheticTheme] : null
+      styleScheme: styleScheme[this.syntheticTheme || this.$naive.fallbackTheme]
     }) : []
     if (defaultSlot.length > 1) {
       console.error(
