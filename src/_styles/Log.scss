@@ -1,60 +1,60 @@
-@import './mixins/mixins.scss';
+// @import './mixins/mixins.scss';
 
-@include themes-mixin {
-  @include b(log) {
-    @include once {
-      position: relative;
-      font-size: 14px;
-      box-sizing: border-box;
-      transition:
-        border-color .3s $--n-ease-in-out-cubic-bezier,
-        color .3s $--n-ease-in-out-cubic-bezier;
-      @include e(lines) {
-        margin: 0;
-        white-space: pre-wrap;
-      }
-      @include e(line) {
-        font-family: $--n-mono-font-family;
-        margin: 0;
-      } 
-    }
-    color: $--log-text-color;
-    @include b(log-loader) {
-      @include once {
-        @include fade-in-width-expand-transition($duration: .3s, $delay: 0s);
-        transition:
-          color .3s $--n-ease-in-out-cubic-bezier,
-          background-color .3s $--n-ease-in-out-cubic-bezier;
-        box-sizing: border-box;
-        position: absolute;
-        right: 16px;
-        top: 8px;
-        height: 34px;
-        border-radius: 17px;
-        line-height: 34px;
-        white-space: nowrap;
-        overflow: hidden;
-        @include e(content) {
-          display: inline-block;
-          vertical-align: bottom;
-          line-height: 34px;
-          padding-left: 40px;
-          padding-right: 20px;
-          white-space: nowrap;
-        }
-        @include b(base-loading) {
-          position: absolute;
-          left: 12px;
-          top: calc(50% - 10px);
-          font-size: 20px;
-          width: 20px;
-          height: 20px;
-          display: inline-block;
-        }
-      }
-      border: 1px solid $--log-loader-border-color;
-      color: $--log-loader-text-color;
-      background-color: $--log-loader-background-color;
-    }
-  }
-}
+// @include themes-mixin {
+//   @include b(log) {
+//     @include once {
+//       position: relative;
+//       font-size: 14px;
+//       box-sizing: border-box;
+//       transition:
+//         border-color .3s $--n-ease-in-out-cubic-bezier,
+//         color .3s $--n-ease-in-out-cubic-bezier;
+//       @include e(lines) {
+//         margin: 0;
+//         white-space: pre-wrap;
+//       }
+//       @include e(line) {
+//         font-family: $--n-mono-font-family;
+//         margin: 0;
+//       } 
+//     }
+//     color: $--log-text-color;
+//     @include b(log-loader) {
+//       @include once {
+//         @include fade-in-width-expand-transition($duration: .3s, $delay: 0s);
+//         transition:
+//           color .3s $--n-ease-in-out-cubic-bezier,
+//           background-color .3s $--n-ease-in-out-cubic-bezier;
+//         box-sizing: border-box;
+//         position: absolute;
+//         right: 16px;
+//         top: 8px;
+//         height: 34px;
+//         border-radius: 17px;
+//         line-height: 34px;
+//         white-space: nowrap;
+//         overflow: hidden;
+//         @include e(content) {
+//           display: inline-block;
+//           vertical-align: bottom;
+//           line-height: 34px;
+//           padding-left: 40px;
+//           padding-right: 20px;
+//           white-space: nowrap;
+//         }
+//         @include b(base-loading) {
+//           position: absolute;
+//           left: 12px;
+//           top: calc(50% - 10px);
+//           font-size: 20px;
+//           width: 20px;
+//           height: 20px;
+//           display: inline-block;
+//         }
+//       }
+//       border: 1px solid $--log-loader-border-color;
+//       color: $--log-loader-text-color;
+//       background-color: $--log-loader-background-color;
+//     }
+//   }
+// }
