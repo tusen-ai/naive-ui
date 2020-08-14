@@ -1,9 +1,9 @@
-import { cTB, c, cB, cE, cM } from '../../../_utils/cssr'
+import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
     return [
-      cTB('popconfirm-content', {
+      cB('popconfirm-content', {
         raw: `
           padding: 4px 0;
         `
