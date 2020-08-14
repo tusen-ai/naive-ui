@@ -43,6 +43,8 @@ import Message from './Message'
 import Modal from './modal'
 import Notification from './Notification'
 import Pagination from './Pagination'
+import Popconfirm from './pop-confirm'
+import Popselect from './Popselect'
 import Popconfirm from './Popconfirm'
 import Popselect from './pop-select'
 import Popup from './Popover'
@@ -140,6 +142,8 @@ import loadingBarLightStyle from './loading-bar/styles/light'
 import loadingBarDarkStyle from './loading-bar/styles/dark'
 import modalDarkStyle from './modal/styles/dark'
 import modalLightStyle from './modal/styles/light'
+import popConfirmDarkStyle from './pop-confirm/styles/dark'
+import popConfirmLightStyle from './pop-confirm/styles/light'
 import popSelectLightStyle from './pop-select/styles/light'
 import popSelectDarkStyle from './pop-select/styles/dark'
 import resultDarkStyle from './result/styles/dark'
@@ -313,6 +317,8 @@ export default create({
     loadingBarLightStyle,
     modalDarkStyle,
     modalLightStyle,
+    popConfirmDarkStyle,
+    popConfirmLightStyle,
     popSelectLightStyle,
     popSelectDarkStyle,
     resultDarkStyle,

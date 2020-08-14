@@ -3,7 +3,7 @@ import NPopover from '../../Popover'
 import PopconfirmPanel from './PopconfirmPanel'
 
 export default {
-  name: 'NPopconfirm',
+  name: 'Popconfirm',
   functional: true,
   props: {
     ...NPopover.props,
