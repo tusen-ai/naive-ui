@@ -48,7 +48,7 @@ import Popselect from './Popselect'
 import Popup from './Popover'
 import Progress from './progress'
 import Radio from './Radio'
-import Result from './Result'
+import Result from './result'
 import Scrollbar from './Scrollbar'
 import Select from './Select'
 import Slider from './Slider'
@@ -140,6 +140,8 @@ import loadingBarLightStyle from './loading-bar/styles/light'
 import loadingBarDarkStyle from './loading-bar/styles/dark'
 import modalDarkStyle from './modal/styles/dark'
 import modalLightStyle from './modal/styles/light'
+import resultDarkStyle from './result/styles/dark'
+import resultLightStyle from './result/styles/light'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -309,6 +311,8 @@ export default create({
     loadingBarLightStyle,
     modalDarkStyle,
     modalLightStyle,
+    resultDarkStyle,
+    resultLightStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle

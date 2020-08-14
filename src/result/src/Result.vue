@@ -54,9 +54,11 @@ import image404 from './404.vue'
 import image500 from './500.vue'
 import image418 from './418.vue'
 import image403 from './403.vue'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 export default {
-  name: 'NResult',
+  name: 'Result',
   components: {
     iosCheckmarkCircle,
     iosAlert,
@@ -68,7 +70,11 @@ export default {
     image418,
     image500
   },
-  mixins: [ withapp, themeable ],
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   props: {
     size: {
       validator (value) {
