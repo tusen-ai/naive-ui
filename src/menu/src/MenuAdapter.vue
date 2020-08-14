@@ -8,7 +8,7 @@ import MenuItemGroup from './MenuItemGroup.vue'
 // Todo remove unnecessary attrs
 // Todo refactor to remove slot
 export default {
-  name: 'NMenu',
+  name: 'Menu',
   functional: true,
   render (h, context) {
     if (context.props.items) {

@@ -38,7 +38,7 @@ import Layout from './Layout'
 import List from './list'
 import LoadingBar from './loading-bar'
 import Log from './log'
-import Menu from './Menu'
+import Menu from './menu'
 import Message from './Message'
 import Modal from './modal'
 import Notification from './Notification'
@@ -138,6 +138,8 @@ import iconDarkStyle from './icon/styles/dark'
 import iconLightStyle from './icon/styles/light'
 import loadingBarLightStyle from './loading-bar/styles/light'
 import loadingBarDarkStyle from './loading-bar/styles/dark'
+import menuDarkStyle from './menu/styles/dark'
+import menuLightStyle from './menu/styles/light'
 import modalDarkStyle from './modal/styles/dark'
 import modalLightStyle from './modal/styles/light'
 import popConfirmDarkStyle from './popconfirm/styles/dark'
@@ -321,6 +323,8 @@ export default create({
     popSelectDarkStyle,
     resultDarkStyle,
     resultLightStyle,
+    menuDarkStyle,
+    menuLightStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle

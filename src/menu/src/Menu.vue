@@ -17,6 +17,8 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/index'
 
 export default {
   name: 'Menu',
@@ -26,7 +28,11 @@ export default {
       NSubmenu: null
     }
   },
-  mixins: [ withapp, themeable ],
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   model: {
     prop: 'value',
     model: 'select'
