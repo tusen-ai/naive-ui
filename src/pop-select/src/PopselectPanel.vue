@@ -17,12 +17,19 @@
 import NBaseSelectMenu from '../../_base/select-menu'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 export default {
   components: {
     NBaseSelectMenu
   },
-  mixins: [withapp, themeable],
+  cssrName: 'Popselect',
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   props: {
     multiple: {
       type: Boolean,

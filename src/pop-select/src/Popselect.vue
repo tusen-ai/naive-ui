@@ -4,7 +4,7 @@ import NPopselectPanel from './PopselectPanel'
 import emptyFunction from '../../_utils/function/empty'
 
 export default {
-  name: 'NPopselect',
+  name: 'Popselect',
   provide () {
     return {
       NPopselect: this
