@@ -43,12 +43,14 @@ import Message from './Message'
 import Modal from './modal'
 import Notification from './Notification'
 import Pagination from './Pagination'
-import Popconfirm from './Popconfirm'
+import Popconfirm from './pop-confirm'
 import Popselect from './Popselect'
+import Popconfirm from './Popconfirm'
+import Popselect from './pop-select'
 import Popup from './Popover'
 import Progress from './progress'
 import Radio from './Radio'
-import Result from './Result'
+import Result from './result'
 import Scrollbar from './Scrollbar'
 import Select from './Select'
 import Slider from './Slider'
@@ -140,6 +142,12 @@ import loadingBarLightStyle from './loading-bar/styles/light'
 import loadingBarDarkStyle from './loading-bar/styles/dark'
 import modalDarkStyle from './modal/styles/dark'
 import modalLightStyle from './modal/styles/light'
+import popConfirmDarkStyle from './pop-confirm/styles/dark'
+import popConfirmLightStyle from './pop-confirm/styles/light'
+import popSelectLightStyle from './pop-select/styles/light'
+import popSelectDarkStyle from './pop-select/styles/dark'
+import resultDarkStyle from './result/styles/dark'
+import resultLightStyle from './result/styles/light'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -309,6 +317,12 @@ export default create({
     loadingBarLightStyle,
     modalDarkStyle,
     modalLightStyle,
+    popConfirmDarkStyle,
+    popConfirmLightStyle,
+    popSelectLightStyle,
+    popSelectDarkStyle,
+    resultDarkStyle,
+    resultLightStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle

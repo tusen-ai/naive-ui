@@ -1,79 +1,79 @@
-@import './mixins/mixins.scss';
+// @import './mixins/mixins.scss';
 
-@mixin result-status-mixin ($status){
-  @include m($status + '-status') {
-    @include b(result-icon) {
-      @include b(icon) {
-        fill: map-get($--result-icon-color, $status);
-        stroke: map-get($--result-icon-color, $status);
-      }
-    }
-  }
-}
+// @mixin result-status-mixin ($status){
+//   @include m($status + '-status') {
+//     @include b(result-icon) {
+//       @include b(icon) {
+//         fill: map-get($--result-icon-color, $status);
+//         stroke: map-get($--result-icon-color, $status);
+//       }
+//     }
+//   }
+// }
 
-@mixin result-size-mixin ($size) {
-  @include m($size + '-size') {
-    @include b(result-icon) {
-      display: flex;
-      justify-content: center;
-      @include e(status-image) {
-        width: map-get($--n-result-icon-size, $size);
-      }
-    }
-    @include b(result-header) {
-      @include e(title) {
-        font-size: map-get($--n-result-header-font-size, $size);
-      }
-      @include e(description) {
-        font-size: map-get($--n-result-description-font-size, $size);
-      }
-    }
-  }
-}
+// @mixin result-size-mixin ($size) {
+//   @include m($size + '-size') {
+//     @include b(result-icon) {
+//       display: flex;
+//       justify-content: center;
+//       @include e(status-image) {
+//         width: map-get($--n-result-icon-size, $size);
+//       }
+//     }
+//     @include b(result-header) {
+//       @include e(title) {
+//         font-size: map-get($--n-result-header-font-size, $size);
+//       }
+//       @include e(description) {
+//         font-size: map-get($--n-result-description-font-size, $size);
+//       }
+//     }
+//   }
+// }
 
-@include themes-mixin {
-  @include b(result) {
-    color: $--result-description-text-color;
-    @include result-status-mixin('success');
-    @include result-status-mixin('info');
-    @include result-status-mixin('warning');
-    @include result-status-mixin('error');
-    @include once {
-      @include result-size-mixin('small');
-      @include result-size-mixin('medium');
-      @include result-size-mixin('large');
-      @include result-size-mixin('huge');
-      line-height: $--n-line-height;
-      font-size: 14px;
-      transition: color .3s $--n-ease-in-out-cubic-bezier;
-      @include b(result-icon) {
-        display: flex;
-        justify-content: center;
-      }
-      @include b(result-content) {
-        margin-top: 24px;
-      }
-      @include b(result-footer) {
-        margin-top: 24px;
-        text-align: center;
-      }
-    }
-    @include b(result-header) {
-      @include e(title) {
-        @include once {
-          margin-top: 16px;
-          font-weight: $--n-strong-weight;
-          transition: color .3s $--n-ease-in-out-cubic-bezier;
-          text-align: center;
-        }
-        color: $--result-header-text-color;
-      }
-      @include once {
-        @include e(description) {
-          margin-top: 4px;
-          text-align: center;
-        }
-      }
-    }
-  }
-}
+// @include themes-mixin {
+//   @include b(result) {
+//     color: $--result-description-text-color;
+//     @include result-status-mixin('success');
+//     @include result-status-mixin('info');
+//     @include result-status-mixin('warning');
+//     @include result-status-mixin('error');
+//     @include once {
+//       @include result-size-mixin('small');
+//       @include result-size-mixin('medium');
+//       @include result-size-mixin('large');
+//       @include result-size-mixin('huge');
+//       line-height: $--n-line-height;
+//       font-size: 14px;
+//       transition: color .3s $--n-ease-in-out-cubic-bezier;
+//       @include b(result-icon) {
+//         display: flex;
+//         justify-content: center;
+//       }
+//       @include b(result-content) {
+//         margin-top: 24px;
+//       }
+//       @include b(result-footer) {
+//         margin-top: 24px;
+//         text-align: center;
+//       }
+//     }
+//     @include b(result-header) {
+//       @include e(title) {
+//         @include once {
+//           margin-top: 16px;
+//           font-weight: $--n-strong-weight;
+//           transition: color .3s $--n-ease-in-out-cubic-bezier;
+//           text-align: center;
+//         }
+//         color: $--result-header-text-color;
+//       }
+//       @include once {
+//         @include e(description) {
+//           margin-top: 4px;
+//           text-align: center;
+//         }
+//       }
+//     }
+//   }
+// }

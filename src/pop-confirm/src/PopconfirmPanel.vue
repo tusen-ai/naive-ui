@@ -45,15 +45,25 @@ import NButton from '../../button'
 import NIcon from '../../icon'
 import mdAlert from '../../_icons/md-alert'
 import locale from '../../_mixins/locale'
+import withapp from '../../_mixins/withapp'
+import themeable from '../../_mixins/themeable'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 export default {
   name: 'NPopconfirmPanel',
+  cssrName: 'Popconfirm',
   components: {
     NButton,
     NIcon,
     mdAlert
   },
-  mixins: [ locale('Popconfirm') ],
+  mixins: [
+    locale('Popconfirm'),
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   props: {
     positiveText: {
       type: String,
