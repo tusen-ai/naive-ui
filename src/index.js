@@ -17,7 +17,7 @@ import ConfigConsumer from './config-consumer'
 import ConfigProvider from './config-provider'
 import ConfirmPlugin from './confirm'
 import DataTable from './data-table'
-import DatePicker from './DatePicker'
+import DatePicker from './date-picker'
 import Descriptions from './Descriptions'
 import Divider from './divider'
 import Drawer from './drawer'
@@ -54,7 +54,7 @@ import Select from './Select'
 import Slider from './Slider'
 import Spin from './Spin'
 import Statistic from './Statistic'
-import Steps from './Steps'
+import Steps from './steps'
 import Switch from './Switch'
 import Table from './Table'
 import Tabs from './Tabs'
@@ -102,6 +102,8 @@ import confirmDarkStyle from './confirm/styles/dark'
 import confirmLightStyle from './confirm/styles/light'
 import dataTableDarkStyle from './data-table/styles/dark'
 import dataTableLightStyle from './data-table/styles/light'
+import datePickerDarkStyle from './date-picker/styles/dark'
+import datePickerLightStyle from './date-picker/styles/light'
 import dividerDarkStyle from './divider/styles/dark'
 import dividerLightStyle from './divider/styles/light'
 import drawerDarkStyle from './drawer/styles/dark'
@@ -148,6 +150,8 @@ import popSelectLightStyle from './popselect/styles/light'
 import popSelectDarkStyle from './popselect/styles/dark'
 import resultDarkStyle from './result/styles/dark'
 import resultLightStyle from './result/styles/light'
+import stepsDarkStyle from './steps/styles/dark'
+import stepsLightStyle from './steps/styles/light'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -325,6 +329,10 @@ export default create({
     resultLightStyle,
     menuDarkStyle,
     menuLightStyle,
+    datePickerDarkStyle,
+    datePickerLightStyle,
+    stepsDarkStyle,
+    stepsLightStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle
