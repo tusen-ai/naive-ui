@@ -68,6 +68,10 @@ function create ({
       component.install(Vue, naive)
     }
   }
+  if (process.env.NODE_ENV !== 'production') {
+    if (!window.naive) window.naive = {}
+    window.naive.styles = styles
+  }
   return naive
 }
 

@@ -6,6 +6,7 @@ export default create({
   name: 'Menu',
   getDerivedVariables ({ base, derived }) {
     return {
+      borderRadius: base.borderRadius,
       groupTextColor: derived.tertiaryTextColor,
       itemColorMatch: changeColor(derived.primaryColor, { alpha: 0.1 }),
       itemTextColor: derived.secondaryTextColor,
