@@ -1,4 +1,4 @@
-import { CSSRender } from 'css-render'
+import CSSRender from 'css-render'
 import BEMPlugin from '@css-render/plugin-bem'
 
 const namespace = 'n'

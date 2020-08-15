@@ -1,5 +1,5 @@
 # CHANGELOG
-## PENDING
+## 1.5.5 (2020-08-15)
 ### Breaking Change
 - Fix all typos of `separator`. (Originally it was `seperator`.)
 ### Fixes

@@ -1,5 +1,5 @@
 # CHANGELOG
-## PENDING
+## 1.5.5 (2020-08-15)
 ### Breaking Change
 - 修正了所有 `separator` 的拼写（原来错拼为 `seperator`）
 ### Fixes
