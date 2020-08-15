@@ -59,7 +59,10 @@ function setupMutableStyle (
   const name = options.cssrName || options.name
   const id = options.cssrId || name
   const renderedTheme = theme || fallbackTheme
-  const dependencyValue = dependencyKey === 'syntheticTheme' ? renderedTheme : instance[dependencyKey]
+  const dependencyValue = (
+    dependencyKey === 'syntheticTheme' ||
+    dependencyKey === 'theme'
+  ) ? renderedTheme : instance[dependencyKey]
   if (
     process.env.NODE_ENV !== 'production' &&
     (dependencyValue === null || dependencyValue === undefined)

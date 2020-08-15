@@ -23,7 +23,7 @@ export default c([
       iconColorInfo,
       iconColorWarning,
       lineHeight,
-      strongFontWeight
+      headerFontWeight
     } = props.$local
     const {
       easeInOutCubicBezier
@@ -65,7 +65,7 @@ export default c([
         cE('title', {
           raw: `
             margin-top: 16px;
-            font-weight: ${strongFontWeight};
+            font-weight: ${headerFontWeight};
             transition: color .3s ${easeInOutCubicBezier};
             text-align: center;
             color: ${headerTextColor};

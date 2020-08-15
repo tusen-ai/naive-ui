@@ -6,7 +6,11 @@ export default function createRouter (Vue, routes) {
     routes
   })
   router.beforeEach(function (to, from, next) {
-    Vue.prototype.$NLoadingBar.theme = to.params.theme
+    let theme = to.params.theme
+    if (theme === 'os-theme') {
+      theme = Vue.prototype.$NOs.theme
+    }
+    Vue.prototype.$NLoadingBar.theme = theme
     if (to.path !== from.path) {
       Vue.prototype.$NLoadingBar.start()
     }

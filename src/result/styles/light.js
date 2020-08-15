@@ -20,7 +20,7 @@ export default create({
     return {
       ...sizeVariables,
       lineHeight,
-      strongFontWeight,
+      headerFontWeight: strongFontWeight,
       headerTextColor: primaryTextColor,
       descriptionTextColor: secondaryTextColor,
       iconColorError: errorColor,

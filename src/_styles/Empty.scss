@@ -1,52 +1,52 @@
-@import "./mixins/mixins.scss";
+// @import "./mixins/mixins.scss";
 
-@mixin empty-size-mixin($size) {
-  @include m($size + '-size') {
-    font-size: map-get($--n-empty-font-size, $size);
-    @include e(icon) {
-      width: map-get($--n-empty-icon-size, $size);
-      height: map-get($--n-empty-icon-size, $size);
-      font-size: map-get($--n-empty-icon-size, $size);
-      line-height: map-get($--n-empty-icon-size, $size);
-    }
-  }
-}
+// @mixin empty-size-mixin($size) {
+//   @include m($size + '-size') {
+//     font-size: map-get($--n-empty-font-size, $size);
+//     @include e(icon) {
+//       width: map-get($--n-empty-icon-size, $size);
+//       height: map-get($--n-empty-icon-size, $size);
+//       font-size: map-get($--n-empty-icon-size, $size);
+//       line-height: map-get($--n-empty-icon-size, $size);
+//     }
+//   }
+// }
 
-@include themes-mixin {
-  @include b(empty) {
-    @include once {
-      @include empty-size-mixin('small');
-      @include empty-size-mixin('medium');
-      @include empty-size-mixin('large');
-      @include empty-size-mixin('huge');
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-size: 14px;
-    }
-    @include e(icon) {
-      @include once {
-        transition: fill .3s $--n-ease-in-out-cubic-bezier;
-      }
-      @include b(icon) {
-        fill: $--empty-icon-color;
-        stroke: $--empty-icon-color;
-      }
-    }
-    @include e(description) {
-      @include once {
-        margin-top: 4px;
-        transition: color .3s $--n-ease-in-out-cubic-bezier;
-      }
-      color: $--empty-text-color;
-    }
-    @include e(extra) {
-      @include once {
-        text-align: center;
-        transition: color .3s $--n-ease-in-out-cubic-bezier;
-        margin-top: 16px;
-      }
-      color: $--empty-extra-text-color;
-    }
-  }
-}
+// @include themes-mixin {
+//   @include b(empty) {
+//     @include once {
+//       @include empty-size-mixin('small');
+//       @include empty-size-mixin('medium');
+//       @include empty-size-mixin('large');
+//       @include empty-size-mixin('huge');
+//       display: flex;
+//       flex-direction: column;
+//       align-items: center;
+//       font-size: 14px;
+//     }
+//     @include e(icon) {
+//       @include once {
+//         transition: fill .3s $--n-ease-in-out-cubic-bezier;
+//       }
+//       @include b(icon) {
+//         fill: $--empty-icon-color;
+//         stroke: $--empty-icon-color;
+//       }
+//     }
+//     @include e(description) {
+//       @include once {
+//         margin-top: 4px;
+//         transition: color .3s $--n-ease-in-out-cubic-bezier;
+//       }
+//       color: $--empty-text-color;
+//     }
+//     @include e(extra) {
+//       @include once {
+//         text-align: center;
+//         transition: color .3s $--n-ease-in-out-cubic-bezier;
+//         margin-top: 16px;
+//       }
+//       color: $--empty-extra-text-color;
+//     }
+//   }
+// }
