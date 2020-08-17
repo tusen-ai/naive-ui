@@ -31,7 +31,7 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import NScrollbar from '../../Scrollbar'
+import NScrollbar from '../../scrollbar'
 import NLogLoader from './LogLoader'
 import NLogLine from './LogLine'
 import NFadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'

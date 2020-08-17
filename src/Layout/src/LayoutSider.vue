@@ -51,7 +51,7 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import ToggleButton from './ToggleButton'
 import ToggleBar from './ToggleBar'
-import NScrollbar from '../../Scrollbar'
+import NScrollbar from '../../scrollbar'
 
 export default {
   name: 'NLayoutSider',

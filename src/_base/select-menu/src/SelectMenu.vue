@@ -106,7 +106,7 @@
 </template>
 
 <script>
-import NScrollbar from '../../../Scrollbar'
+import NScrollbar from '../../../scrollbar'
 import NSelectOption from './SelectOption.vue'
 import NSelectGroupHeader from './SelectGroupHeader.vue'
 import NBaseTrackingRect from '../../tracking-rect'

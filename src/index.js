@@ -49,7 +49,7 @@ import Popup from './Popover'
 import Progress from './progress'
 import Radio from './Radio'
 import Result from './result'
-import Scrollbar from './Scrollbar'
+import Scrollbar from './scrollbar'
 import Select from './Select'
 import Slider from './Slider'
 import Spin from './Spin'
@@ -152,6 +152,8 @@ import resultDarkStyle from './result/styles/dark'
 import resultLightStyle from './result/styles/light'
 import stepsDarkStyle from './steps/styles/dark'
 import stepsLightStyle from './steps/styles/light'
+import scrollBarLightStyle from './scrollbar/styles/light'
+import scrollBarDarkStyle from './scrollbar/styles/dark'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -333,6 +335,8 @@ export default create({
     datePickerLightStyle,
     stepsDarkStyle,
     stepsLightStyle,
+    scrollBarLightStyle,
+    scrollBarDarkStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle

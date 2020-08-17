@@ -26,7 +26,7 @@
 import layoutModeMixin from './layoutModeMixin'
 import themeable from '../../_mixins/themeable'
 import withapp from '../../_mixins/withapp'
-import NScrollbar from '../../Scrollbar'
+import NScrollbar from '../../scrollbar'
 
 export default {
   name: 'NLayout',
