@@ -44,6 +44,8 @@
 import NBaseLoading from '../../_base/loading'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 const STROKE_WIDTH = {
   small: 22,
@@ -55,11 +57,15 @@ const STROKE_WIDTH = {
 }
 
 export default {
-  name: 'NSpin',
+  name: 'Spin',
   components: {
     NBaseLoading
   },
-  mixins: [ withapp, themeable ],
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   props: {
     stroke: {
       type: String,
