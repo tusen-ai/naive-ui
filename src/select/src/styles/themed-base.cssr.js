@@ -24,7 +24,7 @@ export default c([
           }),
           cM('medium-size', {
             raw: `
-              eight: 34px;
+              height: 34px;
             `
           }),
           cM('large-size', {
