@@ -93,7 +93,7 @@
 </template>
 
 <script>
-import NSelect from '../../Select'
+import NSelect from '../../select'
 import NInput from '../../input'
 import NBaseIcon from '../../_base/icon'
 import withapp from '../../_mixins/withapp'

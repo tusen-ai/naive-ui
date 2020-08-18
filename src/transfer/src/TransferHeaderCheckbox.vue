@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import NSimpleCheckbox from '../../Checkbox/src/SimpleCheckbox'
+import NSimpleCheckbox from '../../checkbox/src/SimpleCheckbox'
 import createValidator from '../../_utils/vue/validateProp'
 
 export default {

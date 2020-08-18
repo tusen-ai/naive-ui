@@ -59,13 +59,13 @@
 </template>
 
 <script>
-import NCheckboxGroup from '../../../Checkbox/src/CheckboxGroup'
-import NCheckbox from '../../../Checkbox/src/Checkbox'
+import NCheckboxGroup from '../../../checkbox/src/CheckboxGroup'
+import NCheckbox from '../../../checkbox/src/Checkbox'
 import NRadioGroup from '../../../Radio/src/RadioGroup'
 import NRadio from '../../../Radio/src/Radio'
 import NDivider from '../../../divider'
 import NButton from '../../../button'
-import NScrollbar from '../../../Scrollbar'
+import NScrollbar from '../../../scrollbar'
 import { shouldUseArrayInSingleMode } from '../utils'
 
 function isEqual (value, oldValue) {

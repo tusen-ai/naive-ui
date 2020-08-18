@@ -9,8 +9,8 @@ import Breadcrumb from './breadcrumb'
 import Button from './button'
 import ButtonGroup from './button-group'
 import Card from './card'
-import Cascader from './Cascader'
-import CheckBox from './Checkbox'
+import Cascader from './cascader'
+import CheckBox from './checkbox'
 import Code from './code'
 import Collapse from './collapse'
 import ConfigConsumer from './config-consumer'
@@ -49,8 +49,8 @@ import Popup from './Popover'
 import Progress from './progress'
 import Radio from './Radio'
 import Result from './result'
-import Scrollbar from './Scrollbar'
-import Select from './Select'
+import Select from './select'
+import Scrollbar from './scrollbar'
 import Slider from './Slider'
 import Spin from './Spin'
 import Statistic from './Statistic'
@@ -152,6 +152,14 @@ import resultDarkStyle from './result/styles/dark'
 import resultLightStyle from './result/styles/light'
 import stepsDarkStyle from './steps/styles/dark'
 import stepsLightStyle from './steps/styles/light'
+import selectDarkStyle from './select/styles/dark'
+import selectLightStyle from './select/styles/light'
+import scrollBarLightStyle from './scrollbar/styles/light'
+import scrollBarDarkStyle from './scrollbar/styles/dark'
+import cascaderLightStyle from './cascader/styles/light'
+import cascaderDarkStyle from './cascader/styles/dark'
+import checkboxLightStyle from './checkbox/styles/light'
+import checkboxDarkStyle from './checkbox/styles/dark'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -333,6 +341,14 @@ export default create({
     datePickerLightStyle,
     stepsDarkStyle,
     stepsLightStyle,
+    selectDarkStyle,
+    selectLightStyle,
+    scrollBarLightStyle,
+    scrollBarDarkStyle,
+    cascaderLightStyle,
+    cascaderDarkStyle,
+    checkboxDarkStyle,
+    checkboxLightStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle

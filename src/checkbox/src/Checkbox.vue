@@ -60,9 +60,11 @@ import render from '../../_utils/vue/render'
 import CheckMark from './CheckMark'
 import LineMark from './LineMark'
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 export default {
-  name: 'NCheckbox',
+  name: 'Checkbox',
   inject: {
     NCheckboxGroup: {
       default: null
@@ -77,6 +79,7 @@ export default {
   mixins: [
     withapp,
     themeable,
+    usecssr(styles),
     asformitem(
       {
         change: 'change',
@@ -124,7 +127,7 @@ export default {
       validator (value) {
         return ['small', 'medium', 'large'].includes(value)
       },
-      default: null
+      default: 'medium'
     },
     value: {
       type: [Number, Boolean, String],

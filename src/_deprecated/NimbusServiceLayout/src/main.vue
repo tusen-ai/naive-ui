@@ -1,6 +1,6 @@
 
 <script>
-import Scrollbar from '../../../Scrollbar'
+import Scrollbar from '../../../scrollbar'
 import withapp from '../../../_mixins/withapp'
 import themeable from '../../../_mixins/themeable'
 import getDefaultSlot from '../../../_utils/vue/getDefaultSlot'

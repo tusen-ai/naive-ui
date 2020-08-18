@@ -53,7 +53,7 @@
         class="n-positioning-content"
       >
         <transition
-          name="n-select-menu-transition"
+          name="n-fade-in-scale-up-transition"
           @after-leave="handleMenuAfterLeave"
         >
           <n-base-select-menu
@@ -104,6 +104,8 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asformitem from '../../_mixins/asformitem'
 import locale from '../../_mixins/locale'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/index.js'
 
 function patternMatched (pattern, value) {
   try {
@@ -114,7 +116,7 @@ function patternMatched (pattern, value) {
 }
 
 export default {
-  name: 'NSelect',
+  name: 'Select',
   components: {
     NBaseSelectMenu,
     NBaseSelection
@@ -129,7 +131,8 @@ export default {
     placeable,
     zindexable,
     locale('Select'),
-    asformitem()
+    asformitem(),
+    usecssr(styles)
   ],
   model: {
     prop: 'value',

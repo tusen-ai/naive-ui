@@ -73,7 +73,7 @@
 <script>
 import cell from './Cell.vue'
 import { createCustomWidthStyle, setCheckStatusOfRow, createClassObject, createRowKey } from '../utils'
-import NScrollbar from '../../../Scrollbar'
+import NScrollbar from '../../../scrollbar'
 import formatLength from '../../../_utils/css/formatLength'
 
 export default {

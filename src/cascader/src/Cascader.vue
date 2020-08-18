@@ -96,6 +96,8 @@ import { getType, traverseWithCallback } from './utils'
 import asformitem from '../../_mixins/asformitem'
 import CascaderSelectMenu from './CascaderSelectMenu'
 import locale from '../../_mixins/locale'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 import {
   rootedOptions,
@@ -105,7 +107,7 @@ import {
 } from '../../_utils/component/cascader'
 
 export default {
-  name: 'NCascader',
+  name: 'Cascader',
   components: {
     CascaderMenu,
     CascaderSelectMenu,
@@ -120,7 +122,13 @@ export default {
   directives: {
     clickoutside
   },
-  mixins: [withapp, themeable, asformitem(), locale('Cascader')],
+  mixins: [
+    withapp,
+    themeable,
+    asformitem(),
+    locale('Cascader'),
+    usecssr(styles)
+  ],
   model: {
     prop: 'value',
     event: 'change'
@@ -146,7 +154,7 @@ export default {
       validator (value) {
         return ['small', 'medium', 'large'].includes(value)
       },
-      default: null
+      default: 'medium'
     },
     filterable: {
       type: Boolean,

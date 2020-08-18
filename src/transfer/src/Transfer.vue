@@ -182,7 +182,7 @@
 </template>
 
 <script>
-import NScrollbar from '../../Scrollbar'
+import NScrollbar from '../../scrollbar'
 import NTransferHeaderCheckbox from './TransferHeaderCheckbox'
 import NTransferHeaderExtra from './TransferHeaderExtra'
 import NTransferSourceListItem from './TransferSourceListItem'

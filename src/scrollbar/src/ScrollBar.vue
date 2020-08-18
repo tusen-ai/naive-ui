@@ -38,7 +38,7 @@
       }"
       :style="{...horizontalRailStyle, width: scrollbarSize }"
     >
-      <transition name="n-scrollbar-transition">
+      <transition name="n-fade-in-transition">
         <div
           v-if="needVerticalScrollbar && showVeriticalScrollbar"
           class="n-scrollbar-rail__scrollbar"
@@ -86,10 +86,16 @@
 import withapp from '../../_mixins/withapp'
 import themable from '../../_mixins/themeable'
 import resizeObserverDelagate from '../../_utils/delegate/resizeObserverDelegate'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/index.js'
 
 export default {
-  name: 'NScrollbar',
-  mixins: [withapp, themable],
+  name: 'Scrollbar',
+  mixins: [
+    withapp,
+    themable,
+    usecssr(styles)
+  ],
   props: {
     width: {
       type: Number,

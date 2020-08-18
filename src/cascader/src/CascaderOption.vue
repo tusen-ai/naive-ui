@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import NCheckbox from '../../Checkbox'
+import NCheckbox from '../../checkbox'
 import NRadio from '../../Radio'
 import NBaseLoading from '../../_base/loading'
 

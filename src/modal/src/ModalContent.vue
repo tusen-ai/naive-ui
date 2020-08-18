@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import NScrollbar from '../../Scrollbar'
+import NScrollbar from '../../scrollbar'
 import NConfirm from '../../confirm/src/Confirm'
 import NCard from '../../card'
 import themeable from '../../_mixins/themeable'

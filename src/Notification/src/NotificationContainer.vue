@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import NScrollbar from '../../Scrollbar'
+import NScrollbar from '../../scrollbar'
 
 export default {
   components: {
