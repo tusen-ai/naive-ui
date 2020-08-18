@@ -130,7 +130,7 @@ export default c([
           color: pallete.textColor,
           transition: `color .3s ${easeInOutCubicBezier}`
         }, [
-          c('::placeholder', {
+          c('&::placeholder', {
             transition: `color .3s ${easeInOutCubicBezier}`,
             color: pallete.placeholderColor
           }),
