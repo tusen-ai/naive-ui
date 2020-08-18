@@ -4,11 +4,6 @@ export default create({
   name: 'Select',
   theme: 'dark',
   getDerivedVariables ({ derived, base }) {
-    const {
-      transformDebounceScale
-    } = base
-    return {
-      transformDebounceScale
-    }
+    return {}
   }
 })
