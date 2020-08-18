@@ -5,7 +5,7 @@ import asformitem from '../../_mixins/asformitem'
 import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
 
 export default {
-  name: 'NCheckboxGroup',
+  name: 'CheckboxGroup',
   mixins: [
     withapp,
     themeable,

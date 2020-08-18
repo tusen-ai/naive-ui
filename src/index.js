@@ -10,7 +10,7 @@ import Button from './button'
 import ButtonGroup from './button-group'
 import Card from './card'
 import Cascader from './cascader'
-import CheckBox from './Checkbox'
+import CheckBox from './checkbox'
 import Code from './code'
 import Collapse from './collapse'
 import ConfigConsumer from './config-consumer'
@@ -158,6 +158,8 @@ import scrollBarLightStyle from './scrollbar/styles/light'
 import scrollBarDarkStyle from './scrollbar/styles/dark'
 import cascaderLightStyle from './cascader/styles/light'
 import cascaderDarkStyle from './cascader/styles/dark'
+import checkboxLightStyle from './checkbox/styles/light'
+import checkboxDarkStyle from './checkbox/styles/dark'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -345,6 +347,8 @@ export default create({
     scrollBarDarkStyle,
     cascaderLightStyle,
     cascaderDarkStyle,
+    checkboxDarkStyle,
+    checkboxLightStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle

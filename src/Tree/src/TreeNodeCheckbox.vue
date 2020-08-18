@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import NCheckbox from '../../Checkbox'
+import NCheckbox from '../../checkbox'
 
 export default {
   name: 'NTreeNodeCheckbox',
