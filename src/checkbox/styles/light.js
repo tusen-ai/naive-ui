@@ -7,11 +7,8 @@ export default create({
   name: 'Checkbox',
   getDerivedVariables ({ base, derived }) {
     const {
-      transformDebounceScale
-    } = base
-    const {
       baseBackgroundColor,
-      disabledBackgroundColor,
+      disabledInputBackgroundColor,
       cardBackgroundColor,
       modalBackgroundColor,
       disabledTextColor,
@@ -21,27 +18,19 @@ export default create({
     } = derived
     return {
       ...commonVariables,
-      transformDebounceScale,
-      color: {
-        default: baseBackgroundColor,
-        disabled: disabledBackgroundColor,
-        table: cardBackgroundColor,
-        modalTable: modalBackgroundColor
-      },
-      iconColor: {
-        default: baseBackgroundColor,
-        disabled: disabledTextColor
-      },
-      borderColor: {
-        default: borderColor,
-        disabled: borderColor,
-        active: primaryColor,
-        boxShadow: changeColor(primaryColor, { alpha: 0.3 })
-      },
-      labelTextColor: {
-        default: secondaryTextColor,
-        disabled: disabledTextColor
-      }
+      borderRadius: base.smallBorderRadius,
+      color: baseBackgroundColor,
+      colorDisabled: disabledInputBackgroundColor,
+      colorTableHeader: cardBackgroundColor,
+      colorModalTableHeader: modalBackgroundColor,
+      iconColor: baseBackgroundColor,
+      iconColorDisabled: disabledTextColor,
+      borderColor: borderColor,
+      borderColorDisabled: borderColor,
+      borderColorActive: primaryColor,
+      boxShadowColorActive: changeColor(primaryColor, { alpha: 0.3 }),
+      labelTextColor: secondaryTextColor,
+      labelTextColorDisabled: disabledTextColor
     }
   }
 })

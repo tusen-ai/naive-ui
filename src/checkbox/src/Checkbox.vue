@@ -79,7 +79,6 @@ export default {
   mixins: [
     withapp,
     themeable,
-    usecssr(styles),
     asformitem(
       {
         change: 'change',
@@ -116,7 +115,8 @@ export default {
           'syntheticChecked'
         ]
       }
-    })
+    }),
+    usecssr(styles)
   ],
   model: {
     prop: 'checked',
@@ -127,7 +127,7 @@ export default {
       validator (value) {
         return ['small', 'medium', 'large'].includes(value)
       },
-      default: 'medium'
+      default: null
     },
     value: {
       type: [Number, Boolean, String],
