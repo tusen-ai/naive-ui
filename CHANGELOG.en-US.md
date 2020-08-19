@@ -1,9 +1,10 @@
 # CHANGELOG
 ## 1.5.5 (2020-08-15)
-### Breaking Change
+### Breaking Changes
 - Fix all typos of `separator`. (Originally it was `seperator`.)
 ### Fixes
 - Fix the problem that when theme is not set, style errors will be logged.
+- Fix the text color of `n-select`'s placeholder when `single` `filterable`.
 
 ## 1.5.4 (2020-08-08)
 ### Fixes

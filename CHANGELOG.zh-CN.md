@@ -1,9 +1,10 @@
 # CHANGELOG
 ## 1.5.5 (2020-08-15)
-### Breaking Change
+### Breaking Changes
 - 修正了所有 `separator` 的拼写（原来错拼为 `seperator`）
 ### Fixes
 - 修正了未设定主题时样式报错的问题
+- 修正了 `n-select` `single` `filterable` 时 placeholder 的样式问题
 
 ## 1.5.4 (2020-08-08)
 ### Fixes
