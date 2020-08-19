@@ -53,7 +53,7 @@ import Select from './select'
 import Scrollbar from './scrollbar'
 import Slider from './Slider'
 import Spin from './spin'
-import Statistic from './Statistic'
+import Statistic from './statistic'
 import Steps from './steps'
 import Switch from './Switch'
 import Table from './Table'
@@ -162,6 +162,8 @@ import checkboxLightStyle from './checkbox/styles/light'
 import checkboxDarkStyle from './checkbox/styles/dark'
 import spinDarkStyle from './spin/styles/dark'
 import spinLightStyle from './spin/styles/light'
+import statisticLightStyle from './statistic/styles/light'
+import statisticDarkStyle from './statistic/styles/dark'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -353,6 +355,8 @@ export default create({
     checkboxLightStyle,
     spinDarkStyle,
     spinLightStyle,
+    statisticLightStyle,
+    statisticDarkStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle
