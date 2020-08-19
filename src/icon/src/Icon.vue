@@ -8,6 +8,7 @@ import styles from './styles/index'
 
 export default {
   name: 'Icon',
+  __NAIVE_ICON__: true,
   mixins: [ withapp, themeable, usecssr(styles) ],
   props: {
     size: {
@@ -40,7 +41,7 @@ export default {
   },
   render (h) {
     const parent = this.$parent
-    if (parent && parent.$options.name === 'NIcon') return getDefaultSlot(this)
+    if (parent && parent.$options.__NAIVE_ICON__) return getDefaultSlot(this)
     else {
       const syntheticTheme = this.syntheticTheme
       const depth = this.depth
