@@ -8,11 +8,16 @@ export default create({
       secondaryTextOverlayColor,
       primaryTextOverlayColor
     } = derived
+    const {
+      strongFontWeight
+    } = base
     return {
-      statisticValueLabelTextColor: secondaryTextOverlayColor,
-      statisticValuePrefixTextColor: primaryTextOverlayColor,
-      statisticValueSuffixTextColor: primaryTextOverlayColor,
-      statisticValueContentTextColor: primaryTextOverlayColor
+      labelFontWeight: strongFontWeight,
+      valueFontWeight: strongFontWeight,
+      labelTextColor: secondaryTextOverlayColor,
+      valuePrefixTextColor: primaryTextOverlayColor,
+      valueSuffixTextColor: primaryTextOverlayColor,
+      valueTextColor: primaryTextOverlayColor
     }
   }
 })

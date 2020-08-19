@@ -3,28 +3,29 @@ import { c, cTB, cB, cE } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      easeInOutCubicBezier,
-      strongFontWeight
+      easeInOutCubicBezier
     } = props.$base
     const {
-      statisticValuePrefixTextColor,
-      statisticValueLabelTextColor,
-      statisticValueSuffixTextColor,
-      statisticValueContentTextColor
+      labelFontWeight,
+      valueFontWeight,
+      valuePrefixTextColor,
+      labelTextColor,
+      valueSuffixTextColor,
+      valueTextColor
     } = props.$local
     return cTB('statistic', [
       cE('label', {
         raw: `
-          font-weight: ${strongFontWeight};
+          font-weight: ${labelFontWeight};
           transition: .3s color ${easeInOutCubicBezier};
           font-size: 14px;
         `,
-        color: statisticValueLabelTextColor
+        color: labelTextColor
       }),
       cB('statistic-value', {
         raw: `
           margin-top: 4px;
-          font-weight: ${strongFontWeight};
+          font-weight: ${valueFontWeight};
         `
       }, [
         cE('prefix', {
@@ -32,14 +33,14 @@ export default c([
             font-size: 18px;
             transition: .3s color ${easeInOutCubicBezier};
           `,
-          color: statisticValuePrefixTextColor
+          color: valuePrefixTextColor
         }, [
           cB('icon', {
             raw: `
               vertical-align: -0.125em;
             `,
-            fill: statisticValuePrefixTextColor,
-            stroke: statisticValuePrefixTextColor
+            fill: valuePrefixTextColor,
+            stroke: valuePrefixTextColor
           })
         ]),
         cE('content', {
@@ -47,21 +48,21 @@ export default c([
             font-size: 24px;
             transition: .3s color ${easeInOutCubicBezier};
           `,
-          color: statisticValueContentTextColor
+          color: valueTextColor
         }),
         cE('suffix', {
           raw: `
             font-size: 18px;
             transition: .3s color ${easeInOutCubicBezier};
           `,
-          color: statisticValueSuffixTextColor
+          color: valueSuffixTextColor
         }, [
           cB('icon', {
             raw: `
               vertical-align: -0.125em;
             `,
-            fill: statisticValueSuffixTextColor,
-            stroke: statisticValueSuffixTextColor
+            fill: valueSuffixTextColor,
+            stroke: valueSuffixTextColor
           })
         ])
       ])

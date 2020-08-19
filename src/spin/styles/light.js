@@ -7,10 +7,10 @@ export default create({
   getDerivedVariables ({ base, derived }) {
     const {
       disabledOpacity
-    } = base
+    } = derived
     return {
       ...sizeVariables,
-      spinSpinningOpacity: disabledOpacity
+      opacitySpinning: disabledOpacity
     }
   }
 })
