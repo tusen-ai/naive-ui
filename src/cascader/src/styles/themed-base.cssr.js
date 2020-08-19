@@ -1,21 +1,24 @@
-import { c, cTB, cB, cE, cM } from '../../../_utils/cssr'
+import { c, cTB, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../styles/_transitions/fade-in-scale-up'
 
 export default
 c([
   ({ props }) => {
-    const base = props.$base
-    const easeInOutCubicBezier = base.easeInOutCubicBezier
     const {
-      menuColor,
+      easeInOutCubicBezier,
+      transformDebounceScale
+    } = props.$base
+    const {
       optionTextColor,
+      optionTextColorMatched,
+      optionTextColorDisabled,
+      optionArrowColor,
+      optionCheckMarkColor,
+      menuColor,
       menuBoxShadow,
       menuBorderColor,
       menuTrackingRectColor,
-      optionArrowColor,
-      itemCheckMarkColor,
-      transformDebounceScale,
-      borderRadius
+      menuBorderRadius
     } = props.$local
     return cTB(
       'cascader-menu',
@@ -26,7 +29,7 @@ c([
           margin: 4px 0;
           display: flex;
           flex-wrap: nowrap;
-          border-radius: ${borderRadius};
+          border-radius: ${menuBorderRadius};
           overflow: hidden;
           box-shadow: ${menuBoxShadow};
         `
@@ -34,6 +37,8 @@ c([
       [
         fadeInScaleUpTransition({ transformOrigin: 'inherit', duration: '0.2s' }),
         cB('scrollbar', {
+          // if width not set, cascader select menu's inner scroll area's width is
+          // not correct, which won't change after select menu width is set
           raw: `
             width: 100%;
           `
@@ -53,14 +58,14 @@ c([
           }),
           c('&:first-child', {
             raw: `
-              border-top-left-radius: ${borderRadius};
-              border-bottom-left-radius: ${borderRadius};
+              border-top-left-radius: ${menuBorderRadius};
+              border-bottom-left-radius: ${menuBorderRadius};
             `
           }),
           c('&:last-child', {
             raw: `
-              border-top-right-radius: ${borderRadius};
-              border-bottom-right-radius: ${borderRadius};
+              border-top-right-radius: ${menuBorderRadius};
+              border-bottom-right-radius: ${menuBorderRadius};
             `
           }),
           c('&:not(:first-child)', {
@@ -79,13 +84,13 @@ c([
             white-space: nowrap;
             position: relative;
             cursor: pointer;
-            color: ${optionTextColor.default}
+            color: ${optionTextColor};
             transition:
               background-color .2s ${easeInOutCubicBezier},
               color 0.2s ${easeInOutCubicBezier};
           `
         }, [
-          c('not-leaf', [
+          cNotM('not-leaf', [
             c('&::after', {
               raw: `
                 content: '';
@@ -99,8 +104,8 @@ c([
                 transition: 
                   transform .3s ${easeInOutCubicBezier},
                   opacity .3s ${easeInOutCubicBezier};
-                  border-right: 1px solid ${itemCheckMarkColor};
-                  border-bottom: 1px solid ${itemCheckMarkColor};
+                  border-right: 1px solid ${optionCheckMarkColor};
+                  border-bottom: 1px solid ${optionCheckMarkColor};
               `
             })
           ]),
@@ -142,7 +147,7 @@ c([
           ]),
           cM('selected', {
             raw: `
-              color: ${optionTextColor.avtive}
+              color: ${optionTextColorMatched}
             `
           }, [
             c('&::after', {
@@ -154,12 +159,12 @@ c([
           ]),
           cM('active', {
             raw: `
-              color: ${optionTextColor.active}
+              color: ${optionTextColorMatched}
             `
           }),
           cM('disabled', {
             raw: `
-              color: ${optionTextColor.disabled};
+              color: ${optionTextColorDisabled};
               cursor: not-allowed;
             `
           }),

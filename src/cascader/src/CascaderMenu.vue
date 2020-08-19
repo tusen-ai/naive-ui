@@ -4,7 +4,7 @@
     class="n-positioning-container"
   >
     <div ref="content" class="n-positioning-content">
-      <transition name="n-cascader-menu-transition">
+      <transition name="n-fade-in-scale-up-transition">
         <div
           v-if="active"
           class="n-cascader-menu"

@@ -3,9 +3,9 @@ import baseStyle from './themed-base.cssr.js'
 
 export default [
   {
-    key: 'size',
+    key: 'syntheticSize',
     watch: [
-      'size',
+      'syntheticSize',
       'syntheticTheme'
     ],
     CNode: sizeStyle
