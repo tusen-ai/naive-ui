@@ -6,30 +6,35 @@ exports.alias = {
   'src': path.resolve(__dirname, '../src')
 }
 
+exports.resolve = {
+  extensions: ['.js', '.vue', '.json', '.entry', '.demo-entry.md', '.demo.md', '.md'],
+  alias: exports.alias,
+  modules: ['node_modules']
+}
+
 exports.docLoaders = (env) => [
   {
-    test: /index.entry$/,
+    test: /index\.entry$/,
     loader: ['vue-loader', path.resolve(__dirname, '../demo/loaders/NaiveUIDocEntryLoader.js')]
   },
   {
-    test: /index\.md$/,
-    loader: ['vue-loader', path.resolve(__dirname, '../demo/loaders/NaiveUIDocLoader.js')]
-  },
-  {
-    test: /(README\.md$|\.vue\.md$)/,
-    loader: ['vue-loader', path.resolve(__dirname, '../demo/loaders/NaiveUIMdLoader.js')]
-  },
-  {
-    test: {
-      test: /\.md$/,
-      exclude: [/index\.md$/, /README\.md$/, /\.vue\.md$/]
-    },
+    test: /\.demo\.md$/,
     loader: ['vue-loader', path.resolve(__dirname, '../demo/loaders/NaiveUIDemoLoader.js')]
   },
   {
+    test: /\.demo-entry\.md$/,
+    loader: ['vue-loader', path.resolve(__dirname, '../demo/loaders/NaiveUIDocLoader.js')]
+  },
+  // TODO: update loader test
+  {
     test: {
-      test: /\.vue$/
+      test: /\.md$/,
+      exclude: [/\.demo-entry\.md$/, /\.demo\.md$/]
     },
+    loader: ['vue-loader', path.resolve(__dirname, '../demo/loaders/NaiveUIMdLoader.js')]
+  },
+  {
+    test: /\.vue$/,
     loader: 'vue-loader',
     options: {
       compilerOptions: {

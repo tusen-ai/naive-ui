@@ -15,7 +15,7 @@
 
 ## 1.5.2 (2020-07-22)
 ### Fixes
-- Fix the problem that `n-radio` can be focused.
+- Fix the problem that `n-radio` can not be focused.
 - Fix the problem that `n-data-table`'s `max-height` style is broken. https://bugs.chromium.org/p/chromium/issues/detail?id=1107223
 ### Refactors
 - Refactor `n-tag` styles.

@@ -54,7 +54,7 @@ function generateScript (demosLiteral, components = [], url) {
     .map(demoName => camelCase(demoName))
   components = components.map(component => camelCase(component))
   const importStatements = demoNames
-    .map(demoName => `import ${demoName}Demo from './${demoName}.md'`)
+    .map(demoName => `import ${demoName}Demo from './${demoName}.demo.md'`)
     .concat(components.map(component => `import ${component} from './${component}'`))
     .join('\n')
   const componentStatements = demoNames.map(demoName => demoName + 'Demo').concat(components).join(', ')

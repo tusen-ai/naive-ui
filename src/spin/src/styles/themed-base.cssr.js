@@ -7,7 +7,7 @@ export default c([
       easeInOutCubicBezier
     } = props.$base
     const {
-      spinSpinningOpacity
+      opacitySpinning
     } = props.$local
     return cTB('spin-container', {
       raw: `
@@ -23,8 +23,7 @@ export default c([
         `
       }, [
         fadeInTransition()
-      ]
-      ),
+      ]),
       cB('spin-content', {
         raw: `
           opacity: 1;
@@ -36,7 +35,7 @@ export default c([
           raw: `
             pointer-events: none;
           `,
-          opacity: spinSpinningOpacity
+          opacity: opacitySpinning
         })
       ])
     ])

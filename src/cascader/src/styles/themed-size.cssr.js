@@ -9,20 +9,19 @@ export default c([
       height
     } = props.$local
     const { size } = props.$instance
-    const theHeight = height[size]
-    const subMenuHeight = pxfy(depx(theHeight) * 6.6)
+    const menuHeight = pxfy(depx(height[size]) * 6.6)
     return cB(
       'cascader-menu',
       [
         cM(`${size}-size`, {
         }, [
           cB('cascader-submenu', {
-            height: subMenuHeight
+            height: menuHeight
           }, [
             cB('cascader-option', {
               raw: `
-                height: ${theHeight};
-                line-height: ${theHeight};
+                height: ${height[size]};
+                line-height: ${height[size]};
                 font-size: ${fontSize[size]};
               `
             })

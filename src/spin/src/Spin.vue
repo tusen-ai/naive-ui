@@ -14,7 +14,7 @@
     >
       <slot />
     </div>
-    <transition name="n-spin-transition">
+    <transition name="n-fade-in-transition">
       <n-base-loading
         v-if="spinning"
         :class="{

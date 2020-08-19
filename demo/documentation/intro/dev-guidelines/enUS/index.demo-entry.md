@@ -1,4 +1,4 @@
-<!--no-demo-->
+<!--anchor:on-->
 # Develop Guidelines
 ## Git Commit Message Style
 You **MUST** follow [Angular Commit Format](https://gist.github.com/brianclements/841ea7bffdb01346392c).

@@ -1,4 +1,5 @@
 const marked = require('marked')
+const path = require('path')
 const createRenderer = require('./mdRenderer')
 const renderer = createRenderer()
 
@@ -23,6 +24,12 @@ function parseComponents (tokens) {
 }
 
 module.exports = function (content, url) {
+  const projectPath = path.resolve(__dirname, '..', '..')
+  const relativeURL = this.resourcePath.replace(projectPath + '/', '')
+
+  const showAnchor = !!~content.search('<!--anchor:on-->')
+  // for marked bug https://github.com/markedjs/marked/issues/1047
+  content = content.replace(/\n#/g, '\n\n#')
   const tokens = marked.lexer(content)
   const titleIndex = tokens.findIndex(token => token.type === 'heading' && token.depth === 1)
   let titleText = titleIndex > -1 ? JSON.stringify(tokens[titleIndex].text) : null
@@ -33,7 +40,7 @@ module.exports = function (content, url) {
     .join('\n')
   let mdContent = marked.parser(tokens, { renderer })
   if (titleText) {
-    const gheButton = `<edit-on-github-header url=${url} text=${titleText}></edit-on-github-header>`
+    const gheButton = `<edit-on-github-header url=${url || relativeURL} text=${titleText}></edit-on-github-header>`
     const titleReg = /(<n-h1[^>]*>)(.*?)(<\/n-h1>)/
     mdContent = mdContent.replace(titleReg, `${gheButton}`)
   }
@@ -44,9 +51,12 @@ module.exports = function (content, url) {
       <div style="width: calc(100% - 180px); margin-right: 36px;">
         ${mdContent}
       </div>
+      ${
+  showAnchor ? `
       <div style="width: 144px;">
         ${anchor}
-      </div>
+      </div>` : ''
+}
     </div>
   </component-documentation>
 </template>

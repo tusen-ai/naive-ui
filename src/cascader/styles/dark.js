@@ -1,5 +1,5 @@
 import create from '../../styles/_utils/create-component-base'
-import { changeColor, composite } from '../../_utils/color'
+import { composite } from '../../_utils/color'
 import sizeVariables from './_common'
 
 export default create({
@@ -8,7 +8,6 @@ export default create({
   getDerivedVariables ({ base, derived }) {
     const {
       borderRadius,
-      transformDebounceScale,
       popmenuBoxShadow
     } = base
     const {
@@ -16,27 +15,22 @@ export default create({
       secondaryTextOverlayColor,
       primaryColor,
       disabledTextOverlayColor,
-      disabledOpacity,
       dividerOverlayColor,
       pendingBackgroundOverlayColor,
       iconOverlayColor
     } = derived
     return {
       ...sizeVariables,
-      borderRadius,
-      transformDebounceScale,
+      menuBorderRadius: borderRadius,
       menuColor: popoverBackgroundColor,
-      optionTextColor: {
-        default: secondaryTextOverlayColor,
-        active: primaryColor,
-        disabled: disabledTextOverlayColor,
-        disabledActive: changeColor(primaryColor, { alpha: disabledOpacity })
-      },
       menuBoxShadow: popmenuBoxShadow,
       menuBorderColor: dividerOverlayColor,
       menuTrackingRectColor: composite(popoverBackgroundColor, pendingBackgroundOverlayColor),
+      optionTextColor: secondaryTextOverlayColor,
+      optionTextColorMatched: primaryColor,
+      optionTextColorDisabled: disabledTextOverlayColor,
       optionArrowColor: iconOverlayColor,
-      itemCheckMarkColor: primaryColor
+      optionCheckMarkColor: primaryColor
     }
   }
 })

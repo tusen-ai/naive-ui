@@ -4,8 +4,9 @@ import Entry from '../entry'
 
 import intro from '../documentation/intro/intro'
 import start from '../documentation/intro/start'
-import devGuildlines from '../documentation/intro/devGuidelines'
+// import devGuildlines from '../documentation/intro/devGuidelines'
 import experimentalFeatures from '../documentation/intro/experimental-features'
+import changelog from '../documentation/intro/changelog'
 
 import nimbusServiceLayoutDemo from '../documentation/deprecated/nimbusServiceLayout'
 import gradientText from '../documentation/components/gradientText'
@@ -84,7 +85,8 @@ export const childRoutes = withPrefix('/:lang/:theme/doc', [
   { path: '/intro', component: intro },
   { path: '/start', component: start },
   { path: '/experimental-features', component: experimentalFeatures },
-  { path: '/dev-guildlines', component: devGuildlines },
+  { path: '/changelog', component: changelog },
+  // { path: '/dev-guildlines', component: devGuildlines },
   // components
   { path: '/n-layout', component: layout },
   { path: '/n-gradient-text', component: gradientText },
