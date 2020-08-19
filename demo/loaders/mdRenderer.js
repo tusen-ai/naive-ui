@@ -29,7 +29,7 @@ function createRenderer (wrapCodeWithCard = true) {
     code: (code, language) => {
       const isLanguageValid = !!(language && hljs.getLanguage(language))
       if (!isLanguageValid) {
-        throw new Error(`MdRendererError: ${language} is not valid for code`)
+        throw new Error(`MdRendererError: ${language} is not valid for code - ${code}`)
       }
       const highlighted = hljs.highlight(language, code).value
       return `${wrapCodeWithCard ? '<n-card size="small">' : ''}<n-config-consumer abstract>

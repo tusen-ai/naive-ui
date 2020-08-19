@@ -59,6 +59,11 @@ export default function (instance) {
         path: `/${instance.lang}/${instance.theme}/doc` + '/start'
       },
       {
+        name: 'Change Log',
+        title: '变更日志',
+        path: `/${instance.lang}/${instance.theme}/doc` + '/changelog'
+      },
+      {
         name: 'Create Themed Component',
         title: '创建适配主题的组件',
         path: `/${instance.lang}/${instance.theme}/doc` + '/n-theme'
@@ -510,6 +515,10 @@ export default function (instance) {
       {
         name: 'Get Started',
         path: `/${instance.lang}/${instance.theme}/doc` + '/start'
+      },
+      {
+        name: 'Change Log',
+        path: `/${instance.lang}/${instance.theme}/doc` + '/changelog'
       },
       {
         name: 'Create Themed Component',

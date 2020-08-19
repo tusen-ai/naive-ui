@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import zhCN from './zhCN/index.md'
-import enUS from './enUS/index.md'
+import zhCN from './zhCN/index'
+import enUS from './enUS/index'
 
 export default {
   components: {

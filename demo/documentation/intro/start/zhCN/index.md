@@ -1,8 +1,5 @@
-<!--no-demo-->
+<!--anchor:on-->
 # 起步
-```component
-installCodeGenerator
-```
 ## 安装
 使用 npm 安装。
 

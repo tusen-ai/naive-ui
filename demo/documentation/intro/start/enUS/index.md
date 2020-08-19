@@ -1,8 +1,5 @@
-<!--no-demo-->
+<!--anchor:on-->
 # Get Started
-```component
-installCodeGenerator
-```
 ## Installation
 First install it.
 
