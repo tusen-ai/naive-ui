@@ -8,9 +8,13 @@ export default create({
       primaryTextOverlayColor,
       secondaryTextOverlayColor
     } = derived
+    const {
+      strongFontWeight
+    } = base
     return {
       thingHeaderTextColor: primaryTextOverlayColor,
-      thingTextColor: secondaryTextOverlayColor
+      thingTextColor: secondaryTextOverlayColor,
+      strongFontWeight: strongFontWeight
     }
   }
 })

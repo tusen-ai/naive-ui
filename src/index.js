@@ -158,17 +158,14 @@ import scrollBarLightStyle from './scrollbar/styles/light'
 import scrollBarDarkStyle from './scrollbar/styles/dark'
 import cascaderLightStyle from './cascader/styles/light'
 import cascaderDarkStyle from './cascader/styles/dark'
-<<<<<<< HEAD
 import checkboxLightStyle from './checkbox/styles/light'
 import checkboxDarkStyle from './checkbox/styles/dark'
 import spinDarkStyle from './spin/styles/dark'
 import spinLightStyle from './spin/styles/light'
 import statisticLightStyle from './statistic/styles/light'
 import statisticDarkStyle from './statistic/styles/dark'
-=======
 import thingLightStyle from './thing/styles/light'
 import thingDarkStyle from './thing/styles/dark'
->>>>>>> 66b33db... feat(thing): css in js
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'

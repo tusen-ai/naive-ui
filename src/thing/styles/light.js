@@ -8,9 +8,13 @@ export default create({
       primaryTextColor,
       secondaryTextColor
     } = derived
+    const {
+      strongFontWeight
+    } = base
     return {
       thingHeaderTextColor: primaryTextColor,
-      thingTextColor: secondaryTextColor
+      thingTextColor: secondaryTextColor,
+      strongFontWeight: strongFontWeight
     }
   }
 })
