@@ -18,10 +18,17 @@
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asformitem from '../../_mixins/asformitem'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 export default {
-  name: 'NSwitch',
-  mixins: [ withapp, themeable, asformitem() ],
+  cssrName: 'Switch',
+  mixins: [
+    withapp,
+    themeable,
+    asformitem(),
+    usecssr(styles)
+  ],
   model: {
     prop: 'value',
     event: 'change'
