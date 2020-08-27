@@ -17,6 +17,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
   "
 >
   显示区域
