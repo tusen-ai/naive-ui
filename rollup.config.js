@@ -27,7 +27,7 @@ module.exports = {
     vue({
       template: {
         compilerOptions: {
-          preserveWhitespace: false
+          whitespace: 'condense'
         }
       }
     }),

@@ -164,6 +164,7 @@ export default {
         const pendingOptionData = this.$refs.contentInner.getPendingOptionData()
         if (pendingOptionData) {
           this.select(pendingOptionData)
+          e.preventDefault()
         }
       }
     },

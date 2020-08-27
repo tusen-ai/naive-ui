@@ -1,4 +1,11 @@
 # CHANGELOG
+## PENDING
+### Fixes
+- Fix the problem that `n-auto-complete`'s menu can't be closed when use `textarea` as input.
+- Fix the problem that nested `n-icon` is not flattened.
+### Features
+- Make `n-drawer` content scrollable.
+
 ## 1.5.5 (2020-08-15)
 ### Breaking Changes
 - Fix all typos of `separator`. (Originally it was `seperator`.)

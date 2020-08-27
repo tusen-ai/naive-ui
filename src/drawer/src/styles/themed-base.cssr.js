@@ -16,7 +16,6 @@ export default c([
     return [
       cTB('drawer', {
         raw: `
-          padding: 16px 24px;
           position: absolute;
           pointer-events: all;
           transition:
@@ -31,6 +30,10 @@ export default c([
         slideInFromLeftTransition(),
         slideInFromTopTransition(),
         slideInFromBottomTransition(),
+        cB('drawer-content', {
+          boxSizing: 'border-box',
+          padding: '16px 24px'
+        }),
         cM('right-placement', {
           raw: `
             top: 0;
