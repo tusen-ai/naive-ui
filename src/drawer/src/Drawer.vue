@@ -36,6 +36,7 @@
               [drawerClass]: drawerClass,
               [namespace]: namespace
             }"
+            :style-width="styleWidth"
           >
             <slot />
           </n-drawer-content>
