@@ -24,9 +24,9 @@
       @blur="handleRadioInputBlur"
     >
     <div
-      class="n-radio__control"
+      class="n-radio__dot"
       :class="{
-        'n-radio__control--checked': syntheticChecked
+        'n-radio__dot--checked': syntheticChecked
       }"
     />
     <div class="n-radio__label">
@@ -39,7 +39,7 @@
 import asformitem from '../../_mixins/asformitem'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import radioMixin from './radioMixin'
+import radioMixin from './radio-mixin'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles/radio/index.js'
 
@@ -73,7 +73,9 @@ export default {
         }
         return 'medium'
       }
-    ), radioMixin ],
+    ),
+    radioMixin
+  ],
   props: {
     size: {
       validator (value) {

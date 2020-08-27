@@ -11,7 +11,7 @@ export default c([
         cM(`${size}-size`, {
           fontSize
         }, [
-          cE('control', {
+          cE('dot', {
             height: radioSize,
             width: radioSize
           })

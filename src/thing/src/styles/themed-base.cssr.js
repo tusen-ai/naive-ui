@@ -6,9 +6,9 @@ export default c([
       easeInOutCubicBezier
     } = props.$base
     const {
-      thingHeaderTextColor,
-      thingTextColor,
-      strongFontWeight
+      headerTextColor,
+      textColor,
+      headerFontWeight
     } = props.$local
     return cTB('thing', {
       raw: `
@@ -16,7 +16,7 @@ export default c([
         transition: color .3s ${easeInOutCubicBezier};
         font-size: 14px;
       `,
-      color: thingTextColor
+      color: textColor
     }, [
       cB('thing-avatar', {
         raw: `
@@ -30,7 +30,7 @@ export default c([
           flex-wrap: nowrap;
         `
       }, [
-        cB('thing-avatar-header-wrapper', {
+        cB('thing-header-wrapper', {
           raw: `
             flex: 1;
           `
@@ -52,10 +52,10 @@ export default c([
           cE('title', {
             raw: `
               font-size: 16px;
-              font-weight: ${strongFontWeight};
+              font-weight: ${headerFontWeight};
               transition: color .3s ${easeInOutCubicBezier};
             `,
-            color: thingHeaderTextColor
+            color: headerTextColor
           })
         ]),
         cE('description', [

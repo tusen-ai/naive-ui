@@ -67,7 +67,7 @@ function setupMutableStyle (
     process.env.NODE_ENV !== 'production' &&
     (dependencyValue === null || dependencyValue === undefined)
   ) {
-    console.error(`[naive-ui/mixins/usecssr]: dependency key ${name}.${dependencyKey} should not be nullable`)
+    console.error(`[naive-ui/mixins/usecssr]: dependency key ${name}.${dependencyKey} should not be nullable`, instance)
   }
   const mountId = createMutableStyleId(
     id,

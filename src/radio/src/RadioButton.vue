@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import radioMixin from './radioMixin'
+import radioMixin from './radio-mixin'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles/radio-button/index.js'
 

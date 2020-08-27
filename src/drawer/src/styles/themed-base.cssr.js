@@ -24,7 +24,7 @@ export default c([
             color .3s ${easeInOutCubicBezier};
         `,
         backgroundColor,
-        textColor
+        color: textColor
       },
       [
         slideInFromRightTransition(),

@@ -3,7 +3,7 @@ import { c, cTB, cE, cM } from '../../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      buttonBorderColorDefault,
+      buttonBorderColor,
       buttonBorderColorActive,
       disabledOpacity
     } = props.$local
@@ -12,18 +12,19 @@ export default c([
     } = props.$base
     return cTB('radio-group', {
       raw: `
-          display: inline-block;
-        `
+        display: inline-block;
+      `
     }, [
       cE('splitor', {
         raw: `
-            display: inline-block;
-            vertical-align: bottom;
-            height: 28px;
-            width: 1px;
-            transition: background-color .3s ${easeInOutCubicBezier}, opacity .3s ${easeInOutCubicBezier};
-          `,
-        backgroundColor: buttonBorderColorDefault
+          display: inline-block;
+          vertical-align: bottom;
+          width: 1px;
+          transition:
+            background-color .3s ${easeInOutCubicBezier},
+            opacity .3s ${easeInOutCubicBezier};
+        `,
+        backgroundColor: buttonBorderColor
       }, [
         cM('checked', {
           backgroundColor: buttonBorderColorActive

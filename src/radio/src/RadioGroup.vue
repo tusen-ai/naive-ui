@@ -81,8 +81,8 @@ export default {
   mixins: [
     withapp,
     themeable,
-    usecssr(styles),
     hollowoutable,
+    usecssr(styles),
     asformitem({
       change: 'change'
     }, 'small')
