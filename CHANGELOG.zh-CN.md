@@ -1,4 +1,9 @@
 # CHANGELOG
+## PENDING
+### Fixes
+- 修正了 `n-auto-complete` 使用 `textarea` 作为输入元素时菜单无法关闭的问题
+- 修正了嵌套 `n-icon` 没有被打平的问题
+
 ## 1.5.5 (2020-08-15)
 ### Breaking Changes
 - 修正了所有 `separator` 的拼写（原来错拼为 `seperator`）
