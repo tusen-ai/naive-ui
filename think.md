@@ -389,8 +389,8 @@ const naive = create({
 101. Dark Debug 3，Safari 你可太秀了......
 102. close-outline icon
 103. input + icon 主题切换 transition 有问题!!!
-104. auto-complete 自定义元素 demo 有问题
-105. markdown 渲染缺少空格，修正了 n-select single filterable 时 placeholder 的样式问题
+104. <del>auto-complete 自定义元素 demo 有问题</del> 有 pendingData 的时候 preventDefault
+105. <del>markdown 渲染缺少空格，修正了 n-select single filterable 时 placeholder 的样式问题</del> caused by vue compiler `preserveWhitespace: false`, change it to `whitespace: 'condense'`
 106. drawer 加上滚动条，以及 overflow auto 的样式
 107. 所有弹出的东西改成 body-style
 
