@@ -3,10 +3,12 @@ import { c, cE, cM, cTB, cNotM } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      railBackgroundColor,
-      switcherBackgroundImage,
-      switchBackgroundPosition,
-      switcherBoxShadow
+      railColor,
+      railColorActive,
+      buttonBackgroundImage,
+      buttonBackgroundImageActive,
+      buttonBackgroundPosition,
+      buttonBoxShadow
     } = props.$local
     const {
       easeInOutCubicBezier
@@ -28,7 +30,7 @@ export default c([
           border-radius: 7px;
           margin: 3px;
           transition: background-color .3s ${easeInOutCubicBezier};
-          background-color: ${railBackgroundColor.inactive};
+          background-color: ${railColor};
         `
       }, [
         c('&::before, &::after', {
@@ -92,20 +94,20 @@ export default c([
         ]),
         c('&::before', {
           raw: `
-            box-shadow: ${switcherBoxShadow};
-            background-position: ${switchBackgroundPosition};
-            background-image: ${switcherBackgroundImage.inactive};
+            box-shadow: ${buttonBoxShadow};
+            background-position: ${buttonBackgroundPosition};
+            background-image: ${buttonBackgroundImage};
           `
         }),
         c('&::after', {
           raw: `
-            background-position: ${switchBackgroundPosition};
-            background-image: ${switcherBackgroundImage.active};
+            background-position: ${buttonBackgroundPosition};
+            background-image: ${buttonBackgroundImageActive};
           `
         }),
         cM('active', {
           raw: `
-            background-color: ${railBackgroundColor.active};
+            background-color: ${railColorActive};
           `
         }),
         cM('disabled', {
