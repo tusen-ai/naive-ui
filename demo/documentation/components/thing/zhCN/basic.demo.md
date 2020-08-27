@@ -1,12 +1,31 @@
 # 基础用法
 Thing 提供了很多 slot 来定制。
 ```html
-<n-switch v-model="avatar"/>
-<n-switch v-model="header"/>
-<n-switch v-model="headerExtra"/>
-<n-switch v-model="description"/>
-<n-switch v-model="footer"/>
-<n-switch v-model="action"/>
+<n-row>
+  <n-col :span="12">
+    <n-checkbox v-model="avatar">头像</n-checkbox>
+  </n-col>
+  <n-col :span="12">
+    <n-checkbox v-model="action">操作</n-checkbox>
+  </n-col>
+</n-row>
+<n-row>
+  <n-col :span="12">
+    <n-checkbox v-model="header">标题</n-checkbox>
+  </n-col>
+  <n-col :span="12">
+    <n-checkbox v-model="headerExtra">标题附加信息</n-checkbox>
+  </n-col>
+</n-row>
+<n-row>
+  <n-col :span="12">
+    <n-checkbox v-model="description">描述</n-checkbox>
+  </n-col>
+  <n-col :span="12">
+    <n-checkbox v-model="footer">底部</n-checkbox>
+  </n-col>
+</n-row>
+<n-divider />
 <n-thing>
   <template v-slot:avatar v-if="avatar">
     <n-avatar>

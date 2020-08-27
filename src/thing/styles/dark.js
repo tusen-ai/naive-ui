@@ -12,9 +12,9 @@ export default create({
       strongFontWeight
     } = base
     return {
-      thingHeaderTextColor: primaryTextOverlayColor,
-      thingTextColor: secondaryTextOverlayColor,
-      strongFontWeight: strongFontWeight
+      headerTextColor: primaryTextOverlayColor,
+      textColor: secondaryTextOverlayColor,
+      headerFontWeight: strongFontWeight
     }
   }
 })

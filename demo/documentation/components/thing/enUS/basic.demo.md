@@ -1,12 +1,31 @@
 # Basic
 Thing provides many slots to custom.
 ```html
-<n-switch v-model="avatar"/>
-<n-switch v-model="header"/>
-<n-switch v-model="headerExtra"/>
-<n-switch v-model="description"/>
-<n-switch v-model="footer"/>
-<n-switch v-model="action"/>
+<n-row>
+  <n-col :span="12">
+    <n-checkbox v-model="avatar">Avatar</n-checkbox>
+  </n-col>
+  <n-col :span="12">
+    <n-checkbox v-model="action">Action</n-checkbox>
+  </n-col>
+</n-row>
+<n-row>
+  <n-col :span="12">
+    <n-checkbox v-model="header">Header</n-checkbox>
+  </n-col>
+  <n-col :span="12">
+    <n-checkbox v-model="headerExtra">Header Extra</n-checkbox>
+  </n-col>
+</n-row>
+<n-row>
+  <n-col :span="12">
+    <n-checkbox v-model="description">Description</n-checkbox>
+  </n-col>
+  <n-col :span="12">
+    <n-checkbox v-model="footer">Footer</n-checkbox>
+  </n-col>
+</n-row>
+<n-divider />
 <n-thing>
   <template v-slot:avatar v-if="avatar">
     <n-avatar>
