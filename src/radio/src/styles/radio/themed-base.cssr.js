@@ -3,17 +3,17 @@ import { c, cTB, cE, cM, cNotM, cB } from '../../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      boxShadowDefault,
+      boxShadow,
       boxShadowActive,
       boxShadowFocus,
       boxShadowHover,
       boxShadowDisabled,
-      backgroundColorDefault,
-      backgroundColorDisabled,
-      labelTextColorDefault,
-      labelTextColorDisabled,
-      controlBackgroundColorActive,
-      controlBackgroundColorDisabled
+      color,
+      colorDisabled,
+      textColor,
+      textColorDisabled,
+      dotColorActive,
+      dotColorDisabled
     } = props.$local
     const {
       easeInOutCubicBezier
@@ -41,7 +41,7 @@ export default c([
               margin: 0;
             `
           }),
-          cE('control', {
+          cE('dot', {
             raw: `
               transition:
               background-color .3s ${easeInOutCubicBezier},
@@ -50,8 +50,8 @@ export default c([
               position: relative;
               border-radius: 50%;
             `,
-            backgroundColor: backgroundColorDefault,
-            boxShadow: boxShadowDefault
+            backgroundColor: color,
+            boxShadow: boxShadow
           }
           , [
             c('&::before', {
@@ -70,7 +70,7 @@ export default c([
                   background-color .3s ${easeInOutCubicBezier},
                   transform .3s ${easeInOutCubicBezier};
               `,
-              backgroundColor: controlBackgroundColorActive
+              backgroundColor: dotColorActive
             }),
             cM('checked', {
               boxShadow: boxShadowActive
@@ -89,7 +89,7 @@ export default c([
               white-space: nowrap;
               transition: color .3s ${easeInOutCubicBezier};
             `,
-            color: labelTextColorDefault
+            color: textColor
           }),
           cNotM('disabled', {
             raw: `
@@ -97,13 +97,13 @@ export default c([
             `
           }, [
             c('&:hover', [
-              cE('control', {
+              cE('dot', {
                 boxShadow: boxShadowHover
               })
             ]),
             cM('focus', [
               c('&:not(:active)', [
-                cE('control', {
+                cE('dot', {
                   boxShadow: boxShadowFocus
                 })
               ])
@@ -114,12 +114,12 @@ export default c([
               cursor: not-allowed;
             `
           }, [
-            cE('control', {
+            cE('dot', {
               boxShadow: boxShadowDisabled,
-              backgroundColor: backgroundColorDisabled
+              backgroundColor: colorDisabled
             }, [
               c('&::before', {
-                backgroundColor: controlBackgroundColorDisabled
+                backgroundColor: dotColorDisabled
               }),
               cM('checked', {
                 raw: `
@@ -129,20 +129,20 @@ export default c([
               })
             ]),
             cE('label', {
-              color: labelTextColorDisabled
+              color: textColorDisabled
             })
           ])
         ]
       ),
       cTB('radio-group', {
         raw: `
-            display: inline-block;
-          `
+          display: inline-block;
+        `
       }, [
         cB('radio', {
           raw: `
-              margin-right: 18px;
-            `
+            margin-right: 18px;
+          `
         })
       ])
     ]

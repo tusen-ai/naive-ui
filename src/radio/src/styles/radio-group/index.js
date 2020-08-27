@@ -5,7 +5,8 @@ export default [
   {
     key: 'syntheticSize',
     watch: [
-      'syntheticSize'
+      'syntheticSize',
+      'syntheticTheme'
     ],
     CNode: sizeStyle
   },
