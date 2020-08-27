@@ -2,24 +2,26 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
-    const modifierItems = Array.apply(null, { length: 24 }).map((_, index) => {
-      const _index = index + 1
-      const percent = (1 / 24 * _index * 100).toFixed(2) + '%'
-      return [
-        cM(`${_index}-span`, {
-          width: percent
-        }),
-        cM(`${_index}-offset`, {
-          marginLeft: percent
-        }),
-        cM(`${_index}-push`, {
-          left: percent
-        }),
-        cM(`${_index}-pull`, {
-          right: percent
-        })
-      ]
-    })
+    const positionStyles = Array
+      .apply(null, { length: 24 })
+      .map((_, index) => {
+        const prefixIndex = index + 1
+        const percent = (1 / 24 * prefixIndex * 100).toFixed(2) + '%'
+        return [
+          cM(`${prefixIndex}-span`, {
+            width: percent
+          }),
+          cM(`${prefixIndex}-offset`, {
+            marginLeft: percent
+          }),
+          cM(`${prefixIndex}-push`, {
+            left: percent
+          }),
+          cM(`${prefixIndex}-pull`, {
+            right: percent
+          })
+        ]
+      })
     return cB('col', {
       verticalAlign: 'top',
       boxSizing: 'border-box',
@@ -33,7 +35,7 @@ export default c([
         width: '100%',
         height: '100%'
       }),
-      ...modifierItems
+      positionStyles
     ])
   }
 ])
