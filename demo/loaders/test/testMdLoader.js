@@ -2,8 +2,10 @@
 const marked = require('marked')
 const fs = require('fs')
 const path = require('path')
-const content = fs.readFileSync(path.resolve(__dirname, '../documentation/intro/start.vue.md')).toString()
+const content = fs.readFileSync(path.resolve(__dirname, '../../../CHANGELOG.zh-CN.md')).toString()
 // console.log('rendered', mdLoader(content))
+
+const mdLoader = require('../NaiveUIMdLoader')
 
 function parseMdAsAnchor (content) {
   const tokens = marked.lexer(content)
@@ -15,4 +17,4 @@ function parseMdAsAnchor (content) {
   return `<n-anchor :top="32" position="absolute" affix style="width: 132px;">${linkTags.join('\n')}</n-anchor>`
 }
 
-console.log(parseMdAsAnchor(content))
+console.log(mdLoader.call({ resourcePath: 'xxx' }, content, 'xxx'))
