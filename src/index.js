@@ -47,7 +47,7 @@ import Popconfirm from './popconfirm'
 import Popselect from './popselect'
 import Popup from './Popover'
 import Progress from './progress'
-import Radio from './Radio'
+import Radio from './radio'
 import Result from './result'
 import Select from './select'
 import Scrollbar from './scrollbar'
@@ -168,6 +168,8 @@ import thingLightStyle from './thing/styles/light'
 import thingDarkStyle from './thing/styles/dark'
 import switchLightStyle from './switch/styles/light'
 import switchDarkStyle from './switch/styles/dark'
+import radioLightStyle from './radio/styles/light'
+import radioDarkStyle from './radio/styles/dark'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -365,6 +367,8 @@ export default create({
     thingDarkStyle,
     switchLightStyle,
     switchDarkStyle,
+    radioLightStyle,
+    radioDarkStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle

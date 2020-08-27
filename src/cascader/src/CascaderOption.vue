@@ -64,7 +64,7 @@
 
 <script>
 import NCheckbox from '../../checkbox'
-import NRadio from '../../Radio'
+import NRadio from '../../radio'
 import NBaseLoading from '../../_base/loading'
 
 export default {

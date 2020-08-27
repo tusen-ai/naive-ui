@@ -40,34 +40,40 @@ import asformitem from '../../_mixins/asformitem'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import radioMixin from './radioMixin'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/radio/index.js'
 
 export default {
-  name: 'NRadio',
-  mixins: [ withapp, themeable, asformitem(
-    {
-      change: 'change',
-      blur: 'blur',
-      focus: 'focus'
-    },
-    'medium',
-    function () {
-      const size = this.size
-      if (size) return size
-      const NRadioGroup = this.NRadioGroup
-      if (NRadioGroup && NRadioGroup.syntheticSize) {
-        return NRadioGroup.syntheticSize
-      }
-      const NFormItem = this.NFormItem
-      if (
-        NFormItem &&
+  name: 'Radio',
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles),
+    asformitem(
+      {
+        change: 'change',
+        blur: 'blur',
+        focus: 'focus'
+      },
+      'medium',
+      function () {
+        const size = this.size
+        if (size) return size
+        const NRadioGroup = this.NRadioGroup
+        if (NRadioGroup && NRadioGroup.syntheticSize) {
+          return NRadioGroup.syntheticSize
+        }
+        const NFormItem = this.NFormItem
+        if (
+          NFormItem &&
         NFormItem !== '__FORM_ITEM_INNER__' &&
         NFormItem.syntheticSize
-      ) {
-        return NFormItem.syntheticSize
+        ) {
+          return NFormItem.syntheticSize
+        }
+        return 'medium'
       }
-      return 'medium'
-    }
-  ), radioMixin ],
+    ), radioMixin ],
   props: {
     size: {
       validator (value) {
