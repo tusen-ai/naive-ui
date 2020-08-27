@@ -4,6 +4,8 @@ import themeable from '../../_mixins/themeable'
 import hollowoutable from '../../_mixins/hollowoutable'
 import asformitem from '../../_mixins/asformitem'
 import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/radio-group/index.js'
 
 function mapSlot (h, defaultSlot, groupInstance) {
   const mappedSlot = []
@@ -14,14 +16,14 @@ function mapSlot (h, defaultSlot, groupInstance) {
     const instanceCtorOptions = instanceOptions && instanceOptions.Ctor.options
     if (
       !instanceOptions ||
-      !['NRadio', 'NRadioButton'].includes(instanceCtorOptions.name)
+      !['Radio', 'RadioButton'].includes(instanceCtorOptions.name)
     ) {
       console.error(
         '[naive ui/radio]: `n-radio-group` only taks `n-radio` and `n-radio-button` as children.'
       )
       continue
     }
-    if (i === 0 || instanceCtorOptions.name === 'NRadio') {
+    if (i === 0 || instanceCtorOptions.name === 'Radio') {
       mappedSlot.push(wrappedInstance)
     } else {
       const lastInstanceComponentOptions = mappedSlot[mappedSlot.length - 1].componentOptions
@@ -73,10 +75,18 @@ function mapSlot (h, defaultSlot, groupInstance) {
 }
 
 export default {
-  name: 'NRadioGroup',
-  mixins: [withapp, themeable, hollowoutable, asformitem({
-    change: 'change'
-  }, 'small')],
+  name: 'RadioGroup',
+  cssrName: 'Radio',
+  cssrId: 'RadioGroup',
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles),
+    hollowoutable,
+    asformitem({
+      change: 'change'
+    }, 'small')
+  ],
   model: {
     prop: 'value',
     event: 'change'

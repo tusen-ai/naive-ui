@@ -31,10 +31,17 @@
 
 <script>
 import radioMixin from './radioMixin'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/radio-button/index.js'
 
 export default {
-  name: 'NRadioButton',
-  mixins: [ radioMixin ],
+  name: 'RadioButton',
+  cssrName: 'Radio',
+  cssrId: 'RadioButton',
+  mixins: [
+    radioMixin,
+    usecssr(styles)
+  ],
   created () {
     this.NRadioGroup && this.NRadioGroup.radioButtonCount++
   },

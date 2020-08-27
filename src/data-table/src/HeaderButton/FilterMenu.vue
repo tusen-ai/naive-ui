@@ -61,8 +61,8 @@
 <script>
 import NCheckboxGroup from '../../../checkbox/src/CheckboxGroup'
 import NCheckbox from '../../../checkbox/src/Checkbox'
-import NRadioGroup from '../../../Radio/src/RadioGroup'
-import NRadio from '../../../Radio/src/Radio'
+import NRadioGroup from '../../../radio/src/RadioGroup'
+import NRadio from '../../../radio/src/Radio'
 import NDivider from '../../../divider'
 import NButton from '../../../button'
 import NScrollbar from '../../../scrollbar'
