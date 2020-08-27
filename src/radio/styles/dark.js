@@ -18,7 +18,6 @@ export default create({
     const {
       borderRadius
     } = base
-    const borderMaskWidth = '1px'
     return {
       ...commonVariables,
       boxShadow: `inset 0 0 0 1px ${borderOverlayColor}`,
@@ -41,9 +40,9 @@ export default create({
       buttonTextColorActive: baseBackgroundColor,
       buttonTextColorHover: primaryColor,
       disabledOpacity: disabledOpacity,
-      borderMaskWidth: borderMaskWidth,
       buttonBoxShadowFocus: `inset 0 0 0 1px ${primaryColor}, 0 0 0 2px ${changeColor(primaryColor, { alpha: 0.3 })}`,
-      buttonBoxShadowHover: `inset 0 0 0 ${borderMaskWidth} ${primaryColor}`,
+      buttonBoxShadowHover: `inset 0 0 0 1px ${primaryColor}`,
+      buttonBoxShadow: 'inset 0 0 0 1px transparent',
       buttonBorderRadius: borderRadius
     }
   }

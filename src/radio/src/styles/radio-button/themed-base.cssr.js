@@ -10,10 +10,10 @@ export default c([
       buttonTextColorActive,
       buttonTextColorHover,
       disabledOpacity,
-      borderMaskWidth,
       buttonBoxShadowFocus,
       buttonBoxShadowHover,
-      buttonBorderRadius
+      buttonBorderRadius,
+      buttonBoxShadow
     } = props.$local
     const {
       easeInOutCubicBezier
@@ -64,7 +64,7 @@ export default c([
           raw: `
             pointer-events: none;
             position: absolute;
-            box-shadow: inset 0 0 0 ${borderMaskWidth} transparent;
+            box-shadow: ${buttonBoxShadow};
             transition: box-shadow .3s ${easeInOutCubicBezier};
             left: -1px;
             bottom: -1px;
