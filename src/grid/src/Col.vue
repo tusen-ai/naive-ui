@@ -25,6 +25,8 @@
 
 <script>
 import formatLength from '../../_utils/css/formatLength'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/col.js'
 
 export default {
   inject: {
@@ -32,7 +34,10 @@ export default {
       default: null
     }
   },
-  name: 'NCol',
+  name: 'Col',
+  mixins: [
+    usecssr(styles)
+  ],
   props: {
     span: {
       type: [String, Number],

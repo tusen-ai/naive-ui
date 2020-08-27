@@ -1,6 +1,6 @@
 <script>
 import NFormItem from './FormItem'
-import NCol from '../../Grid/src/Col'
+import NCol from '../../grid/src/Col'
 
 export default {
   name: 'NFormItemCol',

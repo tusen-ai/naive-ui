@@ -17,6 +17,8 @@
 
 <script>
 import formatLength from '../../_utils/css/formatLength'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/row.js'
 
 export default {
   provide () {
@@ -24,7 +26,10 @@ export default {
       NRow: this
     }
   },
-  name: 'NRow',
+  name: 'Row',
+  mixins: [
+    usecssr(styles)
+  ],
   props: {
     gutter: {
       type: [Array, Number, String],
