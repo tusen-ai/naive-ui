@@ -20,38 +20,32 @@ export default create({
     } = base
     const coloredBoxShadow = '0px 2px 18px 0px rgba(0, 0, 0, 0.27)'
     return {
-      textColor: {
-        info: baseBackgroundColor,
-        success: baseBackgroundColor,
-        error: baseBackgroundColor,
-        warning: baseBackgroundColor,
-        loading: secondaryTextColor
-      },
-      iconColor: 'rgba(255, 255, 255, .45)',
-      closeColor: {
-        default: 'rgba(255, 255, 255, .5)',
-        hover: 'rgba(255, 255, 255, .6)',
-        active: 'rgba(255, 255, 255, .4)'
-      },
-      loadingCloseColor: {
-        default: closeColor,
-        hover: closeHoverColor,
-        active: closeColor
-      },
-      color: {
-        info: infoColor,
-        success: successColor,
-        error: errorColor,
-        warning: warningColor,
-        loading: popoverBackgroundColor
-      },
-      boxShadow: {
-        info: coloredBoxShadow,
-        success: coloredBoxShadow,
-        error: coloredBoxShadow,
-        warning: coloredBoxShadow,
-        loading: popmenuBoxShadow
-      }
+      textColorInfo: baseBackgroundColor,
+      textColorSuccess: baseBackgroundColor,
+      textColorError: baseBackgroundColor,
+      textColorWarning: baseBackgroundColor,
+      textColorLoading: secondaryTextColor,
+      colorInfo: infoColor,
+      colorSuccess: successColor,
+      colorError: errorColor,
+      colorWarning: warningColor,
+      colorLoading: popoverBackgroundColor,
+      boxShadowInfo: coloredBoxShadow,
+      boxShadowSuccess: coloredBoxShadow,
+      boxShadowError: coloredBoxShadow,
+      boxShadowWarning: coloredBoxShadow,
+      boxShadowLoading: popmenuBoxShadow,
+      iconColorInfo: 'rgba(255, 255, 255, .45)',
+      iconColorSuccess: 'rgba(255, 255, 255, .45)',
+      iconColorWarning: 'rgba(255, 255, 255, .45)',
+      iconColorError: 'rgba(255, 255, 255, .45)',
+      iconColorLoading: 'rgba(255, 255, 255, .45)',
+      closeColor: 'rgba(255, 255, 255, .5)',
+      closeColorHover: 'rgba(255, 255, 255, .6)',
+      closeColorActive: 'rgba(255, 255, 255, .4)',
+      closeColorLoading: closeColor,
+      closeColorLoadingHover: closeHoverColor,
+      closeColorLoadingActive: closeColor
     }
   }
 })
