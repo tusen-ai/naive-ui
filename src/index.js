@@ -39,7 +39,7 @@ import List from './list'
 import LoadingBar from './loading-bar'
 import Log from './log'
 import Menu from './menu'
-import Message from './Message'
+import Message from './message'
 import Modal from './modal'
 import Notification from './notification'
 import Pagination from './Pagination'
@@ -170,6 +170,8 @@ import switchLightStyle from './switch/styles/light'
 import switchDarkStyle from './switch/styles/dark'
 import radioLightStyle from './radio/styles/light'
 import radioDarkStyle from './radio/styles/dark'
+import messageLightStyle from './message/styles/light'
+import messageDarkStyle from './message/styles/dark'
 import notificationLightStyle from './notification/styles/light'
 import notificationDarkStyle from './notification/styles/dark'
 import layoutDarkStyle from './layout/styles/dark'
@@ -373,6 +375,8 @@ export default create({
     switchDarkStyle,
     radioLightStyle,
     radioDarkStyle,
+    messageLightStyle,
+    messageDarkStyle,
     notificationLightStyle,
     notificationDarkStyle,
     layoutDarkStyle,
