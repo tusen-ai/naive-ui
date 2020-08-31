@@ -1,55 +1,37 @@
-import { cTB, c, cB, cE, cM } from '../../../_utils/cssr'
+import { cTB, c, cB, cE, cM, createKey } from '../../../_utils/cssr'
 import iconSwitchTransition from '../../../styles/_transitions/icon-switch'
 
-function messageTypeMixin (type, textColor, color, boxShadow, iconColor, loadingCloseColor) {
+function typeStyle (
+  type,
+  pallete
+) {
   return cM(`${type}-type`, {
     raw: `
-      color: ${textColor[type]};
-      background-color: ${color[type]};
-      box-shadow: ${boxShadow[type]};
+      color: ${pallete[createKey('textColor', type)]};
+      background-color: ${pallete[createKey('color', type)]};
+      box-shadow: ${pallete[createKey('boxShadow', type)]};
     `
   }, [
     cE('icon', [
       cB('icon', {
         raw: `
-          fill: ${iconColor};
-          stroke: ${iconColor};
+          fill: ${pallete[createKey('iconColor', type)]};
+          stroke: ${pallete[createKey('iconColor', type)]};
         `
       })
-    ]),
-    type === 'loading' && cE('close', [
-      cB('icon', {
-        raw: `
-          cursor: pointer;
-          fill: ${loadingCloseColor.default};
-          stroke: ${loadingCloseColor.default};
-        `
-      }, [
-        c('&:hover', {
-          raw: `
-            fill: ${loadingCloseColor.hover};
-            stroke: ${loadingCloseColor.hover};
-          `
-        }),
-        c('&:active', {
-          raw: `
-            fill: ${loadingCloseColor.active};
-            stroke: ${loadingCloseColor.active};
-          `
-        })
-      ])
     ])
   ])
 }
+
 export default c([
   ({ props }) => {
     const {
-      textColor,
-      iconColor,
       closeColor,
-      loadingCloseColor,
-      color,
-      boxShadow
+      closeColorHover,
+      closeColorActive,
+      closeColorLoading,
+      closeColorLoadingHover,
+      closeColorLoadingActive
     } = props.$local
     const {
       easeInOutCubicBezier
@@ -76,15 +58,6 @@ export default c([
         overflow: hidden;
       `
     }, [
-      c('&&-transition-enter, &&-transition-leave-to', {
-        raw: `
-          opacity: 0;
-          transform: translateY(-12px) scale(.5);
-          transform-origin: top center;
-          max-height: 0;
-          margin-bottom: 0;
-        `
-      }),
       cE('content', {
         raw: `
           display: inline-block;
@@ -127,20 +100,42 @@ export default c([
         cB('icon', {
           raw: `
             cursor: pointer;
-            fill: ${closeColor.default};
-            stroke: ${closeColor.default};
+            fill: ${closeColor};
+            stroke: ${closeColor};
           `
         }, [
           c('&:hover', {
             raw: `
-              fill: ${closeColor.hover};
-              stroke: ${closeColor.hover};
+              fill: ${closeColorHover};
+              stroke: ${closeColorHover};
             `
           }),
           c('&:active', {
             raw: `
-              fill: ${closeColor.active};
-              stroke: ${closeColor.active};
+              fill: ${closeColorActive};
+              stroke: ${closeColorActive};
+            `
+          })
+        ])
+      ]),
+      cM('loading-type', [
+        cB('icon', {
+          raw: `
+            cursor: pointer;
+            fill: ${closeColorLoading};
+            stroke: ${closeColorLoading};
+          `
+        }, [
+          c('&:hover', {
+            raw: `
+              fill: ${closeColorLoadingHover};
+              stroke: ${closeColorLoadingHover};
+            `
+          }),
+          c('&:active', {
+            raw: `
+              fill: ${closeColorLoadingActive};
+              stroke: ${closeColorLoadingActive};
             `
           })
         ])
@@ -150,7 +145,8 @@ export default c([
           padding-right: 24px;
         `
       }),
-      ...['info', 'success', 'error', 'warning', 'loading'].map(type => messageTypeMixin(type, textColor, color, boxShadow, iconColor, loadingCloseColor))
+      ['info', 'success', 'error', 'warning', 'loading']
+        .map(type => typeStyle(type, props.$local))
     ])
   },
   cB('message-container', {
@@ -166,5 +162,17 @@ export default c([
       flex-direction: column;
       align-items: center;
     `
-  })
+  }),
+  // TODO: refactor transition style
+  cB('message', [
+    c('&&-transition-enter, &&-transition-leave-to', {
+      raw: `
+        opacity: 0;
+        transform: translateY(-12px) scale(.5);
+        transform-origin: top center;
+        max-height: 0;
+        margin-bottom: 0;
+      `
+    })
+  ])
 ])

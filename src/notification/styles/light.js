@@ -1,11 +1,15 @@
 import create from '../../styles/_utils/create-component-base'
+import avatarStyle from '../../avatar/styles/dark'
 
 export default create({
   name: 'Notification',
   theme: 'light',
+  peer: [
+    avatarStyle
+  ],
   getDerivedVariables ({ base, derived }) {
     const {
-      secondaryTextOverlayColor,
+      secondaryTextColor,
       successColor,
       infoColor,
       warningColor,
@@ -22,25 +26,20 @@ export default create({
     } = base
     return {
       borderRadius,
-      strongFontWeight,
-      avatarFill: {
-        default: secondaryTextOverlayColor,
-        success: successColor,
-        info: infoColor,
-        warning: warningColor,
-        error: errorColor
-      },
+      headerFontWeight: strongFontWeight,
+      iconColorSuccess: successColor,
+      iconColorInfo: infoColor,
+      iconColorWarning: warningColor,
+      iconColorError: errorColor,
       color: popoverBackgroundColor,
-      textColor: secondaryTextOverlayColor,
-      closeColor: {
-        default: closeColor,
-        hover: closeHoverColor,
-        active: closeColor
-      },
+      textColor: secondaryTextColor,
+      closeColor: closeColor,
+      closeColorHover: closeHoverColor,
+      closeColorActive: closeColor,
       headerTextColor: primaryTextOverlayColor,
-      contentTextColor: secondaryTextOverlayColor,
+      contentTextColor: secondaryTextColor,
       descriptionTextColor: tertiaryTextOverlayColor,
-      actionTextColor: secondaryTextOverlayColor
+      actionTextColor: secondaryTextColor
     }
   }
 })

@@ -13,23 +13,17 @@ export default create({
       scrollbarBackgroundOverlayColor,
       scrollbarHoverBackgroundOverlayColor
     } = derived
-    const {
-      borderRadius
-    } = base
     return {
-      borderRadius,
       textColor: secondaryTextOverlayColor,
       color: bodyBackgroundColor,
-      headerBackgroundColor: cardBackgroundColor,
+      headerColor: cardBackgroundColor,
       headerBorderColor: dividerOverlayColor,
       footerBorderColor: dividerOverlayColor,
       siderBorderColor: dividerOverlayColor,
-      siderBackgroundColor: cardBackgroundColor,
-      siderToggleButtonFill: 'rgba(255, 255, 255, .3)',
-      siderToggleBarBackgroundColor: {
-        default: composite(bodyBackgroundColor, scrollbarBackgroundOverlayColor),
-        hover: composite(bodyBackgroundColor, scrollbarHoverBackgroundOverlayColor)
-      }
+      siderColor: cardBackgroundColor,
+      siderToggleButtonColor: 'rgba(255, 255, 255, .3)',
+      siderToggleBarColor: composite(bodyBackgroundColor, scrollbarBackgroundOverlayColor),
+      siderToggleBarColorHover: composite(bodyBackgroundColor, scrollbarHoverBackgroundOverlayColor)
     }
   }
 })

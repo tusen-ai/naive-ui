@@ -16,10 +16,19 @@
 import layoutModeMixin from './layoutModeMixin'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/layout-header-footer'
 
 export default {
   name: 'LayoutFooter',
-  mixins: [ withapp, themeable, layoutModeMixin ],
+  cssrName: 'Layout',
+  cssrId: 'LayoutHeaderFooter',
+  mixins: [
+    withapp,
+    themeable,
+    layoutModeMixin,
+    usecssr(styles)
+  ],
   props: {
     bordered: {
       type: Boolean,

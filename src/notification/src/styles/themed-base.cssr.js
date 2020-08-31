@@ -1,4 +1,17 @@
-import { cTB, c, cB, cE, cM } from '../../../_utils/cssr'
+import { cTB, c, cB, cE, cM, createKey } from '../../../_utils/cssr'
+
+function typeStyle (type, color) {
+  return cM(`${type}-type`, [
+    cE('avatar', [
+      cB('icon', {
+        raw: `
+          fill: ${color};
+          stroke: ${color};
+        `
+      })
+    ])
+  ])
+}
 
 export default c([
   cB('notification-container', {
@@ -39,7 +52,10 @@ export default c([
           ])
         ])
       ])
-    ])
+    ]),
+    cM('scrollable', {
+      top: 0
+    })
   ]),
   ({ props }) => {
     const {
@@ -47,28 +63,17 @@ export default c([
     } = props.$base
     const {
       color,
-      avatarFill,
       textColor,
       closeColor,
+      closeColorHover,
+      closeColorActive,
       headerTextColor,
       contentTextColor,
       descriptionTextColor,
       actionTextColor,
       borderRadius,
-      strongFontWeight
+      headerFontWeight
     } = props.$local
-    function notificationTypeMixin (type) {
-      return cM(`${type}-type`, [
-        cE('avatar', [
-          cB('icon', {
-            raw: `
-              fill: ${avatarFill[type]};
-              stroke: ${avatarFill[type]};
-            `
-          })
-        ])
-      ])
-    }
     return [
       cTB('notification', {
         raw: `
@@ -101,7 +106,9 @@ export default c([
           opacity: 1;
         `
       }, [
-        ['success', 'info', 'warning', 'error', 'default'].map(type => notificationTypeMixin(type)),
+        // TODO: refactor type styles & transition
+        ['success', 'info', 'warning', 'error', 'default']
+          .map(type => typeStyle(type, props.$local[createKey('iconColor', type)])),
         c('&-transition-enter, &-transition-leave-to', {
           raw: `
             opacity: 0;
@@ -125,43 +132,43 @@ export default c([
         ]),
         cM('closable', [
           cB('notification-main', [
-            c('& > *:first-child', {
+            c('> *:first-child', {
               raw: `
                 padding-right: 20px
               `
             })
-          ])
-        ]),
-        cE('close', {
-          raw: `
-            position: absolute;
-            top: 16px;
-            right: 12px;
-            font-size: 20px;
-            cursor: pointer;
-          `
-        }, [
-          cB('icon', {
-            raw: `
-              fill: ${closeColor.default};
-              stroke: ${closeColor.default};
-          `
-          }),
-          c('&:hover', [
-            cB('icon', {
-              raw: `
-                fill: ${closeColor.hover};
-                stroke: ${closeColor.hover};
-              `
-            })
           ]),
-          c('&:active', [
+          cE('close', {
+            raw: `
+              position: absolute;
+              top: 16px;
+              right: 12px;
+              font-size: 20px;
+              cursor: pointer;
+            `
+          }, [
             cB('icon', {
               raw: `
-                fill: ${closeColor.active};
-                stroke: ${closeColor.active};
-              `
-            })
+                fill: ${closeColor};
+                stroke: ${closeColor};
+            `
+            }),
+            c('&:hover', [
+              cB('icon', {
+                raw: `
+                  fill: ${closeColorHover};
+                  stroke: ${closeColorHover};
+                `
+              })
+            ]),
+            c('&:active', [
+              cB('icon', {
+                raw: `
+                  fill: ${closeColorActive};
+                  stroke: ${closeColorActive};
+                `
+              })
+            ])
           ])
         ]),
         cE('avatar', {
@@ -192,63 +199,57 @@ export default c([
               justify-content: space-between;
               margin-top: 8px;
             `
-          })
-        ]),
-        cE('header', {
-          raw: `
-            font-weight: ${strongFontWeight};
-            font-size: 16px;
-            transition: color .3s ${easeOutCubicBezier};
-            color: ${headerTextColor};
-          `
-        }),
-        cE('description', {
-          raw: `
-            margin-top: 8px;
-            font-size: 12px;
-            transition: color .3s ${easeOutCubicBezier};
-            color: ${descriptionTextColor};
-          `
-        }),
-        cE('content', {
-          raw: `
-            line-height: 1.75;
-            margin: 12px 0 0 0;
-            font-family: inherit;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            transition: color .3s ${easeOutCubicBezier};
-            color: ${contentTextColor};
-          `
-        }, [
-          c('&:first-child', {
+          }, [
+            cE('meta', {
+              raw: `
+                font-size: 12px;
+                transition: color .3s ${easeOutCubicBezier};
+                color: ${descriptionTextColor};
+              `
+            }),
+            cE('action', {
+              raw: `
+                cursor: pointer;
+                transition: color .3s ${easeOutCubicBezier};
+                color: ${actionTextColor};
+              `
+            })
+          ]),
+          cE('header', {
             raw: `
-              margin: 0;
+              font-weight: ${headerFontWeight};
+              font-size: 16px;
+              transition: color .3s ${easeOutCubicBezier};
+              color: ${headerTextColor};
             `
-          })
-        ]),
-        cB('notification-main-footer', {
-          raw: `
-            margin-top: 12px;
-          `
-        }, [
-          cE('meta', {
+          }),
+          cE('description', {
             raw: `
+              margin-top: 8px;
               font-size: 12px;
               transition: color .3s ${easeOutCubicBezier};
               color: ${descriptionTextColor};
             `
           }),
-          cE('action', {
+          cE('content', {
             raw: `
-              cursor: pointer;
+              line-height: 1.75;
+              margin: 12px 0 0 0;
+              font-family: inherit;
+              white-space: pre-wrap;
+              word-wrap: break-word;
               transition: color .3s ${easeOutCubicBezier};
-              color: ${actionTextColor};
+              color: ${contentTextColor};
             `
-          })
+          }, [
+            c('&:first-child', {
+              raw: `
+                margin: 0;
+              `
+            })
+          ])
         ])
       ])
     ]
   }
-
 ])

@@ -18,38 +18,32 @@ export default create({
       popmenuBoxShadow
     } = base
     return {
-      textColor: {
-        info: baseTextColor,
-        success: baseTextColor,
-        error: baseTextColor,
-        warning: baseTextColor,
-        loading: secondaryTextOverlayColor
-      },
-      iconColor: 'rgba(255, 255, 255, .5)',
-      closeColor: {
-        default: 'rgba(255, 255, 255, .5)',
-        hover: 'rgba(255, 255, 255, .6)',
-        active: 'rgba(255, 255, 255, .4)'
-      },
-      loadingCloseColor: {
-        default: 'rgba(255, 255, 255, .5)',
-        hover: 'rgba(255, 255, 255, .6)',
-        active: 'rgba(255, 255, 255, .4)'
-      },
-      color: {
-        info: infoHsColor,
-        success: successHsColor,
-        error: errorHsColor,
-        warning: warningHsColor,
-        loading: popoverBackgroundColor
-      },
-      boxShadow: {
-        info: `0 2px 12px 0 ${changeColor(infoHsColor, { alpha: '0.4' })}`,
-        success: `0 2px 12px 0 ${changeColor(successHsColor, { alpha: '0.4' })}`,
-        error: `0 2px 12px 0 ${changeColor(errorHsColor, { alpha: '0.4' })}`,
-        warning: `0 2px 12px 0 ${changeColor(warningHsColor, { alpha: '0.4' })}`,
-        loading: popmenuBoxShadow
-      }
+      textColorInfo: baseTextColor,
+      textColorSuccess: baseTextColor,
+      textColorError: baseTextColor,
+      textColorWarning: baseTextColor,
+      textColorLoading: secondaryTextOverlayColor,
+      colorInfo: infoHsColor,
+      colorSuccess: successHsColor,
+      colorError: errorHsColor,
+      colorWarning: warningHsColor,
+      colorLoading: popoverBackgroundColor,
+      boxShadowInfo: `0 2px 12px 0 ${changeColor(infoHsColor, { alpha: '0.4' })}`,
+      boxShadowSuccess: `0 2px 12px 0 ${changeColor(successHsColor, { alpha: '0.4' })}`,
+      boxShadowError: `0 2px 12px 0 ${changeColor(errorHsColor, { alpha: '0.4' })}`,
+      boxShadowWarning: `0 2px 12px 0 ${changeColor(warningHsColor, { alpha: '0.4' })}`,
+      boxShadowLoading: popmenuBoxShadow,
+      iconColorInfo: 'rgba(255, 255, 255, .5)',
+      iconColorSuccess: 'rgba(255, 255, 255, .5)',
+      iconColorWarning: 'rgba(255, 255, 255, .5)',
+      iconColorError: 'rgba(255, 255, 255, .5)',
+      iconColorLoading: 'rgba(255, 255, 255, .5)',
+      closeColor: 'rgba(255, 255, 255, .5)',
+      closeColorHover: 'rgba(255, 255, 255, .6)',
+      closeColorActive: 'rgba(255, 255, 255, .4)',
+      closeColorLoading: 'rgba(255, 255, 255, .5)',
+      closeColorLoadingHover: 'rgba(255, 255, 255, .6)',
+      closeColorLoadingActive: 'rgba(255, 255, 255, .4)'
     }
   }
 })

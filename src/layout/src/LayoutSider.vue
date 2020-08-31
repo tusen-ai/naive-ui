@@ -49,18 +49,27 @@
 import layoutModeMixin from './layoutModeMixin'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import usecssr from '../../_mixins/usecssr'
 import ToggleButton from './ToggleButton'
 import ToggleBar from './ToggleBar'
 import NScrollbar from '../../scrollbar'
+import styles from './styles/layout-sider'
 
 export default {
   name: 'LayoutSider',
+  cssrName: 'Layout',
+  cssrId: 'LayoutSider',
   components: {
     ToggleButton,
     ToggleBar,
     NScrollbar
   },
-  mixins: [ withapp, themeable, layoutModeMixin ],
+  mixins: [
+    withapp,
+    themeable,
+    layoutModeMixin,
+    usecssr(styles)
+  ],
   props: {
     bordered: {
       type: Boolean,

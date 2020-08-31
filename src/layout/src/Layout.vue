@@ -28,10 +28,12 @@ import themeable from '../../_mixins/themeable'
 import withapp from '../../_mixins/withapp'
 import NScrollbar from '../../scrollbar'
 import usecssr from '../../_mixins/usecssr'
-import styles from './styles'
+import styles from './styles/layout'
 
 export default {
   name: 'Layout',
+  cssrName: 'Layout',
+  cssrId: 'Layout',
   components: {
     NScrollbar
   },
