@@ -41,7 +41,7 @@ import Log from './log'
 import Menu from './menu'
 import Message from './Message'
 import Modal from './modal'
-import Notification from './Notification'
+import Notification from './notification'
 import Pagination from './Pagination'
 import Popconfirm from './popconfirm'
 import Popselect from './popselect'
@@ -170,6 +170,8 @@ import switchLightStyle from './switch/styles/light'
 import switchDarkStyle from './switch/styles/dark'
 import radioLightStyle from './radio/styles/light'
 import radioDarkStyle from './radio/styles/dark'
+import notificationLightStyle from './notification/styles/light'
+import notificationDarkStyle from './notification/styles/dark'
 import layoutDarkStyle from './layout/styles/dark'
 import layoutLightStyle from './layout/styles/light'
 
@@ -371,6 +373,8 @@ export default create({
     switchDarkStyle,
     radioLightStyle,
     radioDarkStyle,
+    notificationLightStyle,
+    notificationDarkStyle,
     layoutDarkStyle,
     layoutLightStyle,
     // Can be remove after refactoring
