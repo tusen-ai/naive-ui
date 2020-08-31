@@ -34,7 +34,7 @@ import Input from './input'
 import InputGroup from './input-group'
 import InputGroupLabelStyle from './input-group-label'
 import InputNumber from './input-number'
-import Layout from './Layout'
+import Layout from './layout'
 import List from './list'
 import LoadingBar from './loading-bar'
 import Log from './log'
@@ -170,6 +170,8 @@ import switchLightStyle from './switch/styles/light'
 import switchDarkStyle from './switch/styles/dark'
 import radioLightStyle from './radio/styles/light'
 import radioDarkStyle from './radio/styles/dark'
+import layoutDarkStyle from './layout/styles/dark'
+import layoutLightStyle from './layout/styles/light'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -369,6 +371,8 @@ export default create({
     switchDarkStyle,
     radioLightStyle,
     radioDarkStyle,
+    layoutDarkStyle,
+    layoutLightStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle

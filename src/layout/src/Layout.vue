@@ -27,13 +27,20 @@ import layoutModeMixin from './layoutModeMixin'
 import themeable from '../../_mixins/themeable'
 import withapp from '../../_mixins/withapp'
 import NScrollbar from '../../scrollbar'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 export default {
-  name: 'NLayout',
+  name: 'Layout',
   components: {
     NScrollbar
   },
-  mixins: [ withapp, themeable, layoutModeMixin ],
+  mixins: [
+    withapp,
+    themeable,
+    layoutModeMixin,
+    usecssr(styles)
+  ],
   provide () {
     return {
       NLayout: this
