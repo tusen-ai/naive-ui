@@ -54,7 +54,7 @@ import ToggleBar from './ToggleBar'
 import NScrollbar from '../../scrollbar'
 
 export default {
-  name: 'NLayoutSider',
+  name: 'LayoutSider',
   components: {
     ToggleButton,
     ToggleBar,

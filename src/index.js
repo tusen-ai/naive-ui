@@ -34,14 +34,14 @@ import Input from './input'
 import InputGroup from './input-group'
 import InputGroupLabelStyle from './input-group-label'
 import InputNumber from './input-number'
-import Layout from './Layout'
+import Layout from './layout'
 import List from './list'
 import LoadingBar from './loading-bar'
 import Log from './log'
 import Menu from './menu'
-import Message from './Message'
+import Message from './message'
 import Modal from './modal'
-import Notification from './Notification'
+import Notification from './notification'
 import Pagination from './Pagination'
 import Popconfirm from './popconfirm'
 import Popselect from './popselect'
@@ -170,6 +170,12 @@ import switchLightStyle from './switch/styles/light'
 import switchDarkStyle from './switch/styles/dark'
 import radioLightStyle from './radio/styles/light'
 import radioDarkStyle from './radio/styles/dark'
+import messageLightStyle from './message/styles/light'
+import messageDarkStyle from './message/styles/dark'
+import notificationLightStyle from './notification/styles/light'
+import notificationDarkStyle from './notification/styles/dark'
+import layoutDarkStyle from './layout/styles/dark'
+import layoutLightStyle from './layout/styles/light'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -369,6 +375,12 @@ export default create({
     switchDarkStyle,
     radioLightStyle,
     radioDarkStyle,
+    messageLightStyle,
+    messageDarkStyle,
+    notificationLightStyle,
+    notificationDarkStyle,
+    layoutDarkStyle,
+    layoutLightStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle

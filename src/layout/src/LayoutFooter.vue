@@ -18,7 +18,7 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 
 export default {
-  name: 'NLayoutFooter',
+  name: 'LayoutFooter',
   mixins: [ withapp, themeable, layoutModeMixin ],
   props: {
     bordered: {

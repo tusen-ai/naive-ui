@@ -10,9 +10,16 @@ import IconSwitchTransition from '../../_transition/IconSwitchTransition'
 import render from '../../_utils/vue/render'
 import themeable from '../../_mixins/themeable'
 import asthemecontext from '../../_mixins/asthemecontext'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 export default {
-  mixins: [ themeable, asthemecontext ],
+  mixins: [
+    themeable,
+    asthemecontext,
+    usecssr(styles)
+  ],
+  cssrName: 'Message',
   props: {
     icon: {
       type: [String, Function],
