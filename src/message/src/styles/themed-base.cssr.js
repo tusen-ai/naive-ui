@@ -5,7 +5,6 @@ function typeStyle (
   type,
   pallete
 ) {
-  console.log(pallete, type, createKey('textColor', type))
   return cM(`${type}-type`, {
     raw: `
       color: ${pallete[createKey('textColor', type)]};
