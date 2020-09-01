@@ -1,212 +1,212 @@
-@import './mixins/mixins.scss';
+// @import './mixins/mixins.scss';
 
-@include themes-mixin {
-  @include b(layout) {
-    color: $--layout-text-color;
-    background-color: $--layout-background-color;
-    @include once {
-      box-sizing: border-box;
-      position: relative;
-      z-index: auto;
-      transition:
-        margin-left .3s $--n-ease-in-out-cubic-bezier,
-        background-color .3s $--n-ease-in-out-cubic-bezier,
-        color .3s $--n-ease-in-out-cubic-bezier;
-      flex: auto;
-      overflow-x: hidden;
-      @include m(has-sider) {
-        display: flex;
-        flex-wrap: nowrap;
-        width: 100%;
-        flex-direction: row;
-      }
-      @include m(absolute-positioned) {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        @include b(layout-sider) {
-          z-index: 1;
-        }
-      }
-    }
-  }
-  @include b(layout-header) {
-    @include once {
-      transition:
-        background-color .3s $--n-ease-in-out-cubic-bezier,
-        box-shadow .3s $--n-ease-in-out-cubic-bezier,
-        border-color .3s $--n-ease-in-out-cubic-bezier;
-      box-sizing: border-box;
-      width: 100%;
-      @include m(absolute-positioned) {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-      }
-    }
-    background-color: $--layout-header-background-color;
-    @include m(bordered) {
-      border-bottom: solid 1px $--layout-header-border-color;
-    }
-  }
-  @include b(layout-content) {
-    @include once {
-      box-sizing: border-box;
-      position: relative;
-      z-index: auto;
-    }
-    transition:
-      margin-left .3s $--n-ease-in-out-cubic-bezier,
-      background-color .3s $--n-ease-in-out-cubic-bezier,
-      color .3s $--n-ease-in-out-cubic-bezier;
-  }
-  @include b(layout-footer) {
-    @include once {
-      transition:
-        background-color .3s $--n-ease-in-out-cubic-bezier,
-        border-color .3s $--n-ease-in-out-cubic-bezier;
-      box-sizing: border-box;
-      @include m(absolute-positioned) {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-      }
-    }
-    @include m(bordered) {
-      border-top: solid 1px $--layout-footer-border-color;
-    }
-  }
-  @include b(layout-sider) {
-    @include once {
-      box-sizing: border-box;
-      position: relative;
-      z-index: auto;
-      transition:
-        min-width .3s  $--n-ease-in-out-cubic-bezier,
-        max-width .3s $--n-ease-in-out-cubic-bezier,
-        transform .3s $--n-ease-in-out-cubic-bezier,
-        background-color .3s $--n-ease-in-out-cubic-bezier;
-      @include e(border) {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 1px;
-        transition: background-color .3s $--n-ease-in-out-cubic-bezier;
-      }
-    }  
-    background-color: $--layout-sider-background-color;
-    @include b(layout-toggle-button) {
-      @include once {
-        z-index: 1;
-        transition:
-          transform .3s $--n-ease-in-out-cubic-bezier,
-          fill .3s $--n-ease-in-out-cubic-bezier;
-        cursor: pointer;
-        width: 36px;
-        height: 36px;
-        position: absolute;
-        top: 50%;
-        right: 0;
-        transform: translateX(50%) translateY(-50%);
-      }
-      fill: $--layout-sider-toggle-button-fill;
-    }
-    @include b(layout-toggle-bar) {
-      @include once {
-        cursor: pointer;
-        height: 72px;
-        width: 32px;
-        position: absolute;
-        top: calc(50% - 36px);
-        right: -28px;
-        @include e(top, bottom) {
-          position: absolute;
-          width: 4px;
-          border-radius: 2px;
-          height: 38px;
-          left: 14px;
-          transition: 
-            background-color .3s $--n-ease-in-out-cubic-bezier,
-            transform .3s $--n-ease-in-out-cubic-bezier;
-        }
-        @include e(bottom) {
-          position: absolute;
-          top: 34px;
-        }
-        &:hover {
-          @include e(top) {
-            transform: rotate(12deg) scale(1.15) translateY(-2px);
-          }
-          @include e(bottom) {
-            transform: rotate(-12deg) scale(1.15) translateY(2px);
-          }
-        }
-        @include m(collapsed) {
-          &:hover {
-            @include e(top) {
-              transform: rotate(-12deg) scale(1.15) translateY(-2px);
-            }
-            @include e(bottom) {
-              transform: rotate(12deg) scale(1.15) translateY(2px);
-            }
-          }
-        }
-      }
-      @include e(top, bottom) {
-        background-color: map-get(
-          $--layout-sider-toggle-bar-background-color,
-          'default'
-        );
-      }
-      &:hover {
-        @include e(top, bottom) {
-          background-color: map-get(
-            $--layout-sider-toggle-bar-background-color,
-            'hover'
-          );
-        }
-      }
-    }
-    @include once {
-      @include e(content) {
-        opacity: 0;
-        transition: opacity .3s $--n-ease-in-out-cubic-bezier;
-      }
-    }
-    @include once {
-      @include m(show-content) {
-        @include e(content) {
-          opacity: 1;
-        }
-      }
-      @include m(collapsed) {
-        @include b(layout-toggle-button) {
-          transform: translateX(50%) translateY(-50%) rotate(180deg);
-        }
-      }
-      @include m(absolute-positioned) {
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        @include e(content) {
-          position: absolute;
-          left: 0;
-          right: 0;
-          top: 0;
-          bottom: 0;
-        }
-      }
-    }
-    @include m(bordered) {
-      @include e(border) {
-        background-color: $--layout-sider-border-color;
-      }
-    }
-  }
-}
+// @include themes-mixin {
+//   @include b(layout) {
+//     color: $--layout-text-color;
+//     background-color: $--layout-background-color;
+//     @include once {
+//       box-sizing: border-box;
+//       position: relative;
+//       z-index: auto;
+//       transition:
+//         margin-left .3s $--n-ease-in-out-cubic-bezier,
+//         background-color .3s $--n-ease-in-out-cubic-bezier,
+//         color .3s $--n-ease-in-out-cubic-bezier;
+//       flex: auto;
+//       overflow-x: hidden;
+//       @include m(has-sider) {
+//         display: flex;
+//         flex-wrap: nowrap;
+//         width: 100%;
+//         flex-direction: row;
+//       }
+//       @include m(absolute-positioned) {
+//         position: absolute;
+//         left: 0;
+//         right: 0;
+//         top: 0;
+//         bottom: 0;
+//         @include b(layout-sider) {
+//           z-index: 1;
+//         }
+//       }
+//     }
+//   }
+//   @include b(layout-header) {
+//     @include once {
+//       transition:
+//         background-color .3s $--n-ease-in-out-cubic-bezier,
+//         box-shadow .3s $--n-ease-in-out-cubic-bezier,
+//         border-color .3s $--n-ease-in-out-cubic-bezier;
+//       box-sizing: border-box;
+//       width: 100%;
+//       @include m(absolute-positioned) {
+//         position: absolute;
+//         left: 0;
+//         right: 0;
+//         top: 0;
+//       }
+//     }
+//     background-color: $--layout-header-background-color;
+//     @include m(bordered) {
+//       border-bottom: solid 1px $--layout-header-border-color;
+//     }
+//   }
+//   @include b(layout-content) {
+//     @include once {
+//       box-sizing: border-box;
+//       position: relative;
+//       z-index: auto;
+//     }
+//     transition:
+//       margin-left .3s $--n-ease-in-out-cubic-bezier,
+//       background-color .3s $--n-ease-in-out-cubic-bezier,
+//       color .3s $--n-ease-in-out-cubic-bezier;
+//   }
+//   @include b(layout-footer) {
+//     @include once {
+//       transition:
+//         background-color .3s $--n-ease-in-out-cubic-bezier,
+//         border-color .3s $--n-ease-in-out-cubic-bezier;
+//       box-sizing: border-box;
+//       @include m(absolute-positioned) {
+//         position: absolute;
+//         left: 0;
+//         right: 0;
+//         bottom: 0;
+//       }
+//     }
+//     @include m(bordered) {
+//       border-top: solid 1px $--layout-footer-border-color;
+//     }
+//   }
+//   @include b(layout-sider) {
+//     @include once {
+//       box-sizing: border-box;
+//       position: relative;
+//       z-index: auto;
+//       transition:
+//         min-width .3s  $--n-ease-in-out-cubic-bezier,
+//         max-width .3s $--n-ease-in-out-cubic-bezier,
+//         transform .3s $--n-ease-in-out-cubic-bezier,
+//         background-color .3s $--n-ease-in-out-cubic-bezier;
+//       @include e(border) {
+//         position: absolute;
+//         top: 0;
+//         right: 0;
+//         bottom: 0;
+//         width: 1px;
+//         transition: background-color .3s $--n-ease-in-out-cubic-bezier;
+//       }
+//     }  
+//     background-color: $--layout-sider-background-color;
+//     @include b(layout-toggle-button) {
+//       @include once {
+//         z-index: 1;
+//         transition:
+//           transform .3s $--n-ease-in-out-cubic-bezier,
+//           fill .3s $--n-ease-in-out-cubic-bezier;
+//         cursor: pointer;
+//         width: 36px;
+//         height: 36px;
+//         position: absolute;
+//         top: 50%;
+//         right: 0;
+//         transform: translateX(50%) translateY(-50%);
+//       }
+//       fill: $--layout-sider-toggle-button-fill;
+//     }
+//     @include b(layout-toggle-bar) {
+//       @include once {
+//         cursor: pointer;
+//         height: 72px;
+//         width: 32px;
+//         position: absolute;
+//         top: calc(50% - 36px);
+//         right: -28px;
+//         @include e(top, bottom) {
+//           position: absolute;
+//           width: 4px;
+//           border-radius: 2px;
+//           height: 38px;
+//           left: 14px;
+//           transition: 
+//             background-color .3s $--n-ease-in-out-cubic-bezier,
+//             transform .3s $--n-ease-in-out-cubic-bezier;
+//         }
+//         @include e(bottom) {
+//           position: absolute;
+//           top: 34px;
+//         }
+//         &:hover {
+//           @include e(top) {
+//             transform: rotate(12deg) scale(1.15) translateY(-2px);
+//           }
+//           @include e(bottom) {
+//             transform: rotate(-12deg) scale(1.15) translateY(2px);
+//           }
+//         }
+//         @include m(collapsed) {
+//           &:hover {
+//             @include e(top) {
+//               transform: rotate(-12deg) scale(1.15) translateY(-2px);
+//             }
+//             @include e(bottom) {
+//               transform: rotate(12deg) scale(1.15) translateY(2px);
+//             }
+//           }
+//         }
+//       }
+//       @include e(top, bottom) {
+//         background-color: map-get(
+//           $--layout-sider-toggle-bar-background-color,
+//           'default'
+//         );
+//       }
+//       &:hover {
+//         @include e(top, bottom) {
+//           background-color: map-get(
+//             $--layout-sider-toggle-bar-background-color,
+//             'hover'
+//           );
+//         }
+//       }
+//     }
+//     @include once {
+//       @include e(content) {
+//         opacity: 0;
+//         transition: opacity .3s $--n-ease-in-out-cubic-bezier;
+//       }
+//     }
+//     @include once {
+//       @include m(show-content) {
+//         @include e(content) {
+//           opacity: 1;
+//         }
+//       }
+//       @include m(collapsed) {
+//         @include b(layout-toggle-button) {
+//           transform: translateX(50%) translateY(-50%) rotate(180deg);
+//         }
+//       }
+//       @include m(absolute-positioned) {
+//         position: absolute;
+//         left: 0;
+//         top: 0;
+//         bottom: 0;
+//         @include e(content) {
+//           position: absolute;
+//           left: 0;
+//           right: 0;
+//           top: 0;
+//           bottom: 0;
+//         }
+//       }
+//     }
+//     @include m(bordered) {
+//       @include e(border) {
+//         background-color: $--layout-sider-border-color;
+//       }
+//     }
+//   }
+// }
