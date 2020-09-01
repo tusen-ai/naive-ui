@@ -100,15 +100,22 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import locale from '../../_mixins/locale'
 import { pageItems } from './utils'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 export default {
-  name: 'NPagination',
+  name: 'Pagination',
   components: {
     NSelect,
     NInput,
     NBaseIcon
   },
-  mixins: [ withapp, themeable, locale('Pagination') ],
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles),
+    locale('Pagination')
+  ],
   model: {
     prop: 'page',
     event: 'change'

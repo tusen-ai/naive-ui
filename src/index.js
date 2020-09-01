@@ -42,7 +42,7 @@ import Menu from './menu'
 import Message from './message'
 import Modal from './modal'
 import Notification from './notification'
-import Pagination from './Pagination'
+import Pagination from './pagination'
 import Popconfirm from './popconfirm'
 import Popselect from './popselect'
 import Popup from './Popover'
@@ -51,7 +51,7 @@ import Radio from './radio'
 import Result from './result'
 import Select from './select'
 import Scrollbar from './scrollbar'
-import Slider from './Slider'
+import Slider from './slider'
 import Spin from './spin'
 import Statistic from './statistic'
 import Steps from './steps'
@@ -178,6 +178,10 @@ import layoutDarkStyle from './layout/styles/dark'
 import layoutLightStyle from './layout/styles/light'
 import treeLightStyle from './tree/styles/light'
 import treeDarkStyle from './tree/styles/dark'
+import paginationLightStyle from './pagination/styles/light'
+import paginationDarkStyle from './pagination/styles/dark'
+import sliderLightStyle from './slider/styles/light'
+import sliderDarkStyle from './slider/styles/dark'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -385,6 +389,10 @@ export default create({
     layoutLightStyle,
     treeLightStyle,
     treeDarkStyle,
+    paginationLightStyle,
+    paginationDarkStyle,
+    sliderLightStyle,
+    sliderDarkStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle
