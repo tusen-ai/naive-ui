@@ -31,6 +31,8 @@
 
 <script>
 import radioMixin from './radio-mixin'
+import withapp from '../../_mixins/withapp'
+import themeable from '../../_mixins/themeable'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles/radio-button/index.js'
 
@@ -39,6 +41,8 @@ export default {
   cssrName: 'Radio',
   cssrId: 'RadioButton',
   mixins: [
+    withapp,
+    themeable,
     radioMixin,
     usecssr(styles)
   ],
