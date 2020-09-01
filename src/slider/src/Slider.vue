@@ -101,6 +101,8 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asformitem from '../../_mixins/asformitem'
 import zindexable from '../../_mixins/zindexable'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 function handleFirstHandleMouseMove (e) {
   const railRect = this.$refs.rail.getBoundingClientRect()
@@ -123,7 +125,7 @@ function handleSecondHandleMouseMove (e) {
 }
 
 export default {
-  name: 'NSlider',
+  name: 'Slider',
   mixins: [
     withapp,
     themeable,
@@ -131,6 +133,7 @@ export default {
     detachable,
     placeable,
     zindexable,
+    usecssr(styles),
     asformitem()
   ],
   model: {
