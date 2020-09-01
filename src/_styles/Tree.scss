@@ -1,160 +1,160 @@
-@import './mixins/mixins.scss';
+// @import './mixins/mixins.scss';
 
-@include themes-mixin {
-  @include b(tree) {
-    @include once {
-      font-size: 14px;
-      ul, li {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-      }
-      @include b(tree-children-wrapper) {
-        @include fade-in-height-expand-transition(fade-in-height-expand, .15s);
-        margin-left: 16px;
-      }
-      @include b(tree-node) {
-        padding: 3px 0 3px 0;
-        &:first-child {
-          padding-top: 6px;
-        }
-        &:last-child {
-          padding-bottom: 0;
-        }
-      }
-    }
-    @include b(tree-node-switcher) {
-      @include once {
-        cursor: pointer;
-        display: inline-flex;
-        height: 24px;
-        width: 24px;
-        align-items: center;
-        justify-content: center;
-        transition: transform .15s $--n-ease-in-out-cubic-bezier;
-        vertical-align: bottom;
-      }
-      @include e(icon) {
-        @include once {
-          position: relative;
-          height: 14px;
-          width: 14px;
-          display: flex;
-        }
-        @include b(icon) {
-          @include once {
-            height: 14px;
-            width: 14px;
-            font-size: 14px;
-            @include icon-switch-transition;
-          }
-          fill: $--tree-node-switcher-color;
-          stroke: $--tree-node-switcher-color;
-        }
-        @include once {
-          @include b(base-loading) {
-            position: absolute;
-            left: 1px;
-            top: 1px;
-            height: 12px;
-            width: 12px;
-            @include icon-switch-transition($left: 1px, $top: 1px);
-          }
-        }
-      }
-      @include once {
-        @include m(hide) {
-          visibility: hidden
-        }
-        @include m(expanded) {
-          transform: rotate(90deg);
-        }
-      }
-    }
-    @include b(tree-node-checkbox) {
-      display: inline-flex;
-      height: 24px;
-      width: 16px;
-      vertical-align: bottom;
-      align-items: center;
-      justify-content: center;
-      margin-right: 4px;
-    }
-    @include b(tree-node-content) {
-      @include once {
-        position: relative;
-        display: inline-flex;
-        height: 24px;
-        box-sizing: border-box;
-        border-bottom: 3px solid transparent;
-        border-top: 3px solid transparent;
-        line-height: 24px;
-        align-items: center;
-        vertical-align: bottom;
-        padding: 0 6px;
-        cursor: pointer;
-        border-radius: $--n-tree-node-border-radius;
-        text-decoration-color: transparent;
-        text-decoration-line: underline;
-        transition:
-          color .3s $--n-ease-in-out-cubic-bezier,
-          text-decoration-color .3s $--n-ease-in-out-cubic-bezier,
-          background-color .3s $--n-ease-in-out-cubic-bezier,
-          border-color .3s $--n-ease-in-out-cubic-bezier;
-        &:last-child {
-          margin-bottom: 0;
-        }
-        @include e(padding-box) {
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          background-color: transparent;
-        }
-        @include e(text) {
-          line-height: 1.25;
-          border-bottom: 1px solid transparent;
-          transition: border-color .3s $--n-ease-in-out-cubic-bezier;
-        }
-        @include m(block) {
-          width: calc(100% - 24px);
-          @include m(checkable) {
-            width: calc(100% - 48px);
-          }
-        }
-      }
-      color: map-get($--tree-node-content-text-color, 'default');
-      &:hover {
-        background-color: map-get($--tree-node-background-color, 'hover');
-      }
-      &:active {
-        background-color: map-get($--tree-node-background-color, 'active');
-      }
-      @include m(hightlight) {
-        @include e(text) {
-          border-bottom-color: map-get($--tree-node-content-text-color, 'default');
-        }
-      }
-      @include m(pending) {
-        @include once {
-          &:hover {
-            background-color: transparent;
-          }
-        }
-        @include m(pending-bottom) {
-          border-bottom: 3px solid map-get($--tree-node-background-color, 'hover');
-        }
-        @include m(pending-top) {
-          border-top: 3px solid map-get($--tree-node-background-color, 'hover');
-        }
-        @include m(pending-body) {
-          background-color: map-get($--tree-node-background-color, 'hover');
-        }
-      }
-      @include m(selected) {
-        background-color: map-get($--tree-node-background-color, 'selected');
-      }
-    }
-  }
-}
+// @include themes-mixin {
+//   @include b(tree) {
+//     @include once {
+//       font-size: 14px;
+//       ul, li {
+//         margin: 0;
+//         padding: 0;
+//         list-style: none;
+//       }
+//       @include b(tree-children-wrapper) {
+//         @include fade-in-height-expand-transition(fade-in-height-expand, .15s);
+//         margin-left: 16px;
+//       }
+//       @include b(tree-node) {
+//         padding: 3px 0 3px 0;
+//         &:first-child {
+//           padding-top: 6px;
+//         }
+//         &:last-child {
+//           padding-bottom: 0;
+//         }
+//       }
+//     }
+//     @include b(tree-node-switcher) {
+//       @include once {
+//         cursor: pointer;
+//         display: inline-flex;
+//         height: 24px;
+//         width: 24px;
+//         align-items: center;
+//         justify-content: center;
+//         transition: transform .15s $--n-ease-in-out-cubic-bezier;
+//         vertical-align: bottom;
+//       }
+//       @include e(icon) {
+//         @include once {
+//           position: relative;
+//           height: 14px;
+//           width: 14px;
+//           display: flex;
+//         }
+//         @include b(icon) {
+//           @include once {
+//             height: 14px;
+//             width: 14px;
+//             font-size: 14px;
+//             @include icon-switch-transition;
+//           }
+//           fill: $--tree-node-switcher-color;
+//           stroke: $--tree-node-switcher-color;
+//         }
+//         @include once {
+//           @include b(base-loading) {
+//             position: absolute;
+//             left: 1px;
+//             top: 1px;
+//             height: 12px;
+//             width: 12px;
+//             @include icon-switch-transition($left: 1px, $top: 1px);
+//           }
+//         }
+//       }
+//       @include once {
+//         @include m(hide) {
+//           visibility: hidden
+//         }
+//         @include m(expanded) {
+//           transform: rotate(90deg);
+//         }
+//       }
+//     }
+//     @include b(tree-node-checkbox) {
+//       display: inline-flex;
+//       height: 24px;
+//       width: 16px;
+//       vertical-align: bottom;
+//       align-items: center;
+//       justify-content: center;
+//       margin-right: 4px;
+//     }
+//     @include b(tree-node-content) {
+//       @include once {
+//         position: relative;
+//         display: inline-flex;
+//         height: 24px;
+//         box-sizing: border-box;
+//         border-bottom: 3px solid transparent;
+//         border-top: 3px solid transparent;
+//         line-height: 24px;
+//         align-items: center;
+//         vertical-align: bottom;
+//         padding: 0 6px;
+//         cursor: pointer;
+//         border-radius: $--n-tree-node-border-radius;
+//         text-decoration-color: transparent;
+//         text-decoration-line: underline;
+//         transition:
+//           color .3s $--n-ease-in-out-cubic-bezier,
+//           text-decoration-color .3s $--n-ease-in-out-cubic-bezier,
+//           background-color .3s $--n-ease-in-out-cubic-bezier,
+//           border-color .3s $--n-ease-in-out-cubic-bezier;
+//         &:last-child {
+//           margin-bottom: 0;
+//         }
+//         @include e(padding-box) {
+//           position: absolute;
+//           top: 0;
+//           bottom: 0;
+//           left: 0;
+//           right: 0;
+//           background-color: transparent;
+//         }
+//         @include e(text) {
+//           line-height: 1.25;
+//           border-bottom: 1px solid transparent;
+//           transition: border-color .3s $--n-ease-in-out-cubic-bezier;
+//         }
+//         @include m(block) {
+//           width: calc(100% - 24px);
+//           @include m(checkable) {
+//             width: calc(100% - 48px);
+//           }
+//         }
+//       }
+//       color: map-get($--tree-node-content-text-color, 'default');
+//       &:hover {
+//         background-color: map-get($--tree-node-background-color, 'hover');
+//       }
+//       &:active {
+//         background-color: map-get($--tree-node-background-color, 'active');
+//       }
+//       @include m(hightlight) {
+//         @include e(text) {
+//           border-bottom-color: map-get($--tree-node-content-text-color, 'default');
+//         }
+//       }
+//       @include m(pending) {
+//         @include once {
+//           &:hover {
+//             background-color: transparent;
+//           }
+//         }
+//         @include m(pending-bottom) {
+//           border-bottom: 3px solid map-get($--tree-node-background-color, 'hover');
+//         }
+//         @include m(pending-top) {
+//           border-top: 3px solid map-get($--tree-node-background-color, 'hover');
+//         }
+//         @include m(pending-body) {
+//           background-color: map-get($--tree-node-background-color, 'hover');
+//         }
+//       }
+//       @include m(selected) {
+//         background-color: map-get($--tree-node-background-color, 'selected');
+//       }
+//     }
+//   }
+// }

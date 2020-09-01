@@ -22,9 +22,9 @@
         :line="line"
       />
     </n-scrollbar>
-    <n-fade-in-height-expand-transition width>
+    <transition name="n-fade-in-scale-up-transition">
       <n-log-loader v-if="loading" :theme="syntheticTheme" />
-    </n-fade-in-height-expand-transition>
+    </transition>
   </div>
 </template>
 
@@ -34,7 +34,6 @@ import themeable from '../../_mixins/themeable'
 import NScrollbar from '../../scrollbar'
 import NLogLoader from './LogLoader'
 import NLogLine from './LogLine'
-import NFadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
 import throttle from 'lodash-es/throttle'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
@@ -44,8 +43,7 @@ export default {
   components: {
     NScrollbar,
     NLogLoader,
-    NLogLine,
-    NFadeInHeightExpandTransition
+    NLogLine
   },
   provide () {
     return {

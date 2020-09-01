@@ -15,28 +15,24 @@ export default create({
       popoverBackgroundColor,
       secondaryTextOverlayColor
     } = derived
-    const {
-      transformDebounceScale
-    } = base
     const defaultFillColor = composite(cardBackgroundColor, changeColor(primaryColor, { alpha: 0.7 }))
     return {
       ...sizeVariables,
       // defaultFillColor: defaultFillColor,
-      railBackgroundColorDefault: railBackgroundOverlayColor,
-      railBackgroundColorHover: railHoverBackgroundOverlayColor,
-      railFillBackgroundColorDefault: defaultFillColor,
-      railFillBackgroundColorHover: primaryColor,
-      handleBackgroundColor: cardBackgroundColor,
-      handleBoxShadowDefault: `inset 0 0 0 2px ${defaultFillColor}`,
+      railColor: railBackgroundOverlayColor,
+      railColorHover: railHoverBackgroundOverlayColor,
+      railFillColor: defaultFillColor,
+      railFillColorHover: primaryColor,
+      handleColor: cardBackgroundColor,
+      handleBoxShadow: `inset 0 0 0 2px ${defaultFillColor}`,
       handleBoxShadowHover: `inset 0 0 0 2px ${primaryColor}`,
       handleBoxShadowActive: `inset 0 0 0 2px ${primaryColor}, 0 0 0 3px ${changeColor(primaryColor, { alpha: 0.2 })}`,
       handleBoxShadowFocus: `inset 0 0 0 2px ${primaryColor}, 0 0 0 3px ${changeColor(primaryColor, { alpha: 0.2 })}`,
-      indicatorBackgroundColor: popoverBackgroundColor,
+      indicatorColor: popoverBackgroundColor,
       indicatorBoxShadow: boxShadow,
       indicatorTextColor: secondaryTextOverlayColor,
-      dotBoxShadowDefault: `inset 0 0 0 2px ${defaultFillColor}`,
-      dotBoxShadowActive: `inset 0 0 0 2px ${primaryColor}`,
-      transformDebounceScale: transformDebounceScale
+      dotBoxShadow: `inset 0 0 0 2px ${defaultFillColor}`,
+      dotBoxShadowActive: `inset 0 0 0 2px ${primaryColor}`
     }
   }
 })

@@ -1,9 +1,9 @@
-import { c, cTB, cB, cM, cE } from '../../../_utils/cssr'
+import { c, cB, cM, cE } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
     return [
-      cTB('dynamic-input', {
+      cB('dynamic-input', {
         raw: `
           width: 100%;
         `

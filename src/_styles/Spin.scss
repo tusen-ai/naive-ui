@@ -1,58 +1,58 @@
-@import './mixins/mixins.scss';
+// @import './mixins/mixins.scss';
 
-@include themes-mixin {
-  @include once {
-    @include b(spin) {
-      display: inline-block;
-      @include m(in-small-size) {
-        width: 14px;
-        height: 14px;
-      }
-      @include m(in-medium-size) {
-        width: 16px;
-        height: 16px;
-      }
-      @include m(in-large-size) {
-        width: 18px;
-        height: 18px;
-      }
-      @include m(small-size) {
-        width: 28px;
-        height: 28px;
-      }
-      @include m(medium-size) {
-        width: 34px;
-        height: 34px;
-      }
-      @include m(large-size) {
-        width: 40px;
-        height: 40px;
-      }
-    }
-  }
-  @include b(spin-container) {
-    @include once {
-      position: relative;
-      @include b(spin) {
-        @include fade-in-transition(spin);
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translateX(-50%) translateY(-50%);
-      }
-      @include b(spin-content) {
-        opacity: 1;
-        transition: opacity .3s $--n-ease-in-out-cubic-bezier;
-        pointer-events: all;
-        @include m(spinning) {
-          pointer-events: none;
-        }
-      }
-    }
-    @include b(spin-content) {
-      @include m(spinning) {
-        opacity: $--spin-spinning-opacity;
-      }
-    }
-  }
-}
+// @include themes-mixin {
+//   @include once {
+//     @include b(spin) {
+//       display: inline-block;
+//       @include m(in-small-size) {
+//         width: 14px;
+//         height: 14px;
+//       }
+//       @include m(in-medium-size) {
+//         width: 16px;
+//         height: 16px;
+//       }
+//       @include m(in-large-size) {
+//         width: 18px;
+//         height: 18px;
+//       }
+//       @include m(small-size) {
+//         width: 28px;
+//         height: 28px;
+//       }
+//       @include m(medium-size) {
+//         width: 34px;
+//         height: 34px;
+//       }
+//       @include m(large-size) {
+//         width: 40px;
+//         height: 40px;
+//       }
+//     }
+//   }
+//   @include b(spin-container) {
+//     @include once {
+//       position: relative;
+//       @include b(spin) {
+//         @include fade-in-transition(spin);
+//         position: absolute;
+//         top: 50%;
+//         left: 50%;
+//         transform: translateX(-50%) translateY(-50%);
+//       }
+//       @include b(spin-content) {
+//         opacity: 1;
+//         transition: opacity .3s $--n-ease-in-out-cubic-bezier;
+//         pointer-events: all;
+//         @include m(spinning) {
+//           pointer-events: none;
+//         }
+//       }
+//     }
+//     @include b(spin-content) {
+//       @include m(spinning) {
+//         opacity: $--spin-spinning-opacity;
+//       }
+//     }
+//   }
+// }

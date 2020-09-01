@@ -71,5 +71,8 @@ export default {
   },
   Tag: {
     add: 'Add'
+  },
+  Log: {
+    loading: 'Loading'
   }
 }

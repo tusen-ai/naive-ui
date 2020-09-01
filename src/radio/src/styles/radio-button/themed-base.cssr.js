@@ -19,13 +19,6 @@ export default c([
       easeInOutCubicBezier
     } = props.$base
     return cTB('radio-group', [
-      cM('button-group', {
-        raw: `
-          white-space: nowrap;
-          height: 28px;
-          line-height: 28px;
-        `
-      }),
       cM('transition-disabled', [
         cB('radio-button', {
           raw: `
@@ -40,8 +33,6 @@ export default c([
           position: relative;
           user-select: none;
           display: inline-block;
-          height: 28px;
-          line-height: 28px;
           box-sizing: border-box;
           padding-left: 14px;
           padding-right: 14px;

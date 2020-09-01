@@ -1,40 +1,40 @@
-@import './mixins/mixins.scss';
+// @import './mixins/mixins.scss';
 
-@include b(row) {
-  @include m(flex) {
-    display: flex;
-  }
-  width: 100%;
-}
+// @include b(row) {
+//   @include m(flex) {
+//     display: flex;
+//   }
+//   width: 100%;
+// }
 
-@mixin col-size-mixin ($span) {
-  @include m($span + '-span') {
-    width: percentage($number: 1 / 24 * $span);
-  }
-  @include m($span + '-offset') {
-    margin-left: percentage($number: 1 / 24 * $span);
-  }
-  @include m($span + '-push') {
-    left: percentage($number: 1 / 24 * $span);
-  }
-  @include m($span + '-pull') {
-    right: percentage($number: 1 / 24 * $span);
-  }
-}
+// @mixin col-size-mixin ($span) {
+//   @include m($span + '-span') {
+//     width: percentage($number: 1 / 24 * $span);
+//   }
+//   @include m($span + '-offset') {
+//     margin-left: percentage($number: 1 / 24 * $span);
+//   }
+//   @include m($span + '-push') {
+//     left: percentage($number: 1 / 24 * $span);
+//   }
+//   @include m($span + '-pull') {
+//     right: percentage($number: 1 / 24 * $span);
+//   }
+// }
 
-@include b(col) {
-  vertical-align: top;
-  box-sizing: border-box;
-  display: inline-block;
-  position: relative;
-  z-index: auto;
-  @for $i from 1 through 24 {
-    @include col-size-mixin($i);
-  }
-  @include e(box) {
-    position: relative;
-    z-index: auto;
-    width: 100%;
-    height: 100%;
-  }
-}
+// @include b(col) {
+//   vertical-align: top;
+//   box-sizing: border-box;
+//   display: inline-block;
+//   position: relative;
+//   z-index: auto;
+//   @for $i from 1 through 24 {
+//     @include col-size-mixin($i);
+//   }
+//   @include e(box) {
+//     position: relative;
+//     z-index: auto;
+//     width: 100%;
+//     height: 100%;
+//   }
+// }

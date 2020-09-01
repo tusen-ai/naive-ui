@@ -1,55 +1,55 @@
-@import './mixins/mixins.scss';
+// @import './mixins/mixins.scss';
 
-@include themes-mixin {
-  @include b(statistic) {
-    @include b(statistic-value) {
-      @include once {
-        margin-top: 4px;
-        font-weight: $--n-strong-weight;
-      }
-      @include e(prefix) {
-        @include once {
-          font-size: 18px;
-          transition: .3s color $--n-ease-in-out-cubic-bezier;
-        }
-        color: $--statistic-value-prefix-text-color;
-        @include b(icon) {
-          @include once {
-            vertical-align: -0.125em;
-          }
-          fill: $--statistic-value-prefix-text-color;
-          stroke: $--statistic-value-prefix-text-color;
-        }
-      }
-      @include e(content) {
-        @include once {
-          font-size: 24px;
-          transition: .3s color $--n-ease-in-out-cubic-bezier;
-        }
-        color: $--statistic-value-content-text-color;
-      }
-      @include e(suffix) {
-        @include once {
-          font-size: 18px;
-          transition: .3s color $--n-ease-in-out-cubic-bezier;
-        }
-        color: $--statistic-value-suffix-text-color;
-        @include b(icon) {
-          @include once {
-            vertical-align: -0.125em;
-          }
-          fill: $--statistic-value-prefix-text-color;
-          stroke: $--statistic-value-prefix-text-color;
-        }
-      }
-    }
-    @include e(label) {
-      @include once {
-        font-weight: $--n-strong-weight;
-        transition: .3s color $--n-ease-in-out-cubic-bezier;
-        font-size: 14px;
-      }
-      color: $--statistic-value-label-text-color;
-    }
-  }
-}
+// @include themes-mixin {
+//   @include b(statistic) {
+//     @include b(statistic-value) {
+//       @include once {
+//         margin-top: 4px;
+//         font-weight: $--n-strong-weight;
+//       }
+//       @include e(prefix) {
+//         @include once {
+//           font-size: 18px;
+//           transition: .3s color $--n-ease-in-out-cubic-bezier;
+//         }
+//         color: $--statistic-value-prefix-text-color;
+//         @include b(icon) {
+//           @include once {
+//             vertical-align: -0.125em;
+//           }
+//           fill: $--statistic-value-prefix-text-color;
+//           stroke: $--statistic-value-prefix-text-color;
+//         }
+//       }
+//       @include e(content) {
+//         @include once {
+//           font-size: 24px;
+//           transition: .3s color $--n-ease-in-out-cubic-bezier;
+//         }
+//         color: $--statistic-value-content-text-color;
+//       }
+//       @include e(suffix) {
+//         @include once {
+//           font-size: 18px;
+//           transition: .3s color $--n-ease-in-out-cubic-bezier;
+//         }
+//         color: $--statistic-value-suffix-text-color;
+//         @include b(icon) {
+//           @include once {
+//             vertical-align: -0.125em;
+//           }
+//           fill: $--statistic-value-prefix-text-color;
+//           stroke: $--statistic-value-prefix-text-color;
+//         }
+//       }
+//     }
+//     @include e(label) {
+//       @include once {
+//         font-weight: $--n-strong-weight;
+//         transition: .3s color $--n-ease-in-out-cubic-bezier;
+//         font-size: 14px;
+//       }
+//       color: $--statistic-value-label-text-color;
+//     }
+//   }
+// }

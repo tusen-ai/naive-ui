@@ -1,209 +1,209 @@
-@import './mixins/mixins.scss';
+// @import './mixins/mixins.scss';
 
-@include b(notification-container) {
-  z-index: 4000;
-  position: fixed;
-  top: 12px;
-  left: 0;
-  right: 0;
-  height: 0;
-  overflow: visible;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  & > {
-    @include b(scrollbar) {
-      height: -moz-fit-content !important;
-      height: fit-content !important;
-      max-height: 100vh !important;
-      & > {
-        @include b(scrollbar-container) {
-          height: -moz-fit-content !important;
-          height: fit-content !important;
-          max-height: 100vh !important;
-          @include b(scrollbar-content) {
-            padding-top: 12px;
-          }
-        }
-      }
-    }
-  }
+// @include b(notification-container) {
+//   z-index: 4000;
+//   position: fixed;
+//   top: 12px;
+//   left: 0;
+//   right: 0;
+//   height: 0;
+//   overflow: visible;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-end;
+//   & > {
+//     @include b(scrollbar) {
+//       height: -moz-fit-content !important;
+//       height: fit-content !important;
+//       max-height: 100vh !important;
+//       & > {
+//         @include b(scrollbar-container) {
+//           height: -moz-fit-content !important;
+//           height: fit-content !important;
+//           max-height: 100vh !important;
+//           @include b(scrollbar-content) {
+//             padding-top: 12px;
+//           }
+//         }
+//       }
+//     }
+//   }
   
   
-  @include m(scrollable) {
-    top: 0;
-  }
-}
+//   @include m(scrollable) {
+//     top: 0;
+//   }
+// }
 
-@mixin notification-type-mixin ($type) {
-  @include m($type + '-type') {
-    @include e(avatar) {
-      @include b(icon) {
-        fill: map-get($--notification-avatar-fill, $type);
-        stroke: map-get($--notification-avatar-fill, $type);
-      }
-    }
-  }
-}
+// @mixin notification-type-mixin ($type) {
+//   @include m($type + '-type') {
+//     @include e(avatar) {
+//       @include b(icon) {
+//         fill: map-get($--notification-avatar-fill, $type);
+//         stroke: map-get($--notification-avatar-fill, $type);
+//       }
+//     }
+//   }
+// }
 
-@include themes-mixin {
-  @include b(notification) {
-    @include notification-type-mixin(success);
-    @include notification-type-mixin(info);
-    @include notification-type-mixin(warning);
-    @include notification-type-mixin(error);
-    @include notification-type-mixin(default);
-    background-color: $--notification-background-color;
-    color: $--notification-text-color;
-    @include once {
-      transition:
-        background-color .3s $--n-ease-in-out-cubic-bezier,
-        color .3s $--n-ease-in-out-cubic-bezier,
-        opacity .3s $--n-ease-in-out-cubic-bezier,
-        transform .3s $--n-ease-in-out-cubic-bezier,
-        max-height .3s $--n-ease-in-out-cubic-bezier,
-        margin-bottom .3s linear,
-        box-shadow .3s $--n-ease-in-out-cubic-bezier;
-      font-family: inherit;
-      font-size: 14px;
-      font-weight: 400;
-      position: relative;
-      display: flex;
-      overflow: hidden;
-      flex-shrink: 0;
-      margin-bottom: 12px;
-      margin-left: 12px;
-      margin-right: 16px;
-      padding-left: 16px;
-      padding-right: 16px;
-      width: 365px;
-      border-radius: $--n-notification-border-radius;
-      box-shadow:  0px 2px 12px 0px rgba(0, 0, 0, 0.18);
-      box-sizing: border-box;
-      opacity: 1;
-      &-transition-enter, &-transition-leave-to {
-        opacity: 0;
-        margin-bottom: 0;
-        transform: translateX(calc(100% + 16px));
-      }
-      &-transition-leave, &-transition-enter-to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-      @include m(no-avatar) {
-        @include b(notification-main) {
-          margin-left: 8px;
-          width: calc(100% - 8px);
-        }
-      }
-      @include m(closable) {
-        @include b(notification-main) {
-          & > *:first-child {
-            padding-right: 20px
-          }
-        }
-      }
-    }
-    @include e(close) {
-      @include once {
-        position: absolute;
-        top: 16px;
-        right: 12px;
-        font-size: 20px;
-        cursor: pointer;
-      }
-      @include b(icon) {
-        fill: map-get($--notification-close-color, 'default');
-        stroke: map-get($--notification-close-color, 'default');
-      }
-      &:hover {
-        @include b(icon) {
-          fill: map-get($--notification-close-color, 'hover');
-          stroke: map-get($--notification-close-color, 'hover');
-        }
-      }
-      &:active {
-        @include b(icon) {
-          fill: map-get($--notification-close-color, 'active');
-          stroke: map-get($--notification-close-color, 'active');
-        }
-      }
-    }
-    @include e(avatar) {
-      @include once {
-        position: absolute;
-        top: 16px;
-        left: 16px;
-        width: 28px;
-        height: 28px;
-        font-size: 28px;
-      }
-    }
-    @include b(notification-main) {
-      @include once {
-        padding-top: 16px;
-        padding-bottom: 16px;
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        margin-left: 40px;
-        width: calc(100% - 40px);
-        @include b(notification-main-footer) {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin-top: 8px;
-        }
-      }
-      @include e(header) {
-        @include once {
-          font-weight: $--n-strong-weight;
-          font-size: 16px;
-          transition: color .3s $--n-ease-in-out-cubic-bezier;
-        }
-        color: $--notification-header-text-color;
-      }
-      @include e(description) {
-        @include once {
-          margin-top: 8px;
-          font-size: 12px;
-          transition: color .3s $--n-ease-in-out-cubic-bezier;
-        }
-        color: $--notification-description-text-color;
-      }
-      @include e(content) {
-        @include once {
-          line-height: 1.75;
-          margin: 12px 0 0 0;
-          font-family: inherit;
-          &:first-child {
-            margin: 0;
-          }
-          white-space: pre-wrap;
-          word-wrap: break-word;
-          transition: color .3s $--n-ease-in-out-cubic-bezier;
-        }
-        color: $--notification-content-text-color;
-      }
-      @include b(notification-main-footer) {
-        @include once {
-          margin-top: 12px;
-        }
-        @include e(meta) {
-          @include once {
-            font-size: 12px;
-            transition: color .3s $--n-ease-in-out-cubic-bezier;
-          }
-          color: $--notification-description-text-color;
-        }
-        @include e(action) {
-          @include once {
-            cursor: pointer;
-            transition: color .3s $--n-ease-in-out-cubic-bezier;
-          }
-          color: $--notification-action-text-color;
-        }
-      }
-    }
-  }
-}
+// @include themes-mixin {
+//   @include b(notification) {
+//     @include notification-type-mixin(success);
+//     @include notification-type-mixin(info);
+//     @include notification-type-mixin(warning);
+//     @include notification-type-mixin(error);
+//     @include notification-type-mixin(default);
+//     background-color: $--notification-background-color;
+//     color: $--notification-text-color;
+//     @include once {
+//       transition:
+//         background-color .3s $--n-ease-in-out-cubic-bezier,
+//         color .3s $--n-ease-in-out-cubic-bezier,
+//         opacity .3s $--n-ease-in-out-cubic-bezier,
+//         transform .3s $--n-ease-in-out-cubic-bezier,
+//         max-height .3s $--n-ease-in-out-cubic-bezier,
+//         margin-bottom .3s linear,
+//         box-shadow .3s $--n-ease-in-out-cubic-bezier;
+//       font-family: inherit;
+//       font-size: 14px;
+//       font-weight: 400;
+//       position: relative;
+//       display: flex;
+//       overflow: hidden;
+//       flex-shrink: 0;
+//       margin-bottom: 12px;
+//       margin-left: 12px;
+//       margin-right: 16px;
+//       padding-left: 16px;
+//       padding-right: 16px;
+//       width: 365px;
+//       border-radius: $--n-notification-border-radius;
+//       box-shadow:  0px 2px 12px 0px rgba(0, 0, 0, 0.18);
+//       box-sizing: border-box;
+//       opacity: 1;
+//       &-transition-enter, &-transition-leave-to {
+//         opacity: 0;
+//         margin-bottom: 0;
+//         transform: translateX(calc(100% + 16px));
+//       }
+//       &-transition-leave, &-transition-enter-to {
+//         opacity: 1;
+//         transform: translateX(0);
+//       }
+//       @include m(no-avatar) {
+//         @include b(notification-main) {
+//           margin-left: 8px;
+//           width: calc(100% - 8px);
+//         }
+//       }
+//       @include m(closable) {
+//         @include b(notification-main) {
+//           & > *:first-child {
+//             padding-right: 20px
+//           }
+//         }
+//       }
+//     }
+//     @include e(close) {
+//       @include once {
+//         position: absolute;
+//         top: 16px;
+//         right: 12px;
+//         font-size: 20px;
+//         cursor: pointer;
+//       }
+//       @include b(icon) {
+//         fill: map-get($--notification-close-color, 'default');
+//         stroke: map-get($--notification-close-color, 'default');
+//       }
+//       &:hover {
+//         @include b(icon) {
+//           fill: map-get($--notification-close-color, 'hover');
+//           stroke: map-get($--notification-close-color, 'hover');
+//         }
+//       }
+//       &:active {
+//         @include b(icon) {
+//           fill: map-get($--notification-close-color, 'active');
+//           stroke: map-get($--notification-close-color, 'active');
+//         }
+//       }
+//     }
+//     @include e(avatar) {
+//       @include once {
+//         position: absolute;
+//         top: 16px;
+//         left: 16px;
+//         width: 28px;
+//         height: 28px;
+//         font-size: 28px;
+//       }
+//     }
+//     @include b(notification-main) {
+//       @include once {
+//         padding-top: 16px;
+//         padding-bottom: 16px;
+//         box-sizing: border-box;
+//         display: flex;
+//         flex-direction: column;
+//         margin-left: 40px;
+//         width: calc(100% - 40px);
+//         @include b(notification-main-footer) {
+//           display: flex;
+//           align-items: center;
+//           justify-content: space-between;
+//           margin-top: 8px;
+//         }
+//       }
+//       @include e(header) {
+//         @include once {
+//           font-weight: $--n-strong-weight;
+//           font-size: 16px;
+//           transition: color .3s $--n-ease-in-out-cubic-bezier;
+//         }
+//         color: $--notification-header-text-color;
+//       }
+//       @include e(description) {
+//         @include once {
+//           margin-top: 8px;
+//           font-size: 12px;
+//           transition: color .3s $--n-ease-in-out-cubic-bezier;
+//         }
+//         color: $--notification-description-text-color;
+//       }
+//       @include e(content) {
+//         @include once {
+//           line-height: 1.75;
+//           margin: 12px 0 0 0;
+//           font-family: inherit;
+//           &:first-child {
+//             margin: 0;
+//           }
+//           white-space: pre-wrap;
+//           word-wrap: break-word;
+//           transition: color .3s $--n-ease-in-out-cubic-bezier;
+//         }
+//         color: $--notification-content-text-color;
+//       }
+//       @include b(notification-main-footer) {
+//         @include once {
+//           margin-top: 12px;
+//         }
+//         @include e(meta) {
+//           @include once {
+//             font-size: 12px;
+//             transition: color .3s $--n-ease-in-out-cubic-bezier;
+//           }
+//           color: $--notification-description-text-color;
+//         }
+//         @include e(action) {
+//           @include once {
+//             cursor: pointer;
+//             transition: color .3s $--n-ease-in-out-cubic-bezier;
+//           }
+//           color: $--notification-action-text-color;
+//         }
+//       }
+//     }
+//   }
+// }

@@ -9,7 +9,7 @@ export default create({
     const {
       secondaryTextColor,
       primaryColor,
-      disabledBackgroundColor,
+      disabledInputBackgroundColor,
       disabledTextColor,
       cardBackgroundColor,
       baseBackgroundColor,
@@ -19,19 +19,19 @@ export default create({
       borderRadius
     } = base
     return {
-      itemTextColorDefault: secondaryTextColor,
+      itemTextColor: secondaryTextColor,
       itemTextColorHover: primaryColor,
       itemTextColorActive: primaryColor,
       itemTextColorDisabled: disabledTextColor,
-      itemBackgroundColorDefault: cardBackgroundColor,
-      itemBackgroundColorActive: baseBackgroundColor,
-      itemBackgroundColorDisabled: disabledBackgroundColor,
-      itemBorderColorDefault: borderColor,
+      itemColor: cardBackgroundColor,
+      itemColorActive: baseBackgroundColor,
+      itemColorDisabled: disabledInputBackgroundColor,
+      itemBorderColor: borderColor,
       itemBorderColorActive: primaryColor,
       itemBorderColorDisabled: borderColor,
-      textColorDefault: secondaryTextColor,
-      textColorDisabled: disabledTextColor,
-      borderRadius: borderRadius
+      itemBorderRadius: borderRadius,
+      jumperTextColor: secondaryTextColor,
+      jumperTextColorDisabled: disabledTextColor
     }
   }
 })

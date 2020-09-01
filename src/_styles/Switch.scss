@@ -1,85 +1,85 @@
-@import './mixins/mixins.scss';
+// @import './mixins/mixins.scss';
 
-@include themes-mixin{
-  @include b(switch) {
-    @include once {
-      vertical-align: middle;
-      user-select: none;
-      display: inline-block;
-      outline: none;
-    }
-    @include e(rail) {
-      @include once {
-        cursor: pointer;
-        position: relative;
-        height: 14px;
-        width: 30px;
-        border-radius: 7px;
-        margin: 3px;
-        transition: background-color .3s $--n-ease-in-out-cubic-bezier;
-        &::before, &::after {
-          box-sizing: border-box;
-          cursor: inherit;
-          content: "";
-          position: absolute;
-          height: 20px;
-          width: 24px;
-          max-width: 20px;
-          border-radius: 10px;
-          top: -3px;
-          left: -3px;
-          background-size: 800% 800%;
-          transition:
-            left .3s $--n-ease-in-out-cubic-bezier,
-            opacity .3s $--n-ease-in-out-cubic-bezier,
-            max-width .3s $--n-ease-in-out-cubic-bezier,
-            background-position .3s $--n-ease-in-out-cubic-bezier,
-            box-shadow .3s $--n-ease-in-out-cubic-bezier;
-        }
-        &::before {
-          opacity: 1;
-        }
-        &::after {
-          opacity: 0;
-        }
-        @include not-m(disabled) {
-          &:active::before, &:active::after {
-            max-width: 24px;
-          }
-          @include m(active) {
-            &:active::before, &:active::after {
-              left: 9px;
-            }
-          }
-        }
-        @include m(active) {
-          &::before {
-            left: 13px;
-            opacity: 1;
-          }
-          &::after {
-            left: 13px;
-            opacity: 1;
-          }
-        }
-      }
-      &::before {
-        box-shadow: $--switch-switcher-box-shadow;
-        background-position: $--switch-background-position;
-        background-image: map-get($--switch-switcher-background-image, 'inactive');
-      }
-      &::after {
-        background-position: $--switch-background-position;
-        background-image: map-get($--switch-switcher-background-image, 'active');
-      }
-      background-color: map-get($--switch-rail-background-color, 'inactive');
-      @include m(active) {
-        background-color: map-get($--switch-rail-background-color, 'active');
-      }
-      @include m(disabled) {
-        cursor: not-allowed;
-        opacity: .5;
-      }
-    }
-  }
-}
+// @include themes-mixin{
+//   @include b(switch) {
+//     @include once {
+//       vertical-align: middle;
+//       user-select: none;
+//       display: inline-block;
+//       outline: none;
+//     }
+//     @include e(rail) {
+//       @include once {
+//         cursor: pointer;
+//         position: relative;
+//         height: 14px;
+//         width: 30px;
+//         border-radius: 7px;
+//         margin: 3px;
+//         transition: background-color .3s $--n-ease-in-out-cubic-bezier;
+//         &::before, &::after {
+//           box-sizing: border-box;
+//           cursor: inherit;
+//           content: "";
+//           position: absolute;
+//           height: 20px;
+//           width: 24px;
+//           max-width: 20px;
+//           border-radius: 10px;
+//           top: -3px;
+//           left: -3px;
+//           background-size: 800% 800%;
+//           transition:
+//             left .3s $--n-ease-in-out-cubic-bezier,
+//             opacity .3s $--n-ease-in-out-cubic-bezier,
+//             max-width .3s $--n-ease-in-out-cubic-bezier,
+//             background-position .3s $--n-ease-in-out-cubic-bezier,
+//             box-shadow .3s $--n-ease-in-out-cubic-bezier;
+//         }
+//         &::before {
+//           opacity: 1;
+//         }
+//         &::after {
+//           opacity: 0;
+//         }
+//         @include not-m(disabled) {
+//           &:active::before, &:active::after {
+//             max-width: 24px;
+//           }
+//           @include m(active) {
+//             &:active::before, &:active::after {
+//               left: 9px;
+//             }
+//           }
+//         }
+//         @include m(active) {
+//           &::before {
+//             left: 13px;
+//             opacity: 1;
+//           }
+//           &::after {
+//             left: 13px;
+//             opacity: 1;
+//           }
+//         }
+//       }
+//       &::before {
+//         box-shadow: $--switch-switcher-box-shadow;
+//         background-position: $--switch-background-position;
+//         background-image: map-get($--switch-switcher-background-image, 'inactive');
+//       }
+//       &::after {
+//         background-position: $--switch-background-position;
+//         background-image: map-get($--switch-switcher-background-image, 'active');
+//       }
+//       background-color: map-get($--switch-rail-background-color, 'inactive');
+//       @include m(active) {
+//         background-color: map-get($--switch-rail-background-color, 'active');
+//       }
+//       @include m(disabled) {
+//         cursor: not-allowed;
+//         opacity: .5;
+//       }
+//     }
+//   }
+// }
