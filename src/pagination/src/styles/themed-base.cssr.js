@@ -3,18 +3,18 @@ import { cTB, c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      itemTextColorDefault,
+      itemTextColor,
       itemTextColorHover,
       itemTextColorActive,
       itemTextColorDisabled,
-      itemBackgroundColorDefault,
-      itemBackgroundColorActive,
-      itemBackgroundColorDisabled,
-      itemBorderColorDefault,
+      itemColor,
+      itemColorActive,
+      itemColorDisabled,
+      itemBorderColor,
       itemBorderColorActive,
       itemBorderColorDisabled,
-      textColorDisabled,
-      borderRadius
+      jumperTextColorDisabled,
+      itemBorderRadius
     } = props.$local
     const {
       easeInOutCubicBezier
@@ -45,7 +45,7 @@ export default c([
           line-height: 28px;
           transition: color .3s ${easeInOutCubicBezier};
         `,
-        color: itemTextColorDefault
+        color: itemTextColor
       }, [
         cB('input', {
           raw: `
@@ -80,11 +80,11 @@ export default c([
           display: flex;
           align-items: center;
           justify-content: center;
-          border-radius: ${borderRadius};
+          border-radius: ${itemBorderRadius};
           line-height: 28px;
         `,
-        color: itemTextColorDefault,
-        fill: itemTextColorDefault
+        color: itemTextColor,
+        fill: itemTextColor
       }, [
         c('&:not(:last-child)', {
           raw: `
@@ -122,13 +122,13 @@ export default c([
           })
         ]),
         cM('active', {
-          background: itemBackgroundColorActive,
+          background: itemColorActive,
           color: itemTextColorActive,
           boxShadow: `inset 0 0 0 1px ${itemBorderColorActive}`
         }),
         cM('backward, forward', {
-          backgroundColor: itemBackgroundColorDefault,
-          boxShadow: `inset 0 0 0 1px  ${itemBorderColorDefault}`
+          backgroundColor: itemColor,
+          boxShadow: `inset 0 0 0 1px  ${itemBorderColor}`
         }),
         cNotM('disabled', [
           c('&:hover', {
@@ -156,7 +156,7 @@ export default c([
           color: itemTextColorDisabled
         }, [
           cM('active, backward, forward', {
-            backgroundColor: itemBackgroundColorDisabled,
+            backgroundColor: itemColorDisabled,
             boxShadow: `inset 0 0 0 1px ${itemBorderColorDisabled}`
           })
         ])
@@ -167,7 +167,7 @@ export default c([
         `
       }, [
         cB('pagination-quick-jumper', {
-          color: textColorDisabled
+          color: jumperTextColorDisabled
         })
       ])
     ])

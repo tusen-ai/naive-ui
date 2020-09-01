@@ -10,7 +10,7 @@ export default create({
     const {
       secondaryTextOverlayColor,
       primaryColor,
-      disabledBackgroundColor,
+      disabledInputBackgroundOverlayColor,
       disabledTextOverlayColor,
       borderOverlayColor,
       tertiaryOpacity
@@ -19,19 +19,19 @@ export default create({
       borderRadius
     } = base
     return {
-      itemTextColorDefault: secondaryTextOverlayColor,
+      itemTextColor: secondaryTextOverlayColor,
       itemTextColorHover: primaryColor,
       itemTextColorActive: primaryColor,
       itemTextColorDisabled: disabledTextOverlayColor,
-      itemBackgroundColorDefault: 'transparent',
-      itemBackgroundColorActive: 'transparent',
-      itemBackgroundColorDisabled: disabledBackgroundColor,
-      itemBorderColorDefault: borderOverlayColor,
+      itemColor: 'transparent',
+      itemColorActive: 'transparent',
+      itemColorDisabled: disabledInputBackgroundOverlayColor,
+      itemBorderColor: borderOverlayColor,
       itemBorderColorActive: changeColor(primaryColor, { alpha: tertiaryOpacity }),
       itemBorderColorDisabled: 'transparent',
-      textColorDefault: secondaryTextOverlayColor,
-      textColorDisabled: secondaryTextOverlayColor,
-      borderRadius: borderRadius
+      itemBorderRadius: borderRadius,
+      jumperTextColor: secondaryTextOverlayColor,
+      jumperTextColorDisabled: disabledTextOverlayColor
     }
   }
 })
