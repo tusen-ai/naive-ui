@@ -170,6 +170,7 @@ export default create({
       progressRailBackgroundOverlayColor: overlay(base.alphaProgressRail),
       railBackgroundColor: neutral(base.alphaRail),
       railBackgroundOverlayColor: overlay(base.alphaRail),
+      railHoverBackgroundOverlayColor: overlay(base.alphaRail * 0.75),
 
       popoverBackgroundColor: base.neutralPopover,
       tableBodyBackgroundColor: base.neutralCard,
