@@ -1,5 +1,5 @@
 import { cTB, c, cB, cE } from '../../../_utils/cssr'
-import fadeInWidthExpandTransition from '../../../styles/_transitions/fade-in-width-expand'
+import fadeInScaleUpTransition from '../../../styles/_transitions/fade-in-scale-up'
 
 export default c([
   ({ props }) => {
@@ -56,7 +56,7 @@ export default c([
           background-color: ${loaderColor};
         `
       }, [
-        fadeInWidthExpandTransition({ duration: '0.3s', delay: '0s' }),
+        fadeInScaleUpTransition(),
         cE('content', {
           raw: `
             display: inline-block;
