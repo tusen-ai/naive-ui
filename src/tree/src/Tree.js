@@ -3,6 +3,8 @@ import themeable from '../../_mixins/themeable'
 import NTreeNode from './TreeNode'
 import NFadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
 import { isLeaf, isLoaded, getAllKeys, keysWithFilter } from './utils'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 function createNode (node, h, treeInstance) {
   const listeners = {
@@ -54,8 +56,12 @@ function convertOptionsToVNodeTree (options, h, treeInstance) {
 }
 
 export default {
-  name: 'NTree',
-  mixins: [ withapp, themeable ],
+  name: 'Tree',
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   model: {
     prop: 'selected-keys',
     event: 'selected-keys-change'

@@ -65,7 +65,7 @@ import TimePicker from './TimePicker'
 import Timeline from './Timeline'
 import Tooltip from './Tooltip'
 import Transfer from './transfer'
-import Tree from './Tree'
+import Tree from './tree'
 import Typography from './typography'
 import Upload from './Upload'
 import zhCN from './locale/zhCN'
@@ -176,6 +176,8 @@ import notificationLightStyle from './notification/styles/light'
 import notificationDarkStyle from './notification/styles/dark'
 import layoutDarkStyle from './layout/styles/dark'
 import layoutLightStyle from './layout/styles/light'
+import treeLightStyle from './tree/styles/light'
+import treeDarkStyle from './tree/styles/dark'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -381,6 +383,8 @@ export default create({
     notificationDarkStyle,
     layoutDarkStyle,
     layoutLightStyle,
+    treeLightStyle,
+    treeDarkStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle
