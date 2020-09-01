@@ -7,10 +7,10 @@ What's more, not only biology, I forget balanced tree everytime after I revise i
 ## Demos
 ```demo
 basic
-drag-drop
 async
 multiple
 filter
+drag-drop-debug
 ```
 ## V-model
 |Prop|Event|
@@ -24,7 +24,6 @@ filter
 |expand-on-dragenter|`boolean`|`true`|Whether to expand nodes after dragenter|
 |block-node|`boolean`|`false`||
 |data|`Array<TreeNode>`|`[]`|The node data of the tree. Reset `data` will cause clearing of some uncontrolled status. If you need to modify data, you'd better make tree work in a controlled manner.|
-|draggable|`boolean`|`false`||
 |checkable|`boolean`|`false`||
 |multiple|`boolean`|`false`||
 |selectable|`boolean`|`true`||
@@ -40,6 +39,7 @@ filter
 |default-checked-keys|`Array<string \| number>`|`[]`||
 |pattern|`string`|`''`||
 |filter|`(node: TreeNode) => boolean`|A simple string based filter||
+<!-- |draggable|`boolean`|`false`|| -->
 
 ## Events
 |Name|Parameters|Description|
@@ -47,8 +47,8 @@ filter
 |selected-keys-change|`(keys: Array<string \| number>)`||
 |expanded-keys-change|`(keys: Array<string \| number>)`||
 |checked-keys-change|`(keys: Array<string \| number>)`||
-|dragstart|`(data: { node: TreeNode, event: DragEvent })`||
+<!-- |dragstart|`(data: { node: TreeNode, event: DragEvent })`||
 |dragend|`(data: { node: TreeNode, event: DragEvent })`||
 |dragenter|`(data: { node: TreeNode, event: DragEvent })`||
 |dragleave|`(data: { node: TreeNode, event: DragEvent })`||
-|drop|`(data: { node: TreeNode, dragNode: TreeNode, dropPosition: 'top' \| 'center' \| 'bottom', event: DragEvent })`||
+|drop|`(data: { node: TreeNode, dragNode: TreeNode, dropPosition: 'top' \| 'center' \| 'bottom', event: DragEvent })`|| -->

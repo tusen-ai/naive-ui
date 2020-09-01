@@ -8,9 +8,12 @@ export default c([
       easeInOutCubicBezier
     } = props.$base
     const {
-      color,
-      switcherColor,
-      contentTextColor,
+      nodeColorHover,
+      nodeColorActive,
+      nodeColorSelected,
+      arrowColor,
+      nodeTextColor,
+      nodeTextColorDisabled,
       smallBorderRadius
     } = props.$local
     return [
@@ -74,8 +77,8 @@ export default c([
                 height: 14px;
                 width: 14px;
                 font-size: 14px;
-                fill: ${switcherColor};
-                stroke: ${switcherColor};
+                fill: ${arrowColor};
+                stroke: ${arrowColor};
               `
             }, [
               iconSwitchTransition()
@@ -130,7 +133,7 @@ export default c([
             border-radius: ${smallBorderRadius};
             text-decoration-color: transparent;
             text-decoration-line: underline;
-            color: ${contentTextColor.default};
+            color: ${nodeTextColor};
             transition:
               color .3s ${easeInOutCubicBezier},
               text-decoration-color .3s ${easeInOutCubicBezier},
@@ -173,18 +176,18 @@ export default c([
           ]),
           c('&:hover', {
             raw: `
-              background-color: ${color.hover};
+              background-color: ${nodeColorHover};
             `
           }),
           c('&:active', {
             raw: `
-              background-color: ${color.active};
+              background-color: ${nodeColorActive};
             `
           }),
           cM('hightlight', [
             cE('text', {
               raw: `
-                border-bottom-color: ${contentTextColor.default};
+                border-bottom-color: ${nodeTextColorDisabled};
               `
             })
           ]),
@@ -196,23 +199,23 @@ export default c([
             }),
             cM('pending-bottom', {
               raw: `
-                border-bottom: 3px solid ${color.hover};
+                border-bottom: 3px solid ${nodeColorHover};
               `
             }),
             cM('pending-top', {
               raw: `
-                border-top: 3px solid ${color.hover};
+                border-top: 3px solid ${nodeColorHover};
               `
             }),
             cM('pending-body', {
               raw: `
-                background-color: ${color.hover};
+                background-color: ${nodeColorHover};
               `
             })
           ]),
           cM('selected', {
             raw: `
-              background-color: ${color.selected};
+              background-color: ${nodeColorSelected};
             `
           })
         ])
