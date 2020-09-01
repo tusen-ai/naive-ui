@@ -18,16 +18,12 @@ export default create({
     } = derived
     return {
       smallBorderRadius,
-      color: {
-        hover: pendingBackgroundOverlayColor,
-        active: activeBackgroundOverlayColor,
-        selected: changeColor(primaryColor, { alpha: 0.1 })
-      },
-      switchColor: tertiaryTextColor,
-      contentTextColor: {
-        default: secondaryTextColor,
-        disabled: disabledTextColor
-      }
+      nodeColorHover: pendingBackgroundOverlayColor,
+      nodeColorActive: activeBackgroundOverlayColor,
+      nodeColorSelected: changeColor(primaryColor, { alpha: 0.1 }),
+      arrowColor: tertiaryTextColor,
+      nodeTextColor: secondaryTextColor,
+      nodeTextColorDisabled: disabledTextColor
     }
   }
 })

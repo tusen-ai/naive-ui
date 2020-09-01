@@ -6,10 +6,10 @@
 ## 演示
 ```demo
 basic
-drag-drop
 async
 multiple
 filter
+drag-drop-debug
 ```
 ## V-model
 |Prop|Event|
@@ -23,7 +23,6 @@ filter
 |expand-on-dragenter|`boolean`|`true`|是否在拖入后展开节点|
 |block-node|`boolean`|`false`||
 |data|`Array<TreeNode>`|`[]`|树的节点数据。重新设置 data 会将一些非受控状态清空，如果你需要在使用中改动 data，最好以受控的方式控制树|
-|draggable|`boolean`|`false`||
 |checkable|`boolean`|`false`||
 |multiple|`boolean`|`false`||
 |selectable|`boolean`|`true`||
@@ -39,6 +38,7 @@ filter
 |default-checked-keys|`Array<string \| number>`|`[]`||
 |pattern|`string`|`''`||
 |filter|`(node: TreeNode) => boolean`|一个简单的字符串过滤算法||
+<!-- |draggable|`boolean`|`false`|| -->
 
 ## Events
 |名称|参数|说明|
@@ -46,8 +46,8 @@ filter
 |selected-keys-change|`(keys: Array<string \| number>)`||
 |expanded-keys-change|`(keys: Array<string \| number>)`||
 |checked-keys-change|`(keys: Array<string \| number>)`||
-|dragstart|`(data: { node: TreeNode, event: DragEvent })`||
+<!-- |dragstart|`(data: { node: TreeNode, event: DragEvent })`||
 |dragend|`(data: { node: TreeNode, event: DragEvent })`||
 |dragenter|`(data: { node: TreeNode, event: DragEvent })`||
 |dragleave|`(data: { node: TreeNode, event: DragEvent })`||
-|drop|`(data: { node: TreeNode, dragNode: TreeNode, dropPosition: 'top' \| 'center' \| 'bottom', event: DragEvent })`||
+|drop|`(data: { node: TreeNode, dragNode: TreeNode, dropPosition: 'top' \| 'center' \| 'bottom', event: DragEvent })`|| -->
