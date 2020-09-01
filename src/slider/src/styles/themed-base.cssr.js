@@ -1,30 +1,32 @@
 import { cTB, c, cB, cM, cE } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../styles/_transitions/fade-in-scale-up'
+import pxfy from '../../../_utils/css/pxfy'
+import depx from '../../../_utils/css/depx'
 
 export default c([
   ({ props }) => {
     const {
-      railBackgroundColorDefault,
-      railBackgroundColorHover,
-      railFillBackgroundColorDefault,
-      railFillBackgroundColorHover,
-      handleBackgroundColor,
-      handleBoxShadowDefault,
+      railColor,
+      railColorHover,
+      railFillColor,
+      railFillColorHover,
+      handleColor,
+      handleBoxShadow,
       handleBoxShadowHover,
       handleBoxShadowActive,
       handleBoxShadowFocus,
-      indicatorBackgroundColor,
+      indicatorColor,
       indicatorBoxShadow,
       indicatorTextColor,
-      dotBoxShadowDefault,
+      dotBoxShadow,
       dotBoxShadowActive,
       railHeight,
-      transformDebounceScale,
       handleSize,
       dotSize
     } = props.$local
     const {
-      easeInOutCubicBezier
+      easeInOutCubicBezier,
+      transformDebounceScale
     } = props.$base
     return [
       cTB('slider', {
@@ -54,7 +56,7 @@ export default c([
             `
           })
         ]),
-        cM('width-mark', {
+        cM('with-mark', {
           raw: `
             width: calc(100% - 24px);
             margin: 8px 12px 32px 12px;
@@ -62,10 +64,10 @@ export default c([
         }),
         c('&:hover', [
           cB('slider-rail', {
-            backgroundColor: railBackgroundColorHover
+            backgroundColor: railColorHover
           }, [
             cE('fill', {
-              backgroundColor: railFillBackgroundColorHover
+              backgroundColor: railFillColorHover
             }),
             cB('slider-dots', [
               cB('slider-dot', {
@@ -79,10 +81,10 @@ export default c([
         ]),
         cM('active', [
           cB('slider-rail', {
-            backgroundColor: railBackgroundColorHover
+            backgroundColor: railColorHover
           }, [
             cE('fill', {
-              backgroundColor: railFillBackgroundColorHover
+              backgroundColor: railFillColorHover
             }),
             cB('slider-dots', [
               cB('slider-dot', {
@@ -95,24 +97,22 @@ export default c([
           })
         ]),
         cB('slider-rail', {
-          raw: `
-            width: 100%;
-            position: relative;
-          `,
+          width: '100%',
+          position: 'relative',
           height: railHeight,
-          backgroundColor: railBackgroundColorDefault,
+          backgroundColor: railColor,
           transition: `background-color .3s ${easeInOutCubicBezier}`,
-          borderRadius: `${parseInt(railHeight) / 2}px`
+          borderRadius: pxfy(depx(railHeight) / 2)
         }, [
           cE('fill', {
             raw: `
               position: absolute;
               top: 0;
               bottom: 0;
-              border-radius: ${parseInt(railHeight) / 2}px,
+              border-radius: ${pxfy(depx(railHeight) / 2)};
               transition: background-color .3s ${easeInOutCubicBezier};
             `,
-            backgroundColor: railFillBackgroundColorDefault
+            backgroundColor: railFillColor
           })
         ]),
         cB('slider-handle', {
@@ -120,7 +120,7 @@ export default c([
             outline: none;
             height: ${handleSize};
             width: ${handleSize};
-            border-radius: ${parseInt(handleSize) / 2}px;
+            border-radius: 50%;
             transition: box-shadow .2s ${easeInOutCubicBezier}, background-color .3s ${easeInOutCubicBezier};
             position: absolute;
             top: 0;
@@ -128,8 +128,8 @@ export default c([
             overflow: hidden;
             cursor: pointer;
           `,
-          backgroundColor: handleBackgroundColor,
-          boxShadow: handleBoxShadowDefault
+          backgroundColor: handleColor,
+          boxShadow: handleBoxShadow
         }, [
           c('&:hover', {
             boxShadow: handleBoxShadowHover
@@ -156,26 +156,27 @@ export default c([
               transform: translateX(-50%) translateY(-50%);
               height: ${dotSize};
               width: ${dotSize};
-              border-radius: ${parseInt(dotSize) / 2}px;
+              border-radius: 50%;
               overflow: hidden;
             `,
-            boxShadow: dotBoxShadowDefault
+            boxShadow: dotBoxShadow
           })
         ])
       ]),
       cTB('slider-handle-indicator', {
         raw: `
-            ${fadeInScaleUpTransition('slider-indicator')},
-            transform:${transformDebounceScale};
-            font-size: 14px;
-            padding: 8px 12px;
-            margin-bottom: 12px;
-            border-radius: 4px;
-          `,
+          transform: ${transformDebounceScale};
+          font-size: 14px;
+          padding: 8px 12px;
+          margin-bottom: 12px;
+          border-radius: 4px;
+        `,
         color: indicatorTextColor,
-        backgroundColor: indicatorBackgroundColor,
+        backgroundColor: indicatorColor,
         boxShadow: indicatorBoxShadow
-      })
+      }, [
+        fadeInScaleUpTransition()
+      ])
     ]
   }
 ])
