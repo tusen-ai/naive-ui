@@ -147,6 +147,7 @@ import zindexable from '../../_mixins/zindexable'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import asformitem from '../../_mixins/asformitem'
+import usecssr from '../../_mixins/usecssr'
 import clickoutside from '../../_directives/clickoutside'
 import locale from '../../_mixins/locale'
 import DatetimePanel from './panel/datetime'
@@ -164,6 +165,8 @@ import isValid from 'date-fns/isValid'
 import { strictParse, getDerivedTimeFromKeyboardEvent } from '../../_utils/component/datePicker'
 import isEqual from 'lodash-es/isEqual'
 
+import styles from './styles'
+
 const DATE_FORMAT = {
   date: 'yyyy-MM-dd',
   datetime: 'yyyy-MM-dd HH:mm:ss',
@@ -172,7 +175,7 @@ const DATE_FORMAT = {
 }
 
 export default {
-  name: 'NDatePicker',
+  name: 'DatePicker',
   directives: {
     clickoutside
   },
@@ -192,7 +195,8 @@ export default {
     placeable,
     zindexable,
     locale('DatePicker'),
-    asformitem()
+    asformitem(),
+    usecssr(styles)
   ],
   model: {
     prop: 'value',

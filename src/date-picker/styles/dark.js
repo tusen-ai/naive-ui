@@ -7,13 +7,12 @@ export default create({
   getDerivedVariables ({ base, derived }) {
     return {
       itemTextColor: derived.secondaryTextOverlayColor,
-      itemTextColorDisabled: derived.disabledTextOverlayColor,
       itemTextColorMatched: derived.popoverBackgroundColor,
-      itemTextColorCurrent: derived.primaryColor,
       itemSupColor: derived.primaryColor,
       itemSupColorMatch: derived.popoverBackgroundColor,
       itemColorHover: changeColor(derived.primaryColor, { alpha: 0.5 }),
       itemColorActive: derived.primaryColor,
+      itemBorderRadius: base.smallBorderRadius,
       panelColor: derived.popoverBackgroundColor,
       panelTextColor: derived.secondaryTextOverlayColor,
       panelIconColor: derived.iconOverlayColor,
@@ -21,7 +20,8 @@ export default create({
       panelDividerColor: derived.dividerOverlayColor,
       panelBorderRadius: base.borderRadius,
       panelBoxShadow: derived.popoverBoxShadow,
-      pickerTextDecorationColor: derived.secondaryTextOverlayColor
+      pickerTextDecorationColor: derived.secondaryTextOverlayColor,
+      panelHeaderFontWeight: base.strongFontWeight
     }
   }
 })

@@ -1,284 +1,305 @@
-@import './mixins/mixins.scss';
+// @import './mixins/mixins.scss';
 
-@include themes-mixin {
-  $calendar-width: 288px;
-  $weekdays-padding: 10px 0;
-  $input-padding: 8px 14px;
-  $dates-padding: 2px 0 4px 0;
-  $header-padding: 6px 14px 0 14px;
-  $divider-margin: 0 14px;
-  $action-height: 38px;
-  @include once {
-    @include b(date-picker) {
-      position: relative;
-    }
-  }  
-  @include b(date-picker) {
-    @include m(invalid) {
-      input {
-        text-decoration: line-through;
-        text-decoration-color: $--date-picker-text-decoration-color;
-      }
-    }
-    @include m(start-invalid) {
-      input:nth-of-type(1) {
-        text-decoration: line-through;
-        text-decoration-color: $--date-picker-text-decoration-color;
-      }
-    }
-    @include m(end-invalid) {
-      input:nth-of-type(2) {
-        text-decoration: line-through;
-        text-decoration-color: $--date-picker-text-decoration-color;
-      }
-    }
-  } 
-  @include b(date-panel) {
-    @include once {
-      outline: none;
-      @include fade-in-scale-up-transition(date-panel);
-      transform: $--n-transform-debounce-scale;
-      margin-top: 4px;
-      margin-bottom: 4px;
-      width: 288px;
-      display: grid;
-      grid-template-columns: 1fr;
-      border-radius: $--n-date-picker-border-radius;
-      @include b(time-picker) {
-        z-index: 1;
-      }
-      @include b(date-panel-calendar) {
-        width: $calendar-width;
-        display: grid;
-        grid-template-columns: 1fr;
-      }
-    }
-    background: $--date-picker-background-color;
-    box-shadow: $--date-picker-box-shadow;
-    color: $--date-picker-text-color;
-    @include m(datetimerange, daterange) {
-      @include once {
-        width: $calendar-width * 2 + 1;
-        display: flex;
-        flex-wrap: wrap;
-        @include m(daterange) {
-          @include e(vertical-divider) {
-            height: 100%;
-            margin-top: 0;
-          }
-        }
-      }
-      @include b(date-panel-input-wrapper) {
-        @include once {
-          width: 100%;
-          align-items: center;
-        }
-        @include e(arrow) {
-          @include once {
-            width: 16px;
-            height: 16px;
-            margin: 0 8px;
-            position: relative;
-          }
-          @include b(base-icon) {
-            @include once {
-              position: absolute;
-              left: 0;
-              right: 0;
-              top: 0;
-              bottom: 0;
-            }
-            fill: $--date-picker-icon-color;
-          }
-        }
-      }
-      @include e(vertical-divider) {
-        @include once {
-          width: 1px;
-          height: calc(100% - 64px);
-          margin-top: 64px;
-        }
-        background: $--date-picker-divider-color;
-      }
-    }
-    @include b(date-panel-input-wrapper) {
-      @include once {
-        padding: $input-padding;
-        display: flex;
-        justify-content: space-between;
-        @include b(input) {
-          margin-right: 10px;
-          flex: 1;
-        }
-        @include b(time-picker) {
-          flex: 1;
-        }
-      }
-      @include b(date-panel-date-input) {
-        @include m(invalid) {
-          input {
-            text-decoration: line-through;
-            text-decoration-color: $--date-picker-text-decoration-color;
-          }
-        }
-      }
-      border-bottom: 1px solid $--date-picker-divider-color;
-    }
-    @include b(date-panel-month) {
-      @include once {
-        display: flex;
-        box-sizing: border-box;
-        height: 30px;
-        align-items: center;
-        padding: $header-padding;
-        @include e(prev, next, fast-prev, fast-next) {
-          cursor: pointer;
-          width: 14px;
-          height: 14px;
-        }
-        @include e(fast-prev, next) {
-          margin-right: 10px;
-        }
-      }
-      @include e(prev, next, fast-prev, fast-next) {
-        fill: $--date-picker-icon-color;
-      }
-      @include e(month-year) {
-        @include once {
-          font-size: 14px;
-          font-weight: $--n-strong-weight;
-          line-height: 17px;
-          flex-grow: 1;
-          text-align: center;
-        }
-        color: $--date-picker-month-text-color;
-      }
-    }
-    @include b(date-panel-weekdays) {
-      @include once {
-        padding: $weekdays-padding;
-        display: grid;
-        margin: auto;
-        grid-template-columns: repeat(7, 38px);
-        grid-template-rows: repeat(1, 15px);
-        align-items: center;
-        justify-items: center;
-      }
-      @include e(day) {
-        @include once {
-          line-height: 15px;
-          width: 24px;
-          text-align: center;
-          font-size: 12px;
-        }
-        color: $--date-picker-text-color;
-      }
-    }
-    @include b(date-panel-dates) {
-      @include once {
-        padding: $dates-padding;
-        margin: auto;
-        display: grid;
-        grid-template-columns: repeat(7, 38px);
-        grid-template-rows: repeat(6, 32px);
-        align-items: center;
-        justify-items: center;
-        flex-wrap: wrap;
-      }
-      @include b(date-panel-date) {
-        @include once {
-          position: relative;
-          width: 24px;
-          height: 24px;
-          line-height: 24px;
-          text-align: center;
-          font-size: 13px;
-          border-radius: 3px;
-          z-index: 0;
-          cursor: pointer;
-          transition: background-color .2s $--n-ease-in-out-cubic-bezier, color .2s $--n-ease-in-out-cubic-bezier;
-          @include m(transition-disabled) {
-            transition: none!important;
-          }
-        }
-        @include not-m(disabled) {
-          @include not-m(selected) {
-            &:hover {
-              background-color: map-get($--date-picker-item-background-color, 'hover');
-            }
-          }
-        }
-        @include m(current) {
-          &::after {
-            @include once {
-              position: absolute;
-              top: 3px;
-              right: 2px;
-              content: "";
-              height: 4px;
-              width: 4px;
-              border-radius: 2px;
-              transition: background-color .2s $--n-ease-in-out-cubic-bezier;
-            }
-            background-color: map-get($--date-picker-item-background-color, 'active');
-          }
-        }
-        @include m(covered) {
-          @include not-m(selected) {
-            &::before {
-              @include once {
-                content: "";
-                z-index: -1;
-                position: absolute;
-                left: -7px;
-                right: -7px;
-                top: 0;
-                bottom: 0;
-              }
-              background: map-get($--date-picker-item-background-color, 'hover');
-            }
-          }
-        }
-        @include m(selected) {
-          color: map-get($--date-picker-item-text-color, 'active');
-          background-color: map-get($--date-picker-item-background-color, 'active');
-          &::after {
-            background-color: map-get($--date-picker-item-sup-color, 'active');
-          }
-        }
-        @include m(excluded) {
-          @include once {
-            opacity: 0.45;
-          }
-        }
-        @include m(disabled) {
-          @include once {
-            cursor: not-allowed;
-            opacity: $--n-disabled-opacity !important;
-          }
-        }
-      }
-    }
-    @include e(divider) {
-      @include once {
-        margin: $divider-margin;
-        height: 1px;
-      }
-      background-color: $--date-picker-divider-color;
-    }
-    @include b(date-panel-actions) {
-      @include once {
-        flex: 1;
-        height: $action-height;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        @include b(button) {
-          margin-bottom: 0;
-          margin-right: 8px;
-        }
-      }
-      border-top: 1px solid $--date-picker-divider-color;
-    }
-  }
-}
+// @include themes-mixin {
+//   @include b(date-picker) {
+//     position: relative;
+//     @include m(invalid) {
+//       input {
+//         text-decoration: line-through;
+//         text-decoration-color: $--date-picker-text-decoration-color;
+//       }
+//     }
+//     @include m(start-invalid) {
+//       input:nth-of-type(1) {
+//         text-decoration: line-through;
+//         text-decoration-color: $--date-picker-text-decoration-color;
+//       }
+//     }
+//     @include m(end-invalid) {
+//       input:nth-of-type(2) {
+//         text-decoration: line-through;
+//         text-decoration-color: $--date-picker-text-decoration-color;
+//       }
+//     }
+//   } 
+//   @include b(date-panel) {
+//     outline: none;
+//     @include fade-in-scale-up-transition(date-panel);
+//     transform: $--n-transform-debounce-scale;
+//     margin-top: 4px;
+//     margin-bottom: 4px;
+//     display: grid;
+//     grid-template-columns: 1fr;
+//     border-radius: $--n-date-picker-border-radius;
+//     background: $--date-picker-background-color;
+//     box-shadow: $--date-picker-box-shadow;
+//     color: $--date-picker-text-color;
+//     @include b(date-panel-calendar) {
+//       padding: 4px 12px;
+//       display: grid;
+//       grid-template-columns: 1fr;
+//     }
+//     @include m(date) {
+//       grid-template-areas:
+//         "calendar"
+//         "action";
+//       @include b(date-panel-calendar) {
+//         padding-top: 6px;
+//         grid-area: calendar;
+//       }
+//       @include b(date-panel-actions) {
+//         grid-area: action;
+//       }
+//     }
+//     @include m(daterange) {
+//       grid-template-areas:
+//         "start-calendar divider end-calendar"
+//         "action action action";
+//       @include b(date-panel-calendar) {
+//         padding-top: 6px;
+//         @include m(start) {
+//           grid-area: start-calendar;
+//         }
+//         @include m(end) {
+//           grid-area: end-calendar;
+//         }
+//       }
+//       @include b(date-panel-actions) {
+//         grid-area: action;
+//       }
+//     }
+//     @include m(datetime) {
+//       grid-template-areas:
+//         "head"
+//         "calendar"
+//         "action";
+//       @include b(date-panel-input-wrapper) {
+//         grid-area: head;
+//       }
+//       @include b(date-panel-calendar) {
+//         grid-area: calendar;
+//       }
+//       @include b(date-panel-actions) {
+//         grid-area: action;
+//       }
+//     }
+//     @include m(datetimerange) {
+//       grid-template-areas:
+//         "head head head"
+//         "start-calendar divider end-calendar"
+//         "action action action";
+//       @include b(date-panel-input-wrapper) {
+//         grid-area: head;
+//       }
+//       @include b(date-panel-calendar) {
+//         @include m(start) {
+//           grid-area: start-calendar;
+//         }
+//         @include m(end) {
+//           grid-area: end-calendar;
+//         }
+//       }
+//       @include b(date-panel-actions) {
+//         grid-area: action;
+//       }
+//     }
+//     @include b(date-panel-input-wrapper) {
+//       @include once {
+        
+//         @include e(arrow) {
+//           @include once {
+//             width: 16px;
+//             height: 16px;
+//             margin: 0 8px;
+//             position: relative;
+//           }
+//           @include b(base-icon) {
+//             @include once {
+//               position: absolute;
+//               left: 0;
+//               right: 0;
+//               top: 0;
+//               bottom: 0;
+//             }
+//             fill: $--date-picker-icon-color;
+//           }
+//         }
+//         > {
+//           @include b(input) {
+//             margin-right: 10px;
+//             flex: 1;
+//             width: 0;
+//           }
+//           @include b(time-picker) {
+//             z-index: 1;
+//             flex: 1;
+//             width: 0;
+//           }
+//         }
+//       }
+//       @include b(date-panel-date-input) {
+//         @include m(invalid) {
+//           input {
+//             text-decoration: line-through;
+//             text-decoration-color: $--date-picker-text-decoration-color;
+//           }
+//         }
+//       }
+//       border-bottom: 1px solid $--date-picker-divider-color;
+//     }
+//     @include b(date-panel-month) {
+//       @include once {
+//         display: flex;
+//         box-sizing: border-box;
+//         align-items: center;
+//         height: 28px;
+//         padding: 0 8px;
+//         @include e(prev, next, fast-prev, fast-next) {
+//           cursor: pointer;
+//           width: 14px;
+//           height: 14px;
+//         }
+//         @include e(fast-prev, next) {
+//           margin-right: 10px;
+//         }
+//       }
+//       @include e(prev, next, fast-prev, fast-next) {
+//         fill: $--date-picker-icon-color;
+//       }
+//       @include e(month-year) {
+//         @include once {
+//           font-size: 14px;
+//           font-weight: $--n-strong-weight;
+//           line-height: 17px;
+//           flex-grow: 1;
+//           text-align: center;
+//         }
+//         color: $--date-picker-month-text-color;
+//       }
+//     }
+//     @include b(date-panel-weekdays) {
+//       @include once {
+//         display: grid;
+//         margin: auto;
+//         grid-template-columns: repeat(7, 38px);
+//         grid-template-rows: repeat(1, 32px);
+//         align-items: center;
+//         justify-items: center;
+//         margin-bottom: 4px;
+//       }
+//       @include e(day) {
+//         @include once {
+//           line-height: 15px;
+//           width: 24px;
+//           text-align: center;
+//           font-size: 12px;
+//         }
+//         color: $--date-picker-text-color;
+//       }
+//       border-bottom: 1px solid $--date-picker-divider-color;
+//     }
+//     @include b(date-panel-dates) {
+//       @include once {
+//         margin: auto;
+//         display: grid;
+//         grid-template-columns: repeat(7, 38px);
+//         grid-template-rows: repeat(6, 32px);
+//         align-items: center;
+//         justify-items: center;
+//         flex-wrap: wrap;
+//       }
+//       @include b(date-panel-date) {
+//         @include once {
+//           position: relative;
+//           width: 24px;
+//           height: 24px;
+//           line-height: 24px;
+//           text-align: center;
+//           font-size: 13px;
+//           border-radius: 3px;
+//           z-index: 0;
+//           cursor: pointer;
+//           transition: background-color .2s $--n-ease-in-out-cubic-bezier, color .2s $--n-ease-in-out-cubic-bezier;
+//           @include m(transition-disabled) {
+//             transition: none!important;
+//           }
+//         }
+//         @include not-m(disabled) {
+//           @include not-m(selected) {
+//             &:hover {
+//               background-color: map-get($--date-picker-item-background-color, 'hover');
+//             }
+//           }
+//         }
+//         @include m(current) {
+//           &::after {
+//             @include once {
+//               position: absolute;
+//               top: 3px;
+//               right: 2px;
+//               content: "";
+//               height: 4px;
+//               width: 4px;
+//               border-radius: 2px;
+//               transition: background-color .2s $--n-ease-in-out-cubic-bezier;
+//             }
+//             background-color: map-get($--date-picker-item-background-color, 'active');
+//           }
+//         }
+//         @include m(covered) {
+//           @include not-m(selected) {
+//             &::before {
+//               @include once {
+//                 content: "";
+//                 z-index: -1;
+//                 position: absolute;
+//                 left: -7px;
+//                 right: -7px;
+//                 top: 0;
+//                 bottom: 0;
+//               }
+//               background: map-get($--date-picker-item-background-color, 'hover');
+//             }
+//           }
+//         }
+//         @include m(selected) {
+//           color: map-get($--date-picker-item-text-color, 'active');
+//           background-color: map-get($--date-picker-item-background-color, 'active');
+//           &::after {
+//             background-color: map-get($--date-picker-item-sup-color, 'active');
+//           }
+//         }
+//         @include m(excluded) {
+//           @include once {
+//             opacity: 0.45;
+//           }
+//         }
+//         @include m(disabled) {
+//           @include once {
+//             cursor: not-allowed;
+//             opacity: $--n-disabled-opacity !important;
+//           }
+//         }
+//       }
+//     }
+//     @include e(vertical-divider) {
+//       grid-area: divider;
+//       height: 100%;
+//       width: 1px;
+//       background: $--date-picker-divider-color;
+//     }
+//     @include b(date-panel-actions) {
+//       @include once {
+//         flex: 1;
+//         padding: 8px 12px;
+//         display: flex;
+//         align-items: center;
+//         justify-content: flex-end;
+//         @include b(button) {
+//           margin-left: 8px;
+//         }
+//       }
+//       border-top: 1px solid $--date-picker-divider-color;
+//     }
+//   }
+// }

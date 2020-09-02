@@ -393,6 +393,7 @@ const naive = create({
 105. <del>markdown 渲染缺少空格，修正了 n-select single filterable 时 placeholder 的样式问题</del> caused by vue compiler `preserveWhitespace: false`, change it to `whitespace: 'condense'`
 106. drawer 加上滚动条，以及 overflow auto 的样式
 107. 所有弹出的东西改成 body-style
+108. size 切换的时候... transfer 动画问题
 
 ```
 Done

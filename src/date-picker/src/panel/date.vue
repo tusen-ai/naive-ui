@@ -1,75 +1,75 @@
 <template>
-  <transition name="n-date-panel-transition">
+  <transition name="n-fade-in-scale-up-transition">
     <div
       v-if="active"
       tabindex="0"
-      class="n-date-panel"
+      class="n-date-panel n-date-panel--date"
       :class="{
         [`n-${theme}-theme`]: theme
       }"
       @focus="handlePanelFocus"
       @keydown="handlePanelKeyDown"
     >
-      <div style="width: 100%; height: 3px" />
-      <div class="n-date-panel-month">
-        <div
-          class="n-date-panel-month__fast-prev"
-          @click="prevYear"
-        >
-          <n-base-icon type="fast-backward" />
+      <div class="n-date-panel-calendar">
+        <div class="n-date-panel-month">
+          <div
+            class="n-date-panel-month__fast-prev"
+            @click="prevYear"
+          >
+            <n-base-icon type="fast-backward" />
+          </div>
+          <div
+            class="n-date-panel-month__prev"
+            @click="prevMonth"
+          >
+            <n-base-icon type="backward" />
+          </div>
+          <div class="n-date-panel-month__month-year">
+            {{ calendarMonth }} {{ calendarYear }}
+          </div>
+          <div
+            class="n-date-panel-month__next"
+            @click="nextMonth"
+          >
+            <n-base-icon type="forward" />
+          </div>
+          <div
+            class="n-date-panel-month__fast-next"
+            @click="nextYear"
+          >
+            <n-base-icon type="fast-forward" />
+          </div>
         </div>
-        <div
-          class="n-date-panel-month__prev"
-          @click="prevMonth"
-        >
-          <n-base-icon type="backward" />
+        <div class="n-date-panel-weekdays">
+          <div
+            v-for="weekday in weekdays"
+            :key="weekday"
+            class="n-date-panel-weekdays__day"
+          >
+            {{ weekday }}
+          </div>
         </div>
-        <div class="n-date-panel-month__month-year">
-          {{ calendarMonth }} {{ calendarYear }}
+        <div class="n-date-panel-dates">
+          <div
+            v-for="(dateItem, i) in dateArray"
+            :key="i"
+            class="n-date-panel-date"
+            :class="{
+              'n-date-panel-date--current': dateItem.isCurrentDate,
+              'n-date-panel-date--selected': dateItem.isSelectedDate,
+              'n-date-panel-date--excluded': !dateItem.isDateOfDisplayMonth,
+              'n-date-panel-date--transition-disabled': noTransition,
+              'n-date-panel-date--disabled': isDateDisabled(dateItem.timestamp)
+            }"
+            @click="handleDateClick(dateItem)"
+          >
+            {{ dateItem.dateObject.date }}
+          </div>
+          <div
+            v-if="!(actions && actions.length)"
+            style="height: 8px; width: 100%;"
+          />
         </div>
-        <div
-          class="n-date-panel-month__next"
-          @click="nextMonth"
-        >
-          <n-base-icon type="forward" />
-        </div>
-        <div
-          class="n-date-panel-month__fast-next"
-          @click="nextYear"
-        >
-          <n-base-icon type="fast-forward" />
-        </div>
-      </div>
-      <div class="n-date-panel-weekdays">
-        <div
-          v-for="weekday in weekdays"
-          :key="weekday"
-          class="n-date-panel-weekdays__day"
-        >
-          {{ weekday }}
-        </div>
-      </div>
-      <div class="n-date-panel__divider" />
-      <div class="n-date-panel-dates">
-        <div
-          v-for="(dateItem, i) in dateArray"
-          :key="i"
-          class="n-date-panel-date"
-          :class="{
-            'n-date-panel-date--current': dateItem.isCurrentDate,
-            'n-date-panel-date--selected': dateItem.isSelectedDate,
-            'n-date-panel-date--excluded': !dateItem.isDateOfDisplayMonth,
-            'n-date-panel-date--transition-disabled': noTransition,
-            'n-date-panel-date--disabled': isDateDisabled(dateItem.timestamp)
-          }"
-          @click="handleDateClick(dateItem)"
-        >
-          {{ dateItem.dateObject.date }}
-        </div>
-        <div
-          v-if="!(actions && actions.length)"
-          style="height: 8px; width: 100%;"
-        />
       </div>
       <div
         v-if="actions && actions.length"
