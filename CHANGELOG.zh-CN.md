@@ -3,8 +3,11 @@
 ### Fixes
 - 修正了 `n-auto-complete` 使用 `textarea` 作为输入元素时菜单无法关闭的问题
 - 修正了嵌套 `n-icon` 没有被打平的问题
+- 修正了 `n-date-picker` 在类型为 `date` 和 `datetime` 时面板不显示年的问题
 ### Features
 - `n-drawer` 内容可滚动
+### Localization
+- `n-log` 添加 zhCN 本地化
 
 ## 1.5.5 (2020-08-15)
 ### Breaking Changes

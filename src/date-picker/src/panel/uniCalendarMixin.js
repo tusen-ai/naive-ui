@@ -66,7 +66,7 @@ export default {
       return this.localeNamespace[format(this.calendarDateTime, 'MMM')]
     },
     calendarYear () {
-      return this.localeNamespace[format(this.calendarDateTime, 'yyyy')]
+      return format(this.calendarDateTime, 'yyyy')
     },
     /**
      * If value is valid return null.

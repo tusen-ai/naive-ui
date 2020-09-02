@@ -2,7 +2,9 @@
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import hollowoutable from '../../_mixins/hollowoutable'
+import usecssr from '../../_mixins/usecssr'
 import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
+import styles from './styles/steps'
 
 function stepWithIndex (step, i) {
   if (step.componentOptions) {
@@ -18,13 +20,18 @@ function stepsWithIndex (props, steps) {
 }
 
 export default {
-  name: 'NSteps',
+  name: 'Steps',
   provide () {
     return {
       NSteps: this
     }
   },
-  mixins: [withapp, themeable, hollowoutable],
+  mixins: [
+    withapp,
+    themeable,
+    hollowoutable,
+    usecssr(styles)
+  ],
   props: {
     current: {
       type: Number,

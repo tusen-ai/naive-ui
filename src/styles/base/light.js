@@ -70,7 +70,9 @@ export default create({
       successHover: '#36ad6a',
       successDefault: '#18a058',
       successActive: '#0c7a43',
-      successHs: '#36ad6a'
+      successHs: '#36ad6a',
+
+      boxShadow2: '0 3px 6px -4px rgba(0, 0, 0, .16), 0 6px 12px 0 rgba(0, 0, 0, .08), 0 9px 18px 8px rgba(0, 0, 0, .04)'
     }, commonVariables)
   },
   getDerivedVariables (base) {
@@ -197,7 +199,9 @@ export default create({
       disabledOpacity: base.alphaDisabled,
       disabledInputBackgroundColor: neutral(base.alphaDisabledInput),
       disabledInputBackgroundOverlayColor: overlay(base.alphaDisabledInput),
-      messageColoredBoxShadow: '0px 2px 18px 0px rgba(0, 0, 0, 0.27)'
+      messageColoredBoxShadow: '0px 2px 18px 0px rgba(0, 0, 0, 0.27)',
+
+      popoverBoxShadow: base.boxShadow2
     }
     return derived
   }

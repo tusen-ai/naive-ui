@@ -1,5 +1,5 @@
 <template>
-  <transition name="n-date-panel-transition">
+  <transition name="n-fade-in-scale-up-transition">
     <div
       v-if="active"
       tabindex="0"
@@ -80,7 +80,7 @@
       </div>
       <div
         ref="startDates"
-        class="n-date-panel-calendar"
+        class="n-date-panel-calendar n-date-panel-calendar--start"
       >
         <div class="n-date-panel-month">
           <div
@@ -151,10 +151,10 @@
           </div>
         </div>
       </div>
-      <div><div class="n-date-panel__vertical-divider" /></div>
+      <div class="n-date-panel__vertical-divider" />
       <div
         ref="endDates"
-        class="n-date-panel-calendar"
+        class="n-date-panel-calendar n-date-panel-calendar--end"
       >
         <div class="n-date-panel-month">
           <div

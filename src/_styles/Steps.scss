@@ -1,185 +1,185 @@
-@import './mixins/mixins.scss';
+// @import './mixins/mixins.scss';
 
-@mixin steps-size-mixin ($size) {
-  @include m($size + '-size') {
-    $title-font-size: map-get($--n-steps-header-font-size, $size);
-    $indicator-size: map-get($--n-steps-indicator-size, $size);
-    $indicator-icon-size: map-get($--n-steps-indicator-icon-size, $size);
-    $indicator-index-font-size: map-get($--n-steps-indicator-index-font-size, $size);
-    $indicator-title-margin-top: ($indicator-size - $title-font-size) / 2;
-    @include b(step-splitor) {
-      margin-top: $indicator-size / 2 - $indicator-title-margin-top;
-    }
-    @include m(vertical) {
-      @include b(step-splitor) {
-        left: $indicator-size / 2;
-        height: calc(100% - #{$indicator-size});
-      }
-    }
-    @include b(step-content) {
-      @include b(step-content-header) {
-        margin-top: $indicator-title-margin-top;
-        line-height: $title-font-size;
-        font-size: $title-font-size;
-      }
-    }
-    @include b(step-indicator) {
-      height: $indicator-size;
-      width: $indicator-size;
-      border-radius: $indicator-size / 2;
-      @include b(step-indicator-slot) {
-        width: $indicator-icon-size;
-        height: $indicator-icon-size;
-        font-size: $indicator-icon-size;
-        line-height: $indicator-icon-size;
-        @include e(index) {
-          font-size: $indicator-index-font-size;
-          width: $indicator-icon-size;
-          height: $indicator-icon-size;
-          line-height: $indicator-icon-size;
-        }
-      }
-    }
-  }
-}
+// @mixin steps-size-mixin ($size) {
+//   @include m($size + '-size') {
+//     $title-font-size: map-get($--n-steps-header-font-size, $size);
+//     $indicator-size: map-get($--n-steps-indicator-size, $size);
+//     $indicator-icon-size: map-get($--n-steps-indicator-icon-size, $size);
+//     $indicator-index-font-size: map-get($--n-steps-indicator-index-font-size, $size);
+//     $indicator-title-margin-top: ($indicator-size - $title-font-size) / 2;
+//     @include b(step-splitor) {
+//       margin-top: $indicator-size / 2 - $indicator-title-margin-top;
+//     }
+//     @include m(vertical) {
+//       @include b(step-splitor) {
+//         left: $indicator-size / 2;
+//         height: calc(100% - #{$indicator-size});
+//       }
+//     }
+//     @include b(step-content) {
+//       @include b(step-content-header) {
+//         margin-top: $indicator-title-margin-top;
+//         line-height: $title-font-size;
+//         font-size: $title-font-size;
+//       }
+//     }
+//     @include b(step-indicator) {
+//       height: $indicator-size;
+//       width: $indicator-size;
+//       border-radius: $indicator-size / 2;
+//       @include b(step-indicator-slot) {
+//         width: $indicator-icon-size;
+//         height: $indicator-icon-size;
+//         font-size: $indicator-icon-size;
+//         line-height: $indicator-icon-size;
+//         @include e(index) {
+//           font-size: $indicator-index-font-size;
+//           width: $indicator-icon-size;
+//           height: $indicator-icon-size;
+//           line-height: $indicator-icon-size;
+//         }
+//       }
+//     }
+//   }
+// }
 
-@mixin steps-status-mixin ($status) {
-  @include m($status) {
-    @include b(step-splitor) {
-      background-color: map-get($--steps-step-splitor-background-color, $status);
-    }
-    @include b(step-content) {
-      @include b(step-content-header) {
-        color: map-get($--steps-step-title-text-color, $status);
-      }
-      @include e(description) {
-        color: map-get($--steps-step-content-text-color, $status);
-      }
-    }
-    @include b(step-indicator) {
-      background-color: map-get($--steps-step-background-color, $status);
-      box-shadow: 0 0 0 1px map-get($--steps-step-border-color, $status);
-      @include b(step-indicator-slot) {
-        @include e(index) {
-          color: map-get($--steps-step-indicator-text-color, $status);
-        }
-        @include b(icon) {
-          fill: map-get($--steps-step-indicator-text-color, $status);
-          stroke: map-get($--steps-step-indicator-text-color, $status);
-        }
-      }
-    }
-  }
-}
+// @mixin steps-status-mixin ($status) {
+//   @include m($status) {
+//     @include b(step-splitor) {
+//       background-color: map-get($--steps-step-splitor-background-color, $status);
+//     }
+//     @include b(step-content) {
+//       @include b(step-content-header) {
+//         color: map-get($--steps-step-title-text-color, $status);
+//       }
+//       @include e(description) {
+//         color: map-get($--steps-step-content-text-color, $status);
+//       }
+//     }
+//     @include b(step-indicator) {
+//       background-color: map-get($--steps-step-background-color, $status);
+//       box-shadow: 0 0 0 1px map-get($--steps-step-border-color, $status);
+//       @include b(step-indicator-slot) {
+//         @include e(index) {
+//           color: map-get($--steps-step-indicator-text-color, $status);
+//         }
+//         @include b(icon) {
+//           fill: map-get($--steps-step-indicator-text-color, $status);
+//           stroke: map-get($--steps-step-indicator-text-color, $status);
+//         }
+//       }
+//     }
+//   }
+// }
 
-@include themes-mixin {
-  @include b(steps) {
-    @include once {
-      @include steps-size-mixin('small');
-      @include steps-size-mixin('medium');
-      width: 100%;
-      display: flex;
-      @include b(step-splitor) {
-        transition:
-          color .3s $--n-ease-in-out-cubic-bezier,
-          background-color .3s $--n-ease-in-out-cubic-bezier;
-        height: 1px;
-        flex: 1;
-        align-self: flex-start;
-        margin-left: 12px;
-        margin-right: 12px;
-      }
-      @include b(step-content) {
-        flex: 1;
-        @include b(step-content-header) {
-          transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
-          position: relative;
-          display: flex;
-          font-weight: $--n-strong-weight;
-          margin-left: 9px;
-          @include e(title) {
-            white-space: nowrap;
-            flex: 0;
-          }
-        }
-        @include e(description) {
-          transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
-          margin-top: 12px;
-          margin-left: 9px;
-        }
-      }
-      @include b(step-indicator) {
-        transition:
-          background-color .3s $--n-ease-in-out-cubic-bezier,
-          box-shadow .3s $--n-ease-in-out-cubic-bezier;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        @include b(step-indicator-slot) {
-          position: relative;
-          @include e(index) {
-            @include icon-switch-transition();
-            display: inline-block;
-            text-align: center;
-            transition: color .3s $--n-ease-in-out-cubic-bezier;
-            position: absolute;
-            left: 0;
-            top: 0;
-            transform: $--n-transform-debounce-scale;
-          }
-          @include b(icon) {
-            @include icon-switch-transition();
-          }
-        }
-      }
-      @include m(transition-disabled) {
-        @include b(step-indicator) {
-          @include b(step-indicator-slot) {
-            @include e(index) {
-              transition: none !important;
-            }
-          }
-        }
-      }
-      @include m(vertical) {
-        flex-direction: column;
-        $step-margin-bottom: 16px;
-        @include b(step) {
-          margin-bottom: $step-margin-bottom;
-          &:last-child {
-            margin-bottom: 0;
-          }
-        }
-        @include b(step-indicator) {
-          @include b(step-splitor) {
-            position: absolute;
-            bottom: -$step-margin-bottom / 2;
-            width: 1px;
-            margin: 0 !important;
-          }
-        }
-        @include b(step-content) {
-          @include e(description) {
-            margin-top: 8px;
-          }
-        }
-      }
-    }
-    @include b(step) {
-      @include steps-status-mixin('finish');
-      @include steps-status-mixin('error');
-      @include steps-status-mixin('wait');
-      @include steps-status-mixin('process');
-      @include once {
-        position: relative;
-        display: flex;
-        flex: 1;
-        &:last-child {
-          @include b(step-splitor) {
-            display: none;
-          }
-        }
-      }
-    }
-  }
-}
+// @include themes-mixin {
+//   @include b(steps) {
+//     @include once {
+//       @include steps-size-mixin('small');
+//       @include steps-size-mixin('medium');
+//       width: 100%;
+//       display: flex;
+//       @include b(step-splitor) {
+//         transition:
+//           color .3s $--n-ease-in-out-cubic-bezier,
+//           background-color .3s $--n-ease-in-out-cubic-bezier;
+//         height: 1px;
+//         flex: 1;
+//         align-self: flex-start;
+//         margin-left: 12px;
+//         margin-right: 12px;
+//       }
+//       @include b(step-content) {
+//         flex: 1;
+//         @include b(step-content-header) {
+//           transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
+//           position: relative;
+//           display: flex;
+//           font-weight: $--n-strong-weight;
+//           margin-left: 9px;
+//           @include e(title) {
+//             white-space: nowrap;
+//             flex: 0;
+//           }
+//         }
+//         @include e(description) {
+//           transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
+//           margin-top: 12px;
+//           margin-left: 9px;
+//         }
+//       }
+//       @include b(step-indicator) {
+//         transition:
+//           background-color .3s $--n-ease-in-out-cubic-bezier,
+//           box-shadow .3s $--n-ease-in-out-cubic-bezier;
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         @include b(step-indicator-slot) {
+//           position: relative;
+//           @include e(index) {
+//             @include icon-switch-transition();
+//             display: inline-block;
+//             text-align: center;
+//             transition: color .3s $--n-ease-in-out-cubic-bezier;
+//             position: absolute;
+//             left: 0;
+//             top: 0;
+//             transform: $--n-transform-debounce-scale;
+//           }
+//           @include b(icon) {
+//             @include icon-switch-transition();
+//           }
+//         }
+//       }
+//       @include m(transition-disabled) {
+//         @include b(step-indicator) {
+//           @include b(step-indicator-slot) {
+//             @include e(index) {
+//               transition: none !important;
+//             }
+//           }
+//         }
+//       }
+//       @include m(vertical) {
+//         flex-direction: column;
+//         $step-margin-bottom: 16px;
+//         @include b(step) {
+//           margin-bottom: $step-margin-bottom;
+//           &:last-child {
+//             margin-bottom: 0;
+//           }
+//         }
+//         @include b(step-indicator) {
+//           @include b(step-splitor) {
+//             position: absolute;
+//             bottom: -$step-margin-bottom / 2;
+//             width: 1px;
+//             margin: 0 !important;
+//           }
+//         }
+//         @include b(step-content) {
+//           @include e(description) {
+//             margin-top: 8px;
+//           }
+//         }
+//       }
+//     }
+//     @include b(step) {
+//       @include steps-status-mixin('finish');
+//       @include steps-status-mixin('error');
+//       @include steps-status-mixin('wait');
+//       @include steps-status-mixin('process');
+//       @include once {
+//         position: relative;
+//         display: flex;
+//         flex: 1;
+//         &:last-child {
+//           @include b(step-splitor) {
+//             display: none;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }

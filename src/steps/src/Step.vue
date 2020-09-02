@@ -61,7 +61,7 @@ import themeable from '../../_mixins/themeable'
 
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 export default {
-  name: 'NStep',
+  name: 'Step',
   inject: {
     NSteps: {
       default: null
