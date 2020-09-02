@@ -5,6 +5,8 @@
 - Fix the problem that nested `n-icon` is not flattened.
 ### Features
 - Make `n-drawer` content scrollable.
+### Localization
+- Add zhCN for `n-log`
 
 ## 1.5.5 (2020-08-15)
 ### Breaking Changes

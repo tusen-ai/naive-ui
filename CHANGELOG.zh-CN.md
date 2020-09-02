@@ -5,6 +5,8 @@
 - 修正了嵌套 `n-icon` 没有被打平的问题
 ### Features
 - `n-drawer` 内容可滚动
+### Localization
+- `n-log` 添加 zhCN 本地化
 
 ## 1.5.5 (2020-08-15)
 ### Breaking Changes
