@@ -1,4 +1,4 @@
-import themedBaseStyle from './steps/themed-base.cssr.js'
+import themedBaseStyle from './themed-base.cssr.js'
 
 export default [
   {
