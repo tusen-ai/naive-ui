@@ -6,7 +6,7 @@ import render from '../../_utils/vue/render'
 import locale from '../../_mixins/locale'
 
 export default {
-  name: 'NTime',
+  name: 'Time',
   mixins: [
     locale('Time')
   ],
