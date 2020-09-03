@@ -14,21 +14,19 @@ export default create({
     } = derived
     const {
       popmenuBoxShadow,
-      borderRadius,
-      transformDebounceScale
+      borderRadius
     } = base
     return {
-      color: popoverBackgroundColor,
-      textColor: secondaryTextOverlayColor,
-      textColorActive: primaryColor,
-      textDecorationColor: secondaryTextOverlayColor,
-      textDecorationColorActive: primaryColor,
+      panelColor: popoverBackgroundColor,
+      panelBoxShadow: popmenuBoxShadow,
+      panelDividerColor: dividerOverlayColor,
+      itemTextColor: secondaryTextOverlayColor,
+      itemTextColorActive: primaryColor,
       itemColorHover: pendingBackgroundOverlayColor,
-      dividerColor: dividerOverlayColor,
-      boxShadow: popmenuBoxShadow,
-      itemDisabledOpacity: disabledOpacity,
-      borderRadius,
-      transformDebounceScale
+      itemOpacityDisabled: disabledOpacity,
+      triggerTextDecorationColor: secondaryTextOverlayColor,
+      triggerTextDecorationColorActive: primaryColor,
+      borderRadius
     }
   }
 })
