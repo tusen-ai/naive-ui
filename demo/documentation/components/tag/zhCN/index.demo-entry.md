@@ -9,7 +9,7 @@ disabled
 size
 checkable
 shape
-dynamicTags
+dynamic-tags
 ```
 
 ## V-model

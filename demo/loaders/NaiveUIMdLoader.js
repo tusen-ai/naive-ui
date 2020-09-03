@@ -40,9 +40,9 @@ module.exports = function (content, url) {
     .join('\n')
   let mdContent = marked.parser(tokens, { renderer })
   if (titleText) {
-    const gheButton = `<edit-on-github-header url=${url || relativeURL} text=${titleText}></edit-on-github-header>`
+    const githubButton = `<edit-on-github-header url=${url || relativeURL} text=${titleText}></edit-on-github-header>`
     const titleReg = /(<n-h1[^>]*>)(.*?)(<\/n-h1>)/
-    mdContent = mdContent.replace(titleReg, `${gheButton}`)
+    mdContent = mdContent.replace(titleReg, `${githubButton}`)
   }
   return `
 <template>

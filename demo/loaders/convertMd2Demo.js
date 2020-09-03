@@ -72,15 +72,18 @@ ${mergedParts.code}
   return mergedParts
 }
 
-function genVueComponent (parts, noRunning = false) {
-  const titleReg = /<!--TITLE_SLOT-->/
+function genVueComponent (parts, fileName, relativeUrl, noRunning = false) {
+  const demoFileNameReg = /<!--DEMO_FILE_NAME-->/g
+  const relativeUrlReg = /<!--URL-->/g
+  const titleReg = /<!--TITLE_SLOT-->/g
   const contentReg = /<!--CONTENT_SLOT-->/
   const codeReg = /<!--CODE_SLOT-->/
   const scriptReg = /\/\*\*\sSCRIPT_SLOT\s\*\//
   const styleReg = /\/\*\*STYLE_SLOT\*\//g
   const demoReg = /<!--DEMO_SLOT-->/
   let src = demoBlock
-  // console.log(src)
+  src = src.replace(demoFileNameReg, fileName)
+  src = src.replace(relativeUrlReg, relativeUrl)
   if (parts.content) {
     src = src.replace(contentReg, parts.content)
   }
@@ -102,13 +105,22 @@ function genVueComponent (parts, noRunning = false) {
   return src.trim()
 }
 
-function convertMd2Demo (text) {
+function getFileName (resourcePath) {
+  const dirs = resourcePath.split('/')
+  const fileNameWithExtension = dirs[dirs.length - 1]
+  return [fileNameWithExtension.split('.')[0], fileNameWithExtension]
+}
+
+function convertMd2Demo (text, {
+  resourcePath,
+  relativeUrl
+}) {
   const noRunning = /<!--no-running-->/.test(text)
   const tokens = marked.lexer(text)
   const parts = getPartsOfDemo(tokens)
   const mergedParts = mergeParts(parts)
-  const vueComponent = genVueComponent(mergedParts, noRunning)
-  // console.log(vueComponent)
+  const [fileName] = getFileName(resourcePath)
+  const vueComponent = genVueComponent(mergedParts, fileName, relativeUrl, noRunning)
   return vueComponent
 }
 

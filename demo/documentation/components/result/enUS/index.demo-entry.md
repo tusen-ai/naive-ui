@@ -4,10 +4,10 @@ Result is for showing result.
 Many thanks to [twemoji](https://github.com/twitter/twemoji) for creating those high quality icons.
 ## Demos
 ```demo
-s404
-s403
-s500
-s418
+s-404
+s-403
+s-500
+s-418
 info
 success
 warning 

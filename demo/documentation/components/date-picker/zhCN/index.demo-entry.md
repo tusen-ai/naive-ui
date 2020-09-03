@@ -9,7 +9,7 @@ daterange
 datetimerange
 size
 disabled
-disabledTime
+disabled-time
 actions
 events
 format

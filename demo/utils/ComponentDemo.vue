@@ -36,7 +36,7 @@
           <edit-on-github-button
             style="padding: 0; margin-right: 6px;"
             size="tiny"
-            :url="url"
+            :relative-url="relativeUrl"
           />
         </template>
         {{ $t('editOnGithub') }}
@@ -76,11 +76,24 @@
 <script>
 import codeOutline from '../../src/_icons/code-outline'
 import { modeRef } from '../use-dev-mode'
-import camelCase from 'lodash/camelCase'
 
 export default {
   components: {
     codeOutline
+  },
+  props: {
+    title: {
+      type: String,
+      required: true
+    },
+    demoFileName: {
+      type: String,
+      required: true
+    },
+    relativeUrl: {
+      type: String,
+      required: true
+    }
   },
   inject: {
     NDocumentation: {
@@ -93,7 +106,6 @@ export default {
       contentStyle: null,
       controller: {},
       isShow: true,
-      name: '',
       isDebugDemo: false,
       modeRef
     }
@@ -101,10 +113,6 @@ export default {
   computed: {
     mode () {
       return this.modeRef.value
-    },
-    url () {
-      const relativePath = this.NDocumentation.url.replace('index.md', camelCase(this.name) + '.md')
-      return relativePath
     }
   },
   watch: {
@@ -121,8 +129,7 @@ export default {
       this.init()
     }
   },
-  mounted () {
-    this.name = this.$el.id
+  created () {
     this.init()
   },
   methods: {
@@ -131,19 +138,19 @@ export default {
     },
     init () {
       const map = this.NDocumentation.anchorLinkMap
-      this.isDebugDemo = this.name && (~this.name.indexOf('debug') || ~this.name.indexOf('Debug'))
+      this.isDebugDemo = this.demoFileName && (~this.demoFileName.indexOf('debug') || ~this.demoFileName.indexOf('Debug'))
       if (this.isDebugDemo) {
         if (this.mode === 'debug') {
           this.isShow = true
-          map.set(this.name, String(this.$scopedSlots.title()[0].text).trim())
+          map.set(this.demoFileName, this.title)
         } else {
           this.isShow = false
-          map.delete(this.name)
+          map.delete(this.demoFileName)
         }
       } else {
-        map.set(this.name, String(this.$scopedSlots.title()[0].text).trim())
+        map.set(this.demoFileName, this.title)
       }
-      this.NDocumentation.anchorLinkMap = new Map(map, this.$scopedSlots.title()[0].text.trim())
+      this.NDocumentation.anchorLinkMap = new Map(map)
     }
   }
 }

@@ -23,22 +23,22 @@ export default create({
     } = base
     return {
       ...sizeVariables,
-      tabTextColorDefault: secondaryTextColor,
-      tabTextColorActive: primaryColor,
-      tabTextColorHover: primaryColor,
-      tabTextColorDisabled: disabledTextColor,
-      tabBarBackgroundColor: primaryColor,
-      tabScrollButtonColorDefault: iconOverlayColor,
-      tabScrollButtonColorDisabled: disabledIconOverlayColor,
-      tabCloseButtonColorDeault: closeColor,
-      cardTabBackgroundColor: tabBackgroundOverlayColor,
-      cardTabBorderColor: borderColor,
-      cardTabTextColorDefault: secondaryTextColor,
-      cardTabTextColorActive: primaryTextColor,
-      navBorderColor: dividerOverlayColor,
-      panelTextColor: secondaryTextColor,
-      strongFontWeight: strongFontWeight,
-      borderRadius: borderRadius
+      labelTextColor: secondaryTextColor,
+      labelTextColorActive: primaryColor,
+      labelTextColorHover: primaryColor,
+      labelTextColorDisabled: disabledTextColor,
+      labelBarColor: primaryColor,
+      scrollButtonColor: iconOverlayColor,
+      scrollButtonColorDisabled: disabledIconOverlayColor,
+      tabCloseColor: closeColor,
+      tabColor: tabBackgroundOverlayColor,
+      tabBorderColorActive: borderColor,
+      tabTextColor: secondaryTextColor,
+      tabTextColorActive: primaryTextColor,
+      tabBorderColor: dividerOverlayColor,
+      tabFontWeight: strongFontWeight,
+      tabBorderRadius: borderRadius,
+      paneTextColor: secondaryTextColor
     }
   }
 })

@@ -14,6 +14,7 @@
 
 <script>
 import editIcon from '../../src/_icons/git-commit-outline'
+import githubUrl from './github-url'
 
 export default {
   name: 'EditOnGithubButton',
@@ -21,7 +22,7 @@ export default {
     editIcon
   },
   props: {
-    url: {
+    relativeUrl: {
       type: String,
       required: true
     },
@@ -36,12 +37,12 @@ export default {
   },
   data () {
     return {
-      gheUrl: 'https://***REMOVED***/tree/develop/'
+      githubUrl
     }
   },
   computed: {
     gheDocUrl () {
-      return this.gheUrl + this.url
+      return this.githubUrl + this.relativeUrl
     }
   },
   methods: {

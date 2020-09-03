@@ -24,7 +24,7 @@
             text
             size="large"
             class="edit-button"
-            :url="url"
+            :relative-url="relativeUrl"
           />
         </template>
         {{ $t('editOnGithub') }}
@@ -37,7 +37,7 @@
 export default {
   name: 'EditOnGithubHeader',
   props: {
-    url: {
+    relativeUrl: {
       type: String,
       required: true
     },

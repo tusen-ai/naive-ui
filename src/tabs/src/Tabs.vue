@@ -190,7 +190,7 @@ export default {
       this.$emit('scrollable-change', value)
     },
     panelLabels () {
-      this.$nextTick().then(this.updateScrollStatus)
+      this.$nextTick(this.updateScrollStatus)
     }
   },
   mounted () {

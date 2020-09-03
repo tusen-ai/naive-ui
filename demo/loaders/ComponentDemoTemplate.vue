@@ -1,5 +1,9 @@
 <template>
-  <component-demo>
+  <component-demo
+    demo-file-name="<!--DEMO_FILE_NAME-->"
+    relative-url="<!--URL-->"
+    title="<!--TITLE_SLOT-->"
+  >
     <template v-slot:title>
       <!--TITLE_SLOT-->
     </template>

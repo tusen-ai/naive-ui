@@ -6,9 +6,9 @@ Scroll down to see demos work.
 
 ```demo
 basic
-visibilityHeight
-changePosition
-targetContainerSelector
+visibility-height
+change-position
+target-container-selector
 ```
 
 ## Props

@@ -5,7 +5,7 @@
 ```demo
 basic
 size
-disabledTime
+disabled-time
 format
 ```
 ## V-model

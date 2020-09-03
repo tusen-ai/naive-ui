@@ -1,6 +1,6 @@
 
 import { Vue, i18n } from './init'
-import debugRouteMixin from './routes/debugRouteMixin'
+import debugRouteMixin from './routes/debug-route-mixin'
 import hljs from './hljs'
 import demoRouterView from './DemoRouterView'
 // import './styles/test-customize-style-scheme.scss' // test customize style scheme

@@ -4,7 +4,7 @@
 ## 演示
 ```demo
 horizontal
-defaultExpandedNames
+default-expanded-names
 indent
 collapse
 ```

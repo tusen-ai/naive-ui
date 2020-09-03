@@ -16,17 +16,17 @@ DataTable is used to displays rows of structured data.
 basic
 border
 size
-filterAndSorter
+filter-and-sorter
 select
 controlled-page
 controlled-filter
 controlled-sorter
-fixedHeader
-fixedHeaderColumn
+fixed-header
+fixed-header-column
 ellipsis
-renderHeader
-customStyle
-ajaxUsage
+render-header
+custom-style
+ajax-usage
 ```
 
 ## Props

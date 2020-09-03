@@ -4,12 +4,17 @@ import sizeStyle from './themed-size.cssr.js'
 export default [
   {
     key: 'syntheticTheme',
-    watch: ['syntheticTheme'],
+    watch: [
+      'syntheticTheme'
+    ],
     CNode: baseStyle
   },
   {
     key: 'labelSize',
-    watch: ['labelSize'],
+    watch: [
+      'labelSize',
+      'syntheticTheme'
+    ],
     CNode: sizeStyle
   }
 ]

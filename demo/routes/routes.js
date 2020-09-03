@@ -8,7 +8,7 @@ import start from '../documentation/intro/start'
 import experimentalFeatures from '../documentation/intro/experimental-features'
 import changelog from '../documentation/intro/changelog'
 
-import nimbusServiceLayoutDemo from '../documentation/deprecated/nimbusServiceLayout'
+import nimbusServiceLayout from '../documentation/deprecated/nimbus-service-layout'
 import gradientText from '../documentation/components/gradient-text'
 import checkbox from '../documentation/components/checkbox'
 import button from '../documentation/components/button'
@@ -155,7 +155,7 @@ export const childRoutes = withPrefix('/:lang/:theme/doc', [
   { path: '/n-upload', component: upload },
   { path: '/n-table', component: table },
   // deprecated
-  { path: '/n-nimbus-service-layout', component: nimbusServiceLayoutDemo }
+  { path: '/n-nimbus-service-layout', component: nimbusServiceLayout }
 ])
 
 export const routes = [

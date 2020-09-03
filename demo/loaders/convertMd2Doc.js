@@ -1,6 +1,5 @@
 const marked = require('marked')
 const camelCase = require('lodash/camelCase')
-const kababCase = require('lodash/kebabCase')
 const mdLoader = require('./NaiveUIMdLoader')
 const createRenderer = require('./mdRenderer')
 const mdRenderer = createRenderer()
@@ -18,46 +17,44 @@ function template (demos, demosLiteral, isSingleColumn = false) {
 }
 
 function parseDemos (demosLiteral, env) {
-  const demoNames = demosLiteral
+  const demoFileNames = demosLiteral
     .split('\n')
-    .map(demoName => demoName.trim())
-    .filter((demoName) => {
+    .map(demoFileName => demoFileName.trim())
+    .filter((demoFileName) => {
       if (env === 'production') {
-        return demoName.length && demoName.indexOf('debug') < 0 && demoName.indexOf('Debug') < 0
+        return demoFileName.length && demoFileName.indexOf('debug') < 0 && demoFileName.indexOf('Debug') < 0
       }
-      return demoName.length
+      return demoFileName.length
     })
-  const demoTags = demoNames.map(demoName => `<${demoName}Demo id="${kababCase(demoName)}" demo-id="${kababCase(demoName)}"/>`)
+  const demoTags = demoFileNames.map(demoFileName => `<${demoFileName}Demo id="${demoFileName}" demo-id="${demoFileName}"/>`)
   return demoTags.join('\n')
 }
 
 function parseDemosAsAnchor (demosLiteral) {
-  const demoNames = demosLiteral
+  const demoFileNames = demosLiteral
     .split('\n')
-    .map(demoName => demoName.trim())
-    .filter(demoName => demoName.length)
-  const linkTags = demoNames.map(demoName => (
+    .map(demoFileName => demoFileName.trim())
+    .filter(demoFileName => demoFileName.length)
+  const linkTags = demoFileNames.map(demoFileName => (
     `
 <n-anchor-link
-  v-if="anchorLinkMap.has('${kababCase(demoName)}')"
-  :title="anchorLinkMap.get('${kababCase(demoName)}')"
-  href="#${kababCase(demoName)}"
+  v-if="anchorLinkMap.has('${demoFileName}')"
+  :title="anchorLinkMap.get('${demoFileName}')"
+  href="#${demoFileName}"
 />`))
   return `<n-anchor :top="32" :bound="16" position="absolute" affix style="width: 144px;">${linkTags.join('\n')}</n-anchor>`
 }
 
 function generateScript (demosLiteral, components = [], url) {
-  const demoNames = demosLiteral
+  const demoFileNames = demosLiteral
     .split('\n')
-    .map(demoName => demoName.trim())
-    .filter(demoName => demoName.length)
-    .map(demoName => camelCase(demoName))
-  components = components.map(component => camelCase(component))
-  const importStatements = demoNames
-    .map(demoName => `import ${demoName}Demo from './${demoName}.demo.md'`)
-    .concat(components.map(component => `import ${component} from './${component}'`))
+    .map(demoFileName => demoFileName.trim())
+    .filter(demoFileName => demoFileName.length)
+  const importStatements = demoFileNames
+    .map(demoFileName => `import ${camelCase(demoFileName)}Demo from './${demoFileName}.demo.md'`)
+    .concat(components.map(component => `import ${camelCase(component)} from './${component}'`))
     .join('\n')
-  const componentStatements = demoNames.map(demoName => demoName + 'Demo').concat(components).join(', ')
+  const componentStatements = demoFileNames.map(demoFileName => camelCase(demoFileName) + 'Demo').concat(components).join(', ')
   const script = `<script>
 ${importStatements}
 
@@ -130,11 +127,11 @@ function convertMd2ComponentDocumentation (text, env = 'development', url) {
   const titleIndex = tokens.findIndex(token => token.type === 'heading' && token.depth === 1)
   if (titleIndex > -1) {
     const titleText = JSON.stringify(tokens[titleIndex].text)
-    const gheButton = `<edit-on-github-header url=${url} text=${titleText}></edit-on-github-header>`
+    const githubButton = `<edit-on-github-header relative-url="${url}" text=${titleText}></edit-on-github-header>`
     const titleReg = /(<n-h1[^>]*>)(.*?)(<\/n-h1>)/
-    documentationContent = documentationContent.replace(titleReg, `${gheButton}`)
+    documentationContent = documentationContent.replace(titleReg, `${githubButton}`)
   }
-  const documentationTemplate = `s
+  const documentationTemplate = `
 <template>
   <component-documentation>
     <div style="display: flex; flex-wrap: nowrap;">

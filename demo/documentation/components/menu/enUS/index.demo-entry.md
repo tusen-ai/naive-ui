@@ -4,7 +4,7 @@ No Food.
 ## Demos
 ```demo
 horizontal
-defaultExpandedNames
+default-expanded-names
 indent
 collapse
 ```
