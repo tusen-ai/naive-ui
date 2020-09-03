@@ -12,10 +12,10 @@ export default create({
       modalBackgroundColor,
       actionBackgroundOverlayColor,
       primaryTextColor,
-      secondaryTextColor,
-      borderRadius
+      secondaryTextColor
     } = derived
     const {
+      borderRadius,
       strongFontWeight
     } = base
     return {
@@ -27,7 +27,7 @@ export default create({
       headerTextColor: primaryTextColor,
       bodyTextColor: secondaryTextColor,
       borderRadius,
-      strongFontWeight
+      headFontWeight: strongFontWeight
     }
   }
 })

@@ -1,12 +1,8 @@
 export default {
-  fontSize: {
-    small: '14px',
-    medium: '14px',
-    large: '15px'
-  },
-  paddingSize: {
-    small: '5px 5px 5px 11px',
-    medium: '10px 10px 10px 16px',
-    large: '15px 15px 15px 20px'
-  }
+  fontSizeSmall: '14px',
+  fontSizeMedium: '14px',
+  fontSizeLarge: '15px',
+  paddingSmall: '5px 5px 5px 11px',
+  paddingMedium: '10px 10px 10px 16px',
+  paddingLarge: '15px 15px 15px 20px'
 }
