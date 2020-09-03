@@ -1,13 +1,13 @@
 <template>
-  <tbody
-    class="n-table__tbody"
+  <th
+    class="n-table__th"
   >
     <slot />
-  </tbody>
+  </th>
 </template>
 
 <script>
 export default {
-  name: 'NTbody'
+  name: 'Th'
 }
 </script>

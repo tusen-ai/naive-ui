@@ -1,13 +1,13 @@
 <template>
-  <th
-    class="n-table__th"
+  <td
+    class="n-table__td"
   >
     <slot />
-  </th>
+  </td>
 </template>
 
 <script>
 export default {
-  name: 'NTh'
+  name: 'Td'
 }
 </script>

@@ -8,6 +8,6 @@
 
 <script>
 export default {
-  name: 'NTr'
+  name: 'Tr'
 }
 </script>

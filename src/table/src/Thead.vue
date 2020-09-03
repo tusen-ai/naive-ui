@@ -8,6 +8,6 @@
 
 <script>
 export default {
-  name: 'NThead'
+  name: 'Thead'
 }
 </script>
