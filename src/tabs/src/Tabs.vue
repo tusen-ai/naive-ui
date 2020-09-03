@@ -94,9 +94,11 @@ import iosArrowForward from '../../_icons/ios-arrow-forward'
 import mdClose from '../../_icons/md-close'
 import resizeObserverDelegate from '../../_utils/delegate/resizeObserverDelegate'
 import throttle from 'lodash-es/throttle'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 export default {
-  name: 'NTabs',
+  name: 'Tabs',
   provide () {
     return {
       NTab: this
@@ -108,7 +110,11 @@ export default {
     iosArrowForward,
     mdClose
   },
-  mixins: [ withapp, themeable ],
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   model: {
     prop: 'active-name',
     event: 'active-name-change'

@@ -57,7 +57,7 @@ import Statistic from './statistic'
 import Steps from './steps'
 import Switch from './switch'
 import Table from './Table'
-import Tabs from './Tabs'
+import Tabs from './tabs'
 import Tag from './tag'
 import Thing from './thing'
 import Time from './time'
@@ -186,6 +186,8 @@ import timePickerLightStyle from './time-picker/styles/light'
 import timePickerDarkStyle from './time-picker/styles/dark'
 import timelineLightStyle from './timeline/styles/light'
 import timelineDarkStyle from './timeline/styles/dark'
+import tabsLightStyle from './tabs/styles/light'
+import tabsDarkStyle from './tabs/styles/dark'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -401,6 +403,8 @@ export default create({
     timePickerDarkStyle,
     timelineLightStyle,
     timelineDarkStyle,
+    tabsLightStyle,
+    tabsDarkStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle

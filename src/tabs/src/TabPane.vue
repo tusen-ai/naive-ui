@@ -2,7 +2,7 @@
 import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
 
 export default {
-  name: 'NTabPane',
+  name: 'TabPane',
   inject: [ 'NTab' ],
   props: {
     label: {
