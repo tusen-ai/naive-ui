@@ -1,6 +1,5 @@
 const marked = require('marked')
 const camelCase = require('lodash/camelCase')
-const kebabCase = require('lodash/kebabCase')
 const mdLoader = require('./NaiveUIMdLoader')
 const createRenderer = require('./mdRenderer')
 const mdRenderer = createRenderer()
@@ -27,7 +26,7 @@ function parseDemos (demosLiteral, env) {
       }
       return demoFileName.length
     })
-  const demoTags = demoFileNames.map(demoFileName => `<${demoFileName}Demo id="${kebabCase(demoFileName)}" demo-id="${kebabCase(demoFileName)}"/>`)
+  const demoTags = demoFileNames.map(demoFileName => `<${demoFileName}Demo id="${demoFileName}" demo-id="${demoFileName}"/>`)
   return demoTags.join('\n')
 }
 
@@ -39,9 +38,9 @@ function parseDemosAsAnchor (demosLiteral) {
   const linkTags = demoFileNames.map(demoFileName => (
     `
 <n-anchor-link
-  v-if="anchorLinkMap.has('${kebabCase(demoFileName)}')"
-  :title="anchorLinkMap.get('${kebabCase(demoFileName)}')"
-  href="#${kebabCase(demoFileName)}"
+  v-if="anchorLinkMap.has('${demoFileName}')"
+  :title="anchorLinkMap.get('${demoFileName}')"
+  href="#${demoFileName}"
 />`))
   return `<n-anchor :top="32" :bound="16" position="absolute" affix style="width: 144px;">${linkTags.join('\n')}</n-anchor>`
 }
@@ -51,13 +50,11 @@ function generateScript (demosLiteral, components = [], url) {
     .split('\n')
     .map(demoFileName => demoFileName.trim())
     .filter(demoFileName => demoFileName.length)
-    .map(demoFileName => camelCase(demoFileName))
-  components = components.map(component => camelCase(component))
   const importStatements = demoFileNames
-    .map(demoFileName => `import ${demoFileName}Demo from './${demoFileName}.demo.md'`)
-    .concat(components.map(component => `import ${component} from './${component}'`))
+    .map(demoFileName => `import ${camelCase(demoFileName)}Demo from './${demoFileName}.demo.md'`)
+    .concat(components.map(component => `import ${camelCase(component)} from './${component}'`))
     .join('\n')
-  const componentStatements = demoFileNames.map(demoFileName => demoFileName + 'Demo').concat(components).join(', ')
+  const componentStatements = demoFileNames.map(demoFileName => camelCase(demoFileName) + 'Demo').concat(components).join(', ')
   const script = `<script>
 ${importStatements}
 

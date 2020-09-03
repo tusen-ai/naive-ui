@@ -2,7 +2,6 @@ const marked = require('marked')
 const fs = require('fs')
 const path = require('path')
 const createRenderer = require('./mdRenderer')
-const kebabCase = require('lodash/kebabCase')
 const mdRenderer = createRenderer()
 const codeRenderer = createRenderer(false)
 // const prettier = require('prettier')
@@ -73,8 +72,9 @@ ${mergedParts.code}
   return mergedParts
 }
 
-function genVueComponent (parts, demoId, noRunning = false) {
+function genVueComponent (parts, fileName, fileNameWithExtension, noRunning = false) {
   const demoFileNameReg = /<!--DEMO_FILE_NAME-->/g
+  const demoFileNameWithExt = /<!--DEMO_FILE_NAME_WITH_EXT-->/g
   const titleReg = /<!--TITLE_SLOT-->/g
   const contentReg = /<!--CONTENT_SLOT-->/
   const codeReg = /<!--CODE_SLOT-->/
@@ -82,7 +82,8 @@ function genVueComponent (parts, demoId, noRunning = false) {
   const styleReg = /\/\*\*STYLE_SLOT\*\//g
   const demoReg = /<!--DEMO_SLOT-->/
   let src = demoBlock
-  src = src.replace(demoFileNameReg, demoId)
+  src = src.replace(demoFileNameReg, fileName)
+  src = src.replace(demoFileNameWithExt, fileNameWithExtension)
   // console.log(src)
   if (parts.content) {
     src = src.replace(contentReg, parts.content)
@@ -108,7 +109,7 @@ function genVueComponent (parts, demoId, noRunning = false) {
 function getFileName (resourcePath) {
   const dirs = resourcePath.split('/')
   const fileNameWithExtension = dirs[dirs.length - 1]
-  return fileNameWithExtension.split('.')[0]
+  return [fileNameWithExtension.split('.')[0], fileNameWithExtension]
 }
 
 function convertMd2Demo (text, resourcePath) {
@@ -116,9 +117,8 @@ function convertMd2Demo (text, resourcePath) {
   const tokens = marked.lexer(text)
   const parts = getPartsOfDemo(tokens)
   const mergedParts = mergeParts(parts)
-  const fileName = getFileName(resourcePath)
-  const demoId = kebabCase(fileName)
-  const vueComponent = genVueComponent(mergedParts, demoId, noRunning)
+  const [fileName, fileNameWithExtension] = getFileName(resourcePath)
+  const vueComponent = genVueComponent(mergedParts, fileName, fileNameWithExtension, noRunning)
   return vueComponent
 }
 

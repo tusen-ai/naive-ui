@@ -1,6 +1,7 @@
 <template>
   <component-demo
     demo-file-name="<!--DEMO_FILE_NAME-->"
+    demo-file-name-with-extension="<!--DEMO_FILE_NAME_WITH_EXT-->"
     title="<!--TITLE_SLOT-->"
   >
     <template v-slot:title>

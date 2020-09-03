@@ -4,7 +4,7 @@ These demos used to use some charactor names from *Hard-Boiled Wonderland and th
 ## Demos
 ```demo
 basic
-ignoreGap
+ignore-gap
 affix
 scrollto
 

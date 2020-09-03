@@ -4,7 +4,7 @@
 ## 演示
 ```demo
 basic
-ignoreGap
+ignore-gap
 affix
 scrollto
 ```

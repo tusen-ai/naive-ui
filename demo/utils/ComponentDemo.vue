@@ -76,7 +76,6 @@
 <script>
 import codeOutline from '../../src/_icons/code-outline'
 import { modeRef } from '../use-dev-mode'
-import camelCase from 'lodash/camelCase'
 
 export default {
   components: {
@@ -88,6 +87,10 @@ export default {
       required: true
     },
     demoFileName: {
+      type: String,
+      required: true
+    },
+    demoFileNameWithExtension: {
       type: String,
       required: true
     }
@@ -111,8 +114,12 @@ export default {
     mode () {
       return this.modeRef.value
     },
+    // TODO: make it move to loader
     url () {
-      const relativePath = this.NDocumentation.url.replace('index.md', camelCase(this.demoFileName) + '.md')
+      const relativePath = this.NDocumentation.url.replace(
+        'index.demo-entry.md',
+        this.demoFileNameWithExtension
+      )
       return relativePath
     }
   },
