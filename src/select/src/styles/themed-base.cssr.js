@@ -1,4 +1,4 @@
-import { cTB, c, cB, cM, cNotM } from '../../../_utils/cssr'
+import { cTB, c, cM, cNotM } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../styles/_transitions/fade-in-scale-up'
 
 export default c([
@@ -52,7 +52,7 @@ export default c([
           `
         })
       ]),
-      cB('select-menu', {
+      cTB('select-menu', {
         raw: `
           transform: ${transformDebounceScale};
         `

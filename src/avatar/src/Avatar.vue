@@ -34,6 +34,7 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
+import { validSize } from './config'
 
 export default {
   name: 'Avatar',
@@ -44,7 +45,9 @@ export default {
   ],
   props: {
     size: {
-      type: [String, Number],
+      validator (value) {
+        return validSize.includes(value) || typeof value === 'number'
+      },
       default: 'medium'
     },
     src: {
@@ -87,6 +90,10 @@ export default {
         return `${this.size / 2}px`
       }
       return null
+    },
+    // TODO: refactor, bad implementation
+    cssrSize () {
+      return typeof this.size === 'number' ? 'medium' : this.size
     }
   },
   updated () {

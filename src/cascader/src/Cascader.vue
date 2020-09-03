@@ -127,7 +127,10 @@ export default {
     themeable,
     asformitem(),
     locale('Cascader'),
-    usecssr(styles)
+    usecssr(styles, {
+      themeKey: 'syntheticTheme',
+      injectCssrProps: true
+    })
   ],
   model: {
     prop: 'value',

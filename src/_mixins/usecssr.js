@@ -1,16 +1,8 @@
-const mountedStyleMap = new Map()
+import { find } from '../_utils/cssr'
 
 if (process.env.NODE_ENV !== 'production') {
   if (!window.naive) window.naive = {}
   window.naive.styleRenderingDuration = 0
-}
-
-function isStyleMounted (id) {
-  return mountedStyleMap.has(id)
-}
-
-function markStyleMounted (id) {
-  return mountedStyleMap.set(id, 1)
 }
 
 function getThemeVariables (naive, themeName) {
@@ -48,7 +40,8 @@ function setupMutableStyle (
   instance,
   theme,
   dependencyKey,
-  CNode
+  CNode,
+  moduleSrcUpdated
 ) {
   const naive = instance.$naive
   const options = instance.$options
@@ -75,7 +68,7 @@ function setupMutableStyle (
     dependencyKey,
     dependencyValue
   )
-  if (isStyleMounted(mountId)) return
+  if (find(mountId)) return
   const cssrPropsGetter = styles[renderedTheme][name]
   if (process.env.NODE_ENV !== 'production' && !cssrPropsGetter) {
     console.error(`[naive-ui/mixins/usecssr]: ${name}'s style not found`, styles)
@@ -95,7 +88,6 @@ function setupMutableStyle (
     props: componentCssrProps,
     count: false
   })
-  markStyleMounted(mountId)
 }
 
 function setupImmutableStyle (
@@ -106,7 +98,7 @@ function setupImmutableStyle (
   const mountId = createImmutableStyleId(
     options.cssrId || options.cssrName || options.name
   )
-  if (isStyleMounted(mountId)) return
+  if (find(mountId)) return
   CNode.mount({
     target: mountId,
     props: {
@@ -114,7 +106,6 @@ function setupImmutableStyle (
     },
     count: false
   })
-  markStyleMounted(mountId)
 }
 
 function setupCssrProps (

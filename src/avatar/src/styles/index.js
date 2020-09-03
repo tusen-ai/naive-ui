@@ -10,10 +10,10 @@ export default [
     CNode: themedBaseStyle
   },
   {
-    key: 'size',
+    key: 'cssrSize',
     watch: [
       'syntheticTheme',
-      'size'
+      'cssrSize'
     ],
     CNode: themedSizeStyle
   }

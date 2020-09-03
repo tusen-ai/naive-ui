@@ -19,6 +19,7 @@ action
 fallback-option
 change-debug
 placeholder-debug
+menu-debug
 ```
 ## V-model
 |prop|event|
