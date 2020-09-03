@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import LandingFooter from './documentation/landing/footer'
+import LandingFooter from './documentation/landing/Footer'
 
 export default {
   components: {

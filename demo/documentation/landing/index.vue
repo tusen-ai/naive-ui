@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import LandingFooter from './footer'
+import LandingFooter from './Footer'
 import leftImage from './Left'
 import rightImage from './Right'
 
