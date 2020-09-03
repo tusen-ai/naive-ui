@@ -120,10 +120,13 @@ import {
   OPTION_TYPE
 } from '../../../_utils/component/select'
 import formatLength from '../../../_utils/css/formatLength'
-import { itemSize } from '../../../_styles-in-js/common.js'
+import depx from '../../../_utils/css/depx'
+import { createKey } from '../../../_utils/cssr'
+import usecssr from '../../../_mixins/usecssr'
+import styles from './styles'
 
 export default {
-  name: 'NBaseSelectMenu',
+  name: 'BaseSelectMenu',
   provide () {
     return {
       NBaseSelectMenu: this
@@ -138,6 +141,12 @@ export default {
     RecycleScroller,
     render
   },
+  mixins: [
+    usecssr(styles, {
+      themeKey: 'theme',
+      injectCssrProps: true
+    })
+  ],
   props: {
     theme: {
       type: String,
@@ -222,7 +231,7 @@ export default {
       return flattenedOptions && flattenedOptions.length === 0
     },
     itemSize () {
-      return itemSize[this.size]
+      return depx(this.cssrProps.$local[createKey('optionHeight', this.size)])
     },
     pendingOptionValue () {
       const pendingWrappedOption = this.pendingWrappedOption

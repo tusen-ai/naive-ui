@@ -1,9 +1,0 @@
-@import '../_styles/themes/common.scss';
-
-:export {
-  tinySize: map-get($--n-height, 'tiny');
-  smallSize: map-get($--n-height, 'small');
-  mediumSize: map-get($--n-height, 'medium');
-  largeSize: map-get($--n-height, 'large');
-  hugeSize: map-get($--n-height, 'huge');
-}
