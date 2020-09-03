@@ -46,8 +46,8 @@ export default {
       default: null
     }
   },
-  name: 'NTimelineItem',
-  mixins: [hollowoutable],
+  name: 'TimelineItem',
+  mixins: [ hollowoutable ],
   props: {
     time: {
       type: [String, Number],

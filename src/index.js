@@ -62,7 +62,7 @@ import Tag from './tag'
 import Thing from './thing'
 import Time from './Time'
 import TimePicker from './TimePicker'
-import Timeline from './Timeline'
+import Timeline from './timeline'
 import Tooltip from './Tooltip'
 import Transfer from './transfer'
 import Tree from './tree'
@@ -182,6 +182,8 @@ import paginationLightStyle from './pagination/styles/light'
 import paginationDarkStyle from './pagination/styles/dark'
 import sliderLightStyle from './slider/styles/light'
 import sliderDarkStyle from './slider/styles/dark'
+import timelineLightStyle from './timeline/styles/light'
+import timelineDarkStyle from './timeline/styles/dark'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -393,6 +395,8 @@ export default create({
     paginationDarkStyle,
     sliderLightStyle,
     sliderDarkStyle,
+    timelineLightStyle,
+    timelineDarkStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle

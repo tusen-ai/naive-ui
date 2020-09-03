@@ -1,136 +1,136 @@
-@import './mixins/mixins.scss';
+// @import './mixins/mixins.scss';
 
-@mixin timeline-type-mixin ($type) {
-  @include m($type + '-type') {
-    @include b(timeline-item-timeline) {
-      @include e(circle) {
-        border-color: map-get($--timeline-item-circle-border-color, $type);
-      }
-    }
-  }
-}
+// @mixin timeline-type-mixin ($type) {
+//   @include m($type + '-type') {
+//     @include b(timeline-item-timeline) {
+//       @include e(circle) {
+//         border-color: map-get($--timeline-item-circle-border-color, $type);
+//       }
+//     }
+//   }
+// }
 
-@mixin timeline-size-mixin ($size) {
-  @include m($size + '-size') {
-    @include b(timeline-item) {
-      @include b(timeline-item-content) {
-        @include e(title) {
-          margin-top: map-get($--n-timeline-header-margin-top, $size)
-        }
-        @include e(title) {
-          font-size: map-get($--n-timeline-header-font-size, $size);
-        }
-      }
-    }
-  }
-}
+// @mixin timeline-size-mixin ($size) {
+//   @include m($size + '-size') {
+//     @include b(timeline-item) {
+//       @include b(timeline-item-content) {
+//         @include e(title) {
+//           margin-top: map-get($--n-timeline-header-margin-top, $size)
+//         }
+//         @include e(title) {
+//           font-size: map-get($--n-timeline-header-font-size, $size);
+//         }
+//       }
+//     }
+//   }
+// }
 
-@include themes-mixin {
-  @include b(timeline) {
-    @include once {
-      @include timeline-size-mixin ("medium");
-      @include timeline-size-mixin ("large");
-      position: relative;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      @include m(right-placement) {
-        @include b(timeline-item) {
-          @include b(timeline-item-content) {
-            text-align: right;
-            margin-right: 26px;
-          }
-          @include b(timeline-item-timeline) {
-            width: 14px;
-            right: 0;
-          }
-        }
-      }
-      @include m(left-placement) {
-        @include b(timeline-item) {
-          @include b(timeline-item-content) {
-            margin-left: 26px;
-          }
-          @include b(timeline-item-timeline) {
-            left: 0;
-          }
-        }
-      }
-    }
-    @include b(timeline-item) {
-      @include timeline-type-mixin('default');
-      @include timeline-type-mixin('success');
-      @include timeline-type-mixin('info');
-      @include timeline-type-mixin('warning');
-      @include timeline-type-mixin('error');
-      @include once {
-        position: relative;
-        &:last-child {
-          @include b(timeline-item-timeline) {
-            @include e(line) {
-              display: none;
-            }
-          }
-        }
-      }
-      @include b(timeline-item-content) {
-        @include e(title) {
-          @include once {
-            transition: color .3s $--n-ease-in-out-cubic-bezier;
-            font-size: 14px;
-            font-weight: $--n-strong-weight;
-            margin-bottom: 6px;
-          }
-          color: $--timeline-item-title-color;
-        }
-        @include e(content) {
-          @include once {
-            transition: color .3s $--n-ease-in-out-cubic-bezier;
-            font-size: 14px;
-          }
-          color: $--timeline-item-content-color;
-        }
-        @include e(meta) {
-          @include once {
-            transition: color .3s $--n-ease-in-out-cubic-bezier;
-            font-size: 12px;
-            margin-top: 6px;
-            margin-bottom: 20px;
-          }
-          color: $--timeline-item-meta-color;
-        }
-      }
-      @include b(timeline-item-timeline) {
-        @include once {
-          width: 26px;
-          position: absolute;
-          top: 2px;
-          bottom: 0;
-          height: 100%;
-        }
-        @include once {
-          @include e(circle) {
-            transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
-            width: 14px;
-            height: 14px;
-            border-radius: 7px;
-            box-sizing: border-box;
-            border-style: solid;
-            border-width: 2px;
-          }
-        }
-        @include e(line) {
-          @include once {
-            transition: background-color .3s $--n-ease-in-out-cubic-bezier;
-            position: absolute;
-            top: 14px;
-            left: 6px;
-            bottom: 0px;
-            width: 2px;
-          }
-          background-color: $--timeline-line-background-color;
-        }
-      }
-    }
-  }
-}
+// @include themes-mixin {
+//   @include b(timeline) {
+//     @include once {
+//       @include timeline-size-mixin ("medium");
+//       @include timeline-size-mixin ("large");
+//       position: relative;
+//       width: 100%;
+//       display: flex;
+//       flex-direction: column;
+//       @include m(right-placement) {
+//         @include b(timeline-item) {
+//           @include b(timeline-item-content) {
+//             text-align: right;
+//             margin-right: 26px;
+//           }
+//           @include b(timeline-item-timeline) {
+//             width: 14px;
+//             right: 0;
+//           }
+//         }
+//       }
+//       @include m(left-placement) {
+//         @include b(timeline-item) {
+//           @include b(timeline-item-content) {
+//             margin-left: 26px;
+//           }
+//           @include b(timeline-item-timeline) {
+//             left: 0;
+//           }
+//         }
+//       }
+//     }
+//     @include b(timeline-item) {
+//       @include timeline-type-mixin('default');
+//       @include timeline-type-mixin('success');
+//       @include timeline-type-mixin('info');
+//       @include timeline-type-mixin('warning');
+//       @include timeline-type-mixin('error');
+//       @include once {
+//         position: relative;
+//         &:last-child {
+//           @include b(timeline-item-timeline) {
+//             @include e(line) {
+//               display: none;
+//             }
+//           }
+//         }
+//       }
+//       @include b(timeline-item-content) {
+//         @include e(title) {
+//           @include once {
+//             transition: color .3s $--n-ease-in-out-cubic-bezier;
+//             font-size: 14px;
+//             font-weight: $--n-strong-weight;
+//             margin-bottom: 6px;
+//           }
+//           color: $--timeline-item-title-color;
+//         }
+//         @include e(content) {
+//           @include once {
+//             transition: color .3s $--n-ease-in-out-cubic-bezier;
+//             font-size: 14px;
+//           }
+//           color: $--timeline-item-content-color;
+//         }
+//         @include e(meta) {
+//           @include once {
+//             transition: color .3s $--n-ease-in-out-cubic-bezier;
+//             font-size: 12px;
+//             margin-top: 6px;
+//             margin-bottom: 20px;
+//           }
+//           color: $--timeline-item-meta-color;
+//         }
+//       }
+//       @include b(timeline-item-timeline) {
+//         @include once {
+//           width: 26px;
+//           position: absolute;
+//           top: 2px;
+//           bottom: 0;
+//           height: 100%;
+//         }
+//         @include once {
+//           @include e(circle) {
+//             transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
+//             width: 14px;
+//             height: 14px;
+//             border-radius: 7px;
+//             box-sizing: border-box;
+//             border-style: solid;
+//             border-width: 2px;
+//           }
+//         }
+//         @include e(line) {
+//           @include once {
+//             transition: background-color .3s $--n-ease-in-out-cubic-bezier;
+//             position: absolute;
+//             top: 14px;
+//             left: 6px;
+//             bottom: 0px;
+//             width: 2px;
+//           }
+//           background-color: $--timeline-line-background-color;
+//         }
+//       }
+//     }
+//   }
+// }
