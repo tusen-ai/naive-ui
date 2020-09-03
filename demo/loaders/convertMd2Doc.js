@@ -127,11 +127,11 @@ function convertMd2ComponentDocumentation (text, env = 'development', url) {
   const titleIndex = tokens.findIndex(token => token.type === 'heading' && token.depth === 1)
   if (titleIndex > -1) {
     const titleText = JSON.stringify(tokens[titleIndex].text)
-    const gheButton = `<edit-on-github-header url=${url} text=${titleText}></edit-on-github-header>`
+    const githubButton = `<edit-on-github-header relative-url="${url}" text=${titleText}></edit-on-github-header>`
     const titleReg = /(<n-h1[^>]*>)(.*?)(<\/n-h1>)/
-    documentationContent = documentationContent.replace(titleReg, `${gheButton}`)
+    documentationContent = documentationContent.replace(titleReg, `${githubButton}`)
   }
-  const documentationTemplate = `s
+  const documentationTemplate = `
 <template>
   <component-documentation>
     <div style="display: flex; flex-wrap: nowrap;">

@@ -1,5 +1,10 @@
 const convertMd2Demo = require('./convertMd2Demo')
+const projectPath = require('./project-path')
 
 module.exports = function (content) {
-  return convertMd2Demo(content, this.resourcePath)
+  const relativeUrl = this.resourcePath.replace(projectPath + '/', '')
+  return convertMd2Demo(content, {
+    relativeUrl,
+    resourcePath: this.resourcePath
+  })
 }

@@ -36,7 +36,7 @@
           <edit-on-github-button
             style="padding: 0; margin-right: 6px;"
             size="tiny"
-            :url="url"
+            :relative-url="relativeUrl"
           />
         </template>
         {{ $t('editOnGithub') }}
@@ -90,7 +90,7 @@ export default {
       type: String,
       required: true
     },
-    demoFileNameWithExtension: {
+    relativeUrl: {
       type: String,
       required: true
     }
@@ -113,14 +113,6 @@ export default {
   computed: {
     mode () {
       return this.modeRef.value
-    },
-    // TODO: make it move to loader
-    url () {
-      const relativePath = this.NDocumentation.url.replace(
-        'index.demo-entry.md',
-        this.demoFileNameWithExtension
-      )
-      return relativePath
     }
   },
   watch: {
