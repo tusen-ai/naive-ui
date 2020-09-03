@@ -82,6 +82,16 @@ export default {
   components: {
     codeOutline
   },
+  props: {
+    title: {
+      type: String,
+      required: true
+    },
+    demoFileName: {
+      type: String,
+      required: true
+    }
+  },
   inject: {
     NDocumentation: {
       default: null
@@ -93,7 +103,6 @@ export default {
       contentStyle: null,
       controller: {},
       isShow: true,
-      name: '',
       isDebugDemo: false,
       modeRef
     }
@@ -103,7 +112,7 @@ export default {
       return this.modeRef.value
     },
     url () {
-      const relativePath = this.NDocumentation.url.replace('index.md', camelCase(this.name) + '.md')
+      const relativePath = this.NDocumentation.url.replace('index.md', camelCase(this.demoFileName) + '.md')
       return relativePath
     }
   },
@@ -121,8 +130,7 @@ export default {
       this.init()
     }
   },
-  mounted () {
-    this.name = this.$el.id
+  created () {
     this.init()
   },
   methods: {
@@ -131,19 +139,19 @@ export default {
     },
     init () {
       const map = this.NDocumentation.anchorLinkMap
-      this.isDebugDemo = this.name && (~this.name.indexOf('debug') || ~this.name.indexOf('Debug'))
+      this.isDebugDemo = this.demoFileName && (~this.demoFileName.indexOf('debug') || ~this.demoFileName.indexOf('Debug'))
       if (this.isDebugDemo) {
         if (this.mode === 'debug') {
           this.isShow = true
-          map.set(this.name, String(this.$scopedSlots.title()[0].text).trim())
+          map.set(this.demoFileName, this.title)
         } else {
           this.isShow = false
-          map.delete(this.name)
+          map.delete(this.demoFileName)
         }
       } else {
-        map.set(this.name, String(this.$scopedSlots.title()[0].text).trim())
+        map.set(this.demoFileName, this.title)
       }
-      this.NDocumentation.anchorLinkMap = new Map(map, this.$scopedSlots.title()[0].text.trim())
+      this.NDocumentation.anchorLinkMap = new Map(map)
     }
   }
 }

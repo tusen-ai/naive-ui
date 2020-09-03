@@ -2,6 +2,7 @@ const marked = require('marked')
 const fs = require('fs')
 const path = require('path')
 const createRenderer = require('./mdRenderer')
+const kebabCase = require('lodash/kebabCase')
 const mdRenderer = createRenderer()
 const codeRenderer = createRenderer(false)
 // const prettier = require('prettier')
@@ -72,14 +73,16 @@ ${mergedParts.code}
   return mergedParts
 }
 
-function genVueComponent (parts, noRunning = false) {
-  const titleReg = /<!--TITLE_SLOT-->/
+function genVueComponent (parts, demoId, noRunning = false) {
+  const demoFileNameReg = /<!--DEMO_FILE_NAME-->/g
+  const titleReg = /<!--TITLE_SLOT-->/g
   const contentReg = /<!--CONTENT_SLOT-->/
   const codeReg = /<!--CODE_SLOT-->/
   const scriptReg = /\/\*\*\sSCRIPT_SLOT\s\*\//
   const styleReg = /\/\*\*STYLE_SLOT\*\//g
   const demoReg = /<!--DEMO_SLOT-->/
   let src = demoBlock
+  src = src.replace(demoFileNameReg, demoId)
   // console.log(src)
   if (parts.content) {
     src = src.replace(contentReg, parts.content)
@@ -102,13 +105,20 @@ function genVueComponent (parts, noRunning = false) {
   return src.trim()
 }
 
-function convertMd2Demo (text) {
+function getFileName (resourcePath) {
+  const dirs = resourcePath.split('/')
+  const fileNameWithExtension = dirs[dirs.length - 1]
+  return fileNameWithExtension.split('.')[0]
+}
+
+function convertMd2Demo (text, resourcePath) {
   const noRunning = /<!--no-running-->/.test(text)
   const tokens = marked.lexer(text)
   const parts = getPartsOfDemo(tokens)
   const mergedParts = mergeParts(parts)
-  const vueComponent = genVueComponent(mergedParts, noRunning)
-  // console.log(vueComponent)
+  const fileName = getFileName(resourcePath)
+  const demoId = kebabCase(fileName)
+  const vueComponent = genVueComponent(mergedParts, demoId, noRunning)
   return vueComponent
 }
 

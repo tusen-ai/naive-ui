@@ -1,6 +1,6 @@
 const marked = require('marked')
 const camelCase = require('lodash/camelCase')
-const kababCase = require('lodash/kebabCase')
+const kebabCase = require('lodash/kebabCase')
 const mdLoader = require('./NaiveUIMdLoader')
 const createRenderer = require('./mdRenderer')
 const mdRenderer = createRenderer()
@@ -18,46 +18,46 @@ function template (demos, demosLiteral, isSingleColumn = false) {
 }
 
 function parseDemos (demosLiteral, env) {
-  const demoNames = demosLiteral
+  const demoFileNames = demosLiteral
     .split('\n')
-    .map(demoName => demoName.trim())
-    .filter((demoName) => {
+    .map(demoFileName => demoFileName.trim())
+    .filter((demoFileName) => {
       if (env === 'production') {
-        return demoName.length && demoName.indexOf('debug') < 0 && demoName.indexOf('Debug') < 0
+        return demoFileName.length && demoFileName.indexOf('debug') < 0 && demoFileName.indexOf('Debug') < 0
       }
-      return demoName.length
+      return demoFileName.length
     })
-  const demoTags = demoNames.map(demoName => `<${demoName}Demo id="${kababCase(demoName)}" demo-id="${kababCase(demoName)}"/>`)
+  const demoTags = demoFileNames.map(demoFileName => `<${demoFileName}Demo id="${kebabCase(demoFileName)}" demo-id="${kebabCase(demoFileName)}"/>`)
   return demoTags.join('\n')
 }
 
 function parseDemosAsAnchor (demosLiteral) {
-  const demoNames = demosLiteral
+  const demoFileNames = demosLiteral
     .split('\n')
-    .map(demoName => demoName.trim())
-    .filter(demoName => demoName.length)
-  const linkTags = demoNames.map(demoName => (
+    .map(demoFileName => demoFileName.trim())
+    .filter(demoFileName => demoFileName.length)
+  const linkTags = demoFileNames.map(demoFileName => (
     `
 <n-anchor-link
-  v-if="anchorLinkMap.has('${kababCase(demoName)}')"
-  :title="anchorLinkMap.get('${kababCase(demoName)}')"
-  href="#${kababCase(demoName)}"
+  v-if="anchorLinkMap.has('${kebabCase(demoFileName)}')"
+  :title="anchorLinkMap.get('${kebabCase(demoFileName)}')"
+  href="#${kebabCase(demoFileName)}"
 />`))
   return `<n-anchor :top="32" :bound="16" position="absolute" affix style="width: 144px;">${linkTags.join('\n')}</n-anchor>`
 }
 
 function generateScript (demosLiteral, components = [], url) {
-  const demoNames = demosLiteral
+  const demoFileNames = demosLiteral
     .split('\n')
-    .map(demoName => demoName.trim())
-    .filter(demoName => demoName.length)
-    .map(demoName => camelCase(demoName))
+    .map(demoFileName => demoFileName.trim())
+    .filter(demoFileName => demoFileName.length)
+    .map(demoFileName => camelCase(demoFileName))
   components = components.map(component => camelCase(component))
-  const importStatements = demoNames
-    .map(demoName => `import ${demoName}Demo from './${demoName}.demo.md'`)
+  const importStatements = demoFileNames
+    .map(demoFileName => `import ${demoFileName}Demo from './${demoFileName}.demo.md'`)
     .concat(components.map(component => `import ${component} from './${component}'`))
     .join('\n')
-  const componentStatements = demoNames.map(demoName => demoName + 'Demo').concat(components).join(', ')
+  const componentStatements = demoFileNames.map(demoFileName => demoFileName + 'Demo').concat(components).join(', ')
   const script = `<script>
 ${importStatements}
 
