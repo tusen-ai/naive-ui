@@ -3,22 +3,22 @@ import { c, cM, cTB, cB, cE } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      tabTextColorDefault,
+      labelTextColor,
+      labelTextColorActive,
+      labelTextColorHover,
+      labelTextColorDisabled,
+      labelBarColor,
+      scrollButtonColor,
+      scrollButtonColorDisabled,
+      tabCloseColor,
+      tabColor,
+      tabBorderColorActive,
+      tabTextColor,
       tabTextColorActive,
-      tabTextColorHover,
-      tabTextColorDisabled,
-      tabBarBackgroundColor,
-      tabScrollButtonColorDefault,
-      tabScrollButtonColorDisabled,
-      tabCloseButtonColorDeault,
-      cardTabBackgroundColor,
-      cardTabBorderColor,
-      cardTabTextColorDefault,
-      cardTabTextColorActive,
-      navBorderColor,
-      panelTextColor,
-      strongFontWeight,
-      borderRadius
+      tabBorderColor,
+      paneTextColor,
+      tabFontWeight,
+      tabBorderRadius
     } = props.$local
     const {
       easeInOutCubicBezier
@@ -26,7 +26,9 @@ export default c([
     return cTB('tabs', {
       raw: `
         width: 100%;
-        transition: background-color .3s ${easeInOutCubicBezier}, border-color .3s ${easeInOutCubicBezier};
+        transition:
+          background-color .3s ${easeInOutCubicBezier},
+          border-color .3s ${easeInOutCubicBezier};
       `
     }, [
       cM('flex', [
@@ -84,7 +86,7 @@ export default c([
             `
           }),
           cB('icon', {
-            fill: tabScrollButtonColorDefault
+            fill: scrollButtonColor
           }),
           cM('disabled', {
             raw: `
@@ -92,7 +94,7 @@ export default c([
             `
           }, [
             cB('icon', {
-              fill: tabScrollButtonColorDisabled
+              fill: scrollButtonColorDisabled
             })
           ])
         ])
@@ -100,7 +102,7 @@ export default c([
       cB('tabs-label-wrapper', {
         raw: `
           display: inline-block;
-          font-weight:${strongFontWeight};
+          font-weight:${tabFontWeight};
           white-space: nowrap;
           position: relative;
         `
@@ -111,9 +113,12 @@ export default c([
             bottom: 2px;
             height: 2px;
             border-radius: 1px;
-            transition: left .2s ${easeInOutCubicBezier}, max-width .2s ${easeInOutCubicBezier}, background-color .3s ${easeInOutCubicBezier};
+            transition:
+              left .2s ${easeInOutCubicBezier},
+              max-width .2s ${easeInOutCubicBezier},
+              background-color .3s ${easeInOutCubicBezier};
           `,
-          backgroundColor: tabBarBackgroundColor
+          backgroundColor: labelBarColor
         }, [
           cM('transition-disabled', {
             raw: `
@@ -128,7 +133,9 @@ export default c([
             flex-wrap: nowrap;
             display: inline-flex;
             align-items: center;
-            transition: background-color .3s ${easeInOutCubicBezier}, border-color .3s ${easeInOutCubicBezier};
+            transition:
+            background-color .3s ${easeInOutCubicBezier},
+            border-color .3s ${easeInOutCubicBezier};
           `
         }, [
           cM('disabled', {
@@ -147,14 +154,14 @@ export default c([
             `
           }, [
             cB('icon', {
-              fill: tabCloseButtonColorDeault
+              fill: tabCloseColor
             })
           ]),
           cE('label', {
             raw: `
               transition: color .3s ${easeInOutCubicBezier};
             `,
-            color: tabTextColorDefault
+            color: labelTextColor
           })
         ])
       ]),
@@ -162,9 +169,11 @@ export default c([
         raw: `
           width: 100%;
           margin-top: 8px;
-          transition: color .3s ${easeInOutCubicBezier}, background-color .3s ${easeInOutCubicBezier};
+          transition:
+            color .3s ${easeInOutCubicBezier},
+            background-color .3s ${easeInOutCubicBezier};
         `,
-        color: panelTextColor
+        color: paneTextColor
       }),
       cM('line-type', [
         cB('tabs-nav', [
@@ -193,17 +202,17 @@ export default c([
           }),
           c('&:hover', [
             cE('label', {
-              color: tabTextColorHover
+              color: labelTextColorHover
             })
           ]),
           cM('active', [
             cE('label', {
-              color: tabTextColorActive
+              color: labelTextColorActive
             })
           ]),
           cM('disabled', [
             cE('label', {
-              color: tabTextColorDisabled
+              color: labelTextColorDisabled
             })
           ])
         ])
@@ -215,8 +224,8 @@ export default c([
             padding-top: 4px;
             padding-bottom: 4px;
           `,
-          borderTop: `1px solid ${navBorderColor}`,
-          borderBottom: `1px solid ${navBorderColor}`
+          borderTop: `1px solid ${tabBorderColor}`,
+          borderBottom: `1px solid ${tabBorderColor}`
         }, [
           cB('tabs-nav-scroll-button', [
             cM('left', {
@@ -248,7 +257,7 @@ export default c([
             padding: 0 16px;
             position: relative;
             vertical-align: bottom;
-            border-radius: ${borderRadius};
+            border-radius: ${tabBorderRadius};
             border: 1px solid transparent;
           `
         }, [
@@ -256,25 +265,25 @@ export default c([
             raw: `
               font-size: 14px;
             `,
-            color: cardTabTextColorDefault
+            color: tabTextColor
           }),
           c('&:hover', {
-            backgroundColor: cardTabBackgroundColor
+            backgroundColor: tabColor
           }),
           cM('active', {
-            backgroundColor: cardTabBackgroundColor,
-            border: `1px solid ${cardTabBorderColor}`
+            backgroundColor: tabColor,
+            border: `1px solid ${tabBorderColorActive}`
           }, [
             cE('label', {
               raw: `
                 font-size: 14px;
               `,
-              color: cardTabTextColorActive
+              color: tabTextColorActive
             })
           ]),
           cM('disabled', [
             cE('label', {
-              color: tabTextColorDisabled
+              color: labelTextColorDisabled
             })
           ])
         ])
