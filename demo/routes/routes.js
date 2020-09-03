@@ -1,6 +1,6 @@
 
 import LandingPage from '../documentation/landing'
-import Entry from '../entry'
+import Entry from '../Entry'
 
 import intro from '../documentation/intro/intro'
 import start from '../documentation/intro/start'
@@ -76,7 +76,7 @@ import code from '../documentation/components/code'
 import upload from '../documentation/components/upload'
 import table from '../documentation/components/table'
 
-import DocEntry from '../docEntry'
+import DocEntry from '../DocEntry'
 
 import { withPrefix } from './utils'
 

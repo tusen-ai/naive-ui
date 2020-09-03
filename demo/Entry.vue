@@ -20,10 +20,10 @@
 </template>
 
 <script>
-import DocHeader from './header.vue'
-import menuOptions from './menuOptions'
+import DocHeader from './Header.vue'
+import menuOptions from './menu-options'
 import { i18n } from './init'
-import { state } from './store'
+import { modeRef } from './use-dev-mode'
 import simulatedComputed from '../src/_mixins/simulatedComputed'
 
 export default {
@@ -60,12 +60,12 @@ export default {
   },
   data () {
     return {
-      state: state
+      modeRef
     }
   },
   computed: {
     mode () {
-      return this.state.mode
+      return this.modeRef.value
     },
     env () {
       return process.env.NODE_ENV

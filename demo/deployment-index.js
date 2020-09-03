@@ -1,6 +1,6 @@
 import { Vue, i18n } from './init'
 import hljs from './hljs'
-import demoRouterView from './demoRouterView'
+import demoRouterView from './DemoRouterView'
 import naive from '../lib/index'
 import '../lib/styles/index.css'
 // import './styles/test-customize-style-scheme.scss' // test

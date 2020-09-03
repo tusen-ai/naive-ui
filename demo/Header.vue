@@ -85,7 +85,7 @@
 <script>
 import version from '../src/version'
 import withapp from '../src/_mixins/withapp'
-import { state, setMode } from './store'
+import { modeRef, setMode } from './use-dev-mode'
 
 function match (pattern, string) {
   if (!pattern.length) return true
@@ -114,7 +114,7 @@ export default {
     return {
       searchInputValue: '',
       version,
-      state: state,
+      modeRef,
       themeOptions: {
         dark: {
           label: 'light',
@@ -149,7 +149,7 @@ export default {
   },
   computed: {
     mode () {
-      return this.state.mode
+      return this.modeRef.value
     },
     zIndex () {
       const path = this.$route.path
