@@ -75,7 +75,7 @@
 
 <script>
 import codeOutline from '../../src/_icons/code-outline'
-import { state } from '../store'
+import { modeRef } from '../use-dev-mode'
 import camelCase from 'lodash/camelCase'
 
 export default {
@@ -94,13 +94,13 @@ export default {
       controller: {},
       isShow: true,
       name: '',
-      isDebug: false,
-      state: state
+      isDebugDemo: false,
+      modeRef
     }
   },
   computed: {
     mode () {
-      return this.state.mode
+      return this.modeRef.value
     },
     url () {
       const relativePath = this.NDocumentation.url.replace('index.md', camelCase(this.name) + '.md')
@@ -131,8 +131,8 @@ export default {
     },
     init () {
       const map = this.NDocumentation.anchorLinkMap
-      this.isDebug = this.name && (~this.name.indexOf('debug') || ~this.name.indexOf('Debug'))
-      if (this.isDebug) {
+      this.isDebugDemo = this.name && (~this.name.indexOf('debug') || ~this.name.indexOf('Debug'))
+      if (this.isDebugDemo) {
         if (this.mode === 'debug') {
           this.isShow = true
           map.set(this.name, String(this.$scopedSlots.title()[0].text).trim())

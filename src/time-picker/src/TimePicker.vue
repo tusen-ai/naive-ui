@@ -46,7 +46,7 @@
         ref="content"
         class="n-positioning-content"
       >
-        <transition name="n-time-picker-transition">
+        <transition name="n-fade-in-scale-up-transition">
           <div
             v-if="active"
             ref="panel"

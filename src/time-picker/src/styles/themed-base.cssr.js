@@ -4,19 +4,19 @@ import fadeInScaleUpTransition from '../../../styles/_transitions/fade-in-scale-
 export default c([
   ({ props }) => {
     const {
-      color,
-      textColor,
-      textColorActive,
-      textDecorationColor,
-      textDecorationColorActive,
+      panelColor,
+      itemTextColor,
+      itemTextColorActive,
+      triggerTextDecorationColor,
+      triggerTextDecorationColorActive,
       itemColorHover,
-      dividerColor,
-      boxShadow,
-      itemDisabledOpacity,
-      borderRadius,
-      transformDebounceScale
+      panelDividerColor,
+      panelBoxShadow,
+      itemOpacityDisabled,
+      borderRadius
     } = props.$local
     const {
+      transformDebounceScale,
       easeInOutCubicBezier
     } = props.$base
     return [cTB('time-picker', {
@@ -30,7 +30,7 @@ export default c([
           cE('input', {
             raw: `
                 text-decoration: line-through;
-                text-decoration-color: ${textDecorationColor};
+                text-decoration-color: ${triggerTextDecorationColor};
               `
           })
         ])
@@ -54,8 +54,8 @@ export default c([
         min-width: 104px;
         overflow: hidden;
         transform: ${transformDebounceScale};
-        background-color: ${color};
-        box-shadow: ${boxShadow};
+        background-color: ${panelColor};
+        box-shadow: ${panelBoxShadow};
       `
     }, [
       fadeInScaleUpTransition(),
@@ -81,7 +81,7 @@ export default c([
           height: 224px;
           display: flex;
           position: relative;
-          border-bottom: 1px solid ${dividerColor};
+          border-bottom: 1px solid ${panelDividerColor};
         `
       }),
       cB('time-picker-selector-time-row', {
@@ -114,7 +114,7 @@ export default c([
               text-decoration-color .3s ${easeInOutCubicBezier};
             background: transparent;
             text-decoration-color: transparent;
-            color: ${textColor};
+            color: ${itemTextColor};
           `
         }, [
           cNotM('disabled', [
@@ -127,12 +127,12 @@ export default c([
           cM('active', {
             raw: `
               background-color: ${itemColorHover};
-              color: ${textColorActive};
+              color: ${itemTextColorActive};
             `
           }),
           cM('disabled', {
             raw: `
-              opacity: ${itemDisabledOpacity};
+              opacity: ${itemOpacityDisabled};
               cursor: not-allowed;
             `
           })
@@ -142,7 +142,7 @@ export default c([
             cM('active', {
               raw: `
                 text-decoration: line-through;
-                text-decoration-color: ${textDecorationColorActive};
+                text-decoration-color: ${triggerTextDecorationColorActive};
               `
             })
           ])

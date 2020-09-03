@@ -25,7 +25,7 @@
 <script>
 import icons from '../../../../../src/_icons/index'
 import iconWrapper from './iconWrapper'
-import { state } from '../../../../store'
+import { modeRef } from '../../../../use-dev-mode'
 
 const prefixedIcons = Object.entries(icons).reduce((prevValue, [key, value]) => {
   prevValue['icon-' + key] = value
@@ -40,12 +40,12 @@ export default {
   data () {
     return {
       pattern: '',
-      state: state
+      modeRef
     }
   },
   computed: {
     mode () {
-      return this.state.mode
+      return this.modeRef.value
     },
     names () {
       return Object.keys(prefixedIcons)

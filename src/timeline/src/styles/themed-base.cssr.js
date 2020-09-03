@@ -1,45 +1,17 @@
 import { c, cTB, cB, cE, cM, createKey } from '../../../_utils/cssr'
 
-function timelineTypemixin (type, pallete) {
-  return cM(`${type}-type`, [
-    cB('timeline-item-timeline', [
-      cE('circle', {
-        raw: `
-          border-color: ${pallete[createKey('circleBorderColor', type)]}
-        `
-      })
-    ])
-  ])
-}
-
-function timelineSizeMixin (size, pallete) {
-  return cM(`${size}-size`, [
-    cB('timeline-item', [
-      cB('timeline-item-content', [
-        cE('title', {
-          raw: `
-            margin-top: ${pallete.marginTop[size]};
-            font-size: ${pallete.fontSize[size]}
-          `
-        })
-      ])
-    ])
-  ])
-}
-
 export default c([
   ({ props }) => {
     const {
       easeInOutCubicBezier
     } = props.$base
     const {
-      titleColor,
-      contentColor,
-      metaColor,
+      headerTextColor,
+      contentTextColor,
+      metaTextColor,
       lineColor,
-      strongFontWeight
+      headerFontWeight
     } = props.$local
-    const pallete = props.$local
     return cTB('timeline', {
       raw: `
         position: relative;
@@ -48,7 +20,7 @@ export default c([
         flex-direction: column;
       `
     }, [
-      ['medium', 'large'].map(size => timelineSizeMixin(size, pallete)),
+      ['medium', 'large'].map(size => sizeStyle(size, props.$local)),
       cM('right-placement', [
         cB('timeline-item', [
           cB('timeline-item-content', {
@@ -84,7 +56,8 @@ export default c([
           position: relative;
         `
       }, [
-        ['default', 'success', 'info', 'warning', 'error'].map(type => timelineTypemixin(type, pallete)),
+        ['default', 'success', 'info', 'warning', 'error']
+          .map(type => itemTypeStyle(type, props.$local)),
         c('&:last-child', [
           cB('timeline-item-timeline', [
             cE('line', {
@@ -98,17 +71,17 @@ export default c([
           cE('title', {
             raw: `
               transition: color .3s ${easeInOutCubicBezier};
-              font-size: 14px;
-              font-weight: ${strongFontWeight};
+              line-height: 1.25;
+              font-weight: ${headerFontWeight};
               margin-bottom: 6px;
-              color: ${titleColor};
+              color: ${headerTextColor};
             `
           }),
           cE('content', {
             raw: `
               transition: color .3s ${easeInOutCubicBezier};
               font-size: 14px;
-              color: ${contentColor};
+              color: ${contentTextColor};
             `
           }),
           cE('meta', {
@@ -117,7 +90,7 @@ export default c([
               font-size: 12px;
               margin-top: 6px;
               margin-bottom: 20px;
-              color: ${metaColor};
+              color: ${metaTextColor};
             `
           })
         ]),
@@ -132,7 +105,9 @@ export default c([
         }, [
           cE('circle', {
             raw: `
-              transition: background-color .3s ${easeInOutCubicBezier}, border-color .3s ${easeInOutCubicBezier};
+              transition:
+                background-color .3s ${easeInOutCubicBezier},
+                border-color .3s ${easeInOutCubicBezier};
               width: 14px;
               height: 14px;
               border-radius: 7px;
@@ -157,3 +132,30 @@ export default c([
     ])
   }
 ])
+
+function itemTypeStyle (type, pallete) {
+  return cM(`${type}-type`, [
+    cB('timeline-item-timeline', [
+      cE('circle', {
+        raw: `
+          border-color: ${pallete[createKey('circleBorderColor', type)]}
+        `
+      })
+    ])
+  ])
+}
+
+function sizeStyle (size, props) {
+  return cM(`${size}-size`, [
+    cB('timeline-item', [
+      cB('timeline-item-content', [
+        cE('title', {
+          raw: `
+            margin-top: ${props[createKey('headerMarginTop', size)]};
+            font-size: ${props[createKey('headerFontSize', size)]}
+          `
+        })
+      ])
+    ])
+  ])
+}
