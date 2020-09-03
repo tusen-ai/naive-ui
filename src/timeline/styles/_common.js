@@ -1,10 +1,6 @@
 export default {
-  marginTop: {
-    medium: 0,
-    large: '-1px'
-  },
-  fontSize: {
-    medium: '14px',
-    large: '16px'
-  }
+  headerMarginTopMedium: 0,
+  headerMarginTopLarge: '-1px',
+  headerFontSizeMedium: '14px',
+  headerFontSizeLarge: '16px'
 }

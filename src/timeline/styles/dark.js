@@ -20,15 +20,15 @@ export default create({
     } = base
     return {
       ...sizeVariables,
-      strongFontWeight,
+      headerFontWeight: strongFontWeight,
       circleBorderColor: tertiaryTextOverlayColor,
       circleBorderColorInfo: infoHsColor,
       circleBorderColorError: errorHsColor,
       circleBorderColorSuccess: successHsColor,
       circleBorderColorWarning: warningHsColor,
-      titleColor: primaryTextOverlayColor,
-      contentColor: secondaryTextOverlayColor,
-      metaColor: tertiaryTextOverlayColor,
+      headerTextColor: primaryTextOverlayColor,
+      contentTextColor: secondaryTextOverlayColor,
+      metaTextColor: tertiaryTextOverlayColor,
       lineColor: railBackgroundOverlayColor
     }
   }
