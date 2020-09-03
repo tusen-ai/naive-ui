@@ -13,7 +13,7 @@ const plugin = BEMPlugin({
   modifierPrefix
 })
 cssr.use(plugin)
-const { c, context } = cssr
+const { c, context, find } = cssr
 context.theme = null
 context.pallete = null
 const { cB, cE, cM, cNotM } = plugin
@@ -60,4 +60,4 @@ function createKey (prefix, suffix) {
   return prefix + suffix.replace(/^[a-z]/, startChar => startChar.toUpperCase())
 }
 
-export { c, cTB, cB, cE, cM, cNotM, insideFormItem, insideModal, prefix, namespace, createKey }
+export { c, cTB, cB, cE, cM, cNotM, insideFormItem, insideModal, prefix, namespace, createKey, find }
