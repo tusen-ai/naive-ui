@@ -263,7 +263,7 @@
 
 <script>
 import NButton from '../../../button'
-import NTimePicker from '../../../TimePicker'
+import NTimePicker from '../../../time-picker'
 import NInput from '../../../input'
 import dualCalendarMixin from './dualCalendarMixin'
 import NBaseIcon from '../../../_base/icon'

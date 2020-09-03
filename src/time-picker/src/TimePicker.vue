@@ -200,6 +200,8 @@ import keyboardDelegate from '../../_utils/delegate/keyboardDelegate'
 import { KEY_CODE } from '../../_utils/event/keyCode'
 import NBaseFocusDetector from '../../_base/focus-detector'
 import timeOutline from '../../_icons/time-outline'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 const DEFAULT_FORMAT = 'HH:mm:ss'
 
@@ -212,7 +214,7 @@ const TIME_CONST = {
 }
 
 export default {
-  name: 'NTimePicker',
+  name: 'TimePicker',
   components: {
     NInput,
     NIcon,
@@ -230,7 +232,8 @@ export default {
     placeable,
     zindexable,
     locale('TimePicker'),
-    asformitem()
+    asformitem(),
+    usecssr(styles)
   ],
   model: {
     prop: 'value',

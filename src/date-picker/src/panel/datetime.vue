@@ -146,7 +146,7 @@ import uniCalendarMixin from './uniCalendarMixin'
 import startOfSecond from 'date-fns/startOfSecond'
 
 import NButton from '../../../button'
-import NTimePicker from '../../../TimePicker'
+import NTimePicker from '../../../time-picker'
 import NInput from '../../../input'
 
 const DATETIME_FORMAT = 'yyyy-MM-dd HH:mm:ss'
