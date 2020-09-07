@@ -1,6 +1,6 @@
 <template>
   <transition
-    name="n-base-menu-mask-transition"
+    name="n-fade-in-transition"
   >
     <div
       v-if="active"
@@ -16,8 +16,14 @@
 </template>
 
 <script>
+import usecssr from '../../../_mixins/usecssr'
+import styles from './styles'
+
 export default {
-  name: 'NBaseMenuMask',
+  name: 'BaseMenuMask',
+  mixins: [
+    usecssr(styles)
+  ],
   props: {
     theme: {
       type: String,

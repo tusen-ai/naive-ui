@@ -120,7 +120,7 @@ c([
               top: 50%;
               transform: translateY(-50%);
               left: 10px;
-              display: block;
+              display: flex;
             `
           }),
           cE('radio', {

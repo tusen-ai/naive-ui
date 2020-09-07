@@ -3,13 +3,8 @@
 // don't use ~vue-virtual-scroller, if so rollup won't work
 @import '../../node_modules/vue-virtual-scroller/dist/vue-virtual-scroller';
 
-// @import './BaseLoading.scss';
-@import './BaseMenuMask.scss';
-// @import './BaseTrackingRect.scss';
 @import './Descriptions.scss';
 @import './Form.scss';
 @import './Popover.scss';
-// @import './Tabs.scss';
-// @import './Table.scss';
 @import './Tooltip.scss';
 @import './Upload.scss';
