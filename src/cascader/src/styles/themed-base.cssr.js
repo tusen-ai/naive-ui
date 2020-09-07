@@ -114,22 +114,13 @@ c([
               padding: 0px 24px 0 18px;
             `
           }),
-          cE('checkbox', {
+          cE('checkbox, radio', {
             raw: `
               position: absolute;
               top: 50%;
               transform: translateY(-50%);
               left: 10px;
               display: flex;
-            `
-          }),
-          cE('radio', {
-            raw: `
-              position: absolute;
-              top: 50%;
-              transform: translateY(-50%);
-              left: 10px;
-              display: block;
             `
           }),
           cE('loading', {
