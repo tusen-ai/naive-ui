@@ -1,38 +1,38 @@
-@import './mixins/mixins.scss';
+// @import './mixins/mixins.scss';
 
-@include themes-mixin {
-  @include b(base-tracking-rect) {
-    @include once {
-      position: absolute;
-      left: 0;
-      right: 0;
-      height: 0;
-    }
-    @include e(body) {
-      @include once {
-        position: absolute;
-        right: 0;
-        left: 0;
-        transition:
-          background-color .3s $--n-ease-in-out-cubic-bezier,
-          top .3s $--n-ease-in-out-cubic-bezier!important;
-        &.#{block()}-transition-enter, &.#{block()}-transition-leave-to {
-          opacity: 0;
-        }
-        &.#{block()}-transition-enter-active {
-          transition:
-            background-color .3s $--n-ease-in-out-cubic-bezier,
-            opacity .15s $--n-ease-out-cubic-bezier,
-            top .3s $--n-ease-in-out-cubic-bezier!important;
-        }
-        &.#{block()}-transition-leave-active {
-          transition:
-            background-color .3s $--n-ease-in-out-cubic-bezier,
-            opacity .15s $--n-ease-in-cubic-bezier,
-            top .3s $--n-ease-in-out-cubic-bezier!important;
-        }
-      }
-      background-color: $--base-tracking-rect-background-color;
-    }
-  }
-}
+// @include themes-mixin {
+//   @include b(base-tracking-rect) {
+//     @include once {
+//       position: absolute;
+//       left: 0;
+//       right: 0;
+//       height: 0;
+//     }
+//     @include e(body) {
+//       @include once {
+//         position: absolute;
+//         right: 0;
+//         left: 0;
+//         transition:
+//           background-color .3s $--n-ease-in-out-cubic-bezier,
+//           top .3s $--n-ease-in-out-cubic-bezier!important;
+//         &.#{block()}-transition-enter, &.#{block()}-transition-leave-to {
+//           opacity: 0;
+//         }
+//         &.#{block()}-transition-enter-active {
+//           transition:
+//             background-color .3s $--n-ease-in-out-cubic-bezier,
+//             opacity .15s $--n-ease-out-cubic-bezier,
+//             top .3s $--n-ease-in-out-cubic-bezier!important;
+//         }
+//         &.#{block()}-transition-leave-active {
+//           transition:
+//             background-color .3s $--n-ease-in-out-cubic-bezier,
+//             opacity .15s $--n-ease-in-cubic-bezier,
+//             top .3s $--n-ease-in-out-cubic-bezier!important;
+//         }
+//       }
+//       background-color: $--base-tracking-rect-background-color;
+//     }
+//   }
+// }

@@ -1,9 +1,13 @@
 import create from '../../../styles/_utils/create-component-base'
 import commonVariables from './_common'
+import trackingRectStyle from '../../tracking-rect/styles/light'
 
 export default create({
   name: 'BaseSelectMenu',
   theme: 'light',
+  peer: [
+    trackingRectStyle
+  ],
   getDerivedVariables ({ base, derived }) {
     return {
       ...commonVariables,

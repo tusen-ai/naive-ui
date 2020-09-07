@@ -5,7 +5,7 @@
       [`n-${theme}-theme`]: theme
     }"
   >
-    <transition name="n-base-tracking-rect-transition">
+    <transition name="base-tracking-rect-transition">
       <div
         v-show="show"
         class="n-base-tracking-rect__body"
@@ -19,9 +19,14 @@
 </template>
 
 <script>
+import usecssr from '../../../_mixins/usecssr'
+import styles from './styles/index'
 
 export default {
-  name: 'NBaseTrackingRect',
+  name: 'BaseTrackingRect',
+  mixins: [
+    usecssr(styles)
+  ],
   props: {
     theme: {
       type: String,

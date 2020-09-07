@@ -46,14 +46,20 @@ import CheckMark from './CheckMark'
 import LineMark from './LineMark'
 import NIconSwitchTransition from '../../_transition/IconSwitchTransition'
 import createValidator from '../../_utils/vue/validateProp'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles/simple-checkbox'
 
 export default {
   name: 'NSimpleCheckbox',
+  cssrName: 'Checkbox',
   components: {
     CheckMark,
     LineMark,
     NIconSwitchTransition
   },
+  mixins: [
+    usecssr(styles)
+  ],
   model: {
     prop: 'checked',
     event: 'chanage'
