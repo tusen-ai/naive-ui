@@ -25,8 +25,14 @@
 </template>
 
 <script>
+import usecssr from '../../../_mixins/usecssr'
+import styles from './styles/'
+
 export default {
-  name: 'NBaseLoading',
+  name: 'BaseLoading',
+  mixins: [
+    usecssr(styles)
+  ],
   props: {
     radius: {
       type: Number,
