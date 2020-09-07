@@ -45,7 +45,7 @@ import Notification from './notification'
 import Pagination from './pagination'
 import Popconfirm from './popconfirm'
 import Popselect from './popselect'
-import Popup from './Popover'
+import Popup from './popover'
 import Progress from './progress'
 import Radio from './radio'
 import Result from './result'
@@ -190,6 +190,8 @@ import tabsLightStyle from './tabs/styles/light'
 import tabsDarkStyle from './tabs/styles/dark'
 import tableLightStyle from './table/styles/light'
 import tableDarkStyle from './table/styles/dark'
+import popoverLightStyle from './popover/styles/light'
+import popoverDarkStyle from './popover/styles/dark'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -409,6 +411,8 @@ export default create({
     tabsDarkStyle,
     tableLightStyle,
     tableDarkStyle,
+    popoverLightStyle,
+    popoverDarkStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle

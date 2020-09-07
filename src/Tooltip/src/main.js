@@ -1,7 +1,7 @@
 /**
  * Tooltip: popover wearing waistcoat
  */
-import NPopover from '../../Popover'
+import NPopover from '../../popover'
 
 export default {
   name: 'NTooltip',

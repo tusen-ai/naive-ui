@@ -38,7 +38,7 @@
 <script>
 import NIcon from '../../../icon'
 import NDataTableFilterMenu from './FilterMenu'
-import NPopover from '../../../Popover'
+import NPopover from '../../../popover'
 import funnel from '../../../_icons/funnel'
 
 function createActiveFilters (allFilters, columnKey, syntheticFilterValue) {

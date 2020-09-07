@@ -103,7 +103,7 @@
 
 <script>
 import FadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
-import NPopover from '../../Popover'
+import NPopover from '../../popover'
 import NMenuItemContent from './MenuItemContent'
 import NMenu from './Menu'
 import menuContentMixin from './menuContentMixin'

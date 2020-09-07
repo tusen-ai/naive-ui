@@ -19,7 +19,7 @@ function mixin (component, mixins) {
  * When using `manual` trigger, using default param of v-model(value prop, input event)
  */
 export default {
-  name: 'NPopover',
+  name: 'Popover',
   functional: true,
   props: {
     show: {

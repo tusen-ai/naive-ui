@@ -7,6 +7,8 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import formatLength from '../../_utils/css/formatLength'
 import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 export default {
   name: 'NPopoverContent',
@@ -84,7 +86,14 @@ export default {
       default: 'if'
     }
   },
-  mixins: [withapp, themeable, placeable, zindexable],
+  cssrName: 'Popover',
+  mixins: [
+    withapp,
+    themeable,
+    placeable,
+    zindexable,
+    usecssr(styles)
+  ],
   directives: {
     clickoutside,
     mousemoveoutside
