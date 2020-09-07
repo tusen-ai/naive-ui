@@ -4,8 +4,7 @@ import demoRouterView from './DemoRouterView'
 import naive from '../lib/index'
 import '../lib/styles/index.css'
 // import './styles/test-customize-style-scheme.scss' // test
-import '../lib/styles/fonts/Lato.css'
-import '../lib/styles/fonts/FiraCode.css'
+import './font'
 import createRouter from './routes/router'
 import { routes } from './routes/routes'
 
