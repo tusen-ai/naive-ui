@@ -1,7 +1,11 @@
 @import 'Metropolis.scss';
 
-.demo {
-  min-height: 600px;
+// .demo {
+//   min-height: 600px;
+// }
+
+body {
+  overflow: hidden;
 }
 
 .demo-card {

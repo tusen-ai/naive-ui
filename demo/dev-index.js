@@ -6,8 +6,7 @@ import demoRouterView from './DemoRouterView'
 // import './styles/test-customize-style-scheme.scss' // test customize style scheme
 import naive from '../src/index'
 import '../src/_styles/index.scss'
-import '../src/_styles/fonts/Lato.scss'
-import '../src/_styles/fonts/FiraCode.scss'
+import './font'
 import { routes, childRoutes } from './routes/routes'
 import createRouter from './routes/router'
 

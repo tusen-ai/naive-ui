@@ -40,7 +40,7 @@
     >
       <transition name="n-fade-in-transition">
         <div
-          v-if="needVerticalScrollbar && showVeriticalScrollbar"
+          v-if="needVerticalScrollbar && showVeriticalScrollbar && !isIos"
           class="n-scrollbar-rail__scrollbar"
           :style="{
             height: verticalScrollbarHeightPx,
@@ -65,7 +65,7 @@
     >
       <transition name="n-scrollbar-transition">
         <div
-          v-if="needHorizontalScrollbar && showHorizontalScrollbar"
+          v-if="needHorizontalScrollbar && showHorizontalScrollbar && !isIos"
           class="n-scrollbar-rail__scrollbar"
           :style="{
             height: scrollbarSize,
@@ -88,6 +88,7 @@ import themable from '../../_mixins/themeable'
 import resizeObserverDelagate from '../../_utils/delegate/resizeObserverDelegate'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles/index.js'
+import { isIos } from '../../_utils/browser/os'
 
 export default {
   name: 'Scrollbar',
@@ -158,7 +159,8 @@ export default {
       memorizedHorizontalLeft: null,
       memorizedMouseX: null,
       memorizedMouseY: null,
-      disabled: false
+      disabled: false,
+      isIos
     }
   },
   computed: {

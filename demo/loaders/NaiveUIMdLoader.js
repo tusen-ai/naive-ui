@@ -1,7 +1,7 @@
 const marked = require('marked')
-const path = require('path')
 const createRenderer = require('./mdRenderer')
 const renderer = createRenderer()
+const projectPath = require('./project-path')
 
 function parseMdAsAnchor (tokens) {
   const titles = tokens.filter(token => token.type === 'heading' && token.depth === 2).map(token => token.text)
@@ -24,7 +24,6 @@ function parseComponents (tokens) {
 }
 
 module.exports = function (content, url) {
-  const projectPath = path.resolve(__dirname, '..', '..')
   const relativeURL = this.resourcePath.replace(projectPath + '/', '')
 
   const showAnchor = !!~content.search('<!--anchor:on-->')
@@ -40,7 +39,7 @@ module.exports = function (content, url) {
     .join('\n')
   let mdContent = marked.parser(tokens, { renderer })
   if (titleText) {
-    const githubButton = `<edit-on-github-header url=${url || relativeURL} text=${titleText}></edit-on-github-header>`
+    const githubButton = `<edit-on-github-header relative-url="${url || relativeURL}" text=${titleText}></edit-on-github-header>`
     const titleReg = /(<n-h1[^>]*>)(.*?)(<\/n-h1>)/
     mdContent = mdContent.replace(titleReg, `${githubButton}`)
   }

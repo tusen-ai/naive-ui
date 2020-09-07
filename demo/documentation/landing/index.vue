@@ -39,7 +39,7 @@
           <n-p style="font-size: 16px; margin-bottom: 0;">
             {{ $t("intro1") }}
           </n-p>
-          <n-p style="font-size: 16px; margin-bottom: 4px; margin-top: 4px; font-weight: 600;">
+          <n-p style="font-size: 16px; margin-bottom: 4px; margin-top: 4px; font-weight: 500;">
             {{ $t("intro2") }}
           </n-p>
           <n-p style="font-size: 16px; margin-top: 0;">
