@@ -6,7 +6,7 @@ export default c([
       fontSize,
       checkboxSize
     } = props.$local
-    const { syntheticSize } = props.$instance
+    const syntheticSize = props.$instance.syntheticSize || props.$instance.size
     return cTB('checkbox',
       [
         cM(`${syntheticSize}-size`, {
