@@ -37,10 +37,10 @@ export default {
     return {
       memorizedPath: null,
       siderStyle: {
-        height: 'calc(100vh - 64px)'
+        height: '100%'
       },
       contentStyle: {
-        height: 'calc(100vh - 64px)'
+        height: '100%'
       },
       bodyThemedStyle: {
         light: {
