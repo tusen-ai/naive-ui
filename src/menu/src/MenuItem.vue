@@ -60,7 +60,7 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import simulatedComputed from '../../_mixins/simulatedComputed'
 import NMenuItemContent from './MenuItemContent'
-import NTooltip from '../../Tooltip'
+import NTooltip from '../../tooltip'
 import menuContentMixin from './menuContentMixin'
 
 export default {

@@ -1,4 +1,5 @@
 import version from './version'
+import globalStyle from './_global-style/index.cssr.js'
 
 function setHljs (hljs) {
   this.hljs = hljs
@@ -67,6 +68,10 @@ function create ({
     for (const component of components) {
       component.install(Vue, naive)
     }
+    globalStyle.mount({
+      target: 'naive-ui-global',
+      count: false
+    })
   }
   if (process.env.NODE_ENV !== 'production') {
     if (!window.naive) window.naive = {}

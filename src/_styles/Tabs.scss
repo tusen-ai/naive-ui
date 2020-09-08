@@ -1,237 +1,237 @@
-@import './mixins/mixins.scss';
+// @import './mixins/mixins.scss';
 
-@mixin tabs-size-mixin ($size) {
-  @include m($size + '-size') {
-    @include m(line-type) {
-      @include b(tabs-label) {
-        @include e(label) {
-          font-size: map-get($--n-tabs-tab-font-size, $size);
-        }
-      }
-    }
-  }
-}
+// @mixin tabs-size-mixin ($size) {
+//   @include m($size + '-size') {
+//     @include m(line-type) {
+//       @include b(tabs-label) {
+//         @include e(label) {
+//           font-size: map-get($--n-tabs-tab-font-size, $size);
+//         }
+//       }
+//     }
+//   }
+// }
 
-@include themes-mixin {
-  @include b(tabs) {
-    @include once {
-      @include tabs-size-mixin('small');
-      @include tabs-size-mixin('medium');
-      @include tabs-size-mixin('large');
-      @include tabs-size-mixin('huge');
-      width: 100%;
-      transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
-      @include m(flex) {
-        @include b(tabs-nav) {
-          @include b(tabs-nav-scroll) {
-            width: 100%;
-            @include b(tabs-label-wrapper) {
-              width: 100%;
-              @include b(tabs-label) {
-                margin-right: 0;
-              }
-            }
-          }
-        }
-      }
-    }
-    @include b(tabs-nav) {
-      @include once {
-        line-height: 1.75;
-        display: flex;
-        background-clip: padding-box;
-        transition: border-color .3s $--n-ease-in-out-cubic-bezier;
-        @include b(tabs-nav-scroll) {
-          overflow: hidden;
-        }
-      }
-      @include b(tabs-nav-scroll-button) {
-        @include once {
-          font-size: 20px;
-          height: 20px;
-          line-height: 20px;
-          align-self: center;
-          cursor: pointer;
-          transition: color .3s $--n-ease-in-out-cubic-bezier;
-          @include m(left) {
-            margin-right: 8px;
-          }
-          @include m(right) {
-            margin-left: 8px;
-          }
-        }
-        @include b(icon) {
-          fill: map-get($--tabs-tab-scroll-button-color, 'default');
-        }
-        @include m(disabled) {
-          @include once {
-            cursor: not-allowed;
-          }
-          @include b(icon) {
-            fill: map-get($--tabs-tab-scroll-button-color, 'disabled');
-          }
-        }
-      }
-    }
-    @include b(tabs-label-wrapper) {
-      @include once {
-        display: inline-block;
-        font-weight: $--n-strong-weight;
-        white-space: nowrap;
-        position: relative;
-      }
-      @include b(tabs-label-bar) {
-        @include once {
-          position: absolute;
-          bottom: 2px;
-          height: 2px;
-          border-radius: 1px;
-          transition: left .2s $--n-ease-in-out-cubic-bezier, max-width .2s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
-        }
-        background-color: $--tabs-tab-bar-background-color;
-        @include m(transition-disabled) {
-          transition: none;
-        }
-      }
-      @include b(tabs-label) {
-        @include once {
-          cursor: pointer;
-          white-space: nowrap;
-          flex-wrap: nowrap;
-          display: inline-flex;
-          align-items: center;
-          transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
-          @include m(disabled) {
-            cursor: not-allowed;
-          }
-        }
-        @include e(close) {
-          @include once {
-            margin-left: 8px;
-            font-size: 16px;
-            line-height: 16px;
-            height: 16px;
-            cursor: pointer;
-            transition: color .3s $--n-ease-in-out-cubic-bezier;
-          }
-          @include b(icon) {
-            fill: map-get($--tabs-tab-close-button-color, 'default');
-          }
-        }
-        @include e(label) {
-          @include once {
-            transition: color .3s $--n-ease-in-out-cubic-bezier;
-          }
-          color: map-get($--tabs-tab-text-color, 'default');
-        }
-      }
-    }
-    @include b(tab-panel) {
-      @include once {
-        width: 100%;
-        margin-top: 8px;
-        transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
-      }
-      color: $--tabs-panel-text-color;
-    }
-    @include m(line-type) {
-      @include once {
-        @include b(tabs-nav) {
-          @include b(tabs-nav-scroll-button) {
-            padding-bottom: 4px;
-          }
-        }
-      }
-      @include b(tabs-label) {
-        @include once {
-          box-sizing: border-box;
-          padding-bottom: 2px;
-          vertical-align: bottom;
-          @include e(label) {
-            font-size: 14px;
-          }
-          &:not(:last-child) {
-            margin-right: 36px;
-          }
-        }
-        &:hover {
-          @include e(label) {
-            color: map-get($--tabs-tab-text-color, 'hover');
-          }
-        }
-        @include m(active) {
-          @include e(label) {
-            color: map-get($--tabs-tab-text-color, 'active');
-          }
-        }
-        @include m(disabled) {
-          @include e(label) {
-            color: map-get($--tabs-tab-text-color, 'disabled');
-          }
-        }
-      }
-    }
-    @include m(card-type) {
-      @include b(tabs-nav) {
-        @include once {
-          box-sizing: border-box;
-          padding-top: 4px;
-          padding-bottom: 4px;
-          @include b(tabs-nav-scroll-button) {
-            @include m(left) {
-              margin-left: 2px;
-              margin-right: 2px;
-            }
-            @include m(right) {
-              margin-left: 2px;
-              margin-right: 2px;
-            }
-          }
-          @include b(tabs-label-bar) {
-            bottom: 0;
-            border-radius: 0;
-          }
-        }
-        border-top: 1px solid $--tabs-nav-border-color;
-        border-bottom: 1px solid $--tabs-nav-border-color;
-      }
-      @include b(tabs-label) {
-        @include once {
-          margin-right: 4px;
-          box-sizing: border-box;
-          height: 34px;
-          line-height: 34px;
-          padding: 0 16px;
-          position: relative;
-          vertical-align: bottom;
-          border-radius: $--n-tabs-border-radius;
-          border: 1px solid transparent;
-        }
-        @include e(label) {
-          @include once {
-            font-size: 14px;
-          }
-          color: map-get($--tabs-card-tab-text-color, 'default')
-        }
-        &:hover {
-          background-color: $--tabs-card-tab-background-color;
-        }
-        @include m(active) {
-          background-color: $--tabs-card-tab-background-color;
-          border: 1px solid $--tabs-card-tab-border-color;
-          @include e(label) {
-            @include once {
-              font-size: 14px;
-            }
-            color: map-get($--tabs-card-tab-text-color, 'active')
-          }
-        }
-        @include m(disabled) {
-          @include e(label) {
-            color: map-get($--tabs-tab-text-color, 'disabled');
-          }
-        }
-      }
-    }
-  }  
-}
+// @include themes-mixin {
+//   @include b(tabs) {
+//     @include once {
+//       @include tabs-size-mixin('small');
+//       @include tabs-size-mixin('medium');
+//       @include tabs-size-mixin('large');
+//       @include tabs-size-mixin('huge');
+//       width: 100%;
+//       transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
+//       @include m(flex) {
+//         @include b(tabs-nav) {
+//           @include b(tabs-nav-scroll) {
+//             width: 100%;
+//             @include b(tabs-label-wrapper) {
+//               width: 100%;
+//               @include b(tabs-label) {
+//                 margin-right: 0;
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//     @include b(tabs-nav) {
+//       @include once {
+//         line-height: 1.75;
+//         display: flex;
+//         background-clip: padding-box;
+//         transition: border-color .3s $--n-ease-in-out-cubic-bezier;
+//         @include b(tabs-nav-scroll) {
+//           overflow: hidden;
+//         }
+//       }
+//       @include b(tabs-nav-scroll-button) {
+//         @include once {
+//           font-size: 20px;
+//           height: 20px;
+//           line-height: 20px;
+//           align-self: center;
+//           cursor: pointer;
+//           transition: color .3s $--n-ease-in-out-cubic-bezier;
+//           @include m(left) {
+//             margin-right: 8px;
+//           }
+//           @include m(right) {
+//             margin-left: 8px;
+//           }
+//         }
+//         @include b(icon) {
+//           fill: map-get($--tabs-tab-scroll-button-color, 'default');
+//         }
+//         @include m(disabled) {
+//           @include once {
+//             cursor: not-allowed;
+//           }
+//           @include b(icon) {
+//             fill: map-get($--tabs-tab-scroll-button-color, 'disabled');
+//           }
+//         }
+//       }
+//     }
+//     @include b(tabs-label-wrapper) {
+//       @include once {
+//         display: inline-block;
+//         font-weight: $--n-strong-weight;
+//         white-space: nowrap;
+//         position: relative;
+//       }
+//       @include b(tabs-label-bar) {
+//         @include once {
+//           position: absolute;
+//           bottom: 2px;
+//           height: 2px;
+//           border-radius: 1px;
+//           transition: left .2s $--n-ease-in-out-cubic-bezier, max-width .2s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
+//         }
+//         background-color: $--tabs-tab-bar-background-color;
+//         @include m(transition-disabled) {
+//           transition: none;
+//         }
+//       }
+//       @include b(tabs-label) {
+//         @include once {
+//           cursor: pointer;
+//           white-space: nowrap;
+//           flex-wrap: nowrap;
+//           display: inline-flex;
+//           align-items: center;
+//           transition: background-color .3s $--n-ease-in-out-cubic-bezier, border-color .3s $--n-ease-in-out-cubic-bezier;
+//           @include m(disabled) {
+//             cursor: not-allowed;
+//           }
+//         }
+//         @include e(close) {
+//           @include once {
+//             margin-left: 8px;
+//             font-size: 16px;
+//             line-height: 16px;
+//             height: 16px;
+//             cursor: pointer;
+//             transition: color .3s $--n-ease-in-out-cubic-bezier;
+//           }
+//           @include b(icon) {
+//             fill: map-get($--tabs-tab-close-button-color, 'default');
+//           }
+//         }
+//         @include e(label) {
+//           @include once {
+//             transition: color .3s $--n-ease-in-out-cubic-bezier;
+//           }
+//           color: map-get($--tabs-tab-text-color, 'default');
+//         }
+//       }
+//     }
+//     @include b(tab-panel) {
+//       @include once {
+//         width: 100%;
+//         margin-top: 8px;
+//         transition: color .3s $--n-ease-in-out-cubic-bezier, background-color .3s $--n-ease-in-out-cubic-bezier;
+//       }
+//       color: $--tabs-panel-text-color;
+//     }
+//     @include m(line-type) {
+//       @include once {
+//         @include b(tabs-nav) {
+//           @include b(tabs-nav-scroll-button) {
+//             padding-bottom: 4px;
+//           }
+//         }
+//       }
+//       @include b(tabs-label) {
+//         @include once {
+//           box-sizing: border-box;
+//           padding-bottom: 2px;
+//           vertical-align: bottom;
+//           @include e(label) {
+//             font-size: 14px;
+//           }
+//           &:not(:last-child) {
+//             margin-right: 36px;
+//           }
+//         }
+//         &:hover {
+//           @include e(label) {
+//             color: map-get($--tabs-tab-text-color, 'hover');
+//           }
+//         }
+//         @include m(active) {
+//           @include e(label) {
+//             color: map-get($--tabs-tab-text-color, 'active');
+//           }
+//         }
+//         @include m(disabled) {
+//           @include e(label) {
+//             color: map-get($--tabs-tab-text-color, 'disabled');
+//           }
+//         }
+//       }
+//     }
+//     @include m(card-type) {
+//       @include b(tabs-nav) {
+//         @include once {
+//           box-sizing: border-box;
+//           padding-top: 4px;
+//           padding-bottom: 4px;
+//           @include b(tabs-nav-scroll-button) {
+//             @include m(left) {
+//               margin-left: 2px;
+//               margin-right: 2px;
+//             }
+//             @include m(right) {
+//               margin-left: 2px;
+//               margin-right: 2px;
+//             }
+//           }
+//           @include b(tabs-label-bar) {
+//             bottom: 0;
+//             border-radius: 0;
+//           }
+//         }
+//         border-top: 1px solid $--tabs-nav-border-color;
+//         border-bottom: 1px solid $--tabs-nav-border-color;
+//       }
+//       @include b(tabs-label) {
+//         @include once {
+//           margin-right: 4px;
+//           box-sizing: border-box;
+//           height: 34px;
+//           line-height: 34px;
+//           padding: 0 16px;
+//           position: relative;
+//           vertical-align: bottom;
+//           border-radius: $--n-tabs-border-radius;
+//           border: 1px solid transparent;
+//         }
+//         @include e(label) {
+//           @include once {
+//             font-size: 14px;
+//           }
+//           color: map-get($--tabs-card-tab-text-color, 'default')
+//         }
+//         &:hover {
+//           background-color: $--tabs-card-tab-background-color;
+//         }
+//         @include m(active) {
+//           background-color: $--tabs-card-tab-background-color;
+//           border: 1px solid $--tabs-card-tab-border-color;
+//           @include e(label) {
+//             @include once {
+//               font-size: 14px;
+//             }
+//             color: map-get($--tabs-card-tab-text-color, 'active')
+//           }
+//         }
+//         @include m(disabled) {
+//           @include e(label) {
+//             color: map-get($--tabs-tab-text-color, 'disabled');
+//           }
+//         }
+//       }
+//     }
+//   }  
+// }

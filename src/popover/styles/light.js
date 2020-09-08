@@ -8,19 +8,19 @@ export default create({
     const {
       popoverBackgroundColor,
       secondaryTextColor,
-      popoverBoxShadow
+      baseBackgroundColor
     } = derived
     const {
-      borderRadius,
-      transformDebounceScale
+      borderRadius
     } = base
     return {
       ...commonVariables,
       borderRadius,
       color: popoverBackgroundColor,
       textColor: secondaryTextColor,
-      boxShadow: popoverBoxShadow,
-      transformDebounceScale
+      boxShadow: '0 2px 8px 0 rgba(0, 0, 0, .12)',
+      tooltipColor: 'rgba(0, 0, 0, .85)',
+      tooltipTextColor: baseBackgroundColor
     }
   }
 })

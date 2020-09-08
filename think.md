@@ -366,13 +366,13 @@ const naive = create({
 78. <del>select add tag</del>
 79. <del>dynamic input</del> 还差英文文档
 80. <del>input 严格受控</del>
-81. 搞明白 vue 的 scoped 和 普通的关系
-82. Form Item 不返回 true 的时候... 错误信息不会消失，这似乎不太合理?
-83. Form Item 应该和 Input Group 也契合良好
+81. <del>搞明白 vue 的 scoped 和 普通的关系</del>
+82. <del>Form Item 不返回 true 的时候... 错误信息不会消失，这似乎不太合理?</del> async-validator 的特性
+83. <del>Form Item 应该和 Input Group 也契合良好</del> 能用
 84. <del>Notification 主题切换需要工作良好</del>
 85. <del>Notification 这个东西很特殊...</del>感觉也没那么特殊
 86. <del>文件上传的回调方式改成传对象</del>
-87. 抵御外界 CSS 变化，比如 line-height 之类的
+87. 抵御外界 CSS 变化，比如 line-height 之类的，需要一个良好的测试机制
 88. <del>CSS Font 选择</del> 对英文应该没有那么麻烦，走系统字体就好了，然而对中文又没什么好的解决方案，so 先这个样子，之后再琢磨琢磨
 89. <del>把所有用 $slots 判断的地方都改成 $scopedSlots，[原因](https://vuejs.org/v2/api/#vm-scopedSlots)<del> done
 90. <del>调整默认状态下 button, input 的 icon 的颜色</del>
@@ -391,9 +391,11 @@ const naive = create({
 103. input + icon 主题切换 transition 有问题!!!
 104. <del>auto-complete 自定义元素 demo 有问题</del> 有 pendingData 的时候 preventDefault
 105. <del>markdown 渲染缺少空格，修正了 n-select single filterable 时 placeholder 的样式问题</del> caused by vue compiler `preserveWhitespace: false`, change it to `whitespace: 'condense'`
-106. drawer 加上滚动条，以及 overflow auto 的样式
+106. <del>drawer 加上滚动条，以及 overflow auto 的样式</del>
 107. 所有弹出的东西改成 body-style
 108. size 切换的时候... transfer 动画问题
+109. 利用了公用组件的组件样式没办法特殊调教，比如 select 组件自身是没有命名空间的，这个想要单独定制就比较麻烦。先不出来怎么解决
+110. treemate 重构 cascader，异步 api 需要更改
 
 ```
 Done
