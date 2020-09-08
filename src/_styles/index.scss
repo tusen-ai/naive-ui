@@ -1,8 +1,3 @@
-@import './base.scss';
-
-// don't use ~vue-virtual-scroller, if so rollup won't work
-@import '../../node_modules/vue-virtual-scroller/dist/vue-virtual-scroller';
-
 @import './Descriptions.scss';
 @import './Form.scss';
 @import './Upload.scss';
