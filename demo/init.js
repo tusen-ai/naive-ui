@@ -1,6 +1,4 @@
-import Vue from 'vue'
-import VueI18n from 'vue-i18n'
-import VueRouter from 'vue-router'
+import { createI18n } from 'vue-i18n'
 import ComponentDemo from './utils/ComponentDemo'
 import ComponentDemos from './utils/ComponentDemos'
 import ComponentDocumentation from './utils/ComponentDocumentation'
@@ -9,18 +7,15 @@ import EditOnGithubButton from './utils/EditOnGithubButton'
 import EditOnGithubHeader from './utils/EditOnGithubHeader'
 import './styles/demo.scss'
 
-Vue.use(VueI18n)
-Vue.use(VueRouter)
+export function installDemoComponents (app) {
+  app.component('ComponentDemo', ComponentDemo)
+  app.component('ComponentDemos', ComponentDemos)
+  app.component('DocumentationWrapper', DocumentationWrapper)
+  app.component('ComponentDocumentation', ComponentDocumentation)
+  app.component('EditOnGithubButton', EditOnGithubButton)
+  app.component('EditOnGithubHeader', EditOnGithubHeader)
+}
 
-const i18n = new VueI18n({
+export const i18n = createI18n({
   locale: 'zh-CN'
 })
-
-Vue.component('ComponentDemo', ComponentDemo)
-Vue.component('ComponentDemos', ComponentDemos)
-Vue.component('DocumentationWrapper', DocumentationWrapper)
-Vue.component('ComponentDocumentation', ComponentDocumentation)
-Vue.component('EditOnGithubButton', EditOnGithubButton)
-Vue.component('EditOnGithubHeader', EditOnGithubHeader)
-
-export { Vue, i18n }

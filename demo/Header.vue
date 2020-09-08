@@ -50,7 +50,7 @@
           v-model="searchInputValue"
           style="width: 216px;"
           :z-index="zIndex && zIndex + 1"
-          :placeholder="$t('searchPlaceholder')"
+          :placeholder="'searchPlaceholder'"
           :options="searchOptions"
           clear-after-select
           blur-after-select
@@ -58,14 +58,14 @@
         />
         <div class="nav-menu">
           <n-menu mode="horizontal" :value="menuValue" @select="handleMenuSelect">
-            <n-menu-item :title="$t('home')" name="home" />
-            <n-menu-item :title="$t('doc')" name="doc" />
+            <n-menu-item :title="'home'" name="home" />
+            <n-menu-item :title="'doc'" name="doc" />
           </n-menu>
         </div>
       </div>
       <div style="display: flex;">
         <n-tag class="nav-picker" @click.native="handleThemeChange">
-          {{ $t(themeOptions[theme].label) }}
+          {{ themeOptions[theme].label }}
         </n-tag>
         <n-tag class="nav-picker" @click.native="handleLanguageChange">
           {{ langOptions[lang].label }}
@@ -156,7 +156,8 @@ export default {
       return (path.endsWith('n-modal') || path.endsWith('n-drawer') || path.endsWith('n-confirm')) ? null : 3000
     },
     theme () {
-      return this.NConfigProvider.$parent.theme
+      return 'light'
+      // return this.NConfigProvider.$parent.theme
     },
     menuValue () {
       if (/^(\/[^/]+){2}\/doc/.test(this.$route.path)) return 'doc'
@@ -182,11 +183,11 @@ export default {
     options: function () {
       return [
         {
-          label: this.$t('dark'),
+          label: 'dark',
           value: 'dark'
         },
         {
-          label: this.$t('light'),
+          label: 'light',
           value: 'light'
         }
       ]
@@ -194,10 +195,10 @@ export default {
   },
   methods: {
     handleLogoClick () {
-      if (/^(\/[^/]+){2}$/.test(this.$route.path)) {
-        this.$NMessage.info(this.$t('alreadyHome'))
-        return
-      }
+      // if (/^(\/[^/]+){2}$/.test(this.$route.path)) {
+      //   this.$NMessage.info(this.$t('alreadyHome'))
+      //   return
+      // }
       this.$router.push(
         /^(\/[^/]+){2}/.exec(this.$route.path)[0]
       )
@@ -221,7 +222,7 @@ export default {
       }
     },
     handleThemeChange () {
-      this.NConfigProvider.$parent.theme = this.themeOptions[this.theme].next
+      // this.NConfigProvider.$parent.theme = this.themeOptions[this.theme].next
     },
     handleModeChange () {
       setMode(this.modeOptions[this.mode].next)

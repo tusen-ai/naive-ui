@@ -7,11 +7,11 @@
       [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
   >
-    <div v-if="$scopedSlots.header" class="n-list__header">
+    <div v-if="$slots.header" class="n-list__header">
       <slot name="header" />
     </div>
     <slot />
-    <div v-if="$scopedSlots.footer" class="n-list__footer">
+    <div v-if="$slots.footer" class="n-list__footer">
       <slot name="footer" />
     </div>
   </ul>

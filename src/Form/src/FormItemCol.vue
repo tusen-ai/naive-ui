@@ -3,7 +3,7 @@ import NFormItem from './FormItem'
 import NCol from '../../grid/src/Col'
 
 export default {
-  name: 'NFormItemCol',
+  name: 'FormItemCol',
   props: {
     ...NCol.props,
     ...NFormItem.props
@@ -28,7 +28,7 @@ export default {
           return h(NFormItem, {
             ref: 'formItem',
             props: { ...this.$props },
-            scopedSlots: { ...this.$scopedSlots }
+            scopedSlots: { ...this.$slots }
           })
         }
       }

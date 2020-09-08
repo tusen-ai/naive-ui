@@ -99,7 +99,7 @@
         <n-empty />
       </slot>
     </div>
-    <div v-if="$scopedSlots.action" class="n-base-select-menu__action">
+    <div v-if="$slots.action" class="n-base-select-menu__action">
       <slot name="action" />
     </div>
   </div>

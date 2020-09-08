@@ -4,7 +4,7 @@ import NRow from '../../grid/src/Row'
 import NFormItem from './FormItem'
 
 export default {
-  name: 'NFormItemRow',
+  name: 'FormItemRow',
   props: {
     ...NRow.props,
     ...NFormItem.props
@@ -31,7 +31,7 @@ export default {
             span: 24,
             ...this.$props
           },
-          scopedSlots: { ...this.$scopedSlots }
+          scopedSlots: { ...this.$slots }
         })
       }
     })

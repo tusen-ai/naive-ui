@@ -21,7 +21,7 @@ In most case you may want to use a `x-overlay-color`: For example is you use `pr
   >Cool!</button>
 </n-config-consumer>
 <br>
-<n-element as="div"style="overflow: auto;" v-slot="{ styleScheme }">
+<n-element as="div" style="overflow: auto;" v-slot="{ styleScheme }">
   <pre
     :style="{
       color: styleScheme.secondaryTextColor,

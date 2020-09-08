@@ -1,4 +1,5 @@
 <script>
+import { h } from 'vue'
 import themeable from '../../_mixins/themeable'
 
 export default {
@@ -66,8 +67,8 @@ export default {
       return language || (this.NConfigProvider ? this.NConfigProvider.inheritedLanguage : null)
     }
   },
-  render (h) {
-    const defaultSlot = this.$scopedSlots.default ? this.$scopedSlots.default() : []
+  render () {
+    const defaultSlot = this.$slots.default ? this.$slots.default() : []
     if (this.abstract) {
       if (defaultSlot.length > 1) {
         console.error(

@@ -32,12 +32,12 @@ export default function (events = {
     created () {
       Object.keys(events).forEach(event => {
         const asEvent = events[event]
-        this.$on(event, function (value) {
-          const NFormItem = this.NFormItem
-          if (NFormItem && NFormItem !== '__FORM_ITEM_INNER__') {
-            NFormItem.$emit(asEvent, value)
-          }
-        })
+        // this.$on(event, function (value) {
+        //   const NFormItem = this.NFormItem
+        //   if (NFormItem && NFormItem !== '__FORM_ITEM_INNER__') {
+        //     NFormItem.$emit(asEvent, value)
+        //   }
+        // })
       })
     },
     beforeDestroy () {

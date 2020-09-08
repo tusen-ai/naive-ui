@@ -30,40 +30,39 @@
               : rowClassName)
           "
         >
-          <template v-for="column in columns">
-            <td
-              :key="column.key"
-              :style="{
-                textAlign: column.align || null,
-                left: NDataTable.currentFixedColumnLeft(column),
-                right: NDataTable.currentFixedColumnRight(column)
-              }"
-              class="n-data-table-td"
-              :class="{
-                'n-data-table-td--ellipsis': column.ellipsis,
-                [`n-data-table-td--${column.align}-align`]: column.align,
-                ...(column.className && createClassObject(column.className)),
-                [`n-data-table-td--fixed-${column.fixed}`]: column.width && column.fixed,
-                'n-data-table-td--shadow-after': activeLeft[column.key],
-                'n-data-table-td--shadow-before': activeRight[column.key],
-                'n-data-table-td--selection': column.type === 'selection'
-              }"
-            >
-              <n-checkbox
-                v-if="column.type === 'selection'"
-                :key="currentPage"
-                :disabled="column.disabled && column.disabled(rowData)"
-                :checked="checkedRowKeys.includes(createRowKey(rowData, rowKey))"
-                @change="checked => handleCheckboxInput(rowData, checked)"
-              />
-              <cell
-                v-else
-                :index="index"
-                :row="rowData"
-                :column="column"
-              />
-            </td>
-          </template>
+          <td
+            v-for="column in columns"
+            :key="column.key"
+            :style="{
+              textAlign: column.align || null,
+              left: NDataTable.currentFixedColumnLeft(column),
+              right: NDataTable.currentFixedColumnRight(column)
+            }"
+            class="n-data-table-td"
+            :class="{
+              'n-data-table-td--ellipsis': column.ellipsis,
+              [`n-data-table-td--${column.align}-align`]: column.align,
+              ...(column.className && createClassObject(column.className)),
+              [`n-data-table-td--fixed-${column.fixed}`]: column.width && column.fixed,
+              'n-data-table-td--shadow-after': activeLeft[column.key],
+              'n-data-table-td--shadow-before': activeRight[column.key],
+              'n-data-table-td--selection': column.type === 'selection'
+            }"
+          >
+            <n-checkbox
+              v-if="column.type === 'selection'"
+              :key="currentPage"
+              :disabled="column.disabled && column.disabled(rowData)"
+              :checked="checkedRowKeys.includes(createRowKey(rowData, rowKey))"
+              @change="checked => handleCheckboxInput(rowData, checked)"
+            />
+            <cell
+              v-else
+              :index="index"
+              :row="rowData"
+              :column="column"
+            />
+          </td>
         </tr>
       </tbody>
     </table>

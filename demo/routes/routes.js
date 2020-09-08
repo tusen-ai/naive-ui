@@ -176,7 +176,7 @@ export const routes = [
     ]
   },
   {
-    path: '/*',
+    path: '/:catchAll(.*)',
     redirect: '/zh-CN/os-theme'
   }
 ]

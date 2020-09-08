@@ -13,7 +13,7 @@
 import cloneDeep from 'lodash-es/cloneDeep'
 
 export default {
-  name: 'NForm',
+  name: 'Form',
   provide () {
     return {
       NForm: this

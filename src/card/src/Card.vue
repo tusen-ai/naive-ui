@@ -11,16 +11,16 @@
     }"
     :style="syntheticStyle"
   >
-    <div v-if="$scopedSlots.cover" class="n-card-cover">
+    <div v-if="$slots.cover" class="n-card-cover">
       <slot name="cover" />
     </div>
-    <div v-if="$scopedSlots.header || $scopedSlots.header || title || closable" class="n-card-header">
+    <div v-if="$slots.header || $slots.header || title || closable" class="n-card-header">
       <div class="n-card-header__main" :style="headerStyle">
         <slot name="header">
           {{ title }}
         </slot>
       </div>
-      <div v-if="$scopedSlots['header-extra']" class="n-card-header__extra">
+      <div v-if="$slots['header-extra']" class="n-card-header__extra">
         <slot name="header-extra" />
       </div>
       <n-icon
@@ -36,10 +36,10 @@
     <div class="n-card__content" :style="contentStyle">
       <slot />
     </div>
-    <div v-if="$scopedSlots.footer" class="n-card__footer">
+    <div v-if="$slots.footer" class="n-card__footer">
       <slot name="footer" />
     </div>
-    <div v-if="$scopedSlots.action" class="n-card__action">
+    <div v-if="$slots.action" class="n-card__action">
       <slot name="action" />
     </div>
   </div>

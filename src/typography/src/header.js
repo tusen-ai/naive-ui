@@ -1,3 +1,4 @@
+import { h } from 'vue'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import usecssr from '../../_mixins/usecssr'
@@ -27,7 +28,7 @@ export default level => ({
     themeable,
     usecssr(styles)
   ],
-  render (h) {
+  render () {
     const props = this.$props
     return h(`h${level}`, {
       class: {

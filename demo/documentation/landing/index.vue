@@ -19,7 +19,7 @@
 
 <template>
   <n-config-consumer>
-    <template v-slot="{ styleScheme, theme }">
+    <template v-slot="{ theme }">
       <div>
         <n-layout-footer position="absolute" style="z-index: auto;">
           <landing-footer style="max-width: 1200px; margin: auto;" />
@@ -37,20 +37,20 @@
             >Na{{ hover ? 'ï' : 'i' }}ve UI</span>
           </n-h1>
           <n-p style="font-size: 16px; margin-bottom: 0;">
-            {{ $t("intro1") }}
+            {{ ("intro1") }}
           </n-p>
           <n-p style="font-size: 16px; margin-bottom: 4px; margin-top: 4px; font-weight: 500;">
-            {{ $t("intro2") }}
+            {{ ("intro2") }}
           </n-p>
           <n-p style="font-size: 16px; margin-top: 0;">
-            {{ $t("intro3") }}
+            {{ ("intro3") }}
           </n-p>
           <div>
             <n-button type="default" size="large" style="margin-right: 12px;" @click="handleThemeChangeClick">
-              {{ $t("intro4") }}
+              {{ ("intro4") }}
             </n-button>
             <n-button type="primary" :ghost="theme === 'dark'" size="large" @click="handleStartClick">
-              {{ $t("start") }}
+              {{ ("start") }}
             </n-button>
           </div>
         </div>

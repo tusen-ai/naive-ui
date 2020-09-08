@@ -7,7 +7,7 @@ export default {
   },
   render (h, context) {
     const locale = this.$i18n.locale
-    const defaultSlot = (this.$scopedSlots.default && this.$scopedSlots.default()) || []
+    const defaultSlot = (this.$slots.default && this.$slots.default()) || []
     const index = defaultSlot.findIndex(VNode => VNode.componentOptions.tag === locale)
     // console.log(locale, defaultSlot[0].componentOptions.tag)
     // console.log(index)

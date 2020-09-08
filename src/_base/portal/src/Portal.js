@@ -55,7 +55,7 @@ export default {
     }
   },
   render () {
-    const defaultSlot = this.$scopedSlots.default ? this.$scopedSlots.default() : []
+    const defaultSlot = this.$slots.default ? this.$slots.default() : []
     const childrenCount = defaultSlot && defaultSlot.length
     if (defaultSlot && childrenCount) {
       if (childrenCount !== 1) {

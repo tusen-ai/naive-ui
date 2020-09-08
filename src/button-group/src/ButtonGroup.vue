@@ -14,7 +14,7 @@ import usecssr from '../../_mixins/usecssr'
 import styles from './styles/index.js'
 
 export default {
-  name: 'NButtonGroup',
+  name: 'ButtonGroup',
   mixins: [
     usecssr(styles)
   ],

@@ -2,9 +2,9 @@
 import Steps from './src/Steps.vue'
 import Step from './src/Step'
 
-Steps.install = function (Vue, naive) {
-  Vue.component(naive.componentPrefix + Steps.name, Steps)
-  Vue.component(naive.componentPrefix + Step.name, Step)
+Steps.install = function (app, naive) {
+  app.component(naive.componentPrefix + Steps.name, Steps)
+  app.component(naive.componentPrefix + Step.name, Step)
 }
 
 export default Steps

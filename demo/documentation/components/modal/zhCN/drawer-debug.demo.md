@@ -24,7 +24,7 @@
       <n-row :gutter="24">
         <n-form-item-col :span="12" label="Input" path="inputValue">
           <n-input placeholder="Input" v-model="model.inputValue" />
-        </n-form-item-col :span="12">
+        </n-form-item-col>
         <n-form-item-col :span="12" label="Textarea" path="textareaValue">
           <n-input placeholder="Textarea" v-model="model.textareaValue" type="textarea"
             :autosize="{

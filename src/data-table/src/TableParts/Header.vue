@@ -23,62 +23,61 @@
       </colgroup>
       <thead class="n-data-table-thead">
         <tr class="n-data-table-tr">
-          <template v-for="(column, index) in columns">
-            <th
-              :key="column.key"
-              :ref="column.key"
-              :style="{
-                textAlign: column.align || null,
-                left: NDataTable.currentFixedColumnLeft(column),
-                right: NDataTable.currentFixedColumnRight(column)
-              }"
-              class="n-data-table-th"
-              :class="{
-                'n-data-table-th--filterable': isColumnFilterable(column),
-                'n-data-table-th--sortable': isColumnSortable(column),
-                [`n-data-table-th--fixed-${column.fixed}`]: column.fixed && column.width,
-                'n-data-table-th--shadow-after': leftActiveFixedColumn[column.key],
-                'n-data-table-th--shadow-before': rightActiveFixedColumn[column.key],
-                'n-data-table-th--selection': column.type === 'selection'
-              }"
-              @click="handleHeaderClick($event, column)"
-            >
-              <n-checkbox
-                v-if="column.type === 'selection'"
-                :key="currentPage"
-                table-header
-                :checked="checkboxChecked"
-                :indeterminate="checkboxIndererminate"
-                @change="handleCheckboxInput(column)"
+          <th
+            v-for="(column, index) in columns"
+            :key="column.key"
+            :ref="column.key"
+            :style="{
+              textAlign: column.align || null,
+              left: NDataTable.currentFixedColumnLeft(column),
+              right: NDataTable.currentFixedColumnRight(column)
+            }"
+            class="n-data-table-th"
+            :class="{
+              'n-data-table-th--filterable': isColumnFilterable(column),
+              'n-data-table-th--sortable': isColumnSortable(column),
+              [`n-data-table-th--fixed-${column.fixed}`]: column.fixed && column.width,
+              'n-data-table-th--shadow-after': leftActiveFixedColumn[column.key],
+              'n-data-table-th--shadow-before': rightActiveFixedColumn[column.key],
+              'n-data-table-th--selection': column.type === 'selection'
+            }"
+            @click="handleHeaderClick($event, column)"
+          >
+            <n-checkbox
+              v-if="column.type === 'selection'"
+              :key="currentPage"
+              table-header
+              :checked="checkboxChecked"
+              :indeterminate="checkboxIndererminate"
+              @change="handleCheckboxInput(column)"
+            />
+            <div v-if="column.ellipsis" class="n-data-table-th__ellipsis">
+              <render
+                :render="typeof column.title === 'function'
+                  ? h => (column.title)(h, column, index)
+                  : column.title
+                "
               />
-              <div v-if="column.ellipsis" class="n-data-table-th__ellipsis">
-                <render
-                  :render="typeof column.title === 'function'
-                    ? h => (column.title)(h, column, index)
-                    : column.title
-                  "
-                />
-              </div>
-              <template v-else>
-                <render
-                  :render="typeof column.title === 'function'
-                    ? h => (column.title)(h, column, index)
-                    : column.title
-                  "
-                />
-              </template>
-              <sort-button
-                v-if="isColumnSortable(column)"
-                :column="column"
+            </div>
+            <template v-else>
+              <render
+                :render="typeof column.title === 'function'
+                  ? h => (column.title)(h, column, index)
+                  : column.title
+                "
               />
-              <filter-button
-                v-if="isColumnFilterable(column)"
-                :ref="`${column.key}Filter`"
-                :column="column"
-                :options="column.filterOptions"
-              />
-            </th>
-          </template>
+            </template>
+            <sort-button
+              v-if="isColumnSortable(column)"
+              :column="column"
+            />
+            <filter-button
+              v-if="isColumnFilterable(column)"
+              :ref="`${column.key}Filter`"
+              :column="column"
+              :options="column.filterOptions"
+            />
+          </th>
         </tr>
       </thead>
     </table>

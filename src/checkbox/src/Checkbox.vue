@@ -40,7 +40,7 @@
       </n-icon-switch-transition>
     </div>
     <span
-      v-if="label !== null || $scopedSlots.default"
+      v-if="label !== null || $slots.default"
       class="n-checkbox__label"
     >
       <slot>

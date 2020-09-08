@@ -1,5 +1,6 @@
 
 <script>
+import { h } from 'vue'
 import Menu from './Menu.vue'
 import MenuItem from './MenuItem.vue'
 import Submenu from './Submenu.vue'
@@ -9,9 +10,9 @@ import MenuItemGroup from './MenuItemGroup.vue'
 // Todo refactor to remove slot
 export default {
   name: 'Menu',
-  functional: true,
-  render (h, context) {
-    if (context.props.items) {
+  props: Menu.props,
+  render () {
+    if (this.$props.items) {
       const createItems = items => {
         return items.map(item => {
           const props = {
@@ -58,19 +59,19 @@ export default {
       }
       return h(Menu,
         {
-          props: context.props,
-          scopedSlots: { ...context.scopedSlots },
-          on: context.listeners,
-          attrs: context.data.attrs
+          props: this.$props,
+          scopedSlots: { ...this.$slots },
+          on: this.$listeners,
+          attrs: this.$data.attrs
         },
-        createItems(context.props.items)
+        createItems(this.$props.items)
       )
     } else {
       return h(Menu, {
-        props: context.props,
-        scopedSlots: { ...context.scopedSlots },
-        on: context.listeners,
-        attrs: context.data.attrs
+        props: this.$props,
+        scopedSlots: { ...this.$slots },
+        on: this.$listeners,
+        attrs: this.$data.attrs
       })
     }
   }

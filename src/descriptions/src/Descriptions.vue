@@ -62,7 +62,7 @@ export default {
     }
   },
   render (h) {
-    let children = this.$scopedSlots.default ? this.$scopedSlots.default() : []
+    let children = this.$slots.default ? this.$slots.default() : []
     if (children.some(child => !isDescriptionsItem(child))) {
       console.error(
         '[naive-ui/descriptions]: `n-descriptions` only takes `n-descriptions-item` as children.'
@@ -152,11 +152,11 @@ export default {
         [`n-descriptions--bordered`]: this.bordered
       }
     }, [
-      (this.title || this.$scopedSlots.header) ? h('div', {
+      (this.title || this.$slots.header) ? h('div', {
         staticClass: 'n-descriptions-header'
       }, this.title ? [
         this.title
-      ] : this.$scopedSlots.header()) : null,
+      ] : this.$slots.header()) : null,
       h('div', {
         staticClass: 'n-descriptions-table-wrapper'
       }, [

@@ -1,7 +1,7 @@
 import Switch from './src/Switch.vue'
 
-Switch.install = function (Vue, naive) {
-  Vue.component(naive.componentPrefix + 'Switch', Switch)
+Switch.install = function (app, naive) {
+  app.component(naive.componentPrefix + 'Switch', Switch)
 }
 
 export default Switch

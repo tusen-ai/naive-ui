@@ -33,13 +33,13 @@
             :child-selected="selectedInside"
             @click="handleClick"
           >
-            <template v-if="$scopedSlots.icon" v-slot:icon>
+            <template v-if="$slots.icon" v-slot:icon>
               <slot name="icon" />
             </template>
             <template v-slot:header>
-              <slot v-if="$scopedSlots.header" name="header" />
+              <slot v-if="$slots.header" name="header" />
             </template>
-            <template v-if="$scopedSlots['header-extra']" v-slot:header-extra>
+            <template v-if="$slots['header-extra']" v-slot:header-extra>
               <slot name="header-extra" />
             </template>
           </n-menu-item-content>
@@ -79,13 +79,13 @@
         :child-selected="selectedInside"
         @click="handleClick"
       >
-        <template v-if="$scopedSlots.icon" v-slot:icon>
+        <template v-if="$slots.icon" v-slot:icon>
           <slot name="icon" />
         </template>
-        <template v-if="$scopedSlots.header" v-slot:header>
+        <template v-if="$slots.header" v-slot:header>
           <slot name="header" />
         </template>
-        <template v-if="$scopedSlots['header-extra']" v-slot:header-extra>
+        <template v-if="$slots['header-extra']" v-slot:header-extra>
           <slot name="header-extra" />
         </template>
       </n-menu-item-content>

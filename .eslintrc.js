@@ -13,7 +13,8 @@ module.exports = {
           allowFirstLine: false
         }
       }
-    ]
+    ],
+    'vue/no-template-key': 0
   },
   overrides: [
     {

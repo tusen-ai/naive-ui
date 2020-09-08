@@ -6,7 +6,7 @@
       :data-key="keyField ? _[keyField] : index"
       class="n-dynamic-input-item"
     >
-      <slot v-if="$scopedSlots.default" :value="value[index]" :index="index" />
+      <slot v-if="$slots.default" :value="value[index]" :index="index" />
       <n-dynamic-input-input-preset
         v-else-if="preset === 'input'"
         v-model="value[index]"
@@ -142,7 +142,7 @@ export default {
       const onCreate = this.onCreate
       if (onCreate) {
         this.value.splice(index + 1, 0, onCreate(index + 1))
-      } else if (this.$scopedSlots.default) {
+      } else if (this.$slots.default) {
         this.value.splice(index + 1, 0, null)
       } else {
         switch (this.preset) {
@@ -169,7 +169,7 @@ export default {
           } else {
             this.$emit('input', [ onClear() ])
           }
-        } else if (this.$scopedSlots.default) {
+        } else if (this.$slots.default) {
           return
         } else {
           switch (this.preset) {

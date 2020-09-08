@@ -8,8 +8,8 @@ export default {
     }
   },
   render (h) {
-    const defaultSlot = (this.$scopedSlots.default && this.$scopedSlots.default()) || []
-    // const anchorSlot = (this.$scopedSlots.anchor && this.$scopedSlots.anchor()) || []
+    const defaultSlot = (this.$slots.default && this.$slots.default()) || []
+    // const anchorSlot = (this.$slots.anchor && this.$slots.anchor()) || []
     // const anchor = [h('div', {
     //   staticClass: 'n-documentation-anchor'
     // }, anchorSlot)]

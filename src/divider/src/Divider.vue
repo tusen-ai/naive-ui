@@ -3,9 +3,9 @@
     class="n-divider"
     :class="{
       'n-divider--vertical': vertical,
-      'n-divider--no-title': !$scopedSlots.default,
+      'n-divider--no-title': !$slots.default,
       'n-divider--dashed': dashed,
-      [`n-divider--title-position-${titlePlacement}`]: $scopedSlots.default && titlePlacement,
+      [`n-divider--title-position-${titlePlacement}`]: $slots.default && titlePlacement,
       [`n-${syntheticTheme}-theme`]: syntheticTheme
     }"
   >
@@ -14,13 +14,13 @@
       class="n-divider__line n-divider__line--left"
     >
     <div
-      v-if="!vertical && $scopedSlots.default"
+      v-if="!vertical && $slots.default"
       class="n-divider__title"
     >
       <slot />
     </div>
     <div
-      v-if="!vertical && $scopedSlots.default"
+      v-if="!vertical && $slots.default"
       class="n-divider__line n-divider__line--right"
     />
   </div>

@@ -50,7 +50,7 @@
       </div>
       <div v-if="showIndicator">
         <div
-          v-if="$scopedSlots.default"
+          v-if="$slots.default"
           class="n-progress-custom-content"
         >
           <slot />
@@ -137,7 +137,7 @@
       </div>
       <div v-if="showIndicator && syntheticIndicatorPlacement === 'outside'">
         <div
-          v-if="$scopedSlots.default"
+          v-if="$slots.default"
           class="n-progress-custom-content"
           :style="{
             color: indicatorTextColor
@@ -216,7 +216,7 @@
           </svg>
         </div>
       </div>
-      <div v-if="showIndicator && this.$scopedSlots.default">
+      <div v-if="showIndicator && this.$slots.default">
         <div
           class="n-progress-text"
         >

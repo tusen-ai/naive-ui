@@ -6,31 +6,31 @@
     }"
     :style="syntheticStyle"
   >
-    <div v-if="$scopedSlots.avatar && contentIndented" class="n-thing-avatar">
+    <div v-if="$slots.avatar && contentIndented" class="n-thing-avatar">
       <slot name="avatar" />
     </div>
     <div class="n-thing-main">
       <div
-        v-if="!contentIndented && ($scopedSlots.header || title || $scopedSlots['header-extra'] || titleExtra || $scopedSlots.avatar)"
+        v-if="!contentIndented && ($slots.header || title || $slots['header-extra'] || titleExtra || $slots.avatar)"
         class="n-thing-avatar-header-wrapper"
       >
-        <div v-if="$scopedSlots.avatar && !contentIndented" class="n-thing-avatar">
+        <div v-if="$slots.avatar && !contentIndented" class="n-thing-avatar">
           <slot name="avatar" />
         </div>
-        <div v-if="$scopedSlots.header || title || $scopedSlots['header-extra'] || titleExtra" class="n-thing-header-wrapper">
+        <div v-if="$slots.header || title || $slots['header-extra'] || titleExtra" class="n-thing-header-wrapper">
           <div class="n-thing-header">
-            <div v-if="$scopedSlots.header || title" class="n-thing-header__title">
+            <div v-if="$slots.header || title" class="n-thing-header__title">
               <slot name="header">
                 {{ title }}
               </slot>
             </div>
-            <div v-if="$scopedSlots['header-extra'] || titleExtra" class="n-thing-header__extra">
+            <div v-if="$slots['header-extra'] || titleExtra" class="n-thing-header__extra">
               <slot name="header-extra">
                 {{ titleExtra }}
               </slot>
             </div>
           </div>
-          <div v-if="$scopedSlots.description || description" class="n-thing-main__description">
+          <div v-if="$slots.description || description" class="n-thing-main__description">
             <slot name="description">
               {{ description }}
             </slot>
@@ -38,33 +38,33 @@
         </div>
       </div>
       <template v-else>
-        <div v-if="$scopedSlots.header || title || $scopedSlots['header-extra'] || titleExtra" class="n-thing-header">
-          <div v-if="$scopedSlots.header || title" class="n-thing-header__title">
+        <div v-if="$slots.header || title || $slots['header-extra'] || titleExtra" class="n-thing-header">
+          <div v-if="$slots.header || title" class="n-thing-header__title">
             <slot name="header">
               {{ title }}
             </slot>
           </div>
-          <div v-if="$scopedSlots['header-extra'] || titleExtra" class="n-thing-header__extra">
+          <div v-if="$slots['header-extra'] || titleExtra" class="n-thing-header__extra">
             <slot name="header-extra">
               {{ titleExtra }}
             </slot>
           </div>
         </div>
-        <div v-if="$scopedSlots.description || description" class="n-thing-main__description">
+        <div v-if="$slots.description || description" class="n-thing-main__description">
           <slot name="description">
             {{ description }}
           </slot>
         </div>
       </template>
-      <div v-if="$scopedSlots.default || content" class="n-thing-main__content">
+      <div v-if="$slots.default || content" class="n-thing-main__content">
         <slot>
           {{ content }}
         </slot>
       </div>
-      <div v-if="$scopedSlots.footer" class="n-thing-main__footer">
+      <div v-if="$slots.footer" class="n-thing-main__footer">
         <slot name="footer" />
       </div>
-      <div v-if="$scopedSlots.action" class="n-thing-main__action">
+      <div v-if="$slots.action" class="n-thing-main__action">
         <slot name="action" />
       </div>
     </div>

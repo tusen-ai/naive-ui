@@ -169,7 +169,7 @@ export default {
         width: '288px'
       }
     }
-    const scopedSlots = this.$scopedSlots
+    const scopedSlots = this.$slots
     return h('NLayout', {
       staticClass: 'n-nbs',
       class: {

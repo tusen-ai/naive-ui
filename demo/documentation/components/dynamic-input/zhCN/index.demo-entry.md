@@ -21,7 +21,7 @@ form
 ### Dynamic Input Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|preset|`'input' \| 'preset'`|`'input'`|动态录入使用的预设，在不设定 `$scopedSlots.default` 的时候生效。|
+|preset|`'input' \| 'preset'`|`'input'`|动态录入使用的预设，在不设定 `$slots.default` 的时候生效。|
 |value|`Array`|-|**必需**|
 |max|`number`|`null`|最多有几项内容|
 |key-field|`string`|`null`||

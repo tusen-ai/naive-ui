@@ -28,12 +28,11 @@
       <slot />
     </div>
     <div class="n-upload-file-list" :style="fileListStyle">
-      <template v-for="file in syntheticFileList">
-        <n-upload-file
-          :key="file.id"
-          :file="file"
-        />
-      </template>
+      <n-upload-file
+        v-for="file in syntheticFileList"
+        :key="file.id"
+        :file="file"
+      />
     </div>
   </div>
 </template>
@@ -159,7 +158,7 @@ function submit (
 }
 
 export default {
-  name: 'NUpload',
+  name: 'Upload',
   components: {
     NUploadFile
   },

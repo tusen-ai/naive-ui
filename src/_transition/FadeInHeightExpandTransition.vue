@@ -1,4 +1,5 @@
 <script>
+import { h, nextTick } from 'vue'
 import getDefaultSlot from '../_utils/vue/getDefaultSlot'
 
 export default {
@@ -54,7 +55,7 @@ export default {
       this.$emit('after-leave')
     },
     handleEnter () {
-      this.$nextTick().then(() => {
+      nextTick(() => {
         const el = this.$el
         if (this.width) {
           el.style.maxWidth = 'unset'
@@ -86,7 +87,7 @@ export default {
       }
     }
   },
-  render (h) {
+  render () {
     return h('transition', {
       props: {
         name: this.width ? 'n-fade-in-width-expand-transition' : 'n-fade-in-height-expand-transition',

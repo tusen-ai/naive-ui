@@ -5,13 +5,13 @@ import Td from './src/Td.vue'
 import Thead from './src/Thead.vue'
 import Tbody from './src/Tbody.vue'
 
-Table.install = function (Vue, naive) {
-  Vue.component(naive.componentPrefix + Table.name, Table)
-  Vue.component(naive.componentPrefix + Th.name, Th)
-  Vue.component(naive.componentPrefix + Tr.name, Tr)
-  Vue.component(naive.componentPrefix + Td.name, Td)
-  Vue.component(naive.componentPrefix + Tbody.name, Tbody)
-  Vue.component(naive.componentPrefix + Thead.name, Thead)
+Table.install = function (app, naive) {
+  app.component(naive.componentPrefix + Table.name, Table)
+  app.component(naive.componentPrefix + Th.name, Th)
+  app.component(naive.componentPrefix + Tr.name, Tr)
+  app.component(naive.componentPrefix + Td.name, Td)
+  app.component(naive.componentPrefix + Tbody.name, Tbody)
+  app.component(naive.componentPrefix + Thead.name, Thead)
 }
 
 export default Table

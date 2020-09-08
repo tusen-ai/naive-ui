@@ -15,7 +15,7 @@ import Code from './code'
 import Collapse from './collapse'
 import ConfigConsumer from './config-consumer'
 import ConfigProvider from './config-provider'
-import ConfirmPlugin from './confirm'
+// import ConfirmPlugin from './confirm'
 import DataTable from './data-table'
 import DatePicker from './date-picker'
 import Descriptions from './descriptions'
@@ -36,12 +36,12 @@ import InputGroupLabelStyle from './input-group-label'
 import InputNumber from './input-number'
 import Layout from './layout'
 import List from './list'
-import LoadingBar from './loading-bar'
+// import LoadingBar from './loading-bar'
 import Log from './log'
 import Menu from './menu'
-import Message from './message'
+// import Message from './message'
 import Modal from './modal'
-import Notification from './notification'
+// import Notification from './notification'
 import Pagination from './pagination'
 import Popconfirm from './popconfirm'
 import Popselect from './popselect'
@@ -229,8 +229,8 @@ export default create({
     Select,
     Modal,
     Input,
-    Message,
-    Notification,
+    // Message,
+    // Notification,
     Pagination,
     Tooltip,
     Popup,
@@ -245,7 +245,7 @@ export default create({
     TimePicker,
     Scrollbar,
     Steps,
-    ConfirmPlugin,
+    // ConfirmPlugin,
     Progress,
     Badge,
     Tag,
@@ -261,7 +261,7 @@ export default create({
     Transfer,
     Spin,
     Drawer,
-    LoadingBar,
+    // LoadingBar,
     Time,
     Slider,
     Tree,

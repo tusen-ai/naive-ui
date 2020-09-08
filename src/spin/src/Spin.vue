@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="$scopedSlots.default"
+    v-if="$slots.default"
     class="n-spin-container"
     :class="{
       [`n-${syntheticTheme}-theme`]: syntheticTheme

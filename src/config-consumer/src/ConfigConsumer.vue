@@ -24,7 +24,7 @@ export default {
     }
   },
   render (h) {
-    const defaultSlot = this.$scopedSlots.default ? this.$scopedSlots.default({
+    const defaultSlot = this.$slots.default ? this.$slots.default({
       theme: this.syntheticTheme,
       language: this.NConfigProvider ? this.NConfigProvider.inheritedLanguage : null,
       namespace: this.NConfigProvider ? this.NConfigProvider.inheritedNamespace : null,

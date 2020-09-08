@@ -61,12 +61,12 @@ function create ({
     },
     install
   }
-  function install (Vue) {
-    if (installTargets.includes(Vue)) return
-    installTargets.push(Vue)
-    Vue.prototype.$naive = naive
+  function install (app) {
+    if (installTargets.includes(app)) return
+    installTargets.push(app)
+    app.config.globalProperties.$naive = naive
     for (const component of components) {
-      component.install(Vue, naive)
+      component.install(app, naive)
     }
     globalStyle.mount({
       target: 'naive-ui-global',

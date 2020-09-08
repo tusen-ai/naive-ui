@@ -15,7 +15,7 @@ function generateName (prefix, originalName) {
 }
 
 const Typography = {
-  install (Vue, naive) {
+  install (app, naive) {
     const prefix = naive.componentPrefix
     const H1 = header(1)
     const H2 = header(2)
@@ -23,20 +23,20 @@ const Typography = {
     const H4 = header(4)
     const H5 = header(5)
     const H6 = header(6)
-    Vue.component(generateName(prefix, H1.name), H1)
-    Vue.component(generateName(prefix, H2.name), H2)
-    Vue.component(generateName(prefix, H3.name), H3)
-    Vue.component(generateName(prefix, H4.name), H4)
-    Vue.component(generateName(prefix, H5.name), H5)
-    Vue.component(generateName(prefix, H6.name), H6)
-    Vue.component(generateName(prefix, A.name), A)
-    Vue.component(generateName(prefix, P.name), P)
-    Vue.component(generateName(prefix, Blockquote.name), Blockquote)
-    Vue.component(generateName(prefix, Hr.name), Hr)
-    Vue.component(generateName(prefix, Ul.name), Ul)
-    Vue.component(generateName(prefix, Ol.name), Ol)
-    Vue.component(generateName(prefix, Li.name), Li)
-    Vue.component(generateName(prefix, Text.name), Text)
+    app.component(generateName(prefix, H1.name), H1)
+    app.component(generateName(prefix, H2.name), H2)
+    app.component(generateName(prefix, H3.name), H3)
+    app.component(generateName(prefix, H4.name), H4)
+    app.component(generateName(prefix, H5.name), H5)
+    app.component(generateName(prefix, H6.name), H6)
+    app.component(generateName(prefix, A.name), A)
+    app.component(generateName(prefix, P.name), P)
+    app.component(generateName(prefix, Blockquote.name), Blockquote)
+    app.component(generateName(prefix, Hr.name), Hr)
+    app.component(generateName(prefix, Ul.name), Ul)
+    app.component(generateName(prefix, Ol.name), Ol)
+    app.component(generateName(prefix, Li.name), Li)
+    app.component(generateName(prefix, Text.name), Text)
   }
 }
 

@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'NUploadDragger',
+  name: 'UploadDragger',
   inject: {
     NUpload: {
       default: null

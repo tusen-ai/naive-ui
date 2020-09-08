@@ -44,7 +44,7 @@
         <div v-if="!vertical" class="n-step-splitor" />
       </div>
       <div
-        v-if="description !== null || $scopedSlots.default"
+        v-if="description !== null || $slots.default"
         class="n-step-content__description"
       >
         <slot>{{ description }}</slot>

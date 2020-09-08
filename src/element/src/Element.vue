@@ -21,7 +21,7 @@ export default {
     }
   },
   render (h) {
-    const scopedSlots = this.$scopedSlots
+    const scopedSlots = this.$slots
     return h(this.as, {
       class: {
         [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme

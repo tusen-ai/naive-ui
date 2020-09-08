@@ -1,4 +1,4 @@
-export default function installOsProperty (Vue) {
+export default function installOsProperty (app) {
   let osTheme = null
   // Mql means media query list
   let darkMql = null
@@ -29,10 +29,13 @@ export default function installOsProperty (Vue) {
       lightMql.addListener(handleLightMqlChange)
     }
   }
-  const os = Vue.observable({
+  // const os = Vue.observable({
+  //   theme: osTheme
+  // })
+  const os = {
     theme: osTheme
-  })
-  Vue.prototype.$NOs = os
+  }
+  app.config.globalProperties.$NOs = os
   return () => {
     if (window.matchMedia) {
       if (darkMql.removeEventListener) {

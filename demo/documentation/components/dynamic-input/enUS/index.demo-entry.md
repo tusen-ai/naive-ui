@@ -20,7 +20,7 @@ form
 ### Dynamic Input Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|preset|`'input' \| 'preset'`|`'input'`|The preset of `n-dynamic-input`, it work when `$scopedSlots.default` is not set.|
+|preset|`'input' \| 'preset'`|`'input'`|The preset of `n-dynamic-input`, it work when `$slots.default` is not set.|
 |value|`Array`|-|**required**|
 |max|`number`|`null`|Max number of items.|
 |key-field|`string`|`null`||

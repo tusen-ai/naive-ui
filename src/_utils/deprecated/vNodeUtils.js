@@ -22,7 +22,7 @@ function getDefaultSlotOf (componentInstance) {
 
 function getSlotOf (componentInstance, slotName) {
   if (componentInstance.$slots[slotName]) return componentInstance.$slots[slotName] || []
-  if (componentInstance.$scopedSlots[slotName]) return componentInstance.$scopedSlots[slotName]() || []
+  if (componentInstance.$slots[slotName]) return componentInstance.$slots[slotName]() || []
   return []
 }
 

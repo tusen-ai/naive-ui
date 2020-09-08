@@ -19,7 +19,7 @@
         {{ localizedDescription }}
       </slot>
     </div>
-    <div v-if="$scopedSlots.extra" class="n-empty__extra">
+    <div v-if="$slots.extra" class="n-empty__extra">
       <slot name="extra" />
     </div>
   </div>

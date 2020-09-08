@@ -6,7 +6,7 @@
       [`n-badge--${type}-type`]: true,
       [`n-badge--${color || type}-colored`]: true,
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
-      [`n-badge--as-is`]: !$scopedSlots.default
+      [`n-badge--as-is`]: !$slots.default
     }"
   >
     <slot />
