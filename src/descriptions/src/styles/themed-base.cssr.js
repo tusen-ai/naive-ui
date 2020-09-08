@@ -3,14 +3,14 @@ import { c, cTB, cB, cE, cM, insideModal } from '../../../_utils/cssr'
 export default c([
   ({ props }) => {
     const {
-      headerBackgroudColor,
+      headerColor,
       headerTextColor,
+      headerFontWeight,
       contentTextColor,
-      contentBackgroundColorDefault,
-      contentBackgroundColorModal,
+      contentColor,
+      contentColorModal,
       borderColor,
-      borderRadius,
-      strongFontWeight
+      borderRadius
     } = props.$local
     const {
       easeInOutCubicBezier
@@ -53,7 +53,7 @@ export default c([
               border-radius: ${borderRadius};
               overflow: hidden;
             `,
-            background: contentBackgroundColorDefault,
+            background: contentColor,
             border: `1px solid ${borderColor}`
           }, [
             cB('descriptions-table', [
@@ -63,15 +63,13 @@ export default c([
                     borderBottom: `1px solid ${borderColor}`
                   }),
                   cB('descriptions-table-header', {
-                    backgroundClip: 'padding-box',
                     borderBottom: `1px solid ${borderColor}`
                   })
                 ]),
                 cB('descriptions-table-header', {
-                  raw: `
-                    font-weight: 400;
-                  `,
-                  backgroundColor: headerBackgroudColor
+                  fontWeight: 400,
+                  backgroundClip: 'padding-box',
+                  backgroundColor: headerColor
                 }, [
                   c('&:not(:last-child)', {
                     borderRight: `1px solid ${borderColor}`
@@ -88,7 +86,7 @@ export default c([
         ]),
         cB('descriptions-header', {
           raw: `
-            font-weight: ${strongFontWeight};
+            font-weight: ${headerFontWeight};
             font-size: 18px;
             transition: color .3s ${easeInOutCubicBezier};
           `,
@@ -96,7 +94,9 @@ export default c([
         }),
         cB('descriptions-table-wrapper', {
           raw: `
-            transition: border-color .3s ${easeInOutCubicBezier};
+            transition:
+              background-color .3s ${easeInOutCubicBezier},
+              border-color .3s ${easeInOutCubicBezier};
           `
         }, [
           cB('descriptions-table', {
@@ -115,11 +115,14 @@ export default c([
             }, [
               cB('descriptions-table-header', {
                 raw: `
-                  font-weight: ${strongFontWeight};
+                  font-weight: ${headerFontWeight};
                   line-height: 1.75;
                   display: table-cell;
                   box-sizing: border-box;
-                  transition: color .3s ${easeInOutCubicBezier}, border-color .3s ${easeInOutCubicBezier};
+                  transition:
+                    color .3s ${easeInOutCubicBezier},
+                    background-color .3s ${easeInOutCubicBezier},
+                    border-color .3s ${easeInOutCubicBezier};
                 `,
                 color: headerTextColor
               }),
@@ -129,7 +132,10 @@ export default c([
                   line-height: 1.75;
                   display: table-cell;
                   box-sizing: border-box;
-                  transition: color .3s ${easeInOutCubicBezier}, background-color .3s ${easeInOutCubicBezier}, border-color .3s ${easeInOutCubicBezier};
+                  transition:
+                    color .3s ${easeInOutCubicBezier},
+                    background-color .3s ${easeInOutCubicBezier},
+                    border-color .3s ${easeInOutCubicBezier};
                   padding: 0 0 16px 0;  
                 `,
                 color: contentTextColor
@@ -144,7 +150,7 @@ export default c([
               ]),
               cE('label', {
                 raw: `
-                  font-weight: ${strongFontWeight};
+                  font-weight: ${headerFontWeight};
                   transition: color .3s ${easeInOutCubicBezier};
                   display: inline-block;
                   margin-right: 14px;
@@ -167,7 +173,7 @@ export default c([
         cTB('descriptions', [
           cM('bordered', [
             cB('descriptions-table-wrapper', {
-              background: contentBackgroundColorModal
+              background: contentColorModal
             })
           ])
         ])
