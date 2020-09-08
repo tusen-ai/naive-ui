@@ -278,7 +278,7 @@ export default {
       }, [
         h('transition', {
           props: {
-            name: 'n-popover-content-transition'
+            name: 'popover-content-transition'
           },
           on: {
             enter: () => {

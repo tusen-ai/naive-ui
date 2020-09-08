@@ -1,72 +1,6 @@
-import { c, cB, cM } from '../../../_utils/cssr'
+import { c, cTB, cB, cM } from '../../../_utils/cssr'
 import depx from '../../../_utils/css/depx'
 import pxfy from '../../../_utils/css/pxfy'
-
-function popoverContentTransition (pallete, easeOutCubicBezier, easeInCubicBezier) {
-  return [
-    c('&&-transition-enter-to, &&-transition-leave', {
-      raw: `
-        transform: ${pallete.transformDebounceScale};
-        opacity: 1;
-      `
-    }),
-    c('&&-transition-enter, &&-transition-leave-to', {
-      raw: `
-        opacity: 0;
-        transform: scale(.85);
-      `
-    }),
-    c('&&-transition-enter-active', {
-      raw: `
-        transition: opacity .15s ${easeOutCubicBezier}, transform .15s ${easeOutCubicBezier};
-      `
-    }),
-    c('&&-transition-leave-active', {
-      raw: `
-        transition: opacity .15s ${easeInCubicBezier}, transform .15s ${easeInCubicBezier};
-      `
-    })
-  ]
-}
-function noArrowNPlaceMixin (direction) {
-  return c(`&[n-placement$="${direction}"]`, {
-    raw: `
-      margin-bottom: 6px;
-    `
-  })
-}
-const oppsiteDirection = {
-  top: 'bottom',
-  bottom: 'top',
-  left: 'right',
-  right: 'left'
-}
-function nPlacementMixin (pallete, direction, popoverArrowContent) {
-  const finalDirection = direction.split('-')[0]
-  return c(`&[n-placement$="${direction}"]`, {
-    raw: `
-      margin-${oppsiteDirection[finalDirection]}: 10px;
-    `
-  }, [
-    cB('popover-arrow-wrapper', {
-      raw: `
-        right: 0;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        ${finalDirection}: 100%;
-        ${oppsiteDirection[finalDirection]}: auto;
-        height: ${pxfy(depx(pallete.arrowWidth) * 2)};
-      `
-    }, [
-      cB('popover-arrow', {
-        raw: `
-          ${popoverArrowContent}
-        `
-      })
-    ])
-  ])
-}
 
 export default c([
   ({ props }) => {
@@ -78,15 +12,13 @@ export default c([
       borderRadius,
       arrowWidth
     } = props.$local
-
     const {
       easeInOutCubicBezier,
       easeInCubicBezier,
       easeOutCubicBezier
     } = props.$base
-    const pallete = props.$local
     return [
-      cB('popover-content', {
+      cTB('popover-content', {
         raw: `
           transition:
             background-color .3s ${easeInOutCubicBezier},
@@ -98,9 +30,14 @@ export default c([
           color: ${textColor};
         `
       }, [
-        popoverContentTransition(pallete, easeOutCubicBezier, easeInCubicBezier),
+        contentTransition(
+          transformDebounceScale,
+          easeOutCubicBezier,
+          easeInCubicBezier
+        ),
         cM('styled', {
           raw: `
+            background-color: ${color};
             border-radius: ${borderRadius};
             padding: 8px 14px;
           `
@@ -126,12 +63,13 @@ export default c([
               display: block;
               width: ${pxfy(depx(arrowWidth) * 2)};
               height: ${pxfy(depx(arrowWidth) * 2)};
-              box-shadow: ${boxShadow};
+              box-shadow: 0 0 8px 0 rgba(0, 0, 0, .12);
               transform: rotate(45deg);
+              background-color: ${color};
             `
           })
         ]),
-        cM('no-arrow', [
+        cM('no-arrow',
           [ 'top',
             'top-start',
             'top-end',
@@ -144,90 +82,178 @@ export default c([
             'right-start',
             'right',
             'right-end'
-          ].map(direction => noArrowNPlaceMixin(direction))
-        ]),
-        nPlacementMixin(pallete, 'top-start',
-          `
+          ].map(direction => noArrowStyle(direction))
+        ),
+        placementStyle(arrowWidth, 'top-start', `
           top: -${arrowWidth};
           left: 10px;
         `),
-        nPlacementMixin(pallete, 'top',
-          `
+        placementStyle(arrowWidth, 'top', `
           top: -${arrowWidth};
           transform: translateX(-${arrowWidth}) rotate(45deg) ;
           left: 50%;
         `),
-        nPlacementMixin(pallete, 'top-end',
-          `
+        placementStyle(arrowWidth, 'top-end', `
           top: -${arrowWidth};
           right: 10px;
         `),
-        nPlacementMixin(pallete, 'bottom-start',
-          `
+        placementStyle(arrowWidth, 'bottom-start', `
           bottom: -${arrowWidth};
           left: 10px;
         `),
-        nPlacementMixin(pallete, 'bottom',
-          `
+        placementStyle(arrowWidth, 'bottom', `
           bottom: -${arrowWidth};
           transform: translateX(-${arrowWidth}) rotate(45deg) ;
           left: 50%;
         `),
-        nPlacementMixin(pallete, 'bottom-end',
-          `
+        placementStyle(arrowWidth, 'bottom-end', `
           bottom: -${arrowWidth};
           right: 10px;
         `),
-        nPlacementMixin(pallete, 'left-start',
-          `
+        placementStyle(arrowWidth, 'left-start', `
           left: -${arrowWidth};
           top: 10px;
         `),
-        nPlacementMixin(pallete, 'left',
-          `
+        placementStyle(arrowWidth, 'left', `
           left: -${arrowWidth};
           transform: translateY(-${arrowWidth}) rotate(45deg) ;
           top: 50%;
         `),
-        nPlacementMixin(pallete, 'left-end',
-          `
+        placementStyle(arrowWidth, 'left-end', `
           left: -${arrowWidth};
           bottom: 10px;
         `),
-        nPlacementMixin(pallete, 'right-start',
-          `
+        placementStyle(arrowWidth, 'right-start', `
           right: -${arrowWidth};
           top: 10px;
         `),
-        nPlacementMixin(pallete, 'right',
-          `
+        placementStyle(arrowWidth, 'right', `
           right: -${arrowWidth};
           transform: translateY(-${arrowWidth}) rotate(45deg) ;
           top: 50%;
         `),
-        nPlacementMixin(pallete, 'right-end',
-          `
+        placementStyle(arrowWidth, 'right-end', `
           right: -${arrowWidth};
           bottom: 10px;
         `),
-        cM('styled', {
-          raw: `
-          background-color: ${color};
-          `
-        }),
-        cB('popover-arrow-wrapper', [
-          cB('popover-arrow', {
-            raw: `
-              background-color: ${color};
-            `
-          })
-        ]),
         cM('shadow', {
           raw: `
             box-shadow: ${boxShadow};
           `
         })
-      ])
+      ]),
+      tooltipStyle(props.$local)
     ]
   }
 ])
+
+function tooltipStyle (pallete) {
+  const {
+    borderRadius,
+    boxShadow,
+    tooltipColor,
+    tooltipTextColor
+  } = pallete
+  return cB('tooltip', [
+    cTB('tooltip-content', {
+      raw: `
+        padding: 8px 14px;
+        border-radius: ${borderRadius};
+        box-shadow: ${boxShadow};
+        background-color: ${tooltipColor};
+        color: ${tooltipTextColor};
+      `
+    }, [
+      cB('popover-arrow-wrapper', [
+        cB('popover-arrow', {
+          backgroundColor: tooltipColor
+        })
+      ])
+    ])
+  ])
+}
+
+const oppositePlacement = {
+  top: 'bottom',
+  bottom: 'top',
+  left: 'right',
+  right: 'left'
+}
+
+function placementStyle (
+  arrowWidth,
+  placement,
+  arrowStyleLiteral
+) {
+  const arrowWrapperSpace = pxfy(depx(arrowWidth) * 2)
+  const approximatePlacement = placement.split('-')[0]
+  const sizeStyle = ['top', 'bottom'].includes(approximatePlacement) ? {
+    height: arrowWrapperSpace
+  } : { width: arrowWrapperSpace }
+  return c(`&[n-placement$="${placement}"]`, {
+    raw: `
+      margin-${oppositePlacement[approximatePlacement]}: 10px;
+    `
+  }, [
+    cB('popover-arrow-wrapper', {
+      raw: `
+        right: 0;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        ${approximatePlacement}: 100%;
+        ${oppositePlacement[approximatePlacement]}: auto;
+      `,
+      ...sizeStyle
+    }, [
+      cB('popover-arrow', {
+        raw: arrowStyleLiteral
+      })
+    ])
+  ])
+}
+
+function noArrowStyle (placement) {
+  const approximatePlacement = placement.split('-')[0]
+  return c(`&[n-placement$="${placement}"]`, {
+    raw: `
+      margin-${approximatePlacement}: 6px;
+      margin-${oppositePlacement[approximatePlacement]}: 6px;
+    `
+  })
+}
+
+function contentTransition (
+  transformDebounceScale,
+  easeOutCubicBezier,
+  easeInCubicBezier
+) {
+  return [
+    c('&.popover-content-transition-enter-to, &.popover-content-transition-leave', {
+      raw: `
+        transform: ${transformDebounceScale};
+        opacity: 1;
+      `
+    }),
+    c('&.popover-content-transition-enter, &.popover-content-transition-leave-to', {
+      raw: `
+        opacity: 0;
+        transform: scale(.85);
+      `
+    }),
+    c('&.popover-content-transition-enter-active', {
+      raw: `
+        transition:
+          opacity .15s ${easeOutCubicBezier},
+          transform .15s ${easeOutCubicBezier};
+      `
+    }),
+    c('&.popover-content-transition-leave-active', {
+      raw: `
+        transition:
+          opacity .15s ${easeInCubicBezier},
+          transform .15s ${easeInCubicBezier};
+      `
+    })
+  ]
+}

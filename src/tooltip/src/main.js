@@ -4,10 +4,14 @@
 import NPopover from '../../popover'
 
 export default {
-  name: 'NTooltip',
+  name: 'Tooltip',
   functional: true,
   props: {
-    ...NPopover.props
+    ...NPopover.props,
+    showArrow: {
+      type: Boolean,
+      default: false
+    }
   },
   render (h, context) {
     const slots = context.scopedSlots
