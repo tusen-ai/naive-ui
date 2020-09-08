@@ -1,11 +1,11 @@
-import { c, cB, cM } from '../../../_utils/cssr'
+import { c, cTB, cB, cM, createKey } from '../../../_utils/cssr'
 
 export default c([
   ({ props }) => {
     const size = props.$instance.size
-    const padding = props.$local.padding[size]
-    const borderedPadding = props.$local.borderedPadding[size]
-    return cB('descriptions', [
+    const padding = props.$local[createKey('padding', size)]
+    const borderedPadding = props.$local[createKey('paddingBordered', size)]
+    return cTB('descriptions', [
       cM(`${size}-size`, [
         cB('descriptions-header', {
           marginBottom: padding

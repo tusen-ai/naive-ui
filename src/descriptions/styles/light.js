@@ -20,14 +20,14 @@ export default create({
     } = base
     return {
       ...commonVariables,
-      headerBackgroudColor: composite(cardBackgroundColor, tableHeaderBackgroundOverlayColor),
+      headerColor: composite(cardBackgroundColor, tableHeaderBackgroundOverlayColor),
       headerTextColor: primaryTextOverlayColor,
+      headerFontWeight: strongFontWeight,
       contentTextColor: secondaryTextOverlayColor,
-      contentBackgroundColorDefault: cardBackgroundColor,
-      contentBackgroundColorModal: modalBackgroundColor,
+      contentColor: cardBackgroundColor,
+      contentColorModal: modalBackgroundColor,
       borderColor: dividerOverlayColor,
-      borderRadius: borderRadius,
-      strongFontWeight: strongFontWeight
+      borderRadius: borderRadius
     }
   }
 })
