@@ -1,5 +1,5 @@
 <script>
-import NPopover from '../../Popover'
+import NPopover from '../../popover'
 import PopconfirmPanel from './PopconfirmPanel'
 
 export default {

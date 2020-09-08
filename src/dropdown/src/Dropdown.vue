@@ -1,5 +1,5 @@
 <script>
-import NPopover from '../../Popover'
+import NPopover from '../../popover'
 import NDropdownMenu from './DropdownMenu'
 import emptyFunction from '../../_utils/function/empty'
 
