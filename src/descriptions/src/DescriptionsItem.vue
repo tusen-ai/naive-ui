@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'NDescriptionsItem',
+  name: 'DescriptionsItem',
   props: {
     label: {
       type: String,

@@ -1,19 +1,25 @@
 <script>
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 function isDescriptionsItem (vNode) {
   return (
     vNode.componentOptions &&
     vNode.componentOptions.Ctor &&
     vNode.componentOptions.Ctor.extendOptions &&
-    vNode.componentOptions.Ctor.extendOptions.name === 'NDescriptionsItem'
+    vNode.componentOptions.Ctor.extendOptions.name === 'DescriptionsItem'
   )
 }
 
 export default {
-  name: 'NDescriptions',
-  mixins: [withapp, themeable],
+  name: 'Descriptions',
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   props: {
     title: {
       type: String,

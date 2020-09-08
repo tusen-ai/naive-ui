@@ -18,7 +18,7 @@ import ConfigProvider from './config-provider'
 import ConfirmPlugin from './confirm'
 import DataTable from './data-table'
 import DatePicker from './date-picker'
-import Descriptions from './Descriptions'
+import Descriptions from './descriptions'
 import Divider from './divider'
 import Drawer from './drawer'
 import Dropdown from './dropdown'
@@ -192,6 +192,8 @@ import tableLightStyle from './table/styles/light'
 import tableDarkStyle from './table/styles/dark'
 import popoverLightStyle from './popover/styles/light'
 import popoverDarkStyle from './popover/styles/dark'
+import descriptionsLightStyle from './descriptions/styles/light'
+import descriptionsDarkStyle from './descriptions/styles/dark'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -413,6 +415,8 @@ export default create({
     tableDarkStyle,
     popoverLightStyle,
     popoverDarkStyle,
+    descriptionsLightStyle,
+    descriptionsDarkStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle
