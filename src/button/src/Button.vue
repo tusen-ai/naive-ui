@@ -115,6 +115,9 @@ export default {
       default: null
     }
   },
+  emits: [
+    'click'
+  ],
   mixins: [
     withapp,
     themeable,
