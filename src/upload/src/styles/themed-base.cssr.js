@@ -9,16 +9,16 @@ export default c([
       borderRadius
     } = props.$base
     const {
-      uploadDraggerBackgroundColor,
-      uploadDraggerBorderColorHover,
-      uploadFileItemBackgroundColorHover,
-      uploadFileItemBackgroundColorErrorHover,
-      uploadInfoTextColorError,
-      uploadInfoTextColorSuccess,
-      uploadInfoTextColor,
-      uploadInfoIconColor,
-      uploadDisabledOpacity,
-      uploadDraggerBorderColor
+      draggerColor,
+      draggerBorderColorHover,
+      itemColorHover,
+      itemColorErrorHover,
+      itemTextColorError,
+      itemTextColorSuccess,
+      itemTextColor,
+      itemIconColor,
+      itemDisabledOpacity,
+      draggerBorderColor
     } = props.$local
     const iconSwitchTransition = createIconSwitchTransition()
 
@@ -54,13 +54,13 @@ export default c([
           transition:
             border-color .3s ${easeInOutCubicBezier},
             background-color .3s ${easeInOutCubicBezier};
-          background-color: ${uploadDraggerBackgroundColor};
-          border: 1px dashed ${uploadDraggerBorderColor};
+          background-color: ${draggerColor};
+          border: 1px dashed ${draggerBorderColor};
         `
       }, [
         c('&:hover', {
           raw: `
-            border-color:${uploadDraggerBorderColorHover};
+            border-color:${draggerBorderColorHover};
           `
         })
       ]),
@@ -94,7 +94,7 @@ export default c([
           ]),
           c('&:hover', {
             raw: `
-              background-color: ${uploadFileItemBackgroundColorHover};
+              background-color: ${itemColorHover};
             `
           }, [
             cB('upload-file-info', [
@@ -108,12 +108,12 @@ export default c([
           cM('error-status', [
             c('&:hover', {
               raw: `
-                background-color: ${uploadFileItemBackgroundColorErrorHover};
+                background-color: ${itemColorErrorHover};
               `
             }),
             cB('upload-file-info', [
               cE('name', {
-                raw: `color: ${uploadInfoTextColorError}`
+                raw: `color: ${itemTextColorError}`
               })
             ])
           ]),
@@ -126,8 +126,8 @@ export default c([
               cE('name', {
                 raw: `
                   text-decoration: underline;
-                  color: ${uploadInfoTextColorSuccess};
-                  text-decoration-color: ${uploadInfoTextColorSuccess};
+                  color: ${itemTextColorSuccess};
+                  text-decoration-color: ${itemTextColorSuccess};
                 `
               })
             ])
@@ -173,7 +173,7 @@ export default c([
                 transition:
                   color .3s ${easeInOutCubicBezier},
                   text-decoration-color .3s ${easeInOutCubicBezier};
-                color: ${uploadInfoTextColor};    
+                color: ${itemTextColor};    
               `
             }, [
               cB('icon', {
@@ -181,8 +181,8 @@ export default c([
                   font-size: 18px;
                   margin-right: 2px;
                   vertical-align: middle;
-                  fill: ${uploadInfoIconColor};
-                  stroke: ${uploadInfoIconColor};
+                  fill: ${itemIconColor};
+                  stroke: ${itemIconColor};
                 `
               })
             ])
@@ -191,7 +191,7 @@ export default c([
       ]),
       cM('disabled', {
         raw: `
-          opacity: ${uploadDisabledOpacity}
+          opacity: ${itemDisabledOpacity}
         `
       }, [
         cE('activator', {
@@ -213,7 +213,7 @@ export default c([
       cM('drag-over', [
         cB('upload-dragger', {
           raw: `
-            border-color: ${uploadDraggerBorderColorHover};
+            border-color: ${draggerBorderColorHover};
           `
         })
       ])

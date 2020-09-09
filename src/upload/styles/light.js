@@ -17,20 +17,20 @@ export default create({
     } = derived
 
     return {
-      uploadDraggerBackgroundColor: actionBackgroundOverlayColor,
-      uploadDraggerBorderColor: borderColor,
-      uploadDraggerBorderColorHover: primaryColor,
-      uploadFileItemBackgroundColorHover: changeColor(primaryColor, {
+      draggerColor: actionBackgroundOverlayColor,
+      draggerBorderColor: borderColor,
+      draggerBorderColorHover: primaryColor,
+      itemColorHover: changeColor(primaryColor, {
         alpha: 0.1
       }),
-      uploadFileItemBackgroundColorErrorHover: changeColor(errorColor, {
+      itemColorErrorHover: changeColor(errorColor, {
         alpha: 0.1
       }),
-      uploadInfoTextColor: secondaryTextColor,
-      uploadInfoTextColorError: errorColor,
-      uploadInfoTextColorSuccess: successColor,
-      uploadInfoIconColor: iconOverlayColor,
-      uploadDisabledOpacity: disabledOpacity
+      itemTextColor: secondaryTextColor,
+      itemTextColorError: errorColor,
+      itemTextColorSuccess: successColor,
+      itemIconColor: iconOverlayColor,
+      itemDisabledOpacity: disabledOpacity
     }
   }
 })
