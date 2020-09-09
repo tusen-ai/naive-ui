@@ -29,7 +29,9 @@ export default c([
       pointer-events: none;
       transform: translateZ(0);
     `
-  }, cB('positioning-content', {
-    pointerEvents: 'all'
-  }))
+  }, [
+    cB('positioning-content', {
+      pointerEvents: 'all'
+    })
+  ])
 ])
