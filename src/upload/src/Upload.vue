@@ -41,6 +41,8 @@
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import NUploadFile from './UploadFile'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 function createId () {
   return Math.random()
@@ -167,7 +169,7 @@ export default {
       NUpload: this
     }
   },
-  mixins: [ withapp, themeable ],
+  mixins: [ withapp, themeable, usecssr(styles) ],
   props: {
     name: {
       type: String,
@@ -302,8 +304,8 @@ export default {
       this.dragOver = false
     },
     handleActivatorDrop (e) {
-      if (!this.draggerInside || this.disabled) return
       e.preventDefault()
+      if (!this.draggerInside || this.disabled) return
       const dataTransfer = e.dataTransfer
       const files = dataTransfer.files || []
       this.handleFileAddition(files)

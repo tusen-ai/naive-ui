@@ -67,7 +67,7 @@ import Tooltip from './tooltip'
 import Transfer from './transfer'
 import Tree from './tree'
 import Typography from './typography'
-import Upload from './Upload'
+import Upload from './upload'
 import zhCN from './locale/zhCN'
 import enUS from './locale/enUS'
 
@@ -192,6 +192,8 @@ import tableLightStyle from './table/styles/light'
 import tableDarkStyle from './table/styles/dark'
 import popoverLightStyle from './popover/styles/light'
 import popoverDarkStyle from './popover/styles/dark'
+import uploadLightStyle from './upload/styles/light'
+import uploadDarkStyle from './upload/styles/dark'
 import descriptionsLightStyle from './descriptions/styles/light'
 import descriptionsDarkStyle from './descriptions/styles/dark'
 
@@ -415,6 +417,8 @@ export default create({
     tableDarkStyle,
     popoverLightStyle,
     popoverDarkStyle,
+    uploadLightStyle,
+    uploadDarkStyle,
     descriptionsLightStyle,
     descriptionsDarkStyle,
     // Can be remove after refactoring

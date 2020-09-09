@@ -1,173 +1,181 @@
-@import 'mixins/mixins.scss';
+// @import 'mixins/mixins.scss';
 
-@include themes-mixin {
-  @include b(upload) {
-    @include once {
-      @include e(file-input) {
-        display: block;
-        width: 0;
-        height: 0;
-        opacity: 0;
-      }
-      @include e(activator) {
-        display: inline-block;
-      }
-      @include m(dragger-inside) {
-        @include e(activator) {
-          display: block;
-        }
-      }
-    }
-    @include b(upload-dragger) {
-      @include once {
-        cursor: pointer;
-        box-sizing: border-box;
-        width: 100%;
-        text-align: center;
-        border-radius: $--n-upload-border-radius;
-        padding: 24px;
-        transition:
-          border-color .3s $--n-ease-in-out-cubic-bezier,
-          background-color .3s $--n-ease-in-out-cubic-bezier;
-      }
-      background-color: map-get($--upload-dragger-background-color, 'default');
-      border: 1px dashed map-get($--upload-dragger-border-color, 'default');
-      &:hover {
-        border-color: map-get($--upload-dragger-border-color, 'hover');
-      }
-    }
-    @include b(upload-file-list) {
-      @include once {
-        margin-top: 8px;
-        line-height: 1.75;
-      }
-      @include b(upload-file) {
-        @include once {
-          @include fade-in-height-expand-transition;
-          display: block;
-          box-sizing: border-box;
-          cursor: default;
-          padding: 0px 12px 0 6px;
-          transition: background-color .3s $--n-ease-in-out-cubic-bezier;
-          border-radius: $--n-upload-border-radius;
-          @include b(progress) {
-            @include fade-in-height-expand-transition($fold-padding: true);
-            box-sizing: border-box;
-            padding-bottom: 6px;
-            margin-bottom: 6px;
-          }
-        }
-        &:hover {
-          background-color: map-get($--upload-file-item-background-color, 'hover');
-          @include once {
-            @include b(upload-file-info) {
-              @include e(action) {
-                opacity: 1;
-              }
-            }
-          }
-        }
-        @include m(error-status) {
-          &:hover {
-            background-color: map-get($--upload-file-item-background-color, 'error-hover');
-          }
-          @include b(upload-file-info) {
-            @include e(name) {
-              color: map-get($--upload-info-text-color, 'error');
-            }
-          }
-        }
-        @include m(success-status) {
-          @include b(upload-file-info) {
-            @include e(name) {
-              color: map-get($--upload-info-text-color, 'success');
-            }
-          }
-        }
-        @include m(with-url) {
-          @include once {
-            cursor: pointer;
-          }
-          @include b(upload-file-info) {
-            @include e(name) {
-              @include once {
-                text-decoration: underline;
-              }
-              color: map-get($--upload-info-text-color, 'success');
-              text-decoration-color: map-get($--upload-info-text-color, 'success');
-            }
-          }
-        }
-        @include b(upload-file-info) {
-          @include once {
-            position: relative;
-            padding-top: 6px;
-            padding-bottom: 6px;
-            @include e(action) {
-              padding-top: inherit;
-              padding-bottom: inherit;
-              position: absolute;
-              right: 0;
-              top: 0;
-              bottom: 0;
-              width: 80px;
-              display: flex;
-              align-items: center;
-              transition: opacity .2s $--n-ease-in-out-cubic-bezier;
-              flex-direction: row-reverse;
-              opacity: 0;
-              @include b(button) {
-                &:not(:first-child) {
-                  margin-right: 8px;
-                }
-                @include b(icon) {
-                  svg {
-                    @include icon-switch-transition;
-                  }
-                }
-              }
-            }
-          }
-          @include e(name) {
-            @include once {
-              text-overflow: ellipsis;
-              overflow: hidden;
-              text-decoration: underline;
-              text-decoration-color: transparent;
-              font-size: 14px;
-              transition:
-                color .3s $--n-ease-in-out-cubic-bezier,
-                text-decoration-color .3s $--n-ease-in-out-cubic-bezier;
-            }
-            @include b(icon) {
-              @include once {
-                font-size: 18px;
-                margin-right: 2px;
-                vertical-align: middle;
-              }
-              fill: map-get($--upload-info-icon-color, 'default');
-              stroke: map-get($--upload-info-icon-color, 'default');
-            }
-            color: map-get($--upload-info-text-color, 'default');
-          }
-        }
-      }
-    }
-    @include m(disabled) {
-      opacity: $--upload-disabled-opacity;
-      @include once {
-        @include e(activator) {
-          cursor: not-allowed;
-        }
-        @include b(upload-file-list)  {
-          cursor: not-allowed;
-        }
-      }
-    }
-    @include m(drag-over) {
-      @include b(upload-dragger) {
-        border-color: map-get($--upload-dragger-border-color, 'hover');
-      }
-    }
-  }
-}
+// @include themes-mixin {
+//   @include b(upload) {
+//     @include once {
+//       @include e(file-input) {
+//         display: block;
+//         width: 0;
+//         height: 0;
+//         opacity: 0;
+//       }
+//       @include e(activator) {
+//         display: inline-block;
+//       }
+//       @include m(dragger-inside) {
+//         @include e(activator) {
+//           display: block;
+//         }
+//       }
+//     }
+//     @include b(upload-dragger) {
+//       @include once {
+//         cursor: pointer;
+//         box-sizing: border-box;
+//         width: 100%;
+//         text-align: center;
+//         border-radius: $--n-upload-border-radius;
+//         padding: 24px;
+//         transition:
+//           border-color .3s $--n-ease-in-out-cubic-bezier,
+//           background-color .3s $--n-ease-in-out-cubic-bezier;
+//       }
+//       // ?
+//       background-color: map-get($--upload-dragger-background-color, 'default');
+//       border: 1px dashed map-get($--upload-dragger-border-color, 'default');
+//       &:hover {
+//         border-color: map-get($--upload-dragger-border-color, 'hover');
+//       }
+//       // ?
+//     }
+//     @include b(upload-file-list) {
+//       @include once {
+//         margin-top: 8px;
+//         line-height: 1.75;
+//       }
+//       @include b(upload-file) {
+//         @include once {
+//           // ?
+//           @include fade-in-height-expand-transition;
+//           display: block;
+//           box-sizing: border-box;
+//           cursor: default;
+//           padding: 0px 12px 0 6px;
+//           transition: background-color .3s $--n-ease-in-out-cubic-bezier;
+//           border-radius: $--n-upload-border-radius;
+//           @include b(progress) {
+//             // ?
+//             @include fade-in-height-expand-transition($fold-padding: true);
+//             box-sizing: border-box;
+//             padding-bottom: 6px;
+//             margin-bottom: 6px;
+//           }
+//         }
+//         &:hover {
+//           // ?
+//           background-color: map-get($--upload-file-item-background-color, 'hover');
+//           @include once {
+//             @include b(upload-file-info) {
+//               @include e(action) {
+//                 opacity: 1;
+//               }
+//             }
+//           }
+//         }
+//         // ?
+//         @include m(error-status) {
+//           &:hover {
+//             background-color: map-get($--upload-file-item-background-color, 'error-hover');
+//           }
+//           @include b(upload-file-info) {
+//             @include e(name) {
+//               color: map-get($--upload-info-text-color, 'error');
+//             }
+//           }
+//         }
+//         @include m(success-status) {
+//           @include b(upload-file-info) {
+//             @include e(name) {
+//               color: map-get($--upload-info-text-color, 'success');
+//             }
+//           }
+//         }
+//         // ?
+//         @include m(with-url) {
+//           @include once {
+//             cursor: pointer;
+//           }
+//           @include b(upload-file-info) {
+//             @include e(name) {
+//               @include once {
+//                 text-decoration: underline;
+//               }
+//               color: map-get($--upload-info-text-color, 'success');
+//               text-decoration-color: map-get($--upload-info-text-color, 'success');
+//             }
+//           }
+//         }
+//         @include b(upload-file-info) {
+//           @include once {
+//             position: relative;
+//             padding-top: 6px;
+//             padding-bottom: 6px;
+//             @include e(action) {
+//               padding-top: inherit;
+//               padding-bottom: inherit;
+//               position: absolute;
+//               right: 0;
+//               top: 0;
+//               bottom: 0;
+//               width: 80px;
+//               display: flex;
+//               align-items: center;
+//               transition: opacity .2s $--n-ease-in-out-cubic-bezier;
+//               flex-direction: row-reverse;
+//               opacity: 0;
+//               @include b(button) {
+//                 // ?
+//                 &:not(:first-child) {
+//                   margin-right: 8px;
+//                 }
+//                 @include b(icon) {
+//                   svg {
+//                     @include icon-switch-transition;
+//                   }
+//                 }
+//               }
+//             }
+//           }
+//           @include e(name) {
+//             @include once {
+//               text-overflow: ellipsis;
+//               overflow: hidden;
+//               text-decoration: underline;
+//               text-decoration-color: transparent;
+//               font-size: 14px;
+//               transition:
+//                 color .3s $--n-ease-in-out-cubic-bezier,
+//                 text-decoration-color .3s $--n-ease-in-out-cubic-bezier;
+//             }
+//             @include b(icon) {
+//               @include once {
+//                 font-size: 18px;
+//                 margin-right: 2px;
+//                 vertical-align: middle;
+//               }
+//               fill: map-get($--upload-info-icon-color, 'default');
+//               stroke: map-get($--upload-info-icon-color, 'default');
+//             }
+//             color: map-get($--upload-info-text-color, 'default');
+//           }
+//         }
+//       }
+//     }
+//     @include m(disabled) {
+//       opacity: $--upload-disabled-opacity;
+//       @include once {
+//         @include e(activator) {
+//           cursor: not-allowed;
+//         }
+//         @include b(upload-file-list)  {
+//           cursor: not-allowed;
+//         }
+//       }
+//     }
+//     @include m(drag-over) {
+//       @include b(upload-dragger) {
+//         border-color: map-get($--upload-dragger-border-color, 'hover');
+//       }
+//     }
+//   }
+// }
