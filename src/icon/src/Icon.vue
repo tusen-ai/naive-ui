@@ -1,15 +1,20 @@
 <script>
+import { h } from 'vue'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import formatLength from '../../_utils/css/formatLength'
-import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles/index'
+import formatLength from '../../_utils/css/formatLength'
+import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
 
 export default {
-  name: 'Icon',
   __NAIVE_ICON__: true,
-  mixins: [ withapp, themeable, usecssr(styles) ],
+  name: 'Icon',
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   props: {
     size: {
       type: [Number, String],
@@ -39,24 +44,24 @@ export default {
       return style
     }
   },
-  render (h) {
+  render () {
     const parent = this.$parent
     if (parent && parent.$options.__NAIVE_ICON__) return getDefaultSlot(this)
     else {
       const syntheticTheme = this.syntheticTheme
       const depth = this.depth
       return h('i', {
-        staticClass: 'n-icon',
+        ...this.$attrs,
         class: {
+          'n-icon': true,
           [`n-${syntheticTheme}-theme`]: syntheticTheme,
           [`n-icon--${depth}-depth`]: depth
         },
         style: {
           ...this.styles,
           ...this.syntheticStyle
-        },
-        on: Object.assign({}, this.$listeners)
-      }, getDefaultSlot(this))
+        }
+      }, this.$slots)
     }
   }
 }
