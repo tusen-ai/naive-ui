@@ -47,7 +47,8 @@ const appendDebugDemos = (item, mode) => {
 }
 
 export default function (instance) {
-  const { lang, theme } = instance
+  // TODO fix
+  const { lang = 'zh-CN', theme = 'light' } = {}
   if (lang === 'zh-CN') {
     return [
       {

@@ -11,13 +11,13 @@
       :handle-input="handleInput"
       :handle-focus="handleFocus"
       :handle-blur="handleBlur"
-      :value="value"
+      :value="modelValue"
       :theme="syntheticTheme"
     >
       <n-input
         ref="activator"
         :theme="syntheticTheme"
-        :value="value"
+        :model-value="modelValue"
         :placeholder="placeholder"
         :size="syntheticSize"
         @focus="canBeActivated = true"
@@ -44,7 +44,7 @@
             auto-pending-first-option
             class="n-auto-complete-menu"
             :theme="syntheticTheme"
-            :pattern="value"
+            :pattern="modelValue"
             :options="selectOptions"
             :multiple="false"
             :size="syntheticSize"
@@ -97,7 +97,7 @@ export default {
       type: String,
       default: null
     },
-    value: {
+    modelValue: {
       type: String,
       default: null
     },
@@ -144,7 +144,7 @@ export default {
   },
   computed: {
     active () {
-      return !!this.value && this.canBeActivated && !!this.selectOptions.length
+      return !!this.modelValue && this.canBeActivated && !!this.selectOptions.length
     },
     selectOptions () {
       return mapAutoCompleteOptionsToSelectOptions(this.options)
@@ -181,9 +181,9 @@ export default {
     select (option) {
       if (option) {
         if (this.clearAfterSelect) {
-          this.$emit('input', null)
+          this.$emit('update:modelValue', null)
         } else {
-          this.$emit('input', option.label)
+          this.$emit('update:modelValue', option.label)
         }
         this.$emit('select', option.value)
         this.canBeActivated = false
@@ -203,7 +203,7 @@ export default {
       this.canBeActivated = false
     },
     handleInput (value) {
-      this.$emit('input', value)
+      this.$emit('update:modelValue', value)
       this.canBeActivated = true
     },
     handleToggleOption (option) {

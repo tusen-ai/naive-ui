@@ -13,7 +13,7 @@
       'n-text--underline': underline,
       [`n-text--${depth}-depth`]: depth
     }"
-    v-on="$listeners"
+    v-bind="$attrs"
   ><template v-if="!$props.delete"><slot /></template><del v-else><slot /></del></code>
   <del
     v-else-if="$props.delete"
@@ -29,6 +29,7 @@
       'n-text--underline': underline,
       [`n-text--${depth}-depth`]: depth
     }"
+    v-bind="$attrs"
   ><slot /></del>
   <component
     :is="as || 'span'"
@@ -45,6 +46,7 @@
       'n-text--underline': underline,
       [`n-text--${depth}-depth`]: depth
     }"
+    v-bind="$attrs"
   >
     <slot />
   </component>

@@ -1,4 +1,6 @@
 <script>
+import { h } from 'vue'
+
 export default {
   name: 'ComponentDemos',
   props: {
@@ -7,7 +9,7 @@ export default {
       default: false
     }
   },
-  render (h) {
+  render () {
     const defaultSlot = (this.$slots.default && this.$slots.default()) || []
     // const anchorSlot = (this.$slots.anchor && this.$slots.anchor()) || []
     // const anchor = [h('div', {

@@ -7,7 +7,7 @@
     }"
   >
     <template v-if="renderContentAsPopover">
-      <n-tooltip
+      <!-- <n-tooltip
         :placement="menuItemPopoverPlacement"
         :disabled="rootMenuIsHorizontal || !rootMenuCollapsed"
       >
@@ -31,7 +31,7 @@
           </n-menu-item-content>
         </template>
         {{ title }}
-      </n-tooltip>
+      </n-tooltip> -->
     </template>
     <n-menu-item-content
       v-else

@@ -39,7 +39,7 @@
             :relative-url="relativeUrl"
           />
         </template>
-        {{ $t('editOnGithub') }}
+        {{ ('editOnGithub') }}
       </n-tooltip>
       <n-tooltip
         :delay="300"
@@ -60,7 +60,7 @@
             </template>
           </n-button>
         </template>
-        {{ !showCode ? $t('show') : $t('hide') }}
+        {{ !showCode ? ('show') : ('hide') }}
       </n-tooltip>
     </template>
     <slot name="content" />

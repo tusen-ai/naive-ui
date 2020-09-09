@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import { nextTick } from 'vue'
 import layoutModeMixin from './layoutModeMixin'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
@@ -209,6 +210,8 @@ export default {
       NLayout.siderCollapseMode = this.collapseMode
       NLayout.siderPosition = this.position
       NLayout.siderCollapsed = this.collapsed
+      // TODO: it must be a bug, to be fixed
+      nextTick(() => NLayout.$forceUpdate())
     }
   },
   beforeDestroy () {

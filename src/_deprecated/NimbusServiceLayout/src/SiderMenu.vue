@@ -1,4 +1,6 @@
 <script>
+import { h } from 'vue'
+
 export default {
   name: 'NNimbusServiceLayoutSiderMenu',
   inject: {
@@ -9,7 +11,6 @@ export default {
   computed: {
     content () {
       const ServiceLayout = this.NNimbusServiceLayout
-      const h = this.$createElement
       return this.createMenu(h, ServiceLayout.items)
     },
     subMenuNames () {
@@ -23,7 +24,7 @@ export default {
           }
         })
       }
-      traverse(ServiceLayout.items)
+      traverse(ServiceLayout.items || [])
       return subMenuNames
     }
   },
@@ -66,25 +67,22 @@ export default {
       })
     }
   },
-  render (h) {
+  render () {
     const ServiceLayout = this.NNimbusServiceLayout
-    return h('NMenu',
-      {
-        props: {
-          value: ServiceLayout.value || ServiceLayout.activeItem,
-          expandedNames: ServiceLayout.expandedNames,
-          defaultExpandedNames: ServiceLayout.defaultExpandedNames || this.subMenuNames,
-          rootIndent: 36,
-          indent: 40
-        },
-        on: ServiceLayout.$listeners,
-        scopedSlots: {
-          default: () => {
-            return this.content
-          }
-        }
-      }
-    )
+    return null
+    // return h('NMenu',
+    //   {
+    //     ...ServiceLayout.$attrs,
+    //     value: ServiceLayout.value || ServiceLayout.activeItem,
+    //     expandedNames: ServiceLayout.expandedNames,
+    //     defaultExpandedNames: ServiceLayout.defaultExpandedNames || this.subMenuNames,
+    //     rootIndent: 36,
+    //     indent: 40
+    //   },
+    //   {
+    //     default: () => this.content
+    //   }
+    // )
   }
 }
 </script>

@@ -19,7 +19,7 @@ passively-activated
 ## V-model
 |Prop|Event|
 |-|-|
-|value|input|
+|modelValue|update:modelValue|
 
 ## Props
 ### Input Props
@@ -28,7 +28,7 @@ passively-activated
 |theme|`'light' \| 'dark' \| null`|`null`||
 |type|`'text' \| 'password' \| 'textarea'`|`'text'`||
 |pair|`boolean`|`false`|Whether to input pairwise value.|
-|value|`string \| [string, string]`|`null`|Value of input. When `pair` is `true`, `value` is an array.|
+|modelValue|`string \| [string, string]`|`null`|Value of input. When `pair` is `true`, `modelValue` is an array.|
 |disabled|`boolean`|`false`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |rows|`number`|`3`||
@@ -64,7 +64,7 @@ passively-activated
 ### Input Events
 |Name|Parameters|Description|
 |-|-|-|
-|input|`(value: string \| [string, string])`||
+|update:modelValue|`(value: string \| [string, string])`||
 |change|`(value: string \| [string, string])`||
 |blur|`()`||
 |focus|`()`||

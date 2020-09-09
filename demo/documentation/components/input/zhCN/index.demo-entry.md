@@ -13,13 +13,14 @@ disabled
 clearable
 autosize
 pair
-input-group
 passively-activated
 ```
+<!-- input-group -->
+
 ## V-model
 |Prop|Event|
 |-|-|
-|value|input|
+|modelValue|update:modelValue|
 
 ## Props
 ### Input Props
@@ -28,7 +29,7 @@ passively-activated
 |theme|`'light' \| 'dark' \| null`|`null`||
 |type|`'text' \| 'password' \| 'textarea'`|`'text'`||
 |pair|`boolean`|`false`|是否输入成对的值|
-|value|`string \| [string, string]`|`null`|文本输入的值。如果是 `pair` 是 `true`，`value` 是一个数组|
+|modelValue|`string \| [string, string]`|`null`|文本输入的值。如果是 `pair` 是 `true`，`modelValue` 是一个数组|
 |disabled|`boolean`|`false`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |rows|`number`|`3`||
@@ -66,7 +67,7 @@ passively-activated
 ### Input Events
 |属性|类型|说明|
 |-|-|-|
-|input|`(value: string \| [string, string])`||
+|update:modelValue|`(value: string \| [string, string])`||
 |change|`(value: string \| [string, string])`||
 |blur|`()`||
 |focus|`()`||

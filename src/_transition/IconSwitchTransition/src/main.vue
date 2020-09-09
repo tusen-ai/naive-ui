@@ -1,5 +1,5 @@
 <script>
-import getDefaultSlot from '../../../_utils/vue/getDefaultSlot'
+import { h, nextTick, Transition } from 'vue'
 
 export default {
   name: 'NBaseIconTransition',
@@ -9,17 +9,15 @@ export default {
     }
   },
   mounted () {
-    this.$nextTick().then(() => {
+    nextTick(() => {
       this.appear = true
     })
   },
-  render (h) {
-    return h('transition', {
-      props: {
-        name: 'n-icon-switch-transition',
-        appear: this.appear
-      }
-    }, getDefaultSlot(this))
+  render () {
+    return h(Transition, {
+      name: 'n-icon-switch-transition',
+      appear: this.appear
+    }, this.$slots)
   }
 }
 </script>

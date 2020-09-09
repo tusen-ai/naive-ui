@@ -5,6 +5,9 @@ import withapp from '../../../_mixins/withapp'
 import themeable from '../../../_mixins/themeable'
 import getDefaultSlot from '../../../_utils/vue/getDefaultSlot'
 import SiderMenu from './SiderMenu'
+import NLayout from '../../../layout/src/Layout'
+import NLayoutSider from '../../../layout/src/LayoutSider'
+import { h } from 'vue'
 
 export default {
   name: 'NNimbusServiceLayout',
@@ -17,6 +20,11 @@ export default {
     }
   },
   mixins: [withapp, themeable],
+  model: {
+    prop: 'value',
+    event: 'input'
+  },
+  emits: ['input'],
   props: {
     name: {
       type: String,
@@ -84,7 +92,8 @@ export default {
           }
         })
       }
-      traverse(this.items)
+      // TODO fix
+      traverse(this.items || [])
       return subMenuNames
     }
   },
@@ -151,7 +160,7 @@ export default {
       }
     }
   },
-  render (h) {
+  render () {
     const siderProps = {
       'show-toggle-button': true,
       'show-trigger': true,
@@ -169,109 +178,105 @@ export default {
         width: '288px'
       }
     }
-    const scopedSlots = this.$slots
-    return h('NLayout', {
-      staticClass: 'n-nbs',
+    // const scopedSlots = this.$slots
+    return h(NLayout, {
       class: {
+        'n-nbs': true,
         [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme
       },
-      props: {
-        position: 'absolute'
-      }
-    }, [
-      scopedSlots.nav ? h('NLayoutHeader', {
-        staticStyle: {
-          height: '64px',
-          zIndex: this.headerZIndex
-        },
-        props: {
-          bordered: true
-        }
-      }, scopedSlots.nav()) : null,
-      h('NLayout', {
-        style: {
-          top: scopedSlots.nav ? '64px' : null
-        },
-        props: {
+      position: 'absolute'
+    }, {
+      default: () => [
+      // scopedSlots.nav ? h('n-layoutHeader', {
+      //   style: {
+      //     height: '64px',
+      //     zIndex: this.headerZIndex
+      //   },
+      //   bordered: true
+      // }, scopedSlots.nav()) : null,
+        h(NLayout, {
+          style: {
+            top: this.$slots.nav ? '64px' : null
+          },
           themedStyle: this.bodyThemedStyle,
           position: 'absolute'
-        }
-      }, [
-        h('NLayoutSider', {
-          style: {
-            'display': 'flex',
-            'justify-content': 'flex-end',
-            ...this.siderStyle
-          },
-          props: siderProps,
-          on: {
-            collapse: () => {
-              this.collapsed = true
-            },
-            expand: () => {
-              this.collapsed = false
-            }
-          }
-        },
-        [
-          this.name ? h('div', {
-            staticStyle: {
-              alignItems: 'center',
-              height: '64px',
-              paddingLeft: '36px',
-              fontSize: '16px',
-              fontWeight: '500',
-              display: 'flex',
-              position: 'relative'
-            }
-          }, [
-            this.$slots['drawer-header-icon'] ? h(
-              'NConfigConsumer', {
-                props: {
-                  abstract: true
-                },
-                scopedSlots: {
-                  default: ({ styleScheme }) => {
-                    return h('NIcon', {
-                      props: { size: 20 },
-                      staticStyle: {
-                        position: 'absolute',
-                        left: '10px',
-                        top: '50%',
-                        transform: 'translateY(-50%)'
-                      },
-                      style: {
-                        fill: (styleScheme && styleScheme.secondaryTextColor) || null
-                      }
-                    }, this.$slots['drawer-header-icon'])
-                  }
-                }
-              }) : null,
-            h('span', {}, this.name)
-          ]) : null,
-          this.name ? h('n-divider', {
-            staticStyle: {
-              margin: '0',
-              padding: '0 20px 0 4px'
-            }
-          }) : null,
-          h(SiderMenu)]
-        ),
-        h('NLayout', {
-          ref: 'body',
-          style: { ...this.contentStyle },
-          props: {
-            'use-native-scrollbar': false,
-            themedStyle: this.bodyThemedStyle,
-            'scroll-content-style': {
-              width: '100%',
-              boxSizing: 'border-box',
-              padding: this.paddingBody ? '21px 48px' : null
-            }
-          }
-        }, getDefaultSlot(this))
-      ])
-    ])
+        }, {
+          // [
+          //   this.name ? h('div', {
+          //     staticStyle: {
+          //       alignItems: 'center',
+          //       height: '64px',
+          //       paddingLeft: '36px',
+          //       fontSize: '16px',
+          //       fontWeight: '500',
+          //       display: 'flex',
+          //       position: 'relative'
+          //     }
+          //   }, [
+          //     this.$slots['drawer-header-icon'] ? h(
+          //       'NConfigConsumer', {
+          //         props: {
+          //           abstract: true
+          //         },
+          //         scopedSlots: {
+          //           default: ({ styleScheme }) => {
+          //             return h('NIcon', {
+          //               props: { size: 20 },
+          //               staticStyle: {
+          //                 position: 'absolute',
+          //                 left: '10px',
+          //                 top: '50%',
+          //                 transform: 'translateY(-50%)'
+          //               },
+          //               style: {
+          //                 fill: (styleScheme && styleScheme.secondaryTextColor) || null
+          //               }
+          //             }, this.$slots['drawer-header-icon'])
+          //           }
+          //         }
+          //       }) : null,
+          //     h('span', {}, this.name)
+          //   ]) : null,
+          //   this.name ? h('n-divider', {
+          //     staticStyle: {
+          //       margin: '0',
+          //       padding: '0 20px 0 4px'
+          //     }
+          //   }) : null,
+          //   h(SiderMenu)]
+          // ),
+          default: () => [
+            h(NLayoutSider, {
+              ...siderProps,
+              style: {
+                'display': 'flex',
+                'justify-content': 'flex-end',
+                ...this.siderStyle
+              },
+              onCollapse: () => {
+                this.collapsed = true
+              },
+              onExpand: () => {
+                this.collapsed = false
+              }
+            }),
+            h(NLayout, {
+              ref: 'body',
+              style: { ...this.contentStyle },
+              'use-native-scrollbar': false,
+              themedStyle: this.bodyThemedStyle,
+              'scroll-content-style': {
+                width: '100%',
+                boxSizing: 'border-box',
+                padding: this.paddingBody ? '21px 48px' : null
+              }
+            }, {
+              default: this.$slots.default
+            })
+          ]
+        })
+      ]
+    })
   }
 }
 </script>

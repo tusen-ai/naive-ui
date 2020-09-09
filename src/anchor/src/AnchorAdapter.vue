@@ -1,5 +1,6 @@
 <template>
-  <n-base-anchor
+  <div />
+  <!-- <n-base-anchor
     v-if="!affix"
     ref="anchor"
     :bound="bound"
@@ -25,7 +26,7 @@
     >
       <slot />
     </n-base-anchor>
-  </n-affix>
+  </n-affix> -->
 </template>
 
 <script>

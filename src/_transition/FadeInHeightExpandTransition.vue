@@ -1,6 +1,5 @@
 <script>
-import { h, nextTick } from 'vue'
-import getDefaultSlot from '../_utils/vue/getDefaultSlot'
+import { h, nextTick, Transition } from 'vue'
 
 export default {
   props: {
@@ -88,19 +87,15 @@ export default {
     }
   },
   render () {
-    return h('transition', {
-      props: {
-        name: this.width ? 'n-fade-in-width-expand-transition' : 'n-fade-in-height-expand-transition',
-        appear: this.appear
-      },
-      on: {
-        beforeLeave: this.handleBeforeLeave,
-        leave: this.handleLeave,
-        enter: this.handleEnter,
-        afterEnter: this.handleAfterEnter,
-        afterLeave: this.handleAfterLeave
-      }
-    }, getDefaultSlot(this))
+    return h(Transition, {
+      name: this.width ? 'n-fade-in-width-expand-transition' : 'n-fade-in-height-expand-transition',
+      appear: this.appear,
+      onBeforeLeave: this.handleBeforeLeave,
+      onLeave: this.handleLeave,
+      onEnter: this.handleEnter,
+      onAfterEnter: this.handleAfterEnter,
+      onAfterLeave: this.handleAfterLeave
+    }, this.$slots)
   }
 }
 

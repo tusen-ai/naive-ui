@@ -30,7 +30,7 @@
       v-if="isTextarea && autosize"
       ref="textareaMirrow"
       class="n-input__textarea-mirror"
-    >{{ value }}<br></pre>
+    >{{ modelValue }}<br></pre>
     <textarea
       v-if="type === 'textarea'"
       ref="textarea"
@@ -41,7 +41,7 @@
       :autofocus="autofocus"
       :rows="rows"
       :placeholder="placeholder"
-      :value="value"
+      :value="modelValue"
       :disabled="disabled"
       :maxlength="maxlength"
       :minlength="minlength"
@@ -63,7 +63,7 @@
         :disabled="disabled"
         :maxlength="maxlength"
         :minlength="minlength"
-        :value="pair ? (value && value[0]) : value"
+        :value="pair ? (modelValue && modelValue[0]) : modelValue"
         :readonly="readonly"
         :autofocus="autofocus"
         :size="attrSize"
@@ -77,7 +77,7 @@
         v-if="
           pair &&
             !isComposing &&
-            (!value || (Array.isArray(value) && !value[0])) &&
+            (!modelValue || (Array.isArray(modelValue) && !modelValue[0])) &&
             syntheticPlaceholder[0]
         "
         class="n-input__placeholder"
@@ -101,7 +101,7 @@
         :disabled="disabled"
         :maxlength="maxlength"
         :minlength="minlength"
-        :value="value && value[1]"
+        :value="modelValue && modelValue[1]"
         :readonly="readonly"
         @blur="handleInputBlur"
         @focus="handleInputFocus"
@@ -112,7 +112,7 @@
       <div
         v-if="
           !isComposing &&
-            (!value || (Array.isArray(value) && !value[1])) &&
+            (!modelValue || (Array.isArray(modelValue) && !modelValue[1])) &&
             syntheticPlaceholder[1]"
         class="n-input__placeholder"
       >
@@ -147,7 +147,7 @@
         !isComposing &&
           placeholder &&
           !pair &&
-          !value
+          !modelValue
       "
       class="n-input__placeholder"
     >
@@ -170,6 +170,17 @@ export default {
   components: {
     NBaseSuffix
   },
+  emits: [
+    'focus',
+    'blur',
+    'update:modelValue',
+    'click',
+    'change',
+    'keyup',
+    // private
+    'input-blur',
+    'input-focus'
+  ],
   mixins: [
     withapp,
     themeable,
@@ -177,7 +188,7 @@ export default {
       change: 'change',
       blur: 'blur',
       focus: 'focus',
-      input: 'input'
+      input: 'update:modelValue'
     }),
     usecssr(styles)
   ],
@@ -190,7 +201,7 @@ export default {
       type: [Array, String],
       default: ''
     },
-    value: {
+    modelValue: {
       type: [String, Array],
       default: null
     },
@@ -267,7 +278,7 @@ export default {
     /** private */
     attrSize: {
       type: Number,
-      default: null
+      default: 20
     }
   },
   data () {
@@ -297,12 +308,12 @@ export default {
       if (this.disabled || !this.clearable || (!this.syntheticFocus && !this.hover)) return false
       if (this.pair) {
         return !!(
-          Array.isArray(this.value) &&
-          (this.value[0] || this.value[1])
+          Array.isArray(this.modelValue) &&
+          (this.modelValue[0] || this.modelValue[1])
         ) &&
         (this.hover || this.syntheticFocus)
       } else {
-        return !!this.value && (this.hover || this.syntheticFocus)
+        return !!this.modelValue && (this.hover || this.syntheticFocus)
       }
     },
     isTextarea () {
@@ -366,16 +377,16 @@ export default {
       if (this.isComposing) return
       const changedValue = e.target.value
       if (!this.pair) {
-        this.$emit('input', changedValue)
+        this.$emit('update:modelValue', changedValue)
       } else {
-        let value = this.value
+        let value = this.modelValue
         if (!Array.isArray(value)) {
           value = [null, null]
         } else {
           value = [...value]
         }
         value[index] = changedValue
-        this.$emit('input', value)
+        this.$emit('update:modelValue', value)
       }
       /** force update to sync input's view with value */
       this.$forceUpdate()
@@ -465,10 +476,10 @@ export default {
       this.$emit('clear', e)
       if (this.pair) {
         this.$emit('change', [])
-        this.$emit('input', [])
+        this.$emit('update:modelValue', [])
       } else {
         this.$emit('change', '')
-        this.$emit('input', '')
+        this.$emit('update:modelValue', '')
       }
     },
     handleMouseEnter () {

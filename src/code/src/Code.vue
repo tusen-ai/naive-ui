@@ -1,4 +1,5 @@
 <script>
+import { h } from 'vue'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import usecssr from '../../_mixins/usecssr'
@@ -71,7 +72,7 @@ export default {
       this.$refs.code.textContent = this.code
     }
   },
-  render (h) {
+  render () {
     return h('pre', {
       staticClass: 'n-code',
       class: {

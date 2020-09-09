@@ -27,7 +27,7 @@
             :relative-url="relativeUrl"
           />
         </template>
-        {{ $t('editOnGithub') }}
+        {{ ('editOnGithub') }}
       </n-tooltip>
     </span>
   </n-h1>

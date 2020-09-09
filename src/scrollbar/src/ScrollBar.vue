@@ -97,6 +97,11 @@ export default {
     themable,
     usecssr(styles)
   ],
+  emits: [
+    'scroll',
+    'mouse-enter',
+    'mouse-leave'
+  ],
   props: {
     width: {
       type: Number,

@@ -68,11 +68,9 @@ export default {
       )
     } else {
       return h(Menu, {
-        props: this.$props,
-        scopedSlots: { ...this.$slots },
-        on: this.$listeners,
-        attrs: this.$data.attrs
-      })
+        ...this.$props,
+        ...this.$attrs
+      }, this.$slots)
     }
   }
 }
