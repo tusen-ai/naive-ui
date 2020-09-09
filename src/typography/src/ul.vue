@@ -5,6 +5,7 @@
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
       'n-ul--align-text': alignText
     }"
+    v-bind="$attrs"
   >
     <slot />
   </ul>

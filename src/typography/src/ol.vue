@@ -5,7 +5,7 @@
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
       'n-ol--align-text': alignText
     }"
-    v-on="$listeners"
+    v-bind="$attrs"
   >
     <slot />
   </ol>
