@@ -1,3 +1,4 @@
+import { h } from 'vue'
 import format from 'date-fns/format'
 import formatDistance from 'date-fns/formatDistance'
 import fromUnixTime from 'date-fns/fromUnixTime'
@@ -76,7 +77,7 @@ export default {
       msPassedAfterCreated: 0
     }
   },
-  render (h) {
+  render () {
     return this.text ? h(render, {
       props: {
         render: this.renderedTime
