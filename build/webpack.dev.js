@@ -20,7 +20,7 @@ const webpackConfig = {
   resolve: config.resolve,
   devServer: {
     host: '0.0.0.0',
-    port: 8086,
+    port: 14138,
     publicPath: '/',
     hot: true,
     historyApiFallback: true
