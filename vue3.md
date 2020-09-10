@@ -4,9 +4,8 @@ zindexable
 placeable 进行了大调整
 
 - [ ] Form
-- [ ] Upload
 - [ ] affix
-- [ ] alert
+- [x] alert
 - [ ] anchor
 - [ ] auto-complete
 - [ ] avatar
@@ -78,7 +77,9 @@ placeable 进行了大调整
 - [x] time
 - [ ] time-picker
 - [ ] timeline
-- [ ] tooltip
+- [x] tooltip
+  - ref
 - [ ] transfer
 - [ ] tree
 - [x] typography
+- [ ] upload

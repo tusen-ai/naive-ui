@@ -30,5 +30,5 @@ no-icon
 ## Events
 |名称|参数|说明|
 |-|-|-|
-|after-hide|`()`||
-|close|`()`||
+|after-leave|`()`|关闭动画结束触发|
+|leave|`()`|点击关闭出发|

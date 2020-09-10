@@ -69,19 +69,28 @@
 
 <script>
 import NIcon from '../../icon'
-import mdCheckmarkCircle from '../../_icons/md-checkmark-circle'
-import mdAlert from '../../_icons/md-alert'
-import mdInformationCircle from '../../_icons/md-information-circle'
-import mdCloseCircle from '../../_icons/md-close-circle'
-import mdClose from '../../_icons/md-close'
 import FadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
 
+// icons
+import mdCheckmarkCircle from '../../_icons/md-checkmark-circle'
+import mdAlert from '../../_icons/md-alert'
+import mdInformationCircle from '../../_icons/md-information-circle'
+import mdCloseCircle from '../../_icons/md-close-circle'
+import mdClose from '../../_icons/md-close'
+
 export default {
   name: 'Alert',
+  emits: [
+    'leave',
+    'after-leave',
+    // legacy
+    'close',
+    'after-hide'
+  ],
   components: {
     NIcon,
     mdCheckmarkCircle,
@@ -134,8 +143,10 @@ export default {
       this.visible = true
     },
     close () {
-      this.$emit('close')
+      this.$emit('leave')
       this.visible = false
+      // legacy
+      this.$emit('close')
     },
     handleCloseClick () {
       Promise
@@ -146,6 +157,8 @@ export default {
         })
     },
     handleAfterLeave () {
+      this.$emit('after-leave')
+      // legacy
       this.$emit('after-hide')
     }
   }

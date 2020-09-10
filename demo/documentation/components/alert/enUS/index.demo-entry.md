@@ -29,5 +29,5 @@ no-icon
 ## Events
 |Name|Parameters|Description|
 |-|-|-|
-|after-hide|`()`||
-|close|`()`||
+|after-leave|`()`|When close transition is done|
+|leave|`()`|When you click close.|
