@@ -120,6 +120,12 @@ export default {
       }
     }
   },
+  created () {
+    this.NPopover.bodyInstance = this
+  },
+  beforeDestroy () {
+    this.NPopover.bodyInstance = null
+  },
   computed: {
     placeableManuallyPositioned () {
       return this.manuallyPositioned

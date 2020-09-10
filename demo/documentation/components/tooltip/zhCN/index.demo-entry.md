@@ -6,8 +6,7 @@ basic
 trigger
 event
 placement
-fix-width
-max-width
+body-style
 arrow
 ```
 ## Props

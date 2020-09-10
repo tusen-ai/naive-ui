@@ -33,7 +33,6 @@
 <n-tooltip
   :show="showPopover"
   placement="bottom"
-  trigger="manual"
   @show="handleShow"
   @hide="handleHide"
 >

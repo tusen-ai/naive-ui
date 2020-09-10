@@ -30,7 +30,7 @@ export default c([
           color: ${textColor};
         `
       }, [
-        contentTransition(
+        bodyTransition(
           transformDebounceScale,
           easeOutCubicBezier,
           easeInCubicBezier
@@ -155,7 +155,7 @@ function tooltipStyle (pallete) {
     tooltipTextColor
   } = pallete
   return cB('tooltip', [
-    cTB('tooltip-content', {
+    cTB('tooltip-body', {
       raw: `
         padding: 8px 14px;
         border-radius: ${borderRadius};
@@ -223,7 +223,7 @@ function noArrowStyle (placement) {
   })
 }
 
-function contentTransition (
+function bodyTransition (
   transformDebounceScale,
   easeOutCubicBezier,
   easeInCubicBezier

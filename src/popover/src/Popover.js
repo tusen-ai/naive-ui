@@ -94,7 +94,8 @@ export default {
     return {
       showTimerId: null,
       hideTimerId: null,
-      triggerVNode: null
+      triggerVNode: null,
+      bodyInstance: null
     }
   },
   props: {
@@ -203,6 +204,11 @@ export default {
     }
   },
   methods: {
+    syncPosition () {
+      if (this.bodyInstance) {
+        this.bodyInstance.placeableSyncPosition()
+      }
+    },
     getTriggerElement () {
       return this.triggerVNode.el
     },

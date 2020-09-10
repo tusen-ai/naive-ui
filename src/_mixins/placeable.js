@@ -166,14 +166,14 @@ export default {
           this.registerResizeListener()
           this.listenersRegistered = true
         }
-        nextTick(this.updatePosition)
+        nextTick(this.placeableSyncPosition)
       }
     },
     x () {
-      nextTick(this.updatePosition)
+      nextTick(this.placeableSyncPosition)
     },
     y () {
-      nextTick(this.updatePosition)
+      nextTick(this.placeableSyncPosition)
     }
   },
   data () {
@@ -192,7 +192,7 @@ export default {
         this.registerResizeListener()
         this.listenersRegistered = true
       }
-      this.updatePosition()
+      this.placeableSyncPosition()
     }
   },
   beforeDestroy () {
@@ -246,7 +246,7 @@ export default {
       trackingElement.style.transformOrigin = transformOrigin
       trackingElement.setAttribute('n-suggested-transform-origin', transformOrigin)
     },
-    updatePosition () {
+    placeableSyncPosition () {
       if (!this.placeableEnabled) {
         return
       }
@@ -298,21 +298,21 @@ export default {
       this.setOffsetOfTrackingElement(offset, suggestedTransformOrigin)
     },
     registerResizeListener () {
-      resizeDelegate.registerHandler(this.updatePosition)
+      resizeDelegate.registerHandler(this.placeableSyncPosition)
     },
     registerScrollListeners () {
       let currentElement = this._placeableGetTrackedElement()
       while (true) {
         currentElement = getScrollParent(currentElement)
         if (currentElement === null) break
-        this.scrollListeners.push([currentElement, this.updatePosition])
+        this.scrollListeners.push([currentElement, this.placeableSyncPosition])
       }
       for (const [el, handler] of this.scrollListeners) {
         scrollDelegate.registerHandler(el, handler)
       }
     },
     unregisterResizeListener () {
-      resizeDelegate.unregisterHandler(this.updatePosition)
+      resizeDelegate.unregisterHandler(this.placeableSyncPosition)
     },
     unregisterScrollListeners () {
       for (const [el, handler] of this.scrollListeners) {

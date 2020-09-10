@@ -20,7 +20,7 @@
     I wish they all could be California girls
   </span>
 </n-tooltip>
-<n-tooltip :show="showPopover" placement="bottom" trigger="manual">
+<n-tooltip :show="showPopover" placement="bottom">
   <template v-slot:activator>
     <n-button @click="showPopover = !showPopover">
       Manual
@@ -36,9 +36,9 @@ export default {
   data() {
     return {
       showPopover: false
-    };
+    }
   }
-};
+}
 ```
 ```css
 .n-button {

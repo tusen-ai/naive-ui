@@ -1,7 +1,7 @@
-# Max Width
-Setting max-width is sometimes more useful.
+# Body Style
+Setting body-style is sometimes useful.
 ```html
-<n-tooltip :max-width="400" trigger="click">
+<n-tooltip :body-style="{ maxWidth: '400px' }" trigger="click">
   <template v-slot:activator>
     <n-button>
       California Girls
@@ -10,7 +10,7 @@ Setting max-width is sometimes more useful.
   I wish they all could be California girls. I wish they all could be California
   girls. I wish they all could be California girls.
 </n-tooltip>
-<n-tooltip :max-width="400" trigger="click">
+<n-tooltip :body-style="{ maxWidth: '400px' }" trigger="click">
   <template v-slot:activator>
     <n-button>
       California Girls

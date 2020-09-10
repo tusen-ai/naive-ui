@@ -42,10 +42,10 @@
         {{ ('editOnGithub') }}
       </n-tooltip>
       <n-tooltip
+        ref="expandCodeButton"
         :delay="300"
         :placement="'top'"
         :show-arrow="true"
-        :controller="controller"
       >
         <template v-slot:activator>
           <n-button
@@ -74,6 +74,7 @@
 </template>
 
 <script>
+import { nextTick } from 'vue'
 import codeOutline from '../../src/_icons/code-outline'
 import { modeRef } from '../use-dev-mode'
 
@@ -104,7 +105,6 @@ export default {
     return {
       showCode: false,
       contentStyle: null,
-      controller: {},
       isShow: true,
       isDebugDemo: false,
       modeRef
@@ -120,8 +120,8 @@ export default {
       this.contentStyle = {
         transition: 'none'
       }
-      this.$nextTick().then(() => {
-        this.controller.updatePosition()
+      nextTick(() => {
+        this.$refs.expandCodeButton.syncPosition()
         this.contentStyle = null
       })
     },
