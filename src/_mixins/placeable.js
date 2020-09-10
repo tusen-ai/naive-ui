@@ -1,3 +1,4 @@
+import { nextTick } from 'vue'
 import scrollDelegate from '../_utils/delegate/scrollDelegate'
 import resizeDelegate from '../_utils/delegate/resizeDelegate'
 import getScrollParent from '../_utils/dom/getScrollParent'
@@ -54,8 +55,8 @@ function getViewBoundingRect () {
   }
 }
 
-function getActivatorRect (manuallyPositioned, x, y, trackedElement, viewBoundingRect) {
-  if (manuallyPositioned) {
+function getActivatorRect (placeableManuallyPositioned, x, y, trackedElement, viewBoundingRect) {
+  if (placeableManuallyPositioned) {
     return {
       top: y,
       left: x,
@@ -84,7 +85,7 @@ function getActivatorRect (manuallyPositioned, x, y, trackedElement, viewBoundin
  * $refs.activator
  * $refs.content
  * $refs.contentInner(optional)
- * $vm.active
+ * $vm.placeableEnabled
  *
  * @prop {string} placement determine where should $refs.content be put
  * @prop {string} widthMode determine how width is $refs.contentInner
@@ -137,14 +138,6 @@ export default {
     y: {
       type: Number,
       default: null
-    },
-    manuallyPositioned: {
-      type: Boolean,
-      default: false
-    },
-    flip: {
-      type: Boolean,
-      default: true
     }
   },
   computed: {
@@ -166,21 +159,21 @@ export default {
     }
   },
   watch: {
-    active (value) {
+    placeableEnabled (value) {
       if (value) {
-        if (!this.listenersRegistered) {
+        if (!this.listenersRegistered && !this.placeableManuallyPositioned) {
           this.registerScrollListeners()
           this.registerResizeListener()
           this.listenersRegistered = true
         }
-        this.$nextTick().then(this.updatePosition)
+        nextTick(this.updatePosition)
       }
     },
     x () {
-      this.$nextTick().then(this.updatePosition)
+      nextTick(this.updatePosition)
     },
     y () {
-      this.$nextTick().then(this.updatePosition)
+      nextTick(this.updatePosition)
     }
   },
   data () {
@@ -193,12 +186,14 @@ export default {
     }
   },
   mounted () {
-    if (this.active) {
-      this.registerScrollListeners()
-      this.registerResizeListener()
-      this.listenersRegistered = true
+    if (this.placeableEnabled) {
+      if (!this.placeableManuallyPositioned) {
+        this.registerScrollListeners()
+        this.registerResizeListener()
+        this.listenersRegistered = true
+      }
+      this.updatePosition()
     }
-    this.updatePosition()
   },
   beforeDestroy () {
     if (this.listenersRegistered) {
@@ -207,30 +202,30 @@ export default {
     }
   },
   methods: {
-    _getTrackingElement () {
+    _placeableGetTrackingElement () {
       const refs = this.$refs
       if (refs && refs.content) {
         return getContentEl(refs)
       }
-      const getTrackingElement = this.getTrackingElement
-      if (getTrackingElement) {
-        return getTrackingElement()
+      const placeableGetTrackingElement = this.placeableGetTrackingElement
+      if (placeableGetTrackingElement) {
+        return placeableGetTrackingElement()
       }
     },
-    _getTrackedElement () {
+    _placeableGetTrackedElement () {
       const refs = this.$refs
       if (refs && refs.activator) {
         return getActivatorEl(refs)
       }
-      const getTrackedElement = this.getTrackedElement
-      if (getTrackedElement) {
-        return getTrackedElement()
+      const placeableGetTrackedElement = this.placeableGetTrackedElement
+      if (placeableGetTrackedElement) {
+        return placeableGetTrackedElement()
       }
     },
-    _getAbsoluteOffsetContainer () {
-      const getAbsoluteOffsetContainer = this.getAbsoluteOffsetContainer
-      if (getAbsoluteOffsetContainer) {
-        return getAbsoluteOffsetContainer()
+    _placeableGetAbsoluteOffsetContainer () {
+      const placeableGetAbsoluteOffsetContainer = this.placeableGetAbsoluteOffsetContainer
+      if (placeableGetAbsoluteOffsetContainer) {
+        return placeableGetAbsoluteOffsetContainer()
       } else {
         const container = this.$refs.contentContainer
         if (container) {
@@ -241,7 +236,7 @@ export default {
       }
     },
     setOffsetOfTrackingElement (position, transformOrigin) {
-      const trackingElement = this._getTrackingElement()
+      const trackingElement = this._placeableGetTrackingElement()
       trackingElement.style.position = 'absolute'
       trackingElement.style.top = position.top
       trackingElement.style.left = position.left
@@ -252,33 +247,33 @@ export default {
       trackingElement.setAttribute('n-suggested-transform-origin', transformOrigin)
     },
     updatePosition () {
-      if (!this.active) {
-        if (!this.keepPlaceableTracingWhenInactive) return
+      if (!this.placeableEnabled) {
+        return
       }
-      const trackingElement = this._getTrackingElement()
+      const trackingElement = this._placeableGetTrackingElement()
       let trackedElement = null
       trackingElement.style.position = 'absolute'
-      if (this.manuallyPositioned) {
+      if (this.placeableManuallyPositioned) {
         if (!trackingElement) {
           console.error('[naive-ui/mixins/placeable]: trackingElement not found.')
           return
         }
       } else {
-        trackedElement = this._getTrackedElement()
+        trackedElement = this._placeableGetTrackedElement()
         if (!trackedElement || !trackingElement) {
           console.error('[naive-ui/mixins/placeable]: trakedElement or trackingElement not found.')
           return
         }
       }
       const viewBoundingRect = getViewBoundingRect()
-      const activatorRect = getActivatorRect(this.manuallyPositioned, this.x, this.y, trackedElement, viewBoundingRect)
+      const activatorRect = getActivatorRect(this.placeableManuallyPositioned, this.x, this.y, trackedElement, viewBoundingRect)
       const contentInner = getContentInner(this)
       if (this.widthMode === 'activator' && contentInner) {
         contentInner.style.minWidth = activatorRect.width + 'px'
       }
       let adjustedPlacement = this.placement
       let contentBoundingClientRect = null
-      if (this.flip) {
+      if (this.zindexableFlip) {
         contentBoundingClientRect = {
           width: trackingElement.offsetWidth,
           height: trackingElement.offsetHeight
@@ -289,7 +284,7 @@ export default {
       let offset = null
       this.adjustedPlacement = adjustedPlacement
       if (this.positionModeisAbsolute) {
-        const absoluteOffsetContainer = this._getAbsoluteOffsetContainer()
+        const absoluteOffsetContainer = this._placeableGetAbsoluteOffsetContainer()
         if (absoluteOffsetContainer) {
           offset = getPosition(
             adjustedPlacement,
@@ -306,7 +301,7 @@ export default {
       resizeDelegate.registerHandler(this.updatePosition)
     },
     registerScrollListeners () {
-      let currentElement = this._getTrackedElement()
+      let currentElement = this._placeableGetTrackedElement()
       while (true) {
         currentElement = getScrollParent(currentElement)
         if (currentElement === null) break

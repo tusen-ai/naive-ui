@@ -18,7 +18,7 @@ dark-4-debug
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |themed-style|`{ [themeName: string]: Object } \| null`|`null`||
 |show|`boolean`|`false`||
 |placement|`'top' \| 'right' \| 'bottom' \| 'left'`|`'right'`||

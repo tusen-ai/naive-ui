@@ -18,7 +18,7 @@ single-line
 ### Table Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |bordered|`boolean`|`true`||
 |single-line|`boolean`|`true`||
 |single-column|`boolean`|`false`||

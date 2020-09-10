@@ -1,7 +1,7 @@
 # 延迟
 ```html
 <n-popover :delay="500" :duration="500" :width="240">
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button>
       延迟 500ms, 持续 500ms
     </n-button>

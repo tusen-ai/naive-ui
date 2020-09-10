@@ -11,7 +11,7 @@ scrollto
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |affix|`boolean`|`false`|Anchor 是否像 Affix 一样展示，如果设定为 `true`，它还会接受 [Affix](n-affix#Props) 的 Props|
 |target|`() => HTMLElement`|一个返回最邻近可滚动祖先元素的函数|需要监听滚动的元素（如果你希望 Anchor 和 Affix 分别监听不同的元素，可以手动的组合 Anchor 和 Affix）|
 |bound|`number`|`12`||

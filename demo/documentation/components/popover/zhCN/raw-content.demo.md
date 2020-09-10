@@ -1,7 +1,7 @@
 # 不用基础样式
 ```html
 <n-popover raw :show-arrow="false">
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button style="margin:0;">
       悬浮
     </n-button>

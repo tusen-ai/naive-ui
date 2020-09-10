@@ -1,7 +1,7 @@
 # Basic
 ```html
 <n-popover>
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button>
       Hover
     </n-button>

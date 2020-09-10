@@ -25,7 +25,7 @@ passively-activated
 ### Input Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |type|`'text' \| 'password' \| 'textarea'`|`'text'`||
 |pair|`boolean`|`false`|Whether to input pairwise value.|
 |modelValue|`string \| [string, string]`|`null`|Value of input. When `pair` is `true`, `modelValue` is an array.|

@@ -30,7 +30,7 @@ collapse
 |overlay-min-width|`number \| string`|`180`|The min width of submenu popover. Works when menu is horizontal or collapsed.|
 |overlay-width|`number \| string`|`null`|The width of submenu popover. Works when menu is horizontal or collapsed.|
 |root-indent|`number`|`null`|The indent of menu's first level children. If not set, menu will use `indent` in place of it.|
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |value|`string`|`null`|The selected name of menu.|
 
 ### MenuItem Properties

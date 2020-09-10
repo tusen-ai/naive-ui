@@ -20,7 +20,7 @@ function lazyHandler (handler) {
 }
 
 const clickoutside = {
-  bind (el, bindings) {
+  beforeMount (el, bindings) {
     // console.debug('[clickoutside]: bind', el)
     if (process.env.NODE_ENV !== 'production') {
       console.debug('[clickoutside]: bind $el')
@@ -32,7 +32,7 @@ const clickoutside = {
       clickoutsideDelegate.registerHandler(el, el[ctx].handler, false)
     }
   },
-  inserted (el, bindings) {
+  mounted (el, bindings) {
     if (process.env.NODE_ENV !== 'production') {
       console.debug('[clickoutside]: inserted')
     }
@@ -51,7 +51,7 @@ const clickoutside = {
   //     clickoutsideDelegate.registerHandler(el, el[ctx].handler, false)
   //   }
   // },
-  componentUpdated (el, bindings) {
+  updated (el, bindings) {
     if (process.env.NODE_ENV !== 'production') {
       console.debug('[clickoutside]: componentUpdated')
     }
@@ -72,7 +72,7 @@ const clickoutside = {
       )
     }
   },
-  unbind (el) {
+  unmounted (el) {
     if (process.env.NODE_ENV !== 'production') {
       console.debug('[clickoutside]: unbind')
     }

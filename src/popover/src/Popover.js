@@ -1,166 +1,302 @@
-import NBaseContext from '../../_base/context'
-import NBasePortal from '../../_base/portal'
-import NPopoverContent from './PopoverContent'
-import activatorMixin from './activatorMixin'
+import {
+  h,
+  ref,
+  computed,
+  Teleport,
+  Fragment,
+  createTextVNode
+} from 'vue'
+import {
+  useMergedState,
+  useFalseUntilTruthy,
+  useCompitable
+} from '../../_utils/composition'
+import NPopoverBody from './PopoverBody'
 
-function createId () {
-  return Math.random()
-    .toString(36)
-    .slice(2)
+function appendEvents (vNode, events) {
+  Object.entries(events).forEach(([key, handler]) => {
+    if (!vNode.props) vNode.props = {}
+    const originalHandler = vNode.props[key]
+    if (!originalHandler) vNode.props[key] = handler
+    else {
+      vNode.props[key] = (...args) => {
+        originalHandler(...args)
+        handler()
+      }
+    }
+  })
 }
 
-function mixin (component, mixins) {
-  component.mixins = component.mixins || []
-  component.mixins.push(mixins)
-  return component
+function getFirstSlotVNode (slots, slotName = 'default') {
+  let slot = slots[slotName]
+  if (!slot) {
+    console.error(`[naive-ui/getFirstSlotVNode]: slot[${slotName}] is empty`)
+  }
+  slot = slot()
+  // vue will normalize the slot, so slot must be an array
+  if (slot.length === 1) {
+    return slot[0]
+  } else {
+    console.error(`[naive-ui/getFirstSlotVNode]: slot[${slotName}] should have exactly one child`)
+    return null
+  }
 }
 
-// /**
-//  * When using `manual` trigger, using default param of v-model(value prop, input event)
-//  */
-// export default {
-//   name: 'Popover',
-//   functional: true,
-//   props: {
-//     show: {
-//       type: Boolean,
-//       default: false
-//     },
-//     arrow: {
-//       type: Boolean,
-//       default: undefined
-//     },
-//     showArrow: {
-//       type: Boolean,
-//       default: true
-//     },
-//     trigger: {
-//       type: String,
-//       default: 'hover'
-//     },
-//     delay: {
-//       type: Number,
-//       default: 200
-//     },
-//     duration: {
-//       type: Number,
-//       default: 200
-//     },
-//     raw: {
-//       type: Boolean,
-//       default: false
-//     },
-//     width: {
-//       type: Number,
-//       default: null
-//     },
-//     minWidth: {
-//       type: Number,
-//       default: null
-//     },
-//     maxWidth: {
-//       type: Number,
-//       default: null
-//     },
-//     shadow: {
-//       type: Boolean,
-//       default: true
-//     },
-//     placement: {
-//       type: String,
-//       default: 'bottom'
-//     },
-//     controller: {
-//       type: Object,
-//       default: null
-//     },
-//     containerClass: {
-//       type: String,
-//       default: 'n-popover'
-//     },
-//     overlayClass: {
-//       type: String,
-//       default: null
-//     },
-//     overlayStyle: {
-//       type: Object,
-//       default: null
-//     },
-//     manuallyPositioned: {
-//       type: Boolean,
-//       default: false
-//     },
-//     x: {
-//       type: Number,
-//       default: null
-//     },
-//     y: {
-//       type: Number,
-//       default: null
-//     },
-//     disabled: {
-//       type: Boolean,
-//       default: false
-//     },
-//     displayDirective: {
-//       type: String,
-//       default: 'if'
-//     },
-//     arrowStyle: {
-//       type: Object,
-//       default: null
-//     },
-//     zIndex: {
-//       type: String,
-//       default: undefined
-//     },
-//     theme: {
-//       validator (value) {
-//         return ['light', 'dark'].includes(value)
-//       },
-//       default: null
-//     }
-//   },
-//   render (h, context) {
-//     const slots = context.scopedSlots
-//     const defaultSlot = slots.default && slots.default()
-//     const activatorSlot = (slots.activator && slots.activator()) || []
-//     let activatorVNode = activatorSlot[0]
-//     if (activatorVNode && !activatorVNode.tag) {
-//       activatorVNode = h('span', {
-//         staticClass: 'n-popover-text-wrapper'
-//       }, [activatorVNode])
-//     }
-//     const id = createId()
-//     const props = context.props
-//     const listeners = context.listeners
-//     const controller = context.props.controller
-//     return [
-//       h(mixin(NBaseContext, activatorMixin), {
-//         props: {
-//           ...props,
-//           controller,
-//           id
-//         }
-//       }, [activatorVNode]),
-//       h(NBasePortal, {}, [
-//         h(NPopoverContent, {
-//           props: {
-//             ...props,
-//             arrow: props.arrow === undefined ? props.showArrow : props.arrow,
-//             controller,
-//             id
-//           },
-//           on: listeners
-//         }, defaultSlot)
-//       ])
-//     ]
-//   }
-// }
+function omit (object, keys = [], rest = {}) {
+  const omitedObject = { ...object }
+  for (const key of keys) {
+    delete omitedObject[key]
+  }
+  return { ...omitedObject, ...rest }
+}
+
+const textVNodeType = createTextVNode('').type
 
 export default {
   name: 'Popover',
+  provide () {
+    return {
+      NPopover: this
+    }
+  },
+  emits: [
+    'show',
+    'hide'
+  ],
+  setup (props) {
+    // setup show
+    const controlledShowRef = computed(() => props.show)
+    const uncontrolledShowRef = ref(props.defaultShow)
+    const mergedShowWithoutDisabledRef = useMergedState(
+      controlledShowRef,
+      uncontrolledShowRef
+    )
+    const mergedShowRef = computed(() => {
+      return props.disabled ? false : mergedShowWithoutDisabledRef.value
+    })
+    // setup show-arrow
+    const compatibleShowArrowRef = useCompitable(props, [
+      'showArrow',
+      'arrow'
+    ])
+    // setup show teleport
+    const showTeleportRef = useFalseUntilTruthy(mergedShowRef)
+    return {
+      // if to show popover body
+      uncontrolledShow: uncontrolledShowRef,
+      mergedShow: mergedShowRef,
+      // if to show teleport
+      showTeleport: showTeleportRef,
+      compatibleShowArrow: compatibleShowArrowRef
+    }
+  },
+  data () {
+    return {
+      showTimerId: null,
+      hideTimerId: null,
+      triggerVNode: null
+    }
+  },
+  props: {
+    show: {
+      type: Boolean,
+      default: undefined
+    },
+    defaultShow: {
+      type: Boolean,
+      default: false
+    },
+    arrow: {
+      type: Boolean,
+      default: undefined
+    },
+    showArrow: {
+      type: Boolean,
+      default: true
+    },
+    trigger: {
+      validator (value) {
+        return ['hover', 'click'].includes(value)
+      },
+      default: 'hover'
+    },
+    delay: {
+      type: Number,
+      default: 200
+    },
+    duration: {
+      type: Number,
+      default: 300
+    },
+    raw: {
+      type: Boolean,
+      default: false
+    },
+    width: {
+      type: Number,
+      default: null
+    },
+    minWidth: {
+      type: Number,
+      default: null
+    },
+    maxWidth: {
+      type: Number,
+      default: null
+    },
+    placement: {
+      type: String,
+      default: 'bottom'
+    },
+    bodyClass: {
+      type: String,
+      default: null
+    },
+    bodyStyle: {
+      type: Object,
+      default: null
+    },
+    manuallyPositioned: {
+      type: Boolean,
+      default: false
+    },
+    x: {
+      type: Number,
+      default: null
+    },
+    y: {
+      type: Number,
+      default: null
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    displayDirective: {
+      type: String,
+      default: 'if'
+    },
+    arrowStyle: {
+      type: Object,
+      default: null
+    },
+    theme: {
+      type: String,
+      default: null
+    },
+    filp: {
+      type: Boolean,
+      default: true
+    },
+    // private
+    zIndex: {
+      type: String,
+      default: undefined
+    },
+    containerClass: {
+      type: String,
+      default: undefined
+    },
+    shadow: {
+      type: Boolean,
+      default: true
+    }
+  },
+  methods: {
+    getTriggerElement () {
+      return this.triggerVNode.el
+    },
+    clearTimer () {
+      const { showTimerId, hideTimerId } = this
+      if (showTimerId) {
+        window.clearTimeout(showTimerId)
+        this.showTimerId = null
+      }
+      if (hideTimerId) {
+        window.clearTimeout(hideTimerId)
+        this.hideTimerId = null
+      }
+    },
+    handleMouseEnter (e) {
+      if (this.trigger === 'hover') {
+        this.clearTimer()
+        if (this.mergedShow) return
+        if (
+          e.target !== e.currentTarget
+        ) return
+        this.showTimerId = window.setTimeout(() => {
+          this.uncontrolledShow = true
+          this.showTimerId = null
+        }, this.delay)
+      }
+    },
+    handleMouseLeave (e) {
+      if (this.trigger === 'hover') {
+        this.clearTimer()
+        if (!this.mergedShow) return
+        if (
+          e.target !== e.currentTarget
+        ) return
+        this.hideTimerId = window.setTimeout(() => {
+          this.uncontrolledShow = false
+          this.hideTimerId = null
+        }, this.duration)
+      }
+    },
+    // will be called in popover-content
+    handleMouseMoveOutside (e) {
+      this.handleMouseLeave(e)
+    },
+    // will be called in popover-content
+    handleClickOutside () {
+      if (!this.mergedShow) return
+      if (this.trigger === 'click') {
+        this.clearTimer()
+        this.uncontrolledShow = false
+      }
+    },
+    handleClick () {
+      if (this.trigger === 'click') {
+        this.clearTimer()
+        this.uncontrolledShow = !this.uncontrolledShow
+      }
+    }
+  },
   render () {
-    return null
+    const slots = this.$slots
+    const {
+      manuallyPositioned
+    } = this
+    let triggerVNode
+    if (!manuallyPositioned) {
+      if (slots.activator) {
+        triggerVNode = getFirstSlotVNode(slots, 'activator')
+      } else {
+        triggerVNode = getFirstSlotVNode(slots, 'trigger')
+      }
+      triggerVNode = triggerVNode.type === textVNodeType ? h('span', [
+        triggerVNode
+      ]) : triggerVNode
+
+      appendEvents(triggerVNode, {
+        onClick: this.handleClick,
+        onMouseEnter: this.handleMouseEnter,
+        onMouseLeave: this.handleMouseLeave
+      })
+      this.triggerVNode = triggerVNode
+    }
+
+    return h(Fragment, [
+      manuallyPositioned ? null : triggerVNode,
+      this.showTeleport ? h(Teleport, { to: 'body' }, [
+        h(NPopoverBody, omit(this.$props, [
+          'defaultShow',
+          'showArrow',
+          'disabled'
+        ], {
+          show: this.mergedShow
+        }), slots)
+      ]) : null
+    ])
   }
 }

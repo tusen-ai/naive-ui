@@ -22,7 +22,7 @@ item-header-click
 |arrow-placement|`'left' \| 'right'`|`'left'`||
 |display-directive|`'if' \| 'show'`|`'if'`|The display directive to use when its inner `n-collapse-item` render content. `'if'` corresponds to `v-if` and `'show'` corresponds to `v-show`.|
 |expanded-names|`Array<string \| number>`|`null`||
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 
 
 ### Collapse Item

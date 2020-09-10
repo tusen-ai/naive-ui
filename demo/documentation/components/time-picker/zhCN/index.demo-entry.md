@@ -23,7 +23,7 @@ format
 |is-second-disabled|`(second: number, minute: number, hour: number) => boolean`|`() => false`||
 |placeholder|`string`|`'Select Time'`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |value|`number`|`null`||
 |disabled|`boolean`|`false`||
 

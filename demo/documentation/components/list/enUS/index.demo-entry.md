@@ -10,7 +10,7 @@ border
 ### List Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |bordered|`boolean`|`false`||
 
 ## Slots

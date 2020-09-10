@@ -14,7 +14,7 @@ no-icon
 |on-close|`() => boolean \| Promise<boolean> \| any`|`() => true`||
 |on-after-hide|`Function`|`null`||
 |show-icon|`boolean`|`true`||
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |themed-style|`{ [themeName: string]: Object } \| null`|`null`||
 |title|`string`|`null`||
 |type|`'default' \| 'info' \| 'success' \| 'warning' \| 'error'`|`'default'`||

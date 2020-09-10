@@ -13,7 +13,7 @@ default-files
 ### Upload Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |name|`string`|`'file'`|文件在提交表单中的字段名|
 |accept|`string`|`null`|接受的文件类型，参考 <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept">accept</n-a>|
 |action|`string`|`null`|请求提交的地址|

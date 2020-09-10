@@ -14,7 +14,7 @@ default-files
 ### Upload Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |name|`string`|`'file'`|The field name of file in form data.|
 |accept|`string`|`null`|The accept type of upload. See <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept">accept</n-a>.|
 |action|`string`|`null`|The URL to submit data to.|

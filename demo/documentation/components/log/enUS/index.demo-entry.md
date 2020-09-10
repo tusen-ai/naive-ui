@@ -36,7 +36,7 @@ loading
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |loading|`boolean`|`false`||
 |trim|`boolean`|`false`||
 |log|`string`|`null`||

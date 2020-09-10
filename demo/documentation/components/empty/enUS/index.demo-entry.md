@@ -7,7 +7,7 @@ basic
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |size|`'small' \| 'medium' \| 'large' \| 'huge'`|`'medium'`||
 |description|`string`|`'No Data'`||
 |show-description|`boolean`|`true`||

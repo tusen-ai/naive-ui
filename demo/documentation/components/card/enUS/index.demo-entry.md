@@ -20,7 +20,7 @@ closable
 |size|`'small' \| 'medium' \| 'large' \| 'huge'`|`'medium'`||
 |bordered|`boolean`|`true`||
 |closable|`boolean`|`false`||
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |themed-style|`{ [themeName: string]: Object } \| null`|`null`||
 
 ## Events

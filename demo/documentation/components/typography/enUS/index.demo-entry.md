@@ -15,7 +15,7 @@ text
 ### All Typography Components Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 
 
 ### Text Props

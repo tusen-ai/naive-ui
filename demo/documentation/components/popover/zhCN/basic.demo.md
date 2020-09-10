@@ -1,7 +1,7 @@
 # 基础用法
 ```html
-<n-popover>
-  <template v-slot:activator>
+<n-popover show>
+  <template v-slot:trigger>
     <n-button>
       悬浮
     </n-button>

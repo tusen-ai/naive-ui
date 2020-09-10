@@ -26,7 +26,7 @@ filter
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |options|`Array<CascaderOption>`|`null`||
 |value|`string \| number`|`null`||
 |placeholder|`string`|`'Please Select'`||

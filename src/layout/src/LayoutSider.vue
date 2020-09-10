@@ -33,13 +33,13 @@
       <toggle-button
         v-if="showTrigger === 'arrow-circle'"
         :style="triggerStyle"
-        @click.native="handleToggleButtonClick"
+        @click="handleToggleButtonClick"
       />
       <toggle-bar
         v-else
         :collapsed="collapsed"
         :style="triggerStyle"
-        @click.native="handleToggleButtonClick"
+        @click="handleToggleButtonClick"
       />
     </template>
   </aside>
@@ -167,7 +167,7 @@ export default {
         }
         if (value) {
           this.styleMaxWidth = `${this.width}px`
-          this.$nextTick().then(() => {
+          nextTick(() => {
             this.$el.getBoundingClientRect()
             this.styleMaxWidth = `${this.collapsedWidth}px`
           })
@@ -178,7 +178,7 @@ export default {
         } else {
           this.styleMaxWidth = `${this.collapsedWidth}px`
           this.styleWidth = `${this.width}px`
-          this.$nextTick().then(() => {
+          nextTick(() => {
             this.$el.getBoundingClientRect()
             this.styleMaxWidth = `${this.width}px`
           })
@@ -210,7 +210,8 @@ export default {
       NLayout.siderCollapseMode = this.collapseMode
       NLayout.siderPosition = this.position
       NLayout.siderCollapsed = this.collapsed
-      // TODO: it must be a bug, to be fixed
+      // TODO: this is a workaround for bug of vue
+      // remove it if vue fixed it
       nextTick(() => NLayout.$forceUpdate())
     }
   },

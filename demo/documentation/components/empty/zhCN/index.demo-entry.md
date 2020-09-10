@@ -7,7 +7,7 @@ basic
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |size|`'small' \| 'medium' \| 'large' \| 'huge'`|`'medium'`||
 |description|`string`|`'无数据'`||
 |show-description|`boolean`|`true`||

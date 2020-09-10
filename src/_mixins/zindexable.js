@@ -18,18 +18,17 @@ export default {
     }
   },
   mounted () {
-    if (!this.syntheticDetachable && !this.zindexable) return
-    if (this.active) this._initZindexable()
+    if (this.zindexableEnabled) this._initZindexable()
   },
   watch: {
-    active (value) {
-      if (!this.syntheticDetachable && !this.zindexable) return
+    zindexableElementDisplayed (value) {
+      if (!this.zindexableEnabled) return
       if (process.env.NODE_ENV !== 'production') {
-        console.debug('[zindexable.watch.active]:', value)
+        console.debug('[zindexable.watch.zindexableElementDisplayed]:', value)
       }
       if (value) {
         this._initZindexable()
-        zIndexManager.setNewZIndex(this._getZindexableContent(), this.zIndex)
+        zIndexManager.setNewZIndex(this._zindexableGetElement(), this.zIndex)
       }
     }
   },
@@ -39,24 +38,24 @@ export default {
     }
   },
   beforeDestroy () {
-    if (!this.syntheticDetachable && !this.zindexable) return
+    if (!this.zindexableEnabled) return
     if (this.zindexableInitialized) {
-      zIndexManager.unregisterElement(this._getZindexableContent())
+      zIndexManager.unregisterElement(this._zindexableGetElement())
     }
   },
   methods: {
     _initZindexable () {
       if (!this.zindexableInitialized) {
-        zIndexManager.registerElement(this._getZindexableContent(), this.zIndex)
+        zIndexManager.registerElement(this._zindexableGetElement(), this.zIndex)
         this.zindexableInitialized = true
       }
     },
-    _getZindexableContent () {
+    _zindexableGetElement () {
       const refs = this.$refs
       if (refs.contentContainer) {
         return refs.contentContainer
       } else {
-        return this.getZindexableContent()
+        return this.zindexableGetElement()
       }
     }
   }

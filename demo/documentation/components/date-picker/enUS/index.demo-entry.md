@@ -26,7 +26,7 @@ format
 |clearable|`boolean`|`false`||
 |disabled|`boolean`|`false`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |type|`'date' \| 'datetime' \| 'daterange' \|'datetimerange'`|`'date`||
 |value|`number`|`null`||
 

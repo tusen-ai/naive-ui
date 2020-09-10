@@ -5,7 +5,7 @@ import withapp from '../../../_mixins/withapp'
 import themeable from '../../../_mixins/themeable'
 import getDefaultSlot from '../../../_utils/vue/getDefaultSlot'
 import SiderMenu from './SiderMenu'
-import NLayout from '../../../layout/src/Layout'
+import NLayout from '../../../layout/src/Layout.vue'
 import NLayoutSider from '../../../layout/src/LayoutSider'
 import { h } from 'vue'
 

@@ -5,7 +5,6 @@ import pxfy from '../../../_utils/css/pxfy'
 export default c([
   ({ props }) => {
     const {
-      transformDebounceScale,
       textColor,
       color,
       boxShadow,
@@ -15,10 +14,11 @@ export default c([
     const {
       easeInOutCubicBezier,
       easeInCubicBezier,
-      easeOutCubicBezier
+      easeOutCubicBezier,
+      transformDebounceScale
     } = props.$base
     return [
-      cTB('popover-content', {
+      cTB('popover-body', {
         raw: `
           transition:
             background-color .3s ${easeInOutCubicBezier},
@@ -229,26 +229,26 @@ function contentTransition (
   easeInCubicBezier
 ) {
   return [
-    c('&.popover-content-transition-enter-to, &.popover-content-transition-leave', {
-      raw: `
-        transform: ${transformDebounceScale};
-        opacity: 1;
-      `
-    }),
-    c('&.popover-content-transition-enter, &.popover-content-transition-leave-to', {
+    c('&.popover-body-transition-enter-from, &.popover-body-transition-leave-to', {
       raw: `
         opacity: 0;
         transform: scale(.85);
       `
     }),
-    c('&.popover-content-transition-enter-active', {
+    c('&.popover-body-transition-enter-to, &.popover-body-transition-leave-from', {
+      raw: `
+        transform: ${transformDebounceScale};
+        opacity: 1;
+      `
+    }),
+    c('&.popover-body-transition-enter-active', {
       raw: `
         transition:
           opacity .15s ${easeOutCubicBezier},
           transform .15s ${easeOutCubicBezier};
       `
     }),
-    c('&.popover-content-transition-leave-active', {
+    c('&.popover-body-transition-leave-active', {
       raw: `
         transition:
           opacity .15s ${easeInCubicBezier},

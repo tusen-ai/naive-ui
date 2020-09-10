@@ -15,7 +15,7 @@ name-size
 |size|`'small' \| 'medium' \| 'large' \| number`| `'medium'`||
 |src|`string`|`null`||
 |round|`boolean`|`false`||
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |themed-style|`{ [themeName: string]: Object } \| null`|`null`||
 
 ## Slots

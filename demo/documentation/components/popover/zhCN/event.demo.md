@@ -4,11 +4,10 @@
   placement="bottom"
   :width="200"
   trigger="hover"
-  style="margin-right: 12px;"
   @show="handleShow"
   @hide="handleHide"
 >
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button>
       悬浮
     </n-button>
@@ -21,11 +20,10 @@
   placement="bottom"
   :width="200"
   trigger="click"
-  style="margin-right: 12px;"
   @show="handleShow"
   @hide="handleHide"
 >
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button>
       点击
     </n-button>
@@ -38,11 +36,10 @@
   :show="showPopover"
   placement="bottom"
   :width="200"
-  trigger="manual"
   @show="handleShow"
   @hide="handleHide"
 >
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button @click="showPopover = !showPopover">
       点击
     </n-button>

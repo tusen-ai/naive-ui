@@ -1,7 +1,7 @@
 # Delay
 ```html
 <n-popover :delay="500" :duration="500" :width="240">
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button>
       Delay 500, Duration 500
     </n-button>

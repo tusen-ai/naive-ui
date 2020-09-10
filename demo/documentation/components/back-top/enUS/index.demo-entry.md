@@ -14,7 +14,7 @@ target-container-selector
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |target|`() => HTMLElement`|a function that returns the nearest scrollable ascendant element||
 |right|`number \| string`|`40`||
 |bottom|`number \| string`|`40`||

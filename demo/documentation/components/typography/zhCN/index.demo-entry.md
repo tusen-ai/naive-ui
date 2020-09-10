@@ -15,7 +15,7 @@ text
 ### 全部排版组件
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 
 
 ### Text Props

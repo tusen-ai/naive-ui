@@ -24,7 +24,7 @@ drawer-debug
 ### Modal
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |show|`boolean`|`false`||
 |mask-closable|`boolean`|`true`|点击遮罩时是否发出 `hide` 事件|
 |preset|`'card' \| 'confirm'`|`null`||

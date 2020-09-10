@@ -17,7 +17,7 @@ line-debug
 ### Tabs Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |active-name|`string \| number`|`null`||
 |type|`'line' \| 'card'`|`'line'`||
 |closable|`boolean`|`false`||

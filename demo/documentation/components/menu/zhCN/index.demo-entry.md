@@ -29,7 +29,7 @@ collapse
 |overlay-width|`number \| string`|`null`|弹出子菜单的宽度，只在菜单为水平或者折叠时生效|
 |overlay-min-width|`number \| string`|`180`|弹出子菜单的最小宽度，只在菜单为水平或者折叠时生效|
 |root-indent|`number`|`null`|菜单第一级的缩进，如果没有设定，使用 `indent` 代替|
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |value|`string`|`null`|菜单当前的选中值|
 
 ### MenuItem Properties

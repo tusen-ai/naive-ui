@@ -28,7 +28,7 @@ basic
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |language|`string`|`null`||
 |code|`string`|`null`||
 |trim|`boolean`|`true`||

@@ -1,7 +1,7 @@
 # 不要箭头
 ```html
 <n-popover :show-arrow="false">
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button>
       悬浮
     </n-button>

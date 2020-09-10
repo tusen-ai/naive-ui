@@ -14,7 +14,7 @@ processing
 ## Props
 |Name|Type|Default|Description|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |processing|`boolean`|`false`||
 |type|`'line' \| 'circle' \| 'multiple-circle'`|`line`||
 |status|`'default' \| 'success' \| 'error' \| 'warning' \| 'info'`|`'default'`||

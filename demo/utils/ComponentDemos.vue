@@ -1,5 +1,7 @@
 <script>
 import { h } from 'vue'
+import NCol from '../../src/grid/src/Col'
+import NRow from '../../src/grid/src/Row'
 
 export default {
   name: 'ComponentDemos',
@@ -16,26 +18,28 @@ export default {
     //   staticClass: 'n-documentation-anchor'
     // }, anchorSlot)]
     if (this.singleColumn) {
-      return h('n-row', {
-        props: {
-          gutter: 16
-        }
-      }, [
-        h('n-col', { props: { span: 24 } }, defaultSlot)
-        // h('n-col', { props: { span: 4 } }, anchorSlot)
-      ])
+      return h(NRow, {
+        gutter: 16
+      }, {
+        default: () => h(NCol, { span: 24 }, this.$slots)
+        // h(NCol, { props: { span: 4 } }, anchorSlot)
+      })
     } else {
       const leftColumn = defaultSlot.filter((value, index) => index % 2 === 0)
       const rightColumn = defaultSlot.filter((value, index) => index % 2 === 1)
-      return h('n-row', {
-        props: {
-          gutter: 16
-        }
-      }, [
-        h('n-col', { props: { span: 12 } }, leftColumn),
-        h('n-col', { props: { span: 12 } }, rightColumn)
-        // h('n-col', { props: { span: 4 } }, anchor)
-      ])
+      return h(NRow, {
+        gutter: 16
+      }, {
+        default: () => [
+          h(NCol, { span: 12 }, {
+            default: () => leftColumn
+          }),
+          h(NCol, { span: 12 }, {
+            default: () => rightColumn
+          })
+        // h(NCol, { props: { span: 4 } }, anchor)
+        ]
+      })
     }
   }
 }

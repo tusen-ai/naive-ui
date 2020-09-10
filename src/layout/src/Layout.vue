@@ -23,10 +23,11 @@
 </template>
 
 <script>
+import { nextTick } from 'vue'
+import NScrollbar from '../../scrollbar'
 import layoutModeMixin from './layoutModeMixin'
 import themeable from '../../_mixins/themeable'
 import withapp from '../../_mixins/withapp'
-import NScrollbar from '../../scrollbar'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles/layout'
 
@@ -110,7 +111,7 @@ export default {
     },
     blockChildLayoutTransitionOneTick () {
       this.childLayoutTransitionDisabled = true
-      this.$nextTick().then(() => {
+      nextTick(() => {
         this.childLayoutTransitionDisabled = false
       })
     }

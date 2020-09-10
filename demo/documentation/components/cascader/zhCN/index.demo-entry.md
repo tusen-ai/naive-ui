@@ -27,7 +27,7 @@ filter
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null`|`null`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
 |options|`Array<CascaderOption>`|`null`||
 |value|`string \| number`|`null`||
 |placeholder|`string`|`'请选择'`||

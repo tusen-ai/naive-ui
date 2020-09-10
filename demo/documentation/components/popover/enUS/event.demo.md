@@ -8,7 +8,7 @@
   @show="handleShow"
   @hide="handleHide"
 >
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button>
       Hover
     </n-button>
@@ -25,7 +25,7 @@
   @show="handleShow"
   @hide="handleHide"
 >
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button>
       Click
     </n-button>
@@ -38,11 +38,10 @@
   :show="showPopover"
   placement="bottom"
   :width="200"
-  trigger="manual"
   @show="handleShow"
   @hide="handleHide"
 >
-  <template v-slot:activator>
+  <template v-slot:trigger>
     <n-button @click="showPopover = !showPopover">
       Manual
     </n-button>

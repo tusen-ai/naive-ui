@@ -1,7 +1,7 @@
-# Width
+# Body Style
 ```html
-<n-popover :width="500">
-  <template v-slot:activator>
+<n-popover :body-style="{ width: '500px' }">
+  <template v-slot:trigger>
     <n-button>
       Width 500px
     </n-button>

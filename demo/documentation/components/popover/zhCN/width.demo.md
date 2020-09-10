@@ -1,7 +1,7 @@
-# 宽度
+# 主体样式
 ```html
-<n-popover :width="500">
-  <template v-slot:activator>
+<n-popover :body-style="{ width: '500px' }">
+  <template v-slot:trigger>
     <n-button style="margin:0;">
       宽度 500px
     </n-button>

@@ -1,3 +1,8 @@
+last cherry-picked commit: 3e169f3fde95604dc68b884f0745b9af53a5b1ba
+
+zindexable
+placeable 进行了大调整
+
 - [ ] Form
 - [ ] Upload
 - [ ] affix
@@ -48,6 +53,12 @@
 - [ ] pagination
 - [ ] popconfirm
 - [ ] popover
+  - `manual` trigger is removed
+  - add `default-show` prop
+  - `overlay-xxx` to `body-xxx`
+  - remove `controller` prop
+  - remove `max-width`, `width`, `min-width` prop 
+  - deprecate `v-slot:activator` use `v-slot:trigger` instead
 - [ ] popselect
 - [ ] progress
 - [ ] radio
