@@ -165,7 +165,7 @@ export default c([
   }),
   // TODO: refactor transition style
   cB('message', [
-    c('&&-transition-enter, &&-transition-leave-to', {
+    c('&.message-transition-enter-from, &.message-transition-leave-to', {
       raw: `
         opacity: 0;
         transform: translateY(-12px) scale(.5);

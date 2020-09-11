@@ -1,28 +1,26 @@
 # 关于主题的注意事项
-无论你在什么位置调用 `this.$NMessage` 来生成一个信息，如果你不明确指明主题，被创建信息的主题会遵从这个组件最靠外层的一个祖先 Config Provider 的主题。因为如果调用信息的主题和当前组件主题一致的话可能会造成混乱。
+如果你不明确指明主题，被创建信息的主题会与对应 `n-message-controller` 的主题一致。
 ```html
-<n-button @click="emitInfo" style="margin: 0 8px 12px 0;">
+<n-message-controller ref="message" />
+<n-button @click="info" style="margin: 0 8px 12px 0;">
   你可以在 Message 还在的时候切换主题
 </n-button>
-<n-button @click="emitLoading">
+<n-button @click="loading">
   指明深色主题
 </n-button>
 ```
 
 ```js
 export default {
-  data() {
-    return {}
-  },
   methods: {
-    emitInfo () {
-      this.$NMessage.info(
+    info () {
+      this.$refs.message.info(
         "I don't know why nobody told you how to unfold your love",
         { duration: 5000 }
       )
     },
-    emitLoading () {
-      this.$NMessage.info(
+    loading () {
+      this.$refs.message.info(
         "I don't know why nobody told you how to unfold your love",
         { duration: 5000, theme: 'dark' }
       )

@@ -1,9 +1,7 @@
-import MessagePlugin from './src/MessagePlugin'
-import { install } from '../_utils/naive/installThemeAwarableProperty'
+import MessageController from './src/MessageController'
 
-MessagePlugin.install = function (app, naive) {
-  MessagePlugin.Vue = app
-  install(app, MessagePlugin, `$${naive.componentPrefix}Message`)
+MessageController.install = function (app, naive) {
+  app.component(naive.componentPrefix + MessageController.name, MessageController)
 }
 
-export default MessagePlugin
+export default MessageController

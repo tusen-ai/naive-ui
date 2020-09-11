@@ -12,37 +12,38 @@ about-theme
 ```
 
 ## API
-### $NMessage Methods
+### MessageController API
+#### MessageController Methods
 |名称|类型|说明|
 |-|-|-|
-|info|`(content: string, option?: MessageOption) => MessageEnvironment`||
-|success|`(content: string, option?: MessageOption) => MessageEnvironment`||
-|warning|`(content: string, option?: MessageOption) => MessageEnvironment`||
-|error|`(content: string, option?: MessageOption) => MessageEnvironment`||
-|loading|`(content: string, option?: MessageOption) => MessageEnvironment`||
+|info|`(content: string, option?: MessageOption) => MessageReactive`||
+|success|`(content: string, option?: MessageOption) => MessageReactive`||
+|warning|`(content: string, option?: MessageOption) => MessageReactive`||
+|error|`(content: string, option?: MessageOption) => MessageReactive`||
+|loading|`(content: string, option?: MessageOption) => MessageReactive`||
 
-### MessageOption Properties
+#### MessageOption Properties
 |名称|类型|说明|
 |-|-|-|
-|content|`string \| (() => VNode \| Array<VNode>)`|可以是 render 函数|
-|icon|`() => VNode`|可以是 render 函数|
-|theme|`'light' \| 'dark'`||
 |closable|`boolean`||
-|onHide|`Function`||
-|onAfterHide|`Function`||
+|content|`string \| (() => VNode \| Array<VNode>)`|信息内容|
+|icon|`() => VNode`|信息图标|
+|onAfterLeave|`Function`|信息消失动画结束的回调|
+|onLeave|`Function`|信息开始消失的回调|
+|theme|`'light' \| 'dark' \| string \| null`||
 
-### MessageEnvironment API
-#### MessageEnvironment Properties
+#### MessageReactive Properties
 |名称|类型|说明|
 |-|-|-|
-|content|`string \| (() => VNode \| Array<VNode>)`|可以是 render 函数|
-|icon|`string \| (() => VNode)`|可以是 render 函数|
+|closable|`boolean`||
+|content|`string \| (() => VNode \| Array<VNode>)`|信息内容|
+|icon|`() => VNode`|信息图标|
+|onAfterLeave|`Function`|信息消失动画结束的回调|
+|onLeave|`Function`|信息开始消失的回调|
+|theme|`'light' \| 'dark' \| string \| null`||
 |type|`'info' \| 'success' \| 'warning' \| 'error' \| 'loading'`||
-|closable|`boolean`||
-|onHide|`Function`||
-|onAfterHide|`Function`||
 
-#### MessageEnvironment Methods
+#### MessageReactive Methods
 |名称|类型|说明|
 |-|-|-|
-|hide|`()`||
+|destroy|`()`||

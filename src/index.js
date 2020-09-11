@@ -39,7 +39,7 @@ import List from './list'
 // import LoadingBar from './loading-bar'
 import Log from './log'
 import Menu from './menu'
-// import Message from './message'
+import Message from './message'
 import Modal from './modal'
 // import Notification from './notification'
 import Pagination from './pagination'
@@ -231,7 +231,7 @@ export default create({
     Select,
     Modal,
     Input,
-    // Message,
+    Message,
     // Notification,
     Pagination,
     Tooltip,

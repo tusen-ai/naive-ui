@@ -1,33 +1,34 @@
 # 手动关闭
 ```html
-<n-button @click="openMessage">
+<n-message-controller ref="message" />
+<n-button @click="createMessage">
   打开
 </n-button>
-<n-button @click="closeMessage">
+<n-button @click="removeMessage">
   关闭
 </n-button>
 ```
 ```js
 export default {
-  data() {
+  data () {
     return {
       message: null
     }
   },
   beforeDestroy () {
-    this.closeMessage()
+    this.removeMessage()
   },
   methods: {
-    openMessage () {
+    createMessage () {
       if (!this.message) {
-        this.message = this.$NMessage.info('3 * 3 * 4 * 4 * ?', {
+        this.message = this.$refs.message.info('3 * 3 * 4 * 4 * ?', {
           duration: 0
         })
       }
     },
-    closeMessage () {
+    removeMessage () {
       if (this.message) {
-        this.message.hide()
+        this.message.destroy()
         this.message = null
       }
     }

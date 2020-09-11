@@ -1,5 +1,6 @@
 # 修改创建的信息
 ```html
+<n-message-controller ref="message" />
 <n-button @click="createMessage">
   先开个信息
 </n-button>
@@ -8,7 +9,7 @@
 ```
 ```js
 export default {
-  data() {
+  data () {
     return {
       count: 0,
       typeIndex: 0,
@@ -34,11 +35,11 @@ export default {
         this.message.type = this.type
       }
     },
-    createMessage() {
-      this.message = this.$NMessage[this.type](
+    createMessage () {
+      this.message = this.$refs.message[this.type](
         '' + this.count, { duration: 10000 }
       )
-    },
+    }
   }
 }
 ```

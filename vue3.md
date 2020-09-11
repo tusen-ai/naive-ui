@@ -46,7 +46,12 @@ placeable 进行了大调整
 - [ ] locale
 - [ ] log
 - [ ] menu
-- [ ] message
+- [x] message
+  - rewrite message using `n-message-controller`
+  - deprecate `onHide`, new `onLeave`
+  - deprecate `onAfterHide`, new `onAfterLeave`
+  - remove `hide` on message instance, new `destroy`
+  - TODO: update enUS docs
 - [ ] modal
 - [ ] notification
 - [ ] pagination

@@ -1,19 +1,20 @@
+import { h, createTextVNode } from 'vue'
+
 export default {
-  functional: true,
   props: {
     render: {
       type: [String, Number, Function],
       default: () => {}
     }
   },
-  render (h, context) {
-    const render = context.props.render
+  render () {
+    const { render } = this
     if (typeof render === 'function') {
       return render(h)
     } else if (typeof render === 'string') {
-      return context._v(render)
+      return createTextVNode(render)
     } else if (typeof render === 'number') {
-      return context._v(String(render))
+      return createTextVNode(String(render))
     } else {
       return null
     }
