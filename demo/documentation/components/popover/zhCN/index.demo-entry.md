@@ -48,5 +48,4 @@ manual-position
 ## Events
 |名称|参数|说明|
 |-|-|-|
-|show|`()`||
-|hide|`()`||
+|update:show|`(value: boolean)`||

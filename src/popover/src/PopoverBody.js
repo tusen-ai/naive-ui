@@ -18,10 +18,6 @@ import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
 export default {
   name: 'PopoverBody',
   cssrName: 'Popover',
-  emits: [
-    'show',
-    'hide'
-  ],
   inject: {
     NPopover: {
       default: null
@@ -109,15 +105,6 @@ export default {
     return {
       placeableEnabled: this.show,
       zindexableEnabled: true
-    }
-  },
-  watch: {
-    show (value) {
-      if (value) {
-        this.$emit('show')
-      } else {
-        this.$emit('hide')
-      }
     }
   },
   created () {

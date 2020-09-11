@@ -4,7 +4,6 @@
   placement="bottom"
   :width="200"
   trigger="hover"
-  style="margin-right: 12px;"
   @show="handleShow"
   @hide="handleHide"
 >
@@ -21,7 +20,6 @@
   placement="bottom"
   :width="200"
   trigger="click"
-  style="margin-right: 12px;"
   @show="handleShow"
   @hide="handleHide"
 >

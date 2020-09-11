@@ -60,6 +60,8 @@ export default {
     }
   },
   emits: [
+    'update:show',
+    // legacy
     'show',
     'hide'
   ],
@@ -231,6 +233,7 @@ export default {
           e.target !== e.currentTarget
         ) return
         this.showTimerId = window.setTimeout(() => {
+          this.$emit('update:show', true)
           this.uncontrolledShow = true
           this.showTimerId = null
         }, this.delay)
@@ -244,6 +247,7 @@ export default {
           e.target !== e.currentTarget
         ) return
         this.hideTimerId = window.setTimeout(() => {
+          this.$emit('update:show', false)
           this.uncontrolledShow = false
           this.hideTimerId = null
         }, this.duration)
@@ -259,12 +263,15 @@ export default {
       if (this.trigger === 'click') {
         this.clearTimer()
         this.uncontrolledShow = false
+        this.$emit('update:show', false)
       }
     },
     handleClick () {
       if (this.trigger === 'click') {
         this.clearTimer()
-        this.uncontrolledShow = !this.uncontrolledShow
+        const nextShow = !this.mergedShow
+        this.uncontrolledShow = nextShow
+        this.$emit('update:show', nextShow)
       }
     }
   },

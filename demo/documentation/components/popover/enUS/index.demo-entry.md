@@ -49,5 +49,4 @@ manual-position
 ## Events
 |Name|Parameters|Description|
 |-|-|-|
-|show|`()`||
-|hide|`()`||
+|update:show|`(value: boolean)`||
