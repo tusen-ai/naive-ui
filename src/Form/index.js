@@ -5,10 +5,10 @@ import FormItemCol from './src/FormItemCol'
 import FormItemRow from './src/FormItemRow'
 
 Form.install = function (app, naive) {
-  app.component(Form.name + naive.componentPrefix, Form)
-  app.component(FormItem.name + naive.componentPrefix, FormItem)
-  app.component(FormItemCol.name + naive.componentPrefix, FormItemCol)
-  app.component(FormItemRow.name + naive.componentPrefix, FormItemRow)
+  app.component(naive.componentPrefix + Form.name, Form)
+  app.component(naive.componentPrefix + FormItem.name, FormItem)
+  app.component(naive.componentPrefix + FormItemCol.name, FormItemCol)
+  app.component(naive.componentPrefix + FormItemRow.name, FormItemRow)
 }
 
 export default Form
