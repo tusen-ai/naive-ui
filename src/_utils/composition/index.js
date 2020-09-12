@@ -1,7 +1,8 @@
 import {
   ref,
   computed,
-  watch
+  watch,
+  onMounted
 } from 'vue'
 
 export function useFalseUntilTruthy (valueRef) {
@@ -32,4 +33,12 @@ export function useCompitable (reactive, keys) {
       if (reactive[key] !== undefined) return reactive[key]
     }
   })
+}
+
+export function useIsMounted () {
+  const isMounted = ref(false)
+  onMounted(() => {
+    isMounted.value = true
+  })
+  return isMounted
 }

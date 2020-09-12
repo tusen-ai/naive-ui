@@ -6,14 +6,15 @@ import {
 } from 'vue'
 import clickoutside from '../../_directives/clickoutside'
 import mousemoveoutside from '../../_directives/mousemoveoutside'
+import zindexable from '../../_directives/zindexable'
 import themeable from '../../_mixins/themeable'
 import withapp from '../../_mixins/withapp'
 import placeable from '../../_mixins/placeable'
-import zindexable from '../../_mixins/zindexable'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
 import formatLength from '../../_utils/css/formatLength'
 import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
+import { useIsMounted } from '../../_utils/composition'
 
 export default {
   name: 'PopoverBody',
@@ -98,13 +99,16 @@ export default {
     withapp,
     themeable,
     placeable,
-    zindexable,
     usecssr(styles)
   ],
+  setup () {
+    return {
+      isMounted: useIsMounted()
+    }
+  },
   data () {
     return {
-      placeableEnabled: this.show,
-      zindexableEnabled: true
+      placeableEnabled: this.show
     }
   },
   created () {
@@ -117,10 +121,7 @@ export default {
     placeableManuallyPositioned () {
       return this.manuallyPositioned
     },
-    zindexableElementDisplayed () {
-      return this.show
-    },
-    zindexableFlip () {
+    placeableFlip () {
       return this.filp
     },
     useVShow () {
@@ -192,70 +193,73 @@ export default {
       return this.NPopover.getTriggerElement()
     },
     placeableGetTrackingElement () {
-      return this.$refs.wrapper
+      return this.$refs.bodyWrapper
     },
     placeableGetAbsoluteOffsetContainer () {
-      return this.$refs.container
-    },
-    // for zindexable mixin
-    zindexableGetElement () {
       return this.$refs.container
     }
   },
   render () {
-    return h('div', {
-      class: {
-        'n-positioning-container': true,
-        [this.containerClass || 'n-popover']: true,
-        [this.namespace]: this.namespace
-      },
-      ref: 'container'
-    }, [
+    return withDirectives(
       h('div', {
-        class: 'n-positioning-content',
-        ref: 'wrapper'
+        class: {
+          'n-positioning-container': true,
+          [this.containerClass || 'n-popover']: true,
+          [this.namespace]: this.namespace
+        },
+        ref: 'container'
       }, [
-        h(Transition, {
-          name: 'popover-body-transition',
-          appear: true,
-          onEnter: () => {
-            this.placeableEnabled = true
-          },
-          onAfterLeave: () => {
-            this.placeableEnabled = false
-          }
-        }, {
-          default: () => ((this.useVShow || this.show) ? withDirectives(h('div', {
-            'n-placement': this.adjustedPlacement,
-            class: {
-              'n-popover-body': true,
-              'n-popover-body--no-arrow': !this.arrow,
-              [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
-              'n-popover-body--shadow': this.shadow,
-              [this.bodyClass]: this.bodyClass,
-              'n-popover-body--styled': !this.raw,
-              'n-popover-body--fix-width': this.width !== null || this.maxWidth !== null
+        h('div', {
+          class: 'n-positioning-content',
+          ref: 'bodyWrapper'
+        }, [
+          h(Transition, {
+            name: 'popover-body-transition',
+            appear: this.isMounted,
+            onEnter: () => {
+              this.placeableEnabled = true
             },
-            style: this.style,
-            onMouseEnter: this.handleMouseEnter,
-            onMouseLeave: this.handleMouseLeave
-          }, [
-            getDefaultSlot(this),
-            this.arrow
-              ? h(
-                'div',
-                {
-                  staticClass: 'n-popover-arrow-wrapper'
-                }, [
-                  h('div', {
-                    staticClass: 'n-popover-arrow',
-                    style: this.arrowStyle
-                  })
-                ])
-              : null
-          ]), this.directives) : null)
-        })
-      ])
-    ])
+            onAfterLeave: () => {
+              this.placeableEnabled = false
+            }
+          }, {
+            default: () => ((this.useVShow || this.show) ? withDirectives(h('div', {
+              'n-placement': this.adjustedPlacement,
+              class: {
+                'n-popover-body': true,
+                'n-popover-body--no-arrow': !this.arrow,
+                [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
+                'n-popover-body--shadow': this.shadow,
+                [this.bodyClass]: this.bodyClass,
+                'n-popover-body--styled': !this.raw,
+                'n-popover-body--fix-width': this.width !== null || this.maxWidth !== null
+              },
+              style: this.style,
+              onMouseEnter: this.handleMouseEnter,
+              onMouseLeave: this.handleMouseLeave
+            }, [
+              getDefaultSlot(this),
+              this.arrow
+                ? h(
+                  'div',
+                  {
+                    staticClass: 'n-popover-arrow-wrapper'
+                  }, [
+                    h('div', {
+                      staticClass: 'n-popover-arrow',
+                      style: this.arrowStyle
+                    })
+                  ])
+                : null
+            ]), this.directives) : null)
+          })
+        ])
+      ]),
+      [
+        [zindexable, {
+          enabled: this.show
+        }]
+      ]
+    )
   }
 }

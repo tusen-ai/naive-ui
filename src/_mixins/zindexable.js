@@ -2,13 +2,12 @@
 import zIndexManager from '../_utils/dom/zIndexManager'
 
 /**
- * watch active on component,
- * acquire new z-index on content when active is set to true
+ * watch zindexableEnabled on component,
+ * acquire new z-index on content when zindexableEnabled is set to true
  *
  * dependency:
- * $refs.contentContainer
- * $vm.active
- * $vm.syntheticDetachable
+ * $vm.zindexableEnabled
+ * $vm.zindexableGetElement
  */
 export default {
   props: {
@@ -51,12 +50,7 @@ export default {
       }
     },
     _zindexableGetElement () {
-      const refs = this.$refs
-      if (refs.contentContainer) {
-        return refs.contentContainer
-      } else {
-        return this.zindexableGetElement()
-      }
+      return this.zindexableGetElement()
     }
   }
 }
