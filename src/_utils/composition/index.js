@@ -42,3 +42,5 @@ export function useIsMounted () {
   })
   return isMounted
 }
+
+export { default as useLastClickPosition } from './use-last-click-position'

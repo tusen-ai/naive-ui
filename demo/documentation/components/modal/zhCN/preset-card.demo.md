@@ -1,22 +1,21 @@
 # 使用 Card 预设
-Modal 有一些预设，让你在设定之后可以使用对应的 Slots 还有 Props。
+模态框有一些预设，让你在设定之后可以使用对应的 slots 还有 props。
 ```html
 <n-button
-  @click="modalActive = true"
+  @click="show"
 >
   来吧
 </n-button>
 <n-modal
-  v-model="modalActive"
+  v-model:show="showModal"
   preset="card"
-  overlay-style="width: 600px;"
+
+  :body-style="bodyStyle"
   title="卡片预设"
-  :bordered="false"
   size="huge"
-  :segmented="{
-    content: 'soft',
-    footer: 'soft'
-  }"
+  :bordered="false"
+  :segmented="segmented"
+  @close="hide"
 >
   <template v-slot:header-extra>
     噢!
@@ -31,7 +30,22 @@ Modal 有一些预设，让你在设定之后可以使用对应的 Slots 还有 
 export default {
   data () {
     return {
-      modalActive: false,
+      showModal: false,
+      bodyStyle: {
+        width: '600px'
+      },
+      segmented: {
+        content: 'soft',
+        footer: 'soft'
+      }
+    }
+  },
+  methods: {
+    show () {
+      this.showModal = true
+    },
+    hide () {
+      this.showModal = false
     }
   }
 }

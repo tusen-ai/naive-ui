@@ -1,29 +1,29 @@
 <template>
   <div
-    class="n-modal-content"
-    :class="{
-      'n-modal-content--active': styleActive
-    }"
-    @mousedown="handleMouseDown"
-    @mouseup="handleMouseUp"
+    v-if="displayDirective === 'show' || displayed || show"
+    v-show="displayDirective === 'if' || displayed || show"
+    class="n-modal-body-wrapper"
   >
-    <n-scrollbar ref="scrollbar" @scroll="handleScroll">
+    <n-scrollbar ref="scrollbar">
       <transition
         name="n-fade-in-scale-up-transition"
+        :appear="NModal.isMounted"
         @enter="handleEnter"
         @after-leave="handleAfterLeave"
         @before-leave="handleBeforeLeave"
       >
         <div
-          v-if="active"
-          ref="contentInner"
-          style="margin: auto;"
-          class="n-modal-content-slot"
+          v-show="show"
+          v-clickoutside="handleClickOutside"
+          class="n-modal"
+          :class="{
+            [`n-${theme}-theme`]: theme,
+          }"
         >
           <n-confirm
             v-if="preset === 'confirm'"
             ref="confirm"
-            :style="overlayStyle"
+            :style="compitableBodyStyle"
             :theme="theme"
             :title="title"
             :closable="closable"
@@ -48,7 +48,7 @@
           <n-card
             v-else-if="preset === 'card'"
             :theme="theme"
-            :style="overlayStyle"
+            :style="compitableBodyStyle"
             :title="title"
             :closable="closable"
             :size="size"
@@ -78,97 +78,109 @@
 </template>
 
 <script>
+import { nextTick, reactive, toRefs, toRef, watch } from 'vue'
 import NScrollbar from '../../scrollbar'
 import NConfirm from '../../confirm/src/Confirm'
 import NCard from '../../card'
 import themeable from '../../_mixins/themeable'
 import presetProps from './presetProps'
-
-let mousePosition = null
-
-document.documentElement.addEventListener('click', (e) => {
-  mousePosition = {
-    x: e.clientX,
-    y: e.clientY
-  }
-  window.setTimeout(() => {
-    mousePosition = null
-  }, 32)
-}, true)
+import clickoutside from '../../_directives/clickoutside'
+import { useLastClickPosition, useCompitable } from '../../_utils/composition'
 
 export default {
-  name: 'NModalContent',
+  name: 'ModalBody',
+  directives: {
+    clickoutside
+  },
   components: {
     NScrollbar,
     NConfirm,
     NCard
   },
-  provide () {
-    return {
-      NModal: this
+  mixins: [
+    themeable
+  ],
+  inject: {
+    NModal: {
+      default: null
     }
   },
-  mixins: [themeable],
+  setup (props) {
+    const dataRefs = toRefs(reactive({
+      displayed: props.show,
+      transformOriginX: null,
+      transformOriginY: null
+    }))
+    watch(toRef(props, 'show'), value => {
+      if (value) dataRefs.displayed.value = true
+    })
+    return {
+      compitableBodyStyle: useCompitable(props, [
+        'overlayStyle',
+        'bodyStyle'
+      ]),
+      mousePosition: useLastClickPosition(),
+      ...dataRefs
+    }
+  },
   props: {
-    active: {
+    show: {
       type: Boolean,
-      default: false
-    },
-    activateEvent: {
-      validator (e) {
-        return e instanceof MouseEvent
-      },
-      default: null
+      default: undefined
     },
     preset: {
       type: String,
-      default: ''
+      default: undefined
     },
-    ...presetProps
-  },
-  data () {
-    return {
-      styleActive: false,
-      transformOriginX: null,
-      transformOriginY: null,
-      scrollTop: 0
-    }
-  },
-  created () {
-    if (this.active) {
-      this.styleActive = true
+    displayDirective: {
+      type: String,
+      default: null
+    },
+    ...presetProps,
+    // events
+    onClickoutside: {
+      type: Function,
+      default: () => {}
+    },
+    onBeforeLeave: {
+      type: Function,
+      default: () => {}
+    },
+    onAfterLeave: {
+      type: Function,
+      default: () => {}
+    },
+    onPositiveClick: {
+      type: Function,
+      default: () => {}
+    },
+    onNegativeClick: {
+      type: Function,
+      default: () => {}
+    },
+    onClose: {
+      type: Function,
+      default: () => {}
     }
   },
   methods: {
     styleTransformOrigin () {
-      const transformOriginX = this.transformOriginX
-      const transformOriginY = this.transformOriginY
+      const {
+        transformOriginX,
+        transformOriginY
+      } = this
       if (transformOriginX === null || transformOriginY === null) {
         return null
       } else {
-        return `${transformOriginX}px ${transformOriginY + this.scrollTop}px`
+        const scrollTop = this.$refs.scrollbar.containerScrollTop
+        return `${transformOriginX}px ${transformOriginY + scrollTop}px`
       }
     },
-    getSlotDOM () {
-      const els = (this.$refs.contentInner && this.$refs.contentInner.childNodes) || []
-      return els
-    },
-    handleMouseDown (e) {
-      this.$emit('mousedown', e)
-    },
-    handleMouseUp (e) {
-      this.$emit('mouseup', e)
-    },
-    handleEnter () {
-      this.styleActive = true
-      this.$refs.scrollbar.enableScrollbar()
-      this.$nextTick().then(() => {
-        this.updateTransformOrigin()
-      })
-    },
-    updateTransformOrigin () {
+    syncTransformOrigin (el) {
+      const {
+        mousePosition
+      } = this
       if (
-        !this.activateEvent &&
         !mousePosition
       ) {
         return
@@ -177,48 +189,45 @@ export default {
       const {
         offsetLeft,
         offsetTop
-      } = this.$refs.contentInner
-      if (
-        this.activateEvent
-      ) {
-        const top = this.activateEvent.clientY
-        const left = this.activateEvent.clientX
-        this.transformOriginX = -(offsetLeft - left)
-        this.transformOriginY = -(offsetTop - top - scrollTop)
-      } else if (mousePosition) {
+      } = el
+      if (mousePosition) {
         const top = mousePosition.y
         const left = mousePosition.x
         this.transformOriginX = -(offsetLeft - left)
         this.transformOriginY = -(offsetTop - top - scrollTop)
       }
-      this.$refs.contentInner.style.transformOrigin = this.styleTransformOrigin()
+      el.style.transformOrigin = this.styleTransformOrigin()
     },
-    handleBeforeLeave () {
-      this.$refs.contentInner.style.transformOrigin = this.styleTransformOrigin()
+    handleEnter (el) {
+      // TODO: check what happened
+      this.$refs.scrollbar.enableScrollbar()
+      nextTick(() => {
+        this.syncTransformOrigin(el)
+      })
+    },
+    handleBeforeLeave (el) {
+      el.style.transformOrigin = this.styleTransformOrigin()
+      // TODO: check what happened
       this.$refs.scrollbar.disableScrollbar()
-      this.$emit('before-leave')
+      this.onBeforeLeave()
     },
     handleAfterLeave () {
-      this.styleActive = false
-      this.scrollTop = 0
+      this.displayed = false
       this.transformOriginX = null
       this.transformOriginY = null
-      this.$emit('after-leave')
+      this.onAfterLeave()
     },
     handleCloseClick () {
-      this.$emit('close')
+      this.onClose()
     },
     handleNegativeClick () {
-      this.$emit('negative-click')
+      this.onNegativeClick()
     },
     handlePositiveClick () {
-      this.$emit('positive-click')
+      this.onPositiveClick()
     },
-    handleScroll (e) {
-      this.scrollTop = e.target.scrollTop
-    },
-    getDetachTarget () {
-      return this.$refs.contentInner
+    handleClickOutside () {
+      this.onClickoutside()
     }
   }
 }

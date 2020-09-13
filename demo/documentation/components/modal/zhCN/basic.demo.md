@@ -1,21 +1,17 @@
 # 基础用法
-Modal 的基础用法，你可以把任何东西放进去，比如一个卡片。
+模态框的基础用法，你可以把任何东西放进去，比如一个卡片。
 ```html
 <n-button
-  @click="modalActive = true"
+  @click="showModal = true"
 >
   来吧
 </n-button>
-<n-modal v-model="modalActive">
+<n-modal v-model:show="showModal">
   <n-card
     style="width: 600px;"
     title="模态框"
     :bordered="false"
     size="huge"
-    :segmented="{
-      content: 'soft',
-      footer: 'soft'
-    }"
   >
     <template v-slot:header-extra>
      噢！
@@ -31,7 +27,7 @@ Modal 的基础用法，你可以把任何东西放进去，比如一个卡片�
 export default {
   data () {
     return {
-      modalActive: false
+      showModal: false
     }
   }
 }

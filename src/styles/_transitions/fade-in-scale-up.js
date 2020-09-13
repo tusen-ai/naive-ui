@@ -23,11 +23,11 @@ export default function ({
       transformOrigin,
       transition: `opacity ${duration} ${easeOutCubicBezier}, transform ${duration} ${easeOutCubicBezier} ${originalTransition && ',' + originalTransition}`
     }),
-    c(`&.${namespace}-fade-in-scale-up-transition-enter, &.${namespace}-fade-in-scale-up-transition-leave-to`, {
+    c(`&.${namespace}-fade-in-scale-up-transition-enter-from, &.${namespace}-fade-in-scale-up-transition-leave-to`, {
       opacity: 0,
       transform: `scale(${enterScale}) ${originalTransform}`
     }),
-    c(`&.${namespace}-fade-in-scale-up-transition-leave, &.${namespace}-fade-in-scale-up-transition-enter-to`, {
+    c(`&.${namespace}-fade-in-scale-up-transition-leave-from, &.${namespace}-fade-in-scale-up-transition-enter-to`, {
       opacity: 1,
       transform: `scale(${transformDebounceScale}) ${originalTransform}`
     })

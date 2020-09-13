@@ -1,6 +1,6 @@
 export default {
-  overlayStyle: {
-    type: [Object, String],
+  bodyStyle: {
+    type: Object,
     default: null
   },
   // For preset: confirm, card
@@ -37,5 +37,10 @@ export default {
   bordered: {
     type: Boolean,
     default: false
+  },
+  // deprecated
+  overlayStyle: {
+    type: Object,
+    default: undefined
   }
 }

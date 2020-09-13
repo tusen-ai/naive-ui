@@ -1,4 +1,4 @@
-import { cTB, c, cB, cNotM } from '../../../_utils/cssr'
+import { cTB, c, cB } from '../../../_utils/cssr'
 import fadeInTransition from '../../../styles/_transitions/fade-in'
 import fadeInScaleUpTransition from '../../../styles/_transitions/fade-in-scale-up'
 
@@ -11,19 +11,6 @@ export default c([
       color
     } = props.$local
     return [
-      cTB('modal-content', [
-        cB('card', {
-          raw: `
-            background-color: ${color};
-          `
-        }),
-        cB('confirm', {
-          raw: `
-            width: 446px;
-            max-width: calc(100vw - 32px);
-          `
-        })
-      ]),
       cB('modal-container', {
         raw: `
           position: fixed;
@@ -34,7 +21,7 @@ export default c([
           display: flex;
         `
       }),
-      cB('modal-overlay', {
+      cB('modal-mask', {
         raw: `
           position: fixed;
           left: 0;
@@ -51,7 +38,7 @@ export default c([
           leaveCubicBezier: easeOutCubicBezier
         })
       ]),
-      cB('modal-content', {
+      cB('modal-body-wrapper', {
         raw: `
           position: fixed;
           left: 0;
@@ -76,21 +63,28 @@ export default c([
               ])
             ])
           ])
-        ]),
-        cNotM('active', {
-          raw: `
-            visibility: hidden;
-          `
-        })
+        ])
       ]),
-      cB('modal-content-slot', {
+      cTB('modal', {
         raw: `
+          margin: auto;
           position: relative;
         `
       }, [
         fadeInScaleUpTransition({
           duration: '.25s',
           enterScale: '.5'
+        }),
+        cB('card', {
+          raw: `
+            background-color: ${color};
+          `
+        }),
+        cB('confirm', {
+          raw: `
+            width: 446px;
+            max-width: calc(100vw - 32px);
+          `
         })
       ])
     ]

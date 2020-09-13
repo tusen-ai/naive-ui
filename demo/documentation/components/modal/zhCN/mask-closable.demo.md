@@ -1,21 +1,22 @@
 # 遮罩关闭
-你可以在使用 v-model 的时候让点击遮罩不关闭。
+使用 `mask-closable` 使点击遮罩层不发出关闭事件。
 ```html
 <n-button
-  @click="modalActive = true"
+  @click="showModal = true"
 >
   来吧
 </n-button>
 <n-modal
-  v-model="modalActive" 
+  :show="showModal"  
   :mask-closable="false"
-  preset="confirm" 
+  
+  preset="confirm"
   title="确认"
   content="你确认" 
   :closable="false"
   positive-text="确认"
-  @positive-click="submitCallback"
-  @negative-click="cancelCallback"
+  @positive-click="onPositiveClick"
+  @negative-click="onNegativeClick"
   negative-text="算了"
 />
 ```
@@ -23,17 +24,17 @@
 export default {
   data () {
     return {
-      modalActive: false,
+      showModal: false,
     }
   },
   methods: {
-    cancelCallback () {
+    onNegativeClick () {
       this.$NMessage.success('算了')
-      this.modalActive = false
+      this.showModal = false
     },
-    submitCallback () {
+    onPositiveClick () {
       this.$NMessage.success('确认')
-      this.modalActive = false
+      this.showModal = false
     }
   }
 }

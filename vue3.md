@@ -1,7 +1,8 @@
 last cherry-picked commit: 3e169f3fde95604dc68b884f0745b9af53a5b1ba
 
-zindexable
+zindexable 最好写成 directive
 placeable 进行了大调整
+
 
 - [ ] Form
 - [ ] affix
@@ -14,7 +15,7 @@ placeable 进行了大调整
 - [ ] breadcrumb
 - [x] button
 - [x] button-group
-- [ ] card
+- [x] card
 - [ ] cascader
 - [ ] checkbox
 - [ ] code
@@ -22,7 +23,6 @@ placeable 进行了大调整
 - [ ] config-consumer
 - [ ] config-provider
 - [ ] confirm
-- [ ] create.js
 - [ ] data-table
 - [ ] date-picker
 - [ ] descriptions
@@ -53,6 +53,12 @@ placeable 进行了大调整
   - remove `hide` on message instance, new `destroy`
   - TODO: update enUS docs
 - [ ] modal
+  - rewrite with teleport
+  - deprecate v-model show hide
+  - add prop `display-directive`
+  - remove default hide behavior for preset
+  - deprecate `overlay-style`, use `body-style`
+  - TODO: update docs, scrollbar mouseup
 - [ ] notification
 - [ ] pagination
 - [ ] popconfirm
