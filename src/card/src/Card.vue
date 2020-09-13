@@ -59,7 +59,11 @@ export default {
     mdClose,
     NIcon
   },
-  mixins: [withapp, themeable, usecssr(styles)],
+  mixins: [
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   props: {
     title: {
       type: String,
@@ -88,11 +92,15 @@ export default {
     closable: {
       type: Boolean,
       default: false
+    },
+    onClose: {
+      type: Function,
+      default: () => {}
     }
   },
   methods: {
     handleCloseClick () {
-      this.$emit('close')
+      this.onClose()
     }
   }
 }
