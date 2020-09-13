@@ -2,15 +2,15 @@ import {
   h,
   ref,
   computed,
-  Teleport,
   Fragment,
   createTextVNode
 } from 'vue'
 import {
   useMergedState,
-  useFalseUntilTruthy,
-  useCompitable
+  useCompitable,
+  useIsMounted
 } from '../../_utils/composition'
+import NLazyTeleport from '../../_base/lazy-teleport'
 import NPopoverBody from './PopoverBody'
 
 function appendEvents (vNode, events) {
@@ -81,14 +81,11 @@ export default {
       'showArrow',
       'arrow'
     ])
-    // setup show teleport
-    const showTeleportRef = useFalseUntilTruthy(mergedShowRef)
     return {
+      isMounted: useIsMounted(),
       // if to show popover body
       uncontrolledShow: uncontrolledShowRef,
       mergedShow: mergedShowRef,
-      // if to show teleport
-      showTeleport: showTeleportRef,
       compatibleShowArrow: compatibleShowArrowRef
     }
   },
@@ -301,15 +298,22 @@ export default {
 
     return h(Fragment, [
       manuallyPositioned ? null : triggerVNode,
-      this.showTeleport ? h(Teleport, { to: 'body' }, [
-        h(NPopoverBody, omit(this.$props, [
-          'defaultShow',
-          'showArrow',
-          'disabled'
-        ], {
-          show: this.mergedShow
-        }), slots)
-      ]) : null
+      h(NLazyTeleport, {
+        to: 'body',
+        show: this.mergedShow
+      }, {
+        default: () => {
+          return [
+            h(NPopoverBody, omit(this.$props, [
+              'defaultShow',
+              'showArrow',
+              'disabled'
+            ], {
+              show: this.mergedShow
+            }), slots)
+          ]
+        }
+      })
     ])
   }
 }

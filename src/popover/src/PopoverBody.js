@@ -14,7 +14,6 @@ import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
 import formatLength from '../../_utils/css/formatLength'
 import getDefaultSlot from '../../_utils/vue/getDefaultSlot'
-import { useIsMounted } from '../../_utils/composition'
 
 export default {
   name: 'PopoverBody',
@@ -101,11 +100,6 @@ export default {
     placeable,
     usecssr(styles)
   ],
-  setup () {
-    return {
-      isMounted: useIsMounted()
-    }
-  },
   data () {
     return {
       placeableEnabled: this.show
@@ -215,7 +209,7 @@ export default {
         }, [
           h(Transition, {
             name: 'popover-body-transition',
-            appear: this.isMounted,
+            appear: this.NPopover.isMounted,
             onEnter: () => {
               this.placeableEnabled = true
             },
