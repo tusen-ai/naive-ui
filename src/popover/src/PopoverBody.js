@@ -219,15 +219,17 @@ export default {
           }, {
             default: () => ((this.useVShow || this.show) ? withDirectives(h('div', {
               'n-placement': this.adjustedPlacement,
-              class: {
-                'n-popover-body': true,
-                'n-popover-body--no-arrow': !this.arrow,
-                [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
-                'n-popover-body--shadow': this.shadow,
-                [this.bodyClass]: this.bodyClass,
-                'n-popover-body--styled': !this.raw,
-                'n-popover-body--fix-width': this.width !== null || this.maxWidth !== null
-              },
+              class: [
+                'n-popover-body',
+                {
+                  'n-popover-body--no-arrow': !this.arrow,
+                  [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
+                  'n-popover-body--shadow': this.shadow,
+                  [this.bodyClass]: this.bodyClass,
+                  'n-popover-body--styled': !this.raw,
+                  'n-popover-body--fix-width': this.width !== null || this.maxWidth !== null
+                }
+              ],
               style: this.style,
               onMouseEnter: this.handleMouseEnter,
               onMouseLeave: this.handleMouseLeave

@@ -1,7 +1,7 @@
 import zIndexManager from '../_utils/dom/zIndexManager'
 
 const zindexable = {
-  beforeMount (el, { value }) {
+  mounted (el, { value }) {
     const { zIndex, enabled } = (value || {})
     zIndexManager.registerElement(el, zIndex)
     el.zindexableContext = {

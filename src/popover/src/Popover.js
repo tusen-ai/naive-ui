@@ -10,6 +10,7 @@ import {
   useCompitable,
   useIsMounted
 } from '../../_utils/composition'
+import omit from '../../_utils/vue/omit'
 import NLazyTeleport from '../../_base/lazy-teleport'
 import NPopoverBody from './PopoverBody'
 
@@ -42,14 +43,6 @@ function getFirstSlotVNode (slots, slotName = 'default') {
   }
 }
 
-function omit (object, keys = [], rest = {}) {
-  const omitedObject = { ...object }
-  for (const key of keys) {
-    delete omitedObject[key]
-  }
-  return { ...omitedObject, ...rest }
-}
-
 const textVNodeType = createTextVNode('').type
 
 export default {
@@ -59,12 +52,6 @@ export default {
       NPopover: this
     }
   },
-  emits: [
-    'update:show',
-    // legacy
-    'show',
-    'hide'
-  ],
   setup (props) {
     // setup show
     const controlledShowRef = computed(() => props.show)
@@ -78,8 +65,8 @@ export default {
     })
     // setup show-arrow
     const compatibleShowArrowRef = useCompitable(props, [
-      'showArrow',
-      'arrow'
+      'arrow',
+      'showArrow'
     ])
     return {
       isMounted: useIsMounted(),
@@ -106,10 +93,6 @@ export default {
       type: Boolean,
       default: false
     },
-    arrow: {
-      type: Boolean,
-      default: undefined
-    },
     showArrow: {
       type: Boolean,
       default: true
@@ -131,18 +114,6 @@ export default {
     raw: {
       type: Boolean,
       default: false
-    },
-    width: {
-      type: Number,
-      default: null
-    },
-    minWidth: {
-      type: Number,
-      default: null
-    },
-    maxWidth: {
-      type: Number,
-      default: null
     },
     placement: {
       type: String,
@@ -200,6 +171,24 @@ export default {
     shadow: {
       type: Boolean,
       default: true
+    },
+    // events
+    'onUpdate:show': {
+      type: Function,
+      default: () => {}
+    },
+    // deprecated
+    onShow: {
+      type: Function,
+      default: () => {}
+    },
+    onHide: {
+      type: Function,
+      default: () => {}
+    },
+    arrow: {
+      type: Boolean,
+      default: undefined
     }
   },
   methods: {
@@ -230,7 +219,7 @@ export default {
           e.target !== e.currentTarget
         ) return
         this.showTimerId = window.setTimeout(() => {
-          this.$emit('update:show', true)
+          this['onUpdate:show'](true)
           this.uncontrolledShow = true
           this.showTimerId = null
         }, this.delay)
@@ -244,7 +233,7 @@ export default {
           e.target !== e.currentTarget
         ) return
         this.hideTimerId = window.setTimeout(() => {
-          this.$emit('update:show', false)
+          this['onUpdate:show'](false)
           this.uncontrolledShow = false
           this.hideTimerId = null
         }, this.duration)
@@ -260,7 +249,7 @@ export default {
       if (this.trigger === 'click') {
         this.clearTimer()
         this.uncontrolledShow = false
-        this.$emit('update:show', false)
+        this['onUpdate:show'](false)
       }
     },
     handleClick () {
@@ -268,7 +257,7 @@ export default {
         this.clearTimer()
         const nextShow = !this.mergedShow
         this.uncontrolledShow = nextShow
-        this.$emit('update:show', nextShow)
+        this['onUpdate:show'](nextShow)
       }
     }
   },

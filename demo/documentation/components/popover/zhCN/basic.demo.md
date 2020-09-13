@@ -1,6 +1,6 @@
 # 基础用法
 ```html
-<n-popover show>
+<n-popover>
   <template v-slot:trigger>
     <n-button>
       悬浮
