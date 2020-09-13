@@ -1,30 +1,20 @@
-import { Fragment, ref, h, nextTick } from 'vue'
+import { Fragment, ref, h, nextTick, toRef } from 'vue'
 import createId from '../../_utils/vue/createId'
 import MessageEnvironment from './MessageEnvironment.js'
-
-function getContainerTarget (to) {
-  return typeof to === 'string' ? document.querySelector(to) : to
-}
-
-function getContainer (to) {
-  return getContainerTarget(to).querySelector('.n-message-container')
-}
-
-function mountContainer (to) {
-  const targetEl = getContainerTarget(to)
-  if (!targetEl.querySelector('.n-message-container')) {
-    const containerEl = document.createElement('div')
-    containerEl.className = 'n-message-container'
-    targetEl.appendChild(containerEl)
-  }
-}
+import { useContainer } from '../../_utils/composition'
 
 export default {
   name: 'MessageController',
-  setup () {
+  setup (props) {
     const messageListRef = ref([])
+    const [mountContainerIfNotExist, unmountContainerIfEmpty] = useContainer(
+      toRef(props, 'to'),
+      ref('n-message-container')
+    )
     return {
-      messageList: messageListRef
+      messageList: messageListRef,
+      mountContainerIfNotExist,
+      unmountContainerIfEmpty
     }
   },
   props: {
@@ -35,7 +25,7 @@ export default {
   },
   methods: {
     create (content, options = {}) {
-      mountContainer(this.to)
+      this.mountContainerIfNotExist()
       const key = createId()
       const messageReactive = {
         ...options,
@@ -65,10 +55,7 @@ export default {
         1
       )
       nextTick(() => {
-        const container = getContainer(this.to)
-        if (!container.childElementCount) {
-          container.parentNode.removeChild(container)
-        }
+        this.unmountContainerIfEmpty()
       })
     }
   },

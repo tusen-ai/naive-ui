@@ -21,14 +21,10 @@ export default {
     themeable,
     usecssr(styles)
   ],
-  cssrName: 'Message',
-  emits: [
-    'close'
-  ],
   props,
   methods: {
     handleClose () {
-      this.$emit('close')
+      this.onClose()
     }
   },
   render () {

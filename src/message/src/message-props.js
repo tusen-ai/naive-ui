@@ -18,5 +18,9 @@ export default {
   theme: {
     type: String,
     default: null
+  },
+  onClose: {
+    type: Function,
+    default: () => {}
   }
 }

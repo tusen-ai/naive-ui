@@ -5,9 +5,6 @@ import props from './message-props'
 
 export default {
   name: 'MessageEnvironment',
-  emits: [
-    'internal-after-leave'
-  ],
   props: {
     ...props,
     duration: {
@@ -16,33 +13,33 @@ export default {
     },
     onClose: {
       type: Function,
-      default: null
+      default: () => {}
     },
     onAfterLeave: {
       type: Function,
-      default: null
-    },
-    destroy: {
-      type: Function,
-      default: null
+      default: () => {}
     },
     // private
     controller: {
       type: Object,
       required: true
     },
-    onInternalAfterLeave: {
+    destroy: {
       type: Function,
       default: null
+    },
+    onInternalAfterLeave: {
+      type: Function,
+      default: () => {}
     },
     // deprecated
     onHide: {
       type: Function,
-      default: null
+      default: () => {}
     },
     onAfterHide: {
       type: Function,
-      default: null
+      default: () => {}
     }
   },
   data () {
@@ -71,9 +68,9 @@ export default {
       if (timerId) {
         window.clearTimeout(timerId)
       }
-      if (onClose) onClose()
+      onClose()
       // deprecated
-      if (onHide) onHide()
+      onHide()
     },
     handleClose () {
       this.hide()
@@ -84,10 +81,10 @@ export default {
         onInternalAfterLeave,
         onAfterHide
       } = this
-      if (onAfterLeave) onAfterLeave()
-      if (onInternalAfterLeave) onInternalAfterLeave(this._.vnode.key)
+      onAfterLeave()
+      onInternalAfterLeave(this._.vnode.key)
       // deprecated
-      if (onAfterHide) onAfterHide()
+      onAfterHide()
     },
     // deprecated
     deactivate () {
