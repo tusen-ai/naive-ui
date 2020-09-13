@@ -9,7 +9,10 @@
   >
     <div
       class="n-switch__rail"
-      :class="{ 'n-switch__rail--active': value, 'n-switch__rail--disabled': disabled }"
+      :class="{
+        'n-switch__rail--active': modelValue,
+        'n-switch__rail--disabled': disabled
+      }"
     />
   </div>
 </template>
@@ -29,29 +32,31 @@ export default {
     asformitem(),
     usecssr(styles)
   ],
-  model: {
-    prop: 'value',
-    event: 'change'
-  },
   inject: {
     NFormItem: {
       default: null
     }
   },
   props: {
-    value: {
+    modelValue: {
       type: Boolean,
       required: true
     },
     disabled: {
       type: Boolean,
       default: false
+    },
+    // eslint-disable-next-line vue/prop-name-casing
+    'onUpdate:modelValue': {
+      type: Function,
+      default: () => {}
     }
   },
   methods: {
     handleClick () {
       if (!this.disabled) {
-        this.$emit('change', !this.value)
+        console.log(this['onUpdate:modelValue'])
+        this['onUpdate:modelValue'](!this.modelValue)
       }
     }
   }

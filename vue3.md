@@ -79,8 +79,8 @@ placeable 进行了大调整
 - [ ] spin
 - [ ] statistic
 - [ ] steps
-- [ ] styles
-- [ ] switch
+- [x] switch
+  - value & change => modelValue & update:modelValue
 - [ ] table
 - [ ] tabs
 - [ ] tag

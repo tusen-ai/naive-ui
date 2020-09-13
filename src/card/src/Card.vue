@@ -26,11 +26,10 @@
       <n-icon
         v-if="closable"
         class="n-card-header__close-mark"
-        type="md-close"
         size="22"
         @click="handleCloseClick"
       >
-        <md-close />
+        <close-icon />
       </n-icon>
     </div>
     <div class="n-card__content" :style="contentStyle">
@@ -49,14 +48,14 @@
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import NIcon from '../../icon'
-import mdClose from '../../_icons/md-close'
+import CloseIcon from '../../_icons/md-close'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles'
 
 export default {
   name: 'Card',
   components: {
-    mdClose,
+    CloseIcon,
     NIcon
   },
   mixins: [

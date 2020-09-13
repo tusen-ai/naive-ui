@@ -1,9 +1,10 @@
 # 事件
 ```html
 <n-switch
-  v-model="active"
-  @change="handleChange"
+  :modelValue="active"
+  @update:modelValue="handleChange"
 />
+<n-message-controller ref='message' />
 ```
 ```js
 export default {
@@ -14,7 +15,8 @@ export default {
   },
   methods: {
     handleChange (value) {
-      this.$NMessage.info(`Change Event: ${value}`)
+      this.active = value
+      this.$refs.message.info(`Update modelValue: ${value}`)
     }
   }
 }
