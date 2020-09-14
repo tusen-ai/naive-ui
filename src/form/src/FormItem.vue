@@ -2,7 +2,7 @@
   <div
     class="n-form-item"
     :class="{
-      [`n-form-item--${syntheticSize}-size`]: true,
+      [`n-form-item--${renderedSize}-size`]: true,
       [`n-${syntheticTheme}-theme`]: syntheticTheme,
       [`n-form-item--${syntheticLabelPlacement}-labelled`]: syntheticLabelPlacement,
       [`n-form-item--${syntheticLabelAlign}-label-aligned`]: syntheticLabelAlign,
@@ -157,7 +157,7 @@ export default {
       validator (value) {
         return ['small', 'medium', 'large'].includes(value)
       },
-      default: 'medium'
+      default: null
     },
     ignorePathChange: {
       type: Boolean,
@@ -208,6 +208,9 @@ export default {
         return NForm.size
       }
       return null
+    },
+    renderedSize () {
+      return this.syntheticSize || 'medium'
     },
     syntheticValidationStatus () {
       if (this.validationStatus !== null) return this.validationStatus

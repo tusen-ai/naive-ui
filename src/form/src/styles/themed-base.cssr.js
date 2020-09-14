@@ -4,12 +4,10 @@ import fadeDownTranstion from '../../../styles/_transitions/fade-down'
 export default c([
   ({ props }) => {
     const {
-      itemLabelTextColor,
-      itemRequiredAsterisk,
-      itemFeedbackTextColorError,
-      itemFeedbackTextColorWarning,
-      itemLabelHeight,
-      height
+      labelTextColor,
+      asteriskColor,
+      feedbackTextColorError,
+      feedbackTextColorWarning
     } = props.$local
     const {
       easeInOutCubicBezier
@@ -45,11 +43,6 @@ export default c([
             margin-right: 18px;
           `
         }, [
-          cM('no-label', {
-            raw: `
-              padding-top: ${itemLabelHeight.medium}
-            `
-          }),
           cB('form-item-label', {
             raw: `
               display: block;
@@ -110,7 +103,6 @@ export default c([
           raw: `
             padding-top: 3px;
             padding-bottom: 3px;
-            min-height: ${height.medium};
             display: flex;
             align-items: center;
             position: relative;
@@ -119,14 +111,14 @@ export default c([
           cM('error', [
             c('+', [
               cB('form-item-feedback-wrapper', {
-                color: itemFeedbackTextColorError
+                color: feedbackTextColorError
               })
             ])
           ]),
           cM('warning', [
             c('+', [
               cB('form-item-feedback-wrapper', {
-                color: itemFeedbackTextColorWarning
+                color: feedbackTextColorWarning
               })
             ])
           ])
@@ -137,19 +129,18 @@ export default c([
               raw: `
                 content: ' *';
               `,
-              color: itemRequiredAsterisk
+              color: asteriskColor
             })
           ])
         ]),
         cB('form-item-label', {
           raw: `
             display: inline-block;
-            height: ${itemLabelHeight.medium};
             box-sizing: border-box;
             font-size: 14px;
             transition: color .3s ${easeInOutCubicBezier};
           `,
-          color: itemLabelTextColor
+          color: labelTextColor
         }, [
           c('&::after', {
             raw: `

@@ -11,8 +11,6 @@
 </template>
 <script>
 import cloneDeep from 'lodash-es/cloneDeep'
-import usecssr from '../../_mixins/usecssr'
-import styles from './styles'
 
 export default {
   name: 'Form',
@@ -21,9 +19,6 @@ export default {
       NForm: this
     }
   },
-  mixins: [
-    usecssr(styles)
-  ],
   props: {
     inline: {
       type: Boolean,
@@ -59,7 +54,7 @@ export default {
       validator (value) {
         return ['small', 'medium', 'large'].includes(value)
       },
-      default: 'medium'
+      default: null
     },
     onSubmit: {
       type: Function,

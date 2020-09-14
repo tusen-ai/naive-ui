@@ -1,37 +1,39 @@
-import { c, cB, cM } from '../../../_utils/cssr'
+import { c, cB, cM, createKey } from '../../../_utils/cssr'
+import depx from '../../../_utils/css/depx'
+import pxfy from '../../../_utils/css/pxfy'
 
 export default c([
   ({ props }) => {
-    const size = props.$instance.syntheticSize || props.$instance.size
-    const height = props.$local.height[size]
-    const fontSize = props.$local.fontSize[size]
-    const itemLabelHeight = props.$local.itemLabelHeight[size]
-    const getNumber = str => {
-      return Number(str.replace(/[^0-9]/ig, ''))
-    }
+    const size = props.$instance.renderedSize
+    const $local = props.$local
+    const blankHeight = $local[createKey('blankHeight', size)]
+    const feedbackFontSize = $local[createKey('feedbackFontSize', size)]
+    const labelFontSizeTop = $local[createKey('labelFontSizeTop', size)]
+    const labelFontSizeLeft = $local[createKey('labelFontSizeLeft', size)]
+    const labelHeight = $local[createKey('labelHeight', size)]
     return cB('form-item', [
       cM(size + '-size', [
         cM('top-labelled', [
           cM('no-label', {
-            paddingTop: itemLabelHeight
+            paddingTop: labelHeight
           }),
           cB('form-item-label', {
-            fontSize: `${getNumber(fontSize) - 1}px`,
-            height: itemLabelHeight
+            fontSize: labelFontSizeTop,
+            height: labelHeight
           })
         ]),
         cM('left-labelled', [
           cB('form-item-label', {
-            fontSize: fontSize,
-            height: `${getNumber(height) + 6}px`,
-            lineHeight: `${getNumber(height) + 6}px`
+            fontSize: labelFontSizeLeft,
+            height: pxfy(depx(blankHeight) + 6),
+            lineHeight: pxfy(depx(blankHeight) + 6)
           })
         ]),
         cB('form-item-blank', {
-          minHeight: height
+          minHeight: blankHeight
         }),
         cB('form-item-feedback-wrapper', {
-          fontSize: fontSize
+          fontSize: feedbackFontSize
         })
       ])
     ])

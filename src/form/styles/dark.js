@@ -1,11 +1,13 @@
 import create from '../../styles/_utils/create-component-base'
 import commonVariables from './_common'
-import suffixStyle from '../../_base/suffix/styles/dark'
+import gridStyle from '../../grid/styles/dark'
 
 export default create({
   name: 'Form',
   theme: 'dark',
-  peer: [ suffixStyle ],
+  peer: [
+    gridStyle
+  ],
   getDerivedVariables ({ base, derived }) {
     const {
       primaryTextOverlayColor,
@@ -14,10 +16,10 @@ export default create({
     } = derived
     return {
       ...commonVariables,
-      itemLabelTextColor: primaryTextOverlayColor,
-      itemRequiredAsterisk: errorColor,
-      itemFeedbackTextColorError: errorColor,
-      itemFeedbackTextColorWarning: warningColor
+      labelTextColor: primaryTextOverlayColor,
+      asteriskColor: errorColor,
+      feedbackTextColorError: errorColor,
+      feedbackTextColorWarning: warningColor
     }
   }
 })

@@ -1,26 +1,17 @@
 export default {
-  height: {
-    tiny: '22px',
-    small: '28px',
-    medium: '34px',
-    large: '40px',
-    huge: '48px'
-  },
-  fontSize: {
-    tiny: '13px',
-    small: '14px',
-    medium: '14px',
-    large: '15px',
-    huge: '16px'
-  },
-  itemFeedbackFontSize: {
-    small: '13px',
-    medium: '14px',
-    large: '14px'
-  },
-  itemLabelHeight: {
-    small: '20px',
-    medium: '22px',
-    large: '24px'
-  }
+  blankHeightSmall: '28px',
+  blankHeightMedium: '34px',
+  blankHeightLarge: '40px',
+  feedbackFontSizeSmall: '13px',
+  feedbackFontSizeMedium: '13px',
+  feedbackFontSizeLarge: '14px',
+  labelFontSizeLeftSmall: '14px',
+  labelFontSizeLeftMedium: '14px',
+  labelFontSizeLeftLarge: '15px',
+  labelFontSizeTopSmall: '13px',
+  labelFontSizeTopMedium: '13px',
+  labelFontSizeTopLarge: '14px',
+  labelHeightSmall: '18px',
+  labelHeightMedium: '18px',
+  labelHeightLarge: '20px'
 }
