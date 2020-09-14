@@ -1,5 +1,5 @@
 
-import { h, Transition, Teleport } from 'vue'
+import { h, Transition } from 'vue'
 import NMessage from './Message.js'
 import props from './message-props'
 
@@ -81,31 +81,25 @@ export default {
     }
   },
   render () {
-    return h(Teleport, {
-      to: '.n-message-container'
-    }, {
-      default: () => [
-        h(
-          Transition, {
-            name: 'message-transition',
-            appear: true,
-            onAfterLeave: this.handleAfterLeave
-          },
-          {
-            default: () => [
-              this.show
-                ? h(NMessage, {
-                  theme: this.theme,
-                  content: this.content,
-                  type: this.type,
-                  icon: this.icon,
-                  closable: this.closable,
-                  onClose: this.handleClose
-                }) : null
-            ]
-          }
-        )
-      ]
-    })
+    return h(
+      Transition, {
+        name: 'message-transition',
+        appear: true,
+        onAfterLeave: this.handleAfterLeave
+      },
+      {
+        default: () => [
+          this.show
+            ? h(NMessage, {
+              theme: this.theme,
+              content: this.content,
+              type: this.type,
+              icon: this.icon,
+              closable: this.closable,
+              onClose: this.handleClose
+            }) : null
+        ]
+      }
+    )
   }
 }

@@ -1,5 +1,10 @@
 # 信息 Message
 （一般是）从浏览器顶部降下来的神谕。
+
+<n-alert title="注意" type="warning">
+  以下所有例子需要 <n-text code>n-message-provider</n-text> 的包裹，并在组件中注入 <n-text code>message</n-text>。
+</n-alert>
+
 ## 演示
 ```demo
 basic
@@ -12,8 +17,13 @@ about-theme
 ```
 
 ## API
-### MessageController API
-#### MessageController Methods
+### MessageProvider Props
+|名称|类型|默认值|说明|
+|-|-|-|-|
+|to|`string \| HTMLElement`|`'body'`|Message 容器节点的位置|
+
+### MessageProvider Injection API
+#### MessageProvider Injection Methods
 |名称|类型|说明|
 |-|-|-|
 |info|`(content: string, option?: MessageOption) => MessageReactive`||

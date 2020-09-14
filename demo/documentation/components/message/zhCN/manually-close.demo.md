@@ -1,6 +1,5 @@
 # 手动关闭
 ```html
-<n-message-controller ref="message" />
 <n-button @click="createMessage">
   打开
 </n-button>
@@ -10,6 +9,7 @@
 ```
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
       message: null
@@ -21,7 +21,7 @@ export default {
   methods: {
     createMessage () {
       if (!this.message) {
-        this.message = this.$refs.message.info('3 * 3 * 4 * 4 * ?', {
+        this.message = this.message.info('3 * 3 * 4 * 4 * ?', {
           duration: 0
         })
       }

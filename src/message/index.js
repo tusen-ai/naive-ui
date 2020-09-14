@@ -1,7 +1,7 @@
-import MessageController from './src/MessageController'
+import MessagePrivider from './src/MessageProvider'
 
-MessageController.install = function (app, naive) {
-  app.component(naive.componentPrefix + MessageController.name, MessageController)
+MessagePrivider.install = function (app, naive) {
+  app.component(naive.componentPrefix + MessagePrivider.name, MessagePrivider)
 }
 
-export default MessageController
+export default MessagePrivider

@@ -1,6 +1,5 @@
 # 基础用法
 ```html
-<n-message-controller ref="message" />
 <n-button @click="info">
   信息
 </n-button>
@@ -19,29 +18,30 @@
 ```
 ```js
 export default {
+  inject: ['message'],
   methods: {
     info () {
-      this.$refs.message.info(
+      this.message.info(
         "I don't know why nobody told you how to unfold your love"
       )
     },
     error () {
-      this.$refs.message.error(
+      this.message.error(
         "Once upon a time you dressed so fine"
       )
     },
     warning () {
-      this.$refs.message.warning(
+      this.message.warning(
         "How many roads must a man walk down"
       )
     },
     success () {
-      this.$refs.message.success(
+      this.message.success(
         "'Cause you walked hand in hand With another man in my place"
       )
     },
     loading () {
-      this.$refs.message.loading(
+      this.message.loading(
         "If I were you, I will realize that I love you more than any other guy"
       )
     }

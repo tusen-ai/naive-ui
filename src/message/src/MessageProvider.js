@@ -1,41 +1,44 @@
-import { Fragment, ref, h, nextTick, toRef } from 'vue'
+import { Fragment, Teleport, ref, h, reactive } from 'vue'
 import createId from '../../_utils/vue/createId'
 import MessageEnvironment from './MessageEnvironment.js'
-import { useContainer } from '../../_utils/composition'
 import omit from '../../_utils/vue/omit'
 
 export default {
-  name: 'MessageController',
+  name: 'MessageProvider',
   props: {
     to: {
       type: [String, Object],
       default: 'body'
     }
   },
-  setup (props) {
-    const messageListRef = ref([])
-    const [mountContainerIfNotExist, unmountContainerIfEmpty] = useContainer(
-      toRef(props, 'to'),
-      ref('n-message-container')
-    )
+  provide () {
     return {
-      messageList: messageListRef,
-      mountContainerIfNotExist,
-      unmountContainerIfEmpty
+      message: {
+        info: this.info,
+        success: this.success,
+        warning: this.warning,
+        error: this.error,
+        loading: this.loading
+      }
+    }
+  },
+  setup () {
+    const messageListRef = ref([])
+    return {
+      messageList: messageListRef
     }
   },
   methods: {
     create (content, options = {}) {
-      this.mountContainerIfNotExist()
       const key = createId()
-      const messageReactive = {
+      const messageReactive = reactive({
         ...options,
         content,
         key,
         destroy: () => {
           this.$refs[`n-message-${key}`].hide()
         }
-      }
+      })
       this.messageList.push(messageReactive)
       return messageReactive
     },
@@ -57,18 +60,27 @@ export default {
         messageList.findIndex(message => message.key === key),
         1
       )
-      nextTick(() => {
-        this.unmountContainerIfEmpty()
-      })
     }
   },
   render () {
-    return h(Fragment, null, this.messageList.map(
-      message => h(MessageEnvironment, {
-        ref: `n-message-${message.key}`,
-        ...omit(message, ['destroy']),
-        onInternalAfterLeave: this.handleAfterLeave
-      }))
+    return h(Fragment, null,
+      [
+        this.messageList.length ? h(Teleport, {
+          to: this.to
+        }, [
+          h('div', {
+            class: 'n-message-container',
+            key: 'n-message-container'
+          }, this.messageList.map(
+            message => h(MessageEnvironment, {
+              ref: `n-message-${message.key}`,
+              ...omit(message, ['destroy']),
+              onInternalAfterLeave: this.handleAfterLeave
+            })
+          ))
+        ]) : null,
+        this.$slots.default()
+      ]
     )
   }
 }
