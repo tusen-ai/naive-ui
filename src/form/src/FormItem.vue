@@ -61,6 +61,8 @@ import registerable from '../../_mixins/registerable'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import formatLength from '../../_utils/css/formatLength'
+import usecssr from '../../_mixins/usecssr'
+import styles from './styles'
 
 function wrapValidator (validator) {
   if (typeof validator === 'function') {
@@ -99,7 +101,13 @@ function wrapValidator (validator) {
 
 export default {
   name: 'FormItem',
-  mixins: [registerable('NForm', 'items', 'path'), withapp, themeable],
+  cssrName: 'Form',
+  mixins: [
+    registerable('NForm', 'items', 'path'),
+    withapp,
+    themeable,
+    usecssr(styles)
+  ],
   props: {
     label: {
       type: [Number, String],
@@ -149,7 +157,7 @@ export default {
       validator (value) {
         return ['small', 'medium', 'large'].includes(value)
       },
-      default: null
+      default: 'medium'
     },
     ignorePathChange: {
       type: Boolean,

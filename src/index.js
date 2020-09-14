@@ -26,7 +26,7 @@ import DynamicInput from './dynamic-input'
 import DynamicTags from './dynamic-tags'
 import Element from './element'
 import Empty from './empty'
-import Form from './Form'
+import Form from './form'
 import GradientText from './gradient-text'
 import Grid from './grid'
 import Icon from './icon'
@@ -196,6 +196,8 @@ import uploadLightStyle from './upload/styles/light'
 import uploadDarkStyle from './upload/styles/dark'
 import descriptionsLightStyle from './descriptions/styles/light'
 import descriptionsDarkStyle from './descriptions/styles/dark'
+import formLightStyle from './form/styles/light'
+import formDarkStyle from './form/styles/dark'
 
 // Can be remove after refactoring
 import baseSelectionLightStyle from './_base/selection/styles/light'
@@ -421,6 +423,8 @@ export default create({
     uploadDarkStyle,
     descriptionsLightStyle,
     descriptionsDarkStyle,
+    formLightStyle,
+    formDarkStyle,
     // Can be remove after refactoring
     baseSelectionLightStyle,
     baseSelectionDarkStyle
