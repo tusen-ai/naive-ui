@@ -20,14 +20,6 @@ export default {
       default: () => {}
     },
     // private
-    controller: {
-      type: Object,
-      required: true
-    },
-    destroy: {
-      type: Function,
-      default: null
-    },
     onInternalAfterLeave: {
       type: Function,
       default: () => {}
@@ -48,9 +40,6 @@ export default {
       timerId: null,
       show: true
     }
-  },
-  created () {
-    this.controller.destroy = this.hide
   },
   mounted () {
     if (this.duration) {

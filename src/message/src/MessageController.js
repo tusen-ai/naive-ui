@@ -2,9 +2,16 @@ import { Fragment, ref, h, nextTick, toRef } from 'vue'
 import createId from '../../_utils/vue/createId'
 import MessageEnvironment from './MessageEnvironment.js'
 import { useContainer } from '../../_utils/composition'
+import omit from '../../_utils/vue/omit'
 
 export default {
   name: 'MessageController',
+  props: {
+    to: {
+      type: [String, Object],
+      default: 'body'
+    }
+  },
   setup (props) {
     const messageListRef = ref([])
     const [mountContainerIfNotExist, unmountContainerIfEmpty] = useContainer(
@@ -17,12 +24,6 @@ export default {
       unmountContainerIfEmpty
     }
   },
-  props: {
-    to: {
-      type: [String, Object],
-      default: 'body'
-    }
-  },
   methods: {
     create (content, options = {}) {
       this.mountContainerIfNotExist()
@@ -31,7 +32,9 @@ export default {
         ...options,
         content,
         key,
-        destroy: null
+        destroy: () => {
+          this.$refs[`n-message-${key}`].hide()
+        }
       }
       this.messageList.push(messageReactive)
       return messageReactive
@@ -62,8 +65,8 @@ export default {
   render () {
     return h(Fragment, null, this.messageList.map(
       message => h(MessageEnvironment, {
-        ...message,
-        controller: message,
+        ref: `n-message-${message.key}`,
+        ...omit(message, ['destroy']),
         onInternalAfterLeave: this.handleAfterLeave
       }))
     )
