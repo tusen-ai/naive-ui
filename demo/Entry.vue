@@ -6,17 +6,19 @@
     :language="lang"
   >
     <n-message-provider>
-      <n-layout position="absolute" class="root-layout">
-        <doc-header
-          :lang="lang"
-          :items="flattenedItems"
-          :env="env"
-          @lang-change="handleLangChange"
-        />
-        <n-layout class="home-layout" style="top: 64px; overflow: hidden;" position="absolute">
-          <router-view />
+      <n-notification-provider>
+        <n-layout position="absolute" class="root-layout">
+          <doc-header
+            :lang="lang"
+            :items="flattenedItems"
+            :env="env"
+            @lang-change="handleLangChange"
+          />
+          <n-layout class="home-layout" style="top: 64px; overflow: hidden;" position="absolute">
+            <router-view />
+          </n-layout>
         </n-layout>
-      </n-layout>
+      </n-notification-provider>
     </n-message-provider>
   </n-config-provider>
 </template>

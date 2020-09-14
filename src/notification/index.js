@@ -1,9 +1,7 @@
-import Notification from './src/NotificationPlugin'
-import { install } from '../_utils/naive/installThemeAwarableProperty'
+import NotificationProvider from './src/NotificationProvider'
 
 Notification.install = function (app, naive) {
-  Notification.Vue = app
-  install(app, Notification, `$${naive.componentPrefix}Notification`)
+  app.component(naive.componentPrefix + NotificationProvider.name, NotificationProvider)
 }
 
 export default Notification

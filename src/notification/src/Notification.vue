@@ -1,23 +1,23 @@
 <template>
   <div
     :class="{
-      [`n-${theme}-theme`]: theme,
-      'n-notification--no-avatar': noAvatar,
+      [`n-${syntheticTheme}-theme`]: syntheticTheme,
       'n-notification--closable': closable,
+      'n-notification--show-avatar': showAvatar,
       [`n-notification--${type}-type`]: type
     }"
     class="n-notification"
   >
     <div
-      v-if="!noAvatar"
+      v-if="showAvatar"
       class="n-notification__avatar"
     >
       <render v-if="avatar" :render="avatar" />
       <n-icon v-else>
-        <md-information-circle v-if="type === 'info'" />
-        <md-alert v-else-if="type === 'warning'" />
-        <md-close-circle v-else-if="type === 'error'" />
-        <md-checkmark-circle v-else-if="type === 'success'" />
+        <info-icon v-if="type === 'info'" />
+        <warning-icon v-else-if="type === 'warning'" />
+        <error-icon v-else-if="type === 'error'" />
+        <success-icon v-else-if="type === 'success'" />
       </n-icon>
     </div>
     <div
@@ -26,7 +26,7 @@
       @click="handleCloseClick"
     >
       <n-icon>
-        <md-close />
+        <close-icon />
       </n-icon>
     </div>
     <div
@@ -56,32 +56,32 @@
 </template>
 
 <script>
+import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import NIcon from '../../icon'
-import mdClose from '../../_icons/md-close'
-import mdCheckmarkCircle from '../../_icons/md-checkmark-circle'
-import mdAlert from '../../_icons/md-alert'
-import mdInformationCircle from '../../_icons/md-information-circle'
-import mdCloseCircle from '../../_icons/md-close-circle'
-import render from '../../_utils/vue/render'
-import asthemecontext from '../../_mixins/asthemecontext'
 import usecssr from '../../_mixins/usecssr'
+import render from '../../_utils/vue/render'
 import styles from './styles'
+import NIcon from '../../icon'
+import CloseIcon from '../../_icons/md-close'
+import SuccessIcon from '../../_icons/md-checkmark-circle'
+import WarningIcon from '../../_icons/md-alert'
+import InfoIcon from '../../_icons/md-information-circle'
+import ErrorIcon from '../../_icons/md-close-circle'
 
 export default {
+  name: 'Notification',
   components: {
     NIcon,
-    mdClose,
     render,
-    mdCheckmarkCircle,
-    mdAlert,
-    mdInformationCircle,
-    mdCloseCircle
+    CloseIcon,
+    SuccessIcon,
+    WarningIcon,
+    InfoIcon,
+    ErrorIcon
   },
-  cssrName: 'Notification',
   mixins: [
+    withapp,
     themeable,
-    asthemecontext,
     usecssr(styles)
   ],
   props: {
@@ -96,7 +96,7 @@ export default {
       default: 'default'
     },
     avatar: {
-      type: [Function],
+      type: Function,
       default: null
     },
     title: {
@@ -116,18 +116,22 @@ export default {
       default: null
     },
     action: {
-      type: [Object, Function],
+      type: Function,
       default: null
+    },
+    onClose: {
+      type: Function,
+      default: () => {}
     }
   },
   computed: {
-    noAvatar () {
-      return !(this.avatar || this.type !== 'default')
+    showAvatar () {
+      return this.avatar || this.type !== 'default'
     }
   },
   methods: {
     handleCloseClick () {
-      this.$emit('close')
+      this.onClose()
     }
   }
 }

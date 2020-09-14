@@ -41,7 +41,7 @@ import Log from './log'
 import Menu from './menu'
 import Message from './message'
 import Modal from './modal'
-// import Notification from './notification'
+import Notification from './notification'
 import Pagination from './pagination'
 import Popconfirm from './popconfirm'
 import Popselect from './popselect'
@@ -232,7 +232,7 @@ export default create({
     Modal,
     Input,
     Message,
-    // Notification,
+    Notification,
     Pagination,
     Tooltip,
     Popup,

@@ -44,4 +44,3 @@ export function useIsMounted () {
 }
 
 export { default as useLastClickPosition } from './use-last-click-position'
-export { default as useContainer } from './use-container'

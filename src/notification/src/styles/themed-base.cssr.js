@@ -109,24 +109,24 @@ export default c([
         // TODO: refactor type styles & transition
         ['success', 'info', 'warning', 'error', 'default']
           .map(type => typeStyle(type, props.$local[createKey('iconColor', type)])),
-        c('&-transition-enter, &-transition-leave-to', {
+        c('&-transition-enter-from, &-transition-leave-to', {
           raw: `
             opacity: 0;
             margin-bottom: 0;
             transform: translateX(calc(100% + 16px));
           `
         }),
-        c('&-transition-leave, &-transition-enter-to', {
+        c('&-transition-leave-from, &-transition-enter-to', {
           raw: `
             opacity: 1;
             transform: translateX(0);
           `
         }),
-        cM('no-avatar', [
+        cM('show-avatar', [
           cB('notification-main', {
             raw: `
-              margin-left: 8px;
-              width: calc(100% - 8px);
+              margin-left: 40px;
+              width: calc(100% - 40px);  
             `
           })
         ]),
@@ -188,8 +188,8 @@ export default c([
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
-            margin-left: 40px;
-            width: calc(100% - 40px);
+            margin-left: 8px;
+            width: calc(100% - 8px);
           `
         }, [
           cB('notification-main-footer', {

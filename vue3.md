@@ -52,7 +52,7 @@ placeable 进行了大调整
   - deprecate `onAfterHide`, new `onAfterLeave`
   - remove `hide` on message instance, new `destroy`
   - TODO: update enUS docs
-- [ ] modal
+- [x] modal
   - rewrite with teleport
   - deprecate v-model show hide
   - add prop `display-directive`
@@ -60,6 +60,10 @@ placeable 进行了大调整
   - deprecate `overlay-style`, use `body-style`
   - TODO: update docs, scrollbar mouseup
 - [ ] notification
+  - deprecate `open`, use `create`
+  - deprecate `onHide`, use `onLeave`
+  - deprecate `onAfterShow`, use `onAfterEnter`
+  - deprecate `onAfterHide`, use `onAfterHide`
 - [ ] pagination
 - [ ] popconfirm
 - [ ] popover
