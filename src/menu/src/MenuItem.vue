@@ -1,143 +1,92 @@
 <template>
-  <li
+  <div
     class="n-menu-item"
     :class="{
       'n-menu-item--selected': selected,
-      'n-menu-item--disabled': disabled
+      'n-menu-item--disabled': mergedDisabled
     }"
   >
-    <template v-if="renderContentAsPopover">
-      <!-- <n-tooltip
-        :placement="menuItemPopoverPlacement"
-        :disabled="rootMenuIsHorizontal || !rootMenuCollapsed"
-      >
-        <template v-slot:activator>
-          <n-menu-item-content
-            :padding-left="delayedPaddingLeft"
-            :max-icon-size="maxIconSize"
-            :active-icon-size="activeIconSize"
-            :title="title"
-            :disabled="syntheticDisabled"
-            :title-extra="titleExtra"
-            @click="handleClick"
-          >
-            <template v-if="$slots.icon" v-slot:icon>
-              <slot name="icon" />
-            </template>
-            <template v-if="$slots['header-extra']" v-slot:header-extra>
-              <slot name="extra" />
-            </template>
-            <slot />
-          </n-menu-item-content>
-        </template>
-        {{ title }}
-      </n-tooltip> -->
-    </template>
-    <n-menu-item-content
-      v-else
-      :max-icon-size="maxIconSize"
-      :active-icon-size="activeIconSize"
-      :padding-left="delayedPaddingLeft"
-      :title="title"
-      :title-extra="titleExtra"
-      :disabled="syntheticDisabled"
-      @click="handleClick"
+    <n-tooltip
+      trigger="hover"
+      :placement="popoverPlacement"
+      :disabled="!popoverEnabled"
     >
-      <template v-if="$slots.icon" v-slot:icon>
-        <slot name="icon" />
+      <template v-slot:trigger>
+        <n-menu-item-content
+          :padding-left="delayedPaddingLeft"
+          :max-icon-size="maxIconSize"
+          :active-icon-size="activeIconSize"
+          :title="title"
+          :disabled="mergedDisabled"
+          :title-extra="titleExtra"
+          :icon="icon"
+          @click="handleClick"
+        />
       </template>
-      <template v-if="$slots['header-extra']" v-slot:header-extra>
-        <slot name="header-extra" />
-      </template>
-      <slot />
-    </n-menu-item-content>
-  </li>
+      {{ title }}
+    </n-tooltip>
+  </div>
 </template>
 
 <script>
-import collectable from '../../_mixins/collectable'
-import withapp from '../../_mixins/withapp'
-import themeable from '../../_mixins/themeable'
-import simulatedComputed from '../../_mixins/simulatedComputed'
+import { toRef, computed } from 'vue'
 import NMenuItemContent from './MenuItemContent'
 import NTooltip from '../../tooltip'
-import menuContentMixin from './menuContentMixin'
+import menuChildMixin from './menu-child-mixin'
+import { useMemo, useInjectionRef } from '../../_utils/composition'
 
 export default {
-  name: 'NMenuItem',
+  name: 'MenuItem',
   components: {
     NMenuItemContent,
     NTooltip
   },
   mixins: [
-    collectable('PenetratedNSubmenu', 'menuItemNames', 'name', true, function (injectedNSubmenu) {
-      const injectedNMenu = this.NMenu
-      if (injectedNMenu !== injectedNSubmenu.NMenu) {
-        if (injectedNSubmenu.rootMenuIsHorizontal) return false
-        return true
-      }
-    }),
-    simulatedComputed({
-      selected: {
-        get () {
-          if (this.rootMenuValue === this.name) {
-            return true
-          } else {
-            return false
-          }
-        },
-        deps: ['rootMenuValue'],
-        default: false
-      }
-    }),
-    withapp,
-    themeable,
-    menuContentMixin
+    menuChildMixin
   ],
   props: {
-    title: {
-      type: [ String, Function ],
-      default: null
-    },
     titleExtra: {
       type: [ String, Function ],
       default: null
     },
-    name: {
-      type: String,
-      required: true
-    },
     disabled: {
       type: Boolean,
-      default: undefined
+      default: false
+    },
+    icon: {
+      type: Function,
+      default: null
+    },
+    onClick: {
+      type: Function,
+      default: () => {}
     }
   },
-  data () {
+  setup (props) {
+    const rootMenuValueRef = useInjectionRef('NMenu', 'modelValue')
+    const submenuDisabledRef = useInjectionRef('NSubmenu', 'mergedDisabled', false)
+    const nameRef = toRef(props, 'name')
+    const mergedDisabledRef = computed(() => {
+      return submenuDisabledRef.value || props.disabled
+    })
     return {
-      delayedPaddingLeft: null
+      selected: useMemo(() => {
+        if (rootMenuValueRef.value === props.name) return true
+        return false
+      }, [rootMenuValueRef, nameRef]),
+      mergedDisabled: mergedDisabledRef
     }
   },
   computed: {
-    syntheticDisabled () {
-      if (this.disabled !== undefined) return this.disabled
-      return this.PenetratedNSubmenu && this.PenetratedNSubmenu.syntheticDisabled
+    popoverEnabled () {
+      return !this.horizontal && this.root && this.menuCollapsed && !this.mergedDisabled
     }
-  },
-  watch: {
-    paddingLeft (value) {
-      this.$nextTick().then(() => {
-        this.delayedPaddingLeft = value
-      })
-    }
-  },
-  created () {
-    this.delayedPaddingLeft = this.paddingLeft
   },
   methods: {
-    handleClick () {
-      if (!this.syntheticDisabled) {
+    handleClick (e) {
+      if (!this.mergedDisabled) {
         this.NMenu.handleSelect(this.name)
-        this.$emit('click', this)
+        this.onClick(e)
       }
     }
   }

@@ -48,7 +48,8 @@ const webpackConfig = {
           preserveWhitespace: false
         }
       }
-    })
+    }),
+    ...config.plugins
   ]
 }
 

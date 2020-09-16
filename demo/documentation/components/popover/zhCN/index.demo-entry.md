@@ -35,7 +35,7 @@ manual-position
 |show-arrow|`boolean`|`true`||
 |show|`boolean`|-|是否展示 popover|
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
-|trigger|`'hover' \| 'click'`|`'hover'`||
+|trigger|`'hover' \| 'click' \| null`|`null`||
 |x|`number`|-|手动控制位置时填出内容的 CSS `left` 的像素值|
 |y|`number`|-|手动控制位置时填出内容的 CSS `top` 的像素值||
 

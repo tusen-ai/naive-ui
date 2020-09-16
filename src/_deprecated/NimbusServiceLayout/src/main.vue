@@ -3,7 +3,6 @@
 import Scrollbar from '../../../scrollbar'
 import withapp from '../../../_mixins/withapp'
 import themeable from '../../../_mixins/themeable'
-import getDefaultSlot from '../../../_utils/vue/getDefaultSlot'
 import SiderMenu from './SiderMenu'
 import NLayout from '../../../layout/src/Layout.vue'
 import NLayoutSider from '../../../layout/src/LayoutSider'
@@ -108,43 +107,6 @@ export default {
     }
   },
   methods: {
-    createMenu (h, items) {
-      return items.map(item => {
-        const props = {
-          title: item.title || item.name,
-          titleExtra: item.titleExtra,
-          name: item.name,
-          disabled: !!item.disabled
-        }
-        if (item.group) {
-          return h('NMenuItemGroup', {
-            props
-          },
-          this.createMenu(h, item.childItems)
-          )
-        }
-        if (item.childItems) {
-          return h('NSubmenu', {
-            props
-          },
-          this.createMenu(h, item.childItems)
-          )
-        } else {
-          return h('NMenuItem', {
-            props: props,
-            on: {
-              click: () => {
-                if (this.$router && item.path) {
-                  Promise.resolve(
-                    this.$router.push(item.path)
-                  ).catch(() => {})
-                }
-              }
-            }
-          })
-        }
-      })
-    },
     scrollTo (...args) {
       this.$refs.body.scrollTo(...args)
     },
@@ -201,50 +163,6 @@ export default {
           themedStyle: this.bodyThemedStyle,
           position: 'absolute'
         }, {
-          // [
-          //   this.name ? h('div', {
-          //     staticStyle: {
-          //       alignItems: 'center',
-          //       height: '64px',
-          //       paddingLeft: '36px',
-          //       fontSize: '16px',
-          //       fontWeight: '500',
-          //       display: 'flex',
-          //       position: 'relative'
-          //     }
-          //   }, [
-          //     this.$slots['drawer-header-icon'] ? h(
-          //       'NConfigConsumer', {
-          //         props: {
-          //           abstract: true
-          //         },
-          //         scopedSlots: {
-          //           default: ({ styleScheme }) => {
-          //             return h('NIcon', {
-          //               props: { size: 20 },
-          //               staticStyle: {
-          //                 position: 'absolute',
-          //                 left: '10px',
-          //                 top: '50%',
-          //                 transform: 'translateY(-50%)'
-          //               },
-          //               style: {
-          //                 fill: (styleScheme && styleScheme.secondaryTextColor) || null
-          //               }
-          //             }, this.$slots['drawer-header-icon'])
-          //           }
-          //         }
-          //       }) : null,
-          //     h('span', {}, this.name)
-          //   ]) : null,
-          //   this.name ? h('n-divider', {
-          //     staticStyle: {
-          //       margin: '0',
-          //       padding: '0 20px 0 4px'
-          //     }
-          //   }) : null,
-          //   h(SiderMenu)]
-          // ),
           default: () => [
             h(NLayoutSider, {
               ...siderProps,
@@ -259,6 +177,51 @@ export default {
               onExpand: () => {
                 this.collapsed = false
               }
+            }, {
+              default: () => [
+                // this.name ? h('div', {
+                //   style: {
+                //     alignItems: 'center',
+                //     height: '64px',
+                //     paddingLeft: '36px',
+                //     fontSize: '16px',
+                //     fontWeight: '500',
+                //     display: 'flex',
+                //     position: 'relative'
+                //   }
+                // }, [
+                //   this.$slots['drawer-header-icon'] ? h(
+                //     'NConfigConsumer', {
+                //       props: {
+                //         abstract: true
+                //       },
+                //       scopedSlots: {
+                //         default: ({ styleScheme }) => {
+                //           return h('NIcon', {
+                //             props: { size: 20 },
+                //             staticStyle: {
+                //               position: 'absolute',
+                //               left: '10px',
+                //               top: '50%',
+                //               transform: 'translateY(-50%)'
+                //             },
+                //             style: {
+                //               fill: (styleScheme && styleScheme.secondaryTextColor) || null
+                //             }
+                //           }, this.$slots['drawer-header-icon'])
+                //         }
+                //       }
+                //     }) : null,
+                //   h('span', {}, this.name)
+                // ]) : null,
+                // this.name ? h('n-divider', {
+                //   staticStyle: {
+                //     margin: '0',
+                //     padding: '0 20px 0 4px'
+                //   }
+                // }) : null,
+                h(SiderMenu)
+              ]
             }),
             h(NLayout, {
               ref: 'body',

@@ -14,11 +14,11 @@ export default function ({
   leaveToProps = null
 } = {}) {
   return [
-    c(`&.${namespace}-fade-in-height-expand-transition-leave, &.${namespace}-fade-in-height-expand-transition-enter-to`, {
+    c(`&.${namespace}-fade-in-height-expand-transition-leave-from, &.${namespace}-fade-in-height-expand-transition-enter-to`, {
       ...enterToProps,
       opacity: 1
     }),
-    c(`&.${namespace}-fade-in-height-expand-transition-leave-to, &.${namespace}-fade-in-height-expand-transition-enter`, {
+    c(`&.${namespace}-fade-in-height-expand-transition-leave-to, &.${namespace}-fade-in-height-expand-transition-enter-from`, {
       ...leaveToProps,
       opacity: 0,
       marginTop: '0 !important',

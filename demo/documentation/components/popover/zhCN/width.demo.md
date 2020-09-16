@@ -1,6 +1,6 @@
 # 主体样式
 ```html
-<n-popover :body-style="{ width: '500px' }">
+<n-popover :body-style="{ width: '500px' }" trigger="hover">
   <template v-slot:trigger>
     <n-button style="margin:0;">
       宽度 500px

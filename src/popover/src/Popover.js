@@ -101,7 +101,7 @@ export default {
       validator (value) {
         return ['hover', 'click'].includes(value)
       },
-      default: 'hover'
+      default: null
     },
     delay: {
       type: Number,
@@ -212,7 +212,7 @@ export default {
       }
     },
     handleMouseEnter (e) {
-      if (this.trigger === 'hover') {
+      if (this.trigger === 'hover' && !this.disabled) {
         this.clearTimer()
         if (this.mergedShow) return
         if (
@@ -226,7 +226,7 @@ export default {
       }
     },
     handleMouseLeave (e) {
-      if (this.trigger === 'hover') {
+      if (this.trigger === 'hover' && !this.disabled) {
         this.clearTimer()
         if (!this.mergedShow) return
         if (
@@ -253,7 +253,7 @@ export default {
       }
     },
     handleClick () {
-      if (this.trigger === 'click') {
+      if (this.trigger === 'click' && !this.disabled) {
         this.clearTimer()
         const nextShow = !this.mergedShow
         this.uncontrolledShow = nextShow
@@ -295,7 +295,6 @@ export default {
           return [
             h(NPopoverBody, omit(this.$props, [
               'defaultShow',
-              'showArrow',
               'disabled'
             ], {
               show: this.mergedShow

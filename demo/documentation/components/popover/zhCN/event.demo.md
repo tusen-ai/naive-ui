@@ -2,10 +2,8 @@
 ```html
 <n-popover
   placement="bottom"
-  :width="200"
   trigger="hover"
-  @show="handleShow"
-  @hide="handleHide"
+  @update:show="handleUpdateShow"
 >
   <template v-slot:trigger>
     <n-button>
@@ -18,10 +16,8 @@
 </n-popover>
 <n-popover
   placement="bottom"
-  :width="200"
   trigger="click"
-  @show="handleShow"
-  @hide="handleHide"
+   @update:show="handleUpdateShow"
 >
   <template v-slot:trigger>
     <n-button>
@@ -35,9 +31,7 @@
 <n-popover
   :show="showPopover"
   placement="bottom"
-  :width="200"
-  @show="handleShow"
-  @hide="handleHide"
+  @update:show="handleUpdateShow"
 >
   <template v-slot:trigger>
     <n-button @click="showPopover = !showPopover">
@@ -52,20 +46,18 @@
 
 ```js
 export default {
+  inject: ['message'],
   data() {
     return {
       showPopover: false
-    };
+    }
   },
   methods: {
-    handleShow() {
-      this.$NMessage.success("show popover");
-    },
-    handleHide() {
-      this.$NMessage.success("hide popover");
+    handleUpdateShow (value) {
+      this.message.success(`Update show: ${value}`)
     }
   }
-};
+}
 ```
 
 ```css

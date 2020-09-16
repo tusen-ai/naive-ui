@@ -1,6 +1,6 @@
 # 不用基础样式
 ```html
-<n-popover raw :show-arrow="false">
+<n-popover trigger="hover" raw :show-arrow="false">
   <template v-slot:trigger>
     <n-button style="margin:0;">
       悬浮

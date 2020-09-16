@@ -32,7 +32,7 @@ export default {
       type: String,
       default: undefined
     },
-    arrow: {
+    showArrow: {
       type: Boolean,
       default: undefined
     },
@@ -41,18 +41,6 @@ export default {
       default: undefined
     },
     duration: {
-      type: Number,
-      default: undefined
-    },
-    width: {
-      type: Number,
-      default: undefined
-    },
-    minWidth: {
-      type: Number,
-      default: undefined
-    },
-    maxWidth: {
       type: Number,
       default: undefined
     },
@@ -92,6 +80,19 @@ export default {
     containerClass: {
       type: String,
       default: undefined
+    },
+    // deprecated
+    width: {
+      type: Number,
+      default: undefined
+    },
+    minWidth: {
+      type: Number,
+      default: undefined
+    },
+    maxWidth: {
+      type: Number,
+      default: undefined
     }
   },
   mixins: [
@@ -130,26 +131,12 @@ export default {
       return directives
     },
     style () {
-      const style = {}
-      const {
-        width,
-        maxWidth,
-        minWidth,
-        bodyStyle
-      } = this
-      if (width) {
-        style.width = formatLength(width)
+      return {
+        width: formatLength(this.width),
+        maxWidth: formatLength(this.maxWidth),
+        minWidth: formatLength(this.minWidth),
+        ...this.bodyStyle
       }
-      if (maxWidth) {
-        style.maxWidth = formatLength(maxWidth)
-      }
-      if (minWidth) {
-        style.minWidth = formatLength(minWidth)
-      }
-      if (bodyStyle) {
-        Object.assign(style, bodyStyle)
-      }
-      return style
     }
   },
   methods: {
@@ -196,11 +183,13 @@ export default {
   render () {
     return withDirectives(
       h('div', {
-        class: {
-          'n-positioning-container': true,
-          [this.containerClass || 'n-popover']: true,
-          [this.namespace]: this.namespace
-        },
+        class: [
+          'n-positioning-container',
+          {
+            [this.containerClass || 'n-popover']: true,
+            [this.namespace]: this.namespace
+          }
+        ],
         ref: 'container'
       }, [
         h('div', {
@@ -222,12 +211,11 @@ export default {
               class: [
                 'n-popover-body',
                 {
-                  'n-popover-body--no-arrow': !this.arrow,
                   [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme,
+                  'n-popover-body--no-arrow': !this.showArrow,
                   'n-popover-body--shadow': this.shadow,
                   [this.bodyClass]: this.bodyClass,
-                  'n-popover-body--styled': !this.raw,
-                  'n-popover-body--fix-width': this.width !== null || this.maxWidth !== null
+                  'n-popover-body--styled': !this.raw
                 }
               ],
               style: this.style,
@@ -235,14 +223,14 @@ export default {
               onMouseLeave: this.handleMouseLeave
             }, [
               getDefaultSlot(this),
-              this.arrow
+              this.showArrow
                 ? h(
                   'div',
                   {
-                    staticClass: 'n-popover-arrow-wrapper'
+                    class: 'n-popover-arrow-wrapper'
                   }, [
                     h('div', {
-                      staticClass: 'n-popover-arrow',
+                      class: 'n-popover-arrow',
                       style: this.arrowStyle
                     })
                   ])

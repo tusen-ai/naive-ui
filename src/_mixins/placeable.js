@@ -273,7 +273,7 @@ export default {
       }
       let adjustedPlacement = this.placement
       let contentBoundingClientRect = null
-      if (this.zindexableFlip) {
+      if (this.placeableFlip) {
         contentBoundingClientRect = {
           width: trackingElement.offsetWidth,
           height: trackingElement.offsetHeight

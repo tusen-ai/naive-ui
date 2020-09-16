@@ -42,13 +42,6 @@ export default c([
             padding: 8px 14px;
           `
         }),
-        cM('fix-width', {
-          raw: `
-            white-space: normal;
-            width: max-content;
-            box-sizing: border-box;
-          `
-        }),
         cB('popover-arrow-wrapper', {
           raw: `
             position: absolute;

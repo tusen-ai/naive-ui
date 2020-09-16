@@ -4,7 +4,7 @@ zindexable 最好写成 directive
 placeable 进行了大调整
 
 
-- [ ] Form
+- [ ] form
 - [ ] affix
 - [x] alert
 - [ ] anchor
@@ -43,7 +43,6 @@ placeable 进行了大调整
 - [ ] layout
 - [ ] list
 - [ ] loading-bar
-- [ ] locale
 - [ ] log
 - [ ] menu
 - [x] message
@@ -59,7 +58,7 @@ placeable 进行了大调整
   - remove default hide behavior for preset
   - deprecate `overlay-style`, use `body-style`
   - TODO: update docs, scrollbar mouseup
-- [ ] notification
+- [x] notification
   - deprecate `open`, use `create`
   - deprecate `onHide`, use `onLeave`
   - deprecate `onAfterShow`, use `onAfterEnter`

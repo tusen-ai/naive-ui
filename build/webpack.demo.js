@@ -51,7 +51,8 @@ const webpackConfig = {
       filename: '[name].css',
       chunkFilename: '[id].css',
       ignoreOrder: false
-    })
+    }),
+    ...config.plugins
   ]
 }
 

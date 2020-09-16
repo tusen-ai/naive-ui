@@ -1,5 +1,5 @@
 <script>
-import { h } from 'vue'
+import { h, resolveComponent } from 'vue'
 
 export default {
   name: 'NNimbusServiceLayoutSiderMenu',
@@ -9,10 +9,6 @@ export default {
     }
   },
   computed: {
-    content () {
-      const ServiceLayout = this.NNimbusServiceLayout
-      return this.createMenu(h, ServiceLayout.items)
-    },
     subMenuNames () {
       const ServiceLayout = this.NNimbusServiceLayout
       const subMenuNames = []
@@ -29,60 +25,42 @@ export default {
     }
   },
   methods: {
-    createMenu (h, items) {
+    createItems (items) {
       return items.map(item => {
-        const props = {
+        return {
           title: item.title || item.name,
           titleExtra: item.titleExtra,
           name: item.name,
-          disabled: !!item.disabled
-        }
-        if (item.group) {
-          return h('NMenuItemGroup', {
-            props
-          },
-          this.createMenu(h, item.childItems)
-          )
-        }
-        if (item.childItems) {
-          return h('NSubmenu', {
-            props
-          },
-          this.createMenu(h, item.childItems)
-          )
-        } else {
-          return h('NMenuItem', {
-            props: props,
-            on: {
-              click: () => {
-                if (this.$router && item.path) {
-                  Promise.resolve(
-                    this.$router.push(item.path)
-                  ).catch(() => {})
-                }
-              }
+          disabled: !!item.disabled,
+          children: item.childItems ? this.createItems(item.childItems) : undefined,
+          group: item.group,
+          onClick: !(item.group && item.childItems) ? () => {
+            console.log('item click')
+            console.log(this.$router, item.path)
+            if (this.$router && item.path) {
+              Promise.resolve(
+                this.$router.push(item.path)
+              ).catch(err => {
+                console.log(err)
+              })
             }
-          })
+          } : undefined
         }
       })
     }
   },
   render () {
     const ServiceLayout = this.NNimbusServiceLayout
-    return null
-    // return h('NMenu',
-    //   {
-    //     ...ServiceLayout.$attrs,
-    //     value: ServiceLayout.value || ServiceLayout.activeItem,
-    //     expandedNames: ServiceLayout.expandedNames,
-    //     defaultExpandedNames: ServiceLayout.defaultExpandedNames || this.subMenuNames,
-    //     rootIndent: 36,
-    //     indent: 40
-    //   },
-    //   {
-    //     default: () => this.content
-    //   }
-    // )
+    return h(resolveComponent('NMenu'),
+      {
+        modelValue: ServiceLayout.value || ServiceLayout.activeItem,
+        expandedNames: ServiceLayout.expandedNames,
+        defaultExpandedNames: ServiceLayout.defaultExpandedNames || this.subMenuNames,
+        rootIndent: 36,
+        indent: 40,
+        items: this.createItems(ServiceLayout.items)
+      }
+    )
   }
 }
 </script>

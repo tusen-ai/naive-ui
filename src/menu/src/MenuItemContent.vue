@@ -1,7 +1,7 @@
 <template>
   <div
     class="n-menu-item-content"
-    :style="{ paddingLeft: paddingLeft && (paddingLeft + 'px') }"
+    :style="style"
     :class="{
       'n-menu-item-content--collapsed': collapsed,
       'n-menu-item-content--child-selected': childSelected,
@@ -12,25 +12,17 @@
     @click="handleClick"
   >
     <div
-      v-if="$slots.icon"
+      v-if="icon"
       class="n-menu-item-content__icon"
-      :style="{
-        width: maxIconSize && (maxIconSize + 'px'),
-        height: maxIconSize && (maxIconSize + 'px'),
-        fontSize: activeIconSize && (activeIconSize + 'px'),
-      }"
+      :style="iconStyle"
     >
-      <slot name="icon" />
+      <render :render="icon" />
     </div>
     <div class="n-menu-item-content-header">
-      <slot name="header">
-        <render :render="title" />
-      </slot>
-      <slot name="header-extra">
-        <span v-if="titleExtra" class="n-menu-item-content-header__extra">
-          <render v-if="titleExtra" :render="titleExtra" />
-        </span>
-      </slot>
+      <render :render="title" />
+      <span v-if="titleExtra" class="n-menu-item-content-header__extra">
+        <render :render="titleExtra" />
+      </span>
     </div>
     <div v-if="showArrow" class="n-menu-item-content__arrow" />
   </div>
@@ -40,7 +32,7 @@
 import render from '../../_utils/vue/render'
 
 export default {
-  name: 'NMenuItemContent',
+  name: 'MenuItemContent',
   components: {
     render
   },
@@ -73,6 +65,10 @@ export default {
       type: [String, Function],
       default: null
     },
+    icon: {
+      type: [String, Function],
+      default: null
+    },
     showArrow: {
       type: Boolean,
       default: false
@@ -88,11 +84,32 @@ export default {
     uncollapsable: {
       type: Boolean,
       default: false
+    },
+    onClick: {
+      type: Function,
+      default: () => {}
+    }
+  },
+  computed: {
+    style () {
+      const { paddingLeft } = this
+      return { paddingLeft: paddingLeft && (paddingLeft + 'px') }
+    },
+    iconStyle () {
+      const {
+        maxIconSize,
+        activeIconSize
+      } = this
+      return {
+        width: maxIconSize + 'px',
+        height: maxIconSize + 'px',
+        fontSize: activeIconSize + 'px'
+      }
     }
   },
   methods: {
     handleClick () {
-      this.$emit('click')
+      this.onClick()
     }
   }
 }

@@ -1,5 +1,6 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { DefinePlugin } = require('webpack')
 
 exports.alias = {
   'naive-ui/lib/icons': path.resolve(__dirname, '../src/_icons'),
@@ -67,4 +68,10 @@ exports.docLoaders = (env) => [
     type: 'javascript/auto',
     loader: '@intlify/vue-i18n-loader'
   }
+]
+
+exports.plugins = [
+  new DefinePlugin({
+    __DEV__: JSON.stringify(process.env.NODE_ENV === 'development')
+  })
 ]

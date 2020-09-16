@@ -2,7 +2,6 @@
 ```html
 <n-popover
   placement="bottom"
-  :width="200"
   trigger="hover"
   @show="handleShow"
   @hide="handleHide"
@@ -18,7 +17,6 @@
 </n-popover>
 <n-popover
   placement="bottom"
-  :width="200"
   trigger="click"
   @show="handleShow"
   @hide="handleHide"
@@ -35,7 +33,6 @@
 <n-popover
   :show="showPopover"
   placement="bottom"
-  :width="200"
   @show="handleShow"
   @hide="handleHide"
 >

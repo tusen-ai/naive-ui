@@ -1,6 +1,6 @@
 # 基础用法
 ```html
-<n-popover>
+<n-popover trigger="hover">
   <template v-slot:trigger>
     <n-button>
       悬浮

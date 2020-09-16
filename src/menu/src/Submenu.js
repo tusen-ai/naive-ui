@@ -1,0 +1,176 @@
+import { h, withDirectives, vShow, toRef, ref } from 'vue'
+import FadeInHeightExpandTransition from '../../_transition/FadeInHeightExpandTransition'
+import NPopover from '../../popover/src/Popover'
+import NMenuItemContent from './MenuItemContent'
+import menuChildMixin from './menu-child-mixin'
+import { itemRenderer } from './utils'
+import { useInjectionRef, useMemo } from '../../_utils/composition'
+
+export default {
+  name: 'Submenu',
+  mixins: [
+    menuChildMixin
+  ],
+  provide () {
+    return {
+      NSubmenu: this,
+      NMenuItemGroup: null
+    }
+  },
+  props: {
+    titleExtra: {
+      type: [String, Function],
+      default: null
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    children: {
+      type: Array,
+      required: true
+    },
+    icon: {
+      type: Function,
+      default: null
+    },
+    onClick: {
+      type: Function,
+      default: () => {}
+    }
+  },
+  setup (props) {
+    const activePathRef = useInjectionRef('NMenu', 'activePath')
+    const nameRef = toRef(props, 'name')
+    return {
+      selectedInside: useMemo(() => {
+        return activePathRef.value.includes(nameRef.value)
+      }, [
+        activePathRef,
+        nameRef
+      ]),
+      popoverBodyStyle: ref({
+        padding: '2px 4px',
+        minWidth: '180px'
+      }),
+      popoverShow: ref(false)
+    }
+  },
+  computed: {
+    mergedDisabled () {
+      const {
+        NMenu,
+        NSubmenu,
+        disabled
+      } = this
+      if (NSubmenu && NSubmenu.mergedDisabled) return true
+      if (NMenu.disabled) return true
+      return disabled
+    },
+    collapsed () {
+      if (this.horizontal) return false
+      if (this.insidePopover) return false
+      if (this.menuCollapsed) {
+        return true
+      }
+      return this.NMenu.mergedExpandedNames.includes(this.name)
+    },
+    popoverEnabled () {
+      return !this.mergedDisabled && (this.horizontal || this.menuCollapsed)
+    }
+  },
+  methods: {
+    handleClick () {
+      if (!this.mergedDisabled && !this.menuCollapsed) {
+        this.NMenu.toggleExpand(this.name)
+        this.onClick()
+      }
+    },
+    handlePopoverShowChange (value) {
+      this.popoverShow = value
+    }
+  },
+  render () {
+    const createSubmenuItem = () => {
+      const {
+        delayedPaddingLeft,
+        collapsed,
+        mergedDisabled,
+        maxIconSize,
+        activeIconSize,
+        title,
+        titleExtra,
+        horizontal,
+        selectedInside,
+        icon,
+        handleClick,
+        popoverShow,
+        insidePopover
+      } = this
+      return h(NMenuItemContent, {
+        paddingLeft: delayedPaddingLeft,
+        collapsed,
+        disabled: mergedDisabled,
+        maxIconSize,
+        activeIconSize,
+        title,
+        titleExtra,
+        showArrow: !horizontal && !insidePopover,
+        uncollapsable: insidePopover,
+        childSelected: selectedInside,
+        icon,
+        hover: popoverShow,
+        onClick: handleClick
+      })
+    }
+    const createSubmenuChildren = (insidePopover = false) => {
+      return h(FadeInHeightExpandTransition, null, {
+        default: () => {
+          const {
+            children,
+            collapsed
+          } = this
+          return withDirectives(
+            h('div', {
+              class: 'n-submenu-children'
+            }, children.map(item => itemRenderer(item, insidePopover))),
+            [
+              [vShow, insidePopover || !collapsed]
+            ]
+          )
+        }
+      })
+    }
+    return this.root ? h(NPopover, {
+      trigger: 'hover',
+      disabled: !this.popoverEnabled,
+      bodyStyle: this.popoverBodyStyle,
+      placement: this.popoverPlacement,
+      showArrow: false,
+      'onUpdate:show': this.handlePopoverShowChange
+    }, {
+      trigger: () => h('div', {
+        class: 'n-submenu'
+      }, [
+        createSubmenuItem(),
+        !this.horizontal ? createSubmenuChildren() : null
+      ]),
+      default: () => {
+        const theme = this.NMenu.syntheticTheme
+        return h('div', {
+          class: [
+            'n-menu',
+            {
+              [`n-${theme}-theme`]: theme
+            }
+          ]
+        }, createSubmenuChildren(true))
+      }
+    }) : h('div', {
+      class: 'n-submenu'
+    }, [
+      createSubmenuItem(),
+      createSubmenuChildren()
+    ])
+  }
+}

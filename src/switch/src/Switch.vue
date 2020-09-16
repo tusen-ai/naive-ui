@@ -55,7 +55,6 @@ export default {
   methods: {
     handleClick () {
       if (!this.disabled) {
-        console.log(this['onUpdate:modelValue'])
         this['onUpdate:modelValue'](!this.modelValue)
       }
     }

@@ -2,7 +2,7 @@ import {
   ref,
   computed,
   watch,
-  onMounted
+  onMounted, inject, toRef
 } from 'vue'
 
 export function useFalseUntilTruthy (valueRef) {
@@ -19,6 +19,11 @@ export function useMergedState (
   controlledStateRef,
   uncontrolledStateRef
 ) {
+  watch(controlledStateRef, value => {
+    if (value !== undefined) {
+      uncontrolledStateRef.value = value
+    }
+  })
   return computed(() => {
     if (controlledStateRef.value === undefined) {
       return uncontrolledStateRef.value
@@ -41,6 +46,20 @@ export function useIsMounted () {
     isMounted.value = true
   })
   return isMounted
+}
+
+export function useMemo (valueGenerator, deps) {
+  const valueRef = ref(valueGenerator())
+  watch(deps, () => {
+    valueRef.value = valueGenerator()
+  })
+  return valueRef
+}
+
+export function useInjectionRef (injectionName, key, fallback) {
+  const injection = inject(injectionName)
+  if (!injection && arguments.length > 2) return fallback
+  return toRef(injection, key)
 }
 
 export { default as useLastClickPosition } from './use-last-click-position'

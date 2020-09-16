@@ -1,4 +1,4 @@
-import { h, createTextVNode } from 'vue'
+import { createTextVNode } from 'vue'
 
 export default {
   props: {
@@ -10,7 +10,7 @@ export default {
   render () {
     const { render } = this
     if (typeof render === 'function') {
-      return render(h)
+      return render()
     } else if (typeof render === 'string') {
       return createTextVNode(render)
     } else if (typeof render === 'number') {

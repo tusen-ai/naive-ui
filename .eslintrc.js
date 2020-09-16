@@ -27,6 +27,12 @@ module.exports = {
         describe: 'readonly',
         it: 'readonly'
       }
+    },
+    {
+      files: '*',
+      globals: {
+        __DEV__: 'readonly'
+      }
     }
   ]
 }
