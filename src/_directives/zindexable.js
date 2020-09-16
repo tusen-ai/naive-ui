@@ -11,10 +11,10 @@ const zindexable = {
   updated (el, { value }) {
     const { zIndex, enabled } = (value || {})
     const cachedEnabled = el.zindexableContext.enabled
-    if (cachedEnabled !== enabled) {
+    if (enabled && cachedEnabled !== enabled) {
       zIndexManager.setNewZIndex(el, zIndex)
-      el.zindexableContext.enabled = enabled
     }
+    el.zindexableContext.enabled = enabled
   },
   unmounted (el) {
     zIndexManager.unregisterElement(el)
