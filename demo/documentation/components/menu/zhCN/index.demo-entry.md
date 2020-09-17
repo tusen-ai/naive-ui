@@ -9,11 +9,6 @@ indent
 collapse
 ```
 
-## V-model
-|Prop|Event|
-|-|-|
-|value|select|
-
 ## Props
 ### Menu Props
 |名称|类型|默认值|说明|
@@ -30,7 +25,8 @@ collapse
 |overlay-min-width|`number \| string`|`180`|弹出子菜单的最小宽度，只在菜单为水平或者折叠时生效|
 |root-indent|`number`|`null`|菜单第一级的缩进，如果没有设定，使用 `indent` 代替|
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
-|value|`string`|`null`|菜单当前的选中值|
+|model-value|`string`|`null`|菜单当前的选中值|
+|on-update:model-value|`(value: string) => any`|`() => {}`||
 
 ### MenuItem Properties
 |名称|类型|说明|
