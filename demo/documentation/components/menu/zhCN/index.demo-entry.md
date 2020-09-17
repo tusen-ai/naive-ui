@@ -51,7 +51,6 @@ collapse
 ### MenuItemGroup Properties
 |名称|类型|说明|
 |-|-|-|
-
 |children|`Array<MenuItem \| Submenu \| MenuItemGroup>`|**必需**|
 |key|`string`|菜单项的标识符，**必需**|
 |title|`string \| (() => VNode \| Array<VNode>)`||
