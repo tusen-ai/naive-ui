@@ -109,7 +109,7 @@ export default {
     },
     duration: {
       type: Number,
-      default: 300
+      default: 200
     },
     raw: {
       type: Boolean,
