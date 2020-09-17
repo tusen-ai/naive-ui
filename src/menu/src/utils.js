@@ -25,20 +25,20 @@ export function getWrappedItems (items, level = 0) {
   return items.map(item => getWrappedItem(item, level))
 }
 
-export function getActivePath (menuItems, activeName) {
+export function getActivePath (menuItems, activeKey) {
   const path = []
   function traverse (items) {
     for (const item of items) {
       if (item.children) {
-        path.push(item.name)
-        if (__DEV__ && activeName === item.name) {
-          warn('menu', `Menu can't select a subment name.`)
+        path.push(item.internalKey)
+        if (__DEV__ && activeKey === item.internalKey) {
+          warn('menu', `Menu can't select a submenu key.`)
         }
         if (traverse(item.children)) return true
         path.pop()
       } else {
-        if (activeName === item.name) {
-          path.push(item.name)
+        if (activeKey === item.internalKey) {
+          path.push(item.internalKey)
           return true
         }
       }

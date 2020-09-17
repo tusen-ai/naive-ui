@@ -120,7 +120,7 @@ export default {
       controlledExpandedKeysRef,
       uncontrolledExpandedKeysRef
     )
-    const itemsRef = toRef(props, 'items')
+    const itemsRef = computed(() => getWrappedItems(props.items))
     const valueRef = toRef(props, 'modelValue')
     const activePathRef = computed(() => getActivePath(itemsRef.value, valueRef.value))
     const transitionDisabledRef = ref(true)
@@ -134,7 +134,7 @@ export default {
       uncontrolledExpanededKeys: uncontrolledExpandedKeysRef,
       mergedExpandedKeys: mergedExpandedKeysRef,
       activePath: activePathRef,
-      menuItems: getWrappedItems(props.items),
+      menuItems: itemsRef,
       transitionDisabled: transitionDisabledRef
     }
   },

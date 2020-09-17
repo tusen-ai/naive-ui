@@ -17,7 +17,7 @@
       :collapsed-width="64"
       :collapsed-icon-size="22"
       :items="menuItems"
-      v-model="activeMenuItemName"
+      v-model="activeKey"
     />
   </n-layout-sider>
   <n-layout>
@@ -115,7 +115,7 @@ const menuItems = [
 export default {
   data () {
     return {
-      activeMenuItemkey: null,
+      activeKey: null,
       collapsed: true,
       menuItems
     }
