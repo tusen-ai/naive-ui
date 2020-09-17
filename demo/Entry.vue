@@ -59,7 +59,7 @@ export default {
     next()
   },
   beforeRouteUpdate (to, from, next) {
-    this.$i18n.locale = to.params.lang
+    // this.$i18n.locale = to.params.lang
     next()
   },
   data () {

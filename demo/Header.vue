@@ -57,17 +57,19 @@
           @select="handleSelect"
         />
         <div class="nav-menu">
-          <n-menu mode="horizontal" :value="menuValue" @select="handleMenuSelect">
-            <n-menu-item :title="'home'" name="home" />
-            <n-menu-item :title="'doc'" name="doc" />
-          </n-menu>
+          <n-menu
+            mode="horizontal"
+            :model-value="menuValue"
+            :items="menuItems"
+            @select="handleMenuSelect"
+          />
         </div>
       </div>
       <div style="display: flex;">
-        <n-tag class="nav-picker" @click.native="handleThemeChange">
+        <n-tag class="nav-picker" @click="handleThemeChange">
           {{ themeOptions[theme].label }}
         </n-tag>
-        <n-tag class="nav-picker" @click.native="handleLanguageChange">
+        <n-tag class="nav-picker" @click="handleLanguageChange">
           {{ langOptions[lang].label }}
         </n-tag>
         <n-tag
@@ -144,7 +146,17 @@ export default {
           label: 'Debug',
           next: 'debug'
         }
-      }
+      },
+      menuItems: [
+        {
+          name: 'home',
+          title: 'home'
+        },
+        {
+          name: 'doc',
+          title: 'doc'
+        }
+      ]
     }
   },
   computed: {
@@ -256,9 +268,13 @@ export default {
 .nav-menu {
   padding-left: 32px;
 }
-.nav-menu .n-menu-item {
-  height: 63px !important;
+
+.nav-menu {
+  ::v-deep .n-menu-item {
+    height: 63px !important;
+  }
 }
+
 .nav-picker {
   cursor: pointer;
   margin-right: 12px;

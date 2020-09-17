@@ -52,7 +52,8 @@ export default c([
         ])
       ]),
       cM('horizontal', {
-        display: 'flex'
+        display: 'flex',
+        paddingBottom: 0
       }, [
         cB('submenu', {
           margin: 0
