@@ -65,15 +65,15 @@ export default {
   setup (props) {
     const rootMenuValueRef = useInjectionRef('NMenu', 'modelValue')
     const submenuDisabledRef = useInjectionRef('NSubmenu', 'mergedDisabled', false)
-    const nameRef = toRef(props, 'name')
+    const internalKeyRef = toRef(props, 'internalKey')
     const mergedDisabledRef = computed(() => {
       return submenuDisabledRef.value || props.disabled
     })
     return {
       selected: useMemo(() => {
-        if (rootMenuValueRef.value === props.name) return true
+        if (rootMenuValueRef.value === props.internalKey) return true
         return false
-      }, [rootMenuValueRef, nameRef]),
+      }, [rootMenuValueRef, internalKeyRef]),
       mergedDisabled: mergedDisabledRef
     }
   },
@@ -85,7 +85,7 @@ export default {
   methods: {
     handleClick (e) {
       if (!this.mergedDisabled) {
-        this.NMenu.handleSelect(this.name)
+        this.NMenu.handleSelect(this.internalKey)
         this.onClick(e)
       }
     }

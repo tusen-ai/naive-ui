@@ -2,7 +2,7 @@
 你可以设定菜单的 `indent` & `root-indent`。`root-indent` 只决定第一层项目的缩进。
 ```html
 <n-menu
-  v-model="activeName"
+  v-model="activeKey"
   :root-indent="36"
   :indent="12"
   :items="menuItems"
@@ -21,73 +21,73 @@ function renderIcon(icon) {
 const menuItems = [
   {
     title: '且听风吟',
-    name: 'hear-the-wind-sing',
+    key: 'hear-the-wind-sing',
     icon: renderIcon(bookIcon)
   },
   {
     title: '1973年的弹珠玩具',
-    name: 'pinball-1973',
+    key: 'pinball-1973',
     icon: renderIcon(bookIcon),
     disabled: true,
     children: [
       {
         title: '鼠',
-        name: 'rat'
+        key: 'rat'
       }
     ]
   },
   {
     title: '寻羊冒险记',
-    name: 'a-wild-sheep-chase',
+    key: 'a-wild-sheep-chase',
     icon: renderIcon(bookIcon),
     disabled: true
   },
   {
     title: '舞，舞，舞',
-    name: 'dance-dance-dance',
+    key: 'dance-dance-dance',
     icon: renderIcon(bookIcon),
     children: [
       {
         type: 'group',
         title: '人物',
-        name: 'people',
+        key: 'people',
         children: [
           {
             title: '叙事者',
-            name: 'narrator',
+            key: 'narrator',
             icon: renderIcon(personIcon)
           },
           {
             title: '羊男',
-            name: 'sheep-man',
+            key: 'sheep-man',
             icon: renderIcon(personIcon)
           }
         ]
       },
       {
         title: '饮品',
-        name: 'beverage',
+        key: 'beverage',
         icon: renderIcon(wineIcon),
         children: [
           {
             title: '威士忌',
-            name: 'whisky'
+            key: 'whisky'
           }
         ]
       },
       {
         title: '食物',
-        name: 'food',
+        key: 'food',
         children: [
           {
             title: '三明治',
-            name: 'sandwich'
+            key: 'sandwich'
           }
         ]
       },
       {
         title: '过去增多，未来减少',
-        name: 'the-past-increases-the-future-recedes'
+        key: 'the-past-increases-the-future-recedes'
       }
     ]
   }
@@ -96,7 +96,7 @@ const menuItems = [
 export default {
   data () {
     return {
-      activeName: null,
+      activeKey: null,
       menuItems
     }
   }

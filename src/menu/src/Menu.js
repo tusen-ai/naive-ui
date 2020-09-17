@@ -3,7 +3,7 @@ import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles/index'
-import { useMergedState } from '../../_utils/composition'
+import { useCompitable, useMergedState } from '../../_utils/composition'
 import {
   getActivePath,
   getWrappedItems,
@@ -42,7 +42,7 @@ export default {
     },
     collapsedIconSize: {
       type: Number,
-      default: 20
+      default: 24
     },
     rootIndent: {
       type: Number,
@@ -52,13 +52,13 @@ export default {
       type: Number,
       default: 32
     },
-    defaultExpandedNames: {
+    defaultExpandedKeys: {
       type: Array,
       default: () => []
     },
-    expandedNames: {
+    expandedKeys: {
       type: Array,
-      default: undefined
+      default: null
     },
     modelValue: {
       type: String,
@@ -70,17 +70,26 @@ export default {
       },
       default: 'vertical'
     },
-    onExpandedNamesChange: {
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    popoverBodyStyle: {
+      type: Object,
+      default () {
+        return {
+          padding: '2px 4px',
+          minWidth: '180px'
+        }
+      }
+    },
+    'onUpdate:expandedKeys': {
       type: Function,
       default: () => {}
     },
     'onUpdate:modelValue': {
       type: Function,
       default: () => {}
-    },
-    disabled: {
-      type: Boolean,
-      default: false
     },
     // deprecated
     onOpenNamesChange: {
@@ -91,21 +100,25 @@ export default {
       type: Function,
       default: () => {}
     },
-    overlayWidth: {
-      type: [Number, String],
-      default: null
+    onExpandedNamesChange: {
+      type: Function,
+      default: () => {}
     },
-    overlayMinWidth: {
-      type: [Number, String],
-      default: 180
+    expandedNames: {
+      type: Array,
+      default: undefined
+    },
+    defaultExpandedNames: {
+      type: Array,
+      default: undefined
     }
   },
   setup (props) {
-    const uncontrolledExpandedNamesRef = ref(props.defaultExpandedNames)
-    const controlledExpandedNamesRef = toRef(props, 'expandedNames')
-    const mergedExpandedNamesRef = useMergedState(
-      controlledExpandedNamesRef,
-      uncontrolledExpandedNamesRef
+    const uncontrolledExpandedKeysRef = ref(props.defaultExpandedNames || props.defaultExpandedKeys)
+    const controlledExpandedKeysRef = useCompitable(props, 'expandedNames', 'expandedKeys')
+    const mergedExpandedKeysRef = useMergedState(
+      controlledExpandedKeysRef,
+      uncontrolledExpandedKeysRef
     )
     const itemsRef = toRef(props, 'items')
     const valueRef = toRef(props, 'modelValue')
@@ -117,8 +130,9 @@ export default {
       })
     })
     return {
-      uncontrolledExpanededNames: uncontrolledExpandedNamesRef,
-      mergedExpandedNames: mergedExpandedNamesRef,
+      controlledExpandedKeys: controlledExpandedKeysRef,
+      uncontrolledExpanededKeys: uncontrolledExpandedKeysRef,
+      mergedExpandedKeys: mergedExpandedKeysRef,
       activePath: activePathRef,
       menuItems: getWrappedItems(props.items),
       transitionDisabled: transitionDisabledRef
@@ -130,22 +144,23 @@ export default {
       // deprecated
       this.onSelect(value)
     },
-    toggleExpand (name) {
-      const currentExpandedNames = Array.from(this.mergedExpandedNames)
-      const index = currentExpandedNames.findIndex(
-        expanededName => expanededName === name
+    toggleExpand (key) {
+      const currentExpandedKeys = Array.from(this.mergedExpandedKeys)
+      const index = currentExpandedKeys.findIndex(
+        expanededKey => expanededKey === key
       )
       if (~index) {
-        currentExpandedNames.splice(index, 1)
+        currentExpandedKeys.splice(index, 1)
       } else {
-        currentExpandedNames.push(name)
+        currentExpandedKeys.push(key)
       }
-      if (this.expandedNames === undefined) {
-        this.uncontrolledExpanededNames = currentExpandedNames
+      if (this.controlledExpandedKeys === undefined) {
+        this.uncontrolledExpanededKeys = currentExpandedKeys
       }
-      this.onExpandedNamesChange(currentExpandedNames)
+      this['onUpdate:expandedKeys'](currentExpandedKeys)
       // deprecated
-      this.onOpenNamesChange(currentExpandedNames)
+      this.onExpandedNamesChange(currentExpandedKeys)
+      this.onOpenNamesChange(currentExpandedKeys)
     }
   },
   render () {

@@ -44,34 +44,56 @@ placeable 进行了大调整
 - [ ] list
 - [ ] loading-bar
 - [ ] log
-- [ ] menu
+- [x] menu
+  - new
+    - `popover-body-style`
+  - deprecate
+    - `on-expanded-names-change` => `on-update:expanded-keys`
+    - `on-select` => `on-update:model-value`
+    - `expanded-names` => `expanded-keys`
+    - `default-expanded-names` => `default-expanded-keys`
+    - `item.name` => `item.key`
+  - remove
+    - `overlay-width`
+    - `overlay-min-width`
 - [x] message
-  - rewrite message using `n-message-controller`
-  - deprecate `onHide`, new `onLeave`
-  - deprecate `onAfterHide`, new `onAfterLeave`
-  - remove `hide` on message instance, new `destroy`
-  - TODO: update enUS docs
+  - rewrite message using `n-message-provider`
+  - deprecate
+    - `onHide` => `onLeave`
+    - `onAfterHide` => `onAfterLeave`
+  - remove
+    - `message.hide` => `message.destroy`
 - [x] modal
   - rewrite with teleport
-  - deprecate v-model show hide
-  - add prop `display-directive`
-  - remove default hide behavior for preset
-  - deprecate `overlay-style`, use `body-style`
-  - TODO: update docs, scrollbar mouseup
+  - new
+    - `display-directive`
+  - deprecate
+    - `v-model`
+    - `on-show` => `on-update:show`
+    - `on-hide` => `on-update:show`
+    - `overlay-style` => `body-style`
+  - remove
+    - default hide behavior for preset
 - [x] notification
-  - deprecate `open`, use `create`
-  - deprecate `onHide`, use `onLeave`
-  - deprecate `onAfterShow`, use `onAfterEnter`
-  - deprecate `onAfterHide`, use `onAfterHide`
+  - deprecate
+    - `open` => `create`
+    - `onHide` => `onLeave`
+    - `onAfterShow` => `onAfterEnter`
+    - `onAfterHide` => `onAfterHide`
 - [ ] pagination
 - [ ] popconfirm
-- [ ] popover
-  - `manual` trigger is removed
-  - add `default-show` prop
-  - `overlay-xxx` to `body-xxx`
-  - remove `controller` prop
-  - remove `max-width`, `width`, `min-width` prop 
-  - deprecate `v-slot:activator` use `v-slot:trigger` instead
+- [x] popover
+  - new
+    - `default-show`
+  - deprecate
+    - `v-slot:activator` => `v-slot:trigger`
+    - `overlay-xxx` => `body-xxx`
+  - remove
+    - `controller`
+    - `max-width`
+    - `width`
+    - `min-width`
+    - `manual` trigger is removed, use `null` instead
 - [ ] popselect
 - [ ] progress
 - [ ] radio
@@ -83,7 +105,9 @@ placeable 进行了大调整
 - [ ] statistic
 - [ ] steps
 - [x] switch
-  - value & change => modelValue & update:modelValue
+  - remove
+    - `value` => `model-value`
+    - `change` => `on-update:model-value`
 - [ ] table
 - [ ] tabs
 - [ ] tag

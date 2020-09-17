@@ -8,6 +8,8 @@ import { warn } from '../../_utils/naive/warn'
 function getWrappedItem (item, level) {
   const clonedItem = {
     ...item,
+    key: item.key ?? item.name,
+    internalKey: item.key ?? item.name,
     level,
     root: level === 0
   }
@@ -48,16 +50,15 @@ export function getActivePath (menuItems, activeName) {
 
 export function itemRenderer (item, insidePopover = false) {
   const props = {
-    key: item.name,
     insidePopover,
     ...item
   }
   if (item.children) {
     if (item.group || item.type === 'group') {
-      return h(NMenuItemGroup, omit(props, ['disabled', 'group', 'type']))
+      return h(NMenuItemGroup, omit(props, ['disabled', 'group', 'type', 'name']))
     }
-    return h(NSubmenu, props)
+    return h(NSubmenu, omit(props, ['name']))
   } else {
-    return h(NMenuItem, omit(props, ['children']))
+    return h(NMenuItem, omit(props, ['children', 'name']))
   }
 }

@@ -41,18 +41,15 @@ export default {
   },
   setup (props) {
     const activePathRef = useInjectionRef('NMenu', 'activePath')
-    const nameRef = toRef(props, 'name')
+    const internalKeyRef = toRef(props, 'internalKey')
     return {
       selectedInside: useMemo(() => {
-        return activePathRef.value.includes(nameRef.value)
+        return activePathRef.value.includes(internalKeyRef.value)
       }, [
         activePathRef,
-        nameRef
+        internalKeyRef
       ]),
-      popoverBodyStyle: ref({
-        padding: '2px 4px',
-        minWidth: '180px'
-      }),
+      popoverBodyStyle: useInjectionRef('NMenu', 'popoverBodyStyle'),
       popoverShow: ref(false)
     }
   },
@@ -73,7 +70,7 @@ export default {
       if (this.menuCollapsed) {
         return true
       }
-      return this.NMenu.mergedExpandedNames.includes(this.name)
+      return this.NMenu.mergedExpandedKeys.includes(this.internalKey)
     },
     popoverEnabled () {
       return !this.mergedDisabled && (this.horizontal || this.menuCollapsed)
@@ -81,8 +78,10 @@ export default {
   },
   methods: {
     handleClick () {
-      if (!this.mergedDisabled && !this.menuCollapsed) {
-        this.NMenu.toggleExpand(this.name)
+      if (!this.mergedDisabled) {
+        if (!this.menuCollapsed) {
+          this.NMenu.toggleExpand(this.internalKey)
+        }
         this.onClick()
       }
     },

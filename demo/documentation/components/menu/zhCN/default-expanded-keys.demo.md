@@ -1,12 +1,12 @@
 # 展开子菜单
-你可以设定 `default-expanded-names` 让菜单工作在非受控状态下或者使用 `expanded-names` 和 `@expanded-names-change` 以受控的方式控制菜单。
+你可以设定 `default-expanded-keys` 让菜单工作在非受控状态下或者使用 `expanded-keys` 和 `@update:expanded-keys` 以受控的方式控制菜单。
 ```html
 <n-menu
-  v-model="activeName"
-  :default-expanded-names="defaultExpandedNames"
+  v-model="activeKey"
+  :default-expanded-keys="defaultExpandedKeys"
   :items="menuItems"
-  @expanded-names-change="handleExpandedNamesChange"
-  @select="handleSelect"
+  @update:expanded-keys="handleUpdateExpandedKeys"
+  @update:model-value="handleUpdateActiveKey"
 />
 ```
 ```js
@@ -22,73 +22,73 @@ function renderIcon(icon) {
 const menuItems = [
   {
     title: '且听风吟',
-    name: 'hear-the-wind-sing',
+    key: 'hear-the-wind-sing',
     icon: renderIcon(bookIcon)
   },
   {
     title: '1973年的弹珠玩具',
-    name: 'pinball-1973',
+    key: 'pinball-1973',
     icon: renderIcon(bookIcon),
     disabled: true,
     children: [
       {
         title: '鼠',
-        name: 'rat'
+        key: 'rat'
       }
     ]
   },
   {
     title: '寻羊冒险记',
-    name: 'a-wild-sheep-chase',
+    key: 'a-wild-sheep-chase',
     icon: renderIcon(bookIcon),
     disabled: true
   },
   {
     title: '舞，舞，舞',
-    name: 'dance-dance-dance',
+    key: 'dance-dance-dance',
     icon: renderIcon(bookIcon),
     children: [
       {
         type: 'group',
         title: '人物',
-        name: 'people',
+        key: 'people',
         children: [
           {
             title: '叙事者',
-            name: 'narrator',
+            key: 'narrator',
             icon: renderIcon(personIcon)
           },
           {
             title: '羊男',
-            name: 'sheep-man',
+            key: 'sheep-man',
             icon: renderIcon(personIcon)
           }
         ]
       },
       {
         title: '饮品',
-        name: 'beverage',
+        key: 'beverage',
         icon: renderIcon(wineIcon),
         children: [
           {
             title: '威士忌',
-            name: 'whisky'
+            key: 'whisky'
           }
         ]
       },
       {
         title: '食物',
-        name: 'food',
+        key: 'food',
         children: [
           {
             title: '三明治',
-            name: 'sandwich'
+            key: 'sandwich'
           }
         ]
       },
       {
         title: '过去增多，未来减少',
-        name: 'the-past-increases-the-future-recedes'
+        key: 'the-past-increases-the-future-recedes'
       }
     ]
   }
@@ -98,17 +98,17 @@ export default {
   inject: ['message'],
   data () {
     return {
-      defaultExpandedNames: ['dance-dance-dance', 'food'],
-      activeName: null,
+      defaultExpandedKeys: ['dance-dance-dance', 'food'],
+      activeKey: null,
       menuItems
     }
   },
   methods: {
-    handleSelect (value) {
-      this.message.info('Select: ' + JSON.stringify(value))
+    handleUpdateActiveKey (value) {
+      this.message.info('[onUpdate:modelValue]: ' + value)
     },
-    handleExpandedNamesChange (value) {
-      this.message.info('ExpandedNamesChange: ' + JSON.stringify(value))
+    handleUpdateExpandedKeys (value) {
+      this.message.info('[onUpdate:expandedKeys]: ' + JSON.stringify(value))
     }
   }
 }

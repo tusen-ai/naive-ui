@@ -13,7 +13,7 @@ export default {
     }
   },
   props: {
-    name: {
+    internalKey: {
       type: String,
       required: true
     },
