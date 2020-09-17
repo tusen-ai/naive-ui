@@ -18,7 +18,7 @@ export default {
     }
   },
   props: {
-    titleExtra: {
+    extra: {
       type: [String, Function],
       default: null
     },
@@ -98,7 +98,7 @@ export default {
         maxIconSize,
         activeIconSize,
         title,
-        titleExtra,
+        extra,
         horizontal,
         selectedInside,
         icon,
@@ -113,7 +113,7 @@ export default {
         maxIconSize,
         activeIconSize,
         title,
-        titleExtra,
+        extra,
         showArrow: !horizontal && !insidePopover,
         uncollapsable: insidePopover,
         childSelected: selectedInside,

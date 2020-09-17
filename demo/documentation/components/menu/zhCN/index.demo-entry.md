@@ -32,9 +32,9 @@ collapse
 |名称|类型|说明|
 |-|-|-|
 |disabled|`boolean`||
+|extra|`string \| (() => VNode \| Array<VNode>)`||
 |icon|`() => VNode`||
 |key|`string`|菜单项的标识符，**必需**|
-|titleExtra|`string \| (() => VNode \| Array<VNode>)`||
 |title|`string \| (() => VNode \| Array<VNode>)`||
 
 ### Submenu Properties
@@ -42,9 +42,9 @@ collapse
 |-|-|-|
 |children|`Array<MenuItem \| Submenu \| MenuItemGroup>`|**必需**|
 |disabled|`boolean`||
+|extra|`string \| (() => VNode \| Array<VNode>)`||
 |icon|`() => VNode`||
 |key|`string`|菜单项的标识符，**必需**|
-|titleExtra|`string \| (() => VNode \| Array<VNode>)`||
 |title|`string \| (() => VNode \| Array<VNode>)`||
 |type|`'submenu'`|**必需**|
 
@@ -53,7 +53,7 @@ collapse
 |-|-|-|
 
 |children|`Array<MenuItem \| Submenu \| MenuItemGroup>`|**必需**|
-|key|`string`|菜单组的标识符，**必需**|
-|title|`string`||
+|key|`string`|菜单项的标识符，**必需**|
+|title|`string \| (() => VNode \| Array<VNode>)`||
 |type|`'group'`|**必需**|
 

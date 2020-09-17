@@ -20,8 +20,8 @@
     </div>
     <div class="n-menu-item-content-header">
       <render :render="title" />
-      <span v-if="titleExtra" class="n-menu-item-content-header__extra">
-        <render :render="titleExtra" />
+      <span v-if="extra" class="n-menu-item-content-header__extra">
+        <render :render="extra" />
       </span>
     </div>
     <div v-if="showArrow" class="n-menu-item-content__arrow" />
@@ -61,7 +61,7 @@ export default {
       type: [String, Function],
       default: null
     },
-    titleExtra: {
+    extra: {
       type: [String, Function],
       default: null
     },

@@ -1,9 +1,5 @@
 @import 'Metropolis.scss';
 
-// .demo {
-//   min-height: 600px;
-// }
-
 body {
   overflow: hidden;
 }
@@ -32,6 +28,8 @@ body {
   max-width: 680px;
 }
 
-.n-table__td:first-child {
+.api-table .n-table__td:first-child {
+  font-size: 13px;
   white-space: nowrap;
+  font-family: naive-ui-mono, monospace;
 }

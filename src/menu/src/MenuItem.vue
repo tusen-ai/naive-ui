@@ -18,7 +18,7 @@
           :active-icon-size="activeIconSize"
           :title="title"
           :disabled="mergedDisabled"
-          :title-extra="titleExtra"
+          :extra="extra"
           :icon="icon"
           @click="handleClick"
         />
@@ -45,7 +45,7 @@ export default {
     menuChildMixin
   ],
   props: {
-    titleExtra: {
+    extra: {
       type: [ String, Function ],
       default: null
     },

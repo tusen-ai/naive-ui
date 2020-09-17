@@ -53,6 +53,7 @@ placeable 进行了大调整
     - `expanded-names` => `expanded-keys`
     - `default-expanded-names` => `default-expanded-keys`
     - `item.name` => `item.key`
+    - `item.titleExtra` => `item.extra`
   - remove
     - `overlay-width`
     - `overlay-min-width`

@@ -8,6 +8,7 @@ import { warn } from '../../_utils/naive/warn'
 function getWrappedItem (item, level) {
   const clonedItem = {
     ...item,
+    extra: item.extra ?? item.titleExtra,
     key: item.key ?? item.name,
     internalKey: item.key ?? item.name,
     level,
@@ -55,10 +56,10 @@ export function itemRenderer (item, insidePopover = false) {
   }
   if (item.children) {
     if (item.group || item.type === 'group') {
-      return h(NMenuItemGroup, omit(props, ['disabled', 'group', 'type', 'name']))
+      return h(NMenuItemGroup, omit(props, ['disabled', 'group', 'type', 'name', 'titleExtra']))
     }
     return h(NSubmenu, omit(props, ['name']))
   } else {
-    return h(NMenuItem, omit(props, ['children', 'name']))
+    return h(NMenuItem, omit(props, ['children', 'name', 'titleExtra']))
   }
 }
