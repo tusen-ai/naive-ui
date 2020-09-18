@@ -1,6 +1,8 @@
-<script>
+import { DESCRIPTION_ITEM_FLAG } from './utils'
+
 export default {
   name: 'DescriptionsItem',
+  [DESCRIPTION_ITEM_FLAG]: true,
   props: {
     label: {
       type: String,
@@ -11,8 +13,7 @@ export default {
       default: 1
     }
   },
-  render (h) {
+  render () {
     return null
   }
 }
-</script>

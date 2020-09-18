@@ -19,8 +19,8 @@ size
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
 |title|`string`|`null`||
 |column|`number`|`3`||
-|label-placement|`'top' \| 'left'`|`'top`||
-|label-align|`'center' \| 'left' \| 'right'`|`'left`||
+|label-placement|`'top' \| 'left'`|`'top'`||
+|label-align|`'center' \| 'left' \| 'right'`|`'left'`||
 |size|`'small' \| 'medium' \| 'large'`|`'medium'`||
 |bordered|`boolean`|`false`||
 

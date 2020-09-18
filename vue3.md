@@ -9,7 +9,7 @@ placeable 进行了大调整
 - [x] alert
 - [ ] anchor
 - [ ] auto-complete
-- [ ] avatar
+- [x] avatar
 - [x] back-top
   - new
     - `show` controlled show
@@ -33,7 +33,7 @@ placeable 进行了大调整
 - [ ] confirm
 - [ ] data-table
 - [ ] date-picker
-- [ ] descriptions
+- [x] descriptions
 - [ ] divider
 - [ ] drawer
 - [ ] dropdown
@@ -49,7 +49,7 @@ placeable 进行了大调整
 - [ ] input-group-label
 - [ ] input-number
 - [ ] layout
-- [ ] list
+- [x] list
 - [ ] loading-bar
 - [ ] log
 - [x] menu

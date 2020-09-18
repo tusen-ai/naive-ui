@@ -1,5 +1,5 @@
 import { Fragment, h, Teleport, reactive, ref } from 'vue'
-import createId from '../../_utils/vue/createId'
+import { createId } from '../../_utils/vue'
 import NotificationContainer from './NotificationContainer'
 import NotificationEnvironment from './NotificationEnvironment'
 import omit from '../../_utils/vue/omit'
