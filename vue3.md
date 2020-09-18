@@ -10,7 +10,15 @@ placeable 进行了大调整
 - [ ] anchor
 - [ ] auto-complete
 - [ ] avatar
-- [ ] back-top
+- [x] back-top
+  - new
+    - `show` controlled show
+    - `on-update:show`
+    - `to` teleport target
+  - deprecate
+    - `on-show` => `on-update:show`
+    - `on-hide` => `on-update:show`
+    - `target` => `listen-to`
 - [ ] badge
 - [ ] breadcrumb
 - [x] button

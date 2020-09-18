@@ -4,9 +4,6 @@
  <n-back-top
   :bottom="100"
   :visibility-height="300"
-  :style="{
-    transition: 'all .3s cubic-bezier(.4, 0, .2, 1)'
-  }"
   :themed-style="{
     light: {
       color: 'rgb(0, 0, 0)',

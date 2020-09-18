@@ -5,9 +5,6 @@
   :target="target"
   :bottom="220"
   :visibility-height="10"
-  :style="{
-    transition: 'all .3s cubic-bezier(.4, 0, .2, 1)'
-  }"
   :themed-style="{
     light: {
       color: 'rgb(0, 0, 0)',

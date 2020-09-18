@@ -14,15 +14,12 @@ target-container-selector
 ## Props
 |名称|类型|默认值|说明|
 |-|-|-|-|
-|theme|`'light' \| 'dark' \| null \| string`|`null`||
-|target|`() => HTMLElement`|一个返回最邻近可滚动父级元素的函数||
-|right|`number`|`40`||
 |bottom|`number`|`40`||
-|visibility-height|`number`|`180`||
+|listen-to|`string \| HTMLElement`|`null`|监听滚动的元素，如果为 `null` 会监听距离最近的一个可滚动的祖先节点|
+|right|`number`|`40`||
+|show|`boolean`|`undefined`|是否显示 BackTop（受控）|
 |themed-style|`{ [themeName: string]: Object } \| null`|`null`||
-
-## Events
-|名称|参数|说明|
-|-|-|-|
-|show|`()`||
-|hide|`()`||
+|theme|`'light' \| 'dark' \| null \| string`|`null`||
+|to|`string \| HTMLElement`|`'body'`|BackTop 渲染的容器节点|
+|visibility-height|`number`|`180`||
+|on-update:show|`(value: boolean) => any`|`() => {}`||

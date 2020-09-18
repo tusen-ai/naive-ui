@@ -14,7 +14,8 @@ module.exports = {
         }
       }
     ],
-    'vue/no-template-key': 0
+    'vue/no-template-key': 0,
+    'vue/valid-template-root': 0
   },
   overrides: [
     {
