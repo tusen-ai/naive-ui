@@ -13,11 +13,11 @@ body {
 }
 
 .demo-card .demo-card__view pre {
-  font-family: "naive-ui-mono";
+  font-family: "naive-ui-mono", monospace;
 }
 
 .demo-card .demo-card__view code {
-  font-family: "naive-ui-mono";
+  font-family: "naive-ui-mono", monospace;
 }
 
 .demo-card code.n-text {
