@@ -18,8 +18,13 @@
 </template>
 
 <script>
-import collectable from '../../_mixins/collectable'
-import simlulatedComputed from '../../_mixins/simulatedComputed'
+import { toRef } from 'vue'
+import {
+  useMemo,
+  useInjectionRef,
+  useInjectionCollection,
+  useInjectionElementCollection
+} from '../../_utils/composition'
 
 export default {
   name: 'AnchorLink',
@@ -28,19 +33,6 @@ export default {
       default: null
     }
   },
-  mixins: [
-    simlulatedComputed({
-      active: {
-        get () {
-          const href = this.href
-          return href && (this.activeHref === href)
-        },
-        deps: ['activeHref', 'href'],
-        default: false
-      }
-    }),
-    collectable('NAnchor', 'collectedLinkHrefs', 'href')
-  ],
   props: {
     title: {
       type: String,
@@ -51,9 +43,20 @@ export default {
       default: null
     }
   },
-  computed: {
-    activeHref () {
-      return this.NAnchor.activeHref
+  setup (props) {
+    const activeHrefRef = useInjectionRef('NAnchor', 'activeHref')
+    const hrefRef = toRef(props, 'href')
+    const activeRef = useMemo(() => {
+      return hrefRef.value && (hrefRef.value === activeHrefRef.value)
+    }, [
+      hrefRef,
+      activeHrefRef
+    ])
+    useInjectionCollection('NAnchor', 'collectedLinkHrefs', hrefRef)
+    useInjectionElementCollection('NAnchor', 'titleEls', vm => vm.$refs.title)
+    return {
+      activeHref: activeHrefRef,
+      active: activeRef
     }
   },
   watch: {
@@ -61,19 +64,7 @@ export default {
       if (value) this.NAnchor.updateBarPosition(this.$refs.title)
     }
   },
-  mounted () {
-    this.NAnchor.titleEls.push(this.$refs.title)
-  },
-  beforeDestroy () {
-    const titleElIndex = this.NAnchor.titleEls.findIndex(el => el === this.$refs.title)
-    if (~titleElIndex) this.NAnchor.titleEls.splice(titleElIndex, 1)
-  },
   methods: {
-    handleFontReady () {
-      if (this.active) {
-        this.NAnchor.updateBarPosition(this.$refs.title, false)
-      }
-    },
     handleClick (e) {
       this.NAnchor.setActiveHref(this.href)
     }

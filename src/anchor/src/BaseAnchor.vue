@@ -24,10 +24,12 @@
 </template>
 
 <script>
+import { nextTick, ref, markRaw } from 'vue'
 import getScrollParent from '../../_utils/dom/getScrollParent'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
-import fontawarable from '../../_mixins/fontawarable'
+import { onFontReady } from '../../_utils/composition/index'
+import { warn } from '../../_utils/naive/warn'
 
 function getOffset (el, container) {
   const {
@@ -45,7 +47,15 @@ function getOffset (el, container) {
 
 export default {
   name: 'NBaseAnchor',
-  mixins: [withapp, themeable, fontawarable],
+  mixins: [
+    withapp,
+    themeable
+  ],
+  provide () {
+    return {
+      NAnchor: this
+    }
+  },
   props: {
     target: {
       type: Function,
@@ -60,12 +70,17 @@ export default {
       default: false
     }
   },
-  data () {
+  setup () {
+    onFontReady(vm => {
+      vm.init()
+      vm.setActiveHref(window.location)
+      vm.handleScroll(false)
+    })
     return {
-      collectedLinkHrefs: [],
-      titleEls: [],
-      activeHref: null,
-      container: null
+      collectedLinkHrefs: markRaw([]),
+      titleEls: markRaw([]),
+      activeHref: ref(null),
+      container: ref(null)
     }
   },
   watch: {
@@ -76,17 +91,7 @@ export default {
       }
     }
   },
-  provide () {
-    return {
-      NAnchor: this
-    }
-  },
   methods: {
-    handleFontReady () {
-      this.init()
-      this.setActiveHref(window.location)
-      this.handleScroll(false)
-    },
     disableTransitionOneTick () {
       const barEl = this.$refs.bar
       const slotEl = this.$refs.slot
@@ -100,7 +105,7 @@ export default {
       titleEls.forEach(titleEl => {
         titleEl.style.transition = 'none'
       })
-      this.$nextTick().then(() => {
+      nextTick(() => {
         const nextBarEl = this.$refs.bar
         const nextSlotEl = this.$refs.slot
         if (nextBarEl) {
@@ -229,8 +234,8 @@ export default {
         const target = this.target()
         if (target instanceof Element) {
           this.container = target
-        } else {
-          console.error('[naive-ui/Anchor]: target is not a element')
+        } else if (__DEV__) {
+          warn('anchor', 'target is not a element')
         }
       }
       if (this.container) {
