@@ -19,7 +19,7 @@
       <div class="n-collapse-item-arrow">
         <slot name="arrow" :collapsed="collapsed">
           <n-icon type="ios-arrow-forward">
-            <ios-arrow-forward />
+            <arrow-icon />
           </n-icon>
         </slot>
       </div>
@@ -37,19 +37,19 @@
 </template>
 
 <script>
+import { toRef } from 'vue'
 import NIcon from '../../icon'
-import iosArrowForward from '../../_icons/ios-arrow-forward'
-import collectable from '../../_mixins/collectable'
-import NCollapseItemContent from './CollapseItemContent'
+import ArrowIcon from '../../_icons/ios-arrow-forward'
+import NCollapseItemContent from './CollapseItemContent.js'
+import { useInjectionCollection } from '../../_utils/composition'
 
 export default {
   name: 'CollapseItem',
   components: {
     NIcon,
     NCollapseItemContent,
-    iosArrowForward
+    ArrowIcon
   },
-  mixins: [collectable('NCollapse', 'collectedItemNames', 'name')],
   inject: {
     NCollapse: {
       default: null
@@ -71,20 +71,23 @@ export default {
       default: null
     }
   },
+  setup (props) {
+    useInjectionCollection('NCollapse', 'collectedItemNames', toRef(props, 'name'))
+  },
   computed: {
     syntheticDisplayDirective () {
-      const displayDirective = this.displayDirective
+      const { displayDirective, NCollapse } = this
       if (displayDirective !== null) {
-        return this.NCollapse.displayDirective
-      } else {
         return displayDirective
+      } else {
+        return NCollapse.displayDirective
       }
     },
     arrowPlacement () {
       return this.NCollapse.arrowPlacement
     },
     collapsed () {
-      const NCollapse = this.NCollapse
+      const { NCollapse } = this
       if (NCollapse && Array.isArray(NCollapse.expandedNames)) {
         const itemName = this.name
         return !~NCollapse.expandedNames.findIndex(name => name === itemName)
@@ -94,9 +97,13 @@ export default {
   },
   methods: {
     handleClick (e) {
-      const NCollapse = this.NCollapse
+      const { NCollapse } = this
       if (NCollapse) {
-        NCollapse.toggleItem(this.collapsed, this.name, e)
+        NCollapse.toggleItem(
+          this.collapsed,
+          this.name,
+          e
+        )
       }
     }
   }

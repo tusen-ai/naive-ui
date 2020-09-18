@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import Collapse from './src/Collapse.vue'
+import Collapse from './src/Collapse.js'
 import CollapseItem from './src/CollapseItem.vue'
 
 Collapse.install = function (app, naive) {

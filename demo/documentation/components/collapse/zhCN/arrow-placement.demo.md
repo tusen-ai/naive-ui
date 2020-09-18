@@ -2,7 +2,7 @@
 使用 `arrow-placement` 来设定箭头的位置。
 ```html
 <n-collapse
-  v-model="activeNames"
+  v-model:expandedNames="activeNames"
   arrow-placement="right"
 >
   <n-collapse-item title="青铜" name="1">

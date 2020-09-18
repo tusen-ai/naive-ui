@@ -9,11 +9,6 @@ nested
 display-directive
 item-header-click
 ```
-## V-model
-|Prop|Event|
-|-|-|
-|expanded-names|expanded-names-change|
-
 ## Props
 ### Collapse Props
 |名称|类型|默认值|说明|
@@ -23,6 +18,8 @@ item-header-click
 |display-directive|`'if' \| 'show'`|`'if'`|内部 `n-collapse-item` 在控制内容是否渲染时使用的指令，`'if'` 对应 `v-if`，`'show'` 对应 `v-show`|
 |expanded-names|`Array<string \| number>`|`null`||
 |theme|`'light' \| 'dark' \| null \| string`|`null`||
+|on-update-expanded-names|`(expandedNames: Array<string>) => any`|`() => {}`||
+|on-item-header-click|`(data: { name: string, expanded: boolean, event: MouseEvent }) => any`|`() => {}`||
 
 
 ### Collapse Item Props
@@ -45,9 +42,3 @@ item-header-click
 |header|`()`||
 |arrow|`(options: { collapsed: boolean })`||
 
-## Event
-### Collapse Event
-|名称|参数|说明|
-|-|-|-|
-|expanded-names-change|`(expandedNames: Array<string>)`||
-|item-header-click|`(data: { name: string, expanded: boolean, event: MouseEvent })`||

@@ -1,7 +1,7 @@
 # 点击标题
 ```html
 <n-collapse
-  v-model="activeNames"
+  v-model:expandedNames="activeNames"
   @item-header-click="handleItemHeaderClick"
 >
   <n-collapse-item name="1">
@@ -26,6 +26,7 @@
 ```
 ```js
 export default {
+  inject: ['message'],
   data () {
     return {
       activeNames: []
@@ -36,7 +37,7 @@ export default {
       name,
       expanded
     }) {
-      this.$NMessage.info(`Name: ${name}, Expanded: ${expanded}`)
+      this.message.info(`Name: ${name}, Expanded: ${expanded}`)
     }
   }
 }

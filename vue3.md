@@ -27,7 +27,11 @@ placeable 进行了大调整
 - [ ] cascader
 - [ ] checkbox
 - [ ] code
-- [ ] collapse
+- [x] collapse
+  - deprecate
+    - `on-expanded-names-change` => `on-update:expanded-names`
+  - removed
+    - `v-model` => `v-model:expanded-names`
 - [ ] config-consumer
 - [ ] config-provider
 - [ ] confirm
