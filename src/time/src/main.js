@@ -1,9 +1,7 @@
-import { h } from 'vue'
+import { h, createTextVNode } from 'vue'
 import format from 'date-fns/format'
 import formatDistance from 'date-fns/formatDistance'
 import fromUnixTime from 'date-fns/fromUnixTime'
-import render from '../../_utils/vue/render'
-
 import locale from '../../_mixins/locale'
 
 export default {
@@ -72,16 +70,9 @@ export default {
       }
     }
   },
-  data () {
-    return {
-      msPassedAfterCreated: 0
-    }
-  },
   render () {
-    return this.text ? h(render, {
-      props: {
-        render: this.renderedTime
-      }
-    }) : h('time', this.renderedTime)
+    return this.text
+      ? createTextVNode(this.renderedTime)
+      : h('time', [this.renderedTime])
   }
 }
