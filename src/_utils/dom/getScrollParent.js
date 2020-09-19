@@ -43,17 +43,12 @@ function getScrollElementFrom (element) {
     return cachedNode
   }
 
-  // Return body, `getScroll` will take care to get the correct `scrollTop` from it
   if (!element) {
     return null
   }
 
-  switch (element.nodeName) {
-    case 'HTML':
-    case 'BODY':
-      return document
-    case '#document':
-      return null
+  if (element.nodeName === '#document') {
+    return document
   }
 
   // Firefox want us to check `-x` and `-y` variations as well

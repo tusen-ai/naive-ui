@@ -6,7 +6,7 @@
  */
 export default function getParentNode (element) {
   if (element.nodeName === '#document') {
-    return element
+    return null
   }
-  return element.parentNode || element.host
+  return element.parentNode
 }
