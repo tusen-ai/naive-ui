@@ -5,7 +5,9 @@ placeable 进行了大调整
 
 
 - [ ] form
-- [ ] affix
+- [x] affix
+  - deprecate
+    - `target` => `listen-to`
 - [x] alert
 - [x] anchor
 - [ ] auto-complete

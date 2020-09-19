@@ -15,13 +15,15 @@
 import getScrollParent from '../../_utils/dom/getScrollParent'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles/index.js'
+import getTarget from '../../_utils/dom/get-target'
+import { warn } from '../../_utils/naive/warn'
 
 export default {
   name: 'Affix',
   mixins: [usecssr(styles)],
   props: {
-    target: {
-      type: Function,
+    listenTo: {
+      type: [String, Object],
       default: null
     },
     offsetTop: {
@@ -43,11 +45,16 @@ export default {
     position: {
       type: String,
       default: 'fix'
+    },
+    // deprecated
+    target: {
+      type: Function,
+      default: null
     }
   },
   data () {
     return {
-      container: null,
+      scrollElement: null,
       stickToTop: false,
       stickToBottom: false,
       bottomAffixedTriggerScrollTop: null,
@@ -84,29 +91,39 @@ export default {
   mounted () {
     this.init()
   },
-  beforeDestroy () {
-    if (this.container) {
-      this.container.removeEventListener('scroll', this.handleScroll)
+  beforeUnmount () {
+    const { scrollElement } = this
+    if (scrollElement) {
+      scrollElement.removeEventListener('scroll', this.handleScroll)
     }
   },
   methods: {
     init () {
-      this.container = getScrollParent(this.$el)
-      if (this.target) {
-        const target = this.target()
-        if (target instanceof Element) {
-          this.container = target
-        } else {
-          console.error('[naive-ui/Affix]: target is not a element')
-        }
+      const {
+        target: getScrollTarget,
+        listenTo
+      } = this
+      let scrollElement
+      if (getScrollTarget) {
+        // deprecated
+        scrollElement = getScrollTarget()
+      } else if (listenTo) {
+        scrollElement = getTarget(listenTo)
+      } else {
+        scrollElement = getScrollParent(this.$el)
       }
-      if (this.container) {
-        this.container.addEventListener('scroll', this.handleScroll)
+      if (scrollElement) {
+        this.scrollElement = scrollElement
+      } else if (__DEV__) {
+        warn('affix', 'Target to be listened to is not valid.')
+      }
+      if (scrollElement) {
+        scrollElement.addEventListener('scroll', this.handleScroll)
         this.handleScroll()
       }
     },
     handleScroll (e) {
-      const containerEl = this.container.nodeName === '#document' ? this.container.documentElement : this.container
+      const containerEl = this.scrollElement
       if (this.affixed) {
         if (containerEl.scrollTop < this.topAffixedTriggerScrollTop) {
           this.stickToTop = false
@@ -122,16 +139,20 @@ export default {
       const affixRect = this.$el.getBoundingClientRect()
       const pxToTop = affixRect.top - containerRect.top
       const pxToBottom = containerRect.bottom - affixRect.bottom
-      if (this.syntheticOffsetTop !== null && pxToTop <= this.syntheticOffsetTop) {
+      const {
+        syntheticOffsetTop,
+        syntheticOffsetBottom
+      } = this
+      if (syntheticOffsetTop !== null && pxToTop <= syntheticOffsetTop) {
         this.stickToTop = true
-        this.topAffixedTriggerScrollTop = containerEl.scrollTop - (this.syntheticOffsetTop - pxToTop)
+        this.topAffixedTriggerScrollTop = containerEl.scrollTop - (syntheticOffsetTop - pxToTop)
       } else {
         this.stickToTop = false
         this.topAffixedTriggerScrollTop = null
       }
-      if (this.syntheticOffsetBottom !== null && pxToBottom <= this.syntheticOffsetBottom) {
+      if (syntheticOffsetBottom !== null && pxToBottom <= syntheticOffsetBottom) {
         this.stickToBottom = true
-        this.bottomAffixedTriggerScrollTop = containerEl.scrollTop + this.syntheticOffsetBottom - pxToBottom
+        this.bottomAffixedTriggerScrollTop = containerEl.scrollTop + syntheticOffsetBottom - pxToBottom
       } else {
         this.stickToBottom = false
         this.bottomAffixedTriggerScrollTop = null
