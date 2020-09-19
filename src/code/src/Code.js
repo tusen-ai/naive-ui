@@ -1,9 +1,9 @@
-<script>
-import { h } from 'vue'
+import { h, nextTick } from 'vue'
 import withapp from '../../_mixins/withapp'
 import themeable from '../../_mixins/themeable'
 import usecssr from '../../_mixins/usecssr'
 import styles from './styles/index.js'
+import { warn } from '../../_utils/naive/warn'
 
 export default {
   name: 'Code',
@@ -32,15 +32,15 @@ export default {
   },
   watch: {
     language () {
-      this.$nextTick(this.setCode)
+      nextTick(this.setCode)
     },
     code () {
-      this.$nextTick(this.setCode)
+      nextTick(this.setCode)
     }
   },
   created () {
-    if (!this.hljs && !this.$naive.hljs) {
-      console.error('[naive-ui/code]: hljs is not set.')
+    if (__DEV__ && !this.hljs && !this.$naive.hljs) {
+      warn('code', 'hljs is not set.')
     }
   },
   mounted () {
@@ -59,25 +59,32 @@ export default {
       }
     },
     setCode () {
-      if (this.language) {
+      const {
+        code,
+        language
+      } = this
+      if (language) {
         const {
           valid,
           content
-        } = this.generateCodeHTML(this.language, this.code, this.trim)
+        } = this.generateCodeHTML(language, code, this.trim)
         if (valid) {
           this.$refs.code.innerHTML = content
           return
         }
       }
-      this.$refs.code.textContent = this.code
+      this.$refs.code.textContent = code
     }
   },
   render () {
+    const { syntheticTheme } = this
     return h('pre', {
-      staticClass: 'n-code',
-      class: {
-        [`n-${this.syntheticTheme}-theme`]: this.syntheticTheme
-      }
+      class: [
+        'n-code',
+        {
+          [`n-${syntheticTheme}-theme`]: syntheticTheme
+        }
+      ]
     }, [
       h('code', {
         ref: 'code'
@@ -85,4 +92,3 @@ export default {
     ])
   }
 }
-</script>
