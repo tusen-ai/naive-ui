@@ -86,7 +86,7 @@ export default {
   },
   computed: {
     syntheticStrokeWidth () {
-      const strokeWidth = this.strokeWidth
+      const { strokeWidth } = this
       if (strokeWidth !== null) return strokeWidth
       const size = this.size
       return STROKE_WIDTH[size]
