@@ -2,6 +2,7 @@
 import zIndexManager from '../_utils/dom/zIndexManager'
 
 /**
+ * @deprecated
  * watch zindexableEnabled on component,
  * acquire new z-index on content when zindexableEnabled is set to true
  *
@@ -36,7 +37,7 @@ export default {
       zindexableInitialized: false
     }
   },
-  beforeDestroy () {
+  beforeUnmount () {
     if (!this.zindexableEnabled) return
     if (this.zindexableInitialized) {
       zIndexManager.unregisterElement(this._zindexableGetElement())

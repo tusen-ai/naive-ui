@@ -22,7 +22,7 @@ export default {
       animationTimerId: null
     }
   },
-  beforeDestroy () {
+  beforeUnmount () {
     const animationTimerId = this.animationTimerId
     if (animationTimerId !== null) {
       window.clearTimeout(animationTimerId)

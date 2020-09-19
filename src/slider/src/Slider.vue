@@ -312,7 +312,7 @@ export default {
       })
     }
   },
-  beforeDestroy () {
+  beforeUnmount () {
     window.removeEventListener('mousemove', this.handleFirstHandleMouseMove)
     window.removeEventListener('mouseup', this.handleFirstHandleMouseUp)
     window.removeEventListener('mousemove', this.handleSecondHandleMouseMove)

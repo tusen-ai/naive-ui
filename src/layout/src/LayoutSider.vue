@@ -215,7 +215,7 @@ export default {
       nextTick(() => NLayout.$forceUpdate())
     }
   },
-  beforeDestroy () {
+  beforeUnmount () {
     const NLayout = this.NLayout
     if (NLayout) {
       NLayout.hasSider = false

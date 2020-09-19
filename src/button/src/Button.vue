@@ -288,7 +288,7 @@ export default {
       })
     }
   },
-  beforeDestroy () {
+  beforeUnmount () {
     const colorDigest = this.colorDigest
     if (colorDigest) {
       colorStyle.unmount({

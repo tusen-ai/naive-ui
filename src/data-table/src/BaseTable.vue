@@ -112,7 +112,7 @@ export default {
     )
     this.setBodyMinMaxHeight()
   },
-  beforeDestroy () {
+  beforeUnmount () {
     resizeObserverDelegate.unregisterHandler(
       this.getHeaderElement(),
       this.setBodyMinMaxHeight

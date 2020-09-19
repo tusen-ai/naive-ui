@@ -40,7 +40,7 @@ export default function (events = {
         // })
       })
     },
-    beforeDestroy () {
+    beforeUnmount () {
       const NFormItem = this.NFormItem
       if (NFormItem && NFormItem !== '__FORM_ITEM_INNER__') {
         NFormItem._initData()

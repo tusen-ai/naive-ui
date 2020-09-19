@@ -116,7 +116,7 @@
     "terser": "^4.6.3",
     "tinycolor2": "^1.4.1",
     "url-loader": "^1.1.2",
-    "vue": "^3.0.0-rc.10",
+    "vue": "^3.0.0",
     "vue-i18n": "^9.0.0-alpha.16",
     "vue-jest": "^4.0.0-beta.3",
     "vue-loader": "^16.0.0-beta.5",

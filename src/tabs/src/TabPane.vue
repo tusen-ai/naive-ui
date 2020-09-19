@@ -36,7 +36,7 @@ export default {
       this.NTab.addPanel(this)
     }
   },
-  beforeDestroy () {
+  beforeUnmount () {
     if (this.NTab) {
       this.NTab.removePanel(this)
     }

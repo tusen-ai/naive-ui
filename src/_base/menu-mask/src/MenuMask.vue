@@ -45,7 +45,7 @@ export default {
       active: false
     }
   },
-  beforeDestroy () {
+  beforeUnmount () {
     if (this.timerId) window.clearTimeout(this.timerId)
   },
   methods: {

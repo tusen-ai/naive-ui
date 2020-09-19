@@ -262,10 +262,10 @@ export default {
     }
   },
   render () {
-    const slots = this.$slots
     const {
       manuallyPositioned
     } = this
+    const slots = { ...this.$slots }
     let triggerVNode
     if (!manuallyPositioned) {
       if (slots.activator) {

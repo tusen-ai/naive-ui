@@ -38,14 +38,14 @@ export default function (
     //     this.registerValue(this[registerProperty])
     //   }
     // },
-    beforeDestroy () {
+    beforeUnmount () {
       // console.log('before destroy', this.name, this.$el)
       if (this.activeCollectableInjection) {
         this.registerValue(undefined, this[registerProperty])
       }
     },
-    destroyed () {
-      // console.log('destroyed', this.name)
+    unmounted () {
+      // console.log('unmounted', this.name)
     },
     methods: {
       registerValue (value = undefined, oldValue = undefined) {

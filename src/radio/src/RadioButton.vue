@@ -49,7 +49,7 @@ export default {
   created () {
     this.NRadioGroup && this.NRadioGroup.radioButtonCount++
   },
-  beforeDestroy () {
+  beforeUnmount () {
     this.NRadioGroup && this.NRadioGroup.radioButtonCount--
   }
 }

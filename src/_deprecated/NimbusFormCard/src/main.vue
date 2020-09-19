@@ -76,7 +76,7 @@ export default {
       this.patchOverflow(300)
     }
   },
-  beforeDestroy () {
+  beforeUnmount () {
     if (this.sticky) {
       this.patchOverflow()
     }

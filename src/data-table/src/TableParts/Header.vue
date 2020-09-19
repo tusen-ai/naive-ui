@@ -219,7 +219,7 @@ export default {
     this.setActiveRightFixedColumn(this.$el)
     this.$emit('set-active-fixed-column', this.leftActiveFixedColumn, this.rightActiveFixedColumn)
   },
-  beforeDestroy () {
+  beforeUnmount () {
     resizeObserverDelegate.unregisterHandler(this.$el)
   },
   methods: {

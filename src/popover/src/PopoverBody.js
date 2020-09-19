@@ -109,7 +109,7 @@ export default {
   created () {
     this.NPopover.bodyInstance = this
   },
-  beforeDestroy () {
+  beforeUnmount () {
     this.NPopover.bodyInstance = null
   },
   computed: {

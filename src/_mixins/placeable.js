@@ -195,7 +195,7 @@ export default {
       this.placeableSyncPosition()
     }
   },
-  beforeDestroy () {
+  beforeUnmount () {
     if (this.listenersRegistered) {
       this.unregisterScrollListeners()
       this.unregisterResizeListener()

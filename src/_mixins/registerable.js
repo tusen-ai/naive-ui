@@ -16,7 +16,7 @@ export default function (
         this.registerInstance(this[registerKey])
       }
     },
-    beforeDestroy () {
+    beforeUnmount () {
       if (this[inject]) {
         this.registerInstance(undefined, this[registerKey])
       }

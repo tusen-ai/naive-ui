@@ -210,7 +210,7 @@ export default {
       })
     this.registerResizeObserver()
   },
-  beforeDestroy () {
+  beforeUnmount () {
     this.unregisterResizeObserver()
     this.unregisterScrollContentResizeObserver()
   },

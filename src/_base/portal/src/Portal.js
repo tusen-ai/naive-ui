@@ -26,7 +26,7 @@ export default {
       this.$el.parentElement.removeChild(this.$el)
     }
   },
-  beforeDestroy () {
+  beforeUnmount () {
     const target = this.transferTarget()
     const content = this.$el
     /**

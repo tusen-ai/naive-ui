@@ -16,7 +16,7 @@ export default {
       default: false
     }
   },
-  beforeDestroy () {
+  beforeUnmount () {
     if (this.transitionDisabled) {
       const parent = this.$el.parentElement
       if (parent) parent.removeChild(this.$el)

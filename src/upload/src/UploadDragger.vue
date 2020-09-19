@@ -15,7 +15,7 @@ export default {
   created () {
     this.NUpload && (this.NUpload.draggerInside = true)
   },
-  beforeDestroy () {
+  beforeUnmount () {
     this.NUpload && (this.NUpload.draggerInside = false)
   }
 }

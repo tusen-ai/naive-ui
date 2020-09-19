@@ -80,7 +80,7 @@ export default {
       }
     }
   },
-  beforeDestroy () {
+  beforeUnmount () {
     if (this.syntheticDetachable) {
       const content = this.getDetachContent()
       const target = this.getDetachTarget()

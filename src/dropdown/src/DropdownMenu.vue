@@ -102,7 +102,7 @@ export default {
   mounted () {
     if (this.keyboard) this.registerKeyboardOperations()
   },
-  beforeDestroy () {
+  beforeUnmount () {
     if (this.keyboard) this.unregisterKeyboardOperations()
   },
   methods: {

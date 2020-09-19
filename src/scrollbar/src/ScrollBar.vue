@@ -226,10 +226,10 @@ export default {
       this.handleHorizontalScroll()
     }
   },
-  beforeDestroy () {
+  beforeUnmount () {
     resizeObserverDelagate.unregisterHandler(this._content())
   },
-  destroyed () {
+  unmounted () {
     window.clearTimeout(this.horizontalScrollbarVanishTimerId)
     window.clearTimeout(this.verticalScrollbarVanishTimerId)
     window.removeEventListener('mousemove', this.handleVerticalScrollMouseMove, true)

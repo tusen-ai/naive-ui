@@ -167,7 +167,7 @@ export default {
     this.init()
     this.transitionDisabled = this.mergedShow
   },
-  beforeDestroy () {
+  beforeUnmount () {
     if (this.scrollElement) {
       this.scrollElement.removeEventListener('scroll', this.handleScroll)
     }
