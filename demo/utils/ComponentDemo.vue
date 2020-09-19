@@ -28,7 +28,7 @@
 
     <template v-slot:header-extra>
       <n-tooltip
-        :delay="300"
+        trigger="hover"
         :placement="'top'"
         :show-arrow="true"
       >
@@ -43,7 +43,7 @@
       </n-tooltip>
       <n-tooltip
         ref="expandCodeButton"
-        :delay="300"
+        trigger="hover"
         :placement="'top'"
         :show-arrow="true"
       >

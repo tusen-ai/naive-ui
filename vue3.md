@@ -4,6 +4,8 @@ zindexable 最好写成 directive
 placeable 进行了大调整
 
 
+在很特殊的情况下，popover 的在 teleport 打开的时候 beforeUnmount 会被调用两次，具体没有研究出为什么。
+
 - [ ] form
 - [x] affix
   - deprecate
