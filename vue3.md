@@ -7,7 +7,7 @@ placeable 进行了大调整
 - [ ] form
 - [ ] affix
 - [x] alert
-- [ ] anchor
+- [x] anchor
 - [ ] auto-complete
 - [x] avatar
 - [x] back-top
@@ -20,13 +20,13 @@ placeable 进行了大调整
     - `on-hide` => `on-update:show`
     - `target` => `listen-to`
 - [ ] badge
-- [ ] breadcrumb
+- [x] breadcrumb
 - [x] button
 - [x] button-group
 - [x] card
 - [ ] cascader
 - [ ] checkbox
-- [ ] code
+- [x] code
 - [x] collapse
   - deprecate
     - `on-expanded-names-change` => `on-update:expanded-names`
@@ -38,15 +38,15 @@ placeable 进行了大调整
 - [ ] data-table
 - [ ] date-picker
 - [x] descriptions
-- [ ] divider
+- [x] divider
 - [ ] drawer
 - [ ] dropdown
 - [ ] dynamic-input
 - [ ] dynamic-tags
 - [ ] element
 - [x] empty
-- [ ] gradient-text
-- [ ] grid
+- [x] gradient-text
+- [x] grid
 - [x] icon
 - [x] input
 - [ ] input-group
@@ -107,15 +107,17 @@ placeable 进行了大调整
     - `width`
     - `min-width`
     - `manual` trigger is removed, use `null` instead
+  - other
+    - set default trigger to `null`
 - [ ] popselect
-- [ ] progress
+- [x] progress
 - [ ] radio
-- [ ] result
+- [x] result
 - [ ] scrollbar
 - [ ] select
 - [ ] slider
-- [ ] spin
-- [ ] statistic
+- [x] spin
+- [x] statistic
 - [ ] steps
 - [x] switch
   - remove
@@ -124,10 +126,10 @@ placeable 进行了大调整
 - [ ] table
 - [ ] tabs
 - [ ] tag
-- [ ] thing
+- [x] thing
 - [x] time
 - [ ] time-picker
-- [ ] timeline
+- [x] timeline
 - [x] tooltip
   - ref
 - [ ] transfer
