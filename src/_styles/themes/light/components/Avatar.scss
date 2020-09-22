@@ -1,6 +1,0 @@
-@mixin setup-light-avatar {
-  $--avatar-background-color: composite-color(
-    $--n-base-background-color,
-    $--n-avatar-overlay-background-color
-  ) !global;
-}

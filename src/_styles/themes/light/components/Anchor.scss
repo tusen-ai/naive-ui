@@ -1,9 +1,0 @@
-@mixin setup-light-anchor {
-  $--anchor-rail-background-color: $--n-rail-overlay-color !global;
-  $--anchor-link-title-text-color: (
-    'default': $--n-primary-text-color,
-    'hover': $--n-primary-color,
-    'active': $--n-primary-color
-  ) !global;
-  $--anchor-link-background-color: change-color($color: $--n-primary-color, $alpha: .1) !global;
-}

@@ -1,6 +1,0 @@
-@mixin setup-light-base-tracking-rect {
-  $--base-tracking-rect-background-color: composite-color(
-    $--n-base-background-color,
-    $--n-pending-overlay-color
-  ) !global;
-}

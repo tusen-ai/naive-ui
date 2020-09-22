@@ -1,4 +1,0 @@
-@mixin setup-light-base-menu-mask {
-  $--base-menu-mask-background-color: change-color($--n-popover-background-color, $alpha: .75) !global;
-  $--base-menu-mask-text-color: $--n-secondary-text-color !global;
-}

@@ -1,8 +1,0 @@
-@mixin setup-light-form {
-  $--form-item-label-text-color: $--n-primary-text-color !global;
-  $--form-item-required-asterisk: $--n-error-color !global;
-  $--form-item-feedback-text-color: (
-    'error': $--n-error-color,
-    'warning': $--n-warning-color
-  ) !global;
-}

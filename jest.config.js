@@ -28,8 +28,7 @@ module.exports = {
 
   // An array of regexp pattern strings used to skip coverage collection
   coveragePathIgnorePatterns: [
-    '<rootDir>/node_modules/',
-    '<rootDir>/src/_jest-mock/'
+    '<rootDir>/node_modules/'
     // '<rootDir>/src/**/__tests__/**/*.[jt]s',
     // '<rootDir>/src/**/*.(spec|test).[tj]s'
   ],
@@ -77,11 +76,7 @@ module.exports = {
   ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  moduleNameMapper: {
-    '_styles-in-js/lightStyleScheme.scss': '<rootDir>/src/_jest-mock/light-style-scheme.js',
-    '_styles-in-js/darkStyleScheme.scss': '<rootDir>/src/_jest-mock/dark-style-scheme.js',
-    'common.scss': '<rootDir>/src/_jest-mock/common.js'
-  },
+  // moduleNameMapper: {},
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],

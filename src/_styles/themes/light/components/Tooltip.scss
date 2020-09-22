@@ -1,5 +1,0 @@
-@mixin setup-light-tooltip {
-  $--tooltip-background-color: rgba(0, 0, 0, .85) !global;
-  $--tooltip-text-color: $--n-base-background-color !global;
-  $--tooltip-box-shadow: $--n-popover-box-shadow !global;
-}

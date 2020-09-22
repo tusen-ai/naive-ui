@@ -1,6 +1,0 @@
-@mixin setup-light-scrollbar {
-  $--scrollbar-background-color: (
-    "default": $--n-scrollbar-overlay-background-color,
-    "hover": $--n-scrollbar-hover-overlay-background-color
-  ) !global;
-}
