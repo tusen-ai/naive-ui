@@ -1,5 +1,4 @@
-import darkStyleScheme from '../../_styles-in-js/darkStyleScheme.scss'
-import lightStyleScheme from '../../_styles-in-js/lightStyleScheme.scss'
+import { lightStyleScheme, darkStyleScheme } from '../../_deprecated/style-scheme'
 
 const styleScheme = {
   dark: darkStyleScheme,

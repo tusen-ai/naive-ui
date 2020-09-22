@@ -5,8 +5,7 @@ import Pagination from '../index'
 import create from '../../create'
 import zhCN from '../../locale/zhCN'
 import enUS from '../../locale/enUS'
-import lightScheme from '../../_styles-in-js/lightStyleScheme.scss'
-import darkScheme from '../../_styles-in-js/darkStyleScheme.scss'
+import { lightStyleScheme, darkStyleScheme } from '../../_deprecated/style-scheme'
 import paginationLightStyle from '../styles/light'
 import paginationDarkStyle from '../styles/dark'
 import baseDarkStyle from '../../styles/base/dark'
@@ -29,8 +28,8 @@ describe('n-pagination', () => {
           paginationDarkStyle
         ],
         styleSchemes: {
-          light: lightScheme,
-          dark: darkScheme
+          light: lightStyleScheme,
+          dark: darkStyleScheme
         }
       })
       Vue.use(naive)

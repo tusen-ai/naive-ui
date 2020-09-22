@@ -210,8 +210,7 @@ import NimbusServiceLayout from './_deprecated/NimbusServiceLayout'
 import NimbusIcon from './_deprecated/NimbusIcon'
 
 // deprecated
-import lightScheme from './_styles-in-js/lightStyleScheme.scss'
-import darkScheme from './_styles-in-js/darkStyleScheme.scss'
+import { lightStyleScheme, darkStyleScheme } from './_deprecated/style-scheme'
 
 import create from './create'
 
@@ -431,7 +430,7 @@ export default create({
   ],
   // deprecated
   styleSchemes: {
-    light: lightScheme,
-    dark: darkScheme
+    light: lightStyleScheme,
+    dark: darkStyleScheme
   }
 })
